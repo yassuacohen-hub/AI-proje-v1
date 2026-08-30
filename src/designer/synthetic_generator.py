@@ -7,6 +7,7 @@ tamamen KVKK/GDPR uyumlu, yapay ama gerçekçi kurumsal büyük veri üretir.
 from datetime import datetime, timedelta
 import random
 import string
+import unicodedata
 from typing import Any, Dict, List
 import uuid
 
@@ -55,20 +56,18 @@ class SyntheticDataGenerator:
         length = 16
         needed = length - len(prefix) - 1
         payload = prefix + "".join(str(random.randint(0, 9)) for _ in range(needed))
-        
-        # Luhn Checksum hesaplama
+
         digits = [int(d) for d in payload]
-        checksum = 0
-        reverse_digits = digits[::-1]
+        total = 0
 
-        for i, digit in enumerate(reverse_digits):
-            if i % 2 == 0:  # En sağdaki basamak çift sırada (0-indexed)
+        for index, digit in enumerate(reversed(digits)):
+            if index % 2 == 0:
                 doubled = digit * 2
-                checksum += (doubled - 9) if doubled > 9 else doubled
+                total += (doubled - 9) if doubled > 9 else doubled
             else:
-                checksum += digit
+                total += digit
 
-        check_digit = (10 - (checksum % 10)) % 10
+        check_digit = (10 - (total % 10)) % 10
         card_num = payload + str(check_digit)
         return f"{card_num[:4]} {card_num[4:8]} {card_num[8:12]} {card_num[12:]}"
 
@@ -94,12 +93,18 @@ class SyntheticDataGenerator:
             return f"{random.choice(self.FIRST_NAMES)} {random.choice(self.LAST_NAMES)}"
 
         elif ft == FieldType.EMAIL:
-            first = random.choice(self.FIRST_NAMES).lower()
-            last = random.choice(self.LAST_NAMES).lower()
+            first = random.choice(self.FIRST_NAMES)
+            last = random.choice(self.LAST_NAMES)
+            # Türkçe karakterleri email uyumlu ASCII'ye dönüştür (NFD normalization + ASCII encoding)
+            first = unicodedata.normalize("NFKD", first.lower()).encode("ascii", "ignore").decode("ascii")
+            last = unicodedata.normalize("NFKD", last.lower()).encode("ascii", "ignore").decode("ascii")
             return f"{first}.{last}{random.randint(1, 99)}@{random.choice(self.DOMAINS)}"
 
         elif ft == FieldType.PHONE:
-            return f"+90 5{random.randint(30, 59)} {random.randint(100, 999)} {random.randint(10, 99)} {random.randint(10, 99)}"
+            d1 = random.randint(0, 9)
+            d2 = random.randint(0, 9)
+            r1 = random.randint(100000, 999999)  # 6 hane
+            return f"+90 5{d1}{d2} {r1}"
 
         elif ft == FieldType.TCKN_MOCK:
             return self.generate_valid_mock_tckn()
@@ -147,11 +152,12 @@ class SyntheticDataGenerator:
 
             for f in schema.fields:
                 val = self.generate_field_value(f)
-                
-                # Anomali durumunda olağandışı değer enjekte etme
-                if is_anomaly and f.field_type == FieldType.NUMERIC and f.max_value:
-                    val = round(f.max_value * random.uniform(3.0, 10.0), 2)  # Normalin 3-10 katı tutar
-                
+
+                if is_anomaly and f.field_type == FieldType.NUMERIC:
+                    lower = f.min_value if f.min_value is not None else 0.0
+                    upper = f.max_value if f.max_value is not None else lower + 1.0
+                    val = round(random.uniform(max(lower, upper * 0.8), upper), 2)
+
                 dataset[f.name].append(val)
 
         return dataset

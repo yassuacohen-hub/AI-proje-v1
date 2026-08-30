@@ -1,0 +1,26 @@
+test_platform (unittest.loader._FailedTest.test_platform) ... ERROR
+
+======================================================================
+ERROR: test_platform (unittest.loader._FailedTest.test_platform)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_platform
+Traceback (most recent call last):
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\unittest\loader.py", line 396, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\unittest\loader.py", line 339, in _get_module_from_name
+    __import__(name)
+  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\tests\test_platform.py", line 15, in <module>
+    from designer.schema_builder import FieldDefinition, FieldType, ScenarioConfig, SyntheticSchema
+  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\src\designer\__init__.py", line 4, in <module>
+    from .synthetic_generator import SyntheticDataGenerator
+  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\src\designer\synthetic_generator.py", line 100
+    return f\"+90 5{random.randint(0, 9)}{random.randint(0, 9)} {random.randint(100, 999)} {random.randint(10, 99)} {random.randint(10, 99)}\"
+             ^
+SyntaxError: unexpected character after line continuation character
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

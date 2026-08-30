@@ -34,14 +34,14 @@ class ColumnClassification:
 class PIIScanner:
     """Hassas Veri Tespit ve DLP Tarayıcısı."""
 
-    # E-posta Regex (RFC 5322 uyumlu basit format)
-    EMAIL_PATTERN = re.compile(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
+    # E-posta Regex (RFC 5322 uyumlu, Türkçe & Avrupa karakterleri destekler)
+    EMAIL_PATTERN = re.compile(r"^[a-zA-Z0-9ÄäÖöÜüßÃãÕõÎîÌìÉéÈèÊêËëÝýÀàÁáÂâçÇğĞıIİöÖşŞüÜ_.\+\-]+@[a-zA-Z0-9ÄäÖöÜüßÃãÕõÎîÌìÉéÈèÊêËëÝýÀàÁáÂâçÇğĞıIİöÖşŞüÜ\-]+\.[a-zA-Z0-9ÄäÖöÜüßÃãÕõÎîÌìÉéÈèÊêËëÝýÀàÁáÂâçÇğĞıIİöÖşŞüÜ.\-]+$", re.UNICODE)
     
-    # Telefon Regex (Türkiye ve Uluslararası formatlar)
-    PHONE_PATTERN = re.compile(r"^(\+?90|0)?[5][0-9]{9}$|^(\+\d{1,3}[- ]?)?\(?\d{3}\)?[- ]?\d{3}[- ]?\d{4}$")
+    # Telefon Regex (Türkiye: +90 veya 0 ile başlayan 5XX XXXXXX pattern, Diğer ülkeler)
+    PHONE_PATTERN = re.compile(r"^(\+90|0)[5][0-9]{2}[0-9]{6}$|^(?!\+90)\+[1-9]\d{1,14}$", re.UNICODE)
     
-    # IBAN Regex (TR IBAN)
-    IBAN_PATTERN = re.compile(r"^TR[0-9]{2}[0-9]{5}[0-9A-Z]{17}$", re.IGNORECASE)
+    # IBAN Regex (TR IBAN - 26 karakter)
+    IBAN_PATTERN = re.compile(r"^TR[0-9]{2}[0-9]{4}0[0-9]{16}$", re.IGNORECASE)
 
     @staticmethod
     def validate_tckn(tckn_str: str) -> bool:
@@ -83,17 +83,16 @@ class PIIScanner:
             return False
 
         digits = [int(d) for d in clean_card]
-        checksum = 0
-        reverse_digits = digits[::-1]
+        total = 0
 
-        for i, digit in enumerate(reverse_digits):
-            if i % 2 == 1:
+        for index, digit in enumerate(reversed(digits)):
+            if index % 2 == 1:
                 doubled = digit * 2
-                checksum += (doubled - 9) if doubled > 9 else doubled
+                total += (doubled - 9) if doubled > 9 else doubled
             else:
-                checksum += digit
+                total += digit
 
-        return checksum % 10 == 0
+        return total % 10 == 0
 
     def classify_value(self, value: Any) -> Optional[str]:
         """Tek bir değerin hassas veri tipini belirler."""
@@ -131,15 +130,18 @@ class PIIScanner:
     def scan_column(self, column_name: str, values: Sequence[Any]) -> ColumnClassification:
         """Bir sütundaki değerleri tarayarak PII ve güvenlik seviyesini raporlar."""
         total_samples = len(values)
-        if total_samples == 0:
+        
+        # Boş veya None-only sütun kontrolü
+        non_null_values = [v for v in values if v is not None and str(v).strip()]
+        if len(non_null_values) == 0:
             return ColumnClassification(
                 column_name=column_name,
                 detected_type="EMPTY",
                 sensitivity_level=SensitivityLevel.PUBLIC,
-                confidence=0.0,
+                confidence=1.0,
                 matched_samples_count=0,
-                total_samples_scanned=0,
-                recommendation="Sütun boş, işlem gerekmiyor.",
+                total_samples_scanned=total_samples,
+                recommendation="Sütun boş veya tüm değerleri None. İşlem gerekmiyor.",
             )
 
         type_counts: Dict[str, int] = {}
@@ -175,7 +177,7 @@ class PIIScanner:
             )
 
         top_type, match_count = max(type_counts.items(), key=lambda x: x[1])
-        confidence = min(round(match_count / max(total_samples, 1), 2) + 0.3, 1.0)
+        confidence = min(round(match_count / max(len(non_null_values), 1), 2) + 0.3, 1.0)
 
         # Seviye ve Öneri Eşleştirmesi
         if top_type == "CREDIT_CARD":
