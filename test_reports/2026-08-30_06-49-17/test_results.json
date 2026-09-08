@@ -1,35 +1,35 @@
-{
-  "timestamp": "2026-08-30_06-49-17",
-  "total_tests": 16,
-  "passed": 10,
-  "failed": 6,
-  "error_count": 0,
-  "success": false,
-  "failures": [
-    {
-      "test": "test_iban_validation (test_platform.TestEnterpriseDataPlatform.test_iban_validation)",
-      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 138, in test_iban_validation\n    self.assertEqual(self.scanner.classify_value(valid_iban), \"IBAN\")\nAssertionError: None != 'IBAN'\n"
-    },
-    {
-      "test": "test_mixed_pii_detection (test_platform.TestEnterpriseDataPlatform.test_mixed_pii_detection)",
-      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 227, in test_mixed_pii_detection\n    self.assertEqual(result, expected_type)\nAssertionError: None != 'IBAN'\n"
-    },
-    {
-      "test": "test_null_handling (test_platform.TestEnterpriseDataPlatform.test_null_handling)",
-      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 239, in test_null_handling\n    self.assertEqual(result.detected_type, \"EMPTY\")\nAssertionError: 'GENERIC_DATA' != 'EMPTY'\n- GENERIC_DATA\n+ EMPTY\n\n"
-    },
-    {
-      "test": "test_phone_validation (test_platform.TestEnterpriseDataPlatform.test_phone_validation)",
-      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 133, in test_phone_validation\n    self.assertNotEqual(result, \"PHONE\", f\"Geçersiz telefon: {phone}\")\nAssertionError: 'PHONE' == 'PHONE' : Geçersiz telefon: +90 400 123 45 67\n"
-    },
-    {
-      "test": "test_synthetic_email_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_email_generation)",
-      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 156, in test_synthetic_email_generation\n    self.assertEqual(result, \"EMAIL\", f\"Üretilen e-posta doğrulanmalı: {email}\")\nAssertionError: None != 'EMAIL' : Üretilen e-posta doğrulanmalı: şerife.öztürk73@sirket.com.tr\n"
-    },
-    {
-      "test": "test_synthetic_iban_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_iban_generation)",
-      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 184, in test_synthetic_iban_generation\n    self.assertEqual(result, \"IBAN\", f\"Üretilen IBAN doğrulanmalı: {iban}\")\nAssertionError: None != 'IBAN' : Üretilen IBAN doğrulanmalı: TR64150005293276126458662\n"
-    }
-  ],
-  "errors": []
+{
+  "timestamp": "2026-08-30_06-49-17",
+  "total_tests": 16,
+  "passed": 10,
+  "failed": 6,
+  "error_count": 0,
+  "success": false,
+  "failures": [
+    {
+      "test": "test_iban_validation (test_platform.TestEnterpriseDataPlatform.test_iban_validation)",
+      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 138, in test_iban_validation\n    self.assertEqual(self.scanner.classify_value(valid_iban), \"IBAN\")\nAssertionError: None != 'IBAN'\n"
+    },
+    {
+      "test": "test_mixed_pii_detection (test_platform.TestEnterpriseDataPlatform.test_mixed_pii_detection)",
+      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 227, in test_mixed_pii_detection\n    self.assertEqual(result, expected_type)\nAssertionError: None != 'IBAN'\n"
+    },
+    {
+      "test": "test_null_handling (test_platform.TestEnterpriseDataPlatform.test_null_handling)",
+      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 239, in test_null_handling\n    self.assertEqual(result.detected_type, \"EMPTY\")\nAssertionError: 'GENERIC_DATA' != 'EMPTY'\n- GENERIC_DATA\n+ EMPTY\n\n"
+    },
+    {
+      "test": "test_phone_validation (test_platform.TestEnterpriseDataPlatform.test_phone_validation)",
+      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 133, in test_phone_validation\n    self.assertNotEqual(result, \"PHONE\", f\"Geçersiz telefon: {phone}\")\nAssertionError: 'PHONE' == 'PHONE' : Geçersiz telefon: +90 400 123 45 67\n"
+    },
+    {
+      "test": "test_synthetic_email_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_email_generation)",
+      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 156, in test_synthetic_email_generation\n    self.assertEqual(result, \"EMAIL\", f\"Üretilen e-posta doğrulanmalı: {email}\")\nAssertionError: None != 'EMAIL' : Üretilen e-posta doğrulanmalı: şerife.öztürk73@sirket.com.tr\n"
+    },
+    {
+      "test": "test_synthetic_iban_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_iban_generation)",
+      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 184, in test_synthetic_iban_generation\n    self.assertEqual(result, \"IBAN\", f\"Üretilen IBAN doğrulanmalı: {iban}\")\nAssertionError: None != 'IBAN' : Üretilen IBAN doğrulanmalı: TR64150005293276126458662\n"
+    }
+  ],
+  "errors": []
 }

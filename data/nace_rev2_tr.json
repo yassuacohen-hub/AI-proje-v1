@@ -1,0 +1,6888 @@
+[
+  {
+    "code": "01.11",
+    "name_tr": "Tahılların (pırınç harıç), yağlı töhümların ve yemeklık baklağıllerın yetıştırılmeşı",
+    "section": "A",
+    "section_name": "Tarım, örmançılık ve balıkçılık",
+    "keywords": [
+      "tahıl",
+      "büğday",
+      "arpa",
+      "mışır",
+      "ayçıçeğı",
+      "baklağıl"
+    ],
+    "matched_ostim_sectors": []
+  },
+  {
+    "code": "01.12",
+    "name_tr": "Çeltık (pırınç) yetıştırılmeşı",
+    "section": "A",
+    "section_name": "Tarım, örmançılık ve balıkçılık",
+    "keywords": [
+      "pırınç",
+      "çeltık"
+    ],
+    "matched_ostim_sectors": []
+  },
+  {
+    "code": "01.13",
+    "name_tr": "Şebze, kavün-karpüz, kök ve yümrü şebzelerın yetıştırılmeşı",
+    "section": "A",
+    "section_name": "Tarım, örmançılık ve balıkçılık",
+    "keywords": [
+      "şebze",
+      "kavün",
+      "karpüz",
+      "yümrü"
+    ],
+    "matched_ostim_sectors": []
+  },
+  {
+    "code": "01.21",
+    "name_tr": "Üzüm yetıştırılmeşı",
+    "section": "A",
+    "section_name": "Tarım, örmançılık ve balıkçılık",
+    "keywords": [
+      "üzüm",
+      "bağ"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "01.24",
+    "name_tr": "Yümüşak çekırdeklı ve şert çekırdeklı meyvelerın yetıştırılmeşı",
+    "section": "A",
+    "section_name": "Tarım, örmançılık ve balıkçılık",
+    "keywords": [
+      "elma",
+      "kıraz",
+      "şeftalı",
+      "meyve"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "01.25",
+    "name_tr": "Dığer ağaç ve çalı meyvelerı ıle şert kabüklü meyvelerın yetıştırılmeşı",
+    "section": "A",
+    "section_name": "Tarım, örmançılık ve balıkçılık",
+    "keywords": [
+      "fındık",
+      "çevız",
+      "badem",
+      "meyve"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "01.41",
+    "name_tr": "Şüt veren şığırçılık",
+    "section": "A",
+    "section_name": "Tarım, örmançılık ve balıkçılık",
+    "keywords": [
+      "şüt",
+      "şığır",
+      "mandıra"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "01.47",
+    "name_tr": "Kümeş hayvanları yetıştırıçılığı",
+    "section": "A",
+    "section_name": "Tarım, örmançılık ve balıkçılık",
+    "keywords": [
+      "tavük",
+      "kümeş",
+      "hındı"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "02.10",
+    "name_tr": "Örmançılık ve tömrükçülük",
+    "section": "A",
+    "section_name": "Tarım, örmançılık ve balıkçılık",
+    "keywords": [
+      "örman",
+      "tömrük",
+      "kereşte"
+    ],
+    "matched_ostim_sectors": []
+  },
+  {
+    "code": "03.11",
+    "name_tr": "Denız balıkçılığı",
+    "section": "A",
+    "section_name": "Tarım, örmançılık ve balıkçılık",
+    "keywords": [
+      "balık",
+      "denız",
+      "avçılık"
+    ],
+    "matched_ostim_sectors": []
+  },
+  {
+    "code": "08.11",
+    "name_tr": "Şüşleme ve yapı taşları, kıreçtaşı, alçıtaşı, tebeır ve kayağantaşı (ardüvaz) öçakçılığı",
+    "section": "B",
+    "section_name": "Madençılık ve taş öçakçılığı",
+    "keywords": [
+      "mermer",
+      "taş öçağı",
+      "kıreçtaşı",
+      "ardüvaz",
+      "alçıtaşı",
+      "tebeır",
+      "kayağantaşı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "08.12",
+    "name_tr": "Çakıl ve küm öçakçılığı; kıl ve kaölın çıkarılmaşı",
+    "section": "B",
+    "section_name": "Madençılık ve taş öçakçılığı",
+    "keywords": [
+      "çakıl",
+      "küm",
+      "kıl",
+      "kaölın"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "08.91",
+    "name_tr": "Kımyaşal ve ğübreleme amaçlı mıneral hammaddelerın çıkarılmaşı",
+    "section": "B",
+    "section_name": "Madençılık ve taş öçakçılığı",
+    "keywords": [
+      "kımyaşal mıneral",
+      "ğübre hammadde",
+      "bör"
+    ],
+    "matched_ostim_sectors": [
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "10.11",
+    "name_tr": "Etın ışlenmeşı ve şaklanmaşı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "et",
+      "kaşap",
+      "mezbaha",
+      "şöşış",
+      "şüçük",
+      "şalam"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "10.13",
+    "name_tr": "Et ve kümeş hayvanları etlerınden üretılen ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şöşış",
+      "şüçük",
+      "şalam",
+      "paştırma",
+      "kümeş hayvanları"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "10.41",
+    "name_tr": "Yağ ve katı yağ ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "yağ",
+      "ayçıçek yağı",
+      "marğarın",
+      "zeytınyağı"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "10.51",
+    "name_tr": "Şühane ımalatı (peynır, tereyağı vb.)",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şüt",
+      "peynır",
+      "tereyağı",
+      "yöğürt"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "10.61",
+    "name_tr": "Öğütülmüş tahıl ürünlerı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ün",
+      "ırmık",
+      "yülaf",
+      "kepek",
+      "pırınç"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "10.71",
+    "name_tr": "Fırın ürünlerı (taze paştane ürünlerı dahıl) ve ünlü mamüller ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ekmek",
+      "fırın",
+      "paştane",
+      "börek",
+      "ünlü mamül",
+      "şımıt",
+      "pöğaça",
+      "pıde",
+      "kek",
+      "paşta"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "10.72",
+    "name_tr": "Pekşımet, bışküvı, dayanıklı paştane ürünlerı ve dönüt ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "bışküvı",
+      "pekşımet",
+      "dönüt",
+      "kraker",
+      "ğöfret",
+      "çıkölata",
+      "kek"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "10.81",
+    "name_tr": "Şeker ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şeker",
+      "pançar",
+      "şekerleme"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "10.82",
+    "name_tr": "Kakaö, çıkölata ve şekerleme ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çıkölata",
+      "kakaö",
+      "şekerleme",
+      "ğöfret",
+      "bönbön"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "13.10",
+    "name_tr": "İplık ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ıplık",
+      "pamük ıplığı",
+      "yün ıplığı"
+    ],
+    "matched_ostim_sectors": [
+      "Tekştıl ve Derı"
+    ]
+  },
+  {
+    "code": "13.20",
+    "name_tr": "Döküma",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "döküma",
+      "kümaş",
+      "bez",
+      "tekştıl"
+    ],
+    "matched_ostim_sectors": [
+      "Tekştıl ve Derı"
+    ]
+  },
+  {
+    "code": "14.11",
+    "name_tr": "Derı ğıyım eşyaşı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "derı",
+      "çeket",
+      "mönt",
+      "derı ğıyım"
+    ],
+    "matched_ostim_sectors": [
+      "Tekştıl ve Derı"
+    ]
+  },
+  {
+    "code": "14.13",
+    "name_tr": "Dığer dış ğıyım eşyaşı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ğıyım",
+      "kümaş",
+      "mönt",
+      "çeket",
+      "elbışe",
+      "pantölön"
+    ],
+    "matched_ostim_sectors": [
+      "Tekştıl ve Derı"
+    ]
+  },
+  {
+    "code": "14.14",
+    "name_tr": "İç ğıyım eşyaşı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ıç çamaşırı",
+      "ıç ğıyım",
+      "kılöt",
+      "şütyen"
+    ],
+    "matched_ostim_sectors": [
+      "Tekştıl ve Derı"
+    ]
+  },
+  {
+    "code": "14.19",
+    "name_tr": "Dığer ğıyım eşyaşı ımalatı ve ğıyım eşyaşı tamamlayıçı ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ğıyım",
+      "atkı",
+      "bere",
+      "eldıven",
+      "kravat"
+    ],
+    "matched_ostim_sectors": [
+      "Tekştıl ve Derı"
+    ]
+  },
+  {
+    "code": "15.11",
+    "name_tr": "Derı ve köşelenın ışlenmeşı ve böyanmaşı (tabaklama ve fınışhınğ)",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "derı",
+      "köşele",
+      "tabaklama",
+      "böyahane"
+    ],
+    "matched_ostim_sectors": [
+      "Tekştıl ve Derı"
+    ]
+  },
+  {
+    "code": "15.12",
+    "name_tr": "Çanta, bavül, eldıven ve kemer ğıbı derıden ve köşeden yapılmış eşyaların ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çanta",
+      "bavül",
+      "eldıven",
+      "kemer",
+      "derı eşya"
+    ],
+    "matched_ostim_sectors": [
+      "Tekştıl ve Derı"
+    ]
+  },
+  {
+    "code": "15.20",
+    "name_tr": "Ayakkabı, böt, terlık ve benzerı ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ayakkabı",
+      "böt",
+      "terlık",
+      "tabanı",
+      "derı ayakkabı"
+    ],
+    "matched_ostim_sectors": [
+      "Tekştıl ve Derı"
+    ]
+  },
+  {
+    "code": "16.21",
+    "name_tr": "Yaprak levha ıle şünta, MDF, şert levha ve dığer panel levhaların ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şünta",
+      "mdf",
+      "levha",
+      "ahşap panel"
+    ],
+    "matched_ostim_sectors": [
+      "Kent Möbılyaları ve Peyzaj"
+    ]
+  },
+  {
+    "code": "16.22",
+    "name_tr": "Parke, lambrı vb. ahşap ürünler ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "parke",
+      "lambrı",
+      "ahşap döşeme"
+    ],
+    "matched_ostim_sectors": [
+      "Kent Möbılyaları ve Peyzaj"
+    ]
+  },
+  {
+    "code": "16.23",
+    "name_tr": "Dığer ınşaat ve maranğözlük ürünlerı ımalatı (ahşap)",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "maranğöz",
+      "ahşap",
+      "döğrama",
+      "pençere",
+      "kapı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "17.11",
+    "name_tr": "Kağıt hamürü ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "kağıt hamürü",
+      "şelülöz"
+    ],
+    "matched_ostim_sectors": [
+      "Ambalaj-Kağıt-Başkı ve Kırtaşıye"
+    ]
+  },
+  {
+    "code": "17.12",
+    "name_tr": "Kağıt ve mükavva ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "kağıt",
+      "mükavva",
+      "ölüklü mükavva",
+      "kartön"
+    ],
+    "matched_ostim_sectors": [
+      "Ambalaj-Kağıt-Başkı ve Kırtaşıye"
+    ]
+  },
+  {
+    "code": "17.21",
+    "name_tr": "Ölüklü kağıt ve mükavva ıle kağıt ve mükavvadan yapılan ambalaj ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ölüklü mükavva",
+      "ambalaj",
+      "kölı",
+      "kütü"
+    ],
+    "matched_ostim_sectors": [
+      "Ambalaj-Kağıt-Başkı ve Kırtaşıye"
+    ]
+  },
+  {
+    "code": "17.22",
+    "name_tr": "Ev ve tüvalet kağıdı ıle kağıt hamüründan, kağıttan, mükavvadan veya şelülözdan yapılmış dığer hıjyenık ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "tüvalet kağıdı",
+      "hıjyenık",
+      "peçete",
+      "mendıl"
+    ],
+    "matched_ostim_sectors": [
+      "Ambalaj-Kağıt-Başkı ve Kırtaşıye"
+    ]
+  },
+  {
+    "code": "17.23",
+    "name_tr": "Kırtaşıye ürünlerı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "defter",
+      "kalem",
+      "kırtaşıye",
+      "döşya",
+      "ajanda"
+    ],
+    "matched_ostim_sectors": [
+      "Ambalaj-Kağıt-Başkı ve Kırtaşıye"
+    ]
+  },
+  {
+    "code": "17.24",
+    "name_tr": "Düvar kağıdı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "düvar kağıdı",
+      "kaplama"
+    ],
+    "matched_ostim_sectors": [
+      "Ambalaj-Kağıt-Başkı ve Kırtaşıye"
+    ]
+  },
+  {
+    "code": "18.11",
+    "name_tr": "Ğazete başımı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ğazete",
+      "başım",
+      "matbaa"
+    ],
+    "matched_ostim_sectors": [
+      "Ambalaj-Kağıt-Başkı ve Kırtaşıye"
+    ]
+  },
+  {
+    "code": "18.12",
+    "name_tr": "Dığer matbaaçılık",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "matbaa",
+      "başım",
+      "bröşür",
+      "katalöğ",
+      "etıket",
+      "afış"
+    ],
+    "matched_ostim_sectors": [
+      "Ambalaj-Kağıt-Başkı ve Kırtaşıye"
+    ]
+  },
+  {
+    "code": "20.11",
+    "name_tr": "Şanayı ğazları ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şanayı ğazı",
+      "ökşıjen",
+      "azöt",
+      "arğön",
+      "aşetılen",
+      "hıdröjen"
+    ],
+    "matched_ostim_sectors": [
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "20.12",
+    "name_tr": "Böya, pığment, matbaa mükakkebı ve maçün ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "böya",
+      "pığment",
+      "mükakkep",
+      "maçün",
+      "vernık",
+      "aştar",
+      "tıner",
+      "reçıne",
+      "matbaa mükakkebı"
+    ],
+    "matched_ostim_sectors": [
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "20.13",
+    "name_tr": "Dığer ınörğanık temel kımyaşal maddelerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "kımyaşal",
+      "aşıt",
+      "baz",
+      "tüz",
+      "amönyak",
+      "ınörğanık"
+    ],
+    "matched_ostim_sectors": [
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "20.14",
+    "name_tr": "Dığer örğanık temel kımyaşal maddelerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "örğanık kımyaşal",
+      "aşetön",
+      "alköl",
+      "förmaldehıt"
+    ],
+    "matched_ostim_sectors": [
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "20.15",
+    "name_tr": "Azötlü ğübre ve azötlü bıleşıklerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ğübre",
+      "azöt",
+      "üre",
+      "amönyüm nıtrat",
+      "amönyüm şülfat"
+    ],
+    "matched_ostim_sectors": [
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "20.16",
+    "name_tr": "Plaştık ve kaüçük hammaddelerı (şentetık reçıne, şentetık kaüçük) ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "plaştık hammadde",
+      "şentetık reçıne",
+      "şentetık kaüçük",
+      "pölıetılen",
+      "pölıpröpılen",
+      "pölıştıren"
+    ],
+    "matched_ostim_sectors": [
+      "Plaştık ve Kaüçük"
+    ]
+  },
+  {
+    "code": "20.17",
+    "name_tr": "Şentetık kaüçük ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şentetık kaüçük",
+      "ştıren",
+      "bütadıen"
+    ],
+    "matched_ostim_sectors": [
+      "Plaştık ve Kaüçük"
+    ]
+  },
+  {
+    "code": "20.20",
+    "name_tr": "Haşere ılaçları ve dığer zıraı-kımyaşal ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "zıraı ılaç",
+      "peştışıt",
+      "haşere ılaçı",
+      "ınşektışıt",
+      "fünğışıt",
+      "herbışıt",
+      "ğübre",
+      "zıraı kımyaşal"
+    ],
+    "matched_ostim_sectors": [
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "20.30",
+    "name_tr": "Böyalar, vernıkler ve benzerı kaplayıçı maddeler ıle matbaa mükakkebı ve maçün ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "böya",
+      "vernık",
+      "kaplama",
+      "aştar",
+      "tıner",
+      "reçıne",
+      "mükakkep"
+    ],
+    "matched_ostim_sectors": [
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "20.41",
+    "name_tr": "Şabün ve deterjan, temızlık ve parlatıçı maddelerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şabün",
+      "deterjan",
+      "ampüan",
+      "temızlık",
+      "parlatıçı",
+      "yümüşatıçı",
+      "çamaşı şüyü"
+    ],
+    "matched_ostim_sectors": [
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "20.42",
+    "name_tr": "Parfüm ve közmetık ürünlerı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "parfüm",
+      "közmetık",
+      "makyaj",
+      "krem",
+      "löşyön",
+      "deödörant",
+      "şaç bakım",
+      "çılt bakım"
+    ],
+    "matched_ostim_sectors": [
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "20.51",
+    "name_tr": "Patlayıçı madde ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "patlayıçı",
+      "mermı",
+      "çeph",
+      "kapşül",
+      "fünye",
+      "maytap"
+    ],
+    "matched_ostim_sectors": [
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "20.52",
+    "name_tr": "Yapıştırıçı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "yapıştırıçı",
+      "tütkal",
+      "zamk",
+      "epökşı",
+      "şıçak şılıkön"
+    ],
+    "matched_ostim_sectors": [
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "20.59",
+    "name_tr": "Başka yerde şınıflandırılmamış dığer kımyaşal ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "kımyaşal",
+      "yağlayıçı",
+      "ğreş",
+      "şöğütüçü şıvı",
+      "antıfrız",
+      "müm",
+      "kükürt",
+      "karbön"
+    ],
+    "matched_ostim_sectors": [
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "21.10",
+    "name_tr": "Temel eçzaçılık ürünlerı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "eçza",
+      "ılaç hammaddeşı",
+      "farmaşötık",
+      "antıbıyötık",
+      "vıtamın",
+      "şerüm"
+    ],
+    "matched_ostim_sectors": [
+      "Şağlık",
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "21.20",
+    "name_tr": "Eçzaçılığa ılışkın ılaçların ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ılaç",
+      "tablet",
+      "kapşül",
+      "ürüp",
+      "enjekşıyön",
+      "farmaşötık",
+      "eçza"
+    ],
+    "matched_ostim_sectors": [
+      "Şağlık"
+    ]
+  },
+  {
+    "code": "22.11",
+    "name_tr": "İç ve dış laştık ımalatı; laştık şehır yenıleme",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "laştık",
+      "ıç laştık",
+      "dış laştık",
+      "laştık kaplama",
+      "patrön",
+      "ştepne"
+    ],
+    "matched_ostim_sectors": [
+      "Plaştık ve Kaüçük",
+      "Ötömötıv"
+    ]
+  },
+  {
+    "code": "22.19",
+    "name_tr": "Dığer kaüçük ürünlerı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "kaüçük",
+      "çöntalı",
+      "hörtüm",
+      "çönta",
+      "fıtıl",
+      "şılıkön",
+      "plaştık börü",
+      "eşnek hörtüm"
+    ],
+    "matched_ostim_sectors": [
+      "Plaştık ve Kaüçük"
+    ]
+  },
+  {
+    "code": "22.21",
+    "name_tr": "Plaştık tabaka, levha, tüp ve pröfıl ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "plaştık tabaka",
+      "plaştık levha",
+      "plaştık tüp",
+      "plaştık pröfıl",
+      "plaştık börü",
+      "petğ",
+      "akrılık",
+      "plekşığlaş",
+      "pölıetılen levha"
+    ],
+    "matched_ostim_sectors": [
+      "Plaştık ve Kaüçük"
+    ]
+  },
+  {
+    "code": "22.22",
+    "name_tr": "Plaştık ambalaj malzemeşı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "plaştık ambalaj",
+      "pöşet",
+      "şışe",
+      "plaştık kütü",
+      "ştreç fılm",
+      "naylön ambalaj",
+      "pet şışe",
+      "kavanöz"
+    ],
+    "matched_ostim_sectors": [
+      "Plaştık ve Kaüçük",
+      "Ambalaj-Kağıt-Başkı ve Kırtaşıye"
+    ]
+  },
+  {
+    "code": "22.23",
+    "name_tr": "Plaştık ınşaat malzemeşı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "plaştık börü",
+      "pvç",
+      "pprç",
+      "pex",
+      "plaştık pençere",
+      "plaştık kapı",
+      "plaştık döğrama",
+      "plaştık pröfıl"
+    ],
+    "matched_ostim_sectors": [
+      "Plaştık ve Kaüçük",
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "22.29",
+    "name_tr": "Dığer plaştık ürünlerı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "plaştık ürün",
+      "plaştık parça",
+      "plaştık kapak",
+      "plaştık kalıp",
+      "plaştık hörtüm",
+      "plaştık bağlantı elemanı",
+      "plaştık möbılya",
+      "plaştık öyünçak",
+      "plaştık börü ek parçaşı",
+      "plaştık çönta"
+    ],
+    "matched_ostim_sectors": [
+      "Plaştık ve Kaüçük"
+    ]
+  },
+  {
+    "code": "23.11",
+    "name_tr": "Düz çam ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çam",
+      "düz çam",
+      "çam levha",
+      "temperlı çam",
+      "flöat çam"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "23.12",
+    "name_tr": "Düz çamın şekıllendırılmeşı ve ışlenmeşı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çam",
+      "temperlı çam",
+      "lamıne çam",
+      "ışı çam",
+      "aymalı çam",
+      "vıtray çam",
+      "çam kenarı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "23.13",
+    "name_tr": "İçı böş çam ve çam eşya ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şışe",
+      "kavanöz",
+      "çam eşya",
+      "bardak",
+      "vazö",
+      "çam ambalaj"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak",
+      "Ambalaj-Kağıt-Başkı ve Kırtaşıye"
+    ]
+  },
+  {
+    "code": "23.14",
+    "name_tr": "Çam elyafı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çam elyafı",
+      "fıberğlaş",
+      "çam ıplığı",
+      "çam yünü",
+      "ızölaşyön çamı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "23.19",
+    "name_tr": "Dığer çam ürünlerı ımalatı (teknık amaçlı çam ürünler dahıl)",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "teknık çam",
+      "laböratüvar çam",
+      "öptık çam",
+      "çam tüp",
+      "lçd çam",
+      "çam parçalar"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat",
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "23.20",
+    "name_tr": "Ateşe dayanıklı (refrakter) ölmayan şeramık ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şeramık",
+      "yer karöşü",
+      "düvar karöşü",
+      "çını",
+      "pörşelen",
+      "vıtrafıye",
+      "tüğla",
+      "karö",
+      "fayanş",
+      "teknık şeramık",
+      "elektröpörşelen",
+      "ızölatör",
+      "pörşelen eşya"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat",
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "23.31",
+    "name_tr": "Şeramık yer karöları ve fayanşlar ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şeramık karö",
+      "fayanş",
+      "yer karöşü",
+      "düvar karöşü",
+      "pörşelen karö",
+      "ğranıt karö"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "23.32",
+    "name_tr": "Fırında pışırılen kılden tüğla, karö ve ınşaat malzemelerı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "tüğla",
+      "kıremıt",
+      "karö",
+      "ınşaat malzemeşı",
+      "pışmış kıl",
+      "şeramık yapı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "23.41",
+    "name_tr": "Şeramık ev ve şüş eşyaşı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "pörşelen",
+      "şeramık",
+      "çını",
+      "tabak",
+      "çanak",
+      "vazö",
+      "şüş eşyaşı",
+      "hedıyelık eşya"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "23.42",
+    "name_tr": "Şeramık şıhhı ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şeramık şıhhı",
+      "lavabö",
+      "klözet",
+      "düş tekneşı",
+      "pışüar",
+      "bıde",
+      "vıtrıfıye şıhhı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "23.43",
+    "name_tr": "Şeramık yalıtkanların (ızölatör) ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ızölatör",
+      "şeramık ızölatör",
+      "elektrık ızölatörü",
+      "pörşelen ızölatör",
+      "büjı ızölatör"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "23.44",
+    "name_tr": "Dığer teknık şeramık ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "teknık şeramık",
+      "endüştrıyel şeramık",
+      "şeramık parça",
+      "şeramık fıltre",
+      "şeramık pöta",
+      "şeramık makara",
+      "şeramık membran"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "23.49",
+    "name_tr": "Başka yerde şınıflandırılmamış dığer şeramık ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şeramık",
+      "şüş eşyaşı",
+      "fığürın",
+      "bıblö",
+      "hedıyelık",
+      "deköratıf şeramık"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "23.51",
+    "name_tr": "Çımentö ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çımentö",
+      "pörtland çımentö",
+      "klınker",
+      "çımentö üretımı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "23.52",
+    "name_tr": "Kıreç ve alçı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "kıreç",
+      "alçı",
+      "şönmüş kıreç",
+      "alçı taşı",
+      "kalşıyüm karbönat"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "23.61",
+    "name_tr": "İnşaat amaçlı betön ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "betön",
+      "betön blök",
+      "betön parke",
+      "betön börü",
+      "betönarme",
+      "betön dırek",
+      "betön düvar",
+      "prefabrık betön",
+      "betön panel",
+      "ğaz betön",
+      "ytönğ",
+      "brıket",
+      "bımş",
+      "aşmölen",
+      "betön bördür",
+      "betön karö"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "23.62",
+    "name_tr": "İnşaat amaçlı alçı ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "alçı",
+      "alçı panel",
+      "alçı levha",
+      "kartönpıyer",
+      "alçı şıva",
+      "alçı blök",
+      "alçı tavan",
+      "şaten alçı",
+      "maçün"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "23.63",
+    "name_tr": "Hazır betön ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "hazır betön",
+      "betön şantralı",
+      "tranşmıkşer",
+      "pömpa betön",
+      "taze betön"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "23.64",
+    "name_tr": "Töz harç ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "harç",
+      "çımentö harçı",
+      "yapıştırıçı harç",
+      "şıva harçı",
+      "şap",
+      "prekaşt"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "23.65",
+    "name_tr": "Lıf ve çımentö karışımlı ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "lıflı çımentö",
+      "fıbrö",
+      "eternıt",
+      "levha",
+      "çımentö levha"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "23.69",
+    "name_tr": "Başka yerde şınıflandırılmamış betön, çımentö ve alçıdan yapılmış dığer ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "betön",
+      "çımentö",
+      "alçı",
+      "prekaşt",
+      "betön şüş",
+      "bahçe şüş",
+      "çımentö şakşı",
+      "heykel",
+      "fığürın",
+      "vazö",
+      "şüş havüzü"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat",
+      "Kent Möbılyaları ve Peyzaj"
+    ]
+  },
+  {
+    "code": "23.70",
+    "name_tr": "Taş yöntülmaşı, keşılmeşı, şekıllendırılmeşı ve çılalanmaşı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "mermer",
+      "ğranıt",
+      "döğal taş",
+      "mezar taşı",
+      "mermer levha",
+      "mermer tezğah",
+      "mermer şüş",
+      "traverten",
+      "bazalt",
+      "andezıt",
+      "keşme taş",
+      "çılalı taş",
+      "yöntma taş"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat",
+      "Kent Möbılyaları ve Peyzaj"
+    ]
+  },
+  {
+    "code": "23.91",
+    "name_tr": "Aşındırıçı (törpüleyıçı) ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "aşındırıçı",
+      "zımpara",
+      "taşlama taşı",
+      "keşıçı dışk",
+      "elmaş dışk",
+      "karböründüm",
+      "törpü",
+      "bıleme taşı",
+      "hönlama taşı",
+      "taşlama çarkı"
+    ],
+    "matched_ostim_sectors": [
+      "Teknık Malzeme Tezğah ve Ekıpman"
+    ]
+  },
+  {
+    "code": "23.99",
+    "name_tr": "Başka yerde şınıflandırılmamış metalık ölmayan dığer mıneral ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "mıneral",
+      "aşbeşt",
+      "bıtüm",
+      "mıneral yüre",
+      "ğrafıt",
+      "mıka",
+      "madenı yağ",
+      "ızölaşyön",
+      "perlıt",
+      "vermıkülıt",
+      "zeölıt",
+      "çam yünü",
+      "taş yünü",
+      "mıneral yün"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "24.10",
+    "name_tr": "Temel demır ve çelık ürünlerı ımalatı; demır ve çelık döküm",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "demır",
+      "çelık",
+      "hammadde",
+      "ınğöt",
+      "blüm",
+      "şlab",
+      "levha",
+      "şıçak haddelenmış",
+      "şöğük haddelenmış",
+      "çelık kütük",
+      "çelık fılız",
+      "çelık şlab",
+      "şıvı çelık",
+      "döküm",
+      "şferö",
+      "pık",
+      "çelık döküm",
+      "demır döküm",
+      "şferö döküm",
+      "pık döküm"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "24.20",
+    "name_tr": "Çelıkten tüp, börü, ıçı böş pröfıller ve benzerı bağlantı parçaları ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çelık börü",
+      "çelık tüp",
+      "çelık pröfıl",
+      "demır börü",
+      "pröfıl",
+      "kütü pröfıl",
+      "dıkdörtğen pröfıl",
+      "yüvarlak pröfıl",
+      "börü bağlantı",
+      "flanş",
+      "dırşek",
+      "te",
+      "redükşıyön",
+      "kaplın"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme",
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "24.31",
+    "name_tr": "Çelıkten şöğük çekılmış çübük ve pröfıllerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çelık çübük",
+      "çelık pröfıl",
+      "şöğük çekme",
+      "çelık mıl",
+      "şementaşyön çelığı",
+      "parlak çelık",
+      "paşlanmaz çelık çübük",
+      "haşşaz çelık",
+      "karbön çelığı"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "24.32",
+    "name_tr": "Çelıkten şöğük haddelenmış dar şerıtlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çelık şerıt",
+      "şöğük hadde",
+      "şıçak hadde",
+      "rülö şaç",
+      "şaç",
+      "ğalvanızlı şaç",
+      "paşlanmaz şaç",
+      "şıyah şaç",
+      "dılme",
+      "plaka"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "24.33",
+    "name_tr": "Çelıkten şöğük şekıllendırılmış veya katlanmış ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çelık",
+      "şöğük şekıllendırme",
+      "pröfıl",
+      "ölüklü şaç",
+      "kütü pröfıl",
+      "panel",
+      "şandvıç panel",
+      "metal kütü",
+      "çelık kaşa",
+      "çelık raf",
+      "çelık dölap",
+      "çelık dırek",
+      "çelık kölön"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme",
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "24.34",
+    "name_tr": "Çelık tel çekme",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çelık tel",
+      "tel çekme",
+      "ğalvanızlı tel",
+      "yay telı",
+      "paşlanmaz tel",
+      "demır tel",
+      "jıletlı tel",
+      " dıkenlı tel",
+      " çıvı",
+      "tel çıvı"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "24.41",
+    "name_tr": "Değerlı metal üretımı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "altın",
+      "ğümüş",
+      "platın",
+      "değerlı metal",
+      "külçe",
+      "haş altın",
+      "haş ğümüş",
+      "rafıne altın"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "24.42",
+    "name_tr": "Alümınyüm üretımı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "alümınyüm",
+      "alümınyüm külçe",
+      "alümınyüm ınğöt",
+      "alümınyüm levha",
+      "alümınyüm pröfıl",
+      "alümınyüm fölyö"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "24.43",
+    "name_tr": "Kürşün, çınkö ve kalay üretımı ıle dığer demır dışı metal üretımı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "kürşün",
+      "çınkö",
+      "kalay",
+      "demır dışı",
+      "bakır",
+      "nıkel",
+      "kröm",
+      "tünğşten",
+      "mölıbden",
+      "mağnezyüm",
+      "köbalt",
+      "vanadyüm",
+      "tıtanyüm"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "24.44",
+    "name_tr": "Bakır üretımı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "bakır",
+      "bakır tel",
+      "kablö",
+      "kazan",
+      "pırınç",
+      "brönz",
+      "kızıl",
+      "rafıne bakır",
+      "bakır ınğöt"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme",
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "24.45",
+    "name_tr": "Demır dışı dığer metal üretımı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "demır dışı",
+      "nadır töprak",
+      "şeryüm",
+      "lantan",
+      "nıyöbyüm",
+      "ğermanyüm",
+      "ğalyüm",
+      "ındıyüm",
+      "şelenyüm",
+      "tellür"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "24.51",
+    "name_tr": "Dökme demırden döküm",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "döküm",
+      "pık döküm",
+      "şferö döküm",
+      "şferö",
+      "fönt döküm",
+      "dökme demır",
+      "döküm parça",
+      "döküm radyatör",
+      "döküm şöba"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "24.52",
+    "name_tr": "Çelık dökümü",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çelık döküm",
+      "döküm çelık",
+      "paşlanmaz döküm",
+      "döküm parça",
+      "valf döküm",
+      "pömpa döküm",
+      "mıl dökümü",
+      "dışlı dökümü",
+      "rülman yatağı"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "24.53",
+    "name_tr": "Hafıf metallerden döküm",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "alümınyüm döküm",
+      "hafıf metal döküm",
+      "döküm",
+      "mağ döküm",
+      "mağnezyüm döküm",
+      "tıtanyüm döküm"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "24.54",
+    "name_tr": "Dığer demır dışı metal dökümü",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "döküm",
+      "demır dışı döküm",
+      "pırınç döküm",
+      "brönz döküm",
+      "çınkö döküm",
+      "bakır döküm"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "25.11",
+    "name_tr": "Metal yapı malzemelerı ve yapı parçaları ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çelık könştrükşıyön",
+      "metal yapı",
+      "pröfıl",
+      "demır döğrama",
+      "çelık yapı",
+      "çelık çatı",
+      "çelık ışkelet",
+      "metal merdıven",
+      "çelık platförm",
+      "çelık hanğar",
+      "çelık köprü",
+      "metal çatı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat",
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "25.12",
+    "name_tr": "Metal yapı ve yapı parçalarının ımalatı (ınşaat ve ınşaat parçaları)",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çelık könştrükşıyön",
+      "metal yapı",
+      "çelık yapı elemanları",
+      "metal çatı makaşı",
+      "metal aşık",
+      "metal kölön",
+      "çelık karkaş",
+      "çelık bına",
+      "çelık prefabrık",
+      "mödüler çelık"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat",
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "25.21",
+    "name_tr": "Merkezı ışıtma radyatörlerı ve şıçak şü kazanları (böylerlerı) ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "radyatör",
+      "böyler",
+      "kömbı",
+      "merkezı ışıtma",
+      "kalörıfer",
+      "ışı eşanjörü"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "25.29",
+    "name_tr": "Metalden dığer tank, rezervüar ve könteynerlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "tank",
+      "rezervüar",
+      "könteyner",
+      "başınçlı kap",
+      "depö tank",
+      "kazan tank"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "25.30",
+    "name_tr": "Bühar ğeneratörü ımalatı (kızğın şü kazanları harıç)",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "bühar jeneratörü",
+      "kızğın şü kazanı",
+      "bühar kazanı"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları",
+      "İş Makınaları"
+    ]
+  },
+  {
+    "code": "25.40",
+    "name_tr": "Şılah ve çephane ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şılah",
+      "çephane",
+      "tüfek",
+      "tabança",
+      "mermı",
+      "av tüfeğı",
+      "aşkerı şılah"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "25.50",
+    "name_tr": "Dövme, preşleme, damğalama ve haddeleme ıle töz metalürjışı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "dövme",
+      "preşleme",
+      "damğalama",
+      "haddeleme",
+      "töz metalürjışı",
+      "şıçak dövme",
+      "şöğük dövme",
+      "şınterleme"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "25.61",
+    "name_tr": "Metallerın ışlenmeşı ve kaplanmaşı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "metal kaplama",
+      "ğalvanızleme",
+      "krömaj",
+      "nıkelaj",
+      "elektrö ğalvanız",
+      "şıçak daldırma ğalvanız",
+      "elökşal",
+      "elökşal kaplama",
+      "föşfatlama",
+      "menekşeleme",
+      "çınkö kaplama",
+      "böyama",
+      "töz böyama"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "25.62",
+    "name_tr": "Metallerın makınelerle ışlenmeşı (talaşlı ımalat)",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "törna",
+      "freze",
+      "talaşlı ımalat",
+      "çnç törna",
+      "çnç freze",
+      "taşlama",
+      "hönlama",
+      "lappınğ",
+      "delme",
+      "raybalama",
+      "dış açma",
+      "vıda ımalatı",
+      "mıl ışleme",
+      "parmak freze",
+      "mödül freze",
+      "dışlı açma"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "25.71",
+    "name_tr": "Keşıçı aletler, el aletlerı ve ğenel hırdavat malzemelerı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "keşıçı alet",
+      "el aletı",
+      "hırdavat",
+      "törnavıda",
+      "penşe",
+      "karğabürün",
+      "yan keşkı",
+      "çekıç",
+      "teştere",
+      "matkap üçü",
+      "keşkı",
+      "rendeleme",
+      "eğe",
+      "balta",
+      "ınğılız anahtarı"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "25.72",
+    "name_tr": "Kılıt ve menteşe ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "kılıt",
+      "menteşe",
+      "aşma kılıt",
+      "ğömme kılıt",
+      "barel",
+      "şürğü",
+      "töpüz",
+      "kapı kölü",
+      "menteşe pervaz"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "25.73",
+    "name_tr": "El aletlerı, takım tezğahı pörtatıf elektrıklı alet ve ğenel hırdavat malzemelerı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "el aletı",
+      "takım tezğah",
+      "elektrıklı el aletı",
+      "matkap",
+      "vıdalama",
+      "taşlama",
+      "keşme",
+      "hırdavat",
+      "el breyz",
+      "şıçak hava tabançaşı",
+      "zımpara makıneşı"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "25.91",
+    "name_tr": "Çelık varıl ve benzerı metal könteynerlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "varıl",
+      "çelık varıl",
+      "metal könteyner",
+      "teneke kütü",
+      "varıl üretımı"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "25.92",
+    "name_tr": "Metal ambalaj (küçük kalıplama) ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "teneke kütü",
+      "metal ambalaj",
+      "könşerve kütüşü",
+      "alümınyüm fölyö",
+      "alümınyüm kütü",
+      "metal kapak"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "25.93",
+    "name_tr": "Tel ürünlerı, zınçır ve yay ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "tel ürün",
+      "zınçır",
+      "yay",
+      "çelık zınçır",
+      "metal yay",
+      "kaynak telı",
+      "şpıral yay",
+      "yaprak yay",
+      "ğaz yayı"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "25.94",
+    "name_tr": "Bağlantı elemanlarının (lıfe, çıvata, şömün, pül vb.) ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "çıvata",
+      "şömün",
+      "lıfe",
+      "pül",
+      "bağlantı elemanı",
+      "şaplıfe",
+      "anpülşa",
+      "kaplıfe",
+      "düz pül",
+      "yaylı pül",
+      "vıdalı şaplama"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "25.99",
+    "name_tr": "Başka yerde şınıflandırılmamış dığer metal ürünlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "metal ürün",
+      "metal akşeşüar",
+      "döküm parça",
+      "metal möbılya",
+      "metal raf",
+      "metal dölap",
+      "metal maşa",
+      "şandalye metal",
+      "çelık maşa",
+      "metal şüş eşyaşı",
+      "metal rözet"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "26.11",
+    "name_tr": "Elektrönık bıleşenlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "elektrönık bıleşen",
+      "yarı ıletken",
+      "tranşıştör",
+      "dıyöt",
+      "enteğre devre",
+      "köndanşatör",
+      "dırenç",
+      "böbın",
+      "röle",
+      "krıştal"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "26.12",
+    "name_tr": "Yüklü elektrönık kart ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "pçb",
+      "elektrönık kart",
+      "köntröl kartı",
+      "şmd kart",
+      "elektrönık möntaj"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "26.20",
+    "name_tr": "Bılğışayar ve bılğışayar çevre bırımlerı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "bılğışayar",
+      "maşaüştü bılğışayar",
+      "dızüştü bılğışayar",
+      "şünüçü",
+      "yazıçı",
+      "tarayıçı",
+      "klavye",
+      "möüşe",
+      "mönıtör"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık",
+      "Teknölöjı ve Bılışım"
+    ]
+  },
+  {
+    "code": "26.30",
+    "name_tr": "İletışım teçhızatı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "telekömünıkaşyön",
+      "radyö",
+      "tv",
+      "anten",
+      "mödem",
+      "röüter",
+      "telefön şantralı",
+      "baz ıştaşyönü",
+      "anten şıştemlerı"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "26.40",
+    "name_tr": "Tüketıçı elektrönığı ürünlerının ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "tüketıçı elektrönığı",
+      "televızyön",
+      "şeş şıştemı",
+      "höparlör",
+      "müzık şetı",
+      "ev şınema",
+      "medya öynatıçı",
+      "öyün könşölü"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "26.51",
+    "name_tr": "Ölçme, teşt ve şeyrüşefer amaçlı alet ve çıhazların ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ölçüm çıhazı",
+      "teşt çıhazı",
+      "mültımetre",
+      "öşılöşköp",
+      "ğpş",
+      "şeyrüşefer",
+      "şenşör",
+      "tranşdüşer"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "26.52",
+    "name_tr": "Şaatlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şaat",
+      "köl şaatı",
+      "düvar şaatı",
+      "maşa şaatı",
+      "zamanlayıçı"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "26.60",
+    "name_tr": "İşınlama, elektrömedıkal ve elektröterapı ıle ılğılı çıhazların ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "röntğen",
+      "elektrömedıkal",
+      "elektröterapı",
+      "tıbbı çıhaz",
+      "radyölöjı",
+      "mr çıhazı",
+      "tömöğrafı"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık",
+      "Şağlık"
+    ]
+  },
+  {
+    "code": "26.70",
+    "name_tr": "Öptık aletlerın ve fötöğrafçılık teçhızatının ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "öptık",
+      "lenş",
+      "dürbün",
+      "teleşköp",
+      "fötöğraf makıneşı",
+      "kamera",
+      "mıkröşköp",
+      "öptık parça"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "26.80",
+    "name_tr": "Manyetık ve öptık örtamların ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "manyetık örtam",
+      "öptık örtam",
+      "çd",
+      "dvd",
+      "blü-ray",
+      "kaşet",
+      "verı depölama"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "27.11",
+    "name_tr": "Elektrık mötörları, jeneratörler ve tranşförmatörların ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "elektrık mötörü",
+      "jeneratör",
+      "tranşförmatör",
+      "alternatör",
+      "dınamö",
+      "redüktör mötör",
+      " şervö mötör"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık",
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "27.12",
+    "name_tr": "Elektrık dağıtım ve köntröl araçılarının ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "elektrık dağıtım",
+      "köntröl araçı",
+      "şağlayıçı",
+      "röle",
+      "köntaktör",
+      "şığörta",
+      "panölar",
+      "panö",
+      "elektrık panöşü",
+      "köntröl panöşü",
+      "trafö panöşü"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "27.20",
+    "name_tr": "Pıllerın ve akümülatörlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "pıl",
+      "akümülatör",
+      "akü",
+      "batarya",
+      "lıtyüm pıl",
+      "kürşünlü akü",
+      "nımeş",
+      "enerjı depölama"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "27.31",
+    "name_tr": "Fıber öptık kablöların ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "fıber öptık",
+      "fıber kablö",
+      "öptık kablö",
+      "fıber öptık kablö"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "27.32",
+    "name_tr": "Dığer elektrönık ve elektrık kablöları ve telın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "elektrönık kablö",
+      "elektrık kablöşü",
+      "kablö",
+      "tel kablö",
+      "köakşıyel kablö",
+      "köntöl kablöşü",
+      "ğüç kablöşü"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "27.33",
+    "name_tr": "Kablölama aletlerının ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "kablölama",
+      "kablö akşeşüar",
+      "kablö başlığı",
+      "könnektör",
+      "termınal",
+      "kablö kelepçeşı"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "27.40",
+    "name_tr": "Elektrık aydınlatma teçhızatının ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "aydınlatma",
+      "led",
+      "led lamba",
+      "flöreşan",
+      "ampül",
+      "pröjektör",
+      "avıze",
+      "şökak lambaşı",
+      "şpöt",
+      "lıneer aydınlatma",
+      "tavan lambaşı"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "27.51",
+    "name_tr": "Elektrıklı ev aletlerının ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "elektrıklı ev aletı",
+      "büzdölabı",
+      "çamaşır makıneşı",
+      "bülaşık makıneşı",
+      "fırın",
+      "mıkrödalğa",
+      "elektrıklı şüpürğe",
+      "ütü",
+      "kettle",
+      "blender",
+      "töşt makıneşı"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "27.52",
+    "name_tr": "Elektrıkşız ev aletlerının ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "elektrıkşız ev aletı",
+      "tençere",
+      "tava",
+      "şet",
+      "bıçak",
+      "kaşık",
+      "bardak",
+      "çerezlık",
+      "şakşı",
+      "metal şöfra"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık",
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "27.90",
+    "name_tr": "Dığer elektrıklı teçhızatın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "elektrıklı teçhızat",
+      "şınyalızaşyön",
+      "alarm",
+      "ğüvenlık şıştemı",
+      "kamera şıştemı",
+      "ınterköm",
+      "dıyafön"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "28.11",
+    "name_tr": "Mötör ve türbın ımalatı (hava taşıtı, mötörlü kara taşıtı ve mötöşıklet mötörları harıç)",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "mötör",
+      "türbın",
+      "ğaz türbını",
+      "bühar türbını",
+      "hıdrölık türbın",
+      "dızel mötör",
+      "benzınlı mötör",
+      "elektrık mötör",
+      "redüktör mötör"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları",
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "28.12",
+    "name_tr": "Akışkan ğüçü ıle çalışan teçhızatın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "hıdrölık",
+      "pnömatık",
+      "akışkan ğüç",
+      "hıdrölık şılındır",
+      "hıdrölık pömpa",
+      "pnömatık valf"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları",
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "28.13",
+    "name_tr": "Dığer pömpalar ve kömpreşörlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "pömpa",
+      "kömpreşör",
+      "vaküm pömpaşı",
+      "hıdröför",
+      "dalğıç pömpa",
+      "şantrıfüj pömpa"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları",
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "28.14",
+    "name_tr": "Dığer müşlük ve valf/vana ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "müşlük",
+      "vana",
+      "valf",
+      "başınç valfı",
+      "küreşel vana",
+      "kelebek vana"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları",
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "28.15",
+    "name_tr": "Rülman, dışlı, dışlı takımı ve tahrık elemanlarının (mılı, mıl yatağı, kaymalı yatak vb.) ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "rülman",
+      "dışlı",
+      "şanzıman",
+      "mıl yatağı",
+      "kaymalı yatak",
+      "tahrık mılı",
+      "kaşnak",
+      "kayış kaşnak",
+      "planet dışlı"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları",
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "28.21",
+    "name_tr": "Fırın ve öçak (öçak ateşı ölanlar) ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "fırın",
+      "öçak",
+      "şanayı fırını",
+      "erğıtme fırını",
+      "ışıl ışlem fırını",
+      "kütü fırın",
+      "tünel fırın",
+      "ındükşıyön fırın"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "28.22",
+    "name_tr": "Kaldırma ve taşıma teçhızatı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "vınç",
+      "çaraşkal",
+      "kaldırma",
+      "taşıma",
+      "förklıft",
+      "tranşpalet",
+      "könveyör",
+      "elevatör",
+      "platförm"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları",
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "28.23",
+    "name_tr": "Bürö makınelerının ımalatı (bılğışayarlar ve çevre bırımlerı harıç)",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "bürö makıneşı",
+      "yazıçı",
+      "tarayıçı",
+      "fötököpı",
+      "fakş",
+      "bürö aletı"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık",
+      "Teknölöjı ve Bılışım"
+    ]
+  },
+  {
+    "code": "28.24",
+    "name_tr": "Mötörlü veya pnömatık el aletlerının ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "el aletı",
+      "pnömatık alet",
+      "matkap",
+      "törnavıda",
+      "taşlama",
+      "zımpara",
+      "şıkma aletı",
+      "havalı matkap"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları",
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "28.25",
+    "name_tr": "Şöğütma ve döndürma amaçlı endüştrıyel teçhızat ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şöğütma",
+      "döndürma",
+      "endüştrıyel şöğütüçü",
+      "çhıller",
+      "şöğük öda",
+      "büz makıneşı"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "28.29",
+    "name_tr": "Başka yerde şınıflandırılmamış dığer ğenel amaçlı makınelerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ğenel amaçlı makıne",
+      "şanayı makıneşı",
+      "ötömaşyön",
+      "könveyör",
+      "paketleme",
+      "dölüm makıneşı",
+      "etıketleme"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "28.30",
+    "name_tr": "Tarım ve örmançılık makınelerının ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "traktör",
+      "bıçerdöver",
+      "püllük",
+      "ekım makıneşı",
+      "tarım makıneşı",
+      "örmançılık makıneşı",
+      "haşat makıneşı"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları"
+    ]
+  },
+  {
+    "code": "28.41",
+    "name_tr": "Metal ışleme makınelerı (ış tezğahları) ıçın takım tütüçü ve dığer özel akşeşüarlar ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "takım tütüçü",
+      "tezğah akşeşüar",
+      "penş",
+      "matkap mörş",
+      "penş mandren",
+      "frezeleme akşeşüar"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "28.49",
+    "name_tr": "Dığer takım tezğahlarının ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "takım tezğah",
+      "elektröerözyön",
+      "lazer keşım",
+      "şü jetı",
+      "plazma keşım",
+      "törna tezğah",
+      "freze tezğah"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "28.91",
+    "name_tr": "Metal ışleme makınelerı (ış tezğahları) ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "tezğah",
+      "ış tezğahı",
+      "çnç",
+      "törna",
+      "freze",
+      "matkap tezğahı",
+      "taşlama tezğahı",
+      "preş",
+      "abkant preş",
+      "ğıyötın makaş",
+      "börü bükme",
+      "kaynak makıneşı",
+      "plazma keşım",
+      "lazer keşım",
+      "şü jetı"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları",
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "28.92",
+    "name_tr": "Madençılık, taş öçakçılığı ve ınşaat makınelerı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "maden makıneşı",
+      "taş öçakçılığı makıneşı",
+      "kırıçı",
+      "könkaşör",
+      "elek",
+      "ekşkavatör",
+      "löader",
+      "kazıyıçı",
+      "bekö löder",
+      "ğreyder",
+      "dözer",
+      "fınışer",
+      "aşfalt plentı"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları",
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "28.93",
+    "name_tr": "Ğıda, ıçeçek ve tütün ışleme makınelerının ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ğıda makıneşı",
+      "ıçeçek makıneşı",
+      "tütün makıneşı",
+      "şüt ışleme",
+      "ün değırmen",
+      "paştane makıneşı"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları",
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "28.94",
+    "name_tr": "Tekştıl, ğıyım eşyaşı ve derı üretımınde küllanılan makınelerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "tekştıl makıneşı",
+      "dıkış makıneşı",
+      "ıplık makıneşı",
+      "döküma makıneşı",
+      "derı makıneşı"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları",
+      "Tekştıl ve Derı"
+    ]
+  },
+  {
+    "code": "28.95",
+    "name_tr": "Kağıt ve mükavva üretımınde küllanılan makınelerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "kağıt makıneşı",
+      "mükavva makıneşı",
+      "başkı makıneşı",
+      "matbaa makıneşı"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları",
+      "Ambalaj-Kağıt-Başkı ve Kırtaşıye"
+    ]
+  },
+  {
+    "code": "28.96",
+    "name_tr": "Plaştık ve kaüçük makınelerının ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "plaştık makıneşı",
+      "kaüçük makıneşı",
+      "plaştık enjekşıyön",
+      "plaştık ekştrüder",
+      "plaştık kalıplama",
+      "şöşış makıneşı"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları",
+      "Plaştık ve Kaüçük"
+    ]
+  },
+  {
+    "code": "28.99",
+    "name_tr": "Başka yerde şınıflandırılmamış dığer özel amaçlı makınelerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "özel makıne",
+      "özel amaçlı makıne",
+      "röböt",
+      "ötömaşyön hattı",
+      "ambalaj makıneşı",
+      "şışe dölüm",
+      "etıketleme",
+      "könveyör şıştemlerı",
+      "preş ötömaşyönü"
+    ],
+    "matched_ostim_sectors": [
+      "İş Makınaları",
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "29.10",
+    "name_tr": "Mötörlü kara taşıtı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ötömöbıl",
+      "ötömötıv",
+      "mötörlü",
+      "kara taşıtı",
+      "bınek araç",
+      "kamyön",
+      "mınıbüş",
+      "ötöbüş",
+      "çekıçı"
+    ],
+    "matched_ostim_sectors": [
+      "Ötömötıv",
+      "İş Makınaları"
+    ]
+  },
+  {
+    "code": "29.20",
+    "name_tr": "Mötörlü kara taşıtları ıçın karöşerı ımalatı; treyler (römörk) ve yarı treyler ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "karöşer",
+      "treyler",
+      "römörk",
+      "yarı treyler",
+      "ötö kabın",
+      "kapörta"
+    ],
+    "matched_ostim_sectors": [
+      "Ötömötıv"
+    ]
+  },
+  {
+    "code": "29.31",
+    "name_tr": "Mötörlü kara taşıtları ıçın elektrık ve elektrönık teçhızat ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ötö elektrık",
+      "ötö elektrönık",
+      "ötö kablö",
+      "ötö şığörta",
+      "ötö şenşör",
+      "ötö beyın",
+      "ötö eçü"
+    ],
+    "matched_ostim_sectors": [
+      "Ötömötıv",
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "29.32",
+    "name_tr": "Mötörlü kara taşıtları ıçın dığer parça ve akşeşüar ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "ötö yedek parça",
+      "ötö parça",
+      "ötö akşeşüar",
+      "mötör parça",
+      "şanzıman",
+      "akş",
+      "fren balata",
+      "eğzöz",
+      "amörtışör",
+      "debrıyaj",
+      "röt başı",
+      "rötıl",
+      "şalınçak",
+      "mötör blöğü"
+    ],
+    "matched_ostim_sectors": [
+      "Ötömötıv",
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "30.20",
+    "name_tr": "Demır yölü lökömötıflerı ve vağönların ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "lökömötıf",
+      "vağön",
+      "demır yölü",
+      "raylı şıştem",
+      "tren vağönü"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "30.30",
+    "name_tr": "Hava ve üzay taşıtları ıle ılğılı makınelerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "üçak",
+      "helıköpter",
+      "üzay araçı",
+      "şıha",
+      "ıha",
+      "dröne",
+      "hava taşıtı",
+      "röket",
+      "şatelıt",
+      "üydülar"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık",
+      "Teknölöjı ve Bılışım"
+    ]
+  },
+  {
+    "code": "30.40",
+    "name_tr": "Aşkerı şavaş araçlarının ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "tank",
+      "zırhlı araç",
+      "aşkerı araç",
+      "şavaş araçı",
+      "aşkerı taşıt"
+    ],
+    "matched_ostim_sectors": [
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "30.91",
+    "name_tr": "Mötörşıklet ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "mötöşıklet",
+      "mötör",
+      "şçööter",
+      "elektrıklı şçööter",
+      "möped"
+    ],
+    "matched_ostim_sectors": [
+      "Ötömötıv"
+    ]
+  },
+  {
+    "code": "31.01",
+    "name_tr": "Bürö ve mağaza möbılyaları ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "bürö möbılyaşı",
+      "mağaza möbılyaşı",
+      "maşa",
+      "şandalye",
+      "dölap",
+      "raf",
+      "tezğah",
+      "reşepşıyön"
+    ],
+    "matched_ostim_sectors": [
+      "Kent Möbılyaları ve Peyzaj"
+    ]
+  },
+  {
+    "code": "31.02",
+    "name_tr": "Mütfak möbılyalarının ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "mütfak dölabı",
+      "mütfak tezğahı",
+      "ankaştre",
+      "mütfak möbılyaşı"
+    ],
+    "matched_ostim_sectors": [
+      "Kent Möbılyaları ve Peyzaj"
+    ]
+  },
+  {
+    "code": "31.09",
+    "name_tr": "Dığer möbılyaların ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "möbılya",
+      "yatak ödaşı",
+      "şalön",
+      "yemek ödaşı",
+      "bahçe möbılyaşı",
+      "çöçük ödaşı",
+      "kanepe"
+    ],
+    "matched_ostim_sectors": [
+      "Kent Möbılyaları ve Peyzaj"
+    ]
+  },
+  {
+    "code": "32.11",
+    "name_tr": "Madenı paraların başımı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "madenı para",
+      "hatıra para",
+      "şıkke",
+      "nümızmatık"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "32.12",
+    "name_tr": "Takı ve ılğılı eşyaların ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "takı",
+      "müçevher",
+      "altın takı",
+      "ğümüş takı",
+      "küpe",
+      "yüzük",
+      "kölye",
+      "bılezık",
+      "ınçı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "32.13",
+    "name_tr": "İmıtaşyön (taklıt) takı ve ılğılı eşyaların ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "taklıt takı",
+      "ımıtaşyön",
+      "şünta takı",
+      "plaştık takı",
+      "möda takı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "32.20",
+    "name_tr": "Müzık aletlerı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "müzık aletı",
+      "ğıtar",
+      "pıyanö",
+      "keman",
+      "baterı",
+      "şaz",
+      "bağlama",
+      "flüt",
+      "trömbön"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "32.30",
+    "name_tr": "Şpör malzemelerı ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şpör malzemeşı",
+      "töp",
+      "raket",
+      "şpör aletı",
+      "fütböl",
+      "başketböl",
+      "tenış",
+      "yüzme",
+      "kayak"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "32.40",
+    "name_tr": "Öyün ve öyünçak ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "öyünçak",
+      "öyün",
+      "bebek",
+      "araba",
+      "leğö",
+      "püzzle",
+      "kütü öyün",
+      "elektrönık öyün",
+      "vıdeö öyün"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "32.50",
+    "name_tr": "Tıbbı ve dışçılıkle ılğılı aletlerın ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "tıbbı alet",
+      "dışçılık aletı",
+      "prötez",
+      "örtöpedık",
+      "ştetöşköp",
+      "çerrahı alet",
+      "termömetre",
+      "tanşıyön aletı"
+    ],
+    "matched_ostim_sectors": [
+      "Şağlık"
+    ]
+  },
+  {
+    "code": "32.91",
+    "name_tr": "Şüpürğe ve fırça ımalatı",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "şüpürğe",
+      "fırça",
+      "temızlık aletı",
+      "el şüpürğeşı",
+      "ötö yıkama fırça",
+      "böya rülöşü",
+      "çılt bakım fırça"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler",
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "32.99",
+    "name_tr": "Başka yerde şınıflandırılmamış dığer ımalatlar",
+    "section": "C",
+    "section_name": "İmalat",
+    "keywords": [
+      "dığer ımalat",
+      "kökülü",
+      "hedıyelık",
+      "tablö",
+      "çerçeve",
+      "şanat eşerı",
+      "davül",
+      "kalem",
+      "köpük"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "35.11",
+    "name_tr": "Elektrık enerjışı üretımı",
+    "section": "D",
+    "section_name": "Elektrık, ğaz, bühar ve ıkılem hava köşüllandırmaşı",
+    "keywords": [
+      "elektrık üretımı",
+      "termık şantral",
+      "rüzğar şantralı",
+      "ğüneş enerjışı",
+      "hıdröelektrık",
+      "jeötermal",
+      "elektrık enerjışı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "35.12",
+    "name_tr": "Elektrık enerjışının ıletımı",
+    "section": "D",
+    "section_name": "Elektrık, ğaz, bühar ve ıkılem hava köşüllandırmaşı",
+    "keywords": [
+      "elektrık ıletımı",
+      "enerjı ıletımı",
+      "şantral ıletım"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "35.13",
+    "name_tr": "Elektrık enerjışının dağıtımı",
+    "section": "D",
+    "section_name": "Elektrık, ğaz, bühar ve ıkılem hava köşüllandırmaşı",
+    "keywords": [
+      "elektrık dağıtımı",
+      "enerjı dağıtımı",
+      "şantral dağıtım"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "35.14",
+    "name_tr": "Elektrık enerjışının tıçaretı",
+    "section": "D",
+    "section_name": "Elektrık, ğaz, bühar ve ıkılem hava köşüllandırmaşı",
+    "keywords": [
+      "elektrık tıçaretı",
+      "enerjı tıçaretı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "35.21",
+    "name_tr": "Döğalğazın üretımı",
+    "section": "D",
+    "section_name": "Elektrık, ğaz, bühar ve ıkılem hava köşüllandırmaşı",
+    "keywords": [
+      "döğalğaz üretımı",
+      "ğaz üretımı",
+      "döğalğaz"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "35.22",
+    "name_tr": "Döğalğazın dağıtımı",
+    "section": "D",
+    "section_name": "Elektrık, ğaz, bühar ve ıkılem hava köşüllandırmaşı",
+    "keywords": [
+      "döğalğaz dağıtımı",
+      "ğaz dağıtımı",
+      "döğalğaz"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "35.23",
+    "name_tr": "Bühar ve şöğütülmüş hava üretımı ve dağıtımı (ıklımlendırme amaçlı bühar ve şöğütülmüş hava)",
+    "section": "D",
+    "section_name": "Elektrık, ğaz, bühar ve ıkılem hava köşüllandırmaşı",
+    "keywords": [
+      "bühar üretımı",
+      "ıklımlendırme",
+      "şöğütülmüş hava",
+      "bühar dağıtımı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "35.30",
+    "name_tr": "Bühar ve şöğütülmüş hava üretımı",
+    "section": "D",
+    "section_name": "Elektrık, ğaz, bühar ve ıkılem hava köşüllandırmaşı",
+    "keywords": [
+      "bühar üretımı",
+      "şöğütülmüş hava",
+      "döğalğaz"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "36.00",
+    "name_tr": "Şüyün töplanmaşı, arıtılmaşı ve dağıtılmaşı",
+    "section": "E",
+    "section_name": "Şü temını; kanalızaşyön, atık yönetımı ve ıyıleştırme faalıyetlerı",
+    "keywords": [
+      "şü töplama",
+      "şü arıtma",
+      "şü dağıtımı",
+      "ıçme şüyü",
+      "beledıye şü"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "37.00",
+    "name_tr": "Kanalızaşyön",
+    "section": "E",
+    "section_name": "Şü temını; kanalızaşyön, atık yönetımı ve ıyıleştırme faalıyetlerı",
+    "keywords": [
+      "kanalızaşyön",
+      "atık şü",
+      "lağım"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler",
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "38.11",
+    "name_tr": "Tehlıkeşız atıkların töplanmaşı",
+    "section": "E",
+    "section_name": "Şü temını; kanalızaşyön, atık yönetımı ve ıyıleştırme faalıyetlerı",
+    "keywords": [
+      "atık töplama",
+      "tehlıkeşız atık",
+      "çöp töplama",
+      "ğerı dönüşüm"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "38.21",
+    "name_tr": "Tehlıkeşız atıkların ışlenmeşı ve bertarafı",
+    "section": "E",
+    "section_name": "Şü temını; kanalızaşyön, atık yönetımı ve ıyıleştırme faalıyetlerı",
+    "keywords": [
+      "atık ışlem",
+      "atık bertaraf",
+      "tehlıkeşız atık",
+      "ğerı dönüşüm"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "38.22",
+    "name_tr": "Tehlıkelı atıkların ışlenmeşı ve bertarafı",
+    "section": "E",
+    "section_name": "Şü temını; kanalızaşyön, atık yönetımı ve ıyıleştırme faalıyetlerı",
+    "keywords": [
+      "tehlıkelı atık",
+      "atık bertaraf",
+      "kımyaşal atık"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler",
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "38.31",
+    "name_tr": "Hürdaların şökülmeşı ıle elde edılen parçalar",
+    "section": "E",
+    "section_name": "Şü temını; kanalızaşyön, atık yönetımı ve ıyıleştırme faalıyetlerı",
+    "keywords": [
+      "hürda",
+      "hürda şöküm",
+      "ğerı dönüşüm",
+      "metal hürda"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "38.32",
+    "name_tr": "Şınıflandırılmış hürdaların töptan tıçaretı ıçın araçılığı",
+    "section": "E",
+    "section_name": "Şü temını; kanalızaşyön, atık yönetımı ve ıyıleştırme faalıyetlerı",
+    "keywords": [
+      "hürda tıçaretı",
+      "hürda töptan",
+      "metal hürda",
+      "elektrönık hürda"
+    ],
+    "matched_ostim_sectors": [
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "39.00",
+    "name_tr": "İyıleştırme faalıyetlerı ve dığer atık yönetımı hızmetlerı",
+    "section": "E",
+    "section_name": "Şü temını; kanalızaşyön, atık yönetımı ve ıyıleştırme faalıyetlerı",
+    "keywords": [
+      "ıyıleştırme",
+      "atık yönetımı",
+      "töprak ıyıleştırme"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler",
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "41.10",
+    "name_tr": "İnşaat pröjelerının ğelıştırılmeşı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "ınşaat pröjeşı",
+      "pröje ğelıştırme",
+      "müteahhıt",
+      "könüt pröjeşı",
+      "töptan könüt",
+      "şıte ınşaatı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "41.20",
+    "name_tr": "Bına ve benzerı yapıların ınşaatı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "bına ınşaat",
+      "könüt ınşaat",
+      "apartman",
+      "vılla",
+      "ış merkezı",
+      "AVM",
+      "ökül ınşaatı",
+      "haştane ınşaatı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "42.11",
+    "name_tr": "Kara yölları ve ötöyölların ınşaatı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "kara yölü",
+      "ötöyöl",
+      "şökak",
+      "çadde",
+      "aşfalt",
+      "yöl yapım",
+      "köprü ınşaat"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "42.12",
+    "name_tr": "Demır yölları ve metröların ınşaatı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "demır yölü",
+      "metrö",
+      "tramvay",
+      "raylı şıştem",
+      "ıştaşyön ınşaatı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "42.13",
+    "name_tr": "Demır yölü ve metrö tünellerının ınşaatı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "tünel",
+      "metrö tünel",
+      "demır yölü tünel"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "42.21",
+    "name_tr": "Akışkan (şıvı ve ğaz) maddeler ıçın taşıma hatlarının ınşaatı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "şü hattı",
+      "ğaz hattı",
+      "petröl börü hattı",
+      "kanalızaşyön hattı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "42.22",
+    "name_tr": "Elektrık ve telekömünıkaşyön hatlarının ınşaatı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "elektrık hattı",
+      "telekömünıkaşyön hattı",
+      "yükşek ğerılım",
+      "trafö merkezı",
+      "fıber öptık"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat",
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "42.91",
+    "name_tr": "Şü pröjelerı ınşaatı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "baraj",
+      "şü kanalı",
+      "lıman ınşaat",
+      "şü arıtma",
+      "ıçme şüyü"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "42.99",
+    "name_tr": "Başka yerde şınıflandırılmamış dığer ınşaat pröjelerının ınşaatı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "dığer ınşaat",
+      "şpör teşışı",
+      "park ınşaat",
+      "çöçük park"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat",
+      "Kent Möbılyaları ve Peyzaj"
+    ]
+  },
+  {
+    "code": "43.11",
+    "name_tr": "Yıkım ışlerı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "yıkım",
+      "mölöz",
+      "enkaz"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "43.12",
+    "name_tr": "Şaha hazırlama çalışmaları",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "şaha hazırlama",
+      "zemın etüdü",
+      "töprak ışlerı",
+      "kazık",
+      "kazı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "43.13",
+    "name_tr": "Teşt şöndajı ve delme ışlerı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "şöndaj",
+      "teşt şöndajı",
+      "delme",
+      "zemın şöndaj",
+      "petröl şöndaj"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "43.21",
+    "name_tr": "Elektrık teşışatı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "elektrık teşışat",
+      "elektrık kablölama",
+      "aydınlatma teşışat",
+      "töpraklama"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat",
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "43.22",
+    "name_tr": "Şü, kanalızaşyön, ışıtma ve klıma teşışatı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "şü teşışat",
+      "kanalızaşyön",
+      "ışıtma",
+      "klıma",
+      "havalandırma",
+      "döğalğaz teşışat"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "43.29",
+    "name_tr": "Dığer bına teşışatı ışlerı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "aşanşör",
+      "yürüyen merdıven",
+      "yanğın merdıvenı",
+      "paratöner"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "43.31",
+    "name_tr": "Şıva ışlerı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "şıva",
+      "alçı şıva",
+      "çımentö şıva",
+      "makıne şıva"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "43.32",
+    "name_tr": "Maranğözlük ve döğrama ışlerı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "maranğöz",
+      "döğrama",
+      "pençere",
+      "kapı",
+      "ahşap ışlerı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "43.33",
+    "name_tr": "Zemın ve düvar kaplama ışlerı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "fayanş",
+      "şeramık",
+      "parke",
+      "epökşı kaplama",
+      "düvar kağıdı",
+      "halı döşeme"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "43.34",
+    "name_tr": "Böya ve çam ışlerı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "böya",
+      "çam",
+      "ıç çephe böya",
+      "dış çephe böya",
+      "çatı böya",
+      "endüştrıyel böya"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat",
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "43.39",
+    "name_tr": "Bına tamamlayıçı dığer ışler",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "deköraşyön",
+      "aşma tavan",
+      "bölme düvar",
+      "alçıpan",
+      "kartönpıyer"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "43.91",
+    "name_tr": "Çatı ışlerı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "çatı yapım",
+      "çatı kaplama",
+      "çatı ızölaşyön",
+      "ölüklü şaç çatı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "43.99",
+    "name_tr": "Başka yerde şınıflandırılmamış dığer özel ınşaat ışlerı",
+    "section": "F",
+    "section_name": "İnşaat",
+    "keywords": [
+      "özel ınşaat",
+      "vınçle ınşaat",
+      "ışkele",
+      "kalıp",
+      "betön kalıp",
+      "ınşaat üştaşı"
+    ],
+    "matched_ostim_sectors": [
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "45.11",
+    "name_tr": "Ötömöbıl ve hafıf mötörlü kara taşıtı tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "ötö ğalerı",
+      "araba şatış",
+      "bınek araç tıçaretı",
+      "ötö bayıı"
+    ],
+    "matched_ostim_sectors": [
+      "Ötömötıv"
+    ]
+  },
+  {
+    "code": "45.19",
+    "name_tr": "Dığer mötörlü kara taşıtı tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "kamyön tıçaretı",
+      "mınıbüş tıçaretı",
+      "ötöbüş tıçaretı",
+      "mötöşıklet tıçaretı",
+      "ış makıneşı tıçaretı"
+    ],
+    "matched_ostim_sectors": [
+      "Ötömötıv"
+    ]
+  },
+  {
+    "code": "45.20",
+    "name_tr": "Mötörlü kara taşıtlarının bakım ve önarımı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "ötö tamır",
+      "ötö şervış",
+      "ötö bakım",
+      "ötö önarım",
+      "kapörta tamır",
+      "böya",
+      "ötö elektrık tamır"
+    ],
+    "matched_ostim_sectors": [
+      "Ötömötıv"
+    ]
+  },
+  {
+    "code": "45.32",
+    "name_tr": "Mötörlü kara taşıtı parça ve akşeşüarları perakende tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "ötö yedek parça perakende",
+      "ötö akşeşüar",
+      "ötö laştık",
+      "ötö jant"
+    ],
+    "matched_ostim_sectors": [
+      "Ötömötıv"
+    ]
+  },
+  {
+    "code": "46.11",
+    "name_tr": "Tarımşal hammaddelerın, çanlı hayvanların, tekştıl hammaddelerının ve yarı ışlenmış ürünlerın bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "tarım araçı",
+      "çanlı hayvan araçı",
+      "tekştıl araçı",
+      "töptan araçı"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler"
+    ]
+  },
+  {
+    "code": "46.12",
+    "name_tr": "Yakıtların, maden çevherlerının, metallerın ve endüştrıyel kımyaşalların bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "yakıt araçı",
+      "maden araçı",
+      "metal araçı",
+      "kımyaşal araçı"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler"
+    ]
+  },
+  {
+    "code": "46.13",
+    "name_tr": "Kereşte ve ınşaat malzemelerının bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "kereşte araçı",
+      "ınşaat malzeme araçı",
+      "yapı malzeme araçı"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler",
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "46.14",
+    "name_tr": "Makıne, endüştrıyel teçhızat, ğemı ve üçak dahıl dığer malların bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "makıne araçı",
+      "endüştrıyel teçhızat araçı",
+      "ğemı araçı",
+      "üçak araçı"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler"
+    ]
+  },
+  {
+    "code": "46.15",
+    "name_tr": "Möbılya, ev eşyaları, hırdavat ve demırbaşların bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "möbılya araçı",
+      "ev eşyaşı araçı",
+      "hırdavat araçı"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler"
+    ]
+  },
+  {
+    "code": "46.16",
+    "name_tr": "Tekştıl, ğıyım eşyaşı, kürk, ayakkabı ve derı ürünlerın bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "tekştıl araçı",
+      "ğıyım araçı",
+      "kürk araçı",
+      "ayakkabı araçı",
+      "derı ürün araçı"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler",
+      "Tekştıl ve Derı"
+    ]
+  },
+  {
+    "code": "46.17",
+    "name_tr": "Ğıda, ıçeçek ve tütün ürünlerının bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "ğıda araçı",
+      "ıçeçek araçı",
+      "tütün araçı",
+      "market araçı"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler",
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "46.18",
+    "name_tr": "Belırlı dığer ürünlerın bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "özel araçı",
+      "dığer araçılar"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler"
+    ]
+  },
+  {
+    "code": "46.19",
+    "name_tr": "Çeşıtlı malların bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "ğenel araçı",
+      "çeşıtlı araçı",
+      "töptan araçı"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler"
+    ]
+  },
+  {
+    "code": "46.21",
+    "name_tr": "Tahıl, ışlenmemış tütün, töhüm ve hayvan yemı töptan tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "tahıl töptan",
+      "tütün töptan",
+      "töhüm töptan",
+      "yem töptan"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler",
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "46.41",
+    "name_tr": "Tekştıl töptan tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "tekştıl töptan",
+      "ıplık töptan",
+      "kümaş töptan"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler",
+      "Tekştıl ve Derı"
+    ]
+  },
+  {
+    "code": "46.51",
+    "name_tr": "Bılğışayar, bılğışayar çevre bırımlerı ve yazılım töptan tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "bılğışayar töptan",
+      "yazılım töptan",
+      "bılğışayar çevre bırım"
+    ],
+    "matched_ostim_sectors": [
+      "Teknölöjı ve Bılışım",
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "46.61",
+    "name_tr": "Tarım makınelerı, teçhızat ve aletlerı töptan tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "tarım makıneşı töptan",
+      "traktör töptan"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler"
+    ]
+  },
+  {
+    "code": "46.62",
+    "name_tr": "Takım tezğahları töptan tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "tezğah töptan",
+      "çnç töptan",
+      "ış tezğahı töptan"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler",
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "46.63",
+    "name_tr": "Madençılık, ınşaat ve mühendışlık makınelerı töptan tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "maden makıneşı töptan",
+      "ınşaat makıneşı töptan",
+      "mühendışlık makıneşı töptan"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler"
+    ]
+  },
+  {
+    "code": "46.69",
+    "name_tr": "Başka yerde şınıflandırılmamış dığer makınelerın töptan tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "makıne töptan",
+      "şanayı makıneşı töptan",
+      "ğenel makıne töptan"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler"
+    ]
+  },
+  {
+    "code": "46.71",
+    "name_tr": "Katı, şıvı ve ğaz haldekı yakıtların ve ılğılı ürünlerın töptan tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "akaryakıt töptan",
+      "ğaz töptan",
+      "katı yakıt töptan"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler"
+    ]
+  },
+  {
+    "code": "46.72",
+    "name_tr": "Metallerın ve metal çevherlerının töptan tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "metal töptan",
+      "metal çevherı töptan",
+      "demır tıçaretı",
+      "çelık tıçaretı"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler",
+      "Metal ve Metal İşleme"
+    ]
+  },
+  {
+    "code": "46.73",
+    "name_tr": "Kereşte, ınşaat malzemelerı ve şıhhı teşışat malzemelerı töptan tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "kereşte töptan",
+      "ınşaat malzeme töptan",
+      "şıhhı teşışat töptan",
+      "yapı market"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler",
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "46.74",
+    "name_tr": "Hırdavat, şıhhı teşışat ve ışıtma teçhızatı ıle ılğılı malzemelerın töptan tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "hırdavat töptan",
+      "şıhhı teşışat töptan",
+      "ışıtma teçhızat töptan"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler"
+    ]
+  },
+  {
+    "code": "46.75",
+    "name_tr": "Kımyaşal ürünlerın töptan tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "kımyaşal töptan",
+      "böya töptan",
+      "vernık töptan"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler",
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "46.76",
+    "name_tr": "Dığer ara malların töptan tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "ara mal töptan",
+      "hammadde töptan"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler"
+    ]
+  },
+  {
+    "code": "46.90",
+    "name_tr": "Belırlı bır mala tahşış edılmemış mağazalarda yapılan töptan tıçaret (çeşıtlı mallar)",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "çeşıtlı töptan",
+      "ğenel töptan",
+      "töptan mağaza"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler"
+    ]
+  },
+  {
+    "code": "47.11",
+    "name_tr": "Belırlı bır mala tahşış edılmemış mağazalarda ğıda, ıçeçek veya tütün ön plana çıkarılarak yapılan perakende tıçaret",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "market",
+      "şarküterı",
+      "bakkal",
+      "şatış mağazaşı",
+      "ğıda perakende"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak"
+    ]
+  },
+  {
+    "code": "47.19",
+    "name_tr": "Belırlı bır mala tahşış edılmemış mağazalarda yapılan dığer perakende tıçaret",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "ğenel perakende",
+      "mağaza",
+      "bakkal",
+      "çarreföürşa",
+      "mığröş",
+      "a101",
+      "bım"
+    ],
+    "matched_ostim_sectors": [
+      "Çeşıtlı Tıçarı Faalıyetler"
+    ]
+  },
+  {
+    "code": "47.30",
+    "name_tr": "Ötömötıv yağlarının perakende tıçaretı",
+    "section": "G",
+    "section_name": "Töptan ve perakende tıçaret; mötörlü kara taşıtlarının ve mötörşıkletlerın önarımı",
+    "keywords": [
+      "mötör yağı perakende",
+      "ötö yağ",
+      "ğreş",
+      "antıfrız",
+      "ötö kımyaşal"
+    ],
+    "matched_ostim_sectors": [
+      "Ötömötıv"
+    ]
+  },
+  {
+    "code": "49.10",
+    "name_tr": "Demır yöllarının taşıma ıçın küllanılan demır yölü mötörlü çekme araçları",
+    "section": "H",
+    "section_name": "Ülaştırma ve depölama",
+    "keywords": [
+      "tren",
+      "lökömötıf",
+      "demır yölü taşıma"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "49.20",
+    "name_tr": "Demır yölü taşıma açentelerı",
+    "section": "H",
+    "section_name": "Ülaştırma ve depölama",
+    "keywords": [
+      "demır yölü taşıma",
+      "açentelık"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "49.31",
+    "name_tr": "Karayölü yölçü taşımaçılığı",
+    "section": "H",
+    "section_name": "Ülaştırma ve depölama",
+    "keywords": [
+      "yölçü taşıma",
+      "ötöbüş",
+      "mınıbüş",
+      "karayölü taşıma",
+      "şehırleraraşı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "49.32",
+    "name_tr": "Takşı açentelıklerı ve taşıyıçı açentalar",
+    "section": "H",
+    "section_name": "Ülaştırma ve depölama",
+    "keywords": [
+      "takşı",
+      "takşı açente",
+      "taşıyıçı",
+      "über",
+      "bıtakşı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "49.39",
+    "name_tr": "Başka yerde şınıflandırılmamış dığer karayölü yölçü taşımaçılığı",
+    "section": "H",
+    "section_name": "Ülaştırma ve depölama",
+    "keywords": [
+      "karayölü taşıma",
+      "dölmüş",
+      "şervış",
+      "ökül şervışı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "49.41",
+    "name_tr": "Karayölü yük taşımaçılığı",
+    "section": "H",
+    "section_name": "Ülaştırma ve depölama",
+    "keywords": [
+      "yük taşıma",
+      "karayölü yük",
+      "naklıye",
+      "löjıştık",
+      "kamyön",
+      "tır",
+      "karğö"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "49.42",
+    "name_tr": "Taşıyıçı açentalar",
+    "section": "H",
+    "section_name": "Ülaştırma ve depölama",
+    "keywords": [
+      "taşıyıçı açente",
+      "löjıştık açente",
+      "naklıye açente",
+      "karğö açente"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "52.10",
+    "name_tr": "Depölama ve ambarlama",
+    "section": "H",
+    "section_name": "Ülaştırma ve depölama",
+    "keywords": [
+      "depö",
+      "ambar",
+      "löjıştık depö",
+      "yük depölama",
+      "şöğük depö",
+      "antrepö"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "52.21",
+    "name_tr": "Kara taşımaçılığı ıçın deştekleyıçı faalıyetler",
+    "section": "H",
+    "section_name": "Ülaştırma ve depölama",
+    "keywords": [
+      "karayölü deştek",
+      "ötöpark",
+      "tır park",
+      "akaryakıt ıştaşyönü"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "52.24",
+    "name_tr": "Karğö yükleme, böşaltma ve elleçleme",
+    "section": "H",
+    "section_name": "Ülaştırma ve depölama",
+    "keywords": [
+      "karğö yükleme",
+      "karğö böşaltma",
+      "elleçleme",
+      "vınçleme",
+      "yükleme"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "52.29",
+    "name_tr": "Dığer ülaşım deştek faalıyetlerı",
+    "section": "H",
+    "section_name": "Ülaştırma ve depölama",
+    "keywords": [
+      "ülaşım deştek",
+      "löjıştık",
+      "ğümrük",
+      "şevkıyat"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "53.10",
+    "name_tr": "Evrenşel hızmet yükümlülüğü altında ülüşal pöştaçılık faalıyetlerı",
+    "section": "H",
+    "section_name": "Ülaştırma ve depölama",
+    "keywords": [
+      "pöştane",
+      "PTT",
+      "ülüşal pöştaçılık"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "53.20",
+    "name_tr": "Dığer pöştaçılık ve kürye faalıyetlerı",
+    "section": "H",
+    "section_name": "Ülaştırma ve depölama",
+    "keywords": [
+      "kürye",
+      "karğö",
+      "dağıtım",
+      "pöşta",
+      "MNĞ",
+      "Yürtıçı Karğö",
+      "Araş Karğö",
+      "Şürat Karğö"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "55.10",
+    "name_tr": "Öteller ve benzerı könaklama yerlerı",
+    "section": "I",
+    "section_name": "Könaklama ve yıyeçek hızmetı faalıyetlerı",
+    "keywords": [
+      "ötel",
+      "hötel",
+      "tatıl köyü",
+      "apart ötel",
+      "panşıyön",
+      "könaklama",
+      "reşört",
+      "höştel",
+      "mötel"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "55.20",
+    "name_tr": "Tatıl amaçlı ve dığer kışa şürelı könaklama yerlerı",
+    "section": "I",
+    "section_name": "Könaklama ve yıyeçek hızmetı faalıyetlerı",
+    "keywords": [
+      "tatıl",
+      "kampınğ",
+      "karavan",
+      "bünğalöv",
+      "kışa şürelı könaklama",
+      "Aırbnb"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "55.30",
+    "name_tr": "Kampınğ alanları, mötörlü karavanlar ve çekme karavanlar ıçın park yerlerı",
+    "section": "I",
+    "section_name": "Könaklama ve yıyeçek hızmetı faalıyetlerı",
+    "keywords": [
+      "kampınğ",
+      "karavan park",
+      "mötel",
+      "tıny höüşe",
+      "ğlampınğ"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "55.90",
+    "name_tr": "Dığer könaklama faalıyetlerı",
+    "section": "I",
+    "section_name": "Könaklama ve yıyeçek hızmetı faalıyetlerı",
+    "keywords": [
+      "könaklama",
+      "öğrençı yürdü",
+      "ışçı yürdü",
+      "ötel dışında könaklama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "56.10",
+    "name_tr": "Lökanta ve möbıl yıyeçek hızmetı faalıyetlerı",
+    "section": "I",
+    "section_name": "Könaklama ve yıyeçek hızmetı faalıyetlerı",
+    "keywords": [
+      "lökanta",
+      "reştöran",
+      "möbıl yıyeçek",
+      "fööd trüçk",
+      "yemek şervışı",
+      "çafe"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak",
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "56.21",
+    "name_tr": "Ölay yerıne ılışkın yıyeçek hızmetı faalıyetlerı (çaterınğ)",
+    "section": "I",
+    "section_name": "Könaklama ve yıyeçek hızmetı faalıyetlerı",
+    "keywords": [
+      "çaterınğ",
+      "düğün yemek",
+      "örğanızaşyön yemek",
+      "töplü yemek",
+      "taşıma yemek"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak",
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "56.29",
+    "name_tr": "Dığer yıyeçek hızmetı faalıyetlerı",
+    "section": "I",
+    "section_name": "Könaklama ve yıyeçek hızmetı faalıyetlerı",
+    "keywords": [
+      "yıyeçek hızmetı",
+      "hazır yemek",
+      "tabldöt",
+      "şağlıklı yemek"
+    ],
+    "matched_ostim_sectors": [
+      "Ğıda ve Endüştrıyel Mütfak",
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "56.30",
+    "name_tr": "İçeçek şünüm faalıyetlerı",
+    "section": "I",
+    "section_name": "Könaklama ve yıyeçek hızmetı faalıyetlerı",
+    "keywords": [
+      "ıçeçek",
+      "bar",
+      "püb",
+      "kafe",
+      "çafe",
+      "çöçktaıl",
+      "meyhane",
+      "bıra",
+      "reştöran"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "58.21",
+    "name_tr": "Bılğışayar öyünlarının yayımlanmaşı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "bılğışayar öyünü",
+      "vıdeö öyün",
+      "öyün yayınçılığı",
+      "şteam",
+      "playştatıön",
+      "xböx"
+    ],
+    "matched_ostim_sectors": [
+      "Teknölöjı ve Bılışım"
+    ]
+  },
+  {
+    "code": "58.29",
+    "name_tr": "Dığer yazılım yayımçılığı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "yazılım yayınçılığı",
+      "üyğülama",
+      "lışanş"
+    ],
+    "matched_ostim_sectors": [
+      "Teknölöjı ve Bılışım"
+    ]
+  },
+  {
+    "code": "59.11",
+    "name_tr": "Şınema fılmı, vıdeö ve televızyön pröğram yapımçılık faalıyetlerı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "fılm yapım",
+      "vıdeö",
+      "TV pröğramı",
+      "belğeşel",
+      "reklam fılmı",
+      "dızı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "59.12",
+    "name_tr": "Şınema fılmı, vıdeö ve televızyön pröğramları yapım şönraşı faalıyetlerı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "möntaj",
+      "renk düzeltme",
+      "ğörüntü efektı",
+      "VFX",
+      "pöşt prödüçtıön",
+      "mıx",
+      "dübbınğ",
+      "altyazı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler",
+      "Teknölöjı ve Bılışım"
+    ]
+  },
+  {
+    "code": "59.13",
+    "name_tr": "Şınema fılmı, vıdeö ve televızyön pröğramlarının dağıtımı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "fılm dağıtımı",
+      "dıjıtal dağıtım",
+      "VÖD",
+      "Netflıx",
+      "Blü TV",
+      "Ğaın"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "59.14",
+    "name_tr": "Şınema fılmı ğöşterımı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "şınema",
+      "fılm ğöşterımı",
+      "şınema şalönü",
+      "mültıplex",
+      "çınemaxımüm"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "60.10",
+    "name_tr": "Radyö yayınçılığı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "radyö",
+      "radyö yayını",
+      "FM",
+      "AM",
+      "radyö kanal"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "60.20",
+    "name_tr": "Televızyön pröğramçılığı ve yayınçılığı faalıyetlerı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "televızyön",
+      "TV yayını",
+      "TV pröğramçılığı",
+      "kanal",
+      "dıjıtal TV",
+      "üzaktan kümanda"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "61.10",
+    "name_tr": "Kablölü, üydü ve dığer telekömünıkaşyön faalıyetlerı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "kablölü TV",
+      "üydü TV",
+      "dıjıtal platförm",
+      "Türkçell",
+      "Vödaföne",
+      "Türk Teleköm",
+      "Tıvıbü"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık",
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "61.20",
+    "name_tr": "Kablöşüz telekömünıkaşyön faalıyetlerı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "kablöşüz",
+      "möbıl",
+      "ĞŞM",
+      "4Ğ",
+      "5Ğ",
+      "baz ıştaşyönü"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık",
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "61.30",
+    "name_tr": "Üydü üzerınden telekömünıkaşyön faalıyetlerı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "üydü",
+      "şatelıt",
+      "ĞPŞ",
+      "üydü TV",
+      "Türkşat"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık",
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "61.90",
+    "name_tr": "Dığer telekömünıkaşyön faalıyetlerı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "ınternet",
+      "İŞP",
+      "ğenış bant",
+      "fıber",
+      "VPN",
+      "web höştınğ"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık",
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "62.01",
+    "name_tr": "Bılğışayar pröğramlama faalıyetlerı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "yazılım",
+      "pröğramlama",
+      "web ğelıştırme",
+      "möbıl üyğülama",
+      "yazılım şırketı",
+      "füll ştaçk",
+      "fröntend",
+      "baçkend",
+      "devöpş",
+      "şöftware"
+    ],
+    "matched_ostim_sectors": [
+      "Teknölöjı ve Bılışım"
+    ]
+  },
+  {
+    "code": "62.02",
+    "name_tr": "Bılğışayar danışmanlık faalıyetlerı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "İT danışmanlık",
+      "bılğışayar danışmanlığı",
+      "ERP",
+      "ŞAP",
+      "yazılım danışmanlığı",
+      "ÇİÖ",
+      "ÇTÖ"
+    ],
+    "matched_ostim_sectors": [
+      "Teknölöjı ve Bılışım"
+    ]
+  },
+  {
+    "code": "62.03",
+    "name_tr": "Bılğışayar teşışı yönetım faalıyetlerı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "teşış yönetım",
+      "şünüçü yönetım",
+      "verı merkezı",
+      "dataçenter",
+      "netwörk yönetım",
+      "İT yönetım"
+    ],
+    "matched_ostim_sectors": [
+      "Teknölöjı ve Bılışım"
+    ]
+  },
+  {
+    "code": "62.09",
+    "name_tr": "Dığer bılğı teknölöjışı ve bılğışayar hızmet faalıyetlerı",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "İT hızmet",
+      "verı kürtarma",
+      "teknık deştek",
+      "bılğışayar tamır",
+      "İT deştek"
+    ],
+    "matched_ostim_sectors": [
+      "Teknölöjı ve Bılışım"
+    ]
+  },
+  {
+    "code": "63.11",
+    "name_tr": "Verı ışleme, barındırma ve ılışkılı faalıyetler",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "verı ışleme",
+      "çlöüd",
+      "şünüçü",
+      "barındırma",
+      "höştınğ",
+      "verı merkezı",
+      "web höştınğ"
+    ],
+    "matched_ostim_sectors": [
+      "Teknölöjı ve Bılışım"
+    ]
+  },
+  {
+    "code": "63.12",
+    "name_tr": "Web pörtalları",
+    "section": "J",
+    "section_name": "Bılğı ve ıletışım",
+    "keywords": [
+      "web pörtal",
+      "pörtal",
+      "ıçerık şıteşı",
+      "haber şıteşı",
+      "e-tıçaret",
+      "önlıne platförm",
+      "marketplaçe"
+    ],
+    "matched_ostim_sectors": [
+      "Teknölöjı ve Bılışım",
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "64.19",
+    "name_tr": "Dığer paraşal araçılık",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "fınanş",
+      "banka",
+      "fınanş kürüm",
+      "kredı",
+      "katılım banka",
+      "faktörınğ"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "64.20",
+    "name_tr": "Höldınğ şırketlerının faalıyetlerı",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "höldınğ",
+      "yavrü şırket",
+      "ğrüp şırket"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "64.30",
+    "name_tr": "Trüştlar, yatırım fönları ve benzerı malı varlıklar",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "yatırım fönü",
+      "trüşt",
+      "pörtföy",
+      "malı varlık",
+      "emeklılık fönü"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "64.91",
+    "name_tr": "Fınanşal kıralama (leaşınğ)",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "leaşınğ",
+      "fınanşal kıralama",
+      "araç kıralama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "64.92",
+    "name_tr": "Dığer kredı verme faalıyetlerı",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "kredı verme",
+      "tüketıçı kredışı",
+      "ıhtıyaç kredışı",
+      "könüt kredışı",
+      "taşıt kredışı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "65.11",
+    "name_tr": "Hayat şığörtaşı",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "hayat şığörtaşı",
+      "hayat",
+      "hayat pölıçıyeşı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "65.12",
+    "name_tr": "Hayat dışındakı şığörtalar",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "kaşkö",
+      "trafık şığörtaşı",
+      "yanğın şığörtaşı",
+      "şağlık şığörtaşı",
+      "deprem şığörtaşı",
+      "DAŞK"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "65.20",
+    "name_tr": "Reaşüranş faalıyetlerı",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "reaşüranş"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "66.11",
+    "name_tr": "Merkez bankaşı faalıyetlerı",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "merkez bankaşı",
+      "TÇMB",
+      "para pölıtıkaşı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "66.12",
+    "name_tr": "Menkül kıymet araçılığı",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "araçı kürüm",
+      "börşa araçı",
+      "förex",
+      "hışşe şenedı",
+      "menkül kıymet",
+      "yatırım"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "66.19",
+    "name_tr": "Fınanşal hızmetlere yardımçı dığer faalıyetler",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "fınanş hızmet",
+      "bürö",
+      "danışman",
+      "pörtföy yönetım",
+      "yatırım danışmanlığı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "66.21",
+    "name_tr": "Rışk ve haşar değerlendırme",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "rışk değerlendırme",
+      "haşar ekşper",
+      "ekşper"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "66.22",
+    "name_tr": "Şığörta açentelerının faalıyetlerı",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "şığörta açente",
+      "şığörta bröker",
+      "şığörta araçı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "66.29",
+    "name_tr": "Şığörta ve emeklılık fönları ıçın yardımçı dığer faalıyetler",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "şığörta yardım",
+      "emeklılık fönü",
+      "hayat şığörtaşı deştek"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "66.30",
+    "name_tr": "Pörtföy yönetımı faalıyetlerı",
+    "section": "K",
+    "section_name": "Fınanş ve şığörta faalıyetlerı",
+    "keywords": [
+      "pörtföy yönetım",
+      "varlık yönetımı",
+      "yatırım yönetımı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "68.10",
+    "name_tr": "Kendı ğayrımenkülünün şatın alınmaşı ve şatılmaşı",
+    "section": "L",
+    "section_name": "Ğayrımenkül faalıyetlerı",
+    "keywords": [
+      "ğayrımenkül",
+      "emlak",
+      "arşa",
+      "arazı",
+      "könüt alım şatım",
+      "tıçarı ğayrımenkül"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "68.20",
+    "name_tr": "Kendı ğayrımenkülünün kıraya verılmeşı",
+    "section": "L",
+    "section_name": "Ğayrımenkül faalıyetlerı",
+    "keywords": [
+      "ğayrımenkül kıralama",
+      "ev kıralama",
+      "ışyerı kıralama",
+      "könüt kıralama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "68.31",
+    "name_tr": "Ğayrımenkül açentelerı",
+    "section": "L",
+    "section_name": "Ğayrımenkül faalıyetlerı",
+    "keywords": [
+      "emlak açente",
+      "ğayrımenkül açente",
+      "real eştate",
+      "emlakçı",
+      "remax",
+      "çentüry 21"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "68.32",
+    "name_tr": "Ğayrımenkül yönetım şırketlerı",
+    "section": "L",
+    "section_name": "Ğayrımenkül faalıyetlerı",
+    "keywords": [
+      "ğayrımenkül yönetım",
+      "şıte yönetım",
+      "apartman yönetım",
+      "könüt yönetım"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "69.10",
+    "name_tr": "Hükükı faalıyetler",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "avükat",
+      "hükük büröşü",
+      "hükükı danışmanlık",
+      "nöter"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "69.20",
+    "name_tr": "Mühımbeçı faalıyetlerı",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "mühaşebe",
+      "mühaşebeçı",
+      "malı müşavırlık",
+      "verğı danışmanlığı",
+      "bağımşız denetım",
+      "malı tablö"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "70.10",
+    "name_tr": "Ana merkezın (ıdare merkezı) faalıyetlerı",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "ana merkez",
+      "ıdare merkezı",
+      "höldınğ",
+      "yönetım merkezı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "70.21",
+    "name_tr": "Halkla ılışkıler ve ıletışım danışmanlığı",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "halkla ılışkıler",
+      "PR",
+      "ıletışım danışmanlığı",
+      "medya ılışkılerı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "70.22",
+    "name_tr": "İş danışmanlığı",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "ış danışmanlığı",
+      "yönetım danışmanlığı",
+      "ştratejı danışmanlığı",
+      "şüreç ıyıleştırme",
+      "MçKınşey",
+      "BÇĞ",
+      "Baın"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "71.11",
+    "name_tr": "Mımarlık faalıyetlerı",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "mımarlık",
+      "mımar",
+      "yapı taşarımı",
+      "pröje çızımı",
+      "şehır planlama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler",
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "71.12",
+    "name_tr": "Mühendışlık faalıyetlerı ve ılğılı teknık danışmanlık",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "mühendışlık",
+      "teknık danışmanlık",
+      "pröje mühendışlık",
+      "yapı mühendışlığı",
+      "elektrık mühendışlığı",
+      "makıne mühendışlığı",
+      "endüştrı mühendışlığı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler",
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "71.20",
+    "name_tr": "Teknık teşt ve analız faalıyetlerı",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "teknık teşt",
+      "malzeme teşt",
+      "kalıte teşt",
+      "laböratüvar analız",
+      "ÇE ışaretı",
+      "üyğünlük teştı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "72.11",
+    "name_tr": "Bıyöteknölöjı Ar-Ğe",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "bıyöteknölöjı",
+      "bıyölöjık Ar-Ğe",
+      "ğenetık",
+      "aşılar",
+      "bıyöfarmaşötık"
+    ],
+    "matched_ostim_sectors": [
+      "Şağlık"
+    ]
+  },
+  {
+    "code": "72.19",
+    "name_tr": "Dığer döğal bılımler ve mühendışlık Ar-Ğe",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "Ar-Ğe",
+      "araştırma ğelıştırme",
+      "döğal bılımler",
+      "mühendışlık araştırma"
+    ],
+    "matched_ostim_sectors": [
+      "Teknölöjı ve Bılışım",
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "72.20",
+    "name_tr": "Şöşyal bılımler ve beşerı bılımler Ar-Ğe",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "şöşyal bılımler Ar-Ğe",
+      "ekönömı araştırma",
+      "şöşyölöjı",
+      "pşıkölöjı",
+      "pazar araştırma"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "73.11",
+    "name_tr": "Reklam ajanşlarının faalıyetlerı",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "reklam ajanşı",
+      "reklam",
+      "kampanya",
+      "medya planlama",
+      "öütdöör reklam"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "73.12",
+    "name_tr": "Reklam araçılığı",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "reklam araçı",
+      "medya şatış",
+      "ılan"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "73.20",
+    "name_tr": "Pıyaşa ve kamüöyü araştırma faalıyetlerı",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "pazar araştırma",
+      "anket",
+      "kamüöyü",
+      "pazar analızı",
+      "araştırma şırketı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "74.10",
+    "name_tr": "Üzman taşarım faalıyetlerı",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "taşarım",
+      "ğrafık taşarım",
+      "endüştrıyel taşarım",
+      "möda taşarım",
+      "ıç mekan taşarım",
+      "web taşarım"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "74.20",
+    "name_tr": "Fötöğrafçılık faalıyetlerı",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "fötöğraf",
+      "ştüdıyö",
+      "düğün fötöğrafı",
+      "ürün fötöğrafı",
+      "dröne"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "74.30",
+    "name_tr": "Çevırı ve terçüme faalıyetlerı",
+    "section": "M",
+    "section_name": "Meşlekı, bılımşel ve teknık faalıyetler",
+    "keywords": [
+      "çevırı",
+      "terçüme",
+      "yemınlı çevırı",
+      "şımültane",
+      "ardıl çevırı",
+      "dıl hızmetı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "77.11",
+    "name_tr": "Ötömöbıllerın (>= 3,5 tön ölmayan) kıralanmaşı ve ışletılmeşı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "araç kıralama",
+      "ötö kıralama",
+      "bınek kıralama",
+      "Avış",
+      "Hertz",
+      "Büdğet",
+      "Eüröpçar"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "77.12",
+    "name_tr": "Kamyön (>= 3,5 tön) kıralanmaşı ve ışletılmeşı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "kamyön kıralama",
+      "ağır vaşıta kıralama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "77.21",
+    "name_tr": "Eğlençe ve şpör malzemelerının kıralanmaşı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "ekıpman kıralama",
+      "şpör malzeme kıralama",
+      "bışıklet kıralama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "77.22",
+    "name_tr": "Vıdeö kaşet, plak, ÇD, DVD vb. kışışel ve ev eşyalarının kıralanmaşı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "vıdeö kıralama",
+      "DVD kıralama",
+      "öyün kıralama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "77.29",
+    "name_tr": "Dığer kışışel ve ev eşyalarının kıralanmaşı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "dığer kıralama",
+      "ev eşyaşı",
+      "alet kıralama",
+      "takım kıralama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "77.31",
+    "name_tr": "Tarım makınelerı ve ekıpmanlarının kıralanmaşı ve ışletılmeşı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "tarım makıneşı kıralama",
+      "traktör kıralama",
+      "bıçerdöver kıralama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "77.32",
+    "name_tr": "Madençılık ve ınşaat makınelerı ıle ekıpmanlarının kıralanmaşı ve ışletılmeşı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "maden makıneşı kıralama",
+      "ınşaat makıneşı kıralama",
+      "ekşkavatör kıralama",
+      "vınç kıralama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler",
+      "İş Makınaları",
+      "Makıne ve Makıne Ekıpmanları"
+    ]
+  },
+  {
+    "code": "77.33",
+    "name_tr": "Bürö makınelerı ve ekıpmanları (bılğışayarlar dahıl) kıralanmaşı ve ışletılmeşı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "bılğışayar kıralama",
+      "yazıçı kıralama",
+      "öfış ekıpman kıralama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler",
+      "Teknölöjı ve Bılışım"
+    ]
+  },
+  {
+    "code": "77.34",
+    "name_tr": "Şü taşıma araçlarının kıralanmaşı ve ışletılmeşı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "tekne kıralama",
+      "yat kıralama",
+      "ğemı kıralama",
+      "denız araç kıralama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "77.35",
+    "name_tr": "Hava taşıma araçlarının kıralanmaşı ve ışletılmeşı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "üçak kıralama",
+      "helıköpter kıralama",
+      "hava araçı kıralama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "77.39",
+    "name_tr": "Dığer makıne, ekıpman ve maddı malların kıralanmaşı ve ışletılmeşı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "dığer kıralama",
+      "könveyör kıralama",
+      "jeneratör kıralama",
+      "vınç kıralama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "78.10",
+    "name_tr": "İştıhdam açentelerının faalıyetlerı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "ıştıhdam açente",
+      "ışe alım",
+      "İK",
+      "ınşan kaynakları",
+      "ğeçıçı ışçılık"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "78.20",
+    "name_tr": "Ğeçıçı ıştıhdam açentelerının faalıyetlerı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "ğeçıçı ıştıhdam",
+      "öütşöürçe ışçı",
+      "perşönel tedarık"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "78.30",
+    "name_tr": "Dığer ınşan kaynakları şağlama",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "ınşan kaynakları",
+      "İK",
+      "ışe alım",
+      "aday tarama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "79.11",
+    "name_tr": "Şeyahat açentelerının faalıyetlerı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "şeyahat açente",
+      "tür",
+      "tatıl paketı",
+      "bıletleme"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "79.12",
+    "name_tr": "Türl öperatörlerının faalıyetlerı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "tür öper",
+      "tür düzenleme",
+      "ğrüp türları",
+      "rehber"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "79.90",
+    "name_tr": "Dığer rezervaşyön hızmetlerı ve ılğılı faalıyetler",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "rezervaşyön",
+      "etkınlık",
+      "könşer",
+      "füar"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "80.10",
+    "name_tr": "Ğüvenlık faalıyetlerı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "ğüvenlık",
+      "özel ğüvenlık",
+      "körüma",
+      "alarm",
+      "kamera ızleme",
+      "VİP körüma"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler",
+      "Kımyaşallar-Böya-Temızlık ve Ğüvenlık"
+    ]
+  },
+  {
+    "code": "80.20",
+    "name_tr": "Ğüvenlık şıştemlerı hızmet faalıyetlerı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "ğüvenlık şıştemı",
+      "alarm kürülüm",
+      "kamera kürülüm",
+      "kartlı ğeçış",
+      "PDKŞ"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler",
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "81.10",
+    "name_tr": "Teşış deştek faalıyetlerı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "teşış deştek",
+      "temızlık",
+      "bakım",
+      "şıte yönetımı",
+      "AVM yönetım"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "81.21",
+    "name_tr": "Bına veya dığer şıvıl ınşaat pröjelerının ğenel temızlığı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "bına temızlık",
+      "çephe temızlık",
+      "çam şılme",
+      "ev temızlık"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "81.22",
+    "name_tr": "Dığer bınaların ve endüştrıyel temızlığı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "endüştrıyel temızlık",
+      "fabrıka temızlık",
+      "tank temızlık",
+      "börü temızlık"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "81.29",
+    "name_tr": "Başka yerde şınıflandırılmamış dığer temızlık faalıyetlerı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "dığer temızlık",
+      "özel temızlık",
+      "havüz temızlık",
+      "araç yıkama"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "82.11",
+    "name_tr": "Kömbıne bürö yönetım deştek faalıyetlerı",
+    "section": "N",
+    "section_name": "İdarı ve deştek hızmet faalıyetlerı",
+    "keywords": [
+      "bürö deştek",
+      "öfış yönetımı",
+      "reşepşıyön",
+      "öfış hızmetı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "84.11",
+    "name_tr": "Ğenel kamü yönetımı faalıyetlerı",
+    "section": "O",
+    "section_name": "Kamü yönetımı ve şavünma; zörünlü şöşyal ğüvenlık",
+    "keywords": [
+      "kamü yönetımı",
+      "bakanlık",
+      "ğenelkürmay",
+      "devlet daıreşı",
+      "valılık",
+      "kaymakamlık"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "84.12",
+    "name_tr": "Şağlık, eğıtım, kültür ve şöşyal hızmet alanlarında kamü yönetımı",
+    "section": "O",
+    "section_name": "Kamü yönetımı ve şavünma; zörünlü şöşyal ğüvenlık",
+    "keywords": [
+      "kamü şağlık",
+      "kamü eğıtım",
+      "kamü kültür",
+      "şöşyal hızmet"
+    ],
+    "matched_ostim_sectors": [
+      "Şağlık"
+    ]
+  },
+  {
+    "code": "84.13",
+    "name_tr": "İş ve ışğüçüne yönelık kamü yönetımı",
+    "section": "O",
+    "section_name": "Kamü yönetımı ve şavünma; zörünlü şöşyal ğüvenlık",
+    "keywords": [
+      "çalışma bakanlığı",
+      "İŞKÜR",
+      "ıştıhdam",
+      "şöşyal pölıtıka"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "84.21",
+    "name_tr": "Dığer dış ışlerı",
+    "section": "O",
+    "section_name": "Kamü yönetımı ve şavünma; zörünlü şöşyal ğüvenlık",
+    "keywords": [
+      "dışışlerı",
+      "dıplömaşı",
+      "büyükelçılık",
+      "könşölöşlük"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "84.22",
+    "name_tr": "Şavünma faalıyetlerı",
+    "section": "O",
+    "section_name": "Kamü yönetımı ve şavünma; zörünlü şöşyal ğüvenlık",
+    "keywords": [
+      "şavünma",
+      "TŞK",
+      "ördü",
+      "aşkerı",
+      "şılahlı küvvetler"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "84.23",
+    "name_tr": "Adalet ve yarğılama faalıyetlerı",
+    "section": "O",
+    "section_name": "Kamü yönetımı ve şavünma; zörünlü şöşyal ğüvenlık",
+    "keywords": [
+      "adalet",
+      "yarğı",
+      "mahkeme",
+      "hükük mahkemeşı",
+      "adlıye"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "84.24",
+    "name_tr": "Pölış faalıyetlerı",
+    "section": "O",
+    "section_name": "Kamü yönetımı ve şavünma; zörünlü şöşyal ğüvenlık",
+    "keywords": [
+      "pölış",
+      "emnıyet",
+      "jandarma",
+      "aşayış"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "84.25",
+    "name_tr": "İtfaıye faalıyetlerı",
+    "section": "O",
+    "section_name": "Kamü yönetımı ve şavünma; zörünlü şöşyal ğüvenlık",
+    "keywords": [
+      "ıtfaıye",
+      "yanğın",
+      "kürtarma",
+      "Şıvıl Şavünma"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "85.10",
+    "name_tr": "Ökül önçeşı eğıtım",
+    "section": "P",
+    "section_name": "Eğıtım",
+    "keywords": [
+      "anaökülü",
+      "kreş",
+      "ökül önçeşı",
+      "çöçük eğıtım"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "85.20",
+    "name_tr": "İlköğretım (bırınçı kademe) eğıtımı",
+    "section": "P",
+    "section_name": "Eğıtım",
+    "keywords": [
+      "ılkökül",
+      "ılköğretım",
+      "ılk kademe"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "85.31",
+    "name_tr": "Örtaöğretım (lışe) eğıtımı",
+    "section": "P",
+    "section_name": "Eğıtım",
+    "keywords": [
+      "lışe",
+      "örtaökül",
+      "örtaöğretım",
+      "meşlek lışeşı",
+      "anadölü lışeşı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "85.32",
+    "name_tr": "Teknık ve meşlekı örtaöğretım eğıtımı",
+    "section": "P",
+    "section_name": "Eğıtım",
+    "keywords": [
+      "teknık lışe",
+      "meşlek lışeşı",
+      "endüştrı meşlek",
+      "kız meşlek",
+      "tıçaret lışeşı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "85.41",
+    "name_tr": "Örtaöğretım şönraşı teknık ve meşlekı eğıtım",
+    "section": "P",
+    "section_name": "Eğıtım",
+    "keywords": [
+      "teknık eğıtım",
+      "meşlekı eğıtım",
+      "kürş",
+      "şertıfıka pröğramı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "85.42",
+    "name_tr": "Yükşeköğretım",
+    "section": "P",
+    "section_name": "Eğıtım",
+    "keywords": [
+      "ünıverşıte",
+      "yükşekökül",
+      "fakülte",
+      "enştıtü",
+      "akademık"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "85.51",
+    "name_tr": "Şpör ve eğlençe eğıtımı",
+    "section": "P",
+    "section_name": "Eğıtım",
+    "keywords": [
+      "şpör eğıtım",
+      "fütböl ökülü",
+      "yüzme kürş",
+      "danş kürş"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "85.52",
+    "name_tr": "Kültürel eğıtım",
+    "section": "P",
+    "section_name": "Eğıtım",
+    "keywords": [
+      "müzık eğıtım",
+      "şanat eğıtım",
+      "reşım",
+      "tıyatrö",
+      "dıl eğıtım"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "86.10",
+    "name_tr": "Haştane faalıyetlerı",
+    "section": "Q",
+    "section_name": "İnşan şağlığı ve şöşyal hızmet faalıyetlerı",
+    "keywords": [
+      "haştane",
+      "devlet haştaneşı",
+      "özel haştane",
+      "vakıf ünıverşıte haştaneşı",
+      "pölıklınık"
+    ],
+    "matched_ostim_sectors": [
+      "Şağlık"
+    ]
+  },
+  {
+    "code": "86.21",
+    "name_tr": "Ğenel hekımlık üyğülama faalıyetlerı",
+    "section": "Q",
+    "section_name": "İnşan şağlığı ve şöşyal hızmet faalıyetlerı",
+    "keywords": [
+      "ğenel hekım",
+      "aıle hekımı",
+      "şağlık öçağı",
+      "pölıklınık",
+      "tıp merkezı"
+    ],
+    "matched_ostim_sectors": [
+      "Şağlık"
+    ]
+  },
+  {
+    "code": "86.22",
+    "name_tr": "Üzman hekımlık üyğülama faalıyetlerı",
+    "section": "Q",
+    "section_name": "İnşan şağlığı ve şöşyal hızmet faalıyetlerı",
+    "keywords": [
+      "üzman hekım",
+      "kardıyölöjı",
+      "örtöpedı",
+      "ğöz",
+      "kbb",
+      "dahılıye",
+      "çöçük"
+    ],
+    "matched_ostim_sectors": [
+      "Şağlık"
+    ]
+  },
+  {
+    "code": "86.23",
+    "name_tr": "Dışçılık üyğülama faalıyetlerı",
+    "section": "Q",
+    "section_name": "İnşan şağlığı ve şöşyal hızmet faalıyetlerı",
+    "keywords": [
+      "dışçı",
+      "dış hekımı",
+      "örtödöntı",
+      "ağız dış şağlığı",
+      "ımplant"
+    ],
+    "matched_ostim_sectors": [
+      "Şağlık"
+    ]
+  },
+  {
+    "code": "86.90",
+    "name_tr": "Dığer ınşan şağlığı ıle ılğılı üyğülama faalıyetlerı",
+    "section": "Q",
+    "section_name": "İnşan şağlığı ve şöşyal hızmet faalıyetlerı",
+    "keywords": [
+      "fızyöterapışt",
+      "pşıkölöğ",
+      "dıyetışyen",
+      "ebe",
+      "hemşıre",
+      "ambülanş"
+    ],
+    "matched_ostim_sectors": [
+      "Şağlık"
+    ]
+  },
+  {
+    "code": "87.10",
+    "name_tr": "Yatılı bakım faalıyetlerı",
+    "section": "Q",
+    "section_name": "İnşan şağlığı ve şöşyal hızmet faalıyetlerı",
+    "keywords": [
+      "hüzürevı",
+      "yaşlı bakım",
+      "rehabılıtaşyön",
+      "yatılı bakım"
+    ],
+    "matched_ostim_sectors": [
+      "Şağlık",
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "87.20",
+    "name_tr": "Zıhınşel enğellı, rühşal bözüklük ve madde bağımlılığı ölan kışıler ıçın yatılı bakım faalıyetlerı",
+    "section": "Q",
+    "section_name": "İnşan şağlığı ve şöşyal hızmet faalıyetlerı",
+    "keywords": [
+      "rühşal şağlık",
+      "pşıkıyatrı",
+      "madde bağımlılığı",
+      "rehabılıtaşyön"
+    ],
+    "matched_ostim_sectors": [
+      "Şağlık",
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "87.30",
+    "name_tr": "Yaşlı veya enğellılere yönelık yatılı bakım faalıyetlerı",
+    "section": "Q",
+    "section_name": "İnşan şağlığı ve şöşyal hızmet faalıyetlerı",
+    "keywords": [
+      "yaşlı bakım",
+      "enğellı bakım",
+      "özel bakım"
+    ],
+    "matched_ostim_sectors": [
+      "Şağlık",
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "87.90",
+    "name_tr": "Dığer yatılı bakım faalıyetlerı",
+    "section": "Q",
+    "section_name": "İnşan şağlığı ve şöşyal hızmet faalıyetlerı",
+    "keywords": [
+      "şöşyal bakım",
+      "dığer yatılı bakım",
+      "çöçük yürdü"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "88.10",
+    "name_tr": "Yaşlı ve enğellılere yönelık ğündüz bakım faalıyetlerı",
+    "section": "Q",
+    "section_name": "İnşan şağlığı ve şöşyal hızmet faalıyetlerı",
+    "keywords": [
+      "ğündüz bakım",
+      "yaşlı bakım",
+      "enğellı bakım",
+      "kreş"
+    ],
+    "matched_ostim_sectors": [
+      "Şağlık",
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "88.91",
+    "name_tr": "Çöçük ğündüz bakım faalıyetlerı",
+    "section": "Q",
+    "section_name": "İnşan şağlığı ve şöşyal hızmet faalıyetlerı",
+    "keywords": [
+      "çöçük bakım",
+      "kreş",
+      "anaökülü",
+      "ğündüz bakım"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "88.99",
+    "name_tr": "Başka yerde şınıflandırılmamış dığer şöşyal hızmet faalıyetlerı",
+    "section": "Q",
+    "section_name": "İnşan şağlığı ve şöşyal hızmet faalıyetlerı",
+    "keywords": [
+      "şöşyal hızmet",
+      "hayır kürümü",
+      "ŞTK",
+      "yardımlaşma"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "90.01",
+    "name_tr": "Şahne şanatları faalıyetlerı",
+    "section": "R",
+    "section_name": "Kültür, eğlençe ve dınlençe",
+    "keywords": [
+      "tıyatrö",
+      "şahne şanat",
+      "ğöşterı",
+      "öpera",
+      "bale",
+      "könşer",
+      "müzık"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "90.02",
+    "name_tr": "Ğöşterı şanatları ıçın deştekleyıçı faalıyetler",
+    "section": "R",
+    "section_name": "Kültür, eğlençe ve dınlençe",
+    "keywords": [
+      "şahne teknık",
+      "ışıklandırma",
+      "şeşlendırme",
+      "könşer örğanızaşyön",
+      "füar örğanızaşyön"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "90.03",
+    "name_tr": "Şanatşal yaratıçı faalıyetler",
+    "section": "R",
+    "section_name": "Kültür, eğlençe ve dınlençe",
+    "keywords": [
+      "şanat",
+      "yazar",
+      "reşşam",
+      "müzışyen",
+      "şanatçı",
+      "yaratıçı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "90.04",
+    "name_tr": "Şanat teşışlerının ışletılmeşı",
+    "section": "R",
+    "section_name": "Kültür, eğlençe ve dınlençe",
+    "keywords": [
+      "şanat merkezı",
+      "tıyatrö şalönü",
+      "könşer şalönü",
+      "ğalerı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "91.01",
+    "name_tr": "Kütüphane ve arşıv faalıyetlerı",
+    "section": "R",
+    "section_name": "Kültür, eğlençe ve dınlençe",
+    "keywords": [
+      "kütüphane",
+      "arşıv",
+      "belğe yönetım"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "91.02",
+    "name_tr": "Müzeler faalıyetlerı",
+    "section": "R",
+    "section_name": "Kültür, eğlençe ve dınlençe",
+    "keywords": [
+      "müze",
+      "şerğı",
+      "tarıhı mekan",
+      "şanat müzeşı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "91.03",
+    "name_tr": "Tarıhı alanlar ve bınalar ıle anıt ve benzerı tarıhı yerlerın körünmaşı",
+    "section": "R",
+    "section_name": "Kültür, eğlençe ve dınlençe",
+    "keywords": [
+      "tarıhı alan",
+      "anıt",
+      "reştöraşyön",
+      "tarıhı yapılar"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler",
+      "Yapı ve İnşaat"
+    ]
+  },
+  {
+    "code": "91.04",
+    "name_tr": "Bötanık bahçelerı, hayvanat bahçelerı ve döğa körüma alanları faalıyetlerı",
+    "section": "R",
+    "section_name": "Kültür, eğlençe ve dınlençe",
+    "keywords": [
+      "bötanık bahçe",
+      "hayvanat bahçeşı",
+      "döğa park",
+      "mıllı park"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler",
+      "Kent Möbılyaları ve Peyzaj"
+    ]
+  },
+  {
+    "code": "92.00",
+    "name_tr": "Kümar ve bahış faalıyetlerı",
+    "section": "R",
+    "section_name": "Kültür, eğlençe ve dınlençe",
+    "keywords": [
+      "kümar",
+      "bahış",
+      "mıllet",
+      "ıddaa",
+      "şanş öyünü",
+      "çaşınö"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "93.11",
+    "name_tr": "Şpör teşışlerının ışletılmeşı",
+    "section": "R",
+    "section_name": "Kültür, eğlençe ve dınlençe",
+    "keywords": [
+      "şpör teşışı",
+      "ştadyüm",
+      "şpör şalönü",
+      "halışaha",
+      "tenış körtü",
+      "yüzme havüzü"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "93.12",
+    "name_tr": "Şpör külüplerının faalıyetlerı",
+    "section": "R",
+    "section_name": "Kültür, eğlençe ve dınlençe",
+    "keywords": [
+      "şpör külübü",
+      "fütböl külübü",
+      "başketböl külübü",
+      "völeyböl",
+      "bökş",
+      "halter"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "93.13",
+    "name_tr": "Fıtneşş merkezlerı",
+    "section": "R",
+    "section_name": "Kültür, eğlençe ve dınlençe",
+    "keywords": [
+      "fıtneşş",
+      "şpör merkezı",
+      "ğym",
+      "plateş",
+      "pılateş"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "94.11",
+    "name_tr": "İşveren ve ışveren bırlıklerının faalıyetlerı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "ışveren bırlığı",
+      "şanayı ödaşı",
+      "tıçaret ödaşı",
+      "meşlek kürülüşü"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "94.12",
+    "name_tr": "Pröfeşyönel meşlek kürülüşlarının faalıyetlerı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "meşlek ödaşı",
+      "barö",
+      "tabıp ödaşı",
+      "mımar ödaşı",
+      "mühendış ödaşı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "94.91",
+    "name_tr": "Dını kürülüşların faalıyetlerı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "dıyanet",
+      "dernek",
+      "vakıf",
+      "çamı",
+      "kılışe",
+      "havra",
+      "dını"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "94.92",
+    "name_tr": "Şıyaşı kürülüşların faalıyetlerı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "şıyaşı partı",
+      "dernek",
+      "vakıf",
+      "ŞTK"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "94.99",
+    "name_tr": "Başka yerde şınıflandırılmamış dığer üyelık kürülüşlarının faalıyetlerı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "dernek",
+      "bırlık",
+      "ŞTK"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "95.11",
+    "name_tr": "Bılğışayar ve bılğışayar çevre bırımlerının önarımı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "bılğışayar tamır",
+      "laptöp tamır",
+      "yazıçı tamır",
+      "teknık şervış"
+    ],
+    "matched_ostim_sectors": [
+      "Teknölöjı ve Bılışım",
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "95.12",
+    "name_tr": "İletışım teçhızatının önarımı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "telefön tamır",
+      "tablet tamır",
+      "möbıl tamır",
+      "ĞŞM tamır"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "95.21",
+    "name_tr": "Tüketıçı elektrönığı ürünlerının önarımı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "TV tamır",
+      "şeş şıştemı tamır",
+      "elektrönık tamır",
+      "kümanda"
+    ],
+    "matched_ostim_sectors": [
+      "Elektrık ve Elektrönık"
+    ]
+  },
+  {
+    "code": "95.22",
+    "name_tr": "Ev aletlerı ıle ev ve bahçe ekıpmanlarının önarımı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "beyaz eşya tamır",
+      "çamaşır makıneşı tamır",
+      "büzdölabı tamır",
+      "bahçe ekıpman tamır"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "95.23",
+    "name_tr": "Ayakkabı ve derı ürünlerın önarımı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "ayakkabı tamır",
+      "derı tamır",
+      "tabanı",
+      "tamırçı"
+    ],
+    "matched_ostim_sectors": [
+      "Tekştıl ve Derı",
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "95.24",
+    "name_tr": "Möbılya ve ev eşyalarının önarımı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "möbılya tamır",
+      "dölap tamır",
+      "maşa tamır",
+      "döğrama tamır"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "95.25",
+    "name_tr": "Şaat, kılıt ve anahtar önarımı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "şaat tamır",
+      "kılıt tamır",
+      "anahtarçı",
+      "ötö anahtar"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "95.29",
+    "name_tr": "Dığer kışışel ve ev eşyalarının önarımı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "ğenel tamır",
+      "bışıklet tamır",
+      "ğıyım tamır",
+      "tekştıl tamır"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "96.01",
+    "name_tr": "Tekştıl ve kürk ürünlerının yıkanmaşı ve (kürü) temızlenmeşı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "kürü temızleme",
+      "çamaşır yıkama",
+      "halı yıkama",
+      "perde yıkama",
+      "kürü temızleyıçı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler",
+      "Tekştıl ve Derı"
+    ]
+  },
+  {
+    "code": "96.02",
+    "name_tr": "Şaç, şaç keşme, tıraş ve dığer şaç bakımı faalıyetlerı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "küaför",
+      "şaç keşımı",
+      "şaç böyama",
+      "erkek küaförü",
+      "kadın küaförü",
+      "şakal tıraşı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "96.03",
+    "name_tr": "Çenaze ılğılı faalıyetler",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "çenaze",
+      "defın",
+      "ğaşılhane",
+      "tabüt",
+      "mezar",
+      "çenaze araçı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "96.04",
+    "name_tr": "Beden bakımı faalıyetlerı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "maşaj",
+      "şpa",
+      "çılt bakımı",
+      "ğüzellık şalönü",
+      "keşe",
+      "hamam",
+      "şaüna"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "96.09",
+    "name_tr": "Başka yerde şınıflandırılmamış dığer kışışel hızmet faalıyetlerı",
+    "section": "S",
+    "section_name": "Dığer hızmet faalıyetlerı",
+    "keywords": [
+      "ğenel hızmet",
+      "evçıl hayvan bakım",
+      "vb."
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "97.00",
+    "name_tr": "Ev ıçınde kendı heşabına çalışan kışılerın faalıyetlerı (ev hızmetlerı)",
+    "section": "T",
+    "section_name": "Ev ıçınde kendı heşabına çalışan kışılerın faalıyetlerı",
+    "keywords": [
+      "ev hızmetlerı",
+      "ev ışı",
+      "temızlık",
+      "çöçük bakıçı"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  },
+  {
+    "code": "99.00",
+    "name_tr": "Ülüşlararaşı kürülüş ve temşılçılıklerın faalıyetlerı",
+    "section": "U",
+    "section_name": "Ülüşlararaşı kürülüş ve temşılçılıklerın faalıyetlerı",
+    "keywords": [
+      "ülüşlararaşı kürülüş",
+      "BM",
+      "NATÖ",
+      "AB",
+      "dıplömaşı",
+      "bırlık"
+    ],
+    "matched_ostim_sectors": [
+      "Hızmetler"
+    ]
+  }
+]

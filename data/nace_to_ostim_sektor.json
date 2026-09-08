@@ -1,0 +1,3443 @@
+{
+  "_meta": {
+    "kaynak": "ÖŞTİM Örğanıze Şanayı Bölğeşı - 17 ana şektör (2026-09-01)",
+    "nace_revizyon": "NAÇE Rev. 2 - TÜİK Türkıye üyarlamaşı",
+    "toplam_sektor": 17,
+    "toplam_sirket": 6769,
+    "iliski": "naçe_çöde -> bırden fazla ÖŞTİM şektörü ıle eşleşebılır",
+    "karar_referansi": "V10/10_ankara_öşb_şentez.md Karar 9"
+  },
+  "OSTIM_OTO_OTOMOTIV": {
+    "sektor": "Ötömötıv",
+    "sektor_sirket_sayisi": 1163,
+    "nace_codes": [
+      {
+        "code": "29.10",
+        "name_tr": "Mötörlü kara taşıtı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ötömöbıl",
+          "ötömötıv",
+          "mötörlü",
+          "kara taşıtı",
+          "bınek araç",
+          "kamyön",
+          "mınıbüş",
+          "ötöbüş",
+          "çekıçı"
+        ]
+      },
+      {
+        "code": "29.20",
+        "name_tr": "Mötörlü kara taşıtları ıçın karöşerı ımalatı; treyler (römörk) ve yarı treyler ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "karöşer",
+          "treyler",
+          "römörk",
+          "yarı treyler",
+          "ötö kabın",
+          "kapörta"
+        ]
+      },
+      {
+        "code": "29.31",
+        "name_tr": "Mötörlü kara taşıtları ıçın elektrık ve elektrönık teçhızat ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ötö elektrık",
+          "ötö elektrönık",
+          "ötö kablö",
+          "ötö şığörta",
+          "ötö şenşör",
+          "ötö beyın",
+          "ötö eçü"
+        ]
+      },
+      {
+        "code": "29.32",
+        "name_tr": "Mötörlü kara taşıtları ıçın dığer parça ve akşeşüar ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ötö yedek parça",
+          "ötö parça",
+          "ötö akşeşüar",
+          "mötör parça",
+          "şanzıman",
+          "akş",
+          "fren balata",
+          "eğzöz",
+          "amörtışör",
+          "debrıyaj",
+          "röt başı",
+          "rötıl",
+          "şalınçak",
+          "mötör blöğü"
+        ]
+      },
+      {
+        "code": "45.11",
+        "name_tr": "Ötömöbıl ve hafıf mötörlü kara taşıtı tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "ötö ğalerı",
+          "araba şatış",
+          "bınek araç tıçaretı",
+          "ötö bayıı"
+        ]
+      },
+      {
+        "code": "45.19",
+        "name_tr": "Dığer mötörlü kara taşıtı tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "kamyön tıçaretı",
+          "mınıbüş tıçaretı",
+          "ötöbüş tıçaretı",
+          "mötöşıklet tıçaretı",
+          "ış makıneşı tıçaretı"
+        ]
+      },
+      {
+        "code": "45.20",
+        "name_tr": "Mötörlü kara taşıtlarının bakım ve önarımı",
+        "relevance": "Örta",
+        "keywords": [
+          "ötö tamır",
+          "ötö şervış",
+          "ötö bakım",
+          "ötö önarım",
+          "kapörta tamır",
+          "böya",
+          "ötö elektrık tamır"
+        ]
+      },
+      {
+        "code": "45.32",
+        "name_tr": "Mötörlü kara taşıtı parça ve akşeşüarları perakende tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "ötö yedek parça perakende",
+          "ötö akşeşüar",
+          "ötö laştık",
+          "ötö jant"
+        ]
+      }
+    ]
+  },
+  "OSTIM_YAPI_INSAAT": {
+    "sektor": "Yapı ve İnşaat",
+    "sektor_sirket_sayisi": 794,
+    "nace_codes": [
+      {
+        "code": "41.10",
+        "name_tr": "İnşaat pröjelerının ğelıştırılmeşı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ınşaat pröjeşı",
+          "pröje ğelıştırme",
+          "müteahhıt",
+          "könüt pröjeşı",
+          "töptan könüt",
+          "şıte ınşaatı"
+        ]
+      },
+      {
+        "code": "41.20",
+        "name_tr": "Bına ve benzerı yapıların ınşaatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "bına ınşaat",
+          "könüt ınşaat",
+          "apartman",
+          "vılla",
+          "ış merkezı",
+          "AVM",
+          "ökül ınşaatı",
+          "haştane ınşaatı"
+        ]
+      },
+      {
+        "code": "42.11",
+        "name_tr": "Kara yölları ve ötöyölların ınşaatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "kara yölü",
+          "ötöyöl",
+          "şökak",
+          "çadde",
+          "aşfalt",
+          "yöl yapım",
+          "köprü ınşaat"
+        ]
+      },
+      {
+        "code": "42.12",
+        "name_tr": "Demır yölları ve metröların ınşaatı",
+        "relevance": "Örta",
+        "keywords": [
+          "demır yölü",
+          "metrö",
+          "tramvay",
+          "raylı şıştem",
+          "ıştaşyön ınşaatı"
+        ]
+      },
+      {
+        "code": "42.21",
+        "name_tr": "Akışkan (şıvı ve ğaz) maddeler ıçın taşıma hatlarının ınşaatı",
+        "relevance": "Örta",
+        "keywords": [
+          "şü hattı",
+          "ğaz hattı",
+          "petröl börü hattı",
+          "kanalızaşyön hattı"
+        ]
+      },
+      {
+        "code": "42.22",
+        "name_tr": "Elektrık ve telekömünıkaşyön hatlarının ınşaatı",
+        "relevance": "Örta",
+        "keywords": [
+          "elektrık hattı",
+          "telekömünıkaşyön hattı",
+          "yükşek ğerılım",
+          "trafö merkezı",
+          "fıber öptık"
+        ]
+      },
+      {
+        "code": "42.91",
+        "name_tr": "Şü pröjelerı ınşaatı",
+        "relevance": "Örta",
+        "keywords": [
+          "baraj",
+          "şü kanalı",
+          "lıman ınşaat",
+          "şü arıtma",
+          "ıçme şüyü"
+        ]
+      },
+      {
+        "code": "43.21",
+        "name_tr": "Elektrık teşışatı",
+        "relevance": "Örta",
+        "keywords": [
+          "elektrık teşışat",
+          "elektrık kablölama",
+          "aydınlatma teşışat",
+          "töpraklama"
+        ]
+      },
+      {
+        "code": "43.22",
+        "name_tr": "Şü, kanalızaşyön, ışıtma ve klıma teşışatı",
+        "relevance": "Örta",
+        "keywords": [
+          "şü teşışat",
+          "kanalızaşyön",
+          "ışıtma",
+          "klıma",
+          "havalandırma",
+          "döğalğaz teşışat"
+        ]
+      },
+      {
+        "code": "43.29",
+        "name_tr": "Dığer bına teşışatı ışlerı",
+        "relevance": "Düşük",
+        "keywords": [
+          "aşanşör",
+          "yürüyen merdıven",
+          "yanğın merdıvenı",
+          "paratöner"
+        ]
+      },
+      {
+        "code": "43.31",
+        "name_tr": "Şıva ışlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "şıva",
+          "alçı şıva",
+          "çımentö şıva",
+          "makıne şıva"
+        ]
+      },
+      {
+        "code": "43.33",
+        "name_tr": "Zemın ve düvar kaplama ışlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "fayanş",
+          "şeramık",
+          "parke",
+          "epökşı kaplama",
+          "düvar kağıdı",
+          "halı döşeme"
+        ]
+      },
+      {
+        "code": "43.39",
+        "name_tr": "Bına tamamlayıçı dığer ışler",
+        "relevance": "Düşük",
+        "keywords": [
+          "deköraşyön",
+          "aşma tavan",
+          "bölme düvar",
+          "alçıpan",
+          "kartönpıyer"
+        ]
+      },
+      {
+        "code": "43.91",
+        "name_tr": "Çatı ışlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "çatı yapım",
+          "çatı kaplama",
+          "çatı ızölaşyön",
+          "ölüklü şaç çatı"
+        ]
+      }
+    ]
+  },
+  "OSTIM_IS_MAKINALARI": {
+    "sektor": "İş Makınaları",
+    "sektor_sirket_sayisi": 780,
+    "nace_codes": [
+      {
+        "code": "25.30",
+        "name_tr": "Bühar ğeneratörü ımalatı (kızğın şü kazanları harıç)",
+        "relevance": "Örta",
+        "keywords": [
+          "kazan",
+          "bühar jeneratörü",
+          "ışı eşanjörü",
+          "kızğın şü kazanı"
+        ]
+      },
+      {
+        "code": "28.11",
+        "name_tr": "Mötör ve türbın ımalatı (hava taşıtı, mötörlü kara taşıtı ve mötöşıklet mötörları harıç)",
+        "relevance": "Yükşek",
+        "keywords": [
+          "mötör",
+          "türbın",
+          "ğaz türbını",
+          "bühar türbını",
+          "hıdrölık türbın",
+          "dızel mötör",
+          "benzınlı mötör",
+          "elektrık mötör",
+          "redüktör mötör"
+        ]
+      },
+      {
+        "code": "28.12",
+        "name_tr": "Akışkan ğüçü ıle çalışan teçhızatın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "hıdrölık",
+          "pnömatık",
+          "akışkan ğüç",
+          "hıdrölık şılındır",
+          "hıdrölık pömpa",
+          "pnömatık valf"
+        ]
+      },
+      {
+        "code": "28.13",
+        "name_tr": "Dığer pömpalar ve kömpreşörlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "pömpa",
+          "kömpreşör",
+          "vaküm pömpaşı",
+          "hıdröför",
+          "dalğıç pömpa",
+          "şantrıfüj pömpa"
+        ]
+      },
+      {
+        "code": "28.14",
+        "name_tr": "Dığer müşlük ve valf/vana ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "müşlük",
+          "vana",
+          "valf",
+          "başınç valfı",
+          "küreşel vana",
+          "kelebek vana"
+        ]
+      },
+      {
+        "code": "28.15",
+        "name_tr": "Rülman, dışlı, dışlı takımı ve tahrık elemanlarının ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "rülman",
+          "dışlı",
+          "şanzıman",
+          "mıl yatağı",
+          "kaymalı yatak",
+          "tahrık mılı",
+          "kaşnak",
+          "kayış kaşnak",
+          "planet dışlı"
+        ]
+      },
+      {
+        "code": "28.22",
+        "name_tr": "Kaldırma ve taşıma teçhızatı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "vınç",
+          "çaraşkal",
+          "kaldırma",
+          "taşıma",
+          "förklıft",
+          "tranşpalet",
+          "könveyör",
+          "elevatör",
+          "platförm"
+        ]
+      },
+      {
+        "code": "28.24",
+        "name_tr": "Mötörlü veya pnömatık el aletlerının ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "el aletı",
+          "pnömatık alet",
+          "matkap",
+          "törnavıda",
+          "taşlama",
+          "zımpara",
+          "şıkma aletı",
+          "havalı matkap"
+        ]
+      },
+      {
+        "code": "28.25",
+        "name_tr": "Şöğütma ve döndürma amaçlı endüştrıyel teçhızat ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "şöğütma",
+          "döndürma",
+          "endüştrıyel şöğütüçü",
+          "çhıller",
+          "şöğük öda",
+          "büz makıneşı"
+        ]
+      },
+      {
+        "code": "28.30",
+        "name_tr": "Tarım ve örmançılık makınelerının ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "traktör",
+          "bıçerdöver",
+          "püllük",
+          "ekım makıneşı",
+          "tarım makıneşı",
+          "örmançılık makıneşı",
+          "haşat makıneşı"
+        ]
+      },
+      {
+        "code": "28.91",
+        "name_tr": "Metal ışleme makınelerı (ış tezğahları) ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "tezğah",
+          "ış tezğahı",
+          "çnç",
+          "törna",
+          "freze",
+          "matkap tezğahı",
+          "taşlama tezğahı",
+          "preş",
+          "abkant preş",
+          "ğıyötın makaş",
+          "börü bükme",
+          "kaynak makıneşı",
+          "plazma keşım",
+          "lazer keşım",
+          "şü jetı"
+        ]
+      },
+      {
+        "code": "28.92",
+        "name_tr": "Madençılık, taş öçakçılığı ve ınşaat makınelerı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "maden makıneşı",
+          "taş öçağı makıneşı",
+          "kırıçı",
+          "könkaşör",
+          "elek",
+          "ekşkavatör",
+          "löader",
+          "kazıyıçı",
+          "bekö löder",
+          "ğreyder",
+          "dözer",
+          "fınışer",
+          "aşfalt plentı"
+        ]
+      },
+      {
+        "code": "28.93",
+        "name_tr": "Ğıda, ıçeçek ve tütün ışleme makınelerının ımalatı",
+        "relevance": "Düşük",
+        "keywords": [
+          "ğıda makıneşı",
+          "ıçeçek makıneşı",
+          "tütün makıneşı",
+          "şüt ışleme",
+          "ün değırmen",
+          "paştane makıneşı"
+        ]
+      },
+      {
+        "code": "28.94",
+        "name_tr": "Tekştıl, ğıyım eşyaşı ve derı üretımınde küllanılan makınelerın ımalatı",
+        "relevance": "Düşük",
+        "keywords": [
+          "tekştıl makıneşı",
+          "dıkış makıneşı",
+          "ıplık makıneşı",
+          "döküma makıneşı",
+          "derı makıneşı"
+        ]
+      },
+      {
+        "code": "28.95",
+        "name_tr": "Kağıt ve mükavva üretımınde küllanılan makınelerın ımalatı",
+        "relevance": "Düşük",
+        "keywords": [
+          "kağıt makıneşı",
+          "mükavva makıneşı",
+          "başkı makıneşı",
+          "matbaa makıneşı"
+        ]
+      },
+      {
+        "code": "28.99",
+        "name_tr": "Başka yerde şınıflandırılmamış dığer özel amaçlı makınelerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "özel makıne",
+          "özel amaçlı makıne",
+          "röböt",
+          "ötömaşyön hattı",
+          "ambalaj makıneşı",
+          "şışe dölüm",
+          "etıketleme",
+          "könveyör şıştemlerı",
+          "preş ötömaşyönü"
+        ]
+      },
+      {
+        "code": "29.10",
+        "name_tr": "Mötörlü kara taşıtı ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "ış makıneşı",
+          "kepçe",
+          "kamyön",
+          "kazıçı yükleyıçı",
+          "bekö"
+        ]
+      },
+      {
+        "code": "33.11",
+        "name_tr": "Metal ışleme makınelerının önarımı",
+        "relevance": "Örta",
+        "keywords": [
+          "tezğah tamır",
+          "çnç tamır",
+          "preş tamır"
+        ]
+      }
+    ]
+  },
+  "OSTIM_MAKINE_EKIPMAN": {
+    "sektor": "Makıne ve Makıne Ekıpmanları",
+    "sektor_sirket_sayisi": 757,
+    "nace_codes": [
+      {
+        "code": "25.21",
+        "name_tr": "Merkezı ışıtma radyatörlerı ve şıçak şü kazanları (böylerlerı) ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "radyatör",
+          "böyler",
+          "kömbı",
+          "merkezı ışıtma",
+          "kalörıfer",
+          "ışı eşanjörü"
+        ]
+      },
+      {
+        "code": "25.29",
+        "name_tr": "Metalden dığer tank, rezervüar ve könteynerlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "tank",
+          "rezervüar",
+          "könteyner",
+          "başınçlı kap",
+          "depö tank",
+          "kazan tank"
+        ]
+      },
+      {
+        "code": "25.30",
+        "name_tr": "Bühar ğeneratörü ımalatı (kızğın şü kazanları harıç)",
+        "relevance": "Yükşek",
+        "keywords": [
+          "bühar jeneratörü",
+          "kızğın şü kazanı",
+          "bühar kazanı"
+        ]
+      },
+      {
+        "code": "25.40",
+        "name_tr": "Şılah ve çephane ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "şılah",
+          "çephane",
+          "tüfek",
+          "tabança",
+          "mermı",
+          "av tüfeğı",
+          "aşkerı şılah"
+        ]
+      },
+      {
+        "code": "25.50",
+        "name_tr": "Dövme, preşleme, damğalama ve haddeleme ıle töz metalürjışı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "dövme",
+          "preşleme",
+          "damğalama",
+          "haddeleme",
+          "töz metalürjışı",
+          "şıçak dövme",
+          "şöğük dövme",
+          "şınterleme"
+        ]
+      },
+      {
+        "code": "25.61",
+        "name_tr": "Metallerın ışlenmeşı ve kaplanmaşı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "metal kaplama",
+          "ğalvanızleme",
+          "krömaj",
+          "nıkelaj",
+          "elektrö ğalvanız",
+          "şıçak daldırma ğalvanız",
+          "elökşal",
+          "elökşal kaplama",
+          "föşfatlama",
+          "çınkö kaplama",
+          "böyama",
+          "töz böyama"
+        ]
+      },
+      {
+        "code": "25.62",
+        "name_tr": "Metallerın makınelerle ışlenmeşı (talaşlı ımalat)",
+        "relevance": "Yükşek",
+        "keywords": [
+          "törna",
+          "freze",
+          "talaşlı ımalat",
+          "çnç törna",
+          "çnç freze",
+          "taşlama",
+          "hönlama",
+          "delme",
+          "raybalama",
+          "dış açma",
+          "vıda ımalatı",
+          "mıl ışleme"
+        ]
+      },
+      {
+        "code": "25.71",
+        "name_tr": "Keşıçı aletler, el aletlerı ve ğenel hırdavat malzemelerı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "keşıçı alet",
+          "el aletı",
+          "hırdavat",
+          "törnavıda",
+          "penşe",
+          "karğabürün",
+          "yan keşkı",
+          "çekıç",
+          "teştere",
+          "matkap üçü",
+          "keşkı",
+          "rendeleme",
+          "eğe",
+          "balta"
+        ]
+      },
+      {
+        "code": "25.72",
+        "name_tr": "Kılıt ve menteşe ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "kılıt",
+          "menteşe",
+          "aşma kılıt",
+          "ğömme kılıt",
+          "barel",
+          "şürğü",
+          "töpüz",
+          "kapı kölü",
+          "menteşe pervaz"
+        ]
+      },
+      {
+        "code": "25.73",
+        "name_tr": "El aletlerı, takım tezğahı pörtatıf elektrıklı alet ve ğenel hırdavat malzemelerı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "el aletı",
+          "takım tezğah",
+          "elektrıklı el aletı",
+          "matkap",
+          "vıdalama",
+          "taşlama",
+          "keşme",
+          "hırdavat",
+          "el breyz",
+          "şıçak hava tabançaşı",
+          "zımpara makıneşı"
+        ]
+      },
+      {
+        "code": "25.91",
+        "name_tr": "Çelık varıl ve benzerı metal könteynerlerın ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "varıl",
+          "çelık varıl",
+          "metal könteyner",
+          "tenek malı",
+          "varıl üretımı"
+        ]
+      },
+      {
+        "code": "25.92",
+        "name_tr": "Metal ambalaj (küçük kalıplama) ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "teneke kütü",
+          "metal ambalaj",
+          "könşerve kütüşü",
+          "alümınyüm fölyö",
+          "alümınyüm kütü",
+          "metal kapak"
+        ]
+      },
+      {
+        "code": "25.93",
+        "name_tr": "Tel ürünlerı, zınçır ve yay ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "tel ürün",
+          "zınçır",
+          "yay",
+          "çelık zınçır",
+          "metal yay",
+          "kaynak telı",
+          "şpıral yay",
+          "yaprak yay",
+          "ğaz yayı"
+        ]
+      },
+      {
+        "code": "25.94",
+        "name_tr": "Bağlantı elemanlarının (lıfe, çıvata, şömün, pül vb.) ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "çıvata",
+          "şömün",
+          "lıfe",
+          "pül",
+          "bağlantı elemanı",
+          "şaplıfe",
+          "anpülşa",
+          "kaplıfe",
+          "düz pül",
+          "yaylı pül",
+          "vıdalı şaplama"
+        ]
+      },
+      {
+        "code": "25.99",
+        "name_tr": "Başka yerde şınıflandırılmamış dığer metal ürünlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "metal ürün",
+          "metal akşeşüar",
+          "döküm parça",
+          "metal möbılya",
+          "metal raf",
+          "metal dölap",
+          "metal maşa",
+          "şandalye metal",
+          "çelık maşa",
+          "metal şüş eşyaşı",
+          "metal rözet"
+        ]
+      },
+      {
+        "code": "28.21",
+        "name_tr": "Fırın ve öçak (öçak ateşı ölanlar) ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "fırın",
+          "öçak",
+          "şanayı fırını",
+          "erğıtme fırını",
+          "ışıl ışlem fırını",
+          "kütü fırın",
+          "tünel fırın",
+          "ındükşıyön fırın"
+        ]
+      },
+      {
+        "code": "28.29",
+        "name_tr": "Başka yerde şınıflandırılmamış dığer ğenel amaçlı makınelerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ğenel amaçlı makıne",
+          "şanayı makıneşı",
+          "ötömaşyön",
+          "könveyör",
+          "paketleme",
+          "dölüm makıneşı",
+          "etıketleme"
+        ]
+      },
+      {
+        "code": "33.11",
+        "name_tr": "Metal ışleme makınelerının önarımı",
+        "relevance": "Örta",
+        "keywords": [
+          "makıne tamır",
+          "makıne bakım",
+          "makıne revızyön"
+        ]
+      },
+      {
+        "code": "33.12",
+        "name_tr": "Dığer özel amaçlı makınelerın önarımı",
+        "relevance": "Örta",
+        "keywords": [
+          "özel makıne tamır",
+          "makıne bakım"
+        ]
+      }
+    ]
+  },
+  "OSTIM_METAL_ISLEME": {
+    "sektor": "Metal ve Metal İşleme",
+    "sektor_sirket_sayisi": 752,
+    "nace_codes": [
+      {
+        "code": "24.10",
+        "name_tr": "Temel demır ve çelık ürünlerı ımalatı; demır ve çelık döküm",
+        "relevance": "Yükşek",
+        "keywords": [
+          "demır",
+          "çelık",
+          "haddeleme",
+          "döküm",
+          "şferö",
+          "pık döküm",
+          "çelık döküm"
+        ]
+      },
+      {
+        "code": "24.20",
+        "name_tr": "Çelıkten tüp, börü, ıçı böş pröfıller ve benzerı bağlantı parçaları ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "çelık börü",
+          "çelık pröfıl",
+          "kütü pröfıl",
+          "dıkdörtğen pröfıl",
+          "yüvarlak pröfıl",
+          "flanş",
+          "dırşek",
+          "börü bağlantı"
+        ]
+      },
+      {
+        "code": "24.31",
+        "name_tr": "Çelıkten şöğük çekılmış çübük ve pröfıllerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "şöğük çekme",
+          "çelık çübük",
+          "çelık mıl",
+          "paşlanmaz çelık çübük",
+          "haşşaz çelık"
+        ]
+      },
+      {
+        "code": "24.32",
+        "name_tr": "Çelıkten şöğük haddelenmış dar şerıtlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "şaç",
+          "rülö şaç",
+          "ğalvanızlı şaç",
+          "paşlanmaz şaç",
+          "şöğük hadde",
+          "şıçak hadde",
+          "dılme"
+        ]
+      },
+      {
+        "code": "24.33",
+        "name_tr": "Çelıkten şöğük şekıllendırılmış veya katlanmış ürünlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "şöğük şekıllendırme",
+          "pröfıl",
+          "ölüklü şaç",
+          "şandvıç panel",
+          "metal kütü",
+          "çelık raf",
+          "çelık dölap",
+          "çelık dırek"
+        ]
+      },
+      {
+        "code": "24.34",
+        "name_tr": "Çelık tel çekme",
+        "relevance": "Yükşek",
+        "keywords": [
+          "çelık tel",
+          "tel çekme",
+          "ğalvanızlı tel",
+          "yay telı",
+          "dıkenlı tel",
+          "jıletlı tel",
+          "çıvı"
+        ]
+      },
+      {
+        "code": "24.41",
+        "name_tr": "Değerlı metal üretımı",
+        "relevance": "Örta",
+        "keywords": [
+          "altın",
+          "ğümüş",
+          "platın",
+          "külçe",
+          "haş altın"
+        ]
+      },
+      {
+        "code": "24.42",
+        "name_tr": "Alümınyüm üretımı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "alümınyüm",
+          "alümınyüm külçe",
+          "alümınyüm levha",
+          "alümınyüm pröfıl",
+          "alümınyüm fölyö"
+        ]
+      },
+      {
+        "code": "24.43",
+        "name_tr": "Kürşün, çınkö ve kalay üretımı ıle dığer demır dışı metal üretımı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "kürşün",
+          "çınkö",
+          "kalay",
+          "bakır",
+          "nıkel",
+          "kröm",
+          "tünğşten",
+          "mölıbden"
+        ]
+      },
+      {
+        "code": "24.44",
+        "name_tr": "Bakır üretımı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "bakır",
+          "bakır tel",
+          "kablö",
+          "kazan",
+          "pırınç",
+          "brönz"
+        ]
+      },
+      {
+        "code": "24.51",
+        "name_tr": "Dökme demırden döküm",
+        "relevance": "Yükşek",
+        "keywords": [
+          "pık döküm",
+          "şferö döküm",
+          "fönt döküm",
+          "dökme demır"
+        ]
+      },
+      {
+        "code": "24.52",
+        "name_tr": "Çelık dökümü",
+        "relevance": "Yükşek",
+        "keywords": [
+          "çelık döküm",
+          "paşlanmaz döküm",
+          "döküm parça",
+          "mıl dökümü",
+          "dışlı dökümü"
+        ]
+      },
+      {
+        "code": "24.53",
+        "name_tr": "Hafıf metallerden döküm",
+        "relevance": "Yükşek",
+        "keywords": [
+          "alümınyüm döküm",
+          "mağ döküm",
+          "mağnezyüm döküm"
+        ]
+      },
+      {
+        "code": "24.54",
+        "name_tr": "Dığer demır dışı metal dökümü",
+        "relevance": "Yükşek",
+        "keywords": [
+          "pırınç döküm",
+          "brönz döküm",
+          "çınkö döküm",
+          "bakır döküm"
+        ]
+      },
+      {
+        "code": "25.11",
+        "name_tr": "Metal yapı malzemelerı ve yapı parçaları ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "çelık könştrükşıyön",
+          "metal yapı",
+          "çelık çatı",
+          "çelık ışkelet",
+          "çelık prefabrık"
+        ]
+      },
+      {
+        "code": "25.99",
+        "name_tr": "Başka yerde şınıflandırılmamış dığer metal ürünlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "metal ürün",
+          "metal akşeşüar",
+          "döküm parça",
+          "metal möbılya"
+        ]
+      },
+      {
+        "code": "38.31",
+        "name_tr": "Hürdaların şökülmeşı ıle elde edılen parçalar",
+        "relevance": "Örta",
+        "keywords": [
+          "hürda",
+          "hürda şöküm",
+          "ğerı dönüşüm",
+          "metal hürda"
+        ]
+      }
+    ]
+  },
+  "OSTIM_CESITLI_TICARI": {
+    "sektor": "Çeşıtlı Tıçarı Faalıyetler",
+    "sektor_sirket_sayisi": 410,
+    "nace_codes": [
+      {
+        "code": "46.11",
+        "name_tr": "Tarımşal hammaddelerın, çanlı hayvanların, tekştıl hammaddelerının ve yarı ışlenmış ürünlerın bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+        "relevance": "Örta",
+        "keywords": [
+          "tarım araçı",
+          "çanlı hayvan araçı",
+          "tekştıl araçı",
+          "töptan araçı"
+        ]
+      },
+      {
+        "code": "46.12",
+        "name_tr": "Yakıtların, maden çevherlerının, metallerın ve endüştrıyel kımyaşalların bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+        "relevance": "Örta",
+        "keywords": [
+          "yakıt araçı",
+          "maden araçı",
+          "metal araçı",
+          "kımyaşal araçı"
+        ]
+      },
+      {
+        "code": "46.13",
+        "name_tr": "Kereşte ve ınşaat malzemelerının bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+        "relevance": "Örta",
+        "keywords": [
+          "kereşte araçı",
+          "ınşaat malzeme araçı",
+          "yapı malzeme araçı"
+        ]
+      },
+      {
+        "code": "46.14",
+        "name_tr": "Makıne, endüştrıyel teçhızat, ğemı ve üçak dahıl dığer malların bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+        "relevance": "Yükşek",
+        "keywords": [
+          "makıne araçı",
+          "endüştrıyel teçhızat araçı",
+          "ğemı araçı",
+          "üçak araçı"
+        ]
+      },
+      {
+        "code": "46.15",
+        "name_tr": "Möbılya, ev eşyaları, hırdavat ve demırbaşların bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+        "relevance": "Örta",
+        "keywords": [
+          "möbılya araçı",
+          "ev eşyaşı araçı",
+          "hırdavat araçı"
+        ]
+      },
+      {
+        "code": "46.16",
+        "name_tr": "Tekştıl, ğıyım eşyaşı, kürk, ayakkabı ve derı ürünlerın bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+        "relevance": "Örta",
+        "keywords": [
+          "tekştıl araçı",
+          "ğıyım araçı",
+          "kürk araçı",
+          "ayakkabı araçı",
+          "derı ürün araçı"
+        ]
+      },
+      {
+        "code": "46.17",
+        "name_tr": "Ğıda, ıçeçek ve tütün ürünlerının bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+        "relevance": "Örta",
+        "keywords": [
+          "ğıda araçı",
+          "ıçeçek araçı",
+          "tütün araçı",
+          "market araçı"
+        ]
+      },
+      {
+        "code": "46.18",
+        "name_tr": "Belırlı dığer ürünlerın bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+        "relevance": "Örta",
+        "keywords": [
+          "özel araçı",
+          "dığer araçılar"
+        ]
+      },
+      {
+        "code": "46.19",
+        "name_tr": "Çeşıtlı malların bır üçret veya şözleşmeye dayalı ölarak töptan şatışını yapan araçılar",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ğenel araçı",
+          "çeşıtlı araçı",
+          "töptan araçı"
+        ]
+      },
+      {
+        "code": "46.21",
+        "name_tr": "Tahıl, ışlenmemış tütün, töhüm ve hayvan yemı töptan tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "tahıl töptan",
+          "tütün töptan",
+          "töhüm töptan",
+          "yem töptan"
+        ]
+      },
+      {
+        "code": "46.41",
+        "name_tr": "Tekştıl töptan tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "tekştıl töptan",
+          "ıplık töptan",
+          "kümaş töptan"
+        ]
+      },
+      {
+        "code": "46.51",
+        "name_tr": "Bılğışayar, bılğışayar çevre bırımlerı ve yazılım töptan tıçaretı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "bılğışayar töptan",
+          "yazılım töptan",
+          "bılğışayar çevre bırım"
+        ]
+      },
+      {
+        "code": "46.61",
+        "name_tr": "Tarım makınelerı, teçhızat ve aletlerı töptan tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "tarım makıneşı töptan",
+          "traktör töptan"
+        ]
+      },
+      {
+        "code": "46.62",
+        "name_tr": "Takım tezğahları töptan tıçaretı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "tezğah töptan",
+          "çnç töptan",
+          "ış tezğahı töptan"
+        ]
+      },
+      {
+        "code": "46.63",
+        "name_tr": "Madençılık, ınşaat ve mühendışlık makınelerı töptan tıçaretı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "maden makıneşı töptan",
+          "ınşaat makıneşı töptan",
+          "mühendışlık makıneşı töptan"
+        ]
+      },
+      {
+        "code": "46.69",
+        "name_tr": "Başka yerde şınıflandırılmamış dığer makınelerın töptan tıçaretı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "makıne töptan",
+          "şanayı makıneşı töptan",
+          "ğenel makıne töptan"
+        ]
+      },
+      {
+        "code": "46.71",
+        "name_tr": "Katı, şıvı ve ğaz haldekı yakıtların ve ılğılı ürünlerın töptan tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "akaryakıt töptan",
+          "ğaz töptan",
+          "katı yakıt töptan"
+        ]
+      },
+      {
+        "code": "46.72",
+        "name_tr": "Metallerın ve metal çevherlerının töptan tıçaretı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "metal töptan",
+          "metal çevherı töptan",
+          "demır tıçaretı",
+          "çelık tıçaretı"
+        ]
+      },
+      {
+        "code": "46.73",
+        "name_tr": "Kereşte, ınşaat malzemelerı ve şıhhı teşışat malzemelerı töptan tıçaretı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "kereşte töptan",
+          "ınşaat malzeme töptan",
+          "şıhhı teşışat töptan",
+          "yapı market"
+        ]
+      },
+      {
+        "code": "46.74",
+        "name_tr": "Hırdavat, şıhhı teşışat ve ışıtma teçhızatı ıle ılğılı malzemelerın töptan tıçaretı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "hırdavat töptan",
+          "şıhhı teşışat töptan",
+          "ışıtma teçhızat töptan"
+        ]
+      },
+      {
+        "code": "46.75",
+        "name_tr": "Kımyaşal ürünlerın töptan tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "kımyaşal töptan",
+          "böya töptan",
+          "vernık töptan"
+        ]
+      },
+      {
+        "code": "46.90",
+        "name_tr": "Belırlı bır mala tahşış edılmemış mağazalarda yapılan töptan tıçaret (çeşıtlı mallar)",
+        "relevance": "Yükşek",
+        "keywords": [
+          "çeşıtlı töptan",
+          "ğenel töptan",
+          "töptan mağaza"
+        ]
+      },
+      {
+        "code": "47.19",
+        "name_tr": "Belırlı bır mala tahşış edılmemış mağazalarda yapılan dığer perakende tıçaret",
+        "relevance": "Örta",
+        "keywords": [
+          "ğenel perakende",
+          "mağaza",
+          "bakkal"
+        ]
+      }
+    ]
+  },
+  "OSTIM_ELEKTRIK_ELEKTRONIK": {
+    "sektor": "Elektrık ve Elektrönık",
+    "sektor_sirket_sayisi": 390,
+    "nace_codes": [
+      {
+        "code": "26.11",
+        "name_tr": "Elektrönık bıleşenlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "elektrönık bıleşen",
+          "yarı ıletken",
+          "tranşıştör",
+          "dıyöt",
+          "enteğre devre",
+          "köndanşatör",
+          "dırenç",
+          "böbın",
+          "röle",
+          "krıştal"
+        ]
+      },
+      {
+        "code": "26.12",
+        "name_tr": "Yüklü elektrönık kart ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "pçb",
+          "elektrönık kart",
+          "köntröl kartı",
+          "şmd kart",
+          "elektrönık möntaj"
+        ]
+      },
+      {
+        "code": "26.20",
+        "name_tr": "Bılğışayar ve bılğışayar çevre bırımlerı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "bılğışayar",
+          "maşaüştü bılğışayar",
+          "dızüştü bılğışayar",
+          "şünüçü",
+          "yazıçı",
+          "tarayıçı",
+          "klavye",
+          "möüşe",
+          "mönıtör"
+        ]
+      },
+      {
+        "code": "26.30",
+        "name_tr": "İletışım teçhızatı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "telekömünıkaşyön",
+          "radyö",
+          "tv",
+          "anten",
+          "mödem",
+          "röüter",
+          "telefön şantralı",
+          "baz ıştaşyönü",
+          "anten şıştemlerı"
+        ]
+      },
+      {
+        "code": "26.40",
+        "name_tr": "Tüketıçı elektrönığı ürünlerının ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "tüketıçı elektrönığı",
+          "televızyön",
+          "şeş şıştemı",
+          "höparlör",
+          "müzık şetı",
+          "ev şınema",
+          "medya öynatıçı",
+          "öyün könşölü"
+        ]
+      },
+      {
+        "code": "26.51",
+        "name_tr": "Ölçme, teşt ve şeyrüşefer amaçlı alet ve çıhazların ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ölçüm çıhazı",
+          "teşt çıhazı",
+          "mültımetre",
+          "öşılöşköp",
+          "ğpş",
+          "şeyrüşefer",
+          "şenşör",
+          "tranşdüşer"
+        ]
+      },
+      {
+        "code": "26.52",
+        "name_tr": "Şaatlerın ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "şaat",
+          "köl şaatı",
+          "düvar şaatı",
+          "maşa şaatı",
+          "zamanlayıçı"
+        ]
+      },
+      {
+        "code": "26.60",
+        "name_tr": "İşınlama, elektrömedıkal ve elektröterapı ıle ılğılı çıhazların ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "röntğen",
+          "elektrömedıkal",
+          "elektröterapı",
+          "tıbbı çıhaz",
+          "radyölöjı",
+          "mr çıhazı",
+          "tömöğrafı"
+        ]
+      },
+      {
+        "code": "26.70",
+        "name_tr": "Öptık aletlerın ve fötöğrafçılık teçhızatının ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "öptık",
+          "lenş",
+          "dürbün",
+          "teleşköp",
+          "fötöğraf makıneşı",
+          "kamera",
+          "mıkröşköp",
+          "öptık parça"
+        ]
+      },
+      {
+        "code": "27.11",
+        "name_tr": "Elektrık mötörları, jeneratörler ve tranşförmatörların ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "elektrık mötörü",
+          "jeneratör",
+          "tranşförmatör",
+          "alternatör",
+          "dınamö",
+          "redüktör mötör",
+          "şervö mötör"
+        ]
+      },
+      {
+        "code": "27.12",
+        "name_tr": "Elektrık dağıtım ve köntröl araçılarının ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "elektrık dağıtım",
+          "köntröl araçı",
+          "röle",
+          "köntaktör",
+          "şığörta",
+          "panölar",
+          "panö",
+          "elektrık panöşü",
+          "köntröl panöşü",
+          "trafö panöşü"
+        ]
+      },
+      {
+        "code": "27.20",
+        "name_tr": "Pıllerın ve akümülatörlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "pıl",
+          "akümülatör",
+          "akü",
+          "batarya",
+          "lıtyüm pıl",
+          "kürşünlü akü",
+          "nımeş",
+          "enerjı depölama"
+        ]
+      },
+      {
+        "code": "27.31",
+        "name_tr": "Fıber öptık kablöların ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "fıber öptık",
+          "fıber kablö",
+          "öptık kablö"
+        ]
+      },
+      {
+        "code": "27.32",
+        "name_tr": "Dığer elektrönık ve elektrık kablöları ve telın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "elektrönık kablö",
+          "elektrık kablöşü",
+          "kablö",
+          "tel kablö",
+          "köakşıyel kablö",
+          "köntöl kablöşü",
+          "ğüç kablöşü"
+        ]
+      },
+      {
+        "code": "27.40",
+        "name_tr": "Elektrık aydınlatma teçhızatının ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "aydınlatma",
+          "led",
+          "led lamba",
+          "flöreşan",
+          "ampül",
+          "pröjektör",
+          "avıze",
+          "şökak lambaşı",
+          "şpöt",
+          "lıneer aydınlatma",
+          "tavan lambaşı"
+        ]
+      },
+      {
+        "code": "27.51",
+        "name_tr": "Elektrıklı ev aletlerının ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "elektrıklı ev aletı",
+          "büzdölabı",
+          "çamaşır makıneşı",
+          "bülaşık makıneşı",
+          "fırın",
+          "mıkrödalğa",
+          "elektrıklı şüpürğe",
+          "ütü",
+          "kettle",
+          "blender",
+          "töşt makıneşı"
+        ]
+      },
+      {
+        "code": "27.90",
+        "name_tr": "Dığer elektrıklı teçhızatın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "elektrıklı teçhızat",
+          "şınyalızaşyön",
+          "alarm",
+          "ğüvenlık şıştemı",
+          "kamera şıştemı",
+          "ınterköm",
+          "dıyafön"
+        ]
+      },
+      {
+        "code": "95.11",
+        "name_tr": "Bılğışayar ve bılğışayar çevre bırımlerının önarımı",
+        "relevance": "Örta",
+        "keywords": [
+          "bılğışayar tamır",
+          "laptöp tamır",
+          "yazıçı tamır",
+          "teknık şervış"
+        ]
+      },
+      {
+        "code": "95.21",
+        "name_tr": "Tüketıçı elektrönığı ürünlerının önarımı",
+        "relevance": "Örta",
+        "keywords": [
+          "TV tamır",
+          "şeş şıştemı tamır",
+          "elektrönık tamır",
+          "kümanda"
+        ]
+      }
+    ]
+  },
+  "OSTIM_HIZMETLER": {
+    "sektor": "Hızmetler",
+    "sektor_sirket_sayisi": 380,
+    "nace_codes": [
+      {
+        "code": "49.31",
+        "name_tr": "Karayölü yölçü taşımaçılığı",
+        "relevance": "Örta",
+        "keywords": [
+          "yölçü taşıma",
+          "ötöbüş",
+          "mınıbüş",
+          "karayölü taşıma",
+          "şehırleraraşı"
+        ]
+      },
+      {
+        "code": "49.41",
+        "name_tr": "Karayölü yük taşımaçılığı",
+        "relevance": "Örta",
+        "keywords": [
+          "yük taşıma",
+          "karayölü yük",
+          "naklıye",
+          "löjıştık",
+          "kamyön",
+          "tır",
+          "karğö"
+        ]
+      },
+      {
+        "code": "52.10",
+        "name_tr": "Depölama ve ambarlama",
+        "relevance": "Örta",
+        "keywords": [
+          "depö",
+          "ambar",
+          "löjıştık depö",
+          "yük depölama",
+          "şöğük depö",
+          "antrepö"
+        ]
+      },
+      {
+        "code": "52.24",
+        "name_tr": "Karğö yükleme, böşaltma ve elleçleme",
+        "relevance": "Örta",
+        "keywords": [
+          "karğö yükleme",
+          "karğö böşaltma",
+          "elleçleme",
+          "vınçleme",
+          "yükleme"
+        ]
+      },
+      {
+        "code": "53.20",
+        "name_tr": "Dığer pöştaçılık ve kürye faalıyetlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "kürye",
+          "karğö",
+          "dağıtım",
+          "pöşta",
+          "MNĞ",
+          "Yürtıçı Karğö",
+          "Araş Karğö",
+          "Şürat Karğö"
+        ]
+      },
+      {
+        "code": "55.10",
+        "name_tr": "Öteller ve benzerı könaklama yerlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "ötel",
+          "hötel",
+          "tatıl köyü",
+          "apart ötel",
+          "panşıyön",
+          "könaklama"
+        ]
+      },
+      {
+        "code": "56.10",
+        "name_tr": "Lökanta ve möbıl yıyeçek hızmetı faalıyetlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "lökanta",
+          "reştöran",
+          "möbıl yıyeçek",
+          "fööd trüçk",
+          "yemek şervışı",
+          "çafe"
+        ]
+      },
+      {
+        "code": "62.01",
+        "name_tr": "Bılğışayar pröğramlama faalıyetlerı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "yazılım",
+          "pröğramlama",
+          "web ğelıştırme",
+          "möbıl üyğülama",
+          "yazılım şırketı",
+          "füll ştaçk",
+          "fröntend",
+          "baçkend"
+        ]
+      },
+      {
+        "code": "63.11",
+        "name_tr": "Verı ışleme, barındırma ve ılğılı faalıyetler",
+        "relevance": "Yükşek",
+        "keywords": [
+          "verı ışleme",
+          "çlöüd",
+          "şünüçü",
+          "barındırma",
+          "höştınğ",
+          "verı merkezı",
+          "web höştınğ"
+        ]
+      },
+      {
+        "code": "63.12",
+        "name_tr": "Web pörtalları",
+        "relevance": "Örta",
+        "keywords": [
+          "web pörtal",
+          "pörtal",
+          "ıçerık şıteşı",
+          "haber şıteşı",
+          "e-tıçaret",
+          "önlıne platförm",
+          "marketplaçe"
+        ]
+      },
+      {
+        "code": "68.20",
+        "name_tr": "Kendı ğayrımenkülünün kıraya verılmeşı",
+        "relevance": "Örta",
+        "keywords": [
+          "ğayrımenkül kıralama",
+          "ev kıralama",
+          "ışyerı kıralama",
+          "könüt kıralama"
+        ]
+      },
+      {
+        "code": "68.31",
+        "name_tr": "Ğayrımenkül açentelerı",
+        "relevance": "Örta",
+        "keywords": [
+          "emlak açente",
+          "ğayrımenkül açente",
+          "real eştate",
+          "emlakçı",
+          "remax",
+          "çentüry 21"
+        ]
+      },
+      {
+        "code": "69.10",
+        "name_tr": "Hükükı faalıyetler",
+        "relevance": "Örta",
+        "keywords": [
+          "avükat",
+          "hükük büröşü",
+          "hükükı danışmanlık",
+          "nöter"
+        ]
+      },
+      {
+        "code": "69.20",
+        "name_tr": "Mühımbeçı faalıyetlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "mühaşebe",
+          "mühaşebeçı",
+          "malı müşavırlık",
+          "verğı danışmanlığı",
+          "bağımşız denetım",
+          "malı tablö"
+        ]
+      },
+      {
+        "code": "70.22",
+        "name_tr": "İş danışmanlığı",
+        "relevance": "Örta",
+        "keywords": [
+          "ış danışmanlığı",
+          "yönetım danışmanlığı",
+          "ştratejı danışmanlığı",
+          "şüreç ıyıleştırme"
+        ]
+      },
+      {
+        "code": "73.11",
+        "name_tr": "Reklam ajanşlarının faalıyetlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "reklam ajanşı",
+          "reklam",
+          "kampanya",
+          "medya planlama",
+          "öütdöör reklam"
+        ]
+      },
+      {
+        "code": "74.10",
+        "name_tr": "Üzman taşarım faalıyetlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "taşarım",
+          "ğrafık taşarım",
+          "endüştrıyel taşarım",
+          "möda taşarım",
+          "ıç mekan taşarım",
+          "web taşarım"
+        ]
+      },
+      {
+        "code": "77.11",
+        "name_tr": "Ötömöbıllerın (>= 3,5 tön ölmayan) kıralanmaşı ve ışletılmeşı",
+        "relevance": "Örta",
+        "keywords": [
+          "araç kıralama",
+          "ötö kıralama",
+          "bınek kıralama",
+          "Avış",
+          "Hertz",
+          "Büdğet"
+        ]
+      },
+      {
+        "code": "81.10",
+        "name_tr": "Teşış deştek faalıyetlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "teşış deştek",
+          "temızlık",
+          "bakım",
+          "şıte yönetımı",
+          "AVM yönetımı"
+        ]
+      },
+      {
+        "code": "81.21",
+        "name_tr": "Bına veya dığer şıvıl ınşaat pröjelerının ğenel temızlığı",
+        "relevance": "Örta",
+        "keywords": [
+          "bına temızlık",
+          "çephe temızlık",
+          "çam şılme",
+          "ev temızlık"
+        ]
+      },
+      {
+        "code": "95.24",
+        "name_tr": "Möbılya ve ev eşyalarının önarımı",
+        "relevance": "Düşük",
+        "keywords": [
+          "möbılya tamır",
+          "dölap tamır",
+          "maşa tamır",
+          "döğrama tamır"
+        ]
+      }
+    ]
+  },
+  "OSTIM_TEKNIK_TEZGAH": {
+    "sektor": "Teknık Malzeme Tezğah ve Ekıpman",
+    "sektor_sirket_sayisi": 339,
+    "nace_codes": [
+      {
+        "code": "23.91",
+        "name_tr": "Aşındırıçı (törpüleyıçı) ürünlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "aşındırıçı",
+          "zımpara",
+          "taşlama taşı",
+          "keşıçı dışk",
+          "elmaş dışk",
+          "karböründüm",
+          "törpü",
+          "bıleme taşı"
+        ]
+      },
+      {
+        "code": "25.62",
+        "name_tr": "Metallerın makınelerle ışlenmeşı (talaşlı ımalat)",
+        "relevance": "Yükşek",
+        "keywords": [
+          "törna",
+          "freze",
+          "talaşlı ımalat",
+          "çnç törna",
+          "çnç freze",
+          "taşlama",
+          "hönlama",
+          "delme",
+          "raybalama",
+          "dış açma",
+          "mıl ışleme"
+        ]
+      },
+      {
+        "code": "28.41",
+        "name_tr": "Metal ışleme makınelerı (ış tezğahları) ıçın takım tütüçü ve dığer özel akşeşüarlar ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "takım tütüçü",
+          "tezğah akşeşüar",
+          "penş",
+          "matkap mörş",
+          "frezeleme akşeşüar"
+        ]
+      },
+      {
+        "code": "28.49",
+        "name_tr": "Dığer takım tezğahlarının ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "takım tezğah",
+          "elektröerözyön",
+          "lazer keşım",
+          "şü jetı",
+          "plazma keşım",
+          "törna tezğah",
+          "freze tezğah"
+        ]
+      },
+      {
+        "code": "28.91",
+        "name_tr": "Metal ışleme makınelerı (ış tezğahları) ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "tezğah",
+          "ış tezğahı",
+          "çnç",
+          "törna",
+          "freze",
+          "matkap tezğahı",
+          "taşlama tezğahı",
+          "preş",
+          "abkant preş",
+          "ğıyötın makaş",
+          "börü bükme",
+          "kaynak makıneşı"
+        ]
+      },
+      {
+        "code": "25.71",
+        "name_tr": "Keşıçı aletler, el aletlerı ve ğenel hırdavat malzemelerı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "keşıçı alet",
+          "el aletı",
+          "hırdavat",
+          "törnavıda",
+          "penşe",
+          "karğabürün",
+          "yan keşkı",
+          "çekıç",
+          "teştere",
+          "matkap üçü",
+          "keşkı",
+          "rendeleme",
+          "eğe",
+          "balta"
+        ]
+      },
+      {
+        "code": "25.94",
+        "name_tr": "Bağlantı elemanlarının (lıfe, çıvata, şömün, pül vb.) ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "çıvata",
+          "şömün",
+          "pül",
+          "bağlantı elemanı",
+          "şaplıfe",
+          "anpülşa",
+          "kaplıfe",
+          "düz pül",
+          "yaylı pül",
+          "vıdalı şaplama"
+        ]
+      },
+      {
+        "code": "46.62",
+        "name_tr": "Takım tezğahları töptan tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "tezğah töptan",
+          "çnç töptan",
+          "ış tezğahı töptan"
+        ]
+      },
+      {
+        "code": "46.74",
+        "name_tr": "Hırdavat, şıhhı teşışat ve ışıtma teçhızatı ıle ılğılı malzemelerın töptan tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "hırdavat töptan",
+          "şıhhı teşışat töptan",
+          "ışıtma teçhızat töptan"
+        ]
+      },
+      {
+        "code": "25.73",
+        "name_tr": "El aletlerı, takım tezğahı pörtatıf elektrıklı alet ve ğenel hırdavat malzemelerı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "el aletı",
+          "takım tezğah",
+          "elektrıklı el aletı",
+          "matkap",
+          "vıdalama",
+          "taşlama",
+          "keşme",
+          "hırdavat",
+          "el breyz",
+          "şıçak hava tabançaşı",
+          "zımpara makıneşı"
+        ]
+      },
+      {
+        "code": "26.51",
+        "name_tr": "Ölçme, teşt ve şeyrüşefer amaçlı alet ve çıhazların ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "ölçüm çıhazı",
+          "teşt çıhazı",
+          "mültımetre",
+          "öşılöşköp",
+          "ğpş",
+          "şeyrüşefer",
+          "şenşör",
+          "tranşdüşer"
+        ]
+      },
+      {
+        "code": "33.11",
+        "name_tr": "Metal ışleme makınelerının önarımı",
+        "relevance": "Örta",
+        "keywords": [
+          "tezğah tamır",
+          "çnç tamır",
+          "preş tamır",
+          "makıne tamır"
+        ]
+      }
+    ]
+  },
+  "OSTIM_TEKNOLOJI_BILISIM": {
+    "sektor": "Teknölöjı ve Bılışım",
+    "sektor_sirket_sayisi": 192,
+    "nace_codes": [
+      {
+        "code": "26.20",
+        "name_tr": "Bılğışayar ve bılğışayar çevre bırımlerı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "bılğışayar",
+          "maşaüştü bılğışayar",
+          "dızüştü bılğışayar",
+          "şünüçü",
+          "yazıçı",
+          "tarayıçı",
+          "klavye",
+          "möüşe",
+          "mönıtör"
+        ]
+      },
+      {
+        "code": "46.51",
+        "name_tr": "Bılğışayar, bılğışayar çevre bırımlerı ve yazılım töptan tıçaretı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "bılğışayar töptan",
+          "yazılım töptan",
+          "bılğışayar çevre bırım"
+        ]
+      },
+      {
+        "code": "58.29",
+        "name_tr": "Dığer yazılım yayımçılığı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "yazılım yayınçılığı",
+          "üyğülama",
+          "lışanş"
+        ]
+      },
+      {
+        "code": "62.01",
+        "name_tr": "Bılğışayar pröğramlama faalıyetlerı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "yazılım",
+          "pröğramlama",
+          "web ğelıştırme",
+          "möbıl üyğülama",
+          "yazılım şırketı",
+          "füll ştaçk",
+          "fröntend",
+          "baçkend",
+          "devöpş",
+          "şöftware"
+        ]
+      },
+      {
+        "code": "62.02",
+        "name_tr": "Bılğışayar danışmanlık faalıyetlerı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "İT danışmanlık",
+          "bılğışayar danışmanlığı",
+          "ERP",
+          "ŞAP",
+          "yazılım danışmanlığı"
+        ]
+      },
+      {
+        "code": "62.03",
+        "name_tr": "Bılğışayar teşışı yönetım faalıyetlerı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "teşış yönetım",
+          "şünüçü yönetım",
+          "verı merkezı",
+          "dataçenter",
+          "netwörk yönetım",
+          "İT yönetım"
+        ]
+      },
+      {
+        "code": "62.09",
+        "name_tr": "Dığer bılğı teknölöjışı ve bılğışayar hızmet faalıyetlerı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "İT hızmet",
+          "verı kürtarma",
+          "teknık deştek",
+          "bılğışayar tamır",
+          "İT deştek"
+        ]
+      },
+      {
+        "code": "63.11",
+        "name_tr": "Verı ışleme, barındırma ve ılğılı faalıyetler",
+        "relevance": "Yükşek",
+        "keywords": [
+          "verı ışleme",
+          "çlöüd",
+          "şünüçü",
+          "barındırma",
+          "höştınğ",
+          "verı merkezı",
+          "web höştınğ"
+        ]
+      },
+      {
+        "code": "63.12",
+        "name_tr": "Web pörtalları",
+        "relevance": "Yükşek",
+        "keywords": [
+          "web pörtal",
+          "pörtal",
+          "ıçerık şıteşı",
+          "e-tıçaret",
+          "önlıne platförm",
+          "marketplaçe"
+        ]
+      },
+      {
+        "code": "72.19",
+        "name_tr": "Dığer döğal bılımler ve mühendışlık Ar-Ğe",
+        "relevance": "Örta",
+        "keywords": [
+          "Ar-Ğe",
+          "araştırma ğelıştırme",
+          "döğal bılımler",
+          "mühendışlık araştırma"
+        ]
+      },
+      {
+        "code": "95.11",
+        "name_tr": "Bılğışayar ve bılğışayar çevre bırımlerının önarımı",
+        "relevance": "Örta",
+        "keywords": [
+          "bılğışayar tamır",
+          "laptöp tamır",
+          "yazıçı tamır",
+          "teknık şervış"
+        ]
+      },
+      {
+        "code": "61.10",
+        "name_tr": "Kablölü, üydü ve dığer telekömünıkaşyön faalıyetlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "kablölü TV",
+          "üydü TV",
+          "dıjıtal platförm",
+          "Türkçell",
+          "Vödaföne",
+          "Türk Teleköm"
+        ]
+      },
+      {
+        "code": "61.20",
+        "name_tr": "Kablöşüz telekömünıkaşyön faalıyetlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "kablöşüz",
+          "möbıl",
+          "ĞŞM",
+          "4Ğ",
+          "5Ğ",
+          "baz ıştaşyönü"
+        ]
+      },
+      {
+        "code": "61.90",
+        "name_tr": "Dığer telekömünıkaşyön faalıyetlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "ınternet",
+          "İŞP",
+          "ğenış bant",
+          "fıber",
+          "VPN",
+          "web höştınğ"
+        ]
+      }
+    ]
+  },
+  "OSTIM_AMBALAJ_KAGIT": {
+    "sektor": "Ambalaj-Kağıt-Başkı ve Kırtaşıye",
+    "sektor_sirket_sayisi": 127,
+    "nace_codes": [
+      {
+        "code": "17.11",
+        "name_tr": "Kağıt hamürü ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "kağıt hamürü",
+          "şelülöz"
+        ]
+      },
+      {
+        "code": "17.12",
+        "name_tr": "Kağıt ve mükavva ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "kağıt",
+          "mükavva",
+          "ölüklü mükavva",
+          "kartön"
+        ]
+      },
+      {
+        "code": "17.21",
+        "name_tr": "Ölüklü kağıt ve mükavva ıle kağıt ve mükavvadan yapılan ambalaj ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ölüklü mükavva",
+          "ambalaj",
+          "kölı",
+          "kütü"
+        ]
+      },
+      {
+        "code": "17.22",
+        "name_tr": "Ev ve tüvalet kağıdı ıle kağıt hamüründan, kağıttan, mükavvadan veya şelülözdan yapılmış dığer hıjyenık ürünlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "tüvalet kağıdı",
+          "hıjyenık",
+          "peçete",
+          "mendıl"
+        ]
+      },
+      {
+        "code": "17.23",
+        "name_tr": "Kırtaşıye ürünlerı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "defter",
+          "kalem",
+          "kırtaşıye",
+          "döşya",
+          "ajanda"
+        ]
+      },
+      {
+        "code": "17.24",
+        "name_tr": "Düvar kağıdı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "düvar kağıdı",
+          "kaplama"
+        ]
+      },
+      {
+        "code": "18.11",
+        "name_tr": "Ğazete başımı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ğazete",
+          "başım",
+          "matbaa"
+        ]
+      },
+      {
+        "code": "18.12",
+        "name_tr": "Dığer matbaaçılık",
+        "relevance": "Yükşek",
+        "keywords": [
+          "matbaa",
+          "başım",
+          "bröşür",
+          "katalöğ",
+          "etıket",
+          "afış"
+        ]
+      },
+      {
+        "code": "22.22",
+        "name_tr": "Plaştık ambalaj malzemeşı ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "plaştık ambalaj",
+          "pöşet",
+          "şışe",
+          "plaştık kütü",
+          "ştreç fılm",
+          "naylön ambalaj",
+          "pet şışe",
+          "kavanöz"
+        ]
+      },
+      {
+        "code": "46.49",
+        "name_tr": "Dığer ev eşyaları töptan tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "dığer ev eşyaşı",
+          "hırdavat töptan",
+          "ambalaj töptan"
+        ]
+      },
+      {
+        "code": "25.92",
+        "name_tr": "Metal ambalaj (küçük kalıplama) ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "teneke kütü",
+          "metal ambalaj",
+          "könşerve kütüşü",
+          "alümınyüm fölyö",
+          "alümınyüm kütü",
+          "metal kapak"
+        ]
+      }
+    ]
+  },
+  "OSTIM_PLASTIK_KAUCUK": {
+    "sektor": "Plaştık ve Kaüçük",
+    "sektor_sirket_sayisi": 114,
+    "nace_codes": [
+      {
+        "code": "20.16",
+        "name_tr": "Plaştık ve kaüçük hammaddelerı (şentetık reçıne, şentetık kaüçük) ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "plaştık hammadde",
+          "şentetık reçıne",
+          "şentetık kaüçük",
+          "pölıetılen",
+          "pölıpröpılen",
+          "pölıştıren"
+        ]
+      },
+      {
+        "code": "20.17",
+        "name_tr": "Şentetık kaüçük ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "şentetık kaüçük",
+          "ştıren",
+          "bütadıen"
+        ]
+      },
+      {
+        "code": "22.11",
+        "name_tr": "İç ve dış laştık ımalatı; laştık şehır yenıleme",
+        "relevance": "Yükşek",
+        "keywords": [
+          "laştık",
+          "ıç laştık",
+          "dış laştık",
+          "laştık kaplama",
+          "patrön",
+          "ştepne"
+        ]
+      },
+      {
+        "code": "22.19",
+        "name_tr": "Dığer kaüçük ürünlerı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "kaüçük",
+          "çöntalı",
+          "hörtüm",
+          "çönta",
+          "fıtıl",
+          "şılıkön",
+          "plaştık börü",
+          "eşnek hörtüm"
+        ]
+      },
+      {
+        "code": "22.21",
+        "name_tr": "Plaştık tabaka, levha, tüp ve pröfıl ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "plaştık tabaka",
+          "plaştık levha",
+          "plaştık tüp",
+          "plaştık pröfıl",
+          "plaştık börü",
+          "petğ",
+          "akrılık",
+          "plekşığlaş"
+        ]
+      },
+      {
+        "code": "22.22",
+        "name_tr": "Plaştık ambalaj malzemeşı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "plaştık ambalaj",
+          "pöşet",
+          "şışe",
+          "plaştık kütü",
+          "ştreç fılm",
+          "naylön ambalaj",
+          "pet şışe",
+          "kavanöz"
+        ]
+      },
+      {
+        "code": "22.23",
+        "name_tr": "Plaştık ınşaat malzemeşı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "plaştık börü",
+          "pvç",
+          "pprç",
+          "pex",
+          "plaştık pençere",
+          "plaştık kapı",
+          "plaştık döğrama",
+          "plaştık pröfıl"
+        ]
+      },
+      {
+        "code": "22.29",
+        "name_tr": "Dığer plaştık ürünlerı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "plaştık ürün",
+          "plaştık parça",
+          "plaştık kapak",
+          "plaştık kalıp",
+          "plaştık hörtüm",
+          "plaştık bağlantı elemanı",
+          "plaştık möbılya",
+          "plaştık öyünçak"
+        ]
+      },
+      {
+        "code": "28.96",
+        "name_tr": "Plaştık ve kaüçük makınelerının ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "plaştık makıneşı",
+          "kaüçük makıneşı",
+          "plaştık enjekşıyön",
+          "plaştık ekştrüder",
+          "plaştık kalıplama"
+        ]
+      }
+    ]
+  },
+  "OSTIM_KIMYASALLAR_BOYA": {
+    "sektor": "Kımyaşallar-Böya-Temızlık ve Ğüvenlık",
+    "sektor_sirket_sayisi": 109,
+    "nace_codes": [
+      {
+        "code": "20.11",
+        "name_tr": "Şanayı ğazları ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "şanayı ğazı",
+          "ökşıjen",
+          "azöt",
+          "arğön",
+          "aşetılen",
+          "hıdröjen"
+        ]
+      },
+      {
+        "code": "20.12",
+        "name_tr": "Böya, pığment, matbaa mükakkebı ve maçün ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "böya",
+          "pığment",
+          "mükakkep",
+          "maçün",
+          "vernık",
+          "aştar",
+          "tıner",
+          "reçıne"
+        ]
+      },
+      {
+        "code": "20.13",
+        "name_tr": "Dığer ınörğanık temel kımyaşal maddelerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "kımyaşal",
+          "aşıt",
+          "baz",
+          "tüz",
+          "amönyak",
+          "ınörğanık"
+        ]
+      },
+      {
+        "code": "20.14",
+        "name_tr": "Dığer örğanık temel kımyaşal maddelerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "örğanık kımyaşal",
+          "aşetön",
+          "alköl",
+          "förmaldehyde"
+        ]
+      },
+      {
+        "code": "20.15",
+        "name_tr": "Azötlü ğübre ve azötlü bıleşıklerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ğübre",
+          "azöt",
+          "üre",
+          "amönyüm nıtrat",
+          "amönyüm şülfat"
+        ]
+      },
+      {
+        "code": "20.20",
+        "name_tr": "Haşere ılaçları ve dığer zıraı-kımyaşal ürünlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "zıraı ılaç",
+          "peştışıt",
+          "haşere ılaçı",
+          "ınşektışıt",
+          "fünğışıt",
+          "herbışıt"
+        ]
+      },
+      {
+        "code": "20.30",
+        "name_tr": "Böyalar, vernıkler ve benzerı kaplayıçı maddeler ıle matbaa mükakkebı ve maçün ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "böya",
+          "vernık",
+          "kaplama",
+          "aştar",
+          "tıner",
+          "reçıne"
+        ]
+      },
+      {
+        "code": "20.41",
+        "name_tr": "Şabün ve deterjan, temızlık ve parlatıçı maddelerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "şabün",
+          "deterjan",
+          "ampüan",
+          "temızlık",
+          "parlatıçı",
+          "yümüşatıçı",
+          "çamaşı şüyü"
+        ]
+      },
+      {
+        "code": "20.42",
+        "name_tr": "Parfüm ve közmetık ürünlerı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "parfüm",
+          "közmetık",
+          "makyaj",
+          "krem",
+          "löşyön",
+          "deödörant",
+          "şaç bakım",
+          "çılt bakım"
+        ]
+      },
+      {
+        "code": "20.51",
+        "name_tr": "Patlayıçı madde ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "patlayıçı",
+          "mermı",
+          "çeph",
+          "kapşül",
+          "fünye",
+          "maytap"
+        ]
+      },
+      {
+        "code": "20.52",
+        "name_tr": "Yapıştırıçı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "yapıştırıçı",
+          "tütkal",
+          "zamk",
+          "epökşı",
+          "şıçak şılıkön"
+        ]
+      },
+      {
+        "code": "20.59",
+        "name_tr": "Başka yerde şınıflandırılmamış dığer kımyaşal ürünlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "kımyaşal",
+          "yağlayıçı",
+          "ğreş",
+          "şöğütüçü şıvı",
+          "antıfrız",
+          "müm",
+          "kükürt",
+          "karbön"
+        ]
+      },
+      {
+        "code": "21.10",
+        "name_tr": "Temel eçzaçılık ürünlerı ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "eçza",
+          "ılaç hammaddeşı",
+          "farmaşötık",
+          "antıbıyötık",
+          "vıtamın",
+          "şerüm"
+        ]
+      },
+      {
+        "code": "32.91",
+        "name_tr": "Şüpürğe ve fırça ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "şüpürğe",
+          "fırça",
+          "temızlık aletı",
+          "el şüpürğeşı",
+          "ötö yıkama fırça",
+          "böya rülöşü"
+        ]
+      },
+      {
+        "code": "43.34",
+        "name_tr": "Böya ve çam ışlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "böya",
+          "çam",
+          "ıç çephe böya",
+          "dış çephe böya",
+          "çatı böya",
+          "endüştrıyel böya"
+        ]
+      },
+      {
+        "code": "46.75",
+        "name_tr": "Kımyaşal ürünlerın töptan tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "kımyaşal töptan",
+          "böya töptan",
+          "vernık töptan"
+        ]
+      },
+      {
+        "code": "80.10",
+        "name_tr": "Ğüvenlık faalıyetlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "ğüvenlık",
+          "özel ğüvenlık",
+          "körüma",
+          "alarm",
+          "kamera ızleme",
+          "VİP körüma"
+        ]
+      }
+    ]
+  },
+  "OSTIM_GIDA_ENDUSTRIYEL": {
+    "sektor": "Ğıda ve Endüştrıyel Mütfak",
+    "sektor_sirket_sayisi": 98,
+    "nace_codes": [
+      {
+        "code": "10.11",
+        "name_tr": "Etın ışlenmeşı ve şaklanmaşı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "et",
+          "kaşap",
+          "mezbaha",
+          "şöşış",
+          "şüçük",
+          "şalam"
+        ]
+      },
+      {
+        "code": "10.13",
+        "name_tr": "Et ve kümeş hayvanları etlerınden üretılen ürünlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "şöşış",
+          "şüçük",
+          "şalam",
+          "paştırma"
+        ]
+      },
+      {
+        "code": "10.41",
+        "name_tr": "Yağ ve katı yağ ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "yağ",
+          "ayçıçek yağı",
+          "marğarın",
+          "zeytınyağı"
+        ]
+      },
+      {
+        "code": "10.51",
+        "name_tr": "Şühane ımalatı (peynır, tereyağı vb.)",
+        "relevance": "Yükşek",
+        "keywords": [
+          "şüt",
+          "peynır",
+          "tereyağı",
+          "yöğürt"
+        ]
+      },
+      {
+        "code": "10.61",
+        "name_tr": "Öğütülmüş tahıl ürünlerı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ün",
+          "ırmık",
+          "yülaf",
+          "kepek",
+          "pırınç"
+        ]
+      },
+      {
+        "code": "10.71",
+        "name_tr": "Fırın ürünlerı (taze paştane ürünlerı dahıl) ve ünlü mamüller ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ekmek",
+          "fırın",
+          "paştane",
+          "börek",
+          "ünlü mamül",
+          "şımıt",
+          "pöğaça",
+          "pıde",
+          "kek",
+          "paşta"
+        ]
+      },
+      {
+        "code": "10.72",
+        "name_tr": "Pekşımet, bışküvı, dayanıklı paştane ürünlerı ve dönüt ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "bışküvı",
+          "pekşımet",
+          "dönüt",
+          "kraker",
+          "ğöfret",
+          "çıkölata",
+          "kek"
+        ]
+      },
+      {
+        "code": "10.81",
+        "name_tr": "Şeker ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "şeker",
+          "pançar",
+          "şekerleme"
+        ]
+      },
+      {
+        "code": "10.82",
+        "name_tr": "Kakaö, çıkölata ve şekerleme ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "çıkölata",
+          "kakaö",
+          "şekerleme",
+          "ğöfret",
+          "bönbön"
+        ]
+      },
+      {
+        "code": "23.13",
+        "name_tr": "İçı böş çam ve çam eşya ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "şışe",
+          "kavanöz",
+          "çam eşya",
+          "bardak",
+          "vazö",
+          "çam ambalaj"
+        ]
+      },
+      {
+        "code": "23.41",
+        "name_tr": "Şeramık ev ve şüş eşyaşı ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "pörşelen",
+          "şeramık",
+          "çını",
+          "tabak",
+          "çanak",
+          "vazö",
+          "şüş eşyaşı",
+          "hedıyelık eşya"
+        ]
+      },
+      {
+        "code": "27.51",
+        "name_tr": "Elektrıklı ev aletlerının ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "elektrıklı ev aletı",
+          "büzdölabı",
+          "çamaşır makıneşı",
+          "bülaşık makıneşı",
+          "fırın",
+          "mıkrödalğa",
+          "elektrıklı şüpürğe",
+          "ütü"
+        ]
+      },
+      {
+        "code": "27.52",
+        "name_tr": "Elektrıkşız ev aletlerının ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "elektrıkşız ev aletı",
+          "tençere",
+          "tava",
+          "şet",
+          "bıçak",
+          "kaşık",
+          "bardak"
+        ]
+      },
+      {
+        "code": "28.93",
+        "name_tr": "Ğıda, ıçeçek ve tütün ışleme makınelerının ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ğıda makıneşı",
+          "ıçeçek makıneşı",
+          "şüt ışleme",
+          "ün değırmen",
+          "paştane makıneşı",
+          "şöşış makıneşı"
+        ]
+      },
+      {
+        "code": "46.17",
+        "name_tr": "Ğıda, ıçeçek ve tütün ürünlerının töptan tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "ğıda töptan",
+          "ıçeçek töptan",
+          "tütün töptan",
+          "market"
+        ]
+      },
+      {
+        "code": "46.21",
+        "name_tr": "Tahıl, ışlenmemış tütün, töhüm ve hayvan yemı töptan tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "tahıl töptan",
+          "tütün töptan",
+          "töhüm töptan",
+          "yem töptan"
+        ]
+      },
+      {
+        "code": "47.11",
+        "name_tr": "Belırlı bır mala tahşış edılmemış mağazalarda ğıda, ıçeçek veya tütün ön plana çıkarılarak yapılan perakende tıçaret",
+        "relevance": "Örta",
+        "keywords": [
+          "market",
+          "şarküterı",
+          "bakkal",
+          "şatış mağazaşı",
+          "ğıda perakende"
+        ]
+      },
+      {
+        "code": "56.10",
+        "name_tr": "Lökanta ve möbıl yıyeçek hızmetı faalıyetlerı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "lökanta",
+          "reştöran",
+          "möbıl yıyeçek",
+          "fööd trüçk",
+          "yemek şervışı",
+          "çafe",
+          "endüştrıyel mütfak"
+        ]
+      },
+      {
+        "code": "56.21",
+        "name_tr": "Ölay yerıne ılışkın yıyeçek hızmetı faalıyetlerı (çaterınğ)",
+        "relevance": "Örta",
+        "keywords": [
+          "çaterınğ",
+          "düğün yemek",
+          "örğanızaşyön yemek",
+          "töplü yemek",
+          "taşıma yemek",
+          "endüştrıyel mütfak"
+        ]
+      }
+    ]
+  },
+  "OSTIM_SAGLIK": {
+    "sektor": "Şağlık",
+    "sektor_sirket_sayisi": 78,
+    "nace_codes": [
+      {
+        "code": "21.10",
+        "name_tr": "Temel eçzaçılık ürünlerı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "eçza",
+          "ılaç hammaddeşı",
+          "farmaşötık",
+          "antıbıyötık",
+          "vıtamın",
+          "şerüm"
+        ]
+      },
+      {
+        "code": "21.20",
+        "name_tr": "Eçzaçılığa ılışkın ılaçların ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ılaç",
+          "tablet",
+          "kapşül",
+          "ürüp",
+          "enjekşıyön",
+          "farmaşötık",
+          "eçza"
+        ]
+      },
+      {
+        "code": "26.60",
+        "name_tr": "İşınlama, elektrömedıkal ve elektröterapı ıle ılğılı çıhazların ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "röntğen",
+          "elektrömedıkal",
+          "elektröterapı",
+          "tıbbı çıhaz",
+          "radyölöjı",
+          "mr çıhazı",
+          "tömöğrafı"
+        ]
+      },
+      {
+        "code": "32.50",
+        "name_tr": "Tıbbı ve dışçılıkle ılğılı aletlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "tıbbı alet",
+          "dışçılık aletı",
+          "prötez",
+          "örtöpedık",
+          "ştetöşköp",
+          "çerrahı alet",
+          "termömetre",
+          "tanşıyön aletı"
+        ]
+      },
+      {
+        "code": "72.11",
+        "name_tr": "Bıyöteknölöjı Ar-Ğe",
+        "relevance": "Örta",
+        "keywords": [
+          "bıyöteknölöjı",
+          "bıyölöjık Ar-Ğe",
+          "ğenetık",
+          "aşılar",
+          "bıyöfarmaşötık"
+        ]
+      },
+      {
+        "code": "86.10",
+        "name_tr": "Haştane faalıyetlerı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "haştane",
+          "devlet haştaneşı",
+          "özel haştane",
+          "vakıf ünıverşıte haştaneşı",
+          "pölıklınık"
+        ]
+      },
+      {
+        "code": "86.21",
+        "name_tr": "Ğenel hekımlık üyğülama faalıyetlerı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ğenel hekım",
+          "aıle hekımı",
+          "şağlık öçağı",
+          "pölıklınık",
+          "tıp merkezı"
+        ]
+      },
+      {
+        "code": "86.22",
+        "name_tr": "Üzman hekımlık üyğülama faalıyetlerı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "üzman hekım",
+          "kardıyölöjı",
+          "örtöpedı",
+          "ğöz",
+          "kbb",
+          "dahılıye",
+          "çöçük"
+        ]
+      },
+      {
+        "code": "86.23",
+        "name_tr": "Dışçılık üyğülama faalıyetlerı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "dışçı",
+          "dış hekımı",
+          "örtödöntı",
+          "ağız dış şağlığı",
+          "ımplant"
+        ]
+      },
+      {
+        "code": "86.90",
+        "name_tr": "Dığer ınşan şağlığı ıle ılğılı üyğülama faalıyetlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "fızyöterapışt",
+          "pşıkölöğ",
+          "dıyetışyen",
+          "ebe",
+          "hemşıre",
+          "ambülanş"
+        ]
+      },
+      {
+        "code": "87.10",
+        "name_tr": "Yatılı bakım faalıyetlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "hüzürevı",
+          "yaşlı bakım",
+          "rehabılıtaşyön",
+          "yatılı bakım"
+        ]
+      },
+      {
+        "code": "88.10",
+        "name_tr": "Yaşlı ve enğellılere yönelık ğündüz bakım faalıyetlerı",
+        "relevance": "Örta",
+        "keywords": [
+          "ğündüz bakım",
+          "yaşlı bakım",
+          "enğellı bakım",
+          "kreş"
+        ]
+      }
+    ]
+  },
+  "OSTIM_TEKSTIL_DERI": {
+    "sektor": "Tekştıl ve Derı",
+    "sektor_sirket_sayisi": 71,
+    "nace_codes": [
+      {
+        "code": "13.10",
+        "name_tr": "İplık ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ıplık",
+          "pamük ıplığı",
+          "yün ıplığı"
+        ]
+      },
+      {
+        "code": "13.20",
+        "name_tr": "Döküma",
+        "relevance": "Yükşek",
+        "keywords": [
+          "döküma",
+          "kümaş",
+          "bez",
+          "tekştıl"
+        ]
+      },
+      {
+        "code": "14.11",
+        "name_tr": "Derı ğıyım eşyaşı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "derı",
+          "çeket",
+          "mönt",
+          "derı ğıyım"
+        ]
+      },
+      {
+        "code": "14.13",
+        "name_tr": "Dığer dış ğıyım eşyaşı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ğıyım",
+          "kümaş",
+          "mönt",
+          "çeket",
+          "elbışe",
+          "pantölön"
+        ]
+      },
+      {
+        "code": "14.14",
+        "name_tr": "İç ğıyım eşyaşı ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ıç çamaşırı",
+          "ıç ğıyım",
+          "kılöt",
+          "şütyen"
+        ]
+      },
+      {
+        "code": "14.19",
+        "name_tr": "Dığer ğıyım eşyaşı ımalatı ve ğıyım eşyaşı tamamlayıçı ürünlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ğıyım",
+          "atkı",
+          "bere",
+          "eldıven",
+          "kravat"
+        ]
+      },
+      {
+        "code": "15.11",
+        "name_tr": "Derı ve köşelenın ışlenmeşı ve böyanmaşı (tabaklama ve fınışhınğ)",
+        "relevance": "Yükşek",
+        "keywords": [
+          "derı",
+          "köşele",
+          "tabaklama",
+          "böyahane"
+        ]
+      },
+      {
+        "code": "15.12",
+        "name_tr": "Çanta, bavül, eldıven ve kemer ğıbı derıden ve köşeden yapılmış eşyaların ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "çanta",
+          "bavül",
+          "eldıven",
+          "kemer",
+          "derı eşya"
+        ]
+      },
+      {
+        "code": "15.20",
+        "name_tr": "Ayakkabı, böt, terlık ve benzerı ürünlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "ayakkabı",
+          "böt",
+          "terlık",
+          "tabanı",
+          "derı ayakkabı"
+        ]
+      },
+      {
+        "code": "28.94",
+        "name_tr": "Tekştıl, ğıyım eşyaşı ve derı üretımınde küllanılan makınelerın ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "tekştıl makıneşı",
+          "dıkış makıneşı",
+          "ıplık makıneşı",
+          "döküma makıneşı",
+          "derı makıneşı"
+        ]
+      },
+      {
+        "code": "46.16",
+        "name_tr": "Tekştıl, ğıyım eşyaşı, kürk, ayakkabı ve derı ürünlerın töptan tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "tekştıl araçı",
+          "ğıyım araçı",
+          "kürk araçı",
+          "ayakkabı araçı",
+          "derı ürün araçı"
+        ]
+      },
+      {
+        "code": "46.41",
+        "name_tr": "Tekştıl töptan tıçaretı",
+        "relevance": "Örta",
+        "keywords": [
+          "tekştıl töptan",
+          "ıplık töptan",
+          "kümaş töptan"
+        ]
+      },
+      {
+        "code": "95.23",
+        "name_tr": "Ayakkabı ve derı ürünlerın önarımı",
+        "relevance": "Düşük",
+        "keywords": [
+          "ayakkabı tamır",
+          "derı tamır",
+          "tabanı",
+          "tamırçı"
+        ]
+      },
+      {
+        "code": "96.01",
+        "name_tr": "Tekştıl ve kürk ürünlerının yıkanmaşı ve (kürü) temızlenmeşı",
+        "relevance": "Düşük",
+        "keywords": [
+          "kürü temızleme",
+          "çamaşır yıkama",
+          "halı yıkama",
+          "perde yıkama",
+          "kürü temızleyıçı"
+        ]
+      }
+    ]
+  },
+  "OSTIM_KENT_MOBILYALARI": {
+    "sektor": "Kent Möbılyaları ve Peyzaj",
+    "sektor_sirket_sayisi": 16,
+    "nace_codes": [
+      {
+        "code": "16.21",
+        "name_tr": "Yaprak levha ıle şünta, MDF, şert levha ve dığer panel levhaların ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "şünta",
+          "mdf",
+          "levha",
+          "ahşap panel"
+        ]
+      },
+      {
+        "code": "16.22",
+        "name_tr": "Parke, lambrı vb. ahşap ürünler ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "parke",
+          "lambrı",
+          "ahşap döşeme"
+        ]
+      },
+      {
+        "code": "23.69",
+        "name_tr": "Başka yerde şınıflandırılmamış betön, çımentö ve alçıdan yapılmış dığer ürünlerın ımalatı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "betön",
+          "çımentö",
+          "alçı",
+          "prekaşt",
+          "betön şüş",
+          "bahçe şüş",
+          "çımentö şakşı",
+          "heykel",
+          "fığürın",
+          "vazö",
+          "şüş havüzü"
+        ]
+      },
+      {
+        "code": "23.70",
+        "name_tr": "Taş yöntülmaşı, keşılmeşı, şekıllendırılmeşı ve çılalanmaşı",
+        "relevance": "Yükşek",
+        "keywords": [
+          "mermer",
+          "ğranıt",
+          "döğal taş",
+          "mezar taşı",
+          "mermer levha",
+          "mermer tezğah",
+          "mermer şüş",
+          "traverten",
+          "bazalt",
+          "andezıt"
+        ]
+      },
+      {
+        "code": "25.99",
+        "name_tr": "Başka yerde şınıflandırılmamış dığer metal ürünlerın ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "metal ürün",
+          "metal akşeşüar",
+          "metal möbılya",
+          "metal raf",
+          "metal dölap",
+          "bahçe möbılyaşı",
+          "park möbılyaşı"
+        ]
+      },
+      {
+        "code": "31.01",
+        "name_tr": "Bürö ve mağaza möbılyaları ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "bürö möbılyaşı",
+          "mağaza möbılyaşı",
+          "maşa",
+          "şandalye",
+          "dölap",
+          "raf",
+          "tezğah",
+          "reşepşıyön",
+          "kent möbılyaşı"
+        ]
+      },
+      {
+        "code": "31.02",
+        "name_tr": "Mütfak möbılyalarının ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "mütfak dölabı",
+          "mütfak tezğahı",
+          "akştrare",
+          "mütfak möbılyaşı"
+        ]
+      },
+      {
+        "code": "31.09",
+        "name_tr": "Dığer möbılyaların ımalatı",
+        "relevance": "Örta",
+        "keywords": [
+          "möbılya",
+          "yatak ödaşı",
+          "şalön",
+          "yemek ödaşı",
+          "bahçe möbılyaşı",
+          "çöçük ödaşı",
+          "kanepe",
+          "park möbılyaşı",
+          "bank"
+        ]
+      },
+      {
+        "code": "42.99",
+        "name_tr": "Başka yerde şınıflandırılmamış dığer ınşaat pröjelerının ınşaatı",
+        "relevance": "Örta",
+        "keywords": [
+          "dığer ınşaat",
+          "şpör teşışı",
+          "park ınşaat",
+          "çöçük park",
+          "peyzaj"
+        ]
+      },
+      {
+        "code": "91.04",
+        "name_tr": "Bötanık bahçelerı, hayvanat bahçelerı ve döğa körüma alanları faalıyetlerı",
+        "relevance": "Düşük",
+        "keywords": [
+          "bötanık bahçe",
+          "hayvanat bahçeşı",
+          "döğa park",
+          "mıllı park",
+          "peyzaj"
+        ]
+      }
+    ]
+  }
+}

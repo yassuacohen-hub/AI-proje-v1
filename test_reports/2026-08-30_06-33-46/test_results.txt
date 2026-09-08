@@ -1,15 +1,15 @@
-test_luhn_credit_card (test_platform.TestEnterpriseDataPlatform.test_luhn_credit_card)
-Kredi kartı Luhn algoritması testi. ... ok
-test_pii_scanner_column (test_platform.TestEnterpriseDataPlatform.test_pii_scanner_column)
-Sütun sınıflandırma ve güvenlik seviyesi testi. ... ok
-test_quality_engine_rules (test_platform.TestEnterpriseDataPlatform.test_quality_engine_rules)
-Veri kalitesi motoru ve kuralları testi. ... ok
-test_synthetic_data_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_data_generation)
-Sentetik veri üretimi testi. ... ok
-test_tckn_algorithm (test_platform.TestEnterpriseDataPlatform.test_tckn_algorithm)
-TCKN algoritması doğrulama testi. ... ok
-
-----------------------------------------------------------------------
-Ran 5 tests in 0.001s
-
-OK
+test_luhn_credit_card (test_platform.TestEnterpriseDataPlatform.test_luhn_credit_card)
+Kredi kartı Luhn algoritması testi. ... ok
+test_pii_scanner_column (test_platform.TestEnterpriseDataPlatform.test_pii_scanner_column)
+Sütun sınıflandırma ve güvenlik seviyesi testi. ... ok
+test_quality_engine_rules (test_platform.TestEnterpriseDataPlatform.test_quality_engine_rules)
+Veri kalitesi motoru ve kuralları testi. ... ok
+test_synthetic_data_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_data_generation)
+Sentetik veri üretimi testi. ... ok
+test_tckn_algorithm (test_platform.TestEnterpriseDataPlatform.test_tckn_algorithm)
+TCKN algoritması doğrulama testi. ... ok
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.001s
+
+OK

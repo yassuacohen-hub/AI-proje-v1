@@ -1,15 +1,15 @@
-{
-  "timestamp": "2026-08-30_06-52-12",
-  "total_tests": 16,
-  "passed": 15,
-  "failed": 1,
-  "error_count": 0,
-  "success": false,
-  "failures": [
-    {
-      "test": "test_phone_validation (test_platform.TestEnterpriseDataPlatform.test_phone_validation)",
-      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 134, in test_phone_validation\n    self.assertNotEqual(result, \"PHONE\", f\"Geçersiz telefon: {phone}\")\nAssertionError: 'PHONE' == 'PHONE' : Geçersiz telefon: +90 400 1234567\n"
-    }
-  ],
-  "errors": []
+{
+  "timestamp": "2026-08-30_06-52-12",
+  "total_tests": 16,
+  "passed": 15,
+  "failed": 1,
+  "error_count": 0,
+  "success": false,
+  "failures": [
+    {
+      "test": "test_phone_validation (test_platform.TestEnterpriseDataPlatform.test_phone_validation)",
+      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 134, in test_phone_validation\n    self.assertNotEqual(result, \"PHONE\", f\"Geçersiz telefon: {phone}\")\nAssertionError: 'PHONE' == 'PHONE' : Geçersiz telefon: +90 400 1234567\n"
+    }
+  ],
+  "errors": []
 }

@@ -1,15 +1,15 @@
-{
-  "timestamp": "2026-08-30_06-56-06",
-  "total_tests": 16,
-  "passed": 15,
-  "failed": 1,
-  "error_count": 0,
-  "success": false,
-  "failures": [
-    {
-      "test": "test_synthetic_email_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_email_generation)",
-      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 157, in test_synthetic_email_generation\n    self.assertEqual(result, \"EMAIL\", f\"Üretilen e-posta doğrulanmalı: {email}\")\nAssertionError: None != 'EMAIL' : Üretilen e-posta doğrulanmalı: i̇smail.çetin16@banka.com.tr\n"
-    }
-  ],
-  "errors": []
+{
+  "timestamp": "2026-08-30_06-56-06",
+  "total_tests": 16,
+  "passed": 15,
+  "failed": 1,
+  "error_count": 0,
+  "success": false,
+  "failures": [
+    {
+      "test": "test_synthetic_email_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_email_generation)",
+      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 157, in test_synthetic_email_generation\n    self.assertEqual(result, \"EMAIL\", f\"Üretilen e-posta doğrulanmalı: {email}\")\nAssertionError: None != 'EMAIL' : Üretilen e-posta doğrulanmalı: i̇smail.çetin16@banka.com.tr\n"
+    }
+  ],
+  "errors": []
 }

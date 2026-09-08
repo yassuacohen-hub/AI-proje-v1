@@ -1,23 +1,23 @@
-{
-  "timestamp": "2026-08-30_06-54-53",
-  "total_tests": 16,
-  "passed": 13,
-  "failed": 3,
-  "error_count": 0,
-  "success": false,
-  "failures": [
-    {
-      "test": "test_mixed_pii_detection (test_platform.TestEnterpriseDataPlatform.test_mixed_pii_detection)",
-      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 228, in test_mixed_pii_detection\n    self.assertEqual(result, expected_type)\nAssertionError: None != 'PHONE'\n"
-    },
-    {
-      "test": "test_synthetic_email_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_email_generation)",
-      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 157, in test_synthetic_email_generation\n    self.assertEqual(result, \"EMAIL\", f\"Üretilen e-posta doğrulanmalı: {email}\")\nAssertionError: None != 'EMAIL' : Üretilen e-posta doğrulanmalı: i̇smail.yıldız88@banka.com.tr\n"
-    },
-    {
-      "test": "test_synthetic_phone_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_phone_generation)",
-      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 171, in test_synthetic_phone_generation\n    self.assertEqual(result, \"PHONE\", f\"Üretilen telefon doğrulanmalı: {phone}\")\nAssertionError: None != 'PHONE' : Üretilen telefon doğrulanmalı: +90 560 818 51 98\n"
-    }
-  ],
-  "errors": []
+{
+  "timestamp": "2026-08-30_06-54-53",
+  "total_tests": 16,
+  "passed": 13,
+  "failed": 3,
+  "error_count": 0,
+  "success": false,
+  "failures": [
+    {
+      "test": "test_mixed_pii_detection (test_platform.TestEnterpriseDataPlatform.test_mixed_pii_detection)",
+      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 228, in test_mixed_pii_detection\n    self.assertEqual(result, expected_type)\nAssertionError: None != 'PHONE'\n"
+    },
+    {
+      "test": "test_synthetic_email_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_email_generation)",
+      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 157, in test_synthetic_email_generation\n    self.assertEqual(result, \"EMAIL\", f\"Üretilen e-posta doğrulanmalı: {email}\")\nAssertionError: None != 'EMAIL' : Üretilen e-posta doğrulanmalı: i̇smail.yıldız88@banka.com.tr\n"
+    },
+    {
+      "test": "test_synthetic_phone_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_phone_generation)",
+      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 171, in test_synthetic_phone_generation\n    self.assertEqual(result, \"PHONE\", f\"Üretilen telefon doğrulanmalı: {phone}\")\nAssertionError: None != 'PHONE' : Üretilen telefon doğrulanmalı: +90 560 818 51 98\n"
+    }
+  ],
+  "errors": []
 }

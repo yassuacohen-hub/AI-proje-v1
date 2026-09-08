@@ -340,6 +340,37 @@ Algoritmik olarak türetilen güncel ticari durum.
 
 Momentum yalnızca sinyal sayısı değildir.
 
+### 3.X Genisletilmis Tablolar (MVP Faz 1.2, 2026-09-01)
+
+Master 1.2 amaclari dogrultusunda 3 yeni yardimci tablo eklenmistir. Karar referansi: [[10_ankara_osb_sentez]] Karar 5.
+
+#### company_capabilities
+- Amac: Sirketin sundugu hizmet/urun kategorilerini saklamak
+- Tip: product | service | process | technology
+- OSTIM kullanimi: 17 sektor x 139 iskolu icin detayli yetenek kaydi
+- Kaynak: Manuel, scrape (OSTIM), API
+
+#### certifications
+- Amac: ISO, CE ve diger kalite belgelerini takip etmek
+- Alanlar: cert_type, cert_number, issued_by, issued_date, expiry_date, is_valid
+- Sorgu ornegi: Ivedik'te gecerli ISO 9001 sertifikasi olan firmalar
+
+#### key_personnel
+- Amac: Anahtar personel kaydi (Genel Mudur, Fabrika Muduru, vb.)
+- KVKK: is_public = 0 ise yalnizca yetkili kullanici gorebilir
+- Veri kaynagi: Yalnizca resmi OSB uye listesi veya sirket web sitesinden
+
+#### Mimari Kararlar
+- 3 yeni tablo da companies(id) foreign key ile iliskili (CASCADE delete)
+- Index'ler: company_id, type, nace_code bazli sorgular icin optimize
+- source alani ile veri kaynagi takibi (Master 6 Lint kurali)
+- is_valid ve is_public alanlari veri yasam dongusu ve KVKK uyumu icin
+
+#### Geriye Donuk Uyumluluk
+- Mevcut companies tablosunda degisiklik YOK
+- Yeni tablolar SQLite + PostgreSQL uyumlu
+- Migration: ALTER TABLE yok, sadece CREATE TABLE IF NOT EXISTS
+
 ## 4. Veri Kalitesi
 
 Temel boyutlar:
