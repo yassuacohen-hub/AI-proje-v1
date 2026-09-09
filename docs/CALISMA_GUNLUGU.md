@@ -1,4 +1,16 @@
 
+## 2026-09-09 — Topbar hizalama fix + match mantığı netleştirmesi
+
+**Topbar fix:** CANLI / Son güncelleme / Yenile iç içe geçiyordu → `.topbar-actions{flex-shrink:0;margin-left:auto;white-space:nowrap}` (sağa sabit) + brand `max-width:280px` ve dar ekran (<1100px) media query (slogan gizlenir, h1 küçülür). cache v7.
+
+**Match mantığı — 3 yön (kullanıcı sorusu üzerine netleştirme):**
+MVP puanı sektör komşuluğu + konum + kalite + kanıt verir; "kim istifade eder" hedefe bağlı:
+1. **Tedarikçi bul** (A): otomotiv montajcısı → 28 makine / 25 metal / 24 hammadde firmaları
+2. **Müşteri bul / satış kanalı** (B): yedek parça üreticisi → 45.20 oto servis + 46.75 toptan + bayiler
+3. **Rakip analizi** (C): aynı NACE firmaları
+
+Şu anki `mode=komple` 1+3 karışımı; **yön seçimi** Y22 olarak plana eklendi (buyer profilinde "ne için arıyorsun?" sorusu → skor yorumu değişir).
+
 ## 2026-09-09 — UX düzeltmeleri: dropdown dolumu + topbar ortası + nav scroll + canlı Görev Tahtası ✅
 
 **Kullanıcı bildirimi 3 sorunun fix'i:**

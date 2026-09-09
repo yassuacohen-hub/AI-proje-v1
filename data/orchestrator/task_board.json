@@ -1160,5 +1160,12 @@
     "sahip": "arastirmaci",
     "durum": "plan",
     "not": "BRIEF: workspace/external/BRIEF_Y21.md. Koordinator risk uyarilari: (1) scraping = ISKUR kullanim sartlari ihlali riski; resmi API/acik veri portal kontrol edilmeli; (2) KVKK: ilan iletisim bilgileri BIREYSEL kisilere ait olabilir -> maskeleme zorunlu; (3) firma adi serbest metin -> entity resolution yuku + karantina artisi; (4) ilan yoklugu pasiflik sinyali DEGIL (negatif etiketleme yapilmayacak); (5) ticari yeniden dagitim icin lisans/attribution kontrolu zorunlu."
+  },
+  {
+    "id": "Y22",
+    "baslik": "MATCH v2: eslestirme yonu secimi (tedarikci/musteri/rakip) + yonlu NACE haritasi",
+    "sahip": "gelistirici",
+    "durum": "plan",
+    "not": "Kullanicinin vizyon sorusu uzerine: buyer profilinde ne icin ariyor? (1) Tedarikci bul: 29->28/25/24 agirlik yuklu. (2) Musteri bul/satis kanali: yon TERS - yedek parcaciga 45.20 servis/46.75 toptan/bayiler. (3) Rakip analizi: ayni NACE. /api/match?yarak=.. parametresi + haritada yon agirliklari + match panelinde 3 buton (Tedarikci|Musteri|Rakip). KVKK maskeleme korunur."
   }
 ]
