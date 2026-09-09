@@ -1,4 +1,25 @@
 
+## 2026-09-09 — Görev Tahtası admin-only bağımsız sayfa + admin onay paneli ✅
+
+**Kullanıcı istekleri:**
+1. Görev Tahtası verilerin arasından kaldırıldı → **Hızlı Erişim** menüsüne taşındı ("Görev Tahtası (Yönetici)")
+2. **Admin-only**: token'da `role=admin` yoksa görev listesi + onay paneli görüntülenmez, yönetici giriş formu çıkar
+3. Örnek@örnek.com akışı uçtan uca test edildi
+
+**Admin altyapısı:**
+- Seed admin: `admin@huginn.local` (role=admin, onayli, enterprise) — her iki DB'de
+- `require_admin` dependency: DASH_API_KEY **veya** admin kullanıcı tokenı (Bearer) kabul eder
+- Admin endpoint'leri (pending/approve/credit) require_admin'e bağlandı — non-admin token ile erişim **403** ✅ (test edildi)
+
+**Admin panel (Görev Tahtası overlay içinde, admin görünür):**
+- Onay bekleyen üyeler: firma/e-posta/ürün + **tier seç (Terminal/Strategic/Enterprise)** + Onayla/Reddet
+- Onaylı üyeler: kredi bakiyesi + **Credit Pack yükleme** (miktar girilir)
+- Enterprise onayında API key otomatik üretilir
+
+**Test (örnek@ornek.com akışı, 11/11):** kayıt → admin login → pending → approve (100 kredi) → üye login → match kredi 99 → credit pack +50 (149) → profil GET (tamlama %62) → **profil PUT (departman dahil, tamlama %88)** → non-admin 403 engeli.
+
+**Not:** `örnek@örnek.com` kaydı DB'de yoktu (Unicode e-posta formda başarısız olmuş); `ornek@ornek.com` olarak API ile kaydedilip onaylandı — sayfa yapısını görmek için panelde hazır.
+
 ## 2026-09-09 — "İşletmem" bağımsız tam ekran panele taşındı (kullanıcı feedback'i) ✅
 
 **Kullanıcı:** "verilerin arasında duran bir yerde olmaz, bağımsız olsun — navigasyonun ilki veya sağ üstte Yenile'nin orası olabilir; tıklayınca kayıt sayfası açılır."

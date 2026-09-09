@@ -51,3 +51,9 @@ CREATE TABLE IF NOT EXISTS product_categories (
   created_at   TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 CREATE INDEX IF NOT EXISTS idx_pcat_nace ON product_categories (nace_group);
+
+-- Admin kullanici (idempotent seed) — gorev tahtasi + onay paneli erisimi
+INSERT INTO users (email, email_domain, company_name, role, status, tier, credit_balance, kvkk_consent)
+VALUES ('admin@huginn.local', 'huginn.local', 'Huginn Yonetim', 'admin', 'onayli', 'enterprise', -1, TRUE)
+ON CONFLICT (email) DO NOTHING;
+

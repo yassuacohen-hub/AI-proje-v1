@@ -77,49 +77,98 @@ async function loadAll() {
 
 function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 
+// ── Y22: Gorev Tahtasi (bagimsiz admin overlay: gorevler + uye onay paneli) ──
+
+function openTasks() {
+  let ov = document.getElementById('tasks-overlay');
+  if (!ov) {
+    ov = document.createElement('div');
+    ov.id = 'tasks-overlay';
+    ov.style.cssText = 'position:fixed;inset:0;background:rgba(5,7,12,.92);z-index:9998;overflow-y:auto;padding:28px 20px';
+    ov.innerHTML = `
+      <div style="max-width:980px;margin:0 auto">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <h2 style="margin:0;font-size:20px"><i class="fas fa-tasks" style="color:var(--accent)"></i> Görev Tahtası
+            <span style="font-size:12px;color:var(--text-dim);margin-left:8px">iç ajan görevleri · üye onay paneli</span></h2>
+          <button onclick="closeTasks()" style="background:var(--panel-bg);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:13px">✕ Kapat</button>
+        </div>
+        <div id="tasks-admin-panel" class="chart-card" style="padding:4px 0 12px;margin-bottom:14px;display:none">
+          <div class="chart-card-header"><div class="chart-card-title"><i class="fas fa-user-check"></i> Üye Onay Paneli</div>
+            <div class="chart-card-actions"><button class="chart-btn" onclick="loadTasks()"><i class="fas fa-sync-alt"></i> Yenile</button></div></div>
+          <div id="admin-pending-body" style="padding:0 16px 16px"></div>
+        </div>
+        <div class="chart-card" style="padding:4px 0 12px">
+          <div id="tasks-summary" class="match-agg" style="margin:10px 16px"></div>
+          <div id="tasks-body" class="match-results"></div>
+        </div>
+      </div>`;
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) closeTasks(); });
+  }
+  ov.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  loadTasks();
+}
+
+function closeTasks() {
+  const ov = document.getElementById('tasks-overlay');
+  if (ov) ov.style.display = 'none';
+  document.body.style.overflow = '';
+}
+
+function _isTaskAdmin(cb) {
+  const tok = getMemberToken();
+  if (!tok) { cb(false, null); return; }
+  fetch(apiUrl('/api/me?token=' + encodeURIComponent(tok)))
+    .then(r => (r.ok ? r.json() : Promise.reject()))
+    .then(d => cb((d.user || {}).role === 'admin', d.user || {}))
+    .catch(() => cb(false, null));
+}
+
 async function loadTasks() {
   const summaryEl = document.getElementById('tasks-summary');
   const bodyEl = document.getElementById('tasks-body');
   if (!summaryEl || !bodyEl) return;
-  try {
-    const r = await fetch(apiUrl('/api/tasks'));
-    if (!r.ok) throw new Error(`API ${r.status}`);
-    const d = await r.json();
-    const gorevler = Array.isArray(d) ? d : (d.gorevler || d.items || []);
-    const say = g => gorevler.filter(x => x.durum === g).length;
-    const toplam = gorevler.length;
-    const done = say('done') + say('tamamlandi');
-    summaryEl.className = 'match-agg';
-    summaryEl.innerHTML = `
-      <div class="agg-chip">Toplam Görev<b>${toplam}</b></div>
-      <div class="agg-chip">Tamamlanan<b style="color:var(--green)">${done}</b></div>
-      <div class="agg-chip">Plan / Bekleyen<b style="color:#fbbf24">${say('plan')}</b></div>
-      <div class="agg-chip">Aktif<b style="color:var(--accent)">${say('aktif')}</b></div>
-      <div class="agg-chip">Engelli<b style="color:var(--red)">${say('blocked')}</b></div>`;
-    const sirali = gorevler
-      .filter(g => ['plan', 'aktif', 'blocked'].includes(g.durum))
-      .slice(0, 12);
-    const sonTamamlanan = gorevler.filter(g => ['done', 'tamamlandi'].includes(g.durum)).slice(-4);
-    const durumRenk = { plan: '#fbbf24', aktif: 'var(--accent)', blocked: 'var(--red)', done: 'var(--green)', tamamlandi: 'var(--green)' };
-    bodyEl.innerHTML = `
-      <div class="match-result-head">
-        <span class="mr-col-name">Görev</span><span class="mr-col-nace">Sahip</span>
-        <span class="mr-col-score">Durum</span><span class="mr-col-rel">Not</span>
-      </div>` +
-      (sirali.map(g => `
-      <div class="match-result-row" style="cursor:default">
-        <div class="mr-name"><div class="mr-name-main">${esc(g.baslik || g.ad || g.id || '-')}</div></div>
-        <div class="mr-nace">${esc(g.sahip || '-')}</div>
-        <div class="mr-score"><span class="match-badge" style="background:rgba(255,255,255,.06);color:${durumRenk[g.durum] || 'inherit'};border:1px solid ${durumRenk[g.durum] || 'inherit'}">${esc(g.durum)}</span></div>
-        <div class="mr-rel" style="font-size:11px;color:var(--text-dim)">${esc((g.not || '').substring(0, 90))}${(g.not || '').length > 90 ? '…' : ''}</div>
-      </div>`).join('') || '') +
-      `<div class="match-empty" style="border-style:solid;margin-top:10px">
-        <i class="fas fa-check-circle" style="color:var(--green)"></i> Bekleyen görevlerin hepsi ajanda. Son tamamlananlar:
-        ${sonTamamlanan.map(g => esc((g.baslik || g.id) + '')).join(' · ')}
-      </div>`;
-  } catch (e) {
-    bodyEl.innerHTML = `<div class="match-empty"><i class="fas fa-exclamation-circle"></i> Görev tahtası yüklenemedi: ${esc(e.message)}</div>`;
-  }
+  _isTaskAdmin(async (isAdmin) => {
+    const adminPanel = document.getElementById('tasks-admin-panel');
+    adminPanel.style.display = isAdmin ? 'block' : 'none';
+    if (isAdmin) loadAdminPending();
+    try {
+      const r = await fetch(apiUrl('/api/tasks'));
+      if (!r.ok) throw new Error(`API ${r.status}`);
+      const d = await r.json();
+      const gorevler = Array.isArray(d) ? d : (d.gorevler || d.items || []);
+      const say = g => gorevler.filter(x => x.durum === g).length;
+      summaryEl.className = 'match-agg';
+      summaryEl.innerHTML = `
+        <div class="agg-chip">Toplam Görev<b>${gorevler.length}</b></div>
+        <div class="agg-chip">Tamamlanan<b style="color:var(--green)">${say('done') + say('tamamlandi')}</b></div>
+        <div class="agg-chip">Plan / Bekleyen<b style="color:#fbbf24">${say('plan')}</b></div>
+        <div class="agg-chip">Aktif<b style="color:var(--accent)">${say('aktif')}</b></div>
+        <div class="agg-chip">Engelli<b style="color:var(--red)">${say('blocked')}</b></div>`;
+      const sirali = gorevler.filter(g => ['plan', 'aktif', 'blocked'].includes(g.durum)).slice(0, 12);
+      const sonTam = gorevler.filter(g => ['done', 'tamamlandi'].includes(g.durum)).slice(-4);
+      const durumRenk = { plan: '#fbbf24', aktif: 'var(--accent)', blocked: 'var(--red)', done: 'var(--green)', tamamlandi: 'var(--green)' };
+      bodyEl.innerHTML = `
+        <div class="match-result-head">
+          <span class="mr-col-name">Görev</span><span class="mr-col-nace">Sahip</span>
+          <span class="mr-col-score">Durum</span><span class="mr-col-rel">Not</span>
+        </div>` +
+        (sirali.map(g => `
+        <div class="match-result-row" style="cursor:default">
+          <div class="mr-name"><div class="mr-name-main">${esc(g.baslik || g.ad || g.id || '-')}</div></div>
+          <div class="mr-nace">${esc(g.sahip || '-')}</div>
+          <div class="mr-score"><span class="match-badge" style="background:rgba(255,255,255,.06);color:${durumRenk[g.durum] || 'inherit'};border:1px solid ${durumRenk[g.durum] || 'inherit'}">${esc(g.durum)}</span></div>
+          <div class="mr-rel" style="font-size:11px;color:var(--text-dim)">${esc((g.not || '').substring(0, 90))}${(g.not || '').length > 90 ? '…' : ''}</div>
+        </div>`).join('') || '') +
+        `<div class="match-empty" style="border-style:solid;margin-top:10px">
+          <i class="fas fa-check-circle" style="color:var(--green)"></i> Bekleyen görevlerin hepsi ajanda. Son tamamlananlar:
+          ${sonTam.map(g => esc((g.baslik || g.id) + '')).join(' · ')}
+        </div>`;
+    } catch (e) {
+      bodyEl.innerHTML = `<div class="match-empty"><i class="fas fa-exclamation-circle"></i> Görev tahtası yüklenemedi: ${esc(e.message)}</div>`;
+    }
+  });
 }
 
 async function loadKPI() {
@@ -952,6 +1001,98 @@ document.addEventListener('DOMContentLoaded', () => {
   if (actions) actions.prepend(badge);
   refreshCreditBadge();
 });
+
+// ── Admin: uye onay paneli (Gorev Tahtasi overlay icinde) ──────────────────
+
+async function loadAdminPending() {
+  const el = document.getElementById('admin-pending-body');
+  const tok = getMemberToken();
+  try {
+    const r = await fetch(apiUrl('/api/admin/pending'), {
+      headers: { 'Authorization': 'Bearer ' + tok },
+    });
+    if (!r.ok) throw new Error(`API ${r.status}`);
+    const d = await r.json();
+    const bek = d.bekleyen || [];
+    window._adminIds = {}; // email -> user_id (credit pack yukleme icin)
+    (d.onayli_son || []).forEach(u => {
+      if (u.user_id) window._adminIds[u.email] = u.user_id;
+    });
+el.innerHTML = bek.length ? `
+      <div class="match-result-head"><span class="mr-col-name">Bekleyen Üye</span>
+        <span class="mr-col-nace">NACE / Amaç</span><span class="mr-col-score">Tier Seç</span><span class="mr-col-rel">İşlem</span></div>` +
+      bek.map(b => `
+      <div class="match-result-row" style="cursor:default;align-items:start">
+        <div class="mr-name">
+          <div class="mr-name-main">${esc(b.company_name)}</div>
+          <div class="mr-name-sub">${esc(b.email)}${b.website ? " · " + esc(b.website) : ""}</div>
+          <div class="mr-name-sub">${esc(b.products_desc || "")}</div>
+        </div>
+        <div class="mr-nace">${esc(b.nace_code || "-")}<br><small style="color:var(--text-dim)">${esc(b.goal || "")}</small></div>
+        <div class="mr-score">
+          <select id="tier-${b.user_id}" class="filter-select" style="width:100%">
+            <option value="terminal">Terminal (100 kredi)</option>
+            <option value="strategic">Strategic (500 kredi)</option>
+            <option value="enterprise">Enterprise (Sınırsız+API)</option>
+          </select>
+        </div>
+        <div class="mr-rel" style="display:flex;flex-direction:column;gap:6px">
+          <button class="d-btn primary" style="min-width:auto" onclick="adminApprove('${b.user_id}')"><i class="fas fa-check"></i> Onayla</button>
+          <button class="d-btn" style="min-width:auto;border-color:rgba(239,68,68,.4);color:#f87171" onclick="adminReject('${b.user_id}')"><i class="fas fa-times"></i> Reddet</button>
+        </div>
+      </div>`).join("") : `<div class="match-empty"><i class="fas fa-check-circle" style="color:var(--green)"></i> Onay bekleyen üye yok.</div>`;
+    const son = d.onayli_son || [];
+    if (son.length) {
+      el.innerHTML += `<div class="detail-section" style="margin-top:12px">
+        <div class="detail-section-title">Onaylı Üyeler (son 10) — Credit Pack Yükle</div>` +
+        son.map(u => `
+        <div class="detail-row" style="gap:8px">
+          <span class="label" style="min-width:200px">${esc(u.company_name)}<br><small style="color:var(--text-dim)">${esc(u.email)}</small></span>
+          <span class="value mono" style="min-width:80px">${u.credit_balance < 0 ? 'Sınırsız' : u.credit_balance + ' kredi'}</span>
+          <input id="credit-${String(u.email).replace(/[^a-z0-9]/gi, '')}" type="number" min="1" value="50" style="width:70px;background:var(--panel-bg);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:4px 8px;font-size:12px">
+          <button class="d-btn" style="min-width:auto" onclick="adminLoadCredit('${esc(u.email)}')">Kredi Yükle</button>
+        </div>`).join('') + '</div>';
+    }
+  } catch (e) {
+    el.innerHTML = `<div class="match-empty"><i class="fas fa-exclamation-circle"></i> ${esc(e.message)}</div>`;
+  }
+}
+
+async function adminApprove(userId) {
+  const tier = document.getElementById('tier-' + userId).value;
+  const tok = getMemberToken();
+  const r = await fetch(apiUrl('/api/admin/approve'), {
+    method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + tok },
+    body: JSON.stringify({ user_id: userId, tier }),
+  });
+  const d = await r.json().catch(() => ({}));
+  if (r.ok) {
+    toast(`Onaylandı — ${d.tier} tier, ${d.credit_balance < 0 ? 'sınırsız' : d.credit_balance + ' kredi'} yüklendi`);
+    loadAdminPending();
+  } else toast(d.detail || 'Onaylama başarısız');
+}
+
+async function adminReject(userId) {
+  const tok = getMemberToken();
+  const r = await fetch(apiUrl('/api/admin/approve'), {
+    method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + tok },
+    body: JSON.stringify({ user_id: userId, reject: true, note: 'Yonetici reddi' }),
+  });
+  if (r.ok) { toast('Üyelik reddedildi'); loadAdminPending(); } else toast('İşlem başarısız');
+}
+
+async function adminLoadCredit(email) {
+  const inp = document.getElementById('credit-' + email.replace(/[^a-z0-9]/gi, ''));
+  const amount = parseInt(inp ? inp.value : '50') || 50;
+  const tok = getMemberToken();
+  const uid = (window._adminIds || {})[email];
+  if (!uid) { toast('Kullanıcı kimliği bulunamadı — sayfayı yenileyin.'); return; }
+  const r = await fetch(apiUrl('/api/admin/credit'), {
+    method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + tok },
+    body: JSON.stringify({ user_id: uid, amount }),
+  });
+  if (r.ok) { toast(`${amount} kredi yüklendi`); loadAdminPending(); } else toast('Yükleme başarısız');
+}
 
 // ── Y22: Isletmem sayfasi (bagimsiz tam ekran overlay: profil + kredi + paket) ──
 

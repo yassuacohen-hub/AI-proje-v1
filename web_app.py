@@ -1136,8 +1136,22 @@ def api_me(token: str = ""):
 
 # ── Admin: onay kuyrugu + kredi yonetimi (DASH_API_KEY ile) ─────────────────
 
+def require_admin(authorization: str = Header(None, alias="Authorization"),
+                  x_api_key: str = Header(None, alias="X-API-Key"),
+                  api_key: str = ""):
+    """Yonetici erisimi: DASH_API_KEY VEYA role=admin kullanici tokeni (Bearer)."""
+    if (x_api_key or api_key) == (os.getenv("DASH_API_KEY") or ""):
+        return "admin-key"
+    if authorization:
+        tok = authorization.replace("Bearer ", "").strip()
+        u = _user_from_token(tok)
+        if u and u.get("role") == "admin" and u.get("status") == "onayli":
+            return "admin-user"
+    raise HTTPException(status_code=403, detail="Yonetici erisimi gerekli")
+
+
 @app.get("/api/admin/pending")
-def api_admin_pending(_auth: str = Depends(require_api_key)):
+def api_admin_pending(_auth: str = Depends(require_admin)):
     engine = get_engine()
     with engine.connect() as conn:
         bekleyen = conn.execute(text(
@@ -1145,13 +1159,13 @@ def api_admin_pending(_auth: str = Depends(require_api_key)):
             "goal, website, linked_company_id, created_at FROM users "
             "WHERE status = 'onay_bekliyor' ORDER BY created_at")).mappings().all()
         son = conn.execute(text(
-            "SELECT email, company_name, tier, credit_balance, status, updated_at "
+            "SELECT user_id, email, company_name, tier, credit_balance, status, updated_at "
             "FROM users WHERE status = 'onayli' ORDER BY updated_at DESC LIMIT 10")).mappings().all()
     return {"bekleyen": [dict(r) for r in bekleyen], "onayli_son": [dict(r) for r in son]}
 
 
 @app.post("/api/admin/approve")
-def api_admin_approve(req: dict, _auth: str = Depends(require_api_key)):
+def api_admin_approve(req: dict, _auth: str = Depends(require_admin)):
     """Onayla: tier sec (terminal/strategic/enterprise) -> kredi yukle + enterprise'a api_key uret."""
     user_id = req.get("user_id") or ""
     tier = req.get("tier") or "terminal"
@@ -1195,7 +1209,7 @@ def api_admin_approve(req: dict, _auth: str = Depends(require_api_key)):
 
 
 @app.post("/api/admin/credit")
-def api_admin_credit(req: dict, _auth: str = Depends(require_api_key)):
+def api_admin_credit(req: dict, _auth: str = Depends(require_admin)):
     """Credit Pack / manuel kredi yukleme (750 TRY/50 kredi vb.)."""
     user_id = req.get("user_id") or ""
     amount = int(req.get("amount") or 0)

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
@@ -43,8 +43,7 @@
       <div class="nav-item tip" data-tip="Veri kaynakları: OSTİM, ASO, İvedik, Başkent, Web. Kaynağa tıklayarak firmaları filtreleyebilirsiniz." onclick="showView('sources',this); scrollToSection('sources-section')"><i class="fas fa-database"></i> Veri Kaynakları</div>
       <div class="nav-item tip" data-tip="Veri kalitesi: skor dağılımı ve hangi alanların ne kadar dolu olduğu." onclick="showView('quality',this); scrollToSection('quality-section')"><i class="fas fa-chart-bar"></i> Veri Kalitesi</div>
       <div class="nav-item tip" data-tip="V9 Smart Matching: alıcı sektörünüze en uygun firmaları puanlı görün." onclick="showView('match',this); scrollToSection('match-section')"><i class="fas fa-handshake"></i> Eşleştirme</div>
-      <div class="nav-item tip" data-tip="İşletmeniz: firma profiliniz, departmanınız, kredileriniz ve paketiniz — ne kadar çok bilgi, o kadar isabetli eşleşme." onclick="showView('isletmem',this); scrollToSection('isletmem-section')"><i class="fas fa-briefcase"></i> İşletmem</div>
-      <div class="nav-item tip" data-tip="İç ajanların görev panosu: kim ne yapıyor, ne tamamlandı." onclick="showView('tasks',this); scrollToSection('tasks-section')"><i class="fas fa-tasks"></i> Görev Tahtası</div>
+
     </div>
     <div class="sidebar-section">
       <div class="sidebar-title">Bilgi Merkezi</div>
@@ -68,6 +67,7 @@
     <div class="sidebar-section">
       <div class="sidebar-title">Hızlı Erişim</div>
       <div class="nav-item tip" data-tip="Aktif filtrelerdeki firmaları CSV dosyası olarak indirir (Excel'de açılır)." onclick="exportCSV()"><i class="fas fa-download"></i> CSV Dışa Aktar</div>
+      <div class="nav-item tip" data-tip="İç ajan görevleri + üye onay paneli. Yalnızca yönetici girişiyle açılır." onclick="openTasks()"><i class="fas fa-tasks"></i> Görev Tahtası (Yönetici)</div>
       <div class="nav-item tip" data-tip="Tüm API endpoint'lerinin Swagger dokümantasyonu." onclick="window.open('/docs','_blank')"><i class="fas fa-code"></i> API Dokümanı</div>
       <div class="nav-item tip" data-tip="Prometheus formatındaki performans metrikleri (izleme araçları için)." onclick="window.open('/metrics','_blank')"><i class="fas fa-tachometer-alt"></i> Metrikler</div>
     </div>
@@ -190,13 +190,6 @@
 
         <!-- Y22: Isletmem — bamsız tam ekran panel (JS ile acilir, chart-card degil) -->
 
-<!-- Y19: Gorev Tahtasi Bolumu -->
-        <div class="chart-card" id="tasks-section" style="margin-bottom:16px">
-          <div class="chart-card-header">
-            <div class="chart-card-title"><i class="fas fa-tasks"></i> Görev Tahtası <span style="font-size:11px;color:#64748b;margin-left:6px">iç ajan görevleri — canlı</span></div>
-            <div class="chart-card-actions">
-              <button class="chart-btn" onclick="loadTasks()"><i class="fas fa-sync-alt"></i> Yenile</button>
-            </div>
           </div>
           <p class="sources-hint" style="padding:0 16px"><i class="fas fa-info-circle"></i> İç ajanların (arastirmaci, gelistirici, kalite, web_kazima…) o an yaptığı işler ve tamamlananlar.</p>
           <div id="tasks-summary" class="match-agg" style="margin:10px 16px"></div>
@@ -238,6 +231,6 @@
   </aside>
 </div>
 <script src="/static/js/nace_labels.js"></script>
-<script src="/static/js/app.js?v=10"></script>
+<script src="/static/js/app.js?v=12"></script>
 </body>
 </html>
