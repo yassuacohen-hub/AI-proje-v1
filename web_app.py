@@ -749,8 +749,16 @@ def _nace_grup(nace: str) -> str:
     return (nace or "").split(".")[0].strip()
 
 
-def _match_puan(row, buyer_grup: str, buyer_osb: str, mode: str):
-    """Firma için 0-100 eşleştirme puanı + bileşen kırılımı. (None = elensin)"""
+def _match_puan(row, buyer_grup: str, buyer_osb: str, mode: str, yon: str = "tedarikci"):
+    """Firma için 0-100 eşleştirme puanı + bileşen kırılımı. (None = elensin)
+
+    yon (Y22 - eslestirme yonu):
+    - tedarikci: buyer tedarikçi arıyor (montaj -> yan sanayi/hammadde; varsayilan)
+    - musteri:   buyer musteri/satis kanali arıyor (yon TERS: hedef firmanin
+                 komsuluk haritasindan buyer grubuna agirlik - orn. yedek parcaciga
+                 45.20 servis / 46.75 toptan firmalari)
+    - rakip:     sadece ayni NACE ana grubu (rakip analizi)
+    """
     hedef_grup = _nace_grup(row.get("nace_code") or "")
     if not hedef_grup:
         return None
@@ -759,6 +767,14 @@ def _match_puan(row, buyer_grup: str, buyer_osb: str, mode: str):
     if hedef_grup == buyer_grup:
         sektor = 45.0
         iliski = "ayni-sektor"
+    elif yon == "rakip":
+        sektor = 0.0
+        iliski = "farkli"
+    elif yon == "musteri" and mode == "komple":
+        # ters yon: hedef firmanin ayni-sektor inanlari kimlere satar?
+        kom = _NACE_KOMSU.get(hedef_grup, {}).get(buyer_grup, 0.0)
+        sektor = 45.0 * kom
+        iliski = "musteri-kanal" if kom >= 0.4 else "musteri-uzak"
     elif mode == "komple" and buyer_grup in _NACE_KOMSU:
         kom = _NACE_KOMSU[buyer_grup].get(hedef_grup, 0.0)
         sektor = 45.0 * kom
@@ -805,6 +821,7 @@ def api_match(
     nace: str = "",
     osb_id: str = "",
     mode: str = "komple",
+    yon: str = "tedarikci",
     min_puan: int = 30,
     limit: int = 20,
     offset: int = 0,
@@ -817,10 +834,13 @@ def api_match(
     - buyer_id verirse: DB'den buyer alınır (nace + osb)
     - yoksa nace (+ opsiyonel osb_id) ile serbest profil
     - mode: komple (komşu sektörler dahil) | ayni (sadece aynı ana grup)
+    - yon (Y22): tedarikci (varsayilan) | musteri (ters yon satis kanali) | rakip
+      (sadece ayni grup; rakip analizi)
     - user_token: onaylı kullanıcı tokenı → 1 kredi düşülür; kredi bittiyse
       sonuçlar otomatik maskelenir + credit_pack önerisi döner
     """
     mode = mode if mode in ("komple", "ayni") else "komple"
+    yon = yon if yon in ("tedarikci", "musteri", "rakip") else "tedarikci"
     limit = max(1, min(limit, 100))
 
     user = _user_from_token(user_token) if user_token else None
@@ -873,7 +893,7 @@ def api_match(
         d = dict(r)
         if buyer_id and d.get("company_id") == buyer_id:
             continue  # kendisi
-        m = _match_puan(d, buyer_grup, buyer_osb or "", mode)
+        m = _match_puan(d, buyer_grup, buyer_osb or "", mode, yon)
         if not m or m["puan"] < min_puan:
             continue
         d["match"] = m
@@ -892,6 +912,7 @@ def api_match(
             "osb_id": buyer_osb or None,
         },
         "mode": mode,
+        "yon": yon,
         "toplam": len(skorlu),
         "limit": limit,
         "offset": offset,

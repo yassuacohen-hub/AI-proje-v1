@@ -1166,8 +1166,9 @@
     "id": "Y22",
     "baslik": "MATCH v2: eslestirme yonu secimi (tedarikci/musteri/rakip) + yonlu NACE haritasi",
     "sahip": "gelistirici",
-    "durum": "plan",
-    "not": "Kullanicinin vizyon sorusu uzerine: buyer profilinde ne icin ariyor? (1) Tedarikci bul: 29->28/25/24 agirlik yuklu. (2) Musteri bul/satis kanali: yon TERS - yedek parcaciga 45.20 servis/46.75 toptan/bayiler. (3) Rakip analizi: ayni NACE. /api/match?yarak=.. parametresi + haritada yon agirliklari + match panelinde 3 buton (Tedarikci|Musteri|Rakip). KVKK maskeleme korunur."
+    "durum": "done",
+    "not": "TAMAMLANDI 2026-09-09: /api/match?yon=tedarikci|musteri|rakip parametresi. tedarikci=mevcut ileri yon; musteri=ters yon (hedef firmanin komsuluk haritasi buyer grubuna bakan agirlik, 'musteri-kanal'/'musteri-uzak' etiketleri); rakip=sadece ayni grup. Match paneline 'Arama Yonu' dropdown eklendi, durum satiri yon etiketli. Canli test (nace=29): tedarikci->uzak-sektor, musteri->musteri-uzak, rakip->farkli. KVKK maskeleme korunuyor.",
+    "bitis": "2026-09-09"
   },
   {
     "id": "Y23",
@@ -1197,5 +1198,93 @@
     "sahip": "gelistirici",
     "durum": "plan",
     "not": "Enterprise tier approve'da api_key uretiliyor (web_app.py). Eksik: key rotasyonu, kullanim metrikleri (/metrics'e tier bazli istek sayaci), ERP gateway kapsami (V8 mTLS/OAuth2 - Scale)."
+  },
+  {
+    "task_id": "P8-1",
+    "baslik": "Is ilani takip motoru: kaynak oncelikleme ve erisim stratejisi",
+    "sahip": "web_kazima",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "İş ilanı takip motoru kaynak oncelikleme ve erisim stratejisi. Oncelik sirasi: P0 -> İŞKUR, şirket kariyer sayfaları, Kariyer.net; P1 -> LinkedIn, Indeed, GitHub; P2 -> MERSIS, Crunchbase. Erisim stratejisi: KVKK guvenli kaynaklar once (İŞKUR kvkk_safe), robots.txt + rate limit kontrolu (www.iskur.gov.tr 2.0s, www.kariyer.net 3.0s), anti-bot bypass (proxy/headless) gerektiginde. ScrapingPermissionRouter/SourceSpec kayitlari P7 entegrasyonunun surumunu alir."
+  },
+  {
+    "task_id": "P8-2",
+    "baslik": "Is ilani takip motoru: firma eslestirme ve normalize",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "İş ilanlarını company_master entitylerine eslestirme ve normalize motoru. Multi-pass stratejisi: 1) Exact normalized name 2) Domain match 3) Fuzzy rapidfuzz 0.85 eşiği 4) MERSIS/VKN 5) Alias table 6) Human-in-the-loop review queue. job_postings.company_id -> companies.id mapping; P7-3 CompanyMatcher'dan türetilen normalizasyon motoru. KVKK: bireysel firma eşleştirme verisi saklanmaz."
+  },
+  {
+    "task_id": "P8-3",
+    "baslik": "Is ilani takip motoru: buyume sinyali skorlama",
+    "sahip": "arastirmaci",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Büyüme sinyali skorlama motoru. company_signals tablosuna growth skoru yazar. Scoring weights: Growth 0.30 — iş ilanı artış hızı (aylık %), headcount trendleri, yeni lokasyon açılışı sinyalleri. Pozitif hiring trendi 0-100 skor; negatif düzey ters yönlendirilir. company_intelligence_scores.growth_score alanı."
+  },
+  {
+    "task_id": "P8-4",
+    "baslik": "Is ilani takip motoru: risk sinyali skorlama",
+    "sahip": "arastirmaci",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Risk sinyali skorlama motoru. company_signals tablosuna risk skoru yazar. Risk faktörleri: iş ilanı churn (ilan silinmesi/azalması), hiring freeze, feshedilme ihtiyacı sinyalleri, büyüme durgunluğu. Negatif sinyaller düşük risk skoruna yol açar. company_intelligence_scores.risk_score alanı; P4-6 e-posta doğrulama sonrası geçerli veri temeli."
+  },
+  {
+    "task_id": "P8-5",
+    "baslik": "Is ilani takip motoru: teknoloji donusumu analizi",
+    "sahip": "arastirmaci",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Teknoloji dönüşüm analizi. company_tech_profile tablosuna yazar. Sinyaller: yeni tech roller (AI/ML, cloud, cybersecurity), senioralyk dağılımı, skill trendleri, stack modernizasyonu. Scoring weight: tech_transformation 0.20. İş ilanı başlıklarından tech stack çıkarımı; P5-2 sosyal medya varlığıyla komple. Negatif etiketleme yok."
+  },
+  {
+    "task_id": "P8-6",
+    "baslik": "Is ilani takip motoru: yatirim ve olcekleme sinyalleri",
+    "sahip": "arastirmaci",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Yatırım ve ölçekleme sinyalleri. company_signals tablosunda yatırım olayları + hiring velocity ölçeği. Sinyaller: fon turları, yatırım tutarları, headcount artış hızı, yeni ekip kurulu. Scoring weight: investment 0.25, org_change 0.10. Yatırım verileri dış kaynak (Crunchbase/RapidAPI) — KVKK dışı finansal veri, maskeleme gerekmez."
+  },
+  {
+    "task_id": "P8-7",
+    "baslik": "Is ilani takip motoru: cografi genisleme analizi",
+    "sahip": "backend",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Coğrafi genişleme analizi. company_signals tablosuna geo expansion sinyali yazar. Sinyaller: yeni şehir/lokasyonda iş ilanı açılışı, bölgesel hiring patternleri (Türkiye illerine göre), market genişleme hızı. Scoring weight: geo_expansion 0.15 — location diversity + new-region hiring velocity. Y7 KVKK maskeleme/lokasyon politikası uygulanır."
+  },
+  {
+    "task_id": "P8-8",
+    "baslik": "Is ilani takip motoru: kurumsal rapor ve medya entegrasyonu",
+    "sahip": "web_kazima",
+    "oncelik": "P3",
+    "durum": "plan",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Kurumsal rapor ve medya entegrasyonu. company_signals tablosuna entegre edilir. Kaynaklar: şirket yıllık/faaliyet raporları, basın açıklamaları, haber/medya coverage (RapidAPI news, haber ajansları). Skor güncellemesi: medya haberleri pozitif/negatif sentiment analizi. KVKK: medya metni parsing, kişisel veri filtreleme. P3 öncelik — V9 Scale aşaması."
   }
 ]

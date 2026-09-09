@@ -148,6 +148,14 @@
                 <label for="match-nace">Alıcı (Buyer) Sektörü</label>
                 <select class="filter-select" id="match-nace"><option value="">Sektör seçin…</option></select>
               </div>
+              <div class="quick-filter-item tip tip-left" data-tip="Y22 — Ne için arıyorsun? Tedarikçi: sana mal/hizmet üretecek firmalar. Müşteri: senin ürününü alacak/satacak kanallar (ters yön). Rakip: aynı sektördeki firmalar.">
+                <label for="match-yon">Arama Yönü</label>
+                <select class="filter-select" id="match-yon">
+                  <option value="tedarikci">Tedarikçi bul</option>
+                  <option value="musteri">Müşteri bul (satış kanalı)</option>
+                  <option value="rakip">Rakip analizi</option>
+                </select>
+              </div>
               <div class="quick-filter-item tip tip-left" data-tip="komple: tedarik zincirindeki komşu sektörleri de önerir. Aynı sektör: yalnızca aynı ana grup.">
                 <label for="match-mode">Eşleştirme Modu</label>
                 <select class="filter-select" id="match-mode"><option value="komple">Komple (tedarik zinciri dahil)</option><option value="ayni">Aynı sektör</option></select>
@@ -257,7 +265,7 @@
     </aside>
   </div>
   <script src="/static/js/nace_labels.js"></script>
-  <script src="/static/js/app.js?v=20"></script>
+  <script src="/static/js/app.js?v=21"></script>
 </body>
 </html>
 

@@ -1,4 +1,18 @@
 
+## 2026-09-09 — Y22 MATCH v2: eşleştirme yönü seçimi ✅ + admin panel erişim rehberi
+
+**Y22 uygulama:**
+- Backend: `/api/match?yon=tedarikci|musteri|rakip` — `tedarikci` mevcut ileri yön (montaj→yan sanayi); `musteri` **ters yön** (hedef firmanın komşuluk haritası buyer grubuna bakar; `musteri-kanal`/`musteri-uzak` etiketleri — ör. yedek parçacıya 45.20 servis / 46.75 toptan kanalları); `rakip` sadece aynı NACE ana grubu
+- Frontend: match paneline "Arama Yönü" dropdown (tooltip'li), durum satırı yön etiketli ("müşteri/satış kanalı arama" vb.), js v21
+- Doğrulama: py_compile + node --check OK; Docker imaj rebuild; canlı test (nace=29, alt dilim): tedarikci→`uzak-sektor` / musteri→`musteri-uzak` / rakip→`farkli` — yön ayrımı çalışıyor; layout 8/8 PASS + 0 exception
+
+**Admin panele giriş (canlı doğrulandı):**
+1. **İşletmem** (navigasyon 1. öğe veya sağ üst buton) → **Giriş** → `admin@huginn.local` yaz → Giriş
+   (üyelik kayıt formundan **ayrı**; admin hesabı seed'li: `admin@huginn.local`, enterprise, role=admin)
+2. Hızlı Erişim → **Görev Tahtası (Yönetici)** → admin açıkken panelde: Üye Onay Paneli + Ürün Kategorileri kartları görünür
+3. Alternatif: sayfaya `#tasks` hash'i ile gir → overlay otomatik açılır
+- Canlı test: login 200 (role=admin, enterprise) → `/api/admin/pending` 200 ✓
+
 ## 2026-09-09 — İzleme listesi bug fix + Y25 product_categories admin paneli ✅
 
 **Bug fix (izleme listesi):** `toggleWatchDetail` `toggleWatch(c.company_id)` çağırıyordu — `company_id` boş firmalarda ekleme hiç yapılmıyor, toast "çıkarıldı" diyordu. `watchKeyOf()` tek anahtar mantığına geçirildi (tüm izleme işlemleri). Canlı CDP regresyon testi eklendi (`check_dashboard_layout.mjs`): localStorage temizle → toggle → toast/buton/set doğrula → geri al. js v19→v20.

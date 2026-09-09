@@ -714,16 +714,17 @@ async function runMatchFor(buyerId) {
   const resultsEl = document.getElementById('match-results');
   const aggEl = document.getElementById('match-agg');
   const mode = document.getElementById('match-mode').value;
+  const yon = (document.getElementById('match-yon') || {}).value || 'tedarikci';
   const min = document.getElementById('match-min').value;
   statusEl.className = 'match-status info';
   statusEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Firma profiline göre eşleştiriliyor…';
   aggEl.classList.add('hidden');
   resultsEl.innerHTML = '';
   try {
-    const r = await fetch(apiUrl(`/api/match?buyer_id=${encodeURIComponent(buyerId)}&mode=${mode}&min_puan=${min}&limit=20`));
+    const r = await fetch(apiUrl(`/api/match?buyer_id=${encodeURIComponent(buyerId)}&mode=${mode}&yon=${yon}&min_puan=${min}&limit=20`));
     if (!r.ok) throw new Error(`API ${r.status}`);
     const d = await r.json();
-    renderMatchResults(d, mode);
+    renderMatchResults(d, mode, yon);
     toast(`Eşleştirme tamam: ${d.toplam} firma`);
   } catch (e) {
     statusEl.className = 'match-status err';
@@ -829,6 +830,7 @@ function matchKirilim(k) {
 async function runMatch() {
   const nace = document.getElementById('match-nace').value;
   const mode = document.getElementById('match-mode').value;
+  const yon = (document.getElementById('match-yon') || {}).value || 'tedarikci';
   const min = document.getElementById('match-min').value;
   const statusEl = document.getElementById('match-status');
   const resultsEl = document.getElementById('match-results');
@@ -845,10 +847,10 @@ async function runMatch() {
   resultsEl.innerHTML = '';
 
   try {
-    const r = await fetch(apiUrl(`/api/match?nace=${encodeURIComponent(nace)}&mode=${mode}&min_puan=${min}&limit=20`));
+    const r = await fetch(apiUrl(`/api/match?nace=${encodeURIComponent(nace)}&mode=${mode}&yon=${yon}&min_puan=${min}&limit=20`));
     if (!r.ok) throw new Error(`API ${r.status}`);
     const d = await r.json();
-    renderMatchResults(d, mode);
+    renderMatchResults(d, mode, yon);
     toast(`Eşleştirme tamam: ${d.toplam} firma`);
   } catch (e) {
     statusEl.className = 'match-status err';
@@ -856,12 +858,14 @@ async function runMatch() {
   }
 }
 
-function renderMatchResults(d, mode) {
+function renderMatchResults(d, mode, yon) {
   const statusEl = document.getElementById('match-status');
   const aggEl = document.getElementById('match-agg');
   const resultsEl = document.getElementById('match-results');
+  const yonEtiket = { tedarikci: 'tedarikçi arama', musteri: 'müşteri/satış kanalı arama', rakip: 'rakip analizi' }[yon || 'tedarikci'] || 'tedarikçi arama';
+  const modeEtiket = mode === 'komple' ? 'tedarik zinciri dahil' : 'sadece aynı sektör';
   statusEl.className = 'match-status ok';
-  statusEl.innerHTML = `<i class="fas fa-check-circle"></i> <b>${d.toplam}</b> firma eşleştirildi — alıcı: <b>${esc(d.buyer.adi || d.buyer.nace)}</b> · ${esc(d.buyer.nace)} (${mode === 'komple' ? 'tedarik zinciri dahil' : 'sadece aynı sektör'})`;
+  statusEl.innerHTML = `<i class="fas fa-check-circle"></i> <b>${d.toplam}</b> firma eşleştirildi — alıcı: <b>${esc(d.buyer.adi || d.buyer.nace)}</b> · ${esc(d.buyer.nace)} · ${esc(yonEtiket)} (${modeEtiket})`;
 
   const items = d.items || [];
   if (items.length) {
