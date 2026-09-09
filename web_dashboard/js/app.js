@@ -1000,6 +1000,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const actions = document.querySelector('.topbar-actions');
   if (actions) actions.prepend(badge);
   refreshCreditBadge();
+  // #tasks hash ile acilirsa yonetici panelini otomatik ac (test/debug)
+  if (location.hash === '#tasks') openTasks();
 });
 
 // ── Admin: uye onay paneli (Gorev Tahtasi overlay icinde) ──────────────────

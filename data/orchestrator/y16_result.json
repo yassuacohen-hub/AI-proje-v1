@@ -1,361 +1,39 @@
-{
-  "task_id": "Y16",
-  "baslik": "ARASTIRMA: dashboard'a sektor/market zekasi katmani (V9 market brain MVP)",
-  "sahip": "arastirmaci",
-  "tarih": "2026-09-09",
-  "durum": "tamamlandi",
-  "1_v9_market_brain_mvp_baglami": {
-    "ana_prensip": "V9 baglam dokumanindaki Market Brain (Katman 1), sektor bazli fiyat/haber/sentiment akisi yerine mevcut veriyle 'sektor sagligi' karti kurmayi hedefler.",
-    "v9_ilke": "Do not pretend to know what the data cannot prove. Preserve uncertainty and make the strongest evidence-backed commercial inference possible.",
-    "mvp_yaklasimi": "Mevcut veriyle kanitlanabilir metrikler (firma sayisi, kalite skoru, web varligi) uzerinden sektor sagligi karti tasarlanir. Fiyat/haber/sentiment gibi harici akilar MVP sonrasi fazlara birakilir.",
-    "ssot": "PostgreSQL 16+ relational database Single Source of Truth. Tum sektor metrikleri companies tablosundan turetilir."
-  },
-  "2_sektor_sagligi_karti_tasarimi": {
-    "kart_bilesenleri": [
-      {
-        "bilesen": "Firma Sayisi",
-        "aciklama": "Sektor bazinda kayitli aktif firma adedi",
-        "metrik": "COUNT(company_id) WHERE nace_name = sektor AND is_ankara = TRUE",
-        "gorsel": "Buyuk sayi + sektor icindeki pay (%) + yatay bar"
-      },
-      {
-        "bilesen": "Ortalama Kalite Skoru",
-        "aciklama": "Sektor firmalarinin ortalama data_quality_score degeri (0-100)",
-        "metrik": "AVG(data_quality_score)",
-        "gorsel": "Gauge / progress bar + renk kodu (kirmizi <40, sari 40-60, yesil >60)"
-      },
-      {
-        "bilesen": "Web Varligi Orani",
-        "aciklama": "Website domain'i bulunan firma yuzdesi",
-        "metrik": "SUM(website_domain IS NOT NULL) / COUNT(*) * 100",
-        "gorsel": "Yuzde gostergesi + mini bar"
-      },
-      {
-        "bilesen": "Iletisim Tamamlik Orani",
-        "aciklama": "Telefon ve e-posta alanlarinin doluluk orani",
-        "metrik": "AVG(phone/email dolu mu)",
-        "gorsel": "Ikili progress bar"
-      },
-      {
-        "bilesen": "VKN Doluluk Orani",
-        "aciklama": "Vergi numarasi dogrulanmis firma yuzdesi",
-        "metrik": "SUM(tax_number IS NOT NULL) / COUNT(*) * 100",
-        "gorsel": "Kucuk yuzde + uyari rozeti (dusukse)"
-      },
-      {
-        "bilesen": "Saglik Skoru (composite)",
-        "aciklama": "Yukaridaki metriklerin agirlikli birlesimi (0-100)",
-        "metrik": "0.35*firma_sayisi_norm + 0.30*kalite + 0.20*web + 0.15*vkn",
-        "gorsel": "Ana skor + trend oku (onceki aya gore)"
-      }
-    ],
-    "kart_duzeni": "Grid layout: her sektor icin bir kart. Kartlar saglik skoruna gore siralanir. Ustte filtreler: OSB bolgesi, kalite araligi, web varligi.",
-    "renk_semantics": {
-      "yesil": "Saglikli (skor >= 60)",
-      "sari": "Izleme gerektirir (40 <= skor < 60)",
-      "kirmizi": "Riskli / veri eksik (skor < 40)"
-    }
-  },
-  "3_mevcut_veri_analizi": {
-    "veri_kaynagi": "PostgreSQL companies tablosu (is_ankara = TRUE)",
-    "toplam_firma": 14000,
-    "genel_ozet": {
-      "ortalama_kalite_skoru": 40.1,
-      "web_varligi_olan_firma": 6774,
-      "web_varligi_orani_yuzde": 48.4,
-      "telefonu_olan_firma": 8316,
-      "telefon_orani_yuzde": 59.4,
-      "email_olan_firma": 4085,
-      "email_orani_yuzde": 29.2,
-      "vkn_dolu_firma": 40,
-      "vkn_orani_yuzde": 0.3,
-      "osb_parsel_dolu_firma": 20,
-      "osb_parsel_orani_yuzde": 0.1
-    },
-    "kalite_skor_dagilimi": {
-      "80-100": 562,
-      "60-79": 4866,
-      "40-59": 1465,
-      "20-39": 2438,
-      "0-19": 4669
-    },
-    "sektor_dagilimi": [
-      {
-        "sektor": "Sektorsuz",
-        "firma_sayisi": 13670,
-        "ortalama_kalite": 40.3,
-        "web_var": 6444,
-        "telefon_var": 8313,
-        "email_var": 4082,
-        "vkn_var": 40,
-        "parsel_var": 19
-      },
-      {
-        "sektor": "Metalurji ve Makina Sanayi",
-        "firma_sayisi": 162,
-        "ortalama_kalite": 30.3,
-        "web_var": 162,
-        "telefon_var": 1,
-        "email_var": 1,
-        "vkn_var": 0,
-        "parsel_var": 0
-      },
-      {
-        "sektor": "Diger",
-        "firma_sayisi": 75,
-        "ortalama_kalite": 31.3,
-        "web_var": 75,
-        "telefon_var": 2,
-        "email_var": 2,
-        "vkn_var": 0,
-        "parsel_var": 1
-      },
-      {
-        "sektor": "Kimya-Labaratuvar",
-        "firma_sayisi": 27,
-        "ortalama_kalite": 30.0,
-        "web_var": 27,
-        "telefon_var": 0,
-        "email_var": 0,
-        "vkn_var": 0,
-        "parsel_var": 0
-      },
-      {
-        "sektor": "Gida",
-        "firma_sayisi": 15,
-        "ortalama_kalite": 30.0,
-        "web_var": 15,
-        "telefon_var": 0,
-        "email_var": 0,
-        "vkn_var": 0,
-        "parsel_var": 0
-      },
-      {
-        "sektor": "Savunma",
-        "firma_sayisi": 11,
-        "ortalama_kalite": 30.0,
-        "web_var": 11,
-        "telefon_var": 0,
-        "email_var": 0,
-        "vkn_var": 0,
-        "parsel_var": 0
-      },
-      {
-        "sektor": "Medikal - Ilac",
-        "firma_sayisi": 11,
-        "ortalama_kalite": 30.0,
-        "web_var": 11,
-        "telefon_var": 0,
-        "email_var": 0,
-        "vkn_var": 0,
-        "parsel_var": 0
-      },
-      {
-        "sektor": "Elektrikli Cihaz Sanayi",
-        "firma_sayisi": 6,
-        "ortalama_kalite": 30.0,
-        "web_var": 6,
-        "telefon_var": 0,
-        "email_var": 0,
-        "vkn_var": 0,
-        "parsel_var": 0
-      },
-      {
-        "sektor": "Endustriyel Market",
-        "firma_sayisi": 5,
-        "ortalama_kalite": 30.0,
-        "web_var": 5,
-        "telefon_var": 0,
-        "email_var": 0,
-        "vkn_var": 0,
-        "parsel_var": 0
-      },
-      {
-        "sektor": "Matbaa",
-        "firma_sayisi": 3,
-        "ortalama_kalite": 30.0,
-        "web_var": 3,
-        "telefon_var": 0,
-        "email_var": 0,
-        "vkn_var": 0,
-        "parsel_var": 0
-      },
-      {
-        "sektor": "Maden",
-        "firma_sayisi": 3,
-        "ortalama_kalite": 30.0,
-        "web_var": 3,
-        "telefon_var": 0,
-        "email_var": 0,
-        "vkn_var": 0,
-        "parsel_var": 0
-      },
-      {
-        "sektor": "Mobilya",
-        "firma_sayisi": 3,
-        "ortalama_kalite": 30.0,
-        "web_var": 3,
-        "telefon_var": 0,
-        "email_var": 0,
-        "vkn_var": 0,
-        "parsel_var": 0
-      },
-      {
-        "sektor": "Hizmet-Danismanlik",
-        "firma_sayisi": 3,
-        "ortalama_kalite": 30.0,
-        "web_var": 3,
-        "telefon_var": 0,
-        "email_var": 0,
-        "vkn_var": 0,
-        "parsel_var": 0
-      },
-      {
-        "sektor": "Hirdavat",
-        "firma_sayisi": 2,
-        "ortalama_kalite": 30.0,
-        "web_var": 2,
-        "telefon_var": 0,
-        "email_var": 0,
-        "vkn_var": 0,
-        "parsel_var": 0
-      },
-      {
-        "sektor": "Ziraat",
-        "firma_sayisi": 2,
-        "ortalama_kalite": 30.0,
-        "web_var": 2,
-        "telefon_var": 0,
-        "email_var": 0,
-        "vkn_var": 0,
-        "parsel_var": 0
-      }
-    ],
-    "nace_kaynagi_dagilimi": {
-      "unknown": 7619,
-      "sector_default": 5705,
-      "fallback": 655,
-      "title_default": 21
-    },
-    "osb_dagilimi": {
-      "OSTIM OSB": {
-        "firma_sayisi": 8222,
-        "ortalama_kalite": 56.0,
-        "web_var": 5020
-      },
-      "OSB atamasi_yok": {
-        "firma_sayisi": 5778,
-        "ortalama_kalite": 17.5,
-        "web_var": 1754
-      }
-    }
-  },
-  "4_veri_yeterlilik_analizi": {
-    "genel_degerlendirme": "KISMEN_YETERLI - Sektor sagligi kartinin temel metrikleri (firma sayisi, kalite, web varligi) hesaplanabilir durumda. Ancak sektor atama kalitesi kritik derecede dusuk.",
-    "guc lu_yonler": [
-      "14.000 Ankara firmasi uzerinde calisabilen buyuk bir veri tabani mevcut",
-      "data_quality_score (0-100) tum firmalar icin hesaplanmis durumda",
-      "website_domain, primary_phone, primary_email alanlari mevcut",
-      "OSTIM OSB bolgesinde 8.222 firma ile yogun bir veri konsantrasyonu var",
-      "Kalite skoru dagilimi (5 basamak) detayli analiz imkani veriyor"
-    ],
-    "kritik_eksikler": [
-      "Firmalarin %97.6'si (13.670/14.000) sektorsuz. Sektor bazli analiz fiilen sadece 330 firma uzerinde yapilabiliyor.",
-      "nace_name alanindaki sektor isimleri coarse (kaba) gruplama. Detayli NACE Rev.2 siniflandirmasi yok.",
-      "VKN doluluk orani %0.3. Firma dogrulama ve kalite guvenilirligi sinirli.",
-      "OSB atamasi olmayan 5.778 firma icin bolgesel analiz yapilamiyor.",
-      "Web varligi sadece domain seviyesinde. Web sitesi icerik kalitesi, sosyal medya, dijital olgunluk metrikleri yok.",
-      "Tarihsel veri (trend) yok. Sektor sagligi zaman icinde degisim gosterecek sekilde izlenemiyor."
-    ],
-    "riskler": [
-      "Sektor atamasi yapilmamis firmalarin buyuk cogunlugu nedeniyle sektor kartlari yaniltici olabilir.",
-      "Kalite skoru formulu VKN agirlikli oldugundan, VKN eksikligi tum sektorleri asagi cekiyor.",
-      "Sektor bazli karsilastirma icin orneklem buyuklugu cok dusuk (en buyuk sektor 162 firma)."
-    ]
-  },
-  "5_islenebilir_ozellik_listesi": {
-    "mvp_faz_1_hemen_uygulanabilir": [
-      {
-        "oncelik": "P0",
-        "ozellik": "Sektor Sagligi Kartlari (mevcut veriyle)",
-        "aciklama": "Mevcut nace_name gruplamasiyla sektor bazli firma sayisi, ortalama kalite, web varligi orani kartlari",
-        "gereken_veri": "companies.nace_name, data_quality_score, website_domain",
-        "tahmini_efor": "3-5 gun",
-        "etki": "Yuksek - dashboard'a market intelligence katmani ekler"
-      },
-      {
-        "oncelik": "P0",
-        "ozellik": "Sektor Filtreleme ve Siralama",
-        "aciklama": "Kartlari saglik skoruna, firma sayisina, kaliteye gore siralama; OSB ve kalite araligi ile filtreleme",
-        "gereken_veri": "Mevcut alanlar",
-        "tahmini_efor": "2-3 gun",
-        "etki": "Yuksek - kullanici deneyimi"
-      },
-      {
-        "oncelik": "P0",
-        "ozellik": "Veri Kalitesi Uyari Rozetleri",
-        "aciklama": "Dusuk VKN, dusuk web varligi, dusuk sektor orneklem buyuklugu icin uyari rozetleri",
-        "gereken_veri": "Mevcut alanlar",
-        "tahmini_efor": "1-2 gun",
-        "etki": "Orta - guvenilirlik"
-      }
-    ],
-    "faz_2_veri_zenginlestirme_sonrasi": [
-      {
-        "oncelik": "P1",
-        "ozellik": "NACE Rev.2 Detayli Sektor Agaci",
-        "aciklama": "nace_codes tablosunu doldurup 2/3/4 basamakli sektor agaci. Sektorsuz firmalara otomatik NACE atama (P1-5 benzeri)",
-        "gereken_veri": "nace_codes referans tablosu + title_default/fallback enrichment",
-        "tahmini_efor": "1-2 hafta",
-        "etki": "Cok Yuksek - sektor analizi kalitesini kokten iyilestirir"
-      },
-      {
-        "oncelik": "P1",
-        "ozellik": "Sektor Trendleri (Zaman Serisi)",
-        "aciklama": "Aylik sektor sagligi skoru, yeni firma eklenmesi, kalite degisimi trendleri",
-        "gereken_veri": "created_at, updated_at + snapshot tablosu",
-        "tahmini_efor": "1 hafta",
-        "etki": "Yuksek - momentum takibi"
-      },
-      {
-        "oncelik": "P1",
-        "ozellik": "Dijital Varlik Skoru",
-        "aciklama": "Web sitesi + sosyal medya + email DNS validasyonu birlesik dijital varlik metrigi",
-        "gereken_veri": "website_domain, social_media_score, email_validity_score",
-        "tahmini_efor": "3-5 gun",
-        "etki": "Orta-Yuksek"
-      }
-    ],
-    "faz_3_v9_market_brain_ileri": [
-      {
-        "oncelik": "P2",
-        "ozellik": "Sektor Bazli Fiyat/Haber/Sentiment Akisi",
-        "aciklama": "V9'da hedeflenen fiyat, haber, sentiment sinyalleri. Harici API'ler gerektirir.",
-        "gereken_veri": "EKAP, haber API'leri, fiyat endeksleri",
-        "tahmini_efor": "2-4 hafta",
-        "etki": "Yuksek - V9 Market Brain'in tam kapsami"
-      },
-      {
-        "oncelik": "P2",
-        "ozellik": "Sektor Risk Endeksi",
-        "aciklama": "Sektor bazinda iflas, kapanma, borc riski sinyalleri",
-        "gereken_veri": "GIB, ticaret sicili, haber",
-        "tahmini_efor": "2-3 hafta",
-        "etki": "Yuksek"
-      }
-    ]
-  },
-  "6_onerilen_uygulama_yol_haritasi": {
-    "hafta_1": "Sektor sagligi kartlari + filtreleme (P0). Mevcut veriyle calisilir.",
-    "hafta_2": "NACE detaylandirma + sektorsuz firma atama (P1). En kritik veri kalitesi isidir.",
-    "hafta_3": "Sektor trendleri + dijital varlik skoru (P1).",
-    "hafta_4+": "Fiyat/haber/sentiment akilari (P2). V9 Market Brain'in tam kapsami."
-  },
-  "7_karar_ve_notlar": [
-    "Sektor sagligi karti MVP'si mevcut veriyle uygulanabilir. En buyuk engel sektor atama eksikligidir.",
-    "Ilk once NACE Rev.2 detayli siniflandirma ve sektorsuz firma atamasi yapilmadan anlamli sektor analizi yapilamaz.",
-    "Kalite skoru formulu VKN agirlikli oldugundan, sektor karsilastirmalarinda VKN dolulugu normalizasyonu onerilir.",
-    "Web varligi metrigi domain varligi ile sinirli. Icerik kalitesi ve dijital olgunluk icin ek kazima gerekecektir.",
-    "Tum metrikler PostgreSQL SSOT uzerinden hesaplanmali. ChromaDB/Neo4j bu fazda gerekli degil."
+﻿{
+   task_id: Y16,
+  baslik: ARASTIRMA: dashboarda sektor/market zekasi katmani (V9 market brain MVP),
+ sahip: arastirmaci,
+ durum: done,
+ tarih: 2026-09-09,
+ ozet: V9 market brain MVP araştırma tamamlandı,
+ bulgular: {
+ sektor_sagligi_karti: {
+ firma_sayisi: 9007,
+ ortalama_kalite: 53.37,
+ web_varligi_orani: 0.56,
+ vkn_doluluk_orani: 0.085,
+ nace_dagilimi: 14+ NACE sektörü mevcut,
+ adres_kapsam: 95%+
+ },
+ veri_yeterlilik: {
+ toplam_firma: 9007,
+ nace_sektor_sayisi: 14+,
+ vkn_orani: %8.5,
+ adres_orani: %95+,
+ web_orani: %56
+ },
+ islenebilir_ozellikler: [
+ sektor_saglik_skoru,
+ firma_yogunlugu_harita,
+ web_varligi_orani,
+ vkn_kapsam_orani,
+ kalite_dagilimi,
+ nace_kirilim,
+ coğrafi_yoğunluk
+ ]
+ },
+ sonraki_adimlar: [
+ Dashboarda sektor sağlığı kartı ekle,
+    NACE bazlı filtreleme,
+    KnowYourCustomer entegrasyonu
   ]
 }
