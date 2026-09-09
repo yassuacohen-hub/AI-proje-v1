@@ -71,6 +71,55 @@ async function loadAll() {
   hideLoading();
   renderWatchlist();
   restoreLastFilter();
+  populateMatchNace(); // match dropdown sayfa acilisinda dolsun
+  loadTasks();
+}
+
+function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+async function loadTasks() {
+  const summaryEl = document.getElementById('tasks-summary');
+  const bodyEl = document.getElementById('tasks-body');
+  if (!summaryEl || !bodyEl) return;
+  try {
+    const r = await fetch(apiUrl('/api/tasks'));
+    if (!r.ok) throw new Error(`API ${r.status}`);
+    const d = await r.json();
+    const gorevler = Array.isArray(d) ? d : (d.gorevler || d.items || []);
+    const say = g => gorevler.filter(x => x.durum === g).length;
+    const toplam = gorevler.length;
+    const done = say('done') + say('tamamlandi');
+    summaryEl.className = 'match-agg';
+    summaryEl.innerHTML = `
+      <div class="agg-chip">Toplam Görev<b>${toplam}</b></div>
+      <div class="agg-chip">Tamamlanan<b style="color:var(--green)">${done}</b></div>
+      <div class="agg-chip">Plan / Bekleyen<b style="color:#fbbf24">${say('plan')}</b></div>
+      <div class="agg-chip">Aktif<b style="color:var(--accent)">${say('aktif')}</b></div>
+      <div class="agg-chip">Engelli<b style="color:var(--red)">${say('blocked')}</b></div>`;
+    const sirali = gorevler
+      .filter(g => ['plan', 'aktif', 'blocked'].includes(g.durum))
+      .slice(0, 12);
+    const sonTamamlanan = gorevler.filter(g => ['done', 'tamamlandi'].includes(g.durum)).slice(-4);
+    const durumRenk = { plan: '#fbbf24', aktif: 'var(--accent)', blocked: 'var(--red)', done: 'var(--green)', tamamlandi: 'var(--green)' };
+    bodyEl.innerHTML = `
+      <div class="match-result-head">
+        <span class="mr-col-name">Görev</span><span class="mr-col-nace">Sahip</span>
+        <span class="mr-col-score">Durum</span><span class="mr-col-rel">Not</span>
+      </div>` +
+      (sirali.map(g => `
+      <div class="match-result-row" style="cursor:default">
+        <div class="mr-name"><div class="mr-name-main">${esc(g.baslik || g.ad || g.id || '-')}</div></div>
+        <div class="mr-nace">${esc(g.sahip || '-')}</div>
+        <div class="mr-score"><span class="match-badge" style="background:rgba(255,255,255,.06);color:${durumRenk[g.durum] || 'inherit'};border:1px solid ${durumRenk[g.durum] || 'inherit'}">${esc(g.durum)}</span></div>
+        <div class="mr-rel" style="font-size:11px;color:var(--text-dim)">${esc((g.not || '').substring(0, 90))}${(g.not || '').length > 90 ? '…' : ''}</div>
+      </div>`).join('') || '') +
+      `<div class="match-empty" style="border-style:solid;margin-top:10px">
+        <i class="fas fa-check-circle" style="color:var(--green)"></i> Bekleyen görevlerin hepsi ajanda. Son tamamlananlar:
+        ${sonTamamlanan.map(g => esc((g.baslik || g.id) + '')).join(' · ')}
+      </div>`;
+  } catch (e) {
+    bodyEl.innerHTML = `<div class="match-empty"><i class="fas fa-exclamation-circle"></i> Görev tahtası yüklenemedi: ${esc(e.message)}</div>`;
+  }
 }
 
 async function loadKPI() {

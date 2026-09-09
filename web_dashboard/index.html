@@ -34,12 +34,12 @@
   <aside class="sidebar">
     <div class="sidebar-section">
       <div class="sidebar-title">Navigasyon</div>
-      <div class="nav-item tip" data-tip="Genel bakış: firma sayısı, kalite skoru ve veri doluluk oranları burada." onclick="showView('dashboard',this)"><i class="fas fa-chart-line"></i> Genel Bakış</div>
-      <div class="nav-item tip" data-tip="Tüm firmaları listeleyin, arayın, filtreleyin. Satıra tıklayınca detay paneli açılır." onclick="showView('companies',this)"><i class="fas fa-building"></i> Firmalar</div>
-      <div class="nav-item tip" data-tip="Veri kaynakları: OSTİM, ASO, İvedik, Başkent, Web. Kaynağa tıklayarak firmaları filtreleyebilirsiniz." onclick="showView('sources',this)"><i class="fas fa-database"></i> Veri Kaynakları</div>
-      <div class="nav-item tip" data-tip="Veri kalitesi: skor dağılımı ve hangi alanların ne kadar dolu olduğu." onclick="showView('quality',this)"><i class="fas fa-chart-bar"></i> Veri Kalitesi</div>
+      <div class="nav-item tip" data-tip="Genel bakış: firma sayısı, kalite skoru ve veri doluluk oranları burada." onclick="showView('dashboard',this); scrollToTop()"><i class="fas fa-chart-line"></i> Genel Bakış</div>
+      <div class="nav-item tip" data-tip="Tüm firmaları listeleyin, arayın, filtreleyin. Satıra tıklayınca detay paneli açılır." onclick="showView('companies',this); scrollToSection('companies-section')"><i class="fas fa-building"></i> Firmalar</div>
+      <div class="nav-item tip" data-tip="Veri kaynakları: OSTİM, ASO, İvedik, Başkent, Web. Kaynağa tıklayarak firmaları filtreleyebilirsiniz." onclick="showView('sources',this); scrollToSection('sources-section')"><i class="fas fa-database"></i> Veri Kaynakları</div>
+      <div class="nav-item tip" data-tip="Veri kalitesi: skor dağılımı ve hangi alanların ne kadar dolu olduğu." onclick="showView('quality',this); scrollToSection('quality-section')"><i class="fas fa-chart-bar"></i> Veri Kalitesi</div>
       <div class="nav-item tip" data-tip="V9 Smart Matching: alıcı sektörünüze en uygun firmaları puanlı görün." onclick="showView('match',this); scrollToSection('match-section')"><i class="fas fa-handshake"></i> Eşleştirme</div>
-      <div class="nav-item tip" data-tip="İç ajanların görev panosu: kim ne yapıyor, ne tamamlandı." onclick="showView('tasks',this)"><i class="fas fa-tasks"></i> Görev Tahtası</div>
+      <div class="nav-item tip" data-tip="İç ajanların görev panosu: kim ne yapıyor, ne tamamlandı." onclick="showView('tasks',this); scrollToSection('tasks-section')"><i class="fas fa-tasks"></i> Görev Tahtası</div>
     </div>
     <div class="sidebar-section">
       <div class="sidebar-title">Bilgi Merkezi</div>
@@ -87,7 +87,7 @@
             <div class="chart-card-header"><div class="chart-card-title"><i class="fas fa-chart-pie"></i> Alan Doluluk Oranları</div></div>
             <div class="chart-container"><canvas id="coverageChart"></canvas></div>
           </div>
-          <div class="chart-card">
+          <div class="chart-card" id="quality-section">
             <div class="chart-card-header"><div class="chart-card-title"><i class="fas fa-chart-bar"></i> Kalite Skoru Dağılımı</div></div>
             <div class="chart-container"><canvas id="qualityChart"></canvas></div>
           </div>
@@ -137,7 +137,7 @@
         </div>
 
         <!-- Veri Kaynaklari Bolumu -->
-        <div class="sources-section">
+        <div class="sources-section" id="sources-section">
           <div class="sources-header">
             <h2><i class="fas fa-database"></i> Veri Kaynakları</h2>
             <div class="sources-actions">
@@ -177,7 +177,20 @@
           </div>
         </div>
 
-        <div class="table-card">
+        <!-- Y19: Gorev Tahtasi Bolumu -->
+        <div class="chart-card" id="tasks-section" style="margin-bottom:16px">
+          <div class="chart-card-header">
+            <div class="chart-card-title"><i class="fas fa-tasks"></i> Görev Tahtası <span style="font-size:11px;color:#64748b;margin-left:6px">iç ajan görevleri — canlı</span></div>
+            <div class="chart-card-actions">
+              <button class="chart-btn" onclick="loadTasks()"><i class="fas fa-sync-alt"></i> Yenile</button>
+            </div>
+          </div>
+          <p class="sources-hint" style="padding:0 16px"><i class="fas fa-info-circle"></i> İç ajanların (arastirmaci, gelistirici, kalite, web_kazima…) o an yaptığı işler ve tamamlananlar.</p>
+          <div id="tasks-summary" class="match-agg" style="margin:10px 16px"></div>
+          <div id="tasks-body" class="match-results"></div>
+        </div>
+
+        <div class="table-card" id="companies-section">
           <div class="table-header">
             <h2><i class="fas fa-building"></i> Firma Listesi <span class="table-count" id="table-count">0</span></h2>
             <div class="table-filters">
@@ -212,6 +225,6 @@
   </aside>
 </div>
 <script src="/static/js/nace_labels.js"></script>
-<script src="/static/js/app.js?v=5"></script>
+<script src="/static/js/app.js?v=6"></script>
 </body>
 </html>

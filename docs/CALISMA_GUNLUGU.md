@@ -1,4 +1,18 @@
 
+## 2026-09-09 — UX düzeltmeleri: dropdown dolumu + topbar ortası + nav scroll + canlı Görev Tahtası ✅
+
+**Kullanıcı bildirimi 3 sorunun fix'i:**
+
+| # | Sorun | Kök neden | Fix |
+|---|---|---|---|
+| 1 | Match "Alıcı Sektörü" dropdown'u boş | `populateMatchNace` yalnız nav tıklamasında çağrılıyordu | `loadAll()` sonuna taşındı — sayfa açılışında dolar |
+| 2 | Arama çubuğu en sağa kaymış | `.topbar-search{flex:1}` kutuyu sola sıkıştırıp actions'a itiyordu | `display:flex;justify-content:center` + iç kutu `max-width:460px` — **ortalı** |
+| 3 | Nav menüler bölüm kaymıyordu | `showView` yalnızca active-class; section'lara id yoktu | Her nav-item'a `scrollToSection()` bağlandı + id'ler verildi: `companies-section`, `sources-section`, `quality-section`, `tasks-section` (Genel → scrollToTop) |
+
+**Bonus:** Görev Tahtası nav'ı ölüydü (HTML'de bölüm yoktu) → **yeni canlı Görev Tahtası bölümü** eklendi (`/api/tasks`): özet chips (Toplam/Tamamlanan/Plan/Aktif/Engelli) + bekleyen 12 görev (renkli durum badge'leri, ajan sahibi, not) + son tamamlananlar + Yenile butonu. `loadTasks()` loadAll zincirine eklendi.
+
+**Test (headless Edge, virtual-time 12 sn):** dump 181KB · KPI render ✅ · **match-nace options doldu (40 option)** · tasks özet chips=5 ✅ · data-tip=14 ✅ · section id'leri 3/3 ✅ · `node --check` OK · cache-buster v6
+
 ## 2026-09-09 — UX/UI paketi: tüm öneriler + hover bilgi notları ✅
 
 **1. Detay paneli aksiyon butonları:**

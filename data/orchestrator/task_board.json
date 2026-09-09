@@ -1136,8 +1136,9 @@
     "id": "Y18",
     "baslik": "ARASTIRMA: Telegram musterisi icin abonelik/rate plan tasarimi",
     "sahip": "arastirmaci",
-    "durum": "plan",
-    "not": "Dashboard + Telegram'li musteri sunumunda sorgu limitleri ne olmali (per API key, DASH_API_KEY var). Rekabete (Kompass, Euromonitor TR segmenti) bakip pilot abonelik tier'i onerisi cikar. Cikti: tier tablosu + kotalar + isimlendirme."
+    "durum": "done",
+    "not": "Abonelik/rate plan tasarimi tamamlandi: API key bazli kota sistemi, 4 tier tablosu (Free/Starter/Professional/Enterprise), pilot abonelik onerisi. Kompass ve Euromonitor TR segmenti rekabet analizi yapildi. Cikti: data/orchestrator/y18_result.json",
+    "bitis": "2026-09-09T12:00:00Z"
   },
   {
     "id": "Y19",
