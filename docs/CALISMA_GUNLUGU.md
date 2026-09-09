@@ -1,4 +1,16 @@
 
+## 2026-09-09 — "İşletmem" bağımsız tam ekran panele taşındı (kullanıcı feedback'i) ✅
+
+**Kullanıcı:** "verilerin arasında duran bir yerde olmaz, bağımsız olsun — navigasyonun ilki veya sağ üstte Yenile'nin orası olabilir; tıklayınca kayıt sayfası açılır."
+
+**Uygulanan çözüm — 2 giriş noktası + bağımsız overlay:**
+1. **Topbar sağ üst**: mavi vurgulu **"İşletmem"** butonu (CANLI/Yenile grubunun yanında) — üye değilken de görünür, ilk temas noktası
+2. **Navigasyonda İLK öğe**: İşletmem (Genel Bakış'ın üstüne taşındı)
+3. **Bağımsız tam ekran overlay** (980px ortalanmış panel): veri kartlarının arasına gömülü değil; kendi başlık + Kapat butonu olan bağımsız sayfa gibi açılır (arka plan koyu, body scroll kilidi, dış tık = kapat)
+4. Verilerin arasındaki eski chart-card **tamamen kaldırıldı**
+
+**Doğrulama (headless Edge):** topbar butonu ✓ · openIsletmem 2 çağrı noktası ✓ · nav ilk sırada İşletmem ✓ · 18 tooltip ✓ · `node --check` OK · cache v10
+
 ## 2026-09-09 — "İşletmem" sayfası: profil yönetimi + kredi merkezi ✅
 
 **Kullanıcı kararı:** Üyelik CTA match panelinden ayrıldı → navigasyonda **"İşletmem"** sayfası (fa-briefcase).

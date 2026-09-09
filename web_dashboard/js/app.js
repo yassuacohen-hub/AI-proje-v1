@@ -953,7 +953,39 @@ document.addEventListener('DOMContentLoaded', () => {
   refreshCreditBadge();
 });
 
-// ── Y22: Isletmem sayfasi (profil + kredi + paket) ─────────────────────────
+// ── Y22: Isletmem sayfasi (bagimsiz tam ekran overlay: profil + kredi + paket) ──
+
+function openIsletmem() {
+  let ov = document.getElementById('isletmem-overlay');
+  if (!ov) {
+    ov = document.createElement('div');
+    ov.id = 'isletmem-overlay';
+    ov.style.cssText = 'position:fixed;inset:0;background:rgba(5,7,12,.92);z-index:9998;overflow-y:auto;padding:28px 20px';
+    ov.innerHTML = `
+      <div style="max-width:980px;margin:0 auto">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
+          <h2 style="margin:0;font-size:20px"><i class="fas fa-briefcase" style="color:var(--accent)"></i> İşletmem
+            <span style="font-size:12px;color:var(--text-dim);margin-left:8px">profil · kredi · paket yönetimi</span></h2>
+          <button onclick="closeIsletmem()" style="background:var(--panel-bg);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:13px">✕ Kapat</button>
+        </div>
+        <div class="chart-card" style="padding:4px 0 12px">
+          <p class="sources-hint" style="padding:8px 16px 0"><i class="fas fa-info-circle"></i> Profiliniz ne kadar doluysa eşleştirme o kadar isabetli olur. Krediniz her "Eşleştir" ve kontak görüntülemesinde azalır.</p>
+          <div id="isletmem-body" style="padding:0 16px 16px"></div>
+        </div>
+      </div>`;
+    document.body.appendChild(ov);
+    ov.addEventListener('click', e => { if (e.target === ov) closeIsletmem(); });
+  }
+  ov.style.display = 'block';
+  document.body.style.overflow = 'hidden';
+  loadIsletmem();
+}
+
+function closeIsletmem() {
+  const ov = document.getElementById('isletmem-overlay');
+  if (ov) ov.style.display = 'none';
+  document.body.style.overflow = '';
+}
 
 function loadIsletmem() {
   const tok = getMemberToken();

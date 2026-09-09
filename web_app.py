@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from company_master.db.connection import get_engine
+from company_master.intelligence.job_intelligence.api.router import router as job_intelligence_router
 from company_master.orchestrator import task_board as tb
 
 # Query profiler
@@ -407,6 +408,7 @@ app.add_middleware(
 WEB_DIR = ROOT / "web_dashboard"
 WEB_DIR.mkdir(parents=True, exist_ok=True)
 
+app.include_router(job_intelligence_router)
 app.mount("/static", StaticFiles(directory=str(WEB_DIR)), name="web-static")
 
 

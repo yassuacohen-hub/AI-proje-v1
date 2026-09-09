@@ -25,6 +25,9 @@
       <span class="kbd-hint">Ctrl+K</span>
     </div>
     <div class="topbar-actions">
+      <div id="isletmem-topbar-btn" class="tip" data-tip="İşletmeniz: profil, kredi ve paket yönetimi." style="cursor:pointer" onclick="openIsletmem()">
+        <span style="display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.35);color:#93c5fd;font-size:12px;font-weight:600;transition:background .15s" onmouseover="this.style.background='rgba(59,130,246,.28)'" onmouseout="this.style.background='rgba(59,130,246,.15)'"><i class="fas fa-briefcase"></i> İşletmem</span>
+      </div>
       <div class="live-indicator"><span class="live-dot"></span> CANLI</div>
       <div class="last-update" id="last-update">Son güncelleme: —</div>
       <button class="btn-refresh" onclick="loadAll()"><i class="fas fa-sync-alt"></i> Yenile</button>
@@ -34,6 +37,7 @@
   <aside class="sidebar">
     <div class="sidebar-section">
       <div class="sidebar-title">Navigasyon</div>
+      <div class="nav-item tip" data-tip="İşletmeniz: firma profiliniz, departmanınız, kredileriniz ve paketiniz — ne kadar çok bilgi, o kadar isabetli eşleşme." onclick="showView('isletmem',this); openIsletmem()"><i class="fas fa-briefcase"></i> İşletmem</div>
       <div class="nav-item tip" data-tip="Genel bakış: firma sayısı, kalite skoru ve veri doluluk oranları burada." onclick="showView('dashboard',this); scrollToTop()"><i class="fas fa-chart-line"></i> Genel Bakış</div>
       <div class="nav-item tip" data-tip="Tüm firmaları listeleyin, arayın, filtreleyin. Satıra tıklayınca detay paneli açılır." onclick="showView('companies',this); scrollToSection('companies-section')"><i class="fas fa-building"></i> Firmalar</div>
       <div class="nav-item tip" data-tip="Veri kaynakları: OSTİM, ASO, İvedik, Başkent, Web. Kaynağa tıklayarak firmaları filtreleyebilirsiniz." onclick="showView('sources',this); scrollToSection('sources-section')"><i class="fas fa-database"></i> Veri Kaynakları</div>
@@ -184,19 +188,9 @@
           </div>
         </div>
 
-        <!-- Y22: Isletmem Bolumu (profil + kredi + paket) -->
-        <div class="chart-card" id="isletmem-section" style="margin-bottom:16px">
-          <div class="chart-card-header">
-            <div class="chart-card-title"><i class="fas fa-briefcase"></i> İşletmem <span style="font-size:11px;color:#64748b;margin-left:6px">profil · kredi · paket</span></div>
-            <div class="chart-card-actions">
-              <button class="chart-btn" onclick="loadIsletmem()"><i class="fas fa-sync-alt"></i> Yenile</button>
-            </div>
-          </div>
-          <p class="sources-hint" style="padding:0 16px"><i class="fas fa-info-circle"></i> Profiliniz ne kadar doluysa eşleştirme o kadar isabetli olur. Krediniz her "Eşleştir" ve kontak görüntülemesinde azalır.</p>
-          <div id="isletmem-body" style="padding:0 16px 16px"></div>
-        </div>
+        <!-- Y22: Isletmem — bamsız tam ekran panel (JS ile acilir, chart-card degil) -->
 
-        <!-- Y19: Gorev Tahtasi Bolumu -->
+<!-- Y19: Gorev Tahtasi Bolumu -->
         <div class="chart-card" id="tasks-section" style="margin-bottom:16px">
           <div class="chart-card-header">
             <div class="chart-card-title"><i class="fas fa-tasks"></i> Görev Tahtası <span style="font-size:11px;color:#64748b;margin-left:6px">iç ajan görevleri — canlı</span></div>
@@ -244,6 +238,6 @@
   </aside>
 </div>
 <script src="/static/js/nace_labels.js"></script>
-<script src="/static/js/app.js?v=9"></script>
+<script src="/static/js/app.js?v=10"></script>
 </body>
 </html>
