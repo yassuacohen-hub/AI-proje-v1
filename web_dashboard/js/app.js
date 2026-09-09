@@ -952,7 +952,7 @@ function copyField(field, label) {
 function toggleWatchDetail() {
   const c = window._detailCompany;
   if (!c) return;
-  toggleWatch(c.company_id);
+  toggleWatch(watchKeyOf(c));
   showDetail(c); // buton etiketini yenile
   toast(isWatched(c) ? 'İzleme listesine eklendi' : 'İzleme listesinden çıkarıldı');
 }

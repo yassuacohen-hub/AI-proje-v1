@@ -29,13 +29,56 @@ async function evaluate(expression) {
   return r.result.value;
 }
 const pause = ms => new Promise(r => setTimeout(r,ms));
+process.on('exit', () => {});
 try {
   await send('Runtime.enable'); await send('Page.enable');
   await send('Page.navigate', {url:'http://127.0.0.1:8000/static/index.html'});
+  let loaded = false;
   for (let i=0;i<60;i++) {
-    if (await evaluate('typeof allCompanies !== "undefined" && allCompanies.length > 0 && !document.getElementById("content").classList.contains("hidden")')) break;
+    try {
+      if (await evaluate('typeof allCompanies !== "undefined" && allCompanies.length > 0 && !document.getElementById("content").classList.contains("hidden")')) { loaded = true; break; }
+    } catch(e) { /* sayfa yukleniyor */ }
     await pause(500);
   }
+  if (!loaded) {
+    const diag = await evaluate('({url: location.href, hasAll: typeof allCompanies !== "undefined", n: typeof allCompanies !== "undefined" ? allCompanies.length : -1, contentHidden: document.getElementById("content")?.classList.contains("hidden"), err: document.getElementById("error-text")?.textContent})');
+    console.log('DIAG:', JSON.stringify(diag));
+  }
+  assert.ok(loaded, 'Dashboard must load');
+  // ── Watchlist toggle canary (bug fix dogrulamasi) ──
+  // Deterministik: izleme listesini temizle, sayfayi yeniden yukle, sonra toggle davranisini dogrula
+  await evaluate('localStorage.removeItem("huginn_watchlist")');
+  await send('Page.navigate', {url:'http://127.0.0.1:8000/static/index.html'});
+  for (let i=0;i<60;i++) {
+    try { if (await evaluate('typeof allCompanies !== "undefined" && allCompanies.length > 0 && !document.getElementById("content").classList.contains("hidden")')) break; } catch(e) {}
+    await pause(500);
+  }
+  const watchTest = await evaluate(`(async () => {
+    const c = allCompanies.find(x => x.nace_code);
+    if (!c) return {ok:false, reason:'firma yok'};
+    // detay panelini ac
+    showDetail(c);
+    await new Promise(r=>setTimeout(r,300));
+    const btnLabelBefore = document.querySelector('.detail-actions .d-btn:nth-child(2)')?.textContent.trim() || '?';
+    // toggleWatchDetail cagir (butonun yaptigi sey)
+    toggleWatchDetail();
+    await new Promise(r=>setTimeout(r,300));
+    const toastText = document.getElementById('toast')?.textContent || '';
+    const added = watchSet.has(watchKeyOf(c));
+    const btnLabelAfter = document.querySelector('.detail-actions .d-btn:nth-child(2)')?.textContent.trim() || '?';
+    const listCount = watchSet.size;
+    // geri al (temiz cikis)
+    toggleWatchDetail();
+    await new Promise(r=>setTimeout(r,200));
+    const removed = !watchSet.has(watchKeyOf(c));
+    return {ok:true, btnLabelBefore, toastText, added, btnLabelAfter, listCount, removed, watchKeyOfName: typeof watchKeyOf};
+  })()`);
+  assert.ok(watchTest.ok !== false, 'Watch test calismadi: ' + JSON.stringify(watchTest));
+  assert.ok(/eklendi/.test(watchTest.toastText), 'Toast ekleme demeli: ' + watchTest.toastText);
+  assert.ok(watchTest.added === true, 'toggle sonrasi watchSet icinde olmali');
+  assert.ok(/İzlemeden Çıkar/.test(watchTest.btnLabelAfter), 'Buton etiketi Izlemeden Cikar olmali: ' + watchTest.btnLabelAfter);
+  assert.ok(watchTest.removed === true, 'Ikinci toggle ile listeden cikmali');
+  console.log('PASS watchlist-toggle:', JSON.stringify(watchTest));
   assert.ok(await evaluate('allCompanies.length > 0'), 'Live companies must load');
   for (const width of [1600,1366,1150,1024,768,760,390,320]) {
     await send('Emulation.setDeviceMetricsOverride', {width,height:900,deviceScaleFactor:1,mobile:false});
