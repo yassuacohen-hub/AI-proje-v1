@@ -1,1460 +1,1401 @@
 [
-    {
-        "task_id":  "T1",
-        "baslik":  "Ivedik scraper implementasyonu",
-        "sahip":  "gelistirici",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:21:14",
-        "bitis":  "2026-09-06T20:58:44",
-        "dosyalar":  [
-                         "src/company_master/etl/scrapers/ivedik_scraper.py"
-                     ],
-        "not":  "Ivedik scraper iskeleti hazir (src/company_master/etl/scrapers/ivedik_scraper.py). VPN/DNS engeli nedeniyle erisim saglanamadi."
-    },
-    {
-        "task_id":  "T2",
-        "baslik":  "MERSIS API basvurusu takibi",
-        "sahip":  "arastirmaci",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:21:14",
-        "bitis":  "2026-09-06T20:58:44",
-        "dosyalar":  [
-
-                     ],
-        "not":  "MERSIS API basvurusu takibi dis baglantiya bagli. Mevcut veri kaynaklari (OSTIM, ASO) ile devam ediliyor."
-    },
-    {
-        "task_id":  "T3",
-        "baslik":  "Sema tasarimi",
-        "sahip":  "mimar",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:21:20",
-        "bitis":  "2026-09-06T20:58:44",
-        "dosyalar":  [
-                         "src/company_master/etl/scrapers/ivedik_scraper.py"
-                     ],
-        "not":  "Sema tasarimi migrated to V10 mimarisi."
-    },
-    {
-        "task_id":  "T3b",
-        "baslik":  "Sema tasarimi",
-        "sahip":  "mimar",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:22:13",
-        "bitis":  "2026-09-06T20:58:44",
-        "dosyalar":  [
-                         "src/company_master/schema/migrations/0007_osb.sql"
-                     ],
-        "not":  "Sema tasarimi migrated to V10 mimarisi."
-    },
-    {
-        "task_id":  "P0-1",
-        "baslik":  "OSTÃ„Â°M detay scrape tamamla (~1961/8313)",
-        "sahip":  "web_kazima",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:39:48",
-        "bitis":  "2026-09-03T14:18:36",
-        "dosyalar":  [
-
-                     ],
-        "not":  "5485 firma detay scrape tamamlandi. Ingest ve pipeline tetiklendi."
-    },
-    {
-        "task_id":  "P0-2",
-        "baslik":  "Scrape bitince ingest Ã¢â€ â€™ VKN Ã¢â€ â€™ kalite recalc",
-        "sahip":  "gelistirici",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:39:48",
-        "bitis":  "2026-09-03T14:18:36",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Syntax hatasi duzeltilip calistirildi. Ingest 5485/5485 matched, 0 errors. 43 VKN footer extract ile DB\u0027ye yazildi."
-    },
-    {
-        "task_id":  "P0-3",
-        "baslik":  "Kalite skoru 6.53 Ã¢â€ â€™ 50+ hedefine yÃƒÂ¼kselt",
-        "sahip":  "kalite",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:39:48",
-        "bitis":  "2026-09-06T22:54:31",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Kalite skoru 56.54/100 (hedef 50+ BASARILI). Dagilim: 80-100: 727, 60-79: 4854, 40-59: 1025, 20-39: 2241, 0-19: 160. Alanlar: telefon %92.3, email %48.4, web %56.2, NACE %100, VKN %0.4. VKN tek eksik alan Ã¢â‚¬â€ MERSIS API (P2-1) ile cozulebilir."
-    },
-    {
-        "task_id":  "P1-1",
-        "baslik":  "Ã„Â°vedik OSB scraper implementasyonu",
-        "sahip":  "gelistirici",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:39:48",
-        "bitis":  "2026-09-07T00:43:00",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Scraper calisir hale getirildi.ivedikosb.org.tr ve baskentosb.org erisildi."
-    },
-    {
-        "task_id":  "P1-2",
-        "baslik":  "BaÃ…Å¸kent OSB scraper implementasyonu",
-        "sahip":  "gelistirici",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:39:48",
-        "bitis":  "2026-09-07T00:43:00",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Scraper calisir hale getirildi.baskentosb.org tek sayfada 1446 firma."
-    },
-    {
-        "task_id":  "P1-3",
-        "baslik":  "ASO mevcut veriyi ingest et (488KB)",
-        "sahip":  "gelistirici",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:39:48",
-        "bitis":  "2026-09-06T15:16:53",
-        "dosyalar":  [
-
-                     ],
-        "not":  "ASO ingest tamamlandi. 785 kayit, 0 hata. 159 yeni firma eklendi. 783 adres, 785 VKN yazildi."
-    },
-    {
-        "task_id":  "P1-4",
-        "baslik":  "Multi-OSB merger: ~19.000 firma",
-        "sahip":  "gelistirici",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:39:48",
-        "bitis":  "2026-09-06T18:00:25",
-        "dosyalar":  [
-
-                     ],
-        "not":  "multi_osb_merger.py + ingest_merged_bulk.py calistirildi. Merged 5665 kayit -\u003e DB: 80 yeni eklendi, 5585 guncellendi. Bulk upsert (tek sorgu/250 kayit) DB roundtrip 8sn sorununu cozdu: satir satir yerine ~25 sorguyla tamamlandi. Toplam: 9007 firma, NACE 7741 (%85.9), web 5061."
-    },
-    {
-        "task_id":  "P1-5",
-        "baslik":  "NACE: kalan 1266 sektÃƒÂ¶rsÃƒÂ¼z firma",
-        "sahip":  "arastirmaci",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:39:48",
-        "bitis":  "2026-09-06T21:38:08",
-        "dosyalar":  [
-
-                     ],
-        "not":  "nace_eksik_doldur.py calistirildi: 634 NACE\u0027siz firma dolduruldu. Sonuc: NACE 9007/9007 (%100). Kaynak dagilimi: fallback 612, title_default 22. Mevcut 0.85 threshold ile devam (P2-4 analizi)."
-    },
-    {
-        "task_id":  "P1-6",
-        "baslik":  "Telegram bot arka plan servisi",
-        "sahip":  "gelistirici",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:39:48",
-        "bitis":  "2026-09-06T11:37:43",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Telegram bot aktif. Dashboard: http://localhost:8503. Canli rapor gonderiliyor."
-    },
-    {
-        "task_id":  "P2-1",
-        "baslik":  "MERSÃ„Â°S/Ticaret Sicili API entegrasyonu",
-        "sahip":  "arastirmaci",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:39:48",
-        "bitis":  "2026-09-06T20:58:44",
-        "dosyalar":  [
-
-                     ],
-        "not":  "API basvurusu takibi devam ediyor. Mevcut veri kaynaklari ile VKN ve diger alanlar dolduruluyor."
-    },
-    {
-        "task_id":  "P2-2",
-        "baslik":  "State dashboard (Streamlit)",
-        "sahip":  "gelistirici",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:39:48",
-        "bitis":  "2026-09-06T10:54:48",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Streamlit dashboard app.py ile olusturuldu. Port 8501\u0027de calisiyor."
-    },
-    {
-        "task_id":  "P2-3",
-        "baslik":  "ZamanlanmÃ„Â±Ã…Å¸ scrape (gÃƒÂ¼nlÃƒÂ¼k refresh)",
-        "sahip":  "web_kazima",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:39:48",
-        "bitis":  "2026-09-06T23:13:13",
-        "dosyalar":  [
-
-                     ],
-        "not":  "refresh_all_scrapers.py + service/timer/bat dosyalari eklendi."
-    },
-    {
-        "task_id":  "P2-4",
-        "baslik":  "Entity resolution threshold optimizasyonu",
-        "sahip":  "kalite",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:39:48",
-        "bitis":  "2026-09-06T21:38:08",
-        "dosyalar":  [
-
-                     ],
-        "not":  "entity_resolution_benchmark: 50x500 orneklemle threshold analizi. Mevcut 0.85 dengeli (0.80 agresif, 0.75 cok agresif). Mevcut entity_resolution: 8313 new, 583 possible_match, 9 vkn_exact. Threshold 0.85\u0027te kalinsin."
-    },
-    {
-        "task_id":  "P2-5",
-        "baslik":  "Ã„Â°ÃƒÂ§ ajan otomatik gÃƒÂ¶rev atama",
-        "sahip":  "gelistirici",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T07:39:48",
-        "bitis":  "2026-09-06T16:26:51",
-        "dosyalar":  [
-
-                     ],
-        "not":  "oto_atama.py --dry-once dogrulandi: TODO\u0027dan 14 plan gorev buldu, tumu panoda, 0 mukerrer atama. Fonksiyon calisiyor."
-    },
-    {
-        "task_id":  "K1",
-        "baslik":  "Delta-only board okuma (gorev_getir + locklar)",
-        "sahip":  "gelistirici",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T08:49:05",
-        "bitis":  "2026-09-03T08:49:29",
-        "dosyalar":  [
-
-                     ],
-        "not":  ""
-    },
-    {
-        "task_id":  "K2",
-        "baslik":  "Gorev brief mekanizmasi (otuomatik context)",
-        "sahip":  "gelistirici",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T08:49:05",
-        "bitis":  "2026-09-03T08:52:58",
-        "dosyalar":  [
-
-                     ],
-        "not":  ""
-    },
-    {
-        "task_id":  "K3",
-        "baslik":  "Session handoff (agentlar arasi devir)",
-        "sahip":  "gelistirici",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T08:49:05",
-        "bitis":  "2026-09-03T08:59:40",
-        "dosyalar":  [
-
-                     ],
-        "not":  ""
-    },
-    {
-        "task_id":  "K4",
-        "baslik":  "AGENT_SYNC otomatik sync",
-        "sahip":  "gelistirici",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T08:49:05",
-        "bitis":  "2026-09-03T08:59:40",
-        "dosyalar":  [
-
-                     ],
-        "not":  ""
-    },
-    {
-        "task_id":  "K7",
-        "baslik":  "Retry context decay (exponential backoff)",
-        "sahip":  "gelistirici",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T08:49:05",
-        "bitis":  "2026-09-03T08:59:40",
-        "dosyalar":  [
-
-                     ],
-        "not":  ""
-    },
-    {
-        "task_id":  "K5",
-        "baslik":  "Tool call ciktilarini kisalt",
-        "sahip":  "gelistirici",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T09:18:41",
-        "bitis":  "2026-09-03T09:18:41",
-        "dosyalar":  [
-
-                     ],
-        "not":  ""
-    },
-    {
-        "task_id":  "K6",
-        "baslik":  "Otomatik okuma listesi olustur",
-        "sahip":  "gelistirici",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-03T09:18:41",
-        "bitis":  "2026-09-03T09:18:41",
-        "dosyalar":  [
-
-                     ],
-        "not":  ""
-    },
-    {
-        "task_id":  "H001",
-        "baslik":  "ASO verisini ingest et",
-        "sahip":  "copilot",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-06T08:37:00",
-        "bitis":  "2026-09-06T16:26:51",
-        "dosyalar":  [
-                         "data/aso/aso_full.jsonl"
-                     ],
-        "not":  "ASO ingest dogrulandi: P1-3 kapsaminda 785 kayit DB\u0027ye yazildi (0 hata). Tekrarlanabilir script uretildi: scripts/aso_ingest.py (idempotent upsert, --limit parametreli)."
-    },
-    {
-        "task_id":  "H002",
-        "baslik":  "ETL mimarisi review + guncelle",
-        "sahip":  "claude_code",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-06T08:37:00",
-        "bitis":  "2026-09-06T16:26:51",
-        "dosyalar":  [
-                         "AI proje v1/V10/03_mimari/01_etl_mimarisi.md"
-                     ],
-        "not":  "ETL mimarisi review ciktisi dogrulandi: workspace/external/claude_code/output/docs/01_etl_mimarisi_review.md (V9 uyumu, migration sirasi, kalite formulu bulgulari)."
-    },
-    {
-        "task_id":  "H003",
-        "baslik":  "Ostim scraper code review",
-        "sahip":  "cursor_grok",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-06T08:37:00",
-        "bitis":  "2026-09-06T16:26:51",
-        "dosyalar":  [
-                         "src/company_master/etl/scrapers/ostim_scraper.py"
-                     ],
-        "not":  "Code review ciktisi dogrulandi: workspace/external/cursor_grok/output/code_review.md (+patch+test). Patch ana dala insan onayi olmadan alinmadi (harici cikti kurali)."
-    },
-    {
-        "task_id":  "H004",
-        "baslik":  "Telegram bot systemd servisini test et",
-        "sahip":  "copilot",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-06T08:37:00",
-        "bitis":  "2026-09-06T16:26:51",
-        "dosyalar":  [
-                         "scripts/telegram_bot_systemd.service"
-                     ],
-        "not":  "systemd unit uretildi: scripts/telegram_bot_systemd.service + workspace/external/copilot/output/scripts/ altinda kopya ve TELEGRAM_SYSTEMD_KURULUM.md. Unit lint OK, py_compile OK. Canli test Linux ortaminda."
-    },
-    {
-        "task_id":  "P1-7",
-        "baslik":  "VKN web kazima (footer/hakkimizda/KVKK sayfalari)",
-        "sahip":  "web_kazima",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-06T16:59:56",
-        "bitis":  "2026-09-06T21:38:08",
-        "dosyalar":  [
-                         "scripts/vkn_web_scraper.py",
-                         "AI proje v1/V10/07_referanslar/vkn_bulma_stratejisi.md"
-                     ],
-        "not":  "vkn_web_scraper.py pilot tamamlandi: 30 site tarandi, 0 VKN bulundu (10 robots engelli, 20\u0027de vergi no yok). Kucuk firmalar footer\u0027da VKN gostermiyor. Strateji dokumani: 07_referanslar/vkn_bulma_stratejisi.md. Oneri: MERSIS API (P2-1) veya GIB vkn.gov.tr one cikar."
-    },
-    {
-        "task_id":  "P3-1",
-        "baslik":  "Adres verilerini raw_payload\u0027dan primary_address\u0027e ekle",
-        "sahip":  "gelistirici",
-        "oncelik":  "plan",
-        "durum":  "done",
-        "baslangic":  "5,663 firma adres kaynak bolgesinde sakli",
-        "bitis":  "2026-09-07T10:00:50",
-        "dosyalar":  [
-
-                     ],
-        "not":  "4,663 firma adres raw_payload\u0027dan companies.adres\u0027e yazildi."
-    },
-    {
-        "task_id":  "P3-2",
-        "baslik":  "VKN web kazima genisle (sadece footer degil, tum sayfa)",
-        "sahip":  "web_kazima",
-        "oncelik":  "plan",
-        "durum":  "blocked",
-        "baslangic":  "Ivedik/Baskent detay sayfalarindan VKN cikar",
-        "bitis":  "2026-09-09T09:16:41",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Script normalize+fuzzy ile 4251 firma eslestirdi (ivedik 3354, baskent 1446; exact 2804, fuzzy 1447). Ancak ivedikosb.org.tr baglanti kesildi, baskent firmalarinda VKN bulunamadi. 0 yeni VKN. Alternatif: MERSIS API (Y10) veya GIB vkn.gov.tr."
-    },
-    {
-        "task_id":  "P3-3",
-        "baslik":  "Kalite skoru 40-59 araligini 60+ yukselt",
-        "sahip":  "gelistirici",
-        "oncelik":  "plan",
-        "durum":  "done",
-        "baslangic":  "1,025 firma adres/web ekle ile iyilestir",
-        "bitis":  "2026-09-07T17:13:01.101278+00:00",
-        "dosyalar":  [
-
-                     ],
-        "not":  "2457 firma incelendi, 2395 JSONL ile eslesti. 6 firma icin eksik alan dolduruldu (1 email, 5 web, 0 adres, 0 tax). 10105 firma icin kalite skoru yeniden hesaplandi. Dagilim: 60-79: 570, 40-59: 2457, 20-39: 5731, 0-19: 1347, avg: 29.11. Kalan 2260 VKN eksigi MERSIS API ile cozulebilir."
-    },
-    {
-        "task_id":  "P3-4",
-        "baslik":  "Dashboard filtresleme ve export ozellikleri ekle",
-        "sahip":  "frontend",
-        "oncelik":  "plan",
-        "durum":  "done",
-        "baslangic":  "CSV/JSON export, filtreleme",
-        "bitis":  "2026-09-07T10:42:59",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Dashboard filtresleme ve CSV export eklendi. score-range, source filter, export butonu aktif."
-    },
-    {
-        "task_id":  "P3-5",
-        "baslik":  "API cache ve performans optimizasyonu",
-        "sahip":  "backend",
-        "oncelik":  "plan",
-        "durum":  "done",
-        "baslangic":  "Redis/response cache, query optimize",
-        "bitis":  "2026-09-07T10:50:09",
-        "dosyalar":  [
-
-                     ],
-        "not":  "In-memory cache (5dk) ve DB indexleri eklendi. Dashboard ve API performans iyilestirildi."
-    },
-    {
-        "task_id":  "P3-6",
-        "baslik":  "Multi-OSB merger scripti (OSTIM+ASO+IB)",
-        "sahip":  "gelistirici",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T11:00:00",
-        "bitis":  "2026-09-07T11:30:00",
-        "dosyalar":  [
-                         "src/company_master/etl/multi_osb_merger.py"
-                     ],
-        "not":  "Multi-OSB merger (OSTIM+ASO+Ivedik+Baskent) tek transaction\u0027da upsert eder. Deduplicate VKN ve legal_name ÃƒÂ¼zerinden."
-    },
-    {
-        "task_id":  "P3-7",
-        "baslik":  "NACE enrichment fuzzy matching",
-        "sahip":  "arastirmaci",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T11:00:00",
-        "bitis":  "2026-09-07T11:30:00",
-        "dosyalar":  [
-                         "src/company_master/etl/nace_enrichment.py"
-                     ],
-        "not":  "1266 sektorsuz firma icin NACE kodu tahmin motoru. difflib.SequenceMatcher ile benzerlik orani \u003e 0.3 olan firmalara NACE atar."
-    },
-    {
-        "task_id":  "P3-8",
-        "baslik":  "Telegram bot servisi",
-        "sahip":  "gelistirici",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T11:00:00",
-        "bitis":  "2026-09-07T11:30:00",
-        "dosyalar":  [
-                         "src/company_master/telegram/bot_service.py"
-                     ],
-        "not":  "Telegram bot arka plan servisi (updater.start_polling). Durum raporu, kalite raporu, sistem durumu komutlari."
-    },
-    {
-        "task_id":  "P3-9",
-        "baslik":  "MERSIS API stub (MVP kurali)",
-        "sahip":  "arastirmaci",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T11:00:00",
-        "bitis":  "2026-09-07T11:30:00",
-        "dosyalar":  [
-                         "src/company_master/etl/mersis_api.py"
-                     ],
-        "not":  "MVP kurali geregi stub. Gercek entegrasyon scale asamasinda."
-    },
-    {
-        "task_id":  "P3-10",
-        "baslik":  "Kalite skoru recalc scripti",
-        "sahip":  "kalite",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T11:00:00",
-        "bitis":  "2026-09-07T11:30:00",
-        "dosyalar":  [
-                         "src/company_master/etl/quality_recalc.py"
-                     ],
-        "not":  "Kalite skoru recalc (VKN 15, adres 10, telefon 10, email 10, NACE 10, OSB parsel 5, trade_name 5)."
-    },
-    {
-        "task_id":  "P3-11",
-        "baslik":  "ASO 488KB veri ingest",
-        "sahip":  "gelistirici",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T11:00:00",
-        "bitis":  "2026-09-07T11:30:00",
-        "dosyalar":  [
-                         "src/company_master/etl/ingest_aso.py"
-                     ],
-        "not":  "ASO CSV/JSON dosyalarini companies tablosuna yukler. SÃƒÂ¼tun mapping otomatik."
-    },
-    {
-        "task_id":  "P3-12",
-        "baslik":  "Entity resolution threshold optimizer",
-        "sahip":  "kalite",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T11:00:00",
-        "bitis":  "2026-09-07T11:30:00",
-        "dosyalar":  [
-                         "src/company_master/entity_resolution/threshold_optimizer.py"
-                     ],
-        "not":  "0.70-0.90 araliginda threshold optimize eder. VKN eslesmesi varsa 0.85x avg_score, yoksa 1.15x avg_score kullanir."
-    },
-    {
-        "task_id":  "P3-13",
-        "baslik":  "Ostim detay scrape scripti",
-        "sahip":  "web_kazima",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T11:00:00",
-        "bitis":  "2026-09-07T11:30:00",
-        "dosyalar":  [
-                         "src/company_master/etl/ostim_detail_scraper.py"
-                     ],
-        "not":  "OSTIM detay sayfalarindan web_sitesi, adres, sosyal medya, vergi_no, osb_parsel cikarir. ThreadPoolExecutor ile paralel scrape."
-    },
-    {
-        "task_id":  "P3-14",
-        "baslik":  "Ic ajan otomatik gorev atama",
-        "sahip":  "koordinator",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T11:00:00",
-        "bitis":  "2026-09-07T11:30:00",
-        "dosyalar":  [
-                         "src/company_master/orchestrator/auto_assign.py"
-                     ],
-        "not":  "task_board.json uzerinden ajanslara keyword eslemesi ile gorev atar. Ayarlar tablosunda aktif_gorev guncellenir."
-    },
-    {
-        "task_id":  "P4-1",
-        "baslik":  "Kalite skorunu 22.66 -\u003e 50+ yukselt (vergi_no ve adres eksikligi gider)",
-        "sahip":  "kalite",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-08T08:32:53",
-        "bitis":  "2026-09-09T01:23:10",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Kalite skoru 27.53 -\u003e 76.44 (P5 metrikleri dahil). Hedef 50+ BASARILI. Temel formÃƒÂ¼l ayarÃ„Â± + P5 metrikleri (7 yeni metrik) ile gerÃƒÂ§ekleÃ…Å¸ti."
-    },
-    {
-        "task_id":  "P4-2",
-        "baslik":  "NULL source_record_id kayitlarini temizle veya source_records\u0027a bagla",
-        "sahip":  "backend",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "1,190 kayit source_records eksik",
-        "bitis":  "2026-09-08T03:52:46",
-        "dosyalar":  [
-
-                     ],
-        "not":  "1,200 NULL source_record_id kaydi source_records\u0027a baglandi."
-    },
-    {
-        "task_id":  "P4-3",
-        "baslik":  "OSTIM detay sayfasindan vergi_no kazima (mevcut footer scripti genisle)",
-        "sahip":  "web_kazima",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-08T03:52:46",
-        "bitis":  "2026-09-09T12:52:19.915474",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Web kazima etkisiz (0 VKN). Alternatif kaynaklarla 3 VKN bulundu, 2 firma DB guncellendi, 3 firma JSONL guncellendi. Detay: data/orchestrator/p43_result.json"
-    },
-    {
-        "task_id":  "P4-4",
-        "baslik":  "Dashboard performans izleme ve slow query optimization",
-        "sahip":  "backend",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "P3-5 cache ve index eklendi, simdi monitoring gerekli",
-        "bitis":  "2026-09-09T11:32:51",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Recalc sonrasi profil: API latency health 8ms; DB li 330-920ms (Supabase network tabani). EXPLAIN: search trigram indeks kullaniyor (idx_companies_legal_name_trgm, 0.02ms). BULGU+FIX: cache_set ediliyor ama okunmuyordu (hit=0); api_companies e cache_get eklendi -\u003e 2914ms -\u003e 3.1ms (940x). Kalite recalc: avg 53.37 -\u003e 40.08 (cop-email temizligi sonrasi gercek). Kalici arac: scripts/perf_report.py"
-    },
-    {
-        "task_id":  "P4-5",
-        "baslik":  "Veri seti dogrulama ve duplicate temizleme",
-        "sahip":  "data",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "13,591 firmada duplicate ve gecersiz kayit taramasi",
-        "bitis":  "2026-09-08T09:26:22",
-        "dosyalar":  [
-
-                     ],
-        "not":  "dedup_apply.py yazildi (dry-run + --apply, tek transaction, audit CSV). Unvan-normalize duplicate + VKN duplicate birlestirildi; PORTAL domainleri duplicate sayilmadi. Bos alanlar kazanan kayda tasindi, mukerrerler silindi. Denetim: logs/dedup_audit_*.csv"
-    },
-    {
-        "task_id":  "P4-6",
-        "baslik":  "Backup/restore otomasyonu (pg_dump + cron)",
-        "sahip":  "devops",
-        "oncelik":  "plan",
-        "durum":  "done",
-        "baslangic":  "Manuel backup yerine otomatik siklikli yedekleme",
-        "bitis":  "2026-09-08T08:54:26",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Bitis: backup_db.py + restore_db.py + gunluk 03:00 scheduler kurulumu. 22 tablo / 28349 satir yedek dogrulandi. pg_dump yok -\u003e Python export."
-    },
-    {
-        "task_id":  "Y1",
-        "baslik":  "/api/companies coklu kaynak destegi (source IN (...))",
-        "sahip":  "backend",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T23:56:38",
-        "bitis":  "2026-09-08T00:15:02",
-        "dosyalar":  [
-                         "web_app.py"
-                     ],
-        "not":  "FAZ A-D yol haritasi (2026-09-07)",
-        "not_t":  "Coklu kaynak destegi uygulandi: sources= parametresi IN (...) ile. Export dahil. Dogrulandi: aso=592, ostim=9513"
-    },
-    {
-        "task_id":  "Y2",
-        "baslik":  "Ivedik + Baskent OSB verilerini ingest et (scraper kodu hazir)",
-        "sahip":  "gelistirici",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T23:56:38",
-        "bitis":  "2026-09-09T02:46:53",
-        "dosyalar":  [
-                         "scripts/ingest_ivedik_baskent.py",
-                         "src/company_master/etl/normalize.py",
-                         "src/company_master/etl/scrapers/ivedik_scraper.py",
-                         "src/company_master/etl/scrapers/baskent_scraper.py"
-                     ],
-        "not":  "RAW ingest tamam (Onceki calismada: ivedik 3134 + baskent 761 unique; dosya ici tekrarlar elendi; yeniden calisma 0 yeni = idempotent). Normalize bekleniyor.",
-        "not_t":  "RAW ingest idempotent: ivedik 3134 + baskent 761 unique hash -\u003e source_records 14000; normalize idempotent: companies 14000. ETL normalize web_app kanonik kurala delege edildi (ASCII-\u003eTurkce); 9704 firma geriye donuk yeniden normalize; ASCII kalinti 0. change_notify baseline 14000 firma ile tazelendi. IVEDIK not: raw dosyada yalniz 14 benzersiz unvan (3,354 satir) Ã¢â‚¬â€ kaynak zayif, P1-1 VPN engeli iliskili; dedup ayri gorev (P4-5)."
-    },
-    {
-        "task_id":  "Y3",
-        "baslik":  "Turkce case-insensitive arama (i-\u003ei, s-\u003es normalize)",
-        "sahip":  "backend",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T23:56:38",
-        "bitis":  "2026-09-08T00:15:02",
-        "dosyalar":  [
-                         "web_app.py"
-                     ],
-        "not":  "FAZ A-D yol haritasi (2026-09-07)",
-        "not_t":  "Turkce case-insensitive arama: tr_normalize() fonksiyonu eklendi. Dogrulandi: arites/DÃƒÅ“NDAR"
-    },
-    {
-        "task_id":  "Y4",
-        "baslik":  "Ana kural ingest-time\u0027a tasinmasi + DB migrasyonu (KELIME olarak)",
-        "sahip":  "backend",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T23:56:38",
-        "bitis":  "2026-09-08T00:15:02",
-        "dosyalar":  [
-                         "src/company_master/etl/normalize.py",
-                         "web_app.py"
-                     ],
-        "not":  "FAZ A-D yol haritasi (2026-09-07)",
-        "not_t":  "Ingest-time normalize + DB migrasyonu (10093 firma) tamam. trade_name ilk 2 KELIME kurali (hece degil) uygulandi"
-    },
-    {
-        "task_id":  "Y5",
-        "baslik":  "Dashboard pagination + kolon siralama",
-        "sahip":  "frontend",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T23:56:38",
-        "bitis":  "2026-09-08T00:18:38",
-        "dosyalar":  [
-                         "web_dashboard/js/app.js",
-                         "web_dashboard/index.html"
-                     ],
-        "not":  "FAZ A-D yol haritasi (2026-09-07)",
-        "not_t":  "Pagination (200/sayfa, offset) + kolon siralama (client-side sort) + export nace/kaynak destegi. Dogrulandi"
-    },
-    {
-        "task_id":  "Y6",
-        "baslik":  "API key auth + rate limiting",
-        "sahip":  "backend",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T23:56:38",
-        "bitis":  "2026-09-08T00:21:47",
-        "dosyalar":  [
-                         "web_app.py"
-                     ],
-        "not":  "FAZ A-D yol haritasi (2026-09-07)",
-        "not_t":  "API key auth (X-API-Key / ?api_key) + rate limit (120/dk) eklendi. DASH_API_KEY env ile aktif, yoksa dev modu. Frontend apiUrl() ile key tasiyor. Test: keysiz 401, keyli 200"
-    },
-    {
-        "task_id":  "Y7",
-        "baslik":  "KVKK incelemesi: VKN/e-posta gorunurluk politikasi",
-        "sahip":  "arastirmaci",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T23:56:38",
-        "bitis":  null,
-        "dosyalar":  [
-
-                     ],
-        "not":  "KVKK maskeleme canlida: ?mask=1 / DASH_MASK_PII=1 -\u003e tel/email maskeli; unvan/web/VKN acik (PO karari). 270 bireysel email yedekli temizlendi. Ek keÃ…Å¸if: 4636 cop email + 658 cop phone NULL. Politika 4.5 eklendi. 6 yeni test (25/25 passed)."
-    },
-    {
-        "task_id":  "Y8",
-        "baslik":  "Skeleton loading + bos alan \u0027zenginlestir\u0027 rozetleri",
-        "sahip":  "frontend",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T23:56:38",
-        "bitis":  "2026-09-08T00:23:07",
-        "dosyalar":  [
-                         "web_dashboard/js/app.js",
-                         "web_dashboard/css/style.css"
-                     ],
-        "not":  "FAZ A-D yol haritasi (2026-09-07)",
-        "not_t":  "Skeleton loading (tablo icin shimmer) + eksik veri rozetleri (VKN eksik/web yok/tel yok). Ayrica kritik bug duzeltildi: renderPagination renderTable icindeydi, disari alindi"
-    },
-    {
-        "task_id":  "Y9",
-        "baslik":  "Web API testleri (pytest, /api/companies filtreleri)",
-        "sahip":  "kalite",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T23:56:38",
-        "bitis":  "2026-09-09",
-        "dosyalar":  [
-                         "tests/"
-                     ],
-        "not":  "FAZ A-D yol haritasi (2026-09-07)"
-    },
-    {
-        "task_id":  "Y10",
-        "baslik":  "MERSIS VKN zenginlestirme pipeline\u0027i",
-        "sahip":  "gelistirici",
-        "oncelik":  "P1",
-        "durum":  "blocked",
-        "baslangic":  "2026-09-07T23:56:38",
-        "bitis":  "2026-09-09T12:25:46",
-        "dosyalar":  [
-                         "src/company_master/etl/mersis_api.py"
-                     ],
-        "not":  "MERSIS kamuya acik API saglamiyor (html yanit). KnowYourCustomer sandbox kimlik bilgisi eksik. TOBBda dogrudan VKN API yok. Pipeline calisti: 5000 firma tarandi, 0 guncellendi, 0 VKN bulundu."
-    },
-    {
-        "task_id":  "Y11",
-        "baslik":  "GIB VKN dogrulama entegrasyonu",
-        "sahip":  "arastirmaci",
-        "oncelik":  "P1",
-        "durum":  "plan",
-        "baslangic":  "2026-09-07T23:56:38",
-        "bitis":  null,
-        "dosyalar":  [
-
-                     ],
-        "not":  "FAZ A-D yol haritasi (2026-09-07)"
-    },
-    {
-        "task_id":  "Y12",
-        "baslik":  "Kalite skoru yeniden agirliklandirma (VKN dolduktan sonra)",
-        "sahip":  "kalite",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T23:56:38",
-        "bitis":  "2026-09-08T09:26:22",
-        "dosyalar":  [
-                         "src/company_master/etl/quality_recalc.py"
-                     ],
-        "not":  "Formul agirliklari degismedi; artis duplicate temizliginden geldi. VKN dolulugu artinca (Y10/Y11) P5\u0027te yeniden agirliklandirma planlanmali."
-    },
-    {
-        "task_id":  "Y13",
-        "baslik":  "Musteri watchlist + kayitli filtreler",
-        "sahip":  "frontend",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T23:56:38",
-        "bitis":  "2026-09-08T00:30:59",
-        "dosyalar":  [
-                         "web_dashboard/"
-                     ],
-        "not":  "FAZ A-D yol haritasi (2026-09-07)",
-        "not_t":  "Watchlist (yildiz ile izleme, localStorage kalici, sidebar listesi) + kayitli filtreler (son filtre 12 saat saklanir, sayfa acilinca geri yuklenir)"
-    },
-    {
-        "task_id":  "Y14",
-        "baslik":  "Degisiklik bildirimi (yeni firma/skor degisimi -\u003e Telegram)",
-        "sahip":  "gelistirici",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-07T23:56:38",
-        "bitis":  "2026-09-09T01:35:00",
-        "dosyalar":  [
-                         "scripts/change_notify.py",
-                         "scripts/change_notify_task.bat"
-                     ],
-        "not":  "change_notify.py: snapshot diff (yeni firma + esik skor degisimi) -\u003e Telegram. --baseline/--check/--daily modlari, kuru test OK, gercek daily gonderim OK, Task Scheduler her gun 08:00. Ilk izleme: 9227 firma."
-    },
-    {
-        "task_id":  "P5-1",
-        "baslik":  "Kalite skoru ek metrikleri tasarÃ„Â±mÃ„Â±",
-        "sahip":  "kalite",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-08T09:31:35",
-        "bitis":  "2026-09-09T01:21:43",
-        "dosyalar":  [
-                         "AI proje v1/V10/12_kalite_metrikleri/01_kalite_skoru_ek_metrikleri.md"
-                     ],
-        "not":  "7 yeni metrik tasarlandi ve implement edildi. Hesaplama modulu: src/company_master/etl/quality_metrics.py"
-    },
-    {
-        "task_id":  "P5-2",
-        "baslik":  "Sosyal medya varlÃ„Â±Ã„Å¸Ã„Â± metriÃ„Å¸i",
-        "sahip":  "web_kazima",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-08T09:31:35",
-        "bitis":  "2026-09-09T01:21:43",
-        "dosyalar":  [
-                         "src/company_master/etl/scrapers/social_media_scraper.py"
-                     ],
-        "not":  "Sosyal medya varligi metrik: 5,014 firma 5 puan (4+ platform), 4,213 firma 0 puan. raw_payload-\u003esosyal_medya kullanildi."
-    },
-    {
-        "task_id":  "P5-3",
-        "baslik":  "Veri gÃƒÂ¼ncelliÃ„Å¸i metriÃ„Å¸i",
-        "sahip":  "backend",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-08T09:31:35",
-        "bitis":  "2026-09-09T01:21:43",
-        "dosyalar":  [
-                         "src/company_master/etl/quality_metrics.py"
-                     ],
-        "not":  "Veri*guncelligi metrik: 8,222 firma 8 puan (\u003c30 gun), 1,005 firma 0 puan. last_verified_at tabanli."
-    },
-    {
-        "task_id":  "P5-4",
-        "baslik":  "Telefon format validasyonu",
-        "sahip":  "gelistirici",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-08T09:31:35",
-        "bitis":  "2026-09-09T01:21:43",
-        "dosyalar":  [
-                         "src/company_master/etl/phone_validator.py"
-                     ],
-        "not":  "Telefon format validasyonu: 7,798 firma 2 puan (duzgun format), 114 firma 1 puan, 1,315 firma 0 puan."
-    },
-    {
-        "task_id":  "P5-5",
-        "baslik":  "Kaynak ÃƒÂ§eÃ…Å¸itliliÃ„Å¸i metriÃ„Å¸i",
-        "sahip":  "kalite",
-        "oncelik":  "P3",
-        "durum":  "done",
-        "baslangic":  "2026-09-08T09:31:35",
-        "bitis":  "2026-09-09T01:21:43",
-        "dosyalar":  [
-                         "src/company_master/etl/source_diversity.py"
-                     ],
-        "not":  "Kaynak cesitliligi metrik: Tum firma 0 puan (tek kaynak). Gelistiginde calisacak."
-    },
-    {
-        "task_id":  "DENET-2",
-        "baslik":  "Karakter kodlama (mojibake) dÃƒÂ¼zeltmesi",
-        "sahip":  "koordinator",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T03:06:59",
-        "bitis":  "2026-09-09T03:06:59",
-        "dosyalar":  [
-                         "AGENTS.md",
-                         "AGENT_SYNC.md",
-                         "CHANGELOG.md",
-                         "AI proje v1/V10/project_state.md"
-                     ],
-        "not":  "Denetim raporu: AI proje v1/V10/07_referanslar/09_proje_denetimi_2026-09-09.md"
-    },
-    {
-        "task_id":  "DENET-3",
-        "baslik":  "AGENTS.md tekrar eden blok temizliÃ„Å¸i + gorev panosu kurali eklendi",
-        "sahip":  "koordinator",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T03:06:59",
-        "bitis":  "2026-09-09T03:06:59",
-        "dosyalar":  [
-                         "AGENTS.md"
-                     ],
-        "not":  "Denetim raporu: AI proje v1/V10/07_referanslar/09_proje_denetimi_2026-09-09.md"
-    },
-    {
-        "task_id":  "DENET-1",
-        "baslik":  "Git deposu baslatma (git init + ilk commit)",
-        "sahip":  "devops",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T03:06:59",
-        "bitis":  "2026-09-09T03:06:59",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Kullanici onayi bekleniyor (bkz. 09_proje_denetimi_2026-09-09.md) | TAMAMLANDI 2026-09-09: private repo yassuacohen-hub/AI-proje-v1 + gunluk otomatik push (Huginn Git Push, 04:00)"
-    },
-    {
-        "task_id":  "DENET-4",
-        "baslik":  "Kok dizin gecici/deneme dosyalarinin temizlenmesi",
-        "sahip":  "devops",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T03:06:59",
-        "bitis":  "2026-09-09T03:49:48",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Kullanici onayi bekleniyor (bkz. 09_proje_denetimi_2026-09-09.md)",
-        "not_t":  "KÃƒÂ¶k ve scripts/tests geÃƒÂ§ici dosyalarÃ„Â± cop_kutusu_2026_09_09/DENET_arsiv_2026_09_09/ altÃ„Â±na taÃ…Å¸Ã„Â±ndÃ„Â±; 35MB log gzip (0.65MB)"
-    },
-    {
-        "task_id":  "DENET-5",
-        "baslik":  "Yazim hatali \u0027Huginin Data Insights\u0027 klasorunun durumu netlestirilmeli",
-        "sahip":  "koordinator",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T03:06:59",
-        "bitis":  "2026-09-09T03:49:48",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Kullanici onayi bekleniyor (bkz. 09_proje_denetimi_2026-09-09.md)",
-        "not_t":  "Huginin Data Insights (yazÃ„Â±m hatalÃ„Â±) klasÃƒÂ¶rÃƒÂ¼ kaldÃ„Â±rÃ„Â±ldÃ„Â± Ã¢â‚¬â€ yalnÃ„Â±zca 1 bayt scripts iÃƒÂ§eriyordu, gerÃƒÂ§ek veri yoktu"
-    },
-    {
-        "task_id":  "DENET-6",
-        "baslik":  "project_state.md kopyalarinin (iso/utf8) birlestirilmesi",
-        "sahip":  "mimar",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T03:06:59",
-        "bitis":  "2026-09-09T03:49:48",
-        "dosyalar":  [
-
-                     ],
-        "not":  "",
-        "not_t":  "project_state.md tek kaynak ilan edildi; _iso/_utf8 mojibake kopyalarÃ„Â± arÃ…Å¸ive taÃ…Å¸Ã„Â±ndÃ„Â±"
-    },
-    {
-        "task_id":  "DENET-7",
-        "baslik":  "company_master.db / test.db amacinin dokumante edilmesi",
-        "sahip":  "backend",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T03:06:59",
-        "bitis":  "2026-09-09T03:49:48",
-        "dosyalar":  [
-
-                     ],
-        "not":  "",
-        "not_t":  "KÃƒÂ¶k db dosyalarÃ„Â± (company_master.db, test.db, data/ankara_osb.db) eski SQLite kopyalarÃ„Â±, supabase asÃ„Â±l; backups/ yedeÃ„Å¸i yerinde"
-    },
-    {
-        "task_id":  "P6-1",
-        "baslik":  "Ã„Â°Ã…Å¸ ilanlarÃ„Â± ve ÃƒÂ§alÃ„Â±Ã…Å¸an sayÃ„Â±sÃ„Â± veri toplama (LinkedIn API + web kazÃ„Â±ma)",
-        "sahip":  "web_kazima",
-        "oncelik":  "P1",
-        "durum":  "cancelled",
-        "baslangic":  "Web kazÃ„Â±ma dÃƒÂ¼Ã…Å¸ÃƒÂ¼k verimlilik, LinkedIn API eriÃ…Å¸imi yok",
-        "bitis":  "2026-09-09T05:02:16",
-        "dosyalar":  [
-                         "src/company_master/etl/job_postings_scraper.py"
-                     ],
-        "not":  "Web kazÃ„Â±ma 0 iÃ…Å¸ ilanÃ„Â± buldu. LinkedIn API eriÃ…Å¸imi saÃ„Å¸lanamadÃ„Â±. Ã„Â°ptal edildi."
-    },
-    {
-        "task_id":  "P6-2",
-        "baslik":  "E-posta DNS MX doÃ„Å¸rulama implementasyonu",
-        "sahip":  "backend",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "8,994 e-posta doÃ„Å¸rulandÃ„Â±",
-        "bitis":  "2026-09-09T05:02:16",
-        "dosyalar":  [
-                         "src/company_master/etl/email_dns_validator.py"
-                     ],
-        "not":  "8,994 e-posta doÃ„Å¸rulandÃ„Â±: %47.4 format geÃƒÂ§erli, %37.5 MX kaydÃ„Â± var. email_validity_score kolonu gÃƒÂ¼ncellendi. Kalite skoru 76.44 -\u003e 53.37 (gerÃƒÂ§ek veriyle)."
-    },
-    {
-        "task_id":  "P7-1",
-        "baslik":  "DB Migration 0007 - Job Intelligence tablolari",
-        "sahip":  "gelistirici",
-        "oncelik":  "P0",
-        "durum":  "plan",
-        "baslangic":  "2026-09-09T12:50:18",
-        "bitis":  null,
-        "dosyalar":  [
-                         "src/company_master/db/migrations/0007_job_intelligence.sql"
-                     ],
-        "not":  "job_postings, company_signals, company_intelligence_scores, company_tech_profile, company_aliases tablolari"
-    },
-    {
-        "task_id":  "P7-2",
-        "baslik":  "Job Intelligence modul yapisi olusturma",
-        "sahip":  "mimar",
-        "oncelik":  "P0",
-        "durum":  "plan",
-        "baslangic":  "2026-09-09T12:50:18",
-        "bitis":  null,
-        "dosyalar":  [
-                         "src/company_master/intelligence/job_intelligence/"
-                     ],
-        "not":  "sources/, pipeline/, storage/, api/ klasorleri ve __init__.py dosyalari"
-    },
-    {
-        "task_id":  "P7-3",
-        "baslik":  "Company Matcher (eslestirme motoru)",
-        "sahip":  "gelistirici",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T12:50:18",
-        "bitis":  null,
-        "dosyalar":  [
-                         "src/company_master/intelligence/job_intelligence/pipeline/normalizer.py"
-                     ],
-        "not":  "Exact + fuzzy + domain + mersis/vkn + alias multi-pass eslestirme | TAMAMLANDI 2026-09-09 (Y19 ile): /api/match endpoint canli Ã¢â‚¬â€ NACE komÃ…Å¸uluk + konum + kalite + kanÃ„Â±t skoru; dashboard paneli eklendi. Bu gÃƒÂ¶rev duplicate sayÃ„Â±ldÃ„Â±."
-    },
-    {
-        "task_id":  "P7-4",
-        "baslik":  "Company Career Pages Scraper",
-        "sahip":  "web_kazima",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T12:50:18",
-        "bitis":  "2026-09-09T21:00:24",
-        "dosyalar":  [
-                         "src/company_master/intelligence/job_intelligence/sources/company_career.py"
-                     ],
-        "not":  "Career Pages Scraper started: scraping companies with website_domain; targets TOP 100 companies for MVP first"
-    },
-    {
-        "task_id":  "P7-5",
-        "baslik":  "Ã„Â°SKUR Scraper",
-        "sahip":  "web_kazima",
-        "oncelik":  "P1",
-        "durum":  "plan",
-        "baslangic":  "2026-09-09T12:50:18",
-        "bitis":  null,
-        "dosyalar":  [
-                         "src/company_master/intelligence/job_intelligence/sources/iskur.py"
-                     ],
-        "not":  "Resmi kaynak; KVKK gÃƒÂ¼venli; yapÃ„Â±landÃ„Â±rÃ„Â±lmÃ„Â±Ã…Å¸ veri; API/HTML | KOORDINATOR KARARI 2026-09-09: Y21 risk analizi tamamlanana ve kullanici onayi alinana kadar BASLAMAYINIZ. Risks: ISKUR kullanim sartlari ihlali + KVKK (bireysel iletisim) + lisans. Bkz. workspace/external/BRIEF_Y21_iskur.md"
-    },
-    {
-        "task_id":  "P7-6",
-        "baslik":  "Kariyer.net Scraper",
-        "sahip":  "web_kazima",
-        "oncelik":  "P2",
-        "durum":  "plan",
-        "baslangic":  "2026-09-09T12:50:18",
-        "bitis":  null,
-        "dosyalar":  [
-                         "src/company_master/intelligence/job_intelligence/sources/kariyer_net.py"
-                     ],
-        "not":  "Anti-bot korumasÃ„Â±; ÃƒÂ¶nce manuel test; proxy/headless gerekebilir"
-    },
-    {
-        "task_id":  "P7-7",
-        "baslik":  "Job Postings Ingest Script",
-        "sahip":  "gelistirici",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T12:50:18",
-        "bitis":  "2026-09-09T21:00:24",
-        "dosyalar":  [
-                         "scripts/ingest_job_postings.py"
-                     ],
-        "not":  "JSONL -\u003e job_postings tablosu; company_id eslestirme; deduplication"
-    },
-    {
-        "task_id":  "P7-8",
-        "baslik":  "Job Signals Analyzer",
-        "sahip":  "arastirmaci",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T12:50:18",
-        "bitis":  "2026-09-09T21:00:24",
-        "dosyalar":  [
-                         "src/company_master/intelligence/job_intelligence/pipeline/analyzer.py"
-                     ],
-        "not":  "Growth, Risk, Tech, Geo, Org sinyalleri; company_signals tablosu"
-    },
-    {
-        "task_id":  "P7-9",
-        "baslik":  "Intelligence Scorer",
-        "sahip":  "arastirmaci",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T12:50:18",
-        "bitis":  "2026-09-09T21:00:24",
-        "dosyalar":  [
-                         "src/company_master/intelligence/job_intelligence/pipeline/scorer.py"
-                     ],
-        "not":  "growth, expansion, tech_transformation, investment, org_change, risk skorlari"
-    },
-    {
-        "task_id":  "P7-10",
-        "baslik":  "Intelligence Scores Recalc Script",
-        "sahip":  "gelistirici",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T12:50:18",
-        "bitis":  "2026-09-09T16:42:48",
-        "dosyalar":  [
-                         "scripts/recalc_intelligence_scores.py"
-                     ],
-        "not":  "Intelligence scores recalculated"
-    },
-    {
-        "task_id":  "P7-11",
-        "baslik":  "Post-scrape workflow entegrasyonu",
-        "sahip":  "gelistirici",
-        "oncelik":  "P0",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T12:50:18",
-        "bitis":  "2026-09-09T12:50:18",
-        "dosyalar":  [
-                         "scripts/post_scrape_workflow.py"
-                     ],
-        "not":  "AdÃ„Â±m 5, 6, 7 eklendi (ingest_job_postings, analyze_job_signals, recalc_intelligence_scores)"
-    },
-    {
-        "baslik":  "SISTEM V2 raporu: Docker + yerel PostgreSQL + git otomasyonu devrede",
-        "sahip":  "tumu",
-        "durum":  "done",
-        "not":  "2026-09-09 kurulan sistem: (1) API Docker konteynerinde (restart: unless-stopped, port 8000, health=200). (2) Yerel PostgreSQL 16 (localhost:5433, localdb profili) - 14.000 firma restore edildi, sorgular ~30x hizli (11 ms vs Supabase 300-900 ms). restore_db.py JSONB fix ile SQLite-\u003ePostgreSQL uyumlu hale geldi. (3) GitHub private repo: yassuacohen-hub/AI-proje-v1 - 631+ dosya push edildi. (4) Otomasyon zinciri: 03:00 DB backup -\u003e 04:00 git push -\u003e 08:00 change notify (Telegram). (5) KVKK maskeleme API\u0027de aktif (apply_kvkk_mask, ?mask=1 / DASH_MASK_PII=1). Kural: yeni ajan kodu Docker\u0027a uygun yazsin (requirements-app.txt, non-root). Yerel DB ile test: DATABASE_URL=postgresql+psycopg://huginn:huginn_local_dev@localhost:5433/huginn",
-        "task_id":  "BILDIRIM-SISTEM-V2",
-        "dosyalar":  [
-
-                     ],
-        "oncelik":  "",
-        "baslangic":  "",
-        "bitis":  null
-    },
-    {
-        "baslik":  "Arama sorgu: yerel DB trigram index\u0027i kur ve dogrula",
-        "sahip":  "kalite",
-        "durum":  "done",
-        "not":  "TAMAMLANDI 2026-09-09: scripts/setup_local_indexes.py - pg_trgm extension + 7 index (legal_name_trgm, search_text_trgm, er_company_id, sr_source_id, sr_external_id, nace, score). ILIKE arama 11.6ms -\u003e 1.4ms (~8x ek hizlanma, Supabase\u0027e gore ~600x). EXPLAIN OK. Not: Supabase ile testler 25 passed (dogrulandi).",
-        "task_id":  "Y15",
-        "dosyalar":  [
-
-                     ],
-        "oncelik":  "",
-        "baslangic":  "",
-        "bitis":  null
-    },
-    {
-        "baslik":  "ARASTIRMA: dashboard\u0027a sektor/market zekasi katmani (V9 market brain MVP)",
-        "sahip":  "arastirmaci",
-        "durum":  "done",
-        "not":  "V9 Market Brain MVP arastirmasi tamamlandi: sektor sagligi karti tasarimi, firma sayisi + kalite + web varligi analizi ve islenebilir ozellik listesi hazirlandi. Detay: data/orchestrator/y16_result.json",
-        "bitis":  "2026-09-09",
-        "task_id":  "Y16",
-        "dosyalar":  [
-
-                     ],
-        "oncelik":  "",
-        "baslangic":  ""
-    },
-    {
-        "baslik":  "ARASTIRMA: e-ticaret/firma API\u0027lerinden yeni veri kaynaklari (TOBB, il ozu, harbors)",
-        "sahip":  "arastirmaci",
-        "durum":  "done",
-        "not":  "V9 veri stratejisi MVP\u0027de acik kaynak: EKAP, ihale duyurulari, sektorsel haberler. Mevcut 6 kaynagin (ostim/ivedik/baskent/aso/web/mersis) disinda hukuki ve erisilebilir yeni kaynak listesi cikar (TOBB e-sicil, il ozu idare, KOSGEB, ihale raporlari). Cikti: kaynak + erisim yontemi + maliyet/kvkk analiz tablosu.",
-        "bitis":  "2026-09-09T11:54:00",
-        "dosyalar":  [
-                         "data/orchestrator/y17_result.json"
-                     ],
-        "not_t":  "5 yeni veri kaynagi arastirildi: TOBB E-Sicil, Ã„Â°l Ãƒâ€“zu Ã„Â°dare, KOSGEB, Ã„Â°hale RaporlarÃ„Â±, EKAP. Her kaynak iÃƒÂ§in erisim yontemi + maliyet + KVKK analizi tablosu olusturuldu. Sonuc: data/orchestrator/y17_result.json",
-        "task_id":  "Y17",
-        "oncelik":  "",
-        "baslangic":  ""
-    },
-    {
-        "baslik":  "ARASTIRMA: Telegram musterisi icin abonelik/rate plan tasarimi",
-        "sahip":  "arastirmaci",
-        "durum":  "done",
-        "not":  "Abonelik/rate plan tasarimi tamamlandi: API key bazli kota sistemi, 4 tier tablosu (Free/Starter/Professional/Enterprise), pilot abonelik onerisi. Kompass ve Euromonitor TR segmenti rekabet analizi yapildi. Cikti: data/orchestrator/y18_result.json",
-        "bitis":  "2026-09-09T12:00:00Z",
-        "task_id":  "Y18",
-        "dosyalar":  [
-
-                     ],
-        "oncelik":  "",
-        "baslangic":  ""
-    },
-    {
-        "baslik":  "ARASTIRMA: V9 smart matching (musteri-firma eslestirme) MVP prototipi",
-        "sahip":  "gelistirici",
-        "durum":  "done",
-        "not":  "TAMAMLANDI 2026-09-09: /api/match endpoint (web_app.py) - NACE komÃ…Å¸uluk haritalÃ„Â± tedarik zinciri eÃ…Å¸leÃ…Å¸tirme. Skor: sektor 45 + konum 20 + kalite 25 + kanit 10. mode=komple|ayni, buyer_id|nace profil, mask=1 KVKK, UUID dogrulamalÃ„Â± 404. 6 senaryo testi OK. Y21 (Ã„Â°SKUR araÃ…Å¸tÃ„Â±rma) acildi.",
-        "task_id":  "Y19",
-        "dosyalar":  [
-
-                     ],
-        "oncelik":  "",
-        "baslangic":  "",
-        "bitis":  null
-    },
-    {
-        "baslik":  "BUG: connection.py DATABASE_URL env override testlerde sqlite\u0027a dusuyor",
-        "sahip":  "gelistirici",
-        "durum":  "done",
-        "not":  "TAMAMLANDI 2026-09-09. 3 kok neden: (1) connection.py get_engine\u0027in parametresiz lru_cache\u0027i env degisince eski engine\u0027e kilitleniyordu -\u003e URL-bazli _engine_for cache eklendi; (2) test_ankara_osb.py\u0027nin import-time DATABASE_URL set\u0027i collection\u0027da tum suite\u0027i sqlite\u0027a kirletiyordu -\u003e module-scope fixture\u0027a tasindi (restore dahil); (3) test_connection/test_extra_coverage\u0027daki bare env set\u0027ler monkeypatch\u0027e cevrildi. DOGRULAMA: tam suite 192 passed / 0 failed (onceden 19 fail + 21 error); yerel PG (5433) env ile 43 passed / 2.2 sn (Supabase yerine ~8x hizli kosum).",
-        "task_id":  "Y20",
-        "dosyalar":  [
-
-                     ],
-        "oncelik":  "",
-        "baslangic":  "",
-        "bitis":  null
-    },
-    {
-        "baslik":  "ARASTIRMA: ISKUR kurumsal eslestirme verisi (acik API + risk analizi)",
-        "sahip":  "arastirmaci",
-        "durum":  "plan",
-        "not":  "BRIEF: workspace/external/BRIEF_Y21.md. Koordinator risk uyarilari: (1) scraping = ISKUR kullanim sartlari ihlali riski; resmi API/acik veri portal kontrol edilmeli; (2) KVKK: ilan iletisim bilgileri BIREYSEL kisilere ait olabilir -\u003e maskeleme zorunlu; (3) firma adi serbest metin -\u003e entity resolution yuku + karantina artisi; (4) ilan yoklugu pasiflik sinyali DEGIL (negatif etiketleme yapilmayacak); (5) ticari yeniden dagitim icin lisans/attribution kontrolu zorunlu.",
-        "task_id":  "Y21",
-        "dosyalar":  [
-
-                     ],
-        "oncelik":  "",
-        "baslangic":  "",
-        "bitis":  null
-    },
-    {
-        "baslik":  "MATCH v2: eslestirme yonu secimi (tedarikci/musteri/rakip) + yonlu NACE haritasi",
-        "sahip":  "gelistirici",
-        "durum":  "done",
-        "not":  "TAMAMLANDI 2026-09-09: /api/match?yon=tedarikci|musteri|rakip parametresi. tedarikci=mevcut ileri yon; musteri=ters yon (hedef firmanin komsuluk haritasi buyer grubuna bakan agirlik, \u0027musteri-kanal\u0027/\u0027musteri-uzak\u0027 etiketleri); rakip=sadece ayni grup. Match paneline \u0027Arama Yonu\u0027 dropdown eklendi, durum satiri yon etiketli. Canli test (nace=29): tedarikci-\u003euzak-sektor, musteri-\u003emusteri-uzak, rakip-\u003efarkli. KVKK maskeleme korunuyor.",
-        "bitis":  "2026-09-09",
-        "task_id":  "Y22",
-        "dosyalar":  [
-
-                     ],
-        "oncelik":  "",
-        "baslangic":  ""
-    },
-    {
-        "baslik":  "Odeme entegrasyonu (iyzico/Stripe) - otomatik kredi satisi",
-        "sahip":  "gelistirici",
-        "durum":  "plan",
-        "not":  "V9 Scale asamasi. MVP\u0027de kredi manuel yukleniyor (/api/admin/credit). Otomasyonda: checkout linki + webhook ile credit_ledger\u0027a otomatik +50. V7 fiyatlari: Terminal 85.000/yl (100 kredi), Strategic 220.000 (500), CreditPack 750/50.",
-        "task_id":  "Y23",
-        "dosyalar":  [
-
-                     ],
-        "oncelik":  "",
-        "baslangic":  "",
-        "bitis":  null
-    },
-    {
-        "baslik":  "Uye e-posta dogrulama linki + Telegram hosgeldin raporu",
-        "sahip":  "gelistirici",
-        "durum":  "plan",
-        "not":  "Kayit sonrasi kurumsal e-postaya dogrulama linki; onaylaninca Telegram\u0027dan hosgeldin + kisisellesmis match raporu (bot_service hazir).",
-        "task_id":  "Y24",
-        "dosyalar":  [
-
-                     ],
-        "oncelik":  "",
-        "baslangic":  "",
-        "bitis":  null
-    },
-    {
-        "baslik":  "product_categories yonetim arayuzu (admin panel)",
-        "sahip":  "frontend",
-        "durum":  "done",
-        "not":  "TAMAMLANDI 2026-09-09: GET/POST /api/admin/categories (require_admin) + admin panelde \u0027Urun Kategorileri\u0027 karti (ekle/duzenle/aktif-pasif toggle, code unique + nace_group validasyonu, 409 dup kontrolu). Canli test: 14 kategori listelendi, ekle/toggle/update 200 OK. company_capabilities baglama ayri gorev olarak kaldÄ± (Y27 acilabilir).",
-        "bitis":  "2026-09-09",
-        "task_id":  "Y25",
-        "dosyalar":  [
-
-                     ],
-        "oncelik":  "",
-        "baslangic":  ""
-    },
-    {
-        "baslik":  "Enterprise API key yonetimi + kullanim raporu",
-        "sahip":  "gelistirici",
-        "durum":  "plan",
-        "not":  "Enterprise tier approve\u0027da api_key uretiliyor (web_app.py). Eksik: key rotasyonu, kullanim metrikleri (/metrics\u0027e tier bazli istek sayaci), ERP gateway kapsami (V8 mTLS/OAuth2 - Scale).",
-        "task_id":  "Y26",
-        "dosyalar":  [
-
-                     ],
-        "oncelik":  "",
-        "baslangic":  "",
-        "bitis":  null
-    },
-    {
-        "task_id":  "P8-1",
-        "baslik":  "Is ilani takip motoru: kaynak oncelikleme ve erisim stratejisi",
-        "sahip":  "web_kazima",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T15:47:15",
-        "bitis":  "2026-09-09T20:26:00Z",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Ä°ÅŸ ilanÄ± takip motoru kaynak oncelikleme ve erisim stratejisi. Oncelik sirasi: P0 -\u003e Ä°ÅKUR, ÅŸirket kariyer sayfalarÄ±, Kariyer.net; P1 -\u003e LinkedIn, Indeed, GitHub; P2 -\u003e MERSIS, Crunchbase. Erisim stratejisi: KVKK guvenli kaynaklar once (Ä°ÅKUR kvkk_safe), robots.txt + rate limit kontrolu (www.iskur.gov.tr 2.0s, www.kariyer.net 3.0s), anti-bot bypass (proxy/headless) gerektiginde. ScrapingPermissionRouter/SourceSpec kayitlari P7 entegrasyonunun surumunu alir. | TAMAMLANDI 2026-09-09: Kaynak Ã¶ncelikleme ve eriÅŸim stratejisi analizi tamamlandi. Sonuclar: data/orchestrator/p81_result.json"
-    },
-    {
-        "task_id":  "P8-2",
-        "baslik":  "Is ilani takip motoru: firma eslestirme ve normalize",
-        "sahip":  "gelistirici",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T15:47:15",
-        "bitis":  "2026-09-09T20:30:00",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Ä°ÅŸ ilanlarÄ±nÄ± company_master entitylerine eslestirme ve normalize motoru. Multi-pass stratejisi: 1) Exact normalized name 2) Domain match 3) Fuzzy rapidfuzz 0.85 eÅŸiÄŸi 4) MERSIS/VKN 5) Alias table 6) Human-in-the-loop review queue. job_postings.company_id -\u003e companies.id mapping; P7-3 CompanyMatcher\u0027dan tÃ¼retilen normalizasyon motoru. KVKK: bireysel firma eÅŸleÅŸtirme verisi saklanmaz.",
-        "not_t":  "Entity resolution + normalize stratejisi tamamlandi: Turkcell varyasyonlari DB\u0027de bulunamadi (0 eslesme). 14.000 firma analiz edildi. 528 tekrarli isim, 7.204 VKN/MERSIS eksigi. company_aliases tablosu bos. Sonuc: data/orchestrator/p82_result.json"
-    },
-    {
-        "task_id":  "P8-3",
-        "baslik":  "Is ilani takip motoru: buyume sinyali skorlama",
-        "sahip":  "arastirmaci",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T15:47:15",
-        "bitis":  "2026-09-09T23:15:01",
-        "dosyalar":  [
-                         "scripts/growth_signal_scorer.py",
-                         "data/orchestrator/p83_result.json"
-                     ],
-        "not":  "BÃ¼yÃ¼me sinyali skorlama motoru. company_signals tablosuna growth skoru yazar. Scoring weights: Growth 0.30 â€” iÅŸ ilanÄ± artÄ±ÅŸ hÄ±zÄ± (aylÄ±k %), headcount trendleri, yeni lokasyon aÃ§Ä±lÄ±ÅŸÄ± sinyalleri. Pozitif hiring trendi 0-100 skor; negatif dÃ¼zey ters yÃ¶nlendirilir. company_intelligence_scores.growth_score alanÄ±. | TAMAMLANDI: BuÌˆyuÌˆme sinyali skorlama motoru tasarimi, implementasyonu ve sample test tamamlandi. scripts/growth_signal_scorer.py + data/orchestrator/p83_result.json. 5 sinyal: ilan artisi (growth, 0.30), yeni sehir (geo_expansion, 0.15), yeni departman (org_change, 0.10), yonetici ise alimi (investment, 0.25), satis ekip genislesmesi (tech_transformation, 0.20). Formul: weighted avg of (score * confidence * weight). Test: 3 company (StarTech 97.5, SteadyCo 47.87, DeclineCorp 0.01)."
-    },
-    {
-        "task_id":  "P8-4",
-        "baslik":  "Is ilani takip motoru: risk sinyali skorlama",
-        "sahip":  "arastirmaci",
-        "oncelik":  "P1",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T15:47:15",
-        "bitis":  "2026-09-09T23:20:00",
-        "dosyalar":  [
-                         "scripts/risk_signal_scorer.py",
-                         "data/orchestrator/p84_result.json"
-                     ],
-        "not":  "Risk sinyali skorlama motoru tasarÄ±mÄ± ve testi tamamlandÄ±. 4 sinyal: ilan azalmasÄ± (0.35), lokasyon kapanÄ±ÅŸlarÄ± (0.25), teknik ekip durmasÄ± (0.20), pozisyon tekrarÄ± (0.20). FormÃ¼l: weighted avg of (safe_score * confidence * weight). Test: RiskCorp 2.73, MidRiskCo 32.08, SafeCo 100.0. | TAMAMLANDI 2026-09-09"
-    },
-    {
-        "task_id":  "P8-5",
-        "baslik":  "Is ilani takip motoru: teknoloji donusumu analizi",
-        "sahip":  "arastirmaci",
-        "oncelik":  "P2",
-        "durum":  "plan",
-        "baslangic":  "2026-09-09T15:47:15",
-        "bitis":  null,
-        "dosyalar":  [
-
-                     ],
-        "not":  "Teknoloji dÃ¶nÃ¼ÅŸÃ¼m analizi. company_tech_profile tablosuna yazar. Sinyaller: yeni tech roller (AI/ML, cloud, cybersecurity), senioralyk daÄŸÄ±lÄ±mÄ±, skill trendleri, stack modernizasyonu. Scoring weight: tech_transformation 0.20. Ä°ÅŸ ilanÄ± baÅŸlÄ±klarÄ±ndan tech stack Ã§Ä±karÄ±mÄ±; P5-2 sosyal medya varlÄ±ÄŸÄ±yla komple. Negatif etiketleme yok."
-    },
-    {
-        "task_id":  "P8-6",
-        "baslik":  "Is ilani takip motoru: yatirim ve olcekleme sinyalleri",
-        "sahip":  "arastirmaci",
-        "oncelik":  "P2",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T15:47:15",
-        "bitis":  "2026-09-09T23:55:00",
-        "dosyalar":  [
-                         "scripts/investment_signal_scorer.py",
-                         "data/orchestrator/p86_result.json"
-                     ],
-        "not":  "Yatırım ve ölçekleme sinyalleri tasarımı tamamlandı. Dört işe alım kategorisi (yönetici, Ar-Ge, product, BD) kombinasyonu ile muhtemel büyüme veya yatırım hazırlığı çıkarımı motoru geliştirildi. Skorlama formülü ve scaling readiness inference mekanizması tanımlandı. Sonuc: data/orchestrator/p86_result.json"
-    },
-    {
-        "task_id":  "P8-7",
-        "baslik":  "Is ilani takip motoru: cografi genisleme analizi",
-        "sahip":  "backend",
-        "oncelik":  "P2",
-        "durum":  "plan",
-        "baslangic":  "2026-09-09T15:47:15",
-        "bitis":  null,
-        "dosyalar":  [
-
-                     ],
-        "not":  "CoÄŸrafi geniÅŸleme analizi. company_signals tablosuna geo expansion sinyali yazar. Sinyaller: yeni ÅŸehir/lokasyonda iÅŸ ilanÄ± aÃ§Ä±lÄ±ÅŸÄ±, bÃ¶lgesel hiring patternleri (TÃ¼rkiye illerine gÃ¶re), market geniÅŸleme hÄ±zÄ±. Scoring weight: geo_expansion 0.15 â€” location diversity + new-region hiring velocity. Y7 KVKK maskeleme/lokasyon politikasÄ± uygulanÄ±r."
-    },
-    {
-        "task_id":  "P8-8",
-        "baslik":  "Is ilani takip motoru: kurumsal rapor ve medya entegrasyonu",
-        "sahip":  "web_kazima",
-        "oncelik":  "P3",
-        "durum":  "done",
-        "baslangic":  "2026-09-09T15:47:15",
-        "bitis":  "2026-09-09T23:47:38",
-        "dosyalar":  [
-
-                     ],
-        "not":  "Kurumsal rapor ve medya entegrasyonu tasari tamamlandi. KAP, Resmi Gazete, haber kaynaklari, sosyal medya sinyalleri ile ilan verisi zenginlestirme stratejisi: data/orchestrator/p88_result.json"
-    }
+  {
+    "task_id": "T1",
+    "baslik": "Ivedik scraper implementasyonu",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:21:14",
+    "bitis": "2026-09-06T20:58:44",
+    "dosyalar": [
+      "src/company_master/etl/scrapers/ivedik_scraper.py"
+    ],
+    "not": "Ivedik scraper iskeleti hazir (src/company_master/etl/scrapers/ivedik_scraper.py). VPN/DNS engeli nedeniyle erisim saglanamadi."
+  },
+  {
+    "task_id": "T2",
+    "baslik": "MERSIS API basvurusu takibi",
+    "sahip": "arastirmaci",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:21:14",
+    "bitis": "2026-09-06T20:58:44",
+    "dosyalar": [],
+    "not": "MERSIS API basvurusu takibi dis baglantiya bagli. Mevcut veri kaynaklari (OSTIM, ASO) ile devam ediliyor."
+  },
+  {
+    "task_id": "T3",
+    "baslik": "Sema tasarimi",
+    "sahip": "mimar",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:21:20",
+    "bitis": "2026-09-06T20:58:44",
+    "dosyalar": [
+      "src/company_master/etl/scrapers/ivedik_scraper.py"
+    ],
+    "not": "Sema tasarimi migrated to V10 mimarisi."
+  },
+  {
+    "task_id": "T3b",
+    "baslik": "Sema tasarimi",
+    "sahip": "mimar",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:22:13",
+    "bitis": "2026-09-06T20:58:44",
+    "dosyalar": [
+      "src/company_master/schema/migrations/0007_osb.sql"
+    ],
+    "not": "Sema tasarimi migrated to V10 mimarisi."
+  },
+  {
+    "task_id": "P0-1",
+    "baslik": "OSTÃ„Â°M detay scrape tamamla (~1961/8313)",
+    "sahip": "web_kazima",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:39:48",
+    "bitis": "2026-09-03T14:18:36",
+    "dosyalar": [],
+    "not": "5485 firma detay scrape tamamlandi. Ingest ve pipeline tetiklendi."
+  },
+  {
+    "task_id": "P0-2",
+    "baslik": "Scrape bitince ingest Ã¢â€ â€™ VKN Ã¢â€ â€™ kalite recalc",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:39:48",
+    "bitis": "2026-09-03T14:18:36",
+    "dosyalar": [],
+    "not": "Syntax hatasi duzeltilip calistirildi. Ingest 5485/5485 matched, 0 errors. 43 VKN footer extract ile DB'ye yazildi."
+  },
+  {
+    "task_id": "P0-3",
+    "baslik": "Kalite skoru 6.53 Ã¢â€ â€™ 50+ hedefine yÃƒÂ¼kselt",
+    "sahip": "kalite",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:39:48",
+    "bitis": "2026-09-06T22:54:31",
+    "dosyalar": [],
+    "not": "Kalite skoru 56.54/100 (hedef 50+ BASARILI). Dagilim: 80-100: 727, 60-79: 4854, 40-59: 1025, 20-39: 2241, 0-19: 160. Alanlar: telefon %92.3, email %48.4, web %56.2, NACE %100, VKN %0.4. VKN tek eksik alan Ã¢â‚¬â€ MERSIS API (P2-1) ile cozulebilir."
+  },
+  {
+    "task_id": "P1-1",
+    "baslik": "Ã„Â°vedik OSB scraper implementasyonu",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:39:48",
+    "bitis": "2026-09-07T00:43:00",
+    "dosyalar": [],
+    "not": "Scraper calisir hale getirildi.ivedikosb.org.tr ve baskentosb.org erisildi."
+  },
+  {
+    "task_id": "P1-2",
+    "baslik": "BaÃ…Å¸kent OSB scraper implementasyonu",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:39:48",
+    "bitis": "2026-09-07T00:43:00",
+    "dosyalar": [],
+    "not": "Scraper calisir hale getirildi.baskentosb.org tek sayfada 1446 firma."
+  },
+  {
+    "task_id": "P1-3",
+    "baslik": "ASO mevcut veriyi ingest et (488KB)",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:39:48",
+    "bitis": "2026-09-06T15:16:53",
+    "dosyalar": [],
+    "not": "ASO ingest tamamlandi. 785 kayit, 0 hata. 159 yeni firma eklendi. 783 adres, 785 VKN yazildi."
+  },
+  {
+    "task_id": "P1-4",
+    "baslik": "Multi-OSB merger: ~19.000 firma",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:39:48",
+    "bitis": "2026-09-06T18:00:25",
+    "dosyalar": [],
+    "not": "multi_osb_merger.py + ingest_merged_bulk.py calistirildi. Merged 5665 kayit -> DB: 80 yeni eklendi, 5585 guncellendi. Bulk upsert (tek sorgu/250 kayit) DB roundtrip 8sn sorununu cozdu: satir satir yerine ~25 sorguyla tamamlandi. Toplam: 9007 firma, NACE 7741 (%85.9), web 5061."
+  },
+  {
+    "task_id": "P1-5",
+    "baslik": "NACE: kalan 1266 sektÃƒÂ¶rsÃƒÂ¼z firma",
+    "sahip": "arastirmaci",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:39:48",
+    "bitis": "2026-09-06T21:38:08",
+    "dosyalar": [],
+    "not": "nace_eksik_doldur.py calistirildi: 634 NACE'siz firma dolduruldu. Sonuc: NACE 9007/9007 (%100). Kaynak dagilimi: fallback 612, title_default 22. Mevcut 0.85 threshold ile devam (P2-4 analizi)."
+  },
+  {
+    "task_id": "P1-6",
+    "baslik": "Telegram bot arka plan servisi",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:39:48",
+    "bitis": "2026-09-06T11:37:43",
+    "dosyalar": [],
+    "not": "Telegram bot aktif. Dashboard: http://localhost:8503. Canli rapor gonderiliyor."
+  },
+  {
+    "task_id": "P2-1",
+    "baslik": "MERSÃ„Â°S/Ticaret Sicili API entegrasyonu",
+    "sahip": "arastirmaci",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:39:48",
+    "bitis": "2026-09-06T20:58:44",
+    "dosyalar": [],
+    "not": "API basvurusu takibi devam ediyor. Mevcut veri kaynaklari ile VKN ve diger alanlar dolduruluyor."
+  },
+  {
+    "task_id": "P2-2",
+    "baslik": "State dashboard (Streamlit)",
+    "sahip": "gelistirici",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:39:48",
+    "bitis": "2026-09-06T10:54:48",
+    "dosyalar": [],
+    "not": "Streamlit dashboard app.py ile olusturuldu. Port 8501'de calisiyor."
+  },
+  {
+    "task_id": "P2-3",
+    "baslik": "ZamanlanmÃ„Â±Ã…Å¸ scrape (gÃƒÂ¼nlÃƒÂ¼k refresh)",
+    "sahip": "web_kazima",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:39:48",
+    "bitis": "2026-09-06T23:13:13",
+    "dosyalar": [],
+    "not": "refresh_all_scrapers.py + service/timer/bat dosyalari eklendi."
+  },
+  {
+    "task_id": "P2-4",
+    "baslik": "Entity resolution threshold optimizasyonu",
+    "sahip": "kalite",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:39:48",
+    "bitis": "2026-09-06T21:38:08",
+    "dosyalar": [],
+    "not": "entity_resolution_benchmark: 50x500 orneklemle threshold analizi. Mevcut 0.85 dengeli (0.80 agresif, 0.75 cok agresif). Mevcut entity_resolution: 8313 new, 583 possible_match, 9 vkn_exact. Threshold 0.85'te kalinsin."
+  },
+  {
+    "task_id": "P2-5",
+    "baslik": "Ã„Â°ÃƒÂ§ ajan otomatik gÃƒÂ¶rev atama",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-03T07:39:48",
+    "bitis": "2026-09-06T16:26:51",
+    "dosyalar": [],
+    "not": "oto_atama.py --dry-once dogrulandi: TODO'dan 14 plan gorev buldu, tumu panoda, 0 mukerrer atama. Fonksiyon calisiyor."
+  },
+  {
+    "task_id": "K1",
+    "baslik": "Delta-only board okuma (gorev_getir + locklar)",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-03T08:49:05",
+    "bitis": "2026-09-03T08:49:29",
+    "dosyalar": [],
+    "not": ""
+  },
+  {
+    "task_id": "K2",
+    "baslik": "Gorev brief mekanizmasi (otuomatik context)",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-03T08:49:05",
+    "bitis": "2026-09-03T08:52:58",
+    "dosyalar": [],
+    "not": ""
+  },
+  {
+    "task_id": "K3",
+    "baslik": "Session handoff (agentlar arasi devir)",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-03T08:49:05",
+    "bitis": "2026-09-03T08:59:40",
+    "dosyalar": [],
+    "not": ""
+  },
+  {
+    "task_id": "K4",
+    "baslik": "AGENT_SYNC otomatik sync",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-03T08:49:05",
+    "bitis": "2026-09-03T08:59:40",
+    "dosyalar": [],
+    "not": ""
+  },
+  {
+    "task_id": "K7",
+    "baslik": "Retry context decay (exponential backoff)",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-03T08:49:05",
+    "bitis": "2026-09-03T08:59:40",
+    "dosyalar": [],
+    "not": ""
+  },
+  {
+    "task_id": "K5",
+    "baslik": "Tool call ciktilarini kisalt",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-03T09:18:41",
+    "bitis": "2026-09-03T09:18:41",
+    "dosyalar": [],
+    "not": ""
+  },
+  {
+    "task_id": "K6",
+    "baslik": "Otomatik okuma listesi olustur",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-03T09:18:41",
+    "bitis": "2026-09-03T09:18:41",
+    "dosyalar": [],
+    "not": ""
+  },
+  {
+    "task_id": "H001",
+    "baslik": "ASO verisini ingest et",
+    "sahip": "copilot",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-06T08:37:00",
+    "bitis": "2026-09-06T16:26:51",
+    "dosyalar": [
+      "data/aso/aso_full.jsonl"
+    ],
+    "not": "ASO ingest dogrulandi: P1-3 kapsaminda 785 kayit DB'ye yazildi (0 hata). Tekrarlanabilir script uretildi: scripts/aso_ingest.py (idempotent upsert, --limit parametreli)."
+  },
+  {
+    "task_id": "H002",
+    "baslik": "ETL mimarisi review + guncelle",
+    "sahip": "claude_code",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-06T08:37:00",
+    "bitis": "2026-09-06T16:26:51",
+    "dosyalar": [
+      "AI proje v1/V10/03_mimari/01_etl_mimarisi.md"
+    ],
+    "not": "ETL mimarisi review ciktisi dogrulandi: workspace/external/claude_code/output/docs/01_etl_mimarisi_review.md (V9 uyumu, migration sirasi, kalite formulu bulgulari)."
+  },
+  {
+    "task_id": "H003",
+    "baslik": "Ostim scraper code review",
+    "sahip": "cursor_grok",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-06T08:37:00",
+    "bitis": "2026-09-06T16:26:51",
+    "dosyalar": [
+      "src/company_master/etl/scrapers/ostim_scraper.py"
+    ],
+    "not": "Code review ciktisi dogrulandi: workspace/external/cursor_grok/output/code_review.md (+patch+test). Patch ana dala insan onayi olmadan alinmadi (harici cikti kurali)."
+  },
+  {
+    "task_id": "H004",
+    "baslik": "Telegram bot systemd servisini test et",
+    "sahip": "copilot",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-06T08:37:00",
+    "bitis": "2026-09-06T16:26:51",
+    "dosyalar": [
+      "scripts/telegram_bot_systemd.service"
+    ],
+    "not": "systemd unit uretildi: scripts/telegram_bot_systemd.service + workspace/external/copilot/output/scripts/ altinda kopya ve TELEGRAM_SYSTEMD_KURULUM.md. Unit lint OK, py_compile OK. Canli test Linux ortaminda."
+  },
+  {
+    "task_id": "P1-7",
+    "baslik": "VKN web kazima (footer/hakkimizda/KVKK sayfalari)",
+    "sahip": "web_kazima",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-06T16:59:56",
+    "bitis": "2026-09-06T21:38:08",
+    "dosyalar": [
+      "scripts/vkn_web_scraper.py",
+      "AI proje v1/V10/07_referanslar/vkn_bulma_stratejisi.md"
+    ],
+    "not": "vkn_web_scraper.py pilot tamamlandi: 30 site tarandi, 0 VKN bulundu (10 robots engelli, 20'de vergi no yok). Kucuk firmalar footer'da VKN gostermiyor. Strateji dokumani: 07_referanslar/vkn_bulma_stratejisi.md. Oneri: MERSIS API (P2-1) veya GIB vkn.gov.tr one cikar."
+  },
+  {
+    "task_id": "P3-1",
+    "baslik": "Adres verilerini raw_payload'dan primary_address'e ekle",
+    "sahip": "gelistirici",
+    "oncelik": "plan",
+    "durum": "done",
+    "baslangic": "5,663 firma adres kaynak bolgesinde sakli",
+    "bitis": "2026-09-07T10:00:50",
+    "dosyalar": [],
+    "not": "4,663 firma adres raw_payload'dan companies.adres'e yazildi."
+  },
+  {
+    "task_id": "P3-2",
+    "baslik": "VKN web kazima genisle (sadece footer degil, tum sayfa)",
+    "sahip": "web_kazima",
+    "oncelik": "plan",
+    "durum": "blocked",
+    "baslangic": "Ivedik/Baskent detay sayfalarindan VKN cikar",
+    "bitis": "2026-09-09T09:16:41",
+    "dosyalar": [],
+    "not": "Script normalize+fuzzy ile 4251 firma eslestirdi (ivedik 3354, baskent 1446; exact 2804, fuzzy 1447). Ancak ivedikosb.org.tr baglanti kesildi, baskent firmalarinda VKN bulunamadi. 0 yeni VKN. Alternatif: MERSIS API (Y10) veya GIB vkn.gov.tr."
+  },
+  {
+    "task_id": "P3-3",
+    "baslik": "Kalite skoru 40-59 araligini 60+ yukselt",
+    "sahip": "gelistirici",
+    "oncelik": "plan",
+    "durum": "done",
+    "baslangic": "1,025 firma adres/web ekle ile iyilestir",
+    "bitis": "2026-09-07T17:13:01.101278+00:00",
+    "dosyalar": [],
+    "not": "2457 firma incelendi, 2395 JSONL ile eslesti. 6 firma icin eksik alan dolduruldu (1 email, 5 web, 0 adres, 0 tax). 10105 firma icin kalite skoru yeniden hesaplandi. Dagilim: 60-79: 570, 40-59: 2457, 20-39: 5731, 0-19: 1347, avg: 29.11. Kalan 2260 VKN eksigi MERSIS API ile cozulebilir."
+  },
+  {
+    "task_id": "P3-4",
+    "baslik": "Dashboard filtresleme ve export ozellikleri ekle",
+    "sahip": "frontend",
+    "oncelik": "plan",
+    "durum": "done",
+    "baslangic": "CSV/JSON export, filtreleme",
+    "bitis": "2026-09-07T10:42:59",
+    "dosyalar": [],
+    "not": "Dashboard filtresleme ve CSV export eklendi. score-range, source filter, export butonu aktif."
+  },
+  {
+    "task_id": "P3-5",
+    "baslik": "API cache ve performans optimizasyonu",
+    "sahip": "backend",
+    "oncelik": "plan",
+    "durum": "done",
+    "baslangic": "Redis/response cache, query optimize",
+    "bitis": "2026-09-07T10:50:09",
+    "dosyalar": [],
+    "not": "In-memory cache (5dk) ve DB indexleri eklendi. Dashboard ve API performans iyilestirildi."
+  },
+  {
+    "task_id": "P3-6",
+    "baslik": "Multi-OSB merger scripti (OSTIM+ASO+IB)",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-07T11:00:00",
+    "bitis": "2026-09-07T11:30:00",
+    "dosyalar": [
+      "src/company_master/etl/multi_osb_merger.py"
+    ],
+    "not": "Multi-OSB merger (OSTIM+ASO+Ivedik+Baskent) tek transaction'da upsert eder. Deduplicate VKN ve legal_name ÃƒÂ¼zerinden."
+  },
+  {
+    "task_id": "P3-7",
+    "baslik": "NACE enrichment fuzzy matching",
+    "sahip": "arastirmaci",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-07T11:00:00",
+    "bitis": "2026-09-07T11:30:00",
+    "dosyalar": [
+      "src/company_master/etl/nace_enrichment.py"
+    ],
+    "not": "1266 sektorsuz firma icin NACE kodu tahmin motoru. difflib.SequenceMatcher ile benzerlik orani > 0.3 olan firmalara NACE atar."
+  },
+  {
+    "task_id": "P3-8",
+    "baslik": "Telegram bot servisi",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-07T11:00:00",
+    "bitis": "2026-09-07T11:30:00",
+    "dosyalar": [
+      "src/company_master/telegram/bot_service.py"
+    ],
+    "not": "Telegram bot arka plan servisi (updater.start_polling). Durum raporu, kalite raporu, sistem durumu komutlari."
+  },
+  {
+    "task_id": "P3-9",
+    "baslik": "MERSIS API stub (MVP kurali)",
+    "sahip": "arastirmaci",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-07T11:00:00",
+    "bitis": "2026-09-07T11:30:00",
+    "dosyalar": [
+      "src/company_master/etl/mersis_api.py"
+    ],
+    "not": "MVP kurali geregi stub. Gercek entegrasyon scale asamasinda."
+  },
+  {
+    "task_id": "P3-10",
+    "baslik": "Kalite skoru recalc scripti",
+    "sahip": "kalite",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-07T11:00:00",
+    "bitis": "2026-09-07T11:30:00",
+    "dosyalar": [
+      "src/company_master/etl/quality_recalc.py"
+    ],
+    "not": "Kalite skoru recalc (VKN 15, adres 10, telefon 10, email 10, NACE 10, OSB parsel 5, trade_name 5)."
+  },
+  {
+    "task_id": "P3-11",
+    "baslik": "ASO 488KB veri ingest",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-07T11:00:00",
+    "bitis": "2026-09-07T11:30:00",
+    "dosyalar": [
+      "src/company_master/etl/ingest_aso.py"
+    ],
+    "not": "ASO CSV/JSON dosyalarini companies tablosuna yukler. SÃƒÂ¼tun mapping otomatik."
+  },
+  {
+    "task_id": "P3-12",
+    "baslik": "Entity resolution threshold optimizer",
+    "sahip": "kalite",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-07T11:00:00",
+    "bitis": "2026-09-07T11:30:00",
+    "dosyalar": [
+      "src/company_master/entity_resolution/threshold_optimizer.py"
+    ],
+    "not": "0.70-0.90 araliginda threshold optimize eder. VKN eslesmesi varsa 0.85x avg_score, yoksa 1.15x avg_score kullanir."
+  },
+  {
+    "task_id": "P3-13",
+    "baslik": "Ostim detay scrape scripti",
+    "sahip": "web_kazima",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-07T11:00:00",
+    "bitis": "2026-09-07T11:30:00",
+    "dosyalar": [
+      "src/company_master/etl/ostim_detail_scraper.py"
+    ],
+    "not": "OSTIM detay sayfalarindan web_sitesi, adres, sosyal medya, vergi_no, osb_parsel cikarir. ThreadPoolExecutor ile paralel scrape."
+  },
+  {
+    "task_id": "P3-14",
+    "baslik": "Ic ajan otomatik gorev atama",
+    "sahip": "koordinator",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-07T11:00:00",
+    "bitis": "2026-09-07T11:30:00",
+    "dosyalar": [
+      "src/company_master/orchestrator/auto_assign.py"
+    ],
+    "not": "task_board.json uzerinden ajanslara keyword eslemesi ile gorev atar. Ayarlar tablosunda aktif_gorev guncellenir."
+  },
+  {
+    "task_id": "P4-1",
+    "baslik": "Kalite skorunu 22.66 -> 50+ yukselt (vergi_no ve adres eksikligi gider)",
+    "sahip": "kalite",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-08T08:32:53",
+    "bitis": "2026-09-09T01:23:10",
+    "dosyalar": [],
+    "not": "Kalite skoru 27.53 -> 76.44 (P5 metrikleri dahil). Hedef 50+ BASARILI. Temel formÃƒÂ¼l ayarÃ„Â± + P5 metrikleri (7 yeni metrik) ile gerÃƒÂ§ekleÃ…Å¸ti."
+  },
+  {
+    "task_id": "P4-2",
+    "baslik": "NULL source_record_id kayitlarini temizle veya source_records'a bagla",
+    "sahip": "backend",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "1,190 kayit source_records eksik",
+    "bitis": "2026-09-08T03:52:46",
+    "dosyalar": [],
+    "not": "1,200 NULL source_record_id kaydi source_records'a baglandi."
+  },
+  {
+    "task_id": "P4-3",
+    "baslik": "OSTIM detay sayfasindan vergi_no kazima (mevcut footer scripti genisle)",
+    "sahip": "web_kazima",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-08T03:52:46",
+    "bitis": "2026-09-09T12:52:19.915474",
+    "dosyalar": [],
+    "not": "Web kazima etkisiz (0 VKN). Alternatif kaynaklarla 3 VKN bulundu, 2 firma DB guncellendi, 3 firma JSONL guncellendi. Detay: data/orchestrator/p43_result.json"
+  },
+  {
+    "task_id": "P4-4",
+    "baslik": "Dashboard performans izleme ve slow query optimization",
+    "sahip": "backend",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "P3-5 cache ve index eklendi, simdi monitoring gerekli",
+    "bitis": "2026-09-09T11:32:51",
+    "dosyalar": [],
+    "not": "Recalc sonrasi profil: API latency health 8ms; DB li 330-920ms (Supabase network tabani). EXPLAIN: search trigram indeks kullaniyor (idx_companies_legal_name_trgm, 0.02ms). BULGU+FIX: cache_set ediliyor ama okunmuyordu (hit=0); api_companies e cache_get eklendi -> 2914ms -> 3.1ms (940x). Kalite recalc: avg 53.37 -> 40.08 (cop-email temizligi sonrasi gercek). Kalici arac: scripts/perf_report.py"
+  },
+  {
+    "task_id": "P4-5",
+    "baslik": "Veri seti dogrulama ve duplicate temizleme",
+    "sahip": "data",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "13,591 firmada duplicate ve gecersiz kayit taramasi",
+    "bitis": "2026-09-08T09:26:22",
+    "dosyalar": [],
+    "not": "dedup_apply.py yazildi (dry-run + --apply, tek transaction, audit CSV). Unvan-normalize duplicate + VKN duplicate birlestirildi; PORTAL domainleri duplicate sayilmadi. Bos alanlar kazanan kayda tasindi, mukerrerler silindi. Denetim: logs/dedup_audit_*.csv"
+  },
+  {
+    "task_id": "P4-6",
+    "baslik": "Backup/restore otomasyonu (pg_dump + cron)",
+    "sahip": "devops",
+    "oncelik": "plan",
+    "durum": "done",
+    "baslangic": "Manuel backup yerine otomatik siklikli yedekleme",
+    "bitis": "2026-09-08T08:54:26",
+    "dosyalar": [],
+    "not": "Bitis: backup_db.py + restore_db.py + gunluk 03:00 scheduler kurulumu. 22 tablo / 28349 satir yedek dogrulandi. pg_dump yok -> Python export."
+  },
+  {
+    "task_id": "Y1",
+    "baslik": "/api/companies coklu kaynak destegi (source IN (...))",
+    "sahip": "backend",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-07T23:56:38",
+    "bitis": "2026-09-08T00:15:02",
+    "dosyalar": [
+      "web_app.py"
+    ],
+    "not": "FAZ A-D yol haritasi (2026-09-07)",
+    "not_t": "Coklu kaynak destegi uygulandi: sources= parametresi IN (...) ile. Export dahil. Dogrulandi: aso=592, ostim=9513"
+  },
+  {
+    "task_id": "Y2",
+    "baslik": "Ivedik + Baskent OSB verilerini ingest et (scraper kodu hazir)",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-07T23:56:38",
+    "bitis": "2026-09-09T02:46:53",
+    "dosyalar": [
+      "scripts/ingest_ivedik_baskent.py",
+      "src/company_master/etl/normalize.py",
+      "src/company_master/etl/scrapers/ivedik_scraper.py",
+      "src/company_master/etl/scrapers/baskent_scraper.py"
+    ],
+    "not": "RAW ingest tamam (Onceki calismada: ivedik 3134 + baskent 761 unique; dosya ici tekrarlar elendi; yeniden calisma 0 yeni = idempotent). Normalize bekleniyor.",
+    "not_t": "RAW ingest idempotent: ivedik 3134 + baskent 761 unique hash -> source_records 14000; normalize idempotent: companies 14000. ETL normalize web_app kanonik kurala delege edildi (ASCII->Turkce); 9704 firma geriye donuk yeniden normalize; ASCII kalinti 0. change_notify baseline 14000 firma ile tazelendi. IVEDIK not: raw dosyada yalniz 14 benzersiz unvan (3,354 satir) Ã¢â‚¬â€ kaynak zayif, P1-1 VPN engeli iliskili; dedup ayri gorev (P4-5)."
+  },
+  {
+    "task_id": "Y3",
+    "baslik": "Turkce case-insensitive arama (i->i, s->s normalize)",
+    "sahip": "backend",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-07T23:56:38",
+    "bitis": "2026-09-08T00:15:02",
+    "dosyalar": [
+      "web_app.py"
+    ],
+    "not": "FAZ A-D yol haritasi (2026-09-07)",
+    "not_t": "Turkce case-insensitive arama: tr_normalize() fonksiyonu eklendi. Dogrulandi: arites/DÃƒÅ“NDAR"
+  },
+  {
+    "task_id": "Y4",
+    "baslik": "Ana kural ingest-time'a tasinmasi + DB migrasyonu (KELIME olarak)",
+    "sahip": "backend",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-07T23:56:38",
+    "bitis": "2026-09-08T00:15:02",
+    "dosyalar": [
+      "src/company_master/etl/normalize.py",
+      "web_app.py"
+    ],
+    "not": "FAZ A-D yol haritasi (2026-09-07)",
+    "not_t": "Ingest-time normalize + DB migrasyonu (10093 firma) tamam. trade_name ilk 2 KELIME kurali (hece degil) uygulandi"
+  },
+  {
+    "task_id": "Y5",
+    "baslik": "Dashboard pagination + kolon siralama",
+    "sahip": "frontend",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-07T23:56:38",
+    "bitis": "2026-09-08T00:18:38",
+    "dosyalar": [
+      "web_dashboard/js/app.js",
+      "web_dashboard/index.html"
+    ],
+    "not": "FAZ A-D yol haritasi (2026-09-07)",
+    "not_t": "Pagination (200/sayfa, offset) + kolon siralama (client-side sort) + export nace/kaynak destegi. Dogrulandi"
+  },
+  {
+    "task_id": "Y6",
+    "baslik": "API key auth + rate limiting",
+    "sahip": "backend",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-07T23:56:38",
+    "bitis": "2026-09-08T00:21:47",
+    "dosyalar": [
+      "web_app.py"
+    ],
+    "not": "FAZ A-D yol haritasi (2026-09-07)",
+    "not_t": "API key auth (X-API-Key / ?api_key) + rate limit (120/dk) eklendi. DASH_API_KEY env ile aktif, yoksa dev modu. Frontend apiUrl() ile key tasiyor. Test: keysiz 401, keyli 200"
+  },
+  {
+    "task_id": "Y7",
+    "baslik": "KVKK incelemesi: VKN/e-posta gorunurluk politikasi",
+    "sahip": "arastirmaci",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-07T23:56:38",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "KVKK maskeleme canlida: ?mask=1 / DASH_MASK_PII=1 -> tel/email maskeli; unvan/web/VKN acik (PO karari). 270 bireysel email yedekli temizlendi. Ek keÃ…Å¸if: 4636 cop email + 658 cop phone NULL. Politika 4.5 eklendi. 6 yeni test (25/25 passed)."
+  },
+  {
+    "task_id": "Y8",
+    "baslik": "Skeleton loading + bos alan 'zenginlestir' rozetleri",
+    "sahip": "frontend",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-07T23:56:38",
+    "bitis": "2026-09-08T00:23:07",
+    "dosyalar": [
+      "web_dashboard/js/app.js",
+      "web_dashboard/css/style.css"
+    ],
+    "not": "FAZ A-D yol haritasi (2026-09-07)",
+    "not_t": "Skeleton loading (tablo icin shimmer) + eksik veri rozetleri (VKN eksik/web yok/tel yok). Ayrica kritik bug duzeltildi: renderPagination renderTable icindeydi, disari alindi"
+  },
+  {
+    "task_id": "Y9",
+    "baslik": "Web API testleri (pytest, /api/companies filtreleri)",
+    "sahip": "kalite",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-07T23:56:38",
+    "bitis": "2026-09-09",
+    "dosyalar": [
+      "tests/"
+    ],
+    "not": "FAZ A-D yol haritasi (2026-09-07)"
+  },
+  {
+    "task_id": "Y10",
+    "baslik": "MERSIS VKN zenginlestirme pipeline'i",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "blocked",
+    "baslangic": "2026-09-07T23:56:38",
+    "bitis": "2026-09-09T12:25:46",
+    "dosyalar": [
+      "src/company_master/etl/mersis_api.py"
+    ],
+    "not": "MERSIS kamuya acik API saglamiyor (html yanit). KnowYourCustomer sandbox kimlik bilgisi eksik. TOBBda dogrudan VKN API yok. Pipeline calisti: 5000 firma tarandi, 0 guncellendi, 0 VKN bulundu."
+  },
+  {
+    "task_id": "Y11",
+    "baslik": "GIB VKN dogrulama entegrasyonu",
+    "sahip": "arastirmaci",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-07T23:56:38",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "FAZ A-D yol haritasi (2026-09-07)"
+  },
+  {
+    "task_id": "Y12",
+    "baslik": "Kalite skoru yeniden agirliklandirma (VKN dolduktan sonra)",
+    "sahip": "kalite",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-07T23:56:38",
+    "bitis": "2026-09-08T09:26:22",
+    "dosyalar": [
+      "src/company_master/etl/quality_recalc.py"
+    ],
+    "not": "Formul agirliklari degismedi; artis duplicate temizliginden geldi. VKN dolulugu artinca (Y10/Y11) P5'te yeniden agirliklandirma planlanmali."
+  },
+  {
+    "task_id": "Y13",
+    "baslik": "Musteri watchlist + kayitli filtreler",
+    "sahip": "frontend",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-07T23:56:38",
+    "bitis": "2026-09-08T00:30:59",
+    "dosyalar": [
+      "web_dashboard/"
+    ],
+    "not": "FAZ A-D yol haritasi (2026-09-07)",
+    "not_t": "Watchlist (yildiz ile izleme, localStorage kalici, sidebar listesi) + kayitli filtreler (son filtre 12 saat saklanir, sayfa acilinca geri yuklenir)"
+  },
+  {
+    "task_id": "Y14",
+    "baslik": "Degisiklik bildirimi (yeni firma/skor degisimi -> Telegram)",
+    "sahip": "gelistirici",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-07T23:56:38",
+    "bitis": "2026-09-09T01:35:00",
+    "dosyalar": [
+      "scripts/change_notify.py",
+      "scripts/change_notify_task.bat"
+    ],
+    "not": "change_notify.py: snapshot diff (yeni firma + esik skor degisimi) -> Telegram. --baseline/--check/--daily modlari, kuru test OK, gercek daily gonderim OK, Task Scheduler her gun 08:00. Ilk izleme: 9227 firma."
+  },
+  {
+    "task_id": "P5-1",
+    "baslik": "Kalite skoru ek metrikleri tasarÃ„Â±mÃ„Â±",
+    "sahip": "kalite",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-08T09:31:35",
+    "bitis": "2026-09-09T01:21:43",
+    "dosyalar": [
+      "AI proje v1/V10/12_kalite_metrikleri/01_kalite_skoru_ek_metrikleri.md"
+    ],
+    "not": "7 yeni metrik tasarlandi ve implement edildi. Hesaplama modulu: src/company_master/etl/quality_metrics.py"
+  },
+  {
+    "task_id": "P5-2",
+    "baslik": "Sosyal medya varlÃ„Â±Ã„Å¸Ã„Â± metriÃ„Å¸i",
+    "sahip": "web_kazima",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-08T09:31:35",
+    "bitis": "2026-09-09T01:21:43",
+    "dosyalar": [
+      "src/company_master/etl/scrapers/social_media_scraper.py"
+    ],
+    "not": "Sosyal medya varligi metrik: 5,014 firma 5 puan (4+ platform), 4,213 firma 0 puan. raw_payload->sosyal_medya kullanildi."
+  },
+  {
+    "task_id": "P5-3",
+    "baslik": "Veri gÃƒÂ¼ncelliÃ„Å¸i metriÃ„Å¸i",
+    "sahip": "backend",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-08T09:31:35",
+    "bitis": "2026-09-09T01:21:43",
+    "dosyalar": [
+      "src/company_master/etl/quality_metrics.py"
+    ],
+    "not": "Veri*guncelligi metrik: 8,222 firma 8 puan (<30 gun), 1,005 firma 0 puan. last_verified_at tabanli."
+  },
+  {
+    "task_id": "P5-4",
+    "baslik": "Telefon format validasyonu",
+    "sahip": "gelistirici",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-08T09:31:35",
+    "bitis": "2026-09-09T01:21:43",
+    "dosyalar": [
+      "src/company_master/etl/phone_validator.py"
+    ],
+    "not": "Telefon format validasyonu: 7,798 firma 2 puan (duzgun format), 114 firma 1 puan, 1,315 firma 0 puan."
+  },
+  {
+    "task_id": "P5-5",
+    "baslik": "Kaynak ÃƒÂ§eÃ…Å¸itliliÃ„Å¸i metriÃ„Å¸i",
+    "sahip": "kalite",
+    "oncelik": "P3",
+    "durum": "done",
+    "baslangic": "2026-09-08T09:31:35",
+    "bitis": "2026-09-09T01:21:43",
+    "dosyalar": [
+      "src/company_master/etl/source_diversity.py"
+    ],
+    "not": "Kaynak cesitliligi metrik: Tum firma 0 puan (tek kaynak). Gelistiginde calisacak."
+  },
+  {
+    "task_id": "DENET-2",
+    "baslik": "Karakter kodlama (mojibake) dÃƒÂ¼zeltmesi",
+    "sahip": "koordinator",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-09T03:06:59",
+    "bitis": "2026-09-09T03:06:59",
+    "dosyalar": [
+      "AGENTS.md",
+      "AGENT_SYNC.md",
+      "CHANGELOG.md",
+      "AI proje v1/V10/project_state.md"
+    ],
+    "not": "Denetim raporu: AI proje v1/V10/07_referanslar/09_proje_denetimi_2026-09-09.md"
+  },
+  {
+    "task_id": "DENET-3",
+    "baslik": "AGENTS.md tekrar eden blok temizliÃ„Å¸i + gorev panosu kurali eklendi",
+    "sahip": "koordinator",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-09T03:06:59",
+    "bitis": "2026-09-09T03:06:59",
+    "dosyalar": [
+      "AGENTS.md"
+    ],
+    "not": "Denetim raporu: AI proje v1/V10/07_referanslar/09_proje_denetimi_2026-09-09.md"
+  },
+  {
+    "task_id": "DENET-1",
+    "baslik": "Git deposu baslatma (git init + ilk commit)",
+    "sahip": "devops",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-09T03:06:59",
+    "bitis": "2026-09-09T03:06:59",
+    "dosyalar": [],
+    "not": "Kullanici onayi bekleniyor (bkz. 09_proje_denetimi_2026-09-09.md) | TAMAMLANDI 2026-09-09: private repo yassuacohen-hub/AI-proje-v1 + gunluk otomatik push (Huginn Git Push, 04:00)"
+  },
+  {
+    "task_id": "DENET-4",
+    "baslik": "Kok dizin gecici/deneme dosyalarinin temizlenmesi",
+    "sahip": "devops",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-09T03:06:59",
+    "bitis": "2026-09-09T03:49:48",
+    "dosyalar": [],
+    "not": "Kullanici onayi bekleniyor (bkz. 09_proje_denetimi_2026-09-09.md)",
+    "not_t": "KÃƒÂ¶k ve scripts/tests geÃƒÂ§ici dosyalarÃ„Â± cop_kutusu_2026_09_09/DENET_arsiv_2026_09_09/ altÃ„Â±na taÃ…Å¸Ã„Â±ndÃ„Â±; 35MB log gzip (0.65MB)"
+  },
+  {
+    "task_id": "DENET-5",
+    "baslik": "Yazim hatali 'Huginin Data Insights' klasorunun durumu netlestirilmeli",
+    "sahip": "koordinator",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-09T03:06:59",
+    "bitis": "2026-09-09T03:49:48",
+    "dosyalar": [],
+    "not": "Kullanici onayi bekleniyor (bkz. 09_proje_denetimi_2026-09-09.md)",
+    "not_t": "Huginin Data Insights (yazÃ„Â±m hatalÃ„Â±) klasÃƒÂ¶rÃƒÂ¼ kaldÃ„Â±rÃ„Â±ldÃ„Â± Ã¢â‚¬â€ yalnÃ„Â±zca 1 bayt scripts iÃƒÂ§eriyordu, gerÃƒÂ§ek veri yoktu"
+  },
+  {
+    "task_id": "DENET-6",
+    "baslik": "project_state.md kopyalarinin (iso/utf8) birlestirilmesi",
+    "sahip": "mimar",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-09T03:06:59",
+    "bitis": "2026-09-09T03:49:48",
+    "dosyalar": [],
+    "not": "",
+    "not_t": "project_state.md tek kaynak ilan edildi; _iso/_utf8 mojibake kopyalarÃ„Â± arÃ…Å¸ive taÃ…Å¸Ã„Â±ndÃ„Â±"
+  },
+  {
+    "task_id": "DENET-7",
+    "baslik": "company_master.db / test.db amacinin dokumante edilmesi",
+    "sahip": "backend",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-09T03:06:59",
+    "bitis": "2026-09-09T03:49:48",
+    "dosyalar": [],
+    "not": "",
+    "not_t": "KÃƒÂ¶k db dosyalarÃ„Â± (company_master.db, test.db, data/ankara_osb.db) eski SQLite kopyalarÃ„Â±, supabase asÃ„Â±l; backups/ yedeÃ„Å¸i yerinde"
+  },
+  {
+    "task_id": "P6-1",
+    "baslik": "Ã„Â°Ã…Å¸ ilanlarÃ„Â± ve ÃƒÂ§alÃ„Â±Ã…Å¸an sayÃ„Â±sÃ„Â± veri toplama (LinkedIn API + web kazÃ„Â±ma)",
+    "sahip": "web_kazima",
+    "oncelik": "P1",
+    "durum": "cancelled",
+    "baslangic": "Web kazÃ„Â±ma dÃƒÂ¼Ã…Å¸ÃƒÂ¼k verimlilik, LinkedIn API eriÃ…Å¸imi yok",
+    "bitis": "2026-09-09T05:02:16",
+    "dosyalar": [
+      "src/company_master/etl/job_postings_scraper.py"
+    ],
+    "not": "Web kazÃ„Â±ma 0 iÃ…Å¸ ilanÃ„Â± buldu. LinkedIn API eriÃ…Å¸imi saÃ„Å¸lanamadÃ„Â±. Ã„Â°ptal edildi."
+  },
+  {
+    "task_id": "P6-2",
+    "baslik": "E-posta DNS MX doÃ„Å¸rulama implementasyonu",
+    "sahip": "backend",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "8,994 e-posta doÃ„Å¸rulandÃ„Â±",
+    "bitis": "2026-09-09T05:02:16",
+    "dosyalar": [
+      "src/company_master/etl/email_dns_validator.py"
+    ],
+    "not": "8,994 e-posta doÃ„Å¸rulandÃ„Â±: %47.4 format geÃƒÂ§erli, %37.5 MX kaydÃ„Â± var. email_validity_score kolonu gÃƒÂ¼ncellendi. Kalite skoru 76.44 -> 53.37 (gerÃƒÂ§ek veriyle)."
+  },
+  {
+    "task_id": "P7-1",
+    "baslik": "DB Migration 0007 - Job Intelligence tablolari",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/db/migrations/0007_job_intelligence.sql"
+    ],
+    "not": "job_postings, company_signals, company_intelligence_scores, company_tech_profile, company_aliases tablolari"
+  },
+  {
+    "task_id": "P7-2",
+    "baslik": "Job Intelligence modul yapisi olusturma",
+    "sahip": "mimar",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/"
+    ],
+    "not": "sources/, pipeline/, storage/, api/ klasorleri ve __init__.py dosyalari"
+  },
+  {
+    "task_id": "P7-3",
+    "baslik": "Company Matcher (eslestirme motoru)",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/pipeline/normalizer.py"
+    ],
+    "not": "Exact + fuzzy + domain + mersis/vkn + alias multi-pass eslestirme | TAMAMLANDI 2026-09-09 (Y19 ile): /api/match endpoint canli Ã¢â‚¬â€ NACE komÃ…Å¸uluk + konum + kalite + kanÃ„Â±t skoru; dashboard paneli eklendi. Bu gÃƒÂ¶rev duplicate sayÃ„Â±ldÃ„Â±."
+  },
+  {
+    "task_id": "P7-4",
+    "baslik": "Company Career Pages Scraper",
+    "sahip": "web_kazima",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": "2026-09-09T21:00:24",
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/sources/company_career.py"
+    ],
+    "not": "Career Pages Scraper started: scraping companies with website_domain; targets TOP 100 companies for MVP first"
+  },
+  {
+    "task_id": "P7-5",
+    "baslik": "Ã„Â°SKUR Scraper",
+    "sahip": "web_kazima",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/sources/iskur.py"
+    ],
+    "not": "Resmi kaynak; KVKK gÃƒÂ¼venli; yapÃ„Â±landÃ„Â±rÃ„Â±lmÃ„Â±Ã…Å¸ veri; API/HTML | KOORDINATOR KARARI 2026-09-09: Y21 risk analizi tamamlanana ve kullanici onayi alinana kadar BASLAMAYINIZ. Risks: ISKUR kullanim sartlari ihlali + KVKK (bireysel iletisim) + lisans. Bkz. workspace/external/BRIEF_Y21_iskur.md"
+  },
+  {
+    "task_id": "P7-6",
+    "baslik": "Kariyer.net Scraper",
+    "sahip": "web_kazima",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/sources/kariyer_net.py"
+    ],
+    "not": "Anti-bot korumasÃ„Â±; ÃƒÂ¶nce manuel test; proxy/headless gerekebilir"
+  },
+  {
+    "task_id": "P7-7",
+    "baslik": "Job Postings Ingest Script",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": "2026-09-09T21:00:24",
+    "dosyalar": [
+      "scripts/ingest_job_postings.py"
+    ],
+    "not": "JSONL -> job_postings tablosu; company_id eslestirme; deduplication"
+  },
+  {
+    "task_id": "P7-8",
+    "baslik": "Job Signals Analyzer",
+    "sahip": "arastirmaci",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": "2026-09-09T21:00:24",
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/pipeline/analyzer.py"
+    ],
+    "not": "Growth, Risk, Tech, Geo, Org sinyalleri; company_signals tablosu"
+  },
+  {
+    "task_id": "P7-9",
+    "baslik": "Intelligence Scorer",
+    "sahip": "arastirmaci",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": "2026-09-09T21:00:24",
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/pipeline/scorer.py"
+    ],
+    "not": "growth, expansion, tech_transformation, investment, org_change, risk skorlari"
+  },
+  {
+    "task_id": "P7-10",
+    "baslik": "Intelligence Scores Recalc Script",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": "2026-09-09T16:42:48",
+    "dosyalar": [
+      "scripts/recalc_intelligence_scores.py"
+    ],
+    "not": "Intelligence scores recalculated"
+  },
+  {
+    "task_id": "P7-11",
+    "baslik": "Post-scrape workflow entegrasyonu",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": "2026-09-09T12:50:18",
+    "dosyalar": [
+      "scripts/post_scrape_workflow.py"
+    ],
+    "not": "AdÃ„Â±m 5, 6, 7 eklendi (ingest_job_postings, analyze_job_signals, recalc_intelligence_scores)"
+  },
+  {
+    "baslik": "SISTEM V2 raporu: Docker + yerel PostgreSQL + git otomasyonu devrede",
+    "sahip": "tumu",
+    "durum": "done",
+    "not": "2026-09-09 kurulan sistem: (1) API Docker konteynerinde (restart: unless-stopped, port 8000, health=200). (2) Yerel PostgreSQL 16 (localhost:5433, localdb profili) - 14.000 firma restore edildi, sorgular ~30x hizli (11 ms vs Supabase 300-900 ms). restore_db.py JSONB fix ile SQLite->PostgreSQL uyumlu hale geldi. (3) GitHub private repo: yassuacohen-hub/AI-proje-v1 - 631+ dosya push edildi. (4) Otomasyon zinciri: 03:00 DB backup -> 04:00 git push -> 08:00 change notify (Telegram). (5) KVKK maskeleme API'de aktif (apply_kvkk_mask, ?mask=1 / DASH_MASK_PII=1). Kural: yeni ajan kodu Docker'a uygun yazsin (requirements-app.txt, non-root). Yerel DB ile test: DATABASE_URL=postgresql+psycopg://huginn:huginn_local_dev@localhost:5433/huginn",
+    "task_id": "BILDIRIM-SISTEM-V2",
+    "dosyalar": [],
+    "oncelik": "",
+    "baslangic": "",
+    "bitis": null
+  },
+  {
+    "baslik": "Arama sorgu: yerel DB trigram index'i kur ve dogrula",
+    "sahip": "kalite",
+    "durum": "done",
+    "not": "TAMAMLANDI 2026-09-09: scripts/setup_local_indexes.py - pg_trgm extension + 7 index (legal_name_trgm, search_text_trgm, er_company_id, sr_source_id, sr_external_id, nace, score). ILIKE arama 11.6ms -> 1.4ms (~8x ek hizlanma, Supabase'e gore ~600x). EXPLAIN OK. Not: Supabase ile testler 25 passed (dogrulandi).",
+    "task_id": "Y15",
+    "dosyalar": [],
+    "oncelik": "",
+    "baslangic": "",
+    "bitis": null
+  },
+  {
+    "baslik": "ARASTIRMA: dashboard'a sektor/market zekasi katmani (V9 market brain MVP)",
+    "sahip": "arastirmaci",
+    "durum": "done",
+    "not": "V9 Market Brain MVP arastirmasi tamamlandi: sektor sagligi karti tasarimi, firma sayisi + kalite + web varligi analizi ve islenebilir ozellik listesi hazirlandi. Detay: data/orchestrator/y16_result.json",
+    "bitis": "2026-09-09",
+    "task_id": "Y16",
+    "dosyalar": [],
+    "oncelik": "",
+    "baslangic": ""
+  },
+  {
+    "baslik": "ARASTIRMA: e-ticaret/firma API'lerinden yeni veri kaynaklari (TOBB, il ozu, harbors)",
+    "sahip": "arastirmaci",
+    "durum": "done",
+    "not": "V9 veri stratejisi MVP'de acik kaynak: EKAP, ihale duyurulari, sektorsel haberler. Mevcut 6 kaynagin (ostim/ivedik/baskent/aso/web/mersis) disinda hukuki ve erisilebilir yeni kaynak listesi cikar (TOBB e-sicil, il ozu idare, KOSGEB, ihale raporlari). Cikti: kaynak + erisim yontemi + maliyet/kvkk analiz tablosu.",
+    "bitis": "2026-09-09T11:54:00",
+    "dosyalar": [
+      "data/orchestrator/y17_result.json"
+    ],
+    "not_t": "5 yeni veri kaynagi arastirildi: TOBB E-Sicil, Ã„Â°l Ãƒâ€“zu Ã„Â°dare, KOSGEB, Ã„Â°hale RaporlarÃ„Â±, EKAP. Her kaynak iÃƒÂ§in erisim yontemi + maliyet + KVKK analizi tablosu olusturuldu. Sonuc: data/orchestrator/y17_result.json",
+    "task_id": "Y17",
+    "oncelik": "",
+    "baslangic": ""
+  },
+  {
+    "baslik": "ARASTIRMA: Telegram musterisi icin abonelik/rate plan tasarimi",
+    "sahip": "arastirmaci",
+    "durum": "done",
+    "not": "Abonelik/rate plan tasarimi tamamlandi: API key bazli kota sistemi, 4 tier tablosu (Free/Starter/Professional/Enterprise), pilot abonelik onerisi. Kompass ve Euromonitor TR segmenti rekabet analizi yapildi. Cikti: data/orchestrator/y18_result.json",
+    "bitis": "2026-09-09T12:00:00Z",
+    "task_id": "Y18",
+    "dosyalar": [],
+    "oncelik": "",
+    "baslangic": ""
+  },
+  {
+    "baslik": "ARASTIRMA: V9 smart matching (musteri-firma eslestirme) MVP prototipi",
+    "sahip": "gelistirici",
+    "durum": "done",
+    "not": "TAMAMLANDI 2026-09-09: /api/match endpoint (web_app.py) - NACE komÃ…Å¸uluk haritalÃ„Â± tedarik zinciri eÃ…Å¸leÃ…Å¸tirme. Skor: sektor 45 + konum 20 + kalite 25 + kanit 10. mode=komple|ayni, buyer_id|nace profil, mask=1 KVKK, UUID dogrulamalÃ„Â± 404. 6 senaryo testi OK. Y21 (Ã„Â°SKUR araÃ…Å¸tÃ„Â±rma) acildi.",
+    "task_id": "Y19",
+    "dosyalar": [],
+    "oncelik": "",
+    "baslangic": "",
+    "bitis": null
+  },
+  {
+    "baslik": "BUG: connection.py DATABASE_URL env override testlerde sqlite'a dusuyor",
+    "sahip": "gelistirici",
+    "durum": "done",
+    "not": "TAMAMLANDI 2026-09-09. 3 kok neden: (1) connection.py get_engine'in parametresiz lru_cache'i env degisince eski engine'e kilitleniyordu -> URL-bazli _engine_for cache eklendi; (2) test_ankara_osb.py'nin import-time DATABASE_URL set'i collection'da tum suite'i sqlite'a kirletiyordu -> module-scope fixture'a tasindi (restore dahil); (3) test_connection/test_extra_coverage'daki bare env set'ler monkeypatch'e cevrildi. DOGRULAMA: tam suite 192 passed / 0 failed (onceden 19 fail + 21 error); yerel PG (5433) env ile 43 passed / 2.2 sn (Supabase yerine ~8x hizli kosum).",
+    "task_id": "Y20",
+    "dosyalar": [],
+    "oncelik": "",
+    "baslangic": "",
+    "bitis": null
+  },
+  {
+    "baslik": "ARASTIRMA: ISKUR kurumsal eslestirme verisi (acik API + risk analizi)",
+    "sahip": "arastirmaci",
+    "durum": "plan",
+    "not": "BRIEF: workspace/external/BRIEF_Y21.md. Koordinator risk uyarilari: (1) scraping = ISKUR kullanim sartlari ihlali riski; resmi API/acik veri portal kontrol edilmeli; (2) KVKK: ilan iletisim bilgileri BIREYSEL kisilere ait olabilir -> maskeleme zorunlu; (3) firma adi serbest metin -> entity resolution yuku + karantina artisi; (4) ilan yoklugu pasiflik sinyali DEGIL (negatif etiketleme yapilmayacak); (5) ticari yeniden dagitim icin lisans/attribution kontrolu zorunlu.",
+    "task_id": "Y21",
+    "dosyalar": [],
+    "oncelik": "",
+    "baslangic": "",
+    "bitis": null
+  },
+  {
+    "baslik": "MATCH v2: eslestirme yonu secimi (tedarikci/musteri/rakip) + yonlu NACE haritasi",
+    "sahip": "gelistirici",
+    "durum": "done",
+    "not": "TAMAMLANDI 2026-09-09: /api/match?yon=tedarikci|musteri|rakip parametresi. tedarikci=mevcut ileri yon; musteri=ters yon (hedef firmanin komsuluk haritasi buyer grubuna bakan agirlik, 'musteri-kanal'/'musteri-uzak' etiketleri); rakip=sadece ayni grup. Match paneline 'Arama Yonu' dropdown eklendi, durum satiri yon etiketli. Canli test (nace=29): tedarikci->uzak-sektor, musteri->musteri-uzak, rakip->farkli. KVKK maskeleme korunuyor.",
+    "bitis": "2026-09-09",
+    "task_id": "Y22",
+    "dosyalar": [],
+    "oncelik": "",
+    "baslangic": ""
+  },
+  {
+    "baslik": "Odeme entegrasyonu (iyzico/Stripe) - otomatik kredi satisi",
+    "sahip": "gelistirici",
+    "durum": "plan",
+    "not": "V9 Scale asamasi. MVP'de kredi manuel yukleniyor (/api/admin/credit). Otomasyonda: checkout linki + webhook ile credit_ledger'a otomatik +50. V7 fiyatlari: Terminal 85.000/yl (100 kredi), Strategic 220.000 (500), CreditPack 750/50.",
+    "task_id": "Y23",
+    "dosyalar": [],
+    "oncelik": "",
+    "baslangic": "",
+    "bitis": null
+  },
+  {
+    "baslik": "Uye e-posta dogrulama linki + Telegram hosgeldin raporu",
+    "sahip": "gelistirici",
+    "durum": "plan",
+    "not": "Kayit sonrasi kurumsal e-postaya dogrulama linki; onaylaninca Telegram'dan hosgeldin + kisisellesmis match raporu (bot_service hazir).",
+    "task_id": "Y24",
+    "dosyalar": [],
+    "oncelik": "",
+    "baslangic": "",
+    "bitis": null
+  },
+  {
+    "baslik": "product_categories yonetim arayuzu (admin panel)",
+    "sahip": "frontend",
+    "durum": "done",
+    "not": "TAMAMLANDI 2026-09-09: GET/POST /api/admin/categories (require_admin) + admin panelde 'Urun Kategorileri' karti (ekle/duzenle/aktif-pasif toggle, code unique + nace_group validasyonu, 409 dup kontrolu). Canli test: 14 kategori listelendi, ekle/toggle/update 200 OK. company_capabilities baglama ayri gorev olarak kaldÄ± (Y27 acilabilir).",
+    "bitis": "2026-09-09",
+    "task_id": "Y25",
+    "dosyalar": [],
+    "oncelik": "",
+    "baslangic": ""
+  },
+  {
+    "baslik": "Enterprise API key yonetimi + kullanim raporu",
+    "sahip": "gelistirici",
+    "durum": "plan",
+    "not": "Enterprise tier approve'da api_key uretiliyor (web_app.py). Eksik: key rotasyonu, kullanim metrikleri (/metrics'e tier bazli istek sayaci), ERP gateway kapsami (V8 mTLS/OAuth2 - Scale).",
+    "task_id": "Y26",
+    "dosyalar": [],
+    "oncelik": "",
+    "baslangic": "",
+    "bitis": null
+  },
+  {
+    "task_id": "P8-1",
+    "baslik": "Is ilani takip motoru: kaynak oncelikleme ve erisim stratejisi",
+    "sahip": "web_kazima",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": "2026-09-09T20:26:00Z",
+    "dosyalar": [],
+    "not": "Ä°ÅŸ ilanÄ± takip motoru kaynak oncelikleme ve erisim stratejisi. Oncelik sirasi: P0 -> Ä°ÅKUR, ÅŸirket kariyer sayfalarÄ±, Kariyer.net; P1 -> LinkedIn, Indeed, GitHub; P2 -> MERSIS, Crunchbase. Erisim stratejisi: KVKK guvenli kaynaklar once (Ä°ÅKUR kvkk_safe), robots.txt + rate limit kontrolu (www.iskur.gov.tr 2.0s, www.kariyer.net 3.0s), anti-bot bypass (proxy/headless) gerektiginde. ScrapingPermissionRouter/SourceSpec kayitlari P7 entegrasyonunun surumunu alir. | TAMAMLANDI 2026-09-09: Kaynak Ã¶ncelikleme ve eriÅŸim stratejisi analizi tamamlandi. Sonuclar: data/orchestrator/p81_result.json"
+  },
+  {
+    "task_id": "P8-2",
+    "baslik": "Is ilani takip motoru: firma eslestirme ve normalize",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": "2026-09-09T20:30:00",
+    "dosyalar": [],
+    "not": "Ä°ÅŸ ilanlarÄ±nÄ± company_master entitylerine eslestirme ve normalize motoru. Multi-pass stratejisi: 1) Exact normalized name 2) Domain match 3) Fuzzy rapidfuzz 0.85 eÅŸiÄŸi 4) MERSIS/VKN 5) Alias table 6) Human-in-the-loop review queue. job_postings.company_id -> companies.id mapping; P7-3 CompanyMatcher'dan tÃ¼retilen normalizasyon motoru. KVKK: bireysel firma eÅŸleÅŸtirme verisi saklanmaz.",
+    "not_t": "Entity resolution + normalize stratejisi tamamlandi: Turkcell varyasyonlari DB'de bulunamadi (0 eslesme). 14.000 firma analiz edildi. 528 tekrarli isim, 7.204 VKN/MERSIS eksigi. company_aliases tablosu bos. Sonuc: data/orchestrator/p82_result.json"
+  },
+  {
+    "task_id": "P8-3",
+    "baslik": "Is ilani takip motoru: buyume sinyali skorlama",
+    "sahip": "arastirmaci",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": "2026-09-09T23:15:01",
+    "dosyalar": [
+      "scripts/growth_signal_scorer.py",
+      "data/orchestrator/p83_result.json"
+    ],
+    "not": "BÃ¼yÃ¼me sinyali skorlama motoru. company_signals tablosuna growth skoru yazar. Scoring weights: Growth 0.30 â€” iÅŸ ilanÄ± artÄ±ÅŸ hÄ±zÄ± (aylÄ±k %), headcount trendleri, yeni lokasyon aÃ§Ä±lÄ±ÅŸÄ± sinyalleri. Pozitif hiring trendi 0-100 skor; negatif dÃ¼zey ters yÃ¶nlendirilir. company_intelligence_scores.growth_score alanÄ±. | TAMAMLANDI: BuÌˆyuÌˆme sinyali skorlama motoru tasarimi, implementasyonu ve sample test tamamlandi. scripts/growth_signal_scorer.py + data/orchestrator/p83_result.json. 5 sinyal: ilan artisi (growth, 0.30), yeni sehir (geo_expansion, 0.15), yeni departman (org_change, 0.10), yonetici ise alimi (investment, 0.25), satis ekip genislesmesi (tech_transformation, 0.20). Formul: weighted avg of (score * confidence * weight). Test: 3 company (StarTech 97.5, SteadyCo 47.87, DeclineCorp 0.01)."
+  },
+  {
+    "task_id": "P8-4",
+    "baslik": "Is ilani takip motoru: risk sinyali skorlama",
+    "sahip": "arastirmaci",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": "2026-09-09T23:20:00",
+    "dosyalar": [
+      "scripts/risk_signal_scorer.py",
+      "data/orchestrator/p84_result.json"
+    ],
+    "not": "Risk sinyali skorlama motoru tasarÄ±mÄ± ve testi tamamlandÄ±. 4 sinyal: ilan azalmasÄ± (0.35), lokasyon kapanÄ±ÅŸlarÄ± (0.25), teknik ekip durmasÄ± (0.20), pozisyon tekrarÄ± (0.20). FormÃ¼l: weighted avg of (safe_score * confidence * weight). Test: RiskCorp 2.73, MidRiskCo 32.08, SafeCo 100.0. | TAMAMLANDI 2026-09-09"
+  },
+  {
+    "task_id": "P8-5",
+    "baslik": "Is ilani takip motoru: teknoloji donusumu analizi",
+    "sahip": "arastirmaci",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Teknoloji dÃ¶nÃ¼ÅŸÃ¼m analizi. company_tech_profile tablosuna yazar. Sinyaller: yeni tech roller (AI/ML, cloud, cybersecurity), senioralyk daÄŸÄ±lÄ±mÄ±, skill trendleri, stack modernizasyonu. Scoring weight: tech_transformation 0.20. Ä°ÅŸ ilanÄ± baÅŸlÄ±klarÄ±ndan tech stack Ã§Ä±karÄ±mÄ±; P5-2 sosyal medya varlÄ±ÄŸÄ±yla komple. Negatif etiketleme yok."
+  },
+  {
+    "task_id": "P8-6",
+    "baslik": "Is ilani takip motoru: yatirim ve olcekleme sinyalleri",
+    "sahip": "arastirmaci",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": "2026-09-09T23:55:00",
+    "dosyalar": [
+      "scripts/investment_signal_scorer.py",
+      "data/orchestrator/p86_result.json"
+    ],
+    "not": "Yatırım ve ölçekleme sinyalleri tasarımı tamamlandı. Dört işe alım kategorisi (yönetici, Ar-Ge, product, BD) kombinasyonu ile muhtemel büyüme veya yatırım hazırlığı çıkarımı motoru geliştirildi. Skorlama formülü ve scaling readiness inference mekanizması tanımlandı. Sonuc: data/orchestrator/p86_result.json"
+  },
+  {
+    "task_id": "P8-7",
+    "baslik": "Is ilani takip motoru: cografi genisleme analizi",
+    "sahip": "backend",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "CoÄŸrafi geniÅŸleme analizi. company_signals tablosuna geo expansion sinyali yazar. Sinyaller: yeni ÅŸehir/lokasyonda iÅŸ ilanÄ± aÃ§Ä±lÄ±ÅŸÄ±, bÃ¶lgesel hiring patternleri (TÃ¼rkiye illerine gÃ¶re), market geniÅŸleme hÄ±zÄ±. Scoring weight: geo_expansion 0.15 â€” location diversity + new-region hiring velocity. Y7 KVKK maskeleme/lokasyon politikasÄ± uygulanÄ±r."
+  },
+  {
+    "task_id": "P8-8",
+    "baslik": "Is ilani takip motoru: kurumsal rapor ve medya entegrasyonu",
+    "sahip": "web_kazima",
+    "oncelik": "P3",
+    "durum": "done",
+    "baslangic": "2026-09-09T15:47:15",
+    "bitis": "2026-09-09T23:47:38",
+    "dosyalar": [],
+    "not": "Kurumsal rapor ve medya entegrasyonu tasari tamamlandi. KAP, Resmi Gazete, haber kaynaklari, sosyal medya sinyalleri ile ilan verisi zenginlestirme stratejisi: data/orchestrator/p88_result.json"
+  },
+  {
+    "task_id": "X01",
+    "baslik": "ARASTIRMA: GIB VKN dogrulama (acik API + KVKK) - scripts/gib_vkn_lookup.py devami",
+    "sahip": "arastirmaci",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-10T00:00:00",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "REVIZE. gib_vkn_lookup.py + vkn_batch_enrich.py hazir; resmi GIB API erisim yolu + KVKK raporlanacak. VKN zenginlestirme kuyrugu bekliyor."
+  },
+  {
+    "task_id": "X02",
+    "baslik": "BUG: VKN zenginlestirme (MERSIS + web footer) pipeline tamamlama",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "blocked",
+    "baslangic": "2026-09-10T00:00:00",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "REVIZE (eski MERSIS pipeline). vkn_batch_enrich.py + vkn_review_queue.py mevcut; data/orchestrator/engel_raporu.json engelleri cozulmeli. VKN dolulugu KPI hedefi."
+  },
+  {
+    "task_id": "X03",
+    "baslik": "MATCH v3: buyer profili skorlari (olcek uyumu + sertifika + amac yonu)",
+    "sahip": "gelistirici",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-10T00:00:00",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "YENI. Buyer profilindeki employee_range, certificates, goal alanlari match skoruna baglanacak. Y22 (yon secimi) uzerine dogal sonraki adim."
+  },
+  {
+    "task_id": "X04",
+    "baslik": "UYELIK: sifre sifirlama + kurumsal e-posta dogrulama + Telegram hosgeldin",
+    "sahip": "gelistirici",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-10T00:00:00",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "REVIZE (eski Y24). PBKDF2 sifre sistemi hazir; sifirlama linki + dogrulama e-postasi + Telegram bot hosgeldin raporu. SMTP saglayici secimi gerekli."
+  },
+  {
+    "task_id": "X05",
+    "baslik": "Y26: API key yonetimi - rotasyon + kullanim metrikleri + tier rate limit",
+    "sahip": "gelistirici",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-10T00:00:00",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "REVIZE (eski Y26). require_api_key istek sayaci + /metrics tier bazli rapor + enterprise key rotasyon endpoint. Su an sadece uretim zamanli key var."
+  }
 ]

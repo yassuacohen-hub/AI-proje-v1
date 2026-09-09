@@ -1,92 +1,58 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-09T15:47:15
+> Son guncelleme: 2026-09-10T00:30:00
 > Kaynak: data/orchestrator/task_board.json
 
-## ⚡ SISTEM V2 — TUM AJANLARA (2026-09-09, ONEM: YUKSEK)
+## ⚡ Frontend/Web Oturumu Özeti (2026-09-10, dashboard ajanı) — DIĞER AJANLARA ÖNEMLİ
 
-**Artik calisma ortami degisti — yeni gorevlerde buna uyma kurali:**
+Bu oturumda web dashboard'a **uyelik/oturum sistemi** eklendi; tum endpoint'ler ve sema degisti:
 
-1. **API Docker konteynerinde** (restart: unless-stopped, port 8000, health=200). Yeni kod yazarken:
-   - Bagimliliklari `requirements-app.txt`'e ekle (Dockerfile image'i oradan kurar)
-   - Non-root kurali: konteynerde `appuser` calisir, dosya yazma icin `logs/`, `data/` yazilabilir olmali
-2. **Yerel PostgreSQL 16 devrede** (`localhost:5433`, db `huginn`, sifre `huginn_local_dev`, profil `localdb`):
-   - 14.000 firma + 8.905 entity_resolution + 14.000 source_records yuklu
-   - **Sorgular ~30x hizli** (11 ms vs Supabase 300-900 ms) → testleri ve agir isleri yerelde kos
-   - Baglanti: `DATABASE_URL=postgresql+psycopg://huginn:huginn_local_dev@localhost:5433/huginn`
-   - `restore_db.py` artik JSONB uyumlu (SQLite backup -> PostgreSQL restore calisir)
-3. **Git/GitHub:** private repo `yassuacohen-hub/AI-proje-v1` — otomatik gunluk push (04:00, `scripts/git_auto_push.bat`). Commit disiplini: `git_auto_push.bat` elle de calistirilabilir. `.env`, `backups/`, `*.db` gitignore'da — gizli veri koyma.
-4. **Otomasyon zinciri:** 03:00 DB backup → 04:00 git push → 08:00 change notify (Telegram).
-5. **KVKK maskeleme aktif:** `web_app.py → apply_kvkk_mask` (`?mask=1` veya `DASH_MASK_PII=1`). Musteri ucu ciktilarinda e-posta/telefon maskeleme varsayilani unutma.
-
-**Yeni arastirma gorevleri acildi:** Y15 (yerel DB trigram index), Y16 (sektor zekasi/MVP market brain), Y17 (yeni veri kaynaklari: TOBB/ihale/KOSGEB), Y18 (abonelik tier tasarimi), Y19 (V9 smart matching MVP). Detaylar panoda (id: Y15-Y19).
-
+- **Şifre sistemi:** users tablosuna `password_hash` (PBKDF2-SHA256, 120k iter, `pbkdf2$iter$salt$hash` formatı). Kayıt artık şifre zorunlu (min 8); login şifre doğrulamalı. Yeni endpoint: `POST /api/buyer/logout`, `POST /api/buyer/change-password`. Eski hash'siz kayıtlar için geçiş istisnası var.
+- **Yeni users kolonları (migration 0014 + 0015, her iki DB'de):** `employee_range, certificates, tax_number, phone, trade_name, address, password_hash`. `GET/PUT /api/buyer/profile` bunları işler; profil_tamlama **10 alan** üzerinden.
+- **Yeni admin API'ler:** `GET/POST /api/admin/categories` (product_categories CRUD; 409 code çakışması) — `require_admin`.
+- **Bugfix'ler:** toggleWatchDetail anahtar tutarsızlığı (watchKeyOf), task_board.json BOM (utf-8-sig okuma), isletmemAccountTab tip parametresi.
+- **UI:** İşletmem 4 sekme (Firma Profili/Bilgiler/Eşleştirme/Hesap) + görünür kısa bilgi kartları + "Notlar" tek-tuş kapatma; topbar İşletmem butonu kaldırıldı → Paket/Tier rozeti; Son güncelleme CANLI chip'ine taşındı; match paneline "Arama Yönü" (Y22).
+- **Admin'ler:** admin@huginn.local (şifre: Admin2026!) + yassuacohen@gmail.com (11223344) — `scripts/set_admin_password.py add|set|--list` ile yönetilir.
+- **Panel revizesi:** X01–X05 eklendi (aşağıda), Y24/Y26 revize edildi. Dashboard canlı: `http://localhost:8000` (Docker) / 8010 (yerel uvicorn).
+- Ajanlar users tablosuna doğrudan yazacaksa yeni kolonları dikkate alsın; DB yazan scriptler `password_hash`'e dokunmamalı.
 
 ## Aktif Isler
 
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
+| X01 | ARASTIRMA: GIB VKN dogrulama (acik API + KVKK) | arastirmaci | P1 | plan |
+| X02 | BUG: VKN zenginlestirme (MERSIS + web footer) pipeline tamamlama | gelistirici | P1 | blocked |
+| X03 | MATCH v3: buyer profili skorlari (olcek uyumu + sertifika + amac yonu) | gelistirici | P2 | plan |
+| X04 | UYELIK: sifre sifirlama + kurumsal e-posta dogrulama + Telegram hosgeldin | gelistirici | P2 | plan |
+| X05 | Y26: API key yonetimi - rotasyon + kullanim metrikleri + tier rate limit | gelistirici | P2 | plan |
 | P3-2 | VKN web kazima genisle (sadece footer de | web_kazima | plan | blocked |
-| P4-3 | OSTIM detay sayfasindan vergi_no kazima  | web_kazima | P1 | blocked |
-| Y10 | MERSIS VKN zenginlestirme pipeline'i | gelistirici | P1 | blocked |
-| Y11 | GIB VKN dogrulama entegrasyonu | arastirmaci | P1 | plan |
-| DENET-1 | Git deposu baslatma (git init + ilk comm | devops | P1 | blocked |
-| P6-1 | İş ilanları ve çalışan sayısı veri topla | web_kazima | P1 | cancelled |
+| P7-1 | DB Migration 0007 - Job Intelligence tab | gelistirici | P0 | plan |
+| P7-2 | Job Intelligence modul yapisi olusturma | mimar | P0 | plan |
+| P7-5 | Ä°SKUR Scraper | web_kazima | P1 | blocked |
+| P7-6 | Kariyer.net Scraper | web_kazima | P2 | blocked |
+| Y21 | ARASTIRMA: ISKUR kurumsal eslestirme ver | arastirmaci |  | plan |
+| Y23 | Odeme entegrasyonu (iyzico/Stripe) - oto | gelistirici |  | plan |
+| P8-5 | Is ilani takip motoru: teknoloji donusum | arastirmaci | P2 | plan |
+| P8-7 | Is ilani takip motoru: cografi genisleme | backend | P2 | plan |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| Y16 | ARASTIRMA: dashboard'a sektor/market zekasi katmani (V9 market brain MVP) | arastirmaci | 2026-09-09 |
-| P5-4 | Telefon format validasyonu | gelistirici | 2026-09-09 |
-| P5-5 | Kaynak çeşitliliği metriği | kalite | 2026-09-09 |
-| DENET-2 | Karakter kodlama (mojibake) düzeltmesi | koordinator | 2026-09-09 |
-| DENET-3 | AGENTS.md tekrar eden blok temizliği + g | koordinator | 2026-09-09 |
-| DENET-4 | Kok dizin gecici/deneme dosyalarinin tem | devops | 2026-09-09 |
-| DENET-5 | Yazim hatali 'Huginin Data Insights' kla | koordinator | 2026-09-09 |
-| DENET-6 | project_state.md kopyalarinin (iso/utf8) | mimar | 2026-09-09 |
-| DENET-7 | company_master.db / test.db amacinin dok | backend | 2026-09-09 |
-| P6-2 | E-posta DNS MX doğrulama implementasyonu | backend | 2026-09-09 |
+| X00 | (dashboard) Sifreli oturum + Isletmem sekmeleri + Y22/Y25 tamamlandi | gelistirici | 2026-09-10 |
+| Y18 | ARASTIRMA: Telegram musterisi icin abone | arastirmaci | 2026-09-09 |
+| Y19 | ARASTIRMA: V9 smart matching (musteri-fi | gelistirici | - |
+| Y20 | BUG: connection.py DATABASE_URL env over | gelistirici | - |
+| Y22 | MATCH v2: eslestirme yonu secimi (tedari | gelistirici | 2026-09-09 |
+| Y25 | product_categories yonetim arayuzu (admi | frontend | 2026-09-09 |
+| P8-1 | Is ilani takip motoru: kaynak onceliklem | web_kazima | 2026-09-09 |
+| P8-2 | Is ilani takip motoru: firma eslestirme  | gelistirici | 2026-09-09 |
+| P8-3 | Is ilani takip motoru: buyume sinyali sk | arastirmaci | 2026-09-09 |
+| P8-4 | Is ilani takip motoru: risk sinyali skor | arastirmaci | 2026-09-09 |
 
 ## Son Handoff'lar
 
-- **P1-1**: Ivedik scraper implementasyonu tamam (kod hazir)
+- **X00 (dashboard)**: Şifreli oturum (PBKDF2) + İşletmem 4 sekme + Y22 eşleştirme yönü + Y25 kategori admin paneli + admin-only görev tahtası tamam; X01-X05 revize görevler eklendi. Canlı test akışları: üyelik 7/7, auth 8/8, layout 8/8 PASS.
 - **P1-2**: Başkent scraper implementasyonu tamam (kod hazir)
-- **P4-5**: Duplicate temizligi tamam; veri tekillestirildi, a
 - **P4-1**: Kalite skoru 27.5 -> ~64 tamamlandi
-- **P4-4**: Dashboard performans izleme ve slow query optimiza
-
-- **Y17**: Yeni veri kaynaklari arastirmasi tamamlandi (TOBB, il ozu, KOSGEB, ihale, EKAP). Sonuc: data/orchestrator/y17_result.json
-
-## 2026-09-09 � P7 Job Intelligence Mod�l� Planlamas�
-
-### Altyap� Haz�r
-- Migration 0007: 5 tablo + 2 view + trigger
-- Source Registry: company-career-pages, iskur, kariyer-net
-- Permission Router: �SKUR (kvkk_safe), Kariyer.net (kvkk_safe=False)
-- Post-Scrape Pipeline: +3 ad�m (ingest, analyze, score)
-
-### Task Da��l�m� (P7-1..P7-11)
-| Task | Sahip | �ncelik | Durum |
-|------|-------|---------|-------|
-| P7-1: Migration | gelistirici | P0 | plan |
-| P7-2: Mod�l yap�s� | mimar | P0 | plan |
-| P7-3: Company Matcher | gelistirici | P0 | plan |
-| P7-4: Career Pages Scraper | web_kazima | P0 | plan |
-| P7-5: �SKUR Scraper | web_kazima | P1 | plan |
-| P7-6: Kariyer.net Scraper | web_kazima | P2 | blocked |
-| P7-7: Ingest Script | gelistirici | P0 | plan |
-| P7-8: Signals Analyzer | arastirmaci | P0 | plan |
-| P7-9: Intelligence Scorer | arastirmaci | P0 | plan |
-| P7-10: Scores Recalc | gelistirici | P0 | plan |
-| P7-11: Workflow Entegrasyonu | gelistirici | P0 | done |
-
-### MVP S�ras� (�lk 2 Hafta)
-1. Migration + Company Matcher + Career Pages Scraper + �SKUR Scraper + Ingest
-2. Analyzer + Scorer + Recalc Script + Pipeline entegrasyonu
-
-### �lgili Ajanlar Bilgisi
-- **Mimar (P7-2):** Mod�l yap�s�n� `src/company_master/intelligence/job_intelligence/` alt�na kur
-- **Geli�tirici (P7-1,3,7,10):** Migration, Matcher, Ingest, Recalc scriptleri
-- **Web Kaz�ma (P7-4,5,6):** Career Pages, �SKUR, Kariyer.net scraper�lar�
-- **Ara�t�rmac� (P7-8,9):** Sinyal analizi ve skorlama motoru
+- **P8-8**: Kurumsal rapor ve medya entegrasyonu tasari tamaml

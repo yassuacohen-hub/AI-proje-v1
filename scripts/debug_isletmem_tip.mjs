@@ -25,14 +25,12 @@ const prof = await (await fetch('http://127.0.0.1:8000/api/buyer/profile?token='
 const e3 = await ev(`(function () {
   try {
     renderIsletmem(${JSON.stringify(prof)});
-    const src = renderIsletmem.toString();
-    const tipIdx = src.indexOf('tip(');
-    return 'render OK | tip@' + tipIdx + ' | tabsCall=' + src.includes('renderIsletmemTabs');
-  } catch (e) { return 'ERR ' + e.message + ' @ ' + (e.stack || '').split('\\n').slice(0, 3).join(' << '); }
+    return 'render OK | trade=' + !!document.getElementById('is-trade') + ' | address=' + !!document.getElementById('is-address') + ' | hints=' + document.querySelectorAll('.is-hint').length + ' | hintToggle=' + !!document.querySelector('.is-hint-toggle') + ' | tier=' + document.getElementById('tier-badge-text').textContent;
+  } catch (e) { return 'ERR ' + e.message; }
 })()`);
 console.log('isletmem-body:', e3);
-const e4 = await ev('(function(){try{switchIsletmemTab("info");return "OK";}catch(e){return e.message;}})()');
-console.log('switchTab info:', e4);
-const e5 = await ev('(function(){try{switchIsletmemTab("account");return "OK";}catch(e){return e.message;}})()');
-console.log('switchTab account:', e5);
+const e4 = await ev('(function(){try{toggleIsletmemHints(document.querySelector(".is-hint-toggle"));return document.getElementById("isletmem-body").classList.contains("hints-off") ? "HINTS_OFF_OK" : "FAIL";}catch(e){return "ERR "+e.message;}})()');
+console.log('hints toggle:', e4);
+const e5 = await ev('(function(){try{switchIsletmemTab("info");return document.getElementById("is-address") ? "ADDRESS_OK" : "NO_ADDR";}catch(e){return "ERR "+e.message;}})()');
+console.log('address field:', e5);
 process.exit(0);
