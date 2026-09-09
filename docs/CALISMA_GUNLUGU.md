@@ -1,4 +1,28 @@
 
+## 2026-09-09 — Monetizasyon MVP: üyelik + kredi sistemi canlıda ✅
+
+**V7 Hybrid Credit modeli uygulandı** (bağlam dokümanlarından birebir):
+
+| Bileşen | Detay |
+|---|---|
+| **Migrasyon 0012** | `users` (kurumsal e-posta, tier, credit_balance, api_key, status) + `credit_ledger` (denetimli kredi hareketleri) + `product_categories` (**14 kategori seed**: makine/CNC, metal işleme, otomotiv yan sanayi, yazılım/otomasyon, savunma tedariği…) — hem Supabase hem yerel PG'ye uygulandı |
+| **Kayıt** | `POST /api/buyer/register` — kurumsal e-posta zorunlu (gmail/hotmail RED), KVKK checkbox zorunlu, web domain eşleşmesiyle mevcut firma kaydına bağlanır (`linked_company_id`), durumu `onay_bekliyor` |
+| **Onay (senin elinde)** | `GET /api/admin/pending` + `POST /api/admin/approve` (tier seç → kredi yükle: terminal 100 / strategic 500 / enterprise sınırsız + **otomatik API key üretimi**) + `POST /api/admin/credit` (Credit Pack: 750 TRY/50) |
+| **Giriş** | `POST /api/buyer/login` → 24 saatlik HMAC token (OAuth Scale'de) · `GET /api/me` → kredi bakiyesi |
+| **Kredi entegrasyonu** | `/api/match?user_token=...` → **1 kredi düşer**; kredi 0 → **otomatik maskeleme + credit_pack önerisi** (V8 Credit Exhaustion UX); enterprise = sınırsız; ledger'a her hareket kaydolur |
+
+**Frontend:** Match panelinde **"Firmanızı Tanıtın"** CTA → üyelik modalı (3 adımlı form + KVKK + giriş bölümü) · topbar'da **kredi göstergesi** (onaylı kullanıcıya: kredi sayısı + firma adı).
+
+**Test:** 13 senaryo — **13/13 OK** (ücretsiz domain reddi, KVKK, kurumsal kayıt, duplicate, onaysız login, admin pending/approve/kredi, login token, /api/me, match kredi düşümü 99, kredi 0 maskeleme, credit pack +50, kategoriler=14).
+
+### 🆕 Ajan yol haritası (Y23-Y26 panoya işlendi)
+- **Y23** Ödeme entegrasyonu iyzico/Stripe (Scale) — otomatik kredi satışı
+- **Y24** E-posta doğrulama + Telegram hoş geldin raporu
+- **Y25** product_categories admin paneli (company_capabilities doldurma fırsatı)
+- **Y26** Enterprise API key yönetimi + tier bazlı kullanım metrikleri
+
+Pano: **84/102 done** · Docker rebuild sonrası canlı.
+
 ## 2026-09-09 — Topbar hizalama fix + match mantığı netleştirmesi
 
 **Topbar fix:** CANLI / Son güncelleme / Yenile iç içe geçiyordu → `.topbar-actions{flex-shrink:0;margin-left:auto;white-space:nowrap}` (sağa sabit) + brand `max-width:280px` ve dar ekran (<1100px) media query (slogan gizlenir, h1 küçülür). cache v7.

@@ -807,6 +807,7 @@ def api_match(
     limit: int = 20,
     offset: int = 0,
     mask: int = 0,
+    user_token: str = "",
     _auth: str = Depends(require_api_key),
 ) -> dict:
     """V9 smart matching MVP: buyer profiline uygun firmaları puanla.
@@ -814,9 +815,23 @@ def api_match(
     - buyer_id verirse: DB'den buyer alınır (nace + osb)
     - yoksa nace (+ opsiyonel osb_id) ile serbest profil
     - mode: komple (komşu sektörler dahil) | ayni (sadece aynı ana grup)
+    - user_token: onaylı kullanıcı tokenı → 1 kredi düşülür; kredi bittiyse
+      sonuçlar otomatik maskelenir + credit_pack önerisi döner
     """
     mode = mode if mode in ("komple", "ayni") else "komple"
     limit = max(1, min(limit, 100))
+
+    user = _user_from_token(user_token) if user_token else None
+    credit_info = None
+    if user is not None and user["status"] == "onayli":
+        kalan = _charge_credit(str(user["user_id"]), user["email"], "match")
+        if kalan >= 0 and kalan == 0:
+            mask = 1  # kredi bitti: sonuc maskele (V8 Credit Exhaustion UX)
+            credit_info = {"credit_balance": 0,
+                           "notice": "Krediniz tükendi — sonuçlar maskeli görüntüleniyor.",
+                           "credit_pack": "750 TRY / 50 kredi (credit pack ile devam edebilirsiniz)"}
+        else:
+            credit_info = {"credit_balance": kalan if kalan >= 0 else "sinirsiz"}
 
     buyer_nace, buyer_osb, buyer_adi = nace, osb_id, None
     engine = get_engine()
@@ -879,7 +894,240 @@ def api_match(
         "limit": limit,
         "offset": offset,
         "items": skorlu[offset:offset + limit],
+        "credit": credit_info,
     }
+
+# ── Monetizasyon MVP (V7 Hybrid Credit) ─────────────────────────────────────
+
+import hashlib
+import hmac
+import time as _time
+
+_FREE_DOMAINS = {"gmail.com", "hotmail.com", "outlook.com", "yandex.com", "yahoo.com",
+                 "hotmail.com.tr", "yandex.com.tr", "icloud.com", "protonmail.com"}
+_TIER_CREDITS = {"terminal": 100, "strategic": 500, "enterprise": 0}  # 0 = sinirsiz
+_DASH_SECRET = os.getenv("DASH_SECRET", (os.getenv("DASH_API_KEY") or "huginn-secret") + "-secret")
+
+
+def _user_token(email: str) -> str:
+    """MVP auth: e-posta + zaman damgali HMAC token (24 saat gecerli)."""
+    exp = int(_time.time()) + 86400
+    sig = hmac.new(_DASH_SECRET.encode(), f"{email}:{exp}".encode(), hashlib.sha256).hexdigest()[:32]
+    return f"{email}|{exp}|{sig}"
+
+
+def _user_from_token(token: str):
+    """Token'dan kullaniciyi dogrular; gecersizse None."""
+    try:
+        email, exp, sig = token.split("|")
+        if int(exp) < int(_time.time()):
+            return None
+        ok = hmac.new(_DASH_SECRET.encode(), f"{email}:{exp}".encode(), hashlib.sha256).hexdigest()[:32]
+        if not hmac.compare_digest(ok, sig):
+            return None
+        engine = get_engine()
+        with engine.connect() as conn:
+            row = conn.execute(text(
+                "SELECT user_id, email, company_name, role, status, tier, credit_balance, api_key "
+                "FROM users WHERE email = :e"), {"e": email}).mappings().first()
+        return row
+    except Exception:
+        return None
+
+
+def _charge_credit(user_id: str, email: str, reason: str, amount: int = 1) -> int:
+    """Kredi dusurur (enterprise sinirsiz); yeni bakiyeyi dondurur."""
+    engine = get_engine()
+    with engine.begin() as conn:
+        row = conn.execute(text("SELECT tier, credit_balance FROM users WHERE user_id = :u"),
+                           {"u": user_id}).mappings().first()
+        if not row:
+            return 0
+        if row["tier"] == "enterprise":
+            return -1  # sinirsiz
+        yeni = max(int(row["credit_balance"] or 0) - amount, 0)
+        conn.execute(text("UPDATE users SET credit_balance = :b, updated_at = CURRENT_TIMESTAMP "
+                          "WHERE user_id = :u"), {"b": yeni, "u": user_id})
+        conn.execute(text("INSERT INTO credit_ledger (user_id, delta, reason, balance_after) "
+                          "VALUES (:u, :d, :r, :b)"), {"u": user_id, "d": -amount, "r": reason, "b": yeni})
+    return yeni
+
+
+@app.post("/api/buyer/register")
+def api_buyer_register(req: dict):
+    """Kurumsal e-posta ile kayit. Kurumsal domain dogrulamasi + KVKK zorunlu.
+    Sonuc: status=onay_bekliyor (admin onayindan sonra onayli + kredi yuklenir)."""
+    email = (req.get("email") or "").strip().lower()
+    company_name = (req.get("company_name") or "").strip()
+    kvkk = bool(req.get("kvkk_consent"))
+    if not email or "@" not in email or not company_name:
+        raise HTTPException(status_code=400, detail="email ve company_name zorunlu")
+    domain = email.split("@")[-1]
+    if domain.lower() in _FREE_DOMAINS:
+        raise HTTPException(status_code=400, detail=(
+            f"'{domain}' kurumsal degil. Lutfen sirket e-postanizla kayit olun "
+            "(gmail/outlook vb. kabul edilmez)."))
+    if not kvkk:
+        raise HTTPException(status_code=400, detail="KVKK aydinlatma metni onayı zorunlu")
+
+    # mevcut 14k kayitla eslesme (web domain eslestirmesi)
+    linked = None
+    engine = get_engine()
+    with engine.begin() as conn:
+        dup = conn.execute(text("SELECT user_id, status FROM users WHERE email = :e"), {"e": email}).first()
+        if dup:
+            raise HTTPException(status_code=409, detail="Bu e-posta zaten kayitli")
+        # firma eslestirme: web domain veya benzer unvan
+        cweb = (req.get("website") or "").replace("https://", "").replace("http://", "").replace("www.", "").strip("/")
+        if cweb:
+            l = conn.execute(text("SELECT company_id FROM companies WHERE website_domain = :w LIMIT 1"),
+                             {"w": cweb}).scalar()
+            linked = l
+        conn.execute(text("""
+            INSERT INTO users (email, email_domain, company_name, linked_company_id, nace_code,
+                               products_desc, target_nace, goal, contact_name, website,
+                               kvkk_consent, status)
+            VALUES (:email, :domain, :company_name, :linked, :nace, :products, :target,
+                    :goal, :contact, :website, :kvkk, 'onay_bekliyor')
+        """), {"email": email, "domain": domain, "company_name": company_name,
+               "linked": linked, "nace": req.get("nace_code"), "products": req.get("products_desc"),
+               "target": req.get("target_nace"), "goal": req.get("goal", "tumu"),
+               "contact": req.get("contact_name"), "website": req.get("website"),
+               "kvkk": kvkk})
+    return {
+        "ok": True,
+        "status": "onay_bekliyor",
+        "message": ("Kaydınız alındı. Kurumsal e-posta doğrulaması ve üyelik onayından sonra "
+                    "krediniz yüklenecek. Onay genellikle 1 iş günü içinde tamamlanır."),
+        "linked_company_id": str(linked) if linked else None,
+    }
+
+
+@app.get("/api/buyer/categories")
+def api_buyer_categories(_auth: str = Depends(require_api_key)) -> dict:
+    """Urun katalogu (kayit formunda hedef sektor/urun secimi icin)."""
+    engine = get_engine()
+    with engine.connect() as conn:
+        rows = conn.execute(text(
+            "SELECT code, label_tr, nace_group, description FROM product_categories "
+            "WHERE active = TRUE ORDER BY nace_group, label_tr")).mappings().all()
+    return {"items": [dict(r) for r in rows]}
+
+@app.post("/api/buyer/login")
+def api_buyer_login(req: dict):
+    """E-posta ile giris (MVP auth; OAuth Scale asamasinda).
+    Onayli kullaniciya 24 saatlik token doner; kredi bakiyesi dahil."""
+    email = (req.get("email") or "").strip().lower()
+    if not email or "@" not in email:
+        raise HTTPException(status_code=400, detail="gecerli e-posta girin")
+    engine = get_engine()
+    with engine.connect() as conn:
+        row = conn.execute(text(
+            "SELECT user_id, email, status, tier, credit_balance, role, company_name "
+            "FROM users WHERE email = :e"), {"e": email}).mappings().first()
+    if not row:
+        raise HTTPException(status_code=404, detail="Bu e-posta ile kayit bulunamadi")
+    if row["status"] != "onayli":
+        durum = "onayınız değerlendiriliyor" if row["status"] == "onay_bekliyor" else "kabul edilmedi"
+        raise HTTPException(status_code=403, detail=f"Üyelik onayı: {durum}. Sorularınız için iletişime geçin.")
+    return {
+        "token": _user_token(row["email"]),
+        "user": {
+            "email": row["email"], "company_name": row["company_name"],
+            "tier": row["tier"], "credit_balance": row["credit_balance"],
+            "role": row["role"],
+        },
+    }
+
+
+@app.get("/api/me")
+def api_me(token: str = ""):
+    u = _user_from_token(token)
+    if not u:
+        raise HTTPException(status_code=401, detail="oturum gecersiz veya suresi doldu")
+    return {"user": dict(u)}
+
+
+# ── Admin: onay kuyrugu + kredi yonetimi (DASH_API_KEY ile) ─────────────────
+
+@app.get("/api/admin/pending")
+def api_admin_pending(_auth: str = Depends(require_api_key)):
+    engine = get_engine()
+    with engine.connect() as conn:
+        bekleyen = conn.execute(text(
+            "SELECT user_id, email, company_name, nace_code, products_desc, target_nace, "
+            "goal, website, linked_company_id, created_at FROM users "
+            "WHERE status = 'onay_bekliyor' ORDER BY created_at")).mappings().all()
+        son = conn.execute(text(
+            "SELECT email, company_name, tier, credit_balance, status, updated_at "
+            "FROM users WHERE status = 'onayli' ORDER BY updated_at DESC LIMIT 10")).mappings().all()
+    return {"bekleyen": [dict(r) for r in bekleyen], "onayli_son": [dict(r) for r in son]}
+
+
+@app.post("/api/admin/approve")
+def api_admin_approve(req: dict, _auth: str = Depends(require_api_key)):
+    """Onayla: tier sec (terminal/strategic/enterprise) -> kredi yukle + enterprise'a api_key uret."""
+    user_id = req.get("user_id") or ""
+    tier = req.get("tier") or "terminal"
+    reject = bool(req.get("reject"))
+    note = req.get("note") or ""
+    if not user_id:
+        raise HTTPException(status_code=400, detail="user_id zorunlu")
+    try:
+        uuid.UUID(user_id)
+    except (ValueError, AttributeError, TypeError):
+        raise HTTPException(status_code=400, detail="user_id UUID olmali")
+    kredi = _TIER_CREDITS.get(tier, 100)
+    api_key = None
+    engine = get_engine()
+    with engine.begin() as conn:
+        u = conn.execute(text("SELECT email, tier, status FROM users WHERE user_id = :u"),
+                         {"u": user_id}).mappings().first()
+        if not u:
+            raise HTTPException(status_code=404, detail="kullanici bulunamadi")
+        if reject:
+            conn.execute(text("UPDATE users SET status='reddedildi', rejection_note=:n, "
+                              "updated_at=CURRENT_TIMESTAMP WHERE user_id=:u"),
+                         {"n": note, "u": user_id})
+            return {"ok": True, "status": "reddedildi"}
+        if tier == "enterprise":
+            api_key = "ent_" + hmac.new(_DASH_SECRET.encode(), user_id.encode(),
+                                        hashlib.sha256).hexdigest()[:32]
+            conn.execute(text("UPDATE users SET status='onayli', tier=:t, credit_balance=0, "
+                              "api_key=:k, updated_at=CURRENT_TIMESTAMP WHERE user_id=:u"),
+                         {"t": tier, "k": api_key, "u": user_id})
+            yeni = -1
+        else:
+            conn.execute(text("UPDATE users SET status='onayli', tier=:t, credit_balance=:b, "
+                              "updated_at=CURRENT_TIMESTAMP WHERE user_id=:u"),
+                         {"t": tier, "b": kredi, "u": user_id})
+            yeni = kredi
+        conn.execute(text("INSERT INTO credit_ledger (user_id, delta, reason, balance_after) "
+                          "VALUES (:u, :d, 'approve', :b)"), {"u": user_id, "d": kredi, "b": yeni})
+    return {"ok": True, "status": "onayli", "tier": tier, "credit_balance": yeni,
+            "api_key": api_key}
+
+
+@app.post("/api/admin/credit")
+def api_admin_credit(req: dict, _auth: str = Depends(require_api_key)):
+    """Credit Pack / manuel kredi yukleme (750 TRY/50 kredi vb.)."""
+    user_id = req.get("user_id") or ""
+    amount = int(req.get("amount") or 0)
+    if not user_id or amount <= 0:
+        raise HTTPException(status_code=400, detail="user_id ve pozitif amount zorunlu")
+    engine = get_engine()
+    with engine.begin() as conn:
+        row = conn.execute(text("SELECT credit_balance, tier FROM users WHERE user_id = :u"),
+                           {"u": user_id}).mappings().first()
+        if not row:
+            raise HTTPException(status_code=404, detail="kullanici bulunamadi")
+        yeni = int(row["credit_balance"] or 0) + amount
+        conn.execute(text("UPDATE users SET credit_balance=:b, updated_at=CURRENT_TIMESTAMP "
+                          "WHERE user_id=:u"), {"b": yeni, "u": user_id})
+        conn.execute(text("INSERT INTO credit_ledger (user_id, delta, reason, balance_after) "
+                          "VALUES (:u, :d, 'credit_pack', :b)"),
+                     {"u": user_id, "d": amount, "b": yeni})
+    return {"ok": True, "credit_balance": yeni}
 
 @app.get("/api/dashboard", response_class=HTMLResponse)
 def serve_dashboard(_auth: str = Depends(require_api_key)) -> HTMLResponse:

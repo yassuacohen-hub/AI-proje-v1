@@ -1078,13 +1078,13 @@
     "baslik": "Intelligence Scores Recalc Script",
     "sahip": "gelistirici",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-09T12:50:18",
-    "bitis": null,
+    "bitis": "2026-09-09T16:42:48",
     "dosyalar": [
       "scripts/recalc_intelligence_scores.py"
     ],
-    "not": "company_intelligence_scores, company_tech_profile tablolarini günceller"
+    "not": "Intelligence scores recalculated"
   },
   {
     "task_id": "P7-11",
@@ -1117,8 +1117,9 @@
     "id": "Y16",
     "baslik": "ARASTIRMA: dashboard'a sektor/market zekasi katmani (V9 market brain MVP)",
     "sahip": "arastirmaci",
-    "durum": "plan",
-    "not": "V9 baglam dokumanindaki Market Brain MVP kapsam: sektor bazli fiyat/haber/sentiment akisi yerine mevcut veriyle 'sektor sagligi' kartinin nasil kurulur (firma sayisi + kalite + web varligi) arastir. Cikti: islenebilir ozellik listesi + veri yeterlilik analizi."
+    "durum": "done",
+    "not": "V9 Market Brain MVP arastirmasi tamamlandi: sektor sagligi karti tasarimi, firma sayisi + kalite + web varligi analizi ve islenebilir ozellik listesi hazirlandi. Detay: data/orchestrator/y16_result.json",
+    "bitis": "2026-09-09"
   },
   {
     "id": "Y17",
@@ -1167,5 +1168,33 @@
     "sahip": "gelistirici",
     "durum": "plan",
     "not": "Kullanicinin vizyon sorusu uzerine: buyer profilinde ne icin ariyor? (1) Tedarikci bul: 29->28/25/24 agirlik yuklu. (2) Musteri bul/satis kanali: yon TERS - yedek parcaciga 45.20 servis/46.75 toptan/bayiler. (3) Rakip analizi: ayni NACE. /api/match?yarak=.. parametresi + haritada yon agirliklari + match panelinde 3 buton (Tedarikci|Musteri|Rakip). KVKK maskeleme korunur."
+  },
+  {
+    "id": "Y23",
+    "baslik": "Odeme entegrasyonu (iyzico/Stripe) - otomatik kredi satisi",
+    "sahip": "gelistirici",
+    "durum": "plan",
+    "not": "V9 Scale asamasi. MVP'de kredi manuel yukleniyor (/api/admin/credit). Otomasyonda: checkout linki + webhook ile credit_ledger'a otomatik +50. V7 fiyatlari: Terminal 85.000/yl (100 kredi), Strategic 220.000 (500), CreditPack 750/50."
+  },
+  {
+    "id": "Y24",
+    "baslik": "Uye e-posta dogrulama linki + Telegram hosgeldin raporu",
+    "sahip": "gelistirici",
+    "durum": "plan",
+    "not": "Kayit sonrasi kurumsal e-postaya dogrulama linki; onaylaninca Telegram'dan hosgeldin + kisisellesmis match raporu (bot_service hazir)."
+  },
+  {
+    "id": "Y25",
+    "baslik": "product_categories yonetim arayuzu (admin panel)",
+    "sahip": "frontend",
+    "durum": "plan",
+    "not": "14 kategori seed edildi (0012 migrasyon). Admin panelde ekle/duzenle/deactivate + kategorileri firmalara baglama (company_capabilities doldurma firsati)."
+  },
+  {
+    "id": "Y26",
+    "baslik": "Enterprise API key yonetimi + kullanim raporu",
+    "sahip": "gelistirici",
+    "durum": "plan",
+    "not": "Enterprise tier approve'da api_key uretiliyor (web_app.py). Eksik: key rotasyonu, kullanim metrikleri (/metrics'e tier bazli istek sayaci), ERP gateway kapsami (V8 mTLS/OAuth2 - Scale)."
   }
 ]

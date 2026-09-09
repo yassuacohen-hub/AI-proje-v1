@@ -18,5 +18,10 @@
     "sahip": "web_kazima",
     "task_id": "P1-7",
     "litkilendi": "2026-09-06T16:59:56"
+  },
+  "scripts/recalc_intelligence_scores.py": {
+    "sahip": "gelistirici",
+    "task_id": "P7-10",
+    "kilitlendi": "2026-09-09T16:42:48"
   }
 }

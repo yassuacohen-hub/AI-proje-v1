@@ -811,3 +811,144 @@ document.addEventListener('keydown', e => {
     if (s) { s.focus(); s.select(); }
   }
 });
+
+// ── Monetizasyon: Uyelik modal + kredi gostergesi ──────────────────────────
+
+function getMemberToken() { return localStorage.getItem('huginn_member_token') || ''; }
+function setMemberToken(t) {
+  if (t) localStorage.setItem('huginn_member_token', t);
+  else localStorage.removeItem('huginn_member_token');
+  refreshCreditBadge();
+}
+
+function refreshCreditBadge() {
+  const tok = getMemberToken();
+  let el = document.getElementById('credit-badge');
+  if (!el) return;
+  if (!tok) { el.innerHTML = ''; return; }
+  fetch(apiUrl('/api/me?token=' + encodeURIComponent(tok)))
+    .then(r => (r.ok ? r.json() : Promise.reject()))
+    .then(d => {
+      const u = d.user || {};
+      if (u.status !== 'onayli') { el.innerHTML = ''; return; }
+      el.innerHTML = `<i class="fas fa-coins" style="color:#fbbf24"></i> ${u.credit_balance < 0 ? 'Sınırsız' : u.credit_balance + ' kredi'}
+        <span style="color:var(--text-dim);font-size:10px;margin-left:4px">${esc(u.company_name || u.email)}</span>`;
+    })
+    .catch(() => { el.innerHTML = ''; });
+}
+
+function openMembership() {
+  let m = document.getElementById('membership-modal');
+  if (!m) { buildMembershipModal(); m = document.getElementById('membership-modal'); }
+  m.style.display = 'flex';
+}
+
+function closeMembership() {
+  const m = document.getElementById('membership-modal');
+  if (m) m.style.display = 'none';
+}
+
+function buildMembershipModal() {
+  const wrap = document.createElement('div');
+  wrap.id = 'membership-modal';
+  wrap.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:10000;display:flex;align-items:center;justify-content:center';
+  wrap.innerHTML = `
+    <div style="background:var(--panel-bg,#141824);border:1px solid var(--border);border-radius:14px;padding:24px;width:min(560px,92vw);max-height:88vh;overflow-y:auto">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <h3 style="margin:0;font-size:16px"><i class="fas fa-user-plus"></i> Firmanızı Tanıtın — Üyelik Başvurusu</h3>
+        <button onclick="closeMembership()" style="background:none;border:none;color:var(--text-dim);font-size:18px;cursor:pointer">✕</button>
+      </div>
+      <div id="memb-msg" class="match-status hidden" style="margin-bottom:10px"></div>
+      <div class="quick-filter-item"><label>Kurumsal E-posta *</label>
+        <input id="memb-email" class="filter-select" style="width:100%" placeholder="ad@sirketiniz.com.tr">
+        <small style="color:var(--text-dim);font-size:10.5px">Gmail/Hotmail kabul edilmez — sirket e-postasi gereklidir.</small></div>
+      <div class="quick-filter-item"><label>Firma Adı *</label>
+        <input id="memb-company" class="filter-select" style="width:100%" placeholder="Şirket unvanınız"></div>
+      <div class="quick-filter-item"><label>NACE Kodunuz (örn. 29.32)</label>
+        <input id="memb-nace" class="filter-select" style="width:100%" placeholder="29.32"></div>
+      <div class="quick-filter-item"><label>Ne üretiyor / satıyorsunuz?</label>
+        <input id="memb-products" class="filter-select" style="width:100%" placeholder="Örn: fren sistemi yedek parçaları, pres döküm..."></div>
+      <div class="quick-filter-item"><label>Kime satmak / nereden tedarik etmek istiyorsunuz? (NACE ana gruplar, virgülle)</label>
+        <input id="memb-target" class="filter-select" style="width:100%" placeholder="Örn: 45,46,28"></div>
+      <div class="quick-filter-item"><label>Amacınız</label>
+        <select id="memb-goal" class="filter-select" style="width:100%">
+          <option value="tumu">Hepsi</option><option value="musteri">Müşteri bulmak</option>
+          <option value="tedarikci">Tedarikçi bulmak</option><option value="ortagi">İş ortağı</option>
+        </select></div>
+      <div class="quick-filter-item"><label>Web siteniz</label>
+        <input id="memb-web" class="filter-select" style="width:100%" placeholder="sirketiniz.com.tr"></div>
+      <label style="display:flex;gap:8px;align-items:flex-start;font-size:11.5px;color:var(--text-dim);margin:10px 0">
+        <input type="checkbox" id="memb-kvkk"> KVKK aydınlatma metnini okudum; firma ve iletişim verilerimin
+        eşleştirme amacıyla işlenmesine onay veriyorum. (İletişim bilgileri ekranda maskelenir.)
+      </label>
+      <div style="display:flex;gap:10px;margin-top:8px">
+        <button class="d-btn primary" onclick="submitMembership()" style="flex:2"><i class="fas fa-paper-plane"></i> Başvuruyu Gönder</button>
+        <button class="d-btn" onclick="closeMembership()" style="flex:1">Vazgeç</button>
+      </div>
+      <hr style="border-color:var(--border);margin:16px 0 10px">
+      <div style="font-size:12px"><b>Üye girişi:</b></div>
+      <div style="display:flex;gap:8px;margin-top:6px">
+        <input id="memb-login-email" class="filter-select" style="flex:1" placeholder="Kayıtlı kurumsal e-postanız">
+        <button class="d-btn" style="flex:0" onclick="memberLogin()">Giriş</button>
+      </div>
+    </div>`;
+  document.body.appendChild(wrap);
+  wrap.addEventListener('click', e => { if (e.target === wrap) closeMembership(); });
+}
+
+function submitMembership() {
+  const body = {
+    email: document.getElementById('memb-email').value.trim(),
+    company_name: document.getElementById('memb-company').value.trim(),
+    nace_code: document.getElementById('memb-nace').value.trim(),
+    products_desc: document.getElementById('memb-products').value.trim(),
+    target_nace: document.getElementById('memb-target').value.trim(),
+    goal: document.getElementById('memb-goal').value,
+    website: document.getElementById('memb-web').value.trim(),
+    kvkk_consent: document.getElementById('memb-kvkk').checked,
+  };
+  const msg = document.getElementById('memb-msg');
+  fetch(apiUrl('/api/buyer/register'), {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  }).then(async r => {
+    const d = await r.json().catch(() => ({}));
+    if (r.ok) {
+      msg.className = 'match-status ok';
+      msg.innerHTML = `<i class="fas fa-check-circle"></i> ${esc(d.message || 'Kaydınız alındı.')}`;
+    } else {
+      msg.className = 'match-status err';
+      msg.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${esc(d.detail || 'Hata ' + r.status)}`;
+    }
+  }).catch(e => {
+    msg.className = 'match-status err';
+    msg.innerHTML = `<i class="fas fa-exclamation-circle"></i> ${esc(e.message)}`;
+  });
+}
+
+function memberLogin() {
+  const email = document.getElementById('memb-login-email').value.trim();
+  fetch(apiUrl('/api/buyer/login'), {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email }),
+  }).then(async r => {
+    const d = await r.json().catch(() => ({}));
+    if (r.ok) {
+      setMemberToken(d.token);
+      closeMembership();
+      toast(`Hoş geldiniz — ${d.user.credit_balance < 0 ? 'sınırsız' : d.user.credit_balance + ' kredi'}`);
+    } else {
+      toast(d.detail || 'Giriş başarısız');
+    }
+  }).catch(e => toast(e.message));
+}
+
+// sayfa acilisinda kredi gostergesi (topbar'a eklenir)
+document.addEventListener('DOMContentLoaded', () => {
+  const badge = document.createElement('div');
+  badge.id = 'credit-badge';
+  badge.style.cssText = 'font-size:12px;font-weight:600;color:var(--text)';
+  const actions = document.querySelector('.topbar-actions');
+  if (actions) actions.prepend(badge);
+  refreshCreditBadge();
+});
