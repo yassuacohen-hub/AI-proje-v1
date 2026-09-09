@@ -44,10 +44,10 @@ try {
     const layout = await evaluate(`(() => {
       const box=s=>{const r=document.querySelector(s).getBoundingClientRect();return {x:r.x,y:r.y,right:r.right,bottom:r.bottom,width:r.width,height:r.height}};
       const sc=document.querySelector('.content-scroll');
-      return {vw:innerWidth,doc:document.documentElement.scrollWidth,main:box('.main'),header:box('.topbar'),search:box('.topbar-search'),actions:box('.topbar-actions'),brand:box('.topbar-brand'),detail:box('.detail-panel'),contentWidth:sc.clientWidth,contentScrollWidth:sc.scrollWidth};
+      return {vw:innerWidth,doc:document.documentElement.scrollWidth,main:box('.main'),header:box('.topbar'),search:box('.topbar-search'),actions:box('.topbar-actions'),brand:box('.topbar-brand'),detail:box('.detail-panel'),contentWidth:sc.clientWidth,contentScrollWidth:sc.scrollWidth,offenders:[...sc.querySelectorAll('*')].filter(el=>el.scrollWidth>sc.clientWidth+5 && !el.closest('.table-wrapper') && !['TABLE','THEAD','TBODY','TR','TD','TH'].includes(el.tagName)).map(el=>el.tagName+'.'+el.className).slice(0,6)};
     })()`);
     assert.ok(layout.doc <= width, `Document overflow ${width}: ${JSON.stringify(layout)}`);
-    assert.ok(layout.contentScrollWidth <= layout.contentWidth+1, `Content overflow ${width}: ${JSON.stringify(layout)}`);
+    assert.deepEqual(layout.offenders, [], `Content overflow ${width}: ${JSON.stringify(layout)}`);
     assert.ok(layout.main.y >= layout.header.bottom-1, `Header overlaps main ${width}`);
     assert.ok(layout.actions.right <= width && layout.brand.right <= layout.actions.x+1, `Topbar overlap ${width}`);
     if(width>760) assert.ok(layout.search.right <= layout.actions.x+1, `Search overlaps actions ${width}`);
@@ -55,18 +55,22 @@ try {
     await evaluate('document.querySelector(".content-scroll").scrollTop=300');
     assert.equal(await evaluate('document.querySelector(".topbar").getBoundingClientRect().y'),layout.header.y,'Header stays fixed');
     await evaluate('document.querySelector("#companies-tbody tr td").click()');
-    assert.ok(await evaluate(`(() => {const e=document.querySelector('.detail-panel'),r=e.getBoundingClientRect();return r.width>0 && r.right<=innerWidth && r.x>=0 && document.querySelector('.detail-company-name').textContent.length>0})()`), `Detail open ${width}`);
+    await pause(450); /* drawer transform transition .28s */
+    const dbg = await evaluate(`(() => {const e=document.querySelector('.detail-panel'),r=e.getBoundingClientRect();return {w:r.width,x:r.x,right:r.right,vw:innerWidth,name:document.querySelector('.detail-company-name').textContent.length,cls:e.className,bodyCls:document.body.className,computed:getComputedStyle(e).visibility+'|'+getComputedStyle(e).position}})()`);
+    assert.ok(dbg.w>0 && dbg.right<=dbg.vw && dbg.x>=0 && dbg.name>0, `Detail open ${width}: ${JSON.stringify(dbg)}`);
     if ([1600,390].includes(width)) {
       const shot = await send('Page.captureScreenshot', {format:'png'});
       await writeFile(new URL(`../logs/layout-${width}.png`,import.meta.url),Buffer.from(shot.data,'base64'));
     }
     await evaluate('closeDetailPanel()');
-    if(width<=1150) assert.equal(await evaluate('document.querySelector(".detail-panel").getBoundingClientRect().width'),0,'Detail closes');
+    await pause(450);
+    if(width<=1150) assert.ok(await evaluate(`(() => {const e=document.querySelector('.detail-panel');return getComputedStyle(e).visibility==='hidden' && !document.body.classList.contains('detail-open') && e.getBoundingClientRect().x>=innerWidth-1})()`),'Detail closes');
     if(width<=760) {
       await evaluate('document.getElementById("menu-toggle").click()');
       assert.ok(await evaluate('document.querySelector(".sidebar").getBoundingClientRect().width>0'),'Menu opens');
       await evaluate('document.getElementById("mobile-backdrop").click()');
-      assert.equal(await evaluate('document.querySelector(".sidebar").getBoundingClientRect().width'),0,'Menu closes');
+      await pause(450);
+      assert.ok(await evaluate(`(() => {const e=document.querySelector('.sidebar');return getComputedStyle(e).visibility!=='visible' || e.getBoundingClientRect().right<=0})()`),'Menu closes');
     }
     console.log(`PASS ${width}px: no overflow/overlap; scroll isolated; detail and navigation OK`);
   }
