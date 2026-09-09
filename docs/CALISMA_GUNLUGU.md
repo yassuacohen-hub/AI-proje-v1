@@ -1,4 +1,30 @@
 
+## 2026-09-09 — Y19: Smart Matching MVP (V9) canlıda ✅
+
+**`GET /api/match`** — buyer-firma eşleştirme motoru (V9 "kime satis yapilir" MVP'si):
+
+| Bileşen | Ağırlık | Kaynak |
+|---|---|---|
+| Sektör uyumu | 0-45p | NACE ana-grup eşleşmesi + **komşuluk haritası** (`_NACE_KOMSU`: 29→28/25/24 üretim zinciri, 62→63 yazılım-iletişim vb.) |
+| Konum | 0-20p | aynı OSB 20 · Ankara 12 |
+| Firma kalitesi | 0-25p | `data_quality_score/100 × 25` |
+| Kanıt gücü | 0-10p | web 5 + email 3 + telefon 2 |
+
+**Parametreler:** `buyer_id` (DB'den profil) veya `nace` (serbest) · `mode=komple|ayni` · `min_puan` · `mask=1` (KVKK) · limit≤100, offset
+**Doğrulama:** 6 senaryo (otomotiv komple/ayni, yazılım+mask, min_puan=99→0, nace yok→400, UUID değil→404) — **hepsi OK**; Docker rebuild sonrası **canlı port 8000'de çalışıyor** (5000 aday, ilk sonuçlar 89.5p).
+
+**Örnek:** otomotiv buyer (29.10) → montaj firmaları 89.5p; mode=komple → makine (28) 78.8p, metal (25) 74.3p gibi **tamamlayıcı tedarik zinciri** önerileri gelir.
+
+### 🆕 Y21 açıldı (İSKUR kurumsal eşleştirme — kullanıcının fikri)
+Brief: `workspace/external/BRIEF_Y21_iskur.md`. **Risk uyarıları (koordinatör):**
+1. 🔴 Scraping = İSKUR kullanım şartları ihlali riski → **önce resmî API/açık veri kanalı doğrulanacak**
+2. 🔴 KVKK: ilan iletişim bilgileri bireysel olabilir → kişi verisi toplanmayacak, firma+sinyal yeterli
+3. 🟡 İlan firması adı serbest metin → entity resolution yükü artar
+4. 🟡 **"İlan yok = pasif firma" TÜMDÜĞELİMİ** — negatif etiketleme yasak; ilan sinyali yalnızca pozitif (kanıt gücü +) kullanılabilir
+5. 🟡 Ticari yeniden dağıtım için lisans/attribution kontrolü şart
+
+Pano: **85/98 done** · Y21 arastirmaci'da.
+
 ## 2026-09-09 — Y20: Test kirliliği kökten çözüldü (192 passed) ✅
 
 **3 kök neden:**

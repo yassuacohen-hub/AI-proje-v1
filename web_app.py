@@ -4,6 +4,7 @@
 from __future__ import annotations
 
 import os
+import uuid
 import sys
 import time
 from datetime import datetime
@@ -724,6 +725,161 @@ def api_companies_export(format: str = "csv", search: str = "", min_score: int =
         csv_data = output.getvalue()
         return Response(content=csv_data, media_type="text/csv", headers={"Content-Disposition": "attachment; filename=companies.csv"})
 
+
+# ── Y19: V9 Smart Matching MVP ──────────────────────────────────────────────
+
+# NACE ana-grup komşuluk ağırlıkları (tamamlayıcı sektörler; 1.0 = aynı grup).
+# Kaynak: OSTIM/Ankara üretim zinciri kurgusu (montaj<-yan sanayi<-hammadde).
+_NACE_KOMSU = {
+    "29": {"28": 0.75, "25": 0.65, "24": 0.45, "46": 0.55},
+    "28": {"29": 0.75, "25": 0.70, "24": 0.50, "46": 0.55},
+    "25": {"28": 0.70, "29": 0.65, "24": 0.45, "23": 0.40},
+    "10": {"46": 0.60, "01": 0.50, "11": 0.40},
+    "62": {"63": 0.75, "58": 0.55},
+    "41": {"43": 0.80, "23": 0.50, "25": 0.40},
+    "24": {"25": 0.60, "28": 0.50, "29": 0.45},
+    "46": {"10": 0.55, "29": 0.50, "28": 0.50},
+    "43": {"41": 0.80, "23": 0.50},
+}
+
+
+def _nace_grup(nace: str) -> str:
+    return (nace or "").split(".")[0].strip()
+
+
+def _match_puan(row, buyer_grup: str, buyer_osb: str, mode: str):
+    """Firma için 0-100 eşleştirme puanı + bileşen kırılımı. (None = elensin)"""
+    hedef_grup = _nace_grup(row.get("nace_code") or "")
+    if not hedef_grup:
+        return None
+
+    # 1) sektör uyumu (0-45)
+    if hedef_grup == buyer_grup:
+        sektor = 45.0
+        iliski = "ayni-sektor"
+    elif mode == "komple" and buyer_grup in _NACE_KOMSU:
+        kom = _NACE_KOMSU[buyer_grup].get(hedef_grup, 0.0)
+        sektor = 45.0 * kom
+        iliski = "komple-sektor" if kom >= 0.4 else "uzak-sektor"
+    else:
+        sektor = 0.0
+        iliski = "farkli"
+
+    # 2) konum (0-20)
+    hedef_osb = row.get("osb_id") or ""
+    if buyer_osb and hedef_osb and hedef_osb == buyer_osb:
+        konum = 20.0
+    elif row.get("is_ankara"):
+        konum = 12.0
+    else:
+        konum = 0.0
+
+    # 3) firma kalitesi (0-25)
+    try:
+        kalite = min(max(float(row.get("data_quality_score") or 0), 0), 100) * 0.25
+    except (TypeError, ValueError):
+        kalite = 0.0
+
+    # 4) kanıt gücü (0-10): web 5 + email 3 + telefon 2
+    kanit = (5.0 if row.get("web_sitesi") else 0.0) \
+        + (3.0 if row.get("primary_email") else 0.0) \
+        + (2.0 if row.get("primary_phone") else 0.0)
+
+    return {
+        "puan": round(sektor + konum + kalite + kanit, 1),
+        "kirilim": {
+            "sektor": round(sektor, 1),
+            "konum": round(konum, 1),
+            "kalite": round(kalite, 1),
+            "kanit": round(kanit, 1),
+        },
+        "iliski": iliski,
+    }
+
+
+@app.get("/api/match")
+def api_match(
+    buyer_id: str = "",
+    nace: str = "",
+    osb_id: str = "",
+    mode: str = "komple",
+    min_puan: int = 30,
+    limit: int = 20,
+    offset: int = 0,
+    mask: int = 0,
+    _auth: str = Depends(require_api_key),
+) -> dict:
+    """V9 smart matching MVP: buyer profiline uygun firmaları puanla.
+
+    - buyer_id verirse: DB'den buyer alınır (nace + osb)
+    - yoksa nace (+ opsiyonel osb_id) ile serbest profil
+    - mode: komple (komşu sektörler dahil) | ayni (sadece aynı ana grup)
+    """
+    mode = mode if mode in ("komple", "ayni") else "komple"
+    limit = max(1, min(limit, 100))
+
+    buyer_nace, buyer_osb, buyer_adi = nace, osb_id, None
+    engine = get_engine()
+    if buyer_id:
+        try:
+            uuid.UUID(buyer_id)
+        except (ValueError, AttributeError, TypeError):
+            raise HTTPException(status_code=404, detail=f"buyer bulunamadi: {buyer_id}")
+        with engine.connect() as conn:
+            r = conn.execute(text(
+                "SELECT company_id, legal_name, nace_code, osb_id FROM companies "
+                "WHERE company_id = :id"), {"id": buyer_id}).mappings().first()
+        if not r:
+            raise HTTPException(status_code=404, detail=f"buyer bulunamadi: {buyer_id}")
+        buyer_nace = r["nace_code"] or buyer_nace
+        buyer_osb = r["osb_id"] or buyer_osb
+        buyer_adi = r["legal_name"]
+
+    buyer_grup = _nace_grup(buyer_nace)
+    if not buyer_grup:
+        raise HTTPException(
+            status_code=400,
+            detail="buyer nace belirtilmeli (buyer_id veya nace parametresi)",
+        )
+
+    with engine.connect() as conn:
+        rows = conn.execute(text(
+            "SELECT company_id, legal_name, trade_name, nace_code, nace_name, osb_id, "
+            "is_ankara, is_osb_member, data_quality_score, web_sitesi, primary_phone, "
+            "primary_email, website_domain "
+            "FROM companies WHERE nace_code IS NOT NULL AND is_ankara = TRUE "
+            "ORDER BY data_quality_score DESC NULLS LAST LIMIT 5000"
+        )).mappings().all()
+
+    skorlu = []
+    for r in rows:
+        d = dict(r)
+        if buyer_id and d.get("company_id") == buyer_id:
+            continue  # kendisi
+        m = _match_puan(d, buyer_grup, buyer_osb or "", mode)
+        if not m or m["puan"] < min_puan:
+            continue
+        d["match"] = m
+        d = normalize_company(d)
+        if _mask_active(mask):
+            d = apply_kvkk_mask(d)
+        skorlu.append(d)
+
+    skorlu.sort(key=lambda x: x["match"]["puan"], reverse=True)
+    return {
+        "buyer": {
+            "buyer_id": buyer_id or None,
+            "adi": buyer_adi,
+            "nace": buyer_nace,
+            "nace_grup": buyer_grup,
+            "osb_id": buyer_osb or None,
+        },
+        "mode": mode,
+        "toplam": len(skorlu),
+        "limit": limit,
+        "offset": offset,
+        "items": skorlu[offset:offset + limit],
+    }
 
 @app.get("/api/dashboard", response_class=HTMLResponse)
 def serve_dashboard(_auth: str = Depends(require_api_key)) -> HTMLResponse:

@@ -1138,8 +1138,8 @@
     "id": "Y19",
     "baslik": "ARASTIRMA: V9 smart matching (musteri-firma eslestirme) MVP prototipi",
     "sahip": "gelistirici",
-    "durum": "plan",
-    "not": "Mevcut company_capabilities + products tablolar bos; V9'un 'kime satis yapilir' motoru icin minimum eslestirme MVP'yi tanimla: NACE benzerligi + sektor + konum (Ankara/OSB) puanlama. Cikti: skor formulu + endpoints ozeti (eslestirme /api/match?buyer=X)."
+    "durum": "done",
+    "not": "TAMAMLANDI 2026-09-09: /api/match endpoint (web_app.py) - NACE komşuluk haritalı tedarik zinciri eşleştirme. Skor: sektor 45 + konum 20 + kalite 25 + kanit 10. mode=komple|ayni, buyer_id|nace profil, mask=1 KVKK, UUID dogrulamalı 404. 6 senaryo testi OK. Y21 (İSKUR araştırma) acildi."
   },
   {
     "id": "Y20",
@@ -1147,5 +1147,12 @@
     "sahip": "gelistirici",
     "durum": "done",
     "not": "TAMAMLANDI 2026-09-09. 3 kok neden: (1) connection.py get_engine'in parametresiz lru_cache'i env degisince eski engine'e kilitleniyordu -> URL-bazli _engine_for cache eklendi; (2) test_ankara_osb.py'nin import-time DATABASE_URL set'i collection'da tum suite'i sqlite'a kirletiyordu -> module-scope fixture'a tasindi (restore dahil); (3) test_connection/test_extra_coverage'daki bare env set'ler monkeypatch'e cevrildi. DOGRULAMA: tam suite 192 passed / 0 failed (onceden 19 fail + 21 error); yerel PG (5433) env ile 43 passed / 2.2 sn (Supabase yerine ~8x hizli kosum)."
+  },
+  {
+    "id": "Y21",
+    "baslik": "ARASTIRMA: ISKUR kurumsal eslestirme verisi (acik API + risk analizi)",
+    "sahip": "arastirmaci",
+    "durum": "plan",
+    "not": "BRIEF: workspace/external/BRIEF_Y21.md. Koordinator risk uyarilari: (1) scraping = ISKUR kullanim sartlari ihlali riski; resmi API/acik veri portal kontrol edilmeli; (2) KVKK: ilan iletisim bilgileri BIREYSEL kisilere ait olabilir -> maskeleme zorunlu; (3) firma adi serbest metin -> entity resolution yuku + karantina artisi; (4) ilan yoklugu pasiflik sinyali DEGIL (negatif etiketleme yapilmayacak); (5) ticari yeniden dagitim icin lisans/attribution kontrolu zorunlu."
   }
 ]
