@@ -828,8 +828,9 @@ function matchKirilim(k) {
   const rows = [
     ['Sektör', k.sektor, 45], ['Konum', k.konum, 20],
     ['Kalite', k.kalite, 25], ['Kanıt', k.kanit, 10],
-  ];
-  return `<div class="match-kirilim">` + rows.map(([ad, v, max]) =>
+      ['Profil', k.profil, 5],
+    ];
+    return `<div class="match-kirilim">` + rows.map(([ad, v, max]) =>
     `<div class="mk" title="${ad}: ${v}/${max}"><span class="mk-label">${ad}</span>` +
     `<div class="mk-bar"><div class="mk-fill" style="width:${max ? Math.round(v / max * 100) : 0}%"></div></div>` +
     `<span class="mk-val">${v}</span></div>`).join('') + `</div>`;
@@ -873,7 +874,7 @@ function renderMatchResults(d, mode, yon) {
   const yonEtiket = { tedarikci: 'tedarikçi arama', musteri: 'müşteri/satış kanalı arama', rakip: 'rakip analizi' }[yon || 'tedarikci'] || 'tedarikçi arama';
   const modeEtiket = mode === 'komple' ? 'tedarik zinciri dahil' : 'sadece aynı sektör';
   statusEl.className = 'match-status ok';
-  statusEl.innerHTML = `<i class="fas fa-check-circle"></i> <b>${d.toplam}</b> firma eşleştirildi — alıcı: <b>${esc(d.buyer.adi || d.buyer.nace)}</b> · ${esc(d.buyer.nace)} · ${esc(yonEtiket)} (${modeEtiket})`;
+  statusEl.innerHTML = `<i class="fas fa-check-circle"></i> <b>${d.toplam}</b> firma eşleştirildi — alıcı: <b>${esc(d.buyer.adi || d.buyer.nace)}</b> · ${esc(d.buyer.nace)} · ${esc(yonEtiket)} (${modeEtiket})${d.profil_uygulandi ? ' · <span style="color:var(--green)">profil bonusları uygulandı</span>' : ''}`;
 
   const items = d.items || [];
   if (items.length) {

@@ -794,7 +794,8 @@ def _nace_grup(nace: str) -> str:
     return (nace or "").split(".")[0].strip()
 
 
-def _match_puan(row, buyer_grup: str, buyer_osb: str, mode: str, yon: str = "tedarikci"):
+def _match_puan(row, buyer_grup: str, buyer_osb: str, mode: str, yon: str = "tedarikci",
+                buyer_profil: dict | None = None):
     """Firma için 0-100 eşleştirme puanı + bileşen kırılımı. (None = elensin)
 
     yon (Y22 - eslestirme yonu):
@@ -848,16 +849,79 @@ def _match_puan(row, buyer_grup: str, buyer_osb: str, mode: str, yon: str = "ted
         + (3.0 if row.get("primary_email") else 0.0) \
         + (2.0 if row.get("primary_phone") else 0.0)
 
+    # 5) X03: buyer profili bonusu (0-5): olcek uyumu + sertifika + amac
+    bonus, bonus_nedenler = _profil_bonus(buyer_profil, row)
+
     return {
-        "puan": round(sektor + konum + kalite + kanit, 1),
+        "puan": round(min(sektor + konum + kalite + kanit + bonus, 100.0), 1),
         "kirilim": {
             "sektor": round(sektor, 1),
             "konum": round(konum, 1),
             "kalite": round(kalite, 1),
             "kanit": round(kanit, 1),
+            "profil": round(bonus, 1),
         },
         "iliski": iliski,
+        "profil_bonus": bonus_nedenler,
     }
+
+
+# Y26/X03: calisan sayisi araliklarinin buyukluk sirasi (olcek uyumu icin)
+_EMPLOYEE_SCALE = {"1-5": 1, "6-20": 2, "21-50": 3, "51-250": 4, "250+": 5}
+
+
+def _profil_bonus(buyer_profil: dict | None, hedef_row: dict) -> tuple[float, list]:
+    """X03 MATCH v3: buyer profilinden bonus puan (0-5, toplam 100'e yuvarlanir).
+
+    - olcek uyumu (0-2): hedef firmanin kalite skoru + kanit gucu, buyer'in
+      calisan sayisina gore "kapasite sinyali" verir; buyuk buyer daha olgun
+      (kayitli/verili) tedarikci ister.
+    - sertifika bonusu (0-2): buyer sertifikali ve hedef firma kalitesi yuksekse
+      kucuk bonus (hedef firmanin sertifikasyon verisi su an yok; vekil sinyal).
+    - amac uyumu (0-1): buyer'in goal'i ile arama yonu ayni yonde ise +1.
+    """
+    if not buyer_profil:
+        return 0.0, []
+    bonus = 0.0
+    nedenler = []
+    # 1) olcek uyumu (0-2)
+    buyer_scale = _EMPLOYEE_SCALE.get(buyer_profil.get("employee_range") or "")
+    if buyer_scale_uygun(buyer_profil, hedef_row):
+        bonus += 2.0
+        nedenler.append("olcek-uyum")
+    # 2) sertifika sinyali (0-2): buyer sertifikalarini yazmis ise
+    #    kanit gucu yuksek (web+email) firmalari tercih et
+    if (buyer_profil.get("certificates") or "").strip():
+        cert_sinyal = (2.0 if hedef_row.get("web_sitesi") else 0.0) \
+            + (1.0 if hedef_row.get("primary_email") else 0.0)
+        bonus += min(cert_sinyal, 2.0)
+        if cert_sinyal > 0:
+            nedenler.append("sertifika-kapasite")
+    # 3) amac uyumu (0-1)
+    goal = (buyer_profil.get("goal") or "").strip()
+    if goal and goal != "tumu":
+        bonus += 1.0
+        nedenler.append("amac-uyum")
+    return bonus, nedenler
+
+
+def buyer_scale_uygun(buyer_profil: dict, hedef_row: dict) -> bool:
+    """Buyer'in calisan sayisina gore hedef firmanin kapasite sinyali yeterli mi?
+    companies tablosunda calisan sayisi yok; vekil: kalite skoru + kanit gucu.
+    Buyer buyudukce daha yuksek kalite/kanit esigi bekler."""
+    buyer_scale = _EMPLOYEE_SCALE.get(buyer_profil.get("employee_range") or "", 0)
+    if buyer_scale <= 0:
+        return False
+    try:
+        kalite = float(hedef_row.get("data_quality_score") or 0)
+    except (TypeError, ValueError):
+        kalite = 0.0
+    kanit = (1 if hedef_row.get("web_sitesi") else 0) \
+        + (1 if hedef_row.get("primary_email") else 0) \
+        + (1 if hedef_row.get("primary_phone") else 0)
+    # olcek arttikca beklenti artar: kucuk buyer kalite>40 yeter, buyuk 70+
+    esik = 30.0 + buyer_scale * 8.0
+    return kalite >= esik or (kalite >= 40 and kanit >= 2)
 
 
 @app.get("/api/match")
@@ -902,6 +966,7 @@ def api_match(
 
     buyer_nace, buyer_osb, buyer_adi = nace, osb_id, None
     engine = get_engine()
+    buyer_profil = None
     if buyer_id:
         try:
             uuid.UUID(buyer_id)
@@ -916,6 +981,15 @@ def api_match(
         buyer_nace = r["nace_code"] or buyer_nace
         buyer_osb = r["osb_id"] or buyer_osb
         buyer_adi = r["legal_name"]
+
+    # X03 MATCH v3: girisli kullanicinin profili skorlamaya katilir
+    if user is not None:
+        with engine.connect() as conn:
+            up = conn.execute(text(
+                "SELECT employee_range, certificates, goal, target_nace FROM users "
+                "WHERE user_id = :u"), {"u": str(user["user_id"])}).mappings().first()
+        if up:
+            buyer_profil = dict(up)
 
     buyer_grup = _nace_grup(buyer_nace)
     if not buyer_grup:
@@ -938,7 +1012,7 @@ def api_match(
         d = dict(r)
         if buyer_id and d.get("company_id") == buyer_id:
             continue  # kendisi
-        m = _match_puan(d, buyer_grup, buyer_osb or "", mode, yon)
+        m = _match_puan(d, buyer_grup, buyer_osb or "", mode, yon, buyer_profil)
         if not m or m["puan"] < min_puan:
             continue
         d["match"] = m
@@ -958,6 +1032,7 @@ def api_match(
         },
         "mode": mode,
         "yon": yon,
+        "profil_uygulandi": bool(buyer_profil),
         "toplam": len(skorlu),
         "limit": limit,
         "offset": offset,
