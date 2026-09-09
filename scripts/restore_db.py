@@ -51,6 +51,42 @@ def _sql_type(type_str: str, is_sqlite: bool) -> str:
     return "TEXT"
 
 
+def _json_fix(val: str | None) -> object:
+    """CSV'den gelen JSON/JSONB kolon degerini PostgreSQL'e uygun hale getirir.
+
+    SQLite doneminde TEXT olarak yazilan Python-repr ('{'a': 1}') degerler
+    PostgreSQL JSON parser'ini cokertir; dict/list formatina cevrilemeyen
+    degerler NULL olur.
+    """
+    if val is None:
+        return None
+    s = val.strip()
+    if not (s.startswith("{") or s.startswith("[")):
+        return None
+    try:
+        return json.loads(s)
+    except Exception:
+        try:
+            return json.loads(s.replace("'", '"'))
+        except Exception:
+            return None
+
+
+try:  # psycopg3 varsa dict/list'i dogrudan JSONB'ye adap eder
+    from psycopg.types.json import Json as _PgJson
+except Exception:
+    _PgJson = None
+
+
+def _json_param(val: object) -> object:
+    """JSON kolonuna gidecek degeri dbapi-uyumlu hale getirir."""
+    if isinstance(val, (dict, list)):
+        if _PgJson is not None:
+            return _PgJson(val)
+        return json.dumps(val, ensure_ascii=False)
+    return val
+
+
 def restore(zip_path: Path, drop: bool = False, dry_run: bool = False) -> None:
     engine = get_engine()
     is_sqlite = engine.dialect.name == "sqlite"
@@ -97,6 +133,7 @@ def restore(zip_path: Path, drop: bool = False, dry_run: bool = False) -> None:
             for t in manifest["tables"]:
                 tname = t["name"]
                 col_names = [c["name"] for c in t["columns"]]
+                col_types = {c["name"]: (c.get("type") or "").upper() for c in t["columns"]}
                 reader = csv.DictReader(io.StringIO(zf.read(f"data/{tname}.csv").decode("utf-8")))
                 n = 0
                 batch = []
@@ -104,7 +141,12 @@ def restore(zip_path: Path, drop: bool = False, dry_run: bool = False) -> None:
                 placeholders = ", ".join(f":c{i}" for i in range(len(col_names)))
                 insert_sql = text(f'INSERT INTO "{tname}" ({quoted_cols}) VALUES ({placeholders})')
                 for row in reader:
-                    params = {f"c{i}": (row.get(c) or None) for i, c in enumerate(col_names)}
+                    params = {}
+                    for i, c in enumerate(col_names):
+                        raw = row.get(c) or None
+                        if "JSON" in col_types.get(c, ""):
+                            raw = _json_param(_json_fix(raw))
+                        params[f"c{i}"] = raw
                     batch.append(params)
                     n += 1
                     if len(batch) >= 500:

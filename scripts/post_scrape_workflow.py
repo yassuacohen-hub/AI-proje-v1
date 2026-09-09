@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Post-scrape workflow: ingest detail data, extract VKN from footers, recalculate quality.
 
@@ -18,6 +18,10 @@ STEPS: list[tuple[str, str]] = [
     ("Adim 2: Web footer'dan VKN cikar", "footer_vkn_extractor.py"),
     ("Adim 3: Kalite skorlarini yeniden hesapla", "recalculate_quality_scores.py"),
     ("Adim 4: KPI raporu uret", "generate_kpi_report.py"),
+    # Job Intelligence adımları (mevcut pipeline SONUNDA calisir):
+    ("Adim 5: Is ilanlarini DB'ye yaz", "ingest_job_postings.py"),
+    ("Adim 6: Is ilani sinyallerini analiz et", "analyze_job_signals.py"),
+    ("Adim 7: Istihbarat skorlarini hesapla", "recalc_intelligence_scores.py"),
 ]
 
 
