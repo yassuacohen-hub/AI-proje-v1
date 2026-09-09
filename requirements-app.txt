@@ -12,5 +12,5 @@ rapidfuzz>=3.0.0
 
 # Legacy: eski Streamlit arayuzu + Telegram botu (compose profili: legacy)
 streamlit>=1.30.0
-python-telegram-bot>=20.0
+python-telegram-bot>=22.8
 
