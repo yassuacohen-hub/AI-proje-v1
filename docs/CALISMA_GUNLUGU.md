@@ -10,8 +10,9 @@
 
 **Git:**
 - Repo init + ilk commit: **631 dosya** (`95c2f11`) + JSONB fix commit'i (`2603f16`)
+- **Remote bağlandı ve push edildi:** `github.com/yassuacohen-hub/AI-proje-v1` (private) — GitHub Desktop'ın credential'ı Git Credential Manager üzerinden kullanıldı, ayrıca token gerekmedi
+- **Otomatik push kuruldu:** `scripts/git_auto_push.bat` + **"Huginn Git Push"** scheduler görevi (her gün **04:00** — DB backup 03:00'ten sonra): değişiklik varsa commit → pull --rebase → push; yoksa sessiz geçer. Log: `logs/git_push.log`
 - `.gitignore` doğrulandı: `.env`, `backups/`, `AI proje v1/`, `*.db` dışarıda (gizli veri repo'ya girmiyor)
-- Remote henüz yok — GitHub repo + PAT bekleniyor (gh CLI kurulu değil)
 
 **Kullanım:** yerel ortamda çalışmak için `.env.local` dosyasına `DATABASE_URL=postgresql+psycopg://huginn:huginn_local_dev@localhost:5433/huginn` yazmak yeterli. Supabase (üretim) etkilenmedi.
 
