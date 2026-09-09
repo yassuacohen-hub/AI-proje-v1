@@ -105,6 +105,9 @@ function openTasks() {
           <div class="chart-card-header"><div class="chart-card-title"><i class="fas fa-user-check"></i> Üye Onay Paneli</div>
             <div class="chart-card-actions"><button class="chart-btn" onclick="loadTasks()"><i class="fas fa-sync-alt"></i> Yenile</button></div></div>
           <div id="admin-pending-body" style="padding:0 16px 16px"></div>
+          <div class="chart-card-header"><div class="chart-card-title"><i class="fas fa-boxes"></i> Ürün Kategorileri <span style="font-size:10.5px;color:var(--text-dim);margin-left:6px">Y25 — katalog yönetimi</span></div>
+            <div class="chart-card-actions"><button class="chart-btn" onclick="loadAdminCategories()"><i class="fas fa-sync-alt"></i> Yenile</button></div></div>
+          <div id="admin-categories-body" style="padding:0 16px 16px"></div>
         </div>
         <div class="chart-card" style="padding:4px 0 12px">
           <div id="tasks-summary" class="match-agg" style="margin:10px 16px"></div>
@@ -141,7 +144,7 @@ async function loadTasks() {
   _isTaskAdmin(async (isAdmin) => {
     const adminPanel = document.getElementById('tasks-admin-panel');
     adminPanel.style.display = isAdmin ? 'block' : 'none';
-    if (isAdmin) loadAdminPending();
+    if (isAdmin) { loadAdminPending(); loadAdminCategories(); }
     try {
       const r = await fetch(apiUrl('/api/tasks'));
       if (!r.ok) throw new Error(`API ${r.status}`);
@@ -1207,6 +1210,112 @@ async function adminLoadCredit(email) {
     body: JSON.stringify({ user_id: uid, amount }),
   });
   if (r.ok) { toast(`${amount} kredi yüklendi`); loadAdminPending(); } else toast('Yükleme başarısız');
+}
+
+// ── Y25: Urun kategorileri yonetimi (admin) ─────────────────────────────────
+
+async function loadAdminCategories() {
+  const el = document.getElementById('admin-categories-body');
+  if (!el) return;
+  const tok = getMemberToken();
+  try {
+    const r = await fetch(apiUrl('/api/admin/categories'), {
+      headers: { 'Authorization': 'Bearer ' + tok },
+    });
+    if (!r.ok) throw new Error(`API ${r.status}`);
+    const d = await r.json();
+    const items = d.items || [];
+    window._adminCats = {};
+    items.forEach(c => { window._adminCats[c.category_id] = c; });
+    const aktifSay = items.filter(c => c.active).length;
+    const formHtml = `
+      <div id="cat-new-form" style="display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:10px 0">
+        <input id="cat-new-code" class="filter-select" style="width:110px" placeholder="KOD (örn: MAK)">
+        <input id="cat-new-label" class="filter-select" style="flex:1;min-width:160px" placeholder="Kategori adı (örn. Makine İmalatı)">
+        <input id="cat-new-nace" class="filter-select" style="width:70px" placeholder="NACE" title="Bağlı NACE ana grubu (örn. 29)">
+        <button class="d-btn primary" style="min-width:auto" onclick="adminSaveCategory()"><i class="fas fa-plus"></i> Ekle</button>
+      </div>`;
+    const listeHtml = items.length
+      ? `<div class="match-result-head"><span class="mr-col-name">Kategori</span>
+        <span class="mr-col-nace">NACE</span><span class="mr-col-score">Durum</span><span class="mr-col-rel">İşlem</span></div>` +
+      items.map(c => `
+      <div class="match-result-row" id="cat-row-${c.category_id}" style="cursor:default;align-items:center">
+        <div class="mr-name">
+          <div class="mr-name-main"><span class="nace-tag">${esc(c.code)}</span> ${esc(c.label_tr)}</div>
+          ${c.description ? `<div class="mr-name-sub">${esc(String(c.description).substring(0, 70))}</div>` : ''}
+        </div>
+        <div class="mr-nace">${esc(c.nace_group || '-')}</div>
+        <div class="mr-score"><span class="match-badge" style="background:${c.active ? 'rgba(34,197,94,.12);color:#4ade80;border:1px solid rgba(34,197,94,.4)' : 'rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.4)'}">${c.active ? 'Aktif' : 'Pasif'}</span></div>
+        <div class="mr-rel" style="display:flex;gap:6px">
+          <button class="d-btn" style="min-width:auto;padding:5px 9px" onclick="adminEditCategory('${c.category_id}')" title="Düzenle"><i class="fas fa-pen"></i></button>
+          <button class="d-btn" style="min-width:auto;padding:5px 9px;${c.active ? 'border-color:rgba(239,68,68,.4);color:#f87171' : 'border-color:rgba(34,197,94,.4);color:#4ade80'}" onclick="adminToggleCategory('${c.category_id}')" title="${c.active ? 'Pasifleştir' : 'Aktifleştir'}"><i class="fas ${c.active ? 'fa-eye-slash' : 'fa-eye'}"></i></button>
+        </div>
+      </div>`).join('') + `
+      <div class="match-empty" style="margin-top:8px">${aktifSay} aktif / ${items.length} toplam kategori — pasif kategoriler kayıt formunda görünmez.</div>`
+      : `<div class="match-empty">Kategori yok — yukarıdaki formla ilk kategoriyi ekleyin.</div>`;
+    el.innerHTML = formHtml + listeHtml;
+  } catch (e) {
+    el.innerHTML = `<div class="match-empty"><i class="fas fa-exclamation-circle"></i> Kategoriler yüklenemedi: ${esc(e.message)}</div>`;
+  }
+}
+
+async function adminSaveCategory(categoryId) {
+  const tok = getMemberToken();
+  let body;
+  if (categoryId) {
+    const g = id => ((document.getElementById(id) || {}).value || '');
+    body = {
+      category_id: categoryId,
+      code: g('cat-edit-code-' + categoryId),
+      label_tr: g('cat-edit-label-' + categoryId),
+      nace_group: g('cat-edit-nace-' + categoryId),
+      active: true,
+    };
+  } else {
+    body = {
+      code: ((document.getElementById('cat-new-code') || {}).value || ''),
+      label_tr: ((document.getElementById('cat-new-label') || {}).value || ''),
+      nace_group: ((document.getElementById('cat-new-nace') || {}).value || ''),
+      active: true,
+    };
+    if (!body.code.trim() || !body.label_tr.trim()) { toast('Kod ve kategori adı zorunlu.'); return; }
+  }
+  const r = await fetch(apiUrl('/api/admin/categories'), {
+    method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + tok },
+    body: JSON.stringify(body),
+  });
+  const d = await r.json().catch(() => ({}));
+  if (r.ok) {
+    toast(categoryId ? 'Kategori güncellendi' : 'Kategori eklendi');
+    loadAdminCategories();
+  } else toast(d.detail || 'Kayıt başarısız');
+}
+
+function adminEditCategory(categoryId) {
+  const c = (window._adminCats || {})[categoryId];
+  const row = document.getElementById('cat-row-' + categoryId);
+  if (!c || !row) return;
+  row.innerHTML = `
+    <div style="grid-column:1/-1;display:flex;gap:6px;flex-wrap:wrap;align-items:center;padding:6px 0">
+      <input id="cat-edit-code-${categoryId}" value="${esc(c.code)}" class="filter-select" style="width:110px" title="Kod">
+      <input id="cat-edit-label-${categoryId}" value="${esc(c.label_tr)}" class="filter-select" style="flex:1;min-width:160px" title="Kategori adı">
+      <input id="cat-edit-nace-${categoryId}" value="${esc(c.nace_group || '')}" class="filter-select" style="width:70px" title="NACE ana grubu">
+      <button class="d-btn primary" style="min-width:auto" onclick="adminSaveCategory('${categoryId}')"><i class="fas fa-check"></i> Kaydet</button>
+      <button class="d-btn" style="min-width:auto" onclick="loadAdminCategories()"><i class="fas fa-times"></i></button>
+    </div>`;
+}
+
+async function adminToggleCategory(categoryId) {
+  const c = (window._adminCats || {})[categoryId];
+  if (!c) return;
+  const tok = getMemberToken();
+  const r = await fetch(apiUrl('/api/admin/categories'), {
+    method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + tok },
+    body: JSON.stringify({ category_id: categoryId, code: c.code, label_tr: c.label_tr,
+      nace_group: c.nace_group || '', description: c.description || '', active: !c.active }),
+  });
+  if (r.ok) { toast(c.active ? 'Kategori pasifleştirildi' : 'Kategori aktifleştirildi'); loadAdminCategories(); }
+  else { const d = await r.json().catch(() => ({})); toast(d.detail || 'İşlem başarısız'); }
 }
 
 // ── Y22: Isletmem sayfasi (bagimsiz tam ekran overlay: profil + kredi + paket) ──

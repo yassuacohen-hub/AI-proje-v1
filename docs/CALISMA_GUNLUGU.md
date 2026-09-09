@@ -1,4 +1,14 @@
 
+## 2026-09-09 — İzleme listesi bug fix + Y25 product_categories admin paneli ✅
+
+**Bug fix (izleme listesi):** `toggleWatchDetail` `toggleWatch(c.company_id)` çağırıyordu — `company_id` boş firmalarda ekleme hiç yapılmıyor, toast "çıkarıldı" diyordu. `watchKeyOf()` tek anahtar mantığına geçirildi (tüm izleme işlemleri). Canlı CDP regresyon testi eklendi (`check_dashboard_layout.mjs`): localStorage temizle → toggle → toast/buton/set doğrula → geri al. js v19→v20.
+
+**Y25 — product_categories yönetim arayüzü (admin):**
+- Backend: `GET /api/admin/categories` (aktif+pasif tam liste) + `POST /api/admin/categories` (create/update; code unique 409, nace_group 2 hane validasyonu, category_id UUID doğrulama) — ikisi de `require_admin`
+- Frontend: Görev Tahtası admin paneline "Ürün Kategorileri" kartı — ekleme formu (kod/ad/NACE), satır bazlı inline düzenleme, aktif/pasif toggle (göz ikonu), durum badge'leri, özet satırı ("X aktif / Y toplam")
+- Doğrulama: py_compile + node --check OK; 8010 ve Docker (8000, imaj rebuild) yeniden başlatıldı; canlı API testi: GET 14 kategori, POST create/toggle/update 200 OK, test kaydı DB'den silindi
+- Not: `company_capabilities` bağlama (kategori ↔ firma) ayrı görev olarak plana alınmalı
+
 ## 2026-09-09 — Görev Tahtası admin-only bağımsız sayfa + admin onay paneli ✅
 
 **Kullanıcı istekleri:**

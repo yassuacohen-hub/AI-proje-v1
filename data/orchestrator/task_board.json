@@ -1000,9 +1000,9 @@
     "baslik": "Company Career Pages Scraper",
     "sahip": "web_kazima",
     "oncelik": "P0",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-09T12:50:18",
-    "bitis": null,
+    "bitis": "2026-09-09T21:00:24",
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/sources/company_career.py"
     ],
@@ -1039,9 +1039,9 @@
     "baslik": "Job Postings Ingest Script",
     "sahip": "gelistirici",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-09T12:50:18",
-    "bitis": null,
+    "bitis": "2026-09-09T21:00:24",
     "dosyalar": [
       "scripts/ingest_job_postings.py"
     ],
@@ -1052,9 +1052,9 @@
     "baslik": "Job Signals Analyzer",
     "sahip": "arastirmaci",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-09T12:50:18",
-    "bitis": null,
+    "bitis": "2026-09-09T21:00:24",
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/pipeline/analyzer.py"
     ],
@@ -1065,9 +1065,9 @@
     "baslik": "Intelligence Scorer",
     "sahip": "arastirmaci",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-09T12:50:18",
-    "bitis": null,
+    "bitis": "2026-09-09T21:00:24",
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/pipeline/scorer.py"
     ],
@@ -1187,8 +1187,9 @@
     "id": "Y25",
     "baslik": "product_categories yonetim arayuzu (admin panel)",
     "sahip": "frontend",
-    "durum": "plan",
-    "not": "14 kategori seed edildi (0012 migrasyon). Admin panelde ekle/duzenle/deactivate + kategorileri firmalara baglama (company_capabilities doldurma firsati)."
+    "durum": "done",
+    "not": "TAMAMLANDI 2026-09-09: GET/POST /api/admin/categories (require_admin) + admin panelde 'Urun Kategorileri' karti (ekle/duzenle/aktif-pasif toggle, code unique + nace_group validasyonu, 409 dup kontrolu). Canli test: 14 kategori listelendi, ekle/toggle/update 200 OK. company_capabilities baglama ayri gorev olarak kaldı (Y27 acilabilir).",
+    "bitis": "2026-09-09"
   },
   {
     "id": "Y26",

@@ -1229,6 +1229,67 @@ def api_admin_credit(req: dict, _auth: str = Depends(require_admin)):
                      {"u": user_id, "d": amount, "b": yeni})
     return {"ok": True, "credit_balance": yeni}
 
+
+@app.get("/api/admin/categories")
+def api_admin_categories(_auth: str = Depends(require_admin)):
+    """Y25: Urun katalogu yonetimi - tum kategoriler (aktif + pasif)."""
+    engine = get_engine()
+    with engine.connect() as conn:
+        rows = conn.execute(text(
+            "SELECT category_id, code, label_tr, nace_group, description, active, created_at "
+            "FROM product_categories ORDER BY nace_group, code")).mappings().all()
+    return {"items": [dict(r) for r in rows]}
+
+
+@app.post("/api/admin/categories")
+def api_admin_categories_save(req: dict, _auth: str = Depends(require_admin)):
+    """Kategori ekle/guncelle. category_id varsa guncelle, yoksa yeni olustur.
+    active=false ile pasiflesirme (kayit silinmez, kayit formunda kaybolur)."""
+    code = (req.get("code") or "").strip().upper()
+    label_tr = (req.get("label_tr") or "").strip()
+    nace_group = (req.get("nace_group") or "").strip() or None
+    description = (req.get("description") or "").strip() or None
+    active = bool(req.get("active", True))
+    category_id = req.get("category_id") or None
+    if not code or not label_tr:
+        raise HTTPException(status_code=400, detail="code ve label_tr zorunlu")
+    if len(code) > 20:
+        raise HTTPException(status_code=400, detail="code en fazla 20 karakter")
+    if nace_group and not nace_group.isdigit():
+        raise HTTPException(status_code=400, detail="nace_group 2 haneli sayi olmali (orn. 29)")
+    engine = get_engine()
+    with engine.begin() as conn:
+        if category_id:
+            try:
+                uuid.UUID(str(category_id))
+            except (ValueError, AttributeError, TypeError):
+                raise HTTPException(status_code=400, detail="category_id UUID olmali")
+            row = conn.execute(text(
+                "SELECT code FROM product_categories WHERE category_id = :c"),
+                {"c": category_id}).mappings().first()
+            if not row:
+                raise HTTPException(status_code=404, detail="kategori bulunamadi")
+            if row["code"] != code:
+                dup = conn.execute(text(
+                    "SELECT 1 FROM product_categories WHERE code = :k"), {"k": code}).first()
+                if dup:
+                    raise HTTPException(status_code=409, detail="Bu code zaten kayitli")
+            conn.execute(text(
+                "UPDATE product_categories SET code=:k, label_tr=:l, nace_group=:n, "
+                "description=:d, active=:a WHERE category_id=:c"),
+                {"k": code, "l": label_tr, "n": nace_group, "d": description, "a": active,
+                 "c": category_id})
+            return {"ok": True, "updated": True}
+        dup = conn.execute(text(
+            "SELECT 1 FROM product_categories WHERE code = :k"), {"k": code}).first()
+        if dup:
+            raise HTTPException(status_code=409, detail="Bu code zaten kayitli")
+        conn.execute(text(
+            "INSERT INTO product_categories (code, label_tr, nace_group, description, active) "
+            "VALUES (:k, :l, :n, :d, :a)"),
+            {"k": code, "l": label_tr, "n": nace_group, "d": description, "a": active})
+    return {"ok": True, "created": True}
+
 @app.get("/api/dashboard", response_class=HTMLResponse)
 def serve_dashboard(_auth: str = Depends(require_api_key)) -> HTMLResponse:
     index = WEB_DIR / "index.html"
