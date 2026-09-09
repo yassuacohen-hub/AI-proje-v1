@@ -251,19 +251,17 @@ th.sortable:hover{color:var(--accent)}
 .tip{position:relative}
 .tip:hover::after{
   content:attr(data-tip);
-  position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
-  background:#1e2433;color:#e5e9f2;font-size:11.5px;line-height:1.45;
-  padding:8px 11px;border-radius:7px;border:1px solid #2e3548;
-  width:max-content;max-width:260px;white-space:normal;
-  box-shadow:0 6px 20px rgba(0,0,0,.4);z-index:9999;
+  position:absolute;top:calc(100% + 6px);left:0;
+  background:#151b29;color:#dfe5f0;font-size:10.5px;line-height:1.4;
+  padding:6px 9px;border-radius:6px;border:1px solid #2e3548;
+  width:max-content;max-width:210px;white-space:normal;
+  box-shadow:0 6px 18px rgba(0,0,0,.5);z-index:99999;
   pointer-events:none;text-align:left;
 }
 .tip:hover::before{
-  content:"";position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);
-  border:6px solid transparent;border-top-color:#2e3548;z-index:10000;pointer-events:none;
+  content:"";position:absolute;top:calc(100% - 1px);left:16px;
+  border:5px solid transparent;border-bottom-color:#2e3548;z-index:99999;pointer-events:none;
 }
-/* Sag kenarda cikma yapmasin: sadece match icindeki ilk elemanlarda sola hizala */
-.tip.tip-left:hover::after{left:auto;right:0;transform:none}
 
 /* ── Detay paneli aksiyon butonlari ───────────────────────────────────── */
 .detail-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}

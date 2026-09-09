@@ -6,10 +6,10 @@
   <meta http-equiv="Pragma" content="no-cache">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#07111f">
-  <title>Huginn — Ticari İstihbarat Platformu</title>
+  <title>Huginn — Data Insights</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="/static/css/style.css?v=17">
+  <link rel="stylesheet" href="/static/css/style.css?v=18">
 </head>
 <body>
   <a class="skip-link" href="#main-content">İçeriğe geç</a>
@@ -22,7 +22,7 @@
         <div class="logo" aria-hidden="true"><i class="fas fa-eye"></i></div>
         <div class="brand-copy">
           <h1>Huginn</h1>
-          <span>Ticari İstihbarat Platformu</span>
+          <span>Data Insights</span>
         </div>
       </div>
 
@@ -84,13 +84,12 @@
       <div class="content-scroll">
         <section class="page-heading" aria-labelledby="page-title">
           <div>
-            <p class="eyebrow"><i class="fas fa-chart-line" aria-hidden="true"></i> ANKARA B2B INTELLIGENCE</p>
+            <p class="eyebrow"><i class="fas fa-chart-line" aria-hidden="true"></i> B2B INTELLIGENCE</p>
             <h2 id="page-title">Genel Bakış</h2>
             <p>Firma verilerinizi, kalite sinyallerini ve eşleştirme fırsatlarını tek bir çalışma alanında görün.</p>
           </div>
           <div class="heading-actions">
             <span class="status-chip"><span class="live-dot" aria-hidden="true"></span> Veri akışı aktif</span>
-            <button class="btn-refresh btn-ghost" type="button" onclick="loadAll()"><i class="fas fa-sync-alt" aria-hidden="true"></i> Verileri Yenile</button>
           </div>
         </section>
 
@@ -158,12 +157,6 @@
             <div id="match-status" class="match-status hidden" aria-live="polite"></div>
             <div id="match-agg" class="match-agg hidden"></div>
             <div id="match-results" class="match-results" aria-live="polite"></div>
-            <div class="membership-cta">
-              <div class="agg-chip cta-chip tip tip-left" data-tip="Profiliniz, kredileriniz ve paketiniz İşletmem sayfasında — üst menüden veya buradan gidin." role="button" tabindex="0" onclick="scrollToSection('isletmem-section')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();scrollToSection('isletmem-section')}">
-                <b><i class="fas fa-briefcase" aria-hidden="true"></i> Firmanızı Tanıtın — İşletmem sayfası</b>
-                <span>Profil bilgilerinizi girin/güncelleyin, kredilerinizi görün, kredi yükleyin. Ne kadar çok bilgi, o kadar isabetli eşleşme.</span>
-              </div>
-            </div>
           </section>
 
           <section class="chart-card" aria-labelledby="nace-title">
