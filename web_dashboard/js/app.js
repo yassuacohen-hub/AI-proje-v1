@@ -25,7 +25,8 @@ let watchSet = new Set();
 try { watchSet = new Set(JSON.parse(localStorage.getItem('huginn_watchlist') || '[]')); } catch(e){ watchSet = new Set(); }
 
 function saveWatchStorage() { localStorage.setItem('huginn_watchlist', JSON.stringify(Array.from(watchSet))); }
-function isWatched(c) { return watchSet.has(c.company_id || c.legal_name || ''); }
+function watchKeyOf(c) { return c.company_id || c.legal_name || ''; }
+function isWatched(c) { return watchSet.has(watchKeyOf(c)); }
 function toggleWatch(id, el) {
   id = id || '';
   if (!id) return;
@@ -653,7 +654,7 @@ function showDetail(c) {
   const legalName = (c.legal_name||'-').toUpperCase();
   const tradeName = (c.trade_name||'').toUpperCase();
   window._detailCompany = c; // butonlar icin aktif firma saklanir
-  const inWatch = watchSet.has(c.company_id);
+  const inWatch = watchSet.has(watchKeyOf(c));
   document.getElementById('detail-empty').style.display='none';
   document.getElementById('detail-content').style.display='block';
   document.getElementById('detail-content').innerHTML = `
@@ -953,7 +954,7 @@ function toggleWatchDetail() {
   if (!c) return;
   toggleWatch(c.company_id);
   showDetail(c); // buton etiketini yenile
-  toast(watchSet.has(c.company_id) ? 'İzleme listesine eklendi' : 'İzleme listesinden çıkarıldı');
+  toast(isWatched(c) ? 'İzleme listesine eklendi' : 'İzleme listesinden çıkarıldı');
 }
 
 // Ctrl+K: arama kutusuna odak (global arama kisayolu)
