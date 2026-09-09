@@ -9,10 +9,8 @@ if not exist "%GIT%" set GIT=git
 echo [%DATE% %TIME%] otomatik push basli >> %LOG%
 
 REM Degisiklik var mi?
-"%GIT%" status --porcelain > nul 2>&1
-if errorlevel 1 goto :err
-for /f %%i in ('"%GIT%" status --porcelain ^| find /c /v ""') do set N=%%i
-if "%N%"=="0" (
+"%GIT%" status --porcelain 2>&1 | findstr /r "." >nul
+if errorlevel 1 (
     echo [%DATE% %TIME%] degisiklik yok >> %LOG%
     goto :push
 )
