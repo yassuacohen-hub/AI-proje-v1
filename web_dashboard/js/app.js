@@ -354,18 +354,17 @@ async function loadQualityTrend() {
 }
 
 async function loadNACE() {
-  const r = await fetch(apiUrl('/api/nace-distribution?limit=15'));
+  const r = await fetch(apiUrl('/api/nace-distribution?limit=8'));
   const d = await r.json();
   const maxCnt = Math.max(...d.map(x=>x.cnt),1);
   document.getElementById('nace-list').innerHTML = d.map(x=>{
-    const sector = getNaceSector(x.nace_code);
     const label = getNaceLabel(x.nace_code);
     return `<div class="nace-item" onclick="filterByNACE('${x.nace_code}')" style="cursor:pointer" title="${label}">
       <span class="nace-code">${esc(x.nace_code)}</span>
       <span class="nace-label">${esc(label)}</span>
       <span class="nace-count">${fmt(x.cnt)}</span>
-    </div>
-    <div class="nace-bar"><div class="nace-bar-fill" style="width:${(x.cnt/maxCnt)*100}%"></div></div>`;
+      <div class="nace-bar"><div class="nace-bar-fill" style="width:${(x.cnt/maxCnt)*100}%"></div></div>
+    </div>`;
   }).join('');
   // NACE dropdown'ini doldur
   const naceFilter = document.getElementById('nace-filter');
