@@ -1039,6 +1039,8 @@ function buildMembershipModal() {
       <div class="quick-filter-item"><label>Kurumsal E-posta *</label>
         <input id="memb-email" class="filter-select" style="width:100%" placeholder="ad@sirketiniz.com.tr">
         <small style="color:var(--text-dim);font-size:10.5px">Gmail/Hotmail kabul edilmez — sirket e-postasi gereklidir.</small></div>
+      <div class="quick-filter-item"><label>Şifre * <span class="tip tip-right" data-tip="En az 8 karakter. PBKDF2-SHA256 ile şifrelenerek saklanır — ham şifre hiçbir yerde tutulmaz." style="cursor:help"><i class="fas fa-info-circle" style="font-size:10px;color:var(--text-dim)"></i></span></label>
+        <input id="memb-password" type="password" class="filter-select" style="width:100%" placeholder="En az 8 karakter"></div>
       <div class="quick-filter-item"><label>Firma Adı *</label>
         <input id="memb-company" class="filter-select" style="width:100%" placeholder="Şirket unvanınız"></div>
       <div class="quick-filter-item"><label>NACE Kodunuz (örn. 29.32)</label>
@@ -1064,8 +1066,9 @@ function buildMembershipModal() {
       </div>
       <hr style="border-color:var(--border);margin:16px 0 10px">
       <div style="font-size:12px"><b>Üye girişi:</b></div>
-      <div style="display:flex;gap:8px;margin-top:6px">
-        <input id="memb-login-email" class="filter-select" style="flex:1" placeholder="Kayıtlı kurumsal e-postanız">
+      <div style="display:flex;gap:8px;margin-top:6px;flex-wrap:wrap">
+        <input id="memb-login-email" class="filter-select" style="flex:2;min-width:150px" placeholder="Kayıtlı kurumsal e-postanız">
+        <input id="memb-login-password" type="password" class="filter-select" style="flex:1;min-width:120px" placeholder="Şifreniz">
         <button class="d-btn" style="flex:0" onclick="memberLogin()">Giriş</button>
       </div>
     </div>`;
@@ -1074,8 +1077,16 @@ function buildMembershipModal() {
 }
 
 function submitMembership() {
+  const password = (document.getElementById('memb-password') || {}).value || '';
+  if (password.length < 8) {
+    const msg = document.getElementById('memb-msg');
+    msg.className = 'match-status err';
+    msg.innerHTML = '<i class="fas fa-exclamation-circle"></i> Şifre en az 8 karakter olmalı.';
+    return;
+  }
   const body = {
     email: document.getElementById('memb-email').value.trim(),
+    password,
     company_name: document.getElementById('memb-company').value.trim(),
     nace_code: document.getElementById('memb-nace').value.trim(),
     products_desc: document.getElementById('memb-products').value.trim(),
@@ -1105,9 +1116,10 @@ function submitMembership() {
 
 function memberLogin() {
   const email = document.getElementById('memb-login-email').value.trim();
+  const password = (document.getElementById('memb-login-password') || {}).value || '';
   fetch(apiUrl('/api/buyer/login'), {
     method: 'POST', headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ email }),
+    body: JSON.stringify({ email, password }),
   }).then(async r => {
     const d = await r.json().catch(() => ({}));
     if (r.ok) {
@@ -1348,7 +1360,11 @@ function openIsletmem() {
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">
           <h2 style="margin:0;font-size:20px"><i class="fas fa-briefcase" style="color:var(--accent)"></i> İşletmem
             <span style="font-size:12px;color:var(--text-dim);margin-left:8px">profil · kredi · paket yönetimi</span></h2>
-          <button onclick="closeIsletmem()" style="background:var(--panel-bg);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:13px">✕ Kapat</button>
+          <div style="display:flex;gap:8px;align-items:center">
+            <span id="isletmem-session" style="font-size:11.5px;color:var(--text-dim)"></span>
+            <button id="isletmem-logout" class="d-btn" style="min-width:auto;display:none;padding:6px 12px" onclick="memberLogout()" title="Oturumu kapatır — token tarayıcınızdan silinir"><i class="fas fa-sign-out-alt"></i> Çıkış</button>
+            <button onclick="closeIsletmem()" style="background:var(--panel-bg);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:8px 14px;cursor:pointer;font-size:13px">✕ Kapat</button>
+          </div>
         </div>
         <div class="chart-card" style="padding:4px 0 12px">
           <p class="sources-hint" style="padding:8px 16px 0"><i class="fas fa-info-circle"></i> Profiliniz ne kadar doluysa eşleştirme o kadar isabetli olur. Krediniz her "Eşleştir" ve kontak görüntülemesinde azalır.</p>
@@ -1400,8 +1416,7 @@ function loadIsletmem() {
 
 function renderIsletmem(d) {
   const el = document.getElementById('isletmem-body');
-  const p = d.profil || {};
-  const tam = p.profil_tamlama || 0;
+  const p = d.profil || {};  const tam = p.profil_tamlama || 0;
   const tamRenk = tam >= 80 ? 'var(--green)' : tam >= 50 ? '#fbbf24' : 'var(--red)';
   const onayli = p.status === 'onayli';
   const krediTxt = p.credit_balance < 0 ? 'Sınırsız' : `${p.credit_balance} kredi`;
@@ -1416,45 +1431,13 @@ function renderIsletmem(d) {
       ${onayli ? `<div class="agg-chip"><button class="d-btn tip tip-left" data-tip="Credit Pack: krediniz bittiğinde 750 TRY / 50 kredi ile devam edebilirsiniz. Talebiniz yönetici onayıyla yüklenir." style="min-width:auto;width:100%" onclick="requestCreditPack()"><i class="fas fa-shopping-cart"></i> Kredi Yükle</button></div>` : ''}
     </div>
     ${!onayli ? `<div class="match-status info" style="margin:0 0 12px"><i class="fas fa-hourglass-half"></i> Üyelik onayınız bekleniyor — profilinizi şimdiden doldurun, onayla birlikte eşleştirmeler kişiselleşir.</div>` : ''}
-    <div class="match-result-head"><span class="mr-col-name">Firma Profili</span><span class="mr-col-nace">Departman / Rol</span><span class="mr-col-score">Eşleştirme Amacı</span><span class="mr-col-rel">İletişim & Web</span></div>
-    <div class="match-result-row" style="cursor:default;align-items:start">
-      <div class="mr-name">
-        <div class="quick-filter-item" style="width:100%"><label>Firma Adı</label><input id="is-company" class="filter-select" style="width:100%" value="${esc(p.company_name || '')}"></div>
-        <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>NACE Kodu</label><input id="is-nace" class="filter-select" style="width:100%" value="${esc(p.nace_code || '')}" placeholder="29.32"></div>
-        <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Ne üretiyor / satıyorsunuz?</label><input id="is-products" class="filter-select" style="width:100%" value="${esc(p.products_desc || '')}" placeholder="fren sistemi yedek parçaları, pres döküm..."></div>
-        <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Hedef Sektörler (NACE ana grup, virgülle)</label><input id="is-target" class="filter-select" style="width:100%" value="${esc(p.target_nace || '')}" placeholder="45,46,28"></div>
-      </div>
-      <div class="mr-nace">
-        <div class="quick-filter-item" style="width:100%"><label>Departman / Rolünüz</label><input id="is-department" class="filter-select" style="width:100%" value="${esc(p.department || '')}" placeholder="Satış, Üretim, Satın Alma..."></div>
-        <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Çalışan Sayınız</label>
-          <select id="is-employee-range" class="filter-select" style="width:100%">
-            <option value=""${!p.employee_range ? ' selected' : ''}>Seçiniz…</option>
-            <option value="1-5"${p.employee_range === '1-5' ? ' selected' : ''}>1-5 kişi</option>
-            <option value="6-20"${p.employee_range === '6-20' ? ' selected' : ''}>6-20 kişi</option>
-            <option value="21-50"${p.employee_range === '21-50' ? ' selected' : ''}>21-50 kişi</option>
-            <option value="51-250"${p.employee_range === '51-250' ? ' selected' : ''}>51-250 kişi</option>
-            <option value="250+"${p.employee_range === '250+' ? ' selected' : ''}>250+ kişi</option>
-          </select>
-          <small style="color:var(--text-dim);font-size:10.5px;margin-top:4px;display:block">Firma büyüklüğü, eşleştirme önerilerini ölçek uyumuna göre sıralar.</small>
-        </div>
-        <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Sertifikalarınız (virgülle)</label><input id="is-certificates" class="filter-select" style="width:100%" value="${esc(p.certificates || '')}" placeholder="ISO 9001, ISO 14001, CE..."></div>
-        <small style="color:var(--text-dim);font-size:10.5px;margin-top:4px;display:block">Departman ve sertifikalar, eşleştirme isabetini artıran bilgi alanlarıdır.</small>
-      </div>
-      <div class="mr-score">
-        <div class="quick-filter-item" style="width:100%"><label>Eşleştirme Amacı</label>
-          <select id="is-goal" class="filter-select" style="width:100%">
-            <option value="tumu"${p.goal === 'tumu' ? ' selected' : ''}>Hepsi</option>
-            <option value="musteri"${p.goal === 'musteri' ? ' selected' : ''}>Müşteri bulmak</option>
-            <option value="tedarikci"${p.goal === 'tedarikci' ? ' selected' : ''}>Tedarikçi bulmak</option>
-            <option value="ortagi"${p.goal === 'ortagi' ? ' selected' : ''}>İş ortağı</option>
-          </select></div>
-        <small style="color:var(--text-dim);font-size:10.5px;display:block;margin-top:4px">Amaç, eşleştirme yönünü belirler (müşteri/tedarikçi).</small>
-      </div>
-      <div class="mr-rel">
-        <div class="quick-filter-item" style="width:100%"><label>Yetkili Adı</label><input id="is-contact" class="filter-select" style="width:100%" value="${esc(p.contact_name || '')}"></div>
-        <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Web Site</label><input id="is-web" class="filter-select" style="width:100%" value="${esc(p.website || '')}"></div>
-      </div>
+    <div class="is-tabs" role="tablist">
+      <button class="is-tab active" data-tab="profile" onclick="switchIsletmemTab('profile')"><i class="fas fa-building"></i> Firma Profili</button>
+      <button class="is-tab" data-tab="info" onclick="switchIsletmemTab('info')"><i class="fas fa-address-card"></i> Bilgiler</button>
+      <button class="is-tab" data-tab="match" onclick="switchIsletmemTab('match')"><i class="fas fa-bullseye"></i> Eşleştirme</button>
+      <button class="is-tab" data-tab="account" onclick="switchIsletmemTab('account')"><i class="fas fa-user-lock"></i> Hesap</button>
     </div>
+    <div id="is-tab-panes"></div>
     <div style="display:flex;gap:10px;margin:12px 0">
       <button class="d-btn primary" style="flex:2" onclick="saveIsletmemProfile()"><i class="fas fa-save"></i> Profili Kaydet</button>
       <button class="d-btn" style="flex:1" onclick="loadIsletmem()">Sıfırla</button>
@@ -1473,6 +1456,110 @@ function renderIsletmem(d) {
       <div class="detail-row"><span class="label">API Key</span><span class="value mono">${esc((p.api_key || '').substring(0, 12))}…</span>
       <button class="d-btn" style="min-width:auto;flex:0" onclick="copyField('${p.api_key}','API Key')"><i class="fas fa-copy"></i></button></div>
     </div>` : ''}`;
+  renderIsletmemTabs(p);
+  updateSessionHeader(p);
+}
+
+function updateSessionHeader(p) {
+  const sess = document.getElementById('isletmem-session');
+  const lo = document.getElementById('isletmem-logout');
+  if (!sess || !lo) return;
+  const tok = getMemberToken();
+  if (tok && p.email) {
+    sess.textContent = `${p.email}${p.status === 'onayli' ? ' · ' + (p.tier || '') : ''}`;
+    lo.style.display = '';
+  } else {
+    sess.textContent = '';
+    lo.style.display = 'none';
+  }
+}
+
+function memberLogout() {
+  const tok = getMemberToken();
+  if (tok) fetch(apiUrl('/api/buyer/logout'), { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{}' }).catch(() => {});
+  setMemberToken('');
+  toast('Çıkış yapıldı — oturum kapatıldı.');
+  loadIsletmem();
+}
+
+function switchIsletmemTab(name) {
+  document.querySelectorAll('.is-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.is-tab-pane').forEach(pane => { pane.style.display = pane.id === 'is-tab-' + name ? '' : 'none'; });
+}
+
+function changePassword() {
+  const tok = getMemberToken();
+  if (!tok) { toast('Önce giriş yapın.'); return; }
+  const oldp = ((document.getElementById('is-old-pass') || {}).value || '');
+  const newp = ((document.getElementById('is-new-pass') || {}).value || '');
+  if (newp.length < 8) { toast('Yeni şifre en az 8 karakter olmalı.'); return; }
+  fetch(apiUrl('/api/buyer/change-password?token=' + encodeURIComponent(tok)), {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ old_password: oldp, new_password: newp }),
+  }).then(async r => {
+    const d = await r.json().catch(() => ({}));
+    if (r.ok) { toast('Şifre güncellendi ✓'); loadIsletmem(); }
+    else toast(d.detail || 'Şifre değiştirilemedi');
+  }).catch(e => toast(e.message));
+}
+
+function renderIsletmemTabs(p) {
+  const wrap = document.getElementById('is-tab-panes');
+  if (!wrap) return;
+  const tip = (txt) => `<span class="tip tip-right" data-tip="${txt}" style="cursor:help"><i class="fas fa-info-circle" style="font-size:10px;color:var(--text-dim)"></i></span>`;
+  const profile = `
+    <div class="is-tab-pane" id="is-tab-profile">
+      <div class="quick-filter-item" style="width:100%"><label>Firma Adı ${tip('Ticaret sicilinizdeki resmi unvan. Eşleştirme sonuçlarında bu ad görünür.')}</label><input id="is-company" class="filter-select" style="width:100%" value="${esc(p.company_name || '')}"></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>NACE Kodu ${tip('Faaliyet alanınızın resmi sektör kodu (örn. 29.32). Doğru kod = doğru eşleşme.')}</label><input id="is-nace" class="filter-select" style="width:100%" value="${esc(p.nace_code || '')}" placeholder="29.32"></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Ne üretiyor / satıyorsunuz?${tip('Ürün/hizmet anahtar kelimeleriniz eşleştirmede kullanılır — ne kadar net, o kadar isabetli.')}</label><input id="is-products" class="filter-select" style="width:100%" value="${esc(p.products_desc || '')}" placeholder="fren sistemi yedek parçaları, pres döküm..."></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Departman / Rolünüz</label><input id="is-department" class="filter-select" style="width:100%" value="${esc(p.department || '')}" placeholder="Satış, Üretim, Satın Alma..."></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Çalışan Sayınız${tip('Firma büyüklüğü önerileri ölçek uyumuna göre sıralar: küçük firmaya küçük tedarikçi, büyük montajcıya kapasiteli üretici.')}</label>
+        <select id="is-employee-range" class="filter-select" style="width:100%">
+          <option value=""${!p.employee_range ? ' selected' : ''}>Seçiniz…</option>
+          <option value="1-5"${p.employee_range === '1-5' ? ' selected' : ''}>1-5 kişi</option>
+          <option value="6-20"${p.employee_range === '6-20' ? ' selected' : ''}>6-20 kişi</option>
+          <option value="21-50"${p.employee_range === '21-50' ? ' selected' : ''}>21-50 kişi</option>
+          <option value="51-250"${p.employee_range === '51-250' ? ' selected' : ''}>51-250 kişi</option>
+          <option value="250+"${p.employee_range === '250+' ? ' selected' : ''}>250+ kişi</option>
+        </select></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Sertifikalarınız${tip('ISO 9001, CE, TSE vb. Alıcı firmalar sertifikalı tedarikçileri tercih eder — önerilerde vurgulanır.')}</label><input id="is-certificates" class="filter-select" style="width:100%" value="${esc(p.certificates || '')}" placeholder="ISO 9001, ISO 14001, CE..."></div>
+    </div>`;
+  wrap.innerHTML = profile;
+  appendIsletmemTabsRest(p, tip);
+}
+
+function appendIsletmemTabsRest(p, tip) {
+  const wrap = document.getElementById('is-tab-panes');
+  const info = `
+    <div class="is-tab-pane" id="is-tab-info" style="display:none">
+      <div class="quick-filter-item" style="width:100%"><label>Yetkili Adı${tip('Eşleşen firmalar size bu isimle ulaşır (KVKK kapsamında maskeli gösterilir).')}</label><input id="is-contact" class="filter-select" style="width:100%" value="${esc(p.contact_name || '')}"></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Web Site</label><input id="is-web" class="filter-select" style="width:100%" value="${esc(p.website || '')}" placeholder="sirketiniz.com.tr"></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Vergi Numarası (VKN)${tip('10 haneli vergi kimlik no — firma kimlik doğrulaması için kullanılır.')}</label><input id="is-tax" class="filter-select" style="width:100%" value="${esc(p.tax_number || p.vergi_no || '')}" placeholder="1234567890"></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Telefon${tip('Eşleşen firmaların size ulaşacağı numara (KVKK: dışarıya maskeli gösterilir).')}</label><input id="is-phone" class="filter-select" style="width:100%" value="${esc(p.phone || '')}" placeholder="0312 000 00 00"></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>E-posta</label><input class="filter-select" style="width:100%" value="${esc(p.email || '')}" disabled title="Kayıt e-postanız değiştirilemez"></div>
+    </div>`;
+  const match = `
+    <div class="is-tab-pane" id="is-tab-match" style="display:none">
+      <div class="quick-filter-item" style="width:100%"><label>Eşleştirme Amacı${tip('Ne için arıyorsunuz? Müşteri: ürününüzü alacak firmalar. Tedarikçi: size mal/hizmet verecekler. Bu seçim Arama Yönü varsayılanını belirler.')}</label>
+        <select id="is-goal" class="filter-select" style="width:100%">
+          <option value="tumu"${p.goal === 'tumu' ? ' selected' : ''}>Hepsi</option>
+          <option value="musteri"${p.goal === 'musteri' ? ' selected' : ''}>Müşteri bulmak</option>
+          <option value="tedarikci"${p.goal === 'tedarikci' ? ' selected' : ''}>Tedarikçi bulmak</option>
+          <option value="ortagi"${p.goal === 'ortagi' ? ' selected' : ''}>İş ortağı</option>
+        </select></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Hedef Sektörler (NACE ana grup, virgülle)${tip('Kiminle çalışmak istersiniz? Örn. yedek parçacı 45 (toptan) ve 28 (makine) yazar — öneriler bu sektörlerde yoğunlaşır.')}</label><input id="is-target" class="filter-select" style="width:100%" value="${esc(p.target_nace || '')}" placeholder="45,46,28"></div>
+    </div>`;
+  wrap.innerHTML += info + match + isletmemAccountTab(p, tip);
+}
+
+function isletmemAccountTab(p) {
+  return `
+    <div class="is-tab-pane" id="is-tab-account" style="display:none">
+      <div class="quick-filter-item" style="width:100%"><label>Oturum E-postası</label><input class="filter-select" style="width:100%" value="${esc(p.email || '')}" disabled></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Mevcut Şifre</label><input id="is-old-pass" type="password" class="filter-select" style="width:100%" autocomplete="current-password"></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Yeni Şifre${tip('En az 8 karakter. PBKDF2-SHA256 ile şifrelenerek saklanır.')}</label><input id="is-new-pass" type="password" class="filter-select" style="width:100%" autocomplete="new-password" placeholder="En az 8 karakter"></div>
+      <button class="d-btn" style="margin-top:10px" onclick="changePassword()"><i class="fas fa-key"></i> Şifreyi Değiştir</button>
+    </div>`;
 }
 
 function saveIsletmemProfile() {
@@ -1486,6 +1573,8 @@ function saveIsletmemProfile() {
     department: document.getElementById('is-department').value,
     employee_range: (document.getElementById('is-employee-range') || {}).value || '',
     certificates: (document.getElementById('is-certificates') || {}).value || '',
+    tax_number: (document.getElementById('is-tax') || {}).value || '',
+    phone: (document.getElementById('is-phone') || {}).value || '',
     goal: document.getElementById('is-goal').value,
     contact_name: document.getElementById('is-contact').value,
     website: document.getElementById('is-web').value,

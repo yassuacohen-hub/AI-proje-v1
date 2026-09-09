@@ -939,6 +939,25 @@ def _user_token(email: str) -> str:
     return f"{email}|{exp}|{sig}"
 
 
+_PBKDF2_ITER = 120_000
+
+
+def _hash_password(password: str) -> str:
+    """PBKDF2-SHA256, rastgele 16 bayt salt; format: pbkdf2$iter$salt$hash."""
+    salt = os.urandom(16)
+    dk = hashlib.pbkdf2_hmac("sha256", password.encode(), salt, _PBKDF2_ITER)
+    return f"pbkdf2${_PBKDF2_ITER}${salt.hex()}${dk.hex()}"
+
+
+def _verify_password(password: str, stored: str) -> bool:
+    try:
+        _, iters, salt_hex, hash_hex = stored.split("$")
+        dk = hashlib.pbkdf2_hmac("sha256", password.encode(), bytes.fromhex(salt_hex), int(iters))
+        return hmac.compare_digest(dk.hex(), hash_hex)
+    except Exception:
+        return False
+
+
 def _user_from_token(token: str):
     """Token'dan kullaniciyi dogrular; gecersizse None."""
     try:
@@ -978,13 +997,17 @@ def _charge_credit(user_id: str, email: str, reason: str, amount: int = 1) -> in
 
 @app.post("/api/buyer/register")
 def api_buyer_register(req: dict):
-    """Kurumsal e-posta ile kayit. Kurumsal domain dogrulamasi + KVKK zorunlu.
+    """Kurumsal e-posta + sifre ile kayit. Kurumsal domain dogrulamasi + KVKK zorunlu.
+    Sifre PBKDF2-SHA256 ile hash'lenir (ham sifre DB'ye yazilmaz).
     Sonuc: status=onay_bekliyor (admin onayindan sonra onayli + kredi yuklenir)."""
     email = (req.get("email") or "").strip().lower()
     company_name = (req.get("company_name") or "").strip()
     kvkk = bool(req.get("kvkk_consent"))
+    password = req.get("password") or ""
     if not email or "@" not in email or not company_name:
         raise HTTPException(status_code=400, detail="email ve company_name zorunlu")
+    if len(password) < 8:
+        raise HTTPException(status_code=400, detail="sifre en az 8 karakter olmali")
     domain = email.split("@")[-1]
     if domain.lower() in _FREE_DOMAINS:
         raise HTTPException(status_code=400, detail=(
@@ -1009,14 +1032,14 @@ def api_buyer_register(req: dict):
         conn.execute(text("""
             INSERT INTO users (email, email_domain, company_name, linked_company_id, nace_code,
                                products_desc, target_nace, goal, contact_name, website,
-                               kvkk_consent, status)
+                               kvkk_consent, password_hash, status)
             VALUES (:email, :domain, :company_name, :linked, :nace, :products, :target,
-                    :goal, :contact, :website, :kvkk, 'onay_bekliyor')
+                    :goal, :contact, :website, :kvkk, :phash, 'onay_bekliyor')
         """), {"email": email, "domain": domain, "company_name": company_name,
                "linked": linked, "nace": req.get("nace_code"), "products": req.get("products_desc"),
                "target": req.get("target_nace"), "goal": req.get("goal", "tumu"),
                "contact": req.get("contact_name"), "website": req.get("website"),
-               "kvkk": kvkk})
+               "kvkk": kvkk, "phash": _hash_password(password)})
     return {
         "ok": True,
         "status": "onay_bekliyor",
@@ -1048,7 +1071,7 @@ def api_buyer_profile(token: str = ""):
         prof = conn.execute(text(
             "SELECT u.user_id, u.email, u.company_name, u.nace_code, u.products_desc, "
             "u.target_nace, u.goal, u.contact_name, u.website, u.department, u.kvkk_consent, "
-            "u.employee_range, u.certificates, "
+            "u.employee_range, u.certificates, u.tax_number, u.phone, "
             "u.status, u.tier, u.credit_balance, u.api_key, u.linked_company_id, u.created_at "
             "FROM users u WHERE u.user_id = :u"), {"u": u["user_id"]}).mappings().first()
         ledger = conn.execute(text(
@@ -1088,6 +1111,8 @@ def api_buyer_profile_update(req: dict, token: str = ""):
         "department": req.get("department"),
         "employee_range": req.get("employee_range"),
         "certificates": req.get("certificates"),
+        "tax_number": req.get("tax_number"),
+        "phone": req.get("phone"),
     }
     sets, params = [], {"u": str(u["user_id"])}
     for k, v in alanlar.items():
@@ -1102,7 +1127,7 @@ def api_buyer_profile_update(req: dict, token: str = ""):
         conn.execute(text(f"UPDATE users SET {', '.join(sets)} WHERE user_id = :u"), params)
         row = conn.execute(text(
             "SELECT company_name, nace_code, products_desc, target_nace, goal, department, "
-            "website, contact_name, employee_range, certificates, credit_balance, tier "
+            "website, contact_name, employee_range, certificates, tax_number, phone, credit_balance, tier "
             "FROM users WHERE user_id = :u"),
             {"u": str(u["user_id"])}).mappings().first()
     alanlar_dolu = sum(1 for a in ["company_name", "nace_code", "products_desc", "target_nace",
@@ -1127,18 +1152,25 @@ def api_buyer_ledger(token: str = "", limit: int = 20):
 
 @app.post("/api/buyer/login")
 def api_buyer_login(req: dict):
-    """E-posta ile giris (MVP auth; OAuth Scale asamasinda).
+    """E-posta + sifre ile giris. Sifresi olmayan eski MVP kayitlarina ozel:
+    password bos gonderilirse ve DB'de hash yoksa giris izin verilir (gecis donemi).
     Onayli kullaniciya 24 saatlik token doner; kredi bakiyesi dahil."""
     email = (req.get("email") or "").strip().lower()
+    password = req.get("password") or ""
     if not email or "@" not in email:
         raise HTTPException(status_code=400, detail="gecerli e-posta girin")
     engine = get_engine()
     with engine.connect() as conn:
         row = conn.execute(text(
-            "SELECT user_id, email, status, tier, credit_balance, role, company_name "
+            "SELECT user_id, email, status, tier, credit_balance, role, company_name, password_hash "
             "FROM users WHERE email = :e"), {"e": email}).mappings().first()
     if not row:
         raise HTTPException(status_code=404, detail="Bu e-posta ile kayit bulunamadi")
+    stored = row["password_hash"]
+    if stored and not _verify_password(password, stored):
+        raise HTTPException(status_code=401, detail="E-posta veya şifre hatalı")
+    if not stored and len(password) < 8:
+        raise HTTPException(status_code=401, detail="E-posta veya şifre hatalı")
     if row["status"] != "onayli":
         durum = "onayınız değerlendiriliyor" if row["status"] == "onay_bekliyor" else "kabul edilmedi"
         raise HTTPException(status_code=403, detail=f"Üyelik onayı: {durum}. Sorularınız için iletişime geçin.")
@@ -1150,6 +1182,36 @@ def api_buyer_login(req: dict):
             "role": row["role"],
         },
     }
+
+
+@app.post("/api/buyer/logout")
+def api_buyer_logout(req: dict):
+    """Cikis: istemci tarafinda token silinir; sunucu tarafi stateless oldugundan
+    tokenin kalan suresi kadar gecerliligi teknik olarak surer (MVP notu: tam
+    iptal icin token blocklist Scale asamasinda). Donus: ok (istemci temizler)."""
+    return {"ok": True, "message": "Cikis yapildi"}
+
+
+@app.post("/api/buyer/change-password")
+def api_buyer_change_password(req: dict, token: str = ""):
+    """Oturumdaki kullanici sifresini degistirir (PBKDF2)."""
+    u = _user_from_token(token)
+    if not u:
+        raise HTTPException(status_code=401, detail="oturum gecersiz veya suresi doldu")
+    new = req.get("new_password") or ""
+    old = req.get("old_password") or ""
+    if len(new) < 8:
+        raise HTTPException(status_code=400, detail="yeni sifre en az 8 karakter olmali")
+    engine = get_engine()
+    with engine.connect() as conn:
+        row = conn.execute(text("SELECT password_hash FROM users WHERE user_id = :u"),
+                           {"u": str(u["user_id"])}).mappings().first()
+    if row and row["password_hash"] and not _verify_password(old, row["password_hash"]):
+        raise HTTPException(status_code=401, detail="mevcut sifre hatali")
+    with engine.begin() as conn:
+        conn.execute(text("UPDATE users SET password_hash = :p, updated_at = CURRENT_TIMESTAMP "
+                          "WHERE user_id = :u"), {"p": _hash_password(new), "u": str(u["user_id"])})
+    return {"ok": True, "message": "sifre guncellendi"}
 
 
 @app.get("/api/me")

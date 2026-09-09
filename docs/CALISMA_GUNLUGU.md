@@ -1,4 +1,19 @@
 
+## 2026-09-09 — Şifreli oturum sistemi + İşletmem sekmeleri + bilgi bankası notları ✅
+
+**Şifre sistemi (PBKDF2):**
+- Migration 0015: users tablosuna `password_hash` + `tax_number` + `phone` (Supabase + yerel PG)
+- `web_app.py`: `_hash_password`/`_verify_password` (PBKDF2-SHA256, 120k iter, rastgele salt); kayıtta şifre zorunlu (min 8), login şifre doğrulamalı; hash'i olmayan eski MVP kayıtları için geçiş dönemi istisnası
+- Yeni endpoint'ler: `POST /api/buyer/logout` + `POST /api/buyer/change-password` (mevcut şifre doğrulamalı)
+- Üyelik modalı: kayıta şifre alanı + girişe şifre alanı eklendi
+
+**İşletmem overlay yenilendi:**
+- **4 sekme:** Firma Profili (firma/NACE/ürün/departman/çalışan sayısı/sertifikalar) · **Bilgiler** (yetkili, web, **VKN**, **telefon**, e-posta kilitli) · Eşleştirme (amaç + hedef sektörler) · **Hesap** (şifre değiştir)
+- Başlıkta **oturum bilgisi + Çıkış düğmesi** (token silinir)
+- Alan etiketlerine **hover bilgi notları** (neden isteniyor, nasıl kullanılıyor)
+
+**Canlı test (Docker 8000, 8/8):** şifreli kayıt 200 → yanlış şifre 401 → şifresiz 401 → admin onay 200 → doğru şifre login 200 → şifre değiştir 200 → eski şifre 401 / yeni şifre 200 → profil PUT VKN+telefon kaydedildi. Bug fix: INSERT bind param ismi (ph→phash). Layout 8/8 PASS, 0 exception.
+
 ## 2026-09-09 — Profil zenginleştirme + admin-only görev tahtası + tam üyelik akış testi ✅
 
 **Profil geliştirme (çalışan sayısı + sertifikalar):**
