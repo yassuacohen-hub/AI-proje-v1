@@ -1,0 +1,56 @@
+name: Nightly ETL
+
+on:
+  schedule:
+    - cron: "0 2 * * *"  # Her gun 02:00 UTC
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  nightly-etl:
+    name: Run nightly ETL pipeline
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      DATABASE_URL: ${{ secrets.DATABASE_URL }}
+      SCRAPING_ROUTE: scheduled
+      SCRAPER_USER_AGENT: ${{ secrets.SCRAPER_USER_AGENT }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-app.txt
+      - name: Validate config (dry-run)
+        run: |
+          python -c "import os; from src.company_master.db.connection import get_database_url; print(get_database_url())"
+      - name: Run scrapers (OSTIM + ASO)
+        run: |
+          python -m src.company_master.etl.pipeline || echo "::warning::Pipeline non-zero exit"
+      - name: Normalize new records
+        run: |
+          python -m src.company_master.etl.normalize
+      - name: Entity resolution
+        run: |
+          python -m src.company_master.etl.entity_resolution || echo "::warning::Entity resolution skipped"
+      - name: Quality score refresh
+        run: |
+          python -m src.company_master.etl.score_quality
+      - name: Upload artifacts (logs + jsonl)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-etl-logs-${{ github.run_id }}
+          path: |
+            logs/
+            data/**/*.jsonl
+          retention-days: 14
+      - name: Notify on failure
+        if: failure()
+        run: |
+          echo "::error title=Nightly ETL failed::${{ github.workflow }} run ${{ github.run_id }}"

@@ -1,0 +1,36 @@
+# Huginn Data Insights — Telegram Bot Polling servisi (H004)
+# Amaç: scripts/telegram_polling.py'yi systemd arka plan servisi olarak koşturmak.
+#
+# Kurulum (Linux sunucu):
+#   1) Projeyi /opt/huginn altina kopyalayin (veya asagidaki yollari kendi
+#      kurulum yolunuzla degistirin).
+#   2) sudo cp scripts/telegram_bot_systemd.service /etc/systemd/system/
+#   3) sudo systemctl daemon-reload
+#   4) sudo systemctl enable --now telegram-bot
+#   Durum/Log:  systemctl status telegram-bot | journalctl -u telegram-bot -f
+
+[Unit]
+Description=Huginn Data Insights - Telegram Bot Polling
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# --- Kurulum yolunu kendi ortaminiza gore duzenleyin ---
+User=huginn
+Group=huginn
+WorkingDirectory=/opt/huginn
+EnvironmentFile=/opt/huginn/.env
+ExecStart=/opt/huginn/.venv/bin/python scripts/telegram_polling.py
+# -------------------------------------------------------
+Restart=always
+RestartSec=15
+# Uzun polling dogasi geregi sessiz kalabilir; watchdog yerine sade restart.
+TimeoutStartSec=60
+TimeoutStopSec=30
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=telegram-bot
+
+[Install]
+WantedBy=multi-user.target

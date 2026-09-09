@@ -1,0 +1,243 @@
+{
+  "timestamp": "2026-09-09T08:34:56Z",
+  "total_queries": 9,
+  "slow_count": 9,
+  "failed_count": 0,
+  "queries": [
+    {
+      "name": "KPI",
+      "db_ms": 223.79,
+      "roundtrip_ms": 223.79,
+      "rows": 1,
+      "cache_key": "kpi",
+      "status": "SLOW"
+    },
+    {
+      "name": "Sources",
+      "db_ms": 246.87,
+      "roundtrip_ms": 246.87,
+      "rows": 4,
+      "cache_key": "sources",
+      "status": "SLOW"
+    },
+    {
+      "name": "Companies_list",
+      "db_ms": 303.86,
+      "roundtrip_ms": 303.86,
+      "rows": 200,
+      "cache_key": null,
+      "status": "SLOW"
+    },
+    {
+      "name": "ILIKE_search",
+      "db_ms": 387.77,
+      "roundtrip_ms": 387.77,
+      "rows": 41,
+      "cache_key": null,
+      "status": "SLOW"
+    },
+    {
+      "name": "ILIKE_search_optimized",
+      "db_ms": 291.82,
+      "roundtrip_ms": 291.82,
+      "rows": 41,
+      "cache_key": null,
+      "status": "SLOW"
+    },
+    {
+      "name": "Source_IN_filter",
+      "db_ms": 278.61,
+      "roundtrip_ms": 278.61,
+      "rows": 50,
+      "cache_key": null,
+      "status": "SLOW"
+    },
+    {
+      "name": "ASO_count",
+      "db_ms": 215.17,
+      "roundtrip_ms": 215.17,
+      "rows": 1,
+      "cache_key": "aso_count",
+      "status": "SLOW"
+    },
+    {
+      "name": "Quality_trend",
+      "db_ms": 233.37,
+      "roundtrip_ms": 233.37,
+      "rows": 5,
+      "cache_key": "quality_trend",
+      "status": "SLOW"
+    },
+    {
+      "name": "NACE_distribution",
+      "db_ms": 215.16,
+      "roundtrip_ms": 215.16,
+      "rows": 20,
+      "cache_key": "nace_dist",
+      "status": "SLOW"
+    }
+  ],
+  "roundtrip_benchmark": {
+    "KPI": {
+      "avg_ms": 333.48,
+      "min_ms": 330.9,
+      "max_ms": 334.79,
+      "runs": 3
+    },
+    "Sources": {
+      "avg_ms": 335.19,
+      "min_ms": 330.82,
+      "max_ms": 343.63,
+      "runs": 3
+    },
+    "Companies_list": {
+      "avg_ms": 373.63,
+      "min_ms": 343.95,
+      "max_ms": 389.98,
+      "runs": 3
+    },
+    "ILIKE_search": {
+      "avg_ms": 480.47,
+      "min_ms": 440.05,
+      "max_ms": 508.78,
+      "runs": 3
+    },
+    "ILIKE_search_optimized": {
+      "avg_ms": 411.47,
+      "min_ms": 329.57,
+      "max_ms": 508.28,
+      "runs": 3
+    },
+    "Source_IN_filter": {
+      "avg_ms": 369.98,
+      "min_ms": 327.74,
+      "max_ms": 392.19,
+      "runs": 3
+    },
+    "ASO_count": {
+      "avg_ms": 317.53,
+      "min_ms": 314.37,
+      "max_ms": 323.19,
+      "runs": 3
+    },
+    "Quality_trend": {
+      "avg_ms": 332.32,
+      "min_ms": 324.57,
+      "max_ms": 341.07,
+      "runs": 3
+    },
+    "NACE_distribution": {
+      "avg_ms": 318.44,
+      "min_ms": 316.2,
+      "max_ms": 320.58,
+      "runs": 3
+    }
+  },
+  "explain_analyze": {},
+  "baseline_db_ms": {
+    "KPI": 358.69,
+    "Sources": 1221.37,
+    "Companies_list": 120.03,
+    "ILIKE_search": 953.33,
+    "Source_IN_filter": 21.38,
+    "ASO_count": 0.24,
+    "Quality_trend": 54.17
+  },
+  "caching": {
+    "cached_query_types": [
+      "KPI",
+      "Sources",
+      "ASO_count",
+      "Quality_trend",
+      "NACE_distribution"
+    ],
+    "second_load_cache_hits": 0,
+    "second_load_db_time_ms": 1123.26
+  },
+  "slow_queries": [
+    {
+      "name": "KPI",
+      "ms": 223.79
+    },
+    {
+      "name": "Sources",
+      "ms": 246.87
+    },
+    {
+      "name": "Companies_list",
+      "ms": 303.86
+    },
+    {
+      "name": "ILIKE_search",
+      "ms": 387.77
+    },
+    {
+      "name": "ILIKE_search_optimized",
+      "ms": 291.82
+    },
+    {
+      "name": "Source_IN_filter",
+      "ms": 278.61
+    },
+    {
+      "name": "ASO_count",
+      "ms": 215.17
+    },
+    {
+      "name": "Quality_trend",
+      "ms": 233.37
+    },
+    {
+      "name": "NACE_distribution",
+      "ms": 215.16
+    }
+  ],
+  "index_info": {
+    "indexes": {
+      "companies": [
+        "companies_mersis_number_key",
+        "companies_pkey",
+        "companies_tax_number_key",
+        "idx_companies_adres",
+        "idx_companies_ankara_osb",
+        "idx_companies_ankara_osb_score",
+        "idx_companies_created_at",
+        "idx_companies_kpi_covering",
+        "idx_companies_legal_name_lower",
+        "idx_companies_legal_name_trgm",
+        "idx_companies_nace",
+        "idx_companies_nace_code",
+        "idx_companies_osb",
+        "idx_companies_primary_email",
+        "idx_companies_primary_phone",
+        "idx_companies_quality_score",
+        "idx_companies_search_text_trgm",
+        "idx_companies_source_record",
+        "idx_companies_source_record_score",
+        "idx_companies_status",
+        "idx_companies_tax_number",
+        "idx_companies_tax_number_lower",
+        "idx_companies_trade_name_lower",
+        "idx_companies_trade_name_trgm",
+        "idx_companies_vergi_no",
+        "idx_companies_vergi_no_lower",
+        "idx_companies_web_sitesi"
+      ],
+      "sources": [
+        "idx_sources_source_name",
+        "sources_pkey"
+      ],
+      "source_records": [
+        "idx_source_records_covering",
+        "idx_source_records_source",
+        "idx_source_records_tax",
+        "source_records_pkey"
+      ]
+    },
+    "row_counts": {
+      "companies": 14000,
+      "sources": 4,
+      "source_records": 14000
+    }
+  }
+}

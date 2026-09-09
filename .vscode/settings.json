@@ -1,0 +1,5 @@
+{
+    "kimi-copilot.debug": true,
+    "kimi-copilot.apiKey": "${env:KIMI_COPILOT_API_KEY}",
+    "kimi-copilot.baseURL": "https://api.moonshot.cn"
+}

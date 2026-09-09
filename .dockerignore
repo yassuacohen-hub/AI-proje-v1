@@ -1,0 +1,33 @@
+# Gizli bilgiler — ASLA image'e kopyalanmaz (.env compose env_file ile container'a verilir)
+.env
+.env.*
+!.env.example
+
+# Versiyon kontrolü ve dokümantasyon arşivi
+.git
+.gitignore
+AI proje v1/
+
+# Yerel çalışma dosyaları
+backups/
+logs/
+test.db
+company_master.db
+*.db
+data/backups/
+
+# Python artefaktları
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+
+# Geçici/araştırma scriptleri
+scripts/_*.py
+scripts/_*.txt
+
+# Docker kendisi
+Dockerfile
+docker-compose.yml
+.dockerignore

@@ -1,0 +1,269 @@
+diff --git a/src/company_master/etl/scrapers/ostim_scraper.py b/src/company_master/etl/scrapers/ostim_scraper.py
+--- a/src/company_master/etl/scrapers/ostim_scraper.py
++++ b/src/company_master/etl/scrapers/ostim_scraper.py
+@@ -1,10 +1,18 @@
+ """OSTIM OSB uye listesi scraper.
+ 
+-Detay sayfasi parse (2026-09-02):
+-- Sag kolon / aside icindeki bilgi kutulari (label + deger)
+-- Adres, Web, Vergi No, Parsel alanlari icin fallback zinciri
+-- vergi_no bulunamazsa unvan icinden 10-11 haneli regex
+-- osb_parsel bulunamazsa adres icinde PARSEL/ADA anahtar kelimesi aranir
++Detay sayfasi parse (Cursor Grok patch 2026-09-02):
++- Label-based extraction (Adres / Vergi No / Ada-Parsel / Web)
++- Alternatif layout destegi: <table class="firma-detay">, <dl>, div-based info-row
++- vergi_no normalize: nokta/space temizligi, maskelenmis (**) -> None, 10/11 hane dogrulama
++- vergi_no fallback: unvan icinden 10-11 haneli regex
++- osb_parsel fallback: adres icinde PARSEL/ADA anahtar kelimesi
++- Web sitesi blocklist (genisletilmis): sosyal medya + pazaryeri + arama motoru +
++  placeholder + ostim kendi domainleri
++- Subdomain-aware blocklist (m.facebook.com, tr.linkedin.com vb.)
++- Retry/backoff: timeout/connection error sonrasi 2 deneme (1s, 2s)
++- Graceful failure: 4xx/5xx -> bos dict, exception firlatilmaz
++- --detayli modu: tum sektor + tum sayfalarda calisir (scrape_firma_full uzerinden)
++- Detay modunda rate limit (RATE_LIMIT_SECONDS) uygulanir
+ """
+ 
+ from __future__ import annotations
+@@ -17,6 +25,7 @@
+ from datetime import datetime
+ from pathlib import Path
+ from typing import Iterator
++from urllib.parse import urlparse
+ 
+ import requests
+ from bs4 import BeautifulSoup, Tag
+@@ -33,10 +42,29 @@
+ 
+ VKN_PATTERN = re.compile(r"\b(\d{10,11})\b")
+ PARSEL_PATTERN = re.compile(r"\b(PARSEL|ADA)\b", re.IGNORECASE)
++
++# Genisletilmis web blocklist (Cursor Grok patch)
++# - sosyal medya
++# - pazaryeri
++# - arama motoru
++# - placeholder/test
++# - OSTIM OSB kendi domainleri (firma-ozgu site degil)
+ WEB_BLOCKLIST = (
+-    "ostim.org.tr", "ostimonline.com", "facebook.com", "twitter.com",
+-    "x.com", "linkedin.com", "instagram.com", "youtube.com",
++    # Sosyal medya
++    "facebook.com", "twitter.com", "x.com", "linkedin.com",
++    "instagram.com", "youtube.com", "tiktok.com", "pinterest.com",
++    # Pazaryeri
++    "sahibinden.com", "hepsiburada.com", "trendyol.com", "n11.com",
++    "gittigidiyor.com", "amazon.com.tr", "amazon.com",
++    # Arama motorlari
++    "google.com", "yandex.com", "yandex.com.tr",
++    # Placeholder / test
++    "example.com", "example.org", "test.com", "localhost",
++    "127.0.0.1", "0.0.0.0",
++    # OSTIM OSB kendi domainleri (firma-ozgu degil)
++    "ostim.org.tr", "ostimonline.com",
+ )
++
+ DETAY_LABEL_MAP = {
+     "adres": ("adres", "adresi", "address"),
+     "vergi_no": ("vergi no", "vergi numarasi", "tax no", "tax number", "vkn"),
+@@ -54,6 +82,7 @@
+ USER_AGENT = "AnkaraB2B-Bot/1.0 (research@example.com)"
+ RATE_LIMIT_SECONDS = 3.0
+ REQUEST_TIMEOUT = 30
++RETRY_BACKOFF = (1.0, 2.0)  # ilk retry 1s, ikinci retry 2s
+ 
+ EMAIL_PATTERN = re.compile(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+ BIREYSEL_EMAIL_DOMAINS = {
+@@ -120,6 +149,56 @@
+             if domain in BIREYSEL_EMAIL_DOMAINS:
+                 out_email = None
+     return telefon, out_email
++
++
++def _registrable_domain(host: str) -> str:
++    """Subdomain-aware kontrol icin: m.facebook.com -> facebook.com."""
++    if not host:
++        return ""
++    parts = host.lower().split(".")
++    if len(parts) <= 2:
++        return host.lower()
++    # 2-harflik TLD'ler (com.tr, co.uk vb.) icin son 3 segment
++    two_level_tlds = {"com.tr", "co.uk", "org.uk", "net.tr", "edu.tr", "gov.tr"}
++    last_two = ".".join(parts[-2:])
++    if last_two in two_level_tlds and len(parts) >= 3:
++        return ".".join(parts[-3:]).lower()
++    return ".".join(parts[-2:]).lower()
++
++
++def _is_blocked(url: str) -> bool:
++    """Subdomain-aware blocklist kontrolu."""
++    try:
++        host = urlparse(url).netloc or urlparse(url).path
++    except Exception:
++        return True
++    if not host:
++        return True
++    reg = _registrable_domain(host)
++    host_lower = host.lower()
++    for blocked in WEB_BLOCKLIST:
++        if blocked in host_lower or blocked == reg:
++            return True
++    return False
++
++
++def _normalize_vergi_no(raw: str | None) -> str | None:
++    """VKN normalize: nokta/space/tab temizligi, maskelenmis -> None, 10 veya 11 hane."""
++    if not raw:
++        return None
++    s = str(raw).strip()
++    if not s:
++        return None
++    # maskelenmis: "***", "**********"
++    if set(s.replace(" ", "")) <= {"*"}:
++        return None
++    # sadece rakam kalacak sekilde temizle
++    s = re.sub(r"[^\d]", "", s)
++    if not s:
++        return None
++    if len(s) not in (10, 11):
++        return None
++    return s
+ 
+ 
+ def fetch_sektor_listesi() -> list[dict[str, str]]:
+@@ -238,12 +317,59 @@
+     return None
+ 
+ 
++def _find_detail_block_table(soup: BeautifulSoup, field_key: str) -> str | None:
++    """<table class="firma-detay"> satirlarinda th/td bazli arama."""
++    labels = DETAY_LABEL_MAP[field_key]
++    for table in soup.select("table.firma-detay"):
++        for row in table.find_all("tr"):
++            th = row.find("th")
++            td = row.find("td")
++            if not th or not td:
++                continue
++            th_text = th.get_text(" ", strip=True).lower().strip(" :")
++            if not th_text:
++                continue
++            if any(th_text == lab or th_text.startswith(lab + ":") or th_text.startswith(lab + " ") for lab in labels):
++                value = td.get_text(" ", strip=True)
++                value = re.sub(r"\s+", " ", value).strip(" :")
++                if value and len(value) >= 1 and value != "-":
++                    return value
++    return None
++
++
++def _find_detail_block_dl(soup: BeautifulSoup, field_key: str) -> str | None:
++    """<dl class="firma-detay"> definition list bazli arama."""
++    labels = DETAY_LABEL_MAP[field_key]
++    for dl in soup.select("dl.firma-detay, dl"):
++        dts = dl.find_all("dt")
++        dds = dl.find_all("dd")
++        for dt, dd in zip(dts, dds):
++            dt_text = dt.get_text(" ", strip=True).lower().strip(" :")
++            if any(dt_text == lab or dt_text.startswith(lab + ":") or dt_text.startswith(lab + " ") for lab in labels):
++                value = dd.get_text(" ", strip=True)
++                value = re.sub(r"\s+", " ", value).strip(" :")
++                if value and len(value) >= 1 and value != "-":
++                    return value
++    return None
++
++
++def _find_detail_universal(soup: BeautifulSoup, field_key: str) -> str | None:
++    """Sira: table > dl > sibling-scan (eski davranis)."""
++    val = _find_detail_block_table(soup, field_key)
++    if val:
++        return val
++    val = _find_detail_block_dl(soup, field_key)
++    if val:
++        return val
++    return _find_detail_block(soup, field_key)
++
++
+ def _extract_web_sitesi(soup: BeautifulSoup) -> str | None:
+     for a in soup.select("a[href^='http']"):
+         href = a.get("href", "")
+         if not href.startswith("http"):
+             continue
+-        if any(b in href for b in WEB_BLOCKLIST):
++        if _is_blocked(href):
+             continue
+         return href
+     return None
+@@ -272,7 +398,9 @@
+         return None, None
+     m = VKN_PATTERN.search(unvan)
+     if m:
+-        return m.group(1), "unvan_regex"
++        norm = _normalize_vergi_no(m.group(1))
++        if norm:
++            return norm, "unvan_regex"
+     return None, None
+ 
+ 
+@@ -284,15 +412,32 @@
+     return None, None
+ 
+ 
++def _http_get_with_retry(url: str) -> requests.Response | None:
++    """Retry/backoff ile GET. None donerse 4xx/5xx/network error."""
++    last_exc: Exception | None = None
++    delays = (0.0,) + RETRY_BACKOFF
++    for delay in delays:
++        if delay:
++            time.sleep(delay)
++        try:
++            resp = requests.get(
++                url, headers={"User-Agent": USER_AGENT}, timeout=REQUEST_TIMEOUT
++            )
++            if resp.status_code >= 400:
++                log.warning("HTTP %s for %s", resp.status_code, url)
++                return resp if resp.status_code < 500 else None
++            return resp
++        except requests.RequestException as exc:
++            last_exc = exc
++            log.warning("Network error %s: %s", url, exc)
++    log.error("Tum denemeler basarisiz %s: %s", url, last_exc)
++    return None
++
++
+ def fetch_firma_detay(slug: str) -> dict:
+     url = f"{BASE_URL}/firmalar/{slug}"
+-    try:
+-        resp = requests.get(
+-            url, headers={"User-Agent": USER_AGENT}, timeout=REQUEST_TIMEOUT
+-        )
+-        resp.raise_for_status()
+-    except requests.RequestException as exc:
+-        log.error("Detay sayfasi %s: %s", slug, exc)
++    resp = _http_get_with_retry(url)
++    if resp is None:
+         return {}
+ 
+     soup = BeautifulSoup(resp.text, "html.parser")
+@@ -309,13 +454,18 @@
+ 
+     data["web_sitesi"] = _extract_web_sitesi(soup)
+     data["sosyal_medya"] = _extract_sosyal_medya(soup)
+-    data["adres"] = _find_detail_block(soup, "adres")
+-    vergi_val = _find_detail_block(soup, "vergi_no")
++    data["adres"] = _find_detail_universal(soup, "adres")
++    vergi_val = _find_detail_universal(soup, "vergi_no")
+     if vergi_val:
+-        data["vergi_no"] = vergi_val
+-        data["vergi_no_kaynagi"] = "detay_sayfa"
+-
+-    parsel_val = _find_detail_block(soup, "osb_parsel")
++        norm = _normalize_vergi_no(vergi_val)
++        if norm:
++            data["vergi_no"] = norm
++            data["vergi_no_kaynagi"] = "detay_sayfa"
++        else:
++            data["vergi_no"] = None
++            data["vergi_no_kaynagi"] = "maskelenmis"
++
++    parsel_val = _find_detail_universal(soup, "osb_parsel")
+     if parsel_val:
+         data["osb_parsel"] = parsel_val
+         data["osb_parsel_kaynagi"] = "detay_sayfa"

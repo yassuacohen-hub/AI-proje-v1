@@ -1,0 +1,53 @@
+﻿.env
+
+# Veritabanı yedekleri (Supabase pg_dump ciktilari)
+backups/
+
+# Gömülü/ayrı git deposu (kendi GitHub remote'u var: AI-proje-v1)
+# Nested git repo olarak eklenmez; gitlink sorunlarını önlemek için dışlandı.
+AI proje v1/
+
+# Ortam ve gizli bilgiler
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.coverage
+coverage.json
+htmlcov/
+
+# Sanal ortamlar
+.venv/
+.venv_test/
+
+# Veritabanı dosyaları (yerel/legacy fallback; asıl veritabanı Supabase/PostgreSQL)
+*.db
+*.db-journal
+
+# Loglar (yeniden üretilebilir çalışma zamanı çıktıları)
+logs/
+*.log
+
+# Geçici/deneme dosyaları — bkz. AGENTS.md "Çöp Kutusu (Trash) Kuralı"
+_trash/
+tmp/
+
+# Obsidian kişisel/yerel çalışma alanı durumu (workspace paylaşılmaz, plugin listesi paylaşılır)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Playwright MCP çıktıları
+.playwright-mcp/
+
+# Diğer araç/skill yerel klasörleri (makine bazlı, proje kodu değil)
+.agents/
+.continue/
+.kilo/
+.kimi-code/
+agent/

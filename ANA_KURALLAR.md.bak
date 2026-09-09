@@ -1,0 +1,90 @@
+﻿# Huginn Ticari İstihbarat Platformu — Ana Kurallar
+
+## Kural 1: Firma Adları BÜYÜK HARFLE Yazılır
+
+Tüm firma adları (`legal_name`) her zaman BÜYÜK HARFLE gösterilir.
+
+- **Backend**: `web_app.py` → `normalize_company_name()` fonksiyonu
+- **Frontend**: `app.js` → `renderTable()` ve `showDetail()` fonksiyonlarında `.toUpperCase()`
+- **Uygulama**: API'den gelen her firma adı otomatik olarak BÜYÜK HARFE çevrilir
+
+**Örnek:**
+- DB'de: `"Arıtes Metal Sanayi ve Ticaret Ltd. Şti."`
+- Ekranda: `"ARITES METAL SANAYI VE TICARET LTD. STI."`
+
+## Kural 2: Ticaret Adı = İlk 2 KELİME
+
+> **KARAR (2026-09-08):** "İlk 2 hece" ifadesi **ilk 2 KELİME** olarak uygulanmaktadır.
+
+Ticaret adı (`trade_name`), firmanın ilk 2 kelimesinden oluşturulur.
+Şirket tipi belirten kelimeler (VE, SAN, TIC, LTD, STI, A.Ş., vb.) atlanır.
+
+- **Backend (API)**: `web_app.py` → `extract_trade_name()` fonksiyonu
+- **Backend (ingest-time)**: `src/company_master/etl/normalize.py` → `extract_trade_name()`
+- **DB migrasyonu**: `scripts/_ana_kural_migrasyon.py` (10.093 firma güncellendi)
+- **Uygulama**: Hem ingest sırasında hem API çıktısında uygulanır
+
+**Örnekler:**
+- `"DÜNDAR ELEKTRİK SANAYİ"` → `"DÜNDAR ELEKTRİK"`
+- `"ARITES METAL SANAYI"` → `"ARITES METAL"`
+- `"ZMT PTO HIDROLIK"` → `"ZMT PTO"`
+- `"YURTİÇİ KARGO SERVİSİ A.Ş."` → `"YURTİÇİ KARGO"`
+
+## Uygulama Noktaları
+
+| Bileşen | Fonksiyon | Durum |
+|---------|-----------|-------|
+| `web_app.py` | `normalize_company_name()` | ✅ |
+| `web_app.py` | `extract_trade_name()` | ✅ |
+| `web_app.py` | `normalize_company()` | ✅ |
+| `/api/companies` | `normalize_company(row)` | ✅ |
+| `/api/companies/export` | `normalize_company(dict(r))` | ✅ |
+| `/api/company/{id}` | `normalize_company(row)` | ✅ |
+| `app.js` | `renderTable()` → `.toUpperCase()` | ✅ |
+| `app.js` | `showDetail()` → `.toUpperCase()` | ✅ |
+
+## Yeni Veri Kaynağı Eklendiğinde
+
+Yeni bir veri kaynağı (scraper) eklendiğinde, ingest sırasında bu kurallar otomatik uygulanır:
+1. `legal_name` → `normalize_company_name()` ile BÜYÜK HARFE çevrilir
+2. `trade_name` boşsa → `extract_trade_name()` ile ilk 2 hece olarak üretilir
+3. API'den dönen tüm firma verileri `normalize_company()`'den geçer
+
+---
+
+## Tamamlanan Altyapı Özellikleri (2026-09-08)
+
+### API Güvenlik ve Performans
+| Özellik | Açıklama | Durum |
+|---------|----------|-------|
+| API Key Auth | `X-API-Key` header veya `?api_key=` query param | ✅ |
+| Rate Limiting | 120 istek/dakika, sliding window | ✅ |
+| Session Tracking | `X-Source` header ile kaynak izleme | ✅ |
+| CORS | `Access-Control-Allow-Origin: *` | ✅ |
+
+### Arama ve Filtreleme
+| Özellik | Açıklama | Durum |
+|---------|----------|-------|
+| Türkçe Arama | ı→i, ş→s, ç→c, ğ→g, ö→o, ü→u normalize | ✅ |
+| Çoklu Kaynak | `?sources=aso.org.tr,ostim.org.tr` | ✅ |
+| Kalite Filtresi | `?min_quality=50` | ✅ |
+| Sayfalama | `?limit=50&offset=0` | ✅ |
+| Sıralama | `?order_by=quality_score&order_dir=desc` | ✅ |
+
+### Dashboard UX
+| Özellik | Açıklama | Durum |
+|---------|----------|-------|
+| Skeleton Loading | Tablo yüklenirken shimmer efekti | ✅ |
+| Zenginleştir Rozetleri | Eksik alanlar için "zenginleştir" badge | ✅ |
+| Watchlist | Yıldızlı izleme, localStorage kalıcı | ✅ |
+| Kayıtlı Filtreler | Son filtre 12 saat saklanır | ✅ |
+| Detay Paneli | Sağ panelde firma detayları | ✅ |
+| CSV Export | Filtrelenmiş veriyi dışa aktarma | ✅ |
+
+### Veri Kalitesi
+| Özellik | Açıklama | Durum |
+|---------|----------|-------|
+| Kalite Skoru | 0-100 arası otomatik hesaplama | ✅ |
+| Duplicate Detection | Aynı firma tespiti | ✅ |
+| Source Record ID | Orijinal kaynaktan izleme | ✅ |
+

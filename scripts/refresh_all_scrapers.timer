@@ -1,0 +1,10 @@
+[Unit]
+Description=Huginn Data Insights - Daily Scraper Refresh Timer
+Requires=refresh_all_scrapers.service
+
+[Timer]
+OnCalendar=daily
+Persistent=true
+
+[Install]
+WantedBy=timers.target

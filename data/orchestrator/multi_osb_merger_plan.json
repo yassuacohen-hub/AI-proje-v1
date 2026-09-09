@@ -1,0 +1,42 @@
+{
+  "hedef": "Tüm OSB verilerini birleştirip ~19K firma hedefi",
+  "kaynaklar": [
+    {
+      "osb": "OSTIM",
+      "dosya": "data/ostim/firmalar_detayli.jsonl",
+      "kayit": 5485,
+      "durum": "tamamlandi"
+    },
+    {
+      "osb": "ASO",
+      "dosya": "data/aso/aso_full.jsonl",
+      "kayit": 785,
+      "durum": "ingest ediliyor"
+    },
+    {
+      "osb": "İvedik",
+      "dosya": "data/ivedik/firmalar.jsonl",
+      "kayit": 0,
+      "durum": "iskelet hazir"
+    },
+    {
+      "osb": "Başkent",
+      "dosya": "data/baskent/firmalar.jsonl",
+      "kayit": 0,
+      "durum": "iskelet hazir"
+    }
+  ],
+  "adimlar": [
+    "1. Tüm OSB scraper'ları tek standarta oturt (shared schema)",
+    "2. Entity resolution (rapidfuzz) ile cross-OSB deduplication",
+    "3. VKN-first merge stratejisi: aynı VKN → tek kayıt",
+    "4. Adres/telefon/email fallback zinciri",
+    "5. Kaynak takibi: hangi OSB'den geldiğini `source_records`'ta sakla",
+    "6. Kalite skoru güncelle: her OSB kaynağı için authority_score ekle"
+  ],
+  "riskler": [
+    "Aynı firma birden fazla OSB'de olabilir (multi-OSB membership)",
+    "Farklı kaynaklarda farklı isim varyasyonları (entity resolution gerekli)",
+    "VKN bazlı merge: VKN olmayan firmalar için fuzzy match gerekli"
+  ]
+}

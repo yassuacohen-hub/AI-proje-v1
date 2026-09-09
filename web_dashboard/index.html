@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huginn — Ticari İstihbarat Platformu</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="topbar-brand">
+      <div class="logo"><i class="fas fa-eye"></i></div>
+      <div>
+        <h1>Huginn</h1>
+        <span>Ticari İstihbarat Platformu</span>
+      </div>
+    </div>
+    <div class="topbar-search">
+      <i class="fas fa-search"></i>
+      <input type="text" id="global-search" placeholder="Firma adı, VKN, telefon, e-posta ara..." onkeypress="if(event.key==='Enter')doSearch()">
+    </div>
+    <div class="topbar-actions">
+      <div class="live-indicator"><span class="live-dot"></span> CANLI</div>
+      <div class="last-update" id="last-update">Son güncelleme: —</div>
+      <button class="btn-refresh" onclick="loadAll()"><i class="fas fa-sync-alt"></i> Yenile</button>
+    </div>
+  </header>
+
+  <aside class="sidebar">
+    <div class="sidebar-section">
+      <div class="sidebar-title">Navigasyon</div>
+      <div class="nav-item active" onclick="showView('dashboard',this)"><i class="fas fa-chart-line"></i> Genel Bakış</div>
+      <div class="nav-item" onclick="showView('companies',this)"><i class="fas fa-building"></i> Firmalar</div>
+      <div class="nav-item" onclick="showView('sources',this)"><i class="fas fa-database"></i> Veri Kaynakları</div>
+      <div class="nav-item" onclick="showView('quality',this)"><i class="fas fa-chart-bar"></i> Veri Kalitesi</div>
+      <div class="nav-item" onclick="showView('tasks',this)"><i class="fas fa-tasks"></i> Görev Tahtası</div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Bilgi Merkezi</div>
+      <div class="info-card">
+        <i class="fas fa-lightbulb"></i>
+        <p>Arama yaparken firma adı, VKN, telefon veya e-posta kullanabilirsiniz.</p>
+      </div>
+      <div class="info-card">
+        <i class="fas fa-filter"></i>
+        <p>Sektör ve veri kaynağı filtrelerini aynı anda kullanabilirsiniz.</p>
+      </div>
+      <div class="info-card">
+        <i class="fas fa-download"></i>
+        <p>Filtrelenmiş sonuçları CSV olarak dışa aktarabilirsiniz.</p>
+      </div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title"><i class="fas fa-star" style="color:var(--yellow)"></i> İzlenen Firmalar</div>
+      <div id="watchlist" class="watchlist"><span class="watchlist-empty">Henüz firma izlenmiyor.<br>Satırdaki <i class="fas fa-star" style="color:var(--yellow)"></i> ikonuna tıklayın.</span></div>
+    </div>
+    <div class="sidebar-section">
+      <div class="sidebar-title">Hızlı Erişim</div>
+      <div class="nav-item" onclick="exportCSV()"><i class="fas fa-download"></i> CSV Dışa Aktar</div>
+      <div class="nav-item" onclick="window.open('/docs','_blank')"><i class="fas fa-code"></i> API Dokümanı</div>
+      <div class="nav-item" onclick="window.open('/metrics','_blank')"><i class="fas fa-tachometer-alt"></i> Metrikler</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="content-scroll">
+      <div id="error-banner" class="error-banner hidden"><i class="fas fa-exclamation-triangle"></i> <span id="error-text"></span></div>
+      <div id="loading" class="loading"><div class="loading-spinner"></div> Veriler yükleniyor...</div>
+      <div id="content" class="hidden">
+        <div id="search-result" class="search-result-bar hidden">
+          <div class="result-icon"><i class="fas fa-check-circle"></i></div>
+          <div class="result-text">
+            <span class="result-count"><b id="result-count">0</b> firma bulundu</span>
+            <span id="result-filter" class="result-filter"></span>
+          </div>
+          <button class="clear-btn" onclick="clearFilters()"><i class="fas fa-times"></i> Filtreleri Temizle</button>
+        </div>
+        <div class="kpi-row" id="kpi-grid"></div>
+        <div class="charts-row">
+          <div class="chart-card">
+            <div class="chart-card-header"><div class="chart-card-title"><i class="fas fa-chart-pie"></i> Alan Doluluk Oranları</div></div>
+            <div class="chart-container"><canvas id="coverageChart"></canvas></div>
+          </div>
+          <div class="chart-card">
+            <div class="chart-card-header"><div class="chart-card-title"><i class="fas fa-chart-bar"></i> Kalite Skoru Dağılımı</div></div>
+            <div class="chart-container"><canvas id="qualityChart"></canvas></div>
+          </div>
+        </div>
+        <div class="chart-card" style="margin-bottom:16px">
+          <div class="chart-card-header">
+            <div class="chart-card-title"><i class="fas fa-industry"></i> Sektör Dağılımı (NACE Kodları)</div>
+            <div class="chart-card-actions">
+              <button class="chart-btn" onclick="clearNACEFilter()"><i class="fas fa-times"></i> Sektör Temizle</button>
+            </div>
+          </div>
+          <div id="nace-list" class="nace-list"></div>
+        </div>
+
+        <!-- Veri Kaynaklari Bolumu -->
+        <div class="sources-section">
+          <div class="sources-header">
+            <h2><i class="fas fa-database"></i> Veri Kaynakları</h2>
+            <div class="sources-actions">
+              <button class="btn-refresh" onclick="selectAllSources()" style="padding:6px 12px"><i class="fas fa-check-double"></i> Hepsini Seç</button>
+              <button class="chart-btn" onclick="clearSourceFilter()"><i class="fas fa-times"></i> Seçimi Temizle</button>
+            </div>
+          </div>
+          <p class="sources-hint"><i class="fas fa-info-circle"></i> Bir veya birden fazla veri kaynağını seçerek firmaları filtreleyebilirsiniz. Yeni eklenen kaynaklar otomatik olarak buraya gelir.</p>
+          <div id="sources-grid" class="sources-grid"></div>
+        </div>
+
+        <!-- Hizli Filtreleme Cubugu -->
+        <div class="quick-filters">
+          <div class="quick-filter-title"><i class="fas fa-bolt"></i> Hızlı Filtreleme</div>
+          <div class="quick-filter-row">
+            <div class="quick-filter-item">
+              <label>Sektör (NACE)</label>
+              <select class="filter-select" id="nace-filter" onchange="applyQuickFilter()">
+                <option value="">Tüm Sektörler</option>
+              </select>
+            </div>
+            <div class="quick-filter-item">
+              <label>Veri Kaynağı</label>
+              <select class="filter-select" id="source-filter" onchange="applyQuickFilter()">
+                <option value="">Tüm Kaynaklar</option>
+              </select>
+            </div>
+            <div class="quick-filter-item">
+              <label>Min Kalite Skoru</label>
+              <input type="range" id="min-score-slider" min="0" max="100" value="0" oninput="updateScoreLabel()" onchange="applyQuickFilter()">
+              <span class="score-label" id="score-label">0</span>
+            </div>
+            <div class="quick-filter-item">
+              <label>&nbsp;</label>
+              <button class="btn-refresh" onclick="clearAllFilters()" style="padding:8px 14px"><i class="fas fa-redo"></i> Tümünü Sıfırla</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="table-card">
+          <div class="table-header">
+            <h2><i class="fas fa-building"></i> Firma Listesi <span class="table-count" id="table-count">0</span></h2>
+            <div class="table-filters">
+              <button class="btn-refresh" onclick="exportCSV()" style="padding:6px 12px"><i class="fas fa-download"></i> CSV Dışa Aktar</button>
+            </div>
+          </div>
+          <div class="table-wrapper">
+            <table>
+              <thead><tr>
+                <th data-sort="legal_name" class="sortable">Firma Adı <span class="sort-icon"></span></th>
+                <th data-sort="trade_name" class="sortable">Ticaret Adı <span class="sort-icon"></span></th>
+                <th data-sort="website_domain" class="sortable">Web <span class="sort-icon"></span></th>
+                <th data-sort="primary_phone" class="sortable">Telefon <span class="sort-icon"></span></th>
+                <th data-sort="vkn" class="sortable">VKN <span class="sort-icon"></span></th>
+                <th data-sort="nace_code" class="sortable">NACE / Sektör <span class="sort-icon"></span></th>
+                <th data-sort="data_quality_score" class="sortable">Skor <span class="sort-icon"></span></th>
+                <th style="width:32px" title="İzleme listesi"><i class="fas fa-star" style="color:var(--yellow);font-size:10px"></i></th>
+              </tr></thead>
+              <tbody id="companies-tbody"></tbody>
+            </table>
+          </div>
+          <div class="pagination" id="pagination"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <aside class="detail-panel">
+    <div class="detail-title">Firma Detayı</div>
+    <div id="detail-empty" class="detail-empty"><i class="fas fa-hand-pointer"></i><p>Firmaya tıklayarak detayları görüntüle</p></div>
+    <div id="detail-content" style="display:none"></div>
+  </aside>
+</div>
+<script src="/static/js/nace_labels.js"></script>
+<script src="/static/js/app.js?v=3"></script>
+</body>
+</html>

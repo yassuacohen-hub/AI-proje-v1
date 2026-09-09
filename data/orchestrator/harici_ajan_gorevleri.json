@@ -1,0 +1,42 @@
+[
+  {
+    "gorev_id": "H001",
+    "ajan": "copilot",
+    "baslik": "ASO verisini ingest et",
+    "aciklama": "data/aso/aso_full.jsonl (488KB) dosyasini DB'ye yaz. Ingestion scripti yok, uret.",
+    "dosyalar": ["data/aso/aso_full.jsonl"],
+    "beklenen_cikti": "scripts/aso_ingest.py",
+    "bagimliliklar": [],
+    "oncelik": "P1"
+  },
+  {
+    "gorev_id": "H002",
+    "ajan": "claude_code",
+    "baslik": "ETL mimarisi review + guncelle",
+    "aciklama": "AI proje v1/V10/03_mimari/01_etl_mimarisi.md dosyasini V9 baglam ile uyumlu hale getir.",
+    "dosyalar": ["AI proje v1/V10/03_mimari/01_etl_mimarisi.md"],
+    "beklenen_cikti": "workspace/external/claude_code/output/docs/01_etl_mimarisi_review.md",
+    "bagimliliklar": [],
+    "oncelik": "P2"
+  },
+  {
+    "gorev_id": "H003",
+    "ajan": "cursor_grok",
+    "baslik": "Ostim scraper code review",
+    "aciklama": "src/company_master/etl/scrapers/ostim_scraper.py dosyasini gozden gecir, iyilestirme oner.",
+    "dosyalar": ["src/company_master/etl/scrapers/ostim_scraper.py"],
+    "beklenen_cikti": "workspace/external/cursor_grok/output/code_review.md",
+    "bagimliliklar": [],
+    "oncelik": "P1"
+  },
+  {
+    "gorev_id": "H004",
+    "ajan": "copilot",
+    "baslik": "Telegram bot systemd servisini test et",
+    "aciklama": "scripts/telegram_bot_systemd.service dosyasini test et, duzelt ve dokumantasyon yaz.",
+    "dosyalar": ["scripts/telegram_bot_systemd.service"],
+    "beklenen_cikti": "workspace/external/copilot/output/scripts/telegram_bot_systemd.service",
+    "bagimliliklar": [],
+    "oncelik": "P1"
+  }
+]
