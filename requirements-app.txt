@@ -1,7 +1,7 @@
 # API + dashboard (guncel mimari)
 fastapi>=0.110.0
 uvicorn[standard]>=0.29.0
-SQLAlchemy>=2.0.30
+SQLAlchemy>=2.0.52
 psycopg[binary]>=3.2.0
 python-dotenv>=1.0.0
 
