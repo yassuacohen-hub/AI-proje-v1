@@ -88,33 +88,21 @@ except ImportError:
 
 _FALLBACK_URL = "sqlite:///./company_master.db"
 
-
-
-
 def get_database_url() -> str:
-
     """Aktif veritabanı URL'sini döndürür."""
-
     url = os.getenv("DATABASE_URL")
-
     if url:
-
         return url
-
     return _FALLBACK_URL
-@lru_cache(maxsize=1)
-def get_engine():
-    """SQLAlchemy engine veya basit bağlantı."""
-    if not HAS_SQLALCHEMY:
-        import sqlite3
-        url = get_database_url()
-        if url.startswith("sqlite:///"):
-            db_path = Path(url[len("sqlite:///"):])
-        else:
-            db_path = Path("./company_master.db")
-        return sqlite3.connect(str(db_path))
 
-    url = get_database_url()
+
+@lru_cache(maxsize=8)
+def _engine_for(url: str):
+    """URL-bazli engine cache: DATABASE_URL degistince dogru engine uretilir (Y20 fix).
+
+    Eski get_engine() parametresiz lru_cache'ti; test env'i DATABASE_URL'i
+    degistirdiginde cache eski engine'e kilitleniyordu.
+    """
     if url.startswith("postgresql://"):
         url = url.replace("postgresql://", "postgresql+psycopg://", 1)
     if url.startswith("postgresql"):
@@ -129,6 +117,18 @@ def get_engine():
             connect_args={"prepare_threshold": None, "options": "-c statement_timeout=0"},
         )
     return create_engine(url, echo=False, future=True)
+
+def get_engine():
+    """SQLAlchemy engine veya basit bağlantı."""
+    if not HAS_SQLALCHEMY:
+        import sqlite3
+        url = get_database_url()
+        if url.startswith("sqlite:///"):
+            db_path = Path(url[len("sqlite:///"):])
+        else:
+            db_path = Path("./company_master.db")
+        return sqlite3.connect(str(db_path))
+    return _engine_for(get_database_url())
 
 
 def get_session():

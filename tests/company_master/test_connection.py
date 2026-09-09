@@ -12,6 +12,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[2]))\
 from src.company_master.db.connection import (
     get_database_url,
     get_engine,
+    _engine_for,
     init_db,
     _find_root,
     _load_env,
@@ -27,9 +28,9 @@ def _temiz_get_engine_cache():
     DATABASE_URL'i geri almadan sqlite:// engine uretiyor; sonraki testler
     cache'ten eski engine'i alip fail oluyordu (test pollution).
     """
-    get_engine.cache_clear()
+    _engine_for.cache_clear()
     yield
-    get_engine.cache_clear()
+    _engine_for.cache_clear()
 
 
 def test_get_database_url_from_env(monkeypatch):
@@ -42,8 +43,8 @@ def test_get_database_url_fallback(monkeypatch):
     assert get_database_url() == "sqlite:///./company_master.db"
 
 
-def test_get_engine_sqlite():
-    os.environ["DATABASE_URL"] = "sqlite://"
+def test_get_engine_sqlite(monkeypatch):
+    monkeypatch.setenv("DATABASE_URL", "sqlite://")
     engine = get_engine()
     assert engine is not None
 
@@ -87,10 +88,10 @@ def test_get_session_returns_none_without_sqlalchemy(monkeypatch):
     assert get_session() is None
 
 
-def test_init_db_creates_tables():
+def test_init_db_creates_tables(monkeypatch):
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = Path(tmpdir) / "test.db"
-        os.environ["DATABASE_URL"] = f"sqlite:///{db_path}"
+        monkeypatch.setenv("DATABASE_URL", f"sqlite:///{db_path}")
         init_db()
         import sqlite3
         conn = sqlite3.connect(str(db_path))
@@ -121,7 +122,7 @@ def test_init_db_handles_sql_error(monkeypatch):
 def test_init_db_with_custom_sql_path(monkeypatch):
     with tempfile.TemporaryDirectory() as tmpdir:
         db_path = Path(tmpdir) / "test.db"
-        os.environ["DATABASE_URL"] = f"sqlite:///{db_path}"
+        monkeypatch.setenv("DATABASE_URL", f"sqlite:///{db_path}")
         sql_path = Path(tmpdir) / "test.sql"
         sql_path.write_text("CREATE TABLE IF NOT EXISTS test (id INT);", encoding="utf-8")
         with patch("src.company_master.db.connection.create_engine") as mock_engine:

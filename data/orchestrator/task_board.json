@@ -1145,7 +1145,7 @@
     "id": "Y20",
     "baslik": "BUG: connection.py DATABASE_URL env override testlerde sqlite'a dusuyor",
     "sahip": "gelistirici",
-    "durum": "plan",
-    "not": "DATABASE_URL=postgresql+psycopg://... env var'i set edilip testler kosuldugunda web_app sqlite fallback'a geciyor (no such table: companies, 19 fail). get_database_url()/get_engine() +psycopg sonekli URL'leri veya env onceligini duzgun islemeli; testlerin yerel PG ile de kosmasi gerekir (Y15 index dogrulamasi yerelde manuel yapildi)."
+    "durum": "done",
+    "not": "TAMAMLANDI 2026-09-09. 3 kok neden: (1) connection.py get_engine'in parametresiz lru_cache'i env degisince eski engine'e kilitleniyordu -> URL-bazli _engine_for cache eklendi; (2) test_ankara_osb.py'nin import-time DATABASE_URL set'i collection'da tum suite'i sqlite'a kirletiyordu -> module-scope fixture'a tasindi (restore dahil); (3) test_connection/test_extra_coverage'daki bare env set'ler monkeypatch'e cevrildi. DOGRULAMA: tam suite 192 passed / 0 failed (onceden 19 fail + 21 error); yerel PG (5433) env ile 43 passed / 2.2 sn (Supabase yerine ~8x hizli kosum)."
   }
 ]

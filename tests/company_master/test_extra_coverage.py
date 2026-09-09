@@ -13,7 +13,8 @@ from unittest.mock import MagicMock, patch
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
 from src.company_master.db.connection import (
-    get_database_url, get_engine, init_db, _load_env,
+    get_database_url, get_engine,
+    _engine_for, init_db, _load_env,
 )
 from src.company_master.etl.normalize import (
     _data_quality_score, _map_row, run_normalize,
@@ -29,9 +30,9 @@ import pytest  # noqa: E402
 @pytest.fixture(autouse=True)
 def _temiz_get_engine_cache():
     """test_connection.py ile ayni onlem: lru_cache engine sizintisini engelle."""
-    get_engine.cache_clear()
+    _engine_for.cache_clear()
     yield
-    get_engine.cache_clear()
+    _engine_for.cache_clear()
 
 @contextmanager
 def _tmpdir():
@@ -77,10 +78,10 @@ def test_load_env_single_quoted_value():
             assert os.getenv("SKEY") == "single quote"
             os.environ.pop("SKEY", None)
 
-def test_init_db_creates_quarantine():
+def test_init_db_creates_quarantine(monkeypatch):
     with _tmpdir() as tmp:
         db_path = tmp / "q.db"
-        os.environ["DATABASE_URL"] = "sqlite:///" + str(db_path)
+        monkeypatch.setenv("DATABASE_URL", "sqlite:///" + str(db_path))
         init_db()
         import sqlite3
         conn = sqlite3.connect(str(db_path))

@@ -1,4 +1,21 @@
 
+## 2026-09-09 — Y20: Test kirliliği kökten çözüldü (192 passed) ✅
+
+**3 kök neden:**
+
+| # | Sorun | Fix |
+|---|---|---|
+| 1 | `connection.py` — `get_engine`'in parametresiz `lru_cache(maxsize=1)`'i: env değişince **eski engine'e kilitli kalıyordu** | URL-bazlı `_engine_for(url)` cache eklendi; `get_engine` cache'siz delegasyon |
+| 2 | `test_ankara_osb.py` — **import-time** `DATABASE_URL=sqlite://` set'i: pytest collection'da **tüm suite'i** sqlite'a kilitleyordu (19 fail'in asıl kaynağı) | Module-scope `_sqlite_env` fixture'a taşındı (set + teardown restore) |
+| 3 | `test_connection.py` (3) + `test_extra_coverage.py` (1) — çıplak `os.environ` set'leri restore edilmiyordu | Hepsi `monkeypatch.setenv`'e çevrildi (otomatik restore) |
+
+**Doğrulama:**
+- Tam suite (`tests/`): **192 passed, 0 failed** (önce: 19 fail + 21 error) — 3.6 sn
+- **Yerel PG (localhost:5433) env'yle**: `43 passed` — 2.2 sn (Supabase koşumuna göre ~8x hızlı)
+- Artık testler hem Supabase hem yerel PostgreSQL ile koşabilir — Docker Faz 3b'nin tam kazancı
+
+Pano: **83/90 done** · Y20 done.
+
 ## 2026-09-09 — Y15: Yerel DB index'leri (~8x ek hızlanma) ✅
 
 **`scripts/setup_local_indexes.py`** (kalıcı araç — restore sonrası tekrar koşulabilir, idempotent):
