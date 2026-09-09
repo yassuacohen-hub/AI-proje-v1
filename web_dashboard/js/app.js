@@ -524,3 +524,115 @@ function exportCSV() {
   if (nace) url += `&nace=${encodeURIComponent(nace)}`;
   window.open(apiUrl(url), '_blank');
 }
+
+// ── Y19: Akilli Eslestirme (match) Paneli ───────────────────────────────────
+
+function scrollToSection(id) {
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// NACE dropdown'ini doldur (ayni liste nace-filter'dan)
+function populateMatchNace() {
+  const src = document.getElementById('nace-filter');
+  const dst = document.getElementById('match-nace');
+  if (!src || !dst || dst.options.length > 1) return; // bir kez doldur
+  Array.from(src.options).forEach(o => {
+    const opt = document.createElement('option');
+    opt.value = o.value;
+    opt.textContent = o.textContent;
+    dst.appendChild(opt);
+  });
+}
+
+function matchBadge(iliski) {
+  const map = {
+    'ayni-sektor':    ['badge-ayni',   'Aynı Sektör'],
+    'komple-sektor':  ['badge-komple', 'Komple Sektör'],
+    'uzak-sektor':    ['badge-uzak',   'Uzak Sektör'],
+  };
+  const [cls, label] = map[iliski] || ['badge-uzak', iliski || '—'];
+  return `<span class="match-badge ${cls}">${label}</span>`;
+}
+
+function matchScoreBar(puan) {
+  const renk = puan >= 80 ? 'var(--green)' : puan >= 60 ? 'var(--accent)' : puan >= 40 ? '#f59e0b' : 'var(--red)';
+  return `<div class="match-score-wrap">
+    <div class="match-score-bar"><div class="match-score-fill" style="width:${Math.min(puan,100)}%;background:${renk}"></div></div>
+    <span class="match-score-num" style="color:${renk}">${puan}</span>
+  </div>`;
+}
+
+function matchKirilim(k) {
+  if (!k) return '';
+  const rows = [
+    ['Sektör', k.sektor, 45], ['Konum', k.konum, 20],
+    ['Kalite', k.kalite, 25], ['Kanıt', k.kanit, 10],
+  ];
+  return `<div class="match-kirilim">` + rows.map(([ad, v, max]) =>
+    `<div class="mk" title="${ad}: ${v}/${max}"><span class="mk-label">${ad}</span>` +
+    `<div class="mk-bar"><div class="mk-fill" style="width:${max ? Math.round(v / max * 100) : 0}%"></div></div>` +
+    `<span class="mk-val">${v}</span></div>`).join('') + `</div>`;
+}
+
+async function runMatch() {
+  const nace = document.getElementById('match-nace').value;
+  const mode = document.getElementById('match-mode').value;
+  const min = document.getElementById('match-min').value;
+  const statusEl = document.getElementById('match-status');
+  const resultsEl = document.getElementById('match-results');
+
+  if (!nace) {
+    statusEl.className = 'match-status warn';
+    statusEl.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Önce alıcı sektörü seçin.';
+    resultsEl.innerHTML = '';
+    return;
+  }
+
+  statusEl.className = 'match-status info';
+  statusEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Eşleştirme yapılıyor…';
+  resultsEl.innerHTML = '';
+
+  try {
+    const r = await fetch(apiUrl(`/api/match?nace=${encodeURIComponent(nace)}&mode=${mode}&min_puan=${min}&limit=20`));
+    if (!r.ok) throw new Error(`API ${r.status}`);
+    const d = await r.json();
+
+    statusEl.className = 'match-status ok';
+    statusEl.innerHTML = `<i class="fas fa-check-circle"></i> <b>${d.toplam}</b> firma eşleştirildi — alıcı sektörü: <b>${esc(d.buyer.nace)}</b> (${mode === 'komple' ? 'tedarik zinciri dahil' : 'sadece aynı sektör'})`;
+
+    if (!d.items.length) {
+      resultsEl.innerHTML = '<div class="match-empty">Sonuç yok — Min Puan değerini düşürmeyi deneyin.</div>';
+      return;
+    }
+
+    window._matchItems = d.items;
+    resultsEl.innerHTML = `
+      <div class="match-result-head">
+        <span class="mr-col-name">Firma</span><span class="mr-col-nace">Sektör</span>
+        <span class="mr-col-score">Puan</span><span class="mr-col-rel">İlişki</span>
+      </div>` + d.items.map((i, idx) => `
+      <div class="match-result-row" onclick="showDetail(window._matchItems[${idx}])">
+        <div class="mr-name">
+          <div class="mr-name-main">${esc(i.legal_name)}</div>
+          <div class="mr-name-sub">${esc(i.trade_name)}${i.website_domain ? ' · ' + esc(i.website_domain) : ''}</div>
+        </div>
+        <div class="mr-nace">${esc(i.nace_code || '-')}</div>
+        <div class="mr-score">${matchScoreBar(i.match.puan)}</div>
+        <div class="mr-rel">${matchBadge(i.match.iliski)}${matchKirilim(i.match.kirilim)}</div>
+      </div>`).join('');
+  } catch (e) {
+    statusEl.className = 'match-status err';
+    statusEl.innerHTML = `<i class="fas fa-exclamation-circle"></i> Eşleştirme hatası: ${esc(e.message)}`;
+  }
+}
+
+// showView'e match scroll entegrasyonu (mevcut fonksiyonu sarmala)
+const _origShowView = showView;
+showView = function (v, el) {
+  _origShowView(v, el);
+  if (v === 'match') {
+    populateMatchNace();
+    scrollToSection('match-section');
+  }
+};

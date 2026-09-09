@@ -987,13 +987,13 @@
     "baslik": "Company Matcher (eslestirme motoru)",
     "sahip": "gelistirici",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-09T12:50:18",
     "bitis": null,
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/pipeline/normalizer.py"
     ],
-    "not": "Exact + fuzzy + domain + mersis/vkn + alias multi-pass eslestirme"
+    "not": "Exact + fuzzy + domain + mersis/vkn + alias multi-pass eslestirme | TAMAMLANDI 2026-09-09 (Y19 ile): /api/match endpoint canli — NACE komşuluk + konum + kalite + kanıt skoru; dashboard paneli eklendi. Bu görev duplicate sayıldı."
   },
   {
     "task_id": "P7-4",
@@ -1013,13 +1013,13 @@
     "baslik": "İSKUR Scraper",
     "sahip": "web_kazima",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "blocked",
     "baslangic": "2026-09-09T12:50:18",
     "bitis": null,
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/sources/iskur.py"
     ],
-    "not": "Resmi kaynak; KVKK güvenli; yapılandırılmış veri; API/HTML"
+    "not": "Resmi kaynak; KVKK güvenli; yapılandırılmış veri; API/HTML | KOORDINATOR KARARI 2026-09-09: Y21 risk analizi tamamlanana ve kullanici onayi alinana kadar BASLAMAYINIZ. Risks: ISKUR kullanim sartlari ihlali + KVKK (bireysel iletisim) + lisans. Bkz. workspace/external/BRIEF_Y21_iskur.md"
   },
   {
     "task_id": "P7-6",

@@ -36,6 +36,7 @@
       <div class="nav-item" onclick="showView('companies',this)"><i class="fas fa-building"></i> Firmalar</div>
       <div class="nav-item" onclick="showView('sources',this)"><i class="fas fa-database"></i> Veri Kaynakları</div>
       <div class="nav-item" onclick="showView('quality',this)"><i class="fas fa-chart-bar"></i> Veri Kalitesi</div>
+      <div class="nav-item" onclick="showView('match',this); scrollToSection('match-section')"><i class="fas fa-handshake"></i> Eşleştirme</div>
       <div class="nav-item" onclick="showView('tasks',this)"><i class="fas fa-tasks"></i> Görev Tahtası</div>
     </div>
     <div class="sidebar-section">
@@ -89,6 +90,39 @@
             <div class="chart-container"><canvas id="qualityChart"></canvas></div>
           </div>
         </div>
+        <!-- Y19: Akilli Eslestirme Paneli -->
+        <div class="chart-card" id="match-section" style="margin-bottom:16px">
+          <div class="chart-card-header">
+            <div class="chart-card-title"><i class="fas fa-handshake"></i> Akıllı Eşleştirme <span style="font-size:11px;color:#64748b;margin-left:6px">V9 Smart Matching MVP</span></div>
+          </div>
+          <div class="match-controls">
+            <div class="quick-filter-item">
+              <label>Alıcı (Buyer) Sektörü</label>
+              <select class="filter-select" id="match-nace">
+                <option value="">Sektör seçin…</option>
+              </select>
+            </div>
+            <div class="quick-filter-item">
+              <label>Eşleştirme Modu</label>
+              <select class="filter-select" id="match-mode">
+                <option value="komple">Komple (tedarik zinciri dahil)</option>
+                <option value="ayni">Aynı sektör</option>
+              </select>
+            </div>
+            <div class="quick-filter-item">
+              <label>Min Puan</label>
+              <input type="range" id="match-min" min="0" max="100" value="30" oninput="document.getElementById('match-min-label').textContent=this.value">
+              <span class="score-label" id="match-min-label">30</span>
+            </div>
+            <div class="quick-filter-item" style="align-self:end">
+              <button class="btn-refresh" onclick="runMatch()" style="padding:8px 16px"><i class="fas fa-play"></i> Eşleştir</button>
+            </div>
+          </div>
+          <p class="sources-hint" style="padding:0 16px"><i class="fas fa-info-circle"></i> Puan = sektör uyumu (45) + konum (20) + firma kalitesi (25) + kanıt gücü (10). "Komple" mod tedarik zinciri komşu sektörlerini de önerir.</p>
+          <div id="match-status" class="match-status hidden"></div>
+          <div id="match-results" class="match-results"></div>
+        </div>
+
         <div class="chart-card" style="margin-bottom:16px">
           <div class="chart-card-header">
             <div class="chart-card-title"><i class="fas fa-industry"></i> Sektör Dağılımı (NACE Kodları)</div>
@@ -175,6 +209,6 @@
   </aside>
 </div>
 <script src="/static/js/nace_labels.js"></script>
-<script src="/static/js/app.js?v=3"></script>
+<script src="/static/js/app.js?v=4"></script>
 </body>
 </html>

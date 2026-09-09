@@ -1,4 +1,20 @@
 
+## 2026-09-09 — Match motoru dashboard'a taşındı + UX iyileştirmeleri ✅
+
+**Dashboard "Eşleştirme" paneli (Y19 UI):**
+- Sol menüye **"Eşleştirme"** nav-item (scroll entegrasyonlu) + Sektör Dağılımı üstünde `#match-section` kartı
+- Kontroller: buyer NACE dropdown (mevcut NACE listesinden otomatik doldurulur), mod (Komple/Aynı), min puan slider, "Eşleştir" butonu
+- Sonuç satırları: firma adı+ticaret adı+domain, NACE kodu, **renkli puan çubuğu** (≥80 yeşil / ≥60 mavi / ≥40 turuncu / altı kırmızı), ilişki badge'i (Aynı Sektör mavi / Komple Sektör yeşil / Uzak gri), **4'lü kırılım mini-barları** (sektör/konum/kalite/kanıt, tooltip'li)
+- Satıra tıklayınca firma detay paneli açılır (`window._matchItems` indeksleme — JSON quote-escape güvenli)
+- Statü banner'ları: bilgi/yükleniyor/uyarı/hata (renkli), boş durum mesajı
+
+**Doğrulama:** `node --check` OK · headless Edge DOM testi: 5 match elementi render ✅ · volume mount sayesinde **rebuild'siz canlıya düştü** (port 8000) · cache-buster v4
+
+**İç ajan gözlemi + koordinasyon:**
+- Pano: **81/98 done** · arastirmaci'da 5 plan (Y16/Y17/Y18/Y21 + GİB)
+- ✅ "Company Matcher" görevi → **done** (Y19 duplicate)
+- 🔒 "İSKUR Scraper" (web_kazima) → **blocked**: Y21 risk analizi + kullanıcı onayı olmadan ajan başlamayacak (koordinatör kararı panoya işlendi)
+
 ## 2026-09-09 — Y19: Smart Matching MVP (V9) canlıda ✅
 
 **`GET /api/match`** — buyer-firma eşleştirme motoru (V9 "kime satis yapilir" MVP'si):
