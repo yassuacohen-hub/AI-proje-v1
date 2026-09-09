@@ -1,4 +1,18 @@
 
+## 2026-09-09 — Profil zenginleştirme + admin-only görev tahtası + tam üyelik akış testi ✅
+
+**Profil geliştirme (çalışan sayısı + sertifikalar):**
+- Migration 0014 (`scripts/migrate_0014_profile_enrich.py`): users tablosuna `employee_range` + `certificates` — Supabase ve yerel PG'ye uygulandı
+- `GET/PUT /api/buyer/profile` alanları işliyor; tamlama skoru 8→**10 alan**a çıktı
+- İşletmem formuna: Çalışan Sayısı dropdown (1-5/6-20/21-50/51-250/250+) + Sertifikalar input
+
+**Görev tahtası artık gerçek admin-only:**
+- `openTasks()` admin değilse overlay hiç açılmıyor (toast uyarısı); sidebar'daki "Görev Tahtası (Yönetici)" öğesi admin oturumu yokken **gizli**, admin girişinde görünür — js v22
+
+**Tam üyelik akış testi (canlı, 7 adım, hepsi 200):** kayıt (kurumsal e-posta+KVKK) → admin pending'de göründü → terminal tier onayı (100 kredi) → üye girişi → match sonrası kredi 99 (1 kredi düşüldü) → profil PUT yeni alanlar (tamlama %80) → GET doğrulama ✓. Test üyesi sonrasında DB'den temizlendi (`scripts/cleanup_test_users.py`).
+
+**Ürün Kategorileri (Y25) kartının konumu hakkında:** admin overlay'de Üye Onay Paneli'nin altında ayrı karttır — katalog (kayıt formlarındaki ürün kategorileri) eşleştirme kalitesini yönetir; yalnızca admin görür.
+
 ## 2026-09-09 — Y22 MATCH v2: eşleştirme yönü seçimi ✅ + admin panel erişim rehberi
 
 **Y22 uygulama:**

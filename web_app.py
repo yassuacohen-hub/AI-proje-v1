@@ -1048,6 +1048,7 @@ def api_buyer_profile(token: str = ""):
         prof = conn.execute(text(
             "SELECT u.user_id, u.email, u.company_name, u.nace_code, u.products_desc, "
             "u.target_nace, u.goal, u.contact_name, u.website, u.department, u.kvkk_consent, "
+            "u.employee_range, u.certificates, "
             "u.status, u.tier, u.credit_balance, u.api_key, u.linked_company_id, u.created_at "
             "FROM users u WHERE u.user_id = :u"), {"u": u["user_id"]}).mappings().first()
         ledger = conn.execute(text(
@@ -1060,7 +1061,7 @@ def api_buyer_profile(token: str = ""):
     p = dict(prof) if prof else {}
     # profil tamamlanma skoru (ne kadar cok bilgi = o kadar iyi eslesme)
     alanlar = ["company_name", "nace_code", "products_desc", "target_nace", "goal",
-               "department", "website", "contact_name"]
+               "department", "website", "contact_name", "employee_range", "certificates"]
     dolu = sum(1 for a in alanlar if p.get(a))
     p["profil_tamlama"] = round(dolu / len(alanlar) * 100)
     return {
@@ -1085,6 +1086,8 @@ def api_buyer_profile_update(req: dict, token: str = ""):
         "contact_name": req.get("contact_name"),
         "website": req.get("website"),
         "department": req.get("department"),
+        "employee_range": req.get("employee_range"),
+        "certificates": req.get("certificates"),
     }
     sets, params = [], {"u": str(u["user_id"])}
     for k, v in alanlar.items():
@@ -1099,12 +1102,14 @@ def api_buyer_profile_update(req: dict, token: str = ""):
         conn.execute(text(f"UPDATE users SET {', '.join(sets)} WHERE user_id = :u"), params)
         row = conn.execute(text(
             "SELECT company_name, nace_code, products_desc, target_nace, goal, department, "
-            "website, contact_name, credit_balance, tier FROM users WHERE user_id = :u"),
+            "website, contact_name, employee_range, certificates, credit_balance, tier "
+            "FROM users WHERE user_id = :u"),
             {"u": str(u["user_id"])}).mappings().first()
     alanlar_dolu = sum(1 for a in ["company_name", "nace_code", "products_desc", "target_nace",
-                                   "goal", "department", "website", "contact_name"]
+                                   "goal", "department", "website", "contact_name",
+                                   "employee_range", "certificates"]
                        if row.get(a))
-    return {"ok": True, "profil_tamlama": round(alanlar_dolu / 8 * 100), "profil": dict(row)}
+    return {"ok": True, "profil_tamlama": round(alanlar_dolu / 10 * 100), "profil": dict(row)}
 
 
 @app.get("/api/buyer/ledger")

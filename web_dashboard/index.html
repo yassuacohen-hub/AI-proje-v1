@@ -81,7 +81,7 @@
       <div class="sidebar-section">
         <div class="sidebar-title">Hızlı Erişim</div>
         <div class="nav-item tip" data-tip="Aktif filtrelerdeki firmaları CSV dosyası olarak indirir (Excel'de açılır)." role="button" tabindex="0" onclick="exportCSV()"><i class="fas fa-download" aria-hidden="true"></i><span>CSV Dışa Aktar</span></div>
-        <div class="nav-item tip" data-tip="İç ajan görevleri + üye onay paneli. Yalnızca yönetici girişiyle açılır." role="button" tabindex="0" onclick="openTasks()"><i class="fas fa-tasks" aria-hidden="true"></i><span>Görev Tahtası (Yönetici)</span></div>
+        <div class="nav-item tip" id="nav-tasks" data-tip="İç ajan görevleri + üye onay paneli. Yalnızca yönetici girişiyle açılır." role="button" tabindex="0" style="display:none" onclick="openTasks()"><i class="fas fa-tasks" aria-hidden="true"></i><span>Görev Tahtası (Yönetici)</span></div>
         <div class="nav-item tip" data-tip="Tüm API endpoint'lerinin Swagger dokümantasyonu." role="button" tabindex="0" onclick="window.open('/docs','_blank')"><i class="fas fa-code" aria-hidden="true"></i><span>API Dokümanı</span></div>
         <div class="nav-item tip" data-tip="Prometheus formatındaki performans metrikleri (izleme araçları için)." role="button" tabindex="0" onclick="window.open('/metrics','_blank')"><i class="fas fa-tachometer-alt" aria-hidden="true"></i><span>Metrikler</span></div>
       </div>
@@ -265,7 +265,7 @@
     </aside>
   </div>
   <script src="/static/js/nace_labels.js"></script>
-  <script src="/static/js/app.js?v=21"></script>
+  <script src="/static/js/app.js?v=22"></script>
 </body>
 </html>
 

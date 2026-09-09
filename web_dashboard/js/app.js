@@ -89,6 +89,14 @@ function scrollToTop() { window.scrollTo({ top: 0, behavior: 'smooth' }); }
 // ── Y22: Gorev Tahtasi (bagimsiz admin overlay: gorevler + uye onay paneli) ──
 
 function openTasks() {
+  // Yonetici olmayan kullanicilar gorev tahtasini hic goremaz (admin-only).
+  _isTaskAdmin((isAdmin) => {
+    if (!isAdmin) { toast('Görev Tahtası yalnızca yönetici girişiyle açılır.'); return; }
+    _openTasksAdmin();
+  });
+}
+
+function _openTasksAdmin() {
   let ov = document.getElementById('tasks-overlay');
   if (!ov) {
     ov = document.createElement('div');
@@ -1120,6 +1128,11 @@ document.addEventListener('DOMContentLoaded', () => {
   const actions = document.querySelector('.topbar-actions');
   if (actions) actions.prepend(badge);
   refreshCreditBadge();
+  // Gorev Tahtasi nav ogresi yalnizca admin oturumunda gorunur
+  _isTaskAdmin(isAdmin => {
+    const nav = document.getElementById('nav-tasks');
+    if (nav) nav.style.display = isAdmin ? '' : 'none';
+  });
   // #tasks hash ile acilirsa yonetici panelini otomatik ac (test/debug)
   if (location.hash === '#tasks') openTasks();
 });
@@ -1413,7 +1426,19 @@ function renderIsletmem(d) {
       </div>
       <div class="mr-nace">
         <div class="quick-filter-item" style="width:100%"><label>Departman / Rolünüz</label><input id="is-department" class="filter-select" style="width:100%" value="${esc(p.department || '')}" placeholder="Satış, Üretim, Satın Alma..."></div>
-        <small style="color:var(--text-dim);font-size:10.5px;margin-top:4px;display:block">Departman bilgisi önerileri kişiselleştirmek için kullanılır.</small>
+        <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Çalışan Sayınız</label>
+          <select id="is-employee-range" class="filter-select" style="width:100%">
+            <option value=""${!p.employee_range ? ' selected' : ''}>Seçiniz…</option>
+            <option value="1-5"${p.employee_range === '1-5' ? ' selected' : ''}>1-5 kişi</option>
+            <option value="6-20"${p.employee_range === '6-20' ? ' selected' : ''}>6-20 kişi</option>
+            <option value="21-50"${p.employee_range === '21-50' ? ' selected' : ''}>21-50 kişi</option>
+            <option value="51-250"${p.employee_range === '51-250' ? ' selected' : ''}>51-250 kişi</option>
+            <option value="250+"${p.employee_range === '250+' ? ' selected' : ''}>250+ kişi</option>
+          </select>
+          <small style="color:var(--text-dim);font-size:10.5px;margin-top:4px;display:block">Firma büyüklüğü, eşleştirme önerilerini ölçek uyumuna göre sıralar.</small>
+        </div>
+        <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Sertifikalarınız (virgülle)</label><input id="is-certificates" class="filter-select" style="width:100%" value="${esc(p.certificates || '')}" placeholder="ISO 9001, ISO 14001, CE..."></div>
+        <small style="color:var(--text-dim);font-size:10.5px;margin-top:4px;display:block">Departman ve sertifikalar, eşleştirme isabetini artıran bilgi alanlarıdır.</small>
       </div>
       <div class="mr-score">
         <div class="quick-filter-item" style="width:100%"><label>Eşleştirme Amacı</label>
@@ -1459,6 +1484,8 @@ function saveIsletmemProfile() {
     products_desc: document.getElementById('is-products').value,
     target_nace: document.getElementById('is-target').value,
     department: document.getElementById('is-department').value,
+    employee_range: (document.getElementById('is-employee-range') || {}).value || '',
+    certificates: (document.getElementById('is-certificates') || {}).value || '',
     goal: document.getElementById('is-goal').value,
     contact_name: document.getElementById('is-contact').value,
     website: document.getElementById('is-web').value,
