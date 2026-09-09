@@ -29,31 +29,39 @@ function isWatched(c) { return watchSet.has(c.company_id || c.legal_name || '');
 function toggleWatch(id, el) {
   id = id || '';
   if (!id) return;
-  if (watchSet.has(id)) { watchSet.delete(id); if (el) el.querySelector('i').className = 'fas fa-star-o'; }
-  else { watchSet.add(id); if (el) el.querySelector('i').className = 'fas fa-star'; }
+  if (watchSet.has(id)) { watchSet.delete(id); if (el) el.className = 'watch-star-btn'; }
+  else { watchSet.add(id); if (el) el.className = 'watch-star-btn on'; }
   saveWatchStorage();
   renderWatchlist();
+}
+function toggleWatchByCompany(companyId, legalName, el) {
+  const key = companyId || legalName;
+  toggleWatch(key, el);
 }
 function renderWatchlist() {
   const wl = document.getElementById('watchlist');
   if (!wl) return;
   if (watchSet.size === 0) {
-    wl.innerHTML = '<span class="watchlist-empty">Henüz firma izlenmiyor.<br>Satırdaki <i class="fas fa-star" style="color:var(--yellow)"></i> ikonuna tıklayın.</span>';
+    wl.innerHTML = '<span class="watchlist-empty">Henüz firma izlenmiyor.<br>Tablodaki <i class="fas fa-star" style="color:var(--yellow)"></i> düğmesiyle veya detay panelinden <b>İzlemeye Al</b> ile ekleyin. İzlediğiniz firmalar burada kalıcı olarak listelenir — satış takibi için hızlı erişim.</span>';
     return;
   }
   const items = Array.from(watchSet);
   wl.innerHTML = items.slice(0, 10).map(id => {
-    const c = allCompanies.find(x => (x.company_id || x.legal_name) === id) || {};
-    const name = (c.legal_name || id).toUpperCase();
+    const c = allCompanies.find(x => (x.company_id || x.legal_name) === id);
+    const name = (c ? (c.legal_name || id) : id).toUpperCase();
     const nameS = name.length > 18 ? name.substring(0,17) + '…' : name;
+    const score = c ? Math.round(Number(c.data_quality_score||0)) : null;
+    const scoreTag = score !== null ? ` <span class="watchlist-score">${score}</span>` : '';
     return `<div class="watchlist-item" onclick="selectCompany('${esc(id)}')" title="${esc(name)}">
-      <span class="watchlist-name">${esc(nameS)}</span>
+      <span class="watchlist-name">${esc(nameS)}</span>${scoreTag}
       <span class="watchlist-x" onclick="event.stopPropagation(); toggleWatch('${esc(id)}')">&times;</span>
     </div>`;
   }).join('') + (items.length > 10 ? `<div class="watchlist-more">+${items.length-10} daha</div>` : '');
 }
 
-document.addEventListener('DOMContentLoaded', () => { loadAll(); updateTimestamp(); setInterval(updateTimestamp, 60000); });
+document.addEventListener('DOMContentLoaded', () => { loadAll(); updateTimestamp(); setInterval(updateTimestamp, 60000);
+  if (localStorage.getItem('huginn_info_collapsed') === '1') toggleInfoCenter();
+});
 
 function showLoading() { document.getElementById('loading').classList.remove('hidden'); document.getElementById('content').classList.add('hidden'); }
 function hideLoading() { document.getElementById('loading').classList.add('hidden'); document.getElementById('content').classList.remove('hidden'); }
@@ -496,8 +504,10 @@ function renderTable(companies) {
     const missVkn = vknVal ? esc(vknVal) : '<span class="missing-badge enrich" title="VKN eksik - zenginlestirme kuyruguna eklenebilir">VKN eksik ⚡</span>';
     const missWeb = webVal ? esc(webVal) : '<span class="missing-badge">web yok</span>';
     const missPhone = phoneVal ? esc(phoneVal) : '<span class="missing-badge">tel yok</span>';
-    return `<tr onclick="selectCompany('${esc(c.company_id||c.legal_name)}')" tabindex="0" role="button">
-      <td class="td-name">${esc(legalName)} ${isWatched(c) ? '<span class="watch-star">★</span>' : ''}</td>
+    const watchKey = esc(c.company_id||c.legal_name||'');
+    const watched = isWatched(c);
+    return `<tr onclick="selectCompany('${watchKey}')" tabindex="0" role="button">
+      <td class="td-name"><button class="watch-star-btn${watched?' on':''}" title="${watched?'İzlemeden çıkar':'İzlemeye al'}" onclick="event.stopPropagation(); toggleWatch('${watchKey}', this)"><i class="${watched?'fas':'far'} fa-star"></i></button> ${esc(legalName)}</td>
       <td>${esc(tradeName)}</td>
       <td class="td-mono">${missWeb}</td>
       <td class="td-mono">${missPhone}</td>
@@ -947,6 +957,14 @@ function toggleWatchDetail() {
 }
 
 // Ctrl+K: arama kutusuna odak (global arama kisayolu)
+function toggleInfoCenter() {
+  const cards = document.getElementById('info-cards');
+  const btn = document.getElementById('info-toggle');
+  const collapsed = cards.classList.toggle('collapsed');
+  btn.classList.toggle('collapsed', collapsed);
+  btn.setAttribute('aria-expanded', String(!collapsed));
+  localStorage.setItem('huginn_info_collapsed', collapsed ? '1' : '0');
+}
 document.addEventListener('keydown', e => {
   if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
     e.preventDefault();

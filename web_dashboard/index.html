@@ -9,7 +9,7 @@
   <title>Huginn — Data Insights</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="/static/css/style.css?v=21">
+  <link rel="stylesheet" href="/static/css/style.css?v=22">
 </head>
 <body>
   <a class="skip-link" href="#main-content">İçeriğe geç</a>
@@ -61,11 +61,18 @@
         <div class="nav-item tip" data-tip="Veri kalitesi: skor dağılımı ve hangi alanların ne kadar dolu olduğu." role="button" tabindex="0" onclick="showView('quality',this); scrollToSection('quality-section')"><i class="fas fa-chart-bar" aria-hidden="true"></i><span>Veri Kalitesi</span></div>
         <div class="nav-item tip" data-tip="V9 Smart Matching: alıcı sektörünüze en uygun firmaları puanlı görün." role="button" tabindex="0" onclick="showView('match',this); scrollToSection('match-section')"><i class="fas fa-handshake" aria-hidden="true"></i><span>Eşleştirme</span></div>
       </div>
-      <div class="sidebar-section">
-        <div class="sidebar-title">Bilgi Merkezi</div>
-        <div class="info-card"><i class="fas fa-lightbulb" aria-hidden="true"></i><p>Arama yaparken firma adı, VKN, telefon veya e-posta kullanabilirsiniz.</p></div>
-        <div class="info-card"><i class="fas fa-filter" aria-hidden="true"></i><p>Sektör ve veri kaynağı filtrelerini aynı anda kullanabilirsiniz.</p></div>
-        <div class="info-card"><i class="fas fa-download" aria-hidden="true"></i><p>Filtrelenmiş sonuçları CSV olarak dışa aktarabilirsiniz.</p></div>
+      <div class="sidebar-section" id="info-center">
+        <div class="sidebar-title info-center-head">Bilgi Merkezi
+          <button id="info-toggle" class="info-toggle" type="button" aria-expanded="true" aria-controls="info-cards" onclick="toggleInfoCenter()"><i class="fas fa-chevron-up" aria-hidden="true"></i></button>
+        </div>
+        <div id="info-cards" class="info-cards">
+        <div class="info-card clickable" role="button" tabindex="0" onclick="scrollToSection('companies-section')" onkeydown="if(event.key==='Enter'){this.click()}"><i class="fas fa-search" aria-hidden="true"></i><p><b>Akıllı Arama:</b> Firma adı, VKN, telefon veya e-posta ile arayın; Ctrl+K ile arama kutusuna anında geçin.</p></div>
+        <div class="info-card clickable" role="button" tabindex="0" onclick="scrollToSection('quick-filter-title')" onkeydown="if(event.key==='Enter'){this.click()}"><i class="fas fa-filter" aria-hidden="true"></i><p><b>Birleşik Filtreler:</b> Sektör + veri kaynağı + kalite skorunu aynı anda kullanın; sonuçlar anında güncellenir.</p></div>
+        <div class="info-card clickable" role="button" tabindex="0" onclick="exportCSV()" onkeydown="if(event.key==='Enter'){this.click()}"><i class="fas fa-download" aria-hidden="true"></i><p><b>CSV Dışa Aktar:</b> Filtrelenmiş firmaları Excel uyumlu CSV olarak indirin; satış listesi olarak doğrudan kullanın.</p></div>
+        <div class="info-card clickable" role="button" tabindex="0" onclick="scrollToSection('match-section')" onkeydown="if(event.key==='Enter'){this.click()}"><i class="fas fa-handshake" aria-hidden="true"></i><p><b>Eşleştirme Gücü:</b> Kendi NACE sektörünüzü alıcı seçin; tedarik zincirinize uygun tedarikçi ve iş ortağı adaylarını puana göre görün.</p></div>
+        <div class="info-card clickable" role="button" tabindex="0" onclick="scrollToSection('quality-section')" onkeydown="if(event.key==='Enter'){this.click()}"><i class="fas fa-chart-bar" aria-hidden="true"></i><p><b>Veri Sağlığı:</b> Hangi alanların dolu olduğunu görün; eksik telefon/web'i zenginleştirmeyle tamamlayın.</p></div>
+        <div class="info-card clickable" role="button" tabindex="0" onclick="scrollToSection('sources-section')" onkeydown="if(event.key==='Enter'){this.click()}"><i class="fas fa-database" aria-hidden="true"></i><p><b>Veri Kaynakları:</b> OSTİM, ASO, İvedik, Başkent OSB kayıtları — kaynağa tıklayıp o OSB'deki firmaları filtreleyin.</p></div>
+        </div>
       </div>
       <div class="sidebar-section">
         <div class="sidebar-title"><i class="fas fa-star" style="color:var(--yellow)" aria-hidden="true"></i> İzlenen Firmalar</div>
@@ -250,7 +257,7 @@
     </aside>
   </div>
   <script src="/static/js/nace_labels.js"></script>
-  <script src="/static/js/app.js?v=16"></script>
+  <script src="/static/js/app.js?v=17"></script>
 </body>
 </html>
 
