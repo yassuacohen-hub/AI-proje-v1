@@ -51,7 +51,7 @@
   },
   {
     "task_id": "P0-1",
-    "baslik": "OSTİM detay scrape tamamla (~1961/8313)",
+    "baslik": "OSTÄ°M detay scrape tamamla (~1961/8313)",
     "sahip": "web_kazima",
     "oncelik": "P0",
     "durum": "done",
@@ -62,7 +62,7 @@
   },
   {
     "task_id": "P0-2",
-    "baslik": "Scrape bitince ingest → VKN → kalite recalc",
+    "baslik": "Scrape bitince ingest â†’ VKN â†’ kalite recalc",
     "sahip": "gelistirici",
     "oncelik": "P0",
     "durum": "done",
@@ -73,18 +73,18 @@
   },
   {
     "task_id": "P0-3",
-    "baslik": "Kalite skoru 6.53 → 50+ hedefine yükselt",
+    "baslik": "Kalite skoru 6.53 â†’ 50+ hedefine yÃ¼kselt",
     "sahip": "kalite",
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
     "bitis": "2026-09-06T22:54:31",
     "dosyalar": [],
-    "not": "Kalite skoru 56.54/100 (hedef 50+ BASARILI). Dagilim: 80-100: 727, 60-79: 4854, 40-59: 1025, 20-39: 2241, 0-19: 160. Alanlar: telefon %92.3, email %48.4, web %56.2, NACE %100, VKN %0.4. VKN tek eksik alan — MERSIS API (P2-1) ile cozulebilir."
+    "not": "Kalite skoru 56.54/100 (hedef 50+ BASARILI). Dagilim: 80-100: 727, 60-79: 4854, 40-59: 1025, 20-39: 2241, 0-19: 160. Alanlar: telefon %92.3, email %48.4, web %56.2, NACE %100, VKN %0.4. VKN tek eksik alan â€” MERSIS API (P2-1) ile cozulebilir."
   },
   {
     "task_id": "P1-1",
-    "baslik": "İvedik OSB scraper implementasyonu",
+    "baslik": "Ä°vedik OSB scraper implementasyonu",
     "sahip": "gelistirici",
     "oncelik": "P0",
     "durum": "done",
@@ -95,7 +95,7 @@
   },
   {
     "task_id": "P1-2",
-    "baslik": "Başkent OSB scraper implementasyonu",
+    "baslik": "BaÅŸkent OSB scraper implementasyonu",
     "sahip": "gelistirici",
     "oncelik": "P1",
     "durum": "done",
@@ -128,7 +128,7 @@
   },
   {
     "task_id": "P1-5",
-    "baslik": "NACE: kalan 1266 sektörsüz firma",
+    "baslik": "NACE: kalan 1266 sektÃ¶rsÃ¼z firma",
     "sahip": "arastirmaci",
     "oncelik": "P1",
     "durum": "done",
@@ -150,7 +150,7 @@
   },
   {
     "task_id": "P2-1",
-    "baslik": "MERSİS/Ticaret Sicili API entegrasyonu",
+    "baslik": "MERSÄ°S/Ticaret Sicili API entegrasyonu",
     "sahip": "arastirmaci",
     "oncelik": "P1",
     "durum": "done",
@@ -172,7 +172,7 @@
   },
   {
     "task_id": "P2-3",
-    "baslik": "Zamanlanmış scrape (günlük refresh)",
+    "baslik": "ZamanlanmÄ±ÅŸ scrape (gÃ¼nlÃ¼k refresh)",
     "sahip": "web_kazima",
     "oncelik": "P1",
     "durum": "done",
@@ -194,7 +194,7 @@
   },
   {
     "task_id": "P2-5",
-    "baslik": "İç ajan otomatik görev atama",
+    "baslik": "Ä°Ã§ ajan otomatik gÃ¶rev atama",
     "sahip": "gelistirici",
     "oncelik": "P0",
     "durum": "done",
@@ -412,7 +412,7 @@
     "dosyalar": [
       "src/company_master/etl/multi_osb_merger.py"
     ],
-    "not": "Multi-OSB merger (OSTIM+ASO+Ivedik+Baskent) tek transaction'da upsert eder. Deduplicate VKN ve legal_name üzerinden."
+    "not": "Multi-OSB merger (OSTIM+ASO+Ivedik+Baskent) tek transaction'da upsert eder. Deduplicate VKN ve legal_name Ã¼zerinden."
   },
   {
     "task_id": "P3-7",
@@ -477,7 +477,7 @@
     "dosyalar": [
       "src/company_master/etl/ingest_aso.py"
     ],
-    "not": "ASO CSV/JSON dosyalarini companies tablosuna yukler. Sütun mapping otomatik."
+    "not": "ASO CSV/JSON dosyalarini companies tablosuna yukler. SÃ¼tun mapping otomatik."
   },
   {
     "task_id": "P3-12",
@@ -527,7 +527,7 @@
     "baslangic": "2026-09-08T08:32:53",
     "bitis": "2026-09-09T01:23:10",
     "dosyalar": [],
-    "not": "Kalite skoru 27.53 -> 76.44 (P5 metrikleri dahil). Hedef 50+ BASARILI. Temel formül ayarı + P5 metrikleri (7 yeni metrik) ile gerçekleşti."
+    "not": "Kalite skoru 27.53 -> 76.44 (P5 metrikleri dahil). Hedef 50+ BASARILI. Temel formÃ¼l ayarÄ± + P5 metrikleri (7 yeni metrik) ile gerÃ§ekleÅŸti."
   },
   {
     "task_id": "P4-2",
@@ -613,7 +613,7 @@
       "src/company_master/etl/scrapers/baskent_scraper.py"
     ],
     "not": "RAW ingest tamam (Onceki calismada: ivedik 3134 + baskent 761 unique; dosya ici tekrarlar elendi; yeniden calisma 0 yeni = idempotent). Normalize bekleniyor.",
-    "not_t": "RAW ingest idempotent: ivedik 3134 + baskent 761 unique hash -> source_records 14000; normalize idempotent: companies 14000. ETL normalize web_app kanonik kurala delege edildi (ASCII->Turkce); 9704 firma geriye donuk yeniden normalize; ASCII kalinti 0. change_notify baseline 14000 firma ile tazelendi. IVEDIK not: raw dosyada yalniz 14 benzersiz unvan (3,354 satir) — kaynak zayif, P1-1 VPN engeli iliskili; dedup ayri gorev (P4-5)."
+    "not_t": "RAW ingest idempotent: ivedik 3134 + baskent 761 unique hash -> source_records 14000; normalize idempotent: companies 14000. ETL normalize web_app kanonik kurala delege edildi (ASCII->Turkce); 9704 firma geriye donuk yeniden normalize; ASCII kalinti 0. change_notify baseline 14000 firma ile tazelendi. IVEDIK not: raw dosyada yalniz 14 benzersiz unvan (3,354 satir) â€” kaynak zayif, P1-1 VPN engeli iliskili; dedup ayri gorev (P4-5)."
   },
   {
     "task_id": "Y3",
@@ -627,7 +627,7 @@
       "web_app.py"
     ],
     "not": "FAZ A-D yol haritasi (2026-09-07)",
-    "not_t": "Turkce case-insensitive arama: tr_normalize() fonksiyonu eklendi. Dogrulandi: arites/DÜNDAR"
+    "not_t": "Turkce case-insensitive arama: tr_normalize() fonksiyonu eklendi. Dogrulandi: arites/DÃœNDAR"
   },
   {
     "task_id": "Y4",
@@ -682,7 +682,7 @@
     "baslangic": "2026-09-07T23:56:38",
     "bitis": null,
     "dosyalar": [],
-    "not": "KVKK maskeleme canlida: ?mask=1 / DASH_MASK_PII=1 -> tel/email maskeli; unvan/web/VKN acik (PO karari). 270 bireysel email yedekli temizlendi. Ek keşif: 4636 cop email + 658 cop phone NULL. Politika 4.5 eklendi. 6 yeni test (25/25 passed)."
+    "not": "KVKK maskeleme canlida: ?mask=1 / DASH_MASK_PII=1 -> tel/email maskeli; unvan/web/VKN acik (PO karari). 270 bireysel email yedekli temizlendi. Ek keÅŸif: 4636 cop email + 658 cop phone NULL. Politika 4.5 eklendi. 6 yeni test (25/25 passed)."
   },
   {
     "task_id": "Y8",
@@ -779,7 +779,7 @@
   },
   {
     "task_id": "P5-1",
-    "baslik": "Kalite skoru ek metrikleri tasarımı",
+    "baslik": "Kalite skoru ek metrikleri tasarÄ±mÄ±",
     "sahip": "kalite",
     "oncelik": "P1",
     "durum": "done",
@@ -792,7 +792,7 @@
   },
   {
     "task_id": "P5-2",
-    "baslik": "Sosyal medya varlığı metriği",
+    "baslik": "Sosyal medya varlÄ±ÄŸÄ± metriÄŸi",
     "sahip": "web_kazima",
     "oncelik": "P2",
     "durum": "done",
@@ -805,7 +805,7 @@
   },
   {
     "task_id": "P5-3",
-    "baslik": "Veri güncelliği metriği",
+    "baslik": "Veri gÃ¼ncelliÄŸi metriÄŸi",
     "sahip": "backend",
     "oncelik": "P1",
     "durum": "done",
@@ -831,7 +831,7 @@
   },
   {
     "task_id": "P5-5",
-    "baslik": "Kaynak çeşitliliği metriği",
+    "baslik": "Kaynak Ã§eÅŸitliliÄŸi metriÄŸi",
     "sahip": "kalite",
     "oncelik": "P3",
     "durum": "done",
@@ -844,7 +844,7 @@
   },
   {
     "task_id": "DENET-2",
-    "baslik": "Karakter kodlama (mojibake) düzeltmesi",
+    "baslik": "Karakter kodlama (mojibake) dÃ¼zeltmesi",
     "sahip": "koordinator",
     "oncelik": "P0",
     "durum": "done",
@@ -860,7 +860,7 @@
   },
   {
     "task_id": "DENET-3",
-    "baslik": "AGENTS.md tekrar eden blok temizliği + gorev panosu kurali eklendi",
+    "baslik": "AGENTS.md tekrar eden blok temizliÄŸi + gorev panosu kurali eklendi",
     "sahip": "koordinator",
     "oncelik": "P0",
     "durum": "done",
@@ -892,7 +892,7 @@
     "bitis": "2026-09-09T03:49:48",
     "dosyalar": [],
     "not": "Kullanici onayi bekleniyor (bkz. 09_proje_denetimi_2026-09-09.md)",
-    "not_t": "Kök ve scripts/tests geçici dosyaları cop_kutusu_2026_09_09/DENET_arsiv_2026_09_09/ altına taşındı; 35MB log gzip (0.65MB)"
+    "not_t": "KÃ¶k ve scripts/tests geÃ§ici dosyalarÄ± cop_kutusu_2026_09_09/DENET_arsiv_2026_09_09/ altÄ±na taÅŸÄ±ndÄ±; 35MB log gzip (0.65MB)"
   },
   {
     "task_id": "DENET-5",
@@ -904,7 +904,7 @@
     "bitis": "2026-09-09T03:49:48",
     "dosyalar": [],
     "not": "Kullanici onayi bekleniyor (bkz. 09_proje_denetimi_2026-09-09.md)",
-    "not_t": "Huginin Data Insights (yazım hatalı) klasörü kaldırıldı — yalnızca 1 bayt scripts içeriyordu, gerçek veri yoktu"
+    "not_t": "Huginin Data Insights (yazÄ±m hatalÄ±) klasÃ¶rÃ¼ kaldÄ±rÄ±ldÄ± â€” yalnÄ±zca 1 bayt scripts iÃ§eriyordu, gerÃ§ek veri yoktu"
   },
   {
     "task_id": "DENET-6",
@@ -916,7 +916,7 @@
     "bitis": "2026-09-09T03:49:48",
     "dosyalar": [],
     "not": "",
-    "not_t": "project_state.md tek kaynak ilan edildi; _iso/_utf8 mojibake kopyaları arşive taşındı"
+    "not_t": "project_state.md tek kaynak ilan edildi; _iso/_utf8 mojibake kopyalarÄ± arÅŸive taÅŸÄ±ndÄ±"
   },
   {
     "task_id": "DENET-7",
@@ -928,33 +928,33 @@
     "bitis": "2026-09-09T03:49:48",
     "dosyalar": [],
     "not": "",
-    "not_t": "Kök db dosyaları (company_master.db, test.db, data/ankara_osb.db) eski SQLite kopyaları, supabase asıl; backups/ yedeği yerinde"
+    "not_t": "KÃ¶k db dosyalarÄ± (company_master.db, test.db, data/ankara_osb.db) eski SQLite kopyalarÄ±, supabase asÄ±l; backups/ yedeÄŸi yerinde"
   },
   {
     "task_id": "P6-1",
-    "baslik": "İş ilanları ve çalışan sayısı veri toplama (LinkedIn API + web kazıma)",
+    "baslik": "Ä°ÅŸ ilanlarÄ± ve Ã§alÄ±ÅŸan sayÄ±sÄ± veri toplama (LinkedIn API + web kazÄ±ma)",
     "sahip": "web_kazima",
     "oncelik": "P1",
     "durum": "cancelled",
-    "baslangic": "Web kazıma düşük verimlilik, LinkedIn API erişimi yok",
+    "baslangic": "Web kazÄ±ma dÃ¼ÅŸÃ¼k verimlilik, LinkedIn API eriÅŸimi yok",
     "bitis": "2026-09-09T05:02:16",
     "dosyalar": [
       "src/company_master/etl/job_postings_scraper.py"
     ],
-    "not": "Web kazıma 0 iş ilanı buldu. LinkedIn API erişimi sağlanamadı. İptal edildi."
+    "not": "Web kazÄ±ma 0 iÅŸ ilanÄ± buldu. LinkedIn API eriÅŸimi saÄŸlanamadÄ±. Ä°ptal edildi."
   },
   {
     "task_id": "P6-2",
-    "baslik": "E-posta DNS MX doğrulama implementasyonu",
+    "baslik": "E-posta DNS MX doÄŸrulama implementasyonu",
     "sahip": "backend",
     "oncelik": "P1",
     "durum": "done",
-    "baslangic": "8,994 e-posta doğrulandı",
+    "baslangic": "8,994 e-posta doÄŸrulandÄ±",
     "bitis": "2026-09-09T05:02:16",
     "dosyalar": [
       "src/company_master/etl/email_dns_validator.py"
     ],
-    "not": "8,994 e-posta doğrulandı: %47.4 format geçerli, %37.5 MX kaydı var. email_validity_score kolonu güncellendi. Kalite skoru 76.44 -> 53.37 (gerçek veriyle)."
+    "not": "8,994 e-posta doÄŸrulandÄ±: %47.4 format geÃ§erli, %37.5 MX kaydÄ± var. email_validity_score kolonu gÃ¼ncellendi. Kalite skoru 76.44 -> 53.37 (gerÃ§ek veriyle)."
   },
   {
     "task_id": "P7-1",
@@ -993,24 +993,24 @@
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/pipeline/normalizer.py"
     ],
-    "not": "Exact + fuzzy + domain + mersis/vkn + alias multi-pass eslestirme | TAMAMLANDI 2026-09-09 (Y19 ile): /api/match endpoint canli — NACE komşuluk + konum + kalite + kanıt skoru; dashboard paneli eklendi. Bu görev duplicate sayıldı."
+    "not": "Exact + fuzzy + domain + mersis/vkn + alias multi-pass eslestirme | TAMAMLANDI 2026-09-09 (Y19 ile): /api/match endpoint canli â€” NACE komÅŸuluk + konum + kalite + kanÄ±t skoru; dashboard paneli eklendi. Bu gÃ¶rev duplicate sayÄ±ldÄ±."
   },
   {
     "task_id": "P7-4",
     "baslik": "Company Career Pages Scraper",
     "sahip": "web_kazima",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-09T12:50:18",
     "bitis": null,
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/sources/company_career.py"
     ],
-    "not": "5000+ companies.website_domain -> /kariyer, /jobs, /career keşif; KVKK güvenli"
+    "not": "Career Pages Scraper started: scraping companies with website_domain; targets TOP 100 companies for MVP first"
   },
   {
     "task_id": "P7-5",
-    "baslik": "İSKUR Scraper",
+    "baslik": "Ä°SKUR Scraper",
     "sahip": "web_kazima",
     "oncelik": "P1",
     "durum": "blocked",
@@ -1019,7 +1019,7 @@
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/sources/iskur.py"
     ],
-    "not": "Resmi kaynak; KVKK güvenli; yapılandırılmış veri; API/HTML | KOORDINATOR KARARI 2026-09-09: Y21 risk analizi tamamlanana ve kullanici onayi alinana kadar BASLAMAYINIZ. Risks: ISKUR kullanim sartlari ihlali + KVKK (bireysel iletisim) + lisans. Bkz. workspace/external/BRIEF_Y21_iskur.md"
+    "not": "Resmi kaynak; KVKK gÃ¼venli; yapÄ±landÄ±rÄ±lmÄ±ÅŸ veri; API/HTML | KOORDINATOR KARARI 2026-09-09: Y21 risk analizi tamamlanana ve kullanici onayi alinana kadar BASLAMAYINIZ. Risks: ISKUR kullanim sartlari ihlali + KVKK (bireysel iletisim) + lisans. Bkz. workspace/external/BRIEF_Y21_iskur.md"
   },
   {
     "task_id": "P7-6",
@@ -1032,7 +1032,7 @@
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/sources/kariyer_net.py"
     ],
-    "not": "Anti-bot koruması; önce manuel test; proxy/headless gerekebilir"
+    "not": "Anti-bot korumasÄ±; Ã¶nce manuel test; proxy/headless gerekebilir"
   },
   {
     "task_id": "P7-7",
@@ -1097,7 +1097,7 @@
     "dosyalar": [
       "scripts/post_scrape_workflow.py"
     ],
-    "not": "Adım 5, 6, 7 eklendi (ingest_job_postings, analyze_job_signals, recalc_intelligence_scores)"
+    "not": "AdÄ±m 5, 6, 7 eklendi (ingest_job_postings, analyze_job_signals, recalc_intelligence_scores)"
   },
   {
     "id": "BILDIRIM-SISTEM-V2",
@@ -1131,7 +1131,7 @@
     "dosyalar": [
       "data/orchestrator/y17_result.json"
     ],
-    "not_t": "5 yeni veri kaynagi arastirildi: TOBB E-Sicil, İl Özu İdare, KOSGEB, İhale Raporları, EKAP. Her kaynak için erisim yontemi + maliyet + KVKK analizi tablosu olusturuldu. Sonuc: data/orchestrator/y17_result.json"
+    "not_t": "5 yeni veri kaynagi arastirildi: TOBB E-Sicil, Ä°l Ã–zu Ä°dare, KOSGEB, Ä°hale RaporlarÄ±, EKAP. Her kaynak iÃ§in erisim yontemi + maliyet + KVKK analizi tablosu olusturuldu. Sonuc: data/orchestrator/y17_result.json"
   },
   {
     "id": "Y18",
@@ -1146,7 +1146,7 @@
     "baslik": "ARASTIRMA: V9 smart matching (musteri-firma eslestirme) MVP prototipi",
     "sahip": "gelistirici",
     "durum": "done",
-    "not": "TAMAMLANDI 2026-09-09: /api/match endpoint (web_app.py) - NACE komşuluk haritalı tedarik zinciri eşleştirme. Skor: sektor 45 + konum 20 + kalite 25 + kanit 10. mode=komple|ayni, buyer_id|nace profil, mask=1 KVKK, UUID dogrulamalı 404. 6 senaryo testi OK. Y21 (İSKUR araştırma) acildi."
+    "not": "TAMAMLANDI 2026-09-09: /api/match endpoint (web_app.py) - NACE komÅŸuluk haritalÄ± tedarik zinciri eÅŸleÅŸtirme. Skor: sektor 45 + konum 20 + kalite 25 + kanit 10. mode=komple|ayni, buyer_id|nace profil, mask=1 KVKK, UUID dogrulamalÄ± 404. 6 senaryo testi OK. Y21 (Ä°SKUR araÅŸtÄ±rma) acildi."
   },
   {
     "id": "Y20",

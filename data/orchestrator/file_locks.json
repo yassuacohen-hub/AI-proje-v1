@@ -1,4 +1,4 @@
-{
+﻿{
   "src/company_master/etl/scrapers/ivedik_scraper.py": {
     "sahip": "gelistirici",
     "task_id": "T1",
@@ -23,5 +23,10 @@
     "sahip": "gelistirici",
     "task_id": "P7-10",
     "kilitlendi": "2026-09-09T16:42:48"
+  },
+  "src/company_master/intelligence/job_intelligence/sources/company_career.py": {
+    "sahip": "web_kazima",
+    "task_id": "P7-4",
+    "kilitlendi": "2026-09-09T16:50:00"
   }
 }

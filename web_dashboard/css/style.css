@@ -11,8 +11,8 @@ body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);co
 ::-webkit-scrollbar-track{background:var(--bg)}
 ::-webkit-scrollbar-thumb{background:var(--border-light);border-radius:3px}
 ::-webkit-scrollbar-thumb:hover{background:var(--text-muted)}
-.app{display:grid;grid-template-columns:260px 1fr 320px;height:100vh}
-.topbar{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:56px;background:var(--sidebar-bg);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.app{display:grid;grid-template-columns:260px minmax(0,1fr) 320px;grid-template-rows:56px minmax(0,1fr);height:100vh}
+.topbar{grid-column:1/-1;grid-row:1;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:56px;background:var(--sidebar-bg);border-bottom:1px solid var(--border);z-index:100}
 .topbar-brand{display:flex;align-items:center;gap:10px;flex-shrink:0;max-width:250px;overflow:hidden}
 .topbar-brand h1{font-size:16px;font-weight:700;letter-spacing:-.3px;background:linear-gradient(90deg,var(--text),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap}
 .topbar-brand span{font-size:10px;color:var(--text-dim);font-weight:500;text-transform:uppercase;letter-spacing:1px;white-space:nowrap}
@@ -35,7 +35,7 @@ body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);co
 .last-update{font-size:11px;color:var(--text-dim)}
 .btn-refresh{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:8px 16px;font-size:12px;font-weight:600;cursor:pointer;display:flex;align-items:center;gap:6px;transition:all .2s}
 .btn-refresh:hover{background:#2563eb;transform:translateY(-1px)}
-.sidebar{background:var(--sidebar-bg);border-right:1px solid var(--border);overflow-y:auto;padding:16px 12px}
+.sidebar{grid-column:1;grid-row:2;background:var(--sidebar-bg);border-right:1px solid var(--border);overflow-y:auto;padding:16px 12px;min-height:0}
 .sidebar-section{margin-bottom:20px}
 .sidebar-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim);margin-bottom:10px;padding:0 8px;display:flex;align-items:center;justify-content:space-between}
 .sidebar-title .count{font-size:9px;background:var(--border);border-radius:8px;padding:2px 6px;color:var(--text-dim)}
@@ -54,7 +54,7 @@ body{font-family:'Inter','Segoe UI',system-ui,sans-serif;background:var(--bg);co
 .source-card .stat span{color:var(--text);font-weight:600}
 .mini-bar{height:3px;background:var(--border);border-radius:2px;margin-top:6px;overflow:hidden}
 .mini-bar-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--cyan));transition:width .4s ease}
-.main{display:flex;flex-direction:column;overflow:hidden}
+.main{grid-column:2;grid-row:2;display:flex;flex-direction:column;overflow:hidden;min-height:0;min-width:0}
 .content-scroll{flex:1;overflow-y:auto;padding:16px 20px}
 .kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
 .kpi-card{background:var(--panel-bg);border:1px solid var(--border);border-radius:12px;padding:16px;transition:all .2s;position:relative;overflow:hidden}
@@ -98,7 +98,8 @@ tbody td{padding:10px 14px;font-size:12px;white-space:nowrap;max-width:200px;ove
 .score-medium{background:rgba(59,130,246,.15);color:var(--accent)}
 .score-low{background:rgba(245,158,11,.15);color:var(--yellow)}
 .score-very-low{background:rgba(239,68,68,.15);color:var(--red)}
-.detail-panel{background:var(--sidebar-bg);border-left:1px solid var(--border);overflow-y:auto;padding:16px}
+.detail-panel{grid-column:3;grid-row:2;background:var(--sidebar-bg);border-left:1px solid var(--border);overflow-y:auto;padding:16px;min-height:0}
+@media (max-width:1150px){.detail-panel{display:none}.app{grid-template-columns:260px minmax(0,1fr)}}
 .detail-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-dim);margin-bottom:16px}
 .detail-empty{text-align:center;padding:80px 20px;color:var(--text-dim)}
 .detail-empty i{font-size:40px;margin-bottom:16px;display:block;color:var(--text-muted)}

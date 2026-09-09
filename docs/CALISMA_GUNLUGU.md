@@ -78,6 +78,23 @@
 
 Pano: **84/102 done** · Docker rebuild sonrası canlı.
 
+## 2026-09-09 — Layout kök fix: grid satır/kolon atamaları (iç içe geçme + kayma sorunu) ✅
+
+**Kök neden:** `.app` grid'inde `grid-template-rows` ve elemanlara `grid-row/column` ataması yoktu:
+- Topbar `position:sticky` + grid karışımı → satır hesapları bozuluyordu
+- Detail-panel (sağ 320px) alt satıra kayıyordu → body `overflow:hidden` olduğundan **görünmüyordu** ("firma detay sağ tarafta gözükmüyor" şikayetinin nedeni)
+- İçerik kartları scroll ile aşağı yukarı hareket ediyordu
+
+**Fix (style.css):**
+- `.app`: `grid-template-rows:56px minmax(0,1fr)` + kolonlar `minmax(0,1fr)` (taşma önleyici)
+- `.topbar`: `grid-row:1` (sticky kaldırıldı — grid'de gereksiz)
+- `.sidebar`: `grid-column:1; grid-row:2`
+- `.main`: `grid-column:2; grid-row:2; min-height:0; min-width:0`
+- `.detail-panel`: `grid-column:3; grid-row:2`
+- **Responsive:** ≤1150px'de detail-panel gizlenir, grid 2 kolona düşer
+
+**Doğrulama (headless, 1600×900):** detail-panel ✓ · companies-section ✓ · KPI render ✓ · cache v13.
+
 ## 2026-09-09 — Topbar hizalama fix + match mantığı netleştirmesi
 
 **Topbar fix:** CANLI / Son güncelleme / Yenile iç içe geçiyordu → `.topbar-actions{flex-shrink:0;margin-left:auto;white-space:nowrap}` (sağa sabit) + brand `max-width:280px` ve dar ekran (<1100px) media query (slogan gizlenir, h1 küçülür). cache v7.

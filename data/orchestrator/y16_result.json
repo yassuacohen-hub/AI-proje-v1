@@ -1,1 +1,38 @@
-test
+{
+  "task_id": "Y16",
+  "baslik": "ARASTIRMA: dashboard'a sektor/market zekasi katmani (V9 market brain MVP)",
+  "sahip": "arastirmaci",
+  "durum": "done",
+  "tarih": "2026-09-09",
+  "ozet": "V9 market brain MVP arastirmasi tamamlandi",
+  "bulgular": {
+    "sektor_sagligi_karti": {
+      "firma_sayisi": 9007,
+      "ortalama_kalite": 53.37,
+      "web_varligi": "%56",
+      "vkn_doluluk": "%8.5",
+      "nace_dagilimi": "14+ sektor"
+    },
+    "veri_yeterlilik": {
+      "firma_sayisi": 9007,
+      "nace_sektoru": "14+",
+      "vkn": "%8.5",
+      "adres": "%95+",
+      "web": "%56"
+    },
+    "islenebilir_ozellikler": [
+      "sektor_saglik_skoru",
+      "firma_yogunlugu_harita",
+      "web_varligi_orani",
+      "vkn_kapsam_orani",
+      "kalite_dagilimi",
+      "nace_kirilim",
+      "cografik_yogunluk"
+    ]
+  },
+  "sonraki_adimlar": [
+    "Dashboard'a sektor sagligi karti ekle",
+    "NACE bazli filtreleme",
+    "KnowYourCustomer entegrasyonu"
+  ]
+}
