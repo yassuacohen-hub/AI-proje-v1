@@ -1,0 +1,215 @@
+{
+  "main": {
+    "id": "1eae6649cf518200",
+    "type": "split",
+    "children": [
+      {
+        "id": "c6581fe6e943f7c1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ed3559f40885269c",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Grafik Görünümü"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "85c264e5f3a1594f",
+    "type": "split",
+    "children": [
+      {
+        "id": "8b26f3c0a5cc2db8",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ceb34e23a1d5392c",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Dosya Gezgini"
+            }
+          },
+          {
+            "id": "16c28ea2b6469ca5",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Ara"
+            }
+          },
+          {
+            "id": "0fc9fced9f78bada",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Yer İmleri"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "ff94039522d61de0",
+    "type": "split",
+    "children": [
+      {
+        "id": "d706f80cea9aba43",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "e5917525768d6209",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Geri Bağlantılar"
+            }
+          },
+          {
+            "id": "c91c7a68c76ac407",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Giden bağlantılar"
+            }
+          },
+          {
+            "id": "86345c03ff52dc29",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Etiketler"
+            }
+          },
+          {
+            "id": "8bd9021ef3982423",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "Tüm özellikler"
+            }
+          },
+          {
+            "id": "c6804b9d4ec2a7bc",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Anahat"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Hızlı geçişi aç": false,
+      "graph:Grafik görünümünü aç": false,
+      "canvas:Yeni tuval oluşturun": false,
+      "daily-notes:Bugünün Notunu Aç": false,
+      "templates:Şablon ekle": false,
+      "command-palette:Komut paletini aç": false,
+      "bases:Yeni taban oluştur": false
+    }
+  },
+  "active": "ed3559f40885269c",
+  "lastOpenFiles": [
+    "test_reports/2026-08-30_06-57-09/test_results.html",
+    "test_reports/2026-08-30_06-57-09/test_results.txt",
+    "test_reports/2026-08-30_06-57-09/test_results.json",
+    "test_reports/2026-08-30_06-57-09",
+    "test_reports/2026-08-30_06-56-28/test_results.html",
+    "test_reports/2026-08-30_06-56-28/test_results.txt",
+    "test_reports/2026-08-30_06-56-28/test_results.json",
+    "test_reports/2026-08-30_06-56-28",
+    "test_reports/2026-08-30_06-56-06/test_results.html",
+    "test_reports/2026-08-30_06-56-06/test_results.txt",
+    "test_reports/2026-08-30_06-56-06/test_results.json",
+    "V10/08-Ajanlar/06_web_kazima_uzmani.md",
+    "V10/08-Ajanlar/05_kalite_ajan.md",
+    "V10/08-Ajanlar/04_gelistirici_ajan.md",
+    "V10/08-Ajanlar/03_arastirmaci_ajan.md",
+    "V10/08-Ajanlar/02_mimar_ajan.md",
+    "V10/08-Ajanlar/01_koordinator_ajan.md",
+    "V10/08-Ajanlar/README.md",
+    "CLAUDE.md",
+    "V10/00-Home.md",
+    "AGENTS.md",
+    "V10/05_versiyonlar/04_versiyon_9_baglam_dokumani.md",
+    "V10/05_versiyonlar/03_versiyon_8_baglam_dokumani.md",
+    "V10/05_versiyonlar/02_versiyon_7_baglam_dokumani.md",
+    "V10/05_versiyonlar/01_versiyon_6_baglam_dokumani.md",
+    "V10/04_karşılaştırmalar/01_v9_ile_karsilastirma.md",
+    "V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md",
+    "V10/README.md"
+  ]
+}

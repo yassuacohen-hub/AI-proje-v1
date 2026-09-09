@@ -1,0 +1,15 @@
+{
+  "timestamp": "2026-08-30_06-53-29",
+  "total_tests": 1,
+  "passed": 0,
+  "failed": 0,
+  "error_count": 1,
+  "success": false,
+  "failures": [],
+  "errors": [
+    {
+      "test": "test_platform (unittest.loader._FailedTest.test_platform)",
+      "message": "ImportError: Failed to import test module: test_platform\nTraceback (most recent call last):\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\unittest\\loader.py\", line 396, in _find_test_path\n    module = self._get_module_from_name(name)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\unittest\\loader.py\", line 339, in _get_module_from_name\n    __import__(name)\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 15, in <module>\n    from designer.schema_builder import FieldDefinition, FieldType, ScenarioConfig, SyntheticSchema\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\src\\designer\\__init__.py\", line 4, in <module>\n    from .synthetic_generator import SyntheticDataGenerator\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\src\\designer\\synthetic_generator.py\", line 100\n    return f\\\"+90 5{random.randint(0, 9)}{random.randint(0, 9)} {random.randint(100, 999)} {random.randint(10, 99)} {random.randint(10, 99)}\\\"\n             ^\nSyntaxError: unexpected character after line continuation character\n\n"
+    }
+  ]
+}

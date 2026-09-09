@@ -1,0 +1,19 @@
+{
+  "timestamp": "2026-08-30_06-52-31",
+  "total_tests": 16,
+  "passed": 14,
+  "failed": 2,
+  "error_count": 0,
+  "success": false,
+  "failures": [
+    {
+      "test": "test_phone_validation (test_platform.TestEnterpriseDataPlatform.test_phone_validation)",
+      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 134, in test_phone_validation\n    self.assertNotEqual(result, \"PHONE\", f\"Geçersiz telefon: {phone}\")\nAssertionError: 'PHONE' == 'PHONE' : Geçersiz telefon: +90 5041234567\n"
+    },
+    {
+      "test": "test_synthetic_phone_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_phone_generation)",
+      "message": "Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\OneDrive\\Desktop\\AI proje v1\\tests\\test_platform.py\", line 171, in test_synthetic_phone_generation\n    self.assertEqual(result, \"PHONE\", f\"Üretilen telefon doğrulanmalı: {phone}\")\nAssertionError: None != 'PHONE' : Üretilen telefon doğrulanmalı: +90 547 103 67 50\n"
+    }
+  ],
+  "errors": []
+}

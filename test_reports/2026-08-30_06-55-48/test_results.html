@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Raporu - 2026-08-30_06-55-48</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        .status {
+            background: white;
+            padding: 20px;
+            margin: 20px;
+            border-radius: 8px;
+            border-left: 5px solid;
+        }
+        .status.success {
+            border-left-color: #10b981;
+            background-color: #f0fdf4;
+        }
+        .status.failure {
+            border-left-color: #ef4444;
+            background-color: #fef2f2;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            padding: 20px;
+            background: #f9fafb;
+        }
+        .stat-box {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border: 1px solid #e5e7eb;
+        }
+        .stat-box h3 {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        .stat-box p {
+            font-size: 12px;
+            color: #6b7280;
+        }
+        .failures, .errors {
+            padding: 20px;
+            margin: 0 20px;
+        }
+        .failures h2, .errors h2 {
+            margin-bottom: 15px;
+            font-size: 18px;
+            color: #1f2937;
+        }
+        .failure-item, .error-item {
+            background: #fef2f2;
+            border: 1px solid #fee2e2;
+            border-radius: 6px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .failure-item h4, .error-item h4 {
+            color: #dc2626;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+        .failure-item pre, .error-item pre {
+            background: #f3f4f6;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 12px;
+            color: #1f2937;
+            font-family: 'Courier New', monospace;
+        }
+        .footer {
+            background: #f9fafb;
+            padding: 20px;
+            text-align: center;
+            font-size: 12px;
+            color: #6b7280;
+            border-top: 1px solid #e5e7eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧪 Test Raporu</h1>
+            <p>2026-08-30_06-55-48</p>
+        </div>
+        
+        <div class="status failure">
+            <h2>✗ BAŞARISIZ</h2>
+        </div>
+        
+        <div class="stats">
+            <div class="stat-box">
+                <h3>16</h3>
+                <p>Toplam Test</p>
+            </div>
+            <div class="stat-box">
+                <h3 style="color: #10b981;">15</h3>
+                <p>✅ Geçen</p>
+            </div>
+            <div class="stat-box">
+                <h3 style="color: #ef4444;">1</h3>
+                <p>❌ Başarısız</p>
+            </div>
+            <div class="stat-box">
+                <h3 style="color: #f59e0b;">0</h3>
+                <p>⚠️ Hata</p>
+            </div>
+        </div>
+        
+        <div class="failures"><h2>❌ Başarısız Testler</h2>
+        <div class="failure-item">
+            <h4>❌ test_mixed_pii_detection (test_platform.TestEnterpriseDataPlatform.test_mixed_pii_detection)</h4>
+            <pre>Traceback (most recent call last):
+  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\tests\test_platform.py", line 228, in test_mixed_pii_detection
+    self.assertEqual(result, expected_type)
+AssertionError: None != 'PHONE'
+</pre>
+        </div>
+        </div>
+        
+        
+        <div class="footer">
+            <p>Rapor türleri: JSON • HTML • TXT | 📁 test_reports/ klasöründe kaydedildi</p>
+        </div>
+    </div>
+</body>
+</html>
