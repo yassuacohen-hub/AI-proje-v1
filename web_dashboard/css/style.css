@@ -223,6 +223,13 @@ th.sortable:hover{color:var(--accent)}
 .is-tab:hover{color:var(--text)}
 .is-tab.active{color:var(--accent);border-bottom-color:var(--accent)}
 .is-tab-pane{padding:4px 2px}
+.is-hint{display:flex;align-items:flex-start;gap:6px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.25);border-radius:8px;padding:6px 10px;margin-bottom:10px;font-size:11px;color:var(--text-dim)}
+.is-hint i{color:var(--accent);margin-top:2px}
+.hints-off .is-hint{display:none}
+.is-hint-toggle.off{opacity:.55}
+.is-hint-toggle.off i.fa-lightbulb{color:var(--text-dim)}
+.tier-badge{display:flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:var(--text);background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.35);border-radius:8px;padding:6px 12px;white-space:nowrap}
+.tier-badge i{color:var(--accent)}
 .td-watch{width:32px;text-align:center;cursor:pointer;color:var(--text-dim);transition:color .15s}
 .td-watch:hover{color:var(--yellow)}
 .td-watch .fa-star{color:var(--yellow)}

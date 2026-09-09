@@ -1,4 +1,16 @@
 
+## 2026-09-09 — İşletmem: adres + marka adı, görünür bilgi kartları (tek tuşla kapanır), topbar tier rozeti ✅
+
+**Yeni alanlar:** users tablosuna `trade_name` + `address` (migration 0015 genişletildi, iki DB'ye uygulandı); İşletmem "Marka Adı" ve "Adres" alanları eklenip GET/PUT profile bağlandı.
+
+**Görünür bilgi kartları + tek tuşla kapatma:** her sekmenin üstünde kısa (1 cümlelik) yönlendirme kartı (`.is-hint`) — "Bilgiler: eşleşen firmaların size ulaşması için, dışarıya KVKK maskeli" vb. Sekme çubuğuna **Notlar** düğmesi eklendi: tek tıkla tüm kartları kapatır/açar; tercih localStorage'da kalıcı.
+
+**Topbar değişiklikleri:**
+- "İşletmem" butonu kaldırıldı (navigasyondaki giriş yeterli) → yerine **Paket/Tier rozeti** (Terminal/Strategic/Enterprise + admin için "· Yönetici"); üye olmayanlar görmez
+- "Son güncelleme" ayrı kutudan çıkarılıp **CANLI chip'inin yanına** alındı
+
+**Doğrulama:** canlı CDP — marka/adres alanları ✓, 4 bilgi kartı ✓, Notlar toggle HINTS_OFF_OK ✓, tier rozeti render ✓; layout 8/8 PASS + 0 exception; Docker rebuild (css v25 / js v25).
+
 ## 2026-09-09 — Şifreli oturum sistemi + İşletmem sekmeleri + bilgi bankası notları ✅
 
 **Şifre sistemi (PBKDF2):**

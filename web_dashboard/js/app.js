@@ -1001,17 +1001,27 @@ function setMemberToken(t) {
 function refreshCreditBadge() {
   const tok = getMemberToken();
   let el = document.getElementById('credit-badge');
+  const tierEl = document.getElementById('tier-badge');
+  const tierTxt = document.getElementById('tier-badge-text');
   if (!el) return;
-  if (!tok) { el.innerHTML = ''; return; }
+  if (!tok) {
+    el.innerHTML = '';
+    if (tierEl) tierEl.style.display = 'none';
+    return;
+  }
   fetch(apiUrl('/api/me?token=' + encodeURIComponent(tok)))
     .then(r => (r.ok ? r.json() : Promise.reject()))
     .then(d => {
       const u = d.user || {};
-      if (u.status !== 'onayli') { el.innerHTML = ''; return; }
-      el.innerHTML = `<i class="fas fa-coins" style="color:#fbbf24"></i> ${u.credit_balance < 0 ? 'Sınırsız' : u.credit_balance + ' kredi'}
-        <span style="color:var(--text-dim);font-size:10px;margin-left:4px">${esc(u.company_name || u.email)}</span>`;
+      if (u.status !== 'onayli') { el.innerHTML = ''; if (tierEl) tierEl.style.display = 'none'; return; }
+      el.innerHTML = `<i class="fas fa-coins" style="color:#fbbf24"></i> ${u.credit_balance < 0 ? 'Sınırsız' : u.credit_balance + ' kredi'}`;
+      if (tierEl && tierTxt) {
+        const isim = { terminal: 'Terminal', strategic: 'Strategic', enterprise: 'Enterprise' }[u.tier] || (u.tier || '');
+        tierTxt.textContent = isim + (u.role === 'admin' ? ' · Yönetici' : '');
+        tierEl.style.display = '';
+      }
     })
-    .catch(() => { el.innerHTML = ''; });
+    .catch(() => { el.innerHTML = ''; if (tierEl) tierEl.style.display = 'none'; });
 }
 
 function openMembership() {
@@ -1436,6 +1446,7 @@ function renderIsletmem(d) {
       <button class="is-tab" data-tab="info" onclick="switchIsletmemTab('info')"><i class="fas fa-address-card"></i> Bilgiler</button>
       <button class="is-tab" data-tab="match" onclick="switchIsletmemTab('match')"><i class="fas fa-bullseye"></i> Eşleştirme</button>
       <button class="is-tab" data-tab="account" onclick="switchIsletmemTab('account')"><i class="fas fa-user-lock"></i> Hesap</button>
+      <button class="is-tab is-hint-toggle tip tip-left" data-tip="Alanların yanındaki kısa açıklama notlarını açar/kapatır." onclick="toggleIsletmemHints(this)" title="Bilgi notlarını aç/kapat"><i class="fas fa-lightbulb"></i> Notlar</button>
     </div>
     <div id="is-tab-panes"></div>
     <div style="display:flex;gap:10px;margin:12px 0">
@@ -1458,6 +1469,10 @@ function renderIsletmem(d) {
     </div>` : ''}`;
   renderIsletmemTabs(p);
   updateSessionHeader(p);
+  const off = localStorage.getItem('huginn_hints_off') === '1';
+  el.classList.toggle('hints-off', off);
+  const hb = document.querySelector('.is-hint-toggle');
+  if (hb) hb.classList.toggle('off', off);
 }
 
 function updateSessionHeader(p) {
@@ -1483,8 +1498,17 @@ function memberLogout() {
 }
 
 function switchIsletmemTab(name) {
-  document.querySelectorAll('.is-tab').forEach(b => b.classList.toggle('active', b.dataset.tab === name));
+  document.querySelectorAll('.is-tab').forEach(b => { if (b.dataset.tab) b.classList.toggle('active', b.dataset.tab === name); });
   document.querySelectorAll('.is-tab-pane').forEach(pane => { pane.style.display = pane.id === 'is-tab-' + name ? '' : 'none'; });
+}
+
+function toggleIsletmemHints(btn) {
+  const body = document.getElementById('isletmem-body');
+  if (!body || !btn) return;
+  const off = body.classList.toggle('hints-off');
+  btn.classList.toggle('off', off);
+  localStorage.setItem('huginn_hints_off', off ? '1' : '0');
+  toast(off ? 'Bilgi notları kapatıldı' : 'Bilgi notları açıldı');
 }
 
 function changePassword() {
@@ -1507,9 +1531,12 @@ function renderIsletmemTabs(p) {
   const wrap = document.getElementById('is-tab-panes');
   if (!wrap) return;
   const tip = (txt) => `<span class="tip tip-right" data-tip="${txt}" style="cursor:help"><i class="fas fa-info-circle" style="font-size:10px;color:var(--text-dim)"></i></span>`;
+  const hint = (txt) => `<div class="is-hint"><i class="fas fa-circle-info"></i> ${txt}</div>`;
   const profile = `
     <div class="is-tab-pane" id="is-tab-profile">
-      <div class="quick-filter-item" style="width:100%"><label>Firma Adı ${tip('Ticaret sicilinizdeki resmi unvan. Eşleştirme sonuçlarında bu ad görünür.')}</label><input id="is-company" class="filter-select" style="width:100%" value="${esc(p.company_name || '')}"></div>
+      ${hint('Firma Adı: sicil unvanınız — eşleşmelerde bu ad görünür. Marka Adı: ticarette kullandığınız kısa/kurumsal isim.')}
+      <div class="quick-filter-item" style="width:100%"><label>Firma Adı (Resmi Unvan) ${tip('Ticaret sicilinizdeki resmi unvan. Eşleştirme sonuçlarında bu ad görünür.')}</label><input id="is-company" class="filter-select" style="width:100%" value="${esc(p.company_name || '')}"></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Marka Adı${tip('Piyasada bilinen kısa ticari isminiz (örn. Huginn Yazılım). Raporlarda ve özet kartlarda bu kullanılır.')}</label><input id="is-trade" class="filter-select" style="width:100%" value="${esc(p.trade_name || '')}" placeholder="Huginn Teknoloji"></div>
       <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>NACE Kodu ${tip('Faaliyet alanınızın resmi sektör kodu (örn. 29.32). Doğru kod = doğru eşleşme.')}</label><input id="is-nace" class="filter-select" style="width:100%" value="${esc(p.nace_code || '')}" placeholder="29.32"></div>
       <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Ne üretiyor / satıyorsunuz?${tip('Ürün/hizmet anahtar kelimeleriniz eşleştirmede kullanılır — ne kadar net, o kadar isabetli.')}</label><input id="is-products" class="filter-select" style="width:100%" value="${esc(p.products_desc || '')}" placeholder="fren sistemi yedek parçaları, pres döküm..."></div>
       <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Departman / Rolünüz</label><input id="is-department" class="filter-select" style="width:100%" value="${esc(p.department || '')}" placeholder="Satış, Üretim, Satın Alma..."></div>
@@ -1525,21 +1552,24 @@ function renderIsletmemTabs(p) {
       <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Sertifikalarınız${tip('ISO 9001, CE, TSE vb. Alıcı firmalar sertifikalı tedarikçileri tercih eder — önerilerde vurgulanır.')}</label><input id="is-certificates" class="filter-select" style="width:100%" value="${esc(p.certificates || '')}" placeholder="ISO 9001, ISO 14001, CE..."></div>
     </div>`;
   wrap.innerHTML = profile;
-  appendIsletmemTabsRest(p, tip);
+  appendIsletmemTabsRest(p, tip, hint);
 }
 
-function appendIsletmemTabsRest(p, tip) {
+function appendIsletmemTabsRest(p, tip, hint) {
   const wrap = document.getElementById('is-tab-panes');
   const info = `
     <div class="is-tab-pane" id="is-tab-info" style="display:none">
+      ${hint('Bu bilgiler eşleşen firmaların size ulaşması için; dışarıya KVKK kapsamında maskeli gösterilir.')}
       <div class="quick-filter-item" style="width:100%"><label>Yetkili Adı${tip('Eşleşen firmalar size bu isimle ulaşır (KVKK kapsamında maskeli gösterilir).')}</label><input id="is-contact" class="filter-select" style="width:100%" value="${esc(p.contact_name || '')}"></div>
-      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Web Site</label><input id="is-web" class="filter-select" style="width:100%" value="${esc(p.website || '')}" placeholder="sirketiniz.com.tr"></div>
-      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Vergi Numarası (VKN)${tip('10 haneli vergi kimlik no — firma kimlik doğrulaması için kullanılır.')}</label><input id="is-tax" class="filter-select" style="width:100%" value="${esc(p.tax_number || p.vergi_no || '')}" placeholder="1234567890"></div>
       <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Telefon${tip('Eşleşen firmaların size ulaşacağı numara (KVKK: dışarıya maskeli gösterilir).')}</label><input id="is-phone" class="filter-select" style="width:100%" value="${esc(p.phone || '')}" placeholder="0312 000 00 00"></div>
       <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>E-posta</label><input class="filter-select" style="width:100%" value="${esc(p.email || '')}" disabled title="Kayıt e-postanız değiştirilemez"></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Web Site</label><input id="is-web" class="filter-select" style="width:100%" value="${esc(p.website || '')}" placeholder="sirketiniz.com.tr"></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Adres</label><input id="is-address" class="filter-select" style="width:100%" value="${esc(p.address || '')}" placeholder="OSB Mah. Cad. No:0 / İlçe / ANKARA"></div>
+      <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Vergi Numarası (VKN)${tip('10 haneli vergi kimlik no — firma kimlik doğrulaması için kullanılır.')}</label><input id="is-tax" class="filter-select" style="width:100%" value="${esc(p.tax_number || p.vergi_no || '')}" placeholder="1234567890"></div>
     </div>`;
   const match = `
     <div class="is-tab-pane" id="is-tab-match" style="display:none">
+      ${hint('Amacınız ve hedef sektörleriniz, Arama Yönü önerilerini ve sonuç sıralamasını belirler.')}
       <div class="quick-filter-item" style="width:100%"><label>Eşleştirme Amacı${tip('Ne için arıyorsunuz? Müşteri: ürününüzü alacak firmalar. Tedarikçi: size mal/hizmet verecekler. Bu seçim Arama Yönü varsayılanını belirler.')}</label>
         <select id="is-goal" class="filter-select" style="width:100%">
           <option value="tumu"${p.goal === 'tumu' ? ' selected' : ''}>Hepsi</option>
@@ -1549,12 +1579,13 @@ function appendIsletmemTabsRest(p, tip) {
         </select></div>
       <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Hedef Sektörler (NACE ana grup, virgülle)${tip('Kiminle çalışmak istersiniz? Örn. yedek parçacı 45 (toptan) ve 28 (makine) yazar — öneriler bu sektörlerde yoğunlaşır.')}</label><input id="is-target" class="filter-select" style="width:100%" value="${esc(p.target_nace || '')}" placeholder="45,46,28"></div>
     </div>`;
-  wrap.innerHTML += info + match + isletmemAccountTab(p, tip);
+  wrap.innerHTML += info + match + isletmemAccountTab(p, tip, hint);
 }
 
-function isletmemAccountTab(p, tip) {
+function isletmemAccountTab(p, tip, hint) {
   return `
     <div class="is-tab-pane" id="is-tab-account" style="display:none">
+      ${hint('Şifreniz PBKDF2 ile şifrelenerek saklanır — kimse göremez. Çıkış için sağ üstteki Çıkış düğmesini kullanın.')}
       <div class="quick-filter-item" style="width:100%"><label>Oturum E-postası</label><input class="filter-select" style="width:100%" value="${esc(p.email || '')}" disabled></div>
       <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Mevcut Şifre</label><input id="is-old-pass" type="password" class="filter-select" style="width:100%" autocomplete="current-password"></div>
       <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Yeni Şifre${tip('En az 8 karakter. PBKDF2-SHA256 ile şifrelenerek saklanır.')}</label><input id="is-new-pass" type="password" class="filter-select" style="width:100%" autocomplete="new-password" placeholder="En az 8 karakter"></div>
@@ -1575,6 +1606,8 @@ function saveIsletmemProfile() {
     certificates: (document.getElementById('is-certificates') || {}).value || '',
     tax_number: (document.getElementById('is-tax') || {}).value || '',
     phone: (document.getElementById('is-phone') || {}).value || '',
+    trade_name: (document.getElementById('is-trade') || {}).value || '',
+    address: (document.getElementById('is-address') || {}).value || '',
     goal: document.getElementById('is-goal').value,
     contact_name: document.getElementById('is-contact').value,
     website: document.getElementById('is-web').value,

@@ -1072,6 +1072,7 @@ def api_buyer_profile(token: str = ""):
             "SELECT u.user_id, u.email, u.company_name, u.nace_code, u.products_desc, "
             "u.target_nace, u.goal, u.contact_name, u.website, u.department, u.kvkk_consent, "
             "u.employee_range, u.certificates, u.tax_number, u.phone, "
+            "u.trade_name, u.address, "
             "u.status, u.tier, u.credit_balance, u.api_key, u.linked_company_id, u.created_at "
             "FROM users u WHERE u.user_id = :u"), {"u": u["user_id"]}).mappings().first()
         ledger = conn.execute(text(
@@ -1113,6 +1114,8 @@ def api_buyer_profile_update(req: dict, token: str = ""):
         "certificates": req.get("certificates"),
         "tax_number": req.get("tax_number"),
         "phone": req.get("phone"),
+        "trade_name": req.get("trade_name"),
+        "address": req.get("address"),
     }
     sets, params = [], {"u": str(u["user_id"])}
     for k, v in alanlar.items():
@@ -1127,7 +1130,8 @@ def api_buyer_profile_update(req: dict, token: str = ""):
         conn.execute(text(f"UPDATE users SET {', '.join(sets)} WHERE user_id = :u"), params)
         row = conn.execute(text(
             "SELECT company_name, nace_code, products_desc, target_nace, goal, department, "
-            "website, contact_name, employee_range, certificates, tax_number, phone, credit_balance, tier "
+            "website, contact_name, employee_range, certificates, tax_number, phone, "
+            "trade_name, address, credit_balance, tier "
             "FROM users WHERE user_id = :u"),
             {"u": str(u["user_id"])}).mappings().first()
     alanlar_dolu = sum(1 for a in ["company_name", "nace_code", "products_desc", "target_nace",
