@@ -40,7 +40,7 @@ def _ensure() -> None:
 
 def _read_json(path: Path) -> Any:
     _ensure()
-    return json.loads(path.read_text(encoding="utf-8"))
+    return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
 def _write_json(path: Path, data: Any) -> None:
@@ -255,7 +255,7 @@ def agent_sync_olustur() -> str:
     done = [t for t in board if t["durum"] == "done"][-10:]
     for t in done:
         lines.append(f"| {t['task_id']} | {t['baslik'][:40]} | {t['sahip']} | "
-                     f"{t.get('bitis', '-')[:10]} |")
+                     f"{(t.get('bitis') or '-')[:10]} |")
     if handoffs:
         lines += ["", "## Son Handoff'lar", ""]
         for tid, h in list(handoffs.items())[-5:]:
@@ -361,5 +361,5 @@ def _md_yaz(board: list[dict]) -> None:
               "| Görev | Baslik | Sahip | Bitis |", "|-------|--------|-------|-------|"]
     done = [t for t in board if t["durum"] == "done"]
     for t in done:
-        lines.append(f"| {t['task_id']} | {t['baslik']} | {t['sahip']} | {t.get('bitis', '-')} |")
+        lines.append(f"| {t['task_id']} | {t['baslik']} | {t['sahip']} | {(t.get('bitis') or '-')} |")
     TASK_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")

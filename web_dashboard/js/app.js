@@ -1552,7 +1552,7 @@ function appendIsletmemTabsRest(p, tip) {
   wrap.innerHTML += info + match + isletmemAccountTab(p, tip);
 }
 
-function isletmemAccountTab(p) {
+function isletmemAccountTab(p, tip) {
   return `
     <div class="is-tab-pane" id="is-tab-account" style="display:none">
       <div class="quick-filter-item" style="width:100%"><label>Oturum E-postası</label><input class="filter-select" style="width:100%" value="${esc(p.email || '')}" disabled></div>
