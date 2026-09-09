@@ -239,3 +239,63 @@ th.sortable:hover{color:var(--accent)}
 .chart-card,.kpi-card{transition:box-shadow .2s ease}
 .chart-card:hover{box-shadow:0 4px 20px rgba(0,0,0,.25)}
 
+/* ── Tooltip sistemi (hover bilgi notlari) ────────────────────────────── */
+.tip{position:relative}
+.tip:hover::after{
+  content:attr(data-tip);
+  position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);
+  background:#1e2433;color:#e5e9f2;font-size:11.5px;line-height:1.45;
+  padding:8px 11px;border-radius:7px;border:1px solid #2e3548;
+  width:max-content;max-width:260px;white-space:normal;
+  box-shadow:0 6px 20px rgba(0,0,0,.4);z-index:9999;
+  pointer-events:none;text-align:left;
+}
+.tip:hover::before{
+  content:"";position:absolute;bottom:calc(100% + 2px);left:50%;transform:translateX(-50%);
+  border:6px solid transparent;border-top-color:#2e3548;z-index:10000;pointer-events:none;
+}
+/* Sag kenarda cikma yapmasin: sadece match icindeki ilk elemanlarda sola hizala */
+.tip.tip-left:hover::after{left:auto;right:0;transform:none}
+
+/* ── Detay paneli aksiyon butonlari ───────────────────────────────────── */
+.detail-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.d-btn{
+  flex:1;min-width:130px;padding:9px 12px;border-radius:8px;font-size:12px;font-weight:600;
+  border:1px solid var(--border);background:rgba(59,130,246,.1);color:#93c5fd;
+  cursor:pointer;transition:background .15s,border-color .15s;display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.d-btn:hover{background:rgba(59,130,246,.2);border-color:var(--accent)}
+.d-btn.primary{background:rgba(34,197,94,.12);color:#4ade80;border-color:rgba(34,197,94,.35)}
+.d-btn.primary:hover{background:rgba(34,197,94,.22)}
+.d-btn:disabled{opacity:.45;cursor:not-allowed}
+
+/* ── Toast bildirimi ──────────────────────────────────────────────────── */
+#toast{
+  position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);
+  background:#1e2433;color:#e5e9f2;font-size:13px;padding:11px 18px;border-radius:9px;
+  border:1px solid #2e3548;box-shadow:0 6px 24px rgba(0,0,0,.45);z-index:10001;
+  opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── Match ozet karti ─────────────────────────────────────────────────── */
+.match-agg{display:flex;flex-wrap:wrap;gap:12px;margin:0 16px 10px}
+.agg-chip{
+  background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:8px;
+  padding:8px 14px;font-size:11px;color:var(--text-dim);
+}
+.agg-chip b{display:block;font-size:15px;color:var(--text);font-family:'JetBrains Mono',monospace;margin-top:2px}
+
+/* Match satiri yildiz */
+.mr-watch{cursor:pointer;color:var(--text-dim);transition:color .15s;padding:4px}
+.mr-watch:hover,.mr-watch.on{color:var(--yellow)}
+.match-result-head .mr-watch{color:transparent}
+
+/* Ctrl+K gostergesi */
+.kbd-hint{
+  position:absolute;right:10px;top:50%;transform:translateY(-50%);
+  font-size:10px;color:var(--text-dim);border:1px solid var(--border);
+  border-radius:4px;padding:1px 5px;font-family:'JetBrains Mono',monospace;
+}
+
+

@@ -1124,8 +1124,13 @@
     "id": "Y17",
     "baslik": "ARASTIRMA: e-ticaret/firma API'lerinden yeni veri kaynaklari (TOBB, il ozu, harbors)",
     "sahip": "arastirmaci",
-    "durum": "plan",
-    "not": "V9 veri stratejisi MVP'de acik kaynak: EKAP, ihale duyurulari, sektorsel haberler. Mevcut 6 kaynagin (ostim/ivedik/baskent/aso/web/mersis) disinda hukuki ve erisilebilir yeni kaynak listesi cikar (TOBB e-sicil, il ozu idare, KOSGEB, ihale raporlari). Cikti: kaynak + erisim yontemi + maliyet/kvkk analiz tablosu."
+    "durum": "done",
+    "not": "V9 veri stratejisi MVP'de acik kaynak: EKAP, ihale duyurulari, sektorsel haberler. Mevcut 6 kaynagin (ostim/ivedik/baskent/aso/web/mersis) disinda hukuki ve erisilebilir yeni kaynak listesi cikar (TOBB e-sicil, il ozu idare, KOSGEB, ihale raporlari). Cikti: kaynak + erisim yontemi + maliyet/kvkk analiz tablosu.",
+    "bitis": "2026-09-09T11:54:00",
+    "dosyalar": [
+      "data/orchestrator/y17_result.json"
+    ],
+    "not_t": "5 yeni veri kaynagi arastirildi: TOBB E-Sicil, İl Özu İdare, KOSGEB, İhale Raporları, EKAP. Her kaynak için erisim yontemi + maliyet + KVKK analizi tablosu olusturuldu. Sonuc: data/orchestrator/y17_result.json"
   },
   {
     "id": "Y18",

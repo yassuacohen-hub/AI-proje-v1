@@ -451,6 +451,8 @@ function showDetail(c) {
   // ANA KURAL: Firma adlari BUYUK HARFLE
   const legalName = (c.legal_name||'-').toUpperCase();
   const tradeName = (c.trade_name||'').toUpperCase();
+  window._detailCompany = c; // butonlar icin aktif firma saklanir
+  const inWatch = watchSet.has(c.company_id);
   document.getElementById('detail-empty').style.display='none';
   document.getElementById('detail-content').style.display='block';
   document.getElementById('detail-content').innerHTML = `
@@ -477,7 +479,50 @@ function showDetail(c) {
       <div class="detail-row"><span class="label">Vergi No</span><span class="value mono">${esc(c.vergi_no||'-')}</span></div>
       <div class="detail-row"><span class="label">NACE Kodu</span><span class="value mono">${esc(c.nace_code||'-')}</span></div>
       <div class="detail-row"><span class="label">OSB Parsel</span><span class="value mono">${esc(c.osb_parsel||'-')}</span></div>
+    </div>
+    <div class="detail-actions">
+      <button class="d-btn primary tip tip-left" data-tip="Bu firmanın sektörüne en uygun firmaları eşleştirme panelinde açar." onclick="matchFor(window._detailCompany)"${c.nace_code ? '' : ' disabled'}><i class="fas fa-handshake"></i> Kimler Uygun?</button>
+      <button class="d-btn tip tip-left" data-tip="Bu firmayı izleme listenize ekler/kaldırır (tarayıcınızda kalıcı)." onclick="toggleWatchDetail()"><i class="fas fa-star"></i> ${inWatch ? 'İzlemeden Çıkar' : 'İzlemeye Al'}</button>
+      <button class="d-btn tip tip-left" data-tip="Görünen telefon numarasını panoya kopyalar." onclick="copyField('primary_phone','Telefon')"${c.primary_phone ? '' : ' disabled'}><i class="fas fa-phone"></i> Telefon Kopyala</button>
+      <button class="d-btn tip tip-left" data-tip="Görünen e-posta adresini panoya kopyalar." onclick="copyField('primary_email','E-posta')"${c.primary_email ? '' : ' disabled'}><i class="fas fa-envelope"></i> E-posta Kopyala</button>
     </div>`;
+}
+
+function matchFor(c) {
+  if (!c || !c.nace_code) { toast('Bu firmanın NACE kodu yok — eşleştirme yapılamaz.'); return; }
+  scrollToSection('match-section');
+  const sel = document.getElementById('match-nace');
+  const grup = (c.nace_code || '').split('.')[0];
+  const opt = Array.from(sel.options).find(o => o.value === grup || o.value === c.nace_code);
+  if (opt) sel.value = opt.value;
+  else {
+    const o = document.createElement('option');
+    o.value = grup; o.textContent = grup;
+    sel.appendChild(o); sel.value = grup;
+  }
+  runMatchFor(c.company_id);
+}
+
+async function runMatchFor(buyerId) {
+  const statusEl = document.getElementById('match-status');
+  const resultsEl = document.getElementById('match-results');
+  const aggEl = document.getElementById('match-agg');
+  const mode = document.getElementById('match-mode').value;
+  const min = document.getElementById('match-min').value;
+  statusEl.className = 'match-status info';
+  statusEl.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Firma profiline göre eşleştiriliyor…';
+  aggEl.classList.add('hidden');
+  resultsEl.innerHTML = '';
+  try {
+    const r = await fetch(apiUrl(`/api/match?buyer_id=${encodeURIComponent(buyerId)}&mode=${mode}&min_puan=${min}&limit=20`));
+    if (!r.ok) throw new Error(`API ${r.status}`);
+    const d = await r.json();
+    renderMatchResults(d, mode);
+    toast(`Eşleştirme tamam: ${d.toplam} firma`);
+  } catch (e) {
+    statusEl.className = 'match-status err';
+    statusEl.innerHTML = `<i class="fas fa-exclamation-circle"></i> Hata: ${esc(e.message)}`;
+  }
 }
 
 function applyFilters() {
@@ -597,34 +642,60 @@ async function runMatch() {
     const r = await fetch(apiUrl(`/api/match?nace=${encodeURIComponent(nace)}&mode=${mode}&min_puan=${min}&limit=20`));
     if (!r.ok) throw new Error(`API ${r.status}`);
     const d = await r.json();
-
-    statusEl.className = 'match-status ok';
-    statusEl.innerHTML = `<i class="fas fa-check-circle"></i> <b>${d.toplam}</b> firma eşleştirildi — alıcı sektörü: <b>${esc(d.buyer.nace)}</b> (${mode === 'komple' ? 'tedarik zinciri dahil' : 'sadece aynı sektör'})`;
-
-    if (!d.items.length) {
-      resultsEl.innerHTML = '<div class="match-empty">Sonuç yok — Min Puan değerini düşürmeyi deneyin.</div>';
-      return;
-    }
-
-    window._matchItems = d.items;
-    resultsEl.innerHTML = `
-      <div class="match-result-head">
-        <span class="mr-col-name">Firma</span><span class="mr-col-nace">Sektör</span>
-        <span class="mr-col-score">Puan</span><span class="mr-col-rel">İlişki</span>
-      </div>` + d.items.map((i, idx) => `
-      <div class="match-result-row" onclick="showDetail(window._matchItems[${idx}])">
-        <div class="mr-name">
-          <div class="mr-name-main">${esc(i.legal_name)}</div>
-          <div class="mr-name-sub">${esc(i.trade_name)}${i.website_domain ? ' · ' + esc(i.website_domain) : ''}</div>
-        </div>
-        <div class="mr-nace">${esc(i.nace_code || '-')}</div>
-        <div class="mr-score">${matchScoreBar(i.match.puan)}</div>
-        <div class="mr-rel">${matchBadge(i.match.iliski)}${matchKirilim(i.match.kirilim)}</div>
-      </div>`).join('');
+    renderMatchResults(d, mode);
+    toast(`Eşleştirme tamam: ${d.toplam} firma`);
   } catch (e) {
     statusEl.className = 'match-status err';
     statusEl.innerHTML = `<i class="fas fa-exclamation-circle"></i> Eşleştirme hatası: ${esc(e.message)}`;
   }
+}
+
+function renderMatchResults(d, mode) {
+  const statusEl = document.getElementById('match-status');
+  const aggEl = document.getElementById('match-agg');
+  const resultsEl = document.getElementById('match-results');
+  statusEl.className = 'match-status ok';
+  statusEl.innerHTML = `<i class="fas fa-check-circle"></i> <b>${d.toplam}</b> firma eşleştirildi — alıcı: <b>${esc(d.buyer.adi || d.buyer.nace)}</b> · ${esc(d.buyer.nace)} (${mode === 'komple' ? 'tedarik zinciri dahil' : 'sadece aynı sektör'})`;
+
+  const items = d.items || [];
+  if (items.length) {
+    const ort = (items.reduce((s, i) => s + i.match.puan, 0) / items.length).toFixed(1);
+    const dag = {};
+    items.forEach(i => { dag[i.match.iliski] = (dag[i.match.iliski] || 0) + 1; });
+    const dagStr = Object.entries(dag).map(([k, v]) => `${k}: ${v}`).join(' · ');
+    aggEl.className = 'match-agg';
+    aggEl.innerHTML = `
+      <div class="agg-chip">Toplam<b>${d.toplam}</b></div>
+      <div class="agg-chip">Gösterilen<b>${items.length}</b></div>
+      <div class="agg-chip">Ortalama Puan<b>${ort}</b></div>
+      <div class="agg-chip">İlişki<b style="font-size:11px">${dagStr}</b></div>
+      <div class="agg-chip" style="display:flex;align-items:center">
+        <button class="d-btn tip tip-left" data-tip="Görünen eşleştirme sonucunu CSV olarak indirir." style="min-width:auto;width:100%" onclick="exportMatchCSV()"><i class="fas fa-download"></i> CSV</button>
+      </div>`;
+  } else {
+    aggEl.classList.add('hidden');
+  }
+
+  if (!items.length) {
+    resultsEl.innerHTML = '<div class="match-empty">Sonuç yok — Min Puan değerini düşürmeyi deneyin.</div>';
+    return;
+  }
+
+  window._matchItems = items;
+  resultsEl.innerHTML = `
+    <div class="match-result-head">
+      <span class="mr-col-name">Firma</span><span class="mr-col-nace">Sektör</span>
+      <span class="mr-col-score">Puan</span><span class="mr-col-rel">İlişki</span>
+    </div>` + items.map((i, idx) => `
+    <div class="match-result-row" onclick="showDetail(window._matchItems[${idx}])">
+      <div class="mr-name">
+        <div class="mr-name-main">${esc(i.legal_name)} <span class="mr-watch ${watchSet.has(i.company_id) ? 'on' : ''}" title="İzleme listesi" onclick="event.stopPropagation(); toggleWatch('${i.company_id}'); this.classList.toggle('on')"><i class="fas fa-star"></i></span></div>
+        <div class="mr-name-sub">${esc(i.trade_name)}${i.website_domain ? ' · ' + esc(i.website_domain) : ''}</div>
+      </div>
+      <div class="mr-nace">${esc(i.nace_code || '-')}</div>
+      <div class="mr-score">${matchScoreBar(i.match.puan)}</div>
+      <div class="mr-rel">${matchBadge(i.match.iliski)}${matchKirilim(i.match.kirilim)}</div>
+    </div>`).join('');
 }
 
 // showView'e match scroll entegrasyonu (mevcut fonksiyonu sarmala)
@@ -636,3 +707,58 @@ showView = function (v, el) {
     scrollToSection('match-section');
   }
 };
+
+function exportMatchCSV() {
+  const items = window._matchItems || [];
+  if (!items.length) { toast('Dışa aktarılacak sonuç yok.'); return; }
+  const head = 'firma,ticaret_adi,nace,puan,iliski,sektor,konum,kalite,kanit,web';
+  const rows = items.map(i =>
+    `"${(i.legal_name || '').replace(/"/g, '""')}","${(i.trade_name || '').replace(/"/g, '""')}",${i.nace_code || ''},${i.match.puan},${i.match.iliski},${i.match.kirilim.sektor},${i.match.kirilim.konum},${i.match.kirilim.kalite},${i.match.kirilim.kanit},"${i.website_domain || ''}"`
+  );
+  const blob = new Blob(['\ufeff' + head + '\n' + rows.join('\n')], { type: 'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `eslestirme_${Date.now()}.csv`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+  toast(`${items.length} satır CSV indirildi`);
+}
+
+function toast(msg) {
+  let el = document.getElementById('toast');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'toast';
+    document.body.appendChild(el);
+  }
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => el.classList.remove('show'), 2200);
+}
+
+function copyField(field, label) {
+  const c = window._detailCompany;
+  if (!c || !c[field]) { toast(`${label} bilgisi yok.`); return; }
+  navigator.clipboard.writeText(c[field]).then(
+    () => toast(`${label} kopyalandı ✓`),
+    () => toast('Kopyalama başarısız.')
+  );
+}
+
+function toggleWatchDetail() {
+  const c = window._detailCompany;
+  if (!c) return;
+  toggleWatch(c.company_id);
+  showDetail(c); // buton etiketini yenile
+  toast(watchSet.has(c.company_id) ? 'İzleme listesine eklendi' : 'İzleme listesinden çıkarıldı');
+}
+
+// Ctrl+K: arama kutusuna odak (global arama kisayolu)
+document.addEventListener('keydown', e => {
+  if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) {
+    e.preventDefault();
+    const s = document.getElementById('global-search');
+    if (s) { s.focus(); s.select(); }
+  }
+});

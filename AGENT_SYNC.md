@@ -56,6 +56,8 @@
 - **P4-1**: Kalite skoru 27.5 -> ~64 tamamlandi
 - **P4-4**: Dashboard performans izleme ve slow query optimiza
 
+- **Y17**: Yeni veri kaynaklari arastirmasi tamamlandi (TOBB, il ozu, KOSGEB, ihale, EKAP). Sonuc: data/orchestrator/y17_result.json
+
 ## 2026-09-09 � P7 Job Intelligence Mod�l� Planlamas�
 
 ### Altyap� Haz�r

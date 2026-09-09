@@ -1,4 +1,25 @@
 
+## 2026-09-09 — UX/UI paketi: tüm öneriler + hover bilgi notları ✅
+
+**1. Detay paneli aksiyon butonları:**
+- **"Kimler Uygun?"** (primary) → firmayı buyer profiliyle match panelinde açar (`matchFor()` → NACE ana grubu seçilir → `runMatchFor(company_id)`)
+- "İzlemeye Al/Çıkar" (watchSet localStorage entegrasyonu)
+- "Telefon Kopyala" / "E-posta Kopyala" → `navigator.clipboard` + toast bildirimi
+
+**2. Match sonuç CSV export:** `exportMatchCSV()` — client-side blob (firma, ticaret adı, NACE, puan, kırılım, web; BOM'lu UTF-8, Excel uyumlu)
+
+**3. Match satırında yıldız izleme:** `toggleWatch` entegrasyonu (event.stopPropagation ile satır tıklamasından bağımsız)
+
+**4. Özet kartı:** Toplam / Gösterilen / Ortalama Puan / İlişki Dağılımı chips'leri + CSV butonu
+
+**5. Ctrl+K klavye kısayolu** → global aramaya odak; arama kutusunda `Ctrl+K` kbd göstergesi
+
+**6. Toast bildirim sistemi** (`#toast`, kopyalama/izleme/CSV geri bildirimleri)
+
+**7. Hover bilgi notları (tooltip):** CSS-only `.tip[data-tip]` sistemi — 14 noktaya eklendi: 6 nav-item (Genel/Firmalar/Kaynaklar/Kalite/Eşleştirme/Görevler), arama kutusu, CSV/API/Metrikler hızlı erişim, match'in 4 kontrolü (sektör/mod/min puan/buton), match CSV butonu, detay 4 butonu. Sağ kenar çakışması `tip-left` sınıfıyla çözülü.
+
+**Test (headless Edge, gerçek DOM):** dump 172KB · **data-tip=14** · match-section ✓ · fa-handshake=2 · kbd-hint ✓ · tip-left=4 · `node --check` OK · cache-buster v5 · volume mount → rebuild'siz canlıda.
+
 ## 2026-09-09 — Match motoru dashboard'a taşındı + UX iyileştirmeleri ✅
 
 **Dashboard "Eşleştirme" paneli (Y19 UI):**
