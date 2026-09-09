@@ -876,11 +876,11 @@
     "baslik": "Git deposu baslatma (git init + ilk commit)",
     "sahip": "devops",
     "oncelik": "P1",
-    "durum": "blocked",
+    "durum": "done",
     "baslangic": "2026-09-09T03:06:59",
     "bitis": "2026-09-09T03:06:59",
     "dosyalar": [],
-    "not": "Kullanici onayi bekleniyor (bkz. 09_proje_denetimi_2026-09-09.md)"
+    "not": "Kullanici onayi bekleniyor (bkz. 09_proje_denetimi_2026-09-09.md) | TAMAMLANDI 2026-09-09: private repo yassuacohen-hub/AI-proje-v1 + gunluk otomatik push (Huginn Git Push, 04:00)"
   },
   {
     "task_id": "DENET-4",
@@ -1098,5 +1098,47 @@
       "scripts/post_scrape_workflow.py"
     ],
     "not": "Adım 5, 6, 7 eklendi (ingest_job_postings, analyze_job_signals, recalc_intelligence_scores)"
+  },
+  {
+    "id": "BILDIRIM-SISTEM-V2",
+    "baslik": "SISTEM V2 raporu: Docker + yerel PostgreSQL + git otomasyonu devrede",
+    "sahip": "tumu",
+    "durum": "done",
+    "not": "2026-09-09 kurulan sistem: (1) API Docker konteynerinde (restart: unless-stopped, port 8000, health=200). (2) Yerel PostgreSQL 16 (localhost:5433, localdb profili) - 14.000 firma restore edildi, sorgular ~30x hizli (11 ms vs Supabase 300-900 ms). restore_db.py JSONB fix ile SQLite->PostgreSQL uyumlu hale geldi. (3) GitHub private repo: yassuacohen-hub/AI-proje-v1 - 631+ dosya push edildi. (4) Otomasyon zinciri: 03:00 DB backup -> 04:00 git push -> 08:00 change notify (Telegram). (5) KVKK maskeleme API'de aktif (apply_kvkk_mask, ?mask=1 / DASH_MASK_PII=1). Kural: yeni ajan kodu Docker'a uygun yazsin (requirements-app.txt, non-root). Yerel DB ile test: DATABASE_URL=postgresql+psycopg://huginn:huginn_local_dev@localhost:5433/huginn"
+  },
+  {
+    "id": "Y15",
+    "baslik": "Arama sorgu: yerel DB trigram index'i kur ve dogrula",
+    "sahip": "kalite",
+    "durum": "plan",
+    "not": "Yerel DB'de idx_companies_legal_name_trgm + search_text index'i yok (restore create-table'dan geliyor). pg_trgm extension'i acip index'leri kur, Supabase ile ayni plan kalitesini yerelde de dogrula."
+  },
+  {
+    "id": "Y16",
+    "baslik": "ARASTIRMA: dashboard'a sektor/market zekasi katmani (V9 market brain MVP)",
+    "sahip": "arastirmaci",
+    "durum": "plan",
+    "not": "V9 baglam dokumanindaki Market Brain MVP kapsam: sektor bazli fiyat/haber/sentiment akisi yerine mevcut veriyle 'sektor sagligi' kartinin nasil kurulur (firma sayisi + kalite + web varligi) arastir. Cikti: islenebilir ozellik listesi + veri yeterlilik analizi."
+  },
+  {
+    "id": "Y17",
+    "baslik": "ARASTIRMA: e-ticaret/firma API'lerinden yeni veri kaynaklari (TOBB, il ozu, harbors)",
+    "sahip": "arastirmaci",
+    "durum": "plan",
+    "not": "V9 veri stratejisi MVP'de acik kaynak: EKAP, ihale duyurulari, sektorsel haberler. Mevcut 6 kaynagin (ostim/ivedik/baskent/aso/web/mersis) disinda hukuki ve erisilebilir yeni kaynak listesi cikar (TOBB e-sicil, il ozu idare, KOSGEB, ihale raporlari). Cikti: kaynak + erisim yontemi + maliyet/kvkk analiz tablosu."
+  },
+  {
+    "id": "Y18",
+    "baslik": "ARASTIRMA: Telegram musterisi icin abonelik/rate plan tasarimi",
+    "sahip": "arastirmaci",
+    "durum": "plan",
+    "not": "Dashboard + Telegram'li musteri sunumunda sorgu limitleri ne olmali (per API key, DASH_API_KEY var). Rekabete (Kompass, Euromonitor TR segmenti) bakip pilot abonelik tier'i onerisi cikar. Cikti: tier tablosu + kotalar + isimlendirme."
+  },
+  {
+    "id": "Y19",
+    "baslik": "ARASTIRMA: V9 smart matching (musteri-firma eslestirme) MVP prototipi",
+    "sahip": "gelistirici",
+    "durum": "plan",
+    "not": "Mevcut company_capabilities + products tablolar bos; V9'un 'kime satis yapilir' motoru icin minimum eslestirme MVP'yi tanimla: NACE benzerligi + sektor + konum (Ankara/OSB) puanlama. Cikti: skor formulu + endpoints ozeti (eslestirme /api/match?buyer=X)."
   }
 ]

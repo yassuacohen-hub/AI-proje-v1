@@ -3,6 +3,25 @@
 > Son guncelleme: 2026-09-09T12:26:10
 > Kaynak: data/orchestrator/task_board.json
 
+## âš¡ SISTEM V2 â€” TUM AJANLARA (2026-09-09, ONEM: YUKSEK)
+
+**Artik calisma ortami degisti â€” yeni gorevlerde buna uyma kurali:**
+
+1. **API Docker konteynerinde** (restart: unless-stopped, port 8000, health=200). Yeni kod yazarken:
+   - Bagimliliklari `requirements-app.txt`'e ekle (Dockerfile image'i oradan kurar)
+   - Non-root kurali: konteynerde `appuser` calisir, dosya yazma icin `logs/`, `data/` yazilabilir olmali
+2. **Yerel PostgreSQL 16 devrede** (`localhost:5433`, db `huginn`, sifre `huginn_local_dev`, profil `localdb`):
+   - 14.000 firma + 8.905 entity_resolution + 14.000 source_records yuklu
+   - **Sorgular ~30x hizli** (11 ms vs Supabase 300-900 ms) â†’ testleri ve agir isleri yerelde kos
+   - Baglanti: `DATABASE_URL=postgresql+psycopg://huginn:huginn_local_dev@localhost:5433/huginn`
+   - `restore_db.py` artik JSONB uyumlu (SQLite backup -> PostgreSQL restore calisir)
+3. **Git/GitHub:** private repo `yassuacohen-hub/AI-proje-v1` â€” otomatik gunluk push (04:00, `scripts/git_auto_push.bat`). Commit disiplini: `git_auto_push.bat` elle de calistirilabilir. `.env`, `backups/`, `*.db` gitignore'da â€” gizli veri koyma.
+4. **Otomasyon zinciri:** 03:00 DB backup â†’ 04:00 git push â†’ 08:00 change notify (Telegram).
+5. **KVKK maskeleme aktif:** `web_app.py â†’ apply_kvkk_mask` (`?mask=1` veya `DASH_MASK_PII=1`). Musteri ucu ciktilarinda e-posta/telefon maskeleme varsayilani unutma.
+
+**Yeni arastirma gorevleri acildi:** Y15 (yerel DB trigram index), Y16 (sektor zekasi/MVP market brain), Y17 (yeni veri kaynaklari: TOBB/ihale/KOSGEB), Y18 (abonelik tier tasarimi), Y19 (V9 smart matching MVP). Detaylar panoda (id: Y15-Y19).
+
+
 ## Aktif Isler
 
 | Gorev | Baslik | Sahip | Oncelik | Durum |
@@ -37,22 +56,22 @@
 - **P4-1**: Kalite skoru 27.5 -> ~64 tamamlandi
 - **P4-4**: Dashboard performans izleme ve slow query optimiza
 
-## 2026-09-09 — P7 Job Intelligence Modülü Planlamasý
+## 2026-09-09 ï¿½ P7 Job Intelligence Modï¿½lï¿½ Planlamasï¿½
 
-### Altyapý Hazýr
+### Altyapï¿½ Hazï¿½r
 - Migration 0007: 5 tablo + 2 view + trigger
 - Source Registry: company-career-pages, iskur, kariyer-net
-- Permission Router: ÝSKUR (kvkk_safe), Kariyer.net (kvkk_safe=False)
-- Post-Scrape Pipeline: +3 adým (ingest, analyze, score)
+- Permission Router: ï¿½SKUR (kvkk_safe), Kariyer.net (kvkk_safe=False)
+- Post-Scrape Pipeline: +3 adï¿½m (ingest, analyze, score)
 
-### Task Daðýlýmý (P7-1..P7-11)
-| Task | Sahip | Öncelik | Durum |
+### Task Daï¿½ï¿½lï¿½mï¿½ (P7-1..P7-11)
+| Task | Sahip | ï¿½ncelik | Durum |
 |------|-------|---------|-------|
 | P7-1: Migration | gelistirici | P0 | plan |
-| P7-2: Modül yapýsý | mimar | P0 | plan |
+| P7-2: Modï¿½l yapï¿½sï¿½ | mimar | P0 | plan |
 | P7-3: Company Matcher | gelistirici | P0 | plan |
 | P7-4: Career Pages Scraper | web_kazima | P0 | plan |
-| P7-5: ÝSKUR Scraper | web_kazima | P1 | plan |
+| P7-5: ï¿½SKUR Scraper | web_kazima | P1 | plan |
 | P7-6: Kariyer.net Scraper | web_kazima | P2 | blocked |
 | P7-7: Ingest Script | gelistirici | P0 | plan |
 | P7-8: Signals Analyzer | arastirmaci | P0 | plan |
@@ -60,12 +79,12 @@
 | P7-10: Scores Recalc | gelistirici | P0 | plan |
 | P7-11: Workflow Entegrasyonu | gelistirici | P0 | done |
 
-### MVP Sýrasý (Ýlk 2 Hafta)
-1. Migration + Company Matcher + Career Pages Scraper + ÝSKUR Scraper + Ingest
+### MVP Sï¿½rasï¿½ (ï¿½lk 2 Hafta)
+1. Migration + Company Matcher + Career Pages Scraper + ï¿½SKUR Scraper + Ingest
 2. Analyzer + Scorer + Recalc Script + Pipeline entegrasyonu
 
-### Ýlgili Ajanlar Bilgisi
-- **Mimar (P7-2):** Modül yapýsýný `src/company_master/intelligence/job_intelligence/` altýna kur
-- **Geliþtirici (P7-1,3,7,10):** Migration, Matcher, Ingest, Recalc scriptleri
-- **Web Kazýma (P7-4,5,6):** Career Pages, ÝSKUR, Kariyer.net scraper’larý
-- **Araþtýrmacý (P7-8,9):** Sinyal analizi ve skorlama motoru
+### ï¿½lgili Ajanlar Bilgisi
+- **Mimar (P7-2):** Modï¿½l yapï¿½sï¿½nï¿½ `src/company_master/intelligence/job_intelligence/` altï¿½na kur
+- **Geliï¿½tirici (P7-1,3,7,10):** Migration, Matcher, Ingest, Recalc scriptleri
+- **Web Kazï¿½ma (P7-4,5,6):** Career Pages, ï¿½SKUR, Kariyer.net scraperï¿½larï¿½
+- **Araï¿½tï¿½rmacï¿½ (P7-8,9):** Sinyal analizi ve skorlama motoru
