@@ -9,7 +9,7 @@
   <title>Huginn — Data Insights</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <link rel="stylesheet" href="/static/css/style.css?v=19">
+  <link rel="stylesheet" href="/static/css/style.css?v=20">
 </head>
 <body>
   <a class="skip-link" href="#main-content">İçeriğe geç</a>
@@ -168,6 +168,7 @@
               <div class="chart-card-actions"><button class="chart-btn" type="button" onclick="clearNACEFilter()"><i class="fas fa-times" aria-hidden="true"></i> Sektör Temizle</button></div>
             </div>
             <div id="nace-list" class="nace-list"></div>
+            <div class="list-toggle-wrap"><button id="nace-toggle" class="collapsible-toggle hidden" type="button" onclick="toggleNaceList()"><span id="nace-toggle-label">Tümünü göster</span><i class="fas fa-chevron-down" aria-hidden="true"></i></button></div>
           </section>
 
           <section class="sources-section" id="sources-section" aria-labelledby="sources-title">
@@ -183,6 +184,7 @@
             </div>
             <p class="sources-hint"><i class="fas fa-info-circle" aria-hidden="true"></i> Bir veya birden fazla veri kaynağını seçerek firmaları filtreleyebilirsiniz. Yeni eklenen kaynaklar otomatik olarak buraya gelir.</p>
             <div id="sources-grid" class="sources-grid"></div>
+            <div class="list-toggle-wrap"><button id="sources-toggle" class="collapsible-toggle hidden" type="button" onclick="toggleSourcesList()"><span id="sources-toggle-label">Tümünü göster</span><i class="fas fa-chevron-down" aria-hidden="true"></i></button></div>
           </section>
 
           <section class="quick-filters" aria-labelledby="quick-filter-title">
@@ -248,7 +250,7 @@
     </aside>
   </div>
   <script src="/static/js/nace_labels.js"></script>
-  <script src="/static/js/app.js?v=15"></script>
+  <script src="/static/js/app.js?v=16"></script>
 </body>
 </html>
 

@@ -205,11 +205,21 @@ async function loadSources() {
   const r = await fetch(apiUrl('/api/sources'));
   const d = await r.json();
   allSources = d;
-  // Grid olustur
+  renderSources();
+  // Hizli filtre dropdown'ini doldur
+  const sourceFilter = document.getElementById('source-filter');
+  if (sourceFilter) {
+    sourceFilter.innerHTML = '<option value="">Tüm Kaynaklar</option>' + d.map(s => `<option value="${s.source_name}">${s.source_name} (${fmt(s.record_count)})</option>`).join('');
+  }
+}
+
+let showAllSources = false;
+function renderSources() {
+  const list = showAllSources ? allSources : allSources.slice(0, 8);
   const icons = {'ostim.org.tr':'fa-industry','aso.org.tr':'fa-building','ivedik.org.tr':'fa-city','baskent.org.tr':'fa-warehouse'};
   const typeLabels = {'osb':'OSB','chamber':'Oda','mersis':'MERSIS','gib':'GIB','web':'Web'};
-  document.getElementById('sources-grid').innerHTML = d.map(s => `
-    <div class="source-box" id="src-${s.source_name.replace(/\./g,'-')}" onclick="toggleSource('${s.source_name}')">
+  document.getElementById('sources-grid').innerHTML = list.map(s => `
+    <div class="source-box${selectedSources.has(s.source_name)?' selected':''}" id="src-${s.source_name.replace(/\./g,'-')}" onclick="toggleSource('${s.source_name}')">
       <div class="source-box-icon"><i class="fas ${icons[s.source_name]||'fa-database'}"></i></div>
       <div class="source-box-name">${esc(s.source_name)}</div>
       <div class="source-box-type">${typeLabels[s.source_type]||s.source_type}</div>
@@ -218,12 +228,10 @@ async function loadSources() {
         <span>${s.last_scrape ? new Date(s.last_scrape).toLocaleDateString('tr-TR') : '-'}</span>
       </div>
     </div>`).join('');
-  // Hizli filtre dropdown'ini doldur
-  const sourceFilter = document.getElementById('source-filter');
-  if (sourceFilter) {
-    sourceFilter.innerHTML = '<option value="">Tüm Kaynaklar</option>' + d.map(s => `<option value="${s.source_name}">${s.source_name} (${fmt(s.record_count)})</option>`).join('');
-  }
+  updateListToggle('sources-toggle','sources-toggle-label',allSources.length,showAllSources);
 }
+
+function toggleSourcesList() { showAllSources = !showAllSources; renderSources(); }
 
 function toggleSource(name) {
   const box = document.getElementById('src-' + name.replace(/\./g,'-'));
@@ -353,19 +361,12 @@ async function loadQualityTrend() {
   qualityChart = new Chart(document.getElementById('qualityChart'),{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:colors,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#64748b',font:{size:11},padding:8}}},cutout:'60%'}});
 }
 
+let allNace = [], showAllNace = false;
 async function loadNACE() {
-  const r = await fetch(apiUrl('/api/nace-distribution?limit=8'));
+  const r = await fetch(apiUrl('/api/nace-distribution?limit=100'));
   const d = await r.json();
-  const maxCnt = Math.max(...d.map(x=>x.cnt),1);
-  document.getElementById('nace-list').innerHTML = d.map(x=>{
-    const label = getNaceLabel(x.nace_code);
-    return `<div class="nace-item" onclick="filterByNACE('${x.nace_code}')" style="cursor:pointer" title="${label}">
-      <span class="nace-code">${esc(x.nace_code)}</span>
-      <span class="nace-label">${esc(label)}</span>
-      <span class="nace-count">${fmt(x.cnt)}</span>
-      <div class="nace-bar"><div class="nace-bar-fill" style="width:${(x.cnt/maxCnt)*100}%"></div></div>
-    </div>`;
-  }).join('');
+  allNace = d;
+  renderNaceList();
   // NACE dropdown'ini doldur
   const naceFilter = document.getElementById('nace-filter');
   if (naceFilter) {
@@ -374,6 +375,36 @@ async function loadNACE() {
       const sector = getNaceSector(x.nace_code);
       return `<option value="${prefix}">${sector} (${fmt(x.cnt)})</option>`;
     }).join('');
+  }
+}
+
+function renderNaceList() {
+  const list = showAllNace ? allNace : allNace.slice(0, 8);
+  const maxCnt = Math.max(...list.map(x=>x.cnt), 1);
+  document.getElementById('nace-list').innerHTML = list.map(x=>{
+    const label = getNaceLabel(x.nace_code);
+    return `<div class="nace-item" onclick="filterByNACE('${x.nace_code}')" style="cursor:pointer" title="${label}">
+      <span class="nace-code">${esc(x.nace_code)}</span>
+      <span class="nace-label">${esc(label)}</span>
+      <span class="nace-count">${fmt(x.cnt)}</span>
+      <div class="nace-bar"><div class="nace-bar-fill" style="width:${(x.cnt/maxCnt)*100}%"></div></div>
+    </div>`;
+  }).join('');
+  updateListToggle('nace-toggle','nace-toggle-label',allNace.length,showAllNace);
+}
+
+function toggleNaceList() { showAllNace = !showAllNace; renderNaceList(); }
+
+function updateListToggle(btnId, labelId, total, isOpen) {
+  const btn = document.getElementById(btnId);
+  if (!btn) return;
+  const VISIBLE = 8;
+  if (total > VISIBLE) {
+    btn.classList.remove('hidden');
+    document.getElementById(labelId).textContent = isOpen ? 'Daha az göster' : `Tümünü göster (${total})`;
+    btn.classList.toggle('open', isOpen);
+  } else {
+    btn.classList.add('hidden');
   }
 }
 
