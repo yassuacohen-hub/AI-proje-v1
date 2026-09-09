@@ -1,4 +1,17 @@
 
+## 2026-09-09 — Y15: Yerel DB index'leri (~8x ek hızlanma) ✅
+
+**`scripts/setup_local_indexes.py`** (kalıcı araç — restore sonrası tekrar koşulabilir, idempotent):
+- `pg_trgm` extension + **7 index**: `legal_name_trgm`, `search_text_trgm` (arama), `er_company_id`, `sr_source_id`, `sr_external_id`, `nace`, `score` (join/sıralama)
+- Sonuç: **ILIKE arama 11.6ms → 1.4ms** (~8x ek hızlanma; Supabase'e göre ~600x — 300-900ms'den)
+- EXPLAIN OK (total_cost 60.3)
+
+**Doğrulama:** Supabase ile canlı testler **25 passed** (aynı beklenen değer).
+
+**Bulunan bug → Y20 açıldı:** `DATABASE_URL` env override'ı testlerde sqlite fallback'a düşüyor (19 fail) — `connection.py` env/`+psycopg` işleyişini düzeltecek görev (gelistirici).
+
+Pano: 82/90 done · Y20 plan'da.
+
 ## 2026-09-09 — Faz 3b: Yerel PostgreSQL + Git init ✅
 
 **Yerel PostgreSQL (Docker, `localdb` profili):**

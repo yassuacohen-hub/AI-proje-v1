@@ -1110,8 +1110,8 @@
     "id": "Y15",
     "baslik": "Arama sorgu: yerel DB trigram index'i kur ve dogrula",
     "sahip": "kalite",
-    "durum": "plan",
-    "not": "Yerel DB'de idx_companies_legal_name_trgm + search_text index'i yok (restore create-table'dan geliyor). pg_trgm extension'i acip index'leri kur, Supabase ile ayni plan kalitesini yerelde de dogrula."
+    "durum": "done",
+    "not": "TAMAMLANDI 2026-09-09: scripts/setup_local_indexes.py - pg_trgm extension + 7 index (legal_name_trgm, search_text_trgm, er_company_id, sr_source_id, sr_external_id, nace, score). ILIKE arama 11.6ms -> 1.4ms (~8x ek hizlanma, Supabase'e gore ~600x). EXPLAIN OK. Not: Supabase ile testler 25 passed (dogrulandi)."
   },
   {
     "id": "Y16",
@@ -1140,5 +1140,12 @@
     "sahip": "gelistirici",
     "durum": "plan",
     "not": "Mevcut company_capabilities + products tablolar bos; V9'un 'kime satis yapilir' motoru icin minimum eslestirme MVP'yi tanimla: NACE benzerligi + sektor + konum (Ankara/OSB) puanlama. Cikti: skor formulu + endpoints ozeti (eslestirme /api/match?buyer=X)."
+  },
+  {
+    "id": "Y20",
+    "baslik": "BUG: connection.py DATABASE_URL env override testlerde sqlite'a dusuyor",
+    "sahip": "gelistirici",
+    "durum": "plan",
+    "not": "DATABASE_URL=postgresql+psycopg://... env var'i set edilip testler kosuldugunda web_app sqlite fallback'a geciyor (no such table: companies, 19 fail). get_database_url()/get_engine() +psycopg sonekli URL'leri veya env onceligini duzgun islemeli; testlerin yerel PG ile de kosmasi gerekir (Y15 index dogrulamasi yerelde manuel yapildi)."
   }
 ]
