@@ -36,3 +36,36 @@
 - **P4-5**: Duplicate temizligi tamam; veri tekillestirildi, a
 - **P4-1**: Kalite skoru 27.5 -> ~64 tamamlandi
 - **P4-4**: Dashboard performans izleme ve slow query optimiza
+
+## 2026-09-09 — P7 Job Intelligence Modülü Planlamasý
+
+### Altyapý Hazýr
+- Migration 0007: 5 tablo + 2 view + trigger
+- Source Registry: company-career-pages, iskur, kariyer-net
+- Permission Router: ÝSKUR (kvkk_safe), Kariyer.net (kvkk_safe=False)
+- Post-Scrape Pipeline: +3 adým (ingest, analyze, score)
+
+### Task Daðýlýmý (P7-1..P7-11)
+| Task | Sahip | Öncelik | Durum |
+|------|-------|---------|-------|
+| P7-1: Migration | gelistirici | P0 | plan |
+| P7-2: Modül yapýsý | mimar | P0 | plan |
+| P7-3: Company Matcher | gelistirici | P0 | plan |
+| P7-4: Career Pages Scraper | web_kazima | P0 | plan |
+| P7-5: ÝSKUR Scraper | web_kazima | P1 | plan |
+| P7-6: Kariyer.net Scraper | web_kazima | P2 | blocked |
+| P7-7: Ingest Script | gelistirici | P0 | plan |
+| P7-8: Signals Analyzer | arastirmaci | P0 | plan |
+| P7-9: Intelligence Scorer | arastirmaci | P0 | plan |
+| P7-10: Scores Recalc | gelistirici | P0 | plan |
+| P7-11: Workflow Entegrasyonu | gelistirici | P0 | done |
+
+### MVP Sýrasý (Ýlk 2 Hafta)
+1. Migration + Company Matcher + Career Pages Scraper + ÝSKUR Scraper + Ingest
+2. Analyzer + Scorer + Recalc Script + Pipeline entegrasyonu
+
+### Ýlgili Ajanlar Bilgisi
+- **Mimar (P7-2):** Modül yapýsýný `src/company_master/intelligence/job_intelligence/` altýna kur
+- **Geliþtirici (P7-1,3,7,10):** Migration, Matcher, Ingest, Recalc scriptleri
+- **Web Kazýma (P7-4,5,6):** Career Pages, ÝSKUR, Kariyer.net scraper’larý
+- **Araþtýrmacý (P7-8,9):** Sinyal analizi ve skorlama motoru

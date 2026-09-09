@@ -1,64 +1,64 @@
-test_column_classification_email (test_platform.TestEnterpriseDataPlatform.test_column_classification_email)
-E-posta sütunu sınıflandırma testi. ... ok
-test_column_classification_phone (test_platform.TestEnterpriseDataPlatform.test_column_classification_phone)
-Telefon sütunu sınıflandırma testi. ... ok
-test_email_validation (test_platform.TestEnterpriseDataPlatform.test_email_validation)
-E-posta doğrulama testi. ... ok
-test_iban_validation (test_platform.TestEnterpriseDataPlatform.test_iban_validation)
-IBAN doğrulama testi. ... ok
-test_luhn_credit_card (test_platform.TestEnterpriseDataPlatform.test_luhn_credit_card)
-Kredi kartı Luhn algoritması testi. ... ok
-test_mixed_pii_detection (test_platform.TestEnterpriseDataPlatform.test_mixed_pii_detection)
-Karışık PII türü tespiti testi. ... FAIL
-test_null_handling (test_platform.TestEnterpriseDataPlatform.test_null_handling)
-Null/None değer işleme testi. ... ok
-test_phone_validation (test_platform.TestEnterpriseDataPlatform.test_phone_validation)
-Telefon numarası doğrulama testi. ... ok
-test_pii_scanner_column (test_platform.TestEnterpriseDataPlatform.test_pii_scanner_column)
-Sütun sınıflandırma ve güvenlik seviyesi testi. ... ok
-test_quality_engine_rules (test_platform.TestEnterpriseDataPlatform.test_quality_engine_rules)
-Veri kalitesi motoru ve kuralları testi. ... ok
-test_synthetic_data_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_data_generation)
-Sentetik veri üretimi testi. ... ok
-test_synthetic_data_with_null_probability (test_platform.TestEnterpriseDataPlatform.test_synthetic_data_with_null_probability)
-Null olasılığı ile sentetik veri testi. ... ok
-test_synthetic_email_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_email_generation)
-Sentetik e-posta üretimi testi. ... FAIL
-test_synthetic_iban_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_iban_generation)
-Sentetik IBAN üretimi testi. ... ok
-test_synthetic_phone_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_phone_generation)
-Sentetik telefon numarası üretimi testi. ... FAIL
-test_tckn_algorithm (test_platform.TestEnterpriseDataPlatform.test_tckn_algorithm)
-TCKN algoritması doğrulama testi. ... ok
-
-======================================================================
-FAIL: test_mixed_pii_detection (test_platform.TestEnterpriseDataPlatform.test_mixed_pii_detection)
-Karışık PII türü tespiti testi.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\tests\test_platform.py", line 228, in test_mixed_pii_detection
-    self.assertEqual(result, expected_type)
-AssertionError: None != 'PHONE'
-
-======================================================================
-FAIL: test_synthetic_email_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_email_generation)
-Sentetik e-posta üretimi testi.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\tests\test_platform.py", line 157, in test_synthetic_email_generation
-    self.assertEqual(result, "EMAIL", f"Üretilen e-posta doğrulanmalı: {email}")
-AssertionError: None != 'EMAIL' : Üretilen e-posta doğrulanmalı: i̇smail.yıldız88@banka.com.tr
-
-======================================================================
-FAIL: test_synthetic_phone_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_phone_generation)
-Sentetik telefon numarası üretimi testi.
-----------------------------------------------------------------------
-Traceback (most recent call last):
-  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\tests\test_platform.py", line 171, in test_synthetic_phone_generation
-    self.assertEqual(result, "PHONE", f"Üretilen telefon doğrulanmalı: {phone}")
-AssertionError: None != 'PHONE' : Üretilen telefon doğrulanmalı: +90 560 818 51 98
-
-----------------------------------------------------------------------
-Ran 16 tests in 0.003s
-
-FAILED (failures=3)
+test_column_classification_email (test_platform.TestEnterpriseDataPlatform.test_column_classification_email)
+E-posta sütunu sınıflandırma testi. ... ok
+test_column_classification_phone (test_platform.TestEnterpriseDataPlatform.test_column_classification_phone)
+Telefon sütunu sınıflandırma testi. ... ok
+test_email_validation (test_platform.TestEnterpriseDataPlatform.test_email_validation)
+E-posta doğrulama testi. ... ok
+test_iban_validation (test_platform.TestEnterpriseDataPlatform.test_iban_validation)
+IBAN doğrulama testi. ... ok
+test_luhn_credit_card (test_platform.TestEnterpriseDataPlatform.test_luhn_credit_card)
+Kredi kartı Luhn algoritması testi. ... ok
+test_mixed_pii_detection (test_platform.TestEnterpriseDataPlatform.test_mixed_pii_detection)
+Karışık PII türü tespiti testi. ... FAIL
+test_null_handling (test_platform.TestEnterpriseDataPlatform.test_null_handling)
+Null/None değer işleme testi. ... ok
+test_phone_validation (test_platform.TestEnterpriseDataPlatform.test_phone_validation)
+Telefon numarası doğrulama testi. ... ok
+test_pii_scanner_column (test_platform.TestEnterpriseDataPlatform.test_pii_scanner_column)
+Sütun sınıflandırma ve güvenlik seviyesi testi. ... ok
+test_quality_engine_rules (test_platform.TestEnterpriseDataPlatform.test_quality_engine_rules)
+Veri kalitesi motoru ve kuralları testi. ... ok
+test_synthetic_data_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_data_generation)
+Sentetik veri üretimi testi. ... ok
+test_synthetic_data_with_null_probability (test_platform.TestEnterpriseDataPlatform.test_synthetic_data_with_null_probability)
+Null olasılığı ile sentetik veri testi. ... ok
+test_synthetic_email_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_email_generation)
+Sentetik e-posta üretimi testi. ... FAIL
+test_synthetic_iban_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_iban_generation)
+Sentetik IBAN üretimi testi. ... ok
+test_synthetic_phone_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_phone_generation)
+Sentetik telefon numarası üretimi testi. ... FAIL
+test_tckn_algorithm (test_platform.TestEnterpriseDataPlatform.test_tckn_algorithm)
+TCKN algoritması doğrulama testi. ... ok
+
+======================================================================
+FAIL: test_mixed_pii_detection (test_platform.TestEnterpriseDataPlatform.test_mixed_pii_detection)
+Karışık PII türü tespiti testi.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\tests\test_platform.py", line 228, in test_mixed_pii_detection
+    self.assertEqual(result, expected_type)
+AssertionError: None != 'PHONE'
+
+======================================================================
+FAIL: test_synthetic_email_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_email_generation)
+Sentetik e-posta üretimi testi.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\tests\test_platform.py", line 157, in test_synthetic_email_generation
+    self.assertEqual(result, "EMAIL", f"Üretilen e-posta doğrulanmalı: {email}")
+AssertionError: None != 'EMAIL' : Üretilen e-posta doğrulanmalı: i̇smail.yıldız88@banka.com.tr
+
+======================================================================
+FAIL: test_synthetic_phone_generation (test_platform.TestEnterpriseDataPlatform.test_synthetic_phone_generation)
+Sentetik telefon numarası üretimi testi.
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\tests\test_platform.py", line 171, in test_synthetic_phone_generation
+    self.assertEqual(result, "PHONE", f"Üretilen telefon doğrulanmalı: {phone}")
+AssertionError: None != 'PHONE' : Üretilen telefon doğrulanmalı: +90 560 818 51 98
+
+----------------------------------------------------------------------
+Ran 16 tests in 0.003s
+
+FAILED (failures=3)

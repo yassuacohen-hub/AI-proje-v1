@@ -545,11 +545,11 @@
     "baslik": "OSTIM detay sayfasindan vergi_no kazima (mevcut footer scripti genisle)",
     "sahip": "web_kazima",
     "oncelik": "P1",
-    "durum": "blocked",
+    "durum": "done",
     "baslangic": "2026-09-08T03:52:46",
-    "bitis": "2026-09-08T03:54:40",
+    "bitis": "2026-09-09T12:52:19.915474",
     "dosyalar": [],
-    "not": "Web kazima ile 5,485 firma analiz edildi. 2,646 placeholder site atlandi, 774 fetch hatasi. 3,065 site scrape edildi, 0 yeni VKN bulunamadi. Web kazima VKN icin etkisiz. MERSIS API veya GIB vkn.gov.tr denenebilir."
+    "not": "Web kazima etkisiz (0 VKN). Alternatif kaynaklarla 3 VKN bulundu, 2 firma DB guncellendi, 3 firma JSONL guncellendi. Detay: data/orchestrator/p43_result.json"
   },
   {
     "task_id": "P4-4",
@@ -955,5 +955,148 @@
       "src/company_master/etl/email_dns_validator.py"
     ],
     "not": "8,994 e-posta doğrulandı: %47.4 format geçerli, %37.5 MX kaydı var. email_validity_score kolonu güncellendi. Kalite skoru 76.44 -> 53.37 (gerçek veriyle)."
+  },
+  {
+    "task_id": "P7-1",
+    "baslik": "DB Migration 0007 - Job Intelligence tablolari",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/db/migrations/0007_job_intelligence.sql"
+    ],
+    "not": "job_postings, company_signals, company_intelligence_scores, company_tech_profile, company_aliases tablolari"
+  },
+  {
+    "task_id": "P7-2",
+    "baslik": "Job Intelligence modul yapisi olusturma",
+    "sahip": "mimar",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/"
+    ],
+    "not": "sources/, pipeline/, storage/, api/ klasorleri ve __init__.py dosyalari"
+  },
+  {
+    "task_id": "P7-3",
+    "baslik": "Company Matcher (eslestirme motoru)",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/pipeline/normalizer.py"
+    ],
+    "not": "Exact + fuzzy + domain + mersis/vkn + alias multi-pass eslestirme"
+  },
+  {
+    "task_id": "P7-4",
+    "baslik": "Company Career Pages Scraper",
+    "sahip": "web_kazima",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/sources/company_career.py"
+    ],
+    "not": "5000+ companies.website_domain -> /kariyer, /jobs, /career keşif; KVKK güvenli"
+  },
+  {
+    "task_id": "P7-5",
+    "baslik": "İSKUR Scraper",
+    "sahip": "web_kazima",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/sources/iskur.py"
+    ],
+    "not": "Resmi kaynak; KVKK güvenli; yapılandırılmış veri; API/HTML"
+  },
+  {
+    "task_id": "P7-6",
+    "baslik": "Kariyer.net Scraper",
+    "sahip": "web_kazima",
+    "oncelik": "P2",
+    "durum": "blocked",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/sources/kariyer_net.py"
+    ],
+    "not": "Anti-bot koruması; önce manuel test; proxy/headless gerekebilir"
+  },
+  {
+    "task_id": "P7-7",
+    "baslik": "Job Postings Ingest Script",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/ingest_job_postings.py"
+    ],
+    "not": "JSONL -> job_postings tablosu; company_id eslestirme; deduplication"
+  },
+  {
+    "task_id": "P7-8",
+    "baslik": "Job Signals Analyzer",
+    "sahip": "arastirmaci",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/pipeline/analyzer.py"
+    ],
+    "not": "Growth, Risk, Tech, Geo, Org sinyalleri; company_signals tablosu"
+  },
+  {
+    "task_id": "P7-9",
+    "baslik": "Intelligence Scorer",
+    "sahip": "arastirmaci",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/pipeline/scorer.py"
+    ],
+    "not": "growth, expansion, tech_transformation, investment, org_change, risk skorlari"
+  },
+  {
+    "task_id": "P7-10",
+    "baslik": "Intelligence Scores Recalc Script",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/recalc_intelligence_scores.py"
+    ],
+    "not": "company_intelligence_scores, company_tech_profile tablolarini günceller"
+  },
+  {
+    "task_id": "P7-11",
+    "baslik": "Post-scrape workflow entegrasyonu",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-09T12:50:18",
+    "bitis": "2026-09-09T12:50:18",
+    "dosyalar": [
+      "scripts/post_scrape_workflow.py"
+    ],
+    "not": "Adım 5, 6, 7 eklendi (ingest_job_postings, analyze_job_signals, recalc_intelligence_scores)"
   }
 ]

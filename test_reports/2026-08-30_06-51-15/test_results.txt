@@ -1,45 +1,45 @@
-test_platform (unittest.loader._FailedTest.test_platform) ... ERROR
-
-======================================================================
-ERROR: test_platform (unittest.loader._FailedTest.test_platform)
-----------------------------------------------------------------------
-ImportError: Failed to import test module: test_platform
-Traceback (most recent call last):
-  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\unittest\loader.py", line 396, in _find_test_path
-    module = self._get_module_from_name(name)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\unittest\loader.py", line 339, in _get_module_from_name
-    __import__(name)
-  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\tests\test_platform.py", line 13, in <module>
-    from classifier.pii_scanner import PIIScanner, SensitivityLevel
-  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\src\classifier\__init__.py", line 3, in <module>
-    from .pii_scanner import PIIScanner, SensitivityLevel, ColumnClassification
-  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\src\classifier\pii_scanner.py", line 34, in <module>
-    class PIIScanner:
-  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\src\classifier\pii_scanner.py", line 38, in PIIScanner
-    EMAIL_PATTERN = re.compile(r"^[a-zA-Z0-9ÄäÖöÜüßÃãÕõÎîÌìÉéÈèÊêËëÝýÀàÁáÂâçÇğĞıIİöÖşŞüÜ_.+-]+@[a-zA-Z0-9ÄäÖöÜüßÃãÕõÎîÌìÉéÈèÊêËëÝýÀàÁáÂâçÇğĞıIİöÖşŞüÜ-]+\.[a-zA-Z0-9ÄäÖöÜüßÃãÕõÎîÌìÉéÈèÊêËëÝýÀàÁáÂâçÇğĞıIİöÖşŞüÜ-.]+$", re.UNICODE)
-                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\re\__init__.py", line 228, in compile
-    return _compile(pattern, flags)
-           ^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\re\__init__.py", line 307, in _compile
-    p = _compiler.compile(pattern, flags)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\re\_compiler.py", line 750, in compile
-    p = _parser.parse(p, flags)
-        ^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\re\_parser.py", line 979, in parse
-    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
-        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\re\_parser.py", line 460, in _parse_sub
-    itemsappend(_parse(source, state, verbose, nested + 1,
-                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\re\_parser.py", line 617, in _parse
-    raise source.error(msg, len(this) + 1 + len(that))
-re.error: bad character range Ü-. at position 174
-
-
-----------------------------------------------------------------------
-Ran 1 test in 0.000s
-
-FAILED (errors=1)
+test_platform (unittest.loader._FailedTest.test_platform) ... ERROR
+
+======================================================================
+ERROR: test_platform (unittest.loader._FailedTest.test_platform)
+----------------------------------------------------------------------
+ImportError: Failed to import test module: test_platform
+Traceback (most recent call last):
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\unittest\loader.py", line 396, in _find_test_path
+    module = self._get_module_from_name(name)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\unittest\loader.py", line 339, in _get_module_from_name
+    __import__(name)
+  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\tests\test_platform.py", line 13, in <module>
+    from classifier.pii_scanner import PIIScanner, SensitivityLevel
+  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\src\classifier\__init__.py", line 3, in <module>
+    from .pii_scanner import PIIScanner, SensitivityLevel, ColumnClassification
+  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\src\classifier\pii_scanner.py", line 34, in <module>
+    class PIIScanner:
+  File "C:\Users\yasin\OneDrive\Desktop\AI proje v1\src\classifier\pii_scanner.py", line 38, in PIIScanner
+    EMAIL_PATTERN = re.compile(r"^[a-zA-Z0-9ÄäÖöÜüßÃãÕõÎîÌìÉéÈèÊêËëÝýÀàÁáÂâçÇğĞıIİöÖşŞüÜ_.+-]+@[a-zA-Z0-9ÄäÖöÜüßÃãÕõÎîÌìÉéÈèÊêËëÝýÀàÁáÂâçÇğĞıIİöÖşŞüÜ-]+\.[a-zA-Z0-9ÄäÖöÜüßÃãÕõÎîÌìÉéÈèÊêËëÝýÀàÁáÂâçÇğĞıIİöÖşŞüÜ-.]+$", re.UNICODE)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\re\__init__.py", line 228, in compile
+    return _compile(pattern, flags)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\re\__init__.py", line 307, in _compile
+    p = _compiler.compile(pattern, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\re\_compiler.py", line 750, in compile
+    p = _parser.parse(p, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\re\_parser.py", line 979, in parse
+    p = _parse_sub(source, state, flags & SRE_FLAG_VERBOSE, 0)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\re\_parser.py", line 460, in _parse_sub
+    itemsappend(_parse(source, state, verbose, nested + 1,
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\re\_parser.py", line 617, in _parse
+    raise source.error(msg, len(this) + 1 + len(that))
+re.error: bad character range Ü-. at position 174
+
+
+----------------------------------------------------------------------
+Ran 1 test in 0.000s
+
+FAILED (errors=1)

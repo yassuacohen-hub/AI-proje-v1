@@ -1,4 +1,20 @@
 
+## 2026-09-09 — Faz 3b: Yerel PostgreSQL + Git init ✅
+
+**Yerel PostgreSQL (Docker, `localdb` profili):**
+- `postgres:16-alpine` → `localhost:5433` (db: `huginn`, şifre: `LOCAL_PG_PASSWORD` env, default `huginn_local_dev`), container `huginndatainsights-db-1` healthy
+- Taze backup alındı (`backup_20260909_123933.zip`, 23 tablo / 37.197 satır)
+- **restore_db.py JSONB fix:** CSV'den gelen Python-repr JSON değerleri (`{'...` tek tırnak) PostgreSQL JSONB parser'ını çökertiyordu → `_json_fix` (parse/NULL) + `_json_param` (psycopg `Json` adapter, SQLite fallback `json.dumps`) eklendi
+- Restore sonucu: **14.000 companies + 8.905 entity_resolution + 14.000 source_records + 270 kvkk yedek + 4 sources**
+- **Performans: ~30x hızlanma** — COUNT 11.2 ms, ILIKE arama 11.6 ms (Supabase: 300-900 ms network roundtrip)
+
+**Git:**
+- Repo init + ilk commit: **631 dosya** (`95c2f11`) + JSONB fix commit'i (`2603f16`)
+- `.gitignore` doğrulandı: `.env`, `backups/`, `AI proje v1/`, `*.db` dışarıda (gizli veri repo'ya girmiyor)
+- Remote henüz yok — GitHub repo + PAT bekleniyor (gh CLI kurulu değil)
+
+**Kullanım:** yerel ortamda çalışmak için `.env.local` dosyasına `DATABASE_URL=postgresql+psycopg://huginn:huginn_local_dev@localhost:5433/huginn` yazmak yeterli. Supabase (üretim) etkilenmedi.
+
 ## 2026-09-09 — Docker Faz 2-3: Motor ayağa kalktı, API konteynere taşındı ✅
 
 **Faz 2 (motor):** `docker-desktop` WSL dağıtımı Stopped takılıydı → `wsl --shutdown` + Docker Desktop yeniden başlatma ile çözüldü (**Running**). WSL güncellemesi + yeniden başlatma sonrası bu sıfırlama gerekti.
