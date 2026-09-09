@@ -1,4 +1,26 @@
 
+## 2026-09-09 — "İşletmem" sayfası: profil yönetimi + kredi merkezi ✅
+
+**Kullanıcı kararı:** Üyelik CTA match panelinden ayrıldı → navigasyonda **"İşletmem"** sayfası (fa-briefcase).
+
+**Bölüm içeriği (giriş durumuna göre 3 görünüm):**
+- **Giriş yok:** "İşletmenizi sisteme tanıtın" + Kayıt Ol/Giriş butonu (üyelik modalını açar)
+- **Onay bekliyor:** bilgi banner'ı + profil formu (onay öncesi doldurulabilir)
+- **Onaylı:** tam yönetim paneli
+
+**Onaylı panelde:**
+| Kart | İçerik |
+|---|---|
+| Özet chips | Durum · Paket/Tier · **Kredi Bakiyesi** · **Profil Tamamlanma %** (renkli ilerleme çubuğu) |
+| Kredi Yükle | Credit Pack talebi (750 TRY/50 — yönetici onayıyla) |
+| Profil formu | Firma adı, NACE, ürün/hizmet tanımı, **hedef sektörler**, **departman/rol** (yeni!), eşleştirme amacı (müşteri/tedarikçi/iş ortağı), yetkili, web |
+| Kredi hareketleri | Son 12 ledger kaydı (+/- renkli, bakiye ile) |
+| Enterprise | API key görüntüle/kopyala |
+
+**API:** `GET/PUT /api/buyer/profile` (profil_tamlama hesaplamalı — 8 alan doluluğu), `GET /api/buyer/ledger` · `department` kolonu eklendi (0012 ALTER, iki DB'de).
+
+**Doğrulama:** headless DOM: isletmem-section ✓ · briefcase nav ✓ · 16 tooltip ✓ · credit-badge slotu ✓ · `node --check` + py_compile OK · cache v9 · Docker rebuild sonrası canlı.
+
 ## 2026-09-09 — Monetizasyon MVP: üyelik + kredi sistemi canlıda ✅
 
 **V7 Hybrid Credit modeli uygulandı** (bağlam dokümanlarından birebir):

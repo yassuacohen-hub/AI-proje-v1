@@ -21,9 +21,11 @@ CREATE TABLE IF NOT EXISTS users (
   credit_balance    INT DEFAULT 0,           -- V7 Hybrid Credit
   api_key           VARCHAR(64),             -- sadece enterprise tier
   rejection_note    TEXT,
+  department        VARCHAR(120),             -- departman/rol (satis, uretim, satin alma...)
   created_at        TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
   updated_at        TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+ALTER TABLE users ADD COLUMN IF NOT EXISTS department VARCHAR(120);
 CREATE INDEX IF NOT EXISTS idx_users_email ON users (email);
 CREATE INDEX IF NOT EXISTS idx_users_status ON users (status);
 

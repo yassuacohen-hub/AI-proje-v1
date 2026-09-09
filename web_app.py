@@ -1013,6 +1013,90 @@ def api_buyer_categories(_auth: str = Depends(require_api_key)) -> dict:
             "WHERE active = TRUE ORDER BY nace_group, label_tr")).mappings().all()
     return {"items": [dict(r) for r in rows]}
 
+
+@app.get("/api/buyer/profile")
+def api_buyer_profile(token: str = ""):
+    """Isletmem sayfasi: profil + kredi + son hareketler."""
+    u = _user_from_token(token)
+    if not u:
+        raise HTTPException(status_code=401, detail="oturum gecersiz veya suresi doldu")
+    engine = get_engine()
+    with engine.connect() as conn:
+        prof = conn.execute(text(
+            "SELECT u.user_id, u.email, u.company_name, u.nace_code, u.products_desc, "
+            "u.target_nace, u.goal, u.contact_name, u.website, u.department, u.kvkk_consent, "
+            "u.status, u.tier, u.credit_balance, u.api_key, u.linked_company_id, u.created_at "
+            "FROM users u WHERE u.user_id = :u"), {"u": u["user_id"]}).mappings().first()
+        ledger = conn.execute(text(
+            "SELECT delta, reason, balance_after, created_at FROM credit_ledger "
+            "WHERE user_id = :u ORDER BY created_at DESC LIMIT 12"),
+            {"u": u["user_id"]}).mappings().all()
+        kategori = conn.execute(text(
+            "SELECT code, label_tr, nace_group FROM product_categories "
+            "WHERE active = TRUE ORDER BY nace_group, label_tr")).mappings().all()
+    p = dict(prof) if prof else {}
+    # profil tamamlanma skoru (ne kadar cok bilgi = o kadar iyi eslesme)
+    alanlar = ["company_name", "nace_code", "products_desc", "target_nace", "goal",
+               "department", "website", "contact_name"]
+    dolu = sum(1 for a in alanlar if p.get(a))
+    p["profil_tamlama"] = round(dolu / len(alanlar) * 100)
+    return {
+        "profil": p,
+        "ledger": [dict(r) for r in ledger],
+        "kategoriler": [dict(r) for r in kategori],
+    }
+
+
+@app.put("/api/buyer/profile")
+def api_buyer_profile_update(req: dict, token: str = ""):
+    """Isletmem sayfasindan profil guncelleme (gonullu + onayli kullanici)."""
+    u = _user_from_token(token)
+    if not u:
+        raise HTTPException(status_code=401, detail="oturum gecersiz veya suresi doldu")
+    alanlar = {
+        "company_name": req.get("company_name"),
+        "nace_code": req.get("nace_code"),
+        "products_desc": req.get("products_desc"),
+        "target_nace": req.get("target_nace"),
+        "goal": req.get("goal"),
+        "contact_name": req.get("contact_name"),
+        "website": req.get("website"),
+        "department": req.get("department"),
+    }
+    sets, params = [], {"u": str(u["user_id"])}
+    for k, v in alanlar.items():
+        if v is not None:
+            sets.append(f"{k} = :{k}")
+            params[k] = str(v).strip()
+    if not sets:
+        raise HTTPException(status_code=400, detail="guncellenecek alan yok")
+    sets.append("updated_at = CURRENT_TIMESTAMP")
+    engine = get_engine()
+    with engine.begin() as conn:
+        conn.execute(text(f"UPDATE users SET {', '.join(sets)} WHERE user_id = :u"), params)
+        row = conn.execute(text(
+            "SELECT company_name, nace_code, products_desc, target_nace, goal, department, "
+            "website, contact_name, credit_balance, tier FROM users WHERE user_id = :u"),
+            {"u": str(u["user_id"])}).mappings().first()
+    alanlar_dolu = sum(1 for a in ["company_name", "nace_code", "products_desc", "target_nace",
+                                   "goal", "department", "website", "contact_name"]
+                       if row.get(a))
+    return {"ok": True, "profil_tamlama": round(alanlar_dolu / 8 * 100), "profil": dict(row)}
+
+
+@app.get("/api/buyer/ledger")
+def api_buyer_ledger(token: str = "", limit: int = 20):
+    u = _user_from_token(token)
+    if not u:
+        raise HTTPException(status_code=401, detail="oturum gecersiz veya suresi doldu")
+    engine = get_engine()
+    with engine.connect() as conn:
+        rows = conn.execute(text(
+            "SELECT delta, reason, balance_after, created_at FROM credit_ledger "
+            "WHERE user_id = :u ORDER BY created_at DESC LIMIT :l"),
+            {"u": u["user_id"], "l": max(1, min(limit, 50))}).mappings().all()
+    return {"items": [dict(r) for r in rows]}
+
 @app.post("/api/buyer/login")
 def api_buyer_login(req: dict):
     """E-posta ile giris (MVP auth; OAuth Scale asamasinda).

@@ -952,3 +952,129 @@ document.addEventListener('DOMContentLoaded', () => {
   if (actions) actions.prepend(badge);
   refreshCreditBadge();
 });
+
+// ── Y22: Isletmem sayfasi (profil + kredi + paket) ─────────────────────────
+
+function loadIsletmem() {
+  const tok = getMemberToken();
+  const el = document.getElementById('isletmem-body');
+  if (!el) return;
+  if (!tok) {
+    el.innerHTML = `
+      <div class="match-empty">
+        <div style="font-size:15px;margin-bottom:8px"><i class="fas fa-briefcase"></i> İşletmenizi sisteme tanıtın</div>
+        <div style="max-width:520px;margin:0 auto 14px">Üye olduğunuzda firmalarınız kişiselleştirilmiş eşleştirmeler, kredili kontak erişimi ve paket yönetimi açılır. Kurumsal e-posta ile kayıt ücretsizdir; üyelik onayı sonrası krediniz yüklenir.</div>
+        <button class="d-btn primary" style="min-width:220px" onclick="openMembership()"><i class="fas fa-user-plus"></i> Kayıt Ol / Giriş Yap</button>
+      </div>`;
+    return;
+  }
+  fetch(apiUrl('/api/buyer/profile?token=' + encodeURIComponent(tok)))
+    .then(async r => {
+      const d = await r.json().catch(() => ({}));
+      if (!r.ok) throw new Error(d.detail || r.status);
+      renderIsletmem(d);
+    })
+    .catch(e => {
+      if (String(e.message).includes('oturum gecersiz')) {
+        setMemberToken('');
+        loadIsletmem();
+        return;
+      }
+      el.innerHTML = `<div class="match-empty"><i class="fas fa-exclamation-circle"></i> Yüklenemedi: ${esc(e.message)}</div>`;
+    });
+}
+
+function renderIsletmem(d) {
+  const el = document.getElementById('isletmem-body');
+  const p = d.profil || {};
+  const tam = p.profil_tamlama || 0;
+  const tamRenk = tam >= 80 ? 'var(--green)' : tam >= 50 ? '#fbbf24' : 'var(--red)';
+  const onayli = p.status === 'onayli';
+  const krediTxt = p.credit_balance < 0 ? 'Sınırsız' : `${p.credit_balance} kredi`;
+
+  el.innerHTML = `
+    <div class="match-agg" style="margin:0 0 12px">
+      <div class="agg-chip">Durum<b>${esc(p.status || '-')}</b></div>
+      <div class="agg-chip">Paket / Tier<b>${esc(p.tier || '-')}</b></div>
+      <div class="agg-chip">Kredi Bakiyesi<b style="color:${p.credit_balance < 0 ? 'var(--green)' : 'var(--accent)'}">${krediTxt}</b></div>
+      <div class="agg-chip" style="min-width:180px">Profil Tamamlanma<b style="color:${tamRenk}">%${tam}</b>
+        <div class="mk-bar" style="margin-top:4px"><div class="mk-fill" style="width:${tam}%;background:${tamRenk}"></div></div></div>
+      ${onayli ? `<div class="agg-chip"><button class="d-btn tip tip-left" data-tip="Credit Pack: krediniz bittiğinde 750 TRY / 50 kredi ile devam edebilirsiniz. Talebiniz yönetici onayıyla yüklenir." style="min-width:auto;width:100%" onclick="requestCreditPack()"><i class="fas fa-shopping-cart"></i> Kredi Yükle</button></div>` : ''}
+    </div>
+    ${!onayli ? `<div class="match-status info" style="margin:0 0 12px"><i class="fas fa-hourglass-half"></i> Üyelik onayınız bekleniyor — profilinizi şimdiden doldurun, onayla birlikte eşleştirmeler kişiselleşir.</div>` : ''}
+    <div class="match-result-head"><span class="mr-col-name">Firma Profili</span><span class="mr-col-nace">Departman / Rol</span><span class="mr-col-score">Eşleştirme Amacı</span><span class="mr-col-rel">İletişim & Web</span></div>
+    <div class="match-result-row" style="cursor:default;align-items:start">
+      <div class="mr-name">
+        <div class="quick-filter-item" style="width:100%"><label>Firma Adı</label><input id="is-company" class="filter-select" style="width:100%" value="${esc(p.company_name || '')}"></div>
+        <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>NACE Kodu</label><input id="is-nace" class="filter-select" style="width:100%" value="${esc(p.nace_code || '')}" placeholder="29.32"></div>
+        <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Ne üretiyor / satıyorsunuz?</label><input id="is-products" class="filter-select" style="width:100%" value="${esc(p.products_desc || '')}" placeholder="fren sistemi yedek parçaları, pres döküm..."></div>
+        <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Hedef Sektörler (NACE ana grup, virgülle)</label><input id="is-target" class="filter-select" style="width:100%" value="${esc(p.target_nace || '')}" placeholder="45,46,28"></div>
+      </div>
+      <div class="mr-nace">
+        <div class="quick-filter-item" style="width:100%"><label>Departman / Rolünüz</label><input id="is-department" class="filter-select" style="width:100%" value="${esc(p.department || '')}" placeholder="Satış, Üretim, Satın Alma..."></div>
+        <small style="color:var(--text-dim);font-size:10.5px;margin-top:4px;display:block">Departman bilgisi önerileri kişiselleştirmek için kullanılır.</small>
+      </div>
+      <div class="mr-score">
+        <div class="quick-filter-item" style="width:100%"><label>Eşleştirme Amacı</label>
+          <select id="is-goal" class="filter-select" style="width:100%">
+            <option value="tumu"${p.goal === 'tumu' ? ' selected' : ''}>Hepsi</option>
+            <option value="musteri"${p.goal === 'musteri' ? ' selected' : ''}>Müşteri bulmak</option>
+            <option value="tedarikci"${p.goal === 'tedarikci' ? ' selected' : ''}>Tedarikçi bulmak</option>
+            <option value="ortagi"${p.goal === 'ortagi' ? ' selected' : ''}>İş ortağı</option>
+          </select></div>
+        <small style="color:var(--text-dim);font-size:10.5px;display:block;margin-top:4px">Amaç, eşleştirme yönünü belirler (müşteri/tedarikçi).</small>
+      </div>
+      <div class="mr-rel">
+        <div class="quick-filter-item" style="width:100%"><label>Yetkili Adı</label><input id="is-contact" class="filter-select" style="width:100%" value="${esc(p.contact_name || '')}"></div>
+        <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Web Site</label><input id="is-web" class="filter-select" style="width:100%" value="${esc(p.website || '')}"></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:10px;margin:12px 0">
+      <button class="d-btn primary" style="flex:2" onclick="saveIsletmemProfile()"><i class="fas fa-save"></i> Profili Kaydet</button>
+      <button class="d-btn" style="flex:1" onclick="loadIsletmem()">Sıfırla</button>
+    </div>
+    <div class="detail-section" style="margin-top:8px">
+      <div class="detail-section-title">Kredi Hareketleri (son 12)</div>
+      ${(d.ledger || []).map(l => `
+        <div class="detail-row"><span class="label">${esc(l.created_at ? String(l.created_at).substring(0, 16).replace('T', ' ') : '')}</span>
+        <span class="value mono" style="color:${l.delta > 0 ? 'var(--green)' : 'var(--red)'}">${l.delta > 0 ? '+' : ''}${l.delta}</span>
+        <span class="value" style="color:var(--text-dim);font-size:11px">${esc(l.reason)} → bakiye ${l.balance_after}</span></div>`).join('') ||
+        '<div class="detail-row"><span class="label">Henüz hareket yok</span></div>'}
+    </div>
+    ${p.tier === 'enterprise' && p.api_key ? `
+    <div class="detail-section">
+      <div class="detail-section-title">Enterprise API Key</div>
+      <div class="detail-row"><span class="label">API Key</span><span class="value mono">${esc((p.api_key || '').substring(0, 12))}…</span>
+      <button class="d-btn" style="min-width:auto;flex:0" onclick="copyField('${p.api_key}','API Key')"><i class="fas fa-copy"></i></button></div>
+    </div>` : ''}`;
+}
+
+function saveIsletmemProfile() {
+  const tok = getMemberToken();
+  if (!tok) { toast('Önce giriş yapın.'); return; }
+  const body = {
+    company_name: document.getElementById('is-company').value,
+    nace_code: document.getElementById('is-nace').value,
+    products_desc: document.getElementById('is-products').value,
+    target_nace: document.getElementById('is-target').value,
+    department: document.getElementById('is-department').value,
+    goal: document.getElementById('is-goal').value,
+    contact_name: document.getElementById('is-contact').value,
+    website: document.getElementById('is-web').value,
+  };
+  fetch(apiUrl('/api/buyer/profile?token=' + encodeURIComponent(tok)), {
+    method: 'PUT', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(body),
+  }).then(async r => {
+    const d = await r.json().catch(() => ({}));
+    if (r.ok) {
+      toast(`Profil kaydedildi — tamamlanma %${d.profil_tamlama}`);
+      refreshCreditBadge();
+      loadIsletmem();
+    } else { toast(d.detail || 'Kaydetme başarısız'); }
+  }).catch(e => toast(e.message));
+}
+
+function requestCreditPack() {
+  toast('Credit Pack talebiniz alındı — yönetici onayıyla krediniz yüklenecek (750 TRY / 50 kredi).');
+}
