@@ -78,6 +78,16 @@
 
 Pano: **84/102 done** · Docker rebuild sonrası canlı.
 
+## 2026-09-09 — Responsive dashboard tamamlaması ve gerçek tarayıcı regresyonu
+
+- Mevcut, henüz commit edilmemiş HTML korunarak mobil menü ve detay kapatma kontrollerinin eksik CSS/JS bağlantıları tamamlandı.
+- 1150 px altında firma detayı artık satır seçimiyle sağdan açılır; kapatma, arka plan tıklaması ve Escape desteklenir. 760 px altında navigasyon açılır menüdür.
+- Grid üst satırı içerik yüksekliğine uyar; gövde alanları bağımsız kayar. KPI/grafikler, filtreler ve üst çubuk dar ekranda yeniden düzenlenir.
+- CSS v15, JS v14. Yerel canlı sunucu güncel dosyaları sunuyor; bu çalışma ayrıca push edilmedi.
+- `scripts/check_dashboard_layout.mjs`: Node yerleşik WebSocket ile ayrı headless Edge CDP oturumunda canlı veriyle doğrulama. 1600, 1366, 1150, 1024, 768, 760, 390, 320 px: yatay taşma yok, üst çubuk çakışması yok, firma detayı ve mobil menü açma/kapama başarılı, JS runtime exception yok.
+- Ekran görüntüleri yerel `logs/layout-1600.png` ve `logs/layout-390.png`. Test veri/üyelik/kredi değiştirmez.
+
+
 ## 2026-09-09 — Layout kök fix: grid satır/kolon atamaları (iç içe geçme + kayma sorunu) ✅
 
 **Kök neden:** `.app` grid'inde `grid-template-rows` ve elemanlara `grid-row/column` ataması yoktu:

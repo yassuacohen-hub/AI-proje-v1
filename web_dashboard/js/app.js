@@ -535,6 +535,68 @@ document.addEventListener('click', (e) => {
   }
 });
 
+// Responsive navigation and company-detail drawers.
+let drawerReturnFocus = null;
+function closeMobileMenu() {
+  document.body.classList.remove('menu-open');
+  document.getElementById('menu-toggle')?.setAttribute('aria-expanded', 'false');
+}
+function closeDetailPanel() {
+  document.body.classList.remove('detail-open');
+  document.querySelector('.detail-panel')?.classList.remove('is-open');
+  if (drawerReturnFocus?.isConnected) drawerReturnFocus.focus({preventScroll:true});
+  drawerReturnFocus = null;
+}
+function openDetailPanel() {
+  closeMobileMenu();
+  const panel = document.querySelector('.detail-panel');
+  if (!panel) return;
+  panel.scrollTop = 0;
+  panel.classList.add('is-open');
+  if (window.matchMedia('(max-width:1150px)').matches) {
+    if (!document.body.classList.contains('detail-open')) drawerReturnFocus = document.activeElement;
+    document.body.classList.add('detail-open');
+    document.getElementById('detail-close')?.focus({preventScroll:true});
+  }
+}
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('menu-toggle')?.addEventListener('click', () => {
+    closeDetailPanel();
+    const open = document.body.classList.toggle('menu-open');
+    document.getElementById('menu-toggle').setAttribute('aria-expanded', String(open));
+    if (open) document.getElementById('menu-close')?.focus();
+  });
+  document.getElementById('mobile-backdrop')?.addEventListener('click', () => {
+    closeDetailPanel();
+    closeMobileMenu();
+  });
+  document.querySelector('.sidebar')?.addEventListener('click', e => {
+    if (e.target.closest('.nav-item')) closeMobileMenu();
+  });
+});
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    const menuOpen = document.body.classList.contains('menu-open');
+    closeDetailPanel();
+    closeMobileMenu();
+    if (menuOpen) document.getElementById('menu-toggle')?.focus();
+  }
+  const drawer = document.body.classList.contains('detail-open') ? document.querySelector('.detail-panel')
+    : document.body.classList.contains('menu-open') ? document.querySelector('.sidebar') : null;
+  if (e.key === 'Tab' && drawer) {
+    const items = [...drawer.querySelectorAll('button:not(:disabled),a[href],[tabindex="0"]')].filter(el => el.getClientRects().length);
+    const first = items[0], last = items[items.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last?.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first?.focus(); }
+  }
+  const nav = e.target.closest('.nav-item[role="button"]');
+  if (nav && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); nav.click(); }
+});
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 760) closeMobileMenu();
+  if (window.innerWidth > 1150) closeDetailPanel();
+});
+
 function selectCompany(id) {
   const c = allCompanies.find(x => (x.company_id||x.legal_name) === id);
   if (!c) return;
@@ -544,6 +606,7 @@ function selectCompany(id) {
 }
 
 function showDetail(c) {
+  openDetailPanel();
   const score = Number(c.data_quality_score||0);
   const cls = score>=80?'var(--green)':score>=60?'var(--accent)':score>=40?'var(--yellow)':'var(--red)';
   // ANA KURAL: Firma adlari BUYUK HARFLE
@@ -588,6 +651,7 @@ function showDetail(c) {
 
 function matchFor(c) {
   if (!c || !c.nace_code) { toast('Bu firmanın NACE kodu yok — eşleştirme yapılamaz.'); return; }
+  closeDetailPanel();
   scrollToSection('match-section');
   const sel = document.getElementById('match-nace');
   const grup = (c.nace_code || '').split('.')[0];

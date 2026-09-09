@@ -1,238 +1,261 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="tr">
 <head>
-<meta charset="UTF-8">
-<meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
-<meta http-equiv="Pragma" content="no-cache">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Huginn — Ticari İstihbarat Platformu</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<link rel="stylesheet" href="/static/css/style.css?v=13">
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#07111f">
+  <title>Huginn — Ticari İstihbarat Platformu</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <link rel="stylesheet" href="/static/css/style.css?v=15">
 </head>
 <body>
-<div class="app">
-  <header class="topbar">
-    <div class="topbar-brand">
-      <div class="logo"><i class="fas fa-eye"></i></div>
-      <div>
-        <h1>Huginn</h1>
-        <span>Ticari İstihbarat Platformu</span>
-      </div>
-    </div>
-    <div class="topbar-search">
-      <div class="tip" data-tip="Firma adı, VKN, telefon veya e-posta ile arama. Kısayol: Ctrl+K. Enter'a basınca firma listesine kayar." style="position:relative">
-      <i class="fas fa-search"></i>
-      <input type="text" id="global-search" placeholder="Firma adı, VKN, telefon, e-posta ara..." onkeypress="if(event.key==='Enter')doSearch()">
-      <span class="kbd-hint">Ctrl+K</span>
-    </div>
-    <div class="topbar-actions">
-      <div id="isletmem-topbar-btn" class="tip" data-tip="İşletmeniz: profil, kredi ve paket yönetimi." style="cursor:pointer" onclick="openIsletmem()">
-        <span style="display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.35);color:#93c5fd;font-size:12px;font-weight:600;transition:background .15s" onmouseover="this.style.background='rgba(59,130,246,.28)'" onmouseout="this.style.background='rgba(59,130,246,.15)'"><i class="fas fa-briefcase"></i> İşletmem</span>
-      </div>
-      <div class="live-indicator"><span class="live-dot"></span> CANLI</div>
-      <div class="last-update" id="last-update">Son güncelleme: —</div>
-      <button class="btn-refresh" onclick="loadAll()"><i class="fas fa-sync-alt"></i> Yenile</button>
-    </div>
-  </header>
-
-  <aside class="sidebar">
-    <div class="sidebar-section">
-      <div class="sidebar-title">Navigasyon</div>
-      <div class="nav-item tip" data-tip="İşletmeniz: firma profiliniz, departmanınız, kredileriniz ve paketiniz — ne kadar çok bilgi, o kadar isabetli eşleşme." onclick="showView('isletmem',this); openIsletmem()"><i class="fas fa-briefcase"></i> İşletmem</div>
-      <div class="nav-item tip" data-tip="Genel bakış: firma sayısı, kalite skoru ve veri doluluk oranları burada." onclick="showView('dashboard',this); scrollToTop()"><i class="fas fa-chart-line"></i> Genel Bakış</div>
-      <div class="nav-item tip" data-tip="Tüm firmaları listeleyin, arayın, filtreleyin. Satıra tıklayınca detay paneli açılır." onclick="showView('companies',this); scrollToSection('companies-section')"><i class="fas fa-building"></i> Firmalar</div>
-      <div class="nav-item tip" data-tip="Veri kaynakları: OSTİM, ASO, İvedik, Başkent, Web. Kaynağa tıklayarak firmaları filtreleyebilirsiniz." onclick="showView('sources',this); scrollToSection('sources-section')"><i class="fas fa-database"></i> Veri Kaynakları</div>
-      <div class="nav-item tip" data-tip="Veri kalitesi: skor dağılımı ve hangi alanların ne kadar dolu olduğu." onclick="showView('quality',this); scrollToSection('quality-section')"><i class="fas fa-chart-bar"></i> Veri Kalitesi</div>
-      <div class="nav-item tip" data-tip="V9 Smart Matching: alıcı sektörünüze en uygun firmaları puanlı görün." onclick="showView('match',this); scrollToSection('match-section')"><i class="fas fa-handshake"></i> Eşleştirme</div>
-
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-title">Bilgi Merkezi</div>
-      <div class="info-card">
-        <i class="fas fa-lightbulb"></i>
-        <p>Arama yaparken firma adı, VKN, telefon veya e-posta kullanabilirsiniz.</p>
-      </div>
-      <div class="info-card">
-        <i class="fas fa-filter"></i>
-        <p>Sektör ve veri kaynağı filtrelerini aynı anda kullanabilirsiniz.</p>
-      </div>
-      <div class="info-card">
-        <i class="fas fa-download"></i>
-        <p>Filtrelenmiş sonuçları CSV olarak dışa aktarabilirsiniz.</p>
-      </div>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-title"><i class="fas fa-star" style="color:var(--yellow)"></i> İzlenen Firmalar</div>
-      <div id="watchlist" class="watchlist"><span class="watchlist-empty">Henüz firma izlenmiyor.<br>Satırdaki <i class="fas fa-star" style="color:var(--yellow)"></i> ikonuna tıklayın.</span></div>
-    </div>
-    <div class="sidebar-section">
-      <div class="sidebar-title">Hızlı Erişim</div>
-      <div class="nav-item tip" data-tip="Aktif filtrelerdeki firmaları CSV dosyası olarak indirir (Excel'de açılır)." onclick="exportCSV()"><i class="fas fa-download"></i> CSV Dışa Aktar</div>
-      <div class="nav-item tip" data-tip="İç ajan görevleri + üye onay paneli. Yalnızca yönetici girişiyle açılır." onclick="openTasks()"><i class="fas fa-tasks"></i> Görev Tahtası (Yönetici)</div>
-      <div class="nav-item tip" data-tip="Tüm API endpoint'lerinin Swagger dokümantasyonu." onclick="window.open('/docs','_blank')"><i class="fas fa-code"></i> API Dokümanı</div>
-      <div class="nav-item tip" data-tip="Prometheus formatındaki performans metrikleri (izleme araçları için)." onclick="window.open('/metrics','_blank')"><i class="fas fa-tachometer-alt"></i> Metrikler</div>
-    </div>
-  </aside>
-
-  <main class="main">
-    <div class="content-scroll">
-      <div id="error-banner" class="error-banner hidden"><i class="fas fa-exclamation-triangle"></i> <span id="error-text"></span></div>
-      <div id="loading" class="loading"><div class="loading-spinner"></div> Veriler yükleniyor...</div>
-      <div id="content" class="hidden">
-        <div id="search-result" class="search-result-bar hidden">
-          <div class="result-icon"><i class="fas fa-check-circle"></i></div>
-          <div class="result-text">
-            <span class="result-count"><b id="result-count">0</b> firma bulundu</span>
-            <span id="result-filter" class="result-filter"></span>
-          </div>
-          <button class="clear-btn" onclick="clearFilters()"><i class="fas fa-times"></i> Filtreleri Temizle</button>
-        </div>
-        <div class="kpi-row" id="kpi-grid"></div>
-        <div class="charts-row">
-          <div class="chart-card">
-            <div class="chart-card-header"><div class="chart-card-title"><i class="fas fa-chart-pie"></i> Alan Doluluk Oranları</div></div>
-            <div class="chart-container"><canvas id="coverageChart"></canvas></div>
-          </div>
-          <div class="chart-card" id="quality-section">
-            <div class="chart-card-header"><div class="chart-card-title"><i class="fas fa-chart-bar"></i> Kalite Skoru Dağılımı</div></div>
-            <div class="chart-container"><canvas id="qualityChart"></canvas></div>
-          </div>
-        </div>
-        <!-- Y19: Akilli Eslestirme Paneli -->
-        <div class="chart-card" id="match-section" style="margin-bottom:16px">
-          <div class="chart-card-header">
-            <div class="chart-card-title"><i class="fas fa-handshake"></i> Akıllı Eşleştirme <span style="font-size:11px;color:#64748b;margin-left:6px">V9 Smart Matching MVP</span></div>
-          </div>
-          <div class="match-controls">
-            <div class="quick-filter-item tip tip-left" data-tip="Alıcı (buyer) firmanın NACE ana grubu. Eşleştirme bu sektöre göre yapılır.">
-              <label>Alıcı (Buyer) Sektörü</label>
-              <select class="filter-select" id="match-nace">
-                <option value="">Sektör seçin…</option>
-              </select>
-            </div>
-            <div class="quick-filter-item tip tip-left" data-tip="Komple: tedarik zincirindeki komşu sektörleri de önerir (örn. otomotiv → makine, metal). Aynı sektör: yalnızca aynı ana grup.">
-              <label>Eşleştirme Modu</label>
-              <select class="filter-select" id="match-mode">
-                <option value="komple">Komple (tedarik zinciri dahil)</option>
-                <option value="ayni">Aynı sektör</option>
-              </select>
-            </div>
-            <div class="quick-filter-item tip tip-left" data-tip="Bu puanın altındaki firmalar listeden çıkarılır. Sonuç az gelirse düşürün.">
-              <label>Min Puan</label>
-              <input type="range" id="match-min" min="0" max="100" value="30" oninput="document.getElementById('match-min-label').textContent=this.value">
-              <span class="score-label" id="match-min-label">30</span>
-            </div>
-            <div class="quick-filter-item" style="align-self:end">
-              <button class="btn-refresh tip tip-left" data-tip="Seçilen alıcı profiline en uygun firmaları puanlar ve listeler." onclick="runMatch()" style="padding:8px 16px"><i class="fas fa-play"></i> Eşleştir</button>
-            </div>
-          </div>
-          <p class="sources-hint" style="padding:0 16px"><i class="fas fa-info-circle"></i> Puan = sektör uyumu (45) + konum (20) + firma kalitesi (25) + kanıt gücü (10). "Komple" mod tedarik zinciri komşu sektörlerini de önerir.</p>
-          <div id="match-status" class="match-status hidden"></div>
-          <div id="match-agg" class="match-agg hidden"></div>
-          <div id="match-results" class="match-results"></div>
-          <div class="membership-cta" style="padding:0 16px 16px">
-            <div class="agg-chip tip tip-left" data-tip="Profiliniz, kredileriniz ve paketiniz İşletmem sayfasında — üst menüden veya buradan gidin." style="width:100%;cursor:pointer" onclick="scrollToSection('isletmem-section')">
-              <b><i class="fas fa-briefcase"></i> Firmanızı Tanıtın — İşletmem sayfası</b>
-              <span style="font-size:11px">Profil bilgilerinizi girin/güncelleyin, kredilerinizi görün, kredi yükleyin. Ne kadar çok bilgi, o kadar isabetli eşleşme.</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="chart-card" style="margin-bottom:16px">
-          <div class="chart-card-header">
-            <div class="chart-card-title"><i class="fas fa-industry"></i> Sektör Dağılımı (NACE Kodları)</div>
-            <div class="chart-card-actions">
-              <button class="chart-btn" onclick="clearNACEFilter()"><i class="fas fa-times"></i> Sektör Temizle</button>
-            </div>
-          </div>
-          <div id="nace-list" class="nace-list"></div>
-        </div>
-
-        <!-- Veri Kaynaklari Bolumu -->
-        <div class="sources-section" id="sources-section">
-          <div class="sources-header">
-            <h2><i class="fas fa-database"></i> Veri Kaynakları</h2>
-            <div class="sources-actions">
-              <button class="btn-refresh" onclick="selectAllSources()" style="padding:6px 12px"><i class="fas fa-check-double"></i> Hepsini Seç</button>
-              <button class="chart-btn" onclick="clearSourceFilter()"><i class="fas fa-times"></i> Seçimi Temizle</button>
-            </div>
-          </div>
-          <p class="sources-hint"><i class="fas fa-info-circle"></i> Bir veya birden fazla veri kaynağını seçerek firmaları filtreleyebilirsiniz. Yeni eklenen kaynaklar otomatik olarak buraya gelir.</p>
-          <div id="sources-grid" class="sources-grid"></div>
-        </div>
-
-        <!-- Hizli Filtreleme Cubugu -->
-        <div class="quick-filters">
-          <div class="quick-filter-title"><i class="fas fa-bolt"></i> Hızlı Filtreleme</div>
-          <div class="quick-filter-row">
-            <div class="quick-filter-item">
-              <label>Sektör (NACE)</label>
-              <select class="filter-select" id="nace-filter" onchange="applyQuickFilter()">
-                <option value="">Tüm Sektörler</option>
-              </select>
-            </div>
-            <div class="quick-filter-item">
-              <label>Veri Kaynağı</label>
-              <select class="filter-select" id="source-filter" onchange="applyQuickFilter()">
-                <option value="">Tüm Kaynaklar</option>
-              </select>
-            </div>
-            <div class="quick-filter-item">
-              <label>Min Kalite Skoru</label>
-              <input type="range" id="min-score-slider" min="0" max="100" value="0" oninput="updateScoreLabel()" onchange="applyQuickFilter()">
-              <span class="score-label" id="score-label">0</span>
-            </div>
-            <div class="quick-filter-item">
-              <label>&nbsp;</label>
-              <button class="btn-refresh" onclick="clearAllFilters()" style="padding:8px 14px"><i class="fas fa-redo"></i> Tümünü Sıfırla</button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Y22: Isletmem — bamsız tam ekran panel (JS ile acilir, chart-card degil) -->
-
-          </div>
-          <p class="sources-hint" style="padding:0 16px"><i class="fas fa-info-circle"></i> İç ajanların (arastirmaci, gelistirici, kalite, web_kazima…) o an yaptığı işler ve tamamlananlar.</p>
-          <div id="tasks-summary" class="match-agg" style="margin:10px 16px"></div>
-          <div id="tasks-body" class="match-results"></div>
-        </div>
-
-        <div class="table-card" id="companies-section">
-          <div class="table-header">
-            <h2><i class="fas fa-building"></i> Firma Listesi <span class="table-count" id="table-count">0</span></h2>
-            <div class="table-filters">
-              <button class="btn-refresh" onclick="exportCSV()" style="padding:6px 12px"><i class="fas fa-download"></i> CSV Dışa Aktar</button>
-            </div>
-          </div>
-          <div class="table-wrapper">
-            <table>
-              <thead><tr>
-                <th data-sort="legal_name" class="sortable">Firma Adı <span class="sort-icon"></span></th>
-                <th data-sort="trade_name" class="sortable">Ticaret Adı <span class="sort-icon"></span></th>
-                <th data-sort="website_domain" class="sortable">Web <span class="sort-icon"></span></th>
-                <th data-sort="primary_phone" class="sortable">Telefon <span class="sort-icon"></span></th>
-                <th data-sort="vkn" class="sortable">VKN <span class="sort-icon"></span></th>
-                <th data-sort="nace_code" class="sortable">NACE / Sektör <span class="sort-icon"></span></th>
-                <th data-sort="data_quality_score" class="sortable">Skor <span class="sort-icon"></span></th>
-                <th style="width:32px" title="İzleme listesi"><i class="fas fa-star" style="color:var(--yellow);font-size:10px"></i></th>
-              </tr></thead>
-              <tbody id="companies-tbody"></tbody>
-            </table>
-          </div>
-          <div class="pagination" id="pagination"></div>
+  <a class="skip-link" href="#main-content">İçeriğe geç</a>
+  <div class="app">
+    <header class="topbar">
+      <div class="topbar-brand">
+        <button id="menu-toggle" class="icon-btn menu-toggle" type="button" aria-label="Navigasyonu aç" aria-expanded="false" aria-controls="sidebar">
+          <i class="fas fa-bars" aria-hidden="true"></i>
+        </button>
+        <div class="logo" aria-hidden="true"><i class="fas fa-eye"></i></div>
+        <div class="brand-copy">
+          <h1>Huginn</h1>
+          <span>Ticari İstihbarat Platformu</span>
         </div>
       </div>
-    </div>
-  </main>
 
-  <aside class="detail-panel">
-    <div class="detail-title">Firma Detayı</div>
-    <div id="detail-empty" class="detail-empty"><i class="fas fa-hand-pointer"></i><p>Firmaya tıklayarak detayları görüntüle</p></div>
-    <div id="detail-content" style="display:none"></div>
-  </aside>
-</div>
-<script src="/static/js/nace_labels.js"></script>
-<script src="/static/js/app.js?v=12"></script>
+      <div class="topbar-search">
+        <div class="search-field tip" data-tip="Firma adı, VKN, telefon veya e-posta ile arama. Kısayol: Ctrl+K. Enter'a basınca firma listesine kayar.">
+          <i class="fas fa-search" aria-hidden="true"></i>
+          <input type="search" id="global-search" aria-label="Firma ara" placeholder="Firma adı, VKN, telefon, e-posta ara..." onkeypress="if(event.key==='Enter')doSearch()" autocomplete="off">
+          <span class="kbd-hint">Ctrl+K</span>
+        </div>
+      </div>
+
+      <div class="topbar-actions">
+        <div id="isletmem-topbar-btn" class="account-button tip" data-tip="İşletmeniz: profil, kredi ve paket yönetimi." role="button" tabindex="0" onclick="openIsletmem()" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();openIsletmem()}">
+          <i class="fas fa-briefcase" aria-hidden="true"></i><span>İşletmem</span>
+        </div>
+        <div class="live-indicator" aria-label="Canlı veri"><span class="live-dot" aria-hidden="true"></span><span>CANLI</span></div>
+        <div class="last-update" id="last-update">Son güncelleme: —</div>
+        <button class="btn-refresh" type="button" onclick="loadAll()" aria-label="Dashboard verilerini yenile"><i class="fas fa-sync-alt" aria-hidden="true"></i><span>Yenile</span></button>
+      </div>
+    </header>
+
+    <div id="mobile-backdrop" class="mobile-backdrop" onclick="closeMobileMenu()" aria-hidden="true"></div>
+
+    <aside id="sidebar" class="sidebar" aria-label="Ana navigasyon">
+      <div class="sidebar-mobile-head">
+        <div class="logo logo-small" aria-hidden="true"><i class="fas fa-eye"></i></div>
+        <strong>Menü</strong>
+        <button id="menu-close" class="icon-btn" type="button" aria-label="Navigasyonu kapat" onclick="closeMobileMenu()"><i class="fas fa-times" aria-hidden="true"></i></button>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Navigasyon</div>
+        <div class="nav-item tip" data-tip="İşletmeniz: firma profiliniz, departmanınız, kredileriniz ve paketiniz — ne kadar çok bilgi, o kadar isabetli eşleşme." role="button" tabindex="0" onclick="showView('isletmem',this); openIsletmem()"><i class="fas fa-briefcase" aria-hidden="true"></i><span>İşletmem</span></div>
+        <div class="nav-item active tip" data-tip="Genel bakış: firma sayısı, kalite skoru ve veri doluluk oranları burada." role="button" tabindex="0" onclick="showView('dashboard',this); scrollToTop()"><i class="fas fa-chart-line" aria-hidden="true"></i><span>Genel Bakış</span></div>
+        <div class="nav-item tip" data-tip="Tüm firmaları listeleyin, arayın, filtreleyin. Satıra tıklayınca detay paneli açılır." role="button" tabindex="0" onclick="showView('companies',this); scrollToSection('companies-section')"><i class="fas fa-building" aria-hidden="true"></i><span>Firmalar</span></div>
+        <div class="nav-item tip" data-tip="Veri kaynakları: OSTİM, ASO, İvedik, Başkent, Web. Kaynağa tıklayarak firmaları filtreleyebilirsiniz." role="button" tabindex="0" onclick="showView('sources',this); scrollToSection('sources-section')"><i class="fas fa-database" aria-hidden="true"></i><span>Veri Kaynakları</span></div>
+        <div class="nav-item tip" data-tip="Veri kalitesi: skor dağılımı ve hangi alanların ne kadar dolu olduğu." role="button" tabindex="0" onclick="showView('quality',this); scrollToSection('quality-section')"><i class="fas fa-chart-bar" aria-hidden="true"></i><span>Veri Kalitesi</span></div>
+        <div class="nav-item tip" data-tip="V9 Smart Matching: alıcı sektörünüze en uygun firmaları puanlı görün." role="button" tabindex="0" onclick="showView('match',this); scrollToSection('match-section')"><i class="fas fa-handshake" aria-hidden="true"></i><span>Eşleştirme</span></div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Bilgi Merkezi</div>
+        <div class="info-card"><i class="fas fa-lightbulb" aria-hidden="true"></i><p>Arama yaparken firma adı, VKN, telefon veya e-posta kullanabilirsiniz.</p></div>
+        <div class="info-card"><i class="fas fa-filter" aria-hidden="true"></i><p>Sektör ve veri kaynağı filtrelerini aynı anda kullanabilirsiniz.</p></div>
+        <div class="info-card"><i class="fas fa-download" aria-hidden="true"></i><p>Filtrelenmiş sonuçları CSV olarak dışa aktarabilirsiniz.</p></div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title"><i class="fas fa-star" style="color:var(--yellow)" aria-hidden="true"></i> İzlenen Firmalar</div>
+        <div id="watchlist" class="watchlist" aria-live="polite"><span class="watchlist-empty">Henüz firma izlenmiyor.<br>Satırdaki <i class="fas fa-star" style="color:var(--yellow)" aria-hidden="true"></i> ikonuna tıklayın.</span></div>
+      </div>
+      <div class="sidebar-section">
+        <div class="sidebar-title">Hızlı Erişim</div>
+        <div class="nav-item tip" data-tip="Aktif filtrelerdeki firmaları CSV dosyası olarak indirir (Excel'de açılır)." role="button" tabindex="0" onclick="exportCSV()"><i class="fas fa-download" aria-hidden="true"></i><span>CSV Dışa Aktar</span></div>
+        <div class="nav-item tip" data-tip="İç ajan görevleri + üye onay paneli. Yalnızca yönetici girişiyle açılır." role="button" tabindex="0" onclick="openTasks()"><i class="fas fa-tasks" aria-hidden="true"></i><span>Görev Tahtası (Yönetici)</span></div>
+        <div class="nav-item tip" data-tip="Tüm API endpoint'lerinin Swagger dokümantasyonu." role="button" tabindex="0" onclick="window.open('/docs','_blank')"><i class="fas fa-code" aria-hidden="true"></i><span>API Dokümanı</span></div>
+        <div class="nav-item tip" data-tip="Prometheus formatındaki performans metrikleri (izleme araçları için)." role="button" tabindex="0" onclick="window.open('/metrics','_blank')"><i class="fas fa-tachometer-alt" aria-hidden="true"></i><span>Metrikler</span></div>
+      </div>
+    </aside>
+
+    <main id="main-content" class="main">
+      <div class="content-scroll">
+        <section class="page-heading" aria-labelledby="page-title">
+          <div>
+            <p class="eyebrow"><i class="fas fa-chart-line" aria-hidden="true"></i> ANKARA B2B INTELLIGENCE</p>
+            <h2 id="page-title">Genel Bakış</h2>
+            <p>Firma verilerinizi, kalite sinyallerini ve eşleştirme fırsatlarını tek bir çalışma alanında görün.</p>
+          </div>
+          <div class="heading-actions">
+            <span class="status-chip"><span class="live-dot" aria-hidden="true"></span> Veri akışı aktif</span>
+            <button class="btn-refresh btn-ghost" type="button" onclick="loadAll()"><i class="fas fa-sync-alt" aria-hidden="true"></i> Verileri Yenile</button>
+          </div>
+        </section>
+
+        <div id="error-banner" class="error-banner hidden" role="alert"><i class="fas fa-exclamation-triangle" aria-hidden="true"></i><span id="error-text"></span></div>
+        <div id="loading" class="loading" aria-live="polite"><div class="loading-spinner" aria-hidden="true"></div><span>Veriler yükleniyor...</span></div>
+
+        <div id="content" class="content hidden">
+          <div id="search-result" class="search-result-bar hidden" aria-live="polite">
+            <div class="result-icon"><i class="fas fa-check-circle" aria-hidden="true"></i></div>
+            <div class="result-text">
+              <span class="result-count"><b id="result-count">0</b> firma bulundu</span>
+              <span id="result-filter" class="result-filter"></span>
+            </div>
+            <button class="clear-btn" type="button" onclick="clearFilters()"><i class="fas fa-times" aria-hidden="true"></i> Filtreleri Temizle</button>
+          </div>
+
+          <div class="kpi-row" id="kpi-grid" aria-label="Ana metrikler"></div>
+
+          <section class="section-block" aria-labelledby="data-health-title">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow"><i class="fas fa-pulse" aria-hidden="true"></i> VERİ SAĞLIĞI</p>
+                <h2 id="data-health-title">Kalite ve kapsama görünümü</h2>
+              </div>
+              <span class="section-note">Alan bazında doluluk ve skor dağılımı</span>
+            </div>
+            <div class="charts-row">
+              <div class="chart-card">
+                <div class="chart-card-header"><div class="chart-card-title"><i class="fas fa-chart-pie" aria-hidden="true"></i> Alan Doluluk Oranları</div><span class="card-meta">Son durum</span></div>
+                <div class="chart-container"><canvas id="coverageChart" aria-label="Alan doluluk oranları grafiği" role="img"></canvas></div>
+              </div>
+              <div class="chart-card" id="quality-section">
+                <div class="chart-card-header"><div class="chart-card-title"><i class="fas fa-chart-bar" aria-hidden="true"></i> Kalite Skoru Dağılımı</div><span class="card-meta">Firma bazlı</span></div>
+                <div class="chart-container"><canvas id="qualityChart" aria-label="Kalite skoru dağılımı" role="img"></canvas></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="chart-card match-card" id="match-section" aria-labelledby="match-title">
+            <div class="chart-card-header match-header">
+              <div>
+                <p class="eyebrow"><i class="fas fa-handshake" aria-hidden="true"></i> V9 SMART MATCHING</p>
+                <h2 id="match-title">Akıllı Eşleştirme <span class="mvp-label">MVP</span></h2>
+              </div>
+              <span class="card-meta">Alıcı profiline göre fırsatlar</span>
+            </div>
+            <div class="match-controls">
+              <div class="quick-filter-item tip tip-left" data-tip="Alıcı (buyer) firmanın NACE ana grubu. Eşleştirme bu sektöre göre yapılır.">
+                <label for="match-nace">Alıcı (Buyer) Sektörü</label>
+                <select class="filter-select" id="match-nace"><option value="">Sektör seçin…</option></select>
+              </div>
+              <div class="quick-filter-item tip tip-left" data-tip="komple: tedarik zincirindeki komşu sektörleri de önerir. Aynı sektör: yalnızca aynı ana grup.">
+                <label for="match-mode">Eşleştirme Modu</label>
+                <select class="filter-select" id="match-mode"><option value="komple">Komple (tedarik zinciri dahil)</option><option value="ayni">Aynı sektör</option></select>
+              </div>
+              <div class="quick-filter-item tip tip-left" data-tip="Bu puanın altındaki firmalar listeden çıkarılır. Sonuç az gelirse düşürün.">
+                <label for="match-min">Min Puan <output id="match-min-label" for="match-min">30</output></label>
+                <input type="range" id="match-min" min="0" max="100" value="30" oninput="document.getElementById('match-min-label').textContent=this.value" aria-label="Minimum eşleştirme puanı">
+              </div>
+              <div class="quick-filter-item match-action">
+                <button class="btn-refresh btn-primary" type="button" onclick="runMatch()"><i class="fas fa-play" aria-hidden="true"></i> Eşleştir</button>
+              </div>
+            </div>
+            <p class="sources-hint match-hint"><i class="fas fa-info-circle" aria-hidden="true"></i> Puan = sektör uyumu (45) + konum (20) + firma kalitesi (25) + kanıt gücü (10). “Komple” mod tedarik zinciri komşu sektörlerini de önerir.</p>
+            <div id="match-status" class="match-status hidden" aria-live="polite"></div>
+            <div id="match-agg" class="match-agg hidden"></div>
+            <div id="match-results" class="match-results" aria-live="polite"></div>
+            <div class="membership-cta">
+              <div class="agg-chip cta-chip tip tip-left" data-tip="Profiliniz, kredileriniz ve paketiniz İşletmem sayfasında — üst menüden veya buradan gidin." role="button" tabindex="0" onclick="scrollToSection('isletmem-section')" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();scrollToSection('isletmem-section')}">
+                <b><i class="fas fa-briefcase" aria-hidden="true"></i> Firmanızı Tanıtın — İşletmem sayfası</b>
+                <span>Profil bilgilerinizi girin/güncelleyin, kredilerinizi görün, kredi yükleyin. Ne kadar çok bilgi, o kadar isabetli eşleşme.</span>
+              </div>
+            </div>
+          </section>
+
+          <section class="chart-card" aria-labelledby="nace-title">
+            <div class="chart-card-header">
+              <div>
+                <p class="eyebrow"><i class="fas fa-industry" aria-hidden="true"></i> SEKTÖR</p>
+                <h2 id="nace-title">Sektör Dağılımı <span class="heading-sub">NACE kodları</span></h2>
+              </div>
+              <div class="chart-card-actions"><button class="chart-btn" type="button" onclick="clearNACEFilter()"><i class="fas fa-times" aria-hidden="true"></i> Sektör Temizle</button></div>
+            </div>
+            <div id="nace-list" class="nace-list"></div>
+          </section>
+
+          <section class="sources-section" id="sources-section" aria-labelledby="sources-title">
+            <div class="sources-header">
+              <div>
+                <p class="eyebrow"><i class="fas fa-database" aria-hidden="true"></i> KAYNAKLAR</p>
+                <h2 id="sources-title">Veri Kaynakları</h2>
+              </div>
+              <div class="sources-actions">
+                <button class="btn-refresh" type="button" onclick="selectAllSources()"><i class="fas fa-check-double" aria-hidden="true"></i> Hepsini Seç</button>
+                <button class="chart-btn" type="button" onclick="clearSourceFilter()"><i class="fas fa-times" aria-hidden="true"></i> Seçimi Temizle</button>
+              </div>
+            </div>
+            <p class="sources-hint"><i class="fas fa-info-circle" aria-hidden="true"></i> Bir veya birden fazla veri kaynağını seçerek firmaları filtreleyebilirsiniz. Yeni eklenen kaynaklar otomatik olarak buraya gelir.</p>
+            <div id="sources-grid" class="sources-grid"></div>
+          </section>
+
+          <section class="quick-filters" aria-labelledby="quick-filter-title">
+            <div class="quick-filter-title" id="quick-filter-title"><i class="fas fa-bolt" aria-hidden="true"></i> Hızlı Filtreleme</div>
+            <div class="quick-filter-row">
+              <div class="quick-filter-item">
+                <label for="nace-filter">Sektör (NACE)</label>
+                <select class="filter-select" id="nace-filter" onchange="applyQuickFilter()"><option value="">Tüm Sektörler</option></select>
+              </div>
+              <div class="quick-filter-item">
+                <label for="source-filter">Veri Kaynağı</label>
+                <select class="filter-select" id="source-filter" onchange="applyQuickFilter()"><option value="">Tüm Kaynaklar</option></select>
+              </div>
+              <div class="quick-filter-item">
+                <label for="min-score-slider">Min Kalite Skoru <output id="score-label" for="min-score-slider">0</output></label>
+                <input type="range" id="min-score-slider" min="0" max="100" value="0" oninput="updateScoreLabel()" onchange="applyQuickFilter()" aria-label="Minimum kalite skoru">
+              </div>
+              <div class="quick-filter-item filter-action">
+                <button class="btn-refresh" type="button" onclick="clearAllFilters()"><i class="fas fa-redo" aria-hidden="true"></i> Tümünü Sıfırla</button>
+              </div>
+            </div>
+          </section>
+
+          <section class="table-card" id="companies-section" aria-labelledby="companies-title">
+            <div class="table-header">
+              <div>
+                <p class="eyebrow"><i class="fas fa-building" aria-hidden="true"></i> FİRMA VERİTABANI</p>
+                <h2 id="companies-title">Firma Listesi <span class="table-count" id="table-count">0</span></h2>
+              </div>
+              <div class="table-filters"><button class="btn-refresh" type="button" onclick="exportCSV()"><i class="fas fa-download" aria-hidden="true"></i> CSV Dışa Aktar</button></div>
+            </div>
+            <div class="table-wrapper">
+              <table>
+                <thead><tr>
+                  <th data-sort="legal_name" class="sortable" scope="col">Firma Adı <span class="sort-icon" aria-hidden="true"></span></th>
+                  <th data-sort="trade_name" class="sortable" scope="col">Ticaret Adı <span class="sort-icon" aria-hidden="true"></span></th>
+                  <th data-sort="website_domain" class="sortable" scope="col">Web <span class="sort-icon" aria-hidden="true"></span></th>
+                  <th data-sort="primary_phone" class="sortable" scope="col">Telefon <span class="sort-icon" aria-hidden="true"></span></th>
+                  <th data-sort="vkn" class="sortable" scope="col">VKN <span class="sort-icon" aria-hidden="true"></span></th>
+                  <th data-sort="nace_code" class="sortable" scope="col">NACE / Sektör <span class="sort-icon" aria-hidden="true"></span></th>
+                  <th data-sort="data_quality_score" class="sortable" scope="col">Skor <span class="sort-icon" aria-hidden="true"></span></th>
+                  <th scope="col" class="watch-column" title="İzleme listesi"><i class="fas fa-star" aria-hidden="true"></i></th>
+                </tr></thead>
+                <tbody id="companies-tbody"></tbody>
+              </table>
+            </div>
+            <div class="pagination" id="pagination" aria-label="Sayfalandırma"></div>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <aside id="detail-panel" class="detail-panel" aria-label="Firma detayı">
+      <div class="detail-header">
+        <div>
+          <p class="eyebrow"><i class="fas fa-fingerprint" aria-hidden="true"></i></p>
+          <div class="detail-title">Firma Detayı</div>
+        </div>
+        <button id="detail-close" class="icon-btn" type="button" aria-label="Detay panelini kapat" onclick="closeDetailPanel()"><i class="fas fa-times" aria-hidden="true"></i></button>
+      </div>
+      <div id="detail-empty" class="detail-empty"><i class="fas fa-hand-pointer" aria-hidden="true"></i><p>Firmaya tıklayarak detayları görüntüle</p><span>Seçili firmanın iletişim ve kalite bilgileri burada görünür.</span></div>
+      <div id="detail-content" style="display:none"></div>
+    </aside>
+  </div>
+  <script src="/static/js/nace_labels.js"></script>
+  <script src="/static/js/app.js?v=14"></script>
 </body>
 </html>
+
