@@ -1590,7 +1590,35 @@ function isletmemAccountTab(p, tip, hint) {
       <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Mevcut Şifre</label><input id="is-old-pass" type="password" class="filter-select" style="width:100%" autocomplete="current-password"></div>
       <div class="quick-filter-item" style="width:100%;margin-top:6px"><label>Yeni Şifre${tip('En az 8 karakter. PBKDF2-SHA256 ile şifrelenerek saklanır.')}</label><input id="is-new-pass" type="password" class="filter-select" style="width:100%" autocomplete="new-password" placeholder="En az 8 karakter"></div>
       <button class="d-btn" style="margin-top:10px" onclick="changePassword()"><i class="fas fa-key"></i> Şifreyi Değiştir</button>
+      ${p.tier === 'enterprise' && p.api_key ? `
+      <div class="detail-section" style="margin-top:14px">
+        <div class="detail-section-title">API Key (Enterprise) — Y26</div>
+        <div class="detail-row"><span class="label">Mevcut Key</span><span class="value mono">${esc((p.api_key || '').substring(0, 12))}…</span>
+          <button class="d-btn" style="min-width:auto;flex:0" onclick="copyField('${p.api_key}','API Key')"><i class="fas fa-copy"></i></button></div>
+        <button class="d-btn" style="margin-top:8px;border-color:rgba(239,68,68,.4);color:#f87171" onclick="rotateApiKey('${p.user_id || ''}')"><i class="fas fa-sync-alt"></i> Key Rotasyonu</button>
+        <small style="color:var(--text-dim);font-size:10.5px;display:block;margin-top:4px">Rotasyon eski key'i anında geçersiz kılar — entegrasyonlarınızı yeni key ile güncelleyin.</small>
+      </div>` : ''}
     </div>`;
+}
+
+function rotateApiKey() {
+  const tok = getMemberToken();
+  if (!tok) { toast('Önce giriş yapın.'); return; }
+  if (!confirm('API key rotasyonu eski key\u2019i geçersiz kılar. Onaylıyor musunuz?')) return;
+  fetch(apiUrl('/api/me?token=' + encodeURIComponent(tok)))
+    .then(r => r.json())
+    .then(async d => {
+      const uid = (d.user || {}).user_id;
+      if (!uid) { toast('Kullanıcı kimliği alınamadı.'); return; }
+      const r = await fetch(apiUrl('/api/admin/rotate-key'), {
+        method: 'POST', headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + tok },
+        body: JSON.stringify({ user_id: uid }),
+      });
+      const res = await r.json().catch(() => ({}));
+      if (r.ok) { toast('Yeni API key üretildi — İşletmem\u2019den kopyalayın.'); loadIsletmem(); }
+      else toast(res.detail || 'Rotasyon başarısız');
+    })
+    .catch(e => toast(e.message));
 }
 
 function saveIsletmemProfile() {

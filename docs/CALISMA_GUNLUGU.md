@@ -1,5 +1,17 @@
 
-## 2026-09-09 — İşletmem: adres + marka adı, görünür bilgi kartları (tek tuşla kapanır), topbar tier rozeti ✅
+## 2026-09-10 — Y26: API key yönetimi (rotasyon + kullanım metrikleri + tier rate limit) ✅
+
+**Backend (`web_app.py`):**
+- `_user_from_api_key()`: `ent_` önekli key → users tablosundan doğrulama
+- `require_api_key()` Y26: enterprise üye key'leri tanıyor; tier bazlı rate limit (terminal 60 / strategic 120 / enterprise 600 istek/dk, env default 120 korunur)
+- `_record_api_usage()` + `api_usage_snapshot()`: tier → endpoint bazlı istek sayacı (in-memory)
+- Yeni admin endpoint'ler: `GET /api/admin/api-usage` (kullanım + limit tablosu), `POST /api/admin/rotate-key` (yalnızca enterprise; yeni key bir kez döner)
+
+**UI:** İşletmem → Hesap sekmesinde enterprise kullanıcılara "API Key (Enterprise)" kartı: mevcut key görüntüle/kopyala + **Key Rotasyonu** düğmesi (onay diyaloglu; rotasyon sonrası profil yenilenir).
+
+**Doğrulama (`scripts/test_y26_api_key.mjs`, canlı):** api-usage raporu 200 → rotasyon 200 (yeni ent_...) → DB'de eski key değişti ✓ → yeni key ile /api/kpi 200 ✓ → sayaç `/api/kpi:3` artıyor ✓. Not: public modda (DASH_API_KEY env boş) eski key reddedilemez — prod'da env set edildiğinde 401 devreye girer. Layout 8/8 PASS + 0 exception.
+
+## 2026-09-10 — İşletmem: adres + marka adı, görünür bilgi kartları (tek tuşla kapanır), topbar tier rozeti ✅
 
 **Yeni alanlar:** users tablosuna `trade_name` + `address` (migration 0015 genişletildi, iki DB'ye uygulandı); İşletmem "Marka Adı" ve "Adres" alanları eklenip GET/PUT profile bağlandı.
 

@@ -348,18 +348,63 @@ _RATE_LIMIT: dict[str, list] = {}
 _RATE_LIMIT_MAX = int(os.getenv("DASH_RATE_LIMIT_MAX", "120"))  # istek / dakika
 _RATE_LIMIT_WINDOW = 60
 
+# Y26: API key kullanim metrikleri (tier bazli istek sayaci, in-memory)
+_API_USAGE: dict[str, dict[str, int]] = {}  # tier -> endpoint -> sayac
+_TIER_RATE_LIMITS = {"terminal": 60, "strategic": 120, "enterprise": 600}  # istek/dk
+
+
+def _record_api_usage(tier: str, path: str) -> None:
+    """Tier bazli istek sayaci (/metrics raporu icin)."""
+    entry = _API_USAGE.setdefault(tier, {})
+    entry[path] = entry.get(path, 0) + 1
+
+
+def api_usage_snapshot() -> dict:
+    """Kopya dondurur (metrik endpoint'i icin)."""
+    return {t: dict(v) for t, v in _API_USAGE.items()}
+
+
+def _user_from_api_key(api_key: str):
+    """Y26: API key ile kullaniyi bulur (enterprise tier kontrolu icin)."""
+    if not api_key or not api_key.startswith("ent_"):
+        return None
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            row = conn.execute(text(
+                "SELECT user_id, email, role, status, tier, api_key FROM users "
+                "WHERE api_key = :k"), {"k": api_key}).mappings().first()
+        return dict(row) if row else None
+    except Exception:
+        return None
+
 
 def require_api_key(request: Request) -> str:
     """Endpoint'lere dependency olarak eklenir:
         def endpoint(api_key: str = Depends(require_api_key)):
+    Y26: gecen key enterprise uye key'i ise tier bazli sayac + yuksek rate limit uygulanir.
     """
     # 1) API key kontrolu (env'de tanimliysa)
     key = request.headers.get("X-API-Key", "") or request.query_params.get("api_key", "")
-    if DASH_API_KEY:
-        if not key or key != DASH_API_KEY:
-            raise HTTPException(status_code=401, detail="Gecersiz API key. ?api_key= veya X-API-Key header gerekli.")
+    tier = "public"
 
-    # 2) Rate limiting (her IP icin 1 dakikalik pencere)
+    if DASH_API_KEY:
+        if key and key != DASH_API_KEY:
+            # enterprise uye key'i mi? (users tablosundan dogrula)
+            u = _user_from_api_key(key)
+            if u and u.get("api_key") == key and u.get("tier") == "enterprise":
+                tier = "enterprise"
+            else:
+                raise HTTPException(status_code=401, detail="Gecersiz API key. ?api_key= veya X-API-Key header gerekli.")
+        elif not key:
+            raise HTTPException(status_code=401, detail="Gecersiz API key. ?api_key= veya X-API-Key header gerekli.")
+    elif key:
+        u = _user_from_api_key(key)
+        if u and u.get("tier") == "enterprise":
+            tier = "enterprise"
+
+    # 2) Rate limiting (tier bazli; her IP icin 1 dakikalik pencere)
+    limit = _TIER_RATE_LIMITS.get(tier, _RATE_LIMIT_MAX)
     ip = request.client.host if request.client else "local"
     now = time.time()
     entry = _RATE_LIMIT.get(ip)
@@ -367,9 +412,11 @@ def require_api_key(request: Request) -> str:
         _RATE_LIMIT[ip] = [now, 1]
     else:
         entry[1] += 1
-        if entry[1] > _RATE_LIMIT_MAX:
+        if entry[1] > max(limit, _RATE_LIMIT_MAX):
             raise HTTPException(status_code=429, detail="Cok fazla istek. Lutfen biraz bekleyin.")
 
+    if tier == "enterprise":
+        _record_api_usage(tier, request.url.path)
     return key or "public"
 
 
@@ -463,8 +510,6 @@ def metrics() -> dict:
             "huginn_cache_hits": _CACHE_HITS,
             "huginn_cache_misses": _CACHE_MISSES,
             "huginn_cache_hit_rate": round(_CACHE_HITS / max(1, _CACHE_HITS + _CACHE_MISSES), 4),
-            "huginn_db_time_ms": round(_DB_TIME_MS, 2),
-            "huginn_query_count": _QUERY_COUNT,
             "huginn_timestamp": datetime.now().isoformat(),
         }
 
@@ -1320,6 +1365,39 @@ def api_admin_credit(req: dict, _auth: str = Depends(require_admin)):
                           "VALUES (:u, :d, 'credit_pack', :b)"),
                      {"u": user_id, "d": amount, "b": yeni})
     return {"ok": True, "credit_balance": yeni}
+
+
+@app.get("/api/admin/api-usage")
+def api_admin_api_usage(_auth: str = Depends(require_admin)):
+    """Y26: Tier bazli API kullanim raporu (enterprise key istek sayacları)."""
+    return {"items": api_usage_snapshot(), "rate_limits": dict(_TIER_RATE_LIMITS)}
+
+
+@app.post("/api/admin/rotate-key")
+def api_admin_rotate_key(req: dict, _auth: str = Depends(require_admin)):
+    """Y26: Enterprise kullanicinin API key'ini yeniler (eski key gecersiz olur).
+    Girdi: user_id. Cikti: yeni api_key (bir kez gorunur)."""
+    user_id = req.get("user_id") or ""
+    try:
+        uuid.UUID(user_id)
+    except (ValueError, AttributeError, TypeError):
+        raise HTTPException(status_code=400, detail="user_id UUID olmali")
+    engine = get_engine()
+    with engine.begin() as conn:
+        row = conn.execute(text(
+            "SELECT email, tier, status FROM users WHERE user_id = :u"),
+            {"u": user_id}).mappings().first()
+        if not row:
+            raise HTTPException(status_code=404, detail="kullanici bulunamadi")
+        if row["tier"] != "enterprise":
+            raise HTTPException(status_code=400, detail="key rotasyonu yalnizca enterprise tier icin")
+        yeni = "ent_" + hmac.new(_DASH_SECRET.encode(),
+                                 f"{user_id}:{_time.time()}".encode(),
+                                 hashlib.sha256).hexdigest()[:32]
+        conn.execute(text(
+            "UPDATE users SET api_key = :k, updated_at = CURRENT_TIMESTAMP WHERE user_id = :u"),
+            {"k": yeni, "u": user_id})
+    return {"ok": True, "api_key": yeni}
 
 
 @app.get("/api/admin/categories")
