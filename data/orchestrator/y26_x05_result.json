@@ -1,0 +1,65 @@
+{
+  "task_id": "Y26_X05",
+  "title": "API key yönetimi - rotasyon + kullanım metrikleri + tier rate limit araştırması",
+  "date": "2026-09-10T19:29:00Z",
+  "researcher": "arastirmaci",
+  "status": "research_complete",
+  "summary": "Y26 implementasyonu tamamlandı (2026-09-10). X05 revizyonu için eksikler: (1) in-memory sayaç restart'ta kayboluyor, (2) plain text API key saklama riski, (3) key rotasyonu sadece enterprise için, (4) kullanım metrikleri DB'de persist edilmiyor.",
+  "findings": {
+    "current_implementation": {
+      "status": "done (Y26)",
+      "features": [
+        "Enterprise API key üretimi (ent_ önekli HMAC-SHA256)",
+        "Tier bazlı rate limit: terminal 60/dk, strategic 120/dk, enterprise 600/dk",
+        "In-memory kullanım sayacı (_API_USAGE) + /api/admin/api-usage endpoint",
+        "POST /api/admin/rotate-key (sadece enterprise)",
+        "DASH_API_KEY env ile public/enterprise modu geçişi"
+      ],
+      "files": ["web_app.py (lines 346-424)", "scripts/test_y26_api_key.mjs"],
+      "docs": ["docs/CALISMA_GUNLUGU.md"]
+    },
+    "gaps_for_x05_revision": [
+      {
+        "gap": "In-memory usage counter",
+        "risk": "Server restart → tüm sayaçlar sıfırlanır. SLA/enterprise müşteri için kullanım raporu eksik olur.",
+        "fix": "api_usage tablosu ekle (user_id, endpoint, method, status_code, timestamp, tier). Periodic batch insert veya middleware tarafından DB write."
+      },
+      {
+        "gap": "Plain text API key storage",
+        "risk": "users.api_key plain text saklanıyor. DB leak → tüm enterprise key'ler compromised.",
+        "fix": "API key hash'lenerek saklanmalı (HMAC-SHA256 veya bcrypt). Login time'da hash doğrulama. Rotasyon sırasında yeni key hash'lenerek yazılır."
+      },
+      {
+        "gap": "Key rotation limited to enterprise",
+        "risk": "Terminal/Stratetic müşteriler de key rotate etmek isteyebilir (security incident).",
+        "fix": "POST /api/admin/rotate-key → role-based: admin herkesi, enterprise kendi key'ini rotate edebilir."
+      },
+      {
+        "gap": "No API key revocation",
+        "risk": "Key leak olduğunda anında iptal edilebilir endpoint yok.",
+        "fix": "POST /api/admin/revoke-key (admin) + self-service revoke (enterprise). Revoked key listesi cache'de tutulur."
+      },
+      {
+        "gap": "No usage metrics endpoint for users",
+        "risk": "Kullanıcı kendi API kullanımını göremiyor.",
+        "fix": "GET /api/buyer/api-usage (kendi usage'si) + /api/admin/api-usage (tümü, admin)."
+      }
+    ],
+    "rate_limit_best_practices": {
+      "algorithm": "Sliding window log veya fixed window. Mevcut: fixed window (in-memory).",
+      "headers": "x-ratelimit-limit-requests, x-ratelimit-remaining-requests, x-ratelimit-reset-requests ekle (OpenAI tarzı).",
+      "tier_config": {
+        "free": {"requests": 60, "window": 3600},
+        "terminal": {"requests": 60, "window": 60},
+        "strategic": {"requests": 120, "window": 60},
+        "enterprise": {"requests": 600, "window": 60}
+      }
+    },
+    "security_considerations": [
+      "API key hash'leme: HMAC-SHA256(secret_salt, api_key) — constant-time compare.",
+      "Key format: ent_<random_32bytes_base64> — brute-force resistent.",
+      "Rate limit bypass engelle: IP + user_id kombinasyonu, header spoofing koruması.",
+      "Audit log: api_key.rotate, api_key.revoke, api_key.created → credit_ledger'a benzer audit tablosu."
+    ]
+  }
+}

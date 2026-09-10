@@ -1,0 +1,48 @@
+{
+  "task_id": "OBS-01",
+  "title": "Obsidian vault standardizasyonu araştırması",
+  "date": "2026-09-10T19:29:00Z",
+  "researcher": "arastirmaci",
+  "status": "research_complete",
+  "summary": "Obsidian vault yapısı PARA + Meta modeline göre düzenlenmeli. Tek V10 kaynağı, UTF-8 encoding, wikilinks + MOCs + properties standardı benimsenecek. check_obsidian_links.py ile link denetimi otomatize edilecek.",
+  "findings": {
+    "vault_structure": {
+      "recommended": [
+        "01 Projects/ (aktif projeler, her biri hub note ile)",
+        "02 Areas/ (sürekli sorumluluk alanları)",
+        "03 Resources/ (kalıcı referanslar, how-to, dış kaynaklar)",
+        "04 Archives/ (tamamlanan projeler, eski notlar)",
+        "05 Meta/ (vault kuralları, şablonlar, index)"
+      ],
+      "principle": "Folders for lifecycle, links for meaning, tags for workflow, properties for structured metadata."
+    },
+    "note_types_and_frontmatter": {
+      "project": "type: project, status: Active|On Hold|Done|Dropped, created, target, area, tags",
+      "resource": "type: resource, source, tags",
+      "memory": "type: memory, category: preferences|thread|person|decision, created, updated",
+      "daily": "type: daily, date: YYYY-MM-DD"
+    },
+    "linking_strategy": {
+      "wikilinks": "[[Note Name]] — Obsidian native, graph view + backlinks.",
+      "markdown_fallback": "[Note Name](Note%20Name.md) — cross-tool uyumluluğu.",
+      "moc": "5+ not olan konularda MOC oluştur; 25 item altı tut.",
+      "bidirectional": "İlişkili notlarda karşılıklı link ekle (A → B ise B → A da A'ya link)."
+    },
+    "templates": {
+      "project_hub": "Proje adı, durum, hedef tarih, MOC linkleri, görevler.",
+      "handoff": "Görev durumu, dosyalar, kilitler, sonraki adım.",
+      "research": "Araştırma sorusu, kaynaklar, bulgular, öneri, referanslar.",
+      "daily_note": "Tarih, yapılanlar, kararlar, sonraki gün."
+    },
+    "automation": {
+      "scripts": ["scripts/check_obsidian_links.py (link denetimi)", "scripts/sync_v10_mirror.py (V10 mirror, varsa)"],
+      "pre_commit": "UTF-8 encoding check + link audit (pre-commit hook).",
+      "obsidian_plugins": ["Dataview (dashboard)", "Periodic Notes (daily/weekly/monthly)", "Templater (şablonlar)"]
+    },
+    "compatibility": {
+      "wikilinks_vs_markdown": "Wikilinks Obsidian-native; Markdown links tüm araçlarda çalışır. İkisini karıştırma.",
+      "encoding": "Tüm dosyalar UTF-8. BOM yok.",
+      "naming": "Lowercase + underscores: [[project_state]] (boşluk yok, Türkçe karakter ASCII karşılığı yok)."
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "task_id": "MCP-01",
+  "title": "Kontrollü Apify MCP Erişimi araştırması",
+  "date": "2026-09-10T19:29:00Z",
+  "researcher": "arastirmaci",
+  "status": "research_complete",
+  "summary": "MCP (Model Context Protocol), Anthropic tarafından açık kaynak, JSON-RPC 2.0 tabanlı bir protokoldür. Huginn için Apify MCP erişimini kontrollü bir şekilde sağlamak için izinli araç listesi + harcama onayı + veri sınırları modeli önerilir.",
+  "findings": {
+    "mcp_overview": {
+      "description": "MCP, AI modellerinin harici veri kaynakları ve araçlarla iletişim kurmasını standartlaştırır. USB-C portu benzetmesiyle anlaşılır: her uygulama aynı protokol üzerinden farklı verilere erişir.",
+      "architecture": [
+        "Host: MCP bağlantısını başlatan ve yöneten uygulama (Claude Desktop, VS Code, Cursor vb.)",
+        "Client: Host tarafından oluşturulan lightweight subprocess; server ile 1-to-1 bağlantı kurar.",
+        "Server: Araçları (tools), kaynakları (resources) ve prompt'ları (prompts) client'a sunar."
+      ],
+      "capabilities": {
+        "resources": "Yapılandırılmış veri (DB kayıtları, API yanıtları) — modelin kullanabileceği bağlam.",
+        "tools": "Modelin çağırabileceği fonksiyonlar (API çağrısı, dosya işleme vb.).",
+        "prompts": "Önceden yazılmış prompt şablonları."
+      },
+      "transport": "JSON-RPC 2.0. Local: stdio/SSE. Remote: HTTP streaming (artık destekleniyor).",
+      "latest_status": "2026 yılında Linux Foundation'ın Agentic AI Foundation'ına bağışlandı. Registry: registry.modelcontextprotocol.io",
+      "spec_url": "https://modelcontextprotocol.io/specification/2025-11-25"
+    },
+    "huginn_controlled_apify_mcp_design": {
+      "goal": "Apify'ı Huginn içinde kontrollü bir MCP server olarak sunmak. Ajanlar sadece izinli araçları kullanabilsin, harcama limitleri olsun, veri sınırları uygulansın.",
+      "components": [
+        {
+          "name": "Huginn MCP Server (MCP-02)",
+          "role": "Huginn sistemini MCP protokolüne açar. Ajanlar bu server'a bağlanarak Huginn verilerine erişir."
+        },
+        {
+          "name": "Apify MCP Adapter (MCP-01)",
+          "role": "Apify Client'ı bir MCP tool set olarak sunar. Sadece whitelist'teki Actor'lar çalıştırılabilir."
+        },
+        {
+          "name": "Policy Engine",
+          "role": "Ajan başına izinli araç listesi + harcama onayı + veri sınırları (max rows, max credits)."
+        }
+      ],
+      "permission_model": {
+        "allowed_tools": "['apify_run_actor:kariyer_net', 'apify_run_actor:company_career', 'apify_get_dataset']",
+        "denied_tools": "['apify_run_actor:*'] (wildcard engeli)",
+        "spend_approval": "Günlük/apı maksimum harcama (Apify credits) → admin onayı gerekirse workflow duraklatılır.",
+        "data_limits": "Maksimum dataset satırı, maksimum token çıkışı, sadece belirli NACE kodları için izin."
+      },
+      "benefits": [
+        "Ajanların Apify'a doğrudan erişimi kısıtlanır; tüm trafik Huginn üzerinden gider.",
+        "Kullanıcı onayı gerektiren tehlikeli araçlar (delete, update) flag'lenir.",
+        "Kredi/harcama takibi Merkezi olarak Y26 metrikleriyle birleştirilebilir.",
+        "Apify adapteri değişse bile ajan tarafındaki MCP arayüzü sabit kalır."
+      ]
+    },
+    "implementation_notes": {
+      "protocol": "JSON-RPC 2.0 over stdio (local) veya HTTP (remote).",
+      "python_sdk": "mcp Python paketi mevcut ( Anthropic tarafından ).",
+      "sample_flow": [
+        "Ajan: 'Kariyer.net'den yeni ilanları çek' → Huginn MCP Client",
+        "Client → Huginn MCP Server: tools/call 'apify_run_actor'",
+        "Server: Policy Engine kontrolü (yetki var mı, kredi yeterli mi?)",
+        "Server → Apify Client: Actor.run()",
+        "Sonuç → Dataset → Huginn ingest pipeline → credit_ledger güncelle"
+      ]
+    }
+  }
+}

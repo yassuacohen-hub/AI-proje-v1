@@ -1,5 +1,5 @@
 {
-  "generated": "2026-09-10T17:21:59.695447+00:00",
+  "generated": "2026-09-10T20:05:43.208545+00:00",
   "v10_root": "C:/Projeler/Huginn Data Insights/AI proje v1/V10",
   "page_count": 55,
   "hubs": [
@@ -61,7 +61,7 @@
       "title": "00-Home",
       "summary": "Bu vault, proje bağlamı, mimari, özellikler, kararlar, hata notları, araştırma, görevler ve ajan yapısını tek bir merkezden yönetmek için oluşturulmuştur. - 00_ana_belgeler — [[01_sirket_master_ana_be…",
       "size": 1845,
-      "updated": "2026-09-10T16:43:50.434184+00:00",
+      "updated": "2026-09-10T19:30:37.113776+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -228,7 +228,7 @@
       "title": "Veri Toplama Modeli",
       "summary": "Bu belge, [[01_sirket_master_ana_belgesi]] (Company Master V1.0) §9'dan türetilmiş veri toplama iş modelidir. 1. OSB'ler 2. OSTİM 3. İvedik 4. ASO OSB'leri 5. diğer sanayi bölgeleri 6. oda/kuruluş kay…",
       "size": 1348,
-      "updated": "2026-09-10T12:36:57.076099+00:00",
+      "updated": "2026-09-10T19:30:37.118783+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -509,7 +509,7 @@
       "title": "OSB Masa Başı Analizi — 3 OSB Üye Listesi Erişim Raporu",
       "summary": "Bu rapor, Web Kazıma Uzmanı'nın 30 dakikalık masa başı analizinin sonucudur (V10/10_ankara_osb_sentez Karar 4). 3 hedef OSB'nin üye listesi erişilebilirliği, formatı ve scraping uygunluğu değerlendiri…",
       "size": 7672,
-      "updated": "2026-09-10T12:36:57.081098+00:00",
+      "updated": "2026-09-10T19:30:37.121298+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -560,7 +560,7 @@
       "title": "NVIDIA Build Skills Araştırması",
       "summary": "**Tarih:** 2026-09-01 **Analist:** Araştırmacı Ajan + Koordinatör Ajan --- Product Owner talebi: NVIDIA Build platformundaki açık kaynak, kurulabilir, projeyle ilgili skill'leri araştır. Aşağıdaki 3 s…",
       "size": 8843,
-      "updated": "2026-09-10T12:36:57.081098+00:00",
+      "updated": "2026-09-10T19:30:37.124298+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -595,7 +595,7 @@
       "title": "Proje Denetimi — 2026-09-09 (Koordinatör Ajan)",
       "summary": "| # | Bulgu | Düzeltme | Etkilenen Dosyalar | |---|-------|----------|---------------------| | DENET-2 | Birden fazla dosyada Türkçe karakter bozulması (mojibake, cp1254/utf-8 karışımı) | Bozuk bayt d…",
       "size": 3664,
-      "updated": "2026-09-10T16:14:26.889138+00:00",
+      "updated": "2026-09-10T19:30:37.126303+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -613,7 +613,7 @@
       "title": "Apify Entegrasyon Araştırması — API + MCP Çift Yönlü Bağlantı, Web Kazıma Alternatifleri ve Revize Plan Önerisi",
       "summary": "--- **Apify, Huginn için uygun bir \"alternatif veri toplama katmanı\" olabilir; API ve MCP üzerinden çift yönlü entegrasyon teknik olarak mümkündür.** Ancak mevcut kazıma sorunlarının tamamı erişim/ant…",
       "size": 20770,
-      "updated": "2026-09-10T12:36:57.083098+00:00",
+      "updated": "2026-09-10T19:30:37.128146+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -632,7 +632,7 @@
       "title": "VKN Bulma Stratejisi — Firma Web Siteleri",
       "summary": "- OSTİM rehberinde VKN yok (5485 kayıtta `vergi_no` ~boş), ASO'da yalnız ticaret sicil no var. MERSIS API başvurusu dış bağımlı (P2-1, bekliyor). - **Firma web siteleri** VKN'nin en erişilebilir kamuy…",
       "size": 3980,
-      "updated": "2026-09-10T16:14:26.889769+00:00",
+      "updated": "2026-09-10T19:30:37.130321+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -648,7 +648,7 @@
       "title": "Koordinatör Ajan",
       "summary": "Projenin genel akışını düzenler, görevleri önceliklendirir ve hangi ajanın hangi anda devreye gireceğini belirler. - Proje hedeflerinin anlaşılır şekilde tanımlanması - Görev önceliklendirme - Ajanlar…",
       "size": 2356,
-      "updated": "2026-09-10T16:54:24.837230+00:00",
+      "updated": "2026-09-10T19:30:37.132317+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -676,7 +676,7 @@
       "title": "Mimar Ajan",
       "summary": "Sistemin genel mimarisini korur, yeni özelliklerin uyumlu şekilde eklenmesini sağlar ve katmanlar arası bütünlüğü sağlar. - Mimari kararları tutarlı şekilde takip etmek - Katmanlar arası bağımlılık ko…",
       "size": 2561,
-      "updated": "2026-09-10T16:53:53.887179+00:00",
+      "updated": "2026-09-10T19:30:37.135106+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -701,7 +701,7 @@
       "title": "Araştırmacı Ajan",
       "summary": "Proje için referans, araştırma, benzer çözümler ve karar destek bilgisi toplar. - Dış kaynaklar ve benzer çözümler araştırma - Kullanım örnekleri ve teknik karar destekleri toplama - Belge üretimde ta…",
       "size": 2615,
-      "updated": "2026-09-10T16:53:53.887179+00:00",
+      "updated": "2026-09-10T19:30:37.138132+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -728,7 +728,7 @@
       "title": "Geliştirici Ajan",
       "summary": "Kod üretir, özellik ekler ve uygulama katmanlarını geliştirir. - Kod yazma ve modül geliştirme - Bug fix ve refactor çalışmaları - Testlere dayalı geliştirme - src altında işlevsellik üretme - Mimarid…",
       "size": 2363,
-      "updated": "2026-09-10T16:53:53.887179+00:00",
+      "updated": "2026-09-10T19:30:37.142025+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -757,7 +757,7 @@
       "title": "Kalite Ajan",
       "summary": "Projenin doğruluğunu ve güvenilirliğini korur; test, hata, kalite ve regresyon kontrolünü yapar. - Test çalıştırma ve kontrol - Hata analizi ve çözüm önerisi - Geliştirmelerden önce risk değerlendirme…",
       "size": 2397,
-      "updated": "2026-09-10T16:53:53.898023+00:00",
+      "updated": "2026-09-10T19:30:37.145315+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -785,7 +785,7 @@
       "title": "Web Kazıma Uzmanı",
       "summary": "Yalnızca izin verilen, kontrollü ve hedefli şekilde veri toplama görevini yürütür. - Web kaynaklarından veri toplanması - Kazıma için izin ve kaynak uyumluluğu kontrolü - Rate limit, anti-bot, robots.…",
       "size": 3862,
-      "updated": "2026-09-10T16:53:53.898023+00:00",
+      "updated": "2026-09-10T19:30:37.147311+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -817,7 +817,7 @@
       "title": "1. Amaç",
       "summary": "﻿# 07 - Harici Ajan Entegrasyon Protokolü Bu belge, **Cursor Grok, GitHub Copilot, Claude Code** ve benzeri dış yapay zeka ajanlarının proje orkestratörüyle güvenli ve kontrollü biçimde haberleşmesini…",
       "size": 7745,
-      "updated": "2026-09-10T16:14:26.892338+00:00",
+      "updated": "2026-09-10T19:30:37.148311+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -838,7 +838,7 @@
       "title": "1. Cursor Grok için Önerilen Görevler",
       "summary": "﻿# 08 - Harici Ajan Görev Önerileri Bu belge, harici ajanların ([[07_harici_ajan_protokolu]] kapsamındaki Cursor Grok, GitHub Copilot, Claude Code vb.) bu projede **en verimli** şekilde kullanılabilec…",
       "size": 5596,
-      "updated": "2026-09-10T16:14:26.892338+00:00",
+      "updated": "2026-09-10T19:30:37.150311+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -872,7 +872,7 @@
       "title": "Temel ilke",
       "summary": "﻿# Ajanlar ve Gelişime Açık Yapı Bu bölüm, proje içindeki yapay zeka ajanlarının sorumluluk alanlarını, sınırlarını ve gelişime açık yapısını açıklar. - Her ajan tek bir ana sorumluluğa sahip olmalıdı…",
       "size": 4810,
-      "updated": "2026-09-10T16:45:03.322089+00:00",
+      "updated": "2026-09-10T19:30:37.153036+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -907,7 +907,7 @@
       "title": "Kasa Kuralları",
       "summary": "Bu belge, V10 kasasının belge yönetimi standartlarını tek yerde toplar. Ayrıntılı klasör açıklamaları için [[README]] geçerlidir; buradaki kurallar özet ve bağlayıcıdır. - `00_ana_belgeler/` — Ana pro…",
       "size": 2589,
-      "updated": "2026-09-10T12:36:57.088226+00:00",
+      "updated": "2026-09-10T19:30:37.158780+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -952,7 +952,7 @@
       "title": "KVKK ve Veri Politikas`````",
       "summary": "Bu belge, Huginn Data Insights projesinde KVKK (Kişisel Verilerin Korunması Kanunu) kapsamında uygulanan veri filtreleme ve politikalarını tanımlar. Kaynak: [[10_ankara_osb_sentez]], [[01_sirket_maste…",
       "size": 6750,
-      "updated": "2026-09-10T12:36:57.089225+00:00",
+      "updated": "2026-09-10T19:30:37.161771+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -995,7 +995,7 @@
       "title": "Token Verimliliği ve Dil/Dokümantasyon Politikası",
       "summary": "Bu belge, bu kasada çalışan tüm yapay zeka ajanlarının bilgi işleme, token verimliliği ve dil kullanımı konusundaki bağlayıcı politikalarını toplar. Proje anayasası olan ``AGENTS.md`` ve `CLAUDE.md` i…",
       "size": 12105,
-      "updated": "2026-09-10T16:14:26.896340+00:00",
+      "updated": "2026-09-10T19:30:37.163788+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -1111,7 +1111,7 @@
       "title": "Ankara OSB Ekosistemi — Orkestratör Sentez ve Karar",
       "summary": "Bu belge, 6 ajanın Ankara OSB Ekosistemi politika önerisine verdikleri yanıtların sentezidir. Orkestratör olarak alınan kararlar ve sonraki adımlar burada sabitlenir. - 13.500+ rakamı yalnız 3 OSB ye …",
       "size": 8706,
-      "updated": "2026-09-10T16:26:23.201473+00:00",
+      "updated": "2026-09-10T19:30:37.167772+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -1146,7 +1146,7 @@
       "title": "MVP Kapsamı — V9 Birleştirme ve Ankara OSB Odak",
       "summary": "Bu belge, V9 Master Context (V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md) ile V10 Company Master V1.0 arasındaki MVP kapsamı birleştirmesini sabitler. V9'un tüm katmanları MVP'ye alınmaz; yaln…",
       "size": 3965,
-      "updated": "2026-09-10T12:36:57.071099+00:00",
+      "updated": "2026-09-10T19:30:37.171605+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -1177,7 +1177,7 @@
       "title": "Orkestratör Ajan — İç Ajan Koordinasyon Merkezi",
       "summary": "İlgili: [[01_koordinator_ajan]] · [[OSINT_Scraper_Motoru]] · [[project_state]] · [[00-Home]] · [[CHANGELOG]] Eski sistemde \"herkes herkesin ne yaptığını sürekli bir listede takip ediyordu\" mekanizması…",
       "size": 4321,
-      "updated": "2026-09-10T16:45:56.609816+00:00",
+      "updated": "2026-09-10T19:30:37.181898+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -1204,7 +1204,7 @@
       "title": "OSINT Scraper Motoru",
       "summary": "İlgili: [[09_osint_rol_tanimi]] · [[06_web_kazima_uzmani]] · [[10_ankara_osb_sentez]] · [[08_gib_vergino_sorgu_stratejisi]] · [[project_state]] Ankara B2B Company Master projesinin tüm veri toplama ak…",
       "size": 4592,
-      "updated": "2026-09-10T16:45:39.500030+00:00",
+      "updated": "2026-09-10T19:30:37.172778+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -1256,8 +1256,8 @@
       "path": "CHANGELOG.md",
       "title": "[2026-09-01] Company Master PostgreSQL Migration Seti (Kimi Code)",
       "summary": "﻿# CHANGELOG Kronolojik değişiklik günlüğü. - **P0 tamamlandı:** Company Master PostgreSQL şeması numaralı SQL migration'ları olarak üretildi: - src/company_master/schema/migrations/0001_core.sql — uz…",
-      "size": 13297,
-      "updated": "2026-09-10T16:37:36.489951+00:00",
+      "size": 14321,
+      "updated": "2026-09-10T19:30:37.183900+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -1298,9 +1298,9 @@
     "project_state.md": {
       "path": "project_state.md",
       "title": "Project State",
-      "summary": "BaÄŸlantÄ±lar: [[00-Home]] Â· [[TODO]] Â· [[CHANGELOG]] Â· [[01_sirket_master_ana_belgesi]] Ankara B2B Company Master â€” V1.0 - Company Master V1.0 ÅŸema tasarÄ±mÄ± (19 tablo) - ETL mimarisi ve veri …",
-      "size": 11335,
-      "updated": "2026-09-10T12:36:57.073098+00:00",
+      "summary": "Ankara B2B Company Master ” V1.0 - Company Master V1.0 şema tasarımı (19 tablo) - ETL mimarisi ve veri akışı tanımlandı - MVP gereksinimleri (P0/P1/P2) belirlendi - V9 ile karşılaştırma yapıldı - Ajan…",
+      "size": 3431,
+      "updated": "2026-09-10T19:30:37.192033+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -1340,7 +1340,7 @@
       "title": "V10 Master Belgeleri",
       "summary": "Bu klasör, proje belgelerinin Türkçe, düzenli ve sürdürülebilir bir yapıda saklanması için hazırlanmıştır. - Proje bağlamını tek bir yerden takip etmek - Sistem, iş modeli ve gereksinim belgelerini ay…",
       "size": 3000,
-      "updated": "2026-09-10T12:36:57.073098+00:00",
+      "updated": "2026-09-10T19:30:37.186900+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -1360,7 +1360,7 @@
       "title": "ADR: <Başlık>",
       "summary": "- Status: Proposed / Accepted / Rejected - Date: YYYY-MM-DD Bu kararın neden alındığını açıklayın. Alınan karar nedir? - Artı yönler - Eksiler - Etkileyen sistemler 1. Seçenek A 2. Seçenek B 3. Seçene…",
       "size": 388,
-      "updated": "2026-09-10T12:36:57.093226+00:00",
+      "updated": "2026-09-10T19:30:37.193213+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [],
@@ -1374,7 +1374,7 @@
       "title": "Bug: <Başlık>",
       "summary": "Sorunun kısa özeti. - OS: - Python: - Branch: - App version: 1. Adım 1 2. Adım 2 3. Adım 3 Beklenen davranış. Gerçek davranış. Olası sebep. - [ ] İzleme - [ ] Düzeltme - [ ] Test - [ ] Onay Ek notlar …",
       "size": 413,
-      "updated": "2026-09-10T12:36:57.093226+00:00",
+      "updated": "2026-09-10T19:30:37.193213+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [],
@@ -1386,8 +1386,8 @@
       "path": "templates/Frontmatter-template.md",
       "title": "<Başlık>",
       "summary": "<İçerik>",
-      "size": 370,
-      "updated": "2026-09-10T16:48:06.231307+00:00",
+      "size": 356,
+      "updated": "2026-09-10T19:30:37.199362+00:00",
       "type": "wiki          # wiki | raw | template | kararnote",
       "tags": [
         "# örnek: [mimari",
@@ -1405,7 +1405,7 @@
       "title": "Specification: <Özellik Adı>",
       "summary": "Özellik kısa özet. Sorun veya gereksinim nedir? - Amaç 1 - Amaç 2 - Amaç 3 - amaç dışı 1 - amaç dışı 2 - Kullanıcı olarak ... - Sistem olarak ... - [ ] Kriter 1 - [ ] Kriter 2 - [ ] Kriter 3 Ek notlar…",
       "size": 413,
-      "updated": "2026-09-10T12:36:57.094235+00:00",
+      "updated": "2026-09-10T19:30:37.200355+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [],
@@ -1416,9 +1416,9 @@
     "TODO.md": {
       "path": "TODO.md",
       "title": "Açık Görevler",
-      "summary": "﻿# TODO — Orkestratör Görev Panosu --- | ID | Görev | Sahip | Durum | Not | |----|-------|-------|-------|-----| | T1 | Ivedik scraper implementasyonu | gelistirici | done | Ivedik scraper iskeleti ha…",
-      "size": 19610,
-      "updated": "2026-09-10T17:21:59.663447+00:00",
+      "summary": "﻿# TODO — Orkestratör Görev Panosu --- | ID | Görev | Sahip | Durum | Not | |----|-------|-------|-------|-----| | P0-1 | İstiklal OSB scraper implementasyonu | web_kazima | done | Scraper aktif, 100 …",
+      "size": 4116,
+      "updated": "2026-09-10T20:05:43.192471+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [

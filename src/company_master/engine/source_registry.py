@@ -122,6 +122,16 @@ def default_sources() -> list[SourceSpec]:
             enabled=False,  # Anti-bot koruması için önce manuel test
             note="Türkiye'nin en büyük iş ilanı sitesi; sektör/şehir filtreli arama",
         ),
+        SourceSpec(
+            source_id="apify",
+            display_name="Apify REST Adaptör (Pilot)",
+            domain="api.apify.com",
+            scraper_module="company_master.intelligence.job_intelligence.sources.apify_job_source",
+            output_file="data/job_intelligence/apify_pilot.jsonl",
+            pipeline=True,
+            enabled=False,  # APOFY_TOKEN gerekli; once pilot calistirilacak
+            note="Apify Actor'lar uzerinden anti-bot siteleri (kariyer.net, LinkedIn) scrape eder. APIFY-02 pilot.",
+        ),
     ]
 
 

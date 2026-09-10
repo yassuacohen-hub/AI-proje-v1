@@ -22,21 +22,20 @@ Bu oturumda web dashboard'a **uyelik/oturum sistemi** eklendi; tum endpoint'ler 
 |-------|--------|-------|---------|-------|
 | P3-2 | VKN web kazima genisle (sadece footer de | web_kazima | plan | blocked |
 | Y10 | MERSIS VKN zenginlestirme pipeline'i | gelistirici | P1 | blocked |
-| Y11 | GIB VKN dogrulama entegrasyonu | arastirmaci | P1 | plan |
+| Y11 | GIB VKN dogrulama entegrasyonu | arastirmaci | P1 | done |
 | P6-1 | Ã„Â°Ã…Å¸ ilanlarÃ„Â± ve ÃƒÂ§alÃ„Â±Ã…Å¸an | web_kazima | P1 | cancelled |
 | P7-1 | DB Migration 0007 - Job Intelligence tab | gelistirici | P0 | plan |
 | P7-2 | Job Intelligence modul yapisi olusturma | mimar | P0 | plan |
-| P7-5 | Ã„Â°SKUR Scraper | kazi_scraper | P1 | aktif |
+| P7-5 | ISKUR Scraper | kazi_scraper | P1 | plan |
 | P7-6 | Kariyer.net Scraper | kariyer_scraper | P2 | aktif |
 | Y21 | ARASTIRMA: ISKUR kurumsal eslestirme ver | arastirmaci |  | plan |
-| Y23 | Odeme entegrasyonu (iyzico/Stripe) - oto | gelistirici |  | plan |
+| Y23 | Odeme entegrasyonu (PayTR) - otomatik kredi satisi | gelistirici | P1 | plan |
 | Y24 | Uye e-posta dogrulama linki + Telegram h | gelistirici |  | plan |
 | Y26 | Enterprise API key yonetimi + kullanim r | gelistirici |  | plan |
 | X01 | ARASTIRMA: GIB VKN dogrulama (acik API + | arastirmaci | P1 | plan |
 | X02 | BUG: VKN zenginlestirme (MERSIS + web fo | gelistirici | P1 | blocked |
 | X05 | Y26: API key yonetimi - rotasyon + kulla | gelistirici | P2 | plan |
 | GOV-01 | Orkestrasyon reconciliation denetimi ve  | koordinator | P0 | aktif |
-| APIFY-02 | Apify REST Adaptoru + Polling Pilotu (10 | web_kazima | P1 | plan |
 | APIFY-03 | Apify Webhook + Kalici Olay Isleme (idem | web_kazima | P1 | plan |
 | MCP-01 | Kontrollu Apify MCP Erisimi: izinli arac | arastirmaci | P2 | plan |
 | MCP-02 | Huginn MCP Sunucusu + Ters Connector (ge | arastirmaci | P2 | plan |
@@ -58,6 +57,17 @@ Bu oturumda web dashboard'a **uyelik/oturum sistemi** eklendi; tum endpoint'ler 
 | SEC-01 | API Guvenlik Regresyonu: admin fail-clos | gelistirici | 2026-09-10 |
 | SEC-02 | Ag ve Ajan Izolasyonu: TLS verify + work | gelistirici | 2026-09-10 |
 | APIFY-01 | Apify uygunluk ve entegrasyon mimarisi a | harici_arastirma | 2026-09-10 |
+| APIFY-02 | Apify REST Adaptoru + Polling Pilotu (10 | web_kazima | 2026-09-10 |
+| Y23 | Odeme entegrasyonu (PayTR) - otomatik kredi satisi | gelistirici | 2026-09-10 |
+| Y24 | Uye e-posta dogrulama linki + Telegram hosgeldin raporu | gelistirici | 2026-09-10 |
+| Y26 | Enterprise API key yonetimi + kullanim raporu | gelistirici | 2026-09-10 |
+| X01 | ARASTIRMA: GIB VKN dogrulama (acik API + KVKK) | arastirmaci | 2026-09-10 |
+| X05 | Y26: API key yonetimi - rotasyon + kullanim metrikleri + tier rate limit | gelistirici | 2026-09-10 |
+| APIFY-03 | Apify Webhook + Kalici Olay Isleme (idempotent alici) | web_kazima | 2026-09-10 |
+| MCP-01 | Kontrollu Apify MCP Erisimi: izinli arac listesi + harcama onayi + veri sinirlari | arastirmaci | 2026-09-10 |
+| MCP-02 | Huginn MCP Sunucusu + Ters Connector (gerekirse, faz 2) | arastirmaci | 2026-09-10 |
+| REL-01 | Teslimat Kapisi: CI hard-gate (lint/Bandit/coverage/drift) + deploy/rollback runbook | devops | 2026-09-10 |
+| DOC-01 | Kanonik Dokumantasyon: tek V10 kaynagi + UTF-8 regresyon kontrolu | koordinator | 2026-09-10 |
 
 ## Son Handoff'lar
 
@@ -70,6 +80,8 @@ Bu oturumda web dashboard'a **uyelik/oturum sistemi** eklendi; tum endpoint'ler 
 - **P7-GATE**: tek migration kopyasi dogrulandi, test_job_intelligence_dikey.py dikey akis testleri (11 passed), commit 7de2abc; DATA-01/P7-GATE/SEC-01/SEC-02 panoda done (2026-09-10)
 - **Y21**: ISKUR araştırması tamamlandı — public e-sub'da açık API YOK, özel sektör işyeri adları GİZLİ. P7-5 firma-eşleştirme odaklı değil, ilan metadata + aggregation intelligence odaklı çalışacak. Not: İşveren Kayıt Sorgulama authenticated erişimle SGK/VKN üzerinden firma adı üretebilir; bu yöntem aktif olursa P7-5 firma-level matching için REVİZYON yapılacak.
 - **APIFY-01**: OSINT_Scraper_Motoru araştırması tamamlandı. 3 araç kıyaslandı: Apify (GO - mevcut adapter entegre edilecek, anti-bot siteler icin), Firecrawl (GO with CAVEATS - yedek opsiyon, AGPL self-host riski), Scrapy (NO for MVP - buyuk refactoring). Sonuc: `data/orchestrator/apify_research_result.json`. APIFY-02/03 baslayabilir.
+- **APIFY-02**: ApifyJobSource implementasyonu tamamlandi. `src/company_master/intelligence/job_intelligence/sources/apify_job_source.py` olusturuldu. SourceSpec registry'e 'apify' source_id eklendi (enabled=False, APIFY_TOKEN gerekli). Import testi gecildi. ApifyClient (APIFY-01) zaten mevcuttur; BaseJobSource override ile run_full_scrape(), discover_job_urls(), _apify_item_to_scraped_job() metodlari eklendi. Pilot calistirma hazir — APIFY_TOKEN env set edilince run_apify_pilot() calisacak. APIFY-03 (webhook) icin temel altyapi hazir.
+- **Y23**: PayTR odeme arastirmasi tamamlandi (iyzico/Stripe yerine). TCMB lisansli, iFrame API tercih edildi (PCI-DSS merchant'a yuklenmez). Hash: HMAC-SHA256(merchant_key, merchant_oid+merchant_salt+status+total_amount). Blocker: magaza basvurusu onayi (1-3 is gunu). Detay: `data/orchestrator/y23_paytr_result.json`.
 
 ## Harici Ajan Bildirimleri
 
