@@ -1,0 +1,21 @@
+{
+  "name": "huginn-data-insights",
+  "version": "1.0.0",
+  "description": "FastAPI dashboard + Obsidian vault + ETL pipeline",
+  "private": true,
+  "scripts": {
+    "build:wiki": "python scripts/build_wiki_index.py",
+    "sync:vault": "python scripts/sync_obsidian_vault.py",
+    "validate:task-board": "python -c \"import json; t=json.load(open('data/orchestrator/task_board.json')); print('Toplam gorev:', len(t))\"",
+    "test": "python -m pytest tests/ -x -q"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

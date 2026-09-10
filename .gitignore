@@ -38,8 +38,12 @@ logs/
 _trash/
 tmp/
 
+# V10 içeriklerini engelle (şikayet raporları, eski belgeler, vb.)
+V10/
+
 # Araç/repair dosyaları
 data/orchestrator/task_board_corrupt_backup.json
+data/orchestrator/
 check_*.py
 fix_*.py
 inspect_*.py
@@ -48,6 +52,10 @@ final_validate.py
 check_wiki_counts.py
 examine_json.py
 find_*.py
+
+# Node.js
+node_modules/
+package-lock.json
 
 # Obsidian kişisel/yerel çalışma alanı durumu (workspace paylaşılmaz, plugin listesi paylaşılır)
 .obsidian/workspace.json
