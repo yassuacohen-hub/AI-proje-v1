@@ -1026,13 +1026,13 @@
     "baslik": "Kariyer.net Scraper",
     "sahip": "kariyer_scraper",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-09T12:50:18",
-    "bitis": null,
+    "bitis": "2026-09-10T19:23:23.768230",
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/sources/kariyer_net.py"
     ],
-    "not": "Task handed off from web_kazima to kariyer_scraper"
+    "not": "Kariyer.net scraper tamam: kariyer_net.py yazildi, import testi OK. BaseJobSource'dan miras alinan discover/parse/run_full_scrape metodlari mevcut."
   },
   {
     "task_id": "P7-7",
