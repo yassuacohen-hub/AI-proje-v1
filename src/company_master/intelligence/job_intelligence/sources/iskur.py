@@ -1,5 +1,16 @@
 ﻿# -*- coding: utf-8 -*-
-"""Job Intelligence — İŞKUR Resmi İş İlanları Scraper (Basit Versiyon)."""
+"""Job Intelligence — İŞKUR Resmi İş İlanları Scraper (Public Metadata Only).
+
+Y21 araştırması (2026-09-10) sonucu:
+- Açık API YOK: e-sub tamamen HTML/ASP.NET WebForms
+- Özel sektör işyeri adları GİZLİ: üye girişi gerekiyor
+- Public erişimdeki veri: ilan no, başlık, şehir/ilçe, tarih, pozisyon sayısı
+- KVKK/ToS riski yüksek: authenticated access yoksa firma-level matching YAPILAMAZ
+
+Bu modül şu anda sadece public ilan metadata'sını toplar.
+Eğer authenticated İşveren Kayıt Sorgulama erişimi sağlanırsa,
+firma adı + VKN eşleştirme moduna REVİZYON yapılacak.
+"""
 from __future__ import annotations
 
 import json

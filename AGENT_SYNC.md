@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-10T12:49:00
+> Son guncelleme: 2026-09-10T20:05:00
 > Kaynak: data/orchestrator/task_board.json
 
 ## ÔÜí Frontend/Web Oturumu ├ûzeti (2026-09-10, dashboard ajan─▒) ÔÇö DI─ŞER AJANLARA ├ûNEML─░
@@ -36,9 +36,6 @@ Bu oturumda web dashboard'a **uyelik/oturum sistemi** eklendi; tum endpoint'ler 
 | X02 | BUG: VKN zenginlestirme (MERSIS + web fo | gelistirici | P1 | blocked |
 | X05 | Y26: API key yonetimi - rotasyon + kulla | gelistirici | P2 | plan |
 | GOV-01 | Orkestrasyon reconciliation denetimi ve  | koordinator | P0 | aktif |
-| APIFY-01 | Apify uygunluk ve entegrasyon mimarisi a | harici_arastirma | P1 | aktif |
-| DATA-01 | Kanit Hatti Duzeltmeleri: ROOT koku + te | gelistirici | P0 | done |
-| P7-GATE | Job Intelligence Dogrulama Kapisi: tek m | kalite | P0 | done |
 | APIFY-02 | Apify REST Adaptoru + Polling Pilotu (10 | web_kazima | P1 | plan |
 | APIFY-03 | Apify Webhook + Kalici Olay Isleme (idem | web_kazima | P1 | plan |
 | MCP-01 | Kontrollu Apify MCP Erisimi: izinli arac | arastirmaci | P2 | plan |
@@ -60,6 +57,7 @@ Bu oturumda web dashboard'a **uyelik/oturum sistemi** eklendi; tum endpoint'ler 
 | X04 | UYELIK: sifre sifirlama + kurumsal e-pos | gelistirici | 2026-09-09 |
 | SEC-01 | API Guvenlik Regresyonu: admin fail-clos | gelistirici | 2026-09-10 |
 | SEC-02 | Ag ve Ajan Izolasyonu: TLS verify + work | gelistirici | 2026-09-10 |
+| APIFY-01 | Apify uygunluk ve entegrasyon mimarisi a | harici_arastirma | 2026-09-10 |
 
 ## Son Handoff'lar
 
@@ -70,5 +68,16 @@ Bu oturumda web dashboard'a **uyelik/oturum sistemi** eklendi; tum endpoint'ler 
 - **SEC-02**: TLS dogrulama varsayilan yapildi (verify=False kal | done: dinamik domain policy_for + workspace containment, 21 regresyon testi passed (2026-09-10)
 - **SEC-03**: scripts altinda TLS verify=False/CERT_NONE temizlendi (8 script), commit 45cd8fe
 - **P7-GATE**: tek migration kopyasi dogrulandi, test_job_intelligence_dikey.py dikey akis testleri (11 passed), commit 7de2abc; DATA-01/P7-GATE/SEC-01/SEC-02 panoda done (2026-09-10)
+- **Y21**: ISKUR araştırması tamamlandı — public e-sub'da açık API YOK, özel sektör işyeri adları GİZLİ. P7-5 firma-eşleştirme odaklı değil, ilan metadata + aggregation intelligence odaklı çalışacak. Not: İşveren Kayıt Sorgulama authenticated erişimle SGK/VKN üzerinden firma adı üretebilir; bu yöntem aktif olursa P7-5 firma-level matching için REVİZYON yapılacak.
+- **APIFY-01**: OSINT_Scraper_Motoru araştırması tamamlandı. 3 araç kıyaslandı: Apify (GO - mevcut adapter entegre edilecek, anti-bot siteler icin), Firecrawl (GO with CAVEATS - yedek opsiyon, AGPL self-host riski), Scrapy (NO for MVP - buyuk refactoring). Sonuc: `data/orchestrator/apify_research_result.json`. APIFY-02/03 baslayabilir.
+
+## Harici Ajan Bildirimleri
+
+| Ajan | Dosya | Durum |
+|------|-------|-------|
+| kariyer_scraper | `workspace/external/NOTIFICATION_Y21_P75_kariyer_scraper.md` | ✅ Bildirim yazıldı |
+| kazi_scraper | `workspace/external/NOTIFICATION_Y21_P75_kazi_scraper.md` | ✅ Bildirim yazıldı |
+
+**Not:** Kariyer.net scraper (P7-6) Y21 sonuçlarından doğrudan etkilenmez. İSKUR scraper (P7-5) authenticated erişim olursa revize edilecek.
 
 

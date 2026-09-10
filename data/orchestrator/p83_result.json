@@ -1,0 +1,349 @@
+{
+  "task_id": "P8-3",
+  "baslik": "İş ilanı takip motoru: büyüme sinyali skorlama motoru",
+  "sahip": "arastirmaci",
+  "oncelik": "P1",
+  "durum": "done",
+  "baslangic": "2026-09-09T15:47:15",
+  "bitis": "2026-09-09T23:13:00",
+  "dosyalar": [
+    "scripts/growth_signal_scorer.py",
+    "data/orchestrator/p83_result.json"
+  ],
+  "ozet": "Büyüme sinyali skorlama motoru tasarımı, implementasyonu ve örnek veri ile testi tamamlandı. Beş sinyal (ilan artış hızı, yeni şehir, yeni departman, yönetici işe alımı, satış ekip genişlemesi) için skorlama motoru geliştirildi. Skorlama formülü, eşik değerleri ve negatif trend decay mekanizması tanımlandı. company_signals tablosuna growth skoru yazar; company_intelligence_scores.growth_score alanını doldurur.",
+  "design": {
+    "motor_tanimi": "İş ilanı (job_postings) verilerinden büyüme sinyalleri tespit eden, her sinyale 0-100 skor ve confidence atayan, ağırlıklı ortalama ile growth_score üreten motor.",
+    "hedef_tablo": "company_intelligence_scores.growth_score (0-100)",
+    "yazilan_tablo": "company_signals (signal_type, signal_subtype, score, confidence, evidence)",
+    "formula": "growth_score = sum(sub_score_i * confidence_i * weight_i) / sum(confidence_i * weight_i), clamped [0, 100]",
+    "negatif_trend_kurali": "Hiring trend negatifse (growth_rate < 0): growth_score * (1 + growth_rate/100). Clamped [0, 100]."
+  },
+  "signals": [
+    {
+      "signal_type": "growth",
+      "signal_subtype": "hiring_surge",
+      "weight": 0.3,
+      "description": "İş ilanı artış hızı (aylık %)",
+      "eses": "current_posting_count vs previous_posting_count",
+      "scoring": [
+        {
+          "threshold": ">= 50% increase",
+          "score": 100,
+          "label": ">=50pct_increase"
+        },
+        {
+          "threshold": "20-49% increase",
+          "score": 80,
+          "label": "20-49pct_increase"
+        },
+        {
+          "threshold": "10-19% increase",
+          "score": 60,
+          "label": "10-19pct_increase"
+        },
+        {
+          "threshold": "0-9% increase",
+          "score": 40,
+          "label": "0-9pct_increase"
+        },
+        {
+          "threshold": "< 0% decline",
+          "score": "40 * (1 + rate/100), clamped [0,39]",
+          "label": "<0pct_decline"
+        }
+      ],
+      "confidence_formula": "min(100, max(10, current_count * 10)); first_hiring oldugunda current_count * 20",
+      "hiring_trend_kaplama": ">= 50%: accelerating, >= 10% < 50%: stable, -10%..0%: decelerating, < -10%: contracting"
+    },
+    {
+      "signal_type": "geo_expansion",
+      "signal_subtype": "new_location",
+      "weight": 0.15,
+      "description": "Yeni şehir/lokasyon açılışı sinyali",
+      "eses": "current_month cities - historical_cities",
+      "scoring": [
+        {
+          "threshold": "3+ yeni şehir",
+          "score": 100,
+          "label": "3+_new_cities"
+        },
+        {
+          "threshold": "2 yeni şehir",
+          "score": 90,
+          "label": "2_new_cities"
+        },
+        {
+          "threshold": "1 yeni şehir",
+          "score": 80,
+          "label": "1_new_city"
+        },
+        {
+          "threshold": "0 yeni şehir",
+          "score": 0,
+          "label": "no_new_locations"
+        }
+      ],
+      "confidence_formula": "100 if >= 2 postings in new city, else 70"
+    },
+    {
+      "signal_type": "org_change",
+      "signal_subtype": "new_department",
+      "weight": 0.1,
+      "description": "Yeni departman oluşumu sinyali",
+      "eses": "current_month departments - historical_departments",
+      "scoring": [
+        {
+          "threshold": "3+ yeni departman",
+          "score": 100,
+          "label": "3+_new_departments"
+        },
+        {
+          "threshold": "2 yeni departman",
+          "score": 90,
+          "label": "2_new_departments"
+        },
+        {
+          "threshold": "1 yeni departman",
+          "score": 80,
+          "label": "1_new_department"
+        },
+        {
+          "threshold": "0 yeni departman",
+          "score": 0,
+          "label": "no_new_departments"
+        }
+      ],
+      "confidence_formula": "min(100, new_dept_count * 40 + 20)"
+    },
+    {
+      "signal_type": "investment",
+      "signal_subtype": "executive_hire",
+      "weight": 0.25,
+      "description": "Yönetici/kadro işe alımı sinyali (director, c-level, vp, head, manager, lead)",
+      "eses": "job_postings.seniority_level in EXECUTIVE_LEVELS",
+      "scoring": [
+        {
+          "threshold": "3+ yönetici",
+          "score": 100,
+          "label": "3+_executive_hires"
+        },
+        {
+          "threshold": "2 yönetici",
+          "score": 85,
+          "label": "2_executive_hires"
+        },
+        {
+          "threshold": "1 yönetici",
+          "score": 60,
+          "label": "1_executive_hire"
+        },
+        {
+          "threshold": "0 yönetici",
+          "score": 0,
+          "label": "no_executive_hires"
+        }
+      ],
+      "confidence_formula": "100 (seniority_level data explicit)"
+    },
+    {
+      "signal_type": "tech_transformation",
+      "signal_subtype": "sales_expansion",
+      "weight": 0.2,
+      "description": "Satış ekip genişlemesi sinyali (Sales, BD, Account Manager, Revenue, Channel, Partner)",
+      "eses": "job_postings.title veya department keyword match",
+      "scoring": [
+        {
+          "threshold": "6+ satış",
+          "score": 100,
+          "label": "6+_sales_hires"
+        },
+        {
+          "threshold": "3-5 satış",
+          "score": 75,
+          "label": "3-5_sales_hires"
+        },
+        {
+          "threshold": "1-2 satış",
+          "score": 50,
+          "label": "1-2_sales_hires"
+        },
+        {
+          "threshold": "0 satış",
+          "score": 0,
+          "label": "no_sales_hires"
+        }
+      ],
+      "confidence_formula": "min(100, sales_count * 25 + 50)"
+    }
+  ],
+  "weights_total": 1.0,
+  "db_integration": {
+    "company_signals_insert": {
+      "signal_type": "growth",
+      "signal_subtype": "varies",
+      "score": "0-100",
+      "confidence": "0-100",
+      "evidence": "JSONB with posting counts, growth rate, new cities/depts, exec hire details",
+      "valid_until": "NULL (persistent until recalc)",
+      "metadata": "{source: job_postings, engine: growth_signal_scorer}"
+    },
+    "company_intelligence_score_update": "growth_score column updated via scorer.py ON CONFLICT (company_id) DO UPDATE"
+  },
+  "test_data": {
+    "description": "3 örnek şirket (sample data) ile test",
+    "companies": [
+      {
+        "name": "StarTech Engineering",
+        "description": "Güçlü büyüme — 5 ilan (Ağustos) → 15 ilan (Eylül), 3 yeni şehir, 2 yeni departman, 3 yönetici, 3 satış",
+        "aug_postings": 5,
+        "sep_postings": 15,
+        "growth_rate_pct": 200.0
+      },
+      {
+        "name": "SteadyCo",
+        "description": "Orta büyüme — 8 ilan (Ağustos) → 10 ilan (Eylül), tek şehir, tek departman, 1 yönetici, 1 satış",
+        "aug_postings": 8,
+        "sep_postings": 10,
+        "growth_rate_pct": 25.0
+      },
+      {
+        "name": "DeclineCorp",
+        "description": "Daralma — 80 ilan (Ağustos) → 3 ilan (Eylül), -96.25% büyüme",
+        "aug_postings": 80,
+        "sep_postings": 3,
+        "growth_rate_pct": -96.25
+      }
+    ]
+  },
+  "test_results": [
+    {
+      "company_name": "StarTech Engineering",
+      "growth_score": 97.5,
+      "hiring_trend": "accelerating",
+      "growth_rate_pct": 200.0,
+      "signal_scores": {
+        "hiring_surge": {
+          "score": 100.0,
+          "confidence": 100.0,
+          "threshold": ">=50pct_increase"
+        },
+        "new_location": {
+          "score": 100.0,
+          "confidence": 100.0,
+          "threshold": "3+_new_cities",
+          "new_cities": [
+            "Ankara",
+            "Istanbul",
+            "Izmir"
+          ]
+        },
+        "new_department": {
+          "score": 100.0,
+          "confidence": 100.0,
+          "threshold": "3+_new_departments",
+          "new_departments": [
+            "Engineering",
+            "HR",
+            "Sales"
+          ]
+        },
+        "executive_hire": {
+          "score": 100.0,
+          "confidence": 100.0,
+          "threshold": "3+_executive_hires",
+          "count": 3
+        },
+        "sales_expansion": {
+          "score": 75.0,
+          "confidence": 100.0,
+          "threshold": "3-5_sales_hires",
+          "count": 5
+        }
+      }
+    },
+    {
+      "company_name": "SteadyCo",
+      "growth_score": 47.87,
+      "hiring_trend": "stable",
+      "growth_rate_pct": 25.0,
+      "signal_scores": {
+        "hiring_surge": {
+          "score": 80.0,
+          "confidence": 100.0,
+          "threshold": "20-49pct_increase"
+        },
+        "new_location": {
+          "score": 0.0,
+          "confidence": 70.0,
+          "threshold": "no_new_locations"
+        },
+        "new_department": {
+          "score": 0.0,
+          "confidence": 20.0,
+          "threshold": "no_new_departments"
+        },
+        "executive_hire": {
+          "score": 60.0,
+          "confidence": 100.0,
+          "threshold": "1_executive_hire",
+          "count": 1
+        },
+        "sales_expansion": {
+          "score": 50.0,
+          "confidence": 75.0,
+          "threshold": "1-2_sales_hires",
+          "count": 1
+        }
+      }
+    },
+    {
+      "company_name": "DeclineCorp",
+      "growth_score": 0.01,
+      "hiring_trend": "contracting",
+      "growth_rate_pct": -96.25,
+      "signal_scores": {
+        "hiring_surge": {
+          "score": 0.01,
+          "confidence": 30.0,
+          "threshold": "<0pct_decline"
+        },
+        "new_location": {
+          "score": 0.0,
+          "confidence": 70.0,
+          "threshold": "no_new_locations"
+        },
+        "new_department": {
+          "score": 0.0,
+          "confidence": 20.0,
+          "threshold": "no_new_departments"
+        },
+        "executive_hire": {
+          "score": 0.0,
+          "confidence": 100.0,
+          "threshold": "no_executive_hires"
+        },
+        "sales_expansion": {
+          "score": 0.0,
+          "confidence": 50.0,
+          "threshold": "no_sales_hires"
+        }
+      },
+      "trend_note": "Negative trend (-96.25%); score decayed via (1 + rate/100)"
+    }
+  ],
+  "validation": {
+    "starTech_expected": "97+ (yuksek, hepsi sinyaller aktif)",
+    "starTech_actual": "97.5 — PASS",
+    "steadyExpected": "40-55 arasi (moderat)",
+    "steadyActual": "47.87 — PASS",
+    "declineExpected": "0 yakini (contracting, decay)",
+    "declineActual": "0.01 — PASS",
+    "all_tests_passed": true
+  },
+  "sonraki_adimlar": [
+    "Growth signal scorer, analyze_job_signals pipeline'a entegre edilebilir (P7-8)",
+    "company_signals tablosuna yazmak icin DB insertion kodu eklenebilir",
+    "Gerçek job_postings verisiyle production testi yapılabilir",
+    "P8-4 (risk sinyali), P8-5 (tech), P8-6 (investment/geo), P8-7 (geo) için bu motor referans alınabilir"
+  ]
+}

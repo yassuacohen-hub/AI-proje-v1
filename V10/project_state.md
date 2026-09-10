@@ -148,26 +148,26 @@ Ankara B2B Company Master â€” V1.0
 
 
 
-## 2026-09-07 — Kalite Skoru Ýyileþtirmeleri ve Faz 4 Baþlangýcý
+## 2026-09-07 ï¿½ Kalite Skoru ï¿½yileï¿½tirmeleri ve Faz 4 Baï¿½langï¿½cï¿½
 
 ### Tamamlanan
-- NULL source_record_id temizliði: 1,200 firma source_records'a baðlandý (P4-2)
-- Website backfill: 5,035 firmanýn website_domain alaný raw_website'den dolduruldu
-- Kalite skoru formülü yeniden tasarlandý:
+- NULL source_record_id temizliï¿½i: 1,200 firma source_records'a baï¿½landï¿½ (P4-2)
+- Website backfill: 5,035 firmanï¿½n website_domain alanï¿½ raw_website'den dolduruldu
+- Kalite skoru formï¿½lï¿½ yeniden tasarlandï¿½:
   - Telefon(15), Email(10), Web(10), NACE(15), Adres(10), Vergi(10), Parsel(5)
   - Yeni bonuslar: source_record_id(+5), payload(+5)
-  - Ceza oranlarý düþürüldü
-- Ortalama kalite skoru: 22.66 › 63.94 (10,105 firma)
-- P4-3 web kazýma test edildi: 3,065 site scrape, 0 yeni VKN bulunamadý › blocked
+  - Ceza oranlarï¿½ dï¿½ï¿½ï¿½rï¿½ldï¿½
+- Ortalama kalite skoru: 22.66 ï¿½ 63.94 (10,105 firma)
+- P4-3 web kazï¿½ma test edildi: 3,065 site scrape, 0 yeni VKN bulunamadï¿½ ï¿½ blocked
 
-### Ek Metrik Önerisi (Faz 5)
-- Yeni kalite skoru ek metrikleri önerildi ve dokümante edildi:
+### Ek Metrik ï¿½nerisi (Faz 5)
+- Yeni kalite skoru ek metrikleri ï¿½nerildi ve dokï¿½mante edildi:
   - AI proje v1/V10/12_kalite_metrikleri/01_kalite_skoru_ek_metrikleri.md
-- Önerilen metrikler: iþ ilaný sayýsý(0-8), çalýþan sayýsý(0-7), sosyal medya(0-5),
-  e-posta validasyonu(0-3), telefon formatý(0-2), veri güncelliði(0-8), kaynak çeþitliliði(0-5)
-- P5-1 ile P5-5 task_board'a eklendi, ajan görüþleri bekleniyor
+- ï¿½nerilen metrikler: iï¿½ ilanï¿½ sayï¿½sï¿½(0-8), ï¿½alï¿½ï¿½an sayï¿½sï¿½(0-7), sosyal medya(0-5),
+  e-posta validasyonu(0-3), telefon formatï¿½(0-2), veri gï¿½ncelliï¿½i(0-8), kaynak ï¿½eï¿½itliliï¿½i(0-5)
+- P5-1 ile P5-5 task_board'a eklendi, ajan gï¿½rï¿½ï¿½leri bekleniyor
 
-### Açýk Sorular
-- Web kazýma VKN için etkisiz çýktý. MERSIS API veya GIB vkn.gov.tr denenecek mi?
-- Yeni ek metriklerin aðýrlýklarýna diðer ajanlar ne diyecek?
-- Veri güncelliði metriði için otomatik scrape zamanlamasý kurulacak mý?
+### Aï¿½ï¿½k Sorular
+- Web kazï¿½ma VKN iï¿½in etkisiz ï¿½ï¿½ktï¿½. MERSIS API veya GIB vkn.gov.tr denenecek mi?
+- Yeni ek metriklerin aï¿½ï¿½rlï¿½klarï¿½na diï¿½er ajanlar ne diyecek?
+- Veri gï¿½ncelliï¿½i metriï¿½i iï¿½in otomatik scrape zamanlamasï¿½ kurulacak mï¿½?

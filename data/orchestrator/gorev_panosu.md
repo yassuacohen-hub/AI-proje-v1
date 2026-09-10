@@ -15,7 +15,7 @@
 | P7-2 | Job Intelligence modul yapisi olusturma | mimar | P0 | plan | src/company_master/intelligence/job_intelligence/ |
 | P7-5 | Ã„Â°SKUR Scraper | kazi_scraper | P1 | aktif | src/company_master/intelligence/job_intelligence/sources/iskur.py |
 | P7-6 | Kariyer.net Scraper | kariyer_scraper | P2 | aktif | src/company_master/intelligence/job_intelligence/sources/kariyer_net.py |
-| Y21 | ARASTIRMA: ISKUR kurumsal eslestirme verisi (acik API + risk analizi) | arastirmaci |  | plan | - |
+| Y21 | ARASTIRMA: ISKUR kurumsal eslestirme verisi (acik API + risk analizi) | arastirmaci | done | Acik API yok, ozel sektor isyeri adlari gizli; ilan metadata + aggregation intelligence odakli calisilacak. Not: Isveren Kayit Sorgulama authenticated erisimle SGK/VKN uzerinden firma adi uretebilir; bu yontem aktif olursa P7-5 firma-level matching icin revize edilecek. Detay: data/orchestrator/y21_result.json |
 | Y23 | Odeme entegrasyonu (iyzico/Stripe) - otomatik kredi satisi | gelistirici |  | plan | - |
 | Y24 | Uye e-posta dogrulama linki + Telegram hosgeldin raporu | gelistirici |  | plan | - |
 | Y26 | Enterprise API key yonetimi + kullanim raporu | gelistirici |  | plan | - |

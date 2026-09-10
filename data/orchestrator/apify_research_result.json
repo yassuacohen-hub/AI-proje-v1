@@ -1,0 +1,151 @@
+{
+  "research_date": "2026-09-10",
+  "researcher": "yasu-9router",
+  "task_id": "APIFY-01",
+  "scope": "OSINT_Scraper_Motoru alt bileşeni olarak scraping motoru araştırması: Apify + Firecrawl + Scrapy kıyaslama",
+  "summary": "Mevcut OSINT_Scraper_Motoru (requests+BeautifulSoup tabanlı) için Apify en iyi entegrasyon adayıdır. Firecrawl alternatif olarak değerlendirilebilir. Scrapy ise mevcut koda en yakın, ancak infra maliyeti yüksek olan bir seçenektir. Bütün araştırma PermissionRouter, SourceSpec ve BaseJobSource API'si ile uyumlu filtreden geçirildi.",
+  "current_osint_motor": {
+    "name": "OSINT_Scraper_Motoru",
+    "core_stack": "requests + BeautifulSoup + PermissionRouter",
+    "scraping_permission_router": "src/company_master/utils/scraping_permission_router.py",
+    "source_registry": "src/company_master/engine/source_registry.py",
+    "base_job_source": "src/company_master/intelligence/job_intelligence/sources/base.py",
+    "existing_apify_adapter": "src/company_master/intelligence/job_intelligence/sources/apify_client.py (mevcut ama SourceSpec'e bagli degil)",
+    "post_scrape_workflow": "scripts/post_scrape_workflow.py (Adim 5-7: ingest_job_postings.py -> analyze_job_signals.py -> recalc_intelligence_scores.py)",
+    "job_intelligence_sources": {
+      "company-career-pages": {"enabled": true, "domain": "auto", "output": "data/job_intelligence/company_career_jobs.jsonl"},
+      "iskur": {"enabled": true, "domain": "www.iskur.gov.tr", "output": "data/job_intelligence/iskur_jobs.jsonl"},
+      "kariyer-net": {"enabled": false, "domain": "www.kariyer.net", "output": "data/job_intelligence/kariyer_net_jobs.jsonl"}
+    }
+  },
+  "apify": {
+    "type": "managed_cloud_platform",
+    "pricing": {
+      "plans": [
+        {"name": "Free", "monthly": "$0", "included_credits": "$5", "cu_price": "$0.20/CU", "max_ram": "16 GB", "max_concurrent": 25},
+        {"name": "Starter", "monthly": "$29", "included_credits": "$29", "cu_price": "$0.20/CU", "max_ram": "64 GB", "max_concurrent": 32},
+        {"name": "Scale", "monthly": "$199", "included_credits": "$199", "cu_price": "$0.16/CU", "max_ram": "256 GB", "max_concurrent": 128},
+        {"name": "Business", "monthly": "$999", "included_credits": "$999", "cu_price": "$0.13/CU", "max_ram": "512 GB", "max_concurrent": 256}
+      ],
+      "cu_definition": "1 CU = 1 GB RAM x 1 saat",
+      "overrun_billing": "Free'de bloklanir; odemeli planlarda sonraki faturaya yansir",
+      "store_discounts": "Bronze/Silver/Gold tier, hazir Actorlerde indirim",
+      "actor_pricing_models": ["Pay per usage (sadece platform maliyeti)", "Pay per event (baslangic + sonuc basina)", "Rental (2026 Ekim'de kalkiyor)"],
+      "addons": {"concurrent_run": "$5/run", "ram_per_gb": "$1/GB", "datacenter_proxy": "$0.60/IP"}
+    },
+    "osint_motoru_uyumu": {
+      "status": "HIGH",
+      "reason": "ApifyClient adapteri halihazirda kodda mevcut (APIFY-02). REST API ile actor calistirma, polling (5sn interval / 900sn timeout), dataset cekme mekanizmasi var.",
+      "integration_points": [
+        "SourceSpec.registry'e yeni bir 'apify' source_id eklenebilir",
+        "ApifyClient BaseJobSource icine inject edilebilir (discover_job_urls / parse_job_detail override)",
+        "PermissionRouter.check() Apify API cagrilarindan ONCE calisacak (domain whitelist + robots.txt)",
+        "Apify'dan gelen veri ayni ScrapedJob formatina cevrilip post_scrape_workflow Adim 5'e gonderilir",
+        "APIFY_TOKEN env degiskeninden alinir (halihazirda destekleniyor)"
+      ],
+      "risks": [
+        {"risk": "Maliyet", "severity": "MEDIUM", "detail": "500 firma kariyer sayfasi scrape = ~0.5-1 CU = $0.08-0.20. Gunluk 1000 firma = ~$50-150/ay."},
+        {"risk": "KVKK", "severity": "LOW", "detail": "Apify cloud'da veri isleniyor. Privacy policy review gerekli. KVKK_SAFE_DOMAINS ile uyumlu yonetilebilir."},
+        {"risk": "ToS", "severity": "MEDIUM", "detail": "Target sitelerin ToS'si Apify kullanimini yasaklayabilir. Actor run limit ile kontrollu yapilir."},
+        {"risk": "Vendor lock-in", "severity": "LOW", "detail": "ApifyClient adapteri mevcut; baska platforma gecis icin yeni adapter yazilabilir."},
+        {"risk": "Rate limit / cost limit", "severity": "LOW", "detail": "Free tier'de bloklanir; paid'de overage. Actor basina max cost limit konulabilir."}
+      ],
+      "go_no_go": "GO — ozellikle anti-bot korunmasi gerektiren siteler (kariyer.net, LinkedIn, Indeed) icin. IsKUR gibi KVKK-safe/anti-bot gerektirmeyen siteler icin mevcut requests+BS4 yeterli."
+    }
+  },
+  "firecrawl": {
+    "type": "saas_api_with_selfhost_option",
+    "pricing": {
+      "plans": [
+        {"name": "Free", "credits": 1000, "concurrent": 2, "rate_limit_scrape": "10/dk"},
+        {"name": "Hobby", "credits": "5K-8K", "concurrent": 5, "rate_limit_scrape": "100/dk"},
+        {"name": "Standard", "credits": "100K-160K", "concurrent": 25, "rate_limit_scrape": "500/dk"},
+        {"name": "Growth", "credits": "500K-650K", "concurrent": 50, "rate_limit_scrape": "5K/dk"},
+        {"name": "Scale", "credits": "1M", "concurrent": 100, "rate_limit_scrape": "10K/dk"}
+      ],
+      "credit_costs": {
+        "scrape": "1 credit / sayfa",
+        "crawl": "1 credit / sayfa",
+        "map": "1 credit / cagrı",
+        "search": "2 credit / 10 sonuc",
+        "interact": "2 credit / browser dakika",
+        "options_json_llm": "+4 credit / sayfa",
+        "options_enhanced": "+4 credit / sayfa",
+        "options_zdr": "+1 credit / sayfa",
+        "options_pdf": "+1 credit / PDF sayfasi"
+      },
+      "smart_upgrade": "Haziran 2026'dan itibaren: bakiye 0 oldugunda otomatik bir ust plana yukselir (pro-rated fark)."
+    },
+    "osint_motoru_uyumu": {
+      "status": "MEDIUM",
+      "reason": "Firecrawl markdown + structured JSON cikisi verir; mevcut BaseJobSource ScrapedJob formatina donusturulebilir. Ancak Apify kadar zengin Actor ekosistemi yok.",
+      "integration_points": [
+        "SourceSpec.registry'e 'firecrawl' source_id eklenebilir",
+        "FirecrawlClient yazilabilir (REST API wrapper)",
+        "Output: markdown -> BS4 parse -> ScrapedJob (title/description/technologies extract)",
+        "Crawl endpoint ile tum kariyer sayfasi URL'leri toplanabilir (limit parametreli)"
+      ],
+      "risks": [
+        {"risk": "AGPL-3.0 lisans (self-host)", "severity": "HIGH", "detail": "Self-host edilirse AGPL network-use clause ticari kullanimi etkileyebilir. Cloud API kullanilirsa sorun yok."},
+        {"risk": "Self-host infra maliyeti", "severity": "MEDIUM", "detail": "6 konteyner (api, playwright, redis, rabbitmq, postgres, foundationdb). Ops yuku yuksek."},
+        {"risk": "Credit tabanli billing", "severity": "MEDIUM", "detail": "Apify CU'dan daha basit ama aylik abonelik zorunlu."},
+        {"risk": "AI/LLM bagimliligi", "severity": "LOW", "detail": "JSON schema extraction icin LLM key gerekebilir (OpenAI/Ollama)."}
+      ],
+      "go_no_go": "GO with CAVEATS — Apify'den daha basit API, markdown ciktisi daha temiz. Ancak Actor ekosistemi olmadigi icin LinkedIn/Kariyer.net gibi zor sitelerde anti-bot destegi yetersiz. KVKK-safe basit siteler icin uygundur."
+    }
+  },
+  "scrapy": {
+    "type": "open_source_framework",
+    "pricing": {
+      "license": "BSD-3-Clause (tamamen ucretsiz)",
+      "infra_cost": "VPS $5/ay (hafif), proxy $30-200/ay (olcekli), muhendislik zamani en buyuk maliyet",
+      "zyte_services": {"smart_proxy": "~$29/ay+", "scrapy_cloud": "ayri ucretli managed deployment"}
+    },
+    "osint_motoru_uyumu": {
+      "status": "MEDIUM-LOW",
+      "reason": "Scrapy mevcut requests+BS4 yapisina en yakin alternatif. Ancak mevcut motor zaten BS4 ile calisiyor; Scrapy gecisi buyuk refactoring gerektirir.",
+      "integration_points": [
+        "Mevcut BaseJobSource yerine Scrapy Spider subclass yazilabilir",
+        "PermissionRouter -> Scrapy middleware olarak entegre edilebilir (RobotsTxtMiddleware zaten var)",
+        "Item pipeline -> ScrapedJob formatina donusturme",
+        "scrapy-playwright ile JS rendering eklenebilir"
+      ],
+      "risks": [
+        {"risk": "Anti-bot", "severity": "HIGH", "detail": "Scrapy tek basina Cloudflare/DataDome asmaz. scrapy-playwright + proxy gerekir."},
+        {"risk": "Infra yuku", "severity": "HIGH", "detail": "Kendi sunucu, proxy, schedule, monitoring, retry mekanizmasi insa etmek gerekir."},
+        {"risk": "Mevcut koda uyumsuzluk", "severity": "MEDIUM", "detail": "BaseJobSource, SourceSpec, post_scrape_workflow tumu Scrapy'ye uyarlanmali."},
+        {"risk": "JavaScript rendering", "severity": "MEDIUM", "detail": "scrapy-playwright eklenmeli; bu da infra yukunu artirir."}
+      ],
+      "go_no_go": "NO for MVP — Mevcut motor zaten calisiyor. Scrapy gecisi buyuk refactoring ve infra maliyeti gerektirir. Sadece cok yuksek hacimli (milyonlarca sayfa) scraping gerektiginde degerlendirilmeli."
+    }
+  },
+  "comparison_matrix": {
+    "headers": ["Kriter", "Apify", "Firecrawl", "Scrapy", "Mevcut (requests+BS4)"],
+    "rows": [
+      ["Baslangic maliyeti", "Free tier $5/ay", "Free 1000 credit/ay", "$0 (infra haric)", "$0"],
+      ["Anti-bot", "Built-in (residential+datacenter proxy)", "Cloud'da var, self-host yok", "DIY (proxy gerekli)", "Yok (VPN ile manual)"],
+      ["JS rendering", "Built-in (headless Chromium)", "Built-in (playwright)", "scrapy-playwright gerekli", "Yok"],
+      ["KVKK compliance", "Platform review gerekli", "Platform review gerekli", "Self-hosted = tam kontrol", "Self-hosted = tam kontrol"],
+      ["Entegrasyon kolayligi", "Yuksek (adapter mevcut)", "Orta (yeni client yazilmali)", "Dusuk (buyuk refactoring)", "Mevcut"],
+      ["ToS riski", "Orta (platformun ToS'si + target'in ToS'si)", "Orta", "Dusuk (dogrudan siz sorumlusunuz)", "Dusuk"],
+      ["Scale maliyeti", "$199-999/ay", "$83-333/ay", "Infra + proxy maliyeti", "$0"],
+      ["Actor/Marketplace", "1000+ hazir Actor", "Yok (kendi scraper'inizi yazarsiniz)", "Yok", "Yok"]
+    ]
+  },
+  "recommendations": {
+    "short_term": [
+      "Apify'i entegre et (APIFY-02/03): Mevcut apify_client.py'yi BaseJobSource'a bagla, SourceSpec'e 'apify' source_id ekle",
+      "Kariyer.net ve LinkedIn gibi anti-bot siteleri Apify uzerinden scrape et (mevcut requests+BS4 yetersiz)",
+      "IsKUR ve company-career-pages mevcut motor ile devam etsin (KVKK-safe, anti-bot gerektirmiyor, maliyet 0)"
+    ],
+    "medium_term": [
+      "Firecrawl'i yedek olarak degerlendir: Apify'de sorun olursa veya maliyet artarsa gecis opsiyonu",
+      "Firecrawl self-host AGPL riski nedeniyle cloud API kullanimi onerilir"
+    ],
+    "long_term": [
+      "Scrapy sadece cok yuksek hacimli scraping gerektiginde (milyonlarca sayfa) degerlendirilmeli",
+      "Scrapy'ye gecis karari = mevcut tum pipeline'in yeniden yazilmasi = 2-3 sprint maliyeti"
+    ]
+  },
+  "adr_onerisi": "GO — Apify entegrasyonu OSINT_Scraper_Motoru icin en mantikli adimdir. Mevcut adapter kodu var, PermissionRouter ile uyumlu, anti-bot korunmasi saglar. Firecrawl yedek opsiyon olarak tutulur. Scrapy sadece scale asamasinda degerlendirilir."
+}
