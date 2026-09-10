@@ -1,15 +1,15 @@
 {
-  "generated": "2026-09-10T20:05:43.208545+00:00",
+  "generated": "2026-09-10T20:46:41.942691+00:00",
   "v10_root": "C:/Projeler/Huginn Data Insights/AI proje v1/V10",
-  "page_count": 55,
+  "page_count": 53,
   "hubs": [
     {
       "path": "00-Home.md",
-      "links_in": 33
+      "links_in": 31
     },
     {
       "path": "00_ana_belgeler/01_sirket_master_ana_belgesi.md",
-      "links_in": 28
+      "links_in": 27
     },
     {
       "path": "project_state.md",
@@ -20,8 +20,8 @@
       "links_in": 20
     },
     {
-      "path": "06_arsiv/README.md",
-      "links_in": 13
+      "path": "07_referanslar/01_veri_kaynagi_envanteri.md",
+      "links_in": 12
     },
     {
       "path": "10_mvp_kapsam.md",
@@ -32,29 +32,20 @@
       "links_in": 12
     },
     {
-      "path": "04_karşılaştırmalar/01_v9_ile_karsilastirma.md",
-      "links_in": 11
-    },
-    {
-      "path": "07_referanslar/01_veri_kaynagi_envanteri.md",
+      "path": "06_arsiv/README.md",
       "links_in": 11
     },
     {
       "path": "10_ankara_osb_sentez.md",
       "links_in": 11
+    },
+    {
+      "path": "11_osint_motoru/OSINT_Scraper_Motoru.md",
+      "links_in": 11
     }
   ],
-  "orphans": [
-    "README.md",
-    "templates/Frontmatter-template.md"
-  ],
-  "_broken_links": [
-    "08-Ajanlar/README.md -> 07_referanslar/README",
-    "CHANGELOG.md -> ../x",
-    "CHANGELOG.md -> ../../AGENTS",
-    "CHANGELOG.md -> CLAUDE",
-    "CHANGELOG.md -> AGENT_SYNC"
-  ],
+  "orphans": [],
+  "_broken_links": [],
   "pages": {
     "00-Home.md": {
       "path": "00-Home.md",
@@ -134,8 +125,6 @@
         "11_osint_motoru/Orkestrator.md",
         "CHANGELOG.md",
         "project_state.md",
-        "README.md",
-        "templates/Frontmatter-template.md",
         "TODO.md"
       ]
     },
@@ -183,8 +172,7 @@
         "09_kurallar_ve_promptlar/11_unvan_kisaltma_ve_tabela_kurallari.md",
         "10_ankara_osb_sentez.md",
         "10_mvp_kapsam.md",
-        "project_state.md",
-        "README.md"
+        "project_state.md"
       ]
     },
     "00_ana_belgeler/02_hugins_master_kaynak_dokumani.md": {
@@ -292,8 +280,7 @@
         "07_referanslar/02_ankara_osb_ekosistemi_arastirma_notu.md",
         "09_kurallar_ve_promptlar/01_kasa_kurallari.md",
         "10_ankara_osb_sentez.md",
-        "10_mvp_kapsam.md",
-        "README.md"
+        "10_mvp_kapsam.md"
       ]
     },
     "05_versiyonlar/01_versiyon_6_baglam_dokumani.md": {
@@ -315,8 +302,7 @@
         "04_karşılaştırmalar/01_v9_ile_karsilastirma.md",
         "05_versiyonlar/01_versiyon_7_baglam_dokumani.md",
         "05_versiyonlar/01_versiyon_8_baglam_dokumani.md",
-        "05_versiyonlar/01_versiyon_9_baglam_dokumani.md",
-        "README.md"
+        "05_versiyonlar/01_versiyon_9_baglam_dokumani.md"
       ]
     },
     "05_versiyonlar/01_versiyon_7_baglam_dokumani.md": {
@@ -340,8 +326,7 @@
         "00_ana_belgeler/01_sirket_master_ana_belgesi.md",
         "04_karşılaştırmalar/01_v9_ile_karsilastirma.md",
         "05_versiyonlar/01_versiyon_8_baglam_dokumani.md",
-        "05_versiyonlar/01_versiyon_9_baglam_dokumani.md",
-        "README.md"
+        "05_versiyonlar/01_versiyon_9_baglam_dokumani.md"
       ]
     },
     "05_versiyonlar/01_versiyon_8_baglam_dokumani.md": {
@@ -365,8 +350,7 @@
         "00_ana_belgeler/01_sirket_master_ana_belgesi.md",
         "04_karşılaştırmalar/01_v9_ile_karsilastirma.md",
         "05_versiyonlar/01_versiyon_7_baglam_dokumani.md",
-        "05_versiyonlar/01_versiyon_9_baglam_dokumani.md",
-        "README.md"
+        "05_versiyonlar/01_versiyon_9_baglam_dokumani.md"
       ]
     },
     "05_versiyonlar/01_versiyon_9_baglam_dokumani.md": {
@@ -393,8 +377,7 @@
         "05_versiyonlar/01_versiyon_8_baglam_dokumani.md",
         "07_referanslar/10_apify_entegrasyon_arastirmasi_20260910.md",
         "08-Ajanlar/02_mimar_ajan.md",
-        "08-Ajanlar/05_kalite_ajan.md",
-        "README.md"
+        "08-Ajanlar/05_kalite_ajan.md"
       ]
     },
     "06_arsiv/README.md": {
@@ -422,9 +405,7 @@
         "05_versiyonlar/01_versiyon_9_baglam_dokumani.md",
         "06_arsiv/README.md",
         "09_kurallar_ve_promptlar/01_kasa_kurallari.md",
-        "09_kurallar_ve_promptlar/README.md",
-        "README.md",
-        "templates/Frontmatter-template.md"
+        "09_kurallar_ve_promptlar/README.md"
       ]
     },
     "07_referanslar/01_veri_kaynagi_envanteri.md": {
@@ -450,6 +431,7 @@
         "07_referanslar/04_web_kazima_kaynak_arastirmasi.md",
         "08-Ajanlar/03_arastirmaci_ajan.md",
         "08-Ajanlar/06_web_kazima_uzmani.md",
+        "08-Ajanlar/README.md",
         "09_kurallar_ve_promptlar/05_acik_veri_ve_kazina_politikasi.md",
         "10_ankara_osb_sentez.md",
         "11_osint_motoru/OSINT_Scraper_Motoru.md"
@@ -871,8 +853,8 @@
       "path": "08-Ajanlar/README.md",
       "title": "Temel ilke",
       "summary": "﻿# Ajanlar ve Gelişime Açık Yapı Bu bölüm, proje içindeki yapay zeka ajanlarının sorumluluk alanlarını, sınırlarını ve gelişime açık yapısını açıklar. - Her ajan tek bir ana sorumluluğa sahip olmalıdı…",
-      "size": 4810,
-      "updated": "2026-09-10T19:30:37.153036+00:00",
+      "size": 4829,
+      "updated": "2026-09-10T20:44:22.217162+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -886,7 +868,7 @@
         "Orkestrator",
         "01_etl_mimarisi",
         "01_sirket_master_ana_belgesi",
-        "07_referanslar/README",
+        "07_referanslar/01_veri_kaynagi_envanteri",
         "10_apify_entegrasyon_arastirmasi_20260910",
         "01_mvp_gereksinimleri",
         "CHANGELOG",
@@ -1256,8 +1238,8 @@
       "path": "CHANGELOG.md",
       "title": "[2026-09-01] Company Master PostgreSQL Migration Seti (Kimi Code)",
       "summary": "﻿# CHANGELOG Kronolojik değişiklik günlüğü. - **P0 tamamlandı:** Company Master PostgreSQL şeması numaralı SQL migration'ları olarak üretildi: - src/company_master/schema/migrations/0001_core.sql — uz…",
-      "size": 14321,
-      "updated": "2026-09-10T19:30:37.183900+00:00",
+      "size": 14300,
+      "updated": "2026-09-10T20:46:33.775820+00:00",
       "type": "unknown",
       "tags": [],
       "links_out": [
@@ -1266,11 +1248,7 @@
         "TODO",
         "OSINT_Scraper_Motoru",
         "10_ankara_osb_sentez",
-        "09_osint_rol_tanimi",
-        "../x",
-        "../../AGENTS",
-        "CLAUDE",
-        "AGENT_SYNC"
+        "09_osint_rol_tanimi"
       ],
       "links_in": [
         "00-Home.md",
@@ -1335,26 +1313,6 @@
         "TODO.md"
       ]
     },
-    "README.md": {
-      "path": "README.md",
-      "title": "V10 Master Belgeleri",
-      "summary": "Bu klasör, proje belgelerinin Türkçe, düzenli ve sürdürülebilir bir yapıda saklanması için hazırlanmıştır. - Proje bağlamını tek bir yerden takip etmek - Sistem, iş modeli ve gereksinim belgelerini ay…",
-      "size": 3000,
-      "updated": "2026-09-10T19:30:37.186900+00:00",
-      "type": "unknown",
-      "tags": [],
-      "links_out": [
-        "01_sirket_master_ana_belgesi",
-        "01_v9_ile_karsilastirma",
-        "01_versiyon_6_baglam_dokumani",
-        "01_versiyon_7_baglam_dokumani",
-        "01_versiyon_8_baglam_dokumani",
-        "01_versiyon_9_baglam_dokumani",
-        "00-Home",
-        "README"
-      ],
-      "links_in": []
-    },
     "templates/ADR-template.md": {
       "path": "templates/ADR-template.md",
       "title": "ADR: <Başlık>",
@@ -1381,24 +1339,6 @@
       "links_in": [
         "00-Home.md"
       ]
-    },
-    "templates/Frontmatter-template.md": {
-      "path": "templates/Frontmatter-template.md",
-      "title": "<Başlık>",
-      "summary": "<İçerik>",
-      "size": 356,
-      "updated": "2026-09-10T19:30:37.199362+00:00",
-      "type": "wiki          # wiki | raw | template | kararnote",
-      "tags": [
-        "# örnek: [mimari",
-        "etl",
-        "osint"
-      ],
-      "links_out": [
-        "00-Home",
-        "README"
-      ],
-      "links_in": []
     },
     "templates/Spec-template.md": {
       "path": "templates/Spec-template.md",

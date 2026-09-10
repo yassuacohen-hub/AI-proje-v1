@@ -38,6 +38,17 @@ logs/
 _trash/
 tmp/
 
+# Araç/repair dosyaları
+data/orchestrator/task_board_corrupt_backup.json
+check_*.py
+fix_*.py
+inspect_*.py
+validate_*.py
+final_validate.py
+check_wiki_counts.py
+examine_json.py
+find_*.py
+
 # Obsidian kişisel/yerel çalışma alanı durumu (workspace paylaşılmaz, plugin listesi paylaşılır)
 .obsidian/workspace.json
 .obsidian/workspace-mobile.json
