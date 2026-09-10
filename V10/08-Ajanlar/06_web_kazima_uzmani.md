@@ -78,7 +78,7 @@ Bu ajan ana sistemin merkezinde yer almaz; uzmanlık katmanıdır. Veri toplama,
 
 
 
-Bağlantılar: [[../07_referanslar/02_ankara_osb_ekosistemi_arastirma_notu]] · [[../10_mvp_kapsam]] · [[../00_ana_belgeler/01_sirket_master_ana_belgesi]]
+Bağlantılar: [[02_ankara_osb_ekosistemi_arastirma_notu]] · [[10_mvp_kapsam]] · [[01_sirket_master_ana_belgesi]]
 
 
 
@@ -137,3 +137,11 @@ Webkazıma uzmanı olarak teknik ve etik kısıtlar benim işim. 13.500+ firma i
 ---
 
 > Kazima izin/kaynak yonetimi icin [[OSINT_Scraper_Motoru]] icerisindeki Permission Router kullanilir (robots.txt + KVKK + rate limit).
+
+## Bağlantılı Belgeler (Otomatik, DOC-02)
+
+- [[00-Home]] - Ana hub - [[project_state]] - [[TODO]] - [[CHANGELOG]]
+- [[OSINT_Scraper_Motoru]] - izin router + kaynak registry + engine CLI
+- [[01_veri_kaynagi_envanteri]] - [[02_ankara_osb_erisim_planlari]] - [[04_web_kazima_kaynak_arastirmasi]]
+- [[10_vpn_kurali]] - VPN kaynakli ag hatalarinda kullaniciya bildirim
+- Kod: `src/company_master/utils/scraping_permission_router.py` - `scripts/osint_engine.py`

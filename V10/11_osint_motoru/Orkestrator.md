@@ -73,6 +73,17 @@ python scripts/orchestrator_internal.py lock src/company_master/engine/osint_eng
 python scripts/orchestrator_internal.py donem-raporu
 ```
 
+## İlgili Ajanlar
+
+| Ajan | Rolü |
+|------|------|
+| [[01_koordinator_ajan]] | Bu node'un insan-rol karşılığı |
+| [[02_mimar_ajan]] | Orkestrasyon mimarisi |
+| [[04_gelistirici_ajan]] | task_board / lock implementasyonu |
+| [[05_kalite_ajan]] | Görev tamamlama doğrulaması |
+
+Teknik uygulama: `src/company_master/orchestrator/task_board.py` · Wiki: [[OSINT_Scraper_Motoru]] (veri toplama tarafı).
+
 ## İlişkiler
 
 - [[01_koordinator_ajan]] — bu node koordinatörün teknik uygulamasıdır

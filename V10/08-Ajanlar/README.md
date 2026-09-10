@@ -39,6 +39,22 @@ Tüm iç ajanlar ve harici ajanlar, aşağıdaki OSINT rol tanımını kendi uzm
 - Koordinator -> 09_osint_rol_tanimi.md (OSINT gorev dagitimi)
 - Harici ajanlar -> 09_osint_rol_tanimi.md (brief'lere OSINT gorev tipleri eklenir)
 
+## Ajan → Teknik Uygulama Eşleştirmesi
+
+Her ajanın bağlandığı wiki belgeleri ve kod konumları (llm-wiki modeli, DOC-02):
+
+| Ajan | İlgili Belgeler | Kod Konumu |
+|------|----------------|-----------|
+| koordinatör | [[Orkestrator]] · [[01_koordinator_ajan]] | `src/company_master/orchestrator/` |
+| mimar | [[01_etl_mimarisi]] · [[01_sirket_master_ana_belgesi]] | `src/company_master/schema/` |
+| arastirmaci | [[09_osint_rol_tanimi]] · [[07_referanslar/README]] · [[10_apify_entegrasyon_arastirmasi_20260910]] | `scripts/research/` |
+| gelistirici | [[01_mvp_gereksinimleri]] · [[01_etl_mimarisi]] · [[CHANGELOG]] | `src/company_master/etl/` |
+| kalite | [[01_kalite_skoru_ek_metrikleri]] · [[05_kalite_ajan]] | `tests/` |
+| web_kazima | [[OSINT_Scraper_Motoru]] · [[06_web_kazima_uzmani]] · [[02_ankara_osb_erisim_planlari]] | `src/company_master/utils/scraping_permission_router.py` |
+
+> Ajanlar belge ararken önce `data/orchestrator/wiki_index.json` dosyasına bakmalı
+> (`python scripts/build_wiki_index.py` ile yenilenir).
+
 ## Ajanlar için standart
 
 - Her ajan için temel alanlar şunlardır:

@@ -117,7 +117,7 @@ Claude Code; uzun bağlam okuma, mimari dokümantasyon ve güvenlik review gibi 
 
 ## 6. Kaynaklar
 
-- [[V10/08-Ajanlar/07_harici_ajan_protokolu]]
-- [[AGENT_SYNC]]
-- [[AI proje v1/AGENTS]]
+- [[07_harici_ajan_protokolu]]
+- `AGENT_SYNC.md`
+- `AI proje v1/AGENTS.md`
 - Ana bağlam: `AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md`

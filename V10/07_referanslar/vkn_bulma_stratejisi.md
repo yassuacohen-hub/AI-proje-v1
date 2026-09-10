@@ -1,7 +1,7 @@
 # VKN Bulma Stratejisi — Firma Web Siteleri
 
 > **Tarih:** 2026-09-06 · **Durum:** Aktif araştırma (P0-3 destek)
-> **İlgili görevler:** [[../TODO|TODO P0-3]], P1-4, P2-1
+> **İlgili görevler:** [[TODO|TODO P0-3]], P1-4, P2-1
 > **Araç:** `scripts/vkn_web_scraper.py`
 
 ## 1. Neden Web?

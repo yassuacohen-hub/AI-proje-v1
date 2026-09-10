@@ -182,8 +182,8 @@ Harici ajan yalnızca `workspace/external/{agent_id}/output/` altına yazar. Dö
 
 ## 9. Kaynaklar
 
-- [[AGENT_SYNC]]
-- [[AI proje v1/AGENTS]]
-- [[V10/09_kurallar_ve_promptlar/02_calisma_kurallari]]
-- [[V10/08-Ajanlar/08_harici_ajan_gorev_onerileri]]
+- `AGENT_SYNC.md`
+- `AI proje v1/AGENTS.md`
+- [[02_calisma_kurallari]]
+- [[08_harici_ajan_gorev_onerileri]]
 - Ana bağlam: `AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md`

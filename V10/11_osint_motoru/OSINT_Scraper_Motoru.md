@@ -67,6 +67,16 @@ otomatik toplar ve [[06_web_kazima_uzmani]]'nın izin/kaynak kontrolüne uyar.
 4. **ASO pipeline** — mevcut 488KB ASO verisinin ingest'i (multi-OSB merger ilk adımı)
 5. **Multi-OSB merger entegrasyonu** — [[10_ankara_osb_sentez]] kararları uygulanır
 
+## İlgili Ajanlar
+
+| Ajan | Rolü |
+|------|------|
+| [[01_koordinator_ajan]] | Motor görevlerinin dağıtımı ([[Orkestrator]] teknik uygulaması) |
+| [[06_web_kazima_uzmani]] | İzin/kaynak kontrolü, scraper geliştirme |
+| [[09_osint_rol_tanimi]] | Motorun hizmet verdiği OSINT rolü |
+| [[04_gelistirici_ajan]] | Bileşen implementasyonu |
+| [[05_kalite_ajan]] | Pipeline çıktı doğrulaması |
+
 ## Wiki Bağlantıları
 
 - [[09_osint_rol_tanimi]] — OSINT rol tanımı (ajan promptu)

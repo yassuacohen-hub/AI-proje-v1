@@ -1,8 +1,8 @@
 # Token Verimliliği ve Dil/Dokümantasyon Politikası
 
-Bağlantılar: [[09_kurallar_ve_promptlar/README]] · [[02_calisma_kurallari]] · [[CLAUDE]]
+Bağlantılar: [[09_kurallar_ve_promptlar/README]] · [[02_calisma_kurallari]] · `CLAUDE.md`
 
-Bu belge, bu kasada çalışan tüm yapay zeka ajanlarının bilgi işleme, token verimliliği ve dil kullanımı konusundaki bağlayıcı politikalarını toplar. Proje anayasası olan `[[AGENTS]]` ve `CLAUDE.md` ile birlikte okunur.
+Bu belge, bu kasada çalışan tüm yapay zeka ajanlarının bilgi işleme, token verimliliği ve dil kullanımı konusundaki bağlayıcı politikalarını toplar. Proje anayasası olan ``AGENTS.md`` ve `CLAUDE.md` ile birlikte okunur.
 
 ---
 
@@ -235,9 +235,9 @@ Dosya adları da varsayılan olarak Türkçe oluşturulmalıdır.
 Wiki bağlantıları Türkçe sayfa isimleri üzerinden kurulmalıdır.
 
 Örnek:
-- [[Kullanıcı Yönetimi]]
-- [[Kimlik Doğrulama Sistemi]]
-- [[Mimari Kararlar]]
+- `Kullanıcı Yönetimi.md`
+- `Kimlik Doğrulama Sistemi`
+- `Mimari Kararlar`
 
 ## Teknik Terimler
 
