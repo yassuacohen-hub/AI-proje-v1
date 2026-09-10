@@ -173,7 +173,7 @@ def fetch_website(url: str, timeout: int = 15) -> str | None:
             "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
             "Accept-Language": "tr-TR,tr;q=0.9,en-US;q=0.8,en;q=0.7",
         }
-        resp = requests.get(url, headers=headers, timeout=timeout, verify=False, allow_redirects=True)
+        resp = requests.get(url, headers=headers, timeout=timeout, allow_redirects=True)
         resp.raise_for_status()
         return resp.text
     except requests.RequestException as exc:

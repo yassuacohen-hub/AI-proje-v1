@@ -25,7 +25,7 @@ with eng.connect() as conn:
         print(f"Firma: {r[1]}")
         print(f"Website: {r[2]}")
         try:
-            resp = requests.get(r[2], timeout=10, verify=False)
+            resp = requests.get(r[2], timeout=10)
             if resp.status_code == 200:
                 html = resp.text
                 # Look for VKN pattern

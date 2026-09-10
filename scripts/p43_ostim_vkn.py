@@ -31,8 +31,7 @@ GENERIC = {'http://www.isim.org.tr', 'http://www.osp.com.tr', 'https://www.ostim
 TIMEOUT = 15
 MAX_WORKERS = 6
 SSL_CTX = ssl.create_default_context()
-SSL_CTX.check_hostname = False
-SSL_CTX.verify_mode = ssl.CERT_NONE
+# SEC-03: TLS dogrulamasi varsayilan (create_default_context)
 
 
 def vkn_gecerli_mi(v: str) -> bool:

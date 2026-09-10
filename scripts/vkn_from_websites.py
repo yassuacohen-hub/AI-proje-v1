@@ -32,7 +32,7 @@ def extract_vkn_from_html(html: str) -> str | None:
 def fetch_and_extract(web: str) -> str | None:
     try:
         import requests
-        r = requests.get(web, headers=HEADERS, timeout=TIMEOUT, verify=False)
+        r = requests.get(web, headers=HEADERS, timeout=TIMEOUT)
         if r.status_code == 200:
             return extract_vkn_from_html(r.text)
     except Exception:

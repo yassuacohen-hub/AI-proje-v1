@@ -36,7 +36,7 @@ def fetch_website(url, timeout=10):
     try:
         import requests
         headers = {'User-Agent': 'Mozilla/5.0'}
-        resp = requests.get(url, headers=headers, timeout=timeout, verify=False)
+        resp = requests.get(url, headers=headers, timeout=timeout)
         resp.raise_for_status()
         return resp.text
     except Exception:

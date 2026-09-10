@@ -57,7 +57,7 @@ def extract_vkn_from_html(html: str) -> str | None:
 
 def fetch_website(url: str, timeout: int = 15) -> str | None:
     try:
-        resp = requests.get(url, headers=HEADERS, timeout=timeout, verify=False)
+        resp = requests.get(url, headers=HEADERS, timeout=timeout)
         resp.raise_for_status()
         return resp.text
     except Exception:

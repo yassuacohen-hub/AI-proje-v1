@@ -170,8 +170,6 @@ def adim3_vkn_web_scrape(conn, limit: int = 50) -> dict:
     ]
     TIMEOUT = 15
     SSL_CTX = ssl.create_default_context()
-    SSL_CTX.check_hostname = False
-    SSL_CTX.verify_mode = ssl.CERT_NONE
 
     def vkn_gecerli_mi(v: str) -> bool:
         if len(v) != 10 or not v.isdigit():
