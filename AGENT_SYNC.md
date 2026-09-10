@@ -37,8 +37,8 @@ Bu oturumda web dashboard'a **uyelik/oturum sistemi** eklendi; tum endpoint'ler 
 | X05 | Y26: API key yonetimi - rotasyon + kulla | gelistirici | P2 | plan |
 | GOV-01 | Orkestrasyon reconciliation denetimi ve  | koordinator | P0 | aktif |
 | APIFY-01 | Apify uygunluk ve entegrasyon mimarisi a | harici_arastirma | P1 | aktif |
-| DATA-01 | Kanit Hatti Duzeltmeleri: ROOT koku + te | gelistirici | P0 | plan |
-| P7-GATE | Job Intelligence Dogrulama Kapisi: tek m | kalite | P0 | plan |
+| DATA-01 | Kanit Hatti Duzeltmeleri: ROOT koku + te | gelistirici | P0 | done |
+| P7-GATE | Job Intelligence Dogrulama Kapisi: tek m | kalite | P0 | done |
 | APIFY-02 | Apify REST Adaptoru + Polling Pilotu (10 | web_kazima | P1 | plan |
 | APIFY-03 | Apify Webhook + Kalici Olay Isleme (idem | web_kazima | P1 | plan |
 | MCP-01 | Kontrollu Apify MCP Erisimi: izinli arac | arastirmaci | P2 | plan |
@@ -68,3 +68,7 @@ Bu oturumda web dashboard'a **uyelik/oturum sistemi** eklendi; tum endpoint'ler 
 - **P8-8**: Kurumsal rapor ve medya entegrasyonu tasari tamaml
 - **SEC-01**: web_app.py require_admin fail-closed ve CSV export
 - **SEC-02**: TLS dogrulama varsayilan yapildi (verify=False kal | done: dinamik domain policy_for + workspace containment, 21 regresyon testi passed (2026-09-10)
+- **SEC-03**: scripts altinda TLS verify=False/CERT_NONE temizlendi (8 script), commit 45cd8fe
+- **P7-GATE**: tek migration kopyasi dogrulandi, test_job_intelligence_dikey.py dikey akis testleri (11 passed), commit 7de2abc; DATA-01/P7-GATE/SEC-01/SEC-02 panoda done (2026-09-10)
+
+

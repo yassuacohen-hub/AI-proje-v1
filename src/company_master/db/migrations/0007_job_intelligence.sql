@@ -138,7 +138,7 @@ CREATE TRIGGER update_company_intel_scores_updated_at
     BEFORE UPDATE ON company_intelligence_scores
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
-DROP TRIGGER IF NOT EXISTS update_company_tech_profile_updated_at ON company_tech_profile;
+DROP TRIGGER IF EXISTS update_company_tech_profile_updated_at ON company_tech_profile;
 CREATE TRIGGER update_company_tech_profile_updated_at
     BEFORE UPDATE ON company_tech_profile
     FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();

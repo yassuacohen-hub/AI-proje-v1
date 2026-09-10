@@ -300,9 +300,11 @@ def _insert_batch(conn, batch: list[dict[str, Any]]) -> tuple[int, int]:
                     collected_at = EXCLUDED.collected_at,
                     raw_data = EXCLUDED.raw_data,
                     updated_at = NOW()
+                RETURNING (xmax = 0) AS was_inserted
             """), record)
-            
-            if result.rowcount > 0:
+
+            was_inserted = result.scalar()
+            if was_inserted:
                 inserted += 1
             else:
                 duplicates += 1

@@ -1438,7 +1438,9 @@
       "web_app.py",
       "tests/test_api_companies.py"
     ],
-    "not": "require_admin fail-closed + CSV export coklu kaynak SQL duzeltildi. tests/test_security_regresyon.py eklendi (8/8 test gecti, DB bagimsiz)."
+    "not": "require_admin fail-closed + CSV export coklu kaynak SQL duzeltildi. tests/test_security_regresyon.py eklendi (8/8 test gecti, DB bagimsiz).",
+    "status": "done",
+    "tamamlandi": "2026-09-10T15:51:49"
   },
   {
     "task_id": "SEC-02",
@@ -1454,14 +1456,15 @@
       "scripts/p32_vkn_from_ivedik_baskent.py"
     ],
     "not": "TLS verify default; workspace is_relative_to containment; dinamik domain policy_for; regresyon 21 test passed",
-    "tamamlandi": "2026-09-10"
+    "tamamlandi": "2026-09-10T15:51:49",
+    "status": "done"
   },
   {
     "task_id": "DATA-01",
     "baslik": "Kanit Hatti Duzeltmeleri: ROOT koku + tekil ilan modeli + firma eslestirme + dedup + karantina",
     "sahip": "gelistirici",
     "oncelik": "P0",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-10T12:20:33",
     "bitis": null,
     "dosyalar": [
@@ -1470,18 +1473,22 @@
       "scripts/ingest_job_postings.py",
       "src/company_master/intelligence/job_intelligence/pipeline/normalizer.py"
     ],
-    "not": "ROOT koku + tekil ilan modeli + firma eslestirme onceligi + dedup + karantina (sen+asistan)"
+    "not": "ROOT koku + tekil ilan modeli + firma eslestirme onceligi + dedup + karantina (sen+asistan)",
+    "status": "done",
+    "tamamlandi": "2026-09-10T15:51:49"
   },
   {
     "task_id": "P7-GATE",
     "baslik": "Job Intelligence Dogrulama Kapisi: tek migration kaynagi + dikey akis fixture testleri",
     "sahip": "kalite",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-10T12:20:33",
     "bitis": null,
     "dosyalar": [],
-    "not": ""
+    "not": "",
+    "status": "done",
+    "tamamlandi": "2026-09-10T15:51:49"
   },
   {
     "task_id": "APIFY-02",
@@ -1549,6 +1556,27 @@
     "baslangic": "2026-09-10T12:20:33",
     "bitis": null,
     "dosyalar": [],
+    "not": ""
+  },
+  {
+    "task_id": "OBS-01",
+    "baslik": "Obsidian vault standardizasyonu: tek V10 kaynagi + UTF-8 + link denetimi",
+    "sahip": "koordinator",
+    "oncelik": "P1",
+    "durum": "aktif",
+    "baslangic": "2026-09-10T15:32:37",
+    "bitis": null,
+    "dosyalar": [
+      "AI proje v1/V10/project_state.md",
+      "Huginn Data Insights/V10",
+      "AI proje v1/V10",
+      ".obsidian/workspace.json",
+      ".obsidian/graph.json",
+      ".obsidian/core-plugins.json",
+      ".obsidian/templates",
+      "scripts/check_obsidian_links.py",
+      ".pre-commit-config.yaml"
+    ],
     "not": ""
   }
 ]
