@@ -41,17 +41,17 @@ tmp/
 # V10 içeriklerini engelle (şikayet raporları, eski belgeler, vb.)
 V10/
 
-# Araç/repair dosyaları
+# Araç/repair dosyalari (scripts dizinine ozgu)
 data/orchestrator/task_board_corrupt_backup.json
 data/orchestrator/
-check_*.py
-fix_*.py
-inspect_*.py
-validate_*.py
-final_validate.py
-check_wiki_counts.py
-examine_json.py
-find_*.py
+scripts/check_*.py
+scripts/fix_*.py
+scripts/inspect_*.py
+scripts/validate_*.py
+scripts/final_validate.py
+scripts/check_wiki_counts.py
+scripts/examine_json.py
+scripts/find_*.py
 
 # Node.js
 node_modules/
@@ -74,3 +74,4 @@ agent/
 # Nested git repo içeren skill dizinleri (ayrı remote'ları var)
 .claude/skills/supabase/
 data/skills/supabase/
+
