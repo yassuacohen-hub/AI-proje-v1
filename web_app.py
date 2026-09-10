@@ -725,7 +725,7 @@ def api_companies_export(format: str = "csv", search: str = "", min_score: int =
                     SELECT sr.source_record_id
                     FROM source_records sr
                     JOIN sources s ON sr.source_id = s.source_id
-                    WHERE s.source_name IN (", ".join(placeholders))
+                    WHERE s.source_name IN ({", ".join(placeholders)})
                 )""")
 
         if nace:
@@ -1308,6 +1308,67 @@ def api_buyer_login(req: dict):
     }
 
 
+# ── X04: Üyelik yardımcıları (şifre sıfırlama, e-posta doğrulama, Telegram) ───
+import secrets
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+_SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
+_SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
+_SMTP_USER = os.getenv("SMTP_USER", "")
+_SMTP_PASS = os.getenv("SMTP_PASS", "")
+_SMTP_FROM = os.getenv("SMTP_FROM", "noreply@huginn.local")
+
+_TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
+_TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
+_WELCOME_TELEGRAM_CHAT_ID = os.getenv("WELCOME_TELEGRAM_CHAT_ID", _TELEGRAM_CHAT_ID)
+
+_RESET_TOKEN_TTL = 3600  # 1 saat
+_VERIFY_TOKEN_TTL = 86400  # 24 saat
+
+
+def _generate_token(prefix: str = "", length: int = 32) -> str:
+    """URL-safe token üretir."""
+    return f"{prefix}{secrets.token_urlsafe(length)}" if prefix else secrets.token_urlsafe(length)
+
+
+def _send_email(to: str, subject: str, html_body: str) -> bool:
+    """SMTP ile e-posta gönderir. Yapılandırma yoksa sessizce False döner."""
+    if not _SMTP_USER or not _SMTP_PASS:
+        return False
+    try:
+        msg = MIMEMultipart("alternative")
+        msg["Subject"] = subject
+        msg["From"] = _SMTP_FROM
+        msg["To"] = to
+        msg.attach(MIMEText(html_body, "html", "utf-8"))
+        with smtplib.SMTP(_SMTP_HOST, _SMTP_PORT, timeout=10) as s:
+            s.starttls()
+            s.login(_SMTP_USER, _SMTP_PASS)
+            s.send_message(msg)
+        return True
+    except Exception:
+        return False
+
+
+def _send_telegram(text: str, chat_id: str = "") -> bool:
+    """Telegram Bot API ile mesaj gönderir. Token/chat_id yoksa False."""
+    target = chat_id or _TELEGRAM_CHAT_ID
+    if not _TELEGRAM_BOT_TOKEN or not target:
+        return False
+    try:
+        import requests
+        requests.post(
+            f"https://api.telegram.org/bot{_TELEGRAM_BOT_TOKEN}/sendMessage",
+            json={"chat_id": target, "text": text, "parse_mode": "HTML"},
+            timeout=10,
+        )
+        return True
+    except Exception:
+        return False
+
+
 @app.post("/api/buyer/logout")
 def api_buyer_logout(req: dict):
     """Cikis: istemci tarafinda token silinir; sunucu tarafi stateless oldugundan
@@ -1338,6 +1399,170 @@ def api_buyer_change_password(req: dict, token: str = ""):
     return {"ok": True, "message": "sifre guncellendi"}
 
 
+def _store_reset_token(email: str, token: str):
+    """Sıfırlama token'ını DB'ye yazar (users tablosunda reset_token, reset_token_exp)."""
+    engine = get_engine()
+    with engine.begin() as conn:
+        conn.execute(text(
+            "UPDATE users SET reset_token = :t, reset_token_exp = :e WHERE email = :em"
+        ), {"t": token, "e": int(_time.time()) + _RESET_TOKEN_TTL, "em": email})
+
+
+def _store_verify_token(email: str, token: str):
+    """E-posta doğrulama token'ını DB'ye yazar (users tablosunda verify_token, verify_token_exp)."""
+    engine = get_engine()
+    with engine.begin() as conn:
+        conn.execute(text(
+            "UPDATE users SET verify_token = :t, verify_token_exp = :e WHERE email = :em"
+        ), {"t": token, "e": int(_time.time()) + _VERIFY_TOKEN_TTL, "em": email})
+
+
+@app.post("/api/buyer/reset-password-request")
+def api_buyer_reset_password_request(req: dict):
+    """Şifre sıfırlama isteği — e-posta alır, token üretir, e-posta/Telegram ile gönderir."""
+    email = (req.get("email") or "").strip().lower()
+    if not email or "@" not in email:
+        raise HTTPException(status_code=400, detail="geçerli e-posta girin")
+    engine = get_engine()
+    with engine.connect() as conn:
+        row = conn.execute(text("SELECT user_id, email, company_name FROM users WHERE email = :e"),
+                           {"e": email}).mappings().first()
+    if not row:
+        return {"ok": True, "message": "E-posta sistemde varsa sıfırlama linki gönderilecektir."}
+    token = _generate_token("RST-", 24)
+    _store_reset_token(email, token)
+    reset_url = f"{os.getenv('APP_BASE_URL', 'http://localhost:8000')}/#reset-password/{token}"
+    html = f"""
+    <h2>Huginn Data Insights — Şifre Sıfırlama</h2>
+    <p>Merhaba <b>{row['company_name'] or email}</b>,</p>
+    <p>Şifre sıfırlama talebiniz alındı. Aşağıdaki linke tıklayarak yeni şifrenizi belirleyin:</p>
+    <p><a href="{reset_url}" style="background:#3b82f6;color:#fff;padding:12px 24px;
+       text-decoration:none;border-radius:6px;display:inline-block">Yeni Şifre Belirle</a></p>
+    <p>Link 1 saat geçerlidir. Talebiniz değilselse bu e-postayı görmezden gelin.</p>
+    <hr><small>Huginn Data Insights</small>
+    """
+    _send_email(email, "Huginn — Şifre Sıfırlama", html)
+    _send_telegram(f"🔐 <b>Şifre Sıfırlama Talebi</b>\nE-posta: <code>{email}</code>\nFirma: {row['company_name'] or '-'}")
+    return {"ok": True, "message": "E-posta sistemde varsa sıfırlama linki gönderilecektir."}
+
+
+@app.post("/api/buyer/reset-password-confirm")
+def api_buyer_reset_password_confirm(req: dict):
+    """Şifre sıfırlama onayı — token + yeni şifre alır, doğrular, günceller."""
+    token = (req.get("token") or "").strip()
+    new_password = req.get("new_password") or ""
+    if not token:
+        raise HTTPException(status_code=400, detail="token zorunlu")
+    if len(new_password) < 8:
+        raise HTTPException(status_code=400, detail="şifre en az 8 karakter olmalı")
+    engine = get_engine()
+    with engine.begin() as conn:
+        row = conn.execute(text(
+            "SELECT user_id, email, reset_token, reset_token_exp FROM users WHERE reset_token = :t"
+        ), {"t": token}).mappings().first()
+    if not row or int(row["reset_token_exp"] or 0) < int(_time.time()):
+        raise HTTPException(status_code=400, detail="geçersiz veya süresi dolmuş token")
+    with engine.begin() as conn:
+        conn.execute(text(
+            "UPDATE users SET password_hash = :ph, reset_token = NULL, reset_token_exp = NULL, "
+            "updated_at = CURRENT_TIMESTAMP WHERE user_id = :u"
+        ), {"ph": _hash_password(new_password), "u": str(row["user_id"])})
+    _send_telegram(f"✅ <b>Şifre Sıfırlandı</b>\nE-posta: <code>{row['email']}</code>")
+    return {"ok": True, "message": "Şifreniz başarıyla güncellendi. Şimdi giriş yapabilirsiniz."}
+
+
+@app.post("/api/buyer/verify-email-request")
+def api_buyer_verify_email_request(req: dict):
+    """E-posta doğrulama isteği — kayıtlı kullanıcıya doğrulama linki gönderir."""
+    email = (req.get("email") or "").strip().lower()
+    if not email or "@" not in email:
+        raise HTTPException(status_code=400, detail="geçerli e-posta girin")
+    engine = get_engine()
+    with engine.connect() as conn:
+        row = conn.execute(text("SELECT user_id, email, company_name, status FROM users WHERE email = :e"),
+                           {"e": email}).mappings().first()
+    if not row:
+        return {"ok": True, "message": "E-posta sistemde varsa doğrulama linki gönderilecektir."}
+    if row["status"] == "onayli":
+        return {"ok": True, "message": "E-posta zaten doğrulanmış."}
+    token = _generate_token("VER-", 24)
+    _store_verify_token(email, token)
+    verify_url = f"{os.getenv('APP_BASE_URL', 'http://localhost:8000')}/#verify-email/{token}"
+    html = f"""
+    <h2>Huginn Data Insights — E-posta Doğrulama</h2>
+    <p>Merhaba <b>{row['company_name'] or email}</b>,</p>
+    <p>Hesabınızı aktifleştirmek için aşağıdaki linke tıklayın:</p>
+    <p><a href="{verify_url}" style="background:#10b981;color:#fff;padding:12px 24px;
+       text-decoration:none;border-radius:6px;display:inline-block">E-postamı Doğrula</a></p>
+    <p>Link 24 saat geçerlidir.</p>
+    <hr><small>Huginn Data Insights</small>
+    """
+    _send_email(email, "Huginn — E-posta Doğrulama", html)
+    _send_telegram(f"📧 <b>E-posta Doğrulama Talebi</b>\nE-posta: <code>{email}</code>\nFirma: {row['company_name'] or '-'}")
+    return {"ok": True, "message": "E-posta sistemde varsa doğrulama linki gönderilecektir."}
+
+
+@app.get("/api/buyer/verify-email/{token}")
+def api_buyer_verify_email_confirm(token: str):
+    """E-posta doğrulama onayı — token doğrulanır, status 'onayli' yapılır."""
+    engine = get_engine()
+    with engine.begin() as conn:
+        row = conn.execute(text(
+            "SELECT user_id, email, verify_token, verify_token_exp, status, tier, credit_balance "
+            "FROM users WHERE verify_token = :t"
+        ), {"t": token}).mappings().first()
+    if not row or int(row["verify_token_exp"] or 0) < int(_time.time()):
+        raise HTTPException(status_code=400, detail="geçersiz veya süresi dolmuş token")
+    if row["status"] == "onayli":
+        return {"ok": True, "message": "E-posta zaten doğrulanmış."}
+    new_tier = row["tier"] or "terminal"
+    start_credit = _TIER_CREDITS.get(new_tier, 100)
+    with engine.begin() as conn:
+        conn.execute(text(
+            "UPDATE users SET status = 'onayli', tier = :tier, credit_balance = :cred, "
+            "verify_token = NULL, verify_token_exp = NULL, updated_at = CURRENT_TIMESTAMP "
+            "WHERE user_id = :u"
+        ), {"tier": new_tier, "cred": start_credit, "u": str(row["user_id"])})
+        if start_credit > 0:
+            conn.execute(text(
+                "INSERT INTO credit_ledger (user_id, delta, reason, balance_after) "
+                "VALUES (:u, :d, 'Kayıt başlangıç kredisi', :b)"
+            ), {"u": str(row["user_id"]), "d": start_credit, "b": start_credit})
+    _send_telegram(f"✅ <b>E-posta Doğrulandı</b>\nE-posta: <code>{row['email']}</code>\nTier: {new_tier} · Kredi: {start_credit}")
+    welcome_text = (
+        f"🎉 <b>Hoş Geldiniz!</b>\n"
+        f"Firma: {row['company_name'] or row['email']}\n"
+        f"Paket: <b>{new_tier.title()}</b>\n"
+        f"Başlangıç Kredisi: <b>{start_credit}</b>\n\n"
+        f"🔍 Akıllı Eşleştirme ile tedarikçi/müşteri/rakip analizlerinizi başlatabilirsiniz.\n"
+        f"📊 Veri Sağlığı paneliyle veri kalitenizi takip edin.\n"
+        f"📚 Bilgi Merkezi'nden arama ipuçlarını inceleyin."
+    )
+    _send_telegram(welcome_text, _WELCOME_TELEGRAM_CHAT_ID)
+    return {"ok": True, "message": "E-posta doğrulandı. Hesabınız aktifleştirildi.", "tier": new_tier, "credit": start_credit}
+
+
+@app.post("/api/buyer/welcome-telegram")
+def api_buyer_welcome_telegram(req: dict):
+    """Admin/uygulama tarafından çağrılır — onaylı kullanıcıya hoşgeldin Telegram mesajı."""
+    token = (req.get("user_token") or "").strip()
+    u = _user_from_token(token)
+    if not u or u["status"] != "onayli":
+        raise HTTPException(status_code=403, detail="sadece onaylı kullanıcılar için")
+    text = (
+        f"🎉 <b>Huginn Data Insights'e Hoş Geldiniz!</b>\n"
+        f"Firma: <b>{u['company_name']}</b>\n"
+        f"Paket: <b>{u['tier'].title()}</b>\n"
+        f"Kredi: <b>{u['credit_balance']}</b>\n\n"
+        f"🔍 Akıllı Eşleştirme: tedarikçi/müşteri/rakip analizi\n"
+        f"📊 Veri Sağlığı: veri kalitesi & kapsama\n"
+        f"📚 Bilgi Merkezi: arama ipuçları & CSV dışa aktarım\n\n"
+        f"Sorularınız için: <code>admin@huginn.local</code>"
+    )
+    sent = _send_telegram(text, _WELCOME_TELEGRAM_CHAT_ID)
+    return {"ok": sent, "message": "Telegram mesajı gönderildi" if sent else "Telegram yapılandırılmamış"}
+
+
 @app.get("/api/me")
 def api_me(token: str = ""):
     u = _user_from_token(token)
@@ -1351,8 +1576,14 @@ def api_me(token: str = ""):
 def require_admin(authorization: str = Header(None, alias="Authorization"),
                   x_api_key: str = Header(None, alias="X-API-Key"),
                   api_key: str = ""):
-    """Yonetici erisimi: DASH_API_KEY VEYA role=admin kullanici tokeni (Bearer)."""
-    if (x_api_key or api_key) == (os.getenv("DASH_API_KEY") or ""):
+    """Yonetici erisimi: DASH_API_KEY VEYA role=admin kullanici tokeni (Bearer).
+
+    SEC-01: Fail-closed. DASH_API_KEY tanimli degilse key tabanli yonetici
+    erisimi kapalidir (bos anahtar "" == "" eslesmesi yonetici acamaz).
+    """
+    admin_key = (os.getenv("DASH_API_KEY") or "").strip()
+    provided_key = (x_api_key or api_key or "").strip()
+    if admin_key and provided_key and provided_key == admin_key:
         return "admin-key"
     if authorization:
         tok = authorization.replace("Bearer ", "").strip()

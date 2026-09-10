@@ -1,13 +1,21 @@
-﻿# -*- coding: utf-8 -*-
-"""MERSIS / VKN zenginlestirme saglayicilari ve pipeline."""
+# -*- coding: utf-8 -*-
+"""MERSIS / VKN zenginlestirme saglayicilari ve pipeline.
+
+Y11 GIB VKN dogrulama entegrasyonu (2026-09-09):
+- VKNValidator: resmi VKN algoritmasi (10 hane, son hane kontrol).
+- GIBVKNProvider: vkn.gov.tr API'sine dogrulama + firma adi eslestirme.
+- verify_and_match: VKN dogrulama + firma adi uyumu testi.
+- run_gib_vkn_pipeline: DB'deki firmalara VKN dogrulama + adi guncelleme.
+"""
 from __future__ import annotations
 
 import json
 import os
+import re
 import time
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional
+from typing import Dict, List, Optional, Tuple
 
 import requests
 
@@ -15,6 +23,11 @@ MERSIS_BASE_URL = os.getenv("MERSIS_BASE_URL", "https://mersis.ticaret.gov.tr")
 KYC_SANDBOX_URL = os.getenv("KYC_SANDBOX_URL", "https://api.knowyourcustomer.dev").rstrip("/")
 KYC_CLIENT_ID = os.getenv("KYC_CLIENT_ID", "")
 KYC_CLIENT_SECRET = os.getenv("KYC_CLIENT_SECRET", "")
+# Y11: GIB vkn.gov.tr entegrasyonu
+GIB_VKN_BASE_URL = os.getenv("GIB_VKN_BASE_URL", "https://vkn.gov.tr").rstrip("/")
+GIB_VKN_API_KEY = os.getenv("GIB_VKN_API_KEY", "")
+GIB_VKN_TIMEOUT = int(os.getenv("GIB_VKN_TIMEOUT", "10"))
+GIB_VKN_RETRY = int(os.getenv("GIB_VKN_RETRY", "2"))
 CACHE_DIR = Path("data/mersis_cache")
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 

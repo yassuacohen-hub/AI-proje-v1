@@ -78,7 +78,8 @@ def extract_vkn_from_text(text: str) -> str | None:
 def fetch_vkn_from_url(url: str) -> str | None:
     try:
         import requests
-        r = requests.get(url, headers=HEADERS, timeout=TIMEOUT, verify=False)
+        # SEC-02: verify=False kaldirildi; TLS dogrulamasi varsayilan (requests default True).
+        r = requests.get(url, headers=HEADERS, timeout=TIMEOUT)
         if r.status_code == 200:
             return extract_vkn_from_text(r.text)
     except Exception:

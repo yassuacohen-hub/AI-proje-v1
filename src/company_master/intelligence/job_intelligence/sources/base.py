@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Job Intelligence — Temel kaynak (scraper) sınıfı."""
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ from bs4 import BeautifulSoup
 
 from company_master.utils.scraping_permission_router import get_router
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[5]
 LOG_DIR = ROOT / "logs"
 LOG_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -113,15 +113,26 @@ class BaseJobSource(ABC):
             self._last_request = time.time()
     
     def _check_permission(self, url: str) -> bool:
-        """İzin kontrolü (robots.txt + KVKK)."""
-        if not self.domain:
+        """İzin kontrolü (robots.txt + KVKK).
+
+        SEC-02/DATA-01: domain tanımlı değilse (dinamik şirket siteleri)
+        URL'den çıkarılır; izin kontrolü hiçbir sağlayıcıda atlanmaz.
+        """
+        domain = self.domain
+        if not domain:
+            from urllib.parse import urlparse as _urlparse
+            try:
+                domain = _urlparse(url).netloc or None
+            except Exception:
+                domain = None
+        if not domain:
             return True
         decision = self.router.check(url)
         if not decision.allowed:
             logger.warning("[%s] İzin reddedildi: %s - %s", self.source_name, url, decision.reason)
             return False
         return True
-    
+
     def _fetch(self, url: str, timeout: int = 15) -> str | None:
         """Sayfa çek (izin + rate limit + encoding düzeltme)."""
         if not self._check_permission(url):
@@ -130,7 +141,7 @@ class BaseJobSource(ABC):
         self._rate_limit()
         
         try:
-            resp = self.session.get(url, timeout=timeout, verify=False, allow_redirects=True)
+            resp = self.session.get(url, timeout=timeout, allow_redirects=True)
             resp.raise_for_status()
             resp.encoding = resp.apparent_encoding or "utf-8"
             return resp.text

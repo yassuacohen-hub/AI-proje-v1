@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Job Postings Ingest Script — JSONL dosyalarını job_postings tablosuna yazar.
 
@@ -72,65 +72,79 @@ def parse_datetime(dt_str: str | None) -> datetime | None:
 
 
 def prepare_job_record(record: dict[str, Any], matcher: CompanyMatcher, source_name: str) -> dict[str, Any] | None:
-    """Ham kaydı DB kayıt formatına çevir."""
-    # Şirket eşleştirme
+    """Ham kaydi DB kayit formatina cevirir.
+
+    DATA-01:
+    - Firma eslestirmede firma adi onecilikli; title yalnizca geri donus.
+    - raw_data.company_id'ye yalniz kendi scraper'imiz (company-career-pages) urettiginde guvenilir.
+    - external_id bos ise deterministic auto-id uretilir (UNIQUE dedup).
+    """
+    raw = record.get("raw_data") or {}
+    firma_adi = record.get("company_name") or raw.get("company_name") or record.get("title")
+    domain_ipucu = (raw.get("company_domain")
+                    or record.get("career_page_url")
+                    or record.get("source_url")
+                    or record.get("domain"))
+
     match_result: MatchResult = matcher.match(
-        raw_name=record.get("title") or record.get("company_name"),
-        domain=record.get("source_url") or record.get("career_page_url"),
+        raw_name=firma_adi,
+        domain=domain_ipucu,
         tax_number=record.get("tax_number"),
-        mersis=record.get("mersis")
+        mersis=record.get("mersis"),
     )
-    
     company_id = match_result.company_id
-    
-    # Eşleşme yoksa kaynak adından domain çıkararak dene
+
+    # Eslesme yoksa source_url uzerinden domain denenir (portal URL ise eslesmez, zararsiz).
     if not company_id and record.get("source_url"):
         from company_master.intelligence.job_intelligence.pipeline.normalizer import extract_domain
         domain = extract_domain(record["source_url"])
         if domain:
             match_result = matcher.match(domain=domain)
             company_id = match_result.company_id
-    
-    # Hala eşleşme yoksa ve raw_data'dan company_id varsa kullan
-    if not company_id and record.get("raw_data", {}).get("company_id"):
+
+    # DATA-01: Dis kaynaktan gelen keyfi company_id guvenilmez; yalniz kendi uretimimize izin ver.
+    if not company_id and source_name == "company-career-pages" and raw.get("company_id"):
         try:
             from uuid import UUID
-            company_id = UUID(record["raw_data"]["company_id"])
+            company_id = UUID(str(raw["company_id"]))
             match_result = MatchResult(
                 company_id=company_id,
-                matched_name=None,
+                matched_name=raw.get("company_name"),
                 match_type="raw_data",
-                confidence=90.0,
-                details={}
+                confidence=0.95,
+                details={"source": source_name},
             )
-        except Exception:
+        except (ValueError, AttributeError, TypeError):
             pass
-    
-    # Şirket eşleşmediysine atla (logla ama hata yapma)
+
+    # Sirket eslesmediyse karantinaya yaz (dongude _karantina_yaz cagrilir).
     if not company_id:
-        log.debug("Eşleşme yok: %s (source=%s)", record.get("title", "")[:50], source_name)
+        log.debug("Eslesme yok: %s (source=%s)", record.get("title", "")[:50], source_name)
         return None
-    
+
     # Tarih parse et
     posted_at = parse_datetime(record.get("posted_at"))
     expired_at = parse_datetime(record.get("expired_at"))
     collected_at = parse_datetime(record.get("collected_at")) or datetime.now()
-    
-    # Content hash hesapla (deduplication için)
+
+    # Content hash (deduplication)
     import hashlib
     content_parts = [
         str(company_id),
         record.get("title", ""),
-        record.get("source_url", ""),
+        record.get("source_url", "") or record.get("career_page_url", ""),
         record.get("description", "")[:200] if record.get("description") else "",
     ]
     content_hash = hashlib.sha256("|".join(content_parts).encode()).hexdigest()[:32]
-    
+
+    # DATA-01: external_id bos ise deterministic auto-id -> UNIQUE(source_name, external_id) dedup calisir.
+    external_id = record.get("external_id") or f"auto:{content_hash}"
+
     return {
         "company_id": str(company_id),
         "source_name": source_name,
-        "source_url": record.get("source_url", ""),
-        "external_id": record.get("external_id"),
+        "source_url": record.get("source_url", "") or record.get("career_page_url", ""),
+        "external_id": external_id,
         "title": record.get("title", "")[:500],
         "description": record.get("description"),
         "department": record.get("department"),
@@ -139,7 +153,7 @@ def prepare_job_record(record: dict[str, Any], matcher: CompanyMatcher, source_n
         "location_country": record.get("location_country", "Türkiye"),
         "employment_type": record.get("employment_type"),
         "remote_type": record.get("remote_type"),
-        "technologies": record.get("technologies", []),
+        "technologies": json.dumps(record.get("technologies", [])),
         "salary_min": record.get("salary_min"),
         "salary_max": record.get("salary_max"),
         "salary_currency": record.get("salary_currency", "TRY"),
@@ -147,9 +161,27 @@ def prepare_job_record(record: dict[str, Any], matcher: CompanyMatcher, source_n
         "expired_at": expired_at,
         "collected_at": collected_at,
         "content_hash": content_hash,
-        "raw_data": record.get("raw_data", {}),
+        "raw_data": json.dumps(raw, ensure_ascii=False),
     }
 
+def _karantina_yaz(record: dict[str, Any], source_name: str) -> None:
+    """Eslesmeyen kaydi karantina dosyasina ekler (analiz icin; DB'ye yazmaz)."""
+    try:
+        q_path = ROOT / "data" / "job_intelligence" / "unmatched_quarantine.jsonl"
+        q_path.parent.mkdir(parents=True, exist_ok=True)
+        raw = record.get("raw_data") or {}
+        entry = {
+            "source_name": source_name,
+            "external_id": record.get("external_id"),
+            "title": record.get("title", "")[:200],
+            "company_name": record.get("company_name") or raw.get("company_name"),
+            "source_url": record.get("source_url") or record.get("career_page_url"),
+            "quarantined_at": datetime.now().isoformat(),
+        }
+        with open(q_path, "a", encoding="utf-8") as f:
+            f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+    except OSError as exc:
+        log.warning("Karantina yazilamadi: %s", exc)
 
 def ingest_job_postings() -> dict[str, int]:
     """Tüm kaynak dosyalarını işle ve DB'ye yaz."""
@@ -188,6 +220,7 @@ def ingest_job_postings() -> dict[str, int]:
                 try:
                     prepared = prepare_job_record(record, matcher, source_name)
                     if not prepared:
+                        _karantina_yaz(record, source_name)
                         continue
                     
                     source_matched += 1
@@ -305,4 +338,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
-    sys.exit(main()
+    sys.exit(main())
+
+
+

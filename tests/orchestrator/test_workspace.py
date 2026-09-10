@@ -68,3 +68,25 @@ def test_scan_for_secrets_detected(tmp_path):
     findings = scan_for_secrets(dirty)
     assert len(findings) == 1
     assert "secret.py" in findings[0]
+def test_validate_write_path_sibling_directory_rejected():
+    """SEC-02: startswith hatasi - 'cursor_grok_evil2' ayni on ekle baslar ama farkli dizindir."""
+    with pytest.raises(WorkspaceViolation):
+        validate_write_path("cursor_grok", "workspace/external/cursor_grok_evil2/output.txt")
+
+
+def test_validate_write_path_kardes_manifest_rejected():
+    """SEC-02: startswith hatasi - ALLOWED_ROOT.Workspace 'external_evil' external ile baslar ama kardes dizindir."""
+    manifest = AgentManifest(
+        agent_id="cursor_grok",
+        display_name="Cursor Grok",
+        task_type=TaskType.REFACTORING,
+        workspace_path="workspace/external_evil/cursor",
+    )
+    with pytest.raises(WorkspaceViolation):
+        validate_manifest(manifest)
+
+
+def test_validate_write_path_dotdot_traversal_rejected():
+    """SEC-02: .. traversal resolve edilince workspace disina tasar -> engellenmeli."""
+    with pytest.raises(WorkspaceViolation):
+        validate_write_path("cursor_grok", "workspace/external/cursor_grok/../../secret.txt")

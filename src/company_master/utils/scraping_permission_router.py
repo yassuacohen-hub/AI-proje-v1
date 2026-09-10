@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """OSINT Scraper Motoru â€” Izin/Rate-Limit Router (merkezi).
 
 Her scraper'in ayri ayri robots.txt okumasi yerine tek merkez:
@@ -91,6 +91,14 @@ class PermissionRouter:
 
     def _policy_for(self, domain: str) -> SourcePolicy:
         return self._policies.get(domain, SourcePolicy(domain=domain))
+    def policy_for(self, domain: str) -> SourcePolicy:
+        """SEC-02: Dinamik domain politika erisimi (yoksa default uretilir).
+
+        Domain bazli KVKK/rate-limit politikasini disariya acar; dinamik
+        kaynaklar (ornek: sirket kariyer sayfalari) politikayi register
+        etmeden de default kurallari (robots + rate limit) kullanabilir.
+        """
+        return self._policy_for(domain)
 
     # ---- robots.txt (TTL'li cache) ----
     def _robots_ok(self, url: str, policy: SourcePolicy) -> tuple[bool, str]:

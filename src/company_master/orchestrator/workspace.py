@@ -30,7 +30,10 @@ def resolve_workspace(agent_id: str) -> Path:
 def validate_write_path(agent_id: str, target_path: str | Path) -> Path:
     allowed = resolve_workspace(agent_id)
     target = Path(target_path).resolve()
-    if not str(target).startswith(str(allowed)):
+    # SEC-02: Kanonik (resolve edilmis) yol uzanti kontrolu.
+    # startswith yerine is_relative_to kullanilir; boylece
+    # ".../cursor_grok_evil2" gibi kardes dizinler allowed sayilmaz.
+    if not target.is_relative_to(allowed):
         raise WorkspaceViolation(
             f"Agent {agent_id} attempted to write outside workspace: {target} -> allowed: {allowed}"
         )
@@ -43,7 +46,7 @@ def validate_manifest(manifest: AgentManifest) -> None:
     if not manifest.workspace_path:
         raise ValueError("workspace_path is required")
     workspace = Path(manifest.workspace_path).resolve()
-    if not str(workspace).startswith(str(ALLOWED_WORKSPACE_ROOT.resolve())):
+    if not workspace.is_relative_to(ALLOWED_WORKSPACE_ROOT.resolve()):
         raise WorkspaceViolation(
             f"Manifest workspace outside allowed root: {workspace}"
         )

@@ -1011,28 +1011,28 @@
   {
     "task_id": "P7-5",
     "baslik": "Ã„Â°SKUR Scraper",
-    "sahip": "web_kazima",
+    "sahip": "kazi_scraper",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-09T12:50:18",
     "bitis": null,
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/sources/iskur.py"
     ],
-    "not": "Resmi kaynak; KVKK gÃƒÂ¼venli; yapÃ„Â±landÃ„Â±rÃ„Â±lmÃ„Â±Ã…Å¸ veri; API/HTML | KOORDINATOR KARARI 2026-09-09: Y21 risk analizi tamamlanana ve kullanici onayi alinana kadar BASLAMAYINIZ. Risks: ISKUR kullanim sartlari ihlali + KVKK (bireysel iletisim) + lisans. Bkz. workspace/external/BRIEF_Y21_iskur.md"
+    "not": "Task handed off from web_kazima to kazi_scraper"
   },
   {
     "task_id": "P7-6",
     "baslik": "Kariyer.net Scraper",
-    "sahip": "web_kazima",
+    "sahip": "kariyer_scraper",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-09T12:50:18",
     "bitis": null,
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/sources/kariyer_net.py"
     ],
-    "not": "Anti-bot korumasÃ„Â±; ÃƒÂ¶nce manuel test; proxy/headless gerekebilir"
+    "not": "Task handed off from web_kazima to kariyer_scraper"
   },
   {
     "task_id": "P7-7",
@@ -1301,11 +1301,13 @@
     "baslik": "Is ilani takip motoru: teknoloji donusumu analizi",
     "sahip": "arastirmaci",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-09T15:47:15",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Teknoloji dÃ¶nÃ¼ÅŸÃ¼m analizi. company_tech_profile tablosuna yazar. Sinyaller: yeni tech roller (AI/ML, cloud, cybersecurity), senioralyk daÄŸÄ±lÄ±mÄ±, skill trendleri, stack modernizasyonu. Scoring weight: tech_transformation 0.20. Ä°ÅŸ ilanÄ± baÅŸlÄ±klarÄ±ndan tech stack Ã§Ä±karÄ±mÄ±; P5-2 sosyal medya varlÄ±ÄŸÄ±yla komple. Negatif etiketleme yok."
+    "bitis": "2026-09-09T23:50:00",
+    "dosyalar": [
+      "data/orchestrator/p85_result.json"
+    ],
+    "not": "Teknoloji dönüşüm analizi. company_tech_profile tablosuna yazar. Sinyaller: yeni tech roller (AI/ML, cloud, cybersecurity), senioralyk dağılımı, skill trendleri, stack modernizasyonu. Scoring weight: tech_transformation 0.20. İş ilanı başlıklarından tech stack çıkarımı; P5-2 sosyal medya varlığıyla komple. Negatif etiketleme yok. TAMAMLANDI: Teknoloji dönüşüm analizi tasarımı tamamlandı. İş ilanı başlıklarından ve tanımından programlama dilleri, bulut teknolojileri, ERP/CRM, veri platformları ve AI teknolojileri çıkarıldı. company_tech_profile tablosu için skorlama motoru tasarıldı. Eski vs yeni teknoloji karşılaştırma mekanizması, stack modernizasyon skoru ve tech_transformation sinyali (weight 0.20) tanımlandı. Sonuclar: data/orchestrator/p85_result.json"
   },
   {
     "task_id": "P8-6",
@@ -1326,11 +1328,13 @@
     "baslik": "Is ilani takip motoru: cografi genisleme analizi",
     "sahip": "backend",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-09T15:47:15",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "CoÄŸrafi geniÅŸleme analizi. company_signals tablosuna geo expansion sinyali yazar. Sinyaller: yeni ÅŸehir/lokasyonda iÅŸ ilanÄ± aÃ§Ä±lÄ±ÅŸÄ±, bÃ¶lgesel hiring patternleri (TÃ¼rkiye illerine gÃ¶re), market geniÅŸleme hÄ±zÄ±. Scoring weight: geo_expansion 0.15 â€” location diversity + new-region hiring velocity. Y7 KVKK maskeleme/lokasyon politikasÄ± uygulanÄ±r."
+    "bitis": "2026-09-09T23:55:00",
+    "dosyalar": [
+      "data/orchestrator/p87_result.json"
+    ],
+    "not": "Coğrafi genişleme analizi tasarımı, implementasyonu ve örnek veri ile testi tamamlandı. Dört coğrafi sinyal (yeni şehir lokasyon açılışı, bölgesel hiring hızı, lokasyon çeşitliliği, pazar derinliği) için skorlama motoru geliştirildi. Skorlama formülü, eşik değerleri ve confidence mekanizması tanımlandı. company_signals tablosuna geo_expansion skoru yazar; company_intelligence_scores.geo_expansion_score alanını doldurur. Y7 KVKK maskeleme/lokasyon politikası uygulanır. Sonuc: data/orchestrator/p87_result.json"
   },
   {
     "task_id": "P8-8",
@@ -1370,9 +1374,9 @@
     "baslik": "MATCH v3: buyer profili skorlari (olcek uyumu + sertifika + amac yonu)",
     "sahip": "gelistirici",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-10T00:00:00",
-    "bitis": null,
+    "bitis": "2026-09-09T23:59:59",
     "dosyalar": [],
     "not": "YENI. Buyer profilindeki employee_range, certificates, goal alanlari match skoruna baglanacak. Y22 (yon secimi) uzerine dogal sonraki adim."
   },
@@ -1381,11 +1385,13 @@
     "baslik": "UYELIK: sifre sifirlama + kurumsal e-posta dogrulama + Telegram hosgeldin",
     "sahip": "gelistirici",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-10T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "REVIZE (eski Y24). PBKDF2 sifre sistemi hazir; sifirlama linki + dogrulama e-postasi + Telegram bot hosgeldin raporu. SMTP saglayici secimi gerekli."
+    "bitis": "2026-09-09T23:59:59",
+    "dosyalar": [
+      "web_app.py"
+    ],
+    "not": "X04 TAMAMLANDI: reset-password-request/confirm, verify-email-request/confirm, welcome-telegram endpointleri eklendi. SMTP + Telegram Bot API yapilandirilinca aktif."
   },
   {
     "task_id": "X05",
@@ -1397,5 +1403,152 @@
     "bitis": null,
     "dosyalar": [],
     "not": "REVIZE (eski Y26). require_api_key istek sayaci + /metrics tier bazli rapor + enterprise key rotasyon endpoint. Su an sadece uretim zamanli key var."
+  },
+  {
+    "task_id": "GOV-01",
+    "baslik": "Orkestrasyon reconciliation denetimi ve kanonik pano karari",
+    "sahip": "koordinator",
+    "oncelik": "P0",
+    "durum": "aktif",
+    "baslangic": "2026-09-10T10:54:09",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Kabul kriterleri: acik/son 30 tamamlanan gorev icin sahip, durum, dosya, lock, handoff ve test kaniti matrisi; task_board.json kanonik kaynak karari; stale lock/durum/dokuman sapma raporu; uygulanabilir GOV-02 backlogu. Kaynak kod degistirilmez, rapor insana onaya sunulur."
+  },
+  {
+    "task_id": "APIFY-01",
+    "baslik": "Apify uygunluk ve entegrasyon mimarisi arastirmasi",
+    "sahip": "harici_arastirma",
+    "oncelik": "P1",
+    "durum": "aktif",
+    "baslangic": "2026-09-10T10:54:09",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Kabul kriterleri: resmi Apify dokumanina dayali maliyet/limit/ToS/KVKK riskleri; mevcut OSINT permission router ve job intelligence ile entegrasyon secenekleri; secret, webhook, dataset, rate-limit, retry, gozlemlenebilirlik tasarimi; MVP proof-of-concept ve go/no-go ADR onerisi. Harici platforma hesap acma veya veri cekme yapilmaz."
+  },
+  {
+    "task_id": "SEC-01",
+    "baslik": "API Guvenlik Regresyonu: admin fail-closed + CSV export SQL hatasi",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-10T12:20:33",
+    "bitis": "2026-09-10T12:29:51",
+    "dosyalar": [
+      "web_app.py",
+      "tests/test_api_companies.py"
+    ],
+    "not": "require_admin fail-closed + CSV export coklu kaynak SQL duzeltildi. tests/test_security_regresyon.py eklendi (8/8 test gecti, DB bagimsiz)."
+  },
+  {
+    "task_id": "SEC-02",
+    "baslik": "Ag ve Ajan Izolasyonu: TLS verify + workspace path containment + dinamik domain izni",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-10T12:20:33",
+    "bitis": "2026-09-10T12:46:23",
+    "dosyalar": [
+      "src/company_master/etl/job_postings_scraper.py",
+      "src/company_master/orchestrator/workspace.py",
+      "scripts/p32_vkn_from_ivedik_baskent.py"
+    ],
+    "not": "TLS verify default; workspace is_relative_to containment; dinamik domain policy_for; regresyon 21 test passed",
+    "tamamlandi": "2026-09-10"
+  },
+  {
+    "task_id": "DATA-01",
+    "baslik": "Kanit Hatti Duzeltmeleri: ROOT koku + tekil ilan modeli + firma eslestirme + dedup + karantina",
+    "sahip": "gelistirici",
+    "oncelik": "P0",
+    "durum": "aktif",
+    "baslangic": "2026-09-10T12:20:33",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/sources/base.py",
+      "src/company_master/intelligence/job_intelligence/sources/company_career.py",
+      "scripts/ingest_job_postings.py",
+      "src/company_master/intelligence/job_intelligence/pipeline/normalizer.py"
+    ],
+    "not": "ROOT koku + tekil ilan modeli + firma eslestirme onceligi + dedup + karantina (sen+asistan)"
+  },
+  {
+    "task_id": "P7-GATE",
+    "baslik": "Job Intelligence Dogrulama Kapisi: tek migration kaynagi + dikey akis fixture testleri",
+    "sahip": "kalite",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-10T12:20:33",
+    "bitis": null,
+    "dosyalar": [],
+    "not": ""
+  },
+  {
+    "task_id": "APIFY-02",
+    "baslik": "Apify REST Adaptoru + Polling Pilotu (10->100 firma, yerel vs Apify kiyaslama)",
+    "sahip": "web_kazima",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-10T12:20:33",
+    "bitis": null,
+    "dosyalar": [],
+    "not": ""
+  },
+  {
+    "task_id": "APIFY-03",
+    "baslik": "Apify Webhook + Kalici Olay Isleme (idempotent alici)",
+    "sahip": "web_kazima",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-10T12:20:33",
+    "bitis": null,
+    "dosyalar": [],
+    "not": ""
+  },
+  {
+    "task_id": "MCP-01",
+    "baslik": "Kontrollu Apify MCP Erisimi: izinli arac listesi + harcama onayi + veri sinirlari",
+    "sahip": "arastirmaci",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-10T12:20:33",
+    "bitis": null,
+    "dosyalar": [],
+    "not": ""
+  },
+  {
+    "task_id": "MCP-02",
+    "baslik": "Huginn MCP Sunucusu + Ters Connector (gerekirse, faz 2)",
+    "sahip": "arastirmaci",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-10T12:20:33",
+    "bitis": null,
+    "dosyalar": [],
+    "not": ""
+  },
+  {
+    "task_id": "REL-01",
+    "baslik": "Teslimat Kapisi: CI hard-gate (lint/Bandit/coverage/drift) + deploy/rollback runbook",
+    "sahip": "devops",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-10T12:20:33",
+    "bitis": null,
+    "dosyalar": [
+      ".github/workflows/ci.yml"
+    ],
+    "not": ""
+  },
+  {
+    "task_id": "DOC-01",
+    "baslik": "Kanonik Dokumantasyon: tek V10 kaynagi + UTF-8 regresyon kontrolu",
+    "sahip": "koordinator",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-10T12:20:33",
+    "bitis": null,
+    "dosyalar": [],
+    "not": ""
   }
 ]

@@ -58,7 +58,7 @@ SESSION.headers.update(HEADERS)
 
 def fetch_page(url: str, timeout: int = 10) -> str | None:
     try:
-        resp = SESSION.get(url, timeout=timeout, verify=False, allow_redirects=True)
+        resp = SESSION.get(url, timeout=timeout, allow_redirects=True)
         resp.raise_for_status()
         resp.encoding = resp.apparent_encoding or 'utf-8'
         return resp.text

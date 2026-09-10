@@ -1,32 +1,47 @@
-﻿{
-  "src/company_master/etl/scrapers/ivedik_scraper.py": {
+{
+  "src/company_master/db/migrations/0007_job_intelligence.sql": {
     "sahip": "gelistirici",
-    "task_id": "T1",
-    "litkilendi": "2026-09-03T07:21:14"
+    "task_id": "P7-1",
+    "kilitlendi": "2026-09-09T12:50:18"
   },
-  "src/company_master/schema/migrations/0007_osb.sql": {
+  "src/company_master/intelligence/job_intelligence/": {
     "sahip": "mimar",
-    "task_id": "T3b",
-    "litkilendi": "2026-09-03T07:22:13"
+    "task_id": "P7-2",
+    "kilitlendi": "2026-09-09T12:50:18"
   },
-  "scripts/vkn_web_scraper.py": {
-    "sahip": "web_kazima",
-    "task_id": "P1-7",
-    "litkilendi": "2026-09-06T16:59:56"
+  "src/company_master/intelligence/job_intelligence/sources/iskur.py": {
+    "sahip": "kazi_scraper",
+    "task_id": "P7-5",
+    "kilitlendi": "2026-09-09T12:50:18"
   },
-  "AI proje v1/V10/07_referanslar/vkn_bulma_stratejisi.md": {
-    "sahip": "web_kazima",
-    "task_id": "P1-7",
-    "litkilendi": "2026-09-06T16:59:56"
+  "src/company_master/intelligence/job_intelligence/sources/kariyer_net.py": {
+    "sahip": "kariyer_scraper",
+    "task_id": "P7-6",
+    "kilitlendi": "2026-09-09T12:50:18"
   },
-  "scripts/recalc_intelligence_scores.py": {
+  "src/company_master/intelligence/job_intelligence/sources/base.py": {
     "sahip": "gelistirici",
-    "task_id": "P7-10",
-    "kilitlendi": "2026-09-09T16:42:48"
+    "task_id": "DATA-01",
+    "kilitlendi": "2026-09-10T12:20:33"
   },
   "src/company_master/intelligence/job_intelligence/sources/company_career.py": {
-    "sahip": "web_kazima",
-    "task_id": "P7-4",
-    "kilitlendi": "2026-09-09T16:50:00"
+    "sahip": "gelistirici",
+    "task_id": "DATA-01",
+    "kilitlendi": "2026-09-10T12:20:33"
+  },
+  "scripts/ingest_job_postings.py": {
+    "sahip": "gelistirici",
+    "task_id": "DATA-01",
+    "kilitlendi": "2026-09-10T12:20:33"
+  },
+  "src/company_master/intelligence/job_intelligence/pipeline/normalizer.py": {
+    "sahip": "gelistirici",
+    "task_id": "DATA-01",
+    "kilitlendi": "2026-09-10T12:20:33"
+  },
+  ".github/workflows/ci.yml": {
+    "sahip": "devops",
+    "task_id": "REL-01",
+    "kilitlendi": "2026-09-10T12:20:33"
   }
 }

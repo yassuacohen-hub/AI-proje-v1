@@ -913,7 +913,7 @@ function renderMatchResults(d, mode, yon) {
       </div>
       <div class="mr-nace">${esc(i.nace_code || '-')}</div>
       <div class="mr-score">${matchScoreBar(i.match.puan)}</div>
-      <div class="mr-rel">${matchBadge(i.match.iliski)}${matchKirilim(i.match.kirilim)}</div>
+      <div class="mr-rel">${matchBadge(i.match.iliski)}${matchKirilim(i.match.kirilim)}${i.match.profil_bonus && i.match.profil_bonus.length ? `<div class="profil-badge-list">${i.match.profil_bonus.map(b => `<span class="match-badge">${b}</span>`).join(' ')}</div>` : ''}</div>
     </div>`).join('');
 }
 

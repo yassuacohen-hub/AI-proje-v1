@@ -136,5 +136,23 @@
     "sonraki_adim": "web_app.py BUG-1 (export f-string) ve BUG-2 (cache_get eksikligi) duzeltmeleri gerekiyor. app.py Streamlit dashboardu DashboardPerfMonitor modulunu kullanmalidir.",
     "dikkat_edilmesi": "ROUND-TRIP latency Supabase (~200ms/sorgu) DB execution time'dan daha yuksek. Caching ve sorgu sayisini azaltma en etkili optimizasyon. ILIKE multi-column OR aramasi search_text GIN trigram index ile 99.5% iyilestirildi.",
     "tarih": "2026-09-09T11:32:51"
+  },
+  "P8-8": {
+    "tamamlandi": "Kurumsal rapor ve medya entegrasyonu tasari tamamlandi",
+    "sonraki_adim": "P8-9/medya_pipeline",
+    "dikkat_edilmesi": "Medya entegrasyonu MVP once P8-9 gorulmeli",
+    "tarih": "2026-09-09T23:47:38"
+  },
+  "SEC-01": {
+    "tamamlandi": "web_app.py require_admin fail-closed ve CSV export coklu kaynak SQL hatasi duzeltildi; 8 regresyon testi gecti.",
+    "sonraki_adim": "SEC-02 (TLS + workspace containment) ve sonra DATA-01 (kanit hatti) oncelikli.",
+    "dikkat_edilmesi": "tests/test_security_regresyon.py DB bagimsizdir; canli DB gerektirmez.",
+    "tarih": "2026-09-10T12:29:51"
+  },
+  "SEC-02": {
+    "tamamlandi": "TLS dogrulama varsayilan yapildi (verify=False kaldirildi), workspace.py is_relative_to ile kanonik containment, scraping_permission_router.policy_for eklendi.",
+    "sonraki_adim": "DATA-01: base.py/company_career.py dinamik domain iznini policy_for ile tamamla; sonra P7-GATE.",
+    "dikkat_edilmesi": "file_locks.json bir ajan tarafindan bosaltilmisti; aktif gorevlerden yeniden kuruldu. GOV-01 raporuna race kaniti olarak eklenmeli.",
+    "tarih": "2026-09-10T12:49:00"
   }
 }
