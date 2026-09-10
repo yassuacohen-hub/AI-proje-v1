@@ -32,6 +32,7 @@
 | MCP-02 | Huginn MCP Sunucusu + Ters Connector (gerekirse, faz 2) | arastirmaci | P2 | plan | - |
 | REL-01 | Teslimat Kapisi: CI hard-gate (lint/Bandit/coverage/drift) + deploy/rollback runbook | devops | P1 | plan | .github/workflows/ci.yml |
 | DOC-01 | Kanonik Dokumantasyon: tek V10 kaynagi + UTF-8 regresyon kontrolu | koordinator | P1 | plan | - |
+| OBS-01 | Obsidian vault standardizasyonu: tek V10 kaynagi + UTF-8 + link denetimi | koordinator | P1 | aktif | AI proje v1/V10/project_state.md, Huginn Data Insights/V10, AI proje v1/V10 |
 
 ## Tamamlananlar
 

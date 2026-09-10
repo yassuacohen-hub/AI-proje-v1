@@ -961,13 +961,13 @@
     "baslik": "DB Migration 0007 - Job Intelligence tablolari",
     "sahip": "gelistirici",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-09T12:50:18",
-    "bitis": null,
+    "bitis": "2026-09-10T18:24:11.626570",
     "dosyalar": [
       "src/company_master/db/migrations/0007_job_intelligence.sql"
     ],
-    "not": "job_postings, company_signals, company_intelligence_scores, company_tech_profile, company_aliases tablolari"
+    "not": "Migration 0007_job_intelligence.sql Supabase'e uygulandi: 5 tablo (job_postings, company_signals, company_intelligence_scores, company_tech_profile, company_aliases) + 2 view + 2 trigger olustu. BOM temizlendi, PL/pgSQL trigger ayrisca islendi."
   },
   {
     "task_id": "P7-2",
