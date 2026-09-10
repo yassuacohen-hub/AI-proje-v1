@@ -70,3 +70,7 @@ package-lock.json
 .kilo/
 .kimi-code/
 agent/
+
+# Nested git repo içeren skill dizinleri (ayrı remote'ları var)
+.claude/skills/supabase/
+data/skills/supabase/
