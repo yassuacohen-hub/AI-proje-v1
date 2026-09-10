@@ -11,14 +11,10 @@
             "id": "ed3559f40885269c",
             "type": "leaf",
             "state": {
-              "type": "markdown",
-              "state": {
-                "file": "V10/00-Home.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "00-Home"
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "Grafik Görünümü"
             }
           }
         ]
@@ -188,6 +184,8 @@
   },
   "active": "ed3559f40885269c",
   "lastOpenFiles": [
+    "scripts/_compact_ps.py",
+    "V10/00-Home.md",
     "scripts/__pycache__/build_wiki_index.cpython-312.pyc",
     "data/orchestrator/apify_research_result.json",
     "AGENTS.md",
@@ -202,7 +200,6 @@
     "scripts/_doc02_mojibake_onar.py",
     "scripts/_doc02_fix_links.py",
     "data/orchestrator/wiki_index.json",
-    "scripts/build_wiki_index.py",
     "backups/AI_proje_v1_V10_20260910_153420/TODO.md",
     "backups/AI_proje_v1_V10_20260910_153420/README.md",
     "backups/AI_proje_v1_V10_20260910_153420/project_state.md",
@@ -222,7 +219,6 @@
     "backups/AI_proje_v1_V10_20260910_153420/09_kurallar_ve_promptlar/03_kvkk_ve_veri_politikasi.md",
     "backups/AI_proje_v1_V10_20260910_153420/09_kurallar_ve_promptlar/02_calisma_kurallari.md",
     "backups/AI_proje_v1_V10_20260910_153420/09_kurallar_ve_promptlar/01_kasa_kurallari.md",
-    "backups/AI_proje_v1_V10_20260910_153420/12_kalite_metrikleri/01_kalite_skoru_ek_metrikleri.md",
-    "backups/AI_proje_v1_V10_20260910_153420/templates/Spec-template.md"
+    "backups/AI_proje_v1_V10_20260910_153420/12_kalite_metrikleri/01_kalite_skoru_ek_metrikleri.md"
   ]
 }
