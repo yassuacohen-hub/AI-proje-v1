@@ -974,13 +974,13 @@
     "baslik": "Job Intelligence modul yapisi olusturma",
     "sahip": "mimar",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-09T12:50:18",
-    "bitis": null,
+    "bitis": "2026-09-10T18:32:29.419240",
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/"
     ],
-    "not": "sources/, pipeline/, storage/, api/ klasorleri ve __init__.py dosyalari"
+    "not": "Modul yapisi tam: sources/(base,company_career,iskur,apify_client), pipeline/(scorer,normalizer), storage/(intelligence_repo), api/(router). models.py Pydantic modelleri hazir. Tum __init__.py dosyalari mevcut."
   },
   {
     "task_id": "P7-3",
