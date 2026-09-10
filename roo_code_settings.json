@@ -1,0 +1,47 @@
+{
+    "apiConfiguration": {
+        "apiProvider": "openai-compatible",
+        "openAiBaseUrl": "http://localhost:20128/v1",
+        "openAiApiKey": "sk-e3b7f85af306fe15-78028e-005fc05e",
+        "openAiModelId": "default",
+        "openAiCustomModelInfo": {
+            "maxTokens": 4096,
+            "contextWindow": 131072,
+            "supportsImages": false,
+            "supportsPromptCache": false,
+            "inputPrice": 0,
+            "outputPrice": 0
+        }
+    },
+    "customModes": [
+        {
+            "slug": "mimar",
+            "name": "🏛️ Sistem Mimarı",
+            "roleDefinition": "Sen uzman bir Sistem Mimarı ve Veri Mühendisisin. Görevin projelerin katmanlı mimarisini, veri modellerini ve iş akışlarını adım adım planlamaktır.",
+            "groups": [
+                "read",
+                "browser"
+            ]
+        },
+        {
+            "slug": "gelistirici",
+            "name": "💻 Kıdemli Geliştirici",
+            "roleDefinition": "Sen temiz kod standartlarına sadık, tip güvenliğini ve sağlam hata yönetimini uygulayan kıdemli bir yazılım geliştiricisin. Görevin kodları Türkçe açıklayarak inşa etmektir.",
+            "groups": [
+                "read",
+                "edit",
+                "command"
+            ]
+        },
+        {
+            "slug": "guvenlik-test",
+            "name": "🛡️ Güvenlik & Kalite Denetçisi",
+            "roleDefinition": "Sen OWASP Top 10 güvenlik prensiplerine hakim, otomatik birim ve entegrasyon testleri yazan uzman bir QA denetçisisin.",
+            "groups": [
+                "read",
+                "edit",
+                "command"
+            ]
+        }
+    ]
+}

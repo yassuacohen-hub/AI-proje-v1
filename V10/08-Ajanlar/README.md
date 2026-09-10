@@ -47,7 +47,7 @@ Her ajanın bağlandığı wiki belgeleri ve kod konumları (llm-wiki modeli, DO
 |------|----------------|-----------|
 | koordinatör | [[Orkestrator]] · [[01_koordinator_ajan]] | `src/company_master/orchestrator/` |
 | mimar | [[01_etl_mimarisi]] · [[01_sirket_master_ana_belgesi]] | `src/company_master/schema/` |
-| arastirmaci | [[09_osint_rol_tanimi]] · [[07_referanslar/README]] · [[10_apify_entegrasyon_arastirmasi_20260910]] | `scripts/research/` |
+| arastirmaci | [[09_osint_rol_tanimi]] · [[07_referanslar/01_veri_kaynagi_envanteri]] · [[10_apify_entegrasyon_arastirmasi_20260910]] | `scripts/research/` |
 | gelistirici | [[01_mvp_gereksinimleri]] · [[01_etl_mimarisi]] · [[CHANGELOG]] | `src/company_master/etl/` |
 | kalite | [[01_kalite_skoru_ek_metrikleri]] · [[05_kalite_ajan]] | `tests/` |
 | web_kazima | [[OSINT_Scraper_Motoru]] · [[06_web_kazima_uzmani]] · [[02_ankara_osb_erisim_planlari]] | `src/company_master/utils/scraping_permission_router.py` |
