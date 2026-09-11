@@ -2809,3 +2809,88 @@ def api_company_detail(
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+@app.get("/api/intelligence/dashboard")
+def api_intelligence_dashboard(
+    limit: int = 10, _auth: str = Depends(require_api_key)
+) -> dict:
+    """P7-15: Signal Dashboard aggregation.
+
+    company_signals (aktif) + company_intelligence_scores toplu ozet dondurur.
+    SQLite/PostgreSQL uyumlu; tablolar yoksa bos veri doner.
+    """
+    engine = get_engine()
+    now_iso = datetime.utcnow().isoformat()
+    out = {
+        "signal_type_counts": {},
+        "total_active_signals": 0,
+        "scored_companies": 0,
+        "top_growth": [],
+        "top_investment": [],
+        "top_risk": [],
+        "hiring_trends": {},
+        "recent_signals": [],
+        "generated_at": datetime.now().isoformat(timespec="seconds"),
+    }
+
+    def _safe_rows(sql, params=None):
+        try:
+            with engine.connect() as conn:
+                rows = conn.execute(text(sql), params or {}).mappings().all()
+                return [dict(r) for r in rows]
+        except Exception:
+            return []
+
+    # Aktif sinyal turune gore dagilim (valid_until gelecekte ya da bos)
+    rows = _safe_rows("""
+        SELECT signal_type, COUNT(*) AS cnt
+        FROM company_signals
+        WHERE valid_until IS NULL OR valid_until > :now
+        GROUP BY signal_type ORDER BY cnt DESC
+    """, {"now": now_iso})
+    total = 0
+    for r in rows:
+        out["signal_type_counts"][r["signal_type"]] = r["cnt"]
+        total += r["cnt"]
+    out["total_active_signals"] = total
+
+    # Skorlanmis sirket sayisi
+    rows = _safe_rows("SELECT COUNT(*) AS cnt FROM company_intelligence_scores")
+    out["scored_companies"] = rows[0]["cnt"] if rows else 0
+
+    # Top N listeleri (JOIN companies ile isim)
+    top_sql = """
+        SELECT s.company_id, c.legal_name, s.{field} AS score,
+               s.hiring_trend, s.overall_confidence, s.signal_count_30d,
+               s.updated_at
+        FROM company_intelligence_scores s
+        LEFT JOIN companies c ON c.company_id = s.company_id
+        ORDER BY s.{field} DESC LIMIT :lim
+    """
+    out["top_growth"] = _safe_rows(top_sql.format(field="growth_score"), {"lim": limit})
+    out["top_investment"] = _safe_rows(
+        top_sql.format(field="investment_signal_score"), {"lim": limit}
+    )
+    out["top_risk"] = _safe_rows(top_sql.format(field="risk_score"), {"lim": limit})
+
+    # Hiring trend dagilimi
+    rows = _safe_rows("""
+        SELECT hiring_trend, COUNT(*) AS cnt
+        FROM company_intelligence_scores
+        GROUP BY hiring_trend ORDER BY cnt DESC
+    """)
+    out["hiring_trends"] = {r["hiring_trend"]: r["cnt"] for r in rows}
+
+    # Son sinyaller (aktif)
+    rows = _safe_rows("""
+        SELECT cs.company_id, c.legal_name, cs.signal_type, cs.signal_subtype,
+               cs.score, cs.confidence, cs.detected_at, cs.valid_until
+        FROM company_signals cs
+        LEFT JOIN companies c ON c.company_id = cs.company_id
+        WHERE cs.valid_until IS NULL OR cs.valid_until > :now
+        ORDER BY cs.detected_at DESC LIMIT :lim
+    """, {"now": now_iso, "lim": min(limit, 50)})
+    out["recent_signals"] = rows
+
+    return out

@@ -74,7 +74,7 @@ function fmt(n) { return (n||0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
 async function loadAll() {
   showLoading();
-  const results = await Promise.allSettled([loadKPI(), loadSources(), loadCompanies(), loadQualityTrend(), loadNACE()]);
+  const results = await Promise.allSettled([loadKPI(), loadSources(), loadCompanies(), loadQualityTrend(), loadNACE(), loadSignalDashboard()]);
   const errors = results.filter(r => r.status === 'rejected');
   if (errors.length > 0) console.error('Load errors:', errors.map(e => e.reason));
   hideLoading();
@@ -1656,4 +1656,93 @@ function saveIsletmemProfile() {
 
 function requestCreditPack() {
   toast('Credit Pack talebiniz alındı — yönetici onayıyla krediniz yüklenecek (750 TRY / 50 kredi).');
+}
+
+
+// ── P7-15: Signal Dashboard ──
+async function loadSignalDashboard() {
+  const el = document.getElementById('signal-kpis');
+  if (!el) return;
+  try {
+    const r = await fetch(apiUrl('/api/intelligence/dashboard?limit=8'));
+    if (!r.ok) throw new Error('API ' + r.status);
+    const d = await r.json();
+    renderSignalDashboard(d);
+  } catch (e) {
+    el.innerHTML = `<div class="signal-empty"><i class="fas fa-exclamation-circle"></i> Sinyal verisi yüklenemedi: ${esc(e.message)}</div>`;
+  }
+}
+
+function renderSignalDashboard(d) {
+  const meta = document.getElementById('signal-dash-meta');
+  if (meta) meta.textContent = `Son güncelleme: ${d.generated_at ? new Date(d.generated_at).toLocaleTimeString('tr-TR') : '—'} · ${fmt(d.scored_companies || 0)} şirket skorlandı`;
+
+  const kpiEl = document.getElementById('signal-kpis');
+  const typeCounts = d.signal_type_counts || {};
+  const kpis = [
+    { label: 'Aktif Sinyal', value: fmt(d.total_active_signals || 0), color: 'cyan' },
+    { label: 'Büyüme', value: fmt(typeCounts.growth || 0), color: 'green' },
+    { label: 'Yatırım', value: fmt(typeCounts.investment || 0), color: 'purple' },
+    { label: 'Risk', value: fmt(typeCounts.risk || 0), color: 'red' },
+  ];
+  kpiEl.innerHTML = kpis.map(k => `
+    <div class="kpi-card ${k.color}">
+      <div class="kpi-card-label"><i class="fas fa-chart-simple"></i> ${k.label}</div>
+      <div class="kpi-card-value">${k.value}</div>
+    </div>`).join('');
+
+  renderSignalList('signal-top-growth', d.top_growth, 'growth_score');
+  renderSignalList('signal-top-investment', d.top_investment, 'investment_signal_score');
+  renderSignalList('signal-top-risk', d.top_risk, 'risk_score');
+
+  // Tür dağılımı mini bar
+  const distEl = document.getElementById('signal-type-dist');
+  const labels = Object.keys(typeCounts);
+  if (labels.length) {
+    const max = Math.max(...Object.values(typeCounts), 1);
+    const colors = { growth:'#10b981', risk:'#ef4444', investment:'#8b5cf6', tech_transformation:'#06b6d4', geo_expansion:'#f59e0b', org_change:'#3b82f6' };
+    distEl.innerHTML = '<div class="signal-list-head"><i class="fas fa-chart-pie"></i> Sinyal Türü Dağılımı</div>' +
+      labels.map(t => `
+        <div class="signal-bar-row">
+          <span class="signal-bar-label">${esc(t)}</span>
+          <div class="signal-bar"><div class="signal-bar-fill" style="width:${Math.round(typeCounts[t]/max*100)}%;background:${colors[t]||'var(--accent)'}"></div></div>
+          <span class="signal-bar-val">${fmt(typeCounts[t])}</span>
+        </div>`).join('');
+  } else {
+    distEl.innerHTML = '<div class="signal-empty">Aktif sinyal yok.</div>';
+  }
+
+  const recentEl = document.getElementById('signal-recent-rows');
+  const recent = d.recent_signals || [];
+  recentEl.innerHTML = recent.length
+    ? recent.map(s => `
+        <div class="signal-row">
+          <span class="signal-badge" style="color:${signColor(s.signal_type)}">${esc(s.signal_type)}</span>
+          <span class="signal-name">${esc(s.legal_name || s.company_id)}</span>
+          <span class="signal-sub">${esc(s.signal_subtype || '')}</span>
+          <span class="signal-score">${Math.round(Number(s.score)||0)}</span>
+        </div>`).join('')
+    : '<div class="signal-empty">Son 50 sinyal içinde kayıt yok.</div>';
+}
+
+function renderSignalList(domId, items, field) {
+  const el = document.getElementById(domId);
+  if (!el) return;
+  const list = items || [];
+  el.innerHTML = list.length
+    ? list.map(c => `
+        <div class="signal-row" onclick="selectSignalCompany('${esc(c.company_id)}')" title="${esc(c.legal_name || '')}">
+          <span class="signal-name">${esc(c.legal_name || c.company_id)}</span>
+          <span class="signal-score">${Math.round(Number(c.score)||0)}</span>
+          <span class="signal-conf">%${Math.round(Number(c.overall_confidence)||0)}</span>
+        </div>`).join('')
+    : '<div class="signal-empty">Veri yok.</div>';
+}
+
+function selectSignalCompany(cid) {
+  if (cid) selectCompany(cid);
+}
+
+function signColor(type) {
+  return { growth:'#10b981', risk:'#ef4444', investment:'#8b5cf6', tech_transformation:'#06b6d4', geo_expansion:'#f59e0b', org_change:'#3b82f6' }[type] || 'var(--text-dim)';
 }

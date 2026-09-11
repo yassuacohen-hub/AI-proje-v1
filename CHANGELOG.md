@@ -1,5 +1,18 @@
 # CHANGELOG - Ankara B2B Company Master
 
+## 2026-09-11 - GIT-01: Hibrit Git Push Stratejisi ve Temiz Toplu Push
+
+### Temiz Toplu Push
+- Depo kararı: `origin` = `yassuacohen-hub/-AI-proje-v1-Parent-repo`; `chore/monorepo-merge` dalı uzakta oluşturuldu (ilk temiz push: `2ba17c4`, 132 dosya, +23.438/−14.125)
+- Repo temizliği: `cop_kutusu_2026_09_09/` (35 dosya), `.obsidian/`, `.vscode/`, `data/watch/` (runtime log/state), `workspace/external/test_agent/` (test kalıntısı) takipten çıkarıldı ve `.gitignore`'a eklendi (`.roo/` dahil); `.env.example` (yalnızca placeholder) kasıtlı olarak depoda kaldı
+- Push öncesi gizli bilgi taraması: `scripts/_tmp/secret_tarama.py` (GitHub PAT, OpenAI, Bearer, DB URL, env-anahtar desenleri); 139 dosya → TEMİZ. `web_app.py:772` eşleşmesi yanlış pozitifti (`_apify_webhook_receiver: ApifyWebhookReceiver` tip anotasyonu); desen tırnaklı değer gerektirecek şekilde sıkılaştırıldı
+- Çalışma ağacı push sonrası tamamen temiz (`git status` → 0)
+
+### Hibrit Push Altyapısı
+- **Ajan-bitince push:** `scripts/git_push_gorev.py` — seçmeli `git add` (`add -A` yok), koordinasyon dosyaları otomatik dahil, `pull --rebase --autostash` ile dal hizalama, push 2 deneme (VPN/kaynaklı geçici ağ hataları toleranslı); `scripts/quick_task.py --push-dosyalar ...` ile review başarısı sonrası otomatik tetiklenir; commit standardı `<TASK_ID>: <özet>`
+- **Planlı push:** Windows Zamanlayıcı "Huginn Git Push" günde 2x: **12:01 + 00:01** (eski kırık 04:00 görevi onarılmıştı: yanlış `C:\Projeler` yolu → 0x80070002); `git_auto_push.bat` artık aktif dala push + `--autostash` + 2 denemeli retry yapıyor
+- Not: Bu bölüm dahil son durum kayıtları, hibrit sistemin ilk "planlı push" turunda (12:01/00:01) otomatik olarak depoya gidecek
+
 ## 2026-09-11 - Faz 4 (ORCH-01): VALIDATE-01 + DOCS-05/06 Tamamlama, Pano Yeniden Kurulum ve Test İzolasyonu
 
 ### Test İzolasyonu (Kritik Düzeltme)

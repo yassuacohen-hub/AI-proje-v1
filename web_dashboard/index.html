@@ -55,7 +55,9 @@
         <div class="nav-item active tip" data-tip="Genel bakış: firma sayısı, kalite skoru ve veri doluluk oranları burada." role="button" tabindex="0" onclick="showView('dashboard',this); scrollToTop()"><i class="fas fa-chart-line" aria-hidden="true"></i><span>Genel Bakış</span></div>
         <div class="nav-item tip" data-tip="Tüm firmaları listeleyin, arayın, filtreleyin. Satıra tıklayınca detay paneli açılır." role="button" tabindex="0" onclick="showView('companies',this); scrollToSection('companies-section')"><i class="fas fa-building" aria-hidden="true"></i><span>Firmalar</span></div>
         <div class="nav-item tip" data-tip="Veri kaynakları: OSTİM, ASO, İvedik, Başkent, Web. Kaynağa tıklayarak firmaları filtreleyebilirsiniz." role="button" tabindex="0" onclick="showView('sources',this); scrollToSection('sources-section')"><i class="fas fa-database" aria-hidden="true"></i><span>Veri Kaynakları</span></div>
-        <div class="nav-item tip" data-tip="Veri kalitesi: skor dağılımı ve hangi alanların ne kadar dolu olduğu." role="button" tabindex="0" onclick="showView('quality',this); scrollToSection('quality-section')"><i class="fas fa-chart-bar" aria-hidden="true"></i><span>Veri Kalitesi</span></div>
+        <div class="nav-item tip" data-tip="Veri kalitesi: skor dağılımı ve hangi alanların ne kadar dolu olduğu." role="button" tabindex="0" onclick="showView\('quality',this\);\ scrollToSection\('quality-section'\)"><i\ class="fas\ fa-chart-bar"\ aria-hidden="true"></i><span>Veri\ Kalitesi</span></div>
+        <div class="nav-item tip" data-tip="P7-15: İş ilanı sinyalleri + istihbarat skorları özeti." role="button" tabindex="0" onclick="showView('signal-dashboard',this); scrollToSection('signal-dashboard-section')"><i class="fas fa-radar" aria-hidden="true"></i><span>İstihbarat Sinyalleri</span></div>
+
         <div class="nav-item tip" data-tip="V9 Smart Matching: alıcı sektörünüze en uygun firmaları puanlı görün." role="button" tabindex="0" onclick="showView('match',this); scrollToSection('match-section')"><i class="fas fa-handshake" aria-hidden="true"></i><span>Eşleştirme</span></div>
       </div>
       <div class="sidebar-section" id="info-center">
@@ -169,6 +171,35 @@
             <div id="match-status" class="match-status hidden" aria-live="polite"></div>
             <div id="match-agg" class="match-agg hidden"></div>
             <div id="match-results" class="match-results" aria-live="polite"></div>
+          </section>
+          <section class="chart-card signal-dashboard" id="signal-dashboard-section" aria-labelledby="signal-dash-title">
+            <div class="chart-card-header">
+              <div>
+                <p class="eyebrow"><i class="fas fa-radar" aria-hidden="true"></i> P7-15 SIGNAL DASHBOARD</p>
+                <h2 id="signal-dash-title">İstihbarat Sinyalleri <span class="heading-sub">company_signals + skorlar</span></h2>
+              </div>
+              <span class="card-meta" id="signal-dash-meta"></span>
+            </div>
+            <div class="signal-kpis" id="signal-kpis"></div>
+            <div class="signal-lists">
+              <div class="signal-list-card">
+                <div class="signal-list-head"><i class="fas fa-arrow-trend-up"></i> Büyüme Liderleri</div>
+                <div id="signal-top-growth" class="signal-rows"></div>
+              </div>
+              <div class="signal-list-card">
+                <div class="signal-list-head"><i class="fas fa-chart-line"></i> Yatırım Sinyalleri</div>
+                <div id="signal-top-investment" class="signal-rows"></div>
+              </div>
+              <div class="signal-list-card">
+                <div class="signal-list-head"><i class="fas fa-triangle-exclamation"></i> Risk Sinyalleri</div>
+                <div id="signal-top-risk" class="signal-rows"></div>
+              </div>
+            </div>
+            <div class="signal-type-dist" id="signal-type-dist"></div>
+            <div class="signal-recent">
+              <div class="signal-list-head"><i class="fas fa-clock-rotate-left"></i> Son Sinyaller</div>
+              <div id="signal-recent-rows" class="signal-rows"></div>
+            </div>
           </section>
 
           <section class="chart-card" aria-labelledby="nace-title">

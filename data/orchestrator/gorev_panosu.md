@@ -7,8 +7,10 @@
 
 | Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |
 |-------|--------|-------|---------|-------|----------|
-| P7-15 | Signal Dashboard / Aggregation — company_signals + company_intelligence_scores -> Grafana/HTML dashboard | kilo | P2 | aktif | - |
 | GIT-01 | Temiz depo + hibrit push stratejisi devreye alma | cline | P1 | aktif | .gitignore, scripts/git_auto_push.bat, scripts/quick_task.py |
+| 9R-02 | Vektor Katmani + Dublikasyon Pilotu - ChromaDB, vector/ paketi, index_companies.py, matcher doldurma (VKN+fuzzy+vektor) | roo_code | P1 | aktif | src/company_master/vector/, src/company_master/entity_resolution/matcher.py, scripts/index_companies.py |
+| 9R-03 | Chat Tabanli Ilan Zenginlestirme - analyzer.py'ye 9Router chat ile sektor/pozisyon/skill cikarimi (fallback: regex) | roo_code | P2 | plan | src/company_master/intelligence/job_intelligence/pipeline/analyzer.py |
+| 9R-04 | Web Fetch/Search Aktivasyonu - Firecrawl+Tavily provider eklendikten sonra web_fetch/web_search canli test + kariyer sayfasi analiz akisi | roo_code | P3 | plan | src/company_master/gateway/ninerouter_client.py |
 
 ## Tamamlananlar
 
@@ -29,6 +31,7 @@
 | ORCH-01 | Orkestratör senkron yeniden kurulum: pano tamiri, test izolasyonu, DOCS-05/06 | cline | 2026-09-11T21:35:10 |
 | P7-12 | Apify Webhook Prod Hardening — Rate limiting, signature validation, Prometheus metrikleri, dead-letter queue, retry/backoff, health endpoint | kilo | 2026-09-11T13:21:19 |
 | P7-13 | MCP -> OSINT Motoru Bridge — ApifyAdapter + HuginnMCPServer SourceRegistry ile entegre, SourceSpec apify enabled=true | kilo | 2026-09-11T13:21:19 |
+| P7-15 | Signal Dashboard / Aggregation — company_signals + company_intelligence_scores -> Grafana/HTML dashboard | kilo | 2026-09-11T23:57:48 |
 | REFACTOR-01 | gorev_guncelle() not keyword argümanını temizle | mimar | 2026-09-11T21:55:00 |
 | TEST-01 | Review başarısız senaryo testi ekle | mimar | 2026-09-11T21:55:00 |
 | VALIDATE-01 | quick_task.py uçtan uca validasyonu | external_agent | 2026-09-11T21:55:00 |

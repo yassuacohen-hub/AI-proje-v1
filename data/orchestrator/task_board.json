@@ -190,11 +190,11 @@
     "baslik": "Signal Dashboard / Aggregation — company_signals + company_intelligence_scores -> Grafana/HTML dashboard",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-11T23:15:00",
-    "bitis": null,
+    "bitis": "2026-09-11T23:57:48",
     "dosyalar": [],
-    "not": "VKN duplika notu (kullanici): 10 grup firma ayni VKN paylasiyor (toplam VKN dolu kayit yalniz 40). Kucuk bir duplika/dogrulama temizligi ileride yapilabilir — bu gorev kapsaminda not olarak tutuluyor.",
+    "not": "web_app.py /api/intelligence/dashboard (SQLite uyumlu, :now parametresi), web_dashboard index.html+app.js+style.css + test eklendi. 9 test gecti, py_compile + node --check OK. Flake8: sadece mevcut onceden var olan uyarilar.",
     "source": "ic",
     "from_agent": null
   },
@@ -463,5 +463,54 @@
     "not": "Fazlar: (1) envanter tamam, (2) gitignore+untrack temizlik, (3) temiz toplu push origin/Parent-repo chore/monorepo-merge, (4) git_push_gorev.py + review hook + 18:00 tetikleyici + bat retry, (5) durum dosyalari.",
     "source": "ic",
     "from_agent": null
+  },
+  {
+    "task_id": "9R-02",
+    "baslik": "Vektor Katmani + Dublikasyon Pilotu - ChromaDB, vector/ paketi, index_companies.py, matcher doldurma (VKN+fuzzy+vektor)",
+    "sahip": "roo_code",
+    "oncelik": "P1",
+    "durum": "aktif",
+    "baslangic": "2026-09-11T23:53:16",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/vector/",
+      "src/company_master/entity_resolution/matcher.py",
+      "scripts/index_companies.py",
+      "requirements-app.txt",
+      "tests/vector/"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": "roo_code"
+  },
+  {
+    "task_id": "9R-03",
+    "baslik": "Chat Tabanli Ilan Zenginlestirme - analyzer.py'ye 9Router chat ile sektor/pozisyon/skill cikarimi (fallback: regex)",
+    "sahip": "roo_code",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-11T23:53:16",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/pipeline/analyzer.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": "roo_code"
+  },
+  {
+    "task_id": "9R-04",
+    "baslik": "Web Fetch/Search Aktivasyonu - Firecrawl+Tavily provider eklendikten sonra web_fetch/web_search canli test + kariyer sayfasi analiz akisi",
+    "sahip": "roo_code",
+    "oncelik": "P3",
+    "durum": "plan",
+    "baslangic": "2026-09-11T23:53:16",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/gateway/ninerouter_client.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": "roo_code"
   }
 ]

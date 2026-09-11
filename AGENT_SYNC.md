@@ -1,13 +1,16 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-11T23:17:51
+> Son guncelleme: 2026-09-11T23:58:10
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
 
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
-| P7-15 | Signal Dashboard / Aggregation — company | kilo | P2 | aktif |
+| GIT-01 | Temiz depo + hibrit push stratejisi devr | cline | P1 | aktif |
+| 9R-02 | Vektor Katmani + Dublikasyon Pilotu - Ch | roo_code | P1 | aktif |
+| 9R-03 | Chat Tabanli Ilan Zenginlestirme - analy | roo_code | P2 | plan |
+| 9R-04 | Web Fetch/Search Aktivasyonu - Firecrawl | roo_code | P3 | plan |
 
 ## Tamamlananlar (Son 10)
 
@@ -26,8 +29,8 @@
 
 ## Son Handoff'lar
 
-- **P1-13**: Spam filtresi implementasyonu tamamlandi
-- **P0-4**: CI pipeline strict modu tamamlandi
 - **RO-02**: cursor_grok çıktı üretti
 - **LIVE-01**: cursor_grok çıktı üretti
 - **ROO-01**: roo_code çıktı üretti
+- **GIT-01**: Temiz toplu push Parent-repo'ya yapildi (2ba17c4, 
+- **P7-15**: kilo çıktı üretti

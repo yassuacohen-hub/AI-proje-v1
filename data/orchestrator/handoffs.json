@@ -226,5 +226,19 @@
     "tarih": "2026-09-11T17:47:03",
     "output_path": "workspace\\external\\roo_code\\output",
     "summary": "Review passed: 0 files, no secrets, all criteria met"
+  },
+  "GIT-01": {
+    "tamamlandi": "Temiz toplu push Parent-repo'ya yapildi (2ba17c4, 132 dosya) + hibrit push altyapisi devrede (ajan-bitince secmeli + 12:01/00:01 planli)",
+    "sonraki_adim": "Sonraki: P7-14/P7-15 kilo'da; ilk planli push 12:01/00:01'de",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-11T23:50:04"
+  },
+  "P7-15": {
+    "tamamlandi": "kilo çıktı üretti",
+    "sonraki_adim": "İnceleme ve entegrasyon",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-11T23:57:48",
+    "output_path": "web_app.py:2814, web_dashboard/*, tests/company_master/test_web_app.py:157",
+    "summary": "P7-15 Signal Dashboard / Aggregation tamamlandi: /api/intelligence/dashboard endpoint + web dashboard Intiharafa Sinyalleri bolumu. company_signals + scores toplu ozet. 9 test gecti."
   }
 }

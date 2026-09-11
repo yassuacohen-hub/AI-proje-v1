@@ -128,5 +128,40 @@
     "sahip": "cline",
     "task_id": "GIT-01",
     "kilitlendi": "2026-09-11T23:18:14"
+  },
+  "src/company_master/vector/": {
+    "sahip": "roo_code",
+    "task_id": "9R-02",
+    "kilitlendi": "2026-09-11T23:53:16"
+  },
+  "src/company_master/entity_resolution/matcher.py": {
+    "sahip": "roo_code",
+    "task_id": "9R-02",
+    "kilitlendi": "2026-09-11T23:53:16"
+  },
+  "scripts/index_companies.py": {
+    "sahip": "roo_code",
+    "task_id": "9R-02",
+    "kilitlendi": "2026-09-11T23:53:16"
+  },
+  "requirements-app.txt": {
+    "sahip": "roo_code",
+    "task_id": "9R-02",
+    "kilitlendi": "2026-09-11T23:53:16"
+  },
+  "tests/vector/": {
+    "sahip": "roo_code",
+    "task_id": "9R-02",
+    "kilitlendi": "2026-09-11T23:53:16"
+  },
+  "src/company_master/intelligence/job_intelligence/pipeline/analyzer.py": {
+    "sahip": "roo_code",
+    "task_id": "9R-03",
+    "kilitlendi": "2026-09-11T23:53:16"
+  },
+  "src/company_master/gateway/ninerouter_client.py": {
+    "sahip": "roo_code",
+    "task_id": "9R-04",
+    "kilitlendi": "2026-09-11T23:53:16"
   }
 }

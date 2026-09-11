@@ -152,3 +152,30 @@ class TestStaticFiles:
     def test_js_served(self, client):
         response = client.get("/static/js/app.js")
         assert response.status_code == 200
+
+
+class TestIntelligenceDashboardEndpoint:
+    @patch("web_app.get_engine")
+    def test_intelligence_dashboard_returns_expected_structure(self, mock_get_engine, client):
+        mock_conn = MagicMock()
+        # Sıralı execute çağrıları için side_effect kullan (7 sorgu)
+        mock_conn.execute.return_value.mappings.return_value.all.side_effect = [
+            [{"signal_type": "growth", "cnt": 5}, {"signal_type": "risk", "cnt": 2}],      # signal_type_counts
+            [{"cnt": 3}],                                                                 # scored_companies
+            [],                                                                            # top_growth (JOIN üzerinden)
+            [],                                                                            # top_investment
+            [],                                                                            # top_risk
+            [{"hiring_trend": "accelerating", "cnt": 2}],                                  # hiring_trends
+            [],                                                                            # recent_signals
+        ]
+        mock_engine = MagicMock()
+        mock_engine.connect.return_value.__enter__.return_value = mock_conn
+        mock_get_engine.return_value = mock_engine
+
+        response = client.get("/api/intelligence/dashboard")
+        assert response.status_code == 200
+        data = response.json()
+        assert data["signal_type_counts"]["growth"] == 5
+        assert data["total_active_signals"] == 7
+        assert data["scored_companies"] == 3
+        assert data["hiring_trends"]["accelerating"] == 2

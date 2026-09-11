@@ -435,3 +435,28 @@ body.menu-open .mobile-backdrop,body.detail-open .mobile-backdrop{opacity:1;poin
 }
 
 
+/* P7-15 Signal Dashboard */
+.signal-dashboard{padding:18px}
+.signal-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.signal-lists{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.signal-list-card{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px}
+.signal-list-head{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:var(--text);margin-bottom:10px}
+.signal-list-head i{color:var(--accent);font-size:13px}
+.signal-rows{display:flex;flex-direction:column;gap:6px}
+.signal-row{display:flex;align-items:center;gap:8px;padding:7px 10px;background:var(--panel-bg);border:1px solid var(--border);border-radius:8px;font-size:12px;cursor:pointer;transition:border-color .15s}
+.signal-row:hover{border-color:var(--accent)}
+.signal-name{flex:1;font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.signal-sub{font-size:10px;color:var(--text-dim)}
+.signal-score{font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--text);min-width:28px;text-align:right}
+.signal-conf{font-size:10px;color:var(--text-dim);min-width:34px;text-align:right}
+.signal-badge{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;border:1px solid currentColor;border-radius:6px;padding:1px 6px}
+.signal-empty{font-size:11px;color:var(--text-dim);text-align:center;padding:14px 8px}
+.signal-type-dist{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:16px}
+.signal-bar-row{display:flex;align-items:center;gap:10px;margin-bottom:7px}
+.signal-bar-label{font-size:11px;color:var(--text-dim);min-width:110px;text-transform:capitalize}
+.signal-bar{flex:1;height:8px;background:var(--border);border-radius:4px;overflow:hidden}
+.signal-bar-fill{height:100%;border-radius:4px;transition:width .3s}
+.signal-bar-val{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text);min-width:30px;text-align:right}
+.signal-recent{background:var(--bg);border:1px solid var(--border);border-radius:10px;padding:12px}
+@media (max-width:1400px){.signal-kpis{grid-template-columns:repeat(2,1fr)}.signal-lists{grid-template-columns:1fr}}
+@media (max-width:760px){.signal-kpis{grid-template-columns:1fr 1fr}}
