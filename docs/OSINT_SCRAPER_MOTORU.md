@@ -16,22 +16,62 @@ scraper orkestrasyonu ve post-scrape pipeline (ingest -> VKN -> kalite -> KPI).
 |---------|-------|-------|
 | **Permission Router** | `src/company_master/utils/scraping_permission_router.py` | robots.txt (TTL'li cache), KVKK guvenli domain listesi, domain bazli rate limit |
 | **Source Registry** | `src/company_master/engine/source_registry.py` | Tum kaynaklarin tanimi (scraper, cikti dosyasi, pipeline baglantisi) |
-| **Orkestrator (Engine)** | `src/company_master/engine/osint_engine.py` | CLI: `status` / `check` / `run` / `pipeline` |
+| **Orkestrator (Engine)** | `src/company_master/engine/osint_engine.py` | CLI: `status` / `check` / `run` / `pipeline` / `quality` |
+| **Quality Gate** | `src/company_master/engine/quality_gate.py` | Veri kalitesi konturu, DQT kurallari + DB skor filtreleme |
 | **CLI Koprusu** | `scripts/osint_engine.py` | PYTHONPATH otomatik ayarli giris noktasi |
-| **Post-Scrape Workflow** | `scripts/post_scrape_workflow.py` | ingest -> footer VKN -> kalite recalc -> KPI (subprocess zinciri) |
+| **Post-Scrape Workflow** | `scripts/post_scrape_workflow.py` | Quality Gate -> ingest -> footer VKN -> kalite -> KPI (subprocess zinciri) |
 | **Scrape Watcher** | `scripts/scrape_watcher.py` | Scrape bitisini dosya-stabilitesi ile tespit eder, workflow'u tetikler (detached) |
 
-## Kaynaklar (Registry)
+## Kalite Kontrol (Quality Gate)
 
-| ID | Kaynak | Durum | Cikti |
-|----|--------|-------|-------|
-| `ostim-detail` | OSTIM Detay Uye Scrape | **CALISIYOR** | `data/ostim/firmalar_detayli.jsonl` |
-| `ostim-list` | OSTIM Liste | TAMAM (NACE %84.8) | `data/ostim/firmalar_full.jsonl` |
-| `aso` | ASO Firma Rehberi (API) | Veri mevcut (488KB) | `data/aso/aso_full.jsonl` |
-| `ivedik` | Ivedik OSB | PLANLI — scraper yok | `data/ivedik/ivedik_full.jsonl` |
-| `baskent` | Baskent OSB | PLANLI — scraper yok | `data/baskent/baskent_full.jsonl` |
+OSINT Scraper Motoru, gelen veri yapisini otomatik olarak kalite sinirlarindan gecirir. Bu, sisteme girilen veri yapisinin kalitesini olcup filtreleyen en onemli moduldur.
 
-## Kullanim
+### Calisma Prensibi
+```
+Scraper Ciktisi (JSONL)
+        |
+        v
+ Quality Gate
+    - DB Seviye Skor (VKN, Adres, Tel, Email, Web, NACE, Parsel, Unvan)  -> 0-100
+    - Data Quality Toolkit Kurallari (NotNull, Regex, Custom)
+    - Birlesik Skor: %70 DB + %30 DQT Pass Rate
+        |
+        v
+ Filtreleme (min_score eksi)
+    - Geçenler -> temiz.jsonl (+ quality metadati)
+    - Reddedilenler -> rapor
+```
+
+### Kullanim
+
+```bash
+# Terminal CI icin
+python -m company_master.engine.quality_gate data/ostim/firmalar_detayli.jsonl data/ostim/firmalar_temiz.jsonl --min-score 30
+
+# OSINT Engine icine dahil olarak
+python -m company_master.engine.osint_engine quality ostim-detail --min-score 30
+
+# DQT olmadan calistir
+python -m company_master.engine.quality_gate input.jsonl output.jsonl --no-dqt --min-score 50
+```
+
+### Birlesik Skor Formulu
+
+| Boyut | Puan | Kaynak |
+|-------|------|--------|
+| VKN (vergi no) | 15 | quality_recalc.py |
+| Adres | 15 | quality_recalc.py |
+| Telefon | 15 | quality_recalc.py |
+| E-posta | 15 | quality_recalc.py |
+| Web sitesi | 10 | quality_recalc.py |
+| NACE kodu | 15 | quality_recalc.py |
+| OSB parsel | 10 | quality_recalc.py |
+| Ticaret unvani | 5 | quality_recalc.py |
+| **Toplam DB** | **100** | |
+| DQT Pass Rate | 0-100 | Data Quality Toolkit |
+| **Birlesik Skor** | **%70 DB + %30 DQT** | quality_gate.py |
+
+### Diger Komutlar
 
 ```bash
 # Durum + router politikalari
@@ -45,25 +85,7 @@ python scripts/osint_engine.py run aso
 
 # Sadece pipeline (scrape'siz ingest->VKN->recalc->KPI)
 python scripts/osint_engine.py pipeline ostim-detail
+
+# Quality Gate kontrolu
+python scripts/osint_engine.py quality ostim-detail --min-score 30
 ```
-
-## Rate Limit / KVKK Politikasi
-
-- Her domain icin `min_interval` (OSTIM 2.5s, ASO 2.0s, GIB 1.0s)
-- `KVKK_SAFE_DOMAINS`: sadece isletme verisi sunan resmi dizinler (OSTIM, ASO, GIB)
-- Listede olmayan domainlerde scraper kisisel veri toplanmamali (router uyarir)
-- Yeni kaynak eklerken: `DEFAULT_POLICIES`'e politika + `default_sources()`'a SourceSpec
-
-## Yol Haritasi (v2)
-
-1. **Ivedik + Baskent scraper'lari** — Web Kazima Uzmani masa basi analizi sonrasi
-2. **Engine state dashboard** — `osint_engine_state.json` uzerinden Streamlit paneli
-3. **Zamanlanmis calistirma** — watcher'a cron/schedule destegi (gunluk refresh)
-4. **ASO pipeline** — mevcut 488KB ASO verisinin ingest'i (multi-OSB merger ilk adimi)
-5. **Multi-OSB merger entegrasyonu** — `scripts/multi_osb_merger_plan.md` uygulanir
-
-## Iliskili Dokumanlar
-
-- `scripts/multi_osb_merger_plan.md` — birlestirme plani
-- `scripts/mersis_api_research.md` — MERSIS/Ticaret Sicili API
-- `V10/07_referanslar/08_gib_vergino_sorgu_stratejisi.md` — VKN sorgu stratejisi

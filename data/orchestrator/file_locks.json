@@ -93,5 +93,25 @@
     "sahip": "gelistirici",
     "task_id": "DOC-02",
     "kilitlendi": "2026-09-10T18:31:21"
+  },
+  "src/company_master/engine/quality_gate.py": {
+    "sahip": "mimar",
+    "task_id": "OSINT-01",
+    "kilitlendi": "2026-09-11T03:26:51"
+  },
+  "src/company_master/engine/osint_engine.py": {
+    "sahip": "mimar",
+    "task_id": "OSINT-01",
+    "kilitlendi": "2026-09-11T03:26:51"
+  },
+  "scripts/post_scrape_workflow.py": {
+    "sahip": "mimar",
+    "task_id": "OSINT-01",
+    "kilitlendi": "2026-09-11T03:26:51"
+  },
+  "docs/OSINT_SCRAPER_MOTORU.md": {
+    "sahip": "mimar",
+    "task_id": "OSINT-01",
+    "kilitlendi": "2026-09-11T03:26:51"
   }
 }

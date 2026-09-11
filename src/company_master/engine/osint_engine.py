@@ -6,6 +6,7 @@ Kullanim:
     python -m company_master.engine.osint_engine check ostim-detail
     python -m company_master.engine.osint_engine run aso
     python -m company_master.engine.osint_engine pipeline ostim-detail
+    python -m company_master.engine.osint_engine quality ostim-detail --min-score 30
 """
 from __future__ import annotations
 
@@ -153,6 +154,35 @@ def cmd_pipeline(source_id: str) -> int:
     return proc.returncode
 
 
+def cmd_quality(source_id: str, min_score: float = 30.0) -> int:
+    """Kaynagin output dosyasini Quality Gate'den gecir."""
+    spec = registry().get(source_id)
+    if not spec:
+        print(f"Bilinmeyen kaynak: {source_id}")
+        return 1
+    if not spec.output_path.exists():
+        print(f"[{source_id}] cikti dosyasi bulunamadi: {spec.output_path}")
+        return 1
+
+    from .quality_gate import QualityGate
+
+    output_path = spec.output_path.with_name(spec.output_path.stem + "_filtered.jsonl")
+    gate = QualityGate(min_score=min_score, use_dqt=True)
+    report = gate.run(spec.output_path, output_path)
+    print(report.summary())
+
+    _update_state(
+        source_id,
+        last_status=f"kalite-ok(rc={report.rejected})" if report.rejected < report.total_input
+        else f"kalite-reddet(rc={report.rejected})",
+        quality_min_score=min_score,
+        quality_passed=report.passed,
+        quality_rejected=report.rejected,
+        quality_avg_score=report.avg_db_score,
+    )
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="osint-engine")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -163,6 +193,9 @@ def main(argv: list[str] | None = None) -> int:
     p_run.add_argument("source_id")
     p_pipe = sub.add_parser("pipeline")
     p_pipe.add_argument("source_id")
+    p_quality = sub.add_parser("quality")
+    p_quality.add_argument("source_id")
+    p_quality.add_argument("--min-score", type=float, default=30.0)
     args = parser.parse_args(argv)
 
     if args.cmd == "status":
@@ -173,6 +206,8 @@ def main(argv: list[str] | None = None) -> int:
         return cmd_run(args.source_id)
     if args.cmd == "pipeline":
         return cmd_pipeline(args.source_id)
+    if args.cmd == "quality":
+        return cmd_quality(args.source_id, args.min_score)
     return 1
 
 

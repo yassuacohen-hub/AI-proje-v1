@@ -37,6 +37,21 @@ def run_step(baslik: str, script: str) -> int:
 
 
 def main() -> int:
+    # Quality Gate adimi (pipelenin basinda)
+    try:
+        from company_master.engine.source_registry import registry
+        from company_master.engine.quality_gate import QualityGate
+        for sid, spec in registry().items():
+            if not spec.enabled or not spec.output_path.exists():
+                continue
+            print(f"\n=== Quality Gate: {sid} ===")
+            gate = QualityGate(min_score=30.0)
+            output_path = spec.output_path.with_name(spec.output_path.stem + "_filtered.jsonl")
+            report = gate.run(spec.output_path, output_path)
+            print(report.summary())
+    except Exception as exc:
+        print("[UYARI] Quality Gate basarisiz: {}".format(exc))
+
     for baslik, script in STEPS:
         rc = run_step(baslik, script)
         if rc != 0:
