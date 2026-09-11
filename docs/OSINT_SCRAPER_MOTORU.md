@@ -88,4 +88,33 @@ python scripts/osint_engine.py pipeline ostim-detail
 
 # Quality Gate kontrolu
 python scripts/osint_engine.py quality ostim-detail --min-score 30
+
+## Wiki Automation
+
+Wiki otomasyon scriptleri `wiki_automation/` klasöründe:
+
+```bash
+# Tek tek calistirma
+python wiki_automation/wiki_ingest.py       # Yeni/duzenlenmis sayfalari tespit
+python wiki_automation/wiki_sync_agents.py  # task_board agent dosyalarini senkronize et
+python wiki_automation/wiki_lint.py         # Saglik kontrolu
+python wiki_automation/wiki_index.py        # index.json güncelle
+
+# Otomatik duzeltme (eksik frontmatter, broken link placeholder)
+python wiki_automation/wiki_lint.py --fix
+
+# CI modu (hata varsa exit code 1)
+python wiki_automation/wiki_lint.py --ci
+
+# Orkestrator (hepsini sirali calistir)
+python wiki_automation/run_all.py --fix --commit
+```
+
+### wiki_lint.py Kontrolleri
+- **Orphans**: task_board.json'da olmayan wiki dosyalari
+- **Broken Links**: [[task-id]] / [[agent-id]] gecersiz linkler
+- **Contradiction Density**: Son 24 saatte contradictions sayisi
+- **Stale Content**: 7 gun üzeri guncellenmeyen aktif gorevler
+- **Frontmatter**: Gerekli alanlar (task_id, sahip, durum, updated_at)
+
 ```
