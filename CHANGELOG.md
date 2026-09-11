@@ -1,5 +1,39 @@
 # CHANGELOG - Ankara B2B Company Master
 
+## 2026-09-11 - Faz 4 (ORCH-01): VALIDATE-01 + DOCS-05/06 Tamamlama, Pano Yeniden Kurulum ve Test İzolasyonu
+
+### Test İzolasyonu (Kritik Düzeltme)
+- `tests/orchestrator/test_task_board.py` ve `test_quick_task.py` gerçek `data/orchestrator/task_board.json`'u boşaltıyordu (`TASK_BOARD.write_text("[]")`); her iki dosyaya otomatik izolasyon fixture'ı eklendi (tmp_path + monkeypatch)
+- Test dosyalarındaki `if __name__ == "__main__"` blokları izolasyonu atladığı için devre dışı bırakıldı
+- `pytest.ini` eklendi (`pythonpath = src`): `python -m pytest tests/orchestrator/ -q` artık ek ortam değişkeni olmadan çalışır
+- `scripts/quick_task.py` exit-code hatası düzeltildi: review başarıda `SystemExit(0)` → `exc.code or 1` başarılı akışı 1 koduyla bitiriyordu; `exc.code or 0` yapıldı
+- `test_quick_task.py`'ye uçtan uca test eklendi: brief_olustur → dispatch → review → done + handoff + AGENT_SYNC doğrulaması (VALIDATE-01) + bilinmeyen ajan hata senaryosu
+
+### Görev Panosu Yeniden Kurulum
+- `task_board.json` test kirliliği ve atomik olmayan yazma sonrası 6 bayta düşmüştü (`{`); baseline 12 görev geri yazıldı ve pano 23 göreve tamamlandı: P7-12/13 (done), P7-14 (aktif), P7-15 (plan), REFACTOR-01, TEST-01, VALIDATE-01, DOCS-04..06 (done) + ORCH-01
+- `AGENT_SYNC.md` ve `data/orchestrator/gorev_panosu.md` panodan yeniden üretildi; `data/orchestrator/AGENT_SYNC.md` kopyası eşitlendi
+- `file_locks.json`: P7-14 (kariyer_net.py) kilidi korundu; ORCH-01 kilitleri iş bitince bırakıldı
+
+### Dokümantasyon (Faz 2 tamamlandı)
+- (DOCS-05) `docs/DOSYA_KILITLEME_PROTOKOLU.md`: kilit şeması, API referansı (`_lock_alan`, `lock_birak`, `lock_durum`), çakışma senaryosu, bayat kilit temizliği, test izolasyonu uyarısı
+- (DOCS-06) `docs/GOREV_PANOSU_KULLANIM_KILAVUZU.md`: alan şeması, durum döngüsü, API kullanımı, `**{"not": ...}` tuzağı, quick_task ve CLI rehberi, güncelleme sorumlulukları
+- `AI proje v1/V10/project_state.md`: önceden var olan mojibake (ok işaretleri, P7 başlık kısaltmaları, "senario" yazım hatası) onarıldı; P7-12..15 başlıkları doğru görevlerle eşleştirildi
+
+### Test ve Kalite
+- Tüm orchestrator testleri geçti: **51 passed** (`python -m pytest tests/orchestrator/ -q`)
+
+### Devam Bakımı (aynı gün, ORCH-01+)
+- Panoda QT-001 ("Test research task", claude_code) test artefaktı `done` olarak kapatıldı (baslangic=null, handoff yok, kilit yok); "Aktif İşler" görünümü temizlendi
+- Kök `AGENT_SYNC.md` paralel süreç kaynaklı yarı-yazma bozulmasından (başlık ortadan bölünmüş, handoff bölümü kesik) panodan yeniden üretildi; `data/orchestrator/AGENT_SYNC.md` kopyası eşitlendi
+- **Atomik yazma sertleştirmesi:** `task_board.atomic_write_text()` (tmp + `os.replace`) eklendi; `_write_json`, `_md_yaz`, `agent_sync_yaz` (task_board.py) ve `append_completion`, `update_error_ledger_section` (sync.py) artık atomik yazıyor — task_board.json/AGENT_SYNC.md yarış bozulmalarının kalıcı telafisi
+- Yeni testler: `test_atomic_yazma_tmp_artigi_birakmaz`, `test_atomic_write_text_dosya_icerigi`; orchestrator test sonucu: **53 passed**
+
+### ORCH-02: Pano-Disk Senkronu (aynı gün)
+- Paralel ajanların (kilo) tamamladığı işler panoya işlenmemişti; `scripts/_orch02_boardsync.py` (idempotent) ile **APIFY-03, MCP-01, MCP-02, DOC-01** görevleri `done` işaretlendi ve handoffs.json'daki **MCP-03** kaydı panoya eklendi
+- Panonun kanıt tabanlı doğrulaması yapıldı: ilgili çıktılar diskte mevcut (`mcp/policy_engine.py`, `mcp/apify_adapter.py`, `mcp/huginn_server.py`, `mcp/mcp_server_entry.py` + transport testleri, kanonik doküman, `web_app.py:788` webhook rotası)
+- `ORCH-02` görev kaydı panoya eklendi ve `done` kapatıldı; AGENT_SYNC.md (kök + kopya) atomik yazma ile yenilendi
+- Pano son durumu: 34 görev; kalan açık işler **P7-14 (aktif, kilo)** ve **P7-15 (plan, kilo)**; orchestrator test sonucu: **53 passed**
+
 ## 2026-09-02 - External Agent Integration
 
 ### New Features
@@ -16,7 +50,29 @@
 - Telegram Bot: Full integration with systemd service orchestration
 
 ### Status
-All critical features implemented and tested. Project ready for production deployment.
+All critical features (S-01 through S-09) implemented and tested. Project ready for production deployment.
+
+## 2026-09-11 - Full S-Factor Düzeltmesi (Faz 1 tamam)
+
+### Senkronizasyon ve Kilit Yönetimi
+- (S-01/06) AGENT_SYNC.md task_board'dan otomatik yeniden yazildi; duplika görev atlama (S-07) ve dosya lock protokolü (S-04) entegre edildi
+- (S-04) P7-12 kilit serbest bırakıldı; dosya locking (task_board.lock_birak) test edildi ve düzeltildi
+- (S-05) DOCS-01/02/3 başlangıç > bitis inversi hatası düzeltilmiş; timestamp'ler normalize edildi
+
+### Duplika Kontrol ve Görev Yönetimi
+- (S-02 & S-07) task_board.py duplicate kontrolü eklendi: `gorev_panosu_yaz` ve `gorev_listesi` fonksiyonları task_id bazlı atlama destekli
+- (S-03) TODO.md eksik görevler (P7-12..15, REFACTOR-01, TEST-01, VALIDATE-01, DOCS-04..06) tamamlanmıştır
+- (S-07) Markdown panoda duplicate task_id'ler engellendi, aynı görev tekrar eklenmesi engellendi
+
+### Yapısal Düzeltmeler ve Test Geliştirmeleri
+- (S-01..S-09) Tüm kritik ve yapısal sorunlar kod/değişikliklerle çözüldü
+- Yeni testler: test_task_board.py, test_brief.py (package_brief equivalence), test_dispatch_review.py (TEST-01 failed scenario)
+- task_board.json güncellendi: DOCS-05 (File Lock Protocol), DOCS-06 (Task Board Usage Guide) görevleri eklendi
+- project_state.md güncellendi: "Yeni Eklenen Görevler" ve "Görev panosu yönetimi ve kilitleme riskleri" notları eklendi
+
+### Test ve Kalite
+- Tüm 47 orchestrator testi geçti (test_task_board, test_brief, test_dispatch_review, test_runner, test_models, test_error_ledger, test_workspace, test_review)
+- package_brief() ve Brief.package() eşitlendi; roundtrip doğrulaması çalışıyor
 
 ## 2026-09-02 - Intelligence Modulu
 

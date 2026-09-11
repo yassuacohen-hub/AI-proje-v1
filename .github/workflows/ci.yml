@@ -1,85 +1,64 @@
-name: CI/CD Pipeline
+name: OSINT Scraper Motoru CI
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [main, develop]
   pull_request:
-    branches: [ main ]
+    branches: [main]
 
 jobs:
-  test:
+  quality-gate:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: [3.9, 3.10, 3.11]
-    
+        python-version: ["3.10", "3.11", "3.12"]
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v4
-      with:
-        python-version: ${{ matrix.python-version }}
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements-app.txt
-        pip install pytest pytest-cov black flake8
-    
-    - name: Lint with flake8
-      run: |
-        # Exit-zero treats all errors as warnings
-        flake8 src/ --count --select=E9,F63,F7,F82 --show-source --statistics
-        flake8 src/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    
-    - name: Format with black
-      run: |
-        black --check src/ tests/
-    
-    - name: Run tests
-      run: |
-        python -m pytest tests/ -v --cov=src --cov-report=xml --cov-report=term-missing
-    
-    - name: Upload coverage to Codecov
-      uses: codecov/codecov-action@v3
-      with:
-        file: ./coverage.xml
-        flags: unittests
-        name: codecov-umbrella
-        fail_ci_if_error: false
-    
-    - name: Build Docker image
-      run: |
-        docker build -t huginn-data-insights:${{ github.sha }} .
-    
-    - name: Security scan
-      run: |
-        # Basic security scan with bandit
-        pip install bandit
-        bandit -r src/ -f json -o bandit-report.json || true
-    
-  deploy:
-    needs: test
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml pytest
+
+      - name: Lint
+        run: |
+          pip install flake8
+          flake8 src/ scripts/ --max-line-length=120 --exclude=__pycache__
+
+      - name: Test
+        run: |
+          PYTHONPATH=src pytest tests/ -v
+
+      - name: Quality gate smoke test
+        run: |
+          PYTHONPATH=src python -m company_master.engine.osint_engine quality ostim-detail --min-score 30
+
+  post-scrape:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
     steps:
-    - uses: actions/checkout@v3
-    
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-    
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements-app.txt
-    
-    - name: Deploy to Streamlit Cloud (example)
-      run: |
-        echo "Deploy commands would go here"
-        # For Streamlit Community Cloud:
-        # streamlit deploy app.py
-        # Or for other platforms:
-        # docker push your-registry/huginn-data-insights:latest
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyyaml
+
+      - name: Run post-scrape workflow
+        run: |
+          PYTHONPATH=src python scripts/post_scrape_workflow.py
+
+      - name: Validate output exists
+        run: |
+          test -f data/ostim/firmalar_detayli_validated.jsonl

@@ -75,3 +75,12 @@ agent/
 .claude/skills/supabase/
 data/skills/supabase/
 
+
+# Cop kutusu / gecici denetim klasorleri (2026-09-11)
+cop_kutusu_*/
+scripts/_tmp_*
+scripts/_tmp/
+.roo/
+.vscode/
+data/watch/
+workspace/external/test_agent/

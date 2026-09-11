@@ -113,5 +113,20 @@
     "sahip": "mimar",
     "task_id": "OSINT-01",
     "kilitlendi": "2026-09-11T03:26:51"
+  },
+  ".gitignore": {
+    "sahip": "cline",
+    "task_id": "GIT-01",
+    "kilitlendi": "2026-09-11T23:18:13"
+  },
+  "scripts/git_auto_push.bat": {
+    "sahip": "cline",
+    "task_id": "GIT-01",
+    "kilitlendi": "2026-09-11T23:18:14"
+  },
+  "scripts/quick_task.py": {
+    "sahip": "cline",
+    "task_id": "GIT-01",
+    "kilitlendi": "2026-09-11T23:18:14"
   }
 }

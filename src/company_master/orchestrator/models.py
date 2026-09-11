@@ -72,6 +72,7 @@ class Task:
     result: TaskResult | None = None
     created_at: str = field(default_factory=lambda: datetime.now().isoformat())
     updated_at: str = field(default_factory=lambda: datetime.now().isoformat())
+    source: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         data = asdict(self)
@@ -100,6 +101,7 @@ class Task:
             result=result,
             created_at=data.get("created_at", datetime.now().isoformat()),
             updated_at=data.get("updated_at", datetime.now().isoformat()),
+            source=data.get("source"),
         )
 
 
@@ -164,11 +166,17 @@ class Brief:
     constraints: dict[str, Any] = field(default_factory=dict)
     success_criteria: list[str] = field(default_factory=list)
     deadline: str | None = None
+    source: str | None = "ic"
+    from_agent: str | None = None
+    run_mode: str | None = None
 
     def to_dict(self) -> dict[str, Any]:
         data = asdict(self)
         data["task_type"] = self.task_type.value
         return data
+
+    def package(self) -> str:
+        return json.dumps(self.to_dict(), ensure_ascii=False, indent=2)
 
     @classmethod
     def from_dict(cls, data: dict[str, Any]) -> Brief:
@@ -181,5 +189,8 @@ class Brief:
             context_files=data.get("context_files", []),
             constraints=data.get("constraints", {}),
             success_criteria=data.get("success_criteria", []),
-            deadline=data.get("deadline"),
+                        deadline=data.get("deadline"),
+            source=data.get("source", "ic"),
+            from_agent=data.get("from_agent"),
+            run_mode=data.get("run_mode"),
         )

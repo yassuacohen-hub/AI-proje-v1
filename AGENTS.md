@@ -45,6 +45,11 @@ Bu çalışma alanında **canlı görev takibi ve dosya kilidi mekanizması** va
 6. **Bitince güncelle**: `gorev_guncelle(..., durum="done")`, kilidi bırak, özet yaz, gerekli durum dosyalarını yenile
 7. **Son kontrol**: hedef/MVP/sınır dışına çıkmadı mı?
 
+## İletişim Dili
+
+- Tüm ajanlar, kullanıcı ve Ürün Sahibi ile olan insan iletişiminin tamamını **Türkçe** yürütmelidir. Bu kural iç ajandan, dış ajandan ve bu asistan dahil tüm çalışan ajanları kapsar.
+- Sistem, yazılım, teknik doküman, API, test çıktısı ve kod örnekleri İngilizce olabilir; ancak kullanıcıya veya Ürün Sahibi'ne sunulan açıklayıcı iletişim tamamen Türkçe olmalıdır.
+
 ## Genel
 
 - Gizli bilgiler (API anahtarı, token, şifre) asla koda veya notlara yazılmaz; `.env` kullanılır.
@@ -92,3 +97,68 @@ Bu çalışma alanında iç ajanlara ek olarak dış yapay zeka ajanları (Curso
 - [[AI proje v1/V10/08-Ajanlar/08_harici_ajan_gorev_onerileri]]
 - [[AGENT_SYNC]] (External Agent Registry + ErrorLedger)
 - Ana bağlam: `AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md`
+
+---
+
+## Versiyon Hiyerarşisi ve Aktif Kaynaklar
+
+### V9 → V10 Yapısı
+
+Bu projede **iki katmanlı versiyonlama** sistemi vardır:
+
+| Katman | Versiyon | Amaç | Konum |
+|--------|----------|------|-------|
+| **Ana Bağlam** | V9 | Tek tutarlı tasarım ve teknik kararlar | `AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md` |
+| **Yönetim / Organizasyon** | V10 | Görevler, durum, ajanlar, kurallar | `AI proje v1/V10/` dizini |
+
+**Kritik Fark:**
+- **V9** = *Ne yapıldığı ve neden* (teknik tasarım, mimari kararlar, veri stratejisi)
+- **V10** = *Nasıl yönetildiği* (görev panosu, ajan tanımları, kurallar, şablonlar)
+
+### Kaynak Hiyerarşisi (SSOT — Single Source of Truth)
+
+```
+V9 Ana Bağlam (Teknik Kararlar)
+├── 01_versiyon_9_baglam_dokumani.md  ← EN ÜST KAYNAK
+│
+V10 Yönetim Yapısı
+├── 05_versiyonlar/                   ← V9 + önceki sürümler (referans)
+├── 08-Ajanlar/                       ← Ajan tanımları ve protokoller
+│   ├── 01_koordinator_ajan.md
+│   ├── 02_mimar_ajan.md
+│   ├── 03_arastirmaci_ajan.md
+│   ├── 04_gelistirici_ajan.md
+│   ├── 05_kalite_ajan.md
+│   ├── 06_web_kazima_uzmani.md
+│   ├── 07_harici_ajan_protokolu.md   ← YENİ: Harici ajan entegrasyon kuralları
+│   ├── 08_harici_ajan_gorev_onerileri.md
+│   └── 09_osint_rol_tanimi.md
+├── 09_kurallar_ve_promptlar/        ← Ek kurallar
+├── TODO.md                          ← Görev listesi
+├── project_state.md                 ← Proje durumu
+└── CHANGELOG.md                     ← Değişiklik geçmişi
+```
+
+### Hiyerarşi Kuralları
+
+1. **Çakışma durumunda V9 zafer kazanır.** V10'daki herhangi bir karar V9 ile çelişiyorsa V9 geçerlidir.
+2. **V8, V7, V6 gibi önceki sürümler referans devredir;** karar ve iş akışı aktif V9 kaynak üzerinden yürütülür.
+3. **Yeni bir versiyon oluşturulmadan V9 güncellenemez;** büyük tasarım değişiklikleri için V11 taslağı oluşturulur.
+4. **Görev atamaları V10'un TODO.md'si üzerinden yapılır;** teknik tasarım V9'a dayanır.
+5. **Ajan tanımları V10/08-Ajanlar/ altında tutulur;** her ajan kendi dokümanını taşır.
+6. **Harici ajan protokolü** [[07_harici_ajan_protokolu]] dosyasında tanımlıdır; bu dosya harici ajan entegrasyonu için tek kaynaktır.
+7. **Orkestratör modülü** `src/company_master/orchestrator/` altında yer alır; detaylı kullanım kılavuzu oradaki README.md'dedir.
+
+### Dosya Erişim Matrisi
+
+| Dosya / Dizin | İç Ajan | Harici Ajan | Not |
+|---------------|:-------:|:-----------:|-----|
+| `AI proje v1/V10/05_versiyonlar/` | ✅ Oku | ❌ Yasak | V9 ana bağlam |
+| `AI proje v1/V10/TODO.md` | ✅ Oku/Yaz | ❌ Yasak | Görev listesi |
+| `AI proje v1/V10/08-Ajanlar/` | ✅ Oku | ⚠️ Kendi brief'i | Ajan tanımları |
+| `data/orchestrator/` | ✅ Oku/Yaz | ❌ Yasak | Görev panosu |
+| `src/company_master/orchestrator/` | ✅ Oku/Yaz | ❌ Yasak | Orkestratör kodu |
+| `workspace/external/{agent_id}/` | ⚠️ İnceleme | ✅ Oku/Yaz | Harici ajan workspace |
+| `.env`, `.env.*` | ❌ Yasak | ❌ Yasak | Gizli anahtarlar |
+| `src/company_master/db/` | ⚠️ Yetkili | ❌ Yasak | Veritabanı bağlantısı |
+| `src/company_master/schema/` | ⚠️ Yetkili | ❌ Yasak | Üretim şeması |

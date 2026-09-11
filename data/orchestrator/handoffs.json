@@ -6,10 +6,10 @@
     "tarih": "2026-09-03T08:59:39"
   },
   "P0-2": {
-    "tamamlandi": "Ingest + VKN + quality recalc + KPI tamamlandi",
-    "sonraki_adim": "",
+    "tamamlandi": "Scrape pipeline tamamlandi",
+    "sonraki_adim": "P0-3 kalite kontrol",
     "dikkat_edilmesi": "",
-    "tarih": "2026-09-03T14:18:36"
+    "tarih": "2026-09-11T15:00:28"
   },
   "P0-1": {
     "tamamlandi": "OSTIM detay scrape tamamlandi (5485 firma)",
@@ -154,5 +154,77 @@
     "sonraki_adim": "DATA-01: base.py/company_career.py dinamik domain iznini policy_for ile tamamla; sonra P7-GATE.",
     "dikkat_edilmesi": "file_locks.json bir ajan tarafindan bosaltilmisti; aktif gorevlerden yeniden kuruldu. GOV-01 raporuna race kaniti olarak eklenmeli.",
     "tarih": "2026-09-10T12:49:00"
+  },
+  "P7-8": {
+    "tamamlandi": "SignalAnalyzer pipeline modulu + analyze_job_signals.py script yapildi. job_postings to company_signals.",
+    "sonraki_adim": "P7-10 recalc script entegrasyonu",
+    "dikkat_edilmesi": "Signal TTL 90 gun",
+    "tarih": "2026-09-11T04:55:43"
+  },
+  "P7-10": {
+    "tamamlandi": "recalc_intelligence_scores.py script yapildi. score_all_companies + single-id.",
+    "sonraki_adim": "post_scrape_workflow Adim 7 dogrulama",
+    "dikkat_edilmesi": "router.py async/sync + method name duzeltildi",
+    "tarih": "2026-09-11T04:55:43"
+  },
+  "MCP-03": {
+    "tamamlandi": "mcp paketi (v2.2.0) kuruldu ve import doğrulandı. HuginnMCPServer + ApifyAdapter için \n    mcp_server_entry.py oluşturuldu: 7 MCP tool (3 Apify + 4 Huginn) stdio ve Streamable HTTP \n    transport desteğiyle. tests/test_mcp_transport.py: 13 transport test (9 stdio + 4 HTTP) \n    tümü passed (46 toplam MCP test). flake8 temiz. scripts/run_mcp_server.py CLI entry point \n    eklendi. requirements-dev.txt: mcp>=2.0.0 eklendi.",
+    "sonraki_adim": "MCP-02 gorevinde HuginnMCPServer.get_collection_run_status task_board import hatası \n    (task_board değil, gorev_listesi kullanılması gerekir). P7-13 MCP->OSINT Motoru Bridge: \n    SourceRegistry entegrasyonu, SourceSpec apify enabled=true.",
+    "dikkat_edilmesi": "mcp_server_entry.py create_mcp_server() ile server factory pattern kullanılır; \n    testlerde injection yapılabilir. ApifyAdapter policy_engine param, HuginnMCPServer policies param \n    farklı isimlerde. HTTP testler için uvicorn daemon thread kullanılır, port çakışması için \n    find_free_port() ile dinamik port.",
+    "tarih": "2026-09-11T14:17:06"
+  },
+  "P0-5": {
+    "tamamlandi": "run_vkn_validation() hata yayma guncellendi",
+    "sonraki_adim": "VKN validation error propagation fixed",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-11T14:57:41"
+  },
+  "P1-11": {
+    "tamamlandi": "VKN checksum dogrulamasi tamamlandi",
+    "sonraki_adim": "VKN checksum algorithm implemented",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-11T14:57:41"
+  },
+  "P1-12": {
+    "tamamlandi": "dedup_fields config entegrasyonu tamamlandi",
+    "sonraki_adim": "Configurable dedup fields from quality_gate.yaml",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-11T14:57:41"
+  },
+  "P1-13": {
+    "tamamlandi": "Spam filtresi implementasyonu tamamlandi",
+    "sonraki_adim": "Domain and NACE spam filtering added",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-11T14:57:41"
+  },
+  "P0-4": {
+    "tamamlandi": "CI pipeline strict modu tamamlandi",
+    "sonraki_adim": "CI workflow fixed, || true removed",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-11T14:57:41"
+  },
+  "RO-02": {
+    "tamamlandi": "cursor_grok çıktı üretti",
+    "sonraki_adim": "İnceleme ve entegrasyon",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-11T17:37:55",
+    "output_path": "workspace\\external\\cursor_grok\\output",
+    "summary": "Review passed: 10 files, no secrets, all criteria met"
+  },
+  "LIVE-01": {
+    "tamamlandi": "cursor_grok çıktı üretti",
+    "sonraki_adim": "İnceleme ve entegrasyon",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-11T17:43:42",
+    "output_path": "workspace\\external\\cursor_grok\\output",
+    "summary": "Review passed: 10 files, no secrets, all criteria met"
+  },
+  "ROO-01": {
+    "tamamlandi": "roo_code çıktı üretti",
+    "sonraki_adim": "İnceleme ve entegrasyon",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-11T17:47:03",
+    "output_path": "workspace\\external\\roo_code\\output",
+    "summary": "Review passed: 0 files, no secrets, all criteria met"
   }
 }

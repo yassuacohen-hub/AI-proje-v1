@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import sys
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -16,8 +17,9 @@ from src.company_master.orchestrator.models import (
     TaskStatus,
 )
 from src.company_master.orchestrator.review import ReviewError, review_output
-from src.company_master.orchestrator.runner import TaskExecutionError, run_task
+from src.company_master.orchestrator.runner import TaskExecutionError, run_task, execute_orchestrator_task
 from src.company_master.orchestrator.sync import SyncError, append_completion, update_error_ledger_section
+from src.company_master.orchestrator.task_board import gorev_ekle, gorev_guncelle, handoff_ekle
 from src.company_master.orchestrator.workspace import WorkspaceViolation, resolve_workspace, validate_manifest
 
 
@@ -46,6 +48,14 @@ MANIFESTS: dict[str, AgentManifest] = {
         max_attempts=3,
         timeout_seconds=300,
     ),
+    "roo_code": AgentManifest(
+        agent_id="roo_code",
+        display_name="Roo Code",
+        task_type="code_review",
+        workspace_path="workspace/external/roo_code",
+        max_attempts=3,
+        timeout_seconds=300,
+    ),
     "harici_ajan": AgentManifest(
         agent_id="harici_ajan",
         display_name="Harici Ajan (Inkling)",
@@ -68,8 +78,14 @@ def cli() -> None:
 
 @cli.command()
 @click.argument("brief_path", type=click.Path(exists=True))
-def dispatch(brief_path: str) -> None:
-    """Dispatch a brief to its external agent and run with retry/backoff."""
+@click.option("--run-mode", type=click.Choice(["orchestrator", "agent"]), default=None, help="Run mode: orchestrator or agent")
+def dispatch(brief_path: str, run_mode: str | None) -> None:
+    """Dispatch a brief to its external agent and run with retry/backoff.
+    
+    Orchestrator mode runs the task internally (no external agent subprocess).
+    Agent mode delegates to the configured external agent with retry/backoff.
+    Default mode is orchestrator when not specified.
+    """
     try:
         brief = load_brief(brief_path)
     except BriefValidationError as exc:
@@ -87,6 +103,21 @@ def dispatch(brief_path: str) -> None:
         sys.exit(1)
     workspace = resolve_workspace(agent_id)
     click.echo(f"Dispatching {brief.task_id} to {agent_id} ({workspace})")
+
+    # Task board'a kayıt (plan -> aktif)
+    try:
+        gorev_ekle(brief.task_id, brief.title, brief.agent_id,
+                   oncelik="P1", dosyalar=brief.context_files or [],
+                   source=brief.source, from_agent=brief.from_agent)
+    except ValueError:
+        # Zaten varsa mevcut kaydı aktif yap
+        gorev_guncelle(brief.task_id, durum="aktif",
+                       source=brief.source, from_agent=brief.from_agent)
+    else:
+        # Yeni eklenen görevi aktif yap
+        gorev_guncelle(brief.task_id, durum="aktif",
+                       source=brief.source, from_agent=brief.from_agent)
+
     task = Task(
         task_id=brief.task_id,
         agent_id=agent_id,
@@ -97,10 +128,15 @@ def dispatch(brief_path: str) -> None:
         success_criteria=brief.success_criteria,
         deadline=brief.deadline,
         status=TaskStatus.DISPATCHED,
+        source=brief.source,
     )
     TASK_REGISTRY[brief.task_id] = task
     try:
-        completed_task, result = run_task(task, manifest, ERROR_LEDGER.all())
+        effective_run_mode = brief.run_mode or "orchestrator"
+        if effective_run_mode == "orchestrator":
+            completed_task, result = execute_orchestrator_task(task, workspace)
+        else:
+            completed_task, result = run_task(task, manifest, ERROR_LEDGER.all())
     except TaskExecutionError as exc:
         click.echo(f"Execution error: {exc}", err=True)
         sys.exit(1)
@@ -137,11 +173,15 @@ def review(task_id: str, output_dir: str | None) -> None:
             click.echo(f"  - {finding}")
     if result.success:
         task.status = TaskStatus.REVIEWED
+        gorev_guncelle(task_id, durum="done", bitis=datetime.now().isoformat(timespec="seconds"))
+        handoff_ekle(task_id, agent_id, str(review_path), result.summary)
         try:
             append_completion(agent_id, task_id, result.summary, result)
             click.echo(f"Appended completion to AGENT_SYNC.md")
         except SyncError as exc:
             click.echo(f"Sync warning: {exc}", err=True)
+    else:
+        gorev_guncelle(task_id, durum="blocked", **{"not": result.summary})
 
 
 @cli.command()

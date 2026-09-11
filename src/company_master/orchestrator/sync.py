@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from src.company_master.orchestrator.models import TaskResult
+from src.company_master.orchestrator.task_board import atomic_write_text
 
 
 AGENT_SYNC_PATH = Path("AGENT_SYNC.md")
@@ -32,7 +33,7 @@ def append_completion(
     if marker not in content:
         raise SyncError("AGENT_SYNC.md missing 'Tamamlananlar' section")
     new_content = content.replace(marker, f"{marker}\n\n| {agent_name} | {today} | {task_id}: {summary} |")
-    AGENT_SYNC_PATH.write_text(new_content, encoding="utf-8")
+    atomic_write_text(AGENT_SYNC_PATH, new_content)
 
 
 def update_error_ledger_section(entries: list[dict[str, Any]]) -> None:
@@ -57,7 +58,7 @@ def update_error_ledger_section(entries: list[dict[str, Any]]) -> None:
         )
     else:
         new_content = content.rstrip() + f"\n\n## ErrorLedger\n\n{table}\n"
-    AGENT_SYNC_PATH.write_text(new_content, encoding="utf-8")
+    atomic_write_text(AGENT_SYNC_PATH, new_content)
 
 
 def _truncate(text: str, length: int) -> str:

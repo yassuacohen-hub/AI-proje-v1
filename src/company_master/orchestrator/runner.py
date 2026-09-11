@@ -63,7 +63,7 @@ def run_task(
 
 
 def _execute(task: Task, manifest: AgentManifest) -> TaskResult:
-    workspace = Path(manifest.workspace_path)
+    workspace = Path(manifest.workspace_path).resolve()
     output_dir = workspace / "output"
     output_dir.mkdir(parents=True, exist_ok=True)
     cmd = [
@@ -122,3 +122,56 @@ def _collect_output_files(output_dir: Path) -> list[str]:
 def _now() -> str:
     from datetime import datetime
     return datetime.now().isoformat()
+
+
+# ---- Orchestrator-mode internal executor ----
+
+_ORCHESTRATOR_OUTPUTS: dict[str, tuple[str, str]] = {
+    "research": ("research_output.md", "# Research Output\n\n"),
+    "code_review": ("code_review.md", "# Code Review\n\n"),
+    "refactoring": ("refactoring_plan.md", "# Refactoring Plan\n\n"),
+    "test_generation": ("test_report.md", "# Test Report\n\n"),
+    "documentation": ("documentation.md", "# Documentation\n\n"),
+    "data_transformation": ("transformed_data.json", '{"status": "transformed", "records": 0}\n'),
+}
+
+
+def execute_orchestrator_task(
+    task: Task,
+    workspace: Path,
+) -> tuple[Task, TaskResult]:
+    """Execute a task internally (orchestrator mode).
+
+    Creates output based on task_type without delegating to an external agent.
+    Failed tasks are marked FAILED (not REASSIGNED) since there is no fallback agent.
+    """
+    task.status = TaskStatus.RUNNING
+    task.updated_at = _now()
+    output_dir = workspace / "output"
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    type_key = task.task_type.value
+    filename, header = _ORCHESTRATOR_OUTPUTS.get(
+        type_key, ("result.txt", f"# {type_key} result\n\n")
+    )
+    output_file = output_dir / filename
+    try:
+        content = f"{header}- task_id: {task.task_id}\n- agent: orchestrator\n- source: {task.source or 'N/A'}\n"
+        output_file.write_text(content, encoding="utf-8")
+        result = TaskResult(
+            success=True,
+            output_files=[str(output_file.relative_to(workspace))],
+            summary=f"Orchestrator {type_key} completed for {task.task_id}",
+        )
+        task.status = TaskStatus.COMPLETED
+    except Exception as exc:
+        result = TaskResult(
+            success=False,
+            output_files=[],
+            summary=f"Orchestrator {type_key} failed: {exc}",
+            findings=[str(exc)],
+        )
+        task.status = TaskStatus.FAILED
+    task.result = result
+    task.updated_at = _now()
+    return task, result

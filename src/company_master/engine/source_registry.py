@@ -124,13 +124,13 @@ def default_sources() -> list[SourceSpec]:
         ),
         SourceSpec(
             source_id="apify",
-            display_name="Apify REST Adaptör (Pilot)",
+            display_name="Apify REST Adaptör",
             domain="api.apify.com",
             scraper_module="company_master.intelligence.job_intelligence.sources.apify_job_source",
             output_file="data/job_intelligence/apify_pilot.jsonl",
             pipeline=True,
-            enabled=False,  # APOFY_TOKEN gerekli; once pilot calistirilacak
-            note="Apify Actor'lar uzerinden anti-bot siteleri (kariyer.net, LinkedIn) scrape eder. APIFY-02 pilot.",
+            enabled=True,
+            note="Apify Actor'lar uzerinden anti-bot siteleri (kariyer.net, LinkedIn) scrape eder. Token gerekli.",
         ),
     ]
 

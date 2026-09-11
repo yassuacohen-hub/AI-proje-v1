@@ -1,0 +1,43 @@
+quality_gate:
+  db_fields:
+    address: 15
+    nace_code: 15
+    osb_parsel: 10
+    primary_email: 15
+    primary_phone: 15
+    tax_number: 15
+    trade_name: 5
+    website_domain: 10
+  db_weight: 0.7
+  dqt_rules:
+    not_null:
+    - tax_number
+    - address
+    - primary_phone
+    regex:
+      email: ^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$
+      phone: ^\+?[0-9\s\-\(\)]{10,}$
+  dqt_weight: 0.3
+  min_score: 30.0
+  post_scrape:
+    dedup: true
+    dedup_fields:
+    - legal_name
+    - trade_name
+    - tax_number
+    - vergi_no
+    enabled: true
+    spam_filter:
+      enabled: true
+      max_records_per_domain: 500
+      max_records_per_nace: 10000
+    validate_vkn: true
+sources:
+  ostim-detail:
+    enabled: true
+    min_score: 30
+    output_file: data/ostim/firmalar_detayli.jsonl
+  ostim-list:
+    enabled: false
+    min_score: 20
+    output_file: data/ostim/firmalar_full.jsonl

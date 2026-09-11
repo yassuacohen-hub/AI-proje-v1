@@ -13,6 +13,7 @@ sahiplenemez.
 from __future__ import annotations
 
 import json
+import os
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -45,8 +46,25 @@ def _read_json(path: Path) -> Any:
 
 def _write_json(path: Path, data: Any) -> None:
     _ensure()
-    path.write_text(json.dumps(data, ensure_ascii=False, indent=2),
-                    encoding="utf-8")
+    atomic_write_text(path, json.dumps(data, ensure_ascii=False, indent=2))
+
+
+def atomic_write_text(path: Path, text: str) -> None:
+    """Atomik metin yazma: once gizli .tmp dosyasina yaz, sonra os.replace.
+
+    ORCH-01 devami: paralel ajanlar ayni dosyaya ayni anda yazarken yarim
+    dosya kalmamasi icin (gozlemlenen arizalar: task_board.json'un 6 bayta
+    dusmesi ve AGENT_SYNC.md basliginin ortadan bolunmesi).
+    """
+    path = Path(path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    tmp = path.parent / f".{path.name}.{os.getpid()}.tmp"
+    try:
+        tmp.write_text(text, encoding="utf-8")
+        os.replace(tmp, path)
+    finally:
+        if tmp.exists():
+            tmp.unlink(missing_ok=True)
 
 
 # ---- Gorev Panosu ----
@@ -58,8 +76,13 @@ def gorev_ekle(
     baslangic: str | None = None,
     bitis: str | None = None,
     dosyalar: list[str] | None = None,
+    source: str | None = None,
+    from_agent: str | None = None,
 ) -> dict:
-    """Panoya gorev ekle. dosyalar -> file-lock sahipligi de alir."""
+    """Panoya gorev ekle. dosyalar -> file-lock sahipligi de alir.
+
+    source: "ic" veya "harici" (ad-hoc agent)
+    """
     _ensure()
     board = _read_json(TASK_BOARD)
     if any(t["task_id"] == task_id for t in board):
@@ -74,6 +97,8 @@ def gorev_ekle(
         "bitis": bitis,
         "dosyalar": dosyalar or [],
         "not": "",
+        "source": source or "ic",
+        "from_agent": from_agent,
     }
     # Atomik: once tum lock'lar denenir; hata olursa gorev eklenmez.
     if dosyalar:
@@ -274,14 +299,14 @@ def agent_sync_yaz() -> None:
         mevcut = sync_path.read_text(encoding="utf-8")
         # Eger dosya otomatik olusturulmus stile uyuyorsa tamamen yeniden yaz
         if "Otomatik Olusturuldu" in mevcut or mevcut.strip().startswith("# AGENT_SYNC"):
-            sync_path.write_text(icerik, encoding="utf-8")
+            atomic_write_text(sync_path, icerik)
         else:
             # Manuel icerik varsa, otomatik bolumu sona ekle
             if "## Otomatik Ozet (task_board)" not in mevcut:
                 mevcut += "\n\n## Otomatik Ozet (task_board)\n\n" + icerik
-            sync_path.write_text(mevcut, encoding="utf-8")
+            atomic_write_text(sync_path, mevcut)
     else:
-        sync_path.write_text(icerik, encoding="utf-8")
+        atomic_write_text(sync_path, icerik)
 
 
 def gorev_listesi(durum: str | None = None) -> list[dict]:
@@ -315,6 +340,32 @@ def lock_birak(dosya: str, sahip: str) -> bool:
         return True
     return False
 
+
+def handoff_ekle(task_id: str, agent_id: str, output_path: str, summary: str) -> None:
+    """Handoff kaydetme: handoffs.json'a çıktı kaydı ekler.
+
+    Aynı task_id ile tekrar çağrıldığında önceki kaydı koruyarak
+    guncelleme geçmişi tutar (duplicate-safe).
+    """
+    HANDOFFS = STATE_DIR / "handoffs.json"
+    _ensure()
+    data = _read_json(HANDOFFS) if HANDOFFS.exists() else {}
+    entry = {
+        "tamamlandi": f"{agent_id} çıktı üretti",
+        "sonraki_adim": "İnceleme ve entegrasyon",
+        "dikkat_edilmesi": "",
+        "tarih": datetime.now().isoformat(timespec="seconds"),
+        "output_path": output_path,
+        "summary": summary,
+    }
+    if task_id not in data:
+        data[task_id] = entry
+    else:
+        existing = data[task_id]
+        if "guncelleme_gecmisi" not in existing:
+            existing["guncelleme_gecmisi"] = []
+        existing["guncelleme_gecmisi"].append(entry)
+    _write_json(HANDOFFS, data)
 
 def lock_durum(dosya: str) -> dict | None:
     return _read_json(FILE_LOCKS).get(dosya)
@@ -353,7 +404,13 @@ def _md_yaz(board: list[dict]) -> None:
         "|-------|--------|-------|---------|-------|----------|",
     ]
     aktif = [t for t in board if t["durum"] not in ("done",)]
+    # Duplika görevleri engelle: aynı task_id daha önce görünüyorsa atla
+    gorulen_ids = set()
     for t in aktif:
+        task_id = t["task_id"]
+        if task_id in gorulen_ids:
+            continue
+        gorulen_ids.add(task_id)
         dos = ", ".join(t["dosyalar"][:3]) if t["dosyalar"] else "-"
         lines.append(f"| {t['task_id']} | {t['baslik']} | {t['sahip']} | "
                      f"{t['oncelik']} | {t['durum']} | {dos} |")
@@ -362,4 +419,4 @@ def _md_yaz(board: list[dict]) -> None:
     done = [t for t in board if t["durum"] == "done"]
     for t in done:
         lines.append(f"| {t['task_id']} | {t['baslik']} | {t['sahip']} | {(t.get('bitis') or '-')} |")
-    TASK_MD.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    atomic_write_text(TASK_MD, "\n".join(lines) + "\n")

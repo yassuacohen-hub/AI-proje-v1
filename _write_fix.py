@@ -1,1 +1,0 @@
-﻿open("_fix.py","w").write("print(\"hello\")"); print("done")

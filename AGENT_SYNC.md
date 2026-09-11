@@ -1,95 +1,33 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-10T20:05:00
+> Son guncelleme: 2026-09-11T23:17:51
 > Kaynak: data/orchestrator/task_board.json
-
-## ÔÜí Frontend/Web Oturumu ├ûzeti (2026-09-10, dashboard ajan─▒) ÔÇö DI─ŞER AJANLARA ├ûNEML─░
-
-Bu oturumda web dashboard'a **uyelik/oturum sistemi** eklendi; tum endpoint'ler ve sema degisti:
-
-- **┼Şifre sistemi:** users tablosuna `password_hash` (PBKDF2-SHA256, 120k iter, `pbkdf2$iter$salt$hash` format─▒). Kay─▒t art─▒k ┼şifre zorunlu (min 8); login ┼şifre do─şrulamal─▒. Yeni endpoint: `POST /api/buyer/logout`, `POST /api/buyer/change-password`. Eski hash'siz kay─▒tlar i├ğin ge├ği┼ş istisnas─▒ var.
-- **Yeni users kolonlar─▒ (migration 0014 + 0015, her iki DB'de):** `employee_range, certificates, tax_number, phone, trade_name, address, password_hash`. `GET/PUT /api/buyer/profile` bunlar─▒ i┼şler; profil_tamlama **10 alan** ├╝zerinden.
-- **Yeni admin API'ler:** `GET/POST /api/admin/categories` (product_categories CRUD; 409 code ├ğak─▒┼şmas─▒) ÔÇö `require_admin`.
-- **Bugfix'ler:** toggleWatchDetail anahtar tutars─▒zl─▒─ş─▒ (watchKeyOf), task_board.json BOM (utf-8-sig okuma), isletmemAccountTab tip parametresi.
-- **UI:** ─░┼şletmem 4 sekme (Firma Profili/Bilgiler/E┼şle┼ştirme/Hesap) + g├Âr├╝n├╝r k─▒sa bilgi kartlar─▒ + "Notlar" tek-tu┼ş kapatma; topbar ─░┼şletmem butonu kald─▒r─▒ld─▒ ÔåÆ Paket/Tier rozeti; Son g├╝ncelleme CANLI chip'ine ta┼ş─▒nd─▒; match paneline "Arama Y├Ân├╝" (Y22).
-- **Admin'ler:** admin@huginn.local (┼şifre: Admin2026!) + yassuacohen@gmail.com (11223344) ÔÇö `scripts/set_admin_password.py add|set|--list` ile y├Ânetilir.
-- **Panel revizesi:** X01ÔÇôX05 eklendi (a┼şa─ş─▒da), Y24/Y26 revize edildi. Dashboard canl─▒: `http://localhost:8000` (Docker) / 8010 (yerel uvicorn).
-- Ajanlar users tablosuna do─şrudan yazacaksa yeni kolonlar─▒ dikkate als─▒n; DB yazan scriptler `password_hash`'e dokunmamal─▒.
 
 ## Aktif Isler
 
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
-| P3-2 | VKN web kazima genisle (sadece footer de | web_kazima | plan | blocked |
-| Y10 | MERSIS VKN zenginlestirme pipeline'i | gelistirici | P1 | blocked |
-| Y11 | GIB VKN dogrulama entegrasyonu | arastirmaci | P1 | done |
-| P6-1 | Ã„Â°Ã…Å¸ ilanlarÃ„Â± ve ÃƒÂ§alÃ„Â±Ã…Å¸an | web_kazima | P1 | cancelled |
-| P7-1 | DB Migration 0007 - Job Intelligence tab | gelistirici | P0 | plan |
-| P7-2 | Job Intelligence modul yapisi olusturma | mimar | P0 | plan |
-| P7-5 | ISKUR Scraper | kazi_scraper | P1 | plan |
-| P7-6 | Kariyer.net Scraper | kariyer_scraper | P2 | aktif |
-| Y21 | ARASTIRMA: ISKUR kurumsal eslestirme ver | arastirmaci |  | plan |
-| Y23 | Odeme entegrasyonu (PayTR) - otomatik kredi satisi | gelistirici | P1 | plan |
-| Y24 | Uye e-posta dogrulama linki + Telegram h | gelistirici |  | plan |
-| Y26 | Enterprise API key yonetimi + kullanim r | gelistirici |  | plan |
-| X01 | ARASTIRMA: GIB VKN dogrulama (acik API + | arastirmaci | P1 | plan |
-| X02 | BUG: VKN zenginlestirme (MERSIS + web fo | gelistirici | P1 | blocked |
-| X05 | Y26: API key yonetimi - rotasyon + kulla | gelistirici | P2 | plan |
-| GOV-01 | Orkestrasyon reconciliation denetimi ve  | koordinator | P0 | aktif |
-| APIFY-03 | Apify Webhook + Kalici Olay Isleme (idem | web_kazima | P1 | plan |
-| MCP-01 | Kontrollu Apify MCP Erisimi: izinli arac | arastirmaci | P2 | plan |
-| MCP-02 | Huginn MCP Sunucusu + Ters Connector (ge | arastirmaci | P2 | plan |
-| REL-01 | Teslimat Kapisi: CI hard-gate (lint/Band | devops | P1 | plan |
-| DOC-01 | Kanonik Dokumantasyon: tek V10 kaynagi + | koordinator | P1 | plan |
+| P7-15 | Signal Dashboard / Aggregation — company | kilo | P2 | aktif |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| P8-3 | Is ilani takip motoru: buyume sinyali sk | arastirmaci | 2026-09-09 |
-| P8-4 | Is ilani takip motoru: risk sinyali skor | arastirmaci | 2026-09-09 |
-| P8-5 | Is ilani takip motoru: teknoloji donusum | arastirmaci | 2026-09-09 |
-| P8-6 | Is ilani takip motoru: yatirim ve olcekl | arastirmaci | 2026-09-09 |
-| P8-7 | Is ilani takip motoru: cografi genisleme | backend | 2026-09-09 |
-| P8-8 | Is ilani takip motoru: kurumsal rapor ve | web_kazima | 2026-09-09 |
-| X03 | MATCH v3: buyer profili skorlari (olcek  | gelistirici | 2026-09-09 |
-| X04 | UYELIK: sifre sifirlama + kurumsal e-pos | gelistirici | 2026-09-09 |
-| SEC-01 | API Guvenlik Regresyonu: admin fail-clos | gelistirici | 2026-09-10 |
-| SEC-02 | Ag ve Ajan Izolasyonu: TLS verify + work | gelistirici | 2026-09-10 |
-| APIFY-01 | Apify uygunluk ve entegrasyon mimarisi a | harici_arastirma | 2026-09-10 |
-| APIFY-02 | Apify REST Adaptoru + Polling Pilotu (10 | web_kazima | 2026-09-10 |
-| Y23 | Odeme entegrasyonu (PayTR) - otomatik kredi satisi | gelistirici | 2026-09-10 |
-| Y24 | Uye e-posta dogrulama linki + Telegram hosgeldin raporu | gelistirici | 2026-09-10 |
-| Y26 | Enterprise API key yonetimi + kullanim raporu | gelistirici | 2026-09-10 |
-| X01 | ARASTIRMA: GIB VKN dogrulama (acik API + KVKK) | arastirmaci | 2026-09-10 |
-| X05 | Y26: API key yonetimi - rotasyon + kullanim metrikleri + tier rate limit | gelistirici | 2026-09-10 |
-| APIFY-03 | Apify Webhook + Kalici Olay Isleme (idempotent alici) | web_kazima | 2026-09-10 |
-| MCP-01 | Kontrollu Apify MCP Erisimi: izinli arac listesi + harcama onayi + veri sinirlari | arastirmaci | 2026-09-10 |
-| MCP-02 | Huginn MCP Sunucusu + Ters Connector (gerekirse, faz 2) | arastirmaci | 2026-09-10 |
-| REL-01 | Teslimat Kapisi: CI hard-gate (lint/Bandit/coverage/drift) + deploy/rollback runbook | devops | 2026-09-10 |
-| DOC-01 | Kanonik Dokumantasyon: tek V10 kaynagi + UTF-8 regresyon kontrolu | koordinator | 2026-09-10 |
+| DOCS-02 | 07_harici_ajan_protokolu.md guncelle | mimar | 2026-09-11 |
+| DOCS-03 | AGENTS.md guncelle | mimar | 2026-09-11 |
+| RO-02 | Dispatch + Review otomatik test | cursor_grok | 2026-09-11 |
+| LIVE-01 | Canli Test: Dispatch + Review Akisi | cursor_grok | 2026-09-11 |
+| ROO-01 | Roo Code - Kod Incelemesi ve Refactoring | roo_code | 2026-09-11 |
+| 9R-01 | 9Router AI Gateway entegrasyonu | roo_code | 2026-09-11 |
+| MCP-03 | MCP Server Entry + Transport Testleri | kilo | 2026-09-11 |
+| ORCH-02 | Pano-disk senkronu: 5 done guncelleme +  | cline | 2026-09-11 |
+| P7-14 | E2E Pipeline Test — Webhook -> ingest -> | kilo | 2026-09-11 |
+| CLEANUP-01 | test_job_intelligence_e2e.py temizlik -  | kilo | 2026-09-11 |
 
 ## Son Handoff'lar
 
-- **P4-1**: Kalite skoru 27.5 -> ~64 tamamlandi
-- **P4-4**: Dashboard performans izleme ve slow query optimiza
-- **P8-8**: Kurumsal rapor ve medya entegrasyonu tasari tamaml
-- **SEC-01**: web_app.py require_admin fail-closed ve CSV export
-- **SEC-02**: TLS dogrulama varsayilan yapildi (verify=False kal | done: dinamik domain policy_for + workspace containment, 21 regresyon testi passed (2026-09-10)
-- **SEC-03**: scripts altinda TLS verify=False/CERT_NONE temizlendi (8 script), commit 45cd8fe
-- **P7-GATE**: tek migration kopyasi dogrulandi, test_job_intelligence_dikey.py dikey akis testleri (11 passed), commit 7de2abc; DATA-01/P7-GATE/SEC-01/SEC-02 panoda done (2026-09-10)
-- **Y21**: ISKUR araştırması tamamlandı — public e-sub'da açık API YOK, özel sektör işyeri adları GİZLİ. P7-5 firma-eşleştirme odaklı değil, ilan metadata + aggregation intelligence odaklı çalışacak. Not: İşveren Kayıt Sorgulama authenticated erişimle SGK/VKN üzerinden firma adı üretebilir; bu yöntem aktif olursa P7-5 firma-level matching için REVİZYON yapılacak.
-- **APIFY-01**: OSINT_Scraper_Motoru araştırması tamamlandı. 3 araç kıyaslandı: Apify (GO - mevcut adapter entegre edilecek, anti-bot siteler icin), Firecrawl (GO with CAVEATS - yedek opsiyon, AGPL self-host riski), Scrapy (NO for MVP - buyuk refactoring). Sonuc: `data/orchestrator/apify_research_result.json`. APIFY-02/03 baslayabilir.
-- **APIFY-02**: ApifyJobSource implementasyonu tamamlandi. `src/company_master/intelligence/job_intelligence/sources/apify_job_source.py` olusturuldu. SourceSpec registry'e 'apify' source_id eklendi (enabled=False, APIFY_TOKEN gerekli). Import testi gecildi. ApifyClient (APIFY-01) zaten mevcuttur; BaseJobSource override ile run_full_scrape(), discover_job_urls(), _apify_item_to_scraped_job() metodlari eklendi. Pilot calistirma hazir — APIFY_TOKEN env set edilince run_apify_pilot() calisacak. APIFY-03 (webhook) icin temel altyapi hazir.
-- **Y23**: PayTR odeme arastirmasi tamamlandi (iyzico/Stripe yerine). TCMB lisansli, iFrame API tercih edildi (PCI-DSS merchant'a yuklenmez). Hash: HMAC-SHA256(merchant_key, merchant_oid+merchant_salt+status+total_amount). Blocker: magaza basvurusu onayi (1-3 is gunu). Detay: `data/orchestrator/y23_paytr_result.json`.
-
-## Harici Ajan Bildirimleri
-
-| Ajan | Dosya | Durum |
-|------|-------|-------|
-| kariyer_scraper | `workspace/external/NOTIFICATION_Y21_P75_kariyer_scraper.md` | ✅ Bildirim yazıldı |
-| kazi_scraper | `workspace/external/NOTIFICATION_Y21_P75_kazi_scraper.md` | ✅ Bildirim yazıldı |
-
-**Not:** Kariyer.net scraper (P7-6) Y21 sonuçlarından doğrudan etkilenmez. İSKUR scraper (P7-5) authenticated erişim olursa revize edilecek.
-
-
+- **P1-13**: Spam filtresi implementasyonu tamamlandi
+- **P0-4**: CI pipeline strict modu tamamlandi
+- **RO-02**: cursor_grok çıktı üretti
+- **LIVE-01**: cursor_grok çıktı üretti
+- **ROO-01**: roo_code çıktı üretti

@@ -29,6 +29,9 @@ def load_brief(path: str | Path) -> Brief:
         constraints=data.get("constraints", {}),
         success_criteria=data.get("success_criteria", []),
         deadline=data.get("deadline"),
+        source=data.get("source", "ic"),
+        from_agent=data.get("from_agent"),
+        run_mode=data.get("run_mode"),
     )
 
 

@@ -19,6 +19,23 @@ from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[3]
+
+import yaml
+from pathlib import Path as _Path
+
+
+def load_quality_config() -> dict:
+    """config/quality_gate.yaml'dan ayarları yükler."""
+    cfg_path = _Path(__file__).resolve().parents[3] / "config" / "quality_gate.yaml"
+    if cfg_path.exists():
+        try:
+            with open(cfg_path, "r", encoding="utf-8") as f:
+                return yaml.safe_load(f) or {}
+        except Exception:
+            pass
+    return {}
+
+
 sys.path.insert(0, str(ROOT / "src"))
 
 # Data Quality Toolkit entegrasyonu
@@ -126,13 +143,24 @@ class QualityGate:
     ]
 
     def __init__(self, min_score: float = 30.0, rules: list = None, use_dqt: bool = True, pii_scan: bool = False):
+        """Quality Gate'i baslatir. Config'den min_score alir."""
+        config = load_quality_config()
+        quality_cfg = config.get("quality_gate", {}) if config else {}
+        if min_score == 30.0 and "min_score" in quality_cfg:
+            min_score = quality_cfg["min_score"]
+        # DB weights from config
+        db_weights = quality_cfg.get("db_fields", {}) if quality_cfg else {}
+        self.db_weights = db_weights if db_weights else {
+            "tax_number": 15, "address": 15, "primary_phone": 15,
+            "primary_email": 15, "website_domain": 10, "nace_code": 15,
+            "osb_parsel": 10, "trade_name": 5
+        }
         self.min_score = min_score
         self.custom_rules = rules or self.DEFAULT_RULES
         self.use_dqt = use_dqt and DQT_AVAILABLE
         self.pii_scan = pii_scan and DQT_AVAILABLE
         self.engine = None
         self._pii_scanner = None
-
         if self.use_dqt:
             self.engine = DataQualityEngine()
             for col_name, rule_cls, kwargs in self.custom_rules:
@@ -140,8 +168,7 @@ class QualityGate:
                     rule = rule_cls(column_name=col_name, **kwargs)
                     self.engine.add_rule(rule)
                 except Exception as e:
-                    print("[UYARI] Kural oluşturulamadı {}: {}".format(col_name, e), file=sys.stderr)
-
+                    print("[UYARI] Kural olusturulamadi {}: {}".format(col_name, e), file=sys.stderr)
         if self.pii_scan:
             self._pii_scanner = PIIScanner()
 

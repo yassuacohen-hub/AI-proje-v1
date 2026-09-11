@@ -18,6 +18,7 @@ from datetime import datetime
 from pathlib import Path
 
 from .source_registry import SourceSpec, registry
+from .quality_gate import load_quality_config
 
 ROOT = Path(__file__).resolve().parents[3]
 STATE_FILE = ROOT / "data" / "osint_engine_state.json"
@@ -163,6 +164,12 @@ def cmd_quality(source_id: str, min_score: float = 30.0) -> int:
     if not spec.output_path.exists():
         print(f"[{source_id}] cikti dosyasi bulunamadi: {spec.output_path}")
         return 1
+
+    # Load config for min_score default
+    cfg = load_quality_config()
+    qcfg = cfg.get("quality_gate", {}) if cfg else {}
+    if min_score == 30.0 and "min_score" in qcfg:
+        min_score = qcfg["min_score"]
 
     from .quality_gate import QualityGate
 
