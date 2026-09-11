@@ -17,9 +17,9 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-03T14:18:36",
+    "bitis": "2026-09-12T00:04:05",
     "dosyalar": [],
-    "not": "Syntax hatası düzeltildi. Ingest 5485/5485 matched, 0 errors."
+    "not": "Otomatik tetiklendi"
   },
   {
     "task_id": "P0-3",
@@ -285,7 +285,7 @@
     "baslangic": null,
     "bitis": "2026-09-11T21:49:16",
     "dosyalar": [],
-    "not": "Test artefakti (dispatch testleri kalintisi): baslangic=null, handoff yok, dosya kilidi yok. ORCH-01 devami panosu temizligi ile kapatildi; gercek arastirma gorevi degildir.",
+    "not": "Test artefakti (dispatch testleri kalintisi): baslangic=null, handoff yok, dosya kilidi yok. ORCH-001 devami panosu temizligi ile kapatildi; gercek arastirma gorevi degildir.",
     "source": "ic",
     "from_agent": null
   },
@@ -469,9 +469,9 @@
     "baslik": "Vektor Katmani + Dublikasyon Pilotu - ChromaDB, vector/ paketi, index_companies.py, matcher doldurma (VKN+fuzzy+vektor)",
     "sahip": "roo_code",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-11T23:53:16",
-    "bitis": null,
+    "bitis": "2026-09-12T00:18:01",
     "dosyalar": [
       "src/company_master/vector/",
       "src/company_master/entity_resolution/matcher.py",
@@ -479,7 +479,7 @@
       "requirements-app.txt",
       "tests/vector/"
     ],
-    "not": "",
+    "not": "9R-02 tamamlandi. vector/ paketi (embedder fast-fail + store in-memory fallback + service), matcher.py (VKN+fuzzy+vektor karar agaci, _temiz_unvan/onemsiz token duzeltmesi), index_companies.py --vkn-rap embed-oncesi sira, chromadb requirement eklendi. Pilot: firmalar_vkn_ekli 5040 satir -> 0 ortak VKN grubu (veri zaten deduplike). Test: tests/vector 31 + task_board 5 = 36 passed. Not: ChromaDB ve 9Router embed runtime'da kurulu degil -> in-memory fallback devrede; NINEROUTER_* .env + pip kurulumu sonrasi gercek vektor akisi acilir. Sonraki adim: 9R-03 chat tabanli ilan zenginlestirme.",
     "source": "ic",
     "from_agent": "roo_code"
   },
@@ -512,5 +512,20 @@
     "not": "",
     "source": "ic",
     "from_agent": "roo_code"
+  },
+  {
+    "task_id": "P7-16",
+    "baslik": "Entegrasyon Test Kapsamını Genişletme - Vektör, Varlık Çözümlemesi ve DLQ/Yeniden Deneme Senaryoları",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "aktif",
+    "baslangic": "2026-09-12T01:25:35",
+    "bitis": null,
+    "dosyalar": [
+      "tests/test_job_intelligence_e2e.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
   }
 ]

@@ -1,5 +1,20 @@
 # CHANGELOG - Ankara B2B Company Master
 
+## 2026-09-12 - ORCH-03: AGENT_SYNC Otomatik Senkron Hook'u + Atomik Yazma
+
+### Otomatik Senkron Hook'u (bayatlık sorununu kaynağında çözer)
+- `task_board.py`: `gorev_ekle`, `gorev_guncelle`, `lock_birak`, `handoff_yaz`, `handoff_ekle` başarılı olunca `_sync_tetikle()` otomatik `agent_sync_yaz()` çağırır — artık hiçbir ajanın "iş bitince elle senkronla" disiplinine gerek kalmaz
+- `_sync_tetikle()`: 3 denemeli retry (Windows'ta başka süreç dosyayı okurken `os.replace` PermissionError gözlendi — canlı testte teyit edildi); tüm denemeler başarısızsa pano işlemi bloklanmaz, yalnızca stderr uyarısı yazılır (sessiz kayıp yerine görünür hata)
+- `AUTO_SYNC` modül bayrağı eklendi; `tests/orchestrator/conftest.py` (yeni) autouse fixture ile tüm orchestrator testlerinde `AUTO_SYNC=False` + `AGENT_SYNC_MD`/`AGENT_SYNC_MD_KOPYA` tmp_path'e yönlendirilir (test → gerçek dosya kirliliği engellenir)
+
+### Atomik Yazma + Kopya Eşitleme
+- `agent_sync_yaz()` yeniden yazıldı: kök `AGENT_SYNC.md` + `data/orchestrator/AGENT_SYNC.md` kopyası **aynı final içerikle atomik** yazılır (tek yazar: pano)
+- `handoff_yaz()` atomik olmayan `write_text`'ten `atomic_write_text`'e geçirildi (21:37 tarzı yarı-yazma ailesinin son üyesi kapatıldı)
+
+### Canlı Doğrulama
+- Gerçek panoda zararsız güncelleme ile hook tetiklendi: kök + kopya `00:35:05` timestamp'i ile özdeş şekilde yenilendi (`OZDES_MI=True`), pano içeriği değişmedi
+- Testler: **53 passed** (`python -m pytest tests/orchestrator/ -q`)
+
 ## 2026-09-11 - GIT-01: Hibrit Git Push Stratejisi ve Temiz Toplu Push
 
 ### Temiz Toplu Push

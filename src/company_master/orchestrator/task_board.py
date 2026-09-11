@@ -14,6 +14,8 @@ from __future__ import annotations
 
 import json
 import os
+import sys
+import time
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -27,6 +29,14 @@ STATE_JSON = STATE_DIR / "state.json"
 TASK_MD = STATE_DIR / "gorev_panosu.md"
 
 GOREV_DURUMLARI = ("plan", "aktif", "review", "done", "blocked")
+
+# ORCH-03: Pano degistikce AGENT_SYNC otomatik tazelensin.
+# Testlerde conftest.py bu bayragi False yapar (gercek dosyaya yazma engellenir).
+AUTO_SYNC = True
+
+# AGENT_SYNC konumlari (modul seviyesi: testler monkeypatch edebilir)
+AGENT_SYNC_MD = ROOT / "AGENT_SYNC.md"
+AGENT_SYNC_MD_KOPYA = STATE_DIR / "AGENT_SYNC.md"
 
 
 def _ensure() -> None:
@@ -65,6 +75,32 @@ def atomic_write_text(path: Path, text: str) -> None:
     finally:
         if tmp.exists():
             tmp.unlink(missing_ok=True)
+
+
+def _sync_tetikle() -> None:
+    """ORCH-03: Pano/lock degisikliginden sonra AGENT_SYNC'i sessizce tazele.
+
+    - AUTO_SYNC=False ise hicbir sey yapmaz (test izolasyonu).
+    - Windows'ta baska bir surec dosyayi okurken os.replace PermissionError
+      verebilir -> kisa araliklarla 3 deneme yapilir.
+    - Tum denemeler basarisizsa pano islemi BLOKLANMAZ; sadece stderr'a
+      uyari yazilir (sessiz kayip yerine gorunur hata).
+    """
+    if not AUTO_SYNC:
+        return
+    son_hata: Exception | None = None
+    for deneme in range(3):
+        try:
+            agent_sync_yaz()
+            return
+        except Exception as exc:  # noqa: BLE001 - pano islemi bloklanmamali
+            son_hata = exc
+            time.sleep(0.2 * (deneme + 1))
+    print(
+        f"[task_board] AGENT_SYNC otomatik tazeleme basarisiz "
+        f"(pano etkilenmedi): {son_hata}",
+        file=sys.stderr,
+    )
 
 
 # ---- Gorev Panosu ----
@@ -107,6 +143,7 @@ def gorev_ekle(
     board.append(task)
     _write_json(TASK_BOARD, board)
     _md_yaz(board)
+    _sync_tetikle()
     return task
 
 
@@ -147,6 +184,7 @@ def gorev_guncelle(task_id: str, durum: str | None = None, **fields) -> dict | N
                 t["bitis"] = datetime.now().isoformat(timespec="seconds")
             _write_json(TASK_BOARD, board)
             _md_yaz(board)
+            _sync_tetikle()
             return t
     return None
 
@@ -240,8 +278,9 @@ def handoff_yaz(task_id: str, tamamlandi: str, sonraki_adim: str = "",
         "dikkat_edilmesi": dikkat_edilmesi,
         "tarih": datetime.now().isoformat(timespec="seconds"),
     }
-    HANDOFF_FILE.write_text(json.dumps(handoffs, ensure_ascii=False, indent=2),
-                            encoding="utf-8")
+    # ORCH-03: atomik yazma (paralel ajan yazma cakismasi onlemi)
+    atomic_write_text(HANDOFF_FILE, json.dumps(handoffs, ensure_ascii=False, indent=2))
+    _sync_tetikle()
 
 
 def handoff_oku(task_id: str) -> dict | None:
@@ -289,24 +328,33 @@ def agent_sync_olustur() -> str:
 
 
 def agent_sync_yaz() -> None:
-    """AGENT_SYNC.md'yi board'dan otomatik yeniden yazar."""
-    ROOT = Path(__file__).resolve().parents[3]
-    sync_path = ROOT / "AGENT_SYNC.md"
-    # Sadece ilk satir "Otomatik" degilse, basina uyari ekle
+    """AGENT_SYNC.md'yi board'dan otomatik yeniden yazar.
+
+    ORCH-03: KOK AGENT_SYNC.md + data/orchestrator/AGENT_SYNC.md kopyasi
+    ayni icerikle atomik olarak yazilir (tek yazar: pano).
+    """
+    sync_path = AGENT_SYNC_MD
     icerik = agent_sync_olustur()
-    # Mevcut dosyayi koru, sadece otomatik bolumleri guncelle
     if sync_path.exists():
         mevcut = sync_path.read_text(encoding="utf-8")
         # Eger dosya otomatik olusturulmus stile uyuyorsa tamamen yeniden yaz
         if "Otomatik Olusturuldu" in mevcut or mevcut.strip().startswith("# AGENT_SYNC"):
-            atomic_write_text(sync_path, icerik)
+            final = icerik
         else:
             # Manuel icerik varsa, otomatik bolumu sona ekle
             if "## Otomatik Ozet (task_board)" not in mevcut:
-                mevcut += "\n\n## Otomatik Ozet (task_board)\n\n" + icerik
-            atomic_write_text(sync_path, mevcut)
+                final = mevcut + "\n\n## Otomatik Ozet (task_board)\n\n" + icerik
+            else:
+                final = mevcut
+        atomic_write_text(sync_path, final)
     else:
-        atomic_write_text(sync_path, icerik)
+        final = icerik
+        atomic_write_text(sync_path, final)
+    # Kopyayi da esitle (ayni final icerik)
+    try:
+        atomic_write_text(AGENT_SYNC_MD_KOPYA, final)
+    except Exception:
+        pass
 
 
 def gorev_listesi(durum: str | None = None) -> list[dict]:
@@ -337,6 +385,7 @@ def lock_birak(dosya: str, sahip: str) -> bool:
     if locks.get(dosya, {}).get("sahip") == sahip:
         del locks[dosya]
         _write_json(FILE_LOCKS, locks)
+        _sync_tetikle()
         return True
     return False
 
@@ -366,6 +415,7 @@ def handoff_ekle(task_id: str, agent_id: str, output_path: str, summary: str) ->
             existing["guncelleme_gecmisi"] = []
         existing["guncelleme_gecmisi"].append(entry)
     _write_json(HANDOFFS, data)
+    _sync_tetikle()
 
 def lock_durum(dosya: str) -> dict | None:
     return _read_json(FILE_LOCKS).get(dosya)
