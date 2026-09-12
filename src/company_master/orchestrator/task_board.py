@@ -182,6 +182,11 @@ def gorev_guncelle(task_id: str, durum: str | None = None, **fields) -> dict | N
             t.update(fields)
             if durum in ("done", "blocked"):
                 t["bitis"] = datetime.now().isoformat(timespec="seconds")
+            # ORCH-05: done/blocked oldugunda bu göreve ait tum kilitleri otomatik birak
+            locks = _read_json(FILE_LOCKS)
+            kalan = {d: l for d, l in locks.items() if l.get("task_id") != task_id}
+            if len(kalan) != len(locks):
+                _write_json(FILE_LOCKS, kalan)
             _write_json(TASK_BOARD, board)
             _md_yaz(board)
             _sync_tetikle()

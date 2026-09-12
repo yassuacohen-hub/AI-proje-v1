@@ -75,12 +75,17 @@ Bağlantılar: [[00-Home]] · [[project_state]] · [[CHANGELOG]] · [[Orkestrato
 
 Her tamamlanan görev için [[CHANGELOG]] güncellenir ve [[project_state]] yenilenir.
 
-- [ ] DOC-02 (P1): Decision Log mekanizmasini kur — sahibi: mimari (architect)
+- [x] DOC-02 (P1): Decision Log mekanizmasini kur — sahibi: mimari (architect) — done
 
 - [x] DASH-04 (P1): Hybrid Admin Panel - API client + DB fallback — sahibi: mimar (architect) — done
 
-- [ ] DASH-05 (P1): Admin Panel Karar Defteri sekmesi — sahibi: mimar (architect)
+- [x] DASH-05 (P1): Admin Panel Karar Defteri sekmesi — sahibi: mimar (architect) — done
 
 ## Oturum Özeti
 
 DASH-04 API client + DB fallback tamamlandı; api_client.py, db_reader.py, app.py entegrasyonu ve test dosyası eklendi.
+
+
+DOC-02 Decision Log mekanizmasi tamamlandi; scripts/decision_log.py (read_decisions, log_decision, search_decisions), data/orchestrator/decision_log.jsonl (6 girdi, UTF-8), tests/test_decision_log.py (4 test, hepsi gecti).
+
+DASH-05 Admin Panel Karar Defteri sekmesi tamamlandi; web_dashboard/tabs/admin_panel.py (render_decision_tab), web_dashboard/tabs/__init__.py, app.py 4. sekme eklendi. py_compile + smoke test OK.

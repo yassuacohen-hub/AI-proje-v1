@@ -654,11 +654,16 @@
     "baslik": "Decision Log mekanizmasini kur",
     "sahip": "mimari",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-12T17:57:53",
-    "dosyalar": [],
+    "dosyalar": [
+      "data/orchestrator/decision_log.jsonl",
+      "scripts/decision_log.py",
+      "tests/test_decision_log.py"
+    ],
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "bitis": "2026-09-12T21:03:39"
   },
   {
     "task_id": "DASH-04",
@@ -685,7 +690,7 @@
     ],
     "source": "ic",
     "from_agent": null,
-    "bitis": "2026-09-12T19:55:28"
+    "bitis": "2026-09-12T21:12:02"
   },
   {
     "task_id": "DASH-05",
@@ -703,10 +708,15 @@
     "baslik": "Admin Panel Karar Defteri sekmesi",
     "sahip": "mimar",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-12T17:57:53",
-    "dosyalar": [],
+    "dosyalar": [
+      "web_dashboard/tabs/admin_panel.py",
+      "web_dashboard/tabs/__init__.py",
+      "app.py"
+    ],
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "bitis": "2026-09-12T21:12:02"
   }
 ]

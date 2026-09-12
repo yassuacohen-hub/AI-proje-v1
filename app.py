@@ -32,6 +32,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from company_master.db.connection import get_engine
 from company_master.orchestrator import task_board as tb
 from scripts.dash04_api_client import get_api, APIError
+from web_dashboard.tabs.admin_panel import render_decision_tab
 
 st.set_page_config(page_title="Company Master Dashboard", layout="wide", page_icon="🏢")
 
@@ -398,7 +399,7 @@ else:
 
 # --- P7-20: Admin Panel ---
 st.subheader("⚙️ Admin Panel")
-admin_tab1, admin_tab2, admin_tab3 = st.tabs(["📊 Sistem Durumu", "🔑 API Yönetimi", "📋 Webhook Metrikleri"])
+admin_tab1, admin_tab2, admin_tab3, admin_tab4 = st.tabs(["📊 Sistem Durumu", "🔑 API Yönetimi", "📋 Webhook Metrikleri", "📋 Karar Defteri"])
 if kpi is None or not kpi:
     kpi = load_kpi()
 with admin_tab1:
@@ -436,6 +437,9 @@ with admin_tab3:
             st.metric("Hata Oranı", f"%{webhook_stats['hatali'] / max(webhook_stats['olay_toplam'], 1) * 100:.1f}")
     else:
         st.info("Webhook metrikleri yakında aktif olacak")
+
+with admin_tab4:
+    render_decision_tab()
 
 # --- P7-21: Performans Metrikleri ---
 st.subheader("⏱️ Performans Metrikleri")

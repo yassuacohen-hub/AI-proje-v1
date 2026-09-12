@@ -7,8 +7,6 @@
 
 | Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |
 |-------|--------|-------|---------|-------|----------|
-| DOC-02 | Decision Log mekanizmasini kur | mimari | P1 | plan | - |
-| DASH-05 | Admin Panel Karar Defteri sekmesi | mimar | P1 | plan | - |
 
 ## Tamamlananlar
 
@@ -60,4 +58,6 @@
 | P7-19 | P7-19: SSE Gerçek Zamanlı Bildirim Sistemi — Server-Sent Events ile canlı dashboard güncelleme | gelistirici | 2026-09-12T17:25:51 |
 | P7-20 | Admin Dashboard — Kullanıcı yönetimi, API key yönetimi, sistem durumu, webhook metrics UI | gelistirici | 2026-09-12T17:25:51 |
 | P7-21 | Performans Metrikleri Paneli — Response time, throughput, error rate grafikleri (Chart.js) | gelistirici | 2026-09-12T17:25:51 |
-| DASH-04 | Hybrid Admin Panel - API client + DB fallback | mimar | 2026-09-12T19:55:28 |
+| DOC-02 | Decision Log mekanizmasini kur | mimari | 2026-09-12T21:03:39 |
+| DASH-04 | Hybrid Admin Panel - API client + DB fallback | mimar | 2026-09-12T21:12:02 |
+| DASH-05 | Admin Panel Karar Defteri sekmesi | mimar | 2026-09-12T21:12:02 |
