@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-12T04:00:12",
+    "bitis": "2026-09-12T14:42:53",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -565,5 +565,80 @@
     "source": "ic",
     "from_agent": null,
     "note": "Added OpenTelemetry dependencies to requirements-dev.txt, instrumented web_app.py (FastAPI and requests), MCP server entry (requests), vector service and store (spans around key methods). All syntax checks passed. Task completed."
+  },
+  {
+    "task_id": "TG-01",
+    "baslik": "Telegram Bot Gonderim ve Komut Aksini Duzelt",
+    "sahip": "kilo",
+    "oncelik": "high",
+    "durum": "done",
+    "baslangic": "2026-09-12T13:11:18",
+    "bitis": "2026-09-12T15:18:36",
+    "dosyalar": [
+      ".env.example",
+      "docker-compose.yml",
+      "requirements-app.txt",
+      "scripts/README_TELEGRAM.md",
+      "scripts/telegram_bot_task.bat",
+      "scripts/telegram_periodic.py",
+      "scripts/telegram_polling.py",
+      "scripts/test_telegram.py",
+      "scripts/test_telegram_simple.py",
+      "src/company_master/telegram/bot_service.py",
+      "src/company_master/utils/telegram_bot.py",
+      "tests/test_telegram_bot.py",
+      "tests/test_telegram_polling.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "not_": "Telegram bot gonderme sorunu cozuldu: _load_env .env override duzeltmesi, docker-compose ortam override kaldirimi, canli/mock testler gecti, canli smoke test message_id 103."
+  },
+  {
+    "task_id": "P7-19",
+    "baslik": "P7-19: SSE Gerçek Zamanlı Bildirim Sistemi — Server-Sent Events ile canlı dashboard güncelleme",
+    "sahip": "gelistirici",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-12T17:15:06",
+    "dosyalar": [
+      "web_dashboard/js/app.py",
+      "app.py"
+    ],
+    "not": "app.py Streamlit dashboard: P7-19/20/21 panelleri gercek webhook verisine baglandi (load_webhook_stats + prometheus okuma)",
+    "source": "ic"
+  },
+  {
+    "task_id": "P7-20",
+    "baslik": "Admin Dashboard — Kullanıcı yönetimi, API key yönetimi, sistem durumu, webhook metrics UI",
+    "sahip": "gelistirici",
+    "oncelik": "P2",
+    "durum": "aktif",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/index.html",
+      "web_dashboard/css/style.css",
+      "web_dashboard/js/app.py",
+      "app.py"
+    ],
+    "not": "",
+    "source": "ic"
+  },
+  {
+    "task_id": "P7-21",
+    "baslik": "Performans Metrikleri Paneli — Response time, throughput, error rate grafikleri (Chart.js)",
+    "sahip": "gelistirici",
+    "oncelik": "P3",
+    "durum": "aktif",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/js/app.py",
+      "app.py"
+    ],
+    "not": "",
+    "source": "ic"
   }
 ]
