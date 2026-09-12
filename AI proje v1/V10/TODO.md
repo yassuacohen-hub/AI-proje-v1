@@ -82,6 +82,8 @@ Her tamamlanan görev için [[CHANGELOG]] güncellenir ve [[project_state]] yeni
 
 - [x] DASH-05 (P1): Admin Panel Karar Defteri sekmesi — sahibi: mimar (architect) — done
 
+- [x] DASH-07 (P1): Admin Panel JWT Auth & Rol Yönetimi — sahibi: mimar (architect) — done
+
 ## Oturum Özeti
 
 DASH-04 API client + DB fallback tamamlandı; api_client.py, db_reader.py, app.py entegrasyonu ve test dosyası eklendi.

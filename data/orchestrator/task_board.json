@@ -842,12 +842,12 @@
   },
   {
     "task_id": "DASH-07",
-    "baslik": "Admin Kimlik Doğrulama ve Yetkilendirme",
+    "baslik": "Admin Panel JWT Auth & Rol Yönetimi",
     "sahip": "mimar",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-12T23:43:28",
-    "bitis": null,
+    "bitis": "2026-09-13T00:09:05",
     "dosyalar": [
       "web_app.py",
       "app.py",
