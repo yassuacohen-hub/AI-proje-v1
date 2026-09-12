@@ -614,16 +614,16 @@
     "baslik": "Admin Dashboard — Kullanıcı yönetimi, API key yönetimi, sistem durumu, webhook metrics UI",
     "sahip": "gelistirici",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-12T17:17:12",
     "dosyalar": [
       "web_dashboard/index.html",
       "web_dashboard/css/style.css",
       "web_dashboard/js/app.py",
       "app.py"
     ],
-    "not": "",
+    "not": "Admin Dashboard gercek veriye baglandi: kpi (toplam firma, ortalama kalite, VKN doluluk), sistem durumu (DLQ tabanli), webhook hata turleri grafigi + hata orani",
     "source": "ic"
   },
   {
@@ -631,14 +631,14 @@
     "baslik": "Performans Metrikleri Paneli — Response time, throughput, error rate grafikleri (Chart.js)",
     "sahip": "gelistirici",
     "oncelik": "P3",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-12T17:17:12",
     "dosyalar": [
       "web_dashboard/js/app.py",
       "app.py"
     ],
-    "not": "",
+    "not": "Performans Metrikleri gercek veriye baglandi: sayfa yukleme, webhook olay sayisi, DLQ hata orani, webhook akis dagilim grafigi",
     "source": "ic"
   }
 ]

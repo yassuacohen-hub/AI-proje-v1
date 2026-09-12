@@ -252,5 +252,17 @@
     "sonraki_adim": "DASH-02 devam",
     "dikkat_edilmesi": "app.py Streamlit panel - gercek veri baglantisi",
     "tarih": "2026-09-12T17:15:06"
+  },
+  "P7-20": {
+    "tamamlandi": "Admin Dashboard gercek kpi + webhook dogrulama bitti",
+    "sonraki_adim": "P7-21 ayni panelde tamamlandi",
+    "dikkat_edilmesi": "app.py admin_tab secimi - gercek veri",
+    "tarih": "2026-09-12T17:17:12"
+  },
+  "P7-21": {
+    "tamamlandi": "Performans Metrikleri webhook istatistiklerine baglandi",
+    "sonraki_adim": "DASH serisine gecis",
+    "dikkat_edilmesi": "app.py perf paneli - webhook_stats tabanli",
+    "tarih": "2026-09-12T17:17:12"
   }
 }
