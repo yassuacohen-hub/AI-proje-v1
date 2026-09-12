@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-13T02:01:29
+> Son guncelleme: 2026-09-13T02:14:45
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -14,6 +14,7 @@
 | P7-23 | Vektör Katmanı Üretim Entegrasyonu | kilo | P1 | plan |
 | P7-24 | ASO ve OSTİM Veri Kalite Raporu | mimar | P2 | plan |
 | DASH-08 | Admin Denetim (Audit) Sekmesi | mimar | P2 | plan |
+| ORCH-08 | Gorev tetikleme + onay kuyrugu: orkestra | orkestrator | P1 | aktif |
 
 ## Tamamlananlar (Son 10)
 

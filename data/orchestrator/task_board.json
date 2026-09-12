@@ -873,5 +873,23 @@
     "not": "Vault pinli submodule eklendi (gitlink 536d4e1 = origin/main). Icerik ana repoya girmez; hassas dosyalar vault gitignoreunda disli. AGENTS.md kural eklendi.",
     "source": "ic",
     "from_agent": null
+  },
+  {
+    "task_id": "ORCH-08",
+    "baslik": "Gorev tetikleme + onay kuyrugu: orkestrator atar, ajan otomatik fark eder, teslim kontrol onayi olmadan done OLMaz",
+    "sahip": "orkestrator",
+    "oncelik": "P1",
+    "durum": "aktif",
+    "baslangic": "2026-09-13T02:14:45",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/orchestrator/trigger.py",
+      "scripts/gorev_at.py",
+      "scripts/gorev_kutusu.py",
+      "tests/test_gorev_trigger.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
   }
 ]

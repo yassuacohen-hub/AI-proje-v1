@@ -63,6 +63,23 @@ Bu çalışma alanında **canlı görev takibi ve dosya kilidi mekanizması** va
 - Subagent panoya görev **ekleyemez**, yalnızca rapor yazar.
 - Subagent `decision_log.jsonl`'e doğrudan **yazamaz**; kaydı orkestratör atar (`subagent` alanıyla kimliklendirir).
 
+## Görev Tetikleme ve Onay Kuyruğu (ORCH-08) — ZORUNLU
+
+Atama ile başlamayı birbirine bağlayan "posta kutusu" sistemi. Görev panoya yazılınca ajan bunu ancak panoyu elle açarsa görüyordu; artık atama anında ajana **tetik düşer** ve ajan tek komutla postasını okur.
+
+### Akış
+1. **Atama**: `python scripts/gorev_at.py at --task-id X --baslik "..." --ajan kilo [--oncelik P1] [--dosya a.py,b.md] [--talimat "..."]` → görev panoya eklenir (dosyalar otomatik kilitlenir) + `data/orchestrator/triggers/kilo.jsonl` postasına tetik düşer.
+2. **Ajan oturum başında**: `python scripts/gorev_kutusu.py bak --ajan kilo` → bekleyen görevler + talimat + kilitli dosyalar listelenir. Sonra `--task-id` ile `al` komutu işi `aktif`'e çeker.
+3. **Teslim**: `python scripts/gorev_kutusu.py teslim --ajan kilo --task-id X --ozet "..."` → görev **`review`'a düşer; `done` olmaz`**.
+4. **Doğrulama zorunluluğu**: Onaysız `done` **geçersizdir**. Kontrolör: `python scripts/gorev_kutusu.py onay-bekleyen` → incele → `onayla --task-id X --ben orkestrator` (görev `done`, ORCH-05 kilitleri düşer) veya `reddet --neden "..."` (görev `aktif`'e döner, ajan düzeltir).
+5. **Özet**: `python scripts/gorev_at.py pano` → tüm postalar + onay kuyruğu tek bakışta.
+
+### Kurallar
+- Ajan işini bitirince asla doğrudan `gorev_guncelle(durum="done")` çağırmaz; **teslim → onay** kapısından geçer.
+- Reddedilen iş nedenle döner; ajan düzeltip yeniden teslim eder (kuyruk yeni kayıt ekler, eski reddedilmiş olarak kalır — denetim izi).
+- `review` durumunda kilitler düşmez; yalnızca onayda (`done`) düşer.
+- Tetikler ajan bazlı izoledir: kilo postası grok tarafından okunamaz.
+
 ## Ajan Kılavuzu (Tek Şablon)
 
 1. **Ana bağlamı oku**: `AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md`
