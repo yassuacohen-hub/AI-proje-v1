@@ -31,6 +31,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from company_master.db.connection import get_engine
 from company_master.orchestrator import task_board as tb
+from scripts.dash04_api_client import get_api, APIError
 
 st.set_page_config(page_title="Company Master Dashboard", layout="wide", page_icon="🏢")
 
@@ -54,6 +55,13 @@ if 'auto_refresh_enabled' not in st.session_state:
 
 @st.cache_data(ttl=30)
 def load_kpi() -> dict:
+    try:
+        api_data = get_api("/api/kpi")
+        if isinstance(api_data, dict) and api_data:
+            return api_data
+    except APIError:
+        pass
+
     engine = get_engine()
     with engine.connect() as conn:
         r = conn.execute(text("""
@@ -299,6 +307,42 @@ st.markdown(f"""
 st.subheader("🏢 Firma Listesi")
 @st.cache_data(ttl=30)
 def load_companies(search="", min_score=0, max_score=100, limit=200):
+    api_params = {
+        "search": search,
+        "min_score": min_score,
+        "max_score": max_score,
+        "limit": limit,
+    }
+    try:
+        api_data = get_api("/api/companies", params=api_params)
+        if isinstance(api_data, dict):
+            rows = api_data.get("items", [])
+        elif isinstance(api_data, list):
+            rows = api_data
+        else:
+            rows = []
+
+        fields = [
+            "legal_name",
+            "trade_name",
+            "website_domain",
+            "primary_phone",
+            "primary_email",
+            "tax_number",
+            "vergi_no",
+            "nace_code",
+            "data_quality_score",
+        ]
+        api_rows = [
+            {field: row.get(field) for field in fields}
+            for row in rows
+            if isinstance(row, dict)
+        ]
+        if api_rows:
+            return api_rows
+    except APIError:
+        pass
+
     engine = get_engine()
     with engine.connect() as conn:
         params = {"min_score": min_score, "max_score": max_score, "limit": limit}
@@ -315,6 +359,7 @@ def load_companies(search="", min_score=0, max_score=100, limit=200):
             LIMIT :limit
         """), params).mappings().all()
         return [dict(r) for r in rows]
+
 
 companies = load_companies(search_query, score_min, score_max)
 if companies:

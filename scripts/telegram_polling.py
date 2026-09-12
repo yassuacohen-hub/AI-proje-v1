@@ -1,674 +1,588 @@
-"""Telegram bot long-polling ve komut işleyici.
+﻿# -*- coding: utf-8 -*-
+"""Telegram bot — canonical long-polling motoru.
 
-
-
-Çalıştırmak için:
-
-    python scripts/telegram_polling.py
-
-
+Bu modul, python-telegram-bot kutuphanesine bagimlilik kurmadan
+doğrudan Telegram Bot API getUpdates long-polling metodunu kullanir.
 
 Komutlar:
+    /start              - Botu baslat, hos gelesmesi
+    /help               - Yardim metni
+    /status             - Aktif gorevler + proje durumu
+    /gorev              - Task_board.json'dan tum gorevleri listele
+    /rapor              - KPI raporu (data/kpi_raporu.md)
+    /wiki               - OSTİM kalite raporu (data/ostim/kalite_raporu.md)
+    /restart_etl        - ETL pipeline yeniden baslatin
+    /degisiklik         - CHANGELOG.md'yi goster
+    /gunluk             - Gunluk ozet
+    /izleme             - Kalite + proje izleme
+    /set_status <id> <durum> - Task board'da gorev durumunu guncelle (yetkili)
 
-    /start       — Bot tanıtımı
+Calisma zamani degiskenleri (.env):
+    TELEGRAM_BOT_TOKEN
+    TELEGRAM_CHAT_ID
+    TELEGRAM_BOT_USERNAME (opsiyonel; @BotName parsing icin)
+    ETL_RESTART_CMD (opsiyonel; varsayilan: python scripts/refresh_pipeline.py)
 
-    /status      — Proje durumu
-
-    /gorev       — Aktif ve bekleyen görevler
-
-    /rapor       — Son veri kalite raporu özeti
-
-    /wiki        — Wiki bağlantıları
-
-    /help        — Komut listesi
-
-
-
-Karar referansı: V10/10_ankara_osb_sentez Karar 13
-
+Kullanim:
+    set TELEGRAM_BOT_TOKEN=...
+    set TELEGRAM_CHAT_ID=...
+    python scripts/telegram_polling.py
 """
-
 from __future__ import annotations
 
-
-
+import argparse
+import html
 import json
-
 import os
-
 import re
-
+import subprocess
 import sys
-
 import time
-
+import traceback
 from pathlib import Path
-
-from typing import Optional
-from dotenv import load_dotenv
-
-
+from typing import Any, Optional
 
 import requests
+from dotenv import load_dotenv
 
-
-
-# Proje kökünü path'e ekle
-
-ROOT = Path(__file__).resolve().parents[1]
-
-load_dotenv()
+SCRIPT_DIR = Path(__file__).resolve().parent
+ROOT = SCRIPT_DIR.parent
 sys.path.insert(0, str(ROOT))
 
-
-
-from src.company_master.utils.telegram_bot import send_message
-
-
-
-API_URL = f"https://api.telegram.org/bot{os.environ['TELEGRAM_BOT_TOKEN']}"
-
-TIMEOUT = 60
-
-
-
-
-
-def _escape_html(text: str) -> str:
-
-    """HTML parse için escape."""
-
-    return text.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
-
-
-
-
-
-def cmd_start(chat_id: str) -> None:
-
-    send_message(
-
-        "<b>🤖 Ankara B2B Master Bot</b>\n\n"
-
-        "Merhaba! Bu bot, Huginn Data Insights — Ankara B2B Company Master V1.0 projesinin 11 ajan orkestrasyonunu takip eder.\n\n"
-
-        "Komutlar için /help",
-
-        chat_id=chat_id,
-
-    )
-
-
-
-
-
-def cmd_help(chat_id: str) -> None:
-
-    send_message(
-
-        "<b>Komutlar — ne işe yarar?</b>\n\n"
-
-        "/start — Botu tanıtır, ilk kullanımda başlatır\n"
-
-        "/status — Proje durumu: firma sayısı, kalite ortalaması, son güncelleme\n"
-
-        "/gorev — Bekleyen/aktif görevler + son 5 tamamlanan (canlı pano)\n"
-
-        "/rapor — Veri kalite özeti: toplam firma, kayıt sayısı, kalite dağılımı\n"
-
-        "/wiki — Önemli doküman sayfalarının bağlantıları\n"
-
-        "/help — Bu liste\n"
-
-        "/set_status [not] — Durum dosyasına (project_state.md) not ekler\n"
-        "\n"
-        "<b>Bildirimler (Y14) — değişiklik izleme</b>\n"
-        "/degisiklik — Son kontrolden beri: yeni firmalar + skoru ±10 değişenler\n"
-        "/gunluk — Günlük özet kartı: toplam firma, kayıt, kalite dağılımı\n"
-        "/izleme — İzleme durumu: kaç firma izleniyor, son kontrol ne zaman\n"
-        "\n"
-        "<b>Yönetim</b>\n"
-        "/restart_etl — ETL hattını arka planda yeniden başlatır",
-
-        chat_id=chat_id,
-
-    )
-
-
-
-
-
-def _read_project_state() -> dict:
-
-    """project_state.md'den son durum bilgisini çıkarır."""
-
-    state_file = ROOT / "V10" / "project_state.md"
-
-    result = {
-
-        "version": "bilinmiyor",
-
-        "total_firms": 0,
-
-        "active_tasks": 0,
-
-        "completed_tasks": 0,
-
-        "last_update": "bilinmiyor",
-
-    }
-
-    if not state_file.exists():
-
-        return result
-
-    
-
-    content = state_file.read_text(encoding="utf-8")
-
-    # Son sürüm satırını bul
-
-    m = re.search(r"\*\*Sürüm:\*\*\s*(V[\d\.]+)", content)
-
-    if m:
-
-        result["version"] = m.group(1)
-
-    
-
-    m = re.search(r"\*\*Toplam işletme:\*\*\s*([\d\.,]+)", content)
-
-    if m:
-
-        result["total_firms"] = int(m.group(1).replace(",", "").replace(".", ""))
-
-    
-
-    # Son güncelleme tarihi
-
-    m = re.search(r"##\s+(\d{4}-\d{2}-\d{2})", content)
-
-    if m:
-
-        result["last_update"] = m.group(1)
-
-    
-
-    return result
-
-
-
-
-
-def cmd_status(chat_id: str) -> None:
-
-    state = _read_project_state()
-
-    jsonl = ROOT / "data" / "ostim" / "firmalar_sayfa1.jsonl"
-
-    live_count = 0
-
-    if jsonl.exists():
-
-        with open(jsonl, "r", encoding="utf-8") as f:
-
-            live_count = sum(1 for _ in f if _.strip())
-
-    
-
-    text = (
-
-        f"<b>📊 Proje Durumu</b>\n\n"
-
-        f"<b>Sürüm:</b> {state['version']}\n"
-
-        f"<b>Canlı OSTİM kaydı:</b> {live_count:,} firma\n"
-
-        f"<b>Wiki notu:</b> {len(list((ROOT / 'V10').rglob('*.md'))):,} dosya\n"
-
-        f"<b>Son güncelleme:</b> {state['last_update']}\n\n"
-
-        f"<b>Arayüz:</b> http://localhost:8501"
-
-    )
-
-    send_message(text, chat_id=chat_id)
-
-
-
-
-
-def cmd_gorev(chat_id: str) -> None:
-
-    text = (
-
-        "<b>📝 Aktif Görevler</b>\n\n"
-
-        "1. <b>OSTİM scraping:</b> 1 sayfa tamamlandı (~300 firma)\n"
-
-        "2. <b>Tüm OSTİM:</b> 17 sektör × ~200 sayfa (Beklemede)\n"
-
-        "3. <b>ASO firmarehberi scraper:</b> Beklemede\n"
-
-        "4. <b>MERSİS entegrasyonu:</b> Captcha çözümü bekleniyor\n"
-
-        "5. <b>Telegram bot entegrasyonu:</b> Aktif\n\n"
-
-        "Sonraki adımlar için: /wiki"
-
-    )
-
-    send_message(text, chat_id=chat_id)
-
-
-
-
-
-def cmd_rapor(chat_id: str) -> None:
-
-    rapor = ROOT / "data" / "ostim" / "kalite_raporu.md"
-
-    if not rapor.exists():
-
-        send_message("<b>📋 Kalite Raporu</b>\nHenüz rapor oluşturulmadı.", chat_id=chat_id)
-
-        return
-
-    
-
-    content = rapor.read_text(encoding="utf-8")
-
-    # İstatistik tablolarını çıkar
-
-    toplam_match = re.search(r"\*\*Toplam Kayıt:\*\*\s*([\d\.,]+)", content)
-
-    ort_match = re.search(r"\| Ortalama skor \| \*(\d+\.?\d*)\*", content)
-
-    yuksek_match = re.search(r"\| Yüksek \(80-100\) \| (\d+)", content)
-
-    
-
-    toplam = toplam_match.group(1) if toplam_match else "?"
-
-    ort = ort_match.group(1) if ort_match else "?"
-
-    yuksek = yuksek_match.group(1) if yuksek_match else "?"
-
-    
-
-    text = (
-
-        f"<b>📋 Son Kalite Raporu</b>\n\n"
-
-        f"<b>Toplam kayıt:</b> {toplam}\n"
-
-        f"<b>Ortalama kalite:</b> {ort}/100\n"
-
-        f"<b>Yüksek kalite:</b> {yuksek}\n\n"
-
-        f"Detay: <code>data/ostim/kalite_raporu.md</code>"
-
-    )
-
-    send_message(text, chat_id=chat_id)
-
-
-
-
-
-def cmd_wiki(chat_id: str) -> None:
-
-    text = (
-
-        "<b>📚 Önemli Wiki Sayfaları</b>\n\n"
-
-        "• 00-Home — Ana sayfa\n"
-
-        "• 10_mvp_kapsamı — MVP kapsam\n"
-
-        "• 10_ankara_osb_sentez — 13 karar\n"
-
-        "• 01_veri_kaynagi_envanteri — 9 kaynak\n"
-
-        "• 04_web_kazima_kaynak_arastirmasi — 12 web kaynağı\n"
-
-        "• 03_kvkk_ve_veri_politikasi — KVKK\n"
-
-        "• 09_telegram_bot_rehberi — Telegram bot\n\n"
-
-        "Tümü: <code>C:\\Projeler\\Huginn Data Insights\\AI proje v1\\V10</code>"
-
-    )
-
-    send_message(text, chat_id=chat_id)
-
-def _check_change_helpers() -> str:
-    """change_notify fonksiyon adlarini dogrular (telegram komutlari kirilmasin)."""
-    sys.path.insert(0, str(ROOT / "scripts"))
-    sys.path.insert(0, str(ROOT / "src"))
+from src.company_master.utils.telegram_bot import (
+    DEFAULT_TIMEOUT,
+    get_updates,
+    html_escape,
+    is_authorized,
+    masked_token,
+    parse_command,
+    send_message,
+    _get_chat_id,
+    _get_token,
+    _get_bot_username,
+    _load_env,
+)
+
+POLL_TIMEOUT = 30
+POLL_RETRY_DELAY = 5
+POLL_LIMIT = 100
+
+ALLOWED_UPDATES = ["message"]
+COMMANDS_INFO = {
+    "start": ("Botu baslatir", ""),
+    "help": ("Bu yardim metnini gosterir", ""),
+    "status": ("Proje durumu + aktif gorevler", ""),
+    "gorev": ("Task board'daki tum goeveleri listeler", ""),
+    "rapor": ("KPI raporunu gosterir", ""),
+    "wiki": ("OSTIM kalite raporunu gosterir", ""),
+    "restart_etl": ("ETL pipeline'i yeniden baslatir", ""),
+    "degisiklik": ("CHANGELOG.md'yi gosterir", ""),
+    "gunluk": ("Gunluk ozet raporu gonderir", ""),
+    "izleme": ("Kalite + proje izleme", ""),
+    "set_status": ("Gorev durumunu gunceller: /set_status <id> <durum>", ""),
+}
+
+
+# ---------------------------------------------------------------------------
+# Veri kaynaklari (statik dosyalardan okuma)
+# ---------------------------------------------------------------------------
+
+def _read_file(rel_path: str) -> str:
+    """Proje kokeliginden dosya okur; yoksa hata mesaji done."""
+    path = ROOT / rel_path
     try:
-        import change_notify as cn
-        need = ["fetch_current", "format_daily", "format_change_message", "diff_snapshots"]
-        eksik = [n for n in need if not hasattr(cn, n)]
-        return ("OK" if not eksik else "EKSIK:" + ",".join(eksik)) + " rows=" + (
-            "var" if hasattr(cn, "diff_snapshots") else "yok")
+        return path.read_text(encoding="utf-8")
+    except FileNotFoundError:
+        return f"[ dosya bulunamadi: {rel_path} ]"
     except Exception as exc:
-        return "HATA:" + str(exc)[:120]
+        return f"[ okuma hatasi: {exc} ]"
 
 
-def _notify_state() -> dict:
-    """change_notify_state.json icerigi (izleme durumu)."""
-    p = ROOT / "data" / "orchestrator" / "change_notify_state.json"
-    if not p.exists():
-        return {}
+def read_project_state() -> str:
+    """V10/project_state.md'yi okur."""
+    return _read_file("AI proje v1/V10/project_state.md")
+
+
+def read_task_board() -> list[dict[str, Any]]:
+    """data/orchestrator/task_board.json'u dinamik okur."""
+    path = ROOT / "data" / "orchestrator" / "task_board.json"
     try:
-        return json.loads(p.read_text(encoding="utf-8"))
+        data = json.loads(path.read_text(encoding="utf-8-sig"))
+        if isinstance(data, list):
+            return data
+        return []
+    except (FileNotFoundError, json.JSONDecodeError):
+        return []
     except Exception:
-        return {}
+        return []
 
 
-def cmd_degisklik(chat_id: str) -> None:
-    """Son kontrolden beri yeni firma + skoru degisenleri gosterir."""
-    sys.path.insert(0, str(ROOT / "scripts"))
-    sys.path.insert(0, str(ROOT / "src"))
+def read_kpi_report() -> str:
+    """data/kpi_raporu.md'yi okur."""
+    return _read_file("data/kpi_raporu.md")
+
+
+def read_quality_report() -> str:
+    """data/ostim/kalite_raporu.md'yi okur."""
+    return _read_file("data/ostim/kalite_raporu.md")
+
+
+def read_changelog() -> str:
+    """AI proje v1/V10/CHANGELOG.md'yi okur."""
+    return _read_file("AI proje v1/V10/CHANGELOG.md")
+
+
+def read_active_tasks() -> list[dict[str, Any]]:
+    """Task board'dan aktif (yapımda) goeveleri getirir."""
+    board = read_task_board()
+    return [t for t in board if t.get("durum") not in ("done",)]
+
+
+def read_done_count() -> int:
+    """Task board'daki tamamlanmis gorev sayisini getirir."""
+    board = read_task_board()
+    return len([t for t in board if t.get("durum") == "done"])
+
+
+def read_quality_score() -> str:
+    """Kalite skorunu kpi_raporu.md'den cikarir."""
+    text = read_kpi_report()
+    match = re.search(r"Ortalama Kalite Skoru:\s*([\d.]+)/100", text, re.IGNORECASE)
+    if match:
+        return match.group(1)
+    return "bilinmiyor"
+
+
+# ---------------------------------------------------------------------------
+# Atomik set_status (task_board.json)
+# ---------------------------------------------------------------------------
+
+def set_task_status(task_id: str, durum: str) -> dict[str, Any]:
+    """Task board'da bir gorevin durumunu atomik olarak gunceller.
+
+    Returns: {"ok": True/False, "error": "...", "task": {...}}
+    """
+    from src.company_master.orchestrator.task_board import (
+        gorev_guncelle,
+        gorev_getir,
+    )
+
+    # Gecerli durum kontrolu
+    valid_statuses = ("plan", "aktif", "review", "done", "blocked")
+    if durum not in valid_statuses:
+        return {"ok": False, "error": f"Gecersiz durum: {durum}. Gecerli: {', '.join(valid_statuses)}"}
+
+    task = gorev_getir(task_id)
+    if not task:
+        return {"ok": False, "error": f"Gorev bulunamadi: {task_id}"}
+
+    result = gorev_guncelle(task_id, durum=durum)
+    if result:
+        return {"ok": True, "task": result}
+    return {"ok": False, "error": "Guncelleme basarisiz"}
+
+
+# ---------------------------------------------------------------------------
+# ETL restart (subprocess ile dogru cwd)
+# ---------------------------------------------------------------------------
+
+def restart_etl(cmd: str | None = None) -> dict[str, Any]:
+    """ETL pipeline'i yeniden baslatir.
+
+    cmd parametresi verilmezse env'den ETL_RESTART_CMD okunur,
+    yoksa varsayilan: python scripts/refresh_pipeline.py
+    """
+    if not cmd:
+        cmd = os.environ.get("ETL_RESTART_CMD", f"{sys.executable} scripts/refresh_pipeline.py")
+
     try:
-        from change_notify import diff_snapshots, fetch_current, format_change_message
-        cur = fetch_current()
-        st = _notify_state()
-        if not st.get("rows"):
-            send_message("Izleme henuz baslatilmamis. Bilgi icin /izleme", chat_id=chat_id)
-            return
-        diff = diff_snapshots(st["rows"], cur["rows"])
-        n = len(diff["added"]) + len(diff["changed"]) + len(diff["removed"])
-        if n == 0:
-            send_message("Degisiklik yok. Izlenen firma: %s" % f"{len(cur['rows']):,}", chat_id=chat_id)
-        else:
-            send_message(format_change_message(diff, cur["rows"], cur["counts"]), chat_id=chat_id)
+        proc = subprocess.Popen(
+            cmd,
+            shell=True,
+            cwd=str(ROOT),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            text=True,
+        )
+        stdout, stderr = proc.communicate(timeout=30)
+        return {
+            "ok": proc.returncode == 0,
+            "returncode": proc.returncode,
+            "stdout": stdout[:500],
+            "stderr": stderr[:500],
+        }
+    except subprocess.TimeoutExpired:
+        proc.kill()
+        return {"ok": False, "error": "ETL timeout (30s)"}
     except Exception as exc:
-        send_message("Degisiklik kontrolu hatasi: %s" % _escape_html(str(exc)[:200]), chat_id=chat_id)
+        return {"ok": False, "error": str(exc)}
 
 
-def cmd_gunluk(chat_id: str) -> None:
-    """Gunluk ozet karti gonderir."""
-    sys.path.insert(0, str(ROOT / "scripts"))
-    sys.path.insert(0, str(ROOT / "src"))
-    try:
-        from change_notify import fetch_current, format_daily
-        cur = fetch_current()
-        send_message(format_daily(cur["counts"]), chat_id=chat_id)
-    except Exception as exc:
-        send_message("Gunluk ozet hatasi: %s" % _escape_html(str(exc)[:200]), chat_id=chat_id)
+# ---------------------------------------------------------------------------
+# Komut handler'lari
+# ---------------------------------------------------------------------------
 
-
-def cmd_izleme(chat_id: str) -> None:
-    """Izleme durumunu gosterir."""
-    st = _notify_state()
-    if not st.get("rows"):
-        send_message("Izleme baslatilmamis. Sunucuda:\n<code>python scripts/change_notify.py --baseline</code>", chat_id=chat_id)
-        return
-    send_message(
-        "Izleme aktif.\n"
-        "Izlenen firma: %s\n"
-        "Son kontrol: %s" % (f"{len(st['rows']):,}", st.get("last_run", "?")[:16].replace("T", " ")),
-        chat_id=chat_id,
+def cmd_start(text: str) -> str:
+    """/start komutu."""
+    return (
+        "<b>Ankara B2B Intelligence Bot</b>\n\n"
+        "Hosgeldiniz! Komutlari gormek icin <code>/help</code> yazin.\n\n"
+        "Kullanilabilir komutlar:\n"
+        "<code>/start</code> <code>/help</code> <code>/status</code> "
+        "<code>/gorev</code> <code>/rapor</code> <code>/wiki</code> "
+        "<code>/restart_etl</code> <code>/gunluk</code> <code>/izleme</code> "
+        "<code>/set_status</code>"
     )
 
 
+def cmd_help(text: str) -> str:
+    """/help komutu."""
+    lines = ["<b>KOMUTLAR</b>\n"]
+    for cmd, (desc, _) in sorted(COMMANDS_INFO.items()):
+        lines.append(f"<code>/{cmd}</code> — {html_escape(desc)}")
+    lines.append("")
+    lines.append("<i>Yetkili komut: /set_status &lt;task_id&gt; &lt;durum&gt;</i>")
+    return "\n".join(lines)
 
 
+def cmd_status(text: str) -> str:
+    """/status komutu — proje durumu + aktif goresv."""
+    active = read_active_tasks()
+    done = read_done_count()
+    quality = read_quality_score()
+
+    lines = ["<b>PROJE DURUMU</b>\n"]
+    lines.append(f"Toplam gorev: {len(read_task_board())}")
+    lines.append(f"Aktif gorev: <b>{len(active)}</b>")
+    lines.append(f"Tamamlandi: <b>{done}</b>")
+    lines.append(f"Kalite skoru: <b>{quality}</b>/100")
+
+    if active:
+        lines.append("\n<b>Aktif Gorevler:</b>")
+        for t in active[:10]:
+            lines.append(
+                f"  <code>{html_escape(t.get('task_id', '?'))}</code> "
+                f"[{html_escape(t.get('durum', ''))}] "
+                f"{html_escape(t.get('baslik', '')[:50])}"
+            )
+        if len(active) > 10:
+            lines.append(f"  ... ve {len(active) - 10} daha")
+
+    lines.append(f"\n<i>{time.strftime('%H:%M:%S')}</i>")
+    return "\n".join(lines)
 
 
-def cmd_set_status(chat_id: str, message: str) -> None:
-    """Telegram'dan project_state.md'ye son durumu yazar."""
-    state_file = ROOT / "V10" / "project_state.md"
-    if not state_file.exists():
-        send_message("❌ project_state.md bulunamadı.", chat_id=chat_id)
-        return
-    
+def cmd_gorev(text: str) -> str:
+    """/gorev komutu — tum goresv listesi."""
+    board = read_task_board()
+    if not board:
+        return "<b>Gorev listesi bos veya dosya bulunamadi.</b>"
+
+    lines = [f"<b>GOREV PANOSU</b> ({len(board)} gorev)\n"]
+    by_durum: dict[str, list[dict]] = {}
+    for t in board:
+        d = t.get("durum", "bilinmiyor")
+        by_durum.setdefault(d, []).append(t)
+
+    for durum in ("aktif", "plan", "review", "done", "blocked"):
+        tasks = by_durum.get(durum, [])
+        if not tasks:
+            continue
+        lines.append(f"\n<b>{html_escape(durum.upper())}</b> ({len(tasks)}):")
+        for t in tasks[:15]:
+            lines.append(
+                f"  <code>{html_escape(t.get('task_id', '?'))}</code> "
+                f"[{html_escape(t.get('sahip', ''))}] "
+                f"{html_escape(t.get('baslik', '')[:60])}"
+            )
+        if len(tasks) > 15:
+            lines.append(f"  ... ve {len(tasks) - 15} daha")
+
+    lines.append(f"\n<i>{time.strftime('%H:%M:%S')}</i>")
+    return "\n".join(lines)
+
+
+def cmd_rapor(text: str) -> str:
+    """/rapor komutu — KPI raporu."""
+    content = read_kpi_report()
+    truncated = content[:2000] if len(content) > 2000 else content
+    return f"<pre>{html_escape(truncated)}</pre>"
+
+
+def cmd_wiki(text: str) -> str:
+    """/wiki komutu — OSTİM kalite raporu."""
+    content = read_quality_report()
+    truncated = content[:2000] if len(content) > 2000 else content
+    return f"<pre>{html_escape(truncated)}</pre>"
+
+
+def cmd_degisiklik(text: str) -> str:
+    """/degisiklik komutu — changelog."""
+    content = read_changelog()
+    if not content or content.startswith("[ "):
+        return "<b>CHANGELOG.md bulunamadi veya bos.</b>"
+    truncated = content[:2000] if len(content) > 2000 else content
+    return f"<pre>{html_escape(truncated)}</pre>"
+
+
+def cmd_gunluk(text: str) -> str:
+    """/gunluk komutu — gunluk ozet."""
+    board = read_task_board()
+    active = read_active_tasks()
+    done = read_done_count()
+    quality = read_quality_score()
     today = time.strftime("%Y-%m-%d")
-    entry = f"- [{today}] {message}"
-    
-    file_content = state_file.read_text(encoding="utf-8")
-    if "### Açık Sorunlar" in file_content:
-        file_content = file_content.replace("### Açık Sorunlar", f"### Açık Sorunlar\n\n{entry}")
+
+    lines = [f"<b>GUNLUK OZET — {today}</b>\n"]
+    lines.append(f"Toplam gorev: {len(board)}")
+    lines.append(f"Aktif: {len(active)} | Tamamlandi: {done}")
+    lines.append(f"Kalite skoru: {quality}/100")
+    lines.append(f"API tabanli: {bool(board)}")
+
+    # Son 5 tamamlanmamis gorev
+    not_done = [t for t in board if t.get("durum") != "done"][-5:]
+    if not_done:
+        lines.append("\n<b>Son aktif gorevler:</b>")
+        for t in not_done[-5:]:
+            lines.append(
+                f"  {html_escape(t.get('task_id', '?'))}: "
+                f"{html_escape(t.get('baslik', '')[:50])} "
+                f"[{html_escape(t.get('durum', ''))}]"
+            )
+    lines.append(f"\n<i>{time.strftime('%H:%M:%S')}</i>")
+    return "\n".join(lines)
+
+
+def cmd_izleme(text: str) -> str:
+    """/izleme komutu — kalite ve proje izleme."""
+    quality = read_quality_score()
+    state = read_project_state()
+    active = read_active_tasks()
+
+    lines = ["<b>IZLEME PANELI</b>\n"]
+    lines.append(f"Kalite skoru: <b>{quality}</b>/100")
+    lines.append(f"Aktif gorev: <b>{len(active)}</b>")
+
+    # State dosyasindan basliklari cikar
+    state_lines = state.split("\n")[:50]
+    for sl in state_lines:
+        sl = sl.strip()
+        if sl.startswith("#") or sl.startswith("-") or sl.startswith("•") or not sl:
+            lines.append(f"<code>{html_escape(sl[:100])}</code>")
+    lines.append(f"\n<i>{time.strftime('%H:%M:%S')}</i>")
+    return "\n".join(lines)
+
+
+def cmd_restart_etl(text: str) -> str:
+    """/restart_etl komutu — ETL pipeline yeniden baslat."""
+    result = restart_etl()
+    if result["ok"]:
+        msg = f"<b>ETL yeniden baslatildi</b>\n"
+        msg += f"<code>{html_escape(result.get('stdout', '')[:300])}</code>\n"
+        msg += f"<i>{time.strftime('%H:%M:%S')}</i>"
     else:
-        file_content += f"\n\n### Eklenen Notlar\n\n{entry}\n"
-    
-    state_file.write_text(file_content, encoding="utf-8")
-    send_message(f"✅ Durum güncellendi: <i>{_escape_html(message[:100])}</i>", chat_id=chat_id)
+        msg = f"<b>ETL hatasi</b>\n"
+        msg += f"<code>{html_escape(result.get('error', 'bilinmiyor')[:300])}</code>\n"
+        msg += f"<i>{time.strftime('%H:%M:%S')}</i>"
+    return msg
 
 
-def cmd_daily_report() -> None:
-    """Sabah 09:00'da otomatik durum raporu gönder."""
-    chat_id = os.environ.get("TELEGRAM_CHAT_ID")
-    if not chat_id:
-        return
-    
-    state = _read_project_state()
-    date = time.strftime("%Y-%m-%d %H:%M")
-    
-    # Veritabanı sayıları
+def cmd_set_status(text: str, args: list[str]) -> str:
+    """/set_status komutu — gorev durumunu guncelle (yetkili)."""
+    if len(args) < 2:
+        return (
+            "<b>Kullanim:</b> <code>/set_status &lt;task_id&gt; &lt;durum&gt;</code>\n"
+            "<i>Gecerli durumlar: plan, aktif, review, done, blocked</i>"
+        )
+    task_id = args[0]
+    durum = args[1].lower()
+
+    result = set_task_status(task_id, durum)
+    if result["ok"]:
+        t = result["task"]
+        msg = (
+            "<b>Gorev durumu guncellendi</b>\n"
+            f"<code>{html_escape(t.get('task_id', '?'))}</code> → "
+            f"<b>{html_escape(t.get('durum', ''))}</b>\n"
+            f"<i>{html_escape(t.get('baslik', '')[:60])}</i>\n"
+            f"<i>{time.strftime('%H:%M:%S')}</i>"
+        )
+    else:
+        msg = f"<b>Guncelleme basarisiz:</b> {html_escape(result.get('error', 'bilinmiyor'))}"
+    return msg
+
+
+# Komut dispatch table
+COMMAND_HANDLERS: dict[str, Any] = {
+    "start": (cmd_start, False),
+    "help": (cmd_help, False),
+    "status": (cmd_status, False),
+    "gorev": (cmd_gorev, False),
+    "rapor": (cmd_rapor, False),
+    "wiki": (cmd_wiki, False),
+    "restart_etl": (cmd_restart_etl, True),   # yetkili
+    "degisiklik": (cmd_degisiklik, False),
+    "gunluk": (cmd_gunluk, False),
+    "izleme": (cmd_izleme, False),
+    "set_status": (cmd_set_status, True),     # yetkili
+}
+
+
+# ---------------------------------------------------------------------------
+# Update isleme
+# ---------------------------------------------------------------------------
+
+def get_chat_id_from_update(update: dict[str, Any]) -> str | int | None:
+    """Update dict'inden chat_id'yi cikarir."""
+    message = update.get("message") or update.get("edited_message")
+    if not message:
+        return None
+    chat = message.get("chat")
+    if chat:
+        return chat.get("id")
+    return None
+
+
+def get_text_from_update(update: dict[str, Any]) -> str | None:
+    """Update dict'inden mesaj metnini cikarir."""
+    message = update.get("message") or update.get("edited_message")
+    if not message:
+        return None
+    return message.get("text")
+
+
+def handle_update(update: dict[str, Any]) -> Optional[str]:
+    """Bir update'i isler, yanit metni dondurur (veya None)."""
+    chat_id = get_chat_id_from_update(update)
+    text = get_text_from_update(update)
+    if not text:
+        return None
+
+    bot_username = _get_bot_username()
+    parsed = parse_command(text, bot_username)
+    if parsed is None:
+        return None
+
+    command = parsed["command"]
+    args = parsed["args"]
+
+    handler_entry = COMMAND_HANDLERS.get(command)
+    if not handler_entry:
+        return f"<b>Bilinmeyen komut:</b> {html_escape(command)}\n{html_escape('Detay icin /help yazin.')}"
+
+    handler, needs_auth = handler_entry
+
+    if needs_auth and not is_authorized(chat_id):
+        return (
+            "<b>Yetkisiz:</b> Bu komut yetkili kullanicilar icindir.\n"
+            f"<i>{time.strftime('%H:%M:%S')}</i>"
+        )
+
     try:
-        from sqlalchemy import text
-        from src.company_master.db.connection import get_engine
-        engine = get_engine()
-        with engine.connect() as conn:
-            company_count = conn.execute(text("SELECT count(*) FROM companies")).scalar()
-            sr_count = conn.execute(text("SELECT count(*) FROM source_records")).scalar()
-            er_count = conn.execute(text("SELECT count(*) FROM entity_resolution")).scalar()
-    except Exception:
-        company_count = sr_count = er_count = "?"
-    
-    text_msg = (
-        f"📊 <b>Günlük Rapor — {date}</b>\n\n"
-        f"🏢 Şirket sayısı: <b>{company_count}</b>\n"
-        f"📥 Kayıt (source_records): <b>{sr_count}</b>\n"
-        f"🔗 Entity resolution: <b>{er_count}</b>\n"
-        f"\nSürüm: {state.get('version', '?')}\n"
-        f"Son güncelleme: {state.get('last_update', '?')}"
-    )
-    send_message(text_msg, chat_id=chat_id)
+        if handler == cmd_set_status:
+            return handler(text, args)
+        return handler(text)
+    except Exception as exc:
+        err = traceback.format_exc()[-400:]
+        return f"<b>Handler hatasi:</b> {html_escape(str(exc))}\n<pre>{html_escape(err)}</pre>"
 
 
-def handle_command(text: str, chat_id: str) -> None:
-    if chat_id != os.environ.get("TELEGRAM_CHAT_ID"):
-        send_message("🚫 Yetkisiz erişim.", chat_id=chat_id)
-        return
+# ---------------------------------------------------------------------------
+# Long-polling dongusu
+# ---------------------------------------------------------------------------
 
-    cmd = text.strip().lower()
+def run_polling(max_iterations: int = 0, once: bool = False) -> None:
+    """Telegram getUpdates long-polling dongusu.
 
-    if cmd == "/start":
+    Args:
+        max_iterations: 0 = sonsuz, >0 = o kadar update sonra dur
+        once: Tek seferlik calistir (bir update al, isle, cik)
+    """
+    _load_env()
+    token = _get_token()
+    if not token:
+        print("TELEGRAM_BOT_TOKEN bulunamadi. .env dosyasini kontrol edin.", file=sys.stderr)
+        sys.exit(1)
 
-        cmd_start(chat_id)
+    chat_id = _get_chat_id()
+    if not chat_id:
+        print("TELEGRAM_CHAT_ID bulunamadi. .env dosyasini kontrol edin.", file=sys.stderr)
+        sys.exit(1)
 
-    elif cmd == "/help":
+    print(f"Telegram bot polling baslatildi (chat_id={chat_id}, bot={masked_token(token)[:10]}...).", flush=True)
 
-        cmd_help(chat_id)
-
-    elif cmd == "/status":
-
-        cmd_status(chat_id)
-
-    elif cmd == "/gorev":
-
-        cmd_gorev(chat_id)
-
-    elif cmd == "/rapor":
-
-        cmd_rapor(chat_id)
-
-    elif cmd == "/wiki":
-
-        cmd_wiki(chat_id)
-
-    elif cmd == "/restart_etl":
-
-        send_message("🔄 ETL tetikleniyor...", chat_id=chat_id)
-
-        import subprocess
-        subprocess.Popen([sys.executable, "-m", "company_master.etl.pipeline"])
-
-    elif cmd == "/degisiklik":
-        cmd_degisklik(chat_id)
-
-    elif cmd == "/gunluk":
-        cmd_gunluk(chat_id)
-
-    elif cmd == "/izleme":
-        cmd_izleme(chat_id)
-
-    elif cmd.startswith("/set_status "):
-
-        msg = text.strip()[len("/set_status "):]
-
-        cmd_set_status(chat_id, msg)
-
-    else:
-
-        send_message(f"Bilinmeyen komut: {cmd}\nYardım için /help", chat_id=chat_id)
-
-
-
-
-
-def poll() -> None:
-    # Cron: saat 09:00'da günlük rapor
-    daily_report_hour = 9
-    daily_report_sent = False
-
-
-    """Long polling ile Telegram mesajlarını dinler."""
-
-    print(f"[{time.strftime('%H:%M:%S')}] Telegram polling başladı")
-
-    print(f"Token mask: ****")
-
-    print(f"CHAT_ID: {os.environ.get('TELEGRAM_CHAT_ID')}")
-
-    
-
-    offset: Optional[int] = None
+    offset = 0
+    iteration = 0
 
     while True:
-
         try:
-
-            params = {"offset": offset, "limit": 100, "timeout": 30}
-
-            resp = requests.get(
-
-                f"{API_URL}/getUpdates",
-
-                params=params,
-
-                timeout=TIMEOUT,
-
+            result = get_updates(
+                offset=offset,
+                timeout=POLL_TIMEOUT,
+                limit=POLL_LIMIT,
+                allowed_updates=ALLOWED_UPDATES,
             )
 
-            resp.raise_for_status()
-
-            data = resp.json()
-
-            
-
-            if not data.get("ok"):
-
-                print(f"[HATA] getUpdates başarısız: {data}")
-
-                time.sleep(5)
-
+            if not result["ok"]:
+                print(f"[polling] getUpdates hatasi: {result['error']}", file=sys.stderr)
+                time.sleep(POLL_RETRY_DELAY)
                 continue
 
-            
-
-            updates = data.get("result", [])
+            updates = result.get("result", [])
+            new_offset = result.get("next_offset", 0)
 
             for update in updates:
+                update_id = update.get("update_id", 0)
+                try:
+                    response = handle_update(update)
+                    if response:
+                        msg_result = send_message(response)
+                        if not msg_result.get("ok"):
+                            print(f"[polling] mesaj gonderme hatasi: {msg_result.get('error')}", file=sys.stderr)
+                except Exception:
+                    print(f"[polling] update islenirken hata: {traceback.format_exc()}", file=sys.stderr)
 
-                offset = update["update_id"] + 1
+                # offset'u bir sonraki update'den ileri al (confirmed)
+                offset = max(offset, update_id + 1)
 
-                message = update.get("message")
+            iteration += 1
+            if once:
+                break
+            if max_iterations > 0 and iteration >= max_iterations:
+                break
 
-                if not message:
-
-                    continue
-
-                
-
-                chat = message.get("chat", {})
-
-                chat_id = str(chat.get("id"))
-
-                text = message.get("text", "")
-
-                
-
-                if text.startswith("/"):
-
-                    print(f"[KOMUT] {chat_id}: {text}")
-
-                    handle_command(text, chat_id)
-
-                else:
-
-                    # Normal mesaj: yankı + yardım
-
-                    send_message(
-
-                        f"Mesaj alındı: <b>{_escape_html(text[:50])}</b>\n"
-
-                        f"Komutlar için /help",
-
-                        chat_id=chat_id,
-
-                    )
-
-            
-
+            # long-polling: blocking call, yeni mesaj gelene kadar bekle
             if not updates:
-
-                # Long polling bekleme + cron kontrolü
-                current_hour = int(time.strftime("%H"))
-                if current_hour == daily_report_hour and not daily_report_sent:
-                    cmd_daily_report()
-                    daily_report_sent = True
-                elif current_hour != daily_report_hour:
-                    daily_report_sent = False
+                time.sleep(1)
 
         except KeyboardInterrupt:
-
-            print("\nDurduruldu.")
-
+            print("\nPolling durduruldu.")
             break
-
         except Exception as exc:
-
-            print(f"[HATA] {exc}")
-
-            time.sleep(5)
+            print(f"[polling] beklenmeyen hata: {exc}", file=sys.stderr)
+            time.sleep(POLL_RETRY_DELAY)
 
 
+def main() -> None:
+    """CLI entry point."""
+    parser = argparse.ArgumentParser(
+        description="Telegram bot — canonical long-polling motoru"
+    )
+    parser.add_argument(
+        "--max-iterations",
+        type=int,
+        default=0,
+        help="Maksimum update sayisi (0 = sonsuz, varsayilan)",
+    )
+    parser.add_argument(
+        "--once",
+        action="store_true",
+        help="Tek seferlik calistir: bir update al, isle, cik",
+    )
+    args = parser.parse_args()
 
+    run_polling(max_iterations=args.max_iterations, once=args.once)
 
 
 if __name__ == "__main__":
-
-    if not os.environ.get("TELEGRAM_BOT_TOKEN"):
-
-        print("HATA: TELEGRAM_BOT_TOKEN ayarlanmamış.")
-
-        print("Önce: .env dosyasını yükleyin veya ortam değişkeni olarak ayarlayın.")
-
-        sys.exit(1)
-
-    
-
-    if not os.environ.get("TELEGRAM_CHAT_ID"):
-
-        print("HATA: TELEGRAM_CHAT_ID ayarlanmamış.")
-
-        sys.exit(1)
-
-    
-
-    poll()
+    main()

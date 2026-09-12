@@ -1,105 +1,115 @@
-# -*- coding: utf-8 -*-
-"""Telegram bot arka plan servisi.
+﻿# -*- coding: utf-8 -*-
+"""Telegram bot arka plan servisi — canonical polling wrapper.
 
-Kullanım:
-    export TELEGRAM_BOT_TOKEN="your_bot_token_here"
+Bu modul python-telegram-bot kutuphanesini KULLANMAZ.
+Canonical long-polling motoru scripts/telegram_polling.py'dir.
+
+Kullanim:
+    # Servis olarak baslat (arakplan process):
     python -m company_master.telegram.bot_service
+
+    # Direkt polling baslat:
+    python src/company_master/telegram/bot_service.py --foreground
 """
+from __future__ import annotations
 
-import os
-import time
 import logging
-from datetime import datetime
-from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import Updater, CommandHandler, CallbackQueryHandler, CallbackContext
+import os
+import sys
+from pathlib import Path
+from typing import Optional
 
-logging.basicConfig(format="%(asctime)s - %(name)s - %(levelname)s - %(message)s", level=logging.INFO)
+from dotenv import load_dotenv
+
+ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT))
+
+from src.company_master.utils.telegram_bot import send_message, masked_token
+
+load_dotenv(ROOT / ".env")
+
+logging.basicConfig(
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    level=logging.INFO,
+)
 logger = logging.getLogger(__name__)
 
 
-def start(update: Update, context: CallbackContext):
-    """Bot başlangıç komutu."""
-    keyboard = [
-        [InlineKeyboardButton("📊 Durum Raporu", callback_data="report_status")],
-        [InlineKeyboardButton("📈 Kalite Skorları", callback_data="report_quality")],
-        [InlineKeyboardButton("📋 Yardım", callback_data="help")],
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text(
-        "🚀 *Huginn Company Intelligence Bot*\nAnkara B2B Intelligence Platformu\n\nLütfen bir işlem seçin:",
-        reply_markup=reply_markup, parse_mode="Markdown"
-    )
+def _script_path() -> str:
+    """Canonical polling script'inin tam yolunu dondurur."""
+    return str(ROOT / "scripts" / "telegram_polling.py")
 
 
-def button_handler(update: Update, context: CallbackContext):
-    """Buton tıklama işlemleri."""
-    query = update.callback_query
-    query.answer()
-    if query.data == "report_status":
-        report_status(query)
-    elif query.data == "report_quality":
-        report_quality(query)
-    elif query.data == "help":
-        query.edit_message_text(
-            "📖 *Yardım Menüsü*\n\nKomutlar:\n/start - Ana menü\n/status - Sistem durumu\n/quality - Kalite raporu"
-        )
+def start_polling(token: Optional[str] = None, foreground: bool = False) -> "subprocess.Popen | None":
+    """Canonical polling script'ini baslatir.
 
+    Args:
+        token: token (env'den okunur eger None)
+        foreground: Eger True ise bloklayarak calistir (blocking).
+          False (varsayilan): arka planda subprocess olarak baslat.
+    """
+    import subprocess
 
-def report_status(update):
-    """Sistem durumunu raporla."""
-    from company_master.db.connection import get_engine
-    from sqlalchemy import text
-    engine = get_engine()
+    real_token = token or os.environ.get("TELEGRAM_BOT_TOKEN")
+    if not real_token:
+        logger.error("TELEGRAM_BOT_TOKEN bulunamadi!")
+        return None
+
+    env = os.environ.copy()
+    env["TELEGRAM_BOT_TOKEN"] = real_token
+    if os.environ.get("TELEGRAM_CHAT_ID"):
+        env["TELEGRAM_CHAT_ID"] = os.environ["TELEGRAM_CHAT_ID"]
+    bot_user = os.environ.get("TELEGRAM_BOT_USERNAME")
+    if bot_user:
+        env["TELEGRAM_BOT_USERNAME"] = bot_user
+
+    script = _script_path()
+    logger.info("Canonical polling baslatiliyor: %s", script)
+
     try:
-        with engine.connect() as conn:
-            total = conn.execute(text("SELECT COUNT(*) FROM companies WHERE is_ankara=TRUE")).fetchone()[0]
-            avg_score = conn.execute(text("SELECT AVG(data_quality_score) FROM companies WHERE is_ankara=TRUE")).fetchone()[0]
-        msg = f"📊 *Sistem Durumu*\n\n📋 Toplam: {total:,}\n📈 Ort. Kalite: {avg_score:.1f}/100\n🕒 {datetime.now().strftime('%d.%m.%Y %H:%M')}"
-        update.message.reply_text(msg, parse_mode="Markdown")
-    except Exception as e:
-        logger.error(f"Status hata: {e}")
-        update.message.reply_text("❌ Rapor alınamadı.")
+        if foreground:
+            proc = subprocess.run(
+                [sys.executable, script],
+                env=env,
+                cwd=str(ROOT),
+            )
+            return None
+        else:
+            proc = subprocess.Popen(
+                [sys.executable, script],
+                env=env,
+                cwd=str(ROOT),
+                stdout=subprocess.DEVNULL,
+                stderr=subprocess.DEVNULL,
+            )
+            return proc
+    except Exception as exc:
+        logger.error("Polling baslatilamadi: %s", exc)
+        raise
 
 
-def report_quality(update):
-    """Kalite skoru raporu."""
-    from company_master.db.connection import get_engine
-    from sqlalchemy import text
-    engine = get_engine()
-    try:
-        with engine.connect() as conn:
-            buckets = conn.execute(text("""
-                SELECT CASE WHEN data_quality_score>=80 THEN '80-100' WHEN data_quality_score>=60 THEN '60-79'
-                WHEN data_quality_score>=40 THEN '40-59' ELSE '0-39' END as bucket, COUNT(*) as cnt
-                FROM companies WHERE is_ankara=TRUE GROUP BY 1 ORDER BY 1 DESC
-            """)).fetchall()
-        msg = "📈 *Kalite Dağılımı*\n\n"
-        for row in buckets:
-            msg += f"{row.bucket}: {row.cnt:,}\n"
-        update.message.reply_text(msg, parse_mode="Markdown")
-    except Exception as e:
-        logger.error(f"Quality hata: {e}")
-        update.message.reply_text("❌ Rapor alınamadı.")
+def send_test_message() -> dict:
+    """Test mesaji gonderir."""
+    return send_message("<b>🤖 Bot servisi aktif.</b>")
 
 
-def main():
-    """Bot'u başlat."""
-    token = os.getenv("TELEGRAM_BOT_TOKEN")
+def main() -> None:
+    """Bot servisini baslatir."""
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Telegram bot servis yoneticisi")
+    parser.add_argument("--foreground", action="store_true",
+                        help="Bloklayarak calistir (debug icin)")
+    args = parser.parse_args()
+
+    token = os.environ.get("TELEGRAM_BOT_TOKEN")
     if not token:
-        logger.error("TELEGRAM_BOT_TOKEN bulunamadı!")
-        return
-    updater = Updater(token)
-    dp = updater.dispatcher
-    dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CommandHandler("status", lambda u, c: report_status(u)))
-    dp.add_handler(CommandHandler("quality", lambda u, c: report_quality(u)))
-    dp.add_handler(CallbackQueryHandler(button_handler))
-    updater.start_polling()
-    logger.info("Telegram bot başlatıldı.")
-    try:
-        while True: time.sleep(10)
-    except KeyboardInterrupt:
-        updater.stop()
+        logger.error("TELEGRAM_BOT_TOKEN bulunamadi!")
+        sys.exit(1)
+
+    logger.info("Telegram bot servisi baslatiliyor (token: %s)...", masked_token(token)[:15])
+    start_polling(token=token, foreground=args.foreground)
+    logger.info("Telegram bot servisi calistirildi.")
 
 
 if __name__ == "__main__":

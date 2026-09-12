@@ -1,9 +1,10 @@
-# Huginn Data Insights - docker-compose (Faz 1, 2026-09-09)
+﻿# Huginn Data Insights - docker-compose (Faz 1, 2026-09-09)
 # Kullanim:
 #   API + Supabase (prod benzeri):   docker compose up -d --build api
 #   API + yerel PG (dev/test):       docker compose --profile localdb up -d --build
 #     -> DATABASE_URL'i localhost:5433'e cevirerek .env.local ile calistir
 #   Eski Streamlit arayuzu:          docker compose --profile legacy up -d streamlit
+#   Telegram bot (canonical polling): docker compose --profile telegram up -d telegram-bot telegram-periodic
 
 services:
   # Ana servis: FastAPI + vanilla JS dashboard
@@ -74,16 +75,31 @@ services:
       - PYTHONPATH=/app:/app/src
       - API_BASE_URL=http://api:8000
 
+  # ---- Telegram Bot (canonical polling, profiles: telegram) ----
+  # python-telegram-bot kullanmaz; doğrudan getUpdates long-polling.
   telegram-bot:
     build: .
-    profiles: ["legacy"]
-    command: ["python", "-m", "company_master.telegram.bot_service"]
+    profiles: ["telegram"]
+    command: ["python", "scripts/telegram_polling.py"]
+    env_file: .env
+    environment:
+      - PYTHONPATH=/app:/app/src
     volumes:
       - ./logs:/app/logs
       - ./data:/app/data
+    restart: unless-stopped
+
+  telegram-periodic:
+    build: .
+    profiles: ["telegram"]
+    command: ["python", "scripts/telegram_periodic.py"]
+    env_file: .env
     environment:
       - PYTHONPATH=/app:/app/src
-      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+    volumes:
+      - ./logs:/app/logs
+      - ./data:/app/data
+    restart: unless-stopped
 
 volumes:
   pgdata:
