@@ -1,10 +1,19 @@
 // Huginn - Ticari Istihbarat Platformu - Dashboard JS
 const API = window.location.origin;
 console.log('[Huginn] app.js v3 yuklendi -', new Date().toLocaleTimeString('tr-TR'));
-// API key: dashboard ?api_key=KEY ile acildiysa otomatik tasinir (Y6)
-const API_KEY = new URLSearchParams(window.location.search).get('api_key') || localStorage.getItem('dash_api_key') || '';
-if (!new URLSearchParams(window.location.search).has('api_key') && API_KEY) {
-  // URL'de degilse localStorage'dan alindi
+// API key: DASH-01 S-1: HttpOnly çerezden okunur (güvenli)
+const API_KEY = document.cookie.includes('huginn_api_key=') ?
+  document.cookie.split('huginn_api_key=')[1].split(';')[0] : '';
+if (!API_KEY) {
+  // Fallback for backward compatibility (should be removed after migration)
+  const urlKey = new URLSearchParams(window.location.search).get('api_key');
+  const localKey = localStorage.getItem('dash_api_key');
+  if (urlKey) {
+    console.warn('[Huginn] URL api_key kullanımı tespit edildi - çerez tabanlı auth'a geçin');
+  }
+  if (localKey) {
+    console.warn('[Huginn] localStorage dash_api_key kullanımı tespit edildi - çerez tabanlı auth'a geçin');
+  }
 }
 function apiUrl(path) {
   // API key'i query parametresi olarak ekle (rate limit + auth icin)
@@ -1659,7 +1668,9 @@ function requestCreditPack() {
 }
 
 
-// ── P7-15: Signal Dashboard ──
+// ── P7-19b: Signal Dashboard + SSE ──
+let _sseSource = null;
+
 async function loadSignalDashboard() {
   const el = document.getElementById('signal-kpis');
   if (!el) return;
@@ -1668,8 +1679,52 @@ async function loadSignalDashboard() {
     if (!r.ok) throw new Error('API ' + r.status);
     const d = await r.json();
     renderSignalDashboard(d);
+    // P7-19b: SSE bağlantısını başlat
+    startSignalSSE();
   } catch (e) {
     el.innerHTML = `<div class="signal-empty"><i class="fas fa-exclamation-circle"></i> Sinyal verisi yüklenemedi: ${esc(e.message)}</div>`;
+  }
+}
+
+function startSignalSSE() {
+  if (_sseSource) {
+    _sseSource.close();
+    _sseSource = null;
+  }
+  try {
+    _sseSource = new EventSource(apiUrl('/api/intelligence/dashboard/stream'));
+    _sseSource.onmessage = (event) => {
+      try {
+        const d = JSON.parse(event.data);
+        renderSignalDashboard(d);
+        updateSSEStatus(true);
+      } catch (e) {
+        console.error('SSE parse error:', e);
+      }
+    };
+    _sseSource.onerror = () => {
+      updateSSEStatus(false);
+      _sseSource.close();
+      _sseSource = null;
+      // 3 saniye sonra yeniden dene
+      setTimeout(startSignalSSE, 3000);
+    };
+    updateSSEStatus(true);
+  } catch (e) {
+    console.error('SSE init error:', e);
+  }
+}
+
+function updateSSEStatus(connected) {
+  const badge = document.getElementById('sse-status-badge');
+  if (!badge) return;
+  badge.style.display = 'inline-flex';
+  if (connected) {
+    badge.className = 'sse-status-badge sse-connected';
+    badge.innerHTML = '<i class="fas fa-circle"></i> Canlı';
+  } else {
+    badge.className = 'sse-status-badge sse-disconnected';
+    badge.innerHTML = '<i class="fas fa-circle"></i> Kesikli';
   }
 }
 

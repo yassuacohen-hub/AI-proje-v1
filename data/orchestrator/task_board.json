@@ -735,5 +735,127 @@
     "not": "",
     "source": "ic",
     "from_agent": null
+  },
+  {
+    "task_id": "P7-4",
+    "baslik": "Company Career Pages Scraper",
+    "sahip": "web_kazima",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-12T23:43:28",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-5",
+    "baslik": "İSKUR Scraper",
+    "sahip": "kazi_scraper",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-12T23:43:28",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-6",
+    "baslik": "Kariyer.net Scraper",
+    "sahip": "web_kazima",
+    "oncelik": "P1",
+    "durum": "blocked",
+    "baslangic": "2026-09-12T23:43:28",
+    "bitis": "2026-09-12T23:43:28",
+    "dosyalar": [],
+    "not": "Anti-bot koruması; proxy/headless gerekebilir.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-22",
+    "baslik": "Apify Dead-Letter Queue ve Yeniden Deneme Akışı",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-12T23:43:28",
+    "bitis": null,
+    "dosyalar": [
+      "web_app.py",
+      "app.py",
+      "tests/test_apify_dlq.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-23",
+    "baslik": "Vektör Katmanı Üretim Entegrasyonu",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-12T23:43:28",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/vector/",
+      "requirements-dev.txt"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-24",
+    "baslik": "ASO ve OSTİM Veri Kalite Raporu",
+    "sahip": "mimar",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-12T23:43:28",
+    "bitis": null,
+    "dosyalar": [
+      "data/aso/",
+      "data/ostim/",
+      "scripts/quality_report.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "DASH-08",
+    "baslik": "Admin Denetim (Audit) Sekmesi",
+    "sahip": "mimar",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-12T23:43:28",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_audit.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "DASH-07",
+    "baslik": "Admin Kimlik Doğrulama ve Yetkilendirme",
+    "sahip": "mimar",
+    "oncelik": "P1",
+    "durum": "aktif",
+    "baslangic": "2026-09-12T23:43:28",
+    "bitis": null,
+    "dosyalar": [
+      "web_app.py",
+      "app.py",
+      "web_dashboard/tabs/admin_auth.py",
+      "tests/test_admin_auth.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
   }
 ]

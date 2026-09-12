@@ -7,6 +7,14 @@
 
 | Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |
 |-------|--------|-------|---------|-------|----------|
+| P7-4 | Company Career Pages Scraper | web_kazima | P1 | plan | - |
+| P7-5 | İSKUR Scraper | kazi_scraper | P1 | plan | - |
+| P7-6 | Kariyer.net Scraper | web_kazima | P1 | blocked | - |
+| P7-22 | Apify Dead-Letter Queue ve Yeniden Deneme Akışı | kilo | P1 | plan | web_app.py, app.py, tests/test_apify_dlq.py |
+| P7-23 | Vektör Katmanı Üretim Entegrasyonu | kilo | P1 | plan | src/company_master/vector/, requirements-dev.txt |
+| P7-24 | ASO ve OSTİM Veri Kalite Raporu | mimar | P2 | plan | data/aso/, data/ostim/, scripts/quality_report.py |
+| DASH-08 | Admin Denetim (Audit) Sekmesi | mimar | P2 | plan | web_dashboard/tabs/admin_audit.py |
+| DASH-07 | Admin Kimlik Doğrulama ve Yetkilendirme | mimar | P1 | aktif | web_app.py, app.py, web_dashboard/tabs/admin_auth.py |
 
 ## Tamamlananlar
 
@@ -61,3 +69,4 @@
 | DOC-02 | Decision Log mekanizmasini kur | mimari | 2026-09-12T21:03:39 |
 | DASH-04 | Hybrid Admin Panel - API client + DB fallback | mimar | 2026-09-12T21:12:02 |
 | DASH-05 | Admin Panel Karar Defteri sekmesi | mimar | 2026-09-12T21:12:02 |
+| DASH-06 | Admin Panel API Yönetimi ve Kullanıcı Yönetimi | kilo | 2026-09-12T22:27:22 |

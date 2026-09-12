@@ -43,6 +43,7 @@ Bu çalışma alanında **canlı görev takibi ve dosya kilidi mekanizması** va
 4. **Çakışma kontrolü yap**: `task_board.gorev_ekle(..., dosyalar=[...])` ile dosyaları kilitle; aynı dosyada paralel değişiklik yapma
 5. **İşe başla**: yalnız hedef, MVP ve teknik sınırlarla uyumlu adım at
 6. **Bitince güncelle**: `gorev_guncelle(..., durum="done")`, kilidi bırak, özet yaz, gerekli durum dosyalarını yenile
+   - **Zorunlu:** İş bitirince mutlaka `gorev_guncelle(..., durum="done")` çağrılır, `lock_birak(dosya, sahip)` ile kilitlere açılır, `task_board.json` ve `AGENT_SYNC.md` güncellenir. Bu adımlar atlanamaz.
 7. **Son kontrol**: hedef/MVP/sınır dışına çıkmadı mı?
 
 ## İletişim Dili

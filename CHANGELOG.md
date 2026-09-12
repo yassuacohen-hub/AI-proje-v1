@@ -1,5 +1,75 @@
 # CHANGELOG - Ankara B2B Company Master
 
+## 2026-09-12 - P7-19b: Canlı Sinyal Bildirimleri (SSE) & Panel Konumlandırması
+
+### P7-19b SSE Gerçek Zamanlı Sinyal Akışı (Tamamlandı)
+- **Backend (`web_app.py`):** `/api/intelligence/dashboard/stream` SSE endpoint'i eklendi (`StreamingResponse`, `media_type="text/event-stream"`). Shared `_fetch_dashboard_data(limit=8)` fonksiyonu ile DB'den 5 saniyede bir taze sinyal özeti push edilir. `_SSE_LAST_DATA` global bellek önbelleği ilk bağlantı hızlandırması için entegre edildi.
+- **Frontend (`web_dashboard/js/app.js`):** `startSignalSSE()` fonksiyonu ile `EventSource` bağlantısı kuruldu. Gelen SSE paketleri `renderSignalDashboard(d)` ile UI'a yansıtılır. Hata durumunda 3 saniyelik backoff ile otomatik yeniden bağlanır.
+- **UI (`index.html` & `style.css`):** Signal Dashboard başlığına canlı durum badge'i (`#sse-status-badge`) eklendi. Bağlıyken `🟢 Canlı`, bağlantı koptuğunda `🔴 Kesikli` olarak güncellenir.
+- **Doğrulama:** `curl -s -N --max-time 6 http://127.0.0.1:8000/api/intelligence/dashboard/stream` komutuyla 5 saniyelik intervalde SSE pencerelerinin `data: {"signal_type_counts": ...}\n\n` formatında aktığı canlı sunucuda doğrulandı.
+
+### Panel Konumlandırma Kararı
+- **Karar:** Müşteri paneli = FastAPI web_dashboard (port 8000), Admin paneli = Streamlit (port 8501)
+- **P7-19a** operasyonel webhook bildirimleri (başarılı/hatalı/DLQ) → Streamlit'te kalır
+- **P7-19b** müşteri SSE'si (yeni sinyal, yeni firma, eşleşme önerisi) → FastAPI web_dashboard'a taşınacak
+- **P7-20** admin paneli → Streamlit'te kalır (admin API'leri backend'de, Streamlit tüketir)
+- **P7-21** performans metrikleri → Streamlit'te kalır; `/api/performance` endpoint'i SSOT olur
+- V9 bağlam dokümanına **16.4 Panel Konumlandırma Mimarisi** eklendi
+- `docs/ARCHITECTURE_DECISION_HYBRID_ADMIN.md` güncellendi
+
+### Dashboard Debug (Yükleniyor Sorunu)
+- **Kök neden:** `web_app.py` satır 2870'de terk edilmiş `:` kararı → `SyntaxError` → sunucu başlayamıyor → tüm fetch'ler askıda → sayfa sonsuza kadar "Yükleniyor"
+- **Düzeltme:** `:` kararı kaldırıldı, BOM (`\ufeff`) temizlendi, `py_compile` doğrulandı
+- **Doğrulama:** `loadAll()`'ın 6 endpoint'i tümü 200 döndüyor: `/api/kpi`, `/api/sources`, `/api/companies`, `/api/quality-trend`, `/api/nace-distribution`, `/api/intelligence/dashboard`
+- **AGENT_SYNC savunma:** `task_board.py` `agent_sync_olustur()`'da `t["durum"]` → `t.get("durum", "unknown")` değiştirildi (KeyError önleme)
+
+## 2026-09-12 - 9R-05: 9Router Optimizasyon & İzleme Aracı (Adım A-I tamamlandı)
+
+### Yeni Araç: `scripts/9router_optimizer.py` (~700 satır)
+- **Adım A — Sağlık Taraması:** 31 providerConnections kaydı DB'den salt-okunur okunur; backoff, modelLock, errorCode, testStatus bazlı sorunlu provider tespiti; secret alanlar otomatik maskeli
+- **Adım B1 — DB Yedekleme:** SQLite backup API ile WAL-safe tutarlı anlık görüntü; `data/router/yedekler/9router_<tarih>.sqlite`; 7 yedek saklama (retention); `--backup` bayrağı
+- **Adım B2 — Combo RR İstatistiği (disk tabanlı):** `requestDetails` (latency/tokens/status) + `usageHistory` (provider/model/endpoint/cost) + `settings` (comboStrategy/stickyLimit) tablolarından combo round-robin davranış ölçümü; `--probe` gerektirmez
+- **Adım C — Skorlama:** %50 sağlık / %25 hız / %25 maliyet ağırlıklı kombine skor (0-100); provider-bazlı bireysel skorlama
+- **Adım D — Anomali Tespiti + Telegram:** backoff≥5, locks>10, errorCode, testStatus=error imzaları; YUKSEK/ORTA öncelik; sentinel (`son_uyarilar.json`) ile 1 saatlik tekrar engelleme
+- **Adım E — Çıktılar:** Renkli konsol (3 bölüm), Markdown rapor (`data/router/optimizer_<tarih>.md`), JSON (`optimizer_latest.json`), `--watch` periyodik mod
+- **Adım I — Provider-bazlı skorlama:** per-provider ortalama latency (requestDetails) + ortalama maliyet/çağrı (usageHistory); ölçülmemiş provider'lar nötr 75 (yanıltıcı 100 engellendi); testStatus=error cezası -40
+
+### Doğrulanan Bulgular (ilk çalıştırma)
+- 31 provider, 15 sorunlu; 5 YUKSEK anomali (api-airforce backoff=14+402, tokenrouter 112 locks+403, perplexity invalid key 403, cline insufficient credits 402, xai 403+402)
+- Combo RR ayarları doğrulandı: `comboStrategy=round-robin`, `comboStickyRoundRobinLimit=3`, `enableObservability=true`
+- requestDetails: 96 kayıt, clinepass=53 success, cline=43 error, ortalama latency ~11.9s
+- usageHistory: 500 kayıt, toplam maliyet $1.76
+- DB yedek: 1.9MB
+
+### İkinci Tur Bulguları (13:13, canlı DB değişimi)
+- Ortalama latency 3228.9ms → 5881.3ms; toplam maliyet $1.8132 → $1.8122; sorunlu 15 → 19
+- Yeni anomali imzaları: `bazaarlink` testStatus=error, `clinepass` error=429 (rate limit)
+- Skor doğrulaması: openai 87.5 (sağlık=100, hız=50, maliyet=100, $0.0000), antigravity/claude/firecrawl/gemini 81.2 (maliyet=75 nötr)
+
+### Birim Testleri (Adım G)
+- `tests/test_9router_optimizer.py` — 28 test, tamamı geçti (0.86s)
+- Kapsam: secret mask, sağlık parse (null-safety, bozuk JSON), yedek retention 7, combo istatistik (provider-bazlı latency/maliyet), skorlama (testStatus cezası, nötr 75, inaktif 0), anomali (YUKSEK/ORTA), sentinel (1 saat tekrar engelleme), çıktılar (JSON/Markdown)
+- Gerçek 9router DB'sine ve ağa dokunmaz; tmp_path + monkeypatch ile izole
+
+### CLI Kullanımı
+```bash
+python scripts/9router_optimizer.py                    # sağlık + rapor
+python scripts/9router_optimizer.py --backup           # + DB yedekleme
+python scripts/9router_optimizer.py --backup --json    # + JSON çıktı
+python scripts/9router_optimizer.py --watch 3600       # saatlik periyodik
+python scripts/9router_optimizer.py --probe            # + combo probu (ağ/$$$)
+```
+
+### Temizlik (Arşiv)
+- Yardımcı `_9r05_*` scriptleri (7 dosya) `scripts/_arsiv/9r05/` dizinine taşındı:
+  - `_9r05_provider_inventory.py`, `_9r05_db_tablo_kontrol.py`, `_9r05_db_log_sema.py`, `_9r05_db_log_analiz.py`, `_9r05_db_ayar_hata.py`, `_9r05_db_hata_detay.py`, `_9r05_provider_envanter.json`
+- Plan referansı `plans/9r05_adim1_monitor_plan.md` güncellendi (arşiv yolu gösteriliyor)
+
+### Altyapı
+- `.gitignore`: `data/router/yedekler/` ve `data/router/son_uyarilar.json` eklendi (KVKK koruması)
+- Plan: `plans/9r05_adim1_monitor_plan.md` (rev.3, §6 gözlemlenebilirlik bulguları güncellendi)
+- Sonraki adım: `provider_router.py` (free-öncelikli Combo RR, Adım 2)
+
 ## 2026-09-12 - ORCH-03: AGENT_SYNC Otomatik Senkron Hook'u + Atomik Yazma
 
 ### Otomatik Senkron Hook'u (bayatlık sorununu kaynağında çözer)

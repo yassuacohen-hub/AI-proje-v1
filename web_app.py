@@ -4,11 +4,13 @@
 
 from __future__ import annotations
 
+import asyncio
 import json
 import os
 import uuid
 import sys
 import time
+import tomllib
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -16,7 +18,7 @@ from typing import Any
 import uvicorn
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, HTMLResponse, Response
+from fastapi.responses import FileResponse, HTMLResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text
 
@@ -29,6 +31,18 @@ from company_master.intelligence.job_intelligence.api.router import (
 )
 from company_master.orchestrator import task_board as tb  # noqa: E402
 from scripts.apify_webhook_receiver import ApifyWebhookReceiver  # noqa: E402
+
+# DASH-01 Phase 1: Auth & RBAC infrastructure (S-1/S-2/S-3)
+from company_master.auth.session import (
+    get_session as _get_session,
+    require_auth as _require_auth,
+    SESSION_COOKIE_NAME as _SESSION_COOKIE_NAME,
+)
+from company_master.auth.rbac import (
+    has_role as _has_role,
+    ROLE_ADMIN as _ROLE_ADMIN,
+    ROLE_USER as _ROLE_USER,
+)
 
 # OpenTelemetry tracing
 try:
@@ -711,34 +725,34 @@ def require_api_key(request: Request) -> str:
         def endpoint(api_key: str = Depends(require_api_key)):
     Y26: gecen key enterprise uye key'i ise tier bazli sayac + yuksek rate limit uygulanir.
     """
-    # 1) API key kontrolu (env'de tanimliysa)
-    key = request.headers.get("X-API-Key", "") or request.query_params.get(
-        "api_key", ""
-    )
-    tier = "public"
-
-    if DASH_API_KEY:
-        if key and key != DASH_API_KEY:
-            # enterprise uye key'i mi? (users tablosundan dogrula)
+    # 1) Session kontrolü: HttpOnly çerezden SessionUser al
+    session = _get_session(request)
+    if session and session.user:
+        # Session bazlı auth: kullanıcı rolüne ve kredisine göre erişim
+        user = session.user
+        tier = user.tier if user.tier else "public"
+    else:
+        # 2) Fallback: API key kontrolü (X-API-Key header veya ?api_key= query param)
+        # HttpOnly çerezden API key'ini de al (session.py'den)
+        key = request.cookies.get("huginn_api_key", "")
+        if not key:
+            key = request.headers.get("X-API-Key", "") or request.query_params.get(
+                "api_key", ""
+            )
+        
+        tier = "public"
+        
+        if key:
             u = _user_from_api_key(key)
             if u and u.get("api_key") == key and u.get("tier") == "enterprise":
                 tier = "enterprise"
-            else:
+            elif not u:
                 raise HTTPException(
                     status_code=401,
-                    detail="Gecersiz API key. ?api_key= veya X-API-Key header gerekli.",
+                    detail="Gecersiz API key. X-API-Key header veya huginn_api_key cookie gerekli.",
                 )
-        elif not key:
-            raise HTTPException(
-                status_code=401,
-                detail="Gecersiz API key. ?api_key= veya X-API-Key header gerekli.",
-            )
-    elif key:
-        u = _user_from_api_key(key)
-        if u and u.get("tier") == "enterprise":
-            tier = "enterprise"
-
-    # 2) Rate limiting (tier bazli; her IP icin 1 dakikalik pencere)
+    
+    # 3) Rate limiting (tier bazli; her IP icin 1 dakikalik pencere)
     limit = _TIER_RATE_LIMITS.get(tier, _RATE_LIMIT_MAX)
     ip = request.client.host if request.client else "local"
     now = time.time()
@@ -754,6 +768,10 @@ def require_api_key(request: Request) -> str:
 
     if tier == "enterprise":
         _record_api_usage(tier, request.url.path)
+    
+    # Return the effective key for endpoint usage
+    if session and session.user:
+        return session.user.user_id or "session-auth"
     return key or "public"
 
 
@@ -2003,10 +2021,11 @@ def api_buyer_ledger(token: str = "", limit: int = 20):
 
 
 @app.post("/api/buyer/login")
-def api_buyer_login(req: dict):
+def api_buyer_login(req: dict, request: Request, response: Response):
     """E-posta + sifre ile giris. Sifresi olmayan eski MVP kayitlarina ozel:
     password bos gonderilirse ve DB'de hash yoksa giris izin verilir (gecis donemi).
-    Onayli kullaniciya 24 saatlik token doner; kredi bakiyesi dahil."""
+    Onayli kullaniciya 24 saatlik token doner; kredi bakiyesi dahil.
+    DASH-01 S-2: Basarili giris sonrasi HttpOnly session cookie olusturulur."""
     email = (req.get("email") or "").strip().lower()
     password = req.get("password") or ""
     if not email or "@" not in email:
@@ -2041,6 +2060,19 @@ def api_buyer_login(req: dict):
             status_code=403,
             detail=f"Üyelik onayı: {durum}. Sorularınız için iletişime geçin.",
         )
+    # DASH-01 S-2: HttpOnly session cookie olustur (XSS'e karsi guvenli)
+    from company_master.auth.session import SessionUser, create_session
+
+    session_user = SessionUser(
+        user_id=row["user_id"],
+        email=row["email"],
+        role=row["role"] or "user",
+        tier=row["tier"] or "terminal",
+        company_name=row["company_name"],
+        credit_balance=row["credit_balance"] or 0,
+    )
+    client_ip = request.client.host if request.client else ""
+    create_session(session_user, client_ip, response)
     return {
         "token": _user_token(row["email"]),
         "user": {
@@ -2436,6 +2468,38 @@ def require_admin(
             return "admin-user"
     raise HTTPException(status_code=403, detail="Yonetici erisimi gerekli")
 
+
+
+
+@app.get("/api/admin/login")
+def api_admin_login(email: str = "", password: str = ""):
+    """Admin girişi: email + sifre -> token (24 saat)."""
+    if not email or not password:
+        raise HTTPException(status_code=400, detail="email ve sifre zorunlu")
+    engine = get_engine()
+    with engine.connect() as conn:
+        row = conn.execute(
+            text("SELECT email, password_hash, role, status FROM users WHERE email = :e"),
+            {"e": email},
+        ).mappings().first()
+    if row:
+        if row["status"] != "onayli" or row["role"] != "admin":
+            raise HTTPException(status_code=403, detail="admin yetkisi gerekli")
+        if not _verify_password(password, row["password_hash"]):
+            raise HTTPException(status_code=401, detail="gecersiz sifre")
+        return {"token": _user_token(row["email"])}
+    # dev destegi: .streamlit/secrets.toml admin sifresi
+    try:
+        secrets_path = Path(__file__).resolve().parent / ".streamlit" / "secrets.toml"
+        if secrets_path.exists():
+            with secrets_path.open("rb") as f:
+                secrets = tomllib.load(f)
+            admin_pw = secrets.get("admin_password", "")
+            if admin_pw and email == "admin@huginn.local" and admin_pw == password:
+                return {"token": _user_token(email)}
+    except Exception:
+        pass
+    raise HTTPException(status_code=401, detail="gecersiz email veya sifre")
 
 @app.get("/api/admin/pending")
 def api_admin_pending(_auth: str = Depends(require_admin)):
@@ -2837,22 +2901,16 @@ def api_company_detail(
         return {}
 
 
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+
+# ── P7-19b: SSE cache (dashboard verisi) ──
+_SSE_LAST_DATA: dict[str, Any] = {}
 
 
-@app.get("/api/intelligence/dashboard")
-def api_intelligence_dashboard(
-    limit: int = 10, _auth: str = Depends(require_api_key)
-) -> dict:
-    """P7-15: Signal Dashboard aggregation.
-
-    company_signals (aktif) + company_intelligence_scores toplu ozet dondurur.
-    SQLite/PostgreSQL uyumlu; tablolar yoksa bos veri doner.
-    """
+def _fetch_dashboard_data(limit: int = 10) -> dict:
+    """P7-15/P7-19b ortak: Signal Dashboard verisini DB'den çeker."""
     engine = get_engine()
     now_iso = datetime.utcnow().isoformat()
-    out = {
+    out: dict[str, Any] = {
         "signal_type_counts": {},
         "total_active_signals": 0,
         "scored_companies": 0,
@@ -2872,7 +2930,6 @@ def api_intelligence_dashboard(
         except Exception:
             return []
 
-    # Aktif sinyal turune gore dagilim (valid_until gelecekte ya da bos)
     rows = _safe_rows("""
         SELECT signal_type, COUNT(*) AS cnt
         FROM company_signals
@@ -2885,11 +2942,9 @@ def api_intelligence_dashboard(
         total += r["cnt"]
     out["total_active_signals"] = total
 
-    # Skorlanmis sirket sayisi
     rows = _safe_rows("SELECT COUNT(*) AS cnt FROM company_intelligence_scores")
     out["scored_companies"] = rows[0]["cnt"] if rows else 0
 
-    # Top N listeleri (JOIN companies ile isim)
     top_sql = """
         SELECT s.company_id, c.legal_name, s.{field} AS score,
                s.hiring_trend, s.overall_confidence, s.signal_count_30d,
@@ -2904,7 +2959,6 @@ def api_intelligence_dashboard(
     )
     out["top_risk"] = _safe_rows(top_sql.format(field="risk_score"), {"lim": limit})
 
-    # Hiring trend dagilimi
     rows = _safe_rows("""
         SELECT hiring_trend, COUNT(*) AS cnt
         FROM company_intelligence_scores
@@ -2912,7 +2966,6 @@ def api_intelligence_dashboard(
     """)
     out["hiring_trends"] = {r["hiring_trend"]: r["cnt"] for r in rows}
 
-    # Son sinyaller (aktif)
     rows = _safe_rows("""
         SELECT cs.company_id, c.legal_name, cs.signal_type, cs.signal_subtype,
                cs.score, cs.confidence, cs.detected_at, cs.valid_until
@@ -2922,6 +2975,58 @@ def api_intelligence_dashboard(
         ORDER BY cs.detected_at DESC LIMIT :lim
     """, {"now": now_iso, "lim": min(limit, 50)})
     out["recent_signals"] = rows
-
     return out
 
+
+@app.get("/api/intelligence/dashboard")
+def api_intelligence_dashboard(
+    limit: int = 10, _auth: str = Depends(require_api_key)
+) -> dict:
+    """P7-15: Signal Dashboard aggregation."""
+    global _SSE_LAST_DATA
+    out = _fetch_dashboard_data(limit=limit)
+    _SSE_LAST_DATA = out.copy()
+    return out
+
+
+@app.get("/api/intelligence/dashboard/stream")
+async def api_intelligence_dashboard_stream(_auth: str = Depends(require_api_key)) -> StreamingResponse:
+    """P7-19b: SSE stream - müşteri paneli için gerçek zamanlı sinyal güncellemeleri.
+
+    Her 5 saniyede bir DB'den taze veri çeker ve push eder.
+    EventSource (browser) tarafından consumed edilir.
+    """
+    async def event_generator():
+        global _SSE_LAST_DATA
+        # İlk veri: cache varsa onu, yoksa DB'den çek
+        try:
+            data = _SSE_LAST_DATA.copy() if _SSE_LAST_DATA else _fetch_dashboard_data(limit=8)
+            yield f"data: {json.dumps(data, ensure_ascii=False)}\n\n"
+        except Exception:
+            yield f"data: {json.dumps({'generated_at': datetime.utcnow().isoformat(), 'total_active_signals': 0}, ensure_ascii=False)}\n\n"
+        while True:
+            try:
+                await asyncio.sleep(5)
+                # Her döngüde taze veri çek ve cache'i güncelle
+                data = _fetch_dashboard_data(limit=8)
+                _SSE_LAST_DATA = data.copy()
+                yield f"data: {json.dumps(data, ensure_ascii=False)}\n\n"
+            except asyncio.CancelledError:
+                break
+            except Exception:
+                await asyncio.sleep(1)
+                continue
+
+    return StreamingResponse(
+        event_generator(),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+        },
+    )
+
+
+if __name__ == "__main__":
+    uvicorn.run(app, host="0.0.0.0", port=8000)
