@@ -35,6 +35,34 @@ Bu çalışma alanında **canlı görev takibi ve dosya kilidi mekanizması** va
 5. **Aynı dosyada paralel değişiklik yapma.** Kilit yoksa bile `file_locks.json`'u kontrol etmeden büyük/çok dosyalı değişikliğe girme.
 6. `AGENT_SYNC.md` **otomatik üretilen bir dosyadır** (`sync.agent_sync_yaz()` / task_board kaynaklı). Elle büyük yeniden yazım yapmayın; yalnızca ilgili fonksiyonlarla güncelleyin veya küçük not eklemek için dosyanın sonuna ekleyin (üstteki tabloyu bozmayın).
 
+## Orkestratör Rotasyonu ve Görev Emri Sözlüğü — ZORUNLU
+
+### Tek Orkestratör Kuralı
+- Projede **tek aktif orkestratör** vardır; kim olduğu `data/orchestrator/decision_log.jsonl` içindeki **son `orkestrator_rotasyonu` kaydından** okunur (SSOT).
+- Sorgulama: `python scripts/orkestrator_rotasyon.py --kim`
+- Orkestratör olmayan ajanlar (işçiler) panoya yalnızca **kendi görevlerinin durumunu** yazar; başkası adına karar kaydı atmaz.
+
+### Rotasyon Ritüeli ("abrakadabra")
+- Rotasyon **yalnızca sahibin sözüyle** başlar; ritüel sözcüğü `abrakadabra`'dır.
+- Kayıt (tek komut): `python scripts/orkestrator_rotasyon.py <yeni_orkestrator> --kelime abrakadabra --gerekce "..."`
+- Script üç iş yapar: (1) sözcüğü doğrular (yanlışsa reddeder), (2) `decision_log.jsonl`'e yapılandırılmış kayıt atar (`kimden`/`kime`/`tetikleyici`), (3) `AI proje v1/V10/CHANGELOG.md`'e insan-okur notu düşer.
+- **Rotasyon cümlesi ile görev cümlesi aynı mesajda birleştirilmez** — önce rotasyon, sonra görev emri.
+
+### Görev Emri Sözlüğü
+| Sahip cümlesi | Anlamı |
+|---|---|
+| "X-01'i devret" | Orkestratör görevi subagent'a verir; raporu doğrulayıp kayda yazar |
+| "X-01'i kendin yap" | Orkestratör bizzat yapar; subagent başlatmaz |
+| "X-01'i hallet" (mod belirtilmezse) | Orkestratör karar verir; karar + gerekçe kayda düşer |
+
+### Kilit Bekleme (Çakışma Önleme)
+- Başlatılacak görev başka bir ajanın **kilitli** göreviyse (örn. kilo-D07): **beklenir**; kilit sahibi görevi `done` yapınca ORCH-05 kilidi otomatik düşürür, sonra başlanır. Kilitli dosyaya dokunulmaz.
+
+### Subagent Kuralları
+- Subagent **asla orkestratör olamaz**; rotasyon yalnızca sahip ritüeliyle.
+- Subagent panoya görev **ekleyemez**, yalnızca rapor yazar.
+- Subagent `decision_log.jsonl`'e doğrudan **yazamaz**; kaydı orkestratör atar (`subagent` alanıyla kimliklendirir).
+
 ## Ajan Kılavuzu (Tek Şablon)
 
 1. **Ana bağlamı oku**: `AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md`

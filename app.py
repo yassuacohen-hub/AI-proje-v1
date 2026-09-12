@@ -1,17 +1,17 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Streamlit Dashboard â€” Company Master gÃ¶rsel arayÃ¼zÃ¼.
+"""Streamlit Dashboard — Company Master görsel arayüzü.
 
-GÃ¶sterge paneli:
-  - KPI kartlarÄ± (toplam firma, kalite skoru, alan doluluk oranlarÄ±)
-  - GÃ¶rev tahtasÄ± (task_board.json'dan otomatik)
+Gösterge paneli:
+  - KPI kartları (toplam firma, kalite skoru, alan doluluk oranları)
+  - Görev tahtası (task_board.json'dan otomatik)
   - Ajan aktivite logu (AGENT_SYNC.md / handoffs.json'dan)
   - Veri kalitesi trendi (basit bar chart)
-  - ğŸ”” Bildirim merkezi (auto-refresh + webhook event log) [P7-19]
-  - ğŸ›¡ï¸ Admin paneli (sistem durumu, API metrikleri, kaynak durumu) [P7-20]
-  - ğŸ“ˆ Performans paneli (response time, throughput, cache stats) [P7-21]
+  - 🔔 Bildirim merkezi (auto-refresh + webhook event log) [P7-19]
+  - 🛡️ Admin paneli (sistem durumu, API metrikleri, kaynak durumu) [P7-20]
+  - 📈 Performans paneli (response time, throughput, cache stats) [P7-21]
 
-Ã‡alÄ±ÅŸtÄ±rma:
+Çalıştırma:
     streamlit run app.py
 """
 from __future__ import annotations
@@ -32,11 +32,8 @@ sys.path.insert(0, str(ROOT / "src"))
 from company_master.db.connection import get_engine
 from company_master.orchestrator import task_board as tb
 from scripts.dash04_api_client import get_api, APIError
-from web_dashboard.tabs.admin_panel import render_decision_tab
-from web_dashboard.tabs.admin_extras import render_api_management, render_user_management
-from web_dashboard.tabs.admin_auth import get_admin_token, render_admin_login
 
-st.set_page_config(page_title="Company Master Dashboard", layout="wide", page_icon="ğŸ¢")
+st.set_page_config(page_title="Company Master Dashboard", layout="wide", page_icon="🏢")
 
 # --- Performance tracking ---
 if 'perf_metrics' not in st.session_state:
@@ -54,7 +51,7 @@ if 'last_refresh' not in st.session_state:
 if 'auto_refresh_enabled' not in st.session_state:
     st.session_state['auto_refresh_enabled'] = True
 
-# --- YardÄ±mcÄ±lar ---
+# --- Yardımcılar ---
 
 @st.cache_data(ttl=30)
 def load_kpi() -> dict:
@@ -93,10 +90,10 @@ def load_tasks() -> pd.DataFrame:
     rows = []
     for t in board:
         rows.append({
-            "GÃ¶rev ID": t.get("task_id", ""),
-            "BaÅŸlÄ±k": t.get("baslik", ""),
+            "Görev ID": t.get("task_id", ""),
+            "Başlık": t.get("baslik", ""),
             "Sahip": t.get("sahip", ""),
-            "Ã–ncelik": t.get("oncelik", ""),
+            "Öncelik": t.get("oncelik", ""),
             "Durum": t.get("durum", ""),
             "Not": (t.get("not") or "")[:60],
         })
@@ -111,7 +108,7 @@ def load_handoffs() -> pd.DataFrame:
     rows = []
     for tid, h in handoffs.items():
         rows.append({
-            "GÃ¶rev": tid,
+            "Görev": tid,
             "Tamamlanan": (h.get("tamamlandi") or "")[:80],
             "Sonraki": (h.get("sonraki_adim") or "")[:80],
             "Tarih": h.get("tarih", "")[:19],
@@ -183,17 +180,17 @@ def parse_prometheus_bytes(raw: str) -> dict:
     return result
 
 
-# --- ArayÃ¼z ---
+# --- Arayüz ---
 
 # Sidebar - kaynak filtreleme ve arama
 with st.sidebar:
-    st.header("ğŸ”§ Filtreler")
-    search_query = st.text_input("ğŸ” Firma Ara", placeholder="Firma adÄ±, telefon, e-posta...")
+    st.header("🔧 Filtreler")
+    search_query = st.text_input("🔍 Firma Ara", placeholder="Firma adı, telefon, e-posta...")
     score_min = st.slider("Min Kalite Skoru", 0, 100, 0)
     score_max = st.slider("Maks Kalite Skoru", 0, 100, 100)
     
     st.divider()
-    st.subheader("ğŸ“Š Veri KaynaklarÄ±")
+    st.subheader("📊 Veri Kaynakları")
     try:
         @st.cache_data(ttl=30)
         def _load_sources():
@@ -213,25 +210,25 @@ with st.sidebar:
         for s in sources:
             st.metric(s["source_name"], f"{s['cnt']:,}")
     except Exception as e:
-        st.warning(f"Kaynaklar yÃ¼klenemedi: {e}")
+        st.warning(f"Kaynaklar yüklenemedi: {e}")
     
     st.divider()
-    st.subheader("ğŸ“ˆ HÄ±zlÄ± Ä°statistik")
-    if st.button("ğŸ”„ Yenile", type="primary", use_container_width=True):
+    st.subheader("📈 Hızlı İstatistik")
+    if st.button("🔄 Yenile", type="primary", use_container_width=True):
         st.cache_data.clear()
         st.rerun()
 
 # Refresh button
 col_refresh, col_title = st.columns([1, 5])
 with col_refresh:
-    if st.button("ğŸ”„ Yenile", type="primary"):
+    if st.button("🔄 Yenile", type="primary"):
         st.cache_data.clear()
         st.rerun()
 with col_title:
-    st.title("ğŸ¢ Company Master Dashboard")
-st.caption(f"Son gÃ¼ncelleme: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} | Port: 8501")
+    st.title("🏢 Company Master Dashboard")
+st.caption(f"Son güncelleme: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} | Port: 8501")
 
-# KPI kartlarÄ±
+# KPI kartları
 kpi = load_kpi()
 if kpi:
     col1, col2, col3, col4, col5 = st.columns(5)
@@ -241,7 +238,7 @@ if kpi:
     col4.metric("Web Sitesi", f"{kpi.get('web', 0):,}")
     col5.metric("NACE", f"{kpi.get('nace', 0):,}")
     
-    # Ä°kinci satÄ±r
+    # İkinci satır
     col6, col7, col8, col9, col10 = st.columns(5)
     col6.metric("Telefon", f"{kpi.get('tel', 0):,}")
     col7.metric("E-posta", f"{kpi.get('email', 0):,}")
@@ -249,7 +246,7 @@ if kpi:
     col9.metric("Parsel", f"{kpi.get('parsel', 0):,}")
     col10.metric("tax_number", f"{kpi.get('tax', 0):,}")
 
-    st.subheader("ğŸ“Š Alan Doluluk OranlarÄ±")
+    st.subheader("📊 Alan Doluluk Oranları")
     fields = {
         "Telefon": kpi.get("tel", 0),
         "E-posta": kpi.get("email", 0),
@@ -268,46 +265,46 @@ if kpi:
     st.bar_chart(chart_df.set_index("alan")["oran"], use_container_width=True)
     
     # ASO ingest durumu
-    st.subheader("ğŸ“¥ ASO Ingest Durumu")
+    st.subheader("📥 ASO Ingest Durumu")
     try:
         with engine.connect() as conn:
             aso_total = conn.execute(text("""
                 SELECT COUNT(*) FROM source_records sr
                 WHERE sr.source_id = (SELECT source_id FROM sources WHERE source_name = 'aso.org.tr' LIMIT 1)
             """)).scalar()
-            st.info(f"ASO kayÄ±tlarÄ±: {aso_total} | Toplam firma: {total:,} | Kalite skoru: {kpi.get('avg_score', 0):.1f}/100")
+            st.info(f"ASO kayıtları: {aso_total} | Toplam firma: {total:,} | Kalite skoru: {kpi.get('avg_score', 0):.1f}/100")
     except Exception as e:
-        st.warning(f"ASO durumu yÃ¼klenemedi: {e}")
+        st.warning(f"ASO durumu yüklenemedi: {e}")
 
-# GÃ¶rev tahtasÄ±
-st.subheader("ğŸ“‹ GÃ¶rev TahtasÄ±")
+# Görev tahtası
+st.subheader("📋 Görev Tahtası")
 tasks_df = load_tasks()
 if not tasks_df.empty:
     st.dataframe(tasks_df, use_container_width=True, hide_index=True)
 else:
-    st.info("GÃ¶rev bulunamadÄ±.")
+    st.info("Görev bulunamadı.")
 
 # Ajan aktivite logu
-st.subheader("ğŸ¤– Ajan Aktivite Logu")
+st.subheader("🤖 Ajan Aktivite Logu")
 handoffs_df = load_handoffs()
 if not handoffs_df.empty:
     st.dataframe(handoffs_df, use_container_width=True, hide_index=True)
 else:
-    st.info("HenÃ¼z handoff kaydÄ± yok.")
+    st.info("Henüz handoff kaydı yok.")
 
-# Dosya yollarÄ±
-st.subheader("ğŸ“ Veri DosyalarÄ±")
+# Dosya yolları
+st.subheader("📁 Veri Dosyaları")
 st.markdown(f"""
 - **Task board:** `{ROOT / 'data/orchestrator/task_board.json'}`
-- **GÃ¶rev panosu:** `{ROOT / 'data/orchestrator/gorev_panosu.md'}`
+- **Görev panosu:** `{ROOT / 'data/orchestrator/gorev_panosu.md'}`
 - **AGENT_SYNC:** `{ROOT / 'AGENT_SYNC.md'}`
 - **KPI raporu:** `{ROOT / 'data/kpi_raporu.md'}`
-- **OSTÄ°M detay:** `{ROOT / 'data/ostim/firmalar_detayli.jsonl'}`
+- **OSTİM detay:** `{ROOT / 'data/ostim/firmalar_detayli.jsonl'}`
 - **ASO verisi:** `{ROOT / 'data/aso/aso_full.jsonl'}`
 """)
 
 # Firma tablosu (sidebar filtreleri ile)
-st.subheader("ğŸ¢ Firma Listesi")
+st.subheader("🏢 Firma Listesi")
 @st.cache_data(ttl=30)
 def load_companies(search="", min_score=0, max_score=100, limit=200):
     api_params = {
@@ -367,118 +364,113 @@ def load_companies(search="", min_score=0, max_score=100, limit=200):
 companies = load_companies(search_query, score_min, score_max)
 if companies:
     df = pd.DataFrame(companies)
-    df.columns = ["Firma AdÄ±", "Ticaret AdÄ±", "Web", "Telefon", "E-posta", "VKN", "Vergi No", "NACE", "Skor"]
+    df.columns = ["Firma Adı", "Ticaret Adı", "Web", "Telefon", "E-posta", "VKN", "Vergi No", "NACE", "Skor"]
     st.dataframe(df, use_container_width=True, hide_index=True)
-    st.caption(f"Toplam {len(companies)} firma gÃ¶steriliyor (skor {score_min}-{score_max})")
+    st.caption(f"Toplam {len(companies)} firma gösteriliyor (skor {score_min}-{score_max})")
 else:
-    st.info("Filtrelerle eÅŸleÅŸen firma bulunamadÄ±.")
+    st.info("Filtrelerle eşleşen firma bulunamadı.")
 
-# --- P7-19: SSE GerÃ§ek ZamanlÄ± Bildirimler ---
+# --- P7-19: SSE Gerçek Zamanlı Bildirimler ---
 webhook_stats = {}
 try:
     webhook_stats = load_webhook_stats()
 except Exception as e:
     st.warning(f"Webhook istatistikleri yuklenemedi: {e}")
-st.subheader("ğŸ”” GerÃ§ek ZamanlÄ± Bildirimler")
+st.subheader("🔔 Gerçek Zamanlı Bildirimler")
 if webhook_stats:
     notif_col1, notif_col2, notif_col3, notif_col4 = st.columns(4)
     with notif_col1:
-        st.metric("âœ… BaÅŸarÄ±lÄ± Olay", webhook_stats["basarili"])
+        st.metric("✅ Başarılı Olay", webhook_stats["basarili"])
     with notif_col2:
-        st.metric("âŒ HatalÄ± Olay", webhook_stats["hatali"])
+        st.metric("❌ Hatalı Olay", webhook_stats["hatali"])
     with notif_col3:
-        st.metric("â³ Ã‡alÄ±ÅŸan", webhook_stats["calisan"])
+        st.metric("⏳ Çalışan", webhook_stats["calisan"])
     with notif_col4:
-        st.metric("ğŸ“¦ DLQ (Hata KuyruÄŸu)", webhook_stats["dlq_toplam"])
+        st.metric("📦 DLQ (Hata Kuyruğu)", webhook_stats["dlq_toplam"])
     if webhook_stats["son_olay"]:
         st.caption(f"Son olay: {webhook_stats['son_olay']}")
     if webhook_stats["hatali"] > 0 or webhook_stats["dlq_toplam"] > 0:
-        st.warning(f"âš ï¸ {webhook_stats['hatali']} hatalÄ± olay + {webhook_stats['dlq_toplam']} DLQ kaydÄ± incelemeyi bekliyor")
+        st.warning(f"⚠️ {webhook_stats['hatali']} hatalı olay + {webhook_stats['dlq_toplam']} DLQ kaydı incelemeyi bekliyor")
     else:
-        st.success("âœ… Sistem saÄŸlÄ±klÄ± â€” yeni bildirim yok")
+        st.success("✅ Sistem sağlıklı — yeni bildirim yok")
 else:
-    st.info("Bildirim verisi bulunamadÄ±")
+    st.info("Bildirim verisi bulunamadı")
 
 # --- P7-20: Admin Panel ---
-st.subheader("âš™ï¸ Admin Panel")
-admin_tab_login = st.tabs(["🔐 Admin Girişi"])
-admin_tab1, admin_tab2, admin_tab3, admin_tab4, admin_tab5 = st.tabs(["📊 Sistem Durumu", "🔑 API Yönetimi", "📋 Webhook Metrikleri", "📋 Karar Defteri", "👥 Kullanıcı Yönetimi"])
+st.subheader("⚙️ Admin Panel")
+admin_tab1, admin_tab2, admin_tab3 = st.tabs(["📊 Sistem Durumu", "🔑 API Yönetimi", "📋 Webhook Metrikleri"])
 if kpi is None or not kpi:
     kpi = load_kpi()
 with admin_tab1:
     sys_col1, sys_col2, sys_col3, sys_col4 = st.columns(4)
     with sys_col1:
-        st.metric("Toplam Firma", f"{kpi.get('total', 0):,}" if kpi else "â€”")
+        st.metric("Toplam Firma", f"{kpi.get('total', 0):,}" if kpi else "—")
     with sys_col2:
-        st.metric("Ort. Kalite", f"{kpi.get('avg_score', 0):.1f}" if kpi else "â€”")
+        st.metric("Ort. Kalite", f"{kpi.get('avg_score', 0):.1f}" if kpi else "—")
     with sys_col3:
-        st.metric("VKN Doluluk", f"%{kpi.get('vkn_either', 0) / max(kpi.get('total', 1), 1) * 100:.0f}" if kpi else "â€”")
+        st.metric("VKN Doluluk", f"%{kpi.get('vkn_either', 0) / max(kpi.get('total', 1), 1) * 100:.0f}" if kpi else "—")
     with sys_col4:
         dlq_ok = (webhook_stats.get("dlq_toplam", 0) == 0) if webhook_stats else True
-        st.metric("Sistem Durumu", "ğŸŸ¢ SaÄŸlÄ±klÄ±" if dlq_ok else "ğŸŸ  Dikkat")
+        st.metric("Sistem Durumu", "🟢 Sağlıklı" if dlq_ok else "🟠 Dikkat")
 with admin_tab2:
-    render_api_management(token=get_admin_token())
+    st.markdown("""
+    **API Key Yönetimi** — yakında aktif olacak:
+    - Kullanıcı başına API key rotasyonu `/api/admin/rotate-key`
+    - Kullanım metrikleri `/api/admin/api-usage`
+    - Onay bekleyen kullanıcılar `/api/admin/pending`
+    """)
+    st.code("curl -H 'Authorization: Bearer <TOKEN>' http://localhost:8000/api/admin/api-usage")
 with admin_tab3:
     if webhook_stats:
         hata_df = pd.DataFrame(
-            [{"Hata TÃ¼rÃ¼": k, "Adet": v} for k, v in webhook_stats["hata_turleri"].items()]
-        ) if webhook_stats["hata_turleri"] else pd.DataFrame(columns=["Hata TÃ¼rÃ¼", "Adet"])
+            [{"Hata Türü": k, "Adet": v} for k, v in webhook_stats["hata_turleri"].items()]
+        ) if webhook_stats["hata_turleri"] else pd.DataFrame(columns=["Hata Türü", "Adet"])
         if not hata_df.empty:
-            st.bar_chart(hata_df.set_index("Hata TÃ¼rÃ¼"), use_container_width=True)
+            st.bar_chart(hata_df.set_index("Hata Türü"), use_container_width=True)
         else:
-            st.info("Webhook metrikleri: hata kaydÄ± yok â€” sistem temiz")
+            st.info("Webhook metrikleri: hata kaydı yok — sistem temiz")
         met_col1, met_col2 = st.columns(2)
         with met_col1:
-            st.metric("Toplam Webhook OlayÄ±", webhook_stats["olay_toplam"])
+            st.metric("Toplam Webhook Olayı", webhook_stats["olay_toplam"])
         with met_col2:
-            st.metric("Hata OranÄ±", f"%{webhook_stats['hatali'] / max(webhook_stats['olay_toplam'], 1) * 100:.1f}")
+            st.metric("Hata Oranı", f"%{webhook_stats['hatali'] / max(webhook_stats['olay_toplam'], 1) * 100:.1f}")
     else:
-        st.info("Webhook metrikleri yakÄ±nda aktif olacak")
+        st.info("Webhook metrikleri yakında aktif olacak")
 
-with admin_tab4:
-    render_decision_tab()
-
-with admin_tab_login[0]:
-    render_admin_login()
-
-with admin_tab5:
-    render_user_management(token=get_admin_token())
 # --- P7-21: Performans Metrikleri ---
-st.subheader("â±ï¸ Performans Metrikleri")
+st.subheader("⏱️ Performans Metrikleri")
 if st.session_state['perf_metrics'].get('page_load_start'):
     load_ms = (_time.perf_counter() - st.session_state['perf_metrics']['page_load_start']) * 1000
     perf_col1, perf_col2, perf_col3, perf_col4 = st.columns(4)
     with perf_col1:
-        st.metric("Sayfa YÃ¼kleme", f"{load_ms:.0f} ms")
+        st.metric("Sayfa Yükleme", f"{load_ms:.0f} ms")
     with perf_col2:
         st.metric("Webhook Olay", webhook_stats.get("olay_toplam", 0))
     with perf_col3:
         try:
             _toplam = webhook_stats.get("olay_toplam", 0)
             dlq_oran = webhook_stats.get("dlq_toplam", 0) / max(_toplam, 1) * 100
-            st.metric("DLQ Hata OranÄ±", f"%{dlq_oran:.1f}")
+            st.metric("DLQ Hata Oranı", f"%{dlq_oran:.1f}")
         except Exception:
-            st.metric("DLQ Hata OranÄ±", "%0")
+            st.metric("DLQ Hata Oranı", "%0")
     with perf_col4:
         st.metric("Cache TTL", "30 sn")
     try:
         trend_df = pd.DataFrame({
-            "kaynak": ["Olay", "BaÅŸarÄ±lÄ±", "HatalÄ±", "DLQ"],
+            "kaynak": ["Olay", "Başarılı", "Hatalı", "DLQ"],
             "adet": [
                 webhook_stats.get("olay_toplam", 0), webhook_stats.get("basarili", 0),
                 webhook_stats.get("hatali", 0), webhook_stats.get("dlq_toplam", 0),
             ],
         })
         if trend_df["adet"].sum() > 0:
-            st.caption("Webhook akÄ±ÅŸ daÄŸÄ±lÄ±mÄ±")
+            st.caption("Webhook akış dağılımı")
             st.bar_chart(trend_df.set_index("kaynak"), use_container_width=True)
     except Exception as e:
-        st.info(f"Grafik oluÅŸturulamadÄ±: {e}")
-    if st.button("ğŸ”„ Performans SayacÄ±nÄ± SÄ±fÄ±rla"):
+        st.info(f"Grafik oluşturulamadı: {e}")
+    if st.button("🔄 Performans Sayacını Sıfırla"):
         st.session_state['perf_metrics'] = {'response_time': 0, 'query_count': 0, 'cache_hits': 0, 'page_load_start': _time.perf_counter()}
         st.cache_data.clear()
         st.rerun()
 else:
-    st.info("Performans metrikleri burada gÃ¶rÃ¼necek")
-
-
+    st.info("Performans metrikleri burada görünecek")

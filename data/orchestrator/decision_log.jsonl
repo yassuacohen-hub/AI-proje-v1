@@ -4,3 +4,4 @@
 {"ts": "2026-09-03", "title": "MVP siniri: DB kurulumu kanitlanmadan web arayuzune gecilmez", "decision": "accepted", "decider": "user", "reason": "MVP kurali: veri tabani temel temizlik is akisi kanit gerekiyor", "tags": ["mvp", "v9"]}
 {"ts": "2026-09-10", "title": "Streamlit admin paneli web_app API kullanir, DB fallback var", "decision": "accepted", "decider": "mimar", "reason": "DASH-04: API first yaklasim; API hizmet veremezse DB fallback calisir", "tags": ["dashboard", "dash-04", "api"]}
 {"ts": "2026-09-10", "title": "Admin sifresi .streamlit/secrets.toml", "decision": "accepted", "decider": "user", "reason": "Gizli bilgiler .env ile yonetilir; secrets.toml lokal dev icin", "tags": ["admin", "security", "secrets"]}
+{"action": "orkestrator_rotasyonu", "kimden": "cline", "kime": "cline", "tetikleyici": "sahip", "ts": "2026-09-12T22:03:46+00:00", "gerekce": "İlk kayıt: mevcut durum tespiti (cline orkestratör, rotasyon sistemi devreye alındı)"}
