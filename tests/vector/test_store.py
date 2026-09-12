@@ -26,10 +26,11 @@ def test_store_upsert_ve_count():
 def test_store_query_en_yakin():
     store = EmbeddedVectorStore()
     store.upsert([
-        VectorDoc(id="benzer", vector=_v(1.0), metadata={"name": "benzer"}),
-        VectorDoc(id="uzak", vector=_v(0.1), metadata={"name": "uzak"}),
+        VectorDoc(id="benzer", vector=[1.0, 0.0, 0.0], metadata={"name": "benzer"}),
+        # uzak vektor soru vektoruyle neredeyse dik -> dusuk cosine
+        VectorDoc(id="uzak", vector=[0.1, 1.0, 0.0], metadata={"name": "uzak"}),
     ])
-    hits = store.query(_v(1.0), top_k=2)
+    hits = store.query([1.0, 0.0, 0.0], top_k=2)
     assert len(hits) == 2
     assert isinstance(hits[0], SearchHit)
     assert hits[0].id == "benzer"

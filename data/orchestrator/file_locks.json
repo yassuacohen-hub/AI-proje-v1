@@ -114,21 +114,6 @@
     "task_id": "OSINT-01",
     "kilitlendi": "2026-09-11T03:26:51"
   },
-  ".gitignore": {
-    "sahip": "cline",
-    "task_id": "GIT-01",
-    "kilitlendi": "2026-09-11T23:18:13"
-  },
-  "scripts/git_auto_push.bat": {
-    "sahip": "cline",
-    "task_id": "GIT-01",
-    "kilitlendi": "2026-09-11T23:18:14"
-  },
-  "scripts/quick_task.py": {
-    "sahip": "cline",
-    "task_id": "GIT-01",
-    "kilitlendi": "2026-09-11T23:18:14"
-  },
   "src/company_master/intelligence/job_intelligence/pipeline/analyzer.py": {
     "sahip": "roo_code",
     "task_id": "9R-03",
@@ -138,10 +123,5 @@
     "sahip": "roo_code",
     "task_id": "9R-04",
     "kilitlendi": "2026-09-11T23:53:16"
-  },
-  "tests/test_job_intelligence_e2e.py": {
-    "sahip": "kilo",
-    "task_id": "P7-16",
-    "kilitlendi": "2026-09-12T01:25:35"
   }
 }

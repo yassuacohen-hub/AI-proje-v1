@@ -45,7 +45,8 @@ TH_VEKTOR_POSSIBLE = 0.45
 
 # Onemsiz unvan takilari (unvan karsilastirmasinda elenir)
 _ONEMSIZ = ("anonim", "şirketi", "şirket", "limited", "ltd", "şti", "sanayi",
-            "ticaret", "trade", "industrial", "inc", "corp", "corp.", "holding")
+            "ticaret", "trade", "industrial", "inc", "corp", "corp.", "holding",
+            "ve", "ile")
 
 
 def _temiz_unvan(unvan: str) -> str:
@@ -55,7 +56,8 @@ def _temiz_unvan(unvan: str) -> str:
         return ""
     s = unvan.lower()
     s = re.sub(r"[^a-zçğıöşü0-9 ]", " ", s)
-    parcalar = [p for p in s.split() if p and p not in _ONEMSIZ]
+    # Tek karakterli kalintilar ('a.ş.' -> 'a', 'ş') ve onemsiz takilar elenir
+    parcalar = [p for p in s.split() if p and len(p) > 1 and p not in _ONEMSIZ]
     return " ".join(parcalar)
 
 

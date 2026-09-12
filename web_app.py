@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+﻿#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """FastAPI backend - Company Master Web Dashboard API (SQLite-uyumlu)."""
 
@@ -30,6 +30,18 @@ from company_master.intelligence.job_intelligence.api.router import (
 from company_master.orchestrator import task_board as tb  # noqa: E402
 from scripts.apify_webhook_receiver import ApifyWebhookReceiver  # noqa: E402
 
+# OpenTelemetry tracing
+try:
+    from opentelemetry import trace
+    from opentelemetry.sdk.trace import TracerProvider
+    from opentelemetry.sdk.trace.export import BatchSpanProcessor
+    from opentelemetry.exporter.jaeger.thrift import JaegerExporter
+    from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor
+    from opentelemetry.instrumentation.requests import RequestsInstrumentor
+    OTEL_AVAILABLE = True
+except ImportError:
+    OTEL_AVAILABLE = False
+
 # Query profiler
 import time as _perf_time
 
@@ -51,9 +63,9 @@ def _profile_query(name, fn):
     return result
 
 
-# ── ANA KURAL: Firma ad normalizasyonu (V10/09_kurallar_ve_promptlar/11_unvan_kisaltma_ve_tabela_kurallari) ──
+# â”€â”€ ANA KURAL: Firma ad normalizasyonu (V10/09_kurallar_ve_promptlar/11_unvan_kisaltma_ve_tabela_kurallari) â”€â”€
 # Kural 1: Firma adlari her zaman BUYUK HARFLE yazilir
-# Kural 2: Uzun ifadeler standart kisaltilir (SANAYİ VE TİCARET → SAN. VE TİC.)
+# Kural 2: Uzun ifadeler standart kisaltilir (SANAYİ VE TİCARET â†’ SAN. VE TİC.)
 # Kural 3: Tabela ismi = ilgi alanı/marka (ilk 2-3 kelime, VE/Şirket Turu/Faaliyet filtrelenerek)
 
 import re as _re
@@ -107,7 +119,7 @@ def _tr_rx_soft_end(phrase: str) -> str:
     return r"(?<!\w)" + _tr_insensitive(_re.escape(phrase)) + r"(?!\w)"
 
 
-# Standart Kısaltmalar Sozlugu — kaynak: AI proje v1/V10/09_kurallar_ve_promptlar/
+# Standart Kısaltmalar Sozlugu â€” kaynak: AI proje v1/V10/09_kurallar_ve_promptlar/
 # 11_unvan_kisaltma_ve_tabela_kurallari.md (Bolum 2). Degerler Turkce karakterlidir.
 # ANAHTARLAR ASCII (upper() sonrasi); _tr_insensitive sayesinde İ/ı varyantlari da eslesir.
 _COMPANY_TYPE_ABBR = {
@@ -330,7 +342,7 @@ def _clean_double_dots(name: str) -> str:
     return name
 
 
-# ── KVKK PII maskeleme yardimcileri (Y7) ──
+# â”€â”€ KVKK PII maskeleme yardimcileri (Y7) â”€â”€
 def _mask_email(email) -> str:
     """ahmet@gmail.com -> ah***@gmail.com (KVKK veri minimizasyonu)."""
     if not email or "@" not in str(email):
@@ -455,7 +467,7 @@ _TRADE_NAME_STOP_HARD = frozenset(
         "KOBI",
     }
 )
-# SOFT: yalnizca KISALTMALAR (ELEK., INŞ., MAK. vb.) — tam faaliyet kelimeleri
+# SOFT: yalnizca KISALTMALAR (ELEK., INŞ., MAK. vb.) â€” tam faaliyet kelimeleri
 # (ELEKTRIK, INSAAT, MOBILYA...) bilerek SOFT'ta DEGIL: tabelanin parcasi
 # olarak korunurlar. Ornek: "DÜNDAR ELEKTRİK SANAYİ" -> "DÜNDAR ELEKTRİK"
 _TRADE_NAME_STOP_SOFT = frozenset(
@@ -583,7 +595,7 @@ def normalize_company(row: dict) -> dict:
     return row
 
 
-# ── Turkce case-insensitive arama destegi ──
+# â”€â”€ Turkce case-insensitive arama destegi â”€â”€
 # PostgreSQL LOWER() Turkce karakterleri dogru kucultmez (I->i, ama İ->i degil).
 # Bu yuzden arama terimini ve karsilastirma alanlarini ASCII'ye yaklastiriyoruz.
 _TR_LOWER_MAP = str.maketrans(
@@ -618,8 +630,26 @@ def tr_normalize(s: str) -> str:
 # Dashboard performance counters
 
 app = FastAPI(title="Company Master Dashboard API", version="1.0")
+if OTEL_AVAILABLE:
+    # Set up tracer provider
+    trace.set_tracer_provider(TracerProvider())
+    tracer = trace.get_tracer(__name__)
+    # Configure Jaeger exporter (optional, can be configured via env)
+    jaeger_host = os.getenv("JAEGER_HOST", "localhost")
+    jaeger_port = int(os.getenv("JAEGER_PORT", "6831"))
+    jaeger_exporter = JaegerExporter(
+        agent_host_name=jaeger_host,
+        agent_port=jaeger_port,
+    )
+    trace.get_tracer_provider().add_span_processor(
+        BatchSpanProcessor(jaeger_exporter)
+    )
+    # Instrument FastAPI
+    FastAPIInstrumentor.instrument_app(app)
+    # Instrument requests library (for outbound HTTP calls)
+    RequestsInstrumentor().instrument()
 
-# ── API Key Auth & Rate Limiting (Y6) ──
+# â”€â”€ API Key Auth & Rate Limiting (Y6) â”€â”€
 # DASH_API_KEY env'de tanimliysa zorunlu, degilse dev modu (herkese acik).
 # Frontend dashboard'a ?api_key=KEY ile erisince key otomatik tasinir.
 DASH_API_KEY = os.getenv("DASH_API_KEY", "").strip()
@@ -627,7 +657,7 @@ _auth_banner = (
     "API key zorunlu degil (dev modu)" if not DASH_API_KEY else "API key korumasi AKTIF"
 )
 
-# ── KVKK PII Maskeleme (Y7) ──
+# â”€â”€ KVKK PII Maskeleme (Y7) â”€â”€
 # DASH_MASK_PII=1 ise TUM PII maskelemeli doner (musteri preview modu).
 # Endpoint bazinda ?mask=1 ile istek bazli da acilabilir (env'den bagimsiz).
 DASH_MASK_PII = os.getenv("DASH_MASK_PII", "0").strip() == "1"
@@ -1041,7 +1071,7 @@ def api_companies(
     elif source:
         source_list = [source.strip()] if source.strip() else []
 
-    # P4-4: cache hit — DB roundtrip'i tamamen atlar (TTL 300s)
+    # P4-4: cache hit â€” DB roundtrip'i tamamen atlar (TTL 300s)
     # Not: source_list yukarida hesaplandi; mask durumu anahtarda (maskeli/maskesiz ayri).
     import hashlib
 
@@ -1290,7 +1320,7 @@ def api_companies_export(
         )
 
 
-# ── Y19: V9 Smart Matching MVP ──────────────────────────────────────────────
+# â”€â”€ Y19: V9 Smart Matching MVP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 # NACE ana-grup komşuluk ağırlıkları (tamamlayıcı sektörler; 1.0 = aynı grup).
 # Kaynak: OSTIM/Ankara üretim zinciri kurgusu (montaj<-yan sanayi<-hammadde).
@@ -1473,7 +1503,7 @@ def api_match(
     - mode: komple (komşu sektörler dahil) | ayni (sadece aynı ana grup)
     - yon (Y22): tedarikci (varsayilan) | musteri (ters yon satis kanali) | rakip
       (sadece ayni grup; rakip analizi)
-    - user_token: onaylı kullanıcı tokenı → 1 kredi düşülür; kredi bittiyse
+    - user_token: onaylı kullanıcı tokenı â†’ 1 kredi düşülür; kredi bittiyse
       sonuçlar otomatik maskelenir + credit_pack önerisi döner
     """
     mode = mode if mode in ("komple", "ayni") else "komple"
@@ -1488,7 +1518,7 @@ def api_match(
             mask = 1  # kredi bitti: sonuc maskele (V8 Credit Exhaustion UX)
             credit_info = {
                 "credit_balance": 0,
-                "notice": "Krediniz tükendi — sonuçlar maskeli görüntüleniyor.",
+                "notice": "Krediniz tükendi â€” sonuçlar maskeli görüntüleniyor.",
                 "credit_pack": "750 TRY / 50 kredi (credit pack ile devam edebilirsiniz)",
             }
         else:
@@ -1593,7 +1623,7 @@ def api_match(
     }
 
 
-# ── Monetizasyon MVP (V7 Hybrid Credit) ─────────────────────────────────────
+# â”€â”€ Monetizasyon MVP (V7 Hybrid Credit) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 import hashlib
 import hmac
@@ -2023,7 +2053,7 @@ def api_buyer_login(req: dict):
     }
 
 
-# ── X04: Üyelik yardımcıları (şifre sıfırlama, e-posta doğrulama, Telegram) ───
+# â”€â”€ X04: Üyelik yardımcıları (şifre sıfırlama, e-posta doğrulama, Telegram) â”€â”€â”€
 import secrets
 import smtplib
 from email.mime.text import MIMEText
@@ -2158,7 +2188,7 @@ def _store_verify_token(email: str, token: str):
 
 @app.post("/api/buyer/reset-password-request")
 def api_buyer_reset_password_request(req: dict):
-    """Şifre sıfırlama isteği — e-posta alır, token üretir, e-posta/Telegram ile gönderir."""
+    """Şifre sıfırlama isteği â€” e-posta alır, token üretir, e-posta/Telegram ile gönderir."""
     email = (req.get("email") or "").strip().lower()
     if not email or "@" not in email:
         raise HTTPException(status_code=400, detail="geçerli e-posta girin")
@@ -2183,7 +2213,7 @@ def api_buyer_reset_password_request(req: dict):
         f"{os.getenv('APP_BASE_URL', 'http://localhost:8000')}/#reset-password/{token}"
     )
     html = f"""
-    <h2>Huginn Data Insights — Şifre Sıfırlama</h2>
+    <h2>Huginn Data Insights â€” Şifre Sıfırlama</h2>
     <p>Merhaba <b>{row['company_name'] or email}</b>,</p>
     <p>Şifre sıfırlama talebiniz alındı. Aşağıdaki linke tıklayarak yeni şifrenizi belirleyin:</p>
     <p><a href="{reset_url}" style="background:#3b82f6;color:#fff;padding:12px 24px;
@@ -2191,9 +2221,9 @@ def api_buyer_reset_password_request(req: dict):
     <p>Link 1 saat geçerlidir. Talebiniz değilselse bu e-postayı görmezden gelin.</p>
     <hr><small>Huginn Data Insights</small>
     """
-    _send_email(email, "Huginn — Şifre Sıfırlama", html)
+    _send_email(email, "Huginn â€” Şifre Sıfırlama", html)
     _send_telegram(
-        f"🔐 <b>Şifre Sıfırlama Talebi</b>\nE-posta: <code>{email}</code>\nFirma: {row['company_name'] or '-'}"
+        f"ğŸ” <b>Şifre Sıfırlama Talebi</b>\nE-posta: <code>{email}</code>\nFirma: {row['company_name'] or '-'}"
     )
     return {
         "ok": True,
@@ -2203,7 +2233,7 @@ def api_buyer_reset_password_request(req: dict):
 
 @app.post("/api/buyer/reset-password-confirm")
 def api_buyer_reset_password_confirm(req: dict):
-    """Şifre sıfırlama onayı — token + yeni şifre alır, doğrular, günceller."""
+    """Şifre sıfırlama onayı â€” token + yeni şifre alır, doğrular, günceller."""
     token = (req.get("token") or "").strip()
     new_password = req.get("new_password") or ""
     if not token:
@@ -2232,7 +2262,7 @@ def api_buyer_reset_password_confirm(req: dict):
             ),
             {"ph": _hash_password(new_password), "u": str(row["user_id"])},
         )
-    _send_telegram(f"✅ <b>Şifre Sıfırlandı</b>\nE-posta: <code>{row['email']}</code>")
+    _send_telegram(f"âœ… <b>Şifre Sıfırlandı</b>\nE-posta: <code>{row['email']}</code>")
     return {
         "ok": True,
         "message": "Şifreniz başarıyla güncellendi. Şimdi giriş yapabilirsiniz.",
@@ -2241,7 +2271,7 @@ def api_buyer_reset_password_confirm(req: dict):
 
 @app.post("/api/buyer/verify-email-request")
 def api_buyer_verify_email_request(req: dict):
-    """E-posta doğrulama isteği — kayıtlı kullanıcıya doğrulama linki gönderir."""
+    """E-posta doğrulama isteği â€” kayıtlı kullanıcıya doğrulama linki gönderir."""
     email = (req.get("email") or "").strip().lower()
     if not email or "@" not in email:
         raise HTTPException(status_code=400, detail="geçerli e-posta girin")
@@ -2270,7 +2300,7 @@ def api_buyer_verify_email_request(req: dict):
         f"{os.getenv('APP_BASE_URL', 'http://localhost:8000')}/#verify-email/{token}"
     )
     html = f"""
-    <h2>Huginn Data Insights — E-posta Doğrulama</h2>
+    <h2>Huginn Data Insights â€” E-posta Doğrulama</h2>
     <p>Merhaba <b>{row['company_name'] or email}</b>,</p>
     <p>Hesabınızı aktifleştirmek için aşağıdaki linke tıklayın:</p>
     <p><a href="{verify_url}" style="background:#10b981;color:#fff;padding:12px 24px;
@@ -2278,9 +2308,9 @@ def api_buyer_verify_email_request(req: dict):
     <p>Link 24 saat geçerlidir.</p>
     <hr><small>Huginn Data Insights</small>
     """
-    _send_email(email, "Huginn — E-posta Doğrulama", html)
+    _send_email(email, "Huginn â€” E-posta Doğrulama", html)
     _send_telegram(
-        f"📧 <b>E-posta Doğrulama Talebi</b>\nE-posta: <code>{email}</code>\nFirma: {row['company_name'] or '-'}"
+        f"ğŸ“§ <b>E-posta Doğrulama Talebi</b>\nE-posta: <code>{email}</code>\nFirma: {row['company_name'] or '-'}"
     )
     return {
         "ok": True,
@@ -2290,7 +2320,7 @@ def api_buyer_verify_email_request(req: dict):
 
 @app.get("/api/buyer/verify-email/{token}")
 def api_buyer_verify_email_confirm(token: str):
-    """E-posta doğrulama onayı — token doğrulanır, status 'onayli' yapılır."""
+    """E-posta doğrulama onayı â€” token doğrulanır, status 'onayli' yapılır."""
     engine = get_engine()
     with engine.begin() as conn:
         row = (
@@ -2328,16 +2358,16 @@ def api_buyer_verify_email_confirm(token: str):
                 {"u": str(row["user_id"]), "d": start_credit, "b": start_credit},
             )
     _send_telegram(
-        f"✅ <b>E-posta Doğrulandı</b>\nE-posta: <code>{row['email']}</code>\nTier: {new_tier} · Kredi: {start_credit}"
+        f"âœ… <b>E-posta Doğrulandı</b>\nE-posta: <code>{row['email']}</code>\nTier: {new_tier} Â· Kredi: {start_credit}"
     )
     welcome_text = (
-        f"🎉 <b>Hoş Geldiniz!</b>\n"
+        f"ğŸ‰ <b>Hoş Geldiniz!</b>\n"
         f"Firma: {row['company_name'] or row['email']}\n"
         f"Paket: <b>{new_tier.title()}</b>\n"
         f"Başlangıç Kredisi: <b>{start_credit}</b>\n\n"
-        f"🔍 Akıllı Eşleştirme ile tedarikçi/müşteri/rakip analizlerinizi başlatabilirsiniz.\n"
-        f"📊 Veri Sağlığı paneliyle veri kalitenizi takip edin.\n"
-        f"📚 Bilgi Merkezi'nden arama ipuçlarını inceleyin."
+        f"ğŸ” Akıllı Eşleştirme ile tedarikçi/müşteri/rakip analizlerinizi başlatabilirsiniz.\n"
+        f"ğŸ“Š Veri Sağlığı paneliyle veri kalitenizi takip edin.\n"
+        f"ğŸ“š Bilgi Merkezi'nden arama ipuçlarını inceleyin."
     )
     _send_telegram(welcome_text, _WELCOME_TELEGRAM_CHAT_ID)
     return {
@@ -2350,19 +2380,19 @@ def api_buyer_verify_email_confirm(token: str):
 
 @app.post("/api/buyer/welcome-telegram")
 def api_buyer_welcome_telegram(req: dict):
-    """Admin/uygulama tarafından çağrılır — onaylı kullanıcıya hoşgeldin Telegram mesajı."""
+    """Admin/uygulama tarafından çağrılır â€” onaylı kullanıcıya hoşgeldin Telegram mesajı."""
     token = (req.get("user_token") or "").strip()
     u = _user_from_token(token)
     if not u or u["status"] != "onayli":
         raise HTTPException(status_code=403, detail="sadece onaylı kullanıcılar için")
     text = (
-        f"🎉 <b>Huginn Data Insights'e Hoş Geldiniz!</b>\n"
+        f"ğŸ‰ <b>Huginn Data Insights'e Hoş Geldiniz!</b>\n"
         f"Firma: <b>{u['company_name']}</b>\n"
         f"Paket: <b>{u['tier'].title()}</b>\n"
         f"Kredi: <b>{u['credit_balance']}</b>\n\n"
-        f"🔍 Akıllı Eşleştirme: tedarikçi/müşteri/rakip analizi\n"
-        f"📊 Veri Sağlığı: veri kalitesi & kapsama\n"
-        f"📚 Bilgi Merkezi: arama ipuçları & CSV dışa aktarım\n\n"
+        f"ğŸ” Akıllı Eşleştirme: tedarikçi/müşteri/rakip analizi\n"
+        f"ğŸ“Š Veri Sağlığı: veri kalitesi & kapsama\n"
+        f"ğŸ“š Bilgi Merkezi: arama ipuçları & CSV dışa aktarım\n\n"
         f"Sorularınız için: <code>admin@huginn.local</code>"
     )
     sent = _send_telegram(text, _WELCOME_TELEGRAM_CHAT_ID)
@@ -2382,7 +2412,7 @@ def api_me(token: str = ""):
     return {"user": dict(u)}
 
 
-# ── Admin: onay kuyrugu + kredi yonetimi (DASH_API_KEY ile) ─────────────────
+# â”€â”€ Admin: onay kuyrugu + kredi yonetimi (DASH_API_KEY ile) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 
 def require_admin(
@@ -2894,3 +2924,4 @@ def api_intelligence_dashboard(
     out["recent_signals"] = rows
 
     return out
+

@@ -1,0 +1,74 @@
+[
+  {
+    "provider": "firecrawl",
+    "authType": "apikey",
+    "name": "FREECLAW KAZIMA",
+    "email": null,
+    "priority": 1,
+    "isActive": 1,
+    "updatedAt": "2026-09-12T00:24:42.065Z",
+    "data": {
+      "apiKey": "fc-d0f...3c22",
+      "testStatus": "active",
+      "providerSpecificData": {
+        "connectionProxyEnabled": false,
+        "connectionProxyUrl": "",
+        "connectionNoProxy": ""
+      }
+    }
+  },
+  {
+    "provider": "ollama",
+    "authType": "apikey",
+    "name": "router ollama",
+    "email": null,
+    "priority": 1,
+    "isActive": 1,
+    "updatedAt": "2026-09-12T00:41:32.553Z",
+    "data": {
+      "apiKey": "a3663b...9Vwr",
+      "testStatus": "unavailable",
+      "providerSpecificData": {
+        "connectionProxyEnabled": false,
+        "connectionProxyUrl": "",
+        "connectionNoProxy": ""
+      },
+      "modelLock_minimax-m3": null,
+      "lastError": "Ollama returned an empty or invalid web fetch response",
+      "errorCode": 502,
+      "lastErrorAt": "2026-09-12T00:41:32.553Z",
+      "backoffLevel": 0,
+      "modelLock_minimax-m2.5": null,
+      "modelLock_kimi-k2.5": null,
+      "modelLock_glm-4.7-flash": null,
+      "modelLock_glm-5": null,
+      "modelLock_qwen3.5": null,
+      "modelLock_gpt-oss:120b": null,
+      "rateLimitedUntil": null,
+      "modelLock_webfetch:ollama": "2026-09-12T00:42:02.552Z"
+    }
+  },
+  {
+    "provider": "tavily",
+    "authType": "apikey",
+    "name": "tailvy ilk key demo 1500 sorgu/ay",
+    "email": null,
+    "priority": 1,
+    "isActive": 1,
+    "updatedAt": "2026-09-12T00:17:04.156Z",
+    "data": {
+      "apiKey": "tvly-d...Q9x7",
+      "testStatus": "active",
+      "providerSpecificData": {
+        "connectionProxyEnabled": false,
+        "connectionProxyUrl": "",
+        "connectionNoProxy": ""
+      },
+      "lastError": null,
+      "lastErrorAt": null,
+      "errorCode": null,
+      "rateLimitedUntil": null,
+      "backoffLevel": 0
+    }
+  }
+]

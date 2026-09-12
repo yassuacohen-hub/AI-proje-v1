@@ -93,6 +93,12 @@ def main() -> int:
         return 1
     logger.info("Toplam %d satir okundu", len(rows))
 
+    # Pilot: index/embed (ag cagrisi) oncesinde VKN dublikasyon raporu.
+    # Boylece --vkn-rap kullanicisi bosuna 5040 kaydi 9Router'a embed etmez.
+    if args.vkn_rap is not None:
+        _vkn_raporu(rows, vkn_key=args.vkn_key, id_key=args.id_key)
+        return 0
+
     from src.company_master.vector import VectorService, EmbeddedVectorStore
 
     store = EmbeddedVectorStore(persist_dir=args.persist)
@@ -100,9 +106,6 @@ def main() -> int:
     n = svc.index_firmalar(rows, id_key=args.id_key)
     print(f"Indexlenen firma sayisi: {n}")
     print(f"ChromaDB koleksiyon sayisi: {store.count()}")
-
-    if args.vkn_rap is not None:
-        _vkn_raporu(rows, vkn_key=args.vkn_key, id_key=args.id_key)
 
     return 0
 

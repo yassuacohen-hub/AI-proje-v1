@@ -12,6 +12,7 @@ V9 3.3 ChromaDB Vector Architecture referansi:
 from __future__ import annotations
 
 import logging
+import os
 import math
 from dataclasses import dataclass, field
 from typing import Any, Iterable
@@ -27,6 +28,34 @@ try:
 except ImportError:  # pragma: no cover
     chromadb = None  # type: ignore[assignment]
     CHROMADB_AVAILABLE = False
+
+# OpenTelemetry tracing
+try:
+    from opentelemetry import trace
+    from opentelemetry.sdk.trace import TracerProvider
+    from opentelemetry.sdk.trace.export import BatchSpanProcessor
+    from opentelemetry.exporter.jaeger.thrift import JaegerExporter
+    from opentelemetry.instrumentation.requests import RequestsInstrumentor
+    OTEL_AVAILABLE = True
+except ImportError:
+    OTEL_AVAILABLE = False
+
+if OTEL_AVAILABLE:
+    trace.set_tracer_provider(TracerProvider())
+    tracer = trace.get_tracer(__name__)
+    jaeger_host = os.getenv("JAEGER_HOST", "localhost")
+    jaeger_port = int(os.getenv("JAEGER_PORT", "6831"))
+    jaeger_exporter = JaegerExporter(
+        agent_host_name=jaeger_host,
+        agent_port=jaeger_port,
+    )
+    trace.get_tracer_provider().add_span_processor(
+        BatchSpanProcessor(jaeger_exporter)
+    )
+    RequestsInstrumentor().instrument()
+else:
+    tracer = None
+
 
 
 @dataclass
@@ -68,6 +97,7 @@ class EmbeddedVectorStore:
         self._coll: Any | None = None
         self._memory: dict[str, VectorDoc] = {}
         self._in_memory = not CHROMADB_AVAILABLE and chroma_client is None
+        self.tracer = tracer
         if self._in_memory:
             logger.info(
                 "ChromaDB kurulu degil; in-memory fallback kullanilacak "
@@ -102,34 +132,65 @@ class EmbeddedVectorStore:
 
     # ---- yazma ----
     def upsert(self, docs: Iterable[VectorDoc]) -> int:
-        """Dokumanlari koleksiyona yazar; eklenen sayisini dondurur."""
-        items = list(docs)
-        if not items:
-            return 0
-        coll = self.collection
-        if coll is None:
-            # in-memory fallback
-            for d in items:
-                self._memory[d.id] = d
-            return len(items)
-
-        # boyut kontrolu (ilk gorselde dogrula)
-        dim = len(items[0].vector)
-        if dim != self.dimension:
-            logger.warning(
-                "Boyut uyumsuz: beklenen %d, gelen %d — %d ile devam",
-                self.dimension, dim, dim,
+        if self.tracer is not None:
+            with self.tracer.start_as_current_span("EmbeddedVectorStore.upsert"):
+                        """Dokumanlari koleksiyona yazar; eklenen sayisini dondurur."""
+                        items = list(docs)
+                        if not items:
+                            return 0
+                        coll = self.collection
+                        if coll is None:
+                            # in-memory fallback
+                            for d in items:
+                                self._memory[d.id] = d
+                            return len(items)
+                
+                        # boyut kontrolu (ilk gorselde dogrula)
+                        dim = len(items[0].vector)
+                        if dim != self.dimension:
+                            logger.warning(
+                                "Boyut uyumsuz: beklenen %d, gelen %d — %d ile devam",
+                                self.dimension, dim, dim,
+                            )
+                        self._dim = dim
+                
+                        coll.upsert(
+                            ids=[d.id for d in items],
+                            embeddings=[d.vector for d in items],
+                            metadatas=[d.metadata for d in items],
+                        )
+                        return len(items)
+                
+                    # ---- sorgulama ----
+        else:
+            """Dokumanlari koleksiyona yazar; eklenen sayisini dondurur."""
+            items = list(docs)
+            if not items:
+                return 0
+            coll = self.collection
+            if coll is None:
+                # in-memory fallback
+                for d in items:
+                    self._memory[d.id] = d
+                return len(items)
+    
+            # boyut kontrolu (ilk gorselde dogrula)
+            dim = len(items[0].vector)
+            if dim != self.dimension:
+                logger.warning(
+                    "Boyut uyumsuz: beklenen %d, gelen %d — %d ile devam",
+                    self.dimension, dim, dim,
+                )
+            self._dim = dim
+    
+            coll.upsert(
+                ids=[d.id for d in items],
+                embeddings=[d.vector for d in items],
+                metadatas=[d.metadata for d in items],
             )
-        self._dim = dim
-
-        coll.upsert(
-            ids=[d.id for d in items],
-            embeddings=[d.vector for d in items],
-            metadatas=[d.metadata for d in items],
-        )
-        return len(items)
-
-    # ---- sorgulama ----
+            return len(items)
+    
+        # ---- sorgulama ----
     def query(
         self,
         vector: list[float],

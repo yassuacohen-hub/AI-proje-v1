@@ -1,0 +1,97 @@
+#!/usr/bin/env python3
+"""ORCH-04: Bayat dosya kilidi temizligi (idempotent bakim scripti).
+
+file_locks.json'daki kilitleri task_board.json ile karsilastirir:
+- task_id panoda YOK        -> bayat (gorev silinmis/pano yenilenmis)
+- task_id durumu "done"     -> bayat (is bitmis, kilit birakilmamis)
+- diger (aktif/plan/blocked/review) -> GECERLI, dokunulmaz
+
+Kullanim:
+    python scripts/kilit_temizligi.py             # temizle + rapor
+    python scripts/kilit_temizligi.py --dry-run   # sadece rapor, degisiklik yok
+
+Cikti UTF-8 (Turkce). Cikis kodu: 0 (temiz/basarili), 1 (hata).
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+KOK = Path(__file__).resolve().parents[1]
+PANO = KOK / "data" / "orchestrator" / "task_board.json"
+KILITLER = KOK / "data" / "orchestrator" / "file_locks.json"
+
+
+def oku(yol: Path):
+    return json.loads(yol.read_text(encoding="utf-8-sig"))
+
+
+def yaz(yol: Path, veri) -> None:
+    # task_board.atomic_write_text ile ayni desen (bagimsiz script)
+    import os
+
+    tmp = yol.parent / f".{yol.name}.{os.getpid()}.tmp"
+    try:
+        tmp.write_text(json.dumps(veri, ensure_ascii=False, indent=2), encoding="utf-8")
+        os.replace(tmp, yol)
+    finally:
+        if tmp.exists():
+            tmp.unlink(missing_ok=True)
+
+
+def main() -> int:
+    p = argparse.ArgumentParser(description="Bayat dosya kilidi temizligi")
+    p.add_argument("--dry-run", action="store_true", help="Sadece rapor, degisiklik yok")
+    args = p.parse_args()
+
+    pano_durum = {t["task_id"]: t["durum"] for t in oku(PANO)}
+    kilitler = oku(KILITLER)
+
+    bayat: list[tuple[str, str, str, str]] = []
+    gecerli: list[tuple[str, str, str, str]] = []
+    for dosya, bilgi in kilitler.items():
+        tid = bilgi.get("task_id", "")
+        sahip = bilgi.get("sahip", "?")
+        st = pano_durum.get(tid, "PANODA_YOK")
+        hedef = (dosya, sahip, tid, st)
+        (bayat if st in ("done", "PANODA_YOK") else gecerli).append(hedef)
+
+    print(f"Kilit sayisi: {len(kilitler)} | bayat: {len(bayat)} | gecerli: {len(gecerli)}")
+    if bayat:
+        print("--- BAYAT (birakilacak) ---")
+        for d, s, t, st in bayat:
+            print(f"  {d[:70]} | {s} | {t} | {st}")
+    if gecerli:
+        print("--- GECERLI (korunacak) ---")
+        for d, s, t, st in gecerli:
+            print(f"  {d[:70]} | {s} | {t} | {st}")
+
+    if args.dry_run:
+        print("[dry-run] degisiklik yapilmadi")
+        return 0
+
+    if not bayat:
+        print("Temiz: birakilacak bayat kilit yok")
+        return 0
+
+    for d, s, t, _st in bayat:
+        del kilitler[d]
+    yaz(KILITLER, kilitler)
+    print(f"{len(bayat)} bayat kilit birakildi; kalan: {len(kilitler)}")
+
+    # AGENT_SYNC otomatik tazelensin (hook ile ayni davranis)
+    try:
+        sys.path.insert(0, str(KOK / "src"))
+        from company_master.orchestrator.task_board import agent_sync_yaz
+
+        agent_sync_yaz()
+        print("AGENT_SYNC tazelendi")
+    except Exception as exc:  # noqa: BLE001 - temizlik islemini bloklamamali
+        print(f"[uyari] AGENT_SYNC tazeleme basarisiz: {exc}", file=sys.stderr)
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

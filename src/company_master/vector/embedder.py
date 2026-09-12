@@ -17,9 +17,13 @@ logger = logging.getLogger(__name__)
 DEFAULT_EMBED_MODEL = "openrouter/openai/text-embedding-3-small"
 
 try:  # 9Router istemcisi opsiyonel
-    from company_master.gateway.ninerouter_client import get_client
+    # Önce src-root deseni (pytest/src.company_master), sonra eski desen
+    from src.company_master.gateway.ninerouter_client import get_client
 except ImportError:  # pragma: no cover
-    get_client = None  # type: ignore[assignment]
+    try:
+        from company_master.gateway.ninerouter_client import get_client
+    except ImportError:
+        get_client = None  # type: ignore[assignment]
 
 
 @dataclass
@@ -97,7 +101,11 @@ class Embedder:
         return EmbeddingResult(embeddings=out, model=self.model, errors=errors)
 
     def _embed_chunk(self, chunk: list[str]) -> list[list[float]]:
-        """Tek batch'lik embed; retry mantigi."""
+        """Tek batch'lik embed; retry mantigi.
+
+        Sistem hatasi (istemci kurulu degil) icin retry/anlamsizdir — hizli
+        basarisiz olur. Geçici ag hatalari (VPN/timeout) icin ustel backoff.
+        """
         last_exc: Exception | None = None
         for attempt in range(1, self.max_retries + 1):
             try:
@@ -105,6 +113,9 @@ class Embedder:
                 return raw if isinstance(raw, list) else list(raw.get("embeddings", []))
             except Exception as exc:  # noqa: BLE001
                 last_exc = exc
+                if type(exc).__name__ == "RuntimeError" and "kurulu degil" in str(exc):
+                    # sistem hatasi: retry boşuna bekleme yapar, hizli fail
+                    break
                 if attempt < self.max_retries:
                     logger.warning(
                         "embed retry %d/%d: %s", attempt, self.max_retries, exc

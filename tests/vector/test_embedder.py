@@ -61,6 +61,24 @@ def test_embed_batch_tukenince_hata():
     assert any("VPN" in d for _, d in res.errors)
 
 
+def test_embed_sistem_hatasi_hizli_fail_retry_yok():
+    """Istemci kurulu degil (sistem hatasi) -> 1 hata kaydi, retry beklenmez."""
+
+    class YokClient:
+        def embed(self, texts, model=""):
+            raise RuntimeError(
+                "9Router istemcisi kurulu degil; once .env'de NINEROUTER_* "
+                "ve requirements kurulumu gerekli."
+            )
+
+    embedder = Embedder(client=YokClient(), batch_size=2, max_retries=3,
+                        retry_delay_s=0.0)
+    res = embedder.embed(["a", "b", "c", "d"])
+    assert res.ok_count == 0
+    assert res.failed_count == 4
+    assert all("kurulu degil" in d for _, d in res.errors)
+
+
 def test_embed_sonuc_dict_ve_embeddings_ayristir():
     """Client dict donerse embeddings anahtari kullanilir."""
 

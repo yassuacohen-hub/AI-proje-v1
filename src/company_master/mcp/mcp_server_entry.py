@@ -8,9 +8,9 @@ using the mcp Python package (pip install mcp). Supports two transports:
 - HTTP:   python -m company_master.mcp.mcp_server_entry http --port 8000
 
 The server exposes the following tools:
-  Apify:    apify_list_actors, apify_run_actor, apify_get_dataset
-  Huginn:   get_source_policy, get_collection_run_status,
-            submit_evidence_batch, report_collection_failure
+Apify:    apify_list_actors, apify_run_actor, apify_get_dataset
+Huginn:   get_source_policy, get_collection_run_status,
+submit_evidence_batch, report_collection_failure
 
 All tools are gated by the PolicyEngine (whitelist, spend limits, data limits).
 """
@@ -21,6 +21,7 @@ import argparse
 import asyncio
 import logging
 import sys
+import os
 from pathlib import Path
 from typing import Any, Optional
 
@@ -35,6 +36,31 @@ from company_master.mcp.huginn_server import HuginnMCPServer  # noqa: E402
 
 logger = logging.getLogger(__name__)
 
+# OpenTelemetry tracing
+try:
+    from opentelemetry import trace
+    from opentelemetry.sdk.trace import TracerProvider
+    from opentelemetry.sdk.trace.export import BatchSpanProcessor
+    from opentelemetry.exporter.jaeger.thrift import JaegerExporter
+    from opentelemetry.instrumentation.requests import RequestsInstrumentor
+    OTEL_AVAILABLE = True
+except ImportError:
+    OTEL_AVAILABLE = False
+
+if OTEL_AVAILABLE:
+    trace.set_tracer_provider(TracerProvider())
+    tracer = trace.get_tracer(__name__)
+    jaeger_host = os.getenv("JAEGER_HOST", "localhost")
+    jaeger_port = int(os.getenv("JAEGER_PORT", "6831"))
+    jaeger_exporter = JaegerExporter(
+        agent_host_name=jaeger_host,
+        agent_port=jaeger_port,
+    )
+    trace.get_tracer_provider().add_span_processor(
+        BatchSpanProcessor(jaeger_exporter)
+    )
+    RequestsInstrumentor().instrument()
+
 INSTRUCTIONS = (
     "Huginn B2B Intelligence MCP Server. "
     "Apify scraping ve Huginn veri erişim araçları. "
@@ -43,119 +69,119 @@ INSTRUCTIONS = (
 
 
 def create_mcp_server(
-    apify_adapter: Optional[ApifyAdapter] = None,
-    huginn_server: Optional[HuginnMCPServer] = None,
-) -> MCPServer:
-    """Create an MCPServer with Apify + Huginn tools registered.
-
-    Args:
+        apify_adapter: Optional[ApifyAdapter] = None,
+        huginn_server: Optional[HuginnMCPServer] = None,
+    ) -> MCPServer:
+        """Create an MCPServer with Apify + Huginn tools registered.
+    
+        Args:
         apify_adapter: Pre-configured ApifyAdapter (or None for default).
         huginn_server: Pre-configured HuginnMCPServer (or None for default).
-    """
-    server = MCPServer(
-        name="huginn-mcp",
-        version="1.0.0",
-        title="Huginn MCP Server",
-        description="Huginn B2B Intelligence - Apify ve Huginn verilerine MCP erişimi",
-        instructions=INSTRUCTIONS,
-    )
-
-    adapter = apify_adapter or ApifyAdapter(policy_engine=PolicyEngine())
-    huginn = huginn_server or HuginnMCPServer(policies=PolicyEngine())
-
-    # -- Apify tools --
-
-    @server.tool(
-        name="apify_list_actors",
-        title="List Apify Actors",
-        description="Whitelist listesindeki Apify actorlarini ve harcama limitlerini listeler.",
-    )
-    async def handle_apify_list_actors() -> dict[str, Any]:
-        return adapter.apify_list_actors().to_dict()
-
-    @server.tool(
-        name="apify_run_actor",
-        title="Run Apify Actor",
-        description="Whitelist listesindeki bir Apify actorunu calistirir ve sonuclari getirir.",
-    )
-    async def handle_apify_run_actor(
-        actor_id: str,
-        run_input: Optional[dict[str, Any]] = None,
-        max_items: Optional[int] = None,
-        max_charge_usd: Optional[float] = None,
-    ) -> dict[str, Any]:
-        return adapter.apify_run_actor(
-            actor_id=actor_id,
-            run_input=run_input,
-            max_items=max_items,
-            max_charge_usd=max_charge_usd,
-        ).to_dict()
-
-    @server.tool(
-        name="apify_get_dataset",
-        title="Get Apify Dataset",
-        description="Bir Apify datasetini okur (policy kontrolu ile).",
-    )
-    async def handle_apify_get_dataset(
-        dataset_id: str,
-        max_items: Optional[int] = None,
-        clean: bool = True,
-    ) -> dict[str, Any]:
-        return adapter.apify_get_dataset(
-            dataset_id=dataset_id,
-            max_items=max_items,
-            clean=clean,
-        ).to_dict()
-
-    # -- Huginn tools --
-
-    @server.tool(
-        name="get_source_policy",
-        title="Get Source Policy",
-        description="Bir veri kaynaginin izin politikasini getirir (KVKK, domain whitelist, rate limit, NACE scope).",
-    )
-    async def handle_get_source_policy(source_id: str) -> dict[str, Any]:
-        return huginn.get_source_policy(source_id=source_id).to_dict()
-
-    @server.tool(
-        name="get_collection_run_status",
-        title="Get Collection Run Status",
-        description="Veri toplama run durumunu getirir.",
-    )
-    async def handle_get_collection_run_status(run_id: str) -> dict[str, Any]:
-        return huginn.get_collection_run_status(run_id=run_id).to_dict()
-
-    @server.tool(
-        name="submit_evidence_batch",
-        title="Submit Evidence Batch",
-        description="Toplanan kanitlari (scraped data) ingest pipeline'a gönderir.",
-    )
-    async def handle_submit_evidence_batch(
-        evidence: list[dict[str, Any]],
-        source_id: str = "",
-    ) -> dict[str, Any]:
-        return huginn.submit_evidence_batch(
-            evidence=evidence,
-            source_id=source_id,
-        ).to_dict()
-
-    @server.tool(
-        name="report_collection_failure",
-        title="Report Collection Failure",
-        description="Scraper/collect run basarisizligini bildirir.",
-    )
-    async def handle_report_collection_failure(
-        source_id: str,
-        error: str,
-        run_id: Optional[str] = None,
-    ) -> dict[str, Any]:
-        return huginn.report_collection_failure(
-            source_id=source_id,
-            error=error,
-            run_id=run_id,
-        ).to_dict()
-
-    return server
+        """
+        server = MCPServer(
+            name="huginn-mcp",
+            version="1.0.0",
+            title="Huginn MCP Server",
+            description="Huginn B2B Intelligence - Apify ve Huginn verilerine MCP erişimi",
+            instructions=INSTRUCTIONS,
+        )
+    
+        adapter = apify_adapter or ApifyAdapter(policy_engine=PolicyEngine())
+        huginn = huginn_server or HuginnMCPServer(policies=PolicyEngine())
+    
+        # -- Apify tools --
+    
+        @server.tool(
+            name="apify_list_actors",
+            title="List Apify Actors",
+            description="Whitelist listesindeki Apify actorlarini ve harcama limitlerini listeler.",
+        )
+        async def handle_apify_list_actors() -> dict[str, Any]:
+            return adapter.apify_list_actors().to_dict()
+    
+        @server.tool(
+            name="apify_run_actor",
+            title="Run Apify Actor",
+            description="Whitelist listesindeki bir Apify actorunu calistirir ve sonuclari getirir.",
+        )
+        async def handle_apify_run_actor(
+            actor_id: str,
+            run_input: Optional[dict[str, Any]] = None,
+            max_items: Optional[int] = None,
+            max_charge_usd: Optional[float] = None,
+        ) -> dict[str, Any]:
+            return adapter.apify_run_actor(
+                actor_id=actor_id,
+                run_input=run_input,
+                max_items=max_items,
+                max_charge_usd=max_charge_usd,
+            ).to_dict()
+    
+        @server.tool(
+            name="apify_get_dataset",
+            title="Get Apify Dataset",
+            description="Bir Apify datasetini okur (policy kontrolu ile).",
+        )
+        async def handle_apify_get_dataset(
+            dataset_id: str,
+            max_items: Optional[int] = None,
+            clean: bool = True,
+        ) -> dict[str, Any]:
+            return adapter.apify_get_dataset(
+                dataset_id=dataset_id,
+                max_items=max_items,
+                clean=clean,
+            ).to_dict()
+    
+        # -- Huginn tools --
+    
+        @server.tool(
+            name="get_source_policy",
+            title="Get Source Policy",
+            description="Bir veri kaynaginin izin politikasini getirir (KVKK, domain whitelist, rate limit, NACE scope).",
+        )
+        async def handle_get_source_policy(source_id: str) -> dict[str, Any]:
+            return huginn.get_source_policy(source_id=source_id).to_dict()
+    
+        @server.tool(
+            name="get_collection_run_status",
+            title="Get Collection Run Status",
+            description="Veri toplama run durumunu getirir.",
+        )
+        async def handle_get_collection_run_status(run_id: str) -> dict[str, Any]:
+            return huginn.get_collection_run_status(run_id=run_id).to_dict()
+    
+        @server.tool(
+            name="submit_evidence_batch",
+            title="Submit Evidence Batch",
+            description="Toplanan kanitlari (scraped data) ingest pipeline'a gönderir.",
+        )
+        async def handle_submit_evidence_batch(
+            evidence: list[dict[str, Any]],
+            source_id: str = "",
+        ) -> dict[str, Any]:
+            return huginn.submit_evidence_batch(
+                evidence=evidence,
+                source_id=source_id,
+            ).to_dict()
+    
+        @server.tool(
+            name="report_collection_failure",
+            title="Report Collection Failure",
+            description="Scraper/collect run basarisizligini bildirir.",
+        )
+        async def handle_report_collection_failure(
+            source_id: str,
+            error: str,
+            run_id: Optional[str] = None,
+        ) -> dict[str, Any]:
+            return huginn.report_collection_failure(
+                source_id=source_id,
+                error=error,
+                run_id=run_id,
+            ).to_dict()
+    
+        return server
 
 
 def main_stdio() -> None:
@@ -189,7 +215,7 @@ def main() -> None:
         choices=["stdio", "http"],
         default="stdio",
         nargs="?",
-        help="Transport: stdio (default) or http",
+        help="Transport: stdio (default) or http"
     )
     parser.add_argument("--host", default="127.0.0.1", help="HTTP host")
     parser.add_argument("--port", type=int, default=8000, help="HTTP port")

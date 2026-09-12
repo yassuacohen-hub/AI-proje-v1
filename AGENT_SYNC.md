@@ -1,31 +1,27 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-12T01:26:47
+> Son guncelleme: 2026-09-12T04:04:31
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
 
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
-| GIT-01 | Temiz depo + hibrit push stratejisi devr | cline | P1 | aktif |
-| 9R-03 | Chat Tabanli Ilan Zenginlestirme - analy | roo_code | P2 | plan |
-| 9R-04 | Web Fetch/Search Aktivasyonu - Firecrawl | roo_code | P3 | plan |
-| P7-16 | Entegrasyon Test Kapsamını Genişletme -  | kilo | P1 | aktif |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| DOCS-03 | AGENTS.md guncelle | mimar | 2026-09-11 |
-| RO-02 | Dispatch + Review otomatik test | cursor_grok | 2026-09-11 |
-| LIVE-01 | Canli Test: Dispatch + Review Akisi | cursor_grok | 2026-09-11 |
-| ROO-01 | Roo Code - Kod Incelemesi ve Refactoring | roo_code | 2026-09-11 |
-| 9R-01 | 9Router AI Gateway entegrasyonu | roo_code | 2026-09-11 |
-| MCP-03 | MCP Server Entry + Transport Testleri | kilo | 2026-09-11 |
 | ORCH-02 | Pano-disk senkronu: 5 done guncelleme +  | cline | 2026-09-11 |
 | P7-14 | E2E Pipeline Test — Webhook -> ingest -> | kilo | 2026-09-11 |
 | CLEANUP-01 | test_job_intelligence_e2e.py temizlik -  | kilo | 2026-09-11 |
+| GIT-01 | Temiz depo + hibrit push stratejisi devr | cline | 2026-09-12 |
 | 9R-02 | Vektor Katmani + Dublikasyon Pilotu - Ch | roo_code | 2026-09-12 |
+| 9R-03 | Chat Tabanli Ilan Zenginlestirme - analy | roo_code | 2026-09-12 |
+| 9R-04 | Web Fetch/Search Aktivasyonu - Firecrawl | roo_code | 2026-09-12 |
+| P7-16 | Entegrasyon Test Kapsamını Genişletme -  | kilo | 2026-09-12 |
+| P7-17 | Performans ve Ölçeklenebilirlik Benchmar | kilo | 2026-09-12 |
+| P7-18 | Observability: Distributed Tracing Enteg | kilo | 2026-09-12 |
 
 ## Son Handoff'lar
 

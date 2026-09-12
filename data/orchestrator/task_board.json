@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-12T00:04:05",
+    "bitis": "2026-09-12T04:00:12",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -452,15 +452,15 @@
     "baslik": "Temiz depo + hibrit push stratejisi devreye alma",
     "sahip": "cline",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-11T23:18:13",
-    "bitis": null,
+    "bitis": "2026-09-12T01:35:49",
     "dosyalar": [
       ".gitignore",
       "scripts/git_auto_push.bat",
       "scripts/quick_task.py"
     ],
-    "not": "Fazlar: (1) envanter tamam, (2) gitignore+untrack temizlik, (3) temiz toplu push origin/Parent-repo chore/monorepo-merge, (4) git_push_gorev.py + review hook + 18:00 tetikleyici + bat retry, (5) durum dosyalari.",
+    "not": "Hibrit push devrede: git_push_gorev.py + Zamanlayici 12:01/00:01 + .gitignore temizligi. Parent push 80e530e; nested 536d4e1.",
     "source": "ic",
     "from_agent": null
   },
@@ -488,13 +488,13 @@
     "baslik": "Chat Tabanli Ilan Zenginlestirme - analyzer.py'ye 9Router chat ile sektor/pozisyon/skill cikarimi (fallback: regex)",
     "sahip": "roo_code",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-11T23:53:16",
-    "bitis": null,
+    "bitis": "2026-09-12T01:50:13",
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/pipeline/analyzer.py"
     ],
-    "not": "",
+    "not": "9R-03 tamamlandi. chat_enricher.py (sektor/pozisyon/skill + regex fallback + C1/UTF-8 temizlik), analyzer.enrich_with_chat entegrasyonu, build_default_enricher duzeltmesi (client get_client() sentinel). Canli demo: apify_run-*.jsonl 3/3 chat (Developer-BILISIM, Engineer-GENEL, Stajyer-GENEL). Regresyon: chat_enricher+ninerouter+analyzer 57 passed; tam suite (bilinen 3 apify/webhook haric) 388 passed, 1 skipped. Katalog v1.0.1.",
     "source": "ic",
     "from_agent": "roo_code"
   },
@@ -503,29 +503,67 @@
     "baslik": "Web Fetch/Search Aktivasyonu - Firecrawl+Tavily provider eklendikten sonra web_fetch/web_search canli test + kariyer sayfasi analiz akisi",
     "sahip": "roo_code",
     "oncelik": "P3",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-11T23:53:16",
-    "bitis": null,
+    "bitis": "2026-09-12T03:29:34",
     "dosyalar": [
       "src/company_master/gateway/ninerouter_client.py"
     ],
     "not": "",
     "source": "ic",
-    "from_agent": "roo_code"
+    "from_agent": "roo_code",
+    "not_": "firecrawl+tavily provider baglandi; web_fetch/web_search lokal ve tunelde canli dogrulandi (4 web model: ollama/fetch, tavily/search, tavily/fetch, firecrawl/fetch); unit testler 14 yesil; katalog v1.0.2"
   },
   {
     "task_id": "P7-16",
     "baslik": "Entegrasyon Test Kapsamını Genişletme - Vektör, Varlık Çözümlemesi ve DLQ/Yeniden Deneme Senaryoları",
     "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-12T01:25:35",
-    "bitis": null,
+    "bitis": "2026-09-12T01:57:31",
     "dosyalar": [
       "tests/test_job_intelligence_e2e.py"
     ],
     "not": "",
     "source": "ic",
     "from_agent": null
+  },
+  {
+    "task_id": "P7-17",
+    "baslik": "Performans ve Ölçeklenebilirlik Benchmark’i - Webhook alıcısı ve MCP sunucusunun yük altında davranışını ölçme",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-12T02:00:24",
+    "bitis": "2026-09-12T02:13:32",
+    "dosyalar": [
+      "scripts/benchmark_webhook_load.py",
+      "locustfile.py",
+      "requirements-dev.txt"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-18",
+    "baslik": "Observability: Distributed Tracing Entegrasyonu - OpenTelemetry entegrasyonu ile webhook alıcı, MCP sunucusu ve vektör servisleri arasındaki istekleri izleme",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-12T02:15:51",
+    "bitis": "2026-09-12T04:04:31",
+    "dosyalar": [
+      "web_app.py",
+      "src/company_master/mcp/mcp_server_entry.py",
+      "src/company_master/vector/service.py",
+      "src/company_master/vector/store.py",
+      "requirements-dev.txt"
+    ],
+    "not": "Added OpenTelemetry dependencies to requirements-dev.txt, added imports and initialization skeleton in web_app.py (instrumentation pending due to timeout). Next steps: complete instrumentation in web_app.py, add tracing to MCP server entry and vector services.",
+    "source": "ic",
+    "from_agent": null,
+    "note": "Added OpenTelemetry dependencies to requirements-dev.txt, instrumented web_app.py (FastAPI and requests), MCP server entry (requests), vector service and store (spans around key methods). All syntax checks passed. Task completed."
   }
 ]

@@ -143,7 +143,7 @@ def gorev_ekle(
     board.append(task)
     _write_json(TASK_BOARD, board)
     _md_yaz(board)
-    _sync_tetikle()
+    agent_sync_yaz()
     return task
 
 

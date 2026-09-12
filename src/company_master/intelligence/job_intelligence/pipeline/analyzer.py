@@ -26,6 +26,30 @@ from sqlalchemy import text
 
 from company_master.db.connection import get_engine
 
+# ChatEnricher opsiyonel ve çift-import desenli (embedder.py ile aynı):
+# - scripts (ROOT/src sys.path'te) -> src.company_master.* çalışır
+# - pytest (src sys.path'te)       -> company_master.* çalışır
+try:
+    from src.company_master.intelligence.job_intelligence.pipeline.chat_enricher import (  # noqa: E501
+        ChatEnricher,
+        EnrichResult,
+        BELIRSIZ_SEKTOR,
+        build_default_enricher,
+    )
+except ImportError:
+    try:
+        from company_master.intelligence.job_intelligence.pipeline.chat_enricher import (  # noqa: E501
+            ChatEnricher,
+            EnrichResult,
+            BELIRSIZ_SEKTOR,
+            build_default_enricher,
+        )
+    except ImportError:
+        ChatEnricher = None  # type: ignore[assignment,misc]
+        EnrichResult = None  # type: ignore[assignment,misc]
+        BELIRSIZ_SEKTOR = "GENEL / BELİRSİZ"
+        build_default_enricher = None  # type: ignore[assignment]
+
 logger = logging.getLogger(__name__)
 
 RISK_KEYWORDS: list[str] = [
@@ -104,6 +128,28 @@ MODERN_TECH_KEYWORDS: list[str] = [
     "prometheus",
 ]
 
+# 9R-03: chat zenginleştirme için kullanılacak yetenek anahtar sözlüğü
+# (MODERN_TECH_KEYWORDS'e opsiyonel ek becerilerle birlikte). Regex fallback
+# için de aynı sözlük kullanılır (chat devre dışıyken bile tutarlı çıktı).
+ENRICH_SKILL_KEYWORDS: list[str] = list(MODERN_TECH_KEYWORDS) + [
+    "python",
+    "javascript",
+    "typescript",
+    "java",
+    "c#",
+    "c++",
+    "sql",
+    "excel",
+    "sap",
+    "erp",
+    "crm",
+    "satış",
+    "pazarlama",
+    "ihracat",
+    "muhasebe",
+    "raporlama",
+]
+
 SIG_WINDOW_DAYS = 90
 GROWTH_WINDOW_DAYS = 30
 GROWTH_MIN_POSTINGS = 3
@@ -113,9 +159,17 @@ SIGNAL_TTL_DAYS = 90
 class SignalAnalyzer:
     """İş ilanlarından ticari sinyaller çıkarır."""
 
-    def __init__(self, window_days: int = SIG_WINDOW_DAYS) -> None:
+    def __init__(
+        self,
+        window_days: int = SIG_WINDOW_DAYS,
+        enrich_with_chat: bool = False,
+    ) -> None:
         self.window_days = window_days
+        self._enrich_chat_aktif = bool(enrich_with_chat)
         self._engine = get_engine()
+        self._enricher: Any | None = None
+        if self._enrich_chat_aktif:
+            self._enricher = self._chat_enricher_build()
 
     def _load_job_postings(self) -> list[dict[str, Any]]:
         cutoff = datetime.now(timezone.utc) - timedelta(days=self.window_days)
@@ -587,6 +641,59 @@ class SignalAnalyzer:
 
         return len(signals)
 
+    @staticmethod
+    def _chat_enricher_build() -> Any | None:
+        """ChatEnricher kurar; modül/istemci yoksa None döner (graceful)."""
+        if build_default_enricher is None or ChatEnricher is None:
+            logger.info("ChatEnricher devre dışı (modül bulunamadı)")
+            return None
+        try:
+            return build_default_enricher(skill_keywords=ENRICH_SKILL_KEYWORDS)
+        except Exception as exc:  # noqa: BLE001 — istemci kurulum hatası tolere edilir
+            logger.warning("ChatEnricher kurulamadı: %s", _kisa_hata(exc))
+            return None
+
+    def enrich_with_chat(self, postings: list[dict[str, Any]]) -> dict[str, Any]:
+        """İlan listesini 9Router chat() ile zenginleştirir.
+
+        Regresyon riskini sıfırlamak için mevcut ``analyze()`` akışına
+        dokunmaz; bağımsız istatistik döndürür. 9Router yoksa regex fallback
+        çalışır (katalog/9R-03 sözleşmesi).
+        """
+        sonuc = self._enricher
+        if not sonuc:
+            sonuc = self._chat_enricher_build() or ChatEnricher()
+
+        stats: dict[str, Any] = {
+            "ilan_sayisi": len(postings),
+            "kaynak": {"chat": 0, "fallback": 0},
+            "hata": 0,
+            "zenginlestirilen": 0,
+            "detay": [],
+        }
+        if not postings:
+            return stats
+
+        for posting in postings:
+            try:
+                r = sonuc.enrich(posting)
+            except Exception as exc:  # noqa: BLE001 — tek ilan hatası akışı durdurmaz
+                stats["hata"] += 1
+                logger.warning("İlan zenginleştirme hatası: %s", _kisa_hata(exc))
+                continue
+            stats["detay"].append({"title": posting.get("title", ""), **r.to_dict()})
+            stats["kaynak"][r.kaynak] = stats["kaynak"].get(r.kaynak, 0) + 1
+            stats["zenginlestirilen"] += 1
+
+        return stats
+
+    @staticmethod
+    def _sonuc_detayi(title: str, r: Any) -> dict[str, Any]:
+        """Chat enricher çıktısını sözlüğe normalize eder (test kolaylığı)."""
+        if r is not None and hasattr(r, "to_dict"):
+            return {"title": title, **r.to_dict()}
+        return {"title": title}
+
     def analyze(self) -> dict[str, Any]:
         """Ana analiz: job_postings'ten sinyaller çıkar ve kaydet."""
         logger.info("Signal analyzer başlatılıyor (window=%d gün)", self.window_days)
@@ -639,13 +746,44 @@ class SignalAnalyzer:
         return stats
 
 
+def _kisa_hata(exc: Exception) -> str:
+    """İstisna mesajını tek satıra sıkıştırır (log güvenliği)."""
+    msg = str(exc) or exc.__class__.__name__
+    return " ".join(msg.split())[:200]
+
+
 def main() -> None:
     logging.basicConfig(
         level=logging.INFO,
         format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
     )
-    analyzer = SignalAnalyzer()
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Job Intelligence Signal Analyzer")
+    parser.add_argument(
+        "--enrich-chat",
+        action="store_true",
+        help="9Router chat() ile sektör/pozisyon/skill zenginleştirme açık",
+    )
+    parser.add_argument(
+        "--window-days",
+        type=int,
+        default=SIG_WINDOW_DAYS,
+        help="Analiz penceresi (gün); varsayılan: %d" % SIG_WINDOW_DAYS,
+    )
+    args = parser.parse_args()
+
+    analyzer = SignalAnalyzer(
+        window_days=args.window_days,
+        enrich_with_chat=args.enrich_chat,
+    )
     result = analyzer.analyze()
+
+    if analyzer._enrich_chat_aktif:
+        result["zenginlestirme"] = analyzer.enrich_with_chat(
+            analyzer._load_job_postings()
+        )
+
     print(json.dumps(result, indent=2, ensure_ascii=False, default=str))
 
 

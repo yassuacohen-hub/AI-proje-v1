@@ -75,9 +75,16 @@ class NineRouter:
         timeout: float = 60.0,
         max_retries: int = 2,
     ) -> None:
-        self.base_url = (
+        # URL normalizasyonu: NINEROUTER_URL hem base ("http://host:port") hem
+        # de "/v1" suffix'li ("http://host:port/v1") verilebilir. Tüm api path'leri
+        # istemci tarafinda "/v1/..." eklendigi icin sondaki "/v1" asama temizlenir
+        # (aksi halde "/v1/v1/embeddings" olusur).
+        base = (
             base_url or os.getenv("NINEROUTER_URL", "http://localhost:20128")
         ).rstrip("/")
+        if base.endswith("/v1"):
+            base = base[: -len("/v1")]
+        self.base_url = base
         self.api_key = api_key or os.getenv("NINEROUTER_KEY")
         self.default_model = default_model or os.getenv(
             "NINEROUTER_MODEL", "yasu-9router"
@@ -155,7 +162,19 @@ class NineRouter:
                 ) from exc
 
             if resp.status_code == 200:
-                data = self._parse_body(resp.text)
+                # resp.text requests tarafından charset'siz yanıtta ISO-8859-1
+                # ile decode edilir → UTF-8 Türkçe karakterler mojibake olur.
+                # 9Router JSON API'dir (RFC 8259 → UTF-8); bu yüzden content
+                # baytlarını doğrudan UTF-8 ile çözeriz. Mock/eksik nesnede
+                # resp.text'e güvenli düşüş yapılır.
+                text = resp.text
+                try:
+                    content = resp.content
+                    if isinstance(content, bytes):
+                        text = content.decode("utf-8", errors="replace")
+                except Exception:  # noqa: BLE001 — mock/eksik nesnede resp.text'e düş
+                    pass
+                data = self._parse_body(text)
                 # 9Router bazen {data:{...}, success:true} paketi döner
                 if isinstance(data, dict) and "data" in data and "success" in data:
                     return data["data"]
@@ -252,30 +271,48 @@ class NineRouter:
     def web_fetch(
         self,
         url: str,
-        provider: str = "firecrawl/fetch",
+        provider: str = "firecrawl",
         output_format: str = "markdown",
+        max_characters: int | None = None,
         extra: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         """URL'den markdown/html çeker (kariyer sayfaları, OSINT kaynakları).
 
+        9R-04: 9Router /v1/web/fetch sözleşmesine uyum (skill dokümanı):
+          - provider suffix'siz kullanılır: firecrawl | jina-reader | tavily |
+            exa | ollama | fetch-combo ("Provider IS the model").
+          - İstek alanı ``format`` (markdown/text/html) + opsiyonel
+            ``max_characters`` — ``outputFormat`` değil.
+          - Yanıt: ``content: {format, text, length}`` normalize edilir.
+
         Not: 9Router'da webFetch sağlayıcısı yapılandırılmamışsa
         (Dashboard → Providers → firecrawl / jina-reader / tavily)
-        bu çağrı 400 döner. Kullanmadan önce sağlayıcı ekleyin.
+        bu çağrı başarısız olur. Kullanmadan önce sağlayıcı ekleyin.
         """
         body: dict[str, Any] = {
             "model": provider,
             "url": url,
-            "outputFormat": output_format,
+            "format": output_format,
         }
+        if max_characters is not None:
+            body["max_characters"] = max_characters
         if extra:
             body.update(extra)
         data = self._request("POST", "/v1/web/fetch", json=body)
-        # Farklı sağlayıcılar farklı şekil döner; en yaygın olanları normalize et
+        # Farklı sağlayıcılar farklı şekil döner; en yaygın olanları normalize et.
         if isinstance(data, str):
             return {"content": data}
-        for key in ("content", "markdown", "text", "html", "data"):
-            if isinstance(data, dict) and data.get(key):
-                return {"content": data.get(key), "provider": provider}
+        if isinstance(data, dict):
+            # 9Router skill şekli: content -> {"format": ..., "text": ..., "length": ...}
+            ic = data.get("content")
+            if isinstance(ic, dict):
+                text = ic.get("text", ic)
+                return {**data, "content": text}
+            for key in ("markdown", "text", "html", "data"):
+                if data.get(key):
+                    return {"content": data.get(key), "provider": provider}
+            if "content" in data:
+                return {**data, "provider": data.get("provider", provider)}
         return {"content": data, "provider": provider}
 
     # ---- web search ----
@@ -283,10 +320,18 @@ class NineRouter:
     def web_search(
         self,
         query: str,
-        provider: str = "tavily/search",
+        provider: str = "tavily",
         max_results: int = 5,
+        extra: dict[str, Any] | None = None,
     ) -> dict[str, Any]:
         """Web araması yapar (OSINT / şirket araştırması).
+
+        9R-04: 9Router /v1/search sözleşmesine uyum (skill dokümanı):
+          - provider suffix'siz kullanılır: tavily | exa | brave | serper |
+            perplexity | linkup | google-pse | searchapi | youcom | xquik.
+          - Sonuç sayısı alanı ``max_results`` (alt çizgili) — ``maxResults`` değil.
+          - Opsiyonel: search_type, country, language, time_range, domain_filter
+            (provider'a bağlı) extra sözlüğüyle geçirilebilir.
 
         Uyarı: 9Router'da webSearch sağlayıcısı yapılandırılmamışsa
         bu çağrı başarısız olur. Sağlayıcı eklemek için Dashboard →
@@ -295,8 +340,10 @@ class NineRouter:
         body: dict[str, Any] = {
             "model": provider,
             "query": query,
-            "maxResults": max_results,
+            "max_results": max_results,
         }
+        if extra:
+            body.update(extra)
         data = self._request("POST", "/v1/search", json=body)
         return data if isinstance(data, dict) else {"results": data}
 

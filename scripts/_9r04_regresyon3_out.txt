@@ -1,0 +1,76 @@
+..................................................s..................... [ 15%]
+........................................................................ [ 30%]
+...........................................F....F....................... [ 45%]
+........................................................................ [ 61%]
+........................................................................ [ 76%]
+........................................................................ [ 91%]
+......................................                                   [100%]
+================================== FAILURES ===================================
+__________________ TestWaitForRun.test_failed_durumu_hatadir __________________
+
+self = <tests.test_apify_client.TestWaitForRun object at 0x00000297DA32FCB0>
+
+    def test_failed_durumu_hatadir(self) -> None:
+        c = make_client()
+        c.session.get.return_value = resp(200, {"data": {"status": "FAILED"}})
+        meta = c.wait_for_run("run1", poll_interval=0)
+        assert meta["status"] == "FAILED"
+>       with pytest.raises(ApifyError, match="basarisiz"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'basarisiz'
+E         Actual message: "Actor run baslatilamadi (<MagicMock name='mock.post().status_code' id='2851258782768'>): <MagicMock name='mock.post().text.__getitem__()' id='2851263697584'>"
+
+tests\test_apify_client.py:95: AssertionError
+__________________ TestRunActorAndCollect.test_basarili_akis __________________
+
+self = <tests.test_apify_client.TestRunActorAndCollect object at 0x00000297DA32F950>
+
+    def test_basarili_akis(self) -> None:
+        c = make_client()
+        c.session.post.return_value = resp(
+            201, {"data": {"id": "run1", "defaultDatasetId": "ds1"}}
+        )
+        c.session.get.side_effect = [
+            resp(200, {"data": {"status": "SUCCEEDED", "defaultDatasetId": "ds1"}}),
+            resp(200, [{"url": "https://x.com", "title": "Stajyer"}]),
+        ]
+        items, meta = c.run_actor_and_collect("apify/web-scraper", poll_interval=0)
+        assert items[0]["title"] == "Stajyer"
+        assert meta["status"] == "SUCCEEDED"
+>       assert meta["id"] == "run1"
+               ^^^^^^^^^^
+E       KeyError: 'id'
+
+tests\test_apify_client.py:147: KeyError
+============================== warnings summary ===============================
+tests/company_master/test_ankara_osb.py: 15 warnings
+  C:\Huginn Data Projesi\Huginn Data Insights\src\company_master\seed\seed_ankara_osb.py:147: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.utcnow().isoformat()
+
+tests/company_master/test_web_app.py::TestIntelligenceDashboardEndpoint::test_intelligence_dashboard_returns_expected_structure
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:2854: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now_iso = datetime.utcnow().isoformat()
+
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+  C:\Huginn Data Projesi\Huginn Data Insights\tests\test_job_intelligence_e2e.py:321: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "detected_at": datetime.utcnow() - timedelta(days=1),
+
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+  C:\Huginn Data Projesi\Huginn Data Insights\src\company_master\intelligence\job_intelligence\pipeline\scorer.py:28: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return datetime.utcnow()
+
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+  C:\Huginn Data Projesi\Huginn Data Insights\tests\test_job_intelligence_e2e.py:370: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    sig.setdefault("detected_at", datetime.utcnow() - timedelta(days=1))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_apify_client.py::TestWaitForRun::test_failed_durumu_hatadir
+FAILED tests/test_apify_client.py::TestRunActorAndCollect::test_basarili_akis
+2 failed, 467 passed, 1 skipped, 24 warnings in 54.06s

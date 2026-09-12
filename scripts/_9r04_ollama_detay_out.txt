@@ -1,0 +1,36 @@
+================================================================
+provider=firecrawl | auth=apikey | active=1 | pri=1 | updatedAt=2026-09-12T00:24:42.065Z
+name=FREECLAW KAZIMA
+  apiKey: fc-d0f...3c22  (MASKE)
+  testStatus: active
+  providerSpecificData: {'connectionProxyEnabled': False, 'connectionProxyUrl': '', 'connectionNoProxy': ''}
+================================================================
+provider=ollama | auth=apikey | active=1 | pri=1 | updatedAt=2026-09-12T00:36:55.155Z
+name=router ollama
+  apiKey: a3663b...9Vwr  (MASKE)
+  testStatus: unavailable
+  providerSpecificData: {'connectionProxyEnabled': False, 'connectionProxyUrl': '', 'connectionNoProxy': ''}
+  modelLock_minimax-m3: None
+  lastError: Ollama returned an empty or invalid web fetch response
+  errorCode: 502
+  lastErrorAt: 2026-09-12T00:36:55.155Z
+  backoffLevel: 0
+  modelLock_minimax-m2.5: None
+  modelLock_kimi-k2.5: None
+  modelLock_glm-4.7-flash: None
+  modelLock_glm-5: None
+  modelLock_qwen3.5: None
+  modelLock_gpt-oss:120b: None
+  rateLimitedUntil: None
+  modelLock_webfetch:ollama: 2026-09-12T00:37:25.155Z
+================================================================
+provider=tavily | auth=apikey | active=1 | pri=1 | updatedAt=2026-09-12T00:17:04.156Z
+name=tailvy ilk key demo 1500 sorgu/ay
+  apiKey: tvly-d...Q9x7  (MASKE)
+  testStatus: active
+  providerSpecificData: {'connectionProxyEnabled': False, 'connectionProxyUrl': '', 'connectionNoProxy': ''}
+  lastError: None
+  lastErrorAt: None
+  errorCode: None
+  rateLimitedUntil: None
+  backoffLevel: 0

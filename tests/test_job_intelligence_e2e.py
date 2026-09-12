@@ -11,6 +11,7 @@ import json
 import sys
 import uuid
 from datetime import datetime, timedelta, timezone
+import time
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
@@ -384,3 +385,90 @@ def test_tam_akis_webhook_analiz_skor_zinciri(tmp_path, monkeypatch):
     assert result["processed"] == 1
     types = [t for (t, _) in fake_engine.store["records"]]
     assert "company_intelligence_scores" in types
+
+def test_webhook_failure_dlq_logged():
+    """When webhook signature invalid, process_webhook returns error and logs to DLQ.
+    """
+    import scripts.apify_webhook_receiver as recv_mod
+    from scripts.apify_webhook_receiver import ApifyWebhookReceiver
+
+    receiver = ApifyWebhookReceiver(
+        secret_token="test-secret", apify_client=None, enable_rate_limit=False
+    )
+    # Invalid signature
+    payload = {"eventType": "ACTOR.RUN.SUCCEEDED", "actorRunId": "run-1"}
+    result = receiver.process_webhook(payload, secret="wrong-secret")
+
+    assert result["status"] == "rejected"
+    assert result["reason"] == "invalid_secret"
+
+    # Check DLQ log (module variable was monkeypatched by fixture)
+    dlq_log = recv_mod.WEBHOOK_DLQ_LOG
+    assert dlq_log.exists()
+    dlq_content = dlq_log.read_text(encoding="utf-8")
+    assert "invalid secret" in dlq_content.lower()
+
+def test_webhook_rate_limit_retry():
+    """When rate limit exceeded, second call within window is rejected.
+    """
+    import scripts.apify_webhook_receiver as recv_mod
+    from scripts.apify_webhook_receiver import ApifyWebhookReceiver
+    from scripts.apify_webhook_receiver import _rate_limit_buckets, RATE_LIMIT_CAPACITY, RATE_LIMIT_REFILL_RATE
+
+    receiver = ApifyWebhookReceiver(
+        secret_token="test-secret", apify_client=None, enable_rate_limit=True
+    )
+    # Set a low rate limit for testing: 1 per 1 second
+    # Monkeypatch module-level constants
+    original_capacity = RATE_LIMIT_CAPACITY
+    original_refill = RATE_LIMIT_REFILL_RATE
+    recv_mod.RATE_LIMIT_CAPACITY = 1
+    recv_mod.RATE_LIMIT_REFILL_RATE = 1.0
+    # Clear bucket
+    token_prefix = "test-secret"[:16] if "test-secret" else "anonymous"
+    recv_mod._rate_limit_buckets[token_prefix] = (float(recv_mod.RATE_LIMIT_CAPACITY), time.time())
+
+    payload = _succeeded_payload("run-rate-1")
+
+    # First call should succeed
+    result1 = receiver.process_webhook(payload, secret="test-secret")
+    assert result1["status"] == "ok"
+
+    # Second call within window should be rejected
+    result2 = receiver.process_webhook(payload, secret="test-secret")
+    assert result2["status"] == "rate_limited"
+    assert result2["reason"] == "too_many_requests"
+    assert "retry_after" in result2
+    # Do NOT expect DLQ logging for rate limited requests (rejected before DLQ)
+
+    # Restore
+    recv_mod.RATE_LIMIT_CAPACITY = original_capacity
+    recv_mod.RATE_LIMIT_REFILL_RATE = original_refill
+
+def test_matcher_vector_fallback():
+    """Since CompanyMatcher does not use vector store, test that matcher returns fuzzy_below_threshold when fuzzy score below threshold.
+    """
+    from company_master.intelligence.job_intelligence.pipeline.normalizer import CompanyMatcher, MatchResult
+
+    matcher = CompanyMatcher(fuzzy_threshold=85.0)
+
+    # Mock VKN to return None
+    matcher._match_by_vkn = lambda *args, **kwargs: None
+
+    # Mock fuzzy to return a MatchResult with low confidence (below threshold)
+    low_score_result = MatchResult(
+        company_id=CID,
+        matched_name="Some Company",
+        match_type="fuzzy",
+        confidence=0.5  # 50% < 85%
+    )
+    matcher._match_by_fuzzy = lambda *args, **kwargs: low_score_result
+
+    # Mock vector to return None (since we don't use vector store)
+    matcher._match_by_vector = lambda *args, **kwargs: None
+
+    result = matcher.match(raw_name="Some Company", domain=None, tax_number=None, mersis=None)
+
+    assert result is not None
+    assert result.match_type == "fuzzy_below_threshold"
+

@@ -1,0 +1,900 @@
+
+=================================== ERRORS ====================================
+____ ERROR collecting AI proje v1/tests/company_master/test_ankara_osb.py _____
+import file mismatch:
+imported module 'tests.company_master.test_ankara_osb' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\company_master\test_ankara_osb.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\company_master\test_ankara_osb.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_ ERROR collecting AI proje v1/tests/company_master/test_base_osfb_scraper.py _
+import file mismatch:
+imported module 'tests.company_master.test_base_osfb_scraper' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\company_master\test_base_osfb_scraper.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\company_master\test_base_osfb_scraper.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+____ ERROR collecting AI proje v1/tests/company_master/test_connection.py _____
+import file mismatch:
+imported module 'tests.company_master.test_connection' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\company_master\test_connection.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\company_master\test_connection.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+__ ERROR collecting AI proje v1/tests/company_master/test_extra_coverage.py ___
+import file mismatch:
+imported module 'tests.company_master.test_extra_coverage' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\company_master\test_extra_coverage.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\company_master\test_extra_coverage.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+______ ERROR collecting AI proje v1/tests/company_master/test_migrate.py ______
+import file mismatch:
+imported module 'tests.company_master.test_migrate' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\company_master\test_migrate.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\company_master\test_migrate.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_____ ERROR collecting AI proje v1/tests/company_master/test_normalize.py _____
+import file mismatch:
+imported module 'tests.company_master.test_normalize' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\company_master\test_normalize.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\company_master\test_normalize.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_____ ERROR collecting AI proje v1/tests/company_master/test_pipeline.py ______
+import file mismatch:
+imported module 'tests.company_master.test_pipeline' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\company_master\test_pipeline.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\company_master\test_pipeline.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+___ ERROR collecting AI proje v1/tests/company_master/test_quality_score.py ___
+import file mismatch:
+imported module 'tests.company_master.test_quality_score' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\company_master\test_quality_score.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\company_master\test_quality_score.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+______ ERROR collecting AI proje v1/tests/company_master/test_search.py _______
+import file mismatch:
+imported module 'tests.company_master.test_search' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\company_master\test_search.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\company_master\test_search.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+______ ERROR collecting AI proje v1/tests/company_master/test_web_app.py ______
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+tests\company_master\test_web_app.py:11: in <module>
+    from web_app import app
+web_app.py:522: in <module>
+    _TRADE_FOLD_MAP = str.maketrans(
+E   ValueError: string keys in translate table must be of length 1
+_ ERROR collecting AI proje v1/tests/data_quality_toolkit/test_pii_scanner.py _
+import file mismatch:
+imported module 'tests.data_quality_toolkit.test_pii_scanner' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\data_quality_toolkit\test_pii_scanner.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\data_quality_toolkit\test_pii_scanner.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+__ ERROR collecting AI proje v1/tests/data_quality_toolkit/test_validator.py __
+import file mismatch:
+imported module 'tests.data_quality_toolkit.test_validator' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\data_quality_toolkit\test_validator.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\data_quality_toolkit\test_validator.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+________ ERROR collecting AI proje v1/tests/orchestrator/test_brief.py ________
+import file mismatch:
+imported module 'tests.orchestrator.test_brief' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\orchestrator\test_brief.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\orchestrator\test_brief.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+____ ERROR collecting AI proje v1/tests/orchestrator/test_error_ledger.py _____
+import file mismatch:
+imported module 'tests.orchestrator.test_error_ledger' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\orchestrator\test_error_ledger.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\orchestrator\test_error_ledger.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_______ ERROR collecting AI proje v1/tests/orchestrator/test_models.py ________
+import file mismatch:
+imported module 'tests.orchestrator.test_models' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\orchestrator\test_models.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\orchestrator\test_models.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_______ ERROR collecting AI proje v1/tests/orchestrator/test_review.py ________
+import file mismatch:
+imported module 'tests.orchestrator.test_review' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\orchestrator\test_review.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\orchestrator\test_review.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_______ ERROR collecting AI proje v1/tests/orchestrator/test_runner.py ________
+ImportError while importing test module 'c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\orchestrator\test_runner.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\orchestrator\test_runner.py:18: in <module>
+    from src.company_master.orchestrator.runner import (
+E   ImportError: cannot import name 'execute_orchestrator_task' from 'src.company_master.orchestrator.runner' (C:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\src\company_master\orchestrator\runner.py)
+________ ERROR collecting AI proje v1/tests/orchestrator/test_sync.py _________
+import file mismatch:
+imported module 'tests.orchestrator.test_sync' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\orchestrator\test_sync.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\orchestrator\test_sync.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+______ ERROR collecting AI proje v1/tests/orchestrator/test_workspace.py ______
+import file mismatch:
+imported module 'tests.orchestrator.test_workspace' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\orchestrator\test_workspace.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\orchestrator\test_workspace.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+__________ ERROR collecting AI proje v1/tests/test_api_companies.py ___________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+C:\Projeler\Huginn Data Insights\tests\test_api_companies.py:20: in <module>
+    import web_app
+web_app.py:522: in <module>
+    _TRADE_FOLD_MAP = str.maketrans(
+E   ValueError: string keys in translate table must be of length 1
+_____________ ERROR collecting AI proje v1/tests/test_kurallar.py _____________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+C:\Projeler\Huginn Data Insights\tests\test_kurallar.py:17: in <module>
+    from web_app import extract_trade_name, normalize_company, normalize_company_name
+web_app.py:522: in <module>
+    _TRADE_FOLD_MAP = str.maketrans(
+E   ValueError: string keys in translate table must be of length 1
+_____________ ERROR collecting AI proje v1/tests/test_platform.py _____________
+import file mismatch:
+imported module 'tests.test_platform' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\test_platform.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\tests\test_platform.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+____________________ ERROR collecting scripts/_env_test.py ____________________
+import file mismatch:
+imported module '_env_test' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\scripts\_env_test.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\scripts\_env_test.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+________________ ERROR collecting scripts/test_cross_merge.py _________________
+import file mismatch:
+imported module 'test_cross_merge' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\scripts\test_cross_merge.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\scripts\test_cross_merge.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+___________________ ERROR collecting scripts/test_growth.py ___________________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\python.py:508: in importtestmodule
+    mod = import_path(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:179: in exec_module
+    source_stat, co = _rewrite_test(fn, self.config)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:348: in _rewrite_test
+    tree = ast.parse(source, filename=strfn)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\ast.py:52: in parse
+    return compile(source, filename, mode, flags,
+E     File "c:\Huginn Data Projesi\Huginn Data Insights\scripts\test_growth.py", line 74
+E       }CONTENT_PLACEHOLDER
+E        ^^^^^^^^^^^^^^^^^^^
+E   SyntaxError: invalid syntax
+________________ ERROR collecting scripts/test_ostim_scrape.py ________________
+import file mismatch:
+imported module 'test_ostim_scrape' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\scripts\test_ostim_scrape.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\scripts\test_ostim_scrape.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+________________ ERROR collecting scripts/test_scrape_page.py _________________
+import file mismatch:
+imported module 'test_scrape_page' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\scripts\test_scrape_page.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\scripts\test_scrape_page.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+__________________ ERROR collecting scripts/test_telegram.py __________________
+import file mismatch:
+imported module 'test_telegram' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\scripts\test_telegram.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\scripts\test_telegram.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+______________ ERROR collecting scripts/test_telegram_simple.py _______________
+import file mismatch:
+imported module 'test_telegram_simple' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\scripts\test_telegram_simple.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\scripts\test_telegram_simple.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_________________ ERROR collecting scripts/test_vkn_batch.py __________________
+import file mismatch:
+imported module 'test_vkn_batch' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\scripts\test_vkn_batch.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\scripts\test_vkn_batch.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+________________ ERROR collecting scripts/test_vkn_extract.py _________________
+import file mismatch:
+imported module 'test_vkn_extract' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\scripts\test_vkn_extract.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\scripts\test_vkn_extract.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+____ ERROR collecting src/company_master/services/test_nvidia_langchain.py ____
+import file mismatch:
+imported module 'test_nvidia_langchain' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\src\company_master\services\test_nvidia_langchain.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\src\company_master\services\test_nvidia_langchain.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+____ ERROR collecting src/company_master/services/test_nvidia_requests.py _____
+import file mismatch:
+imported module 'test_nvidia_requests' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\src\company_master\services\test_nvidia_requests.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\src\company_master\services\test_nvidia_requests.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+____________ ERROR collecting tests/company_master/test_web_app.py ____________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+tests\company_master\test_web_app.py:11: in <module>
+    from web_app import app
+web_app.py:522: in <module>
+    _TRADE_FOLD_MAP = str.maketrans(
+E   ValueError: string keys in translate table must be of length 1
+_________ ERROR collecting tests/orchestrator/test_dispatch_review.py _________
+ImportError while importing test module 'c:\Huginn Data Projesi\Huginn Data Insights\tests\orchestrator\test_dispatch_review.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\orchestrator\test_dispatch_review.py:16: in <module>
+    from src.company_master.orchestrator.task_board import handoff_ekle, gorev_ekle, gorev_guncelle
+E   ImportError: cannot import name 'handoff_ekle' from 'src.company_master.orchestrator.task_board' (C:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\src\company_master\orchestrator\task_board.py)
+_____________ ERROR collecting tests/orchestrator/test_runner.py ______________
+ImportError while importing test module 'c:\Huginn Data Projesi\Huginn Data Insights\tests\orchestrator\test_runner.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\orchestrator\test_runner.py:18: in <module>
+    from src.company_master.orchestrator.runner import (
+E   ImportError: cannot import name 'execute_orchestrator_task' from 'src.company_master.orchestrator.runner' (C:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\src\company_master\orchestrator\runner.py)
+________________ ERROR collecting tests/test_api_companies.py _________________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+C:\Projeler\Huginn Data Insights\tests\test_api_companies.py:20: in <module>
+    import web_app
+web_app.py:522: in <module>
+    _TRADE_FOLD_MAP = str.maketrans(
+E   ValueError: string keys in translate table must be of length 1
+_________________ ERROR collecting tests/test_apify_client.py _________________
+ImportError while importing test module 'c:\Huginn Data Projesi\Huginn Data Insights\tests\test_apify_client.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_apify_client.py:10: in <module>
+    from company_master.intelligence.job_intelligence.sources.apify_client import (
+E   ModuleNotFoundError: No module named 'company_master.intelligence.job_intelligence.sources.apify_client'
+________________ ERROR collecting tests/test_chat_enricher.py _________________
+ImportError while importing test module 'c:\Huginn Data Projesi\Huginn Data Insights\tests\test_chat_enricher.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_chat_enricher.py:23: in <module>
+    from company_master.intelligence.job_intelligence.pipeline.chat_enricher import (  # noqa: E402
+E   ModuleNotFoundError: No module named 'company_master.intelligence.job_intelligence.pipeline.chat_enricher'
+__________ ERROR collecting tests/test_job_intelligence_analyzer.py ___________
+ImportError while importing test module 'c:\Huginn Data Projesi\Huginn Data Insights\tests\test_job_intelligence_analyzer.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_job_intelligence_analyzer.py:28: in <module>
+    from company_master.intelligence.job_intelligence.pipeline.analyzer import (  # noqa: E402
+E   ModuleNotFoundError: No module named 'company_master.intelligence.job_intelligence.pipeline.analyzer'
+_____________ ERROR collecting tests/test_job_intelligence_e2e.py _____________
+ImportError while importing test module 'c:\Huginn Data Projesi\Huginn Data Insights\tests\test_job_intelligence_e2e.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_job_intelligence_e2e.py:32: in <module>
+    from company_master.intelligence.job_intelligence.pipeline.analyzer import (  # noqa: E402
+E   ModuleNotFoundError: No module named 'company_master.intelligence.job_intelligence.pipeline.analyzer'
+___________________ ERROR collecting tests/test_kurallar.py ___________________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+C:\Projeler\Huginn Data Insights\tests\test_kurallar.py:17: in <module>
+    from web_app import extract_trade_name, normalize_company, normalize_company_name
+web_app.py:522: in <module>
+    _TRADE_FOLD_MAP = str.maketrans(
+E   ValueError: string keys in translate table must be of length 1
+_____________________ ERROR collecting tests/test_mcp.py ______________________
+ImportError while importing test module 'c:\Huginn Data Projesi\Huginn Data Insights\tests\test_mcp.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_mcp.py:14: in <module>
+    from company_master.mcp.policy_engine import PolicyEngine  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ModuleNotFoundError: No module named 'company_master.mcp'
+________________ ERROR collecting tests/test_mcp_transport.py _________________
+ImportError while importing test module 'c:\Huginn Data Projesi\Huginn Data Insights\tests\test_mcp_transport.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_mcp_transport.py:36: in <module>
+    from company_master.mcp.mcp_server_entry import create_mcp_server  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ModuleNotFoundError: No module named 'company_master.mcp'
+_________________ ERROR collecting tests/test_quality_gate.py _________________
+ImportError while importing test module 'c:\Huginn Data Projesi\Huginn Data Insights\tests\test_quality_gate.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\test_quality_gate.py:8: in <module>
+    from company_master.engine.quality_gate import QualityGate, load_quality_config
+E   ModuleNotFoundError: No module named 'company_master.engine.quality_gate'
+______________ ERROR collecting tests/test_security_regresyon.py ______________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+tests\test_security_regresyon.py:22: in <module>
+    import web_app
+web_app.py:522: in <module>
+    _TRADE_FOLD_MAP = str.maketrans(
+E   ValueError: string keys in translate table must be of length 1
+_______________ ERROR collecting tests/vector/test_embedder.py ________________
+ImportError while importing test module 'c:\Huginn Data Projesi\Huginn Data Insights\tests\vector\test_embedder.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\vector\test_embedder.py:8: in <module>
+    from src.company_master.vector.embedder import Embedder, EmbeddingResult
+E   ModuleNotFoundError: No module named 'src.company_master.vector'
+___________ ERROR collecting tests/vector/test_ninerouter_client.py ___________
+ImportError while importing test module 'c:\Huginn Data Projesi\Huginn Data Insights\tests\vector\test_ninerouter_client.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\vector\test_ninerouter_client.py:19: in <module>
+    from src.company_master.gateway.ninerouter_client import NineRouter
+E   ModuleNotFoundError: No module named 'src.company_master.gateway'
+________________ ERROR collecting tests/vector/test_service.py ________________
+ImportError while importing test module 'c:\Huginn Data Projesi\Huginn Data Insights\tests\vector\test_service.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\vector\test_service.py:8: in <module>
+    from src.company_master.vector.service import firma_metni, VectorService, DuplicateGroup
+E   ModuleNotFoundError: No module named 'src.company_master.vector'
+_________________ ERROR collecting tests/vector/test_store.py _________________
+ImportError while importing test module 'c:\Huginn Data Projesi\Huginn Data Insights\tests\vector\test_store.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\vector\test_store.py:10: in <module>
+    from src.company_master.vector.store import EmbeddedVectorStore, VectorDoc, SearchHit
+E   ModuleNotFoundError: No module named 'src.company_master.vector'
+_ ERROR collecting workspace/external/cursor_grok/output/tests/test_ostim_scraper.py _
+import file mismatch:
+imported module 'test_ostim_scraper' has this __file__ attribute:
+  c:\Huginn Data Projesi\Huginn Data Insights\AI proje v1\workspace\external\cursor_grok\output\tests\test_ostim_scraper.py
+which is not the same as the test file we want to collect:
+  c:\Huginn Data Projesi\Huginn Data Insights\workspace\external\cursor_grok\output\tests\test_ostim_scraper.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+============================== warnings summary ===============================
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.bozdag.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.afit.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.ancltd.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ancltd.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.antescelikboru.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'antescelikboru.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.armailac.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.bim.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.boneta.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.bsilighting.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.dokerler.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'dokerler.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.ebruyemek.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'ebruyemek.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.ekolgrupdokum.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.isim.org.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.fixa.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.hasteknikdokum.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'hektas.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.hmdenerji.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.palmemakina.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'palmemakina.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.lichtgitter.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'lichtgitter.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.merihasansor.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.optima.tc'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.pantechalu.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.remaiskele.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'remaiskele.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.sevincmakina.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.tasmakmakina.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.ticoremetal.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.sara.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'sara.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.epws.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.mersanmetal.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'mersanmetal.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.beevision.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.arasenerji.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.baykallarmetal.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.bmsdefence.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'bmsdefence.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'adsmetal.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.safas.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.artukbey.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'pandaalu.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.ihaledunyasi.net'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.ersamobilya.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.baskenthirdavat.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.fafdokum.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.kiaskomur.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.bvs.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.enora.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'enora.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.capssun.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.redlineboya.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'redlineboya.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.solinved.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.atayteknoloji.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.inovat.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.katmerciler.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'katmerciler.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.erve.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.nppanel.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'nppanel.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'hnc.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.hnc.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.vako.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.savasdefense.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'adremed.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.pioluklu.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'pioluklu.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.mekra-turkey.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'turkey.mekralang.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.ostimistihdam.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.manyet.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'manyet.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.alfakrank.com.tr'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+..\..\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\urllib3\connectionpool.py:1110: InsecureRequestWarning: Unverified HTTPS request is being made to host 'www.sevenmakina.com'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#tls-warnings
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+ERROR AI proje v1/tests/company_master/test_ankara_osb.py
+ERROR AI proje v1/tests/company_master/test_base_osfb_scraper.py
+ERROR AI proje v1/tests/company_master/test_connection.py
+ERROR AI proje v1/tests/company_master/test_extra_coverage.py
+ERROR AI proje v1/tests/company_master/test_migrate.py
+ERROR AI proje v1/tests/company_master/test_normalize.py
+ERROR AI proje v1/tests/company_master/test_pipeline.py
+ERROR AI proje v1/tests/company_master/test_quality_score.py
+ERROR AI proje v1/tests/company_master/test_search.py
+ERROR AI proje v1/tests/company_master/test_web_app.py - ValueError: string k...
+ERROR AI proje v1/tests/data_quality_toolkit/test_pii_scanner.py
+ERROR AI proje v1/tests/data_quality_toolkit/test_validator.py
+ERROR AI proje v1/tests/orchestrator/test_brief.py
+ERROR AI proje v1/tests/orchestrator/test_error_ledger.py
+ERROR AI proje v1/tests/orchestrator/test_models.py
+ERROR AI proje v1/tests/orchestrator/test_review.py
+ERROR AI proje v1/tests/orchestrator/test_runner.py
+ERROR AI proje v1/tests/orchestrator/test_sync.py
+ERROR AI proje v1/tests/orchestrator/test_workspace.py
+ERROR AI proje v1/tests/test_api_companies.py - ValueError: string keys in tr...
+ERROR AI proje v1/tests/test_kurallar.py - ValueError: string keys in transla...
+ERROR AI proje v1/tests/test_platform.py
+ERROR scripts/_env_test.py
+ERROR scripts/test_cross_merge.py
+ERROR scripts/test_growth.py
+ERROR scripts/test_ostim_scrape.py
+ERROR scripts/test_scrape_page.py
+ERROR scripts/test_telegram.py
+ERROR scripts/test_telegram_simple.py
+ERROR scripts/test_vkn_batch.py
+ERROR scripts/test_vkn_extract.py
+ERROR src/company_master/services/test_nvidia_langchain.py
+ERROR src/company_master/services/test_nvidia_requests.py
+ERROR tests/company_master/test_web_app.py - ValueError: string keys in trans...
+ERROR tests/orchestrator/test_dispatch_review.py
+ERROR tests/orchestrator/test_runner.py
+ERROR tests/test_api_companies.py - ValueError: string keys in translate tabl...
+ERROR tests/test_apify_client.py
+ERROR tests/test_chat_enricher.py
+ERROR tests/test_job_intelligence_analyzer.py
+ERROR tests/test_job_intelligence_e2e.py
+ERROR tests/test_kurallar.py - ValueError: string keys in translate table mus...
+ERROR tests/test_mcp.py
+ERROR tests/test_mcp_transport.py
+ERROR tests/test_quality_gate.py
+ERROR tests/test_security_regresyon.py - ValueError: string keys in translate...
+ERROR tests/vector/test_embedder.py
+ERROR tests/vector/test_ninerouter_client.py
+ERROR tests/vector/test_service.py
+ERROR tests/vector/test_store.py
+ERROR workspace/external/cursor_grok/output/tests/test_ostim_scraper.py
+!!!!!!!!!!!!!!!!!! Interrupted: 51 errors during collection !!!!!!!!!!!!!!!!!!!
+99 warnings, 51 errors in 354.93s (0:05:54)
