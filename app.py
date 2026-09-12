@@ -34,6 +34,7 @@ from company_master.orchestrator import task_board as tb
 from scripts.dash04_api_client import get_api, APIError
 from web_dashboard.tabs.admin_panel import render_decision_tab
 from web_dashboard.tabs.admin_extras import render_api_management, render_user_management
+from web_dashboard.tabs.admin_auth import get_admin_token, render_admin_login
 
 st.set_page_config(page_title="Company Master Dashboard", layout="wide", page_icon="ğŸ¢")
 
@@ -400,6 +401,7 @@ else:
 
 # --- P7-20: Admin Panel ---
 st.subheader("âš™ï¸ Admin Panel")
+admin_tab_login = st.tabs(["🔐 Admin Girişi"])
 admin_tab1, admin_tab2, admin_tab3, admin_tab4, admin_tab5 = st.tabs(["📊 Sistem Durumu", "🔑 API Yönetimi", "📋 Webhook Metrikleri", "📋 Karar Defteri", "👥 Kullanıcı Yönetimi"])
 if kpi is None or not kpi:
     kpi = load_kpi()
@@ -415,7 +417,7 @@ with admin_tab1:
         dlq_ok = (webhook_stats.get("dlq_toplam", 0) == 0) if webhook_stats else True
         st.metric("Sistem Durumu", "ğŸŸ¢ SaÄŸlÄ±klÄ±" if dlq_ok else "ğŸŸ  Dikkat")
 with admin_tab2:
-    render_api_management()
+    render_api_management(token=get_admin_token())
 with admin_tab3:
     if webhook_stats:
         hata_df = pd.DataFrame(
@@ -436,8 +438,11 @@ with admin_tab3:
 with admin_tab4:
     render_decision_tab()
 
+with admin_tab_login[0]:
+    render_admin_login()
+
 with admin_tab5:
-    render_user_management()
+    render_user_management(token=get_admin_token())
 # --- P7-21: Performans Metrikleri ---
 st.subheader("â±ï¸ Performans Metrikleri")
 if st.session_state['perf_metrics'].get('page_load_start'):
@@ -475,4 +480,5 @@ if st.session_state['perf_metrics'].get('page_load_start'):
         st.rerun()
 else:
     st.info("Performans metrikleri burada gÃ¶rÃ¼necek")
+
 
