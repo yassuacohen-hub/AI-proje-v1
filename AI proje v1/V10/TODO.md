@@ -50,15 +50,16 @@ Bağlantılar: [[00-Home]] · [[project_state]] · [[CHANGELOG]] · [[Orkestrato
 | P7-13 | MCP -> OSINT Motoru Bridge — ApifyAdapter + HuginnMCPServer SourceRegistry ile entegre, SourceSpec apify enabled=true | kilo | done | Apify SourceSpec enabled=True; ApifyAdapter get_apify_source_spec ve HuginnMCPServer list_sources SourceRegistry entegrasyonu tamamlandi. 38 test gecti. |
 | P7-14 | E2E Pipeline Test — Webhook -> ingest -> SignalAnalyzer -> IntelligenceScorer tam akış testi (fixture + CI) | kilo | done | E2E Pipeline Test tamamlandi: tests/test_job_intelligence_e2e.py (6 test, DB bagimsiz - fake engine). Webhook -> ingest -> SignalAnalyzer -> IntelligenceScorer zinciri dogrulandi. |
 | P7-15 | Signal Dashboard / Aggregation — company_signals + company_intelligence_scores -> Grafana/HTML dashboard | kilo | done | web_app.py /api/intelligence/dashboard (SQLite uyumlu) + web_dashboard index.html+app.js+style.css + test eklendi. 9 test gecti. |
-| P7-19 | SSE Gerçek Zamanlı Bildirim Sistemi — Server-Sent Events ile canlı dashboard güncelleme | gelistirici | done | Panel entegrasyonu tamamlandi (commit da90f3e). |
-| P7-20 | Admin Dashboard — Kullanıcı yönetimi, API key yönetimi, sistem durumu, webhook metrics UI | gelistirici | done | Admin gercek veri paneli tamamlandi (commit 2258c83). |
-| P7-21 | Performans Metrikleri Paneli — Response time, throughput, error rate grafikleri (Chart.js) | gelistirici | done | Performans gercek veri paneli tamamlandi (commit 2258c83). |
+| P7-19 | SSE Gerçek Zamanlı Bildirim Sistemi — Server-Sent Events ile canlı dashboard güncelleme | gelistirici | done | Panel entegrasyonu tamamlandi (commit da90f3e). **P7-19a** operasyonel webhook bildirimleri Streamlit'te, **P7-19b** müşteri SSE'si FastAPI panosuna taşınacak. |
+| P7-20 | Admin Dashboard — Kullanıcı yönetimi, API key yönetimi, sistem durumu, webhook metrics UI | gelistirici | done | Admin gercek veri paneli tamamlandi (commit 2258c83). Streamlit'te kalır. |
+| P7-21 | Performans Metrikleri Paneli — Response time, throughput, error rate grafikleri (Chart.js) | gelistirici | done | Performans gercek veri paneli tamamlandi (commit 2258c83). Streamlit'te kalır; `/api/performance` SSOT. |
 | REFACTOR-01 | gorev_guncelle() not keyword argümanını temizle | mimar | done | test_gorev_guncelle_not_keyword_argument eklendi; **{"not": ...} gecisi dogrulandi |
 | TEST-01 | Review başarısız senaryo testi ekle | mimar | done | test_dispatch_review.py: bilinmeyen task ve çıktısız task senaryoları |
 | VALIDATE-01 | quick_task.py uçtan uca validasyonu | external_agent | done | test_quick_task.py: unit + e2e; quick_task exit-code hatası düzeltildi |
 | DOCS-04 | Brief.package() ile brief.py package_brief birleştirme | mimar | done | package_brief() = json.dumps(brief.to_dict()); eşdeğerlik testleri geçti |
 | DOCS-05 | Dosya Kilitleme Protokolü Dokümanı | mimar | done | docs/DOSYA_KILITLEME_PROTOKOLU.md |
 | DOCS-06 | Görev Panosu Kullanım Kılavuzu | mimar | done | docs/GOREV_PANOSU_KULLANIM_KILAVUZU.md |
+| DASH-06 | Admin Panel API Yönetimi ve Kullanıcı Yönetimi | kilo | done | API client kullanarak admin panelinde kullanıcı yönetimi ve API kullanım sekmesi (DASH-06) — done |
 
 
 ## Tamamlanan Dönem Özetleri
@@ -89,3 +90,5 @@ DASH-04 API client + DB fallback tamamlandı; api_client.py, db_reader.py, app.p
 DOC-02 Decision Log mekanizmasi tamamlandi; scripts/decision_log.py (read_decisions, log_decision, search_decisions), data/orchestrator/decision_log.jsonl (6 girdi, UTF-8), tests/test_decision_log.py (4 test, hepsi gecti).
 
 DASH-05 Admin Panel Karar Defteri sekmesi tamamlandi; web_dashboard/tabs/admin_panel.py (render_decision_tab), web_dashboard/tabs/__init__.py, app.py 4. sekme eklendi. py_compile + smoke test OK.
+
+DASH-06 Admin Panel API Yönetimi ve Kullanıcı Yönetimi tamamlandı; web_dashboard/tabs/admin_extras.py (render_api_management, render_user_management), app.py 5. sekme, tests/test_admin_extras.py (3 test). py_compile + pytest OK.
