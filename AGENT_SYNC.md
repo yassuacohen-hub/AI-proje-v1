@@ -1,18 +1,19 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-12T17:17:12
+> Son guncelleme: 2026-09-12T20:52:45
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
 
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
+| DOC-02 | Decision Log mekanizmasini kur | mimari | P1 | plan |
+| DASH-05 | Admin Panel Karar Defteri sekmesi | mimar | P1 | plan |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| 9R-02 | Vektor Katmani + Dublikasyon Pilotu - Ch | roo_code | 2026-09-12 |
 | 9R-03 | Chat Tabanli Ilan Zenginlestirme - analy | roo_code | 2026-09-12 |
 | 9R-04 | Web Fetch/Search Aktivasyonu - Firecrawl | roo_code | 2026-09-12 |
 | P7-16 | Entegrasyon Test Kapsamını Genişletme -  | kilo | 2026-09-12 |
@@ -22,6 +23,7 @@
 | P7-19 | P7-19: SSE Gerçek Zamanlı Bildirim Siste | gelistirici | 2026-09-12 |
 | P7-20 | Admin Dashboard — Kullanıcı yönetimi, AP | gelistirici | 2026-09-12 |
 | P7-21 | Performans Metrikleri Paneli — Response  | gelistirici | 2026-09-12 |
+| DASH-04 | Hybrid Admin Panel - API client + DB fal | mimar | 2026-09-12 |
 
 ## Son Handoff'lar
 
