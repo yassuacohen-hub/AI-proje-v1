@@ -94,3 +94,6 @@ DOC-02 Decision Log mekanizmasi tamamlandi; scripts/decision_log.py (read_decisi
 DASH-05 Admin Panel Karar Defteri sekmesi tamamlandi; web_dashboard/tabs/admin_panel.py (render_decision_tab), web_dashboard/tabs/__init__.py, app.py 4. sekme eklendi. py_compile + smoke test OK.
 
 DASH-06 Admin Panel API Yönetimi ve Kullanıcı Yönetimi tamamlandı; web_dashboard/tabs/admin_extras.py (render_api_management, render_user_management), app.py 5. sekme, tests/test_admin_extras.py (3 test). py_compile + pytest OK.
+
+DASH-07 Admin Panel JWT Auth & Rol Yönetimi tamamlandı; app.py (admin_auth, admin_extras entegrasyonlari), web_dashboard/tabs/admin_auth.py (render_admin_login), admin_extras.py (token destegi). py_compile + 3 test OK.
+
