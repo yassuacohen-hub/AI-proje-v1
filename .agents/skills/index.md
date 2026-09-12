@@ -5,6 +5,8 @@ paylaşılır. Ajanlar ilgili `SKILL.md`’yi okur; aynı talimata göre çalı�
 
 | Skill | Link | Kullanım Alanı |
 |-------|------|----------------|
+| business-plan-template | [SKILL.md](business-plan-template/SKILL.md) | OSINT pazarlama iş modeli, ROI canvas |
+| marketing-strategy | [SKILL.md](marketing-strategy/SKILL.md) | Lead skor → CRM pipeline |
 | 9router | [SKILL.md](9router/SKILL.md) | AI gateway, web search/fetch için |
 | architecture-and-planning | [SKILL.md](architecture-and-planning/SKILL.md) | Mimari karar, plan |
 | code-quality-and-security | [SKILL.md](code-quality-and-security/SKILL.md) | OWASP, tip güvenliği |
