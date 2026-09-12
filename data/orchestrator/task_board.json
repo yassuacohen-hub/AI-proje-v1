@@ -601,12 +601,12 @@
     "oncelik": "P2",
     "durum": "done",
     "baslangic": null,
-    "bitis": "2026-09-12T17:15:06",
+    "bitis": "2026-09-12T17:25:51",
     "dosyalar": [
       "web_dashboard/js/app.py",
       "app.py"
     ],
-    "not": "app.py Streamlit dashboard: P7-19/20/21 panelleri gercek webhook verisine baglandi (load_webhook_stats + prometheus okuma)",
+    "not": "Panel entegrasyonu tamamlandi (commit da90f3e).",
     "source": "ic"
   },
   {
@@ -616,14 +616,14 @@
     "oncelik": "P2",
     "durum": "done",
     "baslangic": null,
-    "bitis": "2026-09-12T17:17:12",
+    "bitis": "2026-09-12T17:25:51",
     "dosyalar": [
       "web_dashboard/index.html",
       "web_dashboard/css/style.css",
       "web_dashboard/js/app.py",
       "app.py"
     ],
-    "not": "Admin Dashboard gercek veriye baglandi: kpi (toplam firma, ortalama kalite, VKN doluluk), sistem durumu (DLQ tabanli), webhook hata turleri grafigi + hata orani",
+    "not": "Admin gercek veri paneli tamamlandi (commit 2258c83).",
     "source": "ic"
   },
   {
@@ -633,12 +633,50 @@
     "oncelik": "P3",
     "durum": "done",
     "baslangic": null,
-    "bitis": "2026-09-12T17:17:12",
+    "bitis": "2026-09-12T17:25:51",
     "dosyalar": [
       "web_dashboard/js/app.py",
       "app.py"
     ],
-    "not": "Performans Metrikleri gercek veriye baglandi: sayfa yukleme, webhook olay sayisi, DLQ hata orani, webhook akis dagilim grafigi",
+    "not": "Performans gercek veri paneli tamamlandi (commit 2258c83).",
     "source": "ic"
+  },
+  {
+    "task_id": "DOC-02",
+    "title": "Decision Log mekanizmasini kur",
+    "owner": "mimari",
+    "mod": "architect",
+    "priority": "P1",
+    "status": "plan",
+    "created_at": "2026-09-12T17:57:53",
+    "not": "data/orchestrator/decision_log.jsonl",
+    "dependencies": []
+  },
+  {
+    "task_id": "DASH-04",
+    "title": "Hybrid Admin Panel - API client + DB fallback",
+    "owner": "mimar",
+    "mod": "architect",
+    "priority": "P1",
+    "status": "plan",
+    "created_at": "2026-09-12T17:57:53",
+    "not": "api_client.py, db_reader.py, .streamlit/config.toml",
+    "dependencies": [
+      "DOC-02"
+    ]
+  },
+  {
+    "task_id": "DASH-05",
+    "title": "Admin Panel Karar Defteri sekmesi",
+    "owner": "mimar",
+    "mod": "architect",
+    "priority": "P1",
+    "status": "plan",
+    "created_at": "2026-09-12T17:57:53",
+    "not": "tabs/admin_panel.py icinde karar tab'i",
+    "dependencies": [
+      "DOC-02",
+      "DASH-04"
+    ]
   }
 ]
