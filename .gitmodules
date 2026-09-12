@@ -1,0 +1,3 @@
+[submodule "kilo-market"]
+	path = .agents/marketplace
+	url = https://github.com/Kilo-Org/kilo-marketplace.git

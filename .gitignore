@@ -66,6 +66,7 @@ package-lock.json
 
 # Diğer araç/skill yerel klasörleri (makine bazlı, proje kodu değil)
 .agents/
+!.agents/marketplace/  # Pinli submodule (kilo-market), paylaşılır
 .continue/
 .kilo/
 .kimi-code/
@@ -84,3 +85,10 @@ scripts/_tmp/
 .vscode/
 data/watch/
 workspace/external/test_agent/
+
+# 9Router optimizer yedekleri (KVKK: token/anahtar içerebilir, dışarı gönderilmez)
+data/router/yedekler/
+data/router/son_uyarilar.json
+
+# 9R-05 arşiv (yardımcı _9r05_* scriptleri)
+scripts/_arsiv/
