@@ -879,7 +879,7 @@
     "baslik": "Gorev tetikleme + onay kuyrugu: orkestrator atar, ajan otomatik fark eder, teslim kontrol onayi olmadan done OLMaz",
     "sahip": "orkestrator",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "review",
     "baslangic": "2026-09-13T02:14:45",
     "bitis": null,
     "dosyalar": [
@@ -888,7 +888,7 @@
       "scripts/gorev_kutusu.py",
       "tests/test_gorev_trigger.py"
     ],
-    "not": "",
+    "not": "Teslim (cline): trigger.py (posta kutusu + onay kuyrugu), scripts/gorev_at.py + gorev_kutusu.py, AGENTS.md ORCH-08 bolumu; 14/14 yeni test + 53/53 orchestrator regresyon OK",
     "source": "ic",
     "from_agent": null
   }

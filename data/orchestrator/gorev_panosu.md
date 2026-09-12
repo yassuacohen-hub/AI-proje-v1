@@ -14,7 +14,7 @@
 | P7-23 | Vektör Katmanı Üretim Entegrasyonu | kilo | P1 | plan | src/company_master/vector/, requirements-dev.txt |
 | P7-24 | ASO ve OSTİM Veri Kalite Raporu | mimar | P2 | plan | data/aso/, data/ostim/, scripts/quality_report.py |
 | DASH-08 | Admin Denetim (Audit) Sekmesi | mimar | P2 | plan | web_dashboard/tabs/admin_audit.py |
-| ORCH-08 | Gorev tetikleme + onay kuyrugu: orkestrator atar, ajan otomatik fark eder, teslim kontrol onayi olmadan done OLMaz | orkestrator | P1 | aktif | src/company_master/orchestrator/trigger.py, scripts/gorev_at.py, scripts/gorev_kutusu.py |
+| ORCH-08 | Gorev tetikleme + onay kuyrugu: orkestrator atar, ajan otomatik fark eder, teslim kontrol onayi olmadan done OLMaz | orkestrator | P1 | review | src/company_master/orchestrator/trigger.py, scripts/gorev_at.py, scripts/gorev_kutusu.py |
 
 ## Tamamlananlar
 
