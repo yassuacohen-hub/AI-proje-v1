@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-12T23:43:28
+> Son guncelleme: 2026-09-13T02:01:29
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -14,14 +14,11 @@
 | P7-23 | Vektör Katmanı Üretim Entegrasyonu | kilo | P1 | plan |
 | P7-24 | ASO ve OSTİM Veri Kalite Raporu | mimar | P2 | plan |
 | DASH-08 | Admin Denetim (Audit) Sekmesi | mimar | P2 | plan |
-| DASH-07 | Admin Kimlik Doğrulama ve Yetkilendirme | mimar | P1 | aktif |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| P7-17 | Performans ve Ölçeklenebilirlik Benchmar | kilo | 2026-09-12 |
-| P7-18 | Observability: Distributed Tracing Enteg | kilo | 2026-09-12 |
 | TG-01 | Telegram Bot Gonderim ve Komut Aksini Du | kilo | 2026-09-12 |
 | P7-19 | P7-19: SSE Gerçek Zamanlı Bildirim Siste | gelistirici | 2026-09-12 |
 | P7-20 | Admin Dashboard — Kullanıcı yönetimi, AP | gelistirici | 2026-09-12 |
@@ -30,6 +27,8 @@
 | DASH-04 | Hybrid Admin Panel - API client + DB fal | mimar | 2026-09-12 |
 | DASH-05 | Admin Panel Karar Defteri sekmesi | mimar | 2026-09-12 |
 | DASH-06 | Admin Panel API Yönetimi ve Kullanıcı Yö | kilo | 2026-09-12 |
+| DASH-07 | Admin Panel JWT Auth & Rol Yönetimi | mimar | 2026-09-13 |
+| ORCH-07 | Obsidian vault git entegrasyonu (kurumsa | cline | 2026-09-13 |
 
 ## Son Handoff'lar
 

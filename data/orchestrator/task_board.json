@@ -863,14 +863,14 @@
     "baslik": "Obsidian vault git entegrasyonu (kurumsal hafiza)",
     "sahip": "cline",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-13T01:55:52",
-    "bitis": null,
+    "bitis": "2026-09-13T02:01:29",
     "dosyalar": [
       ".gitignore",
       "AI proje v1/"
     ],
-    "not": "",
+    "not": "Vault pinli submodule eklendi (gitlink 536d4e1 = origin/main). Icerik ana repoya girmez; hassas dosyalar vault gitignoreunda disli. AGENTS.md kural eklendi.",
     "source": "ic",
     "from_agent": null
   }
