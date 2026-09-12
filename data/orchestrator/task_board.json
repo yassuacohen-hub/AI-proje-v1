@@ -857,5 +857,21 @@
     "not": "",
     "source": "ic",
     "from_agent": null
+  },
+  {
+    "task_id": "ORCH-07",
+    "baslik": "Obsidian vault git entegrasyonu (kurumsal hafiza)",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "aktif",
+    "baslangic": "2026-09-13T01:55:52",
+    "bitis": null,
+    "dosyalar": [
+      ".gitignore",
+      "AI proje v1/"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
   }
 ]

@@ -1,3 +1,6 @@
 [submodule "kilo-market"]
 	path = .agents/marketplace
 	url = https://github.com/Kilo-Org/kilo-marketplace.git
+[submodule "AI proje v1"]
+	path = AI proje v1
+	url = https://github.com/yassuacohen-hub/AI-proje-v1.git

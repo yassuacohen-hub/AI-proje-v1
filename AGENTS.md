@@ -178,6 +178,13 @@ V10 Yönetim Yapısı
 6. **Harici ajan protokolü** [[07_harici_ajan_protokolu]] dosyasında tanımlıdır; bu dosya harici ajan entegrasyonu için tek kaynaktır.
 7. **Orkestratör modülü** `src/company_master/orchestrator/` altında yer alır; detaylı kullanım kılavuzu oradaki README.md'dedir.
 
+### Obsidian Vault Git Takibi (Submodule)
+
+- `AI proje v1/` (Obsidian vault) **pinli submodule** olarak ana repoda takip edilir (bkz. `.gitmodules` → `AI-proje-v1` reposu).
+- Ana repo yalnızca gitlink (commit hash) saklar; vault içeriği vault'un kendi reposunda yönetilir.
+- Vault içinde değişiklik yapınca sıra: (1) vault reposunda commit + push (`git -C "AI proje v1" push`), (2) ana repoda `git add "AI proje v1"` ile yeni pin işle.
+- Vault içindeki `.env` vb. hassas dosyalar vault'un kendi `.gitignore`'unda dışlanır; ana repoya asla girmez.
+
 ### Dosya Erişim Matrisi
 
 | Dosya / Dizin | İç Ajan | Harici Ajan | Not |

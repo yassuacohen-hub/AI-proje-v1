@@ -3,9 +3,9 @@
 # Veritabanı yedekleri (Supabase pg_dump ciktilari)
 backups/
 
-# Gömülü/ayrı git deposu (kendi GitHub remote'u var: AI-proje-v1)
-# Nested git repo olarak eklenmez; gitlink sorunlarını önlemek için dışlandı.
-AI proje v1/
+# Obsidian vault (AI proje v1) — pinli submodule olarak takip ediliyor (bkz. .gitmodules).
+# İçerik ana repoya girmez; yalnızca gitlink (commit hash) versionlanır.
+# Vault içindeki .env vb. hassas dosyalar vault'un kendi .gitignore'unda dışlanır.
 
 # Ortam ve gizli bilgiler
 .env
