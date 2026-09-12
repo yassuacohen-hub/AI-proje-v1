@@ -32,6 +32,8 @@ sys.path.insert(0, str(ROOT / "src"))
 from company_master.db.connection import get_engine
 from company_master.orchestrator import task_board as tb
 from scripts.dash04_api_client import get_api, APIError
+from web_dashboard.tabs.admin_extras import render_api_management, render_user_management
+from web_dashboard.tabs.admin_auth import get_admin_token, render_admin_login
 
 st.set_page_config(page_title="Company Master Dashboard", layout="wide", page_icon="🏢")
 
@@ -397,8 +399,9 @@ else:
     st.info("Bildirim verisi bulunamadı")
 
 # --- P7-20: Admin Panel ---
+admin_tab_login = st.tabs(["🔐 Admin Girişi"])
 st.subheader("⚙️ Admin Panel")
-admin_tab1, admin_tab2, admin_tab3 = st.tabs(["📊 Sistem Durumu", "🔑 API Yönetimi", "📋 Webhook Metrikleri"])
+admin_tab1, admin_tab2, admin_tab3, admin_tab4, admin_tab5 = st.tabs(["📊 Sistem Durumu", "🔑 API Yönetimi", "📋 Webhook Metrikleri", "📋 Karar Defteri", "👥 Kullanıcı Yönetimi"])
 if kpi is None or not kpi:
     kpi = load_kpi()
 with admin_tab1:
@@ -413,13 +416,8 @@ with admin_tab1:
         dlq_ok = (webhook_stats.get("dlq_toplam", 0) == 0) if webhook_stats else True
         st.metric("Sistem Durumu", "🟢 Sağlıklı" if dlq_ok else "🟠 Dikkat")
 with admin_tab2:
-    st.markdown("""
-    **API Key Yönetimi** — yakında aktif olacak:
-    - Kullanıcı başına API key rotasyonu `/api/admin/rotate-key`
-    - Kullanım metrikleri `/api/admin/api-usage`
-    - Onay bekleyen kullanıcılar `/api/admin/pending`
-    """)
-    st.code("curl -H 'Authorization: Bearer <TOKEN>' http://localhost:8000/api/admin/api-usage")
+    render_api_management(token=get_admin_token())
+
 with admin_tab3:
     if webhook_stats:
         hata_df = pd.DataFrame(
@@ -436,6 +434,16 @@ with admin_tab3:
             st.metric("Hata Oranı", f"%{webhook_stats['hatali'] / max(webhook_stats['olay_toplam'], 1) * 100:.1f}")
     else:
         st.info("Webhook metrikleri yakında aktif olacak")
+
+
+with admin_tab4:
+    render_decision_tab()
+
+with admin_tab5:
+    render_user_management(token=get_admin_token())
+
+with admin_tab_login[0]:
+    render_admin_login()
 
 # --- P7-21: Performans Metrikleri ---
 st.subheader("⏱️ Performans Metrikleri")
