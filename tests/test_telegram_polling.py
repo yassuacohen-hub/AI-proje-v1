@@ -210,6 +210,13 @@ def test_cmd_help():
     assert "/rapor" in result
     assert "/wiki" in result
     assert "/set_status" in result
+    assert "/at" in result
+    assert "/pano" in result
+    assert "/onaylar" in result
+    assert "/onayla" in result
+    assert "/reddet" in result
+    assert "/nobet" in result
+    assert "/nobet_ayar" in result
 
 
 def test_cmd_status(_tmp_board):
@@ -499,3 +506,165 @@ def test_get_chat_id_no_message():
 
 def test_get_text_no_message():
     assert telegram_polling.get_text_from_update({}) is None
+
+
+# ---------------------------------------------------------------------------
+# Yeni orkestrator komut testleri
+# ---------------------------------------------------------------------------
+
+
+def test_cmd_at_unauthorized(_tmp_board):
+    result = telegram_polling.handle_update(_make_update("/at T1 kilo Test Gorev"))
+    assert result is not None
+    assert "Yetkisiz" in result or "yetkili" in result
+
+
+def test_cmd_at_authorized(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        result = telegram_polling.handle_update(_make_update('/at T1 kilo "Test Gorev"'))
+    assert result is not None
+    assert "Gorev eklendi" in result
+    board = json.loads(_tmp_board.read_text(encoding="utf-8"))
+    assert any(t["task_id"] == "T1" and t["sahip"] == "kilo" for t in board)
+
+
+def test_cmd_pano(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        telegram_polling.handle_update(_make_update('/at T1 kilo "Test Gorev"'))
+        result = telegram_polling.handle_update(_make_update("/pano"))
+    assert result is not None
+    assert "PANO" in result
+    assert "T1" in result
+
+
+def test_cmd_onaylar(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        telegram_polling.handle_update(_make_update("/at T2 kilo Test"))
+        telegram_polling._trigger.teslim_et("T2", "kilo", "ozet")
+        result = telegram_polling.handle_update(_make_update("/onaylar"))
+    assert result is not None
+    assert "ONAY BEKLEYEN" in result
+    assert "T2" in result
+
+
+def test_cmd_onayla(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        telegram_polling.handle_update(_make_update("/at T3 kilo Test"))
+        telegram_polling._trigger.teslim_et("T3", "kilo", "ozet")
+        result = telegram_polling.handle_update(_make_update("/onayla T3"))
+    assert result is not None
+    assert "Onaylandi" in result or "onaylandi" in result or "done" in result
+    task = telegram_polling._task_board.gorev_getir("T3")
+    assert task is not None and task["durum"] == "done"
+
+
+def test_cmd_reddet(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        telegram_polling.handle_update(_make_update("/at T4 kilo Test"))
+        telegram_polling._trigger.teslim_et("T4", "kilo", "ozet")
+        result = telegram_polling.handle_update(_make_update("/reddet T4 Neden"))
+    assert result is not None
+    assert "Reddedildi" in result or "reddet" in result.lower()
+    task = telegram_polling._task_board.gorev_getir("T4")
+    assert task is not None and task["durum"] == "aktif"
+
+
+def test_cmd_nobet(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        result = telegram_polling.handle_update(_make_update("/nobet"))
+    assert result is not None
+    assert "NOBET" in result
+
+
+def test_cmd_nobet_ayar(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        result = telegram_polling.handle_update(_make_update("/nobet_ayar 600"))
+    assert result is not None
+    assert "600" in result
+    ayar = telegram_polling._nobetci.nobetci_ayar_oku()
+    assert ayar["kademe_sn"] == 600
+
+
+def test_cmd_menu(_tmp_board):
+    result = telegram_polling.handle_update(_make_update("/menu"))
+    assert result is not None
+    assert "ANA MENÜ" in result or "ana menü" in result.lower()
+
+
+def test_cmd_teslim(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        telegram_polling.handle_update(_make_update("/at T5 kilo Test"))
+        result = telegram_polling.handle_update(_make_update("/teslim T5 Ozet"))
+    assert result is not None
+    assert "Teslim" in result or "teslim" in result.lower() or "review" in result.lower()
+
+
+def test_cmd_teslim_missing_args(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        result = telegram_polling.handle_update(_make_update("/teslim"))
+    assert result is not None
+    assert "Kullanim" in result or "Ornek" in result or "usag" in result.lower()
+
+
+def test_alias_gorev_ekle(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        result = telegram_polling.handle_update(_make_update("/gorev-ekle T6 kilo Test"))
+    assert result is not None
+    assert "Gorev eklendi" in result
+    board = json.loads(_tmp_board.read_text(encoding="utf-8"))
+    assert any(t["task_id"] == "T6" for t in board)
+
+
+def test_alias_durum(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        result = telegram_polling.handle_update(_make_update("/durum"))
+    assert result is not None
+    assert "PROJE DURUMU" in result or "DURUM" in result.upper()
+
+
+def test_alias_gorev_durum(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        telegram_polling.handle_update(_make_update("/at T7 kilo Test"))
+        result = telegram_polling.handle_update(_make_update("/gorev-durum T7 review"))
+    assert result is not None
+    assert "guncellendi" in result.lower() or "Guncellendi" in result
+    task = telegram_polling._task_board.gorev_getir("T7")
+    assert task is not None and task["durum"] == "review"
+
+
+def test_alias_nobet_ayar(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        result = telegram_polling.handle_update(_make_update("/nobet-ayar 300"))
+    assert result is not None
+    assert "300" in result
+    ayar = telegram_polling._nobetci.nobetci_ayar_oku()
+    assert ayar["kademe_sn"] == 300
+
+
+def test_cmd_at_usage_example(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        result = telegram_polling.handle_update(_make_update("/at"))
+    assert result is not None
+    assert "Ornek" in result or "Kullanim" in result
+
+
+def test_cmd_onayla_usage_example(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        result = telegram_polling.handle_update(_make_update("/onayla"))
+    assert result is not None
+    assert "Ornek" in result or "Kullanim" in result
+
+
+def test_cmd_reddet_usage_example(_tmp_board):
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        result = telegram_polling.handle_update(_make_update("/reddet"))
+    assert result is not None
+    assert "Ornek" in result or "Kullanim" in result
+
+
+def test_cmd_help_has_categories(_tmp_board):
+    result = telegram_polling.cmd_help("/help")
+    assert "GÖREV YÖNETİMİ" in result
+    assert "ONAY" in result.upper() or "Onay" in result
+    assert "DURUM" in result.upper() or "Durum" in result
+    assert "NÖBETÇİ" in result or "NOBET" in result

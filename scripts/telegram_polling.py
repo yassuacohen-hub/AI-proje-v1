@@ -7,23 +7,33 @@ doğrudan Telegram Bot API getUpdates long-polling metodunu kullanir.
 Komutlar:
     /start              - Botu baslat, hos gelesmesi
     /help               - Yardim metni
-    /status             - Aktif gorevler + proje durumu
+    /menu               - Etkileşimli komut menüsü
+    /status (alias /durum) - Aktif gorevler + proje durumu
     /gorev              - Task_board.json'dan tum gorevleri listele
+    /gorev-ekle (alias /at) - Panoya gorev ekle ve tetik at
+    /gorev-durum (alias /set_status) - Task board'da gorev durumunu guncelle (yetkili)
     /rapor              - KPI raporu (data/kpi_raporu.md)
     /wiki               - OSTİM kalite raporu (data/ostim/kalite_raporu.md)
     /restart_etl        - ETL pipeline yeniden baslatin
     /degisiklik         - CHANGELOG.md'yi goster
     /gunluk             - Gunluk ozet
     /izleme             - Kalite + proje izleme
-    /set_status <id> <durum> - Task board'da gorev durumunu guncelle (yetkili)
+    /onaylar            - Onay bekleyen teslimleri listeler
+    /onayla <id>        - Gorevi onayla (done) (yetkili)
+    /reddet <id> <neden> - Gorevi reddet (aktife geri dönder) (yetkili)
+    /teslim <id> <ozet> - Gorevi incelemeye gönder (yetkili)
+    /nobet              - Nöbetçi turu attırır
+    /nobet-ayar <sn>    - Nöbetci alarm suresini günceller (yetkili)
 
-Calisma zamani degiskenleri (.env):
+    Alias: /at = /gorev-ekle, /set_status = /gorev-durum, /status = /durum, /nobet_ayar = /nobet-ayar
+
+    Calisma zamani degiskenleri (.env):
     TELEGRAM_BOT_TOKEN
     TELEGRAM_CHAT_ID
     TELEGRAM_BOT_USERNAME (opsiyonel; @BotName parsing icin)
     ETL_RESTART_CMD (opsiyonel; varsayilan: python scripts/refresh_pipeline.py)
 
-Kullanim:
+    Kullanim:
     set TELEGRAM_BOT_TOKEN=...
     set TELEGRAM_CHAT_ID=...
     python scripts/telegram_polling.py
@@ -62,6 +72,9 @@ from src.company_master.utils.telegram_bot import (
     _get_bot_username,
     _load_env,
 )
+from src.company_master.orchestrator import trigger as _trigger
+from src.company_master.orchestrator import nobetci as _nobetci
+from src.company_master.orchestrator import task_board as _task_board
 
 POLL_TIMEOUT = 30
 POLL_RETRY_DELAY = 5
@@ -69,17 +82,30 @@ POLL_LIMIT = 100
 
 ALLOWED_UPDATES = ["message"]
 COMMANDS_INFO = {
-    "start": ("Botu baslatir", ""),
+    "start": ("Botu baslatir / hos gelesmesi", ""),
     "help": ("Bu yardim metnini gosterir", ""),
-    "status": ("Proje durumu + aktif gorevler", ""),
+    "menu": ("Etkilesimli ana menu", ""),
+    "status": ("Proje durumu + aktif gorevler (alias: /durum)", ""),
+    "durum": ("Proje durumu + aktif gorevler (alias: /status)", ""),
     "gorev": ("Task board'daki tum goeveleri listeler", ""),
+    "gorev-ekle": ("Panoya gorev ekle (alias: /at)", ""),
+    "at": ("Panoya gorev ekle (alias: /gorev-ekle)", ""),
+    "gorev-durum": ("Gorev durumunu guncelle (alias: /set_status)", ""),
+    "set_status": ("Gorev durumunu guncelle (alias: /gorev-durum)", ""),
     "rapor": ("KPI raporunu gosterir", ""),
     "wiki": ("OSTIM kalite raporunu gosterir", ""),
     "restart_etl": ("ETL pipeline'i yeniden baslatir", ""),
     "degisiklik": ("CHANGELOG.md'yi gosterir", ""),
     "gunluk": ("Gunluk ozet raporu gonderir", ""),
     "izleme": ("Kalite + proje izleme", ""),
-    "set_status": ("Gorev durumunu gunceller: /set_status <id> <durum>", ""),
+    "pano": ("Bekleyen tetik ve onay ozeti", ""),
+    "onaylar": ("Onay bekleyen teslimleri listeler", ""),
+    "onayla": ("Gorevi onayla (done): /onayla <task_id>", ""),
+    "reddet": ("Gorevi reddet: /reddet <task_id> <neden>", ""),
+    "teslim": ("Gorevi incelemeye gond: /teslim <task_id> <ozet>", ""),
+    "nobet": ("Nobetci turu attirir", ""),
+    "nobet-ayar": ("Nobet alarm suresini gunceller (alias: /nobet_ayar)", ""),
+    "nobet_ayar": ("Nobet alarm suresini gunceller (alias: /nobet-ayar)", ""),
 }
 
 
@@ -226,22 +252,73 @@ def cmd_start(text: str) -> str:
     """/start komutu."""
     return (
         "<b>Ankara B2B Intelligence Bot</b>\n\n"
-        "Hosgeldiniz! Komutlari gormek icin <code>/help</code> yazin.\n\n"
-        "Kullanilabilir komutlar:\n"
-        "<code>/start</code> <code>/help</code> <code>/status</code> "
-        "<code>/gorev</code> <code>/rapor</code> <code>/wiki</code> "
-        "<code>/restart_etl</code> <code>/gunluk</code> <code>/izleme</code> "
-        "<code>/set_status</code>"
+        "Hosgeldiniz! Komutlari gormek icin <code>/help</code> veya "
+        "<code>/menu</code> yazin.\n\n"
+        "Kategoriler:\n"
+        "<code>/gorev*</code> Görev yönetimi\n"
+        "<code>/onay* /teslim*</code> Onay ve inceleme\n"
+        "<code>/durum /rapor /wiki /gunluk /izleme*</code> Durum ve raporlama\n"
+        "<code>/nobet*</code> Nöbetçi\n"
+        "<code>/help /menu /start</code> Yardım"
     )
 
 
 def cmd_help(text: str) -> str:
-    """/help komutu."""
-    lines = ["<b>KOMUTLAR</b>\n"]
-    for cmd, (desc, _) in sorted(COMMANDS_INFO.items()):
-        lines.append(f"<code>/{cmd}</code> — {html_escape(desc)}")
-    lines.append("")
-    lines.append("<i>Yetkili komut: /set_status &lt;task_id&gt; &lt;durum&gt;</i>")
+    """/help komutu — kategorize komut listesi ve örnekler."""
+    lines = [
+        "<b>KOMUTLAR</b>\n",
+        "<b>GÖREV YÖNETİMİ</b>",
+        "<code>/gorev-ekle</code> (alias <code>/at</code>) — Panoya görev ekle ve tetik at",
+        "   <i>Kullanım: /gorev-ekle &lt;task_id&gt; &lt;ajan&gt; &lt;baslik&gt;</i>",
+        "<code>/gorev</code> — Tüm görevleri duruma göre listele",
+        "<code>/gorev-durum</code> (alias <code>/set_status</code>) — Görev durumunu güncelle",
+        "   <i>Kullanım: /gorev-durum &lt;task_id&gt; &lt;durum&gt;</i>",
+        "",
+        "<b>ONAY &amp; İNCELEME</b>",
+        "<code>/onaylar</code> — Onay bekleyen teslimleri listeler",
+        "<code>/onayla</code> — Görevi onayla (done)",
+        "   <i>Kullanım: /onayla &lt;task_id&gt;</i>",
+        "<code>/reddet</code> — Görevi reddet (aktife geri dönder)",
+        "   <i>Kullanım: /reddet &lt;task_id&gt; &lt;neden&gt;</i>",
+        "<code>/teslim</code> — Görevi incelemeye gönder",
+        "   <i>Kullanım: /teslim &lt;task_id&gt; &lt;ozet&gt;</i>",
+        "",
+        "<b>DURUM &amp; RAPORLAMA</b>",
+        "<code>/durum</code> (alias <code>/status</code>) — Proje durumu + aktif görevler",
+        "<code>/pano</code> — Bekleyen tetik ve onay özeti",
+        "<code>/rapor</code> — KPI raporu",
+        "<code>/wiki</code> — OSTİM kalite raporu",
+        "<code>/gunluk</code> — Günlük özet",
+        "<code>/izleme</code> — Kalite + proje izleme",
+        "<code>/degisiklik</code> — CHANGELOG.md",
+        "",
+        "<b>NÖBETÇİ</b>",
+        "<code>/nobet</code> — Nöbetçi turu attırır",
+        "<code>/nobet-ayar</code> (alias <code>/nobet_ayar</code>) — Alarm süresini güncelle",
+        "   <i>Kullanım: /nobet-ayar &lt;kademe_sn&gt;</i>",
+        "",
+        "<b>YARDIM</b>",
+        "<code>/menu</code> — Etkileşimli komut menüsü",
+        "<code>/help</code> — Bu yardım metni",
+        "<code>/start</code> — Başlangıç",
+        "",
+        "<i>Yetkili komutlar: /gorev-durum, /onayla, /reddet, /teslim, /nobet-ayar</i>",
+    ]
+    return "\n".join(lines)
+
+
+def cmd_menu(text: str) -> str:
+    """/menu komutu — etkileşimli ana menü."""
+    lines = [
+        "<b>📋 ANA MENÜ</b>\n",
+        "1. <b>Görev yönetimi</b> — /gorev, /gorev-ekle, /gorev-durum",
+        "2. <b>Onay &amp; inceleme</b> — /onaylar, /onayla, /reddet, /teslim",
+        "3. <b>Durum &amp; raporlama</b> — /durum, /pano, /rapor, /wiki, /gunluk",
+        "4. <b>Nöbetçi</b> — /nobet, /nobet-ayar",
+        "5. <b>Yardım</b> — /help, /menu, /start",
+        "",
+        "Bir komut yazin veya <code>/help</code> ile detayları görüntüleyin.",
+    ]
     return "\n".join(lines)
 
 
@@ -388,10 +465,11 @@ def cmd_restart_etl(text: str) -> str:
 
 
 def cmd_set_status(text: str, args: list[str]) -> str:
-    """/set_status komutu — gorev durumunu guncelle (yetkili)."""
+    """/gorev-durum (alias /set_status) — gorev durumunu guncelle (yetkili)."""
     if len(args) < 2:
         return (
-            "<b>Kullanim:</b> <code>/set_status &lt;task_id&gt; &lt;durum&gt;</code>\n"
+            "<b>Kullanim:</b> <code>/gorev-durum &lt;task_id&gt; &lt;durum&gt;</code>\n"
+            "<i>Ornek: /gorev-durum TASK-01 review</i>\n"
             "<i>Gecerli durumlar: plan, aktif, review, done, blocked</i>"
         )
     task_id = args[0]
@@ -412,19 +490,240 @@ def cmd_set_status(text: str, args: list[str]) -> str:
     return msg
 
 
+# ---------------------------------------------------------------------------
+# Yeni orkestrator komutlari
+# ---------------------------------------------------------------------------
+
+def cmd_at(text: str, args: list[str]) -> str:
+    """/at (alias /gorev-ekle) — panoya gorev ekle ve ajan postasina tetik at."""
+    if len(args) < 3:
+        return (
+            "<b>Kullanim:</b> <code>/gorev-ekle &lt;task_id&gt; &lt;ajan&gt; &lt;baslik&gt;</code>\n"
+            "<i>Ornek: /gorev-ekle TASK-01 kilo \"Test gorev\"</i>"
+        )
+    task_id = args[0]
+    ajan = args[1]
+    baslik = " ".join(args[2:]).strip().strip('"')
+    try:
+        task = _task_board.gorev_ekle(
+            task_id=task_id,
+            baslik=baslik,
+            sahip=ajan,
+            dosyalar=[],
+            source="ic",
+        )
+        _trigger.tetik_ekle(
+            task_id=task_id,
+            ajan=ajan,
+            talimat=f"Telegram /gorev-ekle: {baslik}",
+        )
+        return (
+            "<b>Gorev eklendi</b>\n"
+            f"<code>{html_escape(task_id)}</code> → "
+            f"<b>{html_escape(ajan)}</b>\n"
+            f"<i>{html_escape(baslik[:100])}</i>"
+        )
+    except _trigger.TriggerError as exc:
+        return f"<b>⚠️</b> {html_escape(str(exc))}"
+    except ValueError as exc:
+        return f"<b>⚠️</b> {html_escape(str(exc))}"
+    except Exception as exc:
+        return f"<b>❌ Hata:</b> {html_escape(str(exc))}"
+
+
+def cmd_teslim(text: str, args: list[str]) -> str:
+    """/teslim komutu — görevi incelemeye gönder (yetkili)."""
+    if len(args) < 2:
+        return (
+            "<b>Kullanim:</b> <code>/teslim &lt;task_id&gt; &lt;ozet&gt;</code>\n"
+            "<i>Ornek: /teslim TASK-01 Parse tamamlandi</i>"
+        )
+    task_id = args[0]
+    ozet = " ".join(args[1:]).strip().strip('"')
+    try:
+        result = _trigger.teslim_et(
+            task_id=task_id,
+            ajan="telegram_bot",
+            ozet=ozet,
+        )
+        return (
+            f"<b>Teslim edildi</b>\n"
+            f"<code>{html_escape(task_id)}</code> → <b>review</b>\n"
+            f"<i>{html_escape(ozet[:100])}</i>\n"
+            f"<i>Onay kuyruguna eklendi.</i>"
+        )
+    except _trigger.TriggerError as exc:
+        return f"<b>⚠️</b> {html_escape(str(exc))}"
+    except Exception as exc:
+        return f"<b>❌ Hata:</b> {html_escape(str(exc))}"
+
+
+def cmd_pano(text: str, args: list[str] | None = None) -> str:
+    """/pano komutu — bekleyen tetik ve onay ozeti."""
+    lines = ["<b>PANO ÖZETİ</b>\n"]
+
+    triggers_dir = _task_board.STATE_DIR / "triggers"
+    if triggers_dir.exists():
+        for dosya in sorted(triggers_dir.glob("*.jsonl")):
+            ajan = dosya.stem
+            bekleyen = _trigger.bekleyen_tetikler(ajan)
+            if bekleyen:
+                lines.append(f"<b>{html_escape(ajan)}</b> ({len(bekleyen)} tetik bekliyor):")
+                for k in bekleyen[:10]:
+                    lines.append(
+                        f"  <code>{html_escape(k.get('task_id', '?'))}</code> "
+                        f"{html_escape(k.get('talimat', '')[:60])} "
+                        f"<i>{html_escape(k.get('tarih', ''))}</i>"
+                    )
+
+    onaylar = _trigger.onay_bekleyenler()
+    if onaylar:
+        lines.append(f"\n<b>ONAY BEKLEYEN TESLİMLER</b> ({len(onaylar)}):")
+        for k in onaylar[:10]:
+            lines.append(
+                f"  <code>{html_escape(k.get('task_id', '?'))}</code> — "
+                f"<b>{html_escape(k.get('ajan', ''))}</b> "
+                f"{html_escape(k.get('ozet', '')[:80])}"
+            )
+    else:
+        lines.append("\n<i>Onay bekleyen teslim yok.</i>")
+
+    lines.append(f"\n<i>{time.strftime('%H:%M:%S')}</i>")
+    return "\n".join(lines)
+
+
+def cmd_onaylar(text: str, args: list[str] | None = None) -> str:
+    """/onaylar komutu — inceleme bekleyen teslimleri listeler."""
+    onaylar = _trigger.onay_bekleyenler()
+    if not onaylar:
+        return "<b>Onay bekleyen teslim yok.</b>"
+
+    lines = [f"<b>ONAY BEKLEYENLER</b> ({len(onaylar)})\n"]
+    for k in onaylar[:20]:
+        lines.append(
+            f"  <code>{html_escape(k.get('task_id', '?'))}</code> — "
+            f"{html_escape(k.get('ajan', ''))}: "
+            f"{html_escape(k.get('ozet', '')[:80])}"
+        )
+    lines.append(f"\n<i>{time.strftime('%H:%M:%S')}</i>")
+    return "\n".join(lines)
+
+
+def cmd_onayla(text: str, args: list[str]) -> str:
+    """/onayla komutu — görevi onayla (done)."""
+    if not args:
+        return (
+            "<b>Kullanim:</b> <code>/onayla &lt;task_id&gt;</code>\n"
+            "<i>Ornek: /onayla TASK-01</i>"
+        )
+    task_id = args[0]
+    try:
+        _trigger.onayla(task_id, onaylayan="telegram_bot")
+        task = _task_board.gorev_getir(task_id)
+        title = html_escape(task.get("baslik", "")[:80]) if task else ""
+        return (
+            f"<b>✅ Onaylandı</b>\n"
+            f"<code>{html_escape(task_id)}</code> → <b>done</b>\n"
+            f"<i>{title}</i>\n"
+            f"<i>Kilitli dosyalar serbest bırakildi.</i>"
+        )
+    except _trigger.TriggerError as exc:
+        return f"<b>⚠️</b> {html_escape(str(exc))}"
+    except Exception as exc:
+        return f"<b>❌ Hata:</b> {html_escape(str(exc))}"
+
+
+def cmd_reddet(text: str, args: list[str]) -> str:
+    """/reddet komutu — görevi reddet (aktife geri dönder)."""
+    if len(args) < 2:
+        return (
+            "<b>Kullanim:</b> <code>/reddet &lt;task_id&gt; &lt;neden&gt;</code>\n"
+            "<i>Ornek: /reddet TASK-01 Gereksiz duzeltme</i>"
+        )
+    task_id = args[0]
+    neden = " ".join(args[1:]).strip().strip('"')
+    try:
+        _trigger.reddet(task_id, onaylayan="telegram_bot", neden=neden)
+        return (
+            f"<b>Reddedildi</b>\n"
+            f"<code>{html_escape(task_id)}</code> → <b>aktif</b>\n"
+            f"<i>Neden: {html_escape(neden[:100])}</i>"
+        )
+    except _trigger.TriggerError as exc:
+        return f"<b>⚠️</b> {html_escape(str(exc))}"
+    except Exception as exc:
+        return f"<b>❌ Hata:</b> {html_escape(str(exc))}"
+
+
+def cmd_nobet(text: str, args: list[str] | None = None) -> str:
+    """/nobet komutu — nöbetçi turu attırır."""
+    try:
+        results = _nobetci.nobet_tut()
+        if not results:
+            return f"<b>NOBET:</b> geciken tetik yok.\n<i>{time.strftime('%H:%M:%S')}</i>"
+
+        lines = [f"<b>NOBET RAPORU</b> ({len(results)} geciken tetik)\n"]
+        for r in results:
+            lines.append(
+                f"  <code>{html_escape(r.get('task_id', ''))}</code> — "
+                f"{html_escape(r.get('ajan', ''))} — "
+                f"{html_escape(str(r.get('gecikme_dk', '')))} dk gecikme"
+            )
+        lines.append(f"\n<i>{time.strftime('%H:%M:%S')}</i>")
+        return "\n".join(lines)
+    except Exception as exc:
+        return f"<b>❌ Hata:</b> {html_escape(str(exc))}"
+
+
+def cmd_nobet_ayar(text: str, args: list[str]) -> str:
+    """/nobet-ayar (alias /nobet_ayar) — nöbetci alarm suresini günceller."""
+    if not args:
+        return (
+            "<b>Kullanim:</b> <code>/nobet-ayar &lt;kademe_sn&gt;</code>\n"
+            "<i>Ornek: /nobet-ayar 600</i>"
+        )
+    try:
+        kademe_sn = int(args[0])
+        if kademe_sn <= 0:
+            raise ValueError
+    except ValueError:
+        return "<b>⚠️</b> Kademe_sn pozitif tamsayı olmalı."
+
+    try:
+        ayar = _nobetci.nobetci_ayar_oku()
+        ayar["kademe_sn"] = kademe_sn
+        _nobetci.nobetci_ayar_yaz(ayar)
+        return f"<b>Nöbet ayarı güncellendi</b>: {kademe_sn} saniye"
+    except Exception as exc:
+        return f"<b>❌ Hata:</b> {html_escape(str(exc))}"
+
+
 # Komut dispatch table
 COMMAND_HANDLERS: dict[str, Any] = {
-    "start": (cmd_start, False),
-    "help": (cmd_help, False),
-    "status": (cmd_status, False),
-    "gorev": (cmd_gorev, False),
-    "rapor": (cmd_rapor, False),
-    "wiki": (cmd_wiki, False),
-    "restart_etl": (cmd_restart_etl, True),   # yetkili
-    "degisiklik": (cmd_degisiklik, False),
-    "gunluk": (cmd_gunluk, False),
-    "izleme": (cmd_izleme, False),
-    "set_status": (cmd_set_status, True),     # yetkili
+    "start": (cmd_start, False, False),
+    "help": (cmd_help, False, False),
+    "menu": (cmd_menu, False, False),
+    "status": (cmd_status, False, False),
+    "durum": (cmd_status, False, False),
+    "gorev": (cmd_gorev, False, False),
+    "rapor": (cmd_rapor, False, False),
+    "wiki": (cmd_wiki, False, False),
+    "restart_etl": (cmd_restart_etl, True, False),
+    "degisiklik": (cmd_degisiklik, False, False),
+    "gunluk": (cmd_gunluk, False, False),
+    "izleme": (cmd_izleme, False, False),
+    "set_status": (cmd_set_status, True, True),
+    "gorev-durum": (cmd_set_status, True, True),
+    "at": (cmd_at, True, True),
+    "gorev-ekle": (cmd_at, True, True),
+    "pano": (cmd_pano, True, False),
+    "onaylar": (cmd_onaylar, True, False),
+    "onayla": (cmd_onayla, True, True),
+    "reddet": (cmd_reddet, True, True),
+    "teslim": (cmd_teslim, True, True),
+    "nobet": (cmd_nobet, True, False),
+    "nobet-ayar": (cmd_nobet_ayar, True, True),
+    "nobet_ayar": (cmd_nobet_ayar, True, True),
 }
 
 
@@ -470,7 +769,7 @@ def handle_update(update: dict[str, Any]) -> Optional[str]:
     if not handler_entry:
         return f"<b>Bilinmeyen komut:</b> {html_escape(command)}\n{html_escape('Detay icin /help yazin.')}"
 
-    handler, needs_auth = handler_entry
+    handler, needs_auth, takes_args = handler_entry
 
     if needs_auth and not is_authorized(chat_id):
         return (
@@ -479,7 +778,7 @@ def handle_update(update: dict[str, Any]) -> Optional[str]:
         )
 
     try:
-        if handler == cmd_set_status:
+        if takes_args:
             return handler(text, args)
         return handler(text)
     except Exception as exc:

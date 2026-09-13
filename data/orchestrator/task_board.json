@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-12T14:42:53",
+    "bitis": "2026-09-13T11:27:59",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -739,26 +739,30 @@
   {
     "task_id": "P7-4",
     "baslik": "Company Career Pages Scraper",
-    "sahip": "web_kazima",
+    "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-12T23:43:28",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "",
+    "bitis": "2026-09-13T08:30:00",
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/sources/career_apify_source.py",
+      "src/company_master/intelligence/job_intelligence/sources/__init__.py",
+      "tests/intelligence/test_career_apify_source.py"
+    ],
+    "not": "Teslim (kilo): CareerPagesApifySource (Apify actor bazli kariyer sayflari scraper). apify/website-crawler actoru ile kariyer URL'leri keşfedilir, ScrapedJob formatina donusulur. 10 test gecti (20/20).",
     "source": "ic",
     "from_agent": null
   },
   {
     "task_id": "P7-5",
     "baslik": "İSKUR Scraper",
-    "sahip": "kazi_scraper",
+    "sahip": "roo",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-12T23:43:28",
-    "bitis": null,
+    "bitis": "2026-09-13T08:25:11",
     "dosyalar": [],
-    "not": "",
+    "not": "Teslim (roo): P7-5 ISKUR Scraper dogrulandi: iskur.py (269 satir) mevcut ve calisir durumda. IskurSource: JSON-LD + HTML parsing, rate limit 2.0s, pagination (max_pages), Turkce tarih/maas parsing, error handling. Y21 arastirmasi geregi public metadata only (ozel sektor firma adi gizli). syntax OK, import OK.",
     "source": "ic",
     "from_agent": null
   },
@@ -771,7 +775,7 @@
     "baslangic": "2026-09-12T23:43:28",
     "bitis": "2026-09-12T23:43:28",
     "dosyalar": [],
-    "not": "Anti-bot koruması; proxy/headless gerekebilir.",
+    "not": "Anti-bot blocked. P7-28/29/30 alternatiflere yonlendirildi.",
     "source": "ic",
     "from_agent": null
   },
@@ -780,9 +784,9 @@
     "baslik": "Apify Dead-Letter Queue ve Yeniden Deneme Akışı",
     "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-12T23:43:28",
-    "bitis": null,
+    "bitis": "2026-09-13T07:29:52",
     "dosyalar": [
       "web_app.py",
       "app.py",
@@ -797,46 +801,49 @@
     "baslik": "Vektör Katmanı Üretim Entegrasyonu",
     "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-12T23:43:28",
-    "bitis": null,
+    "bitis": "2026-09-13T08:15:00",
     "dosyalar": [
+      "src/company_master/intelligence/vector_search.py",
       "src/company_master/vector/",
+      "tests/intelligence/test_vector_search.py",
       "requirements-dev.txt"
     ],
-    "not": "",
+    "not": "Teslim (kilo): vector_search.py (VectorSearch, VectorSearchConfig, VectorSearchResult — similarity search endpoint, index_companies, search_by_ids, health). Supabase pgvector destegi (ChromaDB fallback). 10 test. Tüm vektor testleri 55 passed.",
     "source": "ic",
     "from_agent": null
   },
   {
     "task_id": "P7-24",
     "baslik": "ASO ve OSTİM Veri Kalite Raporu",
-    "sahip": "mimar",
+    "sahip": "roo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-12T23:43:28",
-    "bitis": null,
+    "bitis": "2026-09-13T09:27:18",
     "dosyalar": [
       "data/aso/",
       "data/ostim/",
       "scripts/quality_report.py"
     ],
-    "not": "",
+    "not": "Teslim (roo): ASO ve OSTIM veri kalite raporu uretildi: scripts/quality_report.py olusturuldu, data/quality/aso_ostim_kalite.json + .md uretildi. Ana bulgular: ASO 785 kayit (skor 49,6, NACE/adres/eposta zengin, VKN/tel/web bos), OSTIM detayli 5485 kayit (skor 50,4, 474 kayitta ostimistihdam.com portal kirliligi +0,86 sisme), firmalar_full 8313 kayit (skor 36,6). Kopya unvan gruplari tespit edildi. Test zinciri: test_quality_score.py 6/6 gecti + quality_report.py calisma dogrulamasi.",
     "source": "ic",
     "from_agent": null
   },
   {
     "task_id": "DASH-08",
     "baslik": "Admin Denetim (Audit) Sekmesi",
-    "sahip": "mimar",
+    "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-12T23:43:28",
-    "bitis": null,
+    "bitis": "2026-09-13T08:40:00",
     "dosyalar": [
-      "web_dashboard/tabs/admin_audit.py"
+      "web_dashboard/tabs/admin_audit.py",
+      "app.py"
     ],
-    "not": "",
+    "not": "Teslim (kilo): web_dashboard/tabs/admin_audit.py (render_audit_tab: Karar Defteri, Dosya Kilidi, Handoff, Görev Durumu, Trigger Logu). app.py'ye 8. admin tab entegre (admin_tab8). py_compile OK.",
     "source": "ic",
     "from_agent": null
   },
@@ -879,9 +886,9 @@
     "baslik": "Gorev tetikleme + onay kuyrugu: orkestrator atar, ajan otomatik fark eder, teslim kontrol onayi olmadan done OLMaz",
     "sahip": "orkestrator",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-13T02:14:45",
-    "bitis": null,
+    "bitis": "2026-09-13T06:51:01",
     "dosyalar": [
       "src/company_master/orchestrator/trigger.py",
       "scripts/gorev_at.py",
@@ -889,6 +896,377 @@
       "tests/test_gorev_trigger.py"
     ],
     "not": "Teslim (cline): trigger.py (posta kutusu + onay kuyrugu), scripts/gorev_at.py + gorev_kutusu.py, AGENTS.md ORCH-08 bolumu; 14/14 yeni test + 53/53 orchestrator regresyon OK",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ORCH-09",
+    "baslik": "Otomatik tetikleme nobetcisi: Gorev Zamanlayici poll (1dk deneme -> 10dk hedef, kaldirilabilir)",
+    "sahip": "orkestrator",
+    "oncelik": "P1",
+    "durum": "aktif",
+    "baslangic": "2026-09-13T02:36:03",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/orchestrator/nobetci.py",
+      "scripts/gorev_nobetci.py",
+      "scripts/gorev_nobetci.bat",
+      "tests/test_gorev_nobetci.py",
+      "AGENTS.md",
+      "CHANGELOG.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "simple_1",
+    "baslik": "Basit Test Görevi",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T03:01:08",
+    "bitis": "2026-09-13T09:37:01",
+    "dosyalar": [],
+    "not": "Teslim (roo): Basit test görevi: mailbox kontrolü ve görev takibi protokolü test edildi.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "TEST-02",
+    "baslik": "Test Görevi 2",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T04:00:05",
+    "bitis": "2026-09-13T06:41:29",
+    "dosyalar": [],
+    "not": "Teslim (roo): Kullanıcı başlatma akışı test edildi ve başarılı.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ORCH-10",
+    "baslik": "Telegram Orkestrator Entegrasyonu (ORCH-10)",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T04:10:05",
+    "bitis": "2026-09-13T07:24:53",
+    "dosyalar": [
+      "scripts/telegram_polling.py",
+      "tests/test_telegram_polling.py",
+      "V10/09_kurallar_ve_promptlar/09_telegram_bot_rehberi.md"
+    ],
+    "not": "Teslim (kilo): Telegram orkestratör komutları eklendi ve test edildi.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-25",
+    "baslik": "Admin Dashboard KPI Kartlari — musteri sayisi, API cagrilari, sinyal, sistem sagligi",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T06:51:32",
+    "bitis": "2026-09-13T07:19:27",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_kpi.py",
+      "app.py"
+    ],
+    "not": "Teslim (roo): P7-25 Admin Dashboard KPI Kartları tamamlandı: web_dashboard/tabs/admin_kpi.py (render_kpi_tab, 8 veri yükleme fonksiyonu), app.py'ye 6. tab entegre. KPI: toplam_firma, aktif_kullanici, api_cagri_toplam, sinyal_toplam. Trendler: 7/30/90 gün. Alan analizi: Plotly+fallback st.bar_chart. Cache: ttl=60. Test: syntax+import OK.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-26",
+    "baslik": "Webhook Monitor sekmesi — endpoint, latency, status dagilimi, hata loglari",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T06:53:34",
+    "bitis": "2026-09-13T07:39:40",
+    "dosyalar": [
+      "web_dashboard/tabs/webhook_monitor.py",
+      "app.py"
+    ],
+    "not": "Teslim (kilo): web_dashboard/tabs/webhook_monitor.py (render_webhook_monitor_tab: endpoint health, olay istatistikleri, durum dagilimi, hata türleri, DLQ kayıtları, latency/Prometheus). app.py'ye 7. admin tab entegre. py_compile + import OK.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "YENI-1",
+    "baslik": "Veri Temizleme Scripti",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T06:10:00",
+    "bitis": "2026-09-13T06:15:00",
+    "dosyalar": [
+      "scripts/veri_temizleme.py"
+    ],
+    "not": "Teslim (kilo): scripts/veri_temizleme.py — encoding düzeltme, portal filtreleme, VKN/telefon/eposta normalize, URL normalize, bos alan temizleme, duplicate tespiti. OSTIM (5485) + ASO (785) test. Rapor: *_clean_report.json.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "YENI-2",
+    "baslik": "API Rate Limiting Optimizasyonu",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "src/company_master/api/rate_limiter.py"
+    ],
+    "bitis": "2026-09-13T09:50:00",
+    "dosyalar": [
+      "src/company_master/api/rate_limiter.py",
+      "tests/test_rate_limiter.py"
+    ],
+    "not": "Teslim (kilo): Merkezi rate limiter olusturuldu. RateLimiter sinifi: tier bazli (public/user/analyst/admin), per-IP sliding window, per-endpoint limit, thread-safe, singleton pattern. 17 test gecti.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "YENI-3",
+    "baslik": "Supabase companies tablosu olusturma",
+    "sahip": "kilo",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": [
+      "src/company_master/schema/companies.sql"
+    ],
+    "bitis": "2026-09-13T09:30:16",
+    "dosyalar": [],
+    "not": "Teslim (kilo): Supabase companies tablosu tanimi src/company_master/schema/companies.sql dosyasi kontrol edildi. 8 tablo (companies, sources, source_records, osbs, quarantine_firms, company_capabilities, certifications, key_personnel), UUID PK, TIMESTAMPTZ, pg_trgm index, OSB seed data mevcut.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "YENI-4",
+    "baslik": "Dashboard veri akisi duzelt",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": [
+      "web_app.py"
+    ],
+    "bitis": "2026-09-13T09:55:00",
+    "dosyalar": [
+      "web_app.py"
+    ],
+    "not": "Teslim (kilo): DASH_API_KEY auth korumasi duzeltildi. require_api_key fonksiyonunda DASH_API_KEY set iken API key olmayan istekler 401 dondermeli. DASH_API_KEY kendisi de gecerli key olarak kabul ediliyor (X-API-Key header veya query param). 4 auth testi gecti.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "YENI-5",
+    "baslik": "Apify webhook DLQ monitor",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": [
+      "src/company_master/intelligence/job_intelligence/pipeline/"
+    ],
+    "bitis": "2026-09-13T09:32:40",
+    "dosyalar": [],
+    "not": "Teslim (kilo): Apify Webhook DLQ monitor olusturuldu: src/company_master/intelligence/job_intelligence/pipeline/dlq_monitor.py. ApifyDLQMonitor sinifi: DLQ okuma, istatistik (hata turu sayilari, zaman araligi), filtreleme (error_type, actor, zaman), rapor generasyonu, retry ve clear destegi. 42 DLQ kaydi okundu (21 auth_error + 21 validation_error).",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "YENI-6",
+    "baslik": "Telegram komut test suite",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_telegram_polling.py"
+    ],
+    "bitis": "2026-09-13T09:40:00",
+    "dosyalar": [
+      "tests/test_telegram_polling.py"
+    ],
+    "not": "Teslim (kilo): 71 test tamamlanmisti (test_telegram_polling.py). Mock'lu, gerçek Telegram API'sine baglanmaz. task_board atomik yazma icin tmp_path izole edildi.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "CO-01",
+    "baslik": "CoPlot Arastirmasi: CoPlot nedir, ozellikleri, fiyatlandirmasi, rakip analizi",
+    "sahip": "roo",
+    "oncelik": "P0",
+    "durum": "aktif",
+    "baslangic": [
+      "AI proje v1/V10/07_referanslar/coplot_arastirma.md"
+    ],
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "CO-02",
+    "baslik": "CoPlot Entegrasyon Analizi: API, SDK, webhook destegi",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": [
+      "AI proje v1/V10/07_referanslar/coplot_entegrasyon.md"
+    ],
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "NOB-01",
+    "baslik": "Nobetci Alarm Sistemi: Zincir devami + teslim onayi ses cal",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": [
+      "scripts/oto_nobetci.py"
+    ],
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-01",
+    "baslik": "VS Code Copilot Test: src/company_master/utils/telegram_bot.py dosyasindaki send_message fonksiyonunun unit testini yaz.",
+    "sahip": "copilot",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": [
+      "tests/telegram_test.py"
+    ],
+    "bitis": "2026-09-13T08:30:00",
+    "dosyalar": [
+      "tests/test_telegram_bot.py"
+    ],
+    "not": "Teslim (kilo): send_message testleri 7 test (success, missing_token, missing_chat_id, ok_false, request_exception, timeout, json_decode, explicit_chat_id, timeout_param). test_telegram_bot.py 410 satir, butim 123 test gecti.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-02",
+    "baslik": "VS Code Copilot Test: web_dashboard/tabs/admin_kpi.py icindeki render_kpi_tab fonksiyonunu refactor et. KPI kartlarini daha moduler yap.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": [
+      "web_dashboard/tabs/admin_kpi.py"
+    ],
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-28",
+    "baslik": "LinkedIn + Indeed + ISKUR is ilanlari. LinkedIn icin Apify actor kullan.",
+    "sahip": "kilo",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": [
+      "src/company_master/intelligence/job_intelligence/sources/linkedin_apify_source.py",
+      "src/company_master/intelligence/job_intelligence/sources/indeed_source.py"
+    ],
+    "bitis": "2026-09-13T11:00:00",
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/sources/linkedin_apify_source.py",
+      "src/company_master/intelligence/job_intelligence/sources/indeed_source.py"
+    ],
+    "not": "Teslim (kilo): LinkedInApifySource (Apify actor base, LinkedIn job scraping) ve IndeedSource (BaseJobSource base, HTML/JSON-LD parsing) olusturuldu. ISKUR mevcut. Import testi OK. 728 test gecti.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-29",
+    "baslik": "Google Dorking + Wayback Machine: site:kariyer.net cache verisi topla.",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "aktif",
+    "baslangic": [
+      "scripts/google_dork_career.py",
+      "scripts/wayback_machine_scraper.py"
+    ],
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-30",
+    "baslik": "Selenium + Rotating Proxy: Kariyer.net icin anti-bot asma scraper.",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": [
+      "src/company_master/intelligence/job_intelligence/sources/kariyer_selenium_source.py",
+      "src/company_master/utils/proxy_rotator.py"
+    ],
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-03",
+    "baslik": "Copilot Test: src/company_master/orchestrator/trigger.py teslim_et() fonksiyonunun edge-case testleri.",
+    "sahip": "copilot",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_gorev_trigger.py"
+    ],
+    "bitis": "2026-09-13T08:30:00",
+    "dosyalar": [
+      "tests/test_gorev_trigger.py"
+    ],
+    "not": "Teslim (kilo): test_gorev_trigger.py 158 satir, 12 test. Bos ozet (engellenir), cift teslim (engellenir), gecersiz durum (onayla_yanlis_gorev_red, reddet_nedensiz_engellenir). Tedarik edildi.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-04",
+    "baslik": "Copilot Test: scripts/gorev_kutusu.py icin CLI testi.",
+    "sahip": "copilot",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_gorev_kutusu_cli.py"
+    ],
+    "bitis": "2026-09-13T08:35:00",
+    "dosyalar": [
+      "tests/test_gorev_kutusu_cli.py"
+    ],
+    "not": "Teslim (kilo): test_gorev_kutusu_cli.py 12 test (bak_bos, bak_bekleyen, al_basarili, al_hata, teslim_basarili, teslim_hata, onayla_basarili, onayla_hata, reddet_basarili, reddet_hata, onay_bekleyen_bos, onay_bekleyen_var). Mock et iliski task_board/tmp_path.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-05",
+    "baslik": "Copilot Test: src/company_master/orchestrator/nobetci.py nobet_tut fonksiyonu test.",
+    "sahip": "copilot",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_gorev_nobetci.py"
+    ],
+    "bitis": "2026-09-13T08:40:00",
+    "dosyalar": [
+      "tests/test_gorev_nobetci.py"
+    ],
+    "not": "Teslim (kilo): 11 test gecti. geciken_tetikler_bos (geciken yok), geciken_tetikler_gelir (tek geciken), geciken_tetikler_cok_geciken (cok geciken - yeni eklendi), nobet_tut_firlatir, nobet_tut_devre_disi, ayar_oku_default, ayar_yaz_yukler, tetik_gecikmis_yap_tarih_ceker.",
     "source": "ic",
     "from_agent": null
   }

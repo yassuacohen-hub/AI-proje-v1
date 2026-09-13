@@ -34,6 +34,9 @@ from company_master.orchestrator import task_board as tb
 from scripts.dash04_api_client import get_api, APIError
 from web_dashboard.tabs.admin_extras import render_api_management, render_user_management
 from web_dashboard.tabs.admin_auth import get_admin_token, render_admin_login
+from web_dashboard.tabs.admin_kpi import render_kpi_tab
+from web_dashboard.tabs.admin_audit import render_audit_tab
+from web_dashboard.tabs.webhook_monitor import render_webhook_monitor_tab
 
 st.set_page_config(page_title="Company Master Dashboard", layout="wide", page_icon="🏢")
 
@@ -57,31 +60,36 @@ if 'auto_refresh_enabled' not in st.session_state:
 
 @st.cache_data(ttl=30)
 def load_kpi() -> dict:
+    """KPI verisi yükle - DB fallback ile."""
     try:
         api_data = get_api("/api/kpi")
         if isinstance(api_data, dict) and api_data:
             return api_data
-    except APIError:
+    except (APIError, Exception):
         pass
 
-    engine = get_engine()
-    with engine.connect() as conn:
-        r = conn.execute(text("""
-            SELECT COUNT(*) as total,
-                SUM(CASE WHEN c.tax_number IS NOT NULL AND c.tax_number != '' THEN 1 ELSE 0 END) as tax,
-                SUM(CASE WHEN c.vergi_no IS NOT NULL AND c.vergi_no != '' THEN 1 ELSE 0 END) as vergi,
-                SUM(CASE WHEN COALESCE(c.tax_number, c.vergi_no) IS NOT NULL AND COALESCE(c.tax_number, c.vergi_no) != '' THEN 1 ELSE 0 END) as vkn_either,
-                SUM(CASE WHEN c.website_domain IS NOT NULL AND c.website_domain != '' THEN 1 ELSE 0 END) as web,
-                SUM(CASE WHEN c.osb_parsel IS NOT NULL AND c.osb_parsel != '' THEN 1 ELSE 0 END) as parsel,
-                SUM(CASE WHEN c.adres IS NOT NULL AND c.adres != '' THEN 1 ELSE 0 END) as adres,
-                SUM(CASE WHEN c.primary_phone IS NOT NULL AND c.primary_phone != '' THEN 1 ELSE 0 END) as tel,
-                SUM(CASE WHEN c.primary_email IS NOT NULL AND c.primary_email != '' THEN 1 ELSE 0 END) as email,
-                SUM(CASE WHEN c.nace_code IS NOT NULL AND c.nace_code != '' THEN 1 ELSE 0 END) as nace,
-                AVG(c.data_quality_score) as avg_score
-            FROM companies c
-            WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
-        """)).mappings().first()
-        return dict(r) if r else {}
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            # Önce companies tablosu var mı kontrol et
+            from sqlalchemy import text
+            tablolar = [row[0] for row in conn.execute(text(
+                "SELECT table_name FROM information_schema.tables WHERE table_schema='public'"
+            ))]
+            if "companies" in tablolar:
+                r = conn.execute(text("""
+                    SELECT COUNT(*) as total,
+                        SUM(CASE WHEN c.tax_number IS NOT NULL AND c.tax_number != '' THEN 1 ELSE 0 END) as tax,
+                        SUM(CASE WHEN c.website_domain IS NOT NULL AND c.website_domain != '' THEN 1 ELSE 0 END) as web,
+                        AVG(c.data_quality_score) as avg_score
+                    FROM companies c
+                """)).mappings().first()
+                return dict(r) if r else {}
+    except Exception:
+        pass
+
+    # Fallback: boş KPI
+    return {"total": 0, "tax": 0, "vergi": 0, "web": 0, "parsel": 0, "adres": 0, "tel": 0, "email": 0, "nace": 0, "avg_score": 0}
 
 
 @st.cache_data(ttl=30)
@@ -401,7 +409,7 @@ else:
 # --- P7-20: Admin Panel ---
 admin_tab_login = st.tabs(["🔐 Admin Girişi"])
 st.subheader("⚙️ Admin Panel")
-admin_tab1, admin_tab2, admin_tab3, admin_tab4, admin_tab5 = st.tabs(["📊 Sistem Durumu", "🔑 API Yönetimi", "📋 Webhook Metrikleri", "📋 Karar Defteri", "👥 Kullanıcı Yönetimi"])
+admin_tab1, admin_tab2, admin_tab3, admin_tab4, admin_tab5, admin_tab6, admin_tab7, admin_tab8 = st.tabs(["📊 Sistem Durumu", "🔑 API Yönetimi", "📋 Webhook Metrikleri", "📋 Karar Defteri", "👥 Kullanıcı Yönetimi", "📈 KPI Kartları", "🔌 Webhook Monitor", "🔍 Denetim"])
 if kpi is None or not kpi:
     kpi = load_kpi()
 with admin_tab1:
@@ -441,6 +449,15 @@ with admin_tab4:
 
 with admin_tab5:
     render_user_management(token=get_admin_token())
+
+with admin_tab6:
+    render_kpi_tab()
+
+with admin_tab7:
+    render_webhook_monitor_tab()
+
+with admin_tab8:
+    render_audit_tab()
 
 with admin_tab_login[0]:
     render_admin_login()

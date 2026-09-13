@@ -1,0 +1,108 @@
+"""Unit tests for web dashboard tab helpers."""
+
+import json
+from pathlib import Path
+from unittest.mock import MagicMock
+
+from web_dashboard.tabs import admin_audit, admin_auth, admin_kpi, admin_panel, webhook_monitor
+
+
+def test_admin_auth_reads_token_and_reports_missing_token(monkeypatch):
+    monkeypatch.setattr(admin_auth.st, "session_state", {"admin_token": "secret"})
+    assert admin_auth.get_admin_token() == "secret"
+    assert admin_auth.require_admin_token() == "secret"
+
+    monkeypatch.setattr(admin_auth.st, "session_state", {})
+    admin_auth.st.info = MagicMock()
+    assert admin_auth.require_admin_token() is None
+    admin_auth.st.info.assert_called_once()
+
+
+def test_decision_tab_handles_empty_and_limits_recent_rows(monkeypatch):
+    admin_panel.st.info = MagicMock()
+    admin_panel.render_decision_tab([])
+    admin_panel.st.info.assert_called_once()
+
+    decisions = [
+        {"ts": str(index), "title": f"Karar {index}", "tags": ["test"]}
+        for index in range(55)
+    ]
+    dataframe = MagicMock()
+    monkeypatch.setattr(admin_panel.st, "dataframe", dataframe)
+    admin_panel.render_decision_tab(decisions)
+
+    rendered_rows = dataframe.call_args.args[0]
+    assert len(rendered_rows) == 50
+    assert rendered_rows.iloc[0]["Tarih"] == "5"
+    assert rendered_rows.iloc[-1]["Baslik"] == "Karar 54"
+
+
+def test_webhook_helpers_cover_statuses_and_timestamps():
+    assert webhook_monitor._status_color("SUCCEEDED") == "🟢"
+    assert webhook_monitor._status_color("FAILED") == "🔴"
+    assert webhook_monitor._status_color("unknown") == "⚪"
+    assert webhook_monitor._format_ts(None) == "—"
+    assert webhook_monitor._format_ts("2026-09-13T12:34:56.000Z") == "2026-09-13T12:34:56"
+
+
+def test_load_webhook_stats_ignores_invalid_jsonl(monkeypatch, tmp_path: Path):
+    events = tmp_path / "events.jsonl"
+    events.write_text(
+        '{"status":"SUCCEEDED","triggered_at":"2026-09-13T10:00:00Z"}\n'
+        '{invalid json}\n'
+        '{"status":"FAILED"}\n',
+        encoding="utf-8",
+    )
+    dlq = tmp_path / "dlq.jsonl"
+    dlq.write_text('{"error_type":"timeout"}\n', encoding="utf-8")
+    monkeypatch.setattr(webhook_monitor, "WEBHOOK_EVENTS", events)
+    monkeypatch.setattr(webhook_monitor, "WEBHOOK_DLQ", dlq)
+    webhook_monitor.load_webhook_stats.clear()
+
+    stats = webhook_monitor.load_webhook_stats()
+
+    assert stats["olay_toplam"] == 2
+    assert stats["basarili"] == 1
+    assert stats["hatali"] == 1
+    assert stats["dlq_toplam"] == 1
+    assert stats["hata_turleri"] == {"timeout": 1}
+
+
+def test_audit_loaders_return_valid_entries_only(monkeypatch, tmp_path: Path):
+    locks = tmp_path / "locks.json"
+    locks.write_text('{"file.py":{"sahip":"copilot"}}', encoding="utf-8")
+    handoffs = tmp_path / "handoffs.json"
+    handoffs.write_text('{"COP-02":{"tamamlandi":"tests"}}', encoding="utf-8")
+    triggers = tmp_path / "triggers.jsonl"
+    triggers.write_text('{"task_id":"COP-02"}\ninvalid\n', encoding="utf-8")
+    monkeypatch.setattr(admin_audit, "FILE_LOCKS", locks)
+    monkeypatch.setattr(admin_audit, "HANDOFFS", handoffs)
+    monkeypatch.setattr(admin_audit, "TRIGGER_LOG", triggers)
+    admin_audit.load_file_locks.clear()
+    admin_audit.load_handoffs.clear()
+    admin_audit.load_trigger_log.clear()
+
+    assert admin_audit.load_file_locks()["file.py"]["sahip"] == "copilot"
+    assert admin_audit.load_handoffs()["COP-02"]["tamamlandi"] == "tests"
+    assert admin_audit.load_trigger_log() == [{"task_id": "COP-02"}]
+
+
+def test_kpi_task_summary_counts_statuses(monkeypatch):
+    monkeypatch.setattr(
+        "company_master.orchestrator.task_board.gorev_listesi",
+        lambda: [
+            {"durum": "done"},
+            {"durum": "aktif"},
+            {"durum": "blocked"},
+            {"durum": "unknown"},
+        ],
+    )
+    admin_kpi.load_task_summary.clear()
+
+    summary = admin_kpi.load_task_summary()
+
+    assert summary["toplam"] == 4
+    assert summary["done"] == 1
+    assert summary["aktif"] == 1
+    assert summary["blocked"] == 1
+    assert summary["review"] == 0

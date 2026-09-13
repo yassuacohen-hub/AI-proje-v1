@@ -7,21 +7,21 @@
 
 | Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |
 |-------|--------|-------|---------|-------|----------|
-| P7-4 | Company Career Pages Scraper | web_kazima | P1 | plan | - |
-| P7-5 | İSKUR Scraper | kazi_scraper | P1 | plan | - |
 | P7-6 | Kariyer.net Scraper | web_kazima | P1 | blocked | - |
-| P7-22 | Apify Dead-Letter Queue ve Yeniden Deneme Akışı | kilo | P1 | plan | web_app.py, app.py, tests/test_apify_dlq.py |
-| P7-23 | Vektör Katmanı Üretim Entegrasyonu | kilo | P1 | plan | src/company_master/vector/, requirements-dev.txt |
-| P7-24 | ASO ve OSTİM Veri Kalite Raporu | mimar | P2 | plan | data/aso/, data/ostim/, scripts/quality_report.py |
-| DASH-08 | Admin Denetim (Audit) Sekmesi | mimar | P2 | plan | web_dashboard/tabs/admin_audit.py |
-| ORCH-08 | Gorev tetikleme + onay kuyrugu: orkestrator atar, ajan otomatik fark eder, teslim kontrol onayi olmadan done OLMaz | orkestrator | P1 | review | src/company_master/orchestrator/trigger.py, scripts/gorev_at.py, scripts/gorev_kutusu.py |
+| ORCH-09 | Otomatik tetikleme nobetcisi: Gorev Zamanlayici poll (1dk deneme -> 10dk hedef, kaldirilabilir) | orkestrator | P1 | aktif | src/company_master/orchestrator/nobetci.py, scripts/gorev_nobetci.py, scripts/gorev_nobetci.bat |
+| CO-01 | CoPlot Arastirmasi: CoPlot nedir, ozellikleri, fiyatlandirmasi, rakip analizi | roo | P0 | aktif | - |
+| CO-02 | CoPlot Entegrasyon Analizi: API, SDK, webhook destegi | roo | P1 | plan | - |
+| NOB-01 | Nobetci Alarm Sistemi: Zincir devami + teslim onayi ses cal | kilo | P1 | plan | - |
+| COP-02 | VS Code Copilot Test: web_dashboard/tabs/admin_kpi.py icindeki render_kpi_tab fonksiyonunu refactor et. KPI kartlarini daha moduler yap. | copilot | P2 | plan | - |
+| P7-29 | Google Dorking + Wayback Machine: site:kariyer.net cache verisi topla. | roo | P1 | aktif | - |
+| P7-30 | Selenium + Rotating Proxy: Kariyer.net icin anti-bot asma scraper. | kilo | P2 | plan | - |
 
 ## Tamamlananlar
 
 | Görev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
 | P0-1 | İstiklal OSB scraper implementasyonu | web_kazima | 2026-09-08T10:00:00Z |
-| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-12T14:42:53 |
+| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-13T11:27:59 |
 | P0-3 | Kalite skoru 6.53 - 50+ heazine | kalite | 2026-09-06T22:54:31 |
 | Y21 | ISKUR kurumsal eslestirme verisi arastirma | arastirmaci | 2026-09-10 |
 | APIFY-01 | Apify uygunluk ve entegrasyon mimarisi arastirma | kilo | 2026-09-11T22:14:20 |
@@ -70,5 +70,28 @@
 | DASH-04 | Hybrid Admin Panel - API client + DB fallback | mimar | 2026-09-12T21:12:02 |
 | DASH-05 | Admin Panel Karar Defteri sekmesi | mimar | 2026-09-12T21:12:02 |
 | DASH-06 | Admin Panel API Yönetimi ve Kullanıcı Yönetimi | kilo | 2026-09-12T22:27:22 |
+| P7-4 | Company Career Pages Scraper | kilo | 2026-09-13T08:30:00 |
+| P7-5 | İSKUR Scraper | roo | 2026-09-13T08:25:11 |
+| P7-22 | Apify Dead-Letter Queue ve Yeniden Deneme Akışı | kilo | 2026-09-13T07:29:52 |
+| P7-23 | Vektör Katmanı Üretim Entegrasyonu | kilo | 2026-09-13T08:15:00 |
+| P7-24 | ASO ve OSTİM Veri Kalite Raporu | roo | 2026-09-13T09:27:18 |
+| DASH-08 | Admin Denetim (Audit) Sekmesi | kilo | 2026-09-13T08:40:00 |
 | DASH-07 | Admin Panel JWT Auth & Rol Yönetimi | mimar | 2026-09-13T00:09:05 |
 | ORCH-07 | Obsidian vault git entegrasyonu (kurumsal hafiza) | cline | 2026-09-13T02:01:29 |
+| ORCH-08 | Gorev tetikleme + onay kuyrugu: orkestrator atar, ajan otomatik fark eder, teslim kontrol onayi olmadan done OLMaz | orkestrator | 2026-09-13T06:51:01 |
+| simple_1 | Basit Test Görevi | roo | 2026-09-13T09:37:01 |
+| TEST-02 | Test Görevi 2 | roo | 2026-09-13T06:41:29 |
+| ORCH-10 | Telegram Orkestrator Entegrasyonu (ORCH-10) | kilo | 2026-09-13T07:24:53 |
+| P7-25 | Admin Dashboard KPI Kartlari — musteri sayisi, API cagrilari, sinyal, sistem sagligi | roo | 2026-09-13T07:19:27 |
+| P7-26 | Webhook Monitor sekmesi — endpoint, latency, status dagilimi, hata loglari | kilo | 2026-09-13T07:39:40 |
+| YENI-1 | Veri Temizleme Scripti | kilo | 2026-09-13T06:15:00 |
+| YENI-2 | API Rate Limiting Optimizasyonu | roo | 2026-09-13T09:50:00 |
+| YENI-3 | Supabase companies tablosu olusturma | kilo | 2026-09-13T09:30:16 |
+| YENI-4 | Dashboard veri akisi duzelt | roo | 2026-09-13T09:55:00 |
+| YENI-5 | Apify webhook DLQ monitor | kilo | 2026-09-13T09:32:40 |
+| YENI-6 | Telegram komut test suite | roo | 2026-09-13T09:40:00 |
+| COP-01 | VS Code Copilot Test: src/company_master/utils/telegram_bot.py dosyasindaki send_message fonksiyonunun unit testini yaz. | copilot | 2026-09-13T08:30:00 |
+| P7-28 | LinkedIn + Indeed + ISKUR is ilanlari. LinkedIn icin Apify actor kullan. | kilo | 2026-09-13T11:00:00 |
+| COP-03 | Copilot Test: src/company_master/orchestrator/trigger.py teslim_et() fonksiyonunun edge-case testleri. | copilot | 2026-09-13T08:30:00 |
+| COP-04 | Copilot Test: scripts/gorev_kutusu.py icin CLI testi. | copilot | 2026-09-13T08:35:00 |
+| COP-05 | Copilot Test: src/company_master/orchestrator/nobetci.py nobet_tut fonksiyonu test. | copilot | 2026-09-13T08:40:00 |

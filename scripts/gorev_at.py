@@ -50,6 +50,8 @@ def cmd_at(args: argparse.Namespace) -> int:
         print(f"KILITLI : {', '.join(gorev['dosyalar'])}")
     print(f"TETIK   : {args.ajan} postasina dusecek; ajan bakarsa gorur.")
     print(f"          python scripts/gorev_kutusu.py bak --ajan {args.ajan}")
+    print(f"HAZIR   : Ajana gidip sadece 'başla' veya 'go' yazmanız yeterlidir (Kural dosyası postayı otomatik okur).")
+
     return 0
 
 

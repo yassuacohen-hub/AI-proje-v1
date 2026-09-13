@@ -68,7 +68,7 @@ Proje **Ankara B2B Company Master V1.0** fazında. Temel altyapı tamamlandı:
 | TEST-01 | Review başarısız senaryo testi ekle | mimar | P1 | [`test_dispatch_review.py`](tests/orchestrator/test_dispatch_review.py:1) | Hayır — .py dosyası |
 | VALIDATE-01 | quick_task.py uçtan uca validasyon | external_agent | P1 | [`quick_task.py`](scripts/quick_task.py:1) | Hayır — harici ajan |
 | DOCS-04 | Brief.package() birleştirme | mimar | P3 | [`models.py`](src/company_master/orchestrator/models.py:158) + [`brief.py`](src/company_master/orchestrator/brief.py:1) | Kısmen — doküman kısmı evet, kod kısmı hayır |
-| P7-4 | Company Career Pages Scraper | web_kazima | plan | - | Hayır |
+| P7-4 | Company Career Pages Scraper | kilo | done | - | Hayır |
 | P7-5 | İSKUR Scraper | kazi_scraper | plan | - | Hayır |
 | P7-6 | Kariyer.net Scraper | web_kazima | blocked | - | Hayır |
 
@@ -218,8 +218,8 @@ flowchart TD
 
 ```
 Aktif:  P7-13, P7-14, QT-001
-Plan:   P7-15, REFACTOR-01, TEST-01, VALIDATE-01, DOCS-04, P7-4, P7-5, P7-6
-Done:   32 görev (P0-1..P0-5, APIFY-01..03, MCP-01..03, OSINT-01..02, P7-1..3, P7-7..10, P7-TEST, QTK-01, DOCS-01..03, RO-02, LIVE-01, ROO-01, vb.)
+Plan:   P7-15, REFACTOR-01, TEST-01, VALIDATE-01, DOCS-04, P7-5, P7-6
+Done:   34 görev (DASH-08 eklendi)
 ```
 
 > Detaylı görev listesi: [`task_board.json`](data/orchestrator/task_board.json:1) — 41 kayıt

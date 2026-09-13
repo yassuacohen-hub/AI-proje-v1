@@ -746,11 +746,18 @@ def require_api_key(request: Request) -> str:
             u = _user_from_api_key(key)
             if u and u.get("api_key") == key and u.get("tier") == "enterprise":
                 tier = "enterprise"
+            elif key == DASH_API_KEY:
+                tier = "public"
             elif not u:
                 raise HTTPException(
                     status_code=401,
                     detail="Gecersiz API key. X-API-Key header veya huginn_api_key cookie gerekli.",
                 )
+        elif DASH_API_KEY:
+            raise HTTPException(
+                status_code=401,
+                detail="API key zorunlu. X-API-Key header veya huginn_api_key cookie gerekli.",
+            )
     
     # 3) Rate limiting (tier bazli; her IP icin 1 dakikalik pencere)
     limit = _TIER_RATE_LIMITS.get(tier, _RATE_LIMIT_MAX)

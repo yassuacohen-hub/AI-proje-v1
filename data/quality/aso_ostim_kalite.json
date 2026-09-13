@@ -1,0 +1,472 @@
+{
+  "uretim_tarihi": "2026-09-13T05:52:39.492416+00:00",
+  "gorev": "P7-24",
+  "agirliklar": {
+    "vkn": 15,
+    "adres": 15,
+    "telefon": 15,
+    "eposta": 15,
+    "web": 10,
+    "nace": 15,
+    "parsel": 10,
+    "ticaret_adi": 5
+  },
+  "kaynaklar": [
+    {
+      "kaynak": "aso",
+      "dosya": "data\\aso\\aso_full.jsonl",
+      "mevcut": true,
+      "toplam_kayit": 785,
+      "doluluk": {
+        "unvan": {
+          "dolu": 785,
+          "oran": 100.0
+        },
+        "vkn": {
+          "dolu": 0,
+          "oran": 0.0
+        },
+        "adres": {
+          "dolu": 783,
+          "oran": 99.75
+        },
+        "telefonlar": {
+          "dolu": 0,
+          "oran": 0.0
+        },
+        "epostalar": {
+          "dolu": 768,
+          "oran": 97.83
+        },
+        "web": {
+          "dolu": 0,
+          "oran": 0.0
+        },
+        "nace": {
+          "dolu": 785,
+          "oran": 100.0
+        },
+        "parsel": {
+          "dolu": 0,
+          "oran": 0.0
+        },
+        "sektor": {
+          "dolu": 785,
+          "oran": 100.0
+        }
+      },
+      "gecerlilik": {
+        "vkn": {
+          "dolu": 0,
+          "gecerli": 0,
+          "hatali": 0,
+          "gecerlilik_orani": 0.0
+        },
+        "telefon": {
+          "dolu": 0,
+          "gecerli": 0,
+          "hatali": 0,
+          "gecerlilik_orani": 0.0
+        },
+        "eposta": {
+          "dolu": 768,
+          "gecerli": 767,
+          "hatali": 1,
+          "gecerlilik_orani": 99.87
+        },
+        "nace": {
+          "dolu": 785,
+          "gecerli": 785,
+          "hatali": 0,
+          "gecerlilik_orani": 100.0
+        }
+      },
+      "kirlilik": {
+        "web_dolu": 0,
+        "web_portal_kaynakli": 0,
+        "web_portal_orani": 0.0,
+        "sosyal_medya_portal_kaynakli": 0,
+        "gercek_firma_web_sitesi": 0,
+        "en_sik_domainler": []
+      },
+      "kopya": {
+        "benzersiz_unvan": 716,
+        "kopya_unvan_grubu": 39,
+        "kopya_unvan_kayit": 69,
+        "kopya_vkn_grubu": 0,
+        "ornek_kopya_unvanlar": [
+          [
+            "i flas nedeni yle tasfi ye hali nde anadolu elektri k sanayi ve ti caret anoni m si rketi",
+            3
+          ],
+          [
+            "i flas nedeni yle tasfi ye hali nde arasta uluslararasi yatirim fi nans danismanlik hi zmetleri i nsaat enerji gida tarim hayvancilik emlak ti caret li mi ted si rketi",
+            3
+          ],
+          [
+            "i flas nedeni yle tasfi ye hali nde ardam atik yoneti mi ve depolama sanayi ve ti caret anoni m si rketi",
+            3
+          ],
+          [
+            "i flas nedeni yle tasfi ye hali nde avrasya enerji i nsaat turi zm ve ti caret anoni m si rketi",
+            3
+          ],
+          [
+            "i flas nedeni yle tasfi ye hali nde basari tutkum bi li si m proje ve loji sti k anoni m si rketi",
+            3
+          ]
+        ],
+        "unvansiz_kayit": 0
+      },
+      "skor": {
+        "ortalama_ham": 49.64,
+        "ortalama_temiz": 49.64,
+        "sisme_farki": 0.0,
+        "min": 35.0,
+        "maks": 50.0,
+        "medyan": 50.0,
+        "dagilim": {
+          "40-59 (orta)": 766,
+          "20-39 (zayif)": 19
+        }
+      }
+    },
+    {
+      "kaynak": "ostim",
+      "dosya": "data\\ostim\\firmalar_full.jsonl",
+      "mevcut": true,
+      "toplam_kayit": 8313,
+      "doluluk": {
+        "unvan": {
+          "dolu": 8313,
+          "oran": 100.0
+        },
+        "vkn": {
+          "dolu": 0,
+          "oran": 0.0
+        },
+        "adres": {
+          "dolu": 0,
+          "oran": 0.0
+        },
+        "telefonlar": {
+          "dolu": 7650,
+          "oran": 92.02
+        },
+        "epostalar": {
+          "dolu": 3668,
+          "oran": 44.12
+        },
+        "web": {
+          "dolu": 0,
+          "oran": 0.0
+        },
+        "nace": {
+          "dolu": 7047,
+          "oran": 84.77
+        },
+        "parsel": {
+          "dolu": 0,
+          "oran": 0.0
+        },
+        "sektor": {
+          "dolu": 5770,
+          "oran": 69.41
+        }
+      },
+      "gecerlilik": {
+        "vkn": {
+          "dolu": 0,
+          "gecerli": 0,
+          "hatali": 0,
+          "gecerlilik_orani": 0.0
+        },
+        "telefon": {
+          "dolu": 7650,
+          "gecerli": 7645,
+          "hatali": 5,
+          "gecerlilik_orani": 99.93
+        },
+        "eposta": {
+          "dolu": 3668,
+          "gecerli": 3661,
+          "hatali": 7,
+          "gecerlilik_orani": 99.81
+        },
+        "nace": {
+          "dolu": 7047,
+          "gecerli": 7047,
+          "hatali": 0,
+          "gecerlilik_orani": 100.0
+        }
+      },
+      "kirlilik": {
+        "web_dolu": 0,
+        "web_portal_kaynakli": 0,
+        "web_portal_orani": 0.0,
+        "sosyal_medya_portal_kaynakli": 0,
+        "gercek_firma_web_sitesi": 0,
+        "en_sik_domainler": []
+      },
+      "kopya": {
+        "benzersiz_unvan": 8267,
+        "kopya_unvan_grubu": 44,
+        "kopya_unvan_kayit": 46,
+        "kopya_vkn_grubu": 0,
+        "ornek_kopya_unvanlar": [
+          [
+            "deser ki mya sanayi ve ti caret ltd sti",
+            3
+          ],
+          [
+            "zi ya comertoglu i lave di ngi l damper i ns tur ti c ltd sti",
+            3
+          ],
+          [
+            "asay lazer kesi m savunma si stemleri maki na i malat san ve ti c ltd sti",
+            2
+          ],
+          [
+            "atasam saglik ve saglik si stemleri san ve ti c ltd sti",
+            2
+          ],
+          [
+            "bnb mekatroni k savunma sanayi ve ti c ltd sti",
+            2
+          ]
+        ],
+        "unvansiz_kayit": 0
+      },
+      "skor": {
+        "ortalama_ham": 36.61,
+        "ortalama_temiz": 36.61,
+        "sisme_farki": 0.0,
+        "min": 0.0,
+        "maks": 50.0,
+        "medyan": 35.0,
+        "dagilim": {
+          "40-59 (orta)": 3313,
+          "20-39 (zayif)": 3900,
+          "0-19 (cok zayif)": 1100
+        }
+      }
+    },
+    {
+      "kaynak": "ostim_detayli",
+      "dosya": "data\\ostim\\firmalar_detayli.jsonl",
+      "mevcut": true,
+      "toplam_kayit": 5485,
+      "doluluk": {
+        "unvan": {
+          "dolu": 5485,
+          "oran": 100.0
+        },
+        "vkn": {
+          "dolu": 3,
+          "oran": 0.05
+        },
+        "adres": {
+          "dolu": 5483,
+          "oran": 99.96
+        },
+        "telefonlar": {
+          "dolu": 5085,
+          "oran": 92.71
+        },
+        "epostalar": {
+          "dolu": 2701,
+          "oran": 49.24
+        },
+        "web": {
+          "dolu": 5483,
+          "oran": 99.96
+        },
+        "nace": {
+          "dolu": 0,
+          "oran": 0.0
+        },
+        "parsel": {
+          "dolu": 5,
+          "oran": 0.09
+        },
+        "sektor": {
+          "dolu": 5485,
+          "oran": 100.0
+        }
+      },
+      "gecerlilik": {
+        "vkn": {
+          "dolu": 3,
+          "gecerli": 3,
+          "hatali": 0,
+          "gecerlilik_orani": 100.0
+        },
+        "telefon": {
+          "dolu": 5085,
+          "gecerli": 5081,
+          "hatali": 4,
+          "gecerlilik_orani": 99.92
+        },
+        "eposta": {
+          "dolu": 2701,
+          "gecerli": 2701,
+          "hatali": 0,
+          "gecerlilik_orani": 100.0
+        },
+        "nace": {
+          "dolu": 0,
+          "gecerli": 0,
+          "hatali": 0,
+          "gecerlilik_orani": 0.0
+        }
+      },
+      "kirlilik": {
+        "web_dolu": 5483,
+        "web_portal_kaynakli": 474,
+        "web_portal_orani": 8.64,
+        "sosyal_medya_portal_kaynakli": 0,
+        "gercek_firma_web_sitesi": 5009,
+        "en_sik_domainler": [
+          [
+            "isim.org.tr",
+            2273
+          ],
+          [
+            "ostimistihdam.com",
+            474
+          ],
+          [
+            "akifsan.com",
+            9
+          ],
+          [
+            "aymakine.com",
+            5
+          ],
+          [
+            "korcelik.com.tr",
+            5
+          ],
+          [
+            "ozbensavunma.com",
+            5
+          ],
+          [
+            "babacanrubber.com",
+            4
+          ],
+          [
+            "scturbofiltre.com",
+            3
+          ],
+          [
+            "anadoluotocam.com",
+            3
+          ],
+          [
+            "aymasdisli.com",
+            3
+          ]
+        ]
+      },
+      "kopya": {
+        "benzersiz_unvan": 5041,
+        "kopya_unvan_grubu": 403,
+        "kopya_unvan_kayit": 444,
+        "kopya_vkn_grubu": 0,
+        "ornek_kopya_unvanlar": [
+          [
+            "akifsan mak hirdavat san ve tic ltd sti",
+            9
+          ],
+          [
+            "arif yilmaz ay makine",
+            5
+          ],
+          [
+            "stg muhendislik",
+            5
+          ],
+          [
+            "anadolu oto cam san tic ltd sti",
+            3
+          ],
+          [
+            "aymas di sli maki na sanayi ti caret a s",
+            3
+          ]
+        ],
+        "unvansiz_kayit": 0
+      },
+      "skor": {
+        "ortalama_ham": 51.3,
+        "ortalama_temiz": 50.44,
+        "sisme_farki": 0.86,
+        "min": 20.0,
+        "maks": 75.0,
+        "medyan": 45.0,
+        "dagilim": {
+          "60-79 (iyi)": 2568,
+          "40-59 (orta)": 2229,
+          "20-39 (zayif)": 688
+        }
+      }
+    }
+  ],
+  "capraz_analiz": {
+    "alan_doluluk_matrisi": {
+      "unvan": {
+        "aso": 100.0,
+        "ostim": 100.0,
+        "ostim_detayli": 100.0
+      },
+      "vkn": {
+        "aso": 0.0,
+        "ostim": 0.0,
+        "ostim_detayli": 0.05
+      },
+      "adres": {
+        "aso": 99.75,
+        "ostim": 0.0,
+        "ostim_detayli": 99.96
+      },
+      "telefonlar": {
+        "aso": 0.0,
+        "ostim": 92.02,
+        "ostim_detayli": 92.71
+      },
+      "epostalar": {
+        "aso": 97.83,
+        "ostim": 44.12,
+        "ostim_detayli": 49.24
+      },
+      "web": {
+        "aso": 0.0,
+        "ostim": 0.0,
+        "ostim_detayli": 99.96
+      },
+      "nace": {
+        "aso": 100.0,
+        "ostim": 84.77,
+        "ostim_detayli": 0.0
+      },
+      "parsel": {
+        "aso": 0.0,
+        "ostim": 0.0,
+        "ostim_detayli": 0.09
+      },
+      "sektor": {
+        "aso": 100.0,
+        "ostim": 69.41,
+        "ostim_detayli": 100.0
+      }
+    },
+    "tamamlayici_alanlar": [
+      "adres: ostim_detayli (%99.96) >> ostim (%0.0)",
+      "telefonlar: ostim_detayli (%92.71) >> aso (%0.0)",
+      "epostalar: aso (%97.83) >> ostim (%44.12)",
+      "web: ostim_detayli (%99.96) >> aso (%0.0)",
+      "nace: aso (%100.0) >> ostim_detayli (%0.0)"
+    ]
+  }
+}

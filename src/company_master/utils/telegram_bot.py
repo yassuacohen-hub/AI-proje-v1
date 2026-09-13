@@ -214,7 +214,7 @@ def parse_command(text: str, bot_username: str | None = None) -> dict[str, Any] 
         return None
 
     cmd_part = parts[0]
-    cmd_match = re.match(r"/([A-Za-z_][A-Za-z0-9_]*)@?([A-Za-z0-9_]*)", cmd_part)
+    cmd_match = re.match(r"/([A-Za-z_][A-Za-z0-9_-]*)@?([A-Za-z0-9_-]*)", cmd_part)
     if not cmd_match:
         return None
 

@@ -80,6 +80,14 @@ Atama ile başlamayı birbirine bağlayan "posta kutusu" sistemi. Görev panoya 
 - `review` durumunda kilitler düşmez; yalnızca onayda (`done`) düşer.
 - Tetikler ajan bazlı izoledir: kilo postası grok tarafından okunamaz.
 
+
+### Ajan Başlangıç Protokolü (Otomatik İşi Alma)
+- Ajan (Roo, Kilo, Claude vb.) oturum açtığında veya kullanıcı kendisine `"başla"`, `"go"`, `"devam"` gibi tek kelimelik bir tetik verdiğinde **ilk iş olarak**:
+  1. `python scripts/gorev_kutusu.py bak --ajan <AJAN_ADI>` komutuyla posta kutusunu kontrol eder.
+  2. Bekleyen görev varsa `python scripts/gorev_kutusu.py al --ajan <AJAN_ADI> --task-id <TASK_ID>` ile görevi aktif yapar.
+  3. Talimattaki işi tamamlayıp `python scripts/gorev_kutusu.py teslim ...` ile teslim eder.
+- Kullanıcının uzun uzun komut yapıştırmasına gerek yoktur; tek kelimelik onay ajanın postasını kontrol edip işe başlaması için yeterlidir.
+
 ## Ajan Kılavuzu (Tek Şablon)
 
 1. **Ana bağlamı oku**: `AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md`
@@ -91,10 +99,13 @@ Atama ile başlamayı birbirine bağlayan "posta kutusu" sistemi. Görev panoya 
    - **Zorunlu:** İş bitirince mutlaka `gorev_guncelle(..., durum="done")` çağrılır, `lock_birak(dosya, sahip)` ile kilitlere açılır, `task_board.json` ve `AGENT_SYNC.md` güncellenir. Bu adımlar atlanamaz.
 7. **Son kontrol**: hedef/MVP/sınır dışına çıkmadı mı?
 
-## İletişim Dili
+## İletişim Dili ve Akıl Yürütme (Demir Kural)
 
-- Tüm ajanlar, kullanıcı ve Ürün Sahibi ile olan insan iletişiminin tamamını **Türkçe** yürütmelidir. Bu kural iç ajandan, dış ajandan ve bu asistan dahil tüm çalışan ajanları kapsar.
-- Sistem, yazılım, teknik doküman, API, test çıktısı ve kod örnekleri İngilizce olabilir; ancak kullanıcıya veya Ürün Sahibi'ne sunulan açıklayıcı iletişim tamamen Türkçe olmalıdır.
+- **Kullanıcı ile İletişim:** Tüm ajanlar, kullanıcı ve Ürün Sahibi ile olan insan iletişiminin tamamını **istisnasız Türkçe** yürütmelidir. Bu kural iç ajandan, dış ajandan ve bu asistan dahil tüm çalışan ajanları kapsar.
+- **Akıl Yürütme (Thinking / Reasoning):** Ajanlar düşünce süreçlerini kullanıcının takip edebilmesi için **kısa maddeler halinde ve Türkçe** yürütmelidir.
+- **Teknik Katman:** Sistem, yazılım, teknik doküman, API, test çıktısı ve kod örnekleri İngilizce olabilir; ancak kullanıcıya sunulan açıklamalar tamamen Türkçe olmalıdır.
+- **Orkestratörün Token Optimizasyonu Sorumluluğu:** Orkestrasyon rolünü üstlenen ajan veya koordinatör, token maliyetlerini optimize etmek için proaktif öneriler sunmak ve somut teknik önlemler (bağlam sıkıştırma, parçalı okuma, kısa brifler) almakla **yükümlüdür**.
+
 
 ## Genel
 

@@ -120,6 +120,11 @@ Bu projede Obsidian vault, LLM Wiki deseninin **bilgi merkezi (wiki)** katmanıd
 
 ---
 
+## Demir Kurallar (İletişim & Token Politikası)
+1. **İletişim ve Akıl Yürütme:** Kullanıcıyla her türlü iletişim ve akıl yürütme (thinking/reasoning) süreçleri **Türkçe** yürütülür. Düşünceler kısa maddelerle yapılarak hem takip kolaylığı hem token tasarrufu sağlanır.
+2. **Orkestratör Token Sorumluluğu:** Orkestrasyonu yürüten her ajan token maliyetlerini düşürmek için proaktif öneriler ve önlemler almak zorundadır (gereksiz dosya okumama, bağlam sıkıştırma, net brifler).
+
+
 Kullanıcı: Projeyi başlarken önce `V10/00-Home.md`, `V10/09_kurallar_ve_promptlar/01_kasa_kurallari.md` ve `V10/09_kurallar_ve_promptlar/02_calisma_kurallari.md` dosyalarını oku.
 
 Agent: Anla ve kurallara uyar.

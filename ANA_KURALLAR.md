@@ -39,7 +39,14 @@ Kısaltmalar **Türkçe karakterli**dir (kaynak doküman Bölüm 2'ye birebir uy
 
 **Tam liste:** `web_app.py` içinde `_COMPANY_TYPE_ABBR`, `_ACTIVITY_ABBR`, `_COMBO_ABBR` sözlükleri
 
-## Kural 3: Tabela İsmi (trade_name) = Marka/İlgi Alanı
+## Kural 3: Zorunlu İletişim Dili ve Akıl Yürütme — %100 TÜRKÇE (Demir Kural)
+
+- **Kullanıcı ile İletişim:** Tüm ajanlar (Roo, Kilo, Claude, Cline vb.), kullanıcıyla olan sohbetlerinde, açıklamalarında, durum özetlerinde ve soru-cevaplarda **istisnasız %100 Türkçe** konuşacaktır.
+- **Akıl Yürütme / Düşünce Süreci (Thinking/Reasoning):** Ajanlar düşünce adımlarını kullanıcının kolayca takip edebilmesi için **kısa maddeler halinde ve Türkçe** yürütecektir. Edebi veya gereksiz uzun cümlelerden kaçınılarak hem şeffaf takip sağlanacak hem token israfı önlenecektir.
+- **Teknik/Kodlama Katmanı:** Kodlar, fonksiyon/değişken isimleri, SQL sorguları, testler ve teknik API terimleri İngilizce olabilir.
+- **Token Prensibi:** Token tasarrufu dilden değil, **kısa ve öz yanıt vermekten (bağlam yönetiminden)** sağlanır. Uzun metinler yerine, net ve kısa Türkçe raporlar verilecektir.
+
+## Kural 4: Tabela İsmi (trade_name) = Marka/İlgi Alanı
 
 Tabela ismi, kısaltma ve şirket türü kelimeleri çıkarıldıktan sonra kalan ilk 2-3 kelimeden oluşur.
 
@@ -54,9 +61,18 @@ Tabela ismi, kısaltma ve şirket türü kelimeleri çıkarıldıktan sonra kala
 - `"GIDA SANAYI VE TICARET A.Ş."` → `"GIDA"`
 - `"BUYUK AGAC MOB.INS.SAN. VE TIC. LTD.STI."` → `"BUYUK AGAC"`
 
-## Kural 4: Görsel Sunum Kuralı
+## Kural 5: Görsel Sunum Kuralı
 
 Dataframe ve tablolarda Markdown yıldızı (**) KULLANILMAZ; temiz metin olarak gösterilir. "Tabela İsmi" ayrı bir sütun olarak sağlanır.
+
+## Kural 6: Orkestratörün Token Optimizasyonu ve Tasarruf Sorumluluğu
+
+Orkestrasyon rolünü üstlenen ajan veya koordinatör her kim olursa olsun:
+1. **Sürekli Öneri & Önlem Zorunluluğu:** Kullanıcının token maliyetlerini minimize etmek için proaktif olarak bağlam sıkıştırma, gereksiz dosya okumayı önleme ve token tasarrufu önerileri sunmak ve gerekli teknik önlemleri almakla **yükümlüdür**.
+2. **Gereksiz Okuma Yasağı:** Tek seferde binlerce satırlık ham kaynak okumak yerine parçalı okuma (`start_line`/`end_line`) veya Wiki sentezlerini kullanmalıdır.
+3. **Kısa ve Net İş Brifleri:** Ajanlara atanan görevler laf kalabalığından arındırılmış, doğrudan amaca yönelik kısa talimatlarla verilmelidir.
+4. **Denetim:** Token harcamasını artıran tekrarlı veya döngüye giren süreçler tespit edildiğinde derhal kullanıcı uyarılmalı ve süreç optimize edilmelidir.
+
 
 ## Uygulama Noktaları
 

@@ -1,0 +1,28 @@
+# Roo Code / Cline / Kilo Ajan Kuralları (Otomatik Görev Protokolü)
+
+## 🚨 MUTLAK İLK ADIM (HER SOHBETİN BAŞINDA ÇALIŞTIRILIR)
+Kullanıcı sana **ne yazarsa yazsın** (sadece nokta `.`, tek bir harf, boşluk, "başla", "selam" veya herhangi bir mesaj):
+
+**DÜŞÜNMEDEN VEYA ESKİ GÖREVLERİ SAYMADAN ÖNCE YAPILACAK İLK İŞLEM:**
+1. Posta kutunu terminalden kontrol et:
+   `python scripts/gorev_kutusu.py bak --ajan <SENIN_AJAN_ADIN>` (örn: kilo, roo, claude)
+
+2. Bekleyen bir görev (tetik) varsa hemen üzerine al:
+   `python scripts/gorev_kutusu.py al --ajan <SENIN_AJAN_ADIN> --task-id <TASK_ID>`
+
+3. Görev talimatını / brif dosyasını oku ve işi yapmaya başla.
+
+4. İşi bitirince teslim et:
+   `python scripts/gorev_kutusu.py teslim --ajan <SENIN_AJAN_ADIN> --task-id <TASK_ID> --ozet "Yapılan iş özeti"`
+
+## 🇹🇷 İLETİŞİM DİLİ VE AKIL YÜRÜTME (DEMİR KURAL)
+- Kullanıcıyla olan **tüm iletişim (sohbet, özet, durum bilgisi, soru, rapor)** %100 TÜRKÇE olacaktır.
+- **Akıl Yürütme (Thinking / Reasoning):** Düşünce adımlarını kullanıcının şeffafça izleyebilmesi için **kısa maddeler halinde ve Türkçe** yürüt. Gereksiz uzun cümlelerden kaçın.
+- Kodlar, değişken isimleri ve teknik API'ler İngilizce olabilir; fakat kullanıcıya sunulan her açıklama Türkçe, kısa ve öz olmalıdır.
+
+## 💰 ORKESTRATÖRÜN TOKEN OPTİMİZASYON SORUMLULUĞU
+- Orkestrasyon rolünü üstlenen her ajan, kullanıcının token maliyetini düşürmek için proaktif öneriler vermek ve tedbirler almak zorundadır.
+- Dev dosyaları bir kerede okuma, parçalı oku. Brifleri öz ve net tut. Tekrarlayan döngüleri derhal durdur.
+
+
+
