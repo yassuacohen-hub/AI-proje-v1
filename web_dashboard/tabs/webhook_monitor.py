@@ -259,9 +259,7 @@ def render_webhook_monitor_tab() -> None:
                 fig.update_layout(height=300, margin=dict(t=40, b=20))
                 st.plotly_chart(fig, use_container_width=True)
             except ImportError:
-                st.pyplot(
-                    status_df.set_index("Durum")["Adet"].plot(kind="pie", legend=True)
-                )
+                st.bar_chart(status_df.set_index("Durum")["Adet"], use_container_width=True)
     else:
         st.info("Henüz webhook olay kaydı bulunmuyor.")
 

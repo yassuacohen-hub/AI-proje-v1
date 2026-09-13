@@ -70,6 +70,10 @@ def tetik_ekle(
     kayitlar = _tetikleri_oku(ajan, data_dir)
     if any(k["task_id"] == task_id and k["durum"] == "bekliyor" for k in kayitlar):
         raise TriggerError(f"{ajan} için bekleyen tetik zaten var: {task_id}")
+    # ORCH-12: Idempotency — tamamlanmış göreve tekrar tetik DÜŞMEZ.
+    gorev = tb.gorev_getir(task_id)
+    if gorev and gorev.get("durum") == "done":
+        raise TriggerError(f"{task_id} zaten done — tekrar tetik düşmez (idempotency)")
     kayit = {
         "task_id": task_id,
         "ajan": ajan,
@@ -151,6 +155,18 @@ def teslim_et(
     })
     _kuyruk_yaz(kuyruk, data_dir)
     tb.gorev_guncelle(task_id, durum="review", **{"not": f"Teslim ({ajan}): {ozet}"})
+
+    # ORCH-12: Otomatik onaylı görevler (isbirligi destek görevleri)
+    # Kim+ne zaman+hedef bilgisi isbirligi_raporu.jsonl denetim izine yazılır.
+    gorev = tb.gorev_getir(task_id) or {}
+    if gorev.get("otomatik_onay"):
+        try:
+            from src.company_master.orchestrator import isbirligi  # dongusel import onlemi
+            onayla(task_id, f"oto:{ajan}", data_dir)
+            isbirligi.destek_raporu(gorev, f"oto:{ajan}")
+        except Exception as exc:  # onay hatası teslimi çökertmesin
+            print(f"  [ORCH-12] otomatik onay hatasi: {exc}")
+
     kayitlar = _tetikleri_oku(ajan, data_dir)
     for k in kayitlar:
         if k["task_id"] == task_id and k["durum"] == "alindi":
@@ -167,8 +183,35 @@ def teslim_et(
 
 
 def onay_bekleyenler(data_dir: Path | None = None) -> list[dict[str, Any]]:
-    """Kontrolörün inceleyeceği teslimler."""
-    return [k for k in _kuyruk_oku(data_dir) if k["durum"] == "bekliyor"]
+    """Kontrolörün inceleyeceği teslimler.
+
+    ORCH-13: iki kaynağı birleştirir —
+    1) onay kuyruğu (bekliyor)  2) tetik dosyasındaki 'teslim' kayıtları
+    (ajanlar bazen teslimi tetik dosyasına yazar, kuyruğa yazmaz).
+    """
+    kuyruk = [k for k in _kuyruk_oku(data_dir) if k["durum"] == "bekliyor"]
+    bilinen = {k["task_id"] for k in kuyruk}
+    try:
+        from src.company_master.orchestrator import duzen  # lokal: döngüsel risk yok
+        ajanlar = duzen.AJANLAR
+    except Exception:
+        ajanlar = ["kilo", "roo", "copilot", "cline", "orkestrator"]
+    for ajan in ajanlar:
+        try:
+            for k in _tetikleri_oku(ajan, data_dir):
+                if k["durum"] == "teslim" and k["task_id"] not in bilinen:
+                    g = tb.gorev_getir(k["task_id"]) or {}
+                    if g.get("durum") != "done":  # zaten onaylanmışsa gösterme
+                        kuyruk.append({
+                            "task_id": k["task_id"], "ajan": ajan,
+                            "ozet": (g.get("not") or "")[:120],
+                            "teslim_tarihi": k.get("teslim_tarihi", ""),
+                            "durum": "bekliyor", "kaynak": "tetik",
+                        })
+                        bilinen.add(k["task_id"])
+        except Exception:
+            pass
+    return kuyruk
 
 
 def _kuyruk_guncelle(
@@ -186,12 +229,56 @@ def _kuyruk_guncelle(
 def onayla(
     task_id: str, onaylayan: str, data_dir: Path | None = None
 ) -> dict[str, Any]:
-    """Kontrolör onayı → görev `done` (ORCH-05 tüm kilitleri otomatik düşürür)."""
-    k = _kuyruk_guncelle(
-        task_id, data_dir,
-        durum="onaylandi", onaylayan=onaylayan, onay_tarihi=_simdi(),
-    )
+    """Kontrolör onayı → görev `done` (ORCH-05 tüm kilitleri otomatik düşürür).
+
+    ORCH-13 fallback: teslim onay kuyruğuna yazılmamışsa (ajan tetik dosyasını
+    elle düzenlediğinde olur), tetik kaydından onaylanır — sistem çökmez.
+    """
+    try:
+        k = _kuyruk_guncelle(
+            task_id, data_dir,
+            durum="onaylandi", onaylayan=onaylayan, onay_tarihi=_simdi(),
+        )
+    except TriggerError:
+        # Fallback: tetik dosyasındaki 'teslim' kaydından onayla.
+        # GÜVENLİK: gerçek teslim kanıtı yoksa hata — var olmayan/teslim
+        # edilmemiş görev sessizce done edilemez (idempotency + bütünlük).
+        g = tb.gorev_getir(task_id) or {}
+        ajan = g.get("sahip", "")
+        teslim_var = False
+        if ajan:
+            kayitlar = _tetikleri_oku(ajan, data_dir)
+            for rk in kayitlar:
+                if rk["task_id"] == task_id and rk["durum"] == "teslim":
+                    rk["durum"] = "done"
+                    rk["onaylayan"] = onaylayan
+                    rk["onay_tarihi"] = _simdi()
+                    teslim_var = True
+            _tetikleri_yaz(kayitlar, ajan, data_dir)
+        # Panoda teslim/review durumu da teslim kanıtı sayılır (ajan tetik
+        # dosyasını güncellememiş olabilir ama görevi panoya teslim etmişse).
+        if not teslim_var and g.get("durum") in ("teslim", "review"):
+            teslim_var = True
+        if not teslim_var:
+            raise TriggerError(f"Onay kuyruğunda bulunamadı: {task_id}")
+        k = {"task_id": task_id, "ajan": ajan, "durum": "onaylandi",
+             "onaylayan": onaylayan, "onay_tarihi": _simdi(), "kaynak": "tetik-fallback"}
     tb.gorev_guncelle(task_id, durum="done")
+
+    # ORCH-13 kalıcı düzeltme: onay -> zincir devamı + blokaj kapıları otomatik.
+    # (Nöbetçi çalışmasa bile elle onay zinciri ilerletir.)
+    devam = None
+    try:
+        devam = zincir_devam_et(task_id, k.get("ajan", ""), data_dir)
+    except Exception:
+        devam = None
+    try:
+        from src.company_master.orchestrator import duzen  # lokal import: döngüsel risk yok
+        kapilar = duzen.blokaj_guncelle()
+    except Exception:
+        kapilar = {}
+    k["zincir_devam"] = (devam or {}).get("task_id") if isinstance(devam, dict) else (devam[0]["task_id"] if devam else None)
+    k["kapilar_acilan"] = kapilar.get("acilan", []) if isinstance(kapilar, dict) else []
     return k
 
 

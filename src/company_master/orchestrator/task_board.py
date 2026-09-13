@@ -71,7 +71,19 @@ def atomic_write_text(path: Path, text: str) -> None:
     tmp = path.parent / f".{path.name}.{os.getpid()}.tmp"
     try:
         tmp.write_text(text, encoding="utf-8")
-        os.replace(tmp, path)
+        # Windows'ta os.replace hedef dosya baska surec tarafindan aciksa
+        # PermissionError verir (gozlemlendi: test/uretim ortaminda ariza).
+        # Kisa araliklarla 3 deneme: yarisci yazim yerine gecici kilit.
+        son_hata: Exception | None = None
+        for deneme in range(3):
+            try:
+                os.replace(tmp, path)
+                break
+            except PermissionError as exc:
+                son_hata = exc
+                time.sleep(0.1 * (deneme + 1))
+        else:
+            raise son_hata  # 3 deneme de basarisiz: gorunur hata (sessiz kayip yasak)
     finally:
         if tmp.exists():
             tmp.unlink(missing_ok=True)
@@ -103,7 +115,54 @@ def _sync_tetikle() -> None:
     )
 
 
+def _pano_kilit() -> None:
+    """Kontrolör-yazım kilit: pano.lock (O_EXCL). 30sn'den eski kilit bayat sayilir."""
+    kilit = STATE_DIR / "pano.lock"
+    STATE_DIR.mkdir(parents=True, exist_ok=True)
+    for _ in range(60):  # ~6 sn bekler
+        try:
+            fd = os.open(kilit, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
+            os.write(fd, str(os.getpid()).encode("utf-8"))
+            os.close(fd)
+            return
+        except FileExistsError:
+            try:
+                if time.time() - kilit.stat().st_mtime > 30:  # bayat kilit
+                    kilit.unlink(missing_ok=True)
+                    continue
+            except OSError:
+                pass
+            time.sleep(0.1)
+    raise TimeoutError("pano.lock beklenirken zaman asimi (baska surec yaziyor olabilir)")
+
+
+def _pano_birak() -> None:
+    (STATE_DIR / "pano.lock").unlink(missing_ok=True)
+
+
+def _pano_korumali(fn):
+    """Gorev panosu okuma-yazma tum islemlerini tek surecte kilitleyen dekorator.
+
+    Gozlemlenen ariza: iki surec ayni anda gorev_guncelle yapinca, birinin
+    ekledigi alan (orn. blokaj) digerinin bayat yedegiyle silinebiliyordu.
+    Bu dekorator gorev_ekle/gorev_guncelle gibi tilde-aktif islemleri
+    pano.lock altina alir (read-modify-write atomiklesir).
+    """
+    from functools import wraps
+
+    @wraps(fn)
+    def sarmal(*args, **kwargs):
+        _pano_kilit()
+        try:
+            return fn(*args, **kwargs)
+        finally:
+            _pano_birak()
+
+    return sarmal
+
+
 # ---- Gorev Panosu ----
+@_pano_korumali
 def gorev_ekle(
     task_id: str,
     baslik: str,
@@ -168,6 +227,7 @@ def retry_istatistikleri(task_id: str) -> dict:
     return {"attempts": attempts, "backoff_sn": backoff_sn, "context_mode": mode}
 
 
+@_pano_korumali
 def gorev_guncelle(task_id: str, durum: str | None = None, **fields) -> dict | None:
     board = _read_json(TASK_BOARD)
     for t in board:

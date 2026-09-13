@@ -48,6 +48,24 @@ def test_log_and_read(temp_decision_log):
     assert entry["tags"] == ["test", "unit"]
 
 
+def test_log_decision_uses_empty_tags_by_default(temp_decision_log):
+    """tags verilmezse kayit bos liste ve UTC timestamp icermelidir."""
+    entry = log_decision(
+        title="Varsayilan etiket testi",
+        decision="deferred",
+        decider="copilot",
+        reason="Daha fazla veri gerekiyor",
+    )
+
+    assert entry["tags"] == []
+    assert entry["ts"].endswith("+00:00")
+    assert entry["title"] == "Varsayilan etiket testi"
+    assert entry["decision"] == "deferred"
+    assert entry["decider"] == "copilot"
+    assert entry["reason"] == "Daha fazla veri gerekiyor"
+    assert read_decisions() == [entry]
+
+
 def test_search(temp_decision_log):
     """Keyword ile arama yapip girin dondugunu kontrol eder."""
     log_decision(

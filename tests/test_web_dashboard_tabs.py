@@ -4,7 +4,15 @@ import json
 from pathlib import Path
 from unittest.mock import MagicMock
 
-from web_dashboard.tabs import admin_audit, admin_auth, admin_kpi, admin_panel, webhook_monitor
+from web_dashboard.tabs import (
+    admin_audit,
+    admin_auth,
+    admin_dlq,
+    admin_kpi,
+    admin_panel,
+    admin_performance,
+    webhook_monitor,
+)
 
 
 def test_admin_auth_reads_token_and_reports_missing_token(monkeypatch):
@@ -106,3 +114,95 @@ def test_kpi_task_summary_counts_statuses(monkeypatch):
     assert summary["aktif"] == 1
     assert summary["blocked"] == 1
     assert summary["review"] == 0
+
+
+def test_kpi_renders_spinner_placeholder_when_data_missing(monkeypatch):
+    monkeypatch.setattr(admin_kpi, "load_admin_kpi_summary", lambda: {})
+
+    class DummySpinner:
+        def __enter__(self):
+            return self
+
+        def __exit__(self, exc_type, exc, tb):
+            return False
+
+    spinner = MagicMock(return_value=DummySpinner())
+    monkeypatch.setattr(admin_kpi.st, "spinner", spinner)
+    monkeypatch.setattr(admin_kpi.st, "subheader", MagicMock())
+    monkeypatch.setattr(admin_kpi.st, "caption", MagicMock())
+    monkeypatch.setattr(admin_kpi.st, "divider", MagicMock())
+    monkeypatch.setattr(admin_kpi.st, "columns", lambda n: [MagicMock() for _ in range(n)])
+
+    admin_kpi.render_kpi_tab()
+
+    spinner.assert_called_once_with("Veri yukleniyor...")
+
+
+def test_dlq_tab_handles_empty_and_populated_data(monkeypatch):
+    monkeypatch.setattr(
+        admin_dlq,
+        "load_dlq_stats",
+        lambda: {"dlq_toplam": 0, "hata_turleri": {}, "entries": []},
+    )
+    success = MagicMock()
+    monkeypatch.setattr(admin_dlq.st, "success", success)
+    admin_dlq.render_dlq_tab()
+    success.assert_called_once_with("DLQ boş — aktif hata kuyruğu yok.")
+
+    monkeypatch.setattr(
+        admin_dlq,
+        "load_dlq_stats",
+        lambda: {
+            "dlq_toplam": 2,
+            "retryable": 1,
+            "non_retryable": 1,
+            "ortalama_yas_saat": 2.5,
+            "hata_turleri": {"timeout": 2},
+            "entries": [{"timestamp": "2026-09-13T12:00:00", "error_type": "timeout", "error": "timeout"}],
+            "en_eski": "2026-09-13T11:00:00",
+            "en_yeni": "2026-09-13T12:00:00",
+        },
+    )
+    metric = MagicMock()
+    bar = MagicMock()
+    dataframe = MagicMock()
+    monkeypatch.setattr(admin_dlq.st, "metric", metric)
+    monkeypatch.setattr(admin_dlq.st, "bar_chart", bar)
+    monkeypatch.setattr(admin_dlq.st, "dataframe", dataframe)
+    monkeypatch.setattr(admin_dlq.st, "info", MagicMock())
+    monkeypatch.setattr(admin_dlq.st, "button", lambda label: False)
+    monkeypatch.setattr(admin_dlq.st, "subheader", MagicMock())
+    monkeypatch.setattr(admin_dlq.st, "divider", MagicMock())
+    monkeypatch.setattr(admin_dlq.st, "caption", MagicMock())
+
+    admin_dlq.render_dlq_tab()
+
+    assert metric.called
+    assert bar.called
+    assert dataframe.called
+
+
+def test_performance_loaders_and_empty_render(monkeypatch):
+    monkeypatch.setattr(
+        admin_performance,
+        "get_api",
+        lambda endpoint: {
+            "db_time_ms": 120,
+            "query_count": 4,
+        },
+    )
+    admin_performance.load_performance_data.clear()
+    assert admin_performance.load_performance_data() == {
+        "db_time_ms": 120,
+        "query_count": 4,
+    }
+
+    admin_performance.load_prometheus_metrics.clear()
+    monkeypatch.setattr(admin_performance, "load_prometheus_metrics", lambda: {})
+    monkeypatch.setattr(admin_performance, "load_performance_data", lambda: {})
+    info = MagicMock()
+    monkeypatch.setattr(admin_performance.st, "info", info)
+
+    admin_performance.render_performance_tab()
+
+    info.assert_called_once_with("Performans verisi yüklenemedi.")

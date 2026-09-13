@@ -86,6 +86,30 @@ docs/
 4. **Wiki Sync**: Automated updates to internal knowledge base
 5. **Dashboard**: Streamlit interface for data exploration
 
+## Admin Panel Faz 2
+
+Admin dashboard sekmeleri `web_dashboard/tabs/` altında bulunur:
+
+- `admin_auth.py`: Admin oturumu ve token kontrolü
+- `admin_kpi.py`: Firma, kullanıcı, API, sinyal ve kalite KPI'ları
+- `admin_performance.py`: Sorgu gecikmesi, cache ve Prometheus metrikleri
+- `admin_audit.py`: Karar, dosya kilidi, handoff ve trigger kayıtları
+- `admin_panel.py`: Karar defteri görünümü
+- `admin_extras.py`: API kullanımı ve kullanıcı yönetimi
+- `webhook_monitor.py`: Webhook sağlık durumu, olaylar ve DLQ
+
+Dashboard'ı çalıştırmak için:
+
+```bash
+streamlit run app.py
+```
+
+Sekme testlerini çalıştırmak için:
+
+```bash
+python -m pytest tests/test_web_dashboard_tabs.py tests/test_admin_extras.py
+```
+
 ## Configuration
 
 - Minimum quality score: Adjustable via `--min-score` (default: 30)

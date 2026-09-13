@@ -195,6 +195,47 @@ def load_source_health() -> pd.DataFrame:
 
 
 @st.cache_data(ttl=60)
+def load_ai_cost_kpi() -> dict[str, Any]:
+    """P7-27: 9Router optimizer JSON'undan günlük AI maliyet özeti.
+
+    admin_cost.py ile aynı kaynağı (data/router/optimizer_latest.json) kullanır;
+    burada sadece KPI panosu için özet metrikler çıkarılır.
+    """
+    import json
+
+    result: dict[str, Any] = {
+        "gunluk_maliyet_usd": 0.0,
+        "aylik_tahmini_usd": 0.0,
+        "problemli_provider": 0,
+        "anomali_sayisi": 0,
+    }
+    try:
+        json_path = Path("data/router/optimizer_latest.json")
+        if not json_path.exists():
+            return result
+        with open(json_path, "r", encoding="utf-8") as f:
+            data = json.load(f)
+
+        combo = data.get("combo_istatistik", {})
+        usage = combo.get("usageHistory", {})
+        gunluk = float(usage.get("toplam_maliyet_usd", 0.0))
+        result["gunluk_maliyet_usd"] = gunluk
+        result["aylik_tahmini_usd"] = gunluk * 30
+        result["anomali_sayisi"] = len(data.get("anomaliler", []))
+
+        providerlar = data.get("saglik", {}).get("providerlar", [])
+        problemli = 0
+        for p in providerlar:
+            d = p.get("durum", {})
+            if (d.get("backoffLevel") or 0) >= 3 or (d.get("modelLockSayisi") or 0) > 5 or d.get("errorCode"):
+                problemli += 1
+        result["problemli_provider"] = problemli
+    except Exception:
+        pass
+    return result
+
+
+@st.cache_data(ttl=60)
 def load_task_summary() -> dict[str, Any]:
     """Görev durumu özeti."""
     from company_master.orchestrator import task_board as tb
@@ -232,6 +273,84 @@ def load_api_usage_trend() -> pd.DataFrame:
     return pd.DataFrame(columns=["tarih", "istek"])
 
 
+def _render_kpi_card(label: str, value: str, delta: str | None = None, icon: str = "") -> None:
+    st.metric(label=f"{icon} {label}", value=value, delta=delta)
+
+
+def _render_quality_trend(gun_secimi: int) -> None:
+    trend_df = load_quality_trend(gun_secimi)
+    if trend_df.empty:
+        st.info(f"Son {gun_secimi} gün için kalite trendi verisi bulunamadı.")
+        return
+    try:
+        import plotly.express as px
+        fig = px.line(
+            trend_df, x="tarih", y="ort_skor",
+            title=f"Son {gun_secimi} Gün — Ortalama Kalite Skoru",
+            labels={"ort_skor": "Skor", "tarih": "Tarih"},
+            markers=True,
+        )
+        fig.update_layout(height=300, margin=dict(t=40, b=20))
+        st.plotly_chart(fig, use_container_width=True)
+    except ImportError:
+        st.bar_chart(trend_df.set_index("tarih")["ort_skor"], use_container_width=True)
+
+
+def _render_field_quality(field_df: pd.DataFrame) -> None:
+    if field_df.empty:
+        st.info("Alan kalitesi verisi yüklenemedi.")
+        return
+    col_table, col_chart = st.columns([1, 1])
+    with col_table:
+        st.dataframe(field_df, use_container_width=True, hide_index=True)
+    with col_chart:
+        try:
+            import plotly.express as px
+            fig = px.bar(
+                field_df, x="Alan", y="Doluluk (%)",
+                title="Alan Doluluk Oranları (%)",
+                color="Doluluk (%)",
+                color_continuous_scale="RdYlGn",
+            )
+            fig.update_layout(height=300, margin=dict(t=40, b=20))
+            st.plotly_chart(fig, use_container_width=True)
+        except ImportError:
+            st.bar_chart(field_df.set_index("Alan")["Doluluk (%)"], use_container_width=True)
+
+
+def _render_source_health(source_df: pd.DataFrame) -> None:
+    if source_df.empty:
+        st.info("Kaynak verisi bulunamadı.")
+        return
+    st.dataframe(source_df, use_container_width=True, hide_index=True)
+    try:
+        import plotly.express as px
+        fig = px.pie(
+            source_df, values="kayit_sayisi", names="source_name",
+            title="Kaynak Dağılımı",
+        )
+        fig.update_layout(height=300, margin=dict(t=40, b=20))
+        st.plotly_chart(fig, use_container_width=True)
+    except ImportError:
+        st.bar_chart(source_df.set_index("source_name")["kayit_sayisi"], use_container_width=True)
+
+
+def _render_api_trend(api_df: pd.DataFrame) -> None:
+    if api_df.empty:
+        st.info("API kullanım trendi verisi bulunamadı.")
+        return
+    try:
+        import plotly.express as px
+        fig = px.bar(
+            api_df, x="tarih", y="istek",
+            title="Günlük API İstek Sayısı",
+        )
+        fig.update_layout(height=250, margin=dict(t=40, b=20))
+        st.plotly_chart(fig, use_container_width=True)
+    except ImportError:
+        st.bar_chart(api_df.set_index("tarih")["istek"], use_container_width=True)
+
+
 # ---------------------------------------------------------------------------
 # Render Fonksiyonu
 # ---------------------------------------------------------------------------
@@ -241,52 +360,70 @@ def render_kpi_tab() -> None:
 
     st.subheader("📊 Admin Dashboard KPI")
     st.caption("Operasyonel metrikler — Son güncelleme: " + datetime.now().strftime("%Y-%m-%d %H:%M"))
+    if st.button("🔄 Yenile", key="admin-kpi-refresh"):
+        st.cache_data.clear()
+        st.rerun()
 
     # --- Ana KPI Kartları ---
     kpi = load_admin_kpi_summary()
+    if not kpi:
+        with st.spinner("Veri yukleniyor..."):
+            cols = st.columns(4)
+            for col in cols:
+                with col:
+                    st.empty()
+                    st.empty()
+        return
 
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        st.metric(
-            label="🏢 Toplam Firma",
-            value=f"{kpi['toplam_firma']:,}",
-            delta=f"+{kpi['son_24s_yeni_firma']} (24s)" if kpi["son_24s_yeni_firma"] else None,
+        _render_kpi_card(
+            "Toplam Firma",
+            f"{kpi['toplam_firma']:,}",
+            f"+{kpi['son_24s_yeni_firma']} (24s)" if kpi["son_24s_yeni_firma"] else None,
+            "🏢",
         )
     with c2:
-        st.metric(
-            label="👥 Aktif Kullanıcı",
-            value=f"{kpi['aktif_kullanici']:,}",
-        )
+        _render_kpi_card("Aktif Kullanıcı", f"{kpi['aktif_kullanici']:,}", icon="👥")
     with c3:
-        st.metric(
-            label="📡 Toplam Sinyal",
-            value=f"{kpi['sinyal_toplam']:,}",
-            delta=f"+{kpi['son_24s_yeni_sinyal']} (24s)" if kpi["son_24s_yeni_sinyal"] else None,
+        _render_kpi_card(
+            "Toplam Sinyal",
+            f"{kpi['sinyal_toplam']:,}",
+            f"+{kpi['son_24s_yeni_sinyal']} (24s)" if kpi["son_24s_yeni_sinyal"] else None,
+            "📡",
         )
     with c4:
-        st.metric(
-            label="🔗 API Çağrıları",
-            value=f"{kpi['api_cagri_toplam']:,}",
-        )
+        _render_kpi_card("API Çağrıları", f"{kpi['api_cagri_toplam']:,}", icon="🔗")
 
     # --- İkinci satır: Sağlık + Görev ---
     st.divider()
     c5, c6, c7, c8 = st.columns(4)
 
-    # Sistem sağlığı
     dlq = kpi.get("dlq_adet", 0)
     saglik = "🟢 Sağlıklı" if dlq == 0 else f"🟠 {dlq} DLQ"
     with c5:
-        st.metric(label="🛡️ Sistem Durumu", value=saglik)
+        _render_kpi_card("Sistem Durumu", saglik, icon="🛡️")
 
-    # Görev durumu
     task_sum = load_task_summary()
     with c6:
-        st.metric(label="📋 Aktif Görev", value=task_sum.get("aktif", 0))
+        _render_kpi_card("Aktif Görev", task_sum.get("aktif", 0), icon="📋")
     with c7:
-        st.metric(label="✅ Tamamlanan", value=task_sum.get("done", 0))
+        _render_kpi_card("Tamamlanan", task_sum.get("done", 0), icon="✅")
     with c8:
-        st.metric(label="🔒 Blokaj", value=task_sum.get("blocked", 0))
+        _render_kpi_card("Blokaj", task_sum.get("blocked", 0), icon="🔒")
+
+    # --- Üçüncü satır: P7-27 AI Maliyet Özeti (9Router) ---
+    st.divider()
+    ai_cost = load_ai_cost_kpi()
+    c9, c10, c11, c12 = st.columns(4)
+    with c9:
+        _render_kpi_card("Günlük AI Maliyet", f"${ai_cost['gunluk_maliyet_usd']:.4f}", icon="💰")
+    with c10:
+        _render_kpi_card("Aylık Tahmini Maliyet", f"${ai_cost['aylik_tahmini_usd']:.2f}", icon="📅")
+    with c11:
+        _render_kpi_card("Anomali Sayısı", ai_cost["anomali_sayisi"], icon="⚠️")
+    with c12:
+        _render_kpi_card("Problemli Provider", ai_cost["problemli_provider"], icon="🔴")
 
     # --- Trend Bölümü (7/30/90 Gün) ---
     st.divider()
@@ -301,87 +438,19 @@ def render_kpi_tab() -> None:
             format_func=lambda x: f"{x} Gün",
             key="kpi_trend_period",
         )
-
-    trend_df = load_quality_trend(gun_secimi)
-    with trend_cols[1]:
-        if not trend_df.empty:
-            try:
-                # Plotly varsa kullan
-                import plotly.express as px
-                fig = px.line(
-                    trend_df, x="tarih", y="ort_skor",
-                    title=f"Son {gun_secimi} Gün — Ortalama Kalite Skoru",
-                    labels={"ort_skor": "Skor", "tarih": "Tarih"},
-                    markers=True,
-                )
-                fig.update_layout(height=300, margin=dict(t=40, b=20))
-                st.plotly_chart(fig, use_container_width=True)
-            except ImportError:
-                # Fallback: Streamlit bar_chart
-                st.bar_chart(trend_df.set_index("tarih")["ort_skor"], use_container_width=True)
-        else:
-            st.info(f"Son {gun_secimi} gün için kalite trendi verisi bulunamadı.")
+    _render_quality_trend(gun_secimi)
 
     # --- Alan Bazlı Kalite Analizi ---
     st.divider()
     st.subheader("🔍 Alan Bazlı Kalite Analizi")
-
-    field_df = load_field_quality_breakdown()
-    if not field_df.empty:
-        col_table, col_chart = st.columns([1, 1])
-        with col_table:
-            st.dataframe(field_df, use_container_width=True, hide_index=True)
-        with col_chart:
-            try:
-                import plotly.express as px
-                fig = px.bar(
-                    field_df, x="Alan", y="Doluluk (%)",
-                    title="Alan Doluluk Oranları (%)",
-                    color="Doluluk (%)",
-                    color_continuous_scale="RdYlGn",
-                )
-                fig.update_layout(height=300, margin=dict(t=40, b=20))
-                st.plotly_chart(fig, use_container_width=True)
-            except ImportError:
-                st.bar_chart(field_df.set_index("Alan")["Doluluk (%)"], use_container_width=True)
-    else:
-        st.info("Alan kalitesi verisi yüklenemedi.")
+    _render_field_quality(load_field_quality_breakdown())
 
     # --- Veri Kaynakları Sağlık Durumu ---
     st.divider()
     st.subheader("🗃️ Veri Kaynakları Durumu")
-
-    source_df = load_source_health()
-    if not source_df.empty:
-        st.dataframe(source_df, use_container_width=True, hide_index=True)
-        try:
-            import plotly.express as px
-            fig = px.pie(
-                source_df, values="kayit_sayisi", names="source_name",
-                title="Kaynak Dağılımı",
-            )
-            fig.update_layout(height=300, margin=dict(t=40, b=20))
-            st.plotly_chart(fig, use_container_width=True)
-        except ImportError:
-            st.bar_chart(source_df.set_index("source_name")["kayit_sayisi"], use_container_width=True)
-    else:
-        st.info("Kaynak verisi bulunamadı.")
+    _render_source_health(load_source_health())
 
     # --- API Kullanım Trendi ---
     st.divider()
     st.subheader("🔗 API Kullanım Trendi (30 Gün)")
-
-    api_trend_df = load_api_usage_trend()
-    if not api_trend_df.empty:
-        try:
-            import plotly.express as px
-            fig = px.bar(
-                api_trend_df, x="tarih", y="istek",
-                title="Günlük API İstek Sayısı",
-            )
-            fig.update_layout(height=250, margin=dict(t=40, b=20))
-            st.plotly_chart(fig, use_container_width=True)
-        except ImportError:
-            st.bar_chart(api_trend_df.set_index("tarih")["istek"], use_container_width=True)
-    else:
-        st.info("API kullanım trendi verisi bulunamadı.")
+    _render_api_trend(load_api_usage_trend())

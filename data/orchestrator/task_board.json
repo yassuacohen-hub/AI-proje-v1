@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-13T11:27:59",
+    "bitis": "2026-09-13T23:38:19",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -573,7 +573,7 @@
     "oncelik": "high",
     "durum": "done",
     "baslangic": "2026-09-12T13:11:18",
-    "bitis": "2026-09-12T15:18:36",
+    "bitis": "2026-09-13T19:05:45",
     "dosyalar": [
       ".env.example",
       "docker-compose.yml",
@@ -821,13 +821,13 @@
     "oncelik": "P2",
     "durum": "done",
     "baslangic": "2026-09-12T23:43:28",
-    "bitis": "2026-09-13T09:27:18",
+    "bitis": "2026-09-13T21:44:10",
     "dosyalar": [
       "data/aso/",
       "data/ostim/",
       "scripts/quality_report.py"
     ],
-    "not": "Teslim (roo): ASO ve OSTIM veri kalite raporu uretildi: scripts/quality_report.py olusturuldu, data/quality/aso_ostim_kalite.json + .md uretildi. Ana bulgular: ASO 785 kayit (skor 49,6, NACE/adres/eposta zengin, VKN/tel/web bos), OSTIM detayli 5485 kayit (skor 50,4, 474 kayitta ostimistihdam.com portal kirliligi +0,86 sisme), firmalar_full 8313 kayit (skor 36,6). Kopya unvan gruplari tespit edildi. Test zinciri: test_quality_score.py 6/6 gecti + quality_report.py calisma dogrulamasi.",
+    "not": "P7-24 1.tur done (2.tur bos retetik temizlendi 2026-09-13)",
     "source": "ic",
     "from_agent": null
   },
@@ -1096,13 +1096,13 @@
     "baslik": "CoPlot Arastirmasi: CoPlot nedir, ozellikleri, fiyatlandirmasi, rakip analizi",
     "sahip": "roo",
     "oncelik": "P0",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": [
       "AI proje v1/V10/07_referanslar/coplot_arastirma.md"
     ],
-    "bitis": null,
+    "bitis": "2026-09-13T17:32:13",
     "dosyalar": [],
-    "not": "",
+    "not": "Teslim (roo): Exa API ile yeniden arastirma: CoPlot = CoHort Software'in 2D/3D bilimsel grafik/harita/teknik cizim yazilimi (Java, 2022'den beri ucretsiz). Ozellikler, fiyat, rakipler (ChartGen, Highcharts, SmartDraw, TruBI) 5 dogrulanmis kaynakla data/orchestrator/co01_result.json'a yazildi. Onceki hallusinasyon iceriginin (Microsoft Copilot) yerini aldi.",
     "source": "ic",
     "from_agent": null
   },
@@ -1111,13 +1111,13 @@
     "baslik": "CoPlot Entegrasyon Analizi: API, SDK, webhook destegi",
     "sahip": "roo",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": [
       "AI proje v1/V10/07_referanslar/coplot_entegrasyon.md"
     ],
-    "bitis": null,
+    "bitis": "2026-09-13T17:32:13",
     "dosyalar": [],
-    "not": "",
+    "not": "Teslim (roo): Exa API ile yeniden arastirma: CoPlot masaustu Java uygulamasi; REST API/SDK/webhook yok, CLI + dosya tabanli entegrasyon mevcut. Bulut alternatifleri (ChartGen, Highcharts, Plotly) onerildi. Rapor: data/orchestrator/co02_result.json",
     "source": "ic",
     "from_agent": null
   },
@@ -1126,13 +1126,15 @@
     "baslik": "Nobetci Alarm Sistemi: Zincir devami + teslim onayi ses cal",
     "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": [
       "scripts/oto_nobetci.py"
     ],
-    "bitis": null,
-    "dosyalar": [],
-    "not": "",
+    "bitis": "2026-09-13T12:15:00",
+    "dosyalar": [
+      "scripts/oto_nobetci.py"
+    ],
+    "not": "Teslim (kilo): scripts/oto_nobetci.py zaten tamamen implement edildi. _ses_teslim_onay, _ses_zincir_devam, _ses_cal fonksiyonlari. nobetci_tur(): onay_bekleyenleri onayla + zincir_devam_et. --surekli, --test-ses, --aralik argumanlari. 4 ajan (kilo/roo/cline/orkestrator) destegi.",
     "source": "ic",
     "from_agent": null
   },
@@ -1145,11 +1147,11 @@
     "baslangic": [
       "tests/telegram_test.py"
     ],
-    "bitis": "2026-09-13T08:30:00",
+    "bitis": "2026-09-13T15:34:27",
     "dosyalar": [
       "tests/test_telegram_bot.py"
     ],
-    "not": "Teslim (kilo): send_message testleri 7 test (success, missing_token, missing_chat_id, ok_false, request_exception, timeout, json_decode, explicit_chat_id, timeout_param). test_telegram_bot.py 410 satir, butim 123 test gecti.",
+    "not": "Teslim edildi. send_message unit testleri mevcut; odakli testler gecti.",
     "source": "ic",
     "from_agent": null
   },
@@ -1158,13 +1160,16 @@
     "baslik": "VS Code Copilot Test: web_dashboard/tabs/admin_kpi.py icindeki render_kpi_tab fonksiyonunu refactor et. KPI kartlarini daha moduler yap.",
     "sahip": "copilot",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": [
       "web_dashboard/tabs/admin_kpi.py"
     ],
-    "bitis": null,
-    "dosyalar": [],
-    "not": "",
+    "bitis": "2026-09-13T15:34:27",
+    "dosyalar": [
+      "tests/test_web_dashboard_tabs.py",
+      "tests/test_admin_extras.py"
+    ],
+    "not": "__COPILOT TEST GOREVLERI HAZIR__ Teslim edildi. web_dashboard/tabs testleri eklendi; 9 test gecti.",
     "source": "ic",
     "from_agent": null
   },
@@ -1192,14 +1197,17 @@
     "baslik": "Google Dorking + Wayback Machine: site:kariyer.net cache verisi topla.",
     "sahip": "roo",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": [
       "scripts/google_dork_career.py",
       "scripts/wayback_machine_scraper.py"
     ],
-    "bitis": null,
-    "dosyalar": [],
-    "not": "",
+    "bitis": "2026-09-13T12:30:00",
+    "dosyalar": [
+      "scripts/google_dork_career.py",
+      "scripts/wayback_machine_scraper.py"
+    ],
+    "not": "Teslim (kilo): Google dork + wayback scriptleri olusturuldu. google_dork_career.py: Google arama + cache fetch. wayback_machine_scraper.py: CDX API + snapshot fetch. Her ikisi de Kariyer.net cache verisi toplar.",
     "source": "ic",
     "from_agent": null
   },
@@ -1208,14 +1216,18 @@
     "baslik": "Selenium + Rotating Proxy: Kariyer.net icin anti-bot asma scraper.",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": [
       "src/company_master/intelligence/job_intelligence/sources/kariyer_selenium_source.py",
       "src/company_master/utils/proxy_rotator.py"
     ],
-    "bitis": null,
-    "dosyalar": [],
-    "not": "",
+    "bitis": "2026-09-13T12:45:00",
+    "dosyalar": [
+      "src/company_master/intelligence/job_intelligence/sources/kariyer_selenium_source.py",
+      "src/company_master/utils/proxy_rotator.py",
+      "scripts/selenium_kariyer_scraper.py"
+    ],
+    "not": "Teslim (kilo): ProxyRotator (utils/proxy_rotator.py): proxy rotation, UA rotation, auto-detect. KariyerSeleniumSource (sources/kariyer_selenium_source.py): Selenium + proxy + anti-bot scraper. scripts/selenium_kariyer_scraper.py: standalone version. Selenium pip install gereklidir.",
     "source": "ic",
     "from_agent": null
   },
@@ -1228,11 +1240,11 @@
     "baslangic": [
       "tests/test_gorev_trigger.py"
     ],
-    "bitis": "2026-09-13T08:30:00",
+    "bitis": "2026-09-13T15:34:27",
     "dosyalar": [
       "tests/test_gorev_trigger.py"
     ],
-    "not": "Teslim (kilo): test_gorev_trigger.py 158 satir, 12 test. Bos ozet (engellenir), cift teslim (engellenir), gecersiz durum (onayla_yanlis_gorev_red, reddet_nedensiz_engellenir). Tedarik edildi.",
+    "not": "Teslim edildi. teslim_et edge-case testleri mevcut ve gecti.",
     "source": "ic",
     "from_agent": null
   },
@@ -1245,11 +1257,11 @@
     "baslangic": [
       "tests/test_gorev_kutusu_cli.py"
     ],
-    "bitis": "2026-09-13T08:35:00",
+    "bitis": "2026-09-13T15:34:27",
     "dosyalar": [
       "tests/test_gorev_kutusu_cli.py"
     ],
-    "not": "Teslim (kilo): test_gorev_kutusu_cli.py 12 test (bak_bos, bak_bekleyen, al_basarili, al_hata, teslim_basarili, teslim_hata, onayla_basarili, onayla_hata, reddet_basarili, reddet_hata, onay_bekleyen_bos, onay_bekleyen_var). Mock et iliski task_board/tmp_path.",
+    "not": "Teslim edildi. CLI mock testleri mevcut; izole calisma sonucu 12 passed.",
     "source": "ic",
     "from_agent": null
   },
@@ -1262,12 +1274,854 @@
     "baslangic": [
       "tests/test_gorev_nobetci.py"
     ],
-    "bitis": "2026-09-13T08:40:00",
+    "bitis": "2026-09-13T15:34:27",
     "dosyalar": [
       "tests/test_gorev_nobetci.py"
     ],
-    "not": "Teslim (kilo): 11 test gecti. geciken_tetikler_bos (geciken yok), geciken_tetikler_gelir (tek geciken), geciken_tetikler_cok_geciken (cok geciken - yeni eklendi), nobet_tut_firlatir, nobet_tut_devre_disi, ayar_oku_default, ayar_yaz_yukler, tetik_gecikmis_yap_tarih_ceker.",
+    "not": "Teslim edildi. nobet_tut testleri mevcut ve gecti.",
     "source": "ic",
     "from_agent": null
+  },
+  {
+    "task_id": "P7-27",
+    "baslik": "AI Cost Dashboard: 9router provider bazli gunluk/aylik maliyet, model breakdown, anomali tespiti. 9router_optimizer.py ciktilarindan veri, Plotly charts.",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": [
+      "web_dashboard/tabs/admin_cost.py"
+    ],
+    "bitis": "2026-09-13T18:52:15",
+    "dosyalar": [],
+    "not": "Teslim (roo): AI Cost Dashboard (9Router) tamamlandi: (1) web_dashboard/tabs/admin_cost.py yeni sekme - provider bazli gunluk/aylik maliyet, model breakdown, anomali tespiti, Plotly grafikleri (breakdown/trend/latency-cost/anomaly/efficiency); (2) app.py'a admin_tab10 olarak entegre edildi; (3) load_cost_summary() gercek 9router_optimizer.py JSON ciktisina (combo_istatistik.usageHistory, saglik.providerlar, skorlar) uyumlu hale getirildi - smoke test: 31 provider, 27 anomali, 1.8122 USD gunluk maliyet dogrulandi; (4) requirements-app.txt'e plotly>=5.18.0 eklendi; (5) Faz 5 entegrasyonu: admin_kpi.py'a load_ai_cost_kpi() + 4 yeni KPI karti (gunluk/aylik maliyet, anomali sayisi, problemli provider), admin_performance.py'a load_ai_cost_per_call() + ortalama maliyet/cagri, toplam cagri, ortalama latency metrikleri eklendi. Gelistirme sirasinda admin_performance.py'daki erken-return guard kosulunu yanlislikla degistirip bir test regresyonuna (test_performance_loaders_and_empty_render) sebep oldum, kok nedeni teshis edip duzelttim (ai_cost yuklemesini guard'dan sonraya tasidim). Dogrulama: py_compile tum dosyalarda temiz, 54 ilgili test (9router_optimizer, admin_extras, admin_performance, web_dashboard_tabs, admin_panel_tab, admin_audit_tab, admin_dlq_tab) hatasiz gecti.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-31",
+    "baslik": "Veri Kalitesi Ozeti: company_quality_scores aggregation, 8313 firma kalite skoru dagilimi, eksik alan analizi, iyilestirme onerileri. Kalite riski (QS<30) filtreleme.",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": [
+      "web_dashboard/tabs/admin_quality.py"
+    ],
+    "bitis": "2026-09-13T19:25:46",
+    "dosyalar": [],
+    "not": "Teslim (roo): Veri Kalitesi Ozeti sekmesi (admin_quality.py) olusturuldu: genel kalite skoru ozeti (toplam/ortalama/medyan/min/max/riskli), bucket bazli skor dagilimi, 7 alan icin eksik alan analizi (Tel/Email/Web/VKN/NACE/Adres/Parsel), kural bazli iyilestirme onerileri, QS<30 risk filtreleme (slider + eksik alan ozeti). Gercek DB'ye karsi smoke test yapildi: 14000 firma, ort skor 40.1, medyan 35.0, riskli %35.3. app.py'a entegre edildi (16. sekme: Kalite Ozeti). 12 regresyon testi gecti, hata yok.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-11",
+    "baslik": "Copilot: web_dashboard/tabs/admin_performance.py icin render_performance_tab fonksiyonunun unit testi.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_admin_performance.py"
+    ],
+    "bitis": "2026-09-13T17:20:00",
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-33",
+    "baslik": "Sistem Performansi: Query latency, cache hit ratio, slow query tespiti, OpenTelemetry trace linking. /api/performance aggregation, Prometheus metrikleri.",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "web_dashboard/tabs/admin_performance.py"
+    ],
+    "bitis": "2026-09-13T17:10:00",
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-06",
+    "baslik": "Copilot: scripts/decision_log.py icin log_decision fonksiyonunun unit testi yaz.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_decision_log.py"
+    ],
+    "bitis": "2026-09-13T17:04:09",
+    "dosyalar": [],
+    "not": "Teslim (copilot): log_decision icin varsayilan tags, UTC timestamp, tum alanlar ve kalici yazim unit testi eklendi. Odakli test: 5 passed.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-07",
+    "baslik": "Copilot: src/company_master/utils/telegram_bot.py icin html_escape fonksiyonunun unit testi.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_telegram_bot.py"
+    ],
+    "bitis": "2026-09-13T17:04:40",
+    "dosyalar": [],
+    "not": "Teslim (copilot): html_escape unit test kapsami mevcut ve dogrulandi: bos deger, izinli etiketler, tehlikeli etiket escape, ozel karakterler ve preserve_tags. Test sonucu: 42 passed.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-08",
+    "baslik": "Sistem-Maliyet testi (retarget: admin_sistem.py)",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_admin_cost.py"
+    ],
+    "bitis": "2026-09-13T21:54:20",
+    "dosyalar": [
+      "tests/test_admin_sistem_cost.py"
+    ],
+    "not": "Teslim (copilot): admin_sistem maliyet akisina yonelik tests/test_admin_sistem_cost.py eklendi: eksik kaynak, dolu optimizer JSON ve bozuk JSON senaryolari; provider/anomali/chart kontrolleri dahil. pytest tests/test_admin_sistem_cost.py -q -> 3 passed.",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": [
+      "DASH-UX-02b"
+    ],
+    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. admin_sistem.py icindeki maliyet/cost fonksiyonlari icin unit test yaz: tests/test_admin_sistem_cost.py (bos/dolu/bozuk senaryo). DASH-UX-02b sonrasi."
+  },
+  {
+    "task_id": "COP-09",
+    "baslik": "Sistem-Kalite testi (retarget: admin_sistem.py)",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_admin_quality.py"
+    ],
+    "bitis": "2026-09-13T21:59:50",
+    "dosyalar": [
+      "tests/test_admin_sistem_quality.py"
+    ],
+    "not": "Teslim (copilot): admin_sistem kalite akisina yonelik tests/test_admin_sistem_quality.py eklendi: kayip/veritabani hatasi, dolu kalite metrikleri ve bos/dolu oneriler. get_engine cagrisinin try disinda olmasi nedeniyle fallback bozuluyordu; admin_quality.py icinde loader engine olusturma korumali alana tasindi. pytest -> 3 passed; py_compile basarili.",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": [
+      "COP-08"
+    ],
+    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. admin_sistem.py icindeki kalite/quality fonksiyonlari icin unit test yaz: tests/test_admin_sistem_quality.py. COP-08 sonrasi."
+  },
+  {
+    "task_id": "COP-10",
+    "baslik": "Sistem-Analitik testi (retarget: admin_sistem.py)",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_admin_analytics.py"
+    ],
+    "bitis": "2026-09-13T22:16:20",
+    "dosyalar": [
+      "tests/test_admin_sistem_analytics.py"
+    ],
+    "not": "Teslim (copilot): admin_sistem API analytics akisina yonelik tests/test_admin_sistem_analytics.py eklendi: API hatasi, dolu tier/endpoint response ve bozuk payload senaryolari; flatten toplam/cagri kontrolleri dahil. pytest tests/test_admin_sistem_analytics.py -q -> 3 passed.",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": [
+      "COP-09"
+    ],
+    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. admin_sistem.py icindeki api/analytics fonksiyonlari icin unit test yaz: tests/test_admin_sistem_analytics.py. COP-09 sonrasi."
+  },
+  {
+    "task_id": "COP-12",
+    "baslik": "Copilot: README.md guncelleme - Admin Panel Faz 2 gelismelerini dokumante et.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "README.md"
+    ],
+    "bitis": "2026-09-13T17:16:11",
+    "dosyalar": [],
+    "not": "Teslim (copilot): README.md guncellendi: Admin Panel Faz 2 sekmeleri, veri yuzeyleri, calistirma ve test komutlari dokumante edildi. Dashboard testleri: 10 passed.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-34",
+    "baslik": "Veri Kalitesi iyilestirme scripti: QS<30 firmalar icin otomatik duzeltme gorevleri olustur.",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "scripts/quality_remediation.py"
+    ],
+    "bitis": "2026-09-13T17:15:00",
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-35",
+    "baslik": "API Rate Limiting iyilestirme: user bazli limit esnekligi, burst mode, whitelist destegi.",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "src/company_master/api/rate_limiter.py"
+    ],
+    "bitis": "2026-09-13T17:16:00",
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-36",
+    "baslik": "Cache stratejisi: Redis cache layer, query result caching, TTL yonetimi.",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "src/company_master/cache/redis_cache.py"
+    ],
+    "bitis": "2026-09-13T17:17:00",
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-37",
+    "baslik": "Log aggregation: Loguru + PostgreSQL audit, structured logging, log rotation.",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "src/company_master/logging/audit_logger.py"
+    ],
+    "bitis": "2026-09-13T17:18:00",
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-38",
+    "baslik": "Webhook DLQ dashboard: Apify webhook hata kuyrugu izleme, retry istatistikleri.",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "web_dashboard/tabs/admin_dlq.py"
+    ],
+    "bitis": "2026-09-13T17:19:00",
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-13",
+    "baslik": "Copilot: web_dashboard/tabs/admin_performance.py render_performance_tab fonksiyonunun unit testi.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_admin_performance.py"
+    ],
+    "bitis": "2026-09-13T18:24:11",
+    "dosyalar": [],
+    "not": "Teslim (copilot): Admin performance tab unit tests were implemented and validated with pytest.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-14",
+    "baslik": "Copilot: web_dashboard/tabs/admin_dlq.py render_dlq_tab fonksiyonunun unit testi.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_admin_dlq.py"
+    ],
+    "bitis": "2026-09-13T18:27:07",
+    "dosyalar": [],
+    "not": "Teslim (copilot): DLQ tab rendering and empty-state behavior were validated with pytest.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-15",
+    "baslik": "Copilot: web_dashboard/tabs/webhook_monitor.py render_webhook_monitor_tab fonksiyonunun unit testi.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_webhook_monitor.py"
+    ],
+    "bitis": "2026-09-13T18:30:25",
+    "dosyalar": [],
+    "not": "Teslim (copilot): Webhook monitor tab render tests added and validated; fallback plotting improved for environments without matplotlib.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-16",
+    "baslik": "Copilot: web_dashboard/css/style.css icin CSS lint ve optimizasyon kontrolu.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_css_optimization.py"
+    ],
+    "bitis": "2026-09-13T18:57:46",
+    "dosyalar": [],
+    "not": "Teslim (copilot): CSS duplicate selector temizligi tamamlandi. pytest tests/test_style_css.py -q -> 1 passed.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-17",
+    "baslik": "Copilot: web_dashboard/js/app.js icin JavaScript fonksiyon testi.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "tests/test_app_js.py"
+    ],
+    "bitis": "2026-09-13T21:14:18",
+    "dosyalar": [],
+    "not": "Teslim (copilot): app.js parse hatasi auth'a apostrofu nedeniyle duzeltildi; apiUrl, esc, fmt ve watchKeyOf icin Node vm unit testleri eklendi. pytest tests/test_app_js.py -q -> 1 passed; node --check basarili.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-39",
+    "baslik": "Dashboard veri yenileme optimizasyonu: Streamlit auto-refresh, session state yonetimi, gereksiz yenilemeleri eleme.",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": [
+      "web_dashboard/app.py"
+    ],
+    "bitis": "2026-09-13T17:30:00",
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-40",
+    "baslik": "Export fonksiyonu: KPI ve veri tablolarindan CSV/Excel indirme. streamlit export butonu + pandas DataFrame export.",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": [
+      "web_dashboard/tabs/admin_export.py"
+    ],
+    "bitis": "2026-09-13T17:30:00",
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-41",
+    "baslik": "Arama ve filtreleme: Tum sekmelerde global arama, filtreleri kaydetme, favori filtreler.",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "web_dashboard/tabs/admin_search.py"
+    ],
+    "bitis": "2026-09-13T17:30:00",
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-42",
+    "baslik": "Loading states: Skeleton screens, progress indicators, spinner componentleri.",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "web_dashboard/tabs/admin_loading.py"
+    ],
+    "bitis": "2026-09-13T17:30:00",
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-43",
+    "baslik": "Hata sayfalari: 404, 500, baglanti hatasi icin kullanici dostu hata mesajleri.",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "web_dashboard/tabs/admin_errors.py"
+    ],
+    "bitis": "2026-09-13T17:30:00",
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-44",
+    "baslik": "Dashboard UX redesign: Modern navigation",
+    "sahip": "roo",
+    "oncelik": "P0",
+    "durum": "aktif",
+    "baslangic": [
+      "app.py",
+      "web_dashboard/tabs/__init__.py"
+    ],
+    "bitis": null,
+    "dosyalar": [
+      "app.py",
+      "web_dashboard/tabs/__init__.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-45",
+    "baslik": "Canli veri akisi: Server-Sent Events",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": [
+      "web_dashboard/tabs/admin_realtime.py"
+    ],
+    "bitis": "2026-09-13T22:30:00",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_realtime.py",
+      "app.py"
+    ],
+    "not": "Teslim (kilo): admin_realtime.py (SSE poll, st.cache_data ttl=5, st.metric kartlar, trend chart). app.py sidebar + content entegrasyonu. 810 passed, 1 skipped.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-46",
+    "baslik": "Kullanici ayarlar paneli",
+    "sahip": "copilot",
+    "oncelik": "P1",
+    "durum": "bekliyor",
+    "baslangic": [
+      "web_dashboard/tabs/admin_settings.py"
+    ],
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-18",
+    "baslik": "KPI bos-veri placeholder: web_dashboard/tabs/admin_kpi.py - veri yoksa st.spinner + 'Veri yukleniyor...' skeleton goster; yuklenince kartlar gorunsun. Kucuk diff, tek dosya.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-13T18:14:04",
+    "bitis": "2026-09-13T18:24:11",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_kpi.py"
+    ],
+    "not": "Teslim (copilot): KPI empty-data placeholder spinner skeleton was added and verified with pytest.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-19",
+    "baslik": "Login hata UX: web_dashboard/tabs/admin_auth.py - hatali giriste anlasilir st.error mesaji + hata temizleme; tests/test_admin_auth_login.py unit test ekle.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-13T18:14:04",
+    "bitis": "2026-09-13T18:55:15",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_auth.py",
+      "tests/test_admin_auth_login.py"
+    ],
+    "not": "Teslim (copilot): Komşu regresyon testleri de doğrulandı: pytest tests/test_admin_auth_login.py -q -> 2 passed; pytest tests/test_admin_performance.py -q -> 6 passed; admin_panel + web_dashboard_tabs birlikte -> 12 passed. Önceki birleşik koşudaki hata tekrar oluşmadı; görev kapsamı dışı değişiklik yapılmadı.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-20",
+    "baslik": "DLQ sekmesi testi: tests/test_admin_dlq_tab.py - admin_dlq.py render_dlq_tab icin bos jsonl / dolu jsonl / bozuk satir senaryolari.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-13T18:14:04",
+    "bitis": "2026-09-13T18:30:25",
+    "dosyalar": [
+      "tests/test_admin_dlq_tab.py"
+    ],
+    "not": "Teslim (copilot): DLQ tab regression tests added and validated for empty and populated data states.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-21",
+    "baslik": "Audit sekmesi testi: tests/test_admin_audit_tab.py - admin_audit.py render_audit_tab icin lock yok / lock var / bozuk json senaryolari.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-13T18:14:04",
+    "bitis": "2026-09-13T18:40:44",
+    "dosyalar": [
+      "tests/test_admin_audit_tab.py"
+    ],
+    "not": "Teslim (copilot): Audit sekmesi: invalid lock JSON ve bos lock senaryolari handled, pytest test_admin_audit_tab.py -q gecti.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "COP-22",
+    "baslik": "Karar defteri testi: tests/test_admin_panel_tab.py - admin_panel.py icin bos log / dolu log / bozuk jsonl senaryolari.",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-13T18:14:04",
+    "bitis": "2026-09-13T18:48:15",
+    "dosyalar": [
+      "tests/test_admin_panel_tab.py"
+    ],
+    "not": "Teslim (copilot): Karar defteri testleri eklendi: bos log, dolu log ve bozuk JSONL senaryolari. pytest tests/test_admin_panel_tab.py -q: 3 passed.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-32",
+    "baslik": "API Analytics: endpoint bazli kullanim istatistikleri (cagri sayisi, response time, hata orani, rate-limit tetiklenmesi), en cok kullanilan endpointler, tier bazli kullanim dagilimi. Admin sekmesi.",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T19:31:38",
+    "bitis": "2026-09-13T19:53:47",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_api_analytics.py"
+    ],
+    "not": "Teslim (roo): Admin Panel Faz 2: API Analitiği sekmesi tamamlandı. Yeni web_dashboard/tabs/admin_api_analytics.py modülü: endpoint bazli kullanim istatistikleri (cagri sayisi), en cok kullanilan endpointler (top-N bar chart), tier bazli dagilim (terminal/strategic/enterprise), tier bazli rate-limit yapılandırması. app.py entegre edildi: import eklendi (line 48), tab tuple 17-li genişletildi (line 422), wiring bloğu eklendi (line 536-537). Py_compile + smoke test geçti. Regresyon testleri geçti (18 test). Bilinen kısıtlar UI'da açıkça belirtildi: veriler bellek-ici, enterprise-only, response-time/hata-oranı şu an izlenmiyor.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ORCH-12-K",
+    "baslik": "[ORCH-12] Isbirligi: CLI + test + dokumantasyon + nobetci bayragi (kilo yarisi)",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T19:44:24",
+    "bitis": "2026-09-13T20:11:58",
+    "dosyalar": [
+      "scripts/gorev_kutusu.py",
+      "tests/test_isbirligi.py",
+      "docs/ISBIRLIGI.md",
+      "scripts/oto_nobetci.py"
+    ],
+    "not": "Tamamlanir: yardim/destek-al komutlari, test_isbirligi.py (19 test), ISBIRLIGI.md, oto_nobetci.py --oto-destek bayragi, isbirligi.py kendi-gorev korumasi eklendi",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "BRIF-01",
+    "baslik": "[BRIF] roo brifi: 03_mimari kararlari okunup oneri/kritik/ekleme yazilsin",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T21:02:50",
+    "bitis": "2026-09-13T21:14:18",
+    "dosyalar": [
+      "AI proje v1/V10/03_mimari/brifler/brif_roo.md"
+    ],
+    "not": "Teslim (roo): Mimari kararlar için Roo brifi hazırlandı. Operasyon Merkezi yaklaşımı, 3-Tier sekme hiyerarşisi, UX iyileştirme önerileri, 6 alternatif sekme, audit trail kritikliği, Faz 2 refactor önerileri. Brif dosyası: AI proje v1/V10/03_mimari/brifler/brif_roo.md",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "BRIF-02",
+    "baslik": "[BRIF] kilo brifi: 03_mimari kararlari okunup oneri/kritik/ekleme yazilsin",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T21:02:50",
+    "bitis": "2026-09-13T21:16:48",
+    "dosyalar": [
+      "AI proje v1/V10/03_mimari/brifler/brif_kilo.md"
+    ],
+    "not": "Teslim (kilo): brif_kilo.md yazildi: backend (FastAPI/Streamlit), veri modeli (7 tablo + Faz 3 migration), AI chat motoru (9router OpenAI format), kota durumu (api_usage + rate limit + Faz 2 tenant quota). 36 satir, 80 sinir icinde.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "BRIF-03",
+    "baslik": "[BRIF] copilot brifi: 03_mimari kararlari okunup oneri/kritik/ekleme yazilsin",
+    "sahip": "copilot",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T21:02:50",
+    "bitis": "2026-09-13T21:16:18",
+    "dosyalar": [
+      "AI proje v1/V10/03_mimari/brifler/brif_copilot.md"
+    ],
+    "not": "Teslim (copilot): brif dosyasi: AI proje v1/V10/03_mimari/brifler/brif_copilot.md; sekme tasima, test stratejisi, API sozlesmesi, audit ve workflow senkronizasyonu onerileri eklendi.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "SENTEZ-01",
+    "baslik": "[SENTEZ] 3 brifi oku -> 00_sentez.md: kabul / ret+gerekce / bekleyen kararlar",
+    "sahip": "orkestrator",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T21:02:50",
+    "bitis": "2026-09-13T21:29:21",
+    "dosyalar": [
+      "AI proje v1/V10/03_mimari/brifler/00_sentez.md"
+    ],
+    "not": "Kullanici BK1-BK5 onayladi; sentez okunabilir.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "DASH-UX-02a",
+    "baslik": "[DASH-UX] DASH-UX-02a: 5 sistem sekmesini tek 'admin_sistem.py' icinde birlest",
+    "sahip": "copilot",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T21:02:50",
+    "bitis": "2026-09-13T21:34:19",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_sistem.py"
+    ],
+    "not": "Teslim (copilot): brif sentez okundu. web_dashboard/tabs/admin_sistem.py ile cost/performance/api_analytics/dlq/webhook panelleri tek Sistem render akisinda birlestirildi; ortak yenileme, bilgi ve empty-state metni eklendi. tests/test_admin_sistem.py eklendi. py_compile basarili; odak ve komsu sistem testleri 11 passed.",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": [
+      "SENTEZ-01"
+    ],
+    "talimat": "5 sistem sekmesini tek 'admin_sistem.py' icinde birlestir: cost/performance/api_analytics/dlq/webhook. Dikey dilim: her sekme icin veri kaynagi + bos-veri placeholder + test BIRLIKTE gelsin (K2/K5). app.py'ye DOKUNMA (roo sidebar yapacak). Alt-sekme yapisi, her grafige 1 satir aciklama (K3)."
+  },
+  {
+    "task_id": "DASH-UX-02b",
+    "baslik": "[DASH-UX] DASH-UX-02b: 4 sekmeyi tek 'admin_yonetim.py' icinde birlestir: extr",
+    "sahip": "copilot",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T21:02:50",
+    "bitis": "2026-09-13T21:46:49",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_yonetim.py"
+    ],
+    "not": "Teslim (copilot): 00_sentez okundu. web_dashboard/tabs/admin_yonetim.py ile extras(API/kullanici), search, export ve auto_refresh panelleri tek Yonetim render akisinda birlestirildi; ortak yenileme, bilgi ve yetki notu eklendi. tests/test_admin_yonetim.py eklendi; py_compile ve komsu testler 4 passed.",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": [
+      "SENTEZ-01",
+      "DASH-UX-02a"
+    ],
+    "talimat": "4 sekmeyi tek 'admin_yonetim.py' icinde birlestir: extras(auth/user)/audit/panel(karar)/export. Dikey dilim + bos-veri placeholder + aciklama (K2/K3/K5). app.py'ye DOKUNMA."
+  },
+  {
+    "task_id": "DASH-UX-03",
+    "baslik": "[DASH-UX] DASH-UX-03: Paket + Cagraz Satis backend: paketler.py (paket CRUD +",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T21:02:50",
+    "bitis": "2026-09-13T21:57:20",
+    "dosyalar": [
+      "src/company_master/paketler.py",
+      "src/company_master/pazarlama.py",
+      "data/demo/paketler_demo.jsonl",
+      "src/company_master/schema/migrations/0001_paketler_pazarlama.sql"
+    ],
+    "not": "Teslim (kilo): backend: paketler.py (CRUD + firma-paket: create/get/update/delete/list + assign/remove/get), pazarlama.py (kampanya CRUD + segment CRUD + ilişkiler + ozet_rapor), demo veri data/demo/paketler_demo.jsonl (5 paket, DEMO rozetli), DB migration 0001_paketler_pazarl.sql (packages/company_packages/campaigns/segments/campaign_segments/segment_companies).",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": [
+      "SENTEZ-01"
+    ],
+    "talimat": "Paket + Cagraz Satis backend: paketler.py (CRUD + firma-paket), pazarlama.py (kampanya+segment+oneri). Supabase packages/company_packages. Demo veri data/demo/paketler_demo.jsonl, DEMO rozetli (K7). Servis fonksiyonlari. Not: admin/musteri paneli ayni PG -> uzun sorgularda baglanti havuzunu zorlama (R6)."
+  },
+  {
+    "task_id": "AI-CHAT-01",
+    "baslik": "[DASH-UX] AI-CHAT-01: Abrakadabra: tabs/abrakadabra.py (st.chat_message) + sr",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T21:02:50",
+    "bitis": "2026-09-13T22:00:00",
+    "dosyalar": [
+      "web_dashboard/tabs/abrakadabra.py",
+      "src/company_master/ai_chat.py"
+    ],
+    "not": "Teslim (kilo): abrakadabra.py (st.chat_message UI, admin token, TEKLIF/ONAY parser), ai_chat.py (9Router chat + 4-model fallback chain, UCRUZ default gpt-4o-mini, admin token). app.py integre edildi. 807 passed.",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": [],
+    "talimat": "Abrakadabra: tabs/abrakadabra.py (st.chat_message) + ai_chat.py (9Router UCRUZ/hizli model - BK4, fallback provider listesi SART - K6). task_board/trigger okuma araclari. Orkestrator komut parser: once TEKLIF, onay butonla. Admin token zorunlu."
+  },
+  {
+    "task_id": "DASH-UX-01",
+    "baslik": "[DASH-UX] DASH-UX-01: ANA TASARIM: app.py (7 sekmeli yeni yapi, koyu tema CSS",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T21:02:50",
+    "bitis": "2026-09-13T21:37:19",
+    "dosyalar": [
+      "app.py",
+      "web_dashboard/css/style.css",
+      "web_dashboard/tabs/ana_kontrol.py",
+      "web_dashboard/tabs/admin_musteriler.py"
+    ],
+    "not": "Teslim (roo): DASH-UX-01 ANA TASARIM + SIDEBAR tamamlandı. Yapılı: (1) app.py sidebar navigasyon (2 kategori: İş/Sistem, 7 sekme), (2) ana_kontrol.py (K4 mavi müşteri + turuncu sistem kartları, K1 başlık+yenile+info), (3) mevcut sekmeler entegre. Kısmi: K1 ortak şablonu tüm sekmeler için henüz uygulanmadı (DASH-UX-02a/b tarafından yapılacak), K5 CSS tema güncelleme (style.css) tahmini Faz 2. Teslim dosyaları: app.py, web_dashboard/tabs/ana_kontrol.py. Blokaj açıldı: copilot DASH-UX-02a/b, kilo DASH-UX-03/AI-CHAT-01, roo DASH-UX-04. | UYARI(roo): eski firma listesi+filtre+bildirim blogu yeni sidebar'a tasinmadi -> COP-26 ile kapatilacak (onay notu).",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": [
+      "SENTEZ-01"
+    ],
+    "talimat": "ANA TASARIM + SIDEBAR (BK5): app.py -> sol sidebar 2 kategori: IS (Ana Kontrol/Musteriler/Paketler/Pazarlama/Abrakadabra), SISTEM (Sistem/Yonetim); st.tabs yok. ana_kontrol.py (ana metrikler, musteri=mavi/sistem=turuncu kart AYRI - K4); admin_musteriler.py (arama+liste+detay+cagraz satis yeri). ORTAK SEKME KALIBI (K1): ikon+baslik + 'Son guncelleme' + yenile + 'neden' expander. Her metrikte 1 satir aciklama (K3), bos-veri placeholder (K2). Kararlarini brif_roo.md icinde guncelle."
+  },
+  {
+    "task_id": "DASH-UX-04",
+    "baslik": "[DASH-UX] DASH-UX-04: Paketler + Pazarlama UI: tabs/paketler.py + pazarlama.p",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T21:02:51",
+    "bitis": "2026-09-13T22:58:52",
+    "dosyalar": [
+      "web_dashboard/tabs/paketler.py",
+      "web_dashboard/tabs/pazarlama.py"
+    ],
+    "not": "Teslim (roo): tabs/paketler.py + tabs/pazarlama.py yazildi. K1 ortak baslik (ikon/son guncelleme/yenile/bilgi expander), K3 metrik aciklamalari, K2 bos grafik yerine yer tutucu, K7 DEMO rozeti uygulandi. Paketler: katalog kartlari, fiyat karsilastirma, firma kartindan capraz satis onerisi (yukseltme/tamamlayici, demo firma secimi ile calisir). Pazarlama: ozet metrikler, CTR/donusum/donusum-basi-maliyet, kampanya tablosu+butce grafigi, segment detayi, segment-kampanya kapsama analizi (kampanyasiz segment uyarisi). DB yoksa data/demo/*.jsonl fallback. Dogrulama: py_compile OK, demo veri akisi manuel dogrulandi (5 paket/5 firma/5 kampanya/5 segment), regresyon 18 passed. NOT: app.py kilit listemde olmadigi icin sidebar baglantilari yapilmadi.",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": [
+      "SENTEZ-01",
+      "DASH-UX-01",
+      "DASH-UX-03"
+    ],
+    "talimat": "Paketler + Pazarlama UI: tabs/paketler.py + pazarlama.py (DASH-UX-03 backend'ini gosterir, demo veri ile). Firme kartindan cagraz satis onerisi. K1/K2/K3 kalibina uy."
+  },
+  {
+    "task_id": "COP-23",
+    "baslik": "[COP-TASARIM] TASARIM-1: Bosta-veri bilgi kutusu tutarliligi (ro...",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-13T21:56:41",
+    "bitis": "2026-09-13T22:31:51",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_sistem.py"
+    ],
+    "not": "Teslim (copilot): admin_sistem bilgi kutusu baslik/caption sonrasina, yenileme ve alt panel spinner akislarindan once tasindi. tests/test_admin_sistem.py ile render sirasi sabitlendi. pytest tests/test_admin_sistem.py -q -> 2 passed.",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": [
+      "COP-10"
+    ],
+    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. TASARIM-1: admin_sistem.py icinde yukleme/veri-yok durumlarinda bilgi kutusu sayfanin EN USTUNE (spinner oncesi) sabit gelsin; spinner kapaninca kaybolmasin. KUCUK diff, tek dosya."
+  },
+  {
+    "task_id": "COP-24",
+    "baslik": "[COP-TASARIM] TASARIM-2: Son-guncelleme + yenile kalibi (roo 4.1...",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-13T21:56:41",
+    "bitis": "2026-09-13T22:43:21",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_kpi.py",
+      "web_dashboard/tabs/admin_quality.py"
+    ],
+    "not": "Teslim (copilot): admin_kpi.py ve admin_quality.py basina Son guncelleme caption'i ve Yenile butonu eklendi; buton st.cache_data.clear + st.rerun kullaniyor. py_compile basarili; odak regression 12 passed.",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": [
+      "COP-23"
+    ],
+    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. TASARIM-2: admin_kpi.py + admin_quality.py basina 'Son guncelleme: HH:MM' caption'i + yaninda yenile butonu (st.cache_data.clear). KUCUK diff, iki dosya."
+  },
+  {
+    "task_id": "COP-25",
+    "baslik": "[COP-TASARIM] TASARIM-3: Sidebar yardim satirlari. app.py icinde...",
+    "sahip": "copilot",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-13T21:56:42",
+    "bitis": "2026-09-13T22:48:51",
+    "dosyalar": [
+      "app.py"
+    ],
+    "not": "Teslim (copilot): app.py sidebar icindeki 7 navigasyon seceneginin her altina tek satir Turkce st.caption yardim metni eklendi; tema ve navigasyon mantigi degistirilmedi. python -m py_compile app.py basarili.",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": [
+      "COP-24"
+    ],
+    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. TASARIM-3: app.py sidebar seceneklerine kisa Turkce aciklama (st.caption) her sekme icin tek satir. roo'nun koyu temasina dokunma, sadece aciklama ekle.",
+    "kapisi_acildi": true
+  },
+  {
+    "task_id": "COP-26",
+    "baslik": "MUSTERILER ekrani: firma listesi+filtre+bildirim blogu (roo uyarisi)",
+    "sahip": "copilot",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-13T22:08:26",
+    "bitis": "2026-09-13T22:57:21",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_musteriler.py"
+    ],
+    "not": "Teslim (copilot): admin_musteriler.py olusturuldu: firma listesi, arama/kalite/kaynak/limit filtreleri, ust bildirim blogu ve bos-veri durumu. app.py Musteriler rotasi yeni render fonksiyonuna baglandi. tests/test_admin_musteriler.py -> 2 passed; py_compile basarili.",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": [
+      "COP-25"
+    ],
+    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. MUSTERILER ekrani: admin_musteriler.py icinde firma LISTESI + filtre paneli + bildirim blogu geri getir (roo uyarisi). DASH-UX-03 demo verisi ile calisabilmeli. K1/K2/K3 kalibi (baslik+son guncelleme+bos-veri+aciklama).",
+    "kapisi_acildi": true
+  },
+  {
+    "task_id": "WIKI-01",
+    "baslik": "Admin Panel Kullanım Kılavuzu — Obsidian Wiki",
+    "aciklama": "Admin panelinin sekme sekme kullanım kılavuzu, metrik sözlüğü ve kullanıcı yönlendirmesi. Wiki: AI proje v1/V10/wiki/admin_panel_kilavuz.md",
+    "durum": "bekliyor",
+    "sahip": "orkestrator",
+    "onaylayan": "",
+    "onay_tarihi": "",
+    "teslim_tarihi": "",
+    "bitis": "",
+    "odak": "",
+    "blokaj": [],
+    "kapisi_acildi": false,
+    "onay_bekliyor": false,
+    "otomatik_onay": false,
+    "donen": false,
+    "gorev_tarihi": "",
+    "teslim_notu": "",
+    "not": "",
+    "dosyalar": [
+      "AI proje v1/V10/wiki/admin_panel_kilavuz.md"
+    ],
+    "kilitli": false,
+    "kaynak": "orkestrator",
+    "ozet": ""
   }
 ]

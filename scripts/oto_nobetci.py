@@ -12,6 +12,8 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 from src.company_master.orchestrator import trigger
+from src.company_master.orchestrator import duzen
+from src.company_master.orchestrator import isbirligi
 
 
 def _ses_cal(frekans=600, sure=200, tekrar=2):
@@ -49,10 +51,32 @@ def _ses_teslim_onay():
         pass
 
 
+def oto_destek():
+    """Bosta ajanslara yonelik otomatik destek gorevleri olusturur."""
+    olusan = 0
+    for ajan in isbirligi.bos_ajanlar():
+        oneriler = isbirligi.yardim_edilebilir(ajan, limit=3)
+        for oner in oneriler:
+            try:
+                isbirligi.destek_al(ajan, oner["task_id"], oner["rol"])
+                print(f"  DESTEK: [{ajan}] -> {oner['task_id']} ({oner['rol']})")
+                olusan += 1
+            except ValueError:
+                pass
+    return olusan
+
+
 def nobetci_tur():
     """Tek nobetci turu - teslimleri onaylar ve zinciri devam ettirir."""
     duzeltilen = 0
-    
+
+    # 0. Otomatik destek
+    if args.oto_destek:
+        d = oto_destek()
+        duzeltilen += d
+        if d:
+            print(f"  OTOMATIK DESTEK: {d} gorev olusturuldu")
+
     # 1. Onay bekleyenleri onayla
     kuyruk = trigger.onay_bekleyenler()
     for k in kuyruk:
@@ -65,7 +89,7 @@ def nobetci_tur():
             print(f"  HATA: {k['task_id']} - {e}")
     
     # 2. Tetik dosyasindaki teslim edilmis gorevleri kontrol et
-    for ajan in ["kilo", "roo", "cline", "orkestrator"]:
+    for ajan in duzen.AJANLAR:
         try:
             tum = trigger._tetikleri_oku(ajan)
             teslim = [k for k in tum if k.get("durum") == "teslim"]
@@ -78,6 +102,18 @@ def nobetci_tur():
         except Exception:
             pass
     
+    # 3. Pano hijyeni (sessiz: degisiklik varsa yaz + ses)
+    try:
+        r = duzen.pano_bakim()
+        islem = (r["dedupe"] + r["tetik_esit"] + len(r["zincir"])
+                 + len(r["acilan"]) + len(r["kapanan"]))
+        if islem:
+            print(f"  BAKIM: dedupe={r['dedupe']} tetik={r['tetik_esit']} "
+                  f"zincir={len(r['zincir'])} blokaj_ac={len(r['acilan'])}")
+            duzeltilen += islem
+    except Exception:
+        pass
+
     return duzeltilen
 
 
@@ -87,6 +123,8 @@ def main():
     parser.add_argument("--surekli", action="store_true", help="Surekli calistir")
     parser.add_argument("--aralik", type=int, default=60, help="Surekli calisma araligi (saniye)")
     parser.add_argument("--test-ses", action="store_true", help="Ses testi calistir")
+    parser.add_argument("--oto-destek", action="store_true",
+                        help="Bosta ajanslara otomatik destek gorevleri olustur")
     args = parser.parse_args()
     
     if args.test_ses:

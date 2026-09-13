@@ -5,6 +5,10 @@ SQLAlchemy>=2.0.30
 psycopg[binary]>=3.2.0
 python-dotenv>=1.0.0
 
+# Cache + Logging
+redis>=5.0.0
+structlog>=23.0.0
+
 # ETL/yardimci scriptler (scripts/)
 requests>=2.28.0
 beautifulsoup4>=4.11.0
@@ -12,6 +16,7 @@ rapidfuzz>=3.0.0
 
 # Legacy: eski Streamlit arayuzu (compose profili: legacy)
 streamlit>=1.30.0
+plotly>=5.18.0
 
 # Vektor katmani (9R-02): semantik arama + dublikasyon (lazy import; yoksa matcher VKN+fuzzy ile calisir)
 chromadb>=0.5.0

@@ -30,6 +30,8 @@ for _akis in (sys.stdout, sys.stderr):
 
 from src.company_master.orchestrator import task_board as tb  # noqa: E402
 from src.company_master.orchestrator import trigger  # noqa: E402
+from src.company_master.orchestrator import duzen  # noqa: E402
+from src.company_master.orchestrator import isbirligi  # noqa: E402
 
 
 def _ayristir_liste(deger: str | None) -> list[str]:
@@ -127,31 +129,6 @@ def cmd_reddet(args: argparse.Namespace) -> int:
     return 0
 
 
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Ajan posta kutusu + onay (ORCH-08)")
-    alt = parser.add_subparsers(dest="komut", required=True)
-
-    def ajanli(p: argparse.ArgumentParser) -> None:
-        p.add_argument("--ajan", required=True)
-
-    p = alt.add_parser("bak", help="Bekleyen görevlerini listele"); ajanli(p)
-    p.set_defaults(func=cmd_bak)
-    p = alt.add_parser("al", help="Görevi al (aktif yap)"); ajanli(p)
-    p.add_argument("--task-id", required=True); p.set_defaults(func=cmd_al)
-    p = alt.add_parser("teslim", help="İşi teslim et (review'a düşer)"); ajanli(p)
-    p.add_argument("--task-id", required=True); p.add_argument("--ozet", required=True)
-    p.add_argument("--cikti", default=None, help="Virgülle ayrılı çıktı dosyaları")
-    p.set_defaults(func=cmd_teslim)
-    p = alt.add_parser("onay-bekleyen", help="Onay bekleyen teslimleri listele")
-    p.set_defaults(func=cmd_onay_bekleyen)
-    p = alt.add_parser("onayla", help="Teslimi onayla (done)")
-    p.add_argument("--task-id", required=True); p.add_argument("--ben", required=True)
-    p.set_defaults(func=cmd_onayla)
-    p = alt.add_parser("reddet", help="Teslimi reddet (aktife geri)")
-    p.add_argument("--task-id", required=True); p.add_argument("--ben", required=True)
-    p.add_argument("--neden", required=True); p.set_defaults(func=cmd_reddet)
-
-    
 def cmd_zincir(args: argparse.Namespace) -> int:
     """Görev zinciri oluştur (örn. P7-23 → P7-4 → ...)."""
     try:
@@ -170,8 +147,6 @@ def cmd_zincir(args: argparse.Namespace) -> int:
 def cmd_hepsini_tamamla(args: argparse.Namespace) -> int:
     """Tum teslim edilen gorevleri onayla ve zinciri devam ettir."""
     duzeltilen = 0
-    
-    # 1. Onay bekleyenleri onayla
     kuyruk = trigger.onay_bekleyenler()
     for k in kuyruk:
         try:
@@ -181,8 +156,7 @@ def cmd_hepsini_tamamla(args: argparse.Namespace) -> int:
         except Exception as e:
             print(f"  HATA: {k['task_id']} - {e}")
     
-    # 2. Tetik dosyasindaki teslim edilmis gorevleri kontrol et
-    for ajan in ["kilo", "roo", "cline", "orkestrator"]:
+    for ajan in ["kilo", "roo", "copilot", "cline", "orkestrator"]:
         try:
             tum = trigger._tetikleri_oku(ajan)
             teslim = [k for k in tum if k.get("durum") == "teslim"]
@@ -198,38 +172,95 @@ def cmd_hepsini_tamamla(args: argparse.Namespace) -> int:
         print("  (düzeltilecek bir şey yok)")
     else:
         print(f"\n  Toplam: {duzeltilen} işlem")
-    
     return 0
 
 
-def cmd_hepsini_tamamla(args: argparse.Namespace) -> int:
-    """Tum teslim edilen gorevleri onayla ve zinciri devam ettir."""
-    duzeltilen = 0
-    kuyruk = trigger.onay_bekleyenler()
-    for k in kuyruk:
-        try:
-            trigger.onayla(k["task_id"], "oto-nobetci")
-            print(f"  ONAYLANDI: {k['task_id']} (teslim: {k['ajan']})")
-            duzeltilen += 1
-        except Exception as e:
-            print(f"  HATA: {k['task_id']} - {e}")
-    
-    for ajan in ["kilo", "roo", "cline", "orkestrator"]:
-        try:
-            tum = trigger._tetikleri_oku(ajan)
-            teslim = [k for k in tum if k.get("durum") == "teslim"]
-            for t in teslim:
-                sonraki = trigger.zincir_devam_et(t["task_id"], ajan)
-                if sonraki:
-                    print(f"  ZINCIR: [{ajan}] {t['task_id']} -> {sonraki['task_id']}")
-                    duzeltilen += 1
-        except Exception:
-            pass
-    
-    if duzeltilen == 0:
-        print("  (düzeltilecek bir şey yok)")
-    else:
-        print(f"\n  Toplam: {duzeltilen} işlem")
+def cmd_bakim(args: argparse.Namespace) -> int:
+    """Pano hijyeni: cift kayit, takili tetik, bayat zincir, blokaj otomasyonu."""
+    if args.rapor:
+        t = duzen.pano_tarama()
+        print("[TARAMA] (dokunulmadi)")
+        print(f"  cift kayit: {t['cift_kayit'] or 'yok'}")
+        for s in t["takili_tetik"]:
+            print(f"  takili: {s}")
+        if not t["takili_tetik"]:
+            print("  takili tetik: yok")
+        print(f"  blocked: {', '.join(t['blocked']) or 'yok'}")
+        return 0
+    r = duzen.pano_bakim()
+    print("[BAKIM] uygulandi:")
+    print(f"  dedupe: {r['dedupe']} | tetik esit: {r['tetik_esit']}")
+    for z in r["zincir"]:
+        print(f"  zincir: {z}")
+    print(f"  blokaj acilan: {', '.join(r['acilan']) or 'yok'}")
+    print(f"  blokaj kapanan: {', '.join(r['kapanan']) or 'yok'}")
+    return 0
+
+
+def cmd_ozet(args: argparse.Namespace) -> int:
+    """Token dostu tek satirlik pano ozeti."""
+    print(duzen.ozet_rapor())
+    return 0
+
+
+def cmd_yardim(args: argparse.Namespace) -> int:
+    """ORCH-12: Bosta ajanlar + onerileri goster."""
+    bos = isbirligi.bos_ajanlar()
+    if not bos:
+        print("Bos ajan yok (tum ajanlar meguldu).")
+        return 0
+    print(f"Bos ajanlar ({len(bos)}): {', '.join(bos)}")
+    for ajan in bos:
+        adaylar = isbirligi.yardim_edilebilir(ajan, limit=3)
+        if adaylar:
+            print(f"\n  [{ajan}] oneriler:")
+            for a in adaylar:
+                print(f"    {a['task_id']} ({a['rol']}) — {a['baslik']}")
+        else:
+            print(f"\n  [{ajan}] oneri yok.")
+    return 0
+
+
+def cmd_destek_al(args: argparse.Namespace) -> int:
+    """ORCH-12: Destek gorevi al (tests/docs/plans altina yazar)."""
+    try:
+        sonuc = isbirligi.destek_al(args.ajan, args.hedef, args.rol)
+    except (ValueError, Exception) as exc:
+        return _hata(exc)
+    print(f"DESTEK ALINDI: {sonuc['gorev']['task_id']} -> {args.ajan}")
+    print(f"  Hedef: {args.hedef} | Rol: {args.rol}")
+    print(f"  -> tetik dosyasina yazildi")
+    return 0
+
+
+def cmd_devret(args: argparse.Namespace) -> int:
+    """Gorevi baska ajana devret: sahip + kilitler + yeni ajana tetik."""
+    g = tb.gorev_getir(args.task_id)
+    if not g:
+        return _hata(ValueError(f"Gorev yok: {args.task_id}"))
+    eski = g["sahip"]
+    # Eski ajanin bekleyen/alindi tetigi -> kaldir
+    try:
+        kayitlar = trigger._tetikleri_oku(eski)
+        kalan = [k for k in kayitlar if not (k["task_id"] == args.task_id and k["durum"] in ("bekliyor", "alindi"))]
+        if len(kalan) != len(kayitlar):
+            trigger._tetikleri_yaz(kalan, eski)
+    except Exception:
+        pass
+    # Kilit sahipligini transfer et
+    try:
+        kilitler = tb._read_json(tb.FILE_LOCKS)
+        for d, l in kilitler.items():
+            if l.get("task_id") == args.task_id:
+                l["sahip"] = args.yeni_ajan
+        tb._write_json(tb.FILE_LOCKS, kilitler)
+    except Exception:
+        pass
+    tb.gorev_guncelle(args.task_id, sahip=args.yeni_ajan,
+                      **{"not": f"Devredildi: {eski} -> {args.yeni_ajan} ({args.neden or '-'})"})
+    trigger.tetik_ekle(args.task_id, args.yeni_ajan,
+                       f"DEVROLDU ({eski} icin). " + (args.neden or ""))
+    print(f"DEVRETILDI: {args.task_id} {eski} -> {args.yeni_ajan} + tetik dustu")
     return 0
 
 
@@ -277,43 +308,31 @@ def main() -> int:
     hepsini_tamamla_p = sub.add_parser("hepsini-tamamla", help="Tum teslimleri onayla + zincir devami")
     hepsini_tamamla_p.set_defaults(func=cmd_hepsini_tamamla)
 
+    bakim_p = sub.add_parser("bakim", help="Pano hijyeni: cift kayit, takili tetik, blokaj")
+    bakim_p.add_argument("--rapor", action="store_true", help="Sadece rapor, duzeltme yok")
+    bakim_p.set_defaults(func=cmd_bakim)
+
+    ozet_p = sub.add_parser("ozet", help="Token dostu tek satirlik pano ozeti")
+    ozet_p.set_defaults(func=cmd_ozet)
+
+    yardim_p = sub.add_parser("yardim", help="ORCH-12: Bosta ajanlar + onerileri goster")
+    yardim_p.set_defaults(func=cmd_yardim)
+
+    destek_al_p = sub.add_parser("destek-al", help="ORCH-12: Destek gorevi al")
+    destek_al_p.add_argument("--ajan", required=True)
+    destek_al_p.add_argument("--hedef", required=True)
+    destek_al_p.add_argument("--rol", choices=["test", "arastirma"], default="test")
+    destek_al_p.set_defaults(func=cmd_destek_al)
+
+    devret_p = sub.add_parser("devret", help="Gorevi baska ajana devret (sahip+kilit+tetik)")
+    devret_p.add_argument("--task-id", required=True)
+    devret_p.add_argument("--yeni-ajan", required=True)
+    devret_p.add_argument("--neden", default="")
+    devret_p.set_defaults(func=cmd_devret)
+
     args = parser.parse_args()
     return args.func(args)
 
 
 if __name__ == "__main__":
     sys.exit(main())
-
-def cmd_hepsini_tamamla(args: argparse.Namespace) -> int:
-    """Tum teslim edilen gorevleri onayla ve zinciri devam ettir."""
-    duzeltilen = 0
-    
-    # 1. Onay bekleyenleri onayla
-    kuyruk = trigger.onay_bekleyenler()
-    for k in kuyruk:
-        try:
-            trigger.onayla(k["task_id"], "oto-nobetci")
-            print(f"  ONAYLANDI: {k['task_id']} (teslim: {k['ajan']})")
-            duzeltilen += 1
-        except Exception as e:
-            print(f"  HATA: {k['task_id']} - {e}")
-    
-    # 2. Tetik dosyasindaki teslim edilmis gorevleri kontrol et
-    for ajan in ["kilo", "roo", "cline", "orkestrator"]:
-        try:
-            tum = trigger._tetikleri_oku(ajan)
-            teslim = [k for k in tum if k.get("durum") == "teslim"]
-            for t in teslim:
-                sonraki = trigger.zincir_devam_et(t["task_id"], ajan)
-                if sonraki:
-                    print(f"  ZINCIR: [{ajan}] {t['task_id']} -> {sonraki['task_id']}")
-                    duzeltilen += 1
-        except Exception:
-            pass
-    
-    if duzeltilen == 0:
-        print("  (düzeltilecek bir şey yok)")
-    else:
-        print(f"\n  Toplam: {duzeltilen} işlem")
-    
-    return 0

@@ -89,6 +89,9 @@ class TestWaitForRun:
 
     def test_failed_durumu_hatadir(self) -> None:
         c = make_client()
+        c.session.post.return_value = resp(
+            201, {"data": {"id": "run1", "defaultDatasetId": "ds1"}}
+        )
         c.session.get.return_value = resp(200, {"data": {"status": "FAILED"}})
         meta = c.wait_for_run("run1", poll_interval=0)
         assert meta["status"] == "FAILED"
@@ -138,7 +141,7 @@ class TestRunActorAndCollect:
             201, {"data": {"id": "run1", "defaultDatasetId": "ds1"}}
         )
         c.session.get.side_effect = [
-            resp(200, {"data": {"status": "SUCCEEDED", "defaultDatasetId": "ds1"}}),
+            resp(200, {"data": {"status": "SUCCEEDED", "defaultDatasetId": "ds1", "id": "run1"}}),
             resp(200, [{"url": "https://x.com", "title": "Stajyer"}]),
         ]
         items, meta = c.run_actor_and_collect("apify/web-scraper", poll_interval=0)

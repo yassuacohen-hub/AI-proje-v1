@@ -1,15 +1,25 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""Streamlit Dashboard — Company Master görsel arayüzü.
+"""Streamlit Dashboard — P7-44: Modern Navigasyon.
 
-Gösterge paneli:
-  - KPI kartları (toplam firma, kalite skoru, alan doluluk oranları)
-  - Görev tahtası (task_board.json'dan otomatik)
-  - Ajan aktivite logu (AGENT_SYNC.md / handoffs.json'dan)
-  - Veri kalitesi trendi (basit bar chart)
-  - 🔔 Bildirim merkezi (auto-refresh + webhook event log) [P7-19]
-  - 🛡️ Admin paneli (sistem durumu, API metrikleri, kaynak durumu) [P7-20]
-  - 📈 Performans paneli (response time, throughput, cache stats) [P7-21]
+Ne değişti (P7-44):
+    1. **Tek doğru kaynak (SSOT):** Sekme listesi artık `app.py` içinde değil,
+       `web_dashboard/tabs/__init__.py` → `SECTIONS` kaydında. Sidebar butonu ve
+       yönlendirme dalı otomatik türetilir; ikisi birbirinden kaçamaz.
+    2. **Placeholder'lar kaldırıldı:** Paketler ve Pazarlama sekmeleri gerçek
+       render fonksiyonlarına bağlandı (K-01 kapandı).
+    3. **Tembel (lazy) import:** Sadece görüntülenen bölümün modülü yüklenir;
+       açılışta 20+ modül import edilmez.
+    4. **Derin bağlantı:** `?bolum=paketler` ile doğrudan bölüme girilebilir,
+       seçim URL'e yazılır (yenileme/paylaşım seçimi korur).
+    5. **Aktif durum vurgusu + breadcrumb:** Kullanıcı nerede olduğunu görür.
+    6. **Hızlı geçiş:** Sidebar'daki arama kutusundan tüm bölümlere tek adımda.
+    7. **Hata sınırı:** Bir bölüm patlarsa panel komple düşmez; hata o bölümde
+       gösterilir, navigasyon çalışmaya devam eder.
+
+Navigasyon (BK5):
+    İş Operasyonları : Ana Kontrol · Müşteriler · Paketler · Pazarlama · Abrakadabra
+    Sistem & Yönetim : Sistem · Canlı Veri · Yönetim
 
 Çalıştırma:
     streamlit run app.py
@@ -19,483 +29,296 @@ from __future__ import annotations
 import json
 import sys
 import time as _time
-from datetime import datetime, timedelta
+import traceback
+from datetime import datetime
 from pathlib import Path
+from typing import Callable
 
-import pandas as pd
 import streamlit as st
-from sqlalchemy import text
 
 ROOT = Path(__file__).resolve().parent
-sys.path.insert(0, str(ROOT / "src"))
+if str(ROOT / "src") not in sys.path:
+    sys.path.insert(0, str(ROOT / "src"))
 
-from company_master.db.connection import get_engine
-from company_master.orchestrator import task_board as tb
-from scripts.dash04_api_client import get_api, APIError
-from web_dashboard.tabs.admin_extras import render_api_management, render_user_management
-from web_dashboard.tabs.admin_auth import get_admin_token, render_admin_login
-from web_dashboard.tabs.admin_kpi import render_kpi_tab
-from web_dashboard.tabs.admin_audit import render_audit_tab
-from web_dashboard.tabs.webhook_monitor import render_webhook_monitor_tab
+from web_dashboard.tabs import (  # noqa: E402
+    SECTIONS,
+    TabTanimi,
+    gruplar,
+    render_fonksiyonu,
+    tab_getir,
+    tab_url_getir,
+    varsayilan_tab,
+)
 
-st.set_page_config(page_title="Company Master Dashboard", layout="wide", page_icon="🏢")
+st.set_page_config(
+    page_title="Huginn — Company Master Dashboard",
+    layout="wide",
+    page_icon="🏢",
+    initial_sidebar_state="expanded",
+)
 
-# --- Performance tracking ---
-if 'perf_metrics' not in st.session_state:
-    st.session_state['perf_metrics'] = {
-        'response_time': 0, 'query_count': 0, 'cache_hits': 0,
-        'page_load_start': None, 'queries': []
-    }
-st.session_state['perf_metrics']['page_load_start'] = _time.perf_counter()
+URL_PARAM = "bolum"
 
-# --- Notification center state ---
-if 'notifications' not in st.session_state:
-    st.session_state['notifications'] = []
-if 'last_refresh' not in st.session_state:
-    st.session_state['last_refresh'] = datetime.now()
-if 'auto_refresh_enabled' not in st.session_state:
-    st.session_state['auto_refresh_enabled'] = True
+# --------------------------------------------------------------------------- #
+# Oturum durumu
+# --------------------------------------------------------------------------- #
 
-# --- Yardımcılar ---
+if "perf_metrics" not in st.session_state:
+    st.session_state["perf_metrics"] = {"page_load_start": None, "son_bolum": ""}
+st.session_state["perf_metrics"]["page_load_start"] = _time.perf_counter()
 
-@st.cache_data(ttl=30)
-def load_kpi() -> dict:
-    """KPI verisi yükle - DB fallback ile."""
+if "current_section" not in st.session_state:
+    st.session_state["current_section"] = varsayilan_tab().anahtar
+
+
+# --------------------------------------------------------------------------- #
+# Yönlendirme (routing) yardımcıları
+# --------------------------------------------------------------------------- #
+
+
+def _url_bolum_oku() -> TabTanimi | None:
+    """URL'deki `?bolum=...` parametresini bölüm tanımına çevirir."""
     try:
-        api_data = get_api("/api/kpi")
-        if isinstance(api_data, dict) and api_data:
-            return api_data
-    except (APIError, Exception):
-        pass
+        ham = st.query_params.get(URL_PARAM, "")
+    except Exception:  # Streamlit sürüm farkı — URL yoksa sessizce geç
+        return None
+    if isinstance(ham, list):
+        ham = ham[0] if ham else ""
+    return tab_url_getir(str(ham))
 
+
+def _url_bolum_yaz(tanim: TabTanimi) -> None:
+    """Seçili bölümü URL'e yazar (yenilemede seçim korunur)."""
     try:
-        engine = get_engine()
-        with engine.connect() as conn:
-            # Önce companies tablosu var mı kontrol et
-            from sqlalchemy import text
-            tablolar = [row[0] for row in conn.execute(text(
-                "SELECT table_name FROM information_schema.tables WHERE table_schema='public'"
-            ))]
-            if "companies" in tablolar:
-                r = conn.execute(text("""
-                    SELECT COUNT(*) as total,
-                        SUM(CASE WHEN c.tax_number IS NOT NULL AND c.tax_number != '' THEN 1 ELSE 0 END) as tax,
-                        SUM(CASE WHEN c.website_domain IS NOT NULL AND c.website_domain != '' THEN 1 ELSE 0 END) as web,
-                        AVG(c.data_quality_score) as avg_score
-                    FROM companies c
-                """)).mappings().first()
-                return dict(r) if r else {}
+        if st.query_params.get(URL_PARAM) != tanim.url_path:
+            st.query_params[URL_PARAM] = tanim.url_path
     except Exception:
         pass
 
-    # Fallback: boş KPI
-    return {"total": 0, "tax": 0, "vergi": 0, "web": 0, "parsel": 0, "adres": 0, "tel": 0, "email": 0, "nace": 0, "avg_score": 0}
+
+def aktif_tab() -> TabTanimi:
+    """Geçerli bölümü belirler: URL > oturum > varsayılan."""
+    url_tanim = _url_bolum_oku()
+    if url_tanim and url_tanim.anahtar != st.session_state.get("current_section"):
+        st.session_state["current_section"] = url_tanim.anahtar
+    tanim = tab_getir(st.session_state.get("current_section", ""))
+    return tanim or varsayilan_tab()
 
 
-@st.cache_data(ttl=30)
-def load_tasks() -> pd.DataFrame:
-    board = tb.gorev_listesi()
-    if not board:
-        return pd.DataFrame()
-    rows = []
-    for t in board:
-        rows.append({
-            "Görev ID": t.get("task_id", ""),
-            "Başlık": t.get("baslik", ""),
-            "Sahip": t.get("sahip", ""),
-            "Öncelik": t.get("oncelik", ""),
-            "Durum": t.get("durum", ""),
-            "Not": (t.get("not") or "")[:60],
-        })
-    return pd.DataFrame(rows)
-
-
-@st.cache_data(ttl=30)
-def load_handoffs() -> pd.DataFrame:
-    handoffs = tb.handoff_tum()
-    if not handoffs:
-        return pd.DataFrame()
-    rows = []
-    for tid, h in handoffs.items():
-        rows.append({
-            "Görev": tid,
-            "Tamamlanan": (h.get("tamamlandi") or "")[:80],
-            "Sonraki": (h.get("sonraki_adim") or "")[:80],
-            "Tarih": h.get("tarih", "")[:19],
-        })
-    return pd.DataFrame(rows)
-
-
-WEBHOOK_EVENTS = ROOT / "data" / "orchestrator" / "apify_webhook_events.jsonl"
-WEBHOOK_DLQ = ROOT / "data" / "orchestrator" / "apify_webhook_dlq.jsonl"
-
-
-@st.cache_data(ttl=10)
-def load_webhook_stats() -> dict:
-    """P7-19/20: Webhook olay ve hata sayaclarini jsonl dosyalarindan okur."""
-    stats = {
-        "olay_toplam": 0,
-        "basarili": 0,
-        "hatali": 0,
-        "calisan": 0,
-        "son_olay": None,
-        "dlq_toplam": 0,
-        "hata_turleri": {},
-    }
-    if WEBHOOK_EVENTS.exists():
-        for line in WEBHOOK_EVENTS.read_text(encoding="utf-8").splitlines():
-            line = line.strip()
-            if not line:
-                continue
-            try:
-                ev = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            stats["olay_toplam"] += 1
-            status = (ev.get("status") or "").upper()
-            if status == "SUCCEEDED":
-                stats["basarili"] += 1
-            elif status in ("FAILED", "ABORTED", "TIMED_OUT"):
-                stats["hatali"] += 1
-            else:
-                stats["calisan"] += 1
-            stats["son_olay"] = ev.get("triggered_at") or ev.get("timestamp") or stats["son_olay"]
-    if WEBHOOK_DLQ.exists():
-        lines = [ln for ln in WEBHOOK_DLQ.read_text(encoding="utf-8").splitlines() if ln.strip()]
-        stats["dlq_toplam"] = len(lines)
-        for line in lines:
-            try:
-                ev = json.loads(line)
-            except json.JSONDecodeError:
-                continue
-            et = ev.get("error_type") or "bilinmeyen"
-            stats["hata_turleri"][et] = stats["hata_turleri"].get(et, 0) + 1
-    return stats
-
-
-def parse_prometheus_bytes(raw: str) -> dict:
-    """P7-20/21: Apify webhook Prometheus metriklerini sozluge cevirir."""
-    result: dict = {}
-    for line in raw.splitlines():
-        line = line.strip()
-        if not line or line.startswith("#"):
-            continue
-        if "{" in line and "}" in line and line.endswith("}"):
-            continue  # multi-line metric olmayan satirlar
-        parts = line.split()
-        if len(parts) == 2:
-            key, val = parts[0], parts[1]
-            if key.startswith("apify_webhook_"):
-                result[key] = val
-    return result
-
-
-# --- Arayüz ---
-
-# Sidebar - kaynak filtreleme ve arama
-with st.sidebar:
-    st.header("🔧 Filtreler")
-    search_query = st.text_input("🔍 Firma Ara", placeholder="Firma adı, telefon, e-posta...")
-    score_min = st.slider("Min Kalite Skoru", 0, 100, 0)
-    score_max = st.slider("Maks Kalite Skoru", 0, 100, 100)
-    
-    st.divider()
-    st.subheader("📊 Veri Kaynakları")
-    try:
-        @st.cache_data(ttl=30)
-        def _load_sources():
-            engine = get_engine()
-            with engine.connect() as conn:
-                sources = conn.execute(text("""
-                    SELECT s.source_name, COUNT(sr.source_record_id) as cnt
-                FROM sources s
-                LEFT JOIN source_records sr ON sr.source_id = s.source_id
-                GROUP BY s.source_id, s.source_name
-                ORDER BY cnt DESC
-            """)).mappings().all()
-            for s in sources:
-                return sources
-            return []
-        sources = _load_sources()
-        for s in sources:
-            st.metric(s["source_name"], f"{s['cnt']:,}")
-    except Exception as e:
-        st.warning(f"Kaynaklar yüklenemedi: {e}")
-    
-    st.divider()
-    st.subheader("📈 Hızlı İstatistik")
-    if st.button("🔄 Yenile", type="primary", use_container_width=True):
-        st.cache_data.clear()
+def bolum_sec(anahtar: str) -> None:
+    """Sidebar/hızlı geçiş tıklamasında bölümü değiştirir."""
+    if st.session_state.get("current_section") != anahtar:
+        st.session_state["current_section"] = anahtar
         st.rerun()
 
-# Refresh button
-col_refresh, col_title = st.columns([1, 5])
-with col_refresh:
-    if st.button("🔄 Yenile", type="primary"):
-        st.cache_data.clear()
-        st.rerun()
-with col_title:
-    st.title("🏢 Company Master Dashboard")
-st.caption(f"Son güncelleme: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')} | Port: 8501")
 
-# KPI kartları
-kpi = load_kpi()
-if kpi:
-    col1, col2, col3, col4, col5 = st.columns(5)
-    col1.metric("Toplam Firma", f"{kpi.get('total', 0):,}")
-    col2.metric("Kalite Skoru", f"{kpi.get('avg_score', 0):.1f}/100")
-    col3.metric("VKN", f"{kpi.get('vkn_either', 0):,}")
-    col4.metric("Web Sitesi", f"{kpi.get('web', 0):,}")
-    col5.metric("NACE", f"{kpi.get('nace', 0):,}")
-    
-    # İkinci satır
-    col6, col7, col8, col9, col10 = st.columns(5)
-    col6.metric("Telefon", f"{kpi.get('tel', 0):,}")
-    col7.metric("E-posta", f"{kpi.get('email', 0):,}")
-    col8.metric("Adres", f"{kpi.get('adres', 0):,}")
-    col9.metric("Parsel", f"{kpi.get('parsel', 0):,}")
-    col10.metric("tax_number", f"{kpi.get('tax', 0):,}")
+# --------------------------------------------------------------------------- #
+# app.py'ye özgü render'lar (Yönetim bileşimi)
+# --------------------------------------------------------------------------- #
 
-    st.subheader("📊 Alan Doluluk Oranları")
-    fields = {
-        "Telefon": kpi.get("tel", 0),
-        "E-posta": kpi.get("email", 0),
-        "Web": kpi.get("web", 0),
-        "VKN": kpi.get("vkn_either", 0),
-        "NACE": kpi.get("nace", 0),
-        "Adres": kpi.get("adres", 0),
-        "Parsel": kpi.get("parsel", 0),
-    }
-    total = max(kpi.get("total", 1), 1)
-    chart_df = pd.DataFrame({
-        "alan": list(fields.keys()),
-        "dolu": list(fields.values()),
-        "oran": [v / total * 100 for v in fields.values()],
-    })
-    st.bar_chart(chart_df.set_index("alan")["oran"], use_container_width=True)
-    
-    # ASO ingest durumu
-    st.subheader("📥 ASO Ingest Durumu")
+
+def render_karar_defteri() -> None:
+    """Orkestratör karar kayıtlarının son 10 satırı."""
+    st.subheader("📋 Karar Defteri")
+    kayit_yolu = ROOT / "data" / "orchestrator" / "decision_log.jsonl"
+    if not kayit_yolu.exists():
+        st.info("📭 Karar defteri henüz oluşturulmadı. İlk karar yazıldığında burada görünecek.")
+        return
     try:
-        with engine.connect() as conn:
-            aso_total = conn.execute(text("""
-                SELECT COUNT(*) FROM source_records sr
-                WHERE sr.source_id = (SELECT source_id FROM sources WHERE source_name = 'aso.org.tr' LIMIT 1)
-            """)).scalar()
-            st.info(f"ASO kayıtları: {aso_total} | Toplam firma: {total:,} | Kalite skoru: {kpi.get('avg_score', 0):.1f}/100")
-    except Exception as e:
-        st.warning(f"ASO durumu yüklenemedi: {e}")
-
-# Görev tahtası
-st.subheader("📋 Görev Tahtası")
-tasks_df = load_tasks()
-if not tasks_df.empty:
-    st.dataframe(tasks_df, use_container_width=True, hide_index=True)
-else:
-    st.info("Görev bulunamadı.")
-
-# Ajan aktivite logu
-st.subheader("🤖 Ajan Aktivite Logu")
-handoffs_df = load_handoffs()
-if not handoffs_df.empty:
-    st.dataframe(handoffs_df, use_container_width=True, hide_index=True)
-else:
-    st.info("Henüz handoff kaydı yok.")
-
-# Dosya yolları
-st.subheader("📁 Veri Dosyaları")
-st.markdown(f"""
-- **Task board:** `{ROOT / 'data/orchestrator/task_board.json'}`
-- **Görev panosu:** `{ROOT / 'data/orchestrator/gorev_panosu.md'}`
-- **AGENT_SYNC:** `{ROOT / 'AGENT_SYNC.md'}`
-- **KPI raporu:** `{ROOT / 'data/kpi_raporu.md'}`
-- **OSTİM detay:** `{ROOT / 'data/ostim/firmalar_detayli.jsonl'}`
-- **ASO verisi:** `{ROOT / 'data/aso/aso_full.jsonl'}`
-""")
-
-# Firma tablosu (sidebar filtreleri ile)
-st.subheader("🏢 Firma Listesi")
-@st.cache_data(ttl=30)
-def load_companies(search="", min_score=0, max_score=100, limit=200):
-    api_params = {
-        "search": search,
-        "min_score": min_score,
-        "max_score": max_score,
-        "limit": limit,
-    }
-    try:
-        api_data = get_api("/api/companies", params=api_params)
-        if isinstance(api_data, dict):
-            rows = api_data.get("items", [])
-        elif isinstance(api_data, list):
-            rows = api_data
-        else:
-            rows = []
-
-        fields = [
-            "legal_name",
-            "trade_name",
-            "website_domain",
-            "primary_phone",
-            "primary_email",
-            "tax_number",
-            "vergi_no",
-            "nace_code",
-            "data_quality_score",
-        ]
-        api_rows = [
-            {field: row.get(field) for field in fields}
-            for row in rows
-            if isinstance(row, dict)
-        ]
-        if api_rows:
-            return api_rows
-    except APIError:
-        pass
-
-    engine = get_engine()
-    with engine.connect() as conn:
-        params = {"min_score": min_score, "max_score": max_score, "limit": limit}
-        where = "c.is_ankara=TRUE AND c.is_osb_member=TRUE AND c.data_quality_score >= :min_score AND c.data_quality_score <= :max_score"
-        if search:
-            where += " AND (LOWER(c.legal_name) LIKE :search OR LOWER(c.primary_phone) LIKE :search OR LOWER(c.primary_email) LIKE :search)"
-            params["search"] = f"%{search.lower()}%"
-        rows = conn.execute(text(f"""
-            SELECT c.legal_name, c.trade_name, c.website_domain, c.primary_phone, c.primary_email,
-                   c.tax_number, c.vergi_no, c.nace_code, c.data_quality_score
-            FROM companies c
-            WHERE {where}
-            ORDER BY c.data_quality_score DESC
-            LIMIT :limit
-        """), params).mappings().all()
-        return [dict(r) for r in rows]
-
-
-companies = load_companies(search_query, score_min, score_max)
-if companies:
-    df = pd.DataFrame(companies)
-    df.columns = ["Firma Adı", "Ticaret Adı", "Web", "Telefon", "E-posta", "VKN", "Vergi No", "NACE", "Skor"]
-    st.dataframe(df, use_container_width=True, hide_index=True)
-    st.caption(f"Toplam {len(companies)} firma gösteriliyor (skor {score_min}-{score_max})")
-else:
-    st.info("Filtrelerle eşleşen firma bulunamadı.")
-
-# --- P7-19: SSE Gerçek Zamanlı Bildirimler ---
-webhook_stats = {}
-try:
-    webhook_stats = load_webhook_stats()
-except Exception as e:
-    st.warning(f"Webhook istatistikleri yuklenemedi: {e}")
-st.subheader("🔔 Gerçek Zamanlı Bildirimler")
-if webhook_stats:
-    notif_col1, notif_col2, notif_col3, notif_col4 = st.columns(4)
-    with notif_col1:
-        st.metric("✅ Başarılı Olay", webhook_stats["basarili"])
-    with notif_col2:
-        st.metric("❌ Hatalı Olay", webhook_stats["hatali"])
-    with notif_col3:
-        st.metric("⏳ Çalışan", webhook_stats["calisan"])
-    with notif_col4:
-        st.metric("📦 DLQ (Hata Kuyruğu)", webhook_stats["dlq_toplam"])
-    if webhook_stats["son_olay"]:
-        st.caption(f"Son olay: {webhook_stats['son_olay']}")
-    if webhook_stats["hatali"] > 0 or webhook_stats["dlq_toplam"] > 0:
-        st.warning(f"⚠️ {webhook_stats['hatali']} hatalı olay + {webhook_stats['dlq_toplam']} DLQ kaydı incelemeyi bekliyor")
-    else:
-        st.success("✅ Sistem sağlıklı — yeni bildirim yok")
-else:
-    st.info("Bildirim verisi bulunamadı")
-
-# --- P7-20: Admin Panel ---
-admin_tab_login = st.tabs(["🔐 Admin Girişi"])
-st.subheader("⚙️ Admin Panel")
-admin_tab1, admin_tab2, admin_tab3, admin_tab4, admin_tab5, admin_tab6, admin_tab7, admin_tab8 = st.tabs(["📊 Sistem Durumu", "🔑 API Yönetimi", "📋 Webhook Metrikleri", "📋 Karar Defteri", "👥 Kullanıcı Yönetimi", "📈 KPI Kartları", "🔌 Webhook Monitor", "🔍 Denetim"])
-if kpi is None or not kpi:
-    kpi = load_kpi()
-with admin_tab1:
-    sys_col1, sys_col2, sys_col3, sys_col4 = st.columns(4)
-    with sys_col1:
-        st.metric("Toplam Firma", f"{kpi.get('total', 0):,}" if kpi else "—")
-    with sys_col2:
-        st.metric("Ort. Kalite", f"{kpi.get('avg_score', 0):.1f}" if kpi else "—")
-    with sys_col3:
-        st.metric("VKN Doluluk", f"%{kpi.get('vkn_either', 0) / max(kpi.get('total', 1), 1) * 100:.0f}" if kpi else "—")
-    with sys_col4:
-        dlq_ok = (webhook_stats.get("dlq_toplam", 0) == 0) if webhook_stats else True
-        st.metric("Sistem Durumu", "🟢 Sağlıklı" if dlq_ok else "🟠 Dikkat")
-with admin_tab2:
-    render_api_management(token=get_admin_token())
-
-with admin_tab3:
-    if webhook_stats:
-        hata_df = pd.DataFrame(
-            [{"Hata Türü": k, "Adet": v} for k, v in webhook_stats["hata_turleri"].items()]
-        ) if webhook_stats["hata_turleri"] else pd.DataFrame(columns=["Hata Türü", "Adet"])
-        if not hata_df.empty:
-            st.bar_chart(hata_df.set_index("Hata Türü"), use_container_width=True)
-        else:
-            st.info("Webhook metrikleri: hata kaydı yok — sistem temiz")
-        met_col1, met_col2 = st.columns(2)
-        with met_col1:
-            st.metric("Toplam Webhook Olayı", webhook_stats["olay_toplam"])
-        with met_col2:
-            st.metric("Hata Oranı", f"%{webhook_stats['hatali'] / max(webhook_stats['olay_toplam'], 1) * 100:.1f}")
-    else:
-        st.info("Webhook metrikleri yakında aktif olacak")
-
-
-with admin_tab4:
-    render_decision_tab()
-
-with admin_tab5:
-    render_user_management(token=get_admin_token())
-
-with admin_tab6:
-    render_kpi_tab()
-
-with admin_tab7:
-    render_webhook_monitor_tab()
-
-with admin_tab8:
-    render_audit_tab()
-
-with admin_tab_login[0]:
-    render_admin_login()
-
-# --- P7-21: Performans Metrikleri ---
-st.subheader("⏱️ Performans Metrikleri")
-if st.session_state['perf_metrics'].get('page_load_start'):
-    load_ms = (_time.perf_counter() - st.session_state['perf_metrics']['page_load_start']) * 1000
-    perf_col1, perf_col2, perf_col3, perf_col4 = st.columns(4)
-    with perf_col1:
-        st.metric("Sayfa Yükleme", f"{load_ms:.0f} ms")
-    with perf_col2:
-        st.metric("Webhook Olay", webhook_stats.get("olay_toplam", 0))
-    with perf_col3:
+        satirlar = [s for s in kayit_yolu.read_text(encoding="utf-8").splitlines() if s.strip()]
+    except OSError as exc:
+        st.error(f"Karar defteri okunamadı: {exc}")
+        return
+    if not satirlar:
+        st.info("📭 Karar kaydı henüz yok.")
+        return
+    st.caption(f"Toplam karar: {len(satirlar)} · son 10 kayıt gösteriliyor")
+    for satir in satirlar[-10:]:
         try:
-            _toplam = webhook_stats.get("olay_toplam", 0)
-            dlq_oran = webhook_stats.get("dlq_toplam", 0) / max(_toplam, 1) * 100
-            st.metric("DLQ Hata Oranı", f"%{dlq_oran:.1f}")
-        except Exception:
-            st.metric("DLQ Hata Oranı", "%0")
-    with perf_col4:
-        st.metric("Cache TTL", "30 sn")
+            kayit = json.loads(satir)
+        except json.JSONDecodeError:
+            continue
+        st.caption(f"{kayit.get('ts', '—')} · {kayit.get('op') or kayit.get('action', '—')}")
+
+
+def render_yonetim_bilesik() -> None:
+    """Yönetim bölümü: admin girişi + yönetim panelleri + analitik alt sekmeler.
+
+    `admin_yonetim.render_yonetim_tab()` yalnızca API/kullanıcı/export/arama
+    panellerini içerir. Admin panelinin KPI, maliyet, kalite ve API analitiği
+    ekranları burada alt sekme olarak birleştirilir.
+    """
+    from web_dashboard.tabs.admin_api_analytics import render_api_analytics_tab
+    from web_dashboard.tabs.admin_auth import render_admin_login
+    from web_dashboard.tabs.admin_cost import render_cost_tab
+    from web_dashboard.tabs.admin_errors import render_errors_tab
+    from web_dashboard.tabs.admin_kpi import render_kpi_tab
+    from web_dashboard.tabs.admin_quality import render_quality_tab
+    from web_dashboard.tabs.admin_yonetim import render_yonetim_tab
+
+    if not st.session_state.get("admin_token"):
+        st.warning("🔐 Yönetim işlemleri için admin girişi gerekir.")
+        render_admin_login()
+        st.divider()
+
+    sekmeler = st.tabs(
+        [
+            "🛠️ Yönetim Araçları",
+            "📊 KPI Kartları",
+            "💰 AI Maliyet",
+            "🧪 Kalite Özeti",
+            "🔌 API Analitiği",
+            "📋 Karar Defteri",
+            "❌ Hata Yönetimi",
+        ]
+    )
+    with sekmeler[0]:
+        render_yonetim_tab()
+    with sekmeler[1]:
+        render_kpi_tab()
+    with sekmeler[2]:
+        render_cost_tab()
+    with sekmeler[3]:
+        render_quality_tab()
+    with sekmeler[4]:
+        render_api_analytics_tab()
+    with sekmeler[5]:
+        render_karar_defteri()
+    with sekmeler[6]:
+        render_errors_tab()
+
+
+# Kayıttaki modül yerine app.py içindeki bileşimi kullanacak bölümler.
+RENDER_OVERRIDES: dict[str, Callable[[], None]] = {
+    "yonetim": render_yonetim_bilesik,
+}
+
+
+# --------------------------------------------------------------------------- #
+# Sidebar
+# --------------------------------------------------------------------------- #
+
+
+def render_sidebar(secili: TabTanimi) -> None:
+    """Modern sidebar: marka başlığı, hızlı geçiş, gruplu navigasyon."""
+    with st.sidebar:
+        st.markdown("## 🏢 Huginn")
+        st.caption("Company Master · Veri Zekâsı Paneli")
+        st.divider()
+
+        # --- Hızlı geçiş: tek adımda herhangi bir bölüme ---
+        secenekler = list(SECTIONS)
+        secim = st.selectbox(
+            "🔍 Hızlı geçiş",
+            secenekler,
+            index=secenekler.index(secili),
+            format_func=lambda t: t.etiket,
+            key="nav_hizli_gecis",
+            help="Bölüm adını yazarak doğrudan geçiş yapın.",
+        )
+        if secim.anahtar != secili.anahtar:
+            bolum_sec(secim.anahtar)
+
+        st.divider()
+
+        for grup_adi, tanimlar in gruplar().items():
+            st.markdown(f"##### {grup_adi}")
+            for tanim in tanimlar:
+                aktif = tanim.anahtar == secili.anahtar
+                etiket = f"{tanim.etiket}{'' if tanim.hazir else ' ⏳'}"
+                if st.button(
+                    etiket,
+                    key=f"nav_{tanim.anahtar}",
+                    use_container_width=True,
+                    type="primary" if aktif else "secondary",
+                    help=tanim.aciklama,
+                    disabled=aktif,
+                ):
+                    bolum_sec(tanim.anahtar)
+            st.write("")
+
+        st.divider()
+        hazir_sayisi = sum(1 for t in SECTIONS if t.hazir)
+        st.caption(
+            f"Bölüm: {hazir_sayisi}/{len(SECTIONS)} hazır · ⏳ = yapım aşamasında\n\n"
+            "P7-44 Modern Navigasyon"
+        )
+
+
+# --------------------------------------------------------------------------- #
+# Ana içerik
+# --------------------------------------------------------------------------- #
+
+
+def render_breadcrumb(tanim: TabTanimi) -> None:
+    """Üst kırıntı yolu: kullanıcı nerede olduğunu ve ne göreceğini bilir."""
+    st.markdown(f"##### 🏠 Panel › {tanim.grup} › **{tanim.baslik}**")
+    st.caption(f"{tanim.aciklama} · Son yükleme: {datetime.now().strftime('%H:%M')}")
+    st.divider()
+
+
+def render_placeholder(tanim: TabTanimi) -> None:
+    """K2: hazır olmayan bölüm için boş ekran yerine açıklayıcı bilgi."""
+    st.info(
+        f"⏳ **{tanim.baslik}** bölümü henüz hazır değil.\n\n"
+        f"Bekleyen görev: `{tanim.bekleyen_gorev or 'planlanıyor'}` — "
+        f"tamamlandığında {tanim.aciklama.lower()} burada görünecek."
+    )
+
+
+def render_icerik(tanim: TabTanimi) -> None:
+    """Seçili bölümü hata sınırı içinde çizer."""
+    if not tanim.hazir:
+        render_placeholder(tanim)
+        return
+
+    fn = RENDER_OVERRIDES.get(tanim.anahtar) or render_fonksiyonu(tanim)
+    if fn is None:
+        st.error(
+            f"❌ **{tanim.baslik}** bölümü yüklenemedi.\n\n"
+            f"Beklenen: `{tanim.modul}.{tanim.fonksiyon}`. "
+            "Modül taşınmış veya fonksiyon adı değişmiş olabilir."
+        )
+        return
+
     try:
-        trend_df = pd.DataFrame({
-            "kaynak": ["Olay", "Başarılı", "Hatalı", "DLQ"],
-            "adet": [
-                webhook_stats.get("olay_toplam", 0), webhook_stats.get("basarili", 0),
-                webhook_stats.get("hatali", 0), webhook_stats.get("dlq_toplam", 0),
-            ],
-        })
-        if trend_df["adet"].sum() > 0:
-            st.caption("Webhook akış dağılımı")
-            st.bar_chart(trend_df.set_index("kaynak"), use_container_width=True)
-    except Exception as e:
-        st.info(f"Grafik oluşturulamadı: {e}")
-    if st.button("🔄 Performans Sayacını Sıfırla"):
-        st.session_state['perf_metrics'] = {'response_time': 0, 'query_count': 0, 'cache_hits': 0, 'page_load_start': _time.perf_counter()}
-        st.cache_data.clear()
-        st.rerun()
-else:
-    st.info("Performans metrikleri burada görünecek")
+        fn()
+    except Exception as exc:  # hata sınırı: navigasyon ayakta kalsın
+        st.error(f"❌ **{tanim.baslik}** çizilirken hata oluştu: {exc}")
+        with st.expander("🔎 Teknik ayrıntı"):
+            st.code(traceback.format_exc(), language="text")
+        st.caption("Diğer bölümler çalışmaya devam ediyor; sol menüden geçiş yapabilirsiniz.")
+
+
+def render_footer(tanim: TabTanimi) -> None:
+    """Alt bilgi: yükleme süresi, aktif bölüm, cache kontrolü."""
+    st.divider()
+    baslangic = st.session_state["perf_metrics"].get("page_load_start")
+    if not baslangic:
+        st.caption("Performans metrikleri bir sonraki yüklemede görünecek.")
+        return
+    yukleme_ms = (_time.perf_counter() - baslangic) * 1000
+    c1, c2, c3, c4 = st.columns(4)
+    with c1:
+        st.metric("Sayfa Yükleme", f"{yukleme_ms:.0f} ms")
+    with c2:
+        st.metric("Aktif Bölüm", tanim.baslik)
+    with c3:
+        st.metric("Cache TTL", "30 sn")
+    with c4:
+        if st.button("🔄 Cache Temizle", key="footer_cache_temizle", use_container_width=True):
+            st.cache_data.clear()
+            st.rerun()
+
+
+def main() -> None:
+    """Uygulama giriş noktası."""
+    secili = aktif_tab()
+    _url_bolum_yaz(secili)
+    render_sidebar(secili)
+    render_breadcrumb(secili)
+    render_icerik(secili)
+    render_footer(secili)
+
+
+main()

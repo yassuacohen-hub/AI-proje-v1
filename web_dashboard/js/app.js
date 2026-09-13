@@ -9,10 +9,10 @@ if (!API_KEY) {
   const urlKey = new URLSearchParams(window.location.search).get('api_key');
   const localKey = localStorage.getItem('dash_api_key');
   if (urlKey) {
-    console.warn('[Huginn] URL api_key kullanımı tespit edildi - çerez tabanlı auth'a geçin');
+    console.warn("[Huginn] URL api_key kullanımı tespit edildi - çerez tabanlı auth'a geçin");
   }
   if (localKey) {
-    console.warn('[Huginn] localStorage dash_api_key kullanımı tespit edildi - çerez tabanlı auth'a geçin');
+    console.warn("[Huginn] localStorage dash_api_key kullanımı tespit edildi - çerez tabanlı auth'a geçin");
   }
 }
 function apiUrl(path) {

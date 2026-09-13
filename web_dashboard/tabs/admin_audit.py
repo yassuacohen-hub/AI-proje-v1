@@ -37,14 +37,24 @@ TRIGGER_LOG = ROOT / "data" / "orchestrator" / "trigger_log.jsonl"
 @st.cache_data(ttl=30)
 def load_file_locks() -> dict[str, Any]:
     if FILE_LOCKS.exists():
-        return json.loads(FILE_LOCKS.read_text(encoding="utf-8"))
+        try:
+            data = json.loads(FILE_LOCKS.read_text(encoding="utf-8"))
+            if isinstance(data, dict):
+                return data
+        except (json.JSONDecodeError, OSError, TypeError, ValueError):
+            return {}
     return {}
 
 
 @st.cache_data(ttl=30)
 def load_handoffs() -> dict[str, Any]:
     if HANDOFFS.exists():
-        return json.loads(HANDOFFS.read_text(encoding="utf-8"))
+        try:
+            data = json.loads(HANDOFFS.read_text(encoding="utf-8"))
+            if isinstance(data, dict):
+                return data
+        except (json.JSONDecodeError, OSError, TypeError, ValueError):
+            return {}
     return {}
 
 

@@ -10,3 +10,10 @@ magicEnabled = true
 
 [client]
 showErrorDetails = true
+
+[theme]
+base = "dark"
+primaryColor = "#3b82f6"
+backgroundColor = "#0a0e17"
+secondaryBackgroundColor = "#131826"
+textColor = "#e2e8f0"

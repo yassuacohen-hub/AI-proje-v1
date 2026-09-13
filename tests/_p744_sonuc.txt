@@ -1,0 +1,30 @@
+[OK]   SECTIONS 8 bolum
+[OK]   anahtarlar benzersiz
+[OK]   url_path benzersiz
+[OK]   varsayilan = ana_kontrol
+[OK]   tab_getir('paketler')
+[OK]   tab_getir('yok') -> None
+[OK]   tab_url_getir('/Paketler/')
+[OK]   tab_url_getir('') -> None
+[OK]   2 grup
+[OK]   grup toplami = 8
+
+--- Bolum -> render fonksiyonu cozumlemesi ---
+[OK]   ana_kontrol: callable
+  🏠 Ana Kontrol  | 🏢 İş Operasyonları     | ?bolum=ana-kontrol  | web_dashboard.tabs.ana_kontrol.render_ana_kontrol_tab
+[OK]   musteriler: callable
+  👥 Müşteriler   | 🏢 İş Operasyonları     | ?bolum=musteriler   | web_dashboard.tabs.admin_musteriler.render_musteriler_tab
+[OK]   paketler: callable
+  📦 Paketler     | 🏢 İş Operasyonları     | ?bolum=paketler     | web_dashboard.tabs.paketler.render_paketler_tab
+[OK]   pazarlama: callable
+  📢 Pazarlama    | 🏢 İş Operasyonları     | ?bolum=pazarlama    | web_dashboard.tabs.pazarlama.render_pazarlama_tab
+[OK]   abrakadabra: hazir=False -> None
+  🤖 Abrakadabra  | 🏢 İş Operasyonları     | ?bolum=abrakadabra  | PLACEHOLDER (beklenen: AI-CHAT-01)
+[OK]   sistem: callable
+  ⚙️ Sistem       | 🔧 Sistem & Yönetim     | ?bolum=sistem       | web_dashboard.tabs.admin_sistem.render_sistem_tab
+[OK]   canli_veri: callable
+  📡 Canlı Veri   | 🔧 Sistem & Yönetim     | ?bolum=canli-veri   | web_dashboard.tabs.admin_realtime.render_admin_realtime_tab
+[OK]   yonetim: callable
+  👨‍💼 Yönetim      | 🔧 Sistem & Yönetim     | ?bolum=yonetim      | web_dashboard.tabs.admin_yonetim.render_yonetim_tab
+
+SONUC: TUM KONTROLLER GECTI

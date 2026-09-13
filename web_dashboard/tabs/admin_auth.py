@@ -15,6 +15,7 @@ def render_admin_login() -> None:
         password = st.text_input("Şifre", type="password")
         submitted = st.form_submit_button("Giriş")
     if submitted:
+        st.session_state.pop("admin_token", None)
         try:
             result = post_api("/api/admin/login", json={"email": email, "password": password})
             if result and result.get("token"):
@@ -22,9 +23,9 @@ def render_admin_login() -> None:
                 st.success("Admin olarak giriş yapıldı.")
                 st.rerun()
             else:
-                st.error("Giriş başarısız: token alınamadı.")
+                st.error("Giriş başarısız: e-posta/şifre kontrol ediniz.")
         except APIError as exc:
-            st.error(f"Giriş hata: {exc}")
+            st.error(f"Giriş başarısız: {exc}")
 
 
 def require_admin_token() -> str | None:

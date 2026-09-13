@@ -54,12 +54,24 @@ class TestRateLimiterBasic:
         assert result.allowed is True
 
     def test_blocks_at_limit(self):
-        r = RateLimiter(tier_limits={"public": 3})
+        r = RateLimiter(tier_limits={"public": 3}, burst_multiplier=1.0)
         for _ in range(3):
             r.consume("1.2.3.4", "public")
         result = r.check("1.2.3.4", "public")
         assert result.allowed is False
         assert result.retry_after > 0
+
+    def test_burst_allows_temporary_exceed(self):
+        r = RateLimiter(tier_limits={"public": 3}, burst_multiplier=2.0)
+        for _ in range(3):
+            r.consume("1.2.3.4", "public")
+        result = r.check("1.2.3.4", "public")
+        assert result.allowed is True
+        assert result.burst is True
+        for _ in range(3):
+            r.consume("1.2.3.4", "public")
+        result = r.check("1.2.3.4", "public")
+        assert result.allowed is False
 
     def test_different_ips_independent(self):
         r = RateLimiter(tier_limits={"public": 2})
@@ -69,9 +81,9 @@ class TestRateLimiterBasic:
         assert result2.allowed is True
 
     def test_endpoint_tracking(self):
-        r = RateLimiter(tier_limits={"public": 2})
-        r.consume("1.2.3.4", "public", endpoint="/api/companies")
-        r.consume("1.2.3.4", "public", endpoint="/api/companies")
+        r = RateLimiter(tier_limits={"public": 3}, burst_multiplier=1.0)
+        for _ in range(3):
+            r.consume("1.2.3.4", "public", endpoint="/api/companies")
         result = r.check("1.2.3.4", "public", endpoint="/api/companies")
         assert result.allowed is False
 
