@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """web_dashboard sekme paketi + merkezi navigasyon kaydı (P7-44).
 
 Neden burada?
@@ -155,6 +155,16 @@ SECTIONS: tuple[TabTanimi, ...] = (
         url_path="yonetim",
         modul="web_dashboard.tabs.admin_yonetim",
         fonksiyon="render_yonetim_tab",
+    ),
+    TabTanimi(
+        anahtar="ayarlar",
+        baslik="Ayarlar",
+        ikon="🎛️",
+        grup=GRUP_SISTEM,
+        aciklama="Görünüm, veri, bildirim ve bölgesel kullanıcı tercihleri (P7-46)",
+        url_path="ayarlar",
+        modul="web_dashboard.tabs.admin_panel",
+        fonksiyon="render_ayarlar_tab",
     ),
 )
 

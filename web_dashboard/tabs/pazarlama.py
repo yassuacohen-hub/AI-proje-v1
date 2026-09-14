@@ -9,6 +9,12 @@ Sentez kalibi:
   K2 - Bos grafik yok; "Veri gelince ... burada gorunecek" yer tutucusu
   K3 - Her metrigin yaninda tek satir Turkce aciklama + operasyonel soru
   K7 - Demo veri DEMO rozetiyle isaretlenir
+
+ADMIN-UI-10:
+  Sayfa iskeleti Playground dokumantasyon mantigina tasindi:
+  ``PageHeader`` -> ``SectionNav`` -> ``Section``. Renk, ikon ve tipografi
+  secimleri **degismedi**; yalnizca hiyerarsi disipline edildi. Ekranin tek
+  birincil butonu "Veriyi Yenile" dugmesidir.
 """
 
 from __future__ import annotations
@@ -26,8 +32,71 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
+from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
+
 DEMO_KAMPANYA = ROOT / "data" / "demo" / "kampanya_demo.jsonl"
 DEMO_SEGMENT = ROOT / "data" / "demo" / "segment_demo.jsonl"
+
+#: ADMIN-UI-10 — Sayfa ici gezinmede gorunen ust duzey bolumler (H2).
+BOLUMLER: tuple[Section, ...] = (
+    Section(
+        "Kampanya ve Segment Özeti",
+        "Kampanya/segment adetleri ve aktiflik durumu.",
+        ikon="🧮",
+        kimlik="pazarlama-ozeti",
+    ),
+    Section(
+        "Kampanya Performansı",
+        "Bütçe, tıklama oranı, dönüşüm ve dönüşüm başı maliyet.",
+        ikon="📈",
+        kimlik="kampanya-performansi",
+    ),
+    Section(
+        "Detay Listeleri",
+        "Kampanyalar, segmentler ve segment–kampanya kapsaması.",
+        ikon="📋",
+        kimlik="detay-listeleri",
+    ),
+)
+
+#: Detay sekmelerinin ic basliklari (H3; gezinmede gorunmez).
+ALT_BOLUMLER: tuple[Section, ...] = (
+    Section(
+        "Kampanyalar",
+        "Bütçe ve dönüşüm tablosu; altında bütçe dağılımı grafiği.",
+        ikon="📣",
+        kimlik="alt-kampanyalar",
+        seviye=3,
+    ),
+    Section(
+        "Segmentler",
+        "Segment kriterleri ve segmentteki firmalar.",
+        ikon="👥",
+        kimlik="alt-segmentler",
+        seviye=3,
+    ),
+    Section(
+        "Segment–Kampanya Kapsaması",
+        "Hangi segment kampanyasız kalmış?",
+        ikon="🔗",
+        kimlik="alt-kapsama",
+        seviye=3,
+    ),
+)
+
+GIRIS_METNI = (
+    "Kampanyaları ve müşteri segmentlerini tek ekrandan izleyin; hangi segmentin "
+    "hangi kampanyayla beslendiğini, hangisinin kampanyasız kaldığını görün. "
+    "Bütçe tutarları ₺ cinsindendir."
+)
+
+
+def _bolum(kimlik: str) -> Section:
+    """Kimlige gore bolum tanimini getirir (anchor tutarliligi icin)."""
+    for bolum in BOLUMLER + ALT_BOLUMLER:
+        if bolum.kimlik == kimlik:
+            return bolum
+    raise KeyError(f"Tanımsız bölüm kimliği: {kimlik}")
 
 DURUM_ETIKET = {
     "active": "🟢 Aktif",
@@ -170,27 +239,56 @@ def _kriter_metni(kriter: Any) -> str:
 
 
 def _render_baslik(demo_mu: bool) -> None:
-    """K1: ortak sekme basligi."""
-    ust_sol, ust_sag = st.columns([5, 1])
-    with ust_sol:
-        st.subheader("📣 Pazarlama")
-        if demo_mu:
-            st.caption("🧪 DEMO veri — veritabani bagli degil, ornek kayitlar gosteriliyor.")
-    with ust_sag:
-        st.caption(f"Son güncelleme: {datetime.now().strftime('%H:%M')}")
-        if st.button("🔄", key="pazarlama_yenile", help="Verileri yeniden yükle"):
-            st.cache_data.clear()
-            st.rerun()
+    """ADMIN-UI-10: Playground kalibi — ust etiket -> H1 -> giris -> aksiyonlar."""
+    PageHeader(
+        "Pazarlama",
+        giris=GIRIS_METNI,
+        ust_etiket="İş · Pazarlama",
+        ikon="📣",
+    ).render()
 
-    with st.expander("ℹ️ Bu sekme hakkında"):
-        st.markdown(
-            "- **Amaç:** Kampanya ve müşteri segmentlerini tek ekrandan izlemek, "
-            "hangi segmentin hangi kampanyayla beslendiğini görmek.\n"
-            "- **Veri kaynağı:** `company_master.pazarlama` (kampanyalar / segmentler "
-            "tabloları). Bağlantı yoksa `data/demo/` altındaki örnek veri.\n"
-            "- **Kısıt:** Demo modda kampanya oluşturma/düzenleme kapalıdır; "
+    col_btn, col_rehber, col_zaman = st.columns([1, 1, 3], vertical_alignment="center")
+    with col_btn:
+        yenile = st.button(
+            "🔄 Veriyi Yenile",
+            key="pazarlama_yenile",
+            type="primary",
+            use_container_width=True,
+            help="Önbelleği temizler ve kampanya/segment verisini yeniden yükler.",
+        )
+    with col_rehber:
+        rehber = st.toggle(
+            "ℹ️ Sekme rehberi",
+            key="pazarlama_rehber",
+            help="Bu ekranın amacını, veri kaynağını ve kısıtlarını gösterir.",
+        )
+    with col_zaman:
+        if demo_mu:
+            st.caption(
+                "🧪 DEMO VERİ — veritabanı bağlantısı yok, örnek kayıtlar gösteriliyor. · "
+                f"Son güncelleme: {datetime.now().strftime('%H:%M')}"
+            )
+        else:
+            st.caption(
+                "Canlı veritabanı verisi. · "
+                f"Son güncelleme: {datetime.now().strftime('%H:%M')}"
+            )
+
+    if yenile:
+        st.cache_data.clear()
+        st.rerun()
+
+    if rehber:
+        st.info(
+            "**Amaç:** Kampanya ve müşteri segmentlerini tek ekrandan izlemek, "
+            "hangi segmentin hangi kampanyayla beslendiğini görmek.\n\n"
+            "**Veri kaynağı:** `company_master.pazarlama` (kampanyalar / segmentler "
+            "tabloları). Bağlantı yoksa `data/demo/` altındaki örnek veri.\n\n"
+            "**Kısıt:** Demo modda kampanya oluşturma/düzenleme kapalıdır; "
             "gösterim/tıklama metrikleri yalnızca kaynakta varsa hesaplanır."
         )
+
+    SectionNav(BOLUMLER, yatay=True).render()
 
 
 def _render_ozet(ozet: dict[str, Any]) -> None:
@@ -233,7 +331,6 @@ def _render_performans(kampanyalar: list[dict[str, Any]]) -> None:
         st.info("Veri gelince kampanya performans özeti burada görünecek.")
         return
 
-    st.markdown("#### Kampanya Performansı")
     p1, p2, p3, p4 = st.columns(4)
     with p1:
         st.metric(
@@ -267,7 +364,7 @@ def _render_performans(kampanyalar: list[dict[str, Any]]) -> None:
 
 def _render_kampanyalar(kampanyalar: list[dict[str, Any]], demo_mu: bool) -> None:
     """Kampanya listesi + butce grafigi (K2 yer tutucu)."""
-    st.markdown("#### Kampanyalar")
+    _bolum("alt-kampanyalar").render()
     if not kampanyalar:
         st.info("Veri gelince kampanya listesi burada görünecek.")
         return
@@ -300,7 +397,7 @@ def _render_kampanyalar(kampanyalar: list[dict[str, Any]], demo_mu: bool) -> Non
 
 def _render_segmentler(segmentler: list[dict[str, Any]], demo_mu: bool) -> None:
     """Segment kartlari + firma detayina inme."""
-    st.markdown("#### Segmentler")
+    _bolum("alt-segmentler").render()
     if not segmentler:
         st.info("Veri gelince segment listesi burada görünecek.")
         return
@@ -331,7 +428,7 @@ def _render_segment_kampanya_eslesme(
     kampanyalar: list[dict[str, Any]], segmentler: list[dict[str, Any]]
 ) -> None:
     """Hangi segmentin kampanyayla beslendigini, hangisinin bos kaldigini gosterir."""
-    st.markdown("#### Segment–Kampanya Kapsaması")
+    _bolum("alt-kapsama").render()
     if not segmentler:
         st.info("Veri gelince segment kapsama analizi burada görünecek.")
         return
@@ -375,12 +472,13 @@ def render_pazarlama_tab() -> None:
         return
 
     ozet = ozet_hesapla(kampanyalar, segmentler)
+    _bolum("pazarlama-ozeti").render()
     _render_ozet(ozet)
-    st.divider()
 
+    _bolum("kampanya-performansi").render()
     _render_performans(kampanyalar)
-    st.divider()
 
+    _bolum("detay-listeleri").render()
     sekme_kampanya, sekme_segment, sekme_kapsama = st.tabs(
         ["Kampanyalar", "Segmentler", "Kapsama"]
     )

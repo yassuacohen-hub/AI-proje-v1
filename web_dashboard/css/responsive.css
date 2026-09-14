@@ -1,0 +1,87 @@
+/* ============================================================
+   UX-02: Responsive Layout System & Breakpoint Management
+   ------------------------------------------------------------
+   Katman sırası: admin_tokens.css -> style.css -> responsive.css
+   Kırılım noktaları (admin_tokens.css ile hizalı):
+     - Desktop : > 1440px  (12 kolon)
+     - Laptop  : <= 1440px (12 kolon, sıkışık boşluk)
+     - Tablet  : <= 1024px (8 kolon, tek kolon grafikler)
+     - Mobile  : <= 640px  (4 kolon, tam genişlik kartlar)
+   Not: style.css'in 1150px (detay paneli drawer) ve 760px
+   (sidebar drawer) kabuk davranışları korunur; bu dosya grid
+   içeriği ve yardımcı sınıfları yönetir. Seçiciler style.css
+   ile çakışmaz (tests/test_style_css.py garantisi bozulmaz).
+   ============================================================ */
+
+/* ── 12 kolon grid yardımcıları ───────────────────────────── */
+.grid{display:grid;grid-template-columns:repeat(var(--grid-cols,12),minmax(0,1fr));gap:var(--space-4,16px)}
+.grid>*{min-width:0}
+.col-span-1{grid-column:span 1}
+.col-span-2{grid-column:span 2}
+.col-span-3{grid-column:span 3}
+.col-span-4{grid-column:span 4}
+.col-span-5{grid-column:span 5}
+.col-span-6{grid-column:span 6}
+.col-span-7{grid-column:span 7}
+.col-span-8{grid-column:span 8}
+.col-span-9{grid-column:span 9}
+.col-span-10{grid-column:span 10}
+.col-span-11{grid-column:span 11}
+.col-span-12{grid-column:span 12}
+.col-full{grid-column:1/-1}
+
+/* ── Görünürlük yardımcıları ──────────────────────────────── */
+.hide-mobile{display:revert}
+.hide-tablet{display:revert}
+.show-mobile-only{display:none}
+
+/* ── Laptop: <= 1440px ────────────────────────────────────── */
+@media (max-width:1440px){
+  .content-scroll{padding:14px 16px}
+  .kpi-row{gap:10px}
+  .charts-row{gap:10px}
+}
+
+/* ── Tablet: <= 1024px (8 kolon) ──────────────────────────── */
+@media (max-width:1024px){
+  .grid{--grid-cols:8}
+  .col-span-7,.col-span-8,.col-span-9,.col-span-10,.col-span-11,.col-span-12{grid-column:1/-1}
+  .hide-tablet{display:none!important}
+  .kpi-row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .charts-row{grid-template-columns:minmax(0,1fr)}
+  .signal-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .signal-lists{grid-template-columns:minmax(0,1fr)}
+  .match-kirilim{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .sources-grid{grid-template-columns:repeat(auto-fill,minmax(170px,1fr))}
+  .quick-filter-item{min-width:150px}
+}
+
+/* ── Mobile: <= 640px (4 kolon) ───────────────────────────── */
+@media (max-width:640px){
+  .grid{--grid-cols:4;gap:var(--space-3,12px)}
+  .col-span-3,.col-span-4,.col-span-5,.col-span-6{grid-column:1/-1}
+  .hide-mobile{display:none!important}
+  .show-mobile-only{display:revert}
+  .content-scroll{padding:10px 12px}
+  .kpi-row{grid-template-columns:minmax(0,1fr);gap:8px}
+  .signal-kpis{grid-template-columns:minmax(0,1fr)}
+  .match-kirilim{grid-template-columns:minmax(0,1fr)}
+  .sources-grid{grid-template-columns:minmax(0,1fr)}
+  .quick-filter-row{flex-direction:column;align-items:stretch}
+  .quick-filter-item{min-width:100%}
+  .page-heading h2{font-size:18px}
+  .kpi-card-value{font-size:22px}
+  .chart-container{height:180px}
+  .table-wrapper{max-height:320px}
+  tbody td{max-width:140px}
+  .pagination{flex-wrap:wrap}
+  /* Dokunmatik hedefler (WCAG 2.5.5 min 40px) */
+  .btn-refresh,.chart-btn,.d-btn,.page-btn,.icon-btn{min-height:40px}
+  .nav-item{padding:12px}
+  .detail-actions .d-btn{min-width:100%}
+}
+
+/* ── Erişilebilirlik: hareket azaltma ─────────────────────── */
+@media (prefers-reduced-motion:reduce){
+  .grid,.grid>*{transition:none!important;animation:none!important}
+}

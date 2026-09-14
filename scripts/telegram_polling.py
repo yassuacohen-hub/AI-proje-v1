@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Telegram bot — canonical long-polling motoru.
 
 Bu modul, python-telegram-bot kutuphanesine bagimlilik kurmadan
@@ -212,19 +212,27 @@ def set_task_status(task_id: str, durum: str) -> dict[str, Any]:
 # ETL restart (subprocess ile dogru cwd)
 # ---------------------------------------------------------------------------
 
-def restart_etl(cmd: str | None = None) -> dict[str, Any]:
+def restart_etl(cmd: str | list[str] | None = None) -> dict[str, Any]:
     """ETL pipeline'i yeniden baslatir.
 
-    cmd parametresi verilmezse env'den ETL_RESTART_CMD okunur,
-    yoksa varsayilan: python scripts/refresh_pipeline.py
+    cmd verilmezse env'den ETL_RESTART_CMD okunur,
+    yoksa varsayilan: [sys.executable, scripts/refresh_pipeline.py].
+    Liste-form argv kullanilir; shell kapali (komut enjeksiyonuna karsi).
     """
-    if not cmd:
-        cmd = os.environ.get("ETL_RESTART_CMD", f"{sys.executable} scripts/refresh_pipeline.py")
+    import shlex
+
+    if cmd is None:
+        env_cmd = os.environ.get("ETL_RESTART_CMD")
+        if env_cmd:
+            cmd = shlex.split(env_cmd)
+        else:
+            cmd = [sys.executable, str(ROOT / "scripts" / "refresh_pipeline.py")]
+    elif isinstance(cmd, str):
+        cmd = shlex.split(cmd)
 
     try:
         proc = subprocess.Popen(
             cmd,
-            shell=True,
             cwd=str(ROOT),
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,

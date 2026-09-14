@@ -1,0 +1,185 @@
+/* admin_tokens.css
+ * Premium enterprise admin panel design token'ları (semantic light/dark).
+ * Referans: docs/UX_ADMIN_PANEL_REVIEW_2026-09-14.md (Copilot audit).
+ * 
+ * Stratejisi: `:root` light mode default; `[data-theme="dark"]` override.
+ * Bileşen CSS'i (web_dashboard/css/style.css) bu token'lara bağlanır.
+ * Admin-specific token'lar (sidebar, topbar, drawer, surface) tanımlanır.
+ */
+
+:root {
+  /* Semantic color palette — Indigo accent, success/warning/danger.
+   * Light mode: açık yüzeyler, koyu metin.
+   */
+  --color-bg: #ffffff;
+  --color-surface: #f8f9fa;
+  --color-surface-2: #f0f1f3;
+  --color-border: #e2e5e9;
+  --color-border-strong: #cfd4db;
+  --color-text: #1a202c;
+  --color-text-muted: #6b7280;
+  --color-text-subtle: #9ca3af;
+  --color-text-inverse: #ffffff;
+
+  /* Semantic brand & status. */
+  --color-accent: #6366f1;
+  --color-accent-hover: #4f46e5;
+  --color-accent-soft: rgba(99, 102, 241, 0.12);
+  --color-success: #22c55e;
+  --color-success-hover: #16a34a;
+  --color-success-soft: rgba(34, 197, 94, 0.12);
+  --color-warning: #f59e0b;
+  --color-warning-hover: #d97706;
+  --color-warning-soft: rgba(245, 158, 11, 0.12);
+  --color-danger: #ef4444;
+  --color-danger-hover: #dc2626;
+  --color-danger-soft: rgba(239, 68, 68, 0.12);
+  --color-info: #06b6d4;
+  --color-info-hover: #0891b2;
+  --color-info-soft: rgba(6, 182, 212, 0.12);
+
+  /* Kategorik (grafik/rozet) renkler — durum bildirmez, ayrım içindir. */
+  --color-purple: #8b5cf6;
+  --color-purple-soft: rgba(139, 92, 246, 0.12);
+  --color-orange: #f97316;
+  --color-orange-soft: rgba(249, 115, 22, 0.12);
+
+  /* Admin-specific surfaces. */
+  --color-topbar-bg: #ffffff;
+  --color-topbar-border: #e2e5e9;
+  --color-sidebar-bg: #f8f9fa;
+  --color-sidebar-border: #e2e5e9;
+  --color-drawer-bg: #ffffff;
+  --color-drawer-shadow: rgba(0, 0, 0, 0.1);
+
+  /* Spacing (4px scale). */
+  --space-0: 0;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+
+  /* Radius bands (per audit: button 8-10px, card 12-16px, modal 16-20px). */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-button: 8px;
+  --radius-card: 12px;
+  --radius-modal: 16px;
+
+  /* Typography. */
+  --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", "SF Mono", Consolas, monospace;
+  --font-size-xs: 11px;
+  --font-size-sm: 13px;
+  --font-size-md: 14px;
+  --font-size-lg: 16px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 26px;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-bold: 700;
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+
+  /* Shadow. */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.08);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.12);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.16);
+  --shadow-focus: 0 0 0 3px rgba(99, 102, 241, 0.35);
+
+  /* Z-index layers (modal/drawer/tooltip çakışmayı önler). */
+  --z-base: 1;
+  --z-dropdown: 1000;
+  --z-tooltip: 1100;
+  --z-modal-backdrop: 1200;
+  --z-modal: 1201;
+  --z-drawer: 1202;
+
+  /* Transition. */
+  --transition-fast: 120ms ease;
+  --transition-normal: 200ms ease;
+
+  /* Grid (12-column, responsive). */
+  --grid-cols: 12;
+}
+
+/* Dark mode override — `[data-theme="dark"]` seçicide. */
+[data-theme="dark"] {
+  --color-bg: #0f172a;
+  --color-surface: #1e293b;
+  --color-surface-2: #334155;
+  --color-border: #475569;
+  --color-border-strong: #64748b;
+  --color-text: #f1f5f9;
+  --color-text-muted: #cbd5e1;
+  --color-text-subtle: #94a3b8;
+  --color-text-inverse: #0f172a;
+
+  /* Marka rengi dark mode'de bir ton açık (koyu zeminde kontrast). */
+  --color-accent: #818cf8;
+  --color-accent-hover: #a5b4fc;
+  --color-accent-soft: rgba(129, 140, 248, 0.2);
+
+  /* Status renkleri dark mode'de biraz daha açık (contrast). */
+  --color-success: #22c55e;
+  --color-success-soft: rgba(34, 197, 94, 0.2);
+  --color-warning: #fbbf24;
+  --color-warning-soft: rgba(251, 191, 36, 0.2);
+  --color-danger: #ff6b6b;
+  --color-danger-soft: rgba(255, 107, 107, 0.2);
+  --color-info: #22d3ee;
+  --color-info-soft: rgba(34, 211, 238, 0.2);
+  --color-purple: #a78bfa;
+  --color-purple-soft: rgba(167, 139, 250, 0.2);
+  --color-orange: #fb923c;
+  --color-orange-soft: rgba(251, 146, 60, 0.2);
+
+  /* Admin surfaces dark. */
+  --color-topbar-bg: #1e293b;
+  --color-topbar-border: #334155;
+  --color-sidebar-bg: #0f172a;
+  --color-sidebar-border: #334155;
+  --color-drawer-bg: #1e293b;
+  --color-drawer-shadow: rgba(0, 0, 0, 0.4);
+
+  /* Shadow dark — daha az yoğun (koyu fonda contrast). */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.6);
+}
+
+/* Reduced motion — a11y. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-normal: 0ms;
+  }
+}
+
+/* Responsive grid breakpoints. */
+@media (max-width: 1440px) {
+  :root {
+    --grid-cols: 12;
+    /* Ana içerik minmax(0, 1fr) kalır; yan drawer responsive. */
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --grid-cols: 8;
+    /* Tablet: sidebar collapsible. */
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    --grid-cols: 4;
+    /* Mobile: full-width, drawer overlay. */
+  }
+}

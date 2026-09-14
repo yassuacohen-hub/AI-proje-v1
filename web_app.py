@@ -31,6 +31,7 @@ from company_master.intelligence.job_intelligence.api.router import (
 )
 from company_master.orchestrator import task_board as tb  # noqa: E402
 from scripts.apify_webhook_receiver import ApifyWebhookReceiver  # noqa: E402
+from src.company_master.admin.caching import admin_cache
 
 # DASH-01 Phase 1: Auth & RBAC infrastructure (S-1/S-2/S-3)
 from company_master.auth.session import (
@@ -1022,8 +1023,10 @@ def metrics() -> dict:
         }
 
 
+@admin_cache(ttl=60)
 @app.get("/api/kpi")
 def api_kpi(_auth: str = Depends(require_api_key)) -> dict:
+    # Cache TTL: 60s
     """KPI ozeti - SQLite/PostgreSQL uyumlu (FILTER yerine CASE WHEN)."""
     engine = get_engine()
     _q_start = _perf_time.perf_counter()
@@ -1100,7 +1103,7 @@ def api_companies(
     # Not: source_list yukarida hesaplandi; mask durumu anahtarda (maskeli/maskesiz ayri).
     import hashlib
 
-    _ck = hashlib.md5(
+    _ck = hashlib.sha256(
         f"companies:{limit}:{offset}:{search}:{min_score}:{max_score}:{source_list}:{nace}:mask={_mask_active(mask)}".encode()
     ).hexdigest()
     _cached = cache_get(_ck)
@@ -2508,8 +2511,10 @@ def api_admin_login(email: str = "", password: str = ""):
         pass
     raise HTTPException(status_code=401, detail="gecersiz email veya sifre")
 
+@admin_cache(ttl=60)
 @app.get("/api/admin/pending")
 def api_admin_pending(_auth: str = Depends(require_admin)):
+    # Cache TTL: 60s
     engine = get_engine()
     with engine.connect() as conn:
         bekleyen = (
@@ -2652,8 +2657,10 @@ def api_admin_credit(req: dict, _auth: str = Depends(require_admin)):
     return {"ok": True, "credit_balance": yeni}
 
 
+@admin_cache(ttl=300)
 @app.get("/api/admin/api-usage")
 def api_admin_api_usage(_auth: str = Depends(require_admin)):
+    # Cache TTL: 300s
     """Y26: Tier bazli API kullanim raporu (enterprise key istek sayacları)."""
     return {"items": api_usage_snapshot(), "rate_limits": dict(_TIER_RATE_LIMITS)}
 
@@ -2700,8 +2707,10 @@ def api_admin_rotate_key(req: dict, _auth: str = Depends(require_admin)):
     return {"ok": True, "api_key": yeni}
 
 
+@admin_cache(ttl=300)
 @app.get("/api/admin/categories")
 def api_admin_categories(_auth: str = Depends(require_admin)):
+    # Cache TTL: 300s
     """Y25: Urun katalogu yonetimi - tum kategoriler (aktif + pasif)."""
     engine = get_engine()
     with engine.connect() as conn:
@@ -2798,8 +2807,10 @@ def serve_dashboard(_auth: str = Depends(require_api_key)) -> HTMLResponse:
     return HTMLResponse(index.read_text(encoding="utf-8"))
 
 
+@admin_cache(ttl=30)
 @app.get("/api/performance")
 def performance_report(_auth: str = Depends(require_api_key)) -> dict:
+    # Cache TTL: 30s
     global _DB_TIME_MS, _QUERY_COUNT, _CACHE_HITS, _CACHE_MISSES
     return {
         "db_time_ms": round(_DB_TIME_MS, 2),

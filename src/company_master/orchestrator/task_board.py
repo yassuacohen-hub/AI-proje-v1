@@ -30,6 +30,18 @@ TASK_MD = STATE_DIR / "gorev_panosu.md"
 
 GOREV_DURUMLARI = ("plan", "aktif", "review", "done", "blocked")
 
+# S-05: Pano kaydinda BULUNMASI ZORUNLU alanlar ve eksikse kullanilacak
+# varsayilanlar. Tek bozuk kayit yuzunden TUM ajanlarin pano yazimi
+# cokmemeli (bkz. WIKI-01 / KeyError 'oncelik', docs/ROO_ELESTIRI_NOTLARI.md).
+ZORUNLU_ALANLAR: dict[str, Any] = {
+    "task_id": "",
+    "baslik": "-",
+    "sahip": "-",
+    "oncelik": "P2",
+    "durum": "plan",
+    "dosyalar": [],
+}
+
 # ORCH-03: Pano degistikce AGENT_SYNC otomatik tazelensin.
 # Testlerde conftest.py bu bayragi False yapar (gercek dosyaya yazma engellenir).
 AUTO_SYNC = True
@@ -47,6 +59,56 @@ def _ensure() -> None:
         FILE_LOCKS.write_text("{}", encoding="utf-8")
     if not STATE_JSON.exists():
         STATE_JSON.write_text("{}", encoding="utf-8")
+
+
+def gorev_normalize(task: dict) -> dict:
+    """S-05: Tek gorev kaydini zorunlu alan semasina tamamlar.
+
+    Eksik alanlari varsayilanla doldurur, `None`/bos degerleri varsayilana
+    cevirir. Kaydi YERINDE degistirir ve ayni sozlugu dondurur.
+    """
+    for alan, varsayilan in ZORUNLU_ALANLAR.items():
+        if alan == "task_id":
+            continue  # task_id uydurulamaz; cagiran taraf dogrulamali
+        if task.get(alan) in (None, ""):
+            task[alan] = list(varsayilan) if isinstance(varsayilan, list) else varsayilan
+    # FIX-ID-01: id eksikse task_id alias olarak doldur
+    if task.get("id") in (None, ""):
+        task["id"] = task.get("task_id", "")
+    if not isinstance(task.get("dosyalar"), list):
+        task["dosyalar"] = []
+    return task
+
+
+def pano_normalize(board: list[dict]) -> tuple[list[dict], list[str]]:
+    """S-05: Tum panoyu semaya gore onarir.
+
+    Donen ikinci deger: onarilan gorev id'leri (denetim izi icin).
+    """
+    onarilan: list[str] = []
+    for t in board:
+        eksik = [a for a in ZORUNLU_ALANLAR if a != "task_id" and t.get(a) in (None, "")]
+        if eksik or not isinstance(t.get("dosyalar"), list):
+            gorev_normalize(t)
+            onarilan.append(str(t.get("task_id", "?")))
+    return board, onarilan
+
+
+def sema_dogrula(task: dict) -> None:
+    """S-05: Panoya YENI eklenecek kayit icin zorunlu alan dogrulamasi.
+
+    Eksik/bos zorunlu alan varsa ValueError firlatir; boylece bozuk kayit
+    panoya hic girmez (savunma degil, onleme).
+    """
+    eksik = [a for a in ZORUNLU_ALANLAR if task.get(a) in (None, "")]
+    if eksik:
+        raise ValueError(
+            "Gorev semasi eksik alan iceriyor: " + ", ".join(sorted(eksik))
+        )
+    if task["durum"] not in GOREV_DURUMLARI:
+        raise ValueError(f"Gecersiz durum: {task['durum']}")
+    if not isinstance(task.get("dosyalar"), list):
+        raise ValueError("'dosyalar' alani liste olmali")
 
 
 def _read_json(path: Path) -> Any:
@@ -180,10 +242,11 @@ def gorev_ekle(
     """
     _ensure()
     board = _read_json(TASK_BOARD)
-    if any(t["task_id"] == task_id for t in board):
+    if any(t.get("task_id") == task_id for t in board):
         raise ValueError(f"Gorev zaten var: {task_id}")
     task = {
         "task_id": task_id,
+        "id": task_id,  # FIX-ID-01: task_id kanonik, id alias (consumer uyumlulugu)
         "baslik": baslik,
         "sahip": sahip,
         "oncelik": oncelik,
@@ -195,6 +258,8 @@ def gorev_ekle(
         "source": source or "ic",
         "from_agent": from_agent,
     }
+    # S-05: Bozuk kayit panoya hic girmesin (onleme).
+    sema_dogrula(task)
     # Atomik: once tum lock'lar denenir; hata olursa gorev eklenmez.
     if dosyalar:
         for d in dosyalar:
@@ -231,7 +296,8 @@ def retry_istatistikleri(task_id: str) -> dict:
 def gorev_guncelle(task_id: str, durum: str | None = None, **fields) -> dict | None:
     board = _read_json(TASK_BOARD)
     for t in board:
-        if t["task_id"] == task_id:
+        # S-05: bozuk kayitta KeyError yerine sessiz atlama
+        if t.get("task_id") == task_id:
             if durum:
                 if durum not in GOREV_DURUMLARI:
                     raise ValueError(f"Gecersiz durum: {durum}")
@@ -247,6 +313,8 @@ def gorev_guncelle(task_id: str, durum: str | None = None, **fields) -> dict | N
             kalan = {d: l for d, l in locks.items() if l.get("task_id") != task_id}
             if len(kalan) != len(locks):
                 _write_json(FILE_LOCKS, kalan)
+            # S-05: her yazimda eski/bozuk kayitlar kendini onarir (self-healing).
+            pano_normalize(board)
             _write_json(TASK_BOARD, board)
             _md_yaz(board)
             _sync_tetikle()
@@ -257,7 +325,7 @@ def gorev_guncelle(task_id: str, durum: str | None = None, **fields) -> dict | N
 def gorev_getir(task_id: str) -> dict | None:
     """Tek görevi getir (delta-only okuma)."""
     for t in gorev_listesi():
-        if t["task_id"] == task_id:
+        if t.get("task_id") == task_id:
             return t
     return None
 
@@ -375,16 +443,18 @@ def agent_sync_olustur() -> str:
         "| Gorev | Baslik | Sahip | Oncelik | Durum |",
         "|-------|--------|-------|---------|-------|",
     ]
+    # Dayaniklilik: eksik alanli eski kayitlar (orn. WIKI-01'de 'oncelik' yok)
+    # tum AGENT_SYNC uretimini cokertmemeli.
     for t in board:
-        if t["durum"] not in ("done",):
-            lines.append(f"| {t['task_id']} | {t['baslik'][:40]} | {t['sahip']} | "
-                         f"{t['oncelik']} | {t['durum']} |")
+        if t.get("durum") not in ("done",):
+            lines.append(f"| {t.get('task_id', '-')} | {str(t.get('baslik', '-'))[:40]} | "
+                         f"{t.get('sahip', '-')} | {t.get('oncelik', '-')} | {t.get('durum', '-')} |")
     lines += ["", "## Tamamlananlar (Son 10)", "",
               "| Gorev | Baslik | Sahip | Bitis |", "|-------|--------|-------|-------|"]
-    done = [t for t in board if t["durum"] == "done"][-10:]
+    done = [t for t in board if t.get("durum") == "done"][-10:]
     for t in done:
-        lines.append(f"| {t['task_id']} | {t['baslik'][:40]} | {t['sahip']} | "
-                     f"{(t.get('bitis') or '-')[:10]} |")
+        lines.append(f"| {t.get('task_id', '-')} | {str(t.get('baslik', '-'))[:40]} | "
+                     f"{t.get('sahip', '-')} | {(t.get('bitis') or '-')[:10]} |")
     if handoffs:
         lines += ["", "## Son Handoff'lar", ""]
         for tid, h in list(handoffs.items())[-5:]:
@@ -518,20 +588,24 @@ def _md_yaz(board: list[dict]) -> None:
         "| Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |",
         "|-------|--------|-------|---------|-------|----------|",
     ]
-    aktif = [t for t in board if t["durum"] not in ("done",)]
+    aktif = [t for t in board if t.get("durum") not in ("done",)]
     # Duplika görevleri engelle: aynı task_id daha önce görünüyorsa atla
     gorulen_ids = set()
     for t in aktif:
-        task_id = t["task_id"]
+        task_id = t.get("task_id", "-")
         if task_id in gorulen_ids:
             continue
         gorulen_ids.add(task_id)
-        dos = ", ".join(t["dosyalar"][:3]) if t["dosyalar"] else "-"
-        lines.append(f"| {t['task_id']} | {t['baslik']} | {t['sahip']} | "
-                     f"{t['oncelik']} | {t['durum']} | {dos} |")
+        # Dayaniklilik: eski/elle eklenmis kayitlarda alanlar eksik olabilir.
+        # Tek eksik alan yuzunden TUM pano yazimi cokmemeli (bkz. WIKI-01 / KeyError 'oncelik').
+        dosyalar = t.get("dosyalar") or []
+        dos = ", ".join(dosyalar[:3]) if dosyalar else "-"
+        lines.append(f"| {task_id} | {t.get('baslik', '-')} | {t.get('sahip', '-')} | "
+                     f"{t.get('oncelik', '-')} | {t.get('durum', '-')} | {dos} |")
     lines += ["", "## Tamamlananlar", "",
               "| Görev | Baslik | Sahip | Bitis |", "|-------|--------|-------|-------|"]
-    done = [t for t in board if t["durum"] == "done"]
+    done = [t for t in board if t.get("durum") == "done"]
     for t in done:
-        lines.append(f"| {t['task_id']} | {t['baslik']} | {t['sahip']} | {(t.get('bitis') or '-')} |")
+        lines.append(f"| {t.get('task_id', '-')} | {t.get('baslik', '-')} | "
+                     f"{t.get('sahip', '-')} | {(t.get('bitis') or '-')} |")
     atomic_write_text(TASK_MD, "\n".join(lines) + "\n")

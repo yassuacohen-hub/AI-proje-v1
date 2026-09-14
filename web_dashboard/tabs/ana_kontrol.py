@@ -11,6 +11,14 @@ Kurallar:
   - st.metric() mavi/turuncu renk sınıflandırması (CSS via _get_metric_color)
   - st.cache_data(ttl=30)
   - Empty state → "Veri gelince X burada görünecek"
+
+ADMIN-UI-09 (pilot ekran):
+  Sayfa iskeleti Streamlit Playground dokümantasyon mantığına taşındı:
+  ``PageHeader`` (üst etiket → H1 → giriş paragrafı) → ``SectionNav``
+  ("Bu sayfada" gezinme) → ``Section`` (H2 + açıklama + ayraç) blokları.
+  Renk paleti, ikon seti ve tipografi seçimleri **değişmedi**; yalnızca
+  hiyerarşi disipline edildi. Aynı ekranda tek birincil buton kuralı gereği
+  yalnız "Veriyi Yenile" birincil, diğer aksiyonlar ikincildir.
 """
 from __future__ import annotations
 
@@ -26,6 +34,8 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from scripts.dash04_api_client import get_api, APIError  # noqa: E402
+
+from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
 
 
 @st.cache_data(ttl=30)
@@ -69,37 +79,96 @@ def _get_metric_color(category: str) -> str:
     return ""
 
 
+#: ADMIN-UI-09 — Sayfa bölümleri tek yerde tanımlanır; hem `SectionNav`
+#: hem de gövde aynı listeyi kullanır, böylece anchor'lar asla kaymaz.
+BOLUMLER: tuple[Section, ...] = (
+    Section(
+        "Müşteri Metrikleri",
+        "Mavi kartlar — kullanıcı ve işletme faaliyeti.",
+        ikon="👥",
+        kimlik="musteri-metrikleri",
+    ),
+    Section(
+        "Sistem Metrikleri",
+        "Turuncu kartlar — altyapı sağlığı.",
+        ikon="🔧",
+        kimlik="sistem-metrikleri",
+    ),
+    Section(
+        "Anlık Uyarılar",
+        "Eşik aşan durumlar burada toplanır; uyarı yoksa sistem iyi demektir.",
+        ikon="🔔",
+        kimlik="anlik-uyarilar",
+    ),
+    Section(
+        "Webhook Akışı",
+        "Son gün içindeki olay dağılımı (başarılı / hatalı / DLQ).",
+        ikon="📈",
+        kimlik="webhook-akisi",
+    ),
+)
+
+GIRIS_METNI = (
+    "Müşteri faaliyetini ve sistem sağlığını tek ekranda izleyin. "
+    "Kartlar 30 saniyelik önbellekle beslenir; anlık değer için "
+    "**Veriyi Yenile** düğmesini kullanın."
+)
+
+
+def _bolum(kimlik: str) -> Section:
+    """Kimliğe göre bölüm tanımını getirir (anchor tutarlılığı için)."""
+    for bolum in BOLUMLER:
+        if bolum.kimlik == kimlik:
+            return bolum
+    raise KeyError(f"Tanımsız bölüm kimliği: {kimlik}")
+
+
 def render_ana_kontrol_tab() -> None:
-    """DASH-UX-01 Ana Kontrol sekmesi."""
-    st.subheader("🏠 Ana Kontrol")
-    
-    # --- K1: Ortak başlık + yenile + info kutusu ---
-    col_time, col_refresh, col_info = st.columns([3, 1, 1])
-    with col_time:
-        st.caption(f"Son güncelleme: {datetime.now().strftime('%H:%M')} · Sayfayı yenilemek için F5'e basın")
+    """DASH-UX-01 Ana Kontrol sekmesi (ADMIN-UI-09 sayfa iskeletiyle)."""
+    # --- ADMIN-UI-09: Playground kalıbı — üst etiket → H1 → giriş paragrafı ---
+    PageHeader(
+        "Ana Kontrol",
+        giris=GIRIS_METNI,
+        ust_etiket="İş · Operasyon",
+        ikon="🏠",
+    ).render()
+
+    # --- K1: Aksiyon şeridi (tek birincil buton: Veriyi Yenile) ---
+    col_refresh, col_info, col_time = st.columns([1, 1, 3], vertical_alignment="center")
     with col_refresh:
-        if st.button("🔄 Veriyi Yenile", key="refresh_ana_kontrol"):
-            st.cache_data.clear()
-            st.rerun()
+        yenile = st.button(
+            "🔄 Veriyi Yenile",
+            key="refresh_ana_kontrol",
+            type="primary",
+            use_container_width=True,
+            help="Önbelleği temizler ve tüm kartları yeniden yükler.",
+        )
     with col_info:
-        with st.expander("ℹ️ Bu sekme hakkında"):
-            st.markdown("""
-**Amaç:** Müşteri ve sistem metriklerinin tek görmek.
+        bilgi = st.toggle(
+            "ℹ️ Sekme rehberi",
+            key="ana_kontrol_rehber",
+            help="Bu ekranın amacını, veri kaynağını ve kısıtlarını gösterir.",
+        )
+    with col_time:
+        st.caption(
+            f"Son güncelleme: {datetime.now().strftime('%H:%M')} · "
+            "Önbellek ömrü 30 sn"
+        )
 
-**Mavi Kartlar (👥 Müşteri):**
-- Toplam Firma, Aktif Kullanıcı, Sinyal Sayısı, API Çağrıları
+    if yenile:
+        st.cache_data.clear()
+        st.rerun()
 
-**Turuncu Kartlar (🔧 Sistem):**
-- Sistem Durumu, DLQ (Hata Kuyruğu), Cache Hit, Query Latency
+    if bilgi:
+        st.info(
+            "**Amaç:** Müşteri ve sistem metriklerini tek ekranda görmek.\n\n"
+            "**Veri kaynağı:** `/api/kpi`, `/metrics`, webhook monitor\n\n"
+            "**Kısıtlar:** Veriler 30 saniyede bir yenilenir; webhook "
+            "istatistikleri şimdilik statiktir (Faz 2'de canlı SSE)."
+        )
 
-**Veri Kaynağı:** `/api/kpi`, `/metrics`, webhook monitor
-
-**Kısıtlar:** 
-- Veriler 30 saniyede bir yenilenir (cache)
-- Webhook istatistikleri statik (Faz 2'de canlı SSE)
-            """)
-
-    st.divider()
+    # --- ADMIN-UI-09: "Bu sayfada" gezinmesi (uzun ekranı taranabilir yapar) ---
+    SectionNav(BOLUMLER, yatay=True).render()
 
     # --- Veri yükleme ---
     with st.spinner("Veriler yükleniyor..."):
@@ -107,9 +176,8 @@ def render_ana_kontrol_tab() -> None:
         webhook = load_webhook_stats()
 
     # --- K4: Müşteri Metrikleri (Mavi) ---
-    st.markdown("### 👥 Müşteri Metrikleri")
-    st.caption("**Mavi kartlar** — kullanıcı ve işletme faaliyeti")
-    
+    _bolum("musteri-metrikleri").render()
+
     if kpi:
         cust_c1, cust_c2, cust_c3, cust_c4 = st.columns(4)
         with cust_c1:
@@ -147,12 +215,9 @@ def render_ana_kontrol_tab() -> None:
     else:
         st.info("⏳ Müşteri metrikleri yükleniyor... Veriler 24 saat içinde görünecek.")
 
-    st.divider()
-
     # --- K4: Sistem Metrikleri (Turuncu) ---
-    st.markdown("### 🔧 Sistem Metrikleri")
-    st.caption("**Turuncu kartlar** — altyapı sağlığı")
-    
+    _bolum("sistem-metrikleri").render()
+
     if webhook or kpi:
         sys_c1, sys_c2, sys_c3, sys_c4 = st.columns(4)
         with sys_c1:
@@ -191,10 +256,8 @@ def render_ana_kontrol_tab() -> None:
     else:
         st.info("⏳ Sistem metrikleri yükleniyor... Veriler kısa süre içinde görünecek.")
 
-    st.divider()
-
     # --- K2: Uyarılar (boş state örneği) ---
-    st.markdown("### 🔔 Anlık Uyarılar")
+    _bolum("anlik-uyarilar").render()
     if webhook.get("dlq_toplam", 0) > 0:
         st.warning(f"⚠️ {webhook['dlq_toplam']} işleme başarısız DLQ kaydı var. İncelemeyi gerektirir.")
     elif kpi.get("cache_hit_rate", 0) and kpi.get("cache_hit_rate", 0) < 0.3:
@@ -203,7 +266,7 @@ def render_ana_kontrol_tab() -> None:
         st.success("✅ Sistem iyi durumda. Kritik uyarı yok.")
 
     # --- İstatistik grafiği ---
-    st.markdown("### 📈 Webhook Akışı (Son Günü)")
+    _bolum("webhook-akisi").render()
     if webhook and webhook.get("olay_toplam", 0) > 0:
         flow_df = pd.DataFrame({
             "Durum": ["Başarılı", "Hatalı", "DLQ"],

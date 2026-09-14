@@ -7,18 +7,47 @@
 
 | Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |
 |-------|--------|-------|---------|-------|----------|
-| P7-6 | Kariyer.net Scraper | web_kazima | P1 | blocked | - |
-| ORCH-09 | Otomatik tetikleme nobetcisi: Gorev Zamanlayici poll (1dk deneme -> 10dk hedef, kaldirilabilir) | orkestrator | P1 | aktif | src/company_master/orchestrator/nobetci.py, scripts/gorev_nobetci.py, scripts/gorev_nobetci.bat |
-| P7-44 | Dashboard UX redesign: Modern navigation | roo | P0 | aktif | app.py, web_dashboard/tabs/__init__.py |
-| P7-45 | Canli veri akisi: Server-Sent Events | kilo | P1 | bekliyor | - |
-| P7-46 | Kullanici ayarlar paneli | copilot | P1 | bekliyor | - |
+| P7-6 | Kariyer.net Scraper | kilo | P1 | blocked | - |
+| MIM-01 | System Architecture Diagram — Microservices | mimar | P1 | plan | docs/ |
+| MIM-02 | API Gateway Design and Routing Rules | mimar | P2 | plan | src/company_master/api/ |
+| MIM-03 | Database Schema Design — Core Entities | mimar | P1 | plan | data/orchestrator/ |
+| CC-01 | Code Review Pipeline — Automated Quality Gates | claude_code | P1 | plan | src/company_master/ |
+| CC-02 | Refactoring Plan — Legacy Code Modules | claude_code | P2 | plan | src/company_master/ |
+| CC-03 | Documentation Generator — Inline Code Docs | claude_code | P2 | plan | src/company_master/ |
+| EA-01 | Third-party API Integration — Weather Service | external_agent | P2 | plan | src/company_master/ |
+| EA-03 | Notification Service — Push Notifications | external_agent | P2 | plan | src/company_master/ |
+| WK-01 | Career Pages Scraper — Enhanced Data Extraction | web_kazima | P1 | blocked | src/company_master/ |
+| WK-02 | OSB Tender Monitor — Real-time Tracking | web_kazima | P1 | blocked | src/company_master/ |
+| WK-03 | Proxy Rotation and IP Management | web_kazima | P2 | blocked | src/company_master/ |
+| DEV-01 | CI/CD Pipeline — GitHub Actions Optimization | gelistirici | P1 | plan | .github/ |
+| DEV-02 | Docker Containerization — Multi-stage Build | gelistirici | P1 | plan | Dockerfile, docker-compose.yml |
+| DEV-03 | Testing Framework — Unified Test Runner | gelistirici | P2 | plan | tests/ |
+| QL-01 | Automated Test Coverage Report | kalite | P1 | plan | tests/ |
+| QL-02 | Load Testing — Concurrent User Simulation | kalite | P1 | plan | tests/ |
+| QL-03 | Accessibility Audit — WCAG Compliance | kalite | P2 | plan | web_dashboard/ |
+| MIMAR-01 | Event Sourcing and CQRS Implementation Plan | mimari | P1 | plan | src/company_master/ |
+| MIMAR-02 | Microservices Decomposition Strategy | mimari | P2 | plan | docs/ |
+| MIMAR-03 | Observability Stack — Metrics, Logs, Traces | mimari | P1 | plan | src/company_master/ |
+| RC-01 | Code Quality Dashboard — Real-time Metrics | roo_code | P2 | plan | web_dashboard/ |
+| RC-02 | AI-powered Code Suggestions Engine | roo_code | P1 | plan | src/company_master/ |
+| RC-03 | Git Hooks — Pre-push Validation | roo_code | P2 | plan | .githooks/ |
+| ORCH-11 | Scheduler Service — Cron-like Task Dispatch | orkestrator | P1 | plan | src/company_master/ |
+| ORCH-12 | Health Monitor — System Status Dashboard | orkestrator | P2 | plan | src/company_master/ |
+| PO-BACK-01 | Tenant Health Score v1 (aktivite, kullanim, odeme, destek sinyali) | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-02 | Segment eligibility skoru + onay akisi | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-03 | Kampanya durum-makinesi otomatik denetimi | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-04 | Paket fiyat katalogu tekillestirme | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-05 | Karar ekranlarinda veri-tazelik etiketi + manuel yenileme | - | P2 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-06 | Destek Merkezi MVP (ticket ata/kapat/eskale) | - | P2 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-07 | Feature Flags MVP (tenant bazli ac/kapa) | - | P2 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-08 | Executive Dashboard v1 (MRR/ARR/churn + health ozeti) | - | P3 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
 
 ## Tamamlananlar
 
 | Görev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
 | P0-1 | İstiklal OSB scraper implementasyonu | web_kazima | 2026-09-08T10:00:00Z |
-| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-13T23:38:19 |
+| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-14T09:15:42 |
 | P0-3 | Kalite skoru 6.53 - 50+ heazine | kalite | 2026-09-06T22:54:31 |
 | Y21 | ISKUR kurumsal eslestirme verisi arastirma | arastirmaci | 2026-09-10 |
 | APIFY-01 | Apify uygunluk ve entegrasyon mimarisi arastirma | kilo | 2026-09-11T22:14:20 |
@@ -76,6 +105,7 @@
 | DASH-07 | Admin Panel JWT Auth & Rol Yönetimi | mimar | 2026-09-13T00:09:05 |
 | ORCH-07 | Obsidian vault git entegrasyonu (kurumsal hafiza) | cline | 2026-09-13T02:01:29 |
 | ORCH-08 | Gorev tetikleme + onay kuyrugu: orkestrator atar, ajan otomatik fark eder, teslim kontrol onayi olmadan done OLMaz | orkestrator | 2026-09-13T06:51:01 |
+| ORCH-09 | Otomatik tetikleme nobetcisi: Gorev Zamanlayici poll (1dk deneme -> 10dk hedef, kaldirilabilir) | kilo | 2026-09-14T03:36:37 |
 | simple_1 | Basit Test Görevi | roo | 2026-09-13T09:37:01 |
 | TEST-02 | Test Görevi 2 | roo | 2026-09-13T06:41:29 |
 | ORCH-10 | Telegram Orkestrator Entegrasyonu (ORCH-10) | kilo | 2026-09-13T07:24:53 |
@@ -123,6 +153,9 @@
 | P7-41 | Arama ve filtreleme: Tum sekmelerde global arama, filtreleri kaydetme, favori filtreler. | kilo | 2026-09-13T17:30:00 |
 | P7-42 | Loading states: Skeleton screens, progress indicators, spinner componentleri. | kilo | 2026-09-13T17:30:00 |
 | P7-43 | Hata sayfalari: 404, 500, baglanti hatasi icin kullanici dostu hata mesajleri. | kilo | 2026-09-13T17:30:00 |
+| P7-44 | Dashboard UX redesign: Modern navigation | roo | 2026-09-14T00:06:52 |
+| P7-45 | Canli veri akisi: Server-Sent Events | kilo | 2026-09-13T22:30:00 |
+| P7-46 | Kullanici ayarlar paneli | roo | 2026-09-14T04:13:27 |
 | COP-18 | KPI bos-veri placeholder: web_dashboard/tabs/admin_kpi.py - veri yoksa st.spinner + 'Veri yukleniyor...' skeleton goster; yuklenince kartlar gorunsun. Kucuk diff, tek dosya. | copilot | 2026-09-13T18:24:11 |
 | COP-19 | Login hata UX: web_dashboard/tabs/admin_auth.py - hatali giriste anlasilir st.error mesaji + hata temizleme; tests/test_admin_auth_login.py unit test ekle. | copilot | 2026-09-13T18:55:15 |
 | COP-20 | DLQ sekmesi testi: tests/test_admin_dlq_tab.py - admin_dlq.py render_dlq_tab icin bos jsonl / dolu jsonl / bozuk satir senaryolari. | copilot | 2026-09-13T18:30:25 |
@@ -144,3 +177,20 @@
 | COP-24 | [COP-TASARIM] TASARIM-2: Son-guncelleme + yenile kalibi (roo 4.1... | copilot | 2026-09-13T22:43:21 |
 | COP-25 | [COP-TASARIM] TASARIM-3: Sidebar yardim satirlari. app.py icinde... | copilot | 2026-09-13T22:48:51 |
 | COP-26 | MUSTERILER ekrani: firma listesi+filtre+bildirim blogu (roo uyarisi) | copilot | 2026-09-13T22:57:21 |
+| WIKI-01 | Admin Panel Kullanım Kılavuzu — Obsidian Wiki | orkestrator | - |
+| ORCH-13 | Pano sema dogrulama (S-05) + tetik_al pano fallback (S-06) | roo | 2026-09-14T00:38:53 |
+| UX-01 | UI Component Library — Design System | roo | 2026-09-14T02:08:24 |
+| UX-02 | Responsive Layout System ve Breakpoint Management | roo | 2026-09-14T02:33:25 |
+| UX-03 | Design Token ve Theme Management System | roo | 2026-09-14T03:36:38 |
+| BE-01 | Admin API Endpoint Optimization and Caching Layer | kilo | 2026-09-14T01:00:00 |
+| BE-02 | Database Migration Scripts and Schema Versioning | kilo | 2026-09-14T01:00:00 |
+| BE-03 | Event-Driven Architecture — Message Queue Integration | cline | 2026-09-14T01:00:00 |
+| WIKI-02 | Wiki Documentation — Architecture and API Reference | cline | 2026-09-14T01:00:00 |
+| ROO-UX-ADMIN-01 | Premium Enterprise Admin Panel UX audit sonrasi design system ve shell | roo | 2026-09-14T02:10:25 |
+| CL-01 | Integration Test Suite for API Endpoints | cline | 2026-09-14T06:03:25 |
+| CL-02 | Performance Benchmark Scripts | cline | 2026-09-14T06:29:56 |
+| CL-03 | Security Audit — Dependency Vulnerability Scan | cline | 2026-09-14T06:28:50 |
+| AR-01 | Market Trend Analysis — Q3 2026 | kilo | 2026-09-14T03:00:00 |
+| AR-02 | Competitor Analysis — Direct and Indirect | kilo | 2026-09-14T03:00:00 |
+| AR-03 | User Persona and Journey Mapping | kilo | 2026-09-14T03:00:00 |
+| FIX-ID-01 | Pano id alanı tutarsızlığı: task_id kanonik, 'id' bekleyen tüketiciler None alıyor | kilo | 2026-09-14T03:45:00 |

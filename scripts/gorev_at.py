@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import argparse
 import sys
+from datetime import datetime
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
@@ -55,8 +56,43 @@ def cmd_at(args: argparse.Namespace) -> int:
     return 0
 
 
+def _kisa_tarih(iso: str | None) -> str:
+    """ISO tarihi 'MM-DD HH:MM' formatina kisalir; parse edilemezse ilk 16 karakter."""
+    if not iso:
+        return "-"
+    try:
+        return datetime.fromisoformat(str(iso)).strftime("%m-%d %H:%M")
+    except ValueError:
+        return str(iso)[:16]
+
+
+def _gorev_basligi(task_id: str | None) -> str:
+    """Panodan gorev basligini getirir; gorev bulunamazsa '-'."""
+    if not task_id:
+        return "-"
+    try:
+        gorev = tb.gorev_getir(str(task_id))
+    except Exception:  # noqa: BLE001 - pano ciktisi hata yuzunden cokmemeli
+        return "-"
+    if not gorev:
+        return "-"
+    return str(gorev.get("baslik") or "-")
+
+
+def _kisalt(metin: str | None, limit: int) -> str:
+    """Metni limit uzunlugunda keser; mumkunse kelime sinirinda keser, '…' ekler."""
+    metin = (metin or "").strip()
+    if len(metin) <= limit:
+        return metin
+    kirpik = metin[: limit - 1]
+    bosluk = kirpik.rfind(" ")
+    if bosluk > limit // 2:  # kelime siniri varsa orada kes
+        kirpik = kirpik[:bosluk]
+    return kirpik.rstrip() + "…"
+
+
 def cmd_pano(args: argparse.Namespace) -> int:
-    ajanlar = sorted({t["sahip"] for t in tb.gorev_listesi()})
+    ajanlar = sorted({str(t.get("sahip") or "?") for t in tb.gorev_listesi()})
     print("== AJAN POSTALARI (bekleyen tetik) ==")
     herhangi_biri = False
     for ajan in ajanlar:
@@ -64,7 +100,12 @@ def cmd_pano(args: argparse.Namespace) -> int:
         if bekleyen:
             herhangi_biri = True
             for k in bekleyen:
-                print(f"  [{ajan}] {k['task_id']}  ({k['tarih']})")
+                task_id = str(k.get("task_id") or "?")
+                baslik = _kisalt(_gorev_basligi(task_id), 28)
+                print(
+                    f"  [{ajan:<14}] {task_id:<10} "
+                    f"({_kisa_tarih(k.get('tarih'))})  {baslik}"
+                )
     if not herhangi_biri:
         print("  (bos)")
     print("\n== ONAY KUYRUGU (kontrol bekleyen teslimler) ==")
@@ -73,8 +114,14 @@ def cmd_pano(args: argparse.Namespace) -> int:
         print("  (bos)")
     else:
         for k in kuyruk:
-            print(f"  {k['task_id']}  <- {k['ajan']}  ({k['teslim_tarihi']})")
-            print(f"    {k['ozet']}")
+            task_id = str(k.get("task_id") or "?")
+            ajan = str(k.get("ajan") or "?")
+            baslik = _kisalt(_gorev_basligi(task_id), 28)
+            print(
+                f"  {task_id:<10} <- {ajan:<14} "
+                f"({_kisa_tarih(k.get('teslim_tarihi'))})  {baslik}"
+            )
+            print(f"    {_kisalt(k.get('ozet'), 50)}")
     return 0
 
 

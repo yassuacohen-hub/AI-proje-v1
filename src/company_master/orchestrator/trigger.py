@@ -91,11 +91,19 @@ def bekleyen_tetikler(ajan: str, data_dir: Path | None = None) -> list[dict[str,
     return [k for k in _tetikleri_oku(ajan, data_dir) if k["durum"] == "bekliyor"]
 
 
+#: S-06: Posta kutusunda tetik yokken panodan alınabilecek görev durumları.
+PANO_ALINABILIR_DURUMLAR = ("plan", "bekliyor")
+
+
 def tetik_al(
     ajan: str, task_id: str, data_dir: Path | None = None
 ) -> dict[str, Any]:
     """Tetiği 'alindi' yap ve panodaki görevi aktife çek.
-    Bekleyen tetik yoksa TriggerError (ajan panoyu elle kontrol etmiş demektir)."""
+
+    S-06: Bekleyen tetik yoksa görev doğrudan panodan alınmaya çalışılır.
+    Koşul: görev panoda var + `sahip == ajan` + durumu `plan`/`bekliyor`.
+    Aksi halde TriggerError (başkasının görevi veya zaten alınmış/bitmiş iş).
+    """
     kayitlar = _tetikleri_oku(ajan, data_dir)
     bulundu = False
     for k in kayitlar:
@@ -103,13 +111,27 @@ def tetik_al(
             k["durum"] = "alindi"
             k["alma_tarihi"] = _simdi()
             bulundu = True
+    gorev = tb.gorev_getir(task_id)
     if not bulundu:
-        raise TriggerError(f"{ajan} için bekleyen tetik yok: {task_id}")
-    if tb.gorev_getir(task_id) is None:
+        # S-06: pano fallback — panoya elle eklenmiş (tetiksiz) görevler için.
+        if gorev is None:
+            raise TriggerError(f"Görev panoda bulunamadı: {task_id}")
+        if gorev.get("sahip") != ajan:
+            raise TriggerError(
+                f"Görev {task_id} '{gorev.get('sahip')}' ajanına ait; {ajan} alamaz"
+            )
+        if gorev.get("durum") not in PANO_ALINABILIR_DURUMLAR:
+            raise TriggerError(
+                f"{ajan} için bekleyen tetik yok: {task_id} "
+                f"(pano durumu: {gorev.get('durum')})"
+            )
+        tb.gorev_guncelle(task_id, durum="aktif")
+        return {"task_id": task_id, "ajan": ajan, "durum": "alindi", "kaynak": "pano"}
+    if gorev is None:
         raise TriggerError(f"Görev panoda bulunamadı: {task_id}")
     _tetikleri_yaz(kayitlar, ajan, data_dir)
     tb.gorev_guncelle(task_id, durum="aktif")
-    return {"task_id": task_id, "ajan": ajan, "durum": "alindi"}
+    return {"task_id": task_id, "ajan": ajan, "durum": "alindi", "kaynak": "tetik"}
 
 
 # ---- Onay kuyruğu (doğrulama zorunluluğu) ----

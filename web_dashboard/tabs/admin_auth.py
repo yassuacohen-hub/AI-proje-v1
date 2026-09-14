@@ -1,4 +1,4 @@
-﻿"""Admin paneli giriş sekmesi."""
+"""Admin paneli giriş sekmesi."""
 from __future__ import annotations
 import streamlit as st
 from scripts.dash04_api_client import post_api, APIError

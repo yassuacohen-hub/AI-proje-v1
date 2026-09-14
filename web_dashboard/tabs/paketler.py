@@ -9,6 +9,12 @@ Uyulan kalibi (00_sentez.md):
   K2 - Bos veri kurali: bos grafik yok, yer tutucu mesaj
   K3 - Her metrigin altinda tek satir Turkce aciklama + operasyonel soru
   K7 - Demo veri DEMO rozetiyle isaretlenir
+
+ADMIN-UI-10:
+  Sayfa iskeleti Playground dokumantasyon mantigina tasindi:
+  ``PageHeader`` -> ``SectionNav`` -> ``Section``. Renk, ikon ve tipografi
+  secimleri **degismedi**; yalnizca hiyerarsi disipline edildi. Ekranin tek
+  birincil butonu "Veriyi Yenile" dugmesidir.
 """
 from __future__ import annotations
 
@@ -25,7 +31,51 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
+from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
+
 DEMO_DOSYA = ROOT / "data" / "demo" / "paketler_demo.jsonl"
+
+#: ADMIN-UI-10 — Bolumler tek yerde tanimlanir (anchor tutarliligi).
+BOLUMLER: tuple[Section, ...] = (
+    Section(
+        "Katalog Özeti",
+        "Paket adedi, ortalama fiyat ve fiyat aralığı.",
+        ikon="🧮",
+        kimlik="katalog-ozeti",
+    ),
+    Section(
+        "Paket Kataloğu",
+        "Her paketin kapsamı ve fiyatı; kart başlığına tıklayarak açın.",
+        ikon="📋",
+        kimlik="paket-katalogu",
+    ),
+    Section(
+        "Paket Karşılaştırma",
+        "Fiyat basamakları ve özellik sayısı yan yana.",
+        ikon="📊",
+        kimlik="paket-karsilastirma",
+    ),
+    Section(
+        "Çapraz Satış Önerisi",
+        "Bir firmanın mevcut paketlerine bakarak teklif edilebilecek paketleri listeler.",
+        ikon="🎯",
+        kimlik="capraz-satis",
+    ),
+)
+
+GIRIS_METNI = (
+    "Satılan paketleri, fiyatlarını ve firmalara atanma durumunu tek ekranda "
+    "görün; bir firmaya hangi paketin teklif edilebileceğini belirleyin. "
+    "Fiyatlar KDV hariç ve aylıktır."
+)
+
+
+def _bolum(kimlik: str) -> Section:
+    """Kimlige gore bolum tanimini getirir (anchor tutarliligi icin)."""
+    for bolum in BOLUMLER:
+        if bolum.kimlik == kimlik:
+            return bolum
+    raise KeyError(f"Tanımsız bölüm kimliği: {kimlik}")
 
 
 # ---------------------------------------------------------------------------
@@ -179,35 +229,58 @@ def capraz_satis_onerisi(
 # ---------------------------------------------------------------------------
 
 def _render_baslik(demo_mu: bool) -> None:
-    """K1: ortak sekme basligi kalibi."""
-    col_baslik, col_zaman, col_btn = st.columns([5, 2, 1])
-    with col_baslik:
-        rozet = " &nbsp;`DEMO`" if demo_mu else ""
-        st.subheader("📦 Paketler")
-        if demo_mu:
-            st.caption("🧪 DEMO VERİ — veritabanı bağlantısı yok, örnek paketler gösteriliyor.")
-        else:
-            st.caption(rozet or "Canlı veritabanı verisi.")
-    with col_zaman:
-        st.caption(f"Son güncelleme: {datetime.now().strftime('%H:%M')}")
+    """ADMIN-UI-10: Playground kalibi — ust etiket -> H1 -> giris -> aksiyonlar."""
+    PageHeader(
+        "Paketler",
+        giris=GIRIS_METNI,
+        ust_etiket="İş · Katalog",
+        ikon="📦",
+    ).render()
+
+    col_btn, col_rehber, col_zaman = st.columns([1, 1, 3], vertical_alignment="center")
     with col_btn:
-        if st.button("🔄", key="paketler_yenile", help="Veriyi yenile"):
-            st.cache_data.clear()
-            st.rerun()
-
-    with st.expander("ℹ️ Bu sekme hakkında"):
-        st.markdown(
-            """
-**Amaç:** Satılan paketleri, fiyatlarını ve firmalara atanma durumunu tek ekranda görmek;
-bir firmaya hangi paketin teklif edilebileceğini belirlemek.
-
-**Veri kaynağı:** `packages` / `company_packages` tabloları (DASH-UX-03 backend).
-Tablo yoksa `data/demo/paketler_demo.jsonl` demo verisi kullanılır.
-
-**Kısıt:** Demo modda atama/CRUD işlemleri kapalıdır; yalnızca görüntüleme yapılır.
-Fiyatlar KDV hariç ve aylık listelenmiştir.
-            """
+        yenile = st.button(
+            "🔄 Veriyi Yenile",
+            key="paketler_yenile",
+            type="primary",
+            use_container_width=True,
+            help="Önbelleği temizler ve paket kataloğunu yeniden yükler.",
         )
+    with col_rehber:
+        rehber = st.toggle(
+            "ℹ️ Sekme rehberi",
+            key="paketler_rehber",
+            help="Bu ekranın amacını, veri kaynağını ve kısıtlarını gösterir.",
+        )
+    with col_zaman:
+        if demo_mu:
+            st.caption(
+                "🧪 DEMO VERİ — veritabanı bağlantısı yok, örnek paketler gösteriliyor. · "
+                f"Son güncelleme: {datetime.now().strftime('%H:%M')}"
+            )
+        else:
+            st.caption(
+                "Canlı veritabanı verisi. · "
+                f"Son güncelleme: {datetime.now().strftime('%H:%M')}"
+            )
+
+    if yenile:
+        st.cache_data.clear()
+        st.rerun()
+
+    if rehber:
+        st.info(
+            "**Amaç:** Satılan paketleri, fiyatlarını ve firmalara atanma durumunu "
+            "tek ekranda görmek; bir firmaya hangi paketin teklif edilebileceğini "
+            "belirlemek.\n\n"
+            "**Veri kaynağı:** `packages` / `company_packages` tabloları "
+            "(DASH-UX-03 backend). Tablo yoksa `data/demo/paketler_demo.jsonl` "
+            "demo verisi kullanılır.\n\n"
+            "**Kısıt:** Demo modda atama/CRUD işlemleri kapalıdır; yalnızca "
+            "görüntüleme yapılır. Fiyatlar KDV hariç ve aylık listelenmiştir."
+        )
+
+    SectionNav(BOLUMLER, yatay=True).render()
 
 
 def _render_ozet(paketler: list[dict[str, Any]]) -> None:
@@ -272,9 +345,7 @@ def _render_paket_tablosu(paketler: list[dict[str, Any]]) -> None:
 
 
 def _render_capraz_satis(paketler: list[dict[str, Any]], demo_mu: bool) -> None:
-    st.markdown("---")
-    st.markdown("### 🎯 Firma Kartı — Çapraz Satış Önerisi")
-    st.caption("Bir firmanın mevcut paketlerine bakarak teklif edilebilecek paketleri listeler.")
+    _bolum("capraz-satis").render()
 
     firma_paketleri: list[dict[str, Any]] = []
 
@@ -313,7 +384,7 @@ def _render_capraz_satis(paketler: list[dict[str, Any]], demo_mu: bool) -> None:
         firma_paketleri = load_firma_paketleri(company_id)
 
     if firma_paketleri:
-        st.markdown("**Mevcut paketleri:**")
+        st.caption("**Mevcut paketleri:**")
         st.dataframe(
             pd.DataFrame(
                 [
@@ -336,7 +407,7 @@ def _render_capraz_satis(paketler: list[dict[str, Any]], demo_mu: bool) -> None:
         st.success("✅ Bu firma kataloğun tamamına sahip — çapraz satış fırsatı yok.")
         return
 
-    st.markdown("**Önerilen paketler:**")
+    st.caption("**Önerilen paketler:**")
     for oneri in oneriler[:5]:
         etiket = "⬆️ Yükseltme" if oneri["tip"] == "yukselt" else "➕ Tamamlayıcı"
         fark = oneri["fark"]
@@ -361,15 +432,14 @@ def render_paketler_tab() -> None:
         st.info("📭 Veri gelince paket listesi burada görünecek. (Katalog boş veya DB bağlantısı yok.)")
         return
 
+    _bolum("katalog-ozeti").render()
     _render_ozet(paketler)
 
-    st.markdown("---")
-    st.markdown("### 📋 Paket Kataloğu")
+    _bolum("paket-katalogu").render()
     for paket in paketler:
         _render_paket_karti(paket, demo_mu)
 
-    st.markdown("---")
-    st.markdown("### 📊 Paket Karşılaştırma")
+    _bolum("paket-karsilastirma").render()
     _render_paket_tablosu(paketler)
 
     _render_capraz_satis(paketler, demo_mu)

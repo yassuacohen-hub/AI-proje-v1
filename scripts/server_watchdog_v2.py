@@ -81,30 +81,19 @@ def check_health(url: str, timeout: int = 10) -> tuple[bool, str]:
 
 
 
-def start_server(python: str, script: str, port: int = 8000, shell: bool = False) -> subprocess.Popen:
-    """Sunucuyu başlat."""
+def start_server(python: str, script: str, port: int = 8000) -> subprocess.Popen:
+    """Sunucuyu baslat (liste-form argv; shell enjeksiyona karsi kapali)."""
     log_event({"type": "restart_attempt", "python": python, "script": script, "port": port})
     out = (LOG_DIR / f"server_watchdog_{port}.stdout.log").open("a", encoding="utf-8")
     err = (LOG_DIR / f"server_watchdog_{port}.stderr.log").open("a", encoding="utf-8")
     
-    if shell:
-        cmd = f"{python} {script}"
-        proc = subprocess.Popen(
-            cmd,
-            cwd=str(ROOT),
-            stdout=out,
-            stderr=err,
-            shell=True,
-            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
-        )
-    else:
-        proc = subprocess.Popen(
-            [python, script],
-            cwd=str(ROOT),
-            stdout=out,
-            stderr=err,
-            creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
-        )
+    proc = subprocess.Popen(
+        [python, script],
+        cwd=str(ROOT),
+        stdout=out,
+        stderr=err,
+        creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
+    )
     
     log_event({"type": "process_started", "pid": proc.pid, "port": port})
     return proc
@@ -186,7 +175,7 @@ def main() -> None:
             
             if not args.no_restart:
                 if proc_8501 is None or proc_8501.poll() is not None:
-                    proc_8501 = start_server(args.python_8501, args.script_8501, port=8501, shell=True)
+                    proc_8501 = start_server(args.python_8501, args.script_8501, port=8501)
                     _telegram_gonder(f"🔄 Streamlit yeniden başlatılıyor (PID: {proc_8501.pid})")
 
         time.sleep(args.interval)

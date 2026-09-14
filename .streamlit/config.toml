@@ -1,3 +1,19 @@
+# -*- coding: utf-8 -*-
+# Huginn — Streamlit yapılandırması
+#
+# Tema referansı: https://docs.streamlit.io/get-started/installation/streamlit-playground
+# Streamlit dokümantasyon/playground görünümü taban alınmıştır:
+#   * Yazı karakteri : Inter (Google Fonts CDN üzerinden)
+#   * Ana renk       : Streamlit imza kırmızısı #FF4B4B
+#   * Köşe yarıçapı  : yumuşak (0.5rem) — kart ve buton kenarları
+#   * Sol bar        : gövdeden bir ton ayrık, ince kenarlıklı
+#
+# İKİ TEMA TANIMLIDIR (gündüz + gece):
+#   [theme.light] → gündüz modu
+#   [theme.dark]  → gece modu
+# Kullanıcı geçişi: sağ üst ⋮ menüsü › Settings › Appearance
+# `base` satırı ilk açılıştaki varsayılanı belirler.
+
 [server]
 headless = true
 port = 8501
@@ -10,10 +26,80 @@ magicEnabled = true
 
 [client]
 showErrorDetails = true
+toolbarMode = "minimal"
 
+# --------------------------------------------------------------------------- #
+# ORTAK TEMA — her iki modda geçerli tipografi ve geometri
+# --------------------------------------------------------------------------- #
 [theme]
-base = "dark"
-primaryColor = "#3b82f6"
-backgroundColor = "#0a0e17"
-secondaryBackgroundColor = "#131826"
-textColor = "#e2e8f0"
+base = "light"
+
+# Yazı karakteri: "<font adı>:<CSS url>" biçimi Streamlit tarafından desteklenir.
+# İnternet erişimi yoksa Streamlit sessizce varsayılan fonta düşer (uygulama kırılmaz).
+font = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+headingFont = "Inter:https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+codeFont = "Source Code Pro:https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600&display=swap"
+
+# Punto ölçeği — dokümantasyon sitesindeki okunabilir gövde metni
+baseFontSize = 16
+codeFontSize = "0.875rem"
+
+# Başlık puntoları (h1…h6). Playground'daki ölçekten biraz sıkılaştırıldı;
+# panelde çok sayıda başlık olduğu için dev başlıklar yer israfı yapıyordu.
+headingFontSizes = ["2.25rem", "1.75rem", "1.375rem", "1.125rem", "1rem", "0.875rem"]
+headingFontWeights = [700, 600, 600, 600, 600, 600]
+
+# Köşe yumuşaklığı
+baseRadius = "0.5rem"
+buttonRadius = "0.5rem"
+
+# Ana renk: Streamlit imza kırmızısı (referans sayfadaki vurgu rengi)
+primaryColor = "#FF4B4B"
+
+# --------------------------------------------------------------------------- #
+# GÜNDÜZ MODU — docs.streamlit.io açık tema paleti
+# --------------------------------------------------------------------------- #
+[theme.light]
+primaryColor = "#FF4B4B"
+backgroundColor = "#FFFFFF"
+secondaryBackgroundColor = "#F0F2F6"
+textColor = "#31333F"
+linkColor = "#FF4B4B"
+borderColor = "#E6EAF1"
+dataframeBorderColor = "#E6EAF1"
+dataframeHeaderBackgroundColor = "#F0F2F6"
+
+[theme.light.sidebar]
+backgroundColor = "#F7F8FA"
+secondaryBackgroundColor = "#FFFFFF"
+textColor = "#31333F"
+borderColor = "#E6EAF1"
+
+# --------------------------------------------------------------------------- #
+# GECE MODU — docs.streamlit.io koyu tema paleti
+# --------------------------------------------------------------------------- #
+[theme.dark]
+primaryColor = "#FF4B4B"
+backgroundColor = "#0E1117"
+secondaryBackgroundColor = "#262730"
+textColor = "#FAFAFA"
+linkColor = "#FF8C8C"
+borderColor = "#31333F"
+dataframeBorderColor = "#31333F"
+dataframeHeaderBackgroundColor = "#262730"
+
+[theme.dark.sidebar]
+backgroundColor = "#161A25"
+secondaryBackgroundColor = "#262730"
+textColor = "#FAFAFA"
+borderColor = "#31333F"
+
+# --------------------------------------------------------------------------- #
+# SOL BAR — her iki modda ortak tipografi
+# Sidebar başlık puntoları [theme]'den miras alınmaz; ayrıca verilir.
+# --------------------------------------------------------------------------- #
+[theme.sidebar]
+baseRadius = "0.5rem"
+buttonRadius = "0.5rem"
+headingFontSizes = ["1.25rem", "1.125rem", "1rem", "0.9375rem", "0.8125rem", "0.75rem"]
+headingFontWeights = [700, 600, 600, 600, 600, 600]

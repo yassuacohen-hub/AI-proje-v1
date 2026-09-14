@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-13T23:38:19",
+    "bitis": "2026-09-14T09:15:42",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -769,7 +769,7 @@
   {
     "task_id": "P7-6",
     "baslik": "Kariyer.net Scraper",
-    "sahip": "web_kazima",
+    "sahip": "kilo",
     "oncelik": "P1",
     "durum": "blocked",
     "baslangic": "2026-09-12T23:43:28",
@@ -902,22 +902,21 @@
   {
     "task_id": "ORCH-09",
     "baslik": "Otomatik tetikleme nobetcisi: Gorev Zamanlayici poll (1dk deneme -> 10dk hedef, kaldirilabilir)",
-    "sahip": "orkestrator",
+    "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-13T02:36:03",
-    "bitis": null,
+    "bitis": "2026-09-14T03:36:37",
     "dosyalar": [
       "src/company_master/orchestrator/nobetci.py",
       "scripts/gorev_nobetci.py",
       "scripts/gorev_nobetci.bat",
-      "tests/test_gorev_nobetci.py",
-      "AGENTS.md",
-      "CHANGELOG.md"
+      "tests/test_gorev_nobetci.py"
     ],
-    "not": "",
+    "not": "Teslim (kilo): Teslim: nobetci.py (geciken tetik, alarm, ses, telegram), gorev_nobetci.py (kur/kaldir/nobet/durum/uyari), 11 test (all pass). 994 passed, 1 skipped.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "blokaj": []
   },
   {
     "task_id": "simple_1",
@@ -1680,17 +1679,17 @@
     "baslik": "Dashboard UX redesign: Modern navigation",
     "sahip": "roo",
     "oncelik": "P0",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": [
       "app.py",
       "web_dashboard/tabs/__init__.py"
     ],
-    "bitis": null,
+    "bitis": "2026-09-14T00:06:52",
     "dosyalar": [
       "app.py",
       "web_dashboard/tabs/__init__.py"
     ],
-    "not": "",
+    "not": "Teslim (roo): Dashboard navigasyon yeniden tasarimi: web_dashboard/tabs/__init__.py artik tek kaynak (SECTIONS kayit defteri, TabTanimi dataclass, lazy import). app.py ince yonlendiriciye donustu: gruplu sidebar (Is Operasyonlari / Sistem-Yonetim), aktif bolum vurgusu, hizli gecis secici, breadcrumb, ?bolum= derin baglantisi, sekme basina hata siniri. K-01 KAPANDI: Paketler ve Pazarlama artik gercekten baglandi (eski 3 adet 'hazirlaniyor' yer tutucusu kaldirildi; Abrakadabra AI-CHAT-01 bekleyen gorev ID'siyle acik yer tutucu olarak kaldi). Sistem ve Yonetim artik amaca ozel render_sistem_tab/render_yonetim_tab bilesikleri kullaniyor. Yeni regresyon testi tests/test_dashboard_nav.py (15 test) her hazir bolumun cagirilabilir render fonksiyonuna cozumlendigini dogruluyor. Toplam 48 test gecti, kirilma yok.",
     "source": "ic",
     "from_agent": null
   },
@@ -1715,17 +1714,20 @@
   {
     "task_id": "P7-46",
     "baslik": "Kullanici ayarlar paneli",
-    "sahip": "copilot",
+    "sahip": "roo",
     "oncelik": "P1",
-    "durum": "bekliyor",
+    "durum": "done",
     "baslangic": [
-      "web_dashboard/tabs/admin_settings.py"
+      "web_dashboard/tabs/admin_panel.py"
     ],
-    "bitis": null,
-    "dosyalar": [],
-    "not": "",
+    "bitis": "2026-09-14T04:13:27",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_panel.py"
+    ],
+    "not": "Teslim (roo): Kullanici ayarlar paneli tamamlandi. YENI SERVIS: src/company_master/settings/ (user_settings.py + __init__.py) - 13 ayarlik sema (4 grup: Gorunum/Veri/Bildirim/Bolgesel), AyarTanimi dataclass, dogrula(), ayarlari_getir/yaz, ayar_kaydet, ayarlari_sifirla. Kalicilik: kullanici basina JSON dosyasi (data/user_settings/<id>.json), atomik yazma (tempfile+fsync+os.replace). Guvenlik: kimlik regex ile path-traversal engeli (../gizli, a/b, nul bayti reddedilir). Dayaniklilik: bozuk JSON / bilinmeyen anahtar / bozuk deger varsayilana duser, panel cokmez. PANEL (kilitli dosya web_dashboard/tabs/admin_panel.py): render_ayarlar_tab() semadan otomatik form uretir (st.tabs ile 4 grup + tek form + kaydet/sifirla), aktif_kullanici() oturumdan kimlik cozer, mevcut render_decision_tab bozulmadi. MIMARI: is mantigi Streamlit'ten tamamen bagimsiz (servis import streamlit icermez) -> UI olmadan test edilebilir; panel sadece ince katman. TEST: tests/test_user_settings.py 78 test (sema tutarliligi, dogrulama sinir degerleri, bool/int sizmasi, IO+izolasyon, bozuk dosya dayanikliligi, kimlik guvenligi, panel sozlesme denetimi). Tam regresyon: 248 passed (user_settings+theme+responsive+style+ui_components+app_js+dashboard_nav). NOT: yenileme_araligi secenekleri mevcut admin_auto_refresh.py ile hizalandi; tema secenekleri theme.js ile uyumlulugu test ile zorlaniyor.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. Profil düzenleme, tema secici, bildirim ayarlari. Form validasyonu, responsive UI."
   },
   {
     "task_id": "COP-18",
@@ -2102,7 +2104,7 @@
     "task_id": "WIKI-01",
     "baslik": "Admin Panel Kullanım Kılavuzu — Obsidian Wiki",
     "aciklama": "Admin panelinin sekme sekme kullanım kılavuzu, metrik sözlüğü ve kullanıcı yönlendirmesi. Wiki: AI proje v1/V10/wiki/admin_panel_kilavuz.md",
-    "durum": "bekliyor",
+    "durum": "done",
     "sahip": "orkestrator",
     "onaylayan": "",
     "onay_tarihi": "",
@@ -2115,13 +2117,680 @@
     "otomatik_onay": false,
     "donen": false,
     "gorev_tarihi": "",
-    "teslim_notu": "",
+    "teslim_notu": "Admin panel kilavuzu olusturuldu",
     "not": "",
     "dosyalar": [
       "AI proje v1/V10/wiki/admin_panel_kilavuz.md"
     ],
     "kilitli": false,
     "kaynak": "orkestrator",
-    "ozet": ""
+    "ozet": "",
+    "oncelik": "P2"
+  },
+  {
+    "task_id": "ORCH-13",
+    "baslik": "Pano sema dogrulama (S-05) + tetik_al pano fallback (S-06)",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T00:26:32",
+    "bitis": "2026-09-14T00:38:53",
+    "dosyalar": [
+      "src/company_master/orchestrator/task_board.py",
+      "src/company_master/orchestrator/trigger.py",
+      "tests/test_pano_sema.py"
+    ],
+    "not": "Teslim (roo): S-05: pano sema katmani (ZORUNLU_ALANLAR + sema_dogrula + gorev_normalize/pano_normalize), gorev_ekle/gorev_guncelle/gorev_getir sagmlastirildi, her yazimda eski kayitlar self-healing. S-06: tetik_al artik tetik yoksa panoya bakip ajana ait plan/bekliyor gorevi aktife cekiyor (kaynak=pano); baskasinin gorevi ve panoda olmayan gorev hala reddediliyor. Test: tests/test_pano_sema.py 16 yeni test + orkestrator paketi toplam 142 test PASS.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "UX-01",
+    "baslik": "UI Component Library — Design System",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": "2026-09-14T02:08:24",
+    "dosyalar": [
+      "src/company_master/ui/"
+    ],
+    "not": "Teslim (roo): UI Component Library (UX-01) — 9 component (Button/Input/Dropdown/Badge/Card/MetricCard/Table/Modal/Tooltip), 82 test, Copilot design token contract (Indigo #6366F1, radius bands 8-10/12-16/16-20px). Semantic tokens 'accent/button/card/modal' CSS SSOT ile integrated. Test suite CSS/XSS/a11y coverage + design regression guards. Denetim raporuyla fully aligned; UX-02 (Responsive Layout) ve UX-03 (Theme Management dark/light) ready."
+  },
+  {
+    "task_id": "UX-02",
+    "baslik": "Responsive Layout System ve Breakpoint Management",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": "2026-09-14T02:33:25",
+    "dosyalar": [
+      "web_dashboard/css/"
+    ],
+    "not": "Teslim (roo): responsive.css olusturuldu: 12/8/4 kolon grid yardimcilari + 1440/1024/640 kirilimlari, dokunmatik hedef min 40px, prefers-reduced-motion. index.html CSS katman sirasi kuruldu (admin_tokens -> style -> responsive). admin_tokens.css dark temada eksik --color-accent/-hover/-soft tanimlari eklendi (test yakaladi). tests/test_responsive_css.py 23 test; toplam 105 test yesil."
+  },
+  {
+    "task_id": "UX-03",
+    "baslik": "Design Token ve Theme Management System",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": "2026-09-14T03:36:38",
+    "dosyalar": [
+      "web_dashboard/css/"
+    ],
+    "not": "Teslim (roo): theme.css kopru katmani olusturuldu: 17 legacy degisken (--bg, --text, --accent vb.) :root[data-theme=dark|light] uzerinden semantik var(--color-*) tokenlarina baglandi; style.css'e hic dokunulmadi (ozgulluk 0,2,0 > 0,1,0). theme.js: localStorage huginn-theme kaliciligi, prefers-color-scheme izleme, HuginnTheme API (aktifTema/temaUygula/temaDegistir/sistemeDon/sistemTemasi), huginn:themechange CustomEvent, try-korumali storage erisimi, FOUC engeli icin head'de senkron ilk yukleme. admin_tokens.css genisletildi (--color-text-subtle/-purple/-orange light+dark; dark --color-info ayristirildi). index.html: data-theme=dark, 4 katmanli CSS sirasi, topbar tema butonu (aria-pressed, 40px dokunmatik hedef, focus-visible). BONUS: index.html satir 64'te HTML'e sizmis kacis karakterleri (showView\\\\( ve class=\\\"fas\\\\ ) bulundu ve onarildi - Veri Kalitesi nav ogesi kirikti; nuks bekcisi testi eklendi. tests/test_theme_system.py 30 test; toplam 170 test yesil."
+  },
+  {
+    "task_id": "BE-01",
+    "baslik": "Admin API Endpoint Optimization and Caching Layer",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": "2026-09-14T01:00:00",
+    "dosyalar": [
+      "src/company_master/admin/caching.py",
+      "web_app.py"
+    ],
+    "not": "Teslim (kilo): Redis caching decorator (@admin_cache), 5 admin endpoint'e entegre (api/kpi, api/admin/pending, api/admin/api-usage, api/admin/categories, api/performance). In-memory fallback var."
+  },
+  {
+    "task_id": "BE-02",
+    "baslik": "Database Migration Scripts and Schema Versioning",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": "2026-09-14T01:00:00",
+    "dosyalar": [
+      "src/company_master/schema/migrations/0014_packages_marketing.sql",
+      "src/company_master/schema/migrations/schema_versions.json",
+      "src/company_master/schema/migrations/migrate.py"
+    ],
+    "not": "Teslim (kilo): 0014_packages_marketing.sql (packages/campaigns/segments), schema_versions.json (14 versiyon), migrate.py (runner --version/--dry-run/--apply)."
+  },
+  {
+    "task_id": "BE-03",
+    "baslik": "Event-Driven Architecture — Message Queue Integration",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": "2026-09-14T01:00:00",
+    "dosyalar": [
+      "src/company_master/queue/message_queue.py",
+      "src/company_master/queue/event_bus.py",
+      "src/company_master/queue/__init__.py"
+    ],
+    "not": "Teslim (kilo): RedisMessageQueue (publish/consume/size/batch), EventBus (subscribe/emit/process). Redis + in-memory fallback."
+  },
+  {
+    "task_id": "WIKI-02",
+    "baslik": "Wiki Documentation — Architecture and API Reference",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": "2026-09-14T01:00:00",
+    "dosyalar": [
+      "docs/API_REFERANSI.md",
+      "docs/DEPLOYMENT.md"
+    ],
+    "not": "Teslim (kilo): API_REFERANSI.md (10 kategori, 30+ endpoint), DEPLOYMENT.md (8 bolum, sorun giderme)."
+  },
+  {
+    "task_id": "ROO-UX-ADMIN-01",
+    "baslik": "Premium Enterprise Admin Panel UX audit sonrasi design system ve shell",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T01:26:43",
+    "bitis": "2026-09-14T02:10:25",
+    "dosyalar": [
+      "docs/UX_ADMIN_PANEL_REVIEW_2026-09-14.md",
+      "web_dashboard/css/admin_tokens.css"
+    ],
+    "not": "Teslim (roo): Premium Admin Panel UX Audit Faz 1a — Design System ve Shell tafsiyesi. Copilot review raporunu dogruladi ve gunceledi: Faz 1a (Token + UI bilesenler + shell mimarisi plani), Faz 1b-4 (Shell impl, Customer Ops, Revenue, Moderation). web_dashboard/css/admin_tokens.css olusturuldu: Semantik token'lar (--color-bg/surface/border/text/accent/success/warning/danger), light/dark [data-theme], Indigo #6366F1, radius bands 8/12/16px, responsive grid breakpoints 1440/1024/640px, a11y prefers-reduced-motion. UX-01 (Component Library) Copilot sözlesmesiyle hizalandi (9 components, 82 test, accent/button/card/modal token'lar). Audit raporu Faz 1a responsive checklist (Desktop/Tablet/Mobile layout/keyboard/a11y kontrol tablosu) + veri sözlesmesi garantisi (Revenue/Transaction/Moderation planlandi, sahte veri yasak) + test kapsamı (render-contract + CSS syntax + Playwright smoke Faz 2'de). Sonraki adim: Topbar, Sidebar, Drawer, ProfileMenu bilesenler (Faz 1b); UX-02 Responsive Layout ve UX-03 Theme Management devam eder.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "CL-01",
+    "baslik": "Integration Test Suite for API Endpoints",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": "2026-09-14T06:03:25",
+    "dosyalar": [
+      "tests/"
+    ],
+    "not": "Teslim (cline): CL-01 API entegrasyon suite: 69 test (rota kontrati 33 uc, DB'li GET, buyer kimlik fail-closed, admin guard, webhook, API-key modu, SSE sozlesme). 2 bug duzeltildi: _FakeEngine sira hatasi (her connect kopya aliyordu -> paylasilan kuyruk), SSE client.stream teardown kilitlenmesi (generator-veri-yolu assert). 69 passed 4.21sn."
+  },
+  {
+    "task_id": "CL-02",
+    "baslik": "Performance Benchmark Scripts",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": "2026-09-14T06:29:56",
+    "dosyalar": [
+      "scripts/"
+    ],
+    "not": "Teslim (cline): CL-02 benchmark tamamlandi: benchmark_http.py yarim kalmis main() tamamlandi (esik karsilastirma + JSON rapor + exit kodu). Suite 5 uc yesil (health p50~9ms, kpi~6ms, companies~6ms, export~4ms, dashboard~3ms). tests/test_benchmark.py 5 test yesil."
+  },
+  {
+    "task_id": "CL-03",
+    "baslik": "Security Audit — Dependency Vulnerability Scan",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": "2026-09-14T06:28:50",
+    "dosyalar": [
+      "data/orchestrator/"
+    ],
+    "not": "Teslim (cline): CL-03 guvenlik taramasi tamamlandi: guvenlik_taramasi.py + 2 JSON sozluk + rapor. Ilk calismada 7 bulgu (requests pini, 2x shell=True, 3x MD5) duzeltildi, tekrar taramada 0 bulgu. 82 test yesil."
+  },
+  {
+    "task_id": "MIM-01",
+    "baslik": "System Architecture Diagram — Microservices",
+    "sahip": "mimar",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "docs/"
+    ],
+    "not": "Mikroservis mimari diyagramını oluştur ve güncelleyin."
+  },
+  {
+    "task_id": "MIM-02",
+    "baslik": "API Gateway Design and Routing Rules",
+    "sahip": "mimar",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/api/"
+    ],
+    "not": "API Gateway tasarımı belirleyin. Routing kuralları, rate limiting."
+  },
+  {
+    "task_id": "MIM-03",
+    "baslik": "Database Schema Design — Core Entities",
+    "sahip": "mimar",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/"
+    ],
+    "not": "Temel varlık veritabanı şema tasarımı tamamlayınız."
+  },
+  {
+    "task_id": "CC-01",
+    "baslik": "Code Review Pipeline — Automated Quality Gates",
+    "sahip": "claude_code",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/"
+    ],
+    "not": "Otomatik code review pipeline kurun. Quality gates entegrasyonu."
+  },
+  {
+    "task_id": "CC-02",
+    "baslik": "Refactoring Plan — Legacy Code Modules",
+    "sahip": "claude_code",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/"
+    ],
+    "not": "Eski kod modüllerini yeniden yapılandırın."
+  },
+  {
+    "task_id": "CC-03",
+    "baslik": "Documentation Generator — Inline Code Docs",
+    "sahip": "claude_code",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/"
+    ],
+    "not": "Inline kod dokümantasyonu generatoru geliştirin."
+  },
+  {
+    "task_id": "EA-01",
+    "baslik": "Third-party API Integration — Weather Service",
+    "sahip": "external_agent",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/"
+    ],
+    "not": "Hava durumu servisi entegrasyonu uygulayın."
+  },
+  {
+    "task_id": "EA-03",
+    "baslik": "Notification Service — Push Notifications",
+    "sahip": "external_agent",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/"
+    ],
+    "not": "Push notification servisi entegrasyonu ekle."
+  },
+  {
+    "task_id": "WK-01",
+    "baslik": "Career Pages Scraper — Enhanced Data Extraction",
+    "sahip": "web_kazima",
+    "oncelik": "P1",
+    "durum": "blocked",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/"
+    ],
+    "not": "Kariyer sayfaları scraper geliştirin. Gelişmiş veri çıkarma. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina)."
+  },
+  {
+    "task_id": "WK-02",
+    "baslik": "OSB Tender Monitor — Real-time Tracking",
+    "sahip": "web_kazima",
+    "oncelik": "P1",
+    "durum": "blocked",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/"
+    ],
+    "not": "OSB ihale takibi — gerçek zamanlı izleme sistemi. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina)."
+  },
+  {
+    "task_id": "WK-03",
+    "baslik": "Proxy Rotation and IP Management",
+    "sahip": "web_kazima",
+    "oncelik": "P2",
+    "durum": "blocked",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/"
+    ],
+    "not": "Proxy rotation ve IP yönetim sistemi kurun. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina)."
+  },
+  {
+    "task_id": "DEV-01",
+    "baslik": "CI/CD Pipeline — GitHub Actions Optimization",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      ".github/"
+    ],
+    "not": "GitHub Actions CI/CD pipeline optimize edin."
+  },
+  {
+    "task_id": "DEV-02",
+    "baslik": "Docker Containerization — Multi-stage Build",
+    "sahip": "gelistirici",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "Dockerfile",
+      "docker-compose.yml"
+    ],
+    "not": "Docker konteynerleştirme — multi-stage build."
+  },
+  {
+    "task_id": "DEV-03",
+    "baslik": "Testing Framework — Unified Test Runner",
+    "sahip": "gelistirici",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "tests/"
+    ],
+    "not": "Birleşik test runner frameworkü geliştirin."
+  },
+  {
+    "task_id": "QL-01",
+    "baslik": "Automated Test Coverage Report",
+    "sahip": "kalite",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "tests/"
+    ],
+    "not": "Otomatik test kapsama raporu oluşturun."
+  },
+  {
+    "task_id": "QL-02",
+    "baslik": "Load Testing — Concurrent User Simulation",
+    "sahip": "kalite",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "tests/"
+    ],
+    "not": "Yük testi — eşzamanlı kullanıcı simülasyonu."
+  },
+  {
+    "task_id": "QL-03",
+    "baslik": "Accessibility Audit — WCAG Compliance",
+    "sahip": "kalite",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/"
+    ],
+    "not": "Erişilebilirlik denetimi — WCAG uyumluluk."
+  },
+  {
+    "task_id": "AR-01",
+    "baslik": "Market Trend Analysis — Q3 2026",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": "2026-09-14T03:00:00",
+    "dosyalar": [
+      "data/orchestrator/AR-01_pazar_egilim_analizi_Q3_2026.md"
+    ],
+    "not": "Pazar eğilimi analizi Q3 2026 tamamlandı: sektör büyüme, talep trendleri, fiyat hareketleri ve 2026 Q4 öngörüleri içeren rapor.",
+    "blokaj": []
+  },
+  {
+    "task_id": "AR-02",
+    "baslik": "Competitor Analysis — Direct and Indirect",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": "2026-09-14T03:00:00",
+    "dosyalar": [
+      "data/orchestrator/AR-02_rekabet_analizi.md"
+    ],
+    "not": "Rekabet analizi tamamlandı: 5.665 şirketlik veri setiyle doğrudan/dolaylı rakip sınıflandırması, demo paket ve kampanya karşılaştırması, stratejik öneriler.",
+    "blokaj": []
+  },
+  {
+    "task_id": "AR-03",
+    "baslik": "User Persona and Journey Mapping",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": "2026-09-14T03:00:00",
+    "dosyalar": [
+      "data/orchestrator/AR-03_kullanici_persona_yol_haritasi.md"
+    ],
+    "not": "Kullanıcı persona ve yol haritası analizi tamamlandı: 3 temel persona (İş Geliştirme Müdürü, Veri Bilimci, Operasyon Yöneticisi), dokunma noktaları, dönüşüm engelleri ve iyileştirme önerileri.",
+    "blokaj": []
+  },
+  {
+    "task_id": "MIMAR-01",
+    "baslik": "Event Sourcing and CQRS Implementation Plan",
+    "sahip": "mimari",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/"
+    ],
+    "not": "Event Sourcing ve CQRS implementasyon planı."
+  },
+  {
+    "task_id": "MIMAR-02",
+    "baslik": "Microservices Decomposition Strategy",
+    "sahip": "mimari",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "docs/"
+    ],
+    "not": "Mikroservis ayrıştırma stratejisi belirleyin."
+  },
+  {
+    "task_id": "MIMAR-03",
+    "baslik": "Observability Stack — Metrics, Logs, Traces",
+    "sahip": "mimari",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/"
+    ],
+    "not": "Gözlemlenebilirlik yığını — metrikler, loglar, izler."
+  },
+  {
+    "task_id": "RC-01",
+    "baslik": "Code Quality Dashboard — Real-time Metrics",
+    "sahip": "roo_code",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/"
+    ],
+    "not": "Kod kalitesi dashboard — gerçek zamanlı metrikler."
+  },
+  {
+    "task_id": "RC-02",
+    "baslik": "AI-powered Code Suggestions Engine",
+    "sahip": "roo_code",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/"
+    ],
+    "not": "Yapay zeka destekli kod önerileri motoru."
+  },
+  {
+    "task_id": "RC-03",
+    "baslik": "Git Hooks — Pre-push Validation",
+    "sahip": "roo_code",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      ".githooks/"
+    ],
+    "not": "Git hooks — pre-push doğrulaması."
+  },
+  {
+    "task_id": "ORCH-11",
+    "baslik": "Scheduler Service — Cron-like Task Dispatch",
+    "sahip": "orkestrator",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/"
+    ],
+    "not": "Zamanlayıcı hizmet — cron benzeri görev dağıtım."
+  },
+  {
+    "task_id": "ORCH-12",
+    "baslik": "Health Monitor — System Status Dashboard",
+    "sahip": "orkestrator",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/"
+    ],
+    "not": "Sağlık monitörü — sistem durum dashboard'ı."
+  },
+  {
+    "task_id": "FIX-ID-01",
+    "baslik": "Pano id alanı tutarsızlığı: task_id kanonik, 'id' bekleyen tüketiciler None alıyor",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T04:27:14",
+    "bitis": "2026-09-14T03:45:00",
+    "dosyalar": [
+      "scripts/_verify_p82.py",
+      "src/company_master/orchestrator/task_board.py"
+    ],
+    "not": "FIX-ID-01 tamamlandi: gorev_ekle + gorev_normalize'e id alanı (task_id alias) eklendi.",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": []
+  },
+  {
+    "task_id": "PO-BACK-01",
+    "baslik": "Tenant Health Score v1 (aktivite, kullanim, odeme, destek sinyali)",
+    "sahip": "-",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+    ],
+    "not": "Skor formulu + esik dokumani + dashboard karti; 3 tenant'ta dogrulanir. PRD Faz 2.",
+    "id": "PO-BACK-01"
+  },
+  {
+    "task_id": "PO-BACK-02",
+    "baslik": "Segment eligibility skoru + onay akisi",
+    "sahip": "-",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+    ],
+    "not": "5 segmentte %95+ uygunluk; eksik-alan aciklamasi UI'da. AR-03 F1.",
+    "id": "PO-BACK-02"
+  },
+  {
+    "task_id": "PO-BACK-03",
+    "baslik": "Kampanya durum-makinesi otomatik denetimi",
+    "sahip": "-",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+    ],
+    "not": "Bitisi gecen aktif uyarir; sifir teslimatli taslak pilot onerir; testli. AR-03.",
+    "id": "PO-BACK-03"
+  },
+  {
+    "task_id": "PO-BACK-04",
+    "baslik": "Paket fiyat katalogu tekillestirme",
+    "sahip": "-",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+    ],
+    "not": "Tek fiyat kaynagi; 4 tier (Temel 499 TL); demo cakismasi giderilir.",
+    "id": "PO-BACK-04"
+  },
+  {
+    "task_id": "PO-BACK-05",
+    "baslik": "Karar ekranlarinda veri-tazelik etiketi + manuel yenileme",
+    "sahip": "-",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+    ],
+    "not": "Son guncelleme + yenile butonu; invalidation gorunur. AR-03 F7.",
+    "id": "PO-BACK-05"
+  },
+  {
+    "task_id": "PO-BACK-06",
+    "baslik": "Destek Merkezi MVP (ticket ata/kapat/eskale)",
+    "sahip": "-",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+    ],
+    "not": "Ticket CRUD + durum makinesi + test; admin sekmeye eklenir. PRD-15.",
+    "id": "PO-BACK-06"
+  },
+  {
+    "task_id": "PO-BACK-07",
+    "baslik": "Feature Flags MVP (tenant bazli ac/kapa)",
+    "sahip": "-",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+    ],
+    "not": "Flag CRUD + tenant esleme + guard; testli. PRD-19.",
+    "id": "PO-BACK-07"
+  },
+  {
+    "task_id": "PO-BACK-08",
+    "baslik": "Executive Dashboard v1 (MRR/ARR/churn + health ozeti)",
+    "sahip": "-",
+    "oncelik": "P3",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+    ],
+    "not": "MRR/ARR trend + churn + health dagilimi; kaynak dokumante. PRD Faz 2.",
+    "id": "PO-BACK-08"
   }
 ]

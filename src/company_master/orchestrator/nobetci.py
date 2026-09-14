@@ -96,7 +96,10 @@ def _ses_uyarisi() -> None:
 
 # ---- Telegram -------------------
 def _telegram_mesajat(msg: str, ayar: dict[str, Any]) -> bool | None:
-    token = ayar.get("telegram", {}).get("bot_token") or os.getenv("TELEGRAM_BOT_TOKEN")
+    telegram = ayar.get("telegram")
+    if not telegram or isinstance(telegram, bool):
+        return None
+    token = telegram.get("bot_token") or os.getenv("TELEGRAM_BOT_TOKEN")
     chat = os.getenv("TELEGRAM_CHAT_ID")
     if not token or not chat:
         return None

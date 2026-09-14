@@ -3,6 +3,12 @@
 
 SSE endpoint: http://localhost:8000/api/intelligence/dashboard/stream
 Kullanim: streamlit run app.py -> Sistem sekmesi
+
+ADMIN-UI-10:
+  Sayfa iskeleti Playground dokumantasyon mantigina tasindi:
+  ``PageHeader`` -> ``SectionNav`` -> ``Section``. Renk, ikon ve tipografi
+  secimleri **degismedi**; yalnizca hiyerarsi disipline edildi. Ekranin tek
+  birincil butonu "Veriyi Yenile" dugmesidir.
 """
 from __future__ import annotations
 
@@ -20,11 +26,42 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from company_master.db.connection import get_engine
 from company_master.db.connection import _load_env
+from company_master.ui import PageHeader, Section, SectionNav
 
 _load_env()
 
 SSE_URL = "http://localhost:8000/api/intelligence/dashboard/stream"
 CACHE_TTL = 5
+
+#: ADMIN-UI-10 — Bolumler tek yerde tanimlanir (anchor tutarliligi).
+BOLUMLER: tuple[Section, ...] = (
+    Section(
+        "Canlı Metrikler",
+        "Firma, sinyal, API çağrısı ve sistem sağlığı anlık değerleri.",
+        ikon="📊",
+        kimlik="canli-metrikler",
+    ),
+    Section(
+        "Son 24 Saat Trend",
+        "Aynı metriklerin zaman içindeki seyri.",
+        ikon="📈",
+        kimlik="trend-24s",
+    ),
+)
+
+GIRIS_METNI = (
+    "Gerçek zamanlı KPI ve sinyal akışını izleyin. Veri "
+    f"{CACHE_TTL} saniyede bir otomatik yenilenir; SSE bağlantısı kesilirse "
+    "son bilinen değerler gösterilir."
+)
+
+
+def _bolum(kimlik: str) -> Section:
+    """Kimlige gore bolum tanimini getirir (anchor tutarliligi icin)."""
+    for bolum in BOLUMLER:
+        if bolum.kimlik == kimlik:
+            return bolum
+    raise KeyError(f"Tanımsız bölüm kimliği: {kimlik}")
 
 
 @st.cache_data(ttl=CACHE_TTL)
@@ -59,38 +96,55 @@ def load_kpi_from_db() -> dict[str, Any]:
 
 
 def render_admin_realtime_tab() -> None:
-    """Canli veri akisi sekmesi."""
-    st.subheader("Canli Veri Akisi")
+    """Canli veri akisi sekmesi (ADMIN-UI-10 sayfa iskeletiyle)."""
+    PageHeader(
+        "Canlı Veri Akışı",
+        giris=GIRIS_METNI,
+        ust_etiket="Sistem · Canlı",
+        ikon="📡",
+    ).render()
 
     son_guncelleme = datetime.now().strftime("%H:%M:%S")
-    col_time, col_refresh, col_info = st.columns([3, 1, 1])
-    with col_time:
-        st.caption(f"Son güncelleme: {son_guncelleme} · {CACHE_TTL}s aralıkla otomatik yenileniyor")
-    with col_refresh:
-        if st.button("🔄 Yenile", key="refresh_realtime"):
-            st.cache_data.clear()
-            st.rerun()
-    with col_info:
-        with st.expander("ℹ️ Bu sekme hakkında"):
-            st.markdown("""
-**Amaç:** Gerçek zamanlı KPI ve sinyal takibi.
+    col_btn, col_rehber, col_zaman = st.columns([1, 1, 3], vertical_alignment="center")
+    with col_btn:
+        yenile = st.button(
+            "🔄 Veriyi Yenile",
+            key="refresh_realtime",
+            type="primary",
+            use_container_width=True,
+            help="Önbelleği temizler ve canlı akışı yeniden okur.",
+        )
+    with col_rehber:
+        rehber = st.toggle(
+            "ℹ️ Sekme rehberi",
+            key="realtime_rehber",
+            help="Bu ekranın amacını, veri kaynağını ve kısıtlarını gösterir.",
+        )
+    with col_zaman:
+        st.caption(
+            f"Son güncelleme: {son_guncelleme} · {CACHE_TTL}s aralıkla otomatik yenileniyor"
+        )
 
-**Veri Kaynağı:** `/api/intelligence/dashboard/stream` (SSE)
+    if yenile:
+        st.cache_data.clear()
+        st.rerun()
 
-**Kural:**
-- Veri 5 saniyede bir otomatik yenilenir
-- SSE bağlantısı kesildiğinde son bilinen veri gösterilir
-- Cache TTL: 5 saniye
-            """)
+    if rehber:
+        st.info(
+            "**Amaç:** Gerçek zamanlı KPI ve sinyal takibi.\n\n"
+            "**Veri kaynağı:** `/api/intelligence/dashboard/stream` (SSE).\n\n"
+            f"**Kısıt:** Veri {CACHE_TTL} saniyede bir yenilenir; SSE bağlantısı "
+            "kesildiğinde son bilinen veri gösterilir ve DB'den yedek okuma yapılır."
+        )
 
-    st.divider()
+    SectionNav(BOLUMLER, yatay=True).render()
 
     with st.spinner("Canli veri yükleniyor..."):
         sse = load_sse_data()
         kpi = load_kpi_from_db()
 
     if sse:
-        st.markdown("### 📊 Canli Metrikler")
+        _bolum("canli-metrikler").render()
         col1, col2, col3, col4 = st.columns(4)
         with col1:
             total = sse.get("total", sse.get("total_firma", 0))
@@ -110,11 +164,10 @@ def render_admin_realtime_tab() -> None:
             st.metric("Sistem Sağlığı", status, help=f"Skor: {score}")
             st.caption("📊 Kritik uyarı var mı?")
 
-        st.divider()
         if sse.get("generated_at"):
             st.caption(f"Veri zamanı: {sse['generated_at']}")
 
-        st.markdown("### 📈 Son 24 Saat Trend")
+        _bolum("trend-24s").render()
         trend = sse.get("trend", {})
         if trend:
             import pandas as pd

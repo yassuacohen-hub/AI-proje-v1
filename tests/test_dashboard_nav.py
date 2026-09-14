@@ -34,7 +34,7 @@ logging.disable(logging.WARNING)
 
 def test_bolum_sayisi_ve_benzersizlik() -> None:
     """BK5: bolum listesi eksiksiz ve anahtarlar/URL'ler benzersiz."""
-    assert len(SECTIONS) == 8
+    assert len(SECTIONS) == 9
 
     anahtarlar = [t.anahtar for t in SECTIONS]
     urller = [t.url_path for t in SECTIONS]
@@ -43,7 +43,7 @@ def test_bolum_sayisi_ve_benzersizlik() -> None:
 
 
 def test_bk5_zorunlu_bolumler_mevcut() -> None:
-    """BK5'te sozu gecen 7 bolum + Canli Veri kayit defterinde olmali."""
+    """BK5'te sozu gecen 7 bolum + Canli Veri + Ayarlar kayit defterinde olmali."""
     beklenen = {
         "ana_kontrol",
         "musteriler",
@@ -52,6 +52,7 @@ def test_bk5_zorunlu_bolumler_mevcut() -> None:
         "pazarlama",
         "abrakadabra",
         "yonetim",
+        "ayarlar",
     }
     assert beklenen.issubset({t.anahtar for t in SECTIONS})
 

@@ -1,0 +1,152 @@
+/* theme.css — UX-03: Design Token ve Theme Management System
+ *
+ * Amac: iki ayri degisken evrenini tek kaynaga baglamak.
+ *   - Legacy evren  : style.css `:root` (--bg, --panel-bg, --accent, --text-dim ...)
+ *   - Semantik evren: admin_tokens.css (--color-bg, --color-surface, --color-accent ...)
+ *
+ * Bu dosya legacy degiskenleri semantik token'lara KOPRULER. Boylece
+ * mevcut 450+ satirlik bilesen CSS'i hic degismeden tema degistirir.
+ *
+ * Yukleme sirasi (index.html):
+ *   admin_tokens.css -> style.css -> responsive.css -> theme.css
+ * Bu dosya en sonda olmalidir; ayrica `:root[data-theme=...]` (0,2,0) secicisi
+ * style.css'in `:root` (0,1,0) tanimini ozgulluk ile de yener.
+ *
+ * Tema durumu `<html data-theme="dark|light">` uzerinde tutulur; js/theme.js
+ * localStorage + `prefers-color-scheme` ile yonetir.
+ */
+
+/* ---------------------------------------------------------------
+ * 1) DARK — urunun varsayilan gorunumu (legacy paletin semantik hali)
+ * --------------------------------------------------------------- */
+:root[data-theme="dark"] {
+  --bg: var(--color-bg);
+  --sidebar-bg: var(--color-sidebar-bg);
+  --panel-bg: var(--color-surface);
+  --panel-hover: var(--color-surface-2);
+  --border: var(--color-border);
+  --border-light: var(--color-border-strong);
+  --text: var(--color-text);
+  --text-dim: var(--color-text-muted);
+  --text-muted: var(--color-text-subtle);
+  --accent: var(--color-accent);
+  --accent-glow: var(--color-accent-soft);
+  --green: var(--color-success);
+  --yellow: var(--color-warning);
+  --red: var(--color-danger);
+  --purple: var(--color-purple);
+  --cyan: var(--color-info);
+  --orange: var(--color-orange);
+}
+
+/* ---------------------------------------------------------------
+ * 2) LIGHT — ayni bilesenler, acik yuzey paleti
+ * --------------------------------------------------------------- */
+:root[data-theme="light"] {
+  --bg: var(--color-bg);
+  --sidebar-bg: var(--color-sidebar-bg);
+  --panel-bg: var(--color-surface);
+  --panel-hover: var(--color-surface-2);
+  --border: var(--color-border);
+  --border-light: var(--color-border-strong);
+  --text: var(--color-text);
+  --text-dim: var(--color-text-muted);
+  --text-muted: var(--color-text-subtle);
+  --accent: var(--color-accent);
+  --accent-glow: var(--color-accent-soft);
+  --green: var(--color-success);
+  --yellow: var(--color-warning);
+  --red: var(--color-danger);
+  --purple: var(--color-purple);
+  --cyan: var(--color-info);
+  --orange: var(--color-orange);
+}
+
+/* Light modda koyu zemine gore tasarlanmis efektleri yumusat. */
+:root[data-theme="light"] body {
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] body {
+  color-scheme: dark;
+}
+
+/* ---------------------------------------------------------------
+ * 3) Tema gecisi — ani renk sicramasini engelle (a11y: reduce'da kapali)
+ * --------------------------------------------------------------- */
+:root[data-theme] body {
+  transition: background-color var(--transition-normal),
+    color var(--transition-normal);
+}
+
+/* ---------------------------------------------------------------
+ * 4) Tema degistirme butonu (topbar)
+ * --------------------------------------------------------------- */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-width: 40px;
+  min-height: 40px;
+  padding: 0 var(--space-2);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-button);
+  background: transparent;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-fast),
+    color var(--transition-fast), border-color var(--transition-fast);
+}
+
+.theme-toggle:hover {
+  background: var(--color-accent-soft);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.theme-toggle:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.theme-toggle-label {
+  font-size: var(--font-size-xs);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* Aktif temaya gore yalniz ilgili ikon gorunur (JS sinif degistirmez). */
+:root[data-theme="dark"] .theme-toggle .theme-icon-sun {
+  display: inline-block;
+}
+
+:root[data-theme="dark"] .theme-toggle .theme-icon-moon {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-toggle .theme-icon-sun {
+  display: none;
+}
+
+:root[data-theme="light"] .theme-toggle .theme-icon-moon {
+  display: inline-block;
+}
+
+/* Dar ekranda etiketi gizle, ikon kalsin. */
+@media (max-width: 1024px) {
+  .theme-toggle-label {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------
+ * 5) Reduced motion — tema gecisi animasyonunu kapat
+ * --------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root[data-theme] body,
+  .theme-toggle {
+    transition: none !important;
+  }
+}

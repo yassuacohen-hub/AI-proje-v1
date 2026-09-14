@@ -1,23 +1,21 @@
-# Roo — Açık Eleştiri ve Risk Notları (Tüm Ajanlar Okusun)
+# Ortak Eleştiri ve Risk Defteri (Tüm Ajanlar Okusun ve Yazsın)
 
-> Son güncelleme: 2026-09-13
-> Yazan: roo · Kapsam: DASH-UX serisi + dashboard mimarisi
+> Son güncelleme: 2026-09-14
+> Kapsam: DASH-UX serisi + UX-01/02/03 + P7-46 + dashboard mimarisi
 > Amaç: Teslim edilen işlerde bilerek bırakılan eksikleri, tespit edilen
 > tutarsızlıkları ve diğer ajanları etkileyecek riskleri tek yerde toplamak.
 
-Bu dosya **kalıcı bir uyarı listesidir**. Bir madde çözüldüğünde satırı silmeyin;
-`Durum` sütununu `ÇÖZÜLDÜ (görev-id)` olarak güncelleyin — denetim izi kalsın.
+Bu dosya **kalıcı ve ortak bir uyarı listesidir**. Bir madde çözüldüğünde satırı
+silmeyin; `Durum` sütununu `ÇÖZÜLDÜ (görev-id)` olarak güncelleyin — denetim izi kalsın.
 
-## 5. Orkestratör Eleştirileri (Kilo)
+### Katkı Kuralı (tüm ajanlar için)
 
-| # | Konu | Açıklama | Etkilenen | Durum |
-|---|------|----------|-----------|-------|
-| O-01 | **P7-44 baslangic alanı yanlış dosya yolu** | P7-44 aslangic alanı web_dashboard/app.py diyor — böyle bir dosya yok. Kök pp.py Streamlit uygulamasıdır. Bu hatalı yol, panoya yazan ajanlarda kök dosya yolu doğrulaması gerektirir. | orkestratör, roo | ÇÖZÜLDÜ (P7-45 tarafından düzeltildi) |
-| O-02 | **P7-46 baslangic nonexistent dosyaya işaret ediyor** | P7-46 aslangic web_dashboard/tabs/admin_settings.py diyor — dosya yok. copilot bu dosyayı yazmamış. Görev açıklamasında hedef dosya yolu doğrulanmalı. | orkestratör, copilot | AÇIK |
-| O-03 | **SSE endpointi testi yok** | /api/intelligence/dashboard/stream (P7-45) için herhangi bir test yok. Endpoint backend'''de var ama Streamlit tarafı consume etmiyor. Backend-Frontend entegrasyonu kanıtlanmamış. | kilo | AÇIK |
-| O-04 | **Demo rozetli alanlar gerçek veriyi gizliyor** | data/demo/*.jsonl ile çalışan ekranlar (Paketler, Pazarlama, Canli Veri) DEMO rozetini gösterse bile kullanıcı gerçek ile demo arasındaki farkı anlayamayabilir. Demo vs gerçek ayrımı daha belirgin olmalı. | kilo, roo | AÇIK |
-| O-05 | **P7-44 kilit dosyası eksik** | DASH-UX-04 dosyalar alanında web_dashboard/tabs/paketler.py ve pazarlama.py var ama bunların backend servisleri (src/company_master/paketler.py, src/company_master/pazarlama.py) kilitlenmedi. UI kilitlendi ama backend kilitlemedi — tam tersi olmalı. | orkestratör, roo | AÇIK |
-| O-06 | **Task board format tutarsızlığı** | Bazı görevlerde aslangic string, bazıda liste. dosyalar bazıda dolu bazıda boş. Tutarlı format zorunlu olmalı. | orkestratör | AÇIK |
+1. Yeni madde eklerken ilgili bölümün **sonuna** satır ekleyin; mevcut satırları yeniden yazmayın.
+2. Kod (`K-`), Mimari (`M-`), Veri (`V-`), Süreç (`S-`), Orkestratör (`O-`) öneklerini kullanın;
+   numarayı o bölümdeki son numaranın bir fazlası yapın.
+3. `Etkilenen` sütununa kendi ajan adınızı ve etkilediğiniz ajanları yazın.
+4. Maddeyi göreve dönüştürmek **orkestratörün / sahibin** kararıdır; buraya yazmak görev açmak değildir.
+5. Sahip talimatı (2026-09-14): maddeler burada biriktirilir, **toplu değerlendirme sonrası** göreve dönüştürülür.
 
 ---
 
@@ -25,9 +23,10 @@ Bu dosya **kalıcı bir uyarı listesidir**. Bir madde çözüldüğünde satır
 
 | # | Konu | Açıklama | Etkilenen | Durum |
 |---|------|----------|-----------|-------|
-| K-01 | **Paketler ve Pazarlama sekmeleri ekrana bağlı değil** | DASH-UX-04'te [`web_dashboard/tabs/paketler.py`](../web_dashboard/tabs/paketler.py) ve [`web_dashboard/tabs/pazarlama.py`](../web_dashboard/tabs/pazarlama.py) yazıldı ve teste geçti; ancak görev kilit listesinde [`app.py`](../app.py) olmadığı için sidebar bağlantısı yapılamadı. Kullanıcı hâlâ `⏳ hazırlanıyor` yer tutucusu görüyor. **Yazılmış kod kullanıcıya görünmüyor.** | roo, orkestratör | AÇIK → P7-44 kapsamında çözülecek |
+| K-01 | **Paketler ve Pazarlama sekmeleri ekrana bağlı değil** | DASH-UX-04'te [`web_dashboard/tabs/paketler.py`](../web_dashboard/tabs/paketler.py) ve [`web_dashboard/tabs/pazarlama.py`](../web_dashboard/tabs/pazarlama.py) yazıldı ve teste geçti; ancak görev kilit listesinde [`app.py`](../app.py) olmadığı için sidebar bağlantısı yapılamadı. Kullanıcı hâlâ `⏳ hazırlanıyor` yer tutucusu görüyor. **Yazılmış kod kullanıcıya görünmüyor.** | roo, orkestratör | **ÇÖZÜLDÜ (P7-44)** — Navigasyon tek kaynağa taşındı: [`SECTIONS`](../web_dashboard/tabs/__init__.py:78). Sidebar ve yönlendirme aynı listeden üretiliyor, bu yüzden "kod var ama ekranda yok" durumu yapısal olarak imkânsız. [`tests/test_dashboard_nav.py`](../tests/test_dashboard_nav.py) her hazır bölümün çağrılabilir bir render fonksiyonuna çözümlendiğini doğruluyor (15 test). |
 | K-02 | **Müşteri listesi + filtre + bildirim bloğu kayboldu** | DASH-UX-01'de [`app.py`](../app.py) yeniden yazılırken eski firma listesi, filtre paneli ve bildirim bloğu yeni yapıya taşınmadı. Eğer COP-26 ("MÜŞTERİLER ekranı") bunu karşılamıyorsa işlevsel gerileme var. | copilot, roo | AÇIK — COP-26 çıktısıyla karşılaştırılmalı |
-| K-03 | **Görev tanımındaki dosya yolu gerçekte yok** | P7-44 `baslangic` alanı `web_dashboard/app.py` diyor; fakat böyle bir dosya yok, Streamlit uygulaması kökteki [`app.py`](../app.py). Panoya yol yazan ajanlar yolu doğrulamadan yazıyor; bu yanlış dosya oluşturulmasına yol açabilir. | tüm ajanlar | AÇIK — pano girdilerinde yol doğrulaması yapılmalı |
+| K-03 | **Görev tanımındaki dosya yolu gerçekte yok** | P7-44 `baslangic` alanı `web_dashboard/app.py` diyor; fakat böyle bir dosya yok, Streamlit uygulaması kökteki [`app.py`](../app.py). Panoya yol yazan ajanlar yolu doğrulamadan yazıyor; bu yanlış dosya oluşturulmasına yol açabilir. | tüm ajanlar | **KISMEN** — P7-44'te doğru dosya (kök `app.py`) kilitlendi ve görev notuna yazıldı; panodaki hatalı `baslangic` değeri düzeltilmedi. Kalıcı çözüm önerisi: `gorev_ekle`/`gorev_at` içinde `baslangic` + `dosyalar` yollarının diskte var olup olmadığını kontrol eden bir uyarı. |
+| K-04 | **Kullanıcı ayarları kaydediliyor ama hiçbir ekran onları okumuyor** | P7-46 ile [`src/company_master/settings/user_settings.py`](../src/company_master/settings/user_settings.py) ve [`render_ayarlar_tab()`](../web_dashboard/tabs/admin_panel.py:137) yazıldı; 13 ayar kalıcı olarak diske yazılıyor. Ancak tüketen taraf yok: [`admin_auto_refresh.py`](../web_dashboard/tabs/admin_auto_refresh.py) hâlâ kendi `REFRESH_INTERVALS` sabitini ve `st.session_state`'i kullanıyor; KVKK maskeleme, sayfa boyutu, varsayılan bölüm, tema ve dil ayarları hiçbir ekranda okunmuyor. **Kullanıcı ayarı değiştiriyor, ekranda hiçbir şey değişmiyor** — panel şu an kozmetik. Önerilen kapsam: her ayar için tüketici nokta belirlenip `ayarlari_getir()` çağrısıyla bağlanması, en az `otomatik_yenileme`/`yenileme_araligi`/`kvkk_maskeleme`/`sayfa_boyutu`/`varsayilan_bolum` ile başlanması. | roo, kilo, orkestratör | AÇIK — sahip kararıyla göreve dönüştürülecek (şimdilik bekletiliyor) |
 
 ## 2. Mimari / Tutarlılık
 
@@ -53,17 +52,21 @@ Bu dosya **kalıcı bir uyarı listesidir**. Bir madde çözüldüğünde satır
 | S-02 | **Teslim özetleri doğrulama kanıtı içermeli** | `py_compile` tek başına yeterli değil. Teslimde en az bir çalıştırma/test kanıtı (`pytest` sonucu veya veri akışı çıktısı) verilmeli; aksi halde onaylayan kontrolör körlemesine onaylıyor. | tüm ajanlar | ÖNERİ |
 | S-03 | **Türkçe karakter bozulması riski** | [`ana_kontrol.py`](../web_dashboard/tabs/ana_kontrol.py) içinde Kiril `д` harfiyle yazılmış `Trenд` bulundu ve düzeltildi. Kopyala-yapıştır kaynaklı bu tür bozulmalar gözle fark edilmiyor — dosya kaydetmeden önce UTF-8 ve karakter kontrolü yapın. | tüm ajanlar | ÇÖZÜLDÜ (DASH-UX-01) — kural olarak geçerli |
 | S-04 | **Bekleyen kullanıcı sorusu** | `pip install "headroom-ai[proxy]"` talebi hâlâ askıda; bağımlılık eklemek onay gerektirdiği için kurulmadı. | roo | AÇIK — sahibe sorulacak |
+| S-05 | **Tek bozuk kayıt tüm panoyu çökertiyordu** | `WIKI-01` görevinde `oncelik` alanı yoktu. [`_md_yaz()`](../src/company_master/orchestrator/task_board.py:511) ve [`agent_sync_olustur()`](../src/company_master/orchestrator/task_board.py:363) alanlara doğrudan `t['oncelik']` ile eriştiği için **her ajanın** her pano yazımı `KeyError: 'oncelik'` ile çöküyordu (P7-44 teslimi sırasında yakalandı). Tüm erişimler `.get(..., '-')` ile sağlamlaştırıldı. **Bu O-06'nın somut sonucudur.** Kalıcı çözüm önerisi: `gorev_ekle` içinde zorunlu alan şeması (task_id/baslik/sahip/oncelik/durum) doğrulaması + eksik alanları varsayılanla dolduran tek bir normalize fonksiyonu. | tüm ajanlar, orkestratör | **ÇÖZÜLDÜ (P7-44)** — savunma amaçlı düzeltme yapıldı; şema doğrulaması hâlâ AÇIK |
+| S-06 | **`gorev_kutusu.py al` panodaki göreve çalışmıyor** | Panoya doğrudan eklenmiş (`source: ic`) görevlerde posta kutusunda tetik olmadığı için `al` komutu "bekleyen tetik yok" diyor; ajan görevi ancak `task_board.gorev_guncelle(...)` ile üstüne alabiliyor. İki farklı yol olması ajanı yanıltıyor. Öneri: `al` komutu tetik bulamazsa panoya bakıp görev o ajana atanmışsa doğrudan aktifleştirsin. | tüm ajanlar, orkestratör | AÇIK |
+| S-07 | **Otomatik onay, "onaysız done olmaz" kuralını fiilen delebiliyor** | P7-44 teslimi `oto-nobetci` tarafından 29 saniye içinde otomatik onaylandı; insan/kontrolör incelemesi olmadan `done` oldu. Kural metni "onaysız done geçersizdir" derken pratikte otomatik onay devrede. Ya kural metni otomatik onayı açıkça tanımlamalı ya da kritik (P0/P1) görevler otomatik onay dışında tutulmalı. | orkestratör | AÇIK — sahibin kararı gerekli |
+| S-08 | **Kullanıcı kimliği zayıf: herkes aynı `misafir` dosyasını paylaşıyor** | P7-46'daki [`aktif_kullanici()`](../web_dashboard/tabs/admin_panel.py:75) oturumdan sırasıyla `admin_email` → `user_email` → `kullanici_id` arıyor; hiçbiri yoksa sabit `misafir` kimliğine düşüyor. Streamlit oturumunda bu alanlar çoğu akışta dolmadığı için pratikte **tüm kullanıcılar `data/user_settings/misafir.json` dosyasını paylaşır**; biri ayarı değiştirince diğerininki de değişir. Ayrıca ayarlar kullanıcıya değil tarayıcı oturumuna bağlı görünür. Kalıcı çözüm: kimliğin [`company_master.auth.session`](../src/company_master/auth/session.py) üzerinden çözülmesi ve kimlik yoksa panelin salt-okunur/uyarılı çalışması. Geçici azaltma: panelde "misafir modunda ayarlar paylaşılır" uyarısı. | roo, kilo, orkestratör | AÇIK — sahip kararıyla göreve dönüştürülecek (şimdilik bekletiliyor) |
 
 ## 5. Orkestratör Eleştirileri (Kilo)
 
 | # | Konu | Açıklama | Etkilenen | Durum |
 |---|------|----------|-----------|-------|
-| O-01 | **P7-44 baslangic alanı yanlış dosya yolu** | P7-44 aslangic alanı web_dashboard/app.py diyor — böyle bir dosya yok. Kök pp.py Streamlit uygulamasıdır. Bu hatalı yol, panoya yazan ajanlarda kök dosya yolu doğrulaması gerektirir. | orkestratör, roo | ÇÖZÜLDÜ (P7-45 tarafından düzeltildi) |
-| O-02 | **P7-46 baslangic nonexistent dosyaya işaret ediyor** | P7-46 aslangic web_dashboard/tabs/admin_settings.py diyor — dosya yok. copilot bu dosyayı yazmamış. Görev açıklamasında hedef dosya yolu doğrulanmalı. | orkestratör, copilot | AÇIK |
-| O-03 | **SSE endpointi testi yok** | /api/intelligence/dashboard/stream (P7-45) için herhangi bir test yok. Endpoint backend'''de var ama Streamlit tarafı consume etmiyor. Backend-Frontend entegrasyonu kanıtlanmamış. | kilo | AÇIK |
+| O-01 | **P7-44 başlangıc alanı yanlış dosya yolu** | P7-44 başlangıc alanı web_dashboard/app.py diyor — böyle bir dosya yok. Kök app.py Streamlit uygulamasıdır. Bu hatalı yol, panoya yazan ajanlarda kök dosya yolu doğrulaması gerektirir. | orkestratör, roo | ÇÖZÜLDÜ (P7-45 tarafından düzeltildi) |
+| O-02 | **P7-46 baslangic nonexistent dosyaya işaret ediyor** | P7-46 başlangıc web_dashboard/tabs/admin_settings.py diyor — dosya yok. copilot bu dosyayı yazmamış. Görev açıklamasında hedef dosya yolu doğrulanmalı. | orkestratör, copilot | **KISMEN (P7-46)** — iş, panoda kilitli olan gerçek dosya [`web_dashboard/tabs/admin_panel.py`](../web_dashboard/tabs/admin_panel.py) üzerinde yapıldı; `admin_settings.py` oluşturulmadı. Panodaki hatalı `baslangic` değeri hâlâ düzeltilmedi (K-03 ile aynı kök neden). |
+| O-03 | **SSE endpointi testi yok** | /api/intelligence/dashboard/stream (P7-45) için herhangi bir test yok. Endpoint backend'de var ama Streamlit tarafı consume etmiyor. Backend-Frontend entegrasyonu kanıtlanmamış. | kilo | AÇIK |
 | O-04 | **Demo rozetli alanlar gerçek veriyi gizliyor** | data/demo/*.jsonl ile çalışan ekranlar (Paketler, Pazarlama, Canli Veri) DEMO rozetini gösterse bile kullanıcı gerçek ile demo arasındaki farkı anlayamayabilir. Demo vs gerçek ayrımı daha belirgin olmalı. | kilo, roo | AÇIK |
 | O-05 | **P7-44 kilit dosyası eksik** | DASH-UX-04 dosyalar alanında web_dashboard/tabs/paketler.py ve pazarlama.py var ama bunların backend servisleri (src/company_master/paketler.py, src/company_master/pazarlama.py) kilitlenmedi. UI kilitlendi ama backend kilitlemedi — tam tersi olmalı. | orkestratör, roo | AÇIK |
-| O-06 | **Task board format tutarsızlığı** | Bazı görevlerde aslangic string, bazıda liste. dosyalar bazıda dolu bazıda boş. Tutarlı format zorunlu olmalı. | orkestratör | AÇIK |
+| O-06 | **Task board format tutarsızlığı** | Bazı görevlerde başlangıc string, bazıda liste. dosyalar bazıda dolu bazıda boş. Tutarlı format zorunlu olmalı. | orkestratör | ÇÖZÜLDÜ (FIX-ID-01) |
 
 ---
 
@@ -73,3 +76,14 @@ Bu dosya **kalıcı bir uyarı listesidir**. Bir madde çözüldüğünde satır
 2. Bir sekme dosyası yazmak yetmez; `app.py`'de yönlendirmesi yoksa kullanıcı göremez.
 3. Görev açarken `dosyalar` alanına yolu yazmadan önce dosyanın **var olduğunu doğrulayın**.
 4. Demo veriyle çalışan her ekran DEMO rozetini korumalı.
+5. Bir **ayar** yazmak yetmez; onu okuyan bir ekran yoksa kullanıcı için hiçbir şey değişmez (K-04).
+6. Kullanıcıya özel veri yazarken kimliğin gerçekten çözüldüğünden emin olun; `misafir` düşüşü veriyi paylaştırır (S-08).
+
+---
+
+## Devredilen / Başka Ajanda Olan Konular
+
+| Konu | Sorumlu | Not |
+|------|---------|-----|
+| Onay kuyruğunun birikmesi (UX-01, UX-02, UX-03, ROO-UX-ADMIN-01, ORCH-13, P7-46 `review`'da bekliyor) | cline (aktif orkestratör) | roo yalnızca sonucu gözlemler; onay verilmedikçe kilitler düşmez |
+| `scripts/gorev_at.py pano` çıktısının okunaksız olması + pano kayıtlarında `id` alanının `None` dönmesi | cline (aktif orkestratör) | Düzeltme sonrası roo tekrar test eder |
