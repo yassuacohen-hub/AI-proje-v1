@@ -253,7 +253,7 @@ def _render_baslik(demo_mu: bool) -> None:
             "🔄 Veriyi Yenile",
             key="pazarlama_yenile",
             type="primary",
-            use_container_width=True,
+            width="stretch",
             help="Önbelleği temizler ve kampanya/segment verisini yeniden yükler.",
         )
     with col_rehber:
@@ -382,7 +382,7 @@ def _render_kampanyalar(kampanyalar: list[dict[str, Any]], demo_mu: bool) -> Non
             }
         )
     df = pd.DataFrame(satirlar)
-    st.dataframe(df, use_container_width=True, hide_index=True)
+    st.dataframe(df, width="stretch", hide_index=True)
     st.caption("📊 Hangi kampanya ne kadar bütçeyle ne kadar dönüşüm getirdi?")
 
     butce_df = df[df["Bütçe (₺)"] > 0]
@@ -417,7 +417,7 @@ def _render_segmentler(segmentler: list[dict[str, Any]], demo_mu: bool) -> None:
                 st.caption(f"Segmentte {len(firmalar)} firma var.")
                 st.dataframe(
                     pd.DataFrame(firmalar),
-                    use_container_width=True,
+                    width="stretch",
                     hide_index=True,
                 )
             else:
@@ -449,7 +449,7 @@ def _render_segment_kampanya_eslesme(
                 "Aktif": "Evet" if seg.get("is_active") else "Hayır",
             }
         )
-    st.dataframe(pd.DataFrame(satirlar), use_container_width=True, hide_index=True)
+    st.dataframe(pd.DataFrame(satirlar), width="stretch", hide_index=True)
     bos = [s for s in satirlar if s["Durum"].startswith("🟡")]
     if bos:
         st.warning(

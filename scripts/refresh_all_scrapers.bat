@@ -2,7 +2,8 @@
 chcp 65001 >nul
 setlocal
 
-cd /d "C:\Projeler\Huginn Data Insights"
+REM 2026-09-14: Sabit yol yerine script konumuna gore kok (tasinabilir).
+cd /d "%~dp0.."
 
 echo [%date% %time%] Scrape refresh basliyor... >> logs\refresh_all_scrapers.log
 

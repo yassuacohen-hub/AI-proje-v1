@@ -244,7 +244,7 @@ def render_webhook_monitor_tab() -> None:
 
         d1, d2 = st.columns([1, 2])
         with d1:
-            st.bar_chart(status_df.set_index("Durum")["Adet"], use_container_width=True)
+            st.bar_chart(status_df.set_index("Durum")["Adet"], width="stretch")
         with d2:
             try:
                 import plotly.express as px
@@ -257,9 +257,9 @@ def render_webhook_monitor_tab() -> None:
                     color="Durum",
                 )
                 fig.update_layout(height=300, margin=dict(t=40, b=20))
-                st.plotly_chart(fig, use_container_width=True)
+                st.plotly_chart(fig, width="stretch")
             except ImportError:
-                st.bar_chart(status_df.set_index("Durum")["Adet"], use_container_width=True)
+                st.bar_chart(status_df.set_index("Durum")["Adet"], width="stretch")
     else:
         st.info("Henüz webhook olay kaydı bulunmuyor.")
 
@@ -270,7 +270,7 @@ def render_webhook_monitor_tab() -> None:
         err_df = pd.DataFrame(
             [{"Hata Türü": k, "Adet": v} for k, v in stats["hata_turleri"].items()]
         ).sort_values("Adet", ascending=False)
-        st.bar_chart(err_df.set_index("Hata Türü")["Adet"], use_container_width=True)
+        st.bar_chart(err_df.set_index("Hata Türü")["Adet"], width="stretch")
 
     # --- DLQ Girdileri ---
     if stats["dlq_girdileri"]:
@@ -291,7 +291,7 @@ def render_webhook_monitor_tab() -> None:
             )
         dlq_df = pd.DataFrame(dlq_rows)
         if not dlq_df.empty:
-            st.dataframe(dlq_df, use_container_width=True, hide_index=True)
+            st.dataframe(dlq_df, width="stretch", hide_index=True)
             st.caption(
                 f"Toplam {stats['dlq_toplam']} DLQ kaydı gösteriliyor (son 50)."
             )

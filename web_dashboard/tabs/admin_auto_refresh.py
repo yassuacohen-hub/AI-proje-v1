@@ -46,10 +46,10 @@ def render_auto_refresh() -> None:
 
     with col_btn:
         if st.session_state.auto_refresh_enabled:
-            if st.button("⏹ Otomatik Yenileme: KAPALI", type="primary", use_container_width=True):
+            if st.button("⏹ Otomatik Yenileme: KAPALI", type="primary", width="stretch"):
                 st.session_state.auto_refresh_enabled = False
         else:
-            if st.button("▶️ Otomatik Yenileme: AÇIK", type="primary", use_container_width=True):
+            if st.button("▶️ Otomatik Yenileme: AÇIK", type="primary", width="stretch"):
                 st.session_state.auto_refresh_enabled = True
 
     with col_status:

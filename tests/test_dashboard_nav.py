@@ -34,7 +34,8 @@ logging.disable(logging.WARNING)
 
 def test_bolum_sayisi_ve_benzersizlik() -> None:
     """BK5: bolum listesi eksiksiz ve anahtarlar/URL'ler benzersiz."""
-    assert len(SECTIONS) == 9
+    # 9 temel bolum + Denetim (DASH-08) + Yukleme Durumlari (P7-42) = 11
+    assert len(SECTIONS) == 11
 
     anahtarlar = [t.anahtar for t in SECTIONS]
     urller = [t.url_path for t in SECTIONS]
@@ -79,7 +80,8 @@ def test_gruplar_tum_bolumleri_kapsar() -> None:
     gruplama = gruplar()
     toplam = sum(len(v) for v in gruplama.values())
     assert toplam == len(SECTIONS)
-    assert len(gruplama) == 2
+    # Huginn + Muninn en az iki grup; yeni gruplar eklenebilir (kırılgan == yerine >=).
+    assert len(gruplama) >= 2
 
 
 @pytest.mark.parametrize("tanim", [t for t in SECTIONS if t.hazir], ids=lambda t: t.anahtar)

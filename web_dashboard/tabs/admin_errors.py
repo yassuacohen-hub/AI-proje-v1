@@ -76,10 +76,10 @@ def render_error_page(error_code: str, details: str = "") -> None:
 
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("🏠 Ana Sayfaya Dön", type="primary", use_container_width=True):
+        if st.button("🏠 Ana Sayfaya Dön", type="primary", width="stretch"):
             st.rerun()
     with col2:
-        if st.button("📧 Destek İletişimi", use_container_width=True):
+        if st.button("📧 Destek İletişimi", width="stretch"):
             st.info("Destek ekibimize haber verin: destek@huginn.local")
 
 
@@ -97,7 +97,7 @@ def render_errors_tab() -> None:
         key="error_type_select",
     )
 
-    if st.button("▶️ Hata Sayfasını Görüntüle", type="primary", use_container_width=True):
+    if st.button("▶️ Hata Sayfasını Görüntüle", type="primary", width="stretch"):
         render_error_page(error_type)
 
     st.divider()
@@ -110,7 +110,7 @@ def render_errors_tab() -> None:
         key="error_demo",
     )
 
-    if st.button("🔥 Hatayı Simüle Et", type="primary", use_container_width=True):
+    if st.button("🔥 Hatayı Simüle Et", type="primary", width="stretch"):
         if "404" in demo:
             raise ValueError("404 — Simüle hata")
         elif "500" in demo:

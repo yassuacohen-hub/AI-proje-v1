@@ -118,7 +118,7 @@ def render_export_tab() -> None:
 
     if df is not None and not df.empty:
         st.success(f"✅ {len(df)} kayit yuklendi")
-        st.dataframe(df.head(100), use_container_width=True, hide_index=True)
+        st.dataframe(df.head(100), width="stretch", hide_index=True)
 
         col_csv, col_excel = st.columns(2)
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

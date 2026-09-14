@@ -103,6 +103,71 @@ quick_scrape  →  parse_html  →  filter_rules  →  Obsidian kaydı
 - Proxy çalışmazsa → otomatik fallback default pool’a geçer (loglanır).
 
 ---
+
+## Ticari İstihbarat (Commercial Intelligence)
+
+Bu beceri, şirket araştırma ve ticari istihbarat görevleri için de kullanılır.
+
+### Şirket Araştırması
+
+- Şirket web siteleri, kariyer sayfaları, hakkımızda sayfaları incelenir.
+- Organizasyon yapıları analiz edilir.
+- İş modelleri belirlenir.
+- Şirket ilişkileri çıkarılır.
+- İştirak ve holding yapıları eşleştirilir.
+- Büyüme sinyalleri tespit edilir.
+- Operasyonel değişimler analiz edilir.
+- Yönetim değişiklikleri izlenir.
+
+---
+
+## Açık Kaynak İstihbaratı (OSINT)
+
+Aşağıdaki kaynaklardan veri toplayabilir, ilişkilendirebilir ve analiz edebilir:
+
+### Kurumsal Kaynaklar
+
+- Şirket Web Siteleri
+- Kariyer Sayfaları
+- Hakkımızda Sayfaları
+- Basın Bültenleri
+- Faaliyet Raporları
+- Sürdürülebilirlik Raporları
+- Kurumsal Bloglar
+
+### Resmi Kaynaklar
+
+- Ticaret Sicil Kayıtları
+- Ticaret Sicil Gazetesi
+- MERSİS
+- KAP
+- Kamu İhale Verileri
+- Resmi Gazete
+- Patent ve Marka Verileri
+
+### Haber Kaynakları
+
+- Ekonomi Haberleri
+- Finans Haberleri
+- Sektörel Yayınlar
+- Basın Duyuruları
+- Yatırım Haberleri
+
+### Sosyal Medya Kaynakları
+
+- LinkedIn
+- X
+- Facebook
+- Instagram
+- Youtube
+- Medium
+
+### Teknoloji Kaynakları
+
+- GitHub
+- GitLab
+- Docker
+---
 *Skill bu havuzda her ajan tarafından paylaşılır. Orijinal marketplace
 referansı: `.agents/marketplace/skills/web-design-guidelines/` (UI) ve
 `content-research-writer/` (iş modeli adaptasyonu).*

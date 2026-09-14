@@ -53,21 +53,6 @@ MUAF: dict[str, str] = {
 #   - Liste dosyada durdugu icin bulgu unutulmaz / gomulmez.
 # Bir kaydi buradan silmeden once ya SECTIONS'a bagla ya MUAF'a tasi.
 BILINEN_ACIK: dict[str, str] = {
-    "render_audit_tab": (
-        "DASH-08 Denetim sekmesi (216 satir + testi var) yazilmis ama hicbir "
-        "navigasyon kaydi yok. Karar bekliyor: SECTIONS'a ayri bolum mu, "
-        "yoksa Yonetim sekmesine alt sekme mi?"
-    ),
-    "render_decision_tab": (
-        "MUKERRER: app.py icindeki `render_karar_defteri()` ayni isi kendi "
-        "kodu ile yapiyor, tabs/admin_panel.py surumunu cagirmiyor. Iki "
-        "implementasyondan biri silinmeli (tercih: app.py'dekini kaldirip "
-        "buna baglamak)."
-    ),
-    "render_loading_tab": (
-        "P7-42 loading/skeleton gosterim ekrani. Urun sekmesi mi yoksa sadece "
-        "gelistirici demosu mu oldugu netlesmedi; demo ise MUAF'a tasinacak."
-    ),
 }
 
 

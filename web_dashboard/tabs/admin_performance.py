@@ -160,7 +160,7 @@ def render_performance_tab() -> None:
         slow_queries = perf.get("slow_queries", [])
         if slow_queries:
             sq_df = pd.DataFrame(slow_queries)
-            st.dataframe(sq_df, use_container_width=True, hide_index=True)
+            st.dataframe(sq_df, width="stretch", hide_index=True)
             st.caption(f"Toplam yavaş sorgu: {len(slow_queries)}")
         else:
             st.success("Yavaş sorgu tespit edilmedi.")
@@ -175,7 +175,7 @@ def render_performance_tab() -> None:
             pm_df = pd.DataFrame(
                 [{"Metrik": k, "Değer": v} for k, v in huginn_keys.items()]
             )
-            st.dataframe(pm_df, use_container_width=True, hide_index=True)
+            st.dataframe(pm_df, width="stretch", hide_index=True)
         else:
             st.info("Huginn metrikleri bulunamadı.")
 

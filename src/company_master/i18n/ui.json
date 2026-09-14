@@ -1,0 +1,602 @@
+{
+  "_aciklama": "MRK-02d — Islevsel arayuz metinleri. `veri` katmani KURU ve MITOLOJISIZDIR; yalnizca `h1_*` ve isaretli anlatisal kayitlar `cerceve` katmanindadir. Kaynak: AI proje v1/V10/14_urun_yuzeyleri_sitemap.md (Bolum 3-4).",
+
+  "menu_genel_bakis": {
+    "tr": "Genel Bakış",
+    "en": "Overview",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "dashboard"
+  },
+  "menu_kpi": {
+    "tr": "KPI Özeti",
+    "en": "KPI Summary",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "insights"
+  },
+  "menu_saglik": {
+    "tr": "Sistem Sağlığı",
+    "en": "System Health",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "monitor_heart"
+  },
+  "menu_canli": {
+    "tr": "Canlı Durum",
+    "en": "Live Status",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "sensors"
+  },
+  "menu_hatalar": {
+    "tr": "Hata Bildirimleri",
+    "en": "Error Reports",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "error"
+  },
+
+  "menu_musteri_grup": {
+    "tr": "Müşteri ve Kullanıcı",
+    "en": "Customers & Users",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "groups"
+  },
+  "menu_musteriler": {
+    "tr": "Müşteri Listesi",
+    "en": "Customer List",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "business"
+  },
+  "menu_kullanicilar": {
+    "tr": "Kullanıcı Yönetimi",
+    "en": "User Management",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "manage_accounts"
+  },
+  "menu_karar_defteri": {
+    "tr": "Karar Defteri",
+    "en": "Decision Log",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "gavel"
+  },
+
+  "menu_veri_grup": {
+    "tr": "Veri ve Kalite",
+    "en": "Data & Quality",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "database"
+  },
+  "menu_kalite": {
+    "tr": "Kalite Skoru",
+    "en": "Quality Score",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "verified"
+  },
+  "menu_realtime": {
+    "tr": "Canlı Veri Akışı",
+    "en": "Live Data Stream",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "stream"
+  },
+  "menu_arama": {
+    "tr": "Global Arama",
+    "en": "Global Search",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "search"
+  },
+  "menu_export": {
+    "tr": "Veri Dışa Aktarma",
+    "en": "Data Export",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "download"
+  },
+
+  "menu_sistem_grup": {
+    "tr": "Sistem ve Altyapı",
+    "en": "System & Infrastructure",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "settings_suggest"
+  },
+  "menu_maliyet": {
+    "tr": "Maliyet",
+    "en": "Cost",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "payments"
+  },
+  "menu_performans": {
+    "tr": "Performans",
+    "en": "Performance",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "speed"
+  },
+  "menu_api": {
+    "tr": "API Analitiği",
+    "en": "API Analytics",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "api"
+  },
+  "menu_webhook": {
+    "tr": "Webhook İzleme",
+    "en": "Webhook Monitoring",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "webhook"
+  },
+  "menu_dlq": {
+    "tr": "Kuyruk Hataları",
+    "en": "Queue Failures",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "queue"
+  },
+  "menu_yenileme": {
+    "tr": "Otomatik Yenileme",
+    "en": "Auto Refresh",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "autorenew"
+  },
+
+  "menu_guvenlik_grup": {
+    "tr": "Güvenlik ve Denetim",
+    "en": "Security & Audit",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "shield"
+  },
+  "menu_denetim": {
+    "tr": "Denetim Kaydı",
+    "en": "Audit Log",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "fact_check"
+  },
+  "menu_kimlik": {
+    "tr": "Kimlik ve Yetki",
+    "en": "Identity & Access",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "badge"
+  },
+
+  "menu_ayar_grup": {
+    "tr": "Ayarlar ve Geliştirici",
+    "en": "Settings & Developer",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "tune"
+  },
+  "menu_ayarlar": {
+    "tr": "Kullanıcı Ayarları",
+    "en": "User Settings",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "settings"
+  },
+  "menu_loading": {
+    "tr": "Yükleme Durumları",
+    "en": "Loading States",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "hourglass_top"
+  },
+  "menu_yonetim": {
+    "tr": "Yönetim",
+    "en": "Management",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "admin_panel_settings"
+  },
+  "menu_sistem_bilesik": {
+    "tr": "Sistem",
+    "en": "System",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "dns"
+  },
+
+  "menu_h_ana": {
+    "tr": "Ana Kontrol",
+    "en": "Main Control",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "home"
+  },
+  "menu_h_kesif": {
+    "tr": "Firma Keşfi",
+    "en": "Company Discovery",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "travel_explore"
+  },
+  "menu_h_arama": {
+    "tr": "Firma Arama",
+    "en": "Company Search",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "search"
+  },
+  "menu_h_eslestirme": {
+    "tr": "Eşleştirme",
+    "en": "Matching",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "join_inner"
+  },
+  "menu_h_sinyal": {
+    "tr": "Sinyal Panosu",
+    "en": "Signal Board",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "podcasts"
+  },
+  "menu_h_nace": {
+    "tr": "Sektör Dağılımı",
+    "en": "Sector Distribution",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "donut_small"
+  },
+  "menu_h_saglik": {
+    "tr": "Veri Sağlığı",
+    "en": "Data Health",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "health_and_safety"
+  },
+  "menu_h_paketler": {
+    "tr": "Paketler",
+    "en": "Packages",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "inventory_2"
+  },
+  "menu_h_pazarlama": {
+    "tr": "Pazarlama",
+    "en": "Marketing",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "campaign"
+  },
+  "menu_h_ai": {
+    "tr": "Yapay Zekâ Asistanı",
+    "en": "AI Assistant",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "smart_toy"
+  },
+
+  "menu_m_musteriler": {
+    "tr": "Müşteriler",
+    "en": "Customers",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "group"
+  },
+  "menu_m_abrakadabra": {
+    "tr": "Abrakadabra",
+    "en": "Abracadabra",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "auto_awesome"
+  },
+  "menu_m_canli_veri": {
+    "tr": "Canlı Veri",
+    "en": "Live Data",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "sensors"
+  },
+  "menu_m_denetim": {
+    "tr": "Denetim",
+    "en": "Audit",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "fact_check"
+  },
+  "menu_m_ayarlar": {
+    "tr": "Ayarlar",
+    "en": "Settings",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "tune"
+  },
+
+  "h1_genel_bakis": {
+    "tr": "Odin'in Tahtı",
+    "en": "Odin's Throne",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "chair"
+  },
+  "h1_musteri": {
+    "tr": "Muninn'in Defteri",
+    "en": "Muninn's Ledger",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "menu_book"
+  },
+  "h1_veri": {
+    "tr": "Huginn'in Gözü",
+    "en": "Huginn's Eye",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "visibility"
+  },
+  "h1_sistem": {
+    "tr": "Odin Çekirdeği",
+    "en": "Odin Core",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "memory"
+  },
+  "h1_guvenlik": {
+    "tr": "Muninn'in Hafızası",
+    "en": "Muninn's Memory",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "history_edu"
+  },
+  "h1_ayar": {
+    "tr": "Bifröst Ayarları",
+    "en": "Bifröst Settings",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "hub"
+  },
+
+  "eylem_kaydet": {
+    "tr": "Kaydet",
+    "en": "Save",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "save"
+  },
+  "eylem_iptal": {
+    "tr": "İptal",
+    "en": "Cancel",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "close"
+  },
+  "eylem_sil": {
+    "tr": "Sil",
+    "en": "Delete",
+    "katman": "veri",
+    "ton": "danger",
+    "ikon": "delete"
+  },
+  "eylem_yenile": {
+    "tr": "Yenile",
+    "en": "Refresh",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "refresh"
+  },
+  "eylem_disa_aktar": {
+    "tr": "Dışa Aktar",
+    "en": "Export",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "download"
+  },
+  "eylem_ara": {
+    "tr": "Ara",
+    "en": "Search",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "search"
+  },
+  "eylem_filtrele": {
+    "tr": "Filtrele",
+    "en": "Filter",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "filter_alt"
+  },
+  "eylem_detay": {
+    "tr": "Detay",
+    "en": "Details",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "open_in_new"
+  },
+  "eylem_geri": {
+    "tr": "Geri",
+    "en": "Back",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "arrow_back"
+  },
+  "eylem_devam": {
+    "tr": "Devam Et",
+    "en": "Continue",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "arrow_forward"
+  },
+
+  "durum_aktif": {
+    "tr": "Aktif",
+    "en": "Active",
+    "katman": "veri",
+    "ton": "success"
+  },
+  "durum_pasif": {
+    "tr": "Pasif",
+    "en": "Inactive",
+    "katman": "veri",
+    "ton": "neutral"
+  },
+  "durum_bekliyor": {
+    "tr": "Bekliyor",
+    "en": "Pending",
+    "katman": "veri",
+    "ton": "warning"
+  },
+  "durum_basarili": {
+    "tr": "Başarılı",
+    "en": "Succeeded",
+    "katman": "veri",
+    "ton": "success"
+  },
+  "durum_hata": {
+    "tr": "Hata",
+    "en": "Failed",
+    "katman": "veri",
+    "ton": "danger"
+  },
+  "durum_uyari": {
+    "tr": "Uyarı",
+    "en": "Warning",
+    "katman": "veri",
+    "ton": "warning"
+  },
+
+  "veri_kayit_yok": {
+    "tr": "Kayıt bulunamadı.",
+    "en": "No records found.",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "inbox"
+  },
+  "veri_sonuc_sayisi": {
+    "tr": "{sayi} kayıt listeleniyor.",
+    "en": "Showing {sayi} records.",
+    "katman": "veri",
+    "ton": "neutral"
+  },
+  "veri_yukleniyor": {
+    "tr": "Yükleniyor…",
+    "en": "Loading…",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "hourglass_top"
+  },
+  "veri_guncellendi": {
+    "tr": "Güncellendi: {zaman}",
+    "en": "Updated: {zaman}",
+    "katman": "veri",
+    "ton": "neutral",
+    "ikon": "schedule"
+  },
+
+  "odin_baglanti_koptu": {
+    "tr": "Bağlantı kesildi (503). Yeniden deneniyor.",
+    "en": "Connection lost (503). Retrying.",
+    "katman": "veri",
+    "ton": "danger",
+    "ikon": "cloud_off"
+  },
+  "odin_sunucu_hatasi": {
+    "tr": "Sunucu hatası (500). Teknik ekip bilgilendirildi.",
+    "en": "Server error (500). The technical team has been notified.",
+    "katman": "veri",
+    "ton": "danger",
+    "ikon": "error"
+  },
+  "odin_zaman_asimi": {
+    "tr": "İstek zaman aşımına uğradı. Tekrar deneyin.",
+    "en": "The request timed out. Please try again.",
+    "katman": "veri",
+    "ton": "warning",
+    "ikon": "timer_off"
+  },
+  "muninn_yetki_yok": {
+    "tr": "Bu işlem için yetkiniz yok (403).",
+    "en": "You are not authorized for this action (403).",
+    "katman": "veri",
+    "ton": "danger",
+    "ikon": "block"
+  },
+  "muninn_oturum_doldu": {
+    "tr": "Oturum süresi doldu. Yeniden giriş yapın.",
+    "en": "Your session has expired. Please sign in again.",
+    "katman": "veri",
+    "ton": "warning",
+    "ikon": "logout"
+  },
+  "muninn_kayit_silinecek": {
+    "tr": "{ad} kalıcı olarak silinecek. Bu işlem geri alınamaz.",
+    "en": "{ad} will be permanently deleted. This action cannot be undone.",
+    "katman": "veri",
+    "ton": "danger",
+    "ikon": "delete_forever"
+  },
+
+  "huginn_liste_bos": {
+    "tr": {
+      "cirak": "Huginn ufku taradı, henüz bir şey yok. Yeni kayıtlar geldiğinde bu liste kendiliğinden dolacak.",
+      "usta": "Huginn ufku taradı, henüz bir şey yok."
+    },
+    "en": "Nothing on the horizon yet.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "radar"
+  },
+  "huginn_tarama_suruyor": {
+    "tr": {
+      "cirak": "Huginn dokuz diyarı tarıyor… Bu işlem veri hacmine göre birkaç saniye sürebilir.",
+      "usta": "Huginn dokuz diyarı tarıyor…"
+    },
+    "en": "Scanning the nine realms…",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "radar"
+  },
+  "muninn_geri_alinamaz": {
+    "tr": {
+      "cirak": "Bu iz kalıcıdır; Muninn unutmaz. Onayladığınızda kayıt denetim defterine işlenir ve geri alınamaz.",
+      "usta": "Bu iz kalıcıdır. Muninn unutmaz."
+    },
+    "en": "This entry is permanent. Muninn does not forget.",
+    "katman": "cerceve",
+    "ton": "warning",
+    "ikon": "history_edu"
+  },
+  "odin_muhurlendi": {
+    "tr": {
+      "cirak": "Mühürlendi. Sistem kararlı; yaptığınız değişiklik tüm diyarlara yayıldı.",
+      "usta": "Mühürlendi. Sistem kararlı."
+    },
+    "en": "Sealed. The system is stable.",
+    "katman": "cerceve",
+    "ton": "success",
+    "ikon": "verified"
+  },
+  "huginn_hosgeldin": {
+    "tr": {
+      "cirak": "Huginn nöbette. Soldaki menüden bir diyar seçin; her ekran size tek bir soruyu yanıtlar.",
+      "usta": "Huginn nöbette."
+    },
+    "en": "Huginn is on watch.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "visibility"
+  },
+  "muninn_defter_acildi": {
+    "tr": {
+      "cirak": "Muninn defterini açtı. Burada geçmişin tamamı değiştirilemez biçimde saklanır.",
+      "usta": "Muninn defterini açtı."
+    },
+    "en": "Muninn has opened the ledger.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "menu_book"
+  }
+}

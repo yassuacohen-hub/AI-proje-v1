@@ -263,9 +263,9 @@ def _chart_distribution(dist_df: pd.DataFrame) -> None:
             color="adet", color_continuous_scale="RdYlGn",
         )
         fig.update_layout(height=320, margin=dict(t=40, b=20))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
     except ImportError:
-        st.bar_chart(dist_df.set_index("bucket")["adet"], use_container_width=True)
+        st.bar_chart(dist_df.set_index("bucket")["adet"], width="stretch")
 
 
 def _chart_missing_fields(missing_df: pd.DataFrame) -> None:
@@ -274,7 +274,7 @@ def _chart_missing_fields(missing_df: pd.DataFrame) -> None:
         return
     col_table, col_chart = st.columns([1, 1])
     with col_table:
-        st.dataframe(missing_df, use_container_width=True, hide_index=True)
+        st.dataframe(missing_df, width="stretch", hide_index=True)
     with col_chart:
         try:
             import plotly.express as px
@@ -284,9 +284,9 @@ def _chart_missing_fields(missing_df: pd.DataFrame) -> None:
                 color="Eksiklik (%)", color_continuous_scale="Reds",
             )
             fig.update_layout(height=300, margin=dict(t=40, b=20))
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
         except ImportError:
-            st.bar_chart(missing_df.set_index("Alan")["Eksiklik (%)"], use_container_width=True)
+            st.bar_chart(missing_df.set_index("Alan")["Eksiklik (%)"], width="stretch")
 
 
 # ---------------------------------------------------------------------------
@@ -335,7 +335,7 @@ def render_quality_tab() -> None:
     st.subheader("💡 İyileştirme Önerileri")
     suggestions = generate_improvement_suggestions(missing_df, overview)
     if suggestions:
-        st.dataframe(pd.DataFrame(suggestions), use_container_width=True, hide_index=True)
+        st.dataframe(pd.DataFrame(suggestions), width="stretch", hide_index=True)
     else:
         st.success("Kritik eksiklik tespit edilmedi — veri kalitesi genel olarak iyi durumda.")
 
@@ -351,4 +351,4 @@ def render_quality_tab() -> None:
         st.success(f"QS<{_RISK_ESIGI} aralığında firma bulunamadı — risk yok.")
     else:
         st.caption(f"{len(risky_df)} firma listeleniyor (limit: {limit})")
-        st.dataframe(risky_df, use_container_width=True, hide_index=True)
+        st.dataframe(risky_df, width="stretch", hide_index=True)

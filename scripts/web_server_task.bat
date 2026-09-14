@@ -1,7 +1,8 @@
 @echo off
 REM Huginn Web Server - otomatik yeniden baslatma dongusu
 REM Sunucu herhangi bir sebeple cokerse 10 saniye icinde yeniden baslar
-cd /d "C:\Projeler\Huginn Data Insights"
+REM 2026-09-14: Sabit yol yerine script konumuna gore kok (tasinabilir).
+cd /d "%~dp0.."
 set PYTHONPATH=src
 if not exist logs mkdir logs
 echo [%date% %time%] Web Server supervisor basladi >> logs\web_server.log

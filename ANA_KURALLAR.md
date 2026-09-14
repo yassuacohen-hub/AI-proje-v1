@@ -65,6 +65,62 @@ Tabela ismi, kısaltma ve şirket türü kelimeleri çıkarıldıktan sonra kala
 
 Dataframe ve tablolarda Markdown yıldızı (**) KULLANILMAZ; temiz metin olarak gösterilir. "Tabela İsmi" ayrı bir sütun olarak sağlanır.
 
+## Marka Adları ve Dil Sözleşmesi (MRK-04)
+
+### Sözlük
+
+| Marka | Emoji | Kapsam | Teknik önek |
+|---|---|---|---|
+| **Huginn** | 🦅 | Müşteri yüzeyi (8000) — canlı izleme, "Ne oluyor?" | `huginn_` |
+| **Muninn** | 🛡️ | İç ekip yüzeyi (8501) — hafıza, denetim, "Ne oldu, neden?" | `muninn_` |
+| **Odin** | ⚡ | Çekirdek/altyapı (görünmez) — karar, yetki, köprü | `odin_` |
+
+### Yazım kuralları (ZORUNLU)
+
+- `Huginn`, `Muninn`, `Odin` **çevrilmez, kısaltılmaz, ekle bölünmez**.
+- **Yasak yazımlar:** `Muginn`, `Hugin`, `Munin`, `Hugginn`, `Odın`.
+- Türkçe ek alırken kesme işareti: `Huginn'in`, `Muninn'e`, `Odin'in`.
+- Dil paketi anahtarları `{marka}_{alan}_{durum}` biçiminde, **en az 3 parça**:
+  `huginn_akis_bos` ✅ · `huginn_bos` ❌
+- Kod içi teknik önek küçük harf: `huginn_`, `muninn_`, `odin_`.
+
+### "Tarihsel Çatı Adı" kuralı
+
+`huginn` adı **veritabanı adı, repo adı, `HuginnMCPServer`,
+`admin@huginn.local`** gibi teknik kimliklerde **hiç değişmez**.
+Marka ayrımı yalnızca kullanıcıya görünen metin ve yeni kod
+adlandırmasında geçerlidir. **Sıfır migration.**
+
+### Güvenlik supabı — mitolojik dil yasağı
+
+Aşağıdaki metinlerde mitolojik dil **kesinlikle kullanılmaz**:
+
+- Hata mesajları ve hata kodları
+- Para, fatura, fiyat, kota bilgisi
+- Yetki reddi ve güvenlik uyarıları
+- Yasal / KVKK / sözleşme metinleri
+- Tablo başlıkları, metrik değerleri, menü etiketleri
+
+**Yasaklı sözcükler (`veri` katmanında):**
+`Huginn, Muninn, Odin, Bifröst, diyar, kuzgun, taht, mühür, Valhalla, Asgard`
+
+❌ "Bifröst çöktü, kuzgunlar geri dönemiyor."
+✅ "Bağlantı kesildi (503). Yeniden deneniyor."
+
+### Paket → kuzgun mantıksal haritası (fiziksel taşıma YOK)
+
+| Kod dizini | Kuzgun | Gerekçe |
+|---|---|---|
+| `web_dashboard/` (8000 statik) | 🦅 Huginn | Müşteri yüzeyi |
+| `web_dashboard/tabs/admin_*` | 🛡️ Muninn | İç ekip ekranları |
+| `src/company_master/engine/`, `intelligence/`, `vector/` | ⚡ Odin | Karar çekirdeği |
+| `src/company_master/db/`, `schema/`, `etl/` | 🛡️ Muninn | Hafıza/arşiv |
+| `src/company_master/api/`, `gateway/`, `queue/` | 🦅 Huginn | Canlı akış |
+| `src/company_master/auth/`, `logging/`, `orchestrator/` | ⚡ Odin | Yetki ve yönetim |
+
+⚠️ Bu tablo **mantıksal**dir. Hiçbir dizin yeniden adlandırılmaz veya
+taşınmaz; import yolları değişmez.
+
 ## Kural 6: Orkestratörün Token Optimizasyonu ve Tasarruf Sorumluluğu
 
 Orkestrasyon rolünü üstlenen ajan veya koordinatör her kim olursa olsun:

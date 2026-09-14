@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-14T09:15:42",
+    "bitis": "2026-09-15T00:00:57",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -2683,7 +2683,7 @@
   },
   {
     "task_id": "PO-BACK-01",
-    "baslik": "Tenant Health Score v1 (aktivite, kullanim, odeme, destek sinyali)",
+    "baslik": "Tenant Health Score v1 (Data Quality + Entity Accuracy + Duplicate Rate)",
     "sahip": "-",
     "oncelik": "P1",
     "durum": "plan",
@@ -2692,12 +2692,12 @@
     "dosyalar": [
       "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
     ],
-    "not": "Skor formulu + esik dokumani + dashboard karti; 3 tenant'ta dogrulanir. PRD Faz 2.",
+    "not": "ADMIN PANEL: Data Quality Score, Entity Accuracy, Duplicate Rate göstergelerini kapsar. Skor formülü + eşik dokümanı + dashboard kartı; 3 tenant'ta doğrulanır. PRD Faz 2. [14_po_panel_haritasi.md]",
     "id": "PO-BACK-01"
   },
   {
     "task_id": "PO-BACK-02",
-    "baslik": "Segment eligibility skoru + onay akisi",
+    "baslik": "Segment Eligibility Skoru + Onay Akışı (Coverage + Profile Accuracy)",
     "sahip": "-",
     "oncelik": "P1",
     "durum": "plan",
@@ -2706,12 +2706,12 @@
     "dosyalar": [
       "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
     ],
-    "not": "5 segmentte %95+ uygunluk; eksik-alan aciklamasi UI'da. AR-03 F1.",
+    "not": "MÜŞTERİ PANEL: Coverage ve Profile Accuracy göstergelerini kapsar. 5 segmentte %95+ uygunluk; eksik-alan açıklaması UI'da. AR-03 F1. [14_po_panel_haritasi.md]",
     "id": "PO-BACK-02"
   },
   {
     "task_id": "PO-BACK-03",
-    "baslik": "Kampanya durum-makinesi otomatik denetimi",
+    "baslik": "Kampanya Durum-Makinesi Denetimi (Source Reliability)",
     "sahip": "-",
     "oncelik": "P1",
     "durum": "plan",
@@ -2720,12 +2720,12 @@
     "dosyalar": [
       "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
     ],
-    "not": "Bitisi gecen aktif uyarir; sifir teslimatli taslak pilot onerir; testli. AR-03.",
+    "not": "ADMIN PANEL: Source Reliability göstergesini kapsar. Bitişi geçen aktif → uyarı; sıfır teslimatlı taslak → pilot önerisi; testli. AR-03. [14_po_panel_haritasi.md]",
     "id": "PO-BACK-03"
   },
   {
     "task_id": "PO-BACK-04",
-    "baslik": "Paket fiyat katalogu tekillestirme",
+    "baslik": "Paket Fiyat Kataloğu Tekilleştirme (Field Completeness)",
     "sahip": "-",
     "oncelik": "P1",
     "durum": "plan",
@@ -2734,12 +2734,12 @@
     "dosyalar": [
       "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
     ],
-    "not": "Tek fiyat kaynagi; 4 tier (Temel 499 TL); demo cakismasi giderilir.",
+    "not": "MÜŞTERİ PANEL: Field Completeness göstergesini kapsar. Tek fiyat kaynağı; 4 tier (Temel 499 TL); demo çakışması giderilir. AR-03. [14_po_panel_haritasi.md]",
     "id": "PO-BACK-04"
   },
   {
     "task_id": "PO-BACK-05",
-    "baslik": "Karar ekranlarinda veri-tazelik etiketi + manuel yenileme",
+    "baslik": "Veri Tazelik Etiketi + Manuel Yenileme (Freshness)",
     "sahip": "-",
     "oncelik": "P2",
     "durum": "plan",
@@ -2748,12 +2748,12 @@
     "dosyalar": [
       "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
     ],
-    "not": "Son guncelleme + yenile butonu; invalidation gorunur. AR-03 F7.",
+    "not": "ADMIN PANEL: Freshness göstergesini kapsar. 'Son güncelleme' + yenile butonu; invalidation görünür. AR-03 F7. [14_po_panel_haritasi.md]",
     "id": "PO-BACK-05"
   },
   {
     "task_id": "PO-BACK-06",
-    "baslik": "Destek Merkezi MVP (ticket ata/kapat/eskale)",
+    "baslik": "Destek Merkezi MVP (Evidence Coverage)",
     "sahip": "-",
     "oncelik": "P2",
     "durum": "plan",
@@ -2762,12 +2762,12 @@
     "dosyalar": [
       "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
     ],
-    "not": "Ticket CRUD + durum makinesi + test; admin sekmeye eklenir. PRD-15.",
+    "not": "MÜŞTERİ PANEL: Evidence Coverage göstergesini kapsar. Ticket CRUD + durum makinesi + test; admin sekmeye eklenir. PRD-15. [14_po_panel_haritasi.md]",
     "id": "PO-BACK-06"
   },
   {
     "task_id": "PO-BACK-07",
-    "baslik": "Feature Flags MVP (tenant bazli ac/kapa)",
+    "baslik": "Feature Flags MVP (Data Quality + Source Reliability)",
     "sahip": "-",
     "oncelik": "P2",
     "durum": "plan",
@@ -2776,12 +2776,12 @@
     "dosyalar": [
       "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
     ],
-    "not": "Flag CRUD + tenant esleme + guard; testli. PRD-19.",
+    "not": "ADMIN PANEL: Data Quality Score ve Source Reliability göstergelerini kapsar. Flag CRUD + tenant eşleme + guard; testli. PRD-19. [14_po_panel_haritasi.md]",
     "id": "PO-BACK-07"
   },
   {
     "task_id": "PO-BACK-08",
-    "baslik": "Executive Dashboard v1 (MRR/ARR/churn + health ozeti)",
+    "baslik": "Executive Dashboard v1 (Coverage + Data Quality Score) — REVIZE",
     "sahip": "-",
     "oncelik": "P3",
     "durum": "plan",
@@ -2790,7 +2790,234 @@
     "dosyalar": [
       "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
     ],
-    "not": "MRR/ARR trend + churn + health dagilimi; kaynak dokumante. PRD Faz 2.",
+    "not": "HER İKİSİ: Coverage ve Data Quality Score göstergelerini kapsar. MRR/ARR trend + churn + health dağılımı; P3 — Faz 3. REVIZE: önce PO-BACK-01 ve 10 tamamlandıktan sonra başla. [14_po_panel_haritasi.md]",
     "id": "PO-BACK-08"
+  },
+  {
+    "task_id": "PO-BACK-09",
+    "baslik": "Duplicate Rate Dashboard (Admin)",
+    "sahip": "-",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+    ],
+    "not": "ADMIN PANEL: Duplicate Rate göstergesi için dedup dashboard. Mükerrer firma oranı, kaynak bazlı duplika analizi. [14_po_panel_haritasi.md]",
+    "id": "PO-BACK-09",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": []
+  },
+  {
+    "task_id": "PO-BACK-10",
+    "baslik": "Coverage Analytics (Müşteri)",
+    "sahip": "-",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+    ],
+    "not": "MÜŞTERİ PANEL: Coverage göstergesi için kapsam analitiği. Ankara B2B şirketlerinin yakalanma oranı, sektör bazlı coverage. [14_po_panel_haritasi.md]",
+    "id": "PO-BACK-10",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": []
+  },
+  {
+    "task_id": "PO-BACK-11",
+    "baslik": "Source Reliability Monitor (Admin)",
+    "sahip": "-",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+    ],
+    "not": "ADMIN PANEL: Source Reliability göstergesi için kaynak sağlık izleme. Kaynak bazlı performans, güven skoru, tazelik takibi. [14_po_panel_haritasi.md]",
+    "id": "PO-BACK-11",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": []
+  },
+  {
+    "task_id": "ADMIN-DOC-01",
+    "id": "ADMIN-DOC-01",
+    "baslik": "Admin panel sitemap düzeltmesi ve uygulama öncelik dokümanı",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T16:07:02",
+    "bitis": "2026-09-14T18:38:27",
+    "dosyalar": [
+      "AI projet v1/V10/15_admin_panel_sitemap.md",
+      "AI projet v1/V10/16_admin_panel_uygulama.md",
+      "data/orchestrator/WORKFLOW_OPTIMIZATION.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "not_": "Roo devraldi: AI proje v1/V10/14_urun_yuzeyleri_sitemap.md ile karsilandi. Kilo taslaklari 06_arsiv/kilo_sitemap_taslaklari_2026_09_14/ altina arsivlendi."
+  },
+  {
+    "task_id": "USER-DOC-01",
+    "id": "USER-DOC-01",
+    "baslik": "User Panel sitemap belgesi oluştur (16_user_panel_sitemap.md) — TASLAK",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T16:45:47",
+    "bitis": "2026-09-14T18:38:27",
+    "dosyalar": [
+      "AI projet v1/V10/16_user_panel_sitemap.md"
+    ],
+    "not": "pending",
+    "source": "ic",
+    "from_agent": null,
+    "not_": "Roo devraldi: user panel kapsami 14_urun_yuzeyleri_sitemap.md Bolum 4 (HUGINN agaci) icinde karsilandi."
+  },
+  {
+    "task_id": "ADMIN-WF-01",
+    "baslik": "İş akışı optimizasyonu ve görev sıralaması",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/WORKFLOW_OPTIMIZATION.md"
+    ],
+    "not": "Tüm görevleri sitemap'lerle uyumlu hale getirme: öncelik, bağımlılık, ajan sorumluluğu.",
+    "id": "ADMIN-WF-01",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": []
+  },
+  {
+    "task_id": "MRK-03",
+    "id": "MRK-03",
+    "baslik": "Marka konumlandirma belgesini projeye tasi + Obsidian baglami",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T18:54:48",
+    "bitis": "2026-09-14T16:40:00",
+    "dosyalar": [
+      "AI proje v1/V10/00_ana_belgeler/03_marka_konumlandirma_ve_kapsam.md",
+      "docs/MARKA_KONUMLANDIRMA.md",
+      "AI proje v1/V10/00-Home.md"
+    ],
+    "not": "Roo dogrulama: Obsidian kopyasi eksikti (kirik wikilink) -> Roo olusturdu; docs aynasi + 00-Home OK",
+    "source": "ic",
+    "from_agent": null,
+    "sonuc": "Marka konumlandirma belgesi tasima + Obsidian baglami tamamlandi"
+  },
+  {
+    "task_id": "MRK-04",
+    "id": "MRK-04",
+    "baslik": "Marka terminolojisi + yazim sozlesmesi + guvenlik supabi kural dosyalarina",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T18:55:05",
+    "bitis": "2026-09-14T16:40:00",
+    "dosyalar": [
+      "ANA_KURALLAR.md",
+      "AGENTS.md",
+      ".roorules",
+      ".clinerules"
+    ],
+    "not": "Roo dogrulama: 4 kural dosyasinda marka terminolojisi OK",
+    "source": "ic",
+    "from_agent": null,
+    "sonuc": "Marka terminolojisi ANA_KURALLAR.md/AGENTS.md/.roorules/.clinerules eklendi"
+  },
+  {
+    "task_id": "FIX-NOB-01",
+    "id": "FIX-NOB-01",
+    "baslik": "gorev_nobetci.py durum komutu cp1254 UnicodeDecodeError",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-14T19:00:33",
+    "bitis": "2026-09-14T16:40:00",
+    "dosyalar": [
+      "scripts/gorev_nobetci.py"
+    ],
+    "not": "Roo dogrulama: gorev_nobetci.py durum utf-8 ile hatasiz calisti",
+    "source": "ic",
+    "from_agent": null,
+    "sonuc": "cmd_durum encoding fix: added sys.stdout.reconfigure(encoding='utf-8', errors='replace') and subprocess.run encoding='utf-8', errors='replace')"
+  },
+  {
+    "task_id": "MRK-02F",
+    "id": "MRK-02F",
+    "baslik": "card.py sayi bicimini i18n.sayi() ile tek kaynaga indir",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T19:14:58",
+    "bitis": "2026-09-14T21:36:59",
+    "dosyalar": [
+      "src/company_master/ui/components/card.py"
+    ],
+    "not": "Teslim (cline): card.py _deger_metni i18n.sayi() delegasyonu; test_ui_components yesil",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "MRK-02G",
+    "id": "MRK-02G",
+    "baslik": "tests/test_i18n.py - 13 bekci testi + 4 ek test",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-14T19:20:10",
+    "bitis": "2026-09-14T21:37:00",
+    "dosyalar": [
+      "tests/test_i18n.py"
+    ],
+    "not": "Teslim (cline): tests/test_i18n.py 13 bekci + 4 ek test; 1413 passed",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "MRK-02H",
+    "id": "MRK-02H",
+    "baslik": "disa_aktar.py + web_dashboard/js/messages.js ureticisi",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-14T19:20:20",
+    "bitis": "2026-09-14T16:40:00",
+    "dosyalar": [
+      "src/company_master/i18n/disa_aktar.py",
+      "web_dashboard/js/messages.js"
+    ],
+    "not": "Roo dogrulama: kontrol() True, 73 anahtar; bekci tests/test_i18n_disa_aktar.py Roo ekledi (8 test)",
+    "source": "ic",
+    "from_agent": null,
+    "sonuc": "disa_aktar.py + messages.js uretildi; --kontrol GUNCEL; 73 anahtar; 152 satir"
+  },
+  {
+    "task_id": "CHART-01",
+    "id": "CHART-01",
+    "baslik": "Grafik altyapisi: charts modulu + requirements kontrolu",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T21:40:06",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/ui/charts/__init__.py",
+      "requirements-app.txt"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
   }
 ]

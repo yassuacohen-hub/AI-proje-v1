@@ -410,8 +410,13 @@ border-radius:var(--hg-radius-modal);box-shadow:var(--hg-shadow-lg)}
 gap:var(--hg-space-2);padding:var(--hg-space-3) var(--hg-space-4);
 border-bottom:1px solid var(--hg-color-border);
 background:var(--hg-color-surface-2)}
-.hg-chat-baslik{font-size:var(--hg-font-size-h3);color:var(--hg-color-text);
+.hg-chat-baslik{display:inline-flex;align-items:center;gap:var(--hg-space-2);
+font-size:var(--hg-font-size-h3);color:var(--hg-color-text);
 font-weight:var(--hg-font-weight-semibold);line-height:var(--hg-font-line-tight)}
+.hg-chat-rozet{padding:0 var(--hg-space-2);border-radius:var(--hg-radius-full);
+background:var(--hg-color-warning-soft);color:var(--hg-color-warning);
+font-size:var(--hg-font-size-help);font-weight:var(--hg-font-weight-medium);
+line-height:var(--hg-font-line-normal);white-space:nowrap}
 .hg-chat-kapat{color:var(--hg-color-text-muted);text-decoration:none;
 font-size:var(--hg-font-size-sm);line-height:1;padding:var(--hg-space-1);
 border-radius:var(--hg-radius-sm)}

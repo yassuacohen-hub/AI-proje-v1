@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from typing import Any
 
+from company_master.i18n import sayi as _sayi_bicimle
 from company_master.ui.base import (
     Bilesen,
     BilesenHatasi,
@@ -128,13 +129,7 @@ class MetricCard(Bilesen):
 
     def _deger_metni(self) -> str:
         """Sayıları binlik ayraçlı Türkçe biçimde gösterir."""
-        if isinstance(self.deger, bool):
-            return "Evet" if self.deger else "Hayır"
-        if isinstance(self.deger, int):
-            return f"{self.deger:,}".replace(",", ".")
-        if isinstance(self.deger, float):
-            return f"{self.deger:,.1f}".replace(",", "#").replace(".", ",").replace("#", ".")
-        return str(self.deger)
+        return _sayi_bicimle(self.deger)
 
     def html(self) -> str:
         parcalar = [

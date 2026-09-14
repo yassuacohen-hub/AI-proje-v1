@@ -783,6 +783,40 @@ def test_chat_bubble_ozel_not():
     assert ChatBubble.VARSAYILAN_NOT not in html
 
 
+def test_chat_bubble_varsayilan_yakinda_rozeti():
+    """Motor bağlı olmadığı sürece başlıkta "Yakında" rozeti görünür."""
+    html = ChatBubble(acik=True).html()
+    assert "hg-chat-rozet" in html
+    assert ChatBubble.VARSAYILAN_ROZET in html
+
+
+def test_chat_bubble_rozet_gizlenebilir():
+    """Motor bağlandığında `rozet_metni=""` ile rozet kaldırılabilir."""
+    html = ChatBubble(acik=True, rozet_metni="").html()
+    assert "hg-chat-rozet" not in html
+    assert ChatBubble.VARSAYILAN_ROZET not in html
+
+
+def test_chat_bubble_rozet_kacis_yapar():
+    """Rozet metni HTML kaçışından geçer (XSS regresyonu)."""
+    html = ChatBubble(acik=True, rozet_metni="<script>x</script>").html()
+    assert "<script>" not in html
+    assert "&lt;script&gt;" in html
+
+
+def test_chat_bubble_fab_rozet_cizmez():
+    """Kapalı balon yalnız FAB çizer; rozet panel başlığına aittir."""
+    html = ChatBubble(acik=False).html()
+    assert "hg-chat-rozet" not in html
+
+
+def test_chat_bubble_ozel_rozet_metni():
+    """Özel rozet metni varsayılanın yerine geçer (motor bağlanınca 'Beta' vb.)."""
+    html = ChatBubble(acik=True, rozet_metni="Beta").html()
+    assert "Beta" in html
+    assert ChatBubble.VARSAYILAN_ROZET not in html
+
+
 # --------------------------------------------------------------------------
 # Ortak sözleşme
 # --------------------------------------------------------------------------

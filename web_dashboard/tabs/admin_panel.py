@@ -90,7 +90,7 @@ def render_decision_tab(decisions: list[dict[str, Any]] | None = None) -> None:
         })
 
     df = pd.DataFrame(rows)
-    st.dataframe(df, use_container_width=True, hide_index=True)
+    st.dataframe(df, width="stretch", hide_index=True)
     st.caption("Toplam " + str(len(decisions)) + " karar kaydi gosterniliyor (son 50).")
 
 

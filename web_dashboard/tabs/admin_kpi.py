@@ -291,9 +291,9 @@ def _render_quality_trend(gun_secimi: int) -> None:
             markers=True,
         )
         fig.update_layout(height=300, margin=dict(t=40, b=20))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
     except ImportError:
-        st.bar_chart(trend_df.set_index("tarih")["ort_skor"], use_container_width=True)
+        st.bar_chart(trend_df.set_index("tarih")["ort_skor"], width="stretch")
 
 
 def _render_field_quality(field_df: pd.DataFrame) -> None:
@@ -302,7 +302,7 @@ def _render_field_quality(field_df: pd.DataFrame) -> None:
         return
     col_table, col_chart = st.columns([1, 1])
     with col_table:
-        st.dataframe(field_df, use_container_width=True, hide_index=True)
+        st.dataframe(field_df, width="stretch", hide_index=True)
     with col_chart:
         try:
             import plotly.express as px
@@ -313,16 +313,16 @@ def _render_field_quality(field_df: pd.DataFrame) -> None:
                 color_continuous_scale="RdYlGn",
             )
             fig.update_layout(height=300, margin=dict(t=40, b=20))
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
         except ImportError:
-            st.bar_chart(field_df.set_index("Alan")["Doluluk (%)"], use_container_width=True)
+            st.bar_chart(field_df.set_index("Alan")["Doluluk (%)"], width="stretch")
 
 
 def _render_source_health(source_df: pd.DataFrame) -> None:
     if source_df.empty:
         st.info("Kaynak verisi bulunamadı.")
         return
-    st.dataframe(source_df, use_container_width=True, hide_index=True)
+    st.dataframe(source_df, width="stretch", hide_index=True)
     try:
         import plotly.express as px
         fig = px.pie(
@@ -330,9 +330,9 @@ def _render_source_health(source_df: pd.DataFrame) -> None:
             title="Kaynak Dağılımı",
         )
         fig.update_layout(height=300, margin=dict(t=40, b=20))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
     except ImportError:
-        st.bar_chart(source_df.set_index("source_name")["kayit_sayisi"], use_container_width=True)
+        st.bar_chart(source_df.set_index("source_name")["kayit_sayisi"], width="stretch")
 
 
 def _render_api_trend(api_df: pd.DataFrame) -> None:
@@ -346,9 +346,9 @@ def _render_api_trend(api_df: pd.DataFrame) -> None:
             title="Günlük API İstek Sayısı",
         )
         fig.update_layout(height=250, margin=dict(t=40, b=20))
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
     except ImportError:
-        st.bar_chart(api_df.set_index("tarih")["istek"], use_container_width=True)
+        st.bar_chart(api_df.set_index("tarih")["istek"], width="stretch")
 
 
 # ---------------------------------------------------------------------------

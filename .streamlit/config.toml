@@ -26,7 +26,10 @@ magicEnabled = true
 
 [client]
 showErrorDetails = true
-toolbarMode = "minimal"
+# U-02: "minimal" sağ üst ⋮ menüsünü buduyor ve "Wide mode", "Clear cache",
+# "Rerun" seçeneklerini gizliyordu. "auto" Streamlit'in özgün araç çubuğunu
+# geri getirir — tema geçişi ve genişlik ayarı tek yerden yönetilir.
+toolbarMode = "auto"
 
 # --------------------------------------------------------------------------- #
 # ORTAK TEMA — her iki modda geçerli tipografi ve geometri

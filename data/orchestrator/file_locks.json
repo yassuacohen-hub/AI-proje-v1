@@ -1,12 +1,12 @@
 {
-  "scripts/_verify_p82.py": {
-    "sahip": "kilo",
-    "task_id": "FIX-ID-01",
-    "kilitlendi": "2026-09-14T04:27:15"
+  "src/company_master/ui/charts/__init__.py": {
+    "sahip": "cline",
+    "task_id": "CHART-01",
+    "kilitlendi": "2026-09-14T21:40:06"
   },
-  "src/company_master/orchestrator/task_board.py": {
-    "sahip": "kilo",
-    "task_id": "FIX-ID-01",
-    "kilitlendi": "2026-09-14T04:27:15"
+  "requirements-app.txt": {
+    "sahip": "cline",
+    "task_id": "CHART-01",
+    "kilitlendi": "2026-09-14T21:40:06"
   }
 }

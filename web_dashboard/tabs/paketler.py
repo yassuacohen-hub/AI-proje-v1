@@ -243,7 +243,7 @@ def _render_baslik(demo_mu: bool) -> None:
             "🔄 Veriyi Yenile",
             key="paketler_yenile",
             type="primary",
-            use_container_width=True,
+            width="stretch",
             help="Önbelleği temizler ve paket kataloğunu yeniden yükler.",
         )
     with col_rehber:
@@ -339,7 +339,7 @@ def _render_paket_tablosu(paketler: list[dict[str, Any]]) -> None:
             for p in paketler
         ]
     )
-    st.dataframe(df, use_container_width=True, hide_index=True)
+    st.dataframe(df, width="stretch", hide_index=True)
     st.bar_chart(df.set_index("Paket")["Fiyat (₺/ay)"])
     st.caption("📊 Fiyat basamakları arasındaki fark satışta itiraz yaratıyor mu?")
 
@@ -396,7 +396,7 @@ def _render_capraz_satis(paketler: list[dict[str, Any]], demo_mu: bool) -> None:
                     for p in firma_paketleri
                 ]
             ),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
     else:

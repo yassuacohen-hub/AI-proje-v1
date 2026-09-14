@@ -1,0 +1,663 @@
+{
+  "huginn_active_users": {
+    "tr": "Canlı kullanıcılar sahada. Huginn izliyor.",
+    "en": "Live users on the field. Huginn is watching.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "group"
+  },
+  "huginn_anomaly_spotted": {
+    "tr": "Huginn sahada olağan dışı bir hareket yakaladı.",
+    "en": "Huginn spotted unusual movement in the realm.",
+    "katman": "cerceve",
+    "ton": "warning",
+    "ikon": "radar"
+  },
+  "huginn_api_health": {
+    "tr": "API yanıt süreleri ideal seviyede.",
+    "en": "API response times are at ideal levels.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "api"
+  },
+  "huginn_bot_detection": {
+    "tr": "Şüpheli bot hareketi anında izole edildi.",
+    "en": "Suspicious bot activity isolated instantly.",
+    "katman": "cerceve",
+    "ton": "warning"
+  },
+  "huginn_channel_monitor": {
+    "tr": "İletişim kanalları aktif ve temiz.",
+    "en": "Communication channels active and clear.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "huginn_click_tracking": {
+    "tr": "Tıklama ve etkileşimler anında işleniyor.",
+    "en": "Clicks and interactions processed instantly.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "huginn_dashboard_welcome": {
+    "tr": "Canlı kontrol paneline hoş geldiniz. Gözleriniz açık olsun.",
+    "en": "Welcome to the live dashboard. Keep your eyes open.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "huginn_error_intercept": {
+    "tr": "Olası bir hata doğmadan engellendi.",
+    "en": "Potential error intercepted before birth.",
+    "katman": "cerceve",
+    "ton": "warning"
+  },
+  "huginn_gateway_status": {
+    "tr": "Ağ kapıları açık ve tamamen kararlı.",
+    "en": "Network gateways open and perfectly stable.",
+    "katman": "cerceve",
+    "ton": "neutral"
+  },
+  "huginn_incident_resolved": {
+    "tr": "Küçük bir aksama giderildi. Huginn takibe devam ediyor.",
+    "en": "Minor hitch resolved. Huginn continues tracking.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "huginn_instant_report": {
+    "tr": "Anlık rapor hazırlandı. İncelemek için tıklayın.",
+    "en": "Instant report generated. Click to review.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "huginn_latency_low": {
+    "tr": "Gecikme süresi en düşük seviyede.",
+    "en": "Latency is at the lowest level.",
+    "katman": "cerceve",
+    "ton": "success",
+    "ikon": "speed"
+  },
+  "huginn_live_analytics_ready": {
+    "tr": "Canlı analitik verileri okumaya hazır.",
+    "en": "Live analytics data ready to read.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "huginn_live_conversion": {
+    "tr": "Dönüşüm oranları canlı olarak yükseliyor.",
+    "en": "Conversion rates rising live.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "huginn_live_feed_pause": {
+    "tr": "Canlı akış duraklatıldı. Gözlem beklemede.",
+    "en": "Live feed paused. Observation on standby.",
+    "katman": "cerceve",
+    "ton": "warning"
+  },
+  "huginn_live_feed_resume": {
+    "tr": "Canlı akış devam ediyor. Veriler güncelleniyor.",
+    "en": "Live feed resumed. Data is updating.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "huginn_live_feedback": {
+    "tr": "Müşteri etkileşimleri canlı akışta.",
+    "en": "Customer interactions in live feed.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "huginn_live_status_ok": {
+    "tr": "Her şey yolunda. Canlı veri akışı aktif.",
+    "en": "All clear. Live data stream is active.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "huginn_live_traffic": {
+    "tr": "Trafik akışı normal. Kesintisiz izleme devrede.",
+    "en": "Traffic flow normal. Uninterrupted monitoring enabled.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "traffic"
+  },
+  "huginn_load_balancing": {
+    "tr": "Yük dağılımı fırtına hızıyla optimize edildi.",
+    "en": "Load distribution optimized at storm speed.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "huginn_performance_peak": {
+    "tr": "Sistem performansı zirvede. Akış kusursuz.",
+    "en": "System performance at its peak. Flawless stream.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "huginn_pulse_check": {
+    "tr": "Sistemin nabzı tutuluyor, her diyar sakin.",
+    "en": "System pulse checked, all realms quiet.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "monitor_heart"
+  },
+  "huginn_queue_status": {
+    "tr": "İşlem kuyruğu temiz. Bekleyen görev yok.",
+    "en": "Job queue clear. No pending tasks.",
+    "katman": "cerceve",
+    "ton": "neutral",
+    "ikon": "queue"
+  },
+  "huginn_quick_glance": {
+    "tr": "Canlı operasyona hızlı bir bakış atın.",
+    "en": "Take a quick glance at live operations.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "huginn_realtime_billing": {
+    "tr": "Anlık ödemeler sorunsuz akıyor.",
+    "en": "Instant payments flowing smoothly.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "huginn_realtime_chart": {
+    "tr": "Grafikler canlı verilerle besleniyor.",
+    "en": "Charts are being fed with live data.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "monitoring"
+  },
+  "huginn_realtime_sync": {
+    "tr": "Anlık veriler düşünce hızında işleniyor.",
+    "en": "Real-time data processed at the speed of thought.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "sync"
+  },
+  "huginn_server_pulse": {
+    "tr": "Sunucu kalbi normal ritminde atıyor.",
+    "en": "Server heart is beating in its normal rhythm.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "dns"
+  },
+  "huginn_session_count": {
+    "tr": "Aktif oturumlar güvenle takip ediliyor.",
+    "en": "Active sessions are tracked with confidence.",
+    "katman": "cerceve",
+    "ton": "neutral"
+  },
+  "huginn_speed_alert": {
+    "tr": "İşlem hızı maksimum limitlerde seyrediyor.",
+    "en": "Transaction speed is hovering at maximum limits.",
+    "katman": "cerceve",
+    "ton": "warning"
+  },
+  "huginn_stream_start": {
+    "tr": "Canlı veri gözlemini başlatın.",
+    "en": "Start live data observation.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "huginn_telemetry_active": {
+    "tr": "Canlı telemetri şu an %100 kararlılıkla çalışıyor.",
+    "en": "Live telemetry is running at 100% stability.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "huginn_track_metrics": {
+    "tr": "Metrikler anlık olarak Huginn'e akıyor.",
+    "en": "Metrics flowing into Huginn in real-time.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "huginn_user_surge": {
+    "tr": "Kullanıcı trafiğinde ani artış. Huginn gözlemliyor.",
+    "en": "Sudden surge in user traffic. Huginn is observing.",
+    "katman": "cerceve",
+    "ton": "warning"
+  },
+  "huginn_watchtower_ready": {
+    "tr": "Gözcü kulesi hazır. Sisteminiz izleniyor.",
+    "en": "Watchtower ready. Your system is being monitored.",
+    "katman": "cerceve",
+    "ton": "success",
+    "ikon": "visibility"
+  },
+  "muninn_access_denied": {
+    "tr": "Yetkisiz erişim girişimi engellendi ve kaydedildi.",
+    "en": "Unauthorized access attempt blocked and logged.",
+    "katman": "cerceve",
+    "ton": "danger"
+  },
+  "muninn_access_granted": {
+    "tr": "Kök yetki doğrulandı. Giriş onaylandı.",
+    "en": "Root authority verified. Access granted.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "muninn_admin_session": {
+    "tr": "Yönetici oturumu güvenli tünelde açık.",
+    "en": "Admin session open in secure tunnel.",
+    "katman": "cerceve",
+    "ton": "neutral"
+  },
+  "muninn_archive_complete": {
+    "tr": "Eski veriler arşive güvenle kaldırıldı.",
+    "en": "Legacy data safely moved to archive.",
+    "katman": "cerceve",
+    "ton": "success",
+    "ikon": "inventory_2"
+  },
+  "muninn_audit_trail_ready": {
+    "tr": "Denetim izleri incelenmeye hazır.",
+    "en": "Audit trails ready for inspection.",
+    "katman": "cerceve",
+    "ton": "success",
+    "ikon": "fact_check"
+  },
+  "muninn_backup_success": {
+    "tr": "Zaman tüneli yedeği Muninn'e başarıyla işlendi.",
+    "en": "Timeline backup successfully processed to Muninn.",
+    "katman": "cerceve",
+    "ton": "success",
+    "ikon": "backup"
+  },
+  "muninn_brute_force_block": {
+    "tr": "Çoklu başarısız deneme: IP geçici olarak askıya alındı.",
+    "en": "Multiple failed attempts: IP temporarily suspended.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "muninn_compliance_ok": {
+    "tr": "Sistem mevzuat uyumluluğu tam not aldı.",
+    "en": "System compliance scored full marks.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "muninn_config_restore": {
+    "tr": "Sistem eski ayarlarına başarıyla döndürüldü.",
+    "en": "System successfully restored to previous settings.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "muninn_data_leak_shield": {
+    "tr": "Veri sızıntısı önleme kalkanı aktif.",
+    "en": "Data leak prevention shield active.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "muninn_data_purge": {
+    "tr": "Eski loglar temizlendi. Hafıza optimize edildi.",
+    "en": "Old logs purged. Memory optimized.",
+    "katman": "cerceve",
+    "ton": "warning"
+  },
+  "muninn_database_integrity": {
+    "tr": "Veri tabanı bütünlüğü koruma altında.",
+    "en": "Database integrity under protection.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "muninn_encryption_active": {
+    "tr": "Tüm sırlar güçlü şifreleme ile mühürlendi.",
+    "en": "All secrets sealed with strong encryption.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "enhanced_encryption"
+  },
+  "muninn_gdpr_export": {
+    "tr": "Kullanıcı gizlilik verileri mevzuata uygun dışa aktarıldı.",
+    "en": "User privacy data exported in compliance with regulations.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "download"
+  },
+  "muninn_identity_secured": {
+    "tr": "Sistem kimliği en yüksek katmanda korunuyor.",
+    "en": "System identity protected at the highest tier.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "muninn_immutable_log": {
+    "tr": "Değiştirilemez Hafıza: Loglar manipülasyona kapalıdır.",
+    "en": "Immutable Memory: Logs are closed to manipulation.",
+    "katman": "cerceve",
+    "ton": "neutral",
+    "ikon": "history_edu"
+  },
+  "muninn_integrity_check": {
+    "tr": "Sistem bütünlük kontrolü hatasız tamamlandı.",
+    "en": "System integrity check completed without errors.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "muninn_ip_whitelist": {
+    "tr": "Güvenli IP listesi hafızaya kaydedildi.",
+    "en": "Safe IP whitelist saved to memory.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "muninn_key_rotation": {
+    "tr": "Kriptografik anahtarlar başarıyla yenilendi.",
+    "en": "Cryptographic keys successfully rotated.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "key"
+  },
+  "muninn_license_valid": {
+    "tr": "Lisans doğrulaması sarsılmaz hafızada onaylandı.",
+    "en": "License verification confirmed in unyielding memory.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "muninn_lock_changes": {
+    "tr": "Değişiklikleri kalıcı olarak hafızaya kilitle.",
+    "en": "Lock changes permanently into memory.",
+    "katman": "cerceve",
+    "ton": "warning"
+  },
+  "muninn_memory_locked": {
+    "tr": "Muninn kaydetti: Bu işlem geri alınamaz bir iz bıraktı.",
+    "en": "Muninn recorded: This action left an indelible mark.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "lock"
+  },
+  "muninn_mfa_required": {
+    "tr": "İki aşamalı doğrulama: Muninn ek güvence talep ediyor.",
+    "en": "Two-factor authentication: Muninn requests extra assurance.",
+    "katman": "cerceve",
+    "ton": "warning",
+    "ikon": "phonelink_lock"
+  },
+  "muninn_password_policy": {
+    "tr": "Şifre politikası güvenle güncellendi.",
+    "en": "Password policy safely updated.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "muninn_patch_applied": {
+    "tr": "Güvenlik yaması sisteme kökten işlendi.",
+    "en": "Security patch deeply integrated into the system.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "muninn_query_history": {
+    "tr": "Geçmişin bilgeliğini sorgula.",
+    "en": "Query the wisdom of history.",
+    "katman": "cerceve",
+    "ton": "neutral"
+  },
+  "muninn_recovery_point": {
+    "tr": "Kurtarma noktası sarsılmaz hafızaya yazıldı.",
+    "en": "Recovery point written to unyielding memory.",
+    "katman": "cerceve",
+    "ton": "neutral"
+  },
+  "muninn_role_assigned": {
+    "tr": "Kullanıcı rolü ve yetkileri kalıcı olarak atandı.",
+    "en": "User role and permissions permanently assigned.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "muninn_root_warn": {
+    "tr": "Emin misiniz? Bu işlem kök ayarları değiştirecek.",
+    "en": "Are you sure? This will change root configurations.",
+    "katman": "cerceve",
+    "ton": "warning"
+  },
+  "muninn_secure_zone": {
+    "tr": "Güvenli bölgedesiniz. Ayarlar koruma altında.",
+    "en": "You are in the secure zone. Settings protected.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "muninn_session_timeout": {
+    "tr": "Güvenlik nedeniyle oturum süresi doldu.",
+    "en": "Session timed out for security reasons.",
+    "katman": "cerceve",
+    "ton": "warning"
+  },
+  "muninn_signature_verified": {
+    "tr": "Dijital imza Muninn tarafından doğrulandı.",
+    "en": "Digital signature verified by Muninn.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "muninn_storage_status": {
+    "tr": "Depolama alanları stabil ve güvende.",
+    "en": "Storage spaces stable and secure.",
+    "katman": "cerceve",
+    "ton": "neutral"
+  },
+  "muninn_threat_neutralized": {
+    "tr": "Potansiyel tehdit geçmişe gömüldü.",
+    "en": "Potential threat buried in the past.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "muninn_vault_safe": {
+    "tr": "Hafıza tazelendi. Verileriniz güvenle yedeklendi.",
+    "en": "Memory refreshed. Your data safely backed up.",
+    "katman": "cerceve",
+    "ton": "success",
+    "ikon": "lock"
+  },
+  "odin_ai_co_pilot": {
+    "tr": "Yapay zeka asistanı Odin'in omuzlarında göreve hazır.",
+    "en": "AI assistant ready for duty on Odin's shoulders.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "smart_toy"
+  },
+  "odin_all_realms_clear": {
+    "tr": "Dokuz diyar kontrol edildi. Hata yok.",
+    "en": "All nine realms checked. No errors.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "odin_allfather_auth": {
+    "tr": "En yüksek otorite onayı alındı.",
+    "en": "Highest authority approval obtained.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_asgard_deployment": {
+    "tr": "Yeni sürüm sorunsuz bir şekilde canlıya alındı.",
+    "en": "New version deployed seamlessly to live environment.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_bifrost_active": {
+    "tr": "Bifrost veri köprüsü maksimum bant genişliğinde aktif.",
+    "en": "Bifrost data bridge active at maximum bandwidth.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "hub"
+  },
+  "odin_bridge_active": {
+    "tr": "Sistemler arası köprü kararlı durumda.",
+    "en": "Inter-system bridge is in stable condition.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_command_center": {
+    "tr": "Merkezi komuta merkezi emirlerinizi bekliyor.",
+    "en": "Central command center awaits your commands.",
+    "katman": "cerceve",
+    "ton": "neutral",
+    "ikon": "dashboard"
+  },
+  "odin_core_shield": {
+    "tr": "Merkezi çekirdek kalkanı maksimum seviyede.",
+    "en": "Central core shield at maximum level.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "odin_crown_access": {
+    "tr": "Kök yönetim erişimi başarıyla sağlandı.",
+    "en": "Root administration access successfully provided.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_data_immutability": {
+    "tr": "Bilgiler işlendi ve hafızaya güvenle alındı.",
+    "en": "Information processed and safely stored in memory.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_decision_support": {
+    "tr": "Merkezi karar destek mekanizması hazır.",
+    "en": "Central decision support mechanism ready.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_destiny_shaped": {
+    "tr": "Verilerinizle operasyonun geleceğini şekillendirin.",
+    "en": "Shape the future of your operation with your data.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_end_of_day_sync": {
+    "tr": "Gün sonu raporu sarsılmaz hafızaya işlendi.",
+    "en": "End-of-day report written to unyielding memory.",
+    "katman": "cerceve",
+    "ton": "neutral"
+  },
+  "odin_epic_milestone": {
+    "tr": "Büyük hedefe ulaşıldı. Platform performansı rekor kırdı.",
+    "en": "Epic milestone achieved. Platform performance hit record high.",
+    "katman": "cerceve",
+    "ton": "success",
+    "ikon": "emoji_events"
+  },
+  "odin_eyes_on_you": {
+    "tr": "Odin'in gözleri üzerinizde: Verileriniz güvende.",
+    "en": "Eyes of Odin are upon you: Your data is secure.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "visibility"
+  },
+  "odin_gateway_secure": {
+    "tr": "Merkezi geçiş kapısı kilitlendi.",
+    "en": "Central gateway locked.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_glance_and_recall": {
+    "tr": "Tek bakışta gör, tek tıkla hatırla.",
+    "en": "See in a single glance, recall in a single click.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_global_teleport": {
+    "tr": "Veriler diyarlar arası fırtına hızıyla taşındı.",
+    "en": "Data transferred across realms at storm speed.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "public"
+  },
+  "odin_insight_generated": {
+    "tr": "Canlı gözlemlerden akıllı kararlar üretildi.",
+    "en": "Smart insights generated from live observations.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_intelligence_fed": {
+    "tr": "Saha bilgisi geçmiş kurallarla eşleşti.",
+    "en": "Field intelligence matched with historical rules.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_nexus_online": {
+    "tr": "Merkezi bağlantı noktası çevrimiçi.",
+    "en": "Central nexus online.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "lan"
+  },
+  "odin_nordic_stability": {
+    "tr": "İskandinav sarsılmazlığı altyapınıza entegre edildi.",
+    "en": "Nordic unyieldability integrated into your infrastructure.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_omniscience_mode": {
+    "tr": "Tam izleme ve kontrol modu aktif.",
+    "en": "Omniscience monitoring and control mode active.",
+    "katman": "cerceve",
+    "ton": "neutral"
+  },
+  "odin_perfect_harmony": {
+    "tr": "Huginn ve Muninn uyum içinde çalışıyor.",
+    "en": "Huginn and Muninn are working in perfect harmony.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "odin_runes_aligned": {
+    "tr": "Sistem parametreleri hizalandı. Operasyon sorunsuz.",
+    "en": "System parameters aligned. Operation seamless.",
+    "katman": "cerceve",
+    "ton": "success",
+    "ikon": "tune"
+  },
+  "odin_shield_wall": {
+    "tr": "Siber kalkan duvarı örüldü. Geçiş yok.",
+    "en": "Cyber shield wall built. No passage.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "shield"
+  },
+  "odin_sovereignty_active": {
+    "tr": "Yazılım egemenliği tamamen sizin elinizde.",
+    "en": "Software sovereignty is completely in your hands.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_sync_complete": {
+    "tr": "Gözlem ve hafıza senkronize. Sistem kararlı.",
+    "en": "Vision and memory synchronized. System stable.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "odin_system_optimized": {
+    "tr": "Geleceği tahmin etmek için sistem optimize edildi.",
+    "en": "System optimized to predict the future.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "odin_throne_welcome": {
+    "tr": "Yönetim Tahtına Hoş Geldiniz. Tam hakimiyet devrede.",
+    "en": "Welcome to the Throne. Total dominion enabled.",
+    "katman": "cerceve",
+    "ton": "info",
+    "ikon": "chair"
+  },
+  "odin_total_control": {
+    "tr": "Platform genelinde mutlak kontrol sizde.",
+    "en": "Absolute control across the platform is yours.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "odin_uncompromised_safety": {
+    "tr": "Tavizsiz güvenlik altyapısı devrede.",
+    "en": "Uncompromised security infrastructure in operation.",
+    "katman": "cerceve",
+    "ton": "success"
+  },
+  "odin_valhalla_tier": {
+    "tr": "En üst düzey premium koruma aktif.",
+    "en": "Top-tier premium protection active.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_whisper_received": {
+    "tr": "Sistem fısıltıları merkezi panele ulaştı.",
+    "en": "System whispers reached the central panel.",
+    "katman": "cerceve",
+    "ton": "info"
+  },
+  "odin_wisdom_applied": {
+    "tr": "Verinin gücü mitolojinin bilgeliğiyle buluştu.",
+    "en": "The power of data met the wisdom of mythology.",
+    "katman": "cerceve",
+    "ton": "success"
+  }
+}

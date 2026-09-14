@@ -153,7 +153,7 @@ class Button(Bilesen):
                 gorunen,
                 key=self.anahtar or None,
                 disabled=self.pasif,
-                use_container_width=self.tam_genislik,
+                width="stretch" if self.tam_genislik else "content",
                 type="primary" if self.varyant == "primary" else "secondary",
                 on_click=on_click,
             )

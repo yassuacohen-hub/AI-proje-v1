@@ -226,3 +226,13 @@ V10 Yönetim Yapısı
 | `.env`, `.env.*` | ❌ Yasak | ❌ Yasak | Gizli anahtarlar |
 | `src/company_master/db/` | ⚠️ Yetkili | ❌ Yasak | Veritabanı bağlantısı |
 | `src/company_master/schema/` | ⚠️ Yetkili | ❌ Yasak | Üretim şeması |
+---
+
+## Marka Terminolojisi
+
+- **Huginn** 🦅: Müşteri yüzeyi (8000) — canlı izleme, "Ne oluyor?" Teknik önek: `huginn_`
+- **Muninn** 🛡️: İç ekip yüzeyi (8501) — hafıza, denetim, "Ne oldu, neden?" Teknik önek: `muninn_`
+- **Odin** ⚡: Çekirdek/altyapı (görünmez) — karar, yetki, köprü. Teknik önek: `odin_`
+- Yazım kuralları: Huginn/Muninn/Odin çevrilmez, kısaltılmaz, ekle bölünmez. Yasak: Muginn, Hugin, Munin, Hugginn, Odın.
+- "Tarihsel Çatı Adı" kuralı: `huginn` veritabanı/repo/adı, `HuginnMCPServer`, `admin@huginn.local` gibi teknik kimliklerde değişmez — sıfır migration.
+- Detaylar: `ANA_KURALLAR.md` (Marka Adları ve Dil Sözleşmesi bölümü)

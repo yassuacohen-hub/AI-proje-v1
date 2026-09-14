@@ -30,6 +30,36 @@
       "sourceType": "github",
       "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
       "computedHash": "128fac78002d916c8ca908245d398e634f540d8bcf20915b2b2359aeb18eba59"
+    },
+    "senior-engineer": {
+      "source": "Cline, Kilo",
+      "sourceType": "internal",
+      "skillPath": "skills/senior-engineer/SKILL.md",
+      "computedHash": "1.0.0"
+    },
+    "osint-web-scraping-toolkit": {
+      "source": "Cline, Kilo Code",
+      "sourceType": "internal",
+      "skillPath": "skills/osint-web-scraping-toolkit/SKILL.md",
+      "computedHash": "1.0.0"
+    },
+    "streemit-product-intelligence": {
+      "source": "Streemit Product Intelligence",
+      "sourceType": "internal",
+      "skillPath": "skills/streemit-product-intelligence/SKILL.md",
+      "computedHash": "1.0.0"
+    },
+    "elite-product-ux-architect": {
+      "source": "Elite Product UX Architect",
+      "sourceType": "internal",
+      "skillPath": "skills/elite-product-ux-architect/SKILL.md",
+      "computedHash": "1.0.0"
+    },
+    "elite-saas-architect": {
+      "source": "Elite SaaS Architect",
+      "sourceType": "internal",
+      "skillPath": "skills/elite-saas-architect/SKILL.md",
+      "computedHash": "1.0.0"
     }
   }
 }

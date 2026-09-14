@@ -16,7 +16,7 @@ def render_api_management(token: str | None = None) -> None:
             items = data.get("items", [])
             limits = data.get("rate_limits", {})
             if items:
-                st.dataframe(pd.DataFrame(items), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(items), width="stretch", hide_index=True)
             else:
                 st.info("API kullanım kaydı yok.")
             if limits:
@@ -36,13 +36,13 @@ def render_user_management(token: str | None = None) -> None:
             for key, label in [("bekleyen", "Onay Bekleyen Kullanıcılar"), ("onayli_son", "Son Onaylı Kullanıcılar")]:
                 rows = pending.get(key, [])
                 if rows:
-                    st.dataframe(pd.DataFrame(rows), use_container_width=True, hide_index=True)
+                    st.dataframe(pd.DataFrame(rows), width="stretch", hide_index=True)
                 else:
                     st.info(f"{label}: yok")
         if isinstance(categories, dict):
             items = categories.get("items", [])
             if items:
-                st.dataframe(pd.DataFrame(items), use_container_width=True, hide_index=True)
+                st.dataframe(pd.DataFrame(items), width="stretch", hide_index=True)
             else:
                 st.info("Kategori kaydı yok.")
     except APIError:

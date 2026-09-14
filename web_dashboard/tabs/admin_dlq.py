@@ -114,8 +114,8 @@ def render_dlq_tab() -> None:
             [{"Hata Türü": k, "Adet": v} for k, v in stats["hata_turleri"].items()],
         )
         ht_df = ht_df.sort_values("Adet", ascending=False)
-        st.bar_chart(ht_df.set_index("Hata Türü"), use_container_width=True)
-        st.dataframe(ht_df, use_container_width=True, hide_index=True)
+        st.bar_chart(ht_df.set_index("Hata Türü"), width="stretch")
+        st.dataframe(ht_df, width="stretch", hide_index=True)
     else:
         st.info("Hata türü bilgisi yok.")
 
@@ -146,7 +146,7 @@ def render_dlq_tab() -> None:
                 "EventType": (ev.get("payload") or {}).get("eventType", ""),
             })
         df = pd.DataFrame(rows)
-        st.dataframe(df, use_container_width=True, hide_index=True)
+        st.dataframe(df, width="stretch", hide_index=True)
 
     # --- Retry Butonu ---
     st.divider()

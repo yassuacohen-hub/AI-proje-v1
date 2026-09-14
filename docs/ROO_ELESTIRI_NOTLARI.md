@@ -87,3 +87,166 @@ silmeyin; `Durum` sütununu `ÇÖZÜLDÜ (görev-id)` olarak güncelleyin — de
 |------|---------|-----|
 | Onay kuyruğunun birikmesi (UX-01, UX-02, UX-03, ROO-UX-ADMIN-01, ORCH-13, P7-46 `review`'da bekliyor) | cline (aktif orkestratör) | roo yalnızca sonucu gözlemler; onay verilmedikçe kilitler düşmez |
 | `scripts/gorev_at.py pano` çıktısının okunaksız olması + pano kayıtlarında `id` alanının `None` dönmesi | cline (aktif orkestratör) | Düzeltme sonrası roo tekrar test eder |
+
+---
+
+## 6. UI Revizyon 2. Tur — Menü Ağacı Analizi (2026-09-14, roo)
+
+> **Durum:** Sahip sitemap/menü ağacını hazırlıyor. Bu bölüm **sitemap gelmeden önce yapılan kök-sebep araştırmasıdır**; kod değişikliği yapılmadı. Sitemap gelince buradaki maddeler görev kalemlerine dönüştürülecek.
+>
+> **Referans:** https://docs.streamlit.io/get-started/installation/streamlit-playground
+> **Ortam:** Streamlit **1.62.0** — `st.navigation` ve `st.Page` **mevcut** (doğrulandı).
+
+### 6.1 Sahibin tespit ettiği 7 eksik → kod karşılığı
+
+| # | Sahip şikayeti | Koddaki yeri | Kök sebep |
+|---|---|---|---|
+| U-01 | "Zaten Streamlit'in gece/gündüz teması var, sen sayfaya ikinci bir tema düğmesi koymuşsun" | [`app.py:403`](../app.py:403) `ThemeToggle(...)` — [`render_topbar()`](../app.py:390) içinde | Yerleşik ⋮ › Settings › Appearance zaten tema değiştiriyor. İkinci düğme **mükerrer** ve iki kaynak (URL `?tema=` vs Streamlit ayarı) birbirini tutmuyor |
+| U-02 | "⋮ menüde **Wide mode** ayarı yok, orijinalinde olması gerekiyor" | [`app.py:63`](../app.py:63) `layout="wide"` **+** [`.streamlit/config.toml:29`](../.streamlit/config.toml:29) `toolbarMode = "minimal"` | **İki ayrı sebep birlikte çalışıyor:** (a) `set_page_config(layout="wide")` verildiğinde Streamlit "Wide mode" geçişini menüden kaldırır; (b) `toolbarMode="minimal"` menüyü zaten budar. İkisi de düzeltilmeden ayar geri gelmez |
+| U-03 | "Ana menülerin altında **alt menüler** olmalı" | [`web_dashboard/tabs/__init__.py:44-75`](../web_dashboard/tabs/__init__.py:44) `TabTanimi` | Yapı **tek seviyeli (flat)**. Yalnız `grup` alanı var (2 grup), hiyerarşi alanı (`ebeveyn`/`alt_bolumler`) yok. Alt menü veri modeli olmadan çizilemez |
+| U-04 | "Kompakt menüde **sadece menü isimleri** yazmalı, sen sadece ikon koymuşsun" | [`app.py:77`](../app.py:77) `KOMPAKT_SUTUN = 4` + [`_nav_grubu_ciz()`](../app.py:296) | Kompakt mod **ters kurgulanmış**: `st.button(tanim.ikon)` ile 4 sütunlu ikon ızgarası çiziliyor. Sahip tam tersini istiyor — **ikon yok, isim var** (ya da tek sütun dar liste) |
+| U-05 | "Kompakt menü **responsive değil**" | [`app.py:299`](../app.py:299) `st.columns(KOMPAKT_SUTUN)` | `st.columns(4)` sabit; dar ekranda sütunlar sıkışıyor, Streamlit'in kendi kırılma noktası devreye girmiyor |
+| U-06 | "Örnekteki **ikonlar ve ikon renkleri** güzeldi, sen yapmamışsın" | `TabTanimi.ikon` = emoji (🏠 👥 📦 …) | Playground **Material Symbols** kullanıyor (`:material/home:`) ve rengi temadan alıyor. Emoji **renk alamaz**, tema ile uyumlanmaz, platformlar arası farklı görünür |
+| U-07 | "Cache temizleme ⋮ menüde zaten var, alta bir daha koymuşsun" | [`app.py:505`](../app.py:505) `render_footer()` → "🔄 Cache Temizle" | Mükerrer. `toolbarMode="minimal"` menüdeki "Clear cache"i gizlediği için footer'a eklenmiş olabilir — U-02 düzeltilince bu düğme gereksizleşir |
+
+### 6.2 Kritik bulgu: mevcut navigasyon Streamlit'in kendi API'sini kullanmıyor
+
+Şu an menü **elle** çiziliyor: `st.sidebar` + `st.button` döngüsü + `?bolum=` URL parametresi ([`app.py:290-382`](../app.py:290)). Streamlit 1.62 ise bunun **resmi karşılığını** sunuyor:
+
+```python
+st.navigation({"🏢 İş Operasyonları": [st.Page(...), ...],
+               "🔧 Sistem & Yönetim": [st.Page(...), ...]})
+```
+
+`st.navigation` hazır olarak veriyor:
+
+| İhtiyaç | Elle çizim (bugün) | `st.navigation` |
+|---|---|---|
+| Grup başlıkları / alt menü | `st.markdown("#####")` + manuel | Sözlük anahtarı = grup başlığı (**yerleşik**) |
+| Aktif öğe vurgusu | `type="primary"` + `disabled=True` hilesi | Yerleşik, tema renginde |
+| URL yönlendirme | Elle `?bolum=` + `st.query_params` | `st.Page(url_path=...)` ile **gerçek rota** |
+| Responsive daralma | Yok | Yerleşik |
+| Material ikon + tema rengi | Emoji (renksiz) | `icon=":material/home:"` |
+| Erişilebilirlik (`nav` semantiği) | Buton yığını | Yerleşik |
+
+**Sonuç:** U-03, U-04, U-05, U-06'nın dördü de tek hamlede — `st.navigation`'a geçerek — çözülüyor. Elle çizimi yamamak yerine taşınması önerilir.
+
+> ⚠️ **Maliyet uyarısı (dürüst değerlendirme):** `st.navigation` **çok sayfalı (multipage)** modeli varsayar; her bölüm bir `st.Page` olur. Bugünkü tek-dosya + `render_icerik()` hata sınırı mimarisi buna göre yeniden kurulmalıdır. Bu **küçük bir yama değil**, orta ölçekli bir taşımadır. Sahibin "kısım kısım gidelim" talimatına uygun olarak **sitemap onaylandıktan sonra** ayrı bir görev olarak açılmalıdır.
+
+### 6.3 Menü ağacı önerileri (sitemap ile karşılaştırılacak taslak)
+
+Bugün **11 bölüm, 2 grup, 0 alt menü** var. Sahip alt menü istediğine göre olası kırılım:
+
+| Ana menü | Önerilen alt menüler | Bugünkü karşılığı |
+|---|---|---|
+| 🏠 Ana Kontrol | — (tek sayfa kalmalı, giriş ekranı) | `ana_kontrol` |
+| 👥 Müşteriler | Firma Listesi · Firma Detayı · Segmentler | `musteriler` (tek sayfa, içinde 3 bölüm) |
+| 📦 Paketler | Paket Kataloğu · Çapraz Satış | `paketler` (içinde `_render_capraz_satis`) |
+| 📢 Pazarlama | Kampanyalar · Segmentler · Performans | `pazarlama` (içinde `BOLUMLER` + `ALT_BOLUMLER` **zaten var**) |
+| 🤖 Abrakadabra | — | `abrakadabra` (hazır değil) |
+| ⚙️ Sistem | Sağlık · Kuyruk/DLQ · Performans · Dışa Aktarma | `sistem` (içinde 4+ panel) |
+| 📡 Canlı Veri | — | `canli_veri` |
+| 📋 Denetim | Dosya Kilitleri · Handoff · Tetik Günlüğü | `denetim` (içinde 3 bölüm) |
+| 👨‍💼 Yönetim | Karar Defteri · Görev Panosu | `yonetim` (bileşik) |
+| 🎛️ Ayarlar | — | `ayarlar` |
+| ⏳ Yükleme | — | `yukleme` (demo/geliştirici) |
+
+**Gözlem:** Alt menü adayları **zaten var** — ekranların içinde `Section`/`BOLUMLER` olarak duruyorlar (örn. [`pazarlama.py:41-85`](../web_dashboard/tabs/pazarlama.py:41) `BOLUMLER` + `ALT_BOLUMLER`). Yani alt menü **sıfırdan içerik üretmek değil, var olan bölümleri menüye yükseltmek** demek. Bu işi ucuzlatır.
+
+**Açık sorular (sahibe) ve cevapları:**
+
+| # | Soru | Cevap | Tarih |
+|---|---|---|---|
+| 1 | Alt menü **ayrı sayfa mı** (URL değişir) yoksa **sayfa içi çapa** mı? | ✅ **Ayrı sayfa** — sahip kararı: *"alt menü ayrı sayfa"* | 2026-09-14 |
+| 2 | `⏳ Yükleme` bölümü menüde kalsın mı, Ayarlar altına mı gizlensin? | ⏸ **Sitemap'e göre birlikte karar** | — |
+| 3 | `st.navigation` taşıması onaylanıyor mu? | ⏸ **Sitemap'e göre birlikte karar** | — |
+| 4 | Genişlik varsayılanı (`layout` verilmesin mi, `config.toml`'a mı yazılsın)? | ⏸ **Sitemap'e göre birlikte karar** — *"menüler otursun sonra bu soruları sor"* | — |
+
+**Soru 1'in teknik sonucu:** Alt menüler ayrı sayfa olacağına göre **`st.navigation` + `st.Page` doğru araç**tır; her alt menü kendi URL'ine sahip bir `st.Page` olur. Sayfa içi çapa (`SectionNav`) alternatifi elendi. Bu, 6.2'deki taşıma önerisini teknik olarak zorunlu kılar — ancak **sitemap onayı hâlâ ön şarttır**.
+
+### 6.4 Önerilen uygulama sırası (kısım kısım)
+
+| Sıra | İş | Risk | Durum | Not |
+|---|---|---|---|---|
+| 1 | U-01 + U-07: mükerrer tema ve cache düğmelerini kaldır | **Düşük** | ✅ yapıldı (2026-09-14) | Sadece silme; sitemap beklemeden yapıldı |
+| 2 | U-02: `toolbarMode` + `layout="wide"` kararını düzelt | **Düşük** | ✅ yapıldı (2026-09-14) | Wide mode geri geldi; genişlik kararı kullanıcıda |
+| 3 | U-06: emoji → Material Symbols | Orta | ⏸ sitemap bekliyor | `TabTanimi.ikon` sözleşmesi değişir, testler güncellenir |
+| 4 | U-03 + U-04 + U-05 + **U-08**: `st.navigation` taşıması + sidebar arama modalı | **Yüksek** | ⏸ sitemap bekliyor | Sitemap onayı şart; ayrı görev. U-08 aynı bölgeye (sidebar) dokunduğu için bu pakete katıldı — bkz. 6.6 |
+
+**Not (U-01 ile ilgili dikkat):** `ThemeToggle` bileşeni silinmiyor; yalnız `app.py`'deki çağrısı kaldırılıyor. Bileşen [`topbar.py:63`](../src/company_master/ui/components/topbar.py:63) ve testleri yerinde kalır — HTML müşteri paneli (8000) onu kullanmaya devam edebilir.
+
+### 6.5 Uygulanan değişiklikler (2026-09-14, roo)
+
+Sahibin "tamam halledelim" onayıyla 1. ve 2. sıra uygulandı. Dokunulan noktalar:
+
+| Dosya / Konum | Değişiklik | Gerekçe |
+|---|---|---|
+| [`.streamlit/config.toml:29`](../.streamlit/config.toml:29) | `toolbarMode = "minimal"` → `"auto"` | `"minimal"` sağ üst ⋮ menüsünü buduyor, **Wide mode** ve **Clear cache** seçeneklerini gizliyordu. U-02 + U-07'nin ortak kök sebebi |
+| [`app.py`](../app.py) — `set_page_config` | `layout="wide"` kaldırıldı | `layout` açıkça verilince Streamlit ⋮ menüsünden "Wide mode" geçişi kaybolur; genişlik kararı kullanıcıya bırakıldı |
+| [`app.py`](../app.py) — import bloğu | `ThemeToggle`, `tema_dogrula`, `tema_karsiti` çıkarıldı | Sayfa içi tema düğmesi kaldırıldı (U-01) |
+| [`app.py`](../app.py) — sabitler | `TEMA_PARAM` silindi; `STREAMLIT_TEMA_ESLEME` eklendi; `VARSAYILAN_TEMA` `"karanlik"` → `"aydinlik"` | `config.toml` `base = "light"` ile hizalandı |
+| [`app.py:152`](../app.py:152) `aktif_tema()` | URL/oturum yerine `st.context.theme.type` okunuyor; `try/except` ile eski sürümde varsayılana düşüyor | Tema için **tek doğru kaynak** artık ⋮ menüsü › Settings › Appearance |
+| [`app.py:390`](../app.py:390) `render_topbar` | İmza `(tanim, tema)` → `(tanim)`; `ThemeToggle` çağrısı ve `sag=[...]` kaldırıldı | U-01 mükerrer tema düğmesi |
+| [`app.py:486`](../app.py:486) `render_footer` | `st.columns(4)` → `st.columns(3)`; `footer_cache_temizle` butonu silindi, yerine ⋮ menüsüne yönlendiren caption | U-07 mükerrer cache temizleme |
+
+**Doğrulama:**
+- Odak testi (`test_ui_components`, `test_dashboard_nav`, `test_web_dashboard_tabs`, `test_theme_system`): **204 passed / 3.76 sn**
+- Tam regresyon (`python -m pytest tests -q`): **1423 passed, 2 skipped, 1 failed / 55.6 sn**. Tek hata `test_api_integration.py::TestVeriUclari::test_companies_liste_sozlesme` (`assert 14000 == 1`) — mock DB devreye girmiyor, gerçek veritabanına düşüyor. **Bilinen ve UI ile ilgisiz** izolasyon sorunu; ayrı görev olarak kayıtlı.
+
+**Ortam notu — ✅ ÇÖZÜLDÜ (2026-09-14):** Kök dizinden `pytest -q` koşulduğunda `AI proje v1/` submodule'ü, `scripts/test_*.py`, `src/company_master/services/test_*.py` ve `workspace/external/...` de toplanıp **77 `import file mismatch`** hatası veriyordu. Sahibin onayıyla ([`pytest.ini`](../pytest.ini)) `testpaths = tests` + `norecursedirs` eklendi.
+
+Doğrulama: `python -m pytest -q --collect-only` → **1426 test toplandı, 0 hata** (önce 77 error). Artık kök dizinden `pytest` koşmak güvenlidir.
+
+---
+
+## 6.6 U-08 — Arama konumu ve arama modalı (yeni istek, 2026-09-14)
+
+**Sahibin isteği:** *"[docs.streamlit.io/develop/concepts](https://docs.streamlit.io/develop/concepts) arama kısmının konumu güzel ve arama yapınca modal açılıyor, bu özellik de hoşuma gitti."*
+
+### Referansın davranışı
+
+| Özellik | Referans (docs.streamlit.io) | Bugünkü Huginn paneli |
+|---|---|---|
+| **Konum** | Sol üst — sidebar'ın tepesinde, logonun hemen altında; sayfa kaydırılsa da sabit | Sağ üst içerik şeridinde ([`app.py:407`](../app.py:407) `render_topbar`), H1 ile aynı satırı paylaşır |
+| **Tetikleme** | Tıklama **veya** `Ctrl/Cmd + K` kısayolu | Yalnız tıklama |
+| **Sonuç sunumu** | Sayfanın üstünde açılan **modal (overlay)**; arka plan kararır | Aynı satırın altında **yan yana buton kolonları** (`st.columns`) |
+| **Sonuç sayısı** | Kaydırılabilir liste, sınırsız | `ARAMA_MAKS_SONUC = 5` ile kesiliyor |
+| **Kapatma** | `Esc`, dışarı tıklama, ✕ | Yok — sonuçlar sayfada asılı kalır |
+
+### Bugünkü kodun sınırları
+
+1. **Arama sonuçları düzeni bozuyor:** [`app.py:422-433`](../app.py:422) çoklu eşleşmede `st.columns` açıp topbar'ın altına buton satırı ekliyor; sayfa içeriği aşağı kayıyor.
+2. **Sorgu temizlenemiyor:** [`app.py:414-416`](../app.py:414) yorumunda belirtildiği gibi, widget oluştuktan sonra `st.session_state[ARAMA_KEY]` yazılamaz (`StreamlitAPIException`). Sonuç: seçim yapıldıktan sonra arama kutusu dolu kalır.
+3. **Tek eşleşmede sessiz zıplama:** [`app.py:420`](../app.py:420) tek sonuç bulunca kullanıcıya sormadan bölüm değiştiriyor — yazım sırasında istenmeyen sayfa geçişi riski.
+
+### Çözüm önerisi
+
+`st.dialog` mevcut (**Streamlit 1.62.0** ile doğrulandı; `st.dialog`, `st.popover`, `st.navigation` üçü de var).
+
+```python
+@st.dialog("Bölüm ara", width="large")
+def arama_modali() -> None:
+    sorgu = st.text_input("Ara", key="_hg_modal_sorgu", label_visibility="collapsed")
+    for aday in bolum_ara(sorgu):
+        if st.button(f"{aday.ikon} {aday.baslik}", key=f"m_{aday.anahtar}",
+                     use_container_width=True, help=aday.aciklama):
+            bolum_sec(aday.anahtar)   # modal kapanır, sayfa değişir
+```
+
+Tetikleyici sidebar'ın en üstüne taşınır (referansın konumu):
+
+```python
+with st.sidebar:
+    if st.button("🔍 Ara…", use_container_width=True):
+        arama_modali()
+```
+
+**Kazanımlar:** düzen bozulmaz (overlay), sorgu modal kapanınca sıfırlanır (2. sınır çözülür), sessiz zıplama ortadan kalkar (3. sınır çözülür), sonuç listesi sınırsız kaydırılabilir.
+
+**Maliyet ve riskler:**
+- `render_topbar` imzası ve testleri değişir (`test_ui_components.py` topbar arama testleri).
+- `ARAMA_MAKS_SONUC` sabiti anlamsızlaşır veya kaydırma sınırına dönüşür.
+- `Ctrl+K` kısayolu Streamlit'te **yerleşik değildir**; JS enjeksiyonu gerektirir — MVP'de kapsam dışı bırakılması önerilir.
+- Arama sidebar'a taşınırsa, `st.navigation` taşıması (U-03/04/05) ile **aynı bölgeye** dokunur → **ikisi tek görevde yapılmalı**, aksi halde sidebar iki kez yeniden yazılır.
+
+**Karar:** U-08, U-03/U-04/U-05 ile **birleştirilip sitemap sonrasına** bırakılır. Tek başına yapılırsa iş iki kez yapılmış olur.

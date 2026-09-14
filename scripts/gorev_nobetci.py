@@ -23,6 +23,9 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+
 from src.company_master.orchestrator import task_board as tb
 from src.company_master.orchestrator import nobetci
 from src.company_master.orchestrator import trigger
@@ -96,7 +99,7 @@ def cmd_kaldir(args: argparse.Namespace) -> int:
 def cmd_durum(args: argparse.Namespace) -> int:
     try:
         r = subprocess.run(["schtasks", "/Query", "/TN", NOBETCI_GOREV, "/fo", "LIST", "/v"],
-                           capture_output=True, text=True, check=False)
+                           capture_output=True, text=True, encoding="utf-8", errors="replace", check=False)
         print(r.stdout.strip() if r.returncode == 0 else "Zamanlayıcı kaydı yok (`kur` ile başlatın).")
     except Exception as exc:
         print(f"Zamanlayıcı sorgulama hatasi: {exc}")

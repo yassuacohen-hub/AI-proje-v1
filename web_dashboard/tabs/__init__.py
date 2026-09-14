@@ -25,6 +25,8 @@ import importlib
 from dataclasses import dataclass
 from typing import Callable
 
+from company_master.i18n import t
+
 __all__ = [
     "TabTanimi",
     "SECTIONS",
@@ -78,7 +80,7 @@ class TabTanimi:
 SECTIONS: tuple[TabTanimi, ...] = (
     TabTanimi(
         anahtar="ana_kontrol",
-        baslik="Ana Kontrol",
+        baslik=t("menu_h_ana"),
         ikon="🏠",
         grup=GRUP_IS,
         aciklama="KPI'lar, müşteri ve sistem sağlığı tek bakışta",
@@ -88,7 +90,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
     ),
     TabTanimi(
         anahtar="musteriler",
-        baslik="Müşteriler",
+        baslik=t("menu_m_musteriler"),
         ikon="👥",
         grup=GRUP_IS,
         aciklama="Firma listesi, filtreler ve kalite bildirimleri",
@@ -98,7 +100,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
     ),
     TabTanimi(
         anahtar="paketler",
-        baslik="Paketler",
+        baslik=t("menu_h_paketler"),
         ikon="📦",
         grup=GRUP_IS,
         aciklama="Paket kataloğu, fiyatlar ve çapraz satış önerileri",
@@ -108,7 +110,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
     ),
     TabTanimi(
         anahtar="pazarlama",
-        baslik="Pazarlama",
+        baslik=t("menu_h_pazarlama"),
         ikon="📢",
         grup=GRUP_IS,
         aciklama="Kampanyalar, segmentler ve segment kapsama analizi",
@@ -118,7 +120,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
     ),
     TabTanimi(
         anahtar="abrakadabra",
-        baslik="Abrakadabra",
+        baslik=t("menu_m_abrakadabra"),
         ikon="🤖",
         grup=GRUP_IS,
         aciklama="9Router tabanlı AI sohbet ve analiz asistanı",
@@ -128,7 +130,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
     ),
     TabTanimi(
         anahtar="sistem",
-        baslik="Sistem",
+        baslik=t("menu_sistem_bilesik"),
         ikon="⚙️",
         grup=GRUP_SISTEM,
         aciklama="Performans, maliyet, webhook, DLQ ve denetim izi",
@@ -138,7 +140,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
     ),
     TabTanimi(
         anahtar="canli_veri",
-        baslik="Canlı Veri",
+        baslik=t("menu_m_canli_veri"),
         ikon="📡",
         grup=GRUP_SISTEM,
         aciklama="Gerçek zamanlı sinyal akışı (SSE)",
@@ -147,8 +149,18 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_admin_realtime_tab",
     ),
     TabTanimi(
+        anahtar="denetim",
+        baslik=t("menu_m_denetim"),
+        ikon="📋",
+        grup=GRUP_SISTEM,
+        aciklama="Dosya kilitleri, handoff geçişleri ve tetikleyici günlüğü (DASH-08)",
+        url_path="denetim",
+        modul="web_dashboard.tabs.admin_audit",
+        fonksiyon="render_audit_tab",
+    ),
+    TabTanimi(
         anahtar="yonetim",
-        baslik="Yönetim",
+        baslik=t("menu_yonetim"),
         ikon="👨‍💼",
         grup=GRUP_SISTEM,
         aciklama="Admin girişi, kullanıcı/API yönetimi, kalite ve karar defteri",
@@ -158,13 +170,23 @@ SECTIONS: tuple[TabTanimi, ...] = (
     ),
     TabTanimi(
         anahtar="ayarlar",
-        baslik="Ayarlar",
+        baslik=t("menu_m_ayarlar"),
         ikon="🎛️",
         grup=GRUP_SISTEM,
         aciklama="Görünüm, veri, bildirim ve bölgesel kullanıcı tercihleri (P7-46)",
         url_path="ayarlar",
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_ayarlar_tab",
+    ),
+    TabTanimi(
+        anahtar="yukleme",
+        baslik=t("menu_loading"),
+        ikon="⏳",
+        grup=GRUP_SISTEM,
+        aciklama="Loading state örnekleri ve skeleton gosterim (P7-42)",
+        url_path="yukleme",
+        modul="web_dashboard.tabs.admin_loading",
+        fonksiyon="render_loading_tab",
     ),
 )
 

@@ -21,6 +21,7 @@ import streamlit as st
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
+from company_master.i18n import t  # noqa: E402
 from company_master.orchestrator import task_board as tb
 from scripts.decision_log import read_decisions
 
@@ -83,10 +84,7 @@ def render_audit_tab() -> None:
     """DASH-08: Admin Denetim (Audit) sekmesi."""
 
     st.subheader("🔍 Admin Denetim")
-    st.caption(
-        "Karar defteri, dosya kilidi, handoff, görev durumu ve trigger loglari — "
-        "son güncelleme: " + datetime.now().strftime("%Y-%m-%d %H:%M")
-    )
+    st.caption(t("muninn_audit_trail_ready") + " — son güncelleme: " + datetime.now().strftime("%Y-%m-%d %H:%M"))
 
     # --- Karar Defteri ---
     st.divider()
@@ -98,17 +96,17 @@ def render_audit_tab() -> None:
         for d in decisions:
             tags = d.get("tags", [])
             if not isinstance(tags, list):
-                tags = [str(t) for t in tags]
+                tags = [str(etiket) for etiket in tags]
             rows.append({
                 "Tarih": d.get("ts", ""),
                 "Başlık": d.get("title", ""),
                 "Karar": d.get("decision", ""),
                 "Karar Vereren": d.get("decider", ""),
                 "Gerekçe": d.get("reason", ""),
-                "Etiketler": ", ".join(str(t) for t in tags),
+                "Etiketler": ", ".join(str(etiket) for etiket in tags),
             })
         df = pd.DataFrame(rows)
-        st.dataframe(df, use_container_width=True, hide_index=True)
+        st.dataframe(df, width="stretch", hide_index=True)
         st.caption(f"Toplam {len(decisions)} karar kaydı gösteriliyor (son 30).")
     else:
         st.info("Henüz karar kaydı yok.")
@@ -128,7 +126,7 @@ def render_audit_tab() -> None:
                 "Kilitlendi": info.get("kilitlendi", ""),
             })
         lock_df = pd.DataFrame(lock_rows)
-        st.dataframe(lock_df, use_container_width=True, hide_index=True)
+        st.dataframe(lock_df, width="stretch", hide_index=True)
         st.caption(f"Aktif kilitle: {len(locks)} dosya.")
     else:
         st.success("✅ Aktif dosya kilidi yok — tüm dosyalar serbest.")
@@ -148,7 +146,7 @@ def render_audit_tab() -> None:
                 "Tarih": info.get("tarih", ""),
             })
         hf_df = pd.DataFrame(hf_rows)
-        st.dataframe(hf_df, use_container_width=True, hide_index=True)
+        st.dataframe(hf_df, width="stretch", hide_index=True)
         st.caption(f"Toplam {len(handoffs)} handoff kaydı.")
     else:
         st.info("Henüz handoff kaydı yok.")
@@ -161,8 +159,8 @@ def render_audit_tab() -> None:
         board = tb.gorev_listesi()
         if board:
             status_counts: dict[str, int] = {}
-            for t in board:
-                durum = t.get("durum", "unknown")
+            for gorev in board:
+                durum = gorev.get("durum", "unknown")
                 status_counts[durum] = status_counts.get(durum, 0) + 1
 
             c1, c2, c3, c4, c5 = st.columns(5)
@@ -179,15 +177,15 @@ def render_audit_tab() -> None:
 
             task_df = pd.DataFrame([
                 {
-                    "Görev ID": t.get("task_id", ""),
-                    "Başlık": (t.get("baslik") or t.get("title", ""))[:60],
-                    "Sahip": t.get("sahip", ""),
-                    "Öncelik": t.get("oncelik", ""),
-                    "Durum": t.get("durum", ""),
+                    "Görev ID": gorev.get("task_id", ""),
+                    "Başlık": (gorev.get("baslik") or gorev.get("title", ""))[:60],
+                    "Sahip": gorev.get("sahip", ""),
+                    "Öncelik": gorev.get("oncelik", ""),
+                    "Durum": gorev.get("durum", ""),
                 }
-                for t in board
+                for gorev in board
             ])
-            st.dataframe(task_df, use_container_width=True, hide_index=True)
+            st.dataframe(task_df, width="stretch", hide_index=True)
         else:
             st.info("Görev verisi bulunamadı.")
     except Exception as e:
@@ -200,16 +198,16 @@ def render_audit_tab() -> None:
     triggers = load_trigger_log()
     if triggers:
         tr_rows = []
-        for t in triggers[-20:]:
+        for tetik in triggers[-20:]:
             tr_rows.append({
-                "Zaman": t.get("ts", ""),
-                "Kaynak": t.get("kaynak", ""),
-                "Ajan": t.get("ajan", ""),
-                "Görev": t.get("task_id", ""),
-                "Tetik Sayısı": t.get("tetik_sayisi", 0),
+                "Zaman": tetik.get("ts", ""),
+                "Kaynak": tetik.get("kaynak", ""),
+                "Ajan": tetik.get("ajan", ""),
+                "Görev": tetik.get("task_id", ""),
+                "Tetik Sayısı": tetik.get("tetik_sayisi", 0),
             })
         tr_df = pd.DataFrame(tr_rows)
-        st.dataframe(tr_df, use_container_width=True, hide_index=True)
+        st.dataframe(tr_df, width="stretch", hide_index=True)
         st.caption(f"Son {len(triggers)} trigger kaydı gösteriliyor.")
     else:
         st.info("Trigger kaydı yok.")

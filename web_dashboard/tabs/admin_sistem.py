@@ -80,7 +80,7 @@ def render_sistem_tab() -> None:
             "🔄 Sistem Verilerini Yenile",
             key="sistem-refresh",
             type="primary",
-            use_container_width=True,
+            width="stretch",
             help="Önbelleği temizler ve tüm sistem panellerini yeniden yükler.",
         )
     with col_time:

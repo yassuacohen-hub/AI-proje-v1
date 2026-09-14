@@ -73,7 +73,7 @@ def render_yonetim_tab() -> None:
             "🔄 Yönetim Verilerini Yenile",
             key="yonetim-refresh",
             type="primary",
-            use_container_width=True,
+            width="stretch",
             help="Önbelleği temizler ve yönetim panellerini yeniden yükler.",
         )
     with col_time:

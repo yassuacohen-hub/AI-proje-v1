@@ -138,7 +138,7 @@ def render_api_analytics_tab() -> None:
             top_n.reset_index().rename(
                 columns={"endpoint": "Endpoint", "cagri_sayisi": "Çağrı Sayısı"}
             ),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
     else:
@@ -158,7 +158,7 @@ def render_api_analytics_tab() -> None:
                 tier_toplam.reset_index().rename(
                     columns={"tier": "Tier", "cagri_sayisi": "Çağrı Sayısı"}
                 ),
-                use_container_width=True,
+                width="stretch",
                 hide_index=True,
             )
     else:
@@ -172,7 +172,7 @@ def render_api_analytics_tab() -> None:
         rl_df = pd.DataFrame(
             [{"Tier": tier, "Limit (istek/dk)": limit} for tier, limit in rate_limits.items()]
         )
-        st.dataframe(rl_df, use_container_width=True, hide_index=True)
+        st.dataframe(rl_df, width="stretch", hide_index=True)
     else:
         st.info("Rate-limit yapılandırması alınamadı.")
 

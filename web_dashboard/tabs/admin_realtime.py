@@ -111,7 +111,7 @@ def render_admin_realtime_tab() -> None:
             "🔄 Veriyi Yenile",
             key="refresh_realtime",
             type="primary",
-            use_container_width=True,
+            width="stretch",
             help="Önbelleği temizler ve canlı akışı yeniden okur.",
         )
     with col_rehber:
@@ -173,7 +173,7 @@ def render_admin_realtime_tab() -> None:
             import pandas as pd
             trend_df = pd.DataFrame(trend)
             if not trend_df.empty:
-                st.line_chart(trend_df, use_container_width=True)
+                st.line_chart(trend_df, width="stretch")
         else:
             st.info("📊 Trend verisi henüz mevcut değil.")
     else:

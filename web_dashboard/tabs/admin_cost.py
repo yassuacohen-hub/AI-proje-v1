@@ -552,14 +552,14 @@ def render_cost_tab() -> None:
     with chart_col1:
         fig_pie = chart_provider_breakdown(cost_summary)
         if fig_pie:
-            st.plotly_chart(fig_pie, use_container_width=True)
+            st.plotly_chart(fig_pie, width="stretch")
         else:
             st.bar_chart({"Provider": [0]})
     
     with chart_col2:
         fig_trend = chart_daily_trend(cost_summary)
         if fig_trend:
-            st.plotly_chart(fig_trend, use_container_width=True)
+            st.plotly_chart(fig_trend, width="stretch")
         else:
             st.info("Trend verisi henüz mevcut değil.")
     
@@ -569,18 +569,18 @@ def render_cost_tab() -> None:
     with chart_col3:
         fig_scatter = chart_latency_vs_cost(cost_summary)
         if fig_scatter:
-            st.plotly_chart(fig_scatter, use_container_width=True)
+            st.plotly_chart(fig_scatter, width="stretch")
     
     with chart_col4:
         fig_anomaly = chart_anomaly_flags(cost_summary)
         if fig_anomaly:
-            st.plotly_chart(fig_anomaly, use_container_width=True)
+            st.plotly_chart(fig_anomaly, width="stretch")
     
     # Heatmap
     st.subheader("Verimliliği Heatmap")
     fig_heatmap = chart_cost_efficiency(cost_summary)
     if fig_heatmap:
-        st.plotly_chart(fig_heatmap, use_container_width=True)
+        st.plotly_chart(fig_heatmap, width="stretch")
     
     st.divider()
     
@@ -603,7 +603,7 @@ def render_cost_tab() -> None:
         })
     
     if provider_data:
-        st.dataframe(provider_data, use_container_width=True)
+        st.dataframe(provider_data, width="stretch")
     
     st.divider()
     
@@ -621,7 +621,7 @@ def render_cost_tab() -> None:
                 "Zaman": a.timestamp,
             })
         
-        st.dataframe(anomaly_data, use_container_width=True)
+        st.dataframe(anomaly_data, width="stretch")
     else:
         st.success("✅ Anomali tespit edilmedi.")
     

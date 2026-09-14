@@ -173,6 +173,7 @@ class ChatBubble(Bilesen):
     """
 
     VARSAYILAN_NOT = "Sohbet motoru henüz bağlı değil — arayüz hazır."
+    VARSAYILAN_ROZET = "Yakında"
 
     def __init__(
         self,
@@ -182,6 +183,7 @@ class ChatBubble(Bilesen):
         kapat_url: str = "?sohbet=kapali",
         baslik: str = "AI Abrakadabra",
         not_metni: str | None = None,
+        rozet_metni: str | None = None,
     ) -> None:
         self.acik = bool(acik)
         self.mesajlar = self._normalize(mesajlar or [])
@@ -189,6 +191,9 @@ class ChatBubble(Bilesen):
         self.kapat_url = kapat_url
         self.baslik = baslik
         self.not_metni = self.VARSAYILAN_NOT if not_metni is None else not_metni
+        # Durum rozeti: motor bağlanana dek "Yakında"; motor bağlanınca
+        # çağıran taraf rozet_metni="" vererek rozeti gizleyebilir.
+        self.rozet_metni = self.VARSAYILAN_ROZET if rozet_metni is None else rozet_metni
 
     @staticmethod
     def _normalize(mesajlar: Iterable[Any]) -> list[tuple[str, str]]:
@@ -222,10 +227,22 @@ class ChatBubble(Bilesen):
             },
         )
 
+    def _rozet_html(self) -> str:
+        if not self.rozet_metni:
+            return ""
+        return etiket(
+            "span",
+            guvenli_metin(self.rozet_metni),
+            **{
+                "class": sinif("chat", "rozet"),
+                "title": "AI asistan henüz aktif değil — yakında devreye alınacak",
+            },
+        )
+
     def _bas_html(self) -> str:
         baslik = etiket(
             "span",
-            f"✨ {guvenli_metin(self.baslik)}",
+            f"✨ {guvenli_metin(self.baslik)}" + self._rozet_html(),
             **{"class": sinif("chat", "baslik")},
         )
         kapat = etiket(

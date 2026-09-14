@@ -173,11 +173,33 @@ ROLLER = {
 
 | Bileşen | Konum | Durum |
 |---|---|---|
-| `ThemeToggle` | Sağ üst | ✅ Gece/gündüz, URL + oturumda kalıcı |
+| `ThemeToggle` | — | ⛔ **Streamlit panelinden kaldırıldı (U-01)** — bileşen `topbar.py`'de duruyor, HTML müşteri paneli (8000) kullanmaya devam eder |
 | Arama alanı | Sağ üst | ✅ Bölüm adına göre canlı süzme |
-| `ChatBubble` "AI Abrakadabra" | Sağ alt | ⚠️ **UI kabuğu hazır, AI motoru bağlı değil** |
+| `ChatBubble` "AI Abrakadabra" | Sağ alt | ⚠️ **UI kabuğu hazır, AI motoru bağlı değil** — panel başlığında **"Yakında" durum rozeti** gösterilir |
 
-> **Açık iş:** Sohbet balonuna gerçek bir sohbet modeli bağlanacak (soru cevaplama, analiz, rehberlik). Sahip talimatı: *"iş yükü çoksa not alırsın sonra yaparız."* → Ayrı görev olarak kayıtlı.
+### 6.0 Streamlit'in kendi araç çubuğuna devredilen kontroller (2026-09-14)
+
+Sahip tespiti: *"zaten Streamlit gece/gündüz teması var sağ üst ⋮ menüde, sen sayfada tekrar koymuşsun"* ve *"cache temizleme de bu menüde var zaten"*. Mükerrer kontroller kaldırıldı; ⋮ menüsü `toolbarMode = "auto"` ile geri açıldı.
+
+| Kontrol | Eskiden | Şimdi |
+|---|---|---|
+| **Tema (gece/gündüz)** | Sayfa içi `ThemeToggle` + `?tema=` URL parametresi | Sağ üst ⋮ › **Settings › Appearance**. `app.py::aktif_tema()` bunu `st.context.theme.type` ile okur, `STREAMLIT_TEMA_ESLEME` ile iç anahtarlara (`aydinlik`/`karanlik`) çevirir |
+| **Genişlik (Wide mode)** | `set_page_config(layout="wide")` sabitti, menüde seçenek yoktu | `layout` verilmiyor → ⋮ › **Wide mode** geçişi kullanıcıda |
+| **Önbellek temizleme** | Footer'da "Cache Temizle" butonu | Sağ üst ⋮ › **Clear cache**. Footer yalnız yönlendirici bir caption gösterir |
+
+**Kural:** Streamlit'in araç çubuğunda zaten bulunan bir kontrolü sayfa içinde tekrarlamayın. İki ayrı kaynak senkronsuz kalır ve kullanıcı hangisinin geçerli olduğunu bilemez. Tema için **tek doğru kaynak** `st.context.theme`'dir.
+
+**Durum rozeti sözleşmesi (`hg-chat-rozet`):**
+
+| Durum | Çağrı | Sonuç |
+|---|---|---|
+| Motor bağlı değil (varsayılan) | `ChatBubble(acik=True)` | Başlıkta `ChatBubble.VARSAYILAN_ROZET` = **"Yakında"** rozeti çizilir |
+| Motor bağlandı | `ChatBubble(acik=True, rozet_metni="")` | Rozet tamamen kaldırılır |
+| Özel etiket | `ChatBubble(acik=True, rozet_metni="Beta")` | Metin `guvenli_metin()` kaçışından geçer (XSS koruması) |
+
+Rozet yalnız **açık panel başlığına** aittir; kapalı durumdaki FAB rozet çizmez. Renkler `--hg-color-warning` / `--hg-color-warning-soft` tokenlarından gelir (hardcoded renk yok).
+
+> **Açık iş:** Sohbet balonuna gerçek bir sohbet modeli bağlanacak (soru cevaplama, analiz, rehberlik). Sahip talimatı: *"iş yükü çoksa not alırsın sonra yaparız."* → Ayrı görev olarak kayıtlı. Motor devreye alındığında `app.py::render_chat` çağrısına `rozet_metni=""` eklenerek rozet kapatılır; başka değişiklik gerekmez.
 
 **Korunanlar (değiştirilmedi):** sol menü ikon dizilimi ve sırası, renk paleti, font seçimi, daraltılabilir dinamik sol menü.
 
@@ -249,10 +271,32 @@ def test_sayfa_iskeleti_h1_uretir(st_sahte):
 
 ---
 
-## 11. Bilinen Açık Kayıtlar
+## 11. Navigasyon Bölümleri (`web_dashboard/tabs/__init__.py::SECTIONS`)
+
+Toplam **11 bölüm**. Her kayıt bir `TabTanimi`; `hazir=False` olanlar `render_placeholder` ile "bekleyen görev" bildirir.
+
+| # | Anahtar | Render fonksiyonu | Not |
+|---|---|---|---|
+| 1 | `ana_kontrol` | `ana_kontrol.render_ana_kontrol_tab` | KPI özeti |
+| 2 | `musteriler` | `admin_musteriler.render_musteriler_tab` | |
+| 3 | `paketler` | `paketler.render_paketler_tab` | |
+| 4 | `pazarlama` | `pazarlama.render_pazarlama_tab` | |
+| 5 | `abrakadabra` | — | `hazir=False` — AI motoru ayrı görev |
+| 6 | `sistem` | `admin_sistem.render_sistem_tab` | |
+| 7 | `canli_veri` | `admin_realtime.render_admin_realtime_tab` | |
+| 8 | `denetim` | `admin_audit.render_audit_tab` | **DASH-08** — öksüzdü, bağlandı |
+| 9 | `yonetim` | `admin_yonetim.render_yonetim_tab` | Karar defteri dahil (`render_decision_tab`) |
+| 10 | `ayarlar` | `admin_panel.render_ayarlar_tab` | |
+| 11 | `yukleme` | `admin_loading.render_loading_tab` | **P7-42** — öksüzdü, bağlandı |
+
+**Bekçi test:** `tests/test_dashboard_nav.py` (bölüm sayısı + anahtar/URL benzersizliği) ve `tests/test_sekme_kapsama.py` (öksüz render fonksiyonu kalmasın — `BILINEN_ACIK` artık boş).
+
+---
+
+## 12. Bilinen Açık Kayıtlar
 
 | Kayıt | Durum |
 |---|---|
-| AI Abrakadabra sohbet motoru | Ayrı görev — UI kabuğu hazır |
-| `test_api_integration.py::test_companies_liste_sozlesme` | UI dışı; gerçek DB'ye bağlı (`total == 1` bekliyor, 14000 geliyor) |
-| 3 öksüz sekme (`render_audit_tab`, `render_decision_tab`, `render_loading_tab`) | Sahip kararı bekliyor |
+| AI Abrakadabra sohbet motoru | Ayrı görev — UI kabuğu hazır, başlıkta "Yakında" rozeti gösteriliyor |
+| `test_api_integration.py::test_companies_liste_sozlesme` | UI dışı; gerçek DB'ye bağlı (`total == 1` bekliyor, 14000 geliyor) → izole fixture DB ayrı görev |
+| ~~3 öksüz sekme~~ | ✅ **Kapandı** — `render_audit_tab` + `render_loading_tab` SECTIONS'a eklendi, `render_decision_tab` yönetim sekmesine delege edildi |

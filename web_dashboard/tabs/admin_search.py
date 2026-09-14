@@ -132,7 +132,7 @@ def render_search_tab() -> None:
 
             col1, col2 = st.columns([3, 1])
             with col1:
-                st.dataframe(df, use_container_width=True, hide_index=True)
+                st.dataframe(df, width="stretch", hide_index=True)
             with col2:
                 st.metric("Toplam Sonuc", len(df))
                 avg_qs = df["data_quality_score"].mean()
@@ -148,7 +148,7 @@ def render_search_tab() -> None:
                 "20-39 (Düşük)": len(df[(df["data_quality_score"] >= 20) & (df["data_quality_score"] < 40)]),
                 "0-19 (Çok Düşük)": len(df[df["data_quality_score"] < 20]),
             }
-            st.bar_chart(pd.Series(qs_buckets), use_container_width=True)
+            st.bar_chart(pd.Series(qs_buckets), width="stretch")
         elif df is not None:
             st.info("Sonuc bulunamadi.")
     else:

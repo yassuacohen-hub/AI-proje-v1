@@ -51,7 +51,7 @@ def _render_baslik() -> None:
     col_btn, col_rehber, col_zaman = st.columns([1, 1, 3], vertical_alignment="center")
     with col_btn:
         yenile = st.button("🔄 Veriyi Yenile", key="musteriler_yenile",
-                           type="primary", use_container_width=True,
+                           type="primary", width="stretch",
                            help="Önbelleği temizler ve firma listesini yeniden sorgular.")
     with col_rehber:
         rehber = st.toggle("ℹ️ Sekme rehberi", key="musteriler_rehber",
@@ -115,5 +115,5 @@ def render_musteriler_tab() -> None:
         return
 
     st.success(f"{len(df)} firma bulundu")
-    st.dataframe(df, use_container_width=True, hide_index=True)
+    st.dataframe(df, width="stretch", hide_index=True)
     st.caption(f"Ortalama kalite skoru: {df['data_quality_score'].mean():.1f}/100")

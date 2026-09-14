@@ -47,7 +47,7 @@ def render_loading_tab() -> None:
         horizontal=True,
     )
 
-    if st.button("▶️ Calistir", type="primary", use_container_width=True):
+    if st.button("▶️ Calistir", type="primary", width="stretch"):
         steps = {
             "Veri Yukleme": ["Baglantı kuruluyor...", "Veri çekiliyor...", "İşleniyor...", "Tamamlandı!"],
             "Kalite Hesaplama": ["Skor hesaplanıyor...", "Kurallar uygulanıyor...", "Rapor oluşturuluyor...", "Tamamlandı!"],

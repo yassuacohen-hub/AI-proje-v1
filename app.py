@@ -26,13 +26,12 @@ Navigasyon (BK5):
 """
 from __future__ import annotations
 
-import json
 import sys
 import time as _time
 import traceback
 from datetime import datetime
 from pathlib import Path
-from typing import Callable
+from typing import Any, Callable
 
 import streamlit as st
 
@@ -50,29 +49,30 @@ from web_dashboard.tabs import (  # noqa: E402
     varsayilan_tab,
 )
 
+from company_master.i18n import t  # noqa: E402
 from company_master.ui import (  # noqa: E402
     ChatBubble,
-    ThemeToggle,
     TopBar,
     stil_enjekte,
-    tema_dogrula,
-    tema_karsiti,
 )
 
+# U-02: `layout` burada sabitlenirse Streamlit ⋮ menüsünden "Wide mode"
+# geçişini kaldırır. Genişlik kararını kullanıcıya bırakıyoruz.
 st.set_page_config(
     page_title="Huginn — Company Master Dashboard",
-    layout="wide",
     page_icon="🏢",
     initial_sidebar_state="expanded",
 )
 
 URL_PARAM = "bolum"
-TEMA_PARAM = "tema"
 SOHBET_PARAM = "sohbet"
 ARAMA_KEY = "_hg_arama_sorgu"
 TEMA_KEY = "_hg_tema"
 SOHBET_KEY = "_hg_sohbet_acik"
-VARSAYILAN_TEMA = "karanlik"
+#: Streamlit'in tema adları → iç tasarım sistemi anahtarlarımız.
+STREAMLIT_TEMA_ESLEME = {"light": "aydinlik", "dark": "karanlik"}
+#: `st.context.theme` okunamazsa kullanılacak değer; config.toml `base = "light"`.
+VARSAYILAN_TEMA = "aydinlik"
 ARAMA_MAKS_SONUC = 5
 KOMPAKT_KEY = "_hg_menu_kompakt"
 KOMPAKT_SUTUN = 4  # ikon-only modda satır başına düşen ikon sayısı
@@ -88,46 +88,56 @@ st.session_state["perf_metrics"]["page_load_start"] = _time.perf_counter()
 if "current_section" not in st.session_state:
     st.session_state["current_section"] = varsayilan_tab().anahtar
 
+# NAV-01: her bölümün `st.Page` nesnesi. `sayfalari_uret()` her koşuda doldurur;
+# `bolum_sec()` ve eski adres çevirici buradan sayfa nesnesine ulaşır.
+_SAYFA_KAYDI: dict[str, Any] = {}  # anahtar -> st.Page nesnesi
+
 
 # --------------------------------------------------------------------------- #
 # Yönlendirme (routing) yardımcıları
 # --------------------------------------------------------------------------- #
 
 
-def _url_bolum_oku() -> TabTanimi | None:
-    """URL'deki `?bolum=...` parametresini bölüm tanımına çevirir."""
+def _eski_adresi_cevir() -> None:
+    """Eski `?bolum=...` adresini yeni `/{url_path}` yoluna taşır.
+
+    Geriye dönük uyum: dışarıda paylaşılmış eski bağlantılar bozulmasın.
+    Parametre okunduktan sonra **temizlenir**; aksi hâlde her koşuda yeniden
+    yönlendirme tetiklenir (sonsuz yenileme).
+    """
     try:
         ham = st.query_params.get(URL_PARAM, "")
     except Exception:  # Streamlit sürüm farkı — URL yoksa sessizce geç
-        return None
+        return
     if isinstance(ham, list):
         ham = ham[0] if ham else ""
-    return tab_url_getir(str(ham))
-
-
-def _url_bolum_yaz(tanim: TabTanimi) -> None:
-    """Seçili bölümü URL'e yazar (yenilemede seçim korunur)."""
+    tanim = tab_url_getir(str(ham))
+    if tanim is None:
+        return
     try:
-        if st.query_params.get(URL_PARAM) != tanim.url_path:
-            st.query_params[URL_PARAM] = tanim.url_path
+        st.query_params.pop(URL_PARAM, None)
     except Exception:
         pass
+    sayfa = _SAYFA_KAYDI.get(tanim.anahtar)
+    if sayfa is not None:
+        st.switch_page(sayfa)
 
 
 def aktif_tab() -> TabTanimi:
-    """Geçerli bölümü belirler: URL > oturum > varsayılan."""
-    url_tanim = _url_bolum_oku()
-    if url_tanim and url_tanim.anahtar != st.session_state.get("current_section"):
-        st.session_state["current_section"] = url_tanim.anahtar
+    """Oturumdaki bölümü döndürür (geri uyum; yönlendirme artık sayfa temelli)."""
     tanim = tab_getir(st.session_state.get("current_section", ""))
     return tanim or varsayilan_tab()
 
 
 def bolum_sec(anahtar: str) -> None:
-    """Sidebar/hızlı geçiş tıklamasında bölümü değiştirir."""
-    if st.session_state.get("current_section") != anahtar:
-        st.session_state["current_section"] = anahtar
+    """Sidebar/hızlı geçiş tıklamasında bölüm sayfasına geçer."""
+    if st.session_state.get("current_section") == anahtar:
+        return
+    st.session_state["current_section"] = anahtar
+    sayfa = _SAYFA_KAYDI.get(anahtar)
+    if sayfa is None:  # sayfa üretilmemişse en azından yeniden çiz
         st.rerun()
+    st.switch_page(sayfa)
 
 
 def _url_param_oku(ad: str) -> str:
@@ -151,21 +161,21 @@ def _url_param_yaz(ad: str, deger: str) -> None:
 
 
 def aktif_tema() -> str:
-    """Geçerli temayı belirler: URL > oturum > varsayılan.
+    """Geçerli temayı **Streamlit'in kendi ayarından** okur.
 
-    ADMIN-UI-03: Sağ üstteki düğme `?tema=` bağlantısıdır (Streamlit'te JS
-    çalışmaz). Tam sayfa yenilemesinde oturum sıfırlanabileceği için tema
-    hem oturuma hem URL'e yazılır.
+    U-01: Sayfa içindeki ikinci gece/gündüz düğmesi kaldırıldı. Tek doğru
+    kaynak artık sağ üst ⋮ menüsü › Settings › Appearance. `st.context.theme`
+    kullanıcının seçtiği temayı verir; alan yoksa (eski sürüm) varsayılana
+    düşülür ve uygulama kırılmaz.
     """
-    ham = _url_param_oku(TEMA_PARAM)
+    tip = ""
     try:
-        tema = tema_dogrula(ham) if ham else ""
-    except Exception:
-        tema = ""
-    if not tema:
-        tema = st.session_state.get(TEMA_KEY) or VARSAYILAN_TEMA
+        tema_ctx = getattr(st.context, "theme", None)
+        tip = str(getattr(tema_ctx, "type", "") or "").strip().lower()
+    except Exception:  # bağlam yoksa (test/çevrimdışı çalıştırma) sessizce geç
+        tip = ""
+    tema = STREAMLIT_TEMA_ESLEME.get(tip, VARSAYILAN_TEMA)
     st.session_state[TEMA_KEY] = tema
-    _url_param_yaz(TEMA_PARAM, tema)
     return tema
 
 
@@ -180,13 +190,15 @@ def sohbet_acik_mi() -> bool:
 
 
 def _baglanti(tanim: TabTanimi, **ek: str) -> str:
-    """Bölümü koruyan sorgu bağlantısı üretir (`?bolum=...&tema=...`).
+    """Bölümü koruyan sorgu bağlantısı üretir (`/{url_path}?tema=...&...`).
 
-    `bolum` taşınmazsa tema/sohbet tıklaması kullanıcıyı varsayılan bölüme
-    fırlatır (aktif_tab önceliği URL > oturum).
+    NAV-01: st.navigation yönlendirmesi kullanıldığından, `bolum` parametresi
+    artık URL yolunda (`/{url_path}`). Tema/sohbet gibi ek parametreler sorgu
+    satırına yazılır; sayfa geçişi `st.switch_page()` ile yapılır.
     """
-    parcalar = {URL_PARAM: tanim.url_path, **ek}
-    return "?" + "&".join(f"{k}={v}" for k, v in parcalar.items())
+    ek_str = "&".join(f"{k}={v}" for k, v in ek.items()) if ek else ""
+    taban = f"/{tanim.url_path}"
+    return f"{taban}?{ek_str}" if ek_str else taban
 
 
 def bolum_ara(sorgu: str) -> list[TabTanimi]:
@@ -195,10 +207,10 @@ def bolum_ara(sorgu: str) -> list[TabTanimi]:
     if not q:
         return []
     sonuc: list[TabTanimi] = []
-    for t in SECTIONS:
-        alanlar = (t.baslik, t.etiket, t.aciklama, t.anahtar, t.grup)
+    for tanim in SECTIONS:
+        alanlar = (tanim.baslik, tanim.etiket, tanim.aciklama, tanim.anahtar, tanim.grup)
         if any(q in (a or "").casefold() for a in alanlar):
-            sonuc.append(t)
+            sonuc.append(tanim)
     return sonuc
 
 
@@ -208,27 +220,14 @@ def bolum_ara(sorgu: str) -> list[TabTanimi]:
 
 
 def render_karar_defteri() -> None:
-    """Orkestratör karar kayıtlarının son 10 satırı."""
-    st.subheader("📋 Karar Defteri")
-    kayit_yolu = ROOT / "data" / "orchestrator" / "decision_log.jsonl"
-    if not kayit_yolu.exists():
-        st.info("📭 Karar defteri henüz oluşturulmadı. İlk karar yazıldığında burada görünecek.")
-        return
-    try:
-        satirlar = [s for s in kayit_yolu.read_text(encoding="utf-8").splitlines() if s.strip()]
-    except OSError as exc:
-        st.error(f"Karar defteri okunamadı: {exc}")
-        return
-    if not satirlar:
-        st.info("📭 Karar kaydı henüz yok.")
-        return
-    st.caption(f"Toplam karar: {len(satirlar)} · son 10 kayıt gösteriliyor")
-    for satir in satirlar[-10:]:
-        try:
-            kayit = json.loads(satir)
-        except json.JSONDecodeError:
-            continue
-        st.caption(f"{kayit.get('ts', '—')} · {kayit.get('op') or kayit.get('action', '—')}")
+    """Orkestratör karar kayıtlarının defteri — render_decision_tab'a devrolundu.
+    
+    (Mükerrer fonksiyon — tabs/admin_panel.py::render_decision_tab() kullanılıyor.)
+    Eski implementasyon silinmiş, yönetim bölümü tabs versiyonuna yönlendirilmiş.
+    """
+    from web_dashboard.tabs.admin_panel import render_decision_tab
+    
+    render_decision_tab()
 
 
 def render_yonetim_bilesik() -> None:
@@ -285,6 +284,53 @@ RENDER_OVERRIDES: dict[str, Callable[[], None]] = {
 
 
 # --------------------------------------------------------------------------- #
+# st.navigation Sayfa Üreticisi (NAV-01)
+# --------------------------------------------------------------------------- #
+
+
+def _sayfa_cizici(tanim: TabTanimi) -> Callable[[], None]:
+    """Bölümü hata sınırı içinde çizen, adı olan bir sayfa fonksiyonu üretir.
+
+    st.Page çağrılabilir nesnenin ``__name__`` özelliğine bakabildiği için
+    ``functools.partial`` yerine kapalı fonksiyon (closure) kullanılır.
+    Hata sınırı, hazır-değil yer tutucu ve yüklenemedi mesajı `render_icerik`
+    içinde tek yerde durur.
+    """
+
+    def _sayfa() -> None:
+        render_icerik(tanim)
+
+    _sayfa.__name__ = f"sayfa_{tanim.anahtar}"
+    _sayfa.__qualname__ = _sayfa.__name__
+    return _sayfa
+
+
+def sayfalari_uret() -> list:
+    """SECTIONS'tan st.Page nesneleri üretir ve _SAYFA_KAYDI'ya kaydeder.
+
+    Her sayfa `render_icerik(tanim)` üzerinden çalışır; böylece
+    RENDER_OVERRIDES > dinamik import > placeholder sırası ve hata sınırı
+    (bir bölüm patlarsa panel düşmez) tek noktada korunur.
+    Default sayfa: `varsayilan_tab()`.
+    """
+    sayfalar = []
+    varsayilan = varsayilan_tab()
+
+    for tanim in SECTIONS:
+        sayfa = st.Page(
+            _sayfa_cizici(tanim),
+            title=tanim.baslik,
+            icon=tanim.ikon,
+            url_path=tanim.url_path,
+            default=(tanim.anahtar == varsayilan.anahtar),
+        )
+        _SAYFA_KAYDI[tanim.anahtar] = sayfa
+        sayfalar.append(sayfa)
+
+    return sayfalar
+
+
+# --------------------------------------------------------------------------- #
 # Sidebar
 # --------------------------------------------------------------------------- #
 
@@ -317,7 +363,7 @@ def _nav_grubu_ciz(tanimlar: list[TabTanimi], secili: TabTanimi, kompakt: bool) 
                     if st.button(
                         tanim.ikon,
                         key=f"nav_{tanim.anahtar}",
-                        use_container_width=True,
+                        width="stretch",
                         type="primary" if aktif else "secondary",
                         help=_nav_ipucu(tanim, True),
                         disabled=aktif,
@@ -331,7 +377,7 @@ def _nav_grubu_ciz(tanimlar: list[TabTanimi], secili: TabTanimi, kompakt: bool) 
         if st.button(
             etiket,
             key=f"nav_{tanim.anahtar}",
-            use_container_width=True,
+            width="stretch",
             type="primary" if aktif else "secondary",
             help=_nav_ipucu(tanim, False),
             disabled=aktif,
@@ -352,7 +398,7 @@ def render_sidebar(secili: TabTanimi) -> None:
             st.markdown("## 🏢")
         else:
             st.markdown("## 🏢 Huginn")
-            st.caption("Company Master · Veri Zekâsı Paneli")
+            st.caption(t("odin_command_center"))
 
         st.toggle(
             "Kompakt menü",
@@ -368,7 +414,7 @@ def render_sidebar(secili: TabTanimi) -> None:
                 "🔍 Hızlı geçiş",
                 secenekler,
                 index=secenekler.index(secili),
-                format_func=lambda t: t.etiket,
+                format_func=lambda tanim: tanim.etiket,
                 key="nav_hizli_gecis",
                 help="Bölüm adını yazarak doğrudan geçiş yapın.",
             )
@@ -386,7 +432,7 @@ def render_sidebar(secili: TabTanimi) -> None:
             st.write("")
 
         st.divider()
-        hazir_sayisi = sum(1 for t in SECTIONS if t.hazir)
+        hazir_sayisi = sum(1 for tanim in SECTIONS if tanim.hazir)
         if kompakt:
             st.caption(f"{hazir_sayisi}/{len(SECTIONS)}")
         else:
@@ -401,24 +447,21 @@ def render_sidebar(secili: TabTanimi) -> None:
 # --------------------------------------------------------------------------- #
 
 
-def render_topbar(tanim: TabTanimi, tema: str) -> None:
-    """ADMIN-UI-03 üst şerit: kırıntı yolu + H1, sağda arama ve tema düğmesi.
+def render_topbar(tanim: TabTanimi) -> None:
+    """ADMIN-UI-03 üst şerit: kırıntı yolu + H1, sağda bölüm araması.
 
     Arama alanı hibrittir: görsel kabuk Streamlit `st.text_input`, eşleşme
     mantığı `bolum_ara()`. Tek eşleşme → doğrudan geçiş; çoklu eşleşme →
     ikincil buton listesi (aynı ekranda tek birincil buton kuralı korunur).
+
+    U-01: Tema düğmesi buradan kaldırıldı — Streamlit'in ⋮ menüsündeki
+    Appearance ayarıyla mükerrerdi ve iki ayrı kaynak birbirini tutmuyordu.
     """
     sol, sag = st.columns([7, 3], vertical_alignment="center")
     with sol:
         TopBar(
             tanim.baslik,
             ust_etiket=f"🏠 Panel › {tanim.grup}",
-            sag=[
-                ThemeToggle(
-                    tema=tema,
-                    hedef_url=_baglanti(tanim, **{TEMA_PARAM: tema_karsiti(tema)}),
-                )
-            ],
         ).render()
     with sag:
         sorgu = st.text_input(
@@ -443,7 +486,7 @@ def render_topbar(tanim: TabTanimi, tema: str) -> None:
                 if st.button(
                     aday.etiket,
                     key=f"ara_{aday.anahtar}",
-                    use_container_width=True,
+                    width="stretch",
                     help=aday.aciklama,
                     disabled=aday.anahtar == tanim.anahtar,
                 ):
@@ -464,6 +507,7 @@ def render_chat(tanim: TabTanimi, acik: bool) -> None:
         mesajlar=st.session_state.get("_hg_sohbet_mesajlar", []),
         ac_url=_baglanti(tanim, **{SOHBET_PARAM: "acik"}),
         kapat_url=_baglanti(tanim, **{SOHBET_PARAM: "kapali"}),
+        not_metni=t("odin_ai_co_pilot"),
     ).render()
 
 
@@ -501,35 +545,58 @@ def render_icerik(tanim: TabTanimi) -> None:
 
 
 def render_footer(tanim: TabTanimi) -> None:
-    """Alt bilgi: yükleme süresi, aktif bölüm, cache kontrolü."""
+    """Alt bilgi: yükleme süresi, aktif bölüm, cache ömrü.
+
+    U-07: "Cache Temizle" düğmesi kaldırıldı — Streamlit'in ⋮ menüsündeki
+    "Clear cache" ile mükerrerdi. Menü `toolbarMode = "auto"` ile geri geldi.
+    """
     st.divider()
     baslangic = st.session_state["perf_metrics"].get("page_load_start")
     if not baslangic:
         st.caption("Performans metrikleri bir sonraki yüklemede görünecek.")
         return
     yukleme_ms = (_time.perf_counter() - baslangic) * 1000
-    c1, c2, c3, c4 = st.columns(4)
+    c1, c2, c3 = st.columns(3)
     with c1:
         st.metric("Sayfa Yükleme", f"{yukleme_ms:.0f} ms")
     with c2:
         st.metric("Aktif Bölüm", tanim.baslik)
     with c3:
         st.metric("Cache TTL", "30 sn")
-    with c4:
-        if st.button("🔄 Cache Temizle", key="footer_cache_temizle", use_container_width=True):
-            st.cache_data.clear()
-            st.rerun()
+    st.caption("Önbelleği temizlemek için sağ üst ⋮ menüsü › Clear cache.")
 
 
 def main() -> None:
-    """Uygulama giriş noktası."""
-    secili = aktif_tab()
-    _url_bolum_yaz(secili)
-    tema = aktif_tema()
-    stil_enjekte(tema=tema)
+    """Uygulama giriş noktası — st.navigation + markalı sidebar.
+    
+    NAV-01 hibrit multipage mimarisi:
+    - st.navigation(..., position="hidden") — Streamlit'in kendi menüsü çizilmez,
+      yönlendirme ve "hangi sayfa çalışıyor" bilgisi sağlanır.
+    - render_sidebar() — Markalı sol menü aynen yerinde kalır.
+    - sayfa.run() — Seçili st.Page'nin render fonksiyonunu çalıştırır.
+    - render_footer/render_chat — Ana akışın parçası (sayfa.run() sonrası).
+    """
+    stil_enjekte(tema=aktif_tema())
+
+    # st.navigation() çalıştırarak sayfa objesini al (önce _SAYFA_KAYDI dolmalı)
+    sayfa = st.navigation(sayfalari_uret(), position="hidden")
+    _eski_adresi_cevir()  # Eski ?bolum=... bağlantılarını /{url_path} olarak çevir
+    
+    # Sayfanın URL yolundan bölümü bul; yoksa varsayılan
+    if sayfa and hasattr(sayfa, "url_path"):
+        secili = tab_url_getir(sayfa.url_path) or varsayilan_tab()
+        st.session_state["current_section"] = secili.anahtar
+    else:
+        secili = aktif_tab()
+    
+    # Markalı sidebar + üst şerit (kırıntı yolu, H1, bölüm arama)
     render_sidebar(secili)
-    render_topbar(secili, tema)
-    render_icerik(secili)
+    render_topbar(secili)
+
+    # Sayfa içeriğini çalıştır — render_icerik hata sınırı içinde çalışır
+    sayfa.run()
+    
+    # Sayfanın altında footer ve sohbet balonu
     render_footer(secili)
     render_chat(secili, sohbet_acik_mi())
 

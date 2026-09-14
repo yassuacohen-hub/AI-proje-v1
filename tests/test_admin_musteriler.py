@@ -86,7 +86,7 @@ def test_render_musteriler_renders_filtered_companies(monkeypatch, st_sahte):
     admin_musteriler.render_musteriler_tab()
 
     st_sahte["dataframe"].assert_called_once_with(
-        frame, use_container_width=True, hide_index=True
+        frame, width="stretch", hide_index=True
     )
 
 

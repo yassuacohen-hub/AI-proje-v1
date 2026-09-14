@@ -145,6 +145,7 @@ def _rate_limit_temiz():
     """Her test sonrasinda IP rate-limit sayacini temizler (429 kirliligi onler)."""
     yield
     web_app._RATE_LIMIT.clear()
+    web_app._CACHE.clear()
 
 
 @pytest.fixture()

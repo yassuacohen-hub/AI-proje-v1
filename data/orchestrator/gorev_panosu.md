@@ -33,21 +33,26 @@
 | RC-03 | Git Hooks — Pre-push Validation | roo_code | P2 | plan | .githooks/ |
 | ORCH-11 | Scheduler Service — Cron-like Task Dispatch | orkestrator | P1 | plan | src/company_master/ |
 | ORCH-12 | Health Monitor — System Status Dashboard | orkestrator | P2 | plan | src/company_master/ |
-| PO-BACK-01 | Tenant Health Score v1 (aktivite, kullanim, odeme, destek sinyali) | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
-| PO-BACK-02 | Segment eligibility skoru + onay akisi | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
-| PO-BACK-03 | Kampanya durum-makinesi otomatik denetimi | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
-| PO-BACK-04 | Paket fiyat katalogu tekillestirme | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
-| PO-BACK-05 | Karar ekranlarinda veri-tazelik etiketi + manuel yenileme | - | P2 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
-| PO-BACK-06 | Destek Merkezi MVP (ticket ata/kapat/eskale) | - | P2 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
-| PO-BACK-07 | Feature Flags MVP (tenant bazli ac/kapa) | - | P2 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
-| PO-BACK-08 | Executive Dashboard v1 (MRR/ARR/churn + health ozeti) | - | P3 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-01 | Tenant Health Score v1 (Data Quality + Entity Accuracy + Duplicate Rate) | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-02 | Segment Eligibility Skoru + Onay Akışı (Coverage + Profile Accuracy) | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-03 | Kampanya Durum-Makinesi Denetimi (Source Reliability) | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-04 | Paket Fiyat Kataloğu Tekilleştirme (Field Completeness) | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-05 | Veri Tazelik Etiketi + Manuel Yenileme (Freshness) | - | P2 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-06 | Destek Merkezi MVP (Evidence Coverage) | - | P2 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-07 | Feature Flags MVP (Data Quality + Source Reliability) | - | P2 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-08 | Executive Dashboard v1 (Coverage + Data Quality Score) — REVIZE | - | P3 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-09 | Duplicate Rate Dashboard (Admin) | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-10 | Coverage Analytics (Müşteri) | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| PO-BACK-11 | Source Reliability Monitor (Admin) | - | P1 | plan | data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md |
+| ADMIN-WF-01 | İş akışı optimizasyonu ve görev sıralaması | kilo | P1 | plan | data/orchestrator/WORKFLOW_OPTIMIZATION.md |
+| CHART-01 | Grafik altyapisi: charts modulu + requirements kontrolu | cline | P1 | plan | src/company_master/ui/charts/__init__.py, requirements-app.txt |
 
 ## Tamamlananlar
 
 | Görev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
 | P0-1 | İstiklal OSB scraper implementasyonu | web_kazima | 2026-09-08T10:00:00Z |
-| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-14T09:15:42 |
+| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-15T00:00:57 |
 | P0-3 | Kalite skoru 6.53 - 50+ heazine | kalite | 2026-09-06T22:54:31 |
 | Y21 | ISKUR kurumsal eslestirme verisi arastirma | arastirmaci | 2026-09-10 |
 | APIFY-01 | Apify uygunluk ve entegrasyon mimarisi arastirma | kilo | 2026-09-11T22:14:20 |
@@ -194,3 +199,11 @@
 | AR-02 | Competitor Analysis — Direct and Indirect | kilo | 2026-09-14T03:00:00 |
 | AR-03 | User Persona and Journey Mapping | kilo | 2026-09-14T03:00:00 |
 | FIX-ID-01 | Pano id alanı tutarsızlığı: task_id kanonik, 'id' bekleyen tüketiciler None alıyor | kilo | 2026-09-14T03:45:00 |
+| ADMIN-DOC-01 | Admin panel sitemap düzeltmesi ve uygulama öncelik dokümanı | kilo | 2026-09-14T18:38:27 |
+| USER-DOC-01 | User Panel sitemap belgesi oluştur (16_user_panel_sitemap.md) — TASLAK | kilo | 2026-09-14T18:38:27 |
+| MRK-03 | Marka konumlandirma belgesini projeye tasi + Obsidian baglami | kilo | 2026-09-14T16:40:00 |
+| MRK-04 | Marka terminolojisi + yazim sozlesmesi + guvenlik supabi kural dosyalarina | kilo | 2026-09-14T16:40:00 |
+| FIX-NOB-01 | gorev_nobetci.py durum komutu cp1254 UnicodeDecodeError | kilo | 2026-09-14T16:40:00 |
+| MRK-02F | card.py sayi bicimini i18n.sayi() ile tek kaynaga indir | cline | 2026-09-14T21:36:59 |
+| MRK-02G | tests/test_i18n.py - 13 bekci testi + 4 ek test | cline | 2026-09-14T21:37:00 |
+| MRK-02H | disa_aktar.py + web_dashboard/js/messages.js ureticisi | kilo | 2026-09-14T16:40:00 |

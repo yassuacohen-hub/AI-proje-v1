@@ -35,6 +35,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from scripts.dash04_api_client import get_api, APIError  # noqa: E402
 
+from company_master.i18n import t  # noqa: E402
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
 
 
@@ -108,11 +109,7 @@ BOLUMLER: tuple[Section, ...] = (
     ),
 )
 
-GIRIS_METNI = (
-    "Müşteri faaliyetini ve sistem sağlığını tek ekranda izleyin. "
-    "Kartlar 30 saniyelik önbellekle beslenir; anlık değer için "
-    "**Veriyi Yenile** düğmesini kullanın."
-)
+GIRIS_METNI = t("huginn_dashboard_welcome")
 
 
 def _bolum(kimlik: str) -> Section:
@@ -140,7 +137,7 @@ def render_ana_kontrol_tab() -> None:
             "🔄 Veriyi Yenile",
             key="refresh_ana_kontrol",
             type="primary",
-            use_container_width=True,
+            width="stretch",
             help="Önbelleği temizler ve tüm kartları yeniden yükler.",
         )
     with col_info:
@@ -277,6 +274,6 @@ def render_ana_kontrol_tab() -> None:
             ],
         })
         if flow_df["Adet"].sum() > 0:
-            st.bar_chart(flow_df.set_index("Durum"), use_container_width=True)
+            st.bar_chart(flow_df.set_index("Durum"), width="stretch")
     else:
         st.info("📊 Webhook verisi henüz toplanmadı. Sistem kullanılınca veriler burada görünecek.")
