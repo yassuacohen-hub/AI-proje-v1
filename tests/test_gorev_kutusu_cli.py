@@ -30,8 +30,10 @@ def izole(tmp_path, monkeypatch):
     return tmp_path
 
 
-def _gorev(task_id: str = "T-01", ajan: str = "kilo"):
+def _gorev(task_id: str = "T-01", ajan: str = "kilo", talimat: str = "test brifi"):
     tb.gorev_ekle(task_id, f"{task_id} test", ajan, "P1")
+    if talimat:
+        tb.gorev_guncelle(task_id, talimat=talimat)
 
 
 # ---- bak ----
@@ -58,6 +60,46 @@ def test_cmd_al_basarili(tmp_path):
     args = argparse.Namespace(ajan="kilo", task_id="T-01")
     rc = gk.cmd_al(args)
     assert rc == 0
+
+
+def test_cmd_al_talimatsiz_reddedilir(tmp_path, capsys):
+    """Brif görünürlüğü: ne tetikte ne panoda talimat yoksa `al` reddedilir."""
+    _gorev(talimat="")
+    trigger.tetik_ekle("T-01", "kilo", data_dir=tmp_path)
+    args = argparse.Namespace(ajan="kilo", task_id="T-01")
+    assert gk.cmd_al(args) == 1
+    assert "talimat" in capsys.readouterr().out.lower()
+    assert tb.gorev_getir("T-01")["durum"] != "aktif"
+
+
+def test_cmd_al_talimatsiz_zorla_alinir(tmp_path):
+    _gorev(talimat="")
+    trigger.tetik_ekle("T-01", "kilo", data_dir=tmp_path)
+    args = argparse.Namespace(ajan="kilo", task_id="T-01", zorla=True)
+    assert gk.cmd_al(args) == 0
+    assert tb.gorev_getir("T-01")["durum"] == "aktif"
+
+
+def test_cmd_al_tetik_talimati_yeterli(tmp_path):
+    _gorev(talimat="")
+    trigger.tetik_ekle("T-01", "kilo", talimat="tetik brifi", data_dir=tmp_path)
+    args = argparse.Namespace(ajan="kilo", task_id="T-01")
+    assert gk.cmd_al(args) == 0
+
+
+def test_cmd_bak_pano_talimatini_basar(tmp_path, capsys):
+    """Tetikte talimat yoksa panodaki brif gösterilir."""
+    _gorev(talimat="pano brifi")
+    trigger.tetik_ekle("T-01", "kilo", data_dir=tmp_path)
+    gk.cmd_bak(argparse.Namespace(ajan="kilo"))
+    assert "pano brifi" in capsys.readouterr().out
+
+
+def test_cmd_bak_talimat_yok_uyarisi(tmp_path, capsys):
+    _gorev(talimat="")
+    trigger.tetik_ekle("T-01", "kilo", data_dir=tmp_path)
+    gk.cmd_bak(argparse.Namespace(ajan="kilo"))
+    assert "TALIMAT YOK" in capsys.readouterr().out
 
 
 def test_cmd_al_hata(tmp_path):

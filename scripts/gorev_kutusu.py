@@ -45,6 +45,15 @@ def _hata(exc: Exception) -> int:
     return 1
 
 
+def _talimat_bul(ajan: str, task_id: str, gorev: dict | None = None) -> str:
+    """Görevin brifini döndür: önce tetik talimatı, yoksa pano `talimat` alanı."""
+    for k in trigger.bekleyen_tetikler(ajan):
+        if k.get("task_id") == task_id and (k.get("talimat") or "").strip():
+            return str(k["talimat"]).strip()
+    gorev = gorev if gorev is not None else (tb.gorev_getir(task_id) or {})
+    return str(gorev.get("talimat") or "").strip()
+
+
 def cmd_bak(args: argparse.Namespace) -> int:
     bekleyen = trigger.bekleyen_tetikler(args.ajan)
     if not bekleyen:
@@ -67,8 +76,11 @@ def cmd_bak(args: argparse.Namespace) -> int:
         if k.get("uyari_tarihi"):
             a = uyarilar.get(k["task_id"], {})
             print(f"  ⚠️ UYARI ({k.get('uyari_sayisi', '?')}x) — tetik {a.get('uyari_tarihi', k['uyari_tarihi'])}'da firlatilmisti")
-        if k.get("talimat"):
-            print(f"  TALIMAT: {k['talimat']}")
+        talimat = _talimat_bul(args.ajan, k["task_id"], gorev)
+        if talimat:
+            print(f"  TALIMAT: {talimat}")
+        else:
+            print("  ⚠️ TALIMAT YOK — brif yazilmadan alinamaz (orkestratore danis)")
         if gorev.get("dosyalar"):
             print(f"  KILITLI DOSYALAR: {', '.join(gorev['dosyalar'])}")
         print(f"  -> al: python scripts/gorev_kutusu.py al --ajan {args.ajan} --task-id {k['task_id']}")
@@ -76,6 +88,14 @@ def cmd_bak(args: argparse.Namespace) -> int:
 
 
 def cmd_al(args: argparse.Namespace) -> int:
+    # Brif görünürlüğü: talimatsız görev alınamaz (--zorla ile bilinçli atlama).
+    if not getattr(args, "zorla", False) and not _talimat_bul(args.ajan, args.task_id):
+        print(
+            f"HATA: {args.task_id} icin talimat (brif) yok. Once orkestrator "
+            f"`gorev_at.py at --talimat ...` veya `gorev_guncelle(talimat=...)` ile brif yazmali; "
+            f"bilincli atlamak icin --zorla kullan."
+        )
+        return 1
     try:
         sonuc = trigger.tetik_al(args.ajan, args.task_id)
     except trigger.TriggerError as exc:
@@ -276,6 +296,7 @@ def main() -> int:
     al_p = sub.add_parser("al", help="Tetiği al (görevi aktif yap)")
     al_p.add_argument("--ajan", required=True)
     al_p.add_argument("--task-id", required=True)
+    al_p.add_argument("--zorla", action="store_true", help="Talimatsız görevi yine de al")
     al_p.set_defaults(func=cmd_al)
 
     teslim_p = sub.add_parser("teslim", help="Görevi teslim et (review)")

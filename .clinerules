@@ -1,10 +1,19 @@
-﻿# Evrensel Ajan Kuralları
+# Evrensel Ajan Kuralları
 
 ## 1. İlk Adım (HER SOHBETİN BAŞINDA)
 - Posta kutusunu kontrol et: `python scripts/gorev_kutusu.py bak --ajan <AJAN>`
 - Bekleyen görevi al: `python scripts/gorev_kutusu.py al --ajan <AJAN> --task-id <ID>`
 - Brif dosyasını oku ve işi yap
 - Teslim et: `python scripts/gorev_kutusu.py teslim --ajan <AJAN> --task-id <ID> --ozet "..."
+
+## 1a. Teslim Öncesi Kontrol Listesi (ŞART — eksikse teslim reddedilir)
+- [ ] Brifteki **her madde** karşılandı mı? (yarım iş "tamamlandı" sayılmaz)
+- [ ] Yeni/değişen dosyaların hepsi **gerçekten diskte var** (yol yol `dir` ile doğrula)
+- [ ] Belge işinde: kaynak + ayna **ikisi de** yazıldı; wikilink/bağlantı hedefleri var
+- [ ] Kod işinde: hedefli testler yeşil + `python -X utf8 -m pytest tests/ -q` çalıştırıldı, sayı yazıldı
+- [ ] Dosyalar UTF-8, BOM yok, Türkçe karakterler bozulmamış
+- [ ] Kilit aldığın dosya dışına dokunmadın; dokunduysan özette belirt
+- [ ] `--ozet` içinde: değişen dosya listesi + test sayısı + eksik/erteleme varsa açıkça yaz
 
 ## 2. İletişim ve Akıl Yürütme
 - Tüm iletişim ve thinking %100 TÜRKÇE
@@ -43,3 +52,10 @@
 ## 8. Test
 - `python -X utf8 -m pytest tests/ -q`
 - 1413 test passed hedefi
+
+## Otonom Çalışma (Onay İstemeden İlerle) — ZORUNLU
+- Execute approved actions immediately.
+- Do not ask for confirmation after planning.
+- When a task is clear, proceed directly.
+- Soru yalnız: geri dönüşü olmayan işlem + talimat kapsamıyorsa / zorunlu parametre bulunamıyorsa / birbirini dışlayan iki yol V9-MVP sınırını etkiliyorsa.
+- Tek kelimelik tetik (başla/go/devam/tamam) = tam yetki. Ayrıntı: .roo/rules/01-otonom-calisma.md

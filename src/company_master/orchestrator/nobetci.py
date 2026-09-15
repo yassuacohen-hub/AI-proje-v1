@@ -87,10 +87,10 @@ def _alarm_dosyasi_yaz(data_dir: Path, ajan: str, task_id: str, task_title: str,
 
 # ---- Ses uyarısı ----------------
 def _ses_uyarisi() -> None:
+    """FIX-NOB-02: Tek ve kısa bip (koşu başına en fazla bir kez çağrılır)."""
     try:
         import winsound
-        winsound.MessageBeep(winsound.MB_ICONHAND)
-        winsound.Beep(800, 150); winsound.Beep(800, 150); winsound.Beep(800, 150)
+        winsound.Beep(800, 150)
     except Exception:
         pass
 
@@ -127,8 +127,6 @@ def tetik_firlat(kayit: dict[str, Any], ayar: dict[str, Any], data_dir: Path | N
              "tetik_sayisi": sayi, "alarm_dosyasi": str(alarm)}
     with open(log, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
-    if "ses" in ayar.get("kanallar", []):
-        _ses_uyarisi()
     if "telegram" in ayar.get("kanallar", []) and ayar.get("telegram"):
         msg = f"🔔 ORCH-09 UYARI: {task_id} ({gorev.get('baslik','')}) — {ajan} {sayi}. kez uyandı."
         _telegram_mesajat(msg, ayar)
@@ -145,7 +143,17 @@ def tetik_gecikmis_yap(ajan: str, task_id: str, sure_sn: int, data_dir: Path | N
     tb.atomic_write_text(yol, "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in recs))
 
 def nobet_tut(data_dir: Path | None = None, ayar: dict[str, Any] | None = None) -> list[dict[str, Any]]:
+    """Geciken tetikleri fırlatır.
+
+    FIX-NOB-02: Ses, tetik başına değil **koşu başına en fazla bir kez** ve yalnızca
+    **ilk kez** uyarılan (daha önce hiç uyarılmamış) tetik varsa çalar. Böylece
+    eski/tekrarlayan gecikmeler her koşuda yeniden ötmez.
+    """
     if ayar is None: ayar = nobetci_ayar_oku(data_dir)
     if ayar.get("devre_disi"): return []
     geciken = geciken_tetikler(data_dir, ayar.get("kademe_sn", 600))
-    return [tetik_firlat(k, ayar, data_dir) for k in geciken]
+    ilk_kez_var = any(int(k.get("uyari_sayisi", 0) or 0) == 0 for k in geciken)
+    sonuc = [tetik_firlat(k, ayar, data_dir) for k in geciken]
+    if sonuc and ilk_kez_var and "ses" in ayar.get("kanallar", []):
+        _ses_uyarisi()
+    return sonuc

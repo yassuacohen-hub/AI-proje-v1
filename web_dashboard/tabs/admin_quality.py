@@ -29,6 +29,11 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from company_master.db.connection import get_engine
+from company_master.kaynak_guvenilirlik import (
+    RELIABILITY_GREEN,
+    RELIABILITY_YELLOW,
+    hesapla_toplu,
+)
 
 # Analiz edilecek alanlar: kolon adı -> okunabilir etiket
 _QUALITY_FIELDS: dict[str, str] = {
@@ -42,6 +47,18 @@ _QUALITY_FIELDS: dict[str, str] = {
 }
 
 _RISK_ESIGI = 30  # Kalite riski (QS < 30) eşiği
+
+# PO-BACK-11: sources + source_records üzerinden kaynak bazlı çekiş istatistiği
+_SOURCE_RELIABILITY_SQL = """
+    SELECT s.source_id, s.source_name,
+           COUNT(sr.source_record_id) AS toplam_cekis,
+           SUM(CASE WHEN sr.raw_payload IS NOT NULL THEN 1 ELSE 0 END) AS basarili_cekis,
+           MAX(sr.collected_at) AS son_cekis_zaman
+    FROM sources s
+    LEFT JOIN source_records sr ON sr.source_id = s.source_id
+    GROUP BY s.source_id, s.source_name
+    ORDER BY s.source_name
+"""
 
 
 # ---------------------------------------------------------------------------
@@ -293,6 +310,72 @@ def _chart_missing_fields(missing_df: pd.DataFrame) -> None:
 # Render Fonksiyonu
 # ---------------------------------------------------------------------------
 
+@st.cache_data(ttl=60)
+def load_source_reliability() -> list[dict[str, Any]]:
+    """PO-BACK-11: Kaynak bazlı güvenilirlik skorları (DB yoksa boş liste)."""
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            rows = conn.execute(text(_SOURCE_RELIABILITY_SQL)).mappings().all()
+        ham = [
+            {
+                "kaynak_id": str(r["source_id"]),
+                "kaynak_adi": r["source_name"] or "",
+                "toplam_cekis": int(r["toplam_cekis"] or 0),
+                "basarili_cekis": int(r["basarili_cekis"] or 0),
+                "son_cekis_zaman": (
+                    r["son_cekis_zaman"].isoformat()
+                    if isinstance(r["son_cekis_zaman"], datetime)
+                    else (str(r["son_cekis_zaman"]) if r["son_cekis_zaman"] else None)
+                ),
+            }
+            for r in rows
+        ]
+        return [k.to_dict() for k in hesapla_toplu(ham)]
+    except Exception:
+        return []
+
+
+def _render_kaynak_guvenilirlik() -> None:
+    """PO-BACK-11: Kaynak tablosu + eşik altı uyarı kartı."""
+    kaynaklar = load_source_reliability()
+    if not kaynaklar:
+        st.info("Kaynak çekiş verisi bulunamadı (sources/source_records boş veya DB erişilemiyor).")
+        return
+
+    kirmizi = [k for k in kaynaklar if k["skor"] < RELIABILITY_YELLOW]
+    sari = [k for k in kaynaklar if RELIABILITY_YELLOW <= k["skor"] < RELIABILITY_GREEN]
+
+    c1, c2, c3 = st.columns(3)
+    c1.metric("Toplam Kaynak", len(kaynaklar))
+    c2.metric(f"Sarı Bant (<{RELIABILITY_GREEN:.0f})", len(sari))
+    c3.metric(f"Kırmızı Bant (<{RELIABILITY_YELLOW:.0f})", len(kirmizi))
+
+    if kirmizi:
+        st.error(
+            "🔴 Eşik altı kaynaklar: "
+            + ", ".join(f"{k['kaynak_adi']} ({k['skor']:.0f})" for k in kirmizi)
+        )
+    elif sari:
+        st.warning(
+            "🟡 Dikkat gerektiren kaynaklar: "
+            + ", ".join(f"{k['kaynak_adi']} ({k['skor']:.0f})" for k in sari)
+        )
+    else:
+        st.success("Tüm kaynaklar yeşil bantta.")
+
+    df = pd.DataFrame(kaynaklar)[
+        ["kaynak_adi", "skor", "band", "tazelik_skoru", "hata_orani",
+         "tutarlilik_skoru", "toplam_cekis", "basarili_cekis", "son_cekis_zaman"]
+    ].rename(columns={
+        "kaynak_adi": "Kaynak", "skor": "Skor", "band": "Bant",
+        "tazelik_skoru": "Tazelik", "hata_orani": "Hata Oranı",
+        "tutarlilik_skoru": "Tutarlılık", "toplam_cekis": "Toplam Çekiş",
+        "basarili_cekis": "Başarılı Çekiş", "son_cekis_zaman": "Son Çekiş",
+    }).sort_values("Skor")
+    st.dataframe(df, width="stretch", hide_index=True)
+
+
 def render_quality_tab() -> None:
     """P7-31: Admin Panel Faz 2 — Veri Kalitesi Özeti sekmesi."""
 
@@ -338,6 +421,10 @@ def render_quality_tab() -> None:
         st.dataframe(pd.DataFrame(suggestions), width="stretch", hide_index=True)
     else:
         st.success("Kritik eksiklik tespit edilmedi — veri kalitesi genel olarak iyi durumda.")
+
+    st.divider()
+    st.subheader("🛰️ Kaynak Güvenilirliği")
+    _render_kaynak_guvenilirlik()
 
     st.divider()
     st.subheader(f"🚨 Kalite Riski Filtreleme (QS < {_RISK_ESIGI})")

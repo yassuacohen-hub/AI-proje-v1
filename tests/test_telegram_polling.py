@@ -65,6 +65,9 @@ def _tmp_board(tmp_path, monkeypatch):
     monkeypatch.setattr(tb_module, "FILE_LOCKS", data_dir / "file_locks.json")
     monkeypatch.setattr(tb_module, "STATE_JSON", data_dir / "state.json")
     monkeypatch.setattr(tb_module, "TASK_MD", data_dir / "gorev_panosu.md")
+    # FIX-SYNC-01: agent_sync_yaz() gercek kok AGENT_SYNC.md'ye sizmasin (T7 artigi)
+    monkeypatch.setattr(tb_module, "AGENT_SYNC_MD", tmp_path / "AGENT_SYNC.md")
+    monkeypatch.setattr(tb_module, "AGENT_SYNC_MD_KOPYA", data_dir / "AGENT_SYNC.md")
 
     # kalite raporu icin gerekli dosyalari olustur
     kpi_path = tmp_path / "data" / "kpi_raporu.md"

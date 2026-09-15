@@ -1,0 +1,8 @@
+TARANAN: 5118
+BOZUK PAKET SAYISI: 6
+- colorama: 2 dosya; ilk: colorama\initialise.py: PyCompileError
+- dateutil: 1 dosya; ilk: dateutil\rrule.py: PyCompileError
+- greenlet: 1 dosya; ilk: greenlet\tests\test_leaks.py: PyCompileError
+- numpy: 32 dosya; ilk: numpy\ctypeslib\_ctypeslib.py: PyCompileError
+- pandas: 3 dosya; ilk: pandas\_version.py: PyCompileError
+- pyarrow: 14 dosya; ilk: pyarrow\ipc.py: PyCompileError

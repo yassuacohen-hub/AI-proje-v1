@@ -32,6 +32,7 @@ from src.company_master.orchestrator import trigger
 
 NOBETCI_GOREV = "HuginnData-Nobetci"
 BAT_YOL = str(Path(__file__).resolve().parent / "gorev_nobetci.bat")
+VBS_YOL = str(Path(__file__).resolve().parent / "gorev_nobetci.vbs")
 
 
 def _hata(exc: Exception) -> int:
@@ -72,11 +73,30 @@ def _bat_olustur() -> None:
     yol.write_text(icerik, encoding="utf-8")
 
 
+def _vbs_olustur(bat_yol: str | None = None) -> str:
+    """FIX-NOB-02: Bat dosyasını **gizli pencerede** çalıştıran VBS sarmalayıcı üretir.
+
+    ``WScript.Shell.Run`` 2. parametre ``0`` = pencere gizli; 3. parametre ``False``
+    = bitişi bekleme. Zamanlayıcı ``wscript.exe`` ile bu dosyayı çağırır; böylece
+    her koşuda siyah CMD penceresi açılmaz.
+    """
+    bat = bat_yol or BAT_YOL
+    yol = Path(VBS_YOL)
+    icerik = (
+        "' FIX-NOB-02: gorev_nobetci.bat dosyasini gizli pencerede calistirir\r\n"
+        'Set sh = CreateObject("WScript.Shell")\r\n'
+        f'sh.Run "cmd /c ""{bat}""", 0, False\r\n'
+    )
+    yol.write_text(icerik, encoding="utf-8")
+    return str(yol)
+
+
 def cmd_kur(args: argparse.Namespace) -> int:
     ayar = {"kademe_sn": args.dakika * 60, "kanallar": ["log", "alarm_dosyasi", "ses"], "telegram": args.telegram}
     nobetci.nobetci_ayar_yaz(ayar)
     _bat_olustur()
-    tr = f'cmd /c "{BAT_YOL}"'
+    vbs = _vbs_olustur()
+    tr = f'wscript.exe "{vbs}"'
     subprocess.run(["schtasks", "/Create", "/TN", NOBETCI_GOREV, "/TR", tr,
                     "/SC", "MINUTE", "/MO", str(args.dakika), "/F"], check=True)
     print(f"Nobetci kuruldu: her {args.dakika} dakika bir calisir (kademe {ayar['kademe_sn']} sn).")

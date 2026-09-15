@@ -43,3 +43,51 @@ def test_error_ledger_clear(tmp_path):
     ledger.add(ErrorLedgerEntry(task_id="TSK-1", agent_id="a", error_type="t"))
     ledger.clear()
     assert len(ledger.all()) == 0
+
+
+# --- FIX-LEDGER-01: Windows gecici kilit (WinError 5) retry ---------------
+
+
+def _replace_sahte(basarisiz_sayisi: int, sayac: dict[str, int]):
+    """Ilk N cagrida PermissionError firlatan, sonra gercek os.replace'i yapan sahte."""
+    import os as _os
+
+    gercek = _os.replace
+
+    def _sahte(kaynak, hedef):
+        sayac["n"] = sayac.get("n", 0) + 1
+        if sayac["n"] <= basarisiz_sayisi:
+            raise PermissionError(5, "Erisim engellendi (sahte WinError 5)")
+        return gercek(kaynak, hedef)
+
+    return _sahte
+
+
+def test_fix_ledger_01_gecici_kilit_retry_ile_gecilir(tmp_path, monkeypatch):
+    """Ilk 2 replace denemesi PermissionError verse bile 3. deneme yazar."""
+    import src.company_master.orchestrator.error_ledger as mod
+
+    monkeypatch.setattr(mod, "REPLACE_BEKLEME_SN", 0.0)
+    sayac: dict[str, int] = {}
+    monkeypatch.setattr(mod.os, "replace", _replace_sahte(2, sayac))
+
+    ledger = ErrorLedger(tmp_path / "ledger.json")
+    ledger.add(ErrorLedgerEntry(task_id="TSK-R", agent_id="a", error_type="t"))
+
+    assert sayac["n"] == 3
+    assert (tmp_path / "ledger.json").exists()
+    assert len(ErrorLedger(tmp_path / "ledger.json").all()) == 1
+
+
+def test_fix_ledger_01_kalici_kilit_hatayi_yukari_atar(tmp_path, monkeypatch):
+    """Tum denemeler basarisizsa PermissionError yutulmaz."""
+    import src.company_master.orchestrator.error_ledger as mod
+
+    monkeypatch.setattr(mod, "REPLACE_BEKLEME_SN", 0.0)
+    sayac: dict[str, int] = {}
+    monkeypatch.setattr(mod.os, "replace", _replace_sahte(99, sayac))
+
+    ledger = ErrorLedger(tmp_path / "ledger.json")
+    with pytest.raises(PermissionError):
+        ledger.add(ErrorLedgerEntry(task_id="TSK-R", agent_id="a", error_type="t"))
+    assert sayac["n"] == mod.REPLACE_DENEME

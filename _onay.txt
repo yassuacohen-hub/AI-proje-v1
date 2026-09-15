@@ -1,0 +1,29 @@
+7 teslim kontrol bekliyor:
+
+  U-11  <- roo  (2026-09-15T02:10:54)
+  OZET: SECTIONS 11->25: admin_yonetim/admin_sistem korundu (Secenek A), 14 yeni kisayol kaydi eklendi (kpi, hatalar, kullanicilar, karar_defteri, kalite, arama, export, maliyet, performans, api, webhook, dlq, yenileme, kimlik). Roller: kullanicilar/karar_defteri=admin, kimlik=anon, digerleri=analyst. Degisen: web_dashboard/tabs/__init__.py, tests/test_dashboard_nav.py (sabit 25). Hedefli 6 dosya 293 passed/1 skip. Tam regresyon 2864 passed, 2 failed — ikisi de Kilo kilidinde (tenant/health.py streamlit import yasagi ihlali = TEN-01; test_odin_ai chunk dedup izole geciyor = flaky, AI-RAG-01). U-11 kapsami temiz.
+  -> python scripts/gorev_kutusu.py onayla --task-id U-11 --ben orkestrator
+
+  MIG-UI-01  <- roo  (2026-09-15T03:01:02)
+  OZET: MIG-UI-01 Asama 1 (Musteri Onizleme ara adimi): tabs/__init__.py -> TabTanimi.yuzey (muninn/huginn, dogrulamali) + musteri_onizleme property + YUZEY_* sabitleri + musteri_onizleme_bolumleri(); ana_kontrol/paketler/pazarlama YUZEY_HUGINN. app.py -> render_musteri_onizleme seridi (render_icerik). tests/test_dashboard_nav.py +6 test. Sitemap 14 satir 156 durum notu. Hedefli: 167 yesil (2 kirmizi Kilo'nun tenant_health_dashboard.py, ROO disi -> AGENT_SYNC notu). Asama 2 (index.html tam goc) Huginn tasarim turu sonrasina ertelendi.
+  -> python scripts/gorev_kutusu.py onayla --task-id MIG-UI-01 --ben orkestrator
+
+  MRK-05  <- roo  (2026-09-15T03:02:56)
+  OZET: MRK-05 tam regresyon: 2900 passed, 2 skipped, 2 failed (test_api_integration haric). 2 kirmizi ROO disi: tests/test_sayfa_iskeleti.py[tenant_health_dashboard] -> Kilo'nun untracked web_dashboard/tabs/tenant_health_dashboard.py (PageHeader/Section eksik), AGENT_SYNC'e not dusuldu. Onceki 2 kirmizi (test_tenant_bekci, test_odin_ai flaky) bu kosuda yesil. ROO kapsaminda (U-10, U-11, MIG-UI-01 dosyalari) sifir kirmizi.
+  -> python scripts/gorev_kutusu.py onayla --task-id MRK-05 --ben orkestrator
+
+  AI-CHAT-01-FIX  <- roo  (2026-09-15T03:18:26)
+  OZET: AI-CHAT-01 kayip teslim yeniden uretildi. Dosyalar: src/company_master/ai_chat.py (9Router sohbet, UCRUZ gpt-4o-mini + 4 model fallback zinciri ABRAKADABRA_MODELS env, pano/posta salt-okunur baglam, TEKLIF parser, teklif_uygula onay kapisi, admin token zorunlu), web_dashboard/tabs/abrakadabra.py (PageHeader+Section+SectionNav, st.chat_message/chat_input, Onayla/Reddet butonlari, admin login kapisi), tests/test_ai_chat.py (21 test), web_dashboard/tabs/__init__.py (abrakadabra hazir=True, min_rol=admin). Hedefli: 202 passed. Tam regresyon: 2935 passed / 3 skipped / 2 failed (yalniz Kilo tenant_health_dashboard, TEN-01 kapsaminda). BOM yok, UTF-8.
+  -> python scripts/gorev_kutusu.py onayla --task-id AI-CHAT-01-FIX --ben orkestrator
+
+  TEN-01  <- kilo  (2026-09-15T03:35:13)
+  OZET: Multi-tenant hazırlığı: TenantContext frozen dataclass, VARSAYILAN_TENANT, tenant_coz(), tenant_dogrula() (model.py). 10 test (8 unit + 2 AST bekçi). Streamlit/auth import yasağı doğrulanmış. health.py Streamlit fonksiyonları web_dashboard/tabs/tenant_health_dashboard.py'ye taşındı.
+  -> python scripts/gorev_kutusu.py onayla --task-id TEN-01 --ben orkestrator
+
+  GAM-01  <- kilo  (2026-09-15T03:35:35)
+  OZET: Rozet keif sistemi: UserProgress dataclass, rozet_ver(), karsilastir() (model.py). 8 test. data/kullanici_ilerleme.json olusturuldu. Streamlit yok.
+  -> python scripts/gorev_kutusu.py onayla --task-id GAM-01 --ben orkestrator
+
+  AI-RAG-01  <- kilo  (2026-09-15T03:35:59)
+  OZET: Odin AI RAG iskeleti: Embedder (SHA-256 deterministik), Chunk frozen dataclass, chunk_metin(), chunk_bol(), chunk_topla() (rag.py). 19 test. docs/ODIN_AI_ISKELET.md olusturuldu. API key yok.
+  -> python scripts/gorev_kutusu.py onayla --task-id AI-RAG-01 --ben orkestrator

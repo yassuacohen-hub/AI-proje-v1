@@ -32,10 +32,18 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
+from company_master.coverage_analitik import (  # noqa: E402
+    NACE_HEDEF_DOSYASI,
+    coverage_ozeti,
+    nace_hedeflerini_yukle,
+)
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
 
 DEMO_KAMPANYA = ROOT / "data" / "demo" / "kampanya_demo.jsonl"
 DEMO_SEGMENT = ROOT / "data" / "demo" / "segment_demo.jsonl"
+
+#: PO-BACK-10 — Hedef evren (firma sayısı). Ortam değişkeni yoksa varsayılan.
+HEDEF_EVREN_VARSAYILAN = 10_000
 
 #: ADMIN-UI-10 — Sayfa ici gezinmede gorunen ust duzey bolumler (H2).
 BOLUMLER: tuple[Section, ...] = (
@@ -80,6 +88,13 @@ ALT_BOLUMLER: tuple[Section, ...] = (
         "Hangi segment kampanyasız kalmış?",
         ikon="🔗",
         kimlik="alt-kapsama",
+        seviye=3,
+    ),
+    Section(
+        "Kapsam (Hedef Evren)",
+        "Hedef evrenin yüzde kaçını yakaladık; hangi sektörler eksik?",
+        ikon="🎯",
+        kimlik="alt-kapsam-evren",
         seviye=3,
     ),
 )
@@ -171,6 +186,61 @@ def load_segment_firmalari(segment_id: str) -> list[dict[str, Any]]:
         return list(segment_firmaları_liste(segment_id))
     except Exception:
         return []
+
+
+def _hedef_evren_oku() -> int:
+    """HUGINN_HEDEF_EVREN ortam degiskeni; bozuksa varsayilan."""
+    import os
+
+    try:
+        return int(os.environ.get("HUGINN_HEDEF_EVREN", HEDEF_EVREN_VARSAYILAN))
+    except ValueError:
+        return HEDEF_EVREN_VARSAYILAN
+
+
+def _nace_hedef_dosyasi() -> Path:
+    """HEDEF-NACE-01: hedef tablosu yolu (env ile ezilebilir, varsayilan repo koku)."""
+    import os
+
+    ozel = os.environ.get("HUGINN_NACE_HEDEF_DOSYASI")
+    return Path(ozel) if ozel else ROOT / NACE_HEDEF_DOSYASI
+
+
+def hedef_tablosu_kaynagi() -> str:
+    """Kapsam kartinin hedefleri nereden aldigi: ``dosya`` | ``esit_paylasim``."""
+    _, kaynak = nace_hedeflerini_yukle(_nace_hedef_dosyasi(), (), 0)
+    return kaynak
+
+
+@st.cache_data(ttl=60)
+def load_kapsam_verisi() -> tuple[list[dict[str, Any]], dict[str, int], int]:
+    """PO-BACK-10: Kapsam kartı girdileri. Donus: (firmalar, nace_hedefleri, hedef_evren).
+
+    DB yoksa/hata halinde bos liste doner; kart yer tutucu gosterir.
+    HEDEF-NACE-01: ``nace_hedefleri`` once ``data/nace_hedefleri.json``'dan okunur
+    (``HUGINN_NACE_HEDEF_DOSYASI`` ile yol ezilebilir); dosya yok/bozuksa DB'deki
+    gruplar arasinda esit paylasim (hedef evren / grup sayisi) fallback'i kullanilir.
+    """
+    hedef_evren = _hedef_evren_oku()
+    try:
+        from sqlalchemy import text
+
+        from company_master.db.connection import get_engine
+
+        engine = get_engine()
+        with engine.connect() as conn:
+            rows = conn.execute(
+                text("SELECT LEFT(nace_code, 2) AS nace_grup FROM companies WHERE nace_code IS NOT NULL")
+            ).fetchall()
+        firmalar = [{"nace_grup": str(r[0] or "").strip()} for r in rows]
+    except Exception:
+        return [], {}, hedef_evren
+    gruplar = sorted({f["nace_grup"] for f in firmalar if f["nace_grup"]})
+    hedefler, kaynak = nace_hedeflerini_yukle(_nace_hedef_dosyasi(), gruplar, hedef_evren)
+    if kaynak == "dosya":
+        # Dosyadaki hedeflerin toplami gercek evrendir; env degeri yalnizca fallback.
+        hedef_evren = sum(hedefler.values()) or hedef_evren
+    return firmalar, hedefler, hedef_evren
 
 
 def ozet_hesapla(
@@ -459,6 +529,44 @@ def _render_segment_kampanya_eslesme(
     st.caption("📊 Hangi müşteri grubunu kampanyasız bırakıyoruz?")
 
 
+def _render_kapsam_karti(
+    firmalar: list[dict[str, Any]], nace_hedefleri: dict[str, int], hedef_evren: int
+) -> None:
+    """PO-BACK-10: Hedef evren kapsamı — st.metric + en düşük sektörler tablosu."""
+    _bolum("alt-kapsam-evren").render()
+    ozet = coverage_ozeti(firmalar, hedef_evren, nace_hedefleri)
+    if not ozet["veri_var"]:
+        st.info("Veri gelince hedef evren kapsam analizi burada görünecek.")
+        return
+
+    m1, m2, m3 = st.columns(3)
+    with m1:
+        st.metric("Kapsam Oranı", f"%{ozet['oran']:.1f}")
+        st.caption("Hedef evrenin ne kadarını yakaladık?")
+    with m2:
+        st.metric("Yakalanan Firma", f"{ozet['toplam']:,}".replace(",", "."))
+        st.caption("NACE kodu bilinen kayıt sayısı.")
+    with m3:
+        st.metric("Hedef Evren", f"{ozet['hedef']:,}".replace(",", "."))
+        if hedef_tablosu_kaynagi() == "dosya":
+            st.caption("Kaynak: data/nace_hedefleri.json (sektör hedefleri toplamı).")
+        else:
+            st.caption("HUGINN_HEDEF_EVREN ile ayarlanır; sektörlere eşit paylaştırılır.")
+
+    if ozet["en_dusuk_3_sektor"]:
+        st.warning(
+            "⚠️ En zayıf sektörler: "
+            + ", ".join(
+                f"{s['nace_grup']} (%{s['oran']:.0f})" for s in ozet["en_dusuk_3_sektor"]
+            )
+        )
+    tablo = pd.DataFrame(ozet["sektorler"]).rename(
+        columns={"nace_grup": "NACE Grubu", "yakalanan": "Yakalanan", "hedef": "Hedef", "oran": "Oran (%)"}
+    )
+    st.dataframe(tablo, width="stretch", hide_index=True)
+    st.caption("📊 Hangi sektörde veri toplamaya öncelik vermeliyiz?")
+
+
 def render_pazarlama_tab() -> None:
     """Pazarlama sekmesi giris noktasi."""
     kampanyalar, k_demo = load_kampanyalar()
@@ -488,3 +596,5 @@ def render_pazarlama_tab() -> None:
         _render_segmentler(segmentler, demo_mu)
     with sekme_kapsama:
         _render_segment_kampanya_eslesme(kampanyalar, segmentler)
+        firmalar, nace_hedefleri, hedef_evren = load_kapsam_verisi()
+        _render_kapsam_karti(firmalar, nace_hedefleri, hedef_evren)

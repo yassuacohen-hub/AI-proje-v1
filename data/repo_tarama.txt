@@ -1,0 +1,126 @@
+C:\Huginn Data Projesi\Huginn Data Insights\scripts\fix_emails.py:62: SyntaxWarning: invalid escape sequence '\.'
+  COUNT(*) FILTER (WHERE primary_email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') as valid,
+C:\Huginn Data Projesi\Huginn Data Insights\scripts\fix_emails.py:77: SyntaxWarning: invalid escape sequence '\.'
+  COUNT(*) FILTER (WHERE primary_email IS NULL OR primary_email !~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') as email_issue,
+C:\Huginn Data Projesi\Huginn Data Insights\scripts\refresh_pipeline.py:10: SyntaxWarning: invalid escape sequence '\P'
+  # schtasks /create /tn "Huginn Daily Scrape" /tr "python C:\Projeler\Huginn Data Insights\scripts\refresh_pipeline.py" /sc daily /st 03:00
+C:\Huginn Data Projesi\Huginn Data Insights\scripts\_verify_p82.py:3: SyntaxWarning: invalid escape sequence '\P'
+  board = json.loads(Path("C:\Projeler\Huginn Data Insights\data\orchestrator\task_board.json").read_text(encoding="utf-8"))
+C:\Huginn Data Projesi\Huginn Data Insights\_trash\fix_lock.py:3: SyntaxWarning: invalid escape sequence '\]'
+  content = content.replace('admin_tab_login = st.tabs([\" ὑ0 Admin "Girişi\])', 'admin_tab_login = st.tabs([\🔐" Admin "Girişi\])')
+C:\Huginn Data Projesi\Huginn Data Insights\_trash\fix_lock.py:3: SyntaxWarning: invalid escape sequence '\]'
+  content = content.replace('admin_tab_login = st.tabs([\" ὑ0 Admin "Girişi\])', 'admin_tab_login = st.tabs([\🔐" Admin "Girişi\])')
+C:\Huginn Data Projesi\Huginn Data Insights\.kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\scripts\fix_emails.py:62: SyntaxWarning: invalid escape sequence '\.'
+  COUNT(*) FILTER (WHERE primary_email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') as valid,
+C:\Huginn Data Projesi\Huginn Data Insights\.kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\scripts\fix_emails.py:77: SyntaxWarning: invalid escape sequence '\.'
+  COUNT(*) FILTER (WHERE primary_email IS NULL OR primary_email !~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') as email_issue,
+C:\Huginn Data Projesi\Huginn Data Insights\.kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\scripts\refresh_pipeline.py:10: SyntaxWarning: invalid escape sequence '\P'
+  # schtasks /create /tn "Huginn Daily Scrape" /tr "python C:\Projeler\Huginn Data Insights\scripts\refresh_pipeline.py" /sc daily /st 03:00
+C:\Huginn Data Projesi\Huginn Data Insights\.kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\scripts\_verify_p82.py:3: SyntaxWarning: invalid escape sequence '\P'
+  board = json.loads(Path("C:\Projeler\Huginn Data Insights\data\orchestrator\task_board.json").read_text(encoding="utf-8"))
+C:\Huginn Data Projesi\Huginn Data Insights\.kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\scripts\scripts\fix_emails.py:62: SyntaxWarning: invalid escape sequence '\.'
+  COUNT(*) FILTER (WHERE primary_email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') as valid,
+C:\Huginn Data Projesi\Huginn Data Insights\.kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\scripts\scripts\fix_emails.py:77: SyntaxWarning: invalid escape sequence '\.'
+  COUNT(*) FILTER (WHERE primary_email IS NULL OR primary_email !~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') as email_issue,
+C:\Huginn Data Projesi\Huginn Data Insights\scripts\scripts\fix_emails.py:62: SyntaxWarning: invalid escape sequence '\.'
+  COUNT(*) FILTER (WHERE primary_email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') as valid,
+C:\Huginn Data Projesi\Huginn Data Insights\scripts\scripts\fix_emails.py:77: SyntaxWarning: invalid escape sequence '\.'
+  COUNT(*) FILTER (WHERE primary_email IS NULL OR primary_email !~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') as email_issue,
+TARANAN: 9338
+NULL BYTE: 35
+  - .pre-commit-config.yaml
+  - find_poback.py
+  - requirements-dev.txt
+  - tmp_tb_src.txt
+  - logs\addadmin.txt
+  - logs\admins.txt
+  - logs\enrich_alternative_sources.lastrun.txt
+  - logs\enrich_missing_fields.last_run.txt
+  - logs\layout-test.txt
+  - logs\reg.txt
+  - logs\setadmin.txt
+  - logs\_tarama_out.txt
+  - tests\test_destek.py
+  - tests\_coklu_sonuc.txt
+  - tests\_y9_sonuc4.txt
+  - V10\CHANGELOG.md
+  - .agents\marketplace\SKILLS_INDEX.md
+  - .kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\tests\_coklu_sonuc.txt
+  - .kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\tests\_y9_sonuc4.txt
+  - .kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\V10\CHANGELOG.md
+  - .kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\cop_kutusu_2026_09_09\DENET_arsiv_2026_09_09\scripts_gecici\_probe_out.txt
+  - .kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\cop_kutusu_2026_09_09\DENET_arsiv_2026_09_09\tests_gecici\_y9_sonuc.txt
+  - .kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\cop_kutusu_2026_09_09\DENET_arsiv_2026_09_09\tests_gecici\_y9_sonuc2.txt
+  - .kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\data\nace\README.md
+  - .kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\src\company_master\schema\migrations\0006_normalize_compat.py
+  - backups\AI_proje_v1_V10_20260910_153420\CHANGELOG.md
+  - backups\AI_proje_v1_V10_20260910_153420\project_state.md
+  - backups\V10_root_20260910_153421\CHANGELOG.md
+  - cop_kutusu_2026_09_09\DENET_arsiv_2026_09_09\scripts_gecici\_probe_out.txt
+  - cop_kutusu_2026_09_09\DENET_arsiv_2026_09_09\tests_gecici\_y9_sonuc.txt
+  - cop_kutusu_2026_09_09\DENET_arsiv_2026_09_09\tests_gecici\_y9_sonuc2.txt
+  - data\destek\tickets.json
+  - data\nace\README.md
+  - src\company_master\destek.py
+  - src\company_master\schema\migrations\0006_normalize_compat.py
+CRCRLF: 537
+  - .instructions.md
+  - run_tests.py
+  - data\nace_rev2_tr.json
+  - scripts\kalite_analizi.py
+  - scripts\test_ostim_scrape.py
+  - tests\test_platform.py
+  - test_reports\summary.json
+  - .agents\skills\cuopt-numerical-optimization-formulation\BENCHMARK.md
+  - .agents\skills\cuopt-numerical-optimization-formulation\skill-card.md
+  - .agents\skills\cuopt-numerical-optimization-formulation\SKILL.md
+  - .agents\skills\data-designer\BENCHMARK.md
+  - .agents\skills\data-designer\skill-card.md
+  - .agents\skills\data-designer\SKILL.md
+  - .agents\skills\skill-card-generator\BENCHMARK.md
+  - .agents\skills\skill-card-generator\skill-card.md
+  - .agents\skills\skill-card-generator\SKILL.md
+  - .agents\skills\supabase\.mcp.json
+  - .agents\skills\supabase\.release-please-manifest.json
+  - .agents\skills\supabase\AGENTS.md
+  - .agents\skills\supabase\CHANGELOG.md
+  - .agents\skills\supabase\CONTRIBUTING.md
+  - .agents\skills\supabase\package.json
+  - .agents\skills\supabase\README.md
+  - .agents\skills\supabase\release-please-config.json
+  - .agents\skills\supabase\SKILL.md
+  - .agents\skills\supabase-postgres-best-practices\CHANGELOG.md
+  - .agents\skills\supabase-postgres-best-practices\SKILL.md
+  - .agents\skills\cuopt-numerical-optimization-formulation\evals\evals.json
+  - .agents\skills\data-designer\evals\evals.json
+  - .agents\skills\data-designer\references\person-sampling.md
+  - .agents\skills\data-designer\references\preview-review.md
+  - .agents\skills\data-designer\references\seed-datasets.md
+  - .agents\skills\data-designer\scripts\get_person_object_schema.py
+  - .agents\skills\data-designer\workflows\autopilot.md
+  - .agents\skills\data-designer\workflows\interactive.md
+  - .agents\skills\skill-card-generator\evals\evals.json
+  - .agents\skills\skill-card-generator\references\style-guide.md
+  - .agents\skills\skill-card-generator\scripts\discover_assets.py
+  - .agents\skills\skill-card-generator\scripts\render_card.py
+  - .agents\skills\skill-card-generator\scripts\validate_submission.py
+DERLENMEYEN PY: 19
+  - find_poback.py: PyCompileError
+  - scripts\check_email_dist.py: PyCompileError
+  - scripts\test_growth.py: PyCompileError
+  - tests\test_destek.py: PyCompileError
+  - tmp\get_one.py: PyCompileError
+  - _trash\check2.py: PyCompileError
+  - _trash\check3.py: PyCompileError
+  - .kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\scripts\check_email_dist.py: PyCompileError
+  - .kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\scripts\test_growth.py: PyCompileError
+  - .kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\cop_kutusu_2026_09_09\DENET_arsiv_2026_09_09\scripts_gecici\_tmp_aso_bulk.py: PyCompileError
+  - .kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\cop_kutusu_2026_09_09\DENET_arsiv_2026_09_09\scripts_gecici\_tmp_gen_p41.py: PyCompileError
+  - .kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\scripts\scripts\check_email_dist.py: PyCompileError
+  - .kilo\worktrees\orkestrasyon-g-revleri-g-nl-k\src\company_master\schema\migrations\0006_normalize_compat.py: PyCompileError
+  - cop_kutusu_2026_09_09\DENET_arsiv_2026_09_09\scripts_gecici\_tmp_aso_bulk.py: PyCompileError
+  - cop_kutusu_2026_09_09\DENET_arsiv_2026_09_09\scripts_gecici\_tmp_gen_p41.py: PyCompileError
+  - scripts\scripts\check_email_dist.py: PyCompileError
+  - src\company_master\destek.py: PyCompileError
+  - src\company_master\schema\migrations\0006_normalize_compat.py: PyCompileError
+  - src\company_master\ui\charts\__init__.py: PyCompileError

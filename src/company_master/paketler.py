@@ -200,8 +200,52 @@ def kampanya_paketleri_getir(campaign_id: str) -> List[Dict[str, Any]]:
 
 
 # ---------------------------------------------------------------------------
-# Yardimci
+# Tek Fiyat Kaynağı — Müşteri Paneli & Kampanya Hedefleme (PO-BACK-04)
 # ---------------------------------------------------------------------------
+
+# PO-BACK-04: Orjinal fiyatlar (SSOT) — demo çakışması giderildi
+_ORJINAL_FIYATLAR: dict[str, float] = {
+    "Temel": 499.0,
+    "Standart": 2999.0,
+    "Profesyonel": 7999.0,
+    "Kurumsal": 19999.0,
+}
+
+_ORJINAL_OZELLIKLER: dict[str, list[str]] = {
+    "Temel": ["3 kullanıcı", "5GB depolama", "API 500 işlem/gün"],
+    "Standart": ["25 kullanıcı", "100GB depolama", "API 50.000 işlem/gün", "Raporlama"],
+    "Profesyonel": ["100 kullanıcı", "1TB depolama", "API 500.000 işlem/gün", "Raporlama", "API analitiği", "Özel destek"],
+    "Kurumsal": ["Sınırsız kullanıcı", "Sınırsız depolama", "Sınırsız API", "SLA 99.9", "Özel güncelleme", "Öncelikli destek"],
+}
+
+_ORJINAL_SIRALAMA = ["Temel", "Standart", "Profesyonel", "Kurumsal"]
+
+
+def fiyat_katalogu() -> list[dict[str, Any]]:
+    """
+    Müşteri paneli, kampanya hedefleme ve fatura pipeline'i için
+    **tek güvenilir fiyat kaynağı** (SSOT).
+
+    Dönüş: isim sırasına göre (Temel→Kurumsal) sabit 4 tier listesi.
+    DB'deki `packages` tablosundaki price/features alanları bu fonksiyon
+    ile **eşzamanlı** güncellenmelidir (bakım betiği: `scripts/sync_paket_fiyatlari.py`).
+    """
+    katalog = []
+    for isim in _ORJINAL_SIRALAMA:
+        katalog.append({
+            "name": isim,
+            "price": _ORJINAL_FIYATLAR[isim],
+            "features": _ORJINAL_OZELLIKLER[isim],
+            "icon": {"Temel": "fa-tag", "Standart": "fa-box", "Profesyonel": "fa-shield", "Kurumsal": "fa-building"}[isim],
+            "description": {
+                "Temel": "Küçük firmalar için giriş paketi",
+                "Standart": "Orta ölçekli firmalar için standart paket",
+                "Profesyonel": "Büyük firmalar için profesyonel paket",
+                "Kurumsal": "Kurumlar için özelleştirilmiş paket",
+            }[isim],
+        })
+    return katalog
+
 
 def _paket_row(row: Any) -> Dict[str, Any]:
     return {

@@ -1,0 +1,3 @@
+ONARILAN DOSYA: 3551
+PAKETLER: ['PIL', '_pytest', '_virtualenv.py', 'altair', 'anyio', 'attr', 'attrs', 'blinker', 'bs4', 'certifi', 'charset_normalizer', 'click', 'colorama', 'dateutil', 'google', 'greenlet', 'h11', 'httptools', 'idna', 'iniconfig', 'itsdangerous', 'jinja2', 'jsonschema', 'jsonschema_specifications', 'markupsafe', 'multipart', 'narwhals', 'numpy', 'packaging', 'pandas', 'pglast', 'pluggy', 'psycopg', 'psycopg_binary', 'py.py', 'pyarrow', 'pydeck', 'pytest', 'python_multipart', 'referencing', 'requests', 'rpds', 'six.py', 'soupsieve', 'sqlalchemy', 'starlette', 'streamlit', 'typing_extensions.py', 'tzdata', 'urllib3', 'uvicorn', 'watchdog', 'websockets']
+HALA BOZUK SAYISI: 0

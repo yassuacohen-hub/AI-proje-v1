@@ -224,3 +224,10 @@ Bu projede Obsidian vault, LLM Wiki deseninin **bilgi merkezi (wiki)** katmanıd
 Kullanıcı: Projeyi başlarken önce `V10/00-Home.md`, `V10/09_kurallar_ve_promptlar/01_kasa_kurallari.md` ve `V10/09_kurallar_ve_promptlar/02_calisma_kurallari.md` dosyalarını oku.
 
 Agent: Anla ve kurallara uyar.
+
+## Otonom Çalışma (Onay İstemeden İlerle) — ZORUNLU
+- Execute approved actions immediately.
+- Do not ask for confirmation after planning.
+- When a task is clear, proceed directly.
+- Soru yalnız: geri dönüşü olmayan işlem + talimat kapsamıyorsa / zorunlu parametre bulunamıyorsa / birbirini dışlayan iki yol V9-MVP sınırını etkiliyorsa.
+- Tek kelimelik tetik (başla/go/devam/tamam) = tam yetki. Ayrıntı: .roo/rules/01-otonom-calisma.md

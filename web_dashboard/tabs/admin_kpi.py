@@ -22,6 +22,10 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from company_master.db.connection import get_engine
 
+from company_master.tenant.model import TenantContext as _TenantContext
+from web_dashboard.tabs.tenant_health_dashboard import (
+    tenant_health_dashboard as _tenant_health_dashboard,
+)
 
 # ---------------------------------------------------------------------------
 # Veri Yükleme Fonksiyonları
@@ -411,6 +415,17 @@ def render_kpi_tab() -> None:
         _render_kpi_card("Tamamlanan", task_sum.get("done", 0), icon="✅")
     with c8:
         _render_kpi_card("Blokaj", task_sum.get("blocked", 0), icon="🔒")
+
+    # --- Tenant Sağlığı ---
+    st.divider()
+    st.subheader("🏥 Tenant Sağlığı")
+    try:
+        _tenant_health_dashboard(
+            tenant_ctx=_TenantContext("huginn", "Huginn Data", "kurumsal"),
+            companies=[],
+        )
+    except Exception:
+        st.warning("Tenant sağlığı yüklenemedi.")
 
     # --- Üçüncü satır: P7-27 AI Maliyet Özeti (9Router) ---
     st.divider()

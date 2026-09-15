@@ -1,23 +1,41 @@
-# Huginn Data Insights - Dockerfile (Faz 1, 2026-09-09)
-# API + vanilla JS dashboard tek konteyner; DB harici (Supabase veya compose db servisi)
-FROM python:3.12-slim
+# Huginn Data Insights - Dockerfile (Faz 2 — Multi-stage)
+# Kullanim: docker compose --profile localdb up -d --build
+#          docker compose up -d --build api
+
+# ===== Stage 1: Builder =====
+FROM python:3.12-slim AS builder
+
+WORKDIR /build
+
+# Sadece build-stage calisir; runtime'a gerek yok
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gcc \
+    g++ \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY requirements-app.txt .
+RUN pip install --no-cache-dir --prefix=/install -r requirements-app.txt
+
+# ===== Stage 2: Runtime =====
+FROM python:3.12-slim AS runtime
 
 WORKDIR /app
 
-# Sadece healthcheck için curl gerekli
+# Healthcheck + runtime icin curl (builder'dan copy edilebilir ama slim'de zaten yok)
 RUN apt-get update && apt-get install -y --no-install-recommends curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Önce bağımlılıklar (layer cache: kod değişince yeniden kurulmaz)
-COPY requirements-app.txt .
-RUN pip install --no-cache-dir -r requirements-app.txt
+# Builder'dan kopyala
+COPY --from=builder /install /usr/local
 
-# Uygulama kodu (.dockerignore sayesinde .env, backups, AI proje v1 dahil DEĞİL)
+# Uygulama kodu
 COPY . .
 
-# Root olmayan kullanıcı
+# Root olmayan kullanici
 RUN useradd --create-home --shell /bin/bash app \
-    && mkdir -p /app/logs && chown -R app:app /app
+    && mkdir -p /app/logs /app/data /app/web_dashboard \
+    && chown -R app:app /app
 USER app
 
 EXPOSE 8000

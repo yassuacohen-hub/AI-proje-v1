@@ -98,6 +98,33 @@ Atama ile başlamayı birbirine bağlayan "posta kutusu" sistemi. Görev panoya 
 6. **Bitince güncelle**: `gorev_guncelle(..., durum="done")`, kilidi bırak, özet yaz, gerekli durum dosyalarını yenile
    - **Zorunlu:** İş bitirince mutlaka `gorev_guncelle(..., durum="done")` çağrılır, `lock_birak(dosya, sahip)` ile kilitlere açılır, `task_board.json` ve `AGENT_SYNC.md` güncellenir. Bu adımlar atlanamaz.
 7. **Son kontrol**: hedef/MVP/sınır dışına çıkmadı mı?
+8. **Teslim Öncesi Kontrol Listesi (ŞART — eksikse teslim reddedilir):**
+   - Brifteki **her madde** karşılandı mı? (yarım iş "tamamlandı" sayılmaz)
+   - Yeni/değişen dosyaların hepsi **gerçekten diskte var** (yol yol doğrula)
+   - Belge işinde: kaynak + ayna **ikisi de** yazıldı; wikilink/bağlantı hedefleri mevcut
+   - Kod işinde: hedefli testler yeşil + tam regresyon çalıştırıldı, sayı özete yazıldı
+     - Tam regresyon komutu: `python -m pytest tests/ -q --continue-on-collection-errors` (tek bozuk modül tüm suite'i gizlemesin; koleksiyon hatası sayısı özete yazılır, 0 olmalı)
+   - Dosyalar UTF-8, BOM yok, Türkçe karakterler bozulmamış
+     - **Yasak:** PowerShell `Out-File -Encoding utf8` / `Set-Content -Encoding utf8` (BOM yazar). Python `open(..., encoding="utf-8")` veya PS 7+ `-Encoding utf8NoBOM` kullan.
+     - Teslimden önce dosya boyutu kontrol: 0 bayt dosya ve NUL bayt (UTF-16 belirtisi) teslim edilemez (`python scripts/kodlama_denetim.py` — BUG-ENCODING-GUARD)
+   - Kilit alınan dosya dışına dokunulmadı; dokunulduysa özette belirtildi
+   - `--ozet` içinde: değişen dosya listesi + test sayısı + eksik/erteleme varsa açıkça yazıldı
+
+## Ajan Rol Profilleri ve Bulgu Notu (2026-09-15, orkestratör kararı)
+
+Gözleme dayalı iş bölümü (cline: KR-1..KR-5 gerçek bulgular; kilo: hacimli üretimde hızlı, kodlama/BOM hatalarına eğilimli):
+
+| Ajan | Birincil rol | Tipik görev |
+|---|---|---|
+| **kilo** | Üretim / hacimli iş | dosya üretimi, scraper, migrasyon, toplu test yazımı |
+| **cline** | Denetim / hata avı | review, refactor, kalite guard'ları, kilo teslimlerinin çapraz incelemesi |
+| **roo** | Orkestratör | brif, onay/ret, decision_log, eskalasyon |
+
+Kurallar:
+1. **cline briflerine standart "BULGU NOTU" eklenir:** *"Kapsam dışında gördüğün bug/hata/kodlama sorununu DÜZELTME; `data/orchestrator/<TASK_ID>_bulgular_<tarih>_cline.md`'ye yaz ve roo'ya tetik düşür."* Kapsam dışı dosyaya dokunmak teslim reddi sebebidir (kilit disiplini korunur).
+2. **kilo teslimleri cline'a çapraz incelemeye gider** (zincir: kilo teslim → cline review → roo onay). Reddedilen iş kilo'ya nedenle döner.
+3. kilo teslim öncesi kodlama kontrolü zorunlu (`python scripts/kodlama_denetim.py` hazır olana dek: 0 bayt / BOM / NUL elle doğrulanır).
+4. Son söz roo'da kalır; cline bulgusu "öneri"dir, karar ve önceliklendirme decision_log'a yazılır.
 
 ## İletişim Dili ve Akıl Yürütme (Demir Kural)
 

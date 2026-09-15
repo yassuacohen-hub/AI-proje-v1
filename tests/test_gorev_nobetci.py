@@ -112,3 +112,77 @@ def test_tetik_gecikmis_yap_tarih_ceker(izole_pano):
     from datetime import datetime as _dt
     t = _dt.fromisoformat(trigger.bekleyen_tetikler("kilo")[0]["tarih"])
     assert (_dt.now() - t).total_seconds() >= 290
+
+
+# ---- FIX-NOB-02: ses tek sefer + gizli pencere ----
+
+_SES_AYAR = {"kademe_sn": 60, "kanallar": ["log", "ses"], "telegram": False}
+
+
+def _ses_sayaci(monkeypatch) -> list[int]:
+    cagri: list[int] = []
+    monkeypatch.setattr(nobetci, "_ses_uyarisi", lambda: cagri.append(1))
+    return cagri
+
+
+def test_nobet_tut_ses_kosu_basina_tek(izole_pano, monkeypatch):
+    """3 geciken tetik olsa da ses koşu başına en fazla 1 kez çalar."""
+    cagri = _ses_sayaci(monkeypatch)
+    for tid in ("T-09", "T-10", "T-11"):
+        _tetik_gec_kim(task_id=tid, sure_sn=120)
+    sonuc = nobetci.nobet_tut(ayar=_SES_AYAR, data_dir=izole_pano)
+    assert len(sonuc) == 3
+    assert len(cagri) == 1
+
+
+def test_nobet_tut_ses_tekrar_kosuda_sessiz(izole_pano, monkeypatch):
+    """Daha önce uyarılmış tetik yeniden fırlatılınca ses çalmaz."""
+    cagri = _ses_sayaci(monkeypatch)
+    _tetik_gec_kim()
+    nobetci.nobet_tut(ayar=_SES_AYAR, data_dir=izole_pano)   # ilk uyarı → 1 ses
+    nobetci.nobet_tut(ayar=_SES_AYAR, data_dir=izole_pano)   # tekrar → sessiz
+    nobetci.nobet_tut(ayar=_SES_AYAR, data_dir=izole_pano)
+    assert len(cagri) == 1
+
+
+def test_nobet_tut_ses_kanali_kapaliysa_calmaz(izole_pano, monkeypatch):
+    cagri = _ses_sayaci(monkeypatch)
+    _tetik_gec_kim()
+    nobetci.nobet_tut(ayar={"kademe_sn": 60, "kanallar": ["log"]}, data_dir=izole_pano)
+    assert cagri == []
+
+
+def test_tetik_firlat_tek_basina_ses_calmaz(izole_pano, monkeypatch):
+    """Ses sorumluluğu nobet_tut'ta; tetik_firlat tetik başına ses çalmaz."""
+    cagri = _ses_sayaci(monkeypatch)
+    k = _tetik_gec_kim()
+    nobetci.tetik_firlat(k, _SES_AYAR, izole_pano)
+    assert cagri == []
+
+
+def test_ses_uyarisi_tek_kisa_bip(monkeypatch):
+    """_ses_uyarisi yalnızca 1 kısa Beep üretir (MessageBeep yok)."""
+    import sys, types
+    sahte = types.SimpleNamespace(
+        Beep=lambda f, d: cagrilar.append(("Beep", f, d)),
+        MessageBeep=lambda *a: cagrilar.append(("MessageBeep",)),
+        MB_ICONHAND=16,
+    )
+    cagrilar: list = []
+    monkeypatch.setitem(sys.modules, "winsound", sahte)
+    nobetci._ses_uyarisi()
+    assert cagrilar == [("Beep", 800, 150)]
+
+
+def test_vbs_olustur_gizli_pencere(tmp_path, monkeypatch):
+    """VBS sarmalayıcı bat'ı gizli pencerede (Run ..., 0, False) çalıştırır."""
+    import importlib
+    gn = importlib.import_module("scripts.gorev_nobetci")
+    vbs_yol = tmp_path / "gorev_nobetci.vbs"
+    monkeypatch.setattr(gn, "VBS_YOL", str(vbs_yol))
+    bat = r"C:\proje\scripts\gorev_nobetci.bat"
+    yol = gn._vbs_olustur(bat)
+    icerik = Path(yol).read_text(encoding="utf-8")
+    assert Path(yol) == vbs_yol
+    assert 'CreateObject("WScript.Shell")' in icerik
+    assert f'sh.Run "cmd /c ""{bat}""", 0, False' in icerik

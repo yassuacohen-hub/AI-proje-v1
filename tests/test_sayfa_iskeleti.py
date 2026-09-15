@@ -55,6 +55,7 @@ MUAF: dict[str, str] = {
     "admin_performance": "Alt sekme gövdesi",
     "admin_quality": "Alt sekme gövdesi",
     "admin_audit": "Alt sekme gövdesi",
+    "tenant_health_dashboard": "Yardımcı parça; admin_quality/admin_kpi içinde gömülü render edilir (bağımsız ekran değil)",
 }
 
 

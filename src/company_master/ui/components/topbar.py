@@ -4,7 +4,7 @@
 Sahip talimatındaki üç yeni unsurdan ikisi burada tanımlanır:
 
 * **Gece/gündüz tema düğmesi** (sağ üst) — :class:`ThemeToggle`
-* **AI Abrakadabra sohbet balonu** (sağ alt) — :class:`ChatBubble`
+* **AI MIMIR sohbet balonu** (sağ alt) — :class:`ChatBubble`
 
 Üçüncü unsur olan arama alanı, gerçek metin girişi gerektirdiği için
 Streamlit'in kendi ``st.text_input`` bileşeniyle çizilir; bu modül ona
@@ -154,7 +154,7 @@ class TopBar(Bilesen):
 
 
 class ChatBubble(Bilesen):
-    """Sağ alt köşedeki "AI Abrakadabra" sohbet balonu.
+    """Sağ alt köşedeki "AI MIMIR" sohbet balonu (S11 kararı: görünen ad MIMIR).
 
     Kapalıyken yalnız yüzen bir düğme (FAB), açıkken küçük bir panel çizer.
 
@@ -181,7 +181,7 @@ class ChatBubble(Bilesen):
         mesajlar: Iterable[Any] | None = None,
         ac_url: str = "?sohbet=acik",
         kapat_url: str = "?sohbet=kapali",
-        baslik: str = "AI Abrakadabra",
+        baslik: str = "AI MIMIR",
         not_metni: str | None = None,
         rozet_metni: str | None = None,
     ) -> None:

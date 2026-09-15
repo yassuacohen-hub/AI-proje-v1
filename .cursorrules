@@ -6,6 +6,15 @@
 - Brif dosyasını oku ve işi yap
 - Teslim et: `python scripts/gorev_kutusu.py teslim --ajan <AJAN> --task-id <ID> --ozet "..."
 
+## 1a. Teslim Öncesi Kontrol Listesi (ŞART — eksikse teslim reddedilir)
+- [ ] Brifteki **her madde** karşılandı mı? (yarım iş "tamamlandı" sayılmaz)
+- [ ] Yeni/değişen dosyaların hepsi **gerçekten diskte var** (yol yol `dir` ile doğrula)
+- [ ] Belge işinde: kaynak + ayna **ikisi de** yazıldı; wikilink/bağlantı hedefleri var
+- [ ] Kod işinde: hedefli testler yeşil + `python -X utf8 -m pytest tests/ -q` çalıştırıldı, sayı yazıldı
+- [ ] Dosyalar UTF-8, BOM yok, Türkçe karakterler bozulmamış
+- [ ] Kilit aldığın dosya dışına dokunmadın; dokunduysan özette belirt
+- [ ] `--ozet` içinde: değişen dosya listesi + test sayısı + eksik/erteleme varsa açıkça yaz
+
 ## 2. İletişim ve Akıl Yürütme
 - Tüm iletişim ve thinking %100 TÜRKÇE
 - Düşünce adımları kısa maddeler halinde

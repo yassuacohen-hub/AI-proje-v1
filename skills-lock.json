@@ -60,6 +60,12 @@
       "sourceType": "internal",
       "skillPath": "skills/elite-saas-architect/SKILL.md",
       "computedHash": "1.0.0"
+    },
+    "venture-category-architect": {
+      "source": "Venture & Category Architect",
+      "sourceType": "internal",
+      "skillPath": "skills/venture-category-architect/SKILL.md",
+      "computedHash": "1.0.0"
     }
   }
 }

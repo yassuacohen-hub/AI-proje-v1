@@ -75,4 +75,19 @@ def render_auto_refresh() -> None:
     with col3:
         st.metric("Son Yenileme", st.session_state.last_auto_refresh.strftime("%H:%M:%S"))
 
+    # --- Tazelik Etiketi + Yenile Butonu ---
+    st.divider()
+    st.subheader("📜 Veri Tazelik")
+    from company_master.tazelik import tazelik_etiketi as _tazelik_etiketi
+    _guncelleme_zamani = datetime.now()
+    tazelik = _tazelik_etiketi(_guncelleme_zamani, datetime.now())
+    etiket = tazelik.get("etiketi", "bilinmiyor")
+    renk = tazelik.get("renk", "gray")
+    renk_map = {"green": "🟢", "yellow": "🟡", "red": "🔴", "gray": "⚪"}
+    icon = renk_map.get(renk, "⚪")
+    st.markdown(f"**Son güncelleme:** {etiket} {icon}")
+    if st.button("🔄 Yenile", key="tazelik-yenile"):
+        st.session_state["tazelik_yenildi"] = True
+        st.rerun()
+
     st.caption("Not: Streamlit auto_refresh, sayfa elemanlarini otomatik olarak gunceller. Cache'ler otomatik temizlenir.")

@@ -18,5 +18,8 @@ rapidfuzz>=3.0.0
 streamlit>=1.30.0
 plotly>=5.18.0
 
+# Grafik altyapisi (CHART-01): charts modulu + requirements
+pandas>=2.0.0
+
 # Vektor katmani (9R-02): semantik arama + dublikasyon (lazy import; yoksa matcher VKN+fuzzy ile calisir)
 chromadb>=0.5.0

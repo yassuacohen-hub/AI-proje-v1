@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-15T00:00:57",
+    "bitis": "2026-09-15T11:23:49",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -773,11 +773,18 @@
     "oncelik": "P1",
     "durum": "blocked",
     "baslangic": "2026-09-12T23:43:28",
-    "bitis": "2026-09-12T23:43:28",
-    "dosyalar": [],
-    "not": "Anti-bot blocked. P7-28/29/30 alternatiflere yonlendirildi.",
+    "bitis": "2026-09-15T11:40:01",
+    "dosyalar": [
+      "docs/P7-6_kariyernet_arastirma.md",
+      "src/company_master/scrapers/kariyernet.py",
+      "tests/test_kariyernet.py"
+    ],
+    "not": "Anti-bot blocked. P7-28/29/30 alternatiflere yonlendirildi. | ORK 2026-09-15: Kariyer.net scraper — dosya listesi yok, brif eksik; yeniden brifleme bekliyor",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "id": "P7-6",
+    "talimat": "Kariyer.net Scraper — DURUM: anti-bot engelli; doğrudan HTML kazıma YAPMA. Yapılacak (araştırma+iskelet): (1) `docs/P7-6_kariyernet_arastirma.md` — resmî API/RSS/sitemap var mı, robots.txt, hukuki sınır (KVKK/ToS), 9Router `web_fetch` ile erişim denemesi sonucu (5 URL, status kodları). (2) Erişim mümkünse `src/company_master/scrapers/kariyernet.py` iskeleti: `ilan_listesi(sektor, sayfa=1) -> list[dict]` (firma_adi, pozisyon, sehir, tarih, url) + rate limit 1 istek/3 sn + retry 3. Mümkün değilse yalnız (1) + 'kapat' önerisi. Testler: HTTP mock'lu ≥5 test (`tests/test_kariyernet.py`), canlı istek testte YASAK. Dosyalar: docs/P7-6_kariyernet_arastirma.md, src/company_master/scrapers/kariyernet.py, tests/test_kariyernet.py. Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK. Tam regresyon sayısı özete yazılır.",
+    "not_": "[roo 2026-09-15] Karar: anti-bot engeli nedeniyle beklemeye alindi; PO-BACK-06 teslimi onceliklidir. Yeniden brifleme PO-BACK-06 done olduktan sonra roo tarafindan yapilacak."
   },
   {
     "task_id": "P7-22",
@@ -2299,224 +2306,207 @@
   {
     "task_id": "MIM-01",
     "baslik": "System Architecture Diagram — Microservices",
-    "sahip": "mimar",
+    "sahip": "-",
     "oncelik": "P1",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "docs/"
-    ],
-    "not": "Mikroservis mimari diyagramını oluştur ve güncelleyin."
+    "dosyalar": [],
+    "not": "Mikroservis mimari diyagramını oluştur ve güncelleyin. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: mimar)",
+    "id": "MIM-01"
   },
   {
     "task_id": "MIM-02",
     "baslik": "API Gateway Design and Routing Rules",
-    "sahip": "mimar",
+    "sahip": "-",
     "oncelik": "P2",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "src/company_master/api/"
-    ],
-    "not": "API Gateway tasarımı belirleyin. Routing kuralları, rate limiting."
+    "dosyalar": [],
+    "not": "API Gateway tasarımı belirleyin. Routing kuralları, rate limiting. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: mimar)",
+    "id": "MIM-02"
   },
   {
     "task_id": "MIM-03",
     "baslik": "Database Schema Design — Core Entities",
-    "sahip": "mimar",
+    "sahip": "-",
     "oncelik": "P1",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "data/orchestrator/"
-    ],
-    "not": "Temel varlık veritabanı şema tasarımı tamamlayınız."
+    "dosyalar": [],
+    "not": "Temel varlık veritabanı şema tasarımı tamamlayınız. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: mimar)",
+    "id": "MIM-03"
   },
   {
     "task_id": "CC-01",
     "baslik": "Code Review Pipeline — Automated Quality Gates",
-    "sahip": "claude_code",
+    "sahip": "-",
     "oncelik": "P1",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "src/company_master/"
-    ],
-    "not": "Otomatik code review pipeline kurun. Quality gates entegrasyonu."
+    "dosyalar": [],
+    "not": "Otomatik code review pipeline kurun. Quality gates entegrasyonu. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: claude_code)",
+    "id": "CC-01"
   },
   {
     "task_id": "CC-02",
     "baslik": "Refactoring Plan — Legacy Code Modules",
-    "sahip": "claude_code",
+    "sahip": "-",
     "oncelik": "P2",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "src/company_master/"
-    ],
-    "not": "Eski kod modüllerini yeniden yapılandırın."
+    "dosyalar": [],
+    "not": "Eski kod modüllerini yeniden yapılandırın. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: claude_code)",
+    "id": "CC-02"
   },
   {
     "task_id": "CC-03",
     "baslik": "Documentation Generator — Inline Code Docs",
-    "sahip": "claude_code",
+    "sahip": "-",
     "oncelik": "P2",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "src/company_master/"
-    ],
-    "not": "Inline kod dokümantasyonu generatoru geliştirin."
+    "dosyalar": [],
+    "not": "Inline kod dokümantasyonu generatoru geliştirin. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: claude_code)",
+    "id": "CC-03"
   },
   {
     "task_id": "EA-01",
     "baslik": "Third-party API Integration — Weather Service",
-    "sahip": "external_agent",
+    "sahip": "-",
     "oncelik": "P2",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "src/company_master/"
-    ],
-    "not": "Hava durumu servisi entegrasyonu uygulayın."
+    "dosyalar": [],
+    "not": "Hava durumu servisi entegrasyonu uygulayın. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: external_agent)",
+    "id": "EA-01"
   },
   {
     "task_id": "EA-03",
     "baslik": "Notification Service — Push Notifications",
-    "sahip": "external_agent",
+    "sahip": "-",
     "oncelik": "P2",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "src/company_master/"
-    ],
-    "not": "Push notification servisi entegrasyonu ekle."
+    "dosyalar": [],
+    "not": "Push notification servisi entegrasyonu ekle. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: external_agent)",
+    "id": "EA-03"
   },
   {
     "task_id": "WK-01",
     "baslik": "Career Pages Scraper — Enhanced Data Extraction",
-    "sahip": "web_kazima",
+    "sahip": "-",
     "oncelik": "P1",
-    "durum": "blocked",
+    "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "src/company_master/"
-    ],
-    "not": "Kariyer sayfaları scraper geliştirin. Gelişmiş veri çıkarma. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina)."
+    "dosyalar": [],
+    "not": "Kariyer sayfaları scraper geliştirin. Gelişmiş veri çıkarma. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina). | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: web_kazima)",
+    "id": "WK-01"
   },
   {
     "task_id": "WK-02",
     "baslik": "OSB Tender Monitor — Real-time Tracking",
-    "sahip": "web_kazima",
+    "sahip": "-",
     "oncelik": "P1",
-    "durum": "blocked",
+    "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "src/company_master/"
-    ],
-    "not": "OSB ihale takibi — gerçek zamanlı izleme sistemi. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina)."
+    "dosyalar": [],
+    "not": "OSB ihale takibi — gerçek zamanlı izleme sistemi. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina). | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: web_kazima)",
+    "id": "WK-02"
   },
   {
     "task_id": "WK-03",
     "baslik": "Proxy Rotation and IP Management",
-    "sahip": "web_kazima",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "blocked",
+    "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "src/company_master/"
-    ],
-    "not": "Proxy rotation ve IP yönetim sistemi kurun. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina)."
+    "dosyalar": [],
+    "not": "Proxy rotation ve IP yönetim sistemi kurun. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina). | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: web_kazima)",
+    "id": "WK-03"
   },
   {
     "task_id": "DEV-01",
     "baslik": "CI/CD Pipeline — GitHub Actions Optimization",
     "sahip": "gelistirici",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
     "dosyalar": [
       ".github/"
     ],
-    "not": "GitHub Actions CI/CD pipeline optimize edin."
+    "not": "GitHub Actions CI/CD pipeline tamamlandı: ci.yml güncellendi (lint, test+coverage, security), deploy-staging.yml ve nightly-etl.yml eklendi. 3010 test geçti, 3 atlandı, 126 uyarı."
   },
   {
     "task_id": "DEV-02",
     "baslik": "Docker Containerization — Multi-stage Build",
-    "sahip": "gelistirici",
+    "sahip": "-",
     "oncelik": "P1",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "Dockerfile",
-      "docker-compose.yml"
-    ],
-    "not": "Docker konteynerleştirme — multi-stage build."
+    "dosyalar": [],
+    "not": "Docker konteynerleştirme — multi-stage build. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: gelistirici)",
+    "id": "DEV-02"
   },
   {
     "task_id": "DEV-03",
     "baslik": "Testing Framework — Unified Test Runner",
-    "sahip": "gelistirici",
+    "sahip": "-",
     "oncelik": "P2",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "tests/"
-    ],
-    "not": "Birleşik test runner frameworkü geliştirin."
+    "dosyalar": [],
+    "not": "Birleşik test runner frameworkü geliştirin. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: gelistirici)",
+    "id": "DEV-03"
   },
   {
     "task_id": "QL-01",
     "baslik": "Automated Test Coverage Report",
-    "sahip": "kalite",
+    "sahip": "-",
     "oncelik": "P1",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "tests/"
-    ],
-    "not": "Otomatik test kapsama raporu oluşturun."
+    "dosyalar": [],
+    "not": "Otomatik test kapsama raporu oluşturun. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: kalite)",
+    "id": "QL-01"
   },
   {
     "task_id": "QL-02",
     "baslik": "Load Testing — Concurrent User Simulation",
-    "sahip": "kalite",
+    "sahip": "-",
     "oncelik": "P1",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "tests/"
-    ],
-    "not": "Yük testi — eşzamanlı kullanıcı simülasyonu."
+    "dosyalar": [],
+    "not": "Yük testi — eşzamanlı kullanıcı simülasyonu. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: kalite)",
+    "id": "QL-02"
   },
   {
     "task_id": "QL-03",
     "baslik": "Accessibility Audit — WCAG Compliance",
-    "sahip": "kalite",
+    "sahip": "-",
     "oncelik": "P2",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "web_dashboard/"
-    ],
-    "not": "Erişilebilirlik denetimi — WCAG uyumluluk."
+    "dosyalar": [],
+    "not": "Erişilebilirlik denetimi — WCAG uyumluluk. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: kalite)",
+    "id": "QL-03"
   },
   {
     "task_id": "AR-01",
@@ -2563,106 +2553,102 @@
   {
     "task_id": "MIMAR-01",
     "baslik": "Event Sourcing and CQRS Implementation Plan",
-    "sahip": "mimari",
+    "sahip": "-",
     "oncelik": "P1",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "src/company_master/"
-    ],
-    "not": "Event Sourcing ve CQRS implementasyon planı."
+    "dosyalar": [],
+    "not": "Event Sourcing ve CQRS implementasyon planı. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: mimari)",
+    "id": "MIMAR-01"
   },
   {
     "task_id": "MIMAR-02",
     "baslik": "Microservices Decomposition Strategy",
-    "sahip": "mimari",
+    "sahip": "-",
     "oncelik": "P2",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "docs/"
-    ],
-    "not": "Mikroservis ayrıştırma stratejisi belirleyin."
+    "dosyalar": [],
+    "not": "Mikroservis ayrıştırma stratejisi belirleyin. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: mimari)",
+    "id": "MIMAR-02"
   },
   {
     "task_id": "MIMAR-03",
     "baslik": "Observability Stack — Metrics, Logs, Traces",
-    "sahip": "mimari",
+    "sahip": "-",
     "oncelik": "P1",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "src/company_master/"
-    ],
-    "not": "Gözlemlenebilirlik yığını — metrikler, loglar, izler."
+    "dosyalar": [],
+    "not": "Gözlemlenebilirlik yığını — metrikler, loglar, izler. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: mimari)",
+    "id": "MIMAR-03"
   },
   {
     "task_id": "RC-01",
     "baslik": "Code Quality Dashboard — Real-time Metrics",
-    "sahip": "roo_code",
+    "sahip": "-",
     "oncelik": "P2",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "web_dashboard/"
-    ],
-    "not": "Kod kalitesi dashboard — gerçek zamanlı metrikler."
+    "dosyalar": [],
+    "not": "Kod kalitesi dashboard — gerçek zamanlı metrikler. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: roo_code)",
+    "id": "RC-01"
   },
   {
     "task_id": "RC-02",
     "baslik": "AI-powered Code Suggestions Engine",
-    "sahip": "roo_code",
+    "sahip": "-",
     "oncelik": "P1",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      "src/company_master/"
-    ],
-    "not": "Yapay zeka destekli kod önerileri motoru."
+    "dosyalar": [],
+    "not": "Yapay zeka destekli kod önerileri motoru. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: roo_code)",
+    "id": "RC-02"
   },
   {
     "task_id": "RC-03",
     "baslik": "Git Hooks — Pre-push Validation",
-    "sahip": "roo_code",
+    "sahip": "-",
     "oncelik": "P2",
     "durum": "plan",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
-    "dosyalar": [
-      ".githooks/"
-    ],
-    "not": "Git hooks — pre-push doğrulaması."
+    "dosyalar": [],
+    "not": "Git hooks — pre-push doğrulaması. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: roo_code)",
+    "id": "RC-03"
   },
   {
     "task_id": "ORCH-11",
     "baslik": "Scheduler Service — Cron-like Task Dispatch",
     "sahip": "orkestrator",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
+    "bitis": "2026-09-15T01:00:00",
     "dosyalar": [
       "src/company_master/"
     ],
-    "not": "Zamanlayıcı hizmet — cron benzeri görev dağıtım."
+    "not": "Zamanlayıcı hizmet — cron benzeri görev dağıtım.",
+    "sonuc": "Scheduler Service olusturuldu: Scheduler sinifi (start/stop/dispatch_once), --once/--dry-run/daemon CLI, cron-like dispatch"
   },
   {
     "task_id": "ORCH-12",
     "baslik": "Health Monitor — System Status Dashboard",
     "sahip": "orkestrator",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
+    "bitis": "2026-09-15T01:00:00",
     "dosyalar": [
       "src/company_master/"
     ],
-    "not": "Sağlık monitörü — sistem durum dashboard'ı."
+    "not": "Sağlık monitörü — sistem durum dashboard'ı.",
+    "sonuc": "Health Monitor olusturuldu: DB/cache/system check, dashboard/endpoint metotlari, cross-platform"
   },
   {
     "task_id": "FIX-ID-01",
@@ -2684,165 +2670,190 @@
   {
     "task_id": "PO-BACK-01",
     "baslik": "Tenant Health Score v1 (Data Quality + Entity Accuracy + Duplicate Rate)",
-    "sahip": "-",
+    "sahip": "cline",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
+    "bitis": "2026-09-15T04:20:41",
     "dosyalar": [
-      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+      "src/company_master/tenant/health.py",
+      "tests/test_tenant_health.py"
     ],
-    "not": "ADMIN PANEL: Data Quality Score, Entity Accuracy, Duplicate Rate göstergelerini kapsar. Skor formülü + eşik dokümanı + dashboard kartı; 3 tenant'ta doğrulanır. PRD Faz 2. [14_po_panel_haritasi.md]",
+    "not": "Modül+27 test hazır (cline). UI entegrasyonu eksik: tenant_health_dashboard() öksüz → PO-BACK-01-UI açıldı (cline). İkisi birlikte done olur. | ORK 2026-09-15: onaylandı (modül+27 test). UI bağlantısı TEN-02 (kilo) kapsamına devredildi",
     "id": "PO-BACK-01"
   },
   {
     "task_id": "PO-BACK-02",
     "baslik": "Segment Eligibility Skoru + Onay Akışı (Coverage + Profile Accuracy)",
-    "sahip": "-",
+    "sahip": "cline",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
+    "bitis": "2026-09-15T08:42:33",
     "dosyalar": [
-      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+      "src/company_master/segment.py",
+      "tests/test_segment.py"
     ],
-    "not": "MÜŞTERİ PANEL: Coverage ve Profile Accuracy göstergelerini kapsar. 5 segmentte %95+ uygunluk; eksik-alan açıklaması UI'da. AR-03 F1. [14_po_panel_haritasi.md]",
-    "id": "PO-BACK-02"
+    "not": "Teslim (cline): segment.py: eligibility_skoru(firma)->float (0-1), onay_durumu(skor, esik)->str; test_segment.py: 18 test; 18 passed",
+    "id": "PO-BACK-02",
+    "talimat": "Segment Eligibility Skoru + Onay Akışı. Yapılacak: segment.py içinde `eligibility_skoru(firma: dict) -> float` (0-1) ve `onay_durumu(skor, esik=0.6) -> 'otomatik'|'manuel'|'red'`; skor bileşenleri: sektör eşleşmesi, çalışan sayısı aralığı, veri tamlığı. tests/test_segment.py'ye sınır değer + eksik alan testleri ekle. Kabul: mevcut segment testleri kırılmaz, ≥6 yeni test yeşil. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_segment.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
   },
   {
     "task_id": "PO-BACK-03",
     "baslik": "Kampanya Durum-Makinesi Denetimi (Source Reliability)",
-    "sahip": "-",
+    "sahip": "roo",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
+    "bitis": "2026-09-15T05:07:33",
     "dosyalar": [
-      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+      "src/company_master/kampanya_durum.py",
+      "tests/test_kampanya_durum.py"
     ],
-    "not": "ADMIN PANEL: Source Reliability göstergesini kapsar. Bitişi geçen aktif → uyarı; sıfır teslimatlı taslak → pilot önerisi; testli. AR-03. [14_po_panel_haritasi.md]",
-    "id": "PO-BACK-03"
+    "not": "Teslim (roo): kampanya_durum.py durum makinesi (6 durum, 9 izinli gecis, uc durum korumasi) + DB esleme (draft/scheduled/active/paused/completed/cancelled); tests/test_kampanya_durum.py 61 test yesil (0.46s); pazarlama.py dokunulmadi",
+    "id": "PO-BACK-03",
+    "talimat": "Kampanya Durum-Makinesi Denetimi. Yapılacak: src/company_master/kampanya_durum.py — durumlar taslak→planlandı→aktif→duraklatıldı→tamamlandı/iptal; `gecis_yap(mevcut, hedef) -> str` (geçersiz geçişte ValueError), `izinli_gecisler()` tablosu. tests/test_kampanya_durum.py: tüm izinli/izinsiz geçişler parametrik. Kabul: ≥10 test yeşil, pazarlama.py'ye dokunulmaz. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_kampanya_durum.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
   },
   {
     "task_id": "PO-BACK-04",
     "baslik": "Paket Fiyat Kataloğu Tekilleştirme (Field Completeness)",
-    "sahip": "-",
+    "sahip": "cline",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
+    "bitis": "2026-09-15T09:07:57",
     "dosyalar": [
-      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+      "src/company_master/paketler.py",
+      "scripts/sync_paket_fiyatlari.py",
+      "tests/test_paket_fiyat.py"
     ],
-    "not": "MÜŞTERİ PANEL: Field Completeness göstergesini kapsar. Tek fiyat kaynağı; 4 tier (Temel 499 TL); demo çakışması giderilir. AR-03. [14_po_panel_haritasi.md]",
-    "id": "PO-BACK-04"
+    "not": "Teslim (cline): paketler.py fiyat_katalogu() tek kaynak; scripts/sync_paket_fiyatlari.py --check JSON writer + diff; test_paket_fiyat.py 11 yeni test (tüm testler yeşil 11/11 + segment 18/18)",
+    "id": "PO-BACK-04",
+    "talimat": "Paket Fiyat Kataloğu Tekilleştirme. Yapılacak: (1) paketler.py `fiyat_katalogu()` tek kaynak olsun; (2) docstring'de referans verilen ama diskte olmayan scripts/sync_paket_fiyatlari.py'yi oluştur: katalogu JSON'a yazar/diff gösterir (`--check` çıkış kodu 1 = uyumsuz); (3) tests/test_paket_fiyat.py: mükerrer paket kodu yok, fiyatlar >0, `--check` senaryosu. Kabul: ≥5 yeni test yeşil. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_paket_fiyat.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
   },
   {
     "task_id": "PO-BACK-05",
     "baslik": "Veri Tazelik Etiketi + Manuel Yenileme (Freshness)",
-    "sahip": "-",
+    "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
+    "bitis": "2026-09-15T05:23:03",
     "dosyalar": [
-      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+      "src/company_master/tazelik.py",
+      "web_dashboard/tabs/admin_auto_refresh.py",
+      "tests/test_tazelik.py"
     ],
-    "not": "ADMIN PANEL: Freshness göstergesini kapsar. 'Son güncelleme' + yenile butonu; invalidation görünür. AR-03 F7. [14_po_panel_haritasi.md]",
-    "id": "PO-BACK-05"
+    "not": "Teslim (kilo): Tazelik etiketi: tazelik_etiketi() (taze/eskiyor/bayat, TZ uyumlu), 11 test. admin_auto_refresh.py guncellendi: Son güncelleme etiketi + Yenile butonu eklendi.",
+    "id": "PO-BACK-05",
+    "talimat": "Veri Tazelik Etiketi + Manuel Yenileme (Freshness). Yapılacak: (1) src/company_master/tazelik.py — `tazelik_etiketi(son_guncelleme: datetime|None, simdi=None) -> dict` (etiket: 'taze'/'eskiyor'/'bayat', saat farkı, renk); (2) admin_auto_refresh.py'de 'Son güncelleme: …' etiketi + 'Yenile' butonu (st.button → session_state bayrağı); (3) tests/test_tazelik.py: eşik sınırları, None girişi, TZ-aware/naive karışımı. Kabul: en az 8 test yeşil; Streamlit importu test ortamında mock'lanır. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_tazelik.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
   },
   {
     "task_id": "PO-BACK-06",
     "baslik": "Destek Merkezi MVP (Evidence Coverage)",
-    "sahip": "-",
+    "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": null,
     "dosyalar": [
-      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+      "src/company_master/destek.py",
+      "web_dashboard/tabs/admin_destek.py",
+      "tests/test_destek.py"
     ],
     "not": "MÜŞTERİ PANEL: Evidence Coverage göstergesini kapsar. Ticket CRUD + durum makinesi + test; admin sekmeye eklenir. PRD-15. [14_po_panel_haritasi.md]",
-    "id": "PO-BACK-06"
+    "id": "PO-BACK-06",
+    "talimat": "Destek Merkezi MVP. Yapılacak: `src/company_master/destek.py` — `@dataclass Ticket` (id, tenant_id, baslik, aciklama, durum, olusturma, guncelleme), durum makinesi `acik -> inceleniyor -> cozuldu -> kapali` (`durum_gecis(ticket, yeni) -> Ticket`, geçersiz geçiş ValueError), JSON dosya tabanlı depo `data/destek/tickets.json` (DB yok — MVP). `web_dashboard/tabs/admin_destek.py`: liste + yeni ticket formu + durum değiştir; SECTIONS'a kayıt (rol: admin). Testler: `tests/test_destek.py` ≥8 (geçerli/geçersiz geçiş, CRUD, boş depo). Dosyalar: src/company_master/destek.py, web_dashboard/tabs/admin_destek.py, web_dashboard/tabs/__init__.py, tests/test_destek.py. Kabul: test_dashboard_nav + iskelet testleri yeşil. Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK. Tam regresyon sayısı özete yazılır.",
+    "not_": "[roo 2026-09-15 11:40] SON UYARI (2/2). destek.py 0 bayt, admin_destek.py yok, tests/test_destek.py koleksiyon hatasi veriyor. Talimat: KR-5 brifi (posta kutusu). Teslim yolu: gorev_kutusu.py al -> dosyalari UTF-8 (BOM'suz) yaz -> pytest tests/test_destek.py yesil -> python -m pytest tests/ -q --continue-on-collection-errors (0 hata) -> teslim --ozet. ESKALASYON: bir sonraki roo turunda hala alinmamissa gorev cline'a devredilir (gorev_kutusu.py devret)."
   },
   {
     "task_id": "PO-BACK-07",
     "baslik": "Feature Flags MVP (Data Quality + Source Reliability)",
-    "sahip": "-",
+    "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
+    "bitis": "2026-09-15T09:05:53",
     "dosyalar": [
-      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+      "src/company_master/feature_flags.py",
+      "tests/test_feature_flags.py",
+      "data/feature_flags.json"
     ],
-    "not": "ADMIN PANEL: Data Quality Score ve Source Reliability göstergelerini kapsar. Flag CRUD + tenant eşleme + guard; testli. PRD-19. [14_po_panel_haritasi.md]",
-    "id": "PO-BACK-07"
+    "not": "Teslim (kilo): Feature Flags MVP: flag_acik(env>tenant>global), flag_ayarla, flaglar_listele, flag_gerekli decorator. 11 test passed. data/feature_flags.json olusturuldu.",
+    "id": "PO-BACK-07",
+    "talimat": "Feature Flags MVP. Yapılacak: `src/company_master/feature_flags.py` — `flag_acik(ad: str, tenant_id: str | None = None) -> bool`, `flag_ayarla(ad, deger, tenant_id=None)`, `flaglar_listele()`; depo `data/feature_flags.json` (global + tenant override; env `HUGINN_FLAG_<AD>` en yüksek öncelik). Guard: `@flag_gerekli('ad')` dekoratörü (kapalıysa NotImplementedError yerine sessiz `None`). İlk flaglar: `data_quality_score`, `source_reliability` (varsayılan True). Testler: `tests/test_feature_flags.py` ≥8 (öncelik sırası env>tenant>global, bilinmeyen flag False, guard). Dosyalar: src/company_master/feature_flags.py, tests/test_feature_flags.py. UI yok (Faz 2). Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK. Tam regresyon sayısı özete yazılır."
   },
   {
     "task_id": "PO-BACK-08",
     "baslik": "Executive Dashboard v1 (Coverage + Data Quality Score) — REVIZE",
-    "sahip": "-",
+    "sahip": "cline",
     "oncelik": "P3",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [
-      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
-    ],
-    "not": "HER İKİSİ: Coverage ve Data Quality Score göstergelerini kapsar. MRR/ARR trend + churn + health dağılımı; P3 — Faz 3. REVIZE: önce PO-BACK-01 ve 10 tamamlandıktan sonra başla. [14_po_panel_haritasi.md]",
-    "id": "PO-BACK-08"
+    "bitis": "2026-09-15T11:12:44",
+    "dosyalar": [],
+    "not": "Teslim (cline): PO-BACK-08 Executive Dashboard v1 teslim edildi. (1) src/company_master/executive_ozet.py — saf modül (DB/Streamlit bağımsız): mrr_arr (MRR/ARR/ARPA + aktif/pasif/paket dağılımı), churn_orani (dönem pencereli, TR+EN tarih), health_dagilimi (band alanı veya skordan), mrr_trend (aylık kesit; referans tarihi enjekte edilebilir → test kırılganlığı yok). Fiyat tek kaynağı paketler.fiyat_katalogu() (PO-BACK-04); health eşikleri tenant.health.HEALTH_GREEN/HEALTH_YELLOW'dan okunur, health.py'ye yazılmadı. Bozuk kayıt / boş girdi / bilinmeyen paket durumlarında istisna fırlatmaz, 0 veya boş veri döner. (2) web_dashboard/tabs/admin_executive.py — PageHeader + 3 Section (Gelir Özeti · MRR Trendi · Tenant Sağlık Dağılımı); load_executive_ozet ttl=60 cache, DB erişilemezse kaynak='bos' + st.info; Plotly varsa plotly_chart, yoksa st.line_chart fallback. (3) web_dashboard/tabs/__init__.py — TabTanimi 'executive' (GRUP_IS, url_path=executive, min_rol=admin) kaydedildi; SECTIONS 25 → 26. (4) tests/test_executive_ozet.py — 36 yeni test (tamamı geçiyor). (5) tests/test_dashboard_nav.py — sabit bölüm sayısı 26'ya güncellendi (yeni sekme kararı: ayrı sekme, mevcut sekme genişletmesi değ",
+    "id": "PO-BACK-08",
+    "talimat": "Executive Dashboard v1 — BLOKE: PO-BACK-01 ve PO-BACK-10 done olmadan BAŞLAMA. Başlayınca: `src/company_master/executive_ozet.py` — `mrr_arr(abonelikler) -> dict`, `churn_orani(donem_baslangic, donem_bitis) -> float`, `health_dagilimi(tenantlar) -> dict[band, int]` (tenant/health.py `hesapla` çıktısını tüketir, health.py'ye DOKUNMA). `web_dashboard/tabs/admin_executive.py`: 3 metrik + trend çizgi grafiği (Plotly fallback st.line_chart). Testler: `tests/test_executive_ozet.py` ≥8. Dosyalar: executive_ozet.py, admin_executive.py, tabs/__init__.py, test dosyası. Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK. Tam regresyon sayısı özete yazılır.",
+    "not_": "Blokaj kalkti (PO-BACK-01 done, PO-BACK-10 done). cline zincirine eklendi, PO-BACK-04 sonrasi."
   },
   {
     "task_id": "PO-BACK-09",
     "baslik": "Duplicate Rate Dashboard (Admin)",
-    "sahip": "-",
+    "sahip": "cline",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
+    "bitis": "2026-09-15T05:32:10",
     "dosyalar": [
-      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+      "src/company_master/dedup_metrics.py",
+      "tests/test_dedup_metrics.py"
     ],
-    "not": "ADMIN PANEL: Duplicate Rate göstergesi için dedup dashboard. Mükerrer firma oranı, kaynak bazlı duplika analizi. [14_po_panel_haritasi.md]",
+    "not": "Teslim (cline): dedup_metrics.py: mukerrer_orani (toplam/benzersiz/mukerrer/oran/kaynak_bazli) saf fonksiyon; test_dedup_metrics.py: 14 test; 14 passed",
     "id": "PO-BACK-09",
     "source": "ic",
     "from_agent": null,
-    "blokaj": []
+    "blokaj": [],
+    "talimat": "Duplicate Rate (mükerrer oran) hesaplama modülü — Admin dashboard için veri katmanı. Yapılacak: src/company_master/dedup_metrics.py: `mukerrer_orani(kayitlar: list[dict], anahtar='vkn') -> dict` (toplam, benzersiz, mükerrer, oran, kaynak bazlı kırılım); mevcut `vector/service.deduplicate_by_vkn` ve `etl/multi_osb_merger.deduplicate_companies` mantığıyla tutarlı olsun (import etme, saf fonksiyon yaz). UI YOK (admin_quality.py roo kapsamında — dokunma). tests/test_dedup_metrics.py: boş liste, tümü benzersiz, tümü mükerrer, eksik anahtar. Kabul: ≥6 test yeşil. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_dedup_metrics.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
   },
   {
     "task_id": "PO-BACK-10",
     "baslik": "Coverage Analytics (Müşteri)",
-    "sahip": "-",
+    "sahip": "roo",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
+    "bitis": "2026-09-15T09:00:46",
     "dosyalar": [
-      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+      "src/company_master/coverage_analitik.py",
+      "tests/test_coverage_analitik.py"
     ],
-    "not": "MÜŞTERİ PANEL: Coverage göstergesi için kapsam analitiği. Ankara B2B şirketlerinin yakalanma oranı, sektör bazlı coverage. [14_po_panel_haritasi.md]",
+    "not": "Teslim (roo): coverage_analitik.py (coverage_orani/sektor_bazli_coverage/coverage_ozeti + firma_nace_grubu, saf, DB yok) + tests/test_coverage_analitik.py 24 test + pazarlama.py Kapsama sekmesine 'Kapsam (Hedef Evren)' H3 karti (load_kapsam_verisi cache+fallback, st.metric x3 + sektor tablosu + en dusuk 3 uyarisi; HUGINN_HEDEF_EVREN env). Iskelet/kapsama/nav testleri 196 yesil; tam regresyon 3193 passed/3 skipped. Not: NACE hedefleri gecici olarak esit paylasim; gercek hedef tablosu gelince load_kapsam_verisi guncellenecek.",
     "id": "PO-BACK-10",
     "source": "ic",
     "from_agent": null,
-    "blokaj": []
+    "blokaj": [],
+    "talimat": "Coverage Analytics (Müşteri). Yapılacak: `src/company_master/coverage_analitik.py` — `coverage_orani(firmalar: list[dict], hedef_evren: int) -> float` (0-100), `sektor_bazli_coverage(firmalar, nace_gruplari) -> list[dict]` (nace_grup, yakalanan, hedef, oran), `coverage_ozeti(...) -> dict` (toplam, oran, en_dusuk_3_sektor). Saf fonksiyon, DB yok. `web_dashboard/tabs/musteri_kesif.py` veya uygun Huginn sekmesine 'Kapsam' kartı (st.metric + tablo). Testler: `tests/test_coverage_analitik.py` ≥8 (boş liste, hedef 0, %100, sektör sıralama). Dosyalar: src/company_master/coverage_analitik.py, tests/test_coverage_analitik.py, ilgili tek sekme. Kabul: yeni testler yeşil, iskelet testleri (test_sayfa_iskeleti/test_sekme_kapsama) kırılmaz. Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK. Tam regresyon sayısı özete yazılır."
   },
   {
     "task_id": "PO-BACK-11",
     "baslik": "Source Reliability Monitor (Admin)",
-    "sahip": "-",
+    "sahip": "roo",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
+    "bitis": "2026-09-15T05:43:04",
     "dosyalar": [
-      "data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+      "src/company_master/kaynak_guvenilirlik.py",
+      "web_dashboard/tabs/admin_quality.py",
+      "tests/test_kaynak_guvenilirlik.py"
     ],
-    "not": "ADMIN PANEL: Source Reliability göstergesi için kaynak sağlık izleme. Kaynak bazlı performans, güven skoru, tazelik takibi. [14_po_panel_haritasi.md]",
+    "not": "Teslim (roo): PO-BACK-11 tamam. Yeni: src/company_master/kaynak_guvenilirlik.py (KaynakSaglik dataclass, tazelik/hata_orani/tutarlilik bilesenleri, hesapla/hesapla_toplu/esik_dokumani; health.py kalibina paralel, health.py dokunulmadi). Yeni: tests/test_kaynak_guvenilirlik.py (35 test). Degisen: web_dashboard/tabs/admin_quality.py (load_source_reliability sources+source_records SQL, kaynak tablosu, esik alti st.error/st.warning karti, 3 metrik). Ek: utcnow -> datetime.now(timezone.utc) (DeprecationWarning sifir), tz-aware DB zaman damgasi destegi. Testler: hedefli 207 passed/2 skipped; tam regresyon 3133 passed/3 skipped/0 fail (76.9s). BOM yok.",
     "id": "PO-BACK-11",
     "source": "ic",
     "from_agent": null,
-    "blokaj": []
+    "blokaj": [],
+    "talimat": "Source Reliability Monitor (Admin). Yapılacak: src/company_master/kaynak_guvenilirlik.py — kaynak bazlı güvenilirlik skoru (tazelik, hata oranı, tutarlılık; `tenant/health._source_reliability_score` ile uyumlu, health.py'ye DOKUNMA — kilo kapsamı); admin_quality.py'de kaynak tablosu + eşik altı uyarı kartı; tests/test_kaynak_guvenilirlik.py ≥8 test. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_kaynak_guvenilirlik.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
   },
   {
     "task_id": "ADMIN-DOC-01",
@@ -2885,17 +2896,18 @@
     "baslik": "İş akışı optimizasyonu ve görev sıralaması",
     "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
+    "bitis": "2026-09-15T05:23:02",
     "dosyalar": [
       "data/orchestrator/WORKFLOW_OPTIMIZATION.md"
     ],
-    "not": "Tüm görevleri sitemap'lerle uyumlu hale getirme: öncelik, bağımlılık, ajan sorumluluğu.",
+    "not": "Teslim (kilo): WORKFLOW_OPTIMIZATION.md güncellendi: (7) darboğaz listesi (5 bottleneck), (8) önerilen akış (tetik→al→teslim→onay tabloları), (9) ölçüm KPI'ları (4 KPI + formüller). UTF-8/BOM'suz, Türkçe karakterler bütün, 3+ somut KPI.",
     "id": "ADMIN-WF-01",
     "source": "ic",
     "from_agent": null,
-    "blokaj": []
+    "blokaj": [],
+    "talimat": "Admin iş akışı optimizasyon dokümanını tamamla: mevcut WORKFLOW_OPTIMIZATION.md'yi (a) darboğaz listesi, (b) önerilen akış (tetik → al → teslim → onay), (c) ölçüm KPI'ları (ort. teslim süresi, ret oranı) başlıklarıyla güncelle. Kabul: dosya UTF-8/BOM'suz, Türkçe karakterler bozulmamış, en az 3 somut KPI tanımı. Kod değişikliği YOK. Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
   },
   {
     "task_id": "MRK-03",
@@ -3009,15 +3021,246 @@
     "baslik": "Grafik altyapisi: charts modulu + requirements kontrolu",
     "sahip": "cline",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-14T21:40:06",
-    "bitis": null,
+    "bitis": "2026-09-14T21:59:00.270289+00:00",
     "dosyalar": [
       "src/company_master/ui/charts/__init__.py",
       "requirements-app.txt"
     ],
-    "not": "",
+    "not": "Teslim (cline): src/company_master/ui/charts/__init__.py olusturuldu (line_bar, bar_chart, pie_chart, scatter_chart, fig_to_json). requirements-app.txt pandas>=2.0.0 eklendi (CHART-01).",
     "source": "ic",
     "from_agent": null
+  },
+  {
+    "task_id": "TEN-01",
+    "id": "TEN-01",
+    "baslik": "Multi-tenant hazirligi: TenantContext + bekci + doc",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-15T00:56:42",
+    "bitis": "2026-09-15T04:20:41",
+    "dosyalar": [
+      "src/company_master/tenant/__init__.py",
+      "src/company_master/tenant/model.py",
+      "tests/test_tenant.py",
+      "tests/test_tenant_bekci.py",
+      "docs/TENANT_HAZIRLIK.md"
+    ],
+    "not": "Teslim (kilo): Multi-tenant hazırlığı: TenantContext frozen dataclass, VARSAYILAN_TENANT, tenant_coz(), tenant_dogrula() (model.py). 10 test (8 unit + 2 AST bekçi). Streamlit/auth import yasağı doğrulanmış. health.py Streamlit fonksiyonları web_dashboard/tabs/tenant_health_dashboard.py'ye taşındı. | Review onayli: TenantContext frozen dataclass, model.py tenant_coz()/tenant_dogrula(), 10 test gecti, Streamlit import kurali dogrulandi, health.py fonksiyonlari web_dashboard/tabs/tenant_health_dashboard.py'ye tasinmis.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "GAM-01",
+    "id": "GAM-01",
+    "baslik": "Rozet/Kesif motoru: 3 rozet + kullanici_ilerleme.json",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-15T00:56:43",
+    "bitis": "2026-09-15T04:20:41",
+    "dosyalar": [
+      "src/company_master/rozet/__init__.py",
+      "tests/test_rozet.py",
+      "data/kullanici_ilerleme.json"
+    ],
+    "not": "Teslim (kilo): Rozet keif sistemi: UserProgress dataclass, rozet_ver(), karsilastir() (model.py). 8 test. data/kullanici_ilerleme.json olusturuldu. Streamlit yok. | Review onayli: UserProgress dataclass, rozet_ver()/karsilastir() (rozet/model.py), data/kullanici_ilerleme.json olusturuldu, 8 test gecti, Streamlit yok.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "AI-RAG-01",
+    "id": "AI-RAG-01",
+    "baslik": "Odin AI RAG iskeleti: kaynak protokolu + baglam derleyici (ai_chat.py'ye dokunma)",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-15T00:57:49",
+    "bitis": "2026-09-15T04:20:41",
+    "dosyalar": [
+      "src/company_master/odin_ai/__init__.py",
+      "src/company_master/odin_ai/rag.py",
+      "tests/test_odin_ai.py",
+      "docs/ODIN_AI_ISKELET.md"
+    ],
+    "not": "Teslim (kilo): Odin AI RAG iskeleti: Embedder (SHA-256 deterministik), Chunk frozen dataclass, chunk_metin(), chunk_bol(), chunk_topla() (rag.py). 19 test. docs/ODIN_AI_ISKELET.md olusturuldu. API key yok. | Review onayli: Odin AI RAG iskeleti (Embedder SHA-256, Chunk dataclass, chunk_metin()/chunk_bol()/chunk_topla() rag.py), 19 test gecti, docs/ODIN_AI_ISKELET.md olusturuldu, API key yok.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "TEN-02",
+    "id": "TEN-02",
+    "baslik": "Tenant health Streamlit import ayrıştırması",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-15T02:19:02",
+    "bitis": "2026-09-15T04:58:22",
+    "dosyalar": [
+      "src/company_master/tenant/health.py",
+      "web_dashboard/tabs/tenant_health_dashboard.py",
+      "web_dashboard/tabs/admin_kpi.py",
+      "tests/test_tenant_health.py"
+    ],
+    "not": "Teslim (kilo): TEN-02 tamamlandı: admin_kpi.py tenant health section ve tenant context import eklendi; tenant_health_dashboard.py bileşen döngüsü düzeltildi; tests/test_tenant_health.py AST/monkeypatch testleri eklendi. Import exit 0; tenant suite 27 passed; full suite 3012 passed, 3 skipped. Hedefli flake8/black pre-existing style ve verilen mock lambda biçimi nedeniyle exit 1; compileall exit 0.",
+    "source": "ic",
+    "from_agent": null,
+    "talimat": "Tenant Sağlık Paneli — tek sahip kilo (PO-BACK-01-UI buraya birleştirildi). Yapılacak: (1) admin_kpi.py'de Section altında `tenant_health_dashboard(tenant_ctx=VARSAYILAN_TENANT, companies=...)` çağır; (2) tenant_health_dashboard.py'yi health.py modülüne bağla (skor + kaynak güvenilirlik özet kartı); (3) AST/monkeypatch testi ekle (admin_kpi içinde çağrının varlığı + dashboard fonksiyonunun st.* çağrıları mock'lanarak çalıştığı). Kabul: tests/test_tenant_health.py yeşil, admin panel importu kırılmaz. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_tenant_health.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
+  },
+  {
+    "task_id": "AI-CHAT-01-FIX",
+    "id": "AI-CHAT-01-FIX",
+    "baslik": "[FIX] AI-CHAT-01 teslim dosyalari diskte yok: ai_chat.py + abrakadabra.py yeniden uretim",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-15T03:07:22",
+    "bitis": "2026-09-15T04:20:41",
+    "dosyalar": [
+      "src/company_master/ai_chat.py",
+      "web_dashboard/tabs/abrakadabra.py",
+      "tests/test_ai_chat.py",
+      "web_dashboard/tabs/__init__.py"
+    ],
+    "not": "S11 MIMIR eki (review özet güncelleme): GORUNEN_AD=MIMIR, kilit sözü abrakadabra (teklif_uygula ikinci kapı + UI kilit kutusu + maskeleme), MIMIR_MODELS/MIMIR_KILIT_SOZU env, ChatBubble=AI MIMIR; test_ai_chat 29; tam regresyon 2941 passed.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "PO-BACK-01-UI",
+    "id": "PO-BACK-01-UI",
+    "baslik": "Tenant Health Score v1 UI entegrasyonu (tenant_health_dashboard'ı ekrana göm)",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-15T03:52:45",
+    "bitis": "2026-09-15T04:20:41",
+    "dosyalar": [
+      "web_dashboard/tabs/tenant_health_dashboard.py",
+      "web_dashboard/tabs/admin_kpi.py",
+      "tests/test_tenant_health.py"
+    ],
+    "not": "ORK 2026-09-15: TEN-02'ye birleştirildi, iş yapılmadı (cline'dan düşürüldü; tenant sağlığı tek sahip kilo)",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "TEST-ISO-01",
+    "id": "TEST-ISO-01",
+    "baslik": "test_api_integration.py için izole fixture DB — 69 deselect edilen testi regresyona geri kat",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-15T04:22:47",
+    "bitis": "2026-09-15T05:13:08",
+    "dosyalar": [
+      "tests/test_api_integration.py",
+      "tests/conftest.py"
+    ],
+    "not": "Teslim (roo): Dogrulama: test_api_integration.py zaten _FakeEngine ile DB mock'lu, conftest.py'deki isolated_spend_log fixture'i ile izole; 69 test deselect edilmeden yesil (5.34s). Tam regresyon: 3073 passed, 3 skipped, 0 deselect, 0 fail (62s). Ek kod degisikligi gerekmedi, izolasyon onceki bir islemde zaten tamamlanmisti.",
+    "source": "ic",
+    "from_agent": null,
+    "talimat": "Yapılacak: conftest.py'ye izole test DB fixture'ı (tmp_path tabanlı SQLite veya monkeypatch'li engine) ekle; test_api_integration.py'deki 69 deselect edilen testi bu fixture'a bağla; canlı DB/ağ bağımlılığı kalmasın. Kabul: `python -X utf8 -m pytest tests/test_api_integration.py -q` deselect olmadan yeşil; tam regresyon `python -X utf8 -m pytest tests/ -q` sayısı özete yazılır. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_api_integration.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
+  },
+  {
+    "task_id": "HEDEF-NACE-01",
+    "id": "HEDEF-NACE-01",
+    "baslik": "Kapsam karti: gercek NACE hedef tablosu (data/nace_hedefleri.json)",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-15T09:15:45",
+    "bitis": "2026-09-15T09:27:02",
+    "dosyalar": [
+      "src/company_master/coverage_analitik.py",
+      "web_dashboard/tabs/pazarlama.py",
+      "tests/test_coverage_analitik.py"
+    ],
+    "not": "Teslim (roo): coverage_analitik.nace_hedeflerini_yukle(dosya,gruplar,evren)->(hedefler,kaynak) + esit paylasim fallback; data/nace_hedefleri.json (27 grup, ilk tahmin); pazarlama.load_kapsam_verisi dosya oncelikli (HUGINN_NACE_HEDEF_DOSYASI ile yol ezilebilir), kart caption kaynagi gosterir; +9 test (33). Tam regresyon 3204 passed.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "FIX-LEDGER-01",
+    "id": "FIX-LEDGER-01",
+    "baslik": "error_ledger Windows tmp kilidi (WinError 5) retry",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-15T09:16:02",
+    "bitis": "2026-09-15T09:27:02",
+    "dosyalar": [],
+    "not": "Teslim (roo): error_ledger._atomik_degistir: os.replace PermissionError'da 3 deneme/geometrik bekleme; +2 test (retry gecer, kalici kilit yukselir). 6/6 yesil; tam regresyon 3204 passed.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "BUG-DESTEK-UTF8",
+    "id": "BUG-DESTEK-UTF8",
+    "baslik": "KRITIK(P1): tests/test_destek.py UTF-16LE+BOM (4319 NUL bayt) — pytest koleksiyonunu durduruyor",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-15T10:10:21",
+    "bitis": "2026-09-15T11:20:30",
+    "dosyalar": [],
+    "not": "Teslim (roo): Kodlama kismi kapandi: tests/test_destek.py (4601 bayt UTF-8) ve destek.py UTF-16 sorunu kilo tarafindan 10:15/10:20'de duzeltildi. YENI DURUM (KR-5): destek.py 0 bayt + admin_destek.py yok -> fonksiyonel is PO-BACK-06 (kilo, aktif) kapsaminda; kilo'ya P1 uyari tetigi dustu. Bu ticket kodlama kapsamiyla kapatiliyor.",
+    "source": "ic",
+    "from_agent": null,
+    "talimat": "TRİYAJ (roo): tests/test_destek.py UTF-16LE + BOM olarak kaydedilmiş (8744 bayt, 4319 NUL bayt) → 'SyntaxError: source code string cannot contain null bytes'; `pytest tests/` koleksiyonu 'Interrupted: 1 error during collection' ile kesiliyor (CI yeşil kapısı sahte negatif). Dosya kilo'nun AKTİF görevi PO-BACK-06'nın dosya listesinde olduğu için cline dokunmadı (AGENTS.md çakışma kuralı). Beklenen karar: düzeltme PO-BACK-06 kapsamında kilo'ya verilsin (dosya UTF-8/BOM'suz yeniden yazılsın) veya ayrı fix görevi açılsın. Doğrulama: `python -m pytest tests/test_destek.py -q` ve ardından --ignore'suz tam regresyon. Kanıt raporu: data/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md (KR-1). PO-BACK-08 tam regresyonu (--ignore ile): 3274 passed, 3 skipped, 126 warnings in 75.74s (0:01:15)"
+  },
+  {
+    "task_id": "BUG-CHART01-SYNTAX",
+    "id": "BUG-CHART01-SYNTAX",
+    "baslik": "SORUN(P2): ui/charts/__init__.py SyntaxError (CHART-01 kalıntısı) — ortak grafik modülü import edilemiyor",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-15T10:10:21",
+    "bitis": "2026-09-15T11:12:44",
+    "dosyalar": [
+      "src/company_master/ui/charts/__init__.py",
+      "tests/test_ui_charts.py"
+    ],
+    "not": "Teslim (cline): KR-2 ÇÖZÜLDÜ. (1) src/company_master/ui/charts/__init__.py bozuk yazımdan (UTF-8 BOM + kaçışlı triple-quote + her satır arasına boş satır) sadık biçimde onarıldı; API ve imzalar aynen korundu (line_chart, bar_chart, pie_chart, scatter_chart, fig_to_json). (2) fig_to_json artık belgelenmiş sözleşmesini karşılıyor: fig.to_dict() numpy ndarray döndürüp json.dumps TypeError veriyordu; plotly.io.to_json + json.loads ile gerçek JSON-serializable dict üretiliyor. (3) Kalıcı regresyon testi eklendi: tests/test_ui_charts.py — 9 test (kaynak kodlama sağlığı guard: BOM/NUL/compile/kaçışlı docstring; __all__ sözleşmesi; gerçek docstring; figür üretimi; dict girdi; color ile çoklu iz; JSON serileştirme; geçersiz kolon). KANIT: tests/test_ui_charts.py 9 passed; tests/test_ui_components.py ile birlikte 137 passed; tests/ --ignore=tests/test_destek.py 3283 passed 3 skipped (64.57s; öncesi 3274 -> +9 yeni test, regresyon yok); py_compile + taze import OK. Dosya sağlığı: 4795 bayt, CRLF, BOM yok, 0 NUL. Kilit: her iki dosya cline/BUG-CHART01-SYNTAX. Kapsam notu: modülü hiçbir yer import etmiyor (altyapı kullanılmaz durumda); admin_executive.py raw plotly + st.line_chart kullanıyor, entegrasyon ayrı görev. KR-1 revizyonu: kök neden tests/test_destek.py değil src/company_master/destek.py idi (UTF-16LE, 3814 NUL); kilo ikisini de 10:15-10:20 arasında düzeltti, test_destek artık koleksiyona giriyor (8 passed / 2 failed; fonksiyonel iş kilo tarafında sürüyor). KR-3 (yeni bulgu): src/company_master/schema/migrations/0006_normalize_compat.py UTF-16LE + 1069 NUL ve hiçbir görevde tanımlı değil (orphan).",
+    "source": "ic",
+    "from_agent": null,
+    "talimat": "TRİYAJ (roo): src/company_master/ui/charts/__init__.py satır 2'de kaçışlı uc-tırnak ifadeleri var ve dosya UTF-8 BOM'lu → 'SyntaxError: unexpected character after line continuation character'; py_compile ve import başarısız, yani line_chart/bar_chart/pie_chart/scatter_chart/fig_to_json kullanılamaz. PO-BACK-08 bu modülü import etmedi (doğrudan plotly + st.line_chart yedeği) → teslim etkilenmedi. Dosya kilitsiz; CHART-01 (cline, done) kalıntısı. Beklenen karar: CHART-01 revizyonu olarak ayrı görev açılsın; cline'a atanırsa düzeltir (kaçışlı uc-tırnakları gerçek docstring yap + BOM'suz UTF-8 kaydet + py_compile ve import testi). Kanıt raporu: data/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md (KR-2)."
+  },
+  {
+    "task_id": "BUG-MIG0006-UTF8",
+    "id": "BUG-MIG0006-UTF8",
+    "baslik": "KR-3: 0006_normalize_compat.py bozuk kodlama (orphan migration dosyasi)",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-15T10:36:04",
+    "bitis": "2026-09-15T11:20:30",
+    "dosyalar": [],
+    "not": "Teslim (roo): 0006_normalize_compat.py silindi (UTF-16+1069 NUL, git HEAD'de de bozuk, onarilamaz; migrate.py yalnizca .sql isler, hicbir yerden import edilmiyor -> orphan). Gercek migration 0006_nace_details.sql yerinde. git rm --cached + del. Dogrulama: dir 0006* -> yalnizca .sql",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "BUG-ENCODING-GUARD",
+    "id": "BUG-ENCODING-GUARD",
+    "baslik": "KR-4: Kodlama denetim araci (BOM/NUL/0-bayt) + ratchet guard + CI",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-15T11:19:35",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/kodlama_denetim.py",
+      "tests/test_kodlama_guard.py",
+      "data/kodlama_allowlist.json",
+      ".github/workflows/ci.yml"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "not_": "[roo] BULGU NOTU: Kapsam disinda gordugun bug/hata/kodlama sorununu DUZELTME; data/orchestrator/BUG-ENCODING-GUARD_bulgular_<tarih>_cline.md dosyasina yaz ve roo ya tetik dusur. Kapsam disi dosyaya dokunmak teslim reddi sebebidir (kilit disiplini)."
   }
 ]

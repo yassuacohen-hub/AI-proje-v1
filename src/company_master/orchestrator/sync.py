@@ -12,6 +12,12 @@ from src.company_master.orchestrator.task_board import atomic_write_text
 
 AGENT_SYNC_PATH = Path("AGENT_SYNC.md")
 
+# FIX-SYNC-01: canlı AGENT_SYNC.md "(Son 10)" başlığı kullanır, eski/test şablonu "(Senkron Kaydi)".
+_TAMAMLANAN_MARKERLAR: tuple[str, ...] = (
+    "## Tamamlananlar (Senkron Kaydi)",
+    "## Tamamlananlar (Son 10)",
+)
+
 
 class SyncError(Exception):
     pass
@@ -29,10 +35,10 @@ def append_completion(
     today = datetime.now().strftime("%Y-%m-%d")
     summary = result.summary if result and result.summary else description
     entry = f"| {agent_name} | {today} | {task_id}: {summary} |"
-    marker = "## Tamamlananlar (Senkron Kaydi)"
-    if marker not in content:
+    marker = next((m for m in _TAMAMLANAN_MARKERLAR if m in content), None)
+    if marker is None:
         raise SyncError("AGENT_SYNC.md missing 'Tamamlananlar' section")
-    new_content = content.replace(marker, f"{marker}\n\n| {agent_name} | {today} | {task_id}: {summary} |")
+    new_content = content.replace(marker, f"{marker}\n\n{entry}", 1)
     atomic_write_text(AGENT_SYNC_PATH, new_content)
 
 

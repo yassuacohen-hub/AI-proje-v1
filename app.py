@@ -40,10 +40,15 @@ if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
 from web_dashboard.tabs import (  # noqa: E402
+    ROL_ADMIN,
+    ROL_ANON,
     SECTIONS,
     TabTanimi,
+    erisebilir,
+    gorunur_bolumler,
     gruplar,
     render_fonksiyonu,
+    rol_normalize,
     tab_getir,
     tab_url_getir,
     varsayilan_tab,
@@ -76,6 +81,8 @@ VARSAYILAN_TEMA = "aydinlik"
 ARAMA_MAKS_SONUC = 5
 KOMPAKT_KEY = "_hg_menu_kompakt"
 KOMPAKT_SUTUN = 4  # ikon-only modda satır başına düşen ikon sayısı
+#: U-10: Oturum rolü. Yazılırsa `admin_token` türetimini ezer (test/gelecek RBAC).
+ROL_KEY = "_hg_rol"
 
 # --------------------------------------------------------------------------- #
 # Oturum durumu
@@ -121,6 +128,18 @@ def _eski_adresi_cevir() -> None:
     sayfa = _SAYFA_KAYDI.get(tanim.anahtar)
     if sayfa is not None:
         st.switch_page(sayfa)
+
+
+def aktif_rol() -> str:
+    """U-10: Oturumun rolünü döndürür.
+
+    Öncelik: `st.session_state[ROL_KEY]` → varsa `admin_token` ⇒ `admin`
+    → aksi hâlde `anon`. Bilinmeyen değerler `anon`a indirgenir.
+    """
+    acik = st.session_state.get(ROL_KEY)
+    if acik:
+        return rol_normalize(str(acik))
+    return ROL_ADMIN if st.session_state.get("admin_token") else ROL_ANON
 
 
 def aktif_tab() -> TabTanimi:
@@ -407,9 +426,15 @@ def render_sidebar(secili: TabTanimi) -> None:
         )
         st.divider()
 
+        # U-10: yalnızca rolün görebildiği bölümler menüye girer.
+        rol = aktif_rol()
+        gorunur = list(gorunur_bolumler(rol))
+        if secili not in gorunur:  # derin bağlantıyla gelinmiş yetkisiz sayfa
+            gorunur.append(secili)
+
         # --- Hızlı geçiş: tek adımda herhangi bir bölüme ---
         if not kompakt:
-            secenekler = list(SECTIONS)
+            secenekler = gorunur
             secim = st.selectbox(
                 "🔍 Hızlı geçiş",
                 secenekler,
@@ -423,7 +448,7 @@ def render_sidebar(secili: TabTanimi) -> None:
 
             st.divider()
 
-        for grup_adi, tanimlar in gruplar().items():
+        for grup_adi, tanimlar in gruplar(rol).items():
             if kompakt:
                 st.caption(grup_adi.split(" ", 1)[0] if " " in grup_adi else grup_adi)
             else:
@@ -432,13 +457,16 @@ def render_sidebar(secili: TabTanimi) -> None:
             st.write("")
 
         st.divider()
-        hazir_sayisi = sum(1 for tanim in SECTIONS if tanim.hazir)
+        gorunur_sayisi = len(gorunur_bolumler(rol))
+        hazir_sayisi = sum(1 for tanim in gorunur_bolumler(rol) if tanim.hazir)
+        gizli_sayisi = len(SECTIONS) - gorunur_sayisi
         if kompakt:
-            st.caption(f"{hazir_sayisi}/{len(SECTIONS)}")
+            st.caption(f"{hazir_sayisi}/{gorunur_sayisi}")
         else:
+            gizli_notu = f" · 🔒 {gizli_sayisi} bölüm giriş gerektirir" if gizli_sayisi else ""
             st.caption(
-                f"Bölüm: {hazir_sayisi}/{len(SECTIONS)} hazır · ⏳ = yapım aşamasında\n\n"
-                "P7-44 Modern Navigasyon"
+                f"Bölüm: {hazir_sayisi}/{gorunur_sayisi} hazır · ⏳ = yapım aşamasında"
+                f"{gizli_notu}\n\nP7-44 Modern Navigasyon"
             )
 
 
@@ -497,7 +525,7 @@ def render_topbar(tanim: TabTanimi) -> None:
 
 
 def render_chat(tanim: TabTanimi, acik: bool) -> None:
-    """Sağ alt "AI Abrakadabra" sohbet balonu — UI kabuğu.
+    """Sağ alt "AI MIMIR" sohbet balonu — UI kabuğu.
 
     Motor bağlantısı ayrı görevdir; şimdilik panel açılır/kapanır ve
     kullanıcıya "motor bağlı değil" notunu gösterir.
@@ -520,11 +548,40 @@ def render_placeholder(tanim: TabTanimi) -> None:
     )
 
 
+def render_yetki_uyarisi(tanim: TabTanimi) -> None:
+    """U-10: Derin bağlantıyla gelinen yetkisiz bölüm için açıklayıcı ekran."""
+    st.warning(
+        f"🔒 **{tanim.baslik}** bölümü için `{tanim.min_rol}` yetkisi gerekir. "
+        "Yönetim bölümünden admin girişi yapın."
+    )
+    yonetim = tab_getir("yonetim")
+    if yonetim is not None and st.button("🔐 Yönetim → Admin girişi", key="yetki_yonetim"):
+        bolum_sec(yonetim.anahtar)
+
+
+def render_musteri_onizleme(tanim: TabTanimi) -> None:
+    """MIG-UI-01: Hedefi Huginn olan bölüm için geçiş dönemi şeridi.
+
+    Tam göç "Huginn tasarım turu" tamamlanınca yapılır; o zamana kadar bölüm
+    Muninn'de kalır ve iç ekibe müşteri ekranı olduğu açıkça bildirilir.
+    """
+    st.caption(
+        f"👁 **Müşteri Önizleme** — *{tanim.baslik}* bir Huginn 🦅 (müşteri) "
+        "ekranıdır; tasarım turu sonrası 8000 portundaki arayüze taşınacak. "
+        "Burada yalnızca iç ekip önizlemesi için görünür."
+    )
+
+
 def render_icerik(tanim: TabTanimi) -> None:
     """Seçili bölümü hata sınırı içinde çizer."""
+    if not erisebilir(tanim, aktif_rol()):
+        render_yetki_uyarisi(tanim)
+        return
     if not tanim.hazir:
         render_placeholder(tanim)
         return
+    if tanim.musteri_onizleme:
+        render_musteri_onizleme(tanim)
 
     fn = RENDER_OVERRIDES.get(tanim.anahtar) or render_fonksiyonu(tanim)
     if fn is None:
