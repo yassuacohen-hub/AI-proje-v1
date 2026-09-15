@@ -131,10 +131,16 @@ def render_admin_realtime_tab() -> None:
 
     if rehber:
         st.info(
-            "**Amaç:** Gerçek zamanlı KPI ve sinyal takibi.\n\n"
-            "**Veri kaynağı:** `/api/intelligence/dashboard/stream` (SSE).\n\n"
-            f"**Kısıt:** Veri {CACHE_TTL} saniyede bir yenilenir; SSE bağlantısı "
-            "kesildiğinde son bilinen veri gösterilir ve DB'den yedek okuma yapılır."
+            "**Bu ekran ne işe yarar?** Sistemin şu anki nabzını gösterir: yeni gelen "
+            "firma sinyalleri, KPI değişimleri ve canlı olaylar burada akar. "
+            "\"Şu an ne oluyor?\" sorusu için bakılacak yerdir.\n\n"
+            "**Nasıl kullanılır?** Ekran kendiliğinden yenilenir; elle müdahale gerekmez. "
+            "Son güncelleme saati sağ üstte görünür. Bağlantı koparsa uyarı çıkar ve "
+            "son bilinen veriler gösterilmeye devam eder.\n\n"
+            "**Veriler nereden gelir?** `/api/intelligence/dashboard/stream` canlı akışı "
+            "(SSE). Akış kesilirse veritabanından yedek okuma yapılır.\n\n"
+            f"**Dikkat:** Veriler {CACHE_TTL} saniyede bir yenilenir; bu süreden kısa "
+            "değişimler ekrana yansımayabilir."
         )
 
     SectionNav(BOLUMLER, yatay=True).render()

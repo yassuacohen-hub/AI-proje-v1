@@ -3244,9 +3244,9 @@
     "baslik": "MVP Kullanici Yonetimi ekrani: PageHeader + onayla + kredi formu",
     "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-15T15:55:11",
-    "bitis": null,
+    "bitis": "2026-09-15T18:10:18",
     "dosyalar": [
       "web_dashboard/tabs/admin_extras.py",
       "tests/test_admin_extras_kullanici.py"
@@ -3275,10 +3275,131 @@
     "baslik": "Review: MVP-KUL-01 Kullanici Yonetimi ekrani",
     "sahip": "cline",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-15T15:55:11",
-    "bitis": null,
+    "bitis": "2026-09-15T18:10:18",
     "dosyalar": [],
+    "not": "roo: cline raporu gelmedi; roo dogrudan inceledi (kod+12 test yesil), hiz icin kapatildi",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "P7-6b",
+    "id": "P7-6b",
+    "baslik": "Kariyer.net scraper saglamlastirma (MVP sonrasi)",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "aktif",
+    "baslangic": "2026-09-15T18:10:48",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/scrapers/kariyernet.py",
+      "tests/test_kariyernet.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "REV-MVP-ADMIN-01",
+    "id": "REV-MVP-ADMIN-01",
+    "baslik": "MVP-ADMIN 4 ekran capraz denetim (rapor-only)",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-15T18:13:20",
+    "bitis": "2026-09-15T18:29:40",
+    "dosyalar": [
+      "data/orchestrator/REV-MVP-ADMIN-01_bulgular_20260915_cline.md"
+    ],
+    "not": "Teslim (cline): bulgu K:1/Y:0/O:1/D:2; rapor data/orchestrator/REV-MVP-ADMIN-01_bulgular_20260915_cline.md; 103 passed; kodlama temiz",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "HIJYEN-01",
+    "id": "HIJYEN-01",
+    "baslik": "Kalinti gecici dosya temizligi",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-15T18:13:21",
+    "bitis": "2026-09-15T18:29:40",
+    "dosyalar": [
+      "data/_tmp/mvp_pano_duzenle.py"
+    ],
+    "not": "Teslim (cline): silindi: data/_tmp/mvp_pano_duzenle.py (izlenmeyen), scripts/_tmp_webapp_a-k.txt 11 dosya (izlenmeyen), scripts/_tmp/ 10 dosya (izlenmeyen); izlenen korumali silme yok; ust dizin basibos dosya yok",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ORCH-05b",
+    "id": "ORCH-05b",
+    "baslik": "ORCH-05 kilit dusurme yalniz done/blocked (gorev_guncelle bug)",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-15T18:24:50",
+    "bitis": "2026-09-15T18:29:40",
+    "dosyalar": [
+      "src/company_master/orchestrator/task_board.py",
+      "tests/orchestrator/test_task_board.py"
+    ],
+    "not": "gorev_guncelle ORCH-05 blogu done/blocked icine tasindi; +2 regresyon testi; test_duzen 2 test ORCH-05b uyumlu guncellendi; 207 passed",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "MVP-KUL-02",
+    "id": "MVP-KUL-02",
+    "baslik": "Kullanici onayinda tier secici (K-1 bulgusu)",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-15T18:30:27",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_extras.py",
+      "tests/test_admin_extras_kullanici.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ENC-ADMIN-PANEL-01",
+    "id": "ENC-ADMIN-PANEL-01",
+    "baslik": "admin_panel.py mojibake 2 dize (O-1)",
+    "sahip": "roo",
+    "oncelik": "P3",
+    "durum": "done",
+    "baslangic": "2026-09-15T18:30:27",
+    "bitis": "2026-09-15T18:34:59",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_panel.py"
+    ],
+    "not": "admin_panel.py 3 satir mojibake onarildi (151,251,255); scripts/mojibake_onar.py araci eklendi; 168 passed 1 skipped; kodlama_denetim temiz; streamlit restart ok",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "FIX-YONETIM-01",
+    "id": "FIX-YONETIM-01",
+    "baslik": "Yonetim bolumu to_excel hatasi + sekme rehberi metinleri (sahip bulgusu)",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "aktif",
+    "baslangic": "2026-09-15T18:43:20",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_export.py",
+      "web_dashboard/tabs/admin_panel.py",
+      "web_dashboard/tabs/ana_kontrol.py",
+      "web_dashboard/tabs/paketler.py",
+      "web_dashboard/tabs/admin_musteriler.py",
+      "web_dashboard/tabs/admin_realtime.py",
+      "web_dashboard/tabs/pazarlama.py"
+    ],
     "not": "",
     "source": "ic",
     "from_agent": null

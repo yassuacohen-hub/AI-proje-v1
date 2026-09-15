@@ -66,11 +66,17 @@ def _render_baslik() -> None:
 
     if rehber:
         st.info(
-            "**Amaç:** Firma kayıtlarını aramak, kalite skoruna göre süzmek ve "
-            "eksik veri taşıyan kayıtları öne çıkarmak.\n\n"
-            "**Veri kaynağı:** `companies` tablosu (`admin_search.search_companies`).\n\n"
-            "**Kısıt:** Liste en fazla seçilen satır sayısı kadar kayıt gösterir; "
-            "tam dışa aktarım için rapor ekranını kullanın."
+            "**Bu ekran ne işe yarar?** Veritabanındaki firma kayıtlarını arar, kalite "
+            "skoruna göre süzer ve eksik bilgi taşıyan (telefon, e-posta, web sitesi olmayan) "
+            "kayıtları öne çıkarır. Veri temizliği ve müşteri araştırması için başlangıç "
+            "noktasıdır.\n\n"
+            "**Nasıl kullanılır?** Arama kutusuna firma adı veya NACE kodu yazın; kalite "
+            "eşiğini kaydırıcıdan seçin. Sonuç tablosunda sütun başlığına tıklayarak "
+            "sıralama yapabilirsiniz.\n\n"
+            "**Veriler nereden gelir?** `companies` tablosu "
+            "(`admin_search.search_companies` sorgusu).\n\n"
+            "**Dikkat:** Liste, seçtiğiniz satır sayısı kadar kayıt gösterir. Tüm sonuçları "
+            "indirmek için **Yönetim › Veri Export** ekranını kullanın."
         )
 
     SectionNav(BOLUMLER, yatay=True).render()

@@ -270,14 +270,17 @@ def _render_baslik(demo_mu: bool) -> None:
 
     if rehber:
         st.info(
-            "**Amaç:** Satılan paketleri, fiyatlarını ve firmalara atanma durumunu "
-            "tek ekranda görmek; bir firmaya hangi paketin teklif edilebileceğini "
-            "belirlemek.\n\n"
-            "**Veri kaynağı:** `packages` / `company_packages` tabloları "
-            "(DASH-UX-03 backend). Tablo yoksa `data/demo/paketler_demo.jsonl` "
-            "demo verisi kullanılır.\n\n"
-            "**Kısıt:** Demo modda atama/CRUD işlemleri kapalıdır; yalnızca "
-            "görüntüleme yapılır. Fiyatlar KDV hariç ve aylık listelenmiştir."
+            "**Bu ekran ne işe yarar?** Sattığımız paketleri, fiyatlarını ve hangi firmaya "
+            "hangi paketin atandığını tek ekranda gösterir. Bir firmaya teklif hazırlarken "
+            "uygun paketi buradan seçebilirsiniz.\n\n"
+            "**Nasıl kullanılır?** Üstteki özet kartlar toplam paket ve atama sayısını verir. "
+            "Aşağıdaki tabloda paketleri karşılaştırabilir, firma bazında atama geçmişini "
+            "görebilirsiniz.\n\n"
+            "**Veriler nereden gelir?** `packages` ve `company_packages` tabloları. "
+            "Tablolar henüz yoksa `data/demo/paketler_demo.jsonl` örnek verisi gösterilir "
+            "ve ekranda **Demo** rozeti belirir.\n\n"
+            "**Dikkat:** Demo modda paket ekleme, düzenleme ve atama kapalıdır; yalnızca "
+            "görüntüleme yapılır. Fiyatlar KDV hariç ve aylık olarak listelenir."
         )
 
     SectionNav(BOLUMLER, yatay=True).render()

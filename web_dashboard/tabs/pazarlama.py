@@ -350,12 +350,18 @@ def _render_baslik(demo_mu: bool) -> None:
 
     if rehber:
         st.info(
-            "**Amaç:** Kampanya ve müşteri segmentlerini tek ekrandan izlemek, "
-            "hangi segmentin hangi kampanyayla beslendiğini görmek.\n\n"
-            "**Veri kaynağı:** `company_master.pazarlama` (kampanyalar / segmentler "
-            "tabloları). Bağlantı yoksa `data/demo/` altındaki örnek veri.\n\n"
-            "**Kısıt:** Demo modda kampanya oluşturma/düzenleme kapalıdır; "
-            "gösterim/tıklama metrikleri yalnızca kaynakta varsa hesaplanır."
+            "**Bu ekran ne işe yarar?** Pazarlama kampanyalarını ve müşteri segmentlerini "
+            "tek ekrandan izler. Hangi segmentin hangi kampanyayla beslendiğini, hangisinin "
+            "boşta kaldığını ve hedef pazarın ne kadarını kapsadığımızı gösterir.\n\n"
+            "**Nasıl kullanılır?** Üstteki özet kartlar aktif kampanya ve segment sayısını "
+            "verir. **Kampanyalar**, **Segmentler** ve **Kapsam** sekmeleri arasında geçiş "
+            "yaparak ayrıntılara inebilirsiniz. Segment başlığına tıklayınca kriterleri "
+            "ve içindeki firmalar açılır.\n\n"
+            "**Veriler nereden gelir?** `company_master.pazarlama` modülü (kampanya ve "
+            "segment tabloları). Bağlantı yoksa `data/demo/` altındaki örnek veri gösterilir "
+            "ve ekranda **Demo** rozeti belirir.\n\n"
+            "**Dikkat:** Demo modda kampanya oluşturma ve düzenleme kapalıdır. "
+            "Gösterim/tıklama/dönüşüm metrikleri yalnızca kaynakta kayıtlıysa hesaplanır."
         )
 
     SectionNav(BOLUMLER, yatay=True).render()

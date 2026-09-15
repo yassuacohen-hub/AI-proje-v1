@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import sys
 from datetime import datetime
+from io import BytesIO
 from pathlib import Path
 from typing import Any
 
@@ -96,6 +97,21 @@ def load_export_data(query_type: str) -> pd.DataFrame | None:
     return None
 
 
+def _excel_bytes(df: pd.DataFrame) -> bytes | None:
+    """DataFrame'i bellekte .xlsx'e yazar (FIX-YONETIM-01).
+
+    `df.to_excel()` bir yazıcı/yol ister; önceki kod bunu vermediği için
+    "missing 1 required positional argument: 'excel_writer'" hatası veriyordu.
+    openpyxl yoksa None döner (çağıran CSV'ye yönlendirir).
+    """
+    try:
+        buffer = BytesIO()
+        df.to_excel(buffer, index=False, engine="openpyxl")
+        return buffer.getvalue()
+    except ImportError:
+        return None
+
+
 def render_export_tab() -> None:
     """Export sekmesini gosterir."""
     st.subheader("📥 Veri Export")
@@ -133,15 +149,15 @@ def render_export_tab() -> None:
             )
 
         with col_excel:
-            try:
-                excel_buffer = df.to_excel(index=False, engine="openpyxl")
+            excel_bytes = _excel_bytes(df)
+            if excel_bytes is None:
+                st.warning("Excel için `openpyxl` kurulu değil; CSV indirmeyi kullanın.")
+            else:
                 st.download_button(
                     label="📊 Excel İndir",
-                    data=excel_buffer,
+                    data=excel_bytes,
                     file_name=f"export_{query_type}_{timestamp}.xlsx",
                     mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
                 )
-            except ImportError:
-                st.warning("openpyxl kurulu degil. CSV kullanin.")
     else:
         st.info("Export edilecek veri bulunamadi.")

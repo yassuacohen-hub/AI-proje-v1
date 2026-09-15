@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-15T18:10:48
+> Son guncelleme: 2026-09-15T18:43:20
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -13,22 +13,24 @@
 | UI-SIDEBAR-02 | Sidebar: marka blogu uste, logo, kompakt | kilo | P2 | blocked |
 | UI-TOPBAR-02 | Topbar: arama sag ust, breadcrumb ayrac, | kilo | P2 | blocked |
 | REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo tesl | cline | P2 | blocked |
-| P7-6b | Kariyer.net scraper saglamlastirma (MVP  | kilo | P2 | plan |
+| P7-6b | Kariyer.net scraper saglamlastirma (MVP  | kilo | P2 | aktif |
+| MVP-KUL-02 | Kullanici onayinda tier secici (K-1 bulg | kilo | P2 | plan |
+| FIX-YONETIM-01 | Yonetim bolumu to_excel hatasi + sekme r | roo | P1 | aktif |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| REPO-HIJYEN-01 | Kok dizin cop/gecici dosya envanteri (si | roo | 2026-09-15 |
-| I18N-SES-02 | Marka sesi JSON (105 tr anahtar) ses.jso | kilo | 2026-09-15 |
-| BUG-SCRIPTS-COMPILE-01 | scripts/ hijyen: 3 compile-bozuk script  | cline | 2026-09-15 |
-| REVIEW-PO-BACK-06 | PO-BACK-06 Destek Merkezi capraz incelem | cline | 2026-09-15 |
 | REV-I18N-SES-02 | Capraz inceleme: I18N-SES-02 kilo teslim | cline | 2026-09-15 |
 | AUDIT-ENC-02 | Repo geneli kodlama denetimi (BOM/UTF-16 | cline | 2026-09-15 |
 | MVP-KD-01 | MVP Karar Defteri ekrani: PageHeader + f | kilo | 2026-09-15 |
 | MVP-KUL-01 | MVP Kullanici Yonetimi ekrani: PageHeade | kilo | 2026-09-15 |
 | REV-MVP-KD-01 | Review: MVP-KD-01 Karar Defteri ekrani | cline | 2026-09-15 |
 | REV-MVP-KUL-01 | Review: MVP-KUL-01 Kullanici Yonetimi ek | cline | 2026-09-15 |
+| REV-MVP-ADMIN-01 | MVP-ADMIN 4 ekran capraz denetim (rapor- | cline | 2026-09-15 |
+| HIJYEN-01 | Kalinti gecici dosya temizligi | cline | 2026-09-15 |
+| ORCH-05b | ORCH-05 kilit dusurme yalniz done/blocke | roo | 2026-09-15 |
+| ENC-ADMIN-PANEL-01 | admin_panel.py mojibake 2 dize (O-1) | roo | 2026-09-15 |
 
 ## Son Handoff'lar
 

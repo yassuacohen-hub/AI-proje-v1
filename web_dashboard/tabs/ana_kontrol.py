@@ -158,10 +158,15 @@ def render_ana_kontrol_tab() -> None:
 
     if bilgi:
         st.info(
-            "**Amaç:** Müşteri ve sistem metriklerini tek ekranda görmek.\n\n"
-            "**Veri kaynağı:** `/api/kpi`, `/metrics`, webhook monitor\n\n"
-            "**Kısıtlar:** Veriler 30 saniyede bir yenilenir; webhook "
-            "istatistikleri şimdilik statiktir (Faz 2'de canlı SSE)."
+            "**Bu ekran ne işe yarar?** Müşteri tarafı (kayıt, onay, kredi) ve sistem tarafı "
+            "(firma sayısı, kalite skoru, görev durumu) metriklerini tek bakışta gösterir. "
+            "Güne başlarken \"her şey yolunda mı?\" sorusunun cevabı burada.\n\n"
+            "**Nasıl kullanılır?** Kartlar renk kodludur: mavi müşteri, gri sistem metrikleri. "
+            "Sağ üstteki **Yenile** düğmesi önbelleği temizleyip verileri anında tazeler.\n\n"
+            "**Veriler nereden gelir?** `/api/kpi` ve `/metrics` uç noktaları ile "
+            "webhook izleme kayıtları.\n\n"
+            "**Dikkat:** Veriler 30 saniyede bir otomatik yenilenir. Webhook istatistikleri "
+            "şimdilik anlık değildir; canlı akış (SSE) Faz 2'de eklenecek."
         )
 
     # --- ADMIN-UI-09: "Bu sayfada" gezinmesi (uzun ekranı taranabilir yapar) ---

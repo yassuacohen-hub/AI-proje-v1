@@ -262,11 +262,16 @@ def render_ayarlar_tab(kullanici_id: str | None = None) -> None:
 
     if rehber:
         st.info(
-            "**Amaç:** Panel tercihlerini kullanıcı bazında kalıcı olarak saklamak.\n\n"
-            "**Veri kaynağı:** `company_master.settings` şeması; alanlar şemadan "
-            "otomatik üretilir.\n\n"
-            "**Kısıt:** Kaydetme hepsi-ya-hiç doğrulanır; bir alan geçersizse "
-            "hiçbir değer yazılmaz."
+            "**Bu ekran ne işe yarar?** Panel tercihlerinizi (tema, tablo satır sayısı, "
+            "bildirimler vb.) kullanıcı bazında kalıcı olarak saklar. Bir kez kaydettiğinizde "
+            "farklı tarayıcı veya cihazdan girseniz bile aynı ayarlar geçerli olur.\n\n"
+            "**Nasıl kullanılır?** Her sekme bir ayar grubudur. İstediğiniz alanları değiştirip "
+            "en alttaki **Kaydet** düğmesine basın. **Varsayılana dön** ile tüm ayarları "
+            "başlangıç değerlerine sıfırlayabilirsiniz.\n\n"
+            "**Veriler nereden gelir?** Ayar tanımları `company_master.settings` şemasından "
+            "otomatik üretilir; yeni bir ayar eklendiğinde bu ekranda kendiliğinden görünür.\n\n"
+            "**Dikkat:** Kaydetme işlemi hepsi-ya-hiç çalışır. Bir alan geçersizse "
+            "hata gösterilir ve hiçbir değer kaydedilmez; düzeltip yeniden kaydedin."
         )
 
     SectionNav(BOLUMLER, yatay=True).render()
