@@ -31,6 +31,6 @@ def test_render_user_management_with_mock(monkeypatch):
             return {"items": [{"code": "A", "label_tr": "Ana"}]}
         raise APIError("unexpected")
     monkeypatch.setattr("web_dashboard.tabs.admin_extras.get_api", fake_get)
-    render_user_management()
+    render_user_management(token="tok")
     assert "/api/admin/pending" in calls
     assert "/api/admin/categories" in calls
