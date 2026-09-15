@@ -48,6 +48,24 @@ def test_env_upsert_gunceller_ve_ekler(tmp_path):
     assert "ADMIN_PASSWORD=p" in metin and "# yorum çğü" in metin
 
 
+def test_env_upsert_tekrarlari_siler(tmp_path):
+    """D-24: `.env` içinde ADMIN_* 3x tekrar → upsert sonrası tek satır (dotenv son değeri alır, bug kaynağı)."""
+    m = _modul()
+    env = tmp_path / ".env"
+    env.write_text(
+        "A=1\nADMIN_EMAIL=a@x\nADMIN_PASSWORD=p1\nB=2\n"
+        "ADMIN_EMAIL=b@x\nADMIN_PASSWORD=p2\nADMIN_EMAIL=c@x\nADMIN_PASSWORD=p3\n",
+        encoding="utf-8",
+    )
+    m.env_upsert(env, {"ADMIN_EMAIL": "son@x", "ADMIN_PASSWORD": "pz"})
+    satirlar = env.read_text(encoding="utf-8").splitlines()
+    assert satirlar.count("ADMIN_EMAIL=son@x") == 1
+    assert satirlar.count("ADMIN_PASSWORD=pz") == 1
+    assert sum(s.startswith("ADMIN_EMAIL=") for s in satirlar) == 1
+    assert sum(s.startswith("ADMIN_PASSWORD=") for s in satirlar) == 1
+    assert satirlar[:2] == ["A=1", "ADMIN_EMAIL=son@x"] and "B=2" in satirlar
+
+
 def test_kisa_sifre_reddedilir(capsys):
     m = _modul()
     assert m.main(["--email", "a@b", "--sifre", "kisa"]) == 2

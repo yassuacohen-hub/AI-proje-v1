@@ -46,18 +46,27 @@ def verify_password(password: str, stored: str) -> bool:
 
 
 def env_upsert(env_path: Path, degerler: dict[str, str]) -> None:
-    """`.env` içinde anahtarları günceller/ekler; diğer satırlara dokunmaz (UTF-8, BOM yok)."""
+    """`.env` içinde anahtarları günceller/ekler; diğer satırlara dokunmaz (UTF-8, BOM yok).
+
+    D-24: Aynı anahtarın tekrar eden kopyaları silinir (ilk satır güncellenir, sonrakiler
+    düşer). Aksi halde `load_dotenv` son kopyayı okuyup DB ile uyumsuz şifre ön-doldurur.
+    """
     satirlar: list[str] = []
     if env_path.exists():
         satirlar = env_path.read_text(encoding="utf-8-sig").splitlines()
     kalan = dict(degerler)
-    for i, satir in enumerate(satirlar):
+    yeni: list[str] = []
+    for satir in satirlar:
         m = re.match(r"^\s*([A-Za-z_][A-Za-z0-9_]*)\s*=", satir)
-        if m and m.group(1) in kalan:
-            satirlar[i] = f"{m.group(1)}={kalan.pop(m.group(1))}"
+        anahtar = m.group(1) if m else None
+        if anahtar in degerler:
+            if anahtar in kalan:
+                yeni.append(f"{anahtar}={kalan.pop(anahtar)}")
+            continue  # tekrar eden kopya → düşür
+        yeni.append(satir)
     for anahtar, deger in kalan.items():
-        satirlar.append(f"{anahtar}={deger}")
-    env_path.write_text("\n".join(satirlar) + "\n", encoding="utf-8")
+        yeni.append(f"{anahtar}={deger}")
+    env_path.write_text("\n".join(yeni) + "\n", encoding="utf-8")
 
 
 def db_sifre_guncelle(email: str, sifre_hash: str) -> int:

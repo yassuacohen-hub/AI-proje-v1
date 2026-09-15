@@ -46,8 +46,27 @@ def get_admin_token() -> str | None:
     return st.session_state.get("admin_token")
 
 
+def _gorunur_bolum_sayisi() -> tuple[int, int]:
+    """(admin görünür bölüm, anon görünür bölüm) — giriş sonrası menü büyümesini göstermek için."""
+    try:
+        from web_dashboard.tabs import ROL_ADMIN, ROL_ANON, gorunur_bolumler
+
+        return len(gorunur_bolumler(ROL_ADMIN)), len(gorunur_bolumler(ROL_ANON))
+    except Exception:
+        return (0, 0)
+
+
 def render_admin_login() -> None:
     st.subheader("Admin Girişi")
+    flash_goster()
+    if get_admin_token():
+        # D-24: `/kimlik` sayfası token varken de boş form çiziyordu; sahip girişin
+        # gerçekleştiğini anlayamıyordu. Oturum bilgisi + çıkış + menü bilgisi göster.
+        render_admin_cikis()
+        admin_n, anon_n = _gorunur_bolum_sayisi()
+        if admin_n:
+            st.info(f"🔓 Oturum açık — sol menüde {admin_n} bölüm görünür (misafir: {anon_n}).")
+        return
     env_email, env_sifre = _env_kimlik()
     with st.form("admin_login_form"):
         email = st.text_input("E-posta", value=env_email)
@@ -71,6 +90,12 @@ def render_admin_login() -> None:
                 st.error("Giriş başarısız: e-posta/şifre kontrol ediniz.")
         except APIError as exc:
             st.error(f"Giriş başarısız: {exc}")
+            if "401" in str(exc):
+                st.caption(
+                    "İpucu: `.env` ADMIN_PASSWORD ile DB şifresi uyuşmuyor olabilir → "
+                    "`python scripts/admin_env_eslesme.py` ile kontrol, "
+                    "`python scripts/admin_sifre_sifirla.py --env-yaz` ile eşitle."
+                )
 
 
 def admin_cikis() -> None:

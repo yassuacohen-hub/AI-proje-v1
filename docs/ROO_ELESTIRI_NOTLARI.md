@@ -1,9 +1,14 @@
-# Ortak Eleştiri ve Risk Defteri (Tüm Ajanlar Okusun ve Yazsın)
+# Ortak Eleştiri, Dikkat ve Risk Defteri (Tüm Ajanlar Okusun ve Yazsın)
 
-> Son güncelleme: 2026-09-14
-> Kapsam: DASH-UX serisi + UX-01/02/03 + P7-46 + dashboard mimarisi
+> Son güncelleme: 2026-09-15
+> Kapsam: DASH-UX serisi + UX-01/02/03 + P7-46 + dashboard mimarisi + MVP-ADMIN + AI-CI (Anthropic × GitHub)
 > Amaç: Teslim edilen işlerde bilerek bırakılan eksikleri, tespit edilen
 > tutarsızlıkları ve diğer ajanları etkileyecek riskleri tek yerde toplamak.
+>
+> **🔎 SORUN ÇIKINCA İLK BURAYA BAK.** Bir hata/beklenmedik davranış görüldüğünde
+> önce bu defterde ara (`findstr /i "anahtar" docs\ROO_ELESTIRI_NOTLARI.md`), sonra
+> `python scripts/decision_log.py` (`search_decisions`) — çoğu sorun daha önce
+> "Dikkat" notu olarak yazılmıştır. Kural: [`AGENTS.md`](../AGENTS.md) → "Dikkat Notları Defteri Kuralı".
 
 Bu dosya **kalıcı ve ortak bir uyarı listesidir**. Bir madde çözüldüğünde satırı
 silmeyin; `Durum` sütununu `ÇÖZÜLDÜ (görev-id)` olarak güncelleyin — denetim izi kalsın.
@@ -11,11 +16,13 @@ silmeyin; `Durum` sütununu `ÇÖZÜLDÜ (görev-id)` olarak güncelleyin — de
 ### Katkı Kuralı (tüm ajanlar için)
 
 1. Yeni madde eklerken ilgili bölümün **sonuna** satır ekleyin; mevcut satırları yeniden yazmayın.
-2. Kod (`K-`), Mimari (`M-`), Veri (`V-`), Süreç (`S-`), Orkestratör (`O-`) öneklerini kullanın;
+2. Kod (`K-`), Mimari (`M-`), Veri (`V-`), Süreç (`S-`), Orkestratör (`O-`), Dikkat (`D-`) öneklerini kullanın;
    numarayı o bölümdeki son numaranın bir fazlası yapın.
 3. `Etkilenen` sütununa kendi ajan adınızı ve etkilediğiniz ajanları yazın.
 4. Maddeyi göreve dönüştürmek **orkestratörün / sahibin** kararıdır; buraya yazmak görev açmak değildir.
 5. Sahip talimatı (2026-09-14): maddeler burada biriktirilir, **toplu değerlendirme sonrası** göreve dönüştürülür.
+6. Sahip talimatı (2026-09-15): her teslim raporundaki **"Dikkat (eleştirel notlar)"** bölümü aynı turda
+   Bölüm 7'ye (`D-` satırı) işlenir; işlenmemiş dikkat notu = eksik teslim.
 
 ---
 
@@ -250,3 +257,52 @@ with st.sidebar:
 - Arama sidebar'a taşınırsa, `st.navigation` taşıması (U-03/04/05) ile **aynı bölgeye** dokunur → **ikisi tek görevde yapılmalı**, aksi halde sidebar iki kez yeniden yazılır.
 
 **Karar:** U-08, U-03/U-04/U-05 ile **birleştirilip sitemap sonrasına** bırakılır. Tek başına yapılırsa iş iki kez yapılmış olur.
+
+---
+
+## 7. Dikkat Notları Defteri (tur bazlı, 2026-09-15'ten itibaren)
+
+> Her teslim raporunun "Dikkat (eleştirel notlar)" bölümü buraya `D-` satırı olarak işlenir.
+> Sütunlar: **Belirti** = sorun ortaya çıkınca ne görürsün (arama için anahtar kelime buraya);
+> **Çözüm / Önlem** = ilk yapılacak iş. Çözülünce `Durum` güncellenir, satır silinmez.
+
+### 7.1 Ortam / Altyapı (sık tekrar eden tuzaklar)
+
+| # | Tarih | Görev | Belirti | Kök neden / Risk | Çözüm / Önlem | Etkilenen | Durum |
+|---|---|---|---|---|---|---|---|
+| D-01 | 2026-09-15 | genel | Streamlit'te kod değişikliği ekrana yansımıyor; F5 işe yaramıyor | [`.streamlit/config.toml`](../.streamlit/config.toml) `fileWatcherType = "none"` — otomatik yükleme kapalı | UI dosyasına dokunan ajan `python scripts/streamlit_restart.py` çalıştırır; sahip yalnız F5 | tüm ajanlar | KURAL (AGENTS.md) |
+| D-02 | 2026-09-15 | genel | `/api/health` ok ama yeni endpoint **404** | 8000 portu Docker container'ında; `web_app.py` imaja **kopyalanır**, volume değil → yerel watchdog restart container'ı güncellemez | `docker compose up -d --build api` → `curl` ile yeni yolu doğrula | tüm ajanlar | KURAL (AGENTS.md) |
+| D-03 | 2026-09-15 | genel | Test dosyası "BOM" / `test_guard_bom_ratchet` kırmızı; `SyntaxError: invalid non-printable character` | PowerShell `Out-File -Encoding utf8` BOM yazar; kilo teslimlerinde tekrar etti ([`tests/test_kariyernet.py`](../tests/test_kariyernet.py), [`app.py`](../app.py) bozuk kopya) | Python `open(..., encoding="utf-8")` ile yaz; teslim öncesi `python scripts/kodlama_denetim.py` | kilo, tüm ajanlar | AÇIK — P7-6b bekliyor; GUARD-ENC-01 (cline) guard yazıyor |
+| D-04 | 2026-09-15 | genel | cmd'de `python -c "...\n..."` → SyntaxError; `findstr /v "^$"` boş çıktıda **exit 1** | Windows cmd çok satır `-c` desteklemez; findstr eşleşme yoksa hata kodu döner | Tek satır list comprehension / geçici script `data/_tmp/`; findstr'ı `|| exit 0` ile sarma ya da sonucu yorumlarken exit 1'i hata sayma | roo, tüm ajanlar | BİLGİ |
+| D-05 | 2026-09-15 | genel | `git push` sonrası status "[ahead 1]" kalıyor | Submodule (`AI proje v1`) pin'i / bayat ref; commit aslında origin'de | `git fetch` + `git log origin/<dal> -1` ile doğrula; submodule değişikliği ayrıca commit edilmeli | roo | BİLGİ |
+| D-06 | 2026-09-15 | genel | Commit'te bol **CRLF uyarısı** | `.gitattributes` renormalize yapılmadı | Ertelendi: `git add --renormalize .` ayrı bir hijyen görevi | roo | AÇIK — ertelendi |
+| D-07 | 2026-09-15 | genel | Kökte `fix_*.py`, `apply_fix*.py`, `original_content.txt`, `fix.ps1` çöpleri | kilo geçici düzeltme scriptlerini repo köküne bıraktı (Proje Sınırı Kuralı md.2 ihlali) | Geçici dosya `data/_tmp/`'ye; kök temizliği hijyen görevi | kilo, roo | AÇIK — ertelendi |
+| D-08 | 2026-09-15 | genel | `tests/test_api_integration.py::test_companies_liste_sozlesme` `assert 14000 == 1` | Mock DB devreye girmiyor, gerçek DB'ye düşüyor (izolasyon) | UI ile ilgisiz; ayrı görev | tüm ajanlar | AÇIK |
+
+### 7.2 MVP-ADMIN serisi (2026-09-15)
+
+| # | Tarih | Görev | Belirti | Kök neden / Risk | Çözüm / Önlem | Etkilenen | Durum |
+|---|---|---|---|---|---|---|---|
+| D-09 | 2026-09-15 | ADMIN-ENV-01 | Admin giriş formu `.env`'deki e-posta/şifreyle **ön-dolu** geliyor | Kolaylık için `ADMIN_EMAIL/ADMIN_PASSWORD` okunuyor; şifre formda görünür (paylaşımlı ekranda risk) | Yalnız yerel geliştirmede kabul; üretimde ön-dolum kapatılmalı (env bayrağı) | roo, sahip | BİLGİ — üretim öncesi kapat |
+| D-10 | 2026-09-15 | MVP-KUL-01 | Sahip bildirimi: giriş/çıkış sonrası **başarı mesajı yok**, **şifre değiştirme yok** | İlk teslim kapsam dışı bırakmış | ADMIN-RESET-01 ile [`render_sifre_degistir()`](../web_dashboard/tabs/admin_auth.py:108) + `flash_goster()` eklendi | kilo, roo | ÇÖZÜLDÜ (ADMIN-RESET-01) — rota envanteri eksik, bkz. D-11 |
+| D-11 | 2026-09-15 | ADMIN-RESET-01 | Rota envanteri testi `/api/admin/change-password`'ü tanımıyor | Yeni endpoint eklendi, envanter listesi güncellenmedi | kilo: rota envanterine ekle | kilo | AÇIK |
+| D-12 | 2026-09-15 | MVP-KUL-02 | 4 test failed → tek kök neden `admin_extras.py` **SyntaxError** | kilo'nun elle "fix" scriptleri dosyayı bozdu (D-07 ile aynı olay) | kilo düzeltti, onay kuyruğunda; cline review → roo onay | kilo, cline, roo | REVIEW |
+| D-13 | 2026-09-15 | UI-SIDEBAR-02/TOPBAR-02 | `app.py` bozuk kopya (encoding), teslim reddedildi | D-03 ile aynı kök neden | `git checkout app.py`; kilo yeniden teslim | kilo | AÇIK — yeniden teslim bekliyor |
+| D-14 | 2026-09-15 | UI-CHART-01 | KPI trend grafikleri **tek noktalı** / geçmiş verisi yok | `/api/kpi` yalnız anlık değer döner; `/api/kpi/history` yok | Sparkline şimdilik mevcut trend tablolarından; `/api/kpi/history` ertelendi | roo, kilo | AÇIK — ertelendi |
+| D-15 | 2026-09-15 | UI-CHART-01 | plotly yoksa grafik çökmesin | [`web_dashboard/charts.py`](../web_dashboard/charts.py) `try: import plotly` + `st.bar_chart` fallback | Fallback var; plotly `requirements`'ta olmalı | roo | BİLGİ |
+| D-16 | 2026-09-15 | orkestrasyon | roo posta kutusunda **bayat ADMIN-RESET-01 tetiği** (görev kilo'ya devredildi ama tetik kaldı) | `devret` tetiği kaynaktan silmiyor | Tetiği elle temizle; `cmd_devret` düzeltmesi önerisi | roo | AÇIK |
+| D-17 | 2026-09-15 | orkestrasyon | Streamlit 1.63.0 yükseltmesi | Yeni sürüm `st.navigation` iyileştirmeleri getiriyor; test kırılma riski | Ertelendi; sitemap taşımasıyla birlikte | roo | AÇIK — ertelendi |
+
+### 7.3 AI-CI serisi — Anthropic × GitHub (2026-09-15, commit `caa71c8`)
+
+| # | Tarih | Görev | Belirti | Kök neden / Risk | Çözüm / Önlem | Etkilenen | Durum |
+|---|---|---|---|---|---|---|---|
+| D-18 | 2026-09-15 | AI-CI-01 | CI kırmızı ama **"CI hata açıklama" yorumu gelmiyor** | `workflow_run` tetikleyicisi yalnız **varsayılan daldaki** workflow dosyasından çalışır; [`anthropic-ci-explain.yml`](../.github/workflows/anthropic-ci-explain.yml) henüz `main`'de değil | `chore/monorepo-merge` → `main` merge edilince aktifleşir; o zamana kadar beklenen davranış, hata değil | roo, sahip | AÇIK — main merge bekliyor |
+| D-19 | 2026-09-15 | AI-CI-01 | Yerelde `ModuleNotFoundError: anthropic` | `.venv`'de SDK yok; runner'da composite action kurar | Script geç import (`claude_sor` içinde) — yerel testler SDK'sız çalışır; yerelde kurma **gerekmez** | tüm ajanlar | BİLGİ |
+| D-20 | 2026-09-15 | AI-CI-01 | `develop`'a açılan PR'da CI ve review çalışmıyor | [`ci.yml`](../.github/workflows/ci.yml) `pull_request.branches: [main]` | İstenirse `[main, develop]` yapılır (isteğe bağlı) | roo | AÇIK — isteğe bağlı |
+| D-21 | 2026-09-15 | AI-CI-01 | Federation/org/workspace ID'leri workflow'da **düz metin** | [`action.yml`](../.github/actions/anthropic-oidc/action.yml) içinde sabit; gizli değil ama repo public olursa görünür | Public'e geçmeden `vars.ANTHROPIC_*` (repo variables) altına taşı | roo | AÇIK — public öncesi |
+| D-22 | 2026-09-15 | AI-CI-01 | İlk PR'da `401/403` Anthropic kimlik hatası | Anthropic Console → Workload Identity federation rule `repository` claim'i bu repo ile eşleşmiyor olabilir | İlk PR'da Actions logunu izle; claim'i `owner/repo` olarak doğrula | sahip, roo | AÇIK — ilk PR'da doğrulanacak |
+| D-23 | 2026-09-15 | AI-CI-01 | decision_log yazımında exit 1 → çift kayıt olasılığı | D-04 (findstr) | Kayıt zaten yazılmışsa ikinci çağrı yapma; `search_decisions` ile kontrol | roo | BİLGİ |
+| D-24 | 2026-09-15 | LOGIN-FIX-01 | `/kimlik` admin girişi "çalışıyor gibi" ama menü büyümüyor (P0) | `.env`'de `ADMIN_EMAIL/ADMIN_PASSWORD` **3x tekrar**; python-dotenv dosya içi tekrarda **son** değeri alır → DB ile uyuşmayan çift ön-dolduruldu → API 401. Ek: sayfa token varken de boş form çiziyor, flash gösterilmiyordu → sahip sonucu göremedi | (1) [`env_upsert`](../scripts/admin_sifre_sifirla.py:48) tekrarları siler; (2) `.env` tekilleştirildi; (3) [`render_admin_login`](../web_dashboard/tabs/admin_auth.py:59) token varken oturum+çıkış+"N bölüm görünür", 401'de ipucu; (4) teşhis araçları [`admin_env_eslesme.py`](../scripts/admin_env_eslesme.py), [`admin_login_probe.py`](../scripts/admin_login_probe.py). **Kural:** `.env` düzenlerken tek anahtar-tek satır; ön-dolum bug'ında önce `admin_env_eslesme` | tüm ajanlar | ÇÖZÜLDÜ |
+| D-25 | 2026-09-15 | genel | Dosya adları çok uzun (sahip şikâyeti) | Tarih + görev ID + ajan adı dosya adına yazılıyordu | **Kural:** kısa snake_case; tarih dosya **içinde** (başlıkta), adda değil; görev ID ≤10 kr; doküman adı ≤3 kelime. Örn. `admin_login_probe.py`, `admin_env_eslesme.py` | tüm ajanlar | KURAL |
+| D-26 | 2026-09-15 | LOGIN-FIX-01 | cmd'de çok satırlı `python -c "..."` sessizce çıktı vermiyor / etkisiz; `curl -w "%{http_code}"` `%` yorumu | Windows cmd tırnak/satır işleme; `%` cmd değişken önekidir | Tek satır `python -c` ya da `scripts/` altında kısa script; curl'de `%%{http_code}` | tüm ajanlar | KURAL |
