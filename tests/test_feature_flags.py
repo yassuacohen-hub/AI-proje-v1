@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """PO-BACK-07: Feature Flags MVP testleri.
 
 Kapsam:

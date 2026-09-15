@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Telegram bot arka plan servisi — canonical polling wrapper.
 
 Bu modul python-telegram-bot kutuphanesini KULLANMAZ.

@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """P4-5: Duplicate temizleme (merge + delete).
 
 Strateji:

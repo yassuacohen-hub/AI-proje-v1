@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-15T11:23:49",
+    "bitis": "2026-09-15T13:06:53",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -2304,102 +2304,6 @@
     "not": "Teslim (cline): CL-03 guvenlik taramasi tamamlandi: guvenlik_taramasi.py + 2 JSON sozluk + rapor. Ilk calismada 7 bulgu (requests pini, 2x shell=True, 3x MD5) duzeltildi, tekrar taramada 0 bulgu. 82 test yesil."
   },
   {
-    "task_id": "MIM-01",
-    "baslik": "System Architecture Diagram — Microservices",
-    "sahip": "-",
-    "oncelik": "P1",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Mikroservis mimari diyagramını oluştur ve güncelleyin. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: mimar)",
-    "id": "MIM-01"
-  },
-  {
-    "task_id": "MIM-02",
-    "baslik": "API Gateway Design and Routing Rules",
-    "sahip": "-",
-    "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "API Gateway tasarımı belirleyin. Routing kuralları, rate limiting. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: mimar)",
-    "id": "MIM-02"
-  },
-  {
-    "task_id": "MIM-03",
-    "baslik": "Database Schema Design — Core Entities",
-    "sahip": "-",
-    "oncelik": "P1",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Temel varlık veritabanı şema tasarımı tamamlayınız. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: mimar)",
-    "id": "MIM-03"
-  },
-  {
-    "task_id": "CC-01",
-    "baslik": "Code Review Pipeline — Automated Quality Gates",
-    "sahip": "-",
-    "oncelik": "P1",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Otomatik code review pipeline kurun. Quality gates entegrasyonu. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: claude_code)",
-    "id": "CC-01"
-  },
-  {
-    "task_id": "CC-02",
-    "baslik": "Refactoring Plan — Legacy Code Modules",
-    "sahip": "-",
-    "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Eski kod modüllerini yeniden yapılandırın. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: claude_code)",
-    "id": "CC-02"
-  },
-  {
-    "task_id": "CC-03",
-    "baslik": "Documentation Generator — Inline Code Docs",
-    "sahip": "-",
-    "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Inline kod dokümantasyonu generatoru geliştirin. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: claude_code)",
-    "id": "CC-03"
-  },
-  {
-    "task_id": "EA-01",
-    "baslik": "Third-party API Integration — Weather Service",
-    "sahip": "-",
-    "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Hava durumu servisi entegrasyonu uygulayın. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: external_agent)",
-    "id": "EA-01"
-  },
-  {
-    "task_id": "EA-03",
-    "baslik": "Notification Service — Push Notifications",
-    "sahip": "-",
-    "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Push notification servisi entegrasyonu ekle. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: external_agent)",
-    "id": "EA-03"
-  },
-  {
     "task_id": "WK-01",
     "baslik": "Career Pages Scraper — Enhanced Data Extraction",
     "sahip": "-",
@@ -2449,66 +2353,6 @@
     "not": "GitHub Actions CI/CD pipeline tamamlandı: ci.yml güncellendi (lint, test+coverage, security), deploy-staging.yml ve nightly-etl.yml eklendi. 3010 test geçti, 3 atlandı, 126 uyarı."
   },
   {
-    "task_id": "DEV-02",
-    "baslik": "Docker Containerization — Multi-stage Build",
-    "sahip": "-",
-    "oncelik": "P1",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Docker konteynerleştirme — multi-stage build. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: gelistirici)",
-    "id": "DEV-02"
-  },
-  {
-    "task_id": "DEV-03",
-    "baslik": "Testing Framework — Unified Test Runner",
-    "sahip": "-",
-    "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Birleşik test runner frameworkü geliştirin. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: gelistirici)",
-    "id": "DEV-03"
-  },
-  {
-    "task_id": "QL-01",
-    "baslik": "Automated Test Coverage Report",
-    "sahip": "-",
-    "oncelik": "P1",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Otomatik test kapsama raporu oluşturun. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: kalite)",
-    "id": "QL-01"
-  },
-  {
-    "task_id": "QL-02",
-    "baslik": "Load Testing — Concurrent User Simulation",
-    "sahip": "-",
-    "oncelik": "P1",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Yük testi — eşzamanlı kullanıcı simülasyonu. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: kalite)",
-    "id": "QL-02"
-  },
-  {
-    "task_id": "QL-03",
-    "baslik": "Accessibility Audit — WCAG Compliance",
-    "sahip": "-",
-    "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Erişilebilirlik denetimi — WCAG uyumluluk. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: kalite)",
-    "id": "QL-03"
-  },
-  {
     "task_id": "AR-01",
     "baslik": "Market Trend Analysis — Q3 2026",
     "sahip": "kilo",
@@ -2549,78 +2393,6 @@
     ],
     "not": "Kullanıcı persona ve yol haritası analizi tamamlandı: 3 temel persona (İş Geliştirme Müdürü, Veri Bilimci, Operasyon Yöneticisi), dokunma noktaları, dönüşüm engelleri ve iyileştirme önerileri.",
     "blokaj": []
-  },
-  {
-    "task_id": "MIMAR-01",
-    "baslik": "Event Sourcing and CQRS Implementation Plan",
-    "sahip": "-",
-    "oncelik": "P1",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Event Sourcing ve CQRS implementasyon planı. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: mimari)",
-    "id": "MIMAR-01"
-  },
-  {
-    "task_id": "MIMAR-02",
-    "baslik": "Microservices Decomposition Strategy",
-    "sahip": "-",
-    "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Mikroservis ayrıştırma stratejisi belirleyin. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: mimari)",
-    "id": "MIMAR-02"
-  },
-  {
-    "task_id": "MIMAR-03",
-    "baslik": "Observability Stack — Metrics, Logs, Traces",
-    "sahip": "-",
-    "oncelik": "P1",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Gözlemlenebilirlik yığını — metrikler, loglar, izler. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: mimari)",
-    "id": "MIMAR-03"
-  },
-  {
-    "task_id": "RC-01",
-    "baslik": "Code Quality Dashboard — Real-time Metrics",
-    "sahip": "-",
-    "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Kod kalitesi dashboard — gerçek zamanlı metrikler. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: roo_code)",
-    "id": "RC-01"
-  },
-  {
-    "task_id": "RC-02",
-    "baslik": "AI-powered Code Suggestions Engine",
-    "sahip": "-",
-    "oncelik": "P1",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Yapay zeka destekli kod önerileri motoru. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: roo_code)",
-    "id": "RC-02"
-  },
-  {
-    "task_id": "RC-03",
-    "baslik": "Git Hooks — Pre-push Validation",
-    "sahip": "-",
-    "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Git hooks — pre-push doğrulaması. | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: roo_code)",
-    "id": "RC-03"
   },
   {
     "task_id": "ORCH-11",
@@ -2753,15 +2525,15 @@
     "baslik": "Destek Merkezi MVP (Evidence Coverage)",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
+    "bitis": "2026-09-15T13:24:46",
     "dosyalar": [
       "src/company_master/destek.py",
       "web_dashboard/tabs/admin_destek.py",
       "tests/test_destek.py"
     ],
-    "not": "MÜŞTERİ PANEL: Evidence Coverage göstergesini kapsar. Ticket CRUD + durum makinesi + test; admin sekmeye eklenir. PRD-15. [14_po_panel_haritasi.md]",
+    "not": "Teslim (kilo): Destek Merkezi MVP: Ticket(frozen dataclass), durum_gecis(acik->inceleniyor->cozuldu->kapali, immutable), JSON depo(data/destek/tickets.json), 10 test. __init__.py ve admin_destek.py Roo kismi (kilitli).",
     "id": "PO-BACK-06",
     "talimat": "Destek Merkezi MVP. Yapılacak: `src/company_master/destek.py` — `@dataclass Ticket` (id, tenant_id, baslik, aciklama, durum, olusturma, guncelleme), durum makinesi `acik -> inceleniyor -> cozuldu -> kapali` (`durum_gecis(ticket, yeni) -> Ticket`, geçersiz geçiş ValueError), JSON dosya tabanlı depo `data/destek/tickets.json` (DB yok — MVP). `web_dashboard/tabs/admin_destek.py`: liste + yeni ticket formu + durum değiştir; SECTIONS'a kayıt (rol: admin). Testler: `tests/test_destek.py` ≥8 (geçerli/geçersiz geçiş, CRUD, boş depo). Dosyalar: src/company_master/destek.py, web_dashboard/tabs/admin_destek.py, web_dashboard/tabs/__init__.py, tests/test_destek.py. Kabul: test_dashboard_nav + iskelet testleri yeşil. Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK. Tam regresyon sayısı özete yazılır.",
     "not_": "[roo 2026-09-15 11:40] SON UYARI (2/2). destek.py 0 bayt, admin_destek.py yok, tests/test_destek.py koleksiyon hatasi veriyor. Talimat: KR-5 brifi (posta kutusu). Teslim yolu: gorev_kutusu.py al -> dosyalari UTF-8 (BOM'suz) yaz -> pytest tests/test_destek.py yesil -> python -m pytest tests/ -q --continue-on-collection-errors (0 hata) -> teslim --ozet. ESKALASYON: bir sonraki roo turunda hala alinmamissa gorev cline'a devredilir (gorev_kutusu.py devret)."
@@ -3249,18 +3021,86 @@
     "baslik": "KR-4: Kodlama denetim araci (BOM/NUL/0-bayt) + ratchet guard + CI",
     "sahip": "cline",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-15T11:19:35",
-    "bitis": null,
+    "bitis": "2026-09-15T13:23:35",
     "dosyalar": [
       "scripts/kodlama_denetim.py",
       "tests/test_kodlama_guard.py",
       "data/kodlama_allowlist.json",
       ".github/workflows/ci.yml"
     ],
-    "not": "",
+    "not": "Teslim (cline): KR-4 TAMAMLANDI. (1) scripts/kodlama_denetim.py (yeni): .py/.md/.json/.toml/.sql tarar; utf8_bom/utf16/nul/bos/compile raporlar; --duzelt yalnizca UTF-8 BOM strip eder (UTF-16/NUL/0-bayt'a dokunmaz); --tam-repo ile tum repo taranir (varsayilan kapsam: src/tests/web_dashboard/scripts; data/.kilo/backups/AI proje v1/workspace atlanir); cikis kodu ratchet'li: allowlist-disi ihlalde 1. (2) tests/test_kodlama_guard.py (yeni, 12 test): scanner birim testleri + ratchet guard (allowlist-disi BOM kirmizi; UTF-16/NUL/0-bayt her zaman kirmizi; compile ratchet). (3) data/kodlama_allowlist.json (yeni): bom:0 (bosaltildi), compile:3 — scripts/ altinda ONCEDEN bozuk 3 eski script (check_email_dist.py + scripts/scripts kopyasi, test_growth.py:74) — ayri BUG onerisi. (4) .github/workflows/ci.yml: Kodlama denetimi adimi + pytest --continue-on-collection-errors. (5) --duzelt ile 90 dosyadan UTF-8 BOM strip edildi (85 .py + 4 .sql + scripts/README_TELEGRAM.md); yalnizca ilk 3 bayt silindi, icerik degismedi; kilonun destek.py/test_destek.py/admin_destek.py dosyalarina dokunulmadi (BOM listesinde degillerdi). Kapsam disi bilincli birakildi: V10/docs/system_prompt.md belgeleri + backups/.kilo yedek/worktree kopyalari (40 BOM'lu belge --tam-repo ile raporlanir). KANIT: guard 12 passed; guard+charts 21 passed; TAM REGRESYON ilk kez --ignore'suz: 3304 passed, 3 skipped, 1 failed (72.52s) — tek kirmizi tests/test_destek.py::test_durum_gecis_acik_inceleniyor = kilonun aktif PO-BACK-06 fonksiyonel isi (kapsam disi); koleksiyon hatasi YOK (KR-5 kapandi, 0006 silindi). 4 yeni/degisen dosya BOM'suz ve NUL'suz dogrulandi. CI notu: 3 eski script duzeltilince allowlist compile anahtari da bosaltilmali (ratchet asagi).",
     "source": "ic",
     "from_agent": null,
     "not_": "[roo] BULGU NOTU: Kapsam disinda gordugun bug/hata/kodlama sorununu DUZELTME; data/orchestrator/BUG-ENCODING-GUARD_bulgular_<tarih>_cline.md dosyasina yaz ve roo ya tetik dusur. Kapsam disi dosyaya dokunmak teslim reddi sebebidir (kilit disiplini)."
+  },
+  {
+    "task_id": "CI-GATE-01",
+    "id": "CI-GATE-01",
+    "baslik": "CI kapisi: tam tests/ + collection-errors + kodlama denetimi adimi",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-15T12:34:23",
+    "bitis": null,
+    "dosyalar": [
+      ".github/workflows/ci.yml"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "not_": "Zincir: BUG-ENCODING-GUARD teslim edilince tetiklenir. [roo 2026-09-15] CI-GATE-01 (KR-4/#7 onerin): .github/workflows/ci.yml 'Run tests' adimi tests/company_master/ yerine tum tests/ dizinini `--continue-on-collection-errors` ile kossun; ayrica BUG-ENCODING-GUARD'da urettigin `python scripts/kodlama_denetim.py` CI'da ayri bir adim olarak test oncesine eklensin (basarisizsa kirmizi). Coverage esigi ve cov hedefleri degismesin. Kabul: yml gecerli (python -c \"import yaml;yaml.safe_load(open('.github/workflows/ci.yml'))\"), tests/orchestrator yesil, tam regresyon 0 koleksiyon hatasi. BULGU NOTU: Kapsam disinda gordugun bug/hata/kodlama sorununu DUZELTME; data/orchestrator/<TASK_ID>_bulgular_<tarih>_cline.md'ye yaz ve roo'ya tetik dusur."
+  },
+  {
+    "task_id": "CHART-INT-01",
+    "id": "CHART-INT-01",
+    "baslik": "ui.charts modulunu admin_executive ekranina entegre et",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-15T12:34:23",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_executive.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "not_": "Zincir: PO-BACK-06 teslim edilince tetiklenir. [roo 2026-09-15] CHART-INT-01: src/company_master/ui/charts/__init__.py (line/bar/pie/scatter, fig_to_json) hicbir ekran tarafindan kullanilmiyor. web_dashboard/tabs/admin_executive.py icindeki ham plotly/st.line_chart cizimlerini bu modulle degistir; API/veri sozlesmesi ayni kalsin, tests/test_ui_charts.py bozulmasin. Kabul: tests/test_ui_charts.py + tests/test_dashboard_nav.py + tests/test_sayfa_iskeleti.py yesil, tam regresyon 0 koleksiyon hatasi, BOM/NUL yok (Out-File YASAK; python open(..., encoding='utf-8')). Teslim cline capraz incelemesine gider."
+  },
+  {
+    "task_id": "REPO-HIJYEN-01",
+    "id": "REPO-HIJYEN-01",
+    "baslik": "Kok dizin cop/gecici dosya envanteri (silme yok, karar Urun Sahibi)",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-15T12:34:24",
+    "bitis": "2026-09-15T13:00:10",
+    "dosyalar": [
+      "data/orchestrator/REPO-HIJYEN-01_envanter.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "not_": "ORK 2026-09-15: 34 kök dosya data/_arsiv_kok/ (git mv), test_import.py scripts/; dış dizin 14 öğe içeri taşındı; .gitignore desenleri; 19 şablon görev arşivlendi"
+  },
+  {
+    "task_id": "I18N-SES-02",
+    "id": "I18N-SES-02",
+    "baslik": "Marka sesi JSON (105 tr anahtar) ses.json/ui.json ile birlestir",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-15T13:03:28",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/i18n/_gelen_marka_sesi_2026-09-15.json",
+      "src/company_master/i18n/ses.json"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
   }
 ]

@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """PO-BACK-05: Veri Tazelik Etiketi testleri."""
 
 from datetime import datetime, timedelta, timezone

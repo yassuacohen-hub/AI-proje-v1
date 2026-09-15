@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """9R-02: VectorService — yuksek seviye semantik islemler.
 
 Firma kayitlarini vektorlestirip store'a yazar ve benzerlik/dublikasyon

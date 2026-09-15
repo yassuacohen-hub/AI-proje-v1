@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """P4-4: Final benchmark and report generator."""
 from __future__ import annotations

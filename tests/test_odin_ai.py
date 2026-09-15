@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Odin AI RAG testleri."""
 from __future__ import annotations
 

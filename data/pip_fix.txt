@@ -1,9 +1,0 @@
-Collecting pygments==2.21.0
-  Using cached pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
-Using cached pygments-2.21.0-py3-none-any.whl (1.3 MB)
-Installing collected packages: pygments
-  Attempting uninstall: pygments
-    Found existing installation: Pygments 2.21.0
-    Uninstalling Pygments-2.21.0:
-      Successfully uninstalled Pygments-2.21.0
-Successfully installed pygments-2.21.0

@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """MRK-02h — Huginn i18n disa aktarim uretici."""
 
 from __future__ import annotations

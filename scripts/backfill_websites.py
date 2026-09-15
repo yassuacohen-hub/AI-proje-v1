@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """source_records.raw_website -> companies.website_domain backfill."""
 from __future__ import annotations

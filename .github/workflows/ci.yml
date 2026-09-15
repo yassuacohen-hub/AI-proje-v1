@@ -70,9 +70,13 @@ jobs:
       - name: Init schema
         run: |
           python -c "from src.company_master.db.connection import init_db; init_db()"
+      - name: Kodlama denetimi (BOM / NUL / 0-bayt / UTF-16) — KR-4
+        run: |
+          python scripts/kodlama_denetim.py
       - name: Run tests with coverage
         run: |
           python -m pytest tests/company_master/ \
+            --continue-on-collection-errors \
             --cov=src/company_master/db/connection \
             --cov=src/company_master/etl/normalize \
             --cov=src/company_master/etl/pipeline \

@@ -1,4 +1,4 @@
-﻿# Telegram Bot — Kurulum ve Kullanim Kilavuzu
+# Telegram Bot — Kurulum ve Kullanim Kilavuzu
 
 ## Genel Bakisim
 

@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Odin AI RAG iskeleti — Embedder, Chunk ve metin parçalama."""
 from __future__ import annotations
 

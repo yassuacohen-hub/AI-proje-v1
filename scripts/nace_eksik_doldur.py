@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """P1-5: NACE'siz kalan firmalar icin sektor/NACE doldurma."""
 from __future__ import annotations
 

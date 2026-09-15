@@ -1,4 +1,4 @@
-﻿"""PostgreSQL otomatik yedekleme scripti.
+"""PostgreSQL otomatik yedekleme scripti.
 
 DATABASE_URL ile baglanir, pg_dump ile veritabanini scripts/backup/ altina
 tarih damgali olarak kaydeder. Hem custom format (.dump) hem de plain SQL

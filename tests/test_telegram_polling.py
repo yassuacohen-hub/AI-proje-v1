@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Unit tests for scripts/telegram_polling.py.
 
 Hiçbir test gerçek Telegram API'sine baglanmaz; requests.post/get

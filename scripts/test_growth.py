@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Growth Signal Scoring Engine - P8-3.
 
 Is ilani verilerinden buyume sinyalleri tespit eder, skorlar ve

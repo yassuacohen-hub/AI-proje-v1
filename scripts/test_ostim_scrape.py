@@ -1,4 +1,4 @@
-﻿"""OSTİM 1-sayfa test scrape (yaklaşık 300 firma).
+"""OSTİM 1-sayfa test scrape (yaklaşık 300 firma).
 
 Karar referansı: V10/10_ankara_osb_sentez Karar 11
 """

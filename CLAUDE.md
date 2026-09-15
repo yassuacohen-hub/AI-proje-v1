@@ -231,3 +231,9 @@ Agent: Anla ve kurallara uyar.
 - When a task is clear, proceed directly.
 - Soru yalnız: geri dönüşü olmayan işlem + talimat kapsamıyorsa / zorunlu parametre bulunamıyorsa / birbirini dışlayan iki yol V9-MVP sınırını etkiliyorsa.
 - Tek kelimelik tetik (başla/go/devam/tamam) = tam yetki. Ayrıntı: .roo/rules/01-otonom-calisma.md
+
+## Proje Sınırı Kuralı (2026-09-15, ZORUNLU)
+- Projeye ait her şey yalnız repo kökü (`C:\Huginn Data Projesi\Huginn Data Insights`) içinde; üst dizine/başka konuma dosya yazmak, taşımak, kopyalamak YASAK.
+- Geçici dosya: `data/_tmp/` veya `_trash/`. Köke `_*.py`, `*.bak`, `*.base` bırakılmaz; iş bitince silinir.
+- Dışarıda proje öğesi görürsen SİLME, ilgili bölüme içeri TAŞI ve özette "dış dizinden taşındı: kaynak → hedef" yaz.
+- Ürün Sahibi dışarıya/köke referans-konum notu bırakabilir (ör. `KONUM_NOTU.md`): oku, belirtilen bölüme taşı, dış kopyayı kaldır, decision_log'a yaz. Ayrıntı: AGENTS.md "Proje Sınırı Kuralı".

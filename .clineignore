@@ -1,0 +1,65 @@
+# PERF-01 (2026-09-15): AI ajan tarama/indexleme dışlamaları (Roo, Cline, Kilo, Cursor için aynı liste)
+# Amaç: Roo + Cline aynı anda tarama yaptığında CPU/RAM çakışmasını azaltmak.
+
+# Gizli / hassas
+.env
+.env.*
+!.env.example
+**/*.pem
+**/*.key
+
+# Sanal ortamlar ve bağımlılıklar
+.venv/
+.venv_test/
+venv/
+node_modules/
+
+# Git ve araç önbellekleri
+.git/
+__pycache__/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.playwright-mcp/
+.obsidian/
+
+# Diğer ajanların çalışma alanları (çapraz indexleme yok)
+.kilo/
+.agents/
+.claude/
+.kimi-code/
+.continue/
+workspace/
+
+# Derleme / çıktı / yedek / log
+dist/
+build/
+backups/
+logs/
+tmp/
+_trash/
+cop_kutusu_*/
+test_reports/
+
+# Büyük veri
+data/_tmp/
+data/ostim/
+data/merged/
+data/aso/
+data/router/
+data/skills/
+data/watch/
+**/*.db
+**/*.db-journal
+**/*.sqlite
+**/*.log
+**/*.zip
+**/*.gz
+**/*.parquet
+**/*.jsonl
+**/*.csv
+
+# Obsidian vault (doküman; sadece gerektiğinde açıkça okunur)
+AI proje v1/06_arsiv/
+AI proje v1/**/*.canvas
+AI proje v1/**/*.base

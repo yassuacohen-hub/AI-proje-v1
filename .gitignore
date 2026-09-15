@@ -17,6 +17,8 @@ __pycache__/
 *.pyc
 *.pyo
 .pytest_cache/
+test_reports/
+.ruff_cache/
 .mypy_cache/
 .coverage
 coverage.json
@@ -92,3 +94,13 @@ data/router/son_uyarilar.json
 
 # 9R-05 arşiv (yardımcı _9r05_* scriptleri)
 scripts/_arsiv/
+
+# REPO-HIJYEN-01 (2026-09-15): kök artık dosyaları arşivi + kökte geçici dosya yasağı
+data/_arsiv_kok/
+/_*.py
+/__*.py
+/*.bak
+/*.base
+/_*.txt
+data/_*.py
+data/_tmp/

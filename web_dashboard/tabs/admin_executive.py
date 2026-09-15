@@ -42,6 +42,7 @@ from company_master.executive_ozet import (
 from company_master.tenant.health import hesapla as _saglik_hesapla
 from company_master.tenant.model import VARSAYILAN_TENANT
 from company_master.ui import PageHeader, Section
+from company_master.ui.charts import line_chart
 
 #: Trend serisinin uzunluğu (ay).
 TREND_AY_SAYISI = 6
@@ -165,29 +166,8 @@ def _mrr_grafigi(seri: list[dict[str, Any]]) -> None:
         return
 
     cerceve = pd.DataFrame(seri)
-    try:
-        import plotly.graph_objects as go
-    except Exception:
-        st.line_chart(cerceve.set_index("ay")["mrr"])
-        return
-
-    grafik = go.Figure()
-    grafik.add_trace(
-        go.Scatter(
-            x=cerceve["ay"],
-            y=cerceve["mrr"],
-            mode="lines+markers",
-            name="MRR",
-            line={"width": 3},
-        )
-    )
-    grafik.update_layout(
-        height=340,
-        margin={"l": 10, "r": 10, "t": 30, "b": 10},
-        yaxis_title="MRR (₺)",
-        xaxis_title="Ay",
-    )
-    st.plotly_chart(grafik, use_container_width=True)
+    fig = line_chart(cerceve.set_index("ay"), x="ay", y="mrr", title="MRR Trendi")
+    st.plotly_chart(fig, use_container_width=True)
 
 
 def _churn_donemi(gun: int = 90) -> tuple[str, str]:

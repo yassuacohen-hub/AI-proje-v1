@@ -1,4 +1,4 @@
-﻿-- 0007_job_intelligence.sql
+-- 0007_job_intelligence.sql
 -- Job Intelligence Module: İş ilanları ve şirket sinyalleri tabloları
 -- Tarih: 2026-09-09
 -- Bağımlılık: 0001_core.sql (companies, sources, source_records tabloları)

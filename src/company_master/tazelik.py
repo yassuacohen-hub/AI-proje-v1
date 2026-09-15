@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Veri Tazelik Etiketi — Freshness label ve Manuel Yenileme."""
 
 from __future__ import annotations

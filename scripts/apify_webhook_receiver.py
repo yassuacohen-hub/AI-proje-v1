@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """APIFY-03/P7-12: Apify Webhook Alıcısı + Kalıcı Olay İşleme + Prod Hardening.
 

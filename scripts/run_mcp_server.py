@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """MCP-03: CLI entry point for running the Huginn MCP Server.
 

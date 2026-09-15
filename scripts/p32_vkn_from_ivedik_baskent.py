@@ -1,4 +1,4 @@
-﻿import json, re, time, os
+import json, re, time, os
 from pathlib import Path
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from rapidfuzz import fuzz

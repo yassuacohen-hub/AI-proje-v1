@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """NULL source_record_id kayitlarini source_records'a bagla veya temizle."""
 from __future__ import annotations

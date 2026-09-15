@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Telegram bot — basit test scripti.
 
 Mock bazli, harici bagimlilik yok. requests.post ve env degiskenleri

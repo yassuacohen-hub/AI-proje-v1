@@ -1,4 +1,4 @@
-﻿import ssl
+import ssl
 import json, os, re, sys, time, urllib.request, urllib.error, urllib.robotparser
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path

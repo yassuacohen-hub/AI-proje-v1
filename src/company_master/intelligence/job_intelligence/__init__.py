@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Job Intelligence Module — İş ilanı tabanlı ticari istihbarat."""
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-﻿"""Dashboard performance monitoring and query optimization utilities.
+"""Dashboard performance monitoring and query optimization utilities.
 
 Provides:
   - QueryProfiler: tracks DB execution time, query count, per-query timing

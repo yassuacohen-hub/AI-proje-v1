@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """MERSIS VKN zenginlestirme pipeline'i - Y10"""
 from __future__ import annotations

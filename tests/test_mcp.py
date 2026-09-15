@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """MCP-01/MCP-02: MCP Policy Engine, Apify Adapter, Huginn Server testleri."""
 
 from __future__ import annotations

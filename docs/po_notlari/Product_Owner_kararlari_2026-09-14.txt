@@ -1,0 +1,58 @@
+Product Owner Kararları v1 - Admin vs Müşteri Panel Stratejisi
+Tarih: 2026-09-14
+Vizyon: "Veriden gelire - tüm operasyon tek panelde"
+
+=== PANEL AYIRIMI ===
+Admin Panel (Yönetim): web_dashboard/tabs/admin_*.py - sistem yönetimi, kullanıcı yönetimi, API analitikliği, performans, maliyet, güvenlik, DLQ, webhook
+Müşteri Panel: web_dashboard/tabs/ana_kontrol.py, paketler.py, pazarlama.py - B2B müşterilerin gördüğü dashboard
+
+=== 10 TEMEL GÖSTERGE (V9 Master §16 + 12_kalite_metrikleri) ===
+Panel = Admin / Müşteri / Her ikisi
+
+1. Coverage (Kapsam) → Müşteri Panel - Ankara B2B şirketlerinin yakalanma oranı
+2. Entity Accuracy → Admin Panel - Yanlış bölme/birleştirme oranı
+3. Duplicate Rate → Admin Panel - Mükerrer firma oranı
+4. Field Completeness → Her ikisi - Alan doluluk oranı
+5. Freshness (Tazelik) → Admin Panel - Veri güncellik süresi
+6. Source Reliability → Admin Panel - Kaynak performansı
+7. Search Quality → Müşteri Panel - Arama başarısı oranı
+8. Profile Accuracy → Müşteri Panel - Profil doğruluğu
+9. Evidence Coverage → Her ikisi - Kanıt desteklenme oranı
+10. Data Quality Score → Admin Panel - Genel kalite skoru
+
+=== PO-BACK GÖREVLERİ (11 Adet) ===
+Panel kodu: A=Admin, M=Müşteri, B=Her ikisi
+
+PO-BACK-01 (A, P1): Tenant Health Score v1 - Data Quality Score + Entity Accuracy + Duplicate Rate
+PO-BACK-02 (M, P1): Segment Eligibility Skoru - Coverage + Profile Accuracy
+PO-BACK-03 (A, P1): Kampanya Durum-Makinesi - Source Reliability
+PO-BACK-04 (M, P1): Paket Fiyat Kataloğu - Field Completeness
+PO-BACK-05 (A, P2): Veri Tazelik Etiketi - Freshness
+PO-BACK-06 (M, P2): Destek Merkezi MVP - Evidence Coverage
+PO-BACK-07 (A, P2): Feature Flags MVP - Data Quality Score + Source Reliability
+PO-BACK-08 (B, P3): Executive Dashboard - Coverage + Data Quality Score (REVIZE)
+PO-BACK-09 (A, P1): Duplicate Rate Dashboard - Duplicate Rate (YENI)
+PO-BACK-10 (M, P1): Coverage Analytics - Coverage (YENI)
+PO-BACK-11 (A, P1): Source Reliability Monitor - Source Reliability (YENI)
+
+=== YOL HARİTASI ===
+Faz 1 (P1): Admin Panel KPIs -> PO-BACK-01, 03, 05, 07, 09, 11
+Faz 2 (P1-P2): Müşteri Panel KPIs -> PO-BACK-02, 04, 06, 10
+Faz 3 (P3): Birleşik -> PO-BACK-08
+
+=== DOKÜMAN BAĞLANTILARI ===
+- V10/14_po_panel_haritasi.md -> Birleşik panel haritasi (ana doküman)
+- V10/13_po_karar_analizi.md -> Detayli PO karar analizi
+- V10/01_sirket_master_ana_belgesi.md -> §16: 10 Başarı KPI'leri
+- V10/12_kalite_metrikleri -> Kalite skor formülleri
+- data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md -> Ürün vizyonu + karar kayitlari
+- data/orchestrator/task_board.json -> Görev durumu (185 görev)
+- data/orchestrator/gorev_panosu.md -> Pano görüntü
+- docs/ROO_ELESTIRI_NOTLARI.md -> Risk defteri (O-06 cozuldu)
+- AGENT_SYNC.md -> Ajan senkronizasyonu
+
+=== KAYNAKLAR ===
+- data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md (PO-D01..D10 kararlari)
+- AR-01_pazar_egilim_analizi_Q3_2026.md (pazar verisi)
+- AR-02_rekabet_analizi.md (rakip verisi)
+- AR-03_kullanici_persona_yol_haritasi.md (persona + metrik)

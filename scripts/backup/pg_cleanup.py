@@ -1,4 +1,4 @@
-﻿"""Eski yedekleri temizleme scripti.
+"""Eski yedekleri temizleme scripti.
 
 scripts/backup/ altindaki yedekleri yas sinirina ve/veya maksimum dosya sayisina
 gore temizler. Hem .dump hem de .sql.gz dosyalarini yonetir.

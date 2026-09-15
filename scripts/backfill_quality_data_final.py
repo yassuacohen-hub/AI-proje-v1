@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import os, json, re, time
 from pathlib import Path
 from sqlalchemy import create_engine, text

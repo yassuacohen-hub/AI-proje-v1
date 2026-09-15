@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """P4-4: Apply missing performance indexes and update table statistics."""
 from __future__ import annotations

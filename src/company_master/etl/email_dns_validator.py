@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """E-posta domain DNS MX doÄŸrulama ve teslim edilebilirlik kontrolÃ¼."""
 from __future__ import annotations

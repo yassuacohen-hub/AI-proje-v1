@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """P45: Veri seti dogrulama ve duplicate temizleme - v3 (CASCADE)."""
 
 import json

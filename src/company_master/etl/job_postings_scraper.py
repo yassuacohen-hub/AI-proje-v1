@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """İş ilanları ve çalışan sayısı çıkarıcı - şirket web sitelerinden."""
 from __future__ import annotations

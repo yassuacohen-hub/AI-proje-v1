@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """MCP-01: Apify MCP Adapter — Apify'ı kontrollü MCP tool seti olarak sunar.
 
 Policy Engine ile korunur: sadece whitelist'teki actor'lar çalıştırılabilir,

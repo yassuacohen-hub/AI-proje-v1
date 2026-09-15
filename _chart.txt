@@ -1,1 +1,0 @@
-[{'task_id': 'CHART-01', 'sahip': 'cline', 'durum': 'done', 'dosyalar': ['src/company_master/ui/charts/__init__.py', 'requirements-app.txt'], 'not': 'Teslim (cline): src/company_master/ui/charts/__init__.py olusturuldu (line_bar, bar_chart, pie_chart, scatter_chart, fig_to_json). requirements-app.txt pandas>=2.0.0 eklendi (CHART-01).'}]

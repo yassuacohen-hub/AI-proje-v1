@@ -1,4 +1,4 @@
-﻿"""Decision Log mekanizmasi - kararlari JSONL formatinda kaydeder.
+"""Decision Log mekanizmasi - kararlari JSONL formatinda kaydeder.
 
 Kullanim:
     from scripts.decision_log import read_decisions, log_decision, search_decisions

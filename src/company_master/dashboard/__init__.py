@@ -1,2 +1,2 @@
-﻿__all__ = ["perf_monitor"]
+__all__ = ["perf_monitor"]
 

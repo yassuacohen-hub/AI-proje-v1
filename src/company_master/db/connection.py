@@ -1,4 +1,4 @@
-﻿"""Veritabanı bağlantı yardımcıları.
+"""Veritabanı bağlantı yardımcıları.
 
 
 

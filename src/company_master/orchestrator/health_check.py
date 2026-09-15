@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Health check & monitoring API.
 
 Sistem saglik kontrolu, metrik toplama ve alerting icin endpoint.

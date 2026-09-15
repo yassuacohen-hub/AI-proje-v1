@@ -1,1 +1,12 @@
-{}
+{
+  "src/company_master/i18n/_gelen_marka_sesi_2026-09-15.json": {
+    "sahip": "kilo",
+    "task_id": "I18N-SES-02",
+    "kilitlendi": "2026-09-15T13:03:28"
+  },
+  "src/company_master/i18n/ses.json": {
+    "sahip": "kilo",
+    "task_id": "I18N-SES-02",
+    "kilitlendi": "2026-09-15T13:03:28"
+  }
+}

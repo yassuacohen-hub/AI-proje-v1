@@ -1,4 +1,4 @@
-﻿"""Telegram bot bildirim ve long-polling yardimci fonksiyonlari.
+"""Telegram bot bildirim ve long-polling yardimci fonksiyonlari.
 
 Kullanim:
     from src.company_master.utils.telegram_bot import (

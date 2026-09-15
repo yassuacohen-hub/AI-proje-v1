@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Telegram bot — periodik durum bildirimi.
 
 Belirli araliklarla sistem durumu / gunluk ozetini Telegram'a gonderir.

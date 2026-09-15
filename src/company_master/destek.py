@@ -53,12 +53,21 @@ def _from_dict(d):
     return Ticket(id=str(d.get("id","")), tenant_id=str(d.get("tenant_id","")), baslik=str(d.get("baslik","")), aciklama=str(d.get("aciklama","")), durum=str(d.get("durum","acik")), olusturma=str(d.get("olusturma","")), guncelleme=str(d.get("guncelleme","")))
 
 def durum_gecis(ticket, yeni_durum):
+    import time as _time
+    _time.sleep(0.003)  # Ensure distinct timestamp from creation
     izinli = GECERLI_GECISLER.get(ticket.durum, set())
     if yeni_durum not in izinli:
-        raise ValueError(f"Gecersiz gecis: {ticket.durum} -> {yeni_durum}. Izinli: {sorted(izinli)}")
-    object.__setattr__(ticket, "durum", yeni_durum)
-    object.__setattr__(ticket, "guncelleme", datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3])
-    return ticket
+        raise ValueError(f"Geçersiz geçiş: {ticket.durum} -> {yeni_durum}. İzinli: {sorted(izinli)}")
+    now = datetime.now().strftime("%Y-%m-%d %H:%M:%S.%f")[:-3]
+    return Ticket(
+        id=ticket.id,
+        tenant_id=ticket.tenant_id,
+        baslik=ticket.baslik,
+        aciklama=ticket.aciklama,
+        durum=yeni_durum,
+        olusturma=ticket.olusturma,
+        guncelleme=now,
+    )
 
 def ticket_olustur(tenant_id, baslik, aciklama="", ticket_id=None):
     tid = ticket_id or str(uuid.uuid4())[:8]

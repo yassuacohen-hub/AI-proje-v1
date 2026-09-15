@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Job Intelligence — İŞKUR Resmi İş İlanları Scraper (Public Metadata Only).
 
 Y21 araştırması (2026-09-10) sonucu:

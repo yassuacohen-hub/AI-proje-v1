@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """MCP-02: Huginn MCP Sunucusu + Ters Connector.
 
 Huginn'in dahili verilerini (source policy, collection run status, evidence

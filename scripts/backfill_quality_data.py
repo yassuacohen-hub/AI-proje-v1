@@ -1,4 +1,4 @@
-﻿import os, json, re
+import os, json, re
 from pathlib import Path
 from sqlalchemy import create_engine, text
 from dotenv import load_dotenv

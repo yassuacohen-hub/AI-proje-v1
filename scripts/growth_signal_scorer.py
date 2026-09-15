@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Growth Signal Scoring Engine for P8-3.
 
 Is ilanlarindan buyume sinyalleri tespit eder, skorlar ve

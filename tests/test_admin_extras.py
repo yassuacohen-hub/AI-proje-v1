@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 from unittest.mock import patch
 from scripts.dash04_api_client import APIError
 from web_dashboard.tabs.admin_extras import render_api_management, render_user_management

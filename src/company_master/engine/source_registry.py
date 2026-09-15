@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """OSINT Scraper Motoru — kaynak kayit defteri.
 
 Her veri kaynagi tek bir SourceSpec ile tanimlanir: scraper modulu, cikti

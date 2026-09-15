@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Tum firmalar icin kalite skorunu yeniden hesapla (SQL, deadlock-free)."""
 from __future__ import annotations

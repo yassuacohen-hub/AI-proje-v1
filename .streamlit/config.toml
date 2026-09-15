@@ -17,6 +17,13 @@
 [server]
 headless = true
 port = 8501
+# PERF-01 (2026-09-15): Streamlit'in kendi dosya izleyicisi kapalı — proje ağacını (venv, data, vault)
+# sürekli taramasın; kod değişince sayfayı elle yenile (tarayıcıda "Rerun" / R tuşu).
+fileWatcherType = "none"
+runOnSave = false
+# Beyaz ekran önlemi: bağlantı kopunca yeniden bağlanma ve büyük mesaj limiti
+enableWebsocketCompression = false
+maxMessageSize = 300
 
 [browser]
 gatherUsageStats = false

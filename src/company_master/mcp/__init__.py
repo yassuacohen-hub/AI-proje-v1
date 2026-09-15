@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Huginn MCP (Model Context Protocol) entegrasyon modülü.
 
 Bu paket, Apify ve Huginn sistemlerini MCP protokolü üzerinden ajanlara

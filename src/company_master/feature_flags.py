@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Feature Flags MVP - Data Quality + Source Reliability kontrolleri.
 
 Kapsam (PO-BACK-07):

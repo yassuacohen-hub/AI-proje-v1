@@ -1,4 +1,4 @@
-﻿-- Migration 0011: Dashboard search optimization
+-- Migration 0011: Dashboard search optimization
 -- Target: Multi-column ILIKE OR search (ilike_search in app.py and web_app.py)
 -- Replaces expensive Seq Scan with GIN trigram index on computed search_text column
 --

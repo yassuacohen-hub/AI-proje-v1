@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Telegram bot — entegre test scripti (mock veya canli).
 
 Mock modda (varsayilan): requests kutuphanesini taklit eder; gerçek

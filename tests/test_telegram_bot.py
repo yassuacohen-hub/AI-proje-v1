@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Unit tests for src/company_master/utils/telegram_bot.py.
 
 Hiçbir test gerçek Telegram API'sine baglanmaz; requests.post

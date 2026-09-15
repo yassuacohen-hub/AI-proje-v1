@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """MCP-03: Transport integration tests for HuginnMCPServer + ApifyAdapter.
 
 Tests the real MCP protocol (JSON-RPC 2.0) over two transports:

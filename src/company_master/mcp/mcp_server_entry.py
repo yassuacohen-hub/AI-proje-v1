@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """MCP-03: MCP Server entry point for Huginn + Apify integration.
 
 Wraps ApifyAdapter and HuginnMCPServer tool sets into a real MCP server

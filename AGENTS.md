@@ -140,6 +140,17 @@ Kurallar:
 - Kullanıcının dosyalarını gerekçe açıklamadan silme / üzerine yazma.
 - Tüm dosyalar **UTF-8** kodlamasında oluşturulur/kaydedilir. Türkçe karakterlerin (ç, ğ, ı, İ, ö, ş, ü ve büyük halleri) bozulmadığından emin olmadan dosyayı kaydetme (bkz. `Token Verimliliği, Türkçe Dokümantasyon ve Karakter Kodlama Standardı ana kurallara eklenmesi.txt`).
 
+## Proje Sınırı Kuralı (2026-09-15, Ürün Sahibi emri) — ZORUNLU
+
+Projeye ait **her şey** yalnızca `C:\Huginn Data Projesi\Huginn Data Insights` (repo kökü) içinde yaşar. Üst dizin (`C:\Huginn Data Projesi\`) veya başka bir konum ajanlar için **yazma alanı değildir**.
+
+1. **Dışarıya yazma yasağı:** Ajanlar repo kökü dışına dosya/klasör oluşturamaz, taşıyamaz, kopyalayamaz. Mutlak yol kullanan komut/script yazarken hedef daima repo içinde olmalıdır (`Path(__file__).resolve()` ile köke bağla; `..`/üst dizin hedefi yasak).
+2. **Geçici dosya konumu:** Tek kullanımlık script/çıktı için `data/_tmp/` veya `_trash/` kullanılır (her ikisi `.gitignore`'da). Repo köküne `_*.py`, `*.bak`, `*.base`, `hello.txt` türü dosya bırakılmaz; kök yalnızca kalıcı proje dosyalarını taşır. İş bitince geçici dosya silinir.
+3. **Dışarıda proje öğesi görülürse:** Ajan bunu **siler değil, içeri taşır** — içeriğine göre ilgili bölüme (`docs/po_notlari/`, `data/`, `src/…/i18n/` vb.; belirsizse `data/_arsiv_kok/dis/`) — ve teslim özetinde "dış dizinden taşındı: kaynak → hedef" satırıyla raporlar.
+4. **Ürün Sahibi referans/konum dosyası:** Ürün Sahibi, üst dizine veya köke bir not dosyası bırakabilir (ör. `KONUM_NOTU.md` / `.txt`) — içinde "şu dosya şu bölüme gitsin" bilgisi olur. Ajan bu dosyayı okur, talimattaki hedefe taşır, dış kopyayı kaldırır ve decision_log'a kaydeder. Bu dosyalar kural ihlali değil, **taşıma emridir**.
+5. **Denetim:** Orkestratör her oturum başında üst dizini kontrol eder (`python scripts/proje_siniri_denetim.py` hazır olana dek elle `dir ..`); `.pytest_cache` gibi araç kalıntıları dışında projeye ait öğe kalmaz.
+6. **Ürün Sahibi notu (aynen):** *"Dizinin dışında projeye ait hiçbir şey görmek istemiyorum."*
+
 ## VPN Kullanım Kuralı (2026-09-01)
 
 - Kullanıcı VPN kullanmaktadır; gelecekte bazı ağ işlemleri (API istekleri, web scraping, kurumsal erişim) VPN kaynaklı hata verebilir.

@@ -17,7 +17,7 @@ from company_master.destek import (
     durum_gecis,
     durum_gecis_depo,
     Ticket,
-    GEÇERLİ_GEÇİŞLER,
+    GECERLI_GECISLER,
 )
 
 TENANT = "test_tenant"

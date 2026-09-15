@@ -1,4 +1,4 @@
-﻿# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 import json, re, time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from datetime import datetime
