@@ -1,7 +1,7 @@
 """Admin paneli giriş sekmesi."""
 from __future__ import annotations
 import streamlit as st
-from scripts.dash04_api_client import post_api, APIError
+from scripts.dash04_api_client import get_api, APIError
 
 
 def get_admin_token() -> str | None:
@@ -17,7 +17,9 @@ def render_admin_login() -> None:
     if submitted:
         st.session_state.pop("admin_token", None)
         try:
-            result = post_api("/api/admin/login", json={"email": email, "password": password})
+            # MVP-KUL-FIX-01: API ucu GET + query bekler (web_app.api_admin_login);
+            # POST 405 donuyordu ve admin token hic alinamiyordu.
+            result = get_api("/api/admin/login", params={"email": email, "password": password})
             if result and result.get("token"):
                 st.session_state["admin_token"] = result["token"]
                 st.success("Admin olarak giriş yapıldı.")
