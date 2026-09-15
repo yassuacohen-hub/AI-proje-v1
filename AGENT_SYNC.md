@@ -1,30 +1,25 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-15T15:56:09
+> Son guncelleme: 2026-09-15T18:02:53
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
 
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
-| P7-6 | Kariyer.net Scraper | kilo | P1 | blocked |
 | WK-01 | Career Pages Scraper — Enhanced Data Ext | - | P1 | plan |
 | WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | plan |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | plan |
 | UI-SIDEBAR-02 | Sidebar: marka blogu uste, logo, kompakt | kilo | P2 | blocked |
 | UI-TOPBAR-02 | Topbar: arama sag ust, breadcrumb ayrac, | kilo | P2 | blocked |
 | REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo tesl | cline | P2 | blocked |
-| MVP-KD-01 | MVP Karar Defteri ekrani: PageHeader + f | kilo | P1 | plan |
-| MVP-KUL-01 | MVP Kullanici Yonetimi ekrani: PageHeade | kilo | P1 | plan |
-| REV-MVP-KD-01 | Review: MVP-KD-01 Karar Defteri ekrani | cline | P1 | plan |
-| REV-MVP-KUL-01 | Review: MVP-KUL-01 Kullanici Yonetimi ek | cline | P1 | plan |
+| MVP-KUL-01 | MVP Kullanici Yonetimi ekrani: PageHeade | kilo | P1 | review |
+| REV-MVP-KUL-01 | Review: MVP-KUL-01 Kullanici Yonetimi ek | cline | P1 | aktif |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| BUG-MIG0006-UTF8 | KR-3: 0006_normalize_compat.py bozuk kod | roo | 2026-09-15 |
-| BUG-ENCODING-GUARD | KR-4: Kodlama denetim araci (BOM/NUL/0-b | cline | 2026-09-15 |
 | CI-GATE-01 | CI kapisi: tam tests/ + collection-error | cline | 2026-09-15 |
 | CHART-INT-01 | ui.charts modulunu admin_executive ekran | kilo | 2026-09-15 |
 | REPO-HIJYEN-01 | Kok dizin cop/gecici dosya envanteri (si | roo | 2026-09-15 |
@@ -33,6 +28,8 @@
 | REVIEW-PO-BACK-06 | PO-BACK-06 Destek Merkezi capraz incelem | cline | 2026-09-15 |
 | REV-I18N-SES-02 | Capraz inceleme: I18N-SES-02 kilo teslim | cline | 2026-09-15 |
 | AUDIT-ENC-02 | Repo geneli kodlama denetimi (BOM/UTF-16 | cline | 2026-09-15 |
+| MVP-KD-01 | MVP Karar Defteri ekrani: PageHeader + f | kilo | 2026-09-15 |
+| REV-MVP-KD-01 | Review: MVP-KD-01 Karar Defteri ekrani | cline | 2026-09-15 |
 
 ## Son Handoff'lar
 

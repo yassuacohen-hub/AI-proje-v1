@@ -7,24 +7,21 @@
 
 | Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |
 |-------|--------|-------|---------|-------|----------|
-| P7-6 | Kariyer.net Scraper | kilo | P1 | blocked | docs/P7-6_kariyernet_arastirma.md, src/company_master/scrapers/kariyernet.py, tests/test_kariyernet.py |
 | WK-01 | Career Pages Scraper — Enhanced Data Extraction | - | P1 | plan | - |
 | WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | plan | - |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | plan | - |
 | UI-SIDEBAR-02 | Sidebar: marka blogu uste, logo, kompakt tooltip | kilo | P2 | blocked | app.py |
 | UI-TOPBAR-02 | Topbar: arama sag ust, breadcrumb ayrac, Bu sayfada ayiraci | kilo | P2 | blocked | app.py |
 | REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar) | cline | P2 | blocked | data/orchestrator/REV-UI-SIDEBAR-02_bulgular_2026-09-15_cline.md |
-| MVP-KD-01 | MVP Karar Defteri ekrani: PageHeader + filtre + yeni karar formu | kilo | P1 | plan | web_dashboard/tabs/admin_panel.py, tests/test_admin_panel_karar_defteri.py |
-| MVP-KUL-01 | MVP Kullanici Yonetimi ekrani: PageHeader + onayla + kredi formu | kilo | P1 | plan | web_dashboard/tabs/admin_extras.py, tests/test_admin_extras_kullanici.py |
-| REV-MVP-KD-01 | Review: MVP-KD-01 Karar Defteri ekrani | cline | P1 | plan | - |
-| REV-MVP-KUL-01 | Review: MVP-KUL-01 Kullanici Yonetimi ekrani | cline | P1 | plan | - |
+| MVP-KUL-01 | MVP Kullanici Yonetimi ekrani: PageHeader + onayla + kredi formu | kilo | P1 | review | web_dashboard/tabs/admin_extras.py, tests/test_admin_extras_kullanici.py |
+| REV-MVP-KUL-01 | Review: MVP-KUL-01 Kullanici Yonetimi ekrani | cline | P1 | aktif | - |
 
 ## Tamamlananlar
 
 | Görev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
 | P0-1 | İstiklal OSB scraper implementasyonu | web_kazima | 2026-09-08T10:00:00Z |
-| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-15T15:12:56 |
+| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-15T18:01:40 |
 | P0-3 | Kalite skoru 6.53 - 50+ heazine | kalite | 2026-09-06T22:54:31 |
 | Y21 | ISKUR kurumsal eslestirme verisi arastirma | arastirmaci | 2026-09-10 |
 | APIFY-01 | Apify uygunluk ve entegrasyon mimarisi arastirma | kilo | 2026-09-11T22:14:20 |
@@ -75,6 +72,7 @@
 | DASH-06 | Admin Panel API Yönetimi ve Kullanıcı Yönetimi | kilo | 2026-09-12T22:27:22 |
 | P7-4 | Company Career Pages Scraper | kilo | 2026-09-13T08:30:00 |
 | P7-5 | İSKUR Scraper | roo | 2026-09-13T08:25:11 |
+| P7-6 | Kariyer.net Scraper (Hizli MVP) | kilo | 2026-09-15T18:02:53 |
 | P7-22 | Apify Dead-Letter Queue ve Yeniden Deneme Akışı | kilo | 2026-09-13T07:29:52 |
 | P7-23 | Vektör Katmanı Üretim Entegrasyonu | kilo | 2026-09-13T08:15:00 |
 | P7-24 | ASO ve OSTİM Veri Kalite Raporu | roo | 2026-09-13T21:44:10 |
@@ -216,3 +214,5 @@
 | REVIEW-PO-BACK-06 | PO-BACK-06 Destek Merkezi capraz inceleme (kilo teslimi) | cline | 2026-09-15T14:45:49 |
 | REV-I18N-SES-02 | Capraz inceleme: I18N-SES-02 kilo teslimi (ses.json birlestirme) | cline | 2026-09-15T15:38:28 |
 | AUDIT-ENC-02 | Repo geneli kodlama denetimi (BOM/UTF-16/0-bayt/CRLF) + kodlama_denetim.py kapsam kontrolu | cline | 2026-09-15T15:38:28 |
+| MVP-KD-01 | MVP Karar Defteri ekrani: PageHeader + filtre + yeni karar formu | kilo | 2026-09-15T16:47:21 |
+| REV-MVP-KD-01 | Review: MVP-KD-01 Karar Defteri ekrani | cline | 2026-09-15T16:30:23 |

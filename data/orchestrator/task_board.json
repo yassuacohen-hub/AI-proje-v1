@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-15T15:12:56",
+    "bitis": "2026-09-15T18:01:40",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -768,23 +768,23 @@
   },
   {
     "task_id": "P7-6",
-    "baslik": "Kariyer.net Scraper",
+    "baslik": "Kariyer.net Scraper (Hizli MVP)",
     "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "blocked",
+    "durum": "done",
     "baslangic": "2026-09-12T23:43:28",
-    "bitis": "2026-09-15T11:40:01",
+    "bitis": "2026-09-15T18:02:53",
     "dosyalar": [
-      "docs/P7-6_kariyernet_arastirma.md",
       "src/company_master/scrapers/kariyernet.py",
-      "tests/test_kariyernet.py"
+      "tests/test_kariyernet.py",
+      "docs/P7-6_kariyernet_arastirma.md",
+      "src/company_master/scrapers/__init__.py"
     ],
-    "not": "Anti-bot blocked. P7-28/29/30 alternatiflere yonlendirildi. | ORK 2026-09-15: Kariyer.net scraper — dosya listesi yok, brif eksik; yeniden brifleme bekliyor",
+    "not": "Hizli MVP brif v2 2026-09-15 (roo): KaynakScraper yok, KariyerNetSource sarmalanir; 4 dosya kilitli.",
     "source": "ic",
     "from_agent": null,
     "id": "P7-6",
-    "talimat": "Kariyer.net Scraper — DURUM: anti-bot engelli; doğrudan HTML kazıma YAPMA. Yapılacak (araştırma+iskelet): (1) `docs/P7-6_kariyernet_arastirma.md` — resmî API/RSS/sitemap var mı, robots.txt, hukuki sınır (KVKK/ToS), 9Router `web_fetch` ile erişim denemesi sonucu (5 URL, status kodları). (2) Erişim mümkünse `src/company_master/scrapers/kariyernet.py` iskeleti: `ilan_listesi(sektor, sayfa=1) -> list[dict]` (firma_adi, pozisyon, sehir, tarih, url) + rate limit 1 istek/3 sn + retry 3. Mümkün değilse yalnız (1) + 'kapat' önerisi. Testler: HTTP mock'lu ≥5 test (`tests/test_kariyernet.py`), canlı istek testte YASAK. Dosyalar: docs/P7-6_kariyernet_arastirma.md, src/company_master/scrapers/kariyernet.py, tests/test_kariyernet.py. Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK. Tam regresyon sayısı özete yazılır.",
-    "not_": "[roo 2026-09-15] Karar: anti-bot engeli nedeniyle beklemeye alindi; PO-BACK-06 teslimi onceliklidir. Yeniden brifleme PO-BACK-06 done olduktan sonra roo tarafindan yapilacak."
+    "talimat": "HIZLI MVP (brif v2, kod tabanina gore duzeltildi): data/orchestrator/P7-6_brif_2026-09-15_roo.md. KaynakScraper YOK; mevcut KariyerNetSource(BaseJobSource) (src/company_master/intelligence/job_intelligence/sources/kariyer_net.py) SARMALANIR, degistirilmez. Yazilacak: src/company_master/scrapers/__init__.py + kariyernet.py (fetch/parse/save->jsonl), tests/test_kariyernet.py (2 test, agsiz/mock), docs/P7-6_kariyernet_arastirma.md (YENI). Pagination/JS/proxy/DB INSERT YOK. UTF-8/BOM yok. Tam regresyon sayisi ozete. Teslim: python scripts/gorev_kutusu.py teslim --ajan kilo --task-id P7-6 --ozet \"...\". UI dosyasi yok -> streamlit restart gerekmez. Hedef <20 dk."
   },
   {
     "task_id": "P7-22",
@@ -3227,14 +3227,14 @@
     "baslik": "MVP Karar Defteri ekrani: PageHeader + filtre + yeni karar formu",
     "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-15T15:54:47",
-    "bitis": null,
+    "bitis": "2026-09-15T16:47:21",
     "dosyalar": [
       "web_dashboard/tabs/admin_panel.py",
       "tests/test_admin_panel_karar_defteri.py"
     ],
-    "not": "",
+    "not": "Teslim (kilo): MVP-KD-01 revize: (1) RET-1 duzeltildi — karar listesi ts desc siralama ile en yeni ustte; (2) B-1 duzeltildi — P7-46 testi _form_degeri bolgesine sinirlandi, Karar Defteri filtre selectboxu meşru. tests/test_admin_panel_tab.py + test_user_settings.py + test_sayfa_iskeleti.py + test_dashboard_nav.py toplam 242 yesil, 0 kirmizi.",
     "source": "ic",
     "from_agent": null
   },
@@ -3244,14 +3244,14 @@
     "baslik": "MVP Kullanici Yonetimi ekrani: PageHeader + onayla + kredi formu",
     "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-15T15:55:11",
     "bitis": null,
     "dosyalar": [
       "web_dashboard/tabs/admin_extras.py",
       "tests/test_admin_extras_kullanici.py"
     ],
-    "not": "",
+    "not": "Teslim (kilo): MVP-KUL-01 tamamlandi: admin_extras.py render_user_management PageHeader('Kullanici Yonetimi', ust_etiket='Is - Yonetim', ikon='👥') + onay bekleyenler satir satir Onayla butonu -> POST /api/admin/approve (tier=terminal), son onaylılar dataframe, kredi formu -> POST /api/admin/credit, token yoksa warning (fail-closed). test_admin_extras_kullanici.py 6 yeni test, test_admin_extras.py guncellendi, test_sayfa_iskeleti.py yesil, kodlama_denetim temiz.",
     "source": "ic",
     "from_agent": null
   },
@@ -3261,11 +3261,11 @@
     "baslik": "Review: MVP-KD-01 Karar Defteri ekrani",
     "sahip": "cline",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-15T15:55:11",
-    "bitis": null,
+    "bitis": "2026-09-15T16:30:23",
     "dosyalar": [],
-    "not": "",
+    "not": "Teslim (cline): REV-MVP-KD-01 INCELEME TAMAMLANDI — DUZELTME GEREKLI (tek madde). Rapor: data/orchestrator/REV-MVP-KD-01_rapor_20260915_cline.md (UTF-8 BOM'suz). OLUMLU: plan maddeleri (plans/MVP_ADMIN_minimum_canli.md) birebir uygulanmis — PageHeader+giris, 3 filtre (Karar Veren selectbox Hepsi+benzersiz decider, Etiket multiselect, Ara), son 50 en yeni ustte st.dataframe, yeni karar formu -> log_decision (imza uyumu teyitli, decider=aktif_kullanici, success+rerun), bos durum st.info; bonus: zorunlu alan kontrolu. KANIT: tests/test_admin_panel_tab.py + test_sayfa_iskeleti.py 83 passed (6 admin_panel testi); kodlama_denetim EXIT 0; streamlit run app.py headless HTTP 200 (app coksuz aciliyor; sekme-ici etkilesim statik inceleme+testlerle dogrulandi, ortam kisiti raporda notlu); tam regresyon: 1 failed, 3317 passed, 3 skipped, koleksiyon hatasi 0. BLOKE EDICI BULGU B-1: kilonun ekledigi Karar Veren selectbox (plan maddesi 2, meşru ve zorunlu) P7-46 kaynak-kural testini kirdi — tests/test_user_settings.py satir 313 dosya-geneli st.selectbox( <=1 kurali; sayi 2 oldu. ONERILEN YAMA (raporda tam hali): sayim _form_degeri..render_ayarlar_tab bolgesiyle sinirlanmali; P7-46 niyeti korunur, MVP-KD-01 filtresine izin verilir. Yama sonrasi tam regresyon yesile döner, diger kapilar yeşil oldugundan yeniden inceleme gerektirmez. BILGI: decider fallback misafir (plan admin demisti, P7-46 ile tutarli — roo notu); scripts.decision_log namespace importu calisiyor. KAPSAM DISI bug yok (bulgular dosyasi acilmadi). NOT: MVP-KUL-01 kilo hala plan durumunda; REV-MVP-KUL-01 incelemesi teslim sonrasi yapilacak.",
     "source": "ic",
     "from_agent": null
   },
@@ -3275,7 +3275,7 @@
     "baslik": "Review: MVP-KUL-01 Kullanici Yonetimi ekrani",
     "sahip": "cline",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-15T15:55:11",
     "bitis": null,
     "dosyalar": [],
