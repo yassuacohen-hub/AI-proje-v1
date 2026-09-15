@@ -1,8 +1,4 @@
 {
   "bom": [],
-  "compile": [
-    "scripts/check_email_dist.py (unexpected character after line continuation character (check_email_dist.py, line 11))",
-    "scripts/scripts/check_email_dist.py (unexpected character after line continuation character (check_email_dist.py, line 11))",
-    "scripts/test_growth.py (invalid syntax (test_growth.py, line 74))"
-  ]
+  "compile": []
 }

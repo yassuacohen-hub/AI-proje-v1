@@ -47,11 +47,11 @@ logging.disable(logging.WARNING)
 
 def test_bolum_sayisi_ve_benzersizlik() -> None:
     """BK5: bolum listesi eksiksiz ve anahtarlar/URL'ler benzersiz."""
-    # 11 (temel) + 14 (U-11 dağıtım) + 1 (PO-BACK-08 executive) = 26
+    # 11 (temel) + 14 (U-11 dağıtım) + 1 (PO-BACK-08 executive) + 1 (PO-BACK-06 destek) = 27
     # Temel: ana_kontrol, musteriler, paketler, pazarlama, abrakadabra, sistem, canli_veri, denetim, yonetim, ayarlar, yukleme
     # U-11: kpi, hatalar, kullanicilar, karar_defteri, kalite, arama, export, maliyet, performans, api, webhook, dlq, yenileme, kimlik
     # PO-BACK-08: executive (MRR/ARR + churn + tenant sağlık dağılımı)
-    assert len(SECTIONS) == 26
+    assert len(SECTIONS) == 27
 
     anahtarlar = [t.anahtar for t in SECTIONS]
     urller = [t.url_path for t in SECTIONS]
@@ -263,3 +263,4 @@ def test_mig_sistem_bolumleri_muninn_kalir() -> None:
         tanim = tab_getir(anahtar)
         assert tanim is not None
         assert tanim.yuzey == YUZEY_MUNINN, anahtar
+

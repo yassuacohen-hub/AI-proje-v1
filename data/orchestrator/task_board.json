@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-15T13:06:53",
+    "bitis": "2026-09-15T15:12:56",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -3041,13 +3041,13 @@
     "baslik": "CI kapisi: tam tests/ + collection-errors + kodlama denetimi adimi",
     "sahip": "cline",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-15T12:34:23",
-    "bitis": null,
+    "bitis": "2026-09-15T14:06:34",
     "dosyalar": [
       ".github/workflows/ci.yml"
     ],
-    "not": "",
+    "not": "Teslim (cline): CI-GATE-01 TAMAMLANDI. .github/workflows/ci.yml test job: (1) 'Run tests with coverage' adimi artik TAM tests/ dizinini kossun (tests/company_master/ -> tests/); (2) --continue-on-collection-errors bayragi eklendi (tek bozuk modul butun suite'i kesemesin); (3) BUG-ENCODING-GUARD tesliminden gelen 'Kodlama denetimi (BOM / NUL / 0-bayt / UTF-16) - KR-4' adimi tests'ten ONCE calisir, ihlalde kirmizi (cikis kodu ratchet'li: allowlist-disi ihlalde 1; data/kodlama_allowlist.json bom:0/compile:3); (4) coverage esigi (80) ve --cov hedefleri (db/connection, etl/normalize, etl/pipeline, search/engine) DEGISMEDİ; matrix 3.10/3.11/3.12 aynen. KABIT (kabul kriterleri): (a) yml gecerli - python -c yaml.safe_load -> YML OK; (b) tests/orchestrator YESIL - 55 passed (2.05s); (c) tam regresyon 0 koleksiyon hatasi - BUG-ENCODING-GUARD tesliminde kanitlandi: 3304 passed, 3 skipped, 1 failed (72.52s; tek kirmizi tests/test_destek.py::test_durum_gecis_acik_inceleniyor = kilonun aktif PO-BACK-06 isi, kapsam disi). BULGU NOTU: kapsam disi duzeltme yapilmadi; goze carpan tek konu (bilinen) destek testinin kilo tarafindan yesile cekilmesi + scripts/ altindaki 3 eski bozuk script icin ayri BUG (compile allowlist kayitlari o duzeltmeyle bosaltilmali). CI notu: tam suite CI'da 3 Python surumunde kosacak; yerel sure 72s referans.",
     "source": "ic",
     "from_agent": null,
     "not_": "Zincir: BUG-ENCODING-GUARD teslim edilince tetiklenir. [roo 2026-09-15] CI-GATE-01 (KR-4/#7 onerin): .github/workflows/ci.yml 'Run tests' adimi tests/company_master/ yerine tum tests/ dizinini `--continue-on-collection-errors` ile kossun; ayrica BUG-ENCODING-GUARD'da urettigin `python scripts/kodlama_denetim.py` CI'da ayri bir adim olarak test oncesine eklensin (basarisizsa kirmizi). Coverage esigi ve cov hedefleri degismesin. Kabul: yml gecerli (python -c \"import yaml;yaml.safe_load(open('.github/workflows/ci.yml'))\"), tests/orchestrator yesil, tam regresyon 0 koleksiyon hatasi. BULGU NOTU: Kapsam disinda gordugun bug/hata/kodlama sorununu DUZELTME; data/orchestrator/<TASK_ID>_bulgular_<tarih>_cline.md'ye yaz ve roo'ya tetik dusur."
@@ -3058,13 +3058,13 @@
     "baslik": "ui.charts modulunu admin_executive ekranina entegre et",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-15T12:34:23",
-    "bitis": null,
+    "bitis": "2026-09-15T14:41:12",
     "dosyalar": [
       "web_dashboard/tabs/admin_executive.py"
     ],
-    "not": "",
+    "not": "Teslim (kilo): CHART-INT-01 tamamlandi: admin_executive.py icindeki raw plotly (go.Scatter + st.plotly_chart) ve st.line_chart fallback kodu kaldirildi; yerine company_master.ui.charts.line_chart kullanildi. admin_executive.py PageHeader/Section kalitesi korundu. tests/test_ui_charts.py 9/9, test_dashboard_nav.py executive pass, test_sayfa_iskeleti.py admin_executive 4/4 pass, test_sekme_kapsama.py render_executive_tab pass. BOM/NUL yok.",
     "source": "ic",
     "from_agent": null,
     "not_": "Zincir: PO-BACK-06 teslim edilince tetiklenir. [roo 2026-09-15] CHART-INT-01: src/company_master/ui/charts/__init__.py (line/bar/pie/scatter, fig_to_json) hicbir ekran tarafindan kullanilmiyor. web_dashboard/tabs/admin_executive.py icindeki ham plotly/st.line_chart cizimlerini bu modulle degistir; API/veri sozlesmesi ayni kalsin, tests/test_ui_charts.py bozulmasin. Kabul: tests/test_ui_charts.py + tests/test_dashboard_nav.py + tests/test_sayfa_iskeleti.py yesil, tam regresyon 0 koleksiyon hatasi, BOM/NUL yok (Out-File YASAK; python open(..., encoding='utf-8')). Teslim cline capraz incelemesine gider."
@@ -3092,12 +3092,127 @@
     "baslik": "Marka sesi JSON (105 tr anahtar) ses.json/ui.json ile birlestir",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-15T13:03:28",
-    "bitis": null,
+    "bitis": "2026-09-15T15:38:28",
     "dosyalar": [
       "src/company_master/i18n/_gelen_marka_sesi_2026-09-15.json",
       "src/company_master/i18n/ses.json"
+    ],
+    "not": "Teslim (kilo): I18N-SES-02 tamamlandi: _gelen_marka_sesi_2026-09-15.json (105 tr + 105 en anahtar) ses.json ile karsilastirildi — tum anahtarlar zaten mevcut, yeni birlestirme gerekmedi, mukerrer bulunamadi. Kaynak dosya silindi. tests -k i18n: 1426 yesil.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "BUG-SCRIPTS-COMPILE-01",
+    "id": "BUG-SCRIPTS-COMPILE-01",
+    "baslik": "scripts/ hijyen: 3 compile-bozuk script + scripts/scripts mukerrer klasor",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-15T14:07:28",
+    "bitis": "2026-09-15T14:45:47",
+    "dosyalar": [
+      "scripts/check_email_dist.py",
+      "scripts/test_growth.py",
+      "scripts/scripts",
+      "data/kodlama_allowlist.json"
+    ],
+    "not": "Teslim (cline): SCRIPTS HIJYENI TAMAMLANDI. KARARLAR: (1) scripts/check_email_dist.py -> DUZELTILDI (silinmedi): satir 11'deki hatali kacisli SELECT satiri tek satirlik fix ile temizlendi; 14 satirlik email dagilim DB denetim sorgusu yeniden kullanilabilir oldugu icin duzeltme tercih edildi. (2) scripts/test_growth.py -> git rm (silindi): dosya sonunda CONTENT_PLACEHOLDER yapismasiyla kalici bozuk; growth sinyal sozlugunun eski deneme kopyasi; gercek modul job_intelligence pipeline'inda yasiyor; kod referansi YOK (git grep temiz). (3) scripts/scripts/ mukerrer klasor (37 dosya) -> git rm -r: 17 dosya birebir ayni; 20 farkli dosyanin farki YALNIZCA satir sonu (alt kopya CRLF vs kok LF) — satir sonlari normalize edilince icerik yuzde 100 esit (check_aso, check_email_dist, fix_and_clean_null_source_records HEAD-vs-kok dahil 9 dosya ornek dogrulama); kokteki LF surumleri korundu, islevsel fark kaybolmadi. (4) data/kodlama_allowlist.json compile listesi bosaltildi -> bom:0 compile:0 (ratchet tam sikilikte). KABUL: python scripts/kodlama_denetim.py -> temiz: kodlama ihlali yok, EXIT 0 ve IHlal 0; referans kontrolu: git grep ile py/yml/toml/cfg/ini icinde scripts/scripts ve scripts/test_growth referansi YOK; TEST: pytest tests/test_kodlama_guard.py tests/orchestrator -q -> 67 passed (4.04s). STAGED: 38 dosya silindi (1797 satir, git rm), + check_email_dist.py fix ve allowlist guncellemesi calisma agacinda. Not: talimatta 38 dosya denmisti; fiilen scripts/scripts altinda 37 dosya vardi (silinen toplam 37+test_growth=38).",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "REVIEW-PO-BACK-06",
+    "id": "REVIEW-PO-BACK-06",
+    "baslik": "PO-BACK-06 Destek Merkezi capraz inceleme (kilo teslimi)",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-15T14:07:29",
+    "bitis": "2026-09-15T14:45:49",
+    "dosyalar": [
+      "data/orchestrator/REVIEW-PO-BACK-06_rapor_20260915_cline.md"
+    ],
+    "not": "Teslim (cline): PO-BACK-06 CAPRAZ INCELEME TAMAMLANDI — ONAY ONERISI. Rapor: data/orchestrator/REVIEW-PO-BACK-06_rapor_20260915_cline.md. KANIT: tests/test_destek.py 10 passed (0.34s, tam yesil); tests/test_sayfa_iskeleti.py 76 passed; kodlama_denetim EXIT 0 (destek dosyalarinda BOM/UTF-16/NUL yok). KONTROLLER: (1) durum makinesi dogru, gecersiz gecis ValueError + testi mevcut; (2) frozen dataclass immutability korunuyor (__post_init__ sadece kurulum damgasi); (3) JSON depo UTF-8 kullaniyor AMA atomik yazma YOK + kilit YOK (orta bulgu B-1: lost-update/yarim dosya riski); corrupt JSON sessizce {} donup ilk yazmada tum veriyi eziyor (orta bulgu B-2); (4) admin_destek.py PageHeader/Section/SectionNav kalibine uyuyor, kimlik/anchor tutarli; (5) hardcoded secret yok; KVKK notu: serbest metin duz dosyada + st.markdown'a kullanici metni (dusuk bulgular D-3/D-4). Diger dusuk bulgular: durum_gecis icinde time.sleep(0.003) koku (D-1), testlerin gercek depoyu kullanmasi tmp_path yok (D-2). Not: talimattaki src/company_master/destek/ paketi fiilen TEK DOSYA destek.py. Oneri: B-1+B-2 icin takip gorevi (atomik yazim + dosya kilidi + corrupt-guvenli yukleme); bloke edici degil.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "UI-SIDEBAR-02",
+    "id": "UI-SIDEBAR-02",
+    "baslik": "Sidebar: marka blogu uste, logo, kompakt tooltip",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-15T15:01:51",
+    "bitis": null,
+    "dosyalar": [
+      "app.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "UI-TOPBAR-02",
+    "id": "UI-TOPBAR-02",
+    "baslik": "Topbar: arama sag ust, breadcrumb ayrac, Bu sayfada ayiraci",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-15T15:03:03",
+    "bitis": null,
+    "dosyalar": [
+      "app.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "REV-I18N-SES-02",
+    "id": "REV-I18N-SES-02",
+    "baslik": "Capraz inceleme: I18N-SES-02 kilo teslimi (ses.json birlestirme)",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-15T15:12:54",
+    "bitis": "2026-09-15T15:38:28",
+    "dosyalar": [
+      "data/orchestrator/REV-I18N-SES-02_bulgular_2026-09-15_cline.md"
+    ],
+    "not": "Teslim (cline): REV-I18N-SES-02 INCELEME TAMAMLANDI — ONAY ONERISI. Rapor: data/orchestrator/REV-I18N-SES-02_bulgular_2026-09-15_cline.md (UTF-8, BOM'suz). KANITLAR: (1) git log — ses.json son commit 661f21c (00:01 otomatik), ui.json b6d8e7a (12:01 otomatik); kilonun calisma penceresinden (13:03+) ONCE -> kilo iki dosyaya dokunmamis, birlestirme-gerekmez karariyla tutarli. (2) Silinen kaynak dosya git HEAD'den cekildi: yapisi tr:105 + en:105; anahtar kumesi farki 0 — kaynak-TR anahtarlarinin TAMAMI ses.json'da mevcut (105/105, eksik 0 fazladan 0); kilonun iddiasi dogru. (3) tr/en parite: kaynak kumeleri birebir esit; ses.json her deger {tr,en} yapisinda, yapi-hatasi 0, bos deger 0 — eksik en YOK. (4) Deger eslesmesi: en 105/105; tr 104/105 — tek fark odin_runes_aligned: ses.json'daki Sistem parametreleri hizalandi (dogru yazim) korunmus, kaynaktaki parameters yazim hatasi alinmamis -> dogru tercih, veri kaybi degil iyilestirme. (5) pytest tests -k i18n -q -> 1426 passed; kodlama_denetim EXIT 0. NOT: kaynak dosyanin silinmesi calisma agacinda (D), commit'lenmedi — sonraki commit ile temizlenir (bloke edici degil). ONAY oneriyoruz.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "AUDIT-ENC-02",
+    "id": "AUDIT-ENC-02",
+    "baslik": "Repo geneli kodlama denetimi (BOM/UTF-16/0-bayt/CRLF) + kodlama_denetim.py kapsam kontrolu",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-15T15:14:00",
+    "bitis": "2026-09-15T15:38:28",
+    "dosyalar": [
+      "data/orchestrator/AUDIT-ENC-02_bulgular_2026-09-15_cline.md"
+    ],
+    "not": "Teslim (cline): AUDIT-ENC-02 REPO GENELI DENETIM TAMAMLANDI. Rapor: data/orchestrator/AUDIT-ENC-02_bulgular_2026-09-15_cline.md (UTF-8 BOM'suz, NUL 0). SONUC 1 KAPSAM ICI TEMIZ: kodlama_denetim.py EXIT 0 (bom/utf16/nul/bos/compile hepsi 0); allowlist tamamen bos (bom:0 compile:0) ratchet tam sikilikte. SONUC 2 KAPSAM DISI TAM-REPO (EXIT 1 beklendik): utf8_bom 71, compile 5, utf16 1, nul 2, bos 6 — TAMAMI AI proje v1 agaci + backups + kok kalintilari (web_app.py, locustfile.py, system_prompt.md vb.); uretim kodunda 0 ihlal; aksiyon onerilmez. SONUC 3 CRLF ANALIZI: autocrlf=true + .gitattributes eol=lf aktif; working copy 379/565 .py CRLF ama git'e giriste LF'e normalize ediliyor (861 i/lf kaniti) — CRLF'in ihlal olarak eklenmemesi DOGRU karar, eklenseydi 379 yanlis pozitif uretilirdi. Tek gercek bulgu: depoya CRLF girmis 35 dosya (i/crlf; cogunluk data_quality_toolkit + 2 init + nace json) — tek seferlik git add --renormalize . onerisi (ayri hijyen commit, roo karari). SONUC 4 KAPSAM KONTROLU: mevcut kapsam (src/tests/web_dashboard/scripts + agir dizin atlama) dogru ve yeterli; oneriler: (a) CRLF ihlal eklenmesin, (b) renormalize, (c) bilgi: AI proje v1 agaci repo'da kaldikca --tam-repo EXIT 1 verecek (beklenen). NOT: PowerShell yonlendirme tuzaigi (UTF-16 cikti) tekrar teyit edildi, gecici dosya silindi; rapor editor ile UTF-8 yazildi.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "REV-UI-SIDEBAR-02",
+    "id": "REV-UI-SIDEBAR-02",
+    "baslik": "Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar)",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "aktif",
+    "baslangic": "2026-09-15T15:15:17",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/REV-UI-SIDEBAR-02_bulgular_2026-09-15_cline.md"
     ],
     "not": "",
     "source": "ic",

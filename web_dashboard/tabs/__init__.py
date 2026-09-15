@@ -232,6 +232,17 @@ SECTIONS: tuple[TabTanimi, ...] = (
         min_rol="admin",
     ),
     TabTanimi(
+        anahtar="destek",
+        baslik="Destek Merkezi",
+        ikon="🎫",
+        grup=GRUP_IS,
+        aciklama="Ticket listesi, olusturma ve durum degistirme",
+        url_path="destek",
+        modul="web_dashboard.tabs.admin_destek",
+        fonksiyon="render_destek_tab",
+        min_rol="admin",
+    ),
+    TabTanimi(
         anahtar="hatalar",
         baslik=t("menu_hatalar"),
         ikon="⚠️",

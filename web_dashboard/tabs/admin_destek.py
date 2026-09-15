@@ -23,7 +23,7 @@ from company_master.destek import (
 #: ADMIN-UI-10 — Bolumler tek yerde tanimlanir (anchor tutarliligi).
 BOLUMLER: tuple[Section, ...] = (
     Section("Ticket Listesi", "Mevcut ticketleri listele.",
-            ikon="📜", kimlik="destek-listesi"),
+            ikon="📀", kimlik="destek-listesi"),
     Section("Yeni Ticket", "Yeni ticket olustur.",
             ikon="➕", kimlik="destek-yeni"),
     Section("Durum Degistir", "Ticket durumunu guncelle.",
