@@ -20,7 +20,7 @@ from typing import Any
 import pandas as pd
 import streamlit as st
 
-from scripts.decision_log import read_decisions
+from scripts.decision_log import read_decisions, log_decision
 
 _KOK = Path(__file__).resolve().parents[2]
 if str(_KOK / "src") not in sys.path:
@@ -68,12 +68,66 @@ def render_decision_tab(decisions: list[dict[str, Any]] | None = None) -> None:
     if decisions is None:
         decisions = read_decisions()
 
-    if not decisions:
-        st.info("Henüz karar kaydı yok")
-        return
+    PageHeader(
+        "Karar Defteri", ust_etiket="İş · Yönetim", ikon="📒",
+        giris="Karar kayıtlarını görüntüleyin, filtreleyin ve yeni kararlar ekleyin.",
+    ).render()
 
-    # Son 50 kaydi goster
-    recent = decisions[-50:]
+    # ---- Filtreler ----
+    Section(
+        "Filtreler", "Karar listesini karar veren, etiket veya metin ile filtreleyin.", ikon="🔍",
+    ).render()
+
+    tum_etiketler = sorted(
+        {
+            t
+            for d in decisions
+            for t in (d.get("tags", []) if isinstance(d.get("tags", []), list) else [])
+        }
+    )
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        secilen_karar_veren = st.selectbox(
+            "Karar Veren",
+            ["Hepsi"] + sorted({d.get("decider", "") for d in decisions if d.get("decider")}),
+            key="kd_karar_veren",
+        )
+    with col2:
+        secilen_etiketler = st.multiselect("Etiket", tum_etiketler, key="kd_etiketler")
+    with col3:
+        arama = st.text_input("Ara", key="kd_ara", placeholder="Başlık, karar veya gerekçe...")
+
+    filtrelenmis = decisions
+    if secilen_karar_veren != "Hepsi":
+        filtrelenmis = [d for d in filtrelenmis if d.get("decider") == secilen_karar_veren]
+    if secilen_etiketler:
+        filtrelenmis = [
+            d
+            for d in filtrelenmis
+            if any(t in (d.get("tags", []) if isinstance(d.get("tags", []), list) else []) for t in secilen_etiketler)
+        ]
+    if arama:
+        q = arama.lower()
+        filtrelenmis = [
+            d
+            for d in filtrelenmis
+            if q in str(d.get("title", "")).lower()
+            or q in str(d.get("decision", "")).lower()
+            or q in str(d.get("reason", "")).lower()
+        ]
+
+    # ---- Karar Listesi ----
+    Section(
+        "Karar Listesi", "Son karar kayıtları, en yeni üstte (son 50).", ikon="📋",
+    ).render()
+
+    if not filtrelenmis:
+        st.info("Henüz karar kaydı yok — ilk kararı aşağıdaki formdan ekleyin.")
+
+
+    filtrelenmis_sorted = sorted(filtrelenmis, key=lambda d: d.get("ts", ""), reverse=True)
+    recent = filtrelenmis_sorted[:50]
 
     rows = []
     for d in recent:
@@ -91,7 +145,27 @@ def render_decision_tab(decisions: list[dict[str, Any]] | None = None) -> None:
 
     df = pd.DataFrame(rows)
     st.dataframe(df, width="stretch", hide_index=True)
-    st.caption("Toplam " + str(len(decisions)) + " karar kaydi gosterniliyor (son 50).")
+    st.caption("Toplam " + str(len(filtrelenmis)) + " karar kaydi gosterniliyor (son 50).")
+
+    # ---- Yeni Karar ----
+    Section("Yeni Karar", "Yeni bir karar kaydÄ± ekleyin.", ikon="â•").render()
+
+    with st.form("yeni_karar"):
+        baslik = st.text_input("Başlık")
+        karar = st.text_input("Karar")
+        gerekce = st.text_input("Gerekçe")
+        etiketler_str = st.text_input("Etiketler (virgülle ayrılmış)")
+        kaydet = st.form_submit_button("Kaydet", type="primary")
+
+    if kaydet:
+        if not baslik.strip() or not karar.strip():
+            st.error("Başlık ve Karar alanları zorunludur.")
+        else:
+            tags = [t.strip() for t in etiketler_str.split(",") if t.strip()]
+            decider = aktif_kullanici()
+            log_decision(baslik.strip(), karar.strip(), decider, gerekce.strip(), tags)
+            st.success("Karar kaydedildi.")
+            st.rerun()
 
 
 # ---------------------------------------------------------------------------
@@ -174,11 +248,11 @@ def render_ayarlar_tab(kullanici_id: str | None = None) -> None:
         kullanici_id = aktif_kullanici()
 
     PageHeader("Kullanıcı Ayarları", giris=GIRIS_METNI,
-               ust_etiket="Sistem · Ayarlar", ikon="⚙️").render()
+               ust_etiket="Sistem Â· Ayarlar", ikon="âš™ï¸").render()
 
     col_rehber, col_kimlik = st.columns([1, 3], vertical_alignment="center")
     with col_rehber:
-        rehber = st.toggle("ℹ️ Sekme rehberi", key="ayarlar_rehber",
+        rehber = st.toggle("â„¹ï¸ Sekme rehberi", key="ayarlar_rehber",
                            help="Bu ekranın amacını, veri kaynağını ve kısıtlarını gösterir.")
     with col_kimlik:
         st.caption(
@@ -230,3 +304,4 @@ def render_ayarlar_tab(kullanici_id: str | None = None) -> None:
     st.caption(
         "Not: Tema ayarı 'sistem' seçiliyken panel, işletim sistemi renk tercihini izler."
     )
+
