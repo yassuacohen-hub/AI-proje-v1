@@ -31,12 +31,26 @@ def izole(tmp_path, monkeypatch):
 # ---- cakisirma_analizi ----
 
 def test_cakisirma_aktif_gorev_dosyasi(tmp_path):
+    # ORCH-05b: aktif'e gecis kilidi dusurmez -> cakisma "kilit:T-1" olarak raporlanir.
     tb.gorev_ekle("T-1", "roo is", "roo", "P1", dosyalar=["a.py"])
     tb.gorev_guncelle("T-1", durum="aktif")
     r = duzen.cakisirma_analizi("T-2", ["a.py", "b.py"])
     assert len(r["cakisan"]) == 1
     assert r["cakisan"][0]["dosya"] == "a.py"
+    assert r["cakisan"][0]["tutan"] == "kilit:T-1"
+    assert r["cakisan"][0]["durum"] == "kilitli"
+    assert r["temiz"] == ["b.py"]
+
+
+def test_cakisirma_aktif_gorev_dosyasi_kilitsiz(tmp_path):
+    """Kilit yoksa (elle birakilmis) aktif gorevin dosya listesi hala cakisma sayilir."""
+    tb.gorev_ekle("T-1", "roo is", "roo", "P1", dosyalar=["a.py"])
+    tb.gorev_guncelle("T-1", durum="aktif")
+    assert tb.lock_birak("a.py", "roo")
+    r = duzen.cakisirma_analizi("T-2", ["a.py", "b.py"])
+    assert len(r["cakisan"]) == 1
     assert r["cakisan"][0]["tutan"] == "T-1"
+    assert r["cakisan"][0]["durum"] == "aktif"
     assert r["temiz"] == ["b.py"]
 
 
@@ -55,10 +69,11 @@ def test_guvenli_ekle_kilit_atlar_uyari_verir(tmp_path):
     tb.gorev_guncelle("T-1", durum="aktif")
     r = duzen.guvenli_gorev_ekle("T-2", "kilo is", "kilo", dosyalar=["a.py"])
     assert len(r["uyarilar"]) == 1
-    assert r["gorev"]["dosyalar"] == []  # cakisan dosya kilitlenmedi
-    # kilitlenmedigini dogrula: FILE_LOCKS'ta a.py yok
+    assert r["gorev"]["dosyalar"] == []  # cakisan dosya T-2 icin kilitlenmedi
+    # ORCH-05b: T-1'in kilidi korunur, T-2 uzerine yazmaz
     kilitler = json.loads((tmp_path / "file_locks.json").read_text(encoding="utf-8"))
-    assert "a.py" not in kilitler
+    assert kilitler["a.py"]["task_id"] == "T-1"
+    assert kilitler["a.py"]["sahip"] == "roo"
 
 
 def test_guvenli_ekle_cift_id_hata(tmp_path):

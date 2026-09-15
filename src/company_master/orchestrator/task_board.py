@@ -308,11 +308,13 @@ def gorev_guncelle(task_id: str, durum: str | None = None, **fields) -> dict | N
             t.update(fields)
             if durum in ("done", "blocked"):
                 t["bitis"] = datetime.now().isoformat(timespec="seconds")
-            # ORCH-05: done/blocked oldugunda bu göreve ait tum kilitleri otomatik birak
-            locks = _read_json(FILE_LOCKS)
-            kalan = {d: l for d, l in locks.items() if l.get("task_id") != task_id}
-            if len(kalan) != len(locks):
-                _write_json(FILE_LOCKS, kalan)
+                # ORCH-05: done/blocked oldugunda bu göreve ait tum kilitleri otomatik birak.
+                # ORCH-05b: Blok yalniz done/blocked'da calisir; onceden her guncellemede
+                # (aktif/review/not) kilit dusuyordu -> file_locks.json surekli bos kaliyordu.
+                locks = _read_json(FILE_LOCKS)
+                kalan = {d: l for d, l in locks.items() if l.get("task_id") != task_id}
+                if len(kalan) != len(locks):
+                    _write_json(FILE_LOCKS, kalan)
             # S-05: her yazimda eski/bozuk kayitlar kendini onarir (self-healing).
             pano_normalize(board)
             _write_json(TASK_BOARD, board)

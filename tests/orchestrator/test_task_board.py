@@ -198,6 +198,36 @@ def test_atomic_write_text_dosya_icerigi():
     assert sorted(p.name for p in tb_module.STATE_DIR.glob("*.tmp")) == []
 
 
+def test_orch05b_kilit_aktif_ve_review_guncellemede_korunur():
+    """ORCH-05b: Kilit yalnizca done/blocked'da duser; aktif/review/not
+    guncellemeleri kilidi silmez (regresyon: file_locks.json surekli bosti)."""
+    _ensure()
+    gorev_ekle("K-05B", "kilit testi", "kilo", "P1", dosyalar=["src/a.py", "tests/a.py"])
+    kilitler = json.loads(tb_module.FILE_LOCKS.read_text(encoding="utf-8"))
+    assert set(kilitler) == {"src/a.py", "tests/a.py"}
+
+    gorev_guncelle("K-05B", durum="aktif")
+    gorev_guncelle("K-05B", **{"not": "ara not"})
+    gorev_guncelle("K-05B", durum="review")
+    kilitler = json.loads(tb_module.FILE_LOCKS.read_text(encoding="utf-8"))
+    assert set(kilitler) == {"src/a.py", "tests/a.py"}, "aktif/review kilidi dusurmemeli"
+    assert kilitler["src/a.py"]["task_id"] == "K-05B"
+
+    gorev_guncelle("K-05B", durum="done")
+    kilitler = json.loads(tb_module.FILE_LOCKS.read_text(encoding="utf-8"))
+    assert kilitler == {}, "done kilitleri dusurmeli (ORCH-05)"
+
+
+def test_orch05b_blocked_kilit_dusurur_baska_gorevin_kilidi_kalir():
+    _ensure()
+    gorev_ekle("K-A", "a", "kilo", "P1", dosyalar=["x.py"])
+    gorev_ekle("K-B", "b", "cline", "P1", dosyalar=["y.py"])
+    gorev_guncelle("K-A", durum="blocked", **{"not": "bekliyor"})
+    kilitler = json.loads(tb_module.FILE_LOCKS.read_text(encoding="utf-8"))
+    assert "x.py" not in kilitler
+    assert kilitler["y.py"]["task_id"] == "K-B"
+
+
 if __name__ == "__main__":
     # ORCH-01: Doğrudan çağrı izolasyon fixture'ını atlar ve gerçek
     # data/orchestrator/task_board.json'a yazabilir -> devre dışı.
