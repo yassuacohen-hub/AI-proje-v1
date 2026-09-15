@@ -65,3 +65,8 @@
 - Geçici dosya: `data/_tmp/` veya `_trash/`. Köke `_*.py`, `*.bak`, `*.base` bırakılmaz; iş bitince silinir.
 - Dışarıda proje öğesi görürsen SİLME, ilgili bölüme içeri TAŞI ve özette "dış dizinden taşındı: kaynak → hedef" yaz.
 - Ürün Sahibi dışarıya/köke referans-konum notu bırakabilir (ör. `KONUM_NOTU.md`): oku, belirtilen bölüme taşı, dış kopyayı kaldır, decision_log'a yaz. Ayrıntı: AGENTS.md "Proje Sınırı Kuralı".
+
+## Streamlit Yeniden Başlatma Kuralı (2026-09-15, ZORUNLU)
+- `.streamlit/config.toml` → `fileWatcherType = "none"`: kod değişikliği otomatik yüklenmez.
+- UI dosyasına (`app.py`, `web_dashboard/**`, `src/company_master/ui/**`, `.streamlit/**`) dokunan ajan teslimden ÖNCE `python scripts/streamlit_restart.py` çalıştırır ve özete yazar (`--durum` durum, `--durdur` kapat).
+- Ürün Sahibi yalnız tarayıcıda F5 çeker; ondan terminal işlemi istenmez. Restart yapılmamış UI teslimi reddedilir. Ayrıntı: AGENTS.md "Streamlit Yeniden Başlatma Kuralı".
