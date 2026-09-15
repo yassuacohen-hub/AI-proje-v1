@@ -70,7 +70,18 @@ def search_companies(
 
             rows = conn.execute(text(sql), params).mappings().all()
             if rows:
-                df = pd.DataFrame([dict(r) for r in rows])
+                # BUG-COMPANYID-01: `company_id` DB'den UUID nesnesi olarak
+                # gelir; pandas/Arrow bunu doğrudan seri hale getiremeyip
+                # {"0":245,"1":124,...} biçiminde byte-dizisi sözlüğüne
+                # dönüştürüyordu. DataFrame kurulmadan ÖNCE `str()` ile
+                # tam UUID metnine çeviriyoruz (kısaltma yok).
+                kayitlar = []
+                for r in rows:
+                    kayit = dict(r)
+                    if kayit.get("company_id") is not None:
+                        kayit["company_id"] = str(kayit["company_id"])
+                    kayitlar.append(kayit)
+                df = pd.DataFrame(kayitlar)
                 df["data_quality_score"] = df["data_quality_score"].apply(lambda x: round(float(x), 1) if x is not None else 0)
                 return df
     except Exception as e:

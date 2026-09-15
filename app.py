@@ -61,11 +61,14 @@ from company_master.ui import (  # noqa: E402
     stil_enjekte,
 )
 
-# U-02: `layout` burada sabitlenirse Streamlit ⋮ menüsünden "Wide mode"
-# geçişini kaldırır. Genişlik kararını kullanıcıya bırakıyoruz.
+# UI-WIDE-01: Ürün Sahibi kararı — sayfa varsayılan olarak geniş (wide) açılır;
+# `toolbarMode = "auto"` (.streamlit/config.toml) sayesinde sağ üstteki ⋮
+# Settings menüsü hâlâ görünür ve kullanıcı dilerse "Wide mode"u kapatıp
+# tekrar "Centered" moda geçebilir (bu tercih tarayıcıda saklanır).
 st.set_page_config(
     page_title="Huginn — Company Master Dashboard",
     page_icon="🏢",
+    layout="wide",
     initial_sidebar_state="expanded",
 )
 
