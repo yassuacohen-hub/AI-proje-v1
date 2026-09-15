@@ -3443,17 +3443,17 @@
     "task_id": "ADMIN-RESET-01",
     "id": "ADMIN-RESET-01",
     "baslik": "Admin e-posta dogrulamali sifre degistirme (buyer reset altyapisini admin'e uyarla)",
-    "sahip": "kilo",
+    "sahip": "roo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-15T19:25:56",
-    "bitis": null,
+    "bitis": "2026-09-15T20:20:57",
     "dosyalar": [
       "web_app.py",
       "web_dashboard/tabs/admin_auth.py",
       "tests/test_admin_reset.py"
     ],
-    "not": "",
+    "not": "Devredildi: kilo -> roo (Sahip geri bildirimi: giris/cikis mesaji + oturum ici sifre degistirme hemen lazim; roo yapar, e-posta dogrulamali kisim sonra kilo'ya geri devredilir)",
     "source": "ic",
     "from_agent": null
   },
@@ -3483,13 +3483,13 @@
     "baslik": "Review: admin sifre sifirlama scripti + .env on-dolum + app.py restore",
     "sahip": "cline",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-15T19:25:57",
     "bitis": null,
     "dosyalar": [
       "data/orchestrator/REV-ADMIN-ENV-01_bulgular_20260915_cline.md"
     ],
-    "not": "",
+    "not": "Teslim (cline): ONAY 2 kosul: rapor REV-ADMIN-ENV-01_bulgular_20260915_cline.md. B-1 prod kapisi yok HUGINN_ENV onerisi takip gorev. B-2 pre-commit-config UTF-16 LE BOM COMMITLI GUARD-ENC-01 duzeltecek. Hash birebir 120000 capraz test yesil 6 passed. app.py temiz parse OK.",
     "source": "ic",
     "from_agent": null
   },
@@ -3499,7 +3499,7 @@
     "baslik": "kodlama_denetim.py: BOM + NUL + mojibake + ast.parse guard (pre-commit)",
     "sahip": "cline",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-15T19:25:57",
     "bitis": null,
     "dosyalar": [

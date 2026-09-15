@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """FastAPI backend - Company Master Web Dashboard API (SQLite-uyumlu)."""
 
@@ -2510,6 +2510,47 @@ def api_admin_login(email: str = "", password: str = ""):
     except Exception:
         pass
     raise HTTPException(status_code=401, detail="gecersiz email veya sifre")
+
+
+@app.post("/api/admin/change-password")
+def api_admin_change_password(req: dict, request: Request, token: str = ""):
+    """ADMIN-RESET-01: Oturumdaki admin kendi sifresini degistirir (PBKDF2).
+
+    Token `?token=` veya `Authorization: Bearer` ile gelir; kullanici admin + onayli olmali.
+    """
+    if not token and request is not None:
+        auth = request.headers.get("Authorization", "")
+        if auth.startswith("Bearer "):
+            token = auth[7:].strip()
+    u = _user_from_token(token)
+    if not u or u.get("role") != "admin" or u.get("status") != "onayli":
+        raise HTTPException(status_code=403, detail="admin yetkisi gerekli")
+    old_pw = (req.get("old_password") or "").strip()
+    new_pw = (req.get("new_password") or "").strip()
+    if not old_pw or not new_pw:
+        raise HTTPException(status_code=400, detail="mevcut ve yeni sifre zorunlu")
+    if len(new_pw) < 8:
+        raise HTTPException(status_code=400, detail="yeni sifre en az 8 karakter olmali")
+    if old_pw == new_pw:
+        raise HTTPException(status_code=400, detail="yeni sifre eskisiyle ayni olamaz")
+    engine = get_engine()
+    with engine.connect() as conn:
+        row = conn.execute(
+            text("SELECT password_hash FROM users WHERE user_id = :u"),
+            {"u": u["user_id"]},
+        ).mappings().first()
+    if not row or not _verify_password(old_pw, row["password_hash"] or ""):
+        raise HTTPException(status_code=401, detail="mevcut sifre hatali")
+    with engine.begin() as conn:
+        conn.execute(
+            text(
+                "UPDATE users SET password_hash = :p, updated_at = CURRENT_TIMESTAMP "
+                "WHERE user_id = :u"
+            ),
+            {"p": _hash_password(new_pw), "u": u["user_id"]},
+        )
+    return {"ok": True, "message": "sifre guncellendi", "email": u["email"]}
+
 
 @admin_cache(ttl=60)
 @app.get("/api/admin/pending")

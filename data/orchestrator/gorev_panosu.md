@@ -15,10 +15,9 @@
 | REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar) | cline | P2 | blocked | data/orchestrator/REV-UI-SIDEBAR-02_bulgular_2026-09-15_cline.md |
 | P7-6b | Kariyer.net scraper saglamlastirma (MVP sonrasi) | kilo | P2 | aktif | src/company_master/scrapers/kariyernet.py, tests/test_kariyernet.py |
 | MVP-KUL-02 | Kullanici onayinda tier secici (K-1 bulgusu) | kilo | P2 | plan | web_dashboard/tabs/admin_extras.py, tests/test_admin_extras_kullanici.py |
-| ADMIN-RESET-01 | Admin e-posta dogrulamali sifre degistirme (buyer reset altyapisini admin'e uyarla) | kilo | P2 | plan | web_app.py, web_dashboard/tabs/admin_auth.py, tests/test_admin_reset.py |
 | UI-CHART-01 | Havali KPI kartlari ve grafikler (Ana Kontrol + Yonetim) | kilo | P1 | plan | web_dashboard/tabs/ana_kontrol.py, web_dashboard/tabs/admin_kpi.py, web_dashboard/charts.py |
-| REV-ADMIN-ENV-01 | Review: admin sifre sifirlama scripti + .env on-dolum + app.py restore | cline | P1 | plan | data/orchestrator/REV-ADMIN-ENV-01_bulgular_20260915_cline.md |
-| GUARD-ENC-01 | kodlama_denetim.py: BOM + NUL + mojibake + ast.parse guard (pre-commit) | cline | P2 | plan | scripts/kodlama_denetim.py, tests/test_kodlama_denetim.py, .pre-commit-config.yaml |
+| REV-ADMIN-ENV-01 | Review: admin sifre sifirlama scripti + .env on-dolum + app.py restore | cline | P1 | review | data/orchestrator/REV-ADMIN-ENV-01_bulgular_20260915_cline.md |
+| GUARD-ENC-01 | kodlama_denetim.py: BOM + NUL + mojibake + ast.parse guard (pre-commit) | cline | P2 | aktif | scripts/kodlama_denetim.py, tests/test_kodlama_denetim.py, .pre-commit-config.yaml |
 
 ## Tamamlananlar
 
@@ -229,3 +228,4 @@
 | FIX-YONETIM-01 | Yonetim bolumu to_excel hatasi + sekme rehberi metinleri (sahip bulgusu) | roo | 2026-09-15T18:51:04 |
 | UI-REFRESH-01 | Otomatik Yenileme bloğu: dev buton/metric responsive + st.auto_refresh cokme fix | roo | 2026-09-15T19:09:59 |
 | ADMIN-ENV-01 | Admin sifre sifirlama scripti + .env on-dolum (roo) | roo | 2026-09-15T19:25:56 |
+| ADMIN-RESET-01 | Admin e-posta dogrulamali sifre degistirme (buyer reset altyapisini admin'e uyarla) | roo | 2026-09-15T20:20:57 |

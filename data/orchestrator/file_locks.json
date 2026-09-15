@@ -1,1 +1,67 @@
-{}
+{
+  "src/company_master/scrapers/kariyernet.py": {
+    "sahip": "kilo",
+    "task_id": "P7-6b",
+    "kilitlendi": "2026-09-15T18:29:40"
+  },
+  "tests/test_kariyernet.py": {
+    "sahip": "kilo",
+    "task_id": "P7-6b",
+    "kilitlendi": "2026-09-15T18:29:40"
+  },
+  "web_dashboard/tabs/admin_extras.py": {
+    "sahip": "kilo",
+    "task_id": "MVP-KUL-02",
+    "kilitlendi": "2026-09-15T18:30:27"
+  },
+  "tests/test_admin_extras_kullanici.py": {
+    "sahip": "kilo",
+    "task_id": "MVP-KUL-02",
+    "kilitlendi": "2026-09-15T18:30:27"
+  },
+  "web_dashboard/tabs/ana_kontrol.py": {
+    "sahip": "kilo",
+    "task_id": "UI-CHART-01",
+    "kilitlendi": "2026-09-15T19:25:56"
+  },
+  "web_dashboard/tabs/admin_kpi.py": {
+    "sahip": "kilo",
+    "task_id": "UI-CHART-01",
+    "kilitlendi": "2026-09-15T19:25:56"
+  },
+  "web_dashboard/charts.py": {
+    "sahip": "kilo",
+    "task_id": "UI-CHART-01",
+    "kilitlendi": "2026-09-15T19:25:56"
+  },
+  "tests/test_charts.py": {
+    "sahip": "kilo",
+    "task_id": "UI-CHART-01",
+    "kilitlendi": "2026-09-15T19:25:56"
+  },
+  "docs/plans/UI-CHART-01_arastirma.md": {
+    "sahip": "kilo",
+    "task_id": "UI-CHART-01",
+    "kilitlendi": "2026-09-15T19:25:56"
+  },
+  "data/orchestrator/REV-ADMIN-ENV-01_bulgular_20260915_cline.md": {
+    "sahip": "cline",
+    "task_id": "REV-ADMIN-ENV-01",
+    "kilitlendi": "2026-09-15T19:25:57"
+  },
+  "scripts/kodlama_denetim.py": {
+    "sahip": "cline",
+    "task_id": "GUARD-ENC-01",
+    "kilitlendi": "2026-09-15T19:25:57"
+  },
+  "tests/test_kodlama_denetim.py": {
+    "sahip": "cline",
+    "task_id": "GUARD-ENC-01",
+    "kilitlendi": "2026-09-15T19:25:57"
+  },
+  ".pre-commit-config.yaml": {
+    "sahip": "cline",
+    "task_id": "GUARD-ENC-01",
+    "kilitlendi": "2026-09-15T19:25:57"
+  }
+}

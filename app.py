@@ -260,17 +260,28 @@ def render_yonetim_bilesik() -> None:
     ekranları burada alt sekme olarak birleştirilir.
     """
     from web_dashboard.tabs.admin_api_analytics import render_api_analytics_tab
-    from web_dashboard.tabs.admin_auth import render_admin_login
+    from web_dashboard.tabs.admin_auth import (
+        flash_goster,
+        render_admin_cikis,
+        render_admin_login,
+        render_sifre_degistir,
+    )
     from web_dashboard.tabs.admin_cost import render_cost_tab
     from web_dashboard.tabs.admin_errors import render_errors_tab
     from web_dashboard.tabs.admin_kpi import render_kpi_tab
     from web_dashboard.tabs.admin_quality import render_quality_tab
     from web_dashboard.tabs.admin_yonetim import render_yonetim_tab
 
+    # ADMIN-RESET-01: giriş/çıkış sonrası tek seferlik başarı mesajı (rerun'a dayanıklı)
+    flash_goster()
     if not st.session_state.get("admin_token"):
         st.warning("🔐 Yönetim işlemleri için admin girişi gerekir.")
         render_admin_login()
         st.divider()
+    else:
+        render_admin_cikis()
+        with st.expander("🔑 Şifre değiştir", expanded=False):
+            render_sifre_degistir()
 
     sekmeler = st.tabs(
         [
