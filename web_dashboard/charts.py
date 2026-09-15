@@ -131,6 +131,17 @@ def _hex_rgba(hex_renk: str, alfa: float) -> str:
     return f"rgba({r},{g},{b},{alfa})"
 
 
+def kpi_stil_css(tema: str | None = "karanlik") -> str:
+    """KPI-EXA-01: Kart hover/odak stili — sayfada bir kez basılır (Exa tarzı: yalnız çerçeve koyulaşır)."""
+    palet = tema_paleti(tema)
+    return (
+        "<style>"
+        f".hg-kpi{{transition:border-color .15s ease}}"
+        f".hg-kpi:hover{{border-color:{palet['text-muted']}}}"
+        "</style>"
+    )
+
+
 def kpi_karti_html(
     baslik: str,
     deger: Any,
@@ -142,7 +153,13 @@ def kpi_karti_html(
     ondalik: int = 0,
     birim: str = "",
 ) -> str:
-    """Gradient KPI kartının HTML'ini üretir (Streamlit'siz, XSS güvenli)."""
+    """Sade (Exa/developer) KPI kartı HTML'i — Streamlit'siz, XSS güvenli.
+
+    KPI-EXA-01 tasarım sözleşmesi (sahip talebi, 2026-09-15):
+    düz yüzey, **1px ince çerçeve**, 10px köşe, gradient/gölge/kalın sol şerit **yok**;
+    küçük gri büyük-harf etiket → büyük değer → tek satır delta.
+    Kategori rengi yalnızca etiket önündeki 6px noktada kullanılır (tek renk vurgu).
+    """
     palet = tema_paleti(tema)
     renk = kategori_rengi(kategori, tema)
     yon = delta_yonu(delta)
@@ -156,23 +173,70 @@ def kpi_karti_html(
     if delta is not None and delta != "":
         delta_metin = delta if isinstance(delta, str) else sayi_formatla(abs(delta), ondalik)
         delta_html = (
-            f'<div class="hg-kpi-delta" style="color:{delta_renk}">'
+            f'<div class="hg-kpi-delta" style="color:{delta_renk};font-size:0.8rem;'
+            f'margin-top:6px;font-variant-numeric:tabular-nums;">'
             f"{ok} {html.escape(str(delta_metin))}</div>"
         )
     yardim_attr = f' title="{html.escape(yardim)}"' if yardim else ""
     deger_metin = html.escape(sayi_formatla(deger, ondalik, birim))
+    ikon_html = f"<span style=\"opacity:.85;margin-right:4px;\">{html.escape(ikon)}</span>" if ikon else ""
     return (
         f'<div class="hg-kpi" {yardim_attr} style="'
-        f"background:linear-gradient(135deg,{_hex_rgba(renk, 0.22)} 0%,{palet['surface']} 65%);"
-        f"border:1px solid {palet['border']};border-left:4px solid {renk};"
-        f"border-radius:14px;padding:14px 16px 10px 16px;min-height:96px;"
-        f"box-shadow:0 4px 14px {_hex_rgba(renk, 0.12)};\">"
-        f'<div class="hg-kpi-baslik" style="color:{palet["text-muted"]};font-size:0.78rem;'
-        f'letter-spacing:.04em;text-transform:uppercase;">{html.escape(ikon)} {html.escape(baslik)}</div>'
-        f'<div class="hg-kpi-deger" style="color:{palet["text"]};font-size:1.7rem;'
-        f'font-weight:700;line-height:1.2;margin-top:4px;">{deger_metin}</div>'
+        f"background:{palet['surface']};"
+        f"border:1px solid {palet['border']};border-radius:10px;"
+        f'padding:14px 16px;min-height:92px;">'
+        f'<div class="hg-kpi-baslik" style="display:flex;align-items:center;gap:6px;'
+        f'color:{palet["text-muted"]};font-size:0.72rem;font-weight:500;'
+        f'letter-spacing:.06em;text-transform:uppercase;">'
+        f'<span style="flex:0 0 6px;height:6px;border-radius:50%;background:{renk};"></span>'
+        f"{ikon_html}{html.escape(baslik)}</div>"
+        f'<div class="hg-kpi-deger" style="color:{palet["text"]};font-size:1.65rem;'
+        f'font-weight:600;line-height:1.25;margin-top:6px;letter-spacing:-.01em;'
+        f'font-variant-numeric:tabular-nums;">{deger_metin}</div>'
         f"{delta_html}</div>"
     )
+
+
+# ---------------------------------------------------------------------------
+# Süreç / veri akışı diyagramı (Graphviz DOT, Streamlit'siz)
+# ---------------------------------------------------------------------------
+
+VERI_AKISI_VARSAYILAN: tuple[tuple[str, str, str], ...] = (
+    ("kaynak", "Kaynaklar", "OSB · Kariyer · Web"),
+    ("etl", "ETL", "Temizleme · Eşleştirme"),
+    ("db", "Veritabanı", "PostgreSQL"),
+    ("api", "API :8000", "Huginn · FastAPI"),
+    ("panel", "Panel :8501", "Muninn · Streamlit"),
+)
+
+
+def veri_akisi_dot(
+    tema: str | None = "karanlik",
+    dugumler: tuple[tuple[str, str, str], ...] = VERI_AKISI_VARSAYILAN,
+    vurgu: str | None = None,
+) -> str:
+    """KPI-EXA-01: Sade süreç diyagramı (Kaynaklar → ETL → DB → API → Panel).
+
+    Exa/developer tarzı: 1px çerçeve, dolgu yok, gölge yok; yalnız ``vurgu``
+    düğümünün çerçevesi marka rengiyle çizilir. Graphviz DOT metni döner.
+    """
+    palet = tema_paleti(tema)
+    marka = kategori_rengi("marka", tema)
+    satirlar = [
+        "digraph veri_akisi {",
+        "rankdir=LR; bgcolor=\"transparent\"; nodesep=0.35; ranksep=0.55; pad=0.1;",
+        f'node [shape=box, style="rounded", penwidth=1, color="{palet["border"]}",'
+        f' fontcolor="{palet["text"]}", fontname="Inter,Segoe UI,Arial", fontsize=11, margin="0.18,0.10"];',
+        f'edge [color="{palet["text-muted"]}", penwidth=1, arrowsize=0.6];',
+    ]
+    for kimlik, ad, alt in dugumler:
+        renk = marka if kimlik == vurgu else palet["border"]
+        etiket = html.escape(ad) + (f"\\n{html.escape(alt)}" if alt else "")
+        satirlar.append(f'{kimlik} [label="{etiket}", color="{renk}"];')
+    zincir = " -> ".join(k for k, _, _ in dugumler)
+    satirlar.append(f"{zincir};")
+    satirlar.append("}")
+    return "\n".join(satirlar)
 
 
 # ---------------------------------------------------------------------------
@@ -335,7 +399,7 @@ def kpi_karti(
     aciklama: str | None = None,
     anahtar: str | None = None,
 ) -> None:
-    """Gradient KPI kartı + isteğe bağlı sparkline çizer (Streamlit).
+    """Sade KPI kartı + isteğe bağlı sparkline çizer (Streamlit).
 
     ``anahtar``: aynı sayfada aynı başlık iki kez kullanılırsa sparkline
     widget anahtarı çakışmasın diye verilir (varsayılan: ``spark-{baslik}``).
@@ -343,6 +407,9 @@ def kpi_karti(
     import streamlit as st
 
     tema = aktif_tema()
+    if not st.session_state.get("_hg_kpi_css"):
+        st.markdown(kpi_stil_css(tema), unsafe_allow_html=True)
+        st.session_state["_hg_kpi_css"] = True
     st.markdown(
         kpi_karti_html(baslik, deger, delta, ikon, kategori, tema, yardim, ondalik, birim),
         unsafe_allow_html=True,
@@ -412,7 +479,21 @@ def alan_grafigi(
         st.area_chart(df.set_index(x)[y], width="stretch")
 
 
+def veri_akisi(vurgu: str | None = None, dugumler=VERI_AKISI_VARSAYILAN) -> None:
+    """Süreç diyagramını çizer (``st.graphviz_chart``); graphviz yoksa metin zinciri."""
+    import streamlit as st
+
+    try:
+        st.graphviz_chart(veri_akisi_dot(aktif_tema(), dugumler, vurgu), width="stretch")
+    except Exception:  # noqa: BLE001 — graphviz eksik/uyumsuz sürüm
+        st.code(" → ".join(ad for _, ad, _ in dugumler), language=None)
+
+
 __all__ = [
+    "VERI_AKISI_VARSAYILAN",
+    "veri_akisi_dot",
+    "veri_akisi",
+    "kpi_stil_css",
     "KATEGORI_RENK",
     "sayi_formatla",
     "delta_yonu",

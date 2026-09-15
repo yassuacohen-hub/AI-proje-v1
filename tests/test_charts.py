@@ -28,13 +28,55 @@ from web_dashboard.charts import (  # noqa: E402
     donut_fig,
     kategori_rengi,
     kpi_karti_html,
+    kpi_stil_css,
     sayi_formatla,
     sparkline_fig,
     tema_normalize,
     tema_paleti,
+    veri_akisi_dot,
 )
 
 plotly = pytest.importorskip("plotly")
+
+
+# ---------------------------------------------------------------------------
+# KPI-EXA-01: sade kart CSS + süreç diyagramı (DOT)
+# ---------------------------------------------------------------------------
+
+def test_kpi_stil_css_sadece_cerceve_hover():
+    css = kpi_stil_css("karanlik")
+    assert ".hg-kpi:hover{border-color:" in css
+    assert "box-shadow" not in css and "transform" not in css
+
+
+def test_veri_akisi_dot_zincir_ve_tema():
+    palet = tema_paleti("karanlik")
+    dot = veri_akisi_dot("karanlik")
+    assert dot.startswith("digraph") and "rankdir=LR" in dot
+    assert "kaynak -> etl -> db -> api -> panel;" in dot
+    assert f'color="{palet["border"]}"' in dot and 'bgcolor="transparent"' in dot
+    assert "penwidth=1" in dot and "fillcolor" not in dot  # dolgu yok, 1px çizgi
+
+
+def test_veri_akisi_dot_vurgu_marka_rengi():
+    dot = veri_akisi_dot("karanlik", vurgu="db")
+    marka = kategori_rengi("marka", "karanlik")
+    assert f'db [label="Veritabanı\\nPostgreSQL", color="{marka}"]' in dot
+    assert f'api [label="API :8000\\nHuginn · FastAPI", color="{marka}"]' not in dot
+
+
+def test_veri_akisi_streamlit_fallback(sahte_st):
+    sahte_st.graphviz_chart.side_effect = RuntimeError("graphviz yok")
+    charts.veri_akisi()
+    sahte_st.code.assert_called_once()
+    assert "Kaynaklar → ETL → Veritabanı" in sahte_st.code.call_args.args[0]
+
+
+def test_veri_akisi_streamlit_graphviz_cizer(sahte_st):
+    charts.veri_akisi(vurgu="db")
+    sahte_st.graphviz_chart.assert_called_once()
+    assert "digraph" in sahte_st.graphviz_chart.call_args.args[0]
+    sahte_st.code.assert_not_called()
 
 
 # ---------------------------------------------------------------------------
@@ -131,7 +173,9 @@ def test_kpi_karti_html_kategori_ve_tema():
     sistem = kpi_karti_html("A", 1, kategori="sistem", tema="aydinlik")
     assert palet_k["metric-customer"] in musteri and palet_k["surface"] in musteri
     assert palet_a["metric-system"] in sistem and palet_a["surface"] in sistem
-    assert "linear-gradient" in musteri
+    # KPI-EXA-01: sade kart — gradient/gölge/kalın sol şerit yok, 1px çerçeve var
+    assert "linear-gradient" not in musteri and "box-shadow" not in musteri
+    assert "border-left" not in musteri and f"border:1px solid {palet_k['border']}" in musteri
     assert "1.234.567" in kpi_karti_html("A", 1234567)
     assert "—" in kpi_karti_html("A", None)
 

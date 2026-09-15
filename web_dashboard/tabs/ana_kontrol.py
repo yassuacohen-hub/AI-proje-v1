@@ -37,7 +37,7 @@ from scripts.dash04_api_client import get_api, APIError  # noqa: E402
 
 from company_master.i18n import t  # noqa: E402
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
-from web_dashboard.charts import donut, kpi_karti  # noqa: E402  (UI-CHART-01)
+from web_dashboard.charts import donut, kpi_karti, veri_akisi  # noqa: E402  (UI-CHART-01, KPI-EXA-01)
 
 
 @st.cache_data(ttl=30)
@@ -85,14 +85,20 @@ def _get_metric_color(category: str) -> str:
 #: hem de gövde aynı listeyi kullanır, böylece anchor'lar asla kaymaz.
 BOLUMLER: tuple[Section, ...] = (
     Section(
+        "Veri Akışı",
+        "Verinin kaynaktan panele izlediği yol; sorun hangi halkada, tek bakışta.",
+        ikon="🔗",
+        kimlik="veri-akisi",
+    ),
+    Section(
         "Müşteri Metrikleri",
-        "Mavi kartlar — kullanıcı ve işletme faaliyeti.",
+        "Kullanıcı ve işletme faaliyeti (mavi nokta).",
         ikon="👥",
         kimlik="musteri-metrikleri",
     ),
     Section(
         "Sistem Metrikleri",
-        "Turuncu kartlar — altyapı sağlığı.",
+        "Altyapı sağlığı (gri nokta).",
         ikon="🔧",
         kimlik="sistem-metrikleri",
     ),
@@ -162,7 +168,7 @@ def render_ana_kontrol_tab() -> None:
             "**Bu ekran ne işe yarar?** Müşteri tarafı (kayıt, onay, kredi) ve sistem tarafı "
             "(firma sayısı, kalite skoru, görev durumu) metriklerini tek bakışta gösterir. "
             "Güne başlarken \"her şey yolunda mı?\" sorusunun cevabı burada.\n\n"
-            "**Nasıl kullanılır?** Kartlar renk kodludur: mavi müşteri, gri sistem metrikleri. "
+            "**Nasıl kullanılır?** Kartların sol üstündeki nokta kategoriyi gösterir: mavi müşteri, gri sistem. "
             "Sağ üstteki **Yenile** düğmesi önbelleği temizleyip verileri anında tazeler.\n\n"
             "**Veriler nereden gelir?** `/api/kpi` ve `/metrics` uç noktaları ile "
             "webhook izleme kayıtları.\n\n"
@@ -178,7 +184,11 @@ def render_ana_kontrol_tab() -> None:
         kpi = load_kpi_data()
         webhook = load_webhook_stats()
 
-    # --- K4: Müşteri Metrikleri (Mavi) ---
+    # --- KPI-EXA-01: Süreç diyagramı (Kaynaklar → ETL → DB → API → Panel) ---
+    _bolum("veri-akisi").render()
+    veri_akisi(vurgu="db" if webhook.get("dlq_toplam", 0) > 0 else None)
+
+    # --- K4: Müşteri Metrikleri ---
     _bolum("musteri-metrikleri").render()
 
     if kpi:
