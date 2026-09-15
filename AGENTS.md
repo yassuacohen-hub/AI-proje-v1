@@ -151,6 +151,13 @@ Projeye ait **her şey** yalnızca `C:\Huginn Data Projesi\Huginn Data Insights`
 5. **Denetim:** Orkestratör her oturum başında üst dizini kontrol eder (`python scripts/proje_siniri_denetim.py` hazır olana dek elle `dir ..`); `.pytest_cache` gibi araç kalıntıları dışında projeye ait öğe kalmaz.
 6. **Ürün Sahibi notu (aynen):** *"Dizinin dışında projeye ait hiçbir şey görmek istemiyorum."*
 
+## Streamlit Yeniden Başlatma Kuralı (2026-09-15, Ürün Sahibi emri) — ZORUNLU
+
+- `.streamlit/config.toml` → `fileWatcherType = "none"`: kod değişikliği **otomatik yüklenmez**.
+- UI/dashboard dosyasına (`app.py`, `web_dashboard/**`, `src/company_master/ui/**`, `.streamlit/**`) dokunan her ajan, teslimden önce sunucuyu **kendisi** yeniden başlatır: `python scripts/streamlit_restart.py` (durum: `--durum`, kapat: `--durdur`).
+- Ürün Sahibi yalnızca tarayıcıda **F5** çeker; ondan terminal kapatıp açması istenmez.
+- Script: portu dinleyen süreci öldürür, `.venv` python'u ile 8501'de yeniden başlatır, `/_stcore/health` "ok" dönene dek bekler; log `logs/streamlit_8501.log`.
+
 ## VPN Kullanım Kuralı (2026-09-01)
 
 - Kullanıcı VPN kullanmaktadır; gelecekte bazı ağ işlemleri (API istekleri, web scraping, kurumsal erişim) VPN kaynaklı hata verebilir.
