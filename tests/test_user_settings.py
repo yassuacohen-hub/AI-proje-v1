@@ -307,11 +307,16 @@ def test_panel_ayar_hatasini_yakalar():
 
 
 def test_panel_formu_sema_uzerinden_uretir():
-    """Elle yazılmış selectbox/checkbox yığını yerine döngü kullanılmalı."""
+    """Elle yazılmış selectbox/checkbox yığını yerine döngü kullanılmalı.
+
+    Sayım yalnızca ayarlar bölgesiyle (``_form_degeri`` → dosya sonu) sınırlıdır;
+    Karar Defteri filtreleri (MVP-KD-01) aynı dosyada meşru selectbox kullanır.
+    """
     kaynak = _panel_kaynak()
-    assert "for tanim in grup_haritasi[" in kaynak
-    assert kaynak.count("st.selectbox(") <= 1
-    assert kaynak.count("st.checkbox(") <= 1
+    bolge = kaynak[kaynak.index("def _form_degeri("):]
+    assert "for tanim in grup_haritasi[" in bolge
+    assert bolge.count("st.selectbox(") <= 1
+    assert bolge.count("st.checkbox(") <= 1
 
 
 def test_panel_misafir_kimligi_tanimli():
