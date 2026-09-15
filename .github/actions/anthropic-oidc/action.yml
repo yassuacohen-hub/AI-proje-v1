@@ -1,0 +1,46 @@
+name: Anthropic OIDC kurulumu
+description: >-
+  Python + anthropic SDK kurar, GitHub OIDC JWT alır (Workload Identity) ve
+  Anthropic kimlik bilgilerini GITHUB_ENV'e yazar. PR review ve CI hata açıklama
+  workflow'ları aynı adımı paylaşır (tekrar yok).
+
+inputs:
+  python-version:
+    description: Python sürümü
+    required: false
+    default: "3.11"
+  model:
+    description: Kullanılacak Claude modeli
+    required: false
+    default: claude-sonnet-4-6
+
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Anthropic SDK
+      shell: bash
+      run: python -m pip install --quiet --upgrade pip anthropic
+
+    - name: GitHub OIDC JWT + Anthropic kimlik bilgileri
+      shell: bash
+      env:
+        OIDC_AUDIENCE: https://api.anthropic.com
+      run: |
+        set -euo pipefail
+        jwt="$(curl --fail-with-body --silent --show-error \
+          -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" \
+          "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=${OIDC_AUDIENCE}" \
+          | python -c "import json,sys; print(json.load(sys.stdin)['value'])")"
+        echo "::add-mask::${jwt}"
+        {
+          echo "JWT=${jwt}"
+          echo "FEDERATION_RULE_ID=fdrl_01N5WFvevBbMMtgkyDk5Vaz9"
+          echo "ANTHROPIC_ORGANIZATION_ID=53bd18d7-d3ec-4b1d-9e88-c8780d063fad"
+          echo "ANTHROPIC_SERVICE_ACCOUNT_ID=svac_01H1w3PoJsnsbAPt2kSW8NXL"
+          echo "ANTHROPIC_WORKSPACE_ID=wrkspc_013LPgw97ZUzYnJHKxjuj3X8"
+          echo "ANTHROPIC_MODEL=${{ inputs.model }}"
+        } >> "${GITHUB_ENV}"

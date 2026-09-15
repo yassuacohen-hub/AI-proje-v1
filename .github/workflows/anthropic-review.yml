@@ -1,0 +1,41 @@
+name: Anthropic PR Review
+
+# Öneri #1 (hemen): PR açılınca/güncellenince Claude diff'i inceler, tek yorumu günceller.
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    paths-ignore:
+      - "**/*.md"
+      - "docs/**"
+      - "AI proje v1/**"
+      - "data/**"
+
+# Aynı PR'a arka arkaya push gelirse eski inceleme iptal edilir (token tasarrufu).
+concurrency:
+  group: anthropic-review-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+
+jobs:
+  review:
+    name: Review pull request with Claude
+    # Fork PR'larında OIDC yok; taslak PR'larda inceleme yapılmaz.
+    if: github.event.pull_request.head.repo.full_name == github.repository && !github.event.pull_request.draft
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/anthropic-oidc
+
+      - name: Run Anthropic review
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: python scripts/anthropic_pr_review.py --mode pr
