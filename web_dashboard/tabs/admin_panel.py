@@ -148,7 +148,7 @@ def render_decision_tab(decisions: list[dict[str, Any]] | None = None) -> None:
     st.caption("Toplam " + str(len(filtrelenmis)) + " karar kaydi gosterniliyor (son 50).")
 
     # ---- Yeni Karar ----
-    Section("Yeni Karar", "Yeni bir karar kaydÄ± ekleyin.", ikon="â•").render()
+    Section("Yeni Karar", "Yeni bir karar kaydı ekleyin.", ikon="➕").render()
 
     with st.form("yeni_karar"):
         baslik = st.text_input("Başlık")
@@ -248,11 +248,11 @@ def render_ayarlar_tab(kullanici_id: str | None = None) -> None:
         kullanici_id = aktif_kullanici()
 
     PageHeader("Kullanıcı Ayarları", giris=GIRIS_METNI,
-               ust_etiket="Sistem Â· Ayarlar", ikon="âš™ï¸").render()
+               ust_etiket="Sistem · Ayarlar", ikon="⚙️").render()
 
     col_rehber, col_kimlik = st.columns([1, 3], vertical_alignment="center")
     with col_rehber:
-        rehber = st.toggle("â„¹ï¸ Sekme rehberi", key="ayarlar_rehber",
+        rehber = st.toggle("ℹ️ Sekme rehberi", key="ayarlar_rehber",
                            help="Bu ekranın amacını, veri kaynağını ve kısıtlarını gösterir.")
     with col_kimlik:
         st.caption(
