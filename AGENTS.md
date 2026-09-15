@@ -158,6 +158,13 @@ Projeye ait **her şey** yalnızca `C:\Huginn Data Projesi\Huginn Data Insights`
 - Ürün Sahibi yalnızca tarayıcıda **F5** çeker; ondan terminal kapatıp açması istenmez.
 - Script: portu dinleyen süreci öldürür, `.venv` python'u ile 8501'de yeniden başlatır, `/_stcore/health` "ok" dönene dek bekler; log `logs/streamlit_8501.log`.
 
+## FastAPI (8000) Yeniden Başlatma Kuralı (2026-09-15, roo bulgusu) — ZORUNLU
+
+- 8000 portu **Docker** container'ında (`huginndatainsights-api-1`, `docker-compose.yml` → `api`) dinler; `web_app.py` imaja **kopyalanır**, volume olarak bağlı değildir.
+- `scripts/servisleri_baslat.py durdur/baslat --servis web` yalnızca yerel nöbetçiyi (watchdog) yönetir, container'a dokunmaz → yeni endpoint **canlıya çıkmaz** (belirti: `/api/health` ok ama yeni yol 404).
+- `web_app.py` veya `src/**` (API tarafı) değişince: `docker compose up -d --build api` çalıştır, ardından yeni endpoint'i `curl` ile doğrula (404 dışı kod bekle).
+- Yerel watchdog + Docker aynı anda çalışıyorsa port çakışması riski vardır; teslim özetinde hangisinin hizmet verdiğini yaz.
+
 ## VPN Kullanım Kuralı (2026-09-01)
 
 - Kullanıcı VPN kullanmaktadır; gelecekte bazı ağ işlemleri (API istekleri, web scraping, kurumsal erişim) VPN kaynaklı hata verebilir.
