@@ -11,9 +11,13 @@
 | WK-01 | Career Pages Scraper — Enhanced Data Extraction | - | P1 | plan | - |
 | WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | plan | - |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | plan | - |
-| UI-SIDEBAR-02 | Sidebar: marka blogu uste, logo, kompakt tooltip | kilo | P2 | plan | app.py |
-| UI-TOPBAR-02 | Topbar: arama sag ust, breadcrumb ayrac, Bu sayfada ayiraci | kilo | P2 | plan | app.py |
-| REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar) | cline | P2 | aktif | data/orchestrator/REV-UI-SIDEBAR-02_bulgular_2026-09-15_cline.md |
+| UI-SIDEBAR-02 | Sidebar: marka blogu uste, logo, kompakt tooltip | kilo | P2 | blocked | app.py |
+| UI-TOPBAR-02 | Topbar: arama sag ust, breadcrumb ayrac, Bu sayfada ayiraci | kilo | P2 | blocked | app.py |
+| REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar) | cline | P2 | blocked | data/orchestrator/REV-UI-SIDEBAR-02_bulgular_2026-09-15_cline.md |
+| MVP-KD-01 | MVP Karar Defteri ekrani: PageHeader + filtre + yeni karar formu | kilo | P1 | plan | web_dashboard/tabs/admin_panel.py, tests/test_admin_panel_karar_defteri.py |
+| MVP-KUL-01 | MVP Kullanici Yonetimi ekrani: PageHeader + onayla + kredi formu | kilo | P1 | plan | web_dashboard/tabs/admin_extras.py, tests/test_admin_extras_kullanici.py |
+| REV-MVP-KD-01 | Review: MVP-KD-01 Karar Defteri ekrani | cline | P1 | plan | - |
+| REV-MVP-KUL-01 | Review: MVP-KUL-01 Kullanici Yonetimi ekrani | cline | P1 | plan | - |
 
 ## Tamamlananlar
 

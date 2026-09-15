@@ -3144,15 +3144,16 @@
     "baslik": "Sidebar: marka blogu uste, logo, kompakt tooltip",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "blocked",
     "baslangic": "2026-09-15T15:01:51",
-    "bitis": null,
+    "bitis": "2026-09-15T15:56:09",
     "dosyalar": [
       "app.py"
     ],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "not_": "MVP-ADMIN: sahip emri ile ertelendi (once 4 ekran canliya cikacak: ana_kontrol, kpi, karar_defteri, kullanicilar)"
   },
   {
     "task_id": "UI-TOPBAR-02",
@@ -3160,15 +3161,16 @@
     "baslik": "Topbar: arama sag ust, breadcrumb ayrac, Bu sayfada ayiraci",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "blocked",
     "baslangic": "2026-09-15T15:03:03",
-    "bitis": null,
+    "bitis": "2026-09-15T15:56:09",
     "dosyalar": [
       "app.py"
     ],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "not_": "MVP-ADMIN: sahip emri ile ertelendi (once 4 ekran canliya cikacak: ana_kontrol, kpi, karar_defteri, kullanicilar)"
   },
   {
     "task_id": "REV-I18N-SES-02",
@@ -3208,12 +3210,75 @@
     "baslik": "Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar)",
     "sahip": "cline",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "blocked",
     "baslangic": "2026-09-15T15:15:17",
-    "bitis": null,
+    "bitis": "2026-09-15T15:56:09",
     "dosyalar": [
       "data/orchestrator/REV-UI-SIDEBAR-02_bulgular_2026-09-15_cline.md"
     ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "not_": "MVP-ADMIN: sahip emri ile ertelendi (once 4 ekran canliya cikacak: ana_kontrol, kpi, karar_defteri, kullanicilar)"
+  },
+  {
+    "task_id": "MVP-KD-01",
+    "id": "MVP-KD-01",
+    "baslik": "MVP Karar Defteri ekrani: PageHeader + filtre + yeni karar formu",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-15T15:54:47",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_panel.py",
+      "tests/test_admin_panel_karar_defteri.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "MVP-KUL-01",
+    "id": "MVP-KUL-01",
+    "baslik": "MVP Kullanici Yonetimi ekrani: PageHeader + onayla + kredi formu",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-15T15:55:11",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_extras.py",
+      "tests/test_admin_extras_kullanici.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "REV-MVP-KD-01",
+    "id": "REV-MVP-KD-01",
+    "baslik": "Review: MVP-KD-01 Karar Defteri ekrani",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-15T15:55:11",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "REV-MVP-KUL-01",
+    "id": "REV-MVP-KUL-01",
+    "baslik": "Review: MVP-KUL-01 Kullanici Yonetimi ekrani",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-15T15:55:11",
+    "bitis": null,
+    "dosyalar": [],
     "not": "",
     "source": "ic",
     "from_agent": null

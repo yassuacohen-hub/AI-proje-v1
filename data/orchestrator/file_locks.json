@@ -1,7 +1,22 @@
 {
-  "app.py": {
+  "web_dashboard/tabs/admin_panel.py": {
     "sahip": "kilo",
-    "task_id": "UI-TOPBAR-02",
-    "kilitlendi": "2026-09-15T15:03:03"
+    "task_id": "MVP-KD-01",
+    "kilitlendi": "2026-09-15T15:54:47"
+  },
+  "tests/test_admin_panel_karar_defteri.py": {
+    "sahip": "kilo",
+    "task_id": "MVP-KD-01",
+    "kilitlendi": "2026-09-15T15:54:47"
+  },
+  "web_dashboard/tabs/admin_extras.py": {
+    "sahip": "kilo",
+    "task_id": "MVP-KUL-01",
+    "kilitlendi": "2026-09-15T15:55:11"
+  },
+  "tests/test_admin_extras_kullanici.py": {
+    "sahip": "kilo",
+    "task_id": "MVP-KUL-01",
+    "kilitlendi": "2026-09-15T15:55:11"
   }
 }

@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-15T15:38:28
+> Son guncelleme: 2026-09-15T15:56:09
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -11,9 +11,13 @@
 | WK-01 | Career Pages Scraper — Enhanced Data Ext | - | P1 | plan |
 | WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | plan |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | plan |
-| UI-SIDEBAR-02 | Sidebar: marka blogu uste, logo, kompakt | kilo | P2 | plan |
-| UI-TOPBAR-02 | Topbar: arama sag ust, breadcrumb ayrac, | kilo | P2 | plan |
-| REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo tesl | cline | P2 | aktif |
+| UI-SIDEBAR-02 | Sidebar: marka blogu uste, logo, kompakt | kilo | P2 | blocked |
+| UI-TOPBAR-02 | Topbar: arama sag ust, breadcrumb ayrac, | kilo | P2 | blocked |
+| REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo tesl | cline | P2 | blocked |
+| MVP-KD-01 | MVP Karar Defteri ekrani: PageHeader + f | kilo | P1 | plan |
+| MVP-KUL-01 | MVP Kullanici Yonetimi ekrani: PageHeade | kilo | P1 | plan |
+| REV-MVP-KD-01 | Review: MVP-KD-01 Karar Defteri ekrani | cline | P1 | plan |
+| REV-MVP-KUL-01 | Review: MVP-KUL-01 Kullanici Yonetimi ek | cline | P1 | plan |
 
 ## Tamamlananlar (Son 10)
 
