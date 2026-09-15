@@ -1,4 +1,7 @@
-"""Admin Panel API ve Kullanici yonetimi sekmesi."""
+﻿# This script restores the original admin_extras.py from the exact content of the first read
+import sys
+
+original_content = '''"""Admin Panel API ve Kullanici yonetimi sekmesi."""
 from __future__ import annotations
 from typing import Any
 import pandas as pd
@@ -22,7 +25,7 @@ def render_api_management(token: str | None = None) -> None:
                 st.info("API kullanım kaydı yok.")
             if limits:
                 st.json(limits)
-    except APIError:
+        except APIError:
             st.warning("Lütfen giriş yapın veya yetkili olun")
 
 
@@ -46,20 +49,6 @@ def render_user_management(token: str | None = None) -> None:
                 for user in bekleyen:
                     cols = st.columns([4, 1])
                     with cols[0]:
-                        # Tier selector for approval
-                        tiers = ["terminal", "strategic", "enterprise"]
-                        default_tier = user.get("tier", "terminal")
-                        try:
-                            default_index = tiers.index(default_tier)
-                        except ValueError:
-                            default_index = 0
-                        selected_tier = st.selectbox(
-                            "Tier",
-                            options=tiers,
-                            index=default_index,
-                            key=f"tier_select_{user.get('user_id', '')}",
-                            label_visibility="collapsed"
-                        )
                         st.write(
                             f"**{user.get('email', '')}** — {user.get('company_name', '')} ({user.get('tier', '')})"
                         )
@@ -68,10 +57,10 @@ def render_user_management(token: str | None = None) -> None:
                             try:
                                 post_api(
                                     "/api/admin/approve",
-                                    json={"user_id": user.get("user_id", ""), "tier": selected_tier},
+                                    json={"user_id": user.get("user_id", ""), "tier": "terminal"},
                                     token=token,
                                 )
-                                st.success(f"{user.get('email', '')} onaylandı ({selected_tier} tier)")
+                                st.success(f"{user.get('email', '')} onaylandı")
                                 st.cache_data.clear()
                                 st.rerun()
                             except APIError as e:
@@ -113,3 +102,7 @@ def render_user_management(token: str | None = None) -> None:
                     st.error(f"Kredi yükleme başarısız: {e}")
     except APIError:
         st.warning("Lütfen giriş yapın veya yetkili olun")
+'''
+with open('web_dashboard/tabs/admin_extras.py', 'w', encoding='utf-8') as f:
+    f.write(original_content)
+print("File restored to original")

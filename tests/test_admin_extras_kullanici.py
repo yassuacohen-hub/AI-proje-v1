@@ -78,6 +78,7 @@ def test_render_user_management_approve_button(monkeypatch):
     form_ctx.__enter__ = MagicMock(return_value=form_ctx)
     form_ctx.__exit__ = MagicMock(return_value=False)
     st_mock.form = MagicMock(return_value=form_ctx)
+    st_mock.selectbox = lambda label, options, index, key=None, label_visibility="visible": options[index] if 0 <= index < len(options) else options[0]
 
     post_calls = []
 

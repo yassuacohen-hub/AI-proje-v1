@@ -1,13 +1,13 @@
-"""Admin Panel API ve Kullanici yonetimi sekmesi."""
-from __future__ import annotations
-from typing import Any
-import pandas as pd
-import streamlit as st
-from company_master.ui import PageHeader
-from scripts.dash04_api_client import get_api, APIError, post_api
+﻿# This script replaces both functions with their correct versions
+import sys
 
+def main():
+    file_path = 'web_dashboard/tabs/admin_extras.py'
+    with open(file_path, 'r', encoding='utf-8') as f:
+        content = f.read()
 
-def render_api_management(token: str | None = None) -> None:
+    # Correct api management function with proper indentation
+    correct_api = '''def render_api_management(token: str | None = None) -> None:
     if token is None:
         token = st.session_state.get("admin_token")
     st.subheader("API Yönetimi")
@@ -22,11 +22,12 @@ def render_api_management(token: str | None = None) -> None:
                 st.info("API kullanım kaydı yok.")
             if limits:
                 st.json(limits)
-    except APIError:
+        except APIError:
             st.warning("Lütfen giriş yapın veya yetkili olun")
+'''
 
-
-def render_user_management(token: str | None = None) -> None:
+    # Correct render_user_management function with the tier selector fix
+    correct_render = '''def render_user_management(token: str | None = None) -> None:
     if token is None:
         token = st.session_state.get("admin_token")
     PageHeader(
@@ -44,8 +45,12 @@ def render_user_management(token: str | None = None) -> None:
             bekleyen = pending.get("bekleyen", [])
             if bekleyen:
                 for user in bekleyen:
-                    cols = st.columns([4, 1])
+                    cols = st.columns([4, 1, 1])
                     with cols[0]:
+                        st.write(
+                            f"**{user.get('email', '')}** — {user.get('company_name', '')} ({user.get('tier', '')})"
+                        )
+                    with cols[1]:
                         # Tier selector for approval
                         tiers = ["terminal", "strategic", "enterprise"]
                         default_tier = user.get("tier", "terminal")
@@ -60,10 +65,7 @@ def render_user_management(token: str | None = None) -> None:
                             key=f"tier_select_{user.get('user_id', '')}",
                             label_visibility="collapsed"
                         )
-                        st.write(
-                            f"**{user.get('email', '')}** — {user.get('company_name', '')} ({user.get('tier', '')})"
-                        )
-                    with cols[1]:
+                    with cols[2]:
                         if st.button("Onayla", key=f"approve_{user.get('user_id', '')}"):
                             try:
                                 post_api(
@@ -113,3 +115,38 @@ def render_user_management(token: str | None = None) -> None:
                     st.error(f"Kredi yükleme başarısız: {e}")
     except APIError:
         st.warning("Lütfen giriş yapın veya yetkili olun")
+'''
+
+    # Replace the functions in the content
+    # We'll do a simple replacement: replace the api management function first, then the render_user_management function
+    # We'll use the function definitions as markers.
+
+    # Replace api management function
+    api_start = content.find('def render_api_management(token: str | None = None) -> None:')
+    if api_start != -1:
+        # Find the end of the api management function: look for the next function definition or end of file
+        api_end = content.find('def render_user_management(token: str | None = None) -> None:', api_start)
+        if api_end == -1:
+            api_end = len(content)
+        # Replace the segment
+        content = content[:api_start] + correct_api + content[api_end:]
+    else:
+        print("Could not find render_api_management function")
+
+    # Replace render_user_management function
+    render_start = content.find('def render_user_management(token: str | None = None) -> None:')
+    if render_start != -1:
+        # Find the end of the render_user_management function: look for the next function definition or end of file
+        # Since this is the last function, we can go to the end of the file
+        render_end = len(content)
+        content = content[:render_start] + correct_render + content[render_end:]
+    else:
+        print("Could not find render_user_management function")
+
+    # Write the file
+    with open(file_path, 'w', encoding='utf-8') as f:
+        f.write(content)
+    print("Both functions replaced with correct versions")
+
+if __name__ == '__main__':
+    main()
