@@ -2,8 +2,9 @@
 
 Kurallar:
   - st.cache_data ttl=60
-  - Plotly fallback: st.bar_chart
-  - st.metric kullanımı
+  - Plotly fallback: st.bar_chart / st.area_chart (web_dashboard.charts içinde)
+  - UI-CHART-01: KPI kartları `web_dashboard.charts.kpi_karti`, dağılımlar `donut`,
+    trendler `alan_grafigi` ile çizilir (tema uyumlu, responsive)
   - 7/30/90 gün trend desteği
 """
 from __future__ import annotations
@@ -23,6 +24,7 @@ sys.path.insert(0, str(ROOT / "src"))
 from company_master.db.connection import get_engine
 
 from company_master.tenant.model import TenantContext as _TenantContext
+from web_dashboard.charts import alan_grafigi, donut, kpi_karti  # noqa: E402  (UI-CHART-01)
 from web_dashboard.tabs.tenant_health_dashboard import (
     tenant_health_dashboard as _tenant_health_dashboard,
 )
@@ -277,8 +279,15 @@ def load_api_usage_trend() -> pd.DataFrame:
     return pd.DataFrame(columns=["tarih", "istek"])
 
 
-def _render_kpi_card(label: str, value: str, delta: str | None = None, icon: str = "") -> None:
-    st.metric(label=f"{icon} {label}", value=value, delta=delta)
+def _render_kpi_card(
+    label: str,
+    value: str,
+    delta: str | None = None,
+    icon: str = "",
+    kategori: str = "marka",
+) -> None:
+    """UI-CHART-01: imza korunur; çizim `charts.kpi_karti`'ye delege edilir."""
+    kpi_karti(label, value, delta=delta, ikon=icon, kategori=kategori)
 
 
 def _render_quality_trend(gun_secimi: int) -> None:
@@ -286,18 +295,11 @@ def _render_quality_trend(gun_secimi: int) -> None:
     if trend_df.empty:
         st.info(f"Son {gun_secimi} gün için kalite trendi verisi bulunamadı.")
         return
-    try:
-        import plotly.express as px
-        fig = px.line(
-            trend_df, x="tarih", y="ort_skor",
-            title=f"Son {gun_secimi} Gün — Ortalama Kalite Skoru",
-            labels={"ort_skor": "Skor", "tarih": "Tarih"},
-            markers=True,
-        )
-        fig.update_layout(height=300, margin=dict(t=40, b=20))
-        st.plotly_chart(fig, width="stretch")
-    except ImportError:
-        st.bar_chart(trend_df.set_index("tarih")["ort_skor"], width="stretch")
+    alan_grafigi(
+        trend_df, "tarih", "ort_skor",
+        baslik=f"Son {gun_secimi} Gün — Ortalama Kalite Skoru",
+        kategori="basari", yukseklik=300, x_etiket="Tarih", y_etiket="Skor",
+    )
 
 
 def _render_field_quality(field_df: pd.DataFrame) -> None:
@@ -327,32 +329,21 @@ def _render_source_health(source_df: pd.DataFrame) -> None:
         st.info("Kaynak verisi bulunamadı.")
         return
     st.dataframe(source_df, width="stretch", hide_index=True)
-    try:
-        import plotly.express as px
-        fig = px.pie(
-            source_df, values="kayit_sayisi", names="source_name",
-            title="Kaynak Dağılımı",
-        )
-        fig.update_layout(height=300, margin=dict(t=40, b=20))
-        st.plotly_chart(fig, width="stretch")
-    except ImportError:
-        st.bar_chart(source_df.set_index("source_name")["kayit_sayisi"], width="stretch")
+    donut(
+        source_df, "source_name", "kayit_sayisi",
+        baslik="Kaynak Dağılımı", merkez_metin="kayıt", yukseklik=300,
+    )
 
 
 def _render_api_trend(api_df: pd.DataFrame) -> None:
     if api_df.empty:
         st.info("API kullanım trendi verisi bulunamadı.")
         return
-    try:
-        import plotly.express as px
-        fig = px.bar(
-            api_df, x="tarih", y="istek",
-            title="Günlük API İstek Sayısı",
-        )
-        fig.update_layout(height=250, margin=dict(t=40, b=20))
-        st.plotly_chart(fig, width="stretch")
-    except ImportError:
-        st.bar_chart(api_df.set_index("tarih")["istek"], width="stretch")
+    alan_grafigi(
+        api_df, "tarih", "istek",
+        baslik="Günlük API İstek Sayısı",
+        kategori="bilgi", yukseklik=250, x_etiket="Tarih", y_etiket="İstek",
+    )
 
 
 # ---------------------------------------------------------------------------

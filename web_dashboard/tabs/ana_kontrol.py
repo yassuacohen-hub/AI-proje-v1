@@ -37,6 +37,7 @@ from scripts.dash04_api_client import get_api, APIError  # noqa: E402
 
 from company_master.i18n import t  # noqa: E402
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
+from web_dashboard.charts import donut, kpi_karti  # noqa: E402  (UI-CHART-01)
 
 
 @st.cache_data(ttl=30)
@@ -181,39 +182,44 @@ def render_ana_kontrol_tab() -> None:
     _bolum("musteri-metrikleri").render()
 
     if kpi:
+        # UI-CHART-01: st.metric yerine gradient KPI kartı (tema uyumlu, responsive)
         cust_c1, cust_c2, cust_c3, cust_c4 = st.columns(4)
         with cust_c1:
-            total = kpi.get("total", 0)
-            st.metric(
+            kpi_karti(
                 "Toplam Firma",
-                f"{total:,}".replace(",", ".") if total else "—",
-                help="Veritabanında kayıtlı aktif firma sayısı"
+                kpi.get("total", 0) or None,
+                ikon="🏢",
+                kategori="musteri",
+                yardim="Veritabanında kayıtlı aktif firma sayısı",
+                aciklama="📊 Bu arttı mı / azaldı mı?",
             )
-            st.caption("📊 Bu arttı mı / azaldı mı?")
         with cust_c2:
-            users = kpi.get("active_users", 0)
-            st.metric(
+            kpi_karti(
                 "Aktif Kullanıcı",
-                f"{users:,}".replace(",", ".") if users else "—",
-                help="Son 7 gün içinde api_key ile istek yapmış kullanıcılar"
+                kpi.get("active_users", 0) or None,
+                ikon="👥",
+                kategori="musteri",
+                yardim="Son 7 gün içinde api_key ile istek yapmış kullanıcılar",
+                aciklama="📊 Churn risk var mı?",
             )
-            st.caption("📊 Churn risk var mı?")
         with cust_c3:
-            signals = kpi.get("signal_count", 0)
-            st.metric(
+            kpi_karti(
                 "Sinyal Sayısı",
-                f"{signals:,}".replace(",", ".") if signals else "—",
-                help="Oluşturulmuş toplam ticari sinyal (purchase intent vb.)"
+                kpi.get("signal_count", 0) or None,
+                ikon="📡",
+                kategori="musteri",
+                yardim="Oluşturulmuş toplam ticari sinyal (purchase intent vb.)",
+                aciklama="📊 Trend nedir?",
             )
-            st.caption("📊 Trend nedir?")
         with cust_c4:
-            api_calls = kpi.get("api_calls_total", 0)
-            st.metric(
+            kpi_karti(
                 "API Çağrıları (24h)",
-                f"{api_calls:,}".replace(",", ".") if api_calls else "—",
-                help="Son 24 saatte yapılmış API çağrı sayısı"
+                kpi.get("api_calls_total", 0) or None,
+                ikon="🔗",
+                kategori="musteri",
+                yardim="Son 24 saatte yapılmış API çağrı sayısı",
+                aciklama="📊 Spike/drop var mı?",
             )
-            st.caption("📊 Spike/drop var mı?")
     else:
         st.info("⏳ Müşteri metrikleri yükleniyor... Veriler 24 saat içinde görünecek.")
 
@@ -224,37 +230,44 @@ def render_ana_kontrol_tab() -> None:
         sys_c1, sys_c2, sys_c3, sys_c4 = st.columns(4)
         with sys_c1:
             dlq_ok = webhook.get("dlq_toplam", 0) == 0
-            status = "🟢 Sağlıklı" if dlq_ok else "🟠 Uyarı"
-            st.metric(
+            kpi_karti(
                 "Sistem Durumu",
-                status,
-                help="DLQ kuyruğu boş → sistem çalışıyor"
+                "🟢 Sağlıklı" if dlq_ok else "🟠 Uyarı",
+                ikon="🛡️",
+                kategori="basari" if dlq_ok else "uyari",
+                yardim="DLQ kuyruğu boş → sistem çalışıyor",
+                aciklama="📊 Son hata ne zaman?",
             )
-            st.caption("📊 Son hata ne zaman?")
         with sys_c2:
             dlq_count = webhook.get("dlq_toplam", 0)
-            st.metric(
+            kpi_karti(
                 "DLQ (Hata Kuyruğu)",
-                f"{dlq_count:,}".replace(",", "."),
-                help="Webhook işlemesi başarısız olan kayıt sayısı"
+                dlq_count,
+                ikon="📥",
+                kategori="tehlike" if dlq_count else "sistem",
+                yardim="Webhook işlemesi başarısız olan kayıt sayısı",
+                aciklama="📊 Hızlanıyor/yavaşlıyor?",
             )
-            st.caption("📊 Hızlanıyor/yavaşlıyor?")
         with sys_c3:
             cache_hit = kpi.get("cache_hit_rate", 0)
-            st.metric(
+            kpi_karti(
                 "Cache Hit Oranı",
-                f"%{cache_hit * 100:.1f}" if cache_hit else "—",
-                help="Veritabanı sorgusu yerine cache'den cevap %"
+                f"%{cache_hit * 100:.1f}" if cache_hit else None,
+                ikon="⚡",
+                kategori="sistem",
+                yardim="Veritabanı sorgusu yerine cache'den cevap %",
+                aciklama="📊 % arttırabilir miyiz?",
             )
-            st.caption("📊 % arttırabilir miyiz?")
         with sys_c4:
             query_ms = kpi.get("avg_query_latency_ms", 0)
-            st.metric(
+            kpi_karti(
                 "Ort. Query Latency",
-                f"{query_ms:.0f} ms" if query_ms else "—",
-                help="Veritabanı sorgularının ortalama yanıt süresi"
+                f"{query_ms:.0f} ms" if query_ms else None,
+                ikon="⏱️",
+                kategori="sistem",
+                yardim="Veritabanı sorgularının ortalama yanıt süresi",
+                aciklama="📊 Slow query yok mu?",
             )
-            st.caption("📊 Slow query yok mu?")
     else:
         st.info("⏳ Sistem metrikleri yükleniyor... Veriler kısa süre içinde görünecek.")
 
@@ -279,6 +292,7 @@ def render_ana_kontrol_tab() -> None:
             ],
         })
         if flow_df["Adet"].sum() > 0:
-            st.bar_chart(flow_df.set_index("Durum"), width="stretch")
+            # UI-CHART-01: bar → donut (merkezde toplam olay, hover tooltip)
+            donut(flow_df, "Durum", "Adet", baslik="Webhook Akışı", merkez_metin="olay")
     else:
         st.info("📊 Webhook verisi henüz toplanmadı. Sistem kullanılınca veriler burada görünecek.")
