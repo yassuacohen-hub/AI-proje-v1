@@ -31,8 +31,9 @@ def test_decision_tab_handles_empty_and_limits_recent_rows(monkeypatch):
     admin_panel.render_decision_tab([])
     admin_panel.st.info.assert_called_once()
 
+    # MVP-KD-01: kayitlar ts'e gore YENIDEN ESKIYE siralanir, ilk 50 gosterilir.
     decisions = [
-        {"ts": str(index), "title": f"Karar {index}", "tags": ["test"]}
+        {"ts": f"2026-01-01T00:00:{index:02d}", "title": f"Karar {index}", "tags": ["test"]}
         for index in range(55)
     ]
     dataframe = MagicMock()
@@ -41,8 +42,8 @@ def test_decision_tab_handles_empty_and_limits_recent_rows(monkeypatch):
 
     rendered_rows = dataframe.call_args.args[0]
     assert len(rendered_rows) == 50
-    assert rendered_rows.iloc[0]["Tarih"] == "5"
-    assert rendered_rows.iloc[-1]["Baslik"] == "Karar 54"
+    assert rendered_rows.iloc[0]["Baslik"] == "Karar 54"
+    assert rendered_rows.iloc[-1]["Baslik"] == "Karar 5"
 
 
 def test_webhook_helpers_cover_statuses_and_timestamps():
