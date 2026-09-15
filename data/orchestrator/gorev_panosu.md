@@ -10,18 +10,22 @@
 | WK-01 | Career Pages Scraper — Enhanced Data Extraction | - | P1 | plan | - |
 | WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | plan | - |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | plan | - |
-| UI-SIDEBAR-02 | Sidebar: marka blogu uste, logo, kompakt tooltip | kilo | P2 | blocked | app.py |
-| UI-TOPBAR-02 | Topbar: arama sag ust, breadcrumb ayrac, Bu sayfada ayiraci | kilo | P2 | blocked | app.py |
+| UI-SIDEBAR-02 | Sidebar: marka blogu uste, logo, kompakt tooltip | kilo | P2 | aktif | app.py |
+| UI-TOPBAR-02 | Topbar: arama sag ust, breadcrumb ayrac, Bu sayfada ayiraci | kilo | P2 | aktif | app.py |
 | REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar) | cline | P2 | blocked | data/orchestrator/REV-UI-SIDEBAR-02_bulgular_2026-09-15_cline.md |
-| MVP-KUL-01 | MVP Kullanici Yonetimi ekrani: PageHeader + onayla + kredi formu | kilo | P1 | review | web_dashboard/tabs/admin_extras.py, tests/test_admin_extras_kullanici.py |
-| REV-MVP-KUL-01 | Review: MVP-KUL-01 Kullanici Yonetimi ekrani | cline | P1 | aktif | - |
+| P7-6b | Kariyer.net scraper saglamlastirma (MVP sonrasi) | kilo | P2 | aktif | src/company_master/scrapers/kariyernet.py, tests/test_kariyernet.py |
+| MVP-KUL-02 | Kullanici onayinda tier secici (K-1 bulgusu) | kilo | P2 | plan | web_dashboard/tabs/admin_extras.py, tests/test_admin_extras_kullanici.py |
+| ADMIN-RESET-01 | Admin e-posta dogrulamali sifre degistirme (buyer reset altyapisini admin'e uyarla) | kilo | P2 | plan | web_app.py, web_dashboard/tabs/admin_auth.py, tests/test_admin_reset.py |
+| UI-CHART-01 | Havali KPI kartlari ve grafikler (Ana Kontrol + Yonetim) | kilo | P1 | plan | web_dashboard/tabs/ana_kontrol.py, web_dashboard/tabs/admin_kpi.py, web_dashboard/charts.py |
+| REV-ADMIN-ENV-01 | Review: admin sifre sifirlama scripti + .env on-dolum + app.py restore | cline | P1 | plan | data/orchestrator/REV-ADMIN-ENV-01_bulgular_20260915_cline.md |
+| GUARD-ENC-01 | kodlama_denetim.py: BOM + NUL + mojibake + ast.parse guard (pre-commit) | cline | P2 | plan | scripts/kodlama_denetim.py, tests/test_kodlama_denetim.py, .pre-commit-config.yaml |
 
 ## Tamamlananlar
 
 | Görev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
 | P0-1 | İstiklal OSB scraper implementasyonu | web_kazima | 2026-09-08T10:00:00Z |
-| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-15T18:01:40 |
+| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-15T19:28:04 |
 | P0-3 | Kalite skoru 6.53 - 50+ heazine | kalite | 2026-09-06T22:54:31 |
 | Y21 | ISKUR kurumsal eslestirme verisi arastirma | arastirmaci | 2026-09-10 |
 | APIFY-01 | Apify uygunluk ve entegrasyon mimarisi arastirma | kilo | 2026-09-11T22:14:20 |
@@ -215,4 +219,13 @@
 | REV-I18N-SES-02 | Capraz inceleme: I18N-SES-02 kilo teslimi (ses.json birlestirme) | cline | 2026-09-15T15:38:28 |
 | AUDIT-ENC-02 | Repo geneli kodlama denetimi (BOM/UTF-16/0-bayt/CRLF) + kodlama_denetim.py kapsam kontrolu | cline | 2026-09-15T15:38:28 |
 | MVP-KD-01 | MVP Karar Defteri ekrani: PageHeader + filtre + yeni karar formu | kilo | 2026-09-15T16:47:21 |
+| MVP-KUL-01 | MVP Kullanici Yonetimi ekrani: PageHeader + onayla + kredi formu | kilo | 2026-09-15T18:10:18 |
 | REV-MVP-KD-01 | Review: MVP-KD-01 Karar Defteri ekrani | cline | 2026-09-15T16:30:23 |
+| REV-MVP-KUL-01 | Review: MVP-KUL-01 Kullanici Yonetimi ekrani | cline | 2026-09-15T18:10:18 |
+| REV-MVP-ADMIN-01 | MVP-ADMIN 4 ekran capraz denetim (rapor-only) | cline | 2026-09-15T18:29:40 |
+| HIJYEN-01 | Kalinti gecici dosya temizligi | cline | 2026-09-15T18:29:40 |
+| ORCH-05b | ORCH-05 kilit dusurme yalniz done/blocked (gorev_guncelle bug) | roo | 2026-09-15T18:29:40 |
+| ENC-ADMIN-PANEL-01 | admin_panel.py mojibake 2 dize (O-1) | roo | 2026-09-15T18:34:59 |
+| FIX-YONETIM-01 | Yonetim bolumu to_excel hatasi + sekme rehberi metinleri (sahip bulgusu) | roo | 2026-09-15T18:51:04 |
+| UI-REFRESH-01 | Otomatik Yenileme bloğu: dev buton/metric responsive + st.auto_refresh cokme fix | roo | 2026-09-15T19:09:59 |
+| ADMIN-ENV-01 | Admin sifre sifirlama scripti + .env on-dolum (roo) | roo | 2026-09-15T19:25:56 |

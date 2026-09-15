@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-15T18:01:40",
+    "bitis": "2026-09-15T19:28:04",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -3144,13 +3144,13 @@
     "baslik": "Sidebar: marka blogu uste, logo, kompakt tooltip",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "blocked",
+    "durum": "aktif",
     "baslangic": "2026-09-15T15:01:51",
     "bitis": "2026-09-15T15:56:09",
     "dosyalar": [
       "app.py"
     ],
-    "not": "",
+    "not": "Red (orkestrator): RED: app.py teslimi uygulamayi cokertti (app.py:419 IndentationError 'if kompakt:' fazladan 1 bosluk girinti) + dosyaya UTF-8 BOM eklendi + TUM Turkce/emoji mojibake'e dondu (187+/166- satir). Sahip hatayi canlida gordu; roo 'git checkout -- app.py' ile 9265d8b'ye geri aldi — degisiklik kaybedildi, YENIDEN yapilacak. Kurallar: (1) app.py'yi UTF-8 BOM'suz kaydet (editor 'UTF-8' — 'UTF-8 with BOM' DEGIL), (2) teslimden once 'python -c \"import ast;ast.parse(open('app.py',encoding='utf-8').read())\"' + 'python scripts/mojibake_onar.py --kontrol app.py' + 'python scripts/streamlit_restart.py' ve tarayicida acildigini dogrula, (3) UI-SIDEBAR-02 ve UI-TOPBAR-02 ayni dosyada — tek teslimde birlestir, once SIDEBAR sonra TOPBAR, (4) placeholder blog listesi yerine data/blog/*.md veya tek caption; sahte veri gomme.",
     "source": "ic",
     "from_agent": null,
     "not_": "MVP-ADMIN: sahip emri ile ertelendi (once 4 ekran canliya cikacak: ana_kontrol, kpi, karar_defteri, kullanicilar)"
@@ -3161,13 +3161,13 @@
     "baslik": "Topbar: arama sag ust, breadcrumb ayrac, Bu sayfada ayiraci",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "blocked",
+    "durum": "aktif",
     "baslangic": "2026-09-15T15:03:03",
     "bitis": "2026-09-15T15:56:09",
     "dosyalar": [
       "app.py"
     ],
-    "not": "",
+    "not": "Red (orkestrator): RED: UI-SIDEBAR-02 ile ayni app.py calisma kopyasi bozuktu (BOM + mojibake + IndentationError); roo app.py'yi 9265d8b'ye geri aldi, degisiklik kaybedildi. UI-SIDEBAR-02 red notundaki kontrol listesiyle birlikte tek teslimde yeniden yap.",
     "source": "ic",
     "from_agent": null,
     "not_": "MVP-ADMIN: sahip emri ile ertelendi (once 4 ekran canliya cikacak: ana_kontrol, kpi, karar_defteri, kullanicilar)"
@@ -3388,9 +3388,9 @@
     "baslik": "Yonetim bolumu to_excel hatasi + sekme rehberi metinleri (sahip bulgusu)",
     "sahip": "roo",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-15T18:43:20",
-    "bitis": null,
+    "bitis": "2026-09-15T18:51:04",
     "dosyalar": [
       "web_dashboard/tabs/admin_export.py",
       "web_dashboard/tabs/admin_panel.py",
@@ -3399,6 +3399,113 @@
       "web_dashboard/tabs/admin_musteriler.py",
       "web_dashboard/tabs/admin_realtime.py",
       "web_dashboard/tabs/pazarlama.py"
+    ],
+    "not": "to_excel BytesIO fix + openpyxl requirements + 6 ekran sekme rehberi; 177 test yesil; commit f63d0f0",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "UI-REFRESH-01",
+    "id": "UI-REFRESH-01",
+    "baslik": "Otomatik Yenileme bloğu: dev buton/metric responsive + st.auto_refresh cokme fix",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-15T19:04:50",
+    "bitis": "2026-09-15T19:09:59",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_auto_refresh.py",
+      "tests/test_admin_auto_refresh.py"
+    ],
+    "not": "admin_auto_refresh.py kompakt: secondary buton, caption durum, st.fragment(run_every) ile 1.62 uyumu, tekrar eden Otomasyon Ozeti kaldirildi; tests/test_admin_auto_refresh.py 8 test; 98 passed 1 skipped; streamlit restart PID 34996",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-ENV-01",
+    "id": "ADMIN-ENV-01",
+    "baslik": "Admin sifre sifirlama scripti + .env on-dolum (roo)",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-15T19:25:56",
+    "bitis": "2026-09-15T19:25:56",
+    "dosyalar": [
+      "scripts/admin_sifre_sifirla.py",
+      "tests/test_admin_sifre_sifirla.py",
+      "web_dashboard/tabs/admin_auth.py"
+    ],
+    "not": "yassuacohen@gmail.com sifresi sifirlandi, .env ADMIN_EMAIL/ADMIN_PASSWORD; API login 200; app.py yabanci blog blogu (BOM+mojibake) git checkout ile geri alindi",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-RESET-01",
+    "id": "ADMIN-RESET-01",
+    "baslik": "Admin e-posta dogrulamali sifre degistirme (buyer reset altyapisini admin'e uyarla)",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-15T19:25:56",
+    "bitis": null,
+    "dosyalar": [
+      "web_app.py",
+      "web_dashboard/tabs/admin_auth.py",
+      "tests/test_admin_reset.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "UI-CHART-01",
+    "id": "UI-CHART-01",
+    "baslik": "Havali KPI kartlari ve grafikler (Ana Kontrol + Yonetim)",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-15T19:25:56",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/ana_kontrol.py",
+      "web_dashboard/tabs/admin_kpi.py",
+      "web_dashboard/charts.py",
+      "tests/test_charts.py",
+      "docs/plans/UI-CHART-01_arastirma.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "REV-ADMIN-ENV-01",
+    "id": "REV-ADMIN-ENV-01",
+    "baslik": "Review: admin sifre sifirlama scripti + .env on-dolum + app.py restore",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-15T19:25:57",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/REV-ADMIN-ENV-01_bulgular_20260915_cline.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "GUARD-ENC-01",
+    "id": "GUARD-ENC-01",
+    "baslik": "kodlama_denetim.py: BOM + NUL + mojibake + ast.parse guard (pre-commit)",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-15T19:25:57",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/kodlama_denetim.py",
+      "tests/test_kodlama_denetim.py",
+      ".pre-commit-config.yaml"
     ],
     "not": "",
     "source": "ic",
