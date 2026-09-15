@@ -75,7 +75,7 @@ jobs:
           python scripts/kodlama_denetim.py
       - name: Run tests with coverage
         run: |
-          python -m pytest tests/company_master/ \
+          python -m pytest tests/ \
             --continue-on-collection-errors \
             --cov=src/company_master/db/connection \
             --cov=src/company_master/etl/normalize \
