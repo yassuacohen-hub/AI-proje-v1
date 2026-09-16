@@ -16,7 +16,7 @@
 | Guard ihlali | `scripts/test_import.py` UTF-16 idi → silindi (kodlama guard testi yeşile döndü) |
 | Süreçler | Mükerrer sistem-Python kopyaları kapatıldı: PID 7316 (`web_app.py`), PID 12256 (`streamlit run app.py`). `.venv` kopyaları (12820, 39296) korundu |
 
-Doğrulama: `scripts/proje_siniri_denetim.py` → TEMİZ; `tests/orchestrator tests/test_gorev_kutusu_cli.py tests/test_kodlama_guard.py` → 84 passed.
+Doğrulama: `scripts/proje_siniri_denetim.py` → TEMİZ; `tests/orchestrator tests/test_gorev_kutusu_cli.py tests/test_kodlama_denetim.py` → 84 passed.
 
 ## 2. Geri alma / kurtarma
 

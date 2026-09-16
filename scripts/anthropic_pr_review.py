@@ -133,11 +133,12 @@ def get_pull_request_diff() -> str:
         ["git", "fetch", "--quiet", "origin", f"{base_ref}:refs/remotes/origin/{base_ref}"],
         check=True, capture_output=True, text=True,
     )
+    # text=True kullanılmaz: eski cp1254 baytları (ör. 0xFD) UTF-8 çözümünü patlatır (PR #14 bulgusu).
     result = subprocess.run(
         ["git", "diff", "--no-ext-diff", "--unified=20", f"origin/{base_ref}...HEAD"],
-        check=True, capture_output=True, text=True,
+        check=True, capture_output=True,
     )
-    return result.stdout
+    return result.stdout.decode("utf-8", errors="replace")
 
 
 def get_failed_job_logs(run_id: str) -> str:

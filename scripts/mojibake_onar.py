@@ -2,7 +2,7 @@
 """Mojibake onarici (ENC-ADMIN-PANEL-01).
 
 UTF-8 metnin cp1252 olarak yeniden kodlanmasiyla olusan cift kodlama
-bozulmalarini ("Ã§" -> "ç", "â€”" -> "—", "âš™ï¸" -> "⚙️") satir bazinda onarir.
+bozulmalarini ("\u00c3\u00a7" -> "\u00e7", "\u00e2\u20ac\u201d" -> "\u2014", "\u00e2\u0161\u2122\u00ef\u00b8" -> "\u2699\ufe0f") satir bazinda onarir.
 
 Kullanim:
     python scripts/mojibake_onar.py web_dashboard/tabs/admin_panel.py [--kontrol]
@@ -20,7 +20,7 @@ import sys
 from pathlib import Path
 
 # Tipik cift-kodlama izleri (UTF-8 cok baytli dizilerin cp1252 gorunumu).
-MOJIBAKE_RX = re.compile(r"Ã.|Â.|â€.|â„.|âš.|ï¸|Ä.|Å.")
+MOJIBAKE_RX = re.compile(r"\u00c3.|\u00c2.|\u00e2\u20ac.|\u00e2\u201e.|\u00e2\u0161.|\u00ef\u00b8|\u00c4.|\u00c5.")
 
 # Cift kodlamada tamamen kaybolan emoji kalintilari (geri kurtarilamaz).
 KALINTI_RX = re.compile(r"[\ufffd\u0080-\u009f]")

@@ -77,4 +77,4 @@ def test_sekme_rehberi_metinleri_utf8_ve_yapili(modul):
     metin = kaynak.read_text(encoding="utf-8")
     for baslik in ("Bu ekran ne işe yarar?", "Nasıl kullanılır?", "Veriler nereden gelir?", "Dikkat:"):
         assert baslik in metin, f"{modul}: '{baslik}' eksik"
-    assert "Ã" not in metin and "â€" not in metin, f"{modul}: mojibake"
+    assert "\u00c3" not in metin and "\u00e2\u20ac" not in metin, f"{modul}: mojibake"
