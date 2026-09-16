@@ -37,7 +37,7 @@ from scripts.dash04_api_client import get_api, APIError  # noqa: E402
 
 from company_master.i18n import t  # noqa: E402
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
-from web_dashboard.charts import donut, kpi_karti, veri_akisi  # noqa: E402  (UI-CHART-01, KPI-EXA-01)
+from web_dashboard.charts import donut, kpi_karti  # noqa: E402  (UI-CHART-01, KPI-EXA-02)
 
 
 @st.cache_data(ttl=30)
@@ -83,37 +83,13 @@ def _get_metric_color(category: str) -> str:
 
 #: ADMIN-UI-09 — Sayfa bölümleri tek yerde tanımlanır; hem `SectionNav`
 #: hem de gövde aynı listeyi kullanır, böylece anchor'lar asla kaymaz.
+# KPI-EXA-02 (sahip, 2026-09-15): Veri Akışı diyagramı "Teknik Altyapı" sayfasına
+# taşındı; bölüm açıklama cümleleri ve küçük emojiler kaldırıldı (sade başlık).
 BOLUMLER: tuple[Section, ...] = (
-    Section(
-        "Veri Akışı",
-        "Verinin kaynaktan panele izlediği yol; sorun hangi halkada, tek bakışta.",
-        ikon="🔗",
-        kimlik="veri-akisi",
-    ),
-    Section(
-        "Müşteri Metrikleri",
-        "Kullanıcı ve işletme faaliyeti (mavi nokta).",
-        ikon="👥",
-        kimlik="musteri-metrikleri",
-    ),
-    Section(
-        "Sistem Metrikleri",
-        "Altyapı sağlığı (gri nokta).",
-        ikon="🔧",
-        kimlik="sistem-metrikleri",
-    ),
-    Section(
-        "Anlık Uyarılar",
-        "Eşik aşan durumlar burada toplanır; uyarı yoksa sistem iyi demektir.",
-        ikon="🔔",
-        kimlik="anlik-uyarilar",
-    ),
-    Section(
-        "Webhook Akışı",
-        "Son gün içindeki olay dağılımı (başarılı / hatalı / DLQ).",
-        ikon="📈",
-        kimlik="webhook-akisi",
-    ),
+    Section("Müşteri", kimlik="musteri-metrikleri"),
+    Section("Sistem", kimlik="sistem-metrikleri"),
+    Section("Uyarılar", kimlik="anlik-uyarilar"),
+    Section("Webhook Akışı", kimlik="webhook-akisi"),
 )
 
 GIRIS_METNI = t("huginn_dashboard_welcome")
@@ -134,14 +110,13 @@ def render_ana_kontrol_tab() -> None:
         "Ana Kontrol",
         giris=GIRIS_METNI,
         ust_etiket="İş · Operasyon",
-        ikon="🏠",
     ).render()
 
     # --- K1: Aksiyon şeridi (tek birincil buton: Veriyi Yenile) ---
     col_refresh, col_info, col_time = st.columns([1, 1, 3], vertical_alignment="center")
     with col_refresh:
         yenile = st.button(
-            "🔄 Veriyi Yenile",
+            "Veriyi Yenile",
             key="refresh_ana_kontrol",
             type="primary",
             width="stretch",
@@ -149,7 +124,7 @@ def render_ana_kontrol_tab() -> None:
         )
     with col_info:
         bilgi = st.toggle(
-            "ℹ️ Sekme rehberi",
+            "Sekme rehberi",
             key="ana_kontrol_rehber",
             help="Bu ekranın amacını, veri kaynağını ve kısıtlarını gösterir.",
         )
@@ -168,7 +143,7 @@ def render_ana_kontrol_tab() -> None:
             "**Bu ekran ne işe yarar?** Müşteri tarafı (kayıt, onay, kredi) ve sistem tarafı "
             "(firma sayısı, kalite skoru, görev durumu) metriklerini tek bakışta gösterir. "
             "Güne başlarken \"her şey yolunda mı?\" sorusunun cevabı burada.\n\n"
-            "**Nasıl kullanılır?** Kartların sol üstündeki nokta kategoriyi gösterir: mavi müşteri, gri sistem. "
+            "**Nasıl kullanılır?** Kart konturu ve sol üstteki nokta kategoriyi gösterir: mavi müşteri, gri sistem. "
             "Sağ üstteki **Yenile** düğmesi önbelleği temizleyip verileri anında tazeler.\n\n"
             "**Veriler nereden gelir?** `/api/kpi` ve `/metrics` uç noktaları ile "
             "webhook izleme kayıtları.\n\n"
@@ -184,11 +159,7 @@ def render_ana_kontrol_tab() -> None:
         kpi = load_kpi_data()
         webhook = load_webhook_stats()
 
-    # --- KPI-EXA-01: Süreç diyagramı (Kaynaklar → ETL → DB → API → Panel) ---
-    _bolum("veri-akisi").render()
-    veri_akisi(vurgu="db" if webhook.get("dlq_toplam", 0) > 0 else None)
-
-    # --- K4: Müşteri Metrikleri ---
+    # --- K4: Müşteri Metrikleri (KPI-EXA-02: süreç diyagramı Teknik Altyapı sayfasında) ---
     _bolum("musteri-metrikleri").render()
 
     if kpi:
@@ -198,42 +169,34 @@ def render_ana_kontrol_tab() -> None:
             kpi_karti(
                 "Toplam Firma",
                 kpi.get("total", 0) or None,
-                ikon="🏢",
                 kategori="musteri",
                 yardim="Veritabanında kayıtlı aktif firma sayısı",
-                aciklama="📊 Bu arttı mı / azaldı mı?",
             )
         with cust_c2:
             kpi_karti(
                 "Aktif Kullanıcı",
                 kpi.get("active_users", 0) or None,
-                ikon="👥",
                 kategori="musteri",
                 yardim="Son 7 gün içinde api_key ile istek yapmış kullanıcılar",
-                aciklama="📊 Churn risk var mı?",
             )
         with cust_c3:
             kpi_karti(
                 "Sinyal Sayısı",
                 kpi.get("signal_count", 0) or None,
-                ikon="📡",
                 kategori="musteri",
                 yardim="Oluşturulmuş toplam ticari sinyal (purchase intent vb.)",
-                aciklama="📊 Trend nedir?",
             )
         with cust_c4:
             kpi_karti(
                 "API Çağrıları (24h)",
                 kpi.get("api_calls_total", 0) or None,
-                ikon="🔗",
                 kategori="musteri",
                 yardim="Son 24 saatte yapılmış API çağrı sayısı",
-                aciklama="📊 Spike/drop var mı?",
             )
     else:
-        st.info("⏳ Müşteri metrikleri yükleniyor... Veriler 24 saat içinde görünecek.")
+        st.info("Müşteri metrikleri yükleniyor... Veriler 24 saat içinde görünecek.")
 
-    # --- K4: Sistem Metrikleri (Turuncu) ---
+    # --- K4: Sistem Metrikleri ---
     _bolum("sistem-metrikleri").render()
 
     if webhook or kpi:
@@ -242,53 +205,45 @@ def render_ana_kontrol_tab() -> None:
             dlq_ok = webhook.get("dlq_toplam", 0) == 0
             kpi_karti(
                 "Sistem Durumu",
-                "🟢 Sağlıklı" if dlq_ok else "🟠 Uyarı",
-                ikon="🛡️",
+                "Sağlıklı" if dlq_ok else "Uyarı",
                 kategori="basari" if dlq_ok else "uyari",
                 yardim="DLQ kuyruğu boş → sistem çalışıyor",
-                aciklama="📊 Son hata ne zaman?",
             )
         with sys_c2:
             dlq_count = webhook.get("dlq_toplam", 0)
             kpi_karti(
                 "DLQ (Hata Kuyruğu)",
                 dlq_count,
-                ikon="📥",
                 kategori="tehlike" if dlq_count else "sistem",
                 yardim="Webhook işlemesi başarısız olan kayıt sayısı",
-                aciklama="📊 Hızlanıyor/yavaşlıyor?",
             )
         with sys_c3:
             cache_hit = kpi.get("cache_hit_rate", 0)
             kpi_karti(
                 "Cache Hit Oranı",
                 f"%{cache_hit * 100:.1f}" if cache_hit else None,
-                ikon="⚡",
                 kategori="sistem",
                 yardim="Veritabanı sorgusu yerine cache'den cevap %",
-                aciklama="📊 % arttırabilir miyiz?",
             )
         with sys_c4:
             query_ms = kpi.get("avg_query_latency_ms", 0)
             kpi_karti(
                 "Ort. Query Latency",
                 f"{query_ms:.0f} ms" if query_ms else None,
-                ikon="⏱️",
                 kategori="sistem",
                 yardim="Veritabanı sorgularının ortalama yanıt süresi",
-                aciklama="📊 Slow query yok mu?",
             )
     else:
-        st.info("⏳ Sistem metrikleri yükleniyor... Veriler kısa süre içinde görünecek.")
+        st.info("Sistem metrikleri yükleniyor... Veriler kısa süre içinde görünecek.")
 
     # --- K2: Uyarılar (boş state örneği) ---
     _bolum("anlik-uyarilar").render()
     if webhook.get("dlq_toplam", 0) > 0:
-        st.warning(f"⚠️ {webhook['dlq_toplam']} işleme başarısız DLQ kaydı var. İncelemeyi gerektirir.")
+        st.warning(f"{webhook['dlq_toplam']} işleme başarısız DLQ kaydı var. İncelemeyi gerektirir.")
     elif kpi.get("cache_hit_rate", 0) and kpi.get("cache_hit_rate", 0) < 0.3:
-        st.warning("⚠️ Cache hit oranı düşük (%30 altında). Veritabanı yükü yüksek olabilir.")
+        st.warning("Cache hit oranı düşük (%30 altında). Veritabanı yükü yüksek olabilir.")
     else:
-        st.success("✅ Sistem iyi durumda. Kritik uyarı yok.")
+        st.success("Sistem iyi durumda. Kritik uyarı yok.")
 
     # --- İstatistik grafiği ---
     _bolum("webhook-akisi").render()
@@ -305,4 +260,4 @@ def render_ana_kontrol_tab() -> None:
             # UI-CHART-01: bar → donut (merkezde toplam olay, hover tooltip)
             donut(flow_df, "Durum", "Adet", baslik="Webhook Akışı", merkez_metin="olay")
     else:
-        st.info("📊 Webhook verisi henüz toplanmadı. Sistem kullanılınca veriler burada görünecek.")
+        st.info("Webhook verisi henüz toplanmadı. Sistem kullanılınca veriler burada görünecek.")

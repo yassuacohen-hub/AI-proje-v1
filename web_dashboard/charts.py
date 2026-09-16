@@ -155,10 +155,10 @@ def kpi_karti_html(
 ) -> str:
     """Sade (Exa/developer) KPI kartı HTML'i — Streamlit'siz, XSS güvenli.
 
-    KPI-EXA-01 tasarım sözleşmesi (sahip talebi, 2026-09-15):
-    düz yüzey, **1px ince çerçeve**, 10px köşe, gradient/gölge/kalın sol şerit **yok**;
-    küçük gri büyük-harf etiket → büyük değer → tek satır delta.
-    Kategori rengi yalnızca etiket önündeki 6px noktada kullanılır (tek renk vurgu).
+    KPI-EXA-01/02 tasarım sözleşmesi (sahip talebi, 2026-09-15):
+    zemin **tema yüzeyi** (beyaz kart yok), **1px kategori renkli kontur**, 10px köşe,
+    gradient/gölge/kalın sol şerit **yok**; küçük gri büyük-harf etiket → büyük değer
+    → tek satır delta. Kategori rengi kontur + etiket önündeki 6px noktada kullanılır.
     """
     palet = tema_paleti(tema)
     renk = kategori_rengi(kategori, tema)
@@ -183,7 +183,7 @@ def kpi_karti_html(
     return (
         f'<div class="hg-kpi" {yardim_attr} style="'
         f"background:{palet['surface']};"
-        f"border:1px solid {palet['border']};border-radius:10px;"
+        f"border:1px solid {renk};border-radius:10px;"
         f'padding:14px 16px;min-height:92px;">'
         f'<div class="hg-kpi-baslik" style="display:flex;align-items:center;gap:6px;'
         f'color:{palet["text-muted"]};font-size:0.72rem;font-weight:500;'
@@ -201,13 +201,17 @@ def kpi_karti_html(
 # Süreç / veri akışı diyagramı (Graphviz DOT, Streamlit'siz)
 # ---------------------------------------------------------------------------
 
+# KPI-EXA-02 (sahip): düğümler kısa BÜYÜK HARF, alt satır yok; diyagram teknik sayfada.
 VERI_AKISI_VARSAYILAN: tuple[tuple[str, str, str], ...] = (
-    ("kaynak", "Kaynaklar", "OSB · Kariyer · Web"),
-    ("etl", "ETL", "Temizleme · Eşleştirme"),
-    ("db", "Veritabanı", "PostgreSQL"),
-    ("api", "API :8000", "Huginn · FastAPI"),
-    ("panel", "Panel :8501", "Muninn · Streamlit"),
+    ("kaynak", "KAYNAK", ""),
+    ("etl", "EŞLEŞTİRME", ""),
+    ("db", "VERİTABANI", ""),
+    ("api", "API", ""),
+    ("panel", "DASHBOARD", ""),
 )
+
+#: Diyagram çerçevesi: hafif kırık beyaz (sahip talebi, temadan bağımsız).
+VERI_AKISI_CERCEVE = "#E6E6E6"
 
 
 def veri_akisi_dot(
@@ -215,22 +219,23 @@ def veri_akisi_dot(
     dugumler: tuple[tuple[str, str, str], ...] = VERI_AKISI_VARSAYILAN,
     vurgu: str | None = None,
 ) -> str:
-    """KPI-EXA-01: Sade süreç diyagramı (Kaynaklar → ETL → DB → API → Panel).
+    """KPI-EXA-01/02: Sade süreç diyagramı (KAYNAK → EŞLEŞTİRME → VERİTABANI → API → DASHBOARD).
 
-    Exa/developer tarzı: 1px çerçeve, dolgu yok, gölge yok; yalnız ``vurgu``
-    düğümünün çerçevesi marka rengiyle çizilir. Graphviz DOT metni döner.
+    Exa/developer tarzı: 1px **kırık beyaz** çerçeve, dolgu yok, gölge yok, küçük
+    düğümler; yalnız ``vurgu`` düğümünün çerçevesi marka rengiyle çizilir.
+    Graphviz DOT metni döner.
     """
     palet = tema_paleti(tema)
     marka = kategori_rengi("marka", tema)
     satirlar = [
         "digraph veri_akisi {",
-        "rankdir=LR; bgcolor=\"transparent\"; nodesep=0.35; ranksep=0.55; pad=0.1;",
-        f'node [shape=box, style="rounded", penwidth=1, color="{palet["border"]}",'
-        f' fontcolor="{palet["text"]}", fontname="Inter,Segoe UI,Arial", fontsize=11, margin="0.18,0.10"];',
-        f'edge [color="{palet["text-muted"]}", penwidth=1, arrowsize=0.6];',
+        "rankdir=LR; bgcolor=\"transparent\"; nodesep=0.25; ranksep=0.4; pad=0.05;",
+        f'node [shape=box, style="rounded", penwidth=1, color="{VERI_AKISI_CERCEVE}",'
+        f' fontcolor="{palet["text"]}", fontname="Inter,Segoe UI,Arial", fontsize=9, margin="0.12,0.06"];',
+        f'edge [color="{palet["text-muted"]}", penwidth=1, arrowsize=0.5];',
     ]
     for kimlik, ad, alt in dugumler:
-        renk = marka if kimlik == vurgu else palet["border"]
+        renk = marka if kimlik == vurgu else VERI_AKISI_CERCEVE
         etiket = html.escape(ad) + (f"\\n{html.escape(alt)}" if alt else "")
         satirlar.append(f'{kimlik} [label="{etiket}", color="{renk}"];')
     zincir = " -> ".join(k for k, _, _ in dugumler)
@@ -378,9 +383,20 @@ def alan_grafigi_fig(
 # ---------------------------------------------------------------------------
 
 def aktif_tema() -> str:
-    """Streamlit'in kendi tema ayarını proje tema adına çevirir."""
+    """Streamlit'in **etkin** temasını proje tema adına çevirir.
+
+    KPI-EXA-02: önce ``st.context.theme.type`` (kullanıcının tarayıcıda gerçekten
+    gördüğü tema; 1.62+), yoksa ``theme.base`` ayarı. Böylece ``app.aktif_tema()``
+    ile aynı kaynağı kullanır; kart zemini/kontur tema ile uyumsuz kalmaz.
+    """
     try:
         import streamlit as st
+        try:
+            tip = st.context.theme.type
+        except Exception:  # noqa: BLE001 - eski sürüm / test sahtesi
+            tip = None
+        if isinstance(tip, str) and tip.strip():
+            return tema_normalize(tip)
         return tema_normalize(st.get_option("theme.base"))
     except Exception:  # noqa: BLE001 - Streamlit dışı çağrı
         return "karanlik"

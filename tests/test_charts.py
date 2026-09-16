@@ -50,26 +50,35 @@ def test_kpi_stil_css_sadece_cerceve_hover():
 
 
 def test_veri_akisi_dot_zincir_ve_tema():
-    palet = tema_paleti("karanlik")
     dot = veri_akisi_dot("karanlik")
     assert dot.startswith("digraph") and "rankdir=LR" in dot
     assert "kaynak -> etl -> db -> api -> panel;" in dot
-    assert f'color="{palet["border"]}"' in dot and 'bgcolor="transparent"' in dot
-    assert "penwidth=1" in dot and "fillcolor" not in dot  # dolgu yok, 1px çizgi
+    # KPI-EXA-02: kırık beyaz çerçeve, küçük düğüm, dolgu yok
+    assert f'color="{charts.VERI_AKISI_CERCEVE}"' in dot and 'bgcolor="transparent"' in dot
+    assert "penwidth=1" in dot and "fillcolor" not in dot
+    assert "fontsize=9" in dot
 
 
 def test_veri_akisi_dot_vurgu_marka_rengi():
     dot = veri_akisi_dot("karanlik", vurgu="db")
     marka = kategori_rengi("marka", "karanlik")
-    assert f'db [label="Veritabanı\\nPostgreSQL", color="{marka}"]' in dot
-    assert f'api [label="API :8000\\nHuginn · FastAPI", color="{marka}"]' not in dot
+    assert f'db [label="VERİTABANI", color="{marka}"]' in dot
+    assert f'api [label="API", color="{charts.VERI_AKISI_CERCEVE}"]' in dot
+
+
+def test_veri_akisi_dugumler_buyuk_harf_ve_alt_satirsiz():
+    for _, ad, alt in charts.VERI_AKISI_VARSAYILAN:
+        assert ad == ad.upper() and alt == ""
+    assert [ad for _, ad, _ in charts.VERI_AKISI_VARSAYILAN] == [
+        "KAYNAK", "EŞLEŞTİRME", "VERİTABANI", "API", "DASHBOARD",
+    ]
 
 
 def test_veri_akisi_streamlit_fallback(sahte_st):
     sahte_st.graphviz_chart.side_effect = RuntimeError("graphviz yok")
     charts.veri_akisi()
     sahte_st.code.assert_called_once()
-    assert "Kaynaklar → ETL → Veritabanı" in sahte_st.code.call_args.args[0]
+    assert "KAYNAK → EŞLEŞTİRME → VERİTABANI" in sahte_st.code.call_args.args[0]
 
 
 def test_veri_akisi_streamlit_graphviz_cizer(sahte_st):
@@ -173,9 +182,12 @@ def test_kpi_karti_html_kategori_ve_tema():
     sistem = kpi_karti_html("A", 1, kategori="sistem", tema="aydinlik")
     assert palet_k["metric-customer"] in musteri and palet_k["surface"] in musteri
     assert palet_a["metric-system"] in sistem and palet_a["surface"] in sistem
-    # KPI-EXA-01: sade kart — gradient/gölge/kalın sol şerit yok, 1px çerçeve var
+    # KPI-EXA-02: sade kart — gradient/gölge/kalın sol şerit yok, 1px KATEGORİ renkli kontur
     assert "linear-gradient" not in musteri and "box-shadow" not in musteri
-    assert "border-left" not in musteri and f"border:1px solid {palet_k['border']}" in musteri
+    assert "border-left" not in musteri
+    assert f"border:1px solid {palet_k['metric-customer']}" in musteri
+    assert f"border:1px solid {palet_a['metric-system']}" in sistem
+    assert "background:#fff" not in musteri.lower()  # beyaz zemin yok
     assert "1.234.567" in kpi_karti_html("A", 1234567)
     assert "—" in kpi_karti_html("A", None)
 
@@ -248,9 +260,19 @@ def sahte_st(monkeypatch):
 
 
 def test_aktif_tema_streamlit_ayarindan(sahte_st):
+    # MagicMock context.theme.type str değil → get_option'a düşer
     sahte_st.get_option.return_value = "light"
     assert charts.aktif_tema() == "aydinlik"
     sahte_st.get_option.side_effect = RuntimeError("yok")
+    assert charts.aktif_tema() == "karanlik"
+
+
+def test_aktif_tema_context_oncelikli(sahte_st):
+    # KPI-EXA-02: tarayıcının etkin teması (st.context.theme.type) ayarın önünde
+    sahte_st.get_option.return_value = "dark"
+    sahte_st.context.theme.type = "light"
+    assert charts.aktif_tema() == "aydinlik"
+    sahte_st.context.theme.type = ""
     assert charts.aktif_tema() == "karanlik"
 
 

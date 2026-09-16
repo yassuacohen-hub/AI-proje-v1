@@ -320,6 +320,17 @@ SECTIONS: tuple[TabTanimi, ...] = (
         min_rol="analyst",
     ),
     TabTanimi(
+        anahtar="teknik_altyapi",
+        baslik="Teknik Altyapı",
+        ikon="🧭",
+        grup=GRUP_SISTEM,
+        aciklama="Süreç diyagramı ve servis haritası (KPI-EXA-02)",
+        url_path="teknik-altyapi",
+        modul="web_dashboard.tabs.teknik_altyapi",
+        fonksiyon="render_teknik_altyapi_tab",
+        min_rol="analyst",
+    ),
+    TabTanimi(
         anahtar="performans",
         baslik=t("menu_performans"),
         ikon="⚡",
