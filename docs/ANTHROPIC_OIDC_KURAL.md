@@ -28,6 +28,12 @@ GitHub Actions JWT'sindeki claim'ler **URL değil, kısa değerdir**:
 
 Doğru olanlar: ihraççı URL `https://token.actions.githubusercontent.com`, JTI tekrar oynatma koruması açık, kural ID action.yml ile aynı, çalışma alanı "tüm alanlar" (kabul edilebilir; istenirse tek alan `wrkspc_013LPgw97ZUzYnJHKxjuj3X8`).
 
+## Konsol "Test connection" kodu hakkında (2026-09-16 23:25)
+
+Konsolun gösterdiği Python örneği (`read_token()` + `WorkloadIdentityCredentials`) **yerelde çalışmaz**: `/path/to/token` diye bir dosya yok; GitHub OIDC JWT yalnızca Actions koşusu içinde (`id-token: write`) üretilir. Örnekteki tüm kimlikler `.github/actions/anthropic-oidc/action.yml` ile birebir aynı (kural/org/servis hesabı/çalışma alanı/model) → kod tarafında değişiklik gerekmez. Gerçek test = PR'a push → "Anthropic PR Review" job'u.
+
+Kural son hali (sahip kaydetti): konu öneki `repo:yassuacohen-hub/-AI-proje-v1-Parent-repo:*`, `repository_owner`, `repository` doğru; `event_name` satırı silindi; kapsam `workspace:developer`.
+
 ## Kopyala-yapıştır: düzenleme formu alan alan (sahip için)
 
 | # | Form alanı | Yapılacak | Yazılacak değer |
