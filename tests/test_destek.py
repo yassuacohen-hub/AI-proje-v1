@@ -98,11 +98,17 @@ def test_durum_gecis_gecersiz_hata():
 
 def test_guncelle():
     """Ticket başlık ve açıklama güncellenebilmeli."""
+    import time
+
     t = ticket_olustur(TENANT, "Eski Başlık", "Eski Açıklama")
+    # Zaman damgasi milisaniye cozunurluklu; hizli CI'da olusturma ve
+    # guncelleme ayni ms'e dusebilir -> deterministik fark icin kisa bekleme.
+    time.sleep(0.005)
     updated = ticket_guncelle(t.id, baslik="Yeni Başlık", aciklama="Yeni Açıklama")
     assert updated is not None
     assert updated.baslik == "Yeni Başlık"
     assert updated.aciklama == "Yeni Açıklama"
+    assert updated.guncelleme >= t.guncelleme
     assert updated.guncelleme != t.guncelleme
 
 
