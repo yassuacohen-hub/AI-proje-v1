@@ -28,6 +28,26 @@ GitHub Actions JWT'sindeki claim'ler **URL değil, kısa değerdir**:
 
 Doğru olanlar: ihraççı URL `https://token.actions.githubusercontent.com`, JTI tekrar oynatma koruması açık, kural ID action.yml ile aynı, çalışma alanı "tüm alanlar" (kabul edilebilir; istenirse tek alan `wrkspc_013LPgw97ZUzYnJHKxjuj3X8`).
 
+## Kopyala-yapıştır: düzenleme formu alan alan (sahip için)
+
+| # | Form alanı | Yapılacak | Yazılacak değer |
+|---|---|---|---|
+| 1 | Kural adı | değiştir | `huginn-muninn-komuta-merkezi` |
+| 2 | Tanım | değiştir | `GitHub Actions PR review + CI hata aciklama` |
+| 3 | İhraççı | dokunma | `github-actions` |
+| 4 | Eşleştirme | "Desen eşleşmesi" seçili kalsın | — |
+| 5 | Konu modeli | tamamını sil, yaz | `repo:yassuacohen-hub/-AI-proje-v1-Parent-repo:*` |
+| 6 | Ek talep `repository_owner` | sağdaki değeri değiştir | `yassuacohen-hub` |
+| 7 | Ek talep `event_name = push` | **çöp kutusu ile SİL** | — |
+| 8 | Ek talep `repository` | sağdaki değeri değiştir | `yassuacohen-hub/-AI-proje-v1-Parent-repo` |
+| 9 | Beklenen hedef kitle | boş bırak | (boş = `https://api.anthropic.com`, action.yml ile aynı) |
+| 10 | Çalışma alanları (aşağıda) | "Tüm çalışma alanları" kalabilir | — |
+| 11 | OAuth kapsamı (aşağıda) | `org:admin` kaldır, sadece | `workspace:developer` |
+| 12 | Token ömrü | dokunma | 86400 |
+| 13 | Kaydet | | |
+
+Not: Konu modelinde sondaki `*` şart — PR'da `:pull_request`, CI-explain'de `:ref:refs/heads/main` ile bitiyor, ikisini de kapsar.
+
 ## Marka notu
 Kural adı `huginn-mumunn-komuta-merkezi` → doğru yazım **Muninn** (`huginn-muninn-komuta-merkezi`). Teknik etkisi yok; AGENTS.md marka kuralı gereği not düşüldü.
 
