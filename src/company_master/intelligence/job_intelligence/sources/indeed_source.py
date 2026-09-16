@@ -53,7 +53,7 @@ class IndeedSource(BaseJobSource):
         for page in range(0, max_pages):
             start = page * 10
             params = f"?q={query}&l={location}&start={start}" if query else f"?l={location}&start={start}"
-            urls.append(f"{indeed_SEARCH}{params}")
+            urls.append(f"{INDEED_SEARCH}{params}")
         logger.info(
             "[%s] %d Indeed arama URL'si keşfedildi",
             self.source_name, len(urls),

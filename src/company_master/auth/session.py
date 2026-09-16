@@ -22,6 +22,8 @@ from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from pydantic import BaseModel
 
+from company_master.auth.rbac import has_role
+
 # Session configuration
 SESSION_COOKIE_NAME = "huginn_session"
 SESSION_TTL = 3600 * 24  # 24 hours

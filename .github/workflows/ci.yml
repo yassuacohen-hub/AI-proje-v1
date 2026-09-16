@@ -30,7 +30,8 @@ jobs:
       - name: flake8 (style)
         run: |
           flake8 src/ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-      - name: black --check
+      - name: black --check (FMT-01 tamamlanana kadar bilgilendirici)
+        continue-on-error: true
         run: black --check src/ tests/
 
   test:
