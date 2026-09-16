@@ -11,19 +11,19 @@
 | WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | plan | - |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | plan | - |
 | REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar) | cline | P2 | blocked | data/orchestrator/REV-UI-SIDEBAR-02_bulgular_2026-09-15_cline.md |
-| AUTH-GATE-01 | Giris kapisi modali + POST login + sifre sifirlama | kilo | P1 | review | src/company_master/ui/components/modal.py, web_dashboard/tabs/admin_auth.py, app.py |
-| NAV-IA-01 | Menu agaci: TabTanimi.ust_sayfa + ESKI_URL + 6 ust oge | kilo | P1 | review | web_dashboard/tabs/__init__.py, tests/test_dashboard_nav.py, tests/test_app_menu_rol.py |
-| NAV-IA-02 | Musteri Yonetimi sayfasi (6 alt sekme) + K-1 tier fix | kilo | P1 | review | web_dashboard/tabs/musteri_yonetimi.py, web_dashboard/tabs/admin_extras.py, tests/test_musteri_yonetimi.py |
-| TOK-01 | Ajan kural dosyalarinda token sikistirma (12K->6K) | cline | P1 | review | AGENTS.md, CLAUDE.md, ANA_KURALLAR.md |
-| REV-TOK-01 | TOK-01 dokuman sadelestirme incelemesi (cline teslimi) | roo | P2 | plan | CLAUDE.md, docs/AJAN_DETAY.md |
 | BRAND-KIMLIK-01 | Marka kimligi seti kuruldu - inceleme ve onay (brand.md + design-tokens.json + assets/LOGO.md) | roo | P2 | plan | - |
+| MARKA-REVIZE-01 | Marka kalip dosyalari ORTAK REVIZE (roo + cline) - ileri tarihli planlama | roo | P2 | plan | - |
+| ELESTIRI-01 | ROO_ELESTIRI_NOTLARI.md gozden gecirme + cline gezinti bulgulari | roo | P1 | plan | docs/ROO_ELESTIRI_NOTLARI.md |
+| NAV-IA-04 | Sol-alt hesap karti popover + kimlik/yonetim kaldir | kilo | P1 | aktif | app.py, web_dashboard/tabs/admin_auth.py, tests/test_dashboard_nav.py |
+| DATA-LOG-01 | login_events + search_events tablolari, Giris Etkinligi/Aramalar gercek veri | kilo | P2 | plan | web_app.py, web_dashboard/tabs/musteri_yonetimi.py, src/company_master/schema/migrations/migrate.py |
+| SEC-AUTH-01 | Auth uclari guvenlik duzeltmeleri (REV-BATCH-01 Y-1..Y-4, O-1, O-2, O-4, D-1, D-4) | cline | P1 | plan | web_dashboard/tabs/__init__.py, tests/test_auth_gate.py, .gitignore |
 
 ## Tamamlananlar
 
 | Görev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
 | P0-1 | İstiklal OSB scraper implementasyonu | web_kazima | 2026-09-08T10:00:00Z |
-| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-16T20:57:24 |
+| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-16T22:17:23 |
 | P0-3 | Kalite skoru 6.53 - 50+ heazine | kalite | 2026-09-06T22:54:31 |
 | Y21 | ISKUR kurumsal eslestirme verisi arastirma | arastirmaci | 2026-09-10 |
 | APIFY-01 | Apify uygunluk ve entegrasyon mimarisi arastirma | kilo | 2026-09-11T22:14:20 |
@@ -241,3 +241,10 @@
 | NAV-FIX-01 | Tek tikta bolum gecisi + mojibake (app.py, admin_panel.py) | kilo | 2026-09-16T17:41:39 |
 | REV-NAV-FIX-01 | NAV-FIX-01 capraz inceleme (kilo teslimi) | cline | 2026-09-16T18:08:39 |
 | NAV-FIX-02 | Menu aciklamalari menu disinda sagda (topbar) gosterilsin; native tooltip kaldir | kilo | 2026-09-16T18:21:51 |
+| AUTH-GATE-01 | Giris kapisi modali + POST login + sifre sifirlama | kilo | 2026-09-16T22:07:25 |
+| NAV-IA-01 | Menu agaci: TabTanimi.ust_sayfa + ESKI_URL + 6 ust oge | kilo | 2026-09-16T22:07:25 |
+| NAV-IA-02 | Musteri Yonetimi sayfasi (6 alt sekme) + K-1 tier fix | kilo | 2026-09-16T22:07:25 |
+| TOK-01 | Ajan kural dosyalarinda token sikistirma (12K->6K) | cline | 2026-09-16T21:58:45 |
+| REV-TOK-01 | TOK-01 dokuman sadelestirme incelemesi (cline teslimi) | roo | 2026-09-16T21:59:50 |
+| REV-BATCH-01 | Capraz inceleme: BATCH-01 (AUTH-GATE-01+NAV-IA-01+NAV-IA-02, commit feea800) | cline | 2026-09-16T22:26:29 |
+| NAV-IA-03 | Proje Yonetimi sayfasi (5 alt sekme, Karar Defteri ustte) | kilo | 2026-09-16T22:26:29 |

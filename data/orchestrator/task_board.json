@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-16T20:57:24",
+    "bitis": "2026-09-16T22:17:23",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -3612,9 +3612,9 @@
     "baslik": "Giris kapisi modali + POST login + sifre sifirlama",
     "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-16T18:47:01",
-    "bitis": null,
+    "bitis": "2026-09-16T22:07:25",
     "dosyalar": [
       "src/company_master/ui/components/modal.py",
       "web_dashboard/tabs/admin_auth.py",
@@ -3632,9 +3632,9 @@
     "baslik": "Menu agaci: TabTanimi.ust_sayfa + ESKI_URL + 6 ust oge",
     "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-16T18:47:01",
-    "bitis": null,
+    "bitis": "2026-09-16T22:07:25",
     "dosyalar": [
       "web_dashboard/tabs/__init__.py",
       "tests/test_dashboard_nav.py",
@@ -3650,9 +3650,9 @@
     "baslik": "Musteri Yonetimi sayfasi (6 alt sekme) + K-1 tier fix",
     "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-16T18:47:01",
-    "bitis": null,
+    "bitis": "2026-09-16T22:07:25",
     "dosyalar": [
       "web_dashboard/tabs/musteri_yonetimi.py",
       "web_dashboard/tabs/admin_extras.py",
@@ -3668,9 +3668,9 @@
     "baslik": "Ajan kural dosyalarinda token sikistirma (12K->6K)",
     "sahip": "cline",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-16T18:52:51",
-    "bitis": null,
+    "bitis": "2026-09-16T21:58:45",
     "dosyalar": [
       "AGENTS.md",
       "CLAUDE.md",
@@ -3688,14 +3688,14 @@
     "baslik": "TOK-01 dokuman sadelestirme incelemesi (cline teslimi)",
     "sahip": "roo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-16T20:03:00",
-    "bitis": null,
+    "bitis": "2026-09-16T21:59:50",
     "dosyalar": [
       "CLAUDE.md",
       "docs/AJAN_DETAY.md"
     ],
-    "not": "",
+    "not": "Teslim (roo): CLAUDE.md 6676B (-42%), AJAN_DETAY 21 bolum, FastAPI yonlendirme dogru; .roorules CLAUDE.md referansi yok; TOK-01 onaylandi",
     "source": "ic",
     "from_agent": null
   },
@@ -3709,6 +3709,124 @@
     "baslangic": "2026-09-16T20:53:38",
     "bitis": null,
     "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "MARKA-REVIZE-01",
+    "id": "MARKA-REVIZE-01",
+    "baslik": "Marka kalip dosyalari ORTAK REVIZE (roo + cline) - ileri tarihli planlama",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-16T21:10:37",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ELESTIRI-01",
+    "id": "ELESTIRI-01",
+    "baslik": "ROO_ELESTIRI_NOTLARI.md gozden gecirme + cline gezinti bulgulari",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-16T21:30:15",
+    "bitis": null,
+    "dosyalar": [
+      "docs/ROO_ELESTIRI_NOTLARI.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "REV-BATCH-01",
+    "id": "REV-BATCH-01",
+    "baslik": "Capraz inceleme: BATCH-01 (AUTH-GATE-01+NAV-IA-01+NAV-IA-02, commit feea800)",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-16T22:07:25",
+    "bitis": "2026-09-16T22:26:29",
+    "dosyalar": [],
+    "not": "Teslim (cline): TAMAMLANDI (yalniz oku modu; dosya degisikligi YOK). Commit feea800 capraz incelemesi: 12 bulgu — 4 YUKSEK: (Y-1) auth uclarinda rate-limit yok (login/reset/change-password sifresiz — brute-force acik); (Y-2) kullanici var/yok sizmasi (login 403/401 ayrimi, reset-request 404 'admin bulunamadi' — brief sarti 'ayrim yapilmamali' ihlal); (Y-3) _env_kimlik DEBUG=1 kapisi yok — .env sifresiyle form on-doluyor; (Y-4) misafir akisi admin_token='guest' yaziyor ve aktif_rol() admin_token doluysa ROL_ADMIN donuyor — misafir UI'da tam admin menusu goruyor (U-10 misafirde asilabilir). 5 ORTA: (O-1) ESKI_URL oluy — kimlik/yonetim halen SECTIONS'ta, tab_url_getir SECTIONS'i once buldugu icin yonlendirme calismiyor; (O-2) GET /api/admin/login kaldirilmis — scripts/admin_login_probe.py (D-24 araci) 405; (O-3) K-1 tier 'JSON konfigurasyon' iddiası sahte — sabit liste + yaniltici test adi; (O-4) auth testleri AST seviyesinde, davranissal kapama yok (roo notu dogrulandi); (O-5) plan v4 sidebar temizligi uygulanmamis (hizli gecis/kompakt/Marka Blogu duruyor). 3 DUSUK: (D-1) secrets.toml plaintext fallback + gitignore girisi yok; (D-2) kompakt mod her butonda yeni columns; (D-3) bekleyen_gorev etiketi tutarsiz; ayrica (D-4) change-password strip() notu. POZITIF: modal dismissible=not kapatilabilir dogru; reset token TTL 3600 + tek kullanim; sifre loglanmiyor; 6 ust sayfa + ust/alt rol filtresi erisebilir dogru; musteri_yonetimi 6 alt sekme + Section desen + grafik yalniz charts.py; test_admin_auth_login POST+JSON zorluyor. DOGRULAMA: hedefli 5 test dosyasi 183 passed (15.3sn); kodlama_denetim --kapsam git TEMIZ. Rapor: data/orchestrator/REV-BATCH-01_rapor_2026-09-16_cline.md (bulgu tablosu + sart-karsilastirma + defter onerileri M-07/M-08/S-11/S-12/D-31); kapsam disi bulgular: data/orchestrator/REV-BATCH-01_bulgular_2026-09-16_cline.md. Eksik/erteleme: duzeltme YOK (kilo BATCH-02 ayni dosyalarda) — Y-1..Y-4 icin BATCH-02 sonrasi ayri gorev; O-2/O-5 kilo teyidi.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "NAV-IA-04",
+    "id": "NAV-IA-04",
+    "baslik": "Sol-alt hesap karti popover + kimlik/yonetim kaldir",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "aktif",
+    "baslangic": "2026-09-16T22:07:26",
+    "bitis": null,
+    "dosyalar": [
+      "app.py",
+      "web_dashboard/tabs/admin_auth.py",
+      "tests/test_dashboard_nav.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "NAV-IA-03",
+    "id": "NAV-IA-03",
+    "baslik": "Proje Yonetimi sayfasi (5 alt sekme, Karar Defteri ustte)",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-16T22:07:26",
+    "bitis": "2026-09-16T22:26:29",
+    "dosyalar": [
+      "web_dashboard/tabs/proje_yonetimi.py",
+      "web_dashboard/tabs/__init__.py",
+      "tests/test_proje_yonetimi.py"
+    ],
+    "not": "Teslim (kilo): web_dashboard/tabs/proje_yonetimi.py: yeni (5 alt sekme: Karar Defteri, 9Router/Abrakadabra, Denetim İzi, Hata Yönetimi, DLQ; Karar Defteri üstte), PageHeader+Section(ADMIN-UI-10), subheader yok, mevcut render fonksiyonları çağrıldı; __init__.py: proje_yonetimi TabTanimi hazir=True + modul/fonksiyon; tests/test_proje_yonetimi.py: 3 yeni test. 3531+ passed, 2 skipped (flaky isolation).",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "DATA-LOG-01",
+    "id": "DATA-LOG-01",
+    "baslik": "login_events + search_events tablolari, Giris Etkinligi/Aramalar gercek veri",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-16T22:07:26",
+    "bitis": null,
+    "dosyalar": [
+      "web_app.py",
+      "web_dashboard/tabs/musteri_yonetimi.py",
+      "src/company_master/schema/migrations/migrate.py",
+      "tests/test_data_log.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "SEC-AUTH-01",
+    "id": "SEC-AUTH-01",
+    "baslik": "Auth uclari guvenlik duzeltmeleri (REV-BATCH-01 Y-1..Y-4, O-1, O-2, O-4, D-1, D-4)",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-16T22:27:05",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/__init__.py",
+      "tests/test_auth_gate.py",
+      ".gitignore",
+      "scripts/admin_login_probe.py"
+    ],
     "not": "",
     "source": "ic",
     "from_agent": null

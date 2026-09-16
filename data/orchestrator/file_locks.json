@@ -1,82 +1,57 @@
 {
-  "src/company_master/ui/components/modal.py": {
+  "app.py": {
     "sahip": "kilo",
-    "task_id": "AUTH-GATE-01",
-    "kilitlendi": "2026-09-16T18:47:01"
+    "task_id": "NAV-IA-04",
+    "kilitlendi": "2026-09-16T22:07:26"
   },
   "web_dashboard/tabs/admin_auth.py": {
     "sahip": "kilo",
-    "task_id": "AUTH-GATE-01",
-    "kilitlendi": "2026-09-16T18:47:01"
-  },
-  "app.py": {
-    "sahip": "kilo",
-    "task_id": "AUTH-GATE-01",
-    "kilitlendi": "2026-09-16T18:47:01"
-  },
-  "web_app.py": {
-    "sahip": "kilo",
-    "task_id": "AUTH-GATE-01",
-    "kilitlendi": "2026-09-16T18:47:01"
-  },
-  "tests/test_auth_gate.py": {
-    "sahip": "kilo",
-    "task_id": "AUTH-GATE-01",
-    "kilitlendi": "2026-09-16T18:47:01"
-  },
-  "web_dashboard/tabs/__init__.py": {
-    "sahip": "kilo",
-    "task_id": "NAV-IA-01",
-    "kilitlendi": "2026-09-16T18:47:01"
+    "task_id": "NAV-IA-04",
+    "kilitlendi": "2026-09-16T22:07:26"
   },
   "tests/test_dashboard_nav.py": {
     "sahip": "kilo",
-    "task_id": "NAV-IA-01",
-    "kilitlendi": "2026-09-16T18:47:01"
+    "task_id": "NAV-IA-04",
+    "kilitlendi": "2026-09-16T22:07:26"
   },
-  "tests/test_app_menu_rol.py": {
+  "web_app.py": {
     "sahip": "kilo",
-    "task_id": "NAV-IA-01",
-    "kilitlendi": "2026-09-16T18:47:01"
+    "task_id": "DATA-LOG-01",
+    "kilitlendi": "2026-09-16T22:07:26"
   },
   "web_dashboard/tabs/musteri_yonetimi.py": {
     "sahip": "kilo",
-    "task_id": "NAV-IA-02",
-    "kilitlendi": "2026-09-16T18:47:01"
+    "task_id": "DATA-LOG-01",
+    "kilitlendi": "2026-09-16T22:07:26"
   },
-  "web_dashboard/tabs/admin_extras.py": {
+  "src/company_master/schema/migrations/migrate.py": {
     "sahip": "kilo",
-    "task_id": "NAV-IA-02",
-    "kilitlendi": "2026-09-16T18:47:01"
+    "task_id": "DATA-LOG-01",
+    "kilitlendi": "2026-09-16T22:07:26"
   },
-  "tests/test_musteri_yonetimi.py": {
+  "tests/test_data_log.py": {
     "sahip": "kilo",
-    "task_id": "NAV-IA-02",
-    "kilitlendi": "2026-09-16T18:47:01"
+    "task_id": "DATA-LOG-01",
+    "kilitlendi": "2026-09-16T22:07:26"
   },
-  "AGENTS.md": {
+  "web_dashboard/tabs/__init__.py": {
     "sahip": "cline",
-    "task_id": "TOK-01",
-    "kilitlendi": "2026-09-16T18:52:51"
+    "task_id": "SEC-AUTH-01",
+    "kilitlendi": "2026-09-16T22:27:05"
   },
-  "ANA_KURALLAR.md": {
+  "tests/test_auth_gate.py": {
     "sahip": "cline",
-    "task_id": "TOK-01",
-    "kilitlendi": "2026-09-16T18:52:51"
+    "task_id": "SEC-AUTH-01",
+    "kilitlendi": "2026-09-16T22:27:05"
   },
-  ".roorules": {
+  ".gitignore": {
     "sahip": "cline",
-    "task_id": "TOK-01",
-    "kilitlendi": "2026-09-16T18:52:51"
+    "task_id": "SEC-AUTH-01",
+    "kilitlendi": "2026-09-16T22:27:06"
   },
-  "CLAUDE.md": {
-    "sahip": "roo",
-    "task_id": "REV-TOK-01",
-    "kilitlendi": "2026-09-16T20:03:00"
-  },
-  "docs/AJAN_DETAY.md": {
-    "sahip": "roo",
-    "task_id": "REV-TOK-01",
-    "kilitlendi": "2026-09-16T20:03:00"
+  "scripts/admin_login_probe.py": {
+    "sahip": "cline",
+    "task_id": "SEC-AUTH-01",
+    "kilitlendi": "2026-09-16T22:27:06"
   }
 }
