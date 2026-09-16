@@ -55,6 +55,14 @@ Push `65b60a6` → run 35160844030 (#22), `req_011Cf7xYeQTDnti8cQvoFj4H`, create
 - `success` → ÇALIŞIYOR; not: `workflow_run` (ci-explain) için `sub` sonu `:workflow_run` olur → main merge sonrası ikinci kural gerekir.
 - yine `failure` → Anthropic destek bileti; request_id'ler: `req_011Cf7uUfGpojKnvwaGVfzvC` (#19), `req_011Cf7vimAJQnoTqCJmRmRWQ` (#20), `req_011Cf7waaTW79addPR28PfUo` (#21), `req_011Cf7xYeQTDnti8cQvoFj4H` (#22).
 
+### "Org ID 329683178" önerisi — neden kullanılmaz (2026-09-16 23:14)
+
+Sahip `{"login": "HUGINN-MUMINN-command-center", "id": 329683178}` kaydını önerdi. Bu **başka bir GitHub hesabı/organizasyonu** (`node_id` `O_kgDO…` → "O" = Organization). Depomuz o org'da değil: her 4 denemede token claim'leri sabit ve `yassuacohen-hub` diyor —
+`repository = yassuacohen-hub/-AI-proje-v1-Parent-repo`, `repository_owner_id = 233441674`, `repository_id = 1364885446`.
+`sub` değerini **GitHub üretir, biz seçemeyiz**; Anthropic kuralı bu üretilen değere eşit olmak zorundadır. 329683178 yazılırsa hiçbir token eşleşmez. Bu ID ancak depo gerçekten o org'a taşınırsa anlam kazanır (o zaman `sub` de kendiliğinden değişir).
+
+Marka notu: org adı `HUGINN-MUMINN-command-center` **yanlış yazılmış** — doğrusu `MUNINN` (Muninn 🛡️). Yasak yazımlar: Muginn, Hugin, Munin, Mumin. Org adı düzeltilmeli (GitHub org rename) veya kullanılmamalı.
+
 ## Konsol "Test connection" kodu hakkında (2026-09-16 23:25)
 
 Konsolun gösterdiği Python örneği (`read_token()` + `WorkloadIdentityCredentials`) **yerelde çalışmaz**: `/path/to/token` diye bir dosya yok; GitHub OIDC JWT yalnızca Actions koşusu içinde (`id-token: write`) üretilir. Örnekteki tüm kimlikler `.github/actions/anthropic-oidc/action.yml` ile birebir aynı (kural/org/servis hesabı/çalışma alanı/model) → kod tarafında değişiklik gerekmez. Gerçek test = PR'a push → "Anthropic PR Review" job'u.
