@@ -1,6 +1,6 @@
 # Ortak Eleştiri, Dikkat ve Risk Defteri (Tüm Ajanlar Okusun ve Yazsın)
 
-> Son güncelleme: 2026-09-16 (K-06/M-06/S-09/S-10/D-29/D-30 ekleyen: cline)
+> Son güncelleme: 2026-09-16 23:15 (S-09/S-10/D-07 ÇÖZÜLDÜ, D-31/D-32, Bölüm 8 görev dönüşüm listesi ekleyen: roo)
 > Kapsam: DASH-UX serisi + UX-01/02/03 + P7-46 + dashboard mimarisi + MVP-ADMIN + AI-CI (Anthropic × GitHub)
 > Amaç: Teslim edilen işlerde bilerek bırakılan eksikleri, tespit edilen
 > tutarsızlıkları ve diğer ajanları etkileyecek riskleri tek yerde toplamak.
@@ -66,8 +66,8 @@ silmeyin; `Durum` sütununu `ÇÖZÜLDÜ (görev-id)` olarak güncelleyin — de
 | S-06 | **`gorev_kutusu.py al` panodaki göreve çalışmıyor** | Panoya doğrudan eklenmiş (`source: ic`) görevlerde posta kutusunda tetik olmadığı için `al` komutu "bekleyen tetik yok" diyor; ajan görevi ancak `task_board.gorev_guncelle(...)` ile üstüne alabiliyor. İki farklı yol olması ajanı yanıltıyor. Öneri: `al` komutu tetik bulamazsa panoya bakıp görev o ajana atanmışsa doğrudan aktifleştirsin. | tüm ajanlar, orkestratör | AÇIK |
 | S-07 | **Otomatik onay, "onaysız done olmaz" kuralını fiilen delebiliyor** | P7-44 teslimi `oto-nobetci` tarafından 29 saniye içinde otomatik onaylandı; insan/kontrolör incelemesi olmadan `done` oldu. Kural metni "onaysız done geçersizdir" derken pratikte otomatik onay devrede. Ya kural metni otomatik onayı açıkça tanımlamalı ya da kritik (P0/P1) görevler otomatik onay dışında tutulmalı. | orkestratör | AÇIK — sahibin kararı gerekli |
 | S-08 | **Kullanıcı kimliği zayıf: herkes aynı `misafir` dosyasını paylaşıyor** | P7-46'daki [`aktif_kullanici()`](../web_dashboard/tabs/admin_panel.py:75) oturumdan sırasıyla `admin_email` → `user_email` → `kullanici_id` arıyor; hiçbiri yoksa sabit `misafir` kimliğine düşüyor. Streamlit oturumunda bu alanlar çoğu akışta dolmadığı için pratikte **tüm kullanıcılar `data/user_settings/misafir.json` dosyasını paylaşır**; biri ayarı değiştirince diğerininki de değişir. Ayrıca ayarlar kullanıcıya değil tarayıcı oturumuna bağlı görünür. Kalıcı çözüm: kimliğin [`company_master.auth.session`](../src/company_master/auth/session.py) üzerinden çözülmesi ve kimlik yoksa panelin salt-okunur/uyarılı çalışması. Geçici azaltma: panelde "misafir modunda ayarlar paylaşılır" uyarısı. | roo, kilo, orkestratör | AÇIK — sahip kararıyla göreve dönüştürülecek (şimdilik bekletiliyor) |
-| S-09 | **Marka kimliği seti versiyon kontrolü dışında** | Kök dizindeki `brand.md`, `design-tokens.json`, `ai-rules.md`, `company.md`, `assets/`, `prompts/`, `personas/` git kapsamı DIŞINDA ve tek kopya (kök `C:\Huginn Data Projesi` repo değil). Kayıp/yazım hatasında iz ve geri dönüş yok. (Gezinti bulgusu, cline 2026-09-16.) | cline, roo, sahip | AÇIK — repo içine taşıma veya `git init` + yedek kuralı |
-| S-10 | **Kök dizindeki geçici scriptler birikmiş** | Kökte `fix_*.py` ×7, `update_and_submit*.py` ×4, `modify_topbar*.py` ×2, `replace_app_functions.*`, `temp_script.py`, `dummy` — 18+ dosya; `scripts/` ise 243 dosya. D-25 ad kuralı var, arşiv/temizlik kuralı yok. (Gezinti bulgusu, cline 2026-09-16.) | cline, sahip | AÇIK — toplu değerlendirmede arşiv kararı |
+| S-09 | **Marka kimliği seti versiyon kontrolü dışında** | Kök dizindeki `brand.md`, `design-tokens.json`, `ai-rules.md`, `company.md`, `assets/`, `prompts/`, `personas/` git kapsamı DIŞINDA ve tek kopya (kök `C:\Huginn Data Projesi` repo değil). Kayıp/yazım hatasında iz ve geri dönüş yok. (Gezinti bulgusu, cline 2026-09-16.) | cline, roo, sahip | ÇÖZÜLDÜ (BRAND-KIMLIK-01, D-44) — kit `docs/brand/` altına taşındı, üst dizin temizlendi, 14 dosyada Huggin→Huginn |
+| S-10 | **Kök dizindeki geçici scriptler birikmiş** | Kökte `fix_*.py` ×7, `update_and_submit*.py` ×4, `modify_topbar*.py` ×2, `replace_app_functions.*`, `temp_script.py`, `dummy` — 18+ dosya; `scripts/` ise 243 dosya. D-25 ad kuralı var, arşiv/temizlik kuralı yok. (Gezinti bulgusu, cline 2026-09-16.) | cline, sahip | ÇÖZÜLDÜ (roo 2026-09-16) — üst dizin çöpleri `_trash/kok_disi_2026-09-16/`, repo kökü çöpleri `_trash/kok_2026-09-16/`, `scripts/_tmp_*` → `_trash/scripts_tmp_2026-09-16/`; kökte 5 .py kaldı |
 
 ## 5. Orkestratör Eleştirileri (Kilo)
 
@@ -281,7 +281,7 @@ with st.sidebar:
 | D-04 | 2026-09-15 | genel | cmd'de `python -c "...\n..."` → SyntaxError; `findstr /v "^$"` boş çıktıda **exit 1** | Windows cmd çok satır `-c` desteklemez; findstr eşleşme yoksa hata kodu döner | Tek satır list comprehension / geçici script `data/_tmp/`; findstr'ı `|| exit 0` ile sarma ya da sonucu yorumlarken exit 1'i hata sayma | roo, tüm ajanlar | BİLGİ |
 | D-05 | 2026-09-15 | genel | `git push` sonrası status "[ahead 1]" kalıyor | Submodule (`AI proje v1`) pin'i / bayat ref; commit aslında origin'de | `git fetch` + `git log origin/<dal> -1` ile doğrula; submodule değişikliği ayrıca commit edilmeli | roo | BİLGİ |
 | D-06 | 2026-09-15 | genel | Commit'te bol **CRLF uyarısı** | `.gitattributes` renormalize yapılmadı | Ertelendi: `git add --renormalize .` ayrı bir hijyen görevi | roo | AÇIK — ertelendi |
-| D-07 | 2026-09-15 | genel | Kökte `fix_*.py`, `apply_fix*.py`, `original_content.txt`, `fix.ps1` çöpleri | kilo geçici düzeltme scriptlerini repo köküne bıraktı (Proje Sınırı Kuralı md.2 ihlali) | Geçici dosya `data/_tmp/`'ye; kök temizliği hijyen görevi | kilo, roo | AÇIK — ertelendi |
+| D-07 | 2026-09-15 | genel | Kökte `fix_*.py`, `apply_fix*.py`, `original_content.txt`, `fix.ps1` çöpleri | kilo geçici düzeltme scriptlerini repo köküne bıraktı (Proje Sınırı Kuralı md.2 ihlali) | Geçici dosya `data/_tmp/`'ye; kök temizliği hijyen görevi | kilo, roo | ÇÖZÜLDÜ (roo 2026-09-16, bkz. S-10) — `original_content.txt` kaldı (kaynak belirsiz; sahip onayı ile silinecek) |
 | D-08 | 2026-09-15 | genel | `tests/test_api_integration.py::test_companies_liste_sozlesme` `assert 14000 == 1` | Mock DB devreye girmiyor, gerçek DB'ye düşüyor (izolasyon) | UI ile ilgisiz; ayrı görev | tüm ajanlar | AÇIK |
 
 ### 7.2 MVP-ADMIN serisi (2026-09-15)
@@ -315,3 +315,26 @@ with st.sidebar:
 | D-28 | 2026-09-15 | KPI-EXA-01 | `veri_akisi()` içinde `st` tanımsız — üretimde `NameError` olurdu; test ilk turda yanlış mock (`charts.st`) ile yakalayamadı | `charts.py` `st`'yi modül düzeyinde import etmez; sarmalayıcılar fonksiyon içi `import streamlit as st` kalıbı kullanır | Sarmalayıcı eklerken kalıbı kopyala; testte `sahte_st` fixture (`sys.modules["streamlit"]`) kullan, `monkeypatch.setattr(charts,"st",..)` değil | roo | BİLGİ |
 | D-29 | 2026-09-16 | ELESTIRI-01 | Defter başlığındaki "Son güncelleme" tarihi bayat kalıyor | Dosya 2026-09-16 21:23'te güncellendi; başlık 2026-09-15 gösteriyordu — ajanlar bayat/güncel ayrımı yapamıyor | **Kural önerisi:** her katkıda başlık tarihi güncellenir | tüm ajanlar | ÖNERİ |
 | D-30 | 2026-09-16 | ELESTIRI-01 | Paylaşımlı defterler görev kilit listesine alınmamalı | ELESTIRI-01 ataması bu dosyayı otomatik kilitledi; defter ortak, katkı kuralı "sona ekle" — kilit diğer ajanların katkısını engeller (sahip düzeltti, kilit bırakıldı) | **Kural önerisi:** `gorev_at --dosya` paylaşımlı defterleri (bu dosya, decision_log) kilit mesafesinde tutmalı; inceleme görevi `--dosya`sız açılır | orkestratör, tüm ajanlar | ÖNERİ |
+| D-31 | 2026-09-16 | BRAND-KIMLIK-01 | cmd `for %f in (...) do @cmd1 & cmd2 & cmd3` zinciri **her iterasyonda** cmd2/cmd3'ü tekrar çalıştırdı (5 kez robocopy+dir) | `&` zinciri `for` gövdesine dahil sayılır; parantezsiz gövde sınırı belirsiz | `for` gövdesini `( ... )` ile sınırla veya döngüyü ayrı komut olarak çalıştır; tek satır `python -c "exec(...)"` tercih et (D-04 ile aynı aile) | tüm ajanlar | BİLGİ |
+| D-32 | 2026-09-16 | BRAND-KIMLIK-01 | `robocopy /MOV` aynı içerikli hedef varsa kaynağı **silmeden atlar** (üst dizinde orijinaller kaldı) | robocopy "same" dosyaları kopyalamaz → MOV silme adımı da atlanır | Taşıma sonrası `dir` ile kaynağı doğrula; gerekirse `del` + `rd /s /q` ile elle temizle | tüm ajanlar | BİLGİ |
+| D-33 | 2026-09-16 | MARKA-REVIZE-01 | `tests/test_i18n.py:29` `HATALI_YAZIM` regex'i `Huggin` (tek n, çift g) yazımını yakalamıyor; kit 14 dosyada bu yazımla gelmişti | Regex yalnız Muginn/Hugin\b/Munin\b/Hugginn/Munnin/Odinn kapsıyor | MARKA-REVIZE-01 kilo adımı: `Huggin\b` + `Odın` ekle, `docs/brand/` taramaya dahil et | kilo, cline | AÇIK — görevde |
+| D-34 | 2026-09-16 | BRAND-KIMLIK-01 | Üç farklı primary renk: kit `#2563FF`, dashboard `tokens.py #6366f1`, Streamlit `config.toml #FF4B4B` | Kit pazarlama için üretildi; dashboard Copilot UX sözleşmesi ile Indigo; config.toml Streamlit varsayılanı | **D-45 kararı:** kit = pazarlama/web/logo; tokens.py = ürün UI (değişmez); `config.toml primaryColor` → `#6366f1` hizası MARKA-REVIZE-01 kilo adımı | kilo, roo | AÇIK — görevde |
+
+## 8. Madde → Görev Dönüşüm Listesi (ELESTIRI-01, roo 2026-09-16)
+
+Sahip talimatı (md.5) gereği toplu değerlendirme. Öncelik: A = bu sprint, B = sonraki, C = sahip kararı.
+
+| Madde | Önerilen görev | Ajan | Öncelik | Not |
+|---|---|---|---|---|
+| S-09, S-10, D-07 | — | — | ✅ | Bu tur çözüldü |
+| D-33, D-34 | MARKA-REVIZE-01 (zincir cline→kilo→roo) | cline, kilo | A | Brif: `docs/plans/MARKA-REVIZE-01_brief.md` |
+| K-04, S-08 | SEC-AUTH-01 (Aşama A cline'da) | cline | A | Zaten açık; `misafir` paylaşımı Aşama B |
+| D-08 | TEST-ISO-01: `test_api_integration` mock DB izolasyonu | kilo | A | 1 test, `conftest` fixture |
+| D-06 | GIT-HIJYEN-01: `git add --renormalize .` + `.gitattributes` | roo | B | Tek commit, diğer ajanlar boşken |
+| M-06 | API-SPLIT-01: `web_app.py` (3141 satır) → `routers/` | kilo | B | SEC-AUTH-01 Aşama B bitince; 4 parça (buyer/admin/companies/intelligence) |
+| M-03, M-04, M-05 | UI-MIMARI-02 | kilo | B | UI-SIDEBAR-02/TOPBAR-02 ile birleştir |
+| O-03, S-06 | ORCH-13: kilit/tetik bayatlama otomasyonu | kilo | B | `gorev_kutusu.py bakim` genişletme |
+| D-11, D-16 | GUARD-ENC-02 | kilo | B | Backlogda var |
+| D-29, D-30 | Kural: `AGENTS.md` sözlük satırı + `gorev_at` paylaşımlı-defter istisnası | roo | A | Bu sprint AGENTS.md sözlük işi ile |
+| S-07 | — | sahip | C | Sahip kararı bekliyor (kapsam) |
+| `original_content.txt` (kök) | Silme | sahip | C | Kaynağı belirsiz; onay gerekir |

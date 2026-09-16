@@ -1,0 +1,123 @@
+{
+  "brand": {
+    "name": "Huginn & Muninn",
+    "category": "Startup Intelligence Platform",
+    "slogan": "Map the Innovation Economy",
+    "spelling": "Huginn, Muninn, Odin (Huggin/Hugginn/Hugin/Munin/Muginn/Odın yasak; D-44)"
+  },
+
+  "typography": {
+    "fontFamily": "Inter, Geist, system-ui, -apple-system, 'Segoe UI', sans-serif",
+    "fontFamilyMono": "'JetBrains Mono', 'Fira Code', Consolas, monospace",
+    "numeric": "tabular-nums",
+    "scale": {
+      "xs": "12px",
+      "sm": "14px",
+      "md": "16px",
+      "lg": "20px",
+      "xl": "24px",
+      "2xl": "32px",
+      "3xl": "40px"
+    },
+    "weight": {
+      "regular": 400,
+      "medium": 500,
+      "semibold": 600,
+      "bold": 700
+    },
+    "lineHeight": {
+      "tight": 1.2,
+      "normal": 1.5
+    }
+  },
+
+  "colorRoles": {
+    "_note": "D-44 §3: rol haritasi. dark = sayfa zemini, gray900 = yuzey/kart, darkSecondary = yukseltilmis yuzey.",
+    "pageBackground": "dark",
+    "surface": "gray900",
+    "surfaceElevated": "darkSecondary",
+    "textPrimary": "gray200",
+    "textMuted": "gray400",
+    "border": "gray700",
+    "brandAction": "primary",
+    "brandSecondary": "secondary",
+    "highlight": "accent"
+  },
+
+  "scope": {
+    "_note": "D-45: bu dosya pazarlama/web/logo SSOT'udur. Muninn dashboard (Streamlit) ayri urun paleti kullanir: src/company_master/ui/tokens.py (primary #6366f1 Indigo, Copilot UX review sozlesmesi). Iki palet birlestirilmez; dashboard'a kit rengi tasinmaz.",
+    "marketing": "docs/brand/design-tokens.json",
+    "productUI": "src/company_master/ui/tokens.py"
+  },
+
+  "colors": {
+    "primary": "#2563FF",
+    "secondary": "#4F46E5",
+    "accent": "#22D3EE",
+
+    "dark": "#09111F",
+    "darkSecondary": "#131C2F",
+
+    "white": "#FFFFFF",
+
+    "gray50": "#F8FAFC",
+    "gray100": "#F1F5F9",
+    "gray200": "#E2E8F0",
+    "gray300": "#CBD5E1",
+    "gray400": "#94A3B8",
+    "gray500": "#64748B",
+    "gray600": "#475569",
+    "gray700": "#334155",
+    "gray800": "#1E293B",
+    "gray900": "#0F172A"
+  },
+
+  "gradients": {
+    "primary": [
+      "#2563FF",
+      "#4F46E5"
+    ],
+    "hero": [
+      "#2563FF",
+      "#7C3AED",
+      "#22D3EE"
+    ]
+  },
+
+  "borderRadius": {
+    "sm": "8px",
+    "md": "12px",
+    "lg": "18px",
+    "xl": "24px",
+    "full": "9999px"
+  },
+
+  "spacing": {
+    "xs": "4px",
+    "sm": "8px",
+    "md": "16px",
+    "lg": "24px",
+    "xl": "32px",
+    "2xl": "48px",
+    "3xl": "64px"
+  },
+
+  "shadow": {
+    "card": "0 10px 30px rgba(37,99,255,0.12)",
+    "hero": "0 20px 60px rgba(37,99,255,0.25)"
+  },
+
+  "logo": {
+    "concept": "Startup Intelligence Engine",
+    "symbol": "Connected opportunity node",
+    "style": "Geometric SaaS",
+    "background": "Transparent"
+  },
+
+  "ui": {
+    "theme": "dark-first",
+    "dashboard": true,
+    "dataDensity": "medium",
+    "chartStyle": "modern"
+  }
+}
