@@ -46,6 +46,15 @@ Tanı planı (Deneme 4): öneği **elle** `repo:` yaz (kopyalama yok → görün
 - `success` → önek mantığı çalışıyor, sorun uzun değerdeydi; `repo:` + claim koşulları kalıcı çözüm olarak kabul edilebilir (ya da kademeli uzatılır).
 - yine `failure` → Anthropic tarafı (format/bug); Anthropic destek + `request_id` ile bilet.
 
+## Deneme 4 sonucu (2026-09-16 23:07) — YİNE BAŞARISIZ: `match_subject_prefix` → "Static = TAM EŞLEŞME" hipotezi doğrulandı
+
+Push `65b60a6` → run 35160844030 (#22), `req_011Cf7xYeQTDnti8cQvoFj4H`, created 23:07:23Z. Önek yalnızca `repo:` iken bile red → önek/`startswith` mantığı hiç çalışmıyor. Kural ekranında Match rozeti **"Static"**, alan etiketi **"Subject pattern"**: Static mod büyük olasılıkla **tam metin eşleşmesi** yapıyor (`sub == pattern`), bu yüzden hiçbir kısmi değer geçmez. (Hata kodu adı `match_subject_prefix` yanıltıcı; iç kontrolün adı.)
+
+Çözüm planı (Deneme 5): Subject pattern alanına `sub`'ın **tamamını** yaz:
+`repo:yassuacohen-hub@233441674/-AI-proje-v1-Parent-repo@1364885446:pull_request`
+- `success` → ÇALIŞIYOR; not: `workflow_run` (ci-explain) için `sub` sonu `:workflow_run` olur → main merge sonrası ikinci kural gerekir.
+- yine `failure` → Anthropic destek bileti; request_id'ler: `req_011Cf7uUfGpojKnvwaGVfzvC` (#19), `req_011Cf7vimAJQnoTqCJmRmRWQ` (#20), `req_011Cf7waaTW79addPR28PfUo` (#21), `req_011Cf7xYeQTDnti8cQvoFj4H` (#22).
+
 ## Konsol "Test connection" kodu hakkında (2026-09-16 23:25)
 
 Konsolun gösterdiği Python örneği (`read_token()` + `WorkloadIdentityCredentials`) **yerelde çalışmaz**: `/path/to/token` diye bir dosya yok; GitHub OIDC JWT yalnızca Actions koşusu içinde (`id-token: write`) üretilir. Örnekteki tüm kimlikler `.github/actions/anthropic-oidc/action.yml` ile birebir aynı (kural/org/servis hesabı/çalışma alanı/model) → kod tarafında değişiklik gerekmez. Gerçek test = PR'a push → "Anthropic PR Review" job'u.
