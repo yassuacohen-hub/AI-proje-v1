@@ -10,7 +10,10 @@ import os
 import uuid
 import sys
 import time
-import tomllib
+try:  # Python 3.11+ standart kutuphane
+    import tomllib
+except ModuleNotFoundError:  # Python 3.10: harici tomli paketi
+    import tomli as tomllib  # type: ignore[no-redef]
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -2481,9 +2484,11 @@ def require_admin(
 
 
 
-@app.get("/api/admin/login")
-def api_admin_login(email: str = "", password: str = ""):
-    """Admin girişi: email + sifre -> token (24 saat)."""
+@app.post("/api/admin/login")
+def api_admin_login_post(req: dict):
+    """ADMIN-GATE-01: POST admin girişi. {email, password} → token."""
+    email = (req.get("email") or "").strip()
+    password = req.get("password") or ""
     if not email or not password:
         raise HTTPException(status_code=400, detail="email ve sifre zorunlu")
     engine = get_engine()
@@ -2498,7 +2503,6 @@ def api_admin_login(email: str = "", password: str = ""):
         if not _verify_password(password, row["password_hash"]):
             raise HTTPException(status_code=401, detail="gecersiz sifre")
         return {"token": _user_token(row["email"])}
-    # dev destegi: .streamlit/secrets.toml admin sifresi
     try:
         secrets_path = Path(__file__).resolve().parent / ".streamlit" / "secrets.toml"
         if secrets_path.exists():
@@ -2510,6 +2514,52 @@ def api_admin_login(email: str = "", password: str = ""):
     except Exception:
         pass
     raise HTTPException(status_code=401, detail="gecersiz email veya sifre")
+
+
+@app.post("/api/admin/reset-request")
+def api_admin_reset_request(req: dict):
+    """AUTH-GATE-01: Sifre sifirlama istegi. {email} -> token gonderilir."""
+    email = (req.get("email") or "").strip()
+    if not email:
+        raise HTTPException(status_code=400, detail="email zorunlu")
+    try:
+        _store_reset_token(email, str(uuid.uuid4()))
+    except Exception:
+        raise HTTPException(status_code=404, detail="admin bulunamadi")
+    return {"ok": True, "message": "sifirlama linki gonderildi"}
+
+
+@app.post("/api/admin/reset-confirm")
+def api_admin_reset_confirm(req: dict):
+    """AUTH-GATE-01: Sifre sifirlama onay. {email, token, new_password} -> sifre guncellenir."""
+    email = (req.get("email") or "").strip()
+    token = req.get("token") or ""
+    new_password = req.get("new_password") or ""
+    if not email or not token or not new_password:
+        raise HTTPException(status_code=400, detail="email, token, yeni sifre zorunlu")
+    if len(new_password) < 8:
+        raise HTTPException(status_code=400, detail="yeni sifre en az 8 karakter")
+    engine = get_engine()
+    with engine.connect() as conn:
+        row = conn.execute(
+            text(
+                "SELECT password_hash FROM users WHERE email = :e "
+                "AND reset_token = :t AND reset_token_exp > :now"
+            ),
+            {"e": email, "t": token, "now": int(_time.time())},
+        ).mappings().first()
+    if not row:
+        raise HTTPException(status_code=400, detail="gecersiz token veya email")
+    with engine.begin() as conn:
+        conn.execute(
+            text(
+                "UPDATE users SET password_hash = :p, reset_token = NULL, "
+                "reset_token_exp = NULL, updated_at = CURRENT_TIMESTAMP "
+                "WHERE email = :e"
+            ),
+            {"p": _hash_password(new_password), "e": email},
+        )
+    return {"ok": True, "message": "sifre guncellendi"}
 
 
 @app.post("/api/admin/change-password")

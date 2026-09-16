@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-15T23:42:12
+> Son guncelleme: 2026-09-16T20:58:36
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -11,24 +11,27 @@
 | WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | plan |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | plan |
 | REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo tesl | cline | P2 | blocked |
-| UI-CHART-01 | Havali KPI kartlari ve grafikler (Ana Ko | roo | P1 | review |
-| GUARD-ENC-01 | kodlama_denetim.py: BOM + NUL + mojibake | cline | P2 | aktif |
-| REV-UI-CHART-01 | UI-CHART-01 capraz inceleme (roo teslimi | cline | P1 | plan |
+| AUTH-GATE-01 | Giris kapisi modali + POST login + sifre | kilo | P1 | review |
+| NAV-IA-01 | Menu agaci: TabTanimi.ust_sayfa + ESKI_U | kilo | P1 | review |
+| NAV-IA-02 | Musteri Yonetimi sayfasi (6 alt sekme) + | kilo | P1 | review |
+| TOK-01 | Ajan kural dosyalarinda token sikistirma | cline | P1 | review |
+| REV-TOK-01 | TOK-01 dokuman sadelestirme incelemesi ( | roo | P2 | plan |
+| BRAND-KIMLIK-01 | Marka kimligi seti kuruldu - inceleme ve | roo | P2 | plan |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| HIJYEN-01 | Kalinti gecici dosya temizligi | cline | 2026-09-15 |
-| ORCH-05b | ORCH-05 kilit dusurme yalniz done/blocke | roo | 2026-09-15 |
-| MVP-KUL-02 | Kullanici onayinda tier secici (K-1 bulg | kilo | 2026-09-15 |
-| ENC-ADMIN-PANEL-01 | admin_panel.py mojibake 2 dize (O-1) | roo | 2026-09-15 |
-| FIX-YONETIM-01 | Yonetim bolumu to_excel hatasi + sekme r | roo | 2026-09-15 |
-| UI-REFRESH-01 | Otomatik Yenileme bloğu: dev buton/metri | roo | 2026-09-15 |
-| ADMIN-ENV-01 | Admin sifre sifirlama scripti + .env on- | roo | 2026-09-15 |
 | ADMIN-RESET-01 | Admin e-posta dogrulamali sifre degistir | roo | 2026-09-15 |
+| UI-CHART-01 | Havali KPI kartlari ve grafikler (Ana Ko | roo | 2026-09-16 |
 | REV-ADMIN-ENV-01 | Review: admin sifre sifirlama scripti +  | cline | 2026-09-15 |
+| GUARD-ENC-01 | kodlama_denetim.py: BOM + NUL + mojibake | cline | 2026-09-16 |
 | UI-MODAL-01 | Admin panel acilir modal ekranlar + graf | cline | 2026-09-15 |
+| REV-UI-CHART-01 | UI-CHART-01 capraz inceleme (roo teslimi | cline | 2026-09-16 |
+| DOC-HIBRIT-01 | Hibrit gecis plani dosyasini repo icine  | kilo | 2026-09-16 |
+| NAV-FIX-01 | Tek tikta bolum gecisi + mojibake (app.p | kilo | 2026-09-16 |
+| REV-NAV-FIX-01 | NAV-FIX-01 capraz inceleme (kilo teslimi | cline | 2026-09-16 |
+| NAV-FIX-02 | Menu aciklamalari menu disinda sagda (to | kilo | 2026-09-16 |
 
 ## Son Handoff'lar
 

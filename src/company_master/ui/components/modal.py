@@ -168,7 +168,7 @@ class Modal(Bilesen):
 
         dialog = getattr(st, "dialog", None)
         if callable(dialog):
-            @dialog(self.baslik)  # type: ignore[misc]
+            @dialog(self.baslik, dismissible=not self.kapatilabilir)
             def _modal() -> None:
                 _cizim()
 

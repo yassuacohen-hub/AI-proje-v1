@@ -46,6 +46,8 @@ from web_dashboard.tabs import (  # noqa: E402
     erisebilir,
     gorunur_bolumler,
     gruplar,
+    alt_sekmeler,
+    ust_sayfalar,
     render_fonksiyonu,
     rol_normalize,
     tab_getir,
@@ -58,6 +60,7 @@ from company_master.ui import (  # noqa: E402
     ChatBubble,
     stil_enjekte,
 )
+from company_master.ui.components.modal import Modal  # noqa: E402
 
 # UI-WIDE-01: Ürün Sahibi kararı — sayfa varsayılan olarak geniş (wide) açılır;
 # `toolbarMode = "auto"` (.streamlit/config.toml) sayesinde sağ üstteki ⋮
@@ -421,10 +424,12 @@ def _nav_grubu_ciz(tanimlar: list[TabTanimi], secili: TabTanimi, kompakt: bool) 
 
 
 def render_sidebar(secili: TabTanimi) -> None:
-    """Modern sidebar: marka başlığı, hızlı geçiş, gruplu navigasyon.
+    """Modern sidebar: marka başlığı, hızlı geçiş, 6 üst sayfa + alt sekmeler.
 
-    ADMIN-UI-04: "Kompakt menü" anahtarı ikon-only görünümüne geçirir;
-    ikon seti, sıra ve gruplama korunur, yalnızca metin gizlenir.
+    NAV-IA-01: Sidebar artık grup değil 6 üst sayfaya göre listelenir.
+    Aktif üst sayfanın alt sekmeleri altında gösterilir.
+    `GRUP_IS/GRUP_SISTEM` geriye dönük korunur (testler için) ama
+    sidebar artık `ust_sayfalar()` kullanır.
     """
     with st.sidebar:
         kompakt = bool(st.session_state.get(KOMPAKT_KEY, False))
@@ -450,7 +455,7 @@ def render_sidebar(secili: TabTanimi) -> None:
         st.caption("Bu bölümde marka ile ilgili blog yazıları yer alacaktır. (Placeholder)")
         st.divider()
 
-        # U-10: yalnızca rolün görebildiği bölümler menüye girer.
+        # U-10: yalnızca rolün görebildiği bölümler menüde.
         rol = aktif_rol()
         gorunur = list(gorunur_bolumler(rol))
         if secili not in gorunur:  # derin bağlantıyla gelinmiş yetkisiz sayfa
@@ -468,7 +473,7 @@ def render_sidebar(secili: TabTanimi) -> None:
             secim = st.selectbox(
                 "🔍 Hızlı geçiş",
                 secenekler,
-                index=secenekler.index(secili),
+                index=secenekler.index(secili) if secili in secenekler else 0,
                 format_func=lambda tanim: tanim.etiket,
                 key="nav_hizli_gecis",
                 on_change=_hizli_gecis_onchange,
@@ -477,13 +482,60 @@ def render_sidebar(secili: TabTanimi) -> None:
 
             st.divider()
 
-        for grup_adi, tanimlar in gruplar(rol).items():
+        # --- NAV-IA-01: 6 üst sayfa + alt sekmeler ---
+        ustlar = ust_sayfalar(rol)
+        # Aktif üst sayfa anahtarı (alt sekme ise kendi üstüne bak)
+        aktif_ust_key = secili.ust if secili.ust else secili.anahtar
+
+        for key, tanim in ustlar.items():
+            aktif = tanim.anahtar == aktif_ust_key or tanim.anahtar == secili.anahtar
             if kompakt:
-                st.caption(grup_adi.split(" ", 1)[0] if " " in grup_adi else grup_adi)
+                with st.columns(KOMPAKT_SUTUN)[0]:
+                    if st.button(
+                        tanim.ikon,
+                        key=f"nav_{tanim.anahtar}",
+                        width="stretch",
+                        type="primary" if aktif else "secondary",
+                        help=_nav_ipucu(tanim, True),
+                        disabled=aktif,
+                    ):
+                        bolum_sec(tanim.anahtar)
             else:
-                st.markdown(f"##### {grup_adi}")
-            _nav_grubu_ciz(tanimlar, secili, kompakt)
-            st.write("")
+                if st.button(
+                    tanim.etiket,
+                    key=f"nav_{tanim.anahtar}",
+                    width="stretch",
+                    type="primary" if aktif else "secondary",
+                    help=_nav_ipucu(tanim, False),
+                    disabled=aktif,
+                ):
+                    bolum_sec(tanim.anahtar)
+
+                # Alt sekmeleri her zaman göster
+                altlar = alt_sekmeler(tanim.anahtar, rol)
+                for alt in altlar:
+                    alt_aktif = alt.anahtar == secili.anahtar
+                    if kompakt:
+                        with st.columns(KOMPAKT_SUTUN)[0]:
+                            if st.button(
+                                f"  {alt.etiket}",
+                                key=f"nav_{alt.anahtar}",
+                                width="stretch",
+                                type="primary" if alt_aktif else "secondary",
+                                help=_nav_ipucu(alt, True) if kompakt else None,
+                                disabled=alt_aktif,
+                            ):
+                                bolum_sec(alt.anahtar)
+                    else:
+                        if st.button(
+                            f"  {alt.etiket}",
+                            key=f"nav_{alt.anahtar}",
+                            width="stretch",
+                            type="primary" if alt_aktif else "secondary",
+                            help=_nav_ipucu(alt, False),
+                            disabled=alt_aktif,
+                        ):
+                            bolum_sec(alt.anahtar)
 
         st.divider()
         gorunur_sayisi = len(gorunur_bolumler(rol))
@@ -646,6 +698,40 @@ def render_footer(tanim: TabTanimi) -> None:
     st.caption("Önbelleği temizlemek için sağ üst ⋮ menüsü › Clear cache.")
 
 
+def _auth_modal_icerik() -> None:
+    """AUTH-GATE-01: Giriş kapısı modal içeriği.
+
+    Akışlar: giriş yap, misafir olarak devam et, şifremi unuttum.
+    """
+    from web_dashboard.tabs.admin_auth import render_admin_login
+
+    render_admin_login()
+
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        if st.button("Misafir olarak devam et", key="misafir_gate_btn"):
+            st.session_state["misafir"] = True
+            st.session_state["admin_token"] = "guest"
+            st.rerun()
+    with col2:
+        if st.button("Şifremi unuttum", key="sifre_unuttum_gate_btn"):
+            st.session_state["_sifre_unuttum"] = True
+            st.rerun()
+
+    if st.session_state.get("_sifre_unuttum"):
+        st.info("Sıfırlama için e-posta adresinizi girin.")
+        with st.form("reset_form"):
+            reset_email = st.text_input("E-posta", key="reset_email_gate")
+            gönder = st.form_submit_button("Sıfırlama linki gönder")
+            if gönder and reset_email:
+                try:
+                    from scripts.dash04_api_client import post_api as _p
+                    _p("/api/admin/reset-request", json={"email": reset_email})
+                    st.success("Sıfırlama linki gönderildi.")
+                except Exception as exc:
+                    st.error(f"Sıfırlama başarısız: {exc}")
+
+
 def main() -> None:
     """Uygulama giriş noktası — st.navigation + markalı sidebar.
     
@@ -658,18 +744,26 @@ def main() -> None:
     """
     stil_enjekte(tema=aktif_tema())
 
+    # AUTH-GATE-01: Admin token yoksa giriş modalı (overlay, sayfa arka planda açık)
+    if not st.session_state.get("admin_token"):
+        Modal(
+            "Admin Girişi",
+            icerik="",
+            kapatilabilir=False,
+            aciklama="Giriş yap, misafir olarak devam et veya şifremi unuttum.",
+        ).streamlit(govde_fn=_auth_modal_icerik)
+
     # st.navigation() çalıştırarak sayfa objesini al (önce _SAYFA_KAYDI dolmalı)
     sayfa = st.navigation(sayfalari_uret(), position="hidden")
     _eski_adresi_cevir()  # Eski ?bolum=... bağlantılarını /{url_path} olarak çevir
-    
+
     # Sayfanın URL yolundan bölümü bul; yoksa varsayılan
     if sayfa and hasattr(sayfa, "url_path"):
         secili = tab_url_getir(sayfa.url_path) or varsayilan_tab()
         st.session_state["current_section"] = secili.anahtar
     else:
         secili = aktif_tab()
-    
-    # Markalı sidebar + üst şerit (kırıntı yolu, H1, bölüm arama)
+
     render_sidebar(secili)
     render_topbar(secili)
 

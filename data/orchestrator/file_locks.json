@@ -1,42 +1,82 @@
 {
-  "scripts/kodlama_denetim.py": {
+  "src/company_master/ui/components/modal.py": {
+    "sahip": "kilo",
+    "task_id": "AUTH-GATE-01",
+    "kilitlendi": "2026-09-16T18:47:01"
+  },
+  "web_dashboard/tabs/admin_auth.py": {
+    "sahip": "kilo",
+    "task_id": "AUTH-GATE-01",
+    "kilitlendi": "2026-09-16T18:47:01"
+  },
+  "app.py": {
+    "sahip": "kilo",
+    "task_id": "AUTH-GATE-01",
+    "kilitlendi": "2026-09-16T18:47:01"
+  },
+  "web_app.py": {
+    "sahip": "kilo",
+    "task_id": "AUTH-GATE-01",
+    "kilitlendi": "2026-09-16T18:47:01"
+  },
+  "tests/test_auth_gate.py": {
+    "sahip": "kilo",
+    "task_id": "AUTH-GATE-01",
+    "kilitlendi": "2026-09-16T18:47:01"
+  },
+  "web_dashboard/tabs/__init__.py": {
+    "sahip": "kilo",
+    "task_id": "NAV-IA-01",
+    "kilitlendi": "2026-09-16T18:47:01"
+  },
+  "tests/test_dashboard_nav.py": {
+    "sahip": "kilo",
+    "task_id": "NAV-IA-01",
+    "kilitlendi": "2026-09-16T18:47:01"
+  },
+  "tests/test_app_menu_rol.py": {
+    "sahip": "kilo",
+    "task_id": "NAV-IA-01",
+    "kilitlendi": "2026-09-16T18:47:01"
+  },
+  "web_dashboard/tabs/musteri_yonetimi.py": {
+    "sahip": "kilo",
+    "task_id": "NAV-IA-02",
+    "kilitlendi": "2026-09-16T18:47:01"
+  },
+  "web_dashboard/tabs/admin_extras.py": {
+    "sahip": "kilo",
+    "task_id": "NAV-IA-02",
+    "kilitlendi": "2026-09-16T18:47:01"
+  },
+  "tests/test_musteri_yonetimi.py": {
+    "sahip": "kilo",
+    "task_id": "NAV-IA-02",
+    "kilitlendi": "2026-09-16T18:47:01"
+  },
+  "AGENTS.md": {
     "sahip": "cline",
-    "task_id": "GUARD-ENC-01",
-    "kilitlendi": "2026-09-15T19:25:57"
+    "task_id": "TOK-01",
+    "kilitlendi": "2026-09-16T18:52:51"
   },
-  "tests/test_kodlama_denetim.py": {
+  "ANA_KURALLAR.md": {
     "sahip": "cline",
-    "task_id": "GUARD-ENC-01",
-    "kilitlendi": "2026-09-15T19:25:57"
+    "task_id": "TOK-01",
+    "kilitlendi": "2026-09-16T18:52:51"
   },
-  ".pre-commit-config.yaml": {
+  ".roorules": {
     "sahip": "cline",
-    "task_id": "GUARD-ENC-01",
-    "kilitlendi": "2026-09-15T19:25:57"
+    "task_id": "TOK-01",
+    "kilitlendi": "2026-09-16T18:52:51"
   },
-  "web_dashboard/tabs/ana_kontrol.py": {
+  "CLAUDE.md": {
     "sahip": "roo",
-    "task_id": "UI-CHART-01",
-    "kilitlendi": "2026-09-15T23:14:07"
+    "task_id": "REV-TOK-01",
+    "kilitlendi": "2026-09-16T20:03:00"
   },
-  "web_dashboard/tabs/admin_kpi.py": {
+  "docs/AJAN_DETAY.md": {
     "sahip": "roo",
-    "task_id": "UI-CHART-01",
-    "kilitlendi": "2026-09-15T23:14:07"
-  },
-  "web_dashboard/charts.py": {
-    "sahip": "roo",
-    "task_id": "UI-CHART-01",
-    "kilitlendi": "2026-09-15T23:14:07"
-  },
-  "tests/test_charts.py": {
-    "sahip": "roo",
-    "task_id": "UI-CHART-01",
-    "kilitlendi": "2026-09-15T23:14:07"
-  },
-  "docs/plans/UI-CHART-01_arastirma.md": {
-    "sahip": "roo",
-    "task_id": "UI-CHART-01",
-    "kilitlendi": "2026-09-15T23:14:07"
+    "task_id": "REV-TOK-01",
+    "kilitlendi": "2026-09-16T20:03:00"
   }
 }

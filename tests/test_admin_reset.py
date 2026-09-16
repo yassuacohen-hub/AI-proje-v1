@@ -45,7 +45,7 @@ def test_giris_basarili_flash_kuyruga_alinir_ve_rerun(monkeypatch):
     monkeypatch.setattr(admin_auth.st, "caption", MagicMock())
     rerun = MagicMock()
     monkeypatch.setattr(admin_auth.st, "rerun", rerun)
-    monkeypatch.setattr(admin_auth, "get_api", lambda *a, **k: {"token": "tok-1"})
+    monkeypatch.setattr(admin_auth, "post_api", lambda *a, **k: {"token": "tok-1"})
 
     admin_auth.render_admin_login()
 

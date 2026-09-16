@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-15T23:39:43",
+    "bitis": "2026-09-16T20:57:24",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -3463,9 +3463,9 @@
     "baslik": "Havali KPI kartlari ve grafikler (Ana Kontrol + Yonetim)",
     "sahip": "roo",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-15T19:25:56",
-    "bitis": null,
+    "bitis": "2026-09-16T17:41:44",
     "dosyalar": [
       "web_dashboard/tabs/ana_kontrol.py",
       "web_dashboard/tabs/admin_kpi.py",
@@ -3499,15 +3499,15 @@
     "baslik": "kodlama_denetim.py: BOM + NUL + mojibake + ast.parse guard (pre-commit)",
     "sahip": "cline",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-15T19:25:57",
-    "bitis": null,
+    "bitis": "2026-09-16T19:08:16",
     "dosyalar": [
       "scripts/kodlama_denetim.py",
       "tests/test_kodlama_denetim.py",
       ".pre-commit-config.yaml"
     ],
-    "not": "",
+    "not": "Teslim (cline): TESLIM. kodlama guard'i tam devrede: (1) test dosyasi gorev tanimina hizalandi: git mv test_kodlama_guard.py -> test_kodlama_denetim.py (12 passed, tek dokuman referansi guncellendi). (2) .pre-commit-config.yaml'a local hook eklendi: kodlama_denetim.py --kapsam git (always_run); dosya UTF-16 LE+BOM'dan UTF-8'e cevrildi (kok-cause onarimi), PyYAML dogrulamasi OK - pre-commit paketi ortamda kurulu degil, ilk kullanan 'pre-commit install' calistirmali. (3) --kapsam git dogrulandi: calisma agacinda 24 dosya temiz, exit 0. (4) Ratchet muafiyetsiz yeşile cekildi: test_kariyernet.py BOM kaldirildi; company_career.py 22 satir mojibake mojibake_onar.py ile onarildi (is mantigi dokunulmadi, job_intelligence 36 passed); pii_scanner L75 regex + test_admin_export_excel L80 + mojibake_onar L5/L23 \\uXXXX kacis formuna cevrildi - davranis kanitli (desen karakter kumesi birebir esit, 7 ornek ayni eslesme; MOJIBAKE_RX 5 mojibake yakalar 4 temiz ornege dokunmaz). Varsayilan tarama: temiz, exit 0. Rapor: data/orchestrator/GUARD-ENC-01_teslim_2026-09-16_cline.md",
     "source": "ic",
     "from_agent": null
   },
@@ -3533,8 +3533,180 @@
     "baslik": "UI-CHART-01 capraz inceleme (roo teslimi, commit 928ef8b)",
     "sahip": "cline",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-15T23:42:11",
+    "bitis": "2026-09-16T18:08:39",
+    "dosyalar": [],
+    "not": "Teslim (cline): ONAY. roo teslimi (928ef8b) incelendi: 5 dosya byte-duzey UTF-8 temiz (BOM/NUL/mojibake yok, parse OK); XSS - kpi_karti_html/donut/veri_akisi tum girisler html.escape; tema aktif_tema() st.context.theme.type->theme.base, token SSOT; plotly ImportError fallback st.bar_chart/area_chart; test_charts 46 passed (gercek Streamlit yok, mock dogru), hedefli 55 passed; render_kpi_tab erken return ve _render_kpi_card imzasi korundu. Kapsam disi notlar raporda (B1 oluk kod _get_metric_color, B2 sparkline varsayilan anahtar, B3 px.bar alan doluluk, B4 webhook placeholder). Rapor: data/orchestrator/REV-UI-CHART-01_bulgular_2026-09-16_cline.md",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "DOC-HIBRIT-01",
+    "id": "DOC-HIBRIT-01",
+    "baslik": "Hibrit gecis plani dosyasini repo icine yaz (docs/plans/UI-CHART-01_hibrit_gecis_plani.md)",
+    "sahip": "kilo",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-16T15:56:25",
+    "bitis": "2026-09-16T17:14:40",
+    "dosyalar": [
+      "docs/plans/UI-CHART-01_hibrit_gecis_plani.md"
+    ],
+    "not": "Teslim (kilo): BÖLÜM 4 okundu; otomatik başlama yok, ECharts onay bekliyor. Dosya: C:\\Huginn Data Projesi\\Huginn Data Insights\\docs\\plans\\UI-CHART-01_hibrit_gecis_plani.md (1615 byte, UTF-8 BOM'suz, NUL yok). Kod dosyasına dokunulmadı. Streamlit restart gerekmez. Mutlak yol dogrulandi: dir çıktisi: 1615 byte.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "NAV-FIX-01",
+    "id": "NAV-FIX-01",
+    "baslik": "Tek tikta bolum gecisi + mojibake (app.py, admin_panel.py)",
+    "sahip": "kilo",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-16T16:40:55",
+    "bitis": "2026-09-16T17:41:39",
+    "dosyalar": [
+      "app.py",
+      "web_dashboard/tabs/admin_panel.py",
+      "tests/test_app_nav_tek_tik.py"
+    ],
+    "not": "Teslim (kilo): BÖLÜM 4 okundu; kapsam 4 madde; tooltip/IA'ya dokunulmadı. Sayı: 3480 passed, 5 failed (önceden vardı, NAV-FIX-01 ile ilgili değil), 3 skipped. NAV-FIX-01'e özgü testler: test_dashboard_nav.py (86), test_app_menu_rol.py (86), test_web_dashboard_tabs.py (9), test_app_nav_tek_tik.py (3) = 184 test. app.py L68 page_icon 🦅 düzeltildi, render_sidebar selectbox on_change eklendi, render_topbar sorgu temizleme + st.session_state[ARAMA_KEY]='' eklendi. admin_panel.py L250-256 mojibake yok. kodlama_denetim: NAV-FIX-01 dosyaları için 0 bulgu. Tam regresyon: python -m pytest tests/ -q --continue-on-collection-errors. Mutlak yol: C:\\Huginn Data Projesi\\Huginn Data Insights\\app.py",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "REV-NAV-FIX-01",
+    "id": "REV-NAV-FIX-01",
+    "baslik": "NAV-FIX-01 capraz inceleme (kilo teslimi)",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-16T16:40:55",
+    "bitis": "2026-09-16T18:08:39",
+    "dosyalar": [],
+    "not": "Teslim (cline): ONAY. kilo teslimi (90d9bc7) incelendi: page_icon 🦅 duzeltildi; tek tik gecis selectbox on_change -> bolum_sec (session_state kisiti callback'e tasinarak dogru); arama ARAMA_KEY temizleme exception'siz; NAV-FIX-03 tooltip varsayilan KAPALI (IPUCU_KEY) - sahip bulgusuyla uyumlu; admin_panel L250-256 temiz; app.py/admin_panel/2 test byte-duzey UTF-8 temiz, parse OK; hedefli nav testleri 98 passed 1 skipped. Not: commit icerisinde NAV-FIX-03 + D-33 (gorev_kutusu/gorev_at ajan normalize, testli) sozlesme disi ama zararsiz; 3 untracked plan dokumani kilo'ya hatirlatildi. Rapor: data/orchestrator/REV-NAV-FIX-01_bulgular_2026-09-16_cline.md",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "NAV-FIX-02",
+    "id": "NAV-FIX-02",
+    "baslik": "Menu aciklamalari menu disinda sagda (topbar) gosterilsin; native tooltip kaldir",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-16T17:46:47",
+    "bitis": "2026-09-16T18:21:51",
+    "dosyalar": [
+      "app.py",
+      "tests/test_app_nav_tek_tik.py"
+    ],
+    "not": "Teslim (kilo): BÖLÜM 4 okundu; kapsam 4 madde; tooltip/IA'ya dokunulmadı. _nav_ipucu() her durumda None; render_topbar toggle açıkken caption; toggle etiketi değişti; help= kaldırıldı. Testler: test_dashboard_nav.py (86 passed), test_app_menu_rol.py (86 passed), test_app_nav_tek_tik.py (5 passed, 2 yeni). Streamlit restart başarılı. Mutlak yol: app.py",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "AUTH-GATE-01",
+    "id": "AUTH-GATE-01",
+    "baslik": "Giris kapisi modali + POST login + sifre sifirlama",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "review",
+    "baslangic": "2026-09-16T18:47:01",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/ui/components/modal.py",
+      "web_dashboard/tabs/admin_auth.py",
+      "app.py",
+      "web_app.py",
+      "tests/test_auth_gate.py"
+    ],
+    "not": "Teslim (kilo): POST /api/admin/login, /api/admin/reset-request, /api/admin/reset-confirm eklendi. Modal kapatilamaz (dismissible=False). admin_auth.py POST kullanimi. _auth_modal_icerik (giris/misafir/sifre-unuttum). tests/test_auth_gate.py (6). 199 passed, 1 skipped. Mutlak yol: web_app.py, app.py, admin_auth.py, modal.py",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "NAV-IA-01",
+    "id": "NAV-IA-01",
+    "baslik": "Menu agaci: TabTanimi.ust_sayfa + ESKI_URL + 6 ust oge",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "review",
+    "baslangic": "2026-09-16T18:47:01",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/__init__.py",
+      "tests/test_dashboard_nav.py",
+      "tests/test_app_menu_rol.py"
+    ],
+    "not": "Teslim (kilo): web_dashboard/tabs/__init__.py: TabTanimi.ust/sira eklendi, 4 yeni üst sayfa (musteri_yonetimi/proje_yonetimi/veri_kalite/musteri_onizleme), ESKI_URL dict, ust_sayfalar/alt_sekmeler/eski_url_yonlendirme/yenile yardımcıları, tab_url_getir ESKI_URL fallback; app.py: render_sidebar 6 üst sayfa + alt sekmeler (gruplar→ust_sayfalar); tests/test_dashboard_nav.py: sayı 28→32, 9 yeni NAV-IA-01 testi. 3512 passed, 2 skipped.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "NAV-IA-02",
+    "id": "NAV-IA-02",
+    "baslik": "Musteri Yonetimi sayfasi (6 alt sekme) + K-1 tier fix",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "review",
+    "baslangic": "2026-09-16T18:47:01",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/musteri_yonetimi.py",
+      "web_dashboard/tabs/admin_extras.py",
+      "tests/test_musteri_yonetimi.py"
+    ],
+    "not": "Teslim (kilo): web_dashboard/tabs/musteri_yonetimi.py: yeni (6 alt sekme: Kullanıcılar&Onay, Paket&Kredi, Giriş Etkinliği, Aramalar, Destek, Dışa Aktar), PageHeader+Section(ADMIN-UI-10), Section kullanılır, subheader yok, tier TIER_SECIMLERI'den geliyor; admin_extras.py: K-1 fix — tiers = TIER_SECIMLERI (modül seviyesi sabit liste); tests/test_musteri_yonetimi.py: 3 yeni test (tier JSON, render, 6 sekme). 3522 passed, 2 skipped.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "TOK-01",
+    "id": "TOK-01",
+    "baslik": "Ajan kural dosyalarinda token sikistirma (12K->6K)",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "review",
+    "baslangic": "2026-09-16T18:52:51",
+    "bitis": null,
+    "dosyalar": [
+      "AGENTS.md",
+      "CLAUDE.md",
+      "ANA_KURALLAR.md",
+      ".roorules",
+      "docs/AJAN_DETAY.md"
+    ],
+    "not": "Teslim (cline): TAMAMLANDI. Ajan kural dosyalari token sikistirma (12K->6K): (1) CLAUDE.md cift icerik (Wiki/Kural/Operations/Demir bloklari iki kez) temizlendi - ogleden sonra dosya sahibi tarafindan kural-7 uyumlu HTML notuyla yapilmis gözlendi; (2) kalan tek sisginlik FastAPI Expert bolumu (~1.9K, Ingilizce) docs/AJAN_DETAY.md S21'e tasindi, CLAUDE.md'de yonlendirme satiri birakti (icerik kaybi yok); (3) AJAN_DETAY.md untracked olarak hazir (21 bolum: rotasyon/gorev emri/kilit/subagent/ORCH-08/rol profilleri/harici ajan/V9-SSOT/erisim matrisi/marka terminolojisi/docker/vpn/TOK-01 tam metinler/FastAPI). Olcum: CLAUDE.md 11492 -> 6676 byte (%42); AGENTS.md 3408 (cekirdek zaten kisaltilmis); toplam kural dosyalari ~44K, ayrinti AJAN_DETAY'da. Dogrulama: kodlama_denetim --kapsam git TEMIZ (exit 0); md dosyalarinda BOM/NUL/mojibake yok. Test: dokuman isi - kod islesi yok; guard taramasi gecer. Not: roo'ya tetik dusulemedi (CLAUDE.md kilidi cline'da, gorev Atamasi reddedildi) - bulgu bu gorev kapsaminda cözüldü; onay roo'da. Eksik/erteleme: CLAUDE 6.7K hedef 6K'nin ~0.7K uzerinde; daha fazla sikistirma Operations ornek cumlelerinin silinmesini gerektirir, kural-7 riskli - ileri tur onerisi.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "REV-TOK-01",
+    "id": "REV-TOK-01",
+    "baslik": "TOK-01 dokuman sadelestirme incelemesi (cline teslimi)",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-16T20:03:00",
+    "bitis": null,
+    "dosyalar": [
+      "CLAUDE.md",
+      "docs/AJAN_DETAY.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "BRAND-KIMLIK-01",
+    "id": "BRAND-KIMLIK-01",
+    "baslik": "Marka kimligi seti kuruldu - inceleme ve onay (brand.md + design-tokens.json + assets/LOGO.md)",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-16T20:53:38",
     "bitis": null,
     "dosyalar": [],
     "not": "",

@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 import streamlit as st
-from scripts.dash04_api_client import get_api, post_api, APIError
+from scripts.dash04_api_client import post_api, APIError
 
 _FLASH_KEY = "_admin_flash"
 
@@ -77,9 +77,8 @@ def render_admin_login() -> None:
     if submitted:
         st.session_state.pop("admin_token", None)
         try:
-            # MVP-KUL-FIX-01: API ucu GET + query bekler (web_app.api_admin_login);
-            # POST 405 donuyordu ve admin token hic alinamiyordu.
-            result = get_api("/api/admin/login", params={"email": email, "password": password})
+            # AUTH-GATE-01: POST /api/admin/login (JSON body).
+            result = post_api("/api/admin/login", json={"email": email, "password": password})
             if result and result.get("token"):
                 st.session_state["admin_token"] = result["token"]
                 st.session_state["admin_email"] = email

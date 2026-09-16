@@ -446,29 +446,30 @@ def test_webhook_rate_limit_retry():
     recv_mod.RATE_LIMIT_REFILL_RATE = original_refill
 
 def test_matcher_vector_fallback():
-    """Since CompanyMatcher does not use vector store, test that matcher returns fuzzy_below_threshold when fuzzy score below threshold.
+    """Fuzzy skor esigin altinda kalinca 'fuzzy_below_threshold' donmeli.
+
+    CompanyMatcher vektor deposu kullanmaz. Aday listesi test icinde
+    sabitlenir; boylece DB'ye bagimli degildir (CI'daki bos DB'de de calisir).
     """
-    from company_master.intelligence.job_intelligence.pipeline.normalizer import CompanyMatcher, MatchResult
+    from company_master.intelligence.job_intelligence.pipeline.normalizer import CompanyMatcher
 
     matcher = CompanyMatcher(fuzzy_threshold=85.0)
-
-    # Mock VKN to return None
-    matcher._match_by_vkn = lambda *args, **kwargs: None
-
-    # Mock fuzzy to return a MatchResult with low confidence (below threshold)
-    low_score_result = MatchResult(
-        company_id=CID,
-        matched_name="Some Company",
-        match_type="fuzzy",
-        confidence=0.5  # 50% < 85%
-    )
-    matcher._match_by_fuzzy = lambda *args, **kwargs: low_score_result
-
-    # Mock vector to return None (since we don't use vector store)
-    matcher._match_by_vector = lambda *args, **kwargs: None
+    # DB'den yukleme yapilmasin: aday listesi elle verilir.
+    matcher._ensure_loaded = lambda: None
+    matcher._companies = [
+        {
+            "company_id": CID,
+            "legal_name": "Some Company",
+            "_norm_name": "bambaska bir uretim firmasi",
+            "_domain": None,
+            "tax_number": None,
+            "mersis_number": None,
+        }
+    ]
 
     result = matcher.match(raw_name="Some Company", domain=None, tax_number=None, mersis=None)
 
     assert result is not None
     assert result.match_type == "fuzzy_below_threshold"
+    assert result.confidence < 0.85
 

@@ -33,6 +33,33 @@ def _companies(client, **params):
     return r.json()
 
 
+# CI'daki Postgres servisi bos baslar (gercek Supabase verisi yok). Asagidaki
+# siniflar gercek veriye (unvan/telefon/nace vb.) bagimlidir; DB bossa atla.
+_VERI_BAGIMLI_SINIFLAR = {
+    "TestKvkkMaskeAPI",
+    "TestNormalizeKurallariCanliVeri",
+    "TestTurkceArama",
+    "TestCokluKaynak",
+    "TestPagination",
+    "TestNaceFiltre",
+}
+
+
+@pytest.fixture(autouse=True)
+def _bos_db_atla(request, client):
+    """CI'daki bos Postgres DB'sinde veri-bagimli testleri atlar.
+
+    Yerelde gercek Supabase baglantisiyla calistirildiginda (DATABASE_URL
+    doluysa) bu testler normal calisir; CI'da init_db() sadece semayi
+    kurar, veri yuklemez.
+    """
+    cls = request.cls
+    if cls is not None and cls.__name__ in _VERI_BAGIMLI_SINIFLAR:
+        d = _companies(client, limit=1)
+        if d["total"] == 0:
+            pytest.skip("Gercek Supabase verisi yok (CI bos DB) - yerelde calisir")
+
+
 class TestHealth:
     def test_health_ok(self, client):
         r = client.get("/api/health")

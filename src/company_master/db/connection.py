@@ -292,7 +292,7 @@ def init_db(sql_path: Optional[str] = None) -> None:
 
         sql = f.read()
 
-    for statement in sql.split(';'):
+    for statement in _sql_ifadelerine_bol(sql):
         # Yorum satirlarini ayikla: '-- ...' ile baslayan blok CREATE'i gizlemesin.
         stmt = "\n".join(
             satir for satir in statement.splitlines()
@@ -307,3 +307,33 @@ def init_db(sql_path: Optional[str] = None) -> None:
                 conn.execute(text(stmt))
         except Exception as e:
             print(f"SQL hatası (atlanıyor): {e}")
+
+
+def _sql_ifadelerine_bol(sql: str) -> list[str]:
+    """SQL metnini ';' ile boler; `$$ ... $$` (plpgsql) gövdelerini bölmez.
+
+    Postgres fonksiyon gövdesi içindeki noktali virguller ifadeyi
+    parcalamamali; aksi halde 'unterminated dollar-quoted string' olusur.
+    """
+    ifadeler: list[str] = []
+    tampon: list[str] = []
+    dollar_acik = False
+    i = 0
+    uzunluk = len(sql)
+    while i < uzunluk:
+        karakter = sql[i]
+        if karakter == "$" and sql.startswith("$$", i):
+            dollar_acik = not dollar_acik
+            tampon.append("$$")
+            i += 2
+            continue
+        if karakter == ";" and not dollar_acik:
+            ifadeler.append("".join(tampon))
+            tampon = []
+            i += 1
+            continue
+        tampon.append(karakter)
+        i += 1
+    if tampon:
+        ifadeler.append("".join(tampon))
+    return ifadeler

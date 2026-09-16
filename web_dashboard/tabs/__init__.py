@@ -31,6 +31,7 @@ import importlib
 from dataclasses import dataclass
 from typing import Callable
 
+import streamlit as st
 from company_master.i18n import t
 
 __all__ = [
@@ -52,9 +53,14 @@ __all__ = [
     "gorunur_bolumler",
     "tab_getir",
     "tab_url_getir",
+    "eski_url_yonlendir",
+    "ust_sayfalar",
+    "alt_sekmeler",
+    "yenile",
     "gruplar",
     "render_fonksiyonu",
     "varsayilan_tab",
+    "ESKI_URL",
 ]
 
 GRUP_IS = "🏢 İş Operasyonları"
@@ -122,6 +128,8 @@ class TabTanimi:
     grup: str
     aciklama: str
     url_path: str
+    ust: str | None = None
+    sira: int = 0
     modul: str | None = None
     fonksiyon: str | None = None
     hazir: bool = True
@@ -171,6 +179,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Firma listesi, filtreler ve kalite bildirimleri",
         url_path="musteriler",
+        ust="musteri_yonetimi", sira=0,
         modul="web_dashboard.tabs.admin_musteriler",
         fonksiyon="render_musteriler_tab",
     ),
@@ -181,6 +190,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Paket kataloğu, fiyatlar ve çapraz satış önerileri",
         url_path="paketler",
+        ust="musteri_onizleme", sira=0,
         modul="web_dashboard.tabs.paketler",
         fonksiyon="render_paketler_tab",
         yuzey=YUZEY_HUGINN,
@@ -192,6 +202,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Kampanyalar, segmentler ve segment kapsama analizi",
         url_path="pazarlama",
+        ust="musteri_onizleme", sira=1,
         modul="web_dashboard.tabs.pazarlama",
         fonksiyon="render_pazarlama_tab",
         yuzey=YUZEY_HUGINN,
@@ -203,6 +214,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="9Router tabanlı AI sohbet ve analiz asistanı",
         url_path="abrakadabra",
+        ust="proje_yonetimi", sira=1,
         modul="web_dashboard.tabs.abrakadabra",
         fonksiyon="render_abrakadabra_tab",
         min_rol="admin",
@@ -215,6 +227,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="KPI kartları ve özet metrikler",
         url_path="kpi",
+        ust="veri_kalite", sira=0,
         modul="web_dashboard.tabs.admin_kpi",
         fonksiyon="render_kpi_tab",
         min_rol="analyst",
@@ -227,6 +240,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="MRR/ARR, churn oranı ve tenant sağlık dağılımı — yönetici özeti",
         url_path="executive",
+        ust="veri_kalite", sira=3,
         modul="web_dashboard.tabs.admin_executive",
         fonksiyon="render_executive_tab",
         min_rol="admin",
@@ -238,6 +252,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Ticket listesi, olusturma ve durum degistirme",
         url_path="destek",
+        ust="musteri_yonetimi", sira=2,
         modul="web_dashboard.tabs.admin_destek",
         fonksiyon="render_destek_tab",
         min_rol="admin",
@@ -249,6 +264,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Hata yönetimi ve sorun giderme",
         url_path="hatalar",
+        ust="proje_yonetimi", sira=3,
         modul="web_dashboard.tabs.admin_errors",
         fonksiyon="render_errors_tab",
         min_rol="analyst",
@@ -260,6 +276,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Kullanıcı yönetimi ve izin denetimi",
         url_path="kullanicilar",
+        ust="musteri_yonetimi", sira=1,
         modul="web_dashboard.tabs.admin_extras",
         fonksiyon="render_user_management",
         min_rol="admin",
@@ -271,6 +288,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Sistem kararları ve denetim kayıtları",
         url_path="karar-defteri",
+        ust="proje_yonetimi", sira=0,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_decision_tab",
         min_rol="admin",
@@ -282,6 +300,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Veri kalitesi ve uyum skoru",
         url_path="kalite",
+        ust="veri_kalite", sira=1,
         modul="web_dashboard.tabs.admin_quality",
         fonksiyon="render_quality_tab",
         min_rol="analyst",
@@ -293,6 +312,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Global arama ve filtreleme",
         url_path="arama",
+        ust="veri_kalite", sira=2,
         modul="web_dashboard.tabs.admin_search",
         fonksiyon="render_search_tab",
         min_rol="analyst",
@@ -304,6 +324,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Veri dışa aktarma ve raporlar",
         url_path="export",
+        ust="musteri_yonetimi", sira=3,
         modul="web_dashboard.tabs.admin_export",
         fonksiyon="render_export_tab",
         min_rol="analyst",
@@ -315,6 +336,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="AI ve sistem maliyeti analizi",
         url_path="maliyet",
+        ust="sistem", sira=4,
         modul="web_dashboard.tabs.admin_cost",
         fonksiyon="render_cost_tab",
         min_rol="analyst",
@@ -326,6 +348,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Süreç diyagramı ve servis haritası (KPI-EXA-02)",
         url_path="teknik-altyapi",
+        ust="sistem", sira=0,
         modul="web_dashboard.tabs.teknik_altyapi",
         fonksiyon="render_teknik_altyapi_tab",
         min_rol="analyst",
@@ -337,6 +360,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Sistem performansı ve gecikme metriği",
         url_path="performans",
+        ust="sistem", sira=1,
         modul="web_dashboard.tabs.admin_performance",
         fonksiyon="render_performance_tab",
         min_rol="analyst",
@@ -348,6 +372,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="API analitiği ve kullanım",
         url_path="api",
+        ust="sistem", sira=2,
         modul="web_dashboard.tabs.admin_api_analytics",
         fonksiyon="render_api_analytics_tab",
         min_rol="analyst",
@@ -359,6 +384,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Webhook izleme ve durum",
         url_path="webhook",
+        ust="sistem", sira=3,
         modul="web_dashboard.tabs.webhook_monitor",
         fonksiyon="render_webhook_monitor_tab",
         min_rol="analyst",
@@ -370,6 +396,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Kuyruk hataları ve ölü harf sırası",
         url_path="dlq",
+        ust="proje_yonetimi", sira=4,
         modul="web_dashboard.tabs.admin_dlq",
         fonksiyon="render_dlq_tab",
         min_rol="analyst",
@@ -381,6 +408,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Otomatik yenileme ayarları",
         url_path="yenileme",
+        ust="sistem", sira=6,
         modul="web_dashboard.tabs.admin_auto_refresh",
         fonksiyon="render_auto_refresh",
         min_rol="analyst",
@@ -414,6 +442,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Gerçek zamanlı sinyal akışı (SSE)",
         url_path="canli-veri",
+        ust="sistem", sira=5,
         modul="web_dashboard.tabs.admin_realtime",
         fonksiyon="render_admin_realtime_tab",
         min_rol="analyst",
@@ -425,6 +454,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Dosya kilitleri, handoff geçişleri ve tetikleyici günlüğü (DASH-08)",
         url_path="denetim",
+        ust="proje_yonetimi", sira=2,
         modul="web_dashboard.tabs.admin_audit",
         fonksiyon="render_audit_tab",
         min_rol="admin",
@@ -449,6 +479,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Görünüm, veri, bildirim ve bölgesel kullanıcı tercihleri (P7-46)",
         url_path="ayarlar",
+        ust="sistem", sira=7,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_ayarlar_tab",
         min_rol="admin",
@@ -460,11 +491,119 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Loading state örnekleri ve skeleton gosterim (P7-42)",
         url_path="yukleme",
+        ust="sistem", sira=8,
         modul="web_dashboard.tabs.admin_loading",
         fonksiyon="render_loading_tab",
         min_rol="admin",
     ),
+    TabTanimi(
+        anahtar="musteri_yonetimi",
+        baslik="Müşteri Yönetimi",
+        ikon="👥",
+        grup=GRUP_IS,
+        aciklama="Müşteri yönetim, paket, giriş ve destek ana sayfa",
+        url_path="musteri-yonetimi",
+        modul="web_dashboard.tabs.musteri_yonetimi",
+        fonksiyon="render_musteri_yonetimi_tab",
+        hazir=True,
+        min_rol="admin",
+    ),
+TabTanimi(
+    anahtar="proje_yonetimi",
+    baslik="Proje Yönetimi",
+    ikon="📊",
+    grup=GRUP_IS,
+    aciklama="Karar defteri, açık işler, denetim izi ve hatalar",
+    url_path="proje-yonetimi",
+    hazir=False,
+    bekleyen_gorev="NAV-IA-03",
+    min_rol="admin",
+),
+TabTanimi(
+    anahtar="veri_kalite",
+    baslik="Veri & Kalite",
+    ikon="✅",
+    grup=GRUP_IS,
+    aciklama="KPI, kalite, arama ve executive özeti",
+    url_path="veri-kalite",
+    hazir=False,
+    bekleyen_gorev="NAV-IA-01",
+    min_rol="analyst",
+),
+    TabTanimi(
+        anahtar="musteri_onizleme",
+        baslik="Müşteri Önizleme",
+        ikon="🦅",
+        grup=GRUP_IS,
+        aciklama="Paketler ve pazarlama müşteri ekranı (Huginn önizleme)",
+        url_path="musteri-onizleme",
+        hazir=False,
+        bekleyen_gorev="NAV-IA-02",
+        min_rol="anon",
+        yuzey=YUZEY_MUNINN,
+    ),
 )
+
+
+ESKI_URL: dict[str, tuple[str, str]] = {
+    "kullanicilar": ("musteri_yonetimi", "kullanicilar"),
+    "yonetim": ("musteri_yonetimi", ""),
+    "kimlik": ("ana_kontrol", ""),
+}
+
+
+def eski_url_yonlendir(yol: str) -> tuple[str, str] | None:
+    """Eski url_path -> (ust_sayfa_anahtari, alt_sekme_anahtari) veya None.
+
+    NAV-IA-01: `tab_url_getir` ESki_URL bulamazsa buraya bakar.
+    """
+    temiz = (yol or "").strip().strip("/").lower()
+    return ESKI_URL.get(temiz)
+
+
+def ust_sayfalar(rol: str | None = None) -> dict[str, TabTanimi]:
+    """Sidebar'da gorunen 6 ust sayfa (kimlik/yonetim/sistem cikmistir).
+
+    Sadece `ust is None` OLAN ve `UST_SAYFA_ANAHTARLARI` listesinde
+    olan bolumler doner. `GRUP_IS/GRUP_SISTEM` geriye donuk korunur.
+    """
+    UST_SAYFA_ANAHTARLARI: frozenset[str] = frozenset({
+        "ana_kontrol", "musteri_yonetimi", "proje_yonetimi",
+        "veri_kalite", "sistem", "musteri_onizleme",
+    })
+    sonuc: dict[str, TabTanimi] = {}
+    for tanim in SECTIONS:
+        if tanim.anahtar not in UST_SAYFA_ANAHTARLARI:
+            continue
+        if tanim.ust is not None:
+            continue
+        if rol is None or erisebilir(tanim, rol):
+            sonuc[tanim.anahtar] = tanim
+    return sonuc
+
+
+def alt_sekmeler(ust: str, rol: str | None = None) -> tuple[TabTanimi, ...]:
+    """Bir ust sayfanin alt sekmelerini sira sirasiyla dondurur.
+
+    `ust` bos/hylif -> bos tuple.
+    """
+    if not ust:
+        return ()
+    return tuple(
+        sorted(
+            (tanim for tanim in SECTIONS if tanim.ust == ust and (rol is None or erisebilir(tanim, rol))),
+            key=lambda tanim: tanim.sira,
+        )
+    )
+
+
+def yenile() -> None:
+    """Ortak yenile: cache temizle + rerun (D-1).
+
+    `admin_kpi.py` ve `ana_kontrol.py` paylasma ici kullanilir.
+    """
+    st.cache_data.clear()
+    st.rerun()
 
 
 def varsayilan_tab() -> TabTanimi:
@@ -481,13 +620,34 @@ def tab_getir(anahtar: str) -> TabTanimi | None:
 
 
 def tab_url_getir(url_path: str) -> TabTanimi | None:
-    """URL parçasına göre bölüm tanımını döndürür (derin bağlantı)."""
+    """URL parçasına göre bölüm tanımını döndürür (derin bağlantı).
+
+    NAV-IA-01: Bulamazsa `ESKI_URL`'ye bakar; bulursa
+    alt sekmeyi `session_state`'e yazar (gutsche aktarım).
+    """
     temiz = (url_path or "").strip().strip("/").lower()
     if not temiz:
         return None
     for tanim in SECTIONS:
         if tanim.url_path == temiz:
             return tanim
+    # ESKI_URL fallback
+    eskiler = eski_url_yonlendir(temiz)
+    if eskiler is not None:
+        ust_anahtar, alt_anahtar = eskiler
+        if alt_anahtar:
+            tanim = tab_getir(alt_anahtar)
+        else:
+            tanim = tab_getir(ust_anahtar)
+        if tanim is not None:
+            try:
+                import streamlit as st
+                if "alt_sekme" in st.session_state:
+                    pass
+                st.session_state["alt_sekme"] = alt_anahtar or ust_anahtar
+            except Exception:
+                pass
+        return tanim
     return None
 
 

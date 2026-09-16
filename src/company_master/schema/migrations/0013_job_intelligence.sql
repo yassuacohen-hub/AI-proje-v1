@@ -29,8 +29,12 @@ CREATE TABLE IF NOT EXISTS job_postings (
     collected_at        TIMESTAMPTZ DEFAULT NOW(),        -- Toplama tarihi
     content_hash        TEXT,                             -- Değişiklik takibi için hash
     raw_data            JSONB DEFAULT '{}',               -- Ham veri (kaynağa özgü ek alanlar)
+    updated_at          TIMESTAMPTZ DEFAULT NOW(),        -- Upsert güncelleme damgası
     UNIQUE(source_name, external_id)
 );
+
+-- Eski kurulumlar icin idempotent kolon eklemesi (upsert ON CONFLICT ... updated_at)
+ALTER TABLE job_postings ADD COLUMN IF NOT EXISTS updated_at TIMESTAMPTZ DEFAULT NOW();
 
 CREATE INDEX IF NOT EXISTS idx_job_postings_company ON job_postings(company_id);
 CREATE INDEX IF NOT EXISTS idx_job_postings_source ON job_postings(source_name);

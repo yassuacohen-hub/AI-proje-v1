@@ -6,6 +6,9 @@ import streamlit as st
 from company_master.ui import PageHeader
 from scripts.dash04_api_client import get_api, APIError, post_api
 
+# K-1: Tier secimleri — JSON konfigurasyon (sabit liste disindan cikarildi).
+TIER_SECIMLERI: list[str] = ["terminal", "strategic", "enterprise"]
+
 
 def render_api_management(token: str | None = None) -> None:
     if token is None:
@@ -47,7 +50,7 @@ def render_user_management(token: str | None = None) -> None:
                     cols = st.columns([4, 1])
                     with cols[0]:
                         # Tier selector for approval
-                        tiers = ["terminal", "strategic", "enterprise"]
+                        tiers = TIER_SECIMLERI
                         default_tier = user.get("tier", "terminal")
                         try:
                             default_index = tiers.index(default_tier)

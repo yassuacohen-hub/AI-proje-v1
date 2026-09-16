@@ -29,7 +29,9 @@ from web_dashboard.tabs import (
     YUZEY_MUNINN,
     YUZEYLER,
     TabTanimi,
+    alt_sekmeler,
     erisebilir,
+    eski_url_yonlendir,
     gorunur_bolumler,
     gruplar,
     musteri_onizleme_bolumleri,
@@ -37,6 +39,7 @@ from web_dashboard.tabs import (
     rol_normalize,
     tab_getir,
     tab_url_getir,
+    ust_sayfalar,
     varsayilan_tab,
 )
 
@@ -47,13 +50,9 @@ logging.disable(logging.WARNING)
 
 def test_bolum_sayisi_ve_benzersizlik() -> None:
     """BK5: bolum listesi eksiksiz ve anahtarlar/URL'ler benzersiz."""
-    # 11 (temel) + 14 (U-11 dağıtım) + 1 (PO-BACK-08 executive) + 1 (PO-BACK-06 destek)
-    # + 1 (KPI-EXA-02 teknik_altyapi) = 28
-    # Temel: ana_kontrol, musteriler, paketler, pazarlama, abrakadabra, sistem, canli_veri, denetim, yonetim, ayarlar, yukleme
-    # U-11: kpi, hatalar, kullanicilar, karar_defteri, kalite, arama, export, maliyet, performans, api, webhook, dlq, yenileme, kimlik
-    # PO-BACK-08: executive (MRR/ARR + churn + tenant sağlık dağılımı)
-    # KPI-EXA-02: teknik_altyapi (Veri Akışı diyagramı ayrı teknik sayfa, min_rol=analyst)
-    assert len(SECTIONS) == 28
+    # 28 mevcut + 4 yeni üst sayfa (musteri_yonetimi, proje_yonetimi,
+    # veri_kalite, musteri_onizleme) = 32
+    assert len(SECTIONS) == 32
 
     anahtarlar = [t.anahtar for t in SECTIONS]
     urller = [t.url_path for t in SECTIONS]
@@ -265,4 +264,91 @@ def test_mig_sistem_bolumleri_muninn_kalir() -> None:
         tanim = tab_getir(anahtar)
         assert tanim is not None
         assert tanim.yuzey == YUZEY_MUNINN, anahtar
+
+
+# --------------------------------------------------------------------------- #
+# NAV-IA-01: üst sayfa, alt sekme, eski url yönlendirme
+# --------------------------------------------------------------------------- #
+
+
+def test_ust_sayfalar_admin_6():
+    """NAV-IA-01: admin 6 üst sayfayı görür."""
+    ust = ust_sayfalar(ROL_ADMIN)
+    assert len(ust) == 6
+    assert set(ust.keys()) == {
+        "ana_kontrol", "musteri_yonetimi", "proje_yonetimi",
+        "veri_kalite", "sistem", "musteri_onizleme",
+    }
+
+
+def test_ust_sayfalar_anon_2():
+    """NAV-IA-01: anon yalnız 2 üst sayfayı görür (kimlik/yonetim/sistem çıkmaz)."""
+    ust = ust_sayfalar(ROL_ANON)
+    assert len(ust) == 2
+    assert set(ust.keys()) == {"ana_kontrol", "musteri_onizleme"}
+
+
+def test_ust_sayfalar_analyst_4():
+    """NAV-IA-01: analyst 4 üst sayfayı görür."""
+    ust = ust_sayfalar(ROL_ANALYST)
+    assert len(ust) == 4
+    assert "sistem" in ust
+    assert "veri_kalite" in ust
+    assert "musteri_yonetimi" not in ust
+
+
+def test_ust_sayfa_ust_none_ve_ust_dolu():
+    """Üst sayfalar ust=None, alt sekmeler ust=dolu."""
+    ust_page = tab_getir("sistem")
+    assert ust_page is not None
+    assert ust_page.ust is None
+    assert ust_page.sira == 0
+
+    alt = tab_getir("teknik_altyapi")
+    assert alt is not None
+    assert alt.ust == "sistem"
+    assert alt.sira == 0
+
+
+def test_alt_sekmeler_sistem_analyst():
+    """Sistem üst sayfasının alt sekmeleri analyst rolünde visible."""
+    alt = alt_sekmeler("sistem", ROL_ANALYST)
+    alt_analhtar = {t.anahtar for t in alt}
+    assert "teknik_altyapi" in alt_analhtar
+    assert "performans" in alt_analhtar
+    assert "api" in alt_analhtar
+    assert "maliyet" in alt_analhtar
+    # admin-only olmasin
+    assert "ayarlar" not in alt_analhtar
+
+
+def test_alt_sekmeler_bos_ust():
+    """Bos ust ile alt_sekemeler bos tuple dondurmeli."""
+    assert alt_sekmeler("") == ()
+    assert alt_sekmeler("yok") == ()
+
+
+def test_alt_sekmeler_sira_sirali():
+    """Alt sekme siralari korunmali."""
+    alt = alt_sekmeler("proje_yonetimi", ROL_ADMIN)
+    siralar = [t.sira for t in alt]
+    assert siralar == sorted(siralar)
+    assert [t.anahtar for t in alt] == [
+        "karar_defteri", "abrakadabra", "denetim", "hatalar", "dlq",
+    ]
+
+
+def test_eski_url_yonlendirme():
+    """NAV-IA-01 ESKI_URL: eski URL'ler yeni yere yonlendiriliyor."""
+    assert eski_url_yonlendir("kullanicilar") == ("musteri_yonetimi", "kullanicilar")
+    assert eski_url_yonlendir("yonetim") == ("musteri_yonetimi", "")
+    assert eski_url_yonlendir("kimlik") == ("ana_kontrol", "")
+    assert eski_url_yonlendir("yok") is None
+
+
+def test_tab_url_getir_eski_url_fallback():
+    """tab_url_getir ESKI_URL'e bakar (cagri aktarimi)."""
+    tanim = tab_url_getir("kullanicilar")
+    assert tanim is not None
+    assert tanim.anahtar == "kullanicilar"
 

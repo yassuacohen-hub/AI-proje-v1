@@ -11,16 +11,19 @@
 | WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | plan | - |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | plan | - |
 | REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar) | cline | P2 | blocked | data/orchestrator/REV-UI-SIDEBAR-02_bulgular_2026-09-15_cline.md |
-| UI-CHART-01 | Havali KPI kartlari ve grafikler (Ana Kontrol + Yonetim) | roo | P1 | review | web_dashboard/tabs/ana_kontrol.py, web_dashboard/tabs/admin_kpi.py, web_dashboard/charts.py |
-| GUARD-ENC-01 | kodlama_denetim.py: BOM + NUL + mojibake + ast.parse guard (pre-commit) | cline | P2 | aktif | scripts/kodlama_denetim.py, tests/test_kodlama_denetim.py, .pre-commit-config.yaml |
-| REV-UI-CHART-01 | UI-CHART-01 capraz inceleme (roo teslimi, commit 928ef8b) | cline | P1 | plan | - |
+| AUTH-GATE-01 | Giris kapisi modali + POST login + sifre sifirlama | kilo | P1 | review | src/company_master/ui/components/modal.py, web_dashboard/tabs/admin_auth.py, app.py |
+| NAV-IA-01 | Menu agaci: TabTanimi.ust_sayfa + ESKI_URL + 6 ust oge | kilo | P1 | review | web_dashboard/tabs/__init__.py, tests/test_dashboard_nav.py, tests/test_app_menu_rol.py |
+| NAV-IA-02 | Musteri Yonetimi sayfasi (6 alt sekme) + K-1 tier fix | kilo | P1 | review | web_dashboard/tabs/musteri_yonetimi.py, web_dashboard/tabs/admin_extras.py, tests/test_musteri_yonetimi.py |
+| TOK-01 | Ajan kural dosyalarinda token sikistirma (12K->6K) | cline | P1 | review | AGENTS.md, CLAUDE.md, ANA_KURALLAR.md |
+| REV-TOK-01 | TOK-01 dokuman sadelestirme incelemesi (cline teslimi) | roo | P2 | plan | CLAUDE.md, docs/AJAN_DETAY.md |
+| BRAND-KIMLIK-01 | Marka kimligi seti kuruldu - inceleme ve onay (brand.md + design-tokens.json + assets/LOGO.md) | roo | P2 | plan | - |
 
 ## Tamamlananlar
 
 | Görev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
 | P0-1 | İstiklal OSB scraper implementasyonu | web_kazima | 2026-09-08T10:00:00Z |
-| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-15T23:39:43 |
+| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-16T20:57:24 |
 | P0-3 | Kalite skoru 6.53 - 50+ heazine | kalite | 2026-09-06T22:54:31 |
 | Y21 | ISKUR kurumsal eslestirme verisi arastirma | arastirmaci | 2026-09-10 |
 | APIFY-01 | Apify uygunluk ve entegrasyon mimarisi arastirma | kilo | 2026-09-11T22:14:20 |
@@ -229,5 +232,12 @@
 | UI-REFRESH-01 | Otomatik Yenileme bloğu: dev buton/metric responsive + st.auto_refresh cokme fix | roo | 2026-09-15T19:09:59 |
 | ADMIN-ENV-01 | Admin sifre sifirlama scripti + .env on-dolum (roo) | roo | 2026-09-15T19:25:56 |
 | ADMIN-RESET-01 | Admin e-posta dogrulamali sifre degistirme (buyer reset altyapisini admin'e uyarla) | roo | 2026-09-15T20:20:57 |
+| UI-CHART-01 | Havali KPI kartlari ve grafikler (Ana Kontrol + Yonetim) | roo | 2026-09-16T17:41:44 |
 | REV-ADMIN-ENV-01 | Review: admin sifre sifirlama scripti + .env on-dolum + app.py restore | cline | 2026-09-15T21:21:39 |
+| GUARD-ENC-01 | kodlama_denetim.py: BOM + NUL + mojibake + ast.parse guard (pre-commit) | cline | 2026-09-16T19:08:16 |
 | UI-MODAL-01 | Admin panel acilir modal ekranlar + grafik/chart arastirma ve oneri calismasi (dokuman) | cline | 2026-09-15T21:16:47 |
+| REV-UI-CHART-01 | UI-CHART-01 capraz inceleme (roo teslimi, commit 928ef8b) | cline | 2026-09-16T18:08:39 |
+| DOC-HIBRIT-01 | Hibrit gecis plani dosyasini repo icine yaz (docs/plans/UI-CHART-01_hibrit_gecis_plani.md) | kilo | 2026-09-16T17:14:40 |
+| NAV-FIX-01 | Tek tikta bolum gecisi + mojibake (app.py, admin_panel.py) | kilo | 2026-09-16T17:41:39 |
+| REV-NAV-FIX-01 | NAV-FIX-01 capraz inceleme (kilo teslimi) | cline | 2026-09-16T18:08:39 |
+| NAV-FIX-02 | Menu aciklamalari menu disinda sagda (topbar) gosterilsin; native tooltip kaldir | kilo | 2026-09-16T18:21:51 |
