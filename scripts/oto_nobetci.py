@@ -77,10 +77,14 @@ def nobetci_tur():
         if d:
             print(f"  OTOMATIK DESTEK: {d} gorev olusturuldu")
 
-    # 1. Onay bekleyenleri onayla
+    # 1. Onay bekleyenleri onayla (S-07: yalniz P2 ve alti; P0/P1 roo elle onaylar)
     kuyruk = trigger.onay_bekleyenler()
     for k in kuyruk:
         try:
+            uygun, gerekce = trigger.otomatik_onaylanabilir(k["task_id"])
+            if not uygun:
+                print(f"  ELLE ONAY GEREKLI: {k['task_id']} -> roo ({gerekce})")
+                continue
             trigger.onayla(k["task_id"], "oto-nobetci")
             print(f"  ONAYLANDI: {k['task_id']} (teslim: {k['ajan']})")
             _ses_teslim_onay()

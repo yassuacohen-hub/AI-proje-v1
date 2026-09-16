@@ -354,6 +354,28 @@ def onayla(
     return k
 
 
+# S-07 (sahip kararı 2026-09-16): otomatik onay yalnız P2 ve altı.
+# P0/P1 görevler roo tarafından ELLE onaylanır; tekrar ihlalde oto-nobetci kapatılır.
+ELLE_ONAY_ONCELIKLERI: frozenset[str] = frozenset({"P0", "P1"})
+
+
+def otomatik_onaylanabilir(task_id: str) -> tuple[bool, str]:
+    """Bir teslimin oto-nobetci/hepsini-tamamla ile onaylanıp onaylanamayacağı.
+
+    Dönüş: (onaylanabilir, gerekçe).
+    - Pano dışı görev (D-35 hayalet onay) → False
+    - `oncelik` P0/P1 → False (S-07: elle roo onayı)
+    - Diğer (P2, P3, ...) → True
+    """
+    g = tb.gorev_getir(task_id)
+    if not g:
+        return False, "panoda yok (D-35)"
+    oncelik = str(g.get("oncelik") or "P2").strip().upper()
+    if oncelik in ELLE_ONAY_ONCELIKLERI:
+        return False, f"{oncelik} elle onay (S-07)"
+    return True, oncelik
+
+
 def reddet(
     task_id: str, onaylayan: str, neden: str, data_dir: Path | None = None
 ) -> dict[str, Any]:

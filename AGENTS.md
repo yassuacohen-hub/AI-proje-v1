@@ -9,6 +9,7 @@
 
 ## Görev Yaşam Döngüsü (ORCH-08, ZORUNLU)
 - Posta: `bak` → `al` → brif → iş → `teslim` (görev `review`'a geçer; onaysız `done` GEÇERSİZ). Sessizlik onay değildir. Ayrıntı: AJAN_DETAY §15.
+- Otomatik onay (S-07, sahip kararı 2026-09-16): `oto-nobetci` / `hepsini-tamamla` yalnız **P2 ve altı** görevleri onaylar; **P0/P1 roo elle onaylar** (`trigger.otomatik_onaylanabilir`). Tekrar ihlalde oto-nobetci kapatılır.
 - Başlangıç protokolü: oturum açınca veya tek kelimelik tetik (başla/go/devam/tamam = tam yetki) ile önce posta kutusunu kontrol et.
 - Teslim kontrol listesi: brif maddeleri + diskte dosya + test sayısı + UTF-8 temizlik + kilit disiplini. Ayrıntı: AJAN_DETAY §17.
 - Kodlama guard: `python scripts/kodlama_denetim.py` temiz çıkmadan teslim yok (BOM/NUL/mojibake/sozdizimi; pre-commit'te de bağlı).

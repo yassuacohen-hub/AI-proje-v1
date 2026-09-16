@@ -165,11 +165,18 @@ def cmd_zincir(args: argparse.Namespace) -> int:
 
 
 def cmd_hepsini_tamamla(args: argparse.Namespace) -> int:
-    """Tum teslim edilen gorevleri onayla ve zinciri devam ettir."""
+    """Tum teslim edilen gorevleri onayla ve zinciri devam ettir.
+
+    S-07 (sahip karari 2026-09-16): P0/P1 gorevler atlanir, roo elle onaylar.
+    """
     duzeltilen = 0
     kuyruk = trigger.onay_bekleyenler()
     for k in kuyruk:
         try:
+            uygun, gerekce = trigger.otomatik_onaylanabilir(k["task_id"])
+            if not uygun:
+                print(f"  ELLE ONAY GEREKLI: {k['task_id']} -> roo ({gerekce})")
+                continue
             trigger.onayla(k["task_id"], "oto-nobetci")
             print(f"  ONAYLANDI: {k['task_id']} (teslim: {k['ajan']})")
             duzeltilen += 1
