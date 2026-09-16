@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Job Intelligence â€” Åirket Kariyer SayfalarÄ± Scraper.
+"""Job Intelligence — Şirket Kariyer Sayfaları Scraper.
  
-Mevcut companies.website_domain'lerden /kariyer, /jobs, /career yollarÄ±nÄ± keÅŸfeder.
-KVKK gÃ¼venli: Åirket kendi sitesindeki veriyi toplar.
+Mevcut companies.website_domain'lerden /kariyer, /jobs, /career yollarını keşfeder.
+KVKK güvenli: Şirket kendi sitesindeki veriyi toplar.
 """
 from __future__ import annotations
 
@@ -21,18 +21,18 @@ logger = logging.getLogger(__name__)
 
 
 class CompanyCareerSource(BaseJobSource):
-    """Åirketlerin kendi kariyer sayfalarÄ±ndan iÅŸ ilanÄ± Ã§eken scraper."""
+    """Şirketlerin kendi kariyer sayfalarından iş ilanı çeken scraper."""
     
     def __init__(self):
         super().__init__(
             source_name="company-career-pages",
-            domain=None,  # Dinamik: her ÅŸirket iÃ§in farklÄ± domain
-            min_interval=1.5  # Åirket siteleri iÃ§in daha nazik
+            domain=None,  # Dinamik: her şirket için farklı domain
+            min_interval=1.5  # Şirket siteleri için daha nazik
         )
         self.companies_cache: list[dict[str, Any]] = []
     
     def load_companies(self, limit: int | None = None) -> list[dict[str, Any]]:
-        """DB'den website_domain'i olan ÅŸirketleri yÃ¼kle."""
+        """DB'den website_domain'i olan şirketleri yükle."""
         from sqlalchemy import text
         from company_master.db.connection import get_engine
         
@@ -76,11 +76,11 @@ class CompanyCareerSource(BaseJobSource):
             })
         
         self.companies_cache = companies
-        logger.info('[%s] %d ÅŸirket yÃ¼klendi (placeholder atlandÄ±)', self.source_name, len(companies))
+        logger.info('[%s] %d şirket yüklendi (placeholder atlandı)', self.source_name, len(companies))
         return companies
     
     def discover_job_urls(self, max_pages: int = 10) -> list[str]:
-        """TÃ¼m ÅŸirketler iÃ§in kariyer sayfasÄ± URL'lerini keÅŸfet."""
+        """Tüm şirketler için kariyer sayfası URL'lerini keşfet."""
         if not self.companies_cache:
             self.load_companies()
         
@@ -91,11 +91,11 @@ class CompanyCareerSource(BaseJobSource):
                 urls.append(career_url)
                 logger.debug('[%s] %s -> %s', self.source_name, company['legal_name'][:50], career_url)
         
-        logger.info('[%s] Toplam %d kariyer sayfasÄ± keÅŸfedildi', self.source_name, len(urls))
+        logger.info('[%s] Toplam %d kariyer sayfası keşfedildi', self.source_name, len(urls))
         return urls[:max_pages] if max_pages else urls
     
     def _find_career_page(self, base_url: str) -> str | None:
-        """Åirket sitesinden kariyer sayfasÄ±nÄ± bul."""
+        """Şirket sitesinden kariyer sayfasını bul."""
         # 1. Ana sayfadan navigasyon linklerinde ara
         html = self._fetch(base_url)
         if not html:
@@ -103,7 +103,7 @@ class CompanyCareerSource(BaseJobSource):
         
         soup = self._parse_html(html)
         
-        # Navigasyon linklerinde kariyer yollarÄ±nÄ± ara
+        # Navigasyon linklerinde kariyer yollarını ara
         for link in soup.find_all('a', href=True):
             href = link.get('href', '')
             link_text = self._safe_text(link.get_text(strip=True)).lower()
@@ -117,13 +117,13 @@ class CompanyCareerSource(BaseJobSource):
                         return full_url
             
             # Link metninde kariyer anahtar kelimeleri
-            if any(kw in link_text for kw in ['kariyer', 'iÅŸ ilan', 'career', 'jobs', 'join us', 'Ã§alÄ±ÅŸma hayatÄ±', 'ik', 'insan kaynaklari', 'pozisyonlar']):
+            if any(kw in link_text for kw in ['kariyer', 'iş ilan', 'career', 'jobs', 'join us', 'çalışma hayatı', 'ik', 'insan kaynaklari', 'pozisyonlar']):
                 full_url = urljoin(base_url, href)
                 if self._same_domain(base_url, full_url):
                     logger.debug('[%s] Link metninde kariyer: %s', self.source_name, full_url)
                     return full_url
         
-        # 2. DoÄŸrudan yaygÄ±n yollarÄ± dene
+        # 2. Doğrudan yaygın yolları dene
         for path in ['/kariyer', '/career', '/jobs', '/is-ilanlari', '/isbasvuru', '/pozisyonlar', '/acik-pozisyonlar']:
             test_url = urljoin(base_url, path)
             html = self._fetch(test_url)
@@ -131,13 +131,13 @@ class CompanyCareerSource(BaseJobSource):
                 soup = self._parse_html(html)
                 text = self._safe_text(soup.get_text(' ', strip=True)).lower()
                 if any(kw in text for kw in JOB_KEYWORDS):
-                    logger.debug('[%s] DoÄŸrudan path Kariyer: %s', self.source_name, test_url)
+                    logger.debug('[%s] Doğrudan path Kariyer: %s', self.source_name, test_url)
                     return test_url
         
         return None
     
     def _same_domain(self, url1: str, url2: str) -> bool:
-        """Ä°ki URL aynÄ± domain mi?"""
+        """İki URL aynı domain mi?"""
         return urlparse(url1).netloc == urlparse(url2).netloc
     
     def parse_job_detail(self, html: str, url: str) -> ScrapedJob | None:
@@ -209,13 +209,13 @@ class CompanyCareerSource(BaseJobSource):
         return jobs
 
     def run_full_scrape(self, max_pages: int = 100, output_file: str | None = None) -> list[ScrapedJob]:
-        """TÃ¼m ÅŸirketler iÃ§in kariyer sayfalarÄ±nÄ± tara.
+        """Tüm şirketler için kariyer sayfalarını tara.
         
         Args:
-            max_pages: Maksimum ÅŸirket sayÄ±sÄ± (her ÅŸirket 1 sayfa = 1 kariyer sayfasÄ±)
-            output_file: Ã‡Ä±ktÄ± dosyasÄ±
+            max_pages: Maksimum şirket sayısı (her şirket 1 sayfa = 1 kariyer sayfası)
+            output_file: Çıktı dosyası
         """
-        logger.info('[%s] Åirket kariyer sayfalarÄ± scrape baÅŸlÄ±yor (max_companies=%d)', self.source_name, max_pages)
+        logger.info('[%s] Şirket kariyer sayfaları scrape başlıyor (max_companies=%d)', self.source_name, max_pages)
         
         if not self.companies_cache:
             self.load_companies(limit=max_pages)
@@ -243,12 +243,12 @@ class CompanyCareerSource(BaseJobSource):
             finally:
                 processed += 1
             if processed % 50 == 0:
-                logger.info('[%s] Ä°lerleme: %d/%d ÅŸirket iÅŸlendi, %d ilan bulundu', 
+                logger.info('[%s] İlerleme: %d/%d şirket işlendi, %d ilan bulundu', 
                            self.source_name, processed, len(self.companies_cache[:max_pages]), len(jobs))
             
             time.sleep(0.5)  # Nazik ol
         
-        logger.info('[%s] Scrape tamamlandÄ±: %d ÅŸirket iÅŸlendi, %d kariyer sayfasÄ± bulundu', 
+        logger.info('[%s] Scrape tamamlandı: %d şirket işlendi, %d kariyer sayfası bulundu', 
                    self.source_name, processed, len(jobs))
         
         if output_file and jobs:
