@@ -83,3 +83,56 @@ def test_page_icon_utf8():
     app_kod = (ROOT / "app.py").read_text(encoding="utf-8")
     assert "page_icon" in app_kod, "page_icon bulunamadı"
     assert "ğŸ" not in app_kod, "page_icon mojibake içeriyor"
+
+
+# --- NAV-FIX-02 ---
+
+
+def test_nav_ipucu_her_durumda_none():
+    """_nav_ipucu() toggle açık/kapalı her ikisinde de None döner."""
+    import app as app_mod
+
+    fake = type("Fake", (), {"hazir": True, "baslik": "x", "aciklama": "y"})()
+    assert app_mod._nav_ipucu(fake, True) is None
+    assert app_mod._nav_ipucu(fake, False) is None
+
+
+def test_nav_ipucu_topbar_caption_toggle(monkeypatch):
+    """Toggle açıkken topbar caption çağrılır; kapalıyken çağrılmaz."""
+    import app as app_mod
+    import streamlit as st
+
+    caption_calls: list[str] = []
+
+    def mock_caption(text=None, **kwargs):
+        if text and "ℹ️" in str(text):
+            caption_calls.append(str(text))
+
+    monkeypatch.setattr(st, "caption", mock_caption)
+
+    fake_session = {app_mod.IPUCU_KEY: True}
+    monkeypatch.setattr(st, "session_state", fake_session)
+
+    fake_tanim = type(
+        "Fake",
+        (),
+        {
+            "aciklama": "test aciklama",
+            "baslik": "test",
+            "grup": "test",
+            "hazir": True,
+            "anahtar": "test",
+        },
+    )()
+
+    # Toggle açık → caption çağrılmalı
+    caption_calls.clear()
+    app_mod.render_topbar(fake_tanim)
+    assert len(caption_calls) == 1, "Toggle açıkken caption çağrılmalı"
+    assert "test aciklama" in caption_calls[0]
+
+    # Toggle kapalı → caption çağrılmamalı
+    caption_calls.clear()
+    fake_session[app_mod.IPUCU_KEY] = False
+    app_mod.render_topbar(fake_tanim)
+    assert len(caption_calls) == 0, "Toggle kapalıyken caption çağrılmalı"

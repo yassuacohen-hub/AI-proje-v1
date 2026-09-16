@@ -371,24 +371,15 @@ def sayfalari_uret() -> list:
 
 
 def _nav_ipucu(tanim: TabTanimi, kompakt: bool) -> str | None:
-    """Menü düğmesinin tooltip metni.
+    """NAV-FIX-02: Tooltip metni — her durumda None.
 
-    NAV-FIX-03: Tooltip varsayılan **KAPALI** — Streamlit'in native `help=`
-    tooltip'i konumlandırılamaz ve dar sidebar'da butonların üzerine binip
-    menüyü kullanılamaz hale getiriyordu (sahip bulgusu, ekran görüntülü,
-    2026-09-16). Kullanıcı "Menü ipuçlarını göster" anahtarını açarsa
-    (IPUCU_KEY) tooltip yeniden görünür; kapalıyken `None` döner (Streamlit
-    `help=None` ile tooltip hiç render edilmez).
-
-    Kompakt modda etiket görünmediği için başlık da tooltip'e taşınır
-    (erişilebilirlik: yalnız ikon bırakılmaz) — yalnızca anahtar açıkken.
+    Native Streamlit tooltip'leri menü butonlarının üzerine binip
+    menüyü kullanılamaz hale getiriyordu. Kullanıcı isteği: bilgi
+    yazıları menü dışında sağda gösterilsin. Bu fonksiyon geriye
+    hiçbir şey döndürmez; bilgi sağ üstte (topbar) ve sadece toggle
+    açıkken gösterilir.
     """
-    if not st.session_state.get(IPUCU_KEY, False):
-        return None
-    ek = "" if tanim.hazir else " · ⏳ yapım aşamasında"
-    if kompakt:
-        return f"{tanim.baslik} — {tanim.aciklama}{ek}"
-    return f"{tanim.aciklama}{ek}"
+    return None
 
 
 def _nav_grubu_ciz(tanimlar: list[TabTanimi], secili: TabTanimi, kompakt: bool) -> None:
@@ -450,9 +441,9 @@ def render_sidebar(secili: TabTanimi) -> None:
             help="Yalnız ikonlar görünür; başlıklar imleçle üzerine gelince çıkar.",
         )
         st.toggle(
-            "Menü ipuçlarını göster",
+            "Bölüm açıklamasını göster",
             key=IPUCU_KEY,
-            help="Kapalıyken menü butonları üzerine gelince açıklama çıkmaz. NAV-FIX-03: Streamlit'in native tooltip'i konumlandırılamaz ve dar sidebar'da butonların üzerine biniyordu.",
+            help="Seçili bölümün açıklaması sağ üstte, arama kutusunun altında görünür.",
         )
         # UI-SIDEBAR-02: Marka blogu bölümü
         st.markdown("### 📝 Marka Blogu")
@@ -529,6 +520,9 @@ def render_topbar(tanim: TabTanimi) -> None:
             placeholder="Bölüm ara…  (ör. kalite, müşteri)",
             label_visibility="collapsed",
         )
+        if st.session_state.get(IPUCU_KEY, False):
+            ek = "" if tanim.hazir else " · ⏳ yapım aşamasında"
+            st.caption(f"ℹ️ {tanim.aciklama}{ek}")
 
     # Widget sonrası doğrudan session_state yazma serbesttir (yalnızca
     # widget'ın kendi internal state'i kısıtlı). Sorgu tek eşleşme
@@ -547,7 +541,6 @@ def render_topbar(tanim: TabTanimi) -> None:
                     aday.etiket,
                     key=f"ara_{aday.anahtar}",
                     width="stretch",
-                    help=aday.aciklama,
                     disabled=aday.anahtar == tanim.anahtar,
                 ):
                     bolum_sec(aday.anahtar)
