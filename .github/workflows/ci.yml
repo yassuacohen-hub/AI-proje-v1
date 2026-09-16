@@ -68,9 +68,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements-app.txt
           pip install pytest pytest-cov
+          echo "# CI ortami: gercek gizli bilgi yok" > .env
       - name: Init schema
         run: |
           python -c "from src.company_master.db.connection import init_db; init_db()"
+          python -c "import glob; from src.company_master.db.connection import init_db; [init_db(sql_path=p) for p in sorted(glob.glob('src/company_master/schema/migrations/*.sql'))]"
       - name: Kodlama denetimi (BOM / NUL / 0-bayt / UTF-16) — KR-4
         run: |
           python scripts/kodlama_denetim.py

@@ -5,7 +5,11 @@ from pathlib import Path
 from typing import Any
 
 import requests
-import tomllib
+
+try:
+    import tomllib
+except ModuleNotFoundError:  # Python < 3.11
+    import tomli as tomllib  # type: ignore[no-redef]
 
 DEFAULT_API_URL = "http://localhost:8000"
 CONFIG_PATH = Path(__file__).resolve().parents[1] / ".streamlit" / "config.toml"

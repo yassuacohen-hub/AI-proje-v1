@@ -57,6 +57,7 @@ EXPECTED_ROUTES: dict[str, set[str]] = {
     "/api/buyer/welcome-telegram": {"POST"},
     "/api/me": {"GET"},
     "/api/admin/login": {"GET"},
+    "/api/admin/change-password": {"POST"},
     "/api/admin/pending": {"GET"},
     "/api/admin/approve": {"POST"},
     "/api/admin/credit": {"POST"},

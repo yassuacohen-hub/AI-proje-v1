@@ -3,11 +3,14 @@ import sys
 import json
 from pathlib import Path
 
+import pytest
+
 # Add project root to path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "scripts"))
 
-import validate_vkn_duplicate  # noqa: E402
+# Script .gitignore'da (scripts/validate_*.py) -> CI'da yoksa atla.
+validate_vkn_duplicate = pytest.importorskip("validate_vkn_duplicate")
 
 
 def test_validate_vkn_format():

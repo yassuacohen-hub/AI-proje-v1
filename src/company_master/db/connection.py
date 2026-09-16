@@ -292,18 +292,18 @@ def init_db(sql_path: Optional[str] = None) -> None:
 
         sql = f.read()
 
-    with engine.begin() as conn:
-
-        for statement in sql.split(';'):
-
-            stmt = statement.strip()
-
-            if stmt and not stmt.startswith('--'):
-
-                try:
-
-                    conn.execute(text(stmt))
-
-                except Exception as e:
-
-                    print(f"SQL hatası (atlanıyor): {e}")
+    for statement in sql.split(';'):
+        # Yorum satirlarini ayikla: '-- ...' ile baslayan blok CREATE'i gizlemesin.
+        stmt = "\n".join(
+            satir for satir in statement.splitlines()
+            if not satir.strip().startswith('--')
+        ).strip()
+        if not stmt:
+            continue
+        # Her statement ayri transaction: bir ALTER hatasi digerlerini
+        # InFailedSqlTransaction ile iptal etmesin.
+        try:
+            with engine.begin() as conn:
+                conn.execute(text(stmt))
+        except Exception as e:
+            print(f"SQL hatası (atlanıyor): {e}")

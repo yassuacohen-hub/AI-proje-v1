@@ -36,10 +36,58 @@ def _simdi() -> str:
     return datetime.now().isoformat(timespec="seconds")
 
 
+# ---- Ajan adı kuralı (D-33, 2026-09-16, Ürün Sahibi emri) ----
+#
+# Kanonik adlar: kilo, cline, roo. "Ajan kilo", "Kilo", "kilo_code",
+# "KiloCode" gibi yazımların hepsi aynı postaya çözümlenir. Böylece ajan
+# hangi adla bakarsa baksın kutusunu bulur ("aktif postam yok" hatası biter).
+
+AJAN_TAKMA_ADLAR: dict[str, str] = {
+    "kilocode": "kilo",
+    "kilo_code": "kilo",
+    "kilo-code": "kilo",
+    "roocode": "roo",
+    "roo_code": "roo",
+    "roo-code": "roo",
+    "roo_orkestrator": "roo",
+    "orkestrator": "roo",
+    "clinebot": "cline",
+    "cline_code": "cline",
+    "claudecode": "claude_code",
+    "claude-code": "claude_code",
+}
+
+
+def ajan_normalize(ad: str | None) -> str:
+    """Ajan adını kanonik biçime çevirir.
+
+    - Baş/son boşluk atılır, küçük harfe çevrilir (Türkçe İ/I güvenli).
+    - "ajan " / "agent " öneki ve "@" atılır ("Ajan kilo" → "kilo").
+    - Boşluk ve tire alt çizgiye çevrilir; ardından takma ad tablosu uygulanır.
+    Boş ad TriggerError fırlatır.
+    """
+    ham = (ad or "").strip()
+    if not ham:
+        raise TriggerError("Ajan adı boş olamaz (kanonik adlar: kilo, cline, roo).")
+    # Ajan adları ASCII'dir: Türkçe İ/ı ayrımı yapılmaz ("KILO" → "kilo").
+    ad_l = ham.replace("İ", "i").replace("ı", "i").lower().lstrip("@").strip()
+    for onek in ("ajan ", "agent ", "ajan_", "agent_", "ajan-", "agent-"):
+        if ad_l.startswith(onek):
+            ad_l = ad_l[len(onek):].strip()
+            break
+    # "ajankilo" gibi bitişik yazımlar
+    for onek in ("ajan", "agent"):
+        if ad_l.startswith(onek) and len(ad_l) > len(onek):
+            ad_l = ad_l[len(onek):].strip()
+            break
+    ad_l = "_".join(p for p in ad_l.replace("-", " ").replace("_", " ").split() if p)
+    return AJAN_TAKMA_ADLAR.get(ad_l, AJAN_TAKMA_ADLAR.get(ad_l.replace("_", ""), ad_l))
+
+
 # ---- Posta kutusu (tetikler) ----
 
 def _tetik_yolu(ajan: str, data_dir: Path | None = None) -> Path:
-    return _data_dir(data_dir) / "triggers" / f"{ajan}.jsonl"
+    return _data_dir(data_dir) / "triggers" / f"{ajan_normalize(ajan)}.jsonl"
 
 
 def _tetikleri_oku(ajan: str, data_dir: Path | None = None) -> list[dict[str, Any]]:
@@ -67,6 +115,7 @@ def tetik_ekle(
     task_id: str, ajan: str, talimat: str = "", data_dir: Path | None = None
 ) -> dict[str, Any]:
     """Ajanın postasına yeni görev tetikle. Aynı görev için tekrar düşmez."""
+    ajan = ajan_normalize(ajan)  # D-33: kayıtta da kanonik ad
     kayitlar = _tetikleri_oku(ajan, data_dir)
     if any(k["task_id"] == task_id and k["durum"] == "bekliyor" for k in kayitlar):
         raise TriggerError(f"{ajan} için bekleyen tetik zaten var: {task_id}")
@@ -104,6 +153,7 @@ def tetik_al(
     Koşul: görev panoda var + `sahip == ajan` + durumu `plan`/`bekliyor`.
     Aksi halde TriggerError (başkasının görevi veya zaten alınmış/bitmiş iş).
     """
+    ajan = ajan_normalize(ajan)
     kayitlar = _tetikleri_oku(ajan, data_dir)
     bulundu = False
     for k in kayitlar:
@@ -116,7 +166,7 @@ def tetik_al(
         # S-06: pano fallback — panoya elle eklenmiş (tetiksiz) görevler için.
         if gorev is None:
             raise TriggerError(f"Görev panoda bulunamadı: {task_id}")
-        if gorev.get("sahip") != ajan:
+        if ajan_normalize(gorev.get("sahip") or "-") != ajan:
             raise TriggerError(
                 f"Görev {task_id} '{gorev.get('sahip')}' ajanına ait; {ajan} alamaz"
             )
