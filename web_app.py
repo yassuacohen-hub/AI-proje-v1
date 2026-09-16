@@ -1084,6 +1084,7 @@ def api_companies(
     sources: str = "",
     nace: str = "",
     mask: int = 0,
+    request: Request = None,
     _auth: str = Depends(require_api_key),
 ) -> dict:
     """Firma listesi - coklu kaynak destegi (sources= virgulle ayrilmis).
@@ -1208,6 +1209,18 @@ def api_companies(
             "offset": offset,
             "items": items,
         }
+        if search and request is not None:
+            session = _get_session(request)
+            user_email = session.user.email if session and session.user else "anonymous"
+            user_id = session.user.user_id if session and session.user else "anon"
+            _log_search_event(
+                user_id=user_id,
+                email=user_email,
+                ip=request.client.host if request.client else "",
+                query=search,
+                result_count=total,
+                filters=f"limit={limit},offset={offset},min_score={min_score},max_score={max_score},nace={nace},mask={mask}",
+            )
         cache_set(_ck, result)
         return result
 
@@ -2042,6 +2055,11 @@ def api_buyer_login(req: dict, request: Request, response: Response):
     email = (req.get("email") or "").strip().lower()
     password = req.get("password") or ""
     if not email or "@" not in email:
+        _log_login_event(
+            user_id="", email=email, ip=request.client.host if request.client else "",
+            user_agent=(request.headers.get("User-Agent") or "")[:500], success=False,
+            error_msg="gecerli e-posta girin",
+        )
         raise HTTPException(status_code=400, detail="gecerli e-posta girin")
     engine = get_engine()
     with engine.connect() as conn:
@@ -2057,17 +2075,40 @@ def api_buyer_login(req: dict, request: Request, response: Response):
             .first()
         )
     if not row:
+        _log_login_event(
+            user_id="", email=email, ip=request.client.host if request.client else "",
+            user_agent=(request.headers.get("User-Agent") or "")[:500], success=False,
+            error_msg="kayit bulunamadi",
+        )
         raise HTTPException(status_code=404, detail="Bu e-posta ile kayit bulunamadi")
     stored = row["password_hash"]
     if stored and not _verify_password(password, stored):
+        _log_login_event(
+            user_id=row.get("user_id", ""), email=row["email"],
+            ip=request.client.host if request.client else "",
+            user_agent=(request.headers.get("User-Agent") or "")[:500], success=False,
+            error_msg="sifre hatali",
+        )
         raise HTTPException(status_code=401, detail="E-posta veya şifre hatalı")
     if not stored and len(password) < 8:
+        _log_login_event(
+            user_id=row.get("user_id", ""), email=row["email"],
+            ip=request.client.host if request.client else "",
+            user_agent=(request.headers.get("User-Agent") or "")[:500], success=False,
+            error_msg="sifre hatali",
+        )
         raise HTTPException(status_code=401, detail="E-posta veya şifre hatalı")
     if row["status"] != "onayli":
         durum = (
             "onayınız değerlendiriliyor"
             if row["status"] == "onay_bekliyor"
             else "kabul edilmedi"
+        )
+        _log_login_event(
+            user_id=row.get("user_id", ""), email=row["email"],
+            ip=request.client.host if request.client else "",
+            user_agent=(request.headers.get("User-Agent") or "")[:500], success=False,
+            error_msg="uyelik_onay",
         )
         raise HTTPException(
             status_code=403,
@@ -2086,6 +2127,13 @@ def api_buyer_login(req: dict, request: Request, response: Response):
     )
     client_ip = request.client.host if request.client else ""
     create_session(session_user, client_ip, response)
+    _log_login_event(
+        user_id=row["user_id"],
+        email=row["email"],
+        ip=client_ip,
+        user_agent=(request.headers.get("User-Agent") or "")[:500],
+        success=True,
+    )
     return {
         "token": _user_token(row["email"]),
         "user": {
@@ -2096,6 +2144,85 @@ def api_buyer_login(req: dict, request: Request, response: Response):
             "role": row["role"],
         },
     }
+
+
+# DATA-LOG-01: login_events + search_events kayit yardimcilari
+
+
+def _dl_mask_ip(ip: str) -> str:
+    """IP son oktesini maskeler: 192.168.1.134 -> 192.168.1.0."""
+    parts = ip.split(".")
+    if len(parts) == 4:
+        parts[-1] = "0"
+        return ".".join(parts)
+    return ip
+
+
+# E-posta maskeleme: mevcut _mask_email (KVKK) fonksiyonunu kullanilir
+
+
+def _log_login_event(
+    user_id: str,
+    email: str,
+    ip: str,
+    user_agent: str,
+    success: bool,
+    error_msg: str = "",
+) -> None:
+    """DATA-LOG-01: login_events tablosuna kayit. Hata istegi duser."""
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            conn.execute(
+                text(
+                    "INSERT INTO login_events (user_id, email_masked, ts, ip_masked, "
+                    "user_agent, success, method, path, error_msg) "
+                    "VALUES (:uid, :email, CURRENT_TIMESTAMP, :ip, :ua, :ok, 'POST', '/api/buyer/login', :err)"
+                ),
+                {
+                    "uid": user_id or "",
+                    "email": _mask_email(email),
+                    "ip": _dl_mask_ip(ip),
+                    "ua": (user_agent or "")[:500],
+                    "ok": 1 if success else 0,
+                    "err": (error_msg or "")[:500],
+                },
+            )
+            conn.commit()
+    except Exception as exc:
+        print(f"[DATA-LOG-01] login_event kayit hatasi: {exc}")
+
+
+def _log_search_event(
+    user_id: str,
+    email: str,
+    ip: str,
+    query: str,
+    result_count: int,
+    filters: str = "",
+) -> None:
+    """DATA-LOG-01: search_events tablosuna kayit. Hata istegi duser."""
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            conn.execute(
+                text(
+                    "INSERT INTO search_events (user_id, email_masked, ts, ip_masked, "
+                    "query, result_count, filters) "
+                    "VALUES (:uid, :email, CURRENT_TIMESTAMP, :ip, :q, :rc, :f)"
+                ),
+                {
+                    "uid": user_id or "",
+                    "email": _mask_email(email),
+                    "ip": _dl_mask_ip(ip),
+                    "q": (query or "")[:1000],
+                    "rc": result_count,
+                    "f": (filters or "")[:500],
+                },
+            )
+            conn.commit()
+    except Exception as exc:
+        print(f"[DATA-LOG-01] search_event kayit hatasi: {exc}")
 
 
 # â”€â”€ X04: Üyelik yardımcıları (şifre sıfırlama, e-posta doğrulama, Telegram) â”€â”€â”€

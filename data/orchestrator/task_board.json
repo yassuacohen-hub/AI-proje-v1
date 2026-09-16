@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-16T22:17:23",
+    "bitis": "2026-09-16T23:59:13",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -3705,11 +3705,11 @@
     "baslik": "Marka kimligi seti kuruldu - inceleme ve onay (brand.md + design-tokens.json + assets/LOGO.md)",
     "sahip": "roo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-16T20:53:38",
-    "bitis": null,
+    "bitis": "2026-09-16T23:16:17",
     "dosyalar": [],
-    "not": "",
+    "not": "Teslim (roo): Kit docs/brand/ altina alindi, Huggin->Huginn 14 dosya, typography+colorRoles+scope token, brand.md Colors, D-44/D-45",
     "source": "ic",
     "from_agent": null
   },
@@ -3717,13 +3717,13 @@
     "task_id": "MARKA-REVIZE-01",
     "id": "MARKA-REVIZE-01",
     "baslik": "Marka kalip dosyalari ORTAK REVIZE (roo + cline) - ileri tarihli planlama",
-    "sahip": "roo",
+    "sahip": "cline",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-16T21:10:37",
     "bitis": null,
     "dosyalar": [],
-    "not": "",
+    "not": "Devredildi: roo -> cline (Dokuman katmani cline'a; brif docs/plans/MARKA-REVIZE-01_brief.md (D-44/D-45). Kilit: AGENTS.md, ANA_KURALLAR.md, docs/AJAN_DETAY.md, docs/brand/**, plans/MRK_*.md. Teslim: gorev_kutusu teslim; rapor data/orchestrator/MARKA-REVIZE-01_rapor_<tarih>_cline.md)",
     "source": "ic",
     "from_agent": null
   },
@@ -3733,13 +3733,13 @@
     "baslik": "ROO_ELESTIRI_NOTLARI.md gozden gecirme + cline gezinti bulgulari",
     "sahip": "roo",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-16T21:30:15",
-    "bitis": null,
+    "bitis": "2026-09-16T23:16:17",
     "dosyalar": [
       "docs/ROO_ELESTIRI_NOTLARI.md"
     ],
-    "not": "",
+    "not": "Teslim (roo): S-09/S-10/D-07 COZULDU, D-31..D-34, Bolum 8 madde->gorev listesi",
     "source": "ic",
     "from_agent": null
   },
@@ -3763,15 +3763,15 @@
     "baslik": "Sol-alt hesap karti popover + kimlik/yonetim kaldir",
     "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-16T22:07:26",
-    "bitis": null,
+    "bitis": "2026-09-16T23:18:15",
     "dosyalar": [
       "app.py",
       "web_dashboard/tabs/admin_auth.py",
       "tests/test_dashboard_nav.py"
     ],
-    "not": "",
+    "not": "Teslim (kilo): NAV-IA-04 tamamlandı: _hesap_karti_popover (admin: email+Şifre Değiştir+Çıkış, misafir: Giriş Yap), _force_auth_gate→AUTH-GATE-01 entegrasyonu, render_yonetim_bilesik kaldırıldı, ESKI_URL güncellendi. 6 yeni test + 3 test düzeltildi. 205 test geçiyor. Kodlama denetimi temiz.",
     "source": "ic",
     "from_agent": null
   },
@@ -3799,7 +3799,7 @@
     "baslik": "login_events + search_events tablolari, Giris Etkinligi/Aramalar gercek veri",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-16T22:07:26",
     "bitis": null,
     "dosyalar": [
@@ -3808,7 +3808,7 @@
       "src/company_master/schema/migrations/migrate.py",
       "tests/test_data_log.py"
     ],
-    "not": "",
+    "not": "Teslim (kilo): DATA-LOG-01 tamamlandı: login_events + search_events tablolari (0015_data_log.sql), migrate.py target 15, schema_versions.json guncellendi, /api/buyer/login ve /api/companies endpoint'lerinde olay kaydi (_log_login_event, _log_search_event), musteri_yonetimi.py Giriş Etkinliği + Aramalar sekmeleri gerçek veri. 17 yeni test (test_data_log.py). KVKK: IP son oktet + e-posta maskeli. try/except + log (API istegi dusurmez). 229 test geciyor.",
     "source": "ic",
     "from_agent": null
   },
@@ -3818,7 +3818,7 @@
     "baslik": "Auth uclari guvenlik duzeltmeleri (REV-BATCH-01 Y-1..Y-4, O-1, O-2, O-4, D-1, D-4)",
     "sahip": "cline",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-16T22:27:05",
     "bitis": null,
     "dosyalar": [
@@ -3826,6 +3826,39 @@
       "tests/test_auth_gate.py",
       ".gitignore",
       "scripts/admin_login_probe.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ROO-GAP-NAV-IA04",
+    "id": "ROO-GAP-NAV-IA04",
+    "baslik": "NAV-IA-04/AUTH-GATE-01 capsayı tutma — kontrol ve onay",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-16T23:01:30",
+    "bitis": "2026-09-16T23:23:35",
+    "dosyalar": [],
+    "not": "Teslim (roo): 1) streamlit_restart PID 30312 OK; 2) test_web_dashboard_tabs 9 passed (izolasyon, ariza yok); 3) MUAF gerekceli onaylandi; 4) NAV-IA-04 done 642b92e, DATA-LOG-01 kilo aktif",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "MARKA-REVIZE-01B",
+    "id": "MARKA-REVIZE-01B",
+    "baslik": "Marka revizyon kod katmani: test_i18n Huggin regex + config.toml primaryColor #6366f1 + scripts/marka_denetim.py",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-16T23:15:35",
+    "bitis": null,
+    "dosyalar": [
+      "tests/test_i18n.py",
+      ".streamlit/config.toml",
+      "scripts/marka_denetim.py",
+      "tests/test_marka_denetim.py"
     ],
     "not": "",
     "source": "ic",

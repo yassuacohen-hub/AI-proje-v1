@@ -15,6 +15,7 @@
     {"version": 11, "file": "0011_dashboard_search_optimization.sql", "date": "2026-09-11"},
     {"version": 12, "file": "0012_users_and_catalog.sql", "date": "2026-09-12"},
     {"version": 13, "file": "0013_job_intelligence.sql", "date": "2026-09-12"},
-    {"version": 14, "file": "0014_packages_marketing.sql", "date": "2026-09-13", "note": "DASH-UX-03 backend: packages, company_packages, campaigns, segments tables"}
+    {"version": 14, "file": "0014_packages_marketing.sql", "date": "2026-09-13", "note": "DASH-UX-03 backend: packages, company_packages, campaigns, segments tables"},
+    {"version": 15, "file": "0015_data_log.sql", "date": "2026-09-16", "note": "DATA-LOG-01: login_events + search_events tablolari"}
   ]
 }

@@ -1,4 +1,4 @@
-﻿.env
+.env
 
 # Veritabanı yedekleri (Supabase pg_dump ciktilari)
 backups/
@@ -104,3 +104,7 @@ data/_arsiv_kok/
 /_*.txt
 data/_*.py
 data/_tmp/
+
+# SEC-AUTH-01 D-1: Streamlit secrets (plaintext admin fallback) depoya girmez
+.streamlit/secrets.toml
+.streamlit/secrets.*.toml

@@ -28,11 +28,11 @@ def list_migrations() -> list[dict[str, Any]]:
     return load_versions().get("migrations", [])
 
 
-def needs_migration(target: int = 14) -> bool:
+def needs_migration(target: int = 15) -> bool:
     return get_current_version() < target
 
 
-def run_migrations(target: int = 14, dry_run: bool = False) -> list[str]:
+def run_migrations(target: int = 15, dry_run: bool = False) -> list[str]:
     """CalistirilmissMigration'lari uygula."""
     versions = load_versions()
     current = versions["current_version"]

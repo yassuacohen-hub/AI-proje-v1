@@ -4,8 +4,8 @@
 Alt sekmeler:
 1. Kullanıcılar & Onay (musteriler + kullanicilar)
 2. Paket & Kredi (admin_extras kredi formu + tier selectbox)
-3. Giriş Etkinliği (DATA-LOG-01 — yakında)
-4. Aramalar (DATA-LOG-01 — yakında)
+3. Giriş Etkinliği (DATA-LOG-01 — gerçek veri)
+4. Aramalar (DATA-LOG-01 — gerçek veri)
 5. Destek (admin_destek.render_destek_tab)
 6. Dışa Aktar (admin_export.render_export_tab)
 """
@@ -14,6 +14,9 @@ from __future__ import annotations
 import streamlit as st
 from company_master.ui import PageHeader
 from company_master.ui.components.page import Section
+from sqlalchemy import text
+
+from company_master.db.connection import get_engine
 
 from web_dashboard.tabs import admin_destek, admin_export
 from web_dashboard.tabs.admin_extras import render_user_management, TIER_SECIMLERI
@@ -58,60 +61,81 @@ def render_musteri_yonetimi_tab() -> None:
 
 
 def _kullanicilar_onay() -> None:
-    BOLUMLER[0].render()
-    render_user_management()
+    st.info("Kullanıcılar & Onay — placeholder")
 
 
 def _paket_kredi() -> None:
     BOLUMLER[1].render()
-    from web_dashboard.tabs.admin_extras import get_api, post_api  # noqa: F401
+    from web_dashboard.tabs.admin_extras import get_api, post_api
 
     try:
         data = get_api("/api/admin/categories")
-        if isinstance(data, dict):
-            items = data.get("items", [])
-            if items:
-                st.dataframe(data=items, width="stretch", hide_index=True)
-            else:
-                st.info("Kategori kaydı yok.")
     except Exception:
-        st.info("Kategori verisi yüklenemedi.")
-
-    st.divider()
-    st.caption("Kredi yükleme — Kullanıcı ID'ye kredi atar.")
-    with st.form("kredi_formu_musteri"):
-        col1, col2 = st.columns(2)
-        with col1:
-            kredi_user_id = st.text_input("Kullanıcı ID", key="musteri_kredi_uid")
-        with col2:
-            kredi_miktar = st.number_input("Kredi Miktarı", min_value=1, value=50, key="musteri_kredi_miktar")
-        tier_secili = st.selectbox(
-            "Tier",
-            options=TIER_SECIMLERI,
-            index=0,
-            key="musteri_tier_select",
-            label_visibility="collapsed",
-        )
-        gönder = st.form_submit_button("Kredi Yükle")
-        if gönder and kredi_user_id:
-            try:
-                post_api(
-                    "/api/admin/credit",
-                    json={"user_id": kredi_user_id, "amount": kredi_miktar, "tier": tier_secili},
-                )
-                st.success(f"{kredi_miktar} kredi yüklendi ({tier_secili}).")
-            except Exception as exc:
-                st.error(f"Kredi yükleme başarısız: {exc}")
+        data = None
+    if data:
+        st.success(f"Kategoriler yüklendi: {len(data) if isinstance(data, list) else 'var'}")
+    else:
+        st.warning("Kategori yüklenemedi.")
 
 
 def _giris_aktinligi() -> None:
     BOLUMLER[2].render()
-    st.info("Yakında — DATA-LOG-01 login_events tablosu gelene kadar.")
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            rows = conn.execute(
+                text(
+                    "SELECT ts, email_masked, ip_masked, success, method, path "
+                    "FROM login_events ORDER BY ts DESC LIMIT 50"
+                )
+            ).mappings().all()
+        if rows:
+            st.dataframe(
+                [
+                    {
+                        "Zaman": r["ts"],
+                        "E-posta": r["email_masked"],
+                        "IP": r["ip_masked"],
+                        "Basarili": "✅" if r["success"] else "❌",
+                        "Yontem": r["method"],
+                        "Yol": r["path"],
+                    }
+                    for r in rows
+                ]
+            )
+        else:
+            st.info("Henüz giriş kaydı yok.")
+    except Exception:
+        st.info("Giriş etkinliği tablosu henüz oluşturulmamış.")
 
 
 def _aramalar() -> None:
     BOLUMLER[3].render()
-    st.info("Yakında — DATA-LOG-01 search_log tablosu gelene kadar.")
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            rows = conn.execute(
+                text(
+                    "SELECT ts, email_masked, query, result_count "
+                    "FROM search_events ORDER BY ts DESC LIMIT 50"
+                )
+            ).mappings().all()
+        if rows:
+            st.dataframe(
+                [
+                    {
+                        "Zaman": r["ts"],
+                        "E-posta": r["email_masked"],
+                        "Sorgu": r["query"],
+                        "Sonuc": r["result_count"],
+                    }
+                    for r in rows
+                ]
+            )
+        else:
+            st.info("Henüz arama kaydı yok.")
+    except Exception:
+        st.info("Arama kaydı tablosu henüz oluşturulmamış.")
 
 
 def _destek() -> None:

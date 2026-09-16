@@ -1,19 +1,4 @@
 {
-  "app.py": {
-    "sahip": "kilo",
-    "task_id": "NAV-IA-04",
-    "kilitlendi": "2026-09-16T22:07:26"
-  },
-  "web_dashboard/tabs/admin_auth.py": {
-    "sahip": "kilo",
-    "task_id": "NAV-IA-04",
-    "kilitlendi": "2026-09-16T22:07:26"
-  },
-  "tests/test_dashboard_nav.py": {
-    "sahip": "kilo",
-    "task_id": "NAV-IA-04",
-    "kilitlendi": "2026-09-16T22:07:26"
-  },
   "web_app.py": {
     "sahip": "kilo",
     "task_id": "DATA-LOG-01",
@@ -53,5 +38,25 @@
     "sahip": "cline",
     "task_id": "SEC-AUTH-01",
     "kilitlendi": "2026-09-16T22:27:06"
+  },
+  "tests/test_i18n.py": {
+    "sahip": "kilo",
+    "task_id": "MARKA-REVIZE-01B",
+    "kilitlendi": "2026-09-16T23:15:35"
+  },
+  ".streamlit/config.toml": {
+    "sahip": "kilo",
+    "task_id": "MARKA-REVIZE-01B",
+    "kilitlendi": "2026-09-16T23:15:35"
+  },
+  "scripts/marka_denetim.py": {
+    "sahip": "kilo",
+    "task_id": "MARKA-REVIZE-01B",
+    "kilitlendi": "2026-09-16T23:15:35"
+  },
+  "tests/test_marka_denetim.py": {
+    "sahip": "kilo",
+    "task_id": "MARKA-REVIZE-01B",
+    "kilitlendi": "2026-09-16T23:15:35"
   }
 }
