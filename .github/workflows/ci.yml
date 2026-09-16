@@ -77,13 +77,13 @@ jobs:
         run: |
           python scripts/kodlama_denetim.py
       - name: Run tests with coverage
+        # Olculen moduller .coveragerc [run] include ile tanimli
+        # (--cov=<dosya/yolu> pytest-cov'da paket adi sayilir -> %0 "No data").
         run: |
           python -m pytest tests/ \
             --continue-on-collection-errors \
-            --cov=src/company_master/db/connection \
-            --cov=src/company_master/etl/normalize \
-            --cov=src/company_master/etl/pipeline \
-            --cov=src/company_master/search/engine \
+            --cov \
+            --cov-config=.coveragerc \
             --cov-report=xml \
             --cov-report=term-missing \
             --cov-fail-under=${{ env.COVERAGE_THRESHOLD }} \

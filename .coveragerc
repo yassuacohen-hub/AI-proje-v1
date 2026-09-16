@@ -1,0 +1,19 @@
+# Coverage yapilandirmasi (CI kapisi icin cekirdek moduller).
+# Not: pytest-cov'da `--cov=<dosya/yolu>` paket adi olarak yorumlanir ve
+# "No data to report" (%0) uretir; bu yuzden olcum dosya kaliplariyla
+# `include` uzerinden yapilir, is akisinda yalnizca `--cov` verilir.
+[run]
+include =
+    src/company_master/db/connection.py
+    src/company_master/etl/normalize.py
+    src/company_master/etl/pipeline.py
+    src/company_master/search/engine.py
+branch = False
+
+[report]
+show_missing = True
+skip_empty = True
+exclude_lines =
+    pragma: no cover
+    if __name__ == .__main__.:
+    if TYPE_CHECKING:
