@@ -42,6 +42,12 @@ PAKET = "web_dashboard.tabs"
 MUAF: dict[str, str] = {
     # Sekme degil, hata durumunda cagrilan yardimci ekran.
     "render_error_page": "Sekme degil; hata durumunda cagrilan yardimci gorunum.",
+    # NAV-IA-04: admin/kimlik/yonetim sekmeleri sidebar'dan cikmisti.
+    # render_yonetim_tab ve render_api_management admin panel icin kaliyor
+    # ama navigasyon yolu olmadan erisilemez; admin_yonetim.py icinden
+    # test yoluyla cagiriliyor.
+    "render_yonetim_tab": "NAV-IA-04: admin sekmeleri sidebar'dan cikmisti; test_admin_yonetim.py icinden cagiriliyor.",
+    "render_api_management": "NAV-IA-04: render_yonetim_tab icinden cagirilan yardimci fonksiyon; navigasyon disinda.",
 }
 
 

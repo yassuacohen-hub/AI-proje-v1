@@ -65,6 +65,7 @@ def test_admin_cikis_token_siler_ve_flash_yazar(monkeypatch):
 
     assert "admin_token" not in state
     assert "admin_email" not in state
+    assert "_force_auth_gate" not in state
     assert "Çıkış yapıldı" in state[admin_auth._FLASH_KEY]["mesaj"]
 
 

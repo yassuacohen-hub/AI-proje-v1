@@ -50,9 +50,8 @@ logging.disable(logging.WARNING)
 
 def test_bolum_sayisi_ve_benzersizlik() -> None:
     """BK5: bolum listesi eksiksiz ve anahtarlar/URL'ler benzersiz."""
-    # 28 mevcut + 4 yeni üst sayfa (musteri_yonetimi, proje_yonetimi,
-    # veri_kalite, musteri_onizleme) = 32
-    assert len(SECTIONS) == 32
+    # 28 mevcut + 4 yeni üst sayfa − 2 kalkar (kimlik, yonetim) = 30
+    assert len(SECTIONS) == 30
 
     anahtarlar = [t.anahtar for t in SECTIONS]
     urller = [t.url_path for t in SECTIONS]
@@ -69,7 +68,6 @@ def test_bk5_zorunlu_bolumler_mevcut() -> None:
         "paketler",
         "pazarlama",
         "abrakadabra",
-        "yonetim",
         "ayarlar",
     }
     assert beklenen.issubset({t.anahtar for t in SECTIONS})
@@ -169,9 +167,7 @@ def test_u10_anon_kritik_bolumleri_gormez_yonetimi_gorur() -> None:
     """Denetim/ayarlar/yukleme gizli; yonetim acik (admin giris formu orada)."""
     anon = {t.anahtar for t in gorunur_bolumler(ROL_ANON)}
     assert {"denetim", "ayarlar", "yukleme", "sistem", "canli_veri"}.isdisjoint(anon)
-    assert {"ana_kontrol", "yonetim"} <= anon
-    assert erisebilir(tab_getir("yonetim"), ROL_ANON)
-    assert not erisebilir(tab_getir("denetim"), ROL_ANON)
+    assert {"ana_kontrol"} <= anon
 
 
 def test_u10_analyst_sistem_gorur_denetim_gormez() -> None:
@@ -260,7 +256,7 @@ def test_mig_onizleme_bolumleri_sections_sirasini_korur() -> None:
 
 def test_mig_sistem_bolumleri_muninn_kalir() -> None:
     """Yönetim/denetim gibi iç ekip bölümleri asla müşteri yüzeyine düşmez."""
-    for anahtar in ("yonetim", "denetim", "sistem", "ayarlar"):
+    for anahtar in ("denetim", "sistem", "ayarlar"):
         tanim = tab_getir(anahtar)
         assert tanim is not None
         assert tanim.yuzey == YUZEY_MUNINN, anahtar
@@ -341,8 +337,8 @@ def test_alt_sekmeler_sira_sirali():
 def test_eski_url_yonlendirme():
     """NAV-IA-01 ESKI_URL: eski URL'ler yeni yere yonlendiriliyor."""
     assert eski_url_yonlendir("kullanicilar") == ("musteri_yonetimi", "kullanicilar")
-    assert eski_url_yonlendir("yonetim") == ("musteri_yonetimi", "")
-    assert eski_url_yonlendir("kimlik") == ("ana_kontrol", "")
+    assert eski_url_yonlendir("yonetim") == ("admin_yonetim", "")
+    assert eski_url_yonlendir("kimlik") == ("admin_auth", "")
     assert eski_url_yonlendir("yok") is None
 
 

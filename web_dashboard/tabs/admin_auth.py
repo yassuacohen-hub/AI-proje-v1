@@ -12,18 +12,11 @@ _FLASH_KEY = "_admin_flash"
 def _env_kimlik() -> tuple[str, str]:
     """ADMIN-ENV-01: `.env` içindeki ADMIN_EMAIL/ADMIN_PASSWORD ile formu ön-doldurur.
 
-    Değerler yalnızca yerel geliştirme kolaylığı içindir; .env depoya girmez.
+    Yalnızca `DEBUG=1` ortamında çalışır; prodüksiyonda boş döner.
     """
-    try:  # .env henüz yüklenmemişse (db import edilmeden önce) yükle
-        from dotenv import load_dotenv
-
-        load_dotenv(override=False)
-    except Exception:
-        pass
-    return (
-        os.getenv("ADMIN_EMAIL", "").strip() or "admin@huginn.local",
-        os.getenv("ADMIN_PASSWORD", ""),
-    )
+    debug = os.environ.get("DEBUG", "").lower() in ("1", "true")
+    if not debug:
+        return ("admin@huginn.local", "")
 
 
 def flash_yaz(mesaj: str, tur: str = "success") -> None:
@@ -101,6 +94,7 @@ def admin_cikis() -> None:
     """Oturumu kapatır ve başarı mesajını kuyruğa alır (rerun çağırmaz)."""
     st.session_state.pop("admin_token", None)
     st.session_state.pop("admin_email", None)
+    st.session_state.pop("_force_auth_gate", None)
     flash_yaz("✅ Çıkış yapıldı. Oturum kapatıldı.")
 
 

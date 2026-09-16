@@ -257,68 +257,8 @@ def render_karar_defteri() -> None:
     render_decision_tab()
 
 
-def render_yonetim_bilesik() -> None:
-    """Yönetim bölümü: admin girişi + yönetim panelleri + analitik alt sekmeler.
-
-    `admin_yonetim.render_yonetim_tab()` yalnızca API/kullanıcı/export/arama
-    panellerini içerir. Admin panelinin KPI, maliyet, kalite ve API analitiği
-    ekranları burada alt sekme olarak birleştirilir.
-    """
-    from web_dashboard.tabs.admin_api_analytics import render_api_analytics_tab
-    from web_dashboard.tabs.admin_auth import (
-        flash_goster,
-        render_admin_cikis,
-        render_admin_login,
-        render_sifre_degistir,
-    )
-    from web_dashboard.tabs.admin_cost import render_cost_tab
-    from web_dashboard.tabs.admin_errors import render_errors_tab
-    from web_dashboard.tabs.admin_kpi import render_kpi_tab
-    from web_dashboard.tabs.admin_quality import render_quality_tab
-    from web_dashboard.tabs.admin_yonetim import render_yonetim_tab
-
-    # ADMIN-RESET-01: giriş/çıkış sonrası tek seferlik başarı mesajı (rerun'a dayanıklı)
-    flash_goster()
-    if not st.session_state.get("admin_token"):
-        st.warning("Yönetim işlemleri için admin girişi gerekir.")
-        render_admin_login()
-        st.divider()
-    else:
-        render_admin_cikis()
-        with st.expander("Şifre değiştir", expanded=False):
-            render_sifre_degistir()
-
-    sekmeler = st.tabs(
-        [
-            "Yönetim Araçları",
-            "KPI Kartları",
-            "AI Maliyet",
-            "Kalite Özeti",
-            "API Analitiği",
-            "Karar Defteri",
-            "Hata Yönetimi",
-        ]
-    )
-    with sekmeler[0]:
-        render_yonetim_tab()
-    with sekmeler[1]:
-        render_kpi_tab()
-    with sekmeler[2]:
-        render_cost_tab()
-    with sekmeler[3]:
-        render_quality_tab()
-    with sekmeler[4]:
-        render_api_analytics_tab()
-    with sekmeler[5]:
-        render_karar_defteri()
-    with sekmeler[6]:
-        render_errors_tab()
-
-
 # Kayıttaki modül yerine app.py içindeki bileşimi kullanacak bölümler.
-RENDER_OVERRIDES: dict[str, Callable[[], None]] = {
-    "yonetim": render_yonetim_bilesik,
-}
+RENDER_OVERRIDES: dict[str, Callable[[], None]] = {}
 
 
 # --------------------------------------------------------------------------- #
@@ -423,6 +363,39 @@ def _nav_grubu_ciz(tanimlar: list[TabTanimi], secili: TabTanimi, kompakt: bool) 
             bolum_sec(tanim.anahtar)
 
 
+def _hesap_karti_popover() -> None:
+    """NAV-IA-04: Sol-alt hesap kartı popover.
+
+    Admin: email, Çıkış, Şifre Değiştir.
+    Misafir: Giriş yap (AUTH-GATE-01 modalını tetikler).
+    """
+    from web_dashboard.tabs.admin_auth import (
+        get_admin_token,
+        render_admin_cikis,
+        render_admin_login,
+        render_sifre_degistir,
+    )
+
+    token = get_admin_token()
+    email = st.session_state.get("admin_email") or "Misafir"
+
+    with st.popover(f"👤 {email}"):
+        if token:
+            st.caption("Rol: admin")
+            col1, col2 = st.columns(2)
+            with col1:
+                if st.button("Şifre Değiştir", key="pop_sifre"):
+                    render_sifre_degistir()
+            with col2:
+                if st.button("Çıkış", key="pop_cikis"):
+                    render_admin_cikis()
+                    st.rerun()
+        else:
+            if st.button("Giriş Yap", key="pop_giris"):
+                st.session_state["_force_auth_gate"] = True
+                st.rerun()
+
+
 def render_sidebar(secili: TabTanimi) -> None:
     """Modern sidebar: marka başlığı, hızlı geçiş, 6 üst sayfa + alt sekmeler.
 
@@ -430,6 +403,7 @@ def render_sidebar(secili: TabTanimi) -> None:
     Aktif üst sayfanın alt sekmeleri altında gösterilir.
     `GRUP_IS/GRUP_SISTEM` geriye dönük korunur (testler için) ama
     sidebar artık `ust_sayfalar()` kullanır.
+    NAV-IA-04: Alt kardeşte hesap kartı popover (👤 email|Misafir).
     """
     with st.sidebar:
         kompakt = bool(st.session_state.get(KOMPAKT_KEY, False))
@@ -538,6 +512,7 @@ def render_sidebar(secili: TabTanimi) -> None:
                             bolum_sec(alt.anahtar)
 
         st.divider()
+        _hesap_karti_popover()
         gorunur_sayisi = len(gorunur_bolumler(rol))
         hazir_sayisi = sum(1 for tanim in gorunur_bolumler(rol) if tanim.hazir)
         gizli_sayisi = len(SECTIONS) - gorunur_sayisi
@@ -549,6 +524,8 @@ def render_sidebar(secili: TabTanimi) -> None:
                 f"Bölüm: {hazir_sayisi}/{gorunur_sayisi} hazır · ⏳ = yapım aşamasında"
                 f"{gizli_notu}\n\nP7-44 Modern Navigasyon"
             )
+
+
 def render_topbar(tanim: TabTanimi) -> None:
     """ADMIN-UI-03 üst şerit: tek kırıntı yolu, sağda bölüm araması.
 
@@ -744,14 +721,15 @@ def main() -> None:
     """
     stil_enjekte(tema=aktif_tema())
 
-    # AUTH-GATE-01: Admin token yoksa giriş modalı (overlay, sayfa arka planda açık)
-    if not st.session_state.get("admin_token"):
+    # AUTH-GATE-01: Admin token yoksa veya popover'dan giriş isteniyorsa giriş modalı
+    if not st.session_state.get("admin_token") or st.session_state.get("_force_auth_gate"):
         Modal(
             "Admin Girişi",
             icerik="",
             kapatilabilir=False,
             aciklama="Giriş yap, misafir olarak devam et veya şifremi unuttum.",
         ).streamlit(govde_fn=_auth_modal_icerik)
+        st.session_state.pop("_force_auth_gate", None)
 
     # st.navigation() çalıştırarak sayfa objesini al (önce _SAYFA_KAYDI dolmalı)
     sayfa = st.navigation(sayfalari_uret(), position="hidden")

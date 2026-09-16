@@ -524,8 +524,8 @@ TabTanimi(
 
 ESKI_URL: dict[str, tuple[str, str]] = {
     "kullanicilar": ("musteri_yonetimi", "kullanicilar"),
-    "yonetim": ("musteri_yonetimi", ""),
-    "kimlik": ("ana_kontrol", ""),
+    "yonetim": ("admin_yonetim", ""),
+    "kimlik": ("admin_auth", ""),
 }
 
 
@@ -599,16 +599,15 @@ def tab_getir(anahtar: str) -> TabTanimi | None:
 def tab_url_getir(url_path: str) -> TabTanimi | None:
     """URL parçasına göre bölüm tanımını döndürür (derin bağlantı).
 
-    NAV-IA-01: Bulamazsa `ESKI_URL`'ye bakar; bulursa
-    alt sekmeyi `session_state`'e yazar (gutsche aktarım).
+    SEC-AUTH-01 O-1: ESKI_URL once bakilir; eski yol SECTIONS'ta kalsa da
+    dogru ust/alt sekmeye yonlendirilir (eski sayfa acilmaz).
     """
     temiz = (url_path or "").strip().strip("/").lower()
     if not temiz:
         return None
-    for tanim in SECTIONS:
-        if tanim.url_path == temiz:
-            return tanim
-    # ESKI_URL fallback
+    # SEC-AUTH-01 O-1: ESKI_URL ONCELIKLI - eski yollar (kimlik/yonetim/kullanicilar)
+    # halen SECTIONS'ta durdugu icin once eski haritaya bakilmali; aksi halde
+    # SECTIONS eslesmesi fallback'i gecersiz kilar ve yonlendirme olu kod olur.
     eskiler = eski_url_yonlendir(temiz)
     if eskiler is not None:
         ust_anahtar, alt_anahtar = eskiler
@@ -619,12 +618,13 @@ def tab_url_getir(url_path: str) -> TabTanimi | None:
         if tanim is not None:
             try:
                 import streamlit as st
-                if "alt_sekme" in st.session_state:
-                    pass
                 st.session_state["alt_sekme"] = alt_anahtar or ust_anahtar
             except Exception:
                 pass
         return tanim
+    for tanim in SECTIONS:
+        if tanim.url_path == temiz:
+            return tanim
     return None
 
 
