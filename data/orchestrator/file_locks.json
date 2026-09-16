@@ -1,24 +1,4 @@
 {
-  "web_app.py": {
-    "sahip": "kilo",
-    "task_id": "DATA-LOG-01",
-    "kilitlendi": "2026-09-16T22:07:26"
-  },
-  "web_dashboard/tabs/musteri_yonetimi.py": {
-    "sahip": "kilo",
-    "task_id": "DATA-LOG-01",
-    "kilitlendi": "2026-09-16T22:07:26"
-  },
-  "src/company_master/schema/migrations/migrate.py": {
-    "sahip": "kilo",
-    "task_id": "DATA-LOG-01",
-    "kilitlendi": "2026-09-16T22:07:26"
-  },
-  "tests/test_data_log.py": {
-    "sahip": "kilo",
-    "task_id": "DATA-LOG-01",
-    "kilitlendi": "2026-09-16T22:07:26"
-  },
   "web_dashboard/tabs/__init__.py": {
     "sahip": "cline",
     "task_id": "SEC-AUTH-01",
@@ -58,5 +38,110 @@
     "sahip": "kilo",
     "task_id": "MARKA-REVIZE-01B",
     "kilitlendi": "2026-09-16T23:15:35"
+  },
+  "docs/brand/brand.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:44"
+  },
+  "docs/brand/ai-rules.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:44"
+  },
+  "docs/brand/company.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:44"
+  },
+  "docs/brand/design-tokens.json": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:44"
+  },
+  "docs/brand/README.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:44"
+  },
+  "docs/brand/assets/LOGO.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:44"
+  },
+  "docs/brand/personas/founder.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:44"
+  },
+  "docs/brand/personas/investor.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:44"
+  },
+  "docs/brand/personas/analyst.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:44"
+  },
+  "docs/brand/personas/accelerator.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:44"
+  },
+  "docs/brand/personas/consultant.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:45"
+  },
+  "docs/brand/prompts/website.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:45"
+  },
+  "docs/brand/prompts/dashboard.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:45"
+  },
+  "docs/brand/prompts/marketing.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:45"
+  },
+  "docs/brand/prompts/system.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:45"
+  },
+  "AGENTS.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:45"
+  },
+  "ANA_KURALLAR.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:45"
+  },
+  "plans/MRK_marka_ve_dil_paketi_plani.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:45"
+  },
+  "plans/brief_cline_MRK02fg.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:45"
+  },
+  "plans/brief_kilo_MRK03_MRK04.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:45"
+  },
+  "plans/muninn_prn_vs_huginn_analiz.md": {
+    "sahip": "cline",
+    "task_id": "MARKA-REVIZE-01",
+    "kilitlendi": "2026-09-17T00:23:45"
   }
 }

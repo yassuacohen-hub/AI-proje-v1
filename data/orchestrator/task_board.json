@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-16T23:59:13",
+    "bitis": "2026-09-17T00:14:29",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -3799,9 +3799,9 @@
     "baslik": "login_events + search_events tablolari, Giris Etkinligi/Aramalar gercek veri",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-16T22:07:26",
-    "bitis": null,
+    "bitis": "2026-09-17T00:18:45",
     "dosyalar": [
       "web_app.py",
       "web_dashboard/tabs/musteri_yonetimi.py",
@@ -3851,7 +3851,7 @@
     "baslik": "Marka revizyon kod katmani: test_i18n Huggin regex + config.toml primaryColor #6366f1 + scripts/marka_denetim.py",
     "sahip": "kilo",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-16T23:15:35",
     "bitis": null,
     "dosyalar": [
