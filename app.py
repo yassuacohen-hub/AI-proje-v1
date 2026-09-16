@@ -65,7 +65,7 @@ from company_master.ui import (  # noqa: E402
 # tekrar "Centered" moda geçebilir (bu tercih tarayıcıda saklanır).
 st.set_page_config(
     page_title="Huginn — Company Master Dashboard",
-    page_icon="ğŸ¢",
+    page_icon="🦅",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -82,6 +82,10 @@ VARSAYILAN_TEMA = "aydinlik"
 ARAMA_MAKS_SONUC = 5
 KOMPAKT_KEY = "_hg_menu_kompakt"
 KOMPAKT_SUTUN = 4  # ikon-only modda satır başına düşen ikon sayısı
+#: NAV-FIX-03: Menü tooltip'leri varsayılan KAPALI — Streamlit'in native
+#: tooltip'i konumlandırılamaz ve butonların üzerine biner (sahip bulgusu,
+#: 2026-09-16). Kullanıcı isterse sidebar'dan açar.
+IPUCU_KEY = "_hg_menu_ipucu_ac"
 #: U-10: Oturum rolü. Yazılırsa `admin_token` türetimini ezer (test/gelecek RBAC).
 ROL_KEY = "_hg_rol"
 
@@ -366,12 +370,21 @@ def sayfalari_uret() -> list:
 # --------------------------------------------------------------------------- #
 
 
-def _nav_ipucu(tanim: TabTanimi, kompakt: bool) -> str:
+def _nav_ipucu(tanim: TabTanimi, kompakt: bool) -> str | None:
     """Menü düğmesinin tooltip metni.
 
+    NAV-FIX-03: Tooltip varsayılan **KAPALI** — Streamlit'in native `help=`
+    tooltip'i konumlandırılamaz ve dar sidebar'da butonların üzerine binip
+    menüyü kullanılamaz hale getiriyordu (sahip bulgusu, ekran görüntülü,
+    2026-09-16). Kullanıcı "Menü ipuçlarını göster" anahtarını açarsa
+    (IPUCU_KEY) tooltip yeniden görünür; kapalıyken `None` döner (Streamlit
+    `help=None` ile tooltip hiç render edilmez).
+
     Kompakt modda etiket görünmediği için başlık da tooltip'e taşınır
-    (erişilebilirlik: yalnız ikon bırakılmaz).
+    (erişilebilirlik: yalnız ikon bırakılmaz) — yalnızca anahtar açıkken.
     """
+    if not st.session_state.get(IPUCU_KEY, False):
+        return None
     ek = "" if tanim.hazir else " · ⏳ yapım aşamasında"
     if kompakt:
         return f"{tanim.baslik} — {tanim.aciklama}{ek}"
@@ -436,6 +449,11 @@ def render_sidebar(secili: TabTanimi) -> None:
             key=KOMPAKT_KEY,
             help="Yalnız ikonlar görünür; başlıklar imleçle üzerine gelince çıkar.",
         )
+        st.toggle(
+            "Menü ipuçlarını göster",
+            key=IPUCU_KEY,
+            help="Kapalıyken menü butonları üzerine gelince açıklama çıkmaz. NAV-FIX-03: Streamlit'in native tooltip'i konumlandırılamaz ve dar sidebar'da butonların üzerine biniyordu.",
+        )
         # UI-SIDEBAR-02: Marka blogu bölümü
         st.markdown("### 📝 Marka Blogu")
         st.caption("Bu bölümde marka ile ilgili blog yazıları yer alacaktır. (Placeholder)")
@@ -450,16 +468,21 @@ def render_sidebar(secili: TabTanimi) -> None:
         # --- Hızlı geçiş: tek adımda herhangi bir bölüme ---
         if not kompakt:
             secenekler = gorunur
+
+            def _hizli_gecis_onchange():
+                secim = st.session_state.get("nav_hizli_gecis")
+                if secim is not None:
+                    bolum_sec(secim)
+
             secim = st.selectbox(
                 "🔍 Hızlı geçiş",
                 secenekler,
                 index=secenekler.index(secili),
                 format_func=lambda tanim: tanim.etiket,
                 key="nav_hizli_gecis",
+                on_change=_hizli_gecis_onchange,
                 help="Bölüm adını yazarak doğrudan geçiş yapın.",
             )
-            if secim.anahtar != secili.anahtar:
-                bolum_sec(secim.anahtar)
 
             st.divider()
 
@@ -507,14 +530,15 @@ def render_topbar(tanim: TabTanimi) -> None:
             label_visibility="collapsed",
         )
 
-    # NOT: widget oluştuktan sonra st.session_state[ARAMA_KEY] yazılamaz
-    # (StreamlitAPIException); bu yüzden sorgu temizlenmez, navigasyon
-    # koşulları döngüyü kendiliğinden keser (aktif bölüm eşleşmesi atlanır).
+    # Widget sonrası doğrudan session_state yazma serbesttir (yalnızca
+    # widget'ın kendi internal state'i kısıtlı). Sorgu tek eşleşme
+    # sonrası temizlenir; bolum_sec aynı rerun içinde çalışır.
     eslesenler = bolum_ara(sorgu)
     if sorgu and not eslesenler:
-        st.caption(f"“{sorgu}” için bölüm bulunamadı.")
+        st.caption(f"'{sorgu}' için bölüm bulunamadı.")
     elif len(eslesenler) == 1 and eslesenler[0].anahtar != tanim.anahtar:
         bolum_sec(eslesenler[0].anahtar)
+        st.session_state[ARAMA_KEY] = ""
     elif len(eslesenler) > 1:
         kolonlar = st.columns(min(len(eslesenler), ARAMA_MAKS_SONUC))
         for kolon, aday in zip(kolonlar, eslesenler[:ARAMA_MAKS_SONUC]):

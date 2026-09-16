@@ -142,6 +142,13 @@ def main() -> int:
     p_pano.set_defaults(func=cmd_pano)
 
     args = parser.parse_args()
+    # D-33 ajan adı kuralı: "Ajan kilo" / "Kilo" / "kilo_code" → "kilo".
+    if getattr(args, "ajan", None):
+        try:
+            args.ajan = trigger.ajan_normalize(args.ajan)
+        except trigger.TriggerError as exc:
+            print(f"HATA: {exc}")
+            return 1
     return args.func(args)
 
 

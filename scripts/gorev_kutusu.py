@@ -352,6 +352,15 @@ def main() -> int:
     devret_p.set_defaults(func=cmd_devret)
 
     args = parser.parse_args()
+    # D-33 ajan adı kuralı: "Ajan kilo" / "Kilo" / "kilo_code" → "kilo".
+    # Tüm alt komutlar tek noktadan kanonik ada çevrilir.
+    for alan in ("ajan", "yeni_ajan"):
+        deger = getattr(args, alan, None)
+        if deger:
+            try:
+                setattr(args, alan, trigger.ajan_normalize(deger))
+            except trigger.TriggerError as exc:
+                return _hata(exc)
     return args.func(args)
 
 
