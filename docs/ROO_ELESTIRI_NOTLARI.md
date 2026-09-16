@@ -281,7 +281,7 @@ with st.sidebar:
 | D-04 | 2026-09-15 | genel | cmd'de `python -c "...\n..."` → SyntaxError; `findstr /v "^$"` boş çıktıda **exit 1** | Windows cmd çok satır `-c` desteklemez; findstr eşleşme yoksa hata kodu döner | Tek satır list comprehension / geçici script `data/_tmp/`; findstr'ı `|| exit 0` ile sarma ya da sonucu yorumlarken exit 1'i hata sayma | roo, tüm ajanlar | BİLGİ |
 | D-05 | 2026-09-15 | genel | `git push` sonrası status "[ahead 1]" kalıyor | Submodule (`AI proje v1`) pin'i / bayat ref; commit aslında origin'de | `git fetch` + `git log origin/<dal> -1` ile doğrula; submodule değişikliği ayrıca commit edilmeli | roo | BİLGİ |
 | D-06 | 2026-09-15 | genel | Commit'te bol **CRLF uyarısı** | `.gitattributes` renormalize yapılmadı | Ertelendi: `git add --renormalize .` ayrı bir hijyen görevi | roo | AÇIK — ertelendi |
-| D-07 | 2026-09-15 | genel | Kökte `fix_*.py`, `apply_fix*.py`, `original_content.txt`, `fix.ps1` çöpleri | kilo geçici düzeltme scriptlerini repo köküne bıraktı (Proje Sınırı Kuralı md.2 ihlali) | Geçici dosya `data/_tmp/`'ye; kök temizliği hijyen görevi | kilo, roo | ÇÖZÜLDÜ (roo 2026-09-16, bkz. S-10) — `original_content.txt` kaldı (kaynak belirsiz; sahip onayı ile silinecek) |
+| D-07 | 2026-09-15 | genel | Kökte `fix_*.py`, `apply_fix*.py`, `original_content.txt`, `fix.ps1` çöpleri | kilo geçici düzeltme scriptlerini repo köküne bıraktı (Proje Sınırı Kuralı md.2 ihlali) | Geçici dosya `data/_tmp/`'ye; kök temizliği hijyen görevi | kilo, roo | ÇÖZÜLDÜ (roo 2026-09-16, bkz. S-10) — `original_content.txt` sahip izniyle `_trash/kok_2026-09-16/`'ya taşındı (içerik: kilo'nun mojibake bozuk `yonetim` sekmesi yedeği; canlı kodda karşılığı yok) |
 | D-08 | 2026-09-15 | genel | `tests/test_api_integration.py::test_companies_liste_sozlesme` `assert 14000 == 1` | Mock DB devreye girmiyor, gerçek DB'ye düşüyor (izolasyon) | UI ile ilgisiz; ayrı görev | tüm ajanlar | AÇIK |
 
 ### 7.2 MVP-ADMIN serisi (2026-09-15)
@@ -337,5 +337,7 @@ Sahip talimatı (md.5) gereği toplu değerlendirme. Öncelik: A = bu sprint, B 
 | O-03, S-06 | ORCH-13: kilit/tetik bayatlama otomasyonu | kilo | B | `gorev_kutusu.py bakim` genişletme |
 | D-11, D-16 | GUARD-ENC-02 | kilo | B | Backlogda var |
 | D-29, D-30 | Kural: `AGENTS.md` sözlük satırı + `gorev_at` paylaşımlı-defter istisnası | roo | A | Bu sprint AGENTS.md sözlük işi ile |
-| S-07 | — | sahip | C | Sahip kararı bekliyor (kapsam) |
-| `original_content.txt` (kök) | Silme | sahip | C | Kaynağı belirsiz; onay gerekir |
+| S-07 | — | sahip | C | Sahip kararı bekliyor; roo önerisi: P0/P1 görevler oto-nobetci onayı dışı, yalnız P2+ otomatik |
+| `original_content.txt` (kök) | Silme | roo | C | ÇÖZÜLDÜ 2026-09-16 — `_trash/kok_2026-09-16/`'ya taşındı (git mv) |
+| Codecov token | GitHub secret `CODECOV_TOKEN` | sahip | C | Yoksa yalnız kapsam raporu yüklenmez; CI kırılmaz (`fail_ci_if_error: false`) |
+| Anthropic OIDC 401 | Anthropic Console federasyon kuralı (`fdrl_01N5WF…`) repo/branch eşleşmesi | sahip | C | Yoksa PR'a otomatik Claude yorumu gelmez; CI kırılmaz |
