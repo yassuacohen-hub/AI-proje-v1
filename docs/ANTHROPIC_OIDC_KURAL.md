@@ -55,6 +55,16 @@ Push `65b60a6` → run 35160844030 (#22), `req_011Cf7xYeQTDnti8cQvoFj4H`, create
 - `success` → ÇALIŞIYOR; not: `workflow_run` (ci-explain) için `sub` sonu `:workflow_run` olur → main merge sonrası ikinci kural gerekir.
 - yine `failure` → Anthropic destek bileti; request_id'ler: `req_011Cf7uUfGpojKnvwaGVfzvC` (#19), `req_011Cf7vimAJQnoTqCJmRmRWQ` (#20), `req_011Cf7waaTW79addPR28PfUo` (#21), `req_011Cf7xYeQTDnti8cQvoFj4H` (#22).
 
+## ✅ Deneme 5 sonucu (2026-09-16 23:17) — BAŞARILI
+
+Push `aa77f8d` → run 35161624267 (#23), `req_011Cf7yKhbSmgWnNmTDXW9cd`, created 23:17:35Z. **`outcome: success`** — OIDC federasyon **çalışıyor!**
+
+**Bulgu:** Anthropic kural **Static mode = tam metin eşleşme** yapıyor (prefix değil). Subject pattern alanında tam `sub` yazılınca geçti. `repository` / `repository_owner` claim koşulları gereksiz kalıyor (tam `sub` zaten yeterince spesifik), ama zararsız.
+
+**Sonraki adım:** `workflow_run` event'i (`ci-explain` job'u) için **ikinci kural** gerekir. `sub` sonu o zaman `:workflow_run` olur:
+`repo:yassuacohen-hub@233441674/-AI-proje-v1-Parent-repo@1364885446:workflow_run`
+Bu, main merge sonrası eklenmelidir (şu anda tetiklenmiyor çünkü `pull_request` event'i yok o branch'de).
+
 ### "Org ID 329683178" önerisi — neden kullanılmaz (2026-09-16 23:14)
 
 Sahip `{"login": "HUGINN-MUMINN-command-center", "id": 329683178}` kaydını önerdi. Bu **başka bir GitHub hesabı/organizasyonu** (`node_id` `O_kgDO…` → "O" = Organization). Depomuz o org'da değil: her 4 denemede token claim'leri sabit ve `yassuacohen-hub` diyor —
