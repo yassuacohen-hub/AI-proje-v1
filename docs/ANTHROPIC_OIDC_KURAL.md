@@ -32,6 +32,12 @@ Doğru olanlar: ihraççı URL `https://token.actions.githubusercontent.com`, JT
 
 Push `782427b` → job çalıştı, JWT Anthropic'e ulaştı (ihraççı, audience, `repository`, `repository_owner`, `event_name=pull_request` hepsi doğru). Tek red sebebi konu öneki: kuralda `repo:yassuacohen-hub/-AI-proje-v1-Parent-repo:*`, tokenda `repo:yassuacohen-hub@233441674/-AI-proje-v1-Parent-repo@1364885446:pull_request`. İki fark: (1) `*` literal, (2) `@233441674` ve `@1364885446` ID ekleri eksik. Düzeltme: önek alanına `repo:yassuacohen-hub@233441674/-AI-proje-v1-Parent-repo@1364885446:` yaz.
 
+## Deneme 2 sonucu (2026-09-16 22:43) — YİNE BAŞARISIZ: `match_subject_prefix`
+
+Push `bbc1070` → run 35159024076 (#20), `req_011Cf7vimAJQnoTqCJmRmRWQ`. Token tarafı deneme 1 ile birebir aynı (`sub` = `repo:yassuacohen-hub@233441674/-AI-proje-v1-Parent-repo@1364885446:pull_request`, tüm claim'ler doğru). Aynı red → kuraldaki önek hâlâ bu `sub`'ın başlangıcı değil. Olasılıklar: (a) düzenleme kaydedilmedi ("test ettim, kapattım"), (b) kopyalarken baş/son boşluk veya `*` kaldı, (c) eski değer (`@ID`'siz) duruyor. Kontrol: kuralın **görüntüleme** sayfasında (Edit değil) "Subject prefix" satırının ekran görüntüsü.
+
+Yedek plan (prefix garanti eşleşsin): öneğe `sub`'ın tamamını yaz → `repo:yassuacohen-hub@233441674/-AI-proje-v1-Parent-repo@1364885446:pull_request`. Önek eşleşmesi tam eşleşmeyi de kapsar; `workflow_run` (ci-explain) o zaman ayrı kural ister — main merge sonrası eklenir.
+
 ## Konsol "Test connection" kodu hakkında (2026-09-16 23:25)
 
 Konsolun gösterdiği Python örneği (`read_token()` + `WorkloadIdentityCredentials`) **yerelde çalışmaz**: `/path/to/token` diye bir dosya yok; GitHub OIDC JWT yalnızca Actions koşusu içinde (`id-token: write`) üretilir. Örnekteki tüm kimlikler `.github/actions/anthropic-oidc/action.yml` ile birebir aynı (kural/org/servis hesabı/çalışma alanı/model) → kod tarafında değişiklik gerekmez. Gerçek test = PR'a push → "Anthropic PR Review" job'u.
