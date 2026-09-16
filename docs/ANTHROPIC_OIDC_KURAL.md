@@ -10,7 +10,7 @@ GitHub Actions JWT'sindeki claim'ler **URL değil, kısa değerdir**:
 
 | Claim | GitHub'ın gönderdiği gerçek değer |
 |---|---|
-| `sub` | `repo:yassuacohen-hub/-AI-proje-v1-Parent-repo:pull_request` (PR) / `repo:yassuacohen-hub/-AI-proje-v1-Parent-repo:ref:refs/heads/main` (push, workflow_run) |
+| `sub` | **Gerçek değer (Anthropic denetim logu 2026-09-16 22:27, `req_011Cf7uUfGpojKnvwaGVfzvC`):** `repo:yassuacohen-hub@233441674/-AI-proje-v1-Parent-repo@1364885446:pull_request` (PR) / `…@1364885446:ref:refs/heads/main` (workflow_run). GitHub bu repo için owner/repo adına `@ID` ekliyor. |
 | `repository` | `yassuacohen-hub/-AI-proje-v1-Parent-repo` |
 | `repository_owner` | `yassuacohen-hub` |
 | `event_name` | `pull_request` (review) · `workflow_run` (ci-explain) · `push` |
@@ -19,7 +19,7 @@ GitHub Actions JWT'sindeki claim'ler **URL değil, kısa değerdir**:
 
 | Alan | Şu an girili (HATALI) | Olması gereken |
 |---|---|---|
-| Konu öneki (subject prefix) | `repo:https://github.com/HUGINN-MUMINN-command-center/yassuacohen-hub/-AI-proje-v1-Parent-repo:*` | `repo:yassuacohen-hub/-AI-proje-v1-Parent-repo:` |
+| Konu öneki (subject prefix) | `repo:https://github.com/HUGINN-MUMINN-command-center/yassuacohen-hub/-AI-proje-v1-Parent-repo:*` | `repo:yassuacohen-hub@233441674/-AI-proje-v1-Parent-repo@1364885446:` (sonda `*` YOK; `@ID` ekleri ŞART — logdaki gerçek `sub` böyle) |
 | `repository_owner` | `https://github.com/HUGINN-MUMINN-command-center` | `yassuacohen-hub` |
 | `event_name` (etkinlik_adı) | `push` | **SİL** — PR review `pull_request`, CI-explain `workflow_run` ile tetiklenir; `push` eşitliği ikisini de reddeder |
 | `repository` (depo) | `https://github.com/HUGINN-MUMINN-command-center/yassuacohen-hub/-AI-proje-v1-Parent-repo` | `yassuacohen-hub/-AI-proje-v1-Parent-repo` |
@@ -27,6 +27,10 @@ GitHub Actions JWT'sindeki claim'ler **URL değil, kısa değerdir**:
 | Token ömrü | 86.400 s | Sorun değil; ihraççı üst sınırı (1.08 sa) zaten kısıtlar. İstenirse 3.600 s |
 
 Doğru olanlar: ihraççı URL `https://token.actions.githubusercontent.com`, JTI tekrar oynatma koruması açık, kural ID action.yml ile aynı, çalışma alanı "tüm alanlar" (kabul edilebilir; istenirse tek alan `wrkspc_013LPgw97ZUzYnJHKxjuj3X8`).
+
+## Deneme 1 sonucu (2026-09-16 22:27) — BAŞARISIZ: `match_subject_prefix`
+
+Push `782427b` → job çalıştı, JWT Anthropic'e ulaştı (ihraççı, audience, `repository`, `repository_owner`, `event_name=pull_request` hepsi doğru). Tek red sebebi konu öneki: kuralda `repo:yassuacohen-hub/-AI-proje-v1-Parent-repo:*`, tokenda `repo:yassuacohen-hub@233441674/-AI-proje-v1-Parent-repo@1364885446:pull_request`. İki fark: (1) `*` literal, (2) `@233441674` ve `@1364885446` ID ekleri eksik. Düzeltme: önek alanına `repo:yassuacohen-hub@233441674/-AI-proje-v1-Parent-repo@1364885446:` yaz.
 
 ## Konsol "Test connection" kodu hakkında (2026-09-16 23:25)
 
@@ -42,7 +46,7 @@ Kural son hali (sahip kaydetti): konu öneki `repo:yassuacohen-hub/-AI-proje-v1-
 | 2 | Tanım | değiştir | `GitHub Actions PR review + CI hata aciklama` |
 | 3 | İhraççı | dokunma | `github-actions` |
 | 4 | Eşleştirme | "Desen eşleşmesi" seçili kalsın | — |
-| 5 | Konu modeli | tamamını sil, yaz | `repo:yassuacohen-hub/-AI-proje-v1-Parent-repo:*` |
+| 5 | Konu modeli / Subject prefix | tamamını sil, yaz | `repo:yassuacohen-hub@233441674/-AI-proje-v1-Parent-repo@1364885446:` — **sonda `*` yok, `@ID` ekleri var** |
 | 6 | Ek talep `repository_owner` | sağdaki değeri değiştir | `yassuacohen-hub` |
 | 7 | Ek talep `event_name = push` | **çöp kutusu ile SİL** | — |
 | 8 | Ek talep `repository` | sağdaki değeri değiştir | `yassuacohen-hub/-AI-proje-v1-Parent-repo` |
