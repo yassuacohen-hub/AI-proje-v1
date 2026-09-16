@@ -38,6 +38,14 @@ Push `bbc1070` → run 35159024076 (#20), `req_011Cf7vimAJQnoTqCJmRmRWQ`. Token 
 
 Yedek plan (prefix garanti eşleşsin): öneğe `sub`'ın tamamını yaz → `repo:yassuacohen-hub@233441674/-AI-proje-v1-Parent-repo@1364885446:pull_request`. Önek eşleşmesi tam eşleşmeyi de kapsar; `workflow_run` (ci-explain) o zaman ayrı kural ister — main merge sonrası eklenir.
 
+## Deneme 3 sonucu (2026-09-16 22:54) — YİNE BAŞARISIZ: `match_subject_prefix` (kural doğru görünürken)
+
+Push `684db76` → run 35159892457 (#21), `req_011Cf7waaTW79addPR28PfUo`. Kuralın görüntüleme sayfası ekran görüntüsüyle teyitli: önek `repo:yassuacohen-hub@233441674/-AI-proje-v1-Parent-repo@1364885446:`, tokendaki `sub` bunun devamı. Buna rağmen red → Anthropic'in önek karşılaştırması bizim beklediğimiz düz `startswith` değil ya da kayıtlı değerde görünmez karakter/boşluk var.
+
+Tanı planı (Deneme 4): öneği **elle** `repo:` yaz (kopyalama yok → görünmez karakter riski sıfır). Güvenlik düşmez: `repository` ve `repository_owner` eşitlik koşulları zaten yalnız bu depoyu geçirir; fork PR'larının `repository` claim'i fork deposudur, reddedilir.
+- `success` → önek mantığı çalışıyor, sorun uzun değerdeydi; `repo:` + claim koşulları kalıcı çözüm olarak kabul edilebilir (ya da kademeli uzatılır).
+- yine `failure` → Anthropic tarafı (format/bug); Anthropic destek + `request_id` ile bilet.
+
 ## Konsol "Test connection" kodu hakkında (2026-09-16 23:25)
 
 Konsolun gösterdiği Python örneği (`read_token()` + `WorkloadIdentityCredentials`) **yerelde çalışmaz**: `/path/to/token` diye bir dosya yok; GitHub OIDC JWT yalnızca Actions koşusu içinde (`id-token: write`) üretilir. Örnekteki tüm kimlikler `.github/actions/anthropic-oidc/action.yml` ile birebir aynı (kural/org/servis hesabı/çalışma alanı/model) → kod tarafında değişiklik gerekmez. Gerçek test = PR'a push → "Anthropic PR Review" job'u.
