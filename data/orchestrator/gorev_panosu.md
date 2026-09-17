@@ -13,7 +13,11 @@
 | REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar) | cline | P2 | plan | data/orchestrator/REV-UI-SIDEBAR-02_bulgular_2026-09-15_cline.md |
 | MARKA-REVIZE-01 | Marka kalip dosyalari ORTAK REVIZE (roo + cline) - ileri tarihli planlama | cline | P2 | aktif | - |
 | SEC-AUTH-01 | Auth uclari guvenlik duzeltmeleri (REV-BATCH-01 Y-1..Y-4, O-1, O-2, O-4, D-1, D-4) | cline | P1 | aktif | web_dashboard/tabs/__init__.py, tests/test_auth_gate.py, .gitignore |
-| TEST-ISO-02 | Test izolasyonu: siraya bagimli testler (randomly + monkeypatch) | kilo | P2 | review | tests/conftest.py, tests/test_web_dashboard_tabs.py, requirements-dev.txt |
+| VEC-TEST-01 | Vektor katmani test kapsami >= %90 | kilo | P2 | plan | src/company_master/vector/embedder.py, src/company_master/vector/service.py, src/company_master/vector/store.py |
+| GUARD-ENC-02 | kodlama_denetim genisletme (CRLF/bosluk/tab/EOF + fix) | kilo | P2 | plan | scripts/kodlama_denetim.py, tests/test_kodlama_denetim.py, data/kodlama_allowlist.json |
+| SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH bulgular | kilo | P2 | plan | scripts/sec_bandit.py, tests/test_sec_bandit.py, .bandit |
+| FMT-01 | ruff format/lint standardizasyonu (web_app/app/web_dashboard haric) | kilo | P2 | plan | ruff.toml, .pre-commit-config.yaml |
+| API-SPLIT-01 | web_app.py modullere bolme (src/company_master/api) | kilo | P2 | plan | web_app.py, src/company_master/api/, tests/test_api_companies.py |
 
 ## Tamamlananlar
 
@@ -251,3 +255,4 @@
 | DATA-LOG-01 | login_events + search_events tablolari, Giris Etkinligi/Aramalar gercek veri | kilo | 2026-09-17T03:07:28 |
 | ROO-GAP-NAV-IA04 | NAV-IA-04/AUTH-GATE-01 capsayı tutma — kontrol ve onay | roo | 2026-09-16T23:23:35 |
 | MARKA-REVIZE-01B | Marka revizyon kod katmani: test_i18n Huggin regex + config.toml primaryColor #6366f1 + scripts/marka_denetim.py | kilo | 2026-09-17T03:07:28 |
+| TEST-ISO-02 | Test izolasyonu: siraya bagimli testler (randomly + monkeypatch) | kilo | 2026-09-17T03:28:59 |

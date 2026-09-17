@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-17T03:14:20
+> Son guncelleme: 2026-09-17T03:28:59
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -13,13 +13,16 @@
 | REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo tesl | cline | P2 | plan |
 | MARKA-REVIZE-01 | Marka kalip dosyalari ORTAK REVIZE (roo  | cline | P2 | aktif |
 | SEC-AUTH-01 | Auth uclari guvenlik duzeltmeleri (REV-B | cline | P1 | aktif |
-| TEST-ISO-02 | Test izolasyonu: siraya bagimli testler  | kilo | P2 | review |
+| VEC-TEST-01 | Vektor katmani test kapsami >= %90 | kilo | P2 | plan |
+| GUARD-ENC-02 | kodlama_denetim genisletme (CRLF/bosluk/ | kilo | P2 | plan |
+| SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH b | kilo | P2 | plan |
+| FMT-01 | ruff format/lint standardizasyonu (web_a | kilo | P2 | plan |
+| API-SPLIT-01 | web_app.py modullere bolme (src/company_ | kilo | P2 | plan |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| TOK-01 | Ajan kural dosyalarinda token sikistirma | cline | 2026-09-16 |
 | REV-TOK-01 | TOK-01 dokuman sadelestirme incelemesi ( | roo | 2026-09-16 |
 | BRAND-KIMLIK-01 | Marka kimligi seti kuruldu - inceleme ve | roo | 2026-09-16 |
 | ELESTIRI-01 | ROO_ELESTIRI_NOTLARI.md gozden gecirme + | roo | 2026-09-16 |
@@ -29,6 +32,7 @@
 | DATA-LOG-01 | login_events + search_events tablolari,  | kilo | 2026-09-17 |
 | ROO-GAP-NAV-IA04 | NAV-IA-04/AUTH-GATE-01 capsayı tutma — k | roo | 2026-09-16 |
 | MARKA-REVIZE-01B | Marka revizyon kod katmani: test_i18n Hu | kilo | 2026-09-17 |
+| TEST-ISO-02 | Test izolasyonu: siraya bagimli testler  | kilo | 2026-09-17 |
 
 ## Son Handoff'lar
 

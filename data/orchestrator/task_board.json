@@ -3871,15 +3871,106 @@
     "baslik": "Test izolasyonu: siraya bagimli testler (randomly + monkeypatch)",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-17T03:09:14",
-    "bitis": null,
+    "bitis": "2026-09-17T03:28:59",
     "dosyalar": [
       "tests/conftest.py",
       "tests/test_web_dashboard_tabs.py",
       "requirements-dev.txt"
     ],
     "not": "Teslim (kilo): pytest.MonkeyPatch fix (cline), pytest-randomly req, conftest pano izolasyonu, test_web_dashboard_tabs 9 pass, 3567/4/0",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "VEC-TEST-01",
+    "id": "VEC-TEST-01",
+    "baslik": "Vektor katmani test kapsami >= %90",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-17T03:28:59",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/vector/embedder.py",
+      "src/company_master/vector/service.py",
+      "src/company_master/vector/store.py",
+      "tests/vector/"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "GUARD-ENC-02",
+    "id": "GUARD-ENC-02",
+    "baslik": "kodlama_denetim genisletme (CRLF/bosluk/tab/EOF + fix)",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-17T03:28:59",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/kodlama_denetim.py",
+      "tests/test_kodlama_denetim.py",
+      "data/kodlama_allowlist.json"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "SEC-BANDIT-01",
+    "id": "SEC-BANDIT-01",
+    "baslik": "Bandit statik guvenlik taramasi + HIGH bulgular",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-17T03:28:59",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/sec_bandit.py",
+      "tests/test_sec_bandit.py",
+      ".bandit",
+      "docs/SECURITY_BANDIT.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "FMT-01",
+    "id": "FMT-01",
+    "baslik": "ruff format/lint standardizasyonu (web_app/app/web_dashboard haric)",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-17T03:28:59",
+    "bitis": null,
+    "dosyalar": [
+      "ruff.toml",
+      ".pre-commit-config.yaml"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "API-SPLIT-01",
+    "id": "API-SPLIT-01",
+    "baslik": "web_app.py modullere bolme (src/company_master/api)",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-17T03:28:59",
+    "bitis": null,
+    "dosyalar": [
+      "web_app.py",
+      "src/company_master/api/",
+      "tests/test_api_companies.py"
+    ],
+    "not": "",
     "source": "ic",
     "from_agent": null
   }

@@ -66,12 +66,12 @@ def oto_destek():
     return olusan
 
 
-def nobetci_tur():
+def nobetci_tur(oto_destek_acik: bool = False):
     """Tek nobetci turu - teslimleri onaylar ve zinciri devam ettirir."""
     duzeltilen = 0
 
     # 0. Otomatik destek
-    if args.oto_destek:
+    if oto_destek_acik:
         d = oto_destek()
         duzeltilen += d
         if d:
@@ -144,14 +144,14 @@ def main():
         print("  Durdurmak icin Ctrl+C basin\n")
         try:
             while True:
-                duzeltilen = nobetci_tur()
+                duzeltilen = nobetci_tur(args.oto_destek)
                 if duzeltilen > 0:
-                    print(f"  Toplam: {duzeltilen} islem\n")
+                    print(f"  [{time.strftime('%H:%M:%S')}] Toplam: {duzeltilen} islem\n", flush=True)
                 time.sleep(args.aralik)
         except KeyboardInterrupt:
             print("\n[OTO-NOBETCI] Durduruldu")
     else:
-        duzeltilen = nobetci_tur()
+        duzeltilen = nobetci_tur(args.oto_destek)
         if duzeltilen == 0:
             print("(düzeltilecek bir şey yok)")
         else:

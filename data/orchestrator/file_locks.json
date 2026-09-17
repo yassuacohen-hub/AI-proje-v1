@@ -124,19 +124,84 @@
     "task_id": "MARKA-REVIZE-01",
     "kilitlendi": "2026-09-17T00:23:45"
   },
-  "tests/conftest.py": {
+  "src/company_master/vector/embedder.py": {
     "sahip": "kilo",
-    "task_id": "TEST-ISO-02",
-    "kilitlendi": "2026-09-17T03:09:14"
+    "task_id": "VEC-TEST-01",
+    "kilitlendi": "2026-09-17T03:28:59"
   },
-  "tests/test_web_dashboard_tabs.py": {
+  "src/company_master/vector/service.py": {
     "sahip": "kilo",
-    "task_id": "TEST-ISO-02",
-    "kilitlendi": "2026-09-17T03:09:14"
+    "task_id": "VEC-TEST-01",
+    "kilitlendi": "2026-09-17T03:28:59"
   },
-  "requirements-dev.txt": {
+  "src/company_master/vector/store.py": {
     "sahip": "kilo",
-    "task_id": "TEST-ISO-02",
-    "kilitlendi": "2026-09-17T03:09:14"
+    "task_id": "VEC-TEST-01",
+    "kilitlendi": "2026-09-17T03:28:59"
+  },
+  "tests/vector/": {
+    "sahip": "kilo",
+    "task_id": "VEC-TEST-01",
+    "kilitlendi": "2026-09-17T03:28:59"
+  },
+  "scripts/kodlama_denetim.py": {
+    "sahip": "kilo",
+    "task_id": "GUARD-ENC-02",
+    "kilitlendi": "2026-09-17T03:28:59"
+  },
+  "tests/test_kodlama_denetim.py": {
+    "sahip": "kilo",
+    "task_id": "GUARD-ENC-02",
+    "kilitlendi": "2026-09-17T03:28:59"
+  },
+  "data/kodlama_allowlist.json": {
+    "sahip": "kilo",
+    "task_id": "GUARD-ENC-02",
+    "kilitlendi": "2026-09-17T03:28:59"
+  },
+  "scripts/sec_bandit.py": {
+    "sahip": "kilo",
+    "task_id": "SEC-BANDIT-01",
+    "kilitlendi": "2026-09-17T03:28:59"
+  },
+  "tests/test_sec_bandit.py": {
+    "sahip": "kilo",
+    "task_id": "SEC-BANDIT-01",
+    "kilitlendi": "2026-09-17T03:28:59"
+  },
+  ".bandit": {
+    "sahip": "kilo",
+    "task_id": "SEC-BANDIT-01",
+    "kilitlendi": "2026-09-17T03:28:59"
+  },
+  "docs/SECURITY_BANDIT.md": {
+    "sahip": "kilo",
+    "task_id": "SEC-BANDIT-01",
+    "kilitlendi": "2026-09-17T03:28:59"
+  },
+  "ruff.toml": {
+    "sahip": "kilo",
+    "task_id": "FMT-01",
+    "kilitlendi": "2026-09-17T03:28:59"
+  },
+  ".pre-commit-config.yaml": {
+    "sahip": "kilo",
+    "task_id": "FMT-01",
+    "kilitlendi": "2026-09-17T03:28:59"
+  },
+  "web_app.py": {
+    "sahip": "kilo",
+    "task_id": "API-SPLIT-01",
+    "kilitlendi": "2026-09-17T03:28:59"
+  },
+  "src/company_master/api/": {
+    "sahip": "kilo",
+    "task_id": "API-SPLIT-01",
+    "kilitlendi": "2026-09-17T03:28:59"
+  },
+  "tests/test_api_companies.py": {
+    "sahip": "kilo",
+    "task_id": "API-SPLIT-01",
+    "kilitlendi": "2026-09-17T03:28:59"
   }
 }
