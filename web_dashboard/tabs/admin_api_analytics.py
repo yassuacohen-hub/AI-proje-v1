@@ -41,6 +41,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from scripts.dash04_api_client import get_api, APIError  # noqa: E402
 from web_dashboard.tabs.admin_auth import get_admin_token  # noqa: E402
+from web_dashboard.charts import kpi_karti
 
 
 @st.cache_data(ttl=30)
@@ -114,13 +115,13 @@ def render_api_analytics_tab() -> None:
 
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        st.metric("Toplam Çağrı", f"{toplam_cagri:,}".replace(",", "."))
+        kpi_karti("Toplam Çağrı", f"{toplam_cagri:,}".replace(",", "."), kategori="sistem")
     with c2:
-        st.metric("Farklı Endpoint", distinct_endpoint)
+        kpi_karti("Farklı Endpoint", distinct_endpoint, kategori="sistem")
     with c3:
-        st.metric("En Çok Kullanılan", en_cok_kullanilan or "—")
+        kpi_karti("En Çok Kullanılan", en_cok_kullanilan or "—", kategori="sistem")
     with c4:
-        st.metric("İzlenen Tier Sayısı", len(items) if items else 0)
+        kpi_karti("İzlenen Tier Sayısı", len(items) if items else 0, kategori="sistem")
 
     st.divider()
 
@@ -183,14 +184,14 @@ def render_api_analytics_tab() -> None:
     if metrics:
         m1, m2, m3, m4 = st.columns(4)
         with m1:
-            st.metric("Toplam Sorgu", f"{metrics.get('huginn_query_count', 0):,}".replace(",", "."))
+            kpi_karti("Toplam Sorgu", f"{metrics.get('huginn_query_count', 0):,}".replace(",", "."), kategori="sistem")
         with m2:
-            st.metric("DB Süresi (ms)", f"{metrics.get('huginn_db_time_ms', 0):,.1f}".replace(",", "."))
+            kpi_karti("DB Süresi (ms)", f"{metrics.get('huginn_db_time_ms', 0):,.1f}".replace(",", "."), kategori="sistem")
         with m3:
-            st.metric("Cache Hit", metrics.get("huginn_cache_hits", 0))
+            kpi_karti("Cache Hit", metrics.get("huginn_cache_hits", 0), kategori="sistem")
         with m4:
             hit_rate = metrics.get("huginn_cache_hit_rate", 0)
-            st.metric("Cache Hit Oranı", f"%{hit_rate * 100:.1f}")
+            kpi_karti("Cache Hit Oranı", f"%{hit_rate * 100:.1f}", kategori="sistem")
     else:
         st.info("Sistem metrikleri alınamadı.")
 

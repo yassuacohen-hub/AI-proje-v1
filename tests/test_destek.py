@@ -38,7 +38,7 @@ def teardown_module():
 
 
 def test_olustur_acik():
-    """Ticket oluşturulduğunda varsayılan durum 
+    """Ticket oluşturulduğunda varsayılan durum
 acik olmalı."""
     t = ticket_olustur(TENANT, "Test Başlık", "Test Açıklama")
     assert t.id is not None

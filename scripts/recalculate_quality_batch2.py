@@ -27,9 +27,9 @@ with engine.connect() as conn:
         WHERE c.is_ankara = TRUE AND c.is_osb_member = TRUE
         ORDER BY c.company_id
     """)).fetchall()
-    
+
     print(f"Toplam firma: {len(rows)}")
-    
+
     # Calculate scores in Python
     updates = []
     for row in rows:
@@ -52,7 +52,7 @@ with engine.connect() as conn:
             score += 5
         score = max(0, min(100, score))
         updates.append((score, row.company_id))
-    
+
     # Batch update using executemany
     print("Guncelleme yapiliyor...")
     with engine.begin() as update_conn:
@@ -60,10 +60,10 @@ with engine.connect() as conn:
             UPDATE companies SET data_quality_score = :score
             WHERE company_id = :cid
         """), [{"score": s, "cid": cid} for s, cid in updates])
-    
+
     avg = conn.execute(text("""
-        SELECT AVG(data_quality_score) FROM companies 
+        SELECT AVG(data_quality_score) FROM companies
         WHERE is_ankara = TRUE AND is_osb_member = TRUE
     """)).scalar()
-    
+
     print(f"Toplam: {len(updates)}, Ortalama: {avg:.2f}")

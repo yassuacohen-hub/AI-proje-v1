@@ -5,118 +5,74 @@ from unittest.mock import MagicMock, patch
 
 from web_app import api_kpi_history
 
-
 @pytest.fixture
 def mock_engine():
-    """Return a mock SQLAlchemy engine."""
     engine = MagicMock()
-    # connect() returns a context manager; __enter__ returns the connection
     cm = MagicMock()
     cm.__enter__.return_value = MagicMock()
     cm.__exit__.return_value = None
     engine.connect.return_value = cm
     return engine
 
-
-@pytest.fixture
-def mock_connection():
-    """Return a mock connection with sample data for both login and search queries."""
+def _mock_conn(login_counts, search_counts, yf_counts, labels):
     conn = MagicMock()
-    # Login query returns 5 columns: date, total_logins, successful_logins, signins, password_resets
-    login_rows = [
-        ("2026-09-17", 150, 45, 5, 2),
-        ("2026-09-16", 120, 30, 3, 1),
-        ("2026-09-15", 200, 80, 10, 3),
-    ]
-    # Search query returns 3 columns: date, total_searches, long_terms, very_long_terms
-    search_rows = [
-        ("2026-09-17", 50, 5, 1),
-        ("2026-09-16", 40, 3, 0),
-        ("2026-09-15", 60, 8, 2),
-    ]
-
-    # Create separate mock results for each execute call
+    label_result = MagicMock()
+    label_result.all.return_value = [(lbl,) for lbl in labels]
     login_result = MagicMock()
-    login_result.all.return_value = login_rows
-
+    login_result.all.return_value = [(lbl, c) for lbl, c in zip(labels, login_counts)]
     search_result = MagicMock()
-    search_result.all.return_value = search_rows
-
-    # execute() called twice: first for login, then for search
-    conn.execute.side_effect = [login_result, search_result]
+    search_result.all.return_value = [(lbl, c) for lbl, c in zip(labels, search_counts)]
+    yf_result = MagicMock()
+    yf_result.all.return_value = [(lbl, c) for lbl, c in zip(labels, yf_counts)]
+    conn.execute.side_effect = [label_result, login_result, search_result, yf_result]
     return conn
 
-
-def test_api_kpi_history_returns_structure(mock_engine, mock_connection):
-    """Test that /api/kpi/history returns the expected structure."""
-    # Configure the engine's connect() to return our mock connection
-    mock_engine.connect.return_value.__enter__.return_value = mock_connection
-
-    with patch("web_app.get_engine", return_value=mock_engine):
-        result = api_kpi_history(None, days=7)
-
-    assert "period" in result
-    assert "total_logins" in result
-    assert "successful_logins" in result
-    assert "signins" in result
-    assert "password_resets" in result
-    assert "search_events" in result
-    assert "long_term_search" in result
-    assert "very_long_term_search" in result
-    assert "days" in result
-    # Values should be integers
-    assert isinstance(result["total_logins"], int)
-    assert isinstance(result["successful_logins"], int)
-    assert isinstance(result["signins"], int)
-    assert isinstance(result["password_resets"], int)
-    assert isinstance(result["search_events"], int)
-    assert isinstance(result["long_term_search"], int)
-    assert isinstance(result["very_long_term_search"], int)
-    # Check computed values
-    assert result["total_logins"] == 470  # 150+120+200
-    assert result["successful_logins"] == 155  # 45+30+80
-    assert result["signins"] == 18  # 5+3+10
-    assert result["password_resets"] == 6  # 2+1+3
-    assert result["search_events"] == 150  # 50+40+60
-    assert result["long_term_search"] == 16  # 5+3+8
-    assert result["very_long_term_search"] == 3  # 1+0+2
-
-
-def test_api_kpi_history_empty_data(mock_engine, mock_connection):
-    """Test that empty data returns zero values."""
-    # Create connection that returns empty rows for both queries
-    conn = MagicMock()
-    empty_result = MagicMock()
-    empty_result.all.return_value = []
-    conn.execute.side_effect = [empty_result, empty_result]
-
+def test_api_kpi_history_returns_structure():
+    labels = ["2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17"]
+    conn = _mock_conn([150, 120, 200, 80, 90, 110, 130], [50, 40, 60, 30, 35, 45, 55], [5, 3, 8, 2, 4, 6, 9], labels)
+    mock_engine = MagicMock()
     mock_engine.connect.return_value.__enter__.return_value = conn
-
     with patch("web_app.get_engine", return_value=mock_engine):
         result = api_kpi_history(None, days=7)
+    assert result["days"] == 7
+    assert "series" in result
+    assert "labels" in result
+    assert result["series"]["login"] == [150, 120, 200, 80, 90, 110, 130]
+    assert result["series"]["search"] == [50, 40, 60, 30, 35, 45, 55]
+    assert result["series"]["yeni_firma"] == [5, 8, 16, 18, 22, 28, 37]
+    assert result["labels"] == labels
 
-    assert result["total_logins"] == 0
-    assert result["successful_logins"] == 0
-    assert result["signins"] == 0
-    assert result["password_resets"] == 0
-    assert result["search_events"] == 0
-    assert result["long_term_search"] == 0
-    assert result["very_long_term_search"] == 0
-    assert result["days"] == []
-
-
-def test_api_kpi_history_exception_handling(mock_engine, mock_connection):
-    """Test that exceptions during query are handled gracefully."""
-    mock_engine.connect.return_value.__enter__.return_value = mock_connection
-    # Simulate an exception during query execution
-    mock_connection.execute.side_effect = Exception("Database error")
-
+def test_api_kpi_history_empty():
+    labels = ["2026-09-11", "2026-09-12", "2026-09-13", "2026-09-14", "2026-09-15", "2026-09-16", "2026-09-17"]
+    conn = _mock_conn([], [], [], labels)
+    mock_engine = MagicMock()
+    mock_engine.connect.return_value.__enter__.return_value = conn
     with patch("web_app.get_engine", return_value=mock_engine):
         result = api_kpi_history(None, days=7)
+    assert result["series"]["login"] == [0, 0, 0, 0, 0, 0, 0]
+    assert result["series"]["search"] == [0, 0, 0, 0, 0, 0, 0]
+    assert result["series"]["yeni_firma"] == [0, 0, 0, 0, 0, 0, 0]
 
-    # Should still return a dict with default values (zeros)
-    assert "period" in result
-    assert "total_logins" in result
-    assert result["total_logins"] == 0
-    assert result["successful_logins"] == 0
-    assert result["search_events"] == 0
+def test_api_kpi_history_days_validation():
+    conn = MagicMock()
+    conn.execute.return_value.all.return_value = []
+    mock_engine = MagicMock()
+    mock_engine.connect.return_value.__enter__.return_value = conn
+    with patch("web_app.get_engine", return_value=mock_engine):
+        r0 = api_kpi_history(None, days=0)
+        r31 = api_kpi_history(None, days=31)
+        r7 = api_kpi_history(None, days=7)
+    assert r0["days"] == 7
+    assert r31["days"] == 7
+    assert r7["days"] == 7
+
+def test_api_kpi_history_exception_handling(mock_engine):
+    mock_engine.connect.return_value.__enter__.return_value = MagicMock()
+    mc = mock_engine.connect.return_value.__enter__.return_value
+    mc.execute.side_effect = Exception("DB error")
+    with patch("web_app.get_engine", return_value=mock_engine):
+        result = api_kpi_history(None, days=7)
+    assert result["days"] == 7
+    assert result["series"]["login"] == []
+    assert result["series"]["search"] == []
+    assert result["series"]["yeni_firma"] == []

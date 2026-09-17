@@ -50,7 +50,7 @@ CONSISTENCY_WINDOW: int = 10
 @dataclass(frozen=True)
 class KaynakSaglik:
     """Tek bir kaynağın sağlık skoru."""
-    
+
     kaynak_id: str
     kaynak_adi: str
     skor: float              # 0-100
@@ -64,11 +64,11 @@ class KaynakSaglik:
     olusturma_zaman: str = field(
         default_factory=lambda: datetime.now(timezone.utc).replace(tzinfo=None).isoformat()
     )
-    
+
     def __post_init__(self) -> None:
         """Bant otomatis atama."""
         object.__setattr__(self, "band", _banti_bul(self.skor))
-    
+
     def to_dict(self) -> dict[str, Any]:
         """Sözlüğe çevir."""
         return {
@@ -101,7 +101,7 @@ def _banti_bul(skor: float) -> str:
 
 def _tazelik_skoru(son_cekis_zaman: str | None) -> float:
     """Tazelik skoru hesapla (0-100).
-    
+
     Formül:
         - 7 gün içinde: 100
         - 7-30 gün: doğrusal azalış
@@ -110,7 +110,7 @@ def _tazelik_skoru(son_cekis_zaman: str | None) -> float:
     """
     if not son_cekis_zaman:
         return 0.0
-    
+
     try:
         son_zaman = datetime.fromisoformat(son_cekis_zaman)
         # tz-aware (DB timestamptz) ve naive (UTC varsayımı) girdileri tek eksene indir
@@ -118,24 +118,24 @@ def _tazelik_skoru(son_cekis_zaman: str | None) -> float:
             son_zaman = son_zaman.astimezone(timezone.utc).replace(tzinfo=None)
         simdi = datetime.now(timezone.utc).replace(tzinfo=None)
         gun_farki = (simdi - son_zaman).days
-        
+
         if gun_farki <= RECENCY_FRESH_DAYS:
             return 100.0
-        
+
         if gun_farki >= RECENCY_STALE_DAYS:
             return 0.0
-        
+
         # Doğrusal azalış: 7-30 gün
         oran = (gun_farki - RECENCY_FRESH_DAYS) / (RECENCY_STALE_DAYS - RECENCY_FRESH_DAYS)
         return round((1.0 - oran) * 100, 2)
-    
+
     except (ValueError, TypeError):
         return 0.0
 
 
 def _hata_orani(toplam: int, basarili: int) -> float:
     """Hata oranı hesapla (0-1).
-    
+
     Formül:
         error_rate = (toplam - başarılı) / toplam
     """
@@ -146,14 +146,14 @@ def _hata_orani(toplam: int, basarili: int) -> float:
 
 def _tutarlilik_skoru(son_n_cekisler: list[bool]) -> float:
     """Tutarlılık skoru (0-100).
-    
+
     Formül:
         Son N çekişte başarı oranı * 100
         (N = CONSISTENCY_WINDOW)
     """
     if not son_n_cekisler:
         return 0.0
-    
+
     basarili = sum(1 for basarı in son_n_cekisler if basarı)
     return round((basarili / len(son_n_cekisler)) * 100, 2)
 
@@ -167,7 +167,7 @@ def hesapla(
     son_n_cekisler: list[bool] | None = None,
 ) -> KaynakSaglik:
     """Kaynak Sağlık Skoru hesapla.
-    
+
     Args:
         kaynak_id: Kaynağın benzersiz kimliği
         kaynak_adi: Okunabilir kaynak adı
@@ -175,10 +175,10 @@ def hesapla(
         basarili_cekis: Başarılı çekiş sayısı
         son_cekis_zaman: Son çekişin zaman damgası (ISO 8601)
         son_n_cekisler: Son N çekişin başarı listesi [True, False, ...]
-    
+
     Returns:
         KaynakSaglik — skor, bant ve bileşen ayrıntıları
-    
+
     Örnek:
         >>> result = hesapla(
         ...     "apify_001",
@@ -192,22 +192,22 @@ def hesapla(
         87.5
     """
     son_n_cekisler = son_n_cekisler or []
-    
+
     # Bileşen skorları
     tazelik = _tazelik_skoru(son_cekis_zaman)
     hata_orani = _hata_orani(toplam_cekis, basarili_cekis)
     tutarlilik = _tutarlilik_skoru(son_n_cekisler) if son_n_cekisler else 0.0
-    
+
     # Genel skor formülü: Tazelik × (1 - Hata Oranı) × Tutarlılık / 10000
     # Basitleştirilmiş formül: (tazelik * 0.5) + (tutarlılık * 0.4) + ((1 - hata_orani) * 0.1 * 100)
     # Daha sade: tazelik 50%, tutarlılık 40%, hata cezası 10%
     skor = round(
-        (tazelik * 0.5) + 
-        (tutarlilik * 0.4) + 
+        (tazelik * 0.5) +
+        (tutarlilik * 0.4) +
         ((1.0 - min(hata_orani, 1.0)) * 100 * 0.1),
         2
     )
-    
+
     return KaynakSaglik(
         kaynak_id=kaynak_id,
         kaynak_adi=kaynak_adi,
@@ -227,7 +227,7 @@ def hesapla(
 
 def hesapla_toplu(kaynaklar: list[dict[str, Any]]) -> list[KaynakSaglik]:
     """Birden fazla kaynağın sağlık skorlarını hesapla.
-    
+
     Args:
         kaynaklar: Her biri şu alanları içeren dict listesi:
             - kaynak_id (str)
@@ -236,7 +236,7 @@ def hesapla_toplu(kaynaklar: list[dict[str, Any]]) -> list[KaynakSaglik]:
             - basarili_cekis (int)
             - son_cekis_zaman (str | None)
             - son_n_cekisler (list[bool] | None, isteğe bağlı)
-    
+
     Returns:
         KaynakSaglik listesi
     """

@@ -64,7 +64,7 @@ for i, row in enumerate(rows):
     company_id, name, website = row
     if not website.startswith(('http://', 'https://')):
         website = 'https://' + website
-    
+
     html = fetch_website(website)
     if html:
         cands = extract_from_html(html)
@@ -72,17 +72,17 @@ for i, row in enumerate(rows):
             # Save to DB
             with engine.begin() as c:
                 c.execute(text("""
-                    UPDATE companies SET vergi_no = :vkn 
+                    UPDATE companies SET vergi_no = :vkn
                     WHERE company_id = :cid AND (vergi_no IS NULL OR vergi_no = '')
                 """), {"vkn": cands[0], "cid": company_id})
             found += 1
             print(f"  [{i+1}/{len(rows)}] VKN bulundu: {name[:40]} -> {cands[0]}")
     else:
         errors += 1
-    
+
     if (i+1) % 20 == 0:
         print(f"Ilerleme: {i+1}/{len(rows)}, Bulunan: {found}, Hata: {errors}")
-    
+
     time.sleep(0.5)  # Rate limiting
 
 print(f"\nSonuc: {found} VKN bulundu, {errors} hata, toplam {len(rows)} firma")

@@ -52,15 +52,15 @@ def _isolated_board(tmp_path, monkeypatch):
 
 def test_gorev_guncelle_not_keyword_argument():
     """Test that gorev_guncelle correctly handles 'not' as a keyword argument.
-    
-    This addresses the issue where 'not' was being passed as a positional 
+
+    This addresses the issue where 'not' was being passed as a positional
     argument incorrectly, causing a syntax error.
     """
     _ensure()
-    
+
     # Clear the board for clean test
     TASK_BOARD.write_text("[]", encoding="utf-8")
-    
+
     # Add a test task
     task = gorev_ekle(
         task_id="TEST-NOT-KEYWORD",
@@ -68,27 +68,27 @@ def test_gorev_guncelle_not_keyword_argument():
         sahip="mimar",
         oncelik="P1"
     )
-    
+
     assert task is not None
     assert task["task_id"] == "TEST-NOT-KEYWORD"
-    
+
     # Test 1: Update with 'not' as a keyword argument (should work)
     result = gorev_guncelle(
         task_id="TEST-NOT-KEYWORD",
         durum="aktif",
         not_test_value="this should work as a keyword argument"
     )
-    
+
     assert result is not None
     assert result["durum"] == "aktif"
     assert result.get("not_test_value") == "this should work as a keyword argument"
-    
+
     # Verify the task was actually updated in the board
     updated_task = gorev_getir("TEST-NOT-KEYWORD")
     assert updated_task is not None
     assert updated_task["durum"] == "aktif"
     assert updated_task.get("not_test_value") == "this should work as a keyword argument"
-    
+
     # Test 2: Update with multiple keyword arguments including one that looks like a built-in
     result2 = gorev_guncelle(
         task_id="TEST-NOT-KEYWORD",
@@ -96,12 +96,12 @@ def test_gorev_guncelle_not_keyword_argument():
         **{"not": "this is allowed as a keyword argument"},
         another_field="test value"
     )
-    
+
     assert result2 is not None
     assert result2["durum"] == "review"
     assert result2.get("not") == "this is allowed as a keyword argument"
     assert result2.get("another_field") == "test value"
-    
+
     # Final verification
     final_task = gorev_getir("TEST-NOT-KEYWORD")
     assert final_task is not None
@@ -114,10 +114,10 @@ def test_gorev_guncelle_not_keyword_argument():
 def test_gorev_guncelle_invalid_duration():
     """Test that gorev_guncelle rejects invalid duration values."""
     _ensure()
-    
+
     # Clear the board for clean test
     TASK_BOARD.write_text("[]", encoding="utf-8")
-    
+
     # Add a test task
     task = gorev_ekle(
         task_id="TEST-INVALID-DURUM",
@@ -125,9 +125,9 @@ def test_gorev_guncelle_invalid_duration():
         sahip="mimar",
         oncelik="P1"
     )
-    
+
     assert task is not None
-    
+
     # Test with invalid duration - should raise ValueError
     with pytest.raises(ValueError, match="Gecersiz durum"):
         gorev_guncelle(
@@ -140,10 +140,10 @@ def test_gorev_guncelle_invalid_duration():
 def test_gorev_ekle_duplicate_prevention():
     """Test that gorev_ekle prevents duplicate task IDs."""
     _ensure()
-    
+
     # Clear the board for clean test
     TASK_BOARD.write_text("[]", encoding="utf-8")
-    
+
     # Add first task
     task1 = gorev_ekle(
         task_id="DUPLICATE-TEST",
@@ -151,10 +151,10 @@ def test_gorev_ekle_duplicate_prevention():
         sahip="mimar",
         oncelik="P1"
     )
-    
+
     assert task1 is not None
     assert task1["task_id"] == "DUPLICATE-TEST"
-    
+
     # Try to add duplicate - should raise ValueError
     with pytest.raises(ValueError, match="Gorev zaten var"):
         gorev_ekle(
@@ -163,7 +163,7 @@ def test_gorev_ekle_duplicate_prevention():
             sahip="gelistirici",
             oncelik="P2"
         )
-    
+
     # Verify only one task exists
     tasks = gorev_listesi()
     assert len(tasks) == 1

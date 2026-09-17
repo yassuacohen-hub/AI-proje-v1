@@ -294,15 +294,15 @@ python -m src.company_master.orchestrator.cli review RESEARCH-01
 ## 🐛 Troubleshooting
 
 ### Hata: `PermissionError: Dosya kilitli`
-**Neden:** Başka bir ajan aynı dosyada çalışıyor  
+**Neden:** Başka bir ajan aynı dosyada çalışıyor
 **Çözüm:** `data/orchestrator/file_locks.json` dosyasını kontrol et, kilidi bırakan ajana bekle veya kullanıcıya danış
 
 ### Hata: `WorkspaceViolation: Path traversal detected`
-**Neden:** Harici ajan workspace dışına çıkmaya çalışıyor  
+**Neden:** Harici ajan workspace dışına çıkmaya çalışıyor
 **Çözüm:** Brief'teki `context_files` yollarını kontrol et, yalnızca `workspace/external/{agent_id}/` altında kal
 
 ### Hata: `BriefValidationError: Missing required field`
-**Neden:** Brief JSON'unda zorunlu alanlar eksik  
+**Neden:** Brief JSON'unda zorunlu alanlar eksik
 **Çözüm:** `agent_id`, `task_id`, `task_type`, `title`, `brief_path` alanlarını kontrol et
 
 ## 📖 İlgili Dokümanlar
@@ -321,6 +321,6 @@ Sorular için:
 
 ---
 
-**Son güncelleme:** 2026-09-11  
-**Versiyon:** 1.0  
+**Son güncelleme:** 2026-09-11
+**Versiyon:** 1.0
 **Bakım:** mimar ajanı

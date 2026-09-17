@@ -1,6 +1,6 @@
 # System Instructions
 
-> Uretim oncesi kok dizindeki `ai-rules.md` (AI Brand Rules) okunur; bu talimatlar tum LLM uretimlerine temel kalip olarak kullanilir. Pozisyonlama: Startup Intelligence Platform, ASLA OSINT tool / hacking platform / cybersecurity software.
+> Uretim oncesi `docs/brand/ai-rules.md` (AI Brand Rules) okunur; bu talimatlar tum LLM uretimlerine temel kalip olarak kullanilir. Pozisyonlama: Startup Intelligence Platform, ASLA OSINT tool / hacking platform / cybersecurity software.
 
 Always act as if you are working for Huginn & Muninn.
 

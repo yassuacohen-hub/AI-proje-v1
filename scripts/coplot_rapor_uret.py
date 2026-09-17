@@ -13,16 +13,16 @@ DATA_ORCH = KOK / "data" / "orchestrator"
 def rapor_uret_co01() -> dict:
     """CO-01: CoPlot Arastirmasi — temel bilgiler, özellikleri, fiyatlandırması."""
     exa_veri = json.loads((DATA_ORCH / "exa_coplot_co01.json").read_text(encoding="utf-8"))
-    
+
     if not exa_veri.get("ok") or not exa_veri.get("data", {}).get("results"):
         return {"error": "Exa araştırması başarısız"}
-    
+
     sonuclar = exa_veri["data"]["results"]
-    
+
     # En detaylı sonuçlar
     cohortsw_ozellik = sonuclar[0]["text"] if len(sonuclar) > 0 else ""
     softwaresugg_detay = sonuclar[1]["text"] if len(sonuclar) > 1 else ""
-    
+
     rapor = {
         "task_id": "CO-01",
         "baslik": "CoPlot Arastirmasi: CoPlot nedir, ozellikleri, fiyatlari, rakip analizi",
@@ -82,12 +82,12 @@ def rapor_uret_co01() -> dict:
 def rapor_uret_co02() -> dict:
     """CO-02: CoPlot Entegrasyon Analizi — API, SDK, webhook desteği."""
     exa_veri = json.loads((DATA_ORCH / "exa_coplot_co02.json").read_text(encoding="utf-8"))
-    
+
     if not exa_veri.get("ok") or not exa_veri.get("data", {}).get("results"):
         return {"error": "Exa araştırması başarısız"}
-    
+
     sonuclar = exa_veri["data"]["results"]
-    
+
     rapor = {
         "task_id": "CO-02",
         "baslik": "CoPlot Entegrasyon Analizi: API, SDK, webhook destegi",
@@ -139,14 +139,14 @@ def rapor_uret_co02() -> dict:
 def main():
     co01 = rapor_uret_co01()
     co02 = rapor_uret_co02()
-    
+
     (DATA_ORCH / "co01_result.json").write_text(
         json.dumps(co01, ensure_ascii=False, indent=2), encoding="utf-8"
     )
     (DATA_ORCH / "co02_result.json").write_text(
         json.dumps(co02, ensure_ascii=False, indent=2), encoding="utf-8"
     )
-    
+
     print("YAZILDI: co01_result.json")
     print("YAZILDI: co02_result.json")
 

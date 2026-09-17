@@ -4,7 +4,7 @@
 Redis tabanli admin panel endpoint cache'i.
 Kullanim:
     from src.company_master.admin.caching import admin_cache
-    
+
     @admin_cache(ttl=60)
     def get_kpi_data():
         ...
@@ -48,7 +48,7 @@ def _make_key(prefix: str, *args, **kwargs) -> str:
 
 def admin_cache(ttl: int = 60):
     """Admin endpoint cache decorator.
-    
+
     Redis capali, in-memory fallback sunar.
     """
     def decorator(func: Callable) -> Callable:
@@ -56,11 +56,11 @@ def admin_cache(ttl: int = 60):
         def wrapper(*args, **kwargs) -> Any:
             key = _make_key(func.__name__, *args, **kwargs)
             cache = get_cache()
-            
+
             cached = cache.get(key)
             if cached is not None:
                 return cached
-            
+
             result = func(*args, **kwargs)
             cache.set(key, result, ttl=ttl)
             return result
@@ -70,7 +70,7 @@ def admin_cache(ttl: int = 60):
 
 def admin_cache_invalidate(prefix: str) -> int:
     """Tum bu prefix cache'ini sil.
-    
+
     Veri degistiginde kullanilir.
     """
     cache = get_cache()

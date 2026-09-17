@@ -14,7 +14,7 @@ with eng.connect() as conn:
         AND (c.primary_email IS NULL OR c.primary_email = '')
         LIMIT 3
     """)).fetchall()
-    
+
     for i, row in enumerate(rows):
         payload = row[0]
         print(f"Record {i+1}: type={type(payload)}")

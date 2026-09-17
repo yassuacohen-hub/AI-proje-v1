@@ -37,24 +37,24 @@ def run_migrations(target: int = 15, dry_run: bool = False) -> list[str]:
     versions = load_versions()
     current = versions["current_version"]
     applied = []
-    
+
     for mig in versions["migrations"]:
         if mig["version"] > current and mig["version"] <= target:
             action = "DRY-RUN" if dry_run else "APPLY"
             applied.append(f"{action}: {mig['file']} (v{mig['version']})")
-    
+
     if not dry_run:
         versions["current_version"] = target
         with open(VERSIONS_FILE, "w", encoding="utf-8") as f:
             json.dump(versions, f, ensure_ascii=False, indent=2)
-    
+
     return applied
 
 
 if __name__ == "__main__":
     dry = "--dry-run" in sys.argv
     version = "--version" in sys.argv
-    
+
     if version:
         print(f"Mevcut versiyon: {get_current_version()}")
         for mig in list_migrations():

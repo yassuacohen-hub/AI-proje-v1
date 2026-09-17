@@ -1,0 +1,191 @@
+{
+  "_not": [
+    "Continue IDE yapilandirmasi SABLONU — Huginn Data Insights. KAYNAK KOPYA (SSOT).",
+    "BU DOSYA DOGRUDAN KOPYALANMAZ. Kurulum: python scripts/continue_config_kur.py",
+    "Script ${env:X} yer tutucularini .env degerleriyle doldurup %USERPROFILE%\\.continue\\config.json'a yazar.",
+    "Neden: Continue JSON config'inde ${env:...} genisletmesi CALISMIYOR (kanit: 401 Missing Authentication header).",
+    "KURAL (sahip): ONCELIK UCRETSIZ MODELLER. Ucretli olanlar en SONDA ve [UCRETLI] etiketli.",
+    "ONEMLI: ANTHROPIC_API_KEY pay-per-token AYRI cuzdandir; Claude Pro/Max aboneliginin 5 saatlik penceresini TUKETMEZ. Continue'dan Sonnet kullanmak Claude Code kotasini yemez.",
+    "CAPRAZ KULLANIM: OpenRouter kredisi korunsun diye NVIDIA/Groq/Together ucretsiz katmanlari da listede.",
+    "Anahtarlar yalniz .env'de; bu dosyaya YAZILMAZ.",
+    "SLUG BAKIMI: /models listesi YETERLI DEGIL — slug listede olsa da cagri 404/429 donebilir.",
+    "Gercek test: python scripts/continue_config_kur.py --dogrula (POST /chat/completions)",
+    "Son dogrulama: 2026-09-17 — asagidaki 13 model + autocomplete GERCEK cagri ile OK dondu.",
+    "BASLIK KURALI: ucretsizler [UCRETSIZ], ucretliler [UCRETLI] etiketiyle baslar. Ucretliler listenin EN SONUNDA.",
+    "CIKARILANLAR: Together (401 gecersiz anahtar), NVIDIA nemotron-70b / deepseek-coder-6.7b / deepseek-v4-flash (404-timeout), Groq llama-3.3-70b (404 hesapta yok), Gemma 4 31B kararsiz (429/timeout).",
+    "ADAY OLUP ELENENLER (2026-09-17 POST testi): poolside/laguna-s-2.1:free + laguna-xs (429), z-ai/glm-5.2:free (429), qwen/qwen3.8-27b:free OR uzerinden (429 — Groq surumu listede), google/gemma-4-26b-a4b-it:free (429), thinkingmachines/inkling(-small):free (403, sadece belirli hesaplara acik).",
+    "DEEPSEEK: OpenRouter'da 21 deepseek slug'inin HICBIRI :free degil — bu yuzden listede yok.",
+    "NOT: Continue'da elle eklenen deepseek/glm/anthropic kayitlari bu dosyadan gelmez; kurucu script calisinca SILINIR."
+  ],
+  "models": [
+    {
+      "title": "[UCRETSIZ] OR · Nemotron 3 Ultra 550B (1M, en guclu)",
+      "provider": "openrouter",
+      "model": "nvidia/nemotron-3-ultra-550b-a55b:free",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "${env:OPENROUTER_API_KEY}",
+      "contextLength": 1000000
+    },
+    {
+      "title": "[UCRETSIZ] OR · Nemotron 3 Super 120B",
+      "provider": "openrouter",
+      "model": "nvidia/nemotron-3-super-120b-a12b:free",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "${env:OPENROUTER_API_KEY}",
+      "contextLength": 262144
+    },
+    {
+      "title": "[UCRETSIZ] OR · Nemotron 3.5 Lightning (1M, hizli)",
+      "provider": "openrouter",
+      "model": "nvidia/nemotron-3.5-lightning:free",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "${env:OPENROUTER_API_KEY}",
+      "contextLength": 1000000
+    },
+    {
+      "title": "[UCRETSIZ] OR · North Mini Code (kod odakli)",
+      "provider": "openrouter",
+      "model": "cohere/north-mini-code:free",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "${env:OPENROUTER_API_KEY}",
+      "contextLength": 256000
+    },
+    {
+      "title": "[UCRETSIZ] OR · Nemotron 3 Nano Omni 30B (reasoning)",
+      "provider": "openrouter",
+      "model": "nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "${env:OPENROUTER_API_KEY}",
+      "contextLength": 256000
+    },
+    {
+      "title": "[UCRETSIZ] OR · Nex N2.5 Pro",
+      "provider": "openrouter",
+      "model": "nex-agi/nex-n2.5-pro:free",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "${env:OPENROUTER_API_KEY}",
+      "contextLength": 262144
+    },
+    {
+      "title": "[UCRETSIZ] OR · Nex N2.5 Mini",
+      "provider": "openrouter",
+      "model": "nex-agi/nex-n2.5-mini:free",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "${env:OPENROUTER_API_KEY}",
+      "contextLength": 262144
+    },
+    {
+      "title": "[UCRETSIZ] OR · Dots 3 Note Preview (512k)",
+      "provider": "openrouter",
+      "model": "dots-studio/dots-3-note-preview:free",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "${env:OPENROUTER_API_KEY}",
+      "contextLength": 512000
+    },
+    {
+      "title": "[UCRETSIZ] OR · LFM 2.5 2.6B (cok hafif)",
+      "provider": "openrouter",
+      "model": "liquid/lfm-2.5-2.6b:free",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "${env:OPENROUTER_API_KEY}",
+      "contextLength": 65536
+    },
+    {
+      "title": "[UCRETSIZ] NVIDIA · Nemotron 3.5 Lightning 30B",
+      "provider": "openai",
+      "model": "nvidia/nemotron-3.5-lightning-30b-a3b",
+      "apiBase": "${env:NVIDIA_BASE_URL}",
+      "apiKey": "${env:NVIDIA_API_KEY}",
+      "contextLength": 128000
+    },
+    {
+      "title": "[UCRETSIZ] Groq · GPT-OSS 120B (hizli, guclu)",
+      "provider": "openai",
+      "model": "openai/gpt-oss-120b",
+      "apiBase": "${env:GROQ_BASE_URL}",
+      "apiKey": "${env:GROQ_API_KEY}",
+      "contextLength": 131072
+    },
+    {
+      "title": "[UCRETSIZ] Groq · GPT-OSS 20B",
+      "provider": "openai",
+      "model": "openai/gpt-oss-20b",
+      "apiBase": "${env:GROQ_BASE_URL}",
+      "apiKey": "${env:GROQ_API_KEY}",
+      "contextLength": 131072
+    },
+    {
+      "title": "[UCRETSIZ] Groq · Qwen 3.8 27B",
+      "provider": "openai",
+      "model": "qwen/qwen3.8-27b",
+      "apiBase": "${env:GROQ_BASE_URL}",
+      "apiKey": "${env:GROQ_API_KEY}",
+      "contextLength": 131072
+    },
+    {
+      "title": "[UCRETLI] OR · DeepSeek V4 Flash (0.06/0.12 · 1.3M ctx · ANA)",
+      "provider": "openrouter",
+      "model": "deepseek/deepseek-v4-flash-0731",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "${env:OPENROUTER_API_KEY}",
+      "contextLength": 1310720
+    },
+    {
+      "title": "[UCRETLI] OR · Qwen3 Coder 30B (0.07/0.28 · kod isi)",
+      "provider": "openrouter",
+      "model": "qwen/qwen3-coder-30b-a3b-instruct",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "${env:OPENROUTER_API_KEY}",
+      "contextLength": 262144
+    },
+    {
+      "title": "[UCRETLI] OR · DeepSeek V3.2 (0.27/0.40 · akil yurutme)",
+      "provider": "openrouter",
+      "model": "deepseek/deepseek-v3.2",
+      "apiBase": "https://openrouter.ai/api/v1",
+      "apiKey": "${env:OPENROUTER_API_KEY}",
+      "contextLength": 163840
+    },
+    {
+      "title": "[UCRETLI] Anthropic · Claude Sonnet 4.5 (SON YEDEK)",
+      "provider": "anthropic",
+      "model": "claude-sonnet-4-5",
+      "apiKey": "${env:ANTHROPIC_API_KEY}",
+      "contextLength": 200000
+    }
+  ],
+  "tabAutocompleteModel": {
+    "title": "[UCRETSIZ] Groq · GPT-OSS 20B (autocomplete)",
+    "provider": "openai",
+    "model": "openai/gpt-oss-20b",
+    "apiBase": "${env:GROQ_BASE_URL}",
+    "apiKey": "${env:GROQ_API_KEY}"
+  },
+  "contextProviders": [
+    { "name": "code", "params": {} },
+    { "name": "diff", "params": {} },
+    { "name": "terminal", "params": {} },
+    { "name": "problems", "params": {} },
+    { "name": "folder", "params": {} },
+    { "name": "codebase", "params": {} }
+  ],
+  "experimental": {
+    "modelContextProtocolServers": [
+      {
+        "transport": {
+          "type": "stdio",
+          "command": "npx",
+          "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+          "env": { "BRAVE_API_KEY": "${env:BRAVE_API_KEY}" }
+        }
+      },
+      {
+        "transport": {
+          "type": "stdio",
+          "command": "npx",
+          "args": ["-y", "@modelcontextprotocol/server-fetch"]
+        }
+      }
+    ]
+  }
+}

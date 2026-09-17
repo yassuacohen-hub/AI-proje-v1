@@ -1,8 +1,8 @@
 # Pazarlama Gorselleri Cercevesi - Huginn & Muninn
 
-> Uretim oncesi kok dizinindeki `ai-rules.md` (AI Brand Rules) okunur; pozisyonlama: Startup Intelligence Platform, ASLA OSINT Tool.
+> Uretim oncesi `docs/brand/ai-rules.md` (AI Brand Rules) okunur; pozisyonlama: Startup Intelligence Platform, ASLA OSINT Tool.
 
-Tum pazarlama ciktilari `brand.md` + `design-tokens.json` ile uyumlu uretilir.
+Tum pazarlama ciktilari `docs/brand/brand.md` + `design-tokens.json` ile uyumlu uretilir.
 
 ## Sabit mesajlar (brand.md Preferred Messages)
 - Discover tomorrow's winners.

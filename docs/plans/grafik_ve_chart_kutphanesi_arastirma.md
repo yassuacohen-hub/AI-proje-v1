@@ -1,7 +1,7 @@
 # Grafik ve Chart Kutuphanesi Arastirmasi
 
-**Tarih:** 2026-09-15  
-**Amac:** OSINT + AI Istihbarat Platformu icin ucretsiz grafik/chart kutuphanesi secimi  
+**Tarih:** 2026-09-15
+**Amac:** OSINT + AI Istihbarat Platformu icin ucretsiz grafik/chart kutuphanesi secimi
 **Baglam:** AI proje v1/V10/03_mimari/osint_ai_visual_stack.md dokumanin sentezi
 
 ---

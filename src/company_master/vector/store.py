@@ -144,7 +144,7 @@ class EmbeddedVectorStore:
                             for d in items:
                                 self._memory[d.id] = d
                             return len(items)
-                
+
                         # boyut kontrolu (ilk gorselde dogrula)
                         dim = len(items[0].vector)
                         if dim != self.dimension:
@@ -153,14 +153,14 @@ class EmbeddedVectorStore:
                                 self.dimension, dim, dim,
                             )
                         self._dim = dim
-                
+
                         coll.upsert(
                             ids=[d.id for d in items],
                             embeddings=[d.vector for d in items],
                             metadatas=[d.metadata for d in items],
                         )
                         return len(items)
-                
+
                     # ---- sorgulama ----
         else:
             """Dokumanlari koleksiyona yazar; eklenen sayisini dondurur."""
@@ -173,7 +173,7 @@ class EmbeddedVectorStore:
                 for d in items:
                     self._memory[d.id] = d
                 return len(items)
-    
+
             # boyut kontrolu (ilk gorselde dogrula)
             dim = len(items[0].vector)
             if dim != self.dimension:
@@ -182,14 +182,14 @@ class EmbeddedVectorStore:
                     self.dimension, dim, dim,
                 )
             self._dim = dim
-    
+
             coll.upsert(
                 ids=[d.id for d in items],
                 embeddings=[d.vector for d in items],
                 metadatas=[d.metadata for d in items],
             )
             return len(items)
-    
+
         # ---- sorgulama ----
     def query(
         self,

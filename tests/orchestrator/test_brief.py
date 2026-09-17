@@ -77,7 +77,7 @@ def test_package_brief():
 
 def test_package_brief_and_brief_package_equivalence():
     """Test that package_brief() and Brief.package() produce identical output.
-    
+
     This addresses the issue where brief.py had its own package_brief() function
     while Brief already had a package() method. Both should produce the same
     JSON output for the same Brief object.

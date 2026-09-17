@@ -1,5 +1,11 @@
 # Huginn & Muninn
 
+> **Kapsam (D-45):** Bu set pazarlama, web ve logo üretimi içindir; palet SSOT'u
+> `docs/brand/design-tokens.json`. Ürün UI paleti **ayrıdır**:
+> `src/company_master/ui/tokens.py` (Indigo `#6366f1`, değişmez) — birleştirme YOK.
+> **Yazım (D-44):** yalnız **Huginn / Muninn / Odin**; çevrilmez, kısaltılmaz, ekle bölünmez.
+> Yasak yazımların tam listesi ve teknik SSOT: `docs/AJAN_DETAY.md` §11.
+
 ## What We Are
 
 A Startup Intelligence Platform.

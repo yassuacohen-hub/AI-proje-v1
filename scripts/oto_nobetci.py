@@ -91,7 +91,7 @@ def nobetci_tur(oto_destek_acik: bool = False):
             duzeltilen += 1
         except Exception as e:
             print(f"  HATA: {k['task_id']} - {e}")
-    
+
     # 2. Tetik dosyasindaki teslim edilmis gorevleri kontrol et
     for ajan in duzen.AJANLAR:
         try:
@@ -105,7 +105,7 @@ def nobetci_tur(oto_destek_acik: bool = False):
                     duzeltilen += 1
         except Exception:
             pass
-    
+
     # 3. Pano hijyeni (sessiz: degisiklik varsa yaz + ses)
     try:
         r = duzen.pano_bakim()
@@ -130,7 +130,7 @@ def main():
     parser.add_argument("--oto-destek", action="store_true",
                         help="Bosta ajanslara otomatik destek gorevleri olustur")
     args = parser.parse_args()
-    
+
     if args.test_ses:
         print("Test: Zincir devam sesi...")
         _ses_zincir_devam()
@@ -138,7 +138,7 @@ def main():
         print("Test: Teslim onay sesi...")
         _ses_teslim_onay()
         return
-    
+
     if args.surekli:
         print(f"[OTO-NOBETCI] Surekli mod baslatildi (aralik: {args.aralik}s)")
         print("  Durdurmak icin Ctrl+C basin\n")

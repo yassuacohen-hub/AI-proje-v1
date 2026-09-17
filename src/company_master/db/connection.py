@@ -280,7 +280,7 @@ def init_db(sql_path: Optional[str] = None) -> None:
 
         return
 
-    
+
 
     # SQLAlchemy + raw SQL
 

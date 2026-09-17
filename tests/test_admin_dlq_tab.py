@@ -38,7 +38,7 @@ def test_render_dlq_tab_with_data(monkeypatch):
     metric = MagicMock()
     bar = MagicMock()
     dataframe = MagicMock()
-    monkeypatch.setattr(admin_dlq.st, "metric", metric)
+    monkeypatch.setattr(admin_dlq, "kpi_karti", metric)
     monkeypatch.setattr(admin_dlq.st, "bar_chart", bar)
     monkeypatch.setattr(admin_dlq.st, "dataframe", dataframe)
     monkeypatch.setattr(admin_dlq.st, "info", MagicMock())

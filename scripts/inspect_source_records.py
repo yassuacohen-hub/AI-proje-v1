@@ -13,7 +13,7 @@ with engine.connect() as conn:
     print("Sources:")
     for r in src_result:
         print(f"  {r[0]}: {r[1]} ({r[2]})")
-    
+
     # Check source_records sample
     result = conn.execute(text('''
         SELECT sr.source_record_id, sr.source_id, sr.raw_payload, sr.raw_address, sr.raw_phone, sr.raw_email, sr.raw_website

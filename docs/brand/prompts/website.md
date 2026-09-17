@@ -1,8 +1,8 @@
 # Website Prompt Cercevesi - Huginn & Muninn
 
-> Uretim oncesi kok dizinindeki `ai-rules.md` (AI Brand Rules) okunur; pozisyonlama: Startup Intelligence Platform, ASLA OSINT Tool.
+> Uretim oncesi `docs/brand/ai-rules.md` (AI Brand Rules) okunur; pozisyonlama: Startup Intelligence Platform, ASLA OSINT Tool.
 
-Landing page uretimi bu cerceve + kok `brand.md` + `design-tokens.json` ile yapilir.
+Landing page uretimi bu cerceve + `docs/brand/brand.md` + `design-tokens.json` ile yapilir.
 
 ## Hero (sabit)
 - Marka: Huginn & Muninn

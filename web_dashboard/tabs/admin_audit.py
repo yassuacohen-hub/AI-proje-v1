@@ -18,6 +18,8 @@ from typing import Any
 import pandas as pd
 import streamlit as st
 
+from web_dashboard.charts import kpi_karti  # noqa: E402
+
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
@@ -165,16 +167,15 @@ def render_audit_tab() -> None:
 
             c1, c2, c3, c4, c5 = st.columns(5)
             with c1:
-                st.metric("Toplam Görev", len(board))
+                kpi_karti("Toplam Görev", len(board), kategori="guvenlik")
             with c2:
-                st.metric("✅ Done", status_counts.get("done", 0))
+                kpi_karti("✅ Done", status_counts.get("done", 0), kategori="guvenlik")
             with c3:
-                st.metric("🔵 Aktif", status_counts.get("aktif", 0))
+                kpi_karti("🔵 Aktif", status_counts.get("aktif", 0), kategori="guvenlik")
             with c4:
-                st.metric("🟡 Review", status_counts.get("review", 0))
+                kpi_karti("🟡 Review", status_counts.get("review", 0), kategori="guvenlik")
             with c5:
-                st.metric("🔴 Blocked", status_counts.get("blocked", 0))
-
+                kpi_karti("🔴 Blocked", status_counts.get("blocked", 0), kategori="guvenlik")
             task_df = pd.DataFrame([
                 {
                     "Görev ID": gorev.get("task_id", ""),

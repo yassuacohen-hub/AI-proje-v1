@@ -1,0 +1,16 @@
+slug,provider,title,context_length,fallback_priority,test_result
+nvidia/nemotron-3.5-content-safety:free,openrouter,[UCRETSIZ] OR · Nemotron 3.5 Content Safety,256000,1,OK
+nvidia/nemotron-3-ultra-550b-a55b:free,openrouter,[UCRETSIZ] OR · Nemotron 3 Ultra 550B,1000000,,from_continue_config
+nvidia/nemotron-3-super-120b-a12b:free,openrouter,[UCRETSIZ] OR · Nemotron 3 Super 120B,262144,,from_continue_config
+nvidia/nemotron-3.5-lightning:free,openrouter,[UCRETSIZ] OR · Nemotron 3.5 Lightning,1000000,,from_continue_config
+cohere/north-mini-code:free,openrouter,[UCRETSIZ] OR · North Mini Code,256000,,from_continue_config
+nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free,openrouter,[UCRETSIZ] OR · Nemotron 3 Nano Omni 30B,256000,,from_continue_config
+nex-agi/nex-n2.5-pro:free,openrouter,[UCRETSIZ] OR · Nex N2.5 Pro,262144,,from_continue_config
+nex-agi/nex-n2.5-mini:free,openrouter,[UCRETSIZ] OR · Nex N2.5 Mini,262144,,from_continue_config
+dots-studio/dots-3-note-preview:free,openrouter,[UCRETSIZ] OR · Dots 3 Note Preview,512000,,from_continue_config
+liquid/lfm-2.5-2.6b:free,openrouter,[UCRETSIZ] OR · LFM 2.5 2.6B,65536,,from_continue_config
+nvidia/nemotron-3.5-lightning-30b-a3b,nvidia,[UCRETSIZ] NVIDIA · Nemotron 3.5 Lightning 30B,128000,,from_continue_config
+openai/gpt-oss-120b,groq,[UCRETSIZ] Groq · GPT-OSS 120B,131072,,from_continue_config
+openai/gpt-oss-20b,groq,[UCRETSIZ] Groq · GPT-OSS 20B,131072,,from_continue_config
+qwen/qwen3.8-27b,groq,[UCRETSIZ] Groq · Qwen 3.8 27B,131072,2,OK
+claude-sonnet-4-5,anthropic,[UCRETLI] Anthropic · Claude Sonnet 4.5,200000,3,from_continue_config

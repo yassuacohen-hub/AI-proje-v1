@@ -134,7 +134,7 @@ print("\n=== Step 2: Adres + Web + Sektor + VKN from JSONL ===")
 # Fetch all Ankara companies with names
 with engine.connect() as conn:
     companies = conn.execute(text("""
-        SELECT c.company_id, 
+        SELECT c.company_id,
                LOWER(TRIM(c.legal_name)) as ln,
                LOWER(TRIM(c.trade_name)) as tn
         FROM companies c WHERE c.is_ankara = TRUE
@@ -154,19 +154,19 @@ for row in companies:
     if not matched:
         continue
     rec = matched[0]
-    
+
     vkn = str(rec.get("vergi_no") or "").strip()
     if vkn and VKN_PATTERN.match(vkn):
         vkn_data.append({"cid": cid, "val": vkn})
-    
+
     adres = str(rec.get("adres") or "").strip()
     if adres:
         adres_data.append({"cid": cid, "val": adres})
-    
+
     web = str(rec.get("web_sitesi") or "").strip()
     if web:
         web_data.append({"cid": cid, "val": web})
-    
+
     sektor = str(rec.get("sektor") or "").strip()
     if sektor:
         sektor_data.append({"cid": cid, "val": sektor})
@@ -182,37 +182,37 @@ with engine.begin() as conn:
             cid TEXT, field_type TEXT, val TEXT
         )
     """))
-    
+
     # Insert all data
     for dtype, data_list in [("adres", adres_data), ("web", web_data), ("sektor", sektor_data), ("vkn", vkn_data)]:
         for d in data_list:
             conn.execute(text("INSERT INTO _backfill_temp VALUES (:cid, :ft, :val)"),
                         {"cid": d["cid"], "ft": dtype, "val": d["val"]})
-    
+
     # Bulk update companies table
     conn.execute(text("""
         UPDATE companies c SET adres = COALESCE(c.adres, t.val)
         FROM (SELECT cid, val FROM _backfill_temp WHERE field_type = 'adres') t
         WHERE c.company_id = t.cid AND (c.adres IS NULL OR c.adres = '')
     """))
-    
+
     conn.execute(text("""
         UPDATE companies c SET website_domain = COALESCE(c.website_domain, t.val),
                                web_sitesi = COALESCE(c.web_sitesi, t.val)
         FROM (SELECT cid, val FROM _backfill_temp WHERE field_type = 'web') t
-        WHERE c.company_id = t.cid 
+        WHERE c.company_id = t.cid
         AND (c.website_domain IS NULL OR c.website_domain = '')
         AND (c.web_sitesi IS NULL OR c.web_sitesi = '')
     """))
-    
+
     conn.execute(text("""
         UPDATE companies c SET vergi_no = COALESCE(c.vergi_no, t.val),
                                tax_number = COALESCE(c.tax_number, t.val)
         FROM (SELECT cid, val FROM _backfill_temp WHERE field_type = 'vkn') t
-        WHERE c.company_id = t.cid 
+        WHERE c.company_id = t.cid
         AND (c.vergi_no IS NULL OR c.vergi_no = '')
     """))
-    
+
     # Bulk update source_records
     conn.execute(text("""
         UPDATE source_records sr
@@ -221,7 +221,7 @@ with engine.begin() as conn:
         WHERE sr.source_record_id = c.source_record_id AND c.company_id = t.cid
         AND (sr.raw_address IS NULL OR sr.raw_address = '')
     """))
-    
+
     conn.execute(text("""
         UPDATE source_records sr
         SET raw_website = COALESCE(sr.raw_website, t.val)
@@ -229,7 +229,7 @@ with engine.begin() as conn:
         WHERE sr.source_record_id = c.source_record_id AND c.company_id = t.cid
         AND (sr.raw_website IS NULL OR sr.raw_website = '')
     """))
-    
+
     conn.execute(text("""
         UPDATE source_records sr
         SET raw_tax_number = COALESCE(sr.raw_tax_number, t.val)
@@ -237,7 +237,7 @@ with engine.begin() as conn:
         WHERE sr.source_record_id = c.source_record_id AND c.company_id = t.cid
         AND (sr.raw_tax_number IS NULL OR sr.raw_tax_number = '')
     """))
-    
+
     # Update raw_payload JSONB for adres and sektor
     conn.execute(text("""
         UPDATE source_records sr
@@ -246,7 +246,7 @@ with engine.begin() as conn:
         WHERE sr.source_record_id = c.source_record_id AND c.company_id = t.cid
         AND (sr.raw_payload->>'adres' IS NULL OR sr.raw_payload->>'adres' = '')
     """))
-    
+
     conn.execute(text("""
         UPDATE source_records sr
         SET raw_payload = raw_payload || jsonb_build_object('sektor', t.val)
@@ -254,7 +254,7 @@ with engine.begin() as conn:
         WHERE sr.source_record_id = c.source_record_id AND c.company_id = t.cid
         AND (sr.raw_payload->>'sektor' IS NULL OR sr.raw_payload->>'sektor' = '')
     """))
-    
+
     conn.execute(text("DROP TABLE _backfill_temp"))
 
 stats["adres_from_jsonl"] = len(adres_data)

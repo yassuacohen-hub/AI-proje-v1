@@ -19,6 +19,8 @@ import plotly.graph_objects as go
 import plotly.express as px
 import streamlit as st
 
+from web_dashboard.charts import kpi_karti
+
 
 # ================================================================ Veri Modelleri
 @dataclass
@@ -28,15 +30,15 @@ class ProviderCost:
     daily_cost_usd: float = 0.0
     daily_calls: int = 0
     daily_avg_cost_per_call: float = 0.0
-    
+
     latency_ms: float = 0.0
     success_rate: float = 100.0
     error_rate: float = 0.0
-    
+
     health_status: str = "OK"  # OK, WARNING, ERROR
     backoff_level: int = 0
     model_locks: int = 0
-    
+
     # Provider detaylari (raw)
     name: str = ""
     is_active: bool = True
@@ -72,13 +74,13 @@ class CostSummary:
     total_daily_cost_usd: float = 0.0
     total_daily_calls: int = 0
     total_avg_cost_per_call: float = 0.0
-    
+
     estimated_monthly_cost_usd: float = 0.0
-    
+
     providers: list[ProviderCost] = field(default_factory=list)
     anomalies: list[AnomalyFlag] = field(default_factory=list)
     trend: list[TrendPoint] = field(default_factory=list)
-    
+
     provider_count: int = 0
     active_provider_count: int = 0
     problematic_provider_count: int = 0
@@ -105,22 +107,22 @@ def _empty_cost_summary() -> CostSummary:
 @st.cache_data(ttl=30)
 def load_cost_summary() -> CostSummary:
     """9router_optimizer.py'nin urettigi JSON'dan CostSummary yukle.
-    
+
     Veri kaynagi: data/router/optimizer_latest.json
-    
+
     Fallback: Bos ozet (UI crash değil)
     """
     try:
         json_path = Path("data/router/optimizer_latest.json")
         if not json_path.exists():
             return _empty_cost_summary()
-        
+
         with open(json_path, "r", encoding="utf-8") as f:
             data = json.load(f)
-        
+
         # Timestamp al
         ts = data.get("timestamp", datetime.now().isoformat())
-        
+
         # GERÇEK YAPI (9router_optimizer.py json_cikti()):
         # - saglik.providerlar  -> tum providerlarin durum/saglik bilgisi
         # - skorlar             -> provider bazli latency_ms / maliyet_ort_usd
@@ -134,37 +136,37 @@ def load_cost_summary() -> CostSummary:
         provider_costs_raw = usage.get("provider_maliyet_toplam", {})
         provider_calls = usage.get("provider_cagri_sayisi", {})
         provider_costs_avg = usage.get("provider_maliyet_ort", {})
-        
+
         req_detail = combo.get("requestDetails", {})
         prov_latency = req_detail.get("provider_latency_ort", {})
         prov_status = req_detail.get("provider_status", {})
-        
+
         # saglik.providerlar -> tum tanimli providerlar (31 adet); usageHistory sadece
         # gercekte cagrilan birkac provider'i icerir, digerlerinde maliyet/cagri 0 kalir.
         providerlar = data.get("saglik", {}).get("providerlar", [])
-        
+
         # skorlar -> latency_ms / maliyet_ort_usd icin fallback kaynagi (combo disi providerlar icin)
         skorlar_raw = data.get("skorlar", [])
         skor_lookup: dict[str, dict] = {
             s.get("provider"): s for s in skorlar_raw if s.get("provider")
         }
-        
+
         # Provider listesi olustur
         providers: list[ProviderCost] = []
         provider_set = set()
-        
+
         for p in providerlar:
             pname = p.get("provider", "unknown")
             provider_set.add(pname)
             skor = skor_lookup.get(pname, {})
-            
+
             cost_total = float(provider_costs_raw.get(pname, 0.0))
             calls = int(provider_calls.get(pname, 0) or 0)
             cost_avg_raw = provider_costs_avg.get(pname)
             cost_avg = float(cost_avg_raw) if cost_avg_raw is not None else float(skor.get("maliyet_ort_usd") or 0.0)
             latency_raw = prov_latency.get(pname)
             latency = float(latency_raw) if latency_raw is not None else float(skor.get("latency_ms") or 0.0)
-            
+
             # Status oranları
             stat = prov_status.get(pname, {})
             success = stat.get("success", 0)
@@ -172,18 +174,18 @@ def load_cost_summary() -> CostSummary:
             total_req = success + error
             success_rate = (success / total_req * 100) if total_req > 0 else 100.0
             error_rate = (error / total_req * 100) if total_req > 0 else 0.0
-            
+
             # Saglik durumu
             durum = p.get("durum", {})
             backoff = durum.get("backoffLevel") or 0
             locks = durum.get("modelLockSayisi") or 0
-            
+
             health = "OK"
             if backoff >= 5 or locks > 10 or durum.get("errorCode"):
                 health = "ERROR"
             elif backoff >= 3 or locks > 5:
                 health = "WARNING"
-            
+
             pc = ProviderCost(
                 provider=pname,
                 daily_cost_usd=cost_total,
@@ -200,11 +202,11 @@ def load_cost_summary() -> CostSummary:
                 auth_type=p.get("authType", ""),
             )
             providers.append(pc)
-        
+
         # Anomaliler — gerçek alanlar: provider, name, nedenler(list[str]), oncelik
         anomalies: list[AnomalyFlag] = []
         anomali_raw = data.get("anomaliler", [])
-        
+
         for a in anomali_raw:
             nedenler = a.get("nedenler", [])
             af = AnomalyFlag(
@@ -215,7 +217,7 @@ def load_cost_summary() -> CostSummary:
                 timestamp=ts,
             )
             anomalies.append(af)
-        
+
         # Ek anomaliler (hesaplı — maliyet/hata/latency bazlı, gerçek combo verisi üzerinden)
         cost_providers = [pc for pc in providers if pc.daily_cost_usd > 0]
         avg_cost = (sum(pc.daily_cost_usd for pc in cost_providers) / len(cost_providers)) if cost_providers else 0.0
@@ -231,7 +233,7 @@ def load_cost_summary() -> CostSummary:
                     threshold=avg_cost * 2,
                     timestamp=ts,
                 ))
-            
+
             if pc.error_rate > 5:
                 anomalies.append(AnomalyFlag(
                     flag_type="error",
@@ -242,7 +244,7 @@ def load_cost_summary() -> CostSummary:
                     threshold=5.0,
                     timestamp=ts,
                 ))
-            
+
             if pc.latency_ms > 5000:
                 anomalies.append(AnomalyFlag(
                     flag_type="latency",
@@ -253,7 +255,7 @@ def load_cost_summary() -> CostSummary:
                     threshold=5000.0,
                     timestamp=ts,
                 ))
-        
+
         # Trend (tahmini — 30 günlük ekstrapol; gerçek zaman serisi için arşiv gerekir)
         trend: list[TrendPoint] = []
         total_calls = sum(pc.daily_calls for pc in providers)
@@ -265,10 +267,10 @@ def load_cost_summary() -> CostSummary:
             anomalies_count=len(anomalies),
         )
         trend.append(tp)
-        
+
         # Aylık tahmin
         monthly_cost = total_cost * 30
-        
+
         cs = CostSummary(
             timestamp=ts,
             total_daily_cost_usd=total_cost,
@@ -283,7 +285,7 @@ def load_cost_summary() -> CostSummary:
             problematic_provider_count=len([p for p in providers if p.health_status != "OK"]),
         )
         return cs
-        
+
     except Exception as e:
         st.warning(f"⚠️ Maliyet verisi yükleme hatası: {e}")
         return _empty_cost_summary()
@@ -292,28 +294,28 @@ def load_cost_summary() -> CostSummary:
 # ================================================================ Plotly Charts
 def chart_provider_breakdown(cost_summary: CostSummary) -> go.Figure | None:
     """Provider-bazlı maliyet dagilimi (Pie chart).
-    
+
     Top 10 provider, gerisi "Diğer" kategorisinde.
     """
     if not cost_summary.providers:
         return None
-    
+
     # En yuksek 10 sırala
     top_providers = sorted(
         cost_summary.providers,
         key=lambda p: p.daily_cost_usd,
         reverse=True
     )[:10]
-    
+
     labels = [p.provider for p in top_providers]
     values = [p.daily_cost_usd for p in top_providers]
-    
+
     # Gerisi var mı?
     other_cost = sum(p.daily_cost_usd for p in cost_summary.providers[10:])
     if other_cost > 0:
         labels.append("Diğer")
         values.append(other_cost)
-    
+
     fig = go.Figure(data=[go.Pie(
         labels=labels,
         values=values,
@@ -329,20 +331,20 @@ def chart_provider_breakdown(cost_summary: CostSummary) -> go.Figure | None:
 
 def chart_daily_trend(cost_summary: CostSummary) -> go.Figure | None:
     """Günlük trend: Maliyet + Çağrı sayısı (dual-axis).
-    
+
     Şimdilik tek nokta (günümüz verisi).
     Gelecek: Archive JSON'lar arşivlenerek gerçek zaman serisi.
     """
     if not cost_summary.trend:
         return None
-    
+
     trend = cost_summary.trend
     dates = [t.date for t in trend]
     costs = [t.cost_usd for t in trend]
     calls = [t.calls for t in trend]
-    
+
     fig = go.Figure()
-    
+
     # Maliyet (sol axis)
     fig.add_trace(go.Bar(
         x=dates,
@@ -351,7 +353,7 @@ def chart_daily_trend(cost_summary: CostSummary) -> go.Figure | None:
         marker=dict(color="rgba(99, 110, 250, 0.6)"),
         yaxis="y",
     ))
-    
+
     # Çağrılar (sağ axis)
     fig.add_trace(go.Scatter(
         x=dates,
@@ -361,7 +363,7 @@ def chart_daily_trend(cost_summary: CostSummary) -> go.Figure | None:
         marker=dict(color="red", size=8),
         yaxis="y2",
     ))
-    
+
     fig.update_layout(
         title="Günlük Maliyet ve Çağrı Trendi",
         height=400,
@@ -375,7 +377,7 @@ def chart_daily_trend(cost_summary: CostSummary) -> go.Figure | None:
 
 def chart_latency_vs_cost(cost_summary: CostSummary) -> go.Figure | None:
     """Latency vs Maliyet scatter (bubble).
-    
+
     X: Latency (ms)
     Y: Maliyet (USD)
     Bubble size: Çağrı sayısı
@@ -383,7 +385,7 @@ def chart_latency_vs_cost(cost_summary: CostSummary) -> go.Figure | None:
     """
     if not cost_summary.providers:
         return None
-    
+
     prov = cost_summary.providers
     x_data = [p.latency_ms for p in prov]
     y_data = [p.daily_cost_usd for p in prov]
@@ -391,7 +393,7 @@ def chart_latency_vs_cost(cost_summary: CostSummary) -> go.Figure | None:
     color_map = {"OK": "green", "WARNING": "orange", "ERROR": "red"}
     colors = [color_map.get(p.health_status, "blue") for p in prov]
     labels = [p.provider for p in prov]
-    
+
     fig = go.Figure(data=[go.Scatter(
         x=x_data,
         y=y_data,
@@ -416,20 +418,20 @@ def chart_latency_vs_cost(cost_summary: CostSummary) -> go.Figure | None:
 
 def chart_anomaly_flags(cost_summary: CostSummary) -> go.Figure | None:
     """Anomali flagleri: Tipi × Sayı (Bar chart).
-    
+
     Renklendirilme: Ciddiyet (kırmızı/turuncu/sarı).
     """
     if not cost_summary.anomalies:
         return None
-    
+
     # Tiptesine gore say
     anomaly_counts = {}
     for a in cost_summary.anomalies:
         anomaly_counts[a.flag_type] = anomaly_counts.get(a.flag_type, 0) + 1
-    
+
     types = list(anomaly_counts.keys())
     counts = list(anomaly_counts.values())
-    
+
     # Ciddiyet: Tipi sorgusu (ortalama ciddiyet alici)
     severity_map = {
         "high_cost": "ORTA",
@@ -446,7 +448,7 @@ def chart_anomaly_flags(cost_summary: CostSummary) -> go.Figure | None:
             colors.append("orange")
         else:
             colors.append("yellow")
-    
+
     fig = go.Figure(data=[go.Bar(
         x=types,
         y=counts,
@@ -464,29 +466,29 @@ def chart_anomaly_flags(cost_summary: CostSummary) -> go.Figure | None:
 
 def chart_cost_efficiency(cost_summary: CostSummary) -> go.Figure | None:
     """Maliyet Verimliliği Heatmap: Provider × Metrik.
-    
+
     Metrikler: Cost/Call, Success Rate, Latency
     """
     if not cost_summary.providers:
         return None
-    
+
     prov = cost_summary.providers[:10]  # Top 10
     providers = [p.provider for p in prov]
-    
+
     # Normalizasyon için max değerler
     max_cost_per_call = max((p.daily_avg_cost_per_call for p in prov), default=1.0) or 1.0
-    
+
     # Metrikler (0-1 ölçeğine normalize et)
     cost_per_call_norm = [p.daily_avg_cost_per_call / max_cost_per_call for p in prov]
     success_rate_norm = [p.success_rate / 100.0 for p in prov]
     latency_norm = [min(1.0, p.latency_ms / 5000.0) for p in prov]
-    
+
     z_data = [
         cost_per_call_norm,
         success_rate_norm,
         latency_norm,
     ]
-    
+
     fig = go.Figure(data=go.Heatmap(
         z=z_data,
         x=providers,
@@ -505,88 +507,94 @@ def chart_cost_efficiency(cost_summary: CostSummary) -> go.Figure | None:
 def render_cost_tab() -> None:
     """Admin sekmesi: AI Cost Dashboard."""
     st.header("💰 AI Maliyet Dashboard")
-    
+
     # Veri yükle
     cost_summary = load_cost_summary()
-    
+
     if cost_summary.provider_count == 0:
         st.info("⏳ Henüz maliyet verisi yok. Optimizer'ı çalıştırın: `python scripts/9router_optimizer.py`")
         return
-    
+
     # === KPI Kartları ===
     col1, col2, col3, col4 = st.columns(4)
-    
+
     with col1:
-        st.metric(
+        kpi_karti(
             "Günlük Maliyet",
             f"${cost_summary.total_daily_cost_usd:.4f}",
             delta=f"Aylık: ${cost_summary.estimated_monthly_cost_usd:.2f}",
+
+            kategori="maliyet",
         )
-    
+
     with col2:
-        st.metric(
+        kpi_karti(
             "Günlük Çağrılar",
             f"{cost_summary.total_daily_calls:,}",
             delta=f"Ort: ${cost_summary.total_avg_cost_per_call:.6f}",
+
+            kategori="maliyet",
         )
-    
+
     with col3:
-        st.metric(
+        kpi_karti(
             "Aktif Providerlar",
             cost_summary.active_provider_count,
             delta=f"Toplam: {cost_summary.provider_count}",
+            kategori="maliyet",
         )
-    
+
     with col4:
-        st.metric(
+        kpi_karti(
             "Sorunlu Providerlar",
             cost_summary.problematic_provider_count,
             delta_color="inverse",
+            kategori="maliyet",
         )
-    
+
     st.divider()
-    
+
     # === Grafikler ===
     chart_col1, chart_col2 = st.columns(2)
-    
+
     with chart_col1:
         fig_pie = chart_provider_breakdown(cost_summary)
         if fig_pie:
             st.plotly_chart(fig_pie, width="stretch")
         else:
             st.bar_chart({"Provider": [0]})
-    
+
     with chart_col2:
         fig_trend = chart_daily_trend(cost_summary)
         if fig_trend:
             st.plotly_chart(fig_trend, width="stretch")
         else:
             st.info("Trend verisi henüz mevcut değil.")
-    
+
     # Scatter + Anomali
     chart_col3, chart_col4 = st.columns(2)
-    
+
     with chart_col3:
         fig_scatter = chart_latency_vs_cost(cost_summary)
         if fig_scatter:
             st.plotly_chart(fig_scatter, width="stretch")
-    
+
     with chart_col4:
         fig_anomaly = chart_anomaly_flags(cost_summary)
         if fig_anomaly:
             st.plotly_chart(fig_anomaly, width="stretch")
-    
+
     # Heatmap
     st.subheader("Verimliliği Heatmap")
     fig_heatmap = chart_cost_efficiency(cost_summary)
     if fig_heatmap:
         st.plotly_chart(fig_heatmap, width="stretch")
-    
+
     st.divider()
-    
+
     # === Provider Detay Tablosu ===
     st.subheader("Provider Detayları")
-    
+
     provider_data = []
     for p in cost_summary.providers:
         provider_data.append({
@@ -601,16 +609,16 @@ def render_cost_tab() -> None:
             "Backoff": p.backoff_level,
             "Locks": p.model_locks,
         })
-    
+
     if provider_data:
         st.dataframe(provider_data, width="stretch")
-    
+
     st.divider()
-    
+
     # === Anomaliler ===
     if cost_summary.anomalies:
         st.subheader("⚠️ Tespit Edilen Anomaliler")
-        
+
         anomaly_data = []
         for a in cost_summary.anomalies:
             anomaly_data.append({
@@ -620,11 +628,11 @@ def render_cost_tab() -> None:
                 "Neden(ler)": a.reasons or f"{a.value:.2f} (eşik: {a.threshold:.2f})",
                 "Zaman": a.timestamp,
             })
-        
+
         st.dataframe(anomaly_data, width="stretch")
     else:
         st.success("✅ Anomali tespit edilmedi.")
-    
+
     # === Metadata ===
     with st.expander("📋 Metadata"):
         st.caption(f"**Güncellenme Zamanı:** {cost_summary.timestamp}")

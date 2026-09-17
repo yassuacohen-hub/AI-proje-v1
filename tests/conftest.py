@@ -82,6 +82,6 @@ def _pano_dosyalari_yalitim(tmp_path, monkeypatch):
 @pytest.fixture(autouse=True)
 def _no_real_env_secrets(monkeypatch):
     """Ensure tests never accidentally read production env secrets."""
-    for key in ("APIFY_API_TOKEN", "APIFY_API_KEY", "TELEGRAM_BOT_TOKEN"):
+    for key in ("APIFY_TOKEN", "APIFY_API_TOKEN", "APIFY_API_KEY", "TELEGRAM_BOT_TOKEN"):
         monkeypatch.delenv(key, raising=False)
 

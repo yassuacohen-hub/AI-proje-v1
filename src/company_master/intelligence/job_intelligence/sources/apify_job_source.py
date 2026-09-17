@@ -33,11 +33,11 @@ logger = logging.getLogger(__name__)
 
 class ApifyJobSource(BaseJobSource):
     """Apify Actor'lar uzerinden is ilani kazayan kaynak.
-    
+
     BaseJobSource framework'una uyuyor: _fetch yerine Apify REST API kullanir.
     PermissionRouter kontrolu atlanir (Apify cloud'da calisir).
     """
-    
+
     def __init__(
         self,
         source_name: str,
@@ -59,7 +59,7 @@ class ApifyJobSource(BaseJobSource):
         self.apify_client = ApifyClient(token=apify_token)
         self._current_run_meta: dict[str, Any] | None = None
         self._current_dataset_id: str | None = None
-    
+
     def _start_actor(self, run_input: dict[str, Any] | None = None) -> str:
         """Apify Actor baslatir ve run_id dondurur."""
         run_meta = self.apify_client.start_actor_run(
@@ -79,19 +79,19 @@ class ApifyJobSource(BaseJobSource):
             self.source_name, run_id, self.actor_id,
         )
         return run_id
-    
+
     def _fetch_dataset(self, limit: int = 100) -> list[dict[str, Any]]:
         """Apify dataset'ini sayfalari oku."""
         if not self._current_dataset_id:
             raise ApifyError("Dataset kimligi yok. Once _start_actor çağrılmalı.")
-        
+
         items = self.apify_client.fetch_dataset_items(
             dataset_id=self._current_dataset_id,
             max_items=limit,
         )
         logger.info("[%s] %d Apify dataset öğesi okundu", self.source_name, len(items))
         return items
-    
+
     def _apify_item_to_scraped_job(self, item: dict[str, Any]) -> ScrapedJob | None:
         """Apify dataset ogelerini ScrapedJob formatina donustur."""
         try:
@@ -118,47 +118,47 @@ class ApifyJobSource(BaseJobSource):
         except Exception as e:
             logger.debug("[%s] Apify item donusturme hatasi: %s", self.source_name, e)
             return None
-    
+
     def discover_job_urls(self, max_pages: int = 10) -> list[str]:
         """Apify Actor calistirir ve ilk sayfa URL'lerini getirir.
-        
+
         Gercek donus: Apify dataset'inden ilk sayfa ID'ler getirilir.
         Sonra parse_job_detail dataset ogelerinden ScrapedJob olusturur.
         """
         run_id = self._start_actor()
         items = self._fetch_dataset(limit=max_pages * 10)
-        
+
         urls = [item.get("url", item.get("link", "")) for item in items if item.get("url") or item.get("link")]
         logger.info("[%s] %d Apify URL'si keşfedildi (run_id=%s)", self.source_name, len(urls), run_id)
         return urls
-    
+
     def parse_job_detail(self, html: str, url: str) -> ScrapedJob | None:
         """Apify dataset ogelerinden ScrapedJob olusturur.
-        
+
         Not: html parametresi Apify context'inde kullanılmaz;
         donusum _fetch_dataset icinde yapilir. Bu metod sadece
         BaseJobSource API'sine uyma amacindadir.
         """
         return None
-    
+
     def run_full_scrape(self, max_pages: int = 10, output_file: str | None = None) -> list[ScrapedJob]:
         """Apify uzerinden tam scrape. BaseJobSource override."""
         logger.info("[%s] Apify scrape baslıyor (max_pages=%d)", self.source_name, max_pages)
-        
+
         run_id = self._start_actor()
         items = self._fetch_dataset(limit=max_pages * 10)
-        
+
         jobs: list[ScrapedJob] = []
         for item in items:
             job = self._apify_item_to_scraped_job(item)
             if job:
                 jobs.append(job)
-        
+
         logger.info("[%s] Apify scrape tamamlandı: %d ilan", self.source_name, len(jobs))
-        
+
         if output_file and jobs:
             self._save_jsonl(jobs, output_file)
-        
+
         return jobs
 
 
@@ -166,7 +166,7 @@ class ApifyJobSource(BaseJobSource):
 
 def run_apify_pilot(actor_id: str = "ziyrak/kariyer-scraper", output_file: str = "data/job_intelligence/apify_pilot.jsonl") -> dict[str, Any]:
     """Apify pilot run'u: 10 firma ile test.
-    
+
     Donus:
         {
             "actor_id": str,
@@ -179,23 +179,23 @@ def run_apify_pilot(actor_id: str = "ziyrak/kariyer-scraper", output_file: str =
         }
     """
     logger.info("APIFY PILOT baslatiliyor: actor=%s", actor_id)
-    
+
     source = ApifyJobSource(source_name="apify-pilot", actor_id=actor_id)
     run_meta = source._start_actor()
     run_id = run_meta.get("id", "unknown")
     dataset_id = run_meta.get("defaultDatasetId", "")
-    
+
     items = source._fetch_dataset(limit=10)
-    
+
     jobs = []
     for item in items:
         job = source._apify_item_to_scraped_job(item)
         if job:
             jobs.append(job)
-    
+
     if jobs:
         source._save_jsonl(jobs, output_file)
-    
+
     result = {
         "actor_id": actor_id,
         "run_id": run_id,
@@ -205,7 +205,7 @@ def run_apify_pilot(actor_id: str = "ziyrak/kariyer-scraper", output_file: str =
         "output_file": output_file,
         "timestamp": datetime.now().isoformat(),
     }
-    
+
     logger.info("APIFY PILOT tamamlandi: %s", result)
     return result
 

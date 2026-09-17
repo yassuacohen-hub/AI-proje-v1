@@ -109,17 +109,17 @@ def build_agent_page(agent_id: str, board: List[dict]) -> str:
     """Agent icin wiki sayfa icerigi olustur."""
     active_tasks = get_agent_tasks(board, agent_id)
     completed = get_completed_tasks(board, agent_id)
-    
+
     lines = []
     lines.append(f"# {agent_id}")
     lines.append("")
-    
+
     agent_info = AGENT_TYPE_MAP.get(agent_id, {"role": "internal", "tool": "Custom"})
     lines.append(f"- **Tip:** {agent_info['role']}")
     lines.append(f"- **Araclar:** {agent_info['tool']}")
     lines.append(f"- **Guncellenme:** {datetime.now(timezone.utc).isoformat()}")
     lines.append("")
-    
+
     lines.append("## Aktif Gorevler")
     lines.append("")
     if active_tasks:
@@ -130,7 +130,7 @@ def build_agent_page(agent_id: str, board: List[dict]) -> str:
     else:
         lines.append("- Aktif gorev yok.")
     lines.append("")
-    
+
     lines.append("## Son Tamamlanan Gorevler")
     lines.append("")
     if completed:
@@ -139,11 +139,11 @@ def build_agent_page(agent_id: str, board: List[dict]) -> str:
     else:
         lines.append("- Son tamamlanan gorev yok.")
     lines.append("")
-    
+
     if active_tasks or completed:
         lines.append("---")
         lines.append(f"*Bu sayfa {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')} UTC'de wiki_sync_agents.py tarafindan olusturuldu.*")
-    
+
     return "\n".join(lines) + "\n"
 
 
@@ -164,9 +164,9 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="Show without changes")
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
     args = parser.parse_args()
-    
+
     WIKI_AGENTS.mkdir(parents=True, exist_ok=True)
-    
+
     board = read_task_board()
     if args.agent:
         agents = [args.agent] if args.agent in ALL_AGENTS else []
@@ -175,12 +175,12 @@ def main() -> int:
             return 1
     else:
         agents = sorted(ALL_AGENTS)
-    
+
     total = 0
     for agent_id in agents:
         content = build_agent_page(agent_id, board)
         agent_file = WIKI_AGENTS / f"{agent_id}.md"
-        
+
         if args.dry_run:
             print(f"[DRY-RUN] Would write: {agent_file}")
             total += 1
@@ -189,10 +189,10 @@ def main() -> int:
             total += 1
             if args.verbose:
                 print(f"Updated: {agent_file}")
-        
+
         if not args.dry_run:
             update_wiki_log(agent_id, total)
-    
+
     print(f"\n=== Wiki Agent Sync Summary ===")
     print(f"Agents synced: {total}")
     if not args.dry_run:

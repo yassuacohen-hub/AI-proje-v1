@@ -17,7 +17,7 @@ with eng.connect() as conn:
         AND sr.raw_payload->>'emailler' IS NOT NULL
         LIMIT 10
     """)).fetchall()
-    
+
     for i, row in enumerate(rows):
         val = row[0]
         print(f"Record {i+1}: {val[:200]}")

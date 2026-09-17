@@ -11,7 +11,7 @@ Kapsam:
 Kurallar:
   - st.cache_data ttl=60
   - Plotly fallback: st.bar_chart
-  - st.metric kullanımı
+  - kpi_karti (web_dashboard.charts) kullanımı
 """
 from __future__ import annotations
 
@@ -34,6 +34,7 @@ from company_master.kaynak_guvenilirlik import (
     RELIABILITY_YELLOW,
     hesapla_toplu,
 )
+from web_dashboard.charts import kpi_karti
 
 # Analiz edilecek alanlar: kolon adı -> okunabilir etiket
 _QUALITY_FIELDS: dict[str, str] = {
@@ -392,16 +393,17 @@ def render_quality_tab() -> None:
 
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        st.metric("📦 Toplam Firma", f"{overview['toplam_firma']:,}")
+        kpi_karti("📦 Toplam Firma", f"{overview['toplam_firma']:,}", kategori="kalite")
     with c2:
-        st.metric("📊 Ortalama Skor", f"{overview['ortalama_skor']:.1f}")
+        kpi_karti("📊 Ortalama Skor", f"{overview['ortalama_skor']:.1f}", kategori="kalite")
     with c3:
-        st.metric("📐 Medyan Skor", f"{overview['medyan_skor']:.1f}")
+        kpi_karti("📐 Medyan Skor", f"{overview['medyan_skor']:.1f}", kategori="kalite")
     with c4:
-        st.metric(
+        kpi_karti(
             "⚠️ Riskli Firma (QS<30)",
             f"{overview['riskli_sayisi']:,}",
-            f"%{overview['riskli_orani']} oranında" if overview["riskli_sayisi"] else None,
+            delta=f"%{overview['riskli_orani']} oranında" if overview["riskli_sayisi"] else None,
+            kategori="kalite",
         )
 
     st.divider()

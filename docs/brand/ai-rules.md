@@ -1,5 +1,10 @@
 # AI Brand Rules
 
+> **Kapsam (D-45):** Bu kurallar pazarlama/web/logo/marka metni üretimi içindir. Ürün UI
+> paleti ayrıdır: `src/company_master/ui/tokens.py` (Indigo `#6366f1`, değişmez) — birleştirme YOK.
+> **Yazım (D-44):** yalnız **Huginn / Muninn / Odin**; yasak yazımların tam listesi ve teknik
+> SSOT: `docs/AJAN_DETAY.md` §11.
+
 Always read brand.md before generating anything.
 
 Always use:

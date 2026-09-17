@@ -60,12 +60,12 @@ def main() -> int:
 
             result = conn.execute(
                 text("""
-                    UPDATE companies 
+                    UPDATE companies
                     SET vergi_no = :vergi_no,
                         website_domain = COALESCE(:web, website_domain),
                         updated_at = NOW()
                     WHERE company_id = (
-                        SELECT c.company_id 
+                        SELECT c.company_id
                         FROM companies c
                         JOIN source_records sr ON sr.source_record_id = c.source_record_id
                         WHERE sr.raw_name = :unvan

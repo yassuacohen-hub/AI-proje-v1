@@ -45,7 +45,8 @@ def test_render_admin_login_clears_token_on_api_error(monkeypatch):
     admin_auth.render_admin_login()
 
     assert "admin_token" not in state
-    error.assert_called_once_with("Giriş başarısız: invalid credentials")
+    # SEC-AUTH-01 Y-2: sunucu detayı genel mesajla gizlenir.
+    error.assert_called_once_with("Giriş başarısız: e-posta/şifre kontrol ediniz.")
 
 
 def test_render_admin_login_uses_post_with_json(monkeypatch):

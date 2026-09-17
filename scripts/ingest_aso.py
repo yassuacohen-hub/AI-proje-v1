@@ -33,11 +33,11 @@ def main():
     input_file = ROOT / "data" / "aso" / "aso_full.jsonl"
     lines = input_file.read_text(encoding="utf-8").strip().split("\n")
     print(f"ASO dosyasi: {len(lines)} kayit")
-    
+
     inserted = 0
     updated = 0
     errors = 0
-    
+
     with engine.begin() as conn:
         for i, line in enumerate(lines[:10]):  # First 10 for debugging
             try:
@@ -48,26 +48,26 @@ def main():
                 phones = extract_phone(rec.get("telefonlar"))
                 email = extract_email(rec.get("eposta"))
                 web = rec.get("web_sitesi") or None
-                
+
                 print(f"[{i}] Name: '{tradename}'")
                 print(f"    Tax: '{tax}' (type: {type(tax)})")
                 print(f"    NACE: '{nace}'")
                 print(f"    Phones: {phones}")
                 print(f"    Email: {email}")
                 print(f"    Web: {web}")
-                
-                if not tradename: 
+
+                if not tradename:
                     print("    Skipping - empty name")
                     continue
-                
+
                 # Check if already exists by tax_number
                 exists = None
                 if tax:
                     r = conn.execute(text("SELECT company_id FROM companies WHERE tax_number = :tax"), {"tax": tax}).fetchone()
                     if r: exists = r[0]
-                
+
                 company_id = exists or str(uuid.uuid4())
-                
+
                 if exists:
                     print(f"    Updating existing: {exists}")
                     sql = text("""
@@ -86,7 +86,7 @@ def main():
                         VALUES (:cid, :lname, :tn, :tax, :nace, :nace, :phone, :email, :web, :web, TRUE, TRUE)
                     """)
                     params = {"cid": company_id, "lname": tradename, "tn": tradename, "tax": tax, "nace": nace, "phone": phones, "email": email, "web": web}
-                
+
                 print(f"    Executing SQL...")
                 result = conn.execute(sql, params)
                 print(f"    Success: {result.rowcount} rows affected")
@@ -94,14 +94,14 @@ def main():
                     updated += 1
                 else:
                     inserted += 1
-                    
+
             except Exception as e:
                 print(f"    ERROR: {type(e).__name__}: {e}")
                 errors += 1
                 import traceback
                 traceback.print_exc()
                 continue
-    
+
     print(f"\nASO ingest tamamlandi (debug):")
     print(f"  Yeni eklendi: {inserted}")
     print(f"  Guncellendi: {updated}")

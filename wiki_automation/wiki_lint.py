@@ -146,18 +146,18 @@ def check_orphans(board: List[dict]) -> List[str]:
     """wiki/tasks ve wiki/agents'da task_board.json' olmayan ID'leri bul."""
     task_ids = {t.get("task_id") for t in board if t.get("task_id")}
     orphans = []
-    
+
     if WIKI_TASKS.exists():
         for f in WIKI_TASKS.glob("*.md"):
             if f.stem not in task_ids:
                 orphans.append(str(f))
-    
+
     if WIKI_AGENTS.exists():
         agent_ids = {t.get("sahip") for t in board if t.get("sahip")}
         for f in WIKI_AGENTS.glob("*.md"):
             if f.stem not in agent_ids:
                 orphans.append(str(f))
-    
+
     return orphans
 
 
@@ -165,7 +165,7 @@ def check_broken_links() -> List[str]:
     """wiki icindeki [[link]] formatindaki broken linkleri tespit et."""
     broken = []
     link_targets = set()
-    
+
     # Tüm .md dosyalarindan link hedeflerini topla
     for md_file in WIKI_ROOT.rglob("*.md"):
         if not md_file.exists():
@@ -174,19 +174,19 @@ def check_broken_links() -> List[str]:
         links = WIKILINK_RE.findall(content)
         for link in links:
             link_targets.add(link)
-    
+
     # Her hedefin gecerli olup olmadigini kontrol et
     valid_targets = set()
     for md_file in WIKI_ROOT.rglob("*.md"):
         valid_targets.add(md_file.stem)
         valid_targets.add(md_file.relative_to(WIKI_ROOT).as_posix().replace(".md", ""))
-    
+
     for target in link_targets:
         # Farkli formatlari dene
         if target not in valid_targets:
             if target + ".md" not in valid_targets:
                 broken.append(target)
-    
+
     return broken
 
 
@@ -194,11 +194,11 @@ def check_contradiction_density() -> Tuple[int, int]:
     """contradictions.md'deki son 24 saattaki giriş sayisini hesapla."""
     if not CONTRADICTIONS.exists():
         return 0, 0
-    
+
     content = CONTRADICTIONS.read_text(encoding="utf-8")
     now = datetime.now(timezone.utc)
     cutoff = now - timedelta(hours=CESITKINKI_SURE)
-    
+
     entries = re.findall(r"Contradictions detected at (\d{4}-\d{2}-\d{2}T[\d:]+\+00:00)", content)
     recent = 0
     for entry in entries:
@@ -208,7 +208,7 @@ def check_contradiction_density() -> Tuple[int, int]:
                 recent += 1
         except ValueError:
             pass
-    
+
     return recent, CESITKINKI_ESEK
 
 
@@ -216,10 +216,10 @@ def check_stale_content(board: List[dict]) -> List[str]:
     """7 gun üzeri güncellenmemis aktif gorev sayfalari."""
     stale = []
     cutoff = datetime.now(timezone.utc) - timedelta(days=YETERLIK_SURE)
-    
+
     if not WIKI_TASKS.exists():
         return stale
-    
+
     for f in WIKI_TASKS.glob("*.md"):
         try:
             content = f.read_text(encoding="utf-8")
@@ -233,14 +233,14 @@ def check_stale_content(board: List[dict]) -> List[str]:
                     stale.append(f"{f.name} (last updated: {updated_str})")
         except (OSError, ValueError, UnicodeDecodeError):
             pass
-    
+
     return stale
 
 
 def check_frontmatter() -> List[str]:
     """Gerekli frontmatter alanlarinin eksik oldugu sayfalari bul."""
     missing = []
-    
+
     for directory in [WIKI_TASKS, WIKI_AGENTS]:
         if not directory.exists():
             continue
@@ -253,51 +253,51 @@ def check_frontmatter() -> List[str]:
                     missing.append(f"{f.name}: {', '.join(missing_fields)}")
             except (OSError, UnicodeDecodeError):
                 pass
-    
+
     return missing
 
 
 def lint() -> Dict:
     """Tum kontrolleri calistir ve rapor ver."""
     board = read_task_board()
-    
+
     results = {
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "checks": {},
         "errors": [],
         "warnings": []
     }
-    
+
     # 1. Orphan kontrol
     orphans = check_orphans(board)
     results["checks"]["orphans"] = {"count": len(orphans), "items": orphans}
     if orphans:
         results["warnings"].append(f"Orphan files found: {len(orphans)}")
-    
+
     # 2. Broken links
     broken = check_broken_links()
     results["checks"]["broken_links"] = {"count": len(broken), "items": broken}
     if broken:
         results["warnings"].append(f"Broken links found: {len(broken)}")
-    
+
     # 3. Contradiction density
     recent, esik = check_contradiction_density()
     results["checks"]["contradiction_density"] = {"count": recent, "threshold": esik}
     if recent > esik:
         results["errors"].append(f"Contradiction density exceeded: {recent}/{esik}")
-    
+
     # 4. Stale content
     stale = check_stale_content(board)
     results["checks"]["stale_content"] = {"count": len(stale), "items": stale}
     if stale:
         results["warnings"].append(f"Stale content: {len(stale)} files older than {YETERLIK_SURE} days")
-    
+
     # 5. Frontmatter
     missing = check_frontmatter()
     results["checks"]["frontmatter"] = {"missing": len(missing), "items": missing}
     if missing:
         results["warnings"].append(f"Missing frontmatter: {len(missing)} files")
-    
+
     return results
 
 
@@ -310,7 +310,7 @@ def main() -> int:
     parser.add_argument("--output", "-o", help="Save report to JSON file")
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
     args = parser.parse_args()
-    
+
     if args.fix:
         print("\n=== Auto-fix mode ===")
         fixed_frontmatter, fm_log = fix_frontmatter()
@@ -323,7 +323,7 @@ def main() -> int:
         if link_log and args.verbose:
             for l in link_log:
                 print("  " + l)
-    
+
     results = lint()
     # JSON output
     if args.output:
@@ -331,33 +331,33 @@ def main() -> int:
         out_path.write_text(json.dumps(results, ensure_ascii=False, indent=2), encoding="utf-8")
         if args.verbose:
             print(f"Report saved to {out_path}")
-    
+
     # Console output
     print("\n=== Wiki Lint Results ===")
     print(f"Timestamp: {results['timestamp']}")
-    
+
     for check_name, check_data in results["checks"].items():
         status = "OK" if check_data.get("count", 0) == 0 or check_data.get("missing", 0) == 0 else "WARN"
         print(f"  [{status}] {check_name}: {check_data.get('count', 0)}")
-    
+
     if results["errors"]:
         print(f"\n[ERR] ERRORS ({len(results['errors'])}):")
         for err in results["errors"]:
             print(f"  - {err}")
-    
+
     if results["warnings"]:
         print(f"\n[WARN] WARNINGS ({len(results['warnings'])}):")
         for warn in results["warnings"]:
             print(f"  - {warn}")
-    
+
     if not results["errors"] and not results["warnings"]:
         print("\n[OK] All checks passed!")
-    
+
     if args.ci and (results["errors"] or results["warnings"]):
         total_issues = len(results['errors']) + len(results['warnings'])
         print(f"\nCI FAILED - {total_issues} issue(s) ({len(results['errors'])} error(s), {len(results['warnings'])} warning(s))")
         return 1
-    
+
     return 0
 
 

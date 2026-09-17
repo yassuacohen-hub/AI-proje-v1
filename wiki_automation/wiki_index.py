@@ -91,7 +91,7 @@ def build_index_content(board: List[dict]) -> str:
     lines.append("")
     lines.append(f"*Guncellenme: {datetime.now(timezone.utc).isoformat()}*")
     lines.append("")
-    
+
     active = get_active_tasks(board)
     lines.append("## Aktif Gorevler")
     lines.append("")
@@ -103,7 +103,7 @@ def build_index_content(board: List[dict]) -> str:
     else:
         lines.append("- Aktif gorev yok.")
     lines.append("")
-    
+
     recent = get_recent_tasks(board)
     lines.append("## Son 7 Gun")
     lines.append("")
@@ -113,7 +113,7 @@ def build_index_content(board: List[dict]) -> str:
     else:
         lines.append("- Son 7 gundeki gorev yok.")
     lines.append("")
-    
+
     idle = get_idle_agents(board)
     lines.append("## Ajan Durumlari")
     lines.append("")
@@ -123,17 +123,17 @@ def build_index_content(board: List[dict]) -> str:
     else:
         lines.append("- Aktif ajan yok.")
     lines.append("")
-    
+
     lines.append("## Konu Basliklari")
     lines.append("")
     lines.append("- Mimari Kararlar: [[ADR-template]]")
     lines.append("- Ongoruler: [[10_ankara_osb_sentez]]")
     lines.append("- Hata Notlari: [[Bug-template]]")
     lines.append("")
-    
+
     lines.append("---")
     lines.append(f"*Bu sayfa {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')} UTC'de wiki_index.py tarafindan guncellendi.*")
-    
+
     return "\n".join(lines) + "\n"
 
 
@@ -144,18 +144,18 @@ def build_log_content(board: List[dict]) -> str:
     lines.append("")
     lines.append(f"*Son guncelleme: {datetime.now(timezone.utc).isoformat()}*")
     lines.append("")
-    
+
     lines.append("## Son Islemler")
     lines.append("")
-    
+
     # Task_board'dan son islemleri ekle
     for t in board[:10]:
         lines.append(f"- [{t.get('task_id','-')}] {t.get('baslik','-')} — {t.get('sahip','-')} ({t.get('durum','-')})")
-    
+
     lines.append("")
     lines.append("---")
     lines.append(f"*Bu sayfa {datetime.now(timezone.utc).strftime('%Y-%m-%d %H:%M:%S')} UTC'de guncellendi.*")
-    
+
     return "\n".join(lines) + "\n"
 
 
@@ -164,24 +164,24 @@ def main() -> int:
     parser.add_argument("--dry-run", action="store_true", help="Show without changes")
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
     args = parser.parse_args()
-    
+
     board = read_task_board()
-    
+
     index_content = build_index_content(board)
     log_content = build_log_content(board)
-    
+
     if args.dry_run:
         print("[DRY-RUN] Would write 00_index.md")
         print("[DRY-RUN] Would write 00_log.md")
         return 0
-    
+
     WIKI_INDEX.write_text(index_content, encoding="utf-8")
     WIKI_LOG.write_text(log_content, encoding="utf-8")
-    
+
     if args.verbose:
         print(f"Updated: {WIKI_INDEX}")
         print(f"Updated: {WIKI_LOG}")
-    
+
     print(f"Wiki index updated: {WIKI_INDEX}")
     print(f"Wiki log updated: {WIKI_LOG}")
     return 0

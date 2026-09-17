@@ -18,6 +18,7 @@ from typing import Any
 
 import pandas as pd
 import streamlit as st
+from web_dashboard.charts import kpi_karti
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "src"))
@@ -97,14 +98,14 @@ def render_dlq_tab() -> None:
     st.divider()
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        st.metric("Toplam DLQ", f"{stats['dlq_toplam']:,}")
+        kpi_karti("Toplam DLQ", f"{stats['dlq_toplam']:,}", kategori="uyari")
     with c2:
         retry = stats.get("retryable", 0)
-        st.metric("Retry", f"{retry:,}")
+        kpi_karti("Retry", f"{retry:,}", kategori="uyari")
     with c3:
-        st.metric("Non-Retry", f"{stats.get('non_retryable', 0):,}")
+        kpi_karti("Non-Retry", f"{stats.get('non_retryable', 0):,}", kategori="uyari")
     with c4:
-        st.metric("Ortalama Yaş", f"{stats.get('ortalama_yas_saat', 0):.1f} saat")
+        kpi_karti("Ortalama Yaş", f"{stats.get('ortalama_yas_saat', 0):.1f} saat", kategori="uyari")
 
     # --- Hata Türleri ---
     st.divider()
@@ -127,9 +128,9 @@ def render_dlq_tab() -> None:
     if eski and yeni:
         c1, c2 = st.columns(2)
         with c1:
-            st.metric("En Eski", eski)
+            kpi_karti("En Eski", eski, kategori="uyari")
         with c2:
-            st.metric("En Yeni", yeni)
+            kpi_karti("En Yeni", yeni, kategori="uyari")
 
     # --- DLQ Girdileri ---
     st.divider()

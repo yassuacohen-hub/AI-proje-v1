@@ -2,6 +2,9 @@
 
 > Durum: **Onaylandı (sahip)** · Tarih: 2026-09-14 · Sahip kararlarıyla kesinleşti.
 > Bu dosya Code moduna geçişte bağlam taşıyıcısıdır. Uzun anlatım yok; karar + adım.
+> **Marka kiti konumu (MARKA-REVIZE-01, D-44):** Kurumsal kimlik seti (marka metni, logo,
+> web/pazarlama prompt'ları, tasarım token'ları) artık `docs/brand/` altındadır; bu plandaki
+> eski "kök dizin" atıfları o klasörü kasteder. Teknik SSOT: `docs/AJAN_DETAY.md` §11.
 
 ---
 
@@ -141,7 +144,7 @@ JSON `@lru_cache` ile tek kez okunur.
 10. **`veri` katmanında mitolojik sözcük yasağı** — yasak listesi: `Huginn, Muninn, Odin, Bifröst, diyar, kuzgun, taht, mühür` (marka adı geçse bile `veri` metni anlatısallaşmaz)
 11. `cerceve` + obje değerinde **`cirak` anahtarı zorunlu** (usta opsiyonel)
 12. `en` değeri **asla obje değil** (tek varyant kuralı)
-13. Marka yazımı: `Muginn|Hugin\b|Munin\b|Hugginn` gibi hatalı yazımlar hiçbir metinde geçmez
+13. Marka yazımı: `Huggin\b|Hugginn|Hugin\b|Munin\b|Muginn|Munnin|Odinn|Odın` gibi hatalı yazımlar hiçbir metinde geçmez; tarama kapsamı `docs/brand/**/*.md` dahil tüm marka dokümanlarıdır (test ile zorlanır: `tests/test_i18n.py`)
 
 ---
 
@@ -235,7 +238,7 @@ Hedef: `ANA_KURALLAR.md`, `AGENTS.md`, `.roorules`, `.clinerules`
 | S7 | Muninn silmez | Metinde "arşivlendi"; şema değişmez |
 | S8 | Rozet ilerlemesi | Ayrı görev **GAM-01**; bu turda kurulmaz |
 | S9 | `en` çatallanması | Hayır — tek varyant |
-| S10 | Marka yazımı | `Huginn/Muninn/Odin` çevrilmez; `Muginn/Hugin/Munin` yazımları **yasak** (test ile zorlanır) |
+| S10 | Marka yazımı | `Huginn/Muninn/Odin` çevrilmez; `Huggin/Hugginn/Hugin/Munin/Muginn/Munnin/Odinn/Odın` yazımları **yasak** (test ile zorlanır) |
 | S11 | AI görünen adı | **AÇIK** — "Abrakadabra" (mevcut) vs **MIMIR** 🗿 önerisi; teknik ad `odin_ai` |
 | S12 | Oyunlaştırma ölçümü | Şimdilik ölçüm kurulmaz; rozet olayları ileride audit log'a düşer |
 

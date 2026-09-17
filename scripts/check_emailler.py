@@ -13,7 +13,7 @@ with eng.connect() as conn:
         WHERE raw_payload->>'emailler' IS NOT NULL
         AND raw_payload->>'emailler' != ''
     """)).fetchall()
-    
+
     non_empty = 0
     empty = 0
     for row in rows:
@@ -26,6 +26,6 @@ with eng.connect() as conn:
                 empty += 1
         except:
             empty += 1
-    
+
     print(f"emailler dolu liste: {non_empty}")
     print(f"emailler bos liste: {empty}")

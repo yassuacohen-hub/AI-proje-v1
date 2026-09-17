@@ -304,7 +304,7 @@ class TestHesaplaToplu:
         sonuc = hesapla_toplu(kaynaklar)
         assert len(sonuc) == 3
         assert all(isinstance(s, KaynakSaglik) for s in sonuc)
-        
+
         # Birinci (mükemmel) >= ikinci (iyi) >= üçüncü (kötü)
         assert sonuc[0].skor >= sonuc[1].skor
         assert sonuc[1].skor >= sonuc[2].skor

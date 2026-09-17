@@ -46,14 +46,14 @@ with engine.connect() as conn:
         WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
         AND (c.nace_code IS NULL OR c.nace_code = '')
     """)).fetchall()
-    
+
     print(f"NACE eksik firma: {len(rows)}")
-    
+
     updated = 0
     for row in rows:
         company_id, legal_name, current_nace = row
         key = (legal_name or "").lower().strip()
-        
+
         if key in aso_lookup:
             nace = aso_lookup[key]
             conn.execute(text("""
@@ -61,6 +61,6 @@ with engine.connect() as conn:
                 WHERE company_id = :cid
             """), {"nace": nace, "cid": company_id})
             updated += 1
-    
+
     conn.commit()
     print(f"NACE doldurulan firma: {updated}")

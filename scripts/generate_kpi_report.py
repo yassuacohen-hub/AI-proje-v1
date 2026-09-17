@@ -31,11 +31,11 @@ def main():
             LEFT JOIN source_records sr ON sr.source_record_id = c.source_record_id
             WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
         """)).mappings().first()
-        
+
         total = r["total"] or 0
         def p(n): return f"{n} ({n/total*100:.1f}%)" if total else "0 (0.0%)"
         def s(v): return f"{v:.2f}" if v else "0.00"
-        
+
         report = f"""# Veri Kalitesi KPI Dashboard
 
 Tarih: 2026-09-03
@@ -67,7 +67,7 @@ Toplam Firma: {total}
             report += "VERI KALITESI: ORTA - Detay scrape ile yukseltilebilir\n"
         else:
             report += "VERI KALITESI: DUSUK - Detay scrape oncelikli\n"
-        
+
         print(report)
         # Markdown dosyaya kaydet
         rapor_dosya = ROOT / "data" / "kpi_raporu.md"

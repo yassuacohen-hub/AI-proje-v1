@@ -21,7 +21,7 @@ with eng.connect() as conn:
         print(f'  {row[0]} karakter: {row[1]} firma')
         total += row[1]
     print(f'Toplam: {total}')
-    
+
     # Check if ASO source has VKN data
     rows2 = conn.execute(text("""
         SELECT COUNT(*) as cnt FROM companies c
@@ -30,7 +30,7 @@ with eng.connect() as conn:
         AND COALESCE(c.tax_number, c.vergi_no) IS NOT NULL
     """)).scalar()
     print(f'\nASO kaynakli VKN: {rows2}')
-    
+
     # Check how many have ticaretSicilNo in raw_payload
     rows3 = conn.execute(text("""
         SELECT COUNT(*) as cnt FROM source_records

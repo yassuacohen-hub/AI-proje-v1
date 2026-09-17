@@ -1,9 +1,9 @@
 # LOGO.md - Huginn & Muninn Logo Uretim Prompt'lari
 
-> Uretim oncesi kok dizinindeki `ai-rules.md` (AI Brand Rules) okunur; pozisyonlama: Startup Intelligence Platform, ASLA OSINT Tool.
+> Uretim oncesi `docs/brand/ai-rules.md` (AI Brand Rules) okunur; pozisyonlama: Startup Intelligence Platform, ASLA OSINT Tool.
 
 Bu dosya, logo varyasyonlarinin uretilecegi `assets/` klasorunun prompt kaynagidir.
-Kurumsal kimligin metin kaynagi: kok dizindeki `brand.md`; tasarim token'lari: `design-tokens.json`.
+Kurumsal kimligin metin kaynagi: `docs/brand/brand.md`; tasarim token'lari: `docs/brand/design-tokens.json`.
 Uretilecek tum varyasyonlar ayni marka kimligini korumak zorundadir.
 
 ## Hedef dosyalar (bu klasore uretilecek)

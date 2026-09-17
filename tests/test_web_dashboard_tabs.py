@@ -167,7 +167,7 @@ def test_dlq_tab_handles_empty_and_populated_data(monkeypatch):
     metric = MagicMock()
     bar = MagicMock()
     dataframe = MagicMock()
-    monkeypatch.setattr(admin_dlq.st, "metric", metric)
+    monkeypatch.setattr(admin_dlq, "kpi_karti", metric)
     monkeypatch.setattr(admin_dlq.st, "bar_chart", bar)
     monkeypatch.setattr(admin_dlq.st, "dataframe", dataframe)
     monkeypatch.setattr(admin_dlq.st, "info", MagicMock())
@@ -207,3 +207,4 @@ def test_performance_loaders_and_empty_render(monkeypatch):
     admin_performance.render_performance_tab()
 
     info.assert_called_once_with("Performans verisi yüklenemedi.")
+

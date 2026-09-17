@@ -21,8 +21,8 @@ def optimize_threshold():
     # Mevcut eşleştirmeleri analiz et
     with engine.connect() as conn:
         result = conn.execute(text("""
-            SELECT 
-                CASE 
+            SELECT
+                CASE
                     WHEN similarity_score >= 0.90 THEN 'high'
                     WHEN similarity_score >= 0.80 THEN 'medium'
                     ELSE 'low'
@@ -36,7 +36,7 @@ def optimize_threshold():
 
         # Threshold optimizasyonu için istatistikleri al
         threshold_stats = conn.execute(text("""
-            SELECT 
+            SELECT
                 AVG(similarity_score) as avg_score,
                 MIN(similarity_score) as min_score,
                 MAX(similarity_score) as max_score,

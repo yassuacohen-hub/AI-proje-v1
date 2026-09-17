@@ -3210,13 +3210,13 @@
     "baslik": "Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar)",
     "sahip": "cline",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-15T15:15:17",
     "bitis": "2026-09-15T15:56:09",
     "dosyalar": [
       "data/orchestrator/REV-UI-SIDEBAR-02_bulgular_2026-09-15_cline.md"
     ],
-    "not": "",
+    "not": "Teslim (cline): UI review tamam: 7 test PASS (test_app_nav_tek_tik.py), sidebar/topbar/NAV-IA-04 hesap kart popover dogrulandi. Bulgular: data/orchestrator/REV-UI-SIDEBAR-02_bulgilar_2026-09-17_cline.md. Kodlama temiz, tum suit 3567 passed.",
     "source": "ic",
     "from_agent": null,
     "not_": "MVP-ADMIN: sahip emri ile ertelendi (once 4 ekran canliya cikacak: ana_kontrol, kpi, karar_defteri, kullanicilar)",
@@ -3720,11 +3720,11 @@
     "baslik": "Marka kalip dosyalari ORTAK REVIZE (roo + cline) - ileri tarihli planlama",
     "sahip": "cline",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "review",
     "baslangic": "2026-09-16T21:10:37",
     "bitis": null,
     "dosyalar": [],
-    "not": "Devredildi: roo -> cline (Dokuman katmani cline'a; brif docs/plans/MARKA-REVIZE-01_brief.md (D-44/D-45). Kilit: AGENTS.md, ANA_KURALLAR.md, docs/AJAN_DETAY.md, docs/brand/**, plans/MRK_*.md. Teslim: gorev_kutusu teslim; rapor data/orchestrator/MARKA-REVIZE-01_rapor_<tarih>_cline.md)",
+    "not": "Teslim (cline): Dokuman katmani: 23 duzenleme/18 dosya. AGENTS.md+ANA_KURALLAR.md+AJAN_DETAY.md yasak listesi tam + docs/brand/ kopru; AJAN_DETAY 11 yeni 'Marka kiti D-44/D-45 kapsam ayrimi' alt bolumu; docs/brand icinde 13 bayat 'kok dizin' atfi duzeltildi; company.md+ai-rules.md D-45 kapsam notu; plans brief'lerine ARSIV notu. Kanit: findstr 'kok dizin' docs/brand=0 satir; pytest test_i18n+test_marka_denetim=1419 passed; kodlama denetimi dokunulan 18 dosyada temiz. Rapor: data/orchestrator/MARKA-REVIZE-01_rapor_2026-09-17_cline.md. Kapsam disi bulgu (marka_denetim.py muafiyet eksikligi, 140 yanlis pozitif): MARKA-REVIZE-01_bulgular_2026-09-17_cline.md",
     "source": "ic",
     "from_agent": null
   },
@@ -3819,7 +3819,7 @@
     "baslik": "Auth uclari guvenlik duzeltmeleri (REV-BATCH-01 Y-1..Y-4, O-1, O-2, O-4, D-1, D-4)",
     "sahip": "cline",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "review",
     "baslangic": "2026-09-16T22:27:05",
     "bitis": null,
     "dosyalar": [
@@ -3828,7 +3828,7 @@
       ".gitignore",
       "scripts/admin_login_probe.py"
     ],
-    "not": "",
+    "not": "Teslim (cline): ASAMA A tamam: test_auth_gate.py 13 passed; __init__.py ESKI_URL yonlendirmesi duzeltildi (.gitignore .streamlit/secrets.toml eklendi); ASAMA B kilit bekliyor (web_app.py rate-limit + guest/admin, DATA-LOG-01 teslimi + roo onaji SONRASI).",
     "source": "ic",
     "from_agent": null
   },
@@ -3962,15 +3962,15 @@
     "baslik": "web_app.py modullere bolme (src/company_master/api)",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-17T03:28:59",
-    "bitis": null,
+    "bitis": "2026-09-17T14:46:16",
     "dosyalar": [
       "web_app.py",
       "src/company_master/api/",
       "tests/test_api_companies.py"
     ],
-    "not": "",
+    "not": "Teslim (kilo): KISMI: normalize.py cikarildi (574 satir), DASH_MASK_PII dusuru duzeltildi, web_app.py'de import eklendi. Kaldi: cache/security, webhooks, intelligence, companies, match, buyer, admin modulleri. Test: 3795 passed, 4 failed (kilit), 5 skipped.",
     "source": "ic",
     "from_agent": null
   },
@@ -4061,16 +4061,18 @@
     "baslik": "GET /api/kpi/history + ana kontrol gercek sparkline (D-14)",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-17T04:53:31",
-    "bitis": null,
+    "bitis": "2026-09-17T13:17:05",
     "dosyalar": [
       "web_app.py",
       "web_dashboard/tabs/ana_kontrol.py"
     ],
-    "not": "",
+    "not": "Teslim (kilo): API /api/kpi/history format brief eslendi (days, series: login/search/yeni_firma, labels); days 1-30 dogrulama; sparkline kartlari guncellendi (Toplam Firma yeni_firma, Aktif Kullanici login, Sinyal search); streamlit restart yapildi; test 4 passed; tam suit 3795/4/0",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "tamamlayan": "kilo",
+    "not_": "roo: gec handoff kaydi eklendi (ORCH-08 surec kusuru duzeltmesi)"
   },
   {
     "task_id": "ADMIN-KPI-KART-01",
@@ -4078,7 +4080,7 @@
     "baslik": "Admin sekmelerinde st.metric -> kpi_karti (8 sekme, ~40 kart)",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": [
       "web_dashboard/tabs/admin_cost.py",
       "web_dashboard/tabs/admin_quality.py",
@@ -4092,9 +4094,19 @@
       "tests/test_web_dashboard_tabs.py",
       "tests/test_admin_kpi_kart.py"
     ],
-    "bitis": null,
-    "dosyalar": [],
-    "not": "",
+    "bitis": "2026-09-17T19:29:49",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_cost.py",
+      "web_dashboard/tabs/admin_quality.py",
+      "web_dashboard/tabs/admin_performance.py",
+      "web_dashboard/tabs/admin_api_analytics.py",
+      "web_dashboard/tabs/admin_dlq.py",
+      "web_dashboard/tabs/admin_audit.py",
+      "tests/test_admin_dlq_tab.py",
+      "tests/test_web_dashboard_tabs.py",
+      "tests/test_admin_kpi_kart.py"
+    ],
+    "not": "Teslim (kilo): Teslim: 6 sekmede 37 st.metric → kpi_karti (maliyet/kalite/sistem/uyari/guvenlik). 2 test dosyası güncellendi + 1 yeni test (24 test). admin_quality.py BOM+mojibake düzeltildi. Test: 3826 passed, 4 pre-existing failed, 5 skipped. Rapor: data/orchestrator/ADMIN-KPI-KART-01_rapor_2026-09-17_kilo.md",
     "source": "ic",
     "from_agent": null
   },
@@ -4121,9 +4133,9 @@
     "baslik": "Admin sekmeleri hata/bos-durum standardi + canli/pazarlama/paketler kpi_karti (roo ceza gorevi)",
     "sahip": "roo",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-17T05:19:53",
-    "bitis": null,
+    "bitis": "2026-09-17T15:39:39",
     "dosyalar": [],
     "not": "A-E tamam; 294 passed; kodlama_denetim kapsam temiz; rapor data/orchestrator/ADMIN-ROO-01_rapor_2026-09-17_roo.md; commit YOK (sabah)",
     "source": "ic",
@@ -4275,5 +4287,51 @@
     "source": "ic",
     "from_agent": null,
     "tamamlayan": "roo"
+  },
+  {
+    "task_id": "RESEARCH-PONYTALE",
+    "baslik": "Ponytail vs Caveman derinlemesine arastirma",
+    "sahip": "roo",
+    "oncelik": "P0",
+    "durum": "aktif",
+    "not": "Ponytail ve Caveman kiyaslamasi. Ponytail=tembel senior dev zihniyeti, YAGNI, az kod. Caveman=token azligi, 65% token kesti.",
+    "dosyalar": []
+  },
+  {
+    "task_id": "GIT-HIJYEN-01",
+    "id": "GIT-HIJYEN-01",
+    "baslik": "Satir sonu/dosya sonu hijyeni: kodlama_denetim.py --kapsam kod exit 0 olsun",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "review",
+    "baslangic": "2026-09-17T19:32:52",
+    "bitis": "2026-09-17T17:10:00",
+    "dosyalar": [
+      "data/orchestrator/GIT-HIJYEN-01_rapor_2026-09-17_kilo.md",
+      ".gitattributes",
+      "src/company_master/api/core/normalize.py"
+    ],
+    "not": "Teslim (kilo): kodlama_denetim.py --kapsam kod exit 0 basarili. 1138 ihlal duzeltildi (60 CRLF, 106 BOM, 2 mojibake, 970 trailing whitespace). Elle 3206 dosya CRLF duzeltildi. Mojibake normalize.py'de duzeltildi. .gitattributes BOM kaldirildi. Scan sonucu temiz.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ROO-CONFIG-01",
+    "id": "ROO-CONFIG-01",
+    "baslik": "Roo Code IDE ucretsiz model yapilandirmasi ve fallback taslagi",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "review",
+    "baslangic": "2026-09-17T22:23:39",
+    "bitis": "2026-09-17T20:15:00",
+    "dosyalar": [
+      "docs/roo_config.json",
+      "docs/raporlar/roo_code/ucretsiz_modeller_2026-09-17.csv",
+      "docs/raporlar/roo_code/taslak_yapilandirma_2026-09-17.md",
+      "data/orchestrator/ROO-CONFIG-01_rapor_2026-09-17_kilo.md"
+    ],
+    "not": "Teslim (kilo): Roo Code IDE ucretsiz model yapilandirmasi + fallback taslagi tamamlandi. 14 model, Primary fallback=Nemotron 3.5 Content Safety, Secondary=Qwen 3.8 27B, Emergency=Claude Sonnet 4.5. D-48 uyumlum. 9Router dokunulmadi.",
+    "source": "ic",
+    "from_agent": null
   }
 ]

@@ -1,6 +1,6 @@
 # Persona: Business Analyst
 
-> Huginn & Muninn - Startup Intelligence Platform. Uretim oncesi kok dizindeki `ai-rules.md` ve `company.md` okunur.
+> Huginn & Muninn - Startup Intelligence Platform. Uretim oncesi `docs/brand/ai-rules.md` ve `docs/brand/company.md` okunur.
 
 ## Goals
 

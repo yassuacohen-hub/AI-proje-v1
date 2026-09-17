@@ -30,6 +30,12 @@
 ## Dil (Demir Kural)
 - Kullanıcı iletişimi ve akıl yürütme %100 TÜRKÇE, kısa maddeler. Kod/teknik terimler İngilizce olabilir.
 
+## Token Verimliliği — Demir Kural (D-48, sahip kararı 2026-09-17)
+- Token tasarrufu için modelin **düşünme/akıl yürütme gücüne müdahale YASAK**: reasoning/thinking budget düşürme, `max_tokens` daraltma, iş kalitesini düşüren zayıf model seçimi.
+- Hedef dörtlü: **temiz kod yazımı · kaliteli iş · verimlilik planlaması · maliyet avantajı**.
+- İzin verilen tasarruf: bağlam seçimi, görev brief'i, gereksiz keşif/okuma eleme, çıktı tekrarını azaltma (K1-K6).
+- Takip: `docs/raporlar/roo_code/TAKIP.md` (sürekli güncellenir).
+
 ## Genel Kod/Dosya Kuralları
 - Gizli bilgiler `.env`'de; hardcoded secret yok. Tüm dosyalar UTF-8 (BOM yasak; PS `Out-File -Encoding utf8` kullanma).
 - Silme/taşıma kullanıcı onayıyla; mevcut temel üzerine geliştir. Ayrıntı: AJAN_DETAY §18.
@@ -46,5 +52,84 @@
 
 ## Marka Terminolojisi (öz)
 - Huginn 🦅 = müşteri (8000, `huginn_`) · Muninn 🛡️ = iç ekip (8501, `muninn_`) · Odin ⚡ = çekirdek (`odin_`).
-- İsimler çevrilmez/bölünmez; teknik kimliklerde (`huginn` db/repo) değişmez. Yasak: Muginn, Hugin, Munin, Odın. Ayrıntı: AJAN_DETAY §11.
+- İsimler çevrilmez/bölünmez; teknik kimliklerde (`huginn` db/repo) değişmez. Yasak: Huggin, Hugginn, Hugin, Munin, Muginn, Munnin, Odinn, Odın. Ayrıntı: AJAN_DETAY §11.
+- Marka kiti (pazarlama/web/logo/marka metni üretimi): `docs/brand/` — D-44/D-45 kapsam ayrımı için AJAN_DETAY §11.
 - Harici ajan etkileşimi orkestratör + `workspace/external/{agent_id}/` üzerinden; kök erişim yok. Ayrıntı: AJAN_DETAY §8.
+
+## Sözlük (Lexicon) — D-29/D-30/D-47
+> Bu bölüm proje genelinde kullanılan terimlerin, kısaltmaların ve ajan rollerinin tek kaynaklı tanımını tutar. D-29/D-30 kural satırı + D-47 karar dayanağıyla eklendi.
+
+### Ajanlar ve Roller
+| Terim | Tanım |
+|-------|-------|
+| **kilo** | Üretim/hacim ajanı — kod yazma, refactoring, test, CI/CD. Kilitli dosyalarda çalışır. |
+| **cline** | Denetim/review ajanı — kod inceleme, güvenlik, mimari uyum, doküman doğrulama. |
+| **roo** | Orkestratör — görev dağıtımı, onay, commit, push, karar kaydı, ajan koordinasyonu. Son söz roo'da. |
+| **orkestrator** | `roo` ile eşanlamlı; görev panosu yönetimi, tetik kuyruğu, kilit takibi. |
+| **oto-nobetci** | Otomatik onay/teslim işleyen arka plan süreci (`scripts/oto_nobetci.py`). P2 ve altı görevleri onaylar; P0/P1 elle onay (D-46). |
+
+### Görev Yaşam Döngüsü Terimleri
+| Terim | Tanım |
+|-------|-------|
+| **bekliyor** | Tetik kuyruğunda, henüz ajan tarafından alınmamış görev. |
+| **alindi** / **aktif** | Ajan `gorev_kutusu.py al` ile görevi üstlendi; kilitler verildi. |
+| **teslim** | Ajan `gorev_kutusu.py teslim` ile işi bitirdi; `review` durumuna geçer, onay bekler. |
+| **review** | Kontrolör (roo) incelemesi bekleyen görev. |
+| **done** | Onaylandı; kilitler bırakıldı, tetik `done`, zincir varsa sonraki tetiklendi. |
+| **iptal_stale** | Bayat/çalışılmayan görev/tetik; bakım ile temizlenir. |
+| **zincir_bekleme** | Zincirdeki önceki görev bitmeden bekleyen sonraki görev. |
+| **handoff** | Teslim kaydı: `data/orchestrator/handoff.jsonl` — kim ne zaman ne teslim etti. |
+
+### Teknik Kısaltmalar ve Terimler
+| Terim | Tanım |
+|-------|-------|
+| **SSOT** | Single Source of Truth — tek doğruluk kaynağı (V9 = teknik SSOT, V10 = yönetim). |
+| **MVP** | Minimum Viable Product — şu anki hedef kapsam. |
+| **P0/P1/P2** | Öncelik seviyeleri: P0=kritik (blokaj), P1=yüksek (güvenlik/çekirdek), P2=orta, P3=düşük. |
+| **BOM** | Byte Order Mark — UTF-8 dosyalarda yasak (kodlama denetimi). |
+| **mojibake** | Karakter kodlama bozulması (Türkçe karakterler bozulmuş). |
+| **NUL** | Null byte (dosya içinde yasak). |
+| **AST** | Abstract Syntax Tree — statik analiz/testlerde kullanılır. |
+| **monkeypatch** | `pytest` fixture'i; elle `MonkeyPatch()` oluşturulmaz (D-47). |
+| **fileWatcherType=none** | Streamlit dosya izleme kapalı (restart script'inde). |
+| **rate-limit** | API isteği sınırlaması (IP bazlı, dakikada N istek). |
+| **SSE** | Server-Sent Events — canlı veri akışı (admin_realtime). |
+| **DLQ** | Dead Letter Queue — işlenemeyen mesaj kuyruğu. |
+| **MRR/ARR** | Monthly/Annual Recurring Revenue — executive dashboard metrikleri. |
+| **churn** | Müşteri kaybı oranı. |
+| **tenant** | Çoklu müşteri (multi-tenant) yapısındaki bir müşteri/kurum. |
+
+### Dosya ve Dizin Kısaltmaları
+| Yol | Anlamı |
+|-----|--------|
+| `data/orchestrator/` | Görev panosu, tetikler, handoff, karar defteri, raporlar. |
+| `data/orchestrator/task_board.json` | Merkezi görev panosu (tek kaynak). |
+| `data/orchestrator/triggers/{ajan}.jsonl` | Ajanın tetik kuyruğu (bekleyen/alınan/teslim/done). |
+| `data/orchestrator/handoff.jsonl` | Teslim kayıtları (ajan, task_id, özet, çıktılar, tarih). |
+| `data/orchestrator/decision_log.jsonl` | Karar kayıtları (D-XX numaralı). |
+| `scripts/gorev_kutusu.py` | Ajan posta kutusu + kontrolör onay CLI. |
+| `scripts/oto_nobetci.py` | Otomatik onay/zincir devam süreci. |
+| `scripts/kodlama_denetim.py` | BOM/NUL/mojibake/sozdizimi denetimi. |
+| `scripts/streamlit_restart.py` | UI değişince Streamlit güvenli restart. |
+| `src/company_master/` | Çekirdek Python paketi (odın). |
+| `web_dashboard/` | Streamlit admin paneli (muninn, port 8501). |
+| `web_app.py` | FastAPI müşteri API'si (huginn, port 8000, Docker). |
+| `docs/brand/` | Marka kiti (pazarlama/web/logo SSOT). |
+| `src/company_master/ui/tokens.py` | Ürün UI tasarım tokenları (Indigo #6366f1 SSOT, D-45). |
+
+### Marka ve Ürün Kimliği
+| Terim | Tanım |
+|-------|-------|
+| **Huginn** 🦅 | Müşteri tarafı (port 8000, `huginn_` öneki, DB `huginn`). |
+| **Muninn** 🛡️ | İç ekip/admin paneli (port 8501, `muninn_` öneki). |
+| **Odin** ⚡ | Çekirdek/kütüphane (`odin_` öneki). |
+| **Yasak yazımlar** | Huggin, Hugginn, Hugin, Munin, Muginn, Munnin, Odinn, Odın. |
+
+### Süreç Kuralları (Hızlı Referans)
+- **ORCH-08**: Görev yaşam döngüsü — `bak` → `al` → brif → iş → `teslim` → `review` → `onay` → `done`.
+- **S-07 (D-46)**: Otomatik onay yalnız P2 ve altı; P0/P1 roo elle onaylar.
+- **D-47**: `pytest.MonkeyPatch` elle oluşturulmaz; her zaman `monkeypatch` fixture.
+- **Kilit disiplini**: `gorev_ekle(..., dosyalar=[...])` ile kilitle, bitince `lock_birak`.
+- **Commit**: Sabah roo/sahip; ajanlar commit ATMAZ.
+- **UI restart**: `python scripts/streamlit_restart.py` (fileWatcherType=none).
+- **API restart**: `docker compose up -d --build api` + curl doğrulama.

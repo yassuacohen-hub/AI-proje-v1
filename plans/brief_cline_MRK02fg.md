@@ -1,5 +1,9 @@
 # BRIEF - CLINE - MRK-02f + MRK-02g
 
+> **ARŞİV — tamamlandı.** Bu brif tarihsel kayıttır; içeriği güncel iş emri değildir.
+> Güncel marka kiti konumu: `docs/brand/` (bkz. `docs/brand/README.md`, D-44/D-45).
+> Güncel marka revizyon zinciri: `docs/plans/MARKA-REVIZE-01_brief.md`.
+
 Hazirlayan: roo (orkestrator)
 Hedef ajan: cline
 Oncelik: P1

@@ -2,8 +2,8 @@
 
 Startup Intelligence Platform kurumsal kimlik seti. Kurumsal kimlik uretimi buradan yapilir.
 
-> Konum: `docs/brand/` (repo ici, git kapsaminda — S-09 cozumu, D-44). Diger dosyalardaki
-> "kok dizindeki `ai-rules.md`" ifadeleri bu klasoru kasteder. Yazim: yalniz **Huginn / Muninn / Odin**.
+> Konum: `docs/brand/` (repo ici, git kapsaminda — S-09 cozumu, D-44). Tum marka uretimi
+> bu klasordeki `ai-rules.md` ile baslar. Yazim: yalniz **Huginn / Muninn / Odin**.
 > Teknik SSOT (port, prefix, yasak yazimlar): [`docs/AJAN_DETAY.md §11`](../AJAN_DETAY.md).
 > Dashboard urun paleti ayridir: `src/company_master/ui/tokens.py` (D-45).
 
@@ -30,3 +30,4 @@ Landing page, dashboard, mobil uygulama ve pazarlama gorselleri bu setten uretil
 - Kurulum: cline - 2026-09-16
 - Inceleme/onay: roo - BRAND-KIMLIK-01 ONAYLANDI 2026-09-16 (D-44: yazim, tipografi, renk rolleri, gorsel yasak kapsami, slogan)
 - Ortak revize: MARKA-REVIZE-01 zinciri cline → kilo → roo; brif: `docs/plans/MARKA-REVIZE-01_brief.md`
+- Dokuman katmani: cline - 2026-09-17 (MARKA-REVIZE-01; bayat "kok dizin" atiflari kaldirildi, D-45 kapsam notu eklendi; rapor: `data/orchestrator/MARKA-REVIZE-01_rapor_2026-09-17_cline.md`)

@@ -69,11 +69,11 @@ ROLE_PERMISSIONS = {
 
 def has_role(user_role: str, required_role: str) -> bool:
     """Check if user role meets or exceeds required role.
-    
+
     Args:
         user_role: User's current role
         required_role: Minimum required role
-        
+
     Returns:
         True if user has sufficient privileges
     """
@@ -84,11 +84,11 @@ def has_role(user_role: str, required_role: str) -> bool:
 
 def has_permission(user_role: str, permission: str) -> bool:
     """Check if user role has specific permission.
-    
+
     Args:
         user_role: User's current role
         permission: Permission string (e.g., "admin:users")
-        
+
     Returns:
         True if user has the permission
     """
@@ -98,13 +98,13 @@ def has_permission(user_role: str, permission: str) -> bool:
 
 def require_admin(request: dict) -> bool:
     """Check if request has admin privileges.
-    
+
     Args:
         request: Request dict with user info
-        
+
     Returns:
         True if admin
-        
+
     Raises:
         HTTPException: If not admin
     """

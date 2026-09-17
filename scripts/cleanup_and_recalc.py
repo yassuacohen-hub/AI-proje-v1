@@ -15,7 +15,7 @@ from sqlalchemy import text
 
 def main() -> int:
     engine = get_engine()
-    
+
     with engine.begin() as conn:
         # Delete companies with NULL source_record_id and minimal data
         result = conn.execute(text("""
@@ -31,11 +31,11 @@ def main() -> int:
         """))
         deleted = result.rowcount
         print(f"Silinen bos kayit: {deleted}")
-    
+
     with engine.connect() as conn:
         total = conn.execute(text("SELECT COUNT(*) FROM companies")).scalar()
         print(f"Kalan toplam: {total}")
-    
+
     # Recalculate quality scores
     with engine.begin() as conn:
         result = conn.execute(text("""
@@ -78,16 +78,16 @@ def main() -> int:
         """))
         updated = result.rowcount
         print(f"Guncellenen: {updated} firma")
-    
+
     with engine.connect() as conn:
         rows = conn.execute(text("SELECT CASE WHEN data_quality_score >= 80 THEN '80-100' WHEN data_quality_score >= 60 THEN '60-79' WHEN data_quality_score >= 40 THEN '40-59' WHEN data_quality_score >= 20 THEN '20-39' ELSE '0-19' END as bucket, COUNT(*) as cnt FROM companies GROUP BY 1 ORDER BY 1 DESC")).mappings().all()
         print('\nYeni kalite dagilimi:')
         for r in rows:
             print(f"  {r['bucket']}: {r['cnt']}")
-        
+
         avg = conn.execute(text("SELECT AVG(data_quality_score) FROM companies")).scalar()
         print(f'\nYeni ortalama skor: {avg:.2f}')
-    
+
     return 0
 
 

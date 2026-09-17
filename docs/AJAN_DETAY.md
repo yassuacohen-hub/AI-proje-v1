@@ -104,10 +104,18 @@ Referanslar: `AI proje v1/V10/08-Ajanlar/07_harici_ajan_protokolu`, `AI proje v1
 - **Odin** ⚡: Çekirdek/altyapı (görünmez) — karar, yetki, köprü. Teknik önek: `odin_`
 
 Yazım kuralları (ZORUNLU):
-- `Huginn`, `Muninn`, `Odin` **çevrilmez, kısaltılmaz, ekle bölünmez**. **Yasak yazımlar:** `Muginn`, `Hugin`, `Munin`, `Hugginn`, `Odın`.
+- `Huginn`, `Muninn`, `Odin` **çevrilmez, kısaltılmaz, ekle bölünmez**. **Yasak yazımlar:** `Huggin`, `Hugginn`, `Hugin`, `Munin`, `Muginn`, `Munnin`, `Odinn`, `Odın`.
 - Türkçe ek alırken kesme işareti: `Huginn'in`, `Muninn'e`, `Odin'in`.
 - Dil paketi anahtarları `{marka}_{alan}_{durum}` biçiminde, **en az 3 parça**: `huginn_akis_bos` ✅ · `huginn_bos` ❌
 - Kod içi teknik önek küçük harf: `huginn_`, `muninn_`, `odin_`.
+
+**Marka kiti: `docs/brand/` (D-44/D-45 kapsam ayrımı):** Marka metni, logo, web/pazarlama görseli
+ve LLM üretim prompt'ları `docs/brand/` setinden üretilir; okuma sırası
+`ai-rules.md` → `company.md` → `brand.md` → `design-tokens.json` → ilgili `prompts/*.md`
+(kit içi tek kaynak: `docs/brand/README.md`). **İki palet, iki kapsam — birleştirme YOK:**
+`docs/brand/design-tokens.json` pazarlama/web/logo SSOT'udur; `src/company_master/ui/tokens.py`
+ürün UI SSOT'udur (Indigo `#6366f1`, değişmez). Bu bölüm (§11) teknik SSOT'tur; marka kiti onu
+**tamamlar**, çelişirse §11 kazanır.
 
 **"Tarihsel Çatı Adı" kuralı:** `huginn` adı veritabanı adı, repo adı, `HuginnMCPServer`, `admin@huginn.local` gibi teknik kimliklerde **hiç değişmez**. Marka ayrımı yalnızca kullanıcıya görünen metin ve yeni kod adlandırmasında geçerlidir. **Sıfır migration.**
 

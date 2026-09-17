@@ -141,13 +141,16 @@ def _eski_adresi_cevir() -> None:
 def aktif_rol() -> str:
     """U-10: Oturumun rolünü döndürür.
 
-    Öncelik: `st.session_state[ROL_KEY]` → varsa `admin_token` ⇒ `admin`
-    → aksi hâlde `anon`. Bilinmeyen değerler `anon`a indirgenir.
+    Öncelik: `st.session_state[ROL_KEY]` → `admin_token` varsa `admin`
+    (misafir "guest" token'i hariç — o `anon`a indirgenir) → aksi hâlde `anon`.
+    Bilinmeyen değerler `anon`a indirgenir.
     """
     acik = st.session_state.get(ROL_KEY)
     if acik:
         return rol_normalize(str(acik))
-    return ROL_ADMIN if st.session_state.get("admin_token") else ROL_ANON
+    # SEC-AUTH-01 Y-4: "guest" (misafir) token'i admin'e yükseltmez.
+    token = st.session_state.get("admin_token")
+    return ROL_ANON if not token or token == "guest" else ROL_ADMIN
 
 
 def aktif_tab() -> TabTanimi:
@@ -248,12 +251,12 @@ def bolum_ara(sorgu: str) -> list[TabTanimi]:
 
 def render_karar_defteri() -> None:
     """Orkestratör karar kayıtlarının defteri — render_decision_tab'a devrolundu.
-    
+
     (Mükerrer fonksiyon — tabs/admin_panel.py::render_decision_tab() kullanılıyor.)
     Eski implementasyon silinmiş, yönetim bölümü tabs versiyonuna yönlendirilmiş.
     """
     from web_dashboard.tabs.admin_panel import render_decision_tab
-    
+
     render_decision_tab()
 
 
@@ -711,7 +714,7 @@ def _auth_modal_icerik() -> None:
 
 def main() -> None:
     """Uygulama giriş noktası — st.navigation + markalı sidebar.
-    
+
     NAV-01 hibrit multipage mimarisi:
     - st.navigation(..., position="hidden") — Streamlit'in kendi menüsü çizilmez,
       yönlendirme ve "hangi sayfa çalışıyor" bilgisi sağlanır.
@@ -747,7 +750,7 @@ def main() -> None:
 
     # Sayfa içeriğini çalıştır — render_icerik hata sınırı içinde çalışır
     sayfa.run()
-    
+
     # Sayfanın altında footer ve sohbet balonu
     render_footer(secili)
     render_chat(secili, sohbet_acik_mi())

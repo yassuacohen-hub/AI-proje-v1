@@ -86,7 +86,7 @@ def start_server(python: str, script: str, port: int = 8000) -> subprocess.Popen
     log_event({"type": "restart_attempt", "python": python, "script": script, "port": port})
     out = (LOG_DIR / f"server_watchdog_{port}.stdout.log").open("a", encoding="utf-8")
     err = (LOG_DIR / f"server_watchdog_{port}.stderr.log").open("a", encoding="utf-8")
-    
+
     proc = subprocess.Popen(
         [python, script],
         cwd=str(ROOT),
@@ -94,7 +94,7 @@ def start_server(python: str, script: str, port: int = 8000) -> subprocess.Popen
         stderr=err,
         creationflags=subprocess.CREATE_NEW_PROCESS_GROUP,
     )
-    
+
     log_event({"type": "process_started", "pid": proc.pid, "port": port})
     return proc
 
@@ -132,7 +132,7 @@ def main() -> None:
         "interval": args.interval,
         "restart": not args.no_restart,
     })
-    
+
     _telegram_gonder(f"🚀 Huginn Watchdog başladı (dual-port: 8000 + 8501)")
 
     proc_8000: subprocess.Popen | None = None
@@ -154,7 +154,7 @@ def main() -> None:
                 down_since_8000 = now_iso()
                 log_event({"type": "down_detected", "port": 8000, "detail": detail_8000})
                 _telegram_gonder(f"🔴 FastAPI (8000) başarısız: {detail_8000[:80]}")
-            
+
             if not args.no_restart:
                 if proc_8000 is None or proc_8000.poll() is not None:
                     proc_8000 = start_server(args.python, args.script, port=8000)
@@ -172,7 +172,7 @@ def main() -> None:
                 down_since_8501 = now_iso()
                 log_event({"type": "down_detected", "port": 8501, "detail": detail_8501})
                 _telegram_gonder(f"🔴 Streamlit (8501) başarısız: {detail_8501[:80]}")
-            
+
             if not args.no_restart:
                 if proc_8501 is None or proc_8501.poll() is not None:
                     proc_8501 = start_server(args.python_8501, args.script_8501, port=8501)

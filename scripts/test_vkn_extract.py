@@ -20,7 +20,7 @@ with eng.connect() as conn:
         AND COALESCE(c.tax_number, c.vergi_no) IS NULL
         LIMIT 5
     """)).fetchall()
-    
+
     for r in row:
         print(f"Firma: {r[1]}")
         print(f"Website: {r[2]}")

@@ -78,11 +78,13 @@ Dataframe ve tablolarda Markdown yıldızı (**) KULLANILMAZ; temiz metin olarak
 ### Yazım kuralları (ZORUNLU)
 
 - `Huginn`, `Muninn`, `Odin` **çevrilmez, kısaltılmaz, ekle bölünmez**.
-- **Yasak yazımlar:** `Muginn`, `Hugin`, `Munin`, `Hugginn`, `Odın`.
+- **Yasak yazımlar:** `Huggin`, `Hugginn`, `Hugin`, `Munin`, `Muginn`, `Munnin`, `Odinn`, `Odın`.
 - Türkçe ek alırken kesme işareti: `Huginn'in`, `Muninn'e`, `Odin'in`.
 - Dil paketi anahtarları `{marka}_{alan}_{durum}` biçiminde, **en az 3 parça**:
   `huginn_akis_bos` ✅ · `huginn_bos` ❌
 - Kod içi teknik önek küçük harf: `huginn_`, `muninn_`, `odin_`.
+- Marka kiti (pazarlama/web/logo/marka metni üretimi): `docs/brand/` — D-44/D-45 kapsam
+  ayrımı ve teknik SSOT için `docs/AJAN_DETAY.md` §11.
 
 ### "Tarihsel Çatı Adı" kuralı
 

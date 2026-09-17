@@ -38,9 +38,15 @@ def test_render_performance_tab_with_perf_data():
     with patch.object(
         admin_performance, "load_performance_data", return_value=perf_data
     ), patch.object(admin_performance, "load_prometheus_metrics", return_value={}):
-        with patch.object(st, "metric") as mock_metric, patch.object(
-            st, "subheader"
-        ) as mock_sub, patch.object(st, "divider"):
+        with patch.object(admin_performance, "kpi_karti") as mock_metric, patch.object(
+            admin_performance.st, "subheader"
+        ) as mock_sub, patch.object(admin_performance.st, "divider"), patch.object(
+            admin_performance.st, "session_state"
+        ), patch.object(admin_performance.st, "markdown"), patch.object(
+            admin_performance.st, "plotly_chart"
+        ), patch.object(admin_performance.st, "area_chart"), patch.object(
+            admin_performance.st, "caption"
+        ):
             admin_performance.render_performance_tab()
             assert mock_metric.called
 
@@ -91,9 +97,15 @@ def test_render_performance_tab_both_data_sources():
     ), patch.object(
         admin_performance, "load_prometheus_metrics", return_value=prom_data
     ):
-        with patch.object(st, "metric") as mock_metric, patch.object(
-            st, "dataframe"
-        ), patch.object(st, "subheader"), patch.object(st, "divider"):
+        with patch.object(admin_performance, "kpi_karti") as mock_metric, patch.object(
+            admin_performance.st, "dataframe"
+        ), patch.object(admin_performance.st, "subheader"), patch.object(admin_performance.st, "divider"), patch.object(
+            admin_performance.st, "session_state"
+        ), patch.object(admin_performance.st, "markdown"), patch.object(
+            admin_performance.st, "plotly_chart"
+        ), patch.object(admin_performance.st, "area_chart"), patch.object(
+            admin_performance.st, "caption"
+        ):
             admin_performance.render_performance_tab()
             assert mock_metric.called
 

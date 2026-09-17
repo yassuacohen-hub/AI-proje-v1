@@ -1,5 +1,9 @@
 # Kilo Brief — MRK-03 · MRK-04 · FIX-NOB-01
 
+> **ARŞİV — tamamlandı.** Bu brif tarihsel kayıttır; içeriği güncel iş emri değildir.
+> Güncel marka kiti konumu: `docs/brand/` (bkz. `docs/brand/README.md`, D-44/D-45).
+> Güncel marka revizyon zinciri: `docs/plans/MARKA-REVIZE-01_brief.md`.
+
 > **Hazırlayan:** roo (orkestratör) · **Tarih:** 2026-09-14
 > **Amaç:** Belge/kural katmanı işlerini roo'dan ayırıp paralelleştirmek.
 > **Çakışma garantisi:** Bu üç görevin dosya kümesi, roo'nun aktif çalıştığı

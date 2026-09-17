@@ -106,10 +106,10 @@ def detect_contradictions(new_content: str, existing_content: str) -> List[Tuple
         r'\b(yanıt|yanıtlamıyor|yanıt vermiyor)\b',
         r'\b(yanlış anlaşılma|yanılsı|yanılsı olduğu)\b'
     ]
-    
+
     new_sentences = re.split(r'[.!?]+', new_content)
     existing_sentences = re.split(r'[.!?]+', existing_content)
-    
+
     for new_sent in new_sentences:
         new_sent = new_sent.strip()
         if not new_sent:
@@ -118,7 +118,7 @@ def detect_contradictions(new_content: str, existing_content: str) -> List[Tuple
                            for pattern in negation_patterns)
         if not has_negation:
             continue
-            
+
         positive_sent = re.sub(r'\b(değil|değildir|yanlış|yanılsın|not|is not|does not|false|incorrect)\b', '', new_sent, flags=re.IGNORECASE).strip()
         positive_sent = re.sub(r'\s+', ' ', positive_sent)
         if positive_sent and len(positive_sent) > 10:

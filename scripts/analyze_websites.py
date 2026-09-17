@@ -16,9 +16,9 @@ with eng.connect() as conn:
         AND COALESCE(c.tax_number, c.vergi_no) IS NULL
         AND c.website_domain IS NOT NULL AND c.website_domain != ''
     """)).fetchall()
-    
+
     print(f"VKN'suz ama web sitesi olan firma: {len(rows)}")
-    
+
     # Analyze domains
     domains = []
     for r in rows:
@@ -29,18 +29,18 @@ with eng.connect() as conn:
         if '/' in domain:
             domain = domain.split('/')[0]
         domains.append(domain)
-    
+
     # Count TLDs
     tlds = Counter(d.split('.')[-1] for d in domains)
     print('\nEn yaygin TLDler:')
     for tld, count in tlds.most_common(10):
         print(f'  .{tld}: {count}')
-    
+
     # Filter out generic portals
     generic = ['isim.org.tr', 'osp.com.tr', 'ostim.org.tr', 'facebook.com', 'twitter.com', 'linkedin.com', 'instagram.com']
     specific = [r for r in rows if not any(g in r[2].lower() for g in generic)]
     print(f'\nGeneric portal haric: {len(specific)} firma')
-    
+
     # Show top 20 specific domains
     specific_domains = Counter()
     for r in specific:
@@ -50,7 +50,7 @@ with eng.connect() as conn:
         if '/' in domain:
             domain = domain.split('/')[0]
         specific_domains[domain] += 1
-    
+
     print('\nEn yaygin ozel domainler:')
     for domain, count in specific_domains.most_common(20):
         print(f'  {domain}: {count}')

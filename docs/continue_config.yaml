@@ -1,0 +1,77 @@
+# Continue IDE yapilandirmasi — Huginn Data Insights
+# KAYNAK KOPYA (SSOT). Kullanim:
+#   copy docs\continue_config.yaml .continue\config.yaml
+# Neden burada: `.rooignore` `.continue/` dizinini tarama disi birakir; ajanlar oraya yazamaz.
+#
+# SAHIP TESTI (2026-09-17): Continue'da YALNIZ OpenRouter free modeller calisiyor.
+#   Calismayanlar (test edildi, kaldirildi): 9Router gateway (provider: openai + apiBase),
+#   Deepseek dogrudan (provider: deepseek), Anthropic dogrudan (provider: anthropic).
+#   => Tek provider: openrouter. Tum modeller `:free` sonekli.
+#
+# KURAL (sahip): ONCELIK UCRETSIZ MODELLER. Ucretli model bu dosyada YOK.
+#
+# GEREKEN ANAHTAR (`.env` icinde, burada YAZILMAZ):
+#   OPENROUTER_API_KEY=sk-or-v1-...
+#   BRAVE_API_KEY=BSA...        (web arama MCP icin, opsiyonel)
+
+name: Huginn Data Insights
+version: 0.0.1
+schema: v1
+
+models:
+  # --- SOHBET / DUZENLEME (ucretsiz) ---
+  - name: Deepseek V3 (free)
+    provider: openrouter
+    model: deepseek/deepseek-chat-v3-0324:free
+    apiBase: https://openrouter.ai/api/v1
+    apiKey: ${{ secrets.OPENROUTER_API_KEY }}
+    defaultCompletionOptions:
+      contextLength: 64000
+    roles: [chat, edit, apply]
+
+  - name: Gemini 2.0 Flash (free)
+    provider: openrouter
+    model: google/gemini-2.0-flash-exp:free
+    apiBase: https://openrouter.ai/api/v1
+    apiKey: ${{ secrets.OPENROUTER_API_KEY }}
+    defaultCompletionOptions:
+      contextLength: 1000000
+    roles: [chat, edit, apply]
+
+  - name: Deepseek R1 (free, akil yurutme)
+    provider: openrouter
+    model: deepseek/deepseek-r1:free
+    apiBase: https://openrouter.ai/api/v1
+    apiKey: ${{ secrets.OPENROUTER_API_KEY }}
+    defaultCompletionOptions:
+      contextLength: 64000
+    roles: [chat]
+
+  # --- KOD TAMAMLAMA (ucretsiz) ---
+  - name: Qwen 2.5 Coder (free)
+    provider: openrouter
+    model: qwen/qwen-2.5-coder-32b-instruct:free
+    apiBase: https://openrouter.ai/api/v1
+    apiKey: ${{ secrets.OPENROUTER_API_KEY }}
+    roles: [autocomplete]
+
+context:
+  - provider: code
+  - provider: diff
+  - provider: terminal
+  - provider: problems
+  - provider: folder
+  - provider: codebase
+
+# Web gezinme: Continue'da tarayici YOK. Web erisimi yalniz MCP sunuculari ile olur.
+# brave-search = arama, fetch = URL'yi metne cevirme. Node/npx gerekli.
+mcpServers:
+  - name: brave-search
+    command: npx
+    args: [-y, "@modelcontextprotocol/server-brave-search"]
+    env:
+      BRAVE_API_KEY: ${{ secrets.BRAVE_API_KEY }}
+
+  - name: fetch
+    command: npx
+    args: [-y, "@modelcontextprotocol/server-fetch"]

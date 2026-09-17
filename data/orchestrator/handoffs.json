@@ -270,5 +270,17 @@
     "sonraki_adim": "Orkestrator onayi: python scripts/gorev_kutusu.py onayla --task-id PO-BACK-08 --ben orkestrator",
     "dikkat_edilmesi": "KR-1: tests/test_destek.py bozuk kodlama (UTF-16LE+BOM, 4319 NUL) -> tam pytest koleksiyonu duruyor; sahip kilo/PO-BACK-06 aktif, cline dokunmadi. KR-2: src/company_master/ui/charts/__init__.py SyntaxError (CHART-01 kalintisi, kilitsiz) -> ortak grafik modulu import edilemiyor. Ikisi de kapsam disi; kanit raporu: data/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md",
     "tarih": "2026-09-15T10:10:21"
+  },
+  "KPI-HIST-01": {
+    "tamamlandi": "kilo",
+    "sonraki_adim": "ADMIN-* zinciri devam",
+    "dikkat_edilmesi": "KPI gecmis grafigi (kpi/history) tamamlandi; roo tarafindan gec handoff kaydi - surec kusuru duzeltmesi",
+    "tarih": "2026-09-17T15:25:36"
+  },
+  "ADMIN-ROO-01": {
+    "tamamlandi": "roo",
+    "sonraki_adim": "MARKA-REVIZE-01 roo adimi + kilo ADMIN zinciri",
+    "dikkat_edilmesi": "Admin sekmeleri hata/bos-durum standardi A-E tamam; 294 passed; kodlama_denetim kapsam temiz; rapor data/orchestrator/ADMIN-ROO-01_rapor_2026-09-17_roo.md",
+    "tarih": "2026-09-17T15:39:25"
   }
 }

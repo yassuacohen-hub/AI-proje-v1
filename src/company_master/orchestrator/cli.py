@@ -81,7 +81,7 @@ def cli() -> None:
 @click.option("--run-mode", type=click.Choice(["orchestrator", "agent"]), default=None, help="Run mode: orchestrator or agent")
 def dispatch(brief_path: str, run_mode: str | None) -> None:
     """Dispatch a brief to its external agent and run with retry/backoff.
-    
+
     Orchestrator mode runs the task internally (no external agent subprocess).
     Agent mode delegates to the configured external agent with retry/backoff.
     Default mode is orchestrator when not specified.

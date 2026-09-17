@@ -74,13 +74,13 @@ class PIIScanner:
 
     EMAIL_PATTERN = re.compile(r"^[a-zA-Z0-9\u00c4\u00e4\u00d6\u00f6\u00dc\u00fc\u00df\u00c3\u00e3\u00d5\u00f5\u00ce\u00ee\u00cc\u00ec\u00c9\u00e9\u00c8\u00e8\u00ca\u00ea\u00cb\u00eb\u00dd\u00fd\u00c0\u00e0\u00c1\u00e1\u00c2\u00e2\u00e7\u00c7\u011f\u011e\u0131I\u0130\u00f6\u00d6\u015f\u015e\u00fc\u00dc_.\+\-]+@[a-zA-Z0-9\u00c4\u00e4\u00d6\u00f6\u00dc\u00fc\u00df\u00c3\u00e3\u00d5\u00f5\u00ce\u00ee\u00cc\u00ec\u00c9\u00e9\u00c8\u00e8\u00ca\u00ea\u00cb\u00eb\u00dd\u00fd\u00c0\u00e0\u00c1\u00e1\u00c2\u00e2\u00e7\u00c7\u011f\u011e\u0131I\u0130\u00f6\u00d6\u015f\u015e\u00fc\u00dc\-]+\.[a-zA-Z0-9\u00c4\u00e4\u00d6\u00f6\u00dc\u00fc\u00df\u00c3\u00e3\u00d5\u00f5\u00ce\u00ee\u00cc\u00ec\u00c9\u00e9\u00c8\u00e8\u00ca\u00ea\u00cb\u00eb\u00dd\u00fd\u00c0\u00e0\u00c1\u00e1\u00c2\u00e2\u00e7\u00c7\u011f\u011e\u0131I\u0130\u00f6\u00d6\u015f\u015e\u00fc\u00dc.\-]+$", re.UNICODE)
 
-    
+
 
     # Telefon Regex (Türkiye: +90 veya 0 ile başlayan 5XX XXXXXX pattern, Diğer ülkeler)
 
     PHONE_PATTERN = re.compile(r"^(\+90|0)[5][0-9]{2}[0-9]{6}$|^(?!\+90)\+[1-9]\d{1,14}$", re.UNICODE)
 
-    
+
 
     # IBAN Regex (TR IBAN - 26 karakter)
 
@@ -94,7 +94,7 @@ class PIIScanner:
 
         """T.C. Kimlik Numarası matematiksel doğrulama algoritması.
 
-        
+
 
         Kurallar:
 
@@ -116,7 +116,7 @@ class PIIScanner:
 
             return False
 
-        
+
 
         if clean_tckn[0] == "0":
 
@@ -198,7 +198,7 @@ class PIIScanner:
 
             return None
 
-        
+
 
         val_str = str(value).strip()
 
@@ -262,7 +262,7 @@ class PIIScanner:
 
         total_samples = len(values)
 
-        
+
 
         # Boş veya None-only sütun kontrolü
 

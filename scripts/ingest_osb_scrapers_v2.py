@@ -20,13 +20,13 @@ FILES = [
 
 def main() -> int:
     engine = get_engine()
-    
+
     with engine.begin() as conn:
         for source_name, path in FILES:
             if not path.exists():
                 print(f"{path.name}: dosya yok")
                 continue
-            
+
             records = []
             for line in path.read_text(encoding="utf-8").splitlines():
                 line = line.strip()
@@ -36,26 +36,26 @@ def main() -> int:
                     records.append(json.loads(line))
                 except json.JSONDecodeError:
                     pass
-            
+
             print(f"{source_name}: {len(records)} kayit, bulk insert ediliyor...")
-            
+
             # Build bulk insert
             values = []
             for rec in records:
                 unvan = (rec.get("unvan") or "").strip()
                 if not unvan:
                     continue
-                
+
                 payload = {
                     "adres": rec.get("adres"),
                     "web_sitesi": rec.get("web_sitesi"),
                     "telefonlar": rec.get("telefonlar", []),
                     "emailler": rec.get("emailler", []),
                 }
-                
+
                 phone = (payload.get("telefonlar") or [None])[0]
                 email = (payload.get("emailler") or [None])[0]
-                
+
                 values.append({
                     "unvan": unvan,
                     "adres": payload.get("adres"),
@@ -66,10 +66,10 @@ def main() -> int:
                     "vergi": rec.get("vergi_no"),
                     "parsel": rec.get("osb_parsel"),
                 })
-            
+
             if not values:
                 continue
-            
+
             # Bulk insert with NULL source_record_id
             args = []
             params = {}
@@ -85,7 +85,7 @@ def main() -> int:
                     f"vergi{i}": v["vergi"],
                     f"parsel{i}": v["parsel"],
                 })
-            
+
             sql = f"""
                 INSERT INTO companies
                 (legal_name, trade_name, adres, website_domain, primary_phone, primary_email,
@@ -93,10 +93,10 @@ def main() -> int:
                 VALUES {', '.join(args)}
                 ON CONFLICT DO NOTHING
             """
-            
+
             result = conn.execute(text(sql), params)
             print(f"  {source_name}: {result.rowcount} yeni firma eklendi")
-    
+
     return 0
 
 

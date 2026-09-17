@@ -124,26 +124,6 @@
     "task_id": "MARKA-REVIZE-01",
     "kilitlendi": "2026-09-17T00:23:45"
   },
-  "web_app.py": {
-    "sahip": "kilo",
-    "task_id": "KPI-HIST-01",
-    "kilitlendi": "2026-09-17T04:53:31"
-  },
-  "src/company_master/api/": {
-    "sahip": "kilo",
-    "task_id": "API-SPLIT-01",
-    "kilitlendi": "2026-09-17T03:28:59"
-  },
-  "tests/test_api_companies.py": {
-    "sahip": "kilo",
-    "task_id": "API-SPLIT-01",
-    "kilitlendi": "2026-09-17T03:28:59"
-  },
-  "web_dashboard/tabs/ana_kontrol.py": {
-    "sahip": "kilo",
-    "task_id": "KPI-HIST-01",
-    "kilitlendi": "2026-09-17T04:53:31"
-  },
   "tests/test_musteri_yonetimi.py": {
     "sahip": "kilo",
     "task_id": "ADMIN-MUSTERI-02",
@@ -193,5 +173,20 @@
     "sahip": "kilo",
     "task_id": "ADMIN-HATA-02",
     "kilitlendi": "2026-09-17T06:49:12"
+  },
+  "docs/roo_config.json": {
+    "sahip": "kilo",
+    "task_id": "ROO-CONFIG-01",
+    "kilitlendi": "2026-09-17T22:23:39"
+  },
+  "docs/raporlar/roo_code/taslak_yapelandirma_2026-09-17.md": {
+    "sahip": "kilo",
+    "task_id": "ROO-CONFIG-01",
+    "kilitlendi": "2026-09-17T22:23:39"
+  },
+  "docs/raporlar/roo_code/ucretsiz_modeller_2026-09-17.csv": {
+    "sahip": "kilo",
+    "task_id": "ROO-CONFIG-01",
+    "kilitlendi": "2026-09-17T22:23:39"
   }
 }

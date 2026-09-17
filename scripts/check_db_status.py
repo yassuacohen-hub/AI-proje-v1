@@ -11,19 +11,19 @@ with engine.connect() as conn:
     # Check companies columns
     cols = conn.execute(text("SELECT column_name FROM information_schema.columns WHERE table_name = 'companies' ORDER BY ordinal_position"))
     print("Companies columns:", [c[0] for c in cols])
-    
+
     # Check if address column exists
     has_addr = conn.execute(text("SELECT EXISTS (SELECT FROM information_schema.columns WHERE table_name='companies' AND column_name='address')")).scalar()
     print(f"Has address column: {has_addr}")
-    
+
     # Count source_records with raw_payload
     total = conn.execute(text("SELECT COUNT(*) FROM source_records")).scalar()
     with_payload = conn.execute(text("SELECT COUNT(*) FROM source_records WHERE raw_payload IS NOT NULL")).scalar()
     print(f"Total source_records: {total}, with raw_payload: {with_payload}")
-    
+
     # Check raw_phone distribution
     cnt = conn.execute(text("""
-        SELECT 
+        SELECT
             COUNT(*) FILTER (WHERE raw_phone IS NOT NULL) as p,
             COUNT(*) FILTER (WHERE raw_email IS NOT NULL) as e,
             COUNT(*) FILTER (WHERE raw_website IS NOT NULL) as w,
@@ -34,10 +34,10 @@ with engine.connect() as conn:
     """)).first()
     print(f"raw_phone: {cnt[0]}, raw_email: {cnt[1]}, raw_website: {cnt[2]}")
     print(f"raw_address: {cnt[3]}, raw_tax_number: {cnt[4]}, total: {cnt[5]}")
-    
+
     # Check companies fields
     ccnt = conn.execute(text("""
-        SELECT 
+        SELECT
             COUNT(*) FILTER (WHERE primary_phone IS NOT NULL) as p,
             COUNT(*) FILTER (WHERE primary_email IS NOT NULL) as e,
             COUNT(*) FILTER (WHERE website_domain IS NOT NULL) as w,

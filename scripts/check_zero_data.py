@@ -16,7 +16,7 @@ with eng.connect() as conn:
         AND (c.primary_phone IS NOT NULL AND c.primary_phone != '')
     """)).scalar()
     print(f"Score 0 ama telefon olan: {r}")
-    
+
     r2 = conn.execute(text("""
         SELECT COUNT(*) as cnt FROM companies c
         LEFT JOIN source_records sr ON sr.source_record_id = c.source_record_id
@@ -25,7 +25,7 @@ with eng.connect() as conn:
         AND (c.primary_email IS NOT NULL AND c.primary_email != '')
     """)).scalar()
     print(f"Score 0 ama email olan: {r2}")
-    
+
     r3 = conn.execute(text("""
         SELECT COUNT(*) as cnt FROM companies c
         LEFT JOIN source_records sr ON sr.source_record_id = c.source_record_id
@@ -34,7 +34,7 @@ with eng.connect() as conn:
         AND c.website_domain IS NOT NULL AND c.website_domain != ''
     """)).scalar()
     print(f"Score 0 ama web olan: {r3}")
-    
+
     r4 = conn.execute(text("""
         SELECT COUNT(*) as cnt FROM companies c
         LEFT JOIN source_records sr ON sr.source_record_id = c.source_record_id

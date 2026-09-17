@@ -182,7 +182,7 @@ def cmd_hepsini_tamamla(args: argparse.Namespace) -> int:
             duzeltilen += 1
         except Exception as e:
             print(f"  HATA: {k['task_id']} - {e}")
-    
+
     for ajan in ["kilo", "roo", "copilot", "cline", "orkestrator"]:
         try:
             tum = trigger._tetikleri_oku(ajan)
@@ -194,7 +194,7 @@ def cmd_hepsini_tamamla(args: argparse.Namespace) -> int:
                     duzeltilen += 1
         except Exception:
             pass
-    
+
     if duzeltilen == 0:
         print("  (düzeltilecek bir şey yok)")
     else:
@@ -295,7 +295,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="ORCH-08 — Ajan posta kutusu + kontrolör onay")
 
     sub = parser.add_subparsers(dest="komut", required=True)
-    
+
     bak_p = sub.add_parser("bak", help="Ajanın posta kutusunu göster")
     bak_p.add_argument("--ajan", required=True, help="Ajan adı (kilo, roo, vs.)")
     bak_p.set_defaults(func=cmd_bak)

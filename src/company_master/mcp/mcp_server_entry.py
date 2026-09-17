@@ -73,7 +73,7 @@ def create_mcp_server(
         huginn_server: Optional[HuginnMCPServer] = None,
     ) -> MCPServer:
         """Create an MCPServer with Apify + Huginn tools registered.
-    
+
         Args:
         apify_adapter: Pre-configured ApifyAdapter (or None for default).
         huginn_server: Pre-configured HuginnMCPServer (or None for default).
@@ -85,12 +85,12 @@ def create_mcp_server(
             description="Huginn B2B Intelligence - Apify ve Huginn verilerine MCP erişimi",
             instructions=INSTRUCTIONS,
         )
-    
+
         adapter = apify_adapter or ApifyAdapter(policy_engine=PolicyEngine())
         huginn = huginn_server or HuginnMCPServer(policies=PolicyEngine())
-    
+
         # -- Apify tools --
-    
+
         @server.tool(
             name="apify_list_actors",
             title="List Apify Actors",
@@ -98,7 +98,7 @@ def create_mcp_server(
         )
         async def handle_apify_list_actors() -> dict[str, Any]:
             return adapter.apify_list_actors().to_dict()
-    
+
         @server.tool(
             name="apify_run_actor",
             title="Run Apify Actor",
@@ -116,7 +116,7 @@ def create_mcp_server(
                 max_items=max_items,
                 max_charge_usd=max_charge_usd,
             ).to_dict()
-    
+
         @server.tool(
             name="apify_get_dataset",
             title="Get Apify Dataset",
@@ -132,9 +132,9 @@ def create_mcp_server(
                 max_items=max_items,
                 clean=clean,
             ).to_dict()
-    
+
         # -- Huginn tools --
-    
+
         @server.tool(
             name="get_source_policy",
             title="Get Source Policy",
@@ -142,7 +142,7 @@ def create_mcp_server(
         )
         async def handle_get_source_policy(source_id: str) -> dict[str, Any]:
             return huginn.get_source_policy(source_id=source_id).to_dict()
-    
+
         @server.tool(
             name="get_collection_run_status",
             title="Get Collection Run Status",
@@ -150,7 +150,7 @@ def create_mcp_server(
         )
         async def handle_get_collection_run_status(run_id: str) -> dict[str, Any]:
             return huginn.get_collection_run_status(run_id=run_id).to_dict()
-    
+
         @server.tool(
             name="submit_evidence_batch",
             title="Submit Evidence Batch",
@@ -164,7 +164,7 @@ def create_mcp_server(
                 evidence=evidence,
                 source_id=source_id,
             ).to_dict()
-    
+
         @server.tool(
             name="report_collection_failure",
             title="Report Collection Failure",
@@ -180,7 +180,7 @@ def create_mcp_server(
                 error=error,
                 run_id=run_id,
             ).to_dict()
-    
+
         return server
 
 

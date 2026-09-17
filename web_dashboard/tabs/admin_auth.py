@@ -94,7 +94,8 @@ def render_admin_login() -> None:
             else:
                 st.error("Giriş başarısız: e-posta/şifre kontrol ediniz.")
         except APIError as exc:
-            st.error(f"Giriş başarısız: {exc}")
+            # SEC-AUTH-01 Y-2: sunucu detayı (var/yok sızması) UI'a yansıtılmaz.
+            st.error("Giriş başarısız: e-posta/şifre kontrol ediniz.")
             if "401" in str(exc):
                 st.caption(
                     "İpucu: `.env` ADMIN_PASSWORD ile DB şifresi uyuşmuyor olabilir → "

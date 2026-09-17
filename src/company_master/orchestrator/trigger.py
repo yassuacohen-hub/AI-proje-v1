@@ -245,12 +245,12 @@ def teslim_et(
             k["durum"] = "teslim"
             k["teslim_tarihi"] = _simdi()
     _tetikleri_yaz(kayitlar, ajan, data_dir)
-    
+
     # Zincir devam et: tamamlanan görevin sonrası tetiklensin
     sonraki = zincir_devam_et(task_id, ajan, data_dir)
     if sonraki:
         print(f"⏭ ZİNCİR: {sonraki['task_id']} tetiklendi (önceki: {task_id})")
-    
+
     return {"task_id": task_id, "durum": "review"}
 
 
@@ -404,31 +404,31 @@ def tetik_uyari_ekle(ajan: str, task_id: str, data_dir: Path | None = None) -> d
     return {"task_id": task_id, "uyari_sayisi": kayitlar[-1].get("uyari_sayisi", 1) if bulundu else 0}
 def gorev_zinciri(task_ids: list[str], ajan: str, talimat: str = "", data_dir: Path | None = None) -> list[dict[str, Any]]:
     """Görev zinciri oluştur: ilk görev hemen tetiklenir, diğerleri 'zincir_bekleme' durumunda bekler.
-    
+
     Ajan ilk görevi teslim edince otomatik sonraki tetiklenir.
-    
+
     Args:
         task_ids: Sıralı görev ID listesi (örn. ['P7-23', 'P7-4'])
         ajan: Tüm görevlerin sahibi
         talimat: Tüm görevler için ortak talimat (opsiyonel)
-        
+
     Returns:
         Oluşturulan tetik kayıtları
     """
     if not task_ids:
         raise TriggerError("Zincir için en az 1 görev gerekli")
-    
+
     kayitlar = []
-    
+
     # İlk görev hemen tetiklenir
     ilk = tetik_ekle(task_ids[0], ajan, talimat, data_dir)
     kayitlar.append(ilk)
-    
+
     # Diğerleri zincir_bekleme durumunda
     for i in range(1, len(task_ids)):
         onceki_id = task_ids[i - 1]
         simdiki_id = task_ids[i]
-        
+
         # Zincir kaydı oluştur (bekliyor yerine zincir_bekleme)
         kayit = {
             "task_id": simdiki_id,
@@ -438,26 +438,26 @@ def gorev_zinciri(task_ids: list[str], ajan: str, talimat: str = "", data_dir: P
             "durum": "zincir_bekleme",
             "onceki_gorev": onceki_id,  # Bu görev tamamlanınca tetikle
         }
-        
+
         # Bu ajanın tetik dosyasına ekle
         mevcut = _tetikleri_oku(ajan, data_dir)
         mevcut.append(kayit)
         _tetikleri_yaz(mevcut, ajan, data_dir)
         kayitlar.append(kayit)
-    
+
     return kayitlar
 
 
 def zincir_devam_et(tamamlanan_task_id: str, ajan: str, data_dir: Path | None = None) -> dict[str, Any] | None:
     """Tamamlanan göreve bağlı zincirdeki sonraki görevi otomatik tetikle.
-    
+
     teslim_et() içinden çağrılır.
-    
+
     Returns:
         Tetiklenen görev kaydı veya None (zincir yok)
     """
     kayitlar = _tetikleri_oku(ajan, data_dir)
-    
+
     # Zincirde bekleyen görev var mı?
     for k in kayitlar:
         if k.get("durum") == "zincir_bekleme" and k.get("onceki_gorev") == tamamlanan_task_id:
@@ -467,37 +467,37 @@ def zincir_devam_et(tamamlanan_task_id: str, ajan: str, data_dir: Path | None = 
             k["tarih"] = _simdi()  # Tetik zamanı güncelle
             _tetikleri_yaz(kayitlar, ajan, data_dir)
             return k
-    
+
     return None
 
 def zincir_uzat(ajan: str, yeni_task_ids: list[str], talimat: str = "", data_dir: Path | None = None) -> list[dict[str, Any]]:
     """Mevcut zinciren sonuna yeni görev(ler) ekle.
-    
+
     Örnek:
         # roo'nun mevcut zinciri: P7-24 → simple_1
         zincir_uzat('roo', ['YENI-1', 'YENI-2'])
         # Sonuç: P7-24 → simple_1 → YENI-1 → YENI-2
-    
+
     Args:
         ajan: Zincir sahibi
         yeni_task_ids: Eklenecek görev ID'leri
         talimat: Yeni görevler için talimat
-        
+
     Returns:
         Eklenen tetik kayıtları
     """
     kayitlar = _tetikleri_oku(ajan, data_dir)
-    
+
     # Zinciren sonunu bul (en son eklenen görev)
     son_task_id = None
     for k in kayitlar:
         if k.get("durum") in ("zincir_bekleme", "bekliyor", "alindi"):
             son_task_id = k["task_id"]
-    
+
     if not son_task_id:
         # Zincir yoksa yeni oluştur
         return gorev_zinciri(yeni_task_ids, ajan, talimat, data_dir)
-    
+
     # Yeni görevleri zinciren sonuna ekle
     eklenen = []
     onceki = son_task_id
@@ -513,6 +513,6 @@ def zincir_uzat(ajan: str, yeni_task_ids: list[str], talimat: str = "", data_dir
         kayitlar.append(kayit)
         eklenen.append(kayit)
         onceki = task_id
-    
+
     _tetikleri_yaz(kayitlar, ajan, data_dir)
     return eklenen

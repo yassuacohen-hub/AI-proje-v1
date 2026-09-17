@@ -1,8 +1,8 @@
 # Dashboard Prompt Cercevesi - Huginn & Muninn
 
-> Uretim oncesi kok dizinindeki `ai-rules.md` (AI Brand Rules) okunur; pozisyonlama: Startup Intelligence Platform, ASLA OSINT Tool.
+> Uretim oncesi `docs/brand/ai-rules.md` (AI Brand Rules) okunur; pozisyonlama: Startup Intelligence Platform, ASLA OSINT Tool.
 
-Dashboard ve mobil uygulama uretimi bu cerceve + `brand.md` + `design-tokens.json` ile yapilir.
+Dashboard ve mobil uygulama uretimi bu cerceve + `docs/brand/brand.md` + `design-tokens.json` ile yapilir.
 
 ## UI token'lari (tokens.ui)
 - theme: dark-first - dashboard: true - dataDensity: medium - chartStyle: modern

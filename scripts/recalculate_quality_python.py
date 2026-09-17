@@ -13,19 +13,19 @@ engine = get_engine()
 with engine.connect() as conn:
     # Get all company_ids
     rows = conn.execute(text("""
-        SELECT company_id FROM companies 
+        SELECT company_id FROM companies
         WHERE is_ankara = TRUE AND is_osb_member = TRUE
         ORDER BY company_id
     """)).fetchall()
-    
+
     company_ids = [r[0] for r in rows]
     print(f"Toplam firma: {len(company_ids)}")
-    
+
     updated = 0
     for i, company_id in enumerate(company_ids):
         # Calculate score for this company
         score_row = conn.execute(text("""
-            SELECT 
+            SELECT
                 COALESCE(c.primary_phone, sr.raw_phone) as phone,
                 COALESCE(c.primary_email, sr.raw_email) as email,
                 COALESCE(c.website_domain, sr.raw_website, c.web_sitesi) as web,
@@ -38,10 +38,10 @@ with engine.connect() as conn:
             LEFT JOIN source_records sr ON sr.source_record_id = c.source_record_id
             WHERE c.company_id = :cid
         """), {"cid": company_id}).first()
-        
+
         if not score_row:
             continue
-        
+
         score = 10  # base
         if score_row.phone:
             score += 10
@@ -59,24 +59,24 @@ with engine.connect() as conn:
             score += 15
         if score_row.nace:
             score += 5
-        
+
         score = max(0, min(100, score))
-        
+
         conn.execute(text("""
             UPDATE companies SET data_quality_score = :score
             WHERE company_id = :cid
         """), {"score": score, "cid": company_id})
-        
+
         updated += 1
         if updated % 100 == 0:
             print(f"Ilerleme: {updated}/{len(company_ids)}")
             conn.commit()
-    
+
     conn.commit()
-    
+
     avg = conn.execute(text("""
-        SELECT AVG(data_quality_score) FROM companies 
+        SELECT AVG(data_quality_score) FROM companies
         WHERE is_ankara = TRUE AND is_osb_member = TRUE
     """)).scalar()
-    
+
     print(f"Toplam: {updated}, Ortalama: {avg:.2f}")

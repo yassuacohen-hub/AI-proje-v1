@@ -16,7 +16,7 @@ with engine.connect() as conn:
     print("Companies columns:")
     for c in cols:
         print(f"  {c[0]}: {c[1]}")
-    
+
     print("\n\n=== Join check ===")
     # Check if companies has source_record_id
     check = conn.execute(text("""
@@ -45,10 +45,10 @@ with engine.connect() as conn:
                 payload = json.loads(payload)
             print(f"  payload: adres={payload.get('adres')}, telefon={payload.get('telefonler')}, vergi={payload.get('vergi_no')}, web={payload.get('web_sitesi')}")
         print()
-    
+
     # Count companies with source_record_id linkage
     count = conn.execute(text("""
-        SELECT 
+        SELECT
             COUNT(*) AS total,
             COUNT(c.source_record_id) AS with_src,
             COUNT(CASE WHEN c.tax_number IS NOT NULL OR c.vergi_no IS NOT NULL THEN 1 END) AS with_vkn

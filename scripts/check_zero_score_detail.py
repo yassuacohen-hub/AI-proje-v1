@@ -17,7 +17,7 @@ with eng.connect() as conn:
         AND c.data_quality_score = 0
         LIMIT 5
     """)).fetchall()
-    
+
     print("Score 0 olan firmalar:")
     for row in rows:
         print(f"  {row[1][:50]}: phone={row[3]}, email={row[4]}, web={row[5]}, tax={row[6]}, vergi={row[7]}, nace={row[8]}, parsel={row[9]}")

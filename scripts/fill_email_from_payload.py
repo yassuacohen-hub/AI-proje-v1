@@ -15,13 +15,13 @@ with eng.connect() as conn:
         WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
         AND (c.primary_email IS NULL OR c.primary_email = '')
     """)).fetchall()
-    
+
     updated = 0
     for row in rows:
         company_id, raw_payload = row
         if not raw_payload:
             continue
-        
+
         try:
             emailler = raw_payload.get("emailler") if isinstance(raw_payload, dict) else None
             if emailler and len(emailler) > 0:
@@ -30,7 +30,7 @@ with eng.connect() as conn:
                     email = email.get("adres") or email.get("email") or str(email)
                 elif not isinstance(email, str):
                     email = str(email)
-                
+
                 conn.execute(text("""
                     UPDATE companies SET primary_email = :email
                     WHERE company_id = :cid
@@ -38,6 +38,6 @@ with eng.connect() as conn:
                 updated += 1
         except:
             continue
-    
+
     conn.commit()
     print(f"Guncellenen firma: {updated}")

@@ -127,19 +127,19 @@ RATE_LIMIT_REFILL_RATE = 10.0  # tokens per second
 
 def _check_rate_limit(token_prefix: str) -> tuple[bool, float]:
     """Token-based rate limiting using token bucket algorithm.
-    
+
     Returns: (allowed, retry_after_seconds)
     """
     if not token_prefix:
         return True, 0.0
-    
+
     now = time.time()
     tokens, last_refill = _rate_limit_buckets[token_prefix]
-    
+
     # Refill tokens
     elapsed = now - last_refill
     tokens = min(RATE_LIMIT_CAPACITY, tokens + elapsed * RATE_LIMIT_REFILL_RATE)
-    
+
     if tokens >= 1.0:
         tokens -= 1.0
         _rate_limit_buckets[token_prefix] = (tokens, now)
@@ -260,7 +260,7 @@ class ApifyWebhookReceiver:
     @staticmethod
     def verify_timestamp(payload: dict[str, Any], max_skew: int = 300) -> bool:
         """Payload'daki timestamp'in gecerli olup olmadigini kontrol eder.
-        
+
         Apify webhook payload'inda 'createdAt' veya 'timestamp' alani olabilir.
         """
         ts = payload.get("createdAt") or payload.get("timestamp")
@@ -280,7 +280,7 @@ class ApifyWebhookReceiver:
     # -- Rate Limiting --
     def check_rate_limit(self, token: str) -> tuple[bool, float]:
         """Rate limit kontrolu.
-        
+
         Returns: (allowed, retry_after_seconds)
         """
         if not self.enable_rate_limit:
@@ -511,7 +511,7 @@ class ApifyWebhookReceiver:
         subprocess olarak ayrilir.
         """
         start_time = time.time()
-        
+
         # 0. Request validation
         if not isinstance(payload, dict):
             self._write_dlq(payload, "payload not a dict", "validation_error")
@@ -611,7 +611,7 @@ class ApifyWebhookReceiver:
                 dlq_count = sum(1 for _ in WEBHOOK_DLQ_LOG.open(encoding="utf-8"))
             except Exception:
                 pass
-        
+
         return {
             "status": "healthy",
             "secret_configured": bool(self.secret_token),

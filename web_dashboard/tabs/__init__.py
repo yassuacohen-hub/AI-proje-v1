@@ -507,6 +507,8 @@ SECTIONS: tuple[TabTanimi, ...] = (
         aciklama="KPI, kalite, arama ve executive özeti",
         url_path="veri-kalite",
         hazir=True,
+        modul="web_dashboard.tabs.admin_kpi",
+        fonksiyon="render_kpi_tab",
         min_rol="analyst",
     ),
     TabTanimi(
@@ -517,6 +519,8 @@ SECTIONS: tuple[TabTanimi, ...] = (
         aciklama="Paketler ve pazarlama müşteri ekranı (Huginn önizleme)",
         url_path="musteri-onizleme",
         hazir=True,
+        modul="web_dashboard.tabs.paketler",
+        fonksiyon="render_paketler_tab",
         min_rol="anon",
         yuzey=YUZEY_MUNINN,
     ),

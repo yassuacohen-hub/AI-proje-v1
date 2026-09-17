@@ -19,7 +19,7 @@ with eng.connect() as conn:
         AND (c.primary_phone IS NOT NULL AND c.primary_phone != '')
         LIMIT 100
     """)).fetchall()
-    
+
     found = 0
     for row in rows:
         payload = row[0]
@@ -31,5 +31,5 @@ with eng.connect() as conn:
                     if matches:
                         found += len(matches)
                         print(f"Found VKN in {key}: {matches}")
-    
+
     print(f"\nTotal VKN patterns found: {found}")
