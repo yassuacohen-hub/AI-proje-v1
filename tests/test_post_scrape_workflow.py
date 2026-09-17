@@ -12,6 +12,34 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 import post_scrape_workflow
 
 
+@pytest.fixture(autouse=True)
+def izole_pano(tmp_path, monkeypatch):
+    """TEST-ISO-02: ``main()`` must never write the real orchestration board.
+
+    ``post_scrape_workflow.main()`` closes task ``P0-2`` and appends a
+    handoff entry (script lines 124-131). Those constants are frozen at
+    import time (``STATE_DIR / "task_board.json"`` etc.), so a test that
+    only mocks ``run_step`` still rewrites the tracked
+    ``data/orchestrator/task_board.json`` and ``handoffs.json`` files.
+    All board targets are redirected to ``tmp_path``.
+    """
+    from company_master.orchestrator import task_board as tb
+
+    monkeypatch.setattr(tb, "AUTO_SYNC", False)
+    monkeypatch.setattr(tb, "STATE_DIR", tmp_path)
+    for ad, dosya in (
+        ("TASK_BOARD", "task_board.json"),
+        ("STATE_JSON", "state.json"),
+        ("FILE_LOCKS", "file_locks.json"),
+        ("TASK_MD", "gorev_panosu.md"),
+        ("HANDOFF_FILE", "handoffs.json"),
+        ("AGENT_SYNC_MD", "AGENT_SYNC.md"),
+        ("AGENT_SYNC_MD_KOPYA", "AGENT_SYNC_kopya.md"),
+    ):
+        monkeypatch.setattr(tb, ad, tmp_path / dosya, raising=False)
+    yield tmp_path
+
+
 def test_run_step_success():
     """Test that run_step executes successfully when script returns 0."""
     with patch('subprocess.run') as mock_run:

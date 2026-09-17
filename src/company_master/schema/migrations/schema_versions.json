@@ -1,6 +1,6 @@
 {
-  "current_version": 13,
-  "last_applied": "0013_job_intelligence.sql",
+  "current_version": 15,
+  "last_applied": "0015_data_log.sql",
   "migrations": [
     {"version": 1, "file": "0001_core.sql", "date": "2026-09-01"},
     {"version": 2, "file": "0002_relations.sql", "date": "2026-09-01"},

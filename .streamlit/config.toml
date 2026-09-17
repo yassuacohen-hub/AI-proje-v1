@@ -64,13 +64,13 @@ baseRadius = "0.5rem"
 buttonRadius = "0.5rem"
 
 # Ana renk: Streamlit imza kırmızısı (referans sayfadaki vurgu rengi)
-primaryColor = "#FF4B4B"
+primaryColor = "#6366f1"
 
 # --------------------------------------------------------------------------- #
 # GÜNDÜZ MODU — docs.streamlit.io açık tema paleti
 # --------------------------------------------------------------------------- #
 [theme.light]
-primaryColor = "#FF4B4B"
+primaryColor = "#6366f1"
 backgroundColor = "#FFFFFF"
 secondaryBackgroundColor = "#F0F2F6"
 textColor = "#31333F"
@@ -89,7 +89,7 @@ borderColor = "#E6EAF1"
 # GECE MODU — docs.streamlit.io koyu tema paleti
 # --------------------------------------------------------------------------- #
 [theme.dark]
-primaryColor = "#FF4B4B"
+primaryColor = "#6366f1"
 backgroundColor = "#0E1117"
 secondaryBackgroundColor = "#262730"
 textColor = "#FAFAFA"

@@ -26,7 +26,8 @@ UI_DOSYA = KOK / "ui.json"
 TONLAR = {"info", "success", "warning", "danger", "neutral"}
 KATMANLAR = {"veri", "cerceve"}
 
-HATALI_YAZIM = re.compile(r"Muginn|Hugin\b|Munin\b|Hugginn|Munnin|Odinn", re.IGNORECASE)
+HATALI_YAZIM = re.compile(r"Muginn|Hugin\b|Munin\b|Hugginn|Munnin|Odinn|Huggin\b", re.IGNORECASE)
+ODIN_MISSPELLING = re.compile(r"Odın")  # exact: Turkish dotless ı (U+0131)
 
 
 def _ham(dosya: Path) -> dict:
@@ -109,6 +110,7 @@ def test_bekci_13_marka_yazim_hatasi_yok(anahtar: str) -> None:
         if isinstance(s, dict):
             s = " ".join(s.values())
         assert not HATALI_YAZIM.search(str(s))
+        assert not ODIN_MISSPELLING.search(str(s))
 
 
 def test_onbellek_temizleme_calisir() -> None:

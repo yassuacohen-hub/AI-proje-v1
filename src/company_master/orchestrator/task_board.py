@@ -267,7 +267,11 @@ def gorev_ekle(
     board.append(task)
     _write_json(TASK_BOARD, board)
     _md_yaz(board)
-    agent_sync_yaz()
+    # TEST-ISO-03: burada dogrudan agent_sync_yaz() cagriliyordu; bu, _sync_tetikle()
+    # icindeki AUTO_SYNC=False kapisini atliyor ve testler (izole pano) gercek kok
+    # AGENT_SYNC.md'yi eziyordu. Diger tum yazim noktalariyla (gorev_guncelle,
+    # lock_birak, handoff_yaz, ...) ayni kapiya baglandi.
+    _sync_tetikle()
     return task
 
 

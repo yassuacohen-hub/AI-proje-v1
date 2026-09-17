@@ -130,7 +130,7 @@ Scope (D-45): this palette is for marketing, website, logo and print. The Muninn
 (Streamlit) keeps its own product palette in `src/company_master/ui/tokens.py`
 (primary Indigo #6366f1). The two palettes are not merged.
 
-Spelling (D-44 §1): **Huginn**, **Muninn**, **Odin** only. Never Huggin, Hugginn, Hugin, Munin, Muginn, Odın.
+Spelling (D-44 §1): **Huginn**, **Muninn**, **Odin** only. Yasak: tüm diger varyantlar.
 
 
 # Typography

@@ -12,6 +12,9 @@ paletine (``#6366F1``) güncellenmiştir.
 
 Not: Tam tema yönetimi (dark/light geçişi) UX-03 kapsamındadır; burada
 yalnızca token sözlüğü ve `:root` CSS üretimi bulunur.
+
+D-45: Bu dosya ürün UI SSOT'dur. `docs/brand/design-tokens.json` = pazarlama/web/logo
+SSOT. İki kapsam birleştirilmez; renk değerleri değişmez.
 """
 from __future__ import annotations
 

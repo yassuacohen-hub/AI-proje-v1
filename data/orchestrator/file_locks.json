@@ -19,26 +19,6 @@
     "task_id": "SEC-AUTH-01",
     "kilitlendi": "2026-09-16T22:27:06"
   },
-  "tests/test_i18n.py": {
-    "sahip": "kilo",
-    "task_id": "MARKA-REVIZE-01B",
-    "kilitlendi": "2026-09-16T23:15:35"
-  },
-  ".streamlit/config.toml": {
-    "sahip": "kilo",
-    "task_id": "MARKA-REVIZE-01B",
-    "kilitlendi": "2026-09-16T23:15:35"
-  },
-  "scripts/marka_denetim.py": {
-    "sahip": "kilo",
-    "task_id": "MARKA-REVIZE-01B",
-    "kilitlendi": "2026-09-16T23:15:35"
-  },
-  "tests/test_marka_denetim.py": {
-    "sahip": "kilo",
-    "task_id": "MARKA-REVIZE-01B",
-    "kilitlendi": "2026-09-16T23:15:35"
-  },
   "docs/brand/brand.md": {
     "sahip": "cline",
     "task_id": "MARKA-REVIZE-01",
@@ -143,5 +123,20 @@
     "sahip": "cline",
     "task_id": "MARKA-REVIZE-01",
     "kilitlendi": "2026-09-17T00:23:45"
+  },
+  "tests/conftest.py": {
+    "sahip": "kilo",
+    "task_id": "TEST-ISO-02",
+    "kilitlendi": "2026-09-17T03:09:14"
+  },
+  "tests/test_web_dashboard_tabs.py": {
+    "sahip": "kilo",
+    "task_id": "TEST-ISO-02",
+    "kilitlendi": "2026-09-17T03:09:14"
+  },
+  "requirements-dev.txt": {
+    "sahip": "kilo",
+    "task_id": "TEST-ISO-02",
+    "kilitlendi": "2026-09-17T03:09:14"
   }
 }

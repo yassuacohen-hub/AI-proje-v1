@@ -11,8 +11,6 @@ from __future__ import annotations
 
 from unittest.mock import MagicMock
 
-import pytest
-
 import web_dashboard.tabs.proje_yonetimi as proje
 from web_dashboard.tabs import admin_panel, abrakadabra, admin_audit, admin_errors, admin_dlq
 
@@ -63,12 +61,11 @@ def test_proje_yonetimi_admin_ui_10():
     assert not subheader_cagrilar, f"st.subheader kullanimi var: {len(subheader_cagrilar)}"
 
 
-def test_render_tum_fonksiyonlar_cagiriliyor():
+def test_render_tum_fonksiyonlar_cagiriliyor(monkeypatch):
     """Alt sekme fonksiyonlari cagiriliyor."""
     st_mock = MagicMock()
     st_mock.tabs = MagicMock(return_value=[MagicMock() for _ in range(5)])
 
-    monkeypatch = pytest.MonkeyPatch()
     monkeypatch.setattr(proje, "st", st_mock)
 
     ph_mock = MagicMock()
