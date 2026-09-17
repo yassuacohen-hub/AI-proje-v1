@@ -17,8 +17,7 @@
 | SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH bulgular | kilo | P2 | blocked | scripts/sec_bandit.py, tests/test_sec_bandit.py, .bandit |
 | FMT-01 | ruff format/lint standardizasyonu (web_app/app/web_dashboard haric) | kilo | P2 | blocked | ruff.toml, .pre-commit-config.yaml |
 | API-SPLIT-01 | web_app.py modullere bolme (src/company_master/api) | kilo | P2 | plan | web_app.py, src/company_master/api/, tests/test_api_companies.py |
-| UI-MIMARI-02 | Ana kontrol/musteri yonetimi temizligi: olu kod, inline import, KVKK tuketimi (M-03/M-05) | kilo | P2 | aktif | web_dashboard/tabs/ana_kontrol.py, web_dashboard/tabs/musteri_yonetimi.py, web_dashboard/charts.py |
-| KPI-HIST-01 | GET /api/kpi/history + ana kontrol gercek sparkline (D-14) | kilo | P2 | plan | web_app.py, web_dashboard/tabs/ana_kontrol.py |
+| KPI-HIST-01 | GET /api/kpi/history + ana kontrol gercek sparkline (D-14) | kilo | P2 | aktif | web_app.py, web_dashboard/tabs/ana_kontrol.py |
 | ADMIN-KPI-KART-01 | Admin sekmelerinde st.metric -> kpi_karti (8 sekme, ~40 kart) | kilo | P2 | plan | - |
 | ADMIN-HATA-01 | Hata Yonetimi sekmesi: sahte istatistik/demo raise kaldir, gercek kaynak + rapor kaydi | kilo | P2 | plan | - |
 | ADMIN-ROO-01 | Admin sekmeleri hata/bos-durum standardi + canli/pazarlama/paketler kpi_karti (roo ceza gorevi) | roo | P1 | review | - |
@@ -263,10 +262,11 @@
 | ROO-GAP-NAV-IA04 | NAV-IA-04/AUTH-GATE-01 capsayı tutma — kontrol ve onay | roo | 2026-09-16T23:23:35 |
 | MARKA-REVIZE-01B | Marka revizyon kod katmani: test_i18n Huggin regex + config.toml primaryColor #6366f1 + scripts/marka_denetim.py | kilo | 2026-09-17T03:07:28 |
 | TEST-ISO-02 | Test izolasyonu: siraya bagimli testler (randomly + monkeypatch) | kilo | 2026-09-17T03:28:59 |
-| VEC-TEST-01 | Vektor katmani test kapsami >= %90 | kilo | 2026-09-17T11:22:52 |
+| VEC-TEST-01 | Vektor katmani test kapsami >= %90 | kilo | 2026-09-17T12:32:00 |
 | HANDOFF-TEMIZ-01 | P0-2 handoff/pano tarih damgasi temizligi (test sizintisi kalintisi) | roo | 2026-09-17T07:01:28 |
 | TEST-CI-01 | CI test isi: pytest -x --timeout + izolasyon guard + kapsam esigi | roo | 2026-09-17T06:56:27 |
 | ADMIN-AYAR-01 | Admin ayar sekmesi: giris zorunlu + auto_refresh ayar dosyasi + KVKK yardimci (K-04/S-08) | kilo | 2026-09-17T06:44:44 |
+| UI-MIMARI-02 | Ana kontrol/musteri yonetimi temizligi: olu kod, inline import, KVKK tuketimi (M-03/M-05) | kilo | 2026-09-17T12:29:55 |
 | ADMIN-NAV-HAZIR-01 | Bayat hazir=False ust sayfalari ac (veri_kalite, musteri_onizleme) + girinti + sessiz pass | roo | 2026-09-17T07:59:14 |
 | ADMIN-EXEC-01 | Executive Dashboard: st.metric->kpi_karti, sessiz except->hata_kutusu, ilk test dosyasi | roo | 2026-09-17T07:17:53 |
 | ADMIN-SEARCH-01 | admin_search.py admin sekme kalibina gecis (kpi_karti + hata_kutusu + test) | roo | 2026-09-17T07:29:31 |

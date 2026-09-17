@@ -12,6 +12,13 @@
 - Otomatik onay (S-07, sahip kararı 2026-09-16): `oto-nobetci` / `hepsini-tamamla` yalnız **P2 ve altı** görevleri onaylar; **P0/P1 roo elle onaylar** (`trigger.otomatik_onaylanabilir`). Tekrar ihlalde oto-nobetci kapatılır.
 - Başlangıç protokolü: oturum açınca veya tek kelimelik tetik (başla/go/devam/tamam = tam yetki) ile önce posta kutusunu kontrol et.
 - Teslim kontrol listesi: brif maddeleri + diskte dosya + test sayısı + UTF-8 temizlik + kilit disiplini. Ayrıntı: AJAN_DETAY §17.
+- **TESLİM SONRASI DOĞRULAMA (KESIN KURAL):** Her görev teslim edilmeden önce şıklar doğrulanır:
+  1. Rapor dosyası mevcut: `data/orchestrator/<TASK>_rapor_<tarih>_<ajan>.md`
+  2. Bilinen test failure'ları (kilitle kaynaklı bile) raporda açıkça belirtilmiş mi?
+  3. Task board (`data/orchestrator/task_board.json`) entryi güncellenmiş mi (durum, not, bitis)?
+  4. `python scripts/gorev_kutusu.py onay-bekleyen` ile teslim kaydındaki görev görünüyor mu?
+  5. Test sonuçları tekrarlanabilir (tam süit veya ilgili test seti yeşil)?
+  Bu 5 madde eksik herhangi biri = teslim YOK.
 - Kodlama guard: `python scripts/kodlama_denetim.py` temiz çıkmadan teslim yok (BOM/NUL/mojibake/sozdizimi; pre-commit'te de bağlı).
 - BULGU NOTU (cline): kapsam dışı bulguyu DÜZELTME; `data/orchestrator/<TASK>_bulgular_<tarih>_cline.md`'ye yaz, roo'ya tetik düş. Ayrıntı: AJAN_DETAY §7.
 

@@ -38,6 +38,7 @@ EXPECTED_ROUTES: dict[str, set[str]] = {
     "/api/webhooks/apify/metrics": {"GET"},
     "/metrics": {"GET"},
     "/api/kpi": {"GET"},
+    "/api/kpi/history": {"GET"},
     "/api/tasks": {"GET"},
     "/api/handoffs": {"GET"},
     "/api/companies": {"GET"},

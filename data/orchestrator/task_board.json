@@ -3891,7 +3891,7 @@
     "oncelik": "P2",
     "durum": "done",
     "baslangic": "2026-09-17T03:28:59",
-    "bitis": "2026-09-17T11:22:52",
+    "bitis": "2026-09-17T12:32:00",
     "dosyalar": [
       "src/company_master/vector/embedder.py",
       "src/company_master/vector/service.py",
@@ -4044,15 +4044,16 @@
     "oncelik": "P2",
     "durum": "done",
     "baslangic": "2026-09-17T04:53:30",
-    "bitis": "2026-09-17T08:15:00",
+    "bitis": "2026-09-17T12:29:55",
     "dosyalar": [
       "web_dashboard/tabs/ana_kontrol.py",
       "web_dashboard/tabs/musteri_yonetimi.py",
       "web_dashboard/charts.py"
     ],
-    "not": "",
+    "not": "roo onayladi - teslim kaydi mevcut",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "tamamlayan": "kilo"
   },
   {
     "task_id": "KPI-HIST-01",
@@ -4060,7 +4061,7 @@
     "baslik": "GET /api/kpi/history + ana kontrol gercek sparkline (D-14)",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-17T04:53:31",
     "bitis": null,
     "dosyalar": [

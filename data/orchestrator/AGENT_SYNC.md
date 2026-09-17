@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-17T11:22:52
+> Son guncelleme: 2026-09-17T12:32:00
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -17,8 +17,7 @@
 | SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH b | kilo | P2 | blocked |
 | FMT-01 | ruff format/lint standardizasyonu (web_a | kilo | P2 | blocked |
 | API-SPLIT-01 | web_app.py modullere bolme (src/company_ | kilo | P2 | plan |
-| UI-MIMARI-02 | Ana kontrol/musteri yonetimi temizligi:  | kilo | P2 | aktif |
-| KPI-HIST-01 | GET /api/kpi/history + ana kontrol gerce | kilo | P2 | plan |
+| KPI-HIST-01 | GET /api/kpi/history + ana kontrol gerce | kilo | P2 | aktif |
 | ADMIN-KPI-KART-01 | Admin sekmelerinde st.metric -> kpi_kart | kilo | P2 | plan |
 | ADMIN-HATA-01 | Hata Yonetimi sekmesi: sahte istatistik/ | kilo | P2 | plan |
 | ADMIN-ROO-01 | Admin sekmeleri hata/bos-durum standardi | roo | P1 | review |
@@ -30,11 +29,11 @@
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| TEST-ISO-02 | Test izolasyonu: siraya bagimli testler  | kilo | 2026-09-17 |
 | VEC-TEST-01 | Vektor katmani test kapsami >= %90 | kilo | 2026-09-17 |
 | HANDOFF-TEMIZ-01 | P0-2 handoff/pano tarih damgasi temizlig | roo | 2026-09-17 |
 | TEST-CI-01 | CI test isi: pytest -x --timeout + izola | roo | 2026-09-17 |
 | ADMIN-AYAR-01 | Admin ayar sekmesi: giris zorunlu + auto | kilo | 2026-09-17 |
+| UI-MIMARI-02 | Ana kontrol/musteri yonetimi temizligi:  | kilo | 2026-09-17 |
 | ADMIN-NAV-HAZIR-01 | Bayat hazir=False ust sayfalari ac (veri | roo | 2026-09-17 |
 | ADMIN-EXEC-01 | Executive Dashboard: st.metric->kpi_kart | roo | 2026-09-17 |
 | ADMIN-SEARCH-01 | admin_search.py admin sekme kalibina gec | roo | 2026-09-17 |

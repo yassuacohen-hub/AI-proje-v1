@@ -1058,7 +1058,6 @@ def api_kpi(_auth: str = Depends(require_api_key)) -> dict:
         return {}
 
 
-@app.get("/api/tasks")
 @app.get("/api/kpi/history")
 def api_kpi_history(_auth: str = Depends(require_api_key), days: int = 7):
     """Get KPI history for the last N days."""
@@ -1092,10 +1091,10 @@ def api_kpi_history(_auth: str = Depends(require_api_key), days: int = 7):
             """)
             try:
                 login_rows = conn.execute(login_sql, {"days": days}).all()
-                result["total_logins"] = sum(row[0] or 0 for row in login_rows)
-                result["successful_logins"] = sum(row[1] or 0 for row in login_rows)
-                result["signins"] = sum(row[2] or 0 for row in login_rows)
-                result["password_resets"] = sum(row[3] or 0 for row in login_rows)
+                result["total_logins"] = sum(row[1] or 0 for row in login_rows)
+                result["successful_logins"] = sum(row[2] or 0 for row in login_rows)
+                result["signins"] = sum(row[3] or 0 for row in login_rows)
+                result["password_resets"] = sum(row[4] or 0 for row in login_rows)
                 result["days"] = [
                     {"date": row[0], "logins": row[1] or 0, "successful": row[2] or 0}
                     for row in login_rows
@@ -1117,15 +1116,17 @@ def api_kpi_history(_auth: str = Depends(require_api_key), days: int = 7):
             """)
             try:
                 search_rows = conn.execute(search_sql, {"days": days}).all()
-                result["search_events"] = sum(row[0] or 0 for row in search_rows)
-                result["long_term_search"] = sum(row[1] or 0 for row in search_rows)
-                result["very_long_term_search"] = sum(row[2] or 0 for row in search_rows)
+                result["search_events"] = sum(row[1] or 0 for row in search_rows)
+                result["long_term_search"] = sum(row[2] or 0 for row in search_rows)
+                result["very_long_term_search"] = sum(row[3] or 0 for row in search_rows)
             except Exception:
                 pass
     except Exception:
         pass
 
     return result
+
+@app.get("/api/tasks")
 def api_tasks(_auth: str = Depends(require_api_key)) -> list[dict]:
     board = tb.gorev_listesi()
     return board or []
