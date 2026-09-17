@@ -2137,8 +2137,8 @@
   {
     "task_id": "ORCH-13",
     "baslik": "Pano sema dogrulama (S-05) + tetik_al pano fallback (S-06)",
-    "sahip": "roo",
-    "oncelik": "P1",
+    "sahip": "cline",
+    "oncelik": "P2",
     "durum": "done",
     "baslangic": "2026-09-14T00:26:32",
     "bitis": "2026-09-14T00:38:53",
@@ -3970,6 +3970,39 @@
       "src/company_master/api/",
       "tests/test_api_companies.py"
     ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "HANDOFF-TEMIZ-01",
+    "id": "HANDOFF-TEMIZ-01",
+    "baslik": "P0-2 handoff/pano tarih damgasi temizligi (test sizintisi kalintisi)",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": [
+      "data/orchestrator/handoffs.json"
+    ],
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "TEST-CI-01",
+    "id": "TEST-CI-01",
+    "baslik": "CI test isi: pytest -x --timeout + izolasyon guard + kapsam esigi",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": [
+      ".github/workflows/",
+      "pytest.ini"
+    ],
+    "bitis": null,
+    "dosyalar": [],
     "not": "",
     "source": "ic",
     "from_agent": null

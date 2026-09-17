@@ -18,6 +18,8 @@
 | SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH bulgular | kilo | P2 | plan | scripts/sec_bandit.py, tests/test_sec_bandit.py, .bandit |
 | FMT-01 | ruff format/lint standardizasyonu (web_app/app/web_dashboard haric) | kilo | P2 | plan | ruff.toml, .pre-commit-config.yaml |
 | API-SPLIT-01 | web_app.py modullere bolme (src/company_master/api) | kilo | P2 | plan | web_app.py, src/company_master/api/, tests/test_api_companies.py |
+| HANDOFF-TEMIZ-01 | P0-2 handoff/pano tarih damgasi temizligi (test sizintisi kalintisi) | cline | P2 | plan | - |
+| TEST-CI-01 | CI test isi: pytest -x --timeout + izolasyon guard + kapsam esigi | cline | P2 | plan | - |
 
 ## Tamamlananlar
 
@@ -156,7 +158,7 @@
 | COP-25 | [COP-TASARIM] TASARIM-3: Sidebar yardim satirlari. app.py icinde... | copilot | 2026-09-13T22:48:51 |
 | COP-26 | MUSTERILER ekrani: firma listesi+filtre+bildirim blogu (roo uyarisi) | copilot | 2026-09-13T22:57:21 |
 | WIKI-01 | Admin Panel Kullanım Kılavuzu — Obsidian Wiki | orkestrator | - |
-| ORCH-13 | Pano sema dogrulama (S-05) + tetik_al pano fallback (S-06) | roo | 2026-09-14T00:38:53 |
+| ORCH-13 | Pano sema dogrulama (S-05) + tetik_al pano fallback (S-06) | cline | 2026-09-14T00:38:53 |
 | UX-01 | UI Component Library — Design System | roo | 2026-09-14T02:08:24 |
 | UX-02 | Responsive Layout System ve Breakpoint Management | roo | 2026-09-14T02:33:25 |
 | UX-03 | Design Token ve Theme Management System | roo | 2026-09-14T03:36:38 |

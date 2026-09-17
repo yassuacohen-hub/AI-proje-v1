@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-17T03:28:59
+> Son guncelleme: 2026-09-17T03:38:11
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -18,6 +18,8 @@
 | SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH b | kilo | P2 | plan |
 | FMT-01 | ruff format/lint standardizasyonu (web_a | kilo | P2 | plan |
 | API-SPLIT-01 | web_app.py modullere bolme (src/company_ | kilo | P2 | plan |
+| HANDOFF-TEMIZ-01 | P0-2 handoff/pano tarih damgasi temizlig | cline | P2 | plan |
+| TEST-CI-01 | CI test isi: pytest -x --timeout + izola | cline | P2 | plan |
 
 ## Tamamlananlar (Son 10)
 
