@@ -123,3 +123,70 @@ def test_fragment_yoksa_cokmez(monkeypatch):
 def test_aralik_metni():
     assert mod._aralik_metni(15) == "15 sn"
     assert mod._aralik_metni(300) == "5 dk"
+
+
+# --- ADMIN-REFRESH-FIX-01: tercih kaydi rerun'dan ONCE, hata yutulmuyor ---
+
+def _kayit_casusu(monkeypatch, *, hata: Exception | None = None) -> list[tuple]:
+    """``ayar_kaydet`` cagrilarini toplayan casus; istenirse istisna firlatir."""
+    cagrilar: list[tuple] = []
+
+    def _sahte(kullanici_id, anahtar, deger):
+        cagrilar.append((kullanici_id, anahtar, deger))
+        if hata is not None:
+            raise hata
+
+    monkeypatch.setattr("company_master.settings.user_settings.ayar_kaydet", _sahte)
+    return cagrilar
+
+
+@pytest.mark.parametrize("kimlik", [None, mod.MISAFIR_KIMLIK])
+def test_ayar_kaydet_guvenli_misafir_kaydetmez(monkeypatch, kimlik):
+    cagrilar = _kayit_casusu(monkeypatch)
+    assert mod._ayar_kaydet_guvenli(kimlik, True, 60) is None
+    assert cagrilar == []
+
+
+def test_ayar_kaydet_guvenli_iki_anahtari_yazar(monkeypatch):
+    cagrilar = _kayit_casusu(monkeypatch)
+    assert mod._ayar_kaydet_guvenli("a@b.com", True, 60) is None
+    assert cagrilar == [
+        ("a@b.com", "otomatik_yenileme", True),
+        ("a@b.com", "yenileme_araligi", 60),
+    ]
+
+
+def test_ayar_kaydet_guvenli_hata_metni_ve_log(monkeypatch, caplog):
+    _kayit_casusu(monkeypatch, hata=RuntimeError("db kapali"))
+    with caplog.at_level("WARNING", logger=mod.log.name):
+        hata = mod._ayar_kaydet_guvenli("a@b.com", False, 30)
+    assert hata == "RuntimeError: db kapali"
+    assert "db kapali" in caplog.text
+
+
+def test_toggle_tercihi_rerun_oncesi_kaydeder(monkeypatch):
+    """Eski bug: ``st.rerun()`` once cagriliyordu, kayit hic calismiyordu."""
+    cagrilar = _kayit_casusu(monkeypatch)
+    st = _sahte_st(monkeypatch, acik=False, tiklanan=mod.ETIKET_AC)
+    with pytest.raises(RuntimeError, match="rerun"):
+        mod.render_auto_refresh(kullanici_id="a@b.com")
+    assert st.rerun.called
+    assert cagrilar == [
+        ("a@b.com", "otomatik_yenileme", True),
+        ("a@b.com", "yenileme_araligi", 30),
+    ]
+
+
+def test_toggle_kayit_hatasinda_uyari_gosterir(monkeypatch):
+    _kayit_casusu(monkeypatch, hata=ValueError("bozuk"))
+    st = _sahte_st(monkeypatch, acik=False, tiklanan=mod.ETIKET_AC)
+    with pytest.raises(RuntimeError, match="rerun"):
+        mod.render_auto_refresh(kullanici_id="a@b.com")
+    uyarilar = [c.args[0] for c in st.caption.call_args_list if c.args]
+    assert any("Tercih kaydedilemedi" in m and "bozuk" in m for m in uyarilar)
+
+
+def test_modul_sessiz_except_pass_icermez():
+    kaynak = DOSYA.read_text(encoding="utf-8")
+    assert "except Exception:\n        pass" not in kaynak
+    assert "except Exception:\n            pass" not in kaynak

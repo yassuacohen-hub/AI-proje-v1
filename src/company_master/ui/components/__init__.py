@@ -16,6 +16,12 @@ from company_master.ui.components.card import KATEGORILER, Card, MetricCard
 from company_master.ui.components.dropdown import Dropdown, secenekleri_normalize
 from company_master.ui.components.input import TIPLER, Input
 from company_master.ui.components.modal import MODAL_BOYUTLARI, Modal
+from company_master.ui.components.durum import (
+    api_cagir,
+    bos_durum,
+    hata_kutusu,
+    yukleniyor,
+)
 from company_master.ui.components.page import (
     PageHeader,
     Section,
@@ -65,4 +71,9 @@ __all__ = [
     "secenekleri_normalize",
     "tema_dogrula",
     "tema_karsiti",
+    # ADMIN-ROO-01: durum bileşenleri (fonksiyonel)
+    "api_cagir",
+    "bos_durum",
+    "hata_kutusu",
+    "yukleniyor",
 ]

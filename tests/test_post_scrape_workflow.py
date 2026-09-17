@@ -46,7 +46,7 @@ def test_run_step_success():
         mock_result = MagicMock()
         mock_result.returncode = 0
         mock_run.return_value = mock_result
-        
+
         rc = post_scrape_workflow.run_step("Test Step", "dummy_script.py")
         assert rc == 0
         mock_run.assert_called_once()
@@ -58,7 +58,7 @@ def test_run_step_failure():
         mock_result = MagicMock()
         mock_result.returncode = 1
         mock_run.return_value = mock_result
-        
+
         rc = post_scrape_workflow.run_step("Test Step", "dummy_script.py")
         assert rc == 1
 
@@ -72,7 +72,7 @@ def test_run_vkn_validation_disabled():
                 "validate_vkn": False
             }
         }
-        
+
         rc = post_scrape_workflow.run_vkn_validation()
         assert rc == 0  # Should skip and return 0
         mock_run.assert_not_called()
@@ -82,7 +82,7 @@ def test_run_vkn_validation_enabled():
     """Test VKN validation when enabled in config."""
     with patch('company_master.engine.quality_gate.load_quality_config') as mock_load_config, \
          patch('subprocess.run') as mock_run:
-        
+
         mock_load_config.return_value = {
             "post_scrape": {
                 "validate_vkn": True,
@@ -93,14 +93,14 @@ def test_run_vkn_validation_enabled():
                 "min_score": 30
             }
         }
-        
+
         mock_result = MagicMock()
         mock_result.returncode = 0
         mock_run.return_value = mock_result
-        
+
         rc = post_scrape_workflow.run_vkn_validation()
         assert rc == 0
-        
+
         # Verify subprocess was called with correct arguments
         mock_run.assert_called_once()
         args = mock_run.call_args[0][0]
@@ -115,16 +115,16 @@ def test_main_calls_vkn_validation():
     """Test that main() calls run_vkn_validation first."""
     with patch('post_scrape_workflow.run_vkn_validation') as mock_vkn, \
          patch('post_scrape_workflow.run_step') as mock_step:
-        
+
         mock_vkn.return_value = 0
         mock_step.return_value = 0
-        
+
         rc = post_scrape_workflow.main()
         assert rc == 0
-        
+
         # Verify run_vkn_validation was called first
         mock_vkn.assert_called_once()
-        
+
         # Verify other steps were called after
         assert mock_step.call_count >= 3  # At least quality gate, VKN dedup, recalc, KPI
 
@@ -133,18 +133,44 @@ def test_main_returns_early_on_vkn_failure():
     """Test that main returns early if VKN validation fails."""
     with patch('post_scrape_workflow.run_vkn_validation') as mock_vkn, \
          patch('post_scrape_workflow.run_step') as mock_step:
-        
+
         mock_vkn.return_value = 1  # Failure
         mock_step.return_value = 0
-        
+
         rc = post_scrape_workflow.main()
         assert rc == 1
-        
+
         # Verify VKN validation was called
         mock_vkn.assert_called_once()
-        
+
         # Verify other steps were NOT called
         mock_step.assert_not_called()
+
+
+def test_main_gercek_panoya_yazmaz():
+    """HANDOFF-TEMIZ-01: ``main()`` gerçek pano/handoff dosyalarını değiştirmez.
+
+    Regresyon: TEST-ISO-02 öncesi her koşuda ``data/orchestrator/task_board.json``
+    (P0-2 ``bitis``) ve ``handoffs.json`` (P0-2 ``tarih``) "şimdi"ye çekiliyordu.
+    Gerçek dosyaların md5'i main() öncesi/sonrası birebir aynı olmalı.
+    """
+    import hashlib
+
+    kok = Path(__file__).resolve().parent.parent / "data" / "orchestrator"
+    hedefler = [kok / "task_board.json", kok / "handoffs.json"]
+    mevcut = [p for p in hedefler if p.exists()]
+    if not mevcut:
+        pytest.skip("Gerçek pano dosyaları yok (CI/temiz klon)")
+
+    def _md5(p: Path) -> str:
+        return hashlib.md5(p.read_bytes()).hexdigest()
+
+    onceki = {p.name: _md5(p) for p in mevcut}
+    with patch("post_scrape_workflow.run_vkn_validation", return_value=0), \
+         patch("post_scrape_workflow.run_step", return_value=0):
+        assert post_scrape_workflow.main() == 0
+    sonraki = {p.name: _md5(p) for p in mevcut}
+    assert onceki == sonraki, f"Gerçek pano değişti: {onceki} != {sonraki}"
 
 
 if __name__ == "__main__":

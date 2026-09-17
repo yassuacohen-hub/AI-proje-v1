@@ -8,7 +8,7 @@
 > **🔎 SORUN ÇIKINCA İLK BURAYA BAK.** Bir hata/beklenmedik davranış görüldüğünde
 > önce bu defterde ara (`findstr /i "anahtar" docs\ROO_ELESTIRI_NOTLARI.md`), sonra
 > `python scripts/decision_log.py` (`search_decisions`) — çoğu sorun daha önce
-> "Dikkat" notu olarak yazılmıştır. Kural: [`AGENTS.md`](../AGENTS.md) → "Dikkat Notları Defteri Kuralı".
+> "Dikkat" notu olarak yazılmıştır. Kural: [`AGENTS.md`](../AGENTS.md) → "Dikkat Notları Defteri Kuralı".python, git, pytest, pip.
 
 Bu dosya **kalıcı ve ortak bir uyarı listesidir**. Bir madde çözüldüğünde satırı
 silmeyin; `Durum` sütununu `ÇÖZÜLDÜ (görev-id)` olarak güncelleyin — denetim izi kalsın.

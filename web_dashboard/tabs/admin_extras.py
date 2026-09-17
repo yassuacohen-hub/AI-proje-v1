@@ -3,7 +3,11 @@ from __future__ import annotations
 from typing import Any
 import pandas as pd
 import streamlit as st
-from company_master.ui import PageHeader
+from company_master.ui import (
+    PageHeader,
+    bos_durum,
+    api_cagir,
+)
 from scripts.dash04_api_client import get_api, APIError, post_api
 
 # K-1: Tier secimleri — JSON konfigurasyon (sabit liste disindan cikarildi).
@@ -14,19 +18,26 @@ def render_api_management(token: str | None = None) -> None:
     if token is None:
         token = st.session_state.get("admin_token")
     st.subheader("API Yönetimi")
-    try:
-        data = get_api("/api/admin/api-usage", token=token)
+
+    def _yukle_api_kullanimi():
+        return get_api("/api/admin/api-usage", token=token)
+
+    data = api_cagir(
+        _yukle_api_kullanimi,
+        baslik="API Kullanımı",
+        ipucu="API kullanım istatistiklerini yüklerken hata oluştu."
+    )
+
+    if data:
         if isinstance(data, dict):
             items = data.get("items", [])
             limits = data.get("rate_limits", {})
             if items:
                 st.dataframe(pd.DataFrame(items), width="stretch", hide_index=True)
             else:
-                st.info("API kullanım kaydı yok.")
+                bos_durum("API kullanım kaydı yok.")
             if limits:
                 st.json(limits)
-    except APIError:
-            st.warning("Lütfen giriş yapın veya yetkili olun")
 
 
 def render_user_management(token: str | None = None) -> None:
@@ -41,8 +52,20 @@ def render_user_management(token: str | None = None) -> None:
     if not token:
         st.warning("Lütfen giriş yapın")
         return
-    try:
+
+    def _yukle_bekleyen_ve_kategoriler():
         pending = get_api("/api/admin/pending", token=token)
+        categories = get_api("/api/admin/categories", token=token)
+        return {"pending": pending, "categories": categories}
+
+    result = api_cagir(
+        _yukle_bekleyen_ve_kategoriler,
+        baslik="Kullanıcı Yönetimi",
+        ipucu="Onay bekleyen kullanıcıları ve kategorileri yüklerken hata oluştu."
+    )
+
+    if result:
+        pending = result.get("pending", {})
         if isinstance(pending, dict):
             bekleyen = pending.get("bekleyen", [])
             if bekleyen:
@@ -80,21 +103,21 @@ def render_user_management(token: str | None = None) -> None:
                             except APIError as e:
                                 st.error(f"Onaylama başarısız: {e}")
             else:
-                st.info("Onay bekleyen kullanıcı yok.")
+                bos_durum("Onay bekleyen kullanıcı yok.")
 
             onayli_son = pending.get("onayli_son", [])
             if onayli_son:
                 st.dataframe(pd.DataFrame(onayli_son), width="stretch", hide_index=True)
             else:
-                st.info("Son onaylı kullanıcı yok.")
+                bos_durum("Son onaylı kullanıcı yok.")
 
-        categories = get_api("/api/admin/categories", token=token)
+        categories = result.get("categories", {})
         if isinstance(categories, dict):
             items = categories.get("items", [])
             if items:
                 st.dataframe(pd.DataFrame(items), width="stretch", hide_index=True)
             else:
-                st.info("Kategori kaydı yok.")
+                bos_durum("Kategori kaydı yok.")
 
         with st.form("kredi_formu"):
             col1, col2 = st.columns(2)
@@ -114,5 +137,3 @@ def render_user_management(token: str | None = None) -> None:
                     st.rerun()
                 except APIError as e:
                     st.error(f"Kredi yükleme başarısız: {e}")
-    except APIError:
-        st.warning("Lütfen giriş yapın veya yetkili olun")

@@ -17,9 +17,15 @@ Kurallar
   koşulda patlamaz.
 - **Tek fiyat kaynağı:** paket fiyatları ``company_master.paketler``
   (PO-BACK-04) üzerinden okunur; bu dosyada fiyat sabiti tutulmaz.
+- **Tek KPI dili (ADMIN-EXEC-01):** metrikler ``st.metric`` değil
+  ``web_dashboard.charts.kpi_karti`` ile çizilir (ADMIN-KPI-KART kalıbı).
+- **Sessiz except yok (ADMIN-EXEC-01):** veri yükleme hatası yutulmaz;
+  ``hata`` alanında taşınır, ekranda ``hata_kutusu`` ile gösterilir ve
+  ``logging`` ile kayda geçer (ADMIN-HATA kalıbı).
 """
 from __future__ import annotations
 
+import logging
 import sys
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -41,14 +47,27 @@ from company_master.executive_ozet import (
 )
 from company_master.tenant.health import hesapla as _saglik_hesapla
 from company_master.tenant.model import VARSAYILAN_TENANT
-from company_master.ui import PageHeader, Section
+from company_master.ui import PageHeader, Section, hata_kutusu
 from company_master.ui.charts import line_chart
+from web_dashboard.charts import kpi_karti  # noqa: E402  (ADMIN-EXEC-01)
+
+logger = logging.getLogger(__name__)
 
 #: Trend serisinin uzunluğu (ay).
 TREND_AY_SAYISI = 6
 
 #: Tenant sağlığı için taranacak en fazla firma sayısı (performans sınırı).
 SAGLIK_ORNEK_LIMITI = 1000
+
+#: Churn penceresi (gün).
+CHURN_GUN = 90
+
+#: Sağlık bandı → (etiket, kpi kategorisi). Sıra ekrandaki kolon sırasıdır.
+SAGLIK_BANTLARI: tuple[tuple[str, str, str], ...] = (
+    ("green", "🟢 Sağlıklı", "basari"),
+    ("yellow", "🟡 Uyarı", "uyari"),
+    ("red", "🔴 Kritik", "tehlike"),
+)
 
 
 @st.cache_data(ttl=60)
@@ -60,12 +79,18 @@ def load_executive_ozet() -> dict[str, Any]:
     kümesinden ``tenant/health.py`` ile **tüketilerek** hesaplanır.
 
     Returns:
-        ``{"abonelikler": [...], "tenantlar": [...], "kaynak": "db"|"bos"}``
-        DB erişilemezse boş listeler ve ``kaynak="bos"`` döner.
+        ``{"abonelikler": [...], "tenantlar": [...], "kaynak": "db"|"bos",
+        "hata": str|None, "tenant_hata": str|None}``
+        DB erişilemezse boş listeler, ``kaynak="bos"`` ve ``hata`` metni döner
+        (hata yutulmaz; ekran ``hata_kutusu`` ile gösterir, log'a yazılır).
     """
-    abonelikler: list[dict[str, Any]] = []
-    tenantlar: list[dict[str, Any]] = []
-    kaynak = "bos"
+    sonuc: dict[str, Any] = {
+        "abonelikler": [],
+        "tenantlar": [],
+        "kaynak": "bos",
+        "hata": None,
+        "tenant_hata": None,
+    }
 
     try:
         engine = get_engine()
@@ -78,17 +103,20 @@ def load_executive_ozet() -> dict[str, Any]:
                     "JOIN packages p ON p.package_id = cp.package_id"
                 )
             ).mappings().all()
-        abonelikler = [dict(row) for row in rows]
-        kaynak = "db"
-    except Exception:
-        return {"abonelikler": [], "tenantlar": [], "kaynak": kaynak}
+        sonuc["abonelikler"] = [dict(row) for row in rows]
+        sonuc["kaynak"] = "db"
+    except Exception as exc:  # noqa: BLE001 — zarif düşüş; hata görünür kalır
+        logger.warning("Executive abonelik verisi okunamadı: %s", exc)
+        sonuc["hata"] = f"{type(exc).__name__}: {exc}"
+        return sonuc
 
     try:
-        tenantlar = [_tenant_sagligi(engine)]
-    except Exception:
-        tenantlar = []
+        sonuc["tenantlar"] = [_tenant_sagligi(engine)]
+    except Exception as exc:  # noqa: BLE001
+        logger.warning("Executive tenant sağlığı hesaplanamadı: %s", exc)
+        sonuc["tenant_hata"] = f"{type(exc).__name__}: {exc}"
 
-    return {"abonelikler": abonelikler, "tenantlar": tenantlar, "kaynak": kaynak}
+    return sonuc
 
 
 def _tl(deger: Any, ondalik: int = 0) -> str:
@@ -155,25 +183,71 @@ def _tenant_sagligi(engine: Any) -> dict[str, Any]:
     return skor.to_dict()
 
 
+def _sayi_guvenli(deger: Any) -> float:
+    """Değeri float'a çevirir; ``None``/bozuk girdi ``0.0`` sayılır."""
+    try:
+        return float(deger or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
+
 def _mrr_grafigi(seri: list[dict[str, Any]]) -> None:
     """MRR trendini çizgi grafik olarak çizer.
 
     Plotly kuruluysa ``st.plotly_chart``, değilse ``st.line_chart`` kullanılır
     (CHART-01 sözleşmesi: grafik yüzünden ekran asla patlamaz).
     """
-    if not seri:
+    # mrr_trend boş abonelikte de 12 aylık sıfır serisi döndürür; sıfır çizgi
+    # çizmek yerine boş durum gösterilir.
+    if not seri or not any(_sayi_guvenli(satir.get("mrr")) for satir in seri):
         st.info("Trend grafiği için abonelik verisi bulunamadı.")
         return
 
     cerceve = pd.DataFrame(seri)
     fig = line_chart(cerceve.set_index("ay"), x="ay", y="mrr", title="MRR Trendi")
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
 
-def _churn_donemi(gun: int = 90) -> tuple[str, str]:
+def _churn_donemi(gun: int = CHURN_GUN) -> tuple[str, str]:
     """Churn penceresini (son ``gun`` gün) ISO metin olarak döndürür."""
     bugun = datetime.now().date()
     return (bugun - timedelta(days=gun)).isoformat(), bugun.isoformat()
+
+
+def _mrr_delta(seri: list[dict[str, Any]]) -> str | None:
+    """Son iki ayın MRR farkını işaretli TL metni olarak döndürür (``+1.200 ₺``).
+
+    Seri iki aydan kısaysa ya da son iki ayda hiç gelir yoksa ``None``
+    (kartta delta satırı çizilmez; boş veride "değişim yok" yanıltır).
+    """
+    if len(seri) < 2:
+        return None
+    try:
+        son, onceki = float(seri[-1]["mrr"]), float(seri[-2]["mrr"])
+    except (KeyError, TypeError, ValueError):
+        return None
+    if son == 0 and onceki == 0:
+        return None
+    fark = round(son - onceki, 2)
+    if fark == 0:
+        return f"{_tl(0)} (değişim yok)"
+    return f"+{_tl(fark)}" if fark > 0 else _tl(fark)
+
+
+def _hatalari_goster(veri: dict[str, Any]) -> None:
+    """Yükleme hatalarını ``hata_kutusu`` ile ekrana taşır (sessiz düşüş yok)."""
+    if veri.get("kaynak") != "db":
+        hata_kutusu(
+            "Abonelik verisine ulaşılamadı",
+            veri.get("hata") or "DB bağlantısı kurulamadı",
+            ipucu="Ekran boş veriyle çiziliyor. DATABASE_URL / Postgres servisini kontrol edin.",
+        )
+    if veri.get("tenant_hata"):
+        hata_kutusu(
+            "Tenant sağlığı hesaplanamadı",
+            veri.get("tenant_hata"),
+            ipucu="companies tablosu ve tenant/health.py girdileri kontrol edilmeli.",
+        )
 
 
 def render_executive_tab() -> None:
@@ -195,27 +269,43 @@ def render_executive_tab() -> None:
     churn = churn_orani(baslangic, bitis, abonelikler)
     dagilim = health_dagilimi(tenantlar)
 
-    if veri.get("kaynak") != "db":
-        st.info("Abonelik verisine ulaşılamadı; ekran boş veriyle çiziliyor.")
+    _hatalari_goster(veri)
 
-    # --- 1) Üç ana metrik -------------------------------------------------
+    # --- 1) Üç ana metrik (kpi_karti — tek KPI dili) ----------------------
     Section(
         "Gelir Özeti",
         "Aktif aboneliklerden türetilen yinelenen gelir ve kayıp oranı.",
     ).render()
 
-    degisim = round(seri[-1]["mrr"] - seri[-2]["mrr"], 2) if len(seri) >= 2 else None
     kolon1, kolon2, kolon3 = st.columns(3)
     with kolon1:
-        st.metric(
+        kpi_karti(
             "MRR (Aylık Yinelenen Gelir)",
             _tl(gelir["mrr"]),
-            delta=None if degisim is None else _tl(degisim),
+            delta=_mrr_delta(seri),
+            ikon="💰",
+            kategori="basari",
+            yardim="Aktif aboneliklerin aylık ücret toplamı; delta son iki ayın farkı.",
+            anahtar="exec-mrr",
         )
     with kolon2:
-        st.metric("ARR (Yıllık Yinelenen Gelir)", _tl(gelir["arr"]))
+        kpi_karti(
+            "ARR (Yıllık Yinelenen Gelir)",
+            _tl(gelir["arr"]),
+            ikon="📅",
+            kategori="marka",
+            yardim="MRR × 12.",
+            anahtar="exec-arr",
+        )
     with kolon3:
-        st.metric("Churn Oranı (90 gün)", f"{churn:.2f}%")
+        kpi_karti(
+            f"Churn Oranı ({CHURN_GUN} gün)",
+            f"%{churn:.2f}".replace(".", ","),
+            ikon="📉",
+            kategori="tehlike" if churn > 0 else "bilgi",
+            yardim="Dönem başında aktif olup dönem içinde iptal edilen aboneliklerin payı.",
+            anahtar="exec-churn",
+        )
 
     st.caption(
         f"Aktif abonelik: {gelir['aktif_abonelik']} · "
@@ -230,7 +320,7 @@ def render_executive_tab() -> None:
                 columns=["Paket", "Aktif Abonelik"],
             ),
             hide_index=True,
-            use_container_width=True,
+            width="stretch",
         )
 
     # --- 2) Trend grafiği -------------------------------------------------
@@ -247,13 +337,15 @@ def render_executive_tab() -> None:
         "(yeşil ≥ 85 · sarı 60-84 · kırmızı < 60).",
     ).render()
 
-    saglik1, saglik2, saglik3 = st.columns(3)
-    with saglik1:
-        st.metric("🟢 Sağlıklı", dagilim["green"])
-    with saglik2:
-        st.metric("🟡 Uyarı", dagilim["yellow"])
-    with saglik3:
-        st.metric("🔴 Kritik", dagilim["red"])
+    for kolon, (bant, etiket, kategori) in zip(st.columns(3), SAGLIK_BANTLARI):
+        with kolon:
+            kpi_karti(
+                etiket,
+                int(dagilim.get(bant, 0) or 0),
+                kategori=kategori,
+                yardim="Tenant Health Score bandındaki tenant sayısı.",
+                anahtar=f"exec-saglik-{bant}",
+            )
 
     toplam_tenant = sum(dagilim.values())
     if toplam_tenant == 0:

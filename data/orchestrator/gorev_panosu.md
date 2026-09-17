@@ -13,20 +13,25 @@
 | REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar) | cline | P2 | plan | data/orchestrator/REV-UI-SIDEBAR-02_bulgular_2026-09-15_cline.md |
 | MARKA-REVIZE-01 | Marka kalip dosyalari ORTAK REVIZE (roo + cline) - ileri tarihli planlama | cline | P2 | aktif | - |
 | SEC-AUTH-01 | Auth uclari guvenlik duzeltmeleri (REV-BATCH-01 Y-1..Y-4, O-1, O-2, O-4, D-1, D-4) | cline | P1 | aktif | web_dashboard/tabs/__init__.py, tests/test_auth_gate.py, .gitignore |
-| VEC-TEST-01 | Vektor katmani test kapsami >= %90 | kilo | P2 | plan | src/company_master/vector/embedder.py, src/company_master/vector/service.py, src/company_master/vector/store.py |
-| GUARD-ENC-02 | kodlama_denetim genisletme (CRLF/bosluk/tab/EOF + fix) | kilo | P2 | plan | scripts/kodlama_denetim.py, tests/test_kodlama_denetim.py, data/kodlama_allowlist.json |
-| SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH bulgular | kilo | P2 | plan | scripts/sec_bandit.py, tests/test_sec_bandit.py, .bandit |
-| FMT-01 | ruff format/lint standardizasyonu (web_app/app/web_dashboard haric) | kilo | P2 | plan | ruff.toml, .pre-commit-config.yaml |
+| GUARD-ENC-02 | kodlama_denetim genisletme (CRLF/bosluk/tab/EOF + fix) | kilo | P2 | blocked | scripts/kodlama_denetim.py, tests/test_kodlama_denetim.py, data/kodlama_allowlist.json |
+| SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH bulgular | kilo | P2 | blocked | scripts/sec_bandit.py, tests/test_sec_bandit.py, .bandit |
+| FMT-01 | ruff format/lint standardizasyonu (web_app/app/web_dashboard haric) | kilo | P2 | blocked | ruff.toml, .pre-commit-config.yaml |
 | API-SPLIT-01 | web_app.py modullere bolme (src/company_master/api) | kilo | P2 | plan | web_app.py, src/company_master/api/, tests/test_api_companies.py |
-| HANDOFF-TEMIZ-01 | P0-2 handoff/pano tarih damgasi temizligi (test sizintisi kalintisi) | cline | P2 | plan | - |
-| TEST-CI-01 | CI test isi: pytest -x --timeout + izolasyon guard + kapsam esigi | cline | P2 | plan | - |
+| UI-MIMARI-02 | Ana kontrol/musteri yonetimi temizligi: olu kod, inline import, KVKK tuketimi (M-03/M-05) | kilo | P2 | aktif | web_dashboard/tabs/ana_kontrol.py, web_dashboard/tabs/musteri_yonetimi.py, web_dashboard/charts.py |
+| KPI-HIST-01 | GET /api/kpi/history + ana kontrol gercek sparkline (D-14) | kilo | P2 | plan | web_app.py, web_dashboard/tabs/ana_kontrol.py |
+| ADMIN-KPI-KART-01 | Admin sekmelerinde st.metric -> kpi_karti (8 sekme, ~40 kart) | kilo | P2 | plan | - |
+| ADMIN-HATA-01 | Hata Yonetimi sekmesi: sahte istatistik/demo raise kaldir, gercek kaynak + rapor kaydi | kilo | P2 | plan | - |
+| ADMIN-ROO-01 | Admin sekmeleri hata/bos-durum standardi + canli/pazarlama/paketler kpi_karti (roo ceza gorevi) | roo | P1 | review | - |
+| ADMIN-MUSTERI-02 | Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi) | kilo | P2 | plan | web_dashboard/tabs/musteri_yonetimi.py, tests/test_musteri_yonetimi.py |
+| ADMIN-KPI-KART-02 | Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi | kilo | P2 | plan | web_dashboard/tabs/webhook_monitor.py, web_dashboard/tabs/tenant_health_dashboard.py, tests/test_webhook_monitor_tab.py |
+| ADMIN-HATA-02 | Admin sekmelerinde 16 sessiz except:pass -> log/hata_kutusu + AST testi | kilo | P2 | plan | web_dashboard/tabs/admin_kpi.py, web_dashboard/tabs/admin_quality.py, web_dashboard/tabs/admin_performance.py |
 
 ## Tamamlananlar
 
 | Görev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
 | P0-1 | İstiklal OSB scraper implementasyonu | web_kazima | 2026-09-08T10:00:00Z |
-| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-17T02:55:07 |
+| P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-03T14:18:36 |
 | P0-3 | Kalite skoru 6.53 - 50+ heazine | kalite | 2026-09-06T22:54:31 |
 | Y21 | ISKUR kurumsal eslestirme verisi arastirma | arastirmaci | 2026-09-10 |
 | APIFY-01 | Apify uygunluk ve entegrasyon mimarisi arastirma | kilo | 2026-09-11T22:14:20 |
@@ -258,3 +263,12 @@
 | ROO-GAP-NAV-IA04 | NAV-IA-04/AUTH-GATE-01 capsayı tutma — kontrol ve onay | roo | 2026-09-16T23:23:35 |
 | MARKA-REVIZE-01B | Marka revizyon kod katmani: test_i18n Huggin regex + config.toml primaryColor #6366f1 + scripts/marka_denetim.py | kilo | 2026-09-17T03:07:28 |
 | TEST-ISO-02 | Test izolasyonu: siraya bagimli testler (randomly + monkeypatch) | kilo | 2026-09-17T03:28:59 |
+| VEC-TEST-01 | Vektor katmani test kapsami >= %90 | kilo | 2026-09-17T11:22:52 |
+| HANDOFF-TEMIZ-01 | P0-2 handoff/pano tarih damgasi temizligi (test sizintisi kalintisi) | roo | 2026-09-17T07:01:28 |
+| TEST-CI-01 | CI test isi: pytest -x --timeout + izolasyon guard + kapsam esigi | roo | 2026-09-17T06:56:27 |
+| ADMIN-AYAR-01 | Admin ayar sekmesi: giris zorunlu + auto_refresh ayar dosyasi + KVKK yardimci (K-04/S-08) | kilo | 2026-09-17T06:44:44 |
+| ADMIN-NAV-HAZIR-01 | Bayat hazir=False ust sayfalari ac (veri_kalite, musteri_onizleme) + girinti + sessiz pass | roo | 2026-09-17T07:59:14 |
+| ADMIN-EXEC-01 | Executive Dashboard: st.metric->kpi_karti, sessiz except->hata_kutusu, ilk test dosyasi | roo | 2026-09-17T07:17:53 |
+| ADMIN-SEARCH-01 | admin_search.py admin sekme kalibina gecis (kpi_karti + hata_kutusu + test) | roo | 2026-09-17T07:29:31 |
+| ADMIN-REFRESH-FIX-01 | admin_auto_refresh: st.rerun oncesi ayar kaydi + sessiz except (roo) | roo | 2026-09-17T07:41:26 |
+| ADMIN-NAV-HAZIR-02 | Navigasyon/auth sessiz except temizligi (render_fonksiyonu + admin_auth) | roo | 2026-09-17T10:49:50 |

@@ -1,5 +1,6 @@
 """Admin paneli giriş sekmesi (giriş / çıkış / şifre değiştirme)."""
 from __future__ import annotations
+import logging
 import os
 from pathlib import Path
 
@@ -7,16 +8,27 @@ import streamlit as st
 from scripts.dash04_api_client import post_api, APIError
 
 _FLASH_KEY = "_admin_flash"
+_LOG = logging.getLogger(__name__)
+
+VARSAYILAN_EPOSTA = "admin@huginn.local"
 
 
 def _env_kimlik() -> tuple[str, str]:
     """ADMIN-ENV-01: `.env` içindeki ADMIN_EMAIL/ADMIN_PASSWORD ile formu ön-doldurur.
 
-    Yalnızca `DEBUG=1` ortamında çalışır; prodüksiyonda boş döner.
+    Yalnızca `DEBUG=1` ortamında çalışır; prodüksiyonda şifre boş döner.
+
+    ADMIN-NAV-HAZIR-02: DEBUG açıkken fonksiyon hiç `return` yapmıyordu (``None``
+    dönüyordu) → çağıran taraftaki ``env_email, env_sifre = _env_kimlik()`` satırı
+    ``TypeError`` ile çöküyordu. Artık her dalda ikili demet döner.
     """
     debug = os.environ.get("DEBUG", "").lower() in ("1", "true")
     if not debug:
-        return ("admin@huginn.local", "")
+        return (VARSAYILAN_EPOSTA, "")
+    return (
+        os.environ.get("ADMIN_EMAIL") or VARSAYILAN_EPOSTA,
+        os.environ.get("ADMIN_PASSWORD") or "",
+    )
 
 
 def flash_yaz(mesaj: str, tur: str = "success") -> None:
@@ -45,7 +57,8 @@ def _gorunur_bolum_sayisi() -> tuple[int, int]:
         from web_dashboard.tabs import ROL_ADMIN, ROL_ANON, gorunur_bolumler
 
         return len(gorunur_bolumler(ROL_ADMIN)), len(gorunur_bolumler(ROL_ANON))
-    except Exception:
+    except Exception as exc:  # noqa: BLE001 - bilgi amaçlı sayaç, giriş akışını bozmamalı
+        _LOG.debug("Görünür bölüm sayısı hesaplanamadı: %s", exc)
         return (0, 0)
 
 
@@ -119,7 +132,8 @@ def _env_sifre_guncelle(yeni_sifre: str) -> bool:
         env_upsert(env_path, {"ADMIN_PASSWORD": yeni_sifre})
         os.environ["ADMIN_PASSWORD"] = yeni_sifre
         return True
-    except Exception:
+    except Exception as exc:  # noqa: BLE001 - .env yazılamazsa şifre değişimi iptal olmamalı
+        _LOG.warning(".env ADMIN_PASSWORD güncellenemedi: %s", exc)
         return False
 
 

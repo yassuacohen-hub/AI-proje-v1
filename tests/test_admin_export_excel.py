@@ -37,7 +37,7 @@ def test_render_export_tab_to_excel_hatasi_vermez(monkeypatch):
     """Tam render: download_button'a bytes gider, TypeError firlamaz."""
     st = admin_export.st
     df = pd.DataFrame({"a": [1, 2]})
-    monkeypatch.setattr(admin_export, "load_export_data", lambda _t: df)
+    monkeypatch.setattr(admin_export, "load_export_data", lambda _t: (df, None))
     monkeypatch.setattr(st, "subheader", lambda *a, **k: None)
     monkeypatch.setattr(st, "radio", lambda *a, **k: "KPI Metrikleri")
     monkeypatch.setattr(st, "success", lambda *a, **k: None)

@@ -8,7 +8,10 @@ on:
 
 env:
   PYTHON_VERSION: "3.11"
-  COVERAGE_THRESHOLD: 80
+  # TEST-CI-01: olculen kapsam ~%88; taban 85 (altina dusurulmez).
+  COVERAGE_THRESHOLD: 85
+  # TEST-CI-01: tek testin asili kalmasi tum isi kilitlemesin (pytest-timeout).
+  PYTEST_TIMEOUT_SN: 300
 
 jobs:
   lint:
@@ -67,7 +70,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements-app.txt
-          pip install pytest pytest-cov
+          pip install pytest pytest-cov pytest-timeout
           echo "# CI ortami: gercek gizli bilgi yok" > .env
       - name: Init schema
         run: |
@@ -76,11 +79,17 @@ jobs:
       - name: Kodlama denetimi (BOM / NUL / 0-bayt / UTF-16) — KR-4
         run: |
           python scripts/kodlama_denetim.py
+      - name: Pano artefakti anlik goruntusu (TEST-CI-01 / TEST-ISO-02 guard)
+        run: python scripts/pano_guard.py snapshot --out "${{ runner.temp }}/pano_md5.json"
       - name: Run tests with coverage
         # Olculen moduller .coveragerc [run] include ile tanimli
         # (--cov=<dosya/yolu> pytest-cov'da paket adi sayilir -> %0 "No data").
+        # TEST-CI-01: -p no:cacheprovider (CI'da .pytest_cache gereksiz),
+        # --timeout (asili test isi kilitlemesin), -x YOK (matris raporu tam olsun).
         run: |
           python -m pytest tests/ \
+            -p no:cacheprovider \
+            --timeout=${{ env.PYTEST_TIMEOUT_SN }} \
             --continue-on-collection-errors \
             --cov \
             --cov-config=.coveragerc \
@@ -88,6 +97,9 @@ jobs:
             --cov-report=term-missing \
             --cov-fail-under=${{ env.COVERAGE_THRESHOLD }} \
             -v
+      - name: Pano artefakti izolasyon kontrolu (testler gercek panoya yazdi mi?)
+        if: always()
+        run: python scripts/pano_guard.py check --in "${{ runner.temp }}/pano_md5.json"
       - name: Upload coverage to Codecov
         if: matrix.python-version == '3.11'
         uses: codecov/codecov-action@v4

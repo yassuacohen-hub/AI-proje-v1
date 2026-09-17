@@ -9,18 +9,42 @@
 """
 from __future__ import annotations
 
+import logging
 import sys
 from datetime import datetime
 from pathlib import Path
 
 import streamlit as st
 
+
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
-REFRESH_INTERVALS = [15, 30, 60, 300, 600]
+log = logging.getLogger(__name__)
+
 ETIKET_AC = "▶️ Otomatik yenilemeyi aç"
 ETIKET_KAPAT = "⏹ Otomatik yenilemeyi kapat"
+MISAFIR_KIMLIK = "misafir"
+
+
+def _ayar_kaydet_guvenli(kullanici_id: str | None, acik: bool, aralik: int) -> str | None:
+    """K-04: Yenileme tercihini kalıcı kaydeder → hata metni ya da ``None``.
+
+    ADMIN-REFRESH-FIX-01: Eski sürümde bu blok ``st.rerun()`` sonrasında
+    durduğu için hiç çalışmıyordu; artık rerun'dan ÖNCE çağrılır ve hata
+    sessizce yutulmaz (log + kısa uyarı).
+    """
+    if kullanici_id is None or kullanici_id == MISAFIR_KIMLIK:
+        return None
+    from company_master.settings.user_settings import ayar_kaydet
+
+    try:
+        ayar_kaydet(kullanici_id, "otomatik_yenileme", acik)
+        ayar_kaydet(kullanici_id, "yenileme_araligi", aralik)
+    except Exception as exc:  # noqa: BLE001 — kayıt hatası UI'yi düşürmemeli
+        log.warning("Yenileme tercihi kaydedilemedi (%s): %s", kullanici_id, exc)
+        return f"{type(exc).__name__}: {exc}"
+    return None
 
 
 def _aralik_metni(saniye: int) -> str:
@@ -49,13 +73,29 @@ def _periyodik_yenileme(interval: int) -> None:
     _tik()
 
 
-def render_auto_refresh() -> None:
+def render_auto_refresh(kullanici_id: str | None = None) -> None:
     """Otomatik yenileme kontrolleri — tek satır, kompakt."""
+    from company_master.settings.user_settings import (
+        ayarlari_getir,
+        _SEMA_HARITASI,
+    )
+    REFRESH_INTERVALS = tuple(_SEMA_HARITASI["yenileme_araligi"].secenekler)
     st.markdown("#### 🔄 Otomatik yenileme")
+
+    _misafir = kullanici_id is not None and kullanici_id == MISAFIR_KIMLIK
+
+    if kullanici_id is not None and not _misafir:
+        _ayarlari = ayarlari_getir(kullanici_id)
+        _başlangıc_acik = bool(_ayarlari.get("otomatik_yenileme", False))
+        _başlangıc_aralık = int(_ayarlari.get("yenileme_araligi", 30))
+    else:
+        _başlangıc_acik = False
+        _başlangıc_aralık = 30
+
     st.caption("Açıkken seçilen aralıkta cache temizlenir ve sayfa yenilenir; kapalıyken 🔄 Yenile ile elle tazelersin.")
 
-    st.session_state.setdefault("auto_refresh_interval", 30)
-    st.session_state.setdefault("auto_refresh_enabled", False)
+    st.session_state.setdefault("auto_refresh_interval", _başlangıc_aralık)
+    st.session_state.setdefault("auto_refresh_enabled", _başlangıc_acik)
     st.session_state.setdefault("last_auto_refresh", datetime.now())
 
     col_int, col_btn, col_durum = st.columns([2, 2, 3])
@@ -77,6 +117,14 @@ def render_auto_refresh() -> None:
         if st.button(etiket, key="auto_refresh_toggle", type="secondary"):
             st.session_state.auto_refresh_enabled = not acik
             st.session_state.last_auto_refresh = datetime.now()
+            # K-04: kaydet (yalnız gerçek kimlikte) — rerun'dan ÖNCE
+            hata = _ayar_kaydet_guvenli(
+                kullanici_id,
+                bool(st.session_state.auto_refresh_enabled),
+                int(st.session_state.auto_refresh_interval),
+            )
+            if hata:
+                st.caption(f"⚠️ Tercih kaydedilemedi: {hata}")
             st.rerun()
 
     with col_durum:

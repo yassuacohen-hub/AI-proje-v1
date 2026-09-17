@@ -20,6 +20,7 @@ ADMIN-UI-10:
 from __future__ import annotations
 
 import json
+import logging
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -38,6 +39,9 @@ from company_master.coverage_analitik import (  # noqa: E402
     nace_hedeflerini_yukle,
 )
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
+from web_dashboard.charts import kpi_karti  # noqa: E402
+
+_LOG = logging.getLogger(__name__)
 
 DEMO_KAMPANYA = ROOT / "data" / "demo" / "kampanya_demo.jsonl"
 DEMO_SEGMENT = ROOT / "data" / "demo" / "segment_demo.jsonl"
@@ -156,8 +160,8 @@ def load_kampanyalar() -> tuple[list[dict[str, Any]], bool]:
         kayitlar = kampanya_liste(aktif_only=False)
         if kayitlar:
             return list(kayitlar), False
-    except Exception:  # DB yok / tablo yok / baglanti hatasi
-        pass
+    except Exception as exc:  # DB yok / tablo yok / baglanti hatasi → demo
+        _LOG.warning("Kampanya DB okunamadı, demo veriye düşülüyor: %s", exc)
     return _jsonl_oku(DEMO_KAMPANYA), True
 
 
@@ -170,8 +174,8 @@ def load_segmentler() -> tuple[list[dict[str, Any]], bool]:
         kayitlar = segment_liste(aktif_only=False)
         if kayitlar:
             return list(kayitlar), False
-    except Exception:
-        pass
+    except Exception as exc:  # DB yok → demo
+        _LOG.warning("Segment DB okunamadı, demo veriye düşülüyor: %s", exc)
     return _jsonl_oku(DEMO_SEGMENT), True
 
 
@@ -257,8 +261,8 @@ def ozet_hesapla(
         rapor = ozet_rapor()
         if rapor and rapor.get("kampanya_sayisi"):
             return dict(rapor)
-    except Exception:
-        pass
+    except Exception as exc:  # backend yok → eldeki listelerden hesapla
+        _LOG.warning("ozet_rapor başarısız, yerel hesaplamaya düşülüyor: %s", exc)
     return {
         "kampanya_sayisi": len(kampanyalar),
         "segment_sayisi": len(segmentler),
@@ -368,40 +372,46 @@ def _render_baslik(demo_mu: bool) -> None:
 
 
 def _render_ozet(ozet: dict[str, Any]) -> None:
-    """K3: ozet metrikler + tek satir aciklama."""
+    """K3: ozet metrikler (kpi_karti) + tek satir aciklama."""
     k1, k2, k3, k4 = st.columns(4)
     with k1:
-        st.metric(
+        kpi_karti(
             "Kampanya Sayısı",
             ozet.get("kampanya_sayisi", 0),
-            help="Sistemdeki toplam kampanya kaydı (aktif + pasif).",
+            ikon="📣",
+            yardim="Sistemdeki toplam kampanya kaydı (aktif + pasif).",
+            aciklama="📊 Kaç kampanya yönetiyoruz?",
         )
-        st.caption("📊 Kaç kampanya yönetiyoruz?")
     with k2:
-        st.metric(
+        kpi_karti(
             "Aktif Kampanya",
             ozet.get("aktif_kampanyalar", 0),
-            help="Durumu 'active' olan, şu an yayında olan kampanyalar.",
+            ikon="🟢",
+            kategori="basari",
+            yardim="Durumu 'active' olan, şu an yayında olan kampanyalar.",
+            aciklama="📊 Şu an sahada kaç kampanya çalışıyor?",
         )
-        st.caption("📊 Şu an sahada kaç kampanya çalışıyor?")
     with k3:
-        st.metric(
+        kpi_karti(
             "Segment Sayısı",
             ozet.get("segment_sayisi", 0),
-            help="Tanımlı müşteri segmenti sayısı.",
+            ikon="🎯",
+            yardim="Tanımlı müşteri segmenti sayısı.",
+            aciklama="📊 Müşteriyi kaç farklı gruba ayırdık?",
         )
-        st.caption("📊 Müşteriyi kaç farklı gruba ayırdık?")
     with k4:
-        st.metric(
+        kpi_karti(
             "Aktif Segment",
             ozet.get("aktif_segmentler", 0),
-            help="Kampanyalarda kullanılabilir durumdaki segmentler.",
+            ikon="✅",
+            kategori="basari",
+            yardim="Kampanyalarda kullanılabilir durumdaki segmentler.",
+            aciklama="📊 Hedeflemeye hazır kaç segment var?",
         )
-        st.caption("📊 Hedeflemeye hazır kaç segment var?")
 
 
 def _render_performans(kampanyalar: list[dict[str, Any]]) -> None:
-    """Gosterim/tiklama/donusum ozeti (veri varsa)."""
+    """Gosterim/tiklama/donusum ozeti (kpi_karti; veri varsa)."""
     perf = performans_ozeti(kampanyalar)
     if not perf["gosterim"] and not perf["butce"]:
         st.info("Veri gelince kampanya performans özeti burada görünecek.")
@@ -409,33 +419,43 @@ def _render_performans(kampanyalar: list[dict[str, Any]]) -> None:
 
     p1, p2, p3, p4 = st.columns(4)
     with p1:
-        st.metric(
+        kpi_karti(
             "Toplam Bütçe",
-            f"{perf['butce']:,.0f} ₺",
-            help="Tüm kampanyaların bütçe toplamı.",
+            perf["butce"],
+            ikon="💰",
+            birim="₺",
+            yardim="Tüm kampanyaların bütçe toplamı.",
+            aciklama="📊 Pazarlamaya ne kadar ayırdık?",
         )
-        st.caption("📊 Pazarlamaya ne kadar ayırdık?")
     with p2:
-        st.metric(
+        kpi_karti(
             "Tıklama Oranı (CTR)",
-            f"%{perf['ctr']:.2f}",
-            help="Tıklama / gösterim oranı. Reklamın ilgi çekiciliğini ölçer.",
+            perf["ctr"],
+            ikon="🖱️",
+            ondalik=2,
+            birim="%",
+            yardim="Tıklama / gösterim oranı. Reklamın ilgi çekiciliğini ölçer.",
+            aciklama="📊 Gösterimler tıklamaya dönüşüyor mu?",
         )
-        st.caption("📊 Gösterimler tıklamaya dönüşüyor mu?")
     with p3:
-        st.metric(
+        kpi_karti(
             "Dönüşüm Oranı",
-            f"%{perf['donusum_orani']:.2f}",
-            help="Dönüşüm / tıklama oranı. Tıklayanın müşteriye dönüşme yüzdesi.",
+            perf["donusum_orani"],
+            ikon="🔁",
+            ondalik=2,
+            birim="%",
+            yardim="Dönüşüm / tıklama oranı. Tıklayanın müşteriye dönüşme yüzdesi.",
+            aciklama="📊 Tıklayanlar müşteriye dönüyor mu?",
         )
-        st.caption("📊 Tıklayanlar müşteriye dönüyor mu?")
     with p4:
-        st.metric(
+        kpi_karti(
             "Dönüşüm Başı Maliyet",
-            f"{perf['donusum_maliyeti']:,.0f} ₺" if perf["donusum"] else "-",
-            help="Toplam bütçe / dönüşüm sayısı.",
+            perf["donusum_maliyeti"] if perf["donusum"] else None,
+            ikon="🧾",
+            birim="₺",
+            yardim="Toplam bütçe / dönüşüm sayısı.",
+            aciklama="📊 Bir müşteri kazanmak kaça mal oluyor?",
         )
-        st.caption("📊 Bir müşteri kazanmak kaça mal oluyor?")
 
 
 def _render_kampanyalar(kampanyalar: list[dict[str, Any]], demo_mu: bool) -> None:
@@ -538,26 +558,43 @@ def _render_segment_kampanya_eslesme(
 def _render_kapsam_karti(
     firmalar: list[dict[str, Any]], nace_hedefleri: dict[str, int], hedef_evren: int
 ) -> None:
-    """PO-BACK-10: Hedef evren kapsamı — st.metric + en düşük sektörler tablosu."""
+    """PO-BACK-10: Hedef evren kapsamı — kpi_karti + en düşük sektörler tablosu."""
     _bolum("alt-kapsam-evren").render()
     ozet = coverage_ozeti(firmalar, hedef_evren, nace_hedefleri)
     if not ozet["veri_var"]:
         st.info("Veri gelince hedef evren kapsam analizi burada görünecek.")
         return
 
+    if hedef_tablosu_kaynagi() == "dosya":
+        hedef_aciklama = "Kaynak: data/nace_hedefleri.json (sektör hedefleri toplamı)."
+    else:
+        hedef_aciklama = "HUGINN_HEDEF_EVREN ile ayarlanır; sektörlere eşit paylaştırılır."
+
     m1, m2, m3 = st.columns(3)
     with m1:
-        st.metric("Kapsam Oranı", f"%{ozet['oran']:.1f}")
-        st.caption("Hedef evrenin ne kadarını yakaladık?")
+        kpi_karti(
+            "Kapsam Oranı",
+            ozet["oran"],
+            ikon="📈",
+            ondalik=1,
+            birim="%",
+            aciklama="Hedef evrenin ne kadarını yakaladık?",
+        )
     with m2:
-        st.metric("Yakalanan Firma", f"{ozet['toplam']:,}".replace(",", "."))
-        st.caption("NACE kodu bilinen kayıt sayısı.")
+        kpi_karti(
+            "Yakalanan Firma",
+            ozet["toplam"],
+            ikon="🏢",
+            kategori="basari",
+            aciklama="NACE kodu bilinen kayıt sayısı.",
+        )
     with m3:
-        st.metric("Hedef Evren", f"{ozet['hedef']:,}".replace(",", "."))
-        if hedef_tablosu_kaynagi() == "dosya":
-            st.caption("Kaynak: data/nace_hedefleri.json (sektör hedefleri toplamı).")
-        else:
-            st.caption("HUGINN_HEDEF_EVREN ile ayarlanır; sektörlere eşit paylaştırılır.")
+        kpi_karti(
+            "Hedef Evren",
+            ozet["hedef"],
+            ikon="🌐",
+            aciklama=hedef_aciklama,
+        )
 
     if ozet["en_dusuk_3_sektor"]:
         st.warning(

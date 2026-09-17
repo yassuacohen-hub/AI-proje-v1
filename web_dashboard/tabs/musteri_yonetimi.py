@@ -21,6 +21,9 @@ from company_master.db.connection import get_engine
 from web_dashboard.tabs import admin_destek, admin_export
 from web_dashboard.tabs.admin_extras import render_user_management, TIER_SECIMLERI
 
+from company_master.settings.user_settings import kvkk_maske_acik  # noqa: E402
+from scripts.dash04_api_client import get_api, post_api  # noqa: E402
+
 
 BOLUMLER = (
     Section("Kullanıcılar & Onay", "Onay bekleyen kullanıcılar ve paket/kredi.", ikon="👥"),
@@ -66,7 +69,6 @@ def _kullanicilar_onay() -> None:
 
 def _paket_kredi() -> None:
     BOLUMLER[1].render()
-    from web_dashboard.tabs.admin_extras import get_api, post_api
 
     try:
         data = get_api("/api/admin/categories")
@@ -90,6 +92,11 @@ def _giris_aktinligi() -> None:
                 )
             ).mappings().all()
         if rows:
+            _kullanici_id = st.session_state.get("kullanici_id", "misafir")
+            if not isinstance(_kullanici_id, str) or not _kullanici_id.strip():
+                _kullanici_id = "misafir"
+            if not kvkk_maske_acik(_kullanici_id):
+                st.caption("Maskeleme kapalı — yetki gerektirir")
             st.dataframe(
                 [
                     {
@@ -121,6 +128,11 @@ def _aramalar() -> None:
                 )
             ).mappings().all()
         if rows:
+            _kullanici_id = st.session_state.get("kullanici_id", "misafir")
+            if not isinstance(_kullanici_id, str) or not _kullanici_id.strip():
+                _kullanici_id = "misafir"
+            if not kvkk_maske_acik(_kullanici_id):
+                st.caption("Maskeleme kapalı — yetki gerektirir")
             st.dataframe(
                 [
                     {

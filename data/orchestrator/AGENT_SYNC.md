@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-17T03:38:11
+> Son guncelleme: 2026-09-17T11:22:52
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -13,28 +13,33 @@
 | REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo tesl | cline | P2 | plan |
 | MARKA-REVIZE-01 | Marka kalip dosyalari ORTAK REVIZE (roo  | cline | P2 | aktif |
 | SEC-AUTH-01 | Auth uclari guvenlik duzeltmeleri (REV-B | cline | P1 | aktif |
-| VEC-TEST-01 | Vektor katmani test kapsami >= %90 | kilo | P2 | plan |
-| GUARD-ENC-02 | kodlama_denetim genisletme (CRLF/bosluk/ | kilo | P2 | plan |
-| SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH b | kilo | P2 | plan |
-| FMT-01 | ruff format/lint standardizasyonu (web_a | kilo | P2 | plan |
+| GUARD-ENC-02 | kodlama_denetim genisletme (CRLF/bosluk/ | kilo | P2 | blocked |
+| SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH b | kilo | P2 | blocked |
+| FMT-01 | ruff format/lint standardizasyonu (web_a | kilo | P2 | blocked |
 | API-SPLIT-01 | web_app.py modullere bolme (src/company_ | kilo | P2 | plan |
-| HANDOFF-TEMIZ-01 | P0-2 handoff/pano tarih damgasi temizlig | cline | P2 | plan |
-| TEST-CI-01 | CI test isi: pytest -x --timeout + izola | cline | P2 | plan |
+| UI-MIMARI-02 | Ana kontrol/musteri yonetimi temizligi:  | kilo | P2 | aktif |
+| KPI-HIST-01 | GET /api/kpi/history + ana kontrol gerce | kilo | P2 | plan |
+| ADMIN-KPI-KART-01 | Admin sekmelerinde st.metric -> kpi_kart | kilo | P2 | plan |
+| ADMIN-HATA-01 | Hata Yonetimi sekmesi: sahte istatistik/ | kilo | P2 | plan |
+| ADMIN-ROO-01 | Admin sekmeleri hata/bos-durum standardi | roo | P1 | review |
+| ADMIN-MUSTERI-02 | Musteri Yonetimi: placeholder alt sekmel | kilo | P2 | plan |
+| ADMIN-KPI-KART-02 | Kalan st.metric -> kpi_karti (webhook_mo | kilo | P2 | plan |
+| ADMIN-HATA-02 | Admin sekmelerinde 16 sessiz except:pass | kilo | P2 | plan |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| REV-TOK-01 | TOK-01 dokuman sadelestirme incelemesi ( | roo | 2026-09-16 |
-| BRAND-KIMLIK-01 | Marka kimligi seti kuruldu - inceleme ve | roo | 2026-09-16 |
-| ELESTIRI-01 | ROO_ELESTIRI_NOTLARI.md gozden gecirme + | roo | 2026-09-16 |
-| REV-BATCH-01 | Capraz inceleme: BATCH-01 (AUTH-GATE-01+ | cline | 2026-09-16 |
-| NAV-IA-04 | Sol-alt hesap karti popover + kimlik/yon | kilo | 2026-09-17 |
-| NAV-IA-03 | Proje Yonetimi sayfasi (5 alt sekme, Kar | kilo | 2026-09-16 |
-| DATA-LOG-01 | login_events + search_events tablolari,  | kilo | 2026-09-17 |
-| ROO-GAP-NAV-IA04 | NAV-IA-04/AUTH-GATE-01 capsayı tutma — k | roo | 2026-09-16 |
-| MARKA-REVIZE-01B | Marka revizyon kod katmani: test_i18n Hu | kilo | 2026-09-17 |
 | TEST-ISO-02 | Test izolasyonu: siraya bagimli testler  | kilo | 2026-09-17 |
+| VEC-TEST-01 | Vektor katmani test kapsami >= %90 | kilo | 2026-09-17 |
+| HANDOFF-TEMIZ-01 | P0-2 handoff/pano tarih damgasi temizlig | roo | 2026-09-17 |
+| TEST-CI-01 | CI test isi: pytest -x --timeout + izola | roo | 2026-09-17 |
+| ADMIN-AYAR-01 | Admin ayar sekmesi: giris zorunlu + auto | kilo | 2026-09-17 |
+| ADMIN-NAV-HAZIR-01 | Bayat hazir=False ust sayfalari ac (veri | roo | 2026-09-17 |
+| ADMIN-EXEC-01 | Executive Dashboard: st.metric->kpi_kart | roo | 2026-09-17 |
+| ADMIN-SEARCH-01 | admin_search.py admin sekme kalibina gec | roo | 2026-09-17 |
+| ADMIN-REFRESH-FIX-01 | admin_auto_refresh: st.rerun oncesi ayar | roo | 2026-09-17 |
+| ADMIN-NAV-HAZIR-02 | Navigasyon/auth sessiz except temizligi  | roo | 2026-09-17 |
 
 ## Son Handoff'lar
 

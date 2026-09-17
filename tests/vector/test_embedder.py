@@ -5,8 +5,7 @@ from __future__ import annotations
 
 import pytest
 
-from src.company_master.vector.embedder import Embedder, EmbeddingResult
-
+from src.company_master.vector.embedder import Embedder, EmbeddingResult, embed_texts
 
 class MockClient:
     """Basit mock: embed(liste, model) -> [[0.1, 0.2], ...]"""
@@ -89,3 +88,29 @@ def test_embed_sonuc_dict_ve_embeddings_ayristir():
     embedder = Embedder(client=DictClient())
     res = embedder.embed(["a"])
     assert res.ok_count == 1
+
+def test_embed_to_dict():
+    result = EmbeddingResult(
+        embeddings=[[1.0, 2.0], [3.0, 4.0]],
+        model="test",
+        errors=[(0, "fail")],
+    )
+    d = result.to_dict()
+    assert d["model"] == "test"
+    assert d["ok"] == 2
+    assert d["failed"] == 1
+    assert d["dim"] == 2
+    assert d["errors"] == [{"index": 0, "detail": "fail"}]
+
+
+def test_embedder_client_uyuzsuz(monkeypatch):
+    monkeypatch.setattr("src.company_master.vector.embedder.get_client", None, raising=False)
+    embedder = Embedder(client=None, batch_size=2, max_retries=1, retry_delay_s=0)
+    with pytest.raises(RuntimeError, match="kurulu degil"):
+        _ = embedder.client
+
+
+def test_embed_texts_fonksiyon():
+    result = embed_texts(["a", "b"], batch_size=1, client=MockClient())
+    assert result.ok_count == 2
+    assert isinstance(result.model, str)

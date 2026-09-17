@@ -8,7 +8,7 @@ Kapsam:
   - K1 ortak şablonu: son güncelleme, yenile, "ℹ️ Bu sekme hakkında"
 
 Kurallar:
-  - st.metric() mavi/turuncu renk sınıflandırması (CSS via _get_metric_color)
+  - kpi_karti(..., kategori=...) ile renk sınıflandırması (mavi müşteri / turuncu sistem)
   - st.cache_data(ttl=30)
   - Empty state → "Veri gelince X burada görünecek"
 
@@ -53,6 +53,18 @@ def load_kpi_data() -> dict[str, Any]:
 
 
 @st.cache_data(ttl=30)
+def load_kpi_history(days: int = 7) -> dict[str, Any]:
+    """KPI tarih verisi yükle (/api/kpi/history endpoint'inden)."""
+    try:
+        data = get_api(f"/api/kpi/history?days={days}")
+        if isinstance(data, dict):
+            return data or {}
+    except (APIError, Exception):
+        pass
+    return {}
+
+
+@st.cache_data(ttl=30)
 def load_webhook_stats() -> dict[str, Any]:
     """Webhook istatistikleri yükle."""
     try:
@@ -70,16 +82,6 @@ def load_webhook_stats() -> dict[str, Any]:
     except Exception:
         pass
     return {}
-
-
-def _get_metric_color(category: str) -> str:
-    """Metrik kartının CSS class'ı (mavi müşteri / turuncu sistem)."""
-    if category == "customer":
-        return "metric-blue"
-    elif category == "system":
-        return "metric-orange"
-    return ""
-
 
 #: ADMIN-UI-09 — Sayfa bölümleri tek yerde tanımlanır; hem `SectionNav`
 #: hem de gövde aynı listeyi kullanır, böylece anchor'lar asla kaymaz.
@@ -157,12 +159,18 @@ def render_ana_kontrol_tab() -> None:
     # --- Veri yükleme ---
     with st.spinner("Veriler yükleniyor..."):
         kpi = load_kpi_data()
+        kpi_history = load_kpi_history(7)
         webhook = load_webhook_stats()
 
     # --- K4: Müşteri Metrikleri (KPI-EXA-02: süreç diyagramı Teknik Altyapı sayfasında) ---
     _bolum("musteri-metrikleri").render()
 
     if kpi:
+        # Sparkline verisi: kpi_history'den son 7 günlük login sayısı
+        _spark_login = [kpi_history.get(f"day_{i}_login", 0) for i in range(7)] if kpi_history else []
+        _spark_search = [kpi_history.get(f"day_{i}_search", 0) for i in range(7)] if kpi_history else []
+        _spark_api = [kpi_history.get(f"day_{i}_api", 0) for i in range(7)] if kpi_history else []
+
         # UI-CHART-01: st.metric yerine gradient KPI kartı (tema uyumlu, responsive)
         cust_c1, cust_c2, cust_c3, cust_c4 = st.columns(4)
         with cust_c1:
@@ -176,6 +184,7 @@ def render_ana_kontrol_tab() -> None:
             kpi_karti(
                 "Aktif Kullanıcı",
                 kpi.get("active_users", 0) or None,
+                sparkline=_spark_login if _spark_login else None,
                 kategori="musteri",
                 yardim="Son 7 gün içinde api_key ile istek yapmış kullanıcılar",
             )
@@ -183,6 +192,7 @@ def render_ana_kontrol_tab() -> None:
             kpi_karti(
                 "Sinyal Sayısı",
                 kpi.get("signal_count", 0) or None,
+                sparkline=_spark_search if _spark_search else None,
                 kategori="musteri",
                 yardim="Oluşturulmuş toplam ticari sinyal (purchase intent vb.)",
             )
@@ -190,6 +200,7 @@ def render_ana_kontrol_tab() -> None:
             kpi_karti(
                 "API Çağrıları (24h)",
                 kpi.get("api_calls_total", 0) or None,
+                sparkline=_spark_api if _spark_api else None,
                 kategori="musteri",
                 yardim="Son 24 saatte yapılmış API çağrı sayısı",
             )

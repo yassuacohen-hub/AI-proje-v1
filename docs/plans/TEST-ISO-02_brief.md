@@ -7,7 +7,7 @@
 ## 0. Bağlam (neden şimdi)
 
 - cline ara raporu (`data/orchestrator/SEC-AUTH-01_bulgular_2026-09-16_cline_ara.md`): tam `pytest` koşusunda
-  `tests/test_web_dashboard_tabs.py::test_decision_tab_handles_empty_and_limits_recent_rows` ve
+  `tests/test_web_dashboard_tabs.python, git, pytest, pippy::test_decision_tab_handles_empty_and_limits_recent_rows` ve
   `test_dlq_tab_handles_empty_and_populated_data` **tam koşuda kırmızı, tek başına yeşil** → sıra/paylaşılan state bağımlılığı şüphesi.
 - `tests/test_web_dashboard_tabs.py:30` doğrudan `admin_panel.st.info = MagicMock()` atıyor (monkeypatch YOK) → modül düzeyi kalıcı mutasyon, sonraki testlere sızar.
 - `pytest-randomly` / `pytest-xdist` kurulu DEĞİL (`pip show` → not found). Rastgele sıra doğrulaması için kurulum şart.

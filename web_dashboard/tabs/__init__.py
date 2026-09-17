@@ -28,11 +28,14 @@ Tasarım kararları:
 from __future__ import annotations
 
 import importlib
+import logging
 from dataclasses import dataclass
 from typing import Callable
 
 import streamlit as st
 from company_master.i18n import t
+
+_LOG = logging.getLogger(__name__)
 
 __all__ = [
     "TabTanimi",
@@ -496,17 +499,16 @@ SECTIONS: tuple[TabTanimi, ...] = (
         hazir=True,
         min_rol="admin",
     ),
-TabTanimi(
-    anahtar="veri_kalite",
-    baslik="Veri & Kalite",
-    ikon="✅",
-    grup=GRUP_IS,
-    aciklama="KPI, kalite, arama ve executive özeti",
-    url_path="veri-kalite",
-    hazir=False,
-    bekleyen_gorev="NAV-IA-01",
-    min_rol="analyst",
-),
+    TabTanimi(
+        anahtar="veri_kalite",
+        baslik="Veri & Kalite",
+        ikon="✅",
+        grup=GRUP_IS,
+        aciklama="KPI, kalite, arama ve executive özeti",
+        url_path="veri-kalite",
+        hazir=True,
+        min_rol="analyst",
+    ),
     TabTanimi(
         anahtar="musteri_onizleme",
         baslik="Müşteri Önizleme",
@@ -514,8 +516,7 @@ TabTanimi(
         grup=GRUP_IS,
         aciklama="Paketler ve pazarlama müşteri ekranı (Huginn önizleme)",
         url_path="musteri-onizleme",
-        hazir=False,
-        bekleyen_gorev="NAV-IA-02",
+        hazir=True,
         min_rol="anon",
         yuzey=YUZEY_MUNINN,
     ),
@@ -619,8 +620,8 @@ def tab_url_getir(url_path: str) -> TabTanimi | None:
             try:
                 import streamlit as st
                 st.session_state["alt_sekme"] = alt_anahtar or ust_anahtar
-            except Exception:
-                pass
+            except Exception as exc:  # noqa: BLE001
+                _LOG.debug("session_state yok: %s", exc)
         return tanim
     for tanim in SECTIONS:
         if tanim.url_path == temiz:
@@ -667,7 +668,10 @@ def render_fonksiyonu(tanim: TabTanimi) -> Callable[[], None] | None:
         return None
     try:
         modul = importlib.import_module(tanim.modul)
-    except Exception:
+    except Exception as exc:  # noqa: BLE001 - tek bozuk sekme paneli düşürmemeli
+        _LOG.warning(
+            "Bölüm modülü yüklenemedi (%s → %s): %s", tanim.anahtar, tanim.modul, exc
+        )
         return None
     fn = getattr(modul, tanim.fonksiyon, None)
     return fn if callable(fn) else None

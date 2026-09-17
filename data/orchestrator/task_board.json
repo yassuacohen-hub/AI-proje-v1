@@ -17,7 +17,7 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-03T07:39:48",
-    "bitis": "2026-09-17T02:55:07",
+    "bitis": "2026-09-03T14:18:36",
     "dosyalar": [],
     "not": "Otomatik tetiklendi"
   },
@@ -3889,16 +3889,16 @@
     "baslik": "Vektor katmani test kapsami >= %90",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-17T03:28:59",
-    "bitis": null,
+    "bitis": "2026-09-17T11:22:52",
     "dosyalar": [
       "src/company_master/vector/embedder.py",
       "src/company_master/vector/service.py",
       "src/company_master/vector/store.py",
       "tests/vector/"
     ],
-    "not": "",
+    "not": "Teslim (kilo): Vector test kapsami %90; 73 test passed; kodlama_denetim temiz; tam suit 3595/4/0",
     "source": "ic",
     "from_agent": null
   },
@@ -3908,15 +3908,15 @@
     "baslik": "kodlama_denetim genisletme (CRLF/bosluk/tab/EOF + fix)",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "blocked",
     "baslangic": "2026-09-17T03:28:59",
-    "bitis": null,
+    "bitis": "2026-09-17T04:59:58",
     "dosyalar": [
       "scripts/kodlama_denetim.py",
       "tests/test_kodlama_denetim.py",
       "data/kodlama_allowlist.json"
     ],
-    "not": "",
+    "not": "ERTELENDI (sahip 2026-09-17, D-48): CI push kodlama_denetim yeterli. Bu goreve DEVAM ETME; ADMIN-AYAR-01 al.",
     "source": "ic",
     "from_agent": null
   },
@@ -3926,16 +3926,16 @@
     "baslik": "Bandit statik guvenlik taramasi + HIGH bulgular",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "blocked",
     "baslangic": "2026-09-17T03:28:59",
-    "bitis": null,
+    "bitis": "2026-09-17T04:59:58",
     "dosyalar": [
       "scripts/sec_bandit.py",
       "tests/test_sec_bandit.py",
       ".bandit",
       "docs/SECURITY_BANDIT.md"
     ],
-    "not": "",
+    "not": "ERTELENDI (sahip 2026-09-17, D-48): CI push kodlama_denetim yeterli. Bu goreve DEVAM ETME; ADMIN-AYAR-01 al.",
     "source": "ic",
     "from_agent": null
   },
@@ -3945,14 +3945,14 @@
     "baslik": "ruff format/lint standardizasyonu (web_app/app/web_dashboard haric)",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "blocked",
     "baslangic": "2026-09-17T03:28:59",
-    "bitis": null,
+    "bitis": "2026-09-17T04:59:58",
     "dosyalar": [
       "ruff.toml",
       ".pre-commit-config.yaml"
     ],
-    "not": "",
+    "not": "ERTELENDI (sahip 2026-09-17, D-48): CI push kodlama_denetim yeterli. Bu goreve DEVAM ETME; ADMIN-AYAR-01 al.",
     "source": "ic",
     "from_agent": null
   },
@@ -3978,11 +3978,118 @@
     "task_id": "HANDOFF-TEMIZ-01",
     "id": "HANDOFF-TEMIZ-01",
     "baslik": "P0-2 handoff/pano tarih damgasi temizligi (test sizintisi kalintisi)",
-    "sahip": "cline",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      "data/orchestrator/handoffs.json"
+    ],
+    "bitis": "2026-09-17T07:01:28",
+    "dosyalar": [
+      "data/orchestrator/handoffs.json",
+      "tests/test_post_scrape_workflow.py"
+    ],
+    "not": "roo tamamladi 2026-09-17 07:01; rapor data/orchestrator/HANDOFF-TEMIZ-01_rapor_2026-09-17_roo.md; 7 passed; commit YOK",
+    "source": "ic",
+    "from_agent": null,
+    "not_": "D-49: cline zincirinden cikarildi, roo backlog (ADMIN-ROO-01 sonrasi)."
+  },
+  {
+    "task_id": "TEST-CI-01",
+    "id": "TEST-CI-01",
+    "baslik": "CI test isi: pytest -x --timeout + izolasyon guard + kapsam esigi",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": [
+      ".github/workflows/",
+      "pytest.ini"
+    ],
+    "bitis": "2026-09-17T06:56:27",
+    "dosyalar": [
+      ".github/workflows/ci.yml",
+      "requirements-dev.txt",
+      "tests/test_ci_workflow.py"
+    ],
+    "not": "roo uyguladi+dogruladi 11 passed; rapor data/orchestrator/TEST-CI-01_rapor_2026-09-17_roo.md; commit sabah",
+    "source": "ic",
+    "from_agent": null,
+    "not_": "D-49: cline zincirinden cikarildi, roo backlog (ADMIN-ROO-01 sonrasi)."
+  },
+  {
+    "task_id": "ADMIN-AYAR-01",
+    "id": "ADMIN-AYAR-01",
+    "baslik": "Admin ayar sekmesi: giris zorunlu + auto_refresh ayar dosyasi + KVKK yardimci (K-04/S-08)",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-17T04:53:30",
+    "bitis": "2026-09-17T06:44:44",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_auto_refresh.py",
+      "web_dashboard/tabs/admin_panel.py",
+      "src/company_master/settings/user_settings.py",
+      "tests/test_admin_panel_tab.py",
+      "tests/test_admin_auto_refresh.py"
+    ],
+    "not": "Teslim (kilo): 3718 test geçik; S-08 misafir salt-okunur; K-04 auto-refresh şemadan; kvkk_maske_acik; 10 aciklama henuzuygulanmıyor; allowlist 4 yeni anahtar",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "UI-MIMARI-02",
+    "id": "UI-MIMARI-02",
+    "baslik": "Ana kontrol/musteri yonetimi temizligi: olu kod, inline import, KVKK tuketimi (M-03/M-05)",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-17T04:53:30",
+    "bitis": "2026-09-17T08:15:00",
+    "dosyalar": [
+      "web_dashboard/tabs/ana_kontrol.py",
+      "web_dashboard/tabs/musteri_yonetimi.py",
+      "web_dashboard/charts.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "KPI-HIST-01",
+    "id": "KPI-HIST-01",
+    "baslik": "GET /api/kpi/history + ana kontrol gercek sparkline (D-14)",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-17T04:53:31",
+    "bitis": null,
+    "dosyalar": [
+      "web_app.py",
+      "web_dashboard/tabs/ana_kontrol.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-KPI-KART-01",
+    "id": "ADMIN-KPI-KART-01",
+    "baslik": "Admin sekmelerinde st.metric -> kpi_karti (8 sekme, ~40 kart)",
+    "sahip": "kilo",
     "oncelik": "P2",
     "durum": "plan",
     "baslangic": [
-      "data/orchestrator/handoffs.json"
+      "web_dashboard/tabs/admin_cost.py",
+      "web_dashboard/tabs/admin_quality.py",
+      "web_dashboard/tabs/admin_performance.py",
+      "web_dashboard/tabs/admin_executive.py",
+      "web_dashboard/tabs/admin_api_analytics.py",
+      "web_dashboard/tabs/admin_dlq.py",
+      "web_dashboard/tabs/admin_audit.py",
+      "web_dashboard/tabs/admin_search.py",
+      "tests/test_admin_dlq_tab.py",
+      "tests/test_web_dashboard_tabs.py",
+      "tests/test_admin_kpi_kart.py"
     ],
     "bitis": null,
     "dosyalar": [],
@@ -3991,20 +4098,181 @@
     "from_agent": null
   },
   {
-    "task_id": "TEST-CI-01",
-    "id": "TEST-CI-01",
-    "baslik": "CI test isi: pytest -x --timeout + izolasyon guard + kapsam esigi",
-    "sahip": "cline",
+    "task_id": "ADMIN-HATA-01",
+    "id": "ADMIN-HATA-01",
+    "baslik": "Hata Yonetimi sekmesi: sahte istatistik/demo raise kaldir, gercek kaynak + rapor kaydi",
+    "sahip": "kilo",
     "oncelik": "P2",
     "durum": "plan",
     "baslangic": [
-      ".github/workflows/",
-      "pytest.ini"
+      "web_dashboard/tabs/admin_errors.py",
+      "tests/test_admin_errors.py"
     ],
     "bitis": null,
     "dosyalar": [],
     "not": "",
     "source": "ic",
     "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-ROO-01",
+    "id": "ADMIN-ROO-01",
+    "baslik": "Admin sekmeleri hata/bos-durum standardi + canli/pazarlama/paketler kpi_karti (roo ceza gorevi)",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "review",
+    "baslangic": "2026-09-17T05:19:53",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "A-E tamam; 294 passed; kodlama_denetim kapsam temiz; rapor data/orchestrator/ADMIN-ROO-01_rapor_2026-09-17_roo.md; commit YOK (sabah)",
+    "source": "ic",
+    "from_agent": null,
+    "not_": "Sahip 2026-09-17: roo 5 saatlik admin paneli gorevi. Commit YOK; sabah kontrol."
+  },
+  {
+    "task_id": "ADMIN-MUSTERI-02",
+    "id": "ADMIN-MUSTERI-02",
+    "baslik": "Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-17T06:48:52",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/musteri_yonetimi.py",
+      "tests/test_musteri_yonetimi.py"
+    ],
+    "not": "",
+    "source": "roo",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-KPI-KART-02",
+    "id": "ADMIN-KPI-KART-02",
+    "baslik": "Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-17T06:49:12",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/webhook_monitor.py",
+      "web_dashboard/tabs/tenant_health_dashboard.py",
+      "tests/test_webhook_monitor_tab.py",
+      "tests/test_admin_kpi_kart.py"
+    ],
+    "not": "",
+    "source": "roo",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-HATA-02",
+    "id": "ADMIN-HATA-02",
+    "baslik": "Admin sekmelerinde 16 sessiz except:pass -> log/hata_kutusu + AST testi",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-17T06:49:12",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_kpi.py",
+      "web_dashboard/tabs/admin_quality.py",
+      "web_dashboard/tabs/admin_performance.py",
+      "web_dashboard/tabs/admin_api_analytics.py",
+      "tests/test_admin_sessiz_except.py"
+    ],
+    "not": "",
+    "source": "roo",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-NAV-HAZIR-01",
+    "id": "ADMIN-NAV-HAZIR-01",
+    "baslik": "Bayat hazir=False ust sayfalari ac (veri_kalite, musteri_onizleme) + girinti + sessiz pass",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-17T06:49:27",
+    "bitis": "2026-09-17T07:59:14",
+    "dosyalar": [],
+    "not": "BEKLE: tabs/__init__.py cline SEC-AUTH-01 kilidinde; SEC-AUTH-01 done olunca roo alir. Brif: docs/plans/ADMIN-NAV-HAZIR-01_brief.md",
+    "source": "roo",
+    "from_agent": null,
+    "rapor": "data/orchestrator/ADMIN-NAV-HAZIR-01_rapor_2026-09-17_roo.md",
+    "aciklama": "Navigasyon SSOT temizligi: veri_kalite+musteri_onizleme hazir=True, bayat bekleyen_gorev kaldirildi, girinti duzeltildi, tab_url_getir sessiz except loglandi; pano tabanli regresyon testi (71 passed, skip yok); restart PID 24552"
+  },
+  {
+    "task_id": "ADMIN-EXEC-01",
+    "id": "ADMIN-EXEC-01",
+    "baslik": "Executive Dashboard: st.metric->kpi_karti, sessiz except->hata_kutusu, ilk test dosyasi",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-17T07:08:07",
+    "bitis": "2026-09-17T07:17:53",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_executive.py",
+      "tests/test_admin_executive.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "rapor": "data/orchestrator/ADMIN-EXEC-01_rapor_2026-09-17_roo.md"
+  },
+  {
+    "task_id": "ADMIN-SEARCH-01",
+    "id": "ADMIN-SEARCH-01",
+    "baslik": "admin_search.py admin sekme kalibina gecis (kpi_karti + hata_kutusu + test)",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-17T07:21:28",
+    "bitis": "2026-09-17T07:29:31",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_search.py",
+      "tests/test_admin_search.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "aciklama": "admin_search.py Asama C kalibi; 26 test, 134 passed; restart PID 22140; commit sabah",
+    "rapor": "data/orchestrator/ADMIN-SEARCH-01_rapor_2026-09-17_roo.md"
+  },
+  {
+    "task_id": "ADMIN-REFRESH-FIX-01",
+    "id": "ADMIN-REFRESH-FIX-01",
+    "baslik": "admin_auto_refresh: st.rerun oncesi ayar kaydi + sessiz except (roo)",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-17T07:34:05",
+    "bitis": "2026-09-17T07:41:26",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_auto_refresh.py",
+      "tests/test_admin_auto_refresh.py",
+      "web_dashboard/tabs/admin_panel.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "aciklama": "rerun oncesi kayit bugu + loglu except; 24 test (toplu 118) gecti",
+    "rapor": "data/orchestrator/ADMIN-REFRESH-FIX-01_rapor_2026-09-17_roo.md"
+  },
+  {
+    "task_id": "ADMIN-NAV-HAZIR-02",
+    "id": "ADMIN-NAV-HAZIR-02",
+    "baslik": "Navigasyon/auth sessiz except temizligi (render_fonksiyonu + admin_auth)",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-17T10:40:21",
+    "bitis": "2026-09-17T10:49:50",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_auth.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "tamamlayan": "roo"
   }
 ]

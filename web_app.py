@@ -1059,6 +1059,73 @@ def api_kpi(_auth: str = Depends(require_api_key)) -> dict:
 
 
 @app.get("/api/tasks")
+@app.get("/api/kpi/history")
+def api_kpi_history(_auth: str = Depends(require_api_key), days: int = 7):
+    """Get KPI history for the last N days."""
+    engine = get_engine()
+    _q_start = _perf_time.perf_counter()
+    result = {
+        "period": f"{days} days",
+        "total_logins": 0,
+        "successful_logins": 0,
+        "signins": 0,
+        "password_resets": 0,
+        "search_events": 0,
+        "long_term_search": 0,
+        "very_long_term_search": 0,
+        "days": [],
+    }
+    try:
+        with engine.connect() as conn:
+            # Login events history - SQLite/PostgreSQL compatible
+            login_sql = text("""
+                SELECT
+                    DATE(login_timestamp) as date,
+                    COUNT(*) as total_logins,
+                    SUM(CASE WHEN login_type = 'login' THEN 1 ELSE 0 END) as successful_logins,
+                    SUM(CASE WHEN login_type = 'signin' THEN 1 ELSE 0 END) as signins,
+                    SUM(CASE WHEN login_type = 'password_reset' THEN 1 ELSE 0 END) as password_resets
+                FROM login_events
+                WHERE login_timestamp >= datetime('now', '-' || :days || ' day')
+                GROUP BY DATE(login_timestamp)
+                ORDER BY DATE(login_timestamp)
+            """)
+            try:
+                login_rows = conn.execute(login_sql, {"days": days}).all()
+                result["total_logins"] = sum(row[0] or 0 for row in login_rows)
+                result["successful_logins"] = sum(row[1] or 0 for row in login_rows)
+                result["signins"] = sum(row[2] or 0 for row in login_rows)
+                result["password_resets"] = sum(row[3] or 0 for row in login_rows)
+                result["days"] = [
+                    {"date": row[0], "logins": row[1] or 0, "successful": row[2] or 0}
+                    for row in login_rows
+                ]
+            except Exception:
+                pass
+
+            # Search events history - SQLite/PostgreSQL compatible
+            search_sql = text("""
+                SELECT
+                    DATE(searched_at) as date,
+                    COUNT(*) as total_searches,
+                    SUM(CASE WHEN search_term_length > 50 THEN 1 ELSE 0 END) as long_terms,
+                    SUM(CASE WHEN search_term_length > 100 THEN 1 ELSE 0 END) as very_long_terms
+                FROM search_events
+                WHERE searched_at >= datetime('now', '-' || :days || ' day')
+                GROUP BY DATE(searched_at)
+                ORDER BY DATE(searched_at)
+            """)
+            try:
+                search_rows = conn.execute(search_sql, {"days": days}).all()
+                result["search_events"] = sum(row[0] or 0 for row in search_rows)
+                result["long_term_search"] = sum(row[1] or 0 for row in search_rows)
+                result["very_long_term_search"] = sum(row[2] or 0 for row in search_rows)
+            except Exception:
+                pass
+    except Exception:
+        pass
+
+    return result
 def api_tasks(_auth: str = Depends(require_api_key)) -> list[dict]:
     board = tb.gorev_listesi()
     return board or []

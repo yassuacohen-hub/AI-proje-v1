@@ -6,10 +6,10 @@
     "tarih": "2026-09-03T08:59:39"
   },
   "P0-2": {
-    "tamamlandi": "Scrape pipeline tamamlandi",
-    "sonraki_adim": "P0-3 kalite kontrol",
+    "tamamlandi": "Ingest + VKN + quality recalc + KPI tamamlandi",
+    "sonraki_adim": "",
     "dikkat_edilmesi": "",
-    "tarih": "2026-09-17T02:55:07"
+    "tarih": "2026-09-03T14:18:36"
   },
   "P0-1": {
     "tamamlandi": "OSTIM detay scrape tamamlandi (5485 firma)",

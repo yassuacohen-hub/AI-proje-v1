@@ -19,6 +19,7 @@ ADMIN-UI-10:
 from __future__ import annotations
 
 import json
+import logging
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -32,6 +33,9 @@ if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
+from web_dashboard.charts import kpi_karti  # noqa: E402
+
+_LOG = logging.getLogger(__name__)
 
 DEMO_DOSYA = ROOT / "data" / "demo" / "paketler_demo.jsonl"
 
@@ -115,8 +119,8 @@ def load_paketler() -> tuple[list[dict[str, Any]], bool]:
         paketler = paket_liste(aktif_only=True)
         if paketler:
             return paketler, False
-    except Exception:
-        pass
+    except Exception as exc:  # DB yok / tablo yok → demo
+        _LOG.warning("Paket DB okunamadı, demo veriye düşülüyor: %s", exc)
     return _demo_paketler(), True
 
 
@@ -287,27 +291,38 @@ def _render_baslik(demo_mu: bool) -> None:
 
 
 def _render_ozet(paketler: list[dict[str, Any]]) -> None:
-    """K3: her metrik icin tek satir aciklama + operasyonel soru."""
+    """K3: kpi_karti ile her metrik icin tek satir aciklama + operasyonel soru."""
     fiyatlar = [float(p.get("price") or 0) for p in paketler]
     c1, c2, c3 = st.columns(3)
     with c1:
-        st.metric("Paket Sayısı", len(paketler), help="Kataloğa tanımlı aktif paket adedi.")
-        st.caption("📊 Katalog fazla mı dar mı — müşteri hangi aralıkta tıkanıyor?")
+        kpi_karti(
+            "Paket Sayısı",
+            len(paketler),
+            ikon="📦",
+            yardim="Kataloğa tanımlı aktif paket adedi.",
+            aciklama="📊 Katalog fazla mı dar mı — müşteri hangi aralıkta tıkanıyor?",
+        )
     with c2:
-        ort = sum(fiyatlar) / len(fiyatlar) if fiyatlar else 0
-        st.metric(
+        ort = sum(fiyatlar) / len(fiyatlar) if fiyatlar else None
+        kpi_karti(
             "Ortalama Fiyat",
-            f"{ort:,.0f} ₺" if fiyatlar else "—",
-            help="Aktif paketlerin ortalama aylık fiyatı (KDV hariç).",
+            ort,
+            ikon="💳",
+            birim="₺",
+            yardim="Aktif paketlerin ortalama aylık fiyatı (KDV hariç).",
+            aciklama="📊 Ortalama sepet buna yakın mı, yoksa hep en ucuz paket mi satılıyor?",
         )
-        st.caption("📊 Ortalama sepet buna yakın mı, yoksa hep en ucuz paket mi satılıyor?")
     with c3:
-        st.metric(
-            "Fiyat Aralığı",
-            f"{min(fiyatlar):,.0f} – {max(fiyatlar):,.0f} ₺" if fiyatlar else "—",
-            help="En ucuz ve en pahalı paket arasındaki aralık.",
+        aralik = (
+            f"{min(fiyatlar):,.0f} – {max(fiyatlar):,.0f} ₺".replace(",", ".") if fiyatlar else None
         )
-        st.caption("📊 Üst segment için bir basamak daha gerekiyor mu?")
+        kpi_karti(
+            "Fiyat Aralığı",
+            aralik,
+            ikon="↔️",
+            yardim="En ucuz ve en pahalı paket arasındaki aralık.",
+            aciklama="📊 Üst segment için bir basamak daha gerekiyor mu?",
+        )
 
 
 def _render_paket_karti(paket: dict[str, Any], demo_mu: bool) -> None:

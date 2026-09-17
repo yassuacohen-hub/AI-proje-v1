@@ -7,7 +7,7 @@ import pytest
 
 from src.company_master.vector.service import firma_metni, VectorService, DuplicateGroup
 from src.company_master.vector.embedder import Embedder
-from src.company_master.vector.store import EmbeddedVectorStore
+from src.company_master.vector.store import EmbeddedVectorStore, VectorDoc
 
 
 class SabitEmbedder(Embedder):
@@ -85,3 +85,117 @@ def test_deduplicate_vkn_yok(svc):
     rows = [{"company_id": "a", "legal_name": "X", "vkn": ""},
             {"company_id": "b", "legal_name": "Y", "vkn": "555"}]
     assert svc.deduplicate_by_vkn(rows) == []
+
+def test_firma_metni_liste_deger():
+    row = {"legal_name": "ABC", "faaliyet": ["Çelik", "Demir"]}
+    text = firma_metni(row)
+    assert "ABC" in text
+    assert "Çelik" in text
+    assert "Demir" in text
+
+
+def test_degistirme_grubu_to_dict():
+    g = DuplicateGroup(vkn="111", ids=["a", "b"], scores=[0.99], texts=["x"])
+    d = g.to_dict()
+    assert d["vkn"] == "111"
+    assert d["ids"] == ["a", "b"]
+    assert d["scores"] == [0.99]
+    assert d["texts"] == ["x"]
+
+
+def test_index_firmalar_bos_embed(svc):
+    EmbeddingResult = __import__("src.company_master.vector.embedder", fromlist=["EmbeddingResult"]).EmbeddingResult
+    bos_embedder = type("BosEmbedder", (Embedder,), {
+        "embed": lambda self, texts, **kw: EmbeddingResult(embeddings=[], model="test", errors=[])
+    })
+    svc2 = VectorService(embedder=bos_embedder(), store=svc.store)
+    assert svc2.index_firmalar([{"company_id": "x", "legal_name": "Y"}]) == 0
+
+
+def test_find_similar_bos_embed(svc):
+    EmbeddingResult = __import__("src.company_master.vector.embedder", fromlist=["EmbeddingResult"]).EmbeddingResult
+    bos_embedder = type("BosEmbedder", (Embedder,), {
+        "embed": lambda self, texts, **kw: EmbeddingResult(embeddings=[], model="test", errors=[])
+    })
+    svc2 = VectorService(embedder=bos_embedder(), store=svc.store)
+    assert svc2.find_similar("anything") == []
+
+
+def test_find_similar_top_k_fazla(svc):
+    svc.index_firmalar([
+        {"company_id": "c1", "legal_name": "ABC Metal Sanayi", "faaliyet": "Çelik üretim"},
+        {"company_id": "c2", "legal_name": "XYZ Plastik", "faaliyet": "Plastik enjeksiyon"},
+        {"company_id": "c3", "legal_name": "DEF Metal İşleme", "faaliyet": "Çelik sac"},
+    ])
+    hits = svc.find_similar("çelik metal üretim", top_k=100)
+    assert len(hits) == 3
+
+
+def test_embed_document(svc):
+    doc = VectorDoc(id="doc1", vector=[1.0, 0.0, 0.0], metadata={"text": "çelik metal"})
+    svc.embed_document(doc)
+    assert svc.store.count() >= 1
+
+
+def test_deduplicate_by_vkn_bos_embed(svc):
+    EmbeddingResult = __import__("src.company_master.vector.embedder", fromlist=["EmbeddingResult"]).EmbeddingResult
+    bos_embedder = type("BosEmbedder", (Embedder,), {
+        "embed": lambda self, texts, **kw: EmbeddingResult(embeddings=[], model="test", errors=[])
+    })
+    svc2 = VectorService(embedder=bos_embedder(), store=svc.store)
+    rows = [{"company_id": "a", "vkn": "111"}, {"company_id": "b", "vkn": "111"}]
+    assert svc2.deduplicate_by_vkn(rows) == []
+
+
+def test_index_firmalar_id_key_degisken(svc):
+    rows = [{"id": "custom-1", "legal_name": "Test", "faaliyet": "X"}]
+    n = svc.index_firmalar(rows, id_key="id")
+    assert n == 1
+
+
+def test_index_firmalar_else_yol(monkeypatch):
+    monkeypatch.setattr("src.company_master.vector.service.tracer", None)
+    svc2 = VectorService(embedder=SabitEmbedder(), store=EmbeddedVectorStore())
+    assert svc2.tracer is None
+    rows = [
+        {"company_id": "c1", "legal_name": "ABC Metal", "faaliyet": "Çelik"},
+        {"company_id": "c2", "legal_name": "XYZ Plastik", "faaliyet": "Plastik"},
+    ]
+    n = svc2.index_firmalar(rows)
+    assert n == 2
+    assert svc2.store.count() == 2
+
+
+def test_find_similar_else_yol(monkeypatch):
+    monkeypatch.setattr("src.company_master.vector.service.tracer", None)
+    svc2 = VectorService(embedder=SabitEmbedder(), store=EmbeddedVectorStore())
+    svc2.index_firmalar([
+        {"company_id": "c1", "legal_name": "ABC Metal", "faaliyet": "Çelik"},
+    ])
+    hits = svc2.find_similar("çelik", top_k=5)
+    assert len(hits) == 1
+
+
+def test_deduplicate_else_yol(monkeypatch):
+    monkeypatch.setattr("src.company_master.vector.service.tracer", None)
+    svc2 = VectorService(embedder=SabitEmbedder(), store=EmbeddedVectorStore())
+    rows = [
+        {"company_id": "g1a", "legal_name": "ABC Metal", "faaliyet": "Çelik", "vkn": "111"},
+        {"company_id": "g1b", "legal_name": "ABC Metal Sanayi", "faaliyet": "Çelik üretim", "vkn": "111"},
+        {"company_id": "g2", "legal_name": "Farkli", "faaliyet": "Plastik", "vkn": "222"},
+    ]
+    gruplar = svc2.deduplicate_by_vkn(rows)
+    assert len(gruplar) == 1
+    assert gruplar[0].vkn == "111"
+
+
+def test_embed_document_bos_embed(monkeypatch):
+    monkeypatch.setattr("src.company_master.vector.service.tracer", None)
+    EmbeddingResult = __import__("src.company_master.vector.embedder", fromlist=["EmbeddingResult"]).EmbeddingResult
+    bos_embedder = type("BosEmbedder", (Embedder,), {
+        "embed": lambda self, texts, **kw: EmbeddingResult(embeddings=[], model="test", errors=[])
+    })
+    svc2 = VectorService(embedder=bos_embedder(), store=EmbeddedVectorStore())
+    doc = VectorDoc(id="doc1", vector=[1.0, 0.0, 0.0], metadata={"text": "test"})
+    svc2.embed_document(doc)
+    assert svc2.store.count() == 0

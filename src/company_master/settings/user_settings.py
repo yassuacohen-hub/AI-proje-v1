@@ -28,6 +28,7 @@ __all__ = [
     "ayar_kaydet",
     "ayarlari_getir",
     "ayarlari_sifirla",
+    "kvkk_maske_acik",
     "ayarlari_yaz",
     "dogrula",
     "gruplar",
@@ -80,7 +81,7 @@ AYAR_SEMASI: Final[tuple[AyarTanimi, ...]] = (
         varsayilan="sistem",
         grup="Görünüm",
         secenekler=("sistem", "dark", "light"),
-        aciklama="Panel renk teması. 'sistem' işletim sistemi tercihini izler.",
+        aciklama="Panel renk teması. 'sistem' işletim sistemi tercihini izler. (henüz uygulanmıyor)",
     ),
     AyarTanimi(
         anahtar="yogun_mod",
@@ -88,7 +89,7 @@ AYAR_SEMASI: Final[tuple[AyarTanimi, ...]] = (
         tip="bool",
         varsayilan=False,
         grup="Görünüm",
-        aciklama="Satır yüksekliklerini daraltır; ekrana daha fazla kayıt sığar.",
+        aciklama="Satır yüksekliklerini daraltır; ekrana daha fazla kayıt sığar. (henüz uygulanmıyor)",
     ),
     AyarTanimi(
         anahtar="sayfa_boyutu",
@@ -98,7 +99,7 @@ AYAR_SEMASI: Final[tuple[AyarTanimi, ...]] = (
         grup="Görünüm",
         alt_sinir=10,
         ust_sinir=500,
-        aciklama="Tablolarda tek sayfada gösterilecek kayıt sayısı (10-500).",
+        aciklama="Tablolarda tek sayfada gösterilecek kayıt sayısı (10-500). (henüz uygulanmıyor)",
     ),
     AyarTanimi(
         anahtar="varsayilan_bolum",
@@ -107,7 +108,7 @@ AYAR_SEMASI: Final[tuple[AyarTanimi, ...]] = (
         varsayilan="ana_kontrol",
         grup="Görünüm",
         secenekler=("ana_kontrol", "musteriler", "kalite", "sistem", "yonetim"),
-        aciklama="Panel açıldığında gösterilecek bölüm.",
+        aciklama="Panel açıldığında gösterilecek bölüm. (henüz uygulanmıyor)",
     ),
     # --- Veri ---
     AyarTanimi(
@@ -142,7 +143,7 @@ AYAR_SEMASI: Final[tuple[AyarTanimi, ...]] = (
         varsayilan="csv",
         grup="Veri",
         secenekler=("csv", "xlsx", "json"),
-        aciklama="İndirme düğmelerinin öntanımlı dosya biçimi.",
+        aciklama="İndirme düğmelerinin öntanımlı dosya biçimi. (henüz uygulanmıyor)",
     ),
     # --- Bildirim ---
     AyarTanimi(
@@ -151,7 +152,7 @@ AYAR_SEMASI: Final[tuple[AyarTanimi, ...]] = (
         tip="bool",
         varsayilan=False,
         grup="Bildirim",
-        aciklama="Kritik uyarılar için e-posta gönderilsin.",
+        aciklama="Kritik uyarılar için e-posta gönderilsin. (henüz uygulanmıyor)",
     ),
     AyarTanimi(
         anahtar="bildirim_telegram",
@@ -159,7 +160,7 @@ AYAR_SEMASI: Final[tuple[AyarTanimi, ...]] = (
         tip="bool",
         varsayilan=False,
         grup="Bildirim",
-        aciklama="Kritik uyarılar için Telegram mesajı gönderilsin.",
+        aciklama="Kritik uyarılar için Telegram mesajı gönderilsin. (henüz uygulanmıyor)",
     ),
     AyarTanimi(
         anahtar="bildirim_esigi",
@@ -168,7 +169,7 @@ AYAR_SEMASI: Final[tuple[AyarTanimi, ...]] = (
         varsayilan="kritik",
         grup="Bildirim",
         secenekler=("bilgi", "uyari", "kritik"),
-        aciklama="Bu seviyeden düşük olaylar bildirim üretmez.",
+        aciklama="Bu seviyeden düşük olaylar bildirim üretmez. (henüz uygulanmıyor)",
     ),
     # --- Bölgesel ---
     AyarTanimi(
@@ -178,7 +179,7 @@ AYAR_SEMASI: Final[tuple[AyarTanimi, ...]] = (
         varsayilan="tr",
         grup="Bölgesel",
         secenekler=("tr", "en"),
-        aciklama="Panel metin dili.",
+        aciklama="Panel metin dili. (henüz uygulanmıyor)",
     ),
     AyarTanimi(
         anahtar="saat_dilimi",
@@ -187,7 +188,7 @@ AYAR_SEMASI: Final[tuple[AyarTanimi, ...]] = (
         varsayilan="Europe/Istanbul",
         grup="Bölgesel",
         secenekler=("Europe/Istanbul", "UTC"),
-        aciklama="Tarih/saat alanlarının gösterim dilimi.",
+        aciklama="Tarih/saat alanlarının gösterim dilimi. (henüz uygulanmıyor)",
     ),
 )
 
@@ -350,3 +351,8 @@ def ayarlari_sifirla(kullanici_id: str, dizin: Path | None = None) -> dict[str, 
     except OSError:
         pass
     return varsayilanlar()
+
+def kvkk_maske_acik(kullanici_id: str, dizin: Path | None = None) -> bool:
+    """Kullanıcının KVKK maskeleme ayarının etkin olup olmadığını döndürür."""
+    result = ayarlari_getir(kullanici_id, dizin)
+    return bool(result.get("kvkk_maskeleme", True))

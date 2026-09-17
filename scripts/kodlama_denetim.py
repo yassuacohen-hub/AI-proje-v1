@@ -256,6 +256,22 @@ def _dosya_ihlalleri(yol: Path, kok: Path | None = None) -> list[tuple[str, str]
                 )
             except (ValueError, MemoryError, RecursionError) as hata:
                 bulgular.append((SOZDIZIMI_KODU, f"{goreceli} ({hata})"))
+        # crlf_karisik: karisik satir sonlari (\r\n ve \n bir arada)
+        if "\r\n" in metin and "\n" in metin.replace("\r\n", ""):
+            bulgular.append(("crlf_karisik", goreceli))
+        # sondaki_bosluk: satir sonundaki bosluklar
+        if yol.suffix in {".py", ".md", ".toml", ".yaml", ".yml"}:
+            for no, satir in enumerate(metin.splitlines(), 1):
+                if satir != satir.rstrip():
+                    bulgular.append(("sondaki_bosluk", f"{goreceli}:{no}"))
+        # tab_girinti: .py dosyalarinda tab girinti
+        if yol.suffix == ".py":
+            for no, satir in enumerate(metin.splitlines(), 1):
+                if satir.startswith("\t"):
+                    bulgular.append(("tab_girinti", f"{goreceli}:{no}"))
+        # dosya_sonu: son satir sonlandirma yok
+        if yol.suffix in {".py", ".md", ".toml", ".yaml", ".yml"} and ham and not ham.endswith(b"\n"):
+            bulgular.append(("dosya_sonu", goreceli))
     return bulgular
 
 
@@ -312,6 +328,10 @@ def tara(
         "okuma_hatasi": [],
         "mojibake": [],
         "sozdizimi": [],
+        "crlf_karisik": [],
+        "sondaki_bosluk": [],
+        "tab_girinti": [],
+        "dosya_sonu": [],
     }
     for yol in _taranacak_dosyalar():
         if kapsam is not None:
@@ -342,6 +362,57 @@ def duzelt(sonuclar: dict[str, list[str]]) -> list[str]:
             continue
         if ham.startswith(UTF8_BOM):
             yol.write_bytes(ham[len(UTF8_BOM) :])
+            degisen.append(goreceli)
+    for goreceli in sonuclar.get("crlf_karisik", []):
+        yol = KOK / goreceli
+        try:
+            icerik = yol.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        duzeltilmis = icerik.replace("\r\n", "\n").replace("\r", "\n")
+        if duzeltilmis != icerik:
+            yol.write_text(duzeltilmis, encoding="utf-8", newline="")
+            degisen.append(goreceli)
+    for goreceli in sonuclar.get("sondaki_bosluk", []):
+        yol = KOK / goreceli
+        try:
+            icerik = yol.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        satirlar = icerik.split("\n")
+        duzeltilmis = "\n".join(s.rstrip() for s in satirlar)
+        if duzeltilmis != icerik:
+            yol.write_text(duzeltilmis, encoding="utf-8", newline="")
+            degisen.append(goreceli)
+    for goreceli in sonuclar.get("tab_girinti", []):
+        yol = KOK / goreceli
+        try:
+            icerik = yol.read_text(encoding="utf-8")
+        except OSError:
+            continue
+        satirlar = icerik.split("\n")
+        duzeltilmis_satirlar = []
+        for satir in satirlar:
+            if satir.startswith("\t"):
+                sayac = 0
+                while satir.startswith("\t"):
+                    sayac += 1
+                    satir = satir[1:]
+                duzeltilmis_satirlar.append("    " * sayac + satir)
+            else:
+                duzeltilmis_satirlar.append(satir)
+        duzeltilmis = "\n".join(duzeltilmis_satirlar)
+        if duzeltilmis != icerik:
+            yol.write_text(duzeltilmis, encoding="utf-8", newline="")
+            degisen.append(goreceli)
+    for goreceli in sonuclar.get("dosya_sonu", []):
+        yol = KOK / goreceli
+        try:
+            ham = yol.read_bytes()
+        except OSError:
+            continue
+        if ham and not ham.endswith(b"\n"):
+            yol.write_bytes(ham + b"\n")
             degisen.append(goreceli)
     return sorted(degisen)
 
@@ -428,7 +499,7 @@ def main(argv: list[str] | None = None) -> int:
         yeni_ihlaller.extend(
             f"{kod}: {d}" for d in sonuclar.get(kod, []) if _muaf_disi(d, muaf_kume)
         )
-    for kod in ("utf16", "nul", "bos", "okuma_hatasi", "mojibake", "sozdizimi"):
+    for kod in ("utf16", "nul", "bos", "okuma_hatasi", "mojibake", "sozdizimi", "crlf_karisik", "sondaki_bosluk", "tab_girinti", "dosya_sonu"):
         yeni_ihlaller.extend(f"{kod}: {d}" for d in sonuclar.get(kod, []))
     if yeni_ihlaller:
         print(f"ALLOWLIST DISI IHlAL ({len(yeni_ihlaller)}):")

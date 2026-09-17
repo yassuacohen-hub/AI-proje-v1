@@ -13,6 +13,7 @@ ADMIN-UI-10:
 """
 from __future__ import annotations
 
+import logging
 import sys
 from pathlib import Path
 from typing import Any
@@ -33,8 +34,11 @@ from company_master.settings import (  # noqa: E402
     ayarlari_sifirla,
     ayarlari_yaz,
     gruplar,
+    varsayilanlar,
 )
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
+
+_log = logging.getLogger(__name__)
 
 #: ADMIN-UI-10 — Bolumler tek yerde tanimlanir (anchor tutarliligi).
 BOLUMLER: tuple[Section, ...] = (
@@ -185,7 +189,8 @@ def aktif_kullanici(oturum: dict[str, Any] | None = None) -> str:
     if oturum is None:
         try:
             oturum = dict(st.session_state)
-        except Exception:
+        except Exception as exc:  # noqa: BLE001 — Streamlit bağlamı dışında (test/CLI)
+            _log.debug("session_state okunamadı, misafir sayılıyor: %s", exc)
             oturum = {}
     for anahtar in ("admin_email", "user_email", "kullanici_id"):
         deger = oturum.get(anahtar)
@@ -275,6 +280,23 @@ def render_ayarlar_tab(kullanici_id: str | None = None) -> None:
         )
 
     SectionNav(BOLUMLER, yatay=True).render()
+
+    _misafir = kullanici_id == MISAFIR_KIMLIK
+
+    if _misafir:
+        st.info("Ayarları kaydetmek için giriş yapın")
+        mevcut = varsayilanlar()
+        grup_haritasi = gruplar()
+        grup_adlari = list(grup_haritasi)
+        _bolum("ayar-gruplari").render()
+        for grup_adi in grup_adlari:
+            with st.tabs([grup_adi])[0]:
+                for tanim in grup_haritasi[grup_adi]:
+                    deger = mevcut.get(tanim.anahtar, tanim.varsayilan)
+                    st.caption(f"{tanim.etiket}: {deger}")
+        _bolum("ayar-sifirlama").render()
+        st.caption("Misafir modunda ayarlar yazılamaz; yalnızca mevcut değerler gösterilir.")
+        return
 
     mevcut = ayarlari_getir(kullanici_id)
     grup_haritasi = gruplar()

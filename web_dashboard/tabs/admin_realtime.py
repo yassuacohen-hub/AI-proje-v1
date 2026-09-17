@@ -9,29 +9,49 @@ ADMIN-UI-10:
   ``PageHeader`` -> ``SectionNav`` -> ``Section``. Renk, ikon ve tipografi
   secimleri **degismedi**; yalnizca hiyerarsi disipline edildi. Ekranin tek
   birincil butonu "Veriyi Yenile" dugmesidir.
+
+ADMIN-ROO-01 (Aşama B):
+  * Ham SQL string'i ``sqlalchemy.text()`` ile sarıldı (SQLAlchemy 2.x uyumu).
+  * ``except Exception: pass`` kaldırıldı; hata metni kullanıcıya
+    ``hata_kutusu`` ile gösterilir, log'a yazılır.
+  * ``st.metric`` → ``kpi_karti`` (tek KPI dili, UI-CHART-01).
+  * SSE ayrıştırma ve metrik çıkarımı saf fonksiyonlara ayrıldı (test edilebilir).
 """
 from __future__ import annotations
 
 import json
+import logging
 import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+import pandas as pd
 import requests
 import streamlit as st
+from sqlalchemy import text
 
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
-from company_master.db.connection import get_engine
-from company_master.db.connection import _load_env
-from company_master.ui import PageHeader, Section, SectionNav
+from company_master.db.connection import _load_env, get_engine  # noqa: E402
+from company_master.ui import (  # noqa: E402
+    PageHeader,
+    Section,
+    SectionNav,
+    bos_durum,
+    hata_kutusu,
+)
+from web_dashboard.charts import kpi_karti  # noqa: E402  (ADMIN-ROO-01)
 
 _load_env()
 
+log = logging.getLogger(__name__)
+
 SSE_URL = "http://localhost:8000/api/intelligence/dashboard/stream"
 CACHE_TTL = 5
+SSE_TIMEOUT = 10
+SAGLIK_ESIK = 90
 
 #: ADMIN-UI-10 — Bolumler tek yerde tanimlanir (anchor tutarliligi).
 BOLUMLER: tuple[Section, ...] = (
@@ -55,6 +75,9 @@ GIRIS_METNI = (
     "son bilinen değerler gösterilir."
 )
 
+SSE_IPUCU = "API (8000) ayakta mı? `docker compose ps api` ile kontrol edin."
+DB_IPUCU = "DATABASE_URL `.env` içinde doğru mu? `docker compose ps` ile servisi kontrol edin."
+
 
 def _bolum(kimlik: str) -> Section:
     """Kimlige gore bolum tanimini getirir (anchor tutarliligi icin)."""
@@ -64,35 +87,134 @@ def _bolum(kimlik: str) -> Section:
     raise KeyError(f"Tanımsız bölüm kimliği: {kimlik}")
 
 
-@st.cache_data(ttl=CACHE_TTL)
-def load_sse_data() -> dict[str, Any]:
-    """SSE endpoint'den canli veri al."""
-    try:
-        resp = requests.get(SSE_URL, timeout=10)
-        resp.raise_for_status()
-        for line in resp.text.splitlines():
-            line = line.strip()
-            if line.startswith("data:"):
-                data = json.loads(line[5:].strip())
-                return data
-    except Exception:
-        pass
+# ---------------------------------------------------------------------------
+# Saf yardımcılar (Streamlit'siz, test edilebilir)
+# ---------------------------------------------------------------------------
+
+def _sse_ayristir(govde: str) -> dict[str, Any]:
+    """SSE metninden ilk ``data:`` satırını JSON olarak döndürür; yoksa ``{}``.
+
+    Bozuk JSON satırı atlanır, sonraki ``data:`` satırı denenir.
+    """
+    for satir in govde.splitlines():
+        satir = satir.strip()
+        if not satir.startswith("data:"):
+            continue
+        try:
+            veri = json.loads(satir[5:].strip())
+        except json.JSONDecodeError:
+            continue
+        if isinstance(veri, dict):
+            return veri
     return {}
 
 
-@st.cache_data(ttl=CACHE_TTL)
-def load_kpi_from_db() -> dict[str, Any]:
-    """DB'den KPI al."""
-    engine = get_engine()
-    result: dict[str, Any] = {"total": 0, "signals": 0, "api_calls": 0}
+def _sse_metrikleri(sse: dict[str, Any]) -> dict[str, Any]:
+    """SSE sözlüğünden 4 ana metriği takma adlarıyla birlikte çıkarır.
+
+    İki isim şeması desteklenir (İngilizce API / Türkçe alias); ilk bulunan alınır.
+    """
+    def _al(*anahtarlar: str, varsayilan: Any = None) -> Any:
+        for k in anahtarlar:
+            if k in sse and sse[k] is not None:
+                return sse[k]
+        return varsayilan
+
+    return {
+        "total": _al("total", "total_firma", varsayilan=0),
+        "signals": _al("signals", "sinyal_toplam", varsayilan=0),
+        "api_calls": _al("api_calls", "api_cagri_toplam", varsayilan=0),
+        "score": _al("quality_score", "saglik_skoru", varsayilan=100),
+    }
+
+
+def _saglik_durumu(skor: Any, esik: int = SAGLIK_ESIK) -> str:
+    """Skoru insan diline çevirir: ``🟢 Sağlıklı`` / ``🟠 Dikkat``."""
     try:
+        return "🟢 Sağlıklı" if float(skor) >= esik else "🟠 Dikkat"
+    except (TypeError, ValueError):
+        return "🟠 Dikkat"
+
+
+def _sse_oku(url: str = SSE_URL, timeout: int = SSE_TIMEOUT) -> tuple[dict[str, Any], str | None]:
+    """SSE endpoint'ini okur → ``(veri, hata)``. Hata varsa veri boştur."""
+    try:
+        resp = requests.get(url, timeout=timeout)
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        log.warning("SSE okunamadı (%s): %s", url, exc)
+        return {}, f"{type(exc).__name__}: {exc}"
+    return _sse_ayristir(resp.text), None
+
+
+def _db_kpi_oku() -> tuple[dict[str, Any], str | None]:
+    """DB'den yedek KPI okur → ``(veri, hata)``; SQL ``text()`` ile sarılıdır."""
+    sonuc: dict[str, Any] = {"total": 0, "signals": 0, "api_calls": 0}
+    try:
+        engine = get_engine()
         with engine.connect() as conn:
-            row = conn.execute("SELECT COUNT(*) as cnt FROM companies").mappings().first()
-            if row:
-                result["total"] = row["cnt"] or 0
-    except Exception:
-        pass
-    return result
+            row = conn.execute(text("SELECT COUNT(*) AS cnt FROM companies")).mappings().first()
+    except Exception as exc:  # noqa: BLE001 - sürücü/bağlantı hataları çeşitli
+        log.warning("DB KPI okunamadı: %s", exc)
+        return sonuc, f"{type(exc).__name__}: {exc}"
+    if row:
+        sonuc["total"] = row["cnt"] or 0
+    return sonuc, None
+
+
+# ---------------------------------------------------------------------------
+# Önbellekli sarmalayıcılar
+# ---------------------------------------------------------------------------
+
+@st.cache_data(ttl=CACHE_TTL)
+def load_sse_data() -> tuple[dict[str, Any], str | None]:
+    """SSE endpoint'den canli veri al (önbellekli)."""
+    return _sse_oku()
+
+
+@st.cache_data(ttl=CACHE_TTL)
+def load_kpi_from_db() -> tuple[dict[str, Any], str | None]:
+    """DB'den KPI al (önbellekli)."""
+    return _db_kpi_oku()
+
+
+# ---------------------------------------------------------------------------
+# Render
+# ---------------------------------------------------------------------------
+
+def _canli_metrikleri_ciz(sse: dict[str, Any]) -> None:
+    """4 KPI kartı (kpi_karti) — tek KPI dili."""
+    m = _sse_metrikleri(sse)
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        kpi_karti(
+            "Toplam Firma", m["total"], ikon="🏢", kategori="sistem",
+            aciklama="📊 Arttı mı azaldı mı?", anahtar="rt-total",
+        )
+    with col2:
+        kpi_karti(
+            "Sinyal", m["signals"], ikon="📡", kategori="sistem",
+            aciklama="📊 Spike var mı?", anahtar="rt-signals",
+        )
+    with col3:
+        kpi_karti(
+            "API Çağrı", m["api_calls"], ikon="🔌", kategori="sistem",
+            aciklama="📊 Artış trendi?", anahtar="rt-api",
+        )
+    with col4:
+        kpi_karti(
+            "Sistem Sağlığı", _saglik_durumu(m["score"]), ikon="🩺", kategori="sistem",
+            yardim=f"Skor: {m['score']}", aciklama="📊 Kritik uyarı var mı?", anahtar="rt-score",
+        )
+
+
+def _trend_ciz(sse: dict[str, Any]) -> None:
+    trend = sse.get("trend") or {}
+    trend_df = pd.DataFrame(trend) if trend else pd.DataFrame()
+    if trend_df.empty:
+        bos_durum("Trend verisi henüz oluşmadı.", ikon="📈", aksiyon="Birkaç dakika sonra tekrar bakın")
+        return
+    st.line_chart(trend_df, width="stretch")
 
 
 def render_admin_realtime_tab() -> None:
@@ -145,45 +267,43 @@ def render_admin_realtime_tab() -> None:
 
     SectionNav(BOLUMLER, yatay=True).render()
 
-    with st.spinner("Canli veri yükleniyor..."):
-        sse = load_sse_data()
-        kpi = load_kpi_from_db()
+    with st.spinner("Canlı veri yükleniyor..."):
+        sse, sse_hata = load_sse_data()
 
     if sse:
         _bolum("canli-metrikler").render()
-        col1, col2, col3, col4 = st.columns(4)
-        with col1:
-            total = sse.get("total", sse.get("total_firma", 0))
-            st.metric("Toplam Firma", f"{total:,}".replace(",", ".") if total else "—")
-            st.caption("📊 Artı mı azaldı mı?")
-        with col2:
-            signals = sse.get("signals", sse.get("sinyal_toplam", 0))
-            st.metric("Sinyal", f"{signals:,}".replace(",", ".") if signals else "—")
-            st.caption("📊 Spike var mı?")
-        with col3:
-            api = sse.get("api_calls", sse.get("api_cagri_toplam", 0))
-            st.metric("API Çağrı", f"{api:,}".replace(",", ".") if api else "—")
-            st.caption("📊 Artış trendi?")
-        with col4:
-            score = sse.get("quality_score", sse.get("saglik_skoru", 100))
-            status = "🟢 Sağlıklı" if score and score >= 90 else "🟠 Dikkat"
-            st.metric("Sistem Sağlığı", status, help=f"Skor: {score}")
-            st.caption("📊 Kritik uyarı var mı?")
-
+        _canli_metrikleri_ciz(sse)
         if sse.get("generated_at"):
             st.caption(f"Veri zamanı: {sse['generated_at']}")
-
         _bolum("trend-24s").render()
-        trend = sse.get("trend", {})
-        if trend:
-            import pandas as pd
-            trend_df = pd.DataFrame(trend)
-            if not trend_df.empty:
-                st.line_chart(trend_df, width="stretch")
-        else:
-            st.info("📊 Trend verisi henüz mevcut değil.")
+        _trend_ciz(sse)
+        return
+
+    # --- SSE yok: hata kutusu + DB yedeği ---
+    if sse_hata:
+        hata_kutusu("Canlı bağlantı kurulamadı", sse_hata, ipucu=SSE_IPUCU)
     else:
-        st.warning("⚠️ Canli bağlantı kurulamadı. SSE endpoint kontrol edin.")
-        db = load_kpi_from_db()
-        if db.get("total"):
-            st.metric("DB Toplam Firma", f"{db['total']:,}")
+        bos_durum("SSE akışı boş yanıt döndürdü.", ikon="📡", aksiyon="Veriyi Yenile")
+
+    _bolum("canli-metrikler").render()
+    db, db_hata = load_kpi_from_db()
+    if db_hata:
+        hata_kutusu("Veritabanı yedeği okunamadı", db_hata, ipucu=DB_IPUCU)
+        return
+    if db.get("total"):
+        kpi_karti(
+            "DB Toplam Firma", db["total"], ikon="🗄️", kategori="sistem",
+            aciklama="Veritabanından yedek okuma (SSE kapalı).", anahtar="rt-db-total",
+        )
+    else:
+        bos_durum("Veritabanında firma kaydı yok.", ikon="🗄️", aksiyon="Veri ingest çalıştırın")
+
+
+__all__ = [
+    "BOLUMLER",
+    "CACHE_TTL",
+    "SSE_URL",
+    "load_kpi_from_db",
+    "load_sse_data",
+    "render_admin_realtime_tab",
+]

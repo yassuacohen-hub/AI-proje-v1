@@ -183,3 +183,24 @@ def test_read_decisions_skips_broken_jsonl_lines(monkeypatch, tmp_path: Path):
     entries = decision_log.read_decisions()
 
     assert [entry["title"] for entry in entries] == ["gecerli", "ikinci"]
+
+
+# --- ADMIN-REFRESH-FIX-01: aktif_kullanici sessiz except -> loglu ---
+
+def test_aktif_kullanici_oturumdan_kimlik_cozer():
+    assert admin_panel.aktif_kullanici({"admin_email": " a@b.com "}) == "a@b.com"
+    assert admin_panel.aktif_kullanici({"bos": ""}) == admin_panel.MISAFIR_KIMLIK
+
+
+def test_aktif_kullanici_session_state_hatasinda_misafir_ve_log(monkeypatch, caplog):
+    class _Patlayan:
+        def keys(self):
+            raise RuntimeError("streamlit baglami yok")
+
+        def __iter__(self):
+            raise RuntimeError("streamlit baglami yok")
+
+    monkeypatch.setattr(admin_panel.st, "session_state", _Patlayan())
+    with caplog.at_level("DEBUG", logger=admin_panel._log.name):
+        assert admin_panel.aktif_kullanici() == admin_panel.MISAFIR_KIMLIK
+    assert "streamlit baglami yok" in caplog.text
