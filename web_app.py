@@ -1061,69 +1061,70 @@ def api_kpi(_auth: str = Depends(require_api_key)) -> dict:
 @app.get("/api/kpi/history")
 def api_kpi_history(_auth: str = Depends(require_api_key), days: int = 7):
     """Get KPI history for the last N days."""
+    if not isinstance(days, int) or days < 1 or days > 30:
+        days = 7
     engine = get_engine()
-    _q_start = _perf_time.perf_counter()
-    result = {
-        "period": f"{days} days",
-        "total_logins": 0,
-        "successful_logins": 0,
-        "signins": 0,
-        "password_resets": 0,
-        "search_events": 0,
-        "long_term_search": 0,
-        "very_long_term_search": 0,
-        "days": [],
-    }
+    result = {"days": days, "series": {"login": [], "search": [], "yeni_firma": []}, "labels": []}
     try:
         with engine.connect() as conn:
-            # Login events history - SQLite/PostgreSQL compatible
-            login_sql = text("""
-                SELECT
-                    DATE(login_timestamp) as date,
-                    COUNT(*) as total_logins,
-                    SUM(CASE WHEN login_type = 'login' THEN 1 ELSE 0 END) as successful_logins,
-                    SUM(CASE WHEN login_type = 'signin' THEN 1 ELSE 0 END) as signins,
-                    SUM(CASE WHEN login_type = 'password_reset' THEN 1 ELSE 0 END) as password_resets
-                FROM login_events
-                WHERE login_timestamp >= datetime('now', '-' || :days || ' day')
-                GROUP BY DATE(login_timestamp)
-                ORDER BY DATE(login_timestamp)
+            labels_sql = text("""
+                SELECT DATE('now', '-' || (n-1) || ' day') as date
+                FROM (SELECT 1 as n UNION SELECT 2 UNION SELECT 3 UNION SELECT 4 UNION SELECT 5 UNION
+                      SELECT 6 UNION SELECT 7 UNION SELECT 8 UNION SELECT 9 UNION SELECT 10 UNION
+                      SELECT 11 UNION SELECT 12 UNION SELECT 13 UNION SELECT 14 UNION SELECT 15 UNION
+                      SELECT 16 UNION SELECT 17 UNION SELECT 18 UNION SELECT 19 UNION SELECT 20 UNION
+                      SELECT 21 UNION SELECT 22 UNION SELECT 23 UNION SELECT 24 UNION SELECT 25 UNION
+                      SELECT 26 UNION SELECT 27 UNION SELECT 28 UNION SELECT 29 UNION SELECT 30)
+                WHERE n <= :days ORDER BY date DESC
             """)
             try:
-                login_rows = conn.execute(login_sql, {"days": days}).all()
-                result["total_logins"] = sum(row[1] or 0 for row in login_rows)
-                result["successful_logins"] = sum(row[2] or 0 for row in login_rows)
-                result["signins"] = sum(row[3] or 0 for row in login_rows)
-                result["password_resets"] = sum(row[4] or 0 for row in login_rows)
-                result["days"] = [
-                    {"date": row[0], "logins": row[1] or 0, "successful": row[2] or 0}
-                    for row in login_rows
-                ]
+                label_rows = conn.execute(labels_sql, {"days": days}).all()
+                result["labels"] = [row[0] for row in label_rows]
             except Exception:
                 pass
-
-            # Search events history - SQLite/PostgreSQL compatible
-            search_sql = text("""
-                SELECT
-                    DATE(searched_at) as date,
-                    COUNT(*) as total_searches,
-                    SUM(CASE WHEN search_term_length > 50 THEN 1 ELSE 0 END) as long_terms,
-                    SUM(CASE WHEN search_term_length > 100 THEN 1 ELSE 0 END) as very_long_terms
-                FROM search_events
-                WHERE searched_at >= datetime('now', '-' || :days || ' day')
-                GROUP BY DATE(searched_at)
-                ORDER BY DATE(searched_at)
-            """)
+            if not result.get("labels"):
+                return result
+            login_sql = text("SELECT DATE(login_timestamp) as date, COUNT(*) as cnt FROM login_events WHERE login_timestamp >= datetime(:start_date, 'localtime') GROUP BY DATE(login_timestamp)")
             try:
-                search_rows = conn.execute(search_sql, {"days": days}).all()
-                result["search_events"] = sum(row[1] or 0 for row in search_rows)
-                result["long_term_search"] = sum(row[2] or 0 for row in search_rows)
-                result["very_long_term_search"] = sum(row[3] or 0 for row in search_rows)
+                login_map = {lbl: 0 for lbl in result["labels"]}
+                login_rows = conn.execute(login_sql, {"start_date": result["labels"][-1]}).all()
+                for row in login_rows:
+                    ds = row[0] if isinstance(row[0], str) else str(row[0])[:10]
+                    if ds in login_map: login_map[ds] = row[1] or 0
+                result["series"]["login"] = [login_map.get(lbl, 0) for lbl in result["labels"]]
             except Exception:
                 pass
+            search_sql = text("SELECT DATE(searched_at) as date, COUNT(*) as cnt FROM search_events WHERE searched_at >= datetime(:start_date, 'localtime') GROUP BY DATE(searched_at)")
+            try:
+                search_map = {lbl: 0 for lbl in result["labels"]}
+                search_rows = conn.execute(search_sql, {"start_date": result["labels"][-1]}).all()
+                for row in search_rows:
+                    ds = row[0] if isinstance(row[0], str) else str(row[0])[:10]
+                    if ds in search_map: search_map[ds] = row[1] or 0
+                result["series"]["search"] = [search_map.get(lbl, 0) for lbl in result["labels"]]
+            except Exception:
+                pass
+            try:
+                firma_sql = text("SELECT DATE(created_at) as date, COUNT(*) as cnt FROM companies WHERE created_at >= datetime(:start_date, 'localtime') GROUP BY DATE(created_at)")
+                firma_map = {lbl: 0 for lbl in result["labels"]}
+                firma_rows = conn.execute(firma_sql, {"start_date": result["labels"][-1]}).all()
+                cumulative = 0
+                yf = []
+                for row in firma_rows:
+                    ds = row[0] if isinstance(row[0], str) else str(row[0])[:10]
+                    if ds in firma_map:
+                        cumulative += row[1] or 0
+                        yf.append(cumulative)
+                    else:
+                        yf.append(cumulative)
+                # Fill to match labels length
+                while len(yf) < len(result["labels"]):
+                    yf.insert(0, cumulative)
+                result["series"]["yeni_firma"] = yf[:len(result["labels"])]
+            except Exception:
+                result["series"]["yeni_firma"] = [0] * len(result["labels"])
     except Exception:
         pass
-
     return result
 
 @app.get("/api/tasks")

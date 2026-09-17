@@ -166,10 +166,10 @@ def render_ana_kontrol_tab() -> None:
     _bolum("musteri-metrikleri").render()
 
     if kpi:
-        # Sparkline verisi: kpi_history'den son 7 günlük login sayısı
-        _spark_login = [kpi_history.get(f"day_{i}_login", 0) for i in range(7)] if kpi_history else []
-        _spark_search = [kpi_history.get(f"day_{i}_search", 0) for i in range(7)] if kpi_history else []
-        _spark_api = [kpi_history.get(f"day_{i}_api", 0) for i in range(7)] if kpi_history else []
+        series = kpi_history.get("series", {})
+        _spark_login = series.get("login", [])
+        _spark_search = series.get("search", [])
+        _spark_yf = series.get("yeni_firma", [])
 
         # UI-CHART-01: st.metric yerine gradient KPI kartı (tema uyumlu, responsive)
         cust_c1, cust_c2, cust_c3, cust_c4 = st.columns(4)
@@ -177,6 +177,7 @@ def render_ana_kontrol_tab() -> None:
             kpi_karti(
                 "Toplam Firma",
                 kpi.get("total", 0) or None,
+                sparkline=_spark_yf if _spark_yf else None,
                 kategori="musteri",
                 yardim="Veritabanında kayıtlı aktif firma sayısı",
             )
@@ -200,7 +201,6 @@ def render_ana_kontrol_tab() -> None:
             kpi_karti(
                 "API Çağrıları (24h)",
                 kpi.get("api_calls_total", 0) or None,
-                sparkline=_spark_api if _spark_api else None,
                 kategori="musteri",
                 yardim="Son 24 saatte yapılmış API çağrı sayısı",
             )
