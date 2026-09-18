@@ -1,0 +1,386 @@
+[
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-15T00:13:14",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-15T00:13:15",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-15T00:13:15",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-15T00:14:13",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-15T00:14:14",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-15T00:14:14",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-15T00:15:13",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-15T00:15:14",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-15T00:15:14",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-15T00:16:13",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-15T00:16:14",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-15T00:16:14",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-15T00:17:13",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-15T00:17:14",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-15T00:17:14",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-15T00:18:13",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-15T00:18:14",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-15T00:18:14",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-15T00:19:13",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-15T00:19:14",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-15T00:19:14",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-15T00:20:13",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-15T00:20:14",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-15T00:20:15",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-15T00:21:14",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-15T00:21:14",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-15T00:21:15",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-15T00:23:13",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-15T00:23:14",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-15T00:23:14",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-15T00:24:14",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-15T00:24:14",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-15T00:24:15",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-15T00:25:14",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-15T00:25:14",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-15T00:25:15",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-15T00:31:13",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-15T00:31:14",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-15T00:31:14",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-15T00:32:14",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-15T00:32:15",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-15T00:32:15",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-15T00:33:03",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-15T00:33:03",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-15T00:33:03",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-01",
+    "gorev_basligi": "Event Sourcing and CQRS Implementation Plan",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-15T00:34:03",
+    "mesaj": "⚠️ MIMAR-01 (Event Sourcing and CQRS Implementation Plan) — mimari 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-02",
+    "gorev_basligi": "Microservices Decomposition Strategy",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-15T00:34:03",
+    "mesaj": "⚠️ MIMAR-02 (Microservices Decomposition Strategy) — mimari 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "mimari",
+    "task_id": "MIMAR-03",
+    "gorev_basligi": "Observability Stack — Metrics, Logs, Traces",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-15T00:34:03",
+    "mesaj": "⚠️ MIMAR-03 (Observability Stack — Metrics, Logs, Traces) — mimari 16. kez uyarıldı; henüz başlamadı."
+  }
+]

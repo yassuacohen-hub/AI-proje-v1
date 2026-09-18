@@ -1,0 +1,80 @@
+{
+  "tarih": "2026-09-18T13:17:24+0300",
+  "sonuclar": [
+    {
+      "n": 200,
+      "min_ms": 1.716,
+      "p50_ms": 5.902,
+      "p95_ms": 7.982,
+      "max_ms": 12.668,
+      "ort_ms": 5.978,
+      "url": "/api/health",
+      "es_zamanlilik": 8,
+      "duvar_suresi_sn": 0.491,
+      "rps": 407.3,
+      "hata": 0,
+      "esik_ms": 50.0,
+      "durum": "OK"
+    },
+    {
+      "n": 100,
+      "min_ms": 1.185,
+      "p50_ms": 3.486,
+      "p95_ms": 4.709,
+      "max_ms": 5.447,
+      "ort_ms": 3.51,
+      "url": "/api/kpi",
+      "es_zamanlilik": 4,
+      "duvar_suresi_sn": 0.261,
+      "rps": 383.4,
+      "hata": 0,
+      "esik_ms": 150.0,
+      "durum": "OK"
+    },
+    {
+      "n": 100,
+      "min_ms": 2.118,
+      "p50_ms": 3.926,
+      "p95_ms": 5.7,
+      "max_ms": 110.573,
+      "ort_ms": 6.127,
+      "url": "/api/companies?limit=20",
+      "es_zamanlilik": 4,
+      "duvar_suresi_sn": 0.382,
+      "rps": 261.7,
+      "hata": 0,
+      "esik_ms": 200.0,
+      "durum": "OK"
+    },
+    {
+      "n": 50,
+      "min_ms": 1.265,
+      "p50_ms": 2.029,
+      "p95_ms": 2.99,
+      "max_ms": 8.487,
+      "ort_ms": 2.173,
+      "url": "/api/companies/export?format=csv&mask=1",
+      "es_zamanlilik": 2,
+      "duvar_suresi_sn": 0.158,
+      "rps": 316.6,
+      "hata": 0,
+      "esik_ms": 500.0,
+      "durum": "OK"
+    },
+    {
+      "n": 50,
+      "min_ms": 1.305,
+      "p50_ms": 1.877,
+      "p95_ms": 2.489,
+      "max_ms": 2.885,
+      "ort_ms": 1.925,
+      "url": "/api/intelligence/dashboard",
+      "es_zamanlilik": 2,
+      "duvar_suresi_sn": 0.138,
+      "rps": 362.2,
+      "hata": 0,
+      "esik_ms": 500.0,
+      "durum": "OK"
+    }
+  ]
+}

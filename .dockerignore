@@ -16,6 +16,35 @@ company_master.db
 *.db
 data/backups/
 
+# Sanal ortamlar + bagimliliklar (image'e girerse boyut 10x sisip build yavaslar)
+.venv/
+.venv_test/
+venv/
+node_modules/
+
+# Ajan/arac calisma alanlari (runtime'da gereksiz)
+.agents/
+.claude/
+.continue/
+.kilo/
+.kimi-code/
+.roo/
+.vscode/
+workspace/
+_trash/
+tmp/
+cop_kutusu_*/
+test_reports/
+htmlcov/
+
+# Buyuk/gecici veri (compose volume ile mount edilir)
+data/_tmp/
+data/_arsiv_kok/
+data/orchestrator/
+data/router/
+data/skills/
+data/watch/
+
 # Python artefaktları
 __pycache__/
 *.pyc

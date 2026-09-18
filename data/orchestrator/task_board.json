@@ -1,5 +1,305 @@
 [
   {
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "id": "ADMIN-UX-LOGOUT-01",
+    "baslik": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "sahip": "roo",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-18T14:31:57",
+    "bitis": null,
+    "dosyalar": [
+      "app.py",
+      "web_dashboard/tabs/admin_auth.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "id": "ADMIN-UX-PROFILMENU-01",
+    "baslik": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "sahip": "roo",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-18T14:31:57",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/ui/components/profil_menu.py",
+      "src/company_master/ui/styles.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "RESEARCH-PONYTALE",
+    "baslik": "Ponytail vs Caveman derinlemesine arastirma",
+    "sahip": "roo",
+    "oncelik": "P0",
+    "durum": "aktif",
+    "not": "Ponytail ve Caveman kiyaslamasi. Ponytail=tembel senior dev zihniyeti, YAGNI, az kod. Caveman=token azligi, 65% token kesti.",
+    "dosyalar": []
+  },
+  {
+    "task_id": "ADMIN-UX-AYARLAR-SAYFA-01",
+    "id": "ADMIN-UX-AYARLAR-SAYFA-01",
+    "baslik": "Kullanici Ayarlari tek sayfa: profil + sifre degistir/sifirla",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-18T14:31:57",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_kullanici_ayarlari.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "id": "ADMIN-UX-MENUTREE-01",
+    "baslik": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-18T14:31:57",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/__init__.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "V10-BELGE-01",
+    "id": "V10-BELGE-01",
+    "baslik": "6 curutulen iddiaya K1/K3/K4 duzeltme notu",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-18T16:54:11",
+    "bitis": null,
+    "dosyalar": [
+      "AI proje v1/V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "WK-01",
+    "baslik": "Career Pages Scraper — Enhanced Data Extraction",
+    "sahip": "-",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Kariyer sayfaları scraper geliştirin. Gelişmiş veri çıkarma. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina). | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: web_kazima)",
+    "id": "WK-01"
+  },
+  {
+    "task_id": "WK-02",
+    "baslik": "OSB Tender Monitor — Real-time Tracking",
+    "sahip": "-",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "OSB ihale takibi — gerçek zamanlı izleme sistemi. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina). | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: web_kazima)",
+    "id": "WK-02"
+  },
+  {
+    "task_id": "ADMIN-HATA-01",
+    "id": "ADMIN-HATA-01",
+    "baslik": "Hata Yonetimi sekmesi: sahte istatistik/demo raise kaldir, gercek kaynak + rapor kaydi",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "aktif",
+    "baslangic": [
+      "web_dashboard/tabs/admin_errors.py",
+      "tests/test_admin_errors.py"
+    ],
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-HATA-02",
+    "id": "ADMIN-HATA-02",
+    "baslik": "Admin sekmelerinde 16 sessiz except:pass -> log/hata_kutusu + AST testi",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "aktif",
+    "baslangic": "2026-09-17T06:49:12",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_kpi.py",
+      "web_dashboard/tabs/admin_quality.py",
+      "web_dashboard/tabs/admin_performance.py",
+      "web_dashboard/tabs/admin_api_analytics.py",
+      "tests/test_admin_sessiz_except.py"
+    ],
+    "not": "",
+    "source": "roo",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-KPI-KART-02",
+    "id": "ADMIN-KPI-KART-02",
+    "baslik": "Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-17T06:49:12",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/webhook_monitor.py",
+      "web_dashboard/tabs/tenant_health_dashboard.py",
+      "tests/test_webhook_monitor_tab.py",
+      "tests/test_admin_kpi_kart.py"
+    ],
+    "not": "",
+    "source": "roo",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-MUSTERI-02",
+    "id": "ADMIN-MUSTERI-02",
+    "baslik": "Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-17T06:48:52",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/musteri_yonetimi.py",
+      "tests/test_musteri_yonetimi.py"
+    ],
+    "not": "",
+    "source": "roo",
+    "from_agent": null
+  },
+  {
+    "task_id": "AGN-CREWAI-PILOT-01",
+    "id": "AGN-CREWAI-PILOT-01",
+    "baslik": "crewAI hibrit worker pilotu (metin-üretimi deneyi, scripts/deney/)",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "aktif",
+    "baslangic": "2026-09-18T06:08:56",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/deney/crewai_arastirma_deneyi.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": "cline"
+  },
+  {
+    "task_id": "FMT-01",
+    "id": "FMT-01",
+    "baslik": "ruff format/lint standardizasyonu (web_app/app/web_dashboard haric)",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "blocked",
+    "baslangic": "2026-09-17T03:28:59",
+    "bitis": "2026-09-17T04:59:58",
+    "dosyalar": [
+      "ruff.toml",
+      ".pre-commit-config.yaml"
+    ],
+    "not": "ERTELENDI (sahip 2026-09-17, D-48): CI push kodlama_denetim yeterli. Bu goreve DEVAM ETME; ADMIN-AYAR-01 al.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "GUARD-ENC-02",
+    "id": "GUARD-ENC-02",
+    "baslik": "kodlama_denetim genisletme (CRLF/bosluk/tab/EOF + fix)",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "blocked",
+    "baslangic": "2026-09-17T03:28:59",
+    "bitis": "2026-09-17T04:59:58",
+    "dosyalar": [
+      "scripts/kodlama_denetim.py",
+      "tests/test_kodlama_denetim.py",
+      "data/kodlama_allowlist.json"
+    ],
+    "not": "ERTELENDI (sahip 2026-09-17, D-48): CI push kodlama_denetim yeterli. Bu goreve DEVAM ETME; ADMIN-AYAR-01 al.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "SEC-BANDIT-01",
+    "id": "SEC-BANDIT-01",
+    "baslik": "Bandit statik guvenlik taramasi + HIGH bulgular",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "blocked",
+    "baslangic": "2026-09-17T03:28:59",
+    "bitis": "2026-09-17T04:59:58",
+    "dosyalar": [
+      "scripts/sec_bandit.py",
+      "tests/test_sec_bandit.py",
+      ".bandit",
+      "docs/SECURITY_BANDIT.md"
+    ],
+    "not": "ERTELENDI (sahip 2026-09-17, D-48): CI push kodlama_denetim yeterli. Bu goreve DEVAM ETME; ADMIN-AYAR-01 al.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "V10-HIJYEN-02",
+    "id": "V10-HIJYEN-02",
+    "baslik": "search/fulltext.py olu kod silinmesi (B-15) - KAHIN onayi bekliyor",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-18T16:54:11",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/search/fulltext.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "WK-03",
+    "baslik": "Proxy Rotation and IP Management",
+    "sahip": "-",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-14T00:00:00",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Proxy rotation ve IP yönetim sistemi kurun. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina). | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: web_kazima)",
+    "id": "WK-03"
+  },
+  {
+    "task_id": "ADLANDIRMA-GERIYE-01",
+    "id": "ADLANDIRMA-GERIYE-01",
+    "baslik": "D-55 geriye donuk: 55 rapor dosyasindan ajan adini kaldir, rol bazli son eke cevir",
+    "sahip": "roo",
+    "oncelik": "P3",
+    "durum": "plan",
+    "baslangic": "2026-09-18T05:52:03",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
     "task_id": "P0-1",
     "baslik": "İstiklal OSB scraper implementasyonu",
     "sahip": "web_kazima",
@@ -2304,42 +2604,6 @@
     "not": "Teslim (cline): CL-03 guvenlik taramasi tamamlandi: guvenlik_taramasi.py + 2 JSON sozluk + rapor. Ilk calismada 7 bulgu (requests pini, 2x shell=True, 3x MD5) duzeltildi, tekrar taramada 0 bulgu. 82 test yesil."
   },
   {
-    "task_id": "WK-01",
-    "baslik": "Career Pages Scraper — Enhanced Data Extraction",
-    "sahip": "-",
-    "oncelik": "P1",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Kariyer sayfaları scraper geliştirin. Gelişmiş veri çıkarma. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina). | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: web_kazima)",
-    "id": "WK-01"
-  },
-  {
-    "task_id": "WK-02",
-    "baslik": "OSB Tender Monitor — Real-time Tracking",
-    "sahip": "-",
-    "oncelik": "P1",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "OSB ihale takibi — gerçek zamanlı izleme sistemi. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina). | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: web_kazima)",
-    "id": "WK-02"
-  },
-  {
-    "task_id": "WK-03",
-    "baslik": "Proxy Rotation and IP Management",
-    "sahip": "-",
-    "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-14T00:00:00",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "Proxy rotation ve IP yönetim sistemi kurun. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina). | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: web_kazima)",
-    "id": "WK-03"
-  },
-  {
     "task_id": "DEV-01",
     "baslik": "CI/CD Pipeline — GitHub Actions Optimization",
     "sahip": "gelistirici",
@@ -3903,60 +4167,6 @@
     "from_agent": null
   },
   {
-    "task_id": "GUARD-ENC-02",
-    "id": "GUARD-ENC-02",
-    "baslik": "kodlama_denetim genisletme (CRLF/bosluk/tab/EOF + fix)",
-    "sahip": "kilo",
-    "oncelik": "P2",
-    "durum": "blocked",
-    "baslangic": "2026-09-17T03:28:59",
-    "bitis": "2026-09-17T04:59:58",
-    "dosyalar": [
-      "scripts/kodlama_denetim.py",
-      "tests/test_kodlama_denetim.py",
-      "data/kodlama_allowlist.json"
-    ],
-    "not": "ERTELENDI (sahip 2026-09-17, D-48): CI push kodlama_denetim yeterli. Bu goreve DEVAM ETME; ADMIN-AYAR-01 al.",
-    "source": "ic",
-    "from_agent": null
-  },
-  {
-    "task_id": "SEC-BANDIT-01",
-    "id": "SEC-BANDIT-01",
-    "baslik": "Bandit statik guvenlik taramasi + HIGH bulgular",
-    "sahip": "kilo",
-    "oncelik": "P2",
-    "durum": "blocked",
-    "baslangic": "2026-09-17T03:28:59",
-    "bitis": "2026-09-17T04:59:58",
-    "dosyalar": [
-      "scripts/sec_bandit.py",
-      "tests/test_sec_bandit.py",
-      ".bandit",
-      "docs/SECURITY_BANDIT.md"
-    ],
-    "not": "ERTELENDI (sahip 2026-09-17, D-48): CI push kodlama_denetim yeterli. Bu goreve DEVAM ETME; ADMIN-AYAR-01 al.",
-    "source": "ic",
-    "from_agent": null
-  },
-  {
-    "task_id": "FMT-01",
-    "id": "FMT-01",
-    "baslik": "ruff format/lint standardizasyonu (web_app/app/web_dashboard haric)",
-    "sahip": "kilo",
-    "oncelik": "P2",
-    "durum": "blocked",
-    "baslangic": "2026-09-17T03:28:59",
-    "bitis": "2026-09-17T04:59:58",
-    "dosyalar": [
-      "ruff.toml",
-      ".pre-commit-config.yaml"
-    ],
-    "not": "ERTELENDI (sahip 2026-09-17, D-48): CI push kodlama_denetim yeterli. Bu goreve DEVAM ETME; ADMIN-AYAR-01 al.",
-    "source": "ic",
-    "from_agent": null
-  },
-  {
     "task_id": "API-SPLIT-01",
     "id": "API-SPLIT-01",
     "baslik": "web_app.py modullere bolme (src/company_master/api)",
@@ -4111,23 +4321,6 @@
     "from_agent": null
   },
   {
-    "task_id": "ADMIN-HATA-01",
-    "id": "ADMIN-HATA-01",
-    "baslik": "Hata Yonetimi sekmesi: sahte istatistik/demo raise kaldir, gercek kaynak + rapor kaydi",
-    "sahip": "kilo",
-    "oncelik": "P2",
-    "durum": "aktif",
-    "baslangic": [
-      "web_dashboard/tabs/admin_errors.py",
-      "tests/test_admin_errors.py"
-    ],
-    "bitis": null,
-    "dosyalar": [],
-    "not": "",
-    "source": "ic",
-    "from_agent": null
-  },
-  {
     "task_id": "ADMIN-ROO-01",
     "id": "ADMIN-ROO-01",
     "baslik": "Admin sekmeleri hata/bos-durum standardi + canli/pazarlama/paketler kpi_karti (roo ceza gorevi)",
@@ -4141,62 +4334,6 @@
     "source": "ic",
     "from_agent": null,
     "not_": "Sahip 2026-09-17: roo 5 saatlik admin paneli gorevi. Commit YOK; sabah kontrol."
-  },
-  {
-    "task_id": "ADMIN-MUSTERI-02",
-    "id": "ADMIN-MUSTERI-02",
-    "baslik": "Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)",
-    "sahip": "kilo",
-    "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-17T06:48:52",
-    "bitis": null,
-    "dosyalar": [
-      "web_dashboard/tabs/musteri_yonetimi.py",
-      "tests/test_musteri_yonetimi.py"
-    ],
-    "not": "",
-    "source": "roo",
-    "from_agent": null
-  },
-  {
-    "task_id": "ADMIN-KPI-KART-02",
-    "id": "ADMIN-KPI-KART-02",
-    "baslik": "Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi",
-    "sahip": "kilo",
-    "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-17T06:49:12",
-    "bitis": null,
-    "dosyalar": [
-      "web_dashboard/tabs/webhook_monitor.py",
-      "web_dashboard/tabs/tenant_health_dashboard.py",
-      "tests/test_webhook_monitor_tab.py",
-      "tests/test_admin_kpi_kart.py"
-    ],
-    "not": "",
-    "source": "roo",
-    "from_agent": null
-  },
-  {
-    "task_id": "ADMIN-HATA-02",
-    "id": "ADMIN-HATA-02",
-    "baslik": "Admin sekmelerinde 16 sessiz except:pass -> log/hata_kutusu + AST testi",
-    "sahip": "kilo",
-    "oncelik": "P2",
-    "durum": "aktif",
-    "baslangic": "2026-09-17T06:49:12",
-    "bitis": null,
-    "dosyalar": [
-      "web_dashboard/tabs/admin_kpi.py",
-      "web_dashboard/tabs/admin_quality.py",
-      "web_dashboard/tabs/admin_performance.py",
-      "web_dashboard/tabs/admin_api_analytics.py",
-      "tests/test_admin_sessiz_except.py"
-    ],
-    "not": "",
-    "source": "roo",
-    "from_agent": null
   },
   {
     "task_id": "ADMIN-NAV-HAZIR-01",
@@ -4287,15 +4424,6 @@
     "source": "ic",
     "from_agent": null,
     "tamamlayan": "roo"
-  },
-  {
-    "task_id": "RESEARCH-PONYTALE",
-    "baslik": "Ponytail vs Caveman derinlemesine arastirma",
-    "sahip": "roo",
-    "oncelik": "P0",
-    "durum": "aktif",
-    "not": "Ponytail ve Caveman kiyaslamasi. Ponytail=tembel senior dev zihniyeti, YAGNI, az kod. Caveman=token azligi, 65% token kesti.",
-    "dosyalar": []
   },
   {
     "task_id": "GIT-HIJYEN-01",
@@ -4417,44 +4545,14 @@
     "from_agent": null
   },
   {
-    "task_id": "ADLANDIRMA-GERIYE-01",
-    "id": "ADLANDIRMA-GERIYE-01",
-    "baslik": "D-55 geriye donuk: 55 rapor dosyasindan ajan adini kaldir, rol bazli son eke cevir",
-    "sahip": "roo",
-    "oncelik": "P3",
-    "durum": "plan",
-    "baslangic": "2026-09-18T05:52:03",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "",
-    "source": "ic",
-    "from_agent": null
-  },
-  {
-    "task_id": "AGN-CREWAI-PILOT-01",
-    "id": "AGN-CREWAI-PILOT-01",
-    "baslik": "crewAI hibrit worker pilotu (metin-üretimi deneyi, scripts/deney/)",
-    "sahip": "roo",
-    "oncelik": "P2",
-    "durum": "aktif",
-    "baslangic": "2026-09-18T06:08:56",
-    "bitis": null,
-    "dosyalar": [
-      "scripts/deney/crewai_arastirma_deneyi.py"
-    ],
-    "not": "",
-    "source": "ic",
-    "from_agent": "cline"
-  },
-  {
     "task_id": "ADMIN-LOGIN-FIX-01",
     "id": "ADMIN-LOGIN-FIX-01",
     "baslik": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
     "sahip": "roo",
     "oncelik": "P0",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-18T06:18:40",
-    "bitis": null,
+    "bitis": "2026-09-18T15:12:46.586128Z",
     "dosyalar": [
       "web_dashboard/tabs/admin_auth.py"
     ],
@@ -4468,9 +4566,9 @@
     "baslik": "2. admin hesabi yassuacohen@gmail.com sifre dogrulama",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-18T06:18:40",
-    "bitis": null,
+    "bitis": "2026-09-18T15:12:46.586128Z",
     "dosyalar": [
       "scripts/admin_kimlik_kontrol.py"
     ],
@@ -4484,9 +4582,9 @@
     "baslik": "Admin modal: blur backdrop + marka kimligini yansit",
     "sahip": "roo",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-18T06:22:27",
-    "bitis": null,
+    "bitis": "2026-09-18T15:12:46.586128Z",
     "dosyalar": [
       "web_dashboard/tabs/admin_auth.py"
     ],
@@ -4500,79 +4598,13 @@
     "baslik": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
     "sahip": "roo",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-18T06:22:27",
-    "bitis": null,
+    "bitis": "2026-09-18T15:12:46.586128Z",
     "dosyalar": [
       "web_dashboard/tabs/admin_auth.py"
     ],
     "not": "Teslim (roo): Giris ekranina 'Sifremi unuttum' akisi eklendi: render_sifre_unuttum() istek + onay formu, /api/admin/reset-request ve /api/admin/reset-confirm. 4 test yesil; ayrica cagiran testlerde yalitim fixture eklendi.",
-    "source": "ic",
-    "from_agent": null
-  },
-  {
-    "task_id": "ADMIN-UX-LOGOUT-01",
-    "id": "ADMIN-UX-LOGOUT-01",
-    "baslik": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
-    "sahip": "roo",
-    "oncelik": "P0",
-    "durum": "plan",
-    "baslangic": "2026-09-18T14:31:57",
-    "bitis": null,
-    "dosyalar": [
-      "app.py",
-      "web_dashboard/tabs/admin_auth.py"
-    ],
-    "not": "",
-    "source": "ic",
-    "from_agent": null
-  },
-  {
-    "task_id": "ADMIN-UX-PROFILMENU-01",
-    "id": "ADMIN-UX-PROFILMENU-01",
-    "baslik": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
-    "sahip": "roo",
-    "oncelik": "P0",
-    "durum": "plan",
-    "baslangic": "2026-09-18T14:31:57",
-    "bitis": null,
-    "dosyalar": [
-      "src/company_master/ui/components/profil_menu.py",
-      "src/company_master/ui/styles.py"
-    ],
-    "not": "",
-    "source": "ic",
-    "from_agent": null
-  },
-  {
-    "task_id": "ADMIN-UX-MENUTREE-01",
-    "id": "ADMIN-UX-MENUTREE-01",
-    "baslik": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
-    "sahip": "roo",
-    "oncelik": "P1",
-    "durum": "plan",
-    "baslangic": "2026-09-18T14:31:57",
-    "bitis": null,
-    "dosyalar": [
-      "web_dashboard/tabs/__init__.py"
-    ],
-    "not": "",
-    "source": "ic",
-    "from_agent": null
-  },
-  {
-    "task_id": "ADMIN-UX-AYARLAR-SAYFA-01",
-    "id": "ADMIN-UX-AYARLAR-SAYFA-01",
-    "baslik": "Kullanici Ayarlari tek sayfa: profil + sifre degistir/sifirla",
-    "sahip": "roo",
-    "oncelik": "P1",
-    "durum": "plan",
-    "baslangic": "2026-09-18T14:31:57",
-    "bitis": null,
-    "dosyalar": [
-      "web_dashboard/tabs/admin_kullanici_ayarlari.py"
-    ],
-    "not": "",
     "source": "ic",
     "from_agent": null
   },
@@ -4582,9 +4614,9 @@
     "baslik": "engine.py mukerrer+bozuk WHERE blogu temizligi (B-14)",
     "sahip": "roo",
     "oncelik": "P0",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-18T16:50:03",
-    "bitis": null,
+    "bitis": "2026-09-18T15:12:46.586128Z",
     "dosyalar": [
       "src/company_master/search/engine.py",
       "tests/test_search_engine_where.py"
@@ -4593,37 +4625,5 @@
     "source": "ic",
     "from_agent": null,
     "not_": "182-187 silindi; 4 regresyon testi eklendi; kodlama_denetim temiz"
-  },
-  {
-    "task_id": "V10-HIJYEN-02",
-    "id": "V10-HIJYEN-02",
-    "baslik": "search/fulltext.py olu kod silinmesi (B-15) - KAHIN onayi bekliyor",
-    "sahip": "roo",
-    "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-18T16:54:11",
-    "bitis": null,
-    "dosyalar": [
-      "src/company_master/search/fulltext.py"
-    ],
-    "not": "",
-    "source": "ic",
-    "from_agent": null
-  },
-  {
-    "task_id": "V10-BELGE-01",
-    "id": "V10-BELGE-01",
-    "baslik": "6 curutulen iddiaya K1/K3/K4 duzeltme notu",
-    "sahip": "roo",
-    "oncelik": "P1",
-    "durum": "plan",
-    "baslangic": "2026-09-18T16:54:11",
-    "bitis": null,
-    "dosyalar": [
-      "AI proje v1/V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md"
-    ],
-    "not": "",
-    "source": "ic",
-    "from_agent": null
   }
 ]

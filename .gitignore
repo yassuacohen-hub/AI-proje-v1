@@ -43,9 +43,18 @@ tmp/
 # V10 içeriklerini engelle (şikayet raporları, eski belgeler, vb.)
 V10/
 
-# Araç/repair dosyalari (scripts dizinine ozgu)
+# ORCH-GIT-01 (KAHİN kararı 2026-09-18): orkestrator pano + karar defteri + rapor/bulgu
+# arşivi git'te TUTULUR. Gerekçe: yedek kritik; süreç/karar yönetimi ileride ayrı ürüne
+# çıkabilir. Yalnız makineye özgü runtime artıkları dışlanır.
+data/orchestrator/nobetci.pid
+data/orchestrator/file_locks.json
+data/orchestrator/state.json
+data/orchestrator/change_notify_state.json
+data/orchestrator/_*.txt
+data/orchestrator/_*.py
 data/orchestrator/task_board_corrupt_backup.json
-data/orchestrator/
+
+# Araç/repair dosyalari (scripts dizinine ozgu)
 scripts/check_*.py
 scripts/fix_*.py
 # ADMIN-KOK-TEMIZLIK-01: kok dizine gecici duzeltme scripti birakilmaz

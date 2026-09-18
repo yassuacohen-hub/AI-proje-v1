@@ -1,0 +1,9 @@
+{
+  "kademe_sn": 300,
+  "kanallar": [
+    "log",
+    "alarm_dosyasi",
+    "ses"
+  ],
+  "telegram": false
+}

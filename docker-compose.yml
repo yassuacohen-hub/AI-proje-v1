@@ -46,6 +46,7 @@ services:
     command: ["streamlit", "run", "app.py", "--server.port=8501", "--server.address=0.0.0.0"]
     ports:
       - "8501:8501"
+    env_file: .env
     volumes:
       - ./logs:/app/logs
       - ./data:/app/data
@@ -62,6 +63,8 @@ services:
   scraper:
     build: .
     command: ["python", "scripts/refresh_pipeline.py"]
+    profiles: ["jobs"]
+    env_file: .env
     volumes:
       - ./logs:/app/logs
       - ./data:/app/data
@@ -71,6 +74,8 @@ services:
   healthcheck:
     build: .
     command: ["python", "src/company_master/orchestrator/health_check.py"]
+    profiles: ["jobs"]
+    env_file: .env
     volumes:
       - ./logs:/app/logs
       - ./data:/app/data
