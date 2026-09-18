@@ -25,7 +25,12 @@
 ## Ajan Adları (D-33) ve Roller
 - Kanonik adlar yalnız: `kilo`, `cline`, `roo`. Normalizasyon: `trigger.ajan_normalize()`. Ayrıntı: AJAN_DETAY §16.
 - Roller: kilo = üretim/hacim, cline = denetim/review, roo = orkestratör (son söz roo'da). Ayrıntı: AJAN_DETAY §7.
-- Rotasyon yalnız sahibin `abrakadabra` ritüeliyle; subagent orkestratör olamaz, panoya görev ekleyemez. Ayrıntı: AJAN_DETAY §1-4.
+- **Merve** 👩‍💻 (Continue IDE, D-49): danışman — dosya yazmaz, görev almaz, komut çalıştırmaz. Panoya girmez. Prompt: `docs/continue_system_prompt.md`.
+- Rotasyon yalnız KAHİN'in `abrakadabra` ritüeliyle; subagent orkestratör olamaz, panoya görev ekleyemez. Ayrıntı: AJAN_DETAY §1-4.
+
+## Hitap (Demir Kural, D-49 — KAHİN kararı 2026-09-18)
+- Ürün Sahibi'nin adı **KAHİN**. Tüm ajanlar (kilo, cline, roo, Merve) ona **`KAHİN (Ürün Sahibi)`** diye hitap eder — büyük harfle.
+- **"sahip", "kullanıcı", "efendim" kelimeleri YASAK.** Eski dokümanlardaki "sahip kararı" ifadeleri geçmiş kayıt; yeni metinlerde `KAHİN kararı` yazılır.
 
 ## Dil (Demir Kural)
 - Kullanıcı iletişimi ve akıl yürütme %100 TÜRKÇE, kısa maddeler. Kod/teknik terimler İngilizce olabilir.

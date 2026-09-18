@@ -11,9 +11,9 @@ Komutlar:
     /status (alias /durum) - Aktif gorevler + proje durumu
     /gorev              - Task_board.json'dan tum gorevleri listele
     /gorev-ekle (alias /at) - Panoya gorev ekle ve tetik at
-    /gorev-durum (alias /set_status) - Task board'da gorev durumunu guncelle (yetkili)
+    /gorev-durum (alias /set_task_status) - Task board'da gorev durumunu guncelle (yetkili)
     /rapor              - KPI raporu (data/kpi_raporu.md)
-    /wiki               - OSTİM kalite raporu (data/ostim/kalite_raporu.md)
+    /wiki               - V10 wiki sayfalarini listeler
     /restart_etl        - ETL pipeline yeniden baslatin
     /degisiklik         - CHANGELOG.md'yi goster
     /gunluk             - Gunluk ozet
@@ -25,7 +25,7 @@ Komutlar:
     /nobet              - Nöbetçi turu attırır
     /nobet-ayar <sn>    - Nöbetci alarm suresini günceller (yetkili)
 
-    Alias: /at = /gorev-ekle, /set_status = /gorev-durum, /status = /durum, /nobet_ayar = /nobet-ayar
+    Alias: /at = /gorev-ekle, /set_task_status = /gorev-durum, /status = /durum, /nobet_ayar = /nobet-ayar
 
     Calisma zamani degiskenleri (.env):
     TELEGRAM_BOT_TOKEN
@@ -87,14 +87,14 @@ COMMANDS_INFO = {
     "menu": ("Etkilesimli ana menu", ""),
     "status": ("Proje durumu + aktif gorevler (alias: /durum)", ""),
     "durum": ("Proje durumu + aktif gorevler (alias: /status)", ""),
-    "gorev": ("Task board'daki tum goeveleri listeler", ""),
+    "gorev": ("Task board'daki tum gorevleri listeler", ""),
     "gorev-ekle": ("Panoya gorev ekle (alias: /at)", ""),
     "at": ("Panoya gorev ekle (alias: /gorev-ekle)", ""),
-    "gorev-durum": ("Task board durumu guncelle: /gorev-durum <id> <durum>", ""),
+    "gorev-durum": ("Task board durumunu guncelle: /gorev-durum <id> <durum>", ""),
     "set_status": ("project_state.md not ekle: /set_status <mesaj>", ""),
-    "set_task_status": ("Task board durumu guncelle: /set_task_status <id> <durum>", ""),
+    "set_task_status": ("Task board durumunu guncelle: /set_task_status <id> <durum>", ""),
     "rapor": ("KPI raporunu gosterir", ""),
-    "wiki": ("OSTIM kalite raporunu gosterir", ""),
+    "wiki": ("V10 wiki sayfalarini listeler", ""),
     "restart_etl": ("ETL pipeline'i yeniden baslatir", ""),
     "degisiklik": ("CHANGELOG.md'yi gosterir", ""),
     "gunluk": ("Gunluk ozet raporu gonderir", ""),
@@ -160,7 +160,7 @@ def read_changelog() -> str:
 
 
 def read_active_tasks() -> list[dict[str, Any]]:
-    """Task board'dan aktif (yapımda) goeveleri getirir."""
+    """Task board'dan aktif (yapımda) gorevleri getirir."""
     board = read_task_board()
     return [t for t in board if t.get("durum") not in ("done",)]
 
@@ -367,15 +367,15 @@ def cmd_help(text: str) -> str:
     altında bir boş satır bırakılır (karışıklık önlenir).
     """
     lines = [
-        "<b>📖 Yardım — Komut Listesi</b>\n",
-        "<b>Görev Yönetimi</b>",
+        "<b>📖 Yardım — Komutlar</b>\n",
+        "<b>GÖREV YÖNETİMİ</b>",
         "/gorev — Tüm görevleri duruma göre listeler",
         "",
         "/gorev-ekle — Panoya görev ekler (alias: /at)",
         "",
-        "/gorev-durum — Görev durumunu günceller (alias: /set_status)",
+        "/gorev-durum — Görev durumunu günceller (alias: /set_task_status)",
         "",
-        "<b>Onay ve İnceleme</b>",
+        "<b>ONAY VE İNCELEME</b>",
         "/onaylar — Onay bekleyen teslimleri listeler",
         "",
         "/onayla — Görevi onaylar",
@@ -384,7 +384,7 @@ def cmd_help(text: str) -> str:
         "",
         "/teslim — Görevi incelemeye gönderir",
         "",
-        "<b>Durum ve Rapor</b>",
+        "<b>DURUM VE RAPOR</b>",
         "/durum — Proje durumu (alias: /status)",
         "",
         "/pano — Tetik ve onay özeti",
@@ -399,7 +399,7 @@ def cmd_help(text: str) -> str:
         "",
         "/degisiklik — Değişiklik bildirimi",
         "",
-        "<b>Nöbetçi</b>",
+        "<b>NÖBETÇİ</b>",
         "/nobet — Nöbetçi turu atar",
         "",
         "/nobet-ayar — Alarm süresini günceller (alias: /nobet_ayar)",
@@ -411,7 +411,29 @@ def cmd_help(text: str) -> str:
         "",
         "/help — Bu liste",
         "",
-        "<i>Yetkili komutlar: /gorev-durum, /onayla, /reddet, /teslim, /nobet-ayar</i>",
+        "<b>Yetkili komutlar</b>",
+        "/restart_etl — ETL pipeline'ini yeniden baslatir",
+        "",
+        "/set_status — project_state.md'ye not ekler",
+        "",
+        "/set_task_status — Task board durumunu gunceller",
+        "",
+        "/gorev-ekle — Panoya gorev ekler (alias: /at)",
+        "",
+        "/pano — Tetik ve onay ozeti",
+        "",
+        "/onaylar — Onay bekleyen teslimler",
+        "",
+        "/onayla — Gorevi onaylar",
+        "",
+        "/reddet — Gorevi reddeder",
+        "",
+        "/teslim — Gorevi incelemeye gonderir",
+        "",
+        "/nobet — Nobetci turu atar",
+        "",
+        "/nobet-ayar — Alarm suresini gunceller (alias: /nobet_ayar)",
+        "",
     ]
     return "\n".join(lines)
 

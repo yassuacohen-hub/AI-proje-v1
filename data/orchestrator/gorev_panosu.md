@@ -7,7 +7,6 @@
 
 | Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |
 |-------|--------|-------|---------|-------|----------|
-| TG-01 | Telegram Bot Gonderim ve Komut Aksini Duzelt | kilo | high | aktif | .env.example, docker-compose.yml, requirements-app.txt |
 | WK-01 | Career Pages Scraper — Enhanced Data Extraction | - | P1 | plan | - |
 | WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | plan | - |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | plan | - |
@@ -19,6 +18,9 @@
 | ADMIN-KPI-KART-02 | Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi | kilo | P2 | plan | web_dashboard/tabs/webhook_monitor.py, web_dashboard/tabs/tenant_health_dashboard.py, tests/test_webhook_monitor_tab.py |
 | ADMIN-HATA-02 | Admin sekmelerinde 16 sessiz except:pass -> log/hata_kutusu + AST testi | kilo | P2 | plan | web_dashboard/tabs/admin_kpi.py, web_dashboard/tabs/admin_quality.py, web_dashboard/tabs/admin_performance.py |
 | RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arastirma | roo | P0 | aktif | - |
+| ADMIN-ROO-DENETIM-01 | Admin panel gece zinciri teslimlerini incele ve onayla (ADMIN-HATA-02, KPI-KART-02, MUSTERI-02) | roo | P2 | plan | - |
+| ADMIN-HITAP-01 | D-49 uygulama: sahip -> KAHIN (Urun Sahibi) taramasi (kurallar + docs + admin panel metinleri) | roo | P2 | plan | AGENTS.md, .clinerules, .roorules |
+| ADMIN-KOK-TEMIZLIK-01 | Kok dizindeki 3 gecici script sil + .gitignore kontrol + commit | roo | P2 | plan | fix_encoding.py, fix_encoding2.py, fix_final.py |
 
 ## Tamamlananlar
 
@@ -66,6 +68,7 @@
 | P7-16 | Entegrasyon Test Kapsamını Genişletme - Vektör, Varlık Çözümlemesi ve DLQ/Yeniden Deneme Senaryoları | kilo | 2026-09-12T01:57:31 |
 | P7-17 | Performans ve Ölçeklenebilirlik Benchmark’i - Webhook alıcısı ve MCP sunucusunun yük altında davranışını ölçme | kilo | 2026-09-12T02:13:32 |
 | P7-18 | Observability: Distributed Tracing Entegrasyonu - OpenTelemetry entegrasyonu ile webhook alıcı, MCP sunucusu ve vektör servisleri arasındaki istekleri izleme | kilo | 2026-09-12T04:04:31 |
+| TG-01 | Telegram Bot Gonderim ve Komut Aksini Duzelt | kilo | 2026-09-18T04:55:50 |
 | P7-19 | P7-19: SSE Gerçek Zamanlı Bildirim Sistemi — Server-Sent Events ile canlı dashboard güncelleme | gelistirici | 2026-09-12T17:25:51 |
 | P7-20 | Admin Dashboard — Kullanıcı yönetimi, API key yönetimi, sistem durumu, webhook metrics UI | gelistirici | 2026-09-12T17:25:51 |
 | P7-21 | Performans Metrikleri Paneli — Response time, throughput, error rate grafikleri (Chart.js) | gelistirici | 2026-09-12T17:25:51 |

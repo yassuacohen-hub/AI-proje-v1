@@ -49,69 +49,39 @@
     "task_id": "ADMIN-HATA-02",
     "kilitlendi": "2026-09-17T06:49:12"
   },
-  "scripts/telegram_polling.py": {
-    "sahip": "kilo",
-    "task_id": "TG-01",
-    "kilitlendi": "2026-09-18T00:23:45"
+  "AGENTS.md": {
+    "sahip": "roo",
+    "task_id": "ADMIN-HITAP-01",
+    "kilitlendi": "2026-09-18T04:56:36"
   },
-  "src/company_master/utils/telegram_bot.py": {
-    "sahip": "kilo",
-    "task_id": "TG-01",
-    "kilitlendi": "2026-09-18T00:23:45"
+  ".clinerules": {
+    "sahip": "roo",
+    "task_id": "ADMIN-HITAP-01",
+    "kilitlendi": "2026-09-18T04:56:36"
   },
-  "src/company_master/telegram/bot_service.py": {
-    "sahip": "kilo",
-    "task_id": "TG-01",
-    "kilitlendi": "2026-09-18T00:23:45"
+  ".roorules": {
+    "sahip": "roo",
+    "task_id": "ADMIN-HITAP-01",
+    "kilitlendi": "2026-09-18T04:56:36"
   },
-  "scripts/telegram_periodic.py": {
-    "sahip": "kilo",
-    "task_id": "TG-01",
-    "kilitlendi": "2026-09-18T00:23:45"
+  "docs/AJAN_DETAY.md": {
+    "sahip": "roo",
+    "task_id": "ADMIN-HITAP-01",
+    "kilitlendi": "2026-09-18T04:56:37"
   },
-  "scripts/test_telegram.py": {
-    "sahip": "kilo",
-    "task_id": "TG-01",
-    "kilitlendi": "2026-09-18T00:23:45"
+  "fix_encoding.py": {
+    "sahip": "roo",
+    "task_id": "ADMIN-KOK-TEMIZLIK-01",
+    "kilitlendi": "2026-09-18T04:56:37"
   },
-  "scripts/test_telegram_simple.py": {
-    "sahip": "kilo",
-    "task_id": "TG-01",
-    "kilitlendi": "2026-09-18T00:23:45"
+  "fix_encoding2.py": {
+    "sahip": "roo",
+    "task_id": "ADMIN-KOK-TEMIZLIK-01",
+    "kilitlendi": "2026-09-18T04:56:37"
   },
-  ".env.example": {
-    "sahip": "kilo",
-    "task_id": "TG-01",
-    "kilitlendi": "2026-09-18T00:23:45"
-  },
-  "docker-compose.yml": {
-    "sahip": "kilo",
-    "task_id": "TG-01",
-    "kilitlendi": "2026-09-18T00:23:45"
-  },
-  "scripts/README_TELEGRAM.md": {
-    "sahip": "kilo",
-    "task_id": "TG-01",
-    "kilitlendi": "2026-09-18T00:23:45"
-  },
-  "scripts/telegram_bot_task.bat": {
-    "sahip": "kilo",
-    "task_id": "TG-01",
-    "kilitlendi": "2026-09-18T00:23:45"
-  },
-  "requirements-app.txt": {
-    "sahip": "kilo",
-    "task_id": "TG-01",
-    "kilitlendi": "2026-09-18T00:23:45"
-  },
-  "tests/test_telegram_bot.py": {
-    "sahip": "kilo",
-    "task_id": "TG-01",
-    "kilitlendi": "2026-09-18T00:23:45"
-  },
-  "tests/test_telegram_polling.py": {
-    "sahip": "kilo",
-    "task_id": "TG-01",
-    "kilitlendi": "2026-09-18T00:23:45"
+  "fix_final.py": {
+    "sahip": "roo",
+    "task_id": "ADMIN-KOK-TEMIZLIK-01",
+    "kilitlendi": "2026-09-18T04:56:37"
   }
 }

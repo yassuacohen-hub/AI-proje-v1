@@ -69,6 +69,16 @@ def _tmp_board(tmp_path, monkeypatch):
     monkeypatch.setattr(tb_module, "AGENT_SYNC_MD", tmp_path / "AGENT_SYNC.md")
     monkeypatch.setattr(tb_module, "AGENT_SYNC_MD_KOPYA", data_dir / "AGENT_SYNC.md")
 
+    # V10 wiki komutları için canonical dizin ve örnek sayfalar
+    v10 = tmp_path / "AI proje v1" / "V10"
+    v10.mkdir(parents=True, exist_ok=True)
+    (v10 / "00-Home.md").write_text("# Home", encoding="utf-8")
+    (v10 / "project_state.md").write_text("# Proje Durumu", encoding="utf-8")
+    (v10 / "10_ankara_osb_sentez.md").write_text("# OSINT Sentez", encoding="utf-8")
+    osint_dir = v10 / "11_osint_motoru"
+    osint_dir.mkdir(parents=True, exist_ok=True)
+    (osint_dir / "OSINT_Scraper_Motoru.md").write_text("# OSINT Motoru", encoding="utf-8")
+
     # kalite raporu icin gerekli dosyalari olustur
     kpi_path = tmp_path / "data" / "kpi_raporu.md"
     kpi_path.parent.mkdir(parents=True, exist_ok=True)
@@ -301,7 +311,8 @@ def test_cmd_wiki(_tmp_board):
     assert "00-Home.md" in result
     assert "project_state.md" in result
     assert "OSINT" in result
-    assert "kalite" not in result.lower() or "Kalite" not in result.replace("kalite", "")
+    assert "OSTIM kalite raporu" not in result
+    assert "Kalite metrikleri" in result
 
 
 def test_cmd_degisiklik(_tmp_board):
@@ -431,7 +442,7 @@ def test_handle_update_start():
 def test_handle_update_help():
     result = telegram_polling.handle_update(_make_update("/help"))
     assert result is not None
-    assert "KOMUTLAR" in result
+    assert "KOMUTLAR" in result.upper()
 
 
 def test_handle_update_status(_tmp_board):
@@ -751,3 +762,47 @@ def test_cmd_help_has_categories(_tmp_board):
     assert "ONAY" in result.upper() or "Onay" in result
     assert "DURUM" in result.upper() or "Durum" in result
     assert "NÖBETÇİ" in result or "NOBET" in result
+
+
+def test_cmd_help_commands_are_plain_and_spaced():
+    """Komutlar inline HTML içine alınmaz ve komutlar boş satırla ayrılır."""
+    result = telegram_polling.cmd_help("/help")
+    lines = result.splitlines()
+    command_indexes = [index for index, line in enumerate(lines) if line.startswith("/")]
+
+    for index in command_indexes:
+        line = lines[index]
+        assert "<code>" not in line
+        assert "</code>" not in line
+        assert "<i>" not in line
+        assert "</i>" not in line
+        if index != command_indexes[-1]:
+            assert lines[index + 1] == ""
+
+    # Son komuttan sonra da Telegram'a bir satır sonu ulaşır.
+    assert result.endswith("\n")
+
+
+def test_cmd_help_lists_all_privileged_commands():
+    result = telegram_polling.cmd_help("/help")
+    expected = {
+        "/restart_etl",
+        "/set_status",
+        "/set_task_status",
+        "/gorev-ekle",
+        "/pano",
+        "/onaylar",
+        "/onayla",
+        "/reddet",
+        "/teslim",
+        "/nobet",
+        "/nobet-ayar",
+    }
+    assert all(command in result for command in expected)
+
+
+def test_cmd_help_distinguishes_status_aliases():
+    result = telegram_polling.cmd_help("/help")
+    assert "/set_status — project_state.md'ye not ekler" in result
+    assert "/set_task_status — Task board durumunu gunceller" in result
+    assert "/gorev-durum — Görev durumunu günceller (alias: /set_task_status)" in result

@@ -1,6 +1,6 @@
 # Telegram Bot — Kurulum ve Kullanim Kilavuzu
 
-## Genel Bakisim
+## Genel Bakış
 
 Bu Telegram botu **canonical long-polling** motoru ile çalistirilir;
 `python-telegram-bot` veya benzeri bir framework kullanmaz. Doğrudan
@@ -22,7 +22,8 @@ gönderir (`getUpdates` long-polling).
 
 ```
 TELEGRAM_BOT_TOKEN=123456:ABC-...     # @BotFather'dan alinir (gizli!)
-TELEGRAM_CHAT_ID=801855376            # Yetkili chat ID
+TELEGRAM_CHAT_ID=801855376            # Birincil yetkili chat ID
+TELEGRAM_ALLOWED_CHAT_IDS=            # Opsiyonel; virgulle ek yetkili chat ID'ler
 TELEGRAM_BOT_USERNAME=                # Opsiyonel; @BotName komut parsing icin
 ETL_RESTART_CMD=python scripts/refresh_pipeline.py  # Opsiyonel
 TELEGRAM_PERIODIC_INTERVAL_SECONDS=3600
@@ -35,15 +36,29 @@ TELEGRAM_PERIODIC_ENABLED=1
 |-------|----------|-------|
 | `/start` | Hos gelesme | Herkese acik |
 | `/help` | Yardim metni | Herkese acik |
-| `/status` | Proje durumu + aktif goresv | Herkese acik |
-| `/gorev` | Task board'daki tum goresv | Herkese acik |
-| `/rapor` | KPI raporu (`data/kpi_raporu.md`) | Herkese acik |
-| `/wiki` | OSTIM kalite raporu | Herkese acik |
-| `/restart_etl` | ETL pipeline yeniden baslat | Yetkili |
-| `/degisiklik` | CHANGELOG.md | Herkese acik |
-| `/gunluk` | Gunluk ozet | Herkese acik |
-| `/izleme` | Kalite + proje izleme | Herkese acik |
-| `/set_status <id> <durum>` | Gorev durumunu guncelle | Yetkili |
+| `/status` | Proje durumu + aktif görevler | Herkese açık |
+| `/durum` | Proje durumu + aktif görevler (`/status` alias'ı) | Herkese açık |
+| `/gorev` | Task board'daki tüm görevler | Herkese açık |
+| `/menu` | Etkileşimli ana menü | Herkese açık |
+| `/rapor` | KPI raporu (`data/kpi_raporu.md`) | Herkese açık |
+| `/wiki` | V10 wiki sayfaları | Herkese açık |
+| `/restart_etl` | ETL pipeline yeniden başlat | Yetkili |
+| `/degisiklik` | CHANGELOG.md | Herkese açık |
+| `/gunluk` | Günlük özet | Herkese açık |
+| `/izleme` | Kalite + proje izleme | Herkese açık |
+| `/set_status <mesaj>` | `project_state.md` içine tarihli not ekle | Yetkili |
+| `/set_task_status <id> <durum>` | Task board durumunu güncelle | Yetkili |
+| `/gorev-durum <id> <durum>` | Task board durumunu güncelle (`/set_task_status` alias'ı) | Yetkili |
+| `/gorev-ekle <id> <ajan> <baslik>` | Panoya görev ekle ve tetik at | Yetkili |
+| `/at <id> <ajan> <baslik>` | Panoya görev ekle (`/gorev-ekle` alias'ı) | Yetkili |
+| `/pano` | Bekleyen tetik ve onay özeti | Yetkili |
+| `/onaylar` | Onay bekleyen teslimleri listele | Yetkili |
+| `/onayla <id>` | Görevi onayla (`done`) | Yetkili |
+| `/reddet <id> <neden>` | Görevi reddet (`aktif`) | Yetkili |
+| `/teslim <id> <ozet>` | Görevi incelemeye gönder (`review`) | Yetkili |
+| `/nobet` | Nöbetçi turunu çalıştır | Yetkili |
+| `/nobet-ayar <sn>` | Nöbet alarm süresini güncelle | Yetkili |
+| `/nobet_ayar <sn>` | Nöbet alarm süresini güncelle (`/nobet-ayar` alias'ı) | Yetkili |
 
 ## Calistirma
 
@@ -73,10 +88,11 @@ docker compose --profile telegram up -d --build telegram-bot telegram-periodic
 
 ## Guvenlik
 
+- `TELEGRAM_CHAT_ID` birincil yetkili chat'tir; `TELEGRAM_ALLOWED_CHAT_IDS` virgülle ayrılmış ek yetkili kimlikleri destekler.
 - Token ve chat_id **asla kodda saklanmaz**; `.env` dosyasindan okunur.
 - Tum dinamik metin `html_escape()` ile sanitize edilir (Telegram HTML parse_mode).
 - `requests.post/get` timeout ve `RequestException` ile guvenle güvenli.
-- `/set_status` ve `/restart_etl` sadece yetkili chat_id'den gelen kullanicilara izin verir.
+- `/restart_etl`, `/set_status`, `/set_task_status`, `/gorev-ekle`, `/onayla`, `/reddet`, `/teslim` ve `/nobet-ayar` yalnızca yetkili chat_id'den gelen kullanıcılara izin verir.
 - `set_task_status` task_board.py'nin atomik `gorev_guncelle()` fonksiyonunu kullanir.
 
 ## Test

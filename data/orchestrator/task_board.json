@@ -571,9 +571,9 @@
     "baslik": "Telegram Bot Gonderim ve Komut Aksini Duzelt",
     "sahip": "kilo",
     "oncelik": "high",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-12T13:11:18",
-    "bitis": "2026-09-13T19:05:45",
+    "bitis": "2026-09-18T04:55:50",
     "dosyalar": [
       ".env.example",
       "docker-compose.yml",
@@ -589,7 +589,7 @@
       "tests/test_telegram_bot.py",
       "tests/test_telegram_polling.py"
     ],
-    "not": "",
+    "not": "Teslim (kilo): Telegram bot komut akışı, yetkili chat ID desteği, V10 wiki komutu ve dokümantasyon düzeltmeleri tamamlandı; 126 pytest, 9 mock smoke, 8 simple smoke ve kodlama denetimi başarılı.",
     "source": "ic",
     "from_agent": null,
     "not_": "Telegram bot gonderme sorunu cozuldu: _load_env .env override duzeltmesi, docker-compose ortam override kaldirimi, canli/mock testler gecti, canli smoke test message_id 103."
@@ -4331,6 +4331,57 @@
       "data/orchestrator/ROO-CONFIG-01_rapor_2026-09-17_kilo.md"
     ],
     "not": "Teslim (kilo): Roo Code IDE ucretsiz model yapilandirmasi + fallback taslagi tamamlandi. 14 model, Primary fallback=Nemotron 3.5 Content Safety, Secondary=Qwen 3.8 27B, Emergency=Claude Sonnet 4.5. D-48 uyumlum. 9Router dokunulmadi.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-ROO-DENETIM-01",
+    "id": "ADMIN-ROO-DENETIM-01",
+    "baslik": "Admin panel gece zinciri teslimlerini incele ve onayla (ADMIN-HATA-02, KPI-KART-02, MUSTERI-02)",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-18T04:56:36",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-HITAP-01",
+    "id": "ADMIN-HITAP-01",
+    "baslik": "D-49 uygulama: sahip -> KAHIN (Urun Sahibi) taramasi (kurallar + docs + admin panel metinleri)",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-18T04:56:36",
+    "bitis": null,
+    "dosyalar": [
+      "AGENTS.md",
+      ".clinerules",
+      ".roorules",
+      "docs/AJAN_DETAY.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-KOK-TEMIZLIK-01",
+    "id": "ADMIN-KOK-TEMIZLIK-01",
+    "baslik": "Kok dizindeki 3 gecici script sil + .gitignore kontrol + commit",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-18T04:56:37",
+    "bitis": null,
+    "dosyalar": [
+      "fix_encoding.py",
+      "fix_encoding2.py",
+      "fix_final.py"
+    ],
+    "not": "",
     "source": "ic",
     "from_agent": null
   }

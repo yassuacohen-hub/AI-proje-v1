@@ -1,13 +1,12 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-18T03:45:37
+> Son guncelleme: 2026-09-18T04:56:37
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
 
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
-| TG-01 | Telegram Bot Gonderim ve Komut Aksini Du | kilo | high | aktif |
 | WK-01 | Career Pages Scraper — Enhanced Data Ext | - | P1 | plan |
 | WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | plan |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | plan |
@@ -19,6 +18,9 @@
 | ADMIN-KPI-KART-02 | Kalan st.metric -> kpi_karti (webhook_mo | kilo | P2 | plan |
 | ADMIN-HATA-02 | Admin sekmelerinde 16 sessiz except:pass | kilo | P2 | plan |
 | RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arasti | roo | P0 | aktif |
+| ADMIN-ROO-DENETIM-01 | Admin panel gece zinciri teslimlerini in | roo | P2 | plan |
+| ADMIN-HITAP-01 | D-49 uygulama: sahip -> KAHIN (Urun Sahi | roo | P2 | plan |
+| ADMIN-KOK-TEMIZLIK-01 | Kok dizindeki 3 gecici script sil + .git | roo | P2 | plan |
 
 ## Tamamlananlar (Son 10)
 
