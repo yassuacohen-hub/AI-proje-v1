@@ -35,6 +35,10 @@ from company_master.kaynak_guvenilirlik import (
     hesapla_toplu,
 )
 from web_dashboard.charts import kpi_karti
+from web_dashboard.tabs.admin_error_handling import AdminErrorHandler
+
+# Admin Quality logger
+_admin_quality_logger = AdminErrorHandler("admin_quality")
 
 # Analiz edilecek alanlar: kolon adı -> okunabilir etiket
 _QUALITY_FIELDS: dict[str, str] = {
@@ -106,8 +110,8 @@ def load_quality_overview() -> dict[str, Any]:
             if scores:
                 scores_f = [float(s) for s in scores]
                 result["medyan_skor"] = round(statistics.median(scores_f), 1)
-    except Exception:
-        pass
+    except Exception as exc:
+        _admin_quality_logger.warning("Kalite özeti yüklenemedi", exc)
     return result
 
 
@@ -134,8 +138,8 @@ def load_score_distribution() -> pd.DataFrame:
                 sira = ["0-19", "20-39", "40-59", "60-79", "80-100"]
                 df["bucket"] = pd.Categorical(df["bucket"], categories=sira, ordered=True)
                 return df.sort_values("bucket").reset_index(drop=True)
-    except Exception:
-        pass
+    except Exception as exc:
+        _admin_quality_logger.warning("Skor dağılımı yüklenemedi", exc)
     return pd.DataFrame(columns=["bucket", "adet"])
 
 
@@ -160,7 +164,8 @@ def load_missing_field_analysis() -> pd.DataFrame:
                         f"AND ({col} IS NULL OR {col} = '')"
                     )).mappings().first()
                     eksik = cnt_row["cnt"] if cnt_row else 0
-                except Exception:
+                except Exception as exc:
+                    _admin_quality_logger.warning(f"Alan {label} eksik sayımı başarısız", exc)
                     eksik = 0
                 result.append({
                     "Alan": label,
@@ -168,7 +173,8 @@ def load_missing_field_analysis() -> pd.DataFrame:
                     "Toplam": total,
                     "Eksiklik (%)": round(eksik / max(total, 1) * 100, 1),
                 })
-    except Exception:
+    except Exception as exc:
+        _admin_quality_logger.warning("Eksik alan analizi yüklenemedi", exc)
         for label in _QUALITY_FIELDS.values():
             result.append({"Alan": label, "Eksik": 0, "Toplam": 0, "Eksiklik (%)": 0})
     return pd.DataFrame(result)

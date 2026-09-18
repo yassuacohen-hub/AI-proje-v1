@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-18T05:55:37
+> Son guncelleme: 2026-09-18T06:18:40
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -16,9 +16,12 @@
 | ADMIN-HATA-01 | Hata Yonetimi sekmesi: sahte istatistik/ | kilo | P2 | aktif |
 | ADMIN-MUSTERI-02 | Musteri Yonetimi: placeholder alt sekmel | kilo | P2 | plan |
 | ADMIN-KPI-KART-02 | Kalan st.metric -> kpi_karti (webhook_mo | kilo | P2 | plan |
-| ADMIN-HATA-02 | Admin sekmelerinde 16 sessiz except:pass | kilo | P2 | plan |
+| ADMIN-HATA-02 | Admin sekmelerinde 16 sessiz except:pass | kilo | P2 | aktif |
 | RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arasti | roo | P0 | aktif |
 | ADLANDIRMA-GERIYE-01 | D-55 geriye donuk: 55 rapor dosyasindan  | roo | P3 | plan |
+| AGN-CREWAI-PILOT-01 | crewAI hibrit worker pilotu (metin-üreti | roo | P2 | plan |
+| ADMIN-LOGIN-FIX-01 | Admin giris: baglanti hatasi ile 401 ayr | kilo | P0 | plan |
+| ADMIN-ADMIN2-DOGRULA-01 | 2. admin hesabi yassuacohen@gmail.com si | kilo | P2 | plan |
 
 ## Tamamlananlar (Son 10)
 

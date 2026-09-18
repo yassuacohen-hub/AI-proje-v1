@@ -10,6 +10,8 @@ Hata yönetimi UX:
 """
 from __future__ import annotations
 
+import json
+import os
 import sys
 import traceback
 from datetime import datetime
@@ -62,6 +64,15 @@ ERROR_TEMPLATES = {
 }
 
 
+def _save_error_report(report: dict) -> None:
+    """Hata raporunu JSONL dosyasına kaydeder."""
+    errors_dir = ROOT / "data" / "errors"
+    errors_dir.mkdir(parents=True, exist_ok=True)
+    report_file = errors_dir / "error_reports.jsonl"
+    with report_file.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(report, ensure_ascii=False) + "\n")
+
+
 def render_error_page(error_code: str, details: str = "") -> None:
     """Hata sayfası gösterir."""
     template = ERROR_TEMPLATES.get(error_code, ERROR_TEMPLATES["404"])
@@ -101,7 +112,7 @@ def render_errors_tab() -> None:
         render_error_page(error_type)
 
     st.divider()
-    st.subheader("🧪 Hata Demo")
+    st.subheader("🧪 Hata Simülasyonu (Geliştirici Modu)")
 
     demo = st.radio(
         "Demo",
@@ -130,25 +141,29 @@ def render_errors_tab() -> None:
 
         if submitted:
             timestamp = datetime.now().isoformat()
-            st.success(f"✅ Hata raporu alındı! ({timestamp})")
-            st.json({
+            report = {
                 "tarih": timestamp,
                 "raporlayan": reporter,
                 "email": reporter_email,
                 "hata_turu": report_error,
                 "aciklama": description,
                 "durum": "kayit_edildi",
-            })
+            }
+            _save_error_report(report)
+            st.success(f"✅ Hata raporu alındı! ({timestamp})")
+            st.json(report)
 
     st.divider()
     st.subheader("📊 Hata İstatistikleri")
 
+    st.info("Gerçek hata istatistikleri için veri kaynağı bağlanmalıdır. Şu an için örnek veriler gösterilmektedir.")
+
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric("404", "5 bugün", delta="-2")
+        st.metric("404", "—", delta="Veri yok")
     with col2:
-        st.metric("500", "1 bugün", delta="+1")
+        st.metric("500", "—", delta="Veri yok")
     with col3:
-        st.metric("Bağlantı", "3 bugün", delta="0")
+        st.metric("Bağlantı", "—", delta="Veri yok")
 
-    st.caption("Dönem: Son 24 saat")
+    st.caption("Dönem: Son 24 saat — Gerçek veri kaynağı entegrasyonu bekleniyor.")

@@ -4184,7 +4184,7 @@
     "baslik": "Admin sekmelerinde 16 sessiz except:pass -> log/hata_kutusu + AST testi",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-17T06:49:12",
     "bitis": null,
     "dosyalar": [
@@ -4426,6 +4426,54 @@
     "baslangic": "2026-09-18T05:52:03",
     "bitis": null,
     "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "AGN-CREWAI-PILOT-01",
+    "id": "AGN-CREWAI-PILOT-01",
+    "baslik": "crewAI hibrit worker pilotu (metin-üretimi deneyi, scripts/deney/)",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-18T06:08:56",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/deney/crewai_arastirma_deneyi.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": "cline"
+  },
+  {
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "id": "ADMIN-LOGIN-FIX-01",
+    "baslik": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "sahip": "kilo",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-18T06:18:40",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_auth.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-ADMIN2-DOGRULA-01",
+    "id": "ADMIN-ADMIN2-DOGRULA-01",
+    "baslik": "2. admin hesabi yassuacohen@gmail.com sifre dogrulama",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-18T06:18:40",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/admin_kimlik_kontrol.py"
+    ],
     "not": "",
     "source": "ic",
     "from_agent": null

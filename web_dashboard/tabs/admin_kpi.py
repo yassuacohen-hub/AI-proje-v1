@@ -28,6 +28,10 @@ from web_dashboard.charts import alan_grafigi, donut, kpi_karti  # noqa: E402  (
 from web_dashboard.tabs.tenant_health_dashboard import (
     tenant_health_dashboard as _tenant_health_dashboard,
 )
+from web_dashboard.tabs.admin_error_handling import AdminErrorHandler
+
+# Admin KPI logger
+_admin_kpi_logger = AdminErrorHandler("admin_kpi")
 
 # ---------------------------------------------------------------------------
 # Veri Yükleme Fonksiyonları
@@ -72,8 +76,8 @@ def load_admin_kpi_summary() -> dict[str, Any]:
             )).mappings().first()
             if row:
                 result["son_24s_yeni_firma"] = row["cnt"] or 0
-    except Exception:
-        pass  # SQLite uyumluluğu için sessiz fallback
+    except Exception as exc:
+        _admin_kpi_logger.warning("KPI özeti yüklenemedi", exc)
 
     # Sinyal sayısı
     try:
@@ -91,8 +95,8 @@ def load_admin_kpi_summary() -> dict[str, Any]:
             )).mappings().first()
             if row:
                 result["son_24s_yeni_sinyal"] = row["cnt"] or 0
-    except Exception:
-        pass
+    except Exception as exc:
+        _admin_kpi_logger.warning("Sinyal sayısı yüklenemedi", exc)
 
     # API kullanım toplamı
     try:
@@ -103,8 +107,8 @@ def load_admin_kpi_summary() -> dict[str, Any]:
             )).mappings().first()
             if row:
                 result["api_cagri_toplam"] = row["total"] or 0
-    except Exception:
-        pass
+    except Exception as exc:
+        _admin_kpi_logger.warning("API kullanım toplamı yüklenemedi", exc)
 
     return result
 
@@ -127,8 +131,8 @@ def load_quality_trend(gun: int = 30) -> pd.DataFrame:
             ), {"gun": gun}).mappings().all()
             if rows:
                 return pd.DataFrame([dict(r) for r in rows])
-    except Exception:
-        pass
+    except Exception as exc:
+        _admin_kpi_logger.warning("Kalite trendi yüklenemedi", exc)
     return pd.DataFrame(columns=["tarih", "ort_skor", "firma_sayisi"])
 
 
@@ -162,7 +166,8 @@ def load_field_quality_breakdown() -> pd.DataFrame:
                         f"AND {col} IS NOT NULL AND {col} != ''"
                     )).mappings().first()
                     cnt = cnt_row["cnt"] if cnt_row else 0
-                except Exception:
+                except Exception as exc:
+                    _admin_kpi_logger.warning(f"Alan {label} sayımı başarısız", exc)
                     cnt = 0
                 result.append({
                     "Alan": label,
@@ -170,7 +175,8 @@ def load_field_quality_breakdown() -> pd.DataFrame:
                     "Toplam": total,
                     "Doluluk (%)": round(cnt / max(total, 1) * 100, 1),
                 })
-    except Exception:
+    except Exception as exc:
+        _admin_kpi_logger.warning("Alan kalite analizi yüklenemedi", exc)
         for col, label in fields.items():
             result.append({
                 "Alan": label, "Dolu": 0, "Toplam": 0, "Doluluk (%)": 0,
@@ -195,8 +201,8 @@ def load_source_health() -> pd.DataFrame:
             )).mappings().all()
             if rows:
                 return pd.DataFrame([dict(r) for r in rows])
-    except Exception:
-        pass
+    except Exception as exc:
+        _admin_kpi_logger.warning("Kaynak sağlık durumu yüklenemedi", exc)
     return pd.DataFrame(columns=["source_name", "kayit_sayisi", "son_guncelleme"])
 
 
@@ -236,8 +242,8 @@ def load_ai_cost_kpi() -> dict[str, Any]:
             if (d.get("backoffLevel") or 0) >= 3 or (d.get("modelLockSayisi") or 0) > 5 or d.get("errorCode"):
                 problemli += 1
         result["problemli_provider"] = problemli
-    except Exception:
-        pass
+    except Exception as exc:
+        _admin_kpi_logger.warning("AI maliyet KPI yüklenemedi", exc)
     return result
 
 
@@ -274,8 +280,8 @@ def load_api_usage_trend() -> pd.DataFrame:
             )).mappings().all()
             if rows:
                 return pd.DataFrame([dict(r) for r in rows])
-    except Exception:
-        pass
+    except Exception as exc:
+        _admin_kpi_logger.warning("API kullanım trendi yüklenemedi", exc)
     return pd.DataFrame(columns=["tarih", "istek"])
 
 
@@ -415,7 +421,8 @@ def render_kpi_tab() -> None:
             tenant_ctx=_TenantContext("huginn", "Huginn Data", "kurumsal"),
             companies=[],
         )
-    except Exception:
+    except Exception as exc:
+        _admin_kpi_logger.warning("Tenant sağlığı yüklenemedi", exc)
         st.warning("Tenant sağlığı yüklenemedi.")
 
     # --- Üçüncü satır: P7-27 AI Maliyet Özeti (9Router) ---
