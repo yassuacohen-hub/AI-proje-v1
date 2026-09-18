@@ -6,6 +6,17 @@ from scripts.dash04_api_client import APIError
 from web_dashboard.tabs import admin_auth
 
 
+@pytest.fixture(autouse=True)
+def _reset_akisi_yalit(monkeypatch):
+    """Giriş testleri yalnız giriş formunu ölçer.
+
+    `render_admin_login()` sonunda `render_sifre_unuttum()` çağrılıyor; bu
+    testler `form_submit_button`'ı global `True` yaptığı için reset formu da
+    gönderilmiş sayılıyordu. Gerçek Streamlit'te her formun submit'i ayrıdır.
+    """
+    monkeypatch.setattr(admin_auth, "render_sifre_unuttum", MagicMock())
+
+
 def _form_hazirla(monkeypatch, state: dict) -> None:
     """Form + text_input + submit sahteleri (giriş formu tıklanmış gibi)."""
     monkeypatch.setattr(admin_auth.st, "session_state", state)

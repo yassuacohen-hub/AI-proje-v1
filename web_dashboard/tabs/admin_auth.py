@@ -102,6 +102,70 @@ def render_admin_login() -> None:
                     "`python scripts/admin_env_eslesme.py` ile kontrol, "
                     "`python scripts/admin_sifre_sifirla.py --env-yaz` ile eşitle."
                 )
+    render_sifre_unuttum()
+
+
+def render_sifre_unuttum() -> None:
+    """ADMIN-SIFRE-RESET-FLOW-01: giriş ekranındaki 'Şifremi unuttum' akışı.
+
+    API iki adımlı: `/api/admin/reset-request` (token üretir) →
+    `/api/admin/reset-confirm` (token + yeni şifre). UI'da hiç karşılığı yoktu,
+    bu yüzden bağlantı "çalışmıyor" görünüyordu.
+
+    ponytail: token e-posta ile gönderilmiyor (SMTP yok), kullanıcı elle giriyor.
+    SMTP kurulunca 2. adım ayrı sayfaya/link'e taşınır.
+    """
+    with st.expander("🔑 Şifremi unuttum"):
+        with st.form("admin_reset_istek_form"):
+            eposta = st.text_input("Kayıtlı e-posta", key="reset_eposta")
+            istek = st.form_submit_button("Sıfırlama isteği gönder")
+        if istek:
+            if not eposta.strip():
+                st.error("E-posta zorunludur.")
+            else:
+                try:
+                    post_api("/api/admin/reset-request", json={"email": eposta.strip()})
+                    st.success("İstek alındı. E-posta kayıtlıysa sıfırlama kodu üretildi.")
+                except APIError as exc:
+                    _LOG.warning("Şifre sıfırlama isteği başarısız: %s", exc)
+                    st.error("İstek gönderilemedi. Sunucuya ulaşılamıyor olabilir.")
+
+        st.caption("Sıfırlama kodunu aldıysanız aşağıdan yeni şifrenizi belirleyin.")
+        with st.form("admin_reset_onay_form", clear_on_submit=True):
+            onay_eposta = st.text_input("E-posta", key="reset_onay_eposta")
+            kod = st.text_input("Sıfırlama kodu", key="reset_kod")
+            yeni = st.text_input("Yeni şifre (en az 8 karakter)", type="password")
+            tekrar = st.text_input("Yeni şifre (tekrar)", type="password")
+            onay = st.form_submit_button("Şifreyi güncelle")
+        if not onay:
+            return
+        if not onay_eposta.strip() or not kod.strip() or not yeni:
+            st.error("E-posta, kod ve yeni şifre zorunludur.")
+            return
+        if len(yeni) < 8:
+            st.error("Yeni şifre en az 8 karakter olmalı.")
+            return
+        if yeni != tekrar:
+            st.error("Yeni şifreler eşleşmiyor.")
+            return
+        try:
+            sonuc = post_api(
+                "/api/admin/reset-confirm",
+                json={
+                    "email": onay_eposta.strip(),
+                    "token": kod.strip(),
+                    "new_password": yeni,
+                },
+            )
+        except APIError as exc:
+            _LOG.warning("Şifre sıfırlama onayı başarısız: %s", exc)
+            st.error("Şifre güncellenemedi: kod geçersiz veya süresi dolmuş olabilir.")
+            return
+        if sonuc and sonuc.get("ok"):
+            flash_yaz("✅ Şifreniz güncellendi. Yeni şifrenizle giriş yapabilirsiniz.")
+            st.rerun()
+        else:
+            st.error("Şifre güncellenemedi: beklenmeyen yanıt.")
 
 
 def admin_cikis() -> None:

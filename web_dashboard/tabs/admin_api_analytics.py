@@ -42,6 +42,10 @@ sys.path.insert(0, str(ROOT / "src"))
 from scripts.dash04_api_client import get_api, APIError  # noqa: E402
 from web_dashboard.tabs.admin_auth import get_admin_token  # noqa: E402
 from web_dashboard.charts import kpi_karti
+from web_dashboard.tabs.admin_error_handling import AdminErrorHandler
+
+# Admin API Analytics logger
+_admin_api_logger = AdminErrorHandler("admin_api_analytics")
 
 
 @st.cache_data(ttl=30)
@@ -54,8 +58,8 @@ def load_api_usage(token: str | None) -> dict[str, Any]:
                 "items": data.get("items", {}) or {},
                 "rate_limits": data.get("rate_limits", {}) or {},
             }
-    except (APIError, Exception):
-        pass
+    except (APIError, Exception) as exc:
+        _admin_api_logger.warning("API kullanım verisi yüklenemedi", exc)
     return {"items": {}, "rate_limits": {}}
 
 
@@ -66,8 +70,8 @@ def load_metrics_summary() -> dict[str, Any]:
         data = get_api("/metrics")
         if isinstance(data, dict) and data:
             return data
-    except (APIError, Exception):
-        pass
+    except (APIError, Exception) as exc:
+        _admin_api_logger.warning("Sistem metrikleri yüklenemedi", exc)
     return {}
 
 

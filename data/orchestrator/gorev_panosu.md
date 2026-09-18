@@ -19,7 +19,7 @@
 | ADMIN-HATA-02 | Admin sekmelerinde 16 sessiz except:pass -> log/hata_kutusu + AST testi | kilo | P2 | aktif | web_dashboard/tabs/admin_kpi.py, web_dashboard/tabs/admin_quality.py, web_dashboard/tabs/admin_performance.py |
 | RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arastirma | roo | P0 | aktif | - |
 | ADLANDIRMA-GERIYE-01 | D-55 geriye donuk: 55 rapor dosyasindan ajan adini kaldir, rol bazli son eke cevir | roo | P3 | plan | - |
-| AGN-CREWAI-PILOT-01 | crewAI hibrit worker pilotu (metin-üretimi deneyi, scripts/deney/) | roo | P2 | plan | scripts/deney/crewai_arastirma_deneyi.py |
+| AGN-CREWAI-PILOT-01 | crewAI hibrit worker pilotu (metin-üretimi deneyi, scripts/deney/) | roo | P2 | aktif | scripts/deney/crewai_arastirma_deneyi.py |
 | ADMIN-LOGIN-FIX-01 | Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi | kilo | P0 | plan | web_dashboard/tabs/admin_auth.py |
 | ADMIN-ADMIN2-DOGRULA-01 | 2. admin hesabi yassuacohen@gmail.com sifre dogrulama | kilo | P2 | plan | scripts/admin_kimlik_kontrol.py |
 | ADMIN-MODAL-STIL-01 | Admin modal: blur backdrop + marka kimligini yansit | kilo | P1 | plan | web_dashboard/tabs/admin_auth.py |
