@@ -112,6 +112,28 @@ def test_force_auth_gate_integration():
     assert has_flag_check, "main() _force_auth_gate flagını kontrol etmiyor"
 
 
+def test_popover_cikis_gercekten_oturum_kapatir():
+    """ADMIN-UX-LOGOUT-01: popover 'Çıkış' butonu admin_cikis() çağırmalı.
+
+    Regresyon: eskiden render_admin_cikis() çağrılıyordu; o fonksiyon oturumu
+    kapatmaz, sadece ikinci bir çıkış butonu çizer -> logout hiç çalışmıyordu.
+    """
+    kod = (ROOT / "app.py").read_text(encoding="utf-8")
+    tree = ast.parse(kod)
+
+    func_body = None
+    for node in ast.walk(tree):
+        if isinstance(node, ast.FunctionDef) and node.name == "_hesap_karti_popover":
+            func_body = ast.unparse(node)
+            break
+
+    assert func_body is not None, "_hesap_karti_popover bulunamadı"
+    assert "admin_cikis()" in func_body, "popover admin_cikis() çağırmıyor"
+    assert "render_admin_cikis" not in func_body, (
+        "popover içinde render_admin_cikis kullanılmamalı (oturumu kapatmaz)"
+    )
+
+
 def test_eski_url_guncel_mappings():
     """NAV-IA-04: eski_url_yonlendirme güncel."""
     from web_dashboard.tabs import eski_url_yonlendir

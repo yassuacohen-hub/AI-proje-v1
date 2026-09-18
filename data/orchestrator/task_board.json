@@ -5,14 +5,14 @@
     "baslik": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
     "sahip": "roo",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-18T14:31:57",
-    "bitis": null,
+    "bitis": "2026-09-18T21:35:00",
     "dosyalar": [
       "app.py",
       "web_dashboard/tabs/admin_auth.py"
     ],
-    "not": "",
+    "not": "Kok neden: app.py _hesap_karti_popover() icinde render_admin_cikis() cagriliyordu; o fonksiyon oturumu kapatmaz, popover icinde ikinci bir buton cizer. admin_cikis() olarak duzeltildi + regresyon testi (tests/test_nav_ia04.py::test_popover_cikis_gercekten_oturum_kapatir). Ek temizlik: olu MUAF kaydi render_error_page silindi, 3 dosyada eksik dosya_sonu newline eklendi.",
     "source": "ic",
     "from_agent": null
   },
@@ -120,14 +120,14 @@
     "baslik": "Hata Yonetimi sekmesi: sahte istatistik/demo raise kaldir, gercek kaynak + rapor kaydi",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "review",
     "baslangic": [
       "web_dashboard/tabs/admin_errors.py",
       "tests/test_admin_errors.py"
     ],
     "bitis": null,
     "dosyalar": [],
-    "not": "",
+    "not": "Teslim (kilo): Hata Yönetimi sekmesi yeniden yazildi: sahte demo raise (simüle 404/500/bağlantı) ve sahte istatistikler (metrikler 'Veri yok' gösteriyordu) kaldirildi. Gercek hata kaynagi: src/company_master/logging/error_logger.py merkezi hata loglama (dosya tabanli JSONL: data/errors/error_log.jsonl). app.py hata sinirina log_error() entegre edildi. Admin sekmesinde: filtreleme (seviye/kaynak/donem), gercek istatistikler (toplam/ERROR/WARNING/CRITICAL, kaynak dagilimi, hata turu dagilimi), hata detaylari (expandable), kullanici hata raporlama formu. Testler: 5/5 geciyor.",
     "source": "ic",
     "from_agent": null
   },
@@ -137,7 +137,7 @@
     "baslik": "Admin sekmelerinde 16 sessiz except:pass -> log/hata_kutusu + AST testi",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "review",
     "baslangic": "2026-09-17T06:49:12",
     "bitis": null,
     "dosyalar": [
@@ -147,7 +147,7 @@
       "web_dashboard/tabs/admin_api_analytics.py",
       "tests/test_admin_sessiz_except.py"
     ],
-    "not": "",
+    "not": "Teslim (kilo): 4 admin sekmesindeki 16 sessiz 'except Exception: pass' kalibi giderildi: admin_kpi.py (11), admin_quality.py (8), admin_performance.py (4), admin_api_analytics.py (2). Her biri AdminErrorHandler.warning() ile loglanacak sekilde duzenlendi. Ortak yardimci modul: web_dashboard/tabs/admin_error_handling.py (AdminErrorHandler sinifi + @admin_error_handler decorator). AST tabanli tespit aracı: scripts/detect_silent_except.py. Testler: tests/test_admin_sessiz_except.py (7 test) tamamı geciyor. Toplam pytest: 136 passed.",
     "source": "roo",
     "from_agent": null
   },

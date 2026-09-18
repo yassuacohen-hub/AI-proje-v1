@@ -1,169 +1,212 @@
 # -*- coding: utf-8 -*-
-"""P7-43: Hata sayfalari — 404, 500, baglanti hatasi icin kullanici dosyalar.
+"""P7-43: Hata Yonetimi sekmesi — Gercek hata kaynagi + rapor kaydi.
 
-Hata yönetimi UX:
-- 404 (Bulunamadi) hata sayfası
-- 500 (Sunucu Hatasi) hata sayfası
-- Bağlantı hatasi kullanici dosyasi
-- Hata raporlama
-- Hata izleme logu
+Ozellikler:
+- Merkezi hata log dosyasindan (data/errors/error_log.jsonl) oku
+- Hata turu, kaynak, seviye, zaman filtreleme
+- Gercek istatistikler (son 24 saat / 7 gun / 30 gun)
+- Hata raporlama formu (kullanici geri bildirimi)
+- Hata detay gosterimi
 """
 from __future__ import annotations
 
-import json
-import os
 import sys
-import traceback
-from datetime import datetime
 from pathlib import Path
-from typing import Any
 
 import streamlit as st
 
 ROOT = Path(__file__).resolve().parent.parent.parent
-sys.path.insert(0, str(ROOT / "src"))
+if str(ROOT / "src") not in sys.path:
+    sys.path.insert(0, str(ROOT / "src"))
+
+from company_master.logging.error_logger import (
+    get_recent_errors,
+    get_error_stats,
+)
 
 ERROR_COLORS = {
-    "error": "🔴",
-    "warning": "🟠",
-    "info": "🔵",
-    "success": "🟢",
+    "ERROR": "🔴",
+    "WARNING": "🟠",
+    "INFO": "🔵",
+    "CRITICAL": "🟣",
+    "DEBUG": "⚪",
 }
 
-ERROR_TEMPLATES = {
-    "404": {
-        "title": "404 — Bulunamadı",
-        "message": "İstenen sayfa veya kaynak bulunamadı. Lütfen adresi kontrol edin.",
-        "icon": "🔍",
-        "color": "warning",
-    },
-    "500": {
-        "title": "500 — Sunucu Hatası",
-        "message": "Bir hata oluştu. Lütfen daha sonra tekrar deneyin. Sorun devam ederse yönetimi bilgilendirin.",
-        "icon": "🔧",
-        "color": "error",
-    },
-    "connection": {
-        "title": "Bağlantı Hatası",
-        "message": "Sunucuya bağlanılamıyor. Ağ ayarlarınızı ve VPN durumunuzu kontrol edin.",
-        "icon": "🌐",
-        "color": "error",
-    },
-    "timeout": {
-        "title": "Zaman Aşımı",
-        "message": "İşlem tamamlanamadı. Daha sonra tekrar deneyin veya zaman aşımını artırın.",
-        "icon": "⏱️",
-        "color": "warning",
-    },
-    "permission": {
-        "title": "İzin Reddedildi",
-        "message": "Bu kaynağa erişim yetkiniz bulunmuyor. Yetkilendirmenizi kontrol edin.",
-        "icon": "🔒",
-        "color": "error",
-    },
-}
+LEVEL_ORDER = ["CRITICAL", "ERROR", "WARNING", "INFO", "DEBUG"]
 
 
-def _save_error_report(report: dict) -> None:
-    """Hata raporunu JSONL dosyasına kaydeder."""
-    errors_dir = ROOT / "data" / "errors"
-    errors_dir.mkdir(parents=True, exist_ok=True)
-    report_file = errors_dir / "error_reports.jsonl"
-    with report_file.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(report, ensure_ascii=False) + "\n")
+def _format_error_entry(entry: dict) -> str:
+    """Hata kaydini okunabilir metne cevir."""
+    ts = entry.get("timestamp", "")
+    level = entry.get("level", "UNKNOWN")
+    source = entry.get("source", "unknown")
+    etype = entry.get("error_type", "UnknownError")
+    msg = entry.get("message", "")
+    ctx = entry.get("context", {})
+    tb = entry.get("traceback", "")
 
-
-def render_error_page(error_code: str, details: str = "") -> None:
-    """Hata sayfası gösterir."""
-    template = ERROR_TEMPLATES.get(error_code, ERROR_TEMPLATES["404"])
-    color = template["color"]
-
-    st.error(f"{template['icon']} **{template['title']}**", icon=template["icon"])
-    st.info(template["message"])
-
-    if details:
-        with st.expander("Detaylar"):
-            st.code(details, language="text")
-
-    col1, col2 = st.columns(2)
-    with col1:
-        if st.button("🏠 Ana Sayfaya Dön", type="primary", width="stretch"):
-            st.rerun()
-    with col2:
-        if st.button("📧 Destek İletişimi", width="stretch"):
-            st.info("Destek ekibimize haber verin: destek@huginn.local")
+    parts = [
+        f"**{ERROR_COLORS.get(level, '⚪')} [{level}] {ts}**",
+        f"**Kaynak:** {source}  |  **Tur:** {etype}",
+        f"**Mesaj:** {msg}",
+    ]
+    if ctx:
+        parts.append(f"**Baglam:** {ctx}")
+    if tb:
+        parts.append(f"**Stack Trace:**\n```\n{tb[:2000]}\n```")
+    return "\n\n".join(parts)
 
 
 def render_errors_tab() -> None:
-    """Hata yönetimi sekmesini gösterir."""
-    st.subheader("❌ Hata Yönetimi")
+    """Hata yonetimi sekmesini gosterir."""
+    st.subheader("❌ Hata Yonetimi")
 
-    st.divider()
-    st.subheader("📋 Hata Türleri")
-
-    error_type = st.selectbox(
-        "Hata Türü",
-        list(ERROR_TEMPLATES.keys()),
-        format_func=lambda x: f"{x} — {ERROR_TEMPLATES[x]['title']}",
-        key="error_type_select",
-    )
-
-    if st.button("▶️ Hata Sayfasını Görüntüle", type="primary", width="stretch"):
-        render_error_page(error_type)
-
-    st.divider()
-    st.subheader("🧪 Hata Simülasyonu (Geliştirici Modu)")
-
-    demo = st.radio(
-        "Demo",
-        ["Simüle 404", "Simüle 500", "Simüle Bağlantı Hatası"],
-        horizontal=True,
-        key="error_demo",
-    )
-
-    if st.button("🔥 Hatayı Simüle Et", type="primary", width="stretch"):
-        if "404" in demo:
-            raise ValueError("404 — Simüle hata")
-        elif "500" in demo:
-            raise RuntimeError("500 — Simüle sunucu hatası")
-        else:
-            raise ConnectionError("Bağlantı hatası — simüle")
-
-    st.divider()
-    st.subheader("📝 Hata Raporu")
-
-    with st.form("error_report"):
-        reporter = st.text_input("Ad Soyad", placeholder="Adınız")
-        reporter_email = st.text_input("E-posta", placeholder="E-posta adresiniz")
-        report_error = st.selectbox("Hata Türü", list(ERROR_TEMPLATES.keys()))
-        description = st.text_area("Açıklama", placeholder="Hata açıklaması...")
-        submitted = st.form_submit_button("📤 Raporu Gönder", type="primary")
-
-        if submitted:
-            timestamp = datetime.now().isoformat()
-            report = {
-                "tarih": timestamp,
-                "raporlayan": reporter,
-                "email": reporter_email,
-                "hata_turu": report_error,
-                "aciklama": description,
-                "durum": "kayit_edildi",
-            }
-            _save_error_report(report)
-            st.success(f"✅ Hata raporu alındı! ({timestamp})")
-            st.json(report)
-
-    st.divider()
-    st.subheader("📊 Hata İstatistikleri")
-
-    st.info("Gerçek hata istatistikleri için veri kaynağı bağlanmalıdır. Şu an için örnek veriler gösterilmektedir.")
-
+    # ---- Filtreler ----
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric("404", "—", delta="Veri yok")
+        level_filter = st.selectbox(
+            "Seviye",
+            ["Hepsi"] + LEVEL_ORDER,
+            index=0,
+            key="error_level_filter",
+        )
     with col2:
-        st.metric("500", "—", delta="Veri yok")
+        source_filter = st.selectbox(
+            "Kaynak",
+            ["Hepsi", "streamlit_tab", "fastapi", "orchestrator", "manual_test"],
+            index=0,
+            key="error_source_filter",
+        )
     with col3:
-        st.metric("Bağlantı", "—", delta="Veri yok")
+        days_filter = st.selectbox(
+            "Donem",
+            ["Son 1 saat", "Son 24 saat", "Son 7 gun", "Son 30 gun", "Tumu"],
+            index=1,
+            key="error_days_filter",
+        )
 
-    st.caption("Dönem: Son 24 saat — Gerçek veri kaynağı entegrasyonu bekleniyor.")
+    # Donem -> gun sayisi
+    days_map = {
+        "Son 1 saat": 1/24,
+        "Son 24 saat": 1,
+        "Son 7 gun": 7,
+        "Son 30 gun": 30,
+        "Tumu": None,
+    }
+    days = days_map[days_filter]
+
+    # ---- Hatalari getir ----
+    level = None if level_filter == "Hepsi" else level_filter
+    source = None if source_filter == "Hepsi" else source_filter
+
+    errors = get_recent_errors(limit=200, level=level, source=source, days=days)
+
+    # ---- Istatikler ----
+    st.divider()
+    st.subheader("📊 Hata Istatikleri")
+
+    stats = get_error_stats(days=int(days) if days else 30)
+
+    mcol1, mcol2, mcol3, mcol4 = st.columns(4)
+    with mcol1:
+        st.metric("Toplam Hata", stats["total"])
+    with mcol2:
+        st.metric("ERROR", stats["by_level"].get("ERROR", 0))
+    with mcol3:
+        st.metric("WARNING", stats["by_level"].get("WARNING", 0))
+    with mcol4:
+        st.metric("CRITICAL", stats["by_level"].get("CRITICAL", 0))
+
+    # Kaynak dagilimi
+    if stats["by_source"]:
+        st.caption("**Kaynak dagilimi:**")
+        src_cols = st.columns(min(len(stats["by_source"]), 4))
+        for i, (src, count) in enumerate(stats["by_source"].items()):
+            with src_cols[i % len(src_cols)]:
+                st.metric(src, count)
+
+    # Tur dagilimi
+    if stats["by_type"]:
+        st.caption("**Hata turu dagilimi:**")
+        type_cols = st.columns(min(len(stats["by_type"]), 4))
+        for i, (etype, count) in enumerate(stats["by_type"].items()):
+            with type_cols[i % len(type_cols)]:
+                st.metric(etype, count)
+
+    # ---- Hata listesi ----
+    st.divider()
+    st.subheader(f"📋 Hata Listesi ({len(errors)} kayit)")
+
+    if not errors:
+        st.info("Seçili filtrelerde hata kaydi bulunamadi.")
+    else:
+        for i, entry in enumerate(errors):
+            with st.expander(
+                f"{ERROR_COLORS.get(entry.get('level', ''), '⚪')} "
+                f"[{entry.get('level', '?')}] {entry.get('timestamp', '')} | "
+                f"{entry.get('source', '?')} | {entry.get('error_type', '?')}",
+                expanded=(i < 3),
+            ):
+                st.markdown(_format_error_entry(entry))
+
+    # ---- Hata raporlama formu (kullanici geri bildirimi) ----
+    st.divider()
+    st.subheader("📝 Hata Raporu Gonder (Kullanici Geri Bildirimi)")
+
+    with st.form("error_report_form"):
+        reporter = st.text_input("Ad Soyad", placeholder="Adiniz")
+        reporter_email = st.text_input("E-posta", placeholder="E-posta adresiniz")
+        report_error_type = st.selectbox(
+            "Hata Turu",
+            [
+                "UI/UX Hatasi",
+                "Performans/Yukleme",
+                "Veri/Goruntu Hatasi",
+                "Giris/Yetki Hatasi",
+                "Baska",
+            ],
+        )
+        description = st.text_area(
+            "Aciklama",
+            placeholder="Hata ne zaman, hangi sayfada, hangi islemlerde olustu? Ekran goruntusu varsa tarif edin...",
+            height=100,
+        )
+        submitted = st.form_submit_button("📤 Raporu Gonder", type="primary")
+
+        if submitted:
+            if not reporter.strip() or not description.strip():
+                st.error("Ad soyad ve aciklama zorunludur.")
+            else:
+                from company_master.logging.error_logger import log_error_simple
+                log_error_simple(
+                    error_type=report_error_type,
+                    message=description,
+                    context={
+                        "reporter": reporter,
+                        "email": reporter_email,
+                        "user_agent": "streamlit",
+                    },
+                    source="user_report",
+                    level="WARNING",
+                )
+                st.success("✅ Hata raporu alindi! Tesekkur ederiz.")
+                st.balloons()
+
+
+if __name__ == "__main__":
+    # Manuel test
+    import tempfile
+
+    # Test icin gecici log dosyasi olustur
+    from company_master.logging.error_logger import ERROR_LOG_FILE, log_error
+    try:
+        raise ValueError("Test hatasi 1")
+    except Exception as e:
+        log_error(e, source="manual_test")
+
+    try:
+        raise ConnectionError("Test baglanti hatasi")
+    except Exception as e:
+        log_error(e, source="fastapi")
+
+    print("Test loglari yazildi:", ERROR_LOG_FILE)

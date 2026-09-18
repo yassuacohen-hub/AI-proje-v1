@@ -40,8 +40,6 @@ PAKET = "web_dashboard.tabs"
 # Buraya bir sey eklemek "bu fonksiyon bilerek navigasyon disinda" demektir.
 # Gerekce zorunlu: ileride okuyan kisi neden muaf oldugunu bilmeli.
 MUAF: dict[str, str] = {
-    # Sekme degil, hata durumunda cagrilan yardimci ekran.
-    "render_error_page": "Sekme degil; hata durumunda cagrilan yardimci gorunum.",
     # NAV-IA-04: admin/kimlik/yonetim sekmeleri sidebar'dan cikmisti.
     # render_yonetim_tab ve render_api_management admin panel icin kaliyor
     # ama navigasyon yolu olmadan erisilemez; admin_yonetim.py icinden

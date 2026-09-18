@@ -373,8 +373,8 @@ def _hesap_karti_popover() -> None:
     Misafir: Giriş yap (AUTH-GATE-01 modalını tetikler).
     """
     from web_dashboard.tabs.admin_auth import (
+        admin_cikis,
         get_admin_token,
-        render_admin_cikis,
         render_admin_login,
         render_sifre_degistir,
     )
@@ -391,7 +391,7 @@ def _hesap_karti_popover() -> None:
                     render_sifre_degistir()
             with col2:
                 if st.button("Çıkış", key="pop_cikis"):
-                    render_admin_cikis()
+                    admin_cikis()
                     st.rerun()
         else:
             if st.button("Giriş Yap", key="pop_giris"):
@@ -649,11 +649,18 @@ def render_icerik(tanim: TabTanimi) -> None:
 
     try:
         fn()
-    except Exception as exc:  # hata sınırı: navigasyon ayakta kalsın
-        st.error(f"❌ **{tanim.baslik}** çizilirken hata oluştu: {exc}")
-        with st.expander("Teknik ayrıntı"):
+    except Exception as exc:  # hata siniri: navigasyon ayakta kalsin
+        # Merkezi hata loglamasi
+        try:
+            from company_master.logging.error_logger import log_error
+            log_error(exc, context={"tab": tanim.baslik, "modul": tanim.modul}, source="streamlit_tab")
+        except Exception:
+            pass  # loglama hatasi uygulamayi cokertmesin
+
+        st.error(f"❌ **{tanim.baslik}** cizilirken hata olustu: {exc}")
+        with st.expander("Teknik ayrinti"):
             st.code(traceback.format_exc(), language="text")
-        st.caption("Diğer bölümler çalışmaya devam ediyor; sol menüden geçiş yapabilirsiniz.")
+        st.caption("Diger bolumler calismaya devam ediyor; sol menuden gecis yapabilirsiniz.")
 
 
 def render_footer(tanim: TabTanimi) -> None:
