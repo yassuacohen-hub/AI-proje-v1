@@ -1,7 +1,22 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-18T18:13:03
+> Son guncelleme: 2026-09-18T20:32:00
 > Kaynak: data/orchestrator/task_board.json
+
+## UX-MENU-03 Teslim (2026-09-18T20:30) 🟢
+
+| Olcut | Once | Sonra | Fark |
+|-------|------|-------|------|
+| Ust sayfa | 6 | 6 | — |
+| Alt sekme (menude) | 24 | 16 | −8 (%33) |
+| Menusuz sayfa (URL yasiyor) | 0 | 8 | +8 |
+| En kalabalik grup | 8 | 5 | −3 (%38) |
+
+- 🟢 Dashboard Overview: 5 gercek aksiyon butonu + 4 giris karti (sus buton yok).
+- 🟢 15 yeni test; tam suit **3889 passed / 0 failed**; kodlama denetimi temiz.
+- 🟢 Push `a19151a` (8 dosya, +385/−63). Streamlit yeniden baslatildi (PID 14652).
+- 🟡 `tests/test_mcp_transport.py` haric tutuldu — `mcp` paketi ortamda kurulu degil (onceden var olan eksiklik, bu degisiklikle ilgisiz). Kurulum takip listesinde.
+- 🔵 Rapor: `data/orchestrator/UX-MENU-03_rapor_2026-09-18_orkestrator.md`
 
 ## KAHİN Onayı Özeti (2026-09-18T15:13)
 
@@ -50,6 +65,7 @@ Yeni öncelik sırası `task_board.json` başında, `AGENT_SYNC.md` senkronize o
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
+| UX-MENU-03 | Menu agaci sadelestirme + Overview aksiyon seridi | roo | 2026-09-18 |
 | ADMIN-ROO-DENETIM-01 | Admin panel gece zinciri teslimlerini in | roo | 2026-09-18 |
 | ADMIN-HITAP-01 | D-49 uygulama: sahip -> KAHIN (Urun Sahi | roo | 2026-09-18 |
 | ADMIN-KOK-TEMIZLIK-01 | Kok dizindeki 3 gecici script sil + .git | roo | 2026-09-18 |

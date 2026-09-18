@@ -4625,5 +4625,28 @@
     "source": "ic",
     "from_agent": null,
     "not_": "182-187 silindi; 4 regresyon testi eklendi; kodlama_denetim temiz"
+  },
+  {
+    "task_id": "UX-MENU-03",
+    "id": "UX-MENU-03",
+    "baslik": "Menu agaci sadelestirme (E1-E5) + Dashboard Overview aksiyon seridi",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-18T17:00:00",
+    "bitis": "2026-09-18T17:30:00",
+    "dosyalar": [
+      "web_dashboard/tabs/__init__.py",
+      "web_dashboard/tabs/ana_kontrol.py",
+      "docs/UX_MENU_AGACI_WIREFRAME_2026-09-18.md",
+      "tests/test_tabs_ia.py",
+      "tests/test_ana_kontrol_overview.py",
+      "tests/test_dashboard_nav.py",
+      "tests/test_sayfa_iskeleti.py",
+      "scripts/onayla_ve_sirala.py"
+    ],
+    "not": "Teslim: menu 24->16 alt sekme (%33 azalma), en kalabalik grup 8->5. Overview'a 5 gercek aksiyon butonu + 4 giris karti. 15 yeni test. Tam suit 3889 passed / 0 failed. Push a19151a. Rapor: data/orchestrator/UX-MENU-03_rapor_2026-09-18_orkestrator.md. Bilinen istisna: tests/test_mcp_transport.py haric (mcp paketi kurulu degil, onceden var olan eksiklik).",
+    "source": "ic",
+    "from_agent": null
   }
 ]
