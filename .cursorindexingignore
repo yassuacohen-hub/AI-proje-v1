@@ -63,3 +63,59 @@ data/watch/
 AI proje v1/06_arsiv/
 AI proje v1/**/*.canvas
 AI proje v1/**/*.base
+
+# ---------------------------------------------------------------------------
+# PERF-02 (2026-09-18): Python/IDE indeksleme eklentileri
+# Amac: LLM context token israfini kesmek; yukaridaki kurallar korundu.
+# ---------------------------------------------------------------------------
+
+# Virtual Environments
+env/
+ENV/
+.venv*/
+
+# Python Cache & Build
+**/*.pyc
+**/*.pyo
+**/*.pyd
+*.egg-info/
+.eggs/
+.pytype/
+
+# Test & Type Checking
+.tox/
+.nox/
+.coverage
+.coverage.*
+htmlcov/
+.hypothesis/
+.benchmarks/
+
+# IDE & Editor Artifacts
+.history/
+.cursor/
+.idea/
+.vscode/
+**/*.swp
+**/.DS_Store
+**/Thumbs.db
+
+# Data Science / ML Artifacts
+.ipynb_checkpoints/
+.chroma/
+chroma_db/
+mlruns/
+wandb/
+**/*.ckpt
+**/*.pt
+**/*.pth
+**/*.onnx
+**/*.h5
+**/*.npy
+**/*.npz
+**/*.pkl
+**/*.joblib
+
+# Diger ajan alanlari (ek)
+.roo/
+.kombai/
