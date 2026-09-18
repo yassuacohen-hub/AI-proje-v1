@@ -81,7 +81,7 @@ def yapilandirma_uret(sablon: dict, env: dict[str, str]) -> tuple[dict, list[str
     cfg["models"] = modeller
 
     tab = cfg.get("tabAutocompleteModel")
-    if isinstance(tab, dict) and not tab.get("apiKey"):
+    if isinstance(tab, dict) and not tab.get("apiKey") and tab.get("provider") != "ollama":
         cfg.pop("tabAutocompleteModel")
         atlanan.append("tabAutocompleteModel -> anahtar bos")
     return cfg, atlanan
@@ -216,6 +216,10 @@ def dogrula(cfg: dict) -> int:
         temel = model.get("apiBase", "")
         anahtar = model.get("apiKey", "")
         slug = model.get("model", "")
+        if model.get("provider") == "ollama":
+            # Ollama OpenAI uyumlu uc /v1 altinda; Continue bunu kendi ekler, biz elle ekliyoruz.
+            temel = temel.rstrip("/") + "/v1"
+            anahtar = anahtar or "ollama"  # sunucu anahtar istemez, bos Authorization basligi olmasin
         if model.get("provider") == "anthropic":
             etiket, aciklama = anthropic_testi(anahtar, slug)
         else:

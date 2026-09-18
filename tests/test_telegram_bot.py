@@ -291,6 +291,49 @@ def test_is_authorized_string_vs_int(monkeypatch):
     assert is_authorized(123) is True
 
 
+def test_is_authorized_allowed_chat_ids_list(monkeypatch):
+    """TELEGRAM_ALLOWED_CHAT_IDS virgul listesi ek izin verir."""
+    monkeypatch.setenv("TELEGRAM_CHAT_ID", "999")
+    monkeypatch.setenv("TELEGRAM_ALLOWED_CHAT_IDS", "111,222,333")
+    assert is_authorized("999") is True
+    assert is_authorized("111") is True
+    assert is_authorized("222") is True
+    assert is_authorized("333") is True
+    assert is_authorized("444") is False
+
+
+def test_is_authorized_allowed_chat_ids_whitespace(monkeypatch):
+    """Bos ve whitespace ogeler yoksayilir."""
+    monkeypatch.setenv("TELEGRAM_CHAT_ID", "999")
+    monkeypatch.setenv("TELEGRAM_ALLOWED_CHAT_IDS", " , 111 ,, 222 , ")
+    assert is_authorized("111") is True
+    assert is_authorized("222") is True
+    assert is_authorized("333") is False
+
+
+def test_is_authorized_allowed_chat_ids_dedup(monkeypatch):
+    """TELEGRAM_CHAT_ID tekrar eklenmez."""
+    monkeypatch.setenv("TELEGRAM_CHAT_ID", "999")
+    monkeypatch.setenv("TELEGRAM_ALLOWED_CHAT_IDS", "999,111")
+    assert is_authorized("999") is True
+    assert is_authorized("111") is True
+
+
+def test_is_authorized_no_env_no_list(monkeypatch):
+    """Ne TELEGRAM_CHAT_ID ne liste varsa yetkisiz."""
+    monkeypatch.delenv("TELEGRAM_CHAT_ID", raising=False)
+    monkeypatch.delenv("TELEGRAM_ALLOWED_CHAT_IDS", raising=False)
+    assert is_authorized("999") is False
+
+
+def test_is_authorized_only_list_no_primary(monkeypatch):
+    """TELEGRAM_CHAT_ID yok ama liste varsa listeden izin verir."""
+    monkeypatch.delenv("TELEGRAM_CHAT_ID", raising=False)
+    monkeypatch.setenv("TELEGRAM_ALLOWED_CHAT_IDS", "111,222")
+    assert is_authorized("111") is True
+    assert is_authorized("999") is False
+
+
 # ---------------------------------------------------------------------------
 # get_updates tests
 # ---------------------------------------------------------------------------

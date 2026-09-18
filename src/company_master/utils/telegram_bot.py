@@ -234,20 +234,46 @@ def parse_command(text: str, bot_username: str | None = None) -> dict[str, Any] 
     }
 
 
-def is_authorized(chat_id: str | int | None, allowed_chat_id: str | None = None) -> bool:
-    """Chat ID'yi yetkili chat ID'ye karsilastirir.
+def _get_allowed_chat_ids() -> list[str]:
+    '''Yetkili chat ID'lerini dondurur ("TELEGRAM_CHAT_ID" + "TELEGRAM_ALLOWED_CHAT_IDS").'''
+    _load_env()
+    ids: list[str] = []
+    primary = os.environ.get("TELEGRAM_CHAT_ID")
+    if primary:
+        ids.append(str(primary).strip())
+    extra = os.environ.get("TELEGRAM_ALLOWED_CHAT_IDS", "")
+    if extra:
+        for part in extra.split(","):
+            part = part.strip()
+            if part and part not in ids:
+                ids.append(part)
+    return ids
 
-    allowed_chat_id verilmezse env'den TELEGRAM_CHAT_ID okunur.
-    """
+def is_authorized(chat_id: str | int | None, allowed_chat_id: str | None = None) -> bool:
+    '''Chat ID'yi yetkili chat ID'lerine karsilastirir.
+
+    Once TELEGRAM_CHAT_ID kesin yetki olarak kabul edilir.
+    TELEGRAM_ALLOWED_CHAT_IDS (virgulle ayri) varsa ek yetkili listesi saglar.
+    Bos/whitespace ogeler yoksayilir.
+
+    allowed_chat_id parametresi verilirse sadece o ID ile karsilastirilir.
+    '''
     if chat_id is None:
         return False
-    target = allowed_chat_id or _get_chat_id()
-    if not target:
-        return False
     try:
-        return str(chat_id).strip() == str(target).strip()
+        cid = str(chat_id).strip()
     except (TypeError, ValueError):
         return False
+    if not cid:
+        return False
+
+    if allowed_chat_id is not None:
+        return cid == str(allowed_chat_id).strip()
+
+    allowed = _get_allowed_chat_ids()
+    if not allowed:
+        return False
+    return cid in allowed
 
 
 def send_task_started(task_name: str, agent: str) -> dict[str, Any]:

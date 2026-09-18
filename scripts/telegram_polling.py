@@ -90,8 +90,9 @@ COMMANDS_INFO = {
     "gorev": ("Task board'daki tum goeveleri listeler", ""),
     "gorev-ekle": ("Panoya gorev ekle (alias: /at)", ""),
     "at": ("Panoya gorev ekle (alias: /gorev-ekle)", ""),
-    "gorev-durum": ("Gorev durumunu guncelle (alias: /set_status)", ""),
-    "set_status": ("Gorev durumunu guncelle (alias: /gorev-durum)", ""),
+    "gorev-durum": ("Task board durumu guncelle: /gorev-durum <id> <durum>", ""),
+    "set_status": ("project_state.md not ekle: /set_status <mesaj>", ""),
+    "set_task_status": ("Task board durumu guncelle: /set_task_status <id> <durum>", ""),
     "rapor": ("KPI raporunu gosterir", ""),
     "wiki": ("OSTIM kalite raporunu gosterir", ""),
     "restart_etl": ("ETL pipeline'i yeniden baslatir", ""),
@@ -171,17 +172,107 @@ def read_done_count() -> int:
 
 
 def read_quality_score() -> str:
-    """Kalite skorunu kpi_raporu.md'den cikarir."""
-    text = read_kpi_report()
-    match = re.search(r"Ortalama Kalite Skoru:\s*([\d.]+)/100", text, re.IGNORECASE)
-    if match:
-        return match.group(1)
+    """Kalite skorunu kpi_raporu.md'den cikarir; yoksa ostim raporuna duser."""
+    for path in ("data/kpi_raporu.md", "data/ostim/kalite_raporu.md"):
+        text = _read_file(path)
+        match = re.search(r"Ortalama Kalite Skoru:\s*([\d.]+)/100", text, re.IGNORECASE)
+        if match:
+            return match.group(1)
     return "bilinmiyor"
+
+
+def count_lines(rel_path: str) -> int:
+    """Dosyadaki bos olmayan satir sayisini dondurur (yoksa 0)."""
+    path = ROOT / rel_path
+    if not path.exists():
+        return 0
+    try:
+        return sum(1 for line in path.read_text(encoding="utf-8").splitlines() if line.strip())
+    except Exception:
+        return 0
+
+
+def count_markdown(rel_dir: str) -> int:
+    """Dizin altindaki .md dosya sayisini dondurur (yoksa 0)."""
+    path = ROOT / rel_dir
+    if not path.exists():
+        return 0
+    try:
+        return sum(1 for _ in path.rglob("*.md"))
+    except Exception:
+        return 0
+
+
+# ---------------------------------------------------------------------------
+# Atomik project_state not ekleme
+# ---------------------------------------------------------------------------
+
+PROJECT_STATE_PATH = "AI proje v1/V10/project_state.md"
+
+
+def project_state_not_ekle(mesaj: str, tarih: str | None = None) -> dict[str, Any]:
+    """project_state.md altina tarihli notu atomik ekler.
+
+    Returns: {"ok": True/False, "error": "...", "dosya": "..."}
+    """
+    path = ROOT / PROJECT_STATE_PATH
+    if not path.exists():
+        return {"ok": False, "error": f"project_state.md bulunamadi: {PROJECT_STATE_PATH}"}
+
+    tarih = tarih or time.strftime("%Y-%m-%d")
+    entry = f"- [{tarih}] {mesaj.strip()}"
+    try:
+        content = path.read_text(encoding="utf-8")
+        marker = "### Eklenen Notlar"
+        if marker in content:
+            content = content.replace(marker, f"{marker}\n\n{entry}")
+        else:
+            content = content.rstrip() + f"\n\n{marker}\n\n{entry}\n"
+
+        # Atomik yaz (tmp + os.replace)
+        import os as _os
+
+        tmp = path.with_name(f".{path.name}.{_os.getpid()}.tmp")
+        tmp.write_text(content, encoding="utf-8")
+        _os.replace(tmp, path)
+        return {"ok": True, "dosya": str(path)}
+    except Exception as exc:
+        return {"ok": False, "error": str(exc)}
 
 
 # ---------------------------------------------------------------------------
 # Atomik set_status (task_board.json)
 # ---------------------------------------------------------------------------
+
+def _count_lines(rel_path: str) -> int:
+    """Dosyadaki bos olmayan satir sayisini dondurur; yoksa 0."""
+    path = ROOT / rel_path
+    try:
+        with open(path, "r", encoding="utf-8") as fh:
+            return sum(1 for line in fh if line.strip())
+    except (FileNotFoundError, OSError):
+        return 0
+
+
+def _count_markdown(rel_dir: str) -> int:
+    """Dizin altindaki .md dosyalarini sayar; yoksa 0."""
+    path = ROOT / rel_dir
+    try:
+        if not path.exists():
+            return 0
+        return len(list(path.rglob("*.md")))
+    except OSError:
+        return 0
+
+
+def read_project_state_title() -> str:
+    """project_state.md icindeki ilk H1 basligini dondurur."""
+    for line in read_project_state().split("\n"):
+        line = line.strip()
+        if line.startswith("#"):
+            return line.lstrip("#").strip()
+    return "bilinmiyor"
+
 
 def set_task_status(task_id: str, durum: str) -> dict[str, Any]:
     """Task board'da bir gorevin durumunu atomik olarak gunceller.
@@ -259,56 +350,66 @@ def restart_etl(cmd: str | list[str] | None = None) -> dict[str, Any]:
 def cmd_start(text: str) -> str:
     """/start komutu."""
     return (
-        "<b>Ankara B2B Intelligence Bot</b>\n\n"
-        "Hosgeldiniz! Komutlari gormek icin <code>/help</code> veya "
-        "<code>/menu</code> yazin.\n\n"
-        "Kategoriler:\n"
-        "<code>/gorev*</code> Görev yönetimi\n"
-        "<code>/onay* /teslim*</code> Onay ve inceleme\n"
-        "<code>/durum /rapor /wiki /gunluk /izleme*</code> Durum ve raporlama\n"
-        "<code>/nobet*</code> Nöbetçi\n"
-        "<code>/help /menu /start</code> Yardım"
+        "<b>🤖 Ankara B2B Intelligence Bot</b>\n\n"
+        "Hoş geldiniz! Komutlar mavi görünür, dokunarak seçebilirsiniz.\n\n"
+        "<b>Başlangıç:</b>\n"
+        "/start — Botu başlat\n\n"
+        "/help — Komut listesi\n\n"
+        "/menu — Ana menü"
     )
 
 
 def cmd_help(text: str) -> str:
-    """/help komutu — kategorize komut listesi ve örnekler."""
+    """/help komutu — sade ve seçilebilir komut listesi.
+
+    Komutlar HTML code etiketi içine alınmaz; böylece Telegram onları
+    mavi, dokunulabilir bot_command olarak render eder. Her komut
+    altında bir boş satır bırakılır (karışıklık önlenir).
+    """
     lines = [
-        "<b>KOMUTLAR</b>\n",
-        "<b>GÖREV YÖNETİMİ</b>",
-        "<code>/gorev-ekle</code> (alias <code>/at</code>) — Panoya görev ekle ve tetik at",
-        "   <i>Kullanım: /gorev-ekle &lt;task_id&gt; &lt;ajan&gt; &lt;baslik&gt;</i>",
-        "<code>/gorev</code> — Tüm görevleri duruma göre listele",
-        "<code>/gorev-durum</code> (alias <code>/set_status</code>) — Görev durumunu güncelle",
-        "   <i>Kullanım: /gorev-durum &lt;task_id&gt; &lt;durum&gt;</i>",
+        "<b>📖 Yardım — Komut Listesi</b>\n",
+        "<b>Görev Yönetimi</b>",
+        "/gorev — Tüm görevleri duruma göre listeler",
         "",
-        "<b>ONAY &amp; İNCELEME</b>",
-        "<code>/onaylar</code> — Onay bekleyen teslimleri listeler",
-        "<code>/onayla</code> — Görevi onayla (done)",
-        "   <i>Kullanım: /onayla &lt;task_id&gt;</i>",
-        "<code>/reddet</code> — Görevi reddet (aktife geri dönder)",
-        "   <i>Kullanım: /reddet &lt;task_id&gt; &lt;neden&gt;</i>",
-        "<code>/teslim</code> — Görevi incelemeye gönder",
-        "   <i>Kullanım: /teslim &lt;task_id&gt; &lt;ozet&gt;</i>",
+        "/gorev-ekle — Panoya görev ekler (alias: /at)",
         "",
-        "<b>DURUM &amp; RAPORLAMA</b>",
-        "<code>/durum</code> (alias <code>/status</code>) — Proje durumu + aktif görevler",
-        "<code>/pano</code> — Bekleyen tetik ve onay özeti",
-        "<code>/rapor</code> — KPI raporu",
-        "<code>/wiki</code> — OSTİM kalite raporu",
-        "<code>/gunluk</code> — Günlük özet",
-        "<code>/izleme</code> — Kalite + proje izleme",
-        "<code>/degisiklik</code> — CHANGELOG.md",
+        "/gorev-durum — Görev durumunu günceller (alias: /set_status)",
         "",
-        "<b>NÖBETÇİ</b>",
-        "<code>/nobet</code> — Nöbetçi turu attırır",
-        "<code>/nobet-ayar</code> (alias <code>/nobet_ayar</code>) — Alarm süresini güncelle",
-        "   <i>Kullanım: /nobet-ayar &lt;kademe_sn&gt;</i>",
+        "<b>Onay ve İnceleme</b>",
+        "/onaylar — Onay bekleyen teslimleri listeler",
         "",
-        "<b>YARDIM</b>",
-        "<code>/menu</code> — Etkileşimli komut menüsü",
-        "<code>/help</code> — Bu yardım metni",
-        "<code>/start</code> — Başlangıç",
+        "/onayla — Görevi onaylar",
+        "",
+        "/reddet — Görevi reddeder",
+        "",
+        "/teslim — Görevi incelemeye gönderir",
+        "",
+        "<b>Durum ve Rapor</b>",
+        "/durum — Proje durumu (alias: /status)",
+        "",
+        "/pano — Tetik ve onay özeti",
+        "",
+        "/rapor — KPI raporu",
+        "",
+        "/wiki — Wiki sayfaları",
+        "",
+        "/gunluk — Günlük özet",
+        "",
+        "/izleme — Kalite ve proje izleme",
+        "",
+        "/degisiklik — Değişiklik bildirimi",
+        "",
+        "<b>Nöbetçi</b>",
+        "/nobet — Nöbetçi turu atar",
+        "",
+        "/nobet-ayar — Alarm süresini günceller (alias: /nobet_ayar)",
+        "",
+        "<b>Yardım</b>",
+        "/menu — Ana menü",
+        "",
+        "/start — Başlangıç",
+        "",
+        "/help — Bu liste",
         "",
         "<i>Yetkili komutlar: /gorev-durum, /onayla, /reddet, /teslim, /nobet-ayar</i>",
     ]
@@ -318,14 +419,16 @@ def cmd_help(text: str) -> str:
 def cmd_menu(text: str) -> str:
     """/menu komutu — etkileşimli ana menü."""
     lines = [
-        "<b>📋 ANA MENÜ</b>\n",
-        "1. <b>Görev yönetimi</b> — /gorev, /gorev-ekle, /gorev-durum",
-        "2. <b>Onay &amp; inceleme</b> — /onaylar, /onayla, /reddet, /teslim",
-        "3. <b>Durum &amp; raporlama</b> — /durum, /pano, /rapor, /wiki, /gunluk",
-        "4. <b>Nöbetçi</b> — /nobet, /nobet-ayar",
-        "5. <b>Yardım</b> — /help, /menu, /start",
-        "",
-        "Bir komut yazin veya <code>/help</code> ile detayları görüntüleyin.",
+        "<b>📋 Ana Menü</b>\n",
+        "1. /gorev — Görevler\n\n"
+        "2. /gorev-ekle — Görev ekle\n\n"
+        "3. /gorev-durum — Durum güncelle\n\n"
+        "4. /onaylar — Onay bekleyenler\n\n"
+        "5. /durum — Proje durumu\n\n"
+        "6. /rapor — KPI raporu\n\n"
+        "7. /wiki — Wiki sayfaları\n\n"
+        "8. /nobet — Nöbetçi\n\n"
+        "9. /help — Komut listesi",
     ]
     return "\n".join(lines)
 
@@ -335,8 +438,14 @@ def cmd_status(text: str) -> str:
     active = read_active_tasks()
     done = read_done_count()
     quality = read_quality_score()
+    title = read_project_state_title()
+    jsonl_count = _count_lines("data/ostim/firmalar_sayfa1.jsonl")
+    md_count = _count_markdown("AI proje v1/V10")
 
-    lines = ["<b>PROJE DURUMU</b>\n"]
+    lines = ["<b>PROJE DURUMU</b>"]
+    lines.append(f"<b>Proje:</b> {html_escape(title)}")
+    lines.append(f"OSTIM kaydi: <b>{jsonl_count:,}</b> satir")
+    lines.append(f"V10 wiki: <b>{md_count}</b> adet .md")
     lines.append(f"Toplam gorev: {len(read_task_board())}")
     lines.append(f"Aktif gorev: <b>{len(active)}</b>")
     lines.append(f"Tamamlandi: <b>{done}</b>")
@@ -388,17 +497,45 @@ def cmd_gorev(text: str) -> str:
 
 
 def cmd_rapor(text: str) -> str:
-    """/rapor komutu — KPI raporu."""
-    content = read_kpi_report()
+    """/rapor komutu — KPI raporu; bulunamazsa kalite raporu fallback."""
+    kpi_path = ROOT / "data/kpi_raporu.md"
+    quality_path = ROOT / "data/ostim/kalite_raporu.md"
+    if kpi_path.exists():
+        content = read_kpi_report()
+    elif quality_path.exists():
+        content = read_quality_report()
+    else:
+        content = "<b>KPI veya kalite raporu bulunamadi.</b>"
     truncated = content[:2000] if len(content) > 2000 else content
     return f"<pre>{html_escape(truncated)}</pre>"
 
 
 def cmd_wiki(text: str) -> str:
-    """/wiki komutu — OSTİM kalite raporu."""
-    content = read_quality_report()
-    truncated = content[:2000] if len(content) > 2000 else content
-    return f"<pre>{html_escape(truncated)}</pre>"
+    """/wiki komutu — V10 wiki sayfalarini canonical relative path + aciklama listeler."""
+    v10_root = ROOT / "AI proje v1/V10"
+    if not v10_root.exists():
+        return "<b>V10 wiki dizini bulunamadi.</b>"
+    known = {
+        "00-Home.md": "Ana sayfa / yonlendirme",
+        "TODO.md": "Plan ve hedefler",
+        "project_state.md": "Proje durumu",
+        "10_ankara_osb_sentez.md": "Ankara OSB sentez raporu",
+        "01_kalite_skoru_ek_metrikleri.md": "Kalite metrikleri",
+        "11_osint_motoru/OSINT_Scraper_Motoru.md": "OSINT motoru",
+        "09_kurallar_ve_promptlar/09_telegram_bot_rehberi.md": "Telegram bot rehberi",
+    }
+    lines = ["<b>V10 WIKI SAYFALARI</b>"]
+    for rel, desc in known.items():
+        marker = "[x]" if (v10_root / rel).exists() else "[ ]"
+        lines.append(f"{marker} <code>{html_escape(rel)}</code> — {html_escape(desc)}")
+    extra = sorted(p.relative_to(v10_root).as_posix() for p in v10_root.rglob("*.md"))
+    others = [r for r in extra if r not in known]
+    if others:
+        lines.append("\n<b>Diger sayfalar:</b>")
+        for rel in others[:20]:
+            lines.append(f"  <code>{html_escape(rel)}</code>")
+    lines.append(f"\n<i>{time.strftime('%H:%M:%S')}</i>")
+    return "\n".join(lines)
 
 
 def cmd_degisiklik(text: str) -> str:
@@ -473,34 +610,55 @@ def cmd_restart_etl(text: str) -> str:
 
 
 def cmd_set_status(text: str, args: list[str]) -> str:
-    """/gorev-durum (alias /set_status) — gorev durumunu guncelle (yetkili)."""
+    """/set_status <mesaj> — project_state.md icinde ### Eklenen Notlar altina tarihli not ekler (yetkili)."""
+    if not args:
+        return "<b>Kullanim:</b> <code>/set_status &lt;mesaj&gt;</code>"
+    msg = " ".join(args).strip()
+    msg = msg[:500]
+    if not msg:
+        return "<b>Mesaj bos.</b>"
+    state_path = ROOT / "AI proje v1" / "V10" / "project_state.md"
+    if not state_path.exists():
+        current = "\n# Proje Durumu\n\n## Genel Bakis\n\n### Eklenen Notlar\n"
+    else:
+        current = state_path.read_text(encoding="utf-8")
+    date_str = time.strftime("%Y-%m-%d")
+    note = f"- [{date_str}] {msg}"
+    marker = "### Eklenen Notlar"
+    if marker in current:
+        idx = current.find(marker)
+        line_end = current.find("\n", idx)
+        insert_at = line_end + 1 if line_end >= 0 else len(current)
+        new_content = current[:insert_at] + "\n" + note + current[insert_at:]
+    else:
+        new_content = current.rstrip() + "\n\n" + marker + "\n" + note + "\n"
+    tmp_path = state_path.with_suffix(".md.tmp")
+    tmp_path.write_text(new_content, encoding="utf-8")
+    import os as _os
+    _os.replace(str(tmp_path), str(state_path))
+    return f"<b>Not eklendi</b>\n<code>{html_escape(note)}</code>\n<i>{time.strftime('%H:%M:%S')}</i>"
+
+
+def cmd_set_task_status(text: str, args: list[str]) -> str:
+    """/set_task_status <id> <durum> — task board durumunu gunceller (yetkili)."""
     if len(args) < 2:
         return (
-            "<b>Kullanim:</b> <code>/gorev-durum &lt;task_id&gt; &lt;durum&gt;</code>\n"
-            "<i>Ornek: /gorev-durum TASK-01 review</i>\n"
+            "<b>Kullanim:</b> <code>/set_task_status &lt;task_id&gt; &lt;durum&gt;</code>\n"
             "<i>Gecerli durumlar: plan, aktif, review, done, blocked</i>"
         )
     task_id = args[0]
     durum = args[1].lower()
-
     result = set_task_status(task_id, durum)
     if result["ok"]:
         t = result["task"]
-        msg = (
+        return (
             "<b>Gorev durumu guncellendi</b>\n"
             f"<code>{html_escape(t.get('task_id', '?'))}</code> → "
             f"<b>{html_escape(t.get('durum', ''))}</b>\n"
-            f"<i>{html_escape(t.get('baslik', '')[:60])}</i>\n"
-            f"<i>{time.strftime('%H:%M:%S')}</i>"
+            f"<i>{html_escape(t.get('baslik', '')[:60])}</i>"
         )
-    else:
-        msg = f"<b>Guncelleme basarisiz:</b> {html_escape(result.get('error', 'bilinmiyor'))}"
-    return msg
+    return f"<b>Guncelleme basarisiz:</b> {html_escape(result.get('error', 'bilinmiyor'))}"
 
-
-# ---------------------------------------------------------------------------
-# Yeni orkestrator komutlari
-# ---------------------------------------------------------------------------
 
 def cmd_at(text: str, args: list[str]) -> str:
     """/at (alias /gorev-ekle) — panoya gorev ekle ve ajan postasina tetik at."""
@@ -721,7 +879,8 @@ COMMAND_HANDLERS: dict[str, Any] = {
     "gunluk": (cmd_gunluk, False, False),
     "izleme": (cmd_izleme, False, False),
     "set_status": (cmd_set_status, True, True),
-    "gorev-durum": (cmd_set_status, True, True),
+    "set_task_status": (cmd_set_task_status, True, True),
+    "gorev-durum": (cmd_set_task_status, True, True),
     "at": (cmd_at, True, True),
     "gorev-ekle": (cmd_at, True, True),
     "pano": (cmd_pano, True, False),
@@ -768,7 +927,7 @@ def handle_update(update: dict[str, Any]) -> Optional[str]:
     bot_username = _get_bot_username()
     parsed = parse_command(text, bot_username)
     if parsed is None:
-        return None
+        return "Komut degil. Yardim icin /help yazin."
 
     command = parsed["command"]
     args = parsed["args"]

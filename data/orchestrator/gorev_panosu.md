@@ -7,12 +7,10 @@
 
 | Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |
 |-------|--------|-------|---------|-------|----------|
+| TG-01 | Telegram Bot Gonderim ve Komut Aksini Duzelt | kilo | high | aktif | .env.example, docker-compose.yml, requirements-app.txt |
 | WK-01 | Career Pages Scraper — Enhanced Data Extraction | - | P1 | plan | - |
 | WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | plan | - |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | plan | - |
-| REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar) | cline | P2 | review | data/orchestrator/REV-UI-SIDEBAR-02_bulgular_2026-09-15_cline.md |
-| MARKA-REVIZE-01 | Marka kalip dosyalari ORTAK REVIZE (roo + cline) - ileri tarihli planlama | cline | P2 | review | - |
-| SEC-AUTH-01 | Auth uclari guvenlik duzeltmeleri (REV-BATCH-01 Y-1..Y-4, O-1, O-2, O-4, D-1, D-4) | cline | P1 | review | web_dashboard/tabs/__init__.py, tests/test_auth_gate.py, .gitignore |
 | GUARD-ENC-02 | kodlama_denetim genisletme (CRLF/bosluk/tab/EOF + fix) | kilo | P2 | blocked | scripts/kodlama_denetim.py, tests/test_kodlama_denetim.py, data/kodlama_allowlist.json |
 | SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH bulgular | kilo | P2 | blocked | scripts/sec_bandit.py, tests/test_sec_bandit.py, .bandit |
 | FMT-01 | ruff format/lint standardizasyonu (web_app/app/web_dashboard haric) | kilo | P2 | blocked | ruff.toml, .pre-commit-config.yaml |
@@ -21,8 +19,6 @@
 | ADMIN-KPI-KART-02 | Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi | kilo | P2 | plan | web_dashboard/tabs/webhook_monitor.py, web_dashboard/tabs/tenant_health_dashboard.py, tests/test_webhook_monitor_tab.py |
 | ADMIN-HATA-02 | Admin sekmelerinde 16 sessiz except:pass -> log/hata_kutusu + AST testi | kilo | P2 | plan | web_dashboard/tabs/admin_kpi.py, web_dashboard/tabs/admin_quality.py, web_dashboard/tabs/admin_performance.py |
 | RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arastirma | roo | P0 | aktif | - |
-| GIT-HIJYEN-01 | Satir sonu/dosya sonu hijyeni: kodlama_denetim.py --kapsam kod exit 0 olsun | kilo | P2 | review | data/orchestrator/GIT-HIJYEN-01_rapor_2026-09-17_kilo.md, .gitattributes, src/company_master/api/core/normalize.py |
-| ROO-CONFIG-01 | Roo Code IDE ucretsiz model yapilandirmasi ve fallback taslagi | kilo | P2 | review | docs/roo_config.json, docs/raporlar/roo_code/ucretsiz_modeller_2026-09-17.csv, docs/raporlar/roo_code/taslak_yapilandirma_2026-09-17.md |
 
 ## Tamamlananlar
 
@@ -70,7 +66,6 @@
 | P7-16 | Entegrasyon Test Kapsamını Genişletme - Vektör, Varlık Çözümlemesi ve DLQ/Yeniden Deneme Senaryoları | kilo | 2026-09-12T01:57:31 |
 | P7-17 | Performans ve Ölçeklenebilirlik Benchmark’i - Webhook alıcısı ve MCP sunucusunun yük altında davranışını ölçme | kilo | 2026-09-12T02:13:32 |
 | P7-18 | Observability: Distributed Tracing Entegrasyonu - OpenTelemetry entegrasyonu ile webhook alıcı, MCP sunucusu ve vektör servisleri arasındaki istekleri izleme | kilo | 2026-09-12T04:04:31 |
-| TG-01 | Telegram Bot Gonderim ve Komut Aksini Duzelt | kilo | 2026-09-13T19:05:45 |
 | P7-19 | P7-19: SSE Gerçek Zamanlı Bildirim Sistemi — Server-Sent Events ile canlı dashboard güncelleme | gelistirici | 2026-09-12T17:25:51 |
 | P7-20 | Admin Dashboard — Kullanıcı yönetimi, API key yönetimi, sistem durumu, webhook metrics UI | gelistirici | 2026-09-12T17:25:51 |
 | P7-21 | Performans Metrikleri Paneli — Response time, throughput, error rate grafikleri (Chart.js) | gelistirici | 2026-09-12T17:25:51 |
@@ -224,6 +219,7 @@
 | UI-TOPBAR-02 | Topbar: arama sag ust, breadcrumb ayrac, Bu sayfada ayiraci | kilo | 2026-09-15T23:16:21 |
 | REV-I18N-SES-02 | Capraz inceleme: I18N-SES-02 kilo teslimi (ses.json birlestirme) | cline | 2026-09-15T15:38:28 |
 | AUDIT-ENC-02 | Repo geneli kodlama denetimi (BOM/UTF-16/0-bayt/CRLF) + kodlama_denetim.py kapsam kontrolu | cline | 2026-09-15T15:38:28 |
+| REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar) | cline | 2026-09-18T03:45:37 |
 | MVP-KD-01 | MVP Karar Defteri ekrani: PageHeader + filtre + yeni karar formu | kilo | 2026-09-15T16:47:21 |
 | MVP-KUL-01 | MVP Kullanici Yonetimi ekrani: PageHeader + onayla + kredi formu | kilo | 2026-09-15T18:10:18 |
 | REV-MVP-KD-01 | Review: MVP-KD-01 Karar Defteri ekrani | cline | 2026-09-15T16:30:23 |
@@ -253,11 +249,13 @@
 | TOK-01 | Ajan kural dosyalarinda token sikistirma (12K->6K) | cline | 2026-09-16T21:58:45 |
 | REV-TOK-01 | TOK-01 dokuman sadelestirme incelemesi (cline teslimi) | roo | 2026-09-16T21:59:50 |
 | BRAND-KIMLIK-01 | Marka kimligi seti kuruldu - inceleme ve onay (brand.md + design-tokens.json + assets/LOGO.md) | roo | 2026-09-16T23:16:17 |
+| MARKA-REVIZE-01 | Marka kalip dosyalari ORTAK REVIZE (roo + cline) - ileri tarihli planlama | cline | 2026-09-18T03:45:36 |
 | ELESTIRI-01 | ROO_ELESTIRI_NOTLARI.md gozden gecirme + cline gezinti bulgulari | roo | 2026-09-16T23:16:17 |
 | REV-BATCH-01 | Capraz inceleme: BATCH-01 (AUTH-GATE-01+NAV-IA-01+NAV-IA-02, commit feea800) | cline | 2026-09-16T22:26:29 |
 | NAV-IA-04 | Sol-alt hesap karti popover + kimlik/yonetim kaldir | kilo | 2026-09-17T03:07:28 |
 | NAV-IA-03 | Proje Yonetimi sayfasi (5 alt sekme, Karar Defteri ustte) | kilo | 2026-09-16T22:26:29 |
 | DATA-LOG-01 | login_events + search_events tablolari, Giris Etkinligi/Aramalar gercek veri | kilo | 2026-09-17T03:07:28 |
+| SEC-AUTH-01 | Auth uclari guvenlik duzeltmeleri (REV-BATCH-01 Y-1..Y-4, O-1, O-2, O-4, D-1, D-4) | cline | 2026-09-18T03:45:37 |
 | ROO-GAP-NAV-IA04 | NAV-IA-04/AUTH-GATE-01 capsayı tutma — kontrol ve onay | roo | 2026-09-16T23:23:35 |
 | MARKA-REVIZE-01B | Marka revizyon kod katmani: test_i18n Huggin regex + config.toml primaryColor #6366f1 + scripts/marka_denetim.py | kilo | 2026-09-17T03:07:28 |
 | TEST-ISO-02 | Test izolasyonu: siraya bagimli testler (randomly + monkeypatch) | kilo | 2026-09-17T03:28:59 |
@@ -275,3 +273,5 @@
 | ADMIN-SEARCH-01 | admin_search.py admin sekme kalibina gecis (kpi_karti + hata_kutusu + test) | roo | 2026-09-17T07:29:31 |
 | ADMIN-REFRESH-FIX-01 | admin_auto_refresh: st.rerun oncesi ayar kaydi + sessiz except (roo) | roo | 2026-09-17T07:41:26 |
 | ADMIN-NAV-HAZIR-02 | Navigasyon/auth sessiz except temizligi (render_fonksiyonu + admin_auth) | roo | 2026-09-17T10:49:50 |
+| GIT-HIJYEN-01 | Satir sonu/dosya sonu hijyeni: kodlama_denetim.py --kapsam kod exit 0 olsun | kilo | 2026-09-18T03:45:36 |
+| ROO-CONFIG-01 | Roo Code IDE ucretsiz model yapilandirmasi ve fallback taslagi | kilo | 2026-09-18T03:45:37 |

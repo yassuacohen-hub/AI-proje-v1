@@ -1,18 +1,16 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-17T23:23:42
+> Son guncelleme: 2026-09-18T03:45:37
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
 
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
+| TG-01 | Telegram Bot Gonderim ve Komut Aksini Du | kilo | high | aktif |
 | WK-01 | Career Pages Scraper — Enhanced Data Ext | - | P1 | plan |
 | WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | plan |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | plan |
-| REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo tesl | cline | P2 | review |
-| MARKA-REVIZE-01 | Marka kalip dosyalari ORTAK REVIZE (roo  | cline | P2 | review |
-| SEC-AUTH-01 | Auth uclari guvenlik duzeltmeleri (REV-B | cline | P1 | review |
 | GUARD-ENC-02 | kodlama_denetim genisletme (CRLF/bosluk/ | kilo | P2 | blocked |
 | SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH b | kilo | P2 | blocked |
 | FMT-01 | ruff format/lint standardizasyonu (web_a | kilo | P2 | blocked |
@@ -21,15 +19,11 @@
 | ADMIN-KPI-KART-02 | Kalan st.metric -> kpi_karti (webhook_mo | kilo | P2 | plan |
 | ADMIN-HATA-02 | Admin sekmelerinde 16 sessiz except:pass | kilo | P2 | plan |
 | RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arasti | roo | P0 | aktif |
-| GIT-HIJYEN-01 | Satir sonu/dosya sonu hijyeni: kodlama_d | kilo | P2 | review |
-| ROO-CONFIG-01 | Roo Code IDE ucretsiz model yapilandirma | kilo | P2 | review |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| ADMIN-AYAR-01 | Admin ayar sekmesi: giris zorunlu + auto | kilo | 2026-09-17 |
-| UI-MIMARI-02 | Ana kontrol/musteri yonetimi temizligi:  | kilo | 2026-09-17 |
 | KPI-HIST-01 | GET /api/kpi/history + ana kontrol gerce | kilo | 2026-09-17 |
 | ADMIN-KPI-KART-01 | Admin sekmelerinde st.metric -> kpi_kart | kilo | 2026-09-17 |
 | ADMIN-ROO-01 | Admin sekmeleri hata/bos-durum standardi | roo | 2026-09-17 |
@@ -38,6 +32,8 @@
 | ADMIN-SEARCH-01 | admin_search.py admin sekme kalibina gec | roo | 2026-09-17 |
 | ADMIN-REFRESH-FIX-01 | admin_auto_refresh: st.rerun oncesi ayar | roo | 2026-09-17 |
 | ADMIN-NAV-HAZIR-02 | Navigasyon/auth sessiz except temizligi  | roo | 2026-09-17 |
+| GIT-HIJYEN-01 | Satir sonu/dosya sonu hijyeni: kodlama_d | kilo | 2026-09-18 |
+| ROO-CONFIG-01 | Roo Code IDE ucretsiz model yapilandirma | kilo | 2026-09-18 |
 
 ## Son Handoff'lar
 

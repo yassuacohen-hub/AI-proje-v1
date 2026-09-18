@@ -195,6 +195,25 @@ def test_is_authorized_mismatch(monkeypatch):
     assert telegram_polling.is_authorized("111") is False
 
 
+def test_is_authorized_allowed_list(monkeypatch):
+    """TELEGRAM_ALLOWED_CHAT_IDS virgul listesi ek izin verir."""
+    monkeypatch.setenv("TELEGRAM_CHAT_ID", "999")
+    monkeypatch.setenv("TELEGRAM_ALLOWED_CHAT_IDS", "111, 222, 333")
+    assert telegram_polling.is_authorized("999") is True
+    assert telegram_polling.is_authorized("111") is True
+    assert telegram_polling.is_authorized("222") is True
+    assert telegram_polling.is_authorized("333") is True
+    assert telegram_polling.is_authorized("444") is False
+
+
+def test_is_authorized_allowed_list_whitespace(monkeypatch):
+    """Whitespace iceren bos ogeler yoksayilir."""
+    monkeypatch.setenv("TELEGRAM_CHAT_ID", "999")
+    monkeypatch.setenv("TELEGRAM_ALLOWED_CHAT_IDS", " , 111 , ,, 222 , ")
+    assert telegram_polling.is_authorized("111") is True
+    assert telegram_polling.is_authorized("222") is True
+
+
 # ---------------------------------------------------------------------------
 # Command handler tests
 # ---------------------------------------------------------------------------
@@ -227,8 +246,20 @@ def test_cmd_status(_tmp_board):
         {"task_id": "T1", "durum": "aktif", "baslik": "Task 1", "sahip": "kilo"},
         {"task_id": "T2", "durum": "done", "baslik": "Task 2", "sahip": "kilo"},
     ])
+    # ornek dosyalari olustur
+    v10 = telegram_polling.ROOT / "AI proje v1" / "V10"
+    v10.mkdir(parents=True, exist_ok=True)
+    (v10 / "00-Home.md").write_text("# Home", encoding="utf-8")
+    (v10 / "project_state.md").write_text("# Proje Durumu Testi\n", encoding="utf-8")
+    jsonl = telegram_polling.ROOT / "data" / "ostim"
+    jsonl.mkdir(parents=True, exist_ok=True)
+    (jsonl / "firmalar_sayfa1.jsonl").write_text("line1\nline2\n", encoding="utf-8")
+
     result = telegram_polling.cmd_status("/status")
     assert "PROJE DURUMU" in result
+    assert "Proje Durumu Testi" in result
+    assert "satir" in result
+    assert ".md" in result
     assert "Aktif" in result
     assert "T1" in result
 
@@ -255,10 +286,22 @@ def test_cmd_rapor(_tmp_board):
     assert "KPI" in result
 
 
-def test_cmd_wiki(_tmp_board):
-    result = telegram_polling.cmd_wiki("/wiki")
+def test_cmd_rapor_fallback_to_quality(_tmp_board):
+    """KPI dosyasi yoksa kalite raporu fallback."""
+    kpi_path = telegram_polling.ROOT / "data" / "kpi_raporu.md"
+    kpi_path.unlink()
+    result = telegram_polling.cmd_rapor("/rapor")
     assert "<pre>" in result
     assert "Kalite" in result
+
+
+def test_cmd_wiki(_tmp_board):
+    result = telegram_polling.cmd_wiki("/wiki")
+    assert "V10 WIKI" in result
+    assert "00-Home.md" in result
+    assert "project_state.md" in result
+    assert "OSINT" in result
+    assert "kalite" not in result.lower() or "Kalite" not in result.replace("kalite", "")
 
 
 def test_cmd_degisiklik(_tmp_board):
@@ -286,7 +329,7 @@ def test_cmd_izleme(_tmp_board):
 # ---------------------------------------------------------------------------
 
 def test_restart_etl_success(monkeypatch):
-    """ETL restart subprocess ile calisir."""
+    """ETL restart subprocess ile calisir (shell kapali)."""
     monkeypatch.delenv("ETL_RESTART_CMD", raising=False)
     mock_proc = MagicMock()
     mock_proc.returncode = 0
@@ -297,6 +340,10 @@ def test_restart_etl_success(monkeypatch):
         assert result["returncode"] == 0
         call_kwargs = mock_popen.call_args.kwargs
         assert "cwd" in call_kwargs
+        assert "shell" not in call_kwargs or call_kwargs.get("shell") is not True
+        # argv listesi string degil
+        cmd_arg = mock_popen.call_args.args[0]
+        assert isinstance(cmd_arg, list)
 
 
 def test_restart_etl_failure(monkeypatch):
@@ -439,17 +486,49 @@ def test_handle_update_set_status_unauthorized():
     assert "Yetkisiz" in result or "yetkili" in result
 
 
-def test_handle_update_set_status_authorized(_tmp_board):
-    """Yetkili kullanici set_status kullanabilir."""
+def test_handle_update_set_status_adds_note(_tmp_board, monkeypatch):
+    """Yetkili /set_status project_state.md icinde Eklenen Notlar altina not ekler."""
+    from pathlib import Path as _P
+    v10 = telegram_polling.ROOT / "AI proje v1" / "V10"
+    v10.mkdir(parents=True, exist_ok=True)
+    state_path = v10 / "project_state.md"
+    state_path.write_text("# Proje\n\n### Eklenen Notlar\n", encoding="utf-8")
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        result = telegram_polling.handle_update(_make_update("/set_status test not mesaji"))
+    assert result is not None
+    assert "Not eklendi" in result
+    updated = state_path.read_text(encoding="utf-8")
+    assert "### Eklenen Notlar" in updated
+    assert "test not mesaji" in updated
+    assert "- [" in updated
+
+
+def test_handle_update_set_task_status_authorized(_tmp_board):
+    """Yetkili /set_task_status task board durumunu gunceller."""
     _write_board(_tmp_board, [
         {"task_id": "TG-01", "durum": "aktif", "baslik": "Test", "sahip": "kilo"},
     ])
     with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
-        result = telegram_polling.handle_update(
-            _make_update("/set_status TG-01 done")
-        )
-        assert result is not None
-        assert "guncellendi" in result.lower() or "Guncellendi" in result
+        result = telegram_polling.handle_update(_make_update("/set_task_status TG-01 done"))
+    assert result is not None
+    assert "guncellendi" in result.lower() or "Guncellendi" in result
+    board = json.loads(_tmp_board.read_text(encoding="utf-8"))
+    assert board[0]["durum"] == "done"
+
+
+def test_cmd_set_status_limit_500(_tmp_board, monkeypatch):
+    """/set_status mesaji 500 karakterle sinirlanir."""
+    v10 = telegram_polling.ROOT / "AI proje v1" / "V10"
+    v10.mkdir(parents=True, exist_ok=True)
+    state_path = v10 / "project_state.md"
+    state_path.write_text("# Proje\n", encoding="utf-8")
+    long_msg = "x" * 800
+    with patch.dict("os.environ", {"TELEGRAM_CHAT_ID": "999"}):
+        result = telegram_polling.handle_update(_make_update("/set_status " + long_msg))
+    assert "Not eklendi" in result
+    updated = state_path.read_text(encoding="utf-8")
+    assert "x" * 500 in updated
+    assert "x" * 501 not in updated
 
 
 def test_handle_update_restart_etl_unauthorized():
@@ -479,9 +558,10 @@ def test_handle_update_unknown_command():
 
 
 def test_handle_update_non_command():
-    """Genuz metin komut degildir."""
+    """Normal mesaj yardim yaniti dondurur."""
     result = telegram_polling.handle_update(_make_update("merhaba dunya"))
-    assert result is None
+    assert result is not None
+    assert "help" in result.lower() or "yardim" in result.lower()
 
 
 def test_handle_update_empty_text():
