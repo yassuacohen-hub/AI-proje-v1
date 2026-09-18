@@ -177,3 +177,94 @@
 | 🟡 | `Yenileme`/`Yükleme` sayfa değil ayar → Ayarlar sayfasına | 2 sekme |
 | 🟢 | Tüm bağlantı adresleri aynı kalıyor, hiçbir link kırılmıyor | %100 uyum |
 | 🔵 | Toplam menü kalabalığı 23 → 18 | %22 azalma |
+
+---
+
+## 7. Ek sadeleşme turu (TO-BE v2) — KAHİN sorusu 2026-09-18
+
+### 7.1 Kod sayımı (gerçek durum, `web_dashboard/tabs/__init__.py` SECTIONS)
+
+| Üst sayfa | Alt sekme sayısı | Sekmeler |
+|-----------|------------------|----------|
+| Ana Kontrol | 0 | — |
+| Müşteri Yönetimi | 4 | musteriler, kullanicilar, destek, export |
+| Müşteri Önizleme | 2 | paketler, pazarlama |
+| Proje Yönetimi | 5 | karar_defteri, abrakadabra, denetim, hatalar, dlq |
+| Veri & Kalite | 4 | kpi, kalite, arama, executive |
+| Sistem | **9** | teknik_altyapi, performans, api, webhook, maliyet, canli_veri, yenileme, ayarlar, yukleme |
+| **Toplam** | **24** | (wireframe §1'deki 23 sayımı 1 eksik) |
+
+### 7.2 Hedef metrik (kabul kriteri olarak sabitlenir)
+
+| Metrik | Hedef | Gerekçe |
+|--------|-------|---------|
+| Üst sayfa | **5** (maks 6) | Tek bakışta taranabilir; kaydırmasız sidebar |
+| Alt sekme / üst sayfa | **≤ 5** (maks 6) | Sekme şeridi taşmasın |
+| Toplam menü öğesi | **≤ 15** | 24 → 15 = %38 azalma |
+| Derinlik | 2 seviye | 3. seviye yalnız profil menüsünde |
+| Ölü sekme kuralı | 30 günde 0 açılış = kaldırılır | Menü kendi kendini budar |
+
+### 7.3 18'den 13'e — 5 ek birleştirme
+
+| # | Öneri | Kazanç | Gerekçe |
+|---|-------|--------|---------|
+| E1 | `arama` sekmesi kaldırılsın, global **Ctrl+K modal** olsun | −1 | Arama bir yer değil, bir eylem |
+| E2 | `yukleme` (loading demo) menüden çıksın, dev bayrağına bağlansın | −1 | Geliştirici demosu, ürün sayfası değil |
+| E3 | `kpi` + `executive` → tek **Metrikler** (rol'e göre içerik) | −1 | İkisi de aynı metrik yüzeyi |
+| E4 | `hatalar` + `dlq` + `webhook` → tek **Olaylar & Hatalar** | −2 | Üçü de "bir şey ters gitti" yüzeyi |
+| E5 | `teknik_altyapi` + `performans` → tek **Altyapı** | −1 | Harita + gecikme aynı hikâye |
+
+Sonuç: 18 → **13**. Başlangıca göre toplam **24 → 13 = %46 azalma**.
+
+### 7.4 TO-BE v2 ağacı
+
+```
+🏠 Ana Kontrol
+👥 Müşteriler        → Firmalar · Kullanıcılar · Destek · Dışa Aktarım        (4)
+💼 Gelir             → Paketler · Pazarlama                                    (2)
+📊 Metrikler         → Özet · Kalite                                           (2)
+🛠️ Sistem            → Altyapı · API · Olaylar & Hatalar · Maliyet · Canlı Veri (5)
+📋 Proje             → Karar Defteri · Denetim · Abrakadabra                   (3)
+```
+Üst sayfa 6 · alt sekme 16 → E1-E5 uygulanınca ölçüt içinde (üst 6 ≤ 6, her grup ≤ 5).
+
+**Not:** Üst sayfa 5'e inmesi için `Proje` → `Sistem` altına girebilir; ancak orkestratör
+yönetimi ayrı ürüne çıkma ihtimali (KAHİN notu) nedeniyle **ayrı üst sayfa kalması önerilir**.
+
+---
+
+## 8. Revizyon esnekliği — mevcut durum ve en kısa yol
+
+### 8.1 Tek kaynak var mı? 🟢 Evet
+
+`SECTIONS: tuple[TabTanimi, ...]` — `web_dashboard/tabs/__init__.py` satır 166-527.
+Tüm menü buradan üretilir: `ust_sayfalar()`, `alt_sekmeler()`, `gruplar()`, `bolum_ara()`,
+`tab_url_getir()`. Sidebar'da elle yazılmış menü yok.
+
+| Revizyon tipi | Dokunulan yer | Efor |
+|---------------|---------------|------|
+| İsim değişikliği | `baslik=t("menu_x")` → i18n sözlüğünde 1 satır | 🟢 1 dk |
+| Sıra değişikliği | `sira=` sayısı | 🟢 1 dk |
+| Sayfa taşıma (grup değişimi) | `ust=` alanı | 🟢 1 dk |
+| Yeni sayfa | 1 `TabTanimi` bloğu + render fonksiyonu | 🟡 render kadar |
+| Sayfa kaldırma | Kayıt silinir + `ESKI_URL` eşlemesi | 🟢 5 dk |
+| İkon / açıklama | Aynı blok | 🟢 1 dk |
+
+🟡 **Sınır:** `SECTIONS` bir Python listesi (JSON/YAML değil). KAHİN kendi başına
+düzenlemek isterse Python sözdizimi bilmesi gerekir. YAML'a taşıma önerilmiyor —
+kazanç düşük, kırılma riski yüksek (tip güvenliği ve `__post_init__` doğrulaması kaybolur).
+
+### 8.2 Ekran görüntüsündeki iki yetenek
+
+| Yetenek | Mevcut durum | Eksik olan | Tahmini diff |
+|---------|--------------|------------|--------------|
+| **Ctrl+K arama modalı** | 🟢 `bolum_ara(sorgu)` var (`app.py` 234-244), üst şeritte çalışıyor | `st.dialog` sarmalı + sonuçların `Recent` / `Pages` başlıklarıyla gruplanması | ~25 satır, yeni dosya yok |
+| **Çift seviyeli kullanıcı menüsü** | 🟢 `_hesap_karti_popover()` var (`app.py` 369-399) | Popover içinde 2. seviye açılır (`st.expander`) + Çıkış/Dil/Yasal maddeleri | ~20 satır |
+
+🔴 **Çelişki uyarısı:** §3 bilgi mimarisi kuralı "maks 2 seviye derinlik" diyor.
+Ekran görüntüsündeki `Legal center ›` alt menüsü 3. seviye. Öneri: kural
+**"menü ağacında 2 seviye; profil popover'ı istisna"** şeklinde güncellensin.
+
+🟡 **Streamlit sınırı:** Ctrl+K klavye kısayolu Streamlit'te yerleşik değil; `st.dialog`
+bir düğmeyle açılır. Gerçek Ctrl+K için küçük bir JS enjeksiyonu gerekir — MVP'de
+düğme + `/` kısayolu yeterli, kısayol Faz 2'ye bırakılabilir.
