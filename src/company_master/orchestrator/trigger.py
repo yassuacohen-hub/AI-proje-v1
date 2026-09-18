@@ -39,35 +39,40 @@ def _simdi() -> str:
 # ---- Ajan adı kuralı (D-33, 2026-09-16, Ürün Sahibi emri; D-59 ile merve eklendi) ----
 #
 # D-60 (KAHİN kararı 2026-09-18): kanonik adlar Türkçe isimlere geçti.
-#   ihsan (eski roo)   — orkestratör
-#   utku  (eski kilo)  — üretim/hacim
-#   salih (eski merve / continue) — QA/Release Governance
-#   cline — emekli olmak üzere; açık görevleri bitince listeden düşer.
+# Kural: araç adı = takma ad, Türkçe ad = kanonik ad.
+#   ihsan (roo)            — orkestratör
+#   utku  (kilo)           — üretim/hacim
+#   salih (merve/continue) — QA/Release Governance
+#   yasu  (cline/yasin)    — denetim/review
 # Eski adlar takma ad olarak korunur; pano ve tetik geçmişi bozulmasın diye
 # her yazım aynı postaya çözümlenir.
 
+AJANLAR: tuple[str, ...] = ("ihsan", "utku", "salih", "yasu")
+
 AJAN_TAKMA_ADLAR: dict[str, str] = {
-    # utku (eski kilo)
+    # utku (araç: kilo)
     "kilo": "utku",
     "kilocode": "utku",
     "kilo_code": "utku",
     "kilo-code": "utku",
-    # ihsan (eski roo)
+    # ihsan (araç: roo)
     "roo": "ihsan",
     "roocode": "ihsan",
     "roo_code": "ihsan",
     "roo-code": "ihsan",
     "roo_orkestrator": "ihsan",
     "orkestrator": "ihsan",
-    # salih (eski merve; Continue IDE)
+    # salih (araç: continue; eski merve)
     "merve": "salih",
     "continue": "salih",
     "continueide": "salih",
     "continue_ide": "salih",
     "continue-ide": "salih",
-    # cline (emekli olacak, ad değişmedi)
-    "clinebot": "cline",
-    "cline_code": "cline",
+    # yasu (araç: cline; KAHİN "yasin" de diyebilir)
+    "cline": "yasu",
+    "clinebot": "yasu",
+    "cline_code": "yasu",
+    "yasin": "yasu",
     "claudecode": "claude_code",
     "claude-code": "claude_code",
 }
@@ -83,7 +88,7 @@ def ajan_normalize(ad: str | None) -> str:
     """
     ham = (ad or "").strip()
     if not ham:
-        raise TriggerError("Ajan adı boş olamaz (kanonik adlar: ihsan, utku, salih, cline).")
+        raise TriggerError(f"Ajan adı boş olamaz (kanonik adlar: {', '.join(AJANLAR)}).")
     # Ajan adları ASCII'dir: Türkçe İ/ı ayrımı yapılmaz ("KILO" → "kilo").
     ad_l = ham.replace("İ", "i").replace("ı", "i").lower().lstrip("@").strip()
     for onek in ("ajan ", "agent ", "ajan_", "agent_", "ajan-", "agent-"):
@@ -97,6 +102,14 @@ def ajan_normalize(ad: str | None) -> str:
             break
     ad_l = "_".join(p for p in ad_l.replace("-", " ").replace("_", " ").split() if p)
     return AJAN_TAKMA_ADLAR.get(ad_l, AJAN_TAKMA_ADLAR.get(ad_l.replace("_", ""), ad_l))
+
+
+def ajan_goster(ad: str | None) -> str:
+    """D-61: ekrana/rapora yazılan ajan hitabı BÜYÜK HARF (Türkçe i→İ).
+
+    Kanonik ad küçük kalır (dosya adı, pano alanı); yalnız gösterim büyür.
+    """
+    return ajan_normalize(ad).replace("i", "İ").upper()
 
 
 # ---- Posta kutusu (tetikler) ----
@@ -284,7 +297,7 @@ def onay_bekleyenler(data_dir: Path | None = None) -> list[dict[str, Any]]:
         from src.company_master.orchestrator import duzen  # lokal: döngüsel risk yok
         ajanlar = duzen.AJANLAR
     except Exception:
-        ajanlar = ["ihsan", "utku", "salih", "cline"]
+        ajanlar = list(AJANLAR)
     for ajan in ajanlar:
         try:
             for k in _tetikleri_oku(ajan, data_dir):

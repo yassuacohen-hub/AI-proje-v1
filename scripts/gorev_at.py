@@ -42,8 +42,8 @@ def _ayristir_liste(deger: str | None) -> list[str]:
 # D-57: [ALAN] FIIL + NESNE -> CIKTI (SURE)
 ALANLAR = ("UI", "API", "VERI", "TEST", "DOC", "ALTYAPI", "ORKESTRA")
 FIILLER = ("yaz", "düzelt", "taşı", "sil", "denetle", "ölç", "belgele", "araştır")
-# D-60: kanonik adlar Turkce isimlere gecti. cline acik gorevleri bitince duser.
-AJANLAR = ("ihsan", "utku", "salih", "cline")
+# D-60: kanonik adlar Turkce; tek dogruluk kaynagi trigger.AJANLAR.
+AJANLAR = trigger.AJANLAR
 _BASLIK = re.compile(
     r"^\[(?P<alan>[A-ZĞÜŞİÖÇ]+)\]\s+(?P<fiil>\S+).*?→.+\((?P<sure>\d+[sd])\)$"
 )

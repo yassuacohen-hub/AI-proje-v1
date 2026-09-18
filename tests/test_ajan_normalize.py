@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
-"""D-60 ajan adı kuralı: kanonik adlar ihsan / utku / salih / cline.
+"""D-60 ajan adı kuralı: kanonik adlar ihsan / utku / salih / yasu.
 
-Eski adlar (kilo, roo, merve, continue, orkestrator) takma ad olarak korunur;
-"Ajan kilo", "KILO", "kilo_code" gibi yazımlar tek posta kutusuna
-(utku.jsonl / ihsan.jsonl / salih.jsonl / cline.jsonl) çözümlenir.
+Kural: araç adı = takma ad, Türkçe ad = kanonik ad.
+Eski/araç adları (kilo, roo, merve, continue, cline, yasin) takma ad olarak
+korunur; "Ajan kilo", "KILO", "kilo_code" gibi yazımlar tek posta kutusuna
+(utku.jsonl / ihsan.jsonl / salih.jsonl / yasu.jsonl) çözümlenir.
+
+D-61: ekrana yazılan hitap BÜYÜK HARF (`ajan_goster`).
 """
 from __future__ import annotations
 
 import pytest
 
 from company_master.orchestrator import trigger
-from company_master.orchestrator.trigger import TriggerError, ajan_normalize
+from company_master.orchestrator.trigger import TriggerError, ajan_goster, ajan_normalize
 
 
 @pytest.mark.parametrize(
@@ -30,11 +33,16 @@ from company_master.orchestrator.trigger import TriggerError, ajan_normalize
         ("kilocode", "utku"),
         ("@kilo", "utku"),
         ("  kilo  ", "utku"),
-        # cline (emekli olacak, ad değişmedi)
-        ("cline", "cline"),
-        ("ajancline", "cline"),
-        ("Ajan cline", "cline"),
-        ("clinebot", "cline"),
+        # yasu (araç: cline; KAHİN "yasin" de diyebilir)
+        ("yasu", "yasu"),
+        ("Yasu", "yasu"),
+        ("cline", "yasu"),
+        ("Cline", "yasu"),
+        ("ajancline", "yasu"),
+        ("Ajan cline", "yasu"),
+        ("clinebot", "yasu"),
+        ("yasin", "yasu"),
+        ("Yasin", "yasu"),
         # ihsan (eski roo)
         ("ihsan", "ihsan"),
         ("roo", "ihsan"),
@@ -66,6 +74,25 @@ def test_ajan_normalize_kanonik_ada_cevirir(ham: str, beklenen: str) -> None:
 def test_ajan_normalize_bos_ad_hata(ham) -> None:
     with pytest.raises(TriggerError):
         ajan_normalize(ham)
+
+
+@pytest.mark.parametrize(
+    ("ham", "beklenen"),
+    [
+        ("ihsan", "İHSAN"),
+        ("roo", "İHSAN"),
+        ("utku", "UTKU"),
+        ("kilo", "UTKU"),
+        ("salih", "SALİH"),
+        ("continue", "SALİH"),
+        ("yasu", "YASU"),
+        ("cline", "YASU"),
+        ("yasin", "YASU"),
+    ],
+)
+def test_ajan_goster_buyuk_harf(ham: str, beklenen: str) -> None:
+    """D-61: ekranda hitap BÜYÜK HARF, Türkçe i→İ."""
+    assert ajan_goster(ham) == beklenen
 
 
 def test_tetik_yolu_varyantlar_ayni_dosyaya_gider(tmp_path) -> None:

@@ -35,11 +35,9 @@ from __future__ import annotations
 from src.company_master.orchestrator import task_board as tb
 from src.company_master.orchestrator import trigger
 
-# Tek doğruluk kaynağı: tüm döngüler buradan ajan okur (copilot unutulmasın!)
-# D-60: kanonik adlar Türkçe isimlere geçti (ihsan/utku/salih).
-# `copilot` dışarıdan gözlemci — görev almaz, listeden düştü.
-# `cline` açık görevleri bitince listeden düşer.
-AJANLAR = ["ihsan", "utku", "salih", "cline"]
+# D-60: kanonik adlar Türkçe (ihsan/utku/salih/yasu); tek doğruluk kaynağı trigger.AJANLAR.
+# `copilot` dışarıdan gözlemci — görev almaz, listede yok.
+AJANLAR = list(trigger.AJANLAR)
 
 # Dedupe'ta hangi durum kazanır (küçük sayı kazanır)
 _DURUM_ONCELIK = {"done": 0, "blocked": 1, "review": 2, "aktif": 3, "plan": 4}

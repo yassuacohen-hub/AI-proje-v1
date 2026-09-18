@@ -40,12 +40,12 @@ def test_bos_ajanlar_iki_azan_bosta(tmp_path):
     assert "ihsan" not in bosta
     assert "utku" not in bosta
     assert "salih" in bosta
-    assert "cline" in bosta
+    assert "yasu" in bosta
 
 
 def test_bos_ajanlar_hepsi_mesgul(tmp_path):
-    # D-60: kanonik ajanlar ihsan / utku / salih / cline.
-    for ajan in ["ihsan", "utku", "salih", "cline"]:
+    # D-60: kanonik ajanlar ihsan / utku / salih / yasu (arac adi = takma ad).
+    for ajan in trigger.AJANLAR:
         tid = f"T-{ajan}"
         tb.gorev_ekle(tid, f"{ajan} is", ajan, "P1")
         tb.gorev_guncelle(tid, durum="aktif")

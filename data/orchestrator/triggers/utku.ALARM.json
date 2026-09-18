@@ -7766,5 +7766,101 @@
     "tetik_sayisi": 26,
     "uyari_tarihi": "2026-09-18T23:44:02",
     "mesaj": "⚠️ ADMIN-MUSTERI-02 (Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)) — kilo 26. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ADMIN-MUSTERI-02",
+    "gorev_basligi": "Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)",
+    "tetik_sayisi": 43,
+    "uyari_tarihi": "2026-09-19T00:19:01",
+    "mesaj": "⚠️ ADMIN-MUSTERI-02 (Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)) — utku 43. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ADMIN-KPI-KART-02",
+    "gorev_basligi": "Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-19T00:19:01",
+    "mesaj": "⚠️ ADMIN-KPI-KART-02 (Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi) — utku 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ADMIN-KPI-KART-02",
+    "gorev_basligi": "Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi",
+    "tetik_sayisi": 35,
+    "uyari_tarihi": "2026-09-19T00:19:01",
+    "mesaj": "⚠️ ADMIN-KPI-KART-02 (Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi) — utku 35. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ADMIN-MUSTERI-02",
+    "gorev_basligi": "Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)",
+    "tetik_sayisi": 28,
+    "uyari_tarihi": "2026-09-19T00:19:01",
+    "mesaj": "⚠️ ADMIN-MUSTERI-02 (Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)) — utku 28. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ADMIN-MUSTERI-02",
+    "gorev_basligi": "Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)",
+    "tetik_sayisi": 45,
+    "uyari_tarihi": "2026-09-19T00:24:01",
+    "mesaj": "⚠️ ADMIN-MUSTERI-02 (Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)) — utku 45. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ADMIN-KPI-KART-02",
+    "gorev_basligi": "Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-19T00:24:01",
+    "mesaj": "⚠️ ADMIN-KPI-KART-02 (Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi) — utku 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ADMIN-KPI-KART-02",
+    "gorev_basligi": "Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi",
+    "tetik_sayisi": 37,
+    "uyari_tarihi": "2026-09-19T00:24:01",
+    "mesaj": "⚠️ ADMIN-KPI-KART-02 (Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi) — utku 37. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ADMIN-MUSTERI-02",
+    "gorev_basligi": "Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)",
+    "tetik_sayisi": 30,
+    "uyari_tarihi": "2026-09-19T00:24:01",
+    "mesaj": "⚠️ ADMIN-MUSTERI-02 (Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)) — utku 30. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ADMIN-MUSTERI-02",
+    "gorev_basligi": "Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)",
+    "tetik_sayisi": 47,
+    "uyari_tarihi": "2026-09-19T00:29:01",
+    "mesaj": "⚠️ ADMIN-MUSTERI-02 (Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)) — utku 47. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ADMIN-KPI-KART-02",
+    "gorev_basligi": "Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-19T00:29:01",
+    "mesaj": "⚠️ ADMIN-KPI-KART-02 (Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi) — utku 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ADMIN-KPI-KART-02",
+    "gorev_basligi": "Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi",
+    "tetik_sayisi": 39,
+    "uyari_tarihi": "2026-09-19T00:29:01",
+    "mesaj": "⚠️ ADMIN-KPI-KART-02 (Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi) — utku 39. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ADMIN-MUSTERI-02",
+    "gorev_basligi": "Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)",
+    "tetik_sayisi": 32,
+    "uyari_tarihi": "2026-09-19T00:29:01",
+    "mesaj": "⚠️ ADMIN-MUSTERI-02 (Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)) — utku 32. kez uyarıldı; henüz başlamadı."
   }
 ]

@@ -13,6 +13,7 @@ from typing import Any
 # Yerel paket importları
 from src.company_master.orchestrator import task_board as tb
 from src.company_master.orchestrator.trigger import (
+    ajan_normalize,
     bekleyen_tetikler,
     tetik_uyari_ekle,
 )
@@ -64,7 +65,8 @@ def geciken_tetikler(data_dir: Path | None = None, kademe_sn: int | None = None)
     return result
 # ---- Alarm dosyası ----------------
 def _alarm_dosyasi_yaz(data_dir: Path, ajan: str, task_id: str, task_title: str, sayi: int) -> Path:
-    dosya = _data_dir(data_dir) / "triggers" / f"{ajan}.ALARM.json"
+    # D-60: dosya adi her zaman kanonik ad (trigger.tetik_ekle de normalize eder).
+    dosya = _data_dir(data_dir) / "triggers" / f"{ajan_normalize(ajan) or ajan}.ALARM.json"
     dosya.parent.mkdir(parents=True, exist_ok=True)
     if dosya.exists():
         try:
@@ -133,7 +135,7 @@ def tetik_firlat(kayit: dict[str, Any], ayar: dict[str, Any], data_dir: Path | N
     return {"task_id": task_id, "ajan": ajan, "tetik_sayisi": sayi, "alarm_dosyasi": str(alarm)}
 
 def tetik_gecikmis_yap(ajan: str, task_id: str, sure_sn: int, data_dir: Path | None = None) -> None:
-    yol = _data_dir(data_dir) / "triggers" / f"{ajan}.jsonl"
+    yol = _data_dir(data_dir) / "triggers" / f"{ajan_normalize(ajan) or ajan}.jsonl"
     if not yol.exists(): return
     recs = [json.loads(l) for l in yol.read_text(encoding="utf-8").splitlines() if l.strip()]
     eski = datetime.now() - timedelta(seconds=sure_sn)

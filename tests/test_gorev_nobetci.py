@@ -22,11 +22,11 @@ def izole_pano(tmp_path, monkeypatch):
     return tmp_path
 
 
-def _gorev_ac(task_id="T-09", ajan="kilo"):
+def _gorev_ac(task_id="T-09", ajan="utku"):
     tb.gorev_ekle(task_id, f"{task_id} tetik testi", ajan, "P1")
 
 
-def _tetik_gec_kim(ajan="kilo", task_id="T-09", sure_sn=120):
+def _tetik_gec_kim(ajan="utku", task_id="T-09", sure_sn=120):
     _gorev_ac(task_id, ajan)
     trigger.tetik_ekle(task_id, ajan, talimat="tetik testi", data_dir=None)
     nobetci.tetik_gecikmis_yap(ajan, task_id, sure_sn)
@@ -51,9 +51,9 @@ def test_geciken_tetikler_yok_gercek(izole_pano):
 
 
 def test_tetik_uyari_ekle(izole_pano):
-    trigger.tetik_ekle("T-09", "kilo", talimat="tetik", data_dir=None)
-    nobetci.tetik_uyari_ekle("kilo", "T-09")
-    k = trigger.bekleyen_tetikler("kilo")[0]
+    trigger.tetik_ekle("T-09", "utku", talimat="tetik", data_dir=None)
+    nobetci.tetik_uyari_ekle("utku", "T-09")
+    k = trigger.bekleyen_tetikler("utku")[0]
     assert k["uyari_sayisi"] == 1
     assert "uyari_tarihi" in k
 
@@ -66,7 +66,7 @@ def test_tetik_firlat_olusturur_alarm_log(izole_pano):
     log = json.loads(logline)
     assert log["kaynak"] == "nobetci"
     assert log["task_id"] == "T-09"
-    alarm = json.loads((izole_pano / "triggers" / "kilo.ALARM.json").read_text(encoding="utf-8-sig"))
+    alarm = json.loads((izole_pano / "triggers" / "utku.ALARM.json").read_text(encoding="utf-8-sig"))
     assert any(a["task_id"] == "T-09" for a in alarm)
 
 
@@ -87,7 +87,7 @@ def test_nobet_tut_firlatir(izole_pano):
         data_dir=izole_pano,
     )
     assert len(sonuc) == 1
-    assert trigger.bekleyen_tetikler("kilo")[0].get("uyari_tarihi")
+    assert trigger.bekleyen_tetikler("utku")[0].get("uyari_tarihi")
 
 
 def test_nobet_tut_devre_disi(izole_pano):
@@ -107,10 +107,10 @@ def test_ayar_yaz_yukler(izole_pano):
 
 
 def test_tetik_gecikmis_yap_tarih_ceker(izole_pano):
-    trigger.tetik_ekle("T-09", "kilo", data_dir=None)
-    nobetci.tetik_gecikmis_yap("kilo", "T-09", 300)
+    trigger.tetik_ekle("T-09", "utku", data_dir=None)
+    nobetci.tetik_gecikmis_yap("utku", "T-09", 300)
     from datetime import datetime as _dt
-    t = _dt.fromisoformat(trigger.bekleyen_tetikler("kilo")[0]["tarih"])
+    t = _dt.fromisoformat(trigger.bekleyen_tetikler("utku")[0]["tarih"])
     assert (_dt.now() - t).total_seconds() >= 290
 
 

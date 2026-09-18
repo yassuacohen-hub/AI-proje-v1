@@ -23,9 +23,10 @@
 - BULGU NOTU (cline): kapsam dışı bulguyu DÜZELTME; `data/orchestrator/<TASK>_bulgular_<tarih>_cline.md`'ye yaz, roo'ya tetik düş. Ayrıntı: AJAN_DETAY §7.
 
 ## Ajan Adları (D-33 → D-60) ve Roller
-- Kanonik adlar yalnız: `ihsan`, `utku`, `salih`, `cline`. Normalizasyon: `trigger.ajan_normalize()`. Ayrıntı: AJAN_DETAY §16.
-- Roller: **ihsan** = orkestratör (son söz ihsan'da) · **utku** = üretim/hacim · **salih** = QA/Release Governance · **cline** = denetim/review (**emekli olacak**). Ayrıntı: AJAN_DETAY §7.
-- Persona ve yetenek dosyaları: `docs/ajanlar/ihsan.md` · `docs/ajanlar/utku.md` · `docs/ajanlar/salih.md`.
+- Kanonik adlar yalnız: `ihsan`, `utku`, `salih`, `yasu`. Tek doğruluk kaynağı `trigger.AJANLAR`; normalizasyon `trigger.ajan_normalize()`. Ayrıntı: AJAN_DETAY §16.
+- Kural: **araç adı = takma ad, Türkçe ad = kanonik ad.**
+- Roller: **ihsan** = orkestratör (son söz ihsan'da) · **utku** = üretim/hacim · **salih** = QA/Release Governance · **yasu** = denetim/review. Ayrıntı: AJAN_DETAY §7.
+- Persona ve yetenek dosyaları: `docs/ajanlar/ihsan.md` · `docs/ajanlar/utku.md` · `docs/ajanlar/salih.md` · `docs/ajanlar/yasu.md`.
 - `copilot` **dışarıdan gözlemci** — sistemde ajan değil, görev almaz, listelerde yer almaz (KAHİN kararı 2026-09-18).
 - Rotasyon yalnız KAHİN'in `abrakadabra` ritüeliyle; subagent orkestratör olamaz, panoya görev ekleyemez. Ayrıntı: AJAN_DETAY §1-4.
 
@@ -72,8 +73,13 @@
 - Onaysız kod yazılmaz.
 
 ## Hitap (Demir Kural, D-49 — KAHİN kararı 2026-09-18)
-- Ürün Sahibi'nin adı **KAHİN**. Tüm ajanlar (ihsan, utku, salih, cline) ona **`KAHİN (Ürün Sahibi)`** diye hitap eder — büyük harfle.
+- Ürün Sahibi'nin adı **KAHİN**. Tüm ajanlar (ihsan, utku, salih, yasu) ona **`KAHİN (Ürün Sahibi)`** diye hitap eder — büyük harfle.
 - **"sahip", "kullanıcı", "efendim" kelimeleri YASAK.** Eski dokümanlardaki "sahip kararı" ifadeleri geçmiş kayıt; yeni metinlerde `KAHİN kararı` yazılır.
+
+## Hitap Büyük Harf (Demir Kural, D-61 — KAHİN kararı 2026-09-18)
+- Ekrana, rapora veya pano çıktısına yazılan **her ajan hitabı BÜYÜK HARF**: `İHSAN` · `UTKU` · `SALİH` · `YASU`. Gerekçe: KAHİN'in ekranda hızlı görmesi.
+- Kanonik ad **küçük kalır** (dosya adı, `task_board.json` `sahip` alanı, `triggers/{ajan}.jsonl`, CLI `--ajan`). Yalnız **gösterim** büyür.
+- Makine kaynağı: `trigger.ajan_goster()` — Türkçe `i` → `İ` dönüşümü yapar (`"salih".upper()` yanlış `SALIH` verir).
 
 ## QA/Release Engineer — salih (D-59 — KAHİN kararı 2026-09-18)
 - D-49'un "danışmandır, görev almaz" maddesi **iptal**. salih tam yetkili ajandır.
@@ -90,11 +96,10 @@
 | `roo`, `roo-code`, `orkestrator` | **`ihsan`** | Orkestratör |
 | `kilo`, `kilo-code` | **`utku`** | Üretim/Hacim |
 | `merve`, `continue`, `continue-ide` | **`salih`** | QA/Release Governance |
-| `cline` | `cline` | Denetim — **emekli olacak** |
+| `cline`, `clinebot`, `yasin` | **`yasu`** | Denetim/Review |
 | `copilot` | — | **Kaldırıldı** (dış gözlemci) |
 
-- **cline emekli:** açık görevleri (`ORKESTRA-BASLIK-GERIYE-01`, `REVIEW-ONAY-KUYRUGU-01`, `TEST-AYARLAR-KAPSAM-01`) bitince yeni görev almaz, listeden düşer.
-- Kod tarafı: `AJAN_TAKMA_ADLAR` (`trigger.py`) tek doğruluk kaynağı; `gorev_at.py`, `gorev_kutusu.py`, `duzen.py` listeleri buna uyar.
+- Kod tarafı: `AJANLAR` + `AJAN_TAKMA_ADLAR` (`trigger.py`) tek doğruluk kaynağı; `gorev_at.py`, `gorev_kutusu.py`, `duzen.py` listeleri buradan türer (sabit kodlanmış ajan listesi yasak).
 - Yeni çıktılarda yalnız **yeni kanonik adlar** yazılır; eski adlar okuma uyumluluğu içindir.
 
 ## Dil (Demir Kural)
@@ -132,10 +137,11 @@
 ### Ajanlar ve Roller
 | Terim | Tanım |
 |-------|-------|
-| **kilo** | Üretim/hacim ajanı — kod yazma, refactoring, test, CI/CD. Kilitli dosyalarda çalışır. |
-| **cline** | Denetim/review ajanı — kod inceleme, güvenlik, mimari uyum, doküman doğrulama. |
-| **roo** | Orkestratör — görev dağıtımı, onay, commit, push, karar kaydı, ajan koordinasyonu. Son söz roo'da. |
-| **orkestrator** | `roo` ile eşanlamlı; görev panosu yönetimi, tetik kuyruğu, kilit takibi. |
+| **utku** (araç: kilo) | Üretim/hacim ajanı — kod yazma, refactoring, test, CI/CD. Kilitli dosyalarda çalışır. |
+| **yasu** (araç: cline) | Denetim/review ajanı — kod inceleme, güvenlik, mimari uyum, doküman doğrulama. |
+| **ihsan** (araç: roo) | Orkestratör — görev dağıtımı, onay, commit, push, karar kaydı, ajan koordinasyonu. Son söz ihsan'da. |
+| **salih** (araç: continue) | QA/Release Governance — test kapsamı, regresyon, sürüm öncesi doğrulama. |
+| **orkestrator** | `ihsan` ile eşanlamlı; görev panosu yönetimi, tetik kuyruğu, kilit takibi. |
 | **oto-nobetci** | Otomatik onay/teslim işleyen arka plan süreci (`scripts/oto_nobetci.py`). P2 ve altı görevleri onaylar; P0/P1 elle onay (D-46). |
 
 ### Görev Yaşam Döngüsü Terimleri
