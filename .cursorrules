@@ -1,4 +1,4 @@
-﻿# Evrensel Ajan Kuralları
+# Evrensel Ajan Kuralları
 
 ## 1. İlk Adım (HER SOHBETİN BAŞINDA)
 - Posta kutusunu kontrol et: `python scripts/gorev_kutusu.py bak --ajan <AJAN>`
