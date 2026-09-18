@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-18T05:31:51
+> Son guncelleme: 2026-09-18T05:41:12
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -23,7 +23,6 @@
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| ADMIN-NAV-HAZIR-01 | Bayat hazir=False ust sayfalari ac (veri | roo | 2026-09-17 |
 | ADMIN-EXEC-01 | Executive Dashboard: st.metric->kpi_kart | roo | 2026-09-17 |
 | ADMIN-SEARCH-01 | admin_search.py admin sekme kalibina gec | roo | 2026-09-17 |
 | ADMIN-REFRESH-FIX-01 | admin_auto_refresh: st.rerun oncesi ayar | roo | 2026-09-17 |
@@ -33,6 +32,7 @@
 | ADMIN-ROO-DENETIM-01 | Admin panel gece zinciri teslimlerini in | roo | 2026-09-18 |
 | ADMIN-HITAP-01 | D-49 uygulama: sahip -> KAHIN (Urun Sahi | roo | 2026-09-18 |
 | ADMIN-KOK-TEMIZLIK-01 | Kok dizindeki 3 gecici script sil + .git | roo | 2026-09-18 |
+| AGN-STACK-01 | crewAI/LangChain vs Huginn orkestratoru  | roo | 2026-09-18 |
 
 ## Son Handoff'lar
 

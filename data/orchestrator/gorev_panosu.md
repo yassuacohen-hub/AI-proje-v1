@@ -278,3 +278,4 @@
 | ADMIN-ROO-DENETIM-01 | Admin panel gece zinciri teslimlerini incele ve onayla (ADMIN-HATA-02, KPI-KART-02, MUSTERI-02) | roo | 2026-09-18T05:31:51 |
 | ADMIN-HITAP-01 | D-49 uygulama: sahip -> KAHIN (Urun Sahibi) taramasi (kurallar + docs + admin panel metinleri) | roo | 2026-09-18T05:27:42 |
 | ADMIN-KOK-TEMIZLIK-01 | Kok dizindeki 3 gecici script sil + .gitignore kontrol + commit | roo | 2026-09-18T05:27:42 |
+| AGN-STACK-01 | crewAI/LangChain vs Huginn orkestratoru kiyas raporu (KAHIN emri) | roo | 2026-09-18T05:41:12 |
