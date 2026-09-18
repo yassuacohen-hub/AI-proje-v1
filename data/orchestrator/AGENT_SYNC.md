@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-18T06:29:46
+> Son guncelleme: 2026-09-18T13:31:18
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -20,10 +20,10 @@
 | RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arasti | roo | P0 | aktif |
 | ADLANDIRMA-GERIYE-01 | D-55 geriye donuk: 55 rapor dosyasindan  | roo | P3 | plan |
 | AGN-CREWAI-PILOT-01 | crewAI hibrit worker pilotu (metin-üreti | roo | P2 | aktif |
-| ADMIN-LOGIN-FIX-01 | Admin giris: baglanti hatasi ile 401 ayr | kilo | P0 | plan |
-| ADMIN-ADMIN2-DOGRULA-01 | 2. admin hesabi yassuacohen@gmail.com si | kilo | P2 | plan |
-| ADMIN-MODAL-STIL-01 | Admin modal: blur backdrop + marka kimli | kilo | P1 | plan |
-| ADMIN-SIFRE-RESET-FLOW-01 | Sifre unuttum akisi: email gonder -> lin | kilo | P2 | plan |
+| ADMIN-LOGIN-FIX-01 | Admin giris: baglanti hatasi ile 401 ayr | roo | P0 | review |
+| ADMIN-ADMIN2-DOGRULA-01 | 2. admin hesabi yassuacohen@gmail.com si | kilo | P2 | review |
+| ADMIN-MODAL-STIL-01 | Admin modal: blur backdrop + marka kimli | roo | P1 | review |
+| ADMIN-SIFRE-RESET-FLOW-01 | Sifre unuttum akisi: email gonder -> lin | roo | P2 | review |
 
 ## Tamamlananlar (Son 10)
 

@@ -169,6 +169,11 @@ class TestY2VarYokSizmasi:
         monkeypatch.setattr(admin_auth.st, "form_submit_button", lambda *a, **k: True)
         error = MagicMock()
         monkeypatch.setattr(admin_auth.st, "error", error)
+        # Bu test yalnız giriş formunu ölçer: `render_admin_login()` sonunda
+        # çağrılan reset akışı, global `form_submit_button=True` yüzünden
+        # gönderilmiş sayılıp ek st.error üretiyor. Gerçek Streamlit'te her
+        # formun submit'i ayrıdır.
+        monkeypatch.setattr(admin_auth, "render_sifre_unuttum", MagicMock())
         monkeypatch.setattr(
             admin_auth,
             "post_api",
