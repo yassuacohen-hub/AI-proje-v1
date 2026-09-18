@@ -64,20 +64,152 @@ def render_musteri_yonetimi_tab() -> None:
 
 
 def _kullanicilar_onay() -> None:
-    st.info("Kullanıcılar & Onay — placeholder")
+    """Kullanıcılar & Onay — onay bekleyen kullanıcılar listesi + tier seçimi + onaylama."""
+    BOLUMLER[0].render()
+
+    token = st.session_state.get("admin_token")
+    if not token:
+        st.warning("Lütfen giriş yapın")
+        return
+
+    try:
+        # Onay bekleyen kullanıcıları ve kategorileri yükle
+        pending = get_api("/api/admin/pending", token=token)
+        categories = get_api("/api/admin/categories", token=token)
+    except Exception as exc:
+        st.error(f"Veri yüklenemedi: {exc}")
+        return
+
+    # Onay bekleyen kullanıcılar
+    if isinstance(pending, dict):
+        bekleyen = pending.get("bekleyen", [])
+        if bekleyen:
+            st.subheader("Onay Bekleyen Kullanıcılar")
+            for user in bekleyen:
+                with st.container():
+                    cols = st.columns([4, 1])
+                    with cols[0]:
+                        tiers = TIER_SECIMLERI
+                        default_tier = user.get("tier", "terminal")
+                        try:
+                            default_index = tiers.index(default_tier)
+                        except ValueError:
+                            default_index = 0
+                        selected_tier = st.selectbox(
+                            "Tier",
+                            options=tiers,
+                            index=default_index,
+                            key=f"tier_select_{user.get('user_id', '')}",
+                            label_visibility="collapsed"
+                        )
+                        st.write(
+                            f"**{user.get('email', '')}** — {user.get('company_name', '')} ({user.get('tier', '')})"
+                        )
+                    with cols[1]:
+                        if st.button("Onayla", key=f"approve_{user.get('user_id', '')}", type="primary"):
+                            try:
+                                post_api(
+                                    "/api/admin/approve",
+                                    json={"user_id": user.get("user_id", ""), "tier": selected_tier},
+                                    token=token,
+                                )
+                                st.success(f"{user.get('email', '')} onaylandı ({selected_tier} tier)")
+                                st.cache_data.clear()
+                                st.rerun()
+                            except Exception as e:
+                                st.error(f"Onaylama başarısız: {e}")
+        else:
+            st.info("Onay bekleyen kullanıcı yok.")
+
+        # Son onaylı kullanıcılar
+        onayli_son = pending.get("onayli_son", [])
+        if onayli_son:
+            st.subheader("Son Onaylanan Kullanıcılar")
+            import pandas as pd
+            st.dataframe(pd.DataFrame(onayli_son), width="stretch", hide_index=True)
+        else:
+            st.info("Son onaylı kullanıcı yok.")
+
+    # Kategoriler
+    if isinstance(categories, dict):
+        items = categories.get("items", [])
+        if items:
+            st.subheader("Paket Kategorileri")
+            import pandas as pd
+            st.dataframe(pd.DataFrame(items), width="stretch", hide_index=True)
+        else:
+            st.info("Kategori kaydı yok.")
 
 
 def _paket_kredi() -> None:
+    """Paket & Kredi — kredi yükleme formu + kategori yönetimi."""
     BOLUMLER[1].render()
 
+    token = st.session_state.get("admin_token")
+    if not token:
+        st.warning("Lütfen giriş yapın")
+        return
+
+    st.subheader("Kredi Yükleme")
+
+    with st.form("kredi_formu"):
+        col1, col2 = st.columns(2)
+        with col1:
+            kredi_user_id = st.text_input("Kullanıcı ID", placeholder="Örn: 123e4567-e89b-12d3-a456-426614174000")
+        with col2:
+            kredi_miktar = st.number_input("Kredi Miktarı", min_value=1, value=50)
+        if st.form_submit_button("Kredi Yükle", type="primary") and kredi_user_id:
+            try:
+                post_api(
+                    "/api/admin/credit",
+                    json={"user_id": kredi_user_id, "amount": kredi_miktar},
+                    token=token,
+                )
+                st.success(f"{kredi_miktar} kredi yüklendi.")
+                st.cache_data.clear()
+                st.rerun()
+            except Exception as e:
+                st.error(f"Kredi yükleme başarısız: {e}")
+
+    st.divider()
+    st.subheader("Kategori Yönetimi")
+
     try:
-        data = get_api("/api/admin/categories")
-    except Exception:
-        data = None
-    if data:
-        st.success(f"Kategoriler yüklendi: {len(data) if isinstance(data, list) else 'var'}")
-    else:
-        st.warning("Kategori yüklenemedi.")
+        categories = get_api("/api/admin/categories", token=token)
+    except Exception as exc:
+        st.error(f"Kategoriler yüklenemedi: {exc}")
+        return
+
+    if isinstance(categories, dict):
+        items = categories.get("items", [])
+        if items:
+            import pandas as pd
+            st.dataframe(pd.DataFrame(items), width="stretch", hide_index=True)
+        else:
+            st.info("Kategori kaydı yok.")
+
+    # Yeni kategori ekleme formu
+    with st.expander("➕ Yeni Kategori Ekle"):
+        with st.form("yeni_kategori_form"):
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                cat_name = st.text_input("Kategori Adı", placeholder="Örn: Premium Paket")
+            with col2:
+                cat_credits = st.number_input("Kredi Miktarı", min_value=1, value=100)
+            with col3:
+                cat_desc = st.text_input("Açıklama", placeholder="İsteğe bağlı")
+            if st.form_submit_button("Kategori Oluştur", type="primary") and cat_name:
+                try:
+                    post_api(
+                        "/api/admin/categories",
+                        json={"name": cat_name, "credits": cat_credits, "description": cat_desc},
+                        token=token,
+                    )
+                    st.success(f"Kategori '{cat_name}' oluşturuldu.")
+                    st.cache_data.clear()
+                    st.rerun()
+                except Exception as e:
+                    st.error(f"Kategori oluşturma başarısız: {e}")
 
 
 def _giris_aktinligi() -> None:
@@ -103,8 +235,8 @@ def _giris_aktinligi() -> None:
                         "Zaman": r["ts"],
                         "E-posta": r["email_masked"],
                         "IP": r["ip_masked"],
-                        "Basarili": "✅" if r["success"] else "❌",
-                        "Yontem": r["method"],
+                        "Başarılı": "✅" if r["success"] else "❌",
+                        "Yöntem": r["method"],
                         "Yol": r["path"],
                     }
                     for r in rows
@@ -139,7 +271,7 @@ def _aramalar() -> None:
                         "Zaman": r["ts"],
                         "E-posta": r["email_masked"],
                         "Sorgu": r["query"],
-                        "Sonuc": r["result_count"],
+                        "Sonuç": r["result_count"],
                     }
                     for r in rows
                 ]

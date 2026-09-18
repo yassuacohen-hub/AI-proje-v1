@@ -5518,5 +5518,1093 @@
     "tetik_sayisi": 51,
     "uyari_tarihi": "2026-09-18T18:49:03",
     "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 51. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 71,
+    "uyari_tarihi": "2026-09-18T18:54:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 71. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 71,
+    "uyari_tarihi": "2026-09-18T18:54:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 71. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 71,
+    "uyari_tarihi": "2026-09-18T18:54:02",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 71. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 52,
+    "uyari_tarihi": "2026-09-18T18:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 52. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 72,
+    "uyari_tarihi": "2026-09-18T18:59:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 72. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 72,
+    "uyari_tarihi": "2026-09-18T18:59:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 72. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 72,
+    "uyari_tarihi": "2026-09-18T18:59:02",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 72. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 53,
+    "uyari_tarihi": "2026-09-18T18:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 53. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 73,
+    "uyari_tarihi": "2026-09-18T19:04:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 73. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 73,
+    "uyari_tarihi": "2026-09-18T19:04:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 73. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 73,
+    "uyari_tarihi": "2026-09-18T19:04:02",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 73. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 54,
+    "uyari_tarihi": "2026-09-18T19:04:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 54. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 74,
+    "uyari_tarihi": "2026-09-18T19:09:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 74. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 74,
+    "uyari_tarihi": "2026-09-18T19:09:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 74. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 74,
+    "uyari_tarihi": "2026-09-18T19:09:02",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 74. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 55,
+    "uyari_tarihi": "2026-09-18T19:09:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 55. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 75,
+    "uyari_tarihi": "2026-09-18T19:14:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 75. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 75,
+    "uyari_tarihi": "2026-09-18T19:14:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 75. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 75,
+    "uyari_tarihi": "2026-09-18T19:14:02",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 75. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 56,
+    "uyari_tarihi": "2026-09-18T19:14:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 56. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 76,
+    "uyari_tarihi": "2026-09-18T19:19:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 76. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 76,
+    "uyari_tarihi": "2026-09-18T19:19:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 76. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 76,
+    "uyari_tarihi": "2026-09-18T19:19:02",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 76. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 57,
+    "uyari_tarihi": "2026-09-18T19:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 57. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 77,
+    "uyari_tarihi": "2026-09-18T19:24:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 77. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 77,
+    "uyari_tarihi": "2026-09-18T19:24:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 77. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 77,
+    "uyari_tarihi": "2026-09-18T19:24:02",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 77. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 58,
+    "uyari_tarihi": "2026-09-18T19:24:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 58. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 78,
+    "uyari_tarihi": "2026-09-18T19:29:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 78. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 78,
+    "uyari_tarihi": "2026-09-18T19:29:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 78. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 78,
+    "uyari_tarihi": "2026-09-18T19:29:02",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 78. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 59,
+    "uyari_tarihi": "2026-09-18T19:29:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 59. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 79,
+    "uyari_tarihi": "2026-09-18T19:34:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 79. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 79,
+    "uyari_tarihi": "2026-09-18T19:34:03",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 79. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 79,
+    "uyari_tarihi": "2026-09-18T19:34:03",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 79. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 60,
+    "uyari_tarihi": "2026-09-18T19:34:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 60. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 80,
+    "uyari_tarihi": "2026-09-18T19:39:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 80. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 80,
+    "uyari_tarihi": "2026-09-18T19:39:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 80. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 80,
+    "uyari_tarihi": "2026-09-18T19:39:02",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 80. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 61,
+    "uyari_tarihi": "2026-09-18T19:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 61. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 81,
+    "uyari_tarihi": "2026-09-18T19:44:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 81. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 81,
+    "uyari_tarihi": "2026-09-18T19:44:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 81. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 81,
+    "uyari_tarihi": "2026-09-18T19:44:02",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 81. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 62,
+    "uyari_tarihi": "2026-09-18T19:44:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 62. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 82,
+    "uyari_tarihi": "2026-09-18T19:49:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 82. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 82,
+    "uyari_tarihi": "2026-09-18T19:49:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 82. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 82,
+    "uyari_tarihi": "2026-09-18T19:49:02",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 82. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 63,
+    "uyari_tarihi": "2026-09-18T19:49:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 63. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 83,
+    "uyari_tarihi": "2026-09-18T19:54:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 83. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 83,
+    "uyari_tarihi": "2026-09-18T19:54:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 83. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 83,
+    "uyari_tarihi": "2026-09-18T19:54:03",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 83. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 64,
+    "uyari_tarihi": "2026-09-18T19:54:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 64. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 84,
+    "uyari_tarihi": "2026-09-18T19:58:28",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 84. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 84,
+    "uyari_tarihi": "2026-09-18T19:58:28",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 84. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 84,
+    "uyari_tarihi": "2026-09-18T19:58:29",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 84. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 65,
+    "uyari_tarihi": "2026-09-18T19:58:29",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 65. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 85,
+    "uyari_tarihi": "2026-09-18T19:59:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 85. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 85,
+    "uyari_tarihi": "2026-09-18T19:59:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 85. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 85,
+    "uyari_tarihi": "2026-09-18T19:59:03",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 85. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 66,
+    "uyari_tarihi": "2026-09-18T19:59:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 66. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 86,
+    "uyari_tarihi": "2026-09-18T20:04:03",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 86. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 86,
+    "uyari_tarihi": "2026-09-18T20:04:03",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 86. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 86,
+    "uyari_tarihi": "2026-09-18T20:04:03",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 86. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 67,
+    "uyari_tarihi": "2026-09-18T20:04:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 67. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 87,
+    "uyari_tarihi": "2026-09-18T20:09:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 87. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 87,
+    "uyari_tarihi": "2026-09-18T20:09:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 87. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 87,
+    "uyari_tarihi": "2026-09-18T20:09:03",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 87. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 68,
+    "uyari_tarihi": "2026-09-18T20:09:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 68. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 88,
+    "uyari_tarihi": "2026-09-18T20:14:03",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 88. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 88,
+    "uyari_tarihi": "2026-09-18T20:14:04",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 88. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 88,
+    "uyari_tarihi": "2026-09-18T20:14:04",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 88. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 69,
+    "uyari_tarihi": "2026-09-18T20:14:04",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 69. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 89,
+    "uyari_tarihi": "2026-09-18T20:18:05",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 89. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 89,
+    "uyari_tarihi": "2026-09-18T20:18:05",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 89. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 89,
+    "uyari_tarihi": "2026-09-18T20:18:05",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 89. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 70,
+    "uyari_tarihi": "2026-09-18T20:18:05",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 70. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "gorev_basligi": "Admin modal: blur backdrop + marka kimligini yansit",
+    "tetik_sayisi": 90,
+    "uyari_tarihi": "2026-09-18T20:19:02",
+    "mesaj": "⚠️ ADMIN-MODAL-STIL-01 (Admin modal: blur backdrop + marka kimligini yansit) — roo 90. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "gorev_basligi": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "tetik_sayisi": 90,
+    "uyari_tarihi": "2026-09-18T20:19:02",
+    "mesaj": "⚠️ ADMIN-SIFRE-RESET-FLOW-01 (Sifre unuttum akisi: email gonder -> link -> sifre sifirla) — roo 90. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-LOGIN-FIX-01",
+    "gorev_basligi": "Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi",
+    "tetik_sayisi": 90,
+    "uyari_tarihi": "2026-09-18T20:19:02",
+    "mesaj": "⚠️ ADMIN-LOGIN-FIX-01 (Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi) — roo 90. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 71,
+    "uyari_tarihi": "2026-09-18T20:19:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 71. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 72,
+    "uyari_tarihi": "2026-09-18T20:28:04",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 72. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 73,
+    "uyari_tarihi": "2026-09-18T20:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 73. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 74,
+    "uyari_tarihi": "2026-09-18T20:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 74. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 75,
+    "uyari_tarihi": "2026-09-18T20:39:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 75. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 76,
+    "uyari_tarihi": "2026-09-18T20:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 76. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 77,
+    "uyari_tarihi": "2026-09-18T20:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 77. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 78,
+    "uyari_tarihi": "2026-09-18T20:54:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 78. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 79,
+    "uyari_tarihi": "2026-09-18T20:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 79. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 80,
+    "uyari_tarihi": "2026-09-18T21:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 80. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 81,
+    "uyari_tarihi": "2026-09-18T21:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 81. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 82,
+    "uyari_tarihi": "2026-09-18T21:14:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 82. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 83,
+    "uyari_tarihi": "2026-09-18T21:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 83. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 84,
+    "uyari_tarihi": "2026-09-18T21:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 84. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 85,
+    "uyari_tarihi": "2026-09-18T21:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 85. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 86,
+    "uyari_tarihi": "2026-09-18T21:33:49",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 86. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 87,
+    "uyari_tarihi": "2026-09-18T21:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 87. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 88,
+    "uyari_tarihi": "2026-09-18T21:36:34",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 88. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 89,
+    "uyari_tarihi": "2026-09-18T21:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 89. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 90,
+    "uyari_tarihi": "2026-09-18T21:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 90. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 91,
+    "uyari_tarihi": "2026-09-18T21:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 91. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 92,
+    "uyari_tarihi": "2026-09-18T21:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 92. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 93,
+    "uyari_tarihi": "2026-09-18T21:56:16",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 93. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 94,
+    "uyari_tarihi": "2026-09-18T21:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 94. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 95,
+    "uyari_tarihi": "2026-09-18T22:00:33",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 95. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 96,
+    "uyari_tarihi": "2026-09-18T22:04:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 96. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 97,
+    "uyari_tarihi": "2026-09-18T22:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 97. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 98,
+    "uyari_tarihi": "2026-09-18T22:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 98. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 99,
+    "uyari_tarihi": "2026-09-18T22:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 99. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 100,
+    "uyari_tarihi": "2026-09-18T22:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 100. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 101,
+    "uyari_tarihi": "2026-09-18T22:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 101. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 102,
+    "uyari_tarihi": "2026-09-18T22:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 102. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 103,
+    "uyari_tarihi": "2026-09-18T22:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 103. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 104,
+    "uyari_tarihi": "2026-09-18T22:41:46",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 104. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 105,
+    "uyari_tarihi": "2026-09-18T22:44:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 105. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 106,
+    "uyari_tarihi": "2026-09-18T22:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 106. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 107,
+    "uyari_tarihi": "2026-09-18T22:54:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 107. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 108,
+    "uyari_tarihi": "2026-09-18T22:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 108. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 109,
+    "uyari_tarihi": "2026-09-18T23:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 109. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 110,
+    "uyari_tarihi": "2026-09-18T23:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 110. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-18T23:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — roo 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 111,
+    "uyari_tarihi": "2026-09-18T23:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 111. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-18T23:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — roo 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 112,
+    "uyari_tarihi": "2026-09-18T23:16:35",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 112. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-18T23:16:35",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — roo 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 113,
+    "uyari_tarihi": "2026-09-18T23:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 113. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-18T23:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — roo 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 114,
+    "uyari_tarihi": "2026-09-18T23:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 114. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-18T23:24:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — roo 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 115,
+    "uyari_tarihi": "2026-09-18T23:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 115. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-18T23:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — roo 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 116,
+    "uyari_tarihi": "2026-09-18T23:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 116. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-18T23:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — roo 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 117,
+    "uyari_tarihi": "2026-09-18T23:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 117. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-18T23:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — roo 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 118,
+    "uyari_tarihi": "2026-09-18T23:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — roo 118. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "roo",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-18T23:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — roo 9. kez uyarıldı; henüz başlamadı."
   }
 ]

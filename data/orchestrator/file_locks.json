@@ -24,31 +24,6 @@
     "task_id": "ADMIN-KPI-KART-02",
     "kilitlendi": "2026-09-17T06:49:12"
   },
-  "web_dashboard/tabs/admin_kpi.py": {
-    "sahip": "kilo",
-    "task_id": "ADMIN-HATA-02",
-    "kilitlendi": "2026-09-17T06:49:12"
-  },
-  "web_dashboard/tabs/admin_quality.py": {
-    "sahip": "kilo",
-    "task_id": "ADMIN-HATA-02",
-    "kilitlendi": "2026-09-17T06:49:12"
-  },
-  "web_dashboard/tabs/admin_performance.py": {
-    "sahip": "kilo",
-    "task_id": "ADMIN-HATA-02",
-    "kilitlendi": "2026-09-17T06:49:12"
-  },
-  "web_dashboard/tabs/admin_api_analytics.py": {
-    "sahip": "kilo",
-    "task_id": "ADMIN-HATA-02",
-    "kilitlendi": "2026-09-17T06:49:12"
-  },
-  "tests/test_admin_sessiz_except.py": {
-    "sahip": "kilo",
-    "task_id": "ADMIN-HATA-02",
-    "kilitlendi": "2026-09-17T06:49:12"
-  },
   "scripts/deney/crewai_arastirma_deneyi.py": {
     "sahip": "roo",
     "task_id": "AGN-CREWAI-PILOT-01",
@@ -58,11 +33,6 @@
     "sahip": "roo",
     "task_id": "ADMIN-UX-LOGOUT-01",
     "kilitlendi": "2026-09-18T14:31:57"
-  },
-  "scripts/admin_kimlik_kontrol.py": {
-    "sahip": "kilo",
-    "task_id": "ADMIN-ADMIN2-DOGRULA-01",
-    "kilitlendi": "2026-09-18T06:18:40"
   },
   "app.py": {
     "sahip": "roo",
@@ -108,5 +78,15 @@
     "sahip": "roo",
     "task_id": "V10-BELGE-01",
     "kilitlendi": "2026-09-18T16:54:11"
+  },
+  "data/orchestrator/REVIEW-ONAY-KUYRUGU-01_rapor_2026-09-18_denetim.md": {
+    "sahip": "cline",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "kilitlendi": "2026-09-18T22:41:37"
+  },
+  "tests/test_admin_kullanici_ayarlari.py": {
+    "sahip": "cline",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "kilitlendi": "2026-09-18T22:42:02"
   }
 }

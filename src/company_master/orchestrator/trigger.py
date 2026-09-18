@@ -38,28 +38,38 @@ def _simdi() -> str:
 
 # ---- Ajan adı kuralı (D-33, 2026-09-16, Ürün Sahibi emri; D-59 ile merve eklendi) ----
 #
-# Kanonik adlar: kilo, cline, roo, merve. "Ajan kilo", "Kilo", "kilo_code",
-# "KiloCode" gibi yazımların hepsi aynı postaya çözümlenir. Böylece ajan
-# hangi adla bakarsa baksın kutusunu bulur ("aktif postam yok" hatası biter).
+# D-60 (KAHİN kararı 2026-09-18): kanonik adlar Türkçe isimlere geçti.
+#   ihsan (eski roo)   — orkestratör
+#   utku  (eski kilo)  — üretim/hacim
+#   salih (eski merve / continue) — QA/Release Governance
+#   cline — emekli olmak üzere; açık görevleri bitince listeden düşer.
+# Eski adlar takma ad olarak korunur; pano ve tetik geçmişi bozulmasın diye
+# her yazım aynı postaya çözümlenir.
 
 AJAN_TAKMA_ADLAR: dict[str, str] = {
-    "kilocode": "kilo",
-    "kilo_code": "kilo",
-    "kilo-code": "kilo",
-    "roocode": "roo",
-    "roo_code": "roo",
-    "roo-code": "roo",
-    "roo_orkestrator": "roo",
-    "orkestrator": "roo",
+    # utku (eski kilo)
+    "kilo": "utku",
+    "kilocode": "utku",
+    "kilo_code": "utku",
+    "kilo-code": "utku",
+    # ihsan (eski roo)
+    "roo": "ihsan",
+    "roocode": "ihsan",
+    "roo_code": "ihsan",
+    "roo-code": "ihsan",
+    "roo_orkestrator": "ihsan",
+    "orkestrator": "ihsan",
+    # salih (eski merve; Continue IDE)
+    "merve": "salih",
+    "continue": "salih",
+    "continueide": "salih",
+    "continue_ide": "salih",
+    "continue-ide": "salih",
+    # cline (emekli olacak, ad değişmedi)
     "clinebot": "cline",
     "cline_code": "cline",
     "claudecode": "claude_code",
     "claude-code": "claude_code",
-    # D-59: Merve = QA/Release Engineer (Continue IDE)
-    "continue": "merve",
-    "continueide": "merve",
-    "continue_ide": "merve",
-    "continue-ide": "merve",
 }
 
 
@@ -73,7 +83,7 @@ def ajan_normalize(ad: str | None) -> str:
     """
     ham = (ad or "").strip()
     if not ham:
-        raise TriggerError("Ajan adı boş olamaz (kanonik adlar: kilo, cline, roo, merve).")
+        raise TriggerError("Ajan adı boş olamaz (kanonik adlar: ihsan, utku, salih, cline).")
     # Ajan adları ASCII'dir: Türkçe İ/ı ayrımı yapılmaz ("KILO" → "kilo").
     ad_l = ham.replace("İ", "i").replace("ı", "i").lower().lstrip("@").strip()
     for onek in ("ajan ", "agent ", "ajan_", "agent_", "ajan-", "agent-"):
@@ -274,7 +284,7 @@ def onay_bekleyenler(data_dir: Path | None = None) -> list[dict[str, Any]]:
         from src.company_master.orchestrator import duzen  # lokal: döngüsel risk yok
         ajanlar = duzen.AJANLAR
     except Exception:
-        ajanlar = ["kilo", "roo", "copilot", "cline", "merve", "orkestrator"]
+        ajanlar = ["ihsan", "utku", "salih", "cline"]
     for ajan in ajanlar:
         try:
             for k in _tetikleri_oku(ajan, data_dir):

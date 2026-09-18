@@ -32,20 +32,20 @@ def izole(tmp_path, monkeypatch):
 # ---- bos_ajanlar ----
 
 def test_bos_ajanlar_iki_azan_bosta(tmp_path):
-    tb.gorev_ekle("T1", "roo is", "roo", "P1")
+    tb.gorev_ekle("T1", "ihsan is", "ihsan", "P1")
     tb.gorev_guncelle("T1", durum="aktif")
-    tb.gorev_ekle("T2", "kilo is", "kilo", "P1")
+    tb.gorev_ekle("T2", "utku is", "utku", "P1")
     tb.gorev_guncelle("T2", durum="aktif")
     bosta = isbirligi.bos_ajanlar()
-    assert "roo" not in bosta
-    assert "kilo" not in bosta
-    assert "copilot" in bosta
+    assert "ihsan" not in bosta
+    assert "utku" not in bosta
+    assert "salih" in bosta
     assert "cline" in bosta
 
 
 def test_bos_ajanlar_hepsi_mesgul(tmp_path):
-    # D-59: merve de kanonik ajan; "hepsi mesgul" icin o da doldurulur.
-    for ajan in ["kilo", "roo", "copilot", "cline", "merve"]:
+    # D-60: kanonik ajanlar ihsan / utku / salih / cline.
+    for ajan in ["ihsan", "utku", "salih", "cline"]:
         tid = f"T-{ajan}"
         tb.gorev_ekle(tid, f"{ajan} is", ajan, "P1")
         tb.gorev_guncelle(tid, durum="aktif")
@@ -53,11 +53,11 @@ def test_bos_ajanlar_hepsi_mesgul(tmp_path):
 
 
 def test_bos_ajanlar_tek_bosta(tmp_path):
-    tb.gorev_ekle("T1", "roo is", "roo", "P1")
+    tb.gorev_ekle("T1", "ihsan is", "ihsan", "P1")
     tb.gorev_guncelle("T1", durum="review")
     bosta = isbirligi.bos_ajanlar()
-    assert "roo" not in bosta
-    assert "kilo" in bosta
+    assert "ihsan" not in bosta
+    assert "utku" in bosta
 
 
 # ---- yardim_edilebilir ----

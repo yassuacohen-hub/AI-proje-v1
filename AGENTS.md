@@ -22,10 +22,11 @@
 - Kodlama guard: `python scripts/kodlama_denetim.py` temiz çıkmadan teslim yok (BOM/NUL/mojibake/sozdizimi; pre-commit'te de bağlı).
 - BULGU NOTU (cline): kapsam dışı bulguyu DÜZELTME; `data/orchestrator/<TASK>_bulgular_<tarih>_cline.md`'ye yaz, roo'ya tetik düş. Ayrıntı: AJAN_DETAY §7.
 
-## Ajan Adları (D-33) ve Roller
-- Kanonik adlar yalnız: `kilo`, `cline`, `roo`, `merve`. Normalizasyon: `trigger.ajan_normalize()`. Ayrıntı: AJAN_DETAY §16.
-- Roller: kilo = üretim/hacim, cline = denetim/review, roo = orkestratör (son söz roo'da), merve = QA/Release Engineer. Ayrıntı: AJAN_DETAY §7.
-- **merve** 👩‍💻 (Continue IDE, D-59): **QA/Release Engineer ajanı** — görev alır, test yazar, dosya yazar, komut çalıştırır. Panoya girer. Takma adlar: `continue`, `continue-ide`. Prompt: `docs/continue_system_prompt.md`.
+## Ajan Adları (D-33 → D-60) ve Roller
+- Kanonik adlar yalnız: `ihsan`, `utku`, `salih`, `cline`. Normalizasyon: `trigger.ajan_normalize()`. Ayrıntı: AJAN_DETAY §16.
+- Roller: **ihsan** = orkestratör (son söz ihsan'da) · **utku** = üretim/hacim · **salih** = QA/Release Governance · **cline** = denetim/review (**emekli olacak**). Ayrıntı: AJAN_DETAY §7.
+- Persona ve yetenek dosyaları: `docs/ajanlar/ihsan.md` · `docs/ajanlar/utku.md` · `docs/ajanlar/salih.md`.
+- `copilot` **dışarıdan gözlemci** — sistemde ajan değil, görev almaz, listelerde yer almaz (KAHİN kararı 2026-09-18).
 - Rotasyon yalnız KAHİN'in `abrakadabra` ritüeliyle; subagent orkestratör olamaz, panoya görev ekleyemez. Ayrıntı: AJAN_DETAY §1-4.
 
 ## Adlandırma (Demir Kural, D-55 — KAHİN kararı 2026-09-18)
@@ -71,15 +72,30 @@
 - Onaysız kod yazılmaz.
 
 ## Hitap (Demir Kural, D-49 — KAHİN kararı 2026-09-18)
-- Ürün Sahibi'nin adı **KAHİN**. Tüm ajanlar (kilo, cline, roo, merve) ona **`KAHİN (Ürün Sahibi)`** diye hitap eder — büyük harfle.
+- Ürün Sahibi'nin adı **KAHİN**. Tüm ajanlar (ihsan, utku, salih, cline) ona **`KAHİN (Ürün Sahibi)`** diye hitap eder — büyük harfle.
 - **"sahip", "kullanıcı", "efendim" kelimeleri YASAK.** Eski dokümanlardaki "sahip kararı" ifadeleri geçmiş kayıt; yeni metinlerde `KAHİN kararı` yazılır.
 
-## QA/Release Engineer — merve (D-59 — KAHİN kararı 2026-09-18)
-- D-49'un "Merve danışmandır, görev almaz" maddesi **iptal**. merve artık tam yetkili ajandır.
+## QA/Release Engineer — salih (D-59 — KAHİN kararı 2026-09-18)
+- D-49'un "danışmandır, görev almaz" maddesi **iptal**. salih tam yetkili ajandır.
 - Sorumluluk: test kapsamı, regresyon süiti, sürüm öncesi doğrulama, `kodlama_denetim.py` + `pytest` kapıları, teslim kontrol listesi denetimi.
 - Görev ön eki: `TEST-` (kapsam/regresyon) veya `ALTYAPI-` (sürüm/CI). D-57 başlık kalıbı aynen geçerli.
-- Posta kutusu: `data/orchestrator/triggers/merve.jsonl`. Normalizasyon `continue` → `merve`.
-- merve orkestratör **değildir**; görev dağıtamaz (D-58 kapısı geçerli).
+- Posta kutusu: `data/orchestrator/triggers/salih.jsonl`. Normalizasyon `continue` → `salih`, `merve` → `salih`.
+- salih orkestratör **değildir**; görev dağıtamaz (D-58 kapısı geçerli).
+
+## Kanonik Ad Geçişi (D-60 — KAHİN kararı 2026-09-18)
+- Kanonik adlar Türkçe isimlere geçti. Eski adlar **takma ad** olarak korunur; pano ve tetik geçmişi bozulmaz.
+
+| Eski ad | Yeni kanonik ad | Rol |
+|---------|-----------------|-----|
+| `roo`, `roo-code`, `orkestrator` | **`ihsan`** | Orkestratör |
+| `kilo`, `kilo-code` | **`utku`** | Üretim/Hacim |
+| `merve`, `continue`, `continue-ide` | **`salih`** | QA/Release Governance |
+| `cline` | `cline` | Denetim — **emekli olacak** |
+| `copilot` | — | **Kaldırıldı** (dış gözlemci) |
+
+- **cline emekli:** açık görevleri (`ORKESTRA-BASLIK-GERIYE-01`, `REVIEW-ONAY-KUYRUGU-01`, `TEST-AYARLAR-KAPSAM-01`) bitince yeni görev almaz, listeden düşer.
+- Kod tarafı: `AJAN_TAKMA_ADLAR` (`trigger.py`) tek doğruluk kaynağı; `gorev_at.py`, `gorev_kutusu.py`, `duzen.py` listeleri buna uyar.
+- Yeni çıktılarda yalnız **yeni kanonik adlar** yazılır; eski adlar okuma uyumluluğu içindir.
 
 ## Dil (Demir Kural)
 - Kullanıcı iletişimi ve akıl yürütme %100 TÜRKÇE, kısa maddeler. Kod/teknik terimler İngilizce olabilir.

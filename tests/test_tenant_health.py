@@ -341,7 +341,7 @@ def test_tenant_health_dashboard_with_mocked_streamlit(monkeypatch):
     # Mock all streamlit calls
     mock_markdown = lambda *a, **kw: None
     mock_metric = lambda *a, **kw: None
-    mock_columns = lambda *a, **kw: [type("Col", (), {"metric": lambda *a2, **kw2: None})() for _ in range(4)]
+    mock_columns = lambda *a, **kw: [type("Col", (), {"metric": lambda *a2, **kw2: None, "__enter__": lambda s: s, "__exit__": lambda *a: None})() for _ in range(4)]
     mock_expander = lambda *a, **kw: type("Exp", (), {"text": lambda *a2, **kw2: None, "__enter__": lambda s: s, "__exit__": lambda *a: None})()
     mock_subheader = lambda *a, **kw: None
     mock_divider = lambda: None

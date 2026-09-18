@@ -7,35 +7,35 @@
 
 | Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |
 |-------|--------|-------|---------|-------|----------|
+| ADMIN-UX-LOGOUT-01 | Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli | roo | P0 | review | app.py, web_dashboard/tabs/admin_auth.py |
+| ADMIN-UX-PROFILMENU-01 | Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link | roo | P0 | plan | src/company_master/ui/components/profil_menu.py, src/company_master/ui/styles.py |
+| RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arastirma | roo | P0 | aktif | - |
+| ADMIN-UX-AYARLAR-SAYFA-01 | Kullanici Ayarlari tek sayfa: profil + sifre degistir/sifirla | roo | P1 | plan | web_dashboard/tabs/admin_kullanici_ayarlari.py |
+| ADMIN-UX-MENUTREE-01 | Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar | roo | P1 | plan | web_dashboard/tabs/__init__.py |
+| V10-BELGE-01 | 6 curutulen iddiaya K1/K3/K4 duzeltme notu | roo | P1 | plan | AI proje v1/V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md |
 | WK-01 | Career Pages Scraper — Enhanced Data Extraction | - | P1 | plan | - |
 | WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | plan | - |
-| WK-03 | Proxy Rotation and IP Management | - | P2 | plan | - |
+| ADMIN-KPI-KART-02 | Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi | kilo | P2 | review | web_dashboard/tabs/webhook_monitor.py, web_dashboard/tabs/tenant_health_dashboard.py, tests/test_webhook_monitor_tab.py |
+| ADMIN-MUSTERI-02 | Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi) | kilo | P2 | review | web_dashboard/tabs/musteri_yonetimi.py, tests/test_musteri_yonetimi.py |
+| AGN-CREWAI-PILOT-01 | crewAI hibrit worker pilotu (metin-üretimi deneyi, scripts/deney/) | roo | P2 | aktif | scripts/deney/crewai_arastirma_deneyi.py |
+| FMT-01 | ruff format/lint standardizasyonu (web_app/app/web_dashboard haric) | kilo | P2 | blocked | ruff.toml, .pre-commit-config.yaml |
 | GUARD-ENC-02 | kodlama_denetim genisletme (CRLF/bosluk/tab/EOF + fix) | kilo | P2 | blocked | scripts/kodlama_denetim.py, tests/test_kodlama_denetim.py, data/kodlama_allowlist.json |
 | SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH bulgular | kilo | P2 | blocked | scripts/sec_bandit.py, tests/test_sec_bandit.py, .bandit |
-| FMT-01 | ruff format/lint standardizasyonu (web_app/app/web_dashboard haric) | kilo | P2 | blocked | ruff.toml, .pre-commit-config.yaml |
-| ADMIN-HATA-01 | Hata Yonetimi sekmesi: sahte istatistik/demo raise kaldir, gercek kaynak + rapor kaydi | kilo | P2 | aktif | - |
-| ADMIN-MUSTERI-02 | Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi) | kilo | P2 | plan | web_dashboard/tabs/musteri_yonetimi.py, tests/test_musteri_yonetimi.py |
-| ADMIN-KPI-KART-02 | Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi | kilo | P2 | plan | web_dashboard/tabs/webhook_monitor.py, web_dashboard/tabs/tenant_health_dashboard.py, tests/test_webhook_monitor_tab.py |
-| ADMIN-HATA-02 | Admin sekmelerinde 16 sessiz except:pass -> log/hata_kutusu + AST testi | kilo | P2 | aktif | web_dashboard/tabs/admin_kpi.py, web_dashboard/tabs/admin_quality.py, web_dashboard/tabs/admin_performance.py |
-| RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arastirma | roo | P0 | aktif | - |
+| WK-03 | Proxy Rotation and IP Management | - | P2 | plan | - |
 | ADLANDIRMA-GERIYE-01 | D-55 geriye donuk: 55 rapor dosyasindan ajan adini kaldir, rol bazli son eke cevir | roo | P3 | plan | - |
-| AGN-CREWAI-PILOT-01 | crewAI hibrit worker pilotu (metin-üretimi deneyi, scripts/deney/) | roo | P2 | aktif | scripts/deney/crewai_arastirma_deneyi.py |
-| ADMIN-LOGIN-FIX-01 | Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi | roo | P0 | review | web_dashboard/tabs/admin_auth.py |
-| ADMIN-ADMIN2-DOGRULA-01 | 2. admin hesabi yassuacohen@gmail.com sifre dogrulama | kilo | P2 | review | scripts/admin_kimlik_kontrol.py |
-| ADMIN-MODAL-STIL-01 | Admin modal: blur backdrop + marka kimligini yansit | roo | P1 | review | web_dashboard/tabs/admin_auth.py |
-| ADMIN-SIFRE-RESET-FLOW-01 | Sifre unuttum akisi: email gonder -> link -> sifre sifirla | roo | P2 | review | web_dashboard/tabs/admin_auth.py |
-| ADMIN-UX-LOGOUT-01 | Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli | roo | P0 | plan | app.py, web_dashboard/tabs/admin_auth.py |
-| ADMIN-UX-PROFILMENU-01 | Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link | roo | P0 | plan | src/company_master/ui/components/profil_menu.py, src/company_master/ui/styles.py |
-| ADMIN-UX-MENUTREE-01 | Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar | roo | P1 | plan | web_dashboard/tabs/__init__.py |
-| ADMIN-UX-AYARLAR-SAYFA-01 | Kullanici Ayarlari tek sayfa: profil + sifre degistir/sifirla | roo | P1 | plan | web_dashboard/tabs/admin_kullanici_ayarlari.py |
-| V10-HIJYEN-01 | engine.py mukerrer+bozuk WHERE blogu temizligi (B-14) | roo | P0 | review | src/company_master/search/engine.py, tests/test_search_engine_where.py |
-| V10-HIJYEN-02 | search/fulltext.py olu kod silinmesi (B-15) - KAHIN onayi bekliyor | roo | P2 | plan | src/company_master/search/fulltext.py |
-| V10-BELGE-01 | 6 curutulen iddiaya K1/K3/K4 duzeltme notu | roo | P1 | plan | AI proje v1/V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md |
+| REVIEW-ONAY-KUYRUGU-01 | Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01) | cline | P1 | plan | data/orchestrator/REVIEW-ONAY-KUYRUGU-01_rapor_2026-09-18_denetim.md |
+| TEST-AYARLAR-KAPSAM-01 | Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda) | cline | P2 | plan | tests/test_admin_kullanici_ayarlari.py |
+| UI-AYARLAR-SAYFA-01 | [UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s) | roo | P1 | plan | - |
+| ORKESTRA-BASLIK-GERIYE-01 | [ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s) | cline | P2 | plan | - |
+| TEST-MERVE-KAPSAM-01 | [TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s) | merve | P2 | plan | - |
 
 ## Tamamlananlar
 
 | Görev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
+| ADMIN-HATA-01 | Hata Yonetimi sekmesi: sahte istatistik/demo raise kaldir, gercek kaynak + rapor kaydi | kilo | 2026-09-18T21:55:21 |
+| ADMIN-HATA-02 | Admin sekmelerinde 16 sessiz except:pass -> log/hata_kutusu + AST testi | kilo | 2026-09-18T21:55:21 |
+| V10-HIJYEN-02 | search/fulltext.py olu kod silinmesi (B-15) | roo | 2026-09-18T21:07:00 |
 | P0-1 | İstiklal OSB scraper implementasyonu | web_kazima | 2026-09-08T10:00:00Z |
 | P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-03T14:18:36 |
 | P0-3 | Kalite skoru 6.53 - 50+ heazine | kalite | 2026-09-06T22:54:31 |
@@ -293,3 +293,9 @@
 | ADMIN-KOK-TEMIZLIK-01 | Kok dizindeki 3 gecici script sil + .gitignore kontrol + commit | roo | 2026-09-18T05:27:42 |
 | AGN-STACK-01 | crewAI/LangChain vs Huginn orkestratoru kiyas raporu (KAHIN emri) | roo | 2026-09-18T05:41:12 |
 | MARKA-REVIZE-01-BULGU | Marka denetim muafiyet mekanizmasi (B-1/B-2/B-6) | roo | 2026-09-18T05:55:37 |
+| ADMIN-LOGIN-FIX-01 | Admin giris: baglanti hatasi ile 401 ayrimi + API kapali uyarisi | roo | 2026-09-18T15:12:46.586128Z |
+| ADMIN-ADMIN2-DOGRULA-01 | 2. admin hesabi yassuacohen@gmail.com sifre dogrulama | kilo | 2026-09-18T21:55:20 |
+| ADMIN-MODAL-STIL-01 | Admin modal: blur backdrop + marka kimligini yansit | roo | 2026-09-18T15:12:46.586128Z |
+| ADMIN-SIFRE-RESET-FLOW-01 | Sifre unuttum akisi: email gonder -> link -> sifre sifirla | roo | 2026-09-18T21:55:20 |
+| V10-HIJYEN-01 | engine.py mukerrer+bozuk WHERE blogu temizligi (B-14) | roo | 2026-09-18T15:12:46.586128Z |
+| UX-MENU-03 | Menu agaci sadelestirme (E1-E5) + Dashboard Overview aksiyon seridi | roo | 2026-09-18T17:30:00 |

@@ -6,6 +6,7 @@ Kurallar:
   - ApifyWebhookReceiver.health_check() ile endpoint durumu
   - Plotly fallback: st.bar_chart / st.pyplot
   - Hata yuzeyinde graceful fallback (dosya yok -> "veri yok")
+  - UI-CHART-01: KPI kartlari `web_dashboard.charts.kpi_karti` ile cizilir
 """
 from __future__ import annotations
 
@@ -22,9 +23,14 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from scripts.apify_webhook_receiver import ApifyWebhookReceiver
+from web_dashboard.charts import kpi_karti  # UI-CHART-01
+from web_dashboard.tabs.admin_error_handling import AdminErrorHandler
 
 WEBHOOK_EVENTS = ROOT / "data" / "orchestrator" / "apify_webhook_events.jsonl"
 WEBHOOK_DLQ = ROOT / "data" / "orchestrator" / "apify_webhook_dlq.jsonl"
+
+# Webhook Monitor logger
+_webhook_logger = AdminErrorHandler("webhook_monitor")
 
 
 # ---------------------------------------------------------------------------
@@ -162,31 +168,38 @@ def render_webhook_monitor_tab() -> None:
         status_val = health.get("status", "unknown")
         dlq_size = health.get("dlq_size", 0)
         with h1:
-            st.metric(
-                "Durum",
-                status_val.upper(),
-                delta=None,
-            )
+            kpi_karti("Durum", status_val.upper(), ikon="🏷️", kategori="bilgi")
         with h2:
-            st.metric(
+            kpi_karti(
                 "Secret",
                 "✅ Var" if health.get("secret_configured") else "❌ Yok",
+                ikon="🔐",
+                kategori="basari" if health.get("secret_configured") else "hata",
             )
         with h3:
-            st.metric(
+            kpi_karti(
                 "Rate Limit",
                 "Aktif" if health.get("rate_limit_enabled") else "Devre Dışı",
+                ikon="⚡",
+                kategori="basari" if health.get("rate_limit_enabled") else "uyari",
             )
         with h4:
-            st.metric("DLQ Boyutu", dlq_size)
+            kpi_karti("DLQ Boyutu", dlq_size, ikon="📦", kategori="hata" if dlq_size > 0 else "basari")
         with h5:
-            st.metric(
+            kpi_karti(
                 "Cache",
                 f"{health.get('processed_runs_memory', 0)} çalışma",
+                ikon="💾",
+                kategori="bilgi",
             )
         with h6:
             prom = health.get("prometheus_available", False)
-            st.metric("Prometheus", "✅" if prom else "❌")
+            kpi_karti(
+                "Prometheus",
+                "✅" if prom else "❌",
+                ikon="📈",
+                kategori="basari" if prom else "hata",
+            )
 
         if status_val == "healthy":
             st.success("✅ Webhook alıcısı sağlıklı.")
@@ -205,15 +218,15 @@ def render_webhook_monitor_tab() -> None:
 
     c1, c2, c3, c4, c5 = st.columns(5)
     with c1:
-        st.metric("Toplam Olay", stats["olay_toplam"])
+        kpi_karti("Toplam Olay", stats["olay_toplam"], ikon="📋", kategori="bilgi")
     with c2:
-        st.metric("✅ Başarılı", stats["basarili"])
+        kpi_karti("✅ Başarılı", stats["basarili"], ikon="✅", kategori="basari")
     with c3:
-        st.metric("❌ Hatalı", stats["hatali"])
+        kpi_karti("❌ Hatalı", stats["hatali"], ikon="❌", kategori="hata")
     with c4:
-        st.metric("⏳ Çalışan", stats["calisan"])
+        kpi_karti("⏳ Çalışan", stats["calisan"], ikon="⏳", kategori="uyari")
     with c5:
-        st.metric("📦 DLQ", stats["dlq_toplam"])
+        kpi_karti("📦 DLQ", stats["dlq_toplam"], ikon="📦", kategori="hata" if stats["dlq_toplam"] > 0 else "basari")
 
     if stats["son_olay"]:
         st.caption(f"Son olay: {stats['son_olay']}")
@@ -310,8 +323,10 @@ def render_webhook_monitor_tab() -> None:
             k: v for k, v in prom.items() if "duration" in k.lower()
         }
         if latency_keys:
-            for k, v in latency_keys.items():
-                st.metric(k, v)
+            cols = st.columns(min(len(latency_keys), 4))
+            for i, (k, v) in enumerate(latency_keys.items()):
+                with cols[i % len(cols)]:
+                    kpi_karti(k, v, ikon="⏱️", kategori="bilgi")
         else:
             st.info("Prometheus metrikleri mevcut ancak latency verisi yok.")
     else:

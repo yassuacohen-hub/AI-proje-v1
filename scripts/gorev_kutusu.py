@@ -183,7 +183,7 @@ def cmd_hepsini_tamamla(args: argparse.Namespace) -> int:
         except Exception as e:
             print(f"  HATA: {k['task_id']} - {e}")
 
-    for ajan in ["kilo", "roo", "copilot", "cline", "merve", "orkestrator"]:
+    for ajan in ["ihsan", "utku", "salih", "cline"]:
         try:
             tum = trigger._tetikleri_oku(ajan)
             teslim = [k for k in tum if k.get("durum") == "teslim"]
