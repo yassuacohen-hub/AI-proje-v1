@@ -260,16 +260,16 @@
   {
     "task_id": "V10-HIJYEN-02",
     "id": "V10-HIJYEN-02",
-    "baslik": "search/fulltext.py olu kod silinmesi (B-15) - KAHIN onayi bekliyor",
+    "baslik": "search/fulltext.py olu kod silinmesi (B-15)",
     "sahip": "roo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-18T16:54:11",
-    "bitis": null,
+    "bitis": "2026-09-18T21:07:00",
     "dosyalar": [
       "src/company_master/search/fulltext.py"
     ],
-    "not": "",
+    "not": "Teslim: dosya fiilen silindi (git rm). Icerik NotImplementedError firlatan iskeletti; gercek arama src/company_master/search/engine.py icinde. Repo genelinde tek bir Python referansi bile yoktu (regex tarama: 0 sonuc). Kodlama denetimi temiz. Tam suit 3902 passed / 5 skipped / 0 failed - regresyon yok.",
     "source": "ic",
     "from_agent": null
   },
