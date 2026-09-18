@@ -48,6 +48,8 @@ data/orchestrator/task_board_corrupt_backup.json
 data/orchestrator/
 scripts/check_*.py
 scripts/fix_*.py
+# ADMIN-KOK-TEMIZLIK-01: kok dizine gecici duzeltme scripti birakilmaz
+/fix_*.py
 scripts/inspect_*.py
 scripts/validate_*.py
 scripts/final_validate.py

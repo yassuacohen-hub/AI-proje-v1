@@ -9,7 +9,7 @@
 
 ## Görev Yaşam Döngüsü (ORCH-08, ZORUNLU)
 - Posta: `bak` → `al` → brif → iş → `teslim` (görev `review`'a geçer; onaysız `done` GEÇERSİZ). Sessizlik onay değildir. Ayrıntı: AJAN_DETAY §15.
-- Otomatik onay (S-07, sahip kararı 2026-09-16): `oto-nobetci` / `hepsini-tamamla` yalnız **P2 ve altı** görevleri onaylar; **P0/P1 roo elle onaylar** (`trigger.otomatik_onaylanabilir`). Tekrar ihlalde oto-nobetci kapatılır.
+- Otomatik onay (S-07, KAHİN kararı 2026-09-16): `oto-nobetci` / `hepsini-tamamla` yalnız **P2 ve altı** görevleri onaylar; **P0/P1 roo elle onaylar** (`trigger.otomatik_onaylanabilir`). Tekrar ihlalde oto-nobetci kapatılır.
 - Başlangıç protokolü: oturum açınca veya tek kelimelik tetik (başla/go/devam/tamam = tam yetki) ile önce posta kutusunu kontrol et.
 - Teslim kontrol listesi: brif maddeleri + diskte dosya + test sayısı + UTF-8 temizlik + kilit disiplini. Ayrıntı: AJAN_DETAY §17.
 - **TESLİM SONRASI DOĞRULAMA (KESIN KURAL):** Her görev teslim edilmeden önce şıklar doğrulanır:
@@ -35,7 +35,7 @@
 ## Dil (Demir Kural)
 - Kullanıcı iletişimi ve akıl yürütme %100 TÜRKÇE, kısa maddeler. Kod/teknik terimler İngilizce olabilir.
 
-## Token Verimliliği — Demir Kural (D-48, sahip kararı 2026-09-17)
+## Token Verimliliği — Demir Kural (D-48, KAHİN kararı 2026-09-17)
 - Token tasarrufu için modelin **düşünme/akıl yürütme gücüne müdahale YASAK**: reasoning/thinking budget düşürme, `max_tokens` daraltma, iş kalitesini düşüren zayıf model seçimi.
 - Hedef dörtlü: **temiz kod yazımı · kaliteli iş · verimlilik planlaması · maliyet avantajı**.
 - İzin verilen tasarruf: bağlam seçimi, görev brief'i, gereksiz keşif/okuma eleme, çıktı tekrarını azaltma (K1-K6).
@@ -135,6 +135,6 @@
 - **S-07 (D-46)**: Otomatik onay yalnız P2 ve altı; P0/P1 roo elle onaylar.
 - **D-47**: `pytest.MonkeyPatch` elle oluşturulmaz; her zaman `monkeypatch` fixture.
 - **Kilit disiplini**: `gorev_ekle(..., dosyalar=[...])` ile kilitle, bitince `lock_birak`.
-- **Commit**: Sabah roo/sahip; ajanlar commit ATMAZ.
+- **Commit**: Sabah roo/KAHİN; ajanlar commit ATMAZ.
 - **UI restart**: `python scripts/streamlit_restart.py` (fileWatcherType=none).
 - **API restart**: `docker compose up -d --build api` + curl doğrulama.

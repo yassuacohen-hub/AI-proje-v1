@@ -139,7 +139,7 @@ Ek doğrulamalar (aynı tarama):
 **Sonuç:** Elimizdeki `BAZARLINK_API_KEY` büyük olasılıkla **iptal edilmiş agent anahtarı**.
 Claim ile kurtarılamaz — claim yolunun kendisi kapandı.
 
-### Sahip için adımlar (tek geçerli yol)
+### KAHİN (Ürün Sahibi) için adımlar (tek geçerli yol)
 
 1. `https://bazaarlink.ai` → **Sign in / Kayıt ol** (normal e-posta hesabı; agent kaydı değil).
 2. Panel → **API Anahtarları** → **Yeni anahtar üret** (`sk-bl-…`).

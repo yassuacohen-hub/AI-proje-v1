@@ -1,13 +1,13 @@
 {
   "_comment": {
-    "description": "Roo Code IDE configuration template - ücretsiz model yapılandirma + fallback",
-    "source": "Continue config deseni (docs/continue_config.json) uzerinden taslaklandi",
-    "fallback": "Fallback: Nemotron 3.5 Content Safety (primary) → Qwen 3.8 27B (secondary) → Claude Sonnet 4.5 (emergency)",
-    "aciklama": "ücretsiz modeller listede onceliklidir. Ucretliler en sondadir [UCRETLI] ile etiketlidir",
-    "api_anahtarlari": "Anahtarlar ortam degiskenleri olarak .env'dede tutulur. Bu dosyaya YAZILMAZ",
-    "d48_uyumlulugu": "D-48: Modelin düşünce/akıl yırşütme guyune mudahale YOK. Reasoning/thinking budget düşülmez (D-48 kural)",
-    "turkce_not": "Türkçe açklamalar _comment alanlarinda. JSON anahtarlarç Englizce",
-    "versiyon": "2026-09-17",
+    "description": "Roo Code IDE yapılandırma şablonu — ücretsiz model listesi + fallback zinciri",
+    "source": "Continue config deseni (docs/continue_config.json) üzerinden taslaklandı",
+    "fallback": "Fallback: Nemotron 3 Ultra 550B :free (primary) → Qwen 3.8 27B (secondary) → Claude Sonnet 4.5 (emergency)",
+    "aciklama": "Ücretsiz modeller listede önceliklidir. Ücretliler en sondadır, [UCRETLI] ile etiketlidir",
+    "api_anahtarlari": "Anahtarlar ortam değişkeni olarak .env'de tutulur. Bu dosyaya YAZILMAZ",
+    "d48_uyumlulugu": "D-48: Modelin düşünce/akıl yürütme gücüne müdahale YOK. Reasoning/thinking budget düşürülmez",
+    "turkce_not": "Türkçe açıklamalar _comment alanlarında. JSON anahtarları İngilizce",
+    "versiyon": "2026-09-18",
     "agent": "kilo",
     "priorite": "P2"
   },

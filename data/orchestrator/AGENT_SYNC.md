@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-18T04:56:37
+> Son guncelleme: 2026-09-18T05:31:51
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -18,17 +18,11 @@
 | ADMIN-KPI-KART-02 | Kalan st.metric -> kpi_karti (webhook_mo | kilo | P2 | plan |
 | ADMIN-HATA-02 | Admin sekmelerinde 16 sessiz except:pass | kilo | P2 | plan |
 | RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arasti | roo | P0 | aktif |
-| ADMIN-ROO-DENETIM-01 | Admin panel gece zinciri teslimlerini in | roo | P2 | plan |
-| ADMIN-HITAP-01 | D-49 uygulama: sahip -> KAHIN (Urun Sahi | roo | P2 | plan |
-| ADMIN-KOK-TEMIZLIK-01 | Kok dizindeki 3 gecici script sil + .git | roo | P2 | plan |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| KPI-HIST-01 | GET /api/kpi/history + ana kontrol gerce | kilo | 2026-09-17 |
-| ADMIN-KPI-KART-01 | Admin sekmelerinde st.metric -> kpi_kart | kilo | 2026-09-17 |
-| ADMIN-ROO-01 | Admin sekmeleri hata/bos-durum standardi | roo | 2026-09-17 |
 | ADMIN-NAV-HAZIR-01 | Bayat hazir=False ust sayfalari ac (veri | roo | 2026-09-17 |
 | ADMIN-EXEC-01 | Executive Dashboard: st.metric->kpi_kart | roo | 2026-09-17 |
 | ADMIN-SEARCH-01 | admin_search.py admin sekme kalibina gec | roo | 2026-09-17 |
@@ -36,6 +30,9 @@
 | ADMIN-NAV-HAZIR-02 | Navigasyon/auth sessiz except temizligi  | roo | 2026-09-17 |
 | GIT-HIJYEN-01 | Satir sonu/dosya sonu hijyeni: kodlama_d | kilo | 2026-09-18 |
 | ROO-CONFIG-01 | Roo Code IDE ucretsiz model yapilandirma | kilo | 2026-09-18 |
+| ADMIN-ROO-DENETIM-01 | Admin panel gece zinciri teslimlerini in | roo | 2026-09-18 |
+| ADMIN-HITAP-01 | D-49 uygulama: sahip -> KAHIN (Urun Sahi | roo | 2026-09-18 |
+| ADMIN-KOK-TEMIZLIK-01 | Kok dizindeki 3 gecici script sil + .git | roo | 2026-09-18 |
 
 ## Son Handoff'lar
 

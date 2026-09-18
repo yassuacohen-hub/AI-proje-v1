@@ -48,40 +48,5 @@
     "sahip": "kilo",
     "task_id": "ADMIN-HATA-02",
     "kilitlendi": "2026-09-17T06:49:12"
-  },
-  "AGENTS.md": {
-    "sahip": "roo",
-    "task_id": "ADMIN-HITAP-01",
-    "kilitlendi": "2026-09-18T04:56:36"
-  },
-  ".clinerules": {
-    "sahip": "roo",
-    "task_id": "ADMIN-HITAP-01",
-    "kilitlendi": "2026-09-18T04:56:36"
-  },
-  ".roorules": {
-    "sahip": "roo",
-    "task_id": "ADMIN-HITAP-01",
-    "kilitlendi": "2026-09-18T04:56:36"
-  },
-  "docs/AJAN_DETAY.md": {
-    "sahip": "roo",
-    "task_id": "ADMIN-HITAP-01",
-    "kilitlendi": "2026-09-18T04:56:37"
-  },
-  "fix_encoding.py": {
-    "sahip": "roo",
-    "task_id": "ADMIN-KOK-TEMIZLIK-01",
-    "kilitlendi": "2026-09-18T04:56:37"
-  },
-  "fix_encoding2.py": {
-    "sahip": "roo",
-    "task_id": "ADMIN-KOK-TEMIZLIK-01",
-    "kilitlendi": "2026-09-18T04:56:37"
-  },
-  "fix_final.py": {
-    "sahip": "roo",
-    "task_id": "ADMIN-KOK-TEMIZLIK-01",
-    "kilitlendi": "2026-09-18T04:56:37"
   }
 }

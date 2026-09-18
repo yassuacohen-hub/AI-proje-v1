@@ -5,13 +5,13 @@
 > durumunda AGENTS.md çekirdeği geçerlidir.
 
 ## 1. Rotasyon Ritüeli ("abrakadabra")
-- Rotasyon **yalnızca sahibin sözüyle** başlar; ritüel sözcüğü `abrakadabra`'dır.
+- Rotasyon **yalnızca KAHİN'in (Ürün Sahibi) sözüyle** başlar; ritüel sözcüğü `abrakadabra`'dır.
 - Kayıt (tek komut): `python scripts/orkestrator_rotasyon.py <yeni_orkestrator> --kelime abrakadabra --gerekce "..."`
 - Script üç iş yapar: (1) sözcüğü doğrular (yanlışsa reddeder), (2) `decision_log.jsonl`'e yapılandırılmış kayıt atar (`kimden`/`kime`/`tetikleyici`), (3) `AI proje v1/V10/CHANGELOG.md`'e insan-okur notu düşer.
 - **Rotasyon cümlesi ile görev cümlesi aynı mesajda birleştirilmez** — önce rotasyon, sonra görev emri.
 
 ## 2. Görev Emri Sözlüğü
-| Sahip cümlesi | Anlamı |
+| KAHİN cümlesi | Anlamı |
 |---|---|
 | "X-01'i devret" | Orkestratör görevi subagent'a verir; raporu doğrulayıp kayda yazar |
 | "X-01'i kendin yap" | Orkestratör bizzat yapar; subagent başlatmaz |
@@ -21,7 +21,7 @@
 - Başlatılacak görev başka bir ajanın **kilitli** göreviyse: **beklenir**; kilit sahibi görevi `done` yapınca ORCH-05 kilidi otomatik düşürür, sonra başlanır. Kilitli dosyaya dokunulmaz.
 
 ## 4. Subagent Kuralları
-- Subagent **asla orkestratör olamaz**; rotasyon yalnızca sahip ritüeliyle.
+- Subagent **asla orkestratör olamaz**; rotasyon yalnızca KAHİN ritüeliyle.
 - Subagent panoya görev **ekleyemez**, yalnızca rapor yazar.
 - Subagent `decision_log.jsonl`'e doğrudan **yazamaz**; kaydı orkestratör atar (`subagent` alanıyla kimliklendirir).
 
