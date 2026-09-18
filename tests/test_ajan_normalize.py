@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""D-33 ajan adı kuralı: kanonik adlar kilo / cline / roo.
+"""D-33 ajan adı kuralı: kanonik adlar kilo / cline / roo / merve (D-59).
 
 "Ajan kilo", "KILO", "kilo_code", "ajancline", "Ajan roo", "roo_code"
 gibi yazımlar tek posta kutusuna (kilo.jsonl / cline.jsonl / roo.jsonl) çözümlenir.
@@ -38,6 +38,14 @@ from company_master.orchestrator.trigger import TriggerError, ajan_normalize
         ("orkestrator", "roo"),
         ("claude_code", "claude_code"),
         ("claude-code", "claude_code"),
+        # D-59: merve = QA/Release Engineer (Continue IDE)
+        ("merve", "merve"),
+        ("Merve", "merve"),
+        ("Ajan merve", "merve"),
+        ("continue", "merve"),
+        ("Continue", "merve"),
+        ("continue-ide", "merve"),
+        ("continue_ide", "merve"),
     ],
 )
 def test_ajan_normalize_kanonik_ada_cevirir(ham: str, beklenen: str) -> None:

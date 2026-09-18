@@ -23,9 +23,9 @@
 - BULGU NOTU (cline): kapsam dışı bulguyu DÜZELTME; `data/orchestrator/<TASK>_bulgular_<tarih>_cline.md`'ye yaz, roo'ya tetik düş. Ayrıntı: AJAN_DETAY §7.
 
 ## Ajan Adları (D-33) ve Roller
-- Kanonik adlar yalnız: `kilo`, `cline`, `roo`. Normalizasyon: `trigger.ajan_normalize()`. Ayrıntı: AJAN_DETAY §16.
-- Roller: kilo = üretim/hacim, cline = denetim/review, roo = orkestratör (son söz roo'da). Ayrıntı: AJAN_DETAY §7.
-- **Merve** 👩‍💻 (Continue IDE, D-49): danışman — dosya yazmaz, görev almaz, komut çalıştırmaz. Panoya girmez. Prompt: `docs/continue_system_prompt.md`.
+- Kanonik adlar yalnız: `kilo`, `cline`, `roo`, `merve`. Normalizasyon: `trigger.ajan_normalize()`. Ayrıntı: AJAN_DETAY §16.
+- Roller: kilo = üretim/hacim, cline = denetim/review, roo = orkestratör (son söz roo'da), merve = QA/Release Engineer. Ayrıntı: AJAN_DETAY §7.
+- **merve** 👩‍💻 (Continue IDE, D-59): **QA/Release Engineer ajanı** — görev alır, test yazar, dosya yazar, komut çalıştırır. Panoya girer. Takma adlar: `continue`, `continue-ide`. Prompt: `docs/continue_system_prompt.md`.
 - Rotasyon yalnız KAHİN'in `abrakadabra` ritüeliyle; subagent orkestratör olamaz, panoya görev ekleyemez. Ayrıntı: AJAN_DETAY §1-4.
 
 ## Adlandırma (Demir Kural, D-55 — KAHİN kararı 2026-09-18)
@@ -36,14 +36,50 @@
 - **Kapsam dışı (makine kimliği, dosya adı değil):** `task_board.json` `sahip` alanı, CLI `--ajan` parametresi, `triggers/{ajan}.jsonl` kuyruk dosyaları, `ajan_normalize()`.
 - Kural **yeni çıktılar** için derhal yürürlükte. Geriye dönük 55 dosya: `ADLANDIRMA-GERIYE-01` (iş yükü azalınca).
 
+## Görev Başlığı Standardı (D-57 — KAHİN kararı 2026-09-18)
+- Her görev başlığı **tek satır, 4 parça**: `[ALAN] FİİL + NESNE → ÇIKTI (SÜRE)`
+  Örnek: `[UI] Ayarlar sayfasını yaz → admin_kullanici_ayarlari.py (2s)`
+- **ALAN** (7 kanonik, başkası yok): `UI` · `API` · `VERI` · `TEST` · `DOC` · `ALTYAPI` · `ORKESTRA`
+- **FİİL** (8 kanonik): `yaz` · `düzelt` · `taşı` · `sil` · `denetle` · `ölç` · `belgele` · `araştır`
+- **ÇIKTI** = tek dosya yolu veya tek komut. Yoksa görev bölünür.
+- **SÜRE** = tahmini saat (`30d`, `1s`, `2s`, `4s`). 4 saati aşan görev bölünür.
+- **task_id ön eki ALAN ile aynı olur:** `UI-...`, `TEST-...`, `DOC-...`
+- Başlık bu kalıba uymuyorsa ajan işi **almaz**, orkestratöre geri sorar.
+- **Geriye dönük muafiyet:** Kural yalnız **yeni** görevler için yürürlükte. Panoda hâlihazırda açık olan görevler eski başlıklarıyla çalışılır; toplu düzeltme `BASLIK-GERIYE-01` görevinde yapılır (D-55'in `ADLANDIRMA-GERIYE-01` deseniyle aynı).
+- **Makine zorlaması:** `scripts/gorev_at.py at` başlık kalıbını ve ajan adını doğrular; uymayan görev panoya **girmez**.
+
+## Orkestratör Devralma (D-58 — KAHİN kararı 2026-09-18)
+- Orkestratör **devredilebilir**: `python scripts/gorev_at.py abrakadabra --ajan <kilo|cline|roo> --anahtar <deger>`
+- Anahtar koda gömülmez: `ABRAKADABRA_KEY` ortam değişkeni, yoksa `data/orchestrator/abrakadabra.key` (repoya girmez, `.gitignore`'da). Karşılaştırma `hmac.compare_digest` ile sabit zamanlı.
+- Aktif orkestratör `data/orchestrator/orchestrator.json`: `{"ajan","devralma_zamani","anahtar_parmak_izi"}`. Parmak izi = anahtarın `sha256` özeti; **anahtarın kendisi hiçbir yere yazılmaz/basılmaz**.
+- Yanlış anahtar: hiçbir durum değişmez, exit 1, anahtar değeri ekrana basılmaz.
+- Devralma sonrası **yeni görevleri yalnız aktif orkestratör dağıtır**. `at` komutu çağıranı `--cagiran` veya `ORKESTRA_AJAN` env'inden okur; uyuşmazsa exit 4.
+- Varsayılan orkestratör `roo` (dosya yoksa).
+
 ## Ürün Sahibi Raporlama Formatı (D-55)
 - KAHİN'e giden her özet: **kısa cümleler**, teknik olmayan dil, tablo.
 - Bulgular 4 sınıfta renklendirilir: 🔴 kırmızı (acil/blokaj) · 🟡 sarı (dikkat) · 🟢 yeşil (tamam) · 🔵 mavi (bilgi/öneri).
 - Mümkün olan her yerde **oran ve yüzde** verilir.
 
+## Wireframe Onay Sunumu (D-56 — KAHİN kararı 2026-09-18)
+- Her wireframe/tasarım belgesi **4 ana başlık + alt başlıklar** ile kurulur:
+  1. **Şu an ne var** (AS-IS + problemler)
+  2. **Ne olacak** (TO-BE çizim + değişim tablosu)
+  3. **Nasıl yapılacak** (bileşen sözleşmesi, tokenlar, erişilebilirlik)
+  4. **Onay için özet** (bağımlılıklar, kabul kriterleri, karar)
+- Onay istenirken belge **bu 4 başlık üzerinden anlatılır**; KAHİN'e dosyayı açma yolu (`Ctrl+P` → ad → `Ctrl+Shift+V`) her seferinde verilir.
+- Onaysız kod yazılmaz.
+
 ## Hitap (Demir Kural, D-49 — KAHİN kararı 2026-09-18)
-- Ürün Sahibi'nin adı **KAHİN**. Tüm ajanlar (kilo, cline, roo, Merve) ona **`KAHİN (Ürün Sahibi)`** diye hitap eder — büyük harfle.
+- Ürün Sahibi'nin adı **KAHİN**. Tüm ajanlar (kilo, cline, roo, merve) ona **`KAHİN (Ürün Sahibi)`** diye hitap eder — büyük harfle.
 - **"sahip", "kullanıcı", "efendim" kelimeleri YASAK.** Eski dokümanlardaki "sahip kararı" ifadeleri geçmiş kayıt; yeni metinlerde `KAHİN kararı` yazılır.
+
+## QA/Release Engineer — merve (D-59 — KAHİN kararı 2026-09-18)
+- D-49'un "Merve danışmandır, görev almaz" maddesi **iptal**. merve artık tam yetkili ajandır.
+- Sorumluluk: test kapsamı, regresyon süiti, sürüm öncesi doğrulama, `kodlama_denetim.py` + `pytest` kapıları, teslim kontrol listesi denetimi.
+- Görev ön eki: `TEST-` (kapsam/regresyon) veya `ALTYAPI-` (sürüm/CI). D-57 başlık kalıbı aynen geçerli.
+- Posta kutusu: `data/orchestrator/triggers/merve.jsonl`. Normalizasyon `continue` → `merve`.
+- merve orkestratör **değildir**; görev dağıtamaz (D-58 kapısı geçerli).
 
 ## Dil (Demir Kural)
 - Kullanıcı iletişimi ve akıl yürütme %100 TÜRKÇE, kısa maddeler. Kod/teknik terimler İngilizce olabilir.

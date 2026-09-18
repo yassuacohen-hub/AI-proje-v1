@@ -36,7 +36,8 @@ from src.company_master.orchestrator import task_board as tb
 from src.company_master.orchestrator import trigger
 
 # Tek doğruluk kaynağı: tüm döngüler buradan ajan okur (copilot unutulmasın!)
-AJANLAR = ["kilo", "roo", "copilot", "cline", "orkestrator"]
+# D-59: merve = QA/Release Engineer (Continue IDE), artık görev alır.
+AJANLAR = ["kilo", "roo", "copilot", "cline", "merve", "orkestrator"]
 
 # Dedupe'ta hangi durum kazanır (küçük sayı kazanır)
 _DURUM_ONCELIK = {"done": 0, "blocked": 1, "review": 2, "aktif": 3, "plan": 4}

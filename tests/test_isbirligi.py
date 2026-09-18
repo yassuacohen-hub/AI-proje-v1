@@ -44,7 +44,8 @@ def test_bos_ajanlar_iki_azan_bosta(tmp_path):
 
 
 def test_bos_ajanlar_hepsi_mesgul(tmp_path):
-    for ajan in ["kilo", "roo", "copilot", "cline"]:
+    # D-59: merve de kanonik ajan; "hepsi mesgul" icin o da doldurulur.
+    for ajan in ["kilo", "roo", "copilot", "cline", "merve"]:
         tid = f"T-{ajan}"
         tb.gorev_ekle(tid, f"{ajan} is", ajan, "P1")
         tb.gorev_guncelle(tid, durum="aktif")

@@ -120,12 +120,12 @@
     "baslik": "Hata Yonetimi sekmesi: sahte istatistik/demo raise kaldir, gercek kaynak + rapor kaydi",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": [
       "web_dashboard/tabs/admin_errors.py",
       "tests/test_admin_errors.py"
     ],
-    "bitis": null,
+    "bitis": "2026-09-18T21:55:21",
     "dosyalar": [],
     "not": "Teslim (kilo): Hata Yönetimi sekmesi yeniden yazildi: sahte demo raise (simüle 404/500/bağlantı) ve sahte istatistikler (metrikler 'Veri yok' gösteriyordu) kaldirildi. Gercek hata kaynagi: src/company_master/logging/error_logger.py merkezi hata loglama (dosya tabanli JSONL: data/errors/error_log.jsonl). app.py hata sinirina log_error() entegre edildi. Admin sekmesinde: filtreleme (seviye/kaynak/donem), gercek istatistikler (toplam/ERROR/WARNING/CRITICAL, kaynak dagilimi, hata turu dagilimi), hata detaylari (expandable), kullanici hata raporlama formu. Testler: 5/5 geciyor.",
     "source": "ic",
@@ -137,9 +137,9 @@
     "baslik": "Admin sekmelerinde 16 sessiz except:pass -> log/hata_kutusu + AST testi",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-17T06:49:12",
-    "bitis": null,
+    "bitis": "2026-09-18T21:55:21",
     "dosyalar": [
       "web_dashboard/tabs/admin_kpi.py",
       "web_dashboard/tabs/admin_quality.py",
@@ -157,7 +157,7 @@
     "baslik": "Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-17T06:49:12",
     "bitis": null,
     "dosyalar": [
@@ -166,7 +166,7 @@
       "tests/test_webhook_monitor_tab.py",
       "tests/test_admin_kpi_kart.py"
     ],
-    "not": "",
+    "not": "Teslim (kilo): webhook_monitor.py ve tenant_health_dashboard.py dosyalarindaki tum st.metric cagrilari kpi_karti ile degistirildi. UI-CHART-01 uyumlulugu saglandi. AST tespit aracı: scripts/detect_st_metric.py. Testler: tests/test_admin_kpi_kart.py (6 test) + test_admin_sessiz_except.py (7 test) + test_admin_errors.py (5 test) + test_tenant_health.py (4 test) = 22 test geciyor. Kodlama denetimi temiz.",
     "source": "roo",
     "from_agent": null
   },
@@ -176,14 +176,14 @@
     "baslik": "Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-17T06:48:52",
     "bitis": null,
     "dosyalar": [
       "web_dashboard/tabs/musteri_yonetimi.py",
       "tests/test_musteri_yonetimi.py"
     ],
-    "not": "",
+    "not": "Teslim (kilo): Musteri Yonetimi placeholder alt sekmeler gercek icerikle dolduruldu: _kullanicilar_onay() — onay bekleyen kullanicilar listesi, tier selectbox, onaylama butonu, son onaylananlar, kategori listesi. _paket_kredi() — kredi yukleme formu, kategori goruntuleme, yeni kategori ekleme formu. admin_extras.pydeki render_user_management mantigi entegre edildi. Testler: tests/test_musteri_yonetimi.py (3 test) geciyor. Kodlama denetimi temiz.",
     "source": "roo",
     "from_agent": null
   },
@@ -4568,7 +4568,7 @@
     "oncelik": "P2",
     "durum": "done",
     "baslangic": "2026-09-18T06:18:40",
-    "bitis": "2026-09-18T15:12:46.586128Z",
+    "bitis": "2026-09-18T21:55:20",
     "dosyalar": [
       "scripts/admin_kimlik_kontrol.py"
     ],
@@ -4600,7 +4600,7 @@
     "oncelik": "P2",
     "durum": "done",
     "baslangic": "2026-09-18T06:22:27",
-    "bitis": "2026-09-18T15:12:46.586128Z",
+    "bitis": "2026-09-18T21:55:20",
     "dosyalar": [
       "web_dashboard/tabs/admin_auth.py"
     ],
@@ -4646,6 +4646,80 @@
       "scripts/onayla_ve_sirala.py"
     ],
     "not": "Teslim: menu 24->16 alt sekme (%33 azalma), en kalabalik grup 8->5. Overview'a 5 gercek aksiyon butonu + 4 giris karti. 15 yeni test. Push a19151a. Rapor: data/orchestrator/UX-MENU-03_rapor_2026-09-18_orkestrator.md. Duzeltme: tests/test_mcp_transport.py artik haric degil - mcp paketi zaten kuruluydu (1.28.1), ariza mcp_server_entry.py icindeki gecersiz 'mcp.server.mcpserver' import yolundaydi; FastMCP API'sine gecildi, 13/13 gecti. Tam suit 3902 passed / 5 skipped / 0 failed.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "id": "REVIEW-ONAY-KUYRUGU-01",
+    "baslik": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "sahip": "cline",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-18T22:41:37",
+    "bitis": null,
+    "dosyalar": [
+      "data/orchestrator/REVIEW-ONAY-KUYRUGU-01_rapor_2026-09-18_denetim.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "id": "TEST-AYARLAR-KAPSAM-01",
+    "baslik": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-18T22:42:02",
+    "bitis": null,
+    "dosyalar": [
+      "tests/test_admin_kullanici_ayarlari.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "id": "UI-AYARLAR-SAYFA-01",
+    "baslik": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-18T23:03:03",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "id": "ORKESTRA-BASLIK-GERIYE-01",
+    "baslik": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "sahip": "cline",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-18T23:05:44",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "id": "TEST-MERVE-KAPSAM-01",
+    "baslik": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "sahip": "merve",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-18T23:32:29",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
     "source": "ic",
     "from_agent": null
   }

@@ -36,9 +36,9 @@ def _simdi() -> str:
     return datetime.now().isoformat(timespec="seconds")
 
 
-# ---- Ajan adı kuralı (D-33, 2026-09-16, Ürün Sahibi emri) ----
+# ---- Ajan adı kuralı (D-33, 2026-09-16, Ürün Sahibi emri; D-59 ile merve eklendi) ----
 #
-# Kanonik adlar: kilo, cline, roo. "Ajan kilo", "Kilo", "kilo_code",
+# Kanonik adlar: kilo, cline, roo, merve. "Ajan kilo", "Kilo", "kilo_code",
 # "KiloCode" gibi yazımların hepsi aynı postaya çözümlenir. Böylece ajan
 # hangi adla bakarsa baksın kutusunu bulur ("aktif postam yok" hatası biter).
 
@@ -55,6 +55,11 @@ AJAN_TAKMA_ADLAR: dict[str, str] = {
     "cline_code": "cline",
     "claudecode": "claude_code",
     "claude-code": "claude_code",
+    # D-59: Merve = QA/Release Engineer (Continue IDE)
+    "continue": "merve",
+    "continueide": "merve",
+    "continue_ide": "merve",
+    "continue-ide": "merve",
 }
 
 
@@ -68,7 +73,7 @@ def ajan_normalize(ad: str | None) -> str:
     """
     ham = (ad or "").strip()
     if not ham:
-        raise TriggerError("Ajan adı boş olamaz (kanonik adlar: kilo, cline, roo).")
+        raise TriggerError("Ajan adı boş olamaz (kanonik adlar: kilo, cline, roo, merve).")
     # Ajan adları ASCII'dir: Türkçe İ/ı ayrımı yapılmaz ("KILO" → "kilo").
     ad_l = ham.replace("İ", "i").replace("ı", "i").lower().lstrip("@").strip()
     for onek in ("ajan ", "agent ", "ajan_", "agent_", "ajan-", "agent-"):
@@ -91,11 +96,13 @@ def _tetik_yolu(ajan: str, data_dir: Path | None = None) -> Path:
 
 
 def _tetikleri_oku(ajan: str, data_dir: Path | None = None) -> list[dict[str, Any]]:
+    """Ajanın tetik dosyasını okur. UTF-8 BOM toleranslı."""
     yol = _tetik_yolu(ajan, data_dir)
     if not yol.exists():
         return []
     kayitlar: list[dict[str, Any]] = []
-    for satir in yol.read_text(encoding="utf-8").splitlines():
+    # utf-8-sig BOM'u otomatik atlar
+    for satir in yol.read_text(encoding="utf-8-sig").splitlines():
         satir = satir.strip()
         if satir:
             kayitlar.append(json.loads(satir))
@@ -267,7 +274,7 @@ def onay_bekleyenler(data_dir: Path | None = None) -> list[dict[str, Any]]:
         from src.company_master.orchestrator import duzen  # lokal: döngüsel risk yok
         ajanlar = duzen.AJANLAR
     except Exception:
-        ajanlar = ["kilo", "roo", "copilot", "cline", "orkestrator"]
+        ajanlar = ["kilo", "roo", "copilot", "cline", "merve", "orkestrator"]
     for ajan in ajanlar:
         try:
             for k in _tetikleri_oku(ajan, data_dir):

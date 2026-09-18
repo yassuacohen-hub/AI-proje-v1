@@ -12,11 +12,22 @@ Ajan `scripts/gorev_kutusu.py bak --ajan kilo` ile postasını görür.
 from __future__ import annotations
 
 import argparse
+import hashlib
+import hmac
+import json
+import os
+import re
 import sys
 from datetime import datetime
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+KOK = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(KOK))
+
+# Windows konsolu cp1254; "→" ve Türkçe karakterler patlamasın.
+for _akis in (sys.stdout, sys.stderr):
+    if hasattr(_akis, "reconfigure"):
+        _akis.reconfigure(encoding="utf-8", errors="replace")
 
 from src.company_master.orchestrator import task_board as tb  # noqa: E402
 from src.company_master.orchestrator import trigger  # noqa: E402
@@ -28,7 +39,131 @@ def _ayristir_liste(deger: str | None) -> list[str]:
     return [p.strip() for p in deger.split(",") if p.strip()]
 
 
+# D-57: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+ALANLAR = ("UI", "API", "VERI", "TEST", "DOC", "ALTYAPI", "ORKESTRA")
+FIILLER = ("yaz", "düzelt", "taşı", "sil", "denetle", "ölç", "belgele", "araştır")
+AJANLAR = ("kilo", "cline", "roo", "merve")  # D-33 kanonik adlar (+ D-59 merve)
+_BASLIK = re.compile(
+    r"^\[(?P<alan>[A-ZĞÜŞİÖÇ]+)\]\s+(?P<fiil>\S+).*?→.+\((?P<sure>\d+[sd])\)$"
+)
+
+
+def _d57_dogrula(task_id: str, baslik: str, ajan: str) -> str | None:
+    """D-57 + D-33 ihlalini metin olarak döner; temizse None."""
+    if ajan not in AJANLAR:
+        return f"ajan '{ajan}' kanonik degil; izinli: {', '.join(AJANLAR)}"
+    m = _BASLIK.match(baslik.strip())
+    if not m:
+        return (
+            "baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n"
+            "  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)"
+        )
+    alan = m.group("alan")
+    if alan not in ALANLAR:
+        return f"ALAN '{alan}' kanonik degil; izinli: {', '.join(ALANLAR)}"
+    # cmd.exe Türkçe karakteri bozabildiği için ASCII karşılıkları da kabul edilir.
+    _tr = str.maketrans("ğüşıöçĞÜŞİÖÇ", "gusiocGUSIOC")
+    _duz = baslik.translate(_tr).lower()
+    if not any(f.translate(_tr).lower() in _duz for f in FIILLER):
+        return f"kanonik FIIL yok; izinli: {', '.join(FIILLER)}"
+    if not task_id.startswith(alan + "-"):
+        return f"task_id on eki ALAN ile ayni olmali: '{alan}-...'"
+    return None
+
+
+# D-58: orkestratör devralma (abrakadabra)
+_ANAHTAR_DOSYA = KOK / "data" / "orchestrator" / "abrakadabra.key"
+_ORK_DOSYA = KOK / "data" / "orchestrator" / "orchestrator.json"
+_VARSAYILAN_ORKESTRATOR = "roo"
+
+
+def _beklenen_anahtar() -> str | None:
+    """ABRAKADABRA_KEY ortam değişkeni, yoksa anahtar dosyası. Hiçbiri yoksa None."""
+    env = os.getenv("ABRAKADABRA_KEY", "").strip()
+    if env:
+        return env
+    if _ANAHTAR_DOSYA.exists():
+        return _ANAHTAR_DOSYA.read_text(encoding="utf-8").strip() or None
+    return None
+
+
+def _parmak_izi(anahtar: str) -> str:
+    """Anahtarın kendisi asla saklanmaz; yalnız sha256 özeti."""
+    return hashlib.sha256(anahtar.encode("utf-8")).hexdigest()
+
+
+def _orkestrator_oku() -> dict:
+    if not _ORK_DOSYA.exists():
+        return {"ajan": _VARSAYILAN_ORKESTRATOR, "devralma_zamani": None, "anahtar_parmak_izi": None}
+    try:
+        return json.loads(_ORK_DOSYA.read_text(encoding="utf-8"))
+    except (ValueError, OSError):
+        return {"ajan": _VARSAYILAN_ORKESTRATOR, "devralma_zamani": None, "anahtar_parmak_izi": None}
+
+
+def _orkestrator_yaz(ajan: str, anahtar: str) -> dict:
+    kayit = {
+        "ajan": ajan,
+        "devralma_zamani": datetime.now().isoformat(timespec="seconds"),
+        "anahtar_parmak_izi": _parmak_izi(anahtar),
+    }
+    _ORK_DOSYA.parent.mkdir(parents=True, exist_ok=True)
+    _ORK_DOSYA.write_text(json.dumps(kayit, ensure_ascii=False, indent=2), encoding="utf-8")
+    return kayit
+
+
+def _orkestrator_kapisi(cagiran: str | None) -> str | None:
+    """Çağıran aktif orkestratör değilse ihlal metni döner; temizse None.
+
+    ponytail: çağıran belirtilmezse kapı geçirgen (geriye uyumluluk).
+    Kimliği zorunlu kılmak için `ORKESTRA_AJAN` env'i her ajan kabuğunda sabitlenmeli.
+    """
+    if not cagiran:
+        return None
+    aktif = _orkestrator_oku().get("ajan") or _VARSAYILAN_ORKESTRATOR
+    if cagiran != aktif:
+        return f"gorev atamayi yalniz aktif orkestrator yapar; aktif: '{aktif}', cagiran: '{cagiran}'"
+    return None
+
+
+def cmd_abrakadabra(args: argparse.Namespace) -> int:
+    """Doğru anahtarla orkestratörlüğü devralır. Anahtar değeri asla basılmaz."""
+    beklenen = _beklenen_anahtar()
+    if not beklenen:
+        print(
+            "HATA: anahtar tanimli degil; ABRAKADABRA_KEY ortam degiskenini ya da "
+            f"{_ANAHTAR_DOSYA.relative_to(KOK)} dosyasini olusturun.",
+            file=sys.stderr,
+        )
+        return 1
+    if not hmac.compare_digest(args.anahtar, beklenen):
+        print("HATA: anahtar dogrulanamadi; devralma yapilmadi.", file=sys.stderr)
+        return 1
+    if args.ajan not in AJANLAR:
+        print(f"HATA: ajan '{args.ajan}' kanonik degil; izinli: {', '.join(AJANLAR)}", file=sys.stderr)
+        return 1
+    kayit = _orkestrator_yaz(args.ajan, beklenen)
+    trigger.tetik_ekle(
+        "ORKESTRA-DEVRALMA",
+        args.ajan,
+        f"Orkestratorluk devralindi ({kayit['devralma_zamani']}). Yeni gorevleri artik sen dagitiyorsun.",
+    )
+    print(f"DEVRALDI : {kayit['ajan']}")
+    print(f"ZAMAN    : {kayit['devralma_zamani']}")
+    print(f"PARMAKIZI: {kayit['anahtar_parmak_izi'][:12]}…")
+    print(f"TETIK    : python scripts/gorev_kutusu.py bak --ajan {args.ajan}")
+    return 0
+
+
 def cmd_at(args: argparse.Namespace) -> int:
+    kapi = _orkestrator_kapisi(getattr(args, "cagiran", None) or os.getenv("ORKESTRA_AJAN"))
+    if kapi:
+        print(f"HATA (D-58): {kapi}", file=sys.stderr)
+        return 4
+    ihlal = _d57_dogrula(args.task_id, args.baslik, args.ajan)
+    if ihlal:
+        print(f"HATA (D-57): {ihlal}", file=sys.stderr)
+        return 3
     try:
         gorev = tb.gorev_ekle(
             task_id=args.task_id,
@@ -136,10 +271,16 @@ def main() -> int:
     p_at.add_argument("--oncelik", default="P1", choices=["P0", "P1", "P2"])
     p_at.add_argument("--dosya", default=None, help="Virgülle ayrılı, otomatik kilitlenir")
     p_at.add_argument("--talimat", default="", help="Ajana kısa talimat")
+    p_at.add_argument("--cagiran", default=None, help="Komutu veren ajan (D-58 kapısı)")
     p_at.set_defaults(func=cmd_at)
 
     p_pano = alt.add_parser("pano", help="Tetik + onay kuyruğu özetini göster")
     p_pano.set_defaults(func=cmd_pano)
+
+    p_abra = alt.add_parser("abrakadabra", help="Orkestratörlüğü devral (D-58)")
+    p_abra.add_argument("--ajan", required=True, help="Yeni orkestratör (kilo/cline/roo)")
+    p_abra.add_argument("--anahtar", required=True, help="ABRAKADABRA_KEY degeri")
+    p_abra.set_defaults(func=cmd_abrakadabra)
 
     args = parser.parse_args()
     # D-33 ajan adı kuralı: "Ajan kilo" / "Kilo" / "kilo_code" → "kilo".
