@@ -13,11 +13,12 @@
 | GUARD-ENC-02 | kodlama_denetim genisletme (CRLF/bosluk/tab/EOF + fix) | kilo | P2 | blocked | scripts/kodlama_denetim.py, tests/test_kodlama_denetim.py, data/kodlama_allowlist.json |
 | SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH bulgular | kilo | P2 | blocked | scripts/sec_bandit.py, tests/test_sec_bandit.py, .bandit |
 | FMT-01 | ruff format/lint standardizasyonu (web_app/app/web_dashboard haric) | kilo | P2 | blocked | ruff.toml, .pre-commit-config.yaml |
-| ADMIN-HATA-01 | Hata Yonetimi sekmesi: sahte istatistik/demo raise kaldir, gercek kaynak + rapor kaydi | kilo | P2 | plan | - |
+| ADMIN-HATA-01 | Hata Yonetimi sekmesi: sahte istatistik/demo raise kaldir, gercek kaynak + rapor kaydi | kilo | P2 | aktif | - |
 | ADMIN-MUSTERI-02 | Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi) | kilo | P2 | plan | web_dashboard/tabs/musteri_yonetimi.py, tests/test_musteri_yonetimi.py |
 | ADMIN-KPI-KART-02 | Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi | kilo | P2 | plan | web_dashboard/tabs/webhook_monitor.py, web_dashboard/tabs/tenant_health_dashboard.py, tests/test_webhook_monitor_tab.py |
 | ADMIN-HATA-02 | Admin sekmelerinde 16 sessiz except:pass -> log/hata_kutusu + AST testi | kilo | P2 | plan | web_dashboard/tabs/admin_kpi.py, web_dashboard/tabs/admin_quality.py, web_dashboard/tabs/admin_performance.py |
 | RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arastirma | roo | P0 | aktif | - |
+| ADLANDIRMA-GERIYE-01 | D-55 geriye donuk: 55 rapor dosyasindan ajan adini kaldir, rol bazli son eke cevir | roo | P3 | plan | - |
 
 ## Tamamlananlar
 
@@ -279,3 +280,4 @@
 | ADMIN-HITAP-01 | D-49 uygulama: sahip -> KAHIN (Urun Sahibi) taramasi (kurallar + docs + admin panel metinleri) | roo | 2026-09-18T05:27:42 |
 | ADMIN-KOK-TEMIZLIK-01 | Kok dizindeki 3 gecici script sil + .gitignore kontrol + commit | roo | 2026-09-18T05:27:42 |
 | AGN-STACK-01 | crewAI/LangChain vs Huginn orkestratoru kiyas raporu (KAHIN emri) | roo | 2026-09-18T05:41:12 |
+| MARKA-REVIZE-01-BULGU | Marka denetim muafiyet mekanizmasi (B-1/B-2/B-6) | roo | 2026-09-18T05:55:37 |

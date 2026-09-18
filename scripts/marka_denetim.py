@@ -7,14 +7,19 @@ Raporlanan ihlaller:
                  Munin, Muginn, Odin, Odinn, Muginn, Munnin)
     kok_dizin: "kok dizindeki" ifadesi (kullanilmamali, docs/brand/ kastedilir)
 
+Muafiyet (MARKA-REVIZE-01-BULGU, B-1/B-2):
+    1) ATLANAN_DIZINLER  - arsiv/gecici/ajan calisma alanlari hic taranmaz
+    2) MUAF_YOLLAR       - kokten glob; yasak listeyi TANIMLAYAN dosyalar
+    3) MUAF_SENTINEL     - satirda 'marka-muaf' geciyorsa o satir atlanir
+
 Kullanim:
     python scripts/marka_denetim.py              # tarama + rapor
+    python scripts/marka_denetim.py --sayim      # sadece ozet
 
 Cikis kodu: ihlal varsa 1, yoksa 0.
 """
 from __future__ import annotations
 
-import ast
 import re
 import sys
 from pathlib import Path
@@ -41,17 +46,59 @@ ATLANAN_DIZINLER = {
     "venv",
     ".venv",
     "env",
+    # B-2: eksik olan calisma alanlari / arsivler
+    "_trash",
+    "backups",
+    ".kilo",
+    ".agents",
+    ".claude",
+    ".continue",
+    "workspace",
+    "AI proje v1",
 }
+
+# B-1: yasak listeyi TANIMLAYAN dosyalar kendi kurallarina takilmasin.
+MUAF_YOLLAR: tuple[str, ...] = (
+    "scripts/marka_denetim.py",       # yasak regex burada tanimli
+    "docs/plans/*",                   # brifler yasak yazimlari ornekliyor
+    "plans/*",
+    "docs/ROO_ELESTIRI_NOTLARI.md",   # elestiri kayitlari ihlali alintiliyor
+    "tests/test_i18n*.py",            # test regexleri yasak yazimi iceriyor
+    "tests/test_marka*.py",
+    "AGENT_SYNC.md",                  # otomatik uretilir (task_board'dan)
+    "data/orchestrator/AGENT_SYNC.md",
+)
+
+MUAF_SENTINEL = "marka-muaf"
+
+# B-1: "Yasak: Huggin, Hugin, ..." gibi kurali TANIMLAYAN satirlar ihlal degildir.
+YASAK_BEYAN = re.compile(r"yasak|forbidden|misspell", re.IGNORECASE)
 
 DOSYA_extensions = {".py", ".md", ".json", ".toml", ".sql", ".yaml", ".yml"}
 
 
-def tarama_kapsami() -> list[Path]:
-    """Kok dizindeki tum dosyalari dondurur (ATLANAN_DIZINLER disi)."""
+def muaf_dosya(path: Path) -> bool:
+    """Dosya MUAF_YOLLAR desenlerinden birine uyuyorsa True."""
+    try:
+        bagil = path.relative_to(KOK).as_posix()
+    except ValueError:
+        return False
+    return any(Path(bagil).match(desen) for desen in MUAF_YOLLAR)
+
+
+def taranabilir(path: Path) -> bool:
+    """Dosya denetime girer mi? (uzanti + atlanan dizin + muaf yol)"""
+    if not path.is_file() or path.suffix not in DOSYA_extensions:
+        return False
+    if any(part in ATLANAN_DIZINLER for part in path.parts):
+        return False
+    return not muaf_dosya(path)
+
+
+def tarama_kapsami():
+    """Kok dizindeki taranabilir dosyalari uretir."""
     for path in KOK.rglob("*"):
-        if path.is_file() and path.suffix in DOSYA_extensions:
-            if any(part in ATLANAN_DIZINLER for part in path.parts):
-                continue
+        if taranabilir(path):
             yield path
 
 
@@ -72,9 +119,7 @@ def tarama(
         return sonuc
 
     for path in root.rglob("*"):
-        if not path.is_file() or path.suffix not in DOSYA_extensions:
-            continue
-        if any(part in ATLANAN_DIZINLER for part in path.parts):
+        if not taranabilir(path):
             continue
         _tarama_dosya(path, sonuc)
 
@@ -88,6 +133,10 @@ def _tarama_dosya(path: Path, sonuc: dict[str, list[str]]) -> None:
         return
 
     for no, satir in enumerate(icerik.splitlines(), start=1):
+        if MUAF_SENTINEL in satir:  # B-1: nokta atisi istisna
+            continue
+        if YASAK_BEYAN.search(satir):  # B-1: kural tanimi, ihlal degil
+            continue
         for mac in YASAL_YAZIM.finditer(satir):
             sonuc["yasal_yazim"].append(
                 f"{path}:{no}: '{mac.group()}' -> {satir.strip()[:120]}"
@@ -103,8 +152,13 @@ def _tarama_dosya(path: Path, sonuc: dict[str, list[str]]) -> None:
 
 
 if __name__ == "__main__":
+    sadece_sayim = "--sayim" in sys.argv
     sonuc = tarama()
     toplam = len(sonuc["yasal_yazim"]) + len(sonuc["kok_dizin"])
+
+    if sadece_sayim:
+        print(f"yasal_yazim: {len(sonuc['yasal_yazim'])} | kok_dizin: {len(sonuc['kok_dizin'])}")
+        sys.exit(1 if toplam > 0 else 0)
 
     if sonuc["yasal_yazim"]:
         print("=== Yasal Yazim Ihlalleri ===")

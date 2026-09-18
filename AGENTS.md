@@ -28,6 +28,19 @@
 - **Merve** 👩‍💻 (Continue IDE, D-49): danışman — dosya yazmaz, görev almaz, komut çalıştırmaz. Panoya girmez. Prompt: `docs/continue_system_prompt.md`.
 - Rotasyon yalnız KAHİN'in `abrakadabra` ritüeliyle; subagent orkestratör olamaz, panoya görev ekleyemez. Ayrıntı: AJAN_DETAY §1-4.
 
+## Adlandırma (Demir Kural, D-55 — KAHİN kararı 2026-09-18)
+- Hiçbir ajan **kendi adını** dosya adına, dizine, branch'e, commit mesajına, rapor başlığına veya görev kimliğine yazmaz.
+- Ajan adı yalnız **o ajanın kendi kişisel dosyasında** geçebilir.
+- Rol bazlı son ek kullanılır: `_orkestrator` · `_uretim` · `_denetim`.
+  Örnek: `data/orchestrator/<TASK>_rapor_<tarih>_orkestrator.md`
+- **Kapsam dışı (makine kimliği, dosya adı değil):** `task_board.json` `sahip` alanı, CLI `--ajan` parametresi, `triggers/{ajan}.jsonl` kuyruk dosyaları, `ajan_normalize()`.
+- Kural **yeni çıktılar** için derhal yürürlükte. Geriye dönük 55 dosya: `ADLANDIRMA-GERIYE-01` (iş yükü azalınca).
+
+## Ürün Sahibi Raporlama Formatı (D-55)
+- KAHİN'e giden her özet: **kısa cümleler**, teknik olmayan dil, tablo.
+- Bulgular 4 sınıfta renklendirilir: 🔴 kırmızı (acil/blokaj) · 🟡 sarı (dikkat) · 🟢 yeşil (tamam) · 🔵 mavi (bilgi/öneri).
+- Mümkün olan her yerde **oran ve yüzde** verilir.
+
 ## Hitap (Demir Kural, D-49 — KAHİN kararı 2026-09-18)
 - Ürün Sahibi'nin adı **KAHİN**. Tüm ajanlar (kilo, cline, roo, Merve) ona **`KAHİN (Ürün Sahibi)`** diye hitap eder — büyük harfle.
 - **"sahip", "kullanıcı", "efendim" kelimeleri YASAK.** Eski dokümanlardaki "sahip kararı" ifadeleri geçmiş kayıt; yeni metinlerde `KAHİN kararı` yazılır.

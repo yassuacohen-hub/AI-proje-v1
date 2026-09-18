@@ -4116,7 +4116,7 @@
     "baslik": "Hata Yonetimi sekmesi: sahte istatistik/demo raise kaldir, gercek kaynak + rapor kaydi",
     "sahip": "kilo",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": [
       "web_dashboard/tabs/admin_errors.py",
       "tests/test_admin_errors.py"
@@ -4396,6 +4396,37 @@
     "bitis": "2026-09-18T05:41:12",
     "dosyalar": [],
     "not": "Teslim (roo): crewAI 1.15.22/LangChain vs Huginn orkestratoru kiyas raporu. Sonuc: ENTEGRASYON YOK (skor 7-2 Huginn lehine). 3 senaryo maliyetlendirildi: A=0 token, B=hibrit worker +%30-60, C=tam gecis +%40-120 REDDEDILDI. Pilot onerisi AGN-CREWAI-PILOT-01 (5 kabul kriteri, tek dosya, geri donduruleblir). Yeni bulgu: tetik var-pano kaydi yok tutarsizligi (ORCH-TETIK-PANO-01 onerildi). requirements.txt dokunulmadi, commit yok. Rapor: data/orchestrator/AGN-STACK-01_rapor_roo.md",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "MARKA-REVIZE-01-BULGU",
+    "id": "MARKA-REVIZE-01-BULGU",
+    "baslik": "Marka denetim muafiyet mekanizmasi (B-1/B-2/B-6)",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-18T05:52:03",
+    "bitis": "2026-09-18T05:55:37",
+    "dosyalar": [
+      "scripts/marka_denetim.py",
+      "tests/test_marka_denetim_muafiyet.py"
+    ],
+    "not": "Teslim (roo): marka_denetim.py 3 katmanli muafiyet: 140 yanlis pozitif -> 0 ihlal. 7/7 test gecti. B-6/D-33 kapatildi. D-55 adlandirma kurali AGENTS.md'ye islendi.",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADLANDIRMA-GERIYE-01",
+    "id": "ADLANDIRMA-GERIYE-01",
+    "baslik": "D-55 geriye donuk: 55 rapor dosyasindan ajan adini kaldir, rol bazli son eke cevir",
+    "sahip": "roo",
+    "oncelik": "P3",
+    "durum": "plan",
+    "baslangic": "2026-09-18T05:52:03",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
     "source": "ic",
     "from_agent": null
   }
