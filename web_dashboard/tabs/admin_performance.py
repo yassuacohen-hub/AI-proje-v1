@@ -23,6 +23,10 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from scripts.dash04_api_client import get_api, APIError
 from web_dashboard.charts import kpi_karti
+from web_dashboard.tabs.admin_error_handling import AdminErrorHandler
+
+# Admin Performance logger
+_admin_perf_logger = AdminErrorHandler("admin_performance")
 
 
 @st.cache_data(ttl=30)
@@ -32,8 +36,8 @@ def load_performance_data() -> dict[str, Any]:
         data = get_api("/api/performance")
         if isinstance(data, dict) and data:
             return data
-    except (APIError, Exception):
-        pass
+    except (APIError, Exception) as exc:
+        _admin_perf_logger.warning("Performans verisi yüklenemedi", exc)
     return {}
 
 
@@ -67,8 +71,8 @@ def load_ai_cost_per_call() -> dict[str, Any]:
             toplam_maliyet / toplam_cagri if toplam_cagri > 0 else 0.0
         )
         result["ort_latency_ms"] = float(req_detail.get("ortalama_latency_ms", 0.0) or 0.0)
-    except Exception:
-        pass
+    except Exception as exc:
+        _admin_perf_logger.warning("AI maliyet/çağrı yüklenemedi", exc)
     return result
 
 
@@ -90,7 +94,8 @@ def load_prometheus_metrics() -> dict[str, Any]:
             if len(parts) >= 2:
                 metrics[parts[0]] = parts[1]
         return metrics
-    except Exception:
+    except Exception as exc:
+        _admin_perf_logger.warning("Prometheus metrikleri yüklenemedi", exc)
         return {}
 
 

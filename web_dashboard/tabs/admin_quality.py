@@ -229,8 +229,8 @@ def load_risky_companies(limit: int = 100) -> pd.DataFrame:
                     "trade_name": "Ticari Ad", "data_quality_score": "Kalite Skoru",
                 })
                 return df
-    except Exception:
-        pass
+    except Exception as exc:
+        _admin_quality_logger.warning("Riskli firmalar yüklenemedi", exc)
     return pd.DataFrame(columns=["Firma ID", "Unvan", "Ticari Ad", "Kalite Skoru", "Eksik Alanlar"])
 
 
@@ -339,7 +339,8 @@ def load_source_reliability() -> list[dict[str, Any]]:
             for r in rows
         ]
         return [k.to_dict() for k in hesapla_toplu(ham)]
-    except Exception:
+    except Exception as exc:
+        _admin_quality_logger.warning("Kaynak güvenilirlik yüklenemedi", exc)
         return []
 
 

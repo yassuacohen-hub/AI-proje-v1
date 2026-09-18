@@ -56,8 +56,8 @@
   },
   "web_dashboard/tabs/admin_auth.py": {
     "sahip": "kilo",
-    "task_id": "ADMIN-LOGIN-FIX-01",
-    "kilitlendi": "2026-09-18T06:18:40"
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "kilitlendi": "2026-09-18T06:22:27"
   },
   "scripts/admin_kimlik_kontrol.py": {
     "sahip": "kilo",

@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-18T06:18:40
+> Son guncelleme: 2026-09-18T06:22:27
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -22,6 +22,8 @@
 | AGN-CREWAI-PILOT-01 | crewAI hibrit worker pilotu (metin-üreti | roo | P2 | plan |
 | ADMIN-LOGIN-FIX-01 | Admin giris: baglanti hatasi ile 401 ayr | kilo | P0 | plan |
 | ADMIN-ADMIN2-DOGRULA-01 | 2. admin hesabi yassuacohen@gmail.com si | kilo | P2 | plan |
+| ADMIN-MODAL-STIL-01 | Admin modal: blur backdrop + marka kimli | kilo | P1 | plan |
+| ADMIN-SIFRE-RESET-FLOW-01 | Sifre unuttum akisi: email gonder -> lin | kilo | P2 | plan |
 
 ## Tamamlananlar (Son 10)
 

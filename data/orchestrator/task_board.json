@@ -4477,5 +4477,37 @@
     "not": "",
     "source": "ic",
     "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-MODAL-STIL-01",
+    "id": "ADMIN-MODAL-STIL-01",
+    "baslik": "Admin modal: blur backdrop + marka kimligini yansit",
+    "sahip": "kilo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-18T06:22:27",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_auth.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "id": "ADMIN-SIFRE-RESET-FLOW-01",
+    "baslik": "Sifre unuttum akisi: email gonder -> link -> sifre sifirla",
+    "sahip": "kilo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-18T06:22:27",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_auth.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
   }
 ]
