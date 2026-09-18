@@ -19,6 +19,14 @@ import time
 import traceback
 from pathlib import Path
 
+# Windows konsolunda Unicode (emoji, ok karakterleri) sorununu çöz
+if sys.platform == "win32":
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:
+        pass
+
 SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
 sys.path.insert(0, str(ROOT))
