@@ -24,6 +24,13 @@
 | ADMIN-ADMIN2-DOGRULA-01 | 2. admin hesabi yassuacohen@gmail.com sifre dogrulama | kilo | P2 | review | scripts/admin_kimlik_kontrol.py |
 | ADMIN-MODAL-STIL-01 | Admin modal: blur backdrop + marka kimligini yansit | roo | P1 | review | web_dashboard/tabs/admin_auth.py |
 | ADMIN-SIFRE-RESET-FLOW-01 | Sifre unuttum akisi: email gonder -> link -> sifre sifirla | roo | P2 | review | web_dashboard/tabs/admin_auth.py |
+| ADMIN-UX-LOGOUT-01 | Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli | roo | P0 | plan | app.py, web_dashboard/tabs/admin_auth.py |
+| ADMIN-UX-PROFILMENU-01 | Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link | roo | P0 | plan | src/company_master/ui/components/profil_menu.py, src/company_master/ui/styles.py |
+| ADMIN-UX-MENUTREE-01 | Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar | roo | P1 | plan | web_dashboard/tabs/__init__.py |
+| ADMIN-UX-AYARLAR-SAYFA-01 | Kullanici Ayarlari tek sayfa: profil + sifre degistir/sifirla | roo | P1 | plan | web_dashboard/tabs/admin_kullanici_ayarlari.py |
+| V10-HIJYEN-01 | engine.py mukerrer+bozuk WHERE blogu temizligi (B-14) | roo | P0 | review | src/company_master/search/engine.py, tests/test_search_engine_where.py |
+| V10-HIJYEN-02 | search/fulltext.py olu kod silinmesi (B-15) - KAHIN onayi bekliyor | roo | P2 | plan | src/company_master/search/fulltext.py |
+| V10-BELGE-01 | 6 curutulen iddiaya K1/K3/K4 duzeltme notu | roo | P1 | plan | AI proje v1/V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md |
 
 ## Tamamlananlar
 

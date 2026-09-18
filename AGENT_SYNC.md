@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-18T13:31:18
+> Son guncelleme: 2026-09-18T16:54:11
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -24,6 +24,13 @@
 | ADMIN-ADMIN2-DOGRULA-01 | 2. admin hesabi yassuacohen@gmail.com si | kilo | P2 | review |
 | ADMIN-MODAL-STIL-01 | Admin modal: blur backdrop + marka kimli | roo | P1 | review |
 | ADMIN-SIFRE-RESET-FLOW-01 | Sifre unuttum akisi: email gonder -> lin | roo | P2 | review |
+| ADMIN-UX-LOGOUT-01 | Cikis/oturum senkronizasyonu: logout ani | roo | P0 | plan |
+| ADMIN-UX-PROFILMENU-01 | Sag-alt admin profil popover (ProfileMen | roo | P0 | plan |
+| ADMIN-UX-MENUTREE-01 | Sol menu agaci yeniden gruplama; Ayarlar | roo | P1 | plan |
+| ADMIN-UX-AYARLAR-SAYFA-01 | Kullanici Ayarlari tek sayfa: profil + s | roo | P1 | plan |
+| V10-HIJYEN-01 | engine.py mukerrer+bozuk WHERE blogu tem | roo | P0 | review |
+| V10-HIJYEN-02 | search/fulltext.py olu kod silinmesi (B- | roo | P2 | plan |
+| V10-BELGE-01 | 6 curutulen iddiaya K1/K3/K4 duzeltme no | roo | P1 | plan |
 
 ## Tamamlananlar (Son 10)
 

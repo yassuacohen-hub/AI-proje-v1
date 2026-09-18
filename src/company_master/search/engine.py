@@ -179,12 +179,6 @@ def fetch_filtered_companies(
         where.append("((c.primary_email IS NOT NULL AND c.primary_email <> '') OR (sr.raw_email IS NOT NULL AND sr.raw_email <> ''))")
     if has_web:
         where.append("((c.website_domain IS NOT NULL AND c.website_domain <> '') OR (c.web_sitesi IS NOT NULL AND c.web_sitesi <> '') OR (sr.raw_website IS NOT NULL AND sr.raw_website <> ''))")
-    if has_phone:
-        where.append("((c.primary_phone IS NOT NULL AND c.primary_phone <> "") OR (sr.raw_phone IS NOT NULL AND sr.raw_phone <> ""))")
-    if has_email:
-        where.append("((c.primary_email IS NOT NULL AND c.primary_email <> "") OR (sr.raw_email IS NOT NULL AND sr.raw_email <> ""))")
-    if has_web:
-        where.append("((c.website_domain IS NOT NULL AND c.website_domain <> "") OR (c.web_sitesi IS NOT NULL AND c.web_sitesi <> "") OR (sr.raw_website IS NOT NULL AND sr.raw_website <> ""))")
     where.append("COALESCE(c.data_quality_score, 0) >= :kalite_min")
     where.append("COALESCE(c.data_quality_score, 0) <= :kalite_max")
     sql = (

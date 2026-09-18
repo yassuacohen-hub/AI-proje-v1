@@ -4509,5 +4509,121 @@
     "not": "Teslim (roo): Giris ekranina 'Sifremi unuttum' akisi eklendi: render_sifre_unuttum() istek + onay formu, /api/admin/reset-request ve /api/admin/reset-confirm. 4 test yesil; ayrica cagiran testlerde yalitim fixture eklendi.",
     "source": "ic",
     "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "id": "ADMIN-UX-LOGOUT-01",
+    "baslik": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "sahip": "roo",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-18T14:31:57",
+    "bitis": null,
+    "dosyalar": [
+      "app.py",
+      "web_dashboard/tabs/admin_auth.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "id": "ADMIN-UX-PROFILMENU-01",
+    "baslik": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "sahip": "roo",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-18T14:31:57",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/ui/components/profil_menu.py",
+      "src/company_master/ui/styles.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "id": "ADMIN-UX-MENUTREE-01",
+    "baslik": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-18T14:31:57",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/__init__.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "ADMIN-UX-AYARLAR-SAYFA-01",
+    "id": "ADMIN-UX-AYARLAR-SAYFA-01",
+    "baslik": "Kullanici Ayarlari tek sayfa: profil + sifre degistir/sifirla",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-18T14:31:57",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_kullanici_ayarlari.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "V10-HIJYEN-01",
+    "id": "V10-HIJYEN-01",
+    "baslik": "engine.py mukerrer+bozuk WHERE blogu temizligi (B-14)",
+    "sahip": "roo",
+    "oncelik": "P0",
+    "durum": "review",
+    "baslangic": "2026-09-18T16:50:03",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/search/engine.py",
+      "tests/test_search_engine_where.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "not_": "182-187 silindi; 4 regresyon testi eklendi; kodlama_denetim temiz"
+  },
+  {
+    "task_id": "V10-HIJYEN-02",
+    "id": "V10-HIJYEN-02",
+    "baslik": "search/fulltext.py olu kod silinmesi (B-15) - KAHIN onayi bekliyor",
+    "sahip": "roo",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-18T16:54:11",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/search/fulltext.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
+  },
+  {
+    "task_id": "V10-BELGE-01",
+    "id": "V10-BELGE-01",
+    "baslik": "6 curutulen iddiaya K1/K3/K4 duzeltme notu",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-18T16:54:11",
+    "bitis": null,
+    "dosyalar": [
+      "AI proje v1/V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null
   }
 ]

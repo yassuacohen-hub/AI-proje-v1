@@ -56,12 +56,57 @@
   },
   "web_dashboard/tabs/admin_auth.py": {
     "sahip": "roo",
-    "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
-    "kilitlendi": "2026-09-18T06:22:27"
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "kilitlendi": "2026-09-18T14:31:57"
   },
   "scripts/admin_kimlik_kontrol.py": {
     "sahip": "kilo",
     "task_id": "ADMIN-ADMIN2-DOGRULA-01",
     "kilitlendi": "2026-09-18T06:18:40"
+  },
+  "app.py": {
+    "sahip": "roo",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "kilitlendi": "2026-09-18T14:31:57"
+  },
+  "src/company_master/ui/components/profil_menu.py": {
+    "sahip": "roo",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "kilitlendi": "2026-09-18T14:31:57"
+  },
+  "src/company_master/ui/styles.py": {
+    "sahip": "roo",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "kilitlendi": "2026-09-18T14:31:57"
+  },
+  "web_dashboard/tabs/__init__.py": {
+    "sahip": "roo",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "kilitlendi": "2026-09-18T14:31:57"
+  },
+  "web_dashboard/tabs/admin_kullanici_ayarlari.py": {
+    "sahip": "roo",
+    "task_id": "ADMIN-UX-AYARLAR-SAYFA-01",
+    "kilitlendi": "2026-09-18T14:31:57"
+  },
+  "src/company_master/search/engine.py": {
+    "sahip": "roo",
+    "task_id": "V10-HIJYEN-01",
+    "kilitlendi": "2026-09-18T16:50:03"
+  },
+  "tests/test_search_engine_where.py": {
+    "sahip": "roo",
+    "task_id": "V10-HIJYEN-01",
+    "kilitlendi": "2026-09-18T16:50:03"
+  },
+  "src/company_master/search/fulltext.py": {
+    "sahip": "roo",
+    "task_id": "V10-HIJYEN-02",
+    "kilitlendi": "2026-09-18T16:54:11"
+  },
+  "AI proje v1/V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md": {
+    "sahip": "roo",
+    "task_id": "V10-BELGE-01",
+    "kilitlendi": "2026-09-18T16:54:11"
   }
 }
