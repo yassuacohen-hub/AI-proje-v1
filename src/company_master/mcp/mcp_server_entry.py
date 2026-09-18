@@ -28,7 +28,7 @@ from typing import Any, Optional
 ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(ROOT / "src"))
 
-from mcp.server.mcpserver.server import MCPServer  # noqa: E402
+from mcp.server.fastmcp import FastMCP  # noqa: E402
 
 from company_master.mcp.policy_engine import PolicyEngine  # noqa: E402
 from company_master.mcp.apify_adapter import ApifyAdapter  # noqa: E402
@@ -71,19 +71,25 @@ INSTRUCTIONS = (
 def create_mcp_server(
         apify_adapter: Optional[ApifyAdapter] = None,
         huginn_server: Optional[HuginnMCPServer] = None,
-    ) -> MCPServer:
-        """Create an MCPServer with Apify + Huginn tools registered.
+        host: str = "127.0.0.1",
+        port: int = 8000,
+        path: str = "/mcp",
+    ) -> FastMCP:
+        """Create a FastMCP server with Apify + Huginn tools registered.
 
         Args:
         apify_adapter: Pre-configured ApifyAdapter (or None for default).
         huginn_server: Pre-configured HuginnMCPServer (or None for default).
+        host/port/path: Streamable HTTP transport settings (stdio icin yok sayilir).
         """
-        server = MCPServer(
+        # ponytail: mcp SDK 1.28 FastMCP version/title/description almiyor;
+        # surum bilgisi gerekirse INSTRUCTIONS icine yazilir.
+        server = FastMCP(
             name="huginn-mcp",
-            version="1.0.0",
-            title="Huginn MCP Server",
-            description="Huginn B2B Intelligence - Apify ve Huginn verilerine MCP erişimi",
             instructions=INSTRUCTIONS,
+            host=host,
+            port=port,
+            streamable_http_path=path,
         )
 
         adapter = apify_adapter or ApifyAdapter(policy_engine=PolicyEngine())
@@ -196,14 +202,8 @@ def main_http(
     path: str = "/mcp",
 ) -> None:
     """Run the MCP server over Streamable HTTP transport."""
-    server = create_mcp_server()
-    asyncio.run(
-        server.run_streamable_http_async(
-            host=host,
-            port=port,
-            streamable_http_path=path,
-        )
-    )
+    server = create_mcp_server(host=host, port=port, path=path)
+    asyncio.run(server.run_streamable_http_async())
 
 
 def main() -> None:

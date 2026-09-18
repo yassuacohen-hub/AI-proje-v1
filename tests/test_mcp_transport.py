@@ -107,8 +107,8 @@ class _HTTPServerRunner:
     def __enter__(self):
         import uvicorn  # noqa: PLC0415
 
-        server = create_mcp_server()
-        starlette_app = server.streamable_http_app(streamable_http_path="/mcp")
+        server = create_mcp_server(path="/mcp")
+        starlette_app = server.streamable_http_app()
         config = uvicorn.Config(
             starlette_app,
             host="127.0.0.1",
@@ -285,7 +285,7 @@ class TestHTTPTransport:
     def test_http_list_tools(self, http_port):
         async def run():
             url = f"http://127.0.0.1:{http_port}/mcp"
-            async with streamable_http_client(url) as (r, w):
+            async with streamable_http_client(url) as (r, w, _):
                 async with ClientSession(r, w) as session:
                     await session.initialize()
                     result = await session.list_tools()
@@ -298,7 +298,7 @@ class TestHTTPTransport:
     def test_http_call_apify_list_actors(self, http_port):
         async def run():
             url = f"http://127.0.0.1:{http_port}/mcp"
-            async with streamable_http_client(url) as (r, w):
+            async with streamable_http_client(url) as (r, w, _):
                 async with ClientSession(r, w) as session:
                     await session.initialize()
                     result = await session.call_tool("apify_list_actors", {})
@@ -312,7 +312,7 @@ class TestHTTPTransport:
     def test_http_call_get_source_policy(self, http_port):
         async def run():
             url = f"http://127.0.0.1:{http_port}/mcp"
-            async with streamable_http_client(url) as (r, w):
+            async with streamable_http_client(url) as (r, w, _):
                 async with ClientSession(r, w) as session:
                     await session.initialize()
                     result = await session.call_tool(
@@ -333,7 +333,7 @@ class TestHTTPTransport:
         try:
             async def run():
                 url = f"http://127.0.0.1:{http_port}/mcp"
-                async with streamable_http_client(url) as (r, w):
+                async with streamable_http_client(url) as (r, w, _):
                     async with ClientSession(r, w) as session:
                         await session.initialize()
                         result = await session.call_tool(

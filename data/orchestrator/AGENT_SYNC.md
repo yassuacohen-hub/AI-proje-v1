@@ -15,7 +15,7 @@
 - 🟢 Dashboard Overview: 5 gercek aksiyon butonu + 4 giris karti (sus buton yok).
 - 🟢 15 yeni test; tam suit **3889 passed / 0 failed**; kodlama denetimi temiz.
 - 🟢 Push `a19151a` (8 dosya, +385/−63). Streamlit yeniden baslatildi (PID 14652).
-- 🟡 `tests/test_mcp_transport.py` haric tutuldu — `mcp` paketi ortamda kurulu degil (onceden var olan eksiklik, bu degisiklikle ilgisiz). Kurulum takip listesinde.
+- 🟢 `tests/test_mcp_transport.py` artik haric degil. Ilk tani yanlisti: `mcp` paketi zaten kuruluydu (1.28.1, `crewai` bagimliligi). Gercek ariza koddaydi — `mcp_server_entry.py` var olmayan `mcp.server.mcpserver` yolunu import ediyordu. `FastMCP` API'sine gecildi (import, `create_mcp_server` imzasi host/port/path, `main_http`), testte `streamable_http_app()` argumansiz + client 3-tuple unpack. Sonuc 13/13 gecti, tam suit 3902 passed / 5 skipped / 0 failed (+13). Paket kurulumu gerekmedi.
 - 🔵 Rapor: `data/orchestrator/UX-MENU-03_rapor_2026-09-18_orkestrator.md`
 
 ## KAHİN Onayı Özeti (2026-09-18T15:13)

@@ -4645,7 +4645,7 @@
       "tests/test_sayfa_iskeleti.py",
       "scripts/onayla_ve_sirala.py"
     ],
-    "not": "Teslim: menu 24->16 alt sekme (%33 azalma), en kalabalik grup 8->5. Overview'a 5 gercek aksiyon butonu + 4 giris karti. 15 yeni test. Tam suit 3889 passed / 0 failed. Push a19151a. Rapor: data/orchestrator/UX-MENU-03_rapor_2026-09-18_orkestrator.md. Bilinen istisna: tests/test_mcp_transport.py haric (mcp paketi kurulu degil, onceden var olan eksiklik).",
+    "not": "Teslim: menu 24->16 alt sekme (%33 azalma), en kalabalik grup 8->5. Overview'a 5 gercek aksiyon butonu + 4 giris karti. 15 yeni test. Push a19151a. Rapor: data/orchestrator/UX-MENU-03_rapor_2026-09-18_orkestrator.md. Duzeltme: tests/test_mcp_transport.py artik haric degil - mcp paketi zaten kuruluydu (1.28.1), ariza mcp_server_entry.py icindeki gecersiz 'mcp.server.mcpserver' import yolundaydi; FastMCP API'sine gecildi, 13/13 gecti. Tam suit 3902 passed / 5 skipped / 0 failed.",
     "source": "ic",
     "from_agent": null
   }
