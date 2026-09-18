@@ -42,6 +42,7 @@ MUAF: dict[str, str] = {
     "__init__": "Navigasyon kaydı; ekran çizmez",
     "admin_auth": "Giriş formu; tam sayfa başlığı taşımaz",
     "admin_auto_refresh": "Gömülü kontrol şeridi; bağımsız ekran değil",
+    "admin_error_handling": "Hata yakalama dekoratörü + logger; ekran çizmez",
     "admin_errors": "Hata sayfası bileşeni; kendi başlık kalıbı var",
     "admin_loading": "Yükleme durumu vitrini; öksüz (sahip kararı bekliyor)",
     "admin_extras": "Yardımcı parçalar; bağımsız ekran değil",

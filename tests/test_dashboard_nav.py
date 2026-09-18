@@ -307,14 +307,18 @@ def test_ust_sayfa_ust_none_ve_ust_dolu():
 
 
 def test_alt_sekmeler_sistem_analyst():
-    """Sistem üst sayfasının alt sekmeleri analyst rolünde visible."""
+    """Sistem üst sayfasının alt sekmeleri analyst rolünde visible.
+
+    UX-MENU-03: `performans` → Altyapı içinde birleşti (E5), `ayarlar` →
+    profil popover'a taşındı; ikisi de artık menüde değil.
+    """
     alt = alt_sekmeler("sistem", ROL_ANALYST)
     alt_analhtar = {t.anahtar for t in alt}
     assert "teknik_altyapi" in alt_analhtar
-    assert "performans" in alt_analhtar
     assert "api" in alt_analhtar
     assert "maliyet" in alt_analhtar
-    # admin-only olmasin
+    # menuden cikarilanlar (ust=None)
+    assert "performans" not in alt_analhtar
     assert "ayarlar" not in alt_analhtar
 
 
@@ -325,12 +329,15 @@ def test_alt_sekmeler_bos_ust():
 
 
 def test_alt_sekmeler_sira_sirali():
-    """Alt sekme siralari korunmali."""
+    """Alt sekme siralari korunmali.
+
+    UX-MENU-03: `hatalar` → Sistem'e taşındı (E4), `dlq` menüden çıktı.
+    """
     alt = alt_sekmeler("proje_yonetimi", ROL_ADMIN)
     siralar = [t.sira for t in alt]
     assert siralar == sorted(siralar)
     assert [t.anahtar for t in alt] == [
-        "karar_defteri", "abrakadabra", "denetim", "hatalar", "dlq",
+        "karar_defteri", "abrakadabra", "denetim",
     ]
 
 

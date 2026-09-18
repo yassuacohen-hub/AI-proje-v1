@@ -295,11 +295,21 @@ sorgu parametresiyle taşınır (`?bolum=iletisim`). `SECTIONS` kayıt yapısı 
    └─ Abrakadabra                                                 [2]
 ```
 
-Ölçüm: üst sayfa **6** (≤6 ✅) · alt sekme **13** (≤15 ✅) · grup başına maks **6** (≤6 ✅).
-Başlangıç 24 → 13 = **%46 azalma**.
+**Uygulama sonrası ölçüm (kod ile doğrulandı, [`tests/test_tabs_ia.py`](../tests/test_tabs_ia.py:1)):**
 
-Menü dışına alınanlar: `arama` (→ Ctrl+K modal, E1), `yukleme` (→ dev bayrağı, E2),
-`ayarlar` (→ profil popover), `yenileme` (→ Overview butonu, §8.4).
+| Ölçüt | Hedef | Gerçekleşen | Durum |
+|-------|-------|-------------|-------|
+| Üst sayfa | ≤ 6 | **6** | 🟢 |
+| Menüdeki alt sekme | ≤ 16 | **16** | 🟢 |
+| Grup başına alt sekme | ≤ 6 | **5** (Sistem) | 🟢 |
+| Menüden çıkan sekme | — | **8** | 🔵 |
+
+Başlangıç 24 → 16 = **%33 azalma**. (Taslakta 13 yazıyordu; `abrakadabra`,
+`denetim`, `api` sekmeleri kapsamda kaldığı için gerçek sayı 16.)
+
+Menü dışına alınan 8 sekme: `executive` (E3), `arama` (E1), `performans` (E5),
+`webhook` + `dlq` (E4), `yukleme` (E2), `ayarlar` (→ profil popover),
+`yenileme` (→ Overview butonu, §8.4).
 
 ### 8.4 Dashboard Overview yeniden düzenlemesi
 
@@ -343,7 +353,7 @@ altında `st.caption` olarak durur. Süs buton yok — 5 buton, 5 iş.
 
 - Yeni bağımlılık **yok** — `get_api` / `post_api` ([`scripts/dash04_api_client.py`](../scripts/dash04_api_client.py:40)) ve mevcut `kpi_karti` kullanılır.
 - [`web_dashboard/tabs/__init__.py`](../web_dashboard/tabs/__init__.py:166) `SECTIONS` kayıt yapısı **bozulmaz**; yalnız `ust` / `sira` alanları değişir.
-- `url_path` değerleri **sabit kalır**; kaldırılan sekmeler [`ESKI_URL`](../web_dashboard/tabs/__init__.py:530) ile yönlendirilir → bağlantı kırılmaz.
+- `url_path` değerleri **sabit kalır** → bağlantı kırılmaz. Neden: [`sayfalari_uret()`](../app.py:289) **tüm** `SECTIONS` için `st.Page` üretir; sidebar ise yalnız `ust` dolu olanları çizer. Yani `ust` silmek sekmeyi menüden çıkarır ama sayfayı ve adresini yaşatır. [`ESKI_URL`](../web_dashboard/tabs/__init__.py:530) genişletmesine **gerek kalmadı**.
 
 ### 8.5 Sonraki faz — Streamlit sınırı nedeniyle ertelenenler 🟡
 

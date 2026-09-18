@@ -22,6 +22,7 @@ ADMIN-UI-09 (pilot ekran):
 """
 from __future__ import annotations
 
+import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -37,7 +38,32 @@ from scripts.dash04_api_client import get_api, APIError  # noqa: E402
 
 from company_master.i18n import t  # noqa: E402
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
+from company_master.ui.tokens import RENKLER  # noqa: E402
 from web_dashboard.charts import donut, kpi_karti  # noqa: E402  (UI-CHART-01, KPI-EXA-02)
+
+# --- §8.4.1: Aksiyon butonu renkleri -----------------------------------------
+# Streamlit `st.button` yalnız primary/secondary/tertiary kabul eder; kontur
+# rengi için element key'inden gelen `.st-key-<key>` sınıfı kullanılır
+# (Streamlit >= 1.38). Renkler yalnız `tokens.py` içinden gelir.
+_AKSIYON_RENK: dict[str, str] = {
+    "ovw_guncelle": RENKLER["info"],
+    "ovw_saglik": RENKLER["success"],
+    "ovw_export": RENKLER["warning"],
+    "ovw_onay": RENKLER["danger"],
+}
+_AKSIYON_CSS = "<style>" + "".join(
+    f'.st-key-{anahtar} button {{ border-color: {renk} !important; color: {renk} !important; }}'
+    f'.st-key-{anahtar} button:hover {{ background: {renk}1a !important; }}'
+    for anahtar, renk in _AKSIYON_RENK.items()
+) + "</style>"
+
+#: §8.4.2 — Overview'dan ilgili sekmeye giriş kartları (ikon, etiket, tab anahtarı).
+GIRIS_KARTLARI: tuple[tuple[str, str, str], ...] = (
+    ("👥", "Firmalar", "musteriler"),
+    ("🧑", "Kullanıcılar", "kullanicilar"),
+    ("⚠️", "Olaylar & Hatalar", "hatalar"),
+    ("📊", "Metrikler", "kpi"),
+)
 
 
 @st.cache_data(ttl=30)
@@ -83,6 +109,81 @@ def load_webhook_stats() -> dict[str, Any]:
         pass
     return {}
 
+@st.cache_data(ttl=60)
+def bekleyen_onay_sayisi(token: str | None) -> int:
+    """Onay bekleyen kullanıcı sayısı. -1 = okunamadı (API/yetki yok)."""
+    try:
+        data = get_api("/api/admin/pending", token=token)
+    except (APIError, Exception):
+        return -1
+    if isinstance(data, list):
+        return len(data)
+    if isinstance(data, dict):
+        for anahtar in ("users", "items", "pending"):
+            if isinstance(data.get(anahtar), list):
+                return len(data[anahtar])
+    return 0
+
+
+def _sonuc_yaz(tip: str, mesaj: str) -> None:
+    """Aksiyon sonucunu rerun sonrası da yaşayacak biçimde saklar."""
+    st.session_state["ovw_sonuc"] = (tip, mesaj, datetime.now().strftime("%H:%M:%S"))
+
+
+def _veri_guncelle() -> None:
+    """`scripts/refresh_pipeline.py` çalıştırır ve sonucu ekrana yazar."""
+    try:
+        proc = subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / "refresh_pipeline.py")],
+            capture_output=True, text=True, timeout=180, cwd=str(ROOT),
+        )
+    except subprocess.TimeoutExpired:
+        _sonuc_yaz("error", "Veri güncelleme 180 sn içinde bitmedi, iptal edildi.")
+        return
+    except Exception as hata:  # script yok / yorumlayıcı hatası
+        _sonuc_yaz("error", f"Veri güncelleme başlatılamadı: {hata}")
+        return
+    if proc.returncode == 0:
+        son = (proc.stdout or "").strip().splitlines()
+        _sonuc_yaz("success", f"Veri güncellendi. {son[-1] if son else 'Çıktı yok.'}")
+        st.cache_data.clear()
+    else:
+        hata_metni = (proc.stderr or proc.stdout or "").strip().splitlines()
+        _sonuc_yaz("error", f"Veri güncelleme hatası: {hata_metni[-1] if hata_metni else proc.returncode}")
+
+
+def _saglik_kontrolu() -> None:
+    """API ve webhook alıcısının ayakta olup olmadığını kontrol eder."""
+    durumlar: list[str] = []
+    saglikli = True
+    for ad, uc in (("API", "/metrics"), ("Webhook", "/api/webhooks/apify/health")):
+        try:
+            get_api(uc)
+            durumlar.append(f"{ad} 🟢")
+        except (APIError, Exception):
+            durumlar.append(f"{ad} 🔴")
+            saglikli = False
+    _sonuc_yaz("success" if saglikli else "error", " · ".join(durumlar))
+
+
+def _csv_hazirla() -> None:
+    """Firma listesini CSV'ye çevirip indirilmeye hazır hale getirir."""
+    # ponytail: doğrudan /api/companies/export yerine JSON + pandas kullanıldı;
+    # get_api yalnız JSON çözer. Büyük veri gerekince stream'li indirmeye geçilir.
+    try:
+        data = get_api("/api/companies", params={"limit": 1000})
+    except (APIError, Exception) as hata:
+        _sonuc_yaz("error", f"Dışa aktarma başarısız: {hata}")
+        return
+    satirlar = data if isinstance(data, list) else (data or {}).get("items") or []
+    if not satirlar:
+        _sonuc_yaz("info", "Dışa aktarılacak kayıt yok.")
+        return
+    csv_metni = pd.DataFrame(satirlar).to_csv(index=False)
+    st.session_state["ovw_csv"] = csv_metni
+    _sonuc_yaz("success", f"{len(satirlar)} satır hazır · {len(csv_metni) / 1_048_576:.2f} MB")
+
+
 #: ADMIN-UI-09 — Sayfa bölümleri tek yerde tanımlanır; hem `SectionNav`
 #: hem de gövde aynı listeyi kullanır, böylece anchor'lar asla kaymaz.
 # KPI-EXA-02 (sahip, 2026-09-15): Veri Akışı diyagramı "Teknik Altyapı" sayfasına
@@ -114,31 +215,72 @@ def render_ana_kontrol_tab() -> None:
         ust_etiket="İş · Operasyon",
     ).render()
 
-    # --- K1: Aksiyon şeridi (tek birincil buton: Veriyi Yenile) ---
-    col_refresh, col_info, col_time = st.columns([1, 1, 3], vertical_alignment="center")
-    with col_refresh:
+    # --- §8.4.1: Aksiyon şeridi (5 buton, tek birincil: Veriyi Yenile) ---
+    st.markdown(_AKSIYON_CSS, unsafe_allow_html=True)
+    token = st.session_state.get("admin_token")
+    bekleyen = bekleyen_onay_sayisi(token)
+    b1, b2, b3, b4, b5 = st.columns(5, vertical_alignment="center")
+
+    with b1:
         yenile = st.button(
-            "Veriyi Yenile",
-            key="refresh_ana_kontrol",
-            type="primary",
-            width="stretch",
+            "⟳ Veriyi Yenile", key="ovw_yenile", type="primary", width="stretch",
             help="Önbelleği temizler ve tüm kartları yeniden yükler.",
         )
-    with col_info:
-        bilgi = st.toggle(
-            "Sekme rehberi",
-            key="ana_kontrol_rehber",
-            help="Bu ekranın amacını, veri kaynağını ve kısıtlarını gösterir.",
-        )
-    with col_time:
-        st.caption(
-            f"Son güncelleme: {datetime.now().strftime('%H:%M')} · "
-            "Önbellek ömrü 30 sn"
-        )
+    with b2:
+        if st.button("⬇ Veri Güncelle", key="ovw_guncelle", width="stretch",
+                     help="Kaynaklardan veri çekme hattını çalıştırır (en çok 180 sn)."):
+            with st.spinner("Veri hattı çalışıyor..."):
+                _veri_guncelle()
+    with b3:
+        if st.button("♥ Sağlık Kontrolü", key="ovw_saglik", width="stretch",
+                     help="API ve webhook alıcısının ayakta olup olmadığını sorar."):
+            with st.spinner("Servisler sorgulanıyor..."):
+                _saglik_kontrolu()
+    with b4:
+        if st.button("⬆ Dışa Aktar (CSV)", key="ovw_export", width="stretch",
+                     help="Firma listesini CSV dosyası olarak hazırlar."):
+            with st.spinner("CSV hazırlanıyor..."):
+                _csv_hazirla()
+    with b5:
+        etiket = "✓ Bekleyen Onaylar" if bekleyen < 0 else f"✓ Bekleyen Onaylar ({bekleyen})"
+        if st.button(etiket, key="ovw_onay", width="stretch",
+                     help="Onay bekleyen kullanıcıları listeler."):
+            st.session_state["ovw_onay_ac"] = True
 
     if yenile:
         st.cache_data.clear()
         st.rerun()
+
+    # --- Aksiyon sonucu (rerun sonrası da görünür) ---
+    sonuc = st.session_state.get("ovw_sonuc")
+    if sonuc:
+        tip, mesaj, saat = sonuc
+        {"success": st.success, "error": st.error}.get(tip, st.info)(f"{mesaj} · {saat}")
+    if st.session_state.get("ovw_csv"):
+        st.download_button(
+            "CSV dosyasını indir", st.session_state["ovw_csv"],
+            file_name=f"firmalar_{datetime.now():%Y%m%d_%H%M}.csv",
+            mime="text/csv", key="ovw_csv_indir",
+        )
+    if st.session_state.pop("ovw_onay_ac", False) and bekleyen > 0:
+        st.info(f"{bekleyen} kullanıcı onay bekliyor — **Müşteriler › Kullanıcılar** sekmesinden işleyin.")
+
+    # --- §8.4.2: Sekme giriş kartları ---
+    from web_dashboard.tabs import tab_getir  # fonksiyon içi: döngüsel import yok
+
+    kart_kolonlari = st.columns(len(GIRIS_KARTLARI))
+    for kolon, (ikon, etiket_kart, anahtar) in zip(kart_kolonlari, GIRIS_KARTLARI):
+        tanim = tab_getir(anahtar)
+        if tanim is None:
+            continue
+        with kolon:
+            st.link_button(f"{ikon} {etiket_kart}", f"/{tanim.url_path}", width="stretch")
+
+    bilgi = st.toggle(
+        "Sekme rehberi", key="ana_kontrol_rehber",
+        help="Bu ekranın amacını, veri kaynağını ve kısıtlarını gösterir.",
+    )
+    st.caption(f"Son güncelleme: {datetime.now():%H:%M} · Önbellek ömrü 30 sn")
 
     if bilgi:
         st.info(

@@ -225,10 +225,10 @@ SECTIONS: tuple[TabTanimi, ...] = (
     # --- U-11: Yeni kısayol sekmeleri (sitemap Bölüm 3 menü ağacı dağıtımı) ---
     TabTanimi(
         anahtar="kpi",
-        baslik=t("menu_kpi"),
+        baslik="Özet",
         ikon="📊",
         grup=GRUP_IS,
-        aciklama="KPI kartları ve özet metrikler",
+        aciklama="KPI kartları, özet metrikler ve yönetici görünümü",
         url_path="kpi",
         ust="veri_kalite", sira=0,
         modul="web_dashboard.tabs.admin_kpi",
@@ -236,6 +236,8 @@ SECTIONS: tuple[TabTanimi, ...] = (
         min_rol="analyst",
     ),
     # --- PO-BACK-08: Executive Dashboard (MRR/ARR + churn + tenant sağlığı) ---
+    # UX-MENU-03/E3: menüden çıktı, "Metrikler › Özet" içine taşındı.
+    # `ust` yok => sidebar'da görünmez; /executive adresi çalışmaya devam eder.
     TabTanimi(
         anahtar="executive",
         baslik="Executive Dashboard",
@@ -243,7 +245,6 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="MRR/ARR, churn oranı ve tenant sağlık dağılımı — yönetici özeti",
         url_path="executive",
-        ust="veri_kalite", sira=3,
         modul="web_dashboard.tabs.admin_executive",
         fonksiyon="render_executive_tab",
         min_rol="admin",
@@ -260,14 +261,15 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_destek_tab",
         min_rol="admin",
     ),
+    # UX-MENU-03/E4: hatalar + dlq + webhook tek sekmede birleşti (Sistem altında).
     TabTanimi(
         anahtar="hatalar",
-        baslik=t("menu_hatalar"),
+        baslik="Olaylar & Hatalar",
         ikon="⚠️",
-        grup=GRUP_IS,
-        aciklama="Hata yönetimi ve sorun giderme",
+        grup=GRUP_SISTEM,
+        aciklama="Hatalar, webhook olayları ve ölü harf kuyruğu (DLQ)",
         url_path="hatalar",
-        ust="proje_yonetimi", sira=3,
+        ust="sistem", sira=3,
         modul="web_dashboard.tabs.admin_errors",
         fonksiyon="render_errors_tab",
         min_rol="analyst",
@@ -308,6 +310,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_quality_tab",
         min_rol="analyst",
     ),
+    # UX-MENU-03/E1: menüden çıktı; global arama üst şeritteki arama kutusu.
     TabTanimi(
         anahtar="arama",
         baslik=t("menu_arama"),
@@ -315,7 +318,6 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Global arama ve filtreleme",
         url_path="arama",
-        ust="veri_kalite", sira=2,
         modul="web_dashboard.tabs.admin_search",
         fonksiyon="render_search_tab",
         min_rol="analyst",
@@ -344,12 +346,13 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_cost_tab",
         min_rol="analyst",
     ),
+    # UX-MENU-03/E5: teknik_altyapi + performans tek "Altyapı" sekmesinde.
     TabTanimi(
         anahtar="teknik_altyapi",
-        baslik="Teknik Altyapı",
+        baslik="Altyapı",
         ikon="🧭",
         grup=GRUP_SISTEM,
-        aciklama="Süreç diyagramı ve servis haritası (KPI-EXA-02)",
+        aciklama="Süreç diyagramı, servis haritası ve performans metrikleri",
         url_path="teknik-altyapi",
         ust="sistem", sira=0,
         modul="web_dashboard.tabs.teknik_altyapi",
@@ -363,7 +366,6 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Sistem performansı ve gecikme metriği",
         url_path="performans",
-        ust="sistem", sira=1,
         modul="web_dashboard.tabs.admin_performance",
         fonksiyon="render_performance_tab",
         min_rol="analyst",
@@ -387,7 +389,6 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Webhook izleme ve durum",
         url_path="webhook",
-        ust="sistem", sira=3,
         modul="web_dashboard.tabs.webhook_monitor",
         fonksiyon="render_webhook_monitor_tab",
         min_rol="analyst",
@@ -399,11 +400,11 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Kuyruk hataları ve ölü harf sırası",
         url_path="dlq",
-        ust="proje_yonetimi", sira=4,
         modul="web_dashboard.tabs.admin_dlq",
         fonksiyon="render_dlq_tab",
         min_rol="analyst",
     ),
+    # UX-MENU-03: menüden çıktı; yenileme Ana Kontrol aksiyon şeridinden yönetilir.
     TabTanimi(
         anahtar="yenileme",
         baslik=t("menu_yenileme"),
@@ -411,7 +412,6 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Otomatik yenileme ayarları",
         url_path="yenileme",
-        ust="sistem", sira=6,
         modul="web_dashboard.tabs.admin_auto_refresh",
         fonksiyon="render_auto_refresh",
         min_rol="analyst",
@@ -451,6 +451,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_audit_tab",
         min_rol="admin",
     ),
+    # UX-MENU-03: menüden çıktı; sol-alt hesap kartı popover'ından açılır.
     TabTanimi(
         anahtar="ayarlar",
         baslik=t("menu_m_ayarlar"),
@@ -458,11 +459,11 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Görünüm, veri, bildirim ve bölgesel kullanıcı tercihleri (P7-46)",
         url_path="ayarlar",
-        ust="sistem", sira=7,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_ayarlar_tab",
         min_rol="admin",
     ),
+    # UX-MENU-03/E2: menüden çıktı; geliştirici demo sayfası olarak URL'de kaldı.
     TabTanimi(
         anahtar="yukleme",
         baslik=t("menu_loading"),
@@ -470,14 +471,13 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Loading state örnekleri ve skeleton gosterim (P7-42)",
         url_path="yukleme",
-        ust="sistem", sira=8,
         modul="web_dashboard.tabs.admin_loading",
         fonksiyon="render_loading_tab",
         min_rol="admin",
     ),
     TabTanimi(
         anahtar="musteri_yonetimi",
-        baslik="Müşteri Yönetimi",
+        baslik="Müşteriler",
         ikon="👥",
         grup=GRUP_IS,
         aciklama="Müşteri yönetim, paket, giriş ve destek ana sayfa",
@@ -489,7 +489,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
     ),
     TabTanimi(
         anahtar="proje_yonetimi",
-        baslik="Proje Yönetimi",
+        baslik="Proje",
         ikon="📊",
         grup=GRUP_IS,
         aciklama="Karar defteri, açık işler, denetim izi ve hatalar",
@@ -501,8 +501,8 @@ SECTIONS: tuple[TabTanimi, ...] = (
     ),
     TabTanimi(
         anahtar="veri_kalite",
-        baslik="Veri & Kalite",
-        ikon="✅",
+        baslik="Metrikler",
+        ikon="📊",
         grup=GRUP_IS,
         aciklama="KPI, kalite, arama ve executive özeti",
         url_path="veri-kalite",
@@ -513,8 +513,8 @@ SECTIONS: tuple[TabTanimi, ...] = (
     ),
     TabTanimi(
         anahtar="musteri_onizleme",
-        baslik="Müşteri Önizleme",
-        ikon="🦅",
+        baslik="Gelir",
+        ikon="💼",
         grup=GRUP_IS,
         aciklama="Paketler ve pazarlama müşteri ekranı (Huginn önizleme)",
         url_path="musteri-onizleme",
