@@ -28,7 +28,7 @@ FILE_LOCKS = STATE_DIR / "file_locks.json"
 STATE_JSON = STATE_DIR / "state.json"
 TASK_MD = STATE_DIR / "gorev_panosu.md"
 
-GOREV_DURUMLARI = ("plan", "aktif", "review", "done", "blocked")
+GOREV_DURUMLARI = ("plan", "aktif", "review", "done", "blocked", "archive")
 
 # S-05: Pano kaydinda BULUNMASI ZORUNLU alanlar ve eksikse kullanilacak
 # varsayilanlar. Tek bozuk kayit yuzunden TUM ajanlarin pano yazimi
@@ -40,6 +40,7 @@ ZORUNLU_ALANLAR: dict[str, Any] = {
     "oncelik": "P2",
     "durum": "plan",
     "dosyalar": [],
+    "mod": "code",
 }
 
 # ORCH-03: Pano degistikce AGENT_SYNC otomatik tazelensin.
@@ -235,6 +236,7 @@ def gorev_ekle(
     dosyalar: list[str] | None = None,
     source: str | None = None,
     from_agent: str | None = None,
+    mod: str = "code",
 ) -> dict:
     """Panoya gorev ekle. dosyalar -> file-lock sahipligi de alir.
 
@@ -257,6 +259,7 @@ def gorev_ekle(
         "not": "",
         "source": source or "ic",
         "from_agent": from_agent,
+        "mod": mod or "code",  # D-63: architect | code
     }
     # S-05: Bozuk kayit panoya hic girmesin (onleme).
     sema_dogrula(task)

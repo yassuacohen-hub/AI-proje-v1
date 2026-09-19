@@ -14,7 +14,8 @@
     ],
     "not": "Kok neden: app.py _hesap_karti_popover() icinde render_admin_cikis() cagriliyordu; o fonksiyon oturumu kapatmaz, popover icinde ikinci bir buton cizer. admin_cikis() olarak duzeltildi + regresyon testi (tests/test_nav_ia04.py::test_popover_cikis_gercekten_oturum_kapatir). Ek temizlik: olu MUAF kaydi render_error_page silindi, 3 dosyada eksik dosya_sonu newline eklendi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-UX-PROFILMENU-01",
@@ -31,7 +32,8 @@
     ],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "RESEARCH-PONYTALE",
@@ -40,7 +42,9 @@
     "oncelik": "P0",
     "durum": "aktif",
     "not": "Ponytail ve Caveman kiyaslamasi. Ponytail=tembel senior dev zihniyeti, YAGNI, az kod. Caveman=token azligi, 65% token kesti.",
-    "dosyalar": []
+    "dosyalar": [],
+    "mod": "code",
+    "id": "RESEARCH-PONYTALE"
   },
   {
     "task_id": "ADMIN-UX-AYARLAR-SAYFA-01",
@@ -48,15 +52,17 @@
     "baslik": "Kullanici Ayarlari tek sayfa: profil + sifre degistir/sifirla",
     "sahip": "ihsan",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "blocked",
     "baslangic": "2026-09-18T14:31:57",
-    "bitis": null,
+    "bitis": "2026-09-19T03:33:07",
     "dosyalar": [
       "web_dashboard/tabs/admin_kullanici_ayarlari.py"
     ],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "notlar": "Kopya: UI-AYARLAR-SAYFA-01 ile ayni is (D-62 temizlik)"
   },
   {
     "task_id": "ADMIN-UX-MENUTREE-01",
@@ -72,7 +78,8 @@
     ],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "V10-BELGE-01",
@@ -88,7 +95,8 @@
     ],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "WK-01",
@@ -100,7 +108,8 @@
     "bitis": null,
     "dosyalar": [],
     "not": "Kariyer sayfaları scraper geliştirin. Gelişmiş veri çıkarma. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina). | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: web_kazima)",
-    "id": "WK-01"
+    "id": "WK-01",
+    "mod": "code"
   },
   {
     "task_id": "WK-02",
@@ -112,7 +121,8 @@
     "bitis": null,
     "dosyalar": [],
     "not": "OSB ihale takibi — gerçek zamanlı izleme sistemi. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina). | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: web_kazima)",
-    "id": "WK-02"
+    "id": "WK-02",
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-HATA-01",
@@ -129,7 +139,8 @@
     "dosyalar": [],
     "not": "Teslim (kilo): Hata Yönetimi sekmesi yeniden yazildi: sahte demo raise (simüle 404/500/bağlantı) ve sahte istatistikler (metrikler 'Veri yok' gösteriyordu) kaldirildi. Gercek hata kaynagi: src/company_master/logging/error_logger.py merkezi hata loglama (dosya tabanli JSONL: data/errors/error_log.jsonl). app.py hata sinirina log_error() entegre edildi. Admin sekmesinde: filtreleme (seviye/kaynak/donem), gercek istatistikler (toplam/ERROR/WARNING/CRITICAL, kaynak dagilimi, hata turu dagilimi), hata detaylari (expandable), kullanici hata raporlama formu. Testler: 5/5 geciyor.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-HATA-02",
@@ -149,7 +160,8 @@
     ],
     "not": "Teslim (kilo): 4 admin sekmesindeki 16 sessiz 'except Exception: pass' kalibi giderildi: admin_kpi.py (11), admin_quality.py (8), admin_performance.py (4), admin_api_analytics.py (2). Her biri AdminErrorHandler.warning() ile loglanacak sekilde duzenlendi. Ortak yardimci modul: web_dashboard/tabs/admin_error_handling.py (AdminErrorHandler sinifi + @admin_error_handler decorator). AST tabanli tespit aracı: scripts/detect_silent_except.py. Testler: tests/test_admin_sessiz_except.py (7 test) tamamı geciyor. Toplam pytest: 136 passed.",
     "source": "roo",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-KPI-KART-02",
@@ -157,9 +169,9 @@
     "baslik": "Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-17T06:49:12",
-    "bitis": null,
+    "bitis": "2026-09-19T02:36:41",
     "dosyalar": [
       "web_dashboard/tabs/webhook_monitor.py",
       "web_dashboard/tabs/tenant_health_dashboard.py",
@@ -168,7 +180,8 @@
     ],
     "not": "Teslim (kilo): webhook_monitor.py ve tenant_health_dashboard.py dosyalarindaki tum st.metric cagrilari kpi_karti ile degistirildi. UI-CHART-01 uyumlulugu saglandi. AST tespit aracı: scripts/detect_st_metric.py. Testler: tests/test_admin_kpi_kart.py (6 test) + test_admin_sessiz_except.py (7 test) + test_admin_errors.py (5 test) + test_tenant_health.py (4 test) = 22 test geciyor. Kodlama denetimi temiz.",
     "source": "roo",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-MUSTERI-02",
@@ -176,16 +189,17 @@
     "baslik": "Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-17T06:48:52",
-    "bitis": null,
+    "bitis": "2026-09-19T02:36:41",
     "dosyalar": [
       "web_dashboard/tabs/musteri_yonetimi.py",
       "tests/test_musteri_yonetimi.py"
     ],
     "not": "Teslim (kilo): Musteri Yonetimi placeholder alt sekmeler gercek icerikle dolduruldu: _kullanicilar_onay() — onay bekleyen kullanicilar listesi, tier selectbox, onaylama butonu, son onaylananlar, kategori listesi. _paket_kredi() — kredi yukleme formu, kategori goruntuleme, yeni kategori ekleme formu. admin_extras.pydeki render_user_management mantigi entegre edildi. Testler: tests/test_musteri_yonetimi.py (3 test) geciyor. Kodlama denetimi temiz.",
     "source": "roo",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "AGN-CREWAI-PILOT-01",
@@ -201,7 +215,8 @@
     ],
     "not": "",
     "source": "ic",
-    "from_agent": "cline"
+    "from_agent": "cline",
+    "mod": "code"
   },
   {
     "task_id": "FMT-01",
@@ -218,7 +233,8 @@
     ],
     "not": "ERTELENDI (sahip 2026-09-17, D-48): CI push kodlama_denetim yeterli. Bu goreve DEVAM ETME; ADMIN-AYAR-01 al.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "GUARD-ENC-02",
@@ -236,7 +252,8 @@
     ],
     "not": "ERTELENDI (sahip 2026-09-17, D-48): CI push kodlama_denetim yeterli. Bu goreve DEVAM ETME; ADMIN-AYAR-01 al.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "SEC-BANDIT-01",
@@ -255,7 +272,8 @@
     ],
     "not": "ERTELENDI (sahip 2026-09-17, D-48): CI push kodlama_denetim yeterli. Bu goreve DEVAM ETME; ADMIN-AYAR-01 al.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "V10-HIJYEN-02",
@@ -271,7 +289,8 @@
     ],
     "not": "Teslim: dosya fiilen silindi (git rm). Icerik NotImplementedError firlatan iskeletti; gercek arama src/company_master/search/engine.py icinde. Repo genelinde tek bir Python referansi bile yoktu (regex tarama: 0 sonuc). Kodlama denetimi temiz. Tam suit 3902 passed / 5 skipped / 0 failed - regresyon yok.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "WK-03",
@@ -283,7 +302,8 @@
     "bitis": null,
     "dosyalar": [],
     "not": "Proxy rotation ve IP yönetim sistemi kurun. | ERTELENDI: 2026-09-15'e kaldi (web kazima isi yarina). | ORK 2026-09-15: park — gerçek ajan değil; geniş klasör kilidi kaldırıldı (eski sahip: web_kazima)",
-    "id": "WK-03"
+    "id": "WK-03",
+    "mod": "code"
   },
   {
     "task_id": "ADLANDIRMA-GERIYE-01",
@@ -297,7 +317,8 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "P0-1",
@@ -308,7 +329,9 @@
     "baslangic": "2026-09-03T07:39:48",
     "bitis": "2026-09-08T10:00:00Z",
     "dosyalar": [],
-    "not": "Scraper aktif, 100 test sahendi."
+    "not": "Scraper aktif, 100 test sahendi.",
+    "mod": "code",
+    "id": "P0-1"
   },
   {
     "task_id": "P0-2",
@@ -319,7 +342,9 @@
     "baslangic": "2026-09-03T07:39:48",
     "bitis": "2026-09-03T14:18:36",
     "dosyalar": [],
-    "not": "Otomatik tetiklendi"
+    "not": "Otomatik tetiklendi",
+    "mod": "code",
+    "id": "P0-2"
   },
   {
     "task_id": "P0-3",
@@ -330,7 +355,9 @@
     "baslangic": "2026-09-03T07:39:48",
     "bitis": "2026-09-06T22:54:31",
     "dosyalar": [],
-    "not": "Kalite skoru 56.54/100, hedef 50+ BAŞARILI."
+    "not": "Kalite skoru 56.54/100, hedef 50+ BAŞARILI.",
+    "mod": "code",
+    "id": "P0-3"
   },
   {
     "task_id": "Y21",
@@ -343,7 +370,9 @@
     "dosyalar": [
       "data/orchestrator/y21_result.json"
     ],
-    "not": "Acik API yok, ozel sektor isyeri adlari gizli."
+    "not": "Acik API yok, ozel sektor isyeri adlari gizli.",
+    "mod": "code",
+    "id": "Y21"
   },
   {
     "task_id": "APIFY-01",
@@ -354,7 +383,9 @@
     "baslangic": "2026-09-10T12:20:33",
     "bitis": "2026-09-11T22:14:20",
     "dosyalar": [],
-    "not": "3 arac kiyaslandi (Apify, Firecrawl, Scrapy) - Apify secildi. ADR: AI proje v1/V10/07_referanslar/10_apify_entegrasyon_arastirmasi_20260910.md (diskte dogrulandi). kilo tamamladi; pano kaydi ORCH-02 devami ile senkronlandi."
+    "not": "3 arac kiyaslandi (Apify, Firecrawl, Scrapy) - Apify secildi. ADR: AI proje v1/V10/07_referanslar/10_apify_entegrasyon_arastirmasi_20260910.md (diskte dogrulandi). kilo tamamladi; pano kaydi ORCH-02 devami ile senkronlandi.",
+    "mod": "code",
+    "id": "APIFY-01"
   },
   {
     "task_id": "APIFY-02",
@@ -367,7 +398,9 @@
     "dosyalar": [
       "src/company_master/intelligence/job_intelligence/sources/apify_job_source.py"
     ],
-    "not": "ApifyJobSource implementasyonu tamamlandi. SourceSpec registry'e 'apify' source_id eklendi."
+    "not": "ApifyJobSource implementasyonu tamamlandi. SourceSpec registry'e 'apify' source_id eklendi.",
+    "mod": "code",
+    "id": "APIFY-02"
   },
   {
     "task_id": "APIFY-03",
@@ -378,7 +411,9 @@
     "baslangic": "2026-09-10T12:20:33",
     "bitis": "2026-09-11T22:14:20",
     "dosyalar": [],
-    "not": "apify_webhook_receiver.py + web_app.py /api/webhooks/apify + manage_apify_webhooks.py; test_apify_webhook_receiver.py + test_apify_webhook_hardening.py (diskte dogrulandi). kilo tamamladi; pano kaydi ORCH-02 devami ile senkronlandi."
+    "not": "apify_webhook_receiver.py + web_app.py /api/webhooks/apify + manage_apify_webhooks.py; test_apify_webhook_receiver.py + test_apify_webhook_hardening.py (diskte dogrulandi). kilo tamamladi; pano kaydi ORCH-02 devami ile senkronlandi.",
+    "mod": "code",
+    "id": "APIFY-03"
   },
   {
     "task_id": "MCP-01",
@@ -389,7 +424,9 @@
     "baslangic": "2026-09-10T12:20:33",
     "bitis": "2026-09-11T22:14:20",
     "dosyalar": [],
-    "not": "mcp/policy_engine.py (PolicyEngine) + mcp/apify_adapter.py (ApifyAdapter): whitelist, spend/data limitleri, NACE scope; 33 test (diskte dogrulandi). kilo tamamladi; pano kaydi ORCH-02 devami ile senkronlandi."
+    "not": "mcp/policy_engine.py (PolicyEngine) + mcp/apify_adapter.py (ApifyAdapter): whitelist, spend/data limitleri, NACE scope; 33 test (diskte dogrulandi). kilo tamamladi; pano kaydi ORCH-02 devami ile senkronlandi.",
+    "mod": "code",
+    "id": "MCP-01"
   },
   {
     "task_id": "MCP-02",
@@ -400,7 +437,9 @@
     "baslangic": "2026-09-10T12:20:33",
     "bitis": "2026-09-11T22:14:20",
     "dosyalar": [],
-    "not": "mcp/huginn_server.py (HuginnMCPServer): get_source_policy, get_collection_run_status, submit_evidence_batch, report_collection_failure (diskte dogrulandi). kilo tamamladi; pano kaydi ORCH-02 devami ile senkronlandi."
+    "not": "mcp/huginn_server.py (HuginnMCPServer): get_source_policy, get_collection_run_status, submit_evidence_batch, report_collection_failure (diskte dogrulandi). kilo tamamladi; pano kaydi ORCH-02 devami ile senkronlandi.",
+    "mod": "code",
+    "id": "MCP-02"
   },
   {
     "task_id": "DOC-01",
@@ -411,7 +450,9 @@
     "baslangic": null,
     "bitis": "2026-09-11T22:14:20",
     "dosyalar": [],
-    "not": "AI proje v1/V10/07_referanslar/11_apify_mcp_entegrasyon.md kanonik dokuman (APIFY-01/02/03 + MCP-01/02; README/docs kilitli - dokunulmadi; diskte dogrulandi). kilo tamamladi; pano kaydi ORCH-02 devami ile senkronlandi."
+    "not": "AI proje v1/V10/07_referanslar/11_apify_mcp_entegrasyon.md kanonik dokuman (APIFY-01/02/03 + MCP-01/02; README/docs kilitli - dokunulmadi; diskte dogrulandi). kilo tamamladi; pano kaydi ORCH-02 devami ile senkronlandi.",
+    "mod": "code",
+    "id": "DOC-01"
   },
   {
     "task_id": "OBS-01",
@@ -424,7 +465,9 @@
     "dosyalar": [
       "data/orchestrator/obs01_obsidian_result.json"
     ],
-    "not": "YAML frontmatter eklendi, encoding düzeltildi, 10_ankara_osb_sentez.md mojibake onarildi."
+    "not": "YAML frontmatter eklendi, encoding düzeltildi, 10_ankara_osb_sentez.md mojibake onarildi.",
+    "mod": "code",
+    "id": "OBS-01"
   },
   {
     "task_id": "OSINT-01",
@@ -440,7 +483,9 @@
       "scripts/post_scrape_workflow.py",
       "docs/OSINT_SCRAPER_MOTORU.md"
     ],
-    "not": "Quality Gate modulu olusturuldu, osint_engine quality komutu eklendi, post_scrape_workflow guncellendi, dokumanlasma yapildi"
+    "not": "Quality Gate modulu olusturuldu, osint_engine quality komutu eklendi, post_scrape_workflow guncellendi, dokumanlasma yapildi",
+    "mod": "code",
+    "id": "OSINT-01"
   },
   {
     "task_id": "ORCH-01",
@@ -457,7 +502,9 @@
     ],
     "not": "Test kirliliği giderildi (tmp_path izolasyonu); pano 23 göreve tamamlandı; AGENT_SYNC/gorev_panosu yenilendi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "ORCH-01"
   },
   {
     "task_id": "P7-12",
@@ -470,7 +517,9 @@
     "dosyalar": [],
     "not": "Webhook hardening test suite: 33 passed in 1.42s.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-12"
   },
   {
     "task_id": "P7-13",
@@ -483,7 +532,9 @@
     "dosyalar": [],
     "not": "Apify SourceSpec enabled=True; ApifyAdapter + HuginnMCPServer entegrasyonu tamamlandi, 38 test gecti.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-13"
   },
   {
     "task_id": "P7-15",
@@ -496,7 +547,9 @@
     "dosyalar": [],
     "not": "web_app.py /api/intelligence/dashboard (SQLite uyumlu, :now parametresi), web_dashboard index.html+app.js+style.css + test eklendi. 9 test gecti, py_compile + node --check OK. Flake8: sadece mevcut onceden var olan uyarilar.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-15"
   },
   {
     "task_id": "REFACTOR-01",
@@ -509,7 +562,9 @@
     "dosyalar": [],
     "not": "test_gorev_guncelle_not_keyword_argument eklendi; **{'not': ...} gecisi dogrulandi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "REFACTOR-01"
   },
   {
     "task_id": "TEST-01",
@@ -522,7 +577,9 @@
     "dosyalar": [],
     "not": "test_dispatch_review.py: bilinmeyen task ve çıktısız task senaryoları eklendi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "TEST-01"
   },
   {
     "task_id": "VALIDATE-01",
@@ -535,7 +592,9 @@
     "dosyalar": [],
     "not": "test_quick_task.py: brief unit testleri + main() e2e (dispatch -> review -> done + handoff + AGENT_SYNC).",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "VALIDATE-01"
   },
   {
     "task_id": "DOCS-04",
@@ -548,7 +607,9 @@
     "dosyalar": [],
     "not": "package_brief() = json.dumps(brief.to_dict()); eşdeğerlik + roundtrip testleri geçti.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "DOCS-04"
   },
   {
     "task_id": "DOCS-05",
@@ -561,7 +622,9 @@
     "dosyalar": [],
     "not": "docs/DOSYA_KILITLEME_PROTOKOLU.md oluşturuldu.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "DOCS-05"
   },
   {
     "task_id": "DOCS-06",
@@ -574,7 +637,9 @@
     "dosyalar": [],
     "not": "docs/GOREV_PANOSU_KULLANIM_KILAVUZU.md oluşturuldu.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "DOCS-06"
   },
   {
     "task_id": "QT-001",
@@ -587,7 +652,9 @@
     "dosyalar": [],
     "not": "Test artefakti (dispatch testleri kalintisi): baslangic=null, handoff yok, dosya kilidi yok. ORCH-001 devami panosu temizligi ile kapatildi; gercek arastirma gorevi degildir.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "QT-001"
   },
   {
     "task_id": "QTK-01",
@@ -600,7 +667,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "QTK-01"
   },
   {
     "task_id": "DOCS-01",
@@ -613,7 +682,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "DOCS-01"
   },
   {
     "task_id": "DOCS-02",
@@ -626,7 +697,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "DOCS-02"
   },
   {
     "task_id": "DOCS-03",
@@ -639,7 +712,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "DOCS-03"
   },
   {
     "task_id": "RO-02",
@@ -652,7 +727,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "RO-02"
   },
   {
     "task_id": "LIVE-01",
@@ -665,7 +742,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "LIVE-01"
   },
   {
     "task_id": "ROO-01",
@@ -678,7 +757,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "ROO-01"
   },
   {
     "task_id": "9R-01",
@@ -691,7 +772,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "9R-01"
   },
   {
     "task_id": "MCP-03",
@@ -704,7 +787,9 @@
     "dosyalar": [],
     "not": "mcp paketi (v2.2.0) kuruldu; mcp/mcp_server_entry.py: 7 MCP tool (3 Apify + 4 Huginn) stdio + Streamable HTTP transport. test_mcp_transport.py: 13 transport test, 46 toplam MCP test. scripts/run_mcp_server.py CLI entry; requirements-dev.txt: mcp>=2.0.0. (handoffs.json MCP-03 kaydindan panoya islendi)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "MCP-03"
   },
   {
     "task_id": "ORCH-02",
@@ -717,7 +802,9 @@
     "dosyalar": [],
     "not": "scripts/_orch02_boardsync.py: APIFY-03/MCP-01/MCP-02/DOC-01 done isaretlendi, MCP-03 panoya eklendi. AGENT_SYNC ve kopya yenilendi (atomik yazma).",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "ORCH-02"
   },
   {
     "task_id": "P7-14",
@@ -730,7 +817,9 @@
     "dosyalar": [],
     "not": "E2E Pipeline Test tamamlandi: tests/test_job_intelligence_e2e.py olusturuldu (6 test, DB bagimsiz - fake engine). Webhook -> ingest -> SignalAnalyzer -> IntelligenceScorer zinciri dogrulandi. Lint temiz.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-14"
   },
   {
     "task_id": "CLEANUP-01",
@@ -745,7 +834,9 @@
     ],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "CLEANUP-01"
   },
   {
     "task_id": "GIT-01",
@@ -762,7 +853,9 @@
     ],
     "not": "Hibrit push devrede: git_push_gorev.py + Zamanlayici 12:01/00:01 + .gitignore temizligi. Parent push 80e530e; nested 536d4e1.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "GIT-01"
   },
   {
     "task_id": "9R-02",
@@ -781,7 +874,9 @@
     ],
     "not": "9R-02 tamamlandi. vector/ paketi (embedder fast-fail + store in-memory fallback + service), matcher.py (VKN+fuzzy+vektor karar agaci, _temiz_unvan/onemsiz token duzeltmesi), index_companies.py --vkn-rap embed-oncesi sira, chromadb requirement eklendi. Pilot: firmalar_vkn_ekli 5040 satir -> 0 ortak VKN grubu (veri zaten deduplike). Test: tests/vector 31 + task_board 5 = 36 passed. Not: ChromaDB ve 9Router embed runtime'da kurulu degil -> in-memory fallback devrede; NINEROUTER_* .env + pip kurulumu sonrasi gercek vektor akisi acilir. Sonraki adim: 9R-03 chat tabanli ilan zenginlestirme.",
     "source": "ic",
-    "from_agent": "roo_code"
+    "from_agent": "roo_code",
+    "mod": "code",
+    "id": "9R-02"
   },
   {
     "task_id": "9R-03",
@@ -796,7 +891,9 @@
     ],
     "not": "9R-03 tamamlandi. chat_enricher.py (sektor/pozisyon/skill + regex fallback + C1/UTF-8 temizlik), analyzer.enrich_with_chat entegrasyonu, build_default_enricher duzeltmesi (client get_client() sentinel). Canli demo: apify_run-*.jsonl 3/3 chat (Developer-BILISIM, Engineer-GENEL, Stajyer-GENEL). Regresyon: chat_enricher+ninerouter+analyzer 57 passed; tam suite (bilinen 3 apify/webhook haric) 388 passed, 1 skipped. Katalog v1.0.1.",
     "source": "ic",
-    "from_agent": "roo_code"
+    "from_agent": "roo_code",
+    "mod": "code",
+    "id": "9R-03"
   },
   {
     "task_id": "9R-04",
@@ -812,7 +909,9 @@
     "not": "",
     "source": "ic",
     "from_agent": "roo_code",
-    "not_": "firecrawl+tavily provider baglandi; web_fetch/web_search lokal ve tunelde canli dogrulandi (4 web model: ollama/fetch, tavily/search, tavily/fetch, firecrawl/fetch); unit testler 14 yesil; katalog v1.0.2"
+    "not_": "firecrawl+tavily provider baglandi; web_fetch/web_search lokal ve tunelde canli dogrulandi (4 web model: ollama/fetch, tavily/search, tavily/fetch, firecrawl/fetch); unit testler 14 yesil; katalog v1.0.2",
+    "mod": "code",
+    "id": "9R-04"
   },
   {
     "task_id": "P7-16",
@@ -827,7 +926,9 @@
     ],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-16"
   },
   {
     "task_id": "P7-17",
@@ -844,7 +945,9 @@
     ],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-17"
   },
   {
     "task_id": "P7-18",
@@ -864,7 +967,9 @@
     "not": "Added OpenTelemetry dependencies to requirements-dev.txt, added imports and initialization skeleton in web_app.py (instrumentation pending due to timeout). Next steps: complete instrumentation in web_app.py, add tracing to MCP server entry and vector services.",
     "source": "ic",
     "from_agent": null,
-    "note": "Added OpenTelemetry dependencies to requirements-dev.txt, instrumented web_app.py (FastAPI and requests), MCP server entry (requests), vector service and store (spans around key methods). All syntax checks passed. Task completed."
+    "note": "Added OpenTelemetry dependencies to requirements-dev.txt, instrumented web_app.py (FastAPI and requests), MCP server entry (requests), vector service and store (spans around key methods). All syntax checks passed. Task completed.",
+    "mod": "code",
+    "id": "P7-18"
   },
   {
     "task_id": "TG-01",
@@ -892,7 +997,9 @@
     "not": "Teslim (kilo): Telegram bot komut akışı, yetkili chat ID desteği, V10 wiki komutu ve dokümantasyon düzeltmeleri tamamlandı; 126 pytest, 9 mock smoke, 8 simple smoke ve kodlama denetimi başarılı.",
     "source": "ic",
     "from_agent": null,
-    "not_": "Telegram bot gonderme sorunu cozuldu: _load_env .env override duzeltmesi, docker-compose ortam override kaldirimi, canli/mock testler gecti, canli smoke test message_id 103."
+    "not_": "Telegram bot gonderme sorunu cozuldu: _load_env .env override duzeltmesi, docker-compose ortam override kaldirimi, canli/mock testler gecti, canli smoke test message_id 103.",
+    "mod": "code",
+    "id": "TG-01"
   },
   {
     "task_id": "P7-19",
@@ -907,7 +1014,9 @@
       "app.py"
     ],
     "not": "Panel entegrasyonu tamamlandi (commit da90f3e).",
-    "source": "ic"
+    "source": "ic",
+    "mod": "code",
+    "id": "P7-19"
   },
   {
     "task_id": "P7-20",
@@ -924,7 +1033,9 @@
       "app.py"
     ],
     "not": "Admin gercek veri paneli tamamlandi (commit 2258c83).",
-    "source": "ic"
+    "source": "ic",
+    "mod": "code",
+    "id": "P7-20"
   },
   {
     "task_id": "P7-21",
@@ -939,7 +1050,9 @@
       "app.py"
     ],
     "not": "Performans gercek veri paneli tamamlandi (commit 2258c83).",
-    "source": "ic"
+    "source": "ic",
+    "mod": "code",
+    "id": "P7-21"
   },
   {
     "task_id": "DOC-02",
@@ -1034,7 +1147,9 @@
     ],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "DASH-06"
   },
   {
     "task_id": "P7-4",
@@ -1051,7 +1166,9 @@
     ],
     "not": "Teslim (kilo): CareerPagesApifySource (Apify actor bazli kariyer sayflari scraper). apify/website-crawler actoru ile kariyer URL'leri keşfedilir, ScrapedJob formatina donusulur. 10 test gecti (20/20).",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-4"
   },
   {
     "task_id": "P7-5",
@@ -1064,7 +1181,9 @@
     "dosyalar": [],
     "not": "Teslim (roo): P7-5 ISKUR Scraper dogrulandi: iskur.py (269 satir) mevcut ve calisir durumda. IskurSource: JSON-LD + HTML parsing, rate limit 2.0s, pagination (max_pages), Turkce tarih/maas parsing, error handling. Y21 arastirmasi geregi public metadata only (ozel sektor firma adi gizli). syntax OK, import OK.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-5"
   },
   {
     "task_id": "P7-6",
@@ -1084,7 +1203,8 @@
     "source": "ic",
     "from_agent": null,
     "id": "P7-6",
-    "talimat": "HIZLI MVP (brif v2, kod tabanina gore duzeltildi): data/orchestrator/P7-6_brif_2026-09-15_roo.md. KaynakScraper YOK; mevcut KariyerNetSource(BaseJobSource) (src/company_master/intelligence/job_intelligence/sources/kariyer_net.py) SARMALANIR, degistirilmez. Yazilacak: src/company_master/scrapers/__init__.py + kariyernet.py (fetch/parse/save->jsonl), tests/test_kariyernet.py (2 test, agsiz/mock), docs/P7-6_kariyernet_arastirma.md (YENI). Pagination/JS/proxy/DB INSERT YOK. UTF-8/BOM yok. Tam regresyon sayisi ozete. Teslim: python scripts/gorev_kutusu.py teslim --ajan kilo --task-id P7-6 --ozet \"...\". UI dosyasi yok -> streamlit restart gerekmez. Hedef <20 dk."
+    "talimat": "HIZLI MVP (brif v2, kod tabanina gore duzeltildi): data/orchestrator/P7-6_brif_2026-09-15_roo.md. KaynakScraper YOK; mevcut KariyerNetSource(BaseJobSource) (src/company_master/intelligence/job_intelligence/sources/kariyer_net.py) SARMALANIR, degistirilmez. Yazilacak: src/company_master/scrapers/__init__.py + kariyernet.py (fetch/parse/save->jsonl), tests/test_kariyernet.py (2 test, agsiz/mock), docs/P7-6_kariyernet_arastirma.md (YENI). Pagination/JS/proxy/DB INSERT YOK. UTF-8/BOM yok. Tam regresyon sayisi ozete. Teslim: python scripts/gorev_kutusu.py teslim --ajan kilo --task-id P7-6 --ozet \"...\". UI dosyasi yok -> streamlit restart gerekmez. Hedef <20 dk.",
+    "mod": "code"
   },
   {
     "task_id": "P7-22",
@@ -1101,7 +1221,9 @@
     ],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-22"
   },
   {
     "task_id": "P7-23",
@@ -1119,7 +1241,9 @@
     ],
     "not": "Teslim (kilo): vector_search.py (VectorSearch, VectorSearchConfig, VectorSearchResult — similarity search endpoint, index_companies, search_by_ids, health). Supabase pgvector destegi (ChromaDB fallback). 10 test. Tüm vektor testleri 55 passed.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-23"
   },
   {
     "task_id": "P7-24",
@@ -1136,7 +1260,9 @@
     ],
     "not": "P7-24 1.tur done (2.tur bos retetik temizlendi 2026-09-13)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-24"
   },
   {
     "task_id": "DASH-08",
@@ -1152,7 +1278,9 @@
     ],
     "not": "Teslim (kilo): web_dashboard/tabs/admin_audit.py (render_audit_tab: Karar Defteri, Dosya Kilidi, Handoff, Görev Durumu, Trigger Logu). app.py'ye 8. admin tab entegre (admin_tab8). py_compile OK.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "DASH-08"
   },
   {
     "task_id": "DASH-07",
@@ -1170,7 +1298,9 @@
     ],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "DASH-07"
   },
   {
     "task_id": "ORCH-07",
@@ -1186,7 +1316,9 @@
     ],
     "not": "Vault pinli submodule eklendi (gitlink 536d4e1 = origin/main). Icerik ana repoya girmez; hassas dosyalar vault gitignoreunda disli. AGENTS.md kural eklendi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "ORCH-07"
   },
   {
     "task_id": "ORCH-08",
@@ -1204,7 +1336,9 @@
     ],
     "not": "Teslim (cline): trigger.py (posta kutusu + onay kuyrugu), scripts/gorev_at.py + gorev_kutusu.py, AGENTS.md ORCH-08 bolumu; 14/14 yeni test + 53/53 orchestrator regresyon OK",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "ORCH-08"
   },
   {
     "task_id": "ORCH-09",
@@ -1223,7 +1357,9 @@
     "not": "Teslim (kilo): Teslim: nobetci.py (geciken tetik, alarm, ses, telegram), gorev_nobetci.py (kur/kaldir/nobet/durum/uyari), 11 test (all pass). 994 passed, 1 skipped.",
     "source": "ic",
     "from_agent": null,
-    "blokaj": []
+    "blokaj": [],
+    "mod": "code",
+    "id": "ORCH-09"
   },
   {
     "task_id": "simple_1",
@@ -1236,7 +1372,9 @@
     "dosyalar": [],
     "not": "Teslim (roo): Basit test görevi: mailbox kontrolü ve görev takibi protokolü test edildi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "simple_1"
   },
   {
     "task_id": "TEST-02",
@@ -1249,7 +1387,9 @@
     "dosyalar": [],
     "not": "Teslim (roo): Kullanıcı başlatma akışı test edildi ve başarılı.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "TEST-02"
   },
   {
     "task_id": "ORCH-10",
@@ -1266,7 +1406,9 @@
     ],
     "not": "Teslim (kilo): Telegram orkestratör komutları eklendi ve test edildi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "ORCH-10"
   },
   {
     "task_id": "P7-25",
@@ -1282,7 +1424,9 @@
     ],
     "not": "Teslim (roo): P7-25 Admin Dashboard KPI Kartları tamamlandı: web_dashboard/tabs/admin_kpi.py (render_kpi_tab, 8 veri yükleme fonksiyonu), app.py'ye 6. tab entegre. KPI: toplam_firma, aktif_kullanici, api_cagri_toplam, sinyal_toplam. Trendler: 7/30/90 gün. Alan analizi: Plotly+fallback st.bar_chart. Cache: ttl=60. Test: syntax+import OK.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-25"
   },
   {
     "task_id": "P7-26",
@@ -1298,7 +1442,9 @@
     ],
     "not": "Teslim (kilo): web_dashboard/tabs/webhook_monitor.py (render_webhook_monitor_tab: endpoint health, olay istatistikleri, durum dagilimi, hata türleri, DLQ kayıtları, latency/Prometheus). app.py'ye 7. admin tab entegre. py_compile + import OK.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-26"
   },
   {
     "task_id": "YENI-1",
@@ -1313,7 +1459,9 @@
     ],
     "not": "Teslim (kilo): scripts/veri_temizleme.py — encoding düzeltme, portal filtreleme, VKN/telefon/eposta normalize, URL normalize, bos alan temizleme, duplicate tespiti. OSTIM (5485) + ASO (785) test. Rapor: *_clean_report.json.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "YENI-1"
   },
   {
     "task_id": "YENI-2",
@@ -1331,7 +1479,9 @@
     ],
     "not": "Teslim (kilo): Merkezi rate limiter olusturuldu. RateLimiter sinifi: tier bazli (public/user/analyst/admin), per-IP sliding window, per-endpoint limit, thread-safe, singleton pattern. 17 test gecti.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "YENI-2"
   },
   {
     "task_id": "YENI-3",
@@ -1346,7 +1496,9 @@
     "dosyalar": [],
     "not": "Teslim (kilo): Supabase companies tablosu tanimi src/company_master/schema/companies.sql dosyasi kontrol edildi. 8 tablo (companies, sources, source_records, osbs, quarantine_firms, company_capabilities, certifications, key_personnel), UUID PK, TIMESTAMPTZ, pg_trgm index, OSB seed data mevcut.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "YENI-3"
   },
   {
     "task_id": "YENI-4",
@@ -1363,7 +1515,9 @@
     ],
     "not": "Teslim (kilo): DASH_API_KEY auth korumasi duzeltildi. require_api_key fonksiyonunda DASH_API_KEY set iken API key olmayan istekler 401 dondermeli. DASH_API_KEY kendisi de gecerli key olarak kabul ediliyor (X-API-Key header veya query param). 4 auth testi gecti.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "YENI-4"
   },
   {
     "task_id": "YENI-5",
@@ -1378,7 +1532,9 @@
     "dosyalar": [],
     "not": "Teslim (kilo): Apify Webhook DLQ monitor olusturuldu: src/company_master/intelligence/job_intelligence/pipeline/dlq_monitor.py. ApifyDLQMonitor sinifi: DLQ okuma, istatistik (hata turu sayilari, zaman araligi), filtreleme (error_type, actor, zaman), rapor generasyonu, retry ve clear destegi. 42 DLQ kaydi okundu (21 auth_error + 21 validation_error).",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "YENI-5"
   },
   {
     "task_id": "YENI-6",
@@ -1395,7 +1551,9 @@
     ],
     "not": "Teslim (kilo): 71 test tamamlanmisti (test_telegram_polling.py). Mock'lu, gerçek Telegram API'sine baglanmaz. task_board atomik yazma icin tmp_path izole edildi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "YENI-6"
   },
   {
     "task_id": "CO-01",
@@ -1410,7 +1568,9 @@
     "dosyalar": [],
     "not": "Teslim (roo): Exa API ile yeniden arastirma: CoPlot = CoHort Software'in 2D/3D bilimsel grafik/harita/teknik cizim yazilimi (Java, 2022'den beri ucretsiz). Ozellikler, fiyat, rakipler (ChartGen, Highcharts, SmartDraw, TruBI) 5 dogrulanmis kaynakla data/orchestrator/co01_result.json'a yazildi. Onceki hallusinasyon iceriginin (Microsoft Copilot) yerini aldi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "CO-01"
   },
   {
     "task_id": "CO-02",
@@ -1425,7 +1585,9 @@
     "dosyalar": [],
     "not": "Teslim (roo): Exa API ile yeniden arastirma: CoPlot masaustu Java uygulamasi; REST API/SDK/webhook yok, CLI + dosya tabanli entegrasyon mevcut. Bulut alternatifleri (ChartGen, Highcharts, Plotly) onerildi. Rapor: data/orchestrator/co02_result.json",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "CO-02"
   },
   {
     "task_id": "NOB-01",
@@ -1442,14 +1604,16 @@
     ],
     "not": "Teslim (kilo): scripts/oto_nobetci.py zaten tamamen implement edildi. _ses_teslim_onay, _ses_zincir_devam, _ses_cal fonksiyonlari. nobetci_tur(): onay_bekleyenleri onayla + zincir_devam_et. --surekli, --test-ses, --aralik argumanlari. 4 ajan (kilo/roo/cline/orkestrator) destegi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "NOB-01"
   },
   {
     "task_id": "COP-01",
     "baslik": "VS Code Copilot Test: src/company_master/utils/telegram_bot.py dosyasindaki send_message fonksiyonunun unit testini yaz.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/telegram_test.py"
     ],
@@ -1457,16 +1621,18 @@
     "dosyalar": [
       "tests/test_telegram_bot.py"
     ],
-    "not": "Teslim edildi. send_message unit testleri mevcut; odakli testler gecti.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-01"
   },
   {
     "task_id": "COP-02",
     "baslik": "VS Code Copilot Test: web_dashboard/tabs/admin_kpi.py icindeki render_kpi_tab fonksiyonunu refactor et. KPI kartlarini daha moduler yap.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "web_dashboard/tabs/admin_kpi.py"
     ],
@@ -1475,9 +1641,11 @@
       "tests/test_web_dashboard_tabs.py",
       "tests/test_admin_extras.py"
     ],
-    "not": "__COPILOT TEST GOREVLERI HAZIR__ Teslim edildi. web_dashboard/tabs testleri eklendi; 9 test gecti.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-02"
   },
   {
     "task_id": "P7-28",
@@ -1496,7 +1664,9 @@
     ],
     "not": "Teslim (kilo): LinkedInApifySource (Apify actor base, LinkedIn job scraping) ve IndeedSource (BaseJobSource base, HTML/JSON-LD parsing) olusturuldu. ISKUR mevcut. Import testi OK. 728 test gecti.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-28"
   },
   {
     "task_id": "P7-29",
@@ -1515,7 +1685,9 @@
     ],
     "not": "Teslim (kilo): Google dork + wayback scriptleri olusturuldu. google_dork_career.py: Google arama + cache fetch. wayback_machine_scraper.py: CDX API + snapshot fetch. Her ikisi de Kariyer.net cache verisi toplar.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-29"
   },
   {
     "task_id": "P7-30",
@@ -1535,14 +1707,16 @@
     ],
     "not": "Teslim (kilo): ProxyRotator (utils/proxy_rotator.py): proxy rotation, UA rotation, auto-detect. KariyerSeleniumSource (sources/kariyer_selenium_source.py): Selenium + proxy + anti-bot scraper. scripts/selenium_kariyer_scraper.py: standalone version. Selenium pip install gereklidir.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-30"
   },
   {
     "task_id": "COP-03",
     "baslik": "Copilot Test: src/company_master/orchestrator/trigger.py teslim_et() fonksiyonunun edge-case testleri.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/test_gorev_trigger.py"
     ],
@@ -1550,16 +1724,18 @@
     "dosyalar": [
       "tests/test_gorev_trigger.py"
     ],
-    "not": "Teslim edildi. teslim_et edge-case testleri mevcut ve gecti.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-03"
   },
   {
     "task_id": "COP-04",
     "baslik": "Copilot Test: scripts/gorev_kutusu.py icin CLI testi.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/test_gorev_kutusu_cli.py"
     ],
@@ -1567,16 +1743,18 @@
     "dosyalar": [
       "tests/test_gorev_kutusu_cli.py"
     ],
-    "not": "Teslim edildi. CLI mock testleri mevcut; izole calisma sonucu 12 passed.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-04"
   },
   {
     "task_id": "COP-05",
     "baslik": "Copilot Test: src/company_master/orchestrator/nobetci.py nobet_tut fonksiyonu test.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/test_gorev_nobetci.py"
     ],
@@ -1584,9 +1762,11 @@
     "dosyalar": [
       "tests/test_gorev_nobetci.py"
     ],
-    "not": "Teslim edildi. nobet_tut testleri mevcut ve gecti.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-05"
   },
   {
     "task_id": "P7-27",
@@ -1601,7 +1781,9 @@
     "dosyalar": [],
     "not": "Teslim (roo): AI Cost Dashboard (9Router) tamamlandi: (1) web_dashboard/tabs/admin_cost.py yeni sekme - provider bazli gunluk/aylik maliyet, model breakdown, anomali tespiti, Plotly grafikleri (breakdown/trend/latency-cost/anomaly/efficiency); (2) app.py'a admin_tab10 olarak entegre edildi; (3) load_cost_summary() gercek 9router_optimizer.py JSON ciktisina (combo_istatistik.usageHistory, saglik.providerlar, skorlar) uyumlu hale getirildi - smoke test: 31 provider, 27 anomali, 1.8122 USD gunluk maliyet dogrulandi; (4) requirements-app.txt'e plotly>=5.18.0 eklendi; (5) Faz 5 entegrasyonu: admin_kpi.py'a load_ai_cost_kpi() + 4 yeni KPI karti (gunluk/aylik maliyet, anomali sayisi, problemli provider), admin_performance.py'a load_ai_cost_per_call() + ortalama maliyet/cagri, toplam cagri, ortalama latency metrikleri eklendi. Gelistirme sirasinda admin_performance.py'daki erken-return guard kosulunu yanlislikla degistirip bir test regresyonuna (test_performance_loaders_and_empty_render) sebep oldum, kok nedeni teshis edip duzelttim (ai_cost yuklemesini guard'dan sonraya tasidim). Dogrulama: py_compile tum dosyalarda temiz, 54 ilgili test (9router_optimizer, admin_extras, admin_performance, web_dashboard_tabs, admin_panel_tab, admin_audit_tab, admin_dlq_tab) hatasiz gecti.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-27"
   },
   {
     "task_id": "P7-31",
@@ -1616,22 +1798,26 @@
     "dosyalar": [],
     "not": "Teslim (roo): Veri Kalitesi Ozeti sekmesi (admin_quality.py) olusturuldu: genel kalite skoru ozeti (toplam/ortalama/medyan/min/max/riskli), bucket bazli skor dagilimi, 7 alan icin eksik alan analizi (Tel/Email/Web/VKN/NACE/Adres/Parsel), kural bazli iyilestirme onerileri, QS<30 risk filtreleme (slider + eksik alan ozeti). Gercek DB'ye karsi smoke test yapildi: 14000 firma, ort skor 40.1, medyan 35.0, riskli %35.3. app.py'a entegre edildi (16. sekme: Kalite Ozeti). 12 regresyon testi gecti, hata yok.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-31"
   },
   {
     "task_id": "COP-11",
     "baslik": "Copilot: web_dashboard/tabs/admin_performance.py icin render_performance_tab fonksiyonunun unit testi.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/test_admin_performance.py"
     ],
     "bitis": "2026-09-13T17:20:00",
     "dosyalar": [],
-    "not": "",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-11"
   },
   {
     "task_id": "P7-33",
@@ -1646,44 +1832,50 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-33"
   },
   {
     "task_id": "COP-06",
     "baslik": "Copilot: scripts/decision_log.py icin log_decision fonksiyonunun unit testi yaz.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/test_decision_log.py"
     ],
     "bitis": "2026-09-13T17:04:09",
     "dosyalar": [],
-    "not": "Teslim (copilot): log_decision icin varsayilan tags, UTC timestamp, tum alanlar ve kalici yazim unit testi eklendi. Odakli test: 5 passed.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-06"
   },
   {
     "task_id": "COP-07",
     "baslik": "Copilot: src/company_master/utils/telegram_bot.py icin html_escape fonksiyonunun unit testi.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/test_telegram_bot.py"
     ],
     "bitis": "2026-09-13T17:04:40",
     "dosyalar": [],
-    "not": "Teslim (copilot): html_escape unit test kapsami mevcut ve dogrulandi: bos deger, izinli etiketler, tehlikeli etiket escape, ozel karakterler ve preserve_tags. Test sonucu: 42 passed.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-07"
   },
   {
     "task_id": "COP-08",
     "baslik": "Sistem-Maliyet testi (retarget: admin_sistem.py)",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/test_admin_cost.py"
     ],
@@ -1691,20 +1883,22 @@
     "dosyalar": [
       "tests/test_admin_sistem_cost.py"
     ],
-    "not": "Teslim (copilot): admin_sistem maliyet akisina yonelik tests/test_admin_sistem_cost.py eklendi: eksik kaynak, dolu optimizer JSON ve bozuk JSON senaryolari; provider/anomali/chart kontrolleri dahil. pytest tests/test_admin_sistem_cost.py -q -> 3 passed.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
     "from_agent": null,
     "blokaj": [
       "DASH-UX-02b"
     ],
-    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. admin_sistem.py icindeki maliyet/cost fonksiyonlari icin unit test yaz: tests/test_admin_sistem_cost.py (bos/dolu/bozuk senaryo). DASH-UX-02b sonrasi."
+    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. admin_sistem.py icindeki maliyet/cost fonksiyonlari icin unit test yaz: tests/test_admin_sistem_cost.py (bos/dolu/bozuk senaryo). DASH-UX-02b sonrasi.",
+    "mod": "code",
+    "id": "COP-08"
   },
   {
     "task_id": "COP-09",
     "baslik": "Sistem-Kalite testi (retarget: admin_sistem.py)",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/test_admin_quality.py"
     ],
@@ -1712,20 +1906,22 @@
     "dosyalar": [
       "tests/test_admin_sistem_quality.py"
     ],
-    "not": "Teslim (copilot): admin_sistem kalite akisina yonelik tests/test_admin_sistem_quality.py eklendi: kayip/veritabani hatasi, dolu kalite metrikleri ve bos/dolu oneriler. get_engine cagrisinin try disinda olmasi nedeniyle fallback bozuluyordu; admin_quality.py icinde loader engine olusturma korumali alana tasindi. pytest -> 3 passed; py_compile basarili.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
     "from_agent": null,
     "blokaj": [
       "COP-08"
     ],
-    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. admin_sistem.py icindeki kalite/quality fonksiyonlari icin unit test yaz: tests/test_admin_sistem_quality.py. COP-08 sonrasi."
+    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. admin_sistem.py icindeki kalite/quality fonksiyonlari icin unit test yaz: tests/test_admin_sistem_quality.py. COP-08 sonrasi.",
+    "mod": "code",
+    "id": "COP-09"
   },
   {
     "task_id": "COP-10",
     "baslik": "Sistem-Analitik testi (retarget: admin_sistem.py)",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/test_admin_analytics.py"
     ],
@@ -1733,28 +1929,32 @@
     "dosyalar": [
       "tests/test_admin_sistem_analytics.py"
     ],
-    "not": "Teslim (copilot): admin_sistem API analytics akisina yonelik tests/test_admin_sistem_analytics.py eklendi: API hatasi, dolu tier/endpoint response ve bozuk payload senaryolari; flatten toplam/cagri kontrolleri dahil. pytest tests/test_admin_sistem_analytics.py -q -> 3 passed.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
     "from_agent": null,
     "blokaj": [
       "COP-09"
     ],
-    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. admin_sistem.py icindeki api/analytics fonksiyonlari icin unit test yaz: tests/test_admin_sistem_analytics.py. COP-09 sonrasi."
+    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. admin_sistem.py icindeki api/analytics fonksiyonlari icin unit test yaz: tests/test_admin_sistem_analytics.py. COP-09 sonrasi.",
+    "mod": "code",
+    "id": "COP-10"
   },
   {
     "task_id": "COP-12",
     "baslik": "Copilot: README.md guncelleme - Admin Panel Faz 2 gelismelerini dokumante et.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "README.md"
     ],
     "bitis": "2026-09-13T17:16:11",
     "dosyalar": [],
-    "not": "Teslim (copilot): README.md guncellendi: Admin Panel Faz 2 sekmeleri, veri yuzeyleri, calistirma ve test komutlari dokumante edildi. Dashboard testleri: 10 passed.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-12"
   },
   {
     "task_id": "P7-34",
@@ -1769,7 +1969,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-34"
   },
   {
     "task_id": "P7-35",
@@ -1784,7 +1986,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-35"
   },
   {
     "task_id": "P7-36",
@@ -1799,7 +2003,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-36"
   },
   {
     "task_id": "P7-37",
@@ -1814,7 +2020,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-37"
   },
   {
     "task_id": "P7-38",
@@ -1829,82 +2037,94 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-38"
   },
   {
     "task_id": "COP-13",
     "baslik": "Copilot: web_dashboard/tabs/admin_performance.py render_performance_tab fonksiyonunun unit testi.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/test_admin_performance.py"
     ],
     "bitis": "2026-09-13T18:24:11",
     "dosyalar": [],
-    "not": "Teslim (copilot): Admin performance tab unit tests were implemented and validated with pytest.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-13"
   },
   {
     "task_id": "COP-14",
     "baslik": "Copilot: web_dashboard/tabs/admin_dlq.py render_dlq_tab fonksiyonunun unit testi.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/test_admin_dlq.py"
     ],
     "bitis": "2026-09-13T18:27:07",
     "dosyalar": [],
-    "not": "Teslim (copilot): DLQ tab rendering and empty-state behavior were validated with pytest.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-14"
   },
   {
     "task_id": "COP-15",
     "baslik": "Copilot: web_dashboard/tabs/webhook_monitor.py render_webhook_monitor_tab fonksiyonunun unit testi.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/test_webhook_monitor.py"
     ],
     "bitis": "2026-09-13T18:30:25",
     "dosyalar": [],
-    "not": "Teslim (copilot): Webhook monitor tab render tests added and validated; fallback plotting improved for environments without matplotlib.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-15"
   },
   {
     "task_id": "COP-16",
     "baslik": "Copilot: web_dashboard/css/style.css icin CSS lint ve optimizasyon kontrolu.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/test_css_optimization.py"
     ],
     "bitis": "2026-09-13T18:57:46",
     "dosyalar": [],
-    "not": "Teslim (copilot): CSS duplicate selector temizligi tamamlandi. pytest tests/test_style_css.py -q -> 1 passed.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-16"
   },
   {
     "task_id": "COP-17",
     "baslik": "Copilot: web_dashboard/js/app.js icin JavaScript fonksiyon testi.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": [
       "tests/test_app_js.py"
     ],
     "bitis": "2026-09-13T21:14:18",
     "dosyalar": [],
-    "not": "Teslim (copilot): app.js parse hatasi auth'a apostrofu nedeniyle duzeltildi; apiUrl, esc, fmt ve watchKeyOf icin Node vm unit testleri eklendi. pytest tests/test_app_js.py -q -> 1 passed; node --check basarili.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-17"
   },
   {
     "task_id": "P7-39",
@@ -1919,7 +2139,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-39"
   },
   {
     "task_id": "P7-40",
@@ -1934,7 +2156,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-40"
   },
   {
     "task_id": "P7-41",
@@ -1949,7 +2173,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-41"
   },
   {
     "task_id": "P7-42",
@@ -1964,7 +2190,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-42"
   },
   {
     "task_id": "P7-43",
@@ -1979,7 +2207,9 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-43"
   },
   {
     "task_id": "P7-44",
@@ -1998,7 +2228,9 @@
     ],
     "not": "Teslim (roo): Dashboard navigasyon yeniden tasarimi: web_dashboard/tabs/__init__.py artik tek kaynak (SECTIONS kayit defteri, TabTanimi dataclass, lazy import). app.py ince yonlendiriciye donustu: gruplu sidebar (Is Operasyonlari / Sistem-Yonetim), aktif bolum vurgusu, hizli gecis secici, breadcrumb, ?bolum= derin baglantisi, sekme basina hata siniri. K-01 KAPANDI: Paketler ve Pazarlama artik gercekten baglandi (eski 3 adet 'hazirlaniyor' yer tutucusu kaldirildi; Abrakadabra AI-CHAT-01 bekleyen gorev ID'siyle acik yer tutucu olarak kaldi). Sistem ve Yonetim artik amaca ozel render_sistem_tab/render_yonetim_tab bilesikleri kullaniyor. Yeni regresyon testi tests/test_dashboard_nav.py (15 test) her hazir bolumun cagirilabilir render fonksiyonuna cozumlendigini dogruluyor. Toplam 48 test gecti, kirilma yok.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-44"
   },
   {
     "task_id": "P7-45",
@@ -2016,7 +2248,9 @@
     ],
     "not": "Teslim (kilo): admin_realtime.py (SSE poll, st.cache_data ttl=5, st.metric kartlar, trend chart). app.py sidebar + content entegrasyonu. 810 passed, 1 skipped.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-45"
   },
   {
     "task_id": "P7-46",
@@ -2034,83 +2268,95 @@
     "not": "Teslim (roo): Kullanici ayarlar paneli tamamlandi. YENI SERVIS: src/company_master/settings/ (user_settings.py + __init__.py) - 13 ayarlik sema (4 grup: Gorunum/Veri/Bildirim/Bolgesel), AyarTanimi dataclass, dogrula(), ayarlari_getir/yaz, ayar_kaydet, ayarlari_sifirla. Kalicilik: kullanici basina JSON dosyasi (data/user_settings/<id>.json), atomik yazma (tempfile+fsync+os.replace). Guvenlik: kimlik regex ile path-traversal engeli (../gizli, a/b, nul bayti reddedilir). Dayaniklilik: bozuk JSON / bilinmeyen anahtar / bozuk deger varsayilana duser, panel cokmez. PANEL (kilitli dosya web_dashboard/tabs/admin_panel.py): render_ayarlar_tab() semadan otomatik form uretir (st.tabs ile 4 grup + tek form + kaydet/sifirla), aktif_kullanici() oturumdan kimlik cozer, mevcut render_decision_tab bozulmadi. MIMARI: is mantigi Streamlit'ten tamamen bagimsiz (servis import streamlit icermez) -> UI olmadan test edilebilir; panel sadece ince katman. TEST: tests/test_user_settings.py 78 test (sema tutarliligi, dogrulama sinir degerleri, bool/int sizmasi, IO+izolasyon, bozuk dosya dayanikliligi, kimlik guvenligi, panel sozlesme denetimi). Tam regresyon: 248 passed (user_settings+theme+responsive+style+ui_components+app_js+dashboard_nav). NOT: yenileme_araligi secenekleri mevcut admin_auto_refresh.py ile hizalandi; tema secenekleri theme.js ile uyumlulugu test ile zorlaniyor.",
     "source": "ic",
     "from_agent": null,
-    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. Profil düzenleme, tema secici, bildirim ayarlari. Form validasyonu, responsive UI."
+    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. Profil düzenleme, tema secici, bildirim ayarlari. Form validasyonu, responsive UI.",
+    "mod": "code",
+    "id": "P7-46"
   },
   {
     "task_id": "COP-18",
     "baslik": "KPI bos-veri placeholder: web_dashboard/tabs/admin_kpi.py - veri yoksa st.spinner + 'Veri yukleniyor...' skeleton goster; yuklenince kartlar gorunsun. Kucuk diff, tek dosya.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-13T18:14:04",
     "bitis": "2026-09-13T18:24:11",
     "dosyalar": [
       "web_dashboard/tabs/admin_kpi.py"
     ],
-    "not": "Teslim (copilot): KPI empty-data placeholder spinner skeleton was added and verified with pytest.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-18"
   },
   {
     "task_id": "COP-19",
     "baslik": "Login hata UX: web_dashboard/tabs/admin_auth.py - hatali giriste anlasilir st.error mesaji + hata temizleme; tests/test_admin_auth_login.py unit test ekle.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-13T18:14:04",
     "bitis": "2026-09-13T18:55:15",
     "dosyalar": [
       "web_dashboard/tabs/admin_auth.py",
       "tests/test_admin_auth_login.py"
     ],
-    "not": "Teslim (copilot): Komşu regresyon testleri de doğrulandı: pytest tests/test_admin_auth_login.py -q -> 2 passed; pytest tests/test_admin_performance.py -q -> 6 passed; admin_panel + web_dashboard_tabs birlikte -> 12 passed. Önceki birleşik koşudaki hata tekrar oluşmadı; görev kapsamı dışı değişiklik yapılmadı.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-19"
   },
   {
     "task_id": "COP-20",
     "baslik": "DLQ sekmesi testi: tests/test_admin_dlq_tab.py - admin_dlq.py render_dlq_tab icin bos jsonl / dolu jsonl / bozuk satir senaryolari.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-13T18:14:04",
     "bitis": "2026-09-13T18:30:25",
     "dosyalar": [
       "tests/test_admin_dlq_tab.py"
     ],
-    "not": "Teslim (copilot): DLQ tab regression tests added and validated for empty and populated data states.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-20"
   },
   {
     "task_id": "COP-21",
     "baslik": "Audit sekmesi testi: tests/test_admin_audit_tab.py - admin_audit.py render_audit_tab icin lock yok / lock var / bozuk json senaryolari.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-13T18:14:04",
     "bitis": "2026-09-13T18:40:44",
     "dosyalar": [
       "tests/test_admin_audit_tab.py"
     ],
-    "not": "Teslim (copilot): Audit sekmesi: invalid lock JSON ve bos lock senaryolari handled, pytest test_admin_audit_tab.py -q gecti.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-21"
   },
   {
     "task_id": "COP-22",
     "baslik": "Karar defteri testi: tests/test_admin_panel_tab.py - admin_panel.py icin bos log / dolu log / bozuk jsonl senaryolari.",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-13T18:14:04",
     "bitis": "2026-09-13T18:48:15",
     "dosyalar": [
       "tests/test_admin_panel_tab.py"
     ],
-    "not": "Teslim (copilot): Karar defteri testleri eklendi: bos log, dolu log ve bozuk JSONL senaryolari. pytest tests/test_admin_panel_tab.py -q: 3 passed.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "COP-22"
   },
   {
     "task_id": "P7-32",
@@ -2125,7 +2371,9 @@
     ],
     "not": "Teslim (roo): Admin Panel Faz 2: API Analitiği sekmesi tamamlandı. Yeni web_dashboard/tabs/admin_api_analytics.py modülü: endpoint bazli kullanim istatistikleri (cagri sayisi), en cok kullanilan endpointler (top-N bar chart), tier bazli dagilim (terminal/strategic/enterprise), tier bazli rate-limit yapılandırması. app.py entegre edildi: import eklendi (line 48), tab tuple 17-li genişletildi (line 422), wiring bloğu eklendi (line 536-537). Py_compile + smoke test geçti. Regresyon testleri geçti (18 test). Bilinen kısıtlar UI'da açıkça belirtildi: veriler bellek-ici, enterprise-only, response-time/hata-oranı şu an izlenmiyor.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "P7-32"
   },
   {
     "task_id": "ORCH-12-K",
@@ -2143,7 +2391,9 @@
     ],
     "not": "Tamamlanir: yardim/destek-al komutlari, test_isbirligi.py (19 test), ISBIRLIGI.md, oto_nobetci.py --oto-destek bayragi, isbirligi.py kendi-gorev korumasi eklendi",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "ORCH-12-K"
   },
   {
     "task_id": "BRIF-01",
@@ -2158,7 +2408,9 @@
     ],
     "not": "Teslim (roo): Mimari kararlar için Roo brifi hazırlandı. Operasyon Merkezi yaklaşımı, 3-Tier sekme hiyerarşisi, UX iyileştirme önerileri, 6 alternatif sekme, audit trail kritikliği, Faz 2 refactor önerileri. Brif dosyası: AI proje v1/V10/03_mimari/brifler/brif_roo.md",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "BRIF-01"
   },
   {
     "task_id": "BRIF-02",
@@ -2173,22 +2425,27 @@
     ],
     "not": "Teslim (kilo): brif_kilo.md yazildi: backend (FastAPI/Streamlit), veri modeli (7 tablo + Faz 3 migration), AI chat motoru (9router OpenAI format), kota durumu (api_usage + rate limit + Faz 2 tenant quota). 36 satir, 80 sinir icinde.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "BRIF-02"
   },
   {
     "task_id": "BRIF-03",
     "baslik": "[BRIF] copilot brifi: 03_mimari kararlari okunup oneri/kritik/ekleme yazilsin",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "blocked",
     "baslangic": "2026-09-13T21:02:50",
-    "bitis": "2026-09-13T21:16:18",
+    "bitis": "2026-09-19T03:33:07",
     "dosyalar": [
       "AI proje v1/V10/03_mimari/brifler/brif_copilot.md"
     ],
-    "not": "Teslim (copilot): brif dosyasi: AI proje v1/V10/03_mimari/brifler/brif_copilot.md; sekme tasima, test stratejisi, API sozlesmesi, audit ve workflow senkronizasyonu onerileri eklendi.",
+    "not": "D-62: Admin panel heap (copilot kaldırıldı, yeniden etkinleştirildi)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "BRIF-03",
+    "notlar": "copilot brifi; copilot dis gozlemci, ajan degil (D-62)"
   },
   {
     "task_id": "SENTEZ-01",
@@ -2203,46 +2460,53 @@
     ],
     "not": "Kullanici BK1-BK5 onayladi; sentez okunabilir.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "SENTEZ-01"
   },
   {
     "task_id": "DASH-UX-02a",
     "baslik": "[DASH-UX] DASH-UX-02a: 5 sistem sekmesini tek 'admin_sistem.py' icinde birlest",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "plan",
     "baslangic": "2026-09-13T21:02:50",
-    "bitis": "2026-09-13T21:34:19",
+    "bitis": null,
     "dosyalar": [
       "web_dashboard/tabs/admin_sistem.py"
     ],
-    "not": "Teslim (copilot): brif sentez okundu. web_dashboard/tabs/admin_sistem.py ile cost/performance/api_analytics/dlq/webhook panelleri tek Sistem render akisinda birlestirildi; ortak yenileme, bilgi ve empty-state metni eklendi. tests/test_admin_sistem.py eklendi. py_compile basarili; odak ve komsu sistem testleri 11 passed.",
+    "not": "Blokaj açıldı: SENTEZ-01 done",
     "source": "ic",
     "from_agent": null,
     "blokaj": [
       "SENTEZ-01"
     ],
-    "talimat": "5 sistem sekmesini tek 'admin_sistem.py' icinde birlestir: cost/performance/api_analytics/dlq/webhook. Dikey dilim: her sekme icin veri kaynagi + bos-veri placeholder + test BIRLIKTE gelsin (K2/K5). app.py'ye DOKUNMA (roo sidebar yapacak). Alt-sekme yapisi, her grafige 1 satir aciklama (K3)."
+    "talimat": "5 sistem sekmesini tek 'admin_sistem.py' icinde birlestir: cost/performance/api_analytics/dlq/webhook. Dikey dilim: her sekme icin veri kaynagi + bos-veri placeholder + test BIRLIKTE gelsin (K2/K5). app.py'ye DOKUNMA (roo sidebar yapacak). Alt-sekme yapisi, her grafige 1 satir aciklama (K3).",
+    "mod": "code",
+    "id": "DASH-UX-02a",
+    "kapisi_acildi": true
   },
   {
     "task_id": "DASH-UX-02b",
     "baslik": "[DASH-UX] DASH-UX-02b: 4 sekmeyi tek 'admin_yonetim.py' icinde birlestir: extr",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "blocked",
     "baslangic": "2026-09-13T21:02:50",
-    "bitis": "2026-09-13T21:46:49",
+    "bitis": "2026-09-19T02:36:41",
     "dosyalar": [
       "web_dashboard/tabs/admin_yonetim.py"
     ],
-    "not": "Teslim (copilot): 00_sentez okundu. web_dashboard/tabs/admin_yonetim.py ile extras(API/kullanici), search, export ve auto_refresh panelleri tek Yonetim render akisinda birlestirildi; ortak yenileme, bilgi ve yetki notu eklendi. tests/test_admin_yonetim.py eklendi; py_compile ve komsu testler 4 passed.",
+    "not": "Blokaj: DASH-UX-02a bekliyor",
     "source": "ic",
     "from_agent": null,
     "blokaj": [
       "SENTEZ-01",
       "DASH-UX-02a"
     ],
-    "talimat": "4 sekmeyi tek 'admin_yonetim.py' icinde birlestir: extras(auth/user)/audit/panel(karar)/export. Dikey dilim + bos-veri placeholder + aciklama (K2/K3/K5). app.py'ye DOKUNMA."
+    "talimat": "4 sekmeyi tek 'admin_yonetim.py' icinde birlestir: extras(auth/user)/audit/panel(karar)/export. Dikey dilim + bos-veri placeholder + aciklama (K2/K3/K5). app.py'ye DOKUNMA.",
+    "mod": "code",
+    "id": "DASH-UX-02b"
   },
   {
     "task_id": "DASH-UX-03",
@@ -2264,7 +2528,9 @@
     "blokaj": [
       "SENTEZ-01"
     ],
-    "talimat": "Paket + Cagraz Satis backend: paketler.py (CRUD + firma-paket), pazarlama.py (kampanya+segment+oneri). Supabase packages/company_packages. Demo veri data/demo/paketler_demo.jsonl, DEMO rozetli (K7). Servis fonksiyonlari. Not: admin/musteri paneli ayni PG -> uzun sorgularda baglanti havuzunu zorlama (R6)."
+    "talimat": "Paket + Cagraz Satis backend: paketler.py (CRUD + firma-paket), pazarlama.py (kampanya+segment+oneri). Supabase packages/company_packages. Demo veri data/demo/paketler_demo.jsonl, DEMO rozetli (K7). Servis fonksiyonlari. Not: admin/musteri paneli ayni PG -> uzun sorgularda baglanti havuzunu zorlama (R6).",
+    "mod": "code",
+    "id": "DASH-UX-03"
   },
   {
     "task_id": "AI-CHAT-01",
@@ -2282,7 +2548,9 @@
     "source": "ic",
     "from_agent": null,
     "blokaj": [],
-    "talimat": "Abrakadabra: tabs/abrakadabra.py (st.chat_message) + ai_chat.py (9Router UCRUZ/hizli model - BK4, fallback provider listesi SART - K6). task_board/trigger okuma araclari. Orkestrator komut parser: once TEKLIF, onay butonla. Admin token zorunlu."
+    "talimat": "Abrakadabra: tabs/abrakadabra.py (st.chat_message) + ai_chat.py (9Router UCRUZ/hizli model - BK4, fallback provider listesi SART - K6). task_board/trigger okuma araclari. Orkestrator komut parser: once TEKLIF, onay butonla. Admin token zorunlu.",
+    "mod": "code",
+    "id": "AI-CHAT-01"
   },
   {
     "task_id": "DASH-UX-01",
@@ -2304,7 +2572,9 @@
     "blokaj": [
       "SENTEZ-01"
     ],
-    "talimat": "ANA TASARIM + SIDEBAR (BK5): app.py -> sol sidebar 2 kategori: IS (Ana Kontrol/Musteriler/Paketler/Pazarlama/Abrakadabra), SISTEM (Sistem/Yonetim); st.tabs yok. ana_kontrol.py (ana metrikler, musteri=mavi/sistem=turuncu kart AYRI - K4); admin_musteriler.py (arama+liste+detay+cagraz satis yeri). ORTAK SEKME KALIBI (K1): ikon+baslik + 'Son guncelleme' + yenile + 'neden' expander. Her metrikte 1 satir aciklama (K3), bos-veri placeholder (K2). Kararlarini brif_roo.md icinde guncelle."
+    "talimat": "ANA TASARIM + SIDEBAR (BK5): app.py -> sol sidebar 2 kategori: IS (Ana Kontrol/Musteriler/Paketler/Pazarlama/Abrakadabra), SISTEM (Sistem/Yonetim); st.tabs yok. ana_kontrol.py (ana metrikler, musteri=mavi/sistem=turuncu kart AYRI - K4); admin_musteriler.py (arama+liste+detay+cagraz satis yeri). ORTAK SEKME KALIBI (K1): ikon+baslik + 'Son guncelleme' + yenile + 'neden' expander. Her metrikte 1 satir aciklama (K3), bos-veri placeholder (K2). Kararlarini brif_roo.md icinde guncelle.",
+    "mod": "code",
+    "id": "DASH-UX-01"
   },
   {
     "task_id": "DASH-UX-04",
@@ -2326,86 +2596,96 @@
       "DASH-UX-01",
       "DASH-UX-03"
     ],
-    "talimat": "Paketler + Pazarlama UI: tabs/paketler.py + pazarlama.py (DASH-UX-03 backend'ini gosterir, demo veri ile). Firme kartindan cagraz satis onerisi. K1/K2/K3 kalibina uy."
+    "talimat": "Paketler + Pazarlama UI: tabs/paketler.py + pazarlama.py (DASH-UX-03 backend'ini gosterir, demo veri ile). Firme kartindan cagraz satis onerisi. K1/K2/K3 kalibina uy.",
+    "mod": "code",
+    "id": "DASH-UX-04"
   },
   {
     "task_id": "COP-23",
     "baslik": "[COP-TASARIM] TASARIM-1: Bosta-veri bilgi kutusu tutarliligi (ro...",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-13T21:56:41",
     "bitis": "2026-09-13T22:31:51",
     "dosyalar": [
       "web_dashboard/tabs/admin_sistem.py"
     ],
-    "not": "Teslim (copilot): admin_sistem bilgi kutusu baslik/caption sonrasina, yenileme ve alt panel spinner akislarindan once tasindi. tests/test_admin_sistem.py ile render sirasi sabitlendi. pytest tests/test_admin_sistem.py -q -> 2 passed.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
     "from_agent": null,
     "blokaj": [
       "COP-10"
     ],
-    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. TASARIM-1: admin_sistem.py icinde yukleme/veri-yok durumlarinda bilgi kutusu sayfanin EN USTUNE (spinner oncesi) sabit gelsin; spinner kapaninca kaybolmasin. KUCUK diff, tek dosya."
+    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. TASARIM-1: admin_sistem.py icinde yukleme/veri-yok durumlarinda bilgi kutusu sayfanin EN USTUNE (spinner oncesi) sabit gelsin; spinner kapaninca kaybolmasin. KUCUK diff, tek dosya.",
+    "mod": "code",
+    "id": "COP-23"
   },
   {
     "task_id": "COP-24",
     "baslik": "[COP-TASARIM] TASARIM-2: Son-guncelleme + yenile kalibi (roo 4.1...",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-13T21:56:41",
     "bitis": "2026-09-13T22:43:21",
     "dosyalar": [
       "web_dashboard/tabs/admin_kpi.py",
       "web_dashboard/tabs/admin_quality.py"
     ],
-    "not": "Teslim (copilot): admin_kpi.py ve admin_quality.py basina Son guncelleme caption'i ve Yenile butonu eklendi; buton st.cache_data.clear + st.rerun kullaniyor. py_compile basarili; odak regression 12 passed.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
     "from_agent": null,
     "blokaj": [
       "COP-23"
     ],
-    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. TASARIM-2: admin_kpi.py + admin_quality.py basina 'Son guncelleme: HH:MM' caption'i + yaninda yenile butonu (st.cache_data.clear). KUCUK diff, iki dosya."
+    "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. TASARIM-2: admin_kpi.py + admin_quality.py basina 'Son guncelleme: HH:MM' caption'i + yaninda yenile butonu (st.cache_data.clear). KUCUK diff, iki dosya.",
+    "mod": "code",
+    "id": "COP-24"
   },
   {
     "task_id": "COP-25",
     "baslik": "[COP-TASARIM] TASARIM-3: Sidebar yardim satirlari. app.py icinde...",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-13T21:56:42",
     "bitis": "2026-09-13T22:48:51",
     "dosyalar": [
       "app.py"
     ],
-    "not": "Teslim (copilot): app.py sidebar icindeki 7 navigasyon seceneginin her altina tek satir Turkce st.caption yardim metni eklendi; tema ve navigasyon mantigi degistirilmedi. python -m py_compile app.py basarili.",
+    "not": "D-62: Copilot legacy test (stale, yeniden organize edilebilir)",
     "source": "ic",
     "from_agent": null,
     "blokaj": [
       "COP-24"
     ],
     "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. TASARIM-3: app.py sidebar seceneklerine kisa Turkce aciklama (st.caption) her sekme icin tek satir. roo'nun koyu temasina dokunma, sadece aciklama ekle.",
-    "kapisi_acildi": true
+    "kapisi_acildi": true,
+    "mod": "code",
+    "id": "COP-25"
   },
   {
     "task_id": "COP-26",
     "baslik": "MUSTERILER ekrani: firma listesi+filtre+bildirim blogu (roo uyarisi)",
-    "sahip": "copilot",
+    "sahip": "-",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "blocked",
     "baslangic": "2026-09-13T22:08:26",
-    "bitis": "2026-09-13T22:57:21",
+    "bitis": "2026-09-19T02:36:41",
     "dosyalar": [
       "web_dashboard/tabs/admin_musteriler.py"
     ],
-    "not": "Teslim (copilot): admin_musteriler.py olusturuldu: firma listesi, arama/kalite/kaynak/limit filtreleri, ust bildirim blogu ve bos-veri durumu. app.py Musteriler rotasi yeni render fonksiyonuna baglandi. tests/test_admin_musteriler.py -> 2 passed; py_compile basarili.",
+    "not": "Blokaj: COP-25 bekliyor",
     "source": "ic",
     "from_agent": null,
     "blokaj": [
       "COP-25"
     ],
     "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. MUSTERILER ekrani: admin_musteriler.py icinde firma LISTESI + filtre paneli + bildirim blogu geri getir (roo uyarisi). DASH-UX-03 demo verisi ile calisabilmeli. K1/K2/K3 kalibi (baslik+son guncelleme+bos-veri+aciklama).",
-    "kapisi_acildi": true
+    "kapisi_acildi": true,
+    "mod": "code",
+    "id": "COP-26"
   },
   {
     "task_id": "WIKI-01",
@@ -2432,7 +2712,9 @@
     "kilitli": false,
     "kaynak": "orkestrator",
     "ozet": "",
-    "oncelik": "P2"
+    "oncelik": "P2",
+    "mod": "code",
+    "id": "WIKI-01"
   },
   {
     "task_id": "ORCH-13",
@@ -2449,7 +2731,9 @@
     ],
     "not": "Teslim (roo): S-05: pano sema katmani (ZORUNLU_ALANLAR + sema_dogrula + gorev_normalize/pano_normalize), gorev_ekle/gorev_guncelle/gorev_getir sagmlastirildi, her yazimda eski kayitlar self-healing. S-06: tetik_al artik tetik yoksa panoya bakip ajana ait plan/bekliyor gorevi aktife cekiyor (kaynak=pano); baskasinin gorevi ve panoda olmayan gorev hala reddediliyor. Test: tests/test_pano_sema.py 16 yeni test + orkestrator paketi toplam 142 test PASS.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "ORCH-13"
   },
   {
     "task_id": "UX-01",
@@ -2462,7 +2746,9 @@
     "dosyalar": [
       "src/company_master/ui/"
     ],
-    "not": "Teslim (roo): UI Component Library (UX-01) — 9 component (Button/Input/Dropdown/Badge/Card/MetricCard/Table/Modal/Tooltip), 82 test, Copilot design token contract (Indigo #6366F1, radius bands 8-10/12-16/16-20px). Semantic tokens 'accent/button/card/modal' CSS SSOT ile integrated. Test suite CSS/XSS/a11y coverage + design regression guards. Denetim raporuyla fully aligned; UX-02 (Responsive Layout) ve UX-03 (Theme Management dark/light) ready."
+    "not": "Teslim (roo): UI Component Library (UX-01) — 9 component (Button/Input/Dropdown/Badge/Card/MetricCard/Table/Modal/Tooltip), 82 test, Copilot design token contract (Indigo #6366F1, radius bands 8-10/12-16/16-20px). Semantic tokens 'accent/button/card/modal' CSS SSOT ile integrated. Test suite CSS/XSS/a11y coverage + design regression guards. Denetim raporuyla fully aligned; UX-02 (Responsive Layout) ve UX-03 (Theme Management dark/light) ready.",
+    "mod": "code",
+    "id": "UX-01"
   },
   {
     "task_id": "UX-02",
@@ -2475,7 +2761,9 @@
     "dosyalar": [
       "web_dashboard/css/"
     ],
-    "not": "Teslim (roo): responsive.css olusturuldu: 12/8/4 kolon grid yardimcilari + 1440/1024/640 kirilimlari, dokunmatik hedef min 40px, prefers-reduced-motion. index.html CSS katman sirasi kuruldu (admin_tokens -> style -> responsive). admin_tokens.css dark temada eksik --color-accent/-hover/-soft tanimlari eklendi (test yakaladi). tests/test_responsive_css.py 23 test; toplam 105 test yesil."
+    "not": "Teslim (roo): responsive.css olusturuldu: 12/8/4 kolon grid yardimcilari + 1440/1024/640 kirilimlari, dokunmatik hedef min 40px, prefers-reduced-motion. index.html CSS katman sirasi kuruldu (admin_tokens -> style -> responsive). admin_tokens.css dark temada eksik --color-accent/-hover/-soft tanimlari eklendi (test yakaladi). tests/test_responsive_css.py 23 test; toplam 105 test yesil.",
+    "mod": "code",
+    "id": "UX-02"
   },
   {
     "task_id": "UX-03",
@@ -2488,7 +2776,9 @@
     "dosyalar": [
       "web_dashboard/css/"
     ],
-    "not": "Teslim (roo): theme.css kopru katmani olusturuldu: 17 legacy degisken (--bg, --text, --accent vb.) :root[data-theme=dark|light] uzerinden semantik var(--color-*) tokenlarina baglandi; style.css'e hic dokunulmadi (ozgulluk 0,2,0 > 0,1,0). theme.js: localStorage huginn-theme kaliciligi, prefers-color-scheme izleme, HuginnTheme API (aktifTema/temaUygula/temaDegistir/sistemeDon/sistemTemasi), huginn:themechange CustomEvent, try-korumali storage erisimi, FOUC engeli icin head'de senkron ilk yukleme. admin_tokens.css genisletildi (--color-text-subtle/-purple/-orange light+dark; dark --color-info ayristirildi). index.html: data-theme=dark, 4 katmanli CSS sirasi, topbar tema butonu (aria-pressed, 40px dokunmatik hedef, focus-visible). BONUS: index.html satir 64'te HTML'e sizmis kacis karakterleri (showView\\\\( ve class=\\\"fas\\\\ ) bulundu ve onarildi - Veri Kalitesi nav ogesi kirikti; nuks bekcisi testi eklendi. tests/test_theme_system.py 30 test; toplam 170 test yesil."
+    "not": "Teslim (roo): theme.css kopru katmani olusturuldu: 17 legacy degisken (--bg, --text, --accent vb.) :root[data-theme=dark|light] uzerinden semantik var(--color-*) tokenlarina baglandi; style.css'e hic dokunulmadi (ozgulluk 0,2,0 > 0,1,0). theme.js: localStorage huginn-theme kaliciligi, prefers-color-scheme izleme, HuginnTheme API (aktifTema/temaUygula/temaDegistir/sistemeDon/sistemTemasi), huginn:themechange CustomEvent, try-korumali storage erisimi, FOUC engeli icin head'de senkron ilk yukleme. admin_tokens.css genisletildi (--color-text-subtle/-purple/-orange light+dark; dark --color-info ayristirildi). index.html: data-theme=dark, 4 katmanli CSS sirasi, topbar tema butonu (aria-pressed, 40px dokunmatik hedef, focus-visible). BONUS: index.html satir 64'te HTML'e sizmis kacis karakterleri (showView\\\\( ve class=\\\"fas\\\\ ) bulundu ve onarildi - Veri Kalitesi nav ogesi kirikti; nuks bekcisi testi eklendi. tests/test_theme_system.py 30 test; toplam 170 test yesil.",
+    "mod": "code",
+    "id": "UX-03"
   },
   {
     "task_id": "BE-01",
@@ -2502,7 +2792,9 @@
       "src/company_master/admin/caching.py",
       "web_app.py"
     ],
-    "not": "Teslim (kilo): Redis caching decorator (@admin_cache), 5 admin endpoint'e entegre (api/kpi, api/admin/pending, api/admin/api-usage, api/admin/categories, api/performance). In-memory fallback var."
+    "not": "Teslim (kilo): Redis caching decorator (@admin_cache), 5 admin endpoint'e entegre (api/kpi, api/admin/pending, api/admin/api-usage, api/admin/categories, api/performance). In-memory fallback var.",
+    "mod": "code",
+    "id": "BE-01"
   },
   {
     "task_id": "BE-02",
@@ -2517,7 +2809,9 @@
       "src/company_master/schema/migrations/schema_versions.json",
       "src/company_master/schema/migrations/migrate.py"
     ],
-    "not": "Teslim (kilo): 0014_packages_marketing.sql (packages/campaigns/segments), schema_versions.json (14 versiyon), migrate.py (runner --version/--dry-run/--apply)."
+    "not": "Teslim (kilo): 0014_packages_marketing.sql (packages/campaigns/segments), schema_versions.json (14 versiyon), migrate.py (runner --version/--dry-run/--apply).",
+    "mod": "code",
+    "id": "BE-02"
   },
   {
     "task_id": "BE-03",
@@ -2532,7 +2826,9 @@
       "src/company_master/queue/event_bus.py",
       "src/company_master/queue/__init__.py"
     ],
-    "not": "Teslim (kilo): RedisMessageQueue (publish/consume/size/batch), EventBus (subscribe/emit/process). Redis + in-memory fallback."
+    "not": "Teslim (kilo): RedisMessageQueue (publish/consume/size/batch), EventBus (subscribe/emit/process). Redis + in-memory fallback.",
+    "mod": "code",
+    "id": "BE-03"
   },
   {
     "task_id": "WIKI-02",
@@ -2546,7 +2842,9 @@
       "docs/API_REFERANSI.md",
       "docs/DEPLOYMENT.md"
     ],
-    "not": "Teslim (kilo): API_REFERANSI.md (10 kategori, 30+ endpoint), DEPLOYMENT.md (8 bolum, sorun giderme)."
+    "not": "Teslim (kilo): API_REFERANSI.md (10 kategori, 30+ endpoint), DEPLOYMENT.md (8 bolum, sorun giderme).",
+    "mod": "code",
+    "id": "WIKI-02"
   },
   {
     "task_id": "ROO-UX-ADMIN-01",
@@ -2562,7 +2860,9 @@
     ],
     "not": "Teslim (roo): Premium Admin Panel UX Audit Faz 1a — Design System ve Shell tafsiyesi. Copilot review raporunu dogruladi ve gunceledi: Faz 1a (Token + UI bilesenler + shell mimarisi plani), Faz 1b-4 (Shell impl, Customer Ops, Revenue, Moderation). web_dashboard/css/admin_tokens.css olusturuldu: Semantik token'lar (--color-bg/surface/border/text/accent/success/warning/danger), light/dark [data-theme], Indigo #6366F1, radius bands 8/12/16px, responsive grid breakpoints 1440/1024/640px, a11y prefers-reduced-motion. UX-01 (Component Library) Copilot sözlesmesiyle hizalandi (9 components, 82 test, accent/button/card/modal token'lar). Audit raporu Faz 1a responsive checklist (Desktop/Tablet/Mobile layout/keyboard/a11y kontrol tablosu) + veri sözlesmesi garantisi (Revenue/Transaction/Moderation planlandi, sahte veri yasak) + test kapsamı (render-contract + CSS syntax + Playwright smoke Faz 2'de). Sonraki adim: Topbar, Sidebar, Drawer, ProfileMenu bilesenler (Faz 1b); UX-02 Responsive Layout ve UX-03 Theme Management devam eder.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code",
+    "id": "ROO-UX-ADMIN-01"
   },
   {
     "task_id": "CL-01",
@@ -2575,7 +2875,9 @@
     "dosyalar": [
       "tests/"
     ],
-    "not": "Teslim (cline): CL-01 API entegrasyon suite: 69 test (rota kontrati 33 uc, DB'li GET, buyer kimlik fail-closed, admin guard, webhook, API-key modu, SSE sozlesme). 2 bug duzeltildi: _FakeEngine sira hatasi (her connect kopya aliyordu -> paylasilan kuyruk), SSE client.stream teardown kilitlenmesi (generator-veri-yolu assert). 69 passed 4.21sn."
+    "not": "Teslim (cline): CL-01 API entegrasyon suite: 69 test (rota kontrati 33 uc, DB'li GET, buyer kimlik fail-closed, admin guard, webhook, API-key modu, SSE sozlesme). 2 bug duzeltildi: _FakeEngine sira hatasi (her connect kopya aliyordu -> paylasilan kuyruk), SSE client.stream teardown kilitlenmesi (generator-veri-yolu assert). 69 passed 4.21sn.",
+    "mod": "code",
+    "id": "CL-01"
   },
   {
     "task_id": "CL-02",
@@ -2588,7 +2890,9 @@
     "dosyalar": [
       "scripts/"
     ],
-    "not": "Teslim (cline): CL-02 benchmark tamamlandi: benchmark_http.py yarim kalmis main() tamamlandi (esik karsilastirma + JSON rapor + exit kodu). Suite 5 uc yesil (health p50~9ms, kpi~6ms, companies~6ms, export~4ms, dashboard~3ms). tests/test_benchmark.py 5 test yesil."
+    "not": "Teslim (cline): CL-02 benchmark tamamlandi: benchmark_http.py yarim kalmis main() tamamlandi (esik karsilastirma + JSON rapor + exit kodu). Suite 5 uc yesil (health p50~9ms, kpi~6ms, companies~6ms, export~4ms, dashboard~3ms). tests/test_benchmark.py 5 test yesil.",
+    "mod": "code",
+    "id": "CL-02"
   },
   {
     "task_id": "CL-03",
@@ -2601,7 +2905,9 @@
     "dosyalar": [
       "data/orchestrator/"
     ],
-    "not": "Teslim (cline): CL-03 guvenlik taramasi tamamlandi: guvenlik_taramasi.py + 2 JSON sozluk + rapor. Ilk calismada 7 bulgu (requests pini, 2x shell=True, 3x MD5) duzeltildi, tekrar taramada 0 bulgu. 82 test yesil."
+    "not": "Teslim (cline): CL-03 guvenlik taramasi tamamlandi: guvenlik_taramasi.py + 2 JSON sozluk + rapor. Ilk calismada 7 bulgu (requests pini, 2x shell=True, 3x MD5) duzeltildi, tekrar taramada 0 bulgu. 82 test yesil.",
+    "mod": "code",
+    "id": "CL-03"
   },
   {
     "task_id": "DEV-01",
@@ -2614,7 +2920,9 @@
     "dosyalar": [
       ".github/"
     ],
-    "not": "GitHub Actions CI/CD pipeline tamamlandı: ci.yml güncellendi (lint, test+coverage, security), deploy-staging.yml ve nightly-etl.yml eklendi. 3010 test geçti, 3 atlandı, 126 uyarı."
+    "not": "GitHub Actions CI/CD pipeline tamamlandı: ci.yml güncellendi (lint, test+coverage, security), deploy-staging.yml ve nightly-etl.yml eklendi. 3010 test geçti, 3 atlandı, 126 uyarı.",
+    "mod": "code",
+    "id": "DEV-01"
   },
   {
     "task_id": "AR-01",
@@ -2628,7 +2936,9 @@
       "data/orchestrator/AR-01_pazar_egilim_analizi_Q3_2026.md"
     ],
     "not": "Pazar eğilimi analizi Q3 2026 tamamlandı: sektör büyüme, talep trendleri, fiyat hareketleri ve 2026 Q4 öngörüleri içeren rapor.",
-    "blokaj": []
+    "blokaj": [],
+    "mod": "code",
+    "id": "AR-01"
   },
   {
     "task_id": "AR-02",
@@ -2642,7 +2952,9 @@
       "data/orchestrator/AR-02_rekabet_analizi.md"
     ],
     "not": "Rekabet analizi tamamlandı: 5.665 şirketlik veri setiyle doğrudan/dolaylı rakip sınıflandırması, demo paket ve kampanya karşılaştırması, stratejik öneriler.",
-    "blokaj": []
+    "blokaj": [],
+    "mod": "code",
+    "id": "AR-02"
   },
   {
     "task_id": "AR-03",
@@ -2656,7 +2968,9 @@
       "data/orchestrator/AR-03_kullanici_persona_yol_haritasi.md"
     ],
     "not": "Kullanıcı persona ve yol haritası analizi tamamlandı: 3 temel persona (İş Geliştirme Müdürü, Veri Bilimci, Operasyon Yöneticisi), dokunma noktaları, dönüşüm engelleri ve iyileştirme önerileri.",
-    "blokaj": []
+    "blokaj": [],
+    "mod": "code",
+    "id": "AR-03"
   },
   {
     "task_id": "ORCH-11",
@@ -2670,7 +2984,9 @@
       "src/company_master/"
     ],
     "not": "Zamanlayıcı hizmet — cron benzeri görev dağıtım.",
-    "sonuc": "Scheduler Service olusturuldu: Scheduler sinifi (start/stop/dispatch_once), --once/--dry-run/daemon CLI, cron-like dispatch"
+    "sonuc": "Scheduler Service olusturuldu: Scheduler sinifi (start/stop/dispatch_once), --once/--dry-run/daemon CLI, cron-like dispatch",
+    "mod": "code",
+    "id": "ORCH-11"
   },
   {
     "task_id": "ORCH-12",
@@ -2684,7 +3000,9 @@
       "src/company_master/"
     ],
     "not": "Sağlık monitörü — sistem durum dashboard'ı.",
-    "sonuc": "Health Monitor olusturuldu: DB/cache/system check, dashboard/endpoint metotlari, cross-platform"
+    "sonuc": "Health Monitor olusturuldu: DB/cache/system check, dashboard/endpoint metotlari, cross-platform",
+    "mod": "code",
+    "id": "ORCH-12"
   },
   {
     "task_id": "FIX-ID-01",
@@ -2701,7 +3019,9 @@
     "not": "FIX-ID-01 tamamlandi: gorev_ekle + gorev_normalize'e id alanı (task_id alias) eklendi.",
     "source": "ic",
     "from_agent": null,
-    "blokaj": []
+    "blokaj": [],
+    "mod": "code",
+    "id": "FIX-ID-01"
   },
   {
     "task_id": "PO-BACK-01",
@@ -2716,7 +3036,8 @@
       "tests/test_tenant_health.py"
     ],
     "not": "Modül+27 test hazır (cline). UI entegrasyonu eksik: tenant_health_dashboard() öksüz → PO-BACK-01-UI açıldı (cline). İkisi birlikte done olur. | ORK 2026-09-15: onaylandı (modül+27 test). UI bağlantısı TEN-02 (kilo) kapsamına devredildi",
-    "id": "PO-BACK-01"
+    "id": "PO-BACK-01",
+    "mod": "code"
   },
   {
     "task_id": "PO-BACK-02",
@@ -2732,7 +3053,8 @@
     ],
     "not": "Teslim (cline): segment.py: eligibility_skoru(firma)->float (0-1), onay_durumu(skor, esik)->str; test_segment.py: 18 test; 18 passed",
     "id": "PO-BACK-02",
-    "talimat": "Segment Eligibility Skoru + Onay Akışı. Yapılacak: segment.py içinde `eligibility_skoru(firma: dict) -> float` (0-1) ve `onay_durumu(skor, esik=0.6) -> 'otomatik'|'manuel'|'red'`; skor bileşenleri: sektör eşleşmesi, çalışan sayısı aralığı, veri tamlığı. tests/test_segment.py'ye sınır değer + eksik alan testleri ekle. Kabul: mevcut segment testleri kırılmaz, ≥6 yeni test yeşil. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_segment.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
+    "talimat": "Segment Eligibility Skoru + Onay Akışı. Yapılacak: segment.py içinde `eligibility_skoru(firma: dict) -> float` (0-1) ve `onay_durumu(skor, esik=0.6) -> 'otomatik'|'manuel'|'red'`; skor bileşenleri: sektör eşleşmesi, çalışan sayısı aralığı, veri tamlığı. tests/test_segment.py'ye sınır değer + eksik alan testleri ekle. Kabul: mevcut segment testleri kırılmaz, ≥6 yeni test yeşil. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_segment.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK.",
+    "mod": "code"
   },
   {
     "task_id": "PO-BACK-03",
@@ -2748,7 +3070,8 @@
     ],
     "not": "Teslim (roo): kampanya_durum.py durum makinesi (6 durum, 9 izinli gecis, uc durum korumasi) + DB esleme (draft/scheduled/active/paused/completed/cancelled); tests/test_kampanya_durum.py 61 test yesil (0.46s); pazarlama.py dokunulmadi",
     "id": "PO-BACK-03",
-    "talimat": "Kampanya Durum-Makinesi Denetimi. Yapılacak: src/company_master/kampanya_durum.py — durumlar taslak→planlandı→aktif→duraklatıldı→tamamlandı/iptal; `gecis_yap(mevcut, hedef) -> str` (geçersiz geçişte ValueError), `izinli_gecisler()` tablosu. tests/test_kampanya_durum.py: tüm izinli/izinsiz geçişler parametrik. Kabul: ≥10 test yeşil, pazarlama.py'ye dokunulmaz. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_kampanya_durum.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
+    "talimat": "Kampanya Durum-Makinesi Denetimi. Yapılacak: src/company_master/kampanya_durum.py — durumlar taslak→planlandı→aktif→duraklatıldı→tamamlandı/iptal; `gecis_yap(mevcut, hedef) -> str` (geçersiz geçişte ValueError), `izinli_gecisler()` tablosu. tests/test_kampanya_durum.py: tüm izinli/izinsiz geçişler parametrik. Kabul: ≥10 test yeşil, pazarlama.py'ye dokunulmaz. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_kampanya_durum.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK.",
+    "mod": "code"
   },
   {
     "task_id": "PO-BACK-04",
@@ -2765,7 +3088,8 @@
     ],
     "not": "Teslim (cline): paketler.py fiyat_katalogu() tek kaynak; scripts/sync_paket_fiyatlari.py --check JSON writer + diff; test_paket_fiyat.py 11 yeni test (tüm testler yeşil 11/11 + segment 18/18)",
     "id": "PO-BACK-04",
-    "talimat": "Paket Fiyat Kataloğu Tekilleştirme. Yapılacak: (1) paketler.py `fiyat_katalogu()` tek kaynak olsun; (2) docstring'de referans verilen ama diskte olmayan scripts/sync_paket_fiyatlari.py'yi oluştur: katalogu JSON'a yazar/diff gösterir (`--check` çıkış kodu 1 = uyumsuz); (3) tests/test_paket_fiyat.py: mükerrer paket kodu yok, fiyatlar >0, `--check` senaryosu. Kabul: ≥5 yeni test yeşil. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_paket_fiyat.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
+    "talimat": "Paket Fiyat Kataloğu Tekilleştirme. Yapılacak: (1) paketler.py `fiyat_katalogu()` tek kaynak olsun; (2) docstring'de referans verilen ama diskte olmayan scripts/sync_paket_fiyatlari.py'yi oluştur: katalogu JSON'a yazar/diff gösterir (`--check` çıkış kodu 1 = uyumsuz); (3) tests/test_paket_fiyat.py: mükerrer paket kodu yok, fiyatlar >0, `--check` senaryosu. Kabul: ≥5 yeni test yeşil. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_paket_fiyat.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK.",
+    "mod": "code"
   },
   {
     "task_id": "PO-BACK-05",
@@ -2782,7 +3106,8 @@
     ],
     "not": "Teslim (kilo): Tazelik etiketi: tazelik_etiketi() (taze/eskiyor/bayat, TZ uyumlu), 11 test. admin_auto_refresh.py guncellendi: Son güncelleme etiketi + Yenile butonu eklendi.",
     "id": "PO-BACK-05",
-    "talimat": "Veri Tazelik Etiketi + Manuel Yenileme (Freshness). Yapılacak: (1) src/company_master/tazelik.py — `tazelik_etiketi(son_guncelleme: datetime|None, simdi=None) -> dict` (etiket: 'taze'/'eskiyor'/'bayat', saat farkı, renk); (2) admin_auto_refresh.py'de 'Son güncelleme: …' etiketi + 'Yenile' butonu (st.button → session_state bayrağı); (3) tests/test_tazelik.py: eşik sınırları, None girişi, TZ-aware/naive karışımı. Kabul: en az 8 test yeşil; Streamlit importu test ortamında mock'lanır. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_tazelik.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
+    "talimat": "Veri Tazelik Etiketi + Manuel Yenileme (Freshness). Yapılacak: (1) src/company_master/tazelik.py — `tazelik_etiketi(son_guncelleme: datetime|None, simdi=None) -> dict` (etiket: 'taze'/'eskiyor'/'bayat', saat farkı, renk); (2) admin_auto_refresh.py'de 'Son güncelleme: …' etiketi + 'Yenile' butonu (st.button → session_state bayrağı); (3) tests/test_tazelik.py: eşik sınırları, None girişi, TZ-aware/naive karışımı. Kabul: en az 8 test yeşil; Streamlit importu test ortamında mock'lanır. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_tazelik.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK.",
+    "mod": "code"
   },
   {
     "task_id": "PO-BACK-06",
@@ -2800,7 +3125,8 @@
     "not": "Teslim (kilo): Destek Merkezi MVP: Ticket(frozen dataclass), durum_gecis(acik->inceleniyor->cozuldu->kapali, immutable), JSON depo(data/destek/tickets.json), 10 test. __init__.py ve admin_destek.py Roo kismi (kilitli).",
     "id": "PO-BACK-06",
     "talimat": "Destek Merkezi MVP. Yapılacak: `src/company_master/destek.py` — `@dataclass Ticket` (id, tenant_id, baslik, aciklama, durum, olusturma, guncelleme), durum makinesi `acik -> inceleniyor -> cozuldu -> kapali` (`durum_gecis(ticket, yeni) -> Ticket`, geçersiz geçiş ValueError), JSON dosya tabanlı depo `data/destek/tickets.json` (DB yok — MVP). `web_dashboard/tabs/admin_destek.py`: liste + yeni ticket formu + durum değiştir; SECTIONS'a kayıt (rol: admin). Testler: `tests/test_destek.py` ≥8 (geçerli/geçersiz geçiş, CRUD, boş depo). Dosyalar: src/company_master/destek.py, web_dashboard/tabs/admin_destek.py, web_dashboard/tabs/__init__.py, tests/test_destek.py. Kabul: test_dashboard_nav + iskelet testleri yeşil. Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK. Tam regresyon sayısı özete yazılır.",
-    "not_": "[roo 2026-09-15 11:40] SON UYARI (2/2). destek.py 0 bayt, admin_destek.py yok, tests/test_destek.py koleksiyon hatasi veriyor. Talimat: KR-5 brifi (posta kutusu). Teslim yolu: gorev_kutusu.py al -> dosyalari UTF-8 (BOM'suz) yaz -> pytest tests/test_destek.py yesil -> python -m pytest tests/ -q --continue-on-collection-errors (0 hata) -> teslim --ozet. ESKALASYON: bir sonraki roo turunda hala alinmamissa gorev cline'a devredilir (gorev_kutusu.py devret)."
+    "not_": "[roo 2026-09-15 11:40] SON UYARI (2/2). destek.py 0 bayt, admin_destek.py yok, tests/test_destek.py koleksiyon hatasi veriyor. Talimat: KR-5 brifi (posta kutusu). Teslim yolu: gorev_kutusu.py al -> dosyalari UTF-8 (BOM'suz) yaz -> pytest tests/test_destek.py yesil -> python -m pytest tests/ -q --continue-on-collection-errors (0 hata) -> teslim --ozet. ESKALASYON: bir sonraki roo turunda hala alinmamissa gorev cline'a devredilir (gorev_kutusu.py devret).",
+    "mod": "code"
   },
   {
     "task_id": "PO-BACK-07",
@@ -2817,7 +3143,8 @@
     ],
     "not": "Teslim (kilo): Feature Flags MVP: flag_acik(env>tenant>global), flag_ayarla, flaglar_listele, flag_gerekli decorator. 11 test passed. data/feature_flags.json olusturuldu.",
     "id": "PO-BACK-07",
-    "talimat": "Feature Flags MVP. Yapılacak: `src/company_master/feature_flags.py` — `flag_acik(ad: str, tenant_id: str | None = None) -> bool`, `flag_ayarla(ad, deger, tenant_id=None)`, `flaglar_listele()`; depo `data/feature_flags.json` (global + tenant override; env `HUGINN_FLAG_<AD>` en yüksek öncelik). Guard: `@flag_gerekli('ad')` dekoratörü (kapalıysa NotImplementedError yerine sessiz `None`). İlk flaglar: `data_quality_score`, `source_reliability` (varsayılan True). Testler: `tests/test_feature_flags.py` ≥8 (öncelik sırası env>tenant>global, bilinmeyen flag False, guard). Dosyalar: src/company_master/feature_flags.py, tests/test_feature_flags.py. UI yok (Faz 2). Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK. Tam regresyon sayısı özete yazılır."
+    "talimat": "Feature Flags MVP. Yapılacak: `src/company_master/feature_flags.py` — `flag_acik(ad: str, tenant_id: str | None = None) -> bool`, `flag_ayarla(ad, deger, tenant_id=None)`, `flaglar_listele()`; depo `data/feature_flags.json` (global + tenant override; env `HUGINN_FLAG_<AD>` en yüksek öncelik). Guard: `@flag_gerekli('ad')` dekoratörü (kapalıysa NotImplementedError yerine sessiz `None`). İlk flaglar: `data_quality_score`, `source_reliability` (varsayılan True). Testler: `tests/test_feature_flags.py` ≥8 (öncelik sırası env>tenant>global, bilinmeyen flag False, guard). Dosyalar: src/company_master/feature_flags.py, tests/test_feature_flags.py. UI yok (Faz 2). Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK. Tam regresyon sayısı özete yazılır.",
+    "mod": "code"
   },
   {
     "task_id": "PO-BACK-08",
@@ -2831,7 +3158,8 @@
     "not": "Teslim (cline): PO-BACK-08 Executive Dashboard v1 teslim edildi. (1) src/company_master/executive_ozet.py — saf modül (DB/Streamlit bağımsız): mrr_arr (MRR/ARR/ARPA + aktif/pasif/paket dağılımı), churn_orani (dönem pencereli, TR+EN tarih), health_dagilimi (band alanı veya skordan), mrr_trend (aylık kesit; referans tarihi enjekte edilebilir → test kırılganlığı yok). Fiyat tek kaynağı paketler.fiyat_katalogu() (PO-BACK-04); health eşikleri tenant.health.HEALTH_GREEN/HEALTH_YELLOW'dan okunur, health.py'ye yazılmadı. Bozuk kayıt / boş girdi / bilinmeyen paket durumlarında istisna fırlatmaz, 0 veya boş veri döner. (2) web_dashboard/tabs/admin_executive.py — PageHeader + 3 Section (Gelir Özeti · MRR Trendi · Tenant Sağlık Dağılımı); load_executive_ozet ttl=60 cache, DB erişilemezse kaynak='bos' + st.info; Plotly varsa plotly_chart, yoksa st.line_chart fallback. (3) web_dashboard/tabs/__init__.py — TabTanimi 'executive' (GRUP_IS, url_path=executive, min_rol=admin) kaydedildi; SECTIONS 25 → 26. (4) tests/test_executive_ozet.py — 36 yeni test (tamamı geçiyor). (5) tests/test_dashboard_nav.py — sabit bölüm sayısı 26'ya güncellendi (yeni sekme kararı: ayrı sekme, mevcut sekme genişletmesi değ",
     "id": "PO-BACK-08",
     "talimat": "Executive Dashboard v1 — BLOKE: PO-BACK-01 ve PO-BACK-10 done olmadan BAŞLAMA. Başlayınca: `src/company_master/executive_ozet.py` — `mrr_arr(abonelikler) -> dict`, `churn_orani(donem_baslangic, donem_bitis) -> float`, `health_dagilimi(tenantlar) -> dict[band, int]` (tenant/health.py `hesapla` çıktısını tüketir, health.py'ye DOKUNMA). `web_dashboard/tabs/admin_executive.py`: 3 metrik + trend çizgi grafiği (Plotly fallback st.line_chart). Testler: `tests/test_executive_ozet.py` ≥8. Dosyalar: executive_ozet.py, admin_executive.py, tabs/__init__.py, test dosyası. Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK. Tam regresyon sayısı özete yazılır.",
-    "not_": "Blokaj kalkti (PO-BACK-01 done, PO-BACK-10 done). cline zincirine eklendi, PO-BACK-04 sonrasi."
+    "not_": "Blokaj kalkti (PO-BACK-01 done, PO-BACK-10 done). cline zincirine eklendi, PO-BACK-04 sonrasi.",
+    "mod": "code"
   },
   {
     "task_id": "PO-BACK-09",
@@ -2850,7 +3178,8 @@
     "source": "ic",
     "from_agent": null,
     "blokaj": [],
-    "talimat": "Duplicate Rate (mükerrer oran) hesaplama modülü — Admin dashboard için veri katmanı. Yapılacak: src/company_master/dedup_metrics.py: `mukerrer_orani(kayitlar: list[dict], anahtar='vkn') -> dict` (toplam, benzersiz, mükerrer, oran, kaynak bazlı kırılım); mevcut `vector/service.deduplicate_by_vkn` ve `etl/multi_osb_merger.deduplicate_companies` mantığıyla tutarlı olsun (import etme, saf fonksiyon yaz). UI YOK (admin_quality.py roo kapsamında — dokunma). tests/test_dedup_metrics.py: boş liste, tümü benzersiz, tümü mükerrer, eksik anahtar. Kabul: ≥6 test yeşil. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_dedup_metrics.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
+    "talimat": "Duplicate Rate (mükerrer oran) hesaplama modülü — Admin dashboard için veri katmanı. Yapılacak: src/company_master/dedup_metrics.py: `mukerrer_orani(kayitlar: list[dict], anahtar='vkn') -> dict` (toplam, benzersiz, mükerrer, oran, kaynak bazlı kırılım); mevcut `vector/service.deduplicate_by_vkn` ve `etl/multi_osb_merger.deduplicate_companies` mantığıyla tutarlı olsun (import etme, saf fonksiyon yaz). UI YOK (admin_quality.py roo kapsamında — dokunma). tests/test_dedup_metrics.py: boş liste, tümü benzersiz, tümü mükerrer, eksik anahtar. Kabul: ≥6 test yeşil. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_dedup_metrics.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK.",
+    "mod": "code"
   },
   {
     "task_id": "PO-BACK-10",
@@ -2869,7 +3198,8 @@
     "source": "ic",
     "from_agent": null,
     "blokaj": [],
-    "talimat": "Coverage Analytics (Müşteri). Yapılacak: `src/company_master/coverage_analitik.py` — `coverage_orani(firmalar: list[dict], hedef_evren: int) -> float` (0-100), `sektor_bazli_coverage(firmalar, nace_gruplari) -> list[dict]` (nace_grup, yakalanan, hedef, oran), `coverage_ozeti(...) -> dict` (toplam, oran, en_dusuk_3_sektor). Saf fonksiyon, DB yok. `web_dashboard/tabs/musteri_kesif.py` veya uygun Huginn sekmesine 'Kapsam' kartı (st.metric + tablo). Testler: `tests/test_coverage_analitik.py` ≥8 (boş liste, hedef 0, %100, sektör sıralama). Dosyalar: src/company_master/coverage_analitik.py, tests/test_coverage_analitik.py, ilgili tek sekme. Kabul: yeni testler yeşil, iskelet testleri (test_sayfa_iskeleti/test_sekme_kapsama) kırılmaz. Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK. Tam regresyon sayısı özete yazılır."
+    "talimat": "Coverage Analytics (Müşteri). Yapılacak: `src/company_master/coverage_analitik.py` — `coverage_orani(firmalar: list[dict], hedef_evren: int) -> float` (0-100), `sektor_bazli_coverage(firmalar, nace_gruplari) -> list[dict]` (nace_grup, yakalanan, hedef, oran), `coverage_ozeti(...) -> dict` (toplam, oran, en_dusuk_3_sektor). Saf fonksiyon, DB yok. `web_dashboard/tabs/musteri_kesif.py` veya uygun Huginn sekmesine 'Kapsam' kartı (st.metric + tablo). Testler: `tests/test_coverage_analitik.py` ≥8 (boş liste, hedef 0, %100, sektör sıralama). Dosyalar: src/company_master/coverage_analitik.py, tests/test_coverage_analitik.py, ilgili tek sekme. Kabul: yeni testler yeşil, iskelet testleri (test_sayfa_iskeleti/test_sekme_kapsama) kırılmaz. Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK. Tam regresyon sayısı özete yazılır.",
+    "mod": "code"
   },
   {
     "task_id": "PO-BACK-11",
@@ -2889,7 +3219,8 @@
     "source": "ic",
     "from_agent": null,
     "blokaj": [],
-    "talimat": "Source Reliability Monitor (Admin). Yapılacak: src/company_master/kaynak_guvenilirlik.py — kaynak bazlı güvenilirlik skoru (tazelik, hata oranı, tutarlılık; `tenant/health._source_reliability_score` ile uyumlu, health.py'ye DOKUNMA — kilo kapsamı); admin_quality.py'de kaynak tablosu + eşik altı uyarı kartı; tests/test_kaynak_guvenilirlik.py ≥8 test. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_kaynak_guvenilirlik.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
+    "talimat": "Source Reliability Monitor (Admin). Yapılacak: src/company_master/kaynak_guvenilirlik.py — kaynak bazlı güvenilirlik skoru (tazelik, hata oranı, tutarlılık; `tenant/health._source_reliability_score` ile uyumlu, health.py'ye DOKUNMA — kilo kapsamı); admin_quality.py'de kaynak tablosu + eşik altı uyarı kartı; tests/test_kaynak_guvenilirlik.py ≥8 test. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_kaynak_guvenilirlik.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK.",
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-DOC-01",
@@ -2908,7 +3239,8 @@
     "not": "",
     "source": "ic",
     "from_agent": null,
-    "not_": "Roo devraldi: AI proje v1/V10/14_urun_yuzeyleri_sitemap.md ile karsilandi. Kilo taslaklari 06_arsiv/kilo_sitemap_taslaklari_2026_09_14/ altina arsivlendi."
+    "not_": "Roo devraldi: AI proje v1/V10/14_urun_yuzeyleri_sitemap.md ile karsilandi. Kilo taslaklari 06_arsiv/kilo_sitemap_taslaklari_2026_09_14/ altina arsivlendi.",
+    "mod": "code"
   },
   {
     "task_id": "USER-DOC-01",
@@ -2925,7 +3257,8 @@
     "not": "pending",
     "source": "ic",
     "from_agent": null,
-    "not_": "Roo devraldi: user panel kapsami 14_urun_yuzeyleri_sitemap.md Bolum 4 (HUGINN agaci) icinde karsilandi."
+    "not_": "Roo devraldi: user panel kapsami 14_urun_yuzeyleri_sitemap.md Bolum 4 (HUGINN agaci) icinde karsilandi.",
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-WF-01",
@@ -2943,7 +3276,8 @@
     "source": "ic",
     "from_agent": null,
     "blokaj": [],
-    "talimat": "Admin iş akışı optimizasyon dokümanını tamamla: mevcut WORKFLOW_OPTIMIZATION.md'yi (a) darboğaz listesi, (b) önerilen akış (tetik → al → teslim → onay), (c) ölçüm KPI'ları (ort. teslim süresi, ret oranı) başlıklarıyla güncelle. Kabul: dosya UTF-8/BOM'suz, Türkçe karakterler bozulmamış, en az 3 somut KPI tanımı. Kod değişikliği YOK. Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
+    "talimat": "Admin iş akışı optimizasyon dokümanını tamamla: mevcut WORKFLOW_OPTIMIZATION.md'yi (a) darboğaz listesi, (b) önerilen akış (tetik → al → teslim → onay), (c) ölçüm KPI'ları (ort. teslim süresi, ret oranı) başlıklarıyla güncelle. Kabul: dosya UTF-8/BOM'suz, Türkçe karakterler bozulmamış, en az 3 somut KPI tanımı. Kod değişikliği YOK. Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK.",
+    "mod": "code"
   },
   {
     "task_id": "MRK-03",
@@ -2962,7 +3296,8 @@
     "not": "Roo dogrulama: Obsidian kopyasi eksikti (kirik wikilink) -> Roo olusturdu; docs aynasi + 00-Home OK",
     "source": "ic",
     "from_agent": null,
-    "sonuc": "Marka konumlandirma belgesi tasima + Obsidian baglami tamamlandi"
+    "sonuc": "Marka konumlandirma belgesi tasima + Obsidian baglami tamamlandi",
+    "mod": "code"
   },
   {
     "task_id": "MRK-04",
@@ -2982,7 +3317,8 @@
     "not": "Roo dogrulama: 4 kural dosyasinda marka terminolojisi OK",
     "source": "ic",
     "from_agent": null,
-    "sonuc": "Marka terminolojisi ANA_KURALLAR.md/AGENTS.md/.roorules/.clinerules eklendi"
+    "sonuc": "Marka terminolojisi ANA_KURALLAR.md/AGENTS.md/.roorules/.clinerules eklendi",
+    "mod": "code"
   },
   {
     "task_id": "FIX-NOB-01",
@@ -2999,7 +3335,8 @@
     "not": "Roo dogrulama: gorev_nobetci.py durum utf-8 ile hatasiz calisti",
     "source": "ic",
     "from_agent": null,
-    "sonuc": "cmd_durum encoding fix: added sys.stdout.reconfigure(encoding='utf-8', errors='replace') and subprocess.run encoding='utf-8', errors='replace')"
+    "sonuc": "cmd_durum encoding fix: added sys.stdout.reconfigure(encoding='utf-8', errors='replace') and subprocess.run encoding='utf-8', errors='replace')",
+    "mod": "code"
   },
   {
     "task_id": "MRK-02F",
@@ -3015,7 +3352,8 @@
     ],
     "not": "Teslim (cline): card.py _deger_metni i18n.sayi() delegasyonu; test_ui_components yesil",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "MRK-02G",
@@ -3031,7 +3369,8 @@
     ],
     "not": "Teslim (cline): tests/test_i18n.py 13 bekci + 4 ek test; 1413 passed",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "MRK-02H",
@@ -3049,7 +3388,8 @@
     "not": "Roo dogrulama: kontrol() True, 73 anahtar; bekci tests/test_i18n_disa_aktar.py Roo ekledi (8 test)",
     "source": "ic",
     "from_agent": null,
-    "sonuc": "disa_aktar.py + messages.js uretildi; --kontrol GUNCEL; 73 anahtar; 152 satir"
+    "sonuc": "disa_aktar.py + messages.js uretildi; --kontrol GUNCEL; 73 anahtar; 152 satir",
+    "mod": "code"
   },
   {
     "task_id": "CHART-01",
@@ -3066,7 +3406,8 @@
     ],
     "not": "Teslim (cline): src/company_master/ui/charts/__init__.py olusturuldu (line_bar, bar_chart, pie_chart, scatter_chart, fig_to_json). requirements-app.txt pandas>=2.0.0 eklendi (CHART-01).",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "TEN-01",
@@ -3086,7 +3427,8 @@
     ],
     "not": "Teslim (kilo): Multi-tenant hazırlığı: TenantContext frozen dataclass, VARSAYILAN_TENANT, tenant_coz(), tenant_dogrula() (model.py). 10 test (8 unit + 2 AST bekçi). Streamlit/auth import yasağı doğrulanmış. health.py Streamlit fonksiyonları web_dashboard/tabs/tenant_health_dashboard.py'ye taşındı. | Review onayli: TenantContext frozen dataclass, model.py tenant_coz()/tenant_dogrula(), 10 test gecti, Streamlit import kurali dogrulandi, health.py fonksiyonlari web_dashboard/tabs/tenant_health_dashboard.py'ye tasinmis.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "GAM-01",
@@ -3104,7 +3446,8 @@
     ],
     "not": "Teslim (kilo): Rozet keif sistemi: UserProgress dataclass, rozet_ver(), karsilastir() (model.py). 8 test. data/kullanici_ilerleme.json olusturuldu. Streamlit yok. | Review onayli: UserProgress dataclass, rozet_ver()/karsilastir() (rozet/model.py), data/kullanici_ilerleme.json olusturuldu, 8 test gecti, Streamlit yok.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "AI-RAG-01",
@@ -3123,7 +3466,8 @@
     ],
     "not": "Teslim (kilo): Odin AI RAG iskeleti: Embedder (SHA-256 deterministik), Chunk frozen dataclass, chunk_metin(), chunk_bol(), chunk_topla() (rag.py). 19 test. docs/ODIN_AI_ISKELET.md olusturuldu. API key yok. | Review onayli: Odin AI RAG iskeleti (Embedder SHA-256, Chunk dataclass, chunk_metin()/chunk_bol()/chunk_topla() rag.py), 19 test gecti, docs/ODIN_AI_ISKELET.md olusturuldu, API key yok.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "TEN-02",
@@ -3143,7 +3487,8 @@
     "not": "Teslim (kilo): TEN-02 tamamlandı: admin_kpi.py tenant health section ve tenant context import eklendi; tenant_health_dashboard.py bileşen döngüsü düzeltildi; tests/test_tenant_health.py AST/monkeypatch testleri eklendi. Import exit 0; tenant suite 27 passed; full suite 3012 passed, 3 skipped. Hedefli flake8/black pre-existing style ve verilen mock lambda biçimi nedeniyle exit 1; compileall exit 0.",
     "source": "ic",
     "from_agent": null,
-    "talimat": "Tenant Sağlık Paneli — tek sahip kilo (PO-BACK-01-UI buraya birleştirildi). Yapılacak: (1) admin_kpi.py'de Section altında `tenant_health_dashboard(tenant_ctx=VARSAYILAN_TENANT, companies=...)` çağır; (2) tenant_health_dashboard.py'yi health.py modülüne bağla (skor + kaynak güvenilirlik özet kartı); (3) AST/monkeypatch testi ekle (admin_kpi içinde çağrının varlığı + dashboard fonksiyonunun st.* çağrıları mock'lanarak çalıştığı). Kabul: tests/test_tenant_health.py yeşil, admin panel importu kırılmaz. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_tenant_health.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
+    "talimat": "Tenant Sağlık Paneli — tek sahip kilo (PO-BACK-01-UI buraya birleştirildi). Yapılacak: (1) admin_kpi.py'de Section altında `tenant_health_dashboard(tenant_ctx=VARSAYILAN_TENANT, companies=...)` çağır; (2) tenant_health_dashboard.py'yi health.py modülüne bağla (skor + kaynak güvenilirlik özet kartı); (3) AST/monkeypatch testi ekle (admin_kpi içinde çağrının varlığı + dashboard fonksiyonunun st.* çağrıları mock'lanarak çalıştığı). Kabul: tests/test_tenant_health.py yeşil, admin panel importu kırılmaz. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_tenant_health.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK.",
+    "mod": "code"
   },
   {
     "task_id": "AI-CHAT-01-FIX",
@@ -3162,7 +3507,8 @@
     ],
     "not": "S11 MIMIR eki (review özet güncelleme): GORUNEN_AD=MIMIR, kilit sözü abrakadabra (teklif_uygula ikinci kapı + UI kilit kutusu + maskeleme), MIMIR_MODELS/MIMIR_KILIT_SOZU env, ChatBubble=AI MIMIR; test_ai_chat 29; tam regresyon 2941 passed.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "PO-BACK-01-UI",
@@ -3180,7 +3526,8 @@
     ],
     "not": "ORK 2026-09-15: TEN-02'ye birleştirildi, iş yapılmadı (cline'dan düşürüldü; tenant sağlığı tek sahip kilo)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "TEST-ISO-01",
@@ -3198,7 +3545,8 @@
     "not": "Teslim (roo): Dogrulama: test_api_integration.py zaten _FakeEngine ile DB mock'lu, conftest.py'deki isolated_spend_log fixture'i ile izole; 69 test deselect edilmeden yesil (5.34s). Tam regresyon: 3073 passed, 3 skipped, 0 deselect, 0 fail (62s). Ek kod degisikligi gerekmedi, izolasyon onceki bir islemde zaten tamamlanmisti.",
     "source": "ic",
     "from_agent": null,
-    "talimat": "Yapılacak: conftest.py'ye izole test DB fixture'ı (tmp_path tabanlı SQLite veya monkeypatch'li engine) ekle; test_api_integration.py'deki 69 deselect edilen testi bu fixture'a bağla; canlı DB/ağ bağımlılığı kalmasın. Kabul: `python -X utf8 -m pytest tests/test_api_integration.py -q` deselect olmadan yeşil; tam regresyon `python -X utf8 -m pytest tests/ -q` sayısı özete yazılır. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_api_integration.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK."
+    "talimat": "Yapılacak: conftest.py'ye izole test DB fixture'ı (tmp_path tabanlı SQLite veya monkeypatch'li engine) ekle; test_api_integration.py'deki 69 deselect edilen testi bu fixture'a bağla; canlı DB/ağ bağımlılığı kalmasın. Kabul: `python -X utf8 -m pytest tests/test_api_integration.py -q` deselect olmadan yeşil; tam regresyon `python -X utf8 -m pytest tests/ -q` sayısı özete yazılır. Test: `set PYTHONPATH=src && python -X utf8 -m pytest tests/test_api_integration.py -q` Teslim YALNIZ `python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id {tid} --ozet \"...\"` ile; doğrudan done YASAK.",
+    "mod": "code"
   },
   {
     "task_id": "HEDEF-NACE-01",
@@ -3216,7 +3564,8 @@
     ],
     "not": "Teslim (roo): coverage_analitik.nace_hedeflerini_yukle(dosya,gruplar,evren)->(hedefler,kaynak) + esit paylasim fallback; data/nace_hedefleri.json (27 grup, ilk tahmin); pazarlama.load_kapsam_verisi dosya oncelikli (HUGINN_NACE_HEDEF_DOSYASI ile yol ezilebilir), kart caption kaynagi gosterir; +9 test (33). Tam regresyon 3204 passed.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "FIX-LEDGER-01",
@@ -3230,7 +3579,8 @@
     "dosyalar": [],
     "not": "Teslim (roo): error_ledger._atomik_degistir: os.replace PermissionError'da 3 deneme/geometrik bekleme; +2 test (retry gecer, kalici kilit yukselir). 6/6 yesil; tam regresyon 3204 passed.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "BUG-DESTEK-UTF8",
@@ -3245,7 +3595,8 @@
     "not": "Teslim (roo): Kodlama kismi kapandi: tests/test_destek.py (4601 bayt UTF-8) ve destek.py UTF-16 sorunu kilo tarafindan 10:15/10:20'de duzeltildi. YENI DURUM (KR-5): destek.py 0 bayt + admin_destek.py yok -> fonksiyonel is PO-BACK-06 (kilo, aktif) kapsaminda; kilo'ya P1 uyari tetigi dustu. Bu ticket kodlama kapsamiyla kapatiliyor.",
     "source": "ic",
     "from_agent": null,
-    "talimat": "TRİYAJ (roo): tests/test_destek.py UTF-16LE + BOM olarak kaydedilmiş (8744 bayt, 4319 NUL bayt) → 'SyntaxError: source code string cannot contain null bytes'; `pytest tests/` koleksiyonu 'Interrupted: 1 error during collection' ile kesiliyor (CI yeşil kapısı sahte negatif). Dosya kilo'nun AKTİF görevi PO-BACK-06'nın dosya listesinde olduğu için cline dokunmadı (AGENTS.md çakışma kuralı). Beklenen karar: düzeltme PO-BACK-06 kapsamında kilo'ya verilsin (dosya UTF-8/BOM'suz yeniden yazılsın) veya ayrı fix görevi açılsın. Doğrulama: `python -m pytest tests/test_destek.py -q` ve ardından --ignore'suz tam regresyon. Kanıt raporu: data/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md (KR-1). PO-BACK-08 tam regresyonu (--ignore ile): 3274 passed, 3 skipped, 126 warnings in 75.74s (0:01:15)"
+    "talimat": "TRİYAJ (roo): tests/test_destek.py UTF-16LE + BOM olarak kaydedilmiş (8744 bayt, 4319 NUL bayt) → 'SyntaxError: source code string cannot contain null bytes'; `pytest tests/` koleksiyonu 'Interrupted: 1 error during collection' ile kesiliyor (CI yeşil kapısı sahte negatif). Dosya kilo'nun AKTİF görevi PO-BACK-06'nın dosya listesinde olduğu için cline dokunmadı (AGENTS.md çakışma kuralı). Beklenen karar: düzeltme PO-BACK-06 kapsamında kilo'ya verilsin (dosya UTF-8/BOM'suz yeniden yazılsın) veya ayrı fix görevi açılsın. Doğrulama: `python -m pytest tests/test_destek.py -q` ve ardından --ignore'suz tam regresyon. Kanıt raporu: data/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md (KR-1). PO-BACK-08 tam regresyonu (--ignore ile): 3274 passed, 3 skipped, 126 warnings in 75.74s (0:01:15)",
+    "mod": "code"
   },
   {
     "task_id": "BUG-CHART01-SYNTAX",
@@ -3263,7 +3614,8 @@
     "not": "Teslim (cline): KR-2 ÇÖZÜLDÜ. (1) src/company_master/ui/charts/__init__.py bozuk yazımdan (UTF-8 BOM + kaçışlı triple-quote + her satır arasına boş satır) sadık biçimde onarıldı; API ve imzalar aynen korundu (line_chart, bar_chart, pie_chart, scatter_chart, fig_to_json). (2) fig_to_json artık belgelenmiş sözleşmesini karşılıyor: fig.to_dict() numpy ndarray döndürüp json.dumps TypeError veriyordu; plotly.io.to_json + json.loads ile gerçek JSON-serializable dict üretiliyor. (3) Kalıcı regresyon testi eklendi: tests/test_ui_charts.py — 9 test (kaynak kodlama sağlığı guard: BOM/NUL/compile/kaçışlı docstring; __all__ sözleşmesi; gerçek docstring; figür üretimi; dict girdi; color ile çoklu iz; JSON serileştirme; geçersiz kolon). KANIT: tests/test_ui_charts.py 9 passed; tests/test_ui_components.py ile birlikte 137 passed; tests/ --ignore=tests/test_destek.py 3283 passed 3 skipped (64.57s; öncesi 3274 -> +9 yeni test, regresyon yok); py_compile + taze import OK. Dosya sağlığı: 4795 bayt, CRLF, BOM yok, 0 NUL. Kilit: her iki dosya cline/BUG-CHART01-SYNTAX. Kapsam notu: modülü hiçbir yer import etmiyor (altyapı kullanılmaz durumda); admin_executive.py raw plotly + st.line_chart kullanıyor, entegrasyon ayrı görev. KR-1 revizyonu: kök neden tests/test_destek.py değil src/company_master/destek.py idi (UTF-16LE, 3814 NUL); kilo ikisini de 10:15-10:20 arasında düzeltti, test_destek artık koleksiyona giriyor (8 passed / 2 failed; fonksiyonel iş kilo tarafında sürüyor). KR-3 (yeni bulgu): src/company_master/schema/migrations/0006_normalize_compat.py UTF-16LE + 1069 NUL ve hiçbir görevde tanımlı değil (orphan).",
     "source": "ic",
     "from_agent": null,
-    "talimat": "TRİYAJ (roo): src/company_master/ui/charts/__init__.py satır 2'de kaçışlı uc-tırnak ifadeleri var ve dosya UTF-8 BOM'lu → 'SyntaxError: unexpected character after line continuation character'; py_compile ve import başarısız, yani line_chart/bar_chart/pie_chart/scatter_chart/fig_to_json kullanılamaz. PO-BACK-08 bu modülü import etmedi (doğrudan plotly + st.line_chart yedeği) → teslim etkilenmedi. Dosya kilitsiz; CHART-01 (cline, done) kalıntısı. Beklenen karar: CHART-01 revizyonu olarak ayrı görev açılsın; cline'a atanırsa düzeltir (kaçışlı uc-tırnakları gerçek docstring yap + BOM'suz UTF-8 kaydet + py_compile ve import testi). Kanıt raporu: data/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md (KR-2)."
+    "talimat": "TRİYAJ (roo): src/company_master/ui/charts/__init__.py satır 2'de kaçışlı uc-tırnak ifadeleri var ve dosya UTF-8 BOM'lu → 'SyntaxError: unexpected character after line continuation character'; py_compile ve import başarısız, yani line_chart/bar_chart/pie_chart/scatter_chart/fig_to_json kullanılamaz. PO-BACK-08 bu modülü import etmedi (doğrudan plotly + st.line_chart yedeği) → teslim etkilenmedi. Dosya kilitsiz; CHART-01 (cline, done) kalıntısı. Beklenen karar: CHART-01 revizyonu olarak ayrı görev açılsın; cline'a atanırsa düzeltir (kaçışlı uc-tırnakları gerçek docstring yap + BOM'suz UTF-8 kaydet + py_compile ve import testi). Kanıt raporu: data/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md (KR-2).",
+    "mod": "code"
   },
   {
     "task_id": "BUG-MIG0006-UTF8",
@@ -3277,7 +3629,8 @@
     "dosyalar": [],
     "not": "Teslim (roo): 0006_normalize_compat.py silindi (UTF-16+1069 NUL, git HEAD'de de bozuk, onarilamaz; migrate.py yalnizca .sql isler, hicbir yerden import edilmiyor -> orphan). Gercek migration 0006_nace_details.sql yerinde. git rm --cached + del. Dogrulama: dir 0006* -> yalnizca .sql",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "BUG-ENCODING-GUARD",
@@ -3297,7 +3650,8 @@
     "not": "Teslim (cline): KR-4 TAMAMLANDI. (1) scripts/kodlama_denetim.py (yeni): .py/.md/.json/.toml/.sql tarar; utf8_bom/utf16/nul/bos/compile raporlar; --duzelt yalnizca UTF-8 BOM strip eder (UTF-16/NUL/0-bayt'a dokunmaz); --tam-repo ile tum repo taranir (varsayilan kapsam: src/tests/web_dashboard/scripts; data/.kilo/backups/AI proje v1/workspace atlanir); cikis kodu ratchet'li: allowlist-disi ihlalde 1. (2) tests/test_kodlama_guard.py (yeni, 12 test): scanner birim testleri + ratchet guard (allowlist-disi BOM kirmizi; UTF-16/NUL/0-bayt her zaman kirmizi; compile ratchet). (3) data/kodlama_allowlist.json (yeni): bom:0 (bosaltildi), compile:3 — scripts/ altinda ONCEDEN bozuk 3 eski script (check_email_dist.py + scripts/scripts kopyasi, test_growth.py:74) — ayri BUG onerisi. (4) .github/workflows/ci.yml: Kodlama denetimi adimi + pytest --continue-on-collection-errors. (5) --duzelt ile 90 dosyadan UTF-8 BOM strip edildi (85 .py + 4 .sql + scripts/README_TELEGRAM.md); yalnizca ilk 3 bayt silindi, icerik degismedi; kilonun destek.py/test_destek.py/admin_destek.py dosyalarina dokunulmadi (BOM listesinde degillerdi). Kapsam disi bilincli birakildi: V10/docs/system_prompt.md belgeleri + backups/.kilo yedek/worktree kopyalari (40 BOM'lu belge --tam-repo ile raporlanir). KANIT: guard 12 passed; guard+charts 21 passed; TAM REGRESYON ilk kez --ignore'suz: 3304 passed, 3 skipped, 1 failed (72.52s) — tek kirmizi tests/test_destek.py::test_durum_gecis_acik_inceleniyor = kilonun aktif PO-BACK-06 fonksiyonel isi (kapsam disi); koleksiyon hatasi YOK (KR-5 kapandi, 0006 silindi). 4 yeni/degisen dosya BOM'suz ve NUL'suz dogrulandi. CI notu: 3 eski script duzeltilince allowlist compile anahtari da bosaltilmali (ratchet asagi).",
     "source": "ic",
     "from_agent": null,
-    "not_": "[roo] BULGU NOTU: Kapsam disinda gordugun bug/hata/kodlama sorununu DUZELTME; data/orchestrator/BUG-ENCODING-GUARD_bulgular_<tarih>_cline.md dosyasina yaz ve roo ya tetik dusur. Kapsam disi dosyaya dokunmak teslim reddi sebebidir (kilit disiplini)."
+    "not_": "[roo] BULGU NOTU: Kapsam disinda gordugun bug/hata/kodlama sorununu DUZELTME; data/orchestrator/BUG-ENCODING-GUARD_bulgular_<tarih>_cline.md dosyasina yaz ve roo ya tetik dusur. Kapsam disi dosyaya dokunmak teslim reddi sebebidir (kilit disiplini).",
+    "mod": "code"
   },
   {
     "task_id": "CI-GATE-01",
@@ -3314,7 +3668,8 @@
     "not": "Teslim (cline): CI-GATE-01 TAMAMLANDI. .github/workflows/ci.yml test job: (1) 'Run tests with coverage' adimi artik TAM tests/ dizinini kossun (tests/company_master/ -> tests/); (2) --continue-on-collection-errors bayragi eklendi (tek bozuk modul butun suite'i kesemesin); (3) BUG-ENCODING-GUARD tesliminden gelen 'Kodlama denetimi (BOM / NUL / 0-bayt / UTF-16) - KR-4' adimi tests'ten ONCE calisir, ihlalde kirmizi (cikis kodu ratchet'li: allowlist-disi ihlalde 1; data/kodlama_allowlist.json bom:0/compile:3); (4) coverage esigi (80) ve --cov hedefleri (db/connection, etl/normalize, etl/pipeline, search/engine) DEGISMEDİ; matrix 3.10/3.11/3.12 aynen. KABIT (kabul kriterleri): (a) yml gecerli - python -c yaml.safe_load -> YML OK; (b) tests/orchestrator YESIL - 55 passed (2.05s); (c) tam regresyon 0 koleksiyon hatasi - BUG-ENCODING-GUARD tesliminde kanitlandi: 3304 passed, 3 skipped, 1 failed (72.52s; tek kirmizi tests/test_destek.py::test_durum_gecis_acik_inceleniyor = kilonun aktif PO-BACK-06 isi, kapsam disi). BULGU NOTU: kapsam disi duzeltme yapilmadi; goze carpan tek konu (bilinen) destek testinin kilo tarafindan yesile cekilmesi + scripts/ altindaki 3 eski bozuk script icin ayri BUG (compile allowlist kayitlari o duzeltmeyle bosaltilmali). CI notu: tam suite CI'da 3 Python surumunde kosacak; yerel sure 72s referans.",
     "source": "ic",
     "from_agent": null,
-    "not_": "Zincir: BUG-ENCODING-GUARD teslim edilince tetiklenir. [roo 2026-09-15] CI-GATE-01 (KR-4/#7 onerin): .github/workflows/ci.yml 'Run tests' adimi tests/company_master/ yerine tum tests/ dizinini `--continue-on-collection-errors` ile kossun; ayrica BUG-ENCODING-GUARD'da urettigin `python scripts/kodlama_denetim.py` CI'da ayri bir adim olarak test oncesine eklensin (basarisizsa kirmizi). Coverage esigi ve cov hedefleri degismesin. Kabul: yml gecerli (python -c \"import yaml;yaml.safe_load(open('.github/workflows/ci.yml'))\"), tests/orchestrator yesil, tam regresyon 0 koleksiyon hatasi. BULGU NOTU: Kapsam disinda gordugun bug/hata/kodlama sorununu DUZELTME; data/orchestrator/<TASK_ID>_bulgular_<tarih>_cline.md'ye yaz ve roo'ya tetik dusur."
+    "not_": "Zincir: BUG-ENCODING-GUARD teslim edilince tetiklenir. [roo 2026-09-15] CI-GATE-01 (KR-4/#7 onerin): .github/workflows/ci.yml 'Run tests' adimi tests/company_master/ yerine tum tests/ dizinini `--continue-on-collection-errors` ile kossun; ayrica BUG-ENCODING-GUARD'da urettigin `python scripts/kodlama_denetim.py` CI'da ayri bir adim olarak test oncesine eklensin (basarisizsa kirmizi). Coverage esigi ve cov hedefleri degismesin. Kabul: yml gecerli (python -c \"import yaml;yaml.safe_load(open('.github/workflows/ci.yml'))\"), tests/orchestrator yesil, tam regresyon 0 koleksiyon hatasi. BULGU NOTU: Kapsam disinda gordugun bug/hata/kodlama sorununu DUZELTME; data/orchestrator/<TASK_ID>_bulgular_<tarih>_cline.md'ye yaz ve roo'ya tetik dusur.",
+    "mod": "code"
   },
   {
     "task_id": "CHART-INT-01",
@@ -3331,7 +3686,8 @@
     "not": "Teslim (kilo): CHART-INT-01 tamamlandi: admin_executive.py icindeki raw plotly (go.Scatter + st.plotly_chart) ve st.line_chart fallback kodu kaldirildi; yerine company_master.ui.charts.line_chart kullanildi. admin_executive.py PageHeader/Section kalitesi korundu. tests/test_ui_charts.py 9/9, test_dashboard_nav.py executive pass, test_sayfa_iskeleti.py admin_executive 4/4 pass, test_sekme_kapsama.py render_executive_tab pass. BOM/NUL yok.",
     "source": "ic",
     "from_agent": null,
-    "not_": "Zincir: PO-BACK-06 teslim edilince tetiklenir. [roo 2026-09-15] CHART-INT-01: src/company_master/ui/charts/__init__.py (line/bar/pie/scatter, fig_to_json) hicbir ekran tarafindan kullanilmiyor. web_dashboard/tabs/admin_executive.py icindeki ham plotly/st.line_chart cizimlerini bu modulle degistir; API/veri sozlesmesi ayni kalsin, tests/test_ui_charts.py bozulmasin. Kabul: tests/test_ui_charts.py + tests/test_dashboard_nav.py + tests/test_sayfa_iskeleti.py yesil, tam regresyon 0 koleksiyon hatasi, BOM/NUL yok (Out-File YASAK; python open(..., encoding='utf-8')). Teslim cline capraz incelemesine gider."
+    "not_": "Zincir: PO-BACK-06 teslim edilince tetiklenir. [roo 2026-09-15] CHART-INT-01: src/company_master/ui/charts/__init__.py (line/bar/pie/scatter, fig_to_json) hicbir ekran tarafindan kullanilmiyor. web_dashboard/tabs/admin_executive.py icindeki ham plotly/st.line_chart cizimlerini bu modulle degistir; API/veri sozlesmesi ayni kalsin, tests/test_ui_charts.py bozulmasin. Kabul: tests/test_ui_charts.py + tests/test_dashboard_nav.py + tests/test_sayfa_iskeleti.py yesil, tam regresyon 0 koleksiyon hatasi, BOM/NUL yok (Out-File YASAK; python open(..., encoding='utf-8')). Teslim cline capraz incelemesine gider.",
+    "mod": "code"
   },
   {
     "task_id": "REPO-HIJYEN-01",
@@ -3348,7 +3704,8 @@
     "not": "",
     "source": "ic",
     "from_agent": null,
-    "not_": "ORK 2026-09-15: 34 kök dosya data/_arsiv_kok/ (git mv), test_import.py scripts/; dış dizin 14 öğe içeri taşındı; .gitignore desenleri; 19 şablon görev arşivlendi"
+    "not_": "ORK 2026-09-15: 34 kök dosya data/_arsiv_kok/ (git mv), test_import.py scripts/; dış dizin 14 öğe içeri taşındı; .gitignore desenleri; 19 şablon görev arşivlendi",
+    "mod": "code"
   },
   {
     "task_id": "I18N-SES-02",
@@ -3365,7 +3722,8 @@
     ],
     "not": "Teslim (kilo): I18N-SES-02 tamamlandi: _gelen_marka_sesi_2026-09-15.json (105 tr + 105 en anahtar) ses.json ile karsilastirildi — tum anahtarlar zaten mevcut, yeni birlestirme gerekmedi, mukerrer bulunamadi. Kaynak dosya silindi. tests -k i18n: 1426 yesil.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "BUG-SCRIPTS-COMPILE-01",
@@ -3384,7 +3742,8 @@
     ],
     "not": "Teslim (cline): SCRIPTS HIJYENI TAMAMLANDI. KARARLAR: (1) scripts/check_email_dist.py -> DUZELTILDI (silinmedi): satir 11'deki hatali kacisli SELECT satiri tek satirlik fix ile temizlendi; 14 satirlik email dagilim DB denetim sorgusu yeniden kullanilabilir oldugu icin duzeltme tercih edildi. (2) scripts/test_growth.py -> git rm (silindi): dosya sonunda CONTENT_PLACEHOLDER yapismasiyla kalici bozuk; growth sinyal sozlugunun eski deneme kopyasi; gercek modul job_intelligence pipeline'inda yasiyor; kod referansi YOK (git grep temiz). (3) scripts/scripts/ mukerrer klasor (37 dosya) -> git rm -r: 17 dosya birebir ayni; 20 farkli dosyanin farki YALNIZCA satir sonu (alt kopya CRLF vs kok LF) — satir sonlari normalize edilince icerik yuzde 100 esit (check_aso, check_email_dist, fix_and_clean_null_source_records HEAD-vs-kok dahil 9 dosya ornek dogrulama); kokteki LF surumleri korundu, islevsel fark kaybolmadi. (4) data/kodlama_allowlist.json compile listesi bosaltildi -> bom:0 compile:0 (ratchet tam sikilikte). KABUL: python scripts/kodlama_denetim.py -> temiz: kodlama ihlali yok, EXIT 0 ve IHlal 0; referans kontrolu: git grep ile py/yml/toml/cfg/ini icinde scripts/scripts ve scripts/test_growth referansi YOK; TEST: pytest tests/test_kodlama_guard.py tests/orchestrator -q -> 67 passed (4.04s). STAGED: 38 dosya silindi (1797 satir, git rm), + check_email_dist.py fix ve allowlist guncellemesi calisma agacinda. Not: talimatta 38 dosya denmisti; fiilen scripts/scripts altinda 37 dosya vardi (silinen toplam 37+test_growth=38).",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "REVIEW-PO-BACK-06",
@@ -3400,7 +3759,8 @@
     ],
     "not": "Teslim (cline): PO-BACK-06 CAPRAZ INCELEME TAMAMLANDI — ONAY ONERISI. Rapor: data/orchestrator/REVIEW-PO-BACK-06_rapor_20260915_cline.md. KANIT: tests/test_destek.py 10 passed (0.34s, tam yesil); tests/test_sayfa_iskeleti.py 76 passed; kodlama_denetim EXIT 0 (destek dosyalarinda BOM/UTF-16/NUL yok). KONTROLLER: (1) durum makinesi dogru, gecersiz gecis ValueError + testi mevcut; (2) frozen dataclass immutability korunuyor (__post_init__ sadece kurulum damgasi); (3) JSON depo UTF-8 kullaniyor AMA atomik yazma YOK + kilit YOK (orta bulgu B-1: lost-update/yarim dosya riski); corrupt JSON sessizce {} donup ilk yazmada tum veriyi eziyor (orta bulgu B-2); (4) admin_destek.py PageHeader/Section/SectionNav kalibine uyuyor, kimlik/anchor tutarli; (5) hardcoded secret yok; KVKK notu: serbest metin duz dosyada + st.markdown'a kullanici metni (dusuk bulgular D-3/D-4). Diger dusuk bulgular: durum_gecis icinde time.sleep(0.003) koku (D-1), testlerin gercek depoyu kullanmasi tmp_path yok (D-2). Not: talimattaki src/company_master/destek/ paketi fiilen TEK DOSYA destek.py. Oneri: B-1+B-2 icin takip gorevi (atomik yazim + dosya kilidi + corrupt-guvenli yukleme); bloke edici degil.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "UI-SIDEBAR-02",
@@ -3417,7 +3777,8 @@
     "not": "Teslim (kilo): UI-SIDEBAR-02 tamamlandı: Sidebar'a marka blogu bölümü eklendi (placeholder ile), mevcut logo korunur, kompakt tooltip funcionalitesi zaten uygulanmıştı. app.py dosyasının render_sidebar fonksiyonu değiştirildi.",
     "source": "ic",
     "from_agent": null,
-    "not_": "MVP-ADMIN: sahip emri ile ertelendi (once 4 ekran canliya cikacak: ana_kontrol, kpi, karar_defteri, kullanicilar)"
+    "not_": "MVP-ADMIN: sahip emri ile ertelendi (once 4 ekran canliya cikacak: ana_kontrol, kpi, karar_defteri, kullanicilar)",
+    "mod": "code"
   },
   {
     "task_id": "UI-TOPBAR-02",
@@ -3434,7 +3795,8 @@
     "not": "Teslim (kilo): UI-TOPBAR-02 tamamlandı: Topbar'da arama sağ üstte korunur, breadcrumb eklendi (Anasayfa > grup > bölüm), grup etiketi dinamik hale getirildi (çevrimden 'İş · Yönetim' yerine tanim.grup), mevcut search kutusu sağ üstte kaldı. app.py dosyasının render_topbar fonksiyonu değiştirildi.",
     "source": "ic",
     "from_agent": null,
-    "not_": "MVP-ADMIN: sahip emri ile ertelendi (once 4 ekran canliya cikacak: ana_kontrol, kpi, karar_defteri, kullanicilar)"
+    "not_": "MVP-ADMIN: sahip emri ile ertelendi (once 4 ekran canliya cikacak: ana_kontrol, kpi, karar_defteri, kullanicilar)",
+    "mod": "code"
   },
   {
     "task_id": "REV-I18N-SES-02",
@@ -3450,7 +3812,8 @@
     ],
     "not": "Teslim (cline): REV-I18N-SES-02 INCELEME TAMAMLANDI — ONAY ONERISI. Rapor: data/orchestrator/REV-I18N-SES-02_bulgular_2026-09-15_cline.md (UTF-8, BOM'suz). KANITLAR: (1) git log — ses.json son commit 661f21c (00:01 otomatik), ui.json b6d8e7a (12:01 otomatik); kilonun calisma penceresinden (13:03+) ONCE -> kilo iki dosyaya dokunmamis, birlestirme-gerekmez karariyla tutarli. (2) Silinen kaynak dosya git HEAD'den cekildi: yapisi tr:105 + en:105; anahtar kumesi farki 0 — kaynak-TR anahtarlarinin TAMAMI ses.json'da mevcut (105/105, eksik 0 fazladan 0); kilonun iddiasi dogru. (3) tr/en parite: kaynak kumeleri birebir esit; ses.json her deger {tr,en} yapisinda, yapi-hatasi 0, bos deger 0 — eksik en YOK. (4) Deger eslesmesi: en 105/105; tr 104/105 — tek fark odin_runes_aligned: ses.json'daki Sistem parametreleri hizalandi (dogru yazim) korunmus, kaynaktaki parameters yazim hatasi alinmamis -> dogru tercih, veri kaybi degil iyilestirme. (5) pytest tests -k i18n -q -> 1426 passed; kodlama_denetim EXIT 0. NOT: kaynak dosyanin silinmesi calisma agacinda (D), commit'lenmedi — sonraki commit ile temizlenir (bloke edici degil). ONAY oneriyoruz.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "AUDIT-ENC-02",
@@ -3466,7 +3829,8 @@
     ],
     "not": "Teslim (cline): AUDIT-ENC-02 REPO GENELI DENETIM TAMAMLANDI. Rapor: data/orchestrator/AUDIT-ENC-02_bulgular_2026-09-15_cline.md (UTF-8 BOM'suz, NUL 0). SONUC 1 KAPSAM ICI TEMIZ: kodlama_denetim.py EXIT 0 (bom/utf16/nul/bos/compile hepsi 0); allowlist tamamen bos (bom:0 compile:0) ratchet tam sikilikte. SONUC 2 KAPSAM DISI TAM-REPO (EXIT 1 beklendik): utf8_bom 71, compile 5, utf16 1, nul 2, bos 6 — TAMAMI AI proje v1 agaci + backups + kok kalintilari (web_app.py, locustfile.py, system_prompt.md vb.); uretim kodunda 0 ihlal; aksiyon onerilmez. SONUC 3 CRLF ANALIZI: autocrlf=true + .gitattributes eol=lf aktif; working copy 379/565 .py CRLF ama git'e giriste LF'e normalize ediliyor (861 i/lf kaniti) — CRLF'in ihlal olarak eklenmemesi DOGRU karar, eklenseydi 379 yanlis pozitif uretilirdi. Tek gercek bulgu: depoya CRLF girmis 35 dosya (i/crlf; cogunluk data_quality_toolkit + 2 init + nace json) — tek seferlik git add --renormalize . onerisi (ayri hijyen commit, roo karari). SONUC 4 KAPSAM KONTROLU: mevcut kapsam (src/tests/web_dashboard/scripts + agir dizin atlama) dogru ve yeterli; oneriler: (a) CRLF ihlal eklenmesin, (b) renormalize, (c) bilgi: AI proje v1 agaci repo'da kaldikca --tam-repo EXIT 1 verecek (beklenen). NOT: PowerShell yonlendirme tuzaigi (UTF-16 cikti) tekrar teyit edildi, gecici dosya silindi; rapor editor ile UTF-8 yazildi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "REV-UI-SIDEBAR-02",
@@ -3484,7 +3848,8 @@
     "source": "ic",
     "from_agent": null,
     "not_": "MVP-ADMIN: sahip emri ile ertelendi (once 4 ekran canliya cikacak: ana_kontrol, kpi, karar_defteri, kullanicilar)",
-    "blok_notu": "Blokaj kaldirildi 2026-09-17: tam suit 3567 passed / 0 failed (TEST-ISO-02 cline)."
+    "blok_notu": "Blokaj kaldirildi 2026-09-17: tam suit 3567 passed / 0 failed (TEST-ISO-02 cline).",
+    "mod": "code"
   },
   {
     "task_id": "MVP-KD-01",
@@ -3501,7 +3866,8 @@
     ],
     "not": "Teslim (kilo): MVP-KD-01 revize: (1) RET-1 duzeltildi — karar listesi ts desc siralama ile en yeni ustte; (2) B-1 duzeltildi — P7-46 testi _form_degeri bolgesine sinirlandi, Karar Defteri filtre selectboxu meşru. tests/test_admin_panel_tab.py + test_user_settings.py + test_sayfa_iskeleti.py + test_dashboard_nav.py toplam 242 yesil, 0 kirmizi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "MVP-KUL-01",
@@ -3518,7 +3884,8 @@
     ],
     "not": "Teslim (kilo): MVP-KUL-01 tamamlandi: admin_extras.py render_user_management PageHeader('Kullanici Yonetimi', ust_etiket='Is - Yonetim', ikon='👥') + onay bekleyenler satir satir Onayla butonu -> POST /api/admin/approve (tier=terminal), son onaylılar dataframe, kredi formu -> POST /api/admin/credit, token yoksa warning (fail-closed). test_admin_extras_kullanici.py 6 yeni test, test_admin_extras.py guncellendi, test_sayfa_iskeleti.py yesil, kodlama_denetim temiz.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "REV-MVP-KD-01",
@@ -3532,7 +3899,8 @@
     "dosyalar": [],
     "not": "Teslim (cline): REV-MVP-KD-01 INCELEME TAMAMLANDI — DUZELTME GEREKLI (tek madde). Rapor: data/orchestrator/REV-MVP-KD-01_rapor_20260915_cline.md (UTF-8 BOM'suz). OLUMLU: plan maddeleri (plans/MVP_ADMIN_minimum_canli.md) birebir uygulanmis — PageHeader+giris, 3 filtre (Karar Veren selectbox Hepsi+benzersiz decider, Etiket multiselect, Ara), son 50 en yeni ustte st.dataframe, yeni karar formu -> log_decision (imza uyumu teyitli, decider=aktif_kullanici, success+rerun), bos durum st.info; bonus: zorunlu alan kontrolu. KANIT: tests/test_admin_panel_tab.py + test_sayfa_iskeleti.py 83 passed (6 admin_panel testi); kodlama_denetim EXIT 0; streamlit run app.py headless HTTP 200 (app coksuz aciliyor; sekme-ici etkilesim statik inceleme+testlerle dogrulandi, ortam kisiti raporda notlu); tam regresyon: 1 failed, 3317 passed, 3 skipped, koleksiyon hatasi 0. BLOKE EDICI BULGU B-1: kilonun ekledigi Karar Veren selectbox (plan maddesi 2, meşru ve zorunlu) P7-46 kaynak-kural testini kirdi — tests/test_user_settings.py satir 313 dosya-geneli st.selectbox( <=1 kurali; sayi 2 oldu. ONERILEN YAMA (raporda tam hali): sayim _form_degeri..render_ayarlar_tab bolgesiyle sinirlanmali; P7-46 niyeti korunur, MVP-KD-01 filtresine izin verilir. Yama sonrasi tam regresyon yesile döner, diger kapilar yeşil oldugundan yeniden inceleme gerektirmez. BILGI: decider fallback misafir (plan admin demisti, P7-46 ile tutarli — roo notu); scripts.decision_log namespace importu calisiyor. KAPSAM DISI bug yok (bulgular dosyasi acilmadi). NOT: MVP-KUL-01 kilo hala plan durumunda; REV-MVP-KUL-01 incelemesi teslim sonrasi yapilacak.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "REV-MVP-KUL-01",
@@ -3546,7 +3914,8 @@
     "dosyalar": [],
     "not": "roo: cline raporu gelmedi; roo dogrudan inceledi (kod+12 test yesil), hiz icin kapatildi",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "P7-6b",
@@ -3563,7 +3932,8 @@
     ],
     "not": "Teslim (kilo): P7-6b tamamlandı: Kariyer.net scraper sağdonkanlılaştırıldı. OUTPUT_PATH düzeltildi (Path(__file__).resolve().parents[3] kullanılarak), robots.txt kontrolü eklendi, rate limiting uygulandı (RATE_LIMIT_SECONDS kullanılarak), kalıcı dedup eklendi (OUTPUT_PATH.exists() kontrolü ile). src/company_master/scrapers/kariyernet.py ve tests/test_kariyernet.py dosyaları değiştirildi. Testler geçiyor.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "REV-MVP-ADMIN-01",
@@ -3579,7 +3949,8 @@
     ],
     "not": "Teslim (cline): bulgu K:1/Y:0/O:1/D:2; rapor data/orchestrator/REV-MVP-ADMIN-01_bulgular_20260915_cline.md; 103 passed; kodlama temiz",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "HIJYEN-01",
@@ -3595,7 +3966,8 @@
     ],
     "not": "Teslim (cline): silindi: data/_tmp/mvp_pano_duzenle.py (izlenmeyen), scripts/_tmp_webapp_a-k.txt 11 dosya (izlenmeyen), scripts/_tmp/ 10 dosya (izlenmeyen); izlenen korumali silme yok; ust dizin basibos dosya yok",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ORCH-05b",
@@ -3612,7 +3984,8 @@
     ],
     "not": "gorev_guncelle ORCH-05 blogu done/blocked icine tasindi; +2 regresyon testi; test_duzen 2 test ORCH-05b uyumlu guncellendi; 207 passed",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "MVP-KUL-02",
@@ -3629,7 +4002,8 @@
     ],
     "not": "Teslim (kilo): MVP-KUL-02 tamamlandı: Kullanıcı onayında tier secici eklendi. web_dashboard/tabs/admin_extras.py dosyasının render_user_management fonksiyonu değiştirildi; onay sekmesinde tier seçici eklendi, iki sütun layoutu korunarak test uyumluluğu sağlandı. Türkçe karakterler UTF-8 olarak kaydedildi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ENC-ADMIN-PANEL-01",
@@ -3645,7 +4019,8 @@
     ],
     "not": "admin_panel.py 3 satir mojibake onarildi (151,251,255); scripts/mojibake_onar.py araci eklendi; 168 passed 1 skipped; kodlama_denetim temiz; streamlit restart ok",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "FIX-YONETIM-01",
@@ -3667,7 +4042,8 @@
     ],
     "not": "to_excel BytesIO fix + openpyxl requirements + 6 ekran sekme rehberi; 177 test yesil; commit f63d0f0",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "UI-REFRESH-01",
@@ -3684,7 +4060,8 @@
     ],
     "not": "admin_auto_refresh.py kompakt: secondary buton, caption durum, st.fragment(run_every) ile 1.62 uyumu, tekrar eden Otomasyon Ozeti kaldirildi; tests/test_admin_auto_refresh.py 8 test; 98 passed 1 skipped; streamlit restart PID 34996",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-ENV-01",
@@ -3702,7 +4079,8 @@
     ],
     "not": "yassuacohen@gmail.com sifresi sifirlandi, .env ADMIN_EMAIL/ADMIN_PASSWORD; API login 200; app.py yabanci blog blogu (BOM+mojibake) git checkout ile geri alindi",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-RESET-01",
@@ -3720,7 +4098,8 @@
     ],
     "not": "Devredildi: kilo -> roo (Sahip geri bildirimi: giris/cikis mesaji + oturum ici sifre degistirme hemen lazim; roo yapar, e-posta dogrulamali kisim sonra kilo'ya geri devredilir)",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "UI-CHART-01",
@@ -3740,7 +4119,8 @@
     ],
     "not": "Teslim (roo): roo devraldi ve uyguladi (commit 928ef8b). Dosyalar: docs/plans/UI-CHART-01_arastirma.md, web_dashboard/charts.py (kpi_karti/donut/alan_grafigi + *_fig cekirdek, tema st.get_option, plotly fallback), web_dashboard/tabs/ana_kontrol.py (8 st.metric -> kpi_karti, webhook bar -> donut), web_dashboard/tabs/admin_kpi.py (_render_kpi_card delege, trend/kaynak/api -> alan_grafigi/donut), tests/test_charts.py (27 test, Streamlit'siz). Hedefli: 48 passed. Tam regresyon: 3406 passed, 2 failed (kapsam disi: test_api_integration rota envanteri /api/admin/change-password ADMIN-RESET-01; test_guard_bom_ratchet tests/test_kariyernet.py P7-6b), 0 koleksiyon hatasi. UTF-8 BOM/NUL yok. streamlit_restart ok. Sabit px yok; sparkline icin /api/kpi/history takip gorevi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "REV-ADMIN-ENV-01",
@@ -3756,7 +4136,8 @@
     ],
     "not": "Teslim (cline): ONAY 2 kosul: rapor REV-ADMIN-ENV-01_bulgular_20260915_cline.md. B-1 prod kapisi yok HUGINN_ENV onerisi takip gorev. B-2 pre-commit-config UTF-16 LE BOM COMMITLI GUARD-ENC-01 duzeltecek. Hash birebir 120000 capraz test yesil 6 passed. app.py temiz parse OK.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "GUARD-ENC-01",
@@ -3774,7 +4155,8 @@
     ],
     "not": "Teslim (cline): TESLIM. kodlama guard'i tam devrede: (1) test dosyasi gorev tanimina hizalandi: git mv test_kodlama_guard.py -> test_kodlama_denetim.py (12 passed, tek dokuman referansi guncellendi). (2) .pre-commit-config.yaml'a local hook eklendi: kodlama_denetim.py --kapsam git (always_run); dosya UTF-16 LE+BOM'dan UTF-8'e cevrildi (kok-cause onarimi), PyYAML dogrulamasi OK - pre-commit paketi ortamda kurulu degil, ilk kullanan 'pre-commit install' calistirmali. (3) --kapsam git dogrulandi: calisma agacinda 24 dosya temiz, exit 0. (4) Ratchet muafiyetsiz yeşile cekildi: test_kariyernet.py BOM kaldirildi; company_career.py 22 satir mojibake mojibake_onar.py ile onarildi (is mantigi dokunulmadi, job_intelligence 36 passed); pii_scanner L75 regex + test_admin_export_excel L80 + mojibake_onar L5/L23 \\uXXXX kacis formuna cevrildi - davranis kanitli (desen karakter kumesi birebir esit, 7 ornek ayni eslesme; MOJIBAKE_RX 5 mojibake yakalar 4 temiz ornege dokunmaz). Varsayilan tarama: temiz, exit 0. Rapor: data/orchestrator/GUARD-ENC-01_teslim_2026-09-16_cline.md",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "UI-MODAL-01",
@@ -3790,7 +4172,8 @@
     ],
     "not": "Teslim (cline): Dokuman yazildi: docs/UI_MODAL_CHART_ARASTIRMA_2026-09-15.md (6472 bayt, BOM/NUL yok). st.dialog birincil, popover/expander tamamlayici, echarts YOK. 5 modal senaryosu + 5 KPI chart onerisi + P1/P2/P3 tablo. charts.py ve web_dashboard DEGIL. Bulgu notu UI-MODAL-01_bulgular dosyasinda (.pyX suphesi, duzeltme yok).",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "REV-UI-CHART-01",
@@ -3804,7 +4187,8 @@
     "dosyalar": [],
     "not": "Teslim (cline): ONAY. roo teslimi (928ef8b) incelendi: 5 dosya byte-duzey UTF-8 temiz (BOM/NUL/mojibake yok, parse OK); XSS - kpi_karti_html/donut/veri_akisi tum girisler html.escape; tema aktif_tema() st.context.theme.type->theme.base, token SSOT; plotly ImportError fallback st.bar_chart/area_chart; test_charts 46 passed (gercek Streamlit yok, mock dogru), hedefli 55 passed; render_kpi_tab erken return ve _render_kpi_card imzasi korundu. Kapsam disi notlar raporda (B1 oluk kod _get_metric_color, B2 sparkline varsayilan anahtar, B3 px.bar alan doluluk, B4 webhook placeholder). Rapor: data/orchestrator/REV-UI-CHART-01_bulgular_2026-09-16_cline.md",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "DOC-HIBRIT-01",
@@ -3820,7 +4204,8 @@
     ],
     "not": "Teslim (kilo): BÖLÜM 4 okundu; otomatik başlama yok, ECharts onay bekliyor. Dosya: C:\\Huginn Data Projesi\\Huginn Data Insights\\docs\\plans\\UI-CHART-01_hibrit_gecis_plani.md (1615 byte, UTF-8 BOM'suz, NUL yok). Kod dosyasına dokunulmadı. Streamlit restart gerekmez. Mutlak yol dogrulandi: dir çıktisi: 1615 byte.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "NAV-FIX-01",
@@ -3838,7 +4223,8 @@
     ],
     "not": "Teslim (kilo): BÖLÜM 4 okundu; kapsam 4 madde; tooltip/IA'ya dokunulmadı. Sayı: 3480 passed, 5 failed (önceden vardı, NAV-FIX-01 ile ilgili değil), 3 skipped. NAV-FIX-01'e özgü testler: test_dashboard_nav.py (86), test_app_menu_rol.py (86), test_web_dashboard_tabs.py (9), test_app_nav_tek_tik.py (3) = 184 test. app.py L68 page_icon 🦅 düzeltildi, render_sidebar selectbox on_change eklendi, render_topbar sorgu temizleme + st.session_state[ARAMA_KEY]='' eklendi. admin_panel.py L250-256 mojibake yok. kodlama_denetim: NAV-FIX-01 dosyaları için 0 bulgu. Tam regresyon: python -m pytest tests/ -q --continue-on-collection-errors. Mutlak yol: C:\\Huginn Data Projesi\\Huginn Data Insights\\app.py",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "REV-NAV-FIX-01",
@@ -3852,7 +4238,8 @@
     "dosyalar": [],
     "not": "Teslim (cline): ONAY. kilo teslimi (90d9bc7) incelendi: page_icon 🦅 duzeltildi; tek tik gecis selectbox on_change -> bolum_sec (session_state kisiti callback'e tasinarak dogru); arama ARAMA_KEY temizleme exception'siz; NAV-FIX-03 tooltip varsayilan KAPALI (IPUCU_KEY) - sahip bulgusuyla uyumlu; admin_panel L250-256 temiz; app.py/admin_panel/2 test byte-duzey UTF-8 temiz, parse OK; hedefli nav testleri 98 passed 1 skipped. Not: commit icerisinde NAV-FIX-03 + D-33 (gorev_kutusu/gorev_at ajan normalize, testli) sozlesme disi ama zararsiz; 3 untracked plan dokumani kilo'ya hatirlatildi. Rapor: data/orchestrator/REV-NAV-FIX-01_bulgular_2026-09-16_cline.md",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "NAV-FIX-02",
@@ -3869,7 +4256,8 @@
     ],
     "not": "Teslim (kilo): BÖLÜM 4 okundu; kapsam 4 madde; tooltip/IA'ya dokunulmadı. _nav_ipucu() her durumda None; render_topbar toggle açıkken caption; toggle etiketi değişti; help= kaldırıldı. Testler: test_dashboard_nav.py (86 passed), test_app_menu_rol.py (86 passed), test_app_nav_tek_tik.py (5 passed, 2 yeni). Streamlit restart başarılı. Mutlak yol: app.py",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "AUTH-GATE-01",
@@ -3889,7 +4277,8 @@
     ],
     "not": "Teslim (kilo): POST /api/admin/login, /api/admin/reset-request, /api/admin/reset-confirm eklendi. Modal kapatilamaz (dismissible=False). admin_auth.py POST kullanimi. _auth_modal_icerik (giris/misafir/sifre-unuttum). tests/test_auth_gate.py (6). 199 passed, 1 skipped. Mutlak yol: web_app.py, app.py, admin_auth.py, modal.py",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "NAV-IA-01",
@@ -3907,7 +4296,8 @@
     ],
     "not": "Teslim (kilo): web_dashboard/tabs/__init__.py: TabTanimi.ust/sira eklendi, 4 yeni üst sayfa (musteri_yonetimi/proje_yonetimi/veri_kalite/musteri_onizleme), ESKI_URL dict, ust_sayfalar/alt_sekmeler/eski_url_yonlendirme/yenile yardımcıları, tab_url_getir ESKI_URL fallback; app.py: render_sidebar 6 üst sayfa + alt sekmeler (gruplar→ust_sayfalar); tests/test_dashboard_nav.py: sayı 28→32, 9 yeni NAV-IA-01 testi. 3512 passed, 2 skipped.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "NAV-IA-02",
@@ -3925,7 +4315,8 @@
     ],
     "not": "Teslim (kilo): web_dashboard/tabs/musteri_yonetimi.py: yeni (6 alt sekme: Kullanıcılar&Onay, Paket&Kredi, Giriş Etkinliği, Aramalar, Destek, Dışa Aktar), PageHeader+Section(ADMIN-UI-10), Section kullanılır, subheader yok, tier TIER_SECIMLERI'den geliyor; admin_extras.py: K-1 fix — tiers = TIER_SECIMLERI (modül seviyesi sabit liste); tests/test_musteri_yonetimi.py: 3 yeni test (tier JSON, render, 6 sekme). 3522 passed, 2 skipped.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "TOK-01",
@@ -3945,7 +4336,8 @@
     ],
     "not": "Teslim (cline): TAMAMLANDI. Ajan kural dosyalari token sikistirma (12K->6K): (1) CLAUDE.md cift icerik (Wiki/Kural/Operations/Demir bloklari iki kez) temizlendi - ogleden sonra dosya sahibi tarafindan kural-7 uyumlu HTML notuyla yapilmis gözlendi; (2) kalan tek sisginlik FastAPI Expert bolumu (~1.9K, Ingilizce) docs/AJAN_DETAY.md S21'e tasindi, CLAUDE.md'de yonlendirme satiri birakti (icerik kaybi yok); (3) AJAN_DETAY.md untracked olarak hazir (21 bolum: rotasyon/gorev emri/kilit/subagent/ORCH-08/rol profilleri/harici ajan/V9-SSOT/erisim matrisi/marka terminolojisi/docker/vpn/TOK-01 tam metinler/FastAPI). Olcum: CLAUDE.md 11492 -> 6676 byte (%42); AGENTS.md 3408 (cekirdek zaten kisaltilmis); toplam kural dosyalari ~44K, ayrinti AJAN_DETAY'da. Dogrulama: kodlama_denetim --kapsam git TEMIZ (exit 0); md dosyalarinda BOM/NUL/mojibake yok. Test: dokuman isi - kod islesi yok; guard taramasi gecer. Not: roo'ya tetik dusulemedi (CLAUDE.md kilidi cline'da, gorev Atamasi reddedildi) - bulgu bu gorev kapsaminda cözüldü; onay roo'da. Eksik/erteleme: CLAUDE 6.7K hedef 6K'nin ~0.7K uzerinde; daha fazla sikistirma Operations ornek cumlelerinin silinmesini gerektirir, kural-7 riskli - ileri tur onerisi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "REV-TOK-01",
@@ -3962,7 +4354,8 @@
     ],
     "not": "Teslim (roo): CLAUDE.md 6676B (-42%), AJAN_DETAY 21 bolum, FastAPI yonlendirme dogru; .roorules CLAUDE.md referansi yok; TOK-01 onaylandi",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "BRAND-KIMLIK-01",
@@ -3976,7 +4369,8 @@
     "dosyalar": [],
     "not": "Teslim (roo): Kit docs/brand/ altina alindi, Huggin->Huginn 14 dosya, typography+colorRoles+scope token, brand.md Colors, D-44/D-45",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "MARKA-REVIZE-01",
@@ -3990,7 +4384,8 @@
     "dosyalar": [],
     "not": "Teslim (cline): Dokuman katmani: 23 duzenleme/18 dosya. AGENTS.md+ANA_KURALLAR.md+AJAN_DETAY.md yasak listesi tam + docs/brand/ kopru; AJAN_DETAY 11 yeni 'Marka kiti D-44/D-45 kapsam ayrimi' alt bolumu; docs/brand icinde 13 bayat 'kok dizin' atfi duzeltildi; company.md+ai-rules.md D-45 kapsam notu; plans brief'lerine ARSIV notu. Kanit: findstr 'kok dizin' docs/brand=0 satir; pytest test_i18n+test_marka_denetim=1419 passed; kodlama denetimi dokunulan 18 dosyada temiz. Rapor: data/orchestrator/MARKA-REVIZE-01_rapor_2026-09-17_cline.md. Kapsam disi bulgu (marka_denetim.py muafiyet eksikligi, 140 yanlis pozitif): MARKA-REVIZE-01_bulgular_2026-09-17_cline.md",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ELESTIRI-01",
@@ -4006,7 +4401,8 @@
     ],
     "not": "Teslim (roo): S-09/S-10/D-07 COZULDU, D-31..D-34, Bolum 8 madde->gorev listesi",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "REV-BATCH-01",
@@ -4020,7 +4416,8 @@
     "dosyalar": [],
     "not": "Teslim (cline): TAMAMLANDI (yalniz oku modu; dosya degisikligi YOK). Commit feea800 capraz incelemesi: 12 bulgu — 4 YUKSEK: (Y-1) auth uclarinda rate-limit yok (login/reset/change-password sifresiz — brute-force acik); (Y-2) kullanici var/yok sizmasi (login 403/401 ayrimi, reset-request 404 'admin bulunamadi' — brief sarti 'ayrim yapilmamali' ihlal); (Y-3) _env_kimlik DEBUG=1 kapisi yok — .env sifresiyle form on-doluyor; (Y-4) misafir akisi admin_token='guest' yaziyor ve aktif_rol() admin_token doluysa ROL_ADMIN donuyor — misafir UI'da tam admin menusu goruyor (U-10 misafirde asilabilir). 5 ORTA: (O-1) ESKI_URL oluy — kimlik/yonetim halen SECTIONS'ta, tab_url_getir SECTIONS'i once buldugu icin yonlendirme calismiyor; (O-2) GET /api/admin/login kaldirilmis — scripts/admin_login_probe.py (D-24 araci) 405; (O-3) K-1 tier 'JSON konfigurasyon' iddiası sahte — sabit liste + yaniltici test adi; (O-4) auth testleri AST seviyesinde, davranissal kapama yok (roo notu dogrulandi); (O-5) plan v4 sidebar temizligi uygulanmamis (hizli gecis/kompakt/Marka Blogu duruyor). 3 DUSUK: (D-1) secrets.toml plaintext fallback + gitignore girisi yok; (D-2) kompakt mod her butonda yeni columns; (D-3) bekleyen_gorev etiketi tutarsiz; ayrica (D-4) change-password strip() notu. POZITIF: modal dismissible=not kapatilabilir dogru; reset token TTL 3600 + tek kullanim; sifre loglanmiyor; 6 ust sayfa + ust/alt rol filtresi erisebilir dogru; musteri_yonetimi 6 alt sekme + Section desen + grafik yalniz charts.py; test_admin_auth_login POST+JSON zorluyor. DOGRULAMA: hedefli 5 test dosyasi 183 passed (15.3sn); kodlama_denetim --kapsam git TEMIZ. Rapor: data/orchestrator/REV-BATCH-01_rapor_2026-09-16_cline.md (bulgu tablosu + sart-karsilastirma + defter onerileri M-07/M-08/S-11/S-12/D-31); kapsam disi bulgular: data/orchestrator/REV-BATCH-01_bulgular_2026-09-16_cline.md. Eksik/erteleme: duzeltme YOK (kilo BATCH-02 ayni dosyalarda) — Y-1..Y-4 icin BATCH-02 sonrasi ayri gorev; O-2/O-5 kilo teyidi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "NAV-IA-04",
@@ -4038,7 +4435,8 @@
     ],
     "not": "Teslim (kilo): st.popover hesap kartı, kimlik/yonetim kaldırildi, _env_kimlik DEBUG guard, render_yonetim_bilesik kaldırıldı, AUTH-GATE-01 modal",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "NAV-IA-03",
@@ -4056,7 +4454,8 @@
     ],
     "not": "Teslim (kilo): web_dashboard/tabs/proje_yonetimi.py: yeni (5 alt sekme: Karar Defteri, 9Router/Abrakadabra, Denetim İzi, Hata Yönetimi, DLQ; Karar Defteri üstte), PageHeader+Section(ADMIN-UI-10), subheader yok, mevcut render fonksiyonları çağrıldı; __init__.py: proje_yonetimi TabTanimi hazir=True + modul/fonksiyon; tests/test_proje_yonetimi.py: 3 yeni test. 3531+ passed, 2 skipped (flaky isolation).",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "DATA-LOG-01",
@@ -4075,7 +4474,8 @@
     ],
     "not": "Teslim (kilo): login_events+search_events tabloları, KVKK maskeleme, migration 0015, musteri_yonetimi sekmeleri gerçek veri; 17 test pass",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "SEC-AUTH-01",
@@ -4094,7 +4494,8 @@
     ],
     "not": "Teslim (cline): ASAMA A tamam: test_auth_gate.py 13 passed; __init__.py ESKI_URL yonlendirmesi duzeltildi (.gitignore .streamlit/secrets.toml eklendi); ASAMA B kilit bekliyor (web_app.py rate-limit + guest/admin, DATA-LOG-01 teslimi + roo onaji SONRASI).",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ROO-GAP-NAV-IA04",
@@ -4108,7 +4509,8 @@
     "dosyalar": [],
     "not": "Teslim (roo): 1) streamlit_restart PID 30312 OK; 2) test_web_dashboard_tabs 9 passed (izolasyon, ariza yok); 3) MUAF gerekceli onaylandi; 4) NAV-IA-04 done 642b92e, DATA-LOG-01 kilo aktif",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "MARKA-REVIZE-01B",
@@ -4127,7 +4529,8 @@
     ],
     "not": "Teslim (kilo): test_i18n Hatali_YAZIM Odin false positive düzeltildi; ODIN_MISSPELLING ayrı regex; marka_denetim.py KOK import düzeltildi; 1453 pass",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "TEST-ISO-02",
@@ -4145,7 +4548,8 @@
     ],
     "not": "Teslim (kilo): pytest.MonkeyPatch fix (cline), pytest-randomly req, conftest pano izolasyonu, test_web_dashboard_tabs 9 pass, 3567/4/0",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "VEC-TEST-01",
@@ -4164,7 +4568,8 @@
     ],
     "not": "Teslim (kilo): Vector test kapsami %90; 73 test passed; kodlama_denetim temiz; tam suit 3595/4/0",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "API-SPLIT-01",
@@ -4182,7 +4587,8 @@
     ],
     "not": "Teslim (kilo): KISMI: normalize.py cikarildi (574 satir), DASH_MASK_PII dusuru duzeltildi, web_app.py'de import eklendi. Kaldi: cache/security, webhooks, intelligence, companies, match, buyer, admin modulleri. Test: 3795 passed, 4 failed (kilit), 5 skipped.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "HANDOFF-TEMIZ-01",
@@ -4202,7 +4608,8 @@
     "not": "roo tamamladi 2026-09-17 07:01; rapor data/orchestrator/HANDOFF-TEMIZ-01_rapor_2026-09-17_roo.md; 7 passed; commit YOK",
     "source": "ic",
     "from_agent": null,
-    "not_": "D-49: cline zincirinden cikarildi, roo backlog (ADMIN-ROO-01 sonrasi)."
+    "not_": "D-49: cline zincirinden cikarildi, roo backlog (ADMIN-ROO-01 sonrasi).",
+    "mod": "code"
   },
   {
     "task_id": "TEST-CI-01",
@@ -4224,7 +4631,8 @@
     "not": "roo uyguladi+dogruladi 11 passed; rapor data/orchestrator/TEST-CI-01_rapor_2026-09-17_roo.md; commit sabah",
     "source": "ic",
     "from_agent": null,
-    "not_": "D-49: cline zincirinden cikarildi, roo backlog (ADMIN-ROO-01 sonrasi)."
+    "not_": "D-49: cline zincirinden cikarildi, roo backlog (ADMIN-ROO-01 sonrasi).",
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-AYAR-01",
@@ -4244,7 +4652,8 @@
     ],
     "not": "Teslim (kilo): 3718 test geçik; S-08 misafir salt-okunur; K-04 auto-refresh şemadan; kvkk_maske_acik; 10 aciklama henuzuygulanmıyor; allowlist 4 yeni anahtar",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "UI-MIMARI-02",
@@ -4263,7 +4672,8 @@
     "not": "roo onayladi - teslim kaydi mevcut",
     "source": "ic",
     "from_agent": null,
-    "tamamlayan": "kilo"
+    "tamamlayan": "kilo",
+    "mod": "code"
   },
   {
     "task_id": "KPI-HIST-01",
@@ -4282,7 +4692,8 @@
     "source": "ic",
     "from_agent": null,
     "tamamlayan": "kilo",
-    "not_": "roo: gec handoff kaydi eklendi (ORCH-08 surec kusuru duzeltmesi)"
+    "not_": "roo: gec handoff kaydi eklendi (ORCH-08 surec kusuru duzeltmesi)",
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-KPI-KART-01",
@@ -4318,7 +4729,8 @@
     ],
     "not": "Teslim (kilo): Teslim: 6 sekmede 37 st.metric → kpi_karti (maliyet/kalite/sistem/uyari/guvenlik). 2 test dosyası güncellendi + 1 yeni test (24 test). admin_quality.py BOM+mojibake düzeltildi. Test: 3826 passed, 4 pre-existing failed, 5 skipped. Rapor: data/orchestrator/ADMIN-KPI-KART-01_rapor_2026-09-17_kilo.md",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-ROO-01",
@@ -4333,7 +4745,8 @@
     "not": "A-E tamam; 294 passed; kodlama_denetim kapsam temiz; rapor data/orchestrator/ADMIN-ROO-01_rapor_2026-09-17_roo.md; commit YOK (sabah)",
     "source": "ic",
     "from_agent": null,
-    "not_": "Sahip 2026-09-17: roo 5 saatlik admin paneli gorevi. Commit YOK; sabah kontrol."
+    "not_": "Sahip 2026-09-17: roo 5 saatlik admin paneli gorevi. Commit YOK; sabah kontrol.",
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-NAV-HAZIR-01",
@@ -4349,7 +4762,8 @@
     "source": "roo",
     "from_agent": null,
     "rapor": "data/orchestrator/ADMIN-NAV-HAZIR-01_rapor_2026-09-17_roo.md",
-    "aciklama": "Navigasyon SSOT temizligi: veri_kalite+musteri_onizleme hazir=True, bayat bekleyen_gorev kaldirildi, girinti duzeltildi, tab_url_getir sessiz except loglandi; pano tabanli regresyon testi (71 passed, skip yok); restart PID 24552"
+    "aciklama": "Navigasyon SSOT temizligi: veri_kalite+musteri_onizleme hazir=True, bayat bekleyen_gorev kaldirildi, girinti duzeltildi, tab_url_getir sessiz except loglandi; pano tabanli regresyon testi (71 passed, skip yok); restart PID 24552",
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-EXEC-01",
@@ -4367,7 +4781,8 @@
     "not": "",
     "source": "ic",
     "from_agent": null,
-    "rapor": "data/orchestrator/ADMIN-EXEC-01_rapor_2026-09-17_roo.md"
+    "rapor": "data/orchestrator/ADMIN-EXEC-01_rapor_2026-09-17_roo.md",
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-SEARCH-01",
@@ -4386,7 +4801,8 @@
     "source": "ic",
     "from_agent": null,
     "aciklama": "admin_search.py Asama C kalibi; 26 test, 134 passed; restart PID 22140; commit sabah",
-    "rapor": "data/orchestrator/ADMIN-SEARCH-01_rapor_2026-09-17_roo.md"
+    "rapor": "data/orchestrator/ADMIN-SEARCH-01_rapor_2026-09-17_roo.md",
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-REFRESH-FIX-01",
@@ -4406,7 +4822,8 @@
     "source": "ic",
     "from_agent": null,
     "aciklama": "rerun oncesi kayit bugu + loglu except; 24 test (toplu 118) gecti",
-    "rapor": "data/orchestrator/ADMIN-REFRESH-FIX-01_rapor_2026-09-17_roo.md"
+    "rapor": "data/orchestrator/ADMIN-REFRESH-FIX-01_rapor_2026-09-17_roo.md",
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-NAV-HAZIR-02",
@@ -4423,7 +4840,8 @@
     "not": "",
     "source": "ic",
     "from_agent": null,
-    "tamamlayan": "roo"
+    "tamamlayan": "roo",
+    "mod": "code"
   },
   {
     "task_id": "GIT-HIJYEN-01",
@@ -4441,7 +4859,8 @@
     ],
     "not": "Teslim (kilo): kodlama_denetim.py --kapsam kod exit 0 basarili. 1138 ihlal duzeltildi (60 CRLF, 106 BOM, 2 mojibake, 970 trailing whitespace). Elle 3206 dosya CRLF duzeltildi. Mojibake normalize.py'de duzeltildi. .gitattributes BOM kaldirildi. Scan sonucu temiz.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ROO-CONFIG-01",
@@ -4460,7 +4879,8 @@
     ],
     "not": "Teslim (kilo): Roo Code IDE ucretsiz model yapilandirmasi + fallback taslagi tamamlandi. 14 model, Primary fallback=Nemotron 3.5 Content Safety, Secondary=Qwen 3.8 27B, Emergency=Claude Sonnet 4.5. D-48 uyumlum. 9Router dokunulmadi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-ROO-DENETIM-01",
@@ -4474,7 +4894,8 @@
     "dosyalar": [],
     "not": "Teslim (roo): Denetim KISMI: kilo hicbir gorevi almamis (ADMIN-HATA-01 2x tetik + 5x uyari, ADMIN-HATA-02 bekliyor). Roo kendi 2 teslimi onaylandi -> done. 3 bulgu: D-1 tetik duplikasyonu (bakim dedupe yakalamiyor, tetik_ekle korumasi var ama eski kayitlari temizlemiyor), D-2 5x uyariya ragmen eskalasyon yok, D-3 zincir blokaji sessiz. Rapor: data/orchestrator/ADMIN-ROO-DENETIM-01_rapor_2026-09-18_roo.md",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-HITAP-01",
@@ -4493,7 +4914,8 @@
     ],
     "not": "Teslim (roo): D-49 hitap kurali uygulandi: 7 satir sahip->KAHIN. AGENTS.md(12,38,138), AJAN_DETAY.md(8,14,24), ARASTIRMA_API_PLAN(142). Muaf: AGENTS.md:33 kural metni, AJAN_DETAY 157/159 kod parametresi, AGENT_SYNC/kilavuz sema alan adlari. .clinerules/.roorules/.cursorrules/CLAUDE.md/ANA_KURALLAR.md temiz. Rapor: data/orchestrator/ADMIN-HITAP-01_rapor_2026-09-18_roo.md",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-KOK-TEMIZLIK-01",
@@ -4511,7 +4933,8 @@
     ],
     "not": "Teslim (roo): Kok dizindeki 3 gecici script (fix_encoding.py, fix_encoding2.py, fix_final.py) git rm ile silindi; bagimlilik taramasi temiz; .gitignore'a /fix_*.py kok kalibi eklendi. Rapor: data/orchestrator/ADMIN-KOK-TEMIZLIK-01_rapor_2026-09-18_roo.md",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "AGN-STACK-01",
@@ -4525,7 +4948,8 @@
     "dosyalar": [],
     "not": "Teslim (roo): crewAI 1.15.22/LangChain vs Huginn orkestratoru kiyas raporu. Sonuc: ENTEGRASYON YOK (skor 7-2 Huginn lehine). 3 senaryo maliyetlendirildi: A=0 token, B=hibrit worker +%30-60, C=tam gecis +%40-120 REDDEDILDI. Pilot onerisi AGN-CREWAI-PILOT-01 (5 kabul kriteri, tek dosya, geri donduruleblir). Yeni bulgu: tetik var-pano kaydi yok tutarsizligi (ORCH-TETIK-PANO-01 onerildi). requirements.txt dokunulmadi, commit yok. Rapor: data/orchestrator/AGN-STACK-01_rapor_roo.md",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "MARKA-REVIZE-01-BULGU",
@@ -4542,7 +4966,8 @@
     ],
     "not": "Teslim (roo): marka_denetim.py 3 katmanli muafiyet: 140 yanlis pozitif -> 0 ihlal. 7/7 test gecti. B-6/D-33 kapatildi. D-55 adlandirma kurali AGENTS.md'ye islendi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-LOGIN-FIX-01",
@@ -4552,13 +4977,14 @@
     "oncelik": "P0",
     "durum": "done",
     "baslangic": "2026-09-18T06:18:40",
-    "bitis": "2026-09-18T15:12:46.586128Z",
+    "bitis": "2026-09-19T02:37:18",
     "dosyalar": [
       "web_dashboard/tabs/admin_auth.py"
     ],
     "not": "Teslim (roo): Admin girisi 2/2 hesap canli 200. Kok neden 4 katman: Docker kapali, eski imaj (405), yanlis saglik yolu (/health), 2. hesabin DB hash uyumsuz.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-ADMIN2-DOGRULA-01",
@@ -4574,7 +5000,8 @@
     ],
     "not": "Teslim (roo): yassuacohen@gmail.com hesabi DB'de VAR (role=admin, status=onayli); sadece sifre hash'i uyumsuzdu. Hash yenilendi, canli login 200.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-MODAL-STIL-01",
@@ -4584,13 +5011,14 @@
     "oncelik": "P1",
     "durum": "done",
     "baslangic": "2026-09-18T06:22:27",
-    "bitis": "2026-09-18T15:12:46.586128Z",
+    "bitis": "2026-09-19T02:37:18",
     "dosyalar": [
       "web_dashboard/tabs/admin_auth.py"
     ],
     "not": "Teslim (roo): Modal arka plan blur eklendi (backdrop-filter), marka seridi + marka baslik uygulandi. 4 test yesil.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
@@ -4606,7 +5034,8 @@
     ],
     "not": "Teslim (roo): Giris ekranina 'Sifremi unuttum' akisi eklendi: render_sifre_unuttum() istek + onay formu, /api/admin/reset-request ve /api/admin/reset-confirm. 4 test yesil; ayrica cagiran testlerde yalitim fixture eklendi.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "V10-HIJYEN-01",
@@ -4624,7 +5053,8 @@
     "not": "",
     "source": "ic",
     "from_agent": null,
-    "not_": "182-187 silindi; 4 regresyon testi eklendi; kodlama_denetim temiz"
+    "not_": "182-187 silindi; 4 regresyon testi eklendi; kodlama_denetim temiz",
+    "mod": "code"
   },
   {
     "task_id": "UX-MENU-03",
@@ -4647,7 +5077,8 @@
     ],
     "not": "Teslim: menu 24->16 alt sekme (%33 azalma), en kalabalik grup 8->5. Overview'a 5 gercek aksiyon butonu + 4 giris karti. 15 yeni test. Push a19151a. Rapor: data/orchestrator/UX-MENU-03_rapor_2026-09-18_orkestrator.md. Duzeltme: tests/test_mcp_transport.py artik haric degil - mcp paketi zaten kuruluydu (1.28.1), ariza mcp_server_entry.py icindeki gecersiz 'mcp.server.mcpserver' import yolundaydi; FastMCP API'sine gecildi, 13/13 gecti. Tam suit 3902 passed / 5 skipped / 0 failed.",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "REVIEW-ONAY-KUYRUGU-01",
@@ -4663,7 +5094,8 @@
     ],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "TEST-AYARLAR-KAPSAM-01",
@@ -4679,7 +5111,8 @@
     ],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "UI-AYARLAR-SAYFA-01",
@@ -4693,7 +5126,8 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "ORKESTRA-BASLIK-GERIYE-01",
@@ -4707,7 +5141,8 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   },
   {
     "task_id": "TEST-MERVE-KAPSAM-01",
@@ -4721,6 +5156,7 @@
     "dosyalar": [],
     "not": "",
     "source": "ic",
-    "from_agent": null
+    "from_agent": null,
+    "mod": "code"
   }
 ]

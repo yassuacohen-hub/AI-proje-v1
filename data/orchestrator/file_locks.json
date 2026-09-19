@@ -1,29 +1,4 @@
 {
-  "tests/test_musteri_yonetimi.py": {
-    "sahip": "kilo",
-    "task_id": "ADMIN-MUSTERI-02",
-    "kilitlendi": "2026-09-17T06:48:52"
-  },
-  "web_dashboard/tabs/webhook_monitor.py": {
-    "sahip": "kilo",
-    "task_id": "ADMIN-KPI-KART-02",
-    "kilitlendi": "2026-09-17T06:49:12"
-  },
-  "web_dashboard/tabs/tenant_health_dashboard.py": {
-    "sahip": "kilo",
-    "task_id": "ADMIN-KPI-KART-02",
-    "kilitlendi": "2026-09-17T06:49:12"
-  },
-  "tests/test_webhook_monitor_tab.py": {
-    "sahip": "kilo",
-    "task_id": "ADMIN-KPI-KART-02",
-    "kilitlendi": "2026-09-17T06:49:12"
-  },
-  "tests/test_admin_kpi_kart.py": {
-    "sahip": "kilo",
-    "task_id": "ADMIN-KPI-KART-02",
-    "kilitlendi": "2026-09-17T06:49:12"
-  },
   "scripts/deney/crewai_arastirma_deneyi.py": {
     "sahip": "roo",
     "task_id": "AGN-CREWAI-PILOT-01",
@@ -52,11 +27,6 @@
   "web_dashboard/tabs/__init__.py": {
     "sahip": "roo",
     "task_id": "ADMIN-UX-MENUTREE-01",
-    "kilitlendi": "2026-09-18T14:31:57"
-  },
-  "web_dashboard/tabs/admin_kullanici_ayarlari.py": {
-    "sahip": "roo",
-    "task_id": "ADMIN-UX-AYARLAR-SAYFA-01",
     "kilitlendi": "2026-09-18T14:31:57"
   },
   "src/company_master/search/engine.py": {

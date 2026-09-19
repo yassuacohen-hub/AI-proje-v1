@@ -38,5 +38,317 @@
     "tetik_sayisi": 5,
     "uyari_tarihi": "2026-09-19T00:29:01",
     "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-19T00:34:01",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-19T00:39:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-19T00:44:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-19T00:49:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-19T00:54:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-19T00:59:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-19T01:04:01",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-19T01:09:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-19T01:14:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-19T01:19:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-19T01:24:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-19T01:29:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 18,
+    "uyari_tarihi": "2026-09-19T01:34:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 18. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 19,
+    "uyari_tarihi": "2026-09-19T01:39:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 19. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 20,
+    "uyari_tarihi": "2026-09-19T01:44:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 20. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 21,
+    "uyari_tarihi": "2026-09-19T01:49:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 21. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 22,
+    "uyari_tarihi": "2026-09-19T01:54:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 22. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 23,
+    "uyari_tarihi": "2026-09-19T01:59:04",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 23. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 24,
+    "uyari_tarihi": "2026-09-19T02:04:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 24. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 25,
+    "uyari_tarihi": "2026-09-19T02:09:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 25. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 26,
+    "uyari_tarihi": "2026-09-19T02:14:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 26. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 27,
+    "uyari_tarihi": "2026-09-19T02:19:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 27. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 28,
+    "uyari_tarihi": "2026-09-19T02:24:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 28. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 29,
+    "uyari_tarihi": "2026-09-19T02:29:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 29. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 30,
+    "uyari_tarihi": "2026-09-19T02:34:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 30. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 31,
+    "uyari_tarihi": "2026-09-19T02:39:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 31. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 32,
+    "uyari_tarihi": "2026-09-19T02:44:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 32. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 33,
+    "uyari_tarihi": "2026-09-19T02:49:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 33. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 34,
+    "uyari_tarihi": "2026-09-19T02:54:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 34. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 35,
+    "uyari_tarihi": "2026-09-19T02:59:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 35. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 36,
+    "uyari_tarihi": "2026-09-19T03:04:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 36. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 37,
+    "uyari_tarihi": "2026-09-19T03:09:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 37. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 38,
+    "uyari_tarihi": "2026-09-19T03:14:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 38. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 39,
+    "uyari_tarihi": "2026-09-19T03:19:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 39. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 40,
+    "uyari_tarihi": "2026-09-19T03:24:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 40. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 41,
+    "uyari_tarihi": "2026-09-19T03:29:03",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 41. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 42,
+    "uyari_tarihi": "2026-09-19T03:34:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 42. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 43,
+    "uyari_tarihi": "2026-09-19T03:39:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 43. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "gorev_basligi": "[TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)",
+    "tetik_sayisi": 44,
+    "uyari_tarihi": "2026-09-19T03:44:02",
+    "mesaj": "⚠️ TEST-MERVE-KAPSAM-01 ([TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s)) — salih 44. kez uyarıldı; henüz başlamadı."
   }
 ]

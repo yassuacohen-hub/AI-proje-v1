@@ -44,6 +44,9 @@ ALANLAR = ("UI", "API", "VERI", "TEST", "DOC", "ALTYAPI", "ORKESTRA")
 FIILLER = ("yaz", "düzelt", "taşı", "sil", "denetle", "ölç", "belgele", "araştır")
 # D-60: kanonik adlar Turkce; tek dogruluk kaynagi trigger.AJANLAR.
 AJANLAR = trigger.AJANLAR
+# D-63: Architect gorevini yalnız orkestratör (ihsan) ve üretim (utku) alır.
+ARCHITECT_AJANLARI = ("ihsan", "utku")
+ARCHITECT_HATIRLATMA = "⚠️ Bu görev Architect modunda açılmalıdır."
 _BASLIK = re.compile(
     r"^\[(?P<alan>[A-ZĞÜŞİÖÇ]+)\]\s+(?P<fiil>\S+).*?→.+\((?P<sure>\d+[sd])\)$"
 )
@@ -165,6 +168,14 @@ def cmd_at(args: argparse.Namespace) -> int:
     if ihlal:
         print(f"HATA (D-57): {ihlal}", file=sys.stderr)
         return 3
+    mod = getattr(args, "mod", "code") or "code"
+    if mod == "architect" and args.ajan not in ARCHITECT_AJANLARI:
+        print(
+            "HATA (D-63): Architect gorevini yalnız "
+            f"{' / '.join(ARCHITECT_AJANLARI)} alabilir; verilen: {args.ajan}",
+            file=sys.stderr,
+        )
+        return 5
     try:
         gorev = tb.gorev_ekle(
             task_id=args.task_id,
@@ -172,6 +183,7 @@ def cmd_at(args: argparse.Namespace) -> int:
             sahip=args.ajan,
             oncelik=args.oncelik,
             dosyalar=_ayristir_liste(args.dosya),
+            mod=mod,
         )
     except ValueError as exc:
         print(f"HATA: {exc}", file=sys.stderr)
@@ -180,11 +192,16 @@ def cmd_at(args: argparse.Namespace) -> int:
         print(f"HATA (kilit): {exc}", file=sys.stderr)
         print("Dosya baska bir ajanin kilidinde; farkli kapsamla atayin.", file=sys.stderr)
         return 2
-    tetik = trigger.tetik_ekle(args.task_id, args.ajan, args.talimat or "")
-    print(f"ATANDI  : {gorev['task_id']} -> {args.ajan} ({gorev['oncelik']})")
+    talimat = args.talimat or ""
+    if mod == "architect":
+        talimat = (talimat + "\n" + ARCHITECT_HATIRLATMA).strip()
+    trigger.tetik_ekle(args.task_id, args.ajan, talimat)
+    print(f"ATANDI  : {gorev['task_id']} -> {args.ajan} ({gorev['oncelik']}, mod={mod})")
     print(f"BASLIK  : {gorev['baslik']}")
     if gorev["dosyalar"]:
         print(f"KILITLI : {', '.join(gorev['dosyalar'])}")
+    if mod == "architect":
+        print(f"MOD     : {ARCHITECT_HATIRLATMA}")
     print(f"TETIK   : {args.ajan} postasina dusecek; ajan bakarsa gorur.")
     print(f"          python scripts/gorev_kutusu.py bak --ajan {args.ajan}")
     print(f"HAZIR   : Ajana gidip sadece 'başla' veya 'go' yazmanız yeterlidir (Kural dosyası postayı otomatik okur).")
@@ -272,6 +289,10 @@ def main() -> int:
     p_at.add_argument("--oncelik", default="P1", choices=["P0", "P1", "P2"])
     p_at.add_argument("--dosya", default=None, help="Virgülle ayrılı, otomatik kilitlenir")
     p_at.add_argument("--talimat", default="", help="Ajana kısa talimat")
+    p_at.add_argument(
+        "--mod", default="code", choices=["code", "architect"],
+        help="D-63: architect sadece ihsan/utku'ya atanabilir",
+    )
     p_at.add_argument("--cagiran", default=None, help="Komutu veren ajan (D-58 kapısı)")
     p_at.set_defaults(func=cmd_at)
 

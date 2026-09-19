@@ -1636,7 +1636,9 @@
       "tests/test_sec_auth_01.py"
     ],
     "teslim_tarihi": "2026-09-18T13:30:50",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-09-19T02:37:18"
   },
   {
     "task_id": "ADMIN-ADMIN2-DOGRULA-01",
@@ -1660,7 +1662,9 @@
       "tests/test_style_css.py"
     ],
     "teslim_tarihi": "2026-09-18T13:31:18",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-09-19T02:37:18"
   },
   {
     "task_id": "ADMIN-SIFRE-RESET-FLOW-01",
@@ -1703,7 +1707,9 @@
     "ozet": "webhook_monitor.py ve tenant_health_dashboard.py dosyalarindaki tum st.metric cagrilari kpi_karti ile degistirildi. UI-CHART-01 uyumlulugu saglandi. AST tespit aracı: scripts/detect_st_metric.py. Testler: tests/test_admin_kpi_kart.py (6 test) + test_admin_sessiz_except.py (7 test) + test_admin_errors.py (5 test) + test_tenant_health.py (4 test) = 22 test geciyor. Kodlama denetimi temiz.",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-18T22:42:10",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-19T02:36:41"
   },
   {
     "task_id": "ADMIN-MUSTERI-02",
@@ -1711,6 +1717,16 @@
     "ozet": "Musteri Yonetimi placeholder alt sekmeler gercek icerikle dolduruldu: _kullanicilar_onay() — onay bekleyen kullanicilar listesi, tier selectbox, onaylama butonu, son onaylananlar, kategori listesi. _paket_kredi() — kredi yukleme formu, kategori goruntuleme, yeni kategori ekleme formu. admin_extras.pydeki render_user_management mantigi entegre edildi. Testler: tests/test_musteri_yonetimi.py (3 test) geciyor. Kodlama denetimi temiz.",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-18T23:16:03",
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-19T02:36:41"
+  },
+  {
+    "task_id": "BRIK-00",
+    "ajan": "ihsan",
+    "ozet": "D-62/D-63 tamamlandi: archive sema, gece zinciri kuruldu, duplikeler arsivlendi, onay kuyrugu bosaldi.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-19T03:48:47",
     "durum": "bekliyor"
   }
 ]

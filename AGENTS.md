@@ -58,6 +58,15 @@
 - Devralma sonrası **yeni görevleri yalnız aktif orkestratör dağıtır**. `at` komutu çağıranı `--cagiran` veya `ORKESTRA_AJAN` env'inden okur; uyuşmazsa exit 4.
 - Varsayılan orkestratör `roo` (dosya yoksa).
 
+## Architect Modu Kapısı (D-63 — KAHİN kararı 2026-09-18)
+- **Architect (mimari/planlama/tasarım) görevlerini yalnız iki ajan alır: `ihsan` (roo) ve `utku` (kilo).** `salih` ve `yasu` architect görevi almaz; alırsa iş geçersizdir, orkestratöre geri sorulur.
+- **Görev dağıtımı Architect modunda yapılır.** Orkestratör başka moddayken atılan görev geçersiz sayılır.
+- Görev metninin sonuna **otomatik hatırlatma satırı** eklenir:
+  `⚠️ Bu görev Architect modunda açılmalıdır.`
+- Makine tarafı: `scripts/gorev_at.py at --mod architect` → görev kaydına `"mod": "architect"` yazar, tetik brifine hatırlatma satırını ekler. `--mod architect` verildiğinde ajan `ihsan` veya `utku` değilse komut exit 5 ile reddeder.
+- Varsayılan `mod` değeri `code`. Mod alanı olmayan eski kayıtlar `code` sayılır (geriye dönük uyumluluk).
+- Kural **yeni görevler** için yürürlükte; panodaki açık görevler mevcut hâliyle çalışılır.
+
 ## Ürün Sahibi Raporlama Formatı (D-55)
 - KAHİN'e giden her özet: **kısa cümleler**, teknik olmayan dil, tablo.
 - Bulgular 4 sınıfta renklendirilir: 🔴 kırmızı (acil/blokaj) · 🟡 sarı (dikkat) · 🟢 yeşil (tamam) · 🔵 mavi (bilgi/öneri).

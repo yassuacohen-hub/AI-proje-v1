@@ -1,0 +1,123 @@
+.env
+
+# Veritabanı yedekleri (Supabase pg_dump ciktilari)
+backups/
+
+# Obsidian vault (AI proje v1) — pinli submodule olarak takip ediliyor (bkz. .gitmodules).
+# İçerik ana repoya girmez; yalnızca gitlink (commit hash) versionlanır.
+# Vault içindeki .env vb. hassas dosyalar vault'un kendi .gitignore'unda dışlanır.
+
+# Ortam ve gizli bilgiler
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+test_reports/
+.ruff_cache/
+.mypy_cache/
+.coverage
+coverage.json
+htmlcov/
+
+# Sanal ortamlar
+.venv/
+.venv_test/
+
+# Veritabanı dosyaları (yerel/legacy fallback; asıl veritabanı Supabase/PostgreSQL)
+*.db
+*.db-journal
+
+# Loglar (yeniden üretilebilir çalışma zamanı çıktıları)
+logs/
+*.log
+
+# Geçici/deneme dosyaları — bkz. AGENTS.md "Çöp Kutusu (Trash) Kuralı"
+_trash/
+tmp/
+
+# V10 içeriklerini engelle (şikayet raporları, eski belgeler, vb.)
+V10/
+
+# ORCH-GIT-01 (KAHİN kararı 2026-09-18): orkestrator pano + karar defteri + rapor/bulgu
+# arşivi git'te TUTULUR. Gerekçe: yedek kritik; süreç/karar yönetimi ileride ayrı ürüne
+# çıkabilir. Yalnız makineye özgü runtime artıkları dışlanır.
+data/orchestrator/nobetci.pid
+data/orchestrator/file_locks.json
+data/orchestrator/state.json
+data/orchestrator/change_notify_state.json
+data/orchestrator/_*.txt
+data/orchestrator/_*.py
+data/orchestrator/task_board_corrupt_backup.json
+# D-58: orkestrator devralma anahtari (gizli, repoya girmez)
+data/orchestrator/abrakadabra.key
+
+# Araç/repair dosyalari (scripts dizinine ozgu)
+scripts/check_*.py
+scripts/fix_*.py
+# ADMIN-KOK-TEMIZLIK-01: kok dizine gecici duzeltme scripti birakilmaz
+/fix_*.py
+scripts/inspect_*.py
+scripts/validate_*.py
+scripts/final_validate.py
+scripts/check_wiki_counts.py
+scripts/examine_json.py
+scripts/find_*.py
+
+# Node.js
+node_modules/
+package-lock.json
+
+# Obsidian kişisel/yerel çalışma alanı durumu (workspace paylaşılmaz, plugin listesi paylaşılır)
+.obsidian/workspace.json
+.obsidian/workspace-mobile.json
+
+# Playwright MCP çıktıları
+.playwright-mcp/
+
+# Diğer araç/skill yerel klasörleri (makine bazlı, proje kodu değil)
+.agents/
+!.agents/marketplace/  # Pinli submodule (kilo-market), paylaşılır
+.continue/
+.kilo/
+.kimi-code/
+agent/
+
+# Nested git repo içeren skill dizinleri (ayrı remote'ları var)
+.claude/skills/supabase/
+data/skills/supabase/
+
+
+# Cop kutusu / gecici denetim klasorleri (2026-09-11)
+cop_kutusu_*/
+scripts/_tmp_*
+scripts/_tmp/
+.roo/
+.vscode/
+data/watch/
+workspace/external/test_agent/
+
+# 9Router optimizer yedekleri (KVKK: token/anahtar içerebilir, dışarı gönderilmez)
+data/router/yedekler/
+data/router/son_uyarilar.json
+
+# 9R-05 arşiv (yardımcı _9r05_* scriptleri)
+scripts/_arsiv/
+
+# REPO-HIJYEN-01 (2026-09-15): kök artık dosyaları arşivi + kökte geçici dosya yasağı
+data/_arsiv_kok/
+/_*.py
+/__*.py
+/*.bak
+/*.base
+/_*.txt
+data/_*.py
+data/_tmp/
+
+# SEC-AUTH-01 D-1: Streamlit secrets (plaintext admin fallback) depoya girmez
+.streamlit/secrets.toml
+.streamlit/secrets.*.toml
