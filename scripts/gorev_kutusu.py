@@ -149,6 +149,70 @@ def cmd_reddet(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_basla(args: argparse.Namespace) -> int:
+    """Tek kelime tetik: postayi oku, zinciri goster, otonom calisma yolunu bas.
+
+    KAHIN yalnizca "basla" der; ajan bu ciktiyi okuyup 4 gorevi sirayla bitirir.
+    """
+    ajan = args.ajan
+    bekleyen = trigger.bekleyen_tetikler(ajan)
+    kalan = trigger.zincir_kalan(ajan)
+    rol = trigger.AJAN_ROLU.get(ajan, "uretim")
+    print(f"=== {trigger.ajan_goster(ajan)} OTONOM ZINCIR ===")
+    if not bekleyen and not kalan:
+        print("Posta bos, zincir yok. Orkestratore haber ver.")
+        return 0
+    sira = [k["task_id"] for k in bekleyen] + [k["task_id"] for k in kalan]
+    print(f"Zincir ({len(sira)} gorev): {' -> '.join(sira)}\n")
+    for tid in sira:
+        g = tb.gorev_getir(tid) or {}
+        print(f"  {tid} ({g.get('oncelik', '?')}) {g.get('baslik', '(pano basligi yok)')}")
+        talimat = _talimat_bul(ajan, tid, g)
+        print(f"    TALIMAT: {talimat or '⚠️ YOK — orkestratore danis'}")
+        if g.get("dosyalar"):
+            print(f"    KILITLI: {', '.join(g['dosyalar'])}")
+    rapor = f"data/orchestrator/ZINCIR_rapor_{trigger._simdi()[:10]}_{rol}.md"
+    print(f"""
+KURAL (her gorev icin sirayla, DURMADAN):
+  1) al     : python scripts/gorev_kutusu.py al --ajan {ajan} --task-id <ID>
+  2) isi yap (AGENTS.md teslim kontrol listesi)
+  3) denetim: python scripts/kodlama_denetim.py
+  4) teslim : python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id <ID> --ozet "..."
+     -> teslim sonrasi ZINCIR sonraki gorevi otomatik tetikler; postaya tekrar bak.
+ZINCIR BITINCE (tum gorevler teslim):
+  5) toplu raporu yaz: {rapor}
+  6) postala: python scripts/gorev_kutusu.py rapor-postala --ajan {ajan} \\
+       --rapor "{rapor}" --baslik "zincir bitti: {len(sira)} gorev"
+Arada KAHIN'e soru sorma; blokaj varsa raporda yaz.""")
+    return 0
+
+
+def cmd_rapor_postala(args: argparse.Namespace) -> int:
+    """Zincir bitis raporunu orkestratorun postasina dusur."""
+    yol = Path(args.rapor)
+    if not yol.is_absolute():
+        yol = Path(__file__).resolve().parents[1] / args.rapor
+    if not yol.exists():
+        return _hata(FileNotFoundError(f"Rapor dosyasi yok: {args.rapor}"))
+    kayit = trigger.rapor_postala(args.ajan, args.baslik, args.rapor, args.hedef)
+    print(f"RAPOR POSTALANDI: {args.ajan} -> {kayit['ajan']} ({args.rapor})")
+    return 0
+
+
+def cmd_raporlar(args: argparse.Namespace) -> int:
+    """Orkestratorun postasina dusen zincir raporlarini listele."""
+    kayitlar = trigger.raporlar(args.ajan)
+    if not kayitlar:
+        print("Rapor postasi bos.")
+        return 0
+    print(f"{len(kayitlar)} zincir raporu:")
+    for k in kayitlar:
+        print(f"\n  {trigger.ajan_goster(k.get('gonderen'))}  ({k['tarih']})")
+        print(f"  {k.get('talimat', '')}")
+        print(f"  -> {k.get('rapor_yolu', '')}")
+    return 0
+
+
 def cmd_zincir(args: argparse.Namespace) -> int:
     """Görev zinciri oluştur (örn. P7-23 → P7-4 → ...)."""
     try:
@@ -300,6 +364,21 @@ def main() -> int:
     bak_p.add_argument("--ajan", required=True, help="Ajan adı (kilo, roo, vs.)")
     bak_p.set_defaults(func=cmd_bak)
 
+    basla_p = sub.add_parser("basla", help="Tek kelime tetik: posta+zincir+otonom talimat")
+    basla_p.add_argument("--ajan", required=True)
+    basla_p.set_defaults(func=cmd_basla)
+
+    rapor_p = sub.add_parser("rapor-postala", help="Zincir bitis raporunu orkestratore postala")
+    rapor_p.add_argument("--ajan", required=True, help="Raporu yazan ajan")
+    rapor_p.add_argument("--rapor", required=True, help="Rapor dosya yolu")
+    rapor_p.add_argument("--baslik", required=True, help="Tek satir ozet")
+    rapor_p.add_argument("--hedef", default="ihsan", help="Postalanacak ajan (varsayilan ihsan)")
+    rapor_p.set_defaults(func=cmd_rapor_postala)
+
+    raporlar_p = sub.add_parser("raporlar", help="Postaya dusen zincir raporlarini listele")
+    raporlar_p.add_argument("--ajan", default="ihsan")
+    raporlar_p.set_defaults(func=cmd_raporlar)
+
     al_p = sub.add_parser("al", help="Tetiği al (görevi aktif yap)")
     al_p.add_argument("--ajan", required=True)
     al_p.add_argument("--task-id", required=True)
@@ -361,7 +440,7 @@ def main() -> int:
     args = parser.parse_args()
     # D-33 ajan adı kuralı: "Ajan kilo" / "Kilo" / "kilo_code" → "kilo".
     # Tüm alt komutlar tek noktadan kanonik ada çevrilir.
-    for alan in ("ajan", "yeni_ajan"):
+    for alan in ("ajan", "yeni_ajan", "hedef"):
         deger = getattr(args, alan, None)
         if deger:
             try:

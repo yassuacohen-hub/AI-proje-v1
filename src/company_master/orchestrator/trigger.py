@@ -500,6 +500,51 @@ def zincir_devam_et(tamamlanan_task_id: str, ajan: str, data_dir: Path | None = 
 
     return None
 
+def zincir_kalan(ajan: str, data_dir: Path | None = None) -> list[dict[str, Any]]:
+    """Zincirde onceki teslime bagli bekleyen gorevler (durum: zincir_bekleme)."""
+    return [k for k in _tetikleri_oku(ajan, data_dir) if k.get("durum") == "zincir_bekleme"]
+
+
+#: D-55 rol son ekleri — rapor dosya adinda ajan adi GECMEZ.
+AJAN_ROLU: dict[str, str] = {
+    "ihsan": "orkestrator",
+    "utku": "uretim",
+    "salih": "denetim",
+    "yasu": "denetim",
+}
+
+
+def rapor_postala(
+    ajan: str, baslik: str, rapor_yolu: str,
+    hedef: str = "ihsan", data_dir: Path | None = None,
+) -> dict[str, Any]:
+    """Zincir bitis raporunu hedef ajanin postasina `rapor` kaydi olarak dusur.
+
+    Ayni posta dosyasi kullanilir; durum `rapor` oldugu icin `bekleyen_tetikler`
+    (durum == bekliyor) bu kaydi gorev sanmaz.
+    """
+    ajan = ajan_normalize(ajan)
+    hedef = ajan_normalize(hedef)
+    kayitlar = _tetikleri_oku(hedef, data_dir)
+    kayit = {
+        "task_id": f"RAPOR-{ajan.upper()}",
+        "ajan": hedef,
+        "gonderen": ajan,
+        "talimat": baslik,
+        "rapor_yolu": rapor_yolu,
+        "tarih": _simdi(),
+        "durum": "rapor",
+    }
+    kayitlar.append(kayit)
+    _tetikleri_yaz(kayitlar, hedef, data_dir)
+    return kayit
+
+
+def raporlar(hedef: str = "ihsan", data_dir: Path | None = None) -> list[dict[str, Any]]:
+    """Hedef ajanin postasina dusen zincir raporlari."""
+    return [k for k in _tetikleri_oku(hedef, data_dir) if k.get("durum") == "rapor"]
+
+
 def zincir_uzat(ajan: str, yeni_task_ids: list[str], talimat: str = "", data_dir: Path | None = None) -> list[dict[str, Any]]:
     """Mevcut zinciren sonuna yeni görev(ler) ekle.
 
