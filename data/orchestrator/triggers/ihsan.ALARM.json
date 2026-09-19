@@ -8862,5 +8862,2133 @@
     "tetik_sayisi": 150,
     "uyari_tarihi": "2026-09-19T11:59:02",
     "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 150. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 260,
+    "uyari_tarihi": "2026-09-19T12:04:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 260. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 151,
+    "uyari_tarihi": "2026-09-19T12:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 151. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 261,
+    "uyari_tarihi": "2026-09-19T12:09:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 261. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 152,
+    "uyari_tarihi": "2026-09-19T12:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 152. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 262,
+    "uyari_tarihi": "2026-09-19T12:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 262. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 153,
+    "uyari_tarihi": "2026-09-19T12:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 153. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 263,
+    "uyari_tarihi": "2026-09-19T12:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 263. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 154,
+    "uyari_tarihi": "2026-09-19T12:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 154. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 264,
+    "uyari_tarihi": "2026-09-19T12:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 264. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 155,
+    "uyari_tarihi": "2026-09-19T12:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 155. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 265,
+    "uyari_tarihi": "2026-09-19T12:29:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 265. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 156,
+    "uyari_tarihi": "2026-09-19T12:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 156. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 266,
+    "uyari_tarihi": "2026-09-19T12:34:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 266. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 157,
+    "uyari_tarihi": "2026-09-19T12:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 157. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 267,
+    "uyari_tarihi": "2026-09-19T12:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 267. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 158,
+    "uyari_tarihi": "2026-09-19T12:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 158. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 268,
+    "uyari_tarihi": "2026-09-19T12:44:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 268. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 159,
+    "uyari_tarihi": "2026-09-19T12:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 159. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 269,
+    "uyari_tarihi": "2026-09-19T12:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 269. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 160,
+    "uyari_tarihi": "2026-09-19T12:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 160. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 270,
+    "uyari_tarihi": "2026-09-19T12:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 270. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 161,
+    "uyari_tarihi": "2026-09-19T12:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 161. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 271,
+    "uyari_tarihi": "2026-09-19T12:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 271. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 162,
+    "uyari_tarihi": "2026-09-19T12:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 162. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 272,
+    "uyari_tarihi": "2026-09-19T13:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 272. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 163,
+    "uyari_tarihi": "2026-09-19T13:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 163. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 273,
+    "uyari_tarihi": "2026-09-19T13:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 273. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 164,
+    "uyari_tarihi": "2026-09-19T13:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 164. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 274,
+    "uyari_tarihi": "2026-09-19T13:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 274. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 165,
+    "uyari_tarihi": "2026-09-19T13:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 165. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 275,
+    "uyari_tarihi": "2026-09-19T13:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 275. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 166,
+    "uyari_tarihi": "2026-09-19T13:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 166. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 276,
+    "uyari_tarihi": "2026-09-19T13:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 276. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 167,
+    "uyari_tarihi": "2026-09-19T13:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 167. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 277,
+    "uyari_tarihi": "2026-09-19T13:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 277. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 168,
+    "uyari_tarihi": "2026-09-19T13:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 168. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 278,
+    "uyari_tarihi": "2026-09-19T13:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 278. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 169,
+    "uyari_tarihi": "2026-09-19T13:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 169. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 279,
+    "uyari_tarihi": "2026-09-19T13:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 279. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 170,
+    "uyari_tarihi": "2026-09-19T13:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 170. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 280,
+    "uyari_tarihi": "2026-09-19T13:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 280. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 171,
+    "uyari_tarihi": "2026-09-19T13:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 171. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 281,
+    "uyari_tarihi": "2026-09-19T13:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 281. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 172,
+    "uyari_tarihi": "2026-09-19T13:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 172. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 282,
+    "uyari_tarihi": "2026-09-19T13:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 282. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 173,
+    "uyari_tarihi": "2026-09-19T13:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 173. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 283,
+    "uyari_tarihi": "2026-09-19T13:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 283. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 174,
+    "uyari_tarihi": "2026-09-19T13:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 174. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 284,
+    "uyari_tarihi": "2026-09-19T14:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 284. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 175,
+    "uyari_tarihi": "2026-09-19T14:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 175. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 285,
+    "uyari_tarihi": "2026-09-19T14:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 285. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 176,
+    "uyari_tarihi": "2026-09-19T14:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 176. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 286,
+    "uyari_tarihi": "2026-09-19T14:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 286. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 177,
+    "uyari_tarihi": "2026-09-19T14:14:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 177. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 287,
+    "uyari_tarihi": "2026-09-19T14:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 287. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 178,
+    "uyari_tarihi": "2026-09-19T14:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 178. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 288,
+    "uyari_tarihi": "2026-09-19T14:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 288. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 179,
+    "uyari_tarihi": "2026-09-19T14:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 179. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 289,
+    "uyari_tarihi": "2026-09-19T14:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 289. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 180,
+    "uyari_tarihi": "2026-09-19T14:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 180. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 290,
+    "uyari_tarihi": "2026-09-19T14:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 290. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 181,
+    "uyari_tarihi": "2026-09-19T14:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 181. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 291,
+    "uyari_tarihi": "2026-09-19T14:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 291. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 182,
+    "uyari_tarihi": "2026-09-19T14:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 182. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 292,
+    "uyari_tarihi": "2026-09-19T14:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 292. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 183,
+    "uyari_tarihi": "2026-09-19T14:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 183. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 293,
+    "uyari_tarihi": "2026-09-19T14:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 293. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 184,
+    "uyari_tarihi": "2026-09-19T14:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 184. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 294,
+    "uyari_tarihi": "2026-09-19T14:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 294. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 185,
+    "uyari_tarihi": "2026-09-19T14:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 185. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 295,
+    "uyari_tarihi": "2026-09-19T14:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 295. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 186,
+    "uyari_tarihi": "2026-09-19T14:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 186. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 296,
+    "uyari_tarihi": "2026-09-19T15:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 296. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 187,
+    "uyari_tarihi": "2026-09-19T15:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 187. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 297,
+    "uyari_tarihi": "2026-09-19T15:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 297. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 188,
+    "uyari_tarihi": "2026-09-19T15:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 188. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 298,
+    "uyari_tarihi": "2026-09-19T15:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 298. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 189,
+    "uyari_tarihi": "2026-09-19T15:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 189. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 299,
+    "uyari_tarihi": "2026-09-19T15:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 299. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 190,
+    "uyari_tarihi": "2026-09-19T15:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 190. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 300,
+    "uyari_tarihi": "2026-09-19T15:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 300. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 191,
+    "uyari_tarihi": "2026-09-19T15:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 191. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 301,
+    "uyari_tarihi": "2026-09-19T15:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 301. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 192,
+    "uyari_tarihi": "2026-09-19T15:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 192. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 302,
+    "uyari_tarihi": "2026-09-19T15:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 302. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 193,
+    "uyari_tarihi": "2026-09-19T15:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 193. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 303,
+    "uyari_tarihi": "2026-09-19T15:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 303. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 194,
+    "uyari_tarihi": "2026-09-19T15:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 194. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 304,
+    "uyari_tarihi": "2026-09-19T15:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 304. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 195,
+    "uyari_tarihi": "2026-09-19T15:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 195. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 305,
+    "uyari_tarihi": "2026-09-19T16:48:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 305. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 196,
+    "uyari_tarihi": "2026-09-19T16:48:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 196. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 306,
+    "uyari_tarihi": "2026-09-19T16:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 306. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 197,
+    "uyari_tarihi": "2026-09-19T16:49:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 197. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 307,
+    "uyari_tarihi": "2026-09-19T16:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 307. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 198,
+    "uyari_tarihi": "2026-09-19T16:54:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 198. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 308,
+    "uyari_tarihi": "2026-09-19T16:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 308. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 199,
+    "uyari_tarihi": "2026-09-19T16:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 199. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 309,
+    "uyari_tarihi": "2026-09-19T17:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 309. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 200,
+    "uyari_tarihi": "2026-09-19T17:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 200. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 310,
+    "uyari_tarihi": "2026-09-19T17:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 310. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 201,
+    "uyari_tarihi": "2026-09-19T17:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 201. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 311,
+    "uyari_tarihi": "2026-09-19T17:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 311. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 202,
+    "uyari_tarihi": "2026-09-19T17:14:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 202. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 312,
+    "uyari_tarihi": "2026-09-19T17:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 312. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 203,
+    "uyari_tarihi": "2026-09-19T17:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 203. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 313,
+    "uyari_tarihi": "2026-09-19T17:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 313. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 204,
+    "uyari_tarihi": "2026-09-19T17:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 204. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 314,
+    "uyari_tarihi": "2026-09-19T17:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 314. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 205,
+    "uyari_tarihi": "2026-09-19T17:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 205. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 315,
+    "uyari_tarihi": "2026-09-19T17:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 315. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 206,
+    "uyari_tarihi": "2026-09-19T17:34:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 206. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 316,
+    "uyari_tarihi": "2026-09-19T17:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 316. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 207,
+    "uyari_tarihi": "2026-09-19T17:39:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 207. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 317,
+    "uyari_tarihi": "2026-09-19T17:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 317. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 208,
+    "uyari_tarihi": "2026-09-19T17:44:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 208. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 318,
+    "uyari_tarihi": "2026-09-19T17:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 318. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 209,
+    "uyari_tarihi": "2026-09-19T17:49:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 209. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 319,
+    "uyari_tarihi": "2026-09-19T17:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 319. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 210,
+    "uyari_tarihi": "2026-09-19T17:54:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 210. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 320,
+    "uyari_tarihi": "2026-09-19T17:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 320. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 211,
+    "uyari_tarihi": "2026-09-19T17:59:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 211. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 321,
+    "uyari_tarihi": "2026-09-19T18:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 321. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 212,
+    "uyari_tarihi": "2026-09-19T18:04:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 212. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 322,
+    "uyari_tarihi": "2026-09-19T18:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 322. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 213,
+    "uyari_tarihi": "2026-09-19T18:09:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 213. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 323,
+    "uyari_tarihi": "2026-09-19T18:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 323. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 214,
+    "uyari_tarihi": "2026-09-19T18:14:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 214. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 324,
+    "uyari_tarihi": "2026-09-19T18:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 324. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 215,
+    "uyari_tarihi": "2026-09-19T18:19:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 215. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 325,
+    "uyari_tarihi": "2026-09-19T18:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 325. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 216,
+    "uyari_tarihi": "2026-09-19T18:24:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 216. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 326,
+    "uyari_tarihi": "2026-09-19T18:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 326. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 217,
+    "uyari_tarihi": "2026-09-19T18:29:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 217. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 327,
+    "uyari_tarihi": "2026-09-19T18:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 327. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 218,
+    "uyari_tarihi": "2026-09-19T18:34:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 218. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 328,
+    "uyari_tarihi": "2026-09-19T18:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 328. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 219,
+    "uyari_tarihi": "2026-09-19T18:39:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 219. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 329,
+    "uyari_tarihi": "2026-09-19T18:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 329. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 220,
+    "uyari_tarihi": "2026-09-19T18:44:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 220. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 330,
+    "uyari_tarihi": "2026-09-19T18:49:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 330. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 221,
+    "uyari_tarihi": "2026-09-19T18:49:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 221. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 331,
+    "uyari_tarihi": "2026-09-19T18:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 331. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 222,
+    "uyari_tarihi": "2026-09-19T18:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 222. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 332,
+    "uyari_tarihi": "2026-09-19T18:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 332. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 223,
+    "uyari_tarihi": "2026-09-19T18:59:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 223. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 333,
+    "uyari_tarihi": "2026-09-19T19:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 333. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 224,
+    "uyari_tarihi": "2026-09-19T19:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 224. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 334,
+    "uyari_tarihi": "2026-09-19T19:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 334. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 225,
+    "uyari_tarihi": "2026-09-19T19:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 225. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 335,
+    "uyari_tarihi": "2026-09-19T19:14:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 335. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 226,
+    "uyari_tarihi": "2026-09-19T19:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 226. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 336,
+    "uyari_tarihi": "2026-09-19T19:19:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 336. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 227,
+    "uyari_tarihi": "2026-09-19T19:19:01",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 227. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 337,
+    "uyari_tarihi": "2026-09-19T19:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 337. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 228,
+    "uyari_tarihi": "2026-09-19T19:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 228. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 338,
+    "uyari_tarihi": "2026-09-19T19:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 338. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 229,
+    "uyari_tarihi": "2026-09-19T19:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 229. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 339,
+    "uyari_tarihi": "2026-09-19T19:34:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 339. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 230,
+    "uyari_tarihi": "2026-09-19T19:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 230. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 340,
+    "uyari_tarihi": "2026-09-19T19:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 340. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 231,
+    "uyari_tarihi": "2026-09-19T19:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 231. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 341,
+    "uyari_tarihi": "2026-09-19T19:44:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 341. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 232,
+    "uyari_tarihi": "2026-09-19T19:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 232. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 342,
+    "uyari_tarihi": "2026-09-19T19:49:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 342. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 233,
+    "uyari_tarihi": "2026-09-19T19:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 233. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 343,
+    "uyari_tarihi": "2026-09-19T19:54:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 343. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 234,
+    "uyari_tarihi": "2026-09-19T19:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 234. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 344,
+    "uyari_tarihi": "2026-09-19T19:59:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 344. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 235,
+    "uyari_tarihi": "2026-09-19T19:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 235. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 345,
+    "uyari_tarihi": "2026-09-19T20:04:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 345. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 236,
+    "uyari_tarihi": "2026-09-19T20:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 236. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 346,
+    "uyari_tarihi": "2026-09-19T20:09:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 346. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 237,
+    "uyari_tarihi": "2026-09-19T20:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 237. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 347,
+    "uyari_tarihi": "2026-09-19T20:14:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 347. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 238,
+    "uyari_tarihi": "2026-09-19T20:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 238. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 348,
+    "uyari_tarihi": "2026-09-19T20:19:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 348. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 239,
+    "uyari_tarihi": "2026-09-19T20:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 239. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 349,
+    "uyari_tarihi": "2026-09-19T20:24:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 349. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 240,
+    "uyari_tarihi": "2026-09-19T20:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 240. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 350,
+    "uyari_tarihi": "2026-09-19T20:29:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 350. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 241,
+    "uyari_tarihi": "2026-09-19T20:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 241. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 351,
+    "uyari_tarihi": "2026-09-19T20:34:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 351. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 242,
+    "uyari_tarihi": "2026-09-19T20:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 242. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 352,
+    "uyari_tarihi": "2026-09-19T20:39:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 352. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 243,
+    "uyari_tarihi": "2026-09-19T20:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 243. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 353,
+    "uyari_tarihi": "2026-09-19T20:44:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 353. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 244,
+    "uyari_tarihi": "2026-09-19T20:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 244. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 354,
+    "uyari_tarihi": "2026-09-19T20:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 354. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 245,
+    "uyari_tarihi": "2026-09-19T20:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 245. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 355,
+    "uyari_tarihi": "2026-09-19T20:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 355. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 246,
+    "uyari_tarihi": "2026-09-19T20:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 246. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 356,
+    "uyari_tarihi": "2026-09-19T20:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 356. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 247,
+    "uyari_tarihi": "2026-09-19T20:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 247. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 357,
+    "uyari_tarihi": "2026-09-19T21:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 357. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 248,
+    "uyari_tarihi": "2026-09-19T21:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 248. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 358,
+    "uyari_tarihi": "2026-09-19T21:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 358. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 249,
+    "uyari_tarihi": "2026-09-19T21:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 249. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 359,
+    "uyari_tarihi": "2026-09-19T21:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 359. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 250,
+    "uyari_tarihi": "2026-09-19T21:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 250. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 360,
+    "uyari_tarihi": "2026-09-19T21:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 360. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 251,
+    "uyari_tarihi": "2026-09-19T21:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 251. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 361,
+    "uyari_tarihi": "2026-09-19T21:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 361. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 252,
+    "uyari_tarihi": "2026-09-19T21:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 252. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 362,
+    "uyari_tarihi": "2026-09-19T21:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 362. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 253,
+    "uyari_tarihi": "2026-09-19T21:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 253. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 363,
+    "uyari_tarihi": "2026-09-19T21:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 363. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 254,
+    "uyari_tarihi": "2026-09-19T21:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 254. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 364,
+    "uyari_tarihi": "2026-09-19T21:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 364. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 255,
+    "uyari_tarihi": "2026-09-19T21:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 255. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 365,
+    "uyari_tarihi": "2026-09-19T21:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 365. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 256,
+    "uyari_tarihi": "2026-09-19T21:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 256. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 366,
+    "uyari_tarihi": "2026-09-19T21:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 366. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 257,
+    "uyari_tarihi": "2026-09-19T21:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 257. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 367,
+    "uyari_tarihi": "2026-09-19T21:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 367. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 258,
+    "uyari_tarihi": "2026-09-19T21:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 258. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 368,
+    "uyari_tarihi": "2026-09-19T21:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 368. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 259,
+    "uyari_tarihi": "2026-09-19T21:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 259. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 369,
+    "uyari_tarihi": "2026-09-19T22:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 369. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 260,
+    "uyari_tarihi": "2026-09-19T22:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 260. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 370,
+    "uyari_tarihi": "2026-09-19T22:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 370. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 261,
+    "uyari_tarihi": "2026-09-19T22:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 261. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 371,
+    "uyari_tarihi": "2026-09-19T22:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 371. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 262,
+    "uyari_tarihi": "2026-09-19T22:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 262. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 372,
+    "uyari_tarihi": "2026-09-19T22:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 372. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 263,
+    "uyari_tarihi": "2026-09-19T22:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 263. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 373,
+    "uyari_tarihi": "2026-09-19T22:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 373. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 264,
+    "uyari_tarihi": "2026-09-19T22:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 264. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 374,
+    "uyari_tarihi": "2026-09-19T22:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 374. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 265,
+    "uyari_tarihi": "2026-09-19T22:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 265. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 375,
+    "uyari_tarihi": "2026-09-19T22:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 375. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 266,
+    "uyari_tarihi": "2026-09-19T22:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 266. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 376,
+    "uyari_tarihi": "2026-09-19T22:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 376. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 267,
+    "uyari_tarihi": "2026-09-19T22:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 267. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 377,
+    "uyari_tarihi": "2026-09-19T22:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 377. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 268,
+    "uyari_tarihi": "2026-09-19T22:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 268. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 378,
+    "uyari_tarihi": "2026-09-19T22:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 378. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 269,
+    "uyari_tarihi": "2026-09-19T22:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 269. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 379,
+    "uyari_tarihi": "2026-09-19T22:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 379. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 270,
+    "uyari_tarihi": "2026-09-19T22:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 270. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 380,
+    "uyari_tarihi": "2026-09-19T22:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 380. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 271,
+    "uyari_tarihi": "2026-09-19T22:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 271. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 381,
+    "uyari_tarihi": "2026-09-19T23:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 381. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 272,
+    "uyari_tarihi": "2026-09-19T23:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 272. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 382,
+    "uyari_tarihi": "2026-09-19T23:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 382. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 273,
+    "uyari_tarihi": "2026-09-19T23:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 273. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 383,
+    "uyari_tarihi": "2026-09-19T23:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 383. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 274,
+    "uyari_tarihi": "2026-09-19T23:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 274. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 384,
+    "uyari_tarihi": "2026-09-19T23:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 384. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 275,
+    "uyari_tarihi": "2026-09-19T23:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 275. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 385,
+    "uyari_tarihi": "2026-09-19T23:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 385. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 276,
+    "uyari_tarihi": "2026-09-19T23:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 276. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 386,
+    "uyari_tarihi": "2026-09-19T23:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 386. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 277,
+    "uyari_tarihi": "2026-09-19T23:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 277. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 387,
+    "uyari_tarihi": "2026-09-19T23:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 387. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 278,
+    "uyari_tarihi": "2026-09-19T23:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 278. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 388,
+    "uyari_tarihi": "2026-09-19T23:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 388. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 279,
+    "uyari_tarihi": "2026-09-19T23:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 279. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 389,
+    "uyari_tarihi": "2026-09-19T23:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 389. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 280,
+    "uyari_tarihi": "2026-09-19T23:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 280. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 390,
+    "uyari_tarihi": "2026-09-19T23:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 390. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 281,
+    "uyari_tarihi": "2026-09-19T23:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 281. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 391,
+    "uyari_tarihi": "2026-09-19T23:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 391. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 282,
+    "uyari_tarihi": "2026-09-19T23:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 282. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli",
+    "tetik_sayisi": 392,
+    "uyari_tarihi": "2026-09-19T23:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 (Cikis/oturum senkronizasyonu: logout aninda UI yenilenmeli) — ihsan 392. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 283,
+    "uyari_tarihi": "2026-09-19T23:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 283. kez uyarıldı; henüz başlamadı."
   }
 ]

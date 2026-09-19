@@ -6526,5 +6526,3197 @@
     "tetik_sayisi": 152,
     "uyari_tarihi": "2026-09-19T11:59:02",
     "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 152. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 158,
+    "uyari_tarihi": "2026-09-19T12:04:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 158. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 158,
+    "uyari_tarihi": "2026-09-19T12:04:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 158. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 153,
+    "uyari_tarihi": "2026-09-19T12:04:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 153. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 159,
+    "uyari_tarihi": "2026-09-19T12:09:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 159. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 159,
+    "uyari_tarihi": "2026-09-19T12:09:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 159. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 154,
+    "uyari_tarihi": "2026-09-19T12:09:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 154. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 160,
+    "uyari_tarihi": "2026-09-19T12:14:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 160. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 160,
+    "uyari_tarihi": "2026-09-19T12:14:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 160. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 155,
+    "uyari_tarihi": "2026-09-19T12:14:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 155. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 161,
+    "uyari_tarihi": "2026-09-19T12:19:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 161. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 161,
+    "uyari_tarihi": "2026-09-19T12:19:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 161. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 156,
+    "uyari_tarihi": "2026-09-19T12:19:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 156. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 162,
+    "uyari_tarihi": "2026-09-19T12:24:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 162. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 162,
+    "uyari_tarihi": "2026-09-19T12:24:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 162. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 157,
+    "uyari_tarihi": "2026-09-19T12:24:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 157. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 163,
+    "uyari_tarihi": "2026-09-19T12:29:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 163. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 163,
+    "uyari_tarihi": "2026-09-19T12:29:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 163. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 158,
+    "uyari_tarihi": "2026-09-19T12:29:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 158. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 164,
+    "uyari_tarihi": "2026-09-19T12:34:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 164. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 164,
+    "uyari_tarihi": "2026-09-19T12:34:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 164. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 159,
+    "uyari_tarihi": "2026-09-19T12:34:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 159. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 165,
+    "uyari_tarihi": "2026-09-19T12:39:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 165. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 165,
+    "uyari_tarihi": "2026-09-19T12:39:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 165. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 160,
+    "uyari_tarihi": "2026-09-19T12:39:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 160. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 166,
+    "uyari_tarihi": "2026-09-19T12:44:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 166. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 166,
+    "uyari_tarihi": "2026-09-19T12:44:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 166. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 161,
+    "uyari_tarihi": "2026-09-19T12:44:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 161. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 167,
+    "uyari_tarihi": "2026-09-19T12:49:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 167. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 167,
+    "uyari_tarihi": "2026-09-19T12:49:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 167. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 162,
+    "uyari_tarihi": "2026-09-19T12:49:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 162. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 168,
+    "uyari_tarihi": "2026-09-19T12:54:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 168. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 168,
+    "uyari_tarihi": "2026-09-19T12:54:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 168. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 163,
+    "uyari_tarihi": "2026-09-19T12:54:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 163. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 169,
+    "uyari_tarihi": "2026-09-19T12:59:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 169. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 169,
+    "uyari_tarihi": "2026-09-19T12:59:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 169. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 164,
+    "uyari_tarihi": "2026-09-19T12:59:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 164. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 170,
+    "uyari_tarihi": "2026-09-19T13:04:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 170. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 170,
+    "uyari_tarihi": "2026-09-19T13:04:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 170. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 165,
+    "uyari_tarihi": "2026-09-19T13:04:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 165. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 171,
+    "uyari_tarihi": "2026-09-19T13:09:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 171. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 171,
+    "uyari_tarihi": "2026-09-19T13:09:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 171. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 166,
+    "uyari_tarihi": "2026-09-19T13:09:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 166. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 172,
+    "uyari_tarihi": "2026-09-19T13:14:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 172. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 172,
+    "uyari_tarihi": "2026-09-19T13:14:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 172. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 167,
+    "uyari_tarihi": "2026-09-19T13:14:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 167. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 173,
+    "uyari_tarihi": "2026-09-19T13:19:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 173. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 173,
+    "uyari_tarihi": "2026-09-19T13:19:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 173. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 168,
+    "uyari_tarihi": "2026-09-19T13:19:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 168. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 174,
+    "uyari_tarihi": "2026-09-19T13:24:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 174. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 174,
+    "uyari_tarihi": "2026-09-19T13:24:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 174. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 169,
+    "uyari_tarihi": "2026-09-19T13:24:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 169. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 175,
+    "uyari_tarihi": "2026-09-19T13:29:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 175. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 175,
+    "uyari_tarihi": "2026-09-19T13:29:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 175. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 170,
+    "uyari_tarihi": "2026-09-19T13:29:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 170. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 176,
+    "uyari_tarihi": "2026-09-19T13:34:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 176. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 176,
+    "uyari_tarihi": "2026-09-19T13:34:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 176. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 171,
+    "uyari_tarihi": "2026-09-19T13:34:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 171. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 177,
+    "uyari_tarihi": "2026-09-19T13:39:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 177. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 177,
+    "uyari_tarihi": "2026-09-19T13:39:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 177. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 172,
+    "uyari_tarihi": "2026-09-19T13:39:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 172. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 178,
+    "uyari_tarihi": "2026-09-19T13:44:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 178. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 178,
+    "uyari_tarihi": "2026-09-19T13:44:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 178. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 173,
+    "uyari_tarihi": "2026-09-19T13:44:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 173. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 179,
+    "uyari_tarihi": "2026-09-19T13:49:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 179. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 179,
+    "uyari_tarihi": "2026-09-19T13:49:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 179. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 174,
+    "uyari_tarihi": "2026-09-19T13:49:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 174. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 180,
+    "uyari_tarihi": "2026-09-19T13:54:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 180. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 180,
+    "uyari_tarihi": "2026-09-19T13:54:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 180. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 175,
+    "uyari_tarihi": "2026-09-19T13:54:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 175. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 181,
+    "uyari_tarihi": "2026-09-19T13:59:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 181. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 181,
+    "uyari_tarihi": "2026-09-19T13:59:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 181. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 176,
+    "uyari_tarihi": "2026-09-19T13:59:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 176. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 182,
+    "uyari_tarihi": "2026-09-19T14:04:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 182. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 182,
+    "uyari_tarihi": "2026-09-19T14:04:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 182. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 177,
+    "uyari_tarihi": "2026-09-19T14:04:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 177. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 183,
+    "uyari_tarihi": "2026-09-19T14:09:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 183. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 183,
+    "uyari_tarihi": "2026-09-19T14:09:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 183. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 178,
+    "uyari_tarihi": "2026-09-19T14:09:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 178. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 184,
+    "uyari_tarihi": "2026-09-19T14:14:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 184. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 184,
+    "uyari_tarihi": "2026-09-19T14:14:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 184. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 179,
+    "uyari_tarihi": "2026-09-19T14:14:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 179. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 185,
+    "uyari_tarihi": "2026-09-19T14:19:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 185. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 185,
+    "uyari_tarihi": "2026-09-19T14:19:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 185. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 180,
+    "uyari_tarihi": "2026-09-19T14:19:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 180. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 186,
+    "uyari_tarihi": "2026-09-19T14:24:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 186. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 186,
+    "uyari_tarihi": "2026-09-19T14:24:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 186. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 181,
+    "uyari_tarihi": "2026-09-19T14:24:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 181. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 187,
+    "uyari_tarihi": "2026-09-19T14:29:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 187. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 187,
+    "uyari_tarihi": "2026-09-19T14:29:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 187. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 182,
+    "uyari_tarihi": "2026-09-19T14:29:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 182. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 188,
+    "uyari_tarihi": "2026-09-19T14:34:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 188. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 188,
+    "uyari_tarihi": "2026-09-19T14:34:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 188. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 183,
+    "uyari_tarihi": "2026-09-19T14:34:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 183. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 189,
+    "uyari_tarihi": "2026-09-19T14:39:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 189. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 189,
+    "uyari_tarihi": "2026-09-19T14:39:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 189. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 184,
+    "uyari_tarihi": "2026-09-19T14:39:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 184. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 190,
+    "uyari_tarihi": "2026-09-19T14:44:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 190. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 190,
+    "uyari_tarihi": "2026-09-19T14:44:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 190. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 185,
+    "uyari_tarihi": "2026-09-19T14:44:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 185. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 191,
+    "uyari_tarihi": "2026-09-19T14:49:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 191. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 191,
+    "uyari_tarihi": "2026-09-19T14:49:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 191. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 186,
+    "uyari_tarihi": "2026-09-19T14:49:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 186. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 192,
+    "uyari_tarihi": "2026-09-19T14:54:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 192. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 192,
+    "uyari_tarihi": "2026-09-19T14:54:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 192. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 187,
+    "uyari_tarihi": "2026-09-19T14:54:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 187. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 193,
+    "uyari_tarihi": "2026-09-19T14:59:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 193. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 193,
+    "uyari_tarihi": "2026-09-19T14:59:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 193. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 188,
+    "uyari_tarihi": "2026-09-19T14:59:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 188. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 194,
+    "uyari_tarihi": "2026-09-19T15:04:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 194. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 194,
+    "uyari_tarihi": "2026-09-19T15:04:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 194. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 189,
+    "uyari_tarihi": "2026-09-19T15:04:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 189. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 195,
+    "uyari_tarihi": "2026-09-19T15:09:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 195. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 195,
+    "uyari_tarihi": "2026-09-19T15:09:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 195. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 190,
+    "uyari_tarihi": "2026-09-19T15:09:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 190. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 196,
+    "uyari_tarihi": "2026-09-19T15:14:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 196. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 196,
+    "uyari_tarihi": "2026-09-19T15:14:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 196. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 191,
+    "uyari_tarihi": "2026-09-19T15:14:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 191. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 197,
+    "uyari_tarihi": "2026-09-19T15:19:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 197. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 197,
+    "uyari_tarihi": "2026-09-19T15:19:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 197. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 192,
+    "uyari_tarihi": "2026-09-19T15:19:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 192. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 198,
+    "uyari_tarihi": "2026-09-19T15:24:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 198. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 198,
+    "uyari_tarihi": "2026-09-19T15:24:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 198. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 193,
+    "uyari_tarihi": "2026-09-19T15:24:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 193. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 199,
+    "uyari_tarihi": "2026-09-19T15:29:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 199. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 199,
+    "uyari_tarihi": "2026-09-19T15:29:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 199. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 194,
+    "uyari_tarihi": "2026-09-19T15:29:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 194. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 200,
+    "uyari_tarihi": "2026-09-19T15:34:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 200. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 200,
+    "uyari_tarihi": "2026-09-19T15:34:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 200. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 195,
+    "uyari_tarihi": "2026-09-19T15:34:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 195. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 201,
+    "uyari_tarihi": "2026-09-19T15:39:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 201. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 201,
+    "uyari_tarihi": "2026-09-19T15:39:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 201. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 196,
+    "uyari_tarihi": "2026-09-19T15:39:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 196. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 202,
+    "uyari_tarihi": "2026-09-19T15:44:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 202. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 202,
+    "uyari_tarihi": "2026-09-19T15:44:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 202. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 197,
+    "uyari_tarihi": "2026-09-19T15:44:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 197. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 203,
+    "uyari_tarihi": "2026-09-19T16:48:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 203. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 203,
+    "uyari_tarihi": "2026-09-19T16:48:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 203. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 198,
+    "uyari_tarihi": "2026-09-19T16:48:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 198. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 204,
+    "uyari_tarihi": "2026-09-19T16:49:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 204. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 204,
+    "uyari_tarihi": "2026-09-19T16:49:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 204. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 199,
+    "uyari_tarihi": "2026-09-19T16:49:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 199. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 205,
+    "uyari_tarihi": "2026-09-19T16:54:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 205. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 205,
+    "uyari_tarihi": "2026-09-19T16:54:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 205. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 200,
+    "uyari_tarihi": "2026-09-19T16:54:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 200. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 206,
+    "uyari_tarihi": "2026-09-19T16:59:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 206. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 206,
+    "uyari_tarihi": "2026-09-19T16:59:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 206. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 201,
+    "uyari_tarihi": "2026-09-19T16:59:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 201. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 207,
+    "uyari_tarihi": "2026-09-19T17:04:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 207. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 207,
+    "uyari_tarihi": "2026-09-19T17:04:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 207. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 202,
+    "uyari_tarihi": "2026-09-19T17:04:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 202. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 208,
+    "uyari_tarihi": "2026-09-19T17:09:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 208. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 208,
+    "uyari_tarihi": "2026-09-19T17:09:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 208. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 203,
+    "uyari_tarihi": "2026-09-19T17:09:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 203. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 209,
+    "uyari_tarihi": "2026-09-19T17:14:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 209. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 209,
+    "uyari_tarihi": "2026-09-19T17:14:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 209. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 204,
+    "uyari_tarihi": "2026-09-19T17:14:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 204. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 210,
+    "uyari_tarihi": "2026-09-19T17:19:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 210. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 210,
+    "uyari_tarihi": "2026-09-19T17:19:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 210. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 205,
+    "uyari_tarihi": "2026-09-19T17:19:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 205. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 211,
+    "uyari_tarihi": "2026-09-19T17:24:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 211. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 211,
+    "uyari_tarihi": "2026-09-19T17:24:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 211. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 206,
+    "uyari_tarihi": "2026-09-19T17:24:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 206. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 212,
+    "uyari_tarihi": "2026-09-19T17:29:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 212. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 212,
+    "uyari_tarihi": "2026-09-19T17:29:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 212. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 207,
+    "uyari_tarihi": "2026-09-19T17:29:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 207. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 213,
+    "uyari_tarihi": "2026-09-19T17:34:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 213. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 213,
+    "uyari_tarihi": "2026-09-19T17:34:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 213. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 208,
+    "uyari_tarihi": "2026-09-19T17:34:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 208. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 214,
+    "uyari_tarihi": "2026-09-19T17:39:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 214. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 214,
+    "uyari_tarihi": "2026-09-19T17:39:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 214. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 209,
+    "uyari_tarihi": "2026-09-19T17:39:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 209. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 215,
+    "uyari_tarihi": "2026-09-19T17:44:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 215. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 215,
+    "uyari_tarihi": "2026-09-19T17:44:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 215. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 210,
+    "uyari_tarihi": "2026-09-19T17:44:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 210. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 216,
+    "uyari_tarihi": "2026-09-19T17:49:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 216. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 216,
+    "uyari_tarihi": "2026-09-19T17:49:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 216. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 211,
+    "uyari_tarihi": "2026-09-19T17:49:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 211. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 217,
+    "uyari_tarihi": "2026-09-19T17:54:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 217. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 217,
+    "uyari_tarihi": "2026-09-19T17:54:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 217. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 212,
+    "uyari_tarihi": "2026-09-19T17:54:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 212. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 218,
+    "uyari_tarihi": "2026-09-19T17:59:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 218. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 218,
+    "uyari_tarihi": "2026-09-19T17:59:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 218. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 213,
+    "uyari_tarihi": "2026-09-19T17:59:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 213. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 219,
+    "uyari_tarihi": "2026-09-19T18:04:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 219. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 219,
+    "uyari_tarihi": "2026-09-19T18:04:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 219. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 214,
+    "uyari_tarihi": "2026-09-19T18:04:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 214. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 220,
+    "uyari_tarihi": "2026-09-19T18:09:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 220. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 220,
+    "uyari_tarihi": "2026-09-19T18:09:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 220. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 215,
+    "uyari_tarihi": "2026-09-19T18:09:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 215. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 221,
+    "uyari_tarihi": "2026-09-19T18:14:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 221. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 221,
+    "uyari_tarihi": "2026-09-19T18:14:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 221. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 216,
+    "uyari_tarihi": "2026-09-19T18:14:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 216. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 222,
+    "uyari_tarihi": "2026-09-19T18:19:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 222. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 222,
+    "uyari_tarihi": "2026-09-19T18:19:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 222. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 217,
+    "uyari_tarihi": "2026-09-19T18:19:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 217. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 223,
+    "uyari_tarihi": "2026-09-19T18:24:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 223. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 223,
+    "uyari_tarihi": "2026-09-19T18:24:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 223. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 218,
+    "uyari_tarihi": "2026-09-19T18:24:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 218. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 224,
+    "uyari_tarihi": "2026-09-19T18:29:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 224. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 224,
+    "uyari_tarihi": "2026-09-19T18:29:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 224. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 219,
+    "uyari_tarihi": "2026-09-19T18:29:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 219. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 225,
+    "uyari_tarihi": "2026-09-19T18:34:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 225. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 225,
+    "uyari_tarihi": "2026-09-19T18:34:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 225. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 220,
+    "uyari_tarihi": "2026-09-19T18:34:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 220. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 226,
+    "uyari_tarihi": "2026-09-19T18:39:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 226. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 226,
+    "uyari_tarihi": "2026-09-19T18:39:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 226. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 221,
+    "uyari_tarihi": "2026-09-19T18:39:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 221. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 227,
+    "uyari_tarihi": "2026-09-19T18:44:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 227. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 227,
+    "uyari_tarihi": "2026-09-19T18:44:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 227. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 222,
+    "uyari_tarihi": "2026-09-19T18:44:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 222. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 228,
+    "uyari_tarihi": "2026-09-19T18:49:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 228. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 228,
+    "uyari_tarihi": "2026-09-19T18:49:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 228. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 223,
+    "uyari_tarihi": "2026-09-19T18:49:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 223. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 229,
+    "uyari_tarihi": "2026-09-19T18:54:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 229. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 229,
+    "uyari_tarihi": "2026-09-19T18:54:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 229. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 224,
+    "uyari_tarihi": "2026-09-19T18:54:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 224. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 230,
+    "uyari_tarihi": "2026-09-19T18:59:03",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 230. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 230,
+    "uyari_tarihi": "2026-09-19T18:59:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 230. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 225,
+    "uyari_tarihi": "2026-09-19T18:59:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 225. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 231,
+    "uyari_tarihi": "2026-09-19T19:04:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 231. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 231,
+    "uyari_tarihi": "2026-09-19T19:04:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 231. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 226,
+    "uyari_tarihi": "2026-09-19T19:04:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 226. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 232,
+    "uyari_tarihi": "2026-09-19T19:09:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 232. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 232,
+    "uyari_tarihi": "2026-09-19T19:09:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 232. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 227,
+    "uyari_tarihi": "2026-09-19T19:09:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 227. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 233,
+    "uyari_tarihi": "2026-09-19T19:14:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 233. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 233,
+    "uyari_tarihi": "2026-09-19T19:14:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 233. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 228,
+    "uyari_tarihi": "2026-09-19T19:14:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 228. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 234,
+    "uyari_tarihi": "2026-09-19T19:19:01",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 234. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 234,
+    "uyari_tarihi": "2026-09-19T19:19:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 234. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 229,
+    "uyari_tarihi": "2026-09-19T19:19:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 229. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 235,
+    "uyari_tarihi": "2026-09-19T19:24:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 235. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 235,
+    "uyari_tarihi": "2026-09-19T19:24:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 235. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 230,
+    "uyari_tarihi": "2026-09-19T19:24:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 230. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 236,
+    "uyari_tarihi": "2026-09-19T19:29:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 236. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 236,
+    "uyari_tarihi": "2026-09-19T19:29:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 236. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 231,
+    "uyari_tarihi": "2026-09-19T19:29:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 231. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 237,
+    "uyari_tarihi": "2026-09-19T19:34:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 237. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 237,
+    "uyari_tarihi": "2026-09-19T19:34:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 237. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 232,
+    "uyari_tarihi": "2026-09-19T19:34:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 232. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 238,
+    "uyari_tarihi": "2026-09-19T19:39:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 238. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 238,
+    "uyari_tarihi": "2026-09-19T19:39:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 238. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 233,
+    "uyari_tarihi": "2026-09-19T19:39:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 233. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 239,
+    "uyari_tarihi": "2026-09-19T19:44:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 239. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 239,
+    "uyari_tarihi": "2026-09-19T19:44:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 239. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 234,
+    "uyari_tarihi": "2026-09-19T19:44:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 234. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 240,
+    "uyari_tarihi": "2026-09-19T19:49:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 240. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 240,
+    "uyari_tarihi": "2026-09-19T19:49:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 240. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 235,
+    "uyari_tarihi": "2026-09-19T19:49:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 235. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 241,
+    "uyari_tarihi": "2026-09-19T19:54:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 241. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 241,
+    "uyari_tarihi": "2026-09-19T19:54:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 241. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 236,
+    "uyari_tarihi": "2026-09-19T19:54:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 236. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 242,
+    "uyari_tarihi": "2026-09-19T19:59:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 242. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 242,
+    "uyari_tarihi": "2026-09-19T19:59:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 242. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 237,
+    "uyari_tarihi": "2026-09-19T19:59:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 237. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 243,
+    "uyari_tarihi": "2026-09-19T20:04:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 243. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 243,
+    "uyari_tarihi": "2026-09-19T20:04:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 243. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 238,
+    "uyari_tarihi": "2026-09-19T20:04:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 238. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 244,
+    "uyari_tarihi": "2026-09-19T20:09:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 244. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 244,
+    "uyari_tarihi": "2026-09-19T20:09:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 244. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 239,
+    "uyari_tarihi": "2026-09-19T20:09:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 239. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 245,
+    "uyari_tarihi": "2026-09-19T20:14:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 245. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 245,
+    "uyari_tarihi": "2026-09-19T20:14:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 245. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 240,
+    "uyari_tarihi": "2026-09-19T20:14:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 240. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 246,
+    "uyari_tarihi": "2026-09-19T20:19:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 246. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 246,
+    "uyari_tarihi": "2026-09-19T20:19:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 246. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 241,
+    "uyari_tarihi": "2026-09-19T20:19:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 241. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 247,
+    "uyari_tarihi": "2026-09-19T20:24:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 247. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 247,
+    "uyari_tarihi": "2026-09-19T20:24:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 247. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 242,
+    "uyari_tarihi": "2026-09-19T20:24:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 242. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 248,
+    "uyari_tarihi": "2026-09-19T20:29:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 248. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 248,
+    "uyari_tarihi": "2026-09-19T20:29:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 248. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 243,
+    "uyari_tarihi": "2026-09-19T20:29:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 243. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 249,
+    "uyari_tarihi": "2026-09-19T20:34:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 249. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 249,
+    "uyari_tarihi": "2026-09-19T20:34:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 249. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 244,
+    "uyari_tarihi": "2026-09-19T20:34:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 244. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 250,
+    "uyari_tarihi": "2026-09-19T20:39:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 250. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 250,
+    "uyari_tarihi": "2026-09-19T20:39:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 250. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 245,
+    "uyari_tarihi": "2026-09-19T20:39:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 245. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 251,
+    "uyari_tarihi": "2026-09-19T20:44:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 251. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 251,
+    "uyari_tarihi": "2026-09-19T20:44:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 251. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 246,
+    "uyari_tarihi": "2026-09-19T20:44:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 246. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 252,
+    "uyari_tarihi": "2026-09-19T20:49:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 252. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 252,
+    "uyari_tarihi": "2026-09-19T20:49:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 252. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 247,
+    "uyari_tarihi": "2026-09-19T20:49:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 247. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 253,
+    "uyari_tarihi": "2026-09-19T20:54:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 253. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 253,
+    "uyari_tarihi": "2026-09-19T20:54:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 253. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 248,
+    "uyari_tarihi": "2026-09-19T20:54:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 248. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 254,
+    "uyari_tarihi": "2026-09-19T20:59:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 254. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 254,
+    "uyari_tarihi": "2026-09-19T20:59:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 254. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 249,
+    "uyari_tarihi": "2026-09-19T20:59:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 249. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 255,
+    "uyari_tarihi": "2026-09-19T21:04:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 255. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 255,
+    "uyari_tarihi": "2026-09-19T21:04:03",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 255. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 250,
+    "uyari_tarihi": "2026-09-19T21:04:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 250. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 256,
+    "uyari_tarihi": "2026-09-19T21:09:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 256. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 256,
+    "uyari_tarihi": "2026-09-19T21:09:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 256. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 251,
+    "uyari_tarihi": "2026-09-19T21:09:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 251. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 257,
+    "uyari_tarihi": "2026-09-19T21:14:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 257. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 257,
+    "uyari_tarihi": "2026-09-19T21:14:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 257. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 252,
+    "uyari_tarihi": "2026-09-19T21:14:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 252. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 258,
+    "uyari_tarihi": "2026-09-19T21:19:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 258. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 258,
+    "uyari_tarihi": "2026-09-19T21:19:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 258. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 253,
+    "uyari_tarihi": "2026-09-19T21:19:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 253. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 259,
+    "uyari_tarihi": "2026-09-19T21:24:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 259. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 259,
+    "uyari_tarihi": "2026-09-19T21:24:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 259. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 254,
+    "uyari_tarihi": "2026-09-19T21:24:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 254. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 260,
+    "uyari_tarihi": "2026-09-19T21:29:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 260. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 260,
+    "uyari_tarihi": "2026-09-19T21:29:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 260. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 255,
+    "uyari_tarihi": "2026-09-19T21:29:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 255. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 261,
+    "uyari_tarihi": "2026-09-19T21:34:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 261. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 261,
+    "uyari_tarihi": "2026-09-19T21:34:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 261. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 256,
+    "uyari_tarihi": "2026-09-19T21:34:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 256. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 262,
+    "uyari_tarihi": "2026-09-19T21:39:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 262. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 262,
+    "uyari_tarihi": "2026-09-19T21:39:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 262. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 257,
+    "uyari_tarihi": "2026-09-19T21:39:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 257. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 263,
+    "uyari_tarihi": "2026-09-19T21:44:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 263. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 263,
+    "uyari_tarihi": "2026-09-19T21:44:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 263. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 258,
+    "uyari_tarihi": "2026-09-19T21:44:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 258. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 264,
+    "uyari_tarihi": "2026-09-19T21:49:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 264. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 264,
+    "uyari_tarihi": "2026-09-19T21:49:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 264. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 259,
+    "uyari_tarihi": "2026-09-19T21:49:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 259. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 265,
+    "uyari_tarihi": "2026-09-19T21:54:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 265. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 265,
+    "uyari_tarihi": "2026-09-19T21:54:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 265. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 260,
+    "uyari_tarihi": "2026-09-19T21:54:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 260. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 266,
+    "uyari_tarihi": "2026-09-19T21:59:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 266. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 266,
+    "uyari_tarihi": "2026-09-19T21:59:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 266. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 261,
+    "uyari_tarihi": "2026-09-19T21:59:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 261. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 267,
+    "uyari_tarihi": "2026-09-19T22:04:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 267. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 267,
+    "uyari_tarihi": "2026-09-19T22:04:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 267. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 262,
+    "uyari_tarihi": "2026-09-19T22:04:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 262. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 268,
+    "uyari_tarihi": "2026-09-19T22:09:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 268. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 268,
+    "uyari_tarihi": "2026-09-19T22:09:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 268. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 263,
+    "uyari_tarihi": "2026-09-19T22:09:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 263. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 269,
+    "uyari_tarihi": "2026-09-19T22:14:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 269. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 269,
+    "uyari_tarihi": "2026-09-19T22:14:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 269. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 264,
+    "uyari_tarihi": "2026-09-19T22:14:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 264. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 270,
+    "uyari_tarihi": "2026-09-19T22:19:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 270. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 270,
+    "uyari_tarihi": "2026-09-19T22:19:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 270. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 265,
+    "uyari_tarihi": "2026-09-19T22:19:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 265. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 271,
+    "uyari_tarihi": "2026-09-19T22:24:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 271. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 271,
+    "uyari_tarihi": "2026-09-19T22:24:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 271. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 266,
+    "uyari_tarihi": "2026-09-19T22:24:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 266. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 272,
+    "uyari_tarihi": "2026-09-19T22:29:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 272. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 272,
+    "uyari_tarihi": "2026-09-19T22:29:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 272. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 267,
+    "uyari_tarihi": "2026-09-19T22:29:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 267. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 273,
+    "uyari_tarihi": "2026-09-19T22:34:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 273. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 273,
+    "uyari_tarihi": "2026-09-19T22:34:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 273. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 268,
+    "uyari_tarihi": "2026-09-19T22:34:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 268. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 274,
+    "uyari_tarihi": "2026-09-19T22:39:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 274. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 274,
+    "uyari_tarihi": "2026-09-19T22:39:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 274. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 269,
+    "uyari_tarihi": "2026-09-19T22:39:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 269. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 275,
+    "uyari_tarihi": "2026-09-19T22:44:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 275. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 275,
+    "uyari_tarihi": "2026-09-19T22:44:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 275. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 270,
+    "uyari_tarihi": "2026-09-19T22:44:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 270. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 276,
+    "uyari_tarihi": "2026-09-19T22:49:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 276. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 276,
+    "uyari_tarihi": "2026-09-19T22:49:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 276. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 271,
+    "uyari_tarihi": "2026-09-19T22:49:02",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 271. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 277,
+    "uyari_tarihi": "2026-09-19T22:54:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 277. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 277,
+    "uyari_tarihi": "2026-09-19T22:54:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 277. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 272,
+    "uyari_tarihi": "2026-09-19T22:54:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 272. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 278,
+    "uyari_tarihi": "2026-09-19T22:59:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 278. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 278,
+    "uyari_tarihi": "2026-09-19T22:59:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 278. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 273,
+    "uyari_tarihi": "2026-09-19T22:59:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 273. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 279,
+    "uyari_tarihi": "2026-09-19T23:04:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 279. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 279,
+    "uyari_tarihi": "2026-09-19T23:04:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 279. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 274,
+    "uyari_tarihi": "2026-09-19T23:04:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 274. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 280,
+    "uyari_tarihi": "2026-09-19T23:09:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 280. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 280,
+    "uyari_tarihi": "2026-09-19T23:09:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 280. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 275,
+    "uyari_tarihi": "2026-09-19T23:09:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 275. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 281,
+    "uyari_tarihi": "2026-09-19T23:14:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 281. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 281,
+    "uyari_tarihi": "2026-09-19T23:14:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 281. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 276,
+    "uyari_tarihi": "2026-09-19T23:14:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 276. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 282,
+    "uyari_tarihi": "2026-09-19T23:19:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 282. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 282,
+    "uyari_tarihi": "2026-09-19T23:19:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 282. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 277,
+    "uyari_tarihi": "2026-09-19T23:19:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 277. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 283,
+    "uyari_tarihi": "2026-09-19T23:24:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 283. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 283,
+    "uyari_tarihi": "2026-09-19T23:24:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 283. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 278,
+    "uyari_tarihi": "2026-09-19T23:24:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 278. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 284,
+    "uyari_tarihi": "2026-09-19T23:29:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 284. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 284,
+    "uyari_tarihi": "2026-09-19T23:29:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 284. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 279,
+    "uyari_tarihi": "2026-09-19T23:29:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 279. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 285,
+    "uyari_tarihi": "2026-09-19T23:34:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 285. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 285,
+    "uyari_tarihi": "2026-09-19T23:34:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 285. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 280,
+    "uyari_tarihi": "2026-09-19T23:34:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 280. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 286,
+    "uyari_tarihi": "2026-09-19T23:39:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 286. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 286,
+    "uyari_tarihi": "2026-09-19T23:39:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 286. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 281,
+    "uyari_tarihi": "2026-09-19T23:39:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 281. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 287,
+    "uyari_tarihi": "2026-09-19T23:44:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 287. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 287,
+    "uyari_tarihi": "2026-09-19T23:44:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 287. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 282,
+    "uyari_tarihi": "2026-09-19T23:44:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 282. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 288,
+    "uyari_tarihi": "2026-09-19T23:49:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 288. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 288,
+    "uyari_tarihi": "2026-09-19T23:49:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 288. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 283,
+    "uyari_tarihi": "2026-09-19T23:49:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 283. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 289,
+    "uyari_tarihi": "2026-09-19T23:54:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 289. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 289,
+    "uyari_tarihi": "2026-09-19T23:54:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 289. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 284,
+    "uyari_tarihi": "2026-09-19T23:54:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 284. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 290,
+    "uyari_tarihi": "2026-09-19T23:59:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 290. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "gorev_basligi": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
+    "tetik_sayisi": 290,
+    "uyari_tarihi": "2026-09-19T23:59:02",
+    "mesaj": "⚠️ TEST-AYARLAR-KAPSAM-01 (Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)) — yasu 290. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "gorev_basligi": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
+    "tetik_sayisi": 285,
+    "uyari_tarihi": "2026-09-19T23:59:03",
+    "mesaj": "⚠️ ORKESTRA-BASLIK-GERIYE-01 ([ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)) — yasu 285. kez uyarıldı; henüz başlamadı."
   }
 ]
