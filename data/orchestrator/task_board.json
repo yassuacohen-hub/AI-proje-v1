@@ -5086,13 +5086,13 @@
     "baslik": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-18T22:41:37",
     "bitis": null,
     "dosyalar": [
       "data/orchestrator/REVIEW-ONAY-KUYRUGU-01_rapor_2026-09-18_denetim.md"
     ],
-    "not": "",
+    "not": "Teslim (yasu): Onay kuyrugu 2 teslimi denetledim (kod degisikligi yok). Canli kanit: 15/15 test yesil (test_sec_auth_01 + test_ui_modal_stil + test_style_css), kodlama_denetim temiz. 15 bulgu: 1 kirmizi (ADMIN-MODAL-STIL-01 rapor dosyasi yok - teslim kontrol listesi madde 1 ihlali, telafi istenir), 5 sari (raporda token degerleri maskelenmemis, --sifre CLI ps sizmasi, brief-teslim sapmasi, kuyruk cikti listesi yanlis, modal docstring eski UX-01 ID), 8 yesil, 1 mavi. Review Confidence 87/100 -> kucuk duzeltmeyle onay. Rapor: data/orchestrator/REVIEW-ONAY-KUYRUGU-01_rapor_2026-09-18_denetim.md",
     "source": "ic",
     "from_agent": null,
     "mod": "code"
@@ -5103,13 +5103,13 @@
     "baslik": "Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-18T22:42:02",
     "bitis": null,
     "dosyalar": [
       "tests/test_admin_kullanici_ayarlari.py"
     ],
-    "not": "",
+    "not": "Teslim (yasu): Kullanici Ayarlari test iskeleti yazildi: tests/test_admin_kullanici_ayarlari.py (8 test). Wireframe 4.2'nin 7 kabul kriteri teker teker karsilanir: k1 3 bolum (BOLUMLER + sirasi), k2 misafir kontrolu, k3 mevcut sifre izi, k4 hepsi-ya-hic (tek submit), k5 admin_panel'de eski render_ayarlari_tab tanimi kaldirilir, k6 navigasyon yeni module, k7 mevcut ayar testleri canary. Hedef modul yokken 7 skip + 1 passed (canary); modul gelince otomatik devreye girer (importorskip deseni). Yontem AST tabanli (test_sayfa_iskeleti.py deseni), Streamlit calistirilmaz. Kod degisikligi yalniz bu test dosyasinda; web_dashboard'a dokunulmadi. kanit: 1 passed/7 skipped, kodlama_denetim temiz. Not: k2/k3/k4 statik iskelet; modul geldiginde davranisal derinlestirme onerilir.",
     "source": "ic",
     "from_agent": null,
     "mod": "code"
@@ -5135,7 +5135,7 @@
     "baslik": "[ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-18T23:05:44",
     "bitis": null,
     "dosyalar": [],

@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-19T03:33:07
+> Son guncelleme: 2026-09-20T23:55:06
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -50,10 +50,10 @@
 | COP-24 | [COP-TASARIM] TASARIM-2: Son-guncelleme  | - | P2 | archive |
 | COP-25 | [COP-TASARIM] TASARIM-3: Sidebar yardim  | - | P2 | archive |
 | COP-26 | MUSTERILER ekrani: firma listesi+filtre+ | - | P1 | blocked |
-| REVIEW-ONAY-KUYRUGU-01 | Onay kuyrugundaki 2 teslimi denetle (ADM | yasu | P1 | plan |
-| TEST-AYARLAR-KAPSAM-01 | Kullanici Ayarlari sayfasi icin test isk | yasu | P2 | plan |
+| REVIEW-ONAY-KUYRUGU-01 | Onay kuyrugundaki 2 teslimi denetle (ADM | yasu | P1 | review |
+| TEST-AYARLAR-KAPSAM-01 | Kullanici Ayarlari sayfasi icin test isk | yasu | P2 | review |
 | UI-AYARLAR-SAYFA-01 | [UI] Kullanici Ayarlari sayfasini yaz →  | ihsan | P1 | plan |
-| ORKESTRA-BASLIK-GERIYE-01 | [ORKESTRA] Acik gorev basliklarini D-57  | yasu | P2 | plan |
+| ORKESTRA-BASLIK-GERIYE-01 | [ORKESTRA] Acik gorev basliklarini D-57  | yasu | P2 | aktif |
 | TEST-MERVE-KAPSAM-01 | [TEST] Ayarlar sayfasi testlerini denetl | salih | P2 | plan |
 
 ## Tamamlananlar (Son 10)
