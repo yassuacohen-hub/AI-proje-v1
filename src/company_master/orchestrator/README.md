@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/skills/supabase/README.md]]
+
 # Huginn Data Insights Orchestrator
 
 Bu modül, çoklu ajan koordinasyonu, görev yönetimi, dosya kilitleme ve senkronizasyon sistemini sağlar.

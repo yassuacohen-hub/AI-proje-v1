@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/security_audit/CL-03_guvenlik_raporu.md]]
+
 # CL-03 Guvenlik Tarama Raporu
 
 Tarih: 2026-09-14T06:28:00+03:00

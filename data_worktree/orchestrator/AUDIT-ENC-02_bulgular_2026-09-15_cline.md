@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/AUDIT-ENC-02_bulgular_2026-09-15_cline.md]]
+
 # AUDIT-ENC-02 — Repo Geneli Kodlama Denetimi + kodlama_denetim.py Kapsam Kontrolü
 
 - **Denetleyen:** cline (tarih: 2026-09-15)

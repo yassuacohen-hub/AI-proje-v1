@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/REV-UI-CHART-01_bulgular_2026-09-16_cline.md]]
+
 # REV-UI-CHART-01 — UI-CHART-01 Çapraz İnceleme (roo teslimi, commit 928ef8b)
 
 **İnceleyen:** cline · **Tarih:** 2026-09-16 · **Sonuç: ✅ ONAY** (engelleyici bulgu yok)

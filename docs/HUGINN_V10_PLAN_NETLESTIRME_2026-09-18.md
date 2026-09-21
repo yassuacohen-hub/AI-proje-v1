@@ -1,3 +1,7 @@
+[[Huginn Data Insights/AI proje v1/V10/03_mimari/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md]]
+
+İlgili: [[PROJECT_ROADMAP]]
+
 # HUGINN V10 — Plan Netleştirme
 
 > **Tarih:** 2026-09-18 · **Sürüm:** 1.0 · **Durum:** KAHİN (Ürün Sahibi) onayı bekliyor

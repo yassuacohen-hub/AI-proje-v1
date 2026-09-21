@@ -1,3 +1,5 @@
+[[Huginn Data Insights/AI proje v1/scripts/README_TELEGRAM.md]]
+
 # Telegram Bot — Kurulum ve Kullanim Kilavuzu
 
 ## Genel Bakış

@@ -15982,5 +15982,2309 @@
     "tetik_sayisi": 595,
     "uyari_tarihi": "2026-09-21T11:59:02",
     "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 595. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 705,
+    "uyari_tarihi": "2026-09-21T12:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 705. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 596,
+    "uyari_tarihi": "2026-09-21T12:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 596. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 706,
+    "uyari_tarihi": "2026-09-21T12:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 706. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 597,
+    "uyari_tarihi": "2026-09-21T12:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 597. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 707,
+    "uyari_tarihi": "2026-09-21T12:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 707. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 598,
+    "uyari_tarihi": "2026-09-21T12:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 598. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 708,
+    "uyari_tarihi": "2026-09-21T12:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 708. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 599,
+    "uyari_tarihi": "2026-09-21T12:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 599. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 709,
+    "uyari_tarihi": "2026-09-21T12:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 709. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 600,
+    "uyari_tarihi": "2026-09-21T12:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 600. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 710,
+    "uyari_tarihi": "2026-09-21T12:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 710. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 601,
+    "uyari_tarihi": "2026-09-21T12:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 601. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 711,
+    "uyari_tarihi": "2026-09-21T12:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 711. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 602,
+    "uyari_tarihi": "2026-09-21T12:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 602. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 712,
+    "uyari_tarihi": "2026-09-21T12:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 712. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 603,
+    "uyari_tarihi": "2026-09-21T12:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 603. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 713,
+    "uyari_tarihi": "2026-09-21T12:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 713. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 604,
+    "uyari_tarihi": "2026-09-21T12:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 604. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 714,
+    "uyari_tarihi": "2026-09-21T12:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 714. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 605,
+    "uyari_tarihi": "2026-09-21T12:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 605. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 715,
+    "uyari_tarihi": "2026-09-21T12:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 715. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 606,
+    "uyari_tarihi": "2026-09-21T12:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 606. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 716,
+    "uyari_tarihi": "2026-09-21T12:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 716. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 607,
+    "uyari_tarihi": "2026-09-21T12:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 607. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 717,
+    "uyari_tarihi": "2026-09-21T13:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 717. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 608,
+    "uyari_tarihi": "2026-09-21T13:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 608. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 718,
+    "uyari_tarihi": "2026-09-21T13:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 718. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 609,
+    "uyari_tarihi": "2026-09-21T13:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 609. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 719,
+    "uyari_tarihi": "2026-09-21T13:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 719. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 610,
+    "uyari_tarihi": "2026-09-21T13:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 610. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 720,
+    "uyari_tarihi": "2026-09-21T13:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 720. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 611,
+    "uyari_tarihi": "2026-09-21T13:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 611. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 721,
+    "uyari_tarihi": "2026-09-21T13:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 721. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 612,
+    "uyari_tarihi": "2026-09-21T13:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 612. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 722,
+    "uyari_tarihi": "2026-09-21T13:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 722. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 613,
+    "uyari_tarihi": "2026-09-21T13:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 613. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 723,
+    "uyari_tarihi": "2026-09-21T13:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 723. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 614,
+    "uyari_tarihi": "2026-09-21T13:34:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 614. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 724,
+    "uyari_tarihi": "2026-09-21T13:39:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 724. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 615,
+    "uyari_tarihi": "2026-09-21T13:39:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 615. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 725,
+    "uyari_tarihi": "2026-09-21T13:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 725. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 616,
+    "uyari_tarihi": "2026-09-21T13:44:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 616. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 726,
+    "uyari_tarihi": "2026-09-21T13:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 726. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 617,
+    "uyari_tarihi": "2026-09-21T13:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 617. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 727,
+    "uyari_tarihi": "2026-09-21T13:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 727. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 618,
+    "uyari_tarihi": "2026-09-21T13:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 618. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 728,
+    "uyari_tarihi": "2026-09-21T13:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 728. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 619,
+    "uyari_tarihi": "2026-09-21T13:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 619. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 729,
+    "uyari_tarihi": "2026-09-21T14:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 729. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 620,
+    "uyari_tarihi": "2026-09-21T14:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 620. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 730,
+    "uyari_tarihi": "2026-09-21T14:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 730. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 621,
+    "uyari_tarihi": "2026-09-21T14:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 621. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 731,
+    "uyari_tarihi": "2026-09-21T14:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 731. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 622,
+    "uyari_tarihi": "2026-09-21T14:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 622. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 732,
+    "uyari_tarihi": "2026-09-21T14:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 732. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 623,
+    "uyari_tarihi": "2026-09-21T14:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 623. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 733,
+    "uyari_tarihi": "2026-09-21T14:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 733. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 624,
+    "uyari_tarihi": "2026-09-21T14:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 624. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 734,
+    "uyari_tarihi": "2026-09-21T14:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 734. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 625,
+    "uyari_tarihi": "2026-09-21T14:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 625. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 735,
+    "uyari_tarihi": "2026-09-21T14:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 735. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 626,
+    "uyari_tarihi": "2026-09-21T14:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 626. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 736,
+    "uyari_tarihi": "2026-09-21T14:39:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 736. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 627,
+    "uyari_tarihi": "2026-09-21T14:39:01",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 627. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 737,
+    "uyari_tarihi": "2026-09-21T14:44:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 737. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 628,
+    "uyari_tarihi": "2026-09-21T14:44:01",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 628. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 738,
+    "uyari_tarihi": "2026-09-21T14:49:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 738. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 629,
+    "uyari_tarihi": "2026-09-21T14:49:01",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 629. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 739,
+    "uyari_tarihi": "2026-09-21T14:54:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 739. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 630,
+    "uyari_tarihi": "2026-09-21T14:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 630. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 740,
+    "uyari_tarihi": "2026-09-21T14:59:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 740. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 631,
+    "uyari_tarihi": "2026-09-21T14:59:01",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 631. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 741,
+    "uyari_tarihi": "2026-09-21T15:04:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 741. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 632,
+    "uyari_tarihi": "2026-09-21T15:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 632. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 742,
+    "uyari_tarihi": "2026-09-21T15:09:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 742. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 633,
+    "uyari_tarihi": "2026-09-21T15:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 633. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 743,
+    "uyari_tarihi": "2026-09-21T15:14:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 743. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 634,
+    "uyari_tarihi": "2026-09-21T15:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 634. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 744,
+    "uyari_tarihi": "2026-09-21T15:19:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 744. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 635,
+    "uyari_tarihi": "2026-09-21T15:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 635. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 745,
+    "uyari_tarihi": "2026-09-21T15:24:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 745. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 636,
+    "uyari_tarihi": "2026-09-21T15:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 636. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 746,
+    "uyari_tarihi": "2026-09-21T15:29:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 746. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 637,
+    "uyari_tarihi": "2026-09-21T15:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 637. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 747,
+    "uyari_tarihi": "2026-09-21T15:34:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 747. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 638,
+    "uyari_tarihi": "2026-09-21T15:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 638. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 748,
+    "uyari_tarihi": "2026-09-21T15:39:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 748. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 639,
+    "uyari_tarihi": "2026-09-21T15:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 639. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 749,
+    "uyari_tarihi": "2026-09-21T15:44:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 749. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 640,
+    "uyari_tarihi": "2026-09-21T15:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 640. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 750,
+    "uyari_tarihi": "2026-09-21T15:49:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 750. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 641,
+    "uyari_tarihi": "2026-09-21T15:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 641. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 751,
+    "uyari_tarihi": "2026-09-21T15:54:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 751. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 642,
+    "uyari_tarihi": "2026-09-21T15:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 642. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 752,
+    "uyari_tarihi": "2026-09-21T15:59:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 752. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 643,
+    "uyari_tarihi": "2026-09-21T15:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 643. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 753,
+    "uyari_tarihi": "2026-09-21T16:04:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 753. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 644,
+    "uyari_tarihi": "2026-09-21T16:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 644. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 754,
+    "uyari_tarihi": "2026-09-21T16:09:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 754. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 645,
+    "uyari_tarihi": "2026-09-21T16:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 645. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 755,
+    "uyari_tarihi": "2026-09-21T16:14:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 755. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 646,
+    "uyari_tarihi": "2026-09-21T16:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 646. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 756,
+    "uyari_tarihi": "2026-09-21T16:19:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 756. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 647,
+    "uyari_tarihi": "2026-09-21T16:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 647. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 757,
+    "uyari_tarihi": "2026-09-21T16:24:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 757. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 648,
+    "uyari_tarihi": "2026-09-21T16:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 648. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 758,
+    "uyari_tarihi": "2026-09-21T16:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 758. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 649,
+    "uyari_tarihi": "2026-09-21T16:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 649. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 759,
+    "uyari_tarihi": "2026-09-21T16:34:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 759. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 650,
+    "uyari_tarihi": "2026-09-21T16:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 650. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 760,
+    "uyari_tarihi": "2026-09-21T16:39:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 760. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 651,
+    "uyari_tarihi": "2026-09-21T16:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 651. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 761,
+    "uyari_tarihi": "2026-09-21T16:44:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 761. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 652,
+    "uyari_tarihi": "2026-09-21T16:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 652. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 762,
+    "uyari_tarihi": "2026-09-21T16:49:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 762. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 653,
+    "uyari_tarihi": "2026-09-21T16:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 653. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 763,
+    "uyari_tarihi": "2026-09-21T16:54:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 763. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 654,
+    "uyari_tarihi": "2026-09-21T16:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 654. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 764,
+    "uyari_tarihi": "2026-09-21T16:59:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 764. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 655,
+    "uyari_tarihi": "2026-09-21T16:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 655. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 765,
+    "uyari_tarihi": "2026-09-21T17:04:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 765. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 656,
+    "uyari_tarihi": "2026-09-21T17:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 656. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 766,
+    "uyari_tarihi": "2026-09-21T17:09:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 766. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 657,
+    "uyari_tarihi": "2026-09-21T17:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 657. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 767,
+    "uyari_tarihi": "2026-09-21T17:14:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 767. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 658,
+    "uyari_tarihi": "2026-09-21T17:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 658. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 768,
+    "uyari_tarihi": "2026-09-21T17:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 768. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 659,
+    "uyari_tarihi": "2026-09-21T17:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 659. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 769,
+    "uyari_tarihi": "2026-09-21T17:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 769. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 660,
+    "uyari_tarihi": "2026-09-21T17:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 660. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 770,
+    "uyari_tarihi": "2026-09-21T17:29:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 770. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 661,
+    "uyari_tarihi": "2026-09-21T17:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 661. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 771,
+    "uyari_tarihi": "2026-09-21T17:34:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 771. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 662,
+    "uyari_tarihi": "2026-09-21T17:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 662. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 772,
+    "uyari_tarihi": "2026-09-21T17:39:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 772. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 663,
+    "uyari_tarihi": "2026-09-21T17:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 663. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 773,
+    "uyari_tarihi": "2026-09-21T17:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 773. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 664,
+    "uyari_tarihi": "2026-09-21T17:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 664. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 774,
+    "uyari_tarihi": "2026-09-21T17:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 774. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 665,
+    "uyari_tarihi": "2026-09-21T17:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 665. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 775,
+    "uyari_tarihi": "2026-09-21T17:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 775. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 666,
+    "uyari_tarihi": "2026-09-21T17:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 666. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 776,
+    "uyari_tarihi": "2026-09-21T17:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 776. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 667,
+    "uyari_tarihi": "2026-09-21T17:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 667. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 777,
+    "uyari_tarihi": "2026-09-21T18:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 777. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 668,
+    "uyari_tarihi": "2026-09-21T18:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 668. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 778,
+    "uyari_tarihi": "2026-09-21T18:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 778. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 669,
+    "uyari_tarihi": "2026-09-21T18:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 669. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 779,
+    "uyari_tarihi": "2026-09-21T18:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 779. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 670,
+    "uyari_tarihi": "2026-09-21T18:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 670. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 780,
+    "uyari_tarihi": "2026-09-21T18:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 780. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 671,
+    "uyari_tarihi": "2026-09-21T18:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 671. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 781,
+    "uyari_tarihi": "2026-09-21T18:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 781. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 672,
+    "uyari_tarihi": "2026-09-21T18:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 672. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 782,
+    "uyari_tarihi": "2026-09-21T18:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 782. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 673,
+    "uyari_tarihi": "2026-09-21T18:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 673. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 783,
+    "uyari_tarihi": "2026-09-21T18:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 783. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 674,
+    "uyari_tarihi": "2026-09-21T18:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 674. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 784,
+    "uyari_tarihi": "2026-09-21T18:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 784. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 675,
+    "uyari_tarihi": "2026-09-21T18:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 675. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 785,
+    "uyari_tarihi": "2026-09-21T18:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 785. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 676,
+    "uyari_tarihi": "2026-09-21T18:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 676. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 786,
+    "uyari_tarihi": "2026-09-21T18:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 786. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 677,
+    "uyari_tarihi": "2026-09-21T18:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 677. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 787,
+    "uyari_tarihi": "2026-09-21T18:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 787. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 678,
+    "uyari_tarihi": "2026-09-21T18:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 678. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 788,
+    "uyari_tarihi": "2026-09-21T18:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 788. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 679,
+    "uyari_tarihi": "2026-09-21T18:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 679. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 789,
+    "uyari_tarihi": "2026-09-21T19:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 789. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 680,
+    "uyari_tarihi": "2026-09-21T19:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 680. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 790,
+    "uyari_tarihi": "2026-09-21T19:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 790. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 681,
+    "uyari_tarihi": "2026-09-21T19:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 681. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 791,
+    "uyari_tarihi": "2026-09-21T19:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 791. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 682,
+    "uyari_tarihi": "2026-09-21T19:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 682. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 792,
+    "uyari_tarihi": "2026-09-21T19:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 792. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 683,
+    "uyari_tarihi": "2026-09-21T19:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 683. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 793,
+    "uyari_tarihi": "2026-09-21T19:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 793. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 684,
+    "uyari_tarihi": "2026-09-21T19:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 684. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 794,
+    "uyari_tarihi": "2026-09-21T19:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 794. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 685,
+    "uyari_tarihi": "2026-09-21T19:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 685. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 795,
+    "uyari_tarihi": "2026-09-21T19:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 795. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 686,
+    "uyari_tarihi": "2026-09-21T19:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 686. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 796,
+    "uyari_tarihi": "2026-09-21T19:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 796. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 687,
+    "uyari_tarihi": "2026-09-21T19:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 687. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 797,
+    "uyari_tarihi": "2026-09-21T19:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 797. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 688,
+    "uyari_tarihi": "2026-09-21T19:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 688. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 798,
+    "uyari_tarihi": "2026-09-21T19:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 798. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 689,
+    "uyari_tarihi": "2026-09-21T19:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 689. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 799,
+    "uyari_tarihi": "2026-09-21T19:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 799. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 690,
+    "uyari_tarihi": "2026-09-21T19:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 690. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 800,
+    "uyari_tarihi": "2026-09-21T19:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 800. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 691,
+    "uyari_tarihi": "2026-09-21T19:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 691. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 801,
+    "uyari_tarihi": "2026-09-21T20:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 801. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 692,
+    "uyari_tarihi": "2026-09-21T20:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 692. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 802,
+    "uyari_tarihi": "2026-09-21T20:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 802. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 693,
+    "uyari_tarihi": "2026-09-21T20:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 693. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 803,
+    "uyari_tarihi": "2026-09-21T20:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 803. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 694,
+    "uyari_tarihi": "2026-09-21T20:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 694. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 804,
+    "uyari_tarihi": "2026-09-21T20:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 804. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 695,
+    "uyari_tarihi": "2026-09-21T20:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 695. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 805,
+    "uyari_tarihi": "2026-09-21T20:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 805. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 696,
+    "uyari_tarihi": "2026-09-21T20:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 696. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 806,
+    "uyari_tarihi": "2026-09-21T20:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 806. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 697,
+    "uyari_tarihi": "2026-09-21T20:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 697. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 807,
+    "uyari_tarihi": "2026-09-21T20:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 807. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 698,
+    "uyari_tarihi": "2026-09-21T20:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 698. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 808,
+    "uyari_tarihi": "2026-09-21T20:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 808. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 699,
+    "uyari_tarihi": "2026-09-21T20:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 699. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 809,
+    "uyari_tarihi": "2026-09-21T20:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 809. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 700,
+    "uyari_tarihi": "2026-09-21T20:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 700. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 810,
+    "uyari_tarihi": "2026-09-21T20:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 810. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 701,
+    "uyari_tarihi": "2026-09-21T20:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 701. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 811,
+    "uyari_tarihi": "2026-09-21T20:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 811. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 702,
+    "uyari_tarihi": "2026-09-21T20:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 702. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 812,
+    "uyari_tarihi": "2026-09-21T20:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 812. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 703,
+    "uyari_tarihi": "2026-09-21T20:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 703. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 813,
+    "uyari_tarihi": "2026-09-21T21:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 813. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 704,
+    "uyari_tarihi": "2026-09-21T21:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 704. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 814,
+    "uyari_tarihi": "2026-09-21T21:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 814. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 705,
+    "uyari_tarihi": "2026-09-21T21:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 705. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 815,
+    "uyari_tarihi": "2026-09-21T21:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 815. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 706,
+    "uyari_tarihi": "2026-09-21T21:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 706. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 816,
+    "uyari_tarihi": "2026-09-21T21:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 816. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 707,
+    "uyari_tarihi": "2026-09-21T21:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 707. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 817,
+    "uyari_tarihi": "2026-09-21T21:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 817. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 708,
+    "uyari_tarihi": "2026-09-21T21:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 708. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 818,
+    "uyari_tarihi": "2026-09-21T21:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 818. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 709,
+    "uyari_tarihi": "2026-09-21T21:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 709. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 819,
+    "uyari_tarihi": "2026-09-21T21:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 819. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 710,
+    "uyari_tarihi": "2026-09-21T21:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 710. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 820,
+    "uyari_tarihi": "2026-09-21T21:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 820. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 711,
+    "uyari_tarihi": "2026-09-21T21:39:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 711. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 821,
+    "uyari_tarihi": "2026-09-21T21:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 821. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 712,
+    "uyari_tarihi": "2026-09-21T21:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 712. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 822,
+    "uyari_tarihi": "2026-09-21T21:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 822. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 713,
+    "uyari_tarihi": "2026-09-21T21:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 713. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 823,
+    "uyari_tarihi": "2026-09-21T21:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 823. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 714,
+    "uyari_tarihi": "2026-09-21T21:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 714. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 824,
+    "uyari_tarihi": "2026-09-21T21:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 824. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 715,
+    "uyari_tarihi": "2026-09-21T21:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 715. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 825,
+    "uyari_tarihi": "2026-09-21T22:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 825. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 716,
+    "uyari_tarihi": "2026-09-21T22:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 716. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 826,
+    "uyari_tarihi": "2026-09-21T22:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 826. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 717,
+    "uyari_tarihi": "2026-09-21T22:09:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 717. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 827,
+    "uyari_tarihi": "2026-09-21T22:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 827. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 718,
+    "uyari_tarihi": "2026-09-21T22:14:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 718. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 828,
+    "uyari_tarihi": "2026-09-21T22:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 828. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 719,
+    "uyari_tarihi": "2026-09-21T22:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 719. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 829,
+    "uyari_tarihi": "2026-09-21T22:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 829. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 720,
+    "uyari_tarihi": "2026-09-21T22:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 720. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 830,
+    "uyari_tarihi": "2026-09-21T22:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 830. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 721,
+    "uyari_tarihi": "2026-09-21T22:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 721. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 831,
+    "uyari_tarihi": "2026-09-21T22:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 831. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 722,
+    "uyari_tarihi": "2026-09-21T22:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 722. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 832,
+    "uyari_tarihi": "2026-09-21T22:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 832. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 723,
+    "uyari_tarihi": "2026-09-21T22:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 723. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 833,
+    "uyari_tarihi": "2026-09-21T22:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 833. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 724,
+    "uyari_tarihi": "2026-09-21T22:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 724. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 834,
+    "uyari_tarihi": "2026-09-21T22:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 834. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 725,
+    "uyari_tarihi": "2026-09-21T22:49:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 725. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 835,
+    "uyari_tarihi": "2026-09-21T22:54:03",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 835. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 726,
+    "uyari_tarihi": "2026-09-21T22:54:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 726. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 836,
+    "uyari_tarihi": "2026-09-21T22:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 836. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 727,
+    "uyari_tarihi": "2026-09-21T22:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 727. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 837,
+    "uyari_tarihi": "2026-09-21T23:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 837. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 728,
+    "uyari_tarihi": "2026-09-21T23:04:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 728. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 838,
+    "uyari_tarihi": "2026-09-21T23:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 838. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 729,
+    "uyari_tarihi": "2026-09-21T23:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 729. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 839,
+    "uyari_tarihi": "2026-09-21T23:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 839. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 730,
+    "uyari_tarihi": "2026-09-21T23:14:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 730. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 840,
+    "uyari_tarihi": "2026-09-21T23:19:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 840. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 731,
+    "uyari_tarihi": "2026-09-21T23:19:01",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 731. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 841,
+    "uyari_tarihi": "2026-09-21T23:24:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 841. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 732,
+    "uyari_tarihi": "2026-09-21T23:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 732. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 842,
+    "uyari_tarihi": "2026-09-21T23:29:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 842. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 733,
+    "uyari_tarihi": "2026-09-21T23:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 733. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 843,
+    "uyari_tarihi": "2026-09-21T23:34:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 843. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 734,
+    "uyari_tarihi": "2026-09-21T23:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 734. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 844,
+    "uyari_tarihi": "2026-09-21T23:39:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 844. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 735,
+    "uyari_tarihi": "2026-09-21T23:39:01",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 735. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 845,
+    "uyari_tarihi": "2026-09-21T23:44:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 845. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 736,
+    "uyari_tarihi": "2026-09-21T23:44:01",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 736. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 846,
+    "uyari_tarihi": "2026-09-21T23:49:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 846. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 737,
+    "uyari_tarihi": "2026-09-21T23:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 737. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 847,
+    "uyari_tarihi": "2026-09-21T23:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 847. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 738,
+    "uyari_tarihi": "2026-09-21T23:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 738. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 848,
+    "uyari_tarihi": "2026-09-21T23:59:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 848. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 739,
+    "uyari_tarihi": "2026-09-21T23:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 739. kez uyarıldı; henüz başlamadı."
   }
 ]

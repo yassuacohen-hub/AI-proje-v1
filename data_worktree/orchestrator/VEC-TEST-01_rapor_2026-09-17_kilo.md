@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/VEC-TEST-01_rapor_2026-09-17_kilo.md]]
+
 # VEC-TEST-01 Raporu
 
 **Tarih:** 2026-09-17  

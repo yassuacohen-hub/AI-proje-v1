@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data_worktree/orchestrator/gorev_panosu.md]]
+
 # Gorev Panosu (Pazar — Akiskan)
 
 ## Aktif Isler

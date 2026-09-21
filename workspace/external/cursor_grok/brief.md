@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/claude_code/brief.md]]
+
 # Cursor Grok — Otomatik Görev Brief'i
 
 > **Paket ID:** `EXT-CURSOR_GROK-20260906`

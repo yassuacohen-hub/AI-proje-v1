@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/REPO-HIJYEN-01_envanter.md]]
+
 # REPO-HIJYEN-01 — Kök dizin artık envanteri (2026-09-15, roo)
 
 Silme **yapılmadı**; karar Ürün Sahibi'nde. Her satır kök dizinde durup projeye ait görünmeyen geçici/çöp dosyadır.

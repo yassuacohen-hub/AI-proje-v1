@@ -1,3 +1,5 @@
+İlgili: [[PROJECT_ROADMAP]]
+
 # Muninn Streamlit Planı — Üç Turluk Hızlı Teslimat Değerlendirmesi
 
 **Tarih:** 2026-09-18

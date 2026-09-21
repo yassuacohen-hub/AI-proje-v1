@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/VAULT-TARAMA-01_analiz_2026-09-20_orkestrator.md]]
+
 # Obsidyen Vault Tarama Raporu
 
 **Tarih:** 2026-09-20

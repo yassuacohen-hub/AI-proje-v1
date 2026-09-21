@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/REV-MVP-ADMIN-01_bulgular_20260915_cline.md]]
+
 # REV-MVP-ADMIN-01 — MVP Admin 4 Ekran Capraz Denetim (rapor-only)
 
 **Inceleyen:** cline · **Tarih:** 2026-09-15 · **Kapsam:** salt-okunur rapor, kod degisikligi yok

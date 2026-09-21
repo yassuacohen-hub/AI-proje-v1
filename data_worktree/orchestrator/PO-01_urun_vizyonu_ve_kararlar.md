@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md]]
+
 # Huginn Data Insights — Ürün Vizyonu ve Ürün Sahibi Kararları
 
 **Doküman:** PO-01 (AR-03 benzeri ürün-vizyon raporu)

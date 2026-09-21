@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/skills/supabase/README.md]]
+
 # Ankara B2B Company Master
 
 ## Overview
@@ -128,3 +130,10 @@ Lint Python code:
 # Using existing wiki_lint as example
 python wiki_automation/wiki_lint.py --ci
 ```
+
+## İlgili Nodlar (GRAPH-FIX-02 Backlink)
+
+- [[Huginn Data Insights/data_worktree/orchestrator/gorev_panosu]]
+- [[Huginn Data Insights/data/orchestrator/gorev_panosu]]
+- [[VAULT_AUTOMATION_TEMPLATE]]
+- [[Huginn Data Insights/AI proje v1/V10/CHANGELOG]]

@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/REV-UI-SIDEBAR-02_bulgilar_2026-09-17_cline.md]]
+
 # REV-UI-SIDEBAR-02 Bulgular Raporu
 
 **Tarih:** 2026-09-17

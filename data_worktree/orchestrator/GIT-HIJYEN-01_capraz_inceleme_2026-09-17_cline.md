@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/GIT-HIJYEN-01_capraz_inceleme_2026-09-17_cline.md]]
+
 # GIT-HIJYEN-01 — Çapraz İnceleme (cline, 2026-09-17)
 
 **İncelenen:** kilo'nun GIT-HIJYEN-01 teslimi (panoda `review`)

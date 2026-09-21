@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ROO-CONFIG-01_capraz_inceleme_2026-09-17_cline.md]]
+
 # ROO-CONFIG-01 — Çapraz İnceleme (cline, 2026-09-17 gece)
 
 **İncelenen:** kilo'nun ROO-CONFIG-01 teslimi (panoda `review`)

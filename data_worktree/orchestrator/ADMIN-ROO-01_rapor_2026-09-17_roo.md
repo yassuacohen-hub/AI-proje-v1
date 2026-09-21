@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ADMIN-ROO-01_rapor_2026-09-17_roo.md]]
+
 # ADMIN-ROO-01 Teslim Raporu (roo — 2026-09-17, P1 ceza görevi)
 
 Brief: `docs/plans/ADMIN-ROO-01_brief.md` · Durum: **review** (sahip/roo sabah onayı; commit YOK — sabah kontrol sonrası).

@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/BULGU-CLAUDE-CIFT-ICERIK_2026-09-16_cline.md]]
+
 # BULGU NOTU — CLAUDE.md çift içerik (2026-09-16, cline)
 
 **Bulgu:** `CLAUDE.md` içinde Wiki katmanları + Kural Seti + Operations + Demir Kurallar blokları **iki kez** tekrarlanıyordu (yaklaşık L14-64 ilk kopya, L160-239 ikinci kopya).

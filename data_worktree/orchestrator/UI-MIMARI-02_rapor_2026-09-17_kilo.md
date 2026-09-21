@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/UI-MIMARI-02_rapor_2026-09-17_kilo.md]]
+
 # UI-MIMARI-02 Raporu
 
 **Tarih:** 2026-09-17

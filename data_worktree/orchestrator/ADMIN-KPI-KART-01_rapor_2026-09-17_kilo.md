@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ADMIN-KPI-KART-01_rapor_2026-09-17_kilo.md]]
+
 # ADMIN-KPI-KART-01 Raporu
 
 **Tarih:** 2026-09-17

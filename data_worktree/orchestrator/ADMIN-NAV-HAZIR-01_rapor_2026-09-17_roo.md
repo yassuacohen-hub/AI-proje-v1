@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ADMIN-NAV-HAZIR-01_rapor_2026-09-17_roo.md]]
+
 # ADMIN-NAV-HAZIR-01 — Navigasyon SSOT Temizligi (roo)
 
 - **Tarih:** 2026-09-17

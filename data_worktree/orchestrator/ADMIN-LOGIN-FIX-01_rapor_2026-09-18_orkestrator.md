@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ADMIN-LOGIN-FIX-01_rapor_2026-09-18_orkestrator.md]]
+
 # ADMIN-LOGIN-FIX-01 — Teslim Raporu (P0)
 
 Tarih: 2026-09-18

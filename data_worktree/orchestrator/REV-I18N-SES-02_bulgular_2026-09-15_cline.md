@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/REV-I18N-SES-02_bulgular_2026-09-15_cline.md]]
+
 # REV-I18N-SES-02 — Çapraz İnceleme Bulguları
 
 - **İnceleyen:** cline (tarih: 2026-09-15)

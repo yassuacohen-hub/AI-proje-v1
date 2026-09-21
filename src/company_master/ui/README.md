@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/skills/supabase/README.md]]
+
 # UX-01 — Huginn UI Bileşen Kütüphanesi (Design System)
 
 Streamlit tabanlı admin panelleri için yeniden kullanılabilir, bağımsız

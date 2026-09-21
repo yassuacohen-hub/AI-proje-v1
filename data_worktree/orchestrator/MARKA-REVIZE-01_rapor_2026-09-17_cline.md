@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/MARKA-REVIZE-01_rapor_2026-09-17_cline.md]]
+
 # MARKA-REVIZE-01 Raporu — Doküman Katmanı
 
 **Tarih:** 2026-09-17

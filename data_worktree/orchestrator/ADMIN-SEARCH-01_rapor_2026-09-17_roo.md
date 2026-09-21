@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ADMIN-SEARCH-01_rapor_2026-09-17_roo.md]]
+
 # ADMIN-SEARCH-01 — Teslim Raporu (roo, 2026-09-17 gece)
 
 ## Kapsam

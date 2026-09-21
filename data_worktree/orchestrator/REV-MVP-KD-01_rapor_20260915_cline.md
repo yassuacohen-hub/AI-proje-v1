@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/REV-MVP-KD-01_rapor_20260915_cline.md]]
+
 # REV-MVP-KD-01 — Karar Defteri Ekranı İnceleme Raporu
 
 - **İnceleyen:** cline (tarih: 2026-09-15)

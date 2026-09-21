@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/V10-HIJYEN-02_rapor_2026-09-18_orkestrator.md]]
+
 # V10-HIJYEN-02 — Teslim Raporu
 
 **Tarih:** 2026-09-18

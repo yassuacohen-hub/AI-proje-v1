@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ADMIN-KPI-KART-01_bulgular_2026-09-17_cline.md]]
+
 # ADMIN-KPI-KART-01 — Çapraz İnceleme Bulguları (cline, 2026-09-17)
 
 **İnceleyen:** cline (denetim/review rolü, AJAN_DETAY §7)

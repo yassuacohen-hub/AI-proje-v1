@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/KOK-TEMIZLIK_envanter_2026-09-17_cline.md]]
+
 # KOK-TEMIZLIK — Geçici script envanteri (cline, 2026-09-17, gece)
 
 **Görev:** yok — ELESTIRI-01'deki "kök dizinde 18+ geçici script temizlik bekliyor" maddesinin güncel envanteri (cline denetim turu).

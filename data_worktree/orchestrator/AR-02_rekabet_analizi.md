@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/AR-02_rekabet_analizi.md]]
+
 # Huginn Data Insights — Rekabet Analizi
 **Rapor tarihi:** 14 Eylül 2026  
 **Kapsam:** Doğrudan/dolaylı rakipler, sektör yoğunluğu, fiyat konumu ve stratejik öncelikler

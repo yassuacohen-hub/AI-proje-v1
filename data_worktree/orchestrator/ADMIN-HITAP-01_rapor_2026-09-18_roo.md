@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ADMIN-HITAP-01_rapor_2026-09-18_roo.md]]
+
 # ADMIN-HITAP-01 — Rapor (roo, 2026-09-18)
 
 D-49 hitap kuralı uygulaması: "sahip" → `KAHİN (Ürün Sahibi)`.

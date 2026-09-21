@@ -1,3 +1,5 @@
+[[Huginn Data Insights/AI proje v1/ANA_KURALLAR.md]]
+
 # Huginn Ticari İstihbarat Platformu — Ana Kurallar
 
 > **Kaynak:** `Huginn Data Insights/AI proje v1/V10/09_kurallar_ve_promptlar/11_unvan_kisaltma_ve_tabela_kurallari`

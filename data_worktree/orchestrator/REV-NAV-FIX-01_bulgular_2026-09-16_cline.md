@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/REV-NAV-FIX-01_bulgular_2026-09-16_cline.md]]
+
 # REV-NAV-FIX-01 — NAV-FIX-01 Çapraz İnceleme (kilo teslimi, commit 90d9bc7)
 
 **İnceleyen:** cline · **Tarih:** 2026-09-16 · **Sonuç: ✅ ONAY** (engelleyici bulgu yok)

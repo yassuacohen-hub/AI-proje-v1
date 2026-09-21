@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/REV-BATCH-01_bulgular_2026-09-16_cline.md]]
+
 # REV-BATCH-01 — Kapsam Dışı Bulgular (cline — 2026-09-16, düzeltme YOK)
 
 Brief gereği ana rapora girmeyen, gezinti sırasında görülen gözlemler:

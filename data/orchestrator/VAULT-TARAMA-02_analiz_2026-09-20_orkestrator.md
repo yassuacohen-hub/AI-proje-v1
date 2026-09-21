@@ -1,3 +1,5 @@
+İlgili: [[AGENTS]]
+
 # Obsidyen Vault Tarama Raporu (v2 — Tam Orphan Listesi)
 
 **Tarih:** 2026-09-20

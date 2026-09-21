@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/V10-HIJYEN-01_rapor_2026-09-18_orkestrator.md]]
+
 # V10-HIJYEN-01 — Teslim Raporu
 
 | Alan | Değer |

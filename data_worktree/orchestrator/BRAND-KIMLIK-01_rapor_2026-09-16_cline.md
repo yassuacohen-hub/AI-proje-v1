@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/BRAND-KIMLIK-01_rapor_2026-09-16_cline.md]]
+
 # BRAND-KIMLIK-01 Rapor - Marka kimligi seti kurulumu (2026-09-16, cline)
 
 ## Yapilanlar

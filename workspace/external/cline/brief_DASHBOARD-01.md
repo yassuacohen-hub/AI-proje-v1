@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/claude_code/brief_DASHBOARD-01.md]]
+
 # 📊 Dashboard İyileştirme Planı — Fikir İsteniyor
 
 ## Mevcut Durum

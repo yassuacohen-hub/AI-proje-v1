@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/VAULT-BIRLESTIME-PLAN-01_strateji_2026-09-20_orkestrator.md]]
+
 # Vault Birleştirme & Bakım Planı
 
 **Tarih:** 2026-09-20  

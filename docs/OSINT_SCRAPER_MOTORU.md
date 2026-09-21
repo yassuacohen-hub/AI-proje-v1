@@ -1,3 +1,5 @@
+[[Huginn Data Insights/AI proje v1/docs/OSINT_SCRAPER_MOTORU.md]]
+
 > **Wiki bilgisi:** Obsidian wiki sayfasi: AI proje v1/V10/11_osint_motoru/OSINT_Scraper_Motoru.md — kod tarafindan erisim icin bu dosya korunur.
 
 # OSINT Scraper Motoru (v1)

@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/API-SPLIT-01_rapor_2026-09-17_kilo.md]]
+
 # API-SPLIT-01 Raporu
 
 **Tarih:** 2026-09-17

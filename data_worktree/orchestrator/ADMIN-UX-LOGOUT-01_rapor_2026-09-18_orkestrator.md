@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ADMIN-UX-LOGOUT-01_rapor_2026-09-18_orkestrator.md]]
+
 # ADMIN-UX-LOGOUT-01 — Teslim Raporu
 
 - **Tarih:** 2026-09-18

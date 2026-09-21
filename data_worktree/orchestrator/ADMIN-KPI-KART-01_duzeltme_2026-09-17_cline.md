@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ADMIN-KPI-KART-01_duzeltme_2026-09-17_cline.md]]
+
 # ADMIN-KPI-KART-01 — Düzeltme Raporu (cline, 2026-09-17)
 
 **Bağlam:** Kilo teslimi (`review`) çapraz incelemede **4 test FAIL** ile kırık bulundu

@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/skills/supabase/README.md]]
+
 # Operasyon Scriptleri Kullanım Rehberi
 
 Bu klasörde, Ankara B2B Company Master projesi için operasyonel yardımcı Python scriptleri bulacaksınız.

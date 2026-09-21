@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/UX-MENU-03_rapor_2026-09-18_orkestrator.md]]
+
 # UX-MENU-03 — Menü ağacı sadeleştirme + Dashboard Overview yeniden düzeni
 
 **Tarih:** 2026-09-18 · **Commit:** `a19151a` · **Dal:** `chore/monorepo-merge`

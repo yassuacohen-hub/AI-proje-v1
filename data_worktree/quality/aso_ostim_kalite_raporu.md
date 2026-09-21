@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/quality/aso_ostim_kalite_raporu.md]]
+
 # ASO ve OSTİM Veri Kalite Raporu (P7-24)
 
 **Üretim tarihi:** 2026-09-13 08:52  

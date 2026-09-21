@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/TEST-ISO-03_bulgular_2026-09-17_cline.md]]
+
 # TEST-ISO-03 — firmalar.jsonl test kalıntısı kök neden + düzeltme (cline, 2026-09-17)
 
 **Görev:** yok (panodan bağımsız kendi bulgumun tespiti; GIT-HIJYEN-01 çapraz inceleme notundaki madde 4'ün çözümü)

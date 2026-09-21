@@ -1,3 +1,5 @@
+[[Huginn Data Insights/AI proje v1/AGENT_SYNC.md]]
+
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
 > Son guncelleme: 2026-09-21T00:08:13

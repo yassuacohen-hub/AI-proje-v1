@@ -1,3 +1,5 @@
+[[Huginn Data Insights/AI proje v1/scripts/mersis_api_research.md]]
+
 # MERSİS/Ticaret Sicili API Araştırma
 
 ## GİB Açık Veri Durumu

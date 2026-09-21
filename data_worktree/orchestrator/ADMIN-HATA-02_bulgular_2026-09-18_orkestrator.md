@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ADMIN-HATA-02_bulgular_2026-09-18_orkestrator.md]]
+
 # ADMIN-HATA-02 — Bulgu Notu (kapsam dışı, düzeltilmedi)
 
 Tarih: 2026-09-18

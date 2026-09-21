@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ADMIN-REFRESH-FIX-01_rapor_2026-09-17_roo.md]]
+
 # ADMIN-REFRESH-FIX-01 — Otomatik yenileme tercihi kaydedilmiyordu (roo)
 
 - **Tarih:** 2026-09-17

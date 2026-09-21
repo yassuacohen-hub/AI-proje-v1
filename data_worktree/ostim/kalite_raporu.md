@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/ostim/kalite_raporu.md]]
+
 # OSTİM Veri Kalite Raporu
 
 **Tarih:** 2026-09-01T15:23:30

@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/REV-ADMIN-ENV-01_bulgular_20260915_cline.md]]
+
 # REV-ADMIN-ENV-01 — İnceleme Bulguları (2026-09-15, cline)
 
 Kapsam: `scripts/admin_sifre_sifirla.py`, `tests/test_admin_sifre_sifirla.py`,

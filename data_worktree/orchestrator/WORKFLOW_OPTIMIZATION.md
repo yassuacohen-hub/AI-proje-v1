@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/WORKFLOW_OPTIMIZATION.md]]
+
 # İş Akışı Optimizasyonu — V10
 
 Bağlantılar: [[15_admin_panel_sitemap]] → Admin menü ağacı

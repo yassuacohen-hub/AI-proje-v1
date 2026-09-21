@@ -1,4 +1,6 @@
-﻿# Q3 2026 Pazar Eğilim Analizi Raporu
+[[Huginn Data Insights/data/orchestrator/AR-01_pazar_egilim_analizi_Q3_2026.md]]
+
+# Q3 2026 Pazar Eğilim Analizi Raporu
 
 **Hazırlayan:** Huginn Data Insights — Market Brain  
 **Tarih:** Eylül 2026  

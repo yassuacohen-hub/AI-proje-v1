@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/AGN-STACK-01_rapor_roo.md]]
+
 # AGN-STACK-01 — crewAI / LangChain vs Huginn Orkestratörü Kıyas Raporu
 
 - **Ajan:** roo

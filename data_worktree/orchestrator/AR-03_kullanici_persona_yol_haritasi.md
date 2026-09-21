@@ -1,4 +1,6 @@
-﻿# Huginn Data Insights — Kullanıcı Persona ve Yol Haritası
+[[Huginn Data Insights/data/orchestrator/AR-03_kullanici_persona_yol_haritasi.md]]
+
+# Huginn Data Insights — Kullanıcı Persona ve Yol Haritası
 
 **Doküman:** AR-03  
 **Tarih:** 2026-09-14  

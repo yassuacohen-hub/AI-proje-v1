@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/SEC-AUTH-01_bulgular_2026-09-16_cline_ara.md]]
+
 # SEC-AUTH-01 — Ara durum ve regresyon engeli
 
 - O-1: `web_dashboard/tabs/__init__.py` eski URL haritasına normal SECTIONS eşleşmesinden önce bakıyor; normal döngü korunuyor. Ölü pass bloğu temizlendi.

@@ -1,3 +1,5 @@
+[[data/orchestrator/GIT-HIJYEN-01_rapor_2026-09-17_kilo.md]]
+
 # GIT-HIJYEN-01 Raporu
 
 **Tarih:** 2026-09-17

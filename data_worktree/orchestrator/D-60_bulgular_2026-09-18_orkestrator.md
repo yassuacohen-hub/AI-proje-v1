@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/D-60_bulgular_2026-09-18_orkestrator.md]]
+
 # D-60/D-61 Ad Geçişi — Kapsam Dışı Bulgular
 
 Tarih: 2026-09-18 · Rol: orkestratör

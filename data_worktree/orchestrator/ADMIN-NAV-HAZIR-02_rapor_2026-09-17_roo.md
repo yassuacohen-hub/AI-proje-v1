@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ADMIN-NAV-HAZIR-02_rapor_2026-09-17_roo.md]]
+
 # ADMIN-NAV-HAZIR-02 — Teslim Raporu
 
 **Görev:** Admin paneli navigasyon sekmelerinde sessiz hata yakalama (silent exception) → loglama ile değiştirme.

@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/skills/supabase/CLAUDE.md]]
+
 # CLAUDE.md
 
 AI için proje kılavuzu burada tutulur.

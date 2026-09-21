@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/kpi_raporu.md]]
+
 # Veri Kalitesi KPI Dashboard
 
 Tarih: 2026-09-03

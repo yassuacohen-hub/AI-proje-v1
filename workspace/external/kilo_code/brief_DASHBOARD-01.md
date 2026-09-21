@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/claude_code/brief_DASHBOARD-01.md]]
+
 # 📊 Dashboard İyileştirme — Kullanıcı Deneyimi Brief'i
 
 **Ajan:** Kilo Code  

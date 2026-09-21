@@ -1,3 +1,5 @@
+İlgili: [[PROJECT_ROADMAP]]
+
 # Muninn 🛡️ Admin Paneli — Streamlit Planı (2026-09-18)
 
 > **Format:** İlk tur plan → **İkinci Tur Revizyonu** (6 zorunlu başlık) → **Fark listesi** → KAHİN özeti.

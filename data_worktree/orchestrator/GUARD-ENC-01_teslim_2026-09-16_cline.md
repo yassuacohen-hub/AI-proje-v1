@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/GUARD-ENC-01_teslim_2026-09-16_cline.md]]
+
 # GUARD-ENC-01 Teslim — kodlama guard'i tam devreye alindi (cline, 2026-09-16)
 
 **Kapsam:** `scripts/kodlama_denetim.py` · `tests/test_kodlama_denetim.py` · `.pre-commit-config.yaml` (+ ratchet'i yeşile çekmek için 4 onarım)

@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/TEST-ISO-02_bulgular_2026-09-17_cline.md]]
+
 # TEST-ISO-02 — Tam Süit Regresyonu: Test İzolasyon Sızıntısı (durum raporu, teslim değil)
 
 **ID notu:** Panoda TEST-ISO-01 roo kapanmis farkli gorevi oldugu icin bu rapor TEST-ISO-02 ile acildi.

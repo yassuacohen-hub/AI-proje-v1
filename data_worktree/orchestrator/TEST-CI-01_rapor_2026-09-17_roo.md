@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/TEST-CI-01_rapor_2026-09-17_roo.md]]
+
 # TEST-CI-01 Raporu (roo — 2026-09-17, D-49 backlog)
 
 ## Yapılanlar

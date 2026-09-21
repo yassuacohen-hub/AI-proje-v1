@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/AGN-STACK-01_bulgu_2026-09-18_cline.md]]
+
 # AGN-STACK-01 — crewAI + langchain-openai kurulum ve kıyaslama görevi (cline, 2026-09-18)
 
 **Sahip emri:** "pip install crewai langchain-openai; buna bakıp kendisi araştırsın — bu sistemi geliştirmek için bir yöntem geliştirilmiş; ikisini kıyasla ve çözüm önerileriyle tetik mektubu gönder, raporlu."

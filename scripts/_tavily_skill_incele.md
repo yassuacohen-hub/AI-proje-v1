@@ -4,6 +4,8 @@ description: |
   Install, authenticate, and route Tavily for live web search, content extraction, site mapping and crawling, deep research, application integration, Agent Skills, Claude Code, or MCP clients. Use when the user needs Tavily onboarding, wants Tavily available inside a coding agent, needs current web data through the Tavily CLI, or wants to add Tavily to application code. Make setup autonomous: reuse existing credentials first, redeem a supplied one-time Tavily setup token when present, otherwise open browser OAuth automatically. Resolve local runtime prerequisites without changing the user's defaults, install Agent Skills globally for the actual target agent, and verify both Tavily and the agent integration before declaring setup complete.
 ---
 
+İlgili: [[AGENTS]]
+
 # Tavily
 
 Use Tavily for real-time web search, clean URL extraction, website mapping and crawling, and multi-source deep research.

@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/skills/supabase/README.md]]
+
 # Marka Kimligi - Huginn & Muninn
 
 Startup Intelligence Platform kurumsal kimlik seti. Kurumsal kimlik uretimi buradan yapilir.

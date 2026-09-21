@@ -1,3 +1,5 @@
+[[Huginn Data Insights/AI proje v1/scripts/multi_osb_merger_plan.md]]
+
 # Multi-OSB Veri Birleştirme Planı
 
 ## Hedef

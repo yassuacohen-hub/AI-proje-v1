@@ -1,4 +1,6 @@
-﻿# ADMIN-AYAR-01 Raporu
+[[Huginn Data Insights/data/orchestrator/ADMIN-AYAR-01_rapor_2026-09-17_kilo.md]]
+
+# ADMIN-AYAR-01 Raporu
 
 **Tarih:** 2026-09-17  
 **Ajan:** kilo  

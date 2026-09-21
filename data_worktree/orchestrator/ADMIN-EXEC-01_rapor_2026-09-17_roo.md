@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ADMIN-EXEC-01_rapor_2026-09-17_roo.md]]
+
 # ADMIN-EXEC-01 — Executive Dashboard sekmesi (roo, 2026-09-17 gece)
 
 ## Kapsam

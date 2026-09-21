@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/SEC-AUTH-01_asama_b_rapor_2026-09-17_cline.md]]
+
 # SEC-AUTH-01 — Aşama B Rapor (cline, 2026-09-17)
 
 **Görev:** SEC-AUTH-01 (roo brief, Aşama B) · **Durum:** tamamlandı, review bekliyor

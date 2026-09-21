@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/skills/supabase/README.md]]
+
 # Company Master V1.0 — Python Altyapısı
 
 

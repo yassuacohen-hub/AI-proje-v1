@@ -1,3 +1,5 @@
+İlgili: [[PROJECT_ROADMAP]]
+
 # P7-27: AI Cost Dashboard Mimarisi — Detaylı Implementasyon Planı
 
 **Görev:** Admin Panel Faz 2 — AI Cost sekmesini app.py'ye entegre et

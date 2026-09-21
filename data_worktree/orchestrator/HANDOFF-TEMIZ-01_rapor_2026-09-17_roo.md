@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/HANDOFF-TEMIZ-01_rapor_2026-09-17_roo.md]]
+
 # HANDOFF-TEMIZ-01 Raporu (roo — 2026-09-17, D-49 backlog)
 
 ## Git kanıtı

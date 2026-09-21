@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/UI-MODAL-01_bulgular_20260915_cline.md]]
+
 # UI-MODAL-01 bulgular (kapsam disi, duzeltme YOK) — 2026-09-15, cline
 
 Arastirma dokumani: `docs/UI_MODAL_CHART_ARASTIRMA_2026-09-15.md`.

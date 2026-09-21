@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/REVIEW-PO-BACK-06_rapor_20260915_cline.md]]
+
 # REVIEW-PO-BACK-06 — Destek Merkezi Çapraz İnceleme
 
 - **İnceleyen:** cline (tarih: 2026-09-15)

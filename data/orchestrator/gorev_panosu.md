@@ -1,3 +1,7 @@
+[[Huginn Data Insights/data_worktree/orchestrator/gorev_panosu.md]]
+
+İlgili: [[README]]
+
 # Gorev Panosu — Orkestrator
 
 > Merkezi gorev listesi: herkes herkesin ne yaptigini takip eder.

@@ -1,3 +1,5 @@
+[[Huginn Data Insights/AI proje v1/docs/P2-3_zamanli_scrape.md]]
+
 # P2-3: Zamanlanmış Scrape (Günlük Refresh)
 
 > **Durum:** Plan → Aktif

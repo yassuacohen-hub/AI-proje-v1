@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/TG-01_rapor_2026-09-18_kilo.md]]
+
 # TG-01 Raporu
 
 **Tarih:** 2026-09-18  

@@ -1,3 +1,5 @@
+İlgili: [[PROJECT_ROADMAP]]
+
 # Admin Sol Menü Ağacı — Wireframe / UX / UI (2026-09-18)
 
 > **Görev:** `ADMIN-UX-MENUTREE-01` · **Durum:** onay bekliyor (KAHİN emri: "menü ağacını wireframe ux ui olarak çıkar önce bu çalışmayı bitir sonra onay")

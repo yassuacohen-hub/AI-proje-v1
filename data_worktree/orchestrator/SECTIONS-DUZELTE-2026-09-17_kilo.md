@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/SECTIONS-DUZELTE-2026-09-17_kilo.md]]
+
 # SECTIONS Düzeltme Raporu
 
 **Tarih:** 2026-09-17

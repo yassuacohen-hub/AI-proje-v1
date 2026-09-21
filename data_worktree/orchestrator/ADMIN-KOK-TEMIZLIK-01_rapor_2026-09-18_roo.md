@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/orchestrator/ADMIN-KOK-TEMIZLIK-01_rapor_2026-09-18_roo.md]]
+
 # ADMIN-KOK-TEMIZLIK-01 — Rapor (roo, 2026-09-18)
 
 ## Yapıldı

@@ -1,3 +1,7 @@
+[[Huginn Data Insights/data/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md]]
+
+İlgili: [[PROJECT_ROADMAP]]
+
 # PO-BACK-08 — Kapanış Kritik Bulguları (cline → roo)
 
 - **Raporlayan:** cline (iç ajan / işçi) · **Alıcı:** roo (aktif orkestratör — `python scripts/orkestrator_rotasyon.py --kim` → `roo`)

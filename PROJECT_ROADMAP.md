@@ -1,3 +1,5 @@
+[[Huginn Data Insights/AI proje v1/PROJECT_ROADMAP.md]]
+
 # 🚀 Huginn Data Insights - Web Dashboard Roadmap
 
 > **Hedef**: Local Streamlit dashboard'u production-ready web app'e taşıma
@@ -47,3 +49,15 @@
 - [ ] PostgreSQL (production config)
 - [ ] Redis (caching)
 - [ ] Nginx (reverse proxy + SSL)
+
+---
+
+## İlgili Nodlar (GRAPH-FIX-02 Backlink)
+
+- [[Huginn Data Insights/docs/MUNINN_STREAMLIT_PLAN_2026-09-18]]
+- [[Huginn Data Insights/plans/P7-27_ai_cost_dashboard_architecture]]
+- [[Huginn Data Insights/docs/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18]]
+- [[Huginn Data Insights/docs/UX_MENU_AGACI_WIREFRAME_2026-09-18]]
+- [[Huginn Data Insights/docs/MUNINN_PLAN_UC_TUR_DEGERLENDIRME_2026-09-18]]
+- [[Huginn Data Insights/data/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline]]
+- [[Huginn Data Insights/data_worktree/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline]]
