@@ -26,10 +26,18 @@ sys.path.insert(0, str(root))
 from src.company_master.orchestrator import trigger
 
 
-def brif_bul(task_id: str, ajan: str) -> Path | None:
-    """Brif dosyasını bul. Uzlaşma: plans/brief_{ajan}_{task_id}.md"""
-    plans_dir = root / "plans"
-    brif = plans_dir / f"brief_{ajan}_{task_id}.md"
+def brif_bul(task_id: str, ajan: str, gorev: dict | None = None) -> Path | None:
+    """Brif dosyasını bul.
+
+    Sıra: 1) panodaki `brief` alanı (zincir brifleri buraya düşer),
+          2) uzlaşma yolu plans/brief_{ajan}_{task_id}.md
+    """
+    if gorev and gorev.get("brief"):
+        pano_brif = root / str(gorev["brief"])
+        if pano_brif.exists():
+            return pano_brif
+
+    brif = root / "plans" / f"brief_{ajan}_{task_id}.md"
     return brif if brif.exists() else None
 
 
@@ -67,10 +75,11 @@ def main() -> int:
     task_id = gorev.get("task_id") or gorev.get("id")
     
     # 2. Brif var mı?
-    brif = brif_bul(task_id, ajan)
+    brif = brif_bul(task_id, ajan, gorev)
     if not brif:
-        print(f"[ERROR] Brif bulunamadi: {brif}")
+        print("[ERROR] Brif bulunamadi")
         print(f"        Beklenen: plans/brief_{ajan}_{task_id}.md")
+        print(f"        veya panoda 'brief' alani (su an: {gorev.get('brief') or '-'})")
         return 1
     
     # 3. Talimat belirle

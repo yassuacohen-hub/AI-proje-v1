@@ -110,19 +110,23 @@
 - `AI proje v1/V10/03_mimari/brifler/brif_copilot.md` ← İHSAN (BRIF-03)
 - `web_dashboard/tabs/admin_musteriler.py` ← (COP-26, hazır ama blokaj kaldırıldıktan sonra)
 
-**⚠️ Çakışma var: `__init__.py`** (MENUTREE + DASH-UX-02a) → **Çözüm: D-185 split (v1/v2)**
+**✅ Çakışma çözüldü: `__init__.py`** (D-185 split) → MENUTREE (seri) + DASH-UX-02a.v1 (paralel)
 - DASH-UX-02a.v1 (dosya yaz, `__init__.py`'ye dokunma) → **paralel** MENUTREE ile
 - MENUTREE (`__init__.py` düzenle) → biter → DASH-UX-02a.v2 (`SECTIONS` kaydı) tetiklenir → **seri**
 - ADMIN-AYAR-01: pano taramasında `done` bulundu (2026-09-17) → bu sprint dışı, listeden çıkarıldı
 
 ### Seri Bağımlılıklar (D-85 + D-185)
 ```
-MENUTREE ━━━━━━━━━━━┓
-                     ┃ (seri, __init__.py paylaşımı)
-DASH-02a.v1 ━━┓      ┃
-   (paralel)  ┗━━━━━ DASH-02a.v2 ━━ DASH-02b (seri)
-                     ┃
-COP-26 ━━━━━━━━━━━━━┛ (paralel, ayrı dosya)
+MENUTREE ━━┓
+            ┃ (__init__.py düzenle, 1h)
+            ┃
+            ├─→ DASH-02a.v2 ━━━━┓
+                (SECTIONS, 1h)   ┃
+                                 ┣━ DASH-02b (seri, 5h)
+DASH-02a.v1 ━━━━━━━━━━━━━━━━━━━━┛
+(dosya yaz, 5h, paralel MENUTREE ile)
+
+COP-26 ━━━━━━━━━━━━━━━━━━━━━━━━━ (paralel, ayrı dosya)
 ```
 
 ---

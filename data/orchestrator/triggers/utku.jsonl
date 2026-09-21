@@ -81,5 +81,6 @@
 {"task_id": "UI-AYARLAR-SAYFA-01", "ajan": "utku", "talimat": "Brif: plans/brief_utku_UX-ZINCIR-01.md - UX zincir: profil popover -> ayarlar sayfasi -> menu agaci", "tarih": "2026-09-21T20:55:15", "durum": "bekliyor"}
 {"task_id": "ADMIN-UX-MENUTREE-01", "ajan": "utku", "talimat": "Brif: plans/brief_utku_UX-ZINCIR-01.md - UX zincir: profil popover -> ayarlar sayfasi -> menu agaci", "tarih": "2026-09-21T19:40:01", "durum": "zincir_bekleme", "onceki_gorev": "UI-AYARLAR-SAYFA-01"}
 {"task_id": "DASH-UX-02b", "ajan": "utku", "talimat": "Brif: plans/brief_utku_DASH-UX-02b.md - Tek sayfada 4 sekmeyi yönet", "tarih": "2026-09-21T19:52:31", "durum": "blocked"}
-{"task_id": "DASH-UX-02a", "ajan": "utku", "talimat": "K1 kalibrasyonu tanımlayıp iki dosya (admin_sistem.py, admin_yonetim.py) içinde tutarlılığını sağla. Brif: plans/brief_utku_DASH-UX-02a.md", "tarih": "2026-09-21T20:19:35", "durum": "bekliyor"}
 {"task_id": "DASH-UX-02b", "ajan": "utku", "talimat": "DASH-UX-02b: Tek Sayfa İçinde 4 Sekmeyi Yönet", "tarih": "2026-09-21T20:27:36", "durum": "blocked"}
+{"task_id": "ADMIN-UX-MENUTREE-01", "ajan": "utku", "talimat": "UX Zincir Brifi — UTKU (2026-09-21)", "tarih": "2026-09-21T21:25:03", "durum": "bekliyor"}
+{"task_id": "DASH-UX-02a", "ajan": "utku", "talimat": "DASH-UX-02a.v1: admin_sistem.py yaz, tabs/__init__.py'ye DOKUNMA. K1 kalibrasyonu burada tanimla (02b'de yeniden kullanilacak). SECTIONS kaydi v2'de (MENUTREE bitince). Brif: plans/brief_utku_DASH-UX-02a-v1.md", "tarih": "2026-09-21T21:26:44", "durum": "bekliyor"}
