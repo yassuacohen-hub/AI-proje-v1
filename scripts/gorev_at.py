@@ -220,6 +220,11 @@ def cmd_at(args: argparse.Namespace) -> int:
     if ihlal:
         print(f"HATA (D-57): {ihlal}", file=sys.stderr)
         return 3
+    # D-66: Brifsiz atama yasak — brief dosyası diskte var mı + talimat dolu mu kontrol et
+    brief_yolu = Path(f"plans/brief_{args.ajan}_{args.task_id}.md")
+    if not brief_yolu.exists() and not args.talimat:
+        print(f"HATA (D-66): Brief yok ve talimat boş. Brief yazilmali: plans/brief_{args.ajan}_{args.task_id}.md", file=sys.stderr)
+        return 6
     mod = getattr(args, "mod", "code") or "code"
     if mod == "architect" and args.ajan not in ARCHITECT_AJANLARI:
         print(
