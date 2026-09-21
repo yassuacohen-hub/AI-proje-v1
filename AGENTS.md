@@ -83,6 +83,32 @@
 - Amaç: Obsidian graph'ta karar nodunu hub olarak oluşturmak; orphan nod oranını azaltmak.
 - Kapsam: yeni kararlar zorunlu; eski kararlar (D-1…D-183) geriye dönük wikilink eklemesi isteğe bağlı, düşük öncelik (`ADLANDIRMA-GERIYE-01` ile birleştirilebilir).
 
+## Windows cmd.exe Kuralı (D-86 — KAHİN kararı 2026-09-21)
+- **Yasak:** Çok satırlı `python -c "..."` komutu. cmd.exe satır sonlarını bozar, **sessizce** yazmaz (exit 0 döner ama dosya değişmez).
+- **Yasak:** Script çıktısında emoji/Unicode (✅❌→). Terminal CP1254 kullanır, `UnicodeEncodeError` atar. Yerine `[OK]` / `[ERROR]` / `->`.
+- **Yasak:** Unix araçları (`head`, `grep`, `cat`, `sed`). Yerine: `findstr`, `type`, ya da Python script.
+- **Zorunlu:** Tek satırdan uzun her iş → `scripts/*.py` dosyası, sonra `python scripts/ad.py`.
+- **Zorunlu:** Her script idempotent olmalı (iki kez çalışınca bozmaz).
+- **Zorunlu:** `cd` mutlak yol ile: `cd "c:/Huginn Data Projesi/worktree klasoru"`.
+
+## Görev Atama Tek Komut (D-87 — KAHİN kararı 2026-09-21)
+- **Komut:** `python scripts/gorev_atama_otomatis.py --task-id <ID> --ajan <ajan>`
+- **Ne yapar:** Panodan görevi bulur → brif varlığını doğrular (D-66) → talimatı brif başlığından çıkarır → tetiği gönderir. Üçü tek adımda.
+- **Brif adı sözleşmesi:** `plans/brief_{ajan}_{task_id}.md` — bu adda değilse komut reddeder.
+- **Neden:** Pano düzenleme + brif yazma + tetik gönderme ayrı adımlardı; tetik unutulunca ajan görevi görmüyordu (DASH-UX-02a vakası, 2026-09-21).
+- **Kural:** `task_board.json`'a elle `sahip` yazmak **atama sayılmaz**. Atama ancak bu komutla tamamlanır.
+
+## MENUTREE UX Kararı: Seri Uygulanma (D-85 — KAHİN kararı 2026-09-21)
+- **Karar:** MENUTREE (menü ağacı) UX tasarımı ve DASH-UX-02a/02b pano görevleri seri çalışılacak; paralelleştirme yerine tek sahip (UTKU).
+- **Neden:** DASH-UX-02a (5 sistem sekmesi) ve DASH-UX-02b (4 yönetim sekmesi) bağımsız dosyalar olmalarına rağmen, K1 kalibrasyonu tutarlılığı ve app.py sidebar birleştirme noktası için seri uygulanma daha güvenli.
+- **Stratejisi:**
+  1. DASH-UX-02a: K1 kalibrasyonu ilk yapılır (raporda detaylar).
+  2. DASH-UX-02b: Aynı K1 yapısını uygular (yinelemez), K2/K3/K5 kendi sekmelerine uygulanır.
+  3. Teslim sırası: 02a → onay → 02b başla.
+- **MENUTREE:** UX-ZINCIR-01 kapsamında, bağımsız, paralellikte değişmez.
+- **Etkilenen görevler:** DASH-UX-02a (brif: `plans/brief_utku_DASH-UX-02a.md`), DASH-UX-02b (brif: `plans/brief_utku_DASH-UX-02b.md`), UX-ZINCIR-01 (MENUTREE).
+- **Referanslar:** [[D-85]] ANALIZ_MENU_AGACI_BLOKAJ_2026-09-21.md (analiz), decision_log.jsonl (karar kaydı).
+
 ### Şifre Rotasyon Protokolü (D-73 — KAHİN kararı 2026-09-20)
 - **Anahtar tek seferliktir.** Her paylaşımdan sonra geçersiz sayılır.
 - **Akış (5 adım, sırayla):**

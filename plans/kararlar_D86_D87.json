@@ -1,0 +1,41 @@
+[
+  {
+    "id": "D-86",
+    "tarih": "2026-09-21",
+    "baslik": "Windows cmd.exe Kurali: Cok Satirli -c Yasak, Emoji Yasak",
+    "karar_veren": "KAHIN",
+    "gerekce": "D-85 karar kaydi 'python -c' ile yazilmaya calisildi; exit 0 dondu ama dosyaya hicbir sey yazilmadi (sessiz basarisizlik). Ayni oturumda emoji iceren script UnicodeEncodeError ile coktu (CP1254). Ayrica 'head' komutu bulunamadi. Uc ayri kayip, tek kok neden: cmd.exe varsayimlari.",
+    "karar": [
+      "Cok satirli python -c yasak; tek satirdan uzun her is scripts/*.py dosyasina yazilir.",
+      "Script ciktisinda emoji/Unicode ok isareti yasak; [OK] / [ERROR] / -> kullanilir.",
+      "Unix araclari (head, grep, cat, sed) yasak; findstr, type ya da Python script kullanilir.",
+      "Her script idempotent olmali: ikinci calistirma veriyi bozmaz.",
+      "cd mutlak yol ile yazilir."
+    ],
+    "etkilenen_dosyalar": [
+      "AGENTS.md",
+      "scripts/karar_yaz.py",
+      "tests/test_d86_cmd_kurallari.py"
+    ],
+    "kaynak": ["AGENTS.md D-86"]
+  },
+  {
+    "id": "D-87",
+    "tarih": "2026-09-21",
+    "baslik": "Gorev Atama Tek Komut: Pano + Brif + Tetik Birlesik",
+    "karar_veren": "KAHIN",
+    "gerekce": "DASH-UX-02a task_board.json'a elle sahip=utku yazilarak atandi ama tetik gonderilmedi. UTKU'nun posta kutusu bos kaldi, gorev gorunmez oldu. Atama uc ayri adim oldugu surece biri unutulur. Sahip hedefi: 'gorev atma ve brief yazma ve kontrol tetikleme sureclerini kusursuz ve hizli hale getirelim'.",
+    "karar": [
+      "Tek komut: python scripts/gorev_atama_otomatis.py --task-id <ID> --ajan <ajan>",
+      "Komut sirayla: panodan gorevi bulur, brif varligini dogrular (D-66), talimati brif basligindan cikarir, tetigi gonderir.",
+      "Brif adi sozlesmesi: plans/brief_{ajan}_{task_id}.md",
+      "task_board.json'a elle sahip yazmak atama sayilmaz; atama ancak bu komutla tamamlanir."
+    ],
+    "etkilenen_dosyalar": [
+      "AGENTS.md",
+      "scripts/gorev_atama_otomatis.py",
+      "tests/test_d87_atama_otomasyonu.py"
+    ],
+    "kaynak": ["AGENTS.md D-87", "D-66 brifsiz atama yasagi"]
+  }
+]
