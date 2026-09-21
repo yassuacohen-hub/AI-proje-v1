@@ -25,7 +25,7 @@
 ## Ajan Adları (D-33 → D-60) ve Roller
 - Kanonik adlar yalnız: `ihsan`, `utku`, `salih`, `yasu`. Tek doğruluk kaynağı `trigger.AJANLAR`; normalizasyon `trigger.ajan_normalize()`. Ayrıntı: AJAN_DETAY §16.
 - Kural: **araç adı = takma ad, Türkçe ad = kanonik ad.**
-- Roller: **ihsan** = orkestratör (son söz ihsan'da) · **utku** = üretim/hacim · **salih** = QA/Release Governance · **yasu** = denetim/review. Ayrıntı: AJAN_DETAY §7.
+- Roller: **ihsan** = orkestratör (son söz ihsan'da) · **utku** = üretim/hacim · **salih** = Test Danışman · **yasu** = denetim/review. Ayrıntı: AJAN_DETAY §7.
 - Persona ve yetenek dosyaları: `docs/ajanlar/ihsan.md` · `docs/ajanlar/utku.md` · `docs/ajanlar/salih.md` · `docs/ajanlar/yasu.md`.
 - `copilot` **dışarıdan gözlemci** — sistemde ajan değil, görev almaz, listelerde yer almaz (KAHİN kararı 2026-09-18).
 - Rotasyon yalnız KAHİN'in `abrakadabra` ritüeliyle; subagent orkestratör olamaz, panoya görev ekleyemez. Ayrıntı: AJAN_DETAY §1-4.
@@ -51,12 +51,46 @@
 - **Makine zorlaması:** `scripts/gorev_at.py at` başlık kalıbını ve ajan adını doğrular; uymayan görev panoya **girmez**.
 
 ## Orkestratör Devralma (D-58 — KAHİN kararı 2026-09-18)
-- Orkestratör **devredilebilir**: `python scripts/gorev_at.py abrakadabra --ajan <kilo|cline|roo> --anahtar <deger>`
+- Orkestratör **devredilebilir**: `python scripts/gorev_at.py abrakadabra --ajan <ihsan|utku|salih|yasu|mimir> --anahtar <deger>`
 - Anahtar koda gömülmez: `ABRAKADABRA_KEY` ortam değişkeni, yoksa `data/orchestrator/abrakadabra.key` (repoya girmez, `.gitignore`'da). Karşılaştırma `hmac.compare_digest` ile sabit zamanlı.
 - Aktif orkestratör `data/orchestrator/orchestrator.json`: `{"ajan","devralma_zamani","anahtar_parmak_izi"}`. Parmak izi = anahtarın `sha256` özeti; **anahtarın kendisi hiçbir yere yazılmaz/basılmaz**.
 - Yanlış anahtar: hiçbir durum değişmez, exit 1, anahtar değeri ekrana basılmaz.
 - Devralma sonrası **yeni görevleri yalnız aktif orkestratör dağıtır**. `at` komutu çağıranı `--cagiran` veya `ORKESTRA_AJAN` env'inden okur; uyuşmazsa exit 4.
-- Varsayılan orkestratör `roo` (dosya yoksa).
+- Varsayılan orkestratör `ihsan` (dosya yoksa, D-71 kanonik).
+
+## Architect Modu Kapısı (D-63 — KAHİN kararı 2026-09-18)
+- **Architect (mimari/planlama/tasarım) görevlerini yalnız iki ajan alır: `ihsan` (roo) ve `utku` (kilo).** `salih` ve `yasu` architect görevi almaz; alırsa iş geçersizdir, orkestratöre geri sorulur.
+- **Görev dağıtımı Architect modunda yapılır.** Orkestratör başka moddayken atılan görev geçersiz sayılır.
+- Görev metninin sonuna **otomatik hatırlatma satırı** eklenir:
+  `⚠️ Bu görev Architect modunda açılmalıdır.`
+- Makine tarafı: `scripts/gorev_at.py at --mod architect` → görev kaydına `"mod": "architect"` yazar, tetik brifine hatırlatma satırını ekler. `--mod architect` verildiğinde ajan `ihsan` veya `utku` değilse komut exit 5 ile reddeder.
+- Varsayılan `mod` değeri `code`. Mod alanı olmayan eski kayıtlar `code` sayılır (geriye dönük uyumluluk).
+- Kural **yeni görevler** için yürürlükte; panodaki açık görevler mevcut hâliyle çalışılır.
+
+## MIMIR — Orkestratör Asistanı, İki Seviye (D-182 — KAHİN kararı 2026-09-21)
+
+Özellik | Açıklama |
+|---------|----------|
+**Ajan** | MIMIR (beşinci ajan, teknik ad: `odin_ai`) |
+**Seviye 0** (Öntanımlı) | 🔒 Orkestratör Asistanı: pano okur, raporlar sunar, `TEKLIF:` önerileri yazabilir; orchestrator.json okunabilir. |
+**Seviye 1** | 🔓 Orkestratör (tam devir): sahip "abrakadabra" sözcüğünü söylediğinde, MIMIR key talep eder, hmac ile doğrular, otomatik olarak orkestratör statüsüne geçer. |
+**Devir Tetikleyicisi** | Sohbet bloğunda "abrakadabra" kelimesi → MIMIR panosundaki kilit mekanizması → key girişi (st.text_input type="password") → hmac doğrulaması → orchestrator.json yazılıp yeni key env'e düşer. |
+**Key Rotasyonu** | Devralma başarılı olunca `secrets.token_urlsafe(32)` ile yeni anahtar üretilir; `.env` varsa atomik `.env.tmp` → `os.replace` ile yazılır, yoksa `data/orchestrator/abrakadabra.key` dosyasına. Eski anahtar geçersiz sayılır. |
+**Seviye Geçişi** | MIMIR iki seviye arasında geçiş yapabilir (diğer ajanlara **geçemez**). Seviye 1'den Seviye 0'a dönmek için yeni rotasyon veya sistem taraması gerekir. |
+**Adı Ekranda** | `MIMIR 🗿` (Seviye 0) veya `MIMIR 🔓` (Seviye 1) |
+**Pas Sözü Saklılığı** | "abrakadabra" kelimesi **yalnız** MIMIR panosu chat bloğunun kilit kapısından tetiklenir. Sistem prompt, model context, pano başlığı, tetik, log'un hiçbir yerinde yer almaz. |
+**Devralma Kaydı** | gorev_at.py:133-175 `cmd_abrakadabra` D-182 ile güncellendi. Eski D-58 ahkâm ve kapıları aynen kalır. |
+
+## Dosya Adlandırma Kuralı (D-183 — KAHİN kararı 2026-09-21)
+- Bundan sonraki tüm script/rapor dosyaları sayısal/teknik suffix (`_add_d182.py`, `d-182_rapor` gibi) **değil**, Türkçe 2-3 kelimelik amaç-tanımlayıcı ad alır. Örnek: `mimir_anahtar_donusumu_raporu.md`, `kullanicilar_silme_scripti.py`.
+- Kapsam: yalnız **yeni** yazılan dosyalar; mevcut dosyalar geriye dönük değiştirilmez (istisna: `ADLANDIRMA-GERIYE-01` görevi açılırsa).
+- İstisnalar: sistem dosyaları (`test_*.py`, `conftest.py`, `app.py`), config dosyaları (`.env`, `.json` vb.). Otomatik üretilen rapor **başlığında** D-XXX karar numarası geçebilir, ama **dosya adı içinde** yalnız Türkçe ad yer alır.
+
+## Graph Köprü Kuralı — Karar ↔ Kod ↔ Test Wikilink'leri (D-184 — KAHİN kararı 2026-09-21)
+- Her yeni karar kaydı (D-XXX) yazıldığında, ilgili kod dosyaları (`*_dXXX_*` pattern) ve test dosyaları (`test_dXXX_*.py` pattern) docstring/başına wikilink eklenir: `[[D-XXX]] — [başlık]`.
+- Karar belgesi de kod ve test dosyalarına backlink içerir (`**Referanslar:**` bloğu).
+- Amaç: Obsidian graph'ta karar nodunu hub olarak oluşturmak; orphan nod oranını azaltmak.
+- Kapsam: yeni kararlar zorunlu; eski kararlar (D-1…D-183) geriye dönük wikilink eklemesi isteğe bağlı, düşük öncelik (`ADLANDIRMA-GERIYE-01` ile birleştirilebilir).
 
 ### Şifre Rotasyon Protokolü (D-73 — KAHİN kararı 2026-09-20)
 - **Anahtar tek seferliktir.** Her paylaşımdan sonra geçersiz sayılır.
@@ -112,13 +146,14 @@
 - Eski sıra (`İhsan (Orkestratör)`, `ihsan - orkestrator`) **kullanılmaz**; yeni metinlerde title-önce yazılır.
 - Title kaynağı: "Ajan Rol Tanımları" tablosu (§ üstte).
 
-## Test Danışman — salih (D-59 / D-63 — KAHİN kararı 2026-09-18 / 2026-09-20)
+## Test Danışman — salih (D-59 / D-63 / D-181 — KAHİN kararı 2026-09-18 / 2026-09-20 / 2026-09-21)
 - **salih bağımsız, uzun süreli, mekanik görevlere uzmanlaştı.** Test planlama, kapsamı ölçme, benchmark, bilgi tabanı, uyum denetimi.
 - Raporlama ve teslim komutları → **YASU'ya yönlenir**. SALİH sadece plan/çerçeve/veri sunar.
 - Görev ön eki: `TEST-` (test planlama/kapsamı), `ALTYAPI-` (benchmark/uyum). D-57 başlık kalıbı aynen geçerli.
 - Posta kutusu: `data/orchestrator/triggers/salih.jsonl`. Normalizasyon `continue` → `salih`, `merve` → `salih`.
 - Raporlama yardımcısı: `python scripts/rapor_olustur.py --task-id X --ajan yasu --ozet "..."` (SALİH plana çıktısını yazarken YASU ister ve teslim eder).
 - salih orkestratör **değildir**; görev dağıtamaz (D-58 kapısı geçerli).
+- Persona/detay SSOT: `docs/ajanlar/salih.md` (Release Authority tavsiye — nihai onay orkestratöre).
 
 ## Ajan Rol Tanımları (D-59/D-60/D-63)
 
@@ -283,7 +318,7 @@
 |---------|-----------------|-----|
 | `roo`, `roo-code`, `orkestrator` | **`ihsan`** | Orkestratör |
 | `kilo`, `kilo-code` | **`utku`** | Üretim/Hacim |
-| `merve`, `continue`, `continue-ide` | **`salih`** | QA/Release Governance |
+| `merve`, `continue`, `continue-ide` | **`salih`** | Test Danışman |
 | `cline`, `clinebot`, `yasin` | **`yasu`** | Denetim/Review |
 | `copilot` | — | **Kaldırıldı** (dış gözlemci) |
 
@@ -328,7 +363,7 @@
 | **utku** (araç: kilo) | Üretim/hacim ajanı — kod yazma, refactoring, test, CI/CD. Kilitli dosyalarda çalışır. |
 | **yasu** (araç: cline) | Denetim/review ajanı — kod inceleme, güvenlik, mimari uyum, doküman doğrulama. |
 | **ihsan** (araç: roo) | Orkestratör — görev dağıtımı, onay, commit, push, karar kaydı, ajan koordinasyonu. Son söz ihsan'da. |
-| **salih** (araç: continue) | QA/Release Governance — test kapsamı, regresyon, sürüm öncesi doğrulama. |
+| **salih** (araç: continue) | Test Danışman — mekanik görevler: test planlama, benchmark, bilgi tabanı, uyum denetimi. Rapor → YASU. |
 | **orkestrator** | `ihsan` ile eşanlamlı; görev panosu yönetimi, tetik kuyruğu, kilit takibi. |
 | **oto-nobetci** | Otomatik onay/teslim işleyen arka plan süreci (`scripts/oto_nobetci.py`). P2 ve altı görevleri onaylar; P0/P1 elle onay (D-46). |
 
@@ -441,3 +476,25 @@
   - `python scripts/senkron_append.py` — eksik satır ekle
   - `python scripts/pano_merge.py` — pano birleştir (yedekli)
 - **Ponytail rung 4 — otomasyon eksik:** post-commit git hook + zamanlanmış görev yazılmadı. Şu an elle tetiklenir. Ekleme zamanı: senkron gecikmesi günde 1'den fazla soruna yol açarsa.
+
+## Graph Canonical vs Yazma Otoritesi (D-172 / D-177 Netleştirme)
+
+İki karar **çelişmiyor**, farklı katmanlara ait:
+
+| Karar | Tanım | Katman | Anlamı |
+|-------|-------|--------|--------|
+| **D-172** | `worktree klasoru/` = otorite kaynağı | **YAZMA / SSOT** | Kod ve doküman **buraya yazılır**. Tüm değişiklik burada yapılır. Git worktree bağlı, orkestratör doğrudan çalışır. |
+| **D-177** | Graph canonical = `Huginn Data Insights/` | **GRAPH / GÖRÜNÜM** | Obsidian link çözümlemesi, orphan tespiti, backlink sayımı **burayı** esas alır. Graph engine burada çalışır. |
+
+**Kural:** `worktree klasoru/` = **yazma otoritesi (SSOT)**. `Huginn Data Insights/` = **graph görünümü (canonical ağaç)**. Bir dosyayı düzenlerken `worktree klasoru/` altındaki kopya değiştirilir; graph metriği okunurken `Huginn Data Insights/` altındaki kopyası sayılır. Bu ikisi çelişmiyor — worktree'ye yazılır, HDI'a link kredisi gider. HDI, worktree'nin senkronize, salt-okunur aynasıdır.
+
+## İlgili Nodlar (GRAPH-FIX-02 Backlink)
+
+- [[Huginn Data Insights/docs/CALISMA_GUNLUGU]]
+- [[Huginn Data Insights/AI proje v1/docs/CALISMA_GUNLUGU]]
+- [[Huginn Data Insights/scripts/_tavily_skill_incele]]
+- [[Huginn Data Insights/data/orchestrator/VAULT-TARAMA-02_analiz_2026-09-20_orkestrator]]
+- [[Huginn Data Insights/data/skills/supabase/AGENTS]]
+- [[Huginn Data Insights/data/skills/supabase/CONTRIBUTING]]
+- [[Huginn Data Insights/data/skills/supabase/README]]
+- [[Huginn Data Insights/data/skills/supabase/skills/supabase/SKILL]]
