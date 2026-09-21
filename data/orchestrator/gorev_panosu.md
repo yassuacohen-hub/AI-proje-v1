@@ -24,6 +24,11 @@
 | ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyası yaz → data/orchestrator/*.md (1s) | yasu | P2 | plan | - |
 | ALTYAPI-KILIT-YOL-FIX-01 | [ALTYAPI] kilit yolunu düzelt → file_locks.json (1s) | utku | P1 | review | data/orchestrator/file_locks.json |
 | ALTYAPI-PANO-ENCODING-FIX-01 | [ALTYAPI] pano encoding hatalarini duzelt → task_board.json (2s) | utku | P1 | review | data/orchestrator/task_board.json |
+| TEST-AYARLAR-KAPSAM-01 | Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda) | yasu | P2 | plan | tests/test_admin_kullanici_ayarlari.py |
+| UI-AYARLAR-SAYFA-01 | [UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s) | utku | P1 | plan | - |
+| ORKESTRA-BASLIK-GERIYE-01 | [ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s) | yasu | P2 | plan | - |
+| TEST-MERVE-KAPSAM-01 | [TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s) | salih | P2 | plan | - |
+| DASH-UX-02a-SECTIONS | [DASH-UX] DASH-UX-02a-SECTIONS: admin_sistem sekmesini SECTIONS'a kaydet | utku | P1 | blocked | web_dashboard/tabs/__init__.py |
 
 ## Tamamlananlar
 

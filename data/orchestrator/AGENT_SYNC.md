@@ -24,6 +24,11 @@
 | ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyası yaz → | yasu | P2 | plan |
 | ALTYAPI-KILIT-YOL-FIX-01 | [ALTYAPI] kilit yolunu düzelt → file_loc | utku | P1 | review |
 | ALTYAPI-PANO-ENCODING-FIX-01 | [ALTYAPI] pano encoding hatalarini duzel | utku | P1 | review |
+| TEST-AYARLAR-KAPSAM-01 | Kullanici Ayarlari sayfasi icin test isk | yasu | P2 | plan |
+| UI-AYARLAR-SAYFA-01 | [UI] Kullanici Ayarlari sayfasini yaz →  | utku | P1 | plan |
+| ORKESTRA-BASLIK-GERIYE-01 | [ORKESTRA] Acik gorev basliklarini D-57  | yasu | P2 | plan |
+| TEST-MERVE-KAPSAM-01 | [TEST] Ayarlar sayfasi testlerini denetl | salih | P2 | plan |
+| DASH-UX-02a-SECTIONS | [DASH-UX] DASH-UX-02a-SECTIONS: admin_si | utku | P1 | blocked |
 
 ## Tamamlananlar (Son 10)
 

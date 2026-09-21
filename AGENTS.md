@@ -109,6 +109,21 @@
 - **Etkilenen görevler:** DASH-UX-02a (brif: `plans/brief_utku_DASH-UX-02a.md`), DASH-UX-02b (brif: `plans/brief_utku_DASH-UX-02b.md`), UX-ZINCIR-01 (MENUTREE).
 - **Referanslar:** [[D-85]] ANALIZ_MENU_AGACI_BLOKAJ_2026-09-21.md (analiz), decision_log.jsonl (karar kaydı).
 
+### DASH-UX-02a Split: v1 (Dosya) / v2 (SECTIONS) (D-185 — KAHİN kararı 2026-09-21)
+- **Karar:** DASH-UX-02a çakışma riskini azaltmak için v1/v2'ye bölün.
+- **v1 (Dosya):** `web_dashboard/tabs/admin_sistem.py` yazılır. SECTIONS kaydı **YAPILMAZ**. K1 kalibrasyonu tanımlanır (raporda).
+- **v2 (SECTIONS):** v1 onaylandıktan + ADMIN-UX-MENUTREE-01 bitince, `tabs/__init__.py` güncellenip SECTIONS'a admin_sistem eklenir. K1 reuse. Full regresyon test.
+- **Neden:** `tabs/__init__.py` tek erişim noktası; MENUTREE ve v2 aynı dosyayı eder → seri (MENUTREE → v2 → 02b).
+- **Stratejisi:**
+  1. DASH-UX-02a (v1): K1 tanımı, lokal test. `__init__.py`'ye dokunmaz. 3-5 saat.
+  2. DASH-UX-02a-SECTIONS (v2): MENUTREE bitince başlar, `__init__.py` kayıt, full test. 1-2 saat.
+  3. DASH-UX-02b: v2'nin bloklı bağımlılığından sonra tetiklenir.
+- **Dosya kilitleri:**
+  - `web_dashboard/tabs/admin_sistem.py` ← UTKU (v1)
+  - `web_dashboard/tabs/__init__.py` ← UTKU (v2, MENUTREE'den sonra)
+- **Etkilenen görevler:** DASH-UX-02a (v1: `plans/brief_utku_DASH-UX-02a-v1.md`), DASH-UX-02a-SECTIONS (v2: `plans/brief_utku_DASH-UX-02a-v2.md`), DASH-UX-02b (tetik: v2 done).
+- **Referanslar:** [[D-85]], [[D-185]] scripts/d185_board_guncelle.py (otomasyon), SPRINT_PLANI_2026-09-21.md (plan), decision_log.jsonl (karar kaydı).
+
 ### Şifre Rotasyon Protokolü (D-73 — KAHİN kararı 2026-09-20)
 - **Anahtar tek seferliktir.** Her paylaşımdan sonra geçersiz sayılır.
 - **Akış (5 adım, sırayla):**

@@ -2509,7 +2509,7 @@
     "dosyalar": [
       "web_dashboard/tabs/admin_sistem.py"
     ],
-    "not": "Teslim (copilot): brif sentez okundu. web_dashboard/tabs/admin_sistem.py ile cost/performance/api_analytics/dlq/webhook panelleri tek Sistem render akisinda birlestirildi; ortak yenileme, bilgi ve empty-state metni eklendi. tests/test_admin_sistem.py eklendi. py_compile basarili; odak ve komsu sistem testleri 11 passed.",
+    "not": "D-185 split v1: sadece admin_sistem.py yazilir, web_dashboard/tabs/__init__.py'ye DOKUNULMAZ. SECTIONS kaydi DASH-UX-02a-SECTIONS (v2) gorevinde, MENUTREE sonrasi. Brief: plans/brief_utku_DASH-UX-02a-v1.md",
     "source": "ic",
     "from_agent": null,
     "blokaj": [
@@ -2518,7 +2518,9 @@
     "talimat": "5 sistem sekmesini tek 'admin_sistem.py' icinde birlestir: cost/performance/api_analytics/dlq/webhook. Dikey dilim: her sekme icin veri kaynagi + bos-veri placeholder + test BIRLIKTE gelsin (K2/K5). app.py'ye DOKUNMA (roo sidebar yapacak). Alt-sekme yapisi, her grafige 1 satir aciklama (K3).",
     "kanit": "",
     "id": "DASH-UX-02a",
-    "mod": "code"
+    "mod": "code",
+    "kapisi_acildi": true,
+    "brief": "plans/brief_utku_DASH-UX-02a-v1.md"
   },
   {
     "task_id": "DASH-UX-02b",
@@ -2531,12 +2533,12 @@
     "dosyalar": [
       "web_dashboard/tabs/admin_yonetim.py"
     ],
-    "not": "Teslim (copilot): 00_sentez okundu. web_dashboard/tabs/admin_yonetim.py ile extras(API/kullanici), search, export ve auto_refresh panelleri tek Yonetim render akisinda birlestirildi; ortak yenileme, bilgi ve yetki notu eklendi. tests/test_admin_yonetim.py eklendi; py_compile ve komsu testler 4 passed.",
+    "not": "D-185: 02b artik DASH-UX-02a-SECTIONS (v2) bitince baslar; K1 kalibrasyonu v1 raporundan. Brief: plans/brief_utku_DASH-UX-02b.md",
     "source": "ic",
     "from_agent": null,
     "blokaj": [
       "SENTEZ-01",
-      "DASH-UX-02a"
+      "DASH-UX-02a-SECTIONS"
     ],
     "talimat": "4 sekmeyi tek 'admin_yonetim.py' icinde birlestir: extras(auth/user)/audit/panel(karar)/export. Dikey dilim + bos-veri placeholder + aciklama (K2/K3/K5). app.py'ye DOKUNMA.",
     "kanit": "",
@@ -6540,5 +6542,62 @@
     "source": "ic",
     "from_agent": null,
     "mod": "code"
+  },
+  {
+    "task_id": "VERI-ARSIV-01",
+    "id": "VERI-ARSIV-01",
+    "baslik": "[VERI] düzelt gizleme_filtreleri → app.json (2s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-21T18:54:55",
+    "bitis": "2026-09-21T19:03:26",
+    "dosyalar": [
+      "Huginn Data Insights/.obsidian/app.json"
+    ],
+    "not": "Teslim (utku): Obsidian app.json userIgnoreFilters genişletildi: 8 yeni glob kalıbı eklendi (temp rapor/JSON dosyaları gizleme). Kodlama denetimi temiz.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code"
+  },
+  {
+    "task_id": "TEST-GRAPH-KOPRU",
+    "id": "TEST-GRAPH-KOPRU",
+    "baslik": "[TEST] denetle backlink_sayimi → dogrulama_raporu.md (2s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-21T18:55:19",
+    "bitis": "2026-09-21T19:13:28",
+    "dosyalar": [
+      "data/orchestrator/TEST_GRAPH_KOPRU_dogrulama_2026-09-21.md"
+    ],
+    "not": "Teslim (utku): D-182 backlink dogrulama: 8 dosya, 16 backlink (5+ bekleniyordu). D-* genel: 8 dosya (20+ kismi - eski kararlar geri donuk eklenmedi). Orphan orani %62->%41 (~%21 azalis). Kodlama denetimi temiz.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code"
+  },
+  {
+    "task_id": "DASH-UX-02a-SECTIONS",
+    "id": "DASH-UX-02a-SECTIONS",
+    "baslik": "[DASH-UX] DASH-UX-02a-SECTIONS: admin_sistem sekmesini SECTIONS'a kaydet",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "blocked",
+    "baslangic": null,
+    "bitis": "2026-09-21T21:16:42",
+    "dosyalar": [
+      "web_dashboard/tabs/__init__.py"
+    ],
+    "not": "Blokaj: DASH-UX-02a, ADMIN-UX-MENUTREE-01 bekliyor",
+    "source": "ic",
+    "from_agent": null,
+    "blokaj": [
+      "DASH-UX-02a",
+      "ADMIN-UX-MENUTREE-01"
+    ],
+    "talimat": "admin_sistem sekmesini SECTIONS'a ekle. MENUTREE'nin Ayarlar cikarma ve grup duzenlemesinin ustune yaz. K1 kalibrasyonu v1 raporundan alinir. pytest tests/ -q tamamen yesil olmali.",
+    "mod": "code",
+    "brief": "plans/brief_utku_DASH-UX-02a-v2.md"
   }
 ]

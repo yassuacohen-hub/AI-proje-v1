@@ -29,13 +29,23 @@
    - Tahmini: 5h
    - Dosyalar: `web_dashboard/tabs/__init__.py`
 
-2. **DASH-UX-02a** (P1, sistem sekmeleri birleştirme)
-   - Brief: `plans/brief_utku_DASH-UX-02a.md` (var)
-   - Tetik: `al utku DASH-UX-02a` (D-85 seri başlangıcı)
-   - Durum: `plan` → `aktif`
-   - Tahmini: 8h (K1/K2/K5 kalibasyonu)
-   - Dosyalar: `web_dashboard/tabs/admin_sistem.py` (cost/perf/api/dlq/webhook)
-   - **Kritik:** K1 kalibasyonu tek kez burada yapılacak, 02b'de reuse edilecek
+2. **DASH-UX-02a.v1** (P1, sistem sekmelerini dosyada yaz — SECTIONS kayıtsız)
+    - Brief: `plans/brief_utku_DASH-UX-02a-v1.md` (D-185 split)
+    - Tetik: `al utku DASH-UX-02a` (D-85 seri başlangıcı)
+    - Durum: `plan` → `aktif`
+    - Tahmini: 5h (K1 kalibrasyonu tanımı)
+    - Dosyalar: `web_dashboard/tabs/admin_sistem.py` (cost/perf/api/dlq/webhook)
+    - **Kritik:** `web_dashboard/tabs/__init__.py`'ye **DOKUNMAZ** (v2'de yapılacak)
+    - **K1 kalibrasyonu** bu görevde tanımlanır, raporda detaylandırılır
+
+2b. **DASH-UX-02a.v2** (P1, admin_sistem SECTIONS kaydı) — v1 + MENUTREE **SONRASI**
+    - Brief: `plans/brief_utku_DASH-UX-02a-v2.md` (D-185 split)
+    - Tetik: Zincir otomatik (v1 onay + MENUTREE done olunca)
+    - Blokaj: `["DASH-UX-02a", "ADMIN-UX-MENUTREE-01"]`
+    - Durum: `plan` → `aktif`
+    - Tahmini: 2h (kayıt + full regresyon test)
+    - Dosyalar: `web_dashboard/tabs/__init__.py`
+    - **K1 reuse:** v1 raporundan alınır
 
 3. **DASH-UX-02b** (P1, yönetim sekmeleri birleştirme) — 02a **SONRASI**
    - Brief: `plans/brief_utku_DASH-UX-02a.md` (ortak, K1 kalibasyonu referansı)
@@ -44,7 +54,7 @@
    - Tahmini: 5h (K1 reuse, K2/K3/K5 paralel)
    - Dosyalar: `web_dashboard/tabs/admin_yonetim.py` (extras/audit/panel/export)
 
-**UTKU İş Yükü:** MENUTREE (5h) + 02a (8h) + 02b (5h) = **18h** (kapasitesi ~20h/hafta) ✅ **kabul edilebilir**
+**UTKU İş Yükü:** MENUTREE (5h) + 02a.v1 (5h) + 02a.v2 (2h) + 02b (5h) = **17h** (kapasitesi ~20h/hafta) ✅ **kabul edilebilir**
 
 ---
 
