@@ -241,7 +241,7 @@
       "ruff.toml",
       ".pre-commit-config.yaml"
     ],
-    "not": "Teslim (utku): ruff format/lint standardizasyonu tamamlandi: web_app/app/web_dashboard haric tum dosyalar formatlandi, ruff.toml ve .pre-commit-config.yaml guncellendi.",
+    "not": "Ertelendi (D-48): ADMIN-AYAR-01 onceligi. ERTELENDI (sahip 2026-09-17, D-48): CI push kodlama_denetim yeterli. Bu goreve DEVAM ETME; ADMIN-AYAR-01 al.",
     "source": "ic",
     "from_agent": null,
     "kanit": "",
@@ -261,7 +261,7 @@
       "tests/test_kodlama_denetim.py",
       "data/kodlama_allowlist.json"
     ],
-    "not": "Teslim (utku): kodlama_denetim genisletildi: CRLF/bosluk/tab/EOF kontrolleri eklendi, auto-fix destegi eklendi, testler guncellendi.",
+    "not": "Ertelendi (D-48): ADMIN-AYAR-01 onceligi. ERTELENDI (sahip 2026-09-17, D-48): CI push kodlama_denetim yeterli. Bu goreve DEVAM ETME; ADMIN-AYAR-01 al.",
     "source": "ic",
     "from_agent": null,
     "kanit": "",
@@ -2467,13 +2467,13 @@
     "baslik": "[BRIF] copilot brifi: 03_mimari kararlari okunup oneri/kritik/ekleme yazilsin",
     "sahip": "copilot",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "plan",
     "baslangic": "2026-09-13T21:02:50",
     "bitis": "2026-09-13T21:16:18",
     "dosyalar": [
       "AI proje v1/V10/03_mimari/brifler/brif_copilot.md"
     ],
-    "not": "Teslim (copilot): brif dosyasi: AI proje v1/V10/03_mimari/brifler/brif_copilot.md; sekme tasima, test stratejisi, API sozlesmesi, audit ve workflow senkronizasyonu onerileri eklendi.",
+    "not": "D-185 temizlik: blokaj alani bos, blocked nedeni bulunamadi -> plan'a cekildi, atanabilir. D-62: Admin panel heap (copilot kaldırıldı, yeniden etkinleştirildi)",
     "source": "ic",
     "from_agent": null,
     "kanit": "",
@@ -2714,18 +2714,16 @@
     "baslik": "MUSTERILER ekrani: firma listesi+filtre+bildirim blogu (roo uyarisi)",
     "sahip": "ihsan",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "plan",
     "baslangic": "2026-09-13T22:08:26",
     "bitis": "2026-09-13T22:57:21",
     "dosyalar": [
       "web_dashboard/tabs/admin_musteriler.py"
     ],
-    "not": "Teslim (copilot): admin_musteriler.py olusturuldu: firma listesi, arama/kalite/kaynak/limit filtreleri, ust bildirim blogu ve bos-veri durumu. app.py Musteriler rotasi yeni render fonksiyonuna baglandi. tests/test_admin_musteriler.py -> 2 passed; py_compile basarili.",
+    "not": "COP-25 archive (basariyla tasindi), blokaj kaldirildi (D-185 temizlik).",
     "source": "ic",
     "from_agent": null,
-    "blokaj": [
-      "COP-25"
-    ],
+    "blokaj": [],
     "talimat": "ONCE AI proje v1/V10/03_mimari/brifler/00_sentez.md OKU. MUSTERILER ekrani: admin_musteriler.py icinde firma LISTESI + filtre paneli + bildirim blogu geri getir (roo uyarisi). DASH-UX-03 demo verisi ile calisabilmeli. K1/K2/K3 kalibi (baslik+son guncelleme+bos-veri+aciklama).",
     "kapisi_acildi": true,
     "kanit": "",
@@ -5267,7 +5265,7 @@
     "baslik": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
     "sahip": "ihsan",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "aktif",
     "baslangic": "2026-09-18T23:03:03",
     "bitis": "2026-09-19T16:24:16",
     "dosyalar": [],

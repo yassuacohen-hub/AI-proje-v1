@@ -35,30 +35,30 @@ def test_sema_dogrula_eksik_oncelik_reddeder():
     """WIKI-01 vakasi: `oncelik` alani olmayan kayit panoya girmemeli."""
     with pytest.raises(ValueError, match="eksik alan"):
         tb.sema_dogrula({"task_id": "X-1", "baslik": "b", "sahip": "roo",
-                         "durum": "plan", "dosyalar": []})
+                         "durum": "plan", "dosyalar": [], "mod": "code"})
 
 
 def test_sema_dogrula_eksik_sahip_reddeder():
     with pytest.raises(ValueError, match="eksik alan"):
         tb.sema_dogrula({"task_id": "X-1", "baslik": "b", "oncelik": "P1",
-                         "durum": "plan", "dosyalar": []})
+                         "durum": "plan", "dosyalar": [], "mod": "code"})
 
 
 def test_sema_dogrula_gecersiz_durum_reddeder():
     with pytest.raises(ValueError, match="Gecersiz durum"):
         tb.sema_dogrula({"task_id": "X-1", "baslik": "b", "sahip": "roo",
-                         "oncelik": "P1", "durum": "uydurma", "dosyalar": []})
+                         "oncelik": "P1", "durum": "uydurma", "dosyalar": [], "mod": "code"})
 
 
 def test_sema_dogrula_dosyalar_liste_olmali():
     with pytest.raises(ValueError, match="liste olmali"):
         tb.sema_dogrula({"task_id": "X-1", "baslik": "b", "sahip": "roo",
-                         "oncelik": "P1", "durum": "plan", "dosyalar": "a.py"})
+                         "oncelik": "P1", "durum": "plan", "dosyalar": "a.py", "mod": "code"})
 
 
 def test_sema_dogrula_gecerli_kaydi_gecirir():
     tb.sema_dogrula({"task_id": "X-1", "baslik": "b", "sahip": "roo",
-                     "oncelik": "P1", "durum": "plan", "dosyalar": []})
+                     "oncelik": "P1", "durum": "plan", "dosyalar": [], "mod": "code"})
 
 
 def test_gorev_normalize_eksikleri_doldurur():
@@ -67,6 +67,7 @@ def test_gorev_normalize_eksikleri_doldurur():
     duzeltilmis = tb.gorev_normalize(bozuk)
     assert duzeltilmis["oncelik"] == "P2"
     assert duzeltilmis["dosyalar"] == []
+    assert duzeltilmis["mod"] == "code"
     # task_id uydurulmaz, korunur
     assert duzeltilmis["task_id"] == "WIKI-01"
 
@@ -79,12 +80,13 @@ def test_gorev_normalize_bozuk_dosyalar_alanini_listeye_cevirir():
 def test_pano_normalize_onarilan_idleri_dondurur():
     board = [
         {"task_id": "OK-1", "baslik": "b", "sahip": "roo", "oncelik": "P1",
-         "durum": "plan", "dosyalar": []},
+         "durum": "plan", "dosyalar": [], "mod": "code"},
         {"task_id": "BOZUK-1", "baslik": "b", "sahip": "roo", "durum": "plan"},
     ]
     _, onarilan = tb.pano_normalize(board)
     assert onarilan == ["BOZUK-1"]
     assert board[1]["oncelik"] == "P2"
+    assert board[1]["mod"] == "code"
 
 
 def test_bozuk_kayit_pano_yazimini_cokertmez(tmp_path):
