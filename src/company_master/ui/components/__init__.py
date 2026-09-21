@@ -29,7 +29,7 @@ from company_master.ui.components.page import (
     kimlik_uret,
 )
 from company_master.ui.components.table import HIZALAMALAR, Table
-from company_master.ui.components.tooltip import KONUMLAR, Tooltip
+from company_master.ui.components.profil_menu import ProfileMenu, render_profil_menu
 from company_master.ui.components.topbar import (
     SOHBET_ROLLERI,
     TEMA_SUNUMU,
@@ -51,6 +51,7 @@ __all__ = [
     "MetricCard",
     "Modal",
     "PageHeader",
+    "ProfileMenu",
     "Section",
     "SectionNav",
     "Table",
@@ -76,4 +77,5 @@ __all__ = [
     "bos_durum",
     "hata_kutusu",
     "yukleniyor",
+    "render_profil_menu",
 ]
