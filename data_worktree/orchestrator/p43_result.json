@@ -1,0 +1,14 @@
+{
+  "total_firma": 5485,
+  "vergi_no_eksik": 5485,
+  "hedef_web": 2736,
+  "vkn_bulunan": 3,
+  "db_guncellenen": 2,
+  "jsonl_guncellenen": 3,
+  "source_records_matched": 3,
+  "local_field_matched": 0,
+  "errors": [],
+  "status": "completed_alternative",
+  "method": "alternative_sources",
+  "notice": "Web scraping erisim sorunu nedeniyle alternatif veri kaynaklari kullanildi (source_records + local alan cikarimi)."
+}

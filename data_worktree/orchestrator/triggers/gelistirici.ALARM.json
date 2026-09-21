@@ -1,0 +1,458 @@
+[
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-15T00:13:06",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-15T00:13:06",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-15T00:13:07",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-15T00:14:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-15T00:14:05",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-15T00:14:06",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-15T00:15:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-15T00:15:05",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-15T00:15:06",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-15T00:16:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-15T00:16:05",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-15T00:16:06",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-15T00:17:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-15T00:17:05",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-15T00:17:06",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-15T00:18:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-15T00:18:05",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-15T00:18:06",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-15T00:19:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-15T00:19:05",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-15T00:19:06",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-15T00:20:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-15T00:20:05",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-15T00:20:06",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-15T00:21:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-15T00:21:05",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-15T00:21:06",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-15T00:22:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-15T00:22:05",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-15T00:23:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-15T00:23:05",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-15T00:23:06",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-15T00:24:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-15T00:24:06",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-15T00:24:06",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-15T00:25:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-15T00:25:06",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-15T00:25:06",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-15T00:28:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-15T00:28:05",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-15T00:28:06",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-15T00:29:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-15T00:30:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-15T00:30:05",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-15T00:30:06",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-15T00:31:05",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-15T00:31:05",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-15T00:31:06",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 18,
+    "uyari_tarihi": "2026-09-15T00:32:06",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 18. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-15T00:32:06",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-15T00:32:07",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 19,
+    "uyari_tarihi": "2026-09-15T00:33:02",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 19. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 18,
+    "uyari_tarihi": "2026-09-15T00:33:02",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 18. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-15T00:33:02",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-01",
+    "gorev_basligi": "CI/CD Pipeline — GitHub Actions Optimization",
+    "tetik_sayisi": 20,
+    "uyari_tarihi": "2026-09-15T00:34:02",
+    "mesaj": "⚠️ DEV-01 (CI/CD Pipeline — GitHub Actions Optimization) — gelistirici 20. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-02",
+    "gorev_basligi": "Docker Containerization — Multi-stage Build",
+    "tetik_sayisi": 19,
+    "uyari_tarihi": "2026-09-15T00:34:02",
+    "mesaj": "⚠️ DEV-02 (Docker Containerization — Multi-stage Build) — gelistirici 19. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "gelistirici",
+    "task_id": "DEV-03",
+    "gorev_basligi": "Testing Framework — Unified Test Runner",
+    "tetik_sayisi": 18,
+    "uyari_tarihi": "2026-09-15T00:34:02",
+    "mesaj": "⚠️ DEV-03 (Testing Framework — Unified Test Runner) — gelistirici 18. kez uyarıldı; henüz başlamadı."
+  }
+]

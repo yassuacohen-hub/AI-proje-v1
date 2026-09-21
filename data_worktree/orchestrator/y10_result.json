@@ -1,0 +1,27 @@
+{
+  "task_id": "Y10",
+  "baslik": "MERSIS VKN zenginlestirme pipeline'i",
+  "baslangic": "2026-09-09T12:23:52",
+  "durum": "blocked",
+  "kaynaklar": {
+    "mersis": {
+      "kullanildi": true,
+      "sonuc": "0 VKN bulundu"
+    },
+    "knowyourcustomer": {
+      "kullanildi": false,
+      "sonuc": "erisim yok / engelli"
+    },
+    "tobb": {
+      "kullanildi": false,
+      "sonuc": "erisim yok / engelli"
+    }
+  },
+  "istatistikler": {
+    "toplam_firma": 5000,
+    "guncellenen_firma": 0,
+    "bulunan_vkn": 0
+  },
+  "bitis": "2026-09-09T12:23:55",
+  "not": "MERSIS kamuya acik API saglamiyor (html yanit). KnowYourCustomer sandbox kimlik bilgisi eksik. TOBB'da dogrudan VKN API'si yok. Sonuc: 0 firma guncellendi, 0 VKN bulundu."
+}

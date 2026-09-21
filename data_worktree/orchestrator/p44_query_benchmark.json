@@ -1,0 +1,62 @@
+{
+  "timestamp": "2026-09-09T08:01:21Z",
+  "total_queries": 9,
+  "slow_count": 9,
+  "failed_count": 0,
+  "queries": [
+    {
+      "name": "KPI",
+      "ms": 2260.4,
+      "rows": 1,
+      "status": "SLOW"
+    },
+    {
+      "name": "Sources",
+      "ms": 239.5,
+      "rows": 4,
+      "status": "SLOW"
+    },
+    {
+      "name": "ASO count",
+      "ms": 223.2,
+      "rows": 1,
+      "status": "SLOW"
+    },
+    {
+      "name": "Companies list",
+      "ms": 328.7,
+      "rows": 200,
+      "status": "SLOW"
+    },
+    {
+      "name": "Quality trend",
+      "ms": 240.6,
+      "rows": 5,
+      "status": "SLOW"
+    },
+    {
+      "name": "NACE distribution",
+      "ms": 228.2,
+      "rows": 20,
+      "status": "SLOW"
+    },
+    {
+      "name": "ILIKE search",
+      "ms": 395.9,
+      "rows": 39,
+      "status": "SLOW"
+    },
+    {
+      "name": "Source EXISTS filter",
+      "ms": 308.7,
+      "rows": 50,
+      "status": "SLOW"
+    },
+    {
+      "name": "Metrics KPI (web_app)",
+      "ms": 233.8,
+      "rows": 1,
+      "status": "SLOW"
+    }
+  ]
+}

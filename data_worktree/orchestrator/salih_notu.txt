@@ -1,0 +1,28 @@
+UI-PROFILMENU-01 teslim alındı — SALİH notu
+
+Yapılan işler:
+
+✅ profil_menu.py (338L) tamamlandı
+   - State mutasyok yok, popover UI, misafir/admin seçenekleri
+   - Docstring tam, kullanım örneği app.py'de
+
+✅ test_profil_menu.py (113L) — 8/8 test yeşil
+   - Mojibake @1 fixed (anı# → #)
+   - _email_kisalt() davranış test edildi
+
+✅ _email_kisalt() lojik düzeltme
+   - Eski: maks parametresi yerel kısmını 1 harfe ezdiriyordu
+   - Yeni: yerel ilk 3 char, alan tam kalır (org görülebilsin)
+   - Davranış: ali@x.com < 12 → tam, cokuzun@ornek → cok...@ornek
+
+✅ app.py entegrasyonu
+   - import profil_menu eklendi
+   - _topbar_menu_button() refactor
+   - Seçim sonuçlarına aksiyon (çıkış/ayarlar/tema/giriş)
+
+✅ Streamlit restart
+   - PID 13348 çalışıyor, tarayıcıda F5 yeterli
+
+Next: KAHİN onayı → python scripts/gorev_kutusu.py onayla --task-id UI-PROFILMENU-01 --ben ihsan → panel canlı
+
+— İHSAN (Orkestratör)

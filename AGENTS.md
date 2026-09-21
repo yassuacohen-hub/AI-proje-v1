@@ -58,14 +58,31 @@
 - Devralma sonrası **yeni görevleri yalnız aktif orkestratör dağıtır**. `at` komutu çağıranı `--cagiran` veya `ORKESTRA_AJAN` env'inden okur; uyuşmazsa exit 4.
 - Varsayılan orkestratör `roo` (dosya yoksa).
 
-## Architect Modu Kapısı (D-63 — KAHİN kararı 2026-09-18)
-- **Architect (mimari/planlama/tasarım) görevlerini yalnız iki ajan alır: `ihsan` (roo) ve `utku` (kilo).** `salih` ve `yasu` architect görevi almaz; alırsa iş geçersizdir, orkestratöre geri sorulur.
-- **Görev dağıtımı Architect modunda yapılır.** Orkestratör başka moddayken atılan görev geçersiz sayılır.
-- Görev metninin sonuna **otomatik hatırlatma satırı** eklenir:
-  `⚠️ Bu görev Architect modunda açılmalıdır.`
-- Makine tarafı: `scripts/gorev_at.py at --mod architect` → görev kaydına `"mod": "architect"` yazar, tetik brifine hatırlatma satırını ekler. `--mod architect` verildiğinde ajan `ihsan` veya `utku` değilse komut exit 5 ile reddeder.
-- Varsayılan `mod` değeri `code`. Mod alanı olmayan eski kayıtlar `code` sayılır (geriye dönük uyumluluk).
-- Kural **yeni görevler** için yürürlükte; panodaki açık görevler mevcut hâliyle çalışılır.
+### Şifre Rotasyon Protokolü (D-73 — KAHİN kararı 2026-09-20)
+- **Anahtar tek seferliktir.** Her paylaşımdan sonra geçersiz sayılır.
+- **Akış (5 adım, sırayla):**
+  1. KAHİN, mevcut `ABRAKADABRA_KEY` değerini orkestratöre verir.
+  2. Orkestratör `python scripts/gorev_at.py abrakadabra --ajan <ad> --anahtar <eski>` çalıştırır; kilit açılır.
+  3. Orkestratör `python -c "import secrets; print(secrets.token_urlsafe(32))"` ile **yeni** anahtar üretir.
+  4. Orkestratör yeni anahtarı KAHİN'e verir (tek sefer, sohbette).
+  5. KAHİN `.env` içindeki `ABRAKADABRA_KEY` değerini yeni anahtarla değiştirir. Eski anahtar ölür.
+- **Yasak:** Anahtarı dosyaya yazmak, commit etmek, loglamak. Yalnız KAHİN ↔ orkestratör sohbetinde geçer.
+
+### Anahtar Sahipliği (D-74 — KAHİN kararı 2026-09-20)
+- **Abrakadabra anahtarı yalnız aktif orkestratöre aittir** (şu an İHSAN).
+- **YASU, UTKU, SALİH anahtara sahip değildir, isteyemez.** "Abrakadabra olmadan görev alamam" demek **geçersizdir**: ajanların kendi posta kutusu işi (`basla` / `al` / `teslim`) anahtar gerektirmez.
+- Anahtar **yalnız orkestratör devralma** için gerekir. Devralmayı yalnız KAHİN başlatır.
+- Ajanlar aktif orkestratörün talimatına uyar; orkestratör kimliği `data/orchestrator/orchestrator.json` içindedir.
+
+### Orkestratör Devralma Örneği (D-76 — KAHİN kararı 2026-09-20)
+**Senaryo:** KAHİN başka ajan (UTKU) orkestratör yapmak isterse. İHSAN (mevcut orkestratör) bunu yönetir:
+
+1. KAHİN, mevcut `ABRAKADABRA_KEY`'i İHSAN'a verir: `Up2Fz6pje6lA6J-3x8iY9hPtiogo4DKQnOiW_yyKf6k`
+2. İHSAN, kilit açma komutu çalıştırır: `python scripts/gorev_at.py abrakadabra --ajan utku --anahtar Up2Fz6pje6lA6J-3x8iY9hPtiogo4DKQnOiW_yyKf6k`
+3. İHSAN, yeni anahtar üretir: `python -c "import secrets; print(secrets.token_urlsafe(32))"` → örn. `ABC123...`
+4. İHSAN, yeni anahtarı KAHİN'e verir (sohbette, dosya yok): "Yeni key: `ABC123...`"
+5. KAHİN, `.env` dosyasını günceller: `ABRAKADABRA_KEY=ABC123...`
+6. UTKU artık orkestratör; İHSAN rolü sona erer. `.roorules` silinir. `.kilocode/rules` oluşturulur (UTKU araç: kilo).
 
 ## Ürün Sahibi Raporlama Formatı (D-55)
 - KAHİN'e giden her özet: **kısa cümleler**, teknik olmayan dil, tablo.
@@ -90,12 +107,174 @@
 - Kanonik ad **küçük kalır** (dosya adı, `task_board.json` `sahip` alanı, `triggers/{ajan}.jsonl`, CLI `--ajan`). Yalnız **gösterim** büyür.
 - Makine kaynağı: `trigger.ajan_goster()` — Türkçe `i` → `İ` dönüşümü yapar (`"salih".upper()` yanlış `SALIH` verir).
 
-## QA/Release Engineer — salih (D-59 — KAHİN kararı 2026-09-18)
-- D-49'un "danışmandır, görev almaz" maddesi **iptal**. salih tam yetkili ajandır.
-- Sorumluluk: test kapsamı, regresyon süiti, sürüm öncesi doğrulama, `kodlama_denetim.py` + `pytest` kapıları, teslim kontrol listesi denetimi.
-- Görev ön eki: `TEST-` (kapsam/regresyon) veya `ALTYAPI-` (sürüm/CI). D-57 başlık kalıbı aynen geçerli.
+## Hitap Sırası: Title Önce (Demir Kural, D-64 — KAHİN kararı 2026-09-20)
+- Ajan hitabında sıra: **önce rol title'ı, sonra ad**. Örnek: `Orkestratör İhsan`, `Üretim/Hacim Utku`, `Test Danışman Salih`, `Denetim/Review Yasu`.
+- Eski sıra (`İhsan (Orkestratör)`, `ihsan - orkestrator`) **kullanılmaz**; yeni metinlerde title-önce yazılır.
+- Title kaynağı: "Ajan Rol Tanımları" tablosu (§ üstte).
+
+## Test Danışman — salih (D-59 / D-63 — KAHİN kararı 2026-09-18 / 2026-09-20)
+- **salih bağımsız, uzun süreli, mekanik görevlere uzmanlaştı.** Test planlama, kapsamı ölçme, benchmark, bilgi tabanı, uyum denetimi.
+- Raporlama ve teslim komutları → **YASU'ya yönlenir**. SALİH sadece plan/çerçeve/veri sunar.
+- Görev ön eki: `TEST-` (test planlama/kapsamı), `ALTYAPI-` (benchmark/uyum). D-57 başlık kalıbı aynen geçerli.
 - Posta kutusu: `data/orchestrator/triggers/salih.jsonl`. Normalizasyon `continue` → `salih`, `merve` → `salih`.
+- Raporlama yardımcısı: `python scripts/rapor_olustur.py --task-id X --ajan yasu --ozet "..."` (SALİH plana çıktısını yazarken YASU ister ve teslim eder).
 - salih orkestratör **değildir**; görev dağıtamaz (D-58 kapısı geçerli).
+
+## Ajan Rol Tanımları (D-59/D-60/D-63)
+
+| Kanonik Ad | Başlık | Görev Ön Eki | Tanım |
+|-----------|--------|--------------|-------|
+| **İHSAN** | Orkestratör | ORKESTRA- | Görev dağıtımı, onay, karar kaydı, ajan koordinasyonu. Son söz İHSAN'da. |
+| **UTKU** | Üretim/Hacim | UI-, API-, VERI- | Kod yazma, refactoring, test, CI/CD. Hacim ve hız odaklı. |
+| **SALİH** | Test Danışman | TEST-, ALTYAPI- | Bağımsız, mekanik görevler: test planlama, benchmark, bilgi tabanı, uyum denetimi. Rapor yazma → YASU. |
+| **YASU** | Denetim/Review | ORKESTRA- | Kod inceleme, güvenlik, mimari uyum, doküman doğrulama, raporlama, teslim işleri. |
+
+## Orkestratör–KAHİN Tetik Protokolü (D-62 — KAHİN kararı 2026-09-19)
+- **Tetik adı:** Orkestratör ajan ismini **BÜYÜK HARF**'ta görev atarken KAHİN'e bildirir (görev emri).
+- **KAHİN yanıtı:** `<AJAN>'ya görev al yaz` — KAHİN tam ajan ismini yazarak görevi onaylar ve orkestratöre çalıştırma sinyali verir.
+- **Aksiyonu:** Orkestratör `scripts/gorev_kutusu.py al --ajan <ad>` çalıştırır; görev kilitlenir, brif okunur.
+- **Kaçırma durumu:** KAHİN mesajını kaçırırsa, orkestratör ajan ismini tekrarlı (N×) uyarı olarak gösterir; KAHİN farkına vardığında mesajı yazar.
+- **Gerekçe:** İş takibinin görünür ve doğrulanabilir olması; atlatılan görev kalmasını önlemek.
+
+## Blokaj Bypass — İş Durmaz (D-65 — KAHİN kararı 2026-09-20)
+- **Kural:** Araç/altyapı hatası bir görevi bloke ediyorsa ve çözümü **uzun sürecekse**, orkestratör işi bekletmez.
+- **Aksiyon sırası:**
+  1. KAHİN'e **kopyala-yapıştır hazır** elle tetikleme metnini ver (görev ID + brif yolu + iş maddeleri + test komutu).
+  2. KAHİN elle tetikler, ajan çalışmaya başlar.
+  3. Orkestratör **paralelde** hatayı çözer; çözünce doğrular ve KAHİN'e bildirir.
+- **Gerekçe:** Ajan iş yaparken orkestratör onarım yapar; seri bekleme yerine paralel akış, zaman kaybı sıfır.
+- **Yasak:** "Bloke, bekliyorum" diyip durmak. Blokaj raporu **her zaman** bypass metniyle birlikte gelir.
+
+## Brifsiz Atama Yasak (D-66 — KAHİN kararı 2026-09-20)
+- **Kural:** Hiçbir ajan hiçbir görev almaz brifsiz. Brif dosyası **mutlaka** `data/orchestrator/<TASK>_brif_<tarih>_<rol>.md` veya `plans/brief_<ajan>_<TASK>.md` olarak diskte hazır ve **tetik `talimat` alanına path yazılı** olmalıdır.
+- **D-80 pekiştirme (KAHİN kararı 2026-09-20): Talimat + brif ikisi de ZORUNLU.** Panoda görev `aktif` olabilmesi için üç şart birlikte sağlanır:
+  1. `brief` alanı dolu ve işaret ettiği dosya diskte var.
+  2. `talimat` alanı dolu (en az bir cümle; ne yapılacağı + brif referansı).
+  3. Tetik `talimat` alanı pano `talimat` alanıyla aynı metni taşır.
+  Üçünden biri eksikse atama **yapılmaz**, tetik **düşürülmez**.
+- **Kontrolü:** `tetik_ekle(task_id, ajan, talimat="")` argümanı boş stringse, çağrı yapılmaz. Orkestratör brifsiz görev atarsa (tetik hatasız düşerse de) YASU/UTKU teslim TESLİM ETMEYECEKTİR — `"brif yok"` cevabı verir, task stale kalır.
+- **Uygulanacak:** Her talimat argument'i yazılırken dosyanın var olduğu doğrulanacak; yoksa `FileNotFoundError` veya benzer hata alınacak ve işlem durdurulacak. Gerekli brief yazılıncaya kadar görevi tekrar tetiklemek yasak.
+- **Gerekçe:** Brifsiz görev = iş maddeleri olmayan talimat = ajan ne yapacağını bilemez = zaman kaybı + block + frustration. KAHİN'in gerçek iş tanımına sahip olması şart.
+
+## Tetik ↔ Pano Tutarlılığı (D-68 — KAHİN kararı 2026-09-20)
+- **Bulgu:** `duzen.pano_bakim()` (satır 198-201) tetik kaydını pano durumuna göre sessizce demote ediyor. Pano `aktif` iken tetik `bekliyor` → tetik `alindi`'ye çevriliyor. `bekleyen_tetikler()` yalnız `bekliyor` dönüyor. **Sonuç:** ajan posta kutusu boş, `al` komutu başarısız.
+- **Kök neden:** `tetik_ekle()` pano durumunu kontrol etmeden `bekliyor` yazıyor. Sonra `pano_bakim()` sessizce demote ediyor.
+- **Çözüm:** `tetik_ekle()` içinde guard: pano `aktif`/`review` ise `plan`'a çek. Tetik yazılırken pano zaten `plan` olur → `pano_bakim()` demote edemez.
+- **Uygulanacak:** [`src/company_master/orchestrator/trigger.py`](src/company_master/orchestrator/trigger.py:145-216) `tetik_ekle()` içinde ORCH-12 idempotency check'inden sonra:
+  ```python
+  if gorev and gorev.get("durum") in ("aktif", "review"):
+      tb.gorev_guncelle(task_id, durum="plan", baslangic=None)
+  ```
+- **Gerekçe:** Tetik ↔ pano dual source-of-truth tutarsızlığı kaynağında kesilir. Ajan hiçbir zaman sessizce tetiksiz kalmaz.
+- **D-77 doğrulama (KAHİN kararı 2026-09-20):** Fix üretimde doğrulandı — `git checkout --` ile yanlışlıkla silinen ihsan/utku tetikleri, guard sayesinde tekrar `tetik_ekle()` ile eklenince pano `plan` durumuna çekildi, `pano_bakim()` demote etmedi. `bekleyen_tetikler()` doğru döndü. **Ek bulgu:** `decision_log.jsonl` dosyasında UTF-8 dışı byte var (mojibake, pozisyon ~46494) — ayrı görev açılmalı (kodlama denetimi kapsamına girer).
+
+### Tek Komut: `basla` (D-68 ikinci parça)
+- **Eski akış:** `bak` → gözle task_id oku → `al --task-id X` → brifi ayrıca aç. Üç adım, elle kopyalama.
+- **Yeni akış:** `python scripts/gorev_kutusu.py basla --ajan <ad>` — en yüksek öncelikli (P0 > P1 > ...) bekleyen görevi seçer, brifi ekrana basar, görevi alır. Tek komut.
+- **Brif garantisi:** Talimat yoksa görev **alınmaz**, uyarı basılır (D-66 ile uyumlu). Talimat varsa `--zorla` ile `cmd_al`'a devredilir (brif zaten gösterildiği için ikinci kontrol gereksiz).
+- **Ajan oturum protokolü:** Oturum başında tek komut yeterli; `bak` artık yalnız çoklu görev gözlemi için.
+
+## Ajan Kimlik Bağlama (D-70 — KAHİN kararı 2026-09-20)
+- **Bulgu:** `.clinerules`, `.cursorrules`, `.roorules` aynı boilerplate'ten kopyalanmış; hepsi `--ajan <AJAN>` placeholder'ı taşıyordu. Ajan kendi adını bilmediği için tahmin ediyordu (YASU → yanlışlıkla `utku` yazdı, UTKU'nun mailbox'ını tükettiği zannedildi).
+- **Çözüm:** Her rule dosyasına sabit **KİMLİK** bloğu eklendi; `<AJAN>` yerine dosyanın sahibi olan ajanın adı doğrudan yazıldı (title önce, D-64 formatı):
+  - `.clinerules` → yasu (araç: cline)
+  - `.roorules` → ihsan (araç: roo)
+  - `.cursorrules` → utku (araç: kilo/cursor)
+- **Açık risk:** SALİH (araç: continue) için workspace içinde ayrı rule dosyası yok; `.continue/` boş. Global config kullanıyor olabilir — kimlik bağlama doğrulanmadı, izlenmeli.
+- **Gerekçe:** Kimlik tahmin edilmez, dosyaya sabitlenir; başka ajanın postasını yanlışlıkla tüketme riski kapanır.
+- **Rol Geçişi (D-71):** Orkestratör rolü unvan, ajan kimliği değil. İhsan şu an orkestratör; gelecekte başka ajan (copilot vb.) orkestrasyon üstlenirse, `.roorules` → yeni orkestratör ajanın aracı dosyasına taşınır. Kural dosyaları **ajan kimliğine** (kalıcı) bağlıdır, role (geçici) değil.
+
+## Orkestratör Rol Geçişi (D-71 — KAHİN kararı 2026-09-20)
+- **İlke:** Orkestratör **unvan** (görev panosu yönetimi, tetik kuyruğu, onay), **ajan kimliği** değil. Rol değişebilir.
+- **Mevcut:** İhsan (ajan) = Orkestratör (rol).
+- **Gelecekte:** copilot veya başka araç orkestrator olursa:
+  1. `.roorules` sil (ihsan'ın işi).
+  2. `.{yeni_araç}rules` yaz, yeni orkestratör'ün kimliğini koy (D-70 şablonu).
+  3. `trigger.py` → `AJAN_TAKMA_ADLAR` yeni araç alias'ı ekle.
+  4. Pano, tetik, handoff dosyaları **değişmez** (ajan-bağımsız).
+- **Yasak:** Kural dosyaları role değil, kimliğe bağla. Ajan adı dosya adında doğrudan yazıl, tahmin etme.
+
+## Pano İşleri Orkestrator'a Aittir (D-77 — KAHİN kararı 2026-09-20)
+- **Kural:** Tüm pano bakımı, düzenleme, hata düzeltme işleri **İHSAN (Orkestratör)** tarafından yapılır.
+  - Pano taraması, çakışma analizi
+  - File lock temizliği ve yönetimi
+  - Görev dağıtımı, durum yönetimi, onay işlemleri
+  - Zincir oluşturma, devam ettirme
+  - Bug fix'ler ve kural güncellemeleri (pano tarafında)
+- **Diğer ajanlar (UTKU/YASU/SALİH)** yalnız **kendi domain görevlerini** yaparlar. Pano işleri başka ajana atanmaz.
+- **Açık kural:** Bu durum AGENTS.md'de D-77 olarak kaydedilmiştir. Eski uygulamada pano görevleri ajanlar arası dağıtılıyordu; artık orkestratör tek ajan.
+- **Gerekçe:** Pano yaşam döngüsü çekirdeği orkestratöre merkezi olduğu için çekişmeler, çakışmalar, stale temizleme işleri tek elden yönetilir.
+
+## SALİH Otomatik Onay (D-78 — KAHİN kararı 2026-09-20)
+- **SALİH'in P2 ve altı görevleri** `oto-nobetci` ile otomatik onaylanır. **P0/P1 elle** (orkestratör) onaylanır.
+- Rapor (D-55) ve özeleştiri (D-67) zorunluluğu **kalkmaz**; otomatik onay yalnız onay adımını atlar.
+- Makine kaynağı: `trigger.py::otomatik_onaylanabilir()` · `oto_nobetci.py::cmd_nobet()`.
+
+## Tetik Değişince Sıfır-Bağlam Sayfa (D-79 — KAHİN kararı 2026-09-20)
+- **Zincir görevleri** aynı sohbet sayfasında arka arkaya çalışabilir (session state korunur).
+- **Tetik veya görev ID değiştiğinde** ajan **yeni sıfır-bağlam sayfa** açar. Eski sayfada kalırsa eski görevi tekrar dener.
+- Gerekçe: 2026-09-20'de SALİH eski sayfada yanlış görevi tekrarladı; yeni sayfada doğru görevi aldı.
+- Makine kaynağı: `gorev_kutusu.py::cmd_basla()`.
+
+## Ajan Oturum Başında Komut Referansı (D-168 — KAHİN kararı 2026-09-20)
+- **Yeni sohbet sayfasında** ilk komut **HER ZAMAN** `basla` olmalı: `python scripts/gorev_kutusu.py basla --ajan <AD>`.
+- **Problem çözümü:** LLM'in yeni oturumda `bak` (posta kutusu gör), `al` (görevi al), `teslim` (iş bitir) komutlarını ilk kez öğrenmesi biraz zaman alıyor. Bir kez öğrenince sorun olmaz.
+- **Çözüm:** Rule dosyaları (`.clinerules`, `.cursorrules`, `.roorules`) + `docs/AJAN_KOMUT_REHBERI.md` dökümanı + `cmd_basla()` çıktısında açık komut referansı.
+- **Zorunluluk:** Ajan başkasına komut vermeden önce kendisi bu rehberi okur ve kuralları bağlamamış olsa bile, tüm oturum içinde komut referansı otomatik yüklenir.
+- Makine kaynağı: `trigger.py::tetik_ekle()` · `.clinerules` / `.cursorrules` / `.roorules` · `docs/AJAN_KOMUT_REHBERI.md`.
+
+## Sprint Başlangıç Tablosu (D-72 — KAHİN kararı 2026-09-20)
+- Her sprint/tur başlangıcında orkestratör KAHİN'e **tek standart tablo** verir. Başka biçim kullanılmaz.
+- Sütunlar aynen: `Ajan` · `Yazılacak` · `Beklenen Sonuç`.
+- `Yazılacak` = KAHİN'in ajan sohbetine **kopyalayacağı tam metin**.
+- `Beklenen Sonuç` = ajanın ekranda göreceği **tam çıktı satırı** (tahmin değil, gerçek format).
+
+| Ajan | Yazılacak | Beklenen Sonuç |
+|---|---|---|
+| YASU | `başla` | `[yasu] 1 bekleyen gorev: <TASK-ID> (P1)` |
+| SALİH | `başla` | `[salih] 1 bekleyen gorev: <TASK-ID> (P2)` |
+| UTKU | `bak` | `[utku] posta kutusu bos.` |
+
+- Beklenen sonuç gerçekleşmezse ajan **iş yapmaz**, orkestratöre bildirir.
+
+## `basla` Tüketicidir — Doğrulama İçin Kullanılmaz (D-69 — KAHİN kararı 2026-09-20)
+- **Kural:** `basla` ve `al` **durum değiştiren** komutlardır; tetiği `alindi` yapar, görevi `aktif`e çeker. **Salt-okuma değildir.**
+- **Yasak:** Orkestratör "çalışıyor mu bakayım" diye başka ajan adına `basla`/`al` çalıştırmaz. Çalıştırırsa görevi o ajan adına tüketir; ajan sonra baktığında posta kutusu **boş** görünür.
+- **Doğrulama için:** yalnız `bak --ajan <ad>` (salt-okuma) kullanılır.
+- **Kaza kurtarma:** `python scripts/tetik_geri_al.py <ajan>:<TASK-ID> ...` — tetiği `bekliyor`a, panoyu `plan`a geri çeker.
+- **Gerekçe:** 2026-09-20'de SALİH ve YASU posta kutuları bu yüzden boş göründü; iki tetik elle geri alındı.
+
+## Raporlama ve Özeleştiri (D-67 — KAHİN kararı 2026-09-20)
+
+### Rapor Zorunluluğu
+- Her teslim **rapor dosyasıyla** gelir: `data/orchestrator/<TASK>_rapor_<tarih>_<rol>.md`. Raporsuz teslim GEÇERSİZ (D-55 teslim kontrol listesi madde 1 ile aynı).
+- Rapor **5 zorunlu başlık** taşır: `## Ne yapıldı` · `## Değişen dosyalar` · `## Test sonuçları` · `## Bulgular` · `## Eksik / erteleme`.
+- **Bulgular bölümü boş bırakılamaz.** Bulgu yoksa açıkça `- Bulgu yok.` yazılır. Sessizlik bulgu yokluğu anlamına gelmez.
+- Bulgular D-55 renk sınıfıyla işaretlenir: 🔴 acil · 🟡 dikkat · 🟢 tamam · 🔵 öneri.
+
+### Bulgu İşleme Zorunluluğu
+- Orkestratör raporlardaki **her bulguyu** işler. Üç seçenekten biri, başka seçenek yok:
+  1. **Görev aç** — panoya D-57 kalıbında görev; bulgu notuna `task_id` yaz.
+  2. **Karara bağla** — `decision_log.jsonl`'a D-XX kaydı; bulgu notuna karar numarası yaz.
+  3. **Reddet + gerekçe** — neden işlenmediği tek cümleyle yazılır.
+- **Yasak:** Bulguyu okumadan/işlemeden geçmek. İşlenmemiş bulgu = orkestratör ihlali.
+- Takip: `data/orchestrator/bulgu_defteri.md` — her bulgu tek satır: `tarih | task_id | rol | 🔴/🟡/🟢/🔵 | özet | karar (görev/D-XX/red+gerekçe)`.
+
+### Haftalık Özeleştiri (D-67 Karar 2: Haftalık)
+- Her ajan **Cuma sonu veya Pazartesi sabahı** özeleştiri notu yazar: `data/orchestrator/ozelestiri/<YYYY-AA-GG>_degerlendirme_<rol>.md`.
+- Özeleştiri **4 soru** cevaplar: `Ne iyi gitti?` · `Ne kötü gitti?` · `Zamanı ne yedi?` · `Yarın neyi değiştireceğim?`
+- Öz eleştiri **kısa** — her soru en fazla 3 madde. Uzun metin yazmak amaç değil.
+- Özeleştiri yoksa sonraki hafta o ajan **yeni görev almaz** (hafta sonu kapanışı şartı).
+- **Rapor içi günlük not (isteğe bağlı):** Ajan teslim sırasında rapor dosyasına `## Özeleştiri` başlığı ve güncel kısaltılmış not yazabilir (örn. "VPN hata 2 saat" gibi).
+
+### Orkestratör Haftalık Döngüsü
+- **Pazartesi sabahı** orkestratör: (1) dünkü (Cuma-Pazartesi) özeleştirileri oku, (2) `bulgu_defteri.md` işlenmemiş satırları kapat, (3) çıkarımları hafta plan döngüsüne yaz.
+- **Haftalık değerlendirme notu:** `data/orchestrator/ozelestiri/<YYYY-AA-GG>_degerlendirme_orkestrator.md` — özeleştirilerden çıkan **aksiyon maddeleri** listesi (3–5 madde; hafta başında plan'a girmeli).
+- **Yasak:** Özeleştirileri okumadan yeni hafta planı yapmak.
+
+### Gerekçe
+- Rapor = görünürlük. Bulgu = sistemin kendi kendini düzeltme sinyali. Özeleştiri = tekrarlanan hatayı kesme mekanizması.
+- İşlenmeyen bulgu birikirse teknik borç sessizce büyür; KAHİN'e görünmez.
 
 ## Kanonik Ad Geçişi (D-60 — KAHİN kararı 2026-09-18)
 - Kanonik adlar Türkçe isimlere geçti. Eski adlar **takma ad** olarak korunur; pano ve tetik geçmişi bozulmaz.
@@ -218,3 +397,47 @@
 - **Commit**: Sabah roo/KAHİN; ajanlar commit ATMAZ.
 - **UI restart**: `python scripts/streamlit_restart.py` (fileWatcherType=none).
 - **API restart**: `docker compose up -d --build api` + curl doğrulama.
+
+## Obsidian Vault Merkezi Yönetim (D-169 — KAHİN kararı 2026-09-20)
+- **Vault kökü = `Huginn Data Insights/` (V10 ana branch).** Tüm `.md` dosyaları buradan sayılır; Obsidian graph, orphan tespiti, cross-reference kontrolü burada yapılır.
+- **`AI proje v1/` submodule DEĞİLDİR.** Submodule kullanımından dönüldü (ürün sahibi beyanı 2026-09-20). Eski sürüm dizinidir; `.gitmodules` kaydı geçersiz, temizlenecek. Vault kapsamı dışında tutulur.
+- **Obsidian `userIgnoreFilters` (`.obsidian/app.json`):** Graph ve arama sınırlaması için native ayar (silme değil, geri alınabilir):
+  ```json
+  "userIgnoreFilters": [
+    ".venv/", ".kilo/", ".agents/", ".claude/", ".cursor/", ".continue/",
+    ".kombai/", ".vscode/", ".pytest_cache/", "node_modules/", ".git/",
+    "AI proje v1/", "data_worktree/"
+  ]
+  ```
+  Etki: 4442 md → ~925 md (vault yapısı temiz).
+- **Orphan nod (916 dosya):** Silme YASAK. Sprint 2'de VAULT-ORPHAN-INCELEME görevinde sınıflandırılacak (silinecek, tutulacak, arşivlenecek).
+- **Dosya boyutu yönetimi (Ponytail: rung 1-3):**
+  - `.kilo/` 280 MB: Kilo Code checkpoint/session geçmişi. Rotasyon: `.kilo/checkpoints/` max 50 MB (tool native ayarı; kod değil).
+  - `backups/` 31.4 MB: pg_dump yedekleri. Politika: son 3 yedek tutma.
+  - Kök geçici dosyalar (`_gen64.txt`, `step1.py`, `_teshis_tmp.py`): `.gitignore` yasaklıyor; diskten da silinmeli (ADMIN-KOK-TEMIZLIK-02).
+- **Vault tarama script:** `scripts/vault_tarama.py` (stdlib-only: `pathlib`, `collections`, `hashlib`, `json`, `re`).
+
+## Worktree Merkeze Taşındı (D-170 — KAHİN kararı 2026-09-20)
+- **Karar:** `worktree klasoru/` içeriği merkeze (`Huginn Data Insights/`) alındı. Tek kök, tek vault, tek SSOT.
+- **Taşınan:**
+  - `worktree klasoru/data/` → `Huginn Data Insights/data_worktree/` (ham kopya, merge bekliyor)
+  - 3 vault raporu → `Huginn Data Insights/data/orchestrator/` (VAULT-TARAMA-01 `.md`+`.json`, VAULT-BIRLESTIME-PLAN-01)
+- **`worktree klasoru/` silinmez.** Git worktree olarak bağlı (`worktree/roo-rest-sonrası-admin-panel-UX-v2`); içinde sözlük + kullanım kılavuzu dosya yapısı var. Kaynak korunur, geri alınabilir.
+- **NOT:** D-170'teki senkronsuzluk tablosu ORCH-SENKRON-01 (D-171) ile kapatıldı; D-172 kalıcı kuralı yazdı.
+
+## Otorite Kaynağı: Worktree Klasoru (D-172 — KAHİN kararı 2026-09-21)
+- **Karar:** `worktree klasoru/` = **otorite kaynağı (SSOT)**. `Huginn Data Insights/` = pasif ayna/arşiv.
+- **Gerekçe:** Worktree aktif geliştirme dalı (git worktree bağlı), orkestratör doğrudan burada çalışır. Kullanım kılavuzu + sözlük çalışması burada. Merkez git main tarafı, okuma/arşiv.
+- **Yazma sırası (ZORUNLU):**
+  1. Yeni karar (`D-XX`) → `worktree klasoru/data/orchestrator/decision_log.jsonl`
+  2. Görev güncellemesi (durum/sahip/not) → `worktree klasoru/data/orchestrator/task_board.json`
+  3. Kural dosyaları (`AGENTS.md`, `ANA_KURALLAR.md`, `AGENT_SYNC.md`, `.clinerules`, `.cursorrules`, `.roorules`) → worktree önce
+  4. Senkron: worktree → merkez (kopya/override)
+- **Çatışma çözümü:** Merkez vs worktree farkında **worktree kazanır**. Yedek alınır, silme yok.
+  - `decision_log.jsonl`: append-only birleştirme (`decision_id` bazlı, kayıp yok)
+  - `task_board.json`: worktree override, yedek zorunlu (`task_board.json.yedek_<tarih>`)
+- **Senkron araçları (mevcut, elle çalışır):**
+  - `python scripts/senkron_fark.py` — karar defteri farkı
+  - `python scripts/senkron_append.py` — eksik satır ekle
+  - `python scripts/pano_merge.py` — pano birleştir (yedekli)
+- **Ponytail rung 4 — otomasyon eksik:** post-commit git hook + zamanlanmış görev yazılmadı. Şu an elle tetiklenir. Ekleme zamanı: senkron gecikmesi günde 1'den fazla soruna yol açarsa.

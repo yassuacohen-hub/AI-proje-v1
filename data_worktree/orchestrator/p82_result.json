@@ -1,0 +1,59 @@
+{
+  "task_id": "P8-2",
+  "baslik": "İş ilani takip motoru: firma eşlestirme ve normalize",
+  "sahip": "gelistirici",
+  "tarih": "2026-09-09T23:23:52",
+  "durum": "done",
+  "ozet": "Firma eşlestirme ve normalize stratejisi analiz edildi. Turkcell varyasyonları için veri tabanında kaynak bulunamadı (0 eslesme). Mevcut durum: 14.000 firma, 8.313 entity_resolution kaydı (yeni), 592 olası eşlestirme, 9 kesin eşlestirme (VKN exact). 528 normalize edilmiş tekrarli isim tespit edildi. company_aliases tablosu bos (0 kayit).",
+  "bulgular": {
+    "toplam_firma": 14000,
+    "toplam_source_records": 14000,
+    "entity_resolution_toplam": 8905,
+    "entity_resolution_yeni": 8313,
+    "entity_resolution_olumsuz_eslesme": 583,
+    "entity_resolution_kesin_eslesme": 9,
+    "vkn_eksik_firma": 13960,
+    "domain_eksik_firma": 7204,
+    "mersis_eksik_firma": 7204,
+    "company_aliases_kayit": 0,
+    "company_names_kayit": 0,
+    "company_identifiers_kayit": 0,
+    "tekrarli_isim_sayisi": 528,
+    "buyuk_harfsiz_kayit": 0,
+    "kucuk_harfsiz_kayit": 0,
+    "turkce_karakter_kullanan": 11945,
+    "trade_name_ayni_legal_name": 2756,
+    "trade_name_bos_kayit": 0
+  },
+  "turkcell_analizi": {
+    "companies_legal_name": 0,
+    "source_records_raw_name": 0,
+    "company_aliases": 0,
+    "company_names": 0,
+    "company_identifiers": 0,
+    "companies_website_domain": 0,
+    "source_records_raw_website": 0,
+    "sonuc": "Turkcell/TURKCELL/Turkcell A.S. varyasyonlari veritabaninda hic bulunamadi. Sirket kariyer sayfalari scraper'indan once bu verilerin gelmesi bekleniyor."
+  },
+  "normalize_stratejisi": {
+    "mevcut_durum": "Tum legal_name'ler BUYUK HARF (0 istisna). Turkce karakterler mevcut (11.945 kayit).",
+    "kisaltma_kullanimi": "ANONIM SIRKETI -> A.S., LIMITED SIRKETI -> LTD. STI. kisaltmalari uygulanmis.",
+    "trade_name_kurali": "ilk 2-3 kelime (marka/ilgi alani). 2.756 kayitta trade_name = legal_name.",
+    "tekrarli_isim": "528 normalize edilmis tekrarli isim tespit edildi (orn: BERAT MAK. 224 kez, FATIH BAGBASI 228 kez).",
+    "entity_resolution_pipeline": "1) VKN exact 2) MERSIS exact 3) Domain match 4) Fuzzy rapidfuzz 0.85 5) Alias table 6) Human-in-the-loop review queue",
+    "onerilen_adimlar": [
+      "company_aliases tablosuna Turkcell varyasyonlari eklenecek (Turkcell, TURKCELL, Turkcell A.S., Turkcell Iletisim)",
+      "Mevcut 528 tekrarli isim icin alias olusturulacak",
+      "7.204 firma icin VKN/MERSIS/domain bilgisi toplanacak",
+      "P7-3 CompanyMatcher'dan türetilen normalizasyon motoru P8-2 için uyarlanacak"
+    ]
+  },
+  "sonraki_adimlar": [
+    "P8-3: Buyume sinyali skorlama motoru",
+    "P8-4: Risk sinyali skorlama motoru",
+    "P8-5: Teknoloji donusumu analizi",
+    "P8-6: Yatirim ve olcekleme sinyalleri",
+    "P8-7: Cografi genisleme analizi",
+    "P8-8: Kurumsal rapor ve medya entegrasyonu"
+  ]
+}

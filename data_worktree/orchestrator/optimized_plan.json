@@ -1,0 +1,25 @@
+{
+  "task_chains": [
+    {
+      "chain_id": "ZN-01",
+      "oncelik": "P0",
+      "tasks": [
+        "ADMIN-UX-PROFILMENU-01",
+        "RESEARCH-PONYTALE",
+        "ADMIN-UX-AYARLAR-SAYFA-01",
+        "ADMIN-UX-MENUTREE-01",
+        "REVIEW-ONAY-KUYRUGU-01",
+        "UI-AYARLAR-SAYFA-01",
+        "V10-BELGE-01"
+      ],
+      "assigned_agent_group": "grup_salih_yasu_utku_1789801742",
+      "chain_type": "seri",
+      "risk_buffer_minutes": 30
+    }
+  ],
+  "metrics": {
+    "estimated_makespan_min": 210,
+    "load_balance_variance": 987.75,
+    "priority_adherence": 0.29
+  }
+}

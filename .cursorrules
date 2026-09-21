@@ -1,10 +1,26 @@
 # Evrensel Ajan Kuralları
 
+## KİMLİK (D-70 — bu dosyayı yalnız Üretim/Hacim Utku okur, araç: kilo/cursor)
+Bu dosyayı okuyan ajan **utku**'dur, başkası değil. `--ajan` parametresine HER ZAMAN **utku** yaz. Tahmin etme, başka ajan adı (ihsan/salih/yasu) kullanma.
+
+**Abrakadabra (D-74):** Devralma anahtarı yalnız aktif orkestratöre (şu an İHSAN) aittir. utku anahtara sahip değildir, isteyemez. Kendi posta kutusu işi (`bak`/`al`/`teslim`) anahtar gerektirmez.
+
+## Sistem Komutları — Hızlı Referans (D-168)
+`--ajan` HER ZAMAN `utku` yaz, tahmin etme.
+
+- **basla** (en hızlı, önerilen) — posta kutusunu kontrol eder + ilk görevi otomatik alır + brifi basar:
+  `python scripts/gorev_kutusu.py basla --ajan utku`
+- **bak** (salt-okuma) — sadece görür, almaz:
+  `python scripts/gorev_kutusu.py bak --ajan utku`
+- **al** — görevi aktif hale getirir (bak sonrası, task-id bilindiğinde):
+  `python scripts/gorev_kutusu.py al --ajan utku --task-id <ID>`
+- **teslim** — işi bitirip review'e gönderir (rapor dosyası + `--ozet` zorunlu):
+  `python scripts/gorev_kutusu.py teslim --ajan utku --task-id <ID> --ozet "..."`
+
 ## 1. İlk Adım (HER SOHBETİN BAŞINDA)
-- Posta kutusunu kontrol et: `python scripts/gorev_kutusu.py bak --ajan <AJAN>`
-- Bekleyen görevi al: `python scripts/gorev_kutusu.py al --ajan <AJAN> --task-id <ID>`
+- Tek komutla başla (bak+al birleşik): `python scripts/gorev_kutusu.py basla --ajan utku`
 - Brif dosyasını oku ve işi yap
-- Teslim et: `python scripts/gorev_kutusu.py teslim --ajan <AJAN> --task-id <ID> --ozet "..."
+- Teslim et: `python scripts/gorev_kutusu.py teslim --ajan utku --task-id <ID> --ozet "..."`
 
 ## 1a. Teslim Öncesi Kontrol Listesi (ŞART — eksikse teslim reddedilir)
 - [ ] Brifteki **her madde** karşılandı mı? (yarım iş "tamamlandı" sayılmaz)

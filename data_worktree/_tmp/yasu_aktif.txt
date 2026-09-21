@@ -1,0 +1,26 @@
+YASU Aktif Görevleri (Detaylı):
+================================================================================
+
+📌 REVIEW-ONAY-KUYRUGU-01 | P1 | aktif
+   Başlık: Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-S
+   Brif: N/A
+   Kilidi: data/orchestrator/REVIEW-ONAY-KUYRUGU-01_rapor_2026-09-18_denetim.md
+   Başlangıç: 2026-09-18T22:41:37
+
+📌 TEST-AYARLAR-KAPSAM-01 | P2 | aktif
+   Başlık: Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda)
+   Brif: N/A
+   Kilidi: tests/test_admin_kullanici_ayarlari.py
+   Başlangıç: 2026-09-18T22:42:02
+
+📌 ALTYAPI-KILIT-TEMIZLE-01 | P2 | aktif
+   Başlık: [ALTYAPI] Duzelt kilitleri → file_locks.json (1s)
+   Brif: N/A
+   Kilidi: data/orchestrator/file_locks.json
+   Başlangıç: 2026-09-19T17:16:46
+
+📌 ORKESTRA-STALE-TEMIZLIK-01 | P1 | aktif
+   Başlık: [ORKESTRA] Denetle → YASU stale görevleri (1s)
+   Brif: N/A
+   Kilidi: data/orchestrator/REVIEW-ONAY-KUYRUGU-01_rapor_2026-09-20_denetim.md, data/orchestrator/ALTYAPI-KILIT-TEMIZLE-01_rapor_2026-09-20_orkestrator.md
+   Başlangıç: 2026-09-20T06:07:25

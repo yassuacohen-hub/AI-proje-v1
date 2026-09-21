@@ -1,0 +1,121 @@
+{
+  "research_id": "Y21",
+  "title": "ISKUR kurumsal eşlestirme verisi araştırması",
+  "date": "2026-09-10T19:35:15.327197",
+  "researcher": "arastirmaci",
+  "status": "done",
+  "scope": {
+    "target": "ISKUR e-sub (esube.iskur.gov.tr) açık iş ilanları platformu",
+    "objective": "Kurumsal eşleştirme için kullanılabilecek açık API, firma verisi erişimi ve risk analizi",
+    "methodology": [
+      "Resmi web sitesi ve e-sub platformu taraması",
+      "Açık iş ilanları listeleme sayfaları incelenmesi (farklı il/ilçe filtreleri)",
+      "İş ilanı detay sayfaları yapısı analizi",
+      "JSON-LD structured data kontrolü",
+      "Açık veri portalları ve API dokümantasyonu arayışı",
+      "Network/XHR endpoint taraması"
+    ]
+  },
+  "findings": {
+    "public_api": {
+      "exists": false,
+      "details": "İŞKUR e-sub tamamen HTML tabanlı ASP.NET WebForms uygulaması. JSON, XML, RSS gibi herhangi bir açık veri endpointi bulunamadı.",
+      "endpoints_checked": [
+        "https://www.iskur.gov.tr/",
+        "https://www.iskur.gov.tr/is-ilanlari",
+        "https://esube.iskur.gov.tr/istihdam/AcikIsIlanAra.aspx",
+        "https://esube.iskur.gov.tr/istihdam/jobsonairquickil.aspx",
+        "JSON-LD structured data (JobPosting schema.org)"
+      ]
+    },
+    "employer_name_visibility": {
+      "private_sector": "GİZLİ — 'İşyeri adını görmek için Sisteme Üye Girişi yapmanız gerekmektedir.' mesajı görünür",
+      "public_sector": "Görünür — Kamu kurumları (örn: 'KARACABEY ÖĞRETMENEVİ VE AKŞAM SANATOKULU MÜDÜRLÜĞÜ Kamu / Daimi / Tam Zamanlı 3 Açık Pozisyon')",
+      "individual_employer": "Kısmi görünür — 'Bireysel İşveren' etiketi bazı ilanlarda görünür"
+    },
+    "publicly_available_fields": {
+      "job_title": true,
+      "job_description": false,
+      "employer_name": "conditional (public only)",
+      "employer_vkn": false,
+      "location_city": true,
+      "location_district": true,
+      "position_count": true,
+      "employment_type": true,
+      "work_schedule": true,
+      "posting_date": true,
+      "application_deadline": true,
+      "job_posting_id": true
+    },
+    "statistics_available": {
+      "total_open_positions": "89,937 (ana sayfa hero metric)",
+      "yearly_placements": "971,200 (2026)",
+      "update_frequency": "Güncel / sürekli güncellenen"
+    }
+  },
+  "risk_analysis": {
+    "legal_risk": {
+      "terms_of_service_violation": "Yüksek — Giriş yapmadan firma adı görüntülemeye çalışmak İŞKUR kullanım şartlarını ihlal eder",
+      "kvkk_risk": "Yüksek — İş ilanları özel/kişisel veri içerebilir; açık erişim KVKK kapsamında sorun yaratabilir",
+      "commercial_redistribution": "Yasak — Verilerin ticari yeniden dağıtımı için lisans/attribution kontrolü zorunlu"
+    },
+    "technical_risk": {
+      "anti_bot": "Orta — ASP.NET WebForms, ViewState, CAPTCHA potansiyeli",
+      "rate_limiting": "Bilinmiyor — Aşırı istek IP banı riski",
+      "ip_blocking": "VPN/DNS engeli riski mevcut (kullanıcı VPN kullanıyor)"
+    },
+    "data_quality_risk": {
+      "employer_name_coverage": "Düşük — Özel sektör ilanlarının büyük çoğunluğunda firma adı gizli",
+      "entity_resolution_difficulty": "Yüksek — Gizli firma adı = eşleştirme imkansız",
+      "negative_labeling": "Yapılmamalı — İlan yokluğu pasiflik sinyali DEĞİL"
+    }
+  },
+  "recommendations": {
+    "p7_5_revision": {
+      "current_approach": "Firma adı ile kurumsal eşleştirme",
+      "revised_approach": "İlan metadata + aggregation intelligence odaklı çalışma",
+      "rationale": "Firma adı public erişimde yok; ISKUR'dan firma-level matching yapılamaz",
+      "feasible_signals": [
+        "İlan sayısı trendi (şehir/meslek bazlı)",
+        "Pozisyon türü dağılımı",
+        "Çalışma şekli (full-time/part-time) oranı",
+        "Sektör bazlı iş piyasası hareketliliği",
+        "Coğrafi yoğunluk haritası"
+      ]
+    },
+    "alternative_sources": [
+      "Kariyer.net — API/scraper ile firma adı + ilan detayı erişimi",
+      "Şirket kariyer sayfaları — Direct company career page scraping",
+      "LinkedIn Jobs — API erişimi gerekli",
+      "Indeed — Scraper ile erişim mümkün"
+    ]
+  },
+  "future_alternatives": {
+    "possible": true,
+    "conditions": [
+      "Resmi ISKUR API'si açılması",
+      "İşveren üye girişli sistemden yetki alınarak erişim",
+      "SGK/VKN ile İşveren Kayıt Sorgulama entegrasyonu",
+      "Kamu sektörü ilanları için open data portal açılması"
+    ],
+    "triggers_for_revision": [
+      "ISKUR'dan resmi API dokümantasyonu yayınlanması",
+      "İşveren Sorgulama servisine authenticated API erişimi",
+      "Kamu ihale ilanları için structured data feed'i",
+      "MERSIS/TOBB üzerinden işveren -> ilan reverse lookup imkanı"
+    ],
+    "impact_if_available": "P7-5 firma-level eşleştirme odaklı olarak TAM REVİZYON yapılır; iskur.py metadata+aggregation yerine direct employer-name matching moduna döner"
+  },
+  "conclusion": {
+    "viability_for_corporate_matching": "Düşük",
+    "reason": "Özel sektör işyeri adları public erişimde GİZLİ. Açık API yok. Firma-level intelligence için yeterli veri sağlanamaz.",
+    "recommended_use": "Makro piyasa göstergeleri (şehir/meslek bazlı ilan hacmi, trend analizi) için kullanılabilir",
+    "p7_5_impact": "P7-5 İŞKUR Scraper revize edilmeli: firma eşleştirme odaklı değil, ilan metadata + aggregation intelligence odaklı çalışacak"
+  },
+  "citations": [
+    "https://www.iskur.gov.tr/ — Ana sayfa, 89,937 açık iş sayısı",
+    "https://esube.iskur.gov.tr/istihdam/AcikIsIlanAra.aspx?mid=16490 — Özel sektör ilanı (firma adı gizli)",
+    "https://esube.iskur.gov.tr/Istihdam/AcikIsIlanAra.aspx?il=16&mid=4992 — Kamu ilanı (firma adı görünür: KARACABEY ÖĞRETMENEVİ)",
+    "https://esube.iskur.gov.tr/Istihdam/AcikIsIlanAra.aspx?mid=4093 — Bireysel İşveren etiketi"
+  ]
+}

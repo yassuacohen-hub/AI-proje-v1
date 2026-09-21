@@ -1,1 +1,21 @@
-{}
+{
+  "userIgnoreFilters": [
+    ".venv/",
+    ".kilo/",
+    ".agents/",
+    ".claude/",
+    ".cursor/",
+    ".continue/",
+    ".kombai/",
+    ".vscode/",
+    ".pytest_cache/",
+    "node_modules/",
+    ".git/",
+    ".roo/",
+    ".obsidian/",
+    ".github/",
+    "worktree klasoru/",
+    "AI proje v1/",
+    "data_worktree/"
+  ]
+}

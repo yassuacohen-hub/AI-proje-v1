@@ -1,0 +1,30 @@
+{
+  "critical_bottlenecks": [
+    {
+      "ajan": "ihsan",
+      "puan": 150.0,
+      "neden": "Yüksek iş yükü (aktif/review görevi maksimum kapasitenin %70'ini aşiyor)"
+    }
+  ],
+  "medium_bottlenecks": [
+    {
+      "ajan": "utku",
+      "puan": 66.67,
+      "neden": "Orta iş yükü (kapasitenin %40-%70 arası kullanılıyor)"
+    }
+  ],
+  "resolution_plan": [
+    {
+      "ajan": "ihsan",
+      "aksiyon": "Görevleri diğer ajanlara yeniden dağıt veya bekleyen görevleri ertele",
+      "etki": "İş yükü dengelemesi, darboğaz puanını düşürme",
+      "hedef_puan": 30.0
+    },
+    {
+      "ajan": "utku",
+      "aksiyon": "Görevleri diğer ajanlara yeniden dağıt veya bekleyen görevleri ertele",
+      "etki": "İş yükü dengelemesi, darboğaz puanını düşürme",
+      "hedef_puan": 30.0
+    }
+  ]
+}

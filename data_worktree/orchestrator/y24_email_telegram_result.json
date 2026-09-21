@@ -1,0 +1,92 @@
+{
+  "task_id": "Y24",
+  "title": "E-posta doğrulama + Telegram hoşgeldin altyapısı araştırması",
+  "date": "2026-09-10T19:29:00Z",
+  "researcher": "arastirmaci",
+  "status": "research_complete",
+  "summary": "Kurumsal e-posta doğrulama ve Telegram hoşgeldin raporu için 2 yaklaşım önerilir: (1) SMTP relay (kendi domainimizden gönderim), (2) Transactional email API (üçüncü parti). Türkiye odaklı, KVKK uyumlu providerlar tercih edilmeli.",
+  "findings": {
+    "requirements": [
+      "Kayıt sonrası kurumsal e-postaya doğrulama linki gönderimi",
+      "Onaylanınca Telegram'dan hoşgeldin + kişiselleştirilmiş match raporu",
+      "KVKK uyumlu (Türkiye veri işleme)",
+      "Zaten mevcut: Telegram bot_service.py"
+    ],
+    "options": [
+      {
+        "name": "SMTP Relay (kendi sunucumuz)",
+        "providers": [
+          {
+            "name": "MXGate",
+            "website": "https://mxgate.com.tr",
+            "features": ["Türkiye data center", "KVKK & GDPR compliant", "Spam filter + secure SMTP relay", "99.9% uptime", "1000+ enterprise müşteri", "IP reputation management"],
+            "pros": ["Kendi domainimizden gönderim", "Tam kontrol", "Türkiye lokasyonlu"],
+            "cons": ["Kendi sunucu yönetimi gerekir", "IP warming süreci"],
+            "cost": "Kurumsal fiyatlandırma (demo talebi ile)"
+          },
+          {
+            "name": "INBOX",
+            "website": "https://useinbox.com",
+            "features": ["Transactional email API + SMTP", "KVKK/GDPR/CASL/CCPA compliant", "Multi-domain management", "Unlimited sending", "Signed sending"],
+            "pros": ["Hem API hem SMTP", "Çoklu düzenleme uyumu", "Türkiye odaklı"],
+            "cons": ["Küçük firmalarda daha az deneyim"],
+            "cost": "Planları web sitesinde"
+          }
+        ]
+      },
+      {
+        "name": "Transactional Email API (cloud)",
+        "providers": [
+          {
+            "name": "Brevo (eski adıyla Sendinblue)",
+            "website": "https://www.brevo.com",
+            "features": ["REST API + SMTP relay", "300 emails/day free", "99% delivery rate", "Templates", "Inbound parsing", "GDPR compliant"],
+            "pros": ["Ücretsiz tier var", "Python SDK mevcut", "Kolay entegrasyon", "Template sistemi"],
+            "cons": ["EU-based sunucular (Türkiye'de değil)", "KVKK uyumu EU düzenlemelerine dayanır"],
+            "cost": "Free: 300/day, then starts ~€25/month"
+          },
+          {
+            "name": "mySMTP",
+            "website": "http://www.mysmtp.com",
+            "features": ["SMTP relay + API", "EU data center", "SPF/DKIM/DMARC", "Dedicated IP opsiyonu", "90-day reporting"],
+            "pros": ["2007'den beri aktif", "Güvenilir", "DKIM/DMARC desteği"],
+            "cons": ["EU-based", "Daha pahalı"],
+            "cost": "Custom pricing"
+          },
+          {
+            "name": "SMTP.com",
+            "website": "https://www.smtp.com",
+            "features": ["SMTP relay", "50,000 emails/$25/month", "Insight Engine", "Reputation Defender"],
+            "pros": ["Yüksek volume", "Reputation yönetimi"],
+            "cons": ["US-based", "Küçük projeler için pahalı"],
+            "cost": "Starts $25/month for 50K emails"
+          }
+        ]
+      }
+    ],
+    "recommendation": {
+      "primary": "Brevo (MVP)",
+      "rationale": "Ücretsiz tier (300 email/gün) ile başlanabilir. Python SDK mevcut, REST API basit, template sistemi doğrulama linkleri için uygun. KVKK/GDPR uyumlu. 300 email/gün MVP için yeterli (yeni kullanıcı kayıtları).",
+      "alternative": "MXGate (Scale)",
+      "alternative_rationale": "Türkiye data center, KVKK tam uyum, 24/7 Türkçe destek. Enterprise ölçekinde geçiş yapılabilir."
+    },
+    "implementation_plan": {
+      "step_1": "Brevo hesabı aç, API key al, domain doğrulama (SPF/DKIM).",
+      "step_2": "Backend: email_service.py modülü yaz (SMTP veya REST API wrapper).",
+      "step_3": "Backend: /api/auth/verify-email endpointi (token üret + gönder).",
+      "step_4": "Backend: /api/auth/verify-email/confirm endpointi (token doğrula, users.status güncelle).",
+      "step_5": "Backend: Telegram hoşgeldin mesajı (bot_service.py ile). Kişiselleştirilmiş match raporu (buyer profiline göre).",
+      "step_6": "Frontend: 'E-posta doğrulanmadı' banner + yeniden gönder butonu.",
+      "step_7": "Test: gerçek e-posta gönderimi + Telegram mesajı doğrula."
+    },
+    "telegram_integration": {
+      "existing": "bot_service.py mevcut, arka plan polling aktif.",
+      "welcome_flow": "Kullanıcı e-posta onayladıktan sonra backend bot_service.send_welcome(user_id, buyer_profile) çağırır. Mesaj: hoşgeldin + firma özeti + ilk match önerisi."
+    },
+    "kvkk_notes": [
+      "Doğrulama linki token'ı URL'de geçmek yerine kısa ömürlü JWT veya random UUID (24h TTL) kullan.",
+      "E-posta içeriği KVKK uyumlu olmalı: abonelik/ileri kullanım izni içermemeli.",
+      "Log'larda e-posta adresi maskeleme yoksa riskli; DASH_MASK_PII kapsamına alınmalı."
+    ]
+  }
+}

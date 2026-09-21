@@ -1,0 +1,25 @@
+{
+  "task_id": "CO-02",
+  "baslik": "CoPlot Entegrasyon Analizi: API, SDK, webhook destegi",
+  "sahip": "roo",
+  "oncelik": "P1",
+  "tarih": "2026-09-13T14:30:42.348797Z",
+  "ozetler": {
+    "api_desteği": "CoPlot, Java tabanlı masaüstü yazılımıdır ve doğrudan REST API sunmamaktadır. Entegrasyon yöntemleri:\n1. Komut satırı arabirimi (CLI) - veri işleme için script\n2. Java API - yazılım içinden programmatic erişim\n3. Dosya tabanlı entegrasyon - CSV/veri dosyaları import/export\n4. Kütüphane olarak kullanma (Java projelerine embed edebilme)",
+    "sdk_desteği": "Resmi SDK yayınlanmamış. Ancak:\n- Kaynak kod açık (2022 sonrası)\n- Java uygulamaları CoPlot sınıflarını doğrudan çağırabilir\n- Üniversite/araştırma ortamlarında özel entegrasyon yapılmış",
+    "webhook": "Webhook desteği YOKTUR. CoPlot masaüstü uygulamasıdır; gerçek zamanlı event push mekanizması bulunmamaktadır.",
+    "alternatif_entegrasyon": "Ticari/bulut alternatifleri (CoPlot yerine):\n- ChartGen AI (API + REST, webhook mümkün)\n- Highcharts (REST API, webhook, real-time integrations)\n- Plotly (açık API, Dash/Python entegrasyonu)\n- Databox (SaaS, webhook desteği)\n\nCoPlot masaüstü araç olduğu için canlı web entegrasyon sınırlıdır."
+  },
+  "kaynaklar": [
+    {
+      "url": "https://cohortsoftware.com/coplot.html",
+      "baslik": "CoHort Software - Technical Details"
+    },
+    {
+      "url": "http://www.cohortsoftware.com/coplotgraphobjects.html",
+      "baslik": "CoPlot Architecture"
+    }
+  ],
+  "araştırma_notu": "CoPlot masaüstü yazılımı olduğundan, modern SaaS ürünlerinin sunduğu REST API / webhook / gerçek zamanlı entegrasyon beklentileri uygulanmaz. Bulut tabanlı alternatifler önerilir.",
+  "durum": "review"
+}

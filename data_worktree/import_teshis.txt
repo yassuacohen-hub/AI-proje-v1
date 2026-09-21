@@ -1,0 +1,18 @@
+Traceback (most recent call last):
+  File "c:\Huginn Data Projesi\Huginn Data Insights\data\_import_teshis.py", line 13, in <module>
+    __import__(m)
+  File "C:\Huginn Data Projesi\Huginn Data Insights\web_dashboard\tabs\admin_cost.py", line 18, in <module>
+    import plotly.graph_objects as go
+ModuleNotFoundError: No module named 'plotly'
+2026-09-15 10:09:23.407 WARNING streamlit.runtime.caching.cache_data_api: No runtime found, using MemoryCacheStorageManager
+2026-09-15 10:09:23.408 WARNING streamlit.runtime.caching.cache_data_api: No runtime found, using MemoryCacheStorageManager
+Traceback (most recent call last):
+  File "c:\Huginn Data Projesi\Huginn Data Insights\data\_import_teshis.py", line 13, in <module>
+    __import__(m)
+  File "C:\Huginn Data Projesi\Huginn Data Insights\web_dashboard\tabs\admin_sistem.py", line 23, in <module>
+    from web_dashboard.tabs.admin_cost import render_cost_tab
+  File "C:\Huginn Data Projesi\Huginn Data Insights\web_dashboard\tabs\admin_cost.py", line 18, in <module>
+    import plotly.graph_objects as go
+ModuleNotFoundError: No module named 'plotly'
+FAIL web_dashboard.tabs.admin_cost
+FAIL web_dashboard.tabs.admin_sistem

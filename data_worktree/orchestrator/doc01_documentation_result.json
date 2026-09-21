@@ -1,0 +1,39 @@
+{
+  "task_id": "DOC-01",
+  "title": "Kanonik Dokümantasyon standardizasyonu araştırması",
+  "date": "2026-09-10T19:29:00Z",
+  "researcher": "arastirmaci",
+  "status": "research_complete",
+  "summary": "Tek V10 kaynağı ilkesi korunmalı. UTF-8 encoding standardı zaten uygulanıyor. Link denetimi için check_obsidian_links.py scripti var. Dokümantasyon formatı: Markdown + YAML frontmatter + wikilinks + MOCs.",
+  "findings": {
+    "single_source_of_truth": {
+      "canonical_dir": "AI proje v1/V10/",
+      "backup_dir": "Huginn Data Insights/V10/ (isteğe bağlı mirror)",
+      "rule": "Tüm kalıcı kararlar project_state.md'de, görevler TODO.md'de, değişiklik geçmişi CHANGELOG.md'de, bağlam dokümanı 01_versiyon_9_baglam_dokumani.md'de.",
+      "sync": "AGENT_SYNC.md otomatik olarak task_board.json'dan üretilir; elle büyük yeniden yazım yapılmamalı."
+    },
+    "markdown_standards": {
+      "encoding": "UTF-8 (zorunlu). Türkçe karakterler bozulmamalı.",
+      "format": "CommonMark + GitHub Flavored Markdown (GFM).",
+      "frontmatter": "YAML frontmatter önerilir: title, date, owner, status, tags.",
+      "links": "Obsidian wikilinks [[Note Name]] tercih edilir (graph view + backlinks için).",
+      "avoid_chars": "# | ^ : %% [[]]] — Obsidian linklerini bozar."
+    },
+    "obsidian_vault_conventions": {
+      "layout": "PARA + Meta (Projects / Areas / Resources / Archives).",
+      "moc": "Maps of Content (MOC) — 5+ not olan konularda hub notları oluştur.",
+      "properties": "Frontmatter properties (type, status, created, updated) — Dataview uyumlu.",
+      "templates": "Yeni notlar için sabir şablonlar (project_state, handoff, research).",
+      "daily_notes": "Periodic Notes eklentisi ile günlük/haftalık/aylık review."
+    },
+    "link_audit": {
+      "existing_tool": "scripts/check_obsidian_links.py",
+      "frequency": "Her gün (CI'da) veya her commit'te.",
+      "fix_strategy": "Kırık linkler için otomatik replace scripti yazılabilir (wiki -> markdown)."
+    },
+    "utf8_regression": {
+      "known_issues": "DENET-2: mojibake düzeltmesi yapıldı (ISO/UTF-8 kopyalar arşive taşındı).",
+      "prevention": "Pre-commit hook: encoding kontrolü (file --mime-encoding veya Python chardet)."
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-09-09T08:00:55Z",
+  "indexes_applied": [
+    {
+      "name": "idx_source_records_covering",
+      "ms": 1779.5
+    },
+    {
+      "name": "idx_companies_source_record_score",
+      "ms": 364.2
+    },
+    {
+      "name": "idx_companies_nace",
+      "ms": 355.1
+    }
+  ],
+  "indexes_skipped": [],
+  "indexes_total_before": 29,
+  "indexes_total_after": 32,
+  "analyze_run": true
+}

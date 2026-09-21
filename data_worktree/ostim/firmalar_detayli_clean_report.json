@@ -1,0 +1,39 @@
+{
+  "input_file": "data\\ostim\\firmalar_detayli.jsonl",
+  "output_file": "data\\ostim\\firmalar_detayli_clean.jsonl",
+  "source_type": "ostim",
+  "toplam_kayit": 5485,
+  "temizlenen": 5485,
+  "atilan": 0,
+  "duzenlenen": 5483,
+  "sorunlar": {
+    "portal_web": 474,
+    "portal_social": 21932
+  },
+  "ortala_duzenlenen": 2,
+  "zaman": "2026-09-13T06:07:38+00:00",
+  "sample_sorunlar": [
+    "line 1: portal_web: https://www.ostimistihdam.com",
+    "line 1: portal_social: facebook",
+    "line 1: portal_social: instagram",
+    "line 1: portal_social: twitter",
+    "line 1: portal_social: linkedin",
+    "line 2: portal_web: https://www.ostimistihdam.com",
+    "line 2: portal_social: facebook",
+    "line 2: portal_social: instagram",
+    "line 2: portal_social: twitter",
+    "line 2: portal_social: linkedin",
+    "line 3: portal_social: facebook",
+    "line 3: portal_social: instagram",
+    "line 3: portal_social: twitter",
+    "line 3: portal_social: linkedin",
+    "line 4: portal_social: facebook",
+    "line 4: portal_social: instagram",
+    "line 4: portal_social: twitter",
+    "line 4: portal_social: linkedin",
+    "line 5: portal_web: https://www.ostimistihdam.com",
+    "line 5: portal_social: facebook"
+  ],
+  "cikti_kayit": 5485,
+  "duplicate_cikarilan": 0
+}

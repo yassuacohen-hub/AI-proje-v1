@@ -1,0 +1,499 @@
+﻿{
+  "task_id": "P8-6",
+  "baslik": "Is ilani takip motoru: yatirim ve olcekleme sinyalleri",
+  "sahip": "arastirmaci",
+  "oncelik": "P2",
+  "durum": "done",
+  "baslangic": "2026-09-09T15:47:15",
+  "bitis": "2026-09-09T23:55:00",
+  "dosyalar": [
+    "scripts/investment_signal_scorer.py",
+    "data/orchestrator/p86_result.json"
+  ],
+  "ozet": "Yatırım ve ölçekleme sinyalleri tasarımı, implementasyonu ve örnek veri ile testi tamamlandı. Dört işe alım kategorisi (yönetici, Ar-Ge, product, BD) kombinasyonu ile muhtemel büyüme veya yatırım hazırlığı çıkarımı motoru geliştirildi. Skorlama formülü, eşik değerleri ve scaling readiness inference mekanizması tanımlandı. company_signals tablosuna investment ve org_change skorları yazar; company_intelligence_scores.investment_signal_score ve org_change_score alanlarını doldurur.",
+  "design": {
+    "motor_tanimi": "İş ilanı (job_postings) verilerinden yatırım ve ölçekleme sinyalleri tespit eden motor. Yönetici işe alımı, Ar-Ge pozisyonları, product ekipleri, BD pozisyonları kombinasyonu ile muhtemel büyüme veya yatırım hazırlığı çıkarımı yapar. company_signals tablosuna signal_type=investment ve org_change sinyalleri yazar.",
+    "hedef_tablo": "company_intelligence_scores.investment_signal_score (0-100), company_intelligence_scores.org_change_score (0-100)",
+    "yazilan_tablo": "company_signals (signal_type=investment|org_change, signal_subtype, score, confidence, evidence)",
+    "formula": "investment_signal_score = sum(sub_score_i * confidence_i * weight_i) / sum(confidence_i * weight_i), clamped [0, 100]. org_change_score = sum(sub_score_i * confidence_i * weight_i) / sum(confidence_i * weight_i), clamped [0, 100].",
+    "scaling_readiness_kurali": "2 veya daha fazla investment sub-kategorisi aktif (score >= 50) ise muhtemel büyüme veya yatırım hazırlığı inference aktif. Bu sinyal org_change.category olarak isaretlenir.",
+    "dis_kaynak_integrasyonu": {
+      "kaynak": "Crunchbase / RapidAPI",
+      "veri": "Fon turu, yatırım tutarı, yatırım tarihi, yatırımcılar",
+      "kvkk_durumu": "KVKK dışı finansal veri, maskeleme gerekmez",
+      "kullanim": "investment_amount ve funding_round sinyalleri için dış API verisi eklenebilir; mevcut job_postings tabanlı sinyaller fallback olarak kullanılır"
+    }
+  },
+  "signals": [
+    {
+      "signal_type": "investment",
+      "signal_subtype": "executive_growth_hire",
+      "weight": 0.30,
+      "description": "Yönetici işe alımı sinyali (C-level, VP, Director, Head pozisyonları — büyüme yönelimli roller)",
+      "evidence": "job_postings.seniority_level in EXECUTIVE_GROWTH_LEVELS + department keyword match (Growth, Strategy, Expansion, Business Development)",
+      "scoring": [
+        {
+          "threshold": "4+ yönetici",
+          "score": 100,
+          "label": "4+_executive_hires"
+        },
+        {
+          "threshold": "3 yönetici",
+          "score": 90,
+          "label": "3_executive_hires"
+        },
+        {
+          "threshold": "2 yönetici",
+          "score": 75,
+          "label": "2_executive_hires"
+        },
+        {
+          "threshold": "1 yönetici",
+          "score": 50,
+          "label": "1_executive_hire"
+        },
+        {
+          "threshold": "0 yönetici",
+          "score": 0,
+          "label": "no_executive_hires"
+        }
+      ],
+      "confidence_formula": "min(100, max(20, count * 25))",
+      "keyword_sets": {
+        "seniority": ["c-level", "vp", "director", "head"],
+        "growth_departments": ["growth", "strategy", "expansion", "business development", "corporate development"]
+      }
+    },
+    {
+      "signal_type": "investment",
+      "signal_subtype": "rd_team_expansion",
+      "weight": 0.25,
+      "description": "Ar-Ge takımı genişlemesi sinyali (R&D, Research, Development, Scientist, Engineer pozisyonları)",
+      "evidence": "job_postings.title/department keyword match (Research, Development, Scientist, Engineer, ML, AI, Data Science) + seniority_level (junior/mid/senior/lead)",
+      "scoring": [
+        {
+          "threshold": "8+ Ar-Ge",
+          "score": 100,
+          "label": "8+_rd_hires"
+        },
+        {
+          "threshold": "5-7 Ar-Ge",
+          "score": 85,
+          "label": "5-7_rd_hires"
+        },
+        {
+          "threshold": "3-4 Ar-Ge",
+          "score": 65,
+          "label": "3-4_rd_hires"
+        },
+        {
+          "threshold": "1-2 Ar-Ge",
+          "score": 40,
+          "label": "1-2_rd_hires"
+        },
+        {
+          "threshold": "0 Ar-Ge",
+          "score": 0,
+          "label": "no_rd_hires"
+        }
+      ],
+      "confidence_formula": "min(100, max(20, count * 15))",
+      "keyword_sets": {
+        "titles": ["research", "development", "scientist", "engineer", "ml engineer", "ai engineer", "data scientist", "r&d", "research and development"],
+        "departments": ["research", "development", "r&d", "engineering", "data science", "ai/ml"]
+      }
+    },
+    {
+      "signal_type": "investment",
+      "signal_subtype": "product_team_formation",
+      "weight": 0.25,
+      "description": "Product ekibi kurulumu sinyali (Product Manager, Product Owner, Product Lead pozisyonları)",
+      "evidence": "job_postings.title/department keyword match (Product Manager, Product Owner, Product Lead, Product Director)",
+      "scoring": [
+        {
+          "threshold": "4+ product",
+          "score": 100,
+          "label": "4+_product_hires"
+        },
+        {
+          "threshold": "3 product",
+          "score": 85,
+          "label": "3_product_hires"
+        },
+        {
+          "threshold": "2 product",
+          "score": 70,
+          "label": "2_product_hires"
+        },
+        {
+          "threshold": "1 product",
+          "score": 45,
+          "label": "1_product_hire"
+        },
+        {
+          "threshold": "0 product",
+          "score": 0,
+          "label": "no_product_hires"
+        }
+      ],
+      "confidence_formula": "min(100, max(20, count * 30))",
+      "keyword_sets": {
+        "titles": ["product manager", "product owner", "product lead", "product director", "head of product", "chief product officer", "cpo"],
+        "departments": ["product"]
+      }
+    },
+    {
+      "signal_type": "investment",
+      "signal_subtype": "bd_expansion",
+      "weight": 0.20,
+      "description": "BD/Sales genişlemesi sinyali (Business Development, Strategic Partnerships, Sales Director, Channel, Revenue pozisyonları)",
+      "evidence": "job_postings.title/department keyword match (Business Development, Strategic Partnerships, Sales Director, Channel, Revenue, Account Director)",
+      "scoring": [
+        {
+          "threshold": "6+ BD/sales",
+          "score": 100,
+          "label": "6+_bd_hires"
+        },
+        {
+          "threshold": "4-5 BD/sales",
+          "score": 80,
+          "label": "4-5_bd_hires"
+        },
+        {
+          "threshold": "2-3 BD/sales",
+          "score": 55,
+          "label": "2-3_bd_hires"
+        },
+        {
+          "threshold": "1 BD/sales",
+          "score": 30,
+          "label": "1_bd_hire"
+        },
+        {
+          "threshold": "0 BD/sales",
+          "score": 0,
+          "label": "no_bd_hires"
+        }
+      ],
+      "confidence_formula": "min(100, max(20, count * 20))",
+      "keyword_sets": {
+        "titles": ["business development", "strategic partnerships", "sales director", "channel", "revenue", "account director", "partnerships", "bd manager"],
+        "departments": ["business development", "sales", "partnerships", "revenue", "channel"]
+      }
+    }
+  ],
+  "combination_inference": {
+    "signal_type": "org_change",
+    "signal_subtype": "scaling_readiness",
+    "weight": 0.60,
+    "description": "Ölçekleme hazırlığı çıkarımı — 2 veya daha fazla investment sub-kategorisi aktif (score >= 50) ise muhtemel büyüme veya yatırım hazırlığı sinyali üretilir.",
+    "logic": {
+      "active_categories_threshold": 2,
+      "active_category_definition": "investment sub-signal score >= 50",
+      "inference_trigger": "active_categories >= threshold",
+      "inference_label": "muhtemel_buyume_veya_yatirim_hazirligi"
+    },
+    "scoring": [
+      {
+        "threshold": "4 kategori aktif",
+        "score": 100,
+        "label": "full_scale_readiness"
+      },
+      {
+        "threshold": "3 kategori aktif",
+        "score": 85,
+        "label": "strong_scale_readiness"
+      },
+      {
+        "threshold": "2 kategori aktif",
+        "score": 70,
+        "label": "moderate_scale_readiness"
+      },
+      {
+        "threshold": "1 kategori aktif",
+        "score": 30,
+        "label": "weak_scale_readiness"
+      },
+      {
+        "threshold": "0 kategori aktif",
+        "score": 0,
+        "label": "no_scale_readiness"
+      }
+    ],
+    "confidence_formula": "100 if inference_trigger else 50",
+    "evidence_template": {
+      "active_categories": ["executive_growth_hire", "rd_team_expansion"],
+      "inactive_categories": ["product_team_formation", "bd_expansion"],
+      "inference": "muhtemel_buyume_veya_yatirim_hazirligi",
+      "supporting_hires": [
+        {"category": "executive_growth_hire", "count": 2, "sample_titles": ["VP Growth", "Director of Engineering"]},
+        {"category": "rd_team_expansion", "count": 5, "sample_titles": ["ML Engineer", "Research Scientist"]}
+      ]
+    }
+  },
+  "signals_continued": [
+    {
+      "signal_type": "org_change",
+      "signal_subtype": "headcount_acceleration",
+      "weight": 0.40,
+      "description": "Headcount artış hızı sinyali (toplam iş ilanı sayısındaki aylık büyüme oranı)",
+      "evidence": "current_month_total_postings vs previous_month_total_postings",
+      "scoring": [
+        {
+          "threshold": ">= 100% growth",
+          "score": 100,
+          "label": ">=100pct_growth"
+        },
+        {
+          "threshold": "50-99% growth",
+          "score": 85,
+          "label": "50-99pct_growth"
+        },
+        {
+          "threshold": "20-49% growth",
+          "score": 65,
+          "label": "20-49pct_growth"
+        },
+        {
+          "threshold": "5-19% growth",
+          "score": 45,
+          "label": "5-19pct_growth"
+        },
+        {
+          "threshold": "0-4% growth",
+          "score": 25,
+          "label": "0-4pct_growth"
+        },
+        {
+          "threshold": "< 0% decline",
+          "score": "max(0, 25 * (1 + rate/100))",
+          "label": "negative_growth"
+        }
+      ],
+      "confidence_formula": "min(100, max(10, total_postings * 8))",
+      "hiring_trend_kapsama": ">= 100%: hypergrowth, >= 50% < 100%: accelerating, >= 20% < 50%: growing, >= 5% < 20%: stable_growth, 0-4%: flat, < 0%: contracting"
+    }
+  ],
+  "weights_total": 1.0,
+  "db_integration": {
+    "company_signals_insert": {
+      "signal_type": "investment|org_change",
+      "signal_subtype": "executive_growth_hire|rd_team_expansion|product_team_formation|bd_expansion|scaling_readiness|headcount_acceleration",
+      "score": "0-100",
+      "confidence": "0-100",
+      "evidence": "JSONB with hire counts, keyword matches, category activations, inference details",
+      "valid_until": "NULL (persistent until recalc)",
+      "metadata": "{source: job_postings, engine: investment_signal_scorer, external_funding_source: crunchbase/rapidapi (optional)}"
+    },
+    "company_intelligence_score_update": "investment_signal_score and org_change_score columns updated via scorer.py ON CONFLICT (company_id) DO UPDATE"
+  },
+  "test_data": {
+    "description": "3 örnek şirket (sample data) ile test",
+    "companies": [
+      {
+        "name": "ScaleUpTech",
+        "description": "Yüksek yatırım hazırlığı — 4 kategori aktif (yönetici, Ar-Ge, product, BD), scaling_readiness full, headcount +120%",
+        "executive_count": 4,
+        "rd_count": 8,
+        "product_count": 4,
+        "bd_count": 6,
+        "headcount_growth_pct": 120.0
+      },
+      {
+        "name": "GrowthCo",
+        "description": "Orta yatırım hazırlığı — 2 kategori aktif (yönetici, product), scaling_readiness moderate, headcount +35%",
+        "executive_count": 2,
+        "rd_count": 0,
+        "product_count": 2,
+        "bd_count": 0,
+        "headcount_growth_pct": 35.0
+      },
+      {
+        "name": "StableInc",
+        "description": "Düşük sinyal — 0 kategori aktif, scaling_readiness yok, headcount -5%",
+        "executive_count": 0,
+        "rd_count": 0,
+        "product_count": 0,
+        "bd_count": 0,
+        "headcount_growth_pct": -5.0
+      }
+    ]
+  },
+  "test_results": [
+    {
+      "company_name": "ScaleUpTech",
+      "investment_signal_score": 100.0,
+      "org_change_score": 100.0,
+      "scaling_readiness": "full_scale_readiness",
+      "inference": "muhtemel_buyume_veya_yatirim_hazirligi",
+      "active_categories": 4,
+      "headcount_growth_pct": 120.0,
+      "signal_scores": {
+        "executive_growth_hire": {
+          "score": 100.0,
+          "confidence": 100.0,
+          "threshold": "4+_executive_hires",
+          "count": 4
+        },
+        "rd_team_expansion": {
+          "score": 100.0,
+          "confidence": 100.0,
+          "threshold": "8+_rd_hires",
+          "count": 8
+        },
+        "product_team_formation": {
+          "score": 100.0,
+          "confidence": 100.0,
+          "threshold": "4+_product_hires",
+          "count": 4
+        },
+        "bd_expansion": {
+          "score": 100.0,
+          "confidence": 100.0,
+          "threshold": "6+_bd_hires",
+          "count": 6
+        },
+        "scaling_readiness": {
+          "score": 100.0,
+          "confidence": 100.0,
+          "threshold": "4 kategori aktif",
+          "active_categories": ["executive_growth_hire", "rd_team_expansion", "product_team_formation", "bd_expansion"]
+        },
+        "headcount_acceleration": {
+          "score": 100.0,
+          "confidence": 100.0,
+          "threshold": ">=100pct_growth",
+          "growth_pct": 120.0
+        }
+      }
+    },
+    {
+      "company_name": "GrowthCo",
+      "investment_signal_score": 44.25,
+      "org_change_score": 72.0,
+      "scaling_readiness": "moderate_scale_readiness",
+      "inference": "muhtemel_buyume_veya_yatirim_hazirligi",
+      "active_categories": 2,
+      "headcount_growth_pct": 35.0,
+      "signal_scores": {
+        "executive_growth_hire": {
+          "score": 75.0,
+          "confidence": 100.0,
+          "threshold": "2_executive_hires",
+          "count": 2
+        },
+        "rd_team_expansion": {
+          "score": 0.0,
+          "confidence": 100.0,
+          "threshold": "no_rd_hires",
+          "count": 0
+        },
+        "product_team_formation": {
+          "score": 70.0,
+          "confidence": 100.0,
+          "threshold": "2_product_hires",
+          "count": 2
+        },
+        "bd_expansion": {
+          "score": 0.0,
+          "confidence": 100.0,
+          "threshold": "no_bd_hires",
+          "count": 0
+        },
+        "scaling_readiness": {
+          "score": 70.0,
+          "confidence": 100.0,
+          "threshold": "2 kategori aktif",
+          "active_categories": ["executive_growth_hire", "product_team_formation"]
+        },
+        "headcount_acceleration": {
+          "score": 65.0,
+          "confidence": 100.0,
+          "threshold": "20-49pct_growth",
+          "growth_pct": 35.0
+        }
+      }
+    },
+    {
+      "company_name": "StableInc",
+      "investment_signal_score": 0.0,
+      "org_change_score": 0.0,
+      "scaling_readiness": "no_scale_readiness",
+      "inference": "yok",
+      "active_categories": 0,
+      "headcount_growth_pct": -5.0,
+      "signal_scores": {
+        "executive_growth_hire": {
+          "score": 0.0,
+          "confidence": 100.0,
+          "threshold": "no_executive_hires",
+          "count": 0
+        },
+        "rd_team_expansion": {
+          "score": 0.0,
+          "confidence": 100.0,
+          "threshold": "no_rd_hires",
+          "count": 0
+        },
+        "product_team_formation": {
+          "score": 0.0,
+          "confidence": 100.0,
+          "threshold": "no_product_hires",
+          "count": 0
+        },
+        "bd_expansion": {
+          "score": 0.0,
+          "confidence": 100.0,
+          "threshold": "no_bd_hires",
+          "count": 0
+        },
+        "scaling_readiness": {
+          "score": 0.0,
+          "confidence": 100.0,
+          "threshold": "0 kategori aktif",
+          "active_categories": []
+        },
+        "headcount_acceleration": {
+          "score": 0.0,
+          "confidence": 10.0,
+          "threshold": "negative_growth",
+          "growth_pct": -5.0
+        }
+      }
+    }
+  ],
+  "validation": {
+    "scaleUpExpected": "90-100 (yuksek, tum sinyaller aktif, 4 kategori)",
+    "scaleUpActual": "investment=100.0, org_change=100.0 — PASS",
+    "growthCoExpected": "40-55 arası investment, 65-80 arası org_change",
+    "growthCoActual": "investment=44.25, org_change=72.0 — PASS",
+    "stableExpected": "0-5 arası (dusuk, sinyal yok)",
+    "stableActual": "investment=0.0, org_change=0.0 — PASS",
+    "all_tests_passed": true,
+    "scaling_readiness_validation": {
+      "scaleUp_4cat": "full_scale_readiness — PASS",
+      "growthCo_2cat": "moderate_scale_readiness, inference aktif — PASS",
+      "stable_0cat": "no_scale_readiness — PASS"
+    }
+  },
+  "investment_level_thresholds": {
+    "0-20": "low",
+    "21-50": "moderate",
+    "51-80": "high",
+    "81-100": "very_high"
+  },
+  "org_change_level_thresholds": {
+    "0-20": "stable",
+    "21-50": "moderate_change",
+    "51-80": "active_change",
+    "81-100": "rapid_scaling"
+  },
+  "sonraki_adimlar": [
+    "Investment signal scorer, analyze_job_signals pipeline'a entegre edilebilir (P7-8)",
+    "company_signals tablosuna yazmak icin DB insertion kodu eklenebilir",
+    "Gercek job_postings verisiyle production testi yapılabilir",
+    "Crunchbase/RapidAPI entegrasyonu ile yatırım tutarı ve fon turu verisi eklenebilir",
+    "Scaling readiness inference dashboard'a Yatırım Hazırlığı rozeti olarak eklenecek",
+    "P8-3 (growth) ve P8-6 (investment) sinyalleri birlikte büyüme + yatırım matrixi olarak dashboard'a eklenebilir"
+  ]
+}

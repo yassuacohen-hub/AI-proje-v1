@@ -202,3 +202,57 @@ Kural regresyon testleri `scripts/_kural_testleri.py` dosyasındadır (2026-09-0
 | Kalite Skoru | 0-100 arası otomatik hesaplama | ✅ |
 | Duplicate Detection | Aynı firma tespiti | ✅ |
 | Source Record ID | Orijinal kaynaktan izleme | ✅ |
+
+## Kural 7: D-77 — Orkestratör Pano Disiplini (DEMIR KURAL)
+
+**Tüm görev yönetimi, pano değişiklikleri ve görev önceliklendirme SADECE orkestratör (D-77) tarafından yapılır.**
+
+### Prensip
+- **Orkestrastrasyonun Görevi:** Görev panosunun (backlog) sağlığı, tutarlılığı ve temizliği — yalnızca orkestrator çalışır.
+- **Ajan Rolü:** Kritik bulgular mevcutsa, bunları raporlarında "bulgular" / "eleştiri" sekmesi veya `bulgu_defteri.md`'ye yazarak orkestratöre bildirir.
+- **Pano Kuralları:**
+  - ❌ Hiçbir ajan, hiçbir görevin `durum`, `oncelik`, `sahip` alanını doğrudan değiştirmez.
+  - ❌ Hiçbir ajan, görev eklemez, silmez veya yeniden adlandırmaz.
+  - ❌ Hiçbir ajan, kilitler `file_locks.json`'da değişiklik yapmaz (denetim hariç).
+  - ✅ Orkestratör, testleri geçen görevleri `done` → `inactive` → `archived` yönetimi yapar.
+  - ✅ Orkestratör, tetik (trigger) tutarlılığını (D-68) sağlar.
+  - ✅ Orkestratör, rapor sonrası aksiyonları (karar alma, durum güncelleme, zincir hareketi) gerçekleştirir.
+
+### Bildirme Mekanizması
+Ajan, kritik bulgu tespit etse:
+1. Raporunun "bulgular" / "eleştiri" bölümüne yazı
+2. Veya `data/orchestrator/bulgu_defteri.md`'ye nota ekle (formatı: `[ajan] [tarih] [görev_id] [konu]`)
+3. **Ardından bekleme** — pano aksiyonları orkestratörün yapması beklenir
+
+### Ajan-Ajan Görev Devri (Yardımlaşma)
+**Ajan, BAŞKA ajana görev ATAYAMAZ. Sadece KENDİ görevini devredebilir.**
+
+| İşlem | Araç | Kim yapar |
+|---|---|---|
+| Yeni görev atama | `scripts/gorev_at.py at` | ❌ Sadece orkestratör (D-58 kapısı) |
+| Kendi görevini devretme | `scripts/gorev_kutusu.py devret --task-id X --yeni-ajan Y --neden "..."` | ✅ Görev sahibi ajan |
+
+- Devir = sahip değişimi + kilit transferi + yeni ajana tetik (otomatik).
+- `--neden` zorunlu; devir gerekçesi kayda geçer.
+- Orkestratör devirleri panoda denetler; keyfi devir zinciri (A→B→C→A) tespit edilirse müdahale eder.
+- **Ajan, kendisine ait olmayan görevi devredemez.**
+
+### D-66 Kanıt Zorunluluğu (Orkestratör Dahil)
+**Her görev atamasında `--kanit` zorunludur — orkestratörün kendi atadığı görevler dahil.**
+
+Geçerli kanıt formatları:
+- `dosya:satır` — backlog/rapor/brif referansı (örn. `data/orchestrator/plan.md:15`)
+- `sahip` — ürün sahibinin doğrudan talebi (sözlü/yazılı istek)
+
+Orkestratör muaf değildir. "Kendi kendine görev atama" da kanıt taşır; aksi halde `gorev_at.py` exit 5 ile reddeder.
+
+### Ortak Dosyalar Yönetimi
+- `task_board.json`, `file_locks.json`, `onay_kuyrugu.json`, `decision_log.jsonl` — **orkestrator sadece okuması ve yönetmesi (yazması).**
+- UTF-8 BOM / Encoding hatası → orkestrator saptayıp temizler.
+- Kilit çatışması → orkestrator tetiklenir.
+
+### Başarı Ölçüsü
+- 0 pano tutarsızlığı (D-68 ihlal)
+- 0 zincir kopması
+- 0 ortadan kayıp/yoğun görev
+- Tüm raporlar pano güncellemesi ile kapatılır ✓

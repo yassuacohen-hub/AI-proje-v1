@@ -1,0 +1,22 @@
+{
+  "completed_sectors": {
+    "otomotiv-3-1": 16,
+    "yapi-ve-insaat-1": 12,
+    "is-makinalari-7-1": 9,
+    "ostim-ankara-makine-ve-makine-ekipmanlari-1": 11,
+    "metal-ve-metal-isleme-1": 10,
+    "cesitli-ticari-faaliyetler-1": 7,
+    "elektrik-ve-elektronik-1": 6,
+    "hizmetler-3": 6,
+    "teknik-malzeme-tezgah-ve-ekipman-1": 5,
+    "teknoloji-ve-bilisim-1": 3,
+    "ambalaj-kagit-baski-ve-kirtasiye-1": 2,
+    "plastik-ve-kaucuk-1": 2,
+    "kimyasallar-boya-temizlik-ve-guvenlik-1": 2,
+    "gida-ve-endustriyel-mutfak-1": 2,
+    "saglik-2-1": 1,
+    "tekstil-ve-deri-1": 2,
+    "kent-mobilyalari-ve-peyzaj-1": 1
+  },
+  "total_records": 5485
+}

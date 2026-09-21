@@ -1,0 +1,26 @@
+﻿# ADMIN-AYAR-01 Raporu
+
+**Tarih:** 2026-09-17  
+**Ajan:** kilo  
+**Paket:** Admin paneli ayar kullanıcı kimliği ve otomatik yenileme tüketimi
+
+## Yapılanlar
+
+1. **S-08 — Misafir modu:** `admin_panel.py:render_ayarlar_tab()` artık `aktif_kullanici()` `misafir` dönerse `st.info("Ayarları kaydetmek için giriş yapın")` + varsayılanları `st.caption` ile gösterir; `ayarlari_yaz` callingleri yalnız gerçek kimlikte. `misafir.json` yazılmaz.
+2. **K-04 — Auto-refresh şemadan:** `admin_auto_refresh.py:render_auto_refresh()` başlangıç değerlerini `ayarlari_getir()` → `otomatik_yenileme`/`yenileme_araligi` alır. `REFRESH_INTERVALS` = `_SEMA_HARITASI["yenileme_araligi"].secenekler`. Değişimde `ayar_kaydet` ile kaydedilir (yalnız gerçek kimlikte).
+3. **K-04 — KVKK yardımcı:** `user_settings.py:kvkk_maske_acik(kullanici_id) -> bool` eklendi. Varsayılan `True`.
+4. **Şema temizliği:** 10 okunmayan ayarın `aciklama` sonuna `" (henüz uygulanmıyor)"` eklendi (`tema, yogun_mod, sayfa_boyutu, varsayilan_bolum, disa_aktarim_bicimi, bildirim_eposta, bildirim_telegram, bildirim_esigi, dil, saat_dilimi`).
+5. **Allowlist:** `data/kodlama_allowlist.json` → 4 yeni anahtar (`crlf`, `bosluk`, `tab`, `eof`).
+
+## Test Sonuçları
+
+- **Tam süit:** 3718 passed, 4 skipped, 0 failed
+- **test_admin_panel_tab.py:** 7 passed
+- **test_admin_auto_refresh.py:** 8 passed
+- **Kodlama denetimi:** Modifiye dosyalar temiz; repo-genel crlf/bosluk/ibaresi sorunları ön-existing
+
+## Riskler
+
+- `admin_auto_refresh.py` içe aktarım (lazy import) ile çalışıyor; `_SEMA_HARITASI` doğrudan `user_settings` modülünden alınıyor
+- `streamlit_restart.py` sonrası 8501 portu erişilebilir olmalı
+- `data/user_settings/misafir.json` mevcut değil; misafir modunda yazma yapılmadığı doğrulandı

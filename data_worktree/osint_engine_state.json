@@ -1,0 +1,10 @@
+{
+  "ostim-detail": {
+    "last_status": "kalite-ok(rc=2)",
+    "quality_min_score": 30.0,
+    "quality_passed": 5483,
+    "quality_rejected": 2,
+    "quality_avg_score": 43.5,
+    "updated_at": "2026-09-11T12:20:38"
+  }
+}

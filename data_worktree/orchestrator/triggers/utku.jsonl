@@ -1,0 +1,4 @@
+{"task_id": "TEST-D77-02", "durum": "done"}
+{"task_id": "ALTYAPI-TEST-FAILURE-FIX-02", "ajan": "utku", "talimat": "Brif: data/orchestrator/ALTYAPI-TEST-FAILURE-FIX-02_brif_2026-09-20_uretim.md", "tarih": "2026-09-20T20:57:48", "durum": "teslim", "alma_tarihi": "2026-09-20T21:17:26", "teslim_tarihi": "2026-09-20T23:40:24"}
+{"task_id": "ALTYAPI-TEST-FAILURE-FIX-02", "ajan": "utku", "talimat": "Brif (plans/brief_utku_ALTYAPI-TEST-FAILURE-FIX-02.md) okuyup tests/test_mcp.py hatasını duzelt, testi yeşil yap.", "tarih": "2026-09-20T23:29:12", "durum": "teslim", "alma_tarihi": "2026-09-20T23:35:20", "teslim_tarihi": "2026-09-20T23:40:24"}
+{"task_id": "DOC-SIRKET-MASTER-01", "ajan": "utku", "talimat": "Brif (plans/brief_utku_DOC-SIRKET-MASTER-01.md) okuyup Sirket Master belgesini duzelt, rapor yaz.", "tarih": "2026-09-20T23:29:12", "durum": "bekliyor"}

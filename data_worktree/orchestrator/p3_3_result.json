@@ -1,0 +1,40 @@
+{
+  "task_id": "P3-3",
+  "ts": "2026-09-07T17:12:35.943831+00:00",
+  "jsonl_keys": 7415,
+  "mid_range_firms": 2457,
+  "matched_jsonl": 2395,
+  "enrichment": {
+    "email_filled": 0,
+    "web_filled": 0,
+    "adres_filled": 0,
+    "tax_filled": 0,
+    "rows_affected": 0
+  },
+  "recalc_rows": 10105,
+  "before_distribution": {
+    "r80_100": 0,
+    "r60_79": 570,
+    "r40_59": 2457,
+    "r20_39": 5731,
+    "r0_19": 1347,
+    "avg_score": "29.11"
+  },
+  "after_distribution": {
+    "r80_100": 0,
+    "r60_79": 570,
+    "r40_59": 2457,
+    "r20_39": 5731,
+    "r0_19": 1347,
+    "avg_score": "29.11"
+  },
+  "mid_range_missing_after": {
+    "no_email": 38,
+    "no_web": 62,
+    "no_adres": 20,
+    "no_vkn": 2260,
+    "no_phone": 25,
+    "total": 2457
+  },
+  "note": "OSTIM JSONL ile 40-59 firmalarin email/web/adres/VKN alanlari doldurulmaya calisildi. Onceki ingest (P3-1, P1-3) alanlari buyuk oranda doldurmus; kalan bosluklar kaynak veride yok."
+}

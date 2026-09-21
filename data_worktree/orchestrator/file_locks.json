@@ -1,0 +1,52 @@
+{
+  "scripts/deney/crewai_arastirma_deneyi.py": {
+    "sahip": "roo",
+    "task_id": "AGN-CREWAI-PILOT-01",
+    "kilitlendi": "2026-09-18T06:08:56"
+  },
+  "data/orchestrator/REVIEW-ONAY-KUYRUGU-01_rapor_2026-09-18_denetim.md": {
+    "sahip": "cline",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "kilitlendi": "2026-09-18T22:41:37"
+  },
+  "tests/test_admin_kullanici_ayarlari.py": {
+    "sahip": "cline",
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "kilitlendi": "2026-09-18T22:42:02"
+  },
+  "AI proje v1/V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md": {
+    "sahip": "utku",
+    "task_id": "DOC-SIRKET-MASTER-01",
+    "kilitlendi": "2026-09-19T16:37:45"
+  },
+  "data/orchestrator/file_locks.json": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-KILIT-TEMIZLE-01",
+    "kilitlendi": "2026-09-19T17:16:46"
+  },
+  "data/orchestrator/decision_log.jsonl": {
+    "sahip": "ihsan",
+    "task_id": "ORKESTRA-DECISION-LOG-03",
+    "kilitlendi": "2026-09-20T10:55:26"
+  },
+  "tests/test_naming_audit.py": {
+    "sahip": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "kilitlendi": "2026-09-20T10:55:26"
+  },
+  "data/orchestrator/bulgu_defteri.md": {
+    "sahip": "ihsan",
+    "task_id": "ORKESTRA-DECISION-LOG-03",
+    "kilitlendi": "2026-09-20T10:55:26"
+  },
+  "tests/test_decision_log.py": {
+    "sahip": "ihsan",
+    "task_id": "ORKESTRA-DECISION-LOG-03",
+    "kilitlendi": "2026-09-20T10:55:26"
+  },
+  "test.txt": {
+    "sahip": "ihsan",
+    "task_id": "TEST-D77-01",
+    "kilitlendi": "2026-09-20T16:32:21"
+  }
+}

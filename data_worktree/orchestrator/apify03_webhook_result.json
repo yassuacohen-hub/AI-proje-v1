@@ -1,0 +1,65 @@
+{
+  "task_id": "APIFY-03",
+  "title": "Apify Webhook + Kalıcı Olay İşleme araştırması",
+  "date": "2026-09-10T19:29:00Z",
+  "researcher": "arastirmaci",
+  "status": "research_complete",
+  "summary": "Apify webhook altyapısı production-ready. Persistent webhook (tüm Actor runs için) veya ad-hoc webhook (tek run için) oluşturulabilir. Idempotent işleme + retry yönetimi kritik. Huginn pipeline'ına entegre edilebilir.",
+  "findings": {
+    "webhook_types": [
+      {
+        "type": "Persistent Webhook",
+        "description": "Belirli bir Actor için tüm run'ları dinler. Actor → Integrations → Webhooks üzerinden kurulur.",
+        "use_case": "Kariyer.net/Company Career Pages scraper'ları için sürekli dinleme"
+      },
+      {
+        "type": "Ad-hoc Webhook",
+        "description": "Tek bir run için geçici webhook. Run başlatılırken webhook parametresi ile eklenir.",
+        "use_case": "Tek seferlik büyük scrape işleri için sonuç bildirimi"
+      }
+    ],
+    "event_types": [
+      "ACTOR.RUN.CREATED",
+      "ACTOR.RUN.SUCCEEDED",
+      "ACTOR.RUN.FAILED",
+      "ACTOR.RUN.ABORTED",
+      "ACTOR.RUN.TIMED_OUT",
+      "ACTOR.RUN.RESURRECTED"
+    ],
+    "payload_template": {
+      "description": "JSON-like syntax ile dynamic data injection. Örnek: {{eventType}}, {{resource.status}}, {{resource.defaultDatasetId}}",
+      "default_fields": ["userId", "createdAt", "eventType", "eventData", "resource"]
+    },
+    "security": {
+      "https_only": "Webhook endpoint'i HTTPS olmalı.",
+      "hmac_verification": "Apify HMAC signature header'ı ekler; doğrulanabilir.",
+      "secret_token": "Query param veya Authorization header ile ekstra secret eklenebilir.",
+      "firewall": "Apify webhook IP'leri whitelist edilebilir (static IP'ler)."
+    },
+    "idempotency_and_retries": {
+      "retry_behavior": "Apify, 30 saniye içinde 200 OK alınamazsa tekrar dener.",
+      "duplicate_delivery": "Aynı webhook birden fazla teslim edilebilir (retry + resurrection).",
+      "idempotency_key": "merchant_oid veya actorRunId benzersiz anahtar olarak kullanılmalı.",
+      "recommended_pattern": "Önce idempotency check (DB'de kayıt var mı?), sonra işleme."
+    },
+    "huginn_integration_design": {
+      "endpoint": "/api/webhooks/apify",
+      "handler": "apify_webhook_receiver.py",
+      "flow": [
+        "1. Apify POST → /api/webhooks/apify (hemen 200 OK dön, async işle)",
+        "2. HMAC + token doğrula",
+        "3. eventType'e göre route et:",
+        "   - SUCCEEDED: datasetId'den veri çek, ingest_job_postings.py tetikle",
+        "   - FAILED/TIMED_OUT: error_log + alert (Telegram)",
+        "4. Idempotency: actorRunId DB'de var mı?",
+        "5. İşlem sonrası credit_ledger/usage metrics güncelle (Y26)"
+      ]
+    },
+    "code_references": [
+      "https://docs.apify.com/api/v2/webhooks-webhooks.md",
+      "https://docs.apify.com/platform/integrations/webhooks",
+      "https://github.com/apify/apify-docs/blob/master/sources/platform/integrations/programming/webhooks/actions.md",
+      "https://use-apify.com/blog/tags/webhooks"
+    ]
+  }
+}
