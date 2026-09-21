@@ -102,23 +102,27 @@
 | İHSAN | V10-BELGE + BRIF-03 + COP-26 | 10h | COP-26 blokajı kaldırıldıktan sonra |
 | Orkestratör | Cleanup + D-67 haftalık özeleştiri | 2h | — |
 
-### Dosya Kilitleri
-- `web_dashboard/tabs/admin_sistem.py` ← UTKU (02a)
-- `web_dashboard/tabs/admin_yonetim.py` ← UTKU (02b, 02a sonrası)
-- `web_dashboard/tabs/__init__.py` ← UTKU (MENUTREE)
+### Dosya Kilitleri (D-185 düzeltmesi)
+- `web_dashboard/tabs/admin_sistem.py` ← UTKU (02a.v1, paralel)
+- `web_dashboard/tabs/admin_yonetim.py` ← UTKU (02b, 02a.v2 sonrası)
+- `web_dashboard/tabs/__init__.py` ← **MENUTREE (1h) → DASH-UX-02a.v2 (1h), SERİ** — tek dosya, iki görev, çakışma noktası
 - `AI proje v1/V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md` ← İHSAN (V10-BELGE)
 - `AI proje v1/V10/03_mimari/brifler/brif_copilot.md` ← İHSAN (BRIF-03)
 - `web_dashboard/tabs/admin_musteriler.py` ← (COP-26, hazır ama blokaj kaldırıldıktan sonra)
 
-**❌ Çakışma yok** → Parallelism ✅
+**⚠️ Çakışma var: `__init__.py`** (MENUTREE + DASH-UX-02a) → **Çözüm: D-185 split (v1/v2)**
+- DASH-UX-02a.v1 (dosya yaz, `__init__.py`'ye dokunma) → **paralel** MENUTREE ile
+- MENUTREE (`__init__.py` düzenle) → biter → DASH-UX-02a.v2 (`SECTIONS` kaydı) tetiklenir → **seri**
+- ADMIN-AYAR-01: pano taramasında `done` bulundu (2026-09-17) → bu sprint dışı, listeden çıkarıldı
 
-### Seri Bağımlılıklar (D-85)
+### Seri Bağımlılıklar (D-85 + D-185)
 ```
-MENUTREE ━━┓
-           ┃ (paralel)
-DASH-02a ━━┫ (2a → 2b seri)
-           ┃
-COP-26 ━━━┛
+MENUTREE ━━━━━━━━━━━┓
+                     ┃ (seri, __init__.py paylaşımı)
+DASH-02a.v1 ━━┓      ┃
+   (paralel)  ┗━━━━━ DASH-02a.v2 ━━ DASH-02b (seri)
+                     ┃
+COP-26 ━━━━━━━━━━━━━┛ (paralel, ayrı dosya)
 ```
 
 ---
@@ -174,9 +178,11 @@ COP-26 ━━━┛
 ## VI. Sonraki Sprint (2026-09-28 +)
 
 Eğer bu sprint süreli biterse:
-1. **ADMIN-AYAR-01** (FMT-01/GUARD-ENC-02'nin devamı, P1)
-2. **COP-26 devamı** (müşteri ekranı, P1)
-3. **V1-ARGE görevler** (plan durumunda, 12 görev)
+1. **COP-26 devamı** (müşteri ekranı, P1)
+2. **V1-ARGE görevler** (plan durumunda, 12 görev)
+3. **FMT-01 / GUARD-ENC-02** (archive → wontfix, P3)
+
+*Not: ADMIN-AYAR-01 pano taramasında `done` (2026-09-17) bulundu → kaldırıldı.*
 
 ---
 
