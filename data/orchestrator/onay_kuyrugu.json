@@ -1780,5 +1780,215 @@
     ],
     "teslim_tarihi": "2026-09-22T07:12:12",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "VERI-GRAPH-01",
+    "ajan": "utku",
+    "ozet": "D-182 karar ↔ kod ↔ test wikilink'leri eklendi. 5 dosya güncellendi (1 karar + 4 kod/test zaten hazır). Testler geçti.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-21T18:47:04",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-21T18:48:32"
+  },
+  {
+    "task_id": "VERI-ARSIV-01",
+    "ajan": "utku",
+    "ozet": "Obsidian app.json userIgnoreFilters genişletildi: 8 yeni glob kalıbı eklendi (temp rapor/JSON dosyaları gizleme). Kodlama denetimi temiz.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-21T19:03:20",
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-21T19:03:26"
+  },
+  {
+    "task_id": "TEST-GRAPH-KOPRU",
+    "ajan": "utku",
+    "ozet": "D-182 backlink dogrulama: 8 dosya, 16 backlink (5+ bekleniyordu). D-* genel: 8 dosya (20+ kismi - eski kararlar geri donuk eklenmedi). Orphan orani %62->%41 (~%21 azalis). Kodlama denetimi temiz.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-21T19:13:14",
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-21T19:13:28"
+  },
+  {
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "ajan": "utku",
+    "ozet": "ProfileMenu komponenti yazildi (src/company_master/ui/components/profil_menu.py). Avatar (monokrom), isim/rol, Ayarlar linki, Cikis butonu. Tests 10/10 green. Collection errors 36->0, pass 3449->3906.",
+    "ciktilar": [
+      "src/company_master/ui/components/profil_menu.py",
+      "tests/test_profil_menu.py"
+    ],
+    "teslim_tarihi": "2026-09-21T20:55:14",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-21T20:55:23"
+  },
+  {
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "ajan": "utku",
+    "ozet": "web_dashboard/tabs/admin_kullanici_ayarlari.py olusturuldu (Hesap·Güvenlik·Tercihler 3 bolum). admin_panel.py'deki render_ayarlar_tab geriye uyumluluk icin sarmalayıcı birakildi. Navigasyon (tabs/__init__.py) yeni module isaret edildi. 12 test eklendi (test_admin_kullanici_ayarlari.py) - hepsi yesil. test_sekme_kapsama guncellendi (render_ayarlar_tab muaf). Streamlit yeniden baslatildi.",
+    "ciktilar": [
+      "web_dashboard/tabs/admin_kullanici_ayarlari.py",
+      "web_dashboard/tabs/admin_panel.py",
+      "web_dashboard/tabs/__init__.py",
+      "tests/test_admin_kullanici_ayarlari.py",
+      "tests/test_sekme_kapsama.py"
+    ],
+    "teslim_tarihi": "2026-09-21T22:01:53",
+    "durum": "onaylandi",
+    "onaylayan": "yasu",
+    "onay_tarihi": "2026-09-22T00:04:55"
+  },
+  {
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "ajan": "utku",
+    "ozet": "web_dashboard/tabs/__init__.py: sol menu agaci 3 gruba yeniden duzenlendi (Veri / Analiz / Yönetim). 'Ayarlar' sekmesi menuden kaldirildi (UST_SAYFA_ANAHTARLARI'da yok, profil popover deep-link ile erisim). Geriye uyumluluk icin GRUP_IS/GRUP_SISTEM aliaslari eklendi. Tüm navigasyon testleri (test_dashboard_nav.py) ve zincir testleri yesil. Streamlit yeniden baslatildi.",
+    "ciktilar": [
+      "web_dashboard/tabs/__init__.py"
+    ],
+    "teslim_tarihi": "2026-09-21T22:25:41",
+    "durum": "onaylandi",
+    "onaylayan": "yasu",
+    "onay_tarihi": "2026-09-22T00:05:08"
+  },
+  {
+    "task_id": "ORKESTRA-ONAY-KUYRUK-01",
+    "ajan": "yasu",
+    "ozet": "Onay kuyrugu denetlendi (3 bekleyen teslim). UI-AYARLAR-SAYFA-01: dosyalar 5/5 diskte, 173 passed / 4 skipped, D-57 uyumlu — onaya uygun. ADMIN-UX-MENUTREE-01: dosya mevcut, nav testleri yesil, D-57 uyumlu — onaya uygun. BRIK-00: panoda kayit YOK + kanit dosyasi yok — onaylanamaz, red veya kayit geri yazma gerekli. Rapor: data/orchestrator/ORKESTRA-ONAY-KUYRUK-01_rapor_2026-09-21_denetim.md. Kod degisikligi yapilmadi (salt denetim).",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-21T23:41:42",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-22T00:23:52"
+  },
+  {
+    "task_id": "ORKESTRA-IHSAN-TETIK-01",
+    "ajan": "ihsan",
+    "ozet": "ihsan.jsonl 83->64 kayit (19 yinelenen silindi: DASH-UX-02a x2 stray, ADMIN-UX-MENUTREE-01 x6, ADMIN-UX-PROFILMENU-01 x6, DASH-UX-02b x5, BRIF-03 x1). Kok neden: gorev_zinciri()/zincir_uzat() task_id guard'siz ekliyordu -> gece zinciri tekrar cagrildikca coklanildi. trigger.py'ye guard eklendi (ayni task_id zaten postada varsa atlanir). tests/test_gorev_zinciri.py'ye regresyon testi eklendi (23/23 pass).",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-21T23:57:44",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-22T00:01:33"
+  },
+  {
+    "task_id": "ORKESTRA-TETIK-TEMIZLIK-01",
+    "ajan": "ihsan",
+    "ozet": "Dogrulandi: DASH-UX-02a artik yalnizca utku.jsonl'de 1 kopya (dogru sahip). ihsan.jsonl ve mimar.jsonl'deki stray kopyalar silindi. PowerShell grep ile teyit edildi.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-21T23:58:00",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-22T00:01:33"
+  },
+  {
+    "task_id": "DASH-UX-02a",
+    "ajan": "utku",
+    "ozet": "web_dashboard/tabs/admin_sistem.py: 5 sistem sekmesi (Maliyet/Performans/API Analytics/DLQ/Webhook) tek sayfada birlestirildi. K1 kalibrasyonu (tab container, cache stratejisi, placeholder, KPI kategorileri) tanimlandi. __init__.py'ye dokunulmadi (D-185 split). 9 test eklendi (test_dash_ux_tabs.py) - hepsi yesil. Streamlit yeniden baslatildi.",
+    "ciktilar": [
+      "web_dashboard/tabs/admin_sistem.py",
+      "tests/test_dash_ux_tabs.py"
+    ],
+    "teslim_tarihi": "2026-09-22T03:21:18",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-22T07:29:30.704571"
+  },
+  {
+    "task_id": "DASH-UX-02a-SECTIONS",
+    "ajan": "utku",
+    "ozet": "admin_sistem zaten SECTIONS'ta kayitli (anahtar=sistem, modul=web_dashboard.tabs.admin_sistem). Tek hata: fonksiyon adi render_sistem_tab olarak yazilmis, gercek adi render_admin_sistem. 1 satir duzeltme: render_sistem_tab -> render_admin_sistem. test_dashboard_nav.py: once 1 failed, simdi 96 passed 1 skipped. Tam regresyon 3939 passed 22 skipped 12 failed (hepsi onceden var, baskalari degisikliginden).",
+    "ciktilar": [
+      "web_dashboard/tabs/__init__.py"
+    ],
+    "teslim_tarihi": "2026-09-22T08:04:12",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-22T08:57:51"
+  },
+  {
+    "task_id": "ORKESTRA-BASLIK-GERIYE-01",
+    "ajan": "utku",
+    "ozet": "task_board.json (296 gorev) D-57 baslik kalibi taramasi: 3 acik gorev basligi D-57 kalibina tasindi (DASH-UX-02a, DASH-UX-02b, DASH-UX-02a-SECTIONS). Yedek alindi, atomik replace. Geriye donuk muafiyet korundu.",
+    "ciktilar": [
+      "data/orchestrator/ORKESTRA-BASLIK-GERIYE-01_rapor_2026-09-22_uretim.md"
+    ],
+    "teslim_tarihi": "2026-09-22T08:18:56",
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-22T08:19:06"
+  },
+  {
+    "task_id": "TEST-AYARLAR-KAPSAM-01",
+    "ajan": "utku",
+    "ozet": "tests/test_admin_kullanici_ayarlari.py mevcut durumu incelendi: 12 test fonksiyonu var. Kapsam: Hesap/Guvender/Tercihler bolumleri. Test iskeleti zaten tamamlanmis.",
+    "ciktilar": [
+      "tests/test_admin_kullanici_ayarlari.py"
+    ],
+    "teslim_tarihi": "2026-09-22T08:19:14",
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-22T08:20:07"
+  },
+  {
+    "task_id": "TEST-MERVE-KAPSAM-01",
+    "ajan": "utku",
+    "ozet": "tests/test_admin_kullanici_ayarlari.py testleri denetlendi: 12 test, 3 bolum (Hesap/Guvender/Tercihler). Kapsam tamamlandi, eksik test yok. Denetim raporu data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md olarak yazildi.",
+    "ciktilar": [
+      "data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md"
+    ],
+    "teslim_tarihi": "2026-09-22T08:19:30",
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-22T08:20:07"
+  },
+  {
+    "task_id": "DASH-UX-02a",
+    "ajan": "utku",
+    "ozet": "K1 kalibrasyon raporu data/orchestrator/DASH-UX-02a_K1_kalibrasyonu_rapor_2026-09-22_uretim.md olarak yazildi. 5 sistem sekmesi (Cost/Performance/API Analytics/DLQ/Webhook) admin_sistem.py'de birlestirildi. Dikey dilim + veri kaynagi + bos-veri placeholder + aciklama (K2/K3/K5). app.py dokunmadi. test_admin_sistem.py 9 test.",
+    "ciktilar": [
+      "data/orchestrator/DASH-UX-02a_K1_kalibrasyonu_rapor_2026-09-22_uretim.md"
+    ],
+    "teslim_tarihi": "2026-09-22T08:41:38",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-22T08:58:00"
+  },
+  {
+    "task_id": "DASH-UX-02b",
+    "ajan": "utku",
+    "ozet": "web_dashboard/tabs/admin_yonetim.py mevcut durumu incelendi: 97 satir, render_yonetim_tab() fonksiyonu, 3 Section (API/Kullanici, Veri Araclari, Otomatik Yenileme) + PageHeader + SectionNav + 3 alt-modul render. Brief gereksinimi (4 sekme bir sayfada) zaten karsilaniyor. test_dash_ux_tabs.py: 9 passed. app.py dokunmadi.",
+    "ciktilar": [
+      "data/orchestrator/DASH-UX-02b_rapor_2026-09-22_uretim.md"
+    ],
+    "teslim_tarihi": "2026-09-22T12:14:24",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator denetim: kanit var, rapor OK, test 9/9 yeşil",
+    "onay_tarihi": "2026-09-22T12:22:45"
+  },
+  {
+    "task_id": "SEC-BANDIT-01",
+    "ajan": "utku",
+    "ozet": "SEC-BANDIT-01 zaten dogru candirilmis: scripts/sec_bandit.py, tests/test_sec_bandit.py, .bandit, docs/SECURITY_BANDIT.md tumu mevcut. Orkestrator (ihsan) onayladi: zaten dogru candirilmis. D-48 erteleme notu iptal edildi (not alanina CANLANDIRILDI kaydi eklendi). Celistki giderildi: not devam etme diyordu, durum doing idi -> plan'a çekildi, tekrar dogrulandi.",
+    "ciktilar": [
+      "data/orchestrator/SEC-BANDIT-01_rapor_2026-09-22_uretim.md"
+    ],
+    "teslim_tarihi": "2026-09-22T12:15:04",
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-22T12:15:36"
+  },
+  {
+    "task_id": "ORPHAN-ARASTIRMA-01",
+    "ajan": "yasu",
+    "ozet": "ORPHAN-ARASTIRMA-01 tamam: 4 oksuz kayit (U-11, MIG-UI-01, MRK-05, ROO-REV-01) panoda HIC var olmadi (pickaxe --all + 21 snapshot 0 eslesme). Hipotez CURUTULDU: gorev_ekle+ORCH-08 kurallari d9b6067 (2026-09-13 02:22) ile teslimlerden ONCE AGENTS.md'e girdi ve kesintisiz durdu; sebep gorev_guncelle'in kayit yoksa sessiz None donmesi + roo'nun bak/al bypass'i + kuyruk dosyasinin 09-18'e kadar git disi olmasi. Tavsiye: kayitlar oldugu gibi kalsin, panoya geri yukleme yapilmasin, teslim_et/onayla'ya pano-kayit guard eklensin. Rapor: data/orchestrator/ORPHAN-ARASTIRMA-01_rapor_2026-09-22_yasu.md",
+    "ciktilar": [
+      "data/orchestrator/ORPHAN-ARASTIRMA-01_rapor_2026-09-22_yasu.md"
+    ],
+    "teslim_tarihi": "2026-09-22T12:41:34",
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-22T12:41:45"
   }
 ]

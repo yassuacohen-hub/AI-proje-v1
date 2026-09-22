@@ -53,6 +53,16 @@ data/orchestrator/change_notify_state.json
 data/orchestrator/_*.txt
 data/orchestrator/_*.py
 data/orchestrator/task_board_corrupt_backup.json
+# D-186: pano dosyaları runtime state (state.json gibi); repodan çıkarıldı split riski nedeniyle
+data/orchestrator/task_board.json
+data/orchestrator/onay_kuyrugu.json
+data_worktree/orchestrator/task_board.json
+data_worktree/orchestrator/onay_kuyrugu.json
+# D-186: otomatik zaman damgali yedekler ve yedek klasorleri repoya girmez
+data/orchestrator/*.bak
+data_worktree/orchestrator/*.bak
+data/orchestrator/_yedek_*/
+data_worktree/orchestrator/_yedek_*/
 # D-58: orkestrator devralma anahtari (gizli, repoya girmez)
 data/orchestrator/abrakadabra.key
 
