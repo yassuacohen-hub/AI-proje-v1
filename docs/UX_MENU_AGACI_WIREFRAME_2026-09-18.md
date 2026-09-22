@@ -251,7 +251,7 @@ Overview yeniden düzenlemesini tanımlar.
 
 Kısaca: **menüde 2 seviye, sayfada 1 seviye daha = toplam 3.** 4. seviye menüye çıkmaz.
 
-### 8.2 Streamlit sınırının tam nedeni 🔴
+### 8.2 Streamlit sınırının tam nedeni
 
 **Sınır:** `st.navigation` menüde **en fazla 2 seviye** çizer.
 
@@ -357,7 +357,7 @@ altında `st.caption` olarak durur. Süs buton yok — 5 buton, 5 iş.
 - [`web_dashboard/tabs/__init__.py`](../web_dashboard/tabs/__init__.py:166) `SECTIONS` kayıt yapısı **bozulmaz**; yalnız `ust` / `sira` alanları değişir.
 - `url_path` değerleri **sabit kalır** → bağlantı kırılmaz. Neden: [`sayfalari_uret()`](../app.py:289) **tüm** `SECTIONS` için `st.Page` üretir; sidebar ise yalnız `ust` dolu olanları çizer. Yani `ust` silmek sekmeyi menüden çıkarır ama sayfayı ve adresini yaşatır. [`ESKI_URL`](../web_dashboard/tabs/__init__.py:530) genişletmesine **gerek kalmadı**.
 
-### 8.5 Sonraki faz — Streamlit sınırı nedeniyle ertelenenler 🟡
+### 8.5 Sonraki faz — Streamlit sınırı nedeniyle ertelenenler
 
 | # | Madde | Sınırın kaynağı | Geçici çözüm (MVP) |
 |---|-------|-----------------|--------------------|
@@ -371,7 +371,7 @@ altında `st.caption` olarak durur. Süs buton yok — 5 buton, 5 iş.
 
 ## 9. Revizyon esnekliği — mevcut durum ve en kısa yol
 
-### 9.1 Tek kaynak var mı? 🟢 Evet
+### 9.1 Tek kaynak var mı? Evet
 
 `SECTIONS: tuple[TabTanimi, ...]` — `web_dashboard/tabs/__init__.py` satır 166-527.
 Tüm menü buradan üretilir: `ust_sayfalar()`, `alt_sekmeler()`, `gruplar()`, `bolum_ara()`,
@@ -404,3 +404,11 @@ Ekran görüntüsündeki `Legal center ›` alt menüsü 3. seviye. Öneri: kura
 🟡 **Streamlit sınırı:** Ctrl+K klavye kısayolu Streamlit'te yerleşik değil; `st.dialog`
 bir düğmeyle açılır. Gerçek Ctrl+K için küçük bir JS enjeksiyonu gerekir — MVP'de
 düğme + `/` kısayolu yeterli, kısayol Faz 2'ye bırakılabilir.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]

@@ -34,3 +34,12 @@
 python scripts/gorev_kutusu.py teslim --ajan cline --task-id SEC-AUTH-01 --ozet "Asama A/B: ... | test: N passed | kodlama temiz | docker curl OK"
 ```
 Özet biçimi: bulgu → dosya:satır → test adı. Aşama A biterse önce **ara teslim** (`--ozet "ASAMA A tamam, B kilit bekliyor"`) — roo B için ayrı tetik atar.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/PLAN_STRATEGY_HUB]]
+
+
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]

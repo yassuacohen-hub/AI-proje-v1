@@ -24,3 +24,11 @@
 - `admin_auto_refresh.py` içe aktarım (lazy import) ile çalışıyor; `_SEMA_HARITASI` doğrudan `user_settings` modülünden alınıyor
 - `streamlit_restart.py` sonrası 8501 portu erişilebilir olmalı
 - `data/user_settings/misafir.json` mevcut değil; misafir modunda yazma yapılmadığı doğrulandı
+
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

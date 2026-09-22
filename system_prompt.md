@@ -45,3 +45,8 @@ Evrensel Ajan Kuralları
 ## 8. Test
 - `python -X utf8 -m pytest tests/ -q`
 - 1413 test passed hedefi
+
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

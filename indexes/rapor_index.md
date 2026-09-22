@@ -5,6 +5,13 @@
 **Dosya Sayısı**: 138
 **Oluşturulma**: 2026-09-21T10:45:46.592749Z
 
+**Bağlantılar**: [[Huginn Data Insights/indexes/teknik_index]] · [[Huginn Data Insights/hubs/REPORTS_ANALYSIS_HUB]]
+
+**İlgili Nodlar**
+
+- [[Huginn Data Insights/docs/ROO_ELESTIRI_NOTLARI]] — Ortak eleştiri/risk defteri: bu indeksteki denetim ve bulgu raporlarından çıkarılan maddelerin (K-/M-/V-/S-/O-/D- önekli) toplandığı yer. Rapor okurken bulguyu buraya yazın, çözerken buradan okuyun.
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]] — Müşteri paneli hub'ı: bu indeksteki sprint, PO, admin panel, UX ve abonelik raporlarının konu bazlı toplandığı merkez. İndeks "hangi dosya var" sorusuna, hub "hangi konuya ait" sorusuna cevap verir.
+
 ## Bağlı Dosyalar
 
 - [[Huginn Data Insights/data/orchestrator/AGENT_SYNC]]

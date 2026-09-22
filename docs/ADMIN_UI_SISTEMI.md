@@ -56,7 +56,7 @@ Renk token'ları **üç role** ayrıldı. Bu ayrım yapılmadan önce 9 ayrı WC
 | `border` / `border-strong` | Dekoratif ayraç | eşik yok |
 | `border-interactive` | Etkileşimli bileşen sınırı (input, buton) | **≥ 3:1** |
 
-### ⚠️ Kontrast ölçümünde en sık yapılan hata
+### Kontrast ölçümünde en sık yapılan hata
 Kontrastı **saf beyaza (#fff) karşı ölçmeyin.** Gerçek zemin token'ı neyse ona karşı ölçün:
 - Aydınlık tema sayfa zemini `bg = #f6f7fb` (beyaz değil!)
 - Kart zemini `surface`
@@ -300,3 +300,13 @@ Toplam **11 bölüm**. Her kayıt bir `TabTanimi`; `hazir=False` olanlar `render
 | AI Abrakadabra sohbet motoru | Ayrı görev — UI kabuğu hazır, başlıkta "Yakında" rozeti gösteriliyor |
 | `test_api_integration.py::test_companies_liste_sozlesme` | UI dışı; gerçek DB'ye bağlı (`total == 1` bekliyor, 14000 geliyor) → izole fixture DB ayrı görev |
 | ~~3 öksüz sekme~~ | ✅ **Kapandı** — `render_audit_tab` + `render_loading_tab` SECTIONS'a eklendi, `render_decision_tab` yönetim sekmesine delege edildi |
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]] — Konu hub: admin paneli tum dokumanlari
+- [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]]
+- [[Huginn Data Insights/PROJECT_ROADMAP]]

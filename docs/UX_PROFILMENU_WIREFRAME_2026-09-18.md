@@ -172,7 +172,7 @@ Yeni renk **eklenmez**; mevcut token seti yeter.
 
 ---
 
-## 8. Bağımlılıklar 🔴
+## 8. Bağımlılıklar
 
 | Bağımlılık | Görev | Neden |
 |-----------|-------|-------|
@@ -200,6 +200,12 @@ Yeni renk **eklenmez**; mevcut token seti yeter.
 | 7 | `ayarlar` kaydı `SECTIONS`'ta sidebar'da görünmez | birim |
 
 ---
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
 
 ## 10. KAHİN'e özet
 

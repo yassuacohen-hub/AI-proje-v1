@@ -14,3 +14,9 @@ Kariyer.net firma listesi için MVP scraper yazıldı.
 - Pagination / JS / proxy: **defer**
 - Encoding: **UTF-8, BOM yok**
 - Hedef süre: **<20 dk**
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

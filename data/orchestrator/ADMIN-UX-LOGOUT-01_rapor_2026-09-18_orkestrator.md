@@ -7,12 +7,21 @@
 
 ---
 
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
+
 ## 1. Sorun (sade dil)
 
 Sağ üstteki hesap kartından "Çıkış" düğmesine basınca **oturum kapanmıyordu**.
 Düğmeye basınca ekranda ikinci bir "Çıkış" düğmesi beliriyordu. Kullanıcı hâlâ içerideydi.
 
-## 2. Kök neden 🔴
+## 2. Kök neden
 
 `app.py` içindeki hesap kartı, yanlış fonksiyonu çağırıyordu.
 
@@ -23,13 +32,13 @@ Düğmeye basınca ekranda ikinci bir "Çıkış" düğmesi beliriyordu. Kullan�
 
 Tek satırlık yanlış çağrı. Etkisi: çıkış özelliği **%100 çalışmıyordu**.
 
-## 3. Yapılan düzeltme 🟢
+## 3. Yapılan düzeltme
 
 - `app.py` → hesap kartı artık `admin_cikis()` çağırıyor. Değişen satır sayısı: **3**.
 - Yeni koruma testi eklendi: `tests/test_nav_ia04.py::test_popover_cikis_gercekten_oturum_kapatir`.
   Bu test, aynı hatanın ileride tekrar yazılmasını engeller.
 
-## 4. Yol üstünde bulunan ek temizlik 🔵
+## 4. Yol üstünde bulunan ek temizlik
 
 Bu görevden kaynaklanmayan, ama süiti kırık tutan 2 sorun kapatıldı:
 
@@ -60,7 +69,7 @@ python scripts/streamlit_restart.py
 | Atlanan | 4 | 4 | — |
 | Kodlama ihlali | 3 | **0** | **%100 temiz** 🟢 |
 
-## 6. Bilinen durumlar 🟡
+## 6. Bilinen durumlar
 
 | Konu | Açıklama | Aksiyon |
 |---|---|---|

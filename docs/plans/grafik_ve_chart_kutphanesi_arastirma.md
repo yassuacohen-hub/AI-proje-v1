@@ -19,7 +19,7 @@ Tum kütüphaneler ucretsiz ve açık kaynaklidir (MIT, Apache 2.0, BSD-3, MPL2)
 
 ## Grup 1: Standart/Yuksek Performansli Grafik Kütüphaneleri
 
-### 1. Plotly (UI-CHART-01 — Onaylandı ✅)
+### 1. Plotly (UI-CHART-01 — Onaylandı )
 - **Lisans:** MIT
 - **Render:** SVG + WebGL (scattergl, scatter3d)
 - **Stars:** 18.6k | **Forks:** 2.8k
@@ -187,7 +187,7 @@ Tum kütüphaneler ucretsiz ve açık kaynaklidir (MIT, Apache 2.0, BSD-3, MPL2)
 
 ## UI-CHART-01 Cross-Check Sonucu
 
-### Onaylanan (✅)
+### Onaylanan ()
 - **Plotly** → UI-CHART-01 kararı dogrulanmis. MIT lisans, Streamlit native, 40+ chart type, Python-first. Proje icinde "web_dashboard/charts.py" ile mevcut.
 - **Mermaid** → AI tarafindan üretilen diagramlar icin dogru secim.
 
@@ -198,7 +198,7 @@ Tum kütüphaneler ucretsiz ve açık kaynaklidir (MIT, Apache 2.0, BSD-3, MPL2)
 - **AG Grid** → Sızıntı verileri icin "streamlit-aggrid" ile entegre edilebilir.
 - **Shadcn UI** → UI katmani icin dogru, ancak chart kütüphanesi degil. "streamlit-shadcn-ui" v1.4.0 şimdi Charts component de sunuyor (line, area, bar, pie, radar, radial).
 
-### Reddedilen (❌)
+### Reddedilen ()
 - **Observable Plot** → JavaScript, Streamlit entegrasyonu yok
 - **Altair** → Streamlit destegi zayıf
 - **Bokeh** → Sadece 1M+ noktalar icin

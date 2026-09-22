@@ -127,3 +127,11 @@ kullanir; chart icinde sabit renk kodu yazilmaz.
 - `src/company_master/ui/__pycache__` ve `web_dashboard/tabs/__pycache__`
   calisma ortami artiklaridir.
 - Detay: `data/orchestrator/UI-MODAL-01_bulgular_20260915_cline.md`
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]

@@ -1,7 +1,7 @@
 
 İlgili: [[AGENTS]]
 
-## 2026-09-10 — Y26: API key yönetimi (rotasyon + kullanım metrikleri + tier rate limit) ✅
+## 2026-09-10 — Y26: API key yönetimi (rotasyon + kullanım metrikleri + tier rate limit)
 
 **Backend (`web_app.py`):**
 - `_user_from_api_key()`: `ent_` önekli key → users tablosundan doğrulama
@@ -13,7 +13,7 @@
 
 **Doğrulama (`scripts/test_y26_api_key.mjs`, canlı):** api-usage raporu 200 → rotasyon 200 (yeni ent_...) → DB'de eski key değişti ✓ → yeni key ile /api/kpi 200 ✓ → sayaç `/api/kpi:3` artıyor ✓. Not: public modda (DASH_API_KEY env boş) eski key reddedilemez — prod'da env set edildiğinde 401 devreye girer. Layout 8/8 PASS + 0 exception.
 
-## 2026-09-10 — İşletmem: adres + marka adı, görünür bilgi kartları (tek tuşla kapanır), topbar tier rozeti ✅
+## 2026-09-10 — İşletmem: adres + marka adı, görünür bilgi kartları (tek tuşla kapanır), topbar tier rozeti
 
 **Yeni alanlar:** users tablosuna `trade_name` + `address` (migration 0015 genişletildi, iki DB'ye uygulandı); İşletmem "Marka Adı" ve "Adres" alanları eklenip GET/PUT profile bağlandı.
 
@@ -25,7 +25,7 @@
 
 **Doğrulama:** canlı CDP — marka/adres alanları ✓, 4 bilgi kartı ✓, Notlar toggle HINTS_OFF_OK ✓, tier rozeti render ✓; layout 8/8 PASS + 0 exception; Docker rebuild (css v25 / js v25).
 
-## 2026-09-09 — Şifreli oturum sistemi + İşletmem sekmeleri + bilgi bankası notları ✅
+## 2026-09-09 — Şifreli oturum sistemi + İşletmem sekmeleri + bilgi bankası notları
 
 **Şifre sistemi (PBKDF2):**
 - Migration 0015: users tablosuna `password_hash` + `tax_number` + `phone` (Supabase + yerel PG)
@@ -40,7 +40,7 @@
 
 **Canlı test (Docker 8000, 8/8):** şifreli kayıt 200 → yanlış şifre 401 → şifresiz 401 → admin onay 200 → doğru şifre login 200 → şifre değiştir 200 → eski şifre 401 / yeni şifre 200 → profil PUT VKN+telefon kaydedildi. Bug fix: INSERT bind param ismi (ph→phash). Layout 8/8 PASS, 0 exception.
 
-## 2026-09-09 — Profil zenginleştirme + admin-only görev tahtası + tam üyelik akış testi ✅
+## 2026-09-09 — Profil zenginleştirme + admin-only görev tahtası + tam üyelik akış testi
 
 **Profil geliştirme (çalışan sayısı + sertifikalar):**
 - Migration 0014 (`scripts/migrate_0014_profile_enrich.py`): users tablosuna `employee_range` + `certificates` — Supabase ve yerel PG'ye uygulandı
@@ -54,7 +54,7 @@
 
 **Ürün Kategorileri (Y25) kartının konumu hakkında:** admin overlay'de Üye Onay Paneli'nin altında ayrı karttır — katalog (kayıt formlarındaki ürün kategorileri) eşleştirme kalitesini yönetir; yalnızca admin görür.
 
-## 2026-09-09 — Y22 MATCH v2: eşleştirme yönü seçimi ✅ + admin panel erişim rehberi
+## 2026-09-09 — Y22 MATCH v2: eşleştirme yönü seçimi + admin panel erişim rehberi
 
 **Y22 uygulama:**
 - Backend: `/api/match?yon=tedarikci|musteri|rakip` — `tedarikci` mevcut ileri yön (montaj→yan sanayi); `musteri` **ters yön** (hedef firmanın komşuluk haritası buyer grubuna bakar; `musteri-kanal`/`musteri-uzak` etiketleri — ör. yedek parçacıya 45.20 servis / 46.75 toptan kanalları); `rakip` sadece aynı NACE ana grubu
@@ -68,7 +68,7 @@
 3. Alternatif: sayfaya `#tasks` hash'i ile gir → overlay otomatik açılır
 - Canlı test: login 200 (role=admin, enterprise) → `/api/admin/pending` 200 ✓
 
-## 2026-09-09 — İzleme listesi bug fix + Y25 product_categories admin paneli ✅
+## 2026-09-09 — İzleme listesi bug fix + Y25 product_categories admin paneli
 
 **Bug fix (izleme listesi):** `toggleWatchDetail` `toggleWatch(c.company_id)` çağırıyordu — `company_id` boş firmalarda ekleme hiç yapılmıyor, toast "çıkarıldı" diyordu. `watchKeyOf()` tek anahtar mantığına geçirildi (tüm izleme işlemleri). Canlı CDP regresyon testi eklendi (`check_dashboard_layout.mjs`): localStorage temizle → toggle → toast/buton/set doğrula → geri al. js v19→v20.
 
@@ -78,7 +78,7 @@
 - Doğrulama: py_compile + node --check OK; 8010 ve Docker (8000, imaj rebuild) yeniden başlatıldı; canlı API testi: GET 14 kategori, POST create/toggle/update 200 OK, test kaydı DB'den silindi
 - Not: `company_capabilities` bağlama (kategori ↔ firma) ayrı görev olarak plana alınmalı
 
-## 2026-09-09 — Görev Tahtası admin-only bağımsız sayfa + admin onay paneli ✅
+## 2026-09-09 — Görev Tahtası admin-only bağımsız sayfa + admin onay paneli
 
 **Kullanıcı istekleri:**
 1. Görev Tahtası verilerin arasından kaldırıldı → **Hızlı Erişim** menüsüne taşındı ("Görev Tahtası (Yönetici)")
@@ -99,7 +99,7 @@
 
 **Not:** `örnek@örnek.com` kaydı DB'de yoktu (Unicode e-posta formda başarısız olmuş); `ornek@ornek.com` olarak API ile kaydedilip onaylandı — sayfa yapısını görmek için panelde hazır.
 
-## 2026-09-09 — "İşletmem" bağımsız tam ekran panele taşındı (kullanıcı feedback'i) ✅
+## 2026-09-09 — "İşletmem" bağımsız tam ekran panele taşındı (kullanıcı feedback'i)
 
 **Kullanıcı:** "verilerin arasında duran bir yerde olmaz, bağımsız olsun — navigasyonun ilki veya sağ üstte Yenile'nin orası olabilir; tıklayınca kayıt sayfası açılır."
 
@@ -111,7 +111,7 @@
 
 **Doğrulama (headless Edge):** topbar butonu ✓ · openIsletmem 2 çağrı noktası ✓ · nav ilk sırada İşletmem ✓ · 18 tooltip ✓ · `node --check` OK · cache v10
 
-## 2026-09-09 — "İşletmem" sayfası: profil yönetimi + kredi merkezi ✅
+## 2026-09-09 — "İşletmem" sayfası: profil yönetimi + kredi merkezi
 
 **Kullanıcı kararı:** Üyelik CTA match panelinden ayrıldı → navigasyonda **"İşletmem"** sayfası (fa-briefcase).
 
@@ -133,7 +133,7 @@
 
 **Doğrulama:** headless DOM: isletmem-section ✓ · briefcase nav ✓ · 16 tooltip ✓ · credit-badge slotu ✓ · `node --check` + py_compile OK · cache v9 · Docker rebuild sonrası canlı.
 
-## 2026-09-09 — Monetizasyon MVP: üyelik + kredi sistemi canlıda ✅
+## 2026-09-09 — Monetizasyon MVP: üyelik + kredi sistemi canlıda
 
 **V7 Hybrid Credit modeli uygulandı** (bağlam dokümanlarından birebir):
 
@@ -167,7 +167,7 @@ Pano: **84/102 done** · Docker rebuild sonrası canlı.
 - Ekran görüntüleri yerel `logs/layout-1600.png` ve `logs/layout-390.png`. Test veri/üyelik/kredi değiştirmez.
 
 
-## 2026-09-09 — Layout kök fix: grid satır/kolon atamaları (iç içe geçme + kayma sorunu) ✅
+## 2026-09-09 — Layout kök fix: grid satır/kolon atamaları (iç içe geçme + kayma sorunu)
 
 **Kök neden:** `.app` grid'inde `grid-template-rows` ve elemanlara `grid-row/column` ataması yoktu:
 - Topbar `position:sticky` + grid karışımı → satır hesapları bozuluyordu
@@ -196,7 +196,7 @@ MVP puanı sektör komşuluğu + konum + kalite + kanıt verir; "kim istifade ed
 
 Şu anki `mode=komple` 1+3 karışımı; **yön seçimi** Y22 olarak plana eklendi (buyer profilinde "ne için arıyorsun?" sorusu → skor yorumu değişir).
 
-## 2026-09-09 — UX düzeltmeleri: dropdown dolumu + topbar ortası + nav scroll + canlı Görev Tahtası ✅
+## 2026-09-09 — UX düzeltmeleri: dropdown dolumu + topbar ortası + nav scroll + canlı Görev Tahtası
 
 **Kullanıcı bildirimi 3 sorunun fix'i:**
 
@@ -210,7 +210,7 @@ MVP puanı sektör komşuluğu + konum + kalite + kanıt verir; "kim istifade ed
 
 **Test (headless Edge, virtual-time 12 sn):** dump 181KB · KPI render ✅ · **match-nace options doldu (40 option)** · tasks özet chips=5 ✅ · data-tip=14 ✅ · section id'leri 3/3 ✅ · `node --check` OK · cache-buster v6
 
-## 2026-09-09 — UX/UI paketi: tüm öneriler + hover bilgi notları ✅
+## 2026-09-09 — UX/UI paketi: tüm öneriler + hover bilgi notları
 
 **1. Detay paneli aksiyon butonları:**
 - **"Kimler Uygun?"** (primary) → firmayı buyer profiliyle match panelinde açar (`matchFor()` → NACE ana grubu seçilir → `runMatchFor(company_id)`)
@@ -231,7 +231,7 @@ MVP puanı sektör komşuluğu + konum + kalite + kanıt verir; "kim istifade ed
 
 **Test (headless Edge, gerçek DOM):** dump 172KB · **data-tip=14** · match-section ✓ · fa-handshake=2 · kbd-hint ✓ · tip-left=4 · `node --check` OK · cache-buster v5 · volume mount → rebuild'siz canlıda.
 
-## 2026-09-09 — Match motoru dashboard'a taşındı + UX iyileştirmeleri ✅
+## 2026-09-09 — Match motoru dashboard'a taşındı + UX iyileştirmeleri
 
 **Dashboard "Eşleştirme" paneli (Y19 UI):**
 - Sol menüye **"Eşleştirme"** nav-item (scroll entegrasyonlu) + Sektör Dağılımı üstünde `#match-section` kartı
@@ -247,7 +247,7 @@ MVP puanı sektör komşuluğu + konum + kalite + kanıt verir; "kim istifade ed
 - ✅ "Company Matcher" görevi → **done** (Y19 duplicate)
 - 🔒 "İSKUR Scraper" (web_kazima) → **blocked**: Y21 risk analizi + kullanıcı onayı olmadan ajan başlamayacak (koordinatör kararı panoya işlendi)
 
-## 2026-09-09 — Y19: Smart Matching MVP (V9) canlıda ✅
+## 2026-09-09 — Y19: Smart Matching MVP (V9) canlıda
 
 **`GET /api/match`** — buyer-firma eşleştirme motoru (V9 "kime satis yapilir" MVP'si):
 
@@ -273,7 +273,7 @@ Brief: `workspace/external/BRIEF_Y21_iskur.md`. **Risk uyarıları (koordinatör
 
 Pano: **85/98 done** · Y21 arastirmaci'da.
 
-## 2026-09-09 — Y20: Test kirliliği kökten çözüldü (192 passed) ✅
+## 2026-09-09 — Y20: Test kirliliği kökten çözüldü (192 passed)
 
 **3 kök neden:**
 
@@ -290,7 +290,7 @@ Pano: **85/98 done** · Y21 arastirmaci'da.
 
 Pano: **83/90 done** · Y20 done.
 
-## 2026-09-09 — Y15: Yerel DB index'leri (~8x ek hızlanma) ✅
+## 2026-09-09 — Y15: Yerel DB index'leri (~8x ek hızlanma)
 
 **`scripts/setup_local_indexes.py`** (kalıcı araç — restore sonrası tekrar koşulabilir, idempotent):
 - `pg_trgm` extension + **7 index**: `legal_name_trgm`, `search_text_trgm` (arama), `er_company_id`, `sr_source_id`, `sr_external_id`, `nace`, `score` (join/sıralama)
@@ -303,7 +303,7 @@ Pano: **83/90 done** · Y20 done.
 
 Pano: 82/90 done · Y20 plan'da.
 
-## 2026-09-09 — Faz 3b: Yerel PostgreSQL + Git init ✅
+## 2026-09-09 — Faz 3b: Yerel PostgreSQL + Git init
 
 **Yerel PostgreSQL (Docker, `localdb` profili):**
 - `postgres:16-alpine` → `localhost:5433` (db: `huginn`, şifre: `LOCAL_PG_PASSWORD` env, default `huginn_local_dev`), container `huginndatainsights-db-1` healthy
@@ -320,7 +320,7 @@ Pano: 82/90 done · Y20 plan'da.
 
 **Kullanım:** yerel ortamda çalışmak için `.env.local` dosyasına `DATABASE_URL=postgresql+psycopg://huginn:huginn_local_dev@localhost:5433/huginn` yazmak yeterli. Supabase (üretim) etkilenmedi.
 
-## 2026-09-09 — Docker Faz 2-3: Motor ayağa kalktı, API konteynere taşındı ✅
+## 2026-09-09 — Docker Faz 2-3: Motor ayağa kalktı, API konteynere taşındı
 
 **Faz 2 (motor):** `docker-desktop` WSL dağıtımı Stopped takılıydı → `wsl --shutdown` + Docker Desktop yeniden başlatma ile çözüldü (**Running**). WSL güncellemesi + yeniden başlatma sonrası bu sıfırlama gerekti.
 
@@ -484,7 +484,7 @@ ayni kayit normalize sonrasi TIC. icermiyor.
 
 ---
 
-## 🟦 GÖREV 1 — P4-6: Backup/Restore Otomasyonu
+## GÖREV 1 — P4-6: Backup/Restore Otomasyonu
 **Tarih:** 2026-09-08 | **Sahip:** devops | **Başlangıç durumu:** plan
 
 ### Başlangıç Notu
@@ -516,7 +516,7 @@ ayni kayit normalize sonrasi TIC. icermiyor.
 
 ---
 
-## 🟦 GÖREV 2 — P4-5: Veri Seti Doğrulama ve Duplicate Temizleme
+## GÖREV 2 — P4-5: Veri Seti Doğrulama ve Duplicate Temizleme
 **Tarih:** 2026-09-08 | **Sahip:** data | **Başlangıç durumu:** plan
 
 ### Başlangıç Notu

@@ -21,7 +21,7 @@
 
 ## 3 Katman Sorun Tespiti
 
-### 1️⃣ Vendor & venv Kontaminasyonu (~80 dosya)
+### 1 Vendor & venv Kontaminasyonu (~80 dosya)
 
 **Sorun:** `.venv/Lib/site-packages/` içindeki 3. taraf Python paketleri `README.md`, `LICENSE.md`, `CHANGELOG.md` ile vault taranıyor.
 
@@ -37,7 +37,7 @@
 
 ---
 
-### 2️⃣ "AI proje v1" Duplikası (~200-300 dosya)
+### 2 "AI proje v1" Duplikası (~200-300 dosya)
 
 **Sorun:** Repo kökünde 2 ayrı git branch yönetimi var — `Huginn Data Insights/` ve `worktree klasoru/`. İçeriği birebir. Ek olarak:
 - `Huginn Data Insights/AI proje v1/`
@@ -66,7 +66,7 @@ data/skills/supabase-postgres-best-practices/ ✓ (5x aynı referans)
 
 ---
 
-### 3️⃣ Orphan Nodlar (916 dosya)
+### 3 Orphan Nodlar (916 dosya)
 
 **Sorun:** 916 dosya hiçbir başka nod tarafından link alınmıyor.
 

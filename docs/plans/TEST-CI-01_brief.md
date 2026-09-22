@@ -14,3 +14,12 @@
 ## Teslim
 - Rapor: `data/orchestrator/TEST-CI-01_rapor_<tarih>_cline.md`
 - `python scripts/gorev_kutusu.py teslim --ajan cline --task-id TEST-CI-01`
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/PLAN_STRATEGY_HUB]]
+
+
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]

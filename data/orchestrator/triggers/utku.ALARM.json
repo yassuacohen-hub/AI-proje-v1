@@ -8662,5 +8662,37 @@
     "tetik_sayisi": 82,
     "uyari_tarihi": "2026-09-19T02:34:02",
     "mesaj": "⚠️ ADMIN-MUSTERI-02 (Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi)) — utku 82. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-KILIT-YOL-FIX-01",
+    "gorev_basligi": "[ALTYAPI] kilit yolunu düzelt → file_locks.json (1s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-22T05:54:02",
+    "mesaj": "⚠️ ALTYAPI-KILIT-YOL-FIX-01 ([ALTYAPI] kilit yolunu düzelt → file_locks.json (1s)) — utku 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-PANO-ENCODING-FIX-01",
+    "gorev_basligi": "[ALTYAPI] pano encoding hatalarini duzelt → task_board.json (2s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-22T05:54:02",
+    "mesaj": "⚠️ ALTYAPI-PANO-ENCODING-FIX-01 ([ALTYAPI] pano encoding hatalarini duzelt → task_board.json (2s)) — utku 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "DOC-SIRKET-MASTER-01",
+    "gorev_basligi": "[DOC] Ã…Âirket Master ana belgesi dÃƒÂ¼zelt Ã¢â€ â€™ 01_sirket_master_ana_belgesi.md (3s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-22T05:59:02",
+    "mesaj": "⚠️ DOC-SIRKET-MASTER-01 ([DOC] Ã…Âirket Master ana belgesi dÃƒÂ¼zelt Ã¢â€ â€™ 01_sirket_master_ana_belgesi.md (3s)) — utku 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "DOC-SIRKET-MASTER-01",
+    "gorev_basligi": "[DOC] Ã…Âirket Master ana belgesi dÃƒÂ¼zelt Ã¢â€ â€™ 01_sirket_master_ana_belgesi.md (3s)",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-22T06:04:04",
+    "mesaj": "⚠️ DOC-SIRKET-MASTER-01 ([DOC] Ã…Âirket Master ana belgesi dÃƒÂ¼zelt Ã¢â€ â€™ 01_sirket_master_ana_belgesi.md (3s)) — utku 2. kez uyarıldı; henüz başlamadı."
   }
 ]

@@ -52,3 +52,9 @@ print(m)
 | DB hatasi | PostgreSQL servisini kontrol et |
 | API key hatali | NINEROUTER_KEY .env'de dogrula |
 | Migration hata | migrate.py --dry-run |
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]

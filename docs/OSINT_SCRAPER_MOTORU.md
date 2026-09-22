@@ -120,3 +120,9 @@ python wiki_automation/run_all.py --fix --commit
 - **Frontmatter**: Gerekli alanlar (task_id, sahip, durum, updated_at)
 
 ```
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

@@ -1,6 +1,6 @@
 [[Huginn Data Insights/workspace/external/claude_code/brief_DASHBOARD-01.md]]
 
-# 📊 Dashboard İyileştirme — Kullanıcı Deneyimi Brief'i
+# Dashboard İyileştirme — Kullanıcı Deneyimi Brief'i
 
 **Ajan:** Kilo Code  
 **Odak:** UX, tema, modal yapı, responsive tasarım  
@@ -85,5 +85,11 @@
 - **Modal z-index çakışması:** Tasks overlay `z-index:9998`, modal `10000`; yeni overlay'ler artan sayaçla yönetilmeli.
 
 ---
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
 
 **Brief tamamlandı. Öneriler güncel sistem analizi ve gelecek planı için hazırlanmıştır.**

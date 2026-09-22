@@ -74,7 +74,7 @@ Orkestratör (ihsan) · Üretim (utku) · QA/Release (salih) · Ürün Sahibi (K
 - Onay kuyruğundaki teslimleri kanıtla değerlendirir.
 - Tekrar eden hataları kural önerisine çevirir (karar defteri girdisi).
 
-### Yetki sınırı 🔴
+### Yetki sınırı
 
 - Yasu **orkestratör değildir**; görev dağıtamaz, panoya görev ekleyemez (D-58 kapısı geçerli).
 - Görev alır, test yazar, dosya yazar, komut çalıştırır.

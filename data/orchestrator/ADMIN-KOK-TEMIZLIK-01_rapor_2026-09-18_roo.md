@@ -17,3 +17,13 @@ Yok.
 
 ## Sonraki
 Zincir: `ADMIN-HITAP-01` → `ADMIN-ROO-DENETIM-01`
+
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

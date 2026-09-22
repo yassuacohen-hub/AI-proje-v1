@@ -45,3 +45,13 @@
 - `render_fonksiyonu()` (L668-671) icinde de bir `except Exception: pass` var; brif kapsaminda **degildi**, dokunulmadi. Lazy import hatasini yutuyor → ayri gorev onerisi (**ADMIN-NAV-HAZIR-02**).
 - `web_dashboard/tabs/admin_auth.py` icinde 2 sessiz except (L47-49, L121-123) tespit edildi → ayni takip gorevine dahil edilebilir.
 - **Commit YOK** (sahip karari: commit sabah toplu atilacak).
+
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

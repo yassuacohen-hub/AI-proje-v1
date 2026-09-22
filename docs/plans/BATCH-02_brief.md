@@ -31,3 +31,12 @@
 
 ## Kilit
 `app.py`, `admin_auth.py`, `musteri_yonetimi.py`, `web_app.py`, `tabs/__init__.py` zincir sıralı olduğundan çakışma yok; kilit kilo'da kalır, roo onayda düşürür. cline eşzamanlı REV-BATCH-01 yapıyor — **yalnız okur**, dosyalara dokunmaz.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/PLAN_STRATEGY_HUB]]
+
+
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]

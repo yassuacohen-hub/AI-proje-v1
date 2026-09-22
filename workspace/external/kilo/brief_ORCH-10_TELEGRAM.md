@@ -6,13 +6,13 @@
 
 ---
 
-## 🎯 Amaç & Vizyon
+## Amaç & Vizyon
 Kullanıcının bilgisayar başında olmadan, mobil üzerinden **Telegram'ı tam yetkili bir Orkestratör olarak kullanabilmesini** sağlamak.
 Komutlar son derece kısa, token/zaman tasarruflu ve insan dostu olmalıdır.
 
 ---
 
-## 📋 Eklenecek / Güncellenecek Telegram Komutları
+## Eklenecek / Güncellenecek Telegram Komutları
 
 | Komut | Parametre | Açıklama |
 |---|---|---|
@@ -26,7 +26,7 @@ Komutlar son derece kısa, token/zaman tasarruflu ve insan dostu olmalıdır.
 
 ---
 
-## 🛠️ Teknik Gereksinimler & Yapılacaklar
+## Teknik Gereksinimler & Yapılacaklar
 
 1. **`scripts/telegram_polling.py` Güncellemesi:**
    - `src.company_master.orchestrator` altındaki `task_board`, `trigger`, `nobetci` modüllerini entegre et.
@@ -42,7 +42,7 @@ Komutlar son derece kısa, token/zaman tasarruflu ve insan dostu olmalıdır.
 
 ---
 
-## 📦 Teslim Kriteri
+## Teslim Kriteri
 - `pytest tests/test_telegram_polling.py` hatasız geçmelidir.
 - Ajan işi bitirdiğinde:
   `python scripts/gorev_kutusu.py teslim --ajan kilo --task-id ORCH-10 --ozet "Telegram orkestratör komutları eklendi ve test edildi."`

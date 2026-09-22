@@ -1,6 +1,6 @@
 [[Huginn Data Insights/workspace/external/claude_code/brief_DASHBOARD-01.md]]
 
-# 📊 Dashboard İyileştirme Planı — Fikir İsteniyor
+# Dashboard İyileştirme Planı — Fikir İsteniyor
 
 ## Mevcut Durum
 - **14.000 firma**, Streamlit + HTML dashboard
@@ -81,6 +81,12 @@
 | **Faz 4** | P7-19 SSE + P7-20 admin + tema/responsive | 6-7 saat |
 
 ---
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
 
 **Net karar:** Mevcut sistemde **hazır endpoint'ler var ama kullanımda tutarsızlık ve eksik var**. Yeni şeyler inşa etmek yerine, **mevcut endpoint'leri doğrulayıp, standartlaştırıp, birleştirmek** en hızlı ve en güvenli yol. P7-16 (Firma Detay) ve P7-18 (Filtre) ile başlamak, "mevcut sistemi anlamak" hedefiyle örtüşür.
 

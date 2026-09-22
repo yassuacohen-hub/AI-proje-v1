@@ -1,6 +1,6 @@
 [[Huginn Data Insights/workspace/external/claude_code/brief_DASHBOARD-01.md]]
 
-# 📊 Dashboard İyileştirme — Mimari Perspektif Brief'i
+# Dashboard İyileştirme — Mimari Perspektif Brief'i
 
 **Ajan:** Roo Code  
 **Odak:** Sistem mimarisi, performans, ölçeklenebilirlik  
@@ -200,6 +200,12 @@
 Bu üç adım tamamlandıktan sonra diğer tüm görevler güvenli ve ölçeklenebilir bir altyapı üzerinde yürütülebilir.
 
 ---
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
 
 **Not:** P7-19, P7-20 ve P7-21 dosyaları `gelistirici` tarafından kilitli. Bu görevlerin kod değişiklikleri için önce kilidi açılması veya koordinasyon sağlanması gerekmektedir. Roo Code mimari önerileri sunmaktadır, doğrudan kod yazımı yapmamaktadır.
 

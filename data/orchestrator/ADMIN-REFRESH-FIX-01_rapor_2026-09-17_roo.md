@@ -46,3 +46,13 @@ diske yazılmıyor, sayfa yenilenince eski değere dönüyordu.
   engeller: `st.rerun` `RuntimeError` fırlatacak şekilde taklit edilir; kayıt çağrıları
   rerun'dan önce toplanmış olmalıdır.
 - Commit atılmadı (sahip kararı: commit sabah, toplu).
+
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

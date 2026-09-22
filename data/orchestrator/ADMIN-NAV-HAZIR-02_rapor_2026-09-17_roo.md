@@ -143,6 +143,15 @@ python -m pytest tests/ -k "admin or tabs or sekme" -q -rs
 
 ---
 
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
+
 ## Sonraki Adım
 
 Pano görevü `done` ile kapatılıyor. `musteri_yonetimi.py` L105 SyntaxError bulgusu (**ayrı kapsamda, dokunmadan bırakılıyor**) — GIT-HIJYEN-01 ya da önceki revizyonda not edilmeli.

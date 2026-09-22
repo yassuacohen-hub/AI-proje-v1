@@ -341,3 +341,14 @@ Sahip talimatı (md.5) gereği toplu değerlendirme. Öncelik: A = bu sprint, B 
 | `original_content.txt` (kök) | Silme | roo | C | ÇÖZÜLDÜ 2026-09-16 — `_trash/kok_2026-09-16/`'ya taşındı (git mv) |
 | Codecov token | GitHub secret `CODECOV_TOKEN` | sahip | C | Yoksa yalnız kapsam raporu yüklenmez; CI kırılmaz (`fail_ci_if_error: false`) |
 | Anthropic OIDC 401 | Anthropic Console federasyon kuralı (`fdrl_01N5WF…`) repo/branch eşleşmesi | sahip | C | Yoksa PR'a otomatik Claude yorumu gelmez; CI kırılmaz |
+
+---
+
+## İlgili Nodlar
+
+Bu defter tek başına durmaz; maddeler raporlardan doğar, kararlara ve görevlere dönüşür. Bağlam zinciri:
+
+- [[Huginn Data Insights/indexes/rapor_index]] — **Kaynak**: buradaki maddelerin çıktığı denetim, bulgu ve sprint raporlarının tam envanteri. Yeni bir madde yazmadan önce ilgili raporu bu indeksten bulup okuyun.
+- [[Huginn Data Insights/AI proje v1/V10/00-Home]] — **Proje bağlamı**: V10 vault giriş noktası, klasör haritası ve proje kuralları. Bir maddenin hangi bileşene dokunduğunu buradan izleyin.
+- [[Huginn Data Insights/hubs/REPORTS_ANALYSIS_HUB]] — **Konu merkezi**: rapor ve analiz hub'ı; defterdeki maddelerin konu bazlı karşılıkları burada gruplanır.
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]] — **Ürün yüzeyi**: K- ve U- önekli kullanıcıya yansıyan maddelerin (admin panel, UX, abonelik) belgelendiği hub.

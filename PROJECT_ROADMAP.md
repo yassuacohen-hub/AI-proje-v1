@@ -1,12 +1,10 @@
-[[Huginn Data Insights/AI proje v1/PROJECT_ROADMAP.md]]
-
-# 🚀 Huginn Data Insights - Web Dashboard Roadmap
+# Huginn Data Insights - Web Dashboard Roadmap
 
 > **Hedef**: Local Streamlit dashboard'u production-ready web app'e taşıma
 
 ---
 
-## 📋 Mevcut Durum
+## Mevcut Durum
 
 | Dashboard | Konum | Özellikler | Durum |
 |-----------|-------|------------|-------|
@@ -17,7 +15,7 @@
 
 ---
 
-## 🎯 FAZ 1: Dashboard Birleştirme & UI/UX (1-2 Hafta)
+## FAZ 1: Dashboard Birleştirme & UI/UX (1-2 Hafta)
 
 ### 1.1 Tek Dashboard Oluşturma
 - [ ] `app.py` + `scripts/dashboard.py` → `app/web_dashboard.py`
@@ -37,7 +35,7 @@
 
 ---
 
-## 🐳 FAZ 2: Docker & Production (1 Hafta)
+## FAZ 2: Docker & Production (1 Hafta)
 
 ### 2.1 Docker Optimizasyonu
 - [ ] Multi-stage build, non-root user
@@ -51,6 +49,14 @@
 - [ ] Nginx (reverse proxy + SSL)
 
 ---
+
+## Konu Hub'lari (Sprint FAS-2, 2026-09-21)
+
+- [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]]
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]
 
 ## İlgili Nodlar (GRAPH-FIX-02 Backlink)
 

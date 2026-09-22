@@ -25,3 +25,11 @@
 
 ## Not
 Commit sabah (sahip emri). Kilo zinciri: UI-MIMARI-02 hâlâ `bekliyor`.
+
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

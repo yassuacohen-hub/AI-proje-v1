@@ -43,3 +43,13 @@ Brief: `docs/plans/ADMIN-ROO-01_brief.md` · Durum: **review** (sahip/roo sabah 
 | `kpi_karti` | Tek kart | Tüm sekmelerde ortak KPI dili |
 | `_SESSIZ_YUTMA` | Yutma regex'i | `except…pass` kalıbını yakalar |
 | `sayi_formatla` | Türkçe sayı | `12.345 ₺`, `%12,35`, `None`→"—" |
+
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

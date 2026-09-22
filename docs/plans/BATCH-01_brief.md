@@ -27,3 +27,12 @@
 
 ## Kilit
 `app.py` üç görevde de değişiyor → zincir sıralı olduğundan çakışma yok; kilit kilo'da kalır, roo onayda düşürür.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/PLAN_STRATEGY_HUB]]
+
+
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]

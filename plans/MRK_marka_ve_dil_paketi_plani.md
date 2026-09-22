@@ -38,7 +38,7 @@ src/company_master/i18n/
 └── disa_aktar.py     # messages.js üretici (Huginn/8000 için, ileride)
 ```
 
-### 2.2 Anahtar şeması (ton + katman + seviye) — ✅ SAHİP ONAYLI
+### 2.2 Anahtar şeması (ton + katman + seviye) — SAHİP ONAYLI
 
 İki eksen vardır ve bunlar karıştırılmaz:
 

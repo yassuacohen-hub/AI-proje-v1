@@ -51,3 +51,9 @@ Yapılacak:
 - `python scripts/kodlama_denetim.py` temiz
 - `tests/test_sayfa_iskeleti.py` PageHeader/Section kuralları geçer (MUAF listesine ekleme yapılmaz)
 - Ekran görüntüsü yerine: cline her ekranı `streamlit run app.py` ile açıp "tamamlandığında ne görünecek" cümlesini birebir doğrular
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]

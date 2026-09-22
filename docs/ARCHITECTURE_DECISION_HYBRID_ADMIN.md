@@ -87,3 +87,9 @@ API hatasi durumunda DB'ye gecis:
 - [ ] db_reader.py olustur (read-only connection)
 - [ ] st.session_state ile auth sagla
 - [ ] P7-19b: Musteri SSE'sini FastAPI panosuna ekle (yeni sinyal bildirimleri)
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]

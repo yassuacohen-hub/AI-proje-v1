@@ -1,5 +1,3 @@
-[[Huginn Data Insights/AI proje v1/ANA_KURALLAR.md]]
-
 # Huginn Ticari İstihbarat Platformu — Ana Kurallar
 
 > **Kaynak:** `Huginn Data Insights/AI proje v1/V10/09_kurallar_ve_promptlar/11_unvan_kisaltma_ve_tabela_kurallari`
@@ -239,14 +237,20 @@ Ajan, kritik bulgu tespit etse:
 - Orkestratör devirleri panoda denetler; keyfi devir zinciri (A→B→C→A) tespit edilirse müdahale eder.
 - **Ajan, kendisine ait olmayan görevi devredemez.**
 
-### D-66 Kanıt Zorunluluğu (Orkestratör Dahil)
-**Her görev atamasında `--kanit` zorunludur — orkestratörün kendi atadığı görevler dahil.**
+### D-66 Kanıt Zorunluluğu (Orkestratör ve Ürün Sahibi MUAF)
+**Görev atamasında `--kanit` beklenir; ancak orkestratör ve ürün sahibi bu zorunluluktan muaftır.**
+
+| Kim | Kanıt zorunlu mu |
+|---|---|
+| Ürün sahibi | ❌ Muaf — talebin kendisi kanıttır |
+| Orkestratör | ❌ Muaf — pano yetkisi (D-77) kanıt yerine geçer |
+| Ajanlar | ✅ Zorunlu |
 
 Geçerli kanıt formatları:
 - `dosya:satır` — backlog/rapor/brif referansı (örn. `data/orchestrator/plan.md:15`)
 - `sahip` — ürün sahibinin doğrudan talebi (sözlü/yazılı istek)
 
-Orkestratör muaf değildir. "Kendi kendine görev atama" da kanıt taşır; aksi halde `gorev_at.py` exit 5 ile reddeder.
+`gorev_at.py` D-58 kapısıyla zaten yalnızca orkestratöre açıktır; bu nedenle `--kanit` opsiyoneldir. Verilirse formatı doğrulanır, verilmezse `sahip` kabul edilir.
 
 ### Ortak Dosyalar Yönetimi
 - `task_board.json`, `file_locks.json`, `onay_kuyrugu.json`, `decision_log.jsonl` — **orkestrator sadece okuması ve yönetmesi (yazması).**

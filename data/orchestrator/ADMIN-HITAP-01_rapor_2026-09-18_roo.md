@@ -36,3 +36,13 @@ Kod seviyesinde yeniden adlandırma D-49 kapsamı DEĞİL — ayrı görev gerek
 
 ## Sonraki
 Zincir: `ADMIN-ROO-DENETIM-01`
+
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

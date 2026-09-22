@@ -1,4 +1,4 @@
-# UI Stack Değerlendirmesi — Müşteri Paneli (Huginn 🦅)
+# UI Stack Değerlendirmesi — Müşteri Paneli (Huginn )
 
 > **Revizyon 2 · 2026-09-18** — KAHİN'in kapsam düzeltmesi ve 4 pazarlık dışı kısıtı sonrası baştan yazıldı.
 > Kapsam: **müşteri paneli** (port 8000). Admin paneli (Muninn, 8501) bu dokümanın dışındadır.
@@ -124,7 +124,7 @@ Temel: `docs/UX_ANA_SAYFA_WIREFRAME_2026-09-18.md`. **Sıfırdan tasarım yok**,
 | **A9** | Test: `tests/test_style_css.py` genişletme + HTML yapı testi | 2 sa | 🟢 |
 | | **Toplam** | **~18,5 sa ≈ 2,5 gün** | |
 
-### 🚩 İlk teslim edilebilir dilim
+### İlk teslim edilebilir dilim
 
 > **A1 + A2 + A3 + A4 = ~7,5 saat (yaklaşık 1 gün)**
 
@@ -172,6 +172,12 @@ Bu isim yeni bir ürün mü, yoksa dışarıdan gelen öneride bir yazım hatas�
 | 🔵 | "Stermit" adı projede hiç geçmiyor, netleşmeli | — |
 
 ---
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
 
 ## 6. Onay için karar
 

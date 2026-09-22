@@ -1747,6 +1747,38 @@
       "tests/test_admin_kullanici_ayarlari.py"
     ],
     "teslim_tarihi": "2026-09-20T23:55:06",
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-22T05:56:24"
+  },
+  {
+    "task_id": "DOC-SIRKET-MASTER-01",
+    "ajan": "utku",
+    "ozet": "Belge zaten temiz UTF-8 (0 mojibake/0 NUL/0 BOM, 7/7 wikilink cereyanli). Tek sorun panodaki baslikta cift-kodlama mojibakeydi; temizlendi, gorev_panosu.md yenilendi. kodlama_denetim.py temiz.",
+    "ciktilar": [
+      "data/orchestrator/DOC-SIRKET-MASTER-01_rapor_2026-09-22_uretim.md"
+    ],
+    "teslim_tarihi": "2026-09-22T06:09:41",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-KILIT-YOL-FIX-01",
+    "ajan": "utku",
+    "ozet": "file_locks.json audit: 12 kilitten 9 stale temizlendi (done/iptal gorevler). Kalan 3 legitimate. Kilit mekanizmasi 5 adimla test edildi (ekle/cakisma/lock_birak/batch) - tumu PASS.",
+    "ciktilar": [
+      "data/orchestrator/ALTYAPI-KILIT-YOL-FIX-01_rapor_2026-09-22_uretim.md"
+    ],
+    "teslim_tarihi": "2026-09-22T06:55:01",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-PANO-ENCODING-FIX-01",
+    "ajan": "utku",
+    "ozet": "task_board.json (340 gorev) mojibake taramasi: 91 alan CP-1252->UTF-8 kalintisi tespit edildi, tam cp1252 ters haritasiyla 7 iterasyonda 89 alan duzeltildi, 2 elle duzeltildi. Yedek alindi, atomik replace. kodlama_denetim.py temiz. Gercek mojibake kalan: 0.",
+    "ciktilar": [
+      "data/orchestrator/ALTYAPI-PANO-ENCODING-FIX-01_rapor_2026-09-22_uretim.md"
+    ],
+    "teslim_tarihi": "2026-09-22T07:12:12",
     "durum": "bekliyor"
   }
 ]

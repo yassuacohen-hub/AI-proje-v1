@@ -79,7 +79,7 @@ Aşağıdaki sıra **mevcut kod durumundan** türetilmiştir; belge takvimleri (
 
 > Her madde `dosya:satır` referanslıdır. Çelişkilerde kod esas alınmıştır.
 
-### 🔴 Kırmızı — Blokaj / Acil
+### Kırmızı — Blokaj / Acil
 
 | Kod | Bulgu | Kanıt |
 |-----|-------|-------|
@@ -87,7 +87,7 @@ Aşağıdaki sıra **mevcut kod durumundan** türetilmiştir; belge takvimleri (
 | **B-2** | **Tablo adı çelişkisi.** K1 `companies`, K4 `firms` diyor. **Kod kesin `companies`.** K4 çürütüldü. | `K1:36` vs `K4:109` · Kod: `engine.py:23,93,148,196`, `web_app.py:676` |
 | **B-1** | **Ürün tanımı üç ayrı.** K1 = Ankara firma ana verisi; K4 = Ankara B2B ticari istihbarat; K2 = global OSINT güven platformu. K2'de "Ankara/OSB/B2B" hiç geçmiyor; K1+K4'te OSINT skorları hiç geçmiyor. **Hafifletici:** `V10/11_osint_motoru/` klasörü + K5 (canlı, 2026-09-12) K2'yi ayrı iş kolu olarak meşrulaştırıyor → "rakip ürün" değil, **L3 katmanı**. Yine de resmî birleştirme kararı yok. | `K2:62,66` · `K1:712` · `K4:15-27` · `V10/11_osint_motoru/` · `K5:1-6` |
 
-### 🟡 Sarı — Dikkat
+### Sarı — Dikkat
 
 | Kod | Bulgu | Kanıt |
 |-----|-------|-------|
@@ -101,7 +101,7 @@ Aşağıdaki sıra **mevcut kod durumundan** türetilmiştir; belge takvimleri (
 | **B-12** | **K3 klasör iddiası kısmen çürük.** "src/company_master/ altında `huginn_`/`muninn_`/`odin_` teknik önekleriyle ilerlenir" — gerçekte sadece `odin_ai/` var; `huginn_` veya `muninn_` önekli **hiçbir** modül yok. | `K3:105` vs `src/company_master/` dizin listesi (35 alt modül) |
 | **B-13** | **Scraper boşluğu.** `scrapers/` = `__init__.py` + `kariyernet.py`. K2'nin saydığı ETBİS, MERSİS, Whois, DNS, SSL/TLS, sosyal medya, pazaryeri, Wayback kaynaklarının **hiçbiri** kodda yok → K2 Faz 1 gerçekleşme %0. | `K2:74-93` vs `src/company_master/scrapers/` |
 
-### 🟢 Yeşil — Tamam / Temizlenebilir
+### Yeşil — Tamam / Temizlenebilir
 
 | Kod | Bulgu | Kanıt |
 |-----|-------|-------|
@@ -113,7 +113,7 @@ Aşağıdaki sıra **mevcut kod durumundan** türetilmiştir; belge takvimleri (
 
 ## 4. Koda Karşı Doğrulama
 
-### 4.1 ✅ Doğrulanan İddialar (12)
+### 4.1 Doğrulanan İddialar (12)
 
 | # | Belge iddiası | Kod kanıtı |
 |---|---------------|-----------|
@@ -132,7 +132,7 @@ Aşağıdaki sıra **mevcut kod durumundan** türetilmiştir; belge takvimleri (
 
 **Doğrulama oranı: 12 / 19 = %63**
 
-### 4.2 ❌ Çürütülen İddialar (6)
+### 4.2 Çürütülen İddialar (6)
 
 | # | Belge iddiası | Gerçek kod durumu | Karar |
 |---|---------------|-------------------|-------|

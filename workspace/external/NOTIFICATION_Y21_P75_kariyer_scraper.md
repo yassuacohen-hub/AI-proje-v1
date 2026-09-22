@@ -34,4 +34,10 @@ Y21 araştırması sonucunda İŞKUR e-sub'da **açık API YOK** ve özel sektö
 
 ---
 
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
+
 **Bu değişiklikler P7-6 (Kariyer.net Scraper) ve diğer Job Intelligence kaynaklarını doğrudan etkilemez.** Kariyer.net scraper çalışmaya devam edebilir.

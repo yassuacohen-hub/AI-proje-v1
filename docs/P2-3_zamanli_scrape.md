@@ -50,3 +50,9 @@ Tüm scraper'ları sırayla çalıştırır, loglar, hata durumunda bildirir.
 - `aso_scraper.py` (ASO)
 
 Not: Scraper'lar VPN gerektirebilir; VPN kuralı `10_vpn_kurali.md` geçerlidir.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

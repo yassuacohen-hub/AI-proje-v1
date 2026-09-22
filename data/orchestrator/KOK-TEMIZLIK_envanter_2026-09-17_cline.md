@@ -13,7 +13,7 @@
 Ayrıca kök silinmiş iz: `test_write.txt` (D) — test artifact, commit'te düşecektir.
 Eski kalıntı klasörleri (`data/_tmp/`, `workspace/`, `plans/`) bu envanterin kapsamı dışı tutuldu (meşru çalışma alanları).
 
-## Üst dizin (`C:\Huginn Data Projesi\`) — TEMİZ ✓
+## Üst dizin (`C:\Huginn Data Projesi\`) — TEMİZ
 roo ELESTIRI-01 tetiğinde geçen üst-dizin kalıntı listesi (`fix_breadcrumb*.py`, `fix_extras*.py`, `fix_mvp_kul_02.py`, `insert_stcaption.py`, ...) **artık yok** — temizlenmiş. Bu madde envanteri ile kapatılabilir.
 
 ## Öneri (roo karar)

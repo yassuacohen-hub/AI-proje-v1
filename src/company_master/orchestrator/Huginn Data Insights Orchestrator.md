@@ -4,14 +4,14 @@
 
 Bu modül, çoklu ajan koordinasyonu, görev yönetimi, dosya kilitleme ve senkronizasyon sistemini sağlar.
 
-## 🎯 Amaç
+## Amaç
 
 - **Merkezi görev yönetimi**: Tüm ajanlar (iç + harici) tek bir panodan görev alır
 - **Çakışma önleme**: Dosya kilitleme mekanizması ile aynı dosyada paralel değişiklik engellenir
 - **Otomatik senkronizasyon**: `AGENT_SYNC.md` dosyası otomatik olarak güncellenir
 - **Hata yönetimi**: Retry mekanizması, context decay ve error ledger
 
-## 📦 Bileşenler
+## Bileşenler
 
 ### Temel Modüller
 
@@ -36,7 +36,7 @@ Bu modül, çoklu ajan koordinasyonu, görev yönetimi, dosya kilitleme ve senkr
 - `tests/orchestrator/test_task_board.py` — Görev panosu CRUD
 - `tests/orchestrator/test_workspace.py` — Workspace izolasyonu
 
-## 🔄 Ana Akışlar
+## Ana Akışlar
 
 ### 1. Görev Dağıtımı (`dispatch`)
 
@@ -106,7 +106,7 @@ aktif_locklar = locklar()
 # {"src/company_master/orchestrator/README.md": {"sahip": "mimar", "task_id": "DOCS-01"}}
 ```
 
-## 📊 Veri Modelleri
+## Veri Modelleri
 
 ### TaskStatus Enum
 ```python
@@ -156,7 +156,7 @@ class Brief:
     run_mode: str | None  # "orchestrator" veya "agent"
 ```
 
-## 🤖 Desteklenen Ajanlar
+## Desteklenen Ajanlar
 
 | Agent ID | Display Name | Task Type | Workspace |
 |----------|--------------|-----------|-----------|
@@ -166,7 +166,7 @@ class Brief:
 | `roo_code` | Roo Code | code_review | `workspace/external/roo_code` |
 | `harici_ajan` | Harici Ajan (Inkling) | research | `workspace/external/harici_ajan` |
 
-## 🔐 Güvenlik ve Kısıtlar
+## Güvenlik ve Kısıtlar
 
 ### Workspace İzolasyonu
 - Harici ajanlar **yalnızca** `workspace/external/{agent_id}/` dizininde çalışabilir
@@ -183,7 +183,7 @@ class Brief:
 - `.env` dosyaları görev context'i dışında tutulur
 - Hardcoded secret'lar CI pipeline'da reddedilir
 
-## 📝 Quick Task Wrapper
+## Quick Task Wrapper
 
 `scripts/quick_task.py` ile hızlı görev oluşturma:
 
@@ -213,7 +213,7 @@ result = quick_task(
 )
 ```
 
-## 🔄 Koordinasyon Protokolleri
+## Koordinasyon Protokolleri
 
 ### 1. Task Board (`task_board.json`)
 - **Tek doğru kaynak**: Tüm görevler burada tanımlı
@@ -235,7 +235,7 @@ result = quick_task(
 - Otomatik üretilir (`sync.agent_sync_yaz()`)
 - **Elle büyük yeniden yazım yapmayın**
 
-## 🧪 Test Çalıştırma
+## Test Çalıştırma
 
 ```bash
 # Tüm orchestrator testleri
@@ -248,7 +248,7 @@ python -m pytest tests/orchestrator/test_dispatch_review.py::test_dispatch_revie
 python -m pytest tests/orchestrator/ --cov=src/company_master/orchestrator --cov-report=html
 ```
 
-## 📚 Örnek Kullanım Senaryoları
+## Örnek Kullanım Senaryoları
 
 ### Senaryo 1: İç Ajan Görevi
 ```python
@@ -293,7 +293,7 @@ python -m src.company_master.orchestrator.cli dispatch workspace/external/claude
 python -m src.company_master.orchestrator.cli review RESEARCH-01
 ```
 
-## 🐛 Troubleshooting
+## Troubleshooting
 
 ### Hata: `PermissionError: Dosya kilitli`
 **Neden:** Başka bir ajan aynı dosyada çalışıyor
@@ -307,14 +307,14 @@ python -m src.company_master.orchestrator.cli review RESEARCH-01
 **Neden:** Brief JSON'unda zorunlu alanlar eksik
 **Çözüm:** `agent_id`, `task_id`, `task_type`, `title`, `brief_path` alanlarını kontrol et
 
-## 📖 İlgili Dokümanlar
+## İlgili Dokümanlar
 
 - [[AI proje v1/V10/08-Ajanlar/07_harici_ajan_protokolu]] — Harici ajan entegrasyon kuralları
 - [[AI proje v1/V10/08-Ajanlar/08_harici_ajan_gorev_onerileri]] — Görev önerileri
 - [[AGENT_SYNC]] — Canlı durum ve hata kayıtları
 - Ana bağlam: `AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md`
 
-## 📞 Destek
+## Destek
 
 Sorular için:
 1. `AGENT_SYNC.md` → "ErrorLedger" bölümünü kontrol et

@@ -46,3 +46,13 @@ ADMIN-ROO-DENETIM-01 "kilo teslimlerini onayla" diyordu ama girdisi yoktu; zinci
 ## Sonraki
 - kilo sabah `ADMIN-HATA-01` → `ADMIN-HATA-02` zincirini almalı.
 - D-1/D-2/D-3 için ayrı görev: `ORCH-TETIK-DEDUPE-01` (öneri, henüz panoda değil).
+
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

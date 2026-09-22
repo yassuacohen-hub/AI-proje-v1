@@ -545,3 +545,6 @@
 {"timestamp": "2026-09-18T21:21:09.612524+00:00", "error_type": "validation_error", "error": "missing actor_run_id", "payload": {}}
 {"timestamp": "2026-09-18T21:21:13.792816+00:00", "error_type": "auth_error", "error": "invalid secret", "payload": {"eventType": "ACTOR.RUN.SUCCEEDED", "actorRunId": "run-abc123", "actorId": "ziyrak/kariyer-scraper", "resource": {"id": "run-abc123", "actorId": "ziyrak/kariyer-scraper", "defaultDatasetId": "ds-xyz789", "status": "SUCCEEDED"}}}
 {"timestamp": "2026-09-18T21:21:13.822564+00:00", "error_type": "validation_error", "error": "missing actor_run_id", "payload": {"eventType": "ACTOR.RUN.SUCCEEDED"}}
+{"timestamp": "2026-09-22T03:19:03.933764+00:00", "error_type": "validation_error", "error": "missing actor_run_id", "payload": {}}
+{"timestamp": "2026-09-22T03:19:05.886003+00:00", "error_type": "auth_error", "error": "invalid secret", "payload": {"eventType": "ACTOR.RUN.SUCCEEDED", "actorRunId": "run-abc123", "actorId": "ziyrak/kariyer-scraper", "resource": {"id": "run-abc123", "actorId": "ziyrak/kariyer-scraper", "defaultDatasetId": "ds-xyz789", "status": "SUCCEEDED"}}}
+{"timestamp": "2026-09-22T03:19:05.915722+00:00", "error_type": "validation_error", "error": "missing actor_run_id", "payload": {"eventType": "ACTOR.RUN.SUCCEEDED"}}

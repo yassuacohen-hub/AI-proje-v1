@@ -48,3 +48,12 @@
 - Fixture'ları `session` scope'a taşıyıp izolasyonu gevşetmek.
 - Kök neden yerine `time.sleep` / retry ile testi "yeşil"e boyamak.
 - MARKA-REVIZE-01B ile aynı diff'te çalışmak (ayrı teslim, ayrı özet).
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/PLAN_STRATEGY_HUB]]
+
+
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]

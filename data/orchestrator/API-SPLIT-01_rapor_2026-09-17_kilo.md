@@ -7,13 +7,13 @@
 
 ## Yapılanlar
 
-### normalize.py — Çıkarıldı ✅
+### normalize.py — Çıkarıldı
 - **Dosya:** `src/company_master/api/core/normalize.py` (574 satır)
 - **İçerik:** `_tr_*, _mask_*, apply_kvkk_mask, normalize_company_name, normalize_company, extract_trade_name, tr_normalize`
 - **DASH_MASK_PII** tanımları bu modüle taşındı
 - **Düzeltme:** normalize.py'de eksik olan `DASH_MASK_PII` tanımı eklendi (test kırılması nedeni)
 
-### web_app.py — İthalat Eklendi ✅
+### web_app.py — İthalat Eklendi
 - Lines 72-77: `from src.company_master.api.core.normalize import (...)`
 - `normalize_company_name`, `normalize_company` ve diğer fonksiyonlar re-export ediliyor
 - 3795 test geçti, 4 failed (kilitle pré-eksist), 5 skipped

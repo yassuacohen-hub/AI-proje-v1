@@ -22,7 +22,7 @@ Motivasyon: V10 yönetim yapısında yetenekler çeşitli raporlara (görev pano
 
 ---
 
-## 2. Mevcut Yetenekler (Doğrulanmış ✅)
+## 2. Mevcut Yetenekler (Doğrulanmış )
 
 > Doğrulanmış = kod + birim test + (uygunsa) canlı çağrı ile kanıtlanmış.
 > Canlı doğrulamalar: 2026-09-11 (9R-03) ve 2026-09-12 (9R-04: web_fetch/web_search), hem lokal (`http://localhost:20128`) hem tünel (`https://r3qmzpf.abc-tunnel.us`) uçlarıyla yapıldı.
@@ -267,3 +267,9 @@ Motivasyon: V10 yönetim yapısında yetenekler çeşitli raporlara (görev pano
 4. **Öncelik onayı** — ÖN-1 (semantik NACE) mi ÖN-4 (büyüme sinyali) mi önce? İkisi de aynı veriyle beslenebilir.
 5. **Dedup stratejisi** — global dedup hangi kaynak birleşimiyle başlatılmalı (OSTIM + ASO + İvedik)?
 6. **Güncelleme takvimi sorumlusu** — kataloğun bakımı haftalık kimde olacak (koordinatör ajan önerisi: koordinatör + Ürün Sahibi onayı).
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

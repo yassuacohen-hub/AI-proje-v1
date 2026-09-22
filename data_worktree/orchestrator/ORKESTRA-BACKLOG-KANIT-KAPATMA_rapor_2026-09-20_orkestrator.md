@@ -47,13 +47,19 @@ if kapi:
 Diğer ajanlar exit 4 alır. Sadece aktif orkestratör (ihsan) `gorev_at.py at` çalıştırabilir.
 
 ### Soru 3: "Orkestratör de aynı kanıtı taşır mı?"
-**Yanıt:** Evet. D-66 zorunluluğu **herkese uygulanır**, orkestratör muaf değildir.
+**Yanıt:** Hayır. **Orkestratör ve ürün sahibi D-66'dan MUAFTIR.**
 
-Geçerli kanıt formatları:
+| Kim | Kanıt zorunlu mu |
+|---|---|
+| Ürün sahibi | ❌ Muaf — talebin kendisi kanıttır |
+| Orkestratör | ❌ Muaf — pano yetkisi (D-77) kanıt yerine geçer |
+| Ajanlar | ✅ Zorunlu |
+
+Geçerli kanıt formatları (verildiğinde):
 - `dosya:satır` — backlog/rapor/brif referansı (örn. `data/orchestrator/plan.md:15`)
 - `sahip` — ürün sahibinin doğrudan talebi (sözlü/yazılı istek)
 
-Orkestratör "kendi kendine görev atarken" da kanıt gerekli; aksi halde exit 5 (D-66 hata).
+`gorev_at.py` D-58 kapısıyla zaten yalnızca orkestratöre açık; bu yüzden `--kanit` opsiyoneldir, boş bırakılırsa `sahip` kabul edilir.
 
 ---
 
@@ -66,9 +72,9 @@ Orkestratör "kendi kendine görev atarken" da kanıt gerekli; aksi halde exit 5
    - ATAMA yasak (D-58)
    - Devir: sadece kendi görev + `gorev_kutusu.py devret --task-id --yeni-ajan --neden`
 
-2. **D-66 Kanıt Zorunluluğu (Orkestratör Dahil)**
+2. **D-66 Kanıt Zorunluluğu (Orkestratör ve Ürün Sahibi MUAF)**
    - Geçerli kanıt: `dosya:satır` veya `sahip`
-   - Orkestratör muaf değil
+   - Orkestratör + ürün sahibi muaf; zorunluluk ajanlara uygulanır
 
 3. **Ortak Dosyalar Yönetimi** (mevcut, güncellendi)
 

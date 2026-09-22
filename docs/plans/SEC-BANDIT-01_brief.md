@@ -19,3 +19,12 @@
 - `python scripts/sec_bandit.py --esik HIGH` exit 0.
 - Tam süit yeşil; kodlama_denetim temiz.
 - Rapor: `data/orchestrator/SEC-BANDIT-01_rapor_<tarih>_kilo.md` (önce/sonra bulgu sayıları, düzeltilen dosya:satır).
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/PLAN_STRATEGY_HUB]]
+
+
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]

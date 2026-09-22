@@ -24,3 +24,13 @@
 ## Not
 - Commit SABAH (sahip emri).
 - Backlog aday: `admin_search.py` (166 satır, tek test) aynı kalıba çekilebilir.
+
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

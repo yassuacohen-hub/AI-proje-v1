@@ -46,3 +46,9 @@ Doğrulama: `scripts/proje_siniri_denetim.py` → TEMİZ; `tests/orchestrator te
 2. `powershell "Get-Process | Sort-Object CPU -Descending | Select -First 8 Name,Id,CPU,WS"` → CPU tüketen süreç ext host mu, node (9router) mu, python mu?
 3. Beyaz ekran Streamlit'te ise: `fileWatcherType = "none"` nedeniyle eski bundle; tarayıcıda R / sayfa yenile.
 4. Beyaz ekran Cursor'da ise: ext host bellek; eklenti listesini uygula, sonra yeniden başlat.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]

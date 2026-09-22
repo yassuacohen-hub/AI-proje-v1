@@ -1,6 +1,6 @@
 [[Huginn Data Insights/workspace/external/claude_code/brief_DASHBOARD-01.md]]
 
-# 📊 Dashboard İyiveştirme Planı — Fikir İsteniyor
+# Dashboard İyiveştirme Planı — Fikir İsteniyor
 
 ## Mevcut Durum
 - **14.000 firma**, Streamlit + HTML dashboard
@@ -96,3 +96,10 @@
 ### Riskler
 - [Risk] — [Çözüm önerisi]
 ```
+
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

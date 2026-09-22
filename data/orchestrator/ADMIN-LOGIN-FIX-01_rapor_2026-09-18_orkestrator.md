@@ -74,3 +74,13 @@ python scripts/marka_denetim.py    -> Marka denetimi: temiz
 - `tests/test_sec_auth_01.py` — reset akışı yalıtımı (regresyon fix)
 - `scripts/admin_giris_dogrula.py` — canlı doğrulama aracı (önceki turda eklendi)
 - DB: `yassuacohen@gmail.com` şifre hash'i güncellendi (dosya değişikliği değil)
+
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

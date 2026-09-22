@@ -5,7 +5,7 @@ Görev panosu ve tetik sisteminin durumu kontrol edildi. **Kilo görevleri yok**
 
 ---
 
-## 1. Kilo'nun Bildirdiği 6 Görev — 🔴 BULGU
+## 1. Kilo'nun Bildirdiği 6 Görev — BULGU
 
 **Beklenen:** `kilo` sahipliğinde 6 görev
 **Gerçek:** 0 görev (sahip="kilo")
@@ -20,7 +20,7 @@ Kilo'nun iş almadığı, yalnızca tetikleri loglandığı görülüyor. Panoda
 
 ---
 
-## 2. Salih Durumu — 🟡 BULGU
+## 2. Salih Durumu — BULGU
 
 **Panodaki görev:** 1 adet
 - `TEST-MERVE-KAPSAM-01` | plan | P2
@@ -39,7 +39,7 @@ Salih tetik alması için `AJAN_TAKMA_ADLAR` düzeltilmeli veya `_tetikleri_yaz(
 
 ---
 
-## 3. Utku Durumu — 🟢 BAŞARILI
+## 3. Utku Durumu — BAŞARILI
 
 **Panodaki görevler:** 47 adet
 - 41 tane `done`

@@ -45,3 +45,11 @@ collection`). Geçici olarak `--ignore=tests/test_mcp_transport.py` ile geçildi
 - `docker-compose.yml` içindeki `db` servisi `profiles: ["localdb"]` ile
   varsayılan `docker compose up` sırasında **açılmaz**. Gerçek DB uzakta,
   `.env` `DATABASE_URL` üzerinden. Yerel `db` konteyneri yalnız dev/test.
+
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

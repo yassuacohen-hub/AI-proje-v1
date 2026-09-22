@@ -53,3 +53,13 @@
 - ADMIN-ROO-01 (review): admin sekmeleri hata/bos-durum standardi + canli/pazarlama/paketler kpi_karti — roo ceza görevi
 - ADMIN-HATA-01: Hata Yonetimi sekmesi
 - ADMIN-KPI-KART-02: Kalan st.metric → kpi_karti (webhook_monitor, tenant_health) + AST testi
+
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

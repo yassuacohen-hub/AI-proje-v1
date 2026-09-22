@@ -13,7 +13,7 @@
 
 ## Tur 1 — Teknik Gerçeklik
 
-### 1.1 Doğrulanan iddialar (✅ kanıt diskte)
+### 1.1 Doğrulanan iddialar ( kanıt diskte)
 
 | # | Plandaki iddia | Kanıt | Durum |
 |---|---|---|---|
@@ -27,7 +27,7 @@
 | T-08 | API istemcisinde retry/backoff yok | `scripts/dash04_api_client.py:81-113` — `post_api(..., timeout=10)`, tek deneme, yeniden deneme yok | ✅ Doğrulandı |
 | T-09 | Cache tüm oturumlar arasında paylaşımlı | ~30 adet `@st.cache_data` (ttl 10-300 sn) — `admin_kpi.py` 8 adet, `admin_quality.py` 5, `admin_performance.py` 3, `ana_kontrol.py` 3, `admin_audit.py` 3, `webhook_monitor.py` 3, `pazarlama.py` 4, `paketler.py` 3, diğerleri | ✅ Doğrulandı |
 
-### 1.2 Çürütülen / değişen iddialar (❌ plan yanlıştı)
+### 1.2 Çürütülen / değişen iddialar ( plan yanlıştı)
 
 | # | Plandaki iddia | Gerçek | Etki |
 |---|---|---|---|
@@ -105,7 +105,7 @@ Tur 1 bulguları girdi alındı. KAHİN'in saydığı 11 başlık ayrı ayrı el
 
 ## Tur 3 — Kabul Kararı
 
-### Karar: 🟡 **ŞARTLI KABUL**
+### Karar: **ŞARTLI KABUL**
 
 Plan doğru sorunu buluyor ve öncelik sırası büyük ölçüde doğru. Ama iki kusuru var: (a) dört P0 gerçeği kaçırmış, (b) altı iddiayı diskte doğrulamadan yazmış. Bu haliyle uygulanırsa Faz 1'de takılır, çünkü Docker'da panel zaten ayağa kalkmıyor.
 
@@ -218,3 +218,9 @@ Planın beş iddiası diskte doğrulanınca yanlış çıktı; dört yeni acil s
 İlk otuz dakikalık iş (compose'a iki satır) yapılmadan geri kalan hiçbir şey test edilemez.
 
 **Plan doğruluk oranı:** 9 iddia doğrulandı, 6 iddia çürütüldü, 4 konu hiç görülmemiş → **%47 isabet**.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]

@@ -20,3 +20,8 @@ Dashboard ve mobil uygulama uretimi bu cerceve + `docs/brand/brand.md` + `design
 
 ## Mobil uygulama
 - Ayni token seti (dark-first); dokunma hedefleri ve listeler spacing olcegiyle (sm/md/lg/xl); marka kimligi birebir korunur.
+
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

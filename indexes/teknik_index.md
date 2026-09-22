@@ -5,6 +5,8 @@
 **Dosya Sayısı**: 96
 **Oluşturulma**: 2026-09-21T10:45:46.591737Z
 
+**Bağlantılar**: [[Huginn Data Insights/indexes/rapor_index]] · [[Huginn Data Insights/hubs/REPORTS_ANALYSIS_HUB]]
+
 ## Bağlı Dosyalar
 
 - [[Huginn Data Insights/AI proje v1/workspace/external/copilot/output/scripts/README]]

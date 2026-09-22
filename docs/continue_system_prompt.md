@@ -1,4 +1,4 @@
-# Continue IDE — System Message ("Merve" 👩‍💻)
+# Continue IDE — System Message ("Merve" )
 
 > Onay bekliyor. Onaylanırsa `docs/continue_config.json` kök seviyesine `"systemMessage"` olarak işlenir ve
 > `python scripts/continue_config_kur.py` dosyayı `~/.continue/config.json`'a otomatik yazar.

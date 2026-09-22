@@ -177,7 +177,7 @@ Yeni renk **eklenmez**. `src/company_master/ui/tokens.py`:
 - Hata mesajı alanın **hemen altında**, yalnız renkle değil metinle de belli
 - Kaydet hepsi-ya-hiç davranışı korunur
 
-### 3.5 Güvenlik kısıtı 🔴
+### 3.5 Güvenlik kısıtı
 
 - Mevcut şifre doğrulaması **zorunlu** kalır — kaldırılmaz
 - Misafir kimlikte Güvenlik bölümü **hiç çizilmez** (form bile oluşturulmaz)
@@ -227,3 +227,11 @@ Yeni renk **eklenmez**. `src/company_master/ui/tokens.py`:
 ### Belgeyi açma
 
 `Ctrl+P` → `UX_AYARLAR_SAYFA` → `Enter` → `Ctrl+Shift+V`
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]

@@ -224,3 +224,11 @@ Karar KAHİN'de: "Figma'yı yine de kur" derse görev açılır, itiraz kaydı d
 
 **Onay verilirse:** 6 adımlık uygulama başlar, ekran testleriyle teslim edilir.
 **Onay verilmezse:** hangi şerit değişsin denirse wireframe güncellenir, kod yazılmaz.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]

@@ -68,3 +68,9 @@ düğme **"Claim"**. Bot yok. Yanlış terim sahibi yanlış ekrana gönderir.
 
 Sahip istediği zaman **"API araştırma planı raporu"** ister; rapor dosyası bu yüzden
 her zaman güncel, tarihli ve kanıtlı tutulur.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]

@@ -135,9 +135,17 @@ def _tetikleri_oku(ajan: str, data_dir: Path | None = None) -> list[dict[str, An
 def _tetikleri_yaz(
     kayitlar: list[dict[str, Any]], ajan: str, data_dir: Path | None = None
 ) -> None:
+    # Dedup by (task_id, durum) — ponytail: future=full rebuild if scaling needs it
+    seen: set[tuple] = set()
+    dedupe = []
+    for k in kayitlar:
+        key = (k["task_id"], k["durum"])
+        if key not in seen:
+            seen.add(key)
+            dedupe.append(k)
     yol = _tetik_yolu(ajan, data_dir)
     yol.parent.mkdir(parents=True, exist_ok=True)
-    icerik = "".join(json.dumps(k, ensure_ascii=False) + "\n" for k in kayitlar)
+    icerik = "".join(json.dumps(k, ensure_ascii=False) + "\n" for k in dedupe)
     tb.atomic_write_text(yol, icerik)
 
 

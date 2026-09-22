@@ -114,6 +114,12 @@
 
 ---
 
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
+
 ## Kurallar
 - Kullanıcı (sahip) ve Ürün Sahibi ile iletişim **Türkçe** olmalı
 - Sistem/yazılım dokümanları İngilizce olabilir

@@ -34,4 +34,10 @@ Y21 araştırması sonucunda İŞKUR e-sub'da **açık API YOK** ve özel sektö
 
 ---
 
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
+
 **Bu değişiklikler P7-5 (İSKUR Scraper) görevini doğrudan etkiler.** İleride authenticated erişim sağlanırsa P7-5 tekrar aktif hale getirilecek ve firma-level matching moduna dönecek.

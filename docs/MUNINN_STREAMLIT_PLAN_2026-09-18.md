@@ -1,6 +1,6 @@
 İlgili: [[PROJECT_ROADMAP]]
 
-# Muninn 🛡️ Admin Paneli — Streamlit Planı (2026-09-18)
+# Muninn Admin Paneli — Streamlit Planı (2026-09-18)
 
 > **Format:** İlk tur plan → **İkinci Tur Revizyonu** (6 zorunlu başlık) → **Fark listesi** → KAHİN özeti.
 > **Bu turda kod yazılmadı, paket kurulmadı.** Tüm bulgular diskteki dosyalardan okunarak doğrulandı.
@@ -104,7 +104,7 @@ A1–A9 adım tablosu (`index.html` / `style.css` / `app.js`) **tamamen düşer*
 | **U-03** | Admin kendi ayarlarını menüden yapıyor; KAHİN "sadece sağ-alt popover'dan" dedi. İki yol açık kalırsa kural bozulur. | 2 | 2 | 4 🟡 | Ayarlar hem menüde hem popover'da | Menüden "Ayarlar" kaldırılır **aynı** fazda popover tamamlanır. Tek fazda, yarım bırakılmaz. |
 | **U-04** | Wireframe onayı alınmadan kod yazılırsa yeniden yapım riski. | 2 | 3 | **6 🔴** | Ekran hazır, KAHİN "böyle değildi" diyor | Her sayfa için wireframe zorunlu (mevcut kural). İki wireframe zaten onay bekliyor. |
 
-### A.4 🔶 Streamlit'e Özgü Riskler (KAHİN'in ayrı başlık talebi)
+### A.4 Streamlit'e Özgü Riskler (KAHİN'in ayrı başlık talebi)
 
 | Kod | Konu | Streamlit'in gerçek davranışı | Bizdeki durum | Risk | Aksiyon |
 |---|---|---|---|:-:|---|
@@ -170,7 +170,7 @@ Her satır: **çakışma noktası → önleyici kural (sınır / sahiplik / isim
 
 ## §C — Verimlilik (YAGNI)
 
-### C.1 🗑️ Atılacak işler (yapılmayacak)
+### C.1 Atılacak işler (yapılmayacak)
 
 | İş | Neden atılıyor |
 |---|---|
@@ -186,7 +186,7 @@ Her satır: **çakışma noktası → önleyici kural (sınır / sahiplik / isim
 
 **9 kalem atıldı.**
 
-### C.2 ♻️ Mevcut kod / stdlib / kurulu bağımlılıkla karşılanan
+### C.2 Mevcut kod / stdlib / kurulu bağımlılıkla karşılanan
 
 | İhtiyaç | Mevcut karşılığı |
 |---|---|
@@ -206,7 +206,7 @@ Her satır: **çakışma noktası → önleyici kural (sınır / sahiplik / isim
 
 **13 ihtiyacın 13'ü mevcut araçlarla karşılanıyor.**
 
-### C.3 ✍️ Gerçekten yeni kod isteyen
+### C.3 Gerçekten yeni kod isteyen
 
 | İş | Tahmini boyut | Neden kaçınılmaz |
 |---|---|---|
@@ -219,7 +219,7 @@ Her satır: **çakışma noktası → önleyici kural (sınır / sahiplik / isim
 | Webhook kartı gerçek veriye bağlama (U-01) | ~20 satır | Placeholder yerine mevcut uç |
 | Testler | ~150 satır | Test edilmemiş iş teslim edilmez |
 
-### C.4 📦 Yeni bağımlılık
+### C.4 Yeni bağımlılık
 
 **Önerilen yeni bağımlılık: 🟢 YOK (0 adet, 0 ₺).**
 Gerekçe/alternatif tablosu doldurulmasına gerek kalmadı — C.2'de 13/13 karşılandı.
@@ -230,7 +230,7 @@ Gerekçe/alternatif tablosu doldurulmasına gerek kalmadı — C.2'de 13/13 kar�
 
 Süreler saat cinsinden: **İyimser / Beklenen / Kötümser.**
 
-### Faz 0 — Doğruluk Onarımı (🔴 her şeyden önce)
+### Faz 0 — Doğruluk Onarımı ( her şeyden önce)
 
 **Neden ilk:** Görsel iş, güvenli olmayan bir panelin üstüne yapılırsa yanlış güven üretir. 4 adet skor-9 riskin 3'ü burada kapanır.
 
@@ -347,7 +347,7 @@ Süreler saat cinsinden: **İyimser / Beklenen / Kötümser.**
 
 > ⚠️ İlk tur "~18,5 sa ≈ 2,5 gün" diyordu. Gerçekçi beklenen **41,5 sa ≈ 5 gün** — **%124 sapma.** Sebep: ilk tur yalnız görsel işi sayıyordu; Faz 0 ve testler hesapta yoktu.
 
-### D.2 🚩 İlk Teslim Dilimi Önerisi
+### D.2 İlk Teslim Dilimi Önerisi
 
 **Faz 0 + Faz 1 = 4 / 7,5 / 15,5 sa ≈ 1 gün.**
 Çıktı: panel **güvenli** (token'sız içerik sızmıyor), **çıkış doğru çalışıyor**, Docker'da **giriş çalışıyor**. Görsel değişiklik yok ama 4 skor-9 riskin 3'ü kapanıyor.
@@ -367,7 +367,7 @@ Süreler saat cinsinden: **İyimser / Beklenen / Kötümser.**
 | 4 | `git revert` — yeni dosya sil + `SECTIONS` satırı geri | ~10 dk | Yok |
 | 5 | `git revert` — tek dosya | ~5 dk | Yok |
 
-### E.2 🚪 Tek Yönlü Kapılar (geri dönülemez / pahalı)
+### E.2 Tek Yönlü Kapılar (geri dönülemez / pahalı)
 
 | # | Karar | Neden tek yönlü | Bu planda? |
 |---|---|---|---|
@@ -460,3 +460,9 @@ Panel **görsel olarak değil, doğruluk olarak** bozuk: giriş kapısı kapanm�
 ---
 
 **Not:** Bu dokümanda kod yazılmadı, paket kurulmadı, hiçbir dosya değiştirilmedi. Tüm bulgular `app.py`, `docker-compose.yml`, `web_dashboard/tabs/`, `web_app.py`, `package.json` dosyalarından **okunarak** doğrulandı.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]

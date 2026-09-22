@@ -176,3 +176,11 @@ Sidebar iki kategoriye ayrilmali: Is ve Sistem. Collapsed durumda ikon + tooltip
 - CSS syntax kontrolü + light/dark theme token coverage.
 - Responsive (Playwright smoke, Faz 2'de tam).
 - Kritik aksiyonlar (admin approvals vb.) Faz 2'de audit trail ile.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]

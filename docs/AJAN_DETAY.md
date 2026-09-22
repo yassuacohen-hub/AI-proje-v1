@@ -232,8 +232,8 @@ You are a Senior Backend Architect specializing in Python 3.11+, FastAPI, Postgr
 - **MongoDB:** Safely handle BSON `ObjectId` parsing and string conversion.
 - **Security:** Enforce `passlib[bcrypt]` for secure password storage. Enforce dependency injection (`Depends(get_current_user)`) on protected routes.
 
+---
 
+## Ilgili Nodlar
 
-
-
-
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

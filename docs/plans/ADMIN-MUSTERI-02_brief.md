@@ -35,3 +35,13 @@ Müşteri Yönetimi üst sayfasının 6 alt sekmesinin tamamı gerçek veri gös
 
 ## Tahmin
 ~1.5 saat.
+
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/PLAN_STRATEGY_HUB]]
+
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

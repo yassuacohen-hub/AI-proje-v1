@@ -55,7 +55,7 @@ Push `65b60a6` → run 35160844030 (#22), `req_011Cf7xYeQTDnti8cQvoFj4H`, create
 - `success` → ÇALIŞIYOR; not: `workflow_run` (ci-explain) için `sub` sonu `:workflow_run` olur → main merge sonrası ikinci kural gerekir.
 - yine `failure` → Anthropic destek bileti; request_id'ler: `req_011Cf7uUfGpojKnvwaGVfzvC` (#19), `req_011Cf7vimAJQnoTqCJmRmRWQ` (#20), `req_011Cf7waaTW79addPR28PfUo` (#21), `req_011Cf7xYeQTDnti8cQvoFj4H` (#22).
 
-## ✅ Deneme 5 sonucu (2026-09-16 23:17) — BAŞARILI
+## Deneme 5 sonucu (2026-09-16 23:17) — BAŞARILI
 
 Push `aa77f8d` → run 35161624267 (#23), `req_011Cf7yKhbSmgWnNmTDXW9cd`, created 23:17:35Z. **`outcome: success`** — OIDC federasyon **çalışıyor!**
 

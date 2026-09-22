@@ -22,3 +22,11 @@
 ## Kısıtlamalar
 - `tenant` paketi `streamlit`/`auth` import etmez (bekçi testiyle doğrulanr)
 - `frozen=True` — tenant context değiştirilemez
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
+
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]

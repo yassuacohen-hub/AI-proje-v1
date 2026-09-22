@@ -13,7 +13,7 @@
 
 ---
 
-## 📊 Cevaplandırılan Sorular
+## Cevaplandırılan Sorular
 
 ### 1. 9router_optimizer.py Çıktıları
 
@@ -130,7 +130,7 @@ Streamlit UI
 
 ---
 
-## 🏗️ Detaylı Mimari Tasarım
+## Detaylı Mimari Tasarım
 
 ### Dosya Yapısı (Yeni)
 
@@ -840,7 +840,7 @@ def render_cost_tab() -> None:
 
 ---
 
-## 🔗 Entegrasyon Noktaları
+## Entegrasyon Noktaları
 
 ### 1. app.py — Tab 10 Ekleme
 
@@ -950,7 +950,7 @@ except Exception:
 
 ---
 
-## 📋 Implementasyon Görev Listesi
+## Implementasyon Görev Listesi
 
 ### Faz 1: Çekirdek Modül (admin_cost.py)
 - [ ] `admin_cost.py` dosyası oluştur
@@ -990,7 +990,7 @@ except Exception:
 
 ---
 
-## 🎯 Teknik Sınırlar
+## Teknik Sınırlar
 
 ✅ **Yapılacak:**
 - Batch read optimizer_latest.json (real-time DB değil)
@@ -1007,7 +1007,7 @@ except Exception:
 
 ---
 
-## 📝 Notlar
+## Notlar
 
 1. **Trend Verisi:** Şu an single-day trend (optimizer_latest.json). Gerçek 7/30 gün trend için multiple JSON'lar arşivlenmelidir (`data/router/optimizer_YYYYMMDD_HHMM.md` → parse et)
 
@@ -1024,7 +1024,7 @@ except Exception:
 
 ---
 
-## 🔄 Sonraki Adımlar
+## Sonraki Adımlar
 
 1. **Mimarinin onaylanması** ✅
 2. **admin_cost.py implementasyonu** → Code mode'a geç

@@ -148,3 +148,9 @@ python -m src.company_master.orchestrator.cli sync
 | Görev bitti | `gorev_guncelle(durum="done")` + kilit bırakma + `TODO.md` + `CHANGELOG.md` |
 | Karar değişti | `project_state.md` + gerekirse V9 bağlam dokümanı |
 | Test eklendi | `CHANGELOG.md` test sayısı notu |
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

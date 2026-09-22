@@ -488,8 +488,20 @@
 
 **Kural:** `worktree klasoru/` = **yazma otoritesi (SSOT)**. `Huginn Data Insights/` = **graph görünümü (canonical ağaç)**. Bir dosyayı düzenlerken `worktree klasoru/` altındaki kopya değiştirilir; graph metriği okunurken `Huginn Data Insights/` altındaki kopyası sayılır. Bu ikisi çelişmiyor — worktree'ye yazılır, HDI'a link kredisi gider. HDI, worktree'nin senkronize, salt-okunur aynasıdır.
 
+## Hub-Önce Okuma (D-185 — KAHİN kararı 2026-09-22)
+- **Kural:** Bir konuda (osint, veri kalitesi, admin panel, müşteri paneli, araç/script, plan/rapor, teknik dok, orkestrasyon/ajan) çalışmaya başlamadan önce önce ilgili `Huginn Data Insights/hubs/*_HUB.md` dosyası okunur, oradan 2-3 hedef dosyaya inilir.
+- **Gerekçe:** Hub, konunun küçültülmüş haritasıdır; doğrudan geniş klasör taraması veya çok sayıda dosya okuması yerine hub üzerinden hedefe gitmek token maliyetini düşürür.
+- **Sıra:** hub bulunamazsa (konu hub'da yok) `search_files` ile ara; yeni bir hub açma kararı orkestratöre sorulur.
+
+## Yeni Belge = Yeni Bağlantı (D-186 — KAHİN kararı 2026-09-22)
+- **Kural:** Vault içine (`Huginn Data Insights/` altına) yeni `.md` belgesi üreten her ajan, aynı işlemde belgeyi ilgili konu hub'ına (`hubs/*_HUB.md`) en az bir madde olarak ekler. Backlink Obsidian tarafından otomatik üretilir, elle yazılmaz.
+- **Gerekçe:** Orphan nod birikimini kaynağında önler; GRAPH-HUB-EXPAND tarzı toplu temizlik görevlerine ihtiyacı azaltır.
+- **İstisna:** `data/orchestrator/` yürütme raporları ve geçici (`data/_tmp/`) dosyalar kapsam dışı — bunlar zaten hub'lara alınmıyor (bkz. hub üretim notları).
+
 ## İlgili Nodlar (GRAPH-FIX-02 Backlink)
 
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]
 - [[Huginn Data Insights/docs/CALISMA_GUNLUGU]]
 - [[Huginn Data Insights/AI proje v1/docs/CALISMA_GUNLUGU]]
 - [[Huginn Data Insights/scripts/_tavily_skill_incele]]
@@ -498,3 +510,10 @@
 - [[Huginn Data Insights/data/skills/supabase/CONTRIBUTING]]
 - [[Huginn Data Insights/data/skills/supabase/README]]
 - [[Huginn Data Insights/data/skills/supabase/skills/supabase/SKILL]]
+
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]

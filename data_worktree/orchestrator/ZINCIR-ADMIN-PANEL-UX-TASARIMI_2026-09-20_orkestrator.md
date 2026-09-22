@@ -239,3 +239,9 @@ Diğer 3 görev (UI-MENUTREE-02, UI-POPOVER, LOGOUT) zaten **done** durumunda, b
 **Tasarım Raporu Bitiş Tarihi:** 2026-09-20T13:11  
 **Durumu:** Brifleri yazma ve tetikleme untuk İHSAN  
 **Onay Bekliyorum:** KAHİN
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]

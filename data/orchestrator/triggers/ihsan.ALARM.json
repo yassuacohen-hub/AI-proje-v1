@@ -18286,5 +18286,2948 @@
     "tetik_sayisi": 739,
     "uyari_tarihi": "2026-09-21T23:59:02",
     "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 739. kez uyarıldı; henüz başlamadı."
-  }
-]
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 849,
+    "uyari_tarihi": "2026-09-22T00:04:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 849. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 740,
+    "uyari_tarihi": "2026-09-22T00:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 740. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 850,
+    "uyari_tarihi": "2026-09-22T00:09:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 850. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 741,
+    "uyari_tarihi": "2026-09-22T00:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 741. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 851,
+    "uyari_tarihi": "2026-09-22T00:14:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 851. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 742,
+    "uyari_tarihi": "2026-09-22T00:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 742. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 852,
+    "uyari_tarihi": "2026-09-22T00:19:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 852. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 743,
+    "uyari_tarihi": "2026-09-22T00:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 743. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 853,
+    "uyari_tarihi": "2026-09-22T00:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 853. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 744,
+    "uyari_tarihi": "2026-09-22T00:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 744. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 854,
+    "uyari_tarihi": "2026-09-22T00:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 854. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 745,
+    "uyari_tarihi": "2026-09-22T00:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 745. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 855,
+    "uyari_tarihi": "2026-09-22T00:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 855. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 746,
+    "uyari_tarihi": "2026-09-22T00:34:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 746. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 856,
+    "uyari_tarihi": "2026-09-22T00:39:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 856. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 747,
+    "uyari_tarihi": "2026-09-22T00:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 747. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 857,
+    "uyari_tarihi": "2026-09-22T00:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 857. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 748,
+    "uyari_tarihi": "2026-09-22T00:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 748. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 858,
+    "uyari_tarihi": "2026-09-22T00:49:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 858. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 749,
+    "uyari_tarihi": "2026-09-22T00:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 749. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 859,
+    "uyari_tarihi": "2026-09-22T00:54:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 859. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 750,
+    "uyari_tarihi": "2026-09-22T00:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 750. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 860,
+    "uyari_tarihi": "2026-09-22T00:59:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 860. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 751,
+    "uyari_tarihi": "2026-09-22T00:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 751. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 861,
+    "uyari_tarihi": "2026-09-22T01:04:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 861. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 752,
+    "uyari_tarihi": "2026-09-22T01:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 752. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 862,
+    "uyari_tarihi": "2026-09-22T01:09:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 862. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 753,
+    "uyari_tarihi": "2026-09-22T01:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 753. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 863,
+    "uyari_tarihi": "2026-09-22T01:14:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 863. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 754,
+    "uyari_tarihi": "2026-09-22T01:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 754. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 864,
+    "uyari_tarihi": "2026-09-22T01:19:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 864. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 755,
+    "uyari_tarihi": "2026-09-22T01:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 755. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 865,
+    "uyari_tarihi": "2026-09-22T01:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 865. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 756,
+    "uyari_tarihi": "2026-09-22T01:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 756. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 866,
+    "uyari_tarihi": "2026-09-22T01:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 866. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 757,
+    "uyari_tarihi": "2026-09-22T01:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 757. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 867,
+    "uyari_tarihi": "2026-09-22T01:34:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 867. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 758,
+    "uyari_tarihi": "2026-09-22T01:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 758. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 868,
+    "uyari_tarihi": "2026-09-22T01:39:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 868. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 759,
+    "uyari_tarihi": "2026-09-22T01:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 759. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 869,
+    "uyari_tarihi": "2026-09-22T01:44:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 869. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 760,
+    "uyari_tarihi": "2026-09-22T01:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 760. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 870,
+    "uyari_tarihi": "2026-09-22T01:49:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 870. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 761,
+    "uyari_tarihi": "2026-09-22T01:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 761. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 871,
+    "uyari_tarihi": "2026-09-22T01:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 871. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 762,
+    "uyari_tarihi": "2026-09-22T01:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 762. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 872,
+    "uyari_tarihi": "2026-09-22T01:59:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 872. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 763,
+    "uyari_tarihi": "2026-09-22T01:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 763. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 873,
+    "uyari_tarihi": "2026-09-22T02:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 873. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 764,
+    "uyari_tarihi": "2026-09-22T02:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 764. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 874,
+    "uyari_tarihi": "2026-09-22T02:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 874. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 765,
+    "uyari_tarihi": "2026-09-22T02:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 765. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 875,
+    "uyari_tarihi": "2026-09-22T02:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 875. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 766,
+    "uyari_tarihi": "2026-09-22T02:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 766. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 876,
+    "uyari_tarihi": "2026-09-22T02:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 876. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 767,
+    "uyari_tarihi": "2026-09-22T02:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 767. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 877,
+    "uyari_tarihi": "2026-09-22T02:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 877. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 768,
+    "uyari_tarihi": "2026-09-22T02:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 768. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 878,
+    "uyari_tarihi": "2026-09-22T02:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 878. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 769,
+    "uyari_tarihi": "2026-09-22T02:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 769. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 879,
+    "uyari_tarihi": "2026-09-22T02:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 879. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 770,
+    "uyari_tarihi": "2026-09-22T02:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 770. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 880,
+    "uyari_tarihi": "2026-09-22T02:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 880. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 771,
+    "uyari_tarihi": "2026-09-22T02:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 771. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 881,
+    "uyari_tarihi": "2026-09-22T02:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 881. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 772,
+    "uyari_tarihi": "2026-09-22T02:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 772. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 882,
+    "uyari_tarihi": "2026-09-22T02:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 882. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 773,
+    "uyari_tarihi": "2026-09-22T02:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 773. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 883,
+    "uyari_tarihi": "2026-09-22T02:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 883. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 774,
+    "uyari_tarihi": "2026-09-22T02:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 774. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 884,
+    "uyari_tarihi": "2026-09-22T02:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 884. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 775,
+    "uyari_tarihi": "2026-09-22T02:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 775. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 885,
+    "uyari_tarihi": "2026-09-22T03:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 885. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 776,
+    "uyari_tarihi": "2026-09-22T03:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 776. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 886,
+    "uyari_tarihi": "2026-09-22T03:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 886. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 777,
+    "uyari_tarihi": "2026-09-22T03:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 777. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 887,
+    "uyari_tarihi": "2026-09-22T03:14:01",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 887. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 778,
+    "uyari_tarihi": "2026-09-22T03:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 778. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 888,
+    "uyari_tarihi": "2026-09-22T03:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 888. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 779,
+    "uyari_tarihi": "2026-09-22T03:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 779. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 889,
+    "uyari_tarihi": "2026-09-22T03:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 889. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 780,
+    "uyari_tarihi": "2026-09-22T03:24:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 780. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 890,
+    "uyari_tarihi": "2026-09-22T03:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 890. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 781,
+    "uyari_tarihi": "2026-09-22T03:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 781. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 891,
+    "uyari_tarihi": "2026-09-22T03:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 891. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 782,
+    "uyari_tarihi": "2026-09-22T03:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 782. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 892,
+    "uyari_tarihi": "2026-09-22T03:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 892. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 783,
+    "uyari_tarihi": "2026-09-22T03:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 783. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 893,
+    "uyari_tarihi": "2026-09-22T03:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 893. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 784,
+    "uyari_tarihi": "2026-09-22T03:44:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 784. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 894,
+    "uyari_tarihi": "2026-09-22T03:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 894. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 785,
+    "uyari_tarihi": "2026-09-22T03:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 785. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 895,
+    "uyari_tarihi": "2026-09-22T03:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 895. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 786,
+    "uyari_tarihi": "2026-09-22T03:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 786. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 896,
+    "uyari_tarihi": "2026-09-22T03:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 896. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 787,
+    "uyari_tarihi": "2026-09-22T03:59:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 787. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 897,
+    "uyari_tarihi": "2026-09-22T04:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 897. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 788,
+    "uyari_tarihi": "2026-09-22T04:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 788. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 898,
+    "uyari_tarihi": "2026-09-22T04:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 898. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 789,
+    "uyari_tarihi": "2026-09-22T04:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 789. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 899,
+    "uyari_tarihi": "2026-09-22T04:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 899. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 790,
+    "uyari_tarihi": "2026-09-22T04:14:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 790. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 900,
+    "uyari_tarihi": "2026-09-22T04:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 900. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 791,
+    "uyari_tarihi": "2026-09-22T04:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 791. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 901,
+    "uyari_tarihi": "2026-09-22T04:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 901. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 792,
+    "uyari_tarihi": "2026-09-22T04:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 792. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 902,
+    "uyari_tarihi": "2026-09-22T04:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 902. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 793,
+    "uyari_tarihi": "2026-09-22T04:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 793. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 903,
+    "uyari_tarihi": "2026-09-22T04:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 903. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 794,
+    "uyari_tarihi": "2026-09-22T04:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 794. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 904,
+    "uyari_tarihi": "2026-09-22T04:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 904. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 795,
+    "uyari_tarihi": "2026-09-22T04:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 795. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 905,
+    "uyari_tarihi": "2026-09-22T04:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 905. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 796,
+    "uyari_tarihi": "2026-09-22T04:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 796. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 906,
+    "uyari_tarihi": "2026-09-22T04:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 906. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 797,
+    "uyari_tarihi": "2026-09-22T04:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 797. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 907,
+    "uyari_tarihi": "2026-09-22T04:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 907. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 798,
+    "uyari_tarihi": "2026-09-22T04:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 798. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 908,
+    "uyari_tarihi": "2026-09-22T04:59:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 908. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 799,
+    "uyari_tarihi": "2026-09-22T04:59:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 799. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 909,
+    "uyari_tarihi": "2026-09-22T05:04:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 909. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 800,
+    "uyari_tarihi": "2026-09-22T05:04:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 800. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 910,
+    "uyari_tarihi": "2026-09-22T05:09:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 910. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 801,
+    "uyari_tarihi": "2026-09-22T05:09:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 801. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 911,
+    "uyari_tarihi": "2026-09-22T05:14:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 911. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 802,
+    "uyari_tarihi": "2026-09-22T05:14:03",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 802. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 912,
+    "uyari_tarihi": "2026-09-22T05:19:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 912. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 803,
+    "uyari_tarihi": "2026-09-22T05:19:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 803. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 913,
+    "uyari_tarihi": "2026-09-22T05:24:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 913. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 804,
+    "uyari_tarihi": "2026-09-22T05:24:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 804. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 914,
+    "uyari_tarihi": "2026-09-22T05:29:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 914. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 805,
+    "uyari_tarihi": "2026-09-22T05:29:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 805. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 915,
+    "uyari_tarihi": "2026-09-22T05:34:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 915. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 806,
+    "uyari_tarihi": "2026-09-22T05:34:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 806. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 916,
+    "uyari_tarihi": "2026-09-22T05:39:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 916. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 807,
+    "uyari_tarihi": "2026-09-22T05:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 807. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 917,
+    "uyari_tarihi": "2026-09-22T05:44:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 917. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 808,
+    "uyari_tarihi": "2026-09-22T05:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 808. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 918,
+    "uyari_tarihi": "2026-09-22T05:49:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 918. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 809,
+    "uyari_tarihi": "2026-09-22T05:49:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 809. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-LOGOUT-01",
+    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
+    "tetik_sayisi": 919,
+    "uyari_tarihi": "2026-09-22T05:54:02",
+    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 919. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 810,
+    "uyari_tarihi": "2026-09-22T05:54:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz â†’ web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 810. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-22T05:59:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-22T06:04:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-22T06:04:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-22T06:04:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-22T06:04:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-22T06:04:03",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-22T06:04:03",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-22T06:04:03",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-22T06:04:04",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-22T06:09:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-22T06:09:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-22T06:09:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-22T06:09:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-22T06:09:03",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-22T06:09:03",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-22T06:09:03",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-22T06:09:04",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-22T06:14:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-22T06:14:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-22T06:14:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-22T06:14:03",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-22T06:14:03",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-22T06:14:03",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-22T06:14:04",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-22T06:14:04",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-22T06:19:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 19,
+    "uyari_tarihi": "2026-09-22T06:19:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 19. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-22T06:19:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-22T06:24:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 20,
+    "uyari_tarihi": "2026-09-22T06:24:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 20. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-22T06:24:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-22T06:29:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 21,
+    "uyari_tarihi": "2026-09-22T06:29:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 21. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-22T06:29:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-22T06:34:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 22,
+    "uyari_tarihi": "2026-09-22T06:34:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 22. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-22T06:34:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-22T06:39:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 23,
+    "uyari_tarihi": "2026-09-22T06:39:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 23. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-22T06:39:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-22T06:44:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 24,
+    "uyari_tarihi": "2026-09-22T06:44:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 24. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-22T06:44:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-22T06:49:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 25,
+    "uyari_tarihi": "2026-09-22T06:49:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 25. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-22T06:49:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-22T06:54:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 26,
+    "uyari_tarihi": "2026-09-22T06:54:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 26. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-22T06:54:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-22T06:59:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 27,
+    "uyari_tarihi": "2026-09-22T06:59:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 27. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-22T06:59:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-22T07:04:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 28,
+    "uyari_tarihi": "2026-09-22T07:04:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 28. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-22T07:04:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-22T07:09:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 29,
+    "uyari_tarihi": "2026-09-22T07:09:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 29. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-22T07:09:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-22T07:14:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 30,
+    "uyari_tarihi": "2026-09-22T07:14:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 30. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-22T07:14:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-22T07:19:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 31,
+    "uyari_tarihi": "2026-09-22T07:19:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 31. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-22T07:19:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-22T07:24:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 32,
+    "uyari_tarihi": "2026-09-22T07:24:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 32. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 18,
+    "uyari_tarihi": "2026-09-22T07:24:03",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 18. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 18,
+    "uyari_tarihi": "2026-09-22T07:29:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 18. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 33,
+    "uyari_tarihi": "2026-09-22T07:29:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 33. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 19,
+    "uyari_tarihi": "2026-09-22T07:29:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 19. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 19,
+    "uyari_tarihi": "2026-09-22T07:34:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 19. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 34,
+    "uyari_tarihi": "2026-09-22T07:34:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 34. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 20,
+    "uyari_tarihi": "2026-09-22T07:34:03",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 20. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 20,
+    "uyari_tarihi": "2026-09-22T07:39:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 20. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 35,
+    "uyari_tarihi": "2026-09-22T07:39:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 35. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 21,
+    "uyari_tarihi": "2026-09-22T07:39:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 21. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 21,
+    "uyari_tarihi": "2026-09-22T07:44:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 21. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 36,
+    "uyari_tarihi": "2026-09-22T07:44:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 36. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 22,
+    "uyari_tarihi": "2026-09-22T07:44:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 22. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 22,
+    "uyari_tarihi": "2026-09-22T07:49:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 22. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 37,
+    "uyari_tarihi": "2026-09-22T07:49:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 37. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 23,
+    "uyari_tarihi": "2026-09-22T07:49:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 23. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 23,
+    "uyari_tarihi": "2026-09-22T07:54:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 23. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 38,
+    "uyari_tarihi": "2026-09-22T07:54:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 38. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 24,
+    "uyari_tarihi": "2026-09-22T07:54:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 24. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 24,
+    "uyari_tarihi": "2026-09-22T07:59:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 24. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 39,
+    "uyari_tarihi": "2026-09-22T07:59:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 39. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 25,
+    "uyari_tarihi": "2026-09-22T07:59:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 25. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 25,
+    "uyari_tarihi": "2026-09-22T08:04:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 25. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 40,
+    "uyari_tarihi": "2026-09-22T08:04:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 40. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 26,
+    "uyari_tarihi": "2026-09-22T08:04:03",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 26. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 26,
+    "uyari_tarihi": "2026-09-22T08:09:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 26. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 41,
+    "uyari_tarihi": "2026-09-22T08:09:03",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 41. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 27,
+    "uyari_tarihi": "2026-09-22T08:09:03",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 27. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 27,
+    "uyari_tarihi": "2026-09-22T08:14:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 27. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 42,
+    "uyari_tarihi": "2026-09-22T08:14:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 42. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 28,
+    "uyari_tarihi": "2026-09-22T08:14:03",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 28. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 28,
+    "uyari_tarihi": "2026-09-22T08:19:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 28. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 43,
+    "uyari_tarihi": "2026-09-22T08:19:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 43. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 29,
+    "uyari_tarihi": "2026-09-22T08:19:03",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 29. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 29,
+    "uyari_tarihi": "2026-09-22T08:24:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 29. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 44,
+    "uyari_tarihi": "2026-09-22T08:24:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 44. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 30,
+    "uyari_tarihi": "2026-09-22T08:24:03",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 30. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 30,
+    "uyari_tarihi": "2026-09-22T08:29:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 30. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 45,
+    "uyari_tarihi": "2026-09-22T08:29:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 45. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 31,
+    "uyari_tarihi": "2026-09-22T08:29:03",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 31. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 31,
+    "uyari_tarihi": "2026-09-22T08:34:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 31. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 46,
+    "uyari_tarihi": "2026-09-22T08:34:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 46. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 32,
+    "uyari_tarihi": "2026-09-22T08:34:03",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 32. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 32,
+    "uyari_tarihi": "2026-09-22T08:39:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 32. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 47,
+    "uyari_tarihi": "2026-09-22T08:39:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 47. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 33,
+    "uyari_tarihi": "2026-09-22T08:39:03",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 33. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 33,
+    "uyari_tarihi": "2026-09-22T08:44:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 33. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 48,
+    "uyari_tarihi": "2026-09-22T08:44:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 48. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 34,
+    "uyari_tarihi": "2026-09-22T08:44:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 34. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 34,
+    "uyari_tarihi": "2026-09-22T08:49:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 34. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 49,
+    "uyari_tarihi": "2026-09-22T08:49:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 49. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 35,
+    "uyari_tarihi": "2026-09-22T08:49:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 35. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 35,
+    "uyari_tarihi": "2026-09-22T08:54:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 35. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 50,
+    "uyari_tarihi": "2026-09-22T08:54:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 50. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 36,
+    "uyari_tarihi": "2026-09-22T08:54:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 36. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 36,
+    "uyari_tarihi": "2026-09-22T08:59:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 36. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 51,
+    "uyari_tarihi": "2026-09-22T08:59:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 51. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 37,
+    "uyari_tarihi": "2026-09-22T08:59:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 37. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 37,
+    "uyari_tarihi": "2026-09-22T09:04:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 37. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 52,
+    "uyari_tarihi": "2026-09-22T09:04:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 52. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 38,
+    "uyari_tarihi": "2026-09-22T09:04:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 38. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 38,
+    "uyari_tarihi": "2026-09-22T09:09:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 38. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 53,
+    "uyari_tarihi": "2026-09-22T09:09:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 53. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 39,
+    "uyari_tarihi": "2026-09-22T09:09:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 39. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 39,
+    "uyari_tarihi": "2026-09-22T09:14:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 39. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 54,
+    "uyari_tarihi": "2026-09-22T09:14:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 54. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 40,
+    "uyari_tarihi": "2026-09-22T09:14:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 40. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 40,
+    "uyari_tarihi": "2026-09-22T09:19:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 40. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 55,
+    "uyari_tarihi": "2026-09-22T09:19:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 55. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 41,
+    "uyari_tarihi": "2026-09-22T09:19:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 41. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 41,
+    "uyari_tarihi": "2026-09-22T09:24:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 41. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 56,
+    "uyari_tarihi": "2026-09-22T09:24:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 56. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 42,
+    "uyari_tarihi": "2026-09-22T09:24:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 42. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 42,
+    "uyari_tarihi": "2026-09-22T09:29:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 42. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 57,
+    "uyari_tarihi": "2026-09-22T09:29:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 57. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 43,
+    "uyari_tarihi": "2026-09-22T09:29:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 43. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 43,
+    "uyari_tarihi": "2026-09-22T09:34:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 43. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 58,
+    "uyari_tarihi": "2026-09-22T09:34:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 58. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 44,
+    "uyari_tarihi": "2026-09-22T09:34:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 44. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 44,
+    "uyari_tarihi": "2026-09-22T09:39:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 44. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 59,
+    "uyari_tarihi": "2026-09-22T09:39:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 59. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 45,
+    "uyari_tarihi": "2026-09-22T09:39:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 45. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 45,
+    "uyari_tarihi": "2026-09-22T09:44:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 45. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 60,
+    "uyari_tarihi": "2026-09-22T09:44:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 60. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 46,
+    "uyari_tarihi": "2026-09-22T09:44:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 46. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 46,
+    "uyari_tarihi": "2026-09-22T09:49:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 46. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 61,
+    "uyari_tarihi": "2026-09-22T09:49:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 61. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 47,
+    "uyari_tarihi": "2026-09-22T09:49:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 47. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 47,
+    "uyari_tarihi": "2026-09-22T09:54:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 47. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 62,
+    "uyari_tarihi": "2026-09-22T09:54:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 62. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 48,
+    "uyari_tarihi": "2026-09-22T09:54:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 48. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 48,
+    "uyari_tarihi": "2026-09-22T09:59:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 48. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 63,
+    "uyari_tarihi": "2026-09-22T09:59:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 63. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 49,
+    "uyari_tarihi": "2026-09-22T09:59:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 49. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 49,
+    "uyari_tarihi": "2026-09-22T10:04:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 49. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 64,
+    "uyari_tarihi": "2026-09-22T10:04:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 64. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 50,
+    "uyari_tarihi": "2026-09-22T10:04:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 50. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 50,
+    "uyari_tarihi": "2026-09-22T10:09:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 50. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 65,
+    "uyari_tarihi": "2026-09-22T10:09:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 65. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 51,
+    "uyari_tarihi": "2026-09-22T10:09:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 51. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 51,
+    "uyari_tarihi": "2026-09-22T10:14:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 51. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 66,
+    "uyari_tarihi": "2026-09-22T10:14:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 66. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 52,
+    "uyari_tarihi": "2026-09-22T10:14:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 52. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 52,
+    "uyari_tarihi": "2026-09-22T10:19:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 52. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 67,
+    "uyari_tarihi": "2026-09-22T10:19:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 67. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 53,
+    "uyari_tarihi": "2026-09-22T10:19:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 53. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 53,
+    "uyari_tarihi": "2026-09-22T10:24:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 53. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 68,
+    "uyari_tarihi": "2026-09-22T10:24:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 68. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 54,
+    "uyari_tarihi": "2026-09-22T10:24:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 54. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 54,
+    "uyari_tarihi": "2026-09-22T10:29:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 54. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 69,
+    "uyari_tarihi": "2026-09-22T10:29:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 69. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 55,
+    "uyari_tarihi": "2026-09-22T10:29:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 55. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 55,
+    "uyari_tarihi": "2026-09-22T10:34:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 55. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 70,
+    "uyari_tarihi": "2026-09-22T10:34:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 70. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 56,
+    "uyari_tarihi": "2026-09-22T10:34:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 56. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 56,
+    "uyari_tarihi": "2026-09-22T10:39:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 56. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 71,
+    "uyari_tarihi": "2026-09-22T10:39:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 71. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 57,
+    "uyari_tarihi": "2026-09-22T10:39:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 57. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 57,
+    "uyari_tarihi": "2026-09-22T10:44:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 57. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 72,
+    "uyari_tarihi": "2026-09-22T10:44:01",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 72. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 58,
+    "uyari_tarihi": "2026-09-22T10:44:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 58. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 58,
+    "uyari_tarihi": "2026-09-22T10:49:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 58. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 73,
+    "uyari_tarihi": "2026-09-22T10:49:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 73. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 59,
+    "uyari_tarihi": "2026-09-22T10:49:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 59. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 59,
+    "uyari_tarihi": "2026-09-22T10:54:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 59. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 74,
+    "uyari_tarihi": "2026-09-22T10:54:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 74. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 60,
+    "uyari_tarihi": "2026-09-22T10:54:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 60. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 60,
+    "uyari_tarihi": "2026-09-22T10:59:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 60. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 75,
+    "uyari_tarihi": "2026-09-22T10:59:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 75. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 61,
+    "uyari_tarihi": "2026-09-22T10:59:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 61. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 61,
+    "uyari_tarihi": "2026-09-22T11:04:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 61. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 76,
+    "uyari_tarihi": "2026-09-22T11:04:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 76. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 62,
+    "uyari_tarihi": "2026-09-22T11:04:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 62. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 62,
+    "uyari_tarihi": "2026-09-22T11:09:02",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 62. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 77,
+    "uyari_tarihi": "2026-09-22T11:09:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 77. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 63,
+    "uyari_tarihi": "2026-09-22T11:09:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 63. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 63,
+    "uyari_tarihi": "2026-09-22T11:14:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 63. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 78,
+    "uyari_tarihi": "2026-09-22T11:14:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 78. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 64,
+    "uyari_tarihi": "2026-09-22T11:14:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 64. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 64,
+    "uyari_tarihi": "2026-09-22T11:19:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 64. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 79,
+    "uyari_tarihi": "2026-09-22T11:19:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 79. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 65,
+    "uyari_tarihi": "2026-09-22T11:19:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 65. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 65,
+    "uyari_tarihi": "2026-09-22T11:24:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 65. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 80,
+    "uyari_tarihi": "2026-09-22T11:24:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 80. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 66,
+    "uyari_tarihi": "2026-09-22T11:24:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 66. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 66,
+    "uyari_tarihi": "2026-09-22T11:29:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 66. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 81,
+    "uyari_tarihi": "2026-09-22T11:29:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 81. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 67,
+    "uyari_tarihi": "2026-09-22T11:29:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 67. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 67,
+    "uyari_tarihi": "2026-09-22T11:34:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 67. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 82,
+    "uyari_tarihi": "2026-09-22T11:34:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 82. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 68,
+    "uyari_tarihi": "2026-09-22T11:34:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 68. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 68,
+    "uyari_tarihi": "2026-09-22T11:39:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 68. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 83,
+    "uyari_tarihi": "2026-09-22T11:39:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 83. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 69,
+    "uyari_tarihi": "2026-09-22T11:39:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 69. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 69,
+    "uyari_tarihi": "2026-09-22T11:44:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 69. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 84,
+    "uyari_tarihi": "2026-09-22T11:44:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 84. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 70,
+    "uyari_tarihi": "2026-09-22T11:44:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 70. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-PROFILMENU-01",
+    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
+    "tetik_sayisi": 70,
+    "uyari_tarihi": "2026-09-22T11:49:01",
+    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 70. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 85,
+    "uyari_tarihi": "2026-09-22T11:49:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 85. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 71,
+    "uyari_tarihi": "2026-09-22T11:49:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 71. kez uyarıldı; henüz başlamadı."
+  },

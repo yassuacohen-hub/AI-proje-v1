@@ -17,3 +17,8 @@ Dashboard (port 8000) + Telegram bot'u kullanan musteri icin **pilot abonelik ti
 
 ## Cikti
 `workspace/external/<ajan>/output/Y18_abonelik_plan.md` — tier tablosu (isim | kota | veri erisimi | fiyat onerisi | KVKK seviyesi).
+
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]]
