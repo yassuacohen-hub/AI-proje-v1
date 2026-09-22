@@ -5,6 +5,9 @@ S11 kararı: görünen ad **MIMIR** (Odin'in bilgelik kuyusu); ``abrakadabra``
 ise sohbet içindeki **kilit sözü** — ayrıcalıklı işlemler (teklif uygulama)
 yalnızca kilit sözü verilince açılır ve modele asla sızdırılmaz.
 
+Karar: [[D-182]] — Orkestratör Asistanı İki Seviye (2026-09-21)
+Test: [[tests/test_d182_mimir.py]]
+
 Streamlit'ten bağımsız saf iş mantığı:
 
 * **9Router üzerinden sohbet** (BK4): UCRUZ/hızlı model varsayılanı
@@ -45,6 +48,8 @@ __all__ = [
     "Teklif",
     "VARSAYILAN_MODELLER",
     "GORUNEN_AD",
+    "GORUNEN_AD_SEVIYE1",
+    "gorunen_ad",
     "kilit_sozu",
     "kilit_acik",
     "kilit_maskele",
@@ -57,8 +62,17 @@ __all__ = [
     "sohbet",
 ]
 
-#: S11 — kullanıcıya görünen asistan adı.
+#: S11 — kullanıcıya görünen asistan adı (Seviye 0, öntanımlı).
 GORUNEN_AD = "MIMIR"
+
+#: D-182 — anahtar dönüşümü sonrası Seviye 1 adı. MIMIR bilgelik kuyusu,
+#: yetki devrinden sonra ODIN olur (aynı varlık, yükselmiş yetki).
+GORUNEN_AD_SEVIYE1 = "ODIN"
+
+
+def gorunen_ad(seviye: int = 0) -> str:
+    """Seviyeye göre görünen ad: 0 → MIMIR (asistan), 1 → ODIN (orkestratör)."""
+    return GORUNEN_AD_SEVIYE1 if seviye == 1 else GORUNEN_AD
 
 #: Kilit sözü env anahtarı ve varsayılanı (sahip ritüeliyle aynı sözcük).
 KILIT_ENV = "MIMIR_KILIT_SOZU"

@@ -13,6 +13,9 @@ Güvenlik kapıları:
 * Model doğrudan pano yazamaz; ``TEKLIF:`` satırları ayıklanır ve
   yalnızca **Onayla** düğmesiyle ``teklif_uygula`` çağrılır.
 * Onayla düğmesi **kilit sözü** doğrulanmadan pasiftir (ikinci kapı).
+
+Karar: [[D-182]] — Orkestratör Asistanı İki Seviye (seviye-bağımlı display name)
+Test: [[tests/test_d182_mimir.py]]
 """
 from __future__ import annotations
 
@@ -33,10 +36,9 @@ BOLUMLER: tuple[Section, ...] = (
             ikon="✅", kimlik="abrakadabra-teklifler"),
 )
 
-AD = ai_chat.GORUNEN_AD
-
+#: D-182 — ad seviye-bağımlı; getir() çağrısıyla alınır, statik değer yok.
 GIRIS_METNI = (
-    f"{AD}, görev panosunu ve posta kutusunu okuyarak orkestrasyon "
+    "MIMIR, görev panosunu ve posta kutusunu okuyarak orkestrasyon "
     "önerileri üretir. Panoda değişiklik yalnızca kilit sözü ve sizin onayınızla yapılır."
 )
 
@@ -44,6 +46,26 @@ _GECMIS_KEY = "abrakadabra_gecmis"
 _TEKLIF_KEY = "abrakadabra_teklifler"
 _HATA_KEY = "abrakadabra_hatalar"
 _KILIT_KEY = "abrakadabra_kilit"
+
+#: D-182 — iki seviye rozeti. Ad da seviyeyle değişir: MIMIR (Seviye 0) → ODIN (Seviye 1).
+_ROZETLER = {0: "🔒 Orkestratör Asistanı", 1: "🔓 Orkestratör"}
+
+
+def _mimir_seviyesi() -> int:
+    """Aktif orkestratör 'mimir' ise 1, değilse 0 (D-182).
+
+    ponytail: orchestrator.json doğrudan okunur; devir CLI'dan
+    (`gorev_at.py abrakadabra`) yapılır. UI'dan devralma gerekirse
+    cmd_abrakadabra bir servis fonksiyonuna çıkarılıp buradan çağrılır.
+    """
+    try:
+        from scripts.gorev_at import _orkestrator_oku
+    except ImportError:
+        return 0
+    try:
+        return 1 if _orkestrator_oku().get("ajan") == "mimir" else 0
+    except OSError:
+        return 0
 
 
 def _bolum(kimlik: str) -> Section:
@@ -68,7 +90,8 @@ def _kilit_acik() -> bool:
 
 
 def _render_baslik() -> None:
-    PageHeader(AD, giris=GIRIS_METNI,
+    seviye = _mimir_seviyesi()
+    PageHeader(f"{ai_chat.gorunen_ad(seviye)} — {_ROZETLER[seviye]}", giris=GIRIS_METNI,
                ust_etiket="İş · AI Asistan", ikon="🤖").render()
 
     col_temizle, col_model, col_bos = st.columns([1, 2, 2], vertical_alignment="center")
@@ -160,7 +183,7 @@ def _render_sohbet(token: str) -> None:
     if hatalar:
         st.caption("Sağlayıcı düşüşleri: " + "; ".join(hatalar))
 
-    girdi = st.chat_input(f"{AD}'e yaz…", key="abrakadabra_girdi")
+    girdi = st.chat_input(f"{ai_chat.gorunen_ad(_mimir_seviyesi())}'e yaz…", key="abrakadabra_girdi")
     if not girdi:
         return
 
@@ -201,7 +224,7 @@ def render_abrakadabra_tab() -> None:
     _render_baslik()
     token = require_admin_token()
     if not token:
-        st.warning(f"{AD} yalnızca admin oturumunda kullanılabilir.")
+        st.warning(f"{ai_chat.gorunen_ad(_mimir_seviyesi())} yalnızca admin oturumunda kullanılabilir.")
         render_admin_login()
         return
     _render_baglam()

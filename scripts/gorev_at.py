@@ -8,15 +8,19 @@ Kullanım (repo kökünden):
 
 `at` görevi panoya ekler (dosyaları kilitler) ve ajana tetik düşürür.
 Ajan `scripts/gorev_kutusu.py bak --ajan kilo` ile postasını görür.
+
+Karar: [[D-182]] — Orkestratör Asistanı İki Seviye (cmd_abrakadabra komutu, key rotasyonu)
 """
 from __future__ import annotations
 
 import argparse
+import base64
 import hashlib
 import hmac
 import json
 import os
 import re
+import secrets
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -78,7 +82,7 @@ def _d57_dogrula(task_id: str, baslik: str, ajan: str) -> str | None:
 # D-58: orkestratör devralma (abrakadabra)
 _ANAHTAR_DOSYA = KOK / "data" / "orchestrator" / "abrakadabra.key"
 _ORK_DOSYA = KOK / "data" / "orchestrator" / "orchestrator.json"
-_VARSAYILAN_ORKESTRATOR = "roo"
+_VARSAYILAN_ORKESTRATOR = "ihsan"  # D-71 canonical
 
 
 def _beklenen_anahtar() -> str | None:
@@ -130,6 +134,31 @@ def _orkestrator_kapisi(cagiran: str | None) -> str | None:
     return None
 
 
+def _anahtar_dondur(yeni_anahtar: str) -> None:
+    """D-182: devralma basarili olunca yeni anahtar uretilir; .env varsa atomik guncellenir, yoksa key dosyasina yazilir.
+
+    ponytail: coklu-instance kilitleme yok (dosya yazma yarisina karsi); tek operator varsayimi.
+    Coklu operator/deployment cikarsa fcntl/msvcrt kilidi eklenir.
+    """
+    env_dosya = KOK / ".env"
+    if env_dosya.exists():
+        satirlar = env_dosya.read_text(encoding="utf-8").splitlines()
+        bulundu = False
+        for i, satir in enumerate(satirlar):
+            if satir.startswith("ABRAKADABRA_KEY="):
+                satirlar[i] = f"ABRAKADABRA_KEY={yeni_anahtar}"
+                bulundu = True
+                break
+        if not bulundu:
+            satirlar.append(f"ABRAKADABRA_KEY={yeni_anahtar}")
+        tmp = env_dosya.with_suffix(".env.tmp")
+        tmp.write_text("\n".join(satirlar) + "\n", encoding="utf-8")
+        os.replace(tmp, env_dosya)
+    else:
+        _ANAHTAR_DOSYA.parent.mkdir(parents=True, exist_ok=True)
+        _ANAHTAR_DOSYA.write_text(yeni_anahtar, encoding="utf-8")
+
+
 def cmd_abrakadabra(args: argparse.Namespace) -> int:
     """Doğru anahtarla orkestratörlüğü devralır. Anahtar değeri asla basılmaz."""
     beklenen = _beklenen_anahtar()
@@ -147,6 +176,8 @@ def cmd_abrakadabra(args: argparse.Namespace) -> int:
         print(f"HATA: ajan '{args.ajan}' kanonik degil; izinli: {', '.join(AJANLAR)}", file=sys.stderr)
         return 1
     kayit = _orkestrator_yaz(args.ajan, beklenen)
+    yeni_anahtar = secrets.token_urlsafe(32)
+    _anahtar_dondur(yeni_anahtar)
     trigger.tetik_ekle(
         "ORKESTRA-DEVRALMA",
         args.ajan,
@@ -155,11 +186,32 @@ def cmd_abrakadabra(args: argparse.Namespace) -> int:
     print(f"DEVRALDI : {kayit['ajan']}")
     print(f"ZAMAN    : {kayit['devralma_zamani']}")
     print(f"PARMAKIZI: {kayit['anahtar_parmak_izi'][:12]}…")
+    print("ANAHTAR  : rotasyon tamamlandi (yeni anahtar env/key dosyasina yazildi, ekrana basilmadi)")
     print(f"TETIK    : python scripts/gorev_kutusu.py bak --ajan {args.ajan}")
     return 0
 
 
+def _baslik_coz(args: argparse.Namespace) -> str | None:
+    """--baslik-b64 verilmişse çözer, yoksa --baslik'i döner. Hata metni döner ya da None.
+
+    cmd.exe cp1254 olduğu için "→" ve Türkçe karakterler doğrudan argüman
+    olarak geçirildiğinde bozulur; base64 bu katmanı atlatır.
+    """
+    b64 = getattr(args, "baslik_b64", None)
+    if not b64:
+        return None
+    try:
+        args.baslik = base64.b64decode(b64).decode("utf-8")
+    except (ValueError, UnicodeDecodeError) as exc:
+        return f"--baslik-b64 cozulemedi (utf-8 base64 bekleniyor): {exc}"
+    return None
+
+
 def cmd_at(args: argparse.Namespace) -> int:
+    hata = _baslik_coz(args)
+    if hata:
+        print(f"HATA: {hata}", file=sys.stderr)
+        return 1
     kapi = _orkestrator_kapisi(getattr(args, "cagiran", None) or os.getenv("ORKESTRA_AJAN"))
     if kapi:
         print(f"HATA (D-58): {kapi}", file=sys.stderr)
@@ -284,7 +336,12 @@ def main() -> int:
 
     p_at = alt.add_parser("at", help="Panoya görev ekle + ajana tetik düşür")
     p_at.add_argument("--task-id", required=True)
-    p_at.add_argument("--baslik", required=True)
+    _baslik_grup = p_at.add_mutually_exclusive_group(required=True)
+    _baslik_grup.add_argument("--baslik", help="D-57 kalibinda baslik")
+    _baslik_grup.add_argument(
+        "--baslik-b64",
+        help="Baslik utf-8 base64; cmd.exe Unicode bozulmasini atlatir",
+    )
     p_at.add_argument("--ajan", required=True, help="sahip + posta kutusu (ör. kilo)")
     p_at.add_argument("--oncelik", default="P1", choices=["P0", "P1", "P2"])
     p_at.add_argument("--dosya", default=None, help="Virgülle ayrılı, otomatik kilitlenir")
