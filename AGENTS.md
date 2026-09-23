@@ -678,3 +678,31 @@ python scripts/ajan_chat.py bulgula "Tasarım (D-192)" "Font boyut tutarsız" --
 - MIMIR asistanı: chat metrikleri analiz etme
 - Otomatik eleştiri önerileri (bulgu → çözüm)
 - Chat geçmişi grafiklendirme (trend analiz)
+
+## Git Değişiklik Kaybı Önleme (D-193 — KAHİN kararı 2026-09-23)
+
+**Sorun:** Uncommitted değişiklikler session sonunda kayboluyor (geçerli olay: dün yapılan admin menu + küçük iyileştirmeler kaybedildi).
+
+**Çözüm:** İki katmanlı koruma:
+
+1. **Ajan Sorumluluğu (Zorunlu)**
+   - Her görev bitiminde `git add -A && git commit -m "<görev_özeti>"` ile commit et. Push'u tetik sisteminde veya oturum kapatılmadan önce yap.
+   - Uncommitted dosyalar 30 dakika sonra `git stash` ile saklanır (otomatik cron, `scripts/git_stash_guard.py`, D-193 ile yürürlüğe girecek).
+   - Stash mesajı: `AUTO-STASH [session_start_timestamp] [modified_files_count]` — session bitiminde roo'ya alert gider.
+
+2. **Sistem Koruma (Arka planda)**
+   - `.git/hooks/pre-commit`: değişiklik dosya sayısı > 5 ise commit öncesi `git diff --stat` raporunu loglar (basit audit).
+   - `.github/workflows/git-guard.yml` (yapılacak): Her 1 saatte uncommitted değişiklik varsa, automatic branch oluşturur (`auto-save-TIMESTAMP`), stash uygulanır, PR draft açılır. Ajan onaylaması gerekir.
+
+3. **Oturum Başında (Ajan Zorunluluk)**
+   - Oturum başında `git status` çalıştır. Stash varsa (`git stash list`), `git stash pop` yapıp değişiklikleri review et. Artık dosya varsa manuel olarak çalış veya `git reset --hard`.
+   - Pre-commit hook: `scripts/git_safety_check.py` Python dosya syntaxını, UTF-8'i, line ending'leri doğrular. Bozuk dosya commit edilemez.
+
+**Kapsam:** Başladığı tarihten (2026-09-23) sonrası tüm oturumlar. Geriye dönük stash var ise `git stash list` ile görülür; poplayabilir.
+
+**Amacı:** Uncommitted değişiklik > 30 dakika hiçbir zaman kalmasın. Ajan + sistem çift tarafından korunmuş.
+
+**Kaynaklar:**
+- `scripts/git_stash_guard.py` — cron tarafından çalışacak, 30 dakika kontrolü
+- `scripts/git_safety_check.py` — pre-commit hook
+- GitHub Actions yaml (yapılacak, P2)
