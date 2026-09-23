@@ -18,7 +18,9 @@ import json
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+_KOK = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(_KOK))
+sys.path.insert(0, str(_KOK / "src"))
 
 # Windows konsolu (cp1254) Unicode ok/emoji karakterlerinde cokuyordu.
 # Cikti akislarini UTF-8'e cevir; desteklenmeyen karakterlerde cokme yerine degistir.
