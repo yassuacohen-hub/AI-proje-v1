@@ -88,13 +88,12 @@ def test_render_admin_cikis_butona_basinca_rerun(monkeypatch):
 
 
 # ---------------------------------------------------------------- şifre değiştir (UI)
-def _sifre_formu_hazirla(monkeypatch, girdiler: list[str], checkbox: bool = False):
+def _sifre_formu_hazirla(monkeypatch, girdiler: list[str]):
     state = {"admin_token": "tok"}
     monkeypatch.setattr(admin_auth.st, "session_state", state)
     monkeypatch.setattr(admin_auth.st, "form", lambda *a, **k: MagicMock())
     sirali = iter(girdiler)
     monkeypatch.setattr(admin_auth.st, "text_input", lambda *a, **k: next(sirali))
-    monkeypatch.setattr(admin_auth.st, "checkbox", lambda *a, **k: checkbox)
     monkeypatch.setattr(admin_auth.st, "form_submit_button", lambda *a, **k: True)
     error = MagicMock()
     success = MagicMock()
@@ -133,6 +132,7 @@ def test_sifre_degistir_yerel_dogrulama(monkeypatch, girdiler, beklenen):
 
 
 def test_sifre_degistir_basarili_post_ve_success(monkeypatch):
+    """D-194: checkbox kaldırıldı — .env her zaman sessizce güncellenir."""
     _, error, success = _sifre_formu_hazirla(monkeypatch, ["eski1234", "yeni12345", "yeni12345"])
     cagri: dict = {}
 
@@ -149,22 +149,9 @@ def test_sifre_degistir_basarili_post_ve_success(monkeypatch):
     assert cagri["endpoint"] == "/api/admin/change-password"
     assert cagri["json"] == {"old_password": "eski1234", "new_password": "yeni12345"}
     assert cagri["token"] == "tok"
-    env.assert_not_called()  # checkbox False
+    env.assert_called_once_with("yeni12345")
     error.assert_not_called()
     assert "başarıyla" in success.call_args[0][0]
-
-
-def test_sifre_degistir_env_guncelle_secili(monkeypatch):
-    _, _, success = _sifre_formu_hazirla(
-        monkeypatch, ["eski1234", "yeni12345", "yeni12345"], checkbox=True
-    )
-    monkeypatch.setattr(admin_auth, "post_api", lambda *a, **k: {"ok": True})
-    env = MagicMock(return_value=True)
-    monkeypatch.setattr(admin_auth, "_env_sifre_guncelle", env)
-
-    admin_auth.render_sifre_degistir()
-
-    env.assert_called_once_with("yeni12345")
     assert "`.env` güncellendi" in success.call_args[0][0]
 
 

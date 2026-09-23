@@ -116,9 +116,11 @@ def render_sifre_unuttum() -> None:
     SMTP kurulunca 2. adım ayrı sayfaya/link'e taşınır.
     """
     with st.expander("🔑 Şifremi unuttum"):
+        # Step 1: Reset request (single button)
         with st.form("admin_reset_istek_form"):
             eposta = st.text_input("Kayıtlı e-posta", key="reset_eposta")
             istek = st.form_submit_button("Sıfırlama isteği gönder")
+        
         if istek:
             if not eposta.strip():
                 st.error("E-posta zorunludur.")
@@ -126,46 +128,48 @@ def render_sifre_unuttum() -> None:
                 try:
                     post_api("/api/admin/reset-request", json={"email": eposta.strip()})
                     st.success("İstek alındı. E-posta kayıtlıysa sıfırlama kodu üretildi.")
+                    # Session state set edilir → onay formu render edilir
+                    st.session_state["_reset_talep_gonderildi"] = True
                 except APIError as exc:
                     _LOG.warning("Şifre sıfırlama isteği başarısız: %s", exc)
                     st.error("İstek gönderilemedi. Sunucuya ulaşılamıyor olabilir.")
-
-        st.caption("Sıfırlama kodunu aldıysanız aşağıdan yeni şifrenizi belirleyin.")
-        with st.form("admin_reset_onay_form", clear_on_submit=True):
-            onay_eposta = st.text_input("E-posta", key="reset_onay_eposta")
-            kod = st.text_input("Sıfırlama kodu", key="reset_kod")
-            yeni = st.text_input("Yeni şifre (en az 8 karakter)", type="password")
-            tekrar = st.text_input("Yeni şifre (tekrar)", type="password")
-            onay = st.form_submit_button("Şifreyi güncelle")
-        if not onay:
-            return
-        if not onay_eposta.strip() or not kod.strip() or not yeni:
-            st.error("E-posta, kod ve yeni şifre zorunludur.")
-            return
-        if len(yeni) < 8:
-            st.error("Yeni şifre en az 8 karakter olmalı.")
-            return
-        if yeni != tekrar:
-            st.error("Yeni şifreler eşleşmiyor.")
-            return
-        try:
-            sonuc = post_api(
-                "/api/admin/reset-confirm",
-                json={
-                    "email": onay_eposta.strip(),
-                    "token": kod.strip(),
-                    "new_password": yeni,
-                },
-            )
-        except APIError as exc:
-            _LOG.warning("Şifre sıfırlama onayı başarısız: %s", exc)
-            st.error("Şifre güncellenemedi: kod geçersiz veya süresi dolmuş olabilir.")
-            return
-        if sonuc and sonuc.get("ok"):
-            flash_yaz("✅ Şifreniz güncellendi. Yeni şifrenizle giriş yapabilirsiniz.")
-            st.rerun()
-        else:
-            st.error("Şifre güncellenemedi: beklenmeyen yanıt.")
+        
+        # Step 2: Reset confirm (conditionally shown)
+        if st.session_state.get("_reset_talep_gonderildi"):
+            st.divider()
+            st.caption("Sıfırlama kodunu aldıysanız aşağıdan yeni şifrenizi belirleyin.")
+            with st.form("admin_reset_onay_form", clear_on_submit=True):
+                onay_eposta = st.text_input("E-posta", key="reset_onay_eposta")
+                kod = st.text_input("Sıfırlama kodu", key="reset_kod")
+                yeni = st.text_input("Yeni şifre (en az 8 karakter)", type="password")
+                tekrar = st.text_input("Yeni şifre (tekrar)", type="password")
+                onay = st.form_submit_button("Şifreyi güncelle")
+            
+            if onay:
+                if not onay_eposta.strip() or not kod.strip() or not yeni:
+                    st.error("E-posta, kod ve yeni şifre zorunludur.")
+                elif len(yeni) < 8:
+                    st.error("Yeni şifre en az 8 karakter olmalı.")
+                elif yeni != tekrar:
+                    st.error("Yeni şifreler eşleşmiyor.")
+                else:
+                    try:
+                        sonuc = post_api(
+                            "/api/admin/reset-confirm",
+                            json={
+                                "email": onay_eposta.strip(),
+                                "token": kod.strip(),
+                                "new_password": yeni,
+                            },
+                        )
+                        if sonuc and sonuc.get("ok"):
+                            flash_yaz("✅ Şifreniz güncellendi. Yeni şifrenizle giriş yapabilirsiniz.")
+                            st.rerun()
+                        else:
+                            st.error("Şifre güncellenemedi: beklenmeyen yanıt.")
+                    except APIError as exc:
+                        _LOG.warning("Şifre sıfırlama onayı başarısız: %s", exc)
+                        st.error("Şifre güncellenemedi: kod geçersiz veya süresi dolmuş olabilir.")
 
 
 def admin_cikis() -> None:
@@ -212,9 +216,6 @@ def render_sifre_degistir(token: str | None = None) -> None:
         mevcut = st.text_input("Mevcut şifre", type="password")
         yeni = st.text_input("Yeni şifre (en az 8 karakter)", type="password")
         tekrar = st.text_input("Yeni şifre (tekrar)", type="password")
-        env_guncelle = st.checkbox(
-            "`.env` içindeki ADMIN_PASSWORD değerini de güncelle", value=True
-        )
         gonder = st.form_submit_button("🔑 Şifreyi değiştir")
     if not gonder:
         return
@@ -242,9 +243,8 @@ def render_sifre_degistir(token: str | None = None) -> None:
     if not (sonuc and sonuc.get("ok")):
         st.error("Şifre değiştirilemedi: beklenmeyen yanıt.")
         return
-    env_notu = ""
-    if env_guncelle:
-        env_notu = " `.env` güncellendi." if _env_sifre_guncelle(yeni) else " (.env güncellenemedi.)"
+    # D-194: .env her zaman sessizce güncellenir, kullanıcıya seçenek sunulmaz.
+    env_notu = " `.env` güncellendi." if _env_sifre_guncelle(yeni) else " (.env güncellenemedi.)"
     st.success(f"✅ Şifre başarıyla değiştirildi.{env_notu}")
 
 

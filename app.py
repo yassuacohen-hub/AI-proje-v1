@@ -371,11 +371,14 @@ def _hesap_karti_popover() -> None:
 
     Admin: email, Çıkış, Şifre Değiştir.
     Misafir: Giriş yap (AUTH-GATE-01 modalını tetikler).
+
+    D-194: Şifre Değiştir formu popover İÇİNDE değil ayrı bir st.dialog'da
+    açılır — aksi halde popover form kadar büyüyüp "çok büyük modal" ve
+    "iki tane var" algısına yol açıyordu.
     """
     from web_dashboard.tabs.admin_auth import (
         admin_cikis,
         get_admin_token,
-        render_admin_login,
         render_sifre_degistir,
     )
 
@@ -388,7 +391,8 @@ def _hesap_karti_popover() -> None:
             col1, col2 = st.columns(2)
             with col1:
                 if st.button("Şifre Değiştir", key="pop_sifre"):
-                    render_sifre_degistir()
+                    st.session_state["_sifre_degistir_dialog"] = True
+                    st.rerun()
             with col2:
                 if st.button("Çıkış", key="pop_cikis"):
                     admin_cikis()
@@ -397,6 +401,17 @@ def _hesap_karti_popover() -> None:
             if st.button("Giriş Yap", key="pop_giris"):
                 st.session_state["_force_auth_gate"] = True
                 st.rerun()
+
+    if st.session_state.get("_sifre_degistir_dialog"):
+        _sifre_degistir_dialog(render_sifre_degistir)
+
+
+@st.dialog("🔑 Şifre Değiştir")
+def _sifre_degistir_dialog(render_sifre_degistir) -> None:
+    render_sifre_degistir()
+    if st.button("Kapat", key="sifre_dialog_kapat"):
+        st.session_state["_sifre_degistir_dialog"] = False
+        st.rerun()
 
 
 def render_sidebar(secili: TabTanimi) -> None:
@@ -730,6 +745,33 @@ def main() -> None:
     - render_footer/render_chat — Ana akışın parçası (sayfa.run() sonrası).
     """
     stil_enjekte(tema=aktif_tema())
+
+    # D-192: Token restore — AppSession reset'ten sonra
+    # Fallback hierarchy: session_state → cache file → auth gate
+    if not st.session_state.get("admin_token"):
+        restore_error = None
+        try:
+            from pathlib import Path
+            cache_dir = Path.home() / ".streamlit_token_cache"
+            token_file = cache_dir / "admin_token.txt"
+            
+            # 1. URL query param'dan denetle (v1.41+ çalışmayabilir ama deneyelim)
+            token_param = st.query_params.get("admin_token", "")
+            if isinstance(token_param, list):
+                token_param = token_param[0] if token_param else ""
+            
+            # 2. Cache file'dan denetle (AppSession sınırı aşan persist)
+            if not token_param and token_file.exists():
+                token_param = token_file.read_text(encoding='utf-8').strip()
+            
+            # Token varsa session state'e yazıl
+            if token_param and isinstance(token_param, str):
+                st.session_state["admin_token"] = token_param
+        except Exception as e:
+            restore_error = f"{type(e).__name__}: {e}"
+        
+        if restore_error:
+            st.warning(f"⚠️ Token restore hatası: {restore_error}")
 
     # AUTH-GATE-01: Admin token yoksa veya popover'dan giriş isteniyorsa giriş modalı
     if not st.session_state.get("admin_token") or st.session_state.get("_force_auth_gate"):

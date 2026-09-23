@@ -116,6 +116,17 @@ class NineRouter:
         except json.JSONDecodeError:
             pass
 
+        # 1b) D-194: pretty-printed (çok satırlı) JSON + SSE "data: [DONE]"
+        # trailer'ı (text/event-stream). Trailer'ı kırpıp tek blok tekrar dene.
+        sans_trailer = "\n".join(
+            line for line in text.splitlines() if line.strip() != "data: [DONE]"
+        ).strip()
+        if sans_trailer and sans_trailer != text:
+            try:
+                return json.loads(sans_trailer)
+            except json.JSONDecodeError:
+                pass
+
         # 2) SSE / satır satır: her 'data:' satırını dene
         for line in text.splitlines():
             line = line.strip()
