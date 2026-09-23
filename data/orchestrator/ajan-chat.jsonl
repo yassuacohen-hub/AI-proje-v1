@@ -1,6 +1,0 @@
-{"timestamp": "2026-09-23T18:15:55", "ajan": "mimar", "task_id": "TEST-001", "sorun": "Test sorun 1", "cozum": "", "durum": "acik", "link": ""}
-{"timestamp": "2026-09-23T18:16:00", "ajan": "yasu", "task_id": "CHAT-001", "sorun": "Admin panelinde chat widget gozukmyor", "cozum": "", "durum": "acik", "link": ""}
-{"timestamp": "2026-09-23T18:16:05", "ajan": "ihsan", "task_id": "CHAT-002", "sorun": "Chat veri yaziliyor ancak okuma yavash", "cozum": "", "durum": "acik", "link": ""}
-{"timestamp": "2026-09-23T18:16:10", "ajan": "utku", "task_id": "CHAT-003", "sorun": "Widget styling uyumsuz", "cozum": "", "durum": "acik", "link": ""}
-{"timestamp": "2026-09-23T18:16:15", "ajan": "salih", "task_id": "CHAT-004", "sorun": "Chat lock timeout hatasi", "cozum": "", "durum": "acik", "link": ""}
-{"timestamp": "2026-09-23T18:16:20", "ajan": "mimar", "task_id": "CHAT-005", "sorun": "JSONL file corruption riski", "cozum": "", "durum": "acik", "link": ""}

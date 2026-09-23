@@ -534,5 +534,45 @@
     "tetik_sayisi": 67,
     "uyari_tarihi": "2026-09-23T22:34:02",
     "mesaj": "⚠️ yasu () — trigger_logging_cleanup 67. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "trigger_logging_cleanup",
+    "task_id": "yasu",
+    "gorev_basligi": "",
+    "tetik_sayisi": 68,
+    "uyari_tarihi": "2026-09-23T22:39:02",
+    "mesaj": "⚠️ yasu () — trigger_logging_cleanup 68. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "trigger_logging_cleanup",
+    "task_id": "yasu",
+    "gorev_basligi": "",
+    "tetik_sayisi": 69,
+    "uyari_tarihi": "2026-09-23T22:44:02",
+    "mesaj": "⚠️ yasu () — trigger_logging_cleanup 69. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "trigger_logging_cleanup",
+    "task_id": "yasu",
+    "gorev_basligi": "",
+    "tetik_sayisi": 70,
+    "uyari_tarihi": "2026-09-23T22:49:02",
+    "mesaj": "⚠️ yasu () — trigger_logging_cleanup 70. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "trigger_logging_cleanup",
+    "task_id": "yasu",
+    "gorev_basligi": "",
+    "tetik_sayisi": 71,
+    "uyari_tarihi": "2026-09-23T22:54:02",
+    "mesaj": "⚠️ yasu () — trigger_logging_cleanup 71. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "trigger_logging_cleanup",
+    "task_id": "yasu",
+    "gorev_basligi": "",
+    "tetik_sayisi": 72,
+    "uyari_tarihi": "2026-09-23T22:59:02",
+    "mesaj": "⚠️ yasu () — trigger_logging_cleanup 72. kez uyarıldı; henüz başlamadı."
   }
 ]

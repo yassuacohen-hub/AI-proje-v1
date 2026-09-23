@@ -7281,5 +7281,22 @@
     "mod": "code",
     "brief": "plans/brief_utku_TEST-13-PREEXIST-DUZELT-01.md",
     "talimat": "d193_menu_e2e_report.md Ek Bulgu bolumune bak. Brief'te detay var."
+  },
+  {
+    "task_id": "ALTYAPI-GROQ-KEY-DOGRULA-01",
+    "id": "ALTYAPI-GROQ-KEY-DOGRULA-01",
+    "baslik": "[ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-23T22:59:32",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-GROQ-KEY-DOGRULA-01.md",
+    "talimat": "ALTYAPI-GROQ-KEY-DOGRULA-01: GroqClient.chat() gercek Groq API'sine karsi test et. Brif: plans/brief_yasu_ALTYAPI-GROQ-KEY-DOGRULA-01.md"
   }
 ]

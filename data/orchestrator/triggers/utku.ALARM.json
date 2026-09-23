@@ -1,0 +1,42 @@
+[
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-01",
+    "gorev_basligi": "[TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-23T22:39:03",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-01 ([TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s)) — utku 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-01",
+    "gorev_basligi": "[TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s)",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-23T22:44:02",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-01 ([TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s)) — utku 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-01",
+    "gorev_basligi": "[TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-23T22:49:02",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-01 ([TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s)) — utku 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-01",
+    "gorev_basligi": "[TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-23T22:54:02",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-01 ([TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s)) — utku 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-01",
+    "gorev_basligi": "[TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-23T22:59:02",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-01 ([TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s)) — utku 5. kez uyarıldı; henüz başlamadı."
+  }
+]

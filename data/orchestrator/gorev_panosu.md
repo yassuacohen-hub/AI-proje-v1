@@ -146,6 +146,7 @@
 | ALTYAPI-D66-BYPASS-TETIKLEME | [Altyapi] D-65 Is Durmaz Bypass Tetikleme → pano_denetim exit 2 + tetik_senk rapor (1-2g) | ihsan | P1 | plan | scripts/pano_denetim.py, scripts/tetik_senk.py, tests/test_d66_bypass_tetikleme.py |
 | ALTYAPI-D66-BYPASS-TETIKLEME-01 | [ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s) | ihsan | P1 | plan | - |
 | TEST-13-PREEXIST-DUZELT-01 | [TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s) | utku | P2 | plan | plans/brief_utku_TEST-13-PREEXIST-DUZELT-01.md |
+| ALTYAPI-GROQ-KEY-DOGRULA-01 | [ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d) | yasu | P2 | plan | - |
 
 ## Tamamlananlar
 
