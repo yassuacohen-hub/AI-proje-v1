@@ -19030,5 +19030,21 @@
     "tetik_sayisi": 888,
     "uyari_tarihi": "2026-09-22T11:49:02",
     "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 888. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 889,
+    "uyari_tarihi": "2026-09-23T08:39:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 889. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "REVIEW-ONAY-KUYRUGU-01",
+    "gorev_basligi": "Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)",
+    "tetik_sayisi": 890,
+    "uyari_tarihi": "2026-09-23T08:44:02",
+    "mesaj": "⚠️ REVIEW-ONAY-KUYRUGU-01 (Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01)) — yasu 890. kez uyarıldı; henüz başlamadı."
   }
 ]

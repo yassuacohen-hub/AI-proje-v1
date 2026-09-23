@@ -8694,5 +8694,53 @@
     "tetik_sayisi": 2,
     "uyari_tarihi": "2026-09-22T06:04:04",
     "mesaj": "⚠️ DOC-SIRKET-MASTER-01 ([DOC] Ã…Âirket Master ana belgesi dÃƒÂ¼zelt Ã¢â€ â€™ 01_sirket_master_ana_belgesi.md (3s)) — utku 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-23T08:39:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — utku 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-23T08:39:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — utku 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "DASH-UX-02a",
+    "gorev_basligi": "[DASH-UX] DASH-UX-02a: 5 sistem sekmesini tek 'admin_sistem.py' icinde birlest",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-23T08:39:02",
+    "mesaj": "⚠️ DASH-UX-02a ([DASH-UX] DASH-UX-02a: 5 sistem sekmesini tek 'admin_sistem.py' icinde birlest) — utku 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-AYARLAR-SAYFA-01",
+    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-23T08:44:02",
+    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — utku 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ADMIN-UX-MENUTREE-01",
+    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-23T08:44:02",
+    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — utku 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "DASH-UX-02a",
+    "gorev_basligi": "[DASH-UX] DASH-UX-02a: 5 sistem sekmesini tek 'admin_sistem.py' icinde birlest",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-23T08:44:02",
+    "mesaj": "⚠️ DASH-UX-02a ([DASH-UX] DASH-UX-02a: 5 sistem sekmesini tek 'admin_sistem.py' icinde birlest) — utku 2. kez uyarıldı; henüz başlamadı."
   }
 ]
