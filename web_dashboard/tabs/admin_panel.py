@@ -39,6 +39,41 @@ from company_master.settings import (  # noqa: E402
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
 from company_master.chat import oku, ozet  # noqa: E402
 
+#: D-192 Faz 2 — ajan başına sabit renk (6 ajan: ihsan/utku/salih/yasu/orkestrator/mimir)
+_AJAN_RENKLERI: dict[str, str] = {
+    "ihsan": "#FFD6D6",
+    "utku": "#D6E4FF",
+    "salih": "#D6FFD9",
+    "yasu": "#FFF3D6",
+    "orkestrator": "#E8D6FF",
+    "mimir": "#D6FFF7",
+}
+#: Önem derecesi (4 tip) → renk + etiket
+_ONEM_ETIKET: dict[str, str] = {
+    "kritik": "🔴 Kritik",
+    "yuksek": "🟠 Yüksek",
+    "orta": "🟡 Orta",
+    "dusuk": "🟢 Düşük",
+}
+_ONEM_RENKLERI: dict[str, str] = {
+    "kritik": "#FF4D4D",
+    "yuksek": "#FF9F40",
+    "orta": "#FFD93D",
+    "dusuk": "#6BCB77",
+}
+
+
+def _sohbet_tablo_stil(row: "pd.Series") -> list[str]:
+    """Ajan ve Önem Derecesi hücrelerini renklendirir (D-192 Faz 2)."""
+    stiller = [""] * len(row)
+    if "Ajan" in row.index:
+        renk = _AJAN_RENKLERI.get(str(row["_ajan_ham"]).lower(), "#EEEEEE")
+        stiller[row.index.get_loc("Ajan")] = f"background-color: {renk}"
+    if "Önem Derecesi" in row.index:
+        renk = _ONEM_RENKLERI.get(str(row["_onem_ham"]).lower(), "#EEEEEE")
+        stiller[row.index.get_loc("Önem Derecesi")] = f"background-color: {renk}; color: white"
+    return stiller
+
 _log = logging.getLogger(__name__)
 
 #: ADMIN-UI-10 — Bolumler tek yerde tanimlanir (anchor tutarliligi).
@@ -481,9 +516,10 @@ def render_chat_summary() -> None:
     else:
         son_acik = sorted(acik, key=lambda x: x.get("timestamp", ""), reverse=True)[:3]
         for i, sorun in enumerate(son_acik, 1):
-            kimden = sorun.get("kimden", "orkestrator").upper()
-            kime = sorun.get("ajan", "?").upper()
-            with st.expander(f"**{i}. {kimden} → {kime}** — {sorun.get('task_id', '?')}"):
+            ajan = sorun.get("kimden", "orkestrator").upper()
+            hangi_ajana = sorun.get("ajan", "?").upper()
+            onem_etiket = _ONEM_ETIKET.get(sorun.get("onem", "orta"), sorun.get("onem", "orta"))
+            with st.expander(f"**{i}. {ajan} → {hangi_ajana}** — {sorun.get('task_id', '?')} · {onem_etiket}"):
                 st.write(f"**Sorun:** {sorun.get('sorun', '')}")
                 if sorun.get("cozum"):
                     st.write(f"**İlk Çözüm Önerisi:** {sorun.get('cozum')}")
@@ -496,16 +532,26 @@ def render_chat_summary() -> None:
     if tum_sorunlar:
         rows = []
         for s in sorted(tum_sorunlar, key=lambda x: x.get("timestamp", ""), reverse=True):
+            ajan_ham = s.get("kimden", "orkestrator")
+            onem_ham = s.get("onem", "orta")
             rows.append({
-                "Tarih": s.get("timestamp", "")[:16],
-                "Kimden": s.get("kimden", "orkestrator").upper(),
-                "Kime": s.get("ajan", "").upper(),
+                "Ajan": ajan_ham.upper(),
+                "Hangi Ajana?": s.get("ajan", "").upper(),
                 "Görev": s.get("task_id", ""),
                 "Sorun": s.get("sorun", "")[:50],
+                "Çözüm": s.get("cozum", "")[:50] or "—",
                 "Durum": s.get("durum", ""),
+                "Önem Derecesi": _ONEM_ETIKET.get(onem_ham, onem_ham),
+                "Tarih": s.get("timestamp", "")[:16],
+                "_ajan_ham": ajan_ham,
+                "_onem_ham": onem_ham,
             })
         df = pd.DataFrame(rows)
-        st.dataframe(df, width="stretch", hide_index=True)
+        gorunen_kolonlar = ["Ajan", "Hangi Ajana?", "Görev", "Sorun", "Çözüm", "Durum", "Önem Derecesi", "Tarih"]
+        st.dataframe(
+            df.style.apply(_sohbet_tablo_stil, axis=1),
+            width="stretch", hide_index=True, column_order=gorunen_kolonlar,
+        )
         st.caption(f"Toplam {len(tum_sorunlar)} sorun kaydedilmiş.")
     else:
         st.info("Henüz sorun kaydı yok.")

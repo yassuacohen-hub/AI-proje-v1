@@ -44,12 +44,16 @@ def _ajan_normalize(ad: str | None) -> str:
     return ad
 
 
+ONEM_SEVIYELERI: tuple[str, ...] = ("kritik", "yuksek", "orta", "dusuk")
+
+
 def ac(
     ajan: str,
     task_id: str,
     sorun: str,
     cozum: str = "",
     kimden: str = "orkestrator",
+    onem: str = "orta",
     data_dir: Path | None = None,
 ) -> dict[str, Any]:
     """Sorun aç (problem kayıt).
@@ -60,6 +64,7 @@ def ac(
         sorun: 1-200 char alıntı
         cozum: 0-300 char çözüm önerisi (isteğe bağlı)
         kimden: gönderen ajan adı (varsayılan: orkestrator)
+        onem: önem derecesi — kritik/yuksek/orta/dusuk (varsayılan: orta)
         data_dir: test için custom data dir
     
     Returns:
@@ -75,6 +80,7 @@ def ac(
         "sorun": sorun[:200],
         "cozum": cozum[:300] if cozum else "",
         "durum": "acik",
+        "onem": onem if onem in ONEM_SEVIYELERI else "orta",
         "link": "",
     }
     

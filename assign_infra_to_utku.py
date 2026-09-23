@@ -33,7 +33,7 @@ hatalar = []
 
 for task_id in secilen_gorevler:
     try:
-        sonuc = trigger.tetik_ekle("utku", task_id)
+        sonuc = trigger.tetik_ekle(task_id, "utku")
         tamamlandi.append((task_id, sonuc))
         print(f"✓ {task_id}")
         print(f"  Tetik: {sonuc.get('created_at', 'N/A')[:19]}")

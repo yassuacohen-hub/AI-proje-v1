@@ -176,7 +176,7 @@ class TestAdminPanelREST:
             assert result["ajan"] == "yasu"
             assert result["task_id"] == "CODE-99"
             assert result["durum"] == "acik"
-            assert len(result) == 7, "Result dict 7 alan olmalı"
+            assert len(result) == 9, "Result dict 9 alan olmalı (kimden+onem eklendi, D-192 Faz 2)"
         except Exception as e:
             pytest.fail(f"REST POST hatası: {e}")
     
