@@ -33,13 +33,11 @@ from src.company_master.orchestrator import task_board as tb  # noqa: E402
 # ponytail: tavan = elle bakim. Yukseltme yolu = "id degistir + yonlendirme
 # kaydi birak" komutu; o gelince bu liste bosalir.
 MUAF: dict[str, str] = {
-    "COP-26": "eski COP serisi; ALAN on eki yok, kapanmayi bekliyor",
-    "ADMIN-UI-CACHE-OPT-01": "task_id 'ADMIN-' kanonik ALAN degil",
-    "GRAPH-CANONICAL-SECER-02": "'GRAPH' ALAN sozlugunde yok (ALAN kararı bekliyor)",
-    "AGENTS-MERGE-UU": "task_id 'AGENTS-'; baslik ALAN'i [DOC]",
-    "VAULT-CLEANUP-BATCH": "task_id 'VAULT-'; baslik ALAN'i [ALTYAPI]",
-    "ADMIN-UX-SIDEBAR-TAB": "task_id 'ADMIN-'; ayrica ASCII '->' kullaniyor",
+    "ALTYAPI-D66-BYPASS-TETIKLEME": "task_id 'ALTYAPI-' ALAN sozlugunde yok (ALAN karari bekliyor)",
 }
+# ORCH-08: COP-26, ALTYAPI-D66-BYPASS-TETIKLEME-01, AGENTS-MERGE-UU,
+# VAULT-CLEANUP-BATCH kapandi (durum=done) -> _acik_gorevler() disinda,
+# muafiyet gerekmiyor, listeden dusuruldu (2026-09-23, ihsan).
 
 
 # conftest'teki izolasyon fixture'i tb.TASK_BOARD'u tmp_path'e cevirdigi icin
