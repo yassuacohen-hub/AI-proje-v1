@@ -18,6 +18,11 @@ Sebep (D-77, D-68 kuralları):
 - Commit → checksum stabil → tetik_senk.py (D-68 senkronizasyonu) sorun çekmez
 - Stash → geçici, progress kayıt edilmez, MIMIR rapor (D-190) context kayıp
 
+**Git Push Yetkisi:**
+- Yasu (yasu.md D-80): "Görev alır, test yazar, dosya yazar, komut çalıştırır" ✓
+- Push yetkisi = kod değişiklikleri repoya gitmesi ✓
+- **Ön koşul:** Önce ihsan TRIGGER-LOGGING-CLEANUP'ı panoya eklemeli (D-77 pano monopolü)
+
 **Komut:**
 ```bash
 git add Huginn\ Data\ Insights/src/company_master/orchestrator/trigger.py

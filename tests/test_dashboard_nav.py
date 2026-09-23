@@ -50,8 +50,8 @@ logging.disable(logging.WARNING)
 
 def test_bolum_sayisi_ve_benzersizlik() -> None:
     """BK5: bolum listesi eksiksiz ve anahtarlar/URL'ler benzersiz."""
-    # 28 mevcut + 4 yeni üst sayfa − 2 kalkar (kimlik, yonetim) = 30; D-190: rapor_listesi +1 = 31
-    assert len(SECTIONS) == 31
+    # 28 mevcut + 4 yeni üst sayfa − 2 kalkar (kimlik, yonetim) = 30; D-190: rapor_listesi +1 = 31; D-192: ajan_sohbet +1 = 32
+    assert len(SECTIONS) == 32
 
     anahtarlar = [t.anahtar for t in SECTIONS]
     urller = [t.url_path for t in SECTIONS]
@@ -333,12 +333,13 @@ def test_alt_sekmeler_sira_sirali():
 
     UX-MENU-03: `hatalar` → Sistem'e taşındı (E4), `dlq` menüden çıktı.
     D-190: `rapor_listesi` eklendi (sira=1).
+    D-192: `ajan_sohbet` eklendi (sira=1), rapor_listesi sira=2 oldu.
     """
     alt = alt_sekmeler("proje_yonetimi", ROL_ADMIN)
     siralar = [t.sira for t in alt]
     assert siralar == sorted(siralar)
     assert [t.anahtar for t in alt] == [
-        "karar_defteri", "rapor_listesi", "abrakadabra", "denetim",
+        "karar_defteri", "ajan_sohbet", "rapor_listesi", "abrakadabra", "denetim",
     ]
 
 

@@ -1,14 +1,14 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-23T15:50:24
+> Son guncelleme: 2026-09-23T17:06:52
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
 
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
-| - | - | - | - | - |
-| - | - | - | - | - |
+| - | - | - | P2 | plan |
+| - | - | - | P2 | plan |
 | ADMIN-UX-PROFILMENU-01 | Sag-alt admin profil popover (ProfileMen | salih | P0 | iptal |
 | ADMIN-UX-MENUTREE-01 | Sol menu agaci yeniden gruplama; Ayarlar | ihsan | P1 | iptal |
 | WK-01 | Career Pages Scraper — Enhanced Data Ext | salih | P1 | archive |
@@ -127,20 +127,18 @@
 | BRIK-00 | ALTYAPI Archive sema + gece zinciri → ku | ihsan | P1 | archive |
 | ADMIN-UI-CACHE-OPT-01 | [ALTYAPI] Admin UI cache optimizasyonu v | yasu | P2 | review |
 | GRAPH-CANONICAL-SECER-02 | [GRAPH] Canonical graph baglanti guvenli | yasu | P2 | review |
-| AGENTS-MERGE-UU | [DOC] AGENTS.md kok/vault kopuklugunu du | ihsan | P0 | review |
-| VAULT-CLEANUP-BATCH | [ALTYAPI] Vault alarm/tetik artiklarini  | ihsan | P2 | review |
+| AGENTS-MERGE-UU | [DOC] AGENTS.md kok/vault kopuklugunu du | ihsan | P0 | approved |
+| VAULT-CLEANUP-BATCH | [ALTYAPI] Vault alarm/tetik artiklarini  | ihsan | P2 | approved |
 | ADMIN-UX-SIDEBAR-TAB | [UI] Sidebar tab secim durumunu sakla -> | utku | P1 | review |
 | ORKESTRA-ONAY-BOSALT-01 | [ORKESTRA] Onay kuyrugundaki 9 teslimi d | salih | P0 | plan |
 | ORKESTRA-GOREV-KAPI-01 | [ORKESTRA] Gorev atama kapisini düzelt → | ihsan | P0 | review |
 | ALTYAPI-KILIT-OTOMATIK-01 | [ALTYAPI] Kilit otomatik birakmayi yaz → | yasu | P1 | aktif |
 | ALTYAPI-TETIK-ARSIV-01 | [ALTYAPI] Kanonik olmayan tetik dosyalar | yasu | P2 | review |
 | ALTYAPI-MOJIBAKE-DIZIN-01 | [ALTYAPI] mojibake_onar.py dizin taramas | yasu | P2 | aktif |
-| ALTYAPI-IMPORT-TEKLES-01 | [ALTYAPI] trigger.py import yolunu düzel | yasu | P2 | review |
 | ALTYAPI-TETIK-ZAMAN-01 | [ALTYAPI] tetik_senk zamanlamasini yaz → | yasu | P2 | aktif |
 | TEST-ADMIN-PERF-01 | [TEST] admin_performance kpi_karti gecis | utku | P1 | aktif |
 | TEST-WEBHOOK-KPI-01 | [TEST] webhook_monitor mock hedefini duz | utku | P2 | aktif |
 | UI-SUBHEADER-MUSTERI-01 | [UI] musteri_yonetimi subheader temizlig | utku | P2 | aktif |
-| ALTYAPI-MARKA-HUGGINN-01 | [ALTYAPI] HUGGINN yazimini duzelt → mark | yasu | P2 | review |
 | ALTYAPI-D182-MIMIR-01 | [ALTYAPI] mimir ajanini yaz → trigger.AJ | ihsan | P1 | review |
 | ORKESTRA-D65-ISDURMAZ-01 | [ORKESTRA] ölç D-65 İş Durmaz ihlalini → | ihsan | P1 | review |
 | ALTYAPI-MOJIBAKE-BARIYER-01 | [ALTYAPI] Mojibake araci yazim-oncesi ha | ihsan | P0 | review |
@@ -153,8 +151,6 @@
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| ORKESTRA-TETIK-TEMIZLIK-01 | [ORKESTRA] ihsan postasindaki 5 yinelene | ihsan | 2026-09-22 |
-| ORPHAN-ARASTIRMA-01 | [ARASTIRMA] 4 orphan kuyruk kaydi — pano | yasu | 2026-09-22 |
 | TEST-GRAPH-KOPRU | [TEST] denetle backlink_sayimi → dogrula | utku | 2026-09-21 |
 | VERI-ARSIV-01 | [VERI] düzelt gizleme_filtreleri → app.j | utku | 2026-09-21 |
 | VERI-GRAPH-01 | [VERI] yaz wikilink kopruleri → graph_ko | utku | 2026-09-21 |
@@ -163,6 +159,8 @@
 | UI-ADOPT-01 | [UI] UI-ADOPT-01: kpi_karti() -> MetricC | utku | - |
 | CHART-KATEGORI-02 | [CHART] KATEGORI_RENK <-> KATEGORILER uy | utku | - |
 | TEST-DASHBOARD-REGRESYON-01 | [TEST] Dashboard test regresyonu: 8 kırı | utku | - |
+| ALTYAPI-IMPORT-TEKLES-01 | [ALTYAPI] trigger.py import yolunu düzel | yasu | 2026-09-23 |
+| ALTYAPI-MARKA-HUGGINN-01 | [ALTYAPI] HUGGINN yazimini duzelt → mark | yasu | 2026-09-23 |
 
 ## Son Handoff'lar
 

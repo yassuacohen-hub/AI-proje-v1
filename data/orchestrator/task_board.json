@@ -76,7 +76,14 @@
         "description": "Admin panel rapor tab (low priority)",
         "baslangic": null
       }
-    ]
+    ],
+    "baslik": "-",
+    "sahip": "-",
+    "oncelik": "P2",
+    "durum": "plan",
+    "dosyalar": [],
+    "mod": "code",
+    "id": ""
   },
   {
     "sprint_id": "SPRINT-2026-09-23-PANO-DENETIM",
@@ -140,12 +147,28 @@
         "baslangic": "2026-09-23T12:27:46Z"
       },
       {
+        "task_id": "TRIGGER-LOGGING-CLEANUP",
         "id": "TRIGGER-LOGGING-CLEANUP",
-        "assigned_to": "yasu",
-        "priority": "P1",
-        "status": "plan",
-        "description": "trigger.py temizlik: Yorum sil, logging ekle",
-        "baslangic": "2026-09-23T12:27:46Z"
+        "baslik": "[ALTYAPI] trigger.py logging cleanup: print→logger, except→logger.exception (2s)",
+        "sahip": "yasu",
+        "oncelik": "P1",
+        "durum": "aktif",
+        "baslangic": "2026-09-23T13:53:00Z",
+        "bitis": null,
+        "dosyalar": [
+          "Huginn Data Insights/src/company_master/orchestrator/trigger.py",
+          "Huginn Data Insights/tests/test_trigger.py",
+          "Huginn Data Insights/tests/test_tetik_senk.py",
+          "Huginn Data Insights/tests/test_mojibake_dizin.py",
+          "Huginn Data Insights/tests/test_task_board_kilit.py"
+        ],
+        "not": "",
+        "source": "ic",
+        "from_agent": null,
+        "kanit": "",
+        "mod": "code",
+        "brief": "plans/brief_yasu_TRIGGER-LOGGING-CLEANUP.md",
+        "talimat": "D-87 tek komut atama: trigger.py logging cleanup, 34 test hedefi"
       },
       {
         "id": "ADMIN-PANEL-RAPOR-TAB",
@@ -155,7 +178,14 @@
         "description": "Admin panel rapor tab (low priority)",
         "baslangic": null
       }
-    ]
+    ],
+    "baslik": "-",
+    "sahip": "-",
+    "oncelik": "P2",
+    "durum": "plan",
+    "dosyalar": [],
+    "mod": "code",
+    "id": ""
   },
   {
     "task_id": "ADMIN-UX-LOGOUT-01",
@@ -6856,9 +6886,9 @@
     "baslik": "[DOC] AGENTS.md kok/vault kopuklugunu duzelt → tek SSOT + D-188 (2s)",
     "sahip": "ihsan",
     "oncelik": "P0",
-    "durum": "review",
+    "durum": "approved",
     "baslangic": "2026-09-23T10:39:33",
-    "bitis": null,
+    "bitis": "2026-09-23T13:54:00",
     "dosyalar": [
       "AGENTS.md",
       "Huginn Data Insights/AGENTS.md"
@@ -6876,9 +6906,9 @@
     "baslik": "[ALTYAPI] Vault alarm/tetik artiklarini sil → temiz kuyruk (1s)",
     "sahip": "ihsan",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "approved",
     "baslangic": "2026-09-23T10:39:33",
-    "bitis": null,
+    "bitis": "2026-09-23T13:54:30",
     "dosyalar": [],
     "not": "Teslim (ihsan): 3 adim tamam: 19 ALARM (4 otomatik silindi, 15 _trash/ tasindi), 26 mojibake onarildi (5 kurtarilamaz), 29 gorev archive + 4 bitis_temizle. tetik_senk.py'de 3 hata bulundu ve duzeltildi: yanlis data_dir (triggers/ eksik + cwd-bagimli, script haftalardir sessizce 0 dosya isliyordu), iptal final durum listesinde yoktu, cp1254 emoji cokmesi. Pano denetimi fail(4 hata) -> ok(0 hata). 224 tetik satiri, 0 bozuk JSON, 0 BOM.",
     "source": "ic",
@@ -6994,9 +7024,9 @@
     "baslik": "[ALTYAPI] trigger.py import yolunu düzelt → trigger.py (1s)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-23T11:36:42",
-    "bitis": null,
+    "bitis": "2026-09-23T17:06:52",
     "dosyalar": [],
     "not": "Teslim (yasu): trigger.py 4 kok-mutlak import paket-gorle yapildi (satir 24 task_board + 3 lokal isbirligi/duzen). Neden gorul: src. oneki yalniz kok sys.path'te calisiyordu; goril import iki baglamda da calisir (kok + sys.path=src) ve tek task_board ornegi garantiler. Test: tests/test_trigger_import.py 4/4 PASSED (kok, paket, uzak-cwd, gorev_kutusu regresyon). pano_denetim: status=ok, ithalat uyarisi kalkti (11->8 uyari). scripts/ sys.path kancalari hala gerekli, kaldirma orkestratorde.",
     "source": "ic",
@@ -7085,9 +7115,9 @@
     "baslik": "[ALTYAPI] HUGGINN yazimini duzelt → marka_denetim temiz (3s)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-23T12:10:34",
-    "bitis": null,
+    "bitis": "2026-09-23T17:06:23",
     "dosyalar": [],
     "not": "Teslim (utku): marka denetimi + cache optimize; HUGGINN-HUGINN gecis tamamlandi",
     "source": "ic",

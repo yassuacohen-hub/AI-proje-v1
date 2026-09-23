@@ -2103,7 +2103,9 @@
       "data/orchestrator/ALTYAPI-IMPORT-TEKLES-01_rapor_2026-09-23_yasu.md"
     ],
     "teslim_tarihi": "2026-09-23T12:35:17",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T17:06:52"
   },
   {
     "task_id": "ORKESTRA-GOREV-KAPI-01",
@@ -2200,7 +2202,9 @@
     "ozet": "marka denetimi + cache optimize; HUGGINN-HUGINN gecis tamamlandi",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-23T13:58:46",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T17:06:23"
   },
   {
     "task_id": "ORKESTRA-D65-ISDURMAZ-01",

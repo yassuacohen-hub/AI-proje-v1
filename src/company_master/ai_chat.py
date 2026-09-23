@@ -81,12 +81,12 @@ VARSAYILAN_KILIT = "abrakadabra"
 #: Model zinciri env anahtarları (yeni → eski, geri uyumlu).
 MODEL_ENV_ANAHTARLARI: tuple[str, ...] = ("MIMIR_MODELS", "ABRAKADABRA_MODELS")
 
-#: K6 — sağlayıcı düşerse sırayla denenecek modeller (UCRUZ önce).
+#: K6 — sağlayıcı düşerse sırayla denenecek modeller.
+#: ponytail: OpenRouter free DNS hatası (Cloudflare origin error), gpt-4o-mini fallback'e döndürüldü.
+#: Add when: OpenRouter stabil olursa yeniden dene.
 VARSAYILAN_MODELLER: tuple[str, ...] = (
     "gpt-4o-mini",
-    "gemini-2.0-flash",
-    "claude-3-5-haiku",
-    "yasu-9router",
+    "groq/llama-3.3-70b-versatile",
 )
 
 #: Onay kapısından geçebilen komutlar. Anahtar → (argüman sayısı, açıklama).

@@ -24,6 +24,13 @@ from typing import Any
 
 from . import task_board as tb
 
+# D-192: Ajan Chat Sistemi entegrasyonu
+try:
+    from company_master.chat import ac as chat_ac
+    HAS_CHAT = True
+except ImportError:
+    HAS_CHAT = False
+
 logger = logging.getLogger(__name__)
 
 
@@ -549,6 +556,8 @@ def rapor_postala(
 
     Ayni posta dosyasi kullanilir; durum `rapor` oldugu icin `bekleyen_tetikler`
     (durum == bekliyor) bu kaydi gorev sanmaz.
+    
+    D-192: Rapor WARNING/ERROR içerse, chat.ac() ile sorun kaydı yapılır.
     """
     ajan = ajan_normalize(ajan)
     hedef = ajan_normalize(hedef)
@@ -564,6 +573,27 @@ def rapor_postala(
     }
     kayitlar.append(kayit)
     _tetikleri_yaz(kayitlar, hedef, data_dir)
+    
+    # D-192: Rapor özetini oku ve sorun seviyesi logları chat.ac() ile kaydet
+    if HAS_CHAT:
+        try:
+            rapor_path = Path(rapor_yolu)
+            if rapor_path.exists():
+                rapor_icerik = rapor_path.read_text(encoding="utf-8", errors="ignore")
+                # WARNING veya ERROR varsa sorun kaydı yap
+                if "WARNING" in rapor_icerik or "ERROR" in rapor_icerik:
+                    # İlk 200 char rapor özeti
+                    ozet = rapor_icerik.split("\n")[0][:200]
+                    chat_ac(
+                        ajan=ajan,
+                        task_id=kayit["task_id"],
+                        sorun=f"Rapor: {ozet}",
+                        cozum="",
+                        data_dir=data_dir
+                    )
+        except Exception as e:
+            logger.warning(f"D-192 chat.ac() hatası: {e}", exc_info=False)
+    
     return kayit
 
 

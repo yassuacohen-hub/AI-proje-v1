@@ -37,6 +37,7 @@ from company_master.settings import (  # noqa: E402
     varsayilanlar,
 )
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
+from company_master.chat import oku, ozet  # noqa: E402
 
 _log = logging.getLogger(__name__)
 
@@ -327,9 +328,9 @@ def render_ayarlar_tab(kullanici_id: str | None = None) -> None:
     if st.button("↩️ Varsayılanlara dön", key="ayar_sifirla"):
         ayarlari_sifirla(kullanici_id)
         st.success("Ayarlar varsayılanlara döndürüldü.")
-st.caption(
-    "Not: Tema ayarı 'sistem' seçiliyken panel, işletim sistemi renk tercihini izler."
-)
+    st.caption(
+        "Not: Tema ayarı 'sistem' seçiliyken panel, işletim sistemi renk tercihini izler."
+    )
 
 
 def rapor_erisisim_denetimi(rol: str | None = None) -> bool:
@@ -441,3 +442,67 @@ def render_rapor_listesi_tab() -> None:
             mime="text/markdown",
             key="rapor_download"
         )
+
+
+# ---------------------------------------------------------------------------
+# D-192: Ajan Chat Sistemi — Dashboard Widget
+# ---------------------------------------------------------------------------
+
+def render_chat_summary() -> None:
+    """Ajan Chat özeti: açık sorunlar, çözüm bekleniyor, çözüldü metrikler + son 3 sorun.
+    
+    Admin panelinde KAHİN ve orkestratör sorunları takip edebilir.
+    """
+    PageHeader(
+        "Ajan Chat Sistemi", ust_etiket="İş · Takip", ikon="💬",
+        giris="Ajanlar arasında bildirilen sorunlar ve çözüm önerileri.",
+    ).render()
+    
+    # ---- Metrikler ----
+    Section("Sorun Durumu Özeti", "Açık, çözüm bekleniyor ve çözüldü sayıları.", ikon="📊").render()
+    
+    acik = ozet("acik")
+    cokundurmus = ozet("cokundurmus")
+    cozuldu = ozet("cozuldu")
+    
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        st.metric("🔴 Açık Sorunlar", len(acik))
+    with col2:
+        st.metric("🟡 Çözüm Bekleniyor", len(cokundurmus))
+    with col3:
+        st.metric("🟢 Çözüldü", len(cozuldu))
+    
+    # ---- Son Açık Sorunlar ----
+    Section("Son 3 Açık Sorun", "Ajanlar tarafından en son bildirilen açık sorunlar.", ikon="🔴").render()
+    
+    if not acik:
+        st.info("Henüz açık sorun yok.")
+    else:
+        son_acik = sorted(acik, key=lambda x: x.get("timestamp", ""), reverse=True)[:3]
+        for i, sorun in enumerate(son_acik, 1):
+            with st.expander(f"**{i}. {sorun.get('ajan', '?').upper()}** — {sorun.get('task_id', '?')}"):
+                st.write(f"**Sorun:** {sorun.get('sorun', '')}")
+                if sorun.get("cozum"):
+                    st.write(f"**İlk Çözüm Önerisi:** {sorun.get('cozum')}")
+                st.caption(f"Zaman: {sorun.get('timestamp', '')}")
+    
+    # ---- Tüm Sorunlar (Tablo) ----
+    Section("Tüm Sorunlar (Tablo Görünümü)", "Filtrelenebilir sorun listesi.", ikon="📋").render()
+    
+    tum_sorunlar = oku()
+    if tum_sorunlar:
+        rows = []
+        for s in sorted(tum_sorunlar, key=lambda x: x.get("timestamp", ""), reverse=True):
+            rows.append({
+                "Tarih": s.get("timestamp", "")[:16],
+                "Ajan": s.get("ajan", "").upper(),
+                "Görev": s.get("task_id", ""),
+                "Sorun": s.get("sorun", "")[:50],
+                "Durum": s.get("durum", ""),
+            })
+        df = pd.DataFrame(rows)
+        st.dataframe(df, width="stretch", hide_index=True)
+        st.caption(f"Toplam {len(tum_sorunlar)} sorun kaydedilmiş.")
+    else:
+        st.info("Henüz sorun kaydı yok.")

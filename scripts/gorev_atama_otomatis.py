@@ -20,8 +20,10 @@ import sys
 from pathlib import Path
 
 # Yol düzelt
-root = Path(__file__).resolve().parent.parent
-sys.path.insert(0, str(root))
+script_dir = Path(__file__).resolve().parent
+huginn_dir = script_dir.parent  # "Huginn Data Insights"
+root = huginn_dir.parent  # "c:/Huginn Data Projesi"
+sys.path.insert(0, str(huginn_dir))
 
 from src.company_master.orchestrator import trigger
 
@@ -43,7 +45,7 @@ def brif_bul(task_id: str, ajan: str, gorev: dict | None = None) -> Path | None:
 
 def gorev_oku(task_id: str) -> dict | None:
     """task_board.json'dan görev oku (büyük/küçük harf duyarsız eşleşme)."""
-    board_file = root / "data" / "orchestrator" / "task_board.json"
+    board_file = root / "Huginn Data Insights" / "data" / "orchestrator" / "task_board.json"
     if not board_file.exists():
         return None
 

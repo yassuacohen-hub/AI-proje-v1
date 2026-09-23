@@ -31,7 +31,10 @@ sys.path.insert(0, str(KOK))
 # Windows konsolu cp1254; "→" ve Türkçe karakterler patlamasın.
 for _akis in (sys.stdout, sys.stderr):
     if hasattr(_akis, "reconfigure"):
-        _akis.reconfigure(encoding="utf-8", errors="replace")
+        try:
+            _akis.reconfigure(encoding="utf-8", errors="replace")
+        except (OSError, ValueError):
+            pass  # Streamlit ortamında başarısız olabilir; ignore
 
 from src.company_master.orchestrator import task_board as tb  # noqa: E402
 from src.company_master.orchestrator import trigger  # noqa: E402

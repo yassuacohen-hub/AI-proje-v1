@@ -604,3 +604,77 @@ Pratikte: Kod/görev worktree'ye yazılır, senkronla HDI'a kopyalanır. GRAPH �
 - [[Huginn Data Insights/indexes/osint_index]] — 10 dosya (istihbarat, veri toplama, araştırma, vendor)
 - [[Huginn Data Insights/indexes/plan_index]] — 38 dosya (roadmap, sprint, gorev panosu, milestone)
 - [[Huginn Data Insights/indexes/rapor_index]] — 152 dosya (denetim, metrik, analiz, rapor çıktıları)
+
+## Ajan Chat Sistemi (D-192 — KAHİN kararı 2026-09-23)
+
+Ajanlar arasında bildirilen sorunlar ve çözüm önerilerinin merkezi takibi. Orkestratör ve KAHİN dashboard'da metrikleri görür.
+
+| Bileşen | Açıklama |
+|---------|----------|
+| **SSOT** | `data/orchestrator/ajan-chat.jsonl` — her satır bir sorun (append-only, lock-protected) |
+| **CLI** | `python scripts/ajan_chat.py <komut>` — 6 komut (ac/guncelle/kapat/oku/ozet/bulgula) |
+| **Dashboard** | `web_dashboard/tabs/admin_panel.py:render_chat_summary()` — 3 metrik + son 3 sorun + tüm tablo |
+| **Tetik** | `trigger.py:rapor_postala()` — WARNING/ERROR raporları otomatik chat.ac() ile kaydedilir |
+| **Durum Döngüsü** | acik → cokundurmus (çözüm önerildi) → cozuldu (kapatıldı) |
+| **Lock** | `threading.RLock` — eşzamanlı append güvenli |
+
+### CLI Komutları
+
+```bash
+# Sorun aç (ajan, task_id, sorun açıklaması)
+python scripts/ajan_chat.py ac ihsan UI-01 "Button hover eksik"
+python scripts/ajan_chat.py ac ihsan UI-01 "Button hover eksik" --cozum "CSS :hover ekle"
+
+# Çözümü güncelle (task_id, sorun_index, yeni çözüm, durum)
+python scripts/ajan_chat.py guncelle UI-01 0 --cozum "CSS :hover eklendi, test yapıldı" --durum cokundurmus
+
+# Sorunu kapat (task_id, sorun_index, karar)
+python scripts/ajan_chat.py kapat UI-01 0 --karar "CSS uygulandı, QA geçti"
+
+# Sorunları oku (filtreleme: --task-id, --son N)
+python scripts/ajan_chat.py oku
+python scripts/ajan_chat.py oku --task-id UI-01
+python scripts/ajan_chat.py oku --son 5
+
+# Durum özeti (--durum: acik/cokundurmus/cozuldu)
+python scripts/ajan_chat.py ozet
+python scripts/ajan_chat.py ozet --durum acik
+
+# Tasarım eleştirisi kaydı (konu, bulgu, --link isteğe bağlı)
+python scripts/ajan_chat.py bulgula "Tasarım (D-192)" "Font boyut tutarsız" --link "data/..."
+```
+
+### Orkestratör Günlük Rutini (15 min)
+
+1. **Panoyu aç**, admin panel → Ajan Chat Sistemi widget
+2. **Açık sorunları oku** (kırmızı panel): `python scripts/ajan_chat.py ozet --durum acik`
+3. **Son 3'ü gözden geçir** (expander)
+4. **Çözüm önerisi yaz** (cokundurmus geçişi): `guncelle` komutu
+5. **Çözüldü olanları kapat** (cozuldu): `kapat` komutu
+6. **Raporu kontrol et**: rapor_postala() tetiklenir, WARNING/ERROR otomatik kaydedilir
+
+### Arkitektur
+
+- **Veri:** JSONL (satır = kayıt, append-only)
+- **Okuma:** `oku()` — tüm kaydı sunar; `ozet()` — durum filtrelü sayı
+- **Yazma:** `ac()` / `guncelle()` / `kapat()` — lock ile sıralı
+- **Chat Entegrasyonu:** trigger.py rapor_postala() WARNING+ rapor varsa chat.ac() çağırır
+- **UI:** Streamlit, PageHeader + Section pattern (admin_panel.py ile tutarlı)
+
+### Test Kapsamı
+
+- `tests/test_ajan_chat.py` — 14 test
+  - TestAc: sorun açma (4 test)
+  - TestGuncelle: çözüm güncelleme (2 test)
+  - TestKapat: kapatma (1 test)
+  - TestOku: okuma/filtreleme (3 test)
+  - TestOzet: durum özeti (1 test)
+  - TestBulgula: tasarım eleştirisi (2 test)
+  - TestConcurrency: 5 thread eşzamanlı append (1 test)
+  - TestIntegration: full lifecycle + orkestrator simülasyonu (2 test)
+
+### Phase 2 (İleri)
+
+- MIMIR asistanı: chat metrikleri analiz etme
+- Otomatik eleştiri önerileri (bulgu → çözüm)
+- Chat geçmişi grafiklendirme (trend analiz)

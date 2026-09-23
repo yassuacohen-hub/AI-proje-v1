@@ -7,7 +7,7 @@
 
 | Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |
 |-------|--------|-------|---------|-------|----------|
-| - | - | - | - | - | - |
+| - | - | - | P2 | plan | - |
 | ADMIN-UX-PROFILMENU-01 | Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link | salih | P0 | iptal | - |
 | ADMIN-UX-MENUTREE-01 | Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar | ihsan | P1 | iptal | web_dashboard/tabs/__init__.py |
 | WK-01 | Career Pages Scraper — Enhanced Data Extraction | salih | P1 | archive | - |
@@ -126,20 +126,18 @@
 | BRIK-00 | ALTYAPI Archive sema + gece zinciri → kurulum ve test (D-62, D-63) | ihsan | P1 | archive | - |
 | ADMIN-UI-CACHE-OPT-01 | [ALTYAPI] Admin UI cache optimizasyonu ve TTL ayarlari | yasu | P2 | review | - |
 | GRAPH-CANONICAL-SECER-02 | [GRAPH] Canonical graph baglanti guvenligi secer | yasu | P2 | review | - |
-| AGENTS-MERGE-UU | [DOC] AGENTS.md kok/vault kopuklugunu duzelt → tek SSOT + D-188 (2s) | ihsan | P0 | review | AGENTS.md, Huginn Data Insights/AGENTS.md |
-| VAULT-CLEANUP-BATCH | [ALTYAPI] Vault alarm/tetik artiklarini sil → temiz kuyruk (1s) | ihsan | P2 | review | - |
+| AGENTS-MERGE-UU | [DOC] AGENTS.md kok/vault kopuklugunu duzelt → tek SSOT + D-188 (2s) | ihsan | P0 | approved | AGENTS.md, Huginn Data Insights/AGENTS.md |
+| VAULT-CLEANUP-BATCH | [ALTYAPI] Vault alarm/tetik artiklarini sil → temiz kuyruk (1s) | ihsan | P2 | approved | - |
 | ADMIN-UX-SIDEBAR-TAB | [UI] Sidebar tab secim durumunu sakla -> web_dashboard/tabs/__init__.py (2s) | utku | P1 | review | - |
 | ORKESTRA-ONAY-BOSALT-01 | [ORKESTRA] Onay kuyrugundaki 9 teslimi denetle → data/orchestrator/ORKESTRA-ONAY-BOSALT-01_rapor_2026-09-23_salih.md (4s) | salih | P0 | plan | - |
 | ORKESTRA-GOREV-KAPI-01 | [ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s) | ihsan | P0 | review | scripts/gorev_at.py, scripts/tetik_senk.py |
 | ALTYAPI-KILIT-OTOMATIK-01 | [ALTYAPI] Kilit otomatik birakmayi yaz → src/company_master/orchestrator/task_board.py (3s) | yasu | P1 | aktif | - |
 | ALTYAPI-TETIK-ARSIV-01 | [ALTYAPI] Kanonik olmayan tetik dosyalarini taşı → data/orchestrator/triggers/_arsiv_2026-09-23/ (2s) | yasu | P2 | review | - |
 | ALTYAPI-MOJIBAKE-DIZIN-01 | [ALTYAPI] mojibake_onar.py dizin taramasini yaz → mojibake_onar.py (2s) | yasu | P2 | aktif | - |
-| ALTYAPI-IMPORT-TEKLES-01 | [ALTYAPI] trigger.py import yolunu düzelt → trigger.py (1s) | yasu | P2 | review | - |
 | ALTYAPI-TETIK-ZAMAN-01 | [ALTYAPI] tetik_senk zamanlamasini yaz → tetik_senk.py (2s) | yasu | P2 | aktif | - |
 | TEST-ADMIN-PERF-01 | [TEST] admin_performance kpi_karti gecisini yaz → web_dashboard/tabs/admin_performance.py (2s) | utku | P1 | aktif | web_dashboard/tabs/admin_performance.py |
 | TEST-WEBHOOK-KPI-01 | [TEST] webhook_monitor mock hedefini duzelt → tests/test_webhook_monitor_tab.py (1s) | utku | P2 | aktif | tests/test_webhook_monitor_tab.py |
 | UI-SUBHEADER-MUSTERI-01 | [UI] musteri_yonetimi subheader temizligini yaz → web_dashboard/tabs/musteri_yonetimi.py (2s) | utku | P2 | aktif | web_dashboard/tabs/musteri_yonetimi.py |
-| ALTYAPI-MARKA-HUGGINN-01 | [ALTYAPI] HUGGINN yazimini duzelt → marka_denetim temiz (3s) | yasu | P2 | review | - |
 | ALTYAPI-D182-MIMIR-01 | [ALTYAPI] mimir ajanini yaz → trigger.AJANLAR (2s) | ihsan | P1 | review | src/company_master/orchestrator/trigger.py |
 | ORKESTRA-D65-ISDURMAZ-01 | [ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s) | ihsan | P1 | review | - |
 | ALTYAPI-MOJIBAKE-BARIYER-01 | [ALTYAPI] Mojibake araci yazim-oncesi hasar bariyeri → scripts/mojibake_onar.py (2s) | ihsan | P0 | review | scripts/mojibake_onar.py, tests/test_mojibake_bariyer.py |
@@ -391,3 +389,5 @@
 | UI-ADOPT-01 | [UI] UI-ADOPT-01: kpi_karti() -> MetricCard bileşen benimsemesi (admin_auto_refresh, admin_api_analytics, admin_performance) | utku | - |
 | CHART-KATEGORI-02 | [CHART] KATEGORI_RENK <-> KATEGORILER uyumlaştırması → web_dashboard/charts.py (1s) | utku | - |
 | TEST-DASHBOARD-REGRESYON-01 | [TEST] Dashboard test regresyonu: 8 kırık + 71 kayıp test araştırması (2s) | utku | - |
+| ALTYAPI-IMPORT-TEKLES-01 | [ALTYAPI] trigger.py import yolunu düzelt → trigger.py (1s) | yasu | 2026-09-23T17:06:52 |
+| ALTYAPI-MARKA-HUGGINN-01 | [ALTYAPI] HUGGINN yazimini duzelt → marka_denetim temiz (3s) | yasu | 2026-09-23T17:06:23 |
