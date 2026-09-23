@@ -7262,5 +7262,24 @@
     "mod": "code",
     "brief": "plans/brief_ihsan_ALTYAPI-D66-BYPASS-TETIKLEME-01.md",
     "talimat": "D66 bypass tetikleme: tetik_senk.py bypass flag ve logging ekle, test yaz. Brief: plans/brief_ihsan_ALTYAPI-D66-BYPASS-TETIKLEME-01.md"
+  },
+  {
+    "task_id": "TEST-13-PREEXIST-DUZELT-01",
+    "id": "TEST-13-PREEXIST-DUZELT-01",
+    "baslik": "[TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-23T22:32:40",
+    "bitis": null,
+    "dosyalar": [
+      "plans/brief_utku_TEST-13-PREEXIST-DUZELT-01.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_TEST-13-PREEXIST-DUZELT-01.md",
+    "talimat": "d193_menu_e2e_report.md Ek Bulgu bolumune bak. Brief'te detay var."
   }
 ]

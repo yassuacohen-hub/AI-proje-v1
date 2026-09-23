@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-23T17:06:52
+> Son guncelleme: 2026-09-23T22:32:40
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -146,6 +146,7 @@
 | ALTYAPI-TEST-HERMETIK-01 | [ALTYAPI] Uretim verisine dokunan testle | ihsan | P1 | review |
 | ALTYAPI-D66-BYPASS-TETIKLEME | [Altyapi] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | plan |
 | ALTYAPI-D66-BYPASS-TETIKLEME-01 | [ALTYAPI] düzelt tetik_senk.py bypass fl | ihsan | P1 | plan |
+| TEST-13-PREEXIST-DUZELT-01 | [TEST] düzelt 13 pre-existing hata → d19 | utku | P2 | plan |
 
 ## Tamamlananlar (Son 10)
 
