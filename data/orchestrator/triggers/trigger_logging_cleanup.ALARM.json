@@ -662,5 +662,13 @@
     "tetik_sayisi": 83,
     "uyari_tarihi": "2026-09-23T23:54:02",
     "mesaj": "⚠️ yasu () — trigger_logging_cleanup 83. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "trigger_logging_cleanup",
+    "task_id": "yasu",
+    "gorev_basligi": "",
+    "tetik_sayisi": 84,
+    "uyari_tarihi": "2026-09-23T23:59:02",
+    "mesaj": "⚠️ yasu () — trigger_logging_cleanup 84. kez uyarıldı; henüz başlamadı."
   }
 ]

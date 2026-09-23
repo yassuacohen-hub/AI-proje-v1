@@ -100,7 +100,7 @@ def test_render_performance_tab_both_data_sources():
     ), patch.object(
         admin_performance, "load_prometheus_metrics", return_value=prom_data
     ):
-        with patch.object(MetricCard) as mock_metric, patch.object(
+        with patch("company_master.ui.MetricCard") as mock_metric, patch.object(
             admin_performance.st, "dataframe"
         ), patch.object(admin_performance.st, "subheader"), patch.object(admin_performance.st, "divider"), patch.object(
             admin_performance.st, "session_state"

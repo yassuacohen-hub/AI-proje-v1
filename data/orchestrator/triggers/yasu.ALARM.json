@@ -86,5 +86,13 @@
     "tetik_sayisi": 10,
     "uyari_tarihi": "2026-09-23T23:54:02",
     "mesaj": "⚠️ ALTYAPI-GROQ-KEY-DOGRULA-01 ([ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)) — yasu 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ALTYAPI-GROQ-KEY-DOGRULA-01",
+    "gorev_basligi": "[ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-23T23:59:02",
+    "mesaj": "⚠️ ALTYAPI-GROQ-KEY-DOGRULA-01 ([ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)) — yasu 11. kez uyarıldı; henüz başlamadı."
   }
 ]
