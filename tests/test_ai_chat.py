@@ -34,7 +34,7 @@ def sahte_baglam(monkeypatch):
 
 def test_model_zinciri_varsayilan():
     assert ai_chat.model_zinciri("") == ai_chat.VARSAYILAN_MODELLER
-    assert ai_chat.model_zinciri()[0] == "gpt-4o-mini"
+    assert ai_chat.model_zinciri()[0] == "meta-llama/llama-3.1-70b-instruct"
 
 
 def test_model_zinciri_env_ayristirir(monkeypatch):

@@ -107,3 +107,17 @@ Ana baglam: [[Huginn Data Insights/AGENTS]] · [[Huginn Data Insights/PROJECT_RO
   oldugu icin kisa ad kullanimi yanlis hedefe cozulur.
 - Ters baglanti (backlink) Obsidian tarafindan otomatik uretilir; elle yazilmaz.
 - Arsiv/yedek/gecici dosyalar bilerek disarida birakildi.
+
+## Yetenek Sistemi (Skill Registry)
+
+- `skills/base.py` → `SkillRegistry` decorator tabanlı kayıt sistemi
+- `agents/devops_agent.py` → Üretim ajanı (Claude tool calling)
+- `skills/streamlit/debug.py` → `analyze_streamlit_lifecycle`, `fix_nginx_websocket`
+- `skills/devops/nginx.py` → `analyze_nginx_websocket`, `fix_nginx_proxy`, `generate_nginx_config`
+- `skills/devops/docker.py` → `optimize_dockerfile`, `parse_container_logs`
+- `skills/devops/monitor.py` → `analyze_oom_killer`, `check_resource_usage`
+- `skills/common/file_ops.py` → `safe_file_read`, `safe_file_write`
+- `skills/common/llm_helper.py` → `count_tokens`, `validate_llm_response`
+- `skills/streamlit/ux_ui.py` → CSS/tema optimizasyonu
+
+Hub: [[Huginn Data Insights/AGENTS]] · [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]

@@ -6,5 +6,13 @@
     "tetik_sayisi": 10,
     "uyari_tarihi": "2026-09-23T13:04:02",
     "mesaj": "⚠️ ALTYAPI-MARKA-HUGGINN-01 ([ALTYAPI] HUGGINN yazimini duzelt → marka_denetim temiz (3s)) — yasu 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ALTYAPI-GROQ-KEY-DOGRULA-01",
+    "gorev_basligi": "[ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-23T23:09:03",
+    "mesaj": "⚠️ ALTYAPI-GROQ-KEY-DOGRULA-01 ([ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)) — yasu 1. kez uyarıldı; henüz başlamadı."
   }
 ]

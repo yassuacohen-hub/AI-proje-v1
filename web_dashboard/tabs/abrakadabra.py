@@ -203,9 +203,13 @@ def _render_sohbet(token: str) -> None:
                     gecmis, token,
                     hata_kaydi=lambda m, h: dusen.append(f"{m}: {h}"),
                 )
-            except AiChatHatasi as exc:
-                st.error(str(exc))
-                st.session_state[_HATA_KEY] = dusen
+            except Exception as exc:
+                hata_metni = str(exc)
+                st.error(f"API hatası: {hata_metni[:200]}")
+                import traceback
+                st.session_state[_HATA_KEY] = dusen + [f"Exception: {type(exc).__name__}: {hata_metni}"]
+                if "--debug" in str(st.query_params):
+                    st.code(traceback.format_exc(), language="python")
                 return
         st.markdown(yanit)
         st.caption(f"Model: {model}")
@@ -216,7 +220,6 @@ def _render_sohbet(token: str) -> None:
     if yeni:
         _teklifler().extend(yeni)
         st.info(f"{len(yeni)} teklif onay bekliyor (aşağıdaki bölüme bakın).")
-        st.rerun()
 
 
 def render_abrakadabra_tab() -> None:

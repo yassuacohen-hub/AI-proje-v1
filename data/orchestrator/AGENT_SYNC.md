@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-23T22:59:32
+> Son guncelleme: 2026-09-23T23:10:56
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -120,30 +120,19 @@
 | MVP-KUL-02 | Kullanici onayinda tier secici (K-1 bulg | utku | P2 | archive |
 | REV-ADMIN-ENV-01 | Review: admin sifre sifirlama scripti +  | yasu | P1 | archive |
 | UI-MODAL-01 | [UI] Admin panel acilir modal ekranlar + | yasu | P2 | archive |
-| ORKESTRA-NAMING-AUDIT-02 | [ORKESTRA] D-55/D-57 adlandırma kurallar | ihsan | P1 | review |
 | ORKESTRA-DECISION-LOG-03 | [ORKESTRA] Karar defterini düzelt → data | ihsan | P1 | plan |
 | ALTYAPI-KILIT-TEMIZLIK-V10-01 | [ALTYAPI] V10-HIJYEN dosyaları kilit sil | cline | P2 | iptal |
 | ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyası yaz → | yasu | P2 | archive |
 | BRIK-00 | ALTYAPI Archive sema + gece zinciri → ku | ihsan | P1 | archive |
-| ADMIN-UI-CACHE-OPT-01 | [ALTYAPI] Admin UI cache optimizasyonu v | yasu | P2 | review |
-| GRAPH-CANONICAL-SECER-02 | [GRAPH] Canonical graph baglanti guvenli | yasu | P2 | review |
 | AGENTS-MERGE-UU | [DOC] AGENTS.md kok/vault kopuklugunu du | ihsan | P0 | approved |
 | VAULT-CLEANUP-BATCH | [ALTYAPI] Vault alarm/tetik artiklarini  | ihsan | P2 | approved |
-| ADMIN-UX-SIDEBAR-TAB | [UI] Sidebar tab secim durumunu sakla -> | utku | P1 | review |
-| ORKESTRA-ONAY-BOSALT-01 | [ORKESTRA] Onay kuyrugundaki 9 teslimi d | salih | P0 | plan |
-| ORKESTRA-GOREV-KAPI-01 | [ORKESTRA] Gorev atama kapisini düzelt → | ihsan | P0 | review |
+| ORKESTRA-ONAY-BOSALT-01 | [ORKESTRA] Onay kuyrugundaki 9 teslimi d | salih | P0 | iptal |
 | ALTYAPI-KILIT-OTOMATIK-01 | [ALTYAPI] Kilit otomatik birakmayi yaz → | yasu | P1 | aktif |
-| ALTYAPI-TETIK-ARSIV-01 | [ALTYAPI] Kanonik olmayan tetik dosyalar | yasu | P2 | review |
 | ALTYAPI-MOJIBAKE-DIZIN-01 | [ALTYAPI] mojibake_onar.py dizin taramas | yasu | P2 | aktif |
 | ALTYAPI-TETIK-ZAMAN-01 | [ALTYAPI] tetik_senk zamanlamasini yaz → | yasu | P2 | aktif |
 | TEST-ADMIN-PERF-01 | [TEST] admin_performance kpi_karti gecis | utku | P1 | aktif |
 | TEST-WEBHOOK-KPI-01 | [TEST] webhook_monitor mock hedefini duz | utku | P2 | aktif |
 | UI-SUBHEADER-MUSTERI-01 | [UI] musteri_yonetimi subheader temizlig | utku | P2 | aktif |
-| ALTYAPI-D182-MIMIR-01 | [ALTYAPI] mimir ajanini yaz → trigger.AJ | ihsan | P1 | review |
-| ORKESTRA-D65-ISDURMAZ-01 | [ORKESTRA] ölç D-65 İş Durmaz ihlalini → | ihsan | P1 | review |
-| ALTYAPI-MOJIBAKE-BARIYER-01 | [ALTYAPI] Mojibake araci yazim-oncesi ha | ihsan | P0 | review |
-| ALTYAPI-DURUM-SOZLUK-01 | [ALTYAPI] Gorev durum sozlugu tutarsizli | ihsan | P1 | review |
-| ALTYAPI-TEST-HERMETIK-01 | [ALTYAPI] Uretim verisine dokunan testle | ihsan | P1 | review |
 | ALTYAPI-D66-BYPASS-TETIKLEME | [Altyapi] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | plan |
 | ALTYAPI-D66-BYPASS-TETIKLEME-01 | [ALTYAPI] düzelt tetik_senk.py bypass fl | ihsan | P1 | plan |
 | TEST-13-PREEXIST-DUZELT-01 | [TEST] düzelt 13 pre-existing hata → d19 | utku | P2 | plan |
@@ -153,16 +142,16 @@
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| TEST-GRAPH-KOPRU | [TEST] denetle backlink_sayimi → dogrula | utku | 2026-09-21 |
-| VERI-ARSIV-01 | [VERI] düzelt gizleme_filtreleri → app.j | utku | 2026-09-21 |
-| VERI-GRAPH-01 | [VERI] yaz wikilink kopruleri → graph_ko | utku | 2026-09-21 |
-| VERI-ARSIV-01 | [VERI] düzelt gizleme_filtreleri → app.j | utku | 2026-09-21 |
-| TEST-GRAPH-KOPRU | [TEST] denetle backlink_sayimi → dogrula | utku | 2026-09-21 |
-| UI-ADOPT-01 | [UI] UI-ADOPT-01: kpi_karti() -> MetricC | utku | - |
-| CHART-KATEGORI-02 | [CHART] KATEGORI_RENK <-> KATEGORILER uy | utku | - |
-| TEST-DASHBOARD-REGRESYON-01 | [TEST] Dashboard test regresyonu: 8 kırı | utku | - |
+| ADMIN-UX-SIDEBAR-TAB | [UI] Sidebar tab secim durumunu sakla -> | utku | 2026-09-23 |
+| ORKESTRA-GOREV-KAPI-01 | [ORKESTRA] Gorev atama kapisini düzelt → | ihsan | 2026-09-23 |
+| ALTYAPI-TETIK-ARSIV-01 | [ALTYAPI] Kanonik olmayan tetik dosyalar | yasu | 2026-09-23 |
 | ALTYAPI-IMPORT-TEKLES-01 | [ALTYAPI] trigger.py import yolunu düzel | yasu | 2026-09-23 |
 | ALTYAPI-MARKA-HUGGINN-01 | [ALTYAPI] HUGGINN yazimini duzelt → mark | yasu | 2026-09-23 |
+| ALTYAPI-D182-MIMIR-01 | [ALTYAPI] mimir ajanini yaz → trigger.AJ | ihsan | 2026-09-23 |
+| ORKESTRA-D65-ISDURMAZ-01 | [ORKESTRA] ölç D-65 İş Durmaz ihlalini → | ihsan | 2026-09-23 |
+| ALTYAPI-MOJIBAKE-BARIYER-01 | [ALTYAPI] Mojibake araci yazim-oncesi ha | ihsan | 2026-09-23 |
+| ALTYAPI-DURUM-SOZLUK-01 | [ALTYAPI] Gorev durum sozlugu tutarsizli | ihsan | 2026-09-23 |
+| ALTYAPI-TEST-HERMETIK-01 | [ALTYAPI] Uretim verisine dokunan testle | ihsan | 2026-09-23 |
 
 ## Son Handoff'lar
 

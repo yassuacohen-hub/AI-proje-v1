@@ -574,5 +574,21 @@
     "tetik_sayisi": 72,
     "uyari_tarihi": "2026-09-23T22:59:02",
     "mesaj": "⚠️ yasu () — trigger_logging_cleanup 72. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "trigger_logging_cleanup",
+    "task_id": "yasu",
+    "gorev_basligi": "",
+    "tetik_sayisi": 73,
+    "uyari_tarihi": "2026-09-23T23:04:02",
+    "mesaj": "⚠️ yasu () — trigger_logging_cleanup 73. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "trigger_logging_cleanup",
+    "task_id": "yasu",
+    "gorev_basligi": "",
+    "tetik_sayisi": 74,
+    "uyari_tarihi": "2026-09-23T23:09:03",
+    "mesaj": "⚠️ yasu () — trigger_logging_cleanup 74. kez uyarıldı; henüz başlamadı."
   }
 ]

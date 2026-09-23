@@ -38,6 +38,8 @@ import shlex
 from dataclasses import dataclass, field
 from typing import Any, Callable, Protocol
 
+import requests
+
 from company_master.gateway.ninerouter_client import NineRouter, NineRouterError
 from company_master.orchestrator import task_board as tb
 from company_master.orchestrator import trigger as tr
@@ -81,12 +83,17 @@ VARSAYILAN_KILIT = "abrakadabra"
 #: Model zinciri env anahtarları (yeni → eski, geri uyumlu).
 MODEL_ENV_ANAHTARLARI: tuple[str, ...] = ("MIMIR_MODELS", "ABRAKADABRA_MODELS")
 
-#: K6 — sağlayıcı düşerse sırayla denenecek modeller.
-#: ponytail: OpenRouter free DNS hatası (Cloudflare origin error), gpt-4o-mini fallback'e döndürüldü.
-#: Add when: OpenRouter stabil olursa yeniden dene.
+#: K6 — sağlayıcı düşerse sırayla denenecek modelller (ücretsiz, yüksek bağlam).
+#: Ranking (D-195 Groq decommissioned hatasından sonra OpenRouter fallback):
+#:  1. meta-llama/llama-3.1-70b-instruct — 128k context, free tier, stabil
+#:  2. mistralai/mixtral-8x7b-instruct — 32k context, free tier, fast
+#:  3. gpt-3.5-turbo — 4k context, free tier, fallback
+#: ponytail: Groq direct client bypass kullanılmadı (modellerinin deprecated olması).
+#: Add when: Groq yeni free modelleri açarsa.
 VARSAYILAN_MODELLER: tuple[str, ...] = (
-    "gpt-4o-mini",
-    "groq/llama-3.3-70b-versatile",
+    "meta-llama/llama-3.1-70b-instruct",
+    "mistralai/mixtral-8x7b-instruct",
+    "gpt-3.5-turbo",
 )
 
 #: Onay kapısından geçebilen komutlar. Anahtar → (argüman sayısı, açıklama).
@@ -332,4 +339,64 @@ def sohbet(
         son_hata = f"{model}: boş yanıt"
         if hata_kaydi:
             hata_kaydi(model, "boş yanıt")
+    
+    # Fallback: NineRouter başarısız — OpenRouter'a doğrudan çağrı yap
+    try:
+        yanit_or = _openrouter_fallback(prompt, system)
+        if yanit_or:
+            return yanit_or, "openrouter-fallback"
+    except Exception as fallback_exc:
+        if hata_kaydi:
+            hata_kaydi("openrouter-fallback", str(fallback_exc))
+    
     raise AiChatHatasi(f"Tüm sağlayıcılar düştü — son hata: {son_hata}")
+
+
+def _openrouter_fallback(prompt: str, system: str | None = None) -> str | None:
+    """OpenRouter doğrudan API çağrısı fallback.
+    
+    NineRouter zinciri tümü başarısız olunca son çare olarak OpenRouter'a
+    doğrudan HTTP POST ile gidilir. Hata durumunda None döner (istisna fırlatmaz).
+    
+    Args:
+        prompt: İstemci soru metni (tarih + mesajlar birleştirilmiş)
+        system: Sistem prompt'ı (opsiyonel)
+    
+    Returns:
+        Yanıt metni ya da None (hata/timeout durumunda)
+    """
+    api_key = os.getenv("OPENROUTER_API_KEY")
+    if not api_key:
+        return None
+    
+    try:
+        headers = {
+            "Authorization": f"Bearer {api_key}",
+            "Content-Type": "application/json",
+        }
+        
+        messages = []
+        if system:
+            messages.append({"role": "system", "content": system})
+        messages.append({"role": "user", "content": prompt})
+        
+        payload = {
+            "model": "meta-llama/llama-3.1-70b-instruct",
+            "messages": messages,
+            "temperature": 0.2,
+            "max_tokens": 1024,
+        }
+        
+        resp = requests.post(
+            "https://openrouter.ai/api/v1/chat/completions",
+            json=payload,
+            headers=headers,
+            timeout=30,
+        )
+        resp.raise_for_status()
+        
+        data = resp.json()
+        yanit = data.get("choices", [{}])[0].get("message", {}).get("content", "")
+        return yanit.strip() if yanit else None
+    except Exception:
+        return None

@@ -2010,7 +2010,9 @@
       "tests/test_admin_ui_cache_opt.py"
     ],
     "teslim_tarihi": "2026-09-23T10:49:55",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:10:04"
   },
   {
     "task_id": "GRAPH-CANONICAL-SECER-02",
@@ -2022,7 +2024,9 @@
       "data/orchestrator/GRAPH-CANONICAL-SECER-02_dogrula.py"
     ],
     "teslim_tarihi": "2026-09-23T10:49:55",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:10:04"
   },
   {
     "task_id": "VAULT-CLEANUP-BATCH",
@@ -2040,7 +2044,9 @@
     "ozet": "init.py zaten session_state ile tab state sakliyor (satir 626). Aktif tab vurgusu zaten app.py:468/494. TALIMAT: TEKRAR YAPMA. Ek is yok.",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-23T12:21:06",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:09:51"
   },
   {
     "task_id": "TEST-ADMIN-PERF-01",
@@ -2071,7 +2077,9 @@
       "scripts/_tetik_arsiv_tasi.py"
     ],
     "teslim_tarihi": "2026-09-23T12:24:57",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:10:05"
   },
   {
     "task_id": "ALTYAPI-MOJIBAKE-DIZIN-01",
@@ -2115,7 +2123,9 @@
       "data/orchestrator/ORKESTRA-GOREV-KAPI-01_rapor_2026-09-23_ihsan.md"
     ],
     "teslim_tarihi": "2026-09-23T12:46:28",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:09:39"
   },
   {
     "task_id": "UI-SUBHEADER-MUSTERI-01",
@@ -2134,7 +2144,9 @@
       "tests/test_mojibake_bariyer.py"
     ],
     "teslim_tarihi": "2026-09-23T13:05:20",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:09:39"
   },
   {
     "task_id": "ALTYAPI-DURUM-SOZLUK-01",
@@ -2147,7 +2159,9 @@
       "tests/test_durum_sozlugu.py"
     ],
     "teslim_tarihi": "2026-09-23T13:07:44",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:09:52"
   },
   {
     "task_id": "ALTYAPI-TETIK-ZAMAN-01",
@@ -2171,7 +2185,9 @@
       "tests/test_uretim_verisi_dokunulmaz.py"
     ],
     "teslim_tarihi": "2026-09-23T13:24:45",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:09:52"
   },
   {
     "task_id": "ALTYAPI-D182-MIMIR-01",
@@ -2184,7 +2200,9 @@
       "data/orchestrator/triggers/mimir.jsonl"
     ],
     "teslim_tarihi": "2026-09-23T13:33:56",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:09:52"
   },
   {
     "task_id": "ORKESTRA-NAMING-AUDIT-02",
@@ -2194,7 +2212,9 @@
       "data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-23_ihsan.md"
     ],
     "teslim_tarihi": "2026-09-23T13:55:10",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:09:51"
   },
   {
     "task_id": "ALTYAPI-MARKA-HUGGINN-01",
@@ -2212,6 +2232,8 @@
     "ozet": "D-65 ölçüm: 2 stuck P1 görev, bypass mekanizması yok. D-66 önerisi: pano_denetim exit 2 → tetik_senk rapor → KAHİN elle tetikle.",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-23T14:00:37",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:09:52"
   }
 ]
