@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-23T23:10:56
+> Son guncelleme: 2026-09-23T23:43:11
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -135,7 +135,7 @@
 | UI-SUBHEADER-MUSTERI-01 | [UI] musteri_yonetimi subheader temizlig | utku | P2 | aktif |
 | ALTYAPI-D66-BYPASS-TETIKLEME | [Altyapi] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | plan |
 | ALTYAPI-D66-BYPASS-TETIKLEME-01 | [ALTYAPI] düzelt tetik_senk.py bypass fl | ihsan | P1 | plan |
-| TEST-13-PREEXIST-DUZELT-01 | [TEST] düzelt 13 pre-existing hata → d19 | utku | P2 | plan |
+| TEST-13-PREEXIST-DUZELT-01 | [TEST] düzelt 13 pre-existing hata → d19 | utku | P2 | aktif |
 | ALTYAPI-GROQ-KEY-DOGRULA-01 | [ALTYAPI] denetle Groq canlı key → groq_ | yasu | P2 | plan |
 
 ## Tamamlananlar (Son 10)

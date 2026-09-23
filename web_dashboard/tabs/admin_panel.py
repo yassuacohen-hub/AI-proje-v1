@@ -390,7 +390,7 @@ def render_rapor_listesi_tab() -> None:
     # Rapor listesi
     col1, col2 = st.columns([3, 1])
     with col1:
-        st.subheader(f"Raporlar ({len(raporlar)})")
+        Section(f"Raporlar ({len(raporlar)})", "Rapor listesi görüntüleme").render()
 
     # Tablo: task_id | tarih | dosya | indir
     table_data = []
@@ -424,7 +424,7 @@ def render_rapor_listesi_tab() -> None:
         st.dataframe(df, use_container_width=True)
 
     # İndir seçeneği
-    st.subheader("İndir")
+    Section("İndir", "Rapor indirme seçeneği").render()
     selected_rapor = st.selectbox(
         "Rapor seçin",
         [r.name for r in raporlar],

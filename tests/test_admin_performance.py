@@ -35,10 +35,11 @@ def test_render_performance_tab_with_perf_data():
         "timestamp": "2026-09-13T17:00:00",
     }
 
-    with patch.object(
+    from company_master.ui import MetricCard
+with patch.object(
         admin_performance, "load_performance_data", return_value=perf_data
     ), patch.object(admin_performance, "load_prometheus_metrics", return_value={}):
-        with patch.object(admin_performance, "kpi_karti") as mock_metric, patch.object(
+        with patch.object(MetricCard) as mock_metric, patch.object(
             admin_performance.st, "subheader"
         ) as mock_sub, patch.object(admin_performance.st, "divider"), patch.object(
             admin_performance.st, "session_state"

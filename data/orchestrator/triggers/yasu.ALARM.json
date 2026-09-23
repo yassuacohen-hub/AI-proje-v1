@@ -14,5 +14,61 @@
     "tetik_sayisi": 1,
     "uyari_tarihi": "2026-09-23T23:09:03",
     "mesaj": "⚠️ ALTYAPI-GROQ-KEY-DOGRULA-01 ([ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)) — yasu 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ALTYAPI-GROQ-KEY-DOGRULA-01",
+    "gorev_basligi": "[ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-23T23:14:02",
+    "mesaj": "⚠️ ALTYAPI-GROQ-KEY-DOGRULA-01 ([ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)) — yasu 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ALTYAPI-GROQ-KEY-DOGRULA-01",
+    "gorev_basligi": "[ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-23T23:19:02",
+    "mesaj": "⚠️ ALTYAPI-GROQ-KEY-DOGRULA-01 ([ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)) — yasu 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ALTYAPI-GROQ-KEY-DOGRULA-01",
+    "gorev_basligi": "[ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-23T23:24:02",
+    "mesaj": "⚠️ ALTYAPI-GROQ-KEY-DOGRULA-01 ([ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)) — yasu 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ALTYAPI-GROQ-KEY-DOGRULA-01",
+    "gorev_basligi": "[ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-23T23:29:02",
+    "mesaj": "⚠️ ALTYAPI-GROQ-KEY-DOGRULA-01 ([ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)) — yasu 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ALTYAPI-GROQ-KEY-DOGRULA-01",
+    "gorev_basligi": "[ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-23T23:34:02",
+    "mesaj": "⚠️ ALTYAPI-GROQ-KEY-DOGRULA-01 ([ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)) — yasu 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ALTYAPI-GROQ-KEY-DOGRULA-01",
+    "gorev_basligi": "[ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-23T23:39:03",
+    "mesaj": "⚠️ ALTYAPI-GROQ-KEY-DOGRULA-01 ([ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)) — yasu 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "yasu",
+    "task_id": "ALTYAPI-GROQ-KEY-DOGRULA-01",
+    "gorev_basligi": "[ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-23T23:44:02",
+    "mesaj": "⚠️ ALTYAPI-GROQ-KEY-DOGRULA-01 ([ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)) — yasu 8. kez uyarıldı; henüz başlamadı."
   }
 ]

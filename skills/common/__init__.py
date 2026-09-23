@@ -31,6 +31,20 @@ from skills.common.admin_panel import (
     analyze_data_quality,
     generate_security_alerts,
 )
+from skills.common.ninerouter import (
+    ninerouter_setup,
+    ninerouter_chat,
+    ninerouter_chat_anthropic,
+    ninerouter_image_gen,
+    ninerouter_video_gen,
+    ninerouter_video_poll,
+    ninerouter_tts,
+    ninerouter_stt,
+    ninerouter_embeddings,
+    ninerouter_web_search,
+    ninerouter_web_fetch,
+    ninerouter_discover_models,
+)
 
 __all__ = [
     "safe_file_read", "safe_file_write",
@@ -46,4 +60,8 @@ __all__ = [
     "generate_admin_dashboard_kpis", "analyze_tenant_health",
     "analyze_churn_risk", "track_ai_costs",
     "analyze_data_quality", "generate_security_alerts",
+    "ninerouter_setup", "ninerouter_chat", "ninerouter_chat_anthropic",
+    "ninerouter_image_gen", "ninerouter_video_gen", "ninerouter_video_poll",
+    "ninerouter_tts", "ninerouter_stt", "ninerouter_embeddings",
+    "ninerouter_web_search", "ninerouter_web_fetch", "ninerouter_discover_models",
 ]

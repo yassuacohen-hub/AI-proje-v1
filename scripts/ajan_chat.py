@@ -20,6 +20,10 @@ import argparse
 import sys
 from pathlib import Path
 
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+    sys.stderr.reconfigure(encoding="utf-8", errors="replace")
+
 _KOK = Path(__file__).resolve().parent.parent
 if str(_KOK / "src") not in sys.path:
     sys.path.insert(0, str(_KOK / "src"))
