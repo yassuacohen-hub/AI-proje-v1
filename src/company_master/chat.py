@@ -49,15 +49,17 @@ def ac(
     task_id: str,
     sorun: str,
     cozum: str = "",
+    kimden: str = "orkestrator",
     data_dir: Path | None = None,
 ) -> dict[str, Any]:
     """Sorun aç (problem kayıt).
     
     Args:
-        ajan: ajan adı
+        ajan: kime (hedef ajan adı)
         task_id: görev ID
         sorun: 1-200 char alıntı
         cozum: 0-300 char çözüm önerisi (isteğe bağlı)
+        kimden: gönderen ajan adı (varsayılan: orkestrator)
         data_dir: test için custom data dir
     
     Returns:
@@ -67,6 +69,7 @@ def ac(
     
     satir = {
         "timestamp": datetime.now().isoformat(timespec="seconds"),
+        "kimden": _ajan_normalize(kimden),
         "ajan": _ajan_normalize(ajan),
         "task_id": task_id.upper(),
         "sorun": sorun[:200],

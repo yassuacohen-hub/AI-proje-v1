@@ -39,8 +39,9 @@ def cmd_ac(args: argparse.Namespace) -> int:
             task_id=args.task_id,
             sorun=args.sorun,
             cozum=args.cozum or "",
+            kimden=args.kimden or "orkestrator",
         )
-        print(f"✅ Sorun kaydedildi: {satir['task_id']} ({satir['timestamp']})")
+        print(f"✅ Sorun kaydedildi: {satir['kimden']} → {satir['ajan']} | {satir['task_id']} ({satir['timestamp']})")
         return 0
     except Exception as e:
         print(f"❌ Hata: {e}", file=sys.stderr)
@@ -169,10 +170,11 @@ def main(argv: list[str] | None = None) -> int:
     
     # ac: Sorun aç
     p_ac = subparsers.add_parser("ac", help="Sorun aç")
-    p_ac.add_argument("ajan", help="Ajan adı (ihsan/utku/salih/yasu)")
+    p_ac.add_argument("ajan", help="Kime — hedef ajan adı (ihsan/utku/salih/yasu)")
     p_ac.add_argument("task_id", help="Görev ID (örn. UI-01)")
     p_ac.add_argument("sorun", help="Sorun açıklaması (1-200 karakter)")
     p_ac.add_argument("--cozum", "-c", help="İlk çözüm önerisi (isteğe bağlı)")
+    p_ac.add_argument("--kimden", "-k", default="orkestrator", help="Gönderen ajan adı (varsayılan: orkestrator)")
     p_ac.set_defaults(func=cmd_ac)
     
     # guncelle: Çözümü güncelle

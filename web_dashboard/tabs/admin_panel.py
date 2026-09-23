@@ -481,7 +481,9 @@ def render_chat_summary() -> None:
     else:
         son_acik = sorted(acik, key=lambda x: x.get("timestamp", ""), reverse=True)[:3]
         for i, sorun in enumerate(son_acik, 1):
-            with st.expander(f"**{i}. {sorun.get('ajan', '?').upper()}** — {sorun.get('task_id', '?')}"):
+            kimden = sorun.get("kimden", "orkestrator").upper()
+            kime = sorun.get("ajan", "?").upper()
+            with st.expander(f"**{i}. {kimden} → {kime}** — {sorun.get('task_id', '?')}"):
                 st.write(f"**Sorun:** {sorun.get('sorun', '')}")
                 if sorun.get("cozum"):
                     st.write(f"**İlk Çözüm Önerisi:** {sorun.get('cozum')}")
@@ -496,7 +498,8 @@ def render_chat_summary() -> None:
         for s in sorted(tum_sorunlar, key=lambda x: x.get("timestamp", ""), reverse=True):
             rows.append({
                 "Tarih": s.get("timestamp", "")[:16],
-                "Ajan": s.get("ajan", "").upper(),
+                "Kimden": s.get("kimden", "orkestrator").upper(),
+                "Kime": s.get("ajan", "").upper(),
                 "Görev": s.get("task_id", ""),
                 "Sorun": s.get("sorun", "")[:50],
                 "Durum": s.get("durum", ""),
