@@ -1,17 +1,22 @@
 {
-  "AI proje v1/V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md": {
-    "sahip": "roo",
-    "task_id": "V10-BELGE-01",
-    "kilitlendi": "2026-09-18T16:54:11"
+  "AGENTS.md": {
+    "sahip": "ihsan",
+    "task_id": "AGENTS-MERGE-UU",
+    "kilitlendi": "2026-09-23T10:39:33"
   },
-  "data/orchestrator/REVIEW-ONAY-KUYRUGU-01_rapor_2026-09-18_denetim.md": {
-    "sahip": "cline",
-    "task_id": "REVIEW-ONAY-KUYRUGU-01",
-    "kilitlendi": "2026-09-18T22:41:37"
+  "Huginn Data Insights/AGENTS.md": {
+    "sahip": "ihsan",
+    "task_id": "AGENTS-MERGE-UU",
+    "kilitlendi": "2026-09-23T10:39:33"
   },
-  "data/orchestrator/file_locks.json": {
-    "sahip": "utku",
-    "task_id": "ALTYAPI-KILIT-YOL-FIX-01",
-    "kilitlendi": "2026-09-22T05:48:19"
+  "scripts/gorev_at.py": {
+    "sahip": "ihsan",
+    "task_id": "ORKESTRA-GOREV-KAPI-01",
+    "kilitlendi": "2026-09-23T11:09:02"
+  },
+  "scripts/tetik_senk.py": {
+    "sahip": "ihsan",
+    "task_id": "ORKESTRA-GOREV-KAPI-01",
+    "kilitlendi": "2026-09-23T11:09:02"
   }
 }

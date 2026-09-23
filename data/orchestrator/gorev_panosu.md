@@ -9,26 +9,132 @@
 |-------|--------|-------|---------|-------|----------|
 | ADMIN-UX-PROFILMENU-01 | Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link | salih | P0 | iptal | - |
 | ADMIN-UX-MENUTREE-01 | Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar | ihsan | P1 | iptal | web_dashboard/tabs/__init__.py |
-| V10-BELGE-01 | 6 curutulen iddiaya K1/K3/K4 duzeltme notu | ihsan | P1 | plan | AI proje v1/V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md |
-| WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | plan | - |
-| AGN-CREWAI-PILOT-01 | crewAI hibrit worker pilotu (metin-üretimi deneyi, scripts/deney/) | ihsan | P2 | aktif | scripts/deney/crewai_arastirma_deneyi.py |
-| WK-03 | Proxy Rotation and IP Management | - | P2 | plan | - |
-| ADLANDIRMA-GERIYE-01 | D-55 geriye donuk: 55 rapor dosyasindan ajan adini kaldir, rol bazli son eke cevir | ihsan | P3 | plan | - |
-| REVIEW-ONAY-KUYRUGU-01 | Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01) | yasu | P1 | plan | data/orchestrator/REVIEW-ONAY-KUYRUGU-01_rapor_2026-09-18_denetim.md |
-| DOC-SIRKET-MASTER-01 | [DOC] Şirket Master ana belgesi düzelt -> 01_sirket_master_ana_belgesi.md (3s) | utku | P1 | review | AI proje v1/V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md |
-| ALTYAPI-KILIT-TEMIZLE-01 | [ALTYAPI] Duzelt kilitleri → file_locks.json (1s) | yasu | P2 | aktif | data/orchestrator/file_locks.json |
+| WK-01 | Career Pages Scraper — Enhanced Data Extraction | salih | P1 | archive | - |
+| WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | archive | - |
+| FMT-01 | ruff format/lint standardizasyonu (web_app/app/web_dashboard haric) | utku | P2 | archive | ruff.toml, .pre-commit-config.yaml |
+| GUARD-ENC-02 | kodlama_denetim genisletme (CRLF/bosluk/tab/EOF + fix) | utku | P2 | archive | scripts/kodlama_denetim.py, tests/test_kodlama_denetim.py, data/kodlama_allowlist.json |
+| WK-03 | Proxy Rotation and IP Management | - | P2 | archive | - |
+| P7-5 | İSKUR Scraper | ihsan | P1 | archive | - |
+| P7-6 | Kariyer.net Scraper (Hizli MVP) | utku | P1 | archive | src/company_master/scrapers/kariyernet.py, tests/test_kariyernet.py, docs/P7-6_kariyernet_arastirma.md |
+| P7-24 | ASO ve OSTİM Veri Kalite Raporu | ihsan | P2 | archive | data/aso/, data/ostim/, scripts/quality_report.py |
+| ORCH-08 | Gorev tetikleme + onay kuyrugu: orkestrator atar, ajan otomatik fark eder, teslim kontrol onayi olmadan done OLMaz | ihsan | P1 | archive | src/company_master/orchestrator/trigger.py, scripts/gorev_at.py, scripts/gorev_kutusu.py |
+| ORCH-09 | Otomatik tetikleme nobetcisi: Gorev Zamanlayici poll (1dk deneme -> 10dk hedef, kaldirilabilir) | utku | P1 | archive | src/company_master/orchestrator/nobetci.py, scripts/gorev_nobetci.py, scripts/gorev_nobetci.bat |
+| simple_1 | Basit Test Görevi | ihsan | P1 | archive | - |
+| TEST-02 | [TEST] Test Görevi 2 | ihsan | P1 | archive | - |
+| ORCH-10 | Telegram Orkestrator Entegrasyonu (ORCH-10) | utku | P1 | archive | scripts/telegram_polling.py, tests/test_telegram_polling.py, V10/09_kurallar_ve_promptlar/09_telegram_bot_rehberi.md |
+| P7-25 | Admin Dashboard KPI Kartlari — musteri sayisi, API cagrilari, sinyal, sistem sagligi | ihsan | P1 | archive | web_dashboard/tabs/admin_kpi.py, app.py |
+| YENI-3 | Supabase companies tablosu olusturma | utku | P0 | archive | - |
+| YENI-5 | Apify webhook DLQ monitor | utku | P1 | archive | - |
+| CO-01 | CoPlot Arastirmasi: CoPlot nedir, ozellikleri, fiyatlandirmasi, rakip analizi | ihsan | P0 | archive | - |
+| CO-02 | CoPlot Entegrasyon Analizi: API, SDK, webhook destegi | ihsan | P1 | archive | - |
+| COP-01 | VS Code Copilot Test: src/company_master/utils/telegram_bot.py dosyasindaki send_message fonksiyonunun unit testini yaz. | copilot | P1 | archive | tests/test_telegram_bot.py |
+| COP-02 | VS Code Copilot Test: web_dashboard/tabs/admin_kpi.py icindeki render_kpi_tab fonksiyonunu refactor et. KPI kartlarini daha moduler yap. | copilot | P2 | archive | tests/test_web_dashboard_tabs.py, tests/test_admin_extras.py |
+| COP-03 | Copilot Test: src/company_master/orchestrator/trigger.py teslim_et() fonksiyonunun edge-case testleri. | copilot | P1 | archive | tests/test_gorev_trigger.py |
+| COP-04 | Copilot Test: scripts/gorev_kutusu.py icin CLI testi. | copilot | P1 | archive | tests/test_gorev_kutusu_cli.py |
+| COP-05 | Copilot Test: src/company_master/orchestrator/nobetci.py nobet_tut fonksiyonu test. | copilot | P1 | archive | tests/test_gorev_nobetci.py |
+| P7-27 | AI Cost Dashboard: 9router provider bazli gunluk/aylik maliyet, model breakdown, anomali tespiti. 9router_optimizer.py ciktilarindan veri, Plotly charts. | ihsan | P1 | archive | - |
+| P7-31 | Veri Kalitesi Ozeti: company_quality_scores aggregation, 8313 firma kalite skoru dagilimi, eksik alan analizi, iyilestirme onerileri. Kalite riski (QS<30) filtreleme. | ihsan | P1 | archive | - |
+| COP-11 | Copilot: web_dashboard/tabs/admin_performance.py icin render_performance_tab fonksiyonunun unit testi. | copilot | P2 | archive | - |
+| COP-06 | Copilot: scripts/decision_log.py icin log_decision fonksiyonunun unit testi yaz. | copilot | P2 | archive | - |
+| COP-07 | Copilot: src/company_master/utils/telegram_bot.py icin html_escape fonksiyonunun unit testi. | copilot | P2 | archive | - |
+| COP-08 | Sistem-Maliyet testi (retarget: admin_sistem.py) | copilot | P2 | archive | tests/test_admin_sistem_cost.py |
+| COP-09 | Sistem-Kalite testi (retarget: admin_sistem.py) | copilot | P2 | archive | tests/test_admin_sistem_quality.py |
+| COP-10 | Sistem-Analitik testi (retarget: admin_sistem.py) | copilot | P2 | archive | tests/test_admin_sistem_analytics.py |
+| COP-12 | Copilot: README.md guncelleme - Admin Panel Faz 2 gelismelerini dokumante et. | copilot | P2 | archive | - |
+| COP-13 | Copilot: web_dashboard/tabs/admin_performance.py render_performance_tab fonksiyonunun unit testi. | copilot | P2 | archive | - |
+| COP-14 | Copilot: web_dashboard/tabs/admin_dlq.py render_dlq_tab fonksiyonunun unit testi. | copilot | P2 | archive | - |
+| COP-15 | Copilot: web_dashboard/tabs/webhook_monitor.py render_webhook_monitor_tab fonksiyonunun unit testi. | copilot | P2 | archive | - |
+| COP-16 | Copilot: web_dashboard/css/style.css icin CSS lint ve optimizasyon kontrolu. | copilot | P2 | archive | - |
+| COP-17 | Copilot: web_dashboard/js/app.js icin JavaScript fonksiyon testi. | copilot | P2 | archive | - |
+| P7-44 | Dashboard UX redesign: Modern navigation | ihsan | P0 | archive | app.py, web_dashboard/tabs/__init__.py |
+| P7-46 | Kullanici ayarlar paneli | ihsan | P1 | archive | web_dashboard/tabs/admin_panel.py |
+| COP-18 | KPI bos-veri placeholder: web_dashboard/tabs/admin_kpi.py - veri yoksa st.spinner + 'Veri yukleniyor...' skeleton goster; yuklenince kartlar gorunsun. Kucuk diff, tek dosya. | copilot | P2 | archive | web_dashboard/tabs/admin_kpi.py |
+| COP-19 | Login hata UX: web_dashboard/tabs/admin_auth.py - hatali giriste anlasilir st.error mesaji + hata temizleme; tests/test_admin_auth_login.py unit test ekle. | copilot | P2 | archive | web_dashboard/tabs/admin_auth.py, tests/test_admin_auth_login.py |
+| COP-20 | DLQ sekmesi testi: tests/test_admin_dlq_tab.py - admin_dlq.py render_dlq_tab icin bos jsonl / dolu jsonl / bozuk satir senaryolari. | copilot | P2 | archive | tests/test_admin_dlq_tab.py |
+| COP-21 | Audit sekmesi testi: tests/test_admin_audit_tab.py - admin_audit.py render_audit_tab icin lock yok / lock var / bozuk json senaryolari. | copilot | P2 | archive | tests/test_admin_audit_tab.py |
+| COP-22 | Karar defteri testi: tests/test_admin_panel_tab.py - admin_panel.py icin bos log / dolu log / bozuk jsonl senaryolari. | copilot | P2 | archive | tests/test_admin_panel_tab.py |
+| P7-32 | API Analytics: endpoint bazli kullanim istatistikleri (cagri sayisi, response time, hata orani, rate-limit tetiklenmesi), en cok kullanilan endpointler, tier bazli kullanim dagilimi. Admin sekmesi. | ihsan | P1 | archive | web_dashboard/tabs/admin_api_analytics.py |
+| BRIF-01 | [BRIF] roo brifi: 03_mimari kararlari okunup oneri/kritik/ekleme yazilsin | ihsan | P1 | archive | AI proje v1/V10/03_mimari/brifler/brif_roo.md |
+| BRIF-02 | [BRIF] kilo brifi: 03_mimari kararlari okunup oneri/kritik/ekleme yazilsin | utku | P1 | archive | AI proje v1/V10/03_mimari/brifler/brif_kilo.md |
+| BRIF-03 | [BRIF] copilot brifi: 03_mimari kararlari okunup oneri/kritik/ekleme yazilsin | copilot | P1 | plan | AI proje v1/V10/03_mimari/brifler/brif_copilot.md |
+| DASH-UX-02a | [DASH-UX] DASH-UX-02a: 5 sistem sekmesini tek 'admin_sistem.py' icinde birlest | copilot | P1 | archive | web_dashboard/tabs/admin_sistem.py |
+| DASH-UX-02b | [DASH-UX] DASH-UX-02b: 4 sekmeyi tek 'admin_yonetim.py' icinde birlestir: extr | copilot | P1 | archive | web_dashboard/tabs/admin_yonetim.py |
+| DASH-UX-03 | [DASH-UX] DASH-UX-03: Paket + Cagraz Satis backend: paketler.py (paket CRUD + | utku | P1 | archive | src/company_master/paketler.py, src/company_master/pazarlama.py, data/demo/paketler_demo.jsonl |
+| DASH-UX-01 | [DASH-UX] DASH-UX-01: ANA TASARIM: app.py (7 sekmeli yeni yapi, koyu tema CSS | ihsan | P1 | archive | app.py, web_dashboard/css/style.css, web_dashboard/tabs/ana_kontrol.py |
+| DASH-UX-04 | [DASH-UX] DASH-UX-04: Paketler + Pazarlama UI: tabs/paketler.py + pazarlama.p | ihsan | P1 | archive | web_dashboard/tabs/paketler.py, web_dashboard/tabs/pazarlama.py |
+| COP-23 | [COP-TASARIM] TASARIM-1: Bosta-veri bilgi kutusu tutarliligi (ro... | copilot | P2 | archive | web_dashboard/tabs/admin_sistem.py |
+| COP-24 | [COP-TASARIM] TASARIM-2: Son-guncelleme + yenile kalibi (roo 4.1... | copilot | P2 | archive | web_dashboard/tabs/admin_kpi.py, web_dashboard/tabs/admin_quality.py |
+| COP-25 | [COP-TASARIM] TASARIM-3: Sidebar yardim satirlari. app.py icinde... | copilot | P2 | archive | app.py |
+| COP-26 | MUSTERILER ekrani: firma listesi+filtre+bildirim blogu (roo uyarisi) | ihsan | P1 | plan | web_dashboard/tabs/admin_musteriler.py |
+| ORCH-13 | Pano sema dogrulama (S-05) + tetik_al pano fallback (S-06) | yasu | P2 | archive | src/company_master/orchestrator/task_board.py, src/company_master/orchestrator/trigger.py, tests/test_pano_sema.py |
+| UX-01 | UI Component Library — Design System | ihsan | P1 | archive | src/company_master/ui/ |
+| UX-02 | Responsive Layout System ve Breakpoint Management | ihsan | P1 | archive | web_dashboard/css/ |
+| UX-03 | Design Token ve Theme Management System | ihsan | P2 | archive | web_dashboard/css/ |
+| ROO-UX-ADMIN-01 | Premium Enterprise Admin Panel UX audit sonrasi design system ve shell | ihsan | P1 | archive | docs/UX_ADMIN_PANEL_REVIEW_2026-09-14.md, web_dashboard/css/admin_tokens.css |
+| CL-01 | Integration Test Suite for API Endpoints | yasu | P1 | archive | tests/ |
+| CL-02 | Performance Benchmark Scripts | yasu | P2 | archive | scripts/ |
+| CL-03 | Security Audit — Dependency Vulnerability Scan | yasu | P1 | archive | data/orchestrator/ |
+| AR-02 | Competitor Analysis — Direct and Indirect | utku | P2 | archive | data/orchestrator/AR-02_rekabet_analizi.md |
+| PO-BACK-02 | Segment Eligibility Skoru + Onay Akışı (Coverage + Profile Accuracy) | yasu | P1 | archive | src/company_master/segment.py, tests/test_segment.py |
+| PO-BACK-03 | Kampanya Durum-Makinesi Denetimi (Source Reliability) | ihsan | P1 | archive | src/company_master/kampanya_durum.py, tests/test_kampanya_durum.py |
+| PO-BACK-04 | Paket Fiyat Kataloğu Tekilleştirme (Field Completeness) | yasu | P1 | archive | src/company_master/paketler.py, scripts/sync_paket_fiyatlari.py, tests/test_paket_fiyat.py |
+| PO-BACK-05 | Veri Tazelik Etiketi + Manuel Yenileme (Freshness) | utku | P2 | archive | src/company_master/tazelik.py, web_dashboard/tabs/admin_auto_refresh.py, tests/test_tazelik.py |
+| PO-BACK-06 | Destek Merkezi MVP (Evidence Coverage) | utku | P2 | archive | src/company_master/destek.py, web_dashboard/tabs/admin_destek.py, tests/test_destek.py |
+| PO-BACK-07 | Feature Flags MVP (Data Quality + Source Reliability) | utku | P2 | archive | src/company_master/feature_flags.py, tests/test_feature_flags.py, data/feature_flags.json |
+| PO-BACK-08 | Executive Dashboard v1 (Coverage + Data Quality Score) — REVIZE | yasu | P3 | archive | - |
+| PO-BACK-09 | Duplicate Rate Dashboard (Admin) | yasu | P1 | archive | src/company_master/dedup_metrics.py, tests/test_dedup_metrics.py |
+| PO-BACK-10 | Coverage Analytics (Müşteri) | ihsan | P1 | archive | src/company_master/coverage_analitik.py, tests/test_coverage_analitik.py |
+| PO-BACK-11 | Source Reliability Monitor (Admin) | ihsan | P1 | archive | src/company_master/kaynak_guvenilirlik.py, web_dashboard/tabs/admin_quality.py, tests/test_kaynak_guvenilirlik.py |
+| ADMIN-WF-01 | İş akışı optimizasyonu ve görev sıralaması | utku | P1 | archive | data/orchestrator/WORKFLOW_OPTIMIZATION.md |
+| MRK-02F | card.py sayi bicimini i18n.sayi() ile tek kaynaga indir | yasu | P1 | archive | src/company_master/ui/components/card.py |
+| MRK-02G | tests/test_i18n.py - 13 bekci testi + 4 ek test | yasu | P1 | archive | tests/test_i18n.py |
+| TEN-01 | Multi-tenant hazirligi: TenantContext + bekci + doc | utku | P1 | archive | src/company_master/tenant/__init__.py, src/company_master/tenant/model.py, tests/test_tenant.py |
+| GAM-01 | Rozet/Kesif motoru: 3 rozet + kullanici_ilerleme.json | utku | P2 | archive | src/company_master/rozet/__init__.py, tests/test_rozet.py, data/kullanici_ilerleme.json |
+| AI-RAG-01 | Odin AI RAG iskeleti: kaynak protokolu + baglam derleyici (ai_chat.py'ye dokunma) | utku | P2 | archive | src/company_master/odin_ai/__init__.py, src/company_master/odin_ai/rag.py, tests/test_odin_ai.py |
+| TEN-02 | Tenant health Streamlit import ayrıştırması | utku | P1 | archive | src/company_master/tenant/health.py, web_dashboard/tabs/tenant_health_dashboard.py, web_dashboard/tabs/admin_kpi.py |
+| AI-CHAT-01-FIX | [FIX] AI-CHAT-01 teslim dosyalari diskte yok: ai_chat.py + abrakadabra.py yeniden uretim | ihsan | P1 | archive | src/company_master/ai_chat.py, web_dashboard/tabs/abrakadabra.py, tests/test_ai_chat.py |
+| TEST-ISO-01 | [TEST] test_api_integration.py için izole fixture DB — 69 deselect edilen testi regresyona geri kat | ihsan | P1 | archive | tests/test_api_integration.py, tests/conftest.py |
+| HEDEF-NACE-01 | Kapsam karti: gercek NACE hedef tablosu (data/nace_hedefleri.json) | ihsan | P2 | archive | src/company_master/coverage_analitik.py, web_dashboard/tabs/pazarlama.py, tests/test_coverage_analitik.py |
+| FIX-LEDGER-01 | error_ledger Windows tmp kilidi (WinError 5) retry | ihsan | P2 | archive | - |
+| BUG-DESTEK-UTF8 | KRITIK(P1): tests/test_destek.py UTF-16LE+BOM (4319 NUL bayt) — pytest koleksiyonunu durduruyor | ihsan | P1 | archive | - |
+| BUG-CHART01-SYNTAX | SORUN(P2): ui/charts/__init__.py SyntaxError (CHART-01 kalıntısı) — ortak grafik modülü import edilemiyor | yasu | P2 | archive | src/company_master/ui/charts/__init__.py, tests/test_ui_charts.py |
+| BUG-MIG0006-UTF8 | KR-3: 0006_normalize_compat.py bozuk kodlama (orphan migration dosyasi) | ihsan | P2 | archive | - |
+| BUG-ENCODING-GUARD | KR-4: Kodlama denetim araci (BOM/NUL/0-bayt) + ratchet guard + CI | yasu | P2 | archive | scripts/kodlama_denetim.py, tests/test_kodlama_guard.py, data/kodlama_allowlist.json |
+| CI-GATE-01 | CI kapisi: tam tests/ + collection-errors + kodlama denetimi adimi | yasu | P1 | archive | .github/workflows/ci.yml |
+| CHART-INT-01 | ui.charts modulunu admin_executive ekranina entegre et | utku | P2 | archive | web_dashboard/tabs/admin_executive.py |
+| I18N-SES-02 | Marka sesi JSON (105 tr anahtar) ses.json/ui.json ile birlestir | utku | P2 | archive | src/company_master/i18n/_gelen_marka_sesi_2026-09-15.json, src/company_master/i18n/ses.json |
+| BUG-SCRIPTS-COMPILE-01 | scripts/ hijyen: 3 compile-bozuk script + scripts/scripts mukerrer klasor | yasu | P2 | archive | scripts/check_email_dist.py, scripts/test_growth.py, scripts/scripts |
+| REVIEW-PO-BACK-06 | PO-BACK-06 Destek Merkezi capraz inceleme (kilo teslimi) | yasu | P1 | archive | data/orchestrator/REVIEW-PO-BACK-06_rapor_20260915_cline.md |
+| UI-SIDEBAR-02 | [UI] Sidebar: marka blogu uste, logo, kompakt tooltip | utku | P2 | archive | app.py |
+| UI-TOPBAR-02 | [UI] Topbar: arama sag ust, breadcrumb ayrac, Bu sayfada ayiraci | utku | P2 | archive | app.py |
+| REV-I18N-SES-02 | Capraz inceleme: I18N-SES-02 kilo teslimi (ses.json birlestirme) | yasu | P1 | archive | data/orchestrator/REV-I18N-SES-02_bulgular_2026-09-15_cline.md |
+| AUDIT-ENC-02 | Repo geneli kodlama denetimi (BOM/UTF-16/0-bayt/CRLF) + kodlama_denetim.py kapsam kontrolu | yasu | P2 | archive | data/orchestrator/AUDIT-ENC-02_bulgular_2026-09-15_cline.md |
+| MVP-KD-01 | MVP Karar Defteri ekrani: PageHeader + filtre + yeni karar formu | utku | P1 | archive | web_dashboard/tabs/admin_panel.py, tests/test_admin_panel_karar_defteri.py |
+| MVP-KUL-01 | MVP Kullanici Yonetimi ekrani: PageHeader + onayla + kredi formu | utku | P1 | archive | web_dashboard/tabs/admin_extras.py, tests/test_admin_extras_kullanici.py |
+| REV-MVP-KD-01 | Review: MVP-KD-01 Karar Defteri ekrani | yasu | P1 | archive | - |
+| P7-6b | Kariyer.net scraper saglamlastirma (MVP sonrasi) | utku | P2 | archive | src/company_master/scrapers/kariyernet.py, tests/test_kariyernet.py |
+| REV-MVP-ADMIN-01 | MVP-ADMIN 4 ekran capraz denetim (rapor-only) | yasu | P1 | archive | data/orchestrator/REV-MVP-ADMIN-01_bulgular_20260915_cline.md |
+| HIJYEN-01 | Kalinti gecici dosya temizligi | yasu | P2 | archive | data/_tmp/mvp_pano_duzenle.py |
+| MVP-KUL-02 | Kullanici onayinda tier secici (K-1 bulgusu) | utku | P2 | archive | web_dashboard/tabs/admin_extras.py, tests/test_admin_extras_kullanici.py |
+| REV-ADMIN-ENV-01 | Review: admin sifre sifirlama scripti + .env on-dolum + app.py restore | yasu | P1 | archive | data/orchestrator/REV-ADMIN-ENV-01_bulgular_20260915_cline.md |
+| UI-MODAL-01 | [UI] Admin panel acilir modal ekranlar + grafik/chart arastirma ve oneri calismasi (dokuman) | yasu | P2 | archive | docs/UI_MODAL_CHART_ARASTIRMA_2026-09-15.md |
 | ORKESTRA-NAMING-AUDIT-02 | [ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s) | ihsan | P1 | plan | data/orchestrator/task_board.json, tests/test_naming_audit.py |
 | ORKESTRA-DECISION-LOG-03 | [ORKESTRA] Karar defteri düzenleme ve validasyon → data/orchestrator/ORKESTRA-DECISION-LOG-03_rapor_2026-09-20_orkestrator.md (2s) | ihsan | P1 | plan | data/orchestrator/decision_log.jsonl, data/orchestrator/bulgu_defteri.md, tests/test_decision_log.py |
-| ORKESTRA-VAULT-TEKRAR-01 | [ORKESTRA] denetle vault isim tekrarlari → ORKESTRA-VAULT-TEKRAR-01_rapor.md (2s) | ihsan | P2 | plan | - |
 | ALTYAPI-KILIT-TEMIZLIK-V10-01 | [ALTYAPI] V10-HIJYEN dosyaları kilit sil → file_locks.json (1s) | cline | P2 | iptal | - |
 | ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyası yaz → data/orchestrator/*.md (1s) | yasu | P2 | plan | - |
-| ALTYAPI-KILIT-YOL-FIX-01 | [ALTYAPI] kilit yolunu düzelt → file_locks.json (1s) | utku | P1 | review | data/orchestrator/file_locks.json |
-| ALTYAPI-PANO-ENCODING-FIX-01 | [ALTYAPI] pano encoding hatalarini duzelt → task_board.json (2s) | utku | P1 | review | data/orchestrator/task_board.json |
-| TEST-AYARLAR-KAPSAM-01 | Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda) | yasu | P2 | plan | tests/test_admin_kullanici_ayarlari.py |
-| UI-AYARLAR-SAYFA-01 | [UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s) | utku | P1 | plan | - |
-| ORKESTRA-BASLIK-GERIYE-01 | [ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s) | yasu | P2 | plan | - |
-| TEST-MERVE-KAPSAM-01 | [TEST] Ayarlar sayfasi testlerini denetle → data/orchestrator/TEST-MERVE-KAPSAM-01_rapor_2026-09-18_denetim.md (2s) | salih | P2 | plan | - |
-| DASH-UX-02a-SECTIONS | [DASH-UX] DASH-UX-02a-SECTIONS: admin_sistem sekmesini SECTIONS'a kaydet | utku | P1 | blocked | web_dashboard/tabs/__init__.py |
+| BRIK-00 | ALTYAPI Archive sema + gece zinciri → kurulum ve test (D-62, D-63) | ihsan | P1 | archive | - |
+| ADMIN-UI-CACHE-OPT-01 | [ALTYAPI] Admin UI cache optimizasyonu ve TTL ayarlari | yasu | P2 | review | - |
+| GRAPH-CANONICAL-SECER-02 | [GRAPH] Canonical graph baglanti guvenligi secer | yasu | P2 | review | - |
+| AGENTS-MERGE-UU | [DOC] AGENTS.md kok/vault kopuklugunu duzelt → tek SSOT + D-188 (2s) | ihsan | P0 | review | AGENTS.md, Huginn Data Insights/AGENTS.md |
+| VAULT-CLEANUP-BATCH | [ALTYAPI] Vault alarm/tetik artiklarini sil → temiz kuyruk (1s) | ihsan | P2 | review | - |
+| ADMIN-UX-SIDEBAR-TAB | [UI] Sidebar tab secim durumunu sakla -> web_dashboard/tabs/__init__.py (2s) | utku | P1 | aktif | - |
+| ORKESTRA-ONAY-BOSALT-01 | [ORKESTRA] Onay kuyrugundaki 9 teslimi denetle → data/orchestrator/ORKESTRA-ONAY-BOSALT-01_rapor_2026-09-23_salih.md (4s) | salih | P0 | plan | - |
+| ORKESTRA-GOREV-KAPI-01 | [ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s) | ihsan | P0 | plan | scripts/gorev_at.py, scripts/tetik_senk.py |
+| ALTYAPI-KILIT-OTOMATIK-01 | [ALTYAPI] Kilit otomatik birakmayi yaz → src/company_master/orchestrator/task_board.py (3s) | roo | P1 | review | - |
+| ALTYAPI-TETIK-ARSIV-01 | [ALTYAPI] Kanonik olmayan tetik dosyalarini taşı → data/orchestrator/triggers/_arsiv_2026-09-23/ (2s) | yasu | P2 | plan | - |
+| ALTYAPI-MOJIBAKE-DIZIN-01 | [ALTYAPI] mojibake_onar.py dizin taramasini yaz → mojibake_onar.py (2s) | yasu | P2 | plan | - |
+| ALTYAPI-IMPORT-TEKLES-01 | [ALTYAPI] trigger.py import yolunu düzelt → trigger.py (1s) | yasu | P2 | plan | - |
+| ALTYAPI-TETIK-ZAMAN-01 | [ALTYAPI] tetik_senk zamanlamasini yaz → tetik_senk.py (2s) | yasu | P2 | plan | - |
 
 ## Tamamlananlar
 
@@ -37,15 +143,15 @@
 | ADMIN-UX-LOGOUT-01 | [UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s) | ihsan | 2026-09-19T16:22:23 |
 | RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arastirma | ihsan | 2026-09-22T05:55:45 |
 | ADMIN-UX-AYARLAR-SAYFA-01 | Kullanici Ayarlari tek sayfa: profil + sifre degistir/sifirla | utku | 2026-09-19T16:49:34 |
-| WK-01 | Career Pages Scraper — Enhanced Data Extraction | salih | 2026-09-19T16:59:51 |
+| V10-BELGE-01 | 6 curutulen iddiaya K1/K3/K4 duzeltme notu | ihsan | - |
 | ADMIN-HATA-01 | Hata Yonetimi sekmesi: sahte istatistik/demo raise kaldir, gercek kaynak + rapor kaydi | utku | 2026-09-18T21:55:21 |
 | ADMIN-HATA-02 | Admin sekmelerinde 16 sessiz except:pass -> log/hata_kutusu + AST testi | utku | 2026-09-18T21:55:21 |
 | ADMIN-KPI-KART-02 | Kalan st.metric -> kpi_karti (webhook_monitor, tenant_health) + AST testi | utku | 2026-09-19T11:37:27 |
 | ADMIN-MUSTERI-02 | Musteri Yonetimi: placeholder alt sekmeler gercek icerik (kullanicilar_onay + paket_kredi) | utku | 2026-09-19T11:37:28 |
-| FMT-01 | ruff format/lint standardizasyonu (web_app/app/web_dashboard haric) | utku | 2026-09-19T12:23:56 |
-| GUARD-ENC-02 | kodlama_denetim genisletme (CRLF/bosluk/tab/EOF + fix) | utku | 2026-09-19T12:24:41 |
+| AGN-CREWAI-PILOT-01 | crewAI hibrit worker pilotu (metin-üretimi deneyi, scripts/deney/) | ihsan | - |
 | SEC-BANDIT-01 | Bandit statik guvenlik taramasi + HIGH bulgular | utku | 2026-09-19T12:25:44 |
 | V10-HIJYEN-02 | search/fulltext.py olu kod silinmesi (B-15) | ihsan | 2026-09-18T21:07:00 |
+| ADLANDIRMA-GERIYE-01 | D-55 geriye donuk: 55 rapor dosyasindan ajan adini kaldir, rol bazli son eke cevir | ihsan | - |
 | P0-1 | İstiklal OSB scraper implementasyonu | web_kazima | 2026-09-08T10:00:00Z |
 | P0-2 | Scrape bitince ingest - VKN - kalite recalc | gelistirici | 2026-09-03T14:18:36 |
 | P0-3 | Kalite skoru 6.53 - 50+ heazine | kalite | 2026-09-06T22:54:31 |
@@ -97,170 +203,66 @@
 | DASH-05 | Admin Panel Karar Defteri sekmesi | mimar | 2026-09-12T21:12:02 |
 | DASH-06 | Admin Panel API Yönetimi ve Kullanıcı Yönetimi | utku | 2026-09-12T22:27:22 |
 | P7-4 | Company Career Pages Scraper | utku | 2026-09-13T08:30:00 |
-| P7-5 | İSKUR Scraper | ihsan | 2026-09-13T08:25:11 |
-| P7-6 | Kariyer.net Scraper (Hizli MVP) | utku | 2026-09-15T18:02:53 |
 | P7-22 | Apify Dead-Letter Queue ve Yeniden Deneme Akışı | utku | 2026-09-13T07:29:52 |
 | P7-23 | Vektör Katmanı Üretim Entegrasyonu | utku | 2026-09-13T08:15:00 |
-| P7-24 | ASO ve OSTİM Veri Kalite Raporu | ihsan | 2026-09-13T21:44:10 |
 | DASH-08 | Admin Denetim (Audit) Sekmesi | utku | 2026-09-13T08:40:00 |
 | DASH-07 | Admin Panel JWT Auth & Rol Yönetimi | mimar | 2026-09-13T00:09:05 |
 | ORCH-07 | Obsidian vault git entegrasyonu (kurumsal hafiza) | yasu | 2026-09-13T02:01:29 |
-| ORCH-08 | Gorev tetikleme + onay kuyrugu: orkestrator atar, ajan otomatik fark eder, teslim kontrol onayi olmadan done OLMaz | ihsan | 2026-09-13T06:51:01 |
-| ORCH-09 | Otomatik tetikleme nobetcisi: Gorev Zamanlayici poll (1dk deneme -> 10dk hedef, kaldirilabilir) | utku | 2026-09-14T03:36:37 |
-| simple_1 | Basit Test Görevi | ihsan | 2026-09-13T09:37:01 |
-| TEST-02 | [TEST] Test Görevi 2 | ihsan | 2026-09-13T06:41:29 |
-| ORCH-10 | Telegram Orkestrator Entegrasyonu (ORCH-10) | utku | 2026-09-13T07:24:53 |
-| P7-25 | Admin Dashboard KPI Kartlari — musteri sayisi, API cagrilari, sinyal, sistem sagligi | ihsan | 2026-09-13T07:19:27 |
 | P7-26 | Webhook Monitor sekmesi — endpoint, latency, status dagilimi, hata loglari | utku | 2026-09-13T07:39:40 |
 | YENI-1 | Veri Temizleme Scripti | utku | 2026-09-13T06:15:00 |
 | YENI-2 | API Rate Limiting Optimizasyonu | ihsan | 2026-09-13T09:50:00 |
-| YENI-3 | Supabase companies tablosu olusturma | utku | 2026-09-13T09:30:16 |
 | YENI-4 | Dashboard veri akisi duzelt | ihsan | 2026-09-13T09:55:00 |
-| YENI-5 | Apify webhook DLQ monitor | utku | 2026-09-13T09:32:40 |
 | YENI-6 | Telegram komut test suite | ihsan | 2026-09-13T09:40:00 |
-| CO-01 | CoPlot Arastirmasi: CoPlot nedir, ozellikleri, fiyatlandirmasi, rakip analizi | ihsan | 2026-09-13T17:32:13 |
-| CO-02 | CoPlot Entegrasyon Analizi: API, SDK, webhook destegi | ihsan | 2026-09-13T17:32:13 |
 | NOB-01 | Nobetci Alarm Sistemi: Zincir devami + teslim onayi ses cal | utku | 2026-09-13T12:15:00 |
-| COP-01 | VS Code Copilot Test: src/company_master/utils/telegram_bot.py dosyasindaki send_message fonksiyonunun unit testini yaz. | copilot | 2026-09-13T15:34:27 |
-| COP-02 | VS Code Copilot Test: web_dashboard/tabs/admin_kpi.py icindeki render_kpi_tab fonksiyonunu refactor et. KPI kartlarini daha moduler yap. | copilot | 2026-09-13T15:34:27 |
 | P7-28 | LinkedIn + Indeed + ISKUR is ilanlari. LinkedIn icin Apify actor kullan. | utku | 2026-09-13T11:00:00 |
 | P7-29 | Google Dorking + Wayback Machine: site:kariyer.net cache verisi topla. | ihsan | 2026-09-13T12:30:00 |
 | P7-30 | Selenium + Rotating Proxy: Kariyer.net icin anti-bot asma scraper. | utku | 2026-09-13T12:45:00 |
-| COP-03 | Copilot Test: src/company_master/orchestrator/trigger.py teslim_et() fonksiyonunun edge-case testleri. | copilot | 2026-09-13T15:34:27 |
-| COP-04 | Copilot Test: scripts/gorev_kutusu.py icin CLI testi. | copilot | 2026-09-13T15:34:27 |
-| COP-05 | Copilot Test: src/company_master/orchestrator/nobetci.py nobet_tut fonksiyonu test. | copilot | 2026-09-13T15:34:27 |
-| P7-27 | AI Cost Dashboard: 9router provider bazli gunluk/aylik maliyet, model breakdown, anomali tespiti. 9router_optimizer.py ciktilarindan veri, Plotly charts. | ihsan | 2026-09-13T18:52:15 |
-| P7-31 | Veri Kalitesi Ozeti: company_quality_scores aggregation, 8313 firma kalite skoru dagilimi, eksik alan analizi, iyilestirme onerileri. Kalite riski (QS<30) filtreleme. | ihsan | 2026-09-13T19:25:46 |
-| COP-11 | Copilot: web_dashboard/tabs/admin_performance.py icin render_performance_tab fonksiyonunun unit testi. | copilot | 2026-09-13T17:20:00 |
 | P7-33 | Sistem Performansi: Query latency, cache hit ratio, slow query tespiti, OpenTelemetry trace linking. /api/performance aggregation, Prometheus metrikleri. | utku | 2026-09-13T17:10:00 |
-| COP-06 | Copilot: scripts/decision_log.py icin log_decision fonksiyonunun unit testi yaz. | copilot | 2026-09-13T17:04:09 |
-| COP-07 | Copilot: src/company_master/utils/telegram_bot.py icin html_escape fonksiyonunun unit testi. | copilot | 2026-09-13T17:04:40 |
-| COP-08 | Sistem-Maliyet testi (retarget: admin_sistem.py) | copilot | 2026-09-13T21:54:20 |
-| COP-09 | Sistem-Kalite testi (retarget: admin_sistem.py) | copilot | 2026-09-13T21:59:50 |
-| COP-10 | Sistem-Analitik testi (retarget: admin_sistem.py) | copilot | 2026-09-13T22:16:20 |
-| COP-12 | Copilot: README.md guncelleme - Admin Panel Faz 2 gelismelerini dokumante et. | copilot | 2026-09-13T17:16:11 |
 | P7-34 | Veri Kalitesi iyilestirme scripti: QS<30 firmalar icin otomatik duzeltme gorevleri olustur. | utku | 2026-09-13T17:15:00 |
 | P7-35 | API Rate Limiting iyilestirme: user bazli limit esnekligi, burst mode, whitelist destegi. | utku | 2026-09-13T17:16:00 |
 | P7-36 | Cache stratejisi: Redis cache layer, query result caching, TTL yonetimi. | utku | 2026-09-13T17:17:00 |
 | P7-37 | Log aggregation: Loguru + PostgreSQL audit, structured logging, log rotation. | utku | 2026-09-13T17:18:00 |
 | P7-38 | Webhook DLQ dashboard: Apify webhook hata kuyrugu izleme, retry istatistikleri. | utku | 2026-09-13T17:19:00 |
-| COP-13 | Copilot: web_dashboard/tabs/admin_performance.py render_performance_tab fonksiyonunun unit testi. | copilot | 2026-09-13T18:24:11 |
-| COP-14 | Copilot: web_dashboard/tabs/admin_dlq.py render_dlq_tab fonksiyonunun unit testi. | copilot | 2026-09-13T18:27:07 |
-| COP-15 | Copilot: web_dashboard/tabs/webhook_monitor.py render_webhook_monitor_tab fonksiyonunun unit testi. | copilot | 2026-09-13T18:30:25 |
-| COP-16 | Copilot: web_dashboard/css/style.css icin CSS lint ve optimizasyon kontrolu. | copilot | 2026-09-13T18:57:46 |
-| COP-17 | Copilot: web_dashboard/js/app.js icin JavaScript fonksiyon testi. | copilot | 2026-09-13T21:14:18 |
 | P7-39 | Dashboard veri yenileme optimizasyonu: Streamlit auto-refresh, session state yonetimi, gereksiz yenilemeleri eleme. | utku | 2026-09-13T17:30:00 |
 | P7-40 | Export fonksiyonu: KPI ve veri tablolarindan CSV/Excel indirme. streamlit export butonu + pandas DataFrame export. | utku | 2026-09-13T17:30:00 |
 | P7-41 | Arama ve filtreleme: Tum sekmelerde global arama, filtreleri kaydetme, favori filtreler. | utku | 2026-09-13T17:30:00 |
 | P7-42 | Loading states: Skeleton screens, progress indicators, spinner componentleri. | utku | 2026-09-13T17:30:00 |
 | P7-43 | Hata sayfalari: 404, 500, baglanti hatasi icin kullanici dostu hata mesajleri. | utku | 2026-09-13T17:30:00 |
-| P7-44 | Dashboard UX redesign: Modern navigation | ihsan | 2026-09-14T00:06:52 |
 | P7-45 | Canli veri akisi: Server-Sent Events | utku | 2026-09-13T22:30:00 |
-| P7-46 | Kullanici ayarlar paneli | ihsan | 2026-09-14T04:13:27 |
-| COP-18 | KPI bos-veri placeholder: web_dashboard/tabs/admin_kpi.py - veri yoksa st.spinner + 'Veri yukleniyor...' skeleton goster; yuklenince kartlar gorunsun. Kucuk diff, tek dosya. | copilot | 2026-09-13T18:24:11 |
-| COP-19 | Login hata UX: web_dashboard/tabs/admin_auth.py - hatali giriste anlasilir st.error mesaji + hata temizleme; tests/test_admin_auth_login.py unit test ekle. | copilot | 2026-09-13T18:55:15 |
-| COP-20 | DLQ sekmesi testi: tests/test_admin_dlq_tab.py - admin_dlq.py render_dlq_tab icin bos jsonl / dolu jsonl / bozuk satir senaryolari. | copilot | 2026-09-13T18:30:25 |
-| COP-21 | Audit sekmesi testi: tests/test_admin_audit_tab.py - admin_audit.py render_audit_tab icin lock yok / lock var / bozuk json senaryolari. | copilot | 2026-09-13T18:40:44 |
-| COP-22 | Karar defteri testi: tests/test_admin_panel_tab.py - admin_panel.py icin bos log / dolu log / bozuk jsonl senaryolari. | copilot | 2026-09-13T18:48:15 |
-| P7-32 | API Analytics: endpoint bazli kullanim istatistikleri (cagri sayisi, response time, hata orani, rate-limit tetiklenmesi), en cok kullanilan endpointler, tier bazli kullanim dagilimi. Admin sekmesi. | ihsan | 2026-09-13T19:53:47 |
 | ORCH-12-K | [ORCH-12] Isbirligi: CLI + test + dokumantasyon + nobetci bayragi (kilo yarisi) | utku | 2026-09-13T20:11:58 |
-| BRIF-01 | [BRIF] roo brifi: 03_mimari kararlari okunup oneri/kritik/ekleme yazilsin | ihsan | 2026-09-13T21:14:18 |
-| BRIF-02 | [BRIF] kilo brifi: 03_mimari kararlari okunup oneri/kritik/ekleme yazilsin | utku | 2026-09-13T21:16:48 |
-| BRIF-03 | [BRIF] copilot brifi: 03_mimari kararlari okunup oneri/kritik/ekleme yazilsin | copilot | 2026-09-13T21:16:18 |
 | SENTEZ-01 | [SENTEZ] 3 brifi oku -> 00_sentez.md: kabul / ret+gerekce / bekleyen kararlar | ihsan | 2026-09-13T21:29:21 |
-| DASH-UX-02a | [DASH-UX] DASH-UX-02a: 5 sistem sekmesini tek 'admin_sistem.py' icinde birlest | copilot | 2026-09-13T21:34:19 |
-| DASH-UX-02b | [DASH-UX] DASH-UX-02b: 4 sekmeyi tek 'admin_yonetim.py' icinde birlestir: extr | copilot | 2026-09-13T21:46:49 |
-| DASH-UX-03 | [DASH-UX] DASH-UX-03: Paket + Cagraz Satis backend: paketler.py (paket CRUD + | utku | 2026-09-13T21:57:20 |
 | AI-CHAT-01 | [DASH-UX] AI-CHAT-01: Abrakadabra: tabs/abrakadabra.py (st.chat_message) + sr | utku | 2026-09-13T22:00:00 |
-| DASH-UX-01 | [DASH-UX] DASH-UX-01: ANA TASARIM: app.py (7 sekmeli yeni yapi, koyu tema CSS | ihsan | 2026-09-13T21:37:19 |
-| DASH-UX-04 | [DASH-UX] DASH-UX-04: Paketler + Pazarlama UI: tabs/paketler.py + pazarlama.p | ihsan | 2026-09-13T22:58:52 |
-| COP-23 | [COP-TASARIM] TASARIM-1: Bosta-veri bilgi kutusu tutarliligi (ro... | copilot | 2026-09-13T22:31:51 |
-| COP-24 | [COP-TASARIM] TASARIM-2: Son-guncelleme + yenile kalibi (roo 4.1... | copilot | 2026-09-13T22:43:21 |
-| COP-25 | [COP-TASARIM] TASARIM-3: Sidebar yardim satirlari. app.py icinde... | copilot | 2026-09-13T22:48:51 |
-| COP-26 | MUSTERILER ekrani: firma listesi+filtre+bildirim blogu (roo uyarisi) | copilot | 2026-09-13T22:57:21 |
 | WIKI-01 | Admin Panel Kullanım Kılavuzu — Obsidian Wiki | ihsan | - |
-| ORCH-13 | Pano sema dogrulama (S-05) + tetik_al pano fallback (S-06) | yasu | 2026-09-14T00:38:53 |
-| UX-01 | UI Component Library — Design System | ihsan | 2026-09-14T02:08:24 |
-| UX-02 | Responsive Layout System ve Breakpoint Management | ihsan | 2026-09-14T02:33:25 |
-| UX-03 | Design Token ve Theme Management System | ihsan | 2026-09-14T03:36:38 |
 | BE-01 | Admin API Endpoint Optimization and Caching Layer | utku | 2026-09-14T01:00:00 |
 | BE-02 | Database Migration Scripts and Schema Versioning | utku | 2026-09-14T01:00:00 |
 | BE-03 | Event-Driven Architecture — Message Queue Integration | yasu | 2026-09-14T01:00:00 |
 | WIKI-02 | Wiki Documentation — Architecture and API Reference | yasu | 2026-09-14T01:00:00 |
-| ROO-UX-ADMIN-01 | Premium Enterprise Admin Panel UX audit sonrasi design system ve shell | ihsan | 2026-09-14T02:10:25 |
-| CL-01 | Integration Test Suite for API Endpoints | yasu | 2026-09-14T06:03:25 |
-| CL-02 | Performance Benchmark Scripts | yasu | 2026-09-14T06:29:56 |
-| CL-03 | Security Audit — Dependency Vulnerability Scan | yasu | 2026-09-14T06:28:50 |
 | DEV-01 | CI/CD Pipeline — GitHub Actions Optimization | gelistirici | - |
 | AR-01 | Market Trend Analysis — Q3 2026 | utku | 2026-09-14T03:00:00 |
-| AR-02 | Competitor Analysis — Direct and Indirect | utku | 2026-09-14T03:00:00 |
 | AR-03 | User Persona and Journey Mapping | utku | 2026-09-14T03:00:00 |
 | ORCH-11 | Scheduler Service — Cron-like Task Dispatch | ihsan | 2026-09-15T01:00:00 |
 | ORCH-12 | Health Monitor — System Status Dashboard | ihsan | 2026-09-15T01:00:00 |
 | FIX-ID-01 | Pano id alanı tutarsızlığı: task_id kanonik, 'id' bekleyen tüketiciler None alıyor | utku | 2026-09-14T03:45:00 |
 | PO-BACK-01 | Tenant Health Score v1 (Data Quality + Entity Accuracy + Duplicate Rate) | yasu | 2026-09-15T04:20:41 |
-| PO-BACK-02 | Segment Eligibility Skoru + Onay Akışı (Coverage + Profile Accuracy) | yasu | 2026-09-15T08:42:33 |
-| PO-BACK-03 | Kampanya Durum-Makinesi Denetimi (Source Reliability) | ihsan | 2026-09-15T05:07:33 |
-| PO-BACK-04 | Paket Fiyat Kataloğu Tekilleştirme (Field Completeness) | yasu | 2026-09-15T09:07:57 |
-| PO-BACK-05 | Veri Tazelik Etiketi + Manuel Yenileme (Freshness) | utku | 2026-09-15T05:23:03 |
-| PO-BACK-06 | Destek Merkezi MVP (Evidence Coverage) | utku | 2026-09-15T13:24:46 |
-| PO-BACK-07 | Feature Flags MVP (Data Quality + Source Reliability) | utku | 2026-09-15T09:05:53 |
-| PO-BACK-08 | Executive Dashboard v1 (Coverage + Data Quality Score) — REVIZE | yasu | 2026-09-15T11:12:44 |
-| PO-BACK-09 | Duplicate Rate Dashboard (Admin) | yasu | 2026-09-15T05:32:10 |
-| PO-BACK-10 | Coverage Analytics (Müşteri) | ihsan | 2026-09-15T09:00:46 |
-| PO-BACK-11 | Source Reliability Monitor (Admin) | ihsan | 2026-09-15T05:43:04 |
 | ADMIN-DOC-01 | Admin panel sitemap düzeltmesi ve uygulama öncelik dokümanı | utku | 2026-09-14T18:38:27 |
 | USER-DOC-01 | User Panel sitemap belgesi oluştur (16_user_panel_sitemap.md) — TASLAK | utku | 2026-09-14T18:38:27 |
-| ADMIN-WF-01 | İş akışı optimizasyonu ve görev sıralaması | utku | 2026-09-15T05:23:02 |
 | MRK-03 | Marka konumlandirma belgesini projeye tasi + Obsidian baglami | utku | 2026-09-14T16:40:00 |
 | MRK-04 | Marka terminolojisi + yazim sozlesmesi + guvenlik supabi kural dosyalarina | utku | 2026-09-14T16:40:00 |
 | FIX-NOB-01 | gorev_nobetci.py durum komutu cp1254 UnicodeDecodeError | utku | 2026-09-14T16:40:00 |
-| MRK-02F | card.py sayi bicimini i18n.sayi() ile tek kaynaga indir | yasu | 2026-09-14T21:36:59 |
-| MRK-02G | tests/test_i18n.py - 13 bekci testi + 4 ek test | yasu | 2026-09-14T21:37:00 |
 | MRK-02H | disa_aktar.py + web_dashboard/js/messages.js ureticisi | utku | 2026-09-14T16:40:00 |
 | CHART-01 | Grafik altyapisi: charts modulu + requirements kontrolu | yasu | 2026-09-14T21:59:00.270289+00:00 |
-| TEN-01 | Multi-tenant hazirligi: TenantContext + bekci + doc | utku | 2026-09-15T04:20:41 |
-| GAM-01 | Rozet/Kesif motoru: 3 rozet + kullanici_ilerleme.json | utku | 2026-09-15T04:20:41 |
-| AI-RAG-01 | Odin AI RAG iskeleti: kaynak protokolu + baglam derleyici (ai_chat.py'ye dokunma) | utku | 2026-09-15T04:20:41 |
-| TEN-02 | Tenant health Streamlit import ayrıştırması | utku | 2026-09-15T04:58:22 |
-| AI-CHAT-01-FIX | [FIX] AI-CHAT-01 teslim dosyalari diskte yok: ai_chat.py + abrakadabra.py yeniden uretim | ihsan | 2026-09-15T04:20:41 |
 | PO-BACK-01-UI | Tenant Health Score v1 UI entegrasyonu (tenant_health_dashboard'ı ekrana göm) | yasu | 2026-09-15T04:20:41 |
-| TEST-ISO-01 | [TEST] test_api_integration.py için izole fixture DB — 69 deselect edilen testi regresyona geri kat | ihsan | 2026-09-15T05:13:08 |
-| HEDEF-NACE-01 | Kapsam karti: gercek NACE hedef tablosu (data/nace_hedefleri.json) | ihsan | 2026-09-15T09:27:02 |
-| FIX-LEDGER-01 | error_ledger Windows tmp kilidi (WinError 5) retry | ihsan | 2026-09-15T09:27:02 |
-| BUG-DESTEK-UTF8 | KRITIK(P1): tests/test_destek.py UTF-16LE+BOM (4319 NUL bayt) — pytest koleksiyonunu durduruyor | ihsan | 2026-09-15T11:20:30 |
-| BUG-CHART01-SYNTAX | SORUN(P2): ui/charts/__init__.py SyntaxError (CHART-01 kalıntısı) — ortak grafik modülü import edilemiyor | yasu | 2026-09-15T11:12:44 |
-| BUG-MIG0006-UTF8 | KR-3: 0006_normalize_compat.py bozuk kodlama (orphan migration dosyasi) | ihsan | 2026-09-15T11:20:30 |
-| BUG-ENCODING-GUARD | KR-4: Kodlama denetim araci (BOM/NUL/0-bayt) + ratchet guard + CI | yasu | 2026-09-15T13:23:35 |
-| CI-GATE-01 | CI kapisi: tam tests/ + collection-errors + kodlama denetimi adimi | yasu | 2026-09-15T14:06:34 |
-| CHART-INT-01 | ui.charts modulunu admin_executive ekranina entegre et | utku | 2026-09-15T14:41:12 |
 | REPO-HIJYEN-01 | Kok dizin cop/gecici dosya envanteri (silme yok, karar Urun Sahibi) | ihsan | 2026-09-15T13:00:10 |
-| I18N-SES-02 | Marka sesi JSON (105 tr anahtar) ses.json/ui.json ile birlestir | utku | 2026-09-15T15:38:28 |
-| BUG-SCRIPTS-COMPILE-01 | scripts/ hijyen: 3 compile-bozuk script + scripts/scripts mukerrer klasor | yasu | 2026-09-15T14:45:47 |
-| REVIEW-PO-BACK-06 | PO-BACK-06 Destek Merkezi capraz inceleme (kilo teslimi) | yasu | 2026-09-15T14:45:49 |
-| UI-SIDEBAR-02 | [UI] Sidebar: marka blogu uste, logo, kompakt tooltip | utku | 2026-09-15T23:16:00 |
-| UI-TOPBAR-02 | [UI] Topbar: arama sag ust, breadcrumb ayrac, Bu sayfada ayiraci | utku | 2026-09-15T23:16:21 |
-| REV-I18N-SES-02 | Capraz inceleme: I18N-SES-02 kilo teslimi (ses.json birlestirme) | yasu | 2026-09-15T15:38:28 |
-| AUDIT-ENC-02 | Repo geneli kodlama denetimi (BOM/UTF-16/0-bayt/CRLF) + kodlama_denetim.py kapsam kontrolu | yasu | 2026-09-15T15:38:28 |
 | REV-UI-SIDEBAR-02 | Capraz inceleme: UI-SIDEBAR-02 kilo teslimi (app.py sidebar) | yasu | 2026-09-18T03:45:37 |
-| MVP-KD-01 | MVP Karar Defteri ekrani: PageHeader + filtre + yeni karar formu | utku | 2026-09-15T16:47:21 |
-| MVP-KUL-01 | MVP Kullanici Yonetimi ekrani: PageHeader + onayla + kredi formu | utku | 2026-09-15T18:10:18 |
-| REV-MVP-KD-01 | Review: MVP-KD-01 Karar Defteri ekrani | yasu | 2026-09-15T16:30:23 |
 | REV-MVP-KUL-01 | Review: MVP-KUL-01 Kullanici Yonetimi ekrani | yasu | 2026-09-15T18:10:18 |
-| P7-6b | Kariyer.net scraper saglamlastirma (MVP sonrasi) | utku | 2026-09-15T23:20:10 |
-| REV-MVP-ADMIN-01 | MVP-ADMIN 4 ekran capraz denetim (rapor-only) | yasu | 2026-09-15T18:29:40 |
-| HIJYEN-01 | Kalinti gecici dosya temizligi | yasu | 2026-09-15T18:29:40 |
 | ORCH-05b | ORCH-05 kilit dusurme yalniz done/blocked (gorev_guncelle bug) | ihsan | 2026-09-15T18:29:40 |
-| MVP-KUL-02 | Kullanici onayinda tier secici (K-1 bulgusu) | utku | 2026-09-15T23:14:20 |
 | ENC-ADMIN-PANEL-01 | admin_panel.py mojibake 2 dize (O-1) | ihsan | 2026-09-15T18:34:59 |
 | FIX-YONETIM-01 | Yonetim bolumu to_excel hatasi + sekme rehberi metinleri (sahip bulgusu) | ihsan | 2026-09-15T18:51:04 |
 | UI-REFRESH-01 | [UI] Otomatik Yenileme bloğu: dev buton/metric responsive + st.auto_refresh cokme fix | ihsan | 2026-09-15T19:09:59 |
 | ADMIN-ENV-01 | Admin sifre sifirlama scripti + .env on-dolum (roo) | ihsan | 2026-09-15T19:25:56 |
 | ADMIN-RESET-01 | Admin e-posta dogrulamali sifre degistirme (buyer reset altyapisini admin'e uyarla) | ihsan | 2026-09-15T20:20:57 |
 | UI-CHART-01 | [UI] Havali KPI kartlari ve grafikler (Ana Kontrol + Yonetim) | ihsan | 2026-09-16T17:41:44 |
-| REV-ADMIN-ENV-01 | Review: admin sifre sifirlama scripti + .env on-dolum + app.py restore | yasu | 2026-09-15T21:21:39 |
 | GUARD-ENC-01 | kodlama_denetim.py: BOM + NUL + mojibake + ast.parse guard (pre-commit) | yasu | 2026-09-16T19:08:16 |
-| UI-MODAL-01 | [UI] Admin panel acilir modal ekranlar + grafik/chart arastirma ve oneri calismasi (dokuman) | yasu | 2026-09-15T21:16:47 |
 | REV-UI-CHART-01 | UI-CHART-01 capraz inceleme (roo teslimi, commit 928ef8b) | yasu | 2026-09-16T18:08:39 |
 | DOC-HIBRIT-01 | [DOC] Hibrit gecis plani dosyasini repo icine yaz (docs/plans/UI-CHART-01_hibrit_gecis_plani.md) | utku | 2026-09-16T17:14:40 |
 | NAV-FIX-01 | Tek tikta bolum gecisi + mojibake (app.py, admin_panel.py) | utku | 2026-09-16T17:41:39 |
@@ -309,6 +311,7 @@
 | ADMIN-SIFRE-RESET-FLOW-01 | Sifre unuttum akisi: email gonder -> link -> sifre sifirla | ihsan | 2026-09-18T21:55:20 |
 | V10-HIJYEN-01 | engine.py mukerrer+bozuk WHERE blogu temizligi (B-14) | ihsan | 2026-09-18T15:12:46.586128Z |
 | UX-MENU-03 | Menu agaci sadelestirme (E1-E5) + Dashboard Overview aksiyon seridi | ihsan | 2026-09-18T17:30:00 |
+| REVIEW-ONAY-KUYRUGU-01 | Onay kuyrugundaki 2 teslimi denetle (ADMIN-LOGIN-FIX-01, ADMIN-MODAL-STIL-01) | yasu | - |
 | TEST-AYARLAR-KAPSAM-01 | [TEST] Kullanici Ayarlari sayfasi icin test iskeleti yaz (tests/ altinda) | yasu | 2026-09-22T05:56:24 |
 | UI-AYARLAR-SAYFA-01 | [UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s) | ihsan | 2026-09-19T16:24:16 |
 | ORKESTRA-BASLIK-GERIYE-01 | [ORKESTRA] Acik gorev basliklarini D-57 kalibina tasi → data/orchestrator/task_board.json (2s) | yasu | 2026-09-19T11:39:13 |
@@ -328,7 +331,9 @@
 | UI-MUSTERI-SUBHEADER-01 | [UI] musteri_yonetimi subheader duzelt → musteri_yonetimi.py (2s) | utku | 2026-09-19T17:18:59 |
 | UI-PROFILMENU-01 | [UI] Profil menu yaz → profil_menu.py (4s) | salih | 2026-09-20T05:55:02 |
 | UI-MENUTREE-02 | [UI] Sol menu agaci düzelt → __init__.py (4s) | utku | 2026-09-20T08:10:46 |
+| DOC-SIRKET-MASTER-01 | [DOC] Şirket Master ana belgesi düzelt -> 01_sirket_master_ana_belgesi.md (3s) | utku | - |
 | UI-AYARLAR-SAYFA-02 | [UI] Ayarlar sayfası yaz → admin_kullanici_ayarlari.py (4s) | utku | 2026-09-20T07:01:13 |
+| ALTYAPI-KILIT-TEMIZLE-01 | [ALTYAPI] Duzelt kilitleri → file_locks.json (1s) | yasu | 2026-09-23T07:08:00 |
 | UI-PROFILMENU-POPOVER-02 | [UI] native st.popover'a taşı → profil_menu.py (2s) | utku | 2026-09-20T07:37:55 |
 | ORKESTRA-STALE-TEMIZLIK-01 | [ORKESTRA] Denetle → YASU stale görevleri (1s) | yasu | 2026-09-20T16:39:03 |
 | ALTYAPI-SQLITE-INIT | [ALTYAPI] SQLite fixture companies tablosunu yaz → tests/conftest.py (2s) | utku | 2026-09-20T13:25:49 |
@@ -347,6 +352,7 @@
 | ORKESTRA-BRIEF-KALITE-01 | [ORKESTRA] 12 yeni brifi denetle → data/orchestrator/ORKESTRA-BRIEF-KALITE-01_rapor_2026-09-20_denetim.md (1s) | yasu | 2026-09-20T19:37:31 |
 | ORKESTRA-KARAR-DEFTERI-AUDIT-01 | [ORKESTRA] Karar defterini denetle → data/orchestrator/ORKESTRA-KARAR-DEFTERI-AUDIT-01_rapor_2026-09-20_denetim.md (30d) | yasu | 2026-09-20T18:58:23 |
 | ALTYAPI-TEST-FAILURE-FIX-01 | [ALTYAPI] düzelt 4 pre-existing test failure → data/orchestrator/ALTYAPI-TEST-FAILURE-FIX-01_rapor_2026-09-20_uretim.md (2s) | utku | 2026-09-20T16:38:45 |
+| ORKESTRA-VAULT-TEKRAR-01 | [ORKESTRA] denetle vault isim tekrarlari → ORKESTRA-VAULT-TEKRAR-01_rapor.md (2s) | ihsan | 2026-09-23T07:21:00 |
 | TEST-D77-02 | [TEST] Done task | utku | 2026-09-20T16:32:21 |
 | ORKESTRA-KARAR-DEFTERI-FIX-01 | [ORKESTRA] decision_log.jsonl kayıtlarını düzelt → data/orchestrator/decision_log.jsonl (1s) | ihsan | 2026-09-20T19:50:48 |
 | ORKESTRA-BACKLOG-KANIT-01 | [ORKESTRA] Backlog kanıt-satırı kuralı yaz → AGENTS.md D-66 güncelleme (2s) | ihsan | 2026-09-20T19:40:18Z |
@@ -356,4 +362,20 @@
 | ALTYAPI-TEST-FAILURE-FIX-02 | [ALTYAPI] Test hatasi duzelt → tests/test_mcp.py (2s) | utku | 2026-09-22T05:55:44 |
 | TEST-PANO-IZOLASYON-01 | [TEST] Pano izolasyon duzelt → tests/test_pano_bakim_d77.py (1s) | salih | 2026-09-20T21:58:45 |
 | ORKESTRA-DECISION-LOG-FORMAT-01 | [ORKESTRA] Decision log format duzelt → data/orchestrator/decision_log.jsonl (4s) | ihsan | - |
+| ALTYAPI-KILIT-YOL-FIX-01 | [ALTYAPI] kilit yolunu düzelt → file_locks.json (1s) | utku | - |
+| ALTYAPI-PANO-ENCODING-FIX-01 | [ALTYAPI] pano encoding hatalarini duzelt → task_board.json (2s) | utku | 2026-09-22T05:55:45 |
 | TEST-BATCH-01 | [TEST] batch lock test -> _tmp (1s) | utku | 2026-09-22T06:54:43 |
+| DASH-UX-02a-SECTIONS | [DOC] duzelt [DASH-UX] DASH-UX-02a-SECTIONS: admin_sistem sekme -> web_dashboard/tabs/__init__.py (2s) | utku | 2026-09-22T08:57:51 |
+| ORKESTRA-IHSAN-TETIK-01 | [ORKESTRA] Ihsan tetik dosyasini duzelt → triggers/ihsan.jsonl (1s) | ihsan | 2026-09-22T00:01:33 |
+| ORKESTRA-ONAY-KUYRUGU-02 | [ORKESTRA] Onay kuyrugundaki 3 teslimi denetle → data/orchestrator/REVIEW-ONAY-KUYRUGU-02_rapor_2026-09-21.md (1s) | ihsan | 2026-09-22T08:08:25.639765 |
+| ORKESTRA-ONAY-KUYRUK-01 | [ORKESTRA] Onay kuyrugunu denetle → onay_kuyrugu.json (1s) | yasu | 2026-09-22T00:23:52 |
+| ORKESTRA-TETIK-TEMIZLIK-01 | [ORKESTRA] ihsan postasindaki 5 yinelenen DASH-UX-02a tetigini sil | ihsan | 2026-09-22T00:01:33 |
+| ORPHAN-ARASTIRMA-01 | [ARASTIRMA] 4 orphan kuyruk kaydi — pano kayit kurali oncesi mi? | yasu | 2026-09-22T12:41:45 |
+| TEST-GRAPH-KOPRU | [TEST] denetle backlink_sayimi → dogrulama_raporu.md (2s) | utku | 2026-09-21T19:13:28 |
+| VERI-ARSIV-01 | [VERI] düzelt gizleme_filtreleri → app.json (2s) | utku | 2026-09-21T19:03:26 |
+| VERI-GRAPH-01 | [VERI] yaz wikilink kopruleri → graph_kopru_d182.md (4s) | utku | 2026-09-21T18:48:32 |
+| VERI-ARSIV-01 | [VERI] düzelt gizleme_filtreleri → app.json (2s) | utku | 2026-09-21T19:03:26 |
+| TEST-GRAPH-KOPRU | [TEST] denetle backlink_sayimi → dogrulama_raporu.md (2s) | utku | 2026-09-21T19:13:28 |
+| UI-ADOPT-01 | [UI] UI-ADOPT-01: kpi_karti() -> MetricCard bileşen benimsemesi (admin_auto_refresh, admin_api_analytics, admin_performance) | utku | - |
+| CHART-KATEGORI-02 | [CHART] KATEGORI_RENK <-> KATEGORILER uyumlaştırması → web_dashboard/charts.py (1s) | utku | - |
+| TEST-DASHBOARD-REGRESYON-01 | [TEST] Dashboard test regresyonu: 8 kırık + 71 kayıp test araştırması (2s) | utku | - |

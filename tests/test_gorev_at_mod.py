@@ -26,6 +26,14 @@ from src.company_master.orchestrator import trigger  # noqa: E402
 
 @pytest.fixture(autouse=True)
 def izole_pano(tmp_path, monkeypatch):
+    # D-66 kapisi artik brif dosyasini ZORUNLU ariyor (eskiden --talimat ile
+    # atlanabiliyordu). Mod testleri kapiyi degil modu olctugu icin brifler
+    # izole KOK altinda hazir yazilir.
+    monkeypatch.setattr(gorev_at, "KOK", tmp_path)
+    (tmp_path / "plans").mkdir(exist_ok=True)
+    for ajan in ("ihsan", "utku", "salih", "yasu"):
+        for tid in ("UI-01", "UI-02", "UI-03"):
+            (tmp_path / "plans" / f"brief_{ajan}_{tid}.md").write_text("brif", encoding="utf-8")
     monkeypatch.setattr(tb, "AUTO_SYNC", False)
     monkeypatch.setattr(tb, "STATE_DIR", tmp_path)
     monkeypatch.setattr(tb, "TASK_BOARD", tmp_path / "task_board.json")
@@ -52,6 +60,7 @@ def _args(task_id="UI-01", baslik="[UI] Ayarlar sayfasını yaz → admin_ayarla
 
 def test_architect_modu_salih_yasu_reddedilir(capsys):
     for izinsiz in ("salih", "yasu"):
+        # D-63 kapisi D-66/D-80'den ONCE calisir: gecersiz atamada brif/talimat sorulmaz.
         rc = gorev_at.cmd_at(_args(task_id="UI-01", ajan=izinsiz, mod="architect"))
         err = capsys.readouterr().err
         assert rc == 5
@@ -80,7 +89,7 @@ def test_architect_modu_ihsan_utku_kabul_edilir(tmp_path, capsys):
         assert "⚠️ Bu görev Architect modunda açılmalıdır." in t["talimat"]
 
 
-def test_code_modu_varsayilan_hatirlatma_eklemez(tmp_path, capsys):
+def test_code_modu_varsayilan_hatirlatma_eklemez(tmp_path, capsys):  # noqa: D103
     rc = gorev_at.cmd_at(_args(task_id="UI-03", ajan="salih", mod="code", talimat="Kod yaz"))
     assert rc == 0
     g = tb.gorev_getir("UI-03")

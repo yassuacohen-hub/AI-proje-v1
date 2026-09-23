@@ -7118,6 +7118,222 @@
       "error_message": "source=transport_test run=N/A: timeout",
       "attempt": 1,
       "action": "retry"
+    },
+    {
+      "task_id": "APIFY-03",
+      "agent_id": "apify_webhook_receiver",
+      "timestamp": "2026-09-23T09:26:35.616779",
+      "error_type": "apify_run_failure",
+      "error_message": "Apify Actor run basarisiz: run=run-fail001 actor=ziyrak/kariyer-scraper status=FAILED type=ACTOR.RUN.FAILED",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "APIFY-03",
+      "agent_id": "apify_webhook_receiver",
+      "timestamp": "2026-09-23T09:26:38.667604",
+      "error_type": "apify_dataset_fetch_error",
+      "error_message": "Apify dataset cekilemedi (run=run-abc123, dataset=ds-xyz789): API error",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "MCP-kariyer-net",
+      "agent_id": "huginn_mcp_server",
+      "timestamp": "2026-09-23T09:27:15.832285",
+      "error_type": "collection_failure",
+      "error_message": "source=kariyer-net run=N/A: anti-bot blocked",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "MCP-transport_test",
+      "agent_id": "huginn_mcp_server",
+      "timestamp": "2026-09-23T09:27:24.183520",
+      "error_type": "collection_failure",
+      "error_message": "source=transport_test run=N/A: timeout",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "APIFY-03",
+      "agent_id": "apify_webhook_receiver",
+      "timestamp": "2026-09-23T09:28:36.234270",
+      "error_type": "apify_run_failure",
+      "error_message": "Apify Actor run basarisiz: run=run-fail001 actor=ziyrak/kariyer-scraper status=FAILED type=ACTOR.RUN.FAILED",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "APIFY-03",
+      "agent_id": "apify_webhook_receiver",
+      "timestamp": "2026-09-23T09:28:39.289911",
+      "error_type": "apify_dataset_fetch_error",
+      "error_message": "Apify dataset cekilemedi (run=run-abc123, dataset=ds-xyz789): API error",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "MCP-kariyer-net",
+      "agent_id": "huginn_mcp_server",
+      "timestamp": "2026-09-23T09:29:14.607897",
+      "error_type": "collection_failure",
+      "error_message": "source=kariyer-net run=N/A: anti-bot blocked",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "MCP-transport_test",
+      "agent_id": "huginn_mcp_server",
+      "timestamp": "2026-09-23T09:29:25.646901",
+      "error_type": "collection_failure",
+      "error_message": "source=transport_test run=N/A: timeout",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "APIFY-03",
+      "agent_id": "apify_webhook_receiver",
+      "timestamp": "2026-09-23T09:38:37.202623",
+      "error_type": "apify_run_failure",
+      "error_message": "Apify Actor run basarisiz: run=run-fail001 actor=ziyrak/kariyer-scraper status=FAILED type=ACTOR.RUN.FAILED",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "APIFY-03",
+      "agent_id": "apify_webhook_receiver",
+      "timestamp": "2026-09-23T09:38:40.249261",
+      "error_type": "apify_dataset_fetch_error",
+      "error_message": "Apify dataset cekilemedi (run=run-abc123, dataset=ds-xyz789): API error",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "MCP-kariyer-net",
+      "agent_id": "huginn_mcp_server",
+      "timestamp": "2026-09-23T09:39:09.265617",
+      "error_type": "collection_failure",
+      "error_message": "source=kariyer-net run=N/A: anti-bot blocked",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "MCP-transport_test",
+      "agent_id": "huginn_mcp_server",
+      "timestamp": "2026-09-23T09:39:17.607933",
+      "error_type": "collection_failure",
+      "error_message": "source=transport_test run=N/A: timeout",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "APIFY-03",
+      "agent_id": "apify_webhook_receiver",
+      "timestamp": "2026-09-23T09:40:12.028084",
+      "error_type": "apify_run_failure",
+      "error_message": "Apify Actor run basarisiz: run=run-fail001 actor=ziyrak/kariyer-scraper status=FAILED type=ACTOR.RUN.FAILED",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "APIFY-03",
+      "agent_id": "apify_webhook_receiver",
+      "timestamp": "2026-09-23T09:40:15.072825",
+      "error_type": "apify_dataset_fetch_error",
+      "error_message": "Apify dataset cekilemedi (run=run-abc123, dataset=ds-xyz789): API error",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "MCP-kariyer-net",
+      "agent_id": "huginn_mcp_server",
+      "timestamp": "2026-09-23T09:40:46.912346",
+      "error_type": "collection_failure",
+      "error_message": "source=kariyer-net run=N/A: anti-bot blocked",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "MCP-transport_test",
+      "agent_id": "huginn_mcp_server",
+      "timestamp": "2026-09-23T09:40:55.607199",
+      "error_type": "collection_failure",
+      "error_message": "source=transport_test run=N/A: timeout",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "APIFY-03",
+      "agent_id": "apify_webhook_receiver",
+      "timestamp": "2026-09-23T09:44:02.005039",
+      "error_type": "apify_run_failure",
+      "error_message": "Apify Actor run basarisiz: run=run-fail001 actor=ziyrak/kariyer-scraper status=FAILED type=ACTOR.RUN.FAILED",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "APIFY-03",
+      "agent_id": "apify_webhook_receiver",
+      "timestamp": "2026-09-23T09:44:05.105981",
+      "error_type": "apify_dataset_fetch_error",
+      "error_message": "Apify dataset cekilemedi (run=run-abc123, dataset=ds-xyz789): API error",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "MCP-kariyer-net",
+      "agent_id": "huginn_mcp_server",
+      "timestamp": "2026-09-23T09:44:38.495054",
+      "error_type": "collection_failure",
+      "error_message": "source=kariyer-net run=N/A: anti-bot blocked",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "MCP-transport_test",
+      "agent_id": "huginn_mcp_server",
+      "timestamp": "2026-09-23T09:44:48.040180",
+      "error_type": "collection_failure",
+      "error_message": "source=transport_test run=N/A: timeout",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "APIFY-03",
+      "agent_id": "apify_webhook_receiver",
+      "timestamp": "2026-09-23T11:57:26.211783",
+      "error_type": "apify_run_failure",
+      "error_message": "Apify Actor run basarisiz: run=run-fail001 actor=ziyrak/kariyer-scraper status=FAILED type=ACTOR.RUN.FAILED",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "APIFY-03",
+      "agent_id": "apify_webhook_receiver",
+      "timestamp": "2026-09-23T11:57:29.260114",
+      "error_type": "apify_dataset_fetch_error",
+      "error_message": "Apify dataset cekilemedi (run=run-abc123, dataset=ds-xyz789): API error",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "MCP-kariyer-net",
+      "agent_id": "huginn_mcp_server",
+      "timestamp": "2026-09-23T11:58:05.917107",
+      "error_type": "collection_failure",
+      "error_message": "source=kariyer-net run=N/A: anti-bot blocked",
+      "attempt": 1,
+      "action": "retry"
+    },
+    {
+      "task_id": "MCP-transport_test",
+      "agent_id": "huginn_mcp_server",
+      "timestamp": "2026-09-23T11:58:14.547902",
+      "error_type": "collection_failure",
+      "error_message": "source=transport_test run=N/A: timeout",
+      "attempt": 1,
+      "action": "retry"
     }
   ]
 }

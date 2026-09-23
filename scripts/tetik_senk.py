@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import io
 """
 Tetik-Pano Senkronizasyonu: Pano durumu ile tetik dosyaları uyum sağla.
 
@@ -11,8 +10,12 @@ eşitler ve sayaçları sıfırlar.
 import json
 import sys
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import Any
+
+# Windows konsolu cp1254; rapor satirlarindaki emoji UnicodeEncodeError veriyordu.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 # Import düzeltme
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -23,9 +26,10 @@ from src.company_master.orchestrator import task_board as tb, trigger as trig
 def tetik_senk() -> dict[str, Any]:
     """Pano durumlarını tetik kuyruğu dosyalarıyla senkronize et."""
     rapor = {
-        "tarih": datetime.utcnow().isoformat(),
+        "tarih": datetime.now(timezone.utc).isoformat(),
         "basarili": 0,
         "hata": 0,
+        "bulunan_dosya": 0,  # sessiz basari yasagi: 0 ise hic tarama yapilmamis
         "detay": []
     }
 
@@ -44,8 +48,12 @@ def tetik_senk() -> dict[str, Any]:
     } for t in pano}
 
     # Tetik kuyruğu dosyaları (tüm ajanlar)
-    ajanlar = ["ihsan", "utku", "salih", "yasu"]
-    data_dir = Path("data/orchestrator")
+    # D-33/D-60: kanonik ajan listesi tek kaynak = trigger.AJANLAR
+    ajanlar = list(trig.AJANLAR)
+    # VAULT-CLEANUP-BATCH: onceden `Path("data/orchestrator")` idi; hem goreli
+    # (cwd'ye bagimli) hem de `triggers/` alt klasorunu atliyordu -> script hicbir
+    # tetik bulamadan sessizce basarili donuyordu.
+    data_dir = tb.STATE_DIR / "triggers"
 
     for ajan in ajanlar:
         tetik_dosya = data_dir / f"{ajan}.jsonl"
@@ -54,6 +62,7 @@ def tetik_senk() -> dict[str, Any]:
         if not tetik_dosya.exists():
             rapor["detay"].append(f"ℹ️  {ajan}: tetik dosyası yok (posta boş)")
             continue
+        rapor["bulunan_dosya"] += 1
 
         # Tetik satırlarını oku
         tetikler = []
@@ -83,7 +92,9 @@ def tetik_senk() -> dict[str, Any]:
             pano_durum = pano_bilgi["durum"]
 
             # Pano durumuna göre tetik durumunu güncelle
-            if pano_durum in ("done", "blocked", "archive", "reddedildi"):
+            # "iptal" de final durumdur; onceden listede yoktu, iptal edilen
+            # gorevlerin tetigi sonsuz uyari uretiyordu (VAULT-CLEANUP-BATCH).
+            if pano_durum in ("done", "blocked", "archive", "reddedildi", "iptal"):
                 # Final durumlar: tetiği kapat
                 tetik_eski_durum = tetik.get("durum")
                 if tetik_eski_durum == "bekliyor":
@@ -134,7 +145,14 @@ if __name__ == "__main__":
     print("="*60)
     for satir in rapor["detay"]:
         print(satir)
-    print(f"\nSonuç: ✅ {rapor['basarili']} | ❌ {rapor['hata']}")
+    print(f"\nSonuç: ✅ {rapor['basarili']} | ❌ {rapor['hata']} "
+          f"| taranan dosya: {rapor['bulunan_dosya']}")
     print("="*60 + "\n")
 
+    # Sessiz basari yasagi: hicbir tetik dosyasi bulunamadiysa bu basari degil,
+    # yol/kurulum hatasidir (bkz. VAULT-CLEANUP-BATCH, yanlis data_dir).
+    if rapor["bulunan_dosya"] == 0:
+        print("HATA: Hicbir tetik dosyasi bulunamadi; yol yanlis olabilir "
+              f"({tb.STATE_DIR / 'triggers'}).", file=sys.stderr)
+        sys.exit(3)
     sys.exit(0 if rapor["hata"] == 0 else 1)

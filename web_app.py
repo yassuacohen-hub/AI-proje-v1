@@ -279,7 +279,19 @@ def _auth_rate_guard(request: Request) -> None:
 
 
 _CACHE: dict[str, tuple[float, Any]] = {}
-_CACHE_TTL = 300
+# ADMIN-UI-CACHE-OPT-01: TTL artik env ile ayarlanabilir (HUGGINN_CACHE_TTL sn).
+# Varsayilan 300s korundu (geriye uyumlu).
+_CACHE_TTL = int(os.getenv("HUGGINN_CACHE_TTL", "300"))
+# ADMIN-UI-CACHE-OPT-01: cache buyuklugu siniri — sinirsiz sozluk bellek sizintisi
+# engellenir. Limit asilinca en eski kayitlar atilir (basit FIFO evictions).
+_CACHE_MAX_ENTRIES = int(os.getenv("HUGGINN_CACHE_MAX_ENTRIES", "512"))
+
+
+def _cache_evict_if_needed() -> None:
+    """ADMIN-UI-CACHE-OPT-01: cache sinir asiminda en eski kayitlari at."""
+    while len(_CACHE) >= _CACHE_MAX_ENTRIES:
+        oldest_key = min(_CACHE, key=lambda k: _CACHE[k][0])
+        _CACHE.pop(oldest_key, None)
 
 
 def cache_get(key: str) -> Any | None:
@@ -294,6 +306,13 @@ def cache_get(key: str) -> Any | None:
 
 
 def cache_set(key: str, value: Any) -> None:
+    # ADMIN-UI-CACHE-OPT-01: bos sonuc negatif cache'lenmesin —
+    # bos sayfa/arama sonucları TTL boyunca bos kalmasin.
+    if isinstance(value, dict) and not value:
+        return
+    if isinstance(value, (list, tuple)) and len(value) == 0:
+        return
+    _cache_evict_if_needed()
     _CACHE[key] = (time.time(), value)
 
 

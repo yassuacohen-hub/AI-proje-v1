@@ -1990,5 +1990,48 @@
     "durum": "onaylandi",
     "onaylayan": "oto-nobetci",
     "onay_tarihi": "2026-09-22T12:41:45"
+  },
+  {
+    "task_id": "AGENTS-MERGE-UU",
+    "ajan": "ihsan",
+    "ozet": "Kok AGENTS.md kural kopyasi kaldirildi (108->93), n8n blogu korundu; vault AGENTS.md'ye D-188 (once pano sonra tetik) ve D-189 eklendi (581->592). BOM yok, catisma isareti yok.",
+    "ciktilar": [
+      "data/orchestrator/AGENTS-MERGE-UU_rapor_2026-09-23_ihsan.md"
+    ],
+    "teslim_tarihi": "2026-09-23T10:42:42",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ADMIN-UI-CACHE-OPT-01",
+    "ajan": "yasu",
+    "ozet": "Cache optimizasyonu: (1) TTL env ile ayarlanabilir (HUGGINN_CACHE_TTL, varsayilan 300s korundu), (2) cache boyut siniri + FIFO eviction (HUGGINN_CACHE_MAX_ENTRIES=512) — bellek sizintisi engellendi, (3) bos sonuc negatif cache'lenmesi engellendi. Test: tests/test_admin_ui_cache_opt.py 10/10 PASSED. web_app.py syntax OK, import OK, kodlama_denetim temiz (dokunulan dosyalar).",
+    "ciktilar": [
+      "web_app.py",
+      "tests/test_admin_ui_cache_opt.py"
+    ],
+    "teslim_tarihi": "2026-09-23T10:49:55",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "GRAPH-CANONICAL-SECER-02",
+    "ajan": "yasu",
+    "ozet": "Canonical graph baglanti guvenligi dogrulamasi: 156 grup denetlendi. SSOT ihlali 0, icerigi bosalan dosya 0. 13 bulgu tespit edildi ve kok nedeni raporlandi: AI proje v1/ altindaki 11 ikiz dosya + orchestrator README.md calisma dizininden silinmis (backup'lar duruyor, git HEAD'de mevcut, checkout ile restore edilebilir). Canonical'lar saglam, SSOT (D-172/D-177) zarar gormedi. Silinen dosyalarin restore karari orkestrator icin birakildi — mudahale YAPILMADI (denetim gorevi). Dogrulama scripti: data/orchestrator/GRAPH-CANONICAL-SECER-02_dogrula.py.",
+    "ciktilar": [
+      "data/orchestrator/GRAPH-CANONICAL-SECER-02_rapor_2026-09-23_yasu.md",
+      "data/orchestrator/GRAPH-CANONICAL-SECER-02_rapor_2026-09-23_yasu.json",
+      "data/orchestrator/GRAPH-CANONICAL-SECER-02_dogrula.py"
+    ],
+    "teslim_tarihi": "2026-09-23T10:49:55",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "VAULT-CLEANUP-BATCH",
+    "ajan": "ihsan",
+    "ozet": "3 adim tamam: 19 ALARM (4 otomatik silindi, 15 _trash/ tasindi), 26 mojibake onarildi (5 kurtarilamaz), 29 gorev archive + 4 bitis_temizle. tetik_senk.py'de 3 hata bulundu ve duzeltildi: yanlis data_dir (triggers/ eksik + cwd-bagimli, script haftalardir sessizce 0 dosya isliyordu), iptal final durum listesinde yoktu, cp1254 emoji cokmesi. Pano denetimi fail(4 hata) -> ok(0 hata). 224 tetik satiri, 0 bozuk JSON, 0 BOM.",
+    "ciktilar": [
+      "data/orchestrator/VAULT-CLEANUP-BATCH_rapor_2026-09-23_ihsan.md"
+    ],
+    "teslim_tarihi": "2026-09-23T10:50:51",
+    "durum": "bekliyor"
   }
 ]

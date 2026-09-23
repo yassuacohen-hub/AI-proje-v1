@@ -1,0 +1,174 @@
+{
+  "timestamp": "2026-09-23T11:55:30",
+  "status": "ok",
+  "uygula": false,
+  "bulgular": [
+    {
+      "tip": "stuck",
+      "seviye": "uyari",
+      "task_id": "BRIF-03",
+      "mesaj": "plan / son hareket 2026-09-13T21:02",
+      "duzeltme": null
+    },
+    {
+      "tip": "stuck",
+      "seviye": "uyari",
+      "task_id": "COP-26",
+      "mesaj": "plan / son hareket 2026-09-13T22:08",
+      "duzeltme": null
+    },
+    {
+      "tip": "stuck",
+      "seviye": "uyari",
+      "task_id": "ORKESTRA-NAMING-AUDIT-02",
+      "mesaj": "plan / son hareket 2026-09-20T10:55",
+      "duzeltme": null
+    },
+    {
+      "tip": "stuck",
+      "seviye": "uyari",
+      "task_id": "ORKESTRA-DECISION-LOG-03",
+      "mesaj": "plan / son hareket 2026-09-20T10:55",
+      "duzeltme": null
+    },
+    {
+      "tip": "stuck",
+      "seviye": "uyari",
+      "task_id": "ORKESTRA-BRIEF-TALIMAT-01",
+      "mesaj": "plan / son hareket 2026-09-20T20:46",
+      "duzeltme": null
+    },
+    {
+      "tip": "kuyruk",
+      "seviye": "uyari",
+      "task_id": "BRIF-03",
+      "mesaj": "kuyruk=onaylandi ama pano=plan — orkestratör kanıtla kapatmalı",
+      "duzeltme": null
+    },
+    {
+      "tip": "kuyruk",
+      "seviye": "uyari",
+      "task_id": "COP-26",
+      "mesaj": "kuyruk=onaylandi ama pano=plan — orkestratör kanıtla kapatmalı",
+      "duzeltme": null
+    },
+    {
+      "tip": "orphan",
+      "seviye": "uyari",
+      "task_id": "U-11",
+      "mesaj": "kuyrukta (onaylandi) var, panoda yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "orphan",
+      "seviye": "uyari",
+      "task_id": "MIG-UI-01",
+      "mesaj": "kuyrukta (onaylandi) var, panoda yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "orphan",
+      "seviye": "uyari",
+      "task_id": "MRK-05",
+      "mesaj": "kuyrukta (onaylandi) var, panoda yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "orphan",
+      "seviye": "uyari",
+      "task_id": "ROO-REV-01",
+      "mesaj": "kuyrukta (onaylandi) var, panoda yok",
+      "duzeltme": null
+    }
+  ],
+  "gorevler": [
+    {
+      "id": "BRIF-03",
+      "durum": "plan",
+      "update": "2026-09-13T21:02"
+    },
+    {
+      "id": "COP-26",
+      "durum": "plan",
+      "update": "2026-09-13T22:08"
+    },
+    {
+      "id": "ORKESTRA-NAMING-AUDIT-02",
+      "durum": "plan",
+      "update": "2026-09-20T10:55"
+    },
+    {
+      "id": "ORKESTRA-DECISION-LOG-03",
+      "durum": "plan",
+      "update": "2026-09-20T10:55"
+    },
+    {
+      "id": "ORKESTRA-BRIEF-TALIMAT-01",
+      "durum": "plan",
+      "update": "2026-09-20T20:46"
+    },
+    {
+      "id": "ADMIN-UI-CACHE-OPT-01",
+      "durum": "review",
+      "update": "2026-09-23T10:36"
+    },
+    {
+      "id": "GRAPH-CANONICAL-SECER-02",
+      "durum": "review",
+      "update": "2026-09-23T10:36"
+    },
+    {
+      "id": "AGENTS-MERGE-UU",
+      "durum": "review",
+      "update": "2026-09-23T10:39"
+    },
+    {
+      "id": "VAULT-CLEANUP-BATCH",
+      "durum": "review",
+      "update": "2026-09-23T10:39"
+    },
+    {
+      "id": "ADMIN-UX-SIDEBAR-TAB",
+      "durum": "aktif",
+      "update": null
+    },
+    {
+      "id": "ORKESTRA-ONAY-BOSALT-01",
+      "durum": "plan",
+      "update": "2026-09-23T11:08"
+    },
+    {
+      "id": "ORKESTRA-GOREV-KAPI-01",
+      "durum": "plan",
+      "update": "2026-09-23T11:09"
+    },
+    {
+      "id": "ALTYAPI-KILIT-OTOMATIK-01",
+      "durum": "review",
+      "update": "2026-09-23T11:09"
+    },
+    {
+      "id": "ALTYAPI-TETIK-ARSIV-01",
+      "durum": "plan",
+      "update": "2026-09-23T11:09"
+    },
+    {
+      "id": "ALTYAPI-MOJIBAKE-DIZIN-01",
+      "durum": "plan",
+      "update": "2026-09-23T11:36"
+    },
+    {
+      "id": "ALTYAPI-IMPORT-TEKLES-01",
+      "durum": "plan",
+      "update": "2026-09-23T11:36"
+    },
+    {
+      "id": "ALTYAPI-TETIK-ZAMAN-01",
+      "durum": "plan",
+      "update": "2026-09-23T11:37"
+    }
+  ],
+  "duzeltilen": [],
+  "error": null,
+  "hata_sayisi": 0
+}

@@ -43,6 +43,20 @@ def _ayristir_liste(deger: str | None) -> list[str]:
     return [p.strip() for p in deger.split(",") if p.strip()]
 
 
+def _brief_bul(ajan: str, task_id: str) -> Path | None:
+    """D-66: brif dosyasini diskte arar; bulamazsa None.
+
+    Iki kanonik konum: plans/brief_<ajan>_<TASK>.md ve
+    data/orchestrator/<TASK>_brif_<tarih>_<rol>.md. Yollar KOK'e gore mutlak —
+    CWD'ye guvenilmez, komut repo disindan da cagrilabiliyor.
+    """
+    tekil = KOK / "plans" / f"brief_{ajan}_{task_id}.md"
+    if tekil.exists():
+        return tekil
+    eskiler = sorted((KOK / "data" / "orchestrator").glob(f"{task_id}_brif_*.md"))
+    return eskiler[-1] if eskiler else None
+
+
 # D-57: [ALAN] FIIL + NESNE -> CIKTI (SURE)
 ALANLAR = ("UI", "API", "VERI", "TEST", "DOC", "ALTYAPI", "ORKESTRA")
 FIILLER = ("yaz", "düzelt", "taşı", "sil", "denetle", "ölç", "belgele", "araştır")
@@ -220,11 +234,7 @@ def cmd_at(args: argparse.Namespace) -> int:
     if ihlal:
         print(f"HATA (D-57): {ihlal}", file=sys.stderr)
         return 3
-    # D-66: Brifsiz atama yasak — brief dosyası diskte var mı + talimat dolu mu kontrol et
-    brief_yolu = Path(f"plans/brief_{args.ajan}_{args.task_id}.md")
-    if not brief_yolu.exists() and not args.talimat:
-        print(f"HATA (D-66): Brief yok ve talimat boş. Brief yazilmali: plans/brief_{args.ajan}_{args.task_id}.md", file=sys.stderr)
-        return 6
+    # Once ATAMA gecerli mi (D-63); gecersiz atama icin brif aramak anlamsiz.
     mod = getattr(args, "mod", "code") or "code"
     if mod == "architect" and args.ajan not in ARCHITECT_AJANLARI:
         print(
@@ -233,6 +243,29 @@ def cmd_at(args: argparse.Namespace) -> int:
             file=sys.stderr,
         )
         return 5
+    # D-66/D-80: Brif VE talimat ikisi de zorunlu. Eskiden kosul "and" idi;
+    # talimat verilince brif atlanabiliyordu -> bos 'brief' alanli gorevler.
+    # Pano tasinabilir kalsin: brif KOK'e goreli, POSIX ayracli yazilir.
+    brief_yolu = _brief_bul(args.ajan, args.task_id)
+    if brief_yolu is None:
+        print(
+            "HATA (D-66): Brif dosyasi diskte yok. Once yaz: "
+            f"plans/brief_{args.ajan}_{args.task_id}.md "
+            f"(veya data/orchestrator/{args.task_id}_brif_<tarih>_<rol>.md)",
+            file=sys.stderr,
+        )
+        return 6
+    brief_goreli = brief_yolu.relative_to(KOK).as_posix()
+    if not (args.talimat or "").strip():
+        print(
+            "HATA (D-80): --talimat bos. En az bir cumle + brif referansi sart: "
+            f"--talimat \"{args.task_id}: <ne yapilacak>. Brif: {brief_goreli}\"",
+            file=sys.stderr,
+        )
+        return 6
+    talimat = (args.talimat or "").strip()
+    if mod == "architect":
+        talimat = (talimat + "\n" + ARCHITECT_HATIRLATMA).strip()
     try:
         gorev = tb.gorev_ekle(
             task_id=args.task_id,
@@ -241,6 +274,8 @@ def cmd_at(args: argparse.Namespace) -> int:
             oncelik=args.oncelik,
             dosyalar=_ayristir_liste(args.dosya),
             mod=mod,
+            brief=brief_goreli,
+            talimat=talimat,
         )
     except ValueError as exc:
         print(f"HATA: {exc}", file=sys.stderr)
@@ -249,9 +284,7 @@ def cmd_at(args: argparse.Namespace) -> int:
         print(f"HATA (kilit): {exc}", file=sys.stderr)
         print("Dosya baska bir ajanin kilidinde; farkli kapsamla atayin.", file=sys.stderr)
         return 2
-    talimat = args.talimat or ""
-    if mod == "architect":
-        talimat = (talimat + "\n" + ARCHITECT_HATIRLATMA).strip()
+    # D-80 sart 3: tetik talimati pano talimatiyla AYNI metin.
     trigger.tetik_ekle(args.task_id, args.ajan, talimat)
     print(f"ATANDI  : {gorev['task_id']} -> {args.ajan} ({gorev['oncelik']}, mod={mod})")
     print(f"BASLIK  : {gorev['baslik']}")
@@ -302,7 +335,10 @@ def _kisalt(metin: str | None, limit: int) -> str:
 
 
 def cmd_pano(args: argparse.Namespace) -> int:
-    ajanlar = sorted({str(t.get("sahip") or "?") for t in tb.gorev_listesi()})
+    # D-60: ajan listesi KANONIK kaynaktan gelir. Panodan turetilirse eski
+    # 'cline'/'yasin' sahip degerleri alias tablosundan yasu'ya cozulur ve
+    # ayni tetik dosyasi iki kez okunur -> gorev cift listelenir.
+    ajanlar = list(trigger.AJANLAR)
     print("== AJAN POSTALARI (bekleyen tetik) ==")
     herhangi_biri = False
     for ajan in ajanlar:
@@ -348,7 +384,8 @@ def main() -> int:
         help="Baslik utf-8 base64; cmd.exe Unicode bozulmasini atlatir",
     )
     p_at.add_argument("--ajan", required=True, help="sahip + posta kutusu (ör. kilo)")
-    p_at.add_argument("--oncelik", default="P1", choices=["P0", "P1", "P2"])
+    # P3 zaten onayla_ve_sirala.py:43 siralamasinda var; burada eksikti.
+    p_at.add_argument("--oncelik", default="P1", choices=["P0", "P1", "P2", "P3"])
     p_at.add_argument("--dosya", default=None, help="Virgülle ayrılı, otomatik kilitlenir")
     p_at.add_argument("--talimat", default="", help="Ajana kısa talimat")
     p_at.add_argument(

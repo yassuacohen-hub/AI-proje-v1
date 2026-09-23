@@ -29,6 +29,9 @@ def _args() -> argparse.Namespace:
 
 
 def test_pano_baslik_ve_kisa_tarih_gosterir(capsys, monkeypatch):
+    # D-60: pano satirlari KANONIK ajan listesinden gelir, gorev sahiplerinden
+    # degil. Eski 'kilo'/'cline' sahipleri alias ile yasu'ya cozulup ayni tetik
+    # dosyasini iki kez okutuyor, gorevi cift listeliyordu.
     monkeypatch.setattr(gorev_at.tb, "gorev_listesi", lambda: [{"sahip": "kilo"}])
     monkeypatch.setattr(
         gorev_at.tb,
@@ -49,7 +52,8 @@ def test_pano_baslik_ve_kisa_tarih_gosterir(capsys, monkeypatch):
     assert "Kariyer.net Scraper" in out
     assert "(09-14 00:00)" in out
     assert "T00:00:00" not in out  # tam ISO satiri bolumuyor
-    assert "[kilo" in out
+    assert "[utku" in out  # kanonik ad; 'kilo' artik pano basligi degil
+    assert out.count("Kariyer.net Scraper") == len(gorev_at.trigger.AJANLAR)
 
 
 def test_pano_eksik_alanlarda_cokmez(capsys, monkeypatch):

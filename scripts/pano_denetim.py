@@ -37,7 +37,9 @@ KUYRUK_DOSYA = STATE / "onay_kuyrugu.json"
 RAPOR_DOSYA = STATE / "sync_report.json"
 TRIGGER_DOSYA = ROOT / "src" / "company_master" / "orchestrator" / "trigger.py"
 
-KAPALI_DURUMLAR = ("done", "archive")
+# "iptal" de kapalidir: iptal gorev ne stuck'tir ne acik istir. Eksikligi
+# 5 sahte uyari uretiyordu (ADMIN-UX-PROFILMENU-01/MENUTREE-01, KILIT-TEMIZLIK-V10-01).
+KAPALI_DURUMLAR = ("done", "archive", "iptal")
 STUCK_ESIK = timedelta(hours=24)
 # ponytail: arşiv eşiği sabit; ayarlanabilir olmasına ihtiyaç doğarsa CLI bayrağı ekle.
 ARSIV_ESIK = timedelta(days=7)
@@ -251,6 +253,10 @@ def main(argv: list[str] | None = None) -> int:
         arsiv = arsivlenebilir(pano, kuyruk, simdi) if args.uygula else []
 
         if args.uygula:
+            # Sessiz basari yasagi: duzeltme adayi varken hicbiri yazilmadiysa
+            # komut "yaptim" deyip cikmamali. aday>0 & yapilan=0 -> exit 2.
+            aday = [b for b in bulgular if b.get("duzeltme") in IZINLI_DUZELTMELER]
+            rapor["aday_sayisi"] = len(aday) + len(arsiv)
             rapor["duzeltilen"] = uygula(bulgular, arsiv)
             pano = _json_oku(PANO_DOSYA)
             kuyruk = _json_oku(KUYRUK_DOSYA)
@@ -265,6 +271,8 @@ def main(argv: list[str] | None = None) -> int:
         hatalar = [b for b in bulgular if b.get("seviye") == "hata"]
         rapor["hata_sayisi"] = len(hatalar)
         rapor["status"] = "ok" if not hatalar else "fail"
+        if args.uygula and rapor.get("aday_sayisi") and not rapor["duzeltilen"]:
+            rapor["status"] = "noop"
     except Exception as exc:  # rapor her koşulda yazılmalı
         rapor["status"] = "fail"
         rapor["error"] = f"{exc}\n{traceback.format_exc()}"
@@ -281,6 +289,10 @@ def main(argv: list[str] | None = None) -> int:
           f"acik_gorev={len(rapor['gorevler'])} rapor={RAPOR_DOSYA.name}")
     if rapor["error"]:
         print(rapor["error"], file=sys.stderr)
+    if rapor["status"] == "noop":
+        print(f"HATA: --uygula verildi, {rapor['aday_sayisi']} duzeltme adayi vardi, "
+              "hicbiri yazilamadi.", file=sys.stderr)
+        return 2
     # ponytail: alarm = exit 1 (CI bildirimi). Ayrı e-posta/webhook gerekirse CI adımına ekle.
     return 0 if rapor["status"] == "ok" else 1
 

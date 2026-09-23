@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from scripts.dash04_api_client import get_api, APIError
-from web_dashboard.charts import kpi_karti
+from company_master.ui import MetricCard
 from web_dashboard.tabs.admin_error_handling import AdminErrorHandler
 
 # Admin Performance logger
@@ -118,11 +118,11 @@ def render_performance_tab() -> None:
 
     ac1, ac2, ac3 = st.columns(3)
     with ac1:
-        kpi_karti("Ortalama Maliyet/Çağrı", f"${ai_cost['ort_maliyet_cagri_usd']:.5f}", kategori="sistem")
+        MetricCard("Ortalama Maliyet/Çağrı", f"${ai_cost['ort_maliyet_cagri_usd']:.5f}", kategori="sistem").render()
     with ac2:
-        kpi_karti("Toplam Çağrı (Combo)", f"{ai_cost['toplam_cagri']:,}", kategori="sistem")
+        MetricCard("Toplam Çağrı (Combo).render()", f"{ai_cost['toplam_cagri']:,}", kategori="sistem")
     with ac3:
-        kpi_karti("Ortalama Latency (Combo)", f"{ai_cost['ort_latency_ms']:.0f} ms", kategori="sistem")
+        MetricCard("Ortalama Latency (Combo).render()", f"{ai_cost['ort_latency_ms']:.0f} ms", kategori="sistem")
     # --- Ana Metrik Kartları ---
     st.divider()
     st.subheader("Query Latency")
@@ -134,11 +134,11 @@ def render_performance_tab() -> None:
 
         c1, c2, c3 = st.columns(3)
         with c1:
-            kpi_karti("Toplam DB Süre", f"{db_time:.2f} ms", kategori="sistem")
+            MetricCard("Toplam DB Süre", f"{db_time:.2f} ms", kategori="sistem").render()
         with c2:
-            kpi_karti("Sorgu Sayısı", f"{query_count:,}", kategori="sistem")
+            MetricCard("Sorgu Sayısı", f"{query_count:,}", kategori="sistem").render()
         with c3:
-            kpi_karti("Ortalama Latency", f"{avg_latency:.2f} ms/sorgu", kategori="sistem")
+            MetricCard("Ortalama Latency", f"{avg_latency:.2f} ms/sorgu", kategori="sistem").render()
     # --- Cache Hit Ratio ---
     st.divider()
     st.subheader("Cache Hit Ratio")
@@ -150,11 +150,11 @@ def render_performance_tab() -> None:
 
         c1, c2, c3 = st.columns(3)
         with c1:
-            kpi_karti("Cache Hits", f"{cache_hits:,}", kategori="sistem")
+            MetricCard("Cache Hits", f"{cache_hits:,}", kategori="sistem").render()
         with c2:
-            kpi_karti("Cache Misses", f"{cache_misses:,}", kategori="sistem")
+            MetricCard("Cache Misses", f"{cache_misses:,}", kategori="sistem").render()
         with c3:
-            kpi_karti("Cache Hit Rate", f"{cache_hit_rate:.2%}", kategori="sistem")
+            MetricCard("Cache Hit Rate", f"{cache_hit_rate:.2%}", kategori="sistem").render()
     # --- Slow Queries ---
     st.divider()
     st.subheader("Yavaş Sorgular (>100ms)")
@@ -186,7 +186,7 @@ def render_performance_tab() -> None:
         if duration_keys:
             st.subheader("Duration Metrikleri")
             for k, v in duration_keys.items():
-                kpi_karti(k, v, kategori="sistem")
+                MetricCard(k, v, kategori="sistem").render()
     else:
         st.info("Prometheus metrikleri yüklenemedi.")
 

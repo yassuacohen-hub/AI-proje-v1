@@ -1,98 +1,194 @@
 [
   {
     "ajan": "ihsan",
-    "task_id": "ADMIN-UX-PROFILMENU-01",
-    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
-    "tetik_sayisi": 74,
-    "uyari_tarihi": "2026-09-23T08:39:01",
-    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 74. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ADMIN-UX-LOGOUT-01",
-    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
-    "tetik_sayisi": 161,
-    "uyari_tarihi": "2026-09-23T08:39:01",
-    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 161. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ADMIN-UX-MENUTREE-01",
-    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
-    "tetik_sayisi": 87,
-    "uyari_tarihi": "2026-09-23T08:39:01",
-    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 87. kez uyarıldı; henüz başlamadı."
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 98,
+    "uyari_tarihi": "2026-09-23T10:49:01",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 98. kez uyarıldı; henüz başlamadı."
   },
   {
     "ajan": "ihsan",
     "task_id": "ORKESTRA-NAMING-AUDIT-02",
     "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 72,
-    "uyari_tarihi": "2026-09-23T08:39:01",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 72. kez uyarıldı; henüz başlamadı."
+    "tetik_sayisi": 99,
+    "uyari_tarihi": "2026-09-23T10:54:01",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 99. kez uyarıldı; henüz başlamadı."
   },
   {
     "ajan": "ihsan",
-    "task_id": "UI-AYARLAR-SAYFA-01",
-    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
-    "tetik_sayisi": 52,
-    "uyari_tarihi": "2026-09-23T08:39:01",
-    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 52. kez uyarıldı; henüz başlamadı."
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 100,
+    "uyari_tarihi": "2026-09-23T10:59:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 100. kez uyarıldı; henüz başlamadı."
   },
   {
     "ajan": "ihsan",
-    "task_id": "DASH-UX-02a",
-    "gorev_basligi": "[DASH-UX] DASH-UX-02a: 5 sistem sekmesini tek 'admin_sistem.py' icinde birlest",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 101,
+    "uyari_tarihi": "2026-09-23T11:04:01",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 101. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 102,
+    "uyari_tarihi": "2026-09-23T11:09:01",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 102. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 103,
+    "uyari_tarihi": "2026-09-23T11:14:01",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 103. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 104,
+    "uyari_tarihi": "2026-09-23T11:19:01",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 104. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-GOREV-KAPI-01",
+    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
     "tetik_sayisi": 1,
-    "uyari_tarihi": "2026-09-23T08:39:01",
-    "mesaj": "⚠️ DASH-UX-02a ([DASH-UX] DASH-UX-02a: 5 sistem sekmesini tek 'admin_sistem.py' icinde birlest) — ihsan 1. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ADMIN-UX-PROFILMENU-01",
-    "gorev_basligi": "Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link",
-    "tetik_sayisi": 75,
-    "uyari_tarihi": "2026-09-23T08:44:02",
-    "mesaj": "⚠️ ADMIN-UX-PROFILMENU-01 (Sag-alt admin profil popover (ProfileMenu) + monokrom ikon + deep-link) — ihsan 75. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ADMIN-UX-LOGOUT-01",
-    "gorev_basligi": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
-    "tetik_sayisi": 162,
-    "uyari_tarihi": "2026-09-23T08:44:02",
-    "mesaj": "⚠️ ADMIN-UX-LOGOUT-01 ([UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)) — ihsan 162. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ADMIN-UX-MENUTREE-01",
-    "gorev_basligi": "Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar",
-    "tetik_sayisi": 88,
-    "uyari_tarihi": "2026-09-23T08:44:02",
-    "mesaj": "⚠️ ADMIN-UX-MENUTREE-01 (Sol menu agaci yeniden gruplama; Ayarlar sekmesi menuden kalkar) — ihsan 88. kez uyarıldı; henüz başlamadı."
+    "uyari_tarihi": "2026-09-23T11:19:02",
+    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 1. kez uyarıldı; henüz başlamadı."
   },
   {
     "ajan": "ihsan",
     "task_id": "ORKESTRA-NAMING-AUDIT-02",
     "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 73,
-    "uyari_tarihi": "2026-09-23T08:44:02",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 73. kez uyarıldı; henüz başlamadı."
+    "tetik_sayisi": 105,
+    "uyari_tarihi": "2026-09-23T11:24:01",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 105. kez uyarıldı; henüz başlamadı."
   },
   {
     "ajan": "ihsan",
-    "task_id": "UI-AYARLAR-SAYFA-01",
-    "gorev_basligi": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
-    "tetik_sayisi": 53,
-    "uyari_tarihi": "2026-09-23T08:44:02",
-    "mesaj": "⚠️ UI-AYARLAR-SAYFA-01 ([UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)) — ihsan 53. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "DASH-UX-02a",
-    "gorev_basligi": "[DASH-UX] DASH-UX-02a: 5 sistem sekmesini tek 'admin_sistem.py' icinde birlest",
+    "task_id": "ORKESTRA-GOREV-KAPI-01",
+    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
     "tetik_sayisi": 2,
-    "uyari_tarihi": "2026-09-23T08:44:02",
-    "mesaj": "⚠️ DASH-UX-02a ([DASH-UX] DASH-UX-02a: 5 sistem sekmesini tek 'admin_sistem.py' icinde birlest) — ihsan 2. kez uyarıldı; henüz başlamadı."
+    "uyari_tarihi": "2026-09-23T11:24:02",
+    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 106,
+    "uyari_tarihi": "2026-09-23T11:29:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 106. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-GOREV-KAPI-01",
+    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-23T11:29:02",
+    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 107,
+    "uyari_tarihi": "2026-09-23T11:34:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 107. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-GOREV-KAPI-01",
+    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-23T11:34:02",
+    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 108,
+    "uyari_tarihi": "2026-09-23T11:39:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 108. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-GOREV-KAPI-01",
+    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-23T11:39:02",
+    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 109,
+    "uyari_tarihi": "2026-09-23T11:44:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 109. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-GOREV-KAPI-01",
+    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-23T11:44:02",
+    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 110,
+    "uyari_tarihi": "2026-09-23T11:49:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 110. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-GOREV-KAPI-01",
+    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-23T11:49:02",
+    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 111,
+    "uyari_tarihi": "2026-09-23T11:54:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 111. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-GOREV-KAPI-01",
+    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-23T11:54:02",
+    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 112,
+    "uyari_tarihi": "2026-09-23T11:59:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 112. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-GOREV-KAPI-01",
+    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-23T11:59:02",
+    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 9. kez uyarıldı; henüz başlamadı."
   }
 ]

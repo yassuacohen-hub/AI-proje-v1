@@ -41,7 +41,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from scripts.dash04_api_client import get_api, APIError  # noqa: E402
 from web_dashboard.tabs.admin_auth import get_admin_token  # noqa: E402
-from web_dashboard.charts import kpi_karti
+from company_master.ui import MetricCard
 from web_dashboard.tabs.admin_error_handling import AdminErrorHandler
 
 # Admin API Analytics logger
@@ -119,13 +119,13 @@ def render_api_analytics_tab() -> None:
 
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        kpi_karti("Toplam Çağrı", f"{toplam_cagri:,}".replace(",", "."), kategori="sistem")
+        MetricCard("Toplam Çağrı", f"{toplam_cagri:,}".replace(",", ".").render(), kategori="sistem")
     with c2:
-        kpi_karti("Farklı Endpoint", distinct_endpoint, kategori="sistem")
+        MetricCard("Farklı Endpoint", distinct_endpoint, kategori="sistem").render()
     with c3:
-        kpi_karti("En Çok Kullanılan", en_cok_kullanilan or "—", kategori="sistem")
+        MetricCard("En Çok Kullanılan", en_cok_kullanilan or "—", kategori="sistem").render()
     with c4:
-        kpi_karti("İzlenen Tier Sayısı", len(items) if items else 0, kategori="sistem")
+        MetricCard("İzlenen Tier Sayısı", len(items).render() if items else 0, kategori="sistem")
 
     st.divider()
 
@@ -188,14 +188,14 @@ def render_api_analytics_tab() -> None:
     if metrics:
         m1, m2, m3, m4 = st.columns(4)
         with m1:
-            kpi_karti("Toplam Sorgu", f"{metrics.get('huginn_query_count', 0):,}".replace(",", "."), kategori="sistem")
+            MetricCard("Toplam Sorgu", f"{metrics.get('huginn_query_count', 0).render():,}".replace(",", "."), kategori="sistem")
         with m2:
-            kpi_karti("DB Süresi (ms)", f"{metrics.get('huginn_db_time_ms', 0):,.1f}".replace(",", "."), kategori="sistem")
+            MetricCard("DB Süresi (ms).render()", f"{metrics.get('huginn_db_time_ms', 0):,.1f}".replace(",", "."), kategori="sistem")
         with m3:
-            kpi_karti("Cache Hit", metrics.get("huginn_cache_hits", 0), kategori="sistem")
+            MetricCard("Cache Hit", metrics.get("huginn_cache_hits", 0).render(), kategori="sistem")
         with m4:
             hit_rate = metrics.get("huginn_cache_hit_rate", 0)
-            kpi_karti("Cache Hit Oranı", f"%{hit_rate * 100:.1f}", kategori="sistem")
+            MetricCard("Cache Hit Oranı", f"%{hit_rate * 100:.1f}", kategori="sistem").render()
     else:
         st.info("Sistem metrikleri alınamadı.")
 

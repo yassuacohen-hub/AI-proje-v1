@@ -16,7 +16,8 @@
     "source": "ic",
     "from_agent": null,
     "kanit": "",
-    "mod": "code"
+    "mod": "code",
+    "talimat": "data/orchestrator/ADMIN-UX-LOGOUT-01_brif_2026-09-20_denetim.md"
   },
   {
     "task_id": "ADMIN-UX-PROFILMENU-01",
@@ -26,7 +27,7 @@
     "oncelik": "P0",
     "durum": "iptal",
     "baslangic": "2026-09-18T14:31:57",
-    "bitis": "2026-09-19T17:35:00",
+    "bitis": null,
     "dosyalar": [],
     "not": "IPTAL (KAHIN karari 2026-09-19, ihsan uyguladi): Ayni dosyada (profil_menu.py) mukerrer gorev. Yerine D-57 uyumlu UI-PROFILMENU-01 gecerli. Kilitler birakildi (profil_menu.py, styles.py).",
     "source": "ic",
@@ -1247,7 +1248,7 @@
     "baslik": "Kariyer.net Scraper (Hizli MVP)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-12T23:43:28",
     "bitis": "2026-09-15T18:02:53",
     "dosyalar": [
@@ -2469,7 +2470,7 @@
     "oncelik": "P1",
     "durum": "plan",
     "baslangic": "2026-09-13T21:02:50",
-    "bitis": "2026-09-13T21:16:18",
+    "bitis": null,
     "dosyalar": [
       "AI proje v1/V10/03_mimari/brifler/brif_copilot.md"
     ],
@@ -2503,7 +2504,7 @@
     "baslik": "[DASH-UX] DASH-UX-02a: 5 sistem sekmesini tek 'admin_sistem.py' icinde birlest",
     "sahip": "copilot",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-13T21:02:50",
     "bitis": "2026-09-13T21:34:19",
     "dosyalar": [
@@ -2527,7 +2528,7 @@
     "baslik": "[DASH-UX] DASH-UX-02b: 4 sekmeyi tek 'admin_yonetim.py' icinde birlestir: extr",
     "sahip": "copilot",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-13T21:02:50",
     "bitis": "2026-09-13T21:46:49",
     "dosyalar": [
@@ -2716,7 +2717,7 @@
     "oncelik": "P1",
     "durum": "plan",
     "baslangic": "2026-09-13T22:08:26",
-    "bitis": "2026-09-13T22:57:21",
+    "bitis": null,
     "dosyalar": [
       "web_dashboard/tabs/admin_musteriler.py"
     ],
@@ -3182,7 +3183,7 @@
     "baslik": "Destek Merkezi MVP (Evidence Coverage)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": "2026-09-15T13:24:46",
     "dosyalar": [
@@ -3220,7 +3221,7 @@
     "baslik": "Executive Dashboard v1 (Coverage + Data Quality Score) — REVIZE",
     "sahip": "yasu",
     "oncelik": "P3",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-14T00:00:00",
     "bitis": "2026-09-15T11:12:44",
     "dosyalar": [],
@@ -3641,7 +3642,7 @@
     "baslik": "Kapsam karti: gercek NACE hedef tablosu (data/nace_hedefleri.json)",
     "sahip": "ihsan",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T09:15:45",
     "bitis": "2026-09-15T09:27:02",
     "dosyalar": [
@@ -3661,7 +3662,7 @@
     "baslik": "error_ledger Windows tmp kilidi (WinError 5) retry",
     "sahip": "ihsan",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T09:16:02",
     "bitis": "2026-09-15T09:27:02",
     "dosyalar": [],
@@ -3677,7 +3678,7 @@
     "baslik": "KRITIK(P1): tests/test_destek.py UTF-16LE+BOM (4319 NUL bayt) — pytest koleksiyonunu durduruyor",
     "sahip": "ihsan",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T10:10:21",
     "bitis": "2026-09-15T11:20:30",
     "dosyalar": [],
@@ -3694,7 +3695,7 @@
     "baslik": "SORUN(P2): ui/charts/__init__.py SyntaxError (CHART-01 kalıntısı) — ortak grafik modülü import edilemiyor",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T10:10:21",
     "bitis": "2026-09-15T11:12:44",
     "dosyalar": [
@@ -3714,7 +3715,7 @@
     "baslik": "KR-3: 0006_normalize_compat.py bozuk kodlama (orphan migration dosyasi)",
     "sahip": "ihsan",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T10:36:04",
     "bitis": "2026-09-15T11:20:30",
     "dosyalar": [],
@@ -3730,7 +3731,7 @@
     "baslik": "KR-4: Kodlama denetim araci (BOM/NUL/0-bayt) + ratchet guard + CI",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T11:19:35",
     "bitis": "2026-09-15T13:23:35",
     "dosyalar": [
@@ -3751,7 +3752,7 @@
     "baslik": "CI kapisi: tam tests/ + collection-errors + kodlama denetimi adimi",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T12:34:23",
     "bitis": "2026-09-15T14:06:34",
     "dosyalar": [
@@ -3769,7 +3770,7 @@
     "baslik": "ui.charts modulunu admin_executive ekranina entegre et",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T12:34:23",
     "bitis": "2026-09-15T14:41:12",
     "dosyalar": [
@@ -3805,7 +3806,7 @@
     "baslik": "Marka sesi JSON (105 tr anahtar) ses.json/ui.json ile birlestir",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T13:03:28",
     "bitis": "2026-09-15T15:38:28",
     "dosyalar": [
@@ -3824,7 +3825,7 @@
     "baslik": "scripts/ hijyen: 3 compile-bozuk script + scripts/scripts mukerrer klasor",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T14:07:28",
     "bitis": "2026-09-15T14:45:47",
     "dosyalar": [
@@ -3845,7 +3846,7 @@
     "baslik": "PO-BACK-06 Destek Merkezi capraz inceleme (kilo teslimi)",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T14:07:29",
     "bitis": "2026-09-15T14:45:49",
     "dosyalar": [
@@ -3863,7 +3864,7 @@
     "baslik": "[UI] Sidebar: marka blogu uste, logo, kompakt tooltip",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T15:01:51",
     "bitis": "2026-09-15T23:16:00",
     "dosyalar": [
@@ -3881,7 +3882,7 @@
     "baslik": "[UI] Topbar: arama sag ust, breadcrumb ayrac, Bu sayfada ayiraci",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T15:03:03",
     "bitis": "2026-09-15T23:16:21",
     "dosyalar": [
@@ -3899,7 +3900,7 @@
     "baslik": "Capraz inceleme: I18N-SES-02 kilo teslimi (ses.json birlestirme)",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T15:12:54",
     "bitis": "2026-09-15T15:38:28",
     "dosyalar": [
@@ -3917,7 +3918,7 @@
     "baslik": "Repo geneli kodlama denetimi (BOM/UTF-16/0-bayt/CRLF) + kodlama_denetim.py kapsam kontrolu",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T15:14:00",
     "bitis": "2026-09-15T15:38:28",
     "dosyalar": [
@@ -3954,7 +3955,7 @@
     "baslik": "MVP Karar Defteri ekrani: PageHeader + filtre + yeni karar formu",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T15:54:47",
     "bitis": "2026-09-15T16:47:21",
     "dosyalar": [
@@ -3973,7 +3974,7 @@
     "baslik": "MVP Kullanici Yonetimi ekrani: PageHeader + onayla + kredi formu",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T15:55:11",
     "bitis": "2026-09-15T18:10:18",
     "dosyalar": [
@@ -3992,7 +3993,7 @@
     "baslik": "Review: MVP-KD-01 Karar Defteri ekrani",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T15:55:11",
     "bitis": "2026-09-15T16:30:23",
     "dosyalar": [],
@@ -4024,7 +4025,7 @@
     "baslik": "Kariyer.net scraper saglamlastirma (MVP sonrasi)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T18:10:48",
     "bitis": "2026-09-15T23:20:10",
     "dosyalar": [
@@ -4043,7 +4044,7 @@
     "baslik": "MVP-ADMIN 4 ekran capraz denetim (rapor-only)",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T18:13:20",
     "bitis": "2026-09-15T18:29:40",
     "dosyalar": [
@@ -4061,7 +4062,7 @@
     "baslik": "Kalinti gecici dosya temizligi",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T18:13:21",
     "bitis": "2026-09-15T18:29:40",
     "dosyalar": [
@@ -4098,7 +4099,7 @@
     "baslik": "Kullanici onayinda tier secici (K-1 bulgusu)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T18:30:27",
     "bitis": "2026-09-15T23:14:20",
     "dosyalar": [
@@ -4240,7 +4241,7 @@
     "baslik": "Review: admin sifre sifirlama scripti + .env on-dolum + app.py restore",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T19:25:57",
     "bitis": "2026-09-15T21:21:39",
     "dosyalar": [
@@ -4278,7 +4279,7 @@
     "baslik": "[UI] Admin panel acilir modal ekranlar + grafik/chart arastirma ve oneri calismasi (dokuman)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "archive",
     "baslangic": "2026-09-15T20:55:23",
     "bitis": "2026-09-15T21:16:47",
     "dosyalar": [
@@ -5265,7 +5266,7 @@
     "baslik": "[UI] Kullanici Ayarlari sayfasini yaz → web_dashboard/tabs/admin_kullanici_ayarlari.py (2s)",
     "sahip": "ihsan",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-18T23:03:03",
     "bitis": "2026-09-19T16:24:16",
     "dosyalar": [],
@@ -5631,9 +5632,9 @@
     "baslik": "[ALTYAPI] Duzelt kilitleri → file_locks.json (1s)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-19T17:16:46",
-    "bitis": null,
+    "bitis": "2026-09-23T07:08:00",
     "dosyalar": [
       "data/orchestrator/file_locks.json"
     ],
@@ -5781,7 +5782,7 @@
       "toplam": 4,
       "sonraki": "ALTYAPI-WEB-MONITOR-01"
     },
-    "talimat": "data/orchestrator/ALTYAPI-FORM-SETUP-03_brif_2026-09-20_uretim.md",
+    "talimat": "data/orchestrator/ALTYAPI-FORM-SETUP-03_brif_2026-09-20_denetim.md",
     "kanit": "",
     "mod": "code"
   },
@@ -5890,7 +5891,7 @@
       "onceki": "ALTYAPI-FORM-SETUP-03",
       "sonraki": "ALTYAPI-PROXY-CONFIG-02"
     },
-    "talimat": "data/orchestrator/ALTYAPI-WEB-MONITOR-01_brif_2026-09-20_uretim.md",
+    "talimat": "data/orchestrator/ALTYAPI-WEB-MONITOR-01_brif_2026-09-20_denetim.md",
     "kanit": "",
     "mod": "code"
   },
@@ -5918,7 +5919,7 @@
       "onceki": "ALTYAPI-WEB-MONITOR-01",
       "sonraki": "TEST-PLAN-COVERAGE-03"
     },
-    "talimat": "data/orchestrator/ALTYAPI-PROXY-CONFIG-02_brif_2026-09-20_uretim.md",
+    "talimat": "data/orchestrator/ALTYAPI-PROXY-CONFIG-02_brif_2026-09-20_denetim.md",
     "kanit": "",
     "mod": "code"
   },
@@ -6101,11 +6102,13 @@
     "baslik": "[ORKESTRA] denetle vault isim tekrarlari → ORKESTRA-VAULT-TEKRAR-01_rapor.md (2s)",
     "sahip": "ihsan",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-20T16:07:52",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "",
+    "bitis": "2026-09-23T07:21:00",
+    "dosyalar": [
+      "data/orchestrator/ORKESTRA-VAULT-TEKRAR-01_rapor_2026-09-23_ihsan.md"
+    ],
+    "not": "Teslim (ihsan): Vault mekanizması denetlendi. JSON-merkezli yapı sağlıklı. 3 sorun bulunmuş: (1) Eski kayıtlar asla silinmiyor (onay_kuyrugu.json 1994 satır), (2) UTF-8 encoding artifact'ları eski tetik dosyalarında, (3) 25 adet .ALARM.json spam dosyası. 4 iyileştirme önerisi: archive mekanizması, encoding temizliği, spam silme, ciktilar file storage (ileri). Sistem yeşil durumdadır. Rapor: data/orchestrator/ORKESTRA-VAULT-TEKRAR-01_rapor_2026-09-23_ihsan.md",
     "source": "ic",
     "from_agent": null,
     "kanit": "",
@@ -6225,7 +6228,7 @@
     "oncelik": "P2",
     "durum": "iptal",
     "baslangic": "2026-09-20T22:07:31",
-    "bitis": "2026-09-20T22:25:12",
+    "bitis": null,
     "dosyalar": [],
     "not": "IPTAL (kullanici karari, cline): Gorev orkestratorun sorumlulugunda; tek bir kisinin panoya mudahale etmesi uygun degil. Yan etkiler geri alindi: file_locks.json V10-HIJYEN kilitleri eski haline getirildi.",
     "source": "ic",
@@ -6576,26 +6579,279 @@
     "mod": "code"
   },
   {
-    "task_id": "DASH-UX-02a-SECTIONS",
-    "id": "DASH-UX-02a-SECTIONS",
-    "baslik": "[DASH-UX] DASH-UX-02a-SECTIONS: admin_sistem sekmesini SECTIONS'a kaydet",
+    "task_id": "UI-ADOPT-01",
+    "id": "UI-ADOPT-01",
+    "baslik": "[UI] UI-ADOPT-01: kpi_karti() -> MetricCard bileşen benimsemesi (admin_auto_refresh, admin_api_analytics, admin_performance)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "blocked",
+    "durum": "done",
     "baslangic": null,
-    "bitis": "2026-09-21T21:16:42",
+    "bitis": null,
     "dosyalar": [
-      "web_dashboard/tabs/__init__.py"
+      "web_dashboard/tabs/admin_auto_refresh.py",
+      "web_dashboard/tabs/admin_api_analytics.py",
+      "web_dashboard/tabs/admin_performance.py"
     ],
-    "not": "Blokaj: DASH-UX-02a, ADMIN-UX-MENUTREE-01 bekliyor",
+    "not": "Faz 2: Eski web_dashboard.charts.kpi_karti() API'sinden yeni company_master.ui.MetricCard bileşenine geçiş. 3 dosyada tüm kpi_karti() çağrıları MetricCard ile değiştirilecek. DASH-UX-01 renk kodlaması uygulanacak. pytest tests/ -q tamamen yeşil olmalı.",
     "source": "ic",
     "from_agent": null,
-    "blokaj": [
-      "DASH-UX-02a",
-      "ADMIN-UX-MENUTREE-01"
-    ],
-    "talimat": "admin_sistem sekmesini SECTIONS'a ekle. MENUTREE'nin Ayarlar cikarma ve grup duzenlemesinin ustune yaz. K1 kalibrasyonu v1 raporundan alinir. pytest tests/ -q tamamen yesil olmali.",
+    "talimat": "admin_auto_refresh.py, admin_api_analytics.py, admin_performance.py dosyalarındaki kpi_karti() fonksiyon çağrılarını company_master.ui.MetricCard bileşenine geçir. Tüm testler yeşil olmalı (pytest tests/ -q). Brief: plans/brief_utku_UI-ADOPT-01.md",
     "mod": "code",
-    "brief": "plans/brief_utku_DASH-UX-02a-v2.md"
+    "brief": "plans/brief_utku_UI-ADOPT-01.md",
+    "atandi_tarihi": null,
+    "zincir": {
+      "sira": 1,
+      "toplam": 3,
+      "onceki": null,
+      "sonraki": "CHART-KATEGORI-02"
+    }
+  },
+  {
+    "task_id": "CHART-KATEGORI-02",
+    "id": "CHART-KATEGORI-02",
+    "baslik": "[CHART] KATEGORI_RENK <-> KATEGORILER uyumlaştırması → web_dashboard/charts.py (1s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/charts.py"
+    ],
+    "not": "Faz 2: Paralel kategori sistemi (KATEGORI_RENK satır 39-47 vs KATEGORILER dağınık) merkezi hale getirilecek. Tek otoriter kaynak, renk haritalanması. Regresyon koruması: pytest tests/ -q yeşil.",
+    "source": "ic",
+    "from_agent": null,
+    "talimat": "web_dashboard/charts.py satır 39'da merkezi KATEGORILER tanımı + KATEGORI_RENK birleştir. Tüm referansları merkezi tanımdan al. Testler yeşil (pytest tests/ -q). Brief: plans/brief_utku_CHART-KATEGORI-02.md",
+    "mod": "code",
+    "brief": "plans/brief_utku_CHART-KATEGORI-02.md",
+    "atandi_tarihi": null,
+    "zincir": {
+      "sira": 2,
+      "toplam": 3,
+      "onceki": "UI-ADOPT-01",
+      "sonraki": "TEST-DASHBOARD-REGRESYON-01"
+    }
+  },
+  {
+    "task_id": "TEST-DASHBOARD-REGRESYON-01",
+    "id": "TEST-DASHBOARD-REGRESYON-01",
+    "baslik": "[TEST] Dashboard test regresyonu: 8 kırık + 71 kayıp test araştırması (2s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "tests/"
+    ],
+    "not": "Rebase sonrası dashboard testlerinde regresyon: 8 kırık test + 71 kayıp test. Kök neden araştırılacak (import hata / state yönetimi / mock sorunu). Düzeltmeler apply, pytest tests/ -q tüm yeşil olmalı.",
+    "source": "ic",
+    "from_agent": null,
+    "talimat": "8 kırık + 71 kayıp test kök nedenini belirle. Düzeltmeleri apply et. pytest tests/ -q -> 179/179 PASSED. Brief: plans/brief_utku_TEST-DASHBOARD-REGRESYON-01.md",
+    "mod": "code",
+    "brief": "plans/brief_utku_TEST-DASHBOARD-REGRESYON-01.md",
+    "atandi_tarihi": null,
+    "zincir": {
+      "sira": 3,
+      "toplam": 3,
+      "onceki": "CHART-KATEGORI-02",
+      "sonraki": null
+    }
+  },
+  {
+    "task_id": "ADMIN-UI-CACHE-OPT-01",
+    "id": "ADMIN-UI-CACHE-OPT-01",
+    "baslik": "[ALTYAPI] Admin UI cache optimizasyonu ve TTL ayarlari",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "review",
+    "baslangic": "2026-09-23T10:36:46",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Teslim (yasu): Cache optimizasyonu: (1) TTL env ile ayarlanabilir (HUGGINN_CACHE_TTL, varsayilan 300s korundu), (2) cache boyut siniri + FIFO eviction (HUGGINN_CACHE_MAX_ENTRIES=512) — bellek sizintisi engellendi, (3) bos sonuc negatif cache'lenmesi engellendi. Test: tests/test_admin_ui_cache_opt.py 10/10 PASSED. web_app.py syntax OK, import OK, kodlama_denetim temiz (dokunulan dosyalar).",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code"
+  },
+  {
+    "task_id": "GRAPH-CANONICAL-SECER-02",
+    "id": "GRAPH-CANONICAL-SECER-02",
+    "baslik": "[GRAPH] Canonical graph baglanti guvenligi secer",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "review",
+    "baslangic": "2026-09-23T10:36:46",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Teslim (yasu): Canonical graph baglanti guvenligi dogrulamasi: 156 grup denetlendi. SSOT ihlali 0, icerigi bosalan dosya 0. 13 bulgu tespit edildi ve kok nedeni raporlandi: AI proje v1/ altindaki 11 ikiz dosya + orchestrator README.md calisma dizininden silinmis (backup'lar duruyor, git HEAD'de mevcut, checkout ile restore edilebilir). Canonical'lar saglam, SSOT (D-172/D-177) zarar gormedi. Silinen dosyalarin restore karari orkestrator icin birakildi — mudahale YAPILMADI (denetim gorevi). Dogrulama scripti: data/orchestrator/GRAPH-CANONICAL-SECER-02_dogrula.py.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code"
+  },
+  {
+    "task_id": "AGENTS-MERGE-UU",
+    "id": "AGENTS-MERGE-UU",
+    "baslik": "[DOC] AGENTS.md kok/vault kopuklugunu duzelt → tek SSOT + D-188 (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P0",
+    "durum": "review",
+    "baslangic": "2026-09-23T10:39:33",
+    "bitis": null,
+    "dosyalar": [
+      "AGENTS.md",
+      "Huginn Data Insights/AGENTS.md"
+    ],
+    "not": "Teslim (ihsan): Kok AGENTS.md kural kopyasi kaldirildi (108->93), n8n blogu korundu; vault AGENTS.md'ye D-188 (once pano sonra tetik) ve D-189 eklendi (581->592). BOM yok, catisma isareti yok.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "talimat": "data/orchestrator/AGENTS-MERGE-UU_brif_2026-09-23_ihsan.md"
+  },
+  {
+    "task_id": "VAULT-CLEANUP-BATCH",
+    "id": "VAULT-CLEANUP-BATCH",
+    "baslik": "[ALTYAPI] Vault alarm/tetik artiklarini sil → temiz kuyruk (1s)",
+    "sahip": "ihsan",
+    "oncelik": "P2",
+    "durum": "review",
+    "baslangic": "2026-09-23T10:39:33",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Teslim (ihsan): 3 adim tamam: 19 ALARM (4 otomatik silindi, 15 _trash/ tasindi), 26 mojibake onarildi (5 kurtarilamaz), 29 gorev archive + 4 bitis_temizle. tetik_senk.py'de 3 hata bulundu ve duzeltildi: yanlis data_dir (triggers/ eksik + cwd-bagimli, script haftalardir sessizce 0 dosya isliyordu), iptal final durum listesinde yoktu, cp1254 emoji cokmesi. Pano denetimi fail(4 hata) -> ok(0 hata). 224 tetik satiri, 0 bozuk JSON, 0 BOM.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "talimat": "data/orchestrator/VAULT-CLEANUP-BATCH_brif_2026-09-23_ihsan.md"
+  },
+  {
+    "task_id": "ADMIN-UX-SIDEBAR-TAB",
+    "baslik": "[UI] Sidebar tab secim durumunu sakla -> web_dashboard/tabs/__init__.py (2s)",
+    "sahip": "utku",
+    "durum": "aktif",
+    "oncelik": "P1",
+    "olusturulma": "2026-09-23T07:30:00",
+    "bitis": null,
+    "zincir": null,
+    "dosyalar": [],
+    "talimat": "ADMIN-UX-SIDEBAR-TAB: Sidebar tab secim durumu saklama + aktif tab vurgusu. Brif: plans/brief_utku_ADMIN-UX-SIDEBAR-TAB.md",
+    "brief": "plans/brief_utku_ADMIN-UX-SIDEBAR-TAB.md",
+    "not": "Tetik 2026-09-23T07:30:00 - pano kaydi otomatik olusturuldu",
+    "mod": "code",
+    "id": "ADMIN-UX-SIDEBAR-TAB"
+  },
+  {
+    "task_id": "ORKESTRA-ONAY-BOSALT-01",
+    "id": "ORKESTRA-ONAY-BOSALT-01",
+    "baslik": "[ORKESTRA] Onay kuyrugundaki 9 teslimi denetle → data/orchestrator/ORKESTRA-ONAY-BOSALT-01_rapor_2026-09-23_salih.md (4s)",
+    "sahip": "salih",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-23T11:08:56",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code"
+  },
+  {
+    "task_id": "ORKESTRA-GOREV-KAPI-01",
+    "id": "ORKESTRA-GOREV-KAPI-01",
+    "baslik": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
+    "sahip": "ihsan",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-09-23T11:09:02",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/gorev_at.py",
+      "scripts/tetik_senk.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code"
+  },
+  {
+    "task_id": "ALTYAPI-KILIT-OTOMATIK-01",
+    "id": "ALTYAPI-KILIT-OTOMATIK-01",
+    "baslik": "[ALTYAPI] Kilit otomatik birakmayi yaz → src/company_master/orchestrator/task_board.py (3s)",
+    "sahip": "roo",
+    "oncelik": "P1",
+    "durum": "review",
+    "baslangic": "2026-09-23T11:09:10",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "notlar": "Orkestrator ustlendi (D-65): ajan gelmedi. lock_birak_gorev() + stale_kilitler() yazildi, tests/test_task_board_kilit.py 7/7 yesil, 272 regresyon yesil."
+  },
+  {
+    "task_id": "ALTYAPI-TETIK-ARSIV-01",
+    "id": "ALTYAPI-TETIK-ARSIV-01",
+    "baslik": "[ALTYAPI] Kanonik olmayan tetik dosyalarini taşı → data/orchestrator/triggers/_arsiv_2026-09-23/ (2s)",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-23T11:09:17",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code"
+  },
+  {
+    "task_id": "ALTYAPI-MOJIBAKE-DIZIN-01",
+    "id": "ALTYAPI-MOJIBAKE-DIZIN-01",
+    "baslik": "[ALTYAPI] mojibake_onar.py dizin taramasini yaz → mojibake_onar.py (2s)",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-23T11:36:28",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-MOJIBAKE-DIZIN-01.md",
+    "talimat": "ALTYAPI-MOJIBAKE-DIZIN-01: --dizin argumani + dry-run varsayilan (--uygula sarti) + 2 test. Brif: plans/brief_yasu_ALTYAPI-MOJIBAKE-DIZIN-01.md"
+  },
+  {
+    "task_id": "ALTYAPI-IMPORT-TEKLES-01",
+    "id": "ALTYAPI-IMPORT-TEKLES-01",
+    "baslik": "[ALTYAPI] trigger.py import yolunu düzelt → trigger.py (1s)",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-23T11:36:42",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-IMPORT-TEKLES-01.md",
+    "talimat": "ALTYAPI-IMPORT-TEKLES-01: trigger.py:24 kok-mutlak importu paket yoluna sabitle + tests/test_trigger_import.py. Brif: plans/brief_yasu_ALTYAPI-IMPORT-TEKLES-01.md"
+  },
+  {
+    "task_id": "ALTYAPI-TETIK-ZAMAN-01",
+    "id": "ALTYAPI-TETIK-ZAMAN-01",
+    "baslik": "[ALTYAPI] tetik_senk zamanlamasini yaz → tetik_senk.py (2s)",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-23T11:37:35",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-TETIK-ZAMAN-01.md",
+    "talimat": "ALTYAPI-TETIK-ZAMAN-01: --gunluk girisi + tetik_senk_log.jsonl + sessiz basari yasagi (exit!=0) + 2 test. Brif: plans/brief_yasu_ALTYAPI-TETIK-ZAMAN-01.md"
   }
 ]

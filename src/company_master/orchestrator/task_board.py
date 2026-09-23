@@ -16,7 +16,7 @@ import json
 import os
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -237,10 +237,14 @@ def gorev_ekle(
     source: str | None = None,
     from_agent: str | None = None,
     mod: str = "code",
+    brief: str | None = None,
+    talimat: str | None = None,
 ) -> dict:
     """Panoya gorev ekle. dosyalar -> file-lock sahipligi de alir.
 
     source: "ic" veya "harici" (ad-hoc agent)
+    brief/talimat: D-66/D-80 kapisindan gelir; panoda bos kalmamalari gerekir
+    (bos 'brief' alanli gorev ajanin ne yapacagini bilmemesi demek).
     """
     _ensure()
     board = _read_json(TASK_BOARD)
@@ -260,6 +264,8 @@ def gorev_ekle(
         "source": source or "ic",
         "from_agent": from_agent,
         "mod": mod or "code",  # D-63: architect | code
+        "brief": brief or "",      # D-66
+        "talimat": talimat or "",  # D-80
     }
     # S-05: Bozuk kayit panoya hic girmesin (onleme).
     sema_dogrula(task)
@@ -318,10 +324,12 @@ def gorev_guncelle(task_id: str, durum: str | None = None, **fields) -> dict | N
                 # ORCH-05: done/blocked oldugunda bu göreve ait tum kilitleri otomatik birak.
                 # ORCH-05b: Blok yalniz done/blocked'da calisir; onceden her guncellemede
                 # (aktif/review/not) kilit dusuyordu -> file_locks.json surekli bos kaliyordu.
-                locks = _read_json(FILE_LOCKS)
-                kalan = {d: l for d, l in locks.items() if l.get("task_id") != task_id}
-                if len(kalan) != len(locks):
-                    _write_json(FILE_LOCKS, kalan)
+                # ALTYAPI-KILIT-OTOMATIK-01: gövde lock_birak_gorev()'e tasindi; pano
+                # yazimi asla kilit hatasi yuzunden cokmemeli.
+                try:
+                    lock_birak_gorev(task_id)
+                except Exception:
+                    pass
             # S-05: her yazimda eski/bozuk kayitlar kendini onarir (self-healing).
             pano_normalize(board)
             _write_json(TASK_BOARD, board)
@@ -532,6 +540,46 @@ def lock_birak(dosya: str, sahip: str) -> bool:
         _sync_tetikle()
         return True
     return False
+
+
+def lock_birak_gorev(task_id: str) -> list[str]:
+    """Bir goreve ait TUM kilitleri tek yazimda birakir; birakilan dosyalari doner.
+
+    gorev_guncelle() durum done/blocked olunca cagirir. Sahip kontrolu yoktur:
+    gorev bittiyse kilidi kimin aldigi onemsizdir, gorev kimligi yeterlidir.
+    """
+    locks = _read_json(FILE_LOCKS)
+    birakilan = [d for d, l in locks.items() if l.get("task_id") == task_id]
+    if birakilan:
+        _write_json(FILE_LOCKS, {d: l for d, l in locks.items() if d not in birakilan})
+    return birakilan
+
+
+def stale_kilitler(saat: int = 24) -> list[dict]:
+    """`saat` saatten eski kilitleri LISTELER. Silmez — karar orkestratorde (D-77).
+
+    Donen kayit: {dosya, sahip, task_id, kilitlendi, yas_saat, gorev_durum}.
+    """
+    esik = datetime.now() - timedelta(hours=saat)
+    durumlar = {t.get("task_id"): t.get("durum") for t in gorev_listesi()}
+    eski: list[dict] = []
+    for dosya, l in _read_json(FILE_LOCKS).items():
+        ham = l.get("kilitlendi")
+        try:
+            an = datetime.fromisoformat(ham) if ham else None
+        except (TypeError, ValueError):
+            an = None
+        if an is None or an > esik:
+            continue
+        eski.append({
+            "dosya": dosya,
+            "sahip": l.get("sahip"),
+            "task_id": l.get("task_id"),
+            "kilitlendi": ham,
+            "yas_saat": round((datetime.now() - an).total_seconds() / 3600, 1),
+            "gorev_durum": durumlar.get(l.get("task_id"), "PANODA YOK"),
+        })
+    return sorted(eski, key=lambda e: e["yas_saat"], reverse=True)
 
 
 def handoff_ekle(task_id: str, agent_id: str, output_path: str, summary: str) -> None:

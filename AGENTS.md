@@ -540,6 +540,18 @@
 - **Gerekçe:** Orphan nod birikimini kaynağında önler; GRAPH-HUB-EXPAND tarzı toplu temizlik görevlerine ihtiyacı azaltır.
 - **İstisna:** `data/orchestrator/` yürütme raporları ve geçici (`data/_tmp/`) dosyalar kapsam dışı — bunlar zaten hub'lara alınmıyor (bkz. hub üretim notları).
 
+## Önce Pano, Sonra Tetik (D-188 — KAHİN kararı 2026-09-23)
+- **Kural:** Her görev **önce** `data/orchestrator/task_board.json`'a yazılır (brif dosyası diskte hazır, `talimat` alanı brif yolunu gösterir), **sonra** ajan tetiği (`triggers/{ajan}.jsonl`) atılır. Ters sıra yasak.
+- **Gerekçe:** Tetik panoda karşılığı olmayan göreve işaret ederse ajan `al` komutunda `HATA: Görev panoda bulunamadı` alır; iş başlamadan durur (2026-09-23 AGENTS-MERGE-UU / VAULT-CLEANUP-BATCH olayı).
+- **Tek komut:** `python scripts/gorev_atama_otomatis.py --task-id <ID> --ajan <name>` (D-87) bu sırayı zaten uygular; elle tetik yazmak yerine bu kullanılır.
+- **Doğrulama:** Tetik atmadan önce `python scripts/gorev_at.py pano` ile görevin panoda görünmesi teyit edilir.
+- **Bağlantı:** D-66 (brifsiz atama yasak) ve D-68 (tetik ↔ pano tutarlılığı) ile birlikte uygulanır.
+
+## Kök AGENTS.md Kural Taşımaz (D-189 — AGENTS-MERGE-UU, 2026-09-23)
+- **Kural:** Depo kökündeki `AGENTS.md` yalnızca (1) `n8n-as-code` üretilmiş blok ve (2) bu dosyaya işaretçi içerir. Ajan kuralları yalnızca `Huginn Data Insights/AGENTS.md` içinde yaşar.
+- **Gerekçe:** İki dosyada kural kopyası tutmak sürüm kayması ve merge çatışması üretiyordu; tek SSOT bunu kaynağında keser.
+- **n8n bloğu:** `<!-- n8n-as-code-start -->` … `<!-- n8n-as-code-end -->` arası elle düzenlenmez; `npx --yes n8nac update-ai` üretir.
+
 ## İlgili Nodlar (GRAPH-FIX-02 Backlink + GRAPH-HUB-EXPAND Kategori Hub'ları)
 
 ### GRAPH-FIX-02 Büyük İzole Nod Backlink'leri
