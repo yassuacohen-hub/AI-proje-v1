@@ -1,14 +1,4 @@
 {
-  "AGENTS.md": {
-    "sahip": "ihsan",
-    "task_id": "AGENTS-MERGE-UU",
-    "kilitlendi": "2026-09-23T10:39:33"
-  },
-  "Huginn Data Insights/AGENTS.md": {
-    "sahip": "ihsan",
-    "task_id": "AGENTS-MERGE-UU",
-    "kilitlendi": "2026-09-23T10:39:33"
-  },
   "web_dashboard/tabs/admin_performance.py": {
     "sahip": "utku",
     "task_id": "TEST-ADMIN-PERF-01",

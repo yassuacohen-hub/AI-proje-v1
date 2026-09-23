@@ -2235,5 +2235,15 @@
     "durum": "onaylandi",
     "onaylayan": "orkestrator",
     "onay_tarihi": "2026-09-23T23:09:52"
+  },
+  {
+    "task_id": "TEST-13-PREEXIST-DUZELT-01",
+    "ajan": "utku",
+    "ozet": "13 pre-existing test failure kaynak kod duzeltmesiyle giderildi: admin_performance.py kategorı sistem->system, task_board.py task_id/baslik/menu, check_board_structure.py marka ID. 199/207 passed, 4 pre-existing flaky. Rapor: TEST-13-PREEXIST-DUZELT-01_rapor_2026-09-23_utku.md",
+    "ciktilar": [
+      "data/orchestrator/TEST-13-PREEXIST-DUZELT-01_rapor_2026-09-23_utku.md"
+    ],
+    "teslim_tarihi": "2026-09-24T01:23:50",
+    "durum": "bekliyor"
   }
 ]

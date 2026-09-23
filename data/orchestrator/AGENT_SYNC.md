@@ -1,14 +1,12 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-23T23:43:11
+> Son guncelleme: 2026-09-24T01:33:09
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
 
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
-| - | - | - | P2 | plan |
-| - | - | - | P2 | plan |
 | ADMIN-UX-PROFILMENU-01 | Sag-alt admin profil popover (ProfileMen | salih | P0 | iptal |
 | ADMIN-UX-MENUTREE-01 | Sol menu agaci yeniden gruplama; Ayarlar | ihsan | P1 | iptal |
 | WK-01 | Career Pages Scraper — Enhanced Data Ext | salih | P1 | archive |
@@ -67,7 +65,6 @@
 | COP-23 | [COP-TASARIM] TASARIM-1: Bosta-veri bilg | copilot | P2 | archive |
 | COP-24 | [COP-TASARIM] TASARIM-2: Son-guncelleme  | copilot | P2 | archive |
 | COP-25 | [COP-TASARIM] TASARIM-3: Sidebar yardim  | copilot | P2 | archive |
-| COP-26 | MUSTERILER ekrani: firma listesi+filtre+ | ihsan | P1 | aktif |
 | ORCH-13 | Pano sema dogrulama (S-05) + tetik_al pa | yasu | P2 | archive |
 | UX-01 | UI Component Library — Design System | ihsan | P1 | archive |
 | UX-02 | Responsive Layout System ve Breakpoint M | ihsan | P1 | archive |
@@ -120,12 +117,9 @@
 | MVP-KUL-02 | Kullanici onayinda tier secici (K-1 bulg | utku | P2 | archive |
 | REV-ADMIN-ENV-01 | Review: admin sifre sifirlama scripti +  | yasu | P1 | archive |
 | UI-MODAL-01 | [UI] Admin panel acilir modal ekranlar + | yasu | P2 | archive |
-| ORKESTRA-DECISION-LOG-03 | [ORKESTRA] Karar defterini düzelt → data | ihsan | P1 | plan |
 | ALTYAPI-KILIT-TEMIZLIK-V10-01 | [ALTYAPI] V10-HIJYEN dosyaları kilit sil | cline | P2 | iptal |
 | ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyası yaz → | yasu | P2 | archive |
 | BRIK-00 | ALTYAPI Archive sema + gece zinciri → ku | ihsan | P1 | archive |
-| AGENTS-MERGE-UU | [DOC] AGENTS.md kok/vault kopuklugunu du | ihsan | P0 | approved |
-| VAULT-CLEANUP-BATCH | [ALTYAPI] Vault alarm/tetik artiklarini  | ihsan | P2 | approved |
 | ORKESTRA-ONAY-BOSALT-01 | [ORKESTRA] Onay kuyrugundaki 9 teslimi d | salih | P0 | iptal |
 | ALTYAPI-KILIT-OTOMATIK-01 | [ALTYAPI] Kilit otomatik birakmayi yaz → | yasu | P1 | aktif |
 | ALTYAPI-MOJIBAKE-DIZIN-01 | [ALTYAPI] mojibake_onar.py dizin taramas | yasu | P2 | aktif |
@@ -133,17 +127,14 @@
 | TEST-ADMIN-PERF-01 | [TEST] admin_performance kpi_karti gecis | utku | P1 | aktif |
 | TEST-WEBHOOK-KPI-01 | [TEST] webhook_monitor mock hedefini duz | utku | P2 | aktif |
 | UI-SUBHEADER-MUSTERI-01 | [UI] musteri_yonetimi subheader temizlig | utku | P2 | aktif |
-| ALTYAPI-D66-BYPASS-TETIKLEME | [Altyapi] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | plan |
-| ALTYAPI-D66-BYPASS-TETIKLEME-01 | [ALTYAPI] düzelt tetik_senk.py bypass fl | ihsan | P1 | plan |
-| TEST-13-PREEXIST-DUZELT-01 | [TEST] düzelt 13 pre-existing hata → d19 | utku | P2 | aktif |
+| ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | plan |
+| TEST-13-PREEXIST-DUZELT-01 | [TEST] düzelt 13 pre-existing hata → d19 | utku | P2 | review |
 | ALTYAPI-GROQ-KEY-DOGRULA-01 | [ALTYAPI] denetle Groq canlı key → groq_ | yasu | P2 | plan |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| ADMIN-UX-SIDEBAR-TAB | [UI] Sidebar tab secim durumunu sakla -> | utku | 2026-09-23 |
-| ORKESTRA-GOREV-KAPI-01 | [ORKESTRA] Gorev atama kapisini düzelt → | ihsan | 2026-09-23 |
 | ALTYAPI-TETIK-ARSIV-01 | [ALTYAPI] Kanonik olmayan tetik dosyalar | yasu | 2026-09-23 |
 | ALTYAPI-IMPORT-TEKLES-01 | [ALTYAPI] trigger.py import yolunu düzel | yasu | 2026-09-23 |
 | ALTYAPI-MARKA-HUGGINN-01 | [ALTYAPI] HUGGINN yazimini duzelt → mark | yasu | 2026-09-23 |
@@ -152,6 +143,8 @@
 | ALTYAPI-MOJIBAKE-BARIYER-01 | [ALTYAPI] Mojibake araci yazim-oncesi ha | ihsan | 2026-09-23 |
 | ALTYAPI-DURUM-SOZLUK-01 | [ALTYAPI] Gorev durum sozlugu tutarsizli | ihsan | 2026-09-23 |
 | ALTYAPI-TEST-HERMETIK-01 | [ALTYAPI] Uretim verisine dokunan testle | ihsan | 2026-09-23 |
+| ALTYAPI-D66-BYPASS-TETIKLEME-01 | [ALTYAPI] duzelt tetik_senk.py bypass fl | ihsan | 2026-09-24 |
+| D-192-FAZ2 | [ADMIN-UI] Ajan Chat Faz 2: Onem Dereces | orkestrator | 2026-09-23 |
 
 ## Son Handoff'lar
 
