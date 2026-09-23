@@ -1878,5 +1878,37 @@
     "tetik_sayisi": 94,
     "uyari_tarihi": "2026-09-23T23:44:02",
     "mesaj": "⚠️ ALTYAPI-D66-BYPASS-TETIKLEME-01 ([ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)) — ihsan 94. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 135,
+    "uyari_tarihi": "2026-09-23T23:49:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 135. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
+    "gorev_basligi": "[ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)",
+    "tetik_sayisi": 95,
+    "uyari_tarihi": "2026-09-23T23:49:02",
+    "mesaj": "⚠️ ALTYAPI-D66-BYPASS-TETIKLEME-01 ([ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)) — ihsan 95. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 136,
+    "uyari_tarihi": "2026-09-23T23:54:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 136. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
+    "gorev_basligi": "[ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)",
+    "tetik_sayisi": 96,
+    "uyari_tarihi": "2026-09-23T23:54:02",
+    "mesaj": "⚠️ ALTYAPI-D66-BYPASS-TETIKLEME-01 ([ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)) — ihsan 96. kez uyarıldı; henüz başlamadı."
   }
 ]
