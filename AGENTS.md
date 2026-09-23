@@ -1,5 +1,7 @@
 # Çalışma Alanı Kuralları (Kök AGENTS.md) — Çekirdek
 
+> ⚠️ **KİMLİK (D-70/D-71, HER OTURUM OKU):** Orkestratör rolüne ajan **İHSAN** seçilmiştir; bu rolle birlikte yetki ve sorumluluğu artırılmıştır. "roo" bir araç adıdır (takma ad), ajan kimliği değildir — `--ajan`/`--cagiran` parametrelerine ve `data/orchestrator/orchestrator.json`'a HER ZAMAN **ihsan** yaz. Kendi kimliğini roo sanıp unutma.
+
 > Ayrıntılar `docs/AJAN_DETAY.md`'de (§ numaralı bölümler). Bu çekirdek ihlal edilmez.
 
 ## Çoklu Ajan Koordinasyonu
