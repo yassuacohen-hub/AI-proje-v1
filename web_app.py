@@ -279,12 +279,32 @@ def _auth_rate_guard(request: Request) -> None:
 
 
 _CACHE: dict[str, tuple[float, Any]] = {}
-# ADMIN-UI-CACHE-OPT-01: TTL artik env ile ayarlanabilir (HUGGINN_CACHE_TTL sn).
-# Varsayilan 300s korundu (geriye uyumlu).
-_CACHE_TTL = int(os.getenv("HUGGINN_CACHE_TTL", "300"))
-# ADMIN-UI-CACHE-OPT-01: cache buyuklugu siniri — sinirsiz sozluk bellek sizintisi
-# engellenir. Limit asilinca en eski kayitlar atilir (basit FIFO evictions).
-_CACHE_MAX_ENTRIES = int(os.getenv("HUGGINN_CACHE_MAX_ENTRIES", "512"))
+
+# ADMIN-UI-CACHE-OPT-01: TTL ve boyut siniri env ile ayarlanabilir.
+# Varsayilanlar korundu: TTL 300 sn, ust sinir 512 kayit (geriye uyumlu).
+_CACHE_TTL_ENV = "HUGINN_CACHE_TTL"
+_CACHE_MAX_ENV = "HUGINN_CACHE_MAX_ENTRIES"
+
+# Altyapi marka yazim gecisi (2026-09-23): marka yazimi HUGINN (tek G).
+# Asagidaki eski adlar MARKA YAZIMI DEGIL, dis sozlesmedir (kullanicilarin .env
+# dosyasinda eski ad yazili olabilir). Bir surum boyunca fallback okunur.
+_ESKI_CACHE_ENV = {  # Altyapi marka gecisi: marka adi degil, gecis donemi env takma adi
+    _CACHE_TTL_ENV: "HUGGINN_CACHE_TTL",  # marka-muaf: eski env adi (deprecated)
+    _CACHE_MAX_ENV: "HUGGINN_CACHE_MAX_ENTRIES",  # marka-muaf: eski env adi (deprecated)
+}
+
+
+def _env_sayi(ad: str, varsayilan: str) -> int:
+    """Env degerini int okur; yeni ad bos ise eski (deprecated) adi dener."""
+    ham = os.getenv(ad)
+    if ham is None:
+        eski = _ESKI_CACHE_ENV.get(ad)
+        ham = os.getenv(eski) if eski else None
+    return int(ham if ham is not None else varsayilan)
+
+
+_CACHE_TTL = _env_sayi(_CACHE_TTL_ENV, "300")
+_CACHE_MAX_ENTRIES = _env_sayi(_CACHE_MAX_ENV, "512")
 
 
 def _cache_evict_if_needed() -> None:

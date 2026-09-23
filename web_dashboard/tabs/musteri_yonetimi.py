@@ -84,7 +84,7 @@ def _kullanicilar_onay() -> None:
     if isinstance(pending, dict):
         bekleyen = pending.get("bekleyen", [])
         if bekleyen:
-            st.subheader("Onay Bekleyen Kullanıcılar")
+            Section("Onay Bekleyen Kullanıcılar").render()
             for user in bekleyen:
                 with st.container():
                     cols = st.columns([4, 1])
@@ -124,7 +124,7 @@ def _kullanicilar_onay() -> None:
         # Son onaylı kullanıcılar
         onayli_son = pending.get("onayli_son", [])
         if onayli_son:
-            st.subheader("Son Onaylanan Kullanıcılar")
+            Section("Son Onaylanan Kullanıcılar").render()
             import pandas as pd
             st.dataframe(pd.DataFrame(onayli_son), width="stretch", hide_index=True)
         else:
@@ -134,7 +134,7 @@ def _kullanicilar_onay() -> None:
     if isinstance(categories, dict):
         items = categories.get("items", [])
         if items:
-            st.subheader("Paket Kategorileri")
+            Section("Paket Kategorileri").render()
             import pandas as pd
             st.dataframe(pd.DataFrame(items), width="stretch", hide_index=True)
         else:
@@ -150,7 +150,7 @@ def _paket_kredi() -> None:
         st.warning("Lütfen giriş yapın")
         return
 
-    st.subheader("Kredi Yükleme")
+    Section("Kredi Yükleme").render()
 
     with st.form("kredi_formu"):
         col1, col2 = st.columns(2)
@@ -172,7 +172,7 @@ def _paket_kredi() -> None:
                 st.error(f"Kredi yükleme başarısız: {e}")
 
     st.divider()
-    st.subheader("Kategori Yönetimi")
+    Section("Kategori Yönetimi").render()
 
     try:
         categories = get_api("/api/admin/categories", token=token)

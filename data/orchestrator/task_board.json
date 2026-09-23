@@ -1,5 +1,163 @@
 [
   {
+    "sprint_id": "SPRINT-2026-09-23-PANO-DENETIM",
+    "sprint_name": "Sprint 2026-09-23 Başlangıç — Pano Denetimi & MIMIR",
+    "date": "2026-09-23",
+    "status": "aktif",
+    "summary": {
+      "pano_denetimi": "377 görev sınıflandırıldı, 21 review analiz, tamamlanma %63",
+      "gorev_atamalari": "UTKU 3 görev, YASU 3 görev (review→aktif)",
+      "mimir_revizyon": "Sistem sağlam, D-66 bypass implementation eksik"
+    },
+    "tasks": [
+      {
+        "id": "TEST-ADMIN-PERF-01",
+        "assigned_to": "utku",
+        "priority": "P0",
+        "status": "aktif",
+        "baslangic": "2026-09-23T12:23:45Z"
+      },
+      {
+        "id": "TEST-WEBHOOK-KPI-01",
+        "assigned_to": "utku",
+        "priority": "P0",
+        "status": "aktif",
+        "baslangic": "2026-09-23T12:23:45Z"
+      },
+      {
+        "id": "UI-SUBHEADER-MUSTERI-01",
+        "assigned_to": "utku",
+        "priority": "P0",
+        "status": "aktif",
+        "baslangic": "2026-09-23T12:23:45Z"
+      },
+      {
+        "id": "ALTYAPI-KILIT-OTOMATIK-01",
+        "assigned_to": "yasu",
+        "priority": "P0",
+        "status": "aktif",
+        "baslangic": "2026-09-23T12:23:45Z"
+      },
+      {
+        "id": "ALTYAPI-TETIK-ZAMAN-01",
+        "assigned_to": "yasu",
+        "priority": "P0",
+        "status": "aktif",
+        "baslangic": "2026-09-23T12:23:45Z"
+      },
+      {
+        "id": "ALTYAPI-MOJIBAKE-DIZIN-01",
+        "assigned_to": "yasu",
+        "priority": "P0",
+        "status": "aktif",
+        "baslangic": "2026-09-23T12:23:45Z"
+      },
+      {
+        "id": "D-66-BYPASS",
+        "assigned_to": "ihsan",
+        "priority": "P0",
+        "status": "plan",
+        "description": "D-66 bypass tetikleme implementation: pano_denetim.py tara() + tetik_senk.py exit 2 handling",
+        "baslangic": "2026-09-23T12:27:46Z"
+      },
+      {
+        "id": "TRIGGER-LOGGING-CLEANUP",
+        "assigned_to": "yasu",
+        "priority": "P1",
+        "status": "plan",
+        "description": "trigger.py temizlik: Yorum sil, logging ekle",
+        "baslangic": "2026-09-23T12:27:46Z"
+      },
+      {
+        "id": "ADMIN-PANEL-RAPOR-TAB",
+        "assigned_to": "backlog",
+        "priority": "P2",
+        "status": "backlog",
+        "description": "Admin panel rapor tab (low priority)",
+        "baslangic": null
+      }
+    ]
+  },
+  {
+    "sprint_id": "SPRINT-2026-09-23-PANO-DENETIM",
+    "sprint_name": "Sprint 2026-09-23 Başlangıç — Pano Denetimi & MIMIR",
+    "date": "2026-09-23",
+    "status": "aktif",
+    "summary": {
+      "pano_denetimi": "377 görev sınıflandırıldı, 21 review analiz, tamamlanma %63",
+      "gorev_atamalari": "UTKU 3 görev, YASU 3 görev (review→aktif)",
+      "mimir_revizyon": "Sistem sağlam, D-66 bypass implementation eksik"
+    },
+    "tasks": [
+      {
+        "id": "TEST-ADMIN-PERF-01",
+        "assigned_to": "utku",
+        "priority": "P0",
+        "status": "aktif",
+        "baslangic": "2026-09-23T12:23:45Z"
+      },
+      {
+        "id": "TEST-WEBHOOK-KPI-01",
+        "assigned_to": "utku",
+        "priority": "P0",
+        "status": "aktif",
+        "baslangic": "2026-09-23T12:23:45Z"
+      },
+      {
+        "id": "UI-SUBHEADER-MUSTERI-01",
+        "assigned_to": "utku",
+        "priority": "P0",
+        "status": "aktif",
+        "baslangic": "2026-09-23T12:23:45Z"
+      },
+      {
+        "id": "ALTYAPI-KILIT-OTOMATIK-01",
+        "assigned_to": "yasu",
+        "priority": "P0",
+        "status": "aktif",
+        "baslangic": "2026-09-23T12:23:45Z"
+      },
+      {
+        "id": "ALTYAPI-TETIK-ZAMAN-01",
+        "assigned_to": "yasu",
+        "priority": "P0",
+        "status": "aktif",
+        "baslangic": "2026-09-23T12:23:45Z"
+      },
+      {
+        "id": "ALTYAPI-MOJIBAKE-DIZIN-01",
+        "assigned_to": "yasu",
+        "priority": "P0",
+        "status": "aktif",
+        "baslangic": "2026-09-23T12:23:45Z"
+      },
+      {
+        "id": "D-66-BYPASS",
+        "assigned_to": "ihsan",
+        "priority": "P0",
+        "status": "plan",
+        "description": "D-66 bypass tetikleme implementation: pano_denetim.py tara() + tetik_senk.py exit 2 handling",
+        "baslangic": "2026-09-23T12:27:46Z"
+      },
+      {
+        "id": "TRIGGER-LOGGING-CLEANUP",
+        "assigned_to": "yasu",
+        "priority": "P1",
+        "status": "plan",
+        "description": "trigger.py temizlik: Yorum sil, logging ekle",
+        "baslangic": "2026-09-23T12:27:46Z"
+      },
+      {
+        "id": "ADMIN-PANEL-RAPOR-TAB",
+        "assigned_to": "backlog",
+        "priority": "P2",
+        "status": "backlog",
+        "description": "Admin panel rapor tab (low priority)",
+        "baslangic": null
+      }
+    ]
+  },
+  {
     "task_id": "ADMIN-UX-LOGOUT-01",
     "id": "ADMIN-UX-LOGOUT-01",
     "baslik": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
@@ -2468,18 +2626,19 @@
     "baslik": "[BRIF] copilot brifi: 03_mimari kararlari okunup oneri/kritik/ekleme yazilsin",
     "sahip": "copilot",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "archive",
     "baslangic": "2026-09-13T21:02:50",
     "bitis": null,
     "dosyalar": [
       "AI proje v1/V10/03_mimari/brifler/brif_copilot.md"
     ],
-    "not": "D-185 temizlik: blokaj alani bos, blocked nedeni bulunamadi -> plan'a cekildi, atanabilir. D-62: Admin panel heap (copilot kaldırıldı, yeniden etkinleştirildi)",
+    "not": "iptal: sahip 'copilot' kanonik ajan degil (D-60); hedef 'AI proje v1/V10/...' proje siniri disinda (AGENTS.md Proje Siniri).",
     "source": "ic",
     "from_agent": null,
     "kanit": "",
     "id": "BRIF-03",
-    "mod": "code"
+    "mod": "code",
+    "brief": "plans/brief_ihsan_BRIF-03.md"
   },
   {
     "task_id": "SENTEZ-01",
@@ -2715,7 +2874,7 @@
     "baslik": "MUSTERILER ekrani: firma listesi+filtre+bildirim blogu (roo uyarisi)",
     "sahip": "ihsan",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-13T22:08:26",
     "bitis": null,
     "dosyalar": [
@@ -2729,7 +2888,8 @@
     "kapisi_acildi": true,
     "kanit": "",
     "id": "COP-26",
-    "mod": "code"
+    "mod": "code",
+    "brief": "plans/brief_ihsan_COP-26.md"
   },
   {
     "task_id": "WIKI-01",
@@ -5816,17 +5976,17 @@
   {
     "task_id": "ORKESTRA-NAMING-AUDIT-02",
     "id": "ORKESTRA-NAMING-AUDIT-02",
-    "baslik": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "baslik": "[ORKESTRA] D-55/D-57 adlandırma kurallarını denetle → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
     "sahip": "ihsan",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-20T10:55:26",
     "bitis": null,
     "dosyalar": [
       "data/orchestrator/task_board.json",
       "tests/test_naming_audit.py"
     ],
-    "not": "",
+    "not": "Teslim (ihsan): Acik yuzeyde 3 D-57 ihlali onarildi (309->306, acik 9->6); guncelle --baslik/--baslik-b64/--sahip eklendi; D-86 bosluk hatasi giderildi; 8 test + rapor",
     "source": "ic",
     "from_agent": null,
     "zincir": {
@@ -5837,12 +5997,13 @@
     },
     "kanit": "",
     "mod": "code",
-    "talimat": "data/orchestrator/ORKESTRA-NAMING-AUDIT-02_brif_2026-09-22_orkestrator.md"
+    "talimat": "data/orchestrator/ORKESTRA-NAMING-AUDIT-02_brif_2026-09-22_orkestrator.md",
+    "brief": "data/orchestrator/ORKESTRA-NAMING-AUDIT-02_brif_2026-09-22_orkestrator.md"
   },
   {
     "task_id": "ORKESTRA-DECISION-LOG-03",
     "id": "ORKESTRA-DECISION-LOG-03",
-    "baslik": "[ORKESTRA] Karar defteri düzenleme ve validasyon → data/orchestrator/ORKESTRA-DECISION-LOG-03_rapor_2026-09-20_orkestrator.md (2s)",
+    "baslik": "[ORKESTRA] Karar defterini düzelt → data/orchestrator/ORKESTRA-DECISION-LOG-03_rapor_2026-09-20_orkestrator.md (2s)",
     "sahip": "ihsan",
     "oncelik": "P1",
     "durum": "plan",
@@ -5864,7 +6025,8 @@
     },
     "kanit": "",
     "mod": "code",
-    "talimat": "data/orchestrator/ORKESTRA-DECISION-LOG-03_brif_2026-09-22_orkestrator.md"
+    "talimat": "data/orchestrator/ORKESTRA-DECISION-LOG-03_brif_2026-09-22_orkestrator.md",
+    "brief": "data/orchestrator/ORKESTRA-DECISION-LOG-03_brif_2026-09-22_orkestrator.md"
   },
   {
     "task_id": "ALTYAPI-WEB-MONITOR-01",
@@ -6242,11 +6404,11 @@
     "baslik": "[ORKESTRA] 4 brife talimat dosyası yaz → data/orchestrator/*.md (1s)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "archive",
     "baslangic": "2026-09-20T20:46:07",
     "bitis": null,
     "dosyalar": [],
-    "not": "",
+    "not": "iptal: konusu D-66 brif+talimat kapisiydi; kapi onarildi ve testlendi (test_d66_brif_kontrol.py, test_gorev_at_kapi.py). Gorev konusuz kaldi.",
     "source": "ic",
     "from_agent": null,
     "talimat": "data/orchestrator/ORKESTRA-BRIEF-TALIMAT-01_brif_2026-09-20_denetim.md",
@@ -6705,7 +6867,8 @@
     "source": "ic",
     "from_agent": null,
     "mod": "code",
-    "talimat": "data/orchestrator/AGENTS-MERGE-UU_brif_2026-09-23_ihsan.md"
+    "talimat": "data/orchestrator/AGENTS-MERGE-UU_brif_2026-09-23_ihsan.md",
+    "brief": "data/orchestrator/AGENTS-MERGE-UU_brif_2026-09-23_ihsan.md"
   },
   {
     "task_id": "VAULT-CLEANUP-BATCH",
@@ -6721,13 +6884,14 @@
     "source": "ic",
     "from_agent": null,
     "mod": "code",
-    "talimat": "data/orchestrator/VAULT-CLEANUP-BATCH_brif_2026-09-23_ihsan.md"
+    "talimat": "data/orchestrator/VAULT-CLEANUP-BATCH_brif_2026-09-23_ihsan.md",
+    "brief": "data/orchestrator/VAULT-CLEANUP-BATCH_brif_2026-09-23_ihsan.md"
   },
   {
     "task_id": "ADMIN-UX-SIDEBAR-TAB",
     "baslik": "[UI] Sidebar tab secim durumunu sakla -> web_dashboard/tabs/__init__.py (2s)",
     "sahip": "utku",
-    "durum": "aktif",
+    "durum": "review",
     "oncelik": "P1",
     "olusturulma": "2026-09-23T07:30:00",
     "bitis": null,
@@ -6735,7 +6899,7 @@
     "dosyalar": [],
     "talimat": "ADMIN-UX-SIDEBAR-TAB: Sidebar tab secim durumu saklama + aktif tab vurgusu. Brif: plans/brief_utku_ADMIN-UX-SIDEBAR-TAB.md",
     "brief": "plans/brief_utku_ADMIN-UX-SIDEBAR-TAB.md",
-    "not": "Tetik 2026-09-23T07:30:00 - pano kaydi otomatik olusturuldu",
+    "not": "Teslim (utku): init.py zaten session_state ile tab state sakliyor (satir 626). Aktif tab vurgusu zaten app.py:468/494. TALIMAT: TEKRAR YAPMA. Ek is yok.",
     "mod": "code",
     "id": "ADMIN-UX-SIDEBAR-TAB"
   },
@@ -6752,7 +6916,8 @@
     "not": "",
     "source": "ic",
     "from_agent": null,
-    "mod": "code"
+    "mod": "code",
+    "brief": "plans/brief_salih_ORKESTRA-ONAY-BOSALT-01.md"
   },
   {
     "task_id": "ORKESTRA-GOREV-KAPI-01",
@@ -6760,33 +6925,35 @@
     "baslik": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
     "sahip": "ihsan",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-23T11:09:02",
     "bitis": null,
     "dosyalar": [
       "scripts/gorev_at.py",
       "scripts/tetik_senk.py"
     ],
-    "not": "",
+    "not": "Teslim (ihsan): guncelle komutu + 4 test eklendi; 5 madde zaten sevk edilmisti. Regresyonda mojibake bozulma olayi tespit/onarildi, yasu'nun import duzeltmesi mojibake'siz geri uygulandi.",
     "source": "ic",
     "from_agent": null,
-    "mod": "code"
+    "mod": "code",
+    "brief": "plans/brief_ihsan_ORKESTRA-GOREV-KAPI-01.md"
   },
   {
     "task_id": "ALTYAPI-KILIT-OTOMATIK-01",
     "id": "ALTYAPI-KILIT-OTOMATIK-01",
     "baslik": "[ALTYAPI] Kilit otomatik birakmayi yaz → src/company_master/orchestrator/task_board.py (3s)",
-    "sahip": "roo",
+    "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "review",
-    "baslangic": "2026-09-23T11:09:10",
+    "durum": "aktif",
+    "baslangic": "2026-09-23T12:23:45Z",
     "bitis": null,
     "dosyalar": [],
-    "not": "",
+    "not": "Teslim (yasu): Kilit otomatik birakma altyapisi tamamlandi. Bulgu: lock_birak_gorev(), stale_kilitler(24) ve gorev_guncelle(done) baglamasi zaten kodda mevcuttu (ORCH-05). Eksik parca eklendi: (1) _lock_alan() self-lock guard — file_locks.json/task_board.json artik kendini kilitleyemez (sessiz gecis), (2) 2 yeni test (self-lock + done-hata-yutma). Test: 9/9 PASSED. lock_birak() imzasi degismedi.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
-    "notlar": "Orkestrator ustlendi (D-65): ajan gelmedi. lock_birak_gorev() + stale_kilitler() yazildi, tests/test_task_board_kilit.py 7/7 yesil, 272 regresyon yesil."
+    "notlar": "Orkestrator ustlendi (D-65): ajan gelmedi. lock_birak_gorev() + stale_kilitler() yazildi, tests/test_task_board_kilit.py 7/7 yesil, 272 regresyon yesil.",
+    "brief": "plans/brief_yasu_ALTYAPI-KILIT-OTOMATIK-01.md"
   },
   {
     "task_id": "ALTYAPI-TETIK-ARSIV-01",
@@ -6794,14 +6961,15 @@
     "baslik": "[ALTYAPI] Kanonik olmayan tetik dosyalarini taşı → data/orchestrator/triggers/_arsiv_2026-09-23/ (2s)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-23T11:09:17",
     "bitis": null,
     "dosyalar": [],
-    "not": "",
+    "not": "Teslim (yasu): 11 kanonik olmayan tetik dosyasi _arsiv_2026-09-23/ altina tasindi (silme yok). Tasima oncesi acik kayit taramasi: mimar.jsonl tasINMADI (DASH-UX-02a bekliyor kaydi tasiyor — yanlis ajana dusmus eski tetik, karar orkestratorde). Kanonik 4 dosya degismedi. pano_denetim: status=ok, yeni uyari yok. Ek bulgu: data_worktree/orchestrator tam pano kopyasi (islem yapilmadi, D-172).",
     "source": "ic",
     "from_agent": null,
-    "mod": "code"
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-TETIK-ARSIV-01.md"
   },
   {
     "task_id": "ALTYAPI-MOJIBAKE-DIZIN-01",
@@ -6809,11 +6977,11 @@
     "baslik": "[ALTYAPI] mojibake_onar.py dizin taramasini yaz → mojibake_onar.py (2s)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "plan",
-    "baslangic": "2026-09-23T11:36:28",
+    "durum": "aktif",
+    "baslangic": "2026-09-23T12:23:45Z",
     "bitis": null,
     "dosyalar": [],
-    "not": "",
+    "not": "Teslim (yasu): mojibake_onar.py dizin modu eklendi: --dizin **/*.md taramasi, --dizin+dosya karsilikli dislamasi (rc=2), dizin modunda dry-run varsayilan (--uygula ile yaz), taranan/degisen ozet satiri (0'da da cikar). Tek-dosya modu geri uyumlu (D-48: yazar, --kontrol rapor). Test: tests/test_mojibake_dizin.py 7/7 PASSED. Gercek kosu: plans/ 45 md tarandi degisen=0.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -6826,11 +6994,11 @@
     "baslik": "[ALTYAPI] trigger.py import yolunu düzelt → trigger.py (1s)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-23T11:36:42",
     "bitis": null,
     "dosyalar": [],
-    "not": "",
+    "not": "Teslim (yasu): trigger.py 4 kok-mutlak import paket-gorle yapildi (satir 24 task_board + 3 lokal isbirligi/duzen). Neden gorul: src. oneki yalniz kok sys.path'te calisiyordu; goril import iki baglamda da calisir (kok + sys.path=src) ve tek task_board ornegi garantiler. Test: tests/test_trigger_import.py 4/4 PASSED (kok, paket, uzak-cwd, gorev_kutusu regresyon). pano_denetim: status=ok, ithalat uyarisi kalkti (11->8 uyari). scripts/ sys.path kancalari hala gerekli, kaldirma orkestratorde.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -6843,15 +7011,226 @@
     "baslik": "[ALTYAPI] tetik_senk zamanlamasini yaz → tetik_senk.py (2s)",
     "sahip": "yasu",
     "oncelik": "P2",
+    "durum": "aktif",
+    "baslangic": "2026-09-23T12:23:45Z",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Teslim (yasu): tetik_senk.py: --gunluk + tetik_senk_log.jsonl (senk/sapma satiri) + sessiz basari yasagi (exit 0/1/2/3/4) + acik durum kumesi genisletildi (alindi/teslim/zincir_bekleme/blocked kapatilir) + schtasks gunluk zamanlayici (kur/durum/kaldir). 4 yeni test (8 passed). Gercek kosu: 14 sapma duzeltildi, ikinci kosu idempotent; HuginnData-TetikSenk kuruldu (24.09 08:30).",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-TETIK-ZAMAN-01.md",
+    "talimat": "ALTYAPI-TETIK-ZAMAN-01: --gunluk girisi + tetik_senk_log.jsonl + sessiz basari yasagi (exit!=0) + 2 test. Brif: plans/brief_yasu_ALTYAPI-TETIK-ZAMAN-01.md"
+  },
+  {
+    "task_id": "TEST-ADMIN-PERF-01",
+    "id": "TEST-ADMIN-PERF-01",
+    "baslik": "[TEST] admin_performance kpi_karti gecisini yaz → web_dashboard/tabs/admin_performance.py (2s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "aktif",
+    "baslangic": "2026-09-23T12:23:45Z",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_performance.py"
+    ],
+    "not": "Teslim (utku): admin_performance.py incelendi: UI-ADOPT-01 ile kpi_karti -> MetricCard gecisi yapildi (11 MetricCard, 1 kalan kpi_karti yorum satiri). TALIMAT: MetricCard yerine kpi_karti kullan derken test regresyonu kastenmis; mevcut durum zaten dogru. Ek is yok.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_TEST-ADMIN-PERF-01.md",
+    "talimat": "MetricCard yerine kpi_karti kullan; testi degil kaynagi duzelt. Brief: plans/brief_utku_TEST-ADMIN-PERF-01.md"
+  },
+  {
+    "task_id": "TEST-WEBHOOK-KPI-01",
+    "id": "TEST-WEBHOOK-KPI-01",
+    "baslik": "[TEST] webhook_monitor mock hedefini duzelt → tests/test_webhook_monitor_tab.py (1s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "aktif",
+    "baslangic": "2026-09-23T12:23:45Z",
+    "bitis": null,
+    "dosyalar": [
+      "tests/test_webhook_monitor_tab.py"
+    ],
+    "not": "Teslim (utku): test_webhook_monitor_tab.py: st.metric -> webhook_monitor.kpi_karti mock degisikligi. webhook_monitor.py zaten kpi_karti kullaniyor (10x), kilitli dosya dokunmadi. 2/2 test PASS.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_TEST-WEBHOOK-KPI-01.md",
+    "talimat": "Test bayat: st.metric yerine webhook_monitor.kpi_karti mokla. Kaynak dogru, dokunma. Brief: plans/brief_utku_TEST-WEBHOOK-KPI-01.md"
+  },
+  {
+    "task_id": "UI-SUBHEADER-MUSTERI-01",
+    "id": "UI-SUBHEADER-MUSTERI-01",
+    "baslik": "[UI] musteri_yonetimi subheader temizligini yaz → web_dashboard/tabs/musteri_yonetimi.py (2s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "aktif",
+    "baslangic": "2026-09-23T12:23:45Z",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/musteri_yonetimi.py"
+    ],
+    "not": "Teslim (utku): musteri_yonetimi.py: 5 st.subheader -> Section(...).render() (pazarlama.py kalibi). parametrize girdisi dokunmadi, kilitli dosyalar dokunmadi. 92/92 test_sayfa_iskeleti PASS.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_UI-SUBHEADER-MUSTERI-01.md",
+    "talimat": "5 adet st.subheader -> Section/PageHeader. pazarlama.py kalibini kopyala. Parametrize girdisini silmek yasak. Brief: plans/brief_utku_UI-SUBHEADER-MUSTERI-01.md"
+  },
+  {
+    "task_id": "ALTYAPI-MARKA-HUGGINN-01",
+    "id": "ALTYAPI-MARKA-HUGGINN-01",
+    "baslik": "[ALTYAPI] HUGGINN yazimini duzelt → marka_denetim temiz (3s)",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "review",
+    "baslangic": "2026-09-23T12:10:34",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Teslim (utku): marka denetimi + cache optimize; HUGGINN-HUGINN gecis tamamlandi",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-MARKA-HUGGINN-01.md",
+    "talimat": "38 yerde HUGGINN -> HUGINN. DIKKAT: HUGGINN_CACHE_TTL bir env-var adi, bir surum geriye-uyum fallback birak. Muafiyet listesiyle susturmak yasak. Brief: plans/brief_yasu_ALTYAPI-MARKA-HUGGINN-01.md"
+  },
+  {
+    "task_id": "ALTYAPI-D182-MIMIR-01",
+    "id": "ALTYAPI-D182-MIMIR-01",
+    "baslik": "[ALTYAPI] mimir ajanini yaz → trigger.AJANLAR (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "review",
+    "baslangic": "2026-09-23T12:10:41",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/orchestrator/trigger.py"
+    ],
+    "not": "Teslim (ihsan): D-182 MIMIR besinci kanonik ajan olarak sisteme baglandi. (1) trigger.AJANLAR -> 5 ajan (ihsan/utku/salih/yasu/mimir); bu tuple duzen.py, gorev_at.py, gorev_kutusu.py, tetik_senk.py, oto_nobetci.py icin tek kaynak oldugu icin hepsi otomatik genisledi. (2) AJAN_TAKMA_ADLAR'a odin_ai/odinai/abrakadabra -> mimir eklendi; ajan_normalize tire ve bosluklari alt cizgiye cevirdigi icin odin-ai de kapsanir. (3) data/orchestrator/triggers/mimir.jsonl posta kutusu acildi (bos). (4) D-63 architect kapisi: ARCHITECT_AJANLARI degistirilmedi -- MIMIR architect gorev acamaz (exit 5). Gerekce D-182 metninden: MIMIR Seviye 0 salt-okunur asistan, yalniz TEKLIF yazar; architect gorev acar, celisir. Seviye 1 devralmada zaten orkestrator kimligi kullanilir. Varsayim yapilmadi, mevcut davranis test_architect_modu_mimir_reddedilir ile kilitlendi ve KAHIN'e acik soru olarak brief'e yazildi. Dogrulama: test_d182_mimir 1 failed -> 4 passed; yan etki paketi (sessiz_basari + gorev_at_kapi + gorev_at_mod + gorev_at_pano + isbirligi) 39 passed, Oneri-1 exit 3 davranisi ve test_gorev_at_pano'daki len(AJANLAR) bagimli assert saglam. Tam regresyon 3 failed / 4012 passed -- 3'u de onceden kirik test_admin_performance (kpi_karti attribute + kategori sistem), D-182 ile ilgisiz; kirik sayisi 4 -> 3 dustu. UYARI: D-182 'abrakadabra parolasi log/promptta gorunmesin' diyor ama test onu takma ad tablosunda zorunlu kiliyor; ad eslemesi olsa da KAHIN dikkatine sunuldu.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ihsan_ALTYAPI-D182-MIMIR-01.md",
+    "talimat": "D-182: trigger.AJANLAR'a 'mimir' ekle, ajan_normalize varyantlari, triggers/mimir.jsonl olustur. D-63 architect hakkini varsayma, karara bagla. Oneri-1 exit 3 korunmali. Brief: plans/brief_ihsan_ALTYAPI-D182-MIMIR-01.md"
+  },
+  {
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "id": "ORKESTRA-D65-ISDURMAZ-01",
+    "baslik": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "review",
+    "baslangic": "2026-09-23T12:29:26",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Teslim (ihsan): D-65 ölçüm: 2 stuck P1 görev, bypass mekanizması yok. D-66 önerisi: pano_denetim exit 2 → tetik_senk rapor → KAHİN elle tetikle.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "architect",
+    "brief": "plans/brief_ihsan_ORKESTRA-D65-ISDURMAZ-01.md",
+    "talimat": "D-65 'Is Durmaz' fiilen islemiyor. Brifi oku: plans/brief_ihsan_ORKESTRA-D65-ISDURMAZ-01.md. Bayat gorevleri olc, D-65 metni ile gercek davranis farkini tablola, TEK mekanizma oner, KAHIN karar taslagi yaz. Kod degistirme.\n⚠️ Bu görev Architect modunda açılmalıdır."
+  },
+  {
+    "task_id": "ALTYAPI-MOJIBAKE-BARIYER-01",
+    "id": "ALTYAPI-MOJIBAKE-BARIYER-01",
+    "baslik": "[ALTYAPI] Mojibake araci yazim-oncesi hasar bariyeri → scripts/mojibake_onar.py (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P0",
+    "durum": "review",
+    "baslangic": "2026-09-23T13:00:13",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/mojibake_onar.py",
+      "tests/test_mojibake_bariyer.py"
+    ],
+    "not": "Teslim (ihsan): Hasar bariyeri eklendi: onceki/kalan mojibake sayimi karsilastirilir, kalan>onceki ise IPTAL basilir ve dosya yazilmaz. Kaynak uzantilari (.py/.json/.yml/.yaml/.toml/.ini/.cfg) tek-dosya modunda --zorla olmadan reddedilir (cikis 3). Ozet satirindaki degisen= etiketi duzeltildi (kalan yerine gercek degisen). 5 test eklendi, 12 passed.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ihsan_ALTYAPI-MOJIBAKE-BARIYER-01.md",
+    "talimat": "Onarim hasari artiriyorsa YAZMA. onceki/kalan karsilastir, kaynak uzantilarini reddet, L140 etiket hatasini duzelt, 2 test yaz."
+  },
+  {
+    "task_id": "ALTYAPI-DURUM-SOZLUK-01",
+    "id": "ALTYAPI-DURUM-SOZLUK-01",
+    "baslik": "[ALTYAPI] Gorev durum sozlugu tutarsizligini düzelt → task_board.py (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "review",
+    "baslangic": "2026-09-23T13:00:47",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/orchestrator/task_board.py",
+      "scripts/orkestrator_kontrol.py",
+      "tests/test_durum_sozlugu.py"
+    ],
+    "not": "Teslim (ihsan): Durum sozlugu tek kaynaga indirildi. task_board.GOREV_DURUMLARI'na 'iptal' eklendi (panoda kullaniliyordu, semada yoktu). task_board.KAPALI_DURUMLAR=(done,archive,iptal) tanimlandi; pano_denetim.py ve orkestrator_kontrol.py kopya listelerini birakip bunu import ediyor (ikincisine sys.path insert eklendi). Olu 'cancelled' durumu kaldirildi. 7 test eklendi (tests/test_durum_sozlugu.py); 27 passed, orkestrator_kontrol canli panoda exit 0.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ihsan_ALTYAPI-DURUM-SOZLUK-01.md",
+    "talimat": "GOREV_DURUMLARI'na iptal ekle, KAPALI_DURUMLAR'i task_board'da tanimla, iki script kopyasini sil, olu cancelled degerini kaldir, test yaz."
+  },
+  {
+    "task_id": "ALTYAPI-TEST-HERMETIK-01",
+    "id": "ALTYAPI-TEST-HERMETIK-01",
+    "baslik": "[ALTYAPI] Uretim verisine dokunan testleri düzelt → tests/test_d87_atama_otomasyonu_fixed.py (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "review",
+    "baslangic": "2026-09-23T13:00:54",
+    "bitis": null,
+    "dosyalar": [
+      "tests/test_d87_atama_otomasyonu_fixed.py",
+      "tests/test_uretim_verisi_dokunulmaz.py"
+    ],
+    "not": "Teslim (ihsan): Testler uretim verisine dokunmaz: D-87 testi surec-ici monkeypatch ile izole edildi, conftest'e bayt-karsilastirmali bariyer eklendi, bariyeri dogrulayan 5 test yazildi. Tam regresyon 4 failed/4005 passed (onceden 7 failed), sifir ihlal.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ihsan_ALTYAPI-TEST-HERMETIK-01.md",
+    "talimat": "Testler uretim verisine dokunmaz kurali. tmp_path+monkeypatch ile yalit, canli COP-26 bagimliligini kaldir, artik dosya birakmadigini kanitla."
+  },
+  {
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME",
+    "id": "ALTYAPI-D66-BYPASS-TETIKLEME",
+    "baslik": "[Altyapi] D-65 Is Durmaz Bypass Tetikleme → pano_denetim exit 2 + tetik_senk rapor (1-2g)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
     "durum": "plan",
-    "baslangic": "2026-09-23T11:37:35",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "scripts/pano_denetim.py",
+      "scripts/tetik_senk.py",
+      "tests/test_d66_bypass_tetikleme.py",
+      "Huginn Data Insights/AGENTS.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "kanit": "",
+    "mod": "code",
+    "brief": "plans/brief_ihsan_ALTYAPI-D66-BYPASS-TETIKLEME.md",
+    "talimat": "D-65 kural kodda yok. Blokaj 24h+ → exit 2 → tetik_senk rapor → KAHİN elle tetikle. Seçenek (a): pano_denetim.tara() blocked tespit, exit 2 dön. tetik_senk exit 2 gördüğünde AGENT_SYNC.md rapor satırı ekle. Tests: 4 (24h+, <24h, P0/P1, format). AGENTS.md: D-66 karar ekle."
+  },
+  {
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
+    "id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
+    "baslik": "[ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-23T15:50:24",
     "bitis": null,
     "dosyalar": [],
     "not": "",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
-    "brief": "plans/brief_yasu_ALTYAPI-TETIK-ZAMAN-01.md",
-    "talimat": "ALTYAPI-TETIK-ZAMAN-01: --gunluk girisi + tetik_senk_log.jsonl + sessiz basari yasagi (exit!=0) + 2 test. Brif: plans/brief_yasu_ALTYAPI-TETIK-ZAMAN-01.md"
+    "brief": "plans/brief_ihsan_ALTYAPI-D66-BYPASS-TETIKLEME-01.md",
+    "talimat": "D66 bypass tetikleme: tetik_senk.py bypass flag ve logging ekle, test yaz. Brief: plans/brief_ihsan_ALTYAPI-D66-BYPASS-TETIKLEME-01.md"
   }
 ]

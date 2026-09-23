@@ -78,6 +78,46 @@ def test_eski_brif_konumu_da_kabul(temiz, tmp_path):
     assert temiz["brief"].startswith("data/orchestrator/TEST-KAPI-01_brif_")
 
 
+def _gargs(**kw):
+    tabanl = dict(task_id="TEST-KAPI-01", brief=None, talimat=None,
+                  oncelik=None, durum=None, cagiran="ihsan")
+    tabanl.update(kw)
+    return _Args(**tabanl)
+
+
+def test_guncelle_olmayan_brif_reddeder(temiz, monkeypatch, capsys):
+    """D-66: brief alani diskte olmayan dosyayi gosteremez."""
+    cagrildi: list = []
+    monkeypatch.setattr(ga.tb, "gorev_guncelle", lambda *a, **k: cagrildi.append(a) or {})
+    assert ga.cmd_guncelle(_gargs(brief="plans/yok.md")) == 6
+    assert "D-66" in capsys.readouterr().err
+    assert not cagrildi, "reddedilen guncelleme panoya yazilmamali"
+
+
+def test_guncelle_alansiz_cagri_reddeder(temiz, capsys):
+    """Sessiz basari yasagi: hicbir alan yoksa 0 donmez."""
+    assert ga.cmd_guncelle(_gargs()) == 1
+    assert "guncellenecek alan yok" in capsys.readouterr().err
+
+
+def test_guncelle_gorev_yoksa_sifir_donmez(temiz, monkeypatch, capsys):
+    """gorev_guncelle None donerse 0 kayit != basari."""
+    monkeypatch.setattr(ga.tb, "gorev_guncelle", lambda *a, **k: None)
+    assert ga.cmd_guncelle(_gargs(oncelik="P1")) == 1
+    assert "panoda yok" in capsys.readouterr().err
+
+
+def test_guncelle_var_olan_brif_gecer(temiz, tmp_path, monkeypatch, capsys):
+    (tmp_path / "plans" / "brief_yasu_TEST-KAPI-01.md").write_text("x", encoding="utf-8")
+    gelen: dict = {}
+    monkeypatch.setattr(ga.tb, "gorev_guncelle",
+                        lambda tid, durum=None, **k: gelen.update(k, task_id=tid) or {"task_id": tid})
+    assert ga.cmd_guncelle(_gargs(brief="plans/brief_yasu_TEST-KAPI-01.md")) == 0
+    # Yol POSIX ve KOK'e goreli kalmali (Windows ters bolu sizmasin).
+    assert gelen["brief"] == "plans/brief_yasu_TEST-KAPI-01.md"
+    assert "GUNCELLENDI" in capsys.readouterr().out
+
+
 def test_gorev_ekle_brief_talimat_kabul_eder():
     """Mock kaymasi tuzagi: gercek imza brief/talimat almazsa uretimde TypeError.
 

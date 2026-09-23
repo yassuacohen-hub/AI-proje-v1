@@ -4,25 +4,31 @@
 Kapsam:
   1. cache_get / cache_set temel akis (hit/miss)
   2. TTL sonrasi expiry
-  3. HUGGINN_CACHE_TTL env ayari
+  3. HUGINN_CACHE_TTL env ayari
   4. Bos sonuc negatif cache'lenmemesi
   5. Cache boyut siniri (eviction)
   6. admin_cache decorator (fallback ile)
+  7. Marka yazim gecisi: eski env adi bir surum boyunca fallback okunur
 """
-from __future__ import annotations
 
-import importlib
-import time
-from types import SimpleNamespace
+#: Marka yazim gecisi: eski ad DIS SOZLESME (marka yazimi degil) — gecis donemi
+#: testi. Yalnizca degeri TASIYAN satirlar istisna tasir; kullanim satirlari
+#: istisnasizdir (bkz. test_marka_denetim_muafiyet.py::test_muafiyet_susturmaya_donusmez).
+ESKI_TTL_ENV = "HUGGINN_CACHE_TTL"  # marka-muaf: dis sozlesme (deprecated env adi)
+ESKI_MAX_ENV = "HUGGINN_CACHE_MAX_ENTRIES"  # marka-muaf: dis sozlesme (deprecated env adi)
 
-import pytest
+import importlib  # noqa: E402
+
+import pytest  # noqa: E402
 
 
 @pytest.fixture()
 def webapp(monkeypatch):
     """web_app modulunu izole yukle (env resetli)."""
-    monkeypatch.delenv("HUGGINN_CACHE_TTL", raising=False)
-    monkeypatch.delenv("HUGGINN_CACHE_MAX_ENTRIES", raising=False)
+    monkeypatch.delenv("HUGINN_CACHE_TTL", raising=False)
+    monkeypatch.delenv("HUGINN_CACHE_MAX_ENTRIES", raising=False)
+    monkeypatch.delenv(ESKI_TTL_ENV, raising=False)
+    monkeypatch.delenv(ESKI_MAX_ENV, raising=False)
     import web_app  # noqa: E402
 
     importlib.reload(web_app)
@@ -52,17 +58,33 @@ class TestCacheTemel:
 
 class TestTtlEnv:
     def test_env_ttl_oku(self, monkeypatch):
-        monkeypatch.setenv("HUGGINN_CACHE_TTL", "42")
+        monkeypatch.setenv("HUGINN_CACHE_TTL", "42")
         import web_app
         importlib.reload(web_app)
         assert web_app._CACHE_TTL == 42
 
     def test_env_ttl_gecersiz_deger_crash_etmez(self, monkeypatch):
         # int() crash ederse modul yuklenmez — davranis belgelenir
-        monkeypatch.setenv("HUGGINN_CACHE_TTL", "abc")
+        monkeypatch.setenv("HUGINN_CACHE_TTL", "abc")
         with pytest.raises(ValueError):
             import web_app
             importlib.reload(web_app)
+
+    def test_eski_env_adi_fallback_okunur(self, monkeypatch):
+        """Marka yazim gecisi: yeni ad yokken eski ad okunmaya devam eder."""
+        monkeypatch.delenv("HUGINN_CACHE_TTL", raising=False)
+        monkeypatch.setenv(ESKI_TTL_ENV, "77")
+        import web_app
+        importlib.reload(web_app)
+        assert web_app._CACHE_TTL == 77
+
+    def test_yeni_ad_eski_adi_ezer(self, monkeypatch):
+        """Yeni ad varsa eski ad yok sayilir (gecis donemi onceligi)."""
+        monkeypatch.setenv("HUGINN_CACHE_TTL", "11")
+        monkeypatch.setenv(ESKI_TTL_ENV, "99")
+        import web_app
+        importlib.reload(web_app)
+        assert web_app._CACHE_TTL == 11
 
 
 class TestNegatifCache:

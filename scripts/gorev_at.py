@@ -140,9 +140,12 @@ def _orkestrator_kapisi(cagiran: str | None) -> str | None:
     ponytail: çağıran belirtilmezse kapı geçirgen (geriye uyumluluk).
     Kimliği zorunlu kılmak için `ORKESTRA_AJAN` env'i her ajan kabuğunda sabitlenmeli.
     """
+    # D-86: cmd.exe'de "set ORKESTRA_AJAN=roo && ..." degere sondaki boslugu
+    # katar ('roo ') ve kapi aktif orkestratoru kendi kimliginden reddeder.
+    cagiran = (cagiran or "").strip()
     if not cagiran:
         return None
-    aktif = _orkestrator_oku().get("ajan") or _VARSAYILAN_ORKESTRATOR
+    aktif = (_orkestrator_oku().get("ajan") or _VARSAYILAN_ORKESTRATOR).strip()
     if cagiran != aktif:
         return f"gorev atamayi yalniz aktif orkestrator yapar; aktif: '{aktif}', cagiran: '{cagiran}'"
     return None
@@ -299,6 +302,77 @@ def cmd_at(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_guncelle(args: argparse.Namespace) -> int:
+    """D-87: brief/talimat/oncelik/durum duzeltmesi icin tek komut.
+
+    Elle script yazmayi bitirir. Sessiz basari yasak: hicbir alan verilmediyse
+    ya da gorev yoksa sifirdan farkli doner.
+    """
+    kapi = _orkestrator_kapisi(getattr(args, "cagiran", None) or os.getenv("ORKESTRA_AJAN"))
+    if kapi:
+        print(f"HATA (D-58): {kapi}", file=sys.stderr)
+        return 4
+
+    alanlar: dict[str, str] = {}
+    # Eski cagiranlarin namespace'inde --sahip yok; dogrudan okumak AttributeError.
+    sahip = getattr(args, "sahip", None)
+    # NAMING-AUDIT-02: D-57 ihlalli eski basliklar elle duzeltilemiyordu; tek
+    # yol pano JSON'una dokunmakti (D-77 ihlali). Basligi buradan gecirince
+    # ayni _d57_dogrula kapisindan gecer -- ihlalin yerine ihlal koyulamaz.
+    if getattr(args, "baslik", None) or getattr(args, "baslik_b64", None):
+        hata = _baslik_coz(args)
+        if hata:
+            print(f"HATA: {hata}", file=sys.stderr)
+            return 1
+        mevcut = tb.gorev_getir(args.task_id)
+        if mevcut is None:
+            print(f"HATA: gorev panoda yok: {args.task_id}", file=sys.stderr)
+            return 1
+        ihlal = _d57_dogrula(args.task_id, args.baslik, sahip or mevcut.get("sahip", ""))
+        if ihlal:
+            print(f"HATA (D-57): {ihlal}", file=sys.stderr)
+            return 3
+        alanlar["baslik"] = args.baslik
+    if sahip:
+        if sahip not in AJANLAR:
+            print(
+                f"HATA (D-60): sahip '{sahip}' kanonik degil; izinli: {', '.join(AJANLAR)}",
+                file=sys.stderr,
+            )
+            return 3
+        alanlar["sahip"] = sahip
+    if args.brief:
+        # D-66: brief alani yalnizca diskte var olan dosyayi gosterebilir.
+        yol = KOK / args.brief
+        if not yol.exists():
+            print(f"HATA (D-66): brif dosyasi yok: {args.brief}", file=sys.stderr)
+            return 6
+        alanlar["brief"] = Path(args.brief).as_posix()
+    if args.talimat:
+        alanlar["talimat"] = args.talimat.strip()
+    if args.oncelik:
+        alanlar["oncelik"] = args.oncelik
+    if not alanlar and not args.durum:
+        print(
+            "HATA: guncellenecek alan yok (--baslik/--sahip/--brief/--talimat/--oncelik/--durum)",
+            file=sys.stderr,
+        )
+        return 1
+
+    try:
+        gorev = tb.gorev_guncelle(args.task_id, durum=args.durum, **alanlar)
+    except ValueError as exc:
+        print(f"HATA: {exc}", file=sys.stderr)
+        return 1
+    if gorev is None:  # sessiz basari yasagi: 0 kayit != basari
+        print(f"HATA: gorev panoda yok: {args.task_id}", file=sys.stderr)
+        return 1
+
+    degisen = ", ".join([*alanlar, *(["durum"] if args.durum else [])])
+    print(f"GUNCELLENDI: {args.task_id} ({degisen})")
+    return 0
+
+
 def _kisa_tarih(iso: str | None) -> str:
     """ISO tarihi 'MM-DD HH:MM' formatina kisalir; parse edilemezse ilk 16 karakter."""
     if not iso:
@@ -394,6 +468,19 @@ def main() -> int:
     )
     p_at.add_argument("--cagiran", default=None, help="Komutu veren ajan (D-58 kapısı)")
     p_at.set_defaults(func=cmd_at)
+
+    p_upd = alt.add_parser("guncelle", help="Mevcut görevin alanlarını düzelt (D-87)")
+    p_upd.add_argument("--task-id", required=True)
+    _upd_baslik = p_upd.add_mutually_exclusive_group()
+    _upd_baslik.add_argument("--baslik", default=None, help="Yeni baslik (D-57 dogrulanir)")
+    _upd_baslik.add_argument("--baslik-b64", default=None, help="Yeni baslik utf-8 base64")
+    p_upd.add_argument("--sahip", default=None, help="Sahibi duzelt (kanonik ajan)")
+    p_upd.add_argument("--brief", default=None, help="KÖK'e göreli brif yolu; varlığı doğrulanır")
+    p_upd.add_argument("--talimat", default=None)
+    p_upd.add_argument("--oncelik", default=None, choices=["P0", "P1", "P2", "P3"])
+    p_upd.add_argument("--durum", default=None, choices=list(tb.GOREV_DURUMLARI))
+    p_upd.add_argument("--cagiran", default=None, help="Komutu veren ajan (D-58 kapısı)")
+    p_upd.set_defaults(func=cmd_guncelle)
 
     p_pano = alt.add_parser("pano", help="Tetik + onay kuyruğu özetini göster")
     p_pano.set_defaults(func=cmd_pano)

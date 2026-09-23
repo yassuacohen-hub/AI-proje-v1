@@ -99,3 +99,23 @@ def test_stale_bozuk_tarihi_atlar(izole):
     _kilit_yaz(izole, {"bozuk.py": {"sahip": "utku", "task_id": "T-X",
                                     "kilitlendi": "cop-veri"}})
     assert tb.stale_kilitler(saat=1) == []           # cokmez, sessizce atlar
+
+
+def test_altyapi_kendi_dosyasini_kilitlenemez(izole, monkeypatch):
+    """ALTYAPI-KILIT-OTOMATIK-01 md.4: file_locks.json / task_board.json
+    kendini kilitleme antipattern'i — _lock_alan sessizce gecmeli."""
+    monkeypatch.setattr(tb, "FILE_LOCKS", izole / "file_locks.json")
+    monkeypatch.setattr(tb, "TASK_BOARD", izole / "task_board.json")
+    tb._lock_alan("yasu", "data/orchestrator/file_locks.json", "T-SELF")
+    tb._lock_alan("yasu", "data/orchestrator/task_board.json", "T-SELF")
+    # Izole kilit dosyasi hala bos: kilit KOYULMADI (sessiz gecildi)
+    assert _kilitler(izole) == {}
+
+
+def test_gorev_guncelle_done_kilit_hatasi_loglar_gecer(izole, monkeypatch):
+    """md.2: kilit birakma basarisizsa gorev kapanisi duser — hata firLATMAZ."""
+    tb.gorev_ekle(task_id="T-FAIL", baslik="test", sahip="yasu", dosyalar=["f.py"])
+    monkeypatch.setattr(tb, "lock_birak_gorev",
+                        lambda tid: (_ for _ in ()).throw(RuntimeError("yazim hatasi")))
+    g = tb.gorev_guncelle("T-FAIL", durum="done")
+    assert g["durum"] == "done"                      # hata yutuldu, gorev kapandi

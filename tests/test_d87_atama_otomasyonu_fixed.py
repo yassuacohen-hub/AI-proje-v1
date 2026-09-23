@@ -1,71 +1,104 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Test D-87 atama otomasyonu — `.upper()` büyük/küçük harf hatasını düzeltildi.
-Gereklilik: `DASH-UX-02a` ve `DASH-UX-02b` görevlerinin başarılı atanabilmesi.
+Test D-87 atama otomasyonu — buyuk/kucuk harf duyarsiz gorev arama.
+
+ALTYAPI-TEST-HERMETIK-01: Bu testler URETIM VERISINE DOKUNMAZ.
+Onceki surum betigi subprocess ile cagiriyordu; betik yollarini
+`__file__`'dan turettigi icin `cwd=` hicbir izolasyon saglamiyordu ve
+her kosu canli `data/orchestrator/task_board.json` + tetik kuyrugunu
+yaziyordu. Artik betik surec-icinde yuklenip `root` tmp_path'e baglanir.
 """
 
 from __future__ import annotations
 
-import subprocess
+import importlib.util
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parent.parent
-SCRIPT = ROOT / "scripts" / "gorev_atama_otomatis.py"
+import pytest
+
+KOK = Path(__file__).resolve().parents[1]
 
 
-def _calistir(*args: str) -> subprocess.CompletedProcess:
-    """Script çalıştır."""
-    return subprocess.run(
-        [sys.executable, str(SCRIPT), *args],
-        capture_output=True,
-        text=True,
-        cwd=ROOT,
+def _betik():
+    """scripts/gorev_atama_otomatis.py'yi modul olarak yukler (paket degil)."""
+    yol = KOK / "scripts" / "gorev_atama_otomatis.py"
+    spec = importlib.util.spec_from_file_location("gorev_atama_otomatis", yol)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
+
+
+@pytest.fixture
+def izole(tmp_path, monkeypatch):
+    """Sahte kok: pano + brif tmp_path'te, tetik bellekte toplanir."""
+    mod = _betik()
+    monkeypatch.setattr(mod, "root", tmp_path)
+
+    pano = tmp_path / "data" / "orchestrator"
+    pano.mkdir(parents=True)
+    (pano / "task_board.json").write_text(
+        '[{"task_id": "DASH-UX-02a", "durum": "plan"},'
+        ' {"task_id": "DASH-UX-02b", "durum": "plan"}]',
+        encoding="utf-8",
     )
+    (tmp_path / "plans").mkdir()
+
+    tetikler: list[tuple] = []
+    monkeypatch.setattr(
+        mod.trigger, "tetik_ekle",
+        lambda t, a, m: tetikler.append((t, a, m)),
+    )
+    return mod, tmp_path, tetikler
 
 
-def test_dash_ux_02b_atanabiliyor() -> None:
-    """DASH-UX-02b (küçük harf soneki) başarıyla atanabilir (yeni ajan, tetik yok)."""
-    sonuc = _calistir("--task-id", "DASH-UX-02b", "--ajan", "roo")
-    # Başarıyla atandı veya zaten tetik var
-    assert sonuc.returncode in (0, 1), f"Beklenen exit 0 veya 1, aldı: {sonuc.returncode}"
-    assert "gorev bulunamadi" not in sonuc.stdout.lower(), "Görev olması gerektiği halde bulunamadı"
+def _brif_yaz(kok: Path, ajan: str, task_id: str, baslik: str = "# Test brifi") -> None:
+    (kok / "plans" / f"brief_{ajan}_{task_id}.md").write_text(baslik, encoding="utf-8")
 
 
-def test_bilinmeyen_gorev_reddedilir() -> None:
-    """Bilinmeyen görev reddedilir."""
-    sonuc = _calistir("--task-id", "YOK-BOYLE-GOREV-99", "--ajan", "utku")
-    assert sonuc.returncode == 1
-    assert "gorev bulunamadi" in sonuc.stdout.lower()
+def _cagir(mod, monkeypatch, *args: str) -> int:
+    monkeypatch.setattr(sys, "argv", ["gorev_atama_otomatis.py", *args])
+    return mod.main()
 
 
-def test_brifsiz_atama_reddedilir() -> None:
-    """Brif yoksa atama reddedilir."""
-    sonuc = _calistir("--task-id", "COP-26", "--ajan", "olmayan")
-    assert sonuc.returncode == 1
-    assert "brif bulunamadi" in sonuc.stdout.lower()
+def test_dash_ux_02b_atanabiliyor(izole, monkeypatch, capsys) -> None:
+    """Kucuk harf sonekli gorev bulunur ve tetiklenir."""
+    mod, kok, tetikler = izole
+    _brif_yaz(kok, "roo", "DASH-UX-02b")
+    assert _cagir(mod, monkeypatch, "--task-id", "DASH-UX-02b", "--ajan", "roo") == 0
+    assert tetikler == [("DASH-UX-02b", "roo", "Test brifi")]
 
 
-def test_case_insensitive_lookup() -> None:
-    """Görev lookup büyük/küçük harfe duyarsız (DASH-UX-02a bulunabilir)."""
-    sonuc = _calistir("--task-id", "DASH-UX-02a", "--ajan", "mimar")
-    # Başarıyla bulundu veya tetik zaten var (her ikisi de case-insensitive'in başarısı)
-    assert "gorev bulunamadi" not in sonuc.stdout.lower(), "Görev lookup başarısız (case sensitivity sorunu)"
+def test_bilinmeyen_gorev_reddedilir(izole, monkeypatch, capsys) -> None:
+    mod, _kok, tetikler = izole
+    assert _cagir(mod, monkeypatch, "--task-id", "YOK-BOYLE-99", "--ajan", "utku") == 1
+    assert "gorev bulunamadi" in capsys.readouterr().out.lower()
+    assert tetikler == []
 
 
-if __name__ == "__main__":
-    print("D-87 atama otomasyonu self-check:")
-    tests = [
-        ("test_dash_ux_02b_atanabiliyor", test_dash_ux_02b_atanabiliyor),
-        ("test_bilinmeyen_gorev_reddedilir", test_bilinmeyen_gorev_reddedilir),
-        ("test_brifsiz_atama_reddedilir", test_brifsiz_atama_reddedilir),
-        ("test_case_insensitive_lookup", test_case_insensitive_lookup),
-    ]
-    
-    for name, test_func in tests:
-        try:
-            test_func()
-            print(f"[OK] {name}")
-        except AssertionError as e:
-            print(f"[ERROR] {name}: {e}")
+def test_brifsiz_atama_reddedilir(izole, monkeypatch, capsys) -> None:
+    """D-66: brif yoksa tetik ATILMAZ."""
+    mod, _kok, tetikler = izole
+    assert _cagir(mod, monkeypatch, "--task-id", "DASH-UX-02a", "--ajan", "olmayan") == 1
+    assert "brif bulunamadi" in capsys.readouterr().out.lower()
+    assert tetikler == []
+
+
+def test_case_insensitive_lookup(izole, monkeypatch, capsys) -> None:
+    """Panoda 'DASH-UX-02a' yazan gorev buyuk harfle de bulunur."""
+    mod, kok, tetikler = izole
+    _brif_yaz(kok, "mimar", "DASH-UX-02a")
+    assert _cagir(mod, monkeypatch, "--task-id", "dash-ux-02A", "--ajan", "mimar") == 0
+    # Panodaki gercek yazim kullanilir, kullanicinin yazdigi degil.
+    assert tetikler[0][0] == "DASH-UX-02a"
+
+
+def test_uretim_panosuna_dokunulmaz(izole, monkeypatch) -> None:
+    """Bariyer: kosu sonrasi canli pano dosyasi bayt-bayt ayni kalir."""
+    mod, kok, _tetikler = izole
+    canli = KOK / "data" / "orchestrator" / "task_board.json"
+    onceki = canli.read_bytes() if canli.exists() else None
+    _brif_yaz(kok, "roo", "DASH-UX-02b")
+    _cagir(mod, monkeypatch, "--task-id", "DASH-UX-02b", "--ajan", "roo")
+    assert (canli.read_bytes() if canli.exists() else None) == onceki

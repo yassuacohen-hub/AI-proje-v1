@@ -17,11 +17,14 @@ Dosyalar:
 from __future__ import annotations
 
 import json
+import logging
 from datetime import datetime
 from pathlib import Path
 from typing import Any
 
-from src.company_master.orchestrator import task_board as tb
+from . import task_board as tb
+
+logger = logging.getLogger(__name__)
 
 
 class TriggerError(Exception):
@@ -47,7 +50,7 @@ def _simdi() -> str:
 # Eski adlar takma ad olarak korunur; pano ve tetik geçmişi bozulmasın diye
 # her yazım aynı postaya çözümlenir.
 
-AJANLAR: tuple[str, ...] = ("ihsan", "utku", "salih", "yasu")
+AJANLAR: tuple[str, ...] = ("ihsan", "utku", "salih", "yasu", "mimir")
 
 AJAN_TAKMA_ADLAR: dict[str, str] = {
     # utku (araç: kilo)
@@ -73,6 +76,10 @@ AJAN_TAKMA_ADLAR: dict[str, str] = {
     "clinebot": "yasu",
     "cline_code": "yasu",
     "yasin": "yasu",
+    # mimir (teknik ad: odin_ai) — D-182 besinci kanonik ajan
+    "odin_ai": "mimir",
+    "odinai": "mimir",
+    "abrakadabra": "mimir",
     "claudecode": "claude_code",
     "claude-code": "claude_code",
 }
@@ -271,7 +278,7 @@ def teslim_et(
     gorev = tb.gorev_getir(task_id) or {}
     if gorev.get("otomatik_onay"):
         try:
-            from src.company_master.orchestrator import isbirligi  # dongusel import onlemi
+            from . import isbirligi  # dongusel import onlemi
             onayla(task_id, f"oto:{ajan}", data_dir)
             isbirligi.destek_raporu(gorev, f"oto:{ajan}")
         except Exception as exc:  # onay hatası teslimi çökertmesin
@@ -287,7 +294,7 @@ def teslim_et(
     # Zincir devam et: tamamlanan görevin sonrası tetiklensin
     sonraki = zincir_devam_et(task_id, ajan, data_dir)
     if sonraki:
-        print(f"⏭ ZİNCİR: {sonraki['task_id']} tetiklendi (önceki: {task_id})")
+        logger.info(f"⏭ ZİNCİR: {sonraki['task_id']} tetiklendi (önceki: {task_id})")
 
     return {"task_id": task_id, "durum": "review"}
 
@@ -302,7 +309,7 @@ def onay_bekleyenler(data_dir: Path | None = None) -> list[dict[str, Any]]:
     kuyruk = [k for k in _kuyruk_oku(data_dir) if k["durum"] == "bekliyor"]
     bilinen = {k["task_id"] for k in kuyruk}
     try:
-        from src.company_master.orchestrator import duzen  # lokal: döngüsel risk yok
+        from . import duzen  # lokal: döngüsel risk yok
         ajanlar = duzen.AJANLAR
     except Exception:
         ajanlar = list(AJANLAR)
@@ -383,12 +390,24 @@ def onayla(
     except Exception:
         devam = None
     try:
-        from src.company_master.orchestrator import duzen  # lokal import: döngüsel risk yok
+        from . import duzen  # lokal import: döngüsel risk yok
         kapilar = duzen.blokaj_guncelle()
     except Exception:
         kapilar = {}
     k["zincir_devam"] = (devam or {}).get("task_id") if isinstance(devam, dict) else (devam[0]["task_id"] if devam else None)
     k["kapilar_acilan"] = kapilar.get("acilan", []) if isinstance(kapilar, dict) else []
+    
+    # D-190: MIMIR architect rapor otomasyonu
+    # Görev done oldu → architect mod ise rapor yaz (zero insan müdahalesi tasarım)
+    try:
+        gorev = tb.gorev_getir(task_id) or {}
+        if gorev.get("mod") == "architect":
+            from company_master.intelligence.mimir_rapor import MimirRaporYazici
+            yazici = MimirRaporYazici()
+            yazici.rapor_yazmayi_tetikle(task_id)
+    except Exception:
+        logger.exception("Rapor yazma hatası", exc_info=True)
+    
     return k
 
 

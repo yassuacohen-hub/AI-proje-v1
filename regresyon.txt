@@ -1,0 +1,7 @@
+
+=========================== short test summary info ===========================
+ERROR tests/test_admin_panel_tab.py - NameError: name 'table_data' is not def...
+ERROR tests/test_proje_yonetimi.py - NameError: name 'table_data' is not defined
+ERROR tests/test_web_dashboard_tabs.py - NameError: name 'table_data' is not ...
+!!!!!!!!!!!!!!!!!!! Interrupted: 3 errors during collection !!!!!!!!!!!!!!!!!!!
+3 errors in 6.17s

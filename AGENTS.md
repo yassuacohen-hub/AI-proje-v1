@@ -150,12 +150,17 @@
 5. KAHİN, `.env` dosyasını günceller: `ABRAKADABRA_KEY=ABC123...`
 6. UTKU artık orkestratör; İHSAN rolü sona erer. `.roorules` silinir. `.kilocode/rules` oluşturulur (UTKU araç: kilo).
 
-## Architect Modu Kapısı (D-63 — KAHİN kararı 2026-09-18)
-- **Architect (mimari/planlama/tasarım) görevlerini yalnız iki ajan alır: `ihsan` (roo) ve `utku` (kilo).** `salih` ve `yasu` architect görevi almaz; alırsa iş geçersizdir, orkestratöre geri sorulur.
+## Architect Modu Kapısı (D-63 — KAHİN kararı 2026-09-18, D-190 ile genişletildi 2026-09-23)
+- **Architect (mimari/planlama/tasarım) görevlerini üç ajan alır:**
+  - `ihsan` (Orkestratör/roo) — her zaman
+  - `utku` (Üretim/kilo) — her zaman
+  - `mimir` (MIMIR Seviye 1) — **yalnız orkestratör devri sonrası** (D-182, D-190)
+- **`salih` ve `yasu` architect görevi almaz;** alırsa iş geçersizdir, orkestratöre geri sorulur.
 - **Görev dağıtımı Architect modunda yapılır.** Orkestratör başka moddayken atılan görev geçersiz sayılır.
 - Görev metninin sonuna **otomatik hatırlatma satırı** eklenir:
   `⚠️ Bu görev Architect modunda açılmalıdır.`
-- Makine tarafı: `scripts/gorev_at.py at --mod architect` → görev kaydına `"mod": "architect"` yazar, tetik brifine hatırlatma satırını ekler. `--mod architect` verildiğinde ajan `ihsan` veya `utku` değilse komut exit 5 ile reddeder.
+- Makine tarafı: `scripts/gorev_at.py at --mod architect --ajan <ihsan|utku|mimir>` → görev kaydına `"mod": "architect"` yazar, tetik brifine hatırlatma satırını ekler. `--mod architect` verildiğinde ajan listede değilse komut exit 5 ile reddeder.
+- MIMIR architect modunda (D-190): rapor dosyası yazabilir, kaynak kodu değiştiremez. Test: `test_d182_mimir.py::test_mimir_architect_mode_bariyeri()`
 - Varsayılan `mod` değeri `code`. Mod alanı olmayan eski kayıtlar `code` sayılır (geriye dönük uyumluluk).
 - Kural **yeni görevler** için yürürlükte; panodaki açık görevler mevcut hâliyle çalışılır.
 
@@ -502,33 +507,42 @@
 - **`worktree klasoru/` silinmez.** Git worktree olarak bağlı (`worktree/roo-rest-sonrası-admin-panel-UX-v2`); içinde sözlük + kullanım kılavuzu dosya yapısı var. Kaynak korunur, geri alınabilir.
 - **NOT:** D-170'teki senkronsuzluk tablosu ORCH-SENKRON-01 (D-171) ile kapatıldı; D-172 kalıcı kuralı yazdı.
 
-## Otorite Kaynağı: Worktree Klasoru (D-172 — KAHİN kararı 2026-09-21)
-- **Karar:** `worktree klasoru/` = **otorite kaynağı (SSOT)**. `Huginn Data Insights/` = pasif ayna/arşiv.
+## Otorite Kaynağı: Worktree Klasoru (D-172 — KAHİN kararı 2026-09-21, D-191 ile genişletildi 2026-09-23)
+- **Karar:** `worktree klasoru/` = **yazma otoritesi (SSOT)**. `Huginn Data Insights/` = senkronize salt-okunur ayna (GRAPH ikinci katman).
 - **Gerekçe:** Worktree aktif geliştirme dalı (git worktree bağlı), orkestratör doğrudan burada çalışır. Kullanım kılavuzu + sözlük çalışması burada. Merkez git main tarafı, okuma/arşiv.
 - **Yazma sırası (ZORUNLU):**
   1. Yeni karar (`D-XX`) → `worktree klasoru/data/orchestrator/decision_log.jsonl`
   2. Görev güncellemesi (durum/sahip/not) → `worktree klasoru/data/orchestrator/task_board.json`
-  3. Kural dosyaları (`AGENTS.md`, `ANA_KURALLAR.md`, `AGENT_SYNC.md`, `.clinerules`, `.cursorrules`, `.roorules`) → worktree önce
-  4. Senkron: worktree → merkez (kopya/override)
+  3. Task ID tanımı + field şeması → GRAPH kanonik kaynağı (D-191, okuma-yazma D-177'de açık)
+  4. Kural dosyaları (`AGENTS.md`, `ANA_KURALLAR.md`, `AGENT_SYNC.md`, `.clinerules`, `.cursorrules`, `.roorules`) → worktree önce
+  5. Senkron: worktree → merkez (kopya/override)
 - **Çatışma çözümü:** Merkez vs worktree farkında **worktree kazanır**. Yedek alınır, silme yok.
   - `decision_log.jsonl`: append-only birleştirme (`decision_id` bazlı, kayıp yok)
   - `task_board.json`: worktree override, yedek zorunlu (`task_board.json.yedek_<tarih>`)
+  - GRAPH canonical: eski task ID → yeni ID migration trail (D-191, D-60 uyumlu)
 - **Senkron araçları (mevcut, elle çalışır):**
   - `python scripts/senkron_fark.py` — karar defteri farkı
   - `python scripts/senkron_append.py` — eksik satır ekle
   - `python scripts/pano_merge.py` — pano birleştir (yedekli)
+  - `python scripts/id_migration.py` — task ID yeniden adlandırma (D-191)
 - **Ponytail rung 4 — otomasyon eksik:** post-commit git hook + zamanlanmış görev yazılmadı. Şu an elle tetiklenir. Ekleme zamanı: senkron gecikmesi günde 1'den fazla soruna yol açarsa.
 
-## Graph Canonical vs Yazma Otoritesi (D-172 / D-177 Netleştirme)
+## Graph Canonical vs Yazma Otoritesi (D-172 / D-177 Netleştirme — D-191 ile genişletildi 2026-09-23)
 
 İki karar **çelişmiyor**, farklı katmanlara ait:
 
 | Karar | Tanım | Katman | Anlamı |
 |-------|-------|--------|--------|
-| **D-172** | `worktree klasoru/` = otorite kaynağı | **YAZMA / SSOT** | Kod ve doküman **buraya yazılır**. Tüm değişiklik burada yapılır. Git worktree bağlı, orkestratör doğrudan çalışır. |
-| **D-177** | Graph canonical = `Huginn Data Insights/` | **GRAPH / GÖRÜNÜM** | Obsidian link çözümlemesi, orphan tespiti, backlink sayımı **burayı** esas alır. Graph engine burada çalışır. |
+| **D-172** | `worktree klasoru/` = yazma otoritesi | **YAZMA / SSOT** | Kod ve doküman **buraya yazılır**. Tüm değişiklik burada yapılır. Git worktree bağlı, orkestratör doğrudan çalışır. |
+| **D-177** | GRAPH task ID + field schema = kanonik okuma | **GRAPH / CANONICAL** | Obsidian link çözümlemesi, orphan tespiti, backlink sayımı, task field tanımları **burada** kanonik. Kod dosyaları GRAPH'tan okur. |
+| **D-191** | id-migration redirect (eski ID → yeni ID) | **MIGRATION / AUDIT** | Task ID yeniden adlandırılırsa eski ID silinmez; redirect trail + D-60 uyumlu geçiş kuralı uygulanır. |
 
-**Kural:** `worktree klasoru/` = **yazma otoritesi (SSOT)**. `Huginn Data Insights/` = **graph görünümü (canonical ağaç)**. Bir dosyayı düzenlerken `worktree klasoru/` altındaki kopya değiştirilir; graph metriği okunurken `Huginn Data Insights/` altındaki kopyası sayılır. Bu ikisi çelişmiyor — worktree'ye yazılır, HDI'a link kredisi gider. HDI, worktree'nin senkronize, salt-okunur aynasıdır.
+**Kural:**
+- `worktree klasoru/` = **yazma otoritesi (SSOT)** — kod, karar, görev burada değiştirilir.
+- `Huginn Data Insights/` = **GRAPH canonical ağaç** — task ID/field schema'nın kanonik kaynağı; link çözümlemesi ve orphan tespiti buraya bağlıdır.
+- **id-migration:** Eski task ID → yeni ID yönlendirmesi D-60 (kanonik ad geçişi) + D-189 (kök AGENTS.md kural taşımaz) ile uyumlu.
+
+Pratikte: Kod/görev worktree'ye yazılır, senkronla HDI'a kopyalanır. GRAPH şeması HDI kopyasını esas alır (yazma/denetim için). Task ID değiştiğinde id_migration.py çalıştırılır → eski ID redirect'e çevrilir → wikilink'ler senkron kalır.
 
 ## Hub-Önce Okuma (D-185 — KAHİN kararı 2026-09-22)
 - **Kural:** Bir konuda (osint, veri kalitesi, admin panel, müşteri paneli, araç/script, plan/rapor, teknik dok, orkestrasyon/ajan) çalışmaya başlamadan önce önce ilgili `Huginn Data Insights/hubs/*_HUB.md` dosyası okunur, oradan 2-3 hedef dosyaya inilir.

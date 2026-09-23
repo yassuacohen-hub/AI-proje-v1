@@ -85,3 +85,32 @@ def _no_real_env_secrets(monkeypatch):
     for key in ("APIFY_TOKEN", "APIFY_API_TOKEN", "APIFY_API_KEY", "TELEGRAM_BOT_TOKEN"):
         monkeypatch.delenv(key, raising=False)
 
+
+# ALTYAPI-TEST-HERMETIK-01: "Testler uretim verisine dokunmaz" kurali.
+# Yalitim fixture'lari yamalama ile calisir; bir test yeni bir yol yakalarsa
+# sessizce canli panoya yazar (nitekim yaziyordu). Bu bariyer yazimi tespit
+# eder, dosyayi geri yukler ve testi kirar -- ihlal bir daha sessiz kalamaz.
+KORUMALI = (
+    ROOT / "data" / "orchestrator" / "task_board.json",
+    ROOT / "data" / "orchestrator" / "onay_kuyrugu.json",
+    ROOT / "data" / "orchestrator" / "file_locks.json",
+    ROOT / "data" / "orchestrator" / "gorev_panosu.md",
+    ROOT / "AGENT_SYNC.md",
+)
+
+
+@pytest.fixture(autouse=True)
+def _uretim_verisi_dokunulmaz():
+    """Korumali uretim dosyalari degisirse geri yukle ve testi kir."""
+    onceki = {p: p.read_bytes() for p in KORUMALI if p.exists()}
+    yield
+    kirlenen = []
+    for yol, icerik in onceki.items():
+        if yol.read_bytes() != icerik:
+            yol.write_bytes(icerik)  # once geri yukle, sonra sikayet et
+            kirlenen.append(yol.name)
+    if kirlenen:
+        raise AssertionError(
+            "Test uretim verisine yazdi (geri yuklendi): " + ", ".join(kirlenen)
+        )
+

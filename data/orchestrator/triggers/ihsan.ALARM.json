@@ -3,192 +3,536 @@
     "ajan": "ihsan",
     "task_id": "ORKESTRA-NAMING-AUDIT-02",
     "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 98,
-    "uyari_tarihi": "2026-09-23T10:49:01",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 98. kez uyarıldı; henüz başlamadı."
+    "tetik_sayisi": 125,
+    "uyari_tarihi": "2026-09-23T13:04:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 125. kez uyarıldı; henüz başlamadı."
   },
   {
     "ajan": "ihsan",
-    "task_id": "ORKESTRA-NAMING-AUDIT-02",
-    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 99,
-    "uyari_tarihi": "2026-09-23T10:54:01",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 99. kez uyarıldı; henüz başlamadı."
+    "task_id": "ALTYAPI-D182-MIMIR-01",
+    "gorev_basligi": "[ALTYAPI] mimir ajanini yaz → trigger.AJANLAR (2s)",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-23T13:04:02",
+    "mesaj": "⚠️ ALTYAPI-D182-MIMIR-01 ([ALTYAPI] mimir ajanini yaz → trigger.AJANLAR (2s)) — ihsan 10. kez uyarıldı; henüz başlamadı."
   },
   {
     "ajan": "ihsan",
-    "task_id": "ORKESTRA-NAMING-AUDIT-02",
-    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 100,
-    "uyari_tarihi": "2026-09-23T10:59:02",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 100. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-NAMING-AUDIT-02",
-    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 101,
-    "uyari_tarihi": "2026-09-23T11:04:01",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 101. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-NAMING-AUDIT-02",
-    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 102,
-    "uyari_tarihi": "2026-09-23T11:09:01",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 102. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-NAMING-AUDIT-02",
-    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 103,
-    "uyari_tarihi": "2026-09-23T11:14:01",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 103. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-NAMING-AUDIT-02",
-    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 104,
-    "uyari_tarihi": "2026-09-23T11:19:01",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 104. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-GOREV-KAPI-01",
-    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
-    "tetik_sayisi": 1,
-    "uyari_tarihi": "2026-09-23T11:19:02",
-    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 1. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-NAMING-AUDIT-02",
-    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 105,
-    "uyari_tarihi": "2026-09-23T11:24:01",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 105. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-GOREV-KAPI-01",
-    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
-    "tetik_sayisi": 2,
-    "uyari_tarihi": "2026-09-23T11:24:02",
-    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 2. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-NAMING-AUDIT-02",
-    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 106,
-    "uyari_tarihi": "2026-09-23T11:29:02",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 106. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-GOREV-KAPI-01",
-    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
-    "tetik_sayisi": 3,
-    "uyari_tarihi": "2026-09-23T11:29:02",
-    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 3. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-NAMING-AUDIT-02",
-    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 107,
-    "uyari_tarihi": "2026-09-23T11:34:02",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 107. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-GOREV-KAPI-01",
-    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
-    "tetik_sayisi": 4,
-    "uyari_tarihi": "2026-09-23T11:34:02",
-    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 4. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-NAMING-AUDIT-02",
-    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 108,
-    "uyari_tarihi": "2026-09-23T11:39:02",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 108. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-GOREV-KAPI-01",
-    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
-    "tetik_sayisi": 5,
-    "uyari_tarihi": "2026-09-23T11:39:02",
-    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 5. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-NAMING-AUDIT-02",
-    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 109,
-    "uyari_tarihi": "2026-09-23T11:44:02",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 109. kez uyarıldı; henüz başlamadı."
-  },
-  {
-    "ajan": "ihsan",
-    "task_id": "ORKESTRA-GOREV-KAPI-01",
-    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
     "tetik_sayisi": 6,
-    "uyari_tarihi": "2026-09-23T11:44:02",
-    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 6. kez uyarıldı; henüz başlamadı."
+    "uyari_tarihi": "2026-09-23T13:04:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 6. kez uyarıldı; henüz başlamadı."
   },
   {
     "ajan": "ihsan",
     "task_id": "ORKESTRA-NAMING-AUDIT-02",
     "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 110,
-    "uyari_tarihi": "2026-09-23T11:49:02",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 110. kez uyarıldı; henüz başlamadı."
+    "tetik_sayisi": 126,
+    "uyari_tarihi": "2026-09-23T13:09:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 126. kez uyarıldı; henüz başlamadı."
   },
   {
     "ajan": "ihsan",
-    "task_id": "ORKESTRA-GOREV-KAPI-01",
-    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
+    "task_id": "ALTYAPI-D182-MIMIR-01",
+    "gorev_basligi": "[ALTYAPI] mimir ajanini yaz → trigger.AJANLAR (2s)",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-23T13:09:02",
+    "mesaj": "⚠️ ALTYAPI-D182-MIMIR-01 ([ALTYAPI] mimir ajanini yaz → trigger.AJANLAR (2s)) — ihsan 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
     "tetik_sayisi": 7,
-    "uyari_tarihi": "2026-09-23T11:49:02",
-    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 7. kez uyarıldı; henüz başlamadı."
+    "uyari_tarihi": "2026-09-23T13:09:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 7. kez uyarıldı; henüz başlamadı."
   },
   {
     "ajan": "ihsan",
     "task_id": "ORKESTRA-NAMING-AUDIT-02",
     "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 111,
-    "uyari_tarihi": "2026-09-23T11:54:02",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 111. kez uyarıldı; henüz başlamadı."
+    "tetik_sayisi": 127,
+    "uyari_tarihi": "2026-09-23T13:14:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 127. kez uyarıldı; henüz başlamadı."
   },
   {
     "ajan": "ihsan",
-    "task_id": "ORKESTRA-GOREV-KAPI-01",
-    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
+    "task_id": "ALTYAPI-D182-MIMIR-01",
+    "gorev_basligi": "[ALTYAPI] mimir ajanini yaz → trigger.AJANLAR (2s)",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-23T13:14:02",
+    "mesaj": "⚠️ ALTYAPI-D182-MIMIR-01 ([ALTYAPI] mimir ajanini yaz → trigger.AJANLAR (2s)) — ihsan 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
     "tetik_sayisi": 8,
-    "uyari_tarihi": "2026-09-23T11:54:02",
-    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 8. kez uyarıldı; henüz başlamadı."
+    "uyari_tarihi": "2026-09-23T13:14:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 8. kez uyarıldı; henüz başlamadı."
   },
   {
     "ajan": "ihsan",
     "task_id": "ORKESTRA-NAMING-AUDIT-02",
     "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
-    "tetik_sayisi": 112,
-    "uyari_tarihi": "2026-09-23T11:59:02",
-    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 112. kez uyarıldı; henüz başlamadı."
+    "tetik_sayisi": 128,
+    "uyari_tarihi": "2026-09-23T13:19:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 128. kez uyarıldı; henüz başlamadı."
   },
   {
     "ajan": "ihsan",
-    "task_id": "ORKESTRA-GOREV-KAPI-01",
-    "gorev_basligi": "[ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)",
+    "task_id": "ALTYAPI-D182-MIMIR-01",
+    "gorev_basligi": "[ALTYAPI] mimir ajanini yaz → trigger.AJANLAR (2s)",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-23T13:19:02",
+    "mesaj": "⚠️ ALTYAPI-D182-MIMIR-01 ([ALTYAPI] mimir ajanini yaz → trigger.AJANLAR (2s)) — ihsan 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
     "tetik_sayisi": 9,
-    "uyari_tarihi": "2026-09-23T11:59:02",
-    "mesaj": "⚠️ ORKESTRA-GOREV-KAPI-01 ([ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s)) — ihsan 9. kez uyarıldı; henüz başlamadı."
+    "uyari_tarihi": "2026-09-23T13:19:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 129,
+    "uyari_tarihi": "2026-09-23T13:24:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 129. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ALTYAPI-D182-MIMIR-01",
+    "gorev_basligi": "[ALTYAPI] mimir ajanini yaz → trigger.AJANLAR (2s)",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-23T13:24:02",
+    "mesaj": "⚠️ ALTYAPI-D182-MIMIR-01 ([ALTYAPI] mimir ajanini yaz → trigger.AJANLAR (2s)) — ihsan 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-23T13:24:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 130,
+    "uyari_tarihi": "2026-09-23T13:29:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 130. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-23T13:29:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "gorev_basligi": "[ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)",
+    "tetik_sayisi": 131,
+    "uyari_tarihi": "2026-09-23T13:34:02",
+    "mesaj": "⚠️ ORKESTRA-NAMING-AUDIT-02 ([ORKESTRA] D-55/D-57 adlandırma kuralları denetimi → data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-20_orkestrator.md (2s)) — ihsan 131. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-23T13:34:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-23T13:39:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-23T13:44:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-23T13:49:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-23T13:54:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-23T13:59:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 18,
+    "uyari_tarihi": "2026-09-23T14:04:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 18. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 19,
+    "uyari_tarihi": "2026-09-23T14:09:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 19. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 20,
+    "uyari_tarihi": "2026-09-23T14:14:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 20. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 21,
+    "uyari_tarihi": "2026-09-23T14:19:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 21. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 22,
+    "uyari_tarihi": "2026-09-23T14:24:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 22. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 23,
+    "uyari_tarihi": "2026-09-23T14:29:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 23. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 24,
+    "uyari_tarihi": "2026-09-23T14:34:02",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 24. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 25,
+    "uyari_tarihi": "2026-09-23T14:39:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 25. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 26,
+    "uyari_tarihi": "2026-09-23T14:44:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 26. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 27,
+    "uyari_tarihi": "2026-09-23T14:49:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 27. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 28,
+    "uyari_tarihi": "2026-09-23T14:54:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 28. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 29,
+    "uyari_tarihi": "2026-09-23T14:59:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 29. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 30,
+    "uyari_tarihi": "2026-09-23T15:04:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 30. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 31,
+    "uyari_tarihi": "2026-09-23T15:09:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 31. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 32,
+    "uyari_tarihi": "2026-09-23T15:14:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 32. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 33,
+    "uyari_tarihi": "2026-09-23T15:19:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 33. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 34,
+    "uyari_tarihi": "2026-09-23T15:24:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 34. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 35,
+    "uyari_tarihi": "2026-09-23T15:29:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 35. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 36,
+    "uyari_tarihi": "2026-09-23T15:34:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 36. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 37,
+    "uyari_tarihi": "2026-09-23T15:39:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 37. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 38,
+    "uyari_tarihi": "2026-09-23T15:44:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 38. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 39,
+    "uyari_tarihi": "2026-09-23T15:49:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 39. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 40,
+    "uyari_tarihi": "2026-09-23T15:54:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 40. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 41,
+    "uyari_tarihi": "2026-09-23T15:59:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 41. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
+    "gorev_basligi": "[ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-23T15:59:01",
+    "mesaj": "⚠️ ALTYAPI-D66-BYPASS-TETIKLEME-01 ([ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)) — ihsan 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 42,
+    "uyari_tarihi": "2026-09-23T16:04:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 42. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
+    "gorev_basligi": "[ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-23T16:04:01",
+    "mesaj": "⚠️ ALTYAPI-D66-BYPASS-TETIKLEME-01 ([ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)) — ihsan 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 43,
+    "uyari_tarihi": "2026-09-23T16:09:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 43. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
+    "gorev_basligi": "[ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-23T16:09:01",
+    "mesaj": "⚠️ ALTYAPI-D66-BYPASS-TETIKLEME-01 ([ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)) — ihsan 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 44,
+    "uyari_tarihi": "2026-09-23T16:14:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 44. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
+    "gorev_basligi": "[ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-23T16:14:01",
+    "mesaj": "⚠️ ALTYAPI-D66-BYPASS-TETIKLEME-01 ([ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)) — ihsan 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 45,
+    "uyari_tarihi": "2026-09-23T16:19:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 45. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
+    "gorev_basligi": "[ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-23T16:19:01",
+    "mesaj": "⚠️ ALTYAPI-D66-BYPASS-TETIKLEME-01 ([ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)) — ihsan 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 46,
+    "uyari_tarihi": "2026-09-23T16:24:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 46. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
+    "gorev_basligi": "[ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-23T16:24:01",
+    "mesaj": "⚠️ ALTYAPI-D66-BYPASS-TETIKLEME-01 ([ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)) — ihsan 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 47,
+    "uyari_tarihi": "2026-09-23T16:29:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 47. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
+    "gorev_basligi": "[ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-23T16:29:01",
+    "mesaj": "⚠️ ALTYAPI-D66-BYPASS-TETIKLEME-01 ([ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)) — ihsan 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 48,
+    "uyari_tarihi": "2026-09-23T16:34:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 48. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
+    "gorev_basligi": "[ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-23T16:34:01",
+    "mesaj": "⚠️ ALTYAPI-D66-BYPASS-TETIKLEME-01 ([ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)) — ihsan 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 49,
+    "uyari_tarihi": "2026-09-23T16:39:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 49. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
+    "gorev_basligi": "[ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-23T16:39:01",
+    "mesaj": "⚠️ ALTYAPI-D66-BYPASS-TETIKLEME-01 ([ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)) — ihsan 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "gorev_basligi": "[ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)",
+    "tetik_sayisi": 50,
+    "uyari_tarihi": "2026-09-23T16:44:01",
+    "mesaj": "⚠️ ORKESTRA-D65-ISDURMAZ-01 ([ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s)) — ihsan 50. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
+    "gorev_basligi": "[ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-23T16:44:01",
+    "mesaj": "⚠️ ALTYAPI-D66-BYPASS-TETIKLEME-01 ([ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)) — ihsan 10. kez uyarıldı; henüz başlamadı."
   }
 ]

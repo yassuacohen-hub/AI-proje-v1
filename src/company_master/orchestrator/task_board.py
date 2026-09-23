@@ -28,7 +28,13 @@ FILE_LOCKS = STATE_DIR / "file_locks.json"
 STATE_JSON = STATE_DIR / "state.json"
 TASK_MD = STATE_DIR / "gorev_panosu.md"
 
-GOREV_DURUMLARI = ("plan", "aktif", "review", "done", "blocked", "archive")
+# ALTYAPI-DURUM-SOZLUK-01: durum sozlugu TEK KAYNAK burasidir.
+# "iptal" panoda fiilen kullaniliyordu ama semada yoktu; pano_denetim ve
+# orkestrator_kontrol kendi kopyalarini tutuyordu (3 farkli liste).
+GOREV_DURUMLARI = ("plan", "aktif", "review", "done", "blocked", "archive", "iptal")
+
+# Kapali = ne acik is ne stuck. Denetim betikleri BUNU import eder, kopyalamaz.
+KAPALI_DURUMLAR = ("done", "archive", "iptal")
 
 # S-05: Pano kaydinda BULUNMASI ZORUNLU alanlar ve eksikse kullanilacak
 # varsayilanlar. Tek bozuk kayit yuzunden TUM ajanlarin pano yazimi
@@ -518,6 +524,12 @@ def gorev_listesi(durum: str | None = None) -> list[dict]:
 
 # ---- Dosya Lock (cakisma onleme) ----
 def _lock_alan(sahip: str, dosya: str, task_id: str) -> None:
+    # ALTYAPI-KILIT-OTOMATIK-01: kendi kendini kilitleme antipattern'i engelle —
+    # orkestrasyon altyapisinin kendi dosyalari (file_locks.json / task_board.json)
+    # ASLA kilitlenemez; aksi halde pano kendi yazimini kilitler.
+    _dosya_adi = Path(dosya).name
+    if _dosya_adi in ("file_locks.json", "task_board.json"):
+        return  # sessiz gec (hata firlatma — gorev akisi bozulmasin)
     locks = _read_json(FILE_LOCKS)
     if dosya in locks and locks[dosya]["sahip"] != sahip:
         raise PermissionError(

@@ -1,12 +1,14 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-23T11:37:35
+> Son guncelleme: 2026-09-23T15:50:24
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
 
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
+| - | - | - | - | - |
+| - | - | - | - | - |
 | ADMIN-UX-PROFILMENU-01 | Sag-alt admin profil popover (ProfileMen | salih | P0 | iptal |
 | ADMIN-UX-MENUTREE-01 | Sol menu agaci yeniden gruplama; Ayarlar | ihsan | P1 | iptal |
 | WK-01 | Career Pages Scraper — Enhanced Data Ext | salih | P1 | archive |
@@ -56,7 +58,7 @@
 | P7-32 | API Analytics: endpoint bazli kullanim i | ihsan | P1 | archive |
 | BRIF-01 | [BRIF] roo brifi: 03_mimari kararlari ok | ihsan | P1 | archive |
 | BRIF-02 | [BRIF] kilo brifi: 03_mimari kararlari o | utku | P1 | archive |
-| BRIF-03 | [BRIF] copilot brifi: 03_mimari kararlar | copilot | P1 | plan |
+| BRIF-03 | [BRIF] copilot brifi: 03_mimari kararlar | copilot | P1 | archive |
 | DASH-UX-02a | [DASH-UX] DASH-UX-02a: 5 sistem sekmesin | copilot | P1 | archive |
 | DASH-UX-02b | [DASH-UX] DASH-UX-02b: 4 sekmeyi tek 'ad | copilot | P1 | archive |
 | DASH-UX-03 | [DASH-UX] DASH-UX-03: Paket + Cagraz Sat | utku | P1 | archive |
@@ -65,7 +67,7 @@
 | COP-23 | [COP-TASARIM] TASARIM-1: Bosta-veri bilg | copilot | P2 | archive |
 | COP-24 | [COP-TASARIM] TASARIM-2: Son-guncelleme  | copilot | P2 | archive |
 | COP-25 | [COP-TASARIM] TASARIM-3: Sidebar yardim  | copilot | P2 | archive |
-| COP-26 | MUSTERILER ekrani: firma listesi+filtre+ | ihsan | P1 | plan |
+| COP-26 | MUSTERILER ekrani: firma listesi+filtre+ | ihsan | P1 | aktif |
 | ORCH-13 | Pano sema dogrulama (S-05) + tetik_al pa | yasu | P2 | archive |
 | UX-01 | UI Component Library — Design System | ihsan | P1 | archive |
 | UX-02 | Responsive Layout System ve Breakpoint M | ihsan | P1 | archive |
@@ -118,23 +120,34 @@
 | MVP-KUL-02 | Kullanici onayinda tier secici (K-1 bulg | utku | P2 | archive |
 | REV-ADMIN-ENV-01 | Review: admin sifre sifirlama scripti +  | yasu | P1 | archive |
 | UI-MODAL-01 | [UI] Admin panel acilir modal ekranlar + | yasu | P2 | archive |
-| ORKESTRA-NAMING-AUDIT-02 | [ORKESTRA] D-55/D-57 adlandırma kurallar | ihsan | P1 | plan |
-| ORKESTRA-DECISION-LOG-03 | [ORKESTRA] Karar defteri düzenleme ve va | ihsan | P1 | plan |
+| ORKESTRA-NAMING-AUDIT-02 | [ORKESTRA] D-55/D-57 adlandırma kurallar | ihsan | P1 | review |
+| ORKESTRA-DECISION-LOG-03 | [ORKESTRA] Karar defterini düzelt → data | ihsan | P1 | plan |
 | ALTYAPI-KILIT-TEMIZLIK-V10-01 | [ALTYAPI] V10-HIJYEN dosyaları kilit sil | cline | P2 | iptal |
-| ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyası yaz → | yasu | P2 | plan |
+| ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyası yaz → | yasu | P2 | archive |
 | BRIK-00 | ALTYAPI Archive sema + gece zinciri → ku | ihsan | P1 | archive |
 | ADMIN-UI-CACHE-OPT-01 | [ALTYAPI] Admin UI cache optimizasyonu v | yasu | P2 | review |
 | GRAPH-CANONICAL-SECER-02 | [GRAPH] Canonical graph baglanti guvenli | yasu | P2 | review |
 | AGENTS-MERGE-UU | [DOC] AGENTS.md kok/vault kopuklugunu du | ihsan | P0 | review |
 | VAULT-CLEANUP-BATCH | [ALTYAPI] Vault alarm/tetik artiklarini  | ihsan | P2 | review |
-| ADMIN-UX-SIDEBAR-TAB | [UI] Sidebar tab secim durumunu sakla -> | utku | P1 | aktif |
+| ADMIN-UX-SIDEBAR-TAB | [UI] Sidebar tab secim durumunu sakla -> | utku | P1 | review |
 | ORKESTRA-ONAY-BOSALT-01 | [ORKESTRA] Onay kuyrugundaki 9 teslimi d | salih | P0 | plan |
-| ORKESTRA-GOREV-KAPI-01 | [ORKESTRA] Gorev atama kapisini düzelt → | ihsan | P0 | plan |
-| ALTYAPI-KILIT-OTOMATIK-01 | [ALTYAPI] Kilit otomatik birakmayi yaz → | roo | P1 | review |
-| ALTYAPI-TETIK-ARSIV-01 | [ALTYAPI] Kanonik olmayan tetik dosyalar | yasu | P2 | plan |
-| ALTYAPI-MOJIBAKE-DIZIN-01 | [ALTYAPI] mojibake_onar.py dizin taramas | yasu | P2 | plan |
-| ALTYAPI-IMPORT-TEKLES-01 | [ALTYAPI] trigger.py import yolunu düzel | yasu | P2 | plan |
-| ALTYAPI-TETIK-ZAMAN-01 | [ALTYAPI] tetik_senk zamanlamasini yaz → | yasu | P2 | plan |
+| ORKESTRA-GOREV-KAPI-01 | [ORKESTRA] Gorev atama kapisini düzelt → | ihsan | P0 | review |
+| ALTYAPI-KILIT-OTOMATIK-01 | [ALTYAPI] Kilit otomatik birakmayi yaz → | yasu | P1 | aktif |
+| ALTYAPI-TETIK-ARSIV-01 | [ALTYAPI] Kanonik olmayan tetik dosyalar | yasu | P2 | review |
+| ALTYAPI-MOJIBAKE-DIZIN-01 | [ALTYAPI] mojibake_onar.py dizin taramas | yasu | P2 | aktif |
+| ALTYAPI-IMPORT-TEKLES-01 | [ALTYAPI] trigger.py import yolunu düzel | yasu | P2 | review |
+| ALTYAPI-TETIK-ZAMAN-01 | [ALTYAPI] tetik_senk zamanlamasini yaz → | yasu | P2 | aktif |
+| TEST-ADMIN-PERF-01 | [TEST] admin_performance kpi_karti gecis | utku | P1 | aktif |
+| TEST-WEBHOOK-KPI-01 | [TEST] webhook_monitor mock hedefini duz | utku | P2 | aktif |
+| UI-SUBHEADER-MUSTERI-01 | [UI] musteri_yonetimi subheader temizlig | utku | P2 | aktif |
+| ALTYAPI-MARKA-HUGGINN-01 | [ALTYAPI] HUGGINN yazimini duzelt → mark | yasu | P2 | review |
+| ALTYAPI-D182-MIMIR-01 | [ALTYAPI] mimir ajanini yaz → trigger.AJ | ihsan | P1 | review |
+| ORKESTRA-D65-ISDURMAZ-01 | [ORKESTRA] ölç D-65 İş Durmaz ihlalini → | ihsan | P1 | review |
+| ALTYAPI-MOJIBAKE-BARIYER-01 | [ALTYAPI] Mojibake araci yazim-oncesi ha | ihsan | P0 | review |
+| ALTYAPI-DURUM-SOZLUK-01 | [ALTYAPI] Gorev durum sozlugu tutarsizli | ihsan | P1 | review |
+| ALTYAPI-TEST-HERMETIK-01 | [ALTYAPI] Uretim verisine dokunan testle | ihsan | P1 | review |
+| ALTYAPI-D66-BYPASS-TETIKLEME | [Altyapi] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | plan |
+| ALTYAPI-D66-BYPASS-TETIKLEME-01 | [ALTYAPI] düzelt tetik_senk.py bypass fl | ihsan | P1 | plan |
 
 ## Tamamlananlar (Son 10)
 

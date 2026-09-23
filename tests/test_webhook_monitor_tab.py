@@ -50,11 +50,11 @@ def test_render_webhook_monitor_tab_renders_metrics(monkeypatch):
     monkeypatch.setattr(webhook_monitor, "load_prometheus_metrics", lambda: {"apify_webhook_duration_seconds": "0.23"})
 
     success = MagicMock()
-    metric = MagicMock()
+    kpi = MagicMock()
     bar = MagicMock()
     dataframe = MagicMock()
     monkeypatch.setattr(webhook_monitor.st, "success", success)
-    monkeypatch.setattr(webhook_monitor.st, "metric", metric)
+    monkeypatch.setattr(webhook_monitor, "kpi_karti", kpi)
     monkeypatch.setattr(webhook_monitor.st, "bar_chart", bar)
     monkeypatch.setattr(webhook_monitor.st, "dataframe", dataframe)
     monkeypatch.setattr(webhook_monitor.st, "subheader", MagicMock())
@@ -68,6 +68,6 @@ def test_render_webhook_monitor_tab_renders_metrics(monkeypatch):
 
     webhook_monitor.render_webhook_monitor_tab()
 
-    assert metric.called
+    assert kpi.called
     assert bar.called
     assert dataframe.called

@@ -18,5 +18,60 @@
     "sahip": "ihsan",
     "task_id": "ORKESTRA-GOREV-KAPI-01",
     "kilitlendi": "2026-09-23T11:09:02"
+  },
+  "web_dashboard/tabs/admin_performance.py": {
+    "sahip": "utku",
+    "task_id": "TEST-ADMIN-PERF-01",
+    "kilitlendi": "2026-09-23T12:10:12"
+  },
+  "tests/test_webhook_monitor_tab.py": {
+    "sahip": "utku",
+    "task_id": "TEST-WEBHOOK-KPI-01",
+    "kilitlendi": "2026-09-23T12:10:19"
+  },
+  "web_dashboard/tabs/musteri_yonetimi.py": {
+    "sahip": "utku",
+    "task_id": "UI-SUBHEADER-MUSTERI-01",
+    "kilitlendi": "2026-09-23T12:10:26"
+  },
+  "src/company_master/orchestrator/trigger.py": {
+    "sahip": "ihsan",
+    "task_id": "ALTYAPI-D182-MIMIR-01",
+    "kilitlendi": "2026-09-23T12:10:41"
+  },
+  "scripts/mojibake_onar.py": {
+    "sahip": "ihsan",
+    "task_id": "ALTYAPI-MOJIBAKE-BARIYER-01",
+    "kilitlendi": "2026-09-23T13:00:13"
+  },
+  "tests/test_mojibake_bariyer.py": {
+    "sahip": "ihsan",
+    "task_id": "ALTYAPI-MOJIBAKE-BARIYER-01",
+    "kilitlendi": "2026-09-23T13:00:13"
+  },
+  "src/company_master/orchestrator/task_board.py": {
+    "sahip": "ihsan",
+    "task_id": "ALTYAPI-DURUM-SOZLUK-01",
+    "kilitlendi": "2026-09-23T13:00:47"
+  },
+  "scripts/orkestrator_kontrol.py": {
+    "sahip": "ihsan",
+    "task_id": "ALTYAPI-DURUM-SOZLUK-01",
+    "kilitlendi": "2026-09-23T13:00:47"
+  },
+  "tests/test_durum_sozlugu.py": {
+    "sahip": "ihsan",
+    "task_id": "ALTYAPI-DURUM-SOZLUK-01",
+    "kilitlendi": "2026-09-23T13:00:47"
+  },
+  "tests/test_d87_atama_otomasyonu_fixed.py": {
+    "sahip": "ihsan",
+    "task_id": "ALTYAPI-TEST-HERMETIK-01",
+    "kilitlendi": "2026-09-23T13:00:54"
+  },
+  "tests/test_uretim_verisi_dokunulmaz.py": {
+    "sahip": "ihsan",
+    "task_id": "ALTYAPI-TEST-HERMETIK-01",
+    "kilitlendi": "2026-09-23T13:00:54"
   }
 }

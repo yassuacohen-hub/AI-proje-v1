@@ -39,7 +39,8 @@ TRIGGER_DOSYA = ROOT / "src" / "company_master" / "orchestrator" / "trigger.py"
 
 # "iptal" de kapalidir: iptal gorev ne stuck'tir ne acik istir. Eksikligi
 # 5 sahte uyari uretiyordu (ADMIN-UX-PROFILMENU-01/MENUTREE-01, KILIT-TEMIZLIK-V10-01).
-KAPALI_DURUMLAR = ("done", "archive", "iptal")
+# ALTYAPI-DURUM-SOZLUK-01: artik kopya tutulmuyor, tek kaynak task_board.
+KAPALI_DURUMLAR = tb.KAPALI_DURUMLAR
 STUCK_ESIK = timedelta(hours=24)
 # ponytail: arşiv eşiği sabit; ayarlanabilir olmasına ihtiyaç doğarsa CLI bayrağı ekle.
 ARSIV_ESIK = timedelta(days=7)

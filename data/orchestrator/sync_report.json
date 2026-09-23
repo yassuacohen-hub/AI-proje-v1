@@ -1,15 +1,8 @@
 {
-  "timestamp": "2026-09-23T11:55:30",
+  "timestamp": "2026-09-23T13:04:50",
   "status": "ok",
   "uygula": false,
   "bulgular": [
-    {
-      "tip": "stuck",
-      "seviye": "uyari",
-      "task_id": "BRIF-03",
-      "mesaj": "plan / son hareket 2026-09-13T21:02",
-      "duzeltme": null
-    },
     {
       "tip": "stuck",
       "seviye": "uyari",
@@ -29,20 +22,6 @@
       "seviye": "uyari",
       "task_id": "ORKESTRA-DECISION-LOG-03",
       "mesaj": "plan / son hareket 2026-09-20T10:55",
-      "duzeltme": null
-    },
-    {
-      "tip": "stuck",
-      "seviye": "uyari",
-      "task_id": "ORKESTRA-BRIEF-TALIMAT-01",
-      "mesaj": "plan / son hareket 2026-09-20T20:46",
-      "duzeltme": null
-    },
-    {
-      "tip": "kuyruk",
-      "seviye": "uyari",
-      "task_id": "BRIF-03",
-      "mesaj": "kuyruk=onaylandi ama pano=plan — orkestratör kanıtla kapatmalı",
       "duzeltme": null
     },
     {
@@ -83,11 +62,6 @@
   ],
   "gorevler": [
     {
-      "id": "BRIF-03",
-      "durum": "plan",
-      "update": "2026-09-13T21:02"
-    },
-    {
       "id": "COP-26",
       "durum": "plan",
       "update": "2026-09-13T22:08"
@@ -101,11 +75,6 @@
       "id": "ORKESTRA-DECISION-LOG-03",
       "durum": "plan",
       "update": "2026-09-20T10:55"
-    },
-    {
-      "id": "ORKESTRA-BRIEF-TALIMAT-01",
-      "durum": "plan",
-      "update": "2026-09-20T20:46"
     },
     {
       "id": "ADMIN-UI-CACHE-OPT-01",
@@ -129,7 +98,7 @@
     },
     {
       "id": "ADMIN-UX-SIDEBAR-TAB",
-      "durum": "aktif",
+      "durum": "review",
       "update": null
     },
     {
@@ -139,7 +108,7 @@
     },
     {
       "id": "ORKESTRA-GOREV-KAPI-01",
-      "durum": "plan",
+      "durum": "review",
       "update": "2026-09-23T11:09"
     },
     {
@@ -149,23 +118,68 @@
     },
     {
       "id": "ALTYAPI-TETIK-ARSIV-01",
-      "durum": "plan",
+      "durum": "review",
       "update": "2026-09-23T11:09"
     },
     {
       "id": "ALTYAPI-MOJIBAKE-DIZIN-01",
-      "durum": "plan",
+      "durum": "review",
       "update": "2026-09-23T11:36"
     },
     {
       "id": "ALTYAPI-IMPORT-TEKLES-01",
-      "durum": "plan",
+      "durum": "review",
       "update": "2026-09-23T11:36"
     },
     {
       "id": "ALTYAPI-TETIK-ZAMAN-01",
-      "durum": "plan",
+      "durum": "aktif",
       "update": "2026-09-23T11:37"
+    },
+    {
+      "id": "TEST-ADMIN-PERF-01",
+      "durum": "review",
+      "update": "2026-09-23T12:10"
+    },
+    {
+      "id": "TEST-WEBHOOK-KPI-01",
+      "durum": "review",
+      "update": "2026-09-23T12:10"
+    },
+    {
+      "id": "UI-SUBHEADER-MUSTERI-01",
+      "durum": "review",
+      "update": "2026-09-23T12:10"
+    },
+    {
+      "id": "ALTYAPI-MARKA-HUGGINN-01",
+      "durum": "plan",
+      "update": "2026-09-23T12:10"
+    },
+    {
+      "id": "ALTYAPI-D182-MIMIR-01",
+      "durum": "plan",
+      "update": "2026-09-23T12:10"
+    },
+    {
+      "id": "ORKESTRA-D65-ISDURMAZ-01",
+      "durum": "plan",
+      "update": "2026-09-23T12:29"
+    },
+    {
+      "id": "ALTYAPI-MOJIBAKE-BARIYER-01",
+      "durum": "aktif",
+      "update": "2026-09-23T13:00"
+    },
+    {
+      "id": "ALTYAPI-DURUM-SOZLUK-01",
+      "durum": "plan",
+      "update": "2026-09-23T13:00"
+    },
+    {
+      "id": "ALTYAPI-TEST-HERMETIK-01",
+      "durum": "plan",
+      "update": "2026-09-23T13:00"
     }
   ],
   "duzeltilen": [],

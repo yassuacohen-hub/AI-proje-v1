@@ -11,6 +11,7 @@ Kapsam:
 from __future__ import annotations
 
 import importlib.util
+import re
 from pathlib import Path
 
 KOK = Path(__file__).resolve().parents[1]
@@ -66,3 +67,57 @@ def test_kok_denetimi_temiz() -> None:
     sonuc = md.tarama()
     assert sonuc["yasal_yazim"] == [], sonuc["yasal_yazim"][:5]
     assert sonuc["kok_dizin"] == [], sonuc["kok_dizin"][:5]
+
+
+# ---- ALTYAPI-MARKA-HUGGINN-01: anti-susturma kilidi ----
+
+#: 'marka-muaf' sentinel'i YALNIZCA bu dosyalarda ve bu sayida kullanilabilir.
+#: Brief kurali: "Muafiyet listesine ekleyerek susturmak YASAK". Izin verilen
+#: tek kullanim: marka adi DEGIL, dis sozlesme olan eski env adlarinin gecis
+#: donemi (bkz. web_app.py _ESKI_CACHE_ENV).
+SENTINEL_BEYAZ_LISTE = {
+    "web_app.py": 2,
+    "tests/test_admin_ui_cache_opt.py": 2,
+}
+
+#: Sentinel'in yaninda gerekce bulunmasi zorunlu (susturma dugmesi degil).
+GEREKCE = re.compile(r"sozlesme|sözleşme|deprecated|eski env adi", re.IGNORECASE)
+
+
+def _sentinel_tarama() -> dict[str, list[tuple[int, str]]]:
+    """Tarama kapsamindaki tum 'marka-muaf' sentinel satirlarini toplar."""
+    bulunan: dict[str, list[tuple[int, str]]] = {}
+    for path in md.tarama_kapsami():
+        try:
+            icerik = path.read_text(encoding="utf-8")
+        except (UnicodeDecodeError, PermissionError):
+            continue
+        satirlar = icerik.splitlines()
+        for no, satir in enumerate(satirlar, start=1):
+            if md.MUAF_SENTINEL not in satir:
+                continue
+            anahtar = path.relative_to(md.KOK).as_posix()
+            bulunan.setdefault(anahtar, []).append((no, satir.strip()))
+    return bulunan
+
+
+def test_muafiyet_susturmaya_donusmez() -> None:
+    """Anti-susturma kilidi: sentinel beyaz listeden tasamaz, gerekcesiz olamaz."""
+    bulunan = _sentinel_tarama()
+    assert set(bulunan) == set(SENTINEL_BEYAZ_LISTE), (
+        f"marka-muaf beyaz liste disinda: {sorted(set(bulunan) - set(SENTINEL_BEYAZ_LISTE))}"
+    )
+    for dosya, satirlar in bulunan.items():
+        assert len(satirlar) <= SENTINEL_BEYAZ_LISTE[dosya], (
+            f"{dosya}: sentinel sayisi {len(satirlar)} > izinli "
+            f"{SENTINEL_BEYAZ_LISTE[dosya]} — yeni muafiyet gerekceyle eklenmeli"
+        )
+    # Her sentinel satirinin yakininda gerekce metni bulunmali.
+    for dosya, satirlar in bulunan.items():
+        icerik = (md.KOK / dosya).read_text(encoding="utf-8").splitlines()
+        for no, satir in satirlar:
+            pencere = "\n".join(icerik[max(0, no - 3):no])
+            assert GEREKCE.search(pencere), (
+                f"{dosya}:{no} sentinel gerekcesiz (susturma riski): {satir}"
+            )
+

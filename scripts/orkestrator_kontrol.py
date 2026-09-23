@@ -13,12 +13,18 @@ Kullanım:
 from __future__ import annotations
 
 import json
+import sys
 from collections import Counter, defaultdict
 from pathlib import Path
 
 KOK = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(KOK))
+from src.company_master.orchestrator import task_board as tb  # noqa: E402
+
 D = KOK / "data" / "orchestrator"
-KAPALI_DURUMLAR = ("done", "iptal", "cancelled")
+# ALTYAPI-DURUM-SOZLUK-01: kopya liste yok, tek kaynak task_board.
+# ("cancelled" kaldirildi: panoda hicbir zaman uretilmeyen olu durumdu.)
+KAPALI_DURUMLAR = tb.KAPALI_DURUMLAR
 
 
 def _json_oku(yol: Path):

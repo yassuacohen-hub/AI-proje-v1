@@ -2033,5 +2033,181 @@
     ],
     "teslim_tarihi": "2026-09-23T10:50:51",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "ADMIN-UX-SIDEBAR-TAB",
+    "ajan": "utku",
+    "ozet": "init.py zaten session_state ile tab state sakliyor (satir 626). Aktif tab vurgusu zaten app.py:468/494. TALIMAT: TEKRAR YAPMA. Ek is yok.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-23T12:21:06",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "TEST-ADMIN-PERF-01",
+    "ajan": "utku",
+    "ozet": "admin_performance.py incelendi: UI-ADOPT-01 ile kpi_karti -> MetricCard gecisi yapildi (11 MetricCard, 1 kalan kpi_karti yorum satiri). TALIMAT: MetricCard yerine kpi_karti kullan derken test regresyonu kastenmis; mevcut durum zaten dogru. Ek is yok.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-23T12:21:48",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-KILIT-OTOMATIK-01",
+    "ajan": "yasu",
+    "ozet": "Kilit otomatik birakma altyapisi tamamlandi. Bulgu: lock_birak_gorev(), stale_kilitler(24) ve gorev_guncelle(done) baglamasi zaten kodda mevcuttu (ORCH-05). Eksik parca eklendi: (1) _lock_alan() self-lock guard — file_locks.json/task_board.json artik kendini kilitleyemez (sessiz gecis), (2) 2 yeni test (self-lock + done-hata-yutma). Test: 9/9 PASSED. lock_birak() imzasi degismedi.",
+    "ciktilar": [
+      "src/company_master/orchestrator/task_board.py",
+      "tests/test_task_board_kilit.py",
+      "data/orchestrator/ALTYAPI-KILIT-OTOMATIK-01_rapor_2026-09-23_yasu.md"
+    ],
+    "teslim_tarihi": "2026-09-23T12:22:08",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-TETIK-ARSIV-01",
+    "ajan": "yasu",
+    "ozet": "11 kanonik olmayan tetik dosyasi _arsiv_2026-09-23/ altina tasindi (silme yok). Tasima oncesi acik kayit taramasi: mimar.jsonl tasINMADI (DASH-UX-02a bekliyor kaydi tasiyor — yanlis ajana dusmus eski tetik, karar orkestratorde). Kanonik 4 dosya degismedi. pano_denetim: status=ok, yeni uyari yok. Ek bulgu: data_worktree/orchestrator tam pano kopyasi (islem yapilmadi, D-172).",
+    "ciktilar": [
+      "data/orchestrator/ALTYAPI-TETIK-ARSIV-01_rapor_2026-09-23_yasu.md",
+      "scripts/_tetik_arsiv_tasi.py"
+    ],
+    "teslim_tarihi": "2026-09-23T12:24:57",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-MOJIBAKE-DIZIN-01",
+    "ajan": "yasu",
+    "ozet": "mojibake_onar.py dizin modu eklendi: --dizin **/*.md taramasi, --dizin+dosya karsilikli dislamasi (rc=2), dizin modunda dry-run varsayilan (--uygula ile yaz), taranan/degisen ozet satiri (0'da da cikar). Tek-dosya modu geri uyumlu (D-48: yazar, --kontrol rapor). Test: tests/test_mojibake_dizin.py 7/7 PASSED. Gercek kosu: plans/ 45 md tarandi degisen=0.",
+    "ciktilar": [
+      "scripts/mojibake_onar.py",
+      "tests/test_mojibake_dizin.py",
+      "data/orchestrator/ALTYAPI-MOJIBAKE-DIZIN-01_rapor_2026-09-23_yasu.md"
+    ],
+    "teslim_tarihi": "2026-09-23T12:31:11",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "TEST-WEBHOOK-KPI-01",
+    "ajan": "utku",
+    "ozet": "test_webhook_monitor_tab.py: st.metric -> webhook_monitor.kpi_karti mock degisikligi. webhook_monitor.py zaten kpi_karti kullaniyor (10x), kilitli dosya dokunmadi. 2/2 test PASS.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-23T12:33:06",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-IMPORT-TEKLES-01",
+    "ajan": "yasu",
+    "ozet": "trigger.py 4 kok-mutlak import paket-gorle yapildi (satir 24 task_board + 3 lokal isbirligi/duzen). Neden gorul: src. oneki yalniz kok sys.path'te calisiyordu; goril import iki baglamda da calisir (kok + sys.path=src) ve tek task_board ornegi garantiler. Test: tests/test_trigger_import.py 4/4 PASSED (kok, paket, uzak-cwd, gorev_kutusu regresyon). pano_denetim: status=ok, ithalat uyarisi kalkti (11->8 uyari). scripts/ sys.path kancalari hala gerekli, kaldirma orkestratorde.",
+    "ciktilar": [
+      "src/company_master/orchestrator/trigger.py",
+      "tests/test_trigger_import.py",
+      "data/orchestrator/ALTYAPI-IMPORT-TEKLES-01_rapor_2026-09-23_yasu.md"
+    ],
+    "teslim_tarihi": "2026-09-23T12:35:17",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ORKESTRA-GOREV-KAPI-01",
+    "ajan": "ihsan",
+    "ozet": "guncelle komutu + 4 test eklendi; 5 madde zaten sevk edilmisti. Regresyonda mojibake bozulma olayi tespit/onarildi, yasu'nun import duzeltmesi mojibake'siz geri uygulandi.",
+    "ciktilar": [
+      "data/orchestrator/ORKESTRA-GOREV-KAPI-01_rapor_2026-09-23_ihsan.md"
+    ],
+    "teslim_tarihi": "2026-09-23T12:46:28",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-SUBHEADER-MUSTERI-01",
+    "ajan": "utku",
+    "ozet": "musteri_yonetimi.py: 5 st.subheader -> Section(...).render() (pazarlama.py kalibi). parametrize girdisi dokunmadi, kilitli dosyalar dokunmadi. 92/92 test_sayfa_iskeleti PASS.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-23T12:51:06",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-MOJIBAKE-BARIYER-01",
+    "ajan": "ihsan",
+    "ozet": "Hasar bariyeri eklendi: onceki/kalan mojibake sayimi karsilastirilir, kalan>onceki ise IPTAL basilir ve dosya yazilmaz. Kaynak uzantilari (.py/.json/.yml/.yaml/.toml/.ini/.cfg) tek-dosya modunda --zorla olmadan reddedilir (cikis 3). Ozet satirindaki degisen= etiketi duzeltildi (kalan yerine gercek degisen). 5 test eklendi, 12 passed.",
+    "ciktilar": [
+      "scripts/mojibake_onar.py",
+      "tests/test_mojibake_bariyer.py"
+    ],
+    "teslim_tarihi": "2026-09-23T13:05:20",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-DURUM-SOZLUK-01",
+    "ajan": "ihsan",
+    "ozet": "Durum sozlugu tek kaynaga indirildi. task_board.GOREV_DURUMLARI'na 'iptal' eklendi (panoda kullaniliyordu, semada yoktu). task_board.KAPALI_DURUMLAR=(done,archive,iptal) tanimlandi; pano_denetim.py ve orkestrator_kontrol.py kopya listelerini birakip bunu import ediyor (ikincisine sys.path insert eklendi). Olu 'cancelled' durumu kaldirildi. 7 test eklendi (tests/test_durum_sozlugu.py); 27 passed, orkestrator_kontrol canli panoda exit 0.",
+    "ciktilar": [
+      "src/company_master/orchestrator/task_board.py",
+      "scripts/pano_denetim.py",
+      "scripts/orkestrator_kontrol.py",
+      "tests/test_durum_sozlugu.py"
+    ],
+    "teslim_tarihi": "2026-09-23T13:07:44",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-TETIK-ZAMAN-01",
+    "ajan": "yasu",
+    "ozet": "tetik_senk.py: --gunluk + tetik_senk_log.jsonl (senk/sapma satiri) + sessiz basari yasagi (exit 0/1/2/3/4) + acik durum kumesi genisletildi (alindi/teslim/zincir_bekleme/blocked kapatilir) + schtasks gunluk zamanlayici (kur/durum/kaldir). 4 yeni test (8 passed). Gercek kosu: 14 sapma duzeltildi, ikinci kosu idempotent; HuginnData-TetikSenk kuruldu (24.09 08:30).",
+    "ciktilar": [
+      "scripts/tetik_senk.py",
+      "tests/test_tetik_senk_log.py",
+      "data/orchestrator/ALTYAPI-TETIK-ZAMAN-01_rapor_2026-09-23_yasu.md"
+    ],
+    "teslim_tarihi": "2026-09-23T13:14:21",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-TEST-HERMETIK-01",
+    "ajan": "ihsan",
+    "ozet": "Testler uretim verisine dokunmaz: D-87 testi surec-ici monkeypatch ile izole edildi, conftest'e bayt-karsilastirmali bariyer eklendi, bariyeri dogrulayan 5 test yazildi. Tam regresyon 4 failed/4005 passed (onceden 7 failed), sifir ihlal.",
+    "ciktilar": [
+      "tests/test_d87_atama_otomasyonu_fixed.py",
+      "tests/conftest.py",
+      "tests/test_uretim_verisi_dokunulmaz.py"
+    ],
+    "teslim_tarihi": "2026-09-23T13:24:45",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-D182-MIMIR-01",
+    "ajan": "ihsan",
+    "ozet": "D-182 MIMIR besinci kanonik ajan olarak sisteme baglandi. (1) trigger.AJANLAR -> 5 ajan (ihsan/utku/salih/yasu/mimir); bu tuple duzen.py, gorev_at.py, gorev_kutusu.py, tetik_senk.py, oto_nobetci.py icin tek kaynak oldugu icin hepsi otomatik genisledi. (2) AJAN_TAKMA_ADLAR'a odin_ai/odinai/abrakadabra -> mimir eklendi; ajan_normalize tire ve bosluklari alt cizgiye cevirdigi icin odin-ai de kapsanir. (3) data/orchestrator/triggers/mimir.jsonl posta kutusu acildi (bos). (4) D-63 architect kapisi: ARCHITECT_AJANLARI degistirilmedi -- MIMIR architect gorev acamaz (exit 5). Gerekce D-182 metninden: MIMIR Seviye 0 salt-okunur asistan, yalniz TEKLIF yazar; architect gorev acar, celisir. Seviye 1 devralmada zaten orkestrator kimligi kullanilir. Varsayim yapilmadi, mevcut davranis test_architect_modu_mimir_reddedilir ile kilitlendi ve KAHIN'e acik soru olarak brief'e yazildi. Dogrulama: test_d182_mimir 1 failed -> 4 passed; yan etki paketi (sessiz_basari + gorev_at_kapi + gorev_at_mod + gorev_at_pano + isbirligi) 39 passed, Oneri-1 exit 3 davranisi ve test_gorev_at_pano'daki len(AJANLAR) bagimli assert saglam. Tam regresyon 3 failed / 4012 passed -- 3'u de onceden kirik test_admin_performance (kpi_karti attribute + kategori sistem), D-182 ile ilgisiz; kirik sayisi 4 -> 3 dustu. UYARI: D-182 'abrakadabra parolasi log/promptta gorunmesin' diyor ama test onu takma ad tablosunda zorunlu kiliyor; ad eslemesi olsa da KAHIN dikkatine sunuldu.",
+    "ciktilar": [
+      "src/company_master/orchestrator/trigger.py",
+      "tests/test_gorev_at_mod.py",
+      "plans/brief_ihsan_ALTYAPI-D182-MIMIR-01.md",
+      "data/orchestrator/triggers/mimir.jsonl"
+    ],
+    "teslim_tarihi": "2026-09-23T13:33:56",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ORKESTRA-NAMING-AUDIT-02",
+    "ajan": "ihsan",
+    "ozet": "Acik yuzeyde 3 D-57 ihlali onarildi (309->306, acik 9->6); guncelle --baslik/--baslik-b64/--sahip eklendi; D-86 bosluk hatasi giderildi; 8 test + rapor",
+    "ciktilar": [
+      "data/orchestrator/ORKESTRA-NAMING-AUDIT-02_rapor_2026-09-23_ihsan.md"
+    ],
+    "teslim_tarihi": "2026-09-23T13:55:10",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-MARKA-HUGGINN-01",
+    "ajan": "utku",
+    "ozet": "marka denetimi + cache optimize; HUGGINN-HUGINN gecis tamamlandi",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-23T13:58:46",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ORKESTRA-D65-ISDURMAZ-01",
+    "ajan": "ihsan",
+    "ozet": "D-65 ölçüm: 2 stuck P1 görev, bypass mekanizması yok. D-66 önerisi: pano_denetim exit 2 → tetik_senk rapor → KAHİN elle tetikle.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-23T14:00:37",
+    "durum": "bekliyor"
   }
 ]

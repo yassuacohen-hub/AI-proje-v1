@@ -68,6 +68,19 @@ def test_architect_modu_salih_yasu_reddedilir(capsys):
         assert izinsiz in err
 
 
+def test_architect_modu_mimir_reddedilir(capsys):
+    """D-182 MIMIR kanonik ajan oldu ama D-63 architect hakki YOK (KAHIN karari bekliyor).
+
+    ponytail: mevcut davranis kilitlendi. KAHIN "MIMIR architect alabilir" derse
+    gorev_at.ARCHITECT_AJANLARI'na "mimir" eklenir ve bu test kabul testine donusur.
+    """
+    rc = gorev_at.cmd_at(_args(task_id="UI-01", ajan="mimir", mod="architect"))
+    err = capsys.readouterr().err
+    assert rc == 5
+    assert "HATA (D-63)" in err
+    assert "mimir" in err
+
+
 def test_architect_modu_ihsan_utku_kabul_edilir(tmp_path, capsys):
     for i, izinli in enumerate(("ihsan", "utku")):
         tid = f"UI-0{i+1}"
