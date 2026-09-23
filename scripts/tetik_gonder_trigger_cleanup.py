@@ -24,7 +24,7 @@ def main():
     print(f"[INFO] {task_id} tetiklemesi: {ajan}'ya gönderiliyor...")
     
     try:
-        result = trigger.tetik_ekle(ajan, task_id)
+        result = trigger.tetik_ekle(task_id, ajan)
         print(f"[OK] Tetik gönderildi: {task_id}")
         print(f"     Kuyruk dosyasi: {result.get('file')}")
         print(f"     Tetik sayisi: {result.get('count')}")

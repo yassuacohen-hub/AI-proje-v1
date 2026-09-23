@@ -1,193 +1,5 @@
 [
   {
-    "sprint_id": "SPRINT-2026-09-23-PANO-DENETIM",
-    "sprint_name": "Sprint 2026-09-23 Başlangıç — Pano Denetimi & MIMIR",
-    "date": "2026-09-23",
-    "status": "aktif",
-    "summary": {
-      "pano_denetimi": "377 görev sınıflandırıldı, 21 review analiz, tamamlanma %63",
-      "gorev_atamalari": "UTKU 3 görev, YASU 3 görev (review→aktif)",
-      "mimir_revizyon": "Sistem sağlam, D-66 bypass implementation eksik"
-    },
-    "tasks": [
-      {
-        "id": "TEST-ADMIN-PERF-01",
-        "assigned_to": "utku",
-        "priority": "P0",
-        "status": "aktif",
-        "baslangic": "2026-09-23T12:23:45Z"
-      },
-      {
-        "id": "TEST-WEBHOOK-KPI-01",
-        "assigned_to": "utku",
-        "priority": "P0",
-        "status": "aktif",
-        "baslangic": "2026-09-23T12:23:45Z"
-      },
-      {
-        "id": "UI-SUBHEADER-MUSTERI-01",
-        "assigned_to": "utku",
-        "priority": "P0",
-        "status": "aktif",
-        "baslangic": "2026-09-23T12:23:45Z"
-      },
-      {
-        "id": "ALTYAPI-KILIT-OTOMATIK-01",
-        "assigned_to": "yasu",
-        "priority": "P0",
-        "status": "aktif",
-        "baslangic": "2026-09-23T12:23:45Z"
-      },
-      {
-        "id": "ALTYAPI-TETIK-ZAMAN-01",
-        "assigned_to": "yasu",
-        "priority": "P0",
-        "status": "aktif",
-        "baslangic": "2026-09-23T12:23:45Z"
-      },
-      {
-        "id": "ALTYAPI-MOJIBAKE-DIZIN-01",
-        "assigned_to": "yasu",
-        "priority": "P0",
-        "status": "aktif",
-        "baslangic": "2026-09-23T12:23:45Z"
-      },
-      {
-        "id": "D-66-BYPASS",
-        "assigned_to": "ihsan",
-        "priority": "P0",
-        "status": "plan",
-        "description": "D-66 bypass tetikleme implementation: pano_denetim.py tara() + tetik_senk.py exit 2 handling",
-        "baslangic": "2026-09-23T12:27:46Z"
-      },
-      {
-        "id": "TRIGGER-LOGGING-CLEANUP",
-        "assigned_to": "yasu",
-        "priority": "P1",
-        "status": "plan",
-        "description": "trigger.py temizlik: Yorum sil, logging ekle",
-        "baslangic": "2026-09-23T12:27:46Z"
-      },
-      {
-        "id": "ADMIN-PANEL-RAPOR-TAB",
-        "assigned_to": "backlog",
-        "priority": "P2",
-        "status": "backlog",
-        "description": "Admin panel rapor tab (low priority)",
-        "baslangic": null
-      }
-    ],
-    "baslik": "-",
-    "sahip": "-",
-    "oncelik": "P2",
-    "durum": "plan",
-    "dosyalar": [],
-    "mod": "code",
-    "id": ""
-  },
-  {
-    "sprint_id": "SPRINT-2026-09-23-PANO-DENETIM",
-    "sprint_name": "Sprint 2026-09-23 Başlangıç — Pano Denetimi & MIMIR",
-    "date": "2026-09-23",
-    "status": "aktif",
-    "summary": {
-      "pano_denetimi": "377 görev sınıflandırıldı, 21 review analiz, tamamlanma %63",
-      "gorev_atamalari": "UTKU 3 görev, YASU 3 görev (review→aktif)",
-      "mimir_revizyon": "Sistem sağlam, D-66 bypass implementation eksik"
-    },
-    "tasks": [
-      {
-        "id": "TEST-ADMIN-PERF-01",
-        "assigned_to": "utku",
-        "priority": "P0",
-        "status": "aktif",
-        "baslangic": "2026-09-23T12:23:45Z"
-      },
-      {
-        "id": "TEST-WEBHOOK-KPI-01",
-        "assigned_to": "utku",
-        "priority": "P0",
-        "status": "aktif",
-        "baslangic": "2026-09-23T12:23:45Z"
-      },
-      {
-        "id": "UI-SUBHEADER-MUSTERI-01",
-        "assigned_to": "utku",
-        "priority": "P0",
-        "status": "aktif",
-        "baslangic": "2026-09-23T12:23:45Z"
-      },
-      {
-        "id": "ALTYAPI-KILIT-OTOMATIK-01",
-        "assigned_to": "yasu",
-        "priority": "P0",
-        "status": "aktif",
-        "baslangic": "2026-09-23T12:23:45Z"
-      },
-      {
-        "id": "ALTYAPI-TETIK-ZAMAN-01",
-        "assigned_to": "yasu",
-        "priority": "P0",
-        "status": "aktif",
-        "baslangic": "2026-09-23T12:23:45Z"
-      },
-      {
-        "id": "ALTYAPI-MOJIBAKE-DIZIN-01",
-        "assigned_to": "yasu",
-        "priority": "P0",
-        "status": "aktif",
-        "baslangic": "2026-09-23T12:23:45Z"
-      },
-      {
-        "id": "D-66-BYPASS",
-        "assigned_to": "ihsan",
-        "priority": "P0",
-        "status": "plan",
-        "description": "D-66 bypass tetikleme implementation: pano_denetim.py tara() + tetik_senk.py exit 2 handling",
-        "baslangic": "2026-09-23T12:27:46Z"
-      },
-      {
-        "task_id": "TRIGGER-LOGGING-CLEANUP",
-        "id": "TRIGGER-LOGGING-CLEANUP",
-        "baslik": "[ALTYAPI] trigger.py logging cleanup: print→logger, except→logger.exception (2s)",
-        "sahip": "yasu",
-        "oncelik": "P1",
-        "durum": "aktif",
-        "baslangic": "2026-09-23T13:53:00Z",
-        "bitis": null,
-        "dosyalar": [
-          "Huginn Data Insights/src/company_master/orchestrator/trigger.py",
-          "Huginn Data Insights/tests/test_trigger.py",
-          "Huginn Data Insights/tests/test_tetik_senk.py",
-          "Huginn Data Insights/tests/test_mojibake_dizin.py",
-          "Huginn Data Insights/tests/test_task_board_kilit.py"
-        ],
-        "not": "",
-        "source": "ic",
-        "from_agent": null,
-        "kanit": "",
-        "mod": "code",
-        "brief": "plans/brief_yasu_TRIGGER-LOGGING-CLEANUP.md",
-        "talimat": "D-87 tek komut atama: trigger.py logging cleanup, 34 test hedefi"
-      },
-      {
-        "id": "ADMIN-PANEL-RAPOR-TAB",
-        "assigned_to": "backlog",
-        "priority": "P2",
-        "status": "backlog",
-        "description": "Admin panel rapor tab (low priority)",
-        "baslangic": null
-      }
-    ],
-    "baslik": "-",
-    "sahip": "-",
-    "oncelik": "P2",
-    "durum": "plan",
-    "dosyalar": [],
-    "mod": "code",
-    "id": ""
-  },
-  {
     "task_id": "ADMIN-UX-LOGOUT-01",
     "id": "ADMIN-UX-LOGOUT-01",
     "baslik": "[UI] Yönetici çıkış uygulaması yaz → web_dashboard/tabs/admin_auth.py (1s)",
@@ -7227,7 +7039,7 @@
   {
     "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME",
     "id": "ALTYAPI-D66-BYPASS-TETIKLEME",
-    "baslik": "[Altyapi] D-65 Is Durmaz Bypass Tetikleme → pano_denetim exit 2 + tetik_senk rapor (1-2g)",
+    "baslik": "[ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s)",
     "sahip": "ihsan",
     "oncelik": "P1",
     "durum": "plan",
@@ -7250,7 +7062,7 @@
   {
     "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
     "id": "ALTYAPI-D66-BYPASS-TETIKLEME-01",
-    "baslik": "[ALTYAPI] düzelt tetik_senk.py bypass flag → tetik_senk.py (20s)",
+    "baslik": "[ALTYAPI] duzelt tetik_senk.py bypass flag -> tetik_senk.py (2s)",
     "sahip": "ihsan",
     "oncelik": "P1",
     "durum": "plan",
@@ -7299,5 +7111,22 @@
     "mod": "code",
     "brief": "plans/brief_yasu_ALTYAPI-GROQ-KEY-DOGRULA-01.md",
     "talimat": "ALTYAPI-GROQ-KEY-DOGRULA-01: GroqClient.chat() gercek Groq API'sine karsi test et. Brif: plans/brief_yasu_ALTYAPI-GROQ-KEY-DOGRULA-01.md"
+  },
+  {
+    "task_id": "D-192-FAZ2",
+    "id": "D-192-FAZ2",
+    "baslik": "[ADMIN-UI] Ajan Chat Faz 2: Onem Derecesi + Cozum kolonu + 6 ajan rengi + Tarih sona tasindi",
+    "sahip": "orkestrator",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-23T21:00:00",
+    "bitis": "2026-09-23T22:00:00",
+    "dosyalar": ["src/company_master/chat.py", "scripts/ajan_chat.py", "web_dashboard/tabs/admin_panel.py"],
+    "not": "D-192 Faz 2 tamamlandi: Ajan/Hangi Ajana/Onem Derecesi/Cozum kolonlari, 6 ajan rengi, Tarih sona tasindi. Commit: 4db6465. Retroaktif pano kaydi.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": null,
+    "talimat": ""
   }
 ]
