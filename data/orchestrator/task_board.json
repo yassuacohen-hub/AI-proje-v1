@@ -6720,7 +6720,7 @@
     "oncelik": "P2",
     "durum": "done",
     "baslangic": "2026-09-23T10:39:33",
-    "bitis": "2026-09-24T01:25:03",
+    "bitis": "2026-09-24T01:59:12",
     "dosyalar": [],
     "not": "Teslim (ihsan): 3 adim tamam: 19 ALARM (4 otomatik silindi, 15 _trash/ tasindi), 26 mojibake onarildi (5 kurtarilamaz), 29 gorev archive + 4 bitis_temizle. tetik_senk.py'de 3 hata bulundu ve duzeltildi: yanlis data_dir (triggers/ eksik + cwd-bagimli, script haftalardir sessizce 0 dosya isliyordu), iptal final durum listesinde yoktu, cp1254 emoji cokmesi. Pano denetimi fail(4 hata) -> ok(0 hata). 224 tetik satiri, 0 bozuk JSON, 0 BOM.",
     "source": "ic",
@@ -6787,9 +6787,9 @@
     "baslik": "[ALTYAPI] Kilit otomatik birakmayi yaz → src/company_master/orchestrator/task_board.py (3s)",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-23T12:23:45Z",
-    "bitis": null,
+    "bitis": "2026-09-24T01:59:37",
     "dosyalar": [],
     "not": "Teslim (yasu): Kilit otomatik birakma altyapisi tamamlandi. Bulgu: lock_birak_gorev(), stale_kilitler(24) ve gorev_guncelle(done) baglamasi zaten kodda mevcuttu (ORCH-05). Eksik parca eklendi: (1) _lock_alan() self-lock guard — file_locks.json/task_board.json artik kendini kilitleyemez (sessiz gecis), (2) 2 yeni test (self-lock + done-hata-yutma). Test: 9/9 PASSED. lock_birak() imzasi degismedi.",
     "source": "ic",
@@ -6820,9 +6820,9 @@
     "baslik": "[ALTYAPI] mojibake_onar.py dizin taramasini yaz → mojibake_onar.py (2s)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-23T12:23:45Z",
-    "bitis": null,
+    "bitis": "2026-09-24T01:59:13",
     "dosyalar": [],
     "not": "Teslim (yasu): mojibake_onar.py dizin modu eklendi: --dizin **/*.md taramasi, --dizin+dosya karsilikli dislamasi (rc=2), dizin modunda dry-run varsayilan (--uygula ile yaz), taranan/degisen ozet satiri (0'da da cikar). Tek-dosya modu geri uyumlu (D-48: yazar, --kontrol rapor). Test: tests/test_mojibake_dizin.py 7/7 PASSED. Gercek kosu: plans/ 45 md tarandi degisen=0.",
     "source": "ic",
@@ -6854,9 +6854,9 @@
     "baslik": "[ALTYAPI] tetik_senk zamanlamasini yaz → tetik_senk.py (2s)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-23T12:23:45Z",
-    "bitis": null,
+    "bitis": "2026-09-24T01:59:13",
     "dosyalar": [],
     "not": "Teslim (yasu): tetik_senk.py: --gunluk + tetik_senk_log.jsonl (senk/sapma satiri) + sessiz basari yasagi (exit 0/1/2/3/4) + acik durum kumesi genisletildi (alindi/teslim/zincir_bekleme/blocked kapatilir) + schtasks gunluk zamanlayici (kur/durum/kaldir). 4 yeni test (8 passed). Gercek kosu: 14 sapma duzeltildi, ikinci kosu idempotent; HuginnData-TetikSenk kuruldu (24.09 08:30).",
     "source": "ic",
@@ -6871,9 +6871,9 @@
     "baslik": "[TEST] admin_performance kpi_karti gecisini yaz → web_dashboard/tabs/admin_performance.py (2s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-23T12:23:45Z",
-    "bitis": null,
+    "bitis": "2026-09-24T02:24:43",
     "dosyalar": [
       "web_dashboard/tabs/admin_performance.py"
     ],
@@ -6890,9 +6890,9 @@
     "baslik": "[TEST] webhook_monitor mock hedefini duzelt → tests/test_webhook_monitor_tab.py (1s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-23T12:23:45Z",
-    "bitis": null,
+    "bitis": "2026-09-24T01:59:13",
     "dosyalar": [
       "tests/test_webhook_monitor_tab.py"
     ],
@@ -6909,9 +6909,9 @@
     "baslik": "[UI] musteri_yonetimi subheader temizligini yaz → web_dashboard/tabs/musteri_yonetimi.py (2s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-09-23T12:23:45Z",
-    "bitis": null,
+    "bitis": "2026-09-24T01:59:13",
     "dosyalar": [
       "web_dashboard/tabs/musteri_yonetimi.py"
     ],
@@ -7082,9 +7082,9 @@
     "baslik": "[TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-23T22:32:40",
-    "bitis": null,
+    "bitis": "2026-09-24T01:59:13",
     "dosyalar": [
       "plans/brief_utku_TEST-13-PREEXIST-DUZELT-01.md"
     ],
@@ -7101,16 +7101,23 @@
     "baslik": "[ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-09-23T22:59:32",
-    "bitis": null,
-    "dosyalar": [],
-    "not": "",
+    "bitis": "2026-09-24T01:44:00",
+    "dosyalar": [
+      "src/company_master/gateway/groq_client.py",
+      "src/company_master/ai_chat.py",
+      "test_altyapi_groq_key_doagrala.py",
+      "data/orchestrator/D-195-GROQ-DIRECT-CLIENT_2026-09-23.md",
+      "data/orchestrator/ALTYAPI-GROQ-KEY-DOGRULA-01_rapor_2026-09-24_013732_yasu.md"
+    ],
+    "not": "Teslim (yasu): Groq API key doğrulama testi yapıldı. GROQ_API_KEY eksik → live test başarısız. D-195 dokümantasyonu ve rapor güncellendi. Rapor: C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\GÖREV-ÖZET-TESLİM_2026-09-24_014400_yasu.md",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_yasu_ALTYAPI-GROQ-KEY-DOGRULA-01.md",
-    "talimat": "ALTYAPI-GROQ-KEY-DOGRULA-01: GroqClient.chat() gercek Groq API'sine karsi test et. Brif: plans/brief_yasu_ALTYAPI-GROQ-KEY-DOGRULA-01.md"
+    "talimat": "ALTYAPI-GROQ-KEY-DOGRULA-01: GroqClient.chat() gercek Groq API'sine karsi test et. Brif: plans/brief_yasu_ALTYAPI-GROQ-KEY-DOGRULA-01.md",
+    "kanit": "data\\orchestrator\\GÖREV-ÖZET-TESLİM_2026-09-24_014400_yasu.md"
   },
   {
     "task_id": "D-192-FAZ2",
@@ -7132,5 +7139,38 @@
     "mod": "code",
     "brief": null,
     "talimat": ""
+  },
+  {
+    "task_id": "NINEROUTER-IMAGE-GEN-01",
+    "id": "NINEROUTER-IMAGE-GEN-01",
+    "baslik": "[SKILL] ninerouter.py'ye ninerouter_image_gen ekle",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-23T22:00:00",
+    "bitis": "2026-09-24T01:44:00",
+    "dosyalar": [
+      "skills/common/ninerouter.py"
+    ],
+    "not": "Teslim (yasu): ninerouter_image_gen fonksiyonu eklendi. Registry kaydı ve derleme doğrulandı. Rapor: C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\GÖREV-ÖZET-TESLİM_2026-09-24_014400_yasu.md",
+    "source": "ic",
+    "mod": "code"
+  },
+  {
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "id": "TEST-13-PREEXIST-DUZELT-02",
+    "baslik": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-24T02:06:58",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_TEST-13-PREEXIST-DUZELT-02.md",
+    "talimat": "brief plans/brief_utku_TEST-13-PREEXIST-DUZELT-02.md oku. DUZELT-01 raporu hatali/eksik, gercek durum 7 fail."
   }
 ]

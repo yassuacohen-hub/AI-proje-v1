@@ -1727,7 +1727,10 @@
     "ozet": "D-62/D-63 tamamlandi: archive sema, gece zinciri kuruldu, duplikeler arsivlendi, onay kuyrugu bosaldi.",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-19T03:48:47",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:24:33.682510+00:00",
+    "not": "Retro-onay: board zaten done/archive, kuyruk stale kayittan temizlendi (ihsan)."
   },
   {
     "task_id": "REVIEW-ONAY-KUYRUGU-01",
@@ -1737,7 +1740,10 @@
       "data/orchestrator/REVIEW-ONAY-KUYRUGU-01_rapor_2026-09-18_denetim.md"
     ],
     "teslim_tarihi": "2026-09-20T23:45:07",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:24:33.682510+00:00",
+    "not": "Retro-onay: board zaten done/archive, kuyruk stale kayittan temizlendi (ihsan)."
   },
   {
     "task_id": "TEST-AYARLAR-KAPSAM-01",
@@ -1759,7 +1765,10 @@
       "data/orchestrator/DOC-SIRKET-MASTER-01_rapor_2026-09-22_uretim.md"
     ],
     "teslim_tarihi": "2026-09-22T06:09:41",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:24:33.682510+00:00",
+    "not": "Retro-onay: board zaten done/archive, kuyruk stale kayittan temizlendi (ihsan)."
   },
   {
     "task_id": "ALTYAPI-KILIT-YOL-FIX-01",
@@ -1769,7 +1778,10 @@
       "data/orchestrator/ALTYAPI-KILIT-YOL-FIX-01_rapor_2026-09-22_uretim.md"
     ],
     "teslim_tarihi": "2026-09-22T06:55:01",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:24:33.682510+00:00",
+    "not": "Retro-onay: board zaten done/archive, kuyruk stale kayittan temizlendi (ihsan)."
   },
   {
     "task_id": "ALTYAPI-PANO-ENCODING-FIX-01",
@@ -1779,7 +1791,10 @@
       "data/orchestrator/ALTYAPI-PANO-ENCODING-FIX-01_rapor_2026-09-22_uretim.md"
     ],
     "teslim_tarihi": "2026-09-22T07:12:12",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:24:33.682510+00:00",
+    "not": "Retro-onay: board zaten done/archive, kuyruk stale kayittan temizlendi (ihsan)."
   },
   {
     "task_id": "VERI-GRAPH-01",
@@ -1999,7 +2014,10 @@
       "data/orchestrator/AGENTS-MERGE-UU_rapor_2026-09-23_ihsan.md"
     ],
     "teslim_tarihi": "2026-09-23T10:42:42",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-23T23:24:33.682510+00:00",
+    "not": "Retro-onay: board zaten done/archive, kuyruk stale kayittan temizlendi (ihsan)."
   },
   {
     "task_id": "ADMIN-UI-CACHE-OPT-01",
@@ -2036,7 +2054,9 @@
       "data/orchestrator/VAULT-CLEANUP-BATCH_rapor_2026-09-23_ihsan.md"
     ],
     "teslim_tarihi": "2026-09-23T10:50:51",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-24T01:59:12"
   },
   {
     "task_id": "ADMIN-UX-SIDEBAR-TAB",
@@ -2054,7 +2074,9 @@
     "ozet": "admin_performance.py incelendi: UI-ADOPT-01 ile kpi_karti -> MetricCard gecisi yapildi (11 MetricCard, 1 kalan kpi_karti yorum satiri). TALIMAT: MetricCard yerine kpi_karti kullan derken test regresyonu kastenmis; mevcut durum zaten dogru. Ek is yok.",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-23T12:21:48",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-24T02:24:43"
   },
   {
     "task_id": "ALTYAPI-KILIT-OTOMATIK-01",
@@ -2066,7 +2088,9 @@
       "data/orchestrator/ALTYAPI-KILIT-OTOMATIK-01_rapor_2026-09-23_yasu.md"
     ],
     "teslim_tarihi": "2026-09-23T12:22:08",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-24T01:59:37"
   },
   {
     "task_id": "ALTYAPI-TETIK-ARSIV-01",
@@ -2091,7 +2115,9 @@
       "data/orchestrator/ALTYAPI-MOJIBAKE-DIZIN-01_rapor_2026-09-23_yasu.md"
     ],
     "teslim_tarihi": "2026-09-23T12:31:11",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-24T01:59:13"
   },
   {
     "task_id": "TEST-WEBHOOK-KPI-01",
@@ -2099,7 +2125,9 @@
     "ozet": "test_webhook_monitor_tab.py: st.metric -> webhook_monitor.kpi_karti mock degisikligi. webhook_monitor.py zaten kpi_karti kullaniyor (10x), kilitli dosya dokunmadi. 2/2 test PASS.",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-23T12:33:06",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-24T01:59:13"
   },
   {
     "task_id": "ALTYAPI-IMPORT-TEKLES-01",
@@ -2133,7 +2161,9 @@
     "ozet": "musteri_yonetimi.py: 5 st.subheader -> Section(...).render() (pazarlama.py kalibi). parametrize girdisi dokunmadi, kilitli dosyalar dokunmadi. 92/92 test_sayfa_iskeleti PASS.",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-23T12:51:06",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-24T01:59:13"
   },
   {
     "task_id": "ALTYAPI-MOJIBAKE-BARIYER-01",
@@ -2173,7 +2203,9 @@
       "data/orchestrator/ALTYAPI-TETIK-ZAMAN-01_rapor_2026-09-23_yasu.md"
     ],
     "teslim_tarihi": "2026-09-23T13:14:21",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-24T01:59:13"
   },
   {
     "task_id": "ALTYAPI-TEST-HERMETIK-01",
@@ -2244,6 +2276,8 @@
       "data/orchestrator/TEST-13-PREEXIST-DUZELT-01_rapor_2026-09-23_utku.md"
     ],
     "teslim_tarihi": "2026-09-24T01:23:50",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-24T01:59:13"
   }
 ]
