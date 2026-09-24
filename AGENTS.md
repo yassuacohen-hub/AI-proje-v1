@@ -569,6 +569,7 @@ Pratikte: Kod/görev worktree'ye yazılır, senkronla HDI'a kopyalanır. GRAPH �
 - **Kural:** Depo kökündeki `AGENTS.md` yalnızca (1) `n8n-as-code` üretilmiş blok ve (2) bu dosyaya işaretçi içerir. Ajan kuralları yalnızca `Huginn Data Insights/AGENTS.md` içinde yaşar.
 - **Gerekçe:** İki dosyada kural kopyası tutmak sürüm kayması ve merge çatışması üretiyordu; tek SSOT bunu kaynağında keser.
 - **n8n bloğu:** `<!-- n8n-as-code-start -->` … `<!-- n8n-as-code-end -->` arası elle düzenlenmez; `npx --yes n8nac update-ai` üretir.
+- **Teknik sebep (TUR-B2, 2026-09-24):** Depo kökü (`c:\Huginn Data Projesi`) git deposu **değildir**; kökteki `AGENTS.md` versiyonlanmaz, klonla taşınmaz ve sunucu değişiminde kaybolur — bu yüzden kural taşıyamaz, yalnızca işaretçi olabilir.
 
 ## İlgili Nodlar (GRAPH-FIX-02 Backlink + GRAPH-HUB-EXPAND Kategori Hub'ları)
 
