@@ -10361,3 +10361,4 @@
 {"ts": "2026-09-24T13:54:01", "kaynak": "nobetci", "ajan": "mimar", "task_id": "DASH-UX-02a", "tetik_sayisi": 311, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\mimar.ALARM.json"}
 {"ts": "2026-09-24T13:59:01", "kaynak": "nobetci", "ajan": "mimar", "task_id": "DASH-UX-02a", "tetik_sayisi": 312, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\mimar.ALARM.json"}
 {"ts": "2026-09-24T14:04:02", "kaynak": "nobetci", "ajan": "mimar", "task_id": "DASH-UX-02a", "tetik_sayisi": 313, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\mimar.ALARM.json"}
+{"ts": "2026-09-24T14:09:01", "kaynak": "nobetci", "ajan": "mimar", "task_id": "DASH-UX-02a", "tetik_sayisi": 314, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\mimar.ALARM.json"}

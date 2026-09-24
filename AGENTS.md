@@ -92,6 +92,7 @@
 - **Zorunlu:** Tek satırdan uzun her iş → `scripts/*.py` dosyası, sonra `python scripts/ad.py`.
 - **Zorunlu:** Her script idempotent olmalı (iki kez çalışınca bozmaz).
 - **Zorunlu:** `cd` mutlak yol ile: `cd "c:/Huginn Data Projesi/worktree klasoru"`.
+- **Zorunlu (cp1254 karşılığı):** Her Python çağrısı `set PYTHONIOENCODING=utf-8 && ...` ile başlar; yeni yazılan her script ilk satırlarında `sys.stdout.reconfigure(encoding="utf-8", errors="replace")` çağırır.
 
 ## Görev Atama Tek Komut (D-87 — KAHİN kararı 2026-09-21)
 - **Komut:** `python scripts/gorev_atama_otomatis.py --task-id <ID> --ajan <ajan>`
@@ -498,7 +499,7 @@
 - **Orphan nod (916 dosya):** Silme YASAK. Sprint 2'de VAULT-ORPHAN-INCELEME görevinde sınıflandırılacak (silinecek, tutulacak, arşivlenecek).
 - **Dosya boyutu yönetimi (Ponytail: rung 1-3):**
   - `.kilo/` 280 MB: Kilo Code checkpoint/session geçmişi. Rotasyon: `.kilo/checkpoints/` max 50 MB (tool native ayarı; kod değil).
-  - `backups/` 31.4 MB: pg_dump yedekleri. Politika: son 3 yedek tutma.
+  - `backups/` 31.4 MB: pg_dump yedekleri. Politika: son 3 yedek tutma. **Aynı politika `data/orchestrator/task_board*yedek*` ve `*backup*` dosyalarını da kapsar** — makine karşılığı: `gorev_kutusu.py bakim --rapor` üçten fazlasında uyarır.
   - Kök geçici dosyalar (`_gen64.txt`, `step1.py`, `_teshis_tmp.py`): `.gitignore` yasaklıyor; diskten da silinmeli (ADMIN-KOK-TEMIZLIK-02).
 - **Vault tarama script:** `scripts/vault_tarama.py` (stdlib-only: `pathlib`, `collections`, `hashlib`, `json`, `re`).
 
