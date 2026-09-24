@@ -1,142 +1,34 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-24T05:47:15
+> Son guncelleme: 2026-09-24T15:38:36
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
 
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
-| ADMIN-UX-PROFILMENU-01 | Sag-alt admin profil popover (ProfileMen | salih | P0 | iptal |
-| ADMIN-UX-MENUTREE-01 | Sol menu agaci yeniden gruplama; Ayarlar | ihsan | P1 | iptal |
-| WK-01 | Career Pages Scraper — Enhanced Data Ext | salih | P1 | archive |
-| WK-02 | OSB Tender Monitor — Real-time Tracking | - | P1 | archive |
-| FMT-01 | ruff format/lint standardizasyonu (web_a | utku | P2 | archive |
-| GUARD-ENC-02 | kodlama_denetim genisletme (CRLF/bosluk/ | utku | P2 | archive |
-| WK-03 | Proxy Rotation and IP Management | - | P2 | archive |
-| P7-5 | İSKUR Scraper | ihsan | P1 | archive |
-| P7-6 | Kariyer.net Scraper (Hizli MVP) | utku | P1 | archive |
-| P7-24 | ASO ve OSTİM Veri Kalite Raporu | ihsan | P2 | archive |
-| ORCH-08 | Gorev tetikleme + onay kuyrugu: orkestra | ihsan | P1 | archive |
-| ORCH-09 | Otomatik tetikleme nobetcisi: Gorev Zama | utku | P1 | archive |
-| simple_1 | Basit Test Görevi | ihsan | P1 | archive |
-| TEST-02 | [TEST] Test Görevi 2 | ihsan | P1 | archive |
-| ORCH-10 | Telegram Orkestrator Entegrasyonu (ORCH- | utku | P1 | archive |
-| P7-25 | Admin Dashboard KPI Kartlari — musteri s | ihsan | P1 | archive |
-| YENI-3 | Supabase companies tablosu olusturma | utku | P0 | archive |
-| YENI-5 | Apify webhook DLQ monitor | utku | P1 | archive |
-| CO-01 | CoPlot Arastirmasi: CoPlot nedir, ozelli | ihsan | P0 | archive |
-| CO-02 | CoPlot Entegrasyon Analizi: API, SDK, we | ihsan | P1 | archive |
-| COP-01 | VS Code Copilot Test: src/company_master | copilot | P1 | archive |
-| COP-02 | VS Code Copilot Test: web_dashboard/tabs | copilot | P2 | archive |
-| COP-03 | Copilot Test: src/company_master/orchest | copilot | P1 | archive |
-| COP-04 | Copilot Test: scripts/gorev_kutusu.py ic | copilot | P1 | archive |
-| COP-05 | Copilot Test: src/company_master/orchest | copilot | P1 | archive |
-| P7-27 | AI Cost Dashboard: 9router provider bazl | ihsan | P1 | archive |
-| P7-31 | Veri Kalitesi Ozeti: company_quality_sco | ihsan | P1 | archive |
-| COP-11 | Copilot: web_dashboard/tabs/admin_perfor | copilot | P2 | archive |
-| COP-06 | Copilot: scripts/decision_log.py icin lo | copilot | P2 | archive |
-| COP-07 | Copilot: src/company_master/utils/telegr | copilot | P2 | archive |
-| COP-08 | Sistem-Maliyet testi (retarget: admin_si | copilot | P2 | archive |
-| COP-09 | Sistem-Kalite testi (retarget: admin_sis | copilot | P2 | archive |
-| COP-10 | Sistem-Analitik testi (retarget: admin_s | copilot | P2 | archive |
-| COP-12 | Copilot: README.md guncelleme - Admin Pa | copilot | P2 | archive |
-| COP-13 | Copilot: web_dashboard/tabs/admin_perfor | copilot | P2 | archive |
-| COP-14 | Copilot: web_dashboard/tabs/admin_dlq.py | copilot | P2 | archive |
-| COP-15 | Copilot: web_dashboard/tabs/webhook_moni | copilot | P2 | archive |
-| COP-16 | Copilot: web_dashboard/css/style.css ici | copilot | P2 | archive |
-| COP-17 | Copilot: web_dashboard/js/app.js icin Ja | copilot | P2 | archive |
-| P7-44 | Dashboard UX redesign: Modern navigation | ihsan | P0 | archive |
-| P7-46 | Kullanici ayarlar paneli | ihsan | P1 | archive |
-| COP-18 | KPI bos-veri placeholder: web_dashboard/ | copilot | P2 | archive |
-| COP-19 | Login hata UX: web_dashboard/tabs/admin_ | copilot | P2 | archive |
-| COP-20 | DLQ sekmesi testi: tests/test_admin_dlq_ | copilot | P2 | archive |
-| COP-21 | Audit sekmesi testi: tests/test_admin_au | copilot | P2 | archive |
-| COP-22 | Karar defteri testi: tests/test_admin_pa | copilot | P2 | archive |
-| P7-32 | API Analytics: endpoint bazli kullanim i | ihsan | P1 | archive |
-| BRIF-01 | [BRIF] roo brifi: 03_mimari kararlari ok | ihsan | P1 | archive |
-| BRIF-02 | [BRIF] kilo brifi: 03_mimari kararlari o | utku | P1 | archive |
-| BRIF-03 | [BRIF] copilot brifi: 03_mimari kararlar | copilot | P1 | archive |
-| DASH-UX-02a | [DASH-UX] DASH-UX-02a: 5 sistem sekmesin | copilot | P1 | archive |
-| DASH-UX-02b | [DASH-UX] DASH-UX-02b: 4 sekmeyi tek 'ad | copilot | P1 | archive |
-| DASH-UX-03 | [DASH-UX] DASH-UX-03: Paket + Cagraz Sat | utku | P1 | archive |
-| DASH-UX-01 | [DASH-UX] DASH-UX-01: ANA TASARIM: app.p | ihsan | P1 | archive |
-| DASH-UX-04 | [DASH-UX] DASH-UX-04: Paketler + Pazarla | ihsan | P1 | archive |
-| COP-23 | [COP-TASARIM] TASARIM-1: Bosta-veri bilg | copilot | P2 | archive |
-| COP-24 | [COP-TASARIM] TASARIM-2: Son-guncelleme  | copilot | P2 | archive |
-| COP-25 | [COP-TASARIM] TASARIM-3: Sidebar yardim  | copilot | P2 | archive |
-| ORCH-13 | Pano sema dogrulama (S-05) + tetik_al pa | yasu | P2 | archive |
-| UX-01 | UI Component Library — Design System | ihsan | P1 | archive |
-| UX-02 | Responsive Layout System ve Breakpoint M | ihsan | P1 | archive |
-| UX-03 | Design Token ve Theme Management System | ihsan | P2 | archive |
-| ROO-UX-ADMIN-01 | Premium Enterprise Admin Panel UX audit  | ihsan | P1 | archive |
-| CL-01 | Integration Test Suite for API Endpoints | yasu | P1 | archive |
-| CL-02 | Performance Benchmark Scripts | yasu | P2 | archive |
-| CL-03 | Security Audit — Dependency Vulnerabilit | yasu | P1 | archive |
-| AR-02 | Competitor Analysis — Direct and Indirec | utku | P2 | archive |
-| PO-BACK-02 | Segment Eligibility Skoru + Onay Akışı ( | yasu | P1 | archive |
-| PO-BACK-03 | Kampanya Durum-Makinesi Denetimi (Source | ihsan | P1 | archive |
-| PO-BACK-04 | Paket Fiyat Kataloğu Tekilleştirme (Fiel | yasu | P1 | archive |
-| PO-BACK-05 | Veri Tazelik Etiketi + Manuel Yenileme ( | utku | P2 | archive |
-| PO-BACK-06 | Destek Merkezi MVP (Evidence Coverage) | utku | P2 | archive |
-| PO-BACK-07 | Feature Flags MVP (Data Quality + Source | utku | P2 | archive |
-| PO-BACK-08 | Executive Dashboard v1 (Coverage + Data  | yasu | P3 | archive |
-| PO-BACK-09 | Duplicate Rate Dashboard (Admin) | yasu | P1 | archive |
-| PO-BACK-10 | Coverage Analytics (Müşteri) | ihsan | P1 | archive |
-| PO-BACK-11 | Source Reliability Monitor (Admin) | ihsan | P1 | archive |
-| ADMIN-WF-01 | İş akışı optimizasyonu ve görev sıralama | utku | P1 | archive |
-| MRK-02F | card.py sayi bicimini i18n.sayi() ile te | yasu | P1 | archive |
-| MRK-02G | tests/test_i18n.py - 13 bekci testi + 4  | yasu | P1 | archive |
-| TEN-01 | Multi-tenant hazirligi: TenantContext +  | utku | P1 | archive |
-| GAM-01 | Rozet/Kesif motoru: 3 rozet + kullanici_ | utku | P2 | archive |
-| AI-RAG-01 | Odin AI RAG iskeleti: kaynak protokolu + | utku | P2 | archive |
-| TEN-02 | Tenant health Streamlit import ayrıştırm | utku | P1 | archive |
-| AI-CHAT-01-FIX | [FIX] AI-CHAT-01 teslim dosyalari diskte | ihsan | P1 | archive |
-| TEST-ISO-01 | [TEST] test_api_integration.py için izol | ihsan | P1 | archive |
-| HEDEF-NACE-01 | Kapsam karti: gercek NACE hedef tablosu  | ihsan | P2 | archive |
-| FIX-LEDGER-01 | error_ledger Windows tmp kilidi (WinErro | ihsan | P2 | archive |
-| BUG-DESTEK-UTF8 | KRITIK(P1): tests/test_destek.py UTF-16L | ihsan | P1 | archive |
-| BUG-CHART01-SYNTAX | SORUN(P2): ui/charts/__init__.py SyntaxE | yasu | P2 | archive |
-| BUG-MIG0006-UTF8 | KR-3: 0006_normalize_compat.py bozuk kod | ihsan | P2 | archive |
-| BUG-ENCODING-GUARD | KR-4: Kodlama denetim araci (BOM/NUL/0-b | yasu | P2 | archive |
-| CI-GATE-01 | CI kapisi: tam tests/ + collection-error | yasu | P1 | archive |
-| CHART-INT-01 | ui.charts modulunu admin_executive ekran | utku | P2 | archive |
-| I18N-SES-02 | Marka sesi JSON (105 tr anahtar) ses.jso | utku | P2 | archive |
-| BUG-SCRIPTS-COMPILE-01 | scripts/ hijyen: 3 compile-bozuk script  | yasu | P2 | archive |
-| REVIEW-PO-BACK-06 | PO-BACK-06 Destek Merkezi capraz incelem | yasu | P1 | archive |
-| UI-SIDEBAR-02 | [UI] Sidebar: marka blogu uste, logo, ko | utku | P2 | archive |
-| UI-TOPBAR-02 | [UI] Topbar: arama sag ust, breadcrumb a | utku | P2 | archive |
-| REV-I18N-SES-02 | Capraz inceleme: I18N-SES-02 kilo teslim | yasu | P1 | archive |
-| AUDIT-ENC-02 | Repo geneli kodlama denetimi (BOM/UTF-16 | yasu | P2 | archive |
-| MVP-KD-01 | MVP Karar Defteri ekrani: PageHeader + f | utku | P1 | archive |
-| MVP-KUL-01 | MVP Kullanici Yonetimi ekrani: PageHeade | utku | P1 | archive |
-| REV-MVP-KD-01 | Review: MVP-KD-01 Karar Defteri ekrani | yasu | P1 | archive |
-| P7-6b | Kariyer.net scraper saglamlastirma (MVP  | utku | P2 | archive |
-| REV-MVP-ADMIN-01 | MVP-ADMIN 4 ekran capraz denetim (rapor- | yasu | P1 | archive |
-| HIJYEN-01 | Kalinti gecici dosya temizligi | yasu | P2 | archive |
-| MVP-KUL-02 | Kullanici onayinda tier secici (K-1 bulg | utku | P2 | archive |
-| REV-ADMIN-ENV-01 | Review: admin sifre sifirlama scripti +  | yasu | P1 | archive |
-| UI-MODAL-01 | [UI] Admin panel acilir modal ekranlar + | yasu | P2 | archive |
-| ALTYAPI-KILIT-TEMIZLIK-V10-01 | [ALTYAPI] V10-HIJYEN dosyaları kilit sil | cline | P2 | iptal |
-| ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyası yaz → | yasu | P2 | archive |
-| BRIK-00 | ALTYAPI Archive sema + gece zinciri → ku | ihsan | P1 | archive |
-| ORKESTRA-ONAY-BOSALT-01 | [ORKESTRA] Onay kuyrugundaki 9 teslimi d | salih | P0 | iptal |
-| ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | plan |
+| ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | iptal |
+| VERI-ADMIN-AKTIVITE-LOG-13 | [VERI] Kullanıcı aktivite log tablosunu  | utku | P0 | bekliyor |
+| API-ADMIN-AKTIVITE-YAZ-14 | [API] Giriş/arama/AI olaylarını log'a ya | utku | P0 | bekliyor |
+| DOC-ADMIN-DURUM-SENKRON-15 | [DOC] Bayat durum satırlarını düzelt → § | utku | P1 | bekliyor |
+| API-ADMIN-CHURN-3SINYAL-16 | [API] Churn kuralını 3 sinyalli hâlde ya | utku | P1 | bekliyor |
+| UI-ADMIN-DAU-17 | [UI] Gerçek DAU kartını yaz → admin_kpi. | utku | P1 | bekliyor |
+| API-ADMIN-KAYNAK-SAGLIK-18 | [API] Kaynak sağlık skorunu ölç → 3 kova | utku | P1 | bekliyor |
+| UI-ADMIN-CRAWL-KONTROL-19 | [UI] Crawl tetikle/durdur aksiyonunu yaz | utku | P1 | bekliyor |
+| UI-ADMIN-ARAMA-BOSLUK-20 | [UI] Sonuçsuz arama frekans raporunu yaz | utku | P2 | bekliyor |
+| API-ADMIN-SUPHELI-AKTIVITE-21 | [API] Şüpheli aktivite kurallarını yaz → | utku | P2 | bekliyor |
+| UI-ADMIN-UPSELL-22 | [UI] Upsell aday listesini yaz → satış a | utku | P2 | bekliyor |
+| TEST-ADMIN-K2-AGIRLIK-23 | [TEST] K2 ağırlık şemasını denetle → tes | utku | P2 | yedek |
+| DOC-ADMIN-V9-KUTUCUK-24 | [DOC] V9 §16.5 kutucuklarını düzelt → 6  | utku | P2 | yedek |
+| UI-ADMIN-FEATURE-FLAG-25 | [UI] Feature flag yönetim ekranını yaz → | utku | P2 | yedek |
+| API-ADMIN-MFA-26 | [API] MFA + hesap kilidi akışını yaz → A | utku | P2 | yedek |
+| UI-ADMIN-LTV-CAC-27 | [UI] LTV/CAC kartlarını yaz → K8 tamamla | utku | P2 | yedek |
+| DOC-ADMIN-MULTITENANT-KARAR-28 | [DOC] Multi-tenant kararını belgele → KK | utku | P2 | yedek |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| UI-ADMIN-SSE-IHLAL-03 | [UI] SSE mimari ihlalini düzelt → admin_ | ihsan | 2026-09-24 |
-| VERI-ADMIN-LASTLOGIN-MIGRATION-04 | [VERI] users.last_login kolonunu yaz → s | ihsan | 2026-09-24 |
-| API-ADMIN-LASTLOGIN-YAZ-05 | [API] Giriş anında last_login değerini y | ihsan | 2026-09-24 |
-| API-ADMIN-CHURN-FONKSIYON-06 | [API] Churn risk fonksiyonunu yaz → chur | ihsan | 2026-09-24 |
-| UI-ADMIN-CHURN-KOLON-07 | [UI] Churn risk kolonunu yaz → musteri_y | ihsan | 2026-09-24 |
-| UI-ADMIN-MAU-08 | [UI] Yanlış DAU etiketini düzelt → admin | ihsan | 2026-09-24 |
-| UI-ADMIN-KULLANICI-BIRLESTIR-09 | [UI] Üç kopya kullanıcı yönetimini taşı  | utku | 2026-09-24 |
-| UI-ADMIN-GUNCELLIK-KOVA-10 | [UI] Veri güncellik kovalarını yaz → adm | utku | 2026-09-24 |
-| UI-ADMIN-MALIYET-ANOMALI-11 | [UI] AI maliyet anomali bloğunu yaz → ad | utku | 2026-09-24 |
-| DOC-ADMIN-ARSIV-12 | [DOC] Bayat analiz dökümanını taşı → arş | utku | 2026-09-24 |
 
 ## Son Handoff'lar
 

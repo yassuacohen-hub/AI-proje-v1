@@ -728,7 +728,7 @@ python scripts/ajan_chat.py bulgula "Tasarım (D-192)" "Font boyut tutarsız" --
 
 | Kit adı     | SSOT dosyası                                                          | Bağlı belge | İlerleme tabloları     |
 | ----------- | --------------------------------------------------------------------- | ----------- | ---------------------- |
-| `ADMIN-KİT` | `AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md` (v2.1) | 6           | §7 matris · §14 revizyon |
+| `ADMIN-KİT` | `AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md` (v2.5) | 6           | §7 matris · §14 revizyon |
 
 **`ADMIN-KİT` bağlı belgeleri (§0.1):** PRD kaynağı `Huginn Data Insights (HUGIns).txt` §889-1687 · V9 bağlam `01_versiyon_9_baglam_dokumani.md` §16.4/§16.5 · `docs/ARCHITECTURE_DECISION_HYBRID_ADMIN.md` · `03_mimari/06_muninn_prd_vs_huginn_analiz.md` (bayat) · `CHANGELOG.md` · görev panosu `data/orchestrator/ADMIN_PANEL_PLAN_VE_GOREV_PAKETLERI_2026-09-22.md`
 

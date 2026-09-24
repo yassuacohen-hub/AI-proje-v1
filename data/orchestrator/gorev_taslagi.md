@@ -18,10 +18,12 @@ toplam_madde = SSOT'ta sayılabilir madde kalemlerinin toplamı = §8.1 (A1-A10 
 | Ölçüm | Değer |
 | --- | --- |
 | Toplam SSOT maddesi | 65 |
-| Kapalı | 32 |
-| Açık | 33 |
+| Kapalı | 31 |
+| Açık | 34 |
 
-**Kapalı madde dağılımı (sayım kanıtı):** §8.1 → 1 (A2) · §8.3 → 6 (C1,C2,C3,C4,C6,C8) · §8.4 → 2 (EK BULGU-9,10) · §9 → 4 (K2,K3,K5,K6) · §10 → 6 (sıra 1,2,4,7,8,9) · §11 → 7 (KK-1,2,3,4,6,8,9) · §12 → 6 (G0,G1,G3,G5,G6,G7).
+**Kapalı madde dağılımı (sayım kanıtı):** §8.1 → 1 (A2) · §8.3 → 6 (C1,C2,C3,C4,C6,C8) · §8.4 → 2 (EK BULGU-9,10) · §9 → 4 (K2,K3,K5,K6) · §10 → 6 (sıra 1,2,4,7,8,9) · §11 → 6 (KK-1,2,3,4,8,9) · §12 → 6 (G0,G1,G3,G5,G6,G7).
+
+> **KK-6 kapalı sayılmaz (B-18, 2026-09-24):** SSOT §11'de varsayılan "AgGrid reddedildi" bir tavsiyedir, ürün sahibi kararı değildir. Karar verilene kadar madde açıktır — bu yüzden §11 kapalı sayısı 7'den 6'ya, toplam kapalı 32'den 31'e indi.
 
 **Görev panosu durumu:** üretilen admin görevi 22 · tamamlanan 12 (`-01`…`-12`) · devam eden 0 · açık 10 (`-13`…`-22`) + 1 altyapı görevi (`ALTYAPI-D66-BYPASS-TETIKLEME`) = pano aktif 11.
 
