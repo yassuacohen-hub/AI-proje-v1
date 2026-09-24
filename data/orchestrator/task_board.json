@@ -446,7 +446,7 @@
     "baslik": "[DOC] Admin pano arşiv günlüğü oluştur",
     "sahip": "utku",
     "oncelik": 6,
-    "durum": "beklemede",
+    "durum": "teslim edildi",
     "dosyalar": [
       "Huginn Data Insights/data/orchestrator/OTURUM_SONU_2026-09-24.md"
     ],
@@ -454,6 +454,9 @@
     "talimat": "Tümünü arşiv log'una ekle, SSOT §7/§14 güncelle",
     "dependencies": [
       "UI-ADMIN-MALIYET-ANOMALI-11"
-    ]
+    ],
+    "baslangic": "2026-09-24T19:43:14.986647",
+    "bitis": "2026-09-24T19:43:31.506306",
+    "not": "Bayat analiz arşivlendi: 06_muninn_prd_vs_huginn_analiz.md başına uyarı, SSOT §0.1/§11 KK-4 güncellendi — silme yok, bağlantılar korundu"
   }
 ]
