@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-24T19:10:51
+> Son guncelleme: 2026-09-24T19:25:07
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -8,11 +8,9 @@
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | iptal |
-| VERI-ADMIN-AKTIVITE-LOG-13 | [VERI] Kullanıcı aktivite log tablosunu  | utku | P0 | review |
 | API-ADMIN-AKTIVITE-YAZ-14 | [API] Giriş/arama/AI olaylarını log'a ya | utku | P0 | bekliyor |
 | DOC-ADMIN-DURUM-SENKRON-15 | [DOC] Bayat durum satırlarını düzelt → § | utku | P1 | bekliyor |
 | API-ADMIN-CHURN-3SINYAL-16 | [API] Churn kuralını 3 sinyalli hâlde ya | utku | P1 | bekliyor |
-| UI-ADMIN-DAU-17 | [UI] Gerçek DAU kartını yaz → admin_kpi. | utku | P1 | bekliyor |
 | API-ADMIN-KAYNAK-SAGLIK-18 | [API] Kaynak sağlık skorunu ölç → 3 kova | utku | P1 | bekliyor |
 | UI-ADMIN-CRAWL-KONTROL-19 | [UI] Crawl tetikle/durdur aksiyonunu yaz | utku | P1 | bekliyor |
 | UI-ADMIN-ARAMA-BOSLUK-20 | [UI] Sonuçsuz arama frekans raporunu yaz | utku | P2 | bekliyor |
@@ -29,6 +27,8 @@
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
+| VERI-ADMIN-AKTIVITE-LOG-13 | [VERI] Kullanıcı aktivite log tablosunu  | utku | 2026-09-24 |
+| UI-ADMIN-DAU-17 | [UI] Gerçek DAU kartını yaz → admin_kpi. | utku | 2026-09-24 |
 
 ## Son Handoff'lar
 

@@ -2416,6 +2416,18 @@
     "ozet": "0017_user_activity_log migration: tablo sema (BIGSERIAL PK, UUID FK, CHECK olay_tipi, INET/CHAR kolonlar NULL gecebilir, iki indeks) ve down dosyasi yazildi; test 12/12; brief kurallar tatmin; simulasyon 8/8 kod 0",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-24T19:10:51",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-24T19:25:07"
+  },
+  {
+    "task_id": "UI-ADMIN-DAU-17",
+    "ajan": "utku",
+    "ozet": "DAU kartı: user_activity_log son 24h distinct user + DAU/MAU oranı, tablo yok durumu güvenli, 5 test geçti",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T19:21:50",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-24T19:25:07"
   }
 ]

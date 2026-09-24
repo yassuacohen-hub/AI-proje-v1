@@ -28,9 +28,9 @@
     "baslik": "[VERI] Kullanıcı aktivite log tablosunu yaz → migration 0017 (2s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "review",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-24T19:25:07",
     "dosyalar": [
       "src/company_master/schema/migrations/0017_user_activity_log.sql"
     ],
@@ -112,13 +112,13 @@
     "baslik": "[UI] Gerçek DAU kartını yaz → admin_kpi.py aktivite sorgusu (2s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "bekliyor",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-24T19:25:07",
     "dosyalar": [
       "web_dashboard/tabs/admin_kpi.py"
     ],
-    "not": "Kaynak: SSOT §8.1 A9:273 · §10:369 · §12 G4:417. Bagimlilik: API-ADMIN-AKTIVITE-YAZ-14. MAU var DAU yok — yarim metrik yaniltici. Tablo yoksa 'veri kaynagi yok' rozeti (UI-ADMIN-SAHTE-KPI-01 deseni).",
+    "not": "Teslim (utku): DAU kartı: user_activity_log son 24h distinct user + DAU/MAU oranı, tablo yok durumu güvenli, 5 test geçti",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
