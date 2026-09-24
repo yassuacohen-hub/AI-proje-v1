@@ -2229,6 +2229,13 @@ def api_admin_login_post(req: dict, _rate: None = Depends(_auth_rate_guard)):
             raise HTTPException(status_code=403, detail="admin yetkisi gerekli")
         if not _verify_password(password, row["password_hash"]):
             raise HTTPException(status_code=401, detail="gecersiz email veya sifre")
+        # API-ADMIN-LASTLOGIN-YAZ-05: Başarılı girişte last_login güncelle
+        with engine.connect() as conn:
+            conn.execute(
+                text("UPDATE users SET last_login = NOW() WHERE email = :e"),
+                {"e": email},
+            )
+            conn.commit()
         return {"token": _user_token(row["email"])}
     try:
         secrets_path = Path(__file__).resolve().parent / ".streamlit" / "secrets.toml"
@@ -2237,6 +2244,13 @@ def api_admin_login_post(req: dict, _rate: None = Depends(_auth_rate_guard)):
                 secrets = tomllib.load(f)
             admin_pw = secrets.get("admin_password", "")
             if admin_pw and email == "admin@huginn.local" and admin_pw == password:
+                # API-ADMIN-LASTLOGIN-YAZ-05: Fallback admin için de last_login güncelle
+                with engine.connect() as conn:
+                    conn.execute(
+                        text("UPDATE users SET last_login = NOW() WHERE email = :e"),
+                        {"e": email},
+                    )
+                    conn.commit()
                 return {"token": _user_token(email)}
     except Exception:
         pass

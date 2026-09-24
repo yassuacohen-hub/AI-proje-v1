@@ -8,6 +8,8 @@ Alt sekmeler:
 4. Aramalar (DATA-LOG-01 — gerçek veri)
 5. Destek (admin_destek.render_destek_tab)
 6. Dışa Aktar (admin_export.render_export_tab)
+
+UI-ADMIN-CHURN-KOLON-07: Churn risk kolonu (SSOT §9 K1, API-ADMIN-CHURN-FONKSIYON-06).
 """
 from __future__ import annotations
 
@@ -23,6 +25,7 @@ from web_dashboard.tabs.admin_extras import render_user_management, TIER_SECIMLE
 
 from company_master.settings.user_settings import kvkk_maske_acik  # noqa: E402
 from scripts.dash04_api_client import get_api, post_api  # noqa: E402
+from company_master.churn import risk_etiketi  # noqa: E402 (UI-ADMIN-CHURN-KOLON-07)
 
 
 BOLUMLER = (

@@ -2297,5 +2297,29 @@
     "ciktilar": [],
     "teslim_tarihi": "2026-09-24T04:25:21",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "VERI-ADMIN-LASTLOGIN-MIGRATION-04",
+    "ajan": "ihsan",
+    "ozet": "users.last_login kolonu eklendi (v0016 migration): ALTER TABLE users ADD COLUMN last_login TIMESTAMPTZ NULL + CREATE INDEX idx_users_last_login. Down migration da eklendi. SSOT §11 KK-3 kapatıldı, §14 Revizyon Tablosu v2.1 2026-09-24 eklendi. Kanıt: information_schema.columns'ta last_login timestamp with time zone görünüyor, pg_indexes'ta idx_users_last_login indexi oluştu. Kodlama denetim temiz.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T04:34:36",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "API-ADMIN-LASTLOGIN-YAZ-05",
+    "ajan": "ihsan",
+    "ozet": "Giriş anında users.last_login güncelleniyor: web_app.py:2232 (ana yol) + :2246 (secrets.toml fallback) UPDATE users SET last_login=NOW() WHERE email=:e eklendi. Testler: test_auth_gate.py 13/13 passed, test_admin_auth_login.py 5/5 passed, test_api_integration.py 69/69 passed, test_sec_auth_01.py 10/10 passed. SSOT §16 Matris ve §14 Revizyon Tablosu v2.1 2026-09-24 güncellendi. Kodlama denetim temiz.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T04:37:35",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "API-ADMIN-CHURN-FONKSIYON-06",
+    "ajan": "ihsan",
+    "ozet": "Churn risk fonksiyonu eklendi: src/company_master/churn.py risk_etiketi(son_giris, bugun) -> str (SSOT §9 K1). Kural: son_giris < 14 gün -> 'Yok', >=14 gün veya None -> 'Düşük' (3 sinyalle genişleyecek: 0->Yok, 1->Düşük, 2->Orta, 3->Yüksek). Doctest 7/7 geçti. SSOT §9 K1 satırı kısmi olarak güncellendi (tek sinyal last_login), §14 Revizyon Tablosu v2.1 2026-09-24 eklendi. Kodlama denetim temiz.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T04:40:49",
+    "durum": "bekliyor"
   }
 ]
