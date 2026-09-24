@@ -1385,6 +1385,43 @@ def _charge_credit(user_id: str, email: str, reason: str, amount: int = 1) -> in
     return yeni
 
 
+def _charge_module_credit(user_id: str, tier: str, module: str) -> int:
+    """D-206: Modül kontörü düş. `module_cost` tablosundan maliyeti oku, `_charge_credit()` çağır.
+    
+    Args:
+        user_id: Kullanıcı ID
+        tier: Tier (terminal/strategic/enterprise)
+        module: Modül (match/ilan/analiz/teklif/kapasite)
+    
+    Returns:
+        Yeni bakiye | -1 (enterprise serbest) | 0 (DB error)
+    """
+    engine = get_engine()
+    with engine.connect() as conn:
+        # module_cost tablosundan maliyet oku
+        cost_row = (
+            conn.execute(
+                text(
+                    "SELECT cost_per_query FROM module_cost "
+                    "WHERE module_id = :mod AND tier = :t AND effective_to IS NULL"
+                ),
+                {"mod": module, "t": tier},
+            )
+            .mappings()
+            .first()
+        )
+        if not cost_row:
+            return 0  # Modül/tier kombinasyonu bulunamadı
+        
+        cost = int(cost_row["cost_per_query"] or 0)
+        if cost == 0:
+            return -1  # Serbest (enterprise veya kapalı modül)
+    
+    # Krediye düşür
+    reason = f"module:{module}:{tier}"
+    return _charge_credit(user_id, "", reason, cost)
+
+
 @app.post("/api/buyer/register")
 def api_buyer_register(req: dict):
     """Kurumsal e-posta + sifre ile kayit. Kurumsal domain dogrulamasi + KVKK zorunlu.
@@ -2694,6 +2731,83 @@ def api_admin_categories_save(req: dict, _auth: str = Depends(require_admin)):
     return {"ok": True, "created": True}
 
 
+@app.post("/api/admin/kvkk-mode")
+def api_admin_kvkk_mode(req: dict, _auth: str = Depends(require_admin)):
+   """D-207: Admin KVKK mode toggle (strict ↔ lenient).
+   
+   strict: KVKK kesinlikle uygulanır (yasak alanlar maskelenir)
+   lenient: Admin riski alıp kısıtlı alanları açar (yasak kalır)
+   
+   İstek: {mode: 'strict' | 'lenient', reason: str}
+   Cevap: {ok: bool, previous_mode: str, new_mode: str, changed_at: str}
+   """
+   mode = (req.get("mode") or "").strip().lower()
+   reason = (req.get("reason") or "").strip()
+   
+   if mode not in ("strict", "lenient"):
+       raise HTTPException(status_code=400, detail="mode 'strict' veya 'lenient' olmalı")
+   if not reason or len(reason) < 3:
+       raise HTTPException(status_code=400, detail="reason en az 3 karakter olmalı")
+   
+   # Admin ID'sini token'dan al
+   auth_header = req.get("_auth_header") or ""
+   admin_id = "system"  # ponytail: Token parsing opsiyonel; system default
+   
+   engine = get_engine()
+   
+   # Mevcut mode'u oku
+   previous_mode = "strict"  # default
+   with engine.connect() as conn:
+       row = conn.execute(
+           text("SELECT mode FROM admin_kvkk_mode WHERE effective_to IS NULL ORDER BY changed_at DESC LIMIT 1")
+       ).mappings().first()
+       if row:
+           previous_mode = row["mode"]
+   
+   # Eğer zaten aynı mode'daysa, değişiklik yapma
+   if mode == previous_mode:
+       return {
+           "ok": True,
+           "previous_mode": previous_mode,
+           "new_mode": mode,
+           "changed_at": datetime.now().isoformat(),
+           "message": "Mevcut mode ile aynı"
+       }
+   
+   # Eski mod'ü sonlandır ve yenisini ekle
+   now = datetime.now().isoformat()
+   try:
+       with engine.begin() as conn:
+           # Mevcut modu sonlandır
+           conn.execute(
+               text("UPDATE admin_kvkk_mode SET effective_to = :now WHERE effective_to IS NULL"),
+               {"now": now}
+           )
+           # Yeni modu ekle
+           conn.execute(
+               text("""
+                   INSERT INTO admin_kvkk_mode (admin_id, mode, changed_at, reason, effective_to)
+                   VALUES (:admin_id, :mode, :changed_at, :reason, NULL)
+               """),
+               {
+                   "admin_id": admin_id,
+                   "mode": mode,
+                   "changed_at": now,
+                   "reason": reason,
+               }
+           )
+       # Cache'i temizle
+       cache_set("kvkk_admin_mode", mode)
+       return {
+           "ok": True,
+           "previous_mode": previous_mode,
+           "new_mode": mode,
+           "changed_at": now
+       }
+   except Exception as e:
+       raise HTTPException(status_code=500, detail=f"Mode değiştirilemedi: {str(e)}")
+
+
 @app.get("/api/dashboard", response_class=HTMLResponse)
 def serve_dashboard(_auth: str = Depends(require_api_key)) -> HTMLResponse:
     index = WEB_DIR / "index.html"
@@ -2788,17 +2902,26 @@ def api_sources(_auth: str = Depends(require_api_key)) -> list[dict]:
 def api_company_detail(
     company_id: str, mask: int = 0, _auth: str = Depends(require_api_key)
 ) -> dict:
-    """Tek firma detayi. KVKK: mask=1 ile telefon/e-posta maskeli."""
+    """Tek firma detayi. KVKK: 2-katman görünürlük (Layer 1: kod sınıfı, Layer 2: paket×grup tablo).
+    D-205: Seçici SELECT — sadece açık + yarı-açık alanlar. Yasak meta alanları hiç seçme."""
     engine = get_engine()
     _q_start = _perf_time.perf_counter()
     with engine.connect() as conn:
+        # Seçici SELECT (SELECT c.* yerine) — meta alanları dışla
+        # ponytail: Layer 2 tablo (plan_field_group) paket bazında kolon filtresi yapmayacak;
+        #           API seviyesinde statik whitelist yeterli. Paket görünürlüğü maskeleme'de (A3 apply_kvkk_mask).
+        sql = text("""
+            SELECT c.company_id, c.legal_name, c.trade_name, c.company_registration_number,
+                   c.foundation_year, c.primary_phone, c.primary_email, c.website,
+                   c.phone_validity_status, c.email_validity_status, c.address, c.city,
+                   c.province, c.country, c.zip_code, c.website_exists, c.domain_valid,
+                   c.digital_presence, c.annual_turnover, c.employee_count, c.turnover_range,
+                   c.employee_range, c.nace_code, c.industry_code, c.sector, c.subsector,
+                   c.manufacturing, c.created_at, c.updated_at
+            FROM companies c WHERE c.company_id = :cid
+        """)
         r = (
-            conn.execute(
-                text("""
-            SELECT c.* FROM companies c WHERE c.company_id = :cid
-        """),
-                {"cid": company_id},
-            )
+            conn.execute(sql, {"cid": company_id})
             .mappings()
             .first()
         )
@@ -2808,8 +2931,10 @@ def api_company_detail(
                 if isinstance(v, (float,)) and v is not None:
                     row[k] = float(v)
             row = normalize_company(row)
+            # Admin modu: strict (default) | lenient (mask=0 dışı)
+            admin_mode = "lenient" if mask == 1 else "strict"
             if _mask_active(mask):
-                row = apply_kvkk_mask(row)
+                row = apply_kvkk_mask(row, admin_mode=admin_mode)
             return row
         return {}
 

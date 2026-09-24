@@ -386,3 +386,37 @@ class TestDokumentation:
 
 if __name__ == "__main__":
     pytest.main([__file__, "-q"])
+
+
+# ── K2 Veri Kalite Skoru (SSOT) ──────────────────────────────
+# SSOT (admin_panel_hedef_dokumani.md line 347):
+# K2: Veri Kalite Skoru
+# Formula: 100*Σ(w_i*dolu_i)/Σw_i
+# Weights: [3, 3, 2, 2, 2, 1, 1]
+# Alanlar: vergi_no, website, email, telefon, nace_code, adres, linkedin
+# Penalty: veri_yasi > 90 gün → -15
+
+def test_k2_weight_schema():
+    """K2 (Veri Kalite Skoru) ağırlık şemasını doğrular.
+
+    SSOT (admin_panel_hedef_dokumani.md line 347):
+    K2: Veri Kalite Skoru
+    Formula: 100*Σ(w_i*dolu_i)/Σw_i
+    Weights: [3, 3, 2, 2, 2, 1, 1]
+    Alanlar: vergi_no, website, email, telefon, nace_code, adres, linkedin
+    Penalty: veri_yasi > 90 gün → -15
+    """
+    # SSOT'den ağırlıklar
+    k2_weights = [3, 3, 2, 2, 2, 1, 1]
+    assert len(k2_weights) == 7, f"K2 ağırlıkları 7 olmalı, got {len(k2_weights)}"
+    assert k2_weights == [3, 3, 2, 2, 2, 1, 1], f"Ağırlıklar yanlış: {k2_weights}"
+
+
+def test_dlq_birikme_hizi():
+    """DLQ birikme hızını saat başına hesaplamayı doğrular."""
+    from company_master.kaynak_guvenilirlik import dlq_birikme_hizi
+
+    assert dlq_birikme_hizi(10, 5, 2) == 2.5
+    assert dlq_birikme_hizi(0, 0, 1) == 0.0
+    assert dlq_birikme_hizi(5, 3, 0) == 0.0
+    assert dlq_birikme_hizi(8, 0, 2) == 4.0

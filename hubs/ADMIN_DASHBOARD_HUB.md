@@ -104,6 +104,7 @@ SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_
 | UI-ADMIN-CRAWL-KONTROL-19 | Crawl tetikle/durdur aksiyonunu yaz → operatör kontrol paneli | 2026-09-24 |
 | TEST-ADMIN-K2-AGIRLIK-23 | K2 ağırlık şemasını denetle → test + SSOT kanıt | 2026-09-24 |
 | DOC-ADMIN-DURUM-SENKRON-15 | Bayat durum satırlarını düzelt → §8.4/§10 kanıtlı (SSOT senkronize) | 2026-09-24 |
+| ALTYAPI-VERI-GORUNURLUK-01 | Katmanlı görünürlük & kontör sistemi: 0018 migration (3 tablo), normalize.py dict, web_app.py SELECT düzelt, test 5+4 | 2026-09-24 |
 | API-ADMIN-AKTIVITE-YAZ-14 | Giris/arama/AI olaylari loglandi: aktivite_yaz, web_app.py, 5 test | 2026-09-24 |
 | API-ADMIN-CHURN-3SINYAL-16 | Churn 3 sinyalli formulu: risk_etiketi_3sinyal, musteri_yonetimi.py SQL guncellendi | 2026-09-24 |
 | UI-ADMIN-ARAMA-BOSLUK-20 | Icerik bosluk raporu: admin_quality.py, normalize+frekans+eskik, rozet, testler | 2026-09-24 |

@@ -780,6 +780,34 @@ Her brief'te `**Hub:**` satırı zorunludur ([[plans/_brief_sablon]]); kapı izi
 
 **Yürürlük tarihi:** Kontrol 8 yalnız **2026-09-24 ve sonrasında** kapanan (`bitis` alanı) işleri denetler — kodda tek sabit: `gorev_kutusu.HAFIZA_KAPISI_YURURLUK`. Bu tarihten önce kapanan 376 işin karşılığı, iki hub'daki "Kapanan isler" bölümünün sonundaki çeyreklik arşiv bağlantısıdır (`data/orchestrator/task_board_arsiv_2026-Q3.json`, D-186). Geriye dönük 376 satır yazmak hafıza değil gürültü üretirdi; kapı ileriye dönük çalışır. İz araması `hubs/` dizinindeki **tüm** hub dosyalarında yapılır, çünkü brief `**Hub:**` satırıyla hedefini kendi seçer.
 
+## Katmanlı Görünürlük & Modül Kontörü (D-200 — D-208, KAHİN kararları 2026-09-24)
+
+Veri görünürlüğü (SELECT c.* sızıntısı, paket tanımı, kontör sistemi, admin filtreleme) için 9 karar:
+
+| # | Başlık | Karar | Referans |
+|---|---|---|---|
+| **D-200** | Kontör tanımı | Modül başına maliyeti farklı. `module_cost(module_id, tier, cost_per_query)` tablosu. | ALTYAPI-VERI-GORUNURLUK-01 §A3 |
+| **D-201** | Admin filtreleme anahtarı | `admin_kvkk_mode` tablo: strict (sabit KVKK) / lenient (admin riski üstlenir). Lenient sadece admin, audit zorunlu. | design_visibility_simulation.md §Senaryo 3 |
+| **D-202** | Müşteri gizleme kapatması | `?mask=0` parametresi **kaldırılır**. Müşteri gizlemeyi kapatamaz; KVKK Layer 1 sabit. Parametrе sadece sıkılaştırır. | design_visibility_simulation.md §Senaryo 5, brief §A3 |
+| **D-203** | Alan grubu görünürlüğü | 6 grup (kimlik, iletişim, lokasyon, dijital, ticari, sınai) × 3 paket = 18 satır `plan_field_group`. Admin sekmesinde aç/kapa. | brief §A1-A3 |
+| **D-204** | Kontör düşümü | Grup + firma başına 1 düşüm (modül+grup kombinasyon ileride). `/api/buyer/reveal?company_id=X&group=Y` ile kontör düşer. | design_visibility_simulation.md §Senaryo 2, brief §A3 |
+| **D-205** | Admin anahtarı değişimi | `admin_kvkk_mode` her değişikliği `user_activity_log`'a yaz (who/when/old/new). | brief §A3 |
+| **D-206** | OSINT kazıma filtresi | OSINT paketi = `plan="osint"`, kontör=0. Karantina kayıtlar filtrelenir (Ç4 çözüm). | design_visibility_simulation.md §Senaryo 4 |
+| **D-207** | Veri sınıflandırması | Alan → KVKK sınıfı (açık/yarı-açık/kısıtlı/yasak) matrisi. Kayıt başına değil alan başına (bakım basit). | field_catalog.md (yeni) |
+| **D-208** | Silme politikası | Veri **asla silinmez**. Karantina = `quarantine_reason` + `is_sahis` bayrakları. Ç1-Ç4 (GSM, e-posta, şahıs, WhatsApp) karantina ile çözülür. | design_visibility_simulation.md §Çelişkiler |
+
+**Uygulanacak dosyalar:**
+- [`migrations/0018_visibility_layer.sql`](src/company_master/schema/migrations/0018_visibility_layer.sql) — 3 tablo + ALTER companies
+- [`field_catalog.md`](field_catalog.md) — SSOT: ~60 alan × grup × KVKK sınıfı
+- [`normalize.py`](src/company_master/api/core/normalize.py) — `apply_plan()`
+- [`web_app.py`](web_app.py) — 4 çağrı noktası, `/api/buyer/reveal` endpoint
+- [`admin_panel.py`](web_dashboard/tabs/admin_panel.py) — 3 yeni sekmesi
+
+**Test senaryoları:**
+- `test_visibility_senaryo_1-5.py` — Müşteri match/ilan/analiz, admin filtreleme, OSINT, kontör düşümü
+- `test_kvkk_katman_iki.py` — KVKK Layer 1 sabit, Layer 2 kırılabilir
+- `test_module_cost.py` — Modül/tier/cost doğrulaması
+
 **Ilgili Nodlar**
 - [[src/company_master/orchestrator/task_board]]
 - [[scripts/gorev_kutusu]]

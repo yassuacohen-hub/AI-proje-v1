@@ -24,6 +24,68 @@ _TR_INSENSITIVE_CLS = {
     "S": "[ŞS]",
 }
 
+# KVKK Field Sınıflandırması (Layer 1 — Kod Katmanı)
+# D-203: Veri Sınıfı — 33 alan × 4 sınıf (açık/yarı-açık/kısıtlı/yasak)
+# Maskeleme logic: strict mode = sınıf kısıtlaması mutlak
+#                  lenient mode = kısıtlı → açık, yasak → hala maskeli
+_KVKK_FIELD_CLASS: Final[dict[str, str]] = {
+    # Kimlik (açık — tüm paketler)
+    "legal_name": "acik",
+    "trade_name": "acik",
+    "company_registration_number": "acik",
+    "foundation_year": "acik",
+    
+    # İletişim (kontrol altında — pakete göre)
+    "primary_phone": "kisitli",
+    "primary_email": "kisitli",
+    "website": "kisitli",
+    "phone_validity_status": "kisitli",
+    "email_validity_status": "kisitli",
+    
+    # Lokasyon (kontrol altında — pakete göre)
+    "address": "kisitli",
+    "city": "kisitli",
+    "province": "kisitli",
+    "country": "acik",  # Ülke açık (OSINT'ten zaten belli)
+    "zip_code": "kisitli",
+    
+    # Dijital (yarı-açık — çoğu paket)
+    "website_exists": "yarisacik",
+    "domain_valid": "yarisacik",
+    "digital_presence": "yarisacik",
+    
+    # Ticari (kontrol altında — pakete göre)
+    "annual_turnover": "kisitli",
+    "employee_count": "kisitli",
+    "turnover_range": "kisitli",
+    "employee_range": "kisitli",
+    
+    # Sınai (yarı-açık — çoğu paket)
+    "nace_code": "yarisacik",
+    "industry_code": "yarisacik",
+    "sector": "yarisacik",
+    "subsector": "yarisacik",
+    "manufacturing": "yarisacik",
+    
+    # Meta / İç (yasak — görülmez)
+    "quarantine_reason": "yasak",
+    "entity_confidence": "yasak",
+    "source_record_id": "yasak",
+    "status_confidence": "yasak",
+    "is_sahis": "yasak",
+}
+
+# Alan Grupları (Layer 2 — Tablo Katmanı için ref)
+# D-204: Alan Grubu — plan_field_group tabloda tanımlanır (18 satır: 6 grup × 3 paket)
+_FIELD_GROUPS: Final[dict[str, list[str]]] = {
+    "kimlik": ["legal_name", "trade_name", "company_registration_number", "foundation_year"],
+    "iletisim": ["primary_phone", "primary_email", "website", "phone_validity_status", "email_validity_status"],
+    "lokasyon": ["address", "city", "province", "country", "zip_code"],
+    "dijital": ["website_exists", "domain_valid", "digital_presence"],
+    "ticari": ["annual_turnover", "employee_count", "turnover_range", "employee_range"],
+    "sinai": ["nace_code", "industry_code", "sector", "subsector", "manufacturing"],
+}
+
 
 
 
@@ -309,15 +371,87 @@ def _mask_phone(phone) -> str:
     return f"{digits[:2]}***" if digits else "***"
 
 
-def apply_kvkk_mask(row: dict) -> dict:
-    """PII alanlari maskeler. Politika: telefon + e-posta maskeli;
-    firma unvani/web/VKN kamuya acik sayilir (PO karari 2026-09-01)."""
+def apply_kvkk_mask(row: dict, admin_mode: str = "strict", plan_field_visibility: dict | None = None) -> dict:
+    """PII alanlari KVKK sınıfına + Layer 2 görünürlüğe göre maskeler.
+    
+    Args:
+        row: Firma dict (companies tablosu satırı)
+        admin_mode: 'strict' (KVKK mutlak) | 'lenient' (kısıtlı → açık, yasak → hala maskeli)
+        plan_field_visibility: Layer 2 dict — {field_group: visibility} (DB'den yüklü).
+                               Yoksa Layer 1 sınıfından uygulanır.
+    
+    D-202: Admin KVKK Modu — strict=KVKK uygun, lenient=yönetici riskleniyor
+    D-204: Alan Grubu Görünürlüğü — plan_field_group (paket × grup) tanımlar
+    """
     if not isinstance(row, dict):
         return row
-    if row.get("primary_phone"):
-        row["primary_phone"] = _mask_phone(row["primary_phone"])
-    if row.get("primary_email"):
-        row["primary_email"] = _mask_email(row["primary_email"])
+    
+    for field, value in row.items():
+        if not value or field not in _KVKK_FIELD_CLASS:
+            continue  # Tanınmayan alan veya boş → maskele
+        
+        kvkk_class = _KVKK_FIELD_CLASS[field]
+        
+        # Layer 2 görünürlüğü var mı? Varsa bunu kullan (Layer 1 override)
+        if plan_field_visibility:
+            # Field hangi gruba ait? _FIELD_GROUPS'tan bul
+            field_group = None
+            for grp, fields in _FIELD_GROUPS.items():
+                if field in fields:
+                    field_group = grp
+                    break
+            
+            if field_group and field_group in plan_field_visibility:
+                layer2_visibility = plan_field_visibility[field_group]
+                # Layer 2 görünürlüğe göre maskelensin mi?
+                if layer2_visibility == "yasak":
+                    row[field] = "***" if isinstance(value, str) else None
+                    continue
+                elif layer2_visibility == "acik":
+                    # Açık → hiç maskeleme
+                    continue
+                elif layer2_visibility == "kisitli":
+                    if admin_mode == "strict":
+                        # Strict: kısıtlı maskeleme
+                        if field == "primary_phone":
+                            row[field] = _mask_phone(value)
+                        elif field == "primary_email":
+                            row[field] = _mask_email(value)
+                        else:
+                            row[field] = "***" if isinstance(value, str) else None
+                    # lenient: kısıtlı açık
+                    continue
+                elif layer2_visibility == "yarisacik":
+                    # Yarı-açık: seçici maskeleme (email domain açık vb.)
+                    if admin_mode == "strict":
+                        if field == "primary_email":
+                            row[field] = _mask_email(value)  # Domain açık
+                    continue
+        
+        # Layer 2 yok, Layer 1 sınıfından uygulanır
+        if kvkk_class == "acik":
+            continue  # Açık → maskeleme yok
+        elif kvkk_class == "yasak":
+            # Yasak her zaman maskelensin (meta/iç veri)
+            row[field] = "***" if isinstance(value, str) else None
+        elif kvkk_class == "kisitli":
+            if admin_mode == "strict":
+                # Strict: kısıtlı alanları maskelensin
+                if field == "primary_phone":
+                    row[field] = _mask_phone(value)
+                elif field == "primary_email":
+                    row[field] = _mask_email(value)
+                else:
+                    row[field] = "***" if isinstance(value, str) else None
+            # lenient: kısıtlı alanlar açık kalır (yönetici kabul etti)
+        elif kvkk_class == "yarisacik":
+            if admin_mode == "strict":
+                # Strict: yarı-açık alanları kısmi maskelensin
+                if field == "website":
+                    row[field] = "***" if isinstance(value, str) else None
+                # dijital alanlar genelde OSINT'ten belli → minimal maskeleme
+        # lenient: yarı-açık → açık
+    
     return row
 
 
