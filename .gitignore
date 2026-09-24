@@ -114,6 +114,9 @@ workspace/external/test_agent/
 # 9Router optimizer yedekleri (KVKK: token/anahtar içerebilir, dışarı gönderilmez)
 data/router/yedekler/
 data/router/son_uyarilar.json
+# TUR-B2 Adim 2 (2026-09-24): maskeli de olsa saglayici anahtari + hesap envanteri sizdirir
+data/router/optimizer_latest.json
+data_worktree/router/optimizer_latest.json
 
 # 9R-05 arşiv (yardımcı _9r05_* scriptleri)
 scripts/_arsiv/
@@ -131,3 +134,16 @@ data/_tmp/
 # SEC-AUTH-01 D-1: Streamlit secrets (plaintext admin fallback) depoya girmez
 .streamlit/secrets.toml
 .streamlit/secrets.*.toml
+
+# TUR-B2 Adim 2 (2026-09-24): sunucu tasinma guvenlik kapisi — genel sir desenleri
+*.key
+*.pem
+*.p12
+*.pfx
+secrets.*
+*_token.json
+*_token.txt
+*.token
+.n8nac/
+n8nac-config.json
+.kombai/

@@ -19,8 +19,8 @@ varsayılan başlatmada **açılmaz**; gerçek DB uzakta (`.env` `DATABASE_URL`)
 ## Canlı kanıt
 
 ```
-OK admin@huginn.local   -> 200 {"token":"admin@huginn.local|1789812871|7042b8c967dc3d578134bb439d345d5b"}
-OK yassuacohen@gmail.com -> 200 {"token":"yassuacohen@gmail.com|1789812871|3eaa3095b3468c935e4b368a70f013ac"}
+OK admin@huginn.local   -> 200 {"token":"<MASKELI: eposta|epoch|imza>"}
+OK <kullanici-2>        -> 200 {"token":"<MASKELI: eposta|epoch|imza>"}
 ```
 
 Çıkış kodu 0. Doğrulama aracı: `scripts/admin_giris_dogrula.py`
