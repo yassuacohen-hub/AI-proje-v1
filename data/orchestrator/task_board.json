@@ -426,7 +426,7 @@
     "baslik": "[UI] Maliyet anomali kartını düzelt",
     "sahip": "utku",
     "oncelik": 5,
-    "durum": "beklemede",
+    "durum": "teslim edildi",
     "dosyalar": [
       "Huginn Data Insights/web_dashboard/tabs/admin_cost.py",
       "Huginn Data Insights/tests/test_admin_maliyet_anomali.py"
@@ -435,7 +435,10 @@
     "talimat": "Tablo kontrol, test ekle, SSOT §7/§14 güncelle",
     "dependencies": [
       "UI-ADMIN-GUNCELLIK-KOVA-10"
-    ]
+    ],
+    "baslangic": "2026-09-24T19:42:44.717918",
+    "bitis": "2026-09-24T19:42:58.861449",
+    "not": "Maliyet anomali: robust_zscore_anomaly() z=0.6745*(deger-medyan)/MAD, eşik |z|>3.5, MAD=0 kenar durumu — 6/6 test geçti"
   },
   {
     "task_id": "DOC-ADMIN-ARSIV-12",
