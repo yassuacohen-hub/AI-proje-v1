@@ -126,6 +126,35 @@ SSOT §8.3 C8 (`:310`) kırık linkin `2026-09-22` tarihinde düzeltildiğini ya
 - D-196 ↔ D-197 çakışması: ikisi farklı katmanı düzenliyor (kit kapsamı ↔ durum tekliği), çelişki **bulunamadı**.
 - `arsivle` ↔ `bakim` çakışması: ikisi farklı dosyalara yazıyor, veri yarışı **bulunamadı** — ancak B-13 kapsama boşluğu ayrı bir konudur.
 
+### Kapanış durumu (TUR-B, 2026-09-24)
+
+Turun kapsamı B-02, B-07, B-08, B-09, B-10, B-17, B-18, B-20 idi. Kapsam dışı bulgulara dokunulmadı — aşağıda açık olarak işaretlendi. Kanıt: `python scripts/gorev_kutusu.py simulasyon` → sekiz kontrol `OK`, çıkış kodu **0**.
+
+| Bulgu | Durum | Commit | Kanıt |
+| --- | --- | --- | --- |
+| B-01 | Kapalı | önceki tur (D-198) | `simulasyon` kontrol 1 OK |
+| B-02 | Kapalı | `bb794b1` | SSOT §10 ve §8.4 öncelik kolonları kaldırıldı; durum yalnız §7'de |
+| B-03 | Kapalı | önceki tur | `simulasyon` kontrol 2 OK |
+| B-04 | Kapalı | önceki tur | `simulasyon` kontrol 3 OK |
+| B-05 | **Açık** | — | KVKK IP/ülke saklama politikası — ⏳ Ürün Sahibi kararı gerekir (kapsam dışı) |
+| B-06 | **Açık** | — | Yedek görevler (Y1-Y6) hâlâ panoda değil (kapsam dışı) |
+| B-07 | Kapalı | `bb794b1` | `simulasyon` kontrol 5 OK — §14 dışında yüzde satırı yok |
+| B-08 | Kapalı | `bb794b1` | SSOT §0 `v2.5` · §14 son satır `v2.5` · `AGENTS.md:731` `(v2.5)` |
+| B-09 | Kapalı | `bb794b1` | `simulasyon` kontrol 6 OK — §8-§12'de durum/öncelik etiketi yok |
+| B-10 | Kapalı | `bb794b1` | SSOT §12 G2 "Yapılan / Kalan" ayrımıyla yeniden yazıldı |
+| B-11 | **Açık** | — | K10 veri kaynağı (`user_activity_log` mi `admin_audit` mi) — ⏳ KAHİN onayı (kapsam dışı) |
+| B-12 | Kapalı | `dd6f1f9` | `simulasyon` kontrol 4 OK — kapsam kırık bağımlılığa daraltıldı |
+| B-13 | **Açık** | — | `cmd_bakim()` arşivi okumuyor (kapsam dışı) |
+| B-14 | Kapalı | `1e24bec` | `simulasyon` kontrol 8 OK — yürürlük eşiği `2026-09-24` + iki hub arşiv özeti |
+| B-15 | **Açık** | — | `data/orchestrator/` yedek/geçici dosya temizliği (kapsam dışı) |
+| B-16 | **Açık** | — | cp1254 — D-86 metnine cümle eklemek yeni karar açma yasağıyla sınırda; ⏳ KAHİN onayı |
+| B-17 | Kapalı | `dd6f1f9` | `simulasyon` kontrol 7 OK — aktif 10 brief şablona uyumlu, kapsam aktif panoya sınırlandı |
+| B-18 | Kapalı | `bb794b1` | KK-6 açık sayıldı; `gorev_taslagi.md` sayacı 32/33 → 31/34 |
+| B-19 | **Açık** | — | Kök `AGENTS.md:80` karar aralığı ifadesi (kapsam dışı) |
+| B-20 | Kapalı | `bb794b1` | §8.3 C8 — `plans/muninn_prn_vs_huginn_analiz.md:1-12` zaten D-186 yönlendirme stub'ı; kanıt satıra yazıldı |
+
+Ayrıca `36d9414` altı kırmızı testi yeşile aldı (bulgu numarası yok; D-198 kapısının ön şartıydı). Tur sonu: `pytest tests/ -q` → **4092 passed, 12 skipped, 0 failed**.
+
 ---
 
 ## 2. Orkestratör Özeleştirisi
