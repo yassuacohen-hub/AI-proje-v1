@@ -758,7 +758,15 @@ python scripts/ajan_chat.py bulgula "Tasarım (D-192)" "Font boyut tutarsız" --
 
 Bir `task_id` panoda yoksa "yeni iş" demek değildir; kapanıp arşivlenmiş olabilir. `gorev_ekle()` mükerrer kontrolünü yalnız `task_board.json` üzerinde değil, `task_board_arsiv_*.json` dosyalarının birleşimi üzerinde yapar ve hata metni **hangi arşiv dosyasında** bulunduğunu söyler; `bakim --rapor` aynı çakışmayı salt okunur raporlar, arşive asla yazmaz. Ayrıca **hiçbir üretim veya planlama turu, `python scripts/gorev_kutusu.py simulasyon` çıktısı temiz (çıkış kodu 0) değilken başlamaz** — tur öncesi zorunlu kapıdır. Gerekçe: `ALTYAPI-D66-BYPASS-TETIKLEME` işi arşivde `done` iken panoya ikinci kez `plan` olarak girdi ve aynı iş iki kez üretildi; kök neden unutkanlık değil, kapının yarım kapsamıdır.
 
+| Simülasyon çıkış kodu | Anlamı | Tur başlayabilir mi |
+|---|---|---|
+| `0` | Temiz | Evet |
+| `1` | Uyarı var | Evet — uyarılar tur planına yazılır (D-65) |
+| `2` | Hata var | **Hayır** — önce hata kapatılır |
+
 **Ilgili Nodlar**
 - [[src/company_master/orchestrator/task_board]]
 - [[scripts/gorev_kutusu]]
 - [[tests/test_gorev_mukerrer_arsiv]]
+- [[tests/test_gorev_kutusu_simulasyon]]
+- [[Huginn Data Insights/docs/GOREV_PANOSU_KULLANIM_KILAVUZU]] — §10 Proje Sağlık Simülasyonu (tablolu kullanım kılavuzu)

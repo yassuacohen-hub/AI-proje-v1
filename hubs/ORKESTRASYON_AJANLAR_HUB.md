@@ -33,7 +33,7 @@ Ana baglam: [[Huginn Data Insights/AGENTS]] · [[Huginn Data Insights/AGENT_SYNC
 
 ## Orkestrasyon Tasarimi
 - `Huginn Data Insights/AI proje v1/V10/11_osint_motoru/Orkestrator` — OSINT orkestratoru tasarimi
-- [[Huginn Data Insights/docs/GOREV_PANOSU_KULLANIM_KILAVUZU]] — Gorev panosu kullanim kilavuzu
+- [[Huginn Data Insights/docs/GOREV_PANOSU_KULLANIM_KILAVUZU]] — Gorev panosu kullanim kilavuzu; §10 Proje Saglik Simulasyonu (`gorev_kutusu.py simulasyon`, D-198 zorunlu tur kapisi)
 
 ## Kurallar / Politika
 - `Huginn Data Insights/AI proje v1/V10/09_kurallar_ve_promptlar/01_kasa_kurallari` — Kasa kurallari

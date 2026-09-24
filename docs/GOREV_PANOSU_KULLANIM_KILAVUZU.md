@@ -149,8 +149,70 @@ python -m src.company_master.orchestrator.cli sync
 | Karar değişti | `project_state.md` + gerekirse V9 bağlam dokümanı |
 | Test eklendi | `CHANGELOG.md` test sayısı notu |
 
+## 10. Proje Sağlık Simülasyonu — `simulasyon` (D-198, zorunlu kapı)
+
+### 10.1 Ne / Neden / Ne Zaman
+
+| Soru | Cevap |
+|------|-------|
+| **Ne?** | Projenin kalıcı sağlık aracı. Pano, arşiv, brief'ler ve SSOT'u 8 kontrolden geçirir. |
+| **Neden var?** | 2026-09-24 süreç denetimi: aynı iş iki kez üretildi, brifsiz görev atandı, SSOT'ta çelişkili durum kaldı. Hepsi ancak iş bittikten sonra fark edildi. |
+| **Ne çözüyor?** | Bu hataları **tur başlamadan önce** yakalar; sorun üretime değil ekrana düşer. |
+| **Ne zaman?** | Her üretim ve her planlama turundan önce. Çıkış kodu 0 değilken tur başlamaz (D-198). |
+| **Riski var mı?** | Yok. Salt okunur: hiçbir dosyaya yazmaz. İstediğin kadar çalıştırabilirsin. |
+| **Ne kadar sürer?** | Birkaç saniye; tamamı yerel dosya okuması, ağ/DB erişimi yok. |
+
+### 10.2 Kullanım
+
+| Komut | Ne zaman kullanılır |
+|-------|---------------------|
+| `set PYTHONIOENCODING=utf-8 && python scripts/gorev_kutusu.py simulasyon` | Normal tur öncesi. Bulguların ilk 5 örneğini `dosya:satır` olarak gösterir. |
+| `set PYTHONIOENCODING=utf-8 && python scripts/gorev_kutusu.py simulasyon --kuru` | Hızlı bakış / CI. Yalnız sayı + çıkış kodu; örnek satır basmaz. |
+
+`set PYTHONIOENCODING=utf-8` Windows cp1254 konsolu içindir (D-86).
+
+### 10.3 Çıkış kodu = kararın kendisi
+
+| Kod | Anlam | Ne yapılır |
+|-----|-------|------------|
+| `0` | Temiz | Tur başlayabilir. |
+| `1` | Uyarı var | İş durmaz (D-65), ama uyarılar tur planına girer. Orkestratör bilerek devam eder. |
+| `2` | Hata var | Tur **başlamaz**. Önce hata kapatılır, simülasyon yeniden çalıştırılır. |
+
+### 10.4 Sekiz kontrol — hangi risk, hangi çözüm
+
+| # | Kontrol | Yakaladığı risk | Bulgu çıkarsa çözüm | Seviye | Bulgu |
+|---|---------|-----------------|---------------------|--------|-------|
+| 1 | Pano ↔ arşiv `task_id` çakışması | Kapanmış iş panoya ikinci kez girer, aynı iş iki kez üretilir | Panodaki kaydı sil veya yeni `task_id` ver | HATA | B-01 |
+| 2 | Pano `brief` yolu diskte var mı | Ajan brifsiz iş alır, kapsamı kendi uydurur (D-66 ihlali) | Brifi yaz veya panodaki yolu düzelt | HATA | B-03 |
+| 3 | Açık görevde `dosyalar` (kilit) boş mu | İki ajan aynı dosyaya yazar, biri diğerini ezer | Brifteki kilitli dosyayı panoya taşı | UYARI | B-04 |
+| 4 | `dependencies` kaydı var mı / kapandı mı | Önkoşulu bitmemiş iş başlatılır, yarıda takılır | Sırayı düzelt veya bilerek devam et (D-65) | UYARI | B-12 |
+| 5 | SSOT'ta yüzde satırı (§14 hariç) | "%60 tamam" satırı bayatlar, yanlış karar verdirir | Yüzdeyi sil; ilerleme yalnız §7'de sayıyla durur (D-197 k.5) | UYARI | B-07 |
+| 6 | SSOT §8-§12'de durum/öncelik etiketi | Aynı işin durumu iki yerde farklı yazar | Etiketi §7'ye taşı, bölümde yalnız içerik kalsın (D-197 k.1-2) | UYARI | B-09 |
+| 7 | Brief `_brief_sablon.md` başlıklarına uyuyor mu | Kabul kriteri yazmayan brif, "bitti mi?" tartışması doğurur | Eksik başlığı brife ekle | UYARI | B-17 |
+| 8 | Kapanan görev SSOT/hub'da iz bırakmış mı | İş biter, belge güncellenmez; bilgi ajanın kafasında kalır | Kapanışı SSOT veya ilgili hub'a bir satır olarak yaz | UYARI | B-14 |
+
+### 10.5 Okuma kuralları
+
+| Çıktı | Anlamı |
+|-------|--------|
+| `OK` | Kontrol çalıştı, bulgu yok |
+| `UYARI n adet` / `HATA n adet` | Bulgu sayısı + ilk 5 örnek `dosya:satır` |
+| `ATLANDI: gerekçe` | Kontrol o an uygulanamadı (ör. SSOT diskte yok). **Uydurma `OK` yazılmaz** — kanıtsız iddia yasak. |
+
+### 10.6 Neden ayrı bir denetim betiği değil
+
+| Seçenek | Sonuç | Karar |
+|---------|-------|-------|
+| Ayrı `ssot_durum_denetim.py` | Bugün bir dosya, altı ay sonra `data/_tmp/` mezarlığı. B-15 bunun kanıtı: 5 artık betik birikmişti. | Reddedildi |
+| `gorev_kutusu.py` içinde alt komut | Kontroller zaten panoyu ve arşivi okuyan modülün yanında; tek giriş noktası, tek bakım yeri | **Seçildi** |
+| Git hook / CI zorunluluğu | Yerel geliştirmede sessizce atlanır, ajan turunu kapsamaz | İleride eklenebilir, önce komut yerleşsin |
+
 ---
 
 ## Ilgili Nodlar
 
 - [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]
+- [[Huginn Data Insights/AGENTS]]
+- [[scripts/gorev_kutusu]]
+- [[tests/test_gorev_kutusu_simulasyon]]

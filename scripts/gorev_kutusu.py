@@ -15,6 +15,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -398,6 +399,137 @@ def cmd_arsivle(args: argparse.Namespace) -> int:
     return 0
 
 
+# --- simulasyon kapisi (D-198) -------------------------------------------
+# Rapor ayri bir scripts/ssot_durum_denetim.py onerdi; acilmadi. Ayri betik
+# bugun bir dosya, alti ay sonra data/_tmp mezarligi (B-15 bunun kaniti).
+# Kontroller zaten panoyu/tetigi okuyan bu komutun icinde yasiyor.
+_SSOT = _KOK / "AI proje v1" / "V10" / "05_versiyonlar" / "02_admin_panel_hedef_dokumani.md"
+_HUB = _KOK / "hubs" / "ADMIN_DASHBOARD_HUB.md"
+_PLANS = _KOK / "plans"
+_SABLON_BASLIKLAR = ("## Neden", "## Doğrulanacak varsayım", "## Adımlar", "## Kabul kriteri")
+
+
+def _kontrol_yaz(no: int, ad: str, seviye: str, bulgular: list[str], ornek: bool = True) -> int:
+    """Tek kontrolun ciktisini basar, katki kodunu doner (0/1/2)."""
+    if not bulgular:
+        print(f"{no}. {ad}: OK")
+        return 0
+    print(f"{no}. {ad}: {seviye} {len(bulgular)} adet")
+    if ornek:
+        for b in bulgular[:5]:
+            print(f"     - {b}")
+        if len(bulgular) > 5:
+            print(f"     ... +{len(bulgular) - 5} daha")
+    return 2 if seviye == "HATA" else 1
+
+
+def _atlandi(no: int, ad: str, gerekce: str) -> int:
+    """Uygulanamayan kontrol uydurma OK yazmaz (urun sahibi kurali)."""
+    print(f"{no}. {ad}: ATLANDI: {gerekce}")
+    return 0
+
+
+def cmd_simulasyon(args: argparse.Namespace) -> int:
+    """D-198: her uretim/planlama turu oncesi zorunlu, salt okunur kapi."""
+    ornek = not args.kuru
+    pano = tb.gorev_listesi()
+    acik = [t for t in pano
+            if t.get("durum") not in tb.KAPALI_DURUMLAR and t.get("durum") != "yedek"]
+    kodlar: list[int] = []
+    print("=== SIMULASYON (salt okunur; hicbir dosyaya yazilmaz) ===")
+
+    # 1 — B-01: arsivde kapanmis is panoya ikinci kez girmis mi.
+    bulgular = []
+    for t in pano:
+        yer = tb.arsivde_bul(t["task_id"])
+        if yer:
+            bulgular.append(f"{t['task_id']} -> {yer}")
+    kodlar.append(_kontrol_yaz(1, "Pano<->arsiv task_id cakismasi (B-01)", "HATA", bulgular, ornek))
+
+    # 2 — B-03: brifsiz atama yasak (D-66) kapisinin diskteki karsiligi.
+    bulgular = []
+    for t in acik:
+        b = t.get("brief")
+        if not b:
+            bulgular.append(f"{t['task_id']}: brief alani bos")
+        elif not (_KOK / b).exists() and not Path(b).exists():
+            bulgular.append(f"{t['task_id']}: {b} diskte yok")
+    kodlar.append(_kontrol_yaz(2, "Brief dosyasi diskte var mi (B-03)", "HATA", bulgular, ornek))
+
+    # 3 — B-04: kilitli dosya panoda yazili mi.
+    bulgular = [t["task_id"] for t in acik if not t.get("dosyalar")]
+    kodlar.append(_kontrol_yaz(3, "Acik gorevde dosyalar bos mu (B-04)", "UYARI", bulgular, ornek))
+
+    # 4 — B-12: bagimlilik kaydi var mi, kapandi mi. Uyari; is durmaz (D-65).
+    bilinen = {t["task_id"]: t.get("durum") for t in pano}
+    bulgular = []
+    for t in acik:
+        for d in t.get("dependencies") or []:
+            if d in bilinen:
+                if bilinen[d] not in tb.KAPALI_DURUMLAR:
+                    bulgular.append(f"{t['task_id']} <- {d} (durum: {bilinen[d]})")
+            elif not tb.arsivde_bul(d):
+                bulgular.append(f"{t['task_id']} <- {d} (hicbir yerde kayit yok)")
+    kodlar.append(_kontrol_yaz(4, "Bagimlilik kaydi/durumu (B-12)", "UYARI", bulgular, ornek))
+
+    # 5 + 6 — D-197 kural 5 (yuzde yasak) ve kural 1-2 (durum yalniz §7'de).
+    if not _SSOT.exists():
+        kodlar.append(_atlandi(5, "SSOT yuzde satiri (D-197 k.5)", f"{_SSOT.name} diskte yok"))
+        kodlar.append(_atlandi(6, "SSOT 8-12 durum/oncelik etiketi (D-197 k.1-2)",
+                               f"{_SSOT.name} diskte yok"))
+        ssot_metin = ""
+    else:
+        ssot_metin = _SSOT.read_text(encoding="utf-8", errors="replace")
+        yuzde, etiket = [], []
+        bolum = 0
+        for i, s in enumerate(ssot_metin.splitlines(), 1):
+            m = re.match(r"^#{2,4} (\d+)", s)
+            if m:
+                bolum = int(m.group(1))
+            if bolum != 14 and re.search(r"\d\s*%", s):
+                yuzde.append(f"{_SSOT.name}:{i}  {s.strip()[:70]}")
+            if bolum in (8, 9, 10, 11, 12) and re.search(r"✅|⬜|\bP[012]\b", s):
+                etiket.append(f"{_SSOT.name}:{i}  {s.strip()[:70]}")
+        kodlar.append(_kontrol_yaz(5, "SSOT yuzde satiri (D-197 k.5, 14 harici)",
+                                   "UYARI", yuzde, ornek))
+        kodlar.append(_kontrol_yaz(6, "SSOT 8-12 durum/oncelik etiketi (D-197 k.1-2)",
+                                   "UYARI", etiket, ornek))
+
+    # 7 — B-17: brief'ler _brief_sablon.md baslik yapisina uyuyor mu.
+    briefler = sorted(_PLANS.glob("brief_*.md")) if _PLANS.is_dir() else []
+    if not briefler:
+        kodlar.append(_atlandi(7, "Brief sablon uyumu (B-17)", "plans/brief_*.md bulunamadi"))
+    else:
+        bulgular = []
+        for b in briefler:
+            metin = b.read_text(encoding="utf-8", errors="replace")
+            yok = [h for h in _SABLON_BASLIKLAR if h not in metin]
+            if yok:
+                bulgular.append(f"plans/{b.name}:1  eksik baslik: {', '.join(yok)}")
+        kodlar.append(_kontrol_yaz(7, "Brief sablon uyumu (B-17)", "UYARI", bulgular, ornek))
+
+    # 8 — B-14: kapanan is SSOT veya hub'da task_id izi birakmis mi.
+    kapanan = [t for t in pano if t.get("durum") in tb.KAPALI_DURUMLAR]
+    hub_metin = _HUB.read_text(encoding="utf-8", errors="replace") if _HUB.exists() else ""
+    if not kapanan:
+        kodlar.append(_atlandi(8, "Kapanan gorevin SSOT/hub izi (B-14)",
+                               "aktif panoda kapanmis gorev yok"))
+    elif not ssot_metin and not hub_metin:
+        kodlar.append(_atlandi(8, "Kapanan gorevin SSOT/hub izi (B-14)",
+                               "SSOT ve hub dosyasi diskte yok"))
+    else:
+        bulgular = [f"{t['task_id']}: ne SSOT'ta ne hub'da gecmiyor" for t in kapanan
+                    if t["task_id"] not in ssot_metin and t["task_id"] not in hub_metin]
+        kodlar.append(_kontrol_yaz(8, "Kapanan gorevin SSOT/hub izi (B-14)",
+                                   "UYARI", bulgular, ornek))
+
+    kod = max(kodlar)
+    print(f"\nSONUC: cikis kodu {kod}  (0 temiz / 1 uyari / 2 hata)")
+    if kod:
+        print("D-198: cikti temiz degilse uretim/planlama turu baslamaz.")
+    return kod
+
+
 def cmd_yardim(args: argparse.Namespace) -> int:
     """ORCH-12: Bosta ajanlar + onerileri goster."""
     bos = isbirligi.bos_ajanlar()
@@ -529,6 +661,11 @@ def main() -> int:
     arsivle_p = sub.add_parser("arsivle", help="Terminal kayitlari ceyreklik arsive tasi")
     arsivle_p.add_argument("--kuru", action="store_true", help="Yazma yok, sadece sayi raporu")
     arsivle_p.set_defaults(func=cmd_arsivle)
+
+    simulasyon_p = sub.add_parser("simulasyon", help="D-198: tur oncesi zorunlu salt okunur kapi")
+    simulasyon_p.add_argument("--kuru", action="store_true",
+                              help="Ornek satirlari bastirma, sadece sayi + cikis kodu")
+    simulasyon_p.set_defaults(func=cmd_simulasyon)
 
     yardim_p = sub.add_parser("yardim", help="ORCH-12: Bosta ajanlar + onerileri goster")
     yardim_p.set_defaults(func=cmd_yardim)
