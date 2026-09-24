@@ -134,9 +134,9 @@
     "baslik": "[API] Kaynak sağlık skorunu ölç → 3 kovalı rozet + DLQ birikme hızı (2s)",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-24T23:38:00",
     "dosyalar": [
       "src/company_master/kaynak_guvenilirlik.py"
     ],
@@ -154,9 +154,9 @@
     "baslik": "[UI] Crawl tetikle/durdur aksiyonunu yaz → operatör kontrol paneli (3s)",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-24T23:38:00",
     "dosyalar": [
       "web_dashboard/tabs/webhook_monitor.py"
     ],
@@ -276,7 +276,7 @@
     "baslik": "[UI] Feature flag yönetim ekranını yaz → A5 MVP (3s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "yedek",
+    "durum": "bekliyor",
     "baslangic": null,
     "bitis": null,
     "dosyalar": [],
@@ -285,7 +285,7 @@
     "source": "ic",
     "from_agent": null,
     "mod": "code",
-    "brief": "",
+    "brief": "plans/brief_utku_UI-ADMIN-FEATURE-FLAG-25.md",
     "talimat": ""
   },
   {
@@ -294,7 +294,7 @@
     "baslik": "[API] MFA + hesap kilidi akışını yaz → A6 auth (4s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "yedek",
+    "durum": "bekliyor",
     "baslangic": null,
     "bitis": null,
     "dosyalar": [],
@@ -303,7 +303,7 @@
     "source": "ic",
     "from_agent": null,
     "mod": "code",
-    "brief": "",
+    "brief": "plans/brief_utku_API-ADMIN-MFA-26.md",
     "talimat": ""
   },
   {
@@ -312,7 +312,7 @@
     "baslik": "[UI] LTV/CAC kartlarını yaz → K8 tamamlama (2s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "yedek",
+    "durum": "bekliyor",
     "baslangic": null,
     "bitis": null,
     "dosyalar": [],
@@ -321,7 +321,7 @@
     "source": "ic",
     "from_agent": null,
     "mod": "code",
-    "brief": "",
+    "brief": "plans/brief_utku_UI-ADMIN-LTV-CAC-27.md",
     "talimat": ""
   },
   {
@@ -330,7 +330,7 @@
     "baslik": "[DOC] Multi-tenant kararını belgele → KK-7 (1s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "yedek",
+    "durum": "bekliyor",
     "baslangic": null,
     "bitis": null,
     "dosyalar": [],
@@ -339,7 +339,7 @@
     "source": "ic",
     "from_agent": null,
     "mod": "code",
-    "brief": "",
+    "brief": "plans/brief_utku_DOC-ADMIN-MULTITENANT-KARAR-28.md",
     "talimat": ""
   },
   {
@@ -482,20 +482,22 @@
     "baslik": "[API] Kontör endpoint entegrasyonu (match/ilan) → _charge_module_credit çağrısı",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "bekliyor",
-    "baslangic": null,
+    "durum": "baslatdi",
+    "baslangic": "2026-09-24T23:35:40.539462",
     "bitis": null,
     "dosyalar": [
       "web_app.py",
       "src/company_master/schema/migrations/0018_visibility_layer.sql"
     ],
-    "not": "Gap-1: Kontör static. Fix: /api/match ve /api/ilan endpoints'te _charge_module_credit(user_id, tier, module) çağrısı ekle. module_cost tablosundan dinamik maliyet oku. Dependency: ALTYAPI-VERI-GORUNURLUK-01 tamamlandı.",
+    "not": "Baslatma bildirimi okundu (2026-09-24). Brief okundu. plans/brief_yasu_API-KVKK-KONTROL-25.md",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_yasu_API-KVKK-KONTROL-25.md",
     "talimat": "API-KVKK-KONTROL-25: /api/match ve /api/ilan endpoints'te _charge_module_credit() çağrısı ekle. Modül cost matrix'i module_cost tablosundan (0018 migration) oku. Terminal=10 kredi, strategic=3-8 kredi, enterprise=serbest.",
-    "dependencies": ["ALTYAPI-VERI-GORUNURLUK-01"]
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01"
+    ]
   },
   {
     "task_id": "TEST-VISIBILITY-ENTEGRASYON-27",
@@ -503,20 +505,22 @@
     "baslik": "[TEST] E2E senaryo testi (visibility layer + kontör) → 5 scenario + 4 conflict",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "bekliyor",
-    "baslangic": null,
+    "durum": "baslatdi",
+    "baslangic": "2026-09-24T23:35:40.539462",
     "bitis": null,
     "dosyalar": [
       "tests/test_visibility_layer.py",
       "src/company_master/api/core/normalize.py"
     ],
-    "not": "Gap-4: Test mock. Fix: test_visibility_layer.py gerçek apply_kvkk_mask() import et. 5 senaryo (terminal/strategic/strict/lenient/OSINT) + 4 conflict (Ç1-Ç4 karantina). pytest test_visibility_layer.py çalıştır.",
+    "not": "Baslatma bildirimi okundu (2026-09-24). Brief okundu. plans/brief_yasu_TEST-VISIBILITY-ENTEGRASYON-27.md",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_yasu_TEST-VISIBILITY-ENTEGRASYON-27.md",
     "talimat": "TEST-VISIBILITY-ENTEGRASYON-27: test_visibility_layer.py gerçek apply_kvkk_mask() çağrısı ile entegre et. 5 scenario + 4 conflict test'leri yazı ve çalıştır. Acceptance: pytest -v başarılı.",
-    "dependencies": ["ALTYAPI-VERI-GORUNURLUK-01"]
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01"
+    ]
   },
   {
     "task_id": "UI-ADMIN-KVKK-MODU-26",
@@ -524,20 +528,22 @@
     "baslik": "[UI] Admin KVKK mode toggle (strict ↔ lenient) → web_app POST endpoint",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "bekliyor",
-    "baslangic": null,
+    "durum": "review",
+    "baslangic": "2026-09-24T23:35:40.539462",
     "bitis": null,
     "dosyalar": [
       "web_app.py",
       "web_dashboard/tabs/admin_panel.py"
     ],
-    "not": "Gap-3: Admin toggle missing. Fix: /api/admin/kvkk-mode POST endpoint yazıldı (web_app.py). UI: admin_panel.py'de strict/lenient toggle ekle, reason input al, endpoint çağır. Audit trail: admin_kvkk_mode tablo.",
+    "not": "Teslim (utku): KVKK Mode sekmesi eklendi: render_kvkk_mode_tab (admin_panel.py) + TabTanimi kvkk_mode (__init__.py). strict/lenient radio + reason input (min 3 char) + API POST /api/admin/kvkk-mode + success/error feedback. Kodlama denetimi temiz.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_UI-ADMIN-KVKK-MODU-26.md",
     "talimat": "UI-ADMIN-KVKK-MODU-26: Admin panel'de strict/lenient toggle ekle. Kullanıcı strict/lenient seçer, reason yazar (text), /api/admin/kvkk-mode POST çağır. Cevap: {ok, new_mode, previous_mode, changed_at}. UI feedback: mode başarıyla değiştirildi mesajı göster.",
-    "dependencies": ["ALTYAPI-VERI-GORUNURLUK-01"]
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01"
+    ]
   },
   {
     "task_id": "UI-ADMIN-KVKK-RAPOR-28",
@@ -545,20 +551,23 @@
     "baslik": "[UI] KVKK maskeleme raporu → admin paneline ek sekme",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "bekliyor",
-    "baslangic": null,
+    "durum": "baslatdi",
+    "baslangic": "2026-09-24T23:35:40.539462",
     "bitis": null,
     "dosyalar": [
       "web_dashboard/tabs/admin_panel.py",
       "web_app.py"
     ],
-    "not": "Yeni sekme: admin_panel.py'de KVKK Raporu sekmesi ekle. Sorgu: admin_kvkk_mode tablo (geçmiş modlar), field maskeleme log (normalization). Tablo: tarih, mode (strict/lenient), sebep, kullanıcı, etki sayısı.",
+    "not": "Baslatma bildirimi okundu (2026-09-24). Brief okundu. plans/brief_utku_UI-ADMIN-KVKK-RAPOR-28.md",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
-    "brief": "plans/brief_utku_UI-ADMIN-KVKK-RAPOR-28.md",
+    "brief": "Huginn Data Insights/plans/brief_utku_UI-ADMIN-KVKK-RAPOR-28.md",
     "talimat": "UI-ADMIN-KVKK-RAPOR-28: Admin panel'e KVKK Maskeleme Raporu sekmesi ekle. Tablo: admin_kvkk_mode geçmiş kayıtları (mode, tarih, sebep). İstatistik: strict vs lenient geçişleri, en sık sebep, son 7 gün trend.",
-    "dependencies": ["ALTYAPI-VERI-GORUNURLUK-01", "UI-ADMIN-KVKK-MODU-26"]
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01",
+      "UI-ADMIN-KVKK-MODU-26"
+    ]
   },
   {
     "task_id": "DOC-VISIBILITY-KATMANI-29",
@@ -566,19 +575,21 @@
     "baslik": "[DOC] Kullanıcı dokümanı (görünürlük katmanı + kontör) → markdown guide",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "bekliyor",
-    "baslangic": null,
+    "durum": "baslatdi",
+    "baslangic": "2026-09-24T23:35:40.539462",
     "bitis": null,
     "dosyalar": [
       "docs/VISIBILITY_LAYER_GUIDE.md"
     ],
-    "not": "Yeni dosya: docs/VISIBILITY_LAYER_GUIDE.md. İçerik: Layer 1 (kod), Layer 2 (tablo), admin mode (strict/lenient), tier-based kontör (terminal/strategic/enterprise), örnek senaryolar.",
+    "not": "Baslatma bildirimi okundu (2026-09-24). Brief okundu. plans/brief_utku_DOC-VISIBILITY-KATMANI-29.md",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_DOC-VISIBILITY-KATMANI-29.md",
     "talimat": "DOC-VISIBILITY-KATMANI-29: docs/VISIBILITY_LAYER_GUIDE.md yaz. İçerik: (1) Layer 1 & 2 mimarı, (2) Admin KVKK mode, (3) Module kontör matrisi, (4) Çelişki çözümü (Ç1-Ç4 karantina). 3-4 scenario örneği.",
-    "dependencies": ["ALTYAPI-VERI-GORUNURLUK-01"]
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01"
+    ]
   },
   {
     "task_id": "API-LAYER2-DINAMIK-YÜKLEME-30",
@@ -599,7 +610,9 @@
     "mod": "code",
     "brief": "plans/brief_yasu_API-LAYER2-DINAMIK-YÜKLEME-30.md",
     "talimat": "API-LAYER2-DINAMIK-YÜKLEME-30: /api/company/{id}'de plan_field_group tablosundan paket-bazında alan görünürlüğü oku. apply_kvkk_mask() çağrısında plan_field_visibility parametre geç. Terminal/Strategic/Enterprise tier'ler için farklı alanlar açık/kapalı olsun.",
-    "dependencies": ["ALTYAPI-VERI-GORUNURLUK-01"]
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01"
+    ]
   },
   {
     "task_id": "KONTROL-KVKK-MASKELEME-31",
@@ -607,20 +620,23 @@
     "baslik": "[KONTROL] KVKK maskeleme end-to-end test → admin panel e2e",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "bekliyor",
-    "baslangic": null,
+    "durum": "baslatdi",
+    "baslangic": "2026-09-24T23:35:40.539462",
     "bitis": null,
     "dosyalar": [
       "tests/test_visibility_layer.py",
       "web_app.py"
     ],
-    "not": "End-to-end test: strict/lenient mod değişimi → field maskeleme değişimi kontrol. Admin /api/admin/kvkk-mode POST çağır, sonra /api/company/{id} fark et. Assertion: strict'te phone maskeli, lenient'te açık.",
+    "not": "Baslatma bildirimi okundu (2026-09-24). Brief okundu. plans/brief_yasu_KONTROL-KVKK-MASKELEME-31.md",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_yasu_KONTROL-KVKK-MASKELEME-31.md",
     "talimat": "KONTROL-KVKK-MASKELEME-31: End-to-end test yaz. (1) /api/admin/kvkk-mode POST strict=True çağır, (2) /api/company/{test_id} oku, (3) phone maskeli olmalı. (4) Lenient'e değiştir, (5) tekrar oku, (6) phone açık olmalı. pytest test.",
-    "dependencies": ["ALTYAPI-VERI-GORUNURLUK-01", "API-KVKK-KONTROL-25"]
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01",
+      "API-KVKK-KONTROL-25"
+    ]
   },
   {
     "task_id": "UI-KONTROL-PANOSU-32",
@@ -628,20 +644,23 @@
     "baslik": "[UI] Admin kontrol panosu → maskeleme durum metriksleri",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "bekliyor",
-    "baslangic": null,
+    "durum": "baslatdi",
+    "baslangic": "2026-09-24T23:35:40.539462",
     "bitis": null,
     "dosyalar": [
       "web_dashboard/tabs/admin_panel.py",
       "web_app.py"
     ],
-    "not": "Yeni sekmesi: Admin Panel'de Kontrol Panosu. Metrikler: kaç alan maskeli (strict), kaç alan açık (lenient), tier dağılımı (terminal/strategic/enterprise), son 24h maskeleme işlemi sayısı. Grafik: tier vs field_count bar chart.",
+    "not": "Baslatma bildirimi okundu (2026-09-24). Brief okundu. plans/brief_utku_UI-KONTROL-PANOSU-32.md",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_UI-KONTROL-PANOSU-32.md",
     "talimat": "UI-KONTROL-PANOSU-32: Admin Panel'e Kontrol Panosu sekmesi ekle. KPI'lar: (1) Maskeli alanlar (strict mode), (2) Açık alanlar (lenient), (3) Tier dağılımı, (4) Günlük işlem trend (son 7 gün). Bar/line chart Streamlit components.",
-    "dependencies": ["ALTYAPI-VERI-GORUNURLUK-01", "UI-ADMIN-KVKK-MODU-26"]
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01",
+      "UI-ADMIN-KVKK-MODU-26"
+    ]
   },
   {
     "task_id": "DOKÜMAN-KVKK-FAQ-33",
@@ -661,6 +680,8 @@
     "mod": "code",
     "brief": "plans/brief_utku_DOKÜMAN-KVKK-FAQ-33.md",
     "talimat": "DOKÜMAN-KVKK-FAQ-33: docs/KVKK_FAQ.md yaz. SSS bölümleri: (1) Field maskeli nedir? (2) Strict vs Lenient mod fark, (3) Quarantine flag nedir, (4) Tier upgrade, (5) Kontör sisteminin avantajları. Olay örnekleri + kod parçacıkları.",
-    "dependencies": ["ALTYAPI-VERI-GORUNURLUK-01"]
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01"
+    ]
   }
 ]
