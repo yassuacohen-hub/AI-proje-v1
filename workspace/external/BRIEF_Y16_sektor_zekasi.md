@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/BRIEF_Y16_sektor_zekasi.md]]
+
 # Y16 — SEKTOR ZEKASI / MVP MARKET BRAIN (sahip: arastirmaci)
 
 > Ana referans: `AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md` (V9 Market Brain)

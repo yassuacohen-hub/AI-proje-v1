@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/harici_ajan/output/entity_resolution_analysis.md]]
+
 # Entity Resolution Analizi
 
 ## Kapsam

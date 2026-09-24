@@ -2,8 +2,8 @@
 
 Bağlantılar: [[00-Home]] · [[10_ankara_osb_sentez]] · [[project_state]] · [[CHANGELOG]]
 
-**Tarih:** 2026-09-01
-**Sürüm:** 1.0
+**Tarih:** 2026-09-13
+**Sürüm:** 2.0
 **Bot:** [@Huginn_Insights_Bot](https://t.me/Huginn_Insights_Bot)
 **Karar referansı:** [[10_ankara_osb_sentez]] Karar 13
 
@@ -17,6 +17,7 @@ Bağlantılar: [[00-Home]] · [[10_ankara_osb_sentez]] · [[project_state]] · [
 | Username | [@Huginn_Insights_Bot](https://t.me/Huginn_Insights_Bot) |
 | Token | `.env` dosyasında (`TELEGRAM_BOT_TOKEN`) |
 | Chat ID | `.env` dosyasında (`TELEGRAM_CHAT_ID`) |
+| Ek yetkili chat ID'leri | `.env` dosyasında (`TELEGRAM_ALLOWED_CHAT_IDS`, opsiyonel) |
 | Polling script | `scripts/telegram_polling.py` |
 | Bildirim modülü | `src/company_master/utils/telegram_bot.py` |
 
@@ -27,6 +28,7 @@ Bağlantılar: [[00-Home]] · [[10_ankara_osb_sentez]] · [[project_state]] · [
 - **Token saklama:** `TELEGRAM_BOT_TOKEN` yalnızca `.env` dosyasında tutulur.
 - **Git:** `.env` dosyası `.gitignore`'da listelenmiştir; asla commit yapılmaz.
 - **Log:** Token'lar loglarda maskelenir (`8603398149:****c2M`).
+- **Yetkili chat:** `TELEGRAM_CHAT_ID` birincil kimliktir; `TELEGRAM_ALLOWED_CHAT_IDS` ile virgülle ayrılmış ek yetkili chat'ler tanımlanabilir.
 - **Paylaşım:** Token'ı kimseyle paylaşmayın; Product Owner ile Koordinatör arasında kalmalıdır.
 
 ---
@@ -55,18 +57,80 @@ Get-Process python | Where-Object { $_.CommandLine -like "*telegram_polling*" } 
 
 ## 4. Komutlar
 
-| Komut | Açıklama | Örnek Çıktı |
+### 4.1 Başlangıç ve Yardım
+
+| Komut | Açıklama | Örnek |
 |---|---|---|
-| `/start` | Bot tanıtımı | Proje adı, amaç |
-| `/help` | Komut listesi | Tüm komutlar |
-| `/status` | Proje durumu | Canlı kayıt sayısı, sürüm, arayüz URL |
-| `/gorev` | Aktif görevler | 5 başlık halinde görev listesi |
-| `/rapor` | Son kalite raporu | Toplam, ortalama kalite, yüksek sayısı |
-| `/wiki` | Wiki sayfaları | 7 önemli sayfa |
+| `/start` | Bot başlangıç mesajı | Proje amacı ve kategoriler |
+| `/help` | Kategorize komut listesi ve örnekler | Tüm komutlar |
+| `/menu` | Etkileşimli ana menü | Numbered menü |
+
+### 4.2 Görev Yönetimi
+
+| Komut | Alias | Kullanım | Açıklama |
+|---|---|---|---|
+| `/gorev-ekle` | `/at` | `/gorev-ekle &lt;id&gt; &lt;ajan&gt; &lt;baslik&gt;` | Panoya görev ekle ve ajan postasına tetik at |
+| `/gorev` | — | `/gorev` | Tüm görevleri duruma göre listele |
+| `/gorev-durum` | `/set_task_status` | `/gorev-durum &lt;id&gt; &lt;durum&gt;` | Görev durumunu güncelle |
+
+**Örnek:**
+```
+/gorev-ekle TASK-01 kilo "Firma scrape"
+```
+
+### 4.3 Onay ve İnceleme
+
+| Komut | Alias | Kullanım | Açıklama |
+|---|---|---|---|
+| `/onaylar` | — | `/onaylar` | Onay bekleyen teslimleri listeler |
+| `/onayla` | — | `/onayla &lt;id&gt;` | Görevi onayla (done) |
+| `/reddet` | — | `/reddet &lt;id&gt; &lt;neden&gt;` | Görevi reddet (aktife geri dönder) |
+| `/teslim` | — | `/teslim &lt;id&gt; &lt;ozet&gt;` | Görevi incelemeye gönder |
+
+**Örnek:**
+```
+/teslim TASK-01 Parse tamamlandi
+/reddet TASK-01 Gereksiz duzeltme
+```
+
+### 4.4 Durum ve Raporlama
+
+| Komut | Alias | Açıklama |
+|---|---|---|
+| `/durum` | `/status` | Proje durumu + aktif görevler |
+| `/pano` | — | Bekleyen tetik ve onay özeti |
+| `/rapor` | — | KPI raporu |
+| `/wiki` | — | V10 wiki sayfalarını listele |
+| `/gunluk` | — | Günlük özet |
+| `/izleme` | — | Kalite + proje izleme |
+| `/degisiklik` | — | CHANGELOG.md |
+
+### 4.5 Nöbetçi
+
+| Komut | Alias | Kullanım | Açıklama |
+|---|---|---|---|
+| `/nobet` | — | `/nobet` | Nöbetçi turu attırır (geciken tetikler) |
+| `/nobet-ayar` | `/nobet_ayar` | `/nobet-ayar &lt;kademe_sn&gt;` | Alarm süresini saniye olarak güncelle |
 
 ---
 
-## 5. Otomatik Bildirimler
+## 5. Komut Akışı (ORCH-08)
+
+```
+/gorev-ekle (veya /at)
+   ↓ Görev panoya eklendi (plan)
+Agent çalışır ve görevi teslim eder
+   ↓ /teslim
+   ↓ Onay kuyruğuna eklendi (review)
+/onaylar  →  İnceleme bekleyenleri görüntüle
+   ↓
+/onayla   →  Onay → done (kilitler bırakılır)
+/reddet   →  Reddet → aktif (agent düzeltir)
+```
+
+---
+
+## 6. Otomatik Bildirimler
 
 Aşağıdaki olaylar otomatik Telegram mesajı gönderir:
 
@@ -79,7 +143,7 @@ Aşağıdaki olaylar otomatik Telegram mesajı gönderir:
 
 ---
 
-## 6. Geliştirici Kullanımı
+## 7. Geliştirici Kullanımı
 
 ```python
 from src.company_master.utils.telegram_bot import (
@@ -97,23 +161,25 @@ send_task_started("OSTİM scrape", "Geliştirici Ajan")
 send_task_completed("OSTİM scrape", "Geliştirici Ajan", "300 firma parse edildi")
 
 # Hata bildirimi
-send_alert("Scraper Hatası", "Selector bulunamadi: div.col-lg-4.mb-3")
+send_alert("Scraper Hatası", "Selector bulunamadi: div.col-lg-4.mb_3")
 ```
 
 ---
 
-## 7. Sorun Giderme
+## 8. Sorun Giderme
 
 | Sorun | Çözüm |
 |---|---|
-| Bot cevap vermiyor | Polling çalışıyor mu? `Get-Process python` kontrol et |
+| Komut cevap vermiyor | Bot polling çalışıyor mu? `Get-Process python` kontrol et |
+| "Yetkisiz" mesajı | Komut yetkili chat ID'den gönderilmeli. `.env` `TELEGRAM_CHAT_ID` kontrol edilebilir |
+| "Bilinmeyen komut" | Bot yeniden başlatılmalı (eskiden kod güncellendi) |
 | "TOKEN not set" hatası | `.env` yüklenmemiş; ortam değişkenlerini ayarla |
 | Emoji bozuk | `PYTHONIOENCODING=utf-8` ayarla |
 | Rate limit | Telegram limit: saniyede 30 mesaj; aşma durumunda bekle |
 
 ---
 
-## 8. İlgili Wiki
+## 9. İlgili Wiki
 
 - [[10_ankara_osb_sentez]] Karar 13 — Telegram bot entegrasyon kararı
 - [[project_state]] — Proje durumu

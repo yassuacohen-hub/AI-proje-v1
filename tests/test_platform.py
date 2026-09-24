@@ -102,11 +102,11 @@ class TestEnterpriseDataPlatform(unittest.TestCase):
             "user@",
             "user @example.com",
         ]
-        
+
         for email in valid_emails:
             result = self.scanner.classify_value(email)
             self.assertEqual(result, "EMAIL", f"E-posta doğrulanmalı: {email}")
-        
+
         for email in invalid_emails:
             result = self.scanner.classify_value(email)
             self.assertNotEqual(result, "EMAIL", f"Geçersiz e-posta: {email}")
@@ -124,11 +124,11 @@ class TestEnterpriseDataPlatform(unittest.TestCase):
             "+90 400 123456",  # Türkiye'de geçersiz (4 ile başlayan)
             "+90 600 123456",  # Türkiye'de geçersiz (6 ile başlayan)
         ]
-        
+
         for phone in valid_phones:
             result = self.scanner.classify_value(phone)
             self.assertEqual(result, "PHONE", f"Telefon doğrulanmalı: {phone}")
-        
+
         for phone in invalid_phones:
             result = self.scanner.classify_value(phone)
             self.assertNotEqual(result, "PHONE", f"Geçersiz telefon: {phone}")
@@ -137,7 +137,7 @@ class TestEnterpriseDataPlatform(unittest.TestCase):
         """IBAN doğrulama testi."""
         valid_iban = self.generator.generate_mock_iban()
         self.assertEqual(self.scanner.classify_value(valid_iban), "IBAN")
-        
+
         # Geçersiz IBAN'lar
         self.assertFalse(self.scanner.classify_value("DE89370400440532013000"))  # Türkiye değil
         self.assertFalse(self.scanner.classify_value("TR123"))  # Çok kısa
@@ -146,10 +146,10 @@ class TestEnterpriseDataPlatform(unittest.TestCase):
         """Sentetik e-posta üretimi testi."""
         schema = SyntheticSchema(schema_name="EmailTest")
         schema.add_field(FieldDefinition("email", FieldType.EMAIL))
-        
+
         data = self.generator.generate(schema, row_count=10)
         self.assertEqual(len(data["email"]), 10)
-        
+
         # Tüm e-postaları doğrula
         for email in data["email"]:
             if email is not None:
@@ -160,10 +160,10 @@ class TestEnterpriseDataPlatform(unittest.TestCase):
         """Sentetik telefon numarası üretimi testi."""
         schema = SyntheticSchema(schema_name="PhoneTest")
         schema.add_field(FieldDefinition("phone", FieldType.PHONE))
-        
+
         data = self.generator.generate(schema, row_count=10)
         self.assertEqual(len(data["phone"]), 10)
-        
+
         # Tüm telefon numaralarını doğrula
         for phone in data["phone"]:
             if phone is not None:
@@ -174,10 +174,10 @@ class TestEnterpriseDataPlatform(unittest.TestCase):
         """Sentetik IBAN üretimi testi."""
         schema = SyntheticSchema(schema_name="IbanTest")
         schema.add_field(FieldDefinition("iban", FieldType.IBAN_MOCK))
-        
+
         data = self.generator.generate(schema, row_count=10)
         self.assertEqual(len(data["iban"]), 10)
-        
+
         # Tüm IBAN'ları doğrula
         for iban in data["iban"]:
             if iban is not None:
@@ -219,11 +219,11 @@ class TestEnterpriseDataPlatform(unittest.TestCase):
             "user@example.com",
             "+90 500 123456",
         ]
-        
+
         # Her bir değerin doğru şekilde tespit edildiğini kontrol et
         results = [self.scanner.classify_value(val) for val in mixed_data]
         expected = ["TCKN", "CREDIT_CARD", "IBAN", "EMAIL", "PHONE"]
-        
+
         for result, expected_type in zip(results, expected):
             self.assertEqual(result, expected_type)
 
@@ -231,10 +231,10 @@ class TestEnterpriseDataPlatform(unittest.TestCase):
         """Null/None değer işleme testi."""
         # None değer
         self.assertIsNone(self.scanner.classify_value(None))
-        
+
         # Boş string
         self.assertIsNone(self.scanner.classify_value(""))
-        
+
         # Sütun boşsa
         result = self.scanner.scan_column("empty_col", [None, None, None])
         self.assertEqual(result.detected_type, "EMPTY")
@@ -245,14 +245,14 @@ class TestEnterpriseDataPlatform(unittest.TestCase):
         schema.add_field(
             FieldDefinition("optional_field", FieldType.EMAIL, null_probability=0.5)
         )
-        
+
         data = self.generator.generate(schema, row_count=100)
-        
+
         # Yaklaşık %50'si None olmalı (tolerance: %30-%70)
         none_count = sum(1 for val in data["optional_field"] if val is None)
         null_ratio = none_count / len(data["optional_field"])
-        
-        self.assertTrue(0.3 <= null_ratio <= 0.7, 
+
+        self.assertTrue(0.3 <= null_ratio <= 0.7,
                        f"Null oranı: {null_ratio}, beklenen: ~0.5")
 
 

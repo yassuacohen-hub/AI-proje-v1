@@ -122,7 +122,7 @@ def generate_non_osb_or_outside_ankara(n: int) -> list:
 def main():
     osbs = generate_osb_master()
     print(f"OSB master: {len(osbs)} kayıt")
-    
+
     all_firms = []
     for osb in osbs:
         # OSB başına 12-20 firma
@@ -130,11 +130,11 @@ def main():
         firms = generate_osb_firm(osb["osb_id"], n)
         all_firms.extend(firms)
         print(f"  {osb['name']}: {n} firma")
-    
+
     # Karantina test kayıtları
     quarantine_test = generate_non_osb_or_outside_ankara(50)
     print(f"Karantina test: {len(quarantine_test)} kayıt")
-    
+
     print(f"\nToplam MVP firma: {len(all_firms)}")
     print(f"Toplam karantina: {len(quarantine_test)}")
     return osbs, all_firms, quarantine_test

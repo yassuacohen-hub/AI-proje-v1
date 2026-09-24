@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/harici_ajan/output/sector_analysis.md]]
+
 # Sektor Analizi
 
 ## Kapsam

@@ -8,7 +8,7 @@ Kullanim:
     from fastapi import FastAPI
     app = FastAPI()
     app.include_router(health_router)
-    
+
     # Cron job olarak (her 5 dakika)
     # */5 * * * * python health_check.py
 """
@@ -52,7 +52,7 @@ def check_database() -> tuple[bool, str]:
     try:
         from sqlalchemy import text
         from company_master.db.connection import get_engine
-        
+
         engine = get_engine()
         with engine.connect() as conn:
             result = conn.execute(text("SELECT 1"))
@@ -67,14 +67,14 @@ def check_data_quality() -> tuple[bool, str]:
     try:
         from sqlalchemy import text
         from company_master.db.connection import get_engine
-        
+
         engine = get_engine()
         with engine.connect() as conn:
             avg = conn.execute(text("""
                 SELECT AVG(data_quality_score) as avg_score
                 FROM companies WHERE is_ankara = TRUE
             """)).fetchone()[0]
-            
+
             if avg and avg >= 50:
                 return True, f"Avg: {avg:.1f}"
             else:
@@ -88,16 +88,16 @@ def check_data_freshness() -> tuple[bool, str]:
     try:
         from sqlalchemy import text
         from company_master.db.connection import get_engine
-        
+
         engine = get_engine()
         with engine.connect() as conn:
             last_scrape = conn.execute(text("""
                 SELECT MAX(ingested_at) FROM companies
             """)).fetchone()[0]
-            
+
             if not last_scrape:
                 return False, "Hiç veri yok"
-            
+
             days_old = (datetime.now() - last_scrape.replace(tzinfo=None)).days
             if days_old <= 7:
                 return True, f"{days_old} gun önce"
@@ -112,7 +112,7 @@ def check_api_endpoints() -> tuple[bool, str]:
     try:
         import requests
         api_base = os.getenv("API_BASE_URL", "http://localhost:8000")
-        
+
         resp = requests.get(f"{api_base}/health", timeout=5)
         if resp.status_code == 200:
             return True, "OK"
@@ -142,32 +142,32 @@ def run_health_check() -> HealthStatus:
     checks = {}
     metrics = {}
     alerts = []
-    
+
     # DB kontrol
     ok, msg = check_database()
     checks["database"] = ok
     metrics["db_message"] = msg
-    
+
     # Kalite kontrol
     ok, msg = check_data_quality()
     checks["data_quality"] = ok
     metrics["quality_message"] = msg
-    
+
     # Tazelik kontrol
     ok, msg = check_data_freshness()
     checks["data_freshness"] = ok
     metrics["freshness_message"] = msg
-    
+
     # API kontrol
     ok, msg = check_api_endpoints()
     checks["api_endpoints"] = ok
     metrics["api_message"] = msg
-    
+
     # Disk kontrol
     ok, msg = check_disk_space()
     checks["disk_space"] = ok
     metrics["disk_message"] = msg
-    
+
     # Alert'ler
     if not checks["database"]:
         alerts.append("CRITICAL: Database baglantisi basarisiz!")
@@ -179,7 +179,7 @@ def run_health_check() -> HealthStatus:
         alerts.append("WARNING: API endpoint'leri yonettirmiyor!")
     if not checks["disk_space"]:
         alerts.append("CRITICAL: Disk alani dusuk!")
-    
+
     # Overall status
     critical_failed = sum(1 for c in checks.values() if not c)
     if critical_failed == 0:
@@ -188,7 +188,7 @@ def run_health_check() -> HealthStatus:
         status = "degraded"
     else:
         status = "unhealthy"
-    
+
     return HealthStatus(
         status=status,
         timestamp=datetime.now().isoformat(),
@@ -202,7 +202,7 @@ def send_alert(alert: str):
     """Alert gonder (Telegram/email)."""
     token = os.getenv("TELEGRAM_BOT_TOKEN")
     chat_id = os.getenv("TELEGRAM_CHAT_ID")
-    
+
     if token and chat_id:
         try:
             import requests
@@ -219,15 +219,15 @@ def send_alert(alert: str):
 def main():
     """CLI modu."""
     result = run_health_check()
-    
+
     print(json.dumps(asdict(result), indent=2, ensure_ascii=False))
-    
+
     # Kritik alert'leri gonder
     if result.alerts:
         for alert in result.alerts:
             if alert.startswith("CRITICAL"):
                 send_alert(alert)
-    
+
     # Exit code
     if result.status == "unhealthy":
         sys.exit(2)

@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/skills/supabase/README.md]]
+
 # Company Master V1.0 — Python Altyapısı
 
 Ankara B2B şirket evreni için Company Master V1.0 implementasyonu. V10 belgelerinde tanımlanan şema, ETL ve arama altyapısının Python kod karşılığıdır.

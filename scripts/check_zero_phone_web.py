@@ -18,7 +18,7 @@ with eng.connect() as conn:
         AND sr.raw_payload->>'web_sitesi' != ''
     """)).scalar()
     print(f"Score 0, phone var, raw_payload web_sitesi var: {r}")
-    
+
     # Check if they have adres in raw_payload
     r2 = conn.execute(text("""
         SELECT COUNT(*) as cnt FROM companies c
@@ -30,7 +30,7 @@ with eng.connect() as conn:
         AND sr.raw_payload->>'adres' != ''
     """)).scalar()
     print(f"Score 0, phone var, raw_payload adres var: {r2}")
-    
+
     # Check if they have vergi_no in raw_payload
     r3 = conn.execute(text("""
         SELECT COUNT(*) as cnt FROM companies c

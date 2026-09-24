@@ -103,7 +103,7 @@ with st.sidebar:
     search_query = st.text_input("🔍 Firma Ara", placeholder="Firma adı, telefon, e-posta...")
     score_min = st.slider("Min Kalite Skoru", 0, 100, 0)
     score_max = st.slider("Maks Kalite Skoru", 0, 100, 100)
-    
+
     st.divider()
     st.subheader("📊 Veri Kaynakları")
     try:
@@ -126,7 +126,7 @@ with st.sidebar:
             st.metric(s["source_name"], f"{s['cnt']:,}")
     except Exception as e:
         st.warning(f"Kaynaklar yüklenemedi: {e}")
-    
+
     st.divider()
     st.subheader("📈 Hızlı İstatistik")
     if st.button("🔄 Yenile", type="primary", use_container_width=True):
@@ -152,7 +152,7 @@ if kpi:
     col3.metric("VKN", f"{kpi.get('vkn_either', 0):,}")
     col4.metric("Web Sitesi", f"{kpi.get('web', 0):,}")
     col5.metric("NACE", f"{kpi.get('nace', 0):,}")
-    
+
     # İkinci satır
     col6, col7, col8, col9, col10 = st.columns(5)
     col6.metric("Telefon", f"{kpi.get('tel', 0):,}")
@@ -178,7 +178,7 @@ if kpi:
         "oran": [v / total * 100 for v in fields.values()],
     })
     st.bar_chart(chart_df.set_index("alan")["oran"], use_container_width=True)
-    
+
     # ASO ingest durumu
     st.subheader("📥 ASO Ingest Durumu")
     try:

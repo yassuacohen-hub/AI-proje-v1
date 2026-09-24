@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/skills/supabase/README.md]]
+
 # Intelligence Modulu
 
 Bu modul Ankara B2B Company Master icin pazar ve musteri analizleri saglar.

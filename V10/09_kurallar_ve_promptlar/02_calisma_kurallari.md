@@ -34,3 +34,12 @@ Bu belge, bu kasada çalışan tüm yapay zeka ajanlarının (ve kullanıcının
 
 - Bir ajan bu kasada işe başlarken önce bu belgeyi ve [[01_kasa_kurallari]] belgesini okur.
 - Kural ile kullanıcının doğrudan talimatı çelişirse, kullanıcının güncel talimatı geçerlidir ve çelişki kullanıcıya bildirilir.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/09_kurallar_ve_promptlar/01_kasa_kurallari]]
+
+
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

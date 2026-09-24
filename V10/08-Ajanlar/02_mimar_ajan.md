@@ -102,3 +102,12 @@ Mimar olarak şema ve ilişki tasarımına bakıyorum. Önerideki OSB → Firma 
 - [[01_sirket_master_ana_belgesi]] - 19 tablo sema tasarimi - [[01_etl_mimarisi]]
 - [[01_versiyon_9_baglam_dokumani]] - aktif ana baglam
 - Sema: `src/company_master/schema/` - Template: [[ADR-template]]
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/08-Ajanlar/README]]
+
+
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

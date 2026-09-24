@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/BRIEF_Y10.md]]
+
 ## Gorev Brief: Y10
 
 **Gorev:** MERSIS VKN zenginlestirme pipeline'i

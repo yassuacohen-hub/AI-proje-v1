@@ -29,7 +29,7 @@ def _similarity(a: str, b: str) -> float:
 
 def run_entity_resolution(limit: Optional[int] = None) -> ResolutionResult:
     """source_records -> companies entity resolution çalıştırır.
-    
+
     İşlenmemiş source_record'ları alır:
     1. tax_number (VKN) exact match varsa -> matched
     2. legal_name fuzzy match (>=0.85) varsa -> possible_match
@@ -60,7 +60,7 @@ def run_entity_resolution(limit: Optional[int] = None) -> ResolutionResult:
         companies = conn.execute(
             text("SELECT company_id, tax_number, legal_name FROM companies WHERE tax_number IS NOT NULL")
         ).mappings().all()
-        
+
         # VKN index
         vkn_index = {c["tax_number"]: c for c in companies if c["tax_number"]}
         # Name list for fuzzy
@@ -71,7 +71,7 @@ def run_entity_resolution(limit: Optional[int] = None) -> ResolutionResult:
             src_id = row["source_record_id"]
             vkn = row["raw_tax_number"]
             name = (row["raw_name"] or "").strip()
-            
+
             if not name:
                 continue
 

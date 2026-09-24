@@ -24,7 +24,7 @@ class ResolutionResult:
 
 def run_entity_resolution(limit: Optional[int] = None, threshold: float = 0.80) -> ResolutionResult:
     """source_records -> companies entity resolution (rapidfuzz ile).
-    
+
     1. VKN exact match (100% confidence)
     2. Name fuzzy match (rapidfuzz, threshold >= 0.80)
     """
@@ -50,7 +50,7 @@ def run_entity_resolution(limit: Optional[int] = None, threshold: float = 0.80) 
         companies = conn.execute(
             text("SELECT company_id, tax_number, legal_name FROM companies")
         ).mappings().all()
-        
+
         vkn_index = {c["tax_number"]: c for c in companies if c["tax_number"]}
         name_list = [(c["company_id"], c["legal_name"]) for c in companies]
 
@@ -59,7 +59,7 @@ def run_entity_resolution(limit: Optional[int] = None, threshold: float = 0.80) 
             src_id = row["source_record_id"]
             vkn = row["raw_tax_number"]
             name = (row["raw_name"] or "").strip()
-            
+
             if not name:
                 continue
 

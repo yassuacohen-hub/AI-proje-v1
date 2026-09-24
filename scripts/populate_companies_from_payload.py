@@ -11,7 +11,7 @@ with engine.begin() as conn:
     # Update companies directly from raw_payload using JSONB extraction
     sql = text("""
         UPDATE companies c
-        SET 
+        SET
             primary_phone = COALESCE(c.primary_phone, NULLIF(sr.raw_payload->>'telefoner', '')),
             web_sitesi = COALESCE(c.web_sitesi, NULLIF(sr.raw_payload->>'web_sitesi', '')),
             vergi_no = COALESCE(c.vergi_no, NULLIF(sr.raw_payload->>'vergi_no', '')),
@@ -25,7 +25,7 @@ with engine.begin() as conn:
     """)
     result = conn.execute(sql)
     print(f"Step 1 - Updated companies from raw_payload: {result.rowcount} rows")
-    
+
     # Count results
     avg = conn.execute(text("SELECT AVG(data_quality_score) FROM companies WHERE is_ankara = TRUE")).scalar()
     print(f"Current avg quality score: {avg}")

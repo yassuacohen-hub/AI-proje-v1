@@ -10,7 +10,7 @@ cid = conn.execute(text("SELECT company_id FROM companies WHERE is_ankara = TRUE
 print("test company:", cid)
 
 row = conn.execute(text("""
-    SELECT 
+    SELECT
         (10
          + CASE WHEN COALESCE(c.primary_phone, sr.raw_phone) IS NOT NULL AND COALESCE(c.primary_phone, sr.raw_phone) <> '' THEN 10 ELSE 0 END
          + CASE WHEN COALESCE(c.primary_email, sr.raw_email) IS NOT NULL AND COALESCE(c.primary_email, sr.raw_email) <> '' THEN 5 ELSE 0 END

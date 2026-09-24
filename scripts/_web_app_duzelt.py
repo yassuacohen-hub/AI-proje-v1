@@ -55,7 +55,7 @@ src = src.replace(old, new)
 # 3) Activity + company_type sub -> _tr_rx
 old = """    for long_phrase, short_form in sorted(_ACTIVITY_ABBR.items(), key=lambda x: -len(x[0])):
         name = _re.sub(r'(?<!\\w)' + _re.escape(long_phrase) + r'(?![\\w.])', short_form, name)
-    
+
     for long_phrase, short_form in sorted(_COMPANY_TYPE_ABBR.items(), key=lambda x: -len(x[0])):
         name = _re.sub(r'(?<!\\w)' + _re.escape(long_phrase) + r'(?![\\w.])', short_form, name)"""
 new = """    for long_phrase, short_form in sorted(_ACTIVITY_ABBR.items(), key=lambda x: -len(x[0])):

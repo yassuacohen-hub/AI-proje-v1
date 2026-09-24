@@ -81,3 +81,12 @@ python scripts/vkn_web_scraper.py --limit 50
 - Web kazıması %15-25 verimle (web'i dolu kayıtlar içinde) skoru
   yaklaşık 4-7 puan yükseltmelidir. Ölçüm: her 100 sitelik parti sonrası
   kalite raporu.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/07_referanslar/01_veri_kaynagi_envanteri]]
+
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

@@ -3,8 +3,8 @@
 
 Bağlantılar: [[README]] · [[01_v9_ile_karsilastirma]] · [[01_versiyon_6_baglam_dokumani]] · [[01_versiyon_7_baglam_dokumani]] · [[01_versiyon_8_baglam_dokumani]] · [[01_versiyon_9_baglam_dokumani]]
 
-**Proje:** Ankara B2B Intelligence  
-**Katman:** Company Universe / Company Master  
+**Proje:** Ankara B2B Intelligence
+**Katman:** Company Universe / Company Master
 **Amaç:** Ankara'daki B2B şirket evrenini kapsamlı, tekilleştirilmiş, doğrulanabilir, güncellenebilir ve Market Brain + Customer Brain tarafından kullanılabilir hale getirmek.
 
 ## 1. Tasarım Felsefesi

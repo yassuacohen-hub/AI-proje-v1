@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/harici_ajan/output/ingest_detail_analysis.md]]
+
 # Ingest Detail Analizi
 
 ## Kapsam

@@ -15,7 +15,7 @@ with eng.connect() as conn:
         AND c.data_quality_score = 0
         LIMIT 10
     """)).fetchall()
-    
+
     for i, row in enumerate(rows):
         payload = row[0]
         if isinstance(payload, dict):

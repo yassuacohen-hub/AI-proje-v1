@@ -16,7 +16,7 @@ with eng.connect() as conn:
         AND COALESCE(c.tax_number, c.vergi_no) IS NULL
     """)).scalar()
     print(f'Websitesi var ama VKN yok: {r}')
-    
+
     # Companies with no address but have other data
     r2 = conn.execute(text("""
         SELECT COUNT(*) as cnt FROM companies c
@@ -26,7 +26,7 @@ with eng.connect() as conn:
         AND (c.primary_phone IS NOT NULL OR c.primary_email IS NOT NULL OR c.website_domain IS NOT NULL)
     """)).scalar()
     print(f'Adres yok ama diger veri var: {r2}')
-    
+
     # Companies with no phone but have other data
     r3 = conn.execute(text("""
         SELECT COUNT(*) as cnt FROM companies c

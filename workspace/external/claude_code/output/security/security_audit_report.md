@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/claude_code/output/security/security_audit_report.md]]
+
 # Guvenlik Denetim Raporu
 
 **Tarih:** 2026-09-02

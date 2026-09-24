@@ -99,3 +99,12 @@ def extract_vkn_from_footer(html: str) -> str | None:
 ---
 
 > VKN sorgusu motor kaynaklarina eklenmis politika ile yapilir (GIB domain, [[OSINT_Scraper_Motoru]] registry'de).
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/07_referanslar/01_veri_kaynagi_envanteri]]
+
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

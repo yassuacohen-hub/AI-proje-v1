@@ -1,4 +1,4 @@
-﻿{
+{
   "src/company_master/etl/scrapers/ivedik_scraper.py": {
     "sahip": "gelistirici",
     "task_id": "T1",
@@ -28,5 +28,70 @@
     "sahip": "web_kazima",
     "task_id": "P7-4",
     "kilitlendi": "2026-09-09T16:50:00"
+  },
+  "scripts/telegram_polling.py": {
+    "sahip": "kilo",
+    "task_id": "TG-01",
+    "kilitlendi": "2026-09-12T13:20:50"
+  },
+  "src/company_master/utils/telegram_bot.py": {
+    "sahip": "kilo",
+    "task_id": "TG-01",
+    "kilitlendi": "2026-09-12T13:20:50"
+  },
+  "src/company_master/telegram/bot_service.py": {
+    "sahip": "kilo",
+    "task_id": "TG-01",
+    "kilitlendi": "2026-09-12T13:20:50"
+  },
+  "scripts/telegram_periodic.py": {
+    "sahip": "kilo",
+    "task_id": "TG-01",
+    "kilitlendi": "2026-09-12T13:20:50"
+  },
+  "scripts/test_telegram.py": {
+    "sahip": "kilo",
+    "task_id": "TG-01",
+    "kilitlendi": "2026-09-12T13:20:50"
+  },
+  "scripts/test_telegram_simple.py": {
+    "sahip": "kilo",
+    "task_id": "TG-01",
+    "kilitlendi": "2026-09-12T13:20:50"
+  },
+  ".env.example": {
+    "sahip": "kilo",
+    "task_id": "TG-01",
+    "kilitlendi": "2026-09-12T13:20:50"
+  },
+  "docker-compose.yml": {
+    "sahip": "kilo",
+    "task_id": "TG-01",
+    "kilitlendi": "2026-09-12T13:20:50"
+  },
+  "scripts/README_TELEGRAM.md": {
+    "sahip": "kilo",
+    "task_id": "TG-01",
+    "kilitlendi": "2026-09-12T13:20:50"
+  },
+  "scripts/telegram_bot_task.bat": {
+    "sahip": "kilo",
+    "task_id": "TG-01",
+    "kilitlendi": "2026-09-12T13:20:50"
+  },
+  "requirements-app.txt": {
+    "sahip": "kilo",
+    "task_id": "TG-01",
+    "kilitlendi": "2026-09-12T13:20:50"
+  },
+  "tests/test_telegram_bot.py": {
+    "sahip": "kilo",
+    "task_id": "TG-01",
+    "kilitlendi": "2026-09-12T13:20:50"
+  },
+  "tests/test_telegram_polling.py": {
+    "sahip": "kilo",
+    "task_id": "TG-01",
+    "kilitlendi": "2026-09-12T13:20:50"
   }
 }

@@ -64,23 +64,23 @@ def score_candidate(vkn: str, context: str) -> float:
         return 0.0
     if not vkn.isdigit():
         return 0.0
-    
+
     ctx_lower = context.lower()
     score = 0.3
-    
+
     for kw in VKN_KEYWORDS:
         if kw in ctx_lower:
             score += 0.4
             break
-    
+
     if len(context) < 500:
         score += 0.1
-    
+
     surrounding = re.sub(r"\d{10,11}", "", context)
     digit_ratio = (len(context) - len(surrounding)) / max(len(context), 1)
     if digit_ratio > 0.5:
         score -= 0.2
-    
+
     return min(max(score, 0.0), 1.0)
 
 
@@ -89,7 +89,7 @@ def extract_vkn_from_html(html: str, url: str) -> dict[str, Any]:
     best_vergi_no = None
     best_kaynak = None
     best_guven = 0.0
-    
+
     # 1. Meta etiketlerinden dene
     for meta in soup.find_all("meta"):
         content = meta.get("content", "")
@@ -101,7 +101,7 @@ def extract_vkn_from_html(html: str, url: str) -> dict[str, Any]:
                     best_vergi_no = vkn
                     best_kaynak = "meta"
                     best_guven = s
-    
+
     # 2. Sayfa basligi
     title = soup.title.string if soup.title else ""
     if title:
@@ -112,7 +112,7 @@ def extract_vkn_from_html(html: str, url: str) -> dict[str, Any]:
                 best_vergi_no = vkn
                 best_kaynak = "title"
                 best_guven = s
-    
+
     # 3. JSON-LD structured data
     for script in soup.find_all("script", type="application/ld+json"):
         try:
@@ -127,7 +127,7 @@ def extract_vkn_from_html(html: str, url: str) -> dict[str, Any]:
                     best_guven = s
         except (json.JSONDecodeError, TypeError):
             continue
-    
+
     # 4. Anahtar kelime baglamli arama
     for element in soup.find_all(text=True):
         text = element.strip()
@@ -143,7 +143,7 @@ def extract_vkn_from_html(html: str, url: str) -> dict[str, Any]:
                     best_vergi_no = vkn
                     best_kaynak = "keyword_context"
                     best_guven = s
-    
+
     # 5. Footer arama
     footer = soup.find("footer") or soup.find("div", class_=re.compile("footer", re.I))
     if footer:
@@ -158,7 +158,7 @@ def extract_vkn_from_html(html: str, url: str) -> dict[str, Any]:
                 best_vergi_no = vkn
                 best_kaynak = "footer"
                 best_guven = s
-    
+
     return {
         "vergi_no": best_vergi_no,
         "kaynak": best_kaynak,
@@ -214,46 +214,46 @@ def main() -> int:
     input_path = ROOT / "data" / "ostim" / "firmalar_detayli.jsonl"
     output_path = ROOT / "data" / "ostim" / "firmalar_vkn_ekli.jsonl"
     state_path = ROOT / "data" / "ostim" / ".vkn_extractor_state.json"
-    
+
     if not input_path.exists():
         log.error("Input file not found: %s", input_path)
         return 1
-    
+
     records = []
     with open(input_path, "r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
             if line:
                 records.append(json.loads(line))
-    
+
     total_records = len(records)
     log.info("Toplam %d kayit yuklendi", total_records)
-    
+
     state = load_state(state_path)
     processed_slugs = set(state.get("processed", {}).keys())
     stats = state.get("stats", {"total": 0, "vkn_found": 0, "skipped_placeholder": 0, "fetch_failed": 0})
-    
+
     log.info("Devam ediliyor: %d kayit zaten islendi", len(processed_slugs))
-    
+
     file_mode = "a" if output_path.exists() and len(processed_slugs) > 0 else "w"
     log.info("Cikti dosyasi modu: %s", file_mode)
-    
+
     processed_count = 0
     vkn_found_count = 0
-    
+
     with open(output_path, file_mode, encoding="utf-8") as out:
         for rec in records:
             slug = rec.get("slug", "")
-            
+
             if slug in processed_slugs:
                 processed_count += 1
                 if rec.get("vergi_no"):
                     vkn_found_count += 1
                 continue
-            
+
             web = rec.get("web_sitesi")
             stats["total"] += 1
-            
+
             if is_placeholder(web):
                 stats["skipped_placeholder"] += 1
                 rec["vergi_no"] = rec.get("vergi_no")
@@ -263,7 +263,7 @@ def main() -> int:
                 processed_count += 1
                 save_state(state_path, state)
                 continue
-            
+
             if web:
                 url = normalize_url(web)
                 html = fetch_website(url)
@@ -274,15 +274,15 @@ def main() -> int:
                         rec["vergi_no_kaynagi"] = result["kaynak"]
                         rec["vergi_no_guven"] = result["guven"]
                         vkn_found_count += 1
-                        log.info("VKN bulundu: %s -> %s (kaynak: %s, guven: %.2f)", 
+                        log.info("VKN bulundu: %s -> %s (kaynak: %s, guven: %.2f)",
                                 rec.get("unvan", ""), result["vergi_no"], result["kaynak"], result["guven"])
                 else:
                     stats["fetch_failed"] += 1
-            
+
             state["processed"][slug] = {"status": "processed", "web": web, "vkn": rec.get("vergi_no")}
             out.write(json.dumps(rec, ensure_ascii=False) + "\n")
             processed_count += 1
-            
+
             if processed_count % 100 == 0:
                 save_state(state_path, state)
                 log.info("Ilerleme: %d/%d (%.1f%%), VKN: %d, Atlamalar: %d, Hatalar: %d",
@@ -291,14 +291,14 @@ def main() -> int:
                         vkn_found_count,
                         stats["skipped_placeholder"],
                         stats["fetch_failed"])
-            
+
             time.sleep(1.5)
-    
+
     save_state(state_path, state)
     log.info("TAMAM! Islenen: %d/%d, VKN bulundu: %d, Atlanan placeholder: %d, Cekim hatasi: %d",
             processed_count, total_records, vkn_found_count,
             stats["skipped_placeholder"], stats["fetch_failed"])
-    
+
     return 0
 
 

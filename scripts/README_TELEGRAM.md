@@ -1,13 +1,13 @@
 # 🤖 Telegram Bot Kullanım Rehberi
 
-**Bot:** `@Huginn_Insights_Bot`  
+**Bot:** `@Huginn_Insights_Bot`
 **Amaç:** Huginn Data Insights — Ankara B2B Company Master projesinin takibi ve yönetimi
 
 ---
 
 ## 🔐 Güvenlik
 
-Bot, **yalnızca senin Telegram ID'n** (`TELEGRAM_CHAT_ID`) ile etkileşime geçer.  
+Bot, **yalnızca senin Telegram ID'n** (`TELEGRAM_CHAT_ID`) ile etkileşime geçer.
 Diğer kullanıcilar her komutta `🚫 Yetkisiz erişim.` alır.
 
 ---

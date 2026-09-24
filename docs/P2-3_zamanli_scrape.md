@@ -1,7 +1,7 @@
 # P2-3: Zamanlanmış Scrape (Günlük Refresh)
 
-> **Durum:** Plan → Aktif  
-> **Sahip:** web_kazima  
+> **Durum:** Plan → Aktif
+> **Sahip:** web_kazima
 > **Amaç:** OSB scraper'larını günlük otomatik çalıştırmak.
 
 ## 1. Linux (systemd timer — önerilen)

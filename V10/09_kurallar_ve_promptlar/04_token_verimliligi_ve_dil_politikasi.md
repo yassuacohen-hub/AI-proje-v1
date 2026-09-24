@@ -448,3 +448,12 @@ Paralel çalışma (2+ agent):   ~-3000 token/oturum → BÜYÜK KAZANÇ
 > Token tasarrufu "daha az çalışmak" değil, "aynı işi daha az token ile
 > yapmak"tır. Orkestrasyon sistemi agent'ın ne yapacağını bilir yapar;
 > keşfetmez, çakışmaz, yeniden yapmaz.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/09_kurallar_ve_promptlar/01_kasa_kurallari]]
+
+
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

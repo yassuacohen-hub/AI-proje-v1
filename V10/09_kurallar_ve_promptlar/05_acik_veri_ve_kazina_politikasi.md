@@ -143,3 +143,12 @@ Her firma için 0-100 arası skor:
 - [[03_kvkk_ve_veri_politikasi]] — KVKK politikası
 - [[01_veri_kaynagi_envanteri]] — Mevcut envanter
 - [[10_ankara_osb_sentez]] — Kararlar
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/09_kurallar_ve_promptlar/01_kasa_kurallari]]
+
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

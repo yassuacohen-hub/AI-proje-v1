@@ -103,3 +103,12 @@ Bu bölüm, kullanıcının oturumlarda verdiği ve kural olarak saklanmasını 
 |---|---|---|
 | 2025-08 | Mevcut dosyalar silinmeden organizasyon yap; üstüne geliştir | Kullanıcı talimatı |
 | 2025-08 | Tüm promptları kural olarak merkezi bir yerde topla ve uygula | Kullanıcı talimatı |
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/09_kurallar_ve_promptlar/01_kasa_kurallari]]
+
+
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

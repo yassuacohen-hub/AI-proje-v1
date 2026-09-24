@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/merged/merger_raporu.md]]
+
 # Multi-OSB Merger Raporu (P1-4)
 
 - Girdi kayit: **6270**

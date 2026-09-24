@@ -352,3 +352,11 @@ Aşağıdaki tablo, OSB'lerin kendi öz sayfalarından doğrulanmış güncel ra
 
 - [[03_osb_masa_basi_analizi]] — Web Kazıma Uzmanı masa başı analizi (2026-09-01)
 
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/07_referanslar/01_veri_kaynagi_envanteri]]
+
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

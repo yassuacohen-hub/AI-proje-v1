@@ -15,7 +15,7 @@ eng = get_engine()
 with eng.begin() as conn:
     # Mevcut resolution istatistikleri
     stats = conn.execute(text("""
-        SELECT match_method, decision, count(*) 
+        SELECT match_method, decision, count(*)
         FROM entity_resolution GROUP BY 1,2 ORDER BY 3 DESC
     """)).fetchall()
     print("--- Mevcut entity_resolution dagilimi ---")
@@ -24,8 +24,8 @@ with eng.begin() as conn:
 
     # Kucuk orneklem benchmark (50 source x 500 company)
     src = conn.execute(text("""
-        SELECT raw_name FROM source_records 
-        WHERE raw_name IS NOT NULL AND raw_name <> '' 
+        SELECT raw_name FROM source_records
+        WHERE raw_name IS NOT NULL AND raw_name <> ''
         ORDER BY collected_at DESC LIMIT 50
     """)).fetchall()
     comp = conn.execute(text("""

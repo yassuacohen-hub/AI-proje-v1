@@ -1,3 +1,5 @@
+[[Huginn Data Insights/AI proje v1/docs/OSINT_SCRAPER_MOTORU.md]]
+
 # OSINT Scraper Motoru
 
 > **Durum:** Aktif (v1) · **Tarih:** 2026-09-03 · **Sahip:** Geliştirici Ajan + Harici Ajan (Inkling)
@@ -91,3 +93,9 @@ otomatik toplar ve [[06_web_kazima_uzmani]]'nın izin/kaynak kontrolüne uyar.
 - [[CHANGELOG]] — değişiklik kayıtları
 | `ivedik` | İvedik OSB | PLANLI — scraper yok | `data/ivedik/ivedik_full.jsonl` |
 | `baskent` | Başkent OSB | PLANLI — scraper yok | `data/baskent/baskent_full.jsonl` |
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

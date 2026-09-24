@@ -10,13 +10,13 @@ c = e.connect()
 
 print("--- data_quality_score dagilimi ---")
 for x in c.execute(text("""
-    SELECT CASE 
+    SELECT CASE
         WHEN data_quality_score >= 80 THEN '80-100'
         WHEN data_quality_score >= 60 THEN '60-79'
         WHEN data_quality_score >= 40 THEN '40-59'
         WHEN data_quality_score >= 20 THEN '20-39'
         ELSE '0-19'
-    END AS bucket, count(*) 
+    END AS bucket, count(*)
     FROM companies GROUP BY 1 ORDER BY 2 DESC
 """)).fetchall():
     print(f"  {x[0]}: {x[1]}")

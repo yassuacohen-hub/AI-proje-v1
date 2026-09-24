@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/claude_code/output/docs/01_etl_mimarisi_review.md]]
+
 # ETL Mimarisi Review
 
 **Tarih:** 2026-09-02  

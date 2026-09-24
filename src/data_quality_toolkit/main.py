@@ -28,10 +28,10 @@ def print_banner(title: str) -> None:
 def run_classification_demo(dataset: Dict[str, List[Any]]) -> None:
     """Aşama 1: Veri Sınıflandırma ve DLP Taraması."""
     print_banner("1. AŞAMA: KURUMSAL VERİ SINIFLANDIRMA VE DLP TARAMASI")
-    
+
     scanner = PIIScanner()
     profiler = SchemaProfiler()
-    
+
     profile = profiler.profile_dataset(dataset)
     print(f"📊 Veri Boyutu: {profile.total_rows} Satır, {profile.total_columns} Sütun")
     print(f"📈 Veri Eksiksizlik Skoru (Completeness): %{profile.missing_data_score}\n")

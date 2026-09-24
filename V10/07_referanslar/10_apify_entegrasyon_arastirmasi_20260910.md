@@ -320,3 +320,12 @@ V9'daki 100 firma yaklaşımıyla uyumlu:
 - [Crawlee Python](https://crawlee.dev/python/docs/introduction)
 - [Browserless API karşılaştırması](https://docs.browserless.io/overview)
 - [Firecrawl belgeleri](https://docs.firecrawl.dev/introduction)
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/07_referanslar/01_veri_kaynagi_envanteri]]
+
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

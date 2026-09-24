@@ -136,17 +136,17 @@ def gorev_getir(task_id: str) -> dict | None:
 
 def okuma_listesi_olustur(task_id: str) -> list[str]:
     """K6: Agent icin otomatik 'ne okunmalı' listesi.
-    
+
     Agent bu listeden fazla dosya acamaz (exploration yasak).
     Tasarruf: ~1500-3000 token/oturum.
     """
     gorev = gorev_getir(task_id)
     if not gorev:
         return []
-    
+
     # Gorevin dosyalari
     dosyalar = list(gorev.get("dosyalar", []))
-    
+
     # Sahip ajana bagli dosya eslemesi
     sahip = gorev["sahip"]
     sahip_dosyalari = {
@@ -157,18 +157,18 @@ def okuma_listesi_olustur(task_id: str) -> list[str]:
         "web_kazima": ["src/company_master/engine", "src/company_master/utils"],
         "koordinatör": ["AI proje v1/V10", "AGENT_SYNC.md"],
     }
-    
+
     for dizin in sahip_dosyalari.get(sahip, []):
         if dizin not in dosyalar:
             dosyalar.append(dizin)
-    
+
     # Mevcut olmayan dosyalari filtrele (token bosa harcanmasin)
     mevcut = []
     ROOT = Path(__file__).resolve().parents[3]
     for d in dosyalar:
         if (ROOT / d).exists():
             mevcut.append(d)
-    
+
     return mevcut[:5]  # Maksimum 5 okunacak (token limiti)
 
 

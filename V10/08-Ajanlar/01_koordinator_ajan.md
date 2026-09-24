@@ -103,3 +103,12 @@ Koordinatör olarak ana görevim iş dağılımı ve çakışma önleme. Bu öne
 - [[00-Home]] — Ana hub · [[project_state]] · [[TODO]] · [[CHANGELOG]]
 - Rol kartı: [[01_koordinator_ajan]] · Teknik uygulama: [[Orkestrator]]
 - Görev panosu: data/orchestrator/task_board.json · Wiki indeksi: data/orchestrator/wiki_index.json
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/08-Ajanlar/README]]
+
+
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

@@ -1294,3 +1294,9 @@ When improving it: 1. Preserve accepted principles unless strong evidence shows 
 **END — MASTER CONTEXT V8 FINAL**
 
 **Değişiklik Özeti:** - 5 Simülasyon Bulgusu Düzeltildi (Bulgu 1-5) - 8 Doküman Tutarlılık Düzeltmesi Uygulandı (D1-D8) - 3 Yeni Adversarial Test Eklendi (Shadow Model Swap, Anonim Bypass, DEPRIORITIZE Leak) - 3 Yeni Açık Problem Eklendi (Shadow Model maintenance, Anonim conversion, Deduplication fairness) - 2 Yeni Handoff Kuralı Eklendi (Shadow Model, Anonimlik)
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]

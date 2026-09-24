@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/BRIEF_Y18_abonelik_plan.md]]
+
 # Y18 — ABONELIK / RATE PLAN TASARIMI (sahip: arastirmaci)
 
 ## Gorev

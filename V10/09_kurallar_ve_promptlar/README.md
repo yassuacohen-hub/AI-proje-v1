@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/skills/supabase/README.md]]
+
 # Kurallar ve Promptlar
 
 Bağlantılar: [[00-Home]] · [[README]] · [[01_kasa_kurallari]] · [[02_calisma_kurallari]] · [[03_prompt_kutuphanesi]]

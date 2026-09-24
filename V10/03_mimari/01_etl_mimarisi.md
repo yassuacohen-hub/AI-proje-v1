@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/claude_code/output/docs/01_etl_mimarisi.md]]
+
 # ETL Mimarisi
 
 Bağlantılar: [[00-Home]] · [[01_sirket_master_ana_belgesi]] · [[01_mvp_gereksinimleri]] · [[01_veri_toplama_modeli]]

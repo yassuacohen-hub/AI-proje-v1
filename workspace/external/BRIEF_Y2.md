@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/BRIEF_Y2.md]]
+
 ## Gorev Brief: Y2
 
 **Gorev:** Ivedik + Baskent OSB verilerini ingest et (scraper kodu hazir)

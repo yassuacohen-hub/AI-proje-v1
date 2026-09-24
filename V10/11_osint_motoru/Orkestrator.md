@@ -97,3 +97,10 @@ Teknik uygulama: `src/company_master/orchestrator/task_board.py` · Wiki: [[OSIN
 1. **Harici ajan entegrasyonu** — mevcut `orchestrator/cli.py` (cursor_grok/copilot) ile köprü
 2. **Otomatik görev atama** — Kilo Code sonrası kalan görevleri panoya taşı
 3. **Dönem raporu otomasyonu** — günlük özet [[project_state]]'e yazılır
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

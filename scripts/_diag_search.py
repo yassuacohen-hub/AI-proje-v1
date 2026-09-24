@@ -42,26 +42,26 @@ with e.connect() as c:
 
     # Benchmark old query (multi-column ILIKE OR)
     old_sql = "SELECT c.legal_name FROM companies c WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE AND (c.legal_name ILIKE :s OR c.trade_name ILIKE :s OR c.primary_phone ILIKE :s OR c.primary_email ILIKE :s OR c.tax_number ILIKE :s OR c.vergi_no ILIKE :s) ORDER BY c.data_quality_score DESC LIMIT 50"
-    
+
     # Benchmark new query (single column on computed search_text)
     new_sql = "SELECT c.legal_name FROM companies c WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE AND c.search_text ILIKE :s ORDER BY c.data_quality_score DESC LIMIT 50"
-    
+
     for label, sql in [("OLD (multi-col ILIKE OR)", old_sql), ("NEW (search_text ILIKE)", new_sql)]:
         # EXPLAIN ANALYZE
         plan = c.execute(text("EXPLAIN (ANALYZE, FORMAT JSON) " + sql), {"s": "%dogan%"}).fetchone()
         plan_str = plan[0] if isinstance(plan[0], (list, dict)) else json.loads(plan[0])
         db_ms = plan_str[0]["Execution Time"]
-        
+
         # Plain EXPLAIN
         expl = [r[0] for r in c.execute(text("EXPLAIN " + sql), {"s": "%dogan%"}).fetchall()]
-        
+
         # Round-trip
         times = []
         for i in range(3):
             t0 = time.perf_counter()
             c.execute(text(sql), {"s": "%dogan%"}).fetchall()
             times.append((time.perf_counter() - t0) * 1000)
-        
+
         print(f"\n{label}:")
         print(f"  DB exec (EXPLAIN ANALYZE): {db_ms:.2f} ms")
         print(f"  Round-trip avg: {sum(times)/len(times):.2f} ms (min={min(times):.2f}, max={max(times):.2f})")

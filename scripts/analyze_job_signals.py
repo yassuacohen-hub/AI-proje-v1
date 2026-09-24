@@ -51,11 +51,11 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
     """Tek bir şirket için sinyalleri analiz et."""
     signals = []
     engine = get_db_engine()
-    
+
     with engine.connect() as conn:
         # İş ilanlarını çek
         rows = conn.execute(text("""
-            SELECT 
+            SELECT
                 job_posting_id, title, department, seniority_level, location_city,
                 technologies, posted_at, collected_at
             FROM job_postings
@@ -63,20 +63,20 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
             AND posted_at >= NOW() - INTERVAL '%s days'
             ORDER BY posted_at
         """ % lookback_days), {"cid": company_id}).mappings().all()
-        
+
         if not rows:
             return signals
-        
+
         # Zaman pencereleri
         now = datetime.now()
         cutoff_30d = now - timedelta(days=30)
         cutoff_90d = now - timedelta(days=90)
-        
+
         postings_30d = [r for r in rows if r["posted_at"] and r["posted_at"] >= cutoff_30d]
         postings_90d = [r for r in rows if r["posted_at"] and r["posted_at"] >= cutoff_90d]
-        
+
         # --- 1. BÜYÜME SİNYALLERİ ---
-        
+
         # 1a. İşe alım patlaması (30 gün)
         if len(postings_30d) >= THRESHOLDS["hiring_surge_30d"]:
             signals.append({
@@ -92,7 +92,7 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
                     "titles": [r["title"] for r in postings_30d[:10]],
                 }
             })
-        
+
         # 1b. İşe alım trendi (90 gün)
         if len(postings_90d) >= THRESHOLDS["hiring_surge_90d"]:
             signals.append({
@@ -107,7 +107,7 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
                     "job_posting_ids": [str(r["job_posting_id"]) for r in postings_90d],
                 }
             })
-        
+
         # 1c. Yönetici/Kıdemli işe alımı
         executive_postings = [r for r in rows if r["seniority_level"] in ("director", "c-level", "vp", "head", "manager")]
         if len(executive_postings) >= THRESHOLDS["executive_hiring"]:
@@ -124,9 +124,9 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
                     "job_posting_ids": [str(r["job_posting_id"]) for r in executive_postings],
                 }
             })
-        
+
         # --- 2. COĞRAFİ GENİŞLEME ---
-        
+
         # Şehir bazlı dağılım
         city_counts = defaultdict(int)
         city_first_seen = {}
@@ -136,7 +136,7 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
                 city_counts[city] += 1
                 if city not in city_first_seen or (r["posted_at"] and r["posted_at"] < city_first_seen[city]):
                     city_first_seen[city] = r["posted_at"]
-        
+
         # Yeni şehirler (son 90 günde ilk kez görülen)
         for city, first_seen in city_first_seen.items():
             if first_seen and first_seen >= cutoff_90d:
@@ -152,9 +152,9 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
                         "total_postings_in_city": city_counts[city],
                     }
                 })
-        
+
         # --- 3. ORGANİZASYON DEĞİŞİMİ ---
-        
+
         # Departman bazlı dağılım
         dept_counts = defaultdict(int)
         dept_first_seen = {}
@@ -164,7 +164,7 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
                 dept_counts[dept] += 1
                 if dept not in dept_first_seen or (r["posted_at"] and r["posted_at"] < dept_first_seen[dept]):
                     dept_first_seen[dept] = r["posted_at"]
-        
+
         # Yeni departmanlar
         for dept, first_seen in dept_first_seen.items():
             if first_seen and first_seen >= cutoff_90d:
@@ -180,7 +180,7 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
                         "postings_count": dept_counts[dept],
                     }
                 })
-        
+
         # Departman büyümesi (mevcut departmandaki artış)
         # Önceki dönem (90-180 gün) vs son 90 gün karşılaştırması
         cutoff_180d = now - timedelta(days=180)
@@ -189,7 +189,7 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
         for r in prev_period:
             if r["department"]:
                 prev_dept_counts[r["department"].strip().lower()] += 1
-        
+
         for dept, curr_count in dept_counts.items():
             prev_count = prev_dept_counts.get(dept, 0)
             if prev_count > 0 and curr_count >= prev_count * (1 + THRESHOLDS["dept_growth_rate"]):
@@ -207,29 +207,29 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
                         "growth_rate": round(growth_rate * 100, 1),
                     }
                 })
-        
+
         # --- 4. TEKNOLOJİ DÖNÜŞÜMÜ ---
-        
+
         # Teknoloji trendleri
         all_techs = []
         tech_timeline = defaultdict(list)  # tech -> [(date, count)]
-        
+
         for r in rows:
             if r["technologies"] and isinstance(r["technologies"], list):
                 for tech in r["technologies"]:
                     all_techs.append(tech.lower().strip())
                     if r["posted_at"]:
                         tech_timeline[tech.lower().strip()].append(r["posted_at"])
-        
+
         tech_counts = defaultdict(int)
         for tech in all_techs:
             tech_counts[tech] += 1
-        
+
         # Modern tech stack tespiti (cloud, k8s, modern languages)
         modern_techs = {"kubernetes", "aws", "azure", "gcp", "docker", "terraform",
                        "kafka", "spark", "pytorch", "tensorflow", "react", "vue",
                        "next.js", "fastapi", "golang", "rust", "typescript"}
-        
+
         modern_count = sum(1 for tech in tech_counts if tech in modern_techs)
         if modern_count >= THRESHOLDS["tech_modernization"]:
             signals.append({
@@ -244,12 +244,12 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
                     "top_techs": dict(sorted(tech_counts.items(), key=lambda x: -x[1])[:10]),
                 }
             })
-        
+
         # Legacy -> Modern geçiş tespiti
         legacy_techs = {".net framework", "jquery", "angularjs", "php 5", "java 8", "on-premise"}
         legacy_found = [t for t in tech_counts if any(lt in t for lt in legacy_techs)]
         modern_found = [t for t in tech_counts if t in modern_techs]
-        
+
         if legacy_found and modern_found:
             signals.append({
                 "company_id": company_id,
@@ -263,9 +263,9 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
                     "transition_indicator": True,
                 }
             })
-        
+
         # --- 5. YATIRIM SİNYALLERİ ---
-        
+
         # Ar-Ge / Ürün ekibi büyümesi
         rd_depts = {"r&d", "research", "ar-ge", "product", "ürün", "innovation", "yenilik"}
         rd_postings = [r for r in rows if r["department"] and r["department"].strip().lower() in rd_depts]
@@ -282,7 +282,7 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
                     "job_posting_ids": [str(r["job_posting_id"]) for r in rd_postings],
                 }
             })
-        
+
         # Business Development / Satış genişlemesi
         bd_depts = {"sales", "satış", "business development", "bd", "account", "musteri", "customer success"}
         bd_postings = [r for r in rows if r["department"] and r["department"].strip().lower() in bd_depts]
@@ -298,13 +298,13 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
                     "titles": [r["title"] for r in bd_postings],
                 }
             })
-        
+
         # --- 6. RİSK SİNYALLERİ ---
-        
+
         # İşe alım durması (önceki dönemde ilan varsa ama son 90 günde yok)
         total_prev = len(prev_period)
         total_curr = len(postings_90d)
-        
+
         if total_prev > 0 and total_curr == 0:
             signals.append({
                 "company_id": company_id,
@@ -331,12 +331,12 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
                     "decline_rate": round((1 - total_curr / total_prev) * 100, 1),
                 }
             })
-        
+
         # Teknik ekip azalması
         tech_depts = {"engineering", "it", "devops", "data", "software", "backend", "frontend", "fullstack"}
         tech_prev = len([r for r in prev_period if r["department"] and r["department"].strip().lower() in tech_depts])
         tech_curr = len([r for r in postings_90d if r["department"] and r["department"].strip().lower() in tech_depts])
-        
+
         if tech_prev > 0 and tech_curr == 0:
             signals.append({
                 "company_id": company_id,
@@ -349,7 +349,7 @@ def analyze_company_signals(company_id: str, lookback_days: int = 180) -> list[d
                     "current_tech_postings": 0,
                 }
             })
-    
+
     return signals
 
 
@@ -357,11 +357,11 @@ def save_signals(signals: list[dict[str, Any]]) -> tuple[int, int]:
     """Sinyalleri company_signals tablosuna kaydet."""
     if not signals:
         return 0, 0
-    
+
     engine = get_db_engine()
     inserted = 0
     updated = 0
-    
+
     with engine.begin() as conn:
         for signal in signals:
             try:
@@ -379,7 +379,7 @@ def save_signals(signals: list[dict[str, Any]]) -> tuple[int, int]:
                     "stype": signal["signal_type"],
                     "ssubtype": signal["signal_subtype"]
                 }).first()
-                
+
                 if existing:
                     # Güncelle
                     conn.execute(text("""
@@ -423,33 +423,33 @@ def save_signals(signals: list[dict[str, Any]]) -> tuple[int, int]:
                         "metadata": json.dumps(signal.get("metadata", {}), ensure_ascii=False),
                     })
                     inserted += 1
-                    
+
             except Exception as e:
                 log.error("Sinyal kaydetme hatası: %s", e)
-    
+
     return inserted, updated
 
 
 def run_analysis(limit: int | None = None) -> dict[str, int]:
     """Tüm şirketler için sinyal analizi çalıştır."""
     engine = get_db_engine()
-    
+
     with engine.connect() as conn:
         # İş ilanı olan şirketleri al
         query = """
-            SELECT DISTINCT company_id 
-            FROM job_postings 
+            SELECT DISTINCT company_id
+            FROM job_postings
             WHERE company_id IS NOT NULL
         """
         if limit:
             query += f" LIMIT {limit}"
-        
+
         company_ids = [str(r[0]) for r in conn.execute(text(query)).fetchall()]
-    
+
     log.info("%d şirket analiz edilecek", len(company_ids))
-    
+
     stats = {"companies": 0, "signals_generated": 0, "signals_saved": 0, "errors": 0}
-    
+
     for i, company_id in enumerate(company_ids):
         try:
             signals = analyze_company_signals(company_id)
@@ -457,34 +457,34 @@ def run_analysis(limit: int | None = None) -> dict[str, int]:
                 inserted, updated = save_signals(signals)
                 stats["signals_generated"] += len(signals)
                 stats["signals_saved"] += inserted + updated
-            
+
             stats["companies"] += 1
-            
+
             if (i + 1) % 100 == 0:
                 log.info("İlerleme: %d/%d şirket", i + 1, len(company_ids))
-                
+
         except Exception as e:
             stats["errors"] += 1
             log.error("Şirket %s analiz hatası: %s", company_id, e)
-    
+
     return stats
 
 
 def main() -> int:
     import sys
-    
+
     log.info("=== Job Signals Analysis Başlatılıyor ===")
-    
+
     try:
         stats = run_analysis()
-        
+
         log.info("=== ANALİZ TAMAMLANDI ===")
         log.info("Şirket: %d, Sinyal Üretilen: %d, Kaydedilen: %d, Hata: %d",
                 stats["companies"], stats["signals_generated"], stats["signals_saved"], stats["errors"])
-        
+
         print(json.dumps(stats, ensure_ascii=False, indent=2, default=str))
         return 0 if stats["errors"] == 0 else 1
-        
+
     except Exception as e:
         log.exception("Analiz hatası: %s", e)
         return 1

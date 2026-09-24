@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/claude_code/output/docs/01_etl_mimarisi.md]]
+
 # ETL Mimarisi (V9 ile uyumlu, guncel)
 
 **Kaynak:** `AI proje v1/V10/03_mimari/01_etl_mimarisi.md` (Claude Code tarafindan guncellendi, 2026-09-03)  

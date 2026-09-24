@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/BRIEF_Y21_iskur.md]]
+
 # Y21 — İSKUR Kurumsal Eşleştirme Verisi (sahip: arastirmaci)
 
 > Ana referans: `AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md` (V9)

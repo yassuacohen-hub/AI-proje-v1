@@ -19,15 +19,15 @@ with eng.connect() as conn:
         AND sr.raw_payload->>'sektor' IS NOT NULL
         AND sr.raw_payload->>'sektor' != ''
     """)).fetchall()
-    
+
     print(f"NACE eksik ama sektor olan: {len(rows)}")
-    
+
     updated = 0
     for row in rows:
         company_id, sektor = row
         if not sektor:
             continue
-        
+
         # Extract numeric code from end
         m = re.search(r'(\d+)$', sektor.strip())
         if m:
@@ -40,6 +40,6 @@ with eng.connect() as conn:
                 WHERE company_id = :cid
             """), {"nace": nace_code, "cid": company_id})
             updated += 1
-    
+
     conn.commit()
     print(f"NACE doldurulan firma: {updated}")

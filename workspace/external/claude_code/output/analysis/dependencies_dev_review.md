@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/claude_code/output/analysis/dependencies_dev_review.md]]
+
 # Dependencies Dev Review
 
 **Tarih:** 2026-09-02

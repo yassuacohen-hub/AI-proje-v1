@@ -96,7 +96,7 @@ def run_merger():
     logger.info("\nKaynak Dağılımı:")
     for src, cnt in summary.items():
         logger.info(f"  {src}: {cnt}")
-    
+
     return merged
 
 

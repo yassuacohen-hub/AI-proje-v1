@@ -23,7 +23,7 @@ for r in rows:
     for i, ch in enumerate(name):
         if ord(ch) < 32 or ord(ch) > 126:
             print(f"  Pozisyon {i}: {repr(ch)} (U+{ord(ch):04X})")
-    
+
     # normalize_company_name test
     cleaned = re.sub(r'[\r\n\t]+', ' ', name)
     cleaned = re.sub(r'\s{2,}', ' ', cleaned)

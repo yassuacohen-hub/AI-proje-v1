@@ -16,7 +16,7 @@ with eng.connect() as conn:
         AND c.data_quality_score = 0
         LIMIT 5
     """)).fetchall()
-    
+
     for i, row in enumerate(rows):
         payload = row[0]
         score = row[1]

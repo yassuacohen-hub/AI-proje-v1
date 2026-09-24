@@ -50,7 +50,7 @@ Araştırma 3 kaynaktan yapıldı:
 
 ### 2.1 data-designer
 
-- **Komut:** 
+- **Komut:**
 
 px skills add nvidia/skills --skill data-designer --yes
 
@@ -68,7 +68,7 @@ px skills add nvidia/skills --skill data-designer --yes
 
 ### 2.2 skill-card-generator
 
-- **Komut:** 
+- **Komut:**
 
 px skills add nvidia/skills --skill skill-card-generator --yes
 
@@ -86,7 +86,7 @@ px skills add nvidia/skills --skill skill-card-generator --yes
 
 ### 2.3 cuopt-numerical-optimization-formulation
 
-- **Komut:** 
+- **Komut:**
 
 px skills add nvidia/skills --skill cuopt-numerical-optimization-formulation --yes
 
@@ -118,51 +118,51 @@ NVIDIA toplam **346 skill** barındırıyor. Projeyle ilgili potansiyel skill'le
 
 |---|---|---|---|---|---|
 
-| 1 | aiq-research | AI/Research | 
+| 1 | aiq-research | AI/Research |
 
 px skills add nvidia/skills --skill aiq-research --yes | Derin araştırma workflow'ları | github.com/NVIDIA-AI-Blueprints/aiq |
 
-| 2 | rag-blueprint | RAG Pipeline | 
+| 2 | rag-blueprint | RAG Pipeline |
 
 px skills add nvidia/skills --skill rag-blueprint --yes | Bilgi getirme sistemleri | github.com/NVIDIA-AI-Blueprints/rag |
 
-| 3 | rag-eval | RAG Değerlendirme | 
+| 3 | rag-eval | RAG Değerlendirme |
 
 px skills add nvidia/skills --skill rag-eval --yes | RAG kalite metrikleri | github.com/NVIDIA-AI-Blueprints/rag |
 
-| 4 | portfolio-optimization | Finans/Optimizasyon | 
+| 4 | portfolio-optimization | Finans/Optimizasyon |
 
 px skills add nvidia/skills --skill portfolio-optimization --yes | Portföy optimizasyonu | github.com/NVIDIA-AI-Blueprints/portfolio-optimization |
 
-| 5 | cuopt-routing-api-python | Optimizasyon | 
+| 5 | cuopt-routing-api-python | Optimizasyon |
 
 px skills add nvidia/skills --skill cuopt-routing-api-python --yes | Rotalama optimizasyonu | github.com/NVIDIA/cuopt |
 
-| 6 | cuopt-numerical-optimization-api | Optimizasyon | 
+| 6 | cuopt-numerical-optimization-api | Optimizasyon |
 
 px skills add nvidia/skills --skill cuopt-numerical-optimization-api --yes | Sayısal optimizasyon API | github.com/NVIDIA/cuopt |
 
-| 7 | cuopt-multi-objective-exploration | Optimizasyon | 
+| 7 | cuopt-multi-objective-exploration | Optimizasyon |
 
 px skills add nvidia/skills --skill cuopt-multi-objective-exploration --yes | Çok amaçlı optimizasyon | github.com/NVIDIA/cuopt |
 
-| 8 | accelerated-computing-cudf | Veri İşleme | 
+| 8 | accelerated-computing-cudf | Veri İşleme |
 
 px skills add nvidia/skills --skill accelerated-computing-cudf --yes | GPU hızlandırmalı DataFrame | github.com/rapidsai/cudf |
 
-| 9 | nemo-retriever | Bilgi Getirme | 
+| 9 | nemo-retriever | Bilgi Getirme |
 
 px skills add nvidia/skills --skill nemo-retriever --yes | Corpus tabanlı soru-cevap | github.com/NVIDIA/NeMo-Retriever |
 
-| 10 | rag-perf | Performans | 
+| 10 | rag-perf | Performans |
 
 px skills add nvidia/skills --skill rag-perf --yes | RAG performans analizi | github.com/NVIDIA-AI-Blueprints/rag |
 
-| 11 | cuopt-server-api-python | Optimizasyon | 
+| 11 | cuopt-server-api-python | Optimizasyon |
 
 px skills add nvidia/skills --skill cuopt-server-api-python --yes | cuOpt sunucu API | github.com/NVIDIA/cuopt |
 
-| 12 | aiq-deploy | AI Deploy | 
+| 12 | aiq-deploy | AI Deploy |
 
 px skills add nvidia/skills --skill aiq-deploy --yes | AI-Q servis dağıtımı | github.com/NVIDIA-AI-Blueprints/aiq |
 
@@ -178,15 +178,15 @@ px skills add nvidia/skills --skill aiq-deploy --yes | AI-Q servis dağıtımı 
 
 ### 4.1 Node.js / npm / npx Durumu
 
-- 
+-
 
 ode --version: v24.19.0
 
-- 
+-
 
 pm --version: 11.17.0
 
-- 
+-
 
 px --version: 11.17.0
 
@@ -198,7 +198,7 @@ px --version: 11.17.0
 
 
 
-**Komut 1:** 
+**Komut 1:**
 
 px skills add nvidia/skills --skill data-designer --yes
 
@@ -212,7 +212,7 @@ px skills add nvidia/skills --skill data-designer --yes
 
 
 
-**Komut 2:** 
+**Komut 2:**
 
 px skills add nvidia/skills --skill skill-card-generator --yes
 
@@ -226,7 +226,7 @@ px skills add nvidia/skills --skill skill-card-generator --yes
 
 
 
-**Komut 3:** 
+**Komut 3:**
 
 px skills add nvidia/skills --skill cuopt-numerical-optimization-formulation --yes
 

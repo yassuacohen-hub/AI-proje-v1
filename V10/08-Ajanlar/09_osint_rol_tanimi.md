@@ -1,4 +1,4 @@
-tüm ajanlar için ortak görevi ve rolü olarak tanımlanacak 
+tüm ajanlar için ortak görevi ve rolü olarak tanımlanacak
 
 
 # TÜM AJANLAR İÇİN EKLENECEK YENİ ROL
@@ -72,3 +72,13 @@ Araştır:
 ---
 
 > Otomatik veri toplama icin [[OSINT_Scraper_Motoru]] kullanilir (izin router + kaynak kayitlari). Bu rol, motorun takviye katmanidir.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/08-Ajanlar/README]]
+
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

@@ -100,3 +100,12 @@ Bu belge, [[01_veri_kaynagi_envanteri]] sonucu tespit edilen 4 OSB (Ivedik, ASO 
 - OSB Kanunu (4562 sayili) - yasal dayanak
 - KVKK (6698 sayili) - kisisel veri koruma
 - V10/09_kurallar_ve_promptlar/10_vpn_kurali - VPN uyarisi (erisim hatasi durumunda)
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/07_referanslar/01_veri_kaynagi_envanteri]]
+
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

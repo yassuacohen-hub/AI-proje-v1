@@ -15,7 +15,7 @@ with eng.connect() as conn:
         AND (c.primary_phone IS NOT NULL AND c.primary_phone != '')
         LIMIT 5
     """)).fetchall()
-    
+
     for i, row in enumerate(rows):
         payload = row[0]
         print(f"\nFirma {i+1}:")

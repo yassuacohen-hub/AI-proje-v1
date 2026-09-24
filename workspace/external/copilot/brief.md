@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/claude_code/brief.md]]
+
 # GitHub Copilot — Otomatik Görev Brief'i
 
 > **Paket ID:** `EXT-COPILOT-20260906`

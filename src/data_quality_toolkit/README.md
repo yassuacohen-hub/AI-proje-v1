@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/skills/supabase/README.md]]
+
 # Data Quality Toolkit
 
 Kurumsal veri setleri için **sınıflandırma (PII/DLP)**, **sentetik veri tasarımı** ve **kalite doğrulama** altyapısı.

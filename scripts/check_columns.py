@@ -10,7 +10,7 @@ with engine.connect() as conn:
     print('Companies columns:')
     for c in all_cols:
         print(f'  {c}')
-    
+
     # Count non-null for each
     print('\nNon-null counts:')
     for c in all_cols:

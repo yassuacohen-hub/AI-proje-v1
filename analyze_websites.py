@@ -4,14 +4,14 @@ from sqlalchemy import text
 engine = get_engine()
 with engine.connect() as conn:
     total_web = conn.execute(text("""
-        SELECT COUNT(*) FROM companies 
+        SELECT COUNT(*) FROM companies
         WHERE website_domain IS NOT NULL AND website_domain != ''
     """)).scalar()
     print(f"Companies with website_domain: {total_web}")
 
     samples = conn.execute(text("""
         SELECT company_id, legal_name, website_domain
-        FROM companies 
+        FROM companies
         WHERE website_domain IS NOT NULL AND website_domain != ''
         LIMIT 20
     """)).mappings().all()

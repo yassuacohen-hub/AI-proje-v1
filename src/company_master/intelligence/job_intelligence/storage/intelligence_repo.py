@@ -69,14 +69,14 @@ class IntelligenceRepository:
                 text("""
                     INSERT INTO company_intelligence_scores (
                         company_id, growth_score, expansion_score, tech_transformation_score,
-                        investment_signal_score, org_change_score, risk_score, 
-                        hiring_trend, new_locations, new_departments, critical_hires, 
+                        investment_signal_score, org_change_score, risk_score,
+                        hiring_trend, new_locations, new_departments, critical_hires,
                         detected_signals, overall_confidence
                     )
                     VALUES (
                         :company_id, :growth_score, :expansion_score, :tech_transformation_score,
-                        :investment_signal_score, :org_change_score, :risk_score, 
-                        :hiring_trend, :new_locations, :new_departments, :critical_hires, 
+                        :investment_signal_score, :org_change_score, :risk_score,
+                        :hiring_trend, :new_locations, :new_departments, :critical_hires,
                         :detected_signals, :overall_confidence
                     )
                     ON CONFLICT (company_id) DO UPDATE SET

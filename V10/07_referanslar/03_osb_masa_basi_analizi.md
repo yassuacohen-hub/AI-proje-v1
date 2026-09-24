@@ -338,3 +338,11 @@ Bu rapor, Web Kazıma Uzmanı'nın 30 dakikalık masa başı analizinin sonucudu
 
 - [[01_sirket_master_ana_belgesi]] — Ana şema
 
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/07_referanslar/01_veri_kaynagi_envanteri]]
+
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

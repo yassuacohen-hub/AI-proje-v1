@@ -116,3 +116,11 @@ Bağlantılar: [[README]] · [[01_sirket_master_ana_belgesi]] · [[01_v9_ile_kar
 
 - Eski belge silinmez; arşive taşınır ve başına arşiv notu eklenir.
 
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/09_kurallar_ve_promptlar/01_kasa_kurallari]]
+
+
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

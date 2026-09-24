@@ -32,15 +32,15 @@ def run_full_scrape(max_sayfa: int = 30):
     session = requests.Session()
     session.headers["User-Agent"] = USER_AGENT
     csrf = get_csrf_token(session)
-    
+
     count_detail = 0
     with open("data/aso/aso_full.jsonl", "a", encoding="utf-8") as f:
         for page in range(1, max_sayfa + 1):
             if page % 50 == 0: csrf = get_csrf_token(session)
-            
+
             items = search_page(session, csrf, page)
             if not items: break
-            
+
             for item in items:
                 detail = get_detail(session, csrf, item.get("detailToken", ""))
                 if detail:

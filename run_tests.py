@@ -15,29 +15,29 @@ from io import StringIO
 
 def run_tests_with_reporting():
     """Test suite'i çalıştır ve raporları kaydet."""
-    
+
     # Rapor dizini oluştur
     reports_dir = Path("test_reports")
     reports_dir.mkdir(exist_ok=True)
-    
+
     # Timestamp klasörü
     timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
     run_dir = reports_dir / timestamp
     run_dir.mkdir(exist_ok=True)
-    
+
     # Test suite'i yükle
     sys.path.insert(0, str(Path.cwd() / "src"))
     loader = unittest.TestLoader()
     suite = loader.discover("tests", pattern="test_*.py")
-    
+
     # StringIO ile çıktıyı yakala
     stream = StringIO()
     runner = unittest.TextTestRunner(stream=stream, verbosity=2)
     result = runner.run(suite)
-    
+
     # Test sonuçlarını hazırla
     test_output = stream.getvalue()
-    
+
     report_data = {
         "timestamp": timestamp,
         "total_tests": result.testsRun,
@@ -60,30 +60,30 @@ def run_tests_with_reporting():
             for test, msg in result.errors
         ],
     }
-    
+
     # 1. JSON raporu kaydet
     json_file = run_dir / "test_results.json"
     with open(json_file, "w", encoding="utf-8") as f:
         json.dump(report_data, f, indent=2, ensure_ascii=False)
-    
+
     # 2. TXT raporu kaydet
     txt_file = run_dir / "test_results.txt"
     with open(txt_file, "w", encoding="utf-8") as f:
         f.write(test_output)
-    
+
     # 3. HTML raporu oluştur
     html_file = run_dir / "test_results.html"
     html_content = generate_html_report(report_data, test_output)
     with open(html_file, "w", encoding="utf-8") as f:
         f.write(html_content)
-    
+
     # 4. Özet raporu (summary.json) - geçmiş takibi
     summary_file = reports_dir / "summary.json"
     summaries = []
     if summary_file.exists():
         with open(summary_file, "r", encoding="utf-8") as f:
             summaries = json.load(f)
-    
+
     summaries.append({
         "timestamp": timestamp,
         "total": report_data["total_tests"],
@@ -92,10 +92,10 @@ def run_tests_with_reporting():
         "errors": report_data["error_count"],
         "success": report_data["success"]
     })
-    
+
     with open(summary_file, "w", encoding="utf-8") as f:
         json.dump(summaries, f, indent=2, ensure_ascii=False)
-    
+
     # Console'da göster
     print("\n" + "="*60)
     print(f"📊 Test Raporu: {timestamp}")
@@ -112,16 +112,16 @@ def run_tests_with_reporting():
     print(f"   - {html_file.name}")
     print(f"\n📈 Geçmiş özet: {summary_file}")
     print("\n")
-    
+
     return result.wasSuccessful()
 
 
 def generate_html_report(report_data, test_output):
     """HTML formatında test raporu oluştur."""
-    
+
     status_class = "success" if report_data["success"] else "failure"
     status_text = "✓ BAŞARILI" if report_data["success"] else "✗ BAŞARISIZ"
-    
+
     failures_html = ""
     for failure in report_data["failures"]:
         failures_html += f"""
@@ -130,7 +130,7 @@ def generate_html_report(report_data, test_output):
             <pre>{failure['message']}</pre>
         </div>
         """
-    
+
     errors_html = ""
     for error in report_data["errors"]:
         errors_html += f"""
@@ -139,7 +139,7 @@ def generate_html_report(report_data, test_output):
             <pre>{error['message']}</pre>
         </div>
         """
-    
+
     html = f"""<!DOCTYPE html>
 <html lang="tr">
 <head>
@@ -264,11 +264,11 @@ def generate_html_report(report_data, test_output):
             <h1>🧪 Test Raporu</h1>
             <p>{report_data['timestamp']}</p>
         </div>
-        
+
         <div class="status {status_class}">
             <h2>{status_text}</h2>
         </div>
-        
+
         <div class="stats">
             <div class="stat-box">
                 <h3>{report_data['total_tests']}</h3>
@@ -287,10 +287,10 @@ def generate_html_report(report_data, test_output):
                 <p>⚠️ Hata</p>
             </div>
         </div>
-        
+
         {f'<div class="failures"><h2>❌ Başarısız Testler</h2>{failures_html}</div>' if report_data['failed'] > 0 else ''}
         {f'<div class="errors"><h2>⚠️ Hatalar</h2>{errors_html}</div>' if report_data['error_count'] > 0 else ''}
-        
+
         <div class="footer">
             <p>Rapor türleri: JSON • HTML • TXT | 📁 test_reports/ klasöründe kaydedildi</p>
         </div>

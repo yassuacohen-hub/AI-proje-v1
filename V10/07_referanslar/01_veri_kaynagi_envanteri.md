@@ -58,3 +58,12 @@ Bu belge, [[01_sirket_master_ana_belgesi]] sonundaki "sonraki teknik adım" gere
 - yasal_durum: Kamuya açık, izin gerekli
 - guven_skoru: 0.80
 - not: Üye listesi offline paylaşılır; e-posta/yazılı talep ile temin edilir.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/07_referanslar/01_veri_kaynagi_envanteri]]
+
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

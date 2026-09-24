@@ -45,7 +45,7 @@ def load_jsonl(file_path: Path) -> list[dict[str, Any]]:
     if not file_path.exists():
         log.warning("Dosya yok: %s", file_path)
         return records
-    
+
     with open(file_path, "r", encoding="utf-8") as f:
         for line_num, line in enumerate(f, 1):
             line = line.strip()
@@ -55,7 +55,7 @@ def load_jsonl(file_path: Path) -> list[dict[str, Any]]:
                 records.append(json.loads(line))
             except json.JSONDecodeError as e:
                 log.warning("Satır %d: JSON parse hatası: %s", line_num, e)
-    
+
     log.info("%s: %d kayıt yüklendi", file_path.name, len(records))
     return records
 
@@ -80,9 +80,9 @@ def prepare_job_record(record: dict[str, Any], matcher: CompanyMatcher, source_n
         tax_number=record.get("tax_number"),
         mersis=record.get("mersis")
     )
-    
+
     company_id = match_result.company_id
-    
+
     # Eşleşme yoksa kaynak adından domain çıkararak dene
     if not company_id and record.get("source_url"):
         from company_master.intelligence.job_intelligence.pipeline.normalizer import extract_domain
@@ -90,7 +90,7 @@ def prepare_job_record(record: dict[str, Any], matcher: CompanyMatcher, source_n
         if domain:
             match_result = matcher.match(domain=domain)
             company_id = match_result.company_id
-    
+
     # Hala eşleşme yoksa ve raw_data'dan company_id varsa kullan
     if not company_id and record.get("raw_data", {}).get("company_id"):
         try:
@@ -105,17 +105,17 @@ def prepare_job_record(record: dict[str, Any], matcher: CompanyMatcher, source_n
             )
         except Exception:
             pass
-    
+
     # Şirket eşleşmediysine atla (logla ama hata yapma)
     if not company_id:
         log.debug("Eşleşme yok: %s (source=%s)", record.get("title", "")[:50], source_name)
         return None
-    
+
     # Tarih parse et
     posted_at = parse_datetime(record.get("posted_at"))
     expired_at = parse_datetime(record.get("expired_at"))
     collected_at = parse_datetime(record.get("collected_at")) or datetime.now()
-    
+
     # Content hash hesapla (deduplication için)
     import hashlib
     content_parts = [
@@ -125,7 +125,7 @@ def prepare_job_record(record: dict[str, Any], matcher: CompanyMatcher, source_n
         record.get("description", "")[:200] if record.get("description") else "",
     ]
     content_hash = hashlib.sha256("|".join(content_parts).encode()).hexdigest()[:32]
-    
+
     return {
         "company_id": str(company_id),
         "source_name": source_name,
@@ -154,7 +154,7 @@ def prepare_job_record(record: dict[str, Any], matcher: CompanyMatcher, source_n
 def ingest_job_postings() -> dict[str, int]:
     """Tüm kaynak dosyalarını işle ve DB'ye yaz."""
     matcher = CompanyMatcher(fuzzy_threshold=85.0)
-    
+
     stats = {
         "total_files": 0,
         "total_records": 0,
@@ -164,51 +164,51 @@ def ingest_job_postings() -> dict[str, int]:
         "errors": 0,
         "by_source": {},
     }
-    
+
     engine = get_engine()
-    
+
     for source_name, file_path in SOURCE_FILES:
         log.info("İşleniyor: %s (%s)", source_name, file_path)
         stats["total_files"] += 1
-        
+
         records = load_jsonl(file_path)
         if not records:
             continue
-        
+
         stats["total_records"] += len(records)
         source_matched = 0
         source_inserted = 0
         source_duplicates = 0
         source_errors = 0
-        
+
         with engine.begin() as conn:
             batch = []
-            
+
             for record in records:
                 try:
                     prepared = prepare_job_record(record, matcher, source_name)
                     if not prepared:
                         continue
-                    
+
                     source_matched += 1
                     batch.append(prepared)
-                    
+
                     if len(batch) >= BATCH_SIZE:
                         inserted, duplicates = _insert_batch(conn, batch)
                         source_inserted += inserted
                         source_duplicates += duplicates
                         batch = []
-                        
+
                 except Exception as e:
                     source_errors += 1
                     log.error("Kayıt işleme hatası (%s): %s", record.get("title", "")[:50], e)
-            
+
             # Kalan batch
             if batch:
                 inserted, duplicates = _insert_batch(conn, batch)
                 source_inserted += inserted
                 source_duplicates += duplicates
-        
+
         stats["matched"] += source_matched
         stats["inserted"] += source_inserted
         stats["duplicates"] += source_duplicates
@@ -220,10 +220,10 @@ def ingest_job_postings() -> dict[str, int]:
             "duplicates": source_duplicates,
             "errors": source_errors,
         }
-        
+
         log.info("%s tamamlandı: matched=%d, inserted=%d, duplicates=%d, errors=%d",
                 source_name, source_matched, source_inserted, source_duplicates, source_errors)
-    
+
     return stats
 
 
@@ -231,10 +231,10 @@ def _insert_batch(conn, batch: list[dict[str, Any]]) -> tuple[int, int]:
     """Batch insert (ON CONFLICT ile deduplication)."""
     if not batch:
         return 0, 0
-    
+
     inserted = 0
     duplicates = 0
-    
+
     for record in batch:
         try:
             result = conn.execute(text("""
@@ -268,37 +268,37 @@ def _insert_batch(conn, batch: list[dict[str, Any]]) -> tuple[int, int]:
                     raw_data = EXCLUDED.raw_data,
                     updated_at = NOW()
             """), record)
-            
+
             if result.rowcount > 0:
                 inserted += 1
             else:
                 duplicates += 1
-                
+
         except Exception as e:
             # Duplicate key violation veya diğer hatalar
             raise
-    
+
     return inserted, duplicates
 
 
 def main() -> int:
     log.info("=== Job Postings Ingest Başlatılıyor ===")
-    
+
     try:
         stats = ingest_job_postings()
-        
+
         log.info("=== INGEST TAMAMLANDI ===")
         log.info("Dosya: %d, Toplam Kayıt: %d", stats["total_files"], stats["total_records"])
         log.info("Eşleşen: %d, Eklenen: %d, Duplicate: %d, Hata: %d",
                 stats["matched"], stats["inserted"], stats["duplicates"], stats["errors"])
-        
+
         for source, s in stats["by_source"].items():
             log.info("  %s: kayıt=%d, eşleşen=%d, eklenen=%d, dup=%d, hata=%d",
                     source, s["records"], s["matched"], s["inserted"], s["duplicates"], s["errors"])
-        
+
         print(json.dumps(stats, ensure_ascii=False, indent=2, default=str))
         return 0 if stats["errors"] == 0 else 1
-        
+
     except Exception as e:
         log.exception("Ingest hatası: %s", e)
         return 1

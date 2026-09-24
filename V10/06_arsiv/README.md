@@ -1,3 +1,5 @@
+[[Huginn Data Insights/data/skills/supabase/README.md]]
+
 # Arşiv
 
 Bağlantılar: [[00-Home]] · [[01_kasa_kurallari]] · [[README]]

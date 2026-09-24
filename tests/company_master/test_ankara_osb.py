@@ -171,7 +171,7 @@ def test_mvp_filter_logic():
 
     invalid_firms.extend(generate_non_osb_or_outside_ankara(10))
 
-    
+
 
     mvp_filter = [f for f in valid_firms if f["is_ankara"] and f["is_osb_member"]]
 

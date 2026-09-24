@@ -102,3 +102,12 @@ Araştırmacı olarak kaynak güvenilirliği benim işim. 13.500+ rakamı 〒_2-
 - [[01_veri_kaynagi_envanteri]] - [[04_web_kazima_kaynak_arastirmasi]] - [[08_gib_vergino_sorgu_stratejisi]]
 - [[10_apify_entegrasyon_arastirmasi_20260910]] - [[vkn_bulma_stratejisi]] - [[02_ankara_osb_ekosistemi_arastirma_notu]]
 - Ham notlar: `07_referanslar/` - Sonuclar [[CHANGELOG]]`a yazilir
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/08-Ajanlar/README]]
+
+
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

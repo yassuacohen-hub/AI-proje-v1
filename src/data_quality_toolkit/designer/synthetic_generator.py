@@ -23,7 +23,7 @@ class SyntheticDataGenerator:
         "Fatma", "Ayşe", "Emine", "Hatice", "Zeynep", "Elif", "Meryem", "Şerife", "Zehra", "Sultan",
         "Burak", "Can", "Deniz", "Ege", "Kerem", "Selin", "Derya", "Cem", "Berk", "Yasemin"
     ]
-    
+
     LAST_NAMES = [
         "Yılmaz", "Kaya", "Demir", "Çelik", "Şahin", "Yıldız", "Yıldırım", "Öztürk", "Aydın", "Özdemir",
         "Arslan", "Doğan", "Kılıç", "Aslan", "Çetin", "Kara", "Koç", "Kurt", "Özkan", "Şimşek"
@@ -125,7 +125,7 @@ class SyntheticDataGenerator:
         elif ft == FieldType.NUMERIC:
             min_v = field_def.min_value if field_def.min_value is not None else 0.0
             max_v = field_def.max_value if field_def.max_value is not None else 1000.0
-            
+
             if field_def.mean is not None and field_def.std_dev is not None:
                 val = random.gauss(field_def.mean, field_def.std_dev)
                 val = max(min_v, min(max_v, val))

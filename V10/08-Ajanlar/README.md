@@ -1,4 +1,6 @@
-﻿# Ajanlar ve Gelişime Açık Yapı
+[[Huginn Data Insights/data/skills/supabase/README.md]]
+
+# Ajanlar ve Gelişime Açık Yapı
 
 Bu bölüm, proje içindeki yapay zeka ajanlarının sorumluluk alanlarını, sınırlarını ve gelişime açık yapısını açıklar.
 
@@ -105,3 +107,12 @@ Bu yapı, hem genişletilebilir hem de denetlenebilir bir yapıdır.
 - Tüm harici ajan görevleri **orkestratör ([[01_koordinator_ajan]]) üzerinden** yürütülür.
 - Başarısızlık durumunda 3 deneme sonrası iç ajanlara reassign yapılır.
 - Hata kayıtları `AGENT_SYNC.md` → "ErrorLedger" bölümüne yazılır.
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/08-Ajanlar/README]]
+
+
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

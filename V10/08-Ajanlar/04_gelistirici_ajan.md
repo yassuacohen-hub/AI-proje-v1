@@ -102,3 +102,12 @@ Geliştirici olarak uygulanabilirlik benim işim. İyi taraf: OSTİM, ASO 1, İv
 - [[01_etl_mimarisi]] - [[01_mvp_gereksinimleri]] - [[02_hugins_master_kaynak_dokumani]]
 - [[OSINT_Scraper_Motoru]] - scraper/pipeline bilesenleri
 - Kod: `src/company_master/` - Testler: `tests/`
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/08-Ajanlar/README]]
+
+
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

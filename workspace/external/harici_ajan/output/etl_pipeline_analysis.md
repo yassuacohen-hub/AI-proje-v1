@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/harici_ajan/output/etl_pipeline_analysis.md]]
+
 # ETL Pipeline Analizi
 
 ## Kapsam

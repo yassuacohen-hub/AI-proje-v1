@@ -162,7 +162,7 @@ def _read_project_state() -> dict:
 
         return result
 
-    
+
 
     content = state_file.read_text(encoding="utf-8")
 
@@ -174,7 +174,7 @@ def _read_project_state() -> dict:
 
         result["version"] = m.group(1)
 
-    
+
 
     m = re.search(r"\*\*Toplam işletme:\*\*\s*([\d\.,]+)", content)
 
@@ -182,7 +182,7 @@ def _read_project_state() -> dict:
 
         result["total_firms"] = int(m.group(1).replace(",", "").replace(".", ""))
 
-    
+
 
     # Son güncelleme tarihi
 
@@ -192,7 +192,7 @@ def _read_project_state() -> dict:
 
         result["last_update"] = m.group(1)
 
-    
+
 
     return result
 
@@ -214,7 +214,7 @@ def cmd_status(chat_id: str) -> None:
 
             live_count = sum(1 for _ in f if _.strip())
 
-    
+
 
     text = (
 
@@ -274,7 +274,7 @@ def cmd_rapor(chat_id: str) -> None:
 
         return
 
-    
+
 
     content = rapor.read_text(encoding="utf-8")
 
@@ -286,7 +286,7 @@ def cmd_rapor(chat_id: str) -> None:
 
     yuksek_match = re.search(r"\| Yüksek \(80-100\) \| (\d+)", content)
 
-    
+
 
     toplam = toplam_match.group(1) if toplam_match else "?"
 
@@ -294,7 +294,7 @@ def cmd_rapor(chat_id: str) -> None:
 
     yuksek = yuksek_match.group(1) if yuksek_match else "?"
 
-    
+
 
     text = (
 
@@ -424,16 +424,16 @@ def cmd_set_status(chat_id: str, message: str) -> None:
     if not state_file.exists():
         send_message("❌ project_state.md bulunamadı.", chat_id=chat_id)
         return
-    
+
     today = time.strftime("%Y-%m-%d")
     entry = f"- [{today}] {message}"
-    
+
     file_content = state_file.read_text(encoding="utf-8")
     if "### Açık Sorunlar" in file_content:
         file_content = file_content.replace("### Açık Sorunlar", f"### Açık Sorunlar\n\n{entry}")
     else:
         file_content += f"\n\n### Eklenen Notlar\n\n{entry}\n"
-    
+
     state_file.write_text(file_content, encoding="utf-8")
     send_message(f"✅ Durum güncellendi: <i>{_escape_html(message[:100])}</i>", chat_id=chat_id)
 
@@ -443,10 +443,10 @@ def cmd_daily_report() -> None:
     chat_id = os.environ.get("TELEGRAM_CHAT_ID")
     if not chat_id:
         return
-    
+
     state = _read_project_state()
     date = time.strftime("%Y-%m-%d %H:%M")
-    
+
     # Veritabanı sayıları
     try:
         from sqlalchemy import text
@@ -458,7 +458,7 @@ def cmd_daily_report() -> None:
             er_count = conn.execute(text("SELECT count(*) FROM entity_resolution")).scalar()
     except Exception:
         company_count = sr_count = er_count = "?"
-    
+
     text_msg = (
         f"📊 <b>Günlük Rapor — {date}</b>\n\n"
         f"🏢 Şirket sayısı: <b>{company_count}</b>\n"
@@ -545,7 +545,7 @@ def poll() -> None:
 
     print(f"CHAT_ID: {os.environ.get('TELEGRAM_CHAT_ID')}")
 
-    
+
 
     offset: Optional[int] = None
 
@@ -569,7 +569,7 @@ def poll() -> None:
 
             data = resp.json()
 
-            
+
 
             if not data.get("ok"):
 
@@ -579,7 +579,7 @@ def poll() -> None:
 
                 continue
 
-            
+
 
             updates = data.get("result", [])
 
@@ -593,7 +593,7 @@ def poll() -> None:
 
                     continue
 
-                
+
 
                 chat = message.get("chat", {})
 
@@ -601,7 +601,7 @@ def poll() -> None:
 
                 text = message.get("text", "")
 
-                
+
 
                 if text.startswith("/"):
 
@@ -623,7 +623,7 @@ def poll() -> None:
 
                     )
 
-            
+
 
             if not updates:
 
@@ -661,7 +661,7 @@ if __name__ == "__main__":
 
         sys.exit(1)
 
-    
+
 
     if not os.environ.get("TELEGRAM_CHAT_ID"):
 
@@ -669,6 +669,6 @@ if __name__ == "__main__":
 
         sys.exit(1)
 
-    
+
 
     poll()

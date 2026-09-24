@@ -14,7 +14,7 @@ with eng.connect() as conn:
         AND c.data_quality_score = 0
     """)).scalar()
     print(f"Score 0 olan firma: {rows}")
-    
+
     rows2 = conn.execute(text("""
         SELECT COUNT(*) as cnt FROM companies c
         LEFT JOIN source_records sr ON sr.source_record_id = c.source_record_id
@@ -23,7 +23,7 @@ with eng.connect() as conn:
         AND sr.raw_payload IS NOT NULL
     """)).scalar()
     print(f"Score 0 ama raw_payload olan: {rows2}")
-    
+
     rows3 = conn.execute(text("""
         SELECT COUNT(*) as cnt FROM companies c
         LEFT JOIN source_records sr ON sr.source_record_id = c.source_record_id

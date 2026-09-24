@@ -36,20 +36,20 @@ logger.addHandler(_fh)
 logger.addHandler(_sh)
 
 TURKISH_CHAR_MAP = str.maketrans({
-    "ý": "i", "Ý": "I", "ð": "g", "Ð": "G", "ü": "u", "Ü": "U",
-    "þ": "s", "Þ": "S", "ö": "o", "Ö": "O", "ç": "c", "Ç": "C",
+    "ï¿½": "i", "ï¿½": "I", "ï¿½": "g", "ï¿½": "G", "ï¿½": "u", "ï¿½": "U",
+    "ï¿½": "s", "ï¿½": "S", "ï¿½": "o", "ï¿½": "O", "ï¿½": "c", "ï¿½": "C",
 })
 ABBREVIATIONS = {
-    "san.", "tic.", "ltd.", "þti.", "a.þ.", "a.s.", "anonim", "þirketi",
-    "limited", "þirket", "ve", "ticaret", "sanayi", "imalat", "deðerleme",
-    "organize", "av.", "tur.", "org.", "dan.", "kim.", "i·nþ.", "inþ.",
-    "dýþ", "dis", "iç", "ic", "tekstil", "tek.", "imal", "ithalat", "ihracat",
-    "mühendislik", "müh.", "muh.", "müþavir", "musavir", "hizmet", "hizm.",
-    "gýda", "gida", "metal", "otomotiv", "otom.", "elektronik", "elektr.",
-    "yazýlým", "yazilim", "teknoloji", "tekno.", "teknol.", "mobilya",
-    "mob.", "tekstil", "tekst.", "tek.", "plastik", "kauçuk", "kaucuk",
-    "ürünler", "urunler", "ürün", "urun", "imalat", "imal.", "deðerleme",
-    "degerleme", "deðer.", "deger.",
+    "san.", "tic.", "ltd.", "ï¿½ti.", "a.ï¿½.", "a.s.", "anonim", "ï¿½irketi",
+    "limited", "ï¿½irket", "ve", "ticaret", "sanayi", "imalat", "deï¿½erleme",
+    "organize", "av.", "tur.", "org.", "dan.", "kim.", "iï¿½nï¿½.", "inï¿½.",
+    "dï¿½ï¿½", "dis", "iï¿½", "ic", "tekstil", "tek.", "imal", "ithalat", "ihracat",
+    "mï¿½hendislik", "mï¿½h.", "muh.", "mï¿½ï¿½avir", "musavir", "hizmet", "hizm.",
+    "gï¿½da", "gida", "metal", "otomotiv", "otom.", "elektronik", "elektr.",
+    "yazï¿½lï¿½m", "yazilim", "teknoloji", "tekno.", "teknol.", "mobilya",
+    "mob.", "tekstil", "tekst.", "tek.", "plastik", "kauï¿½uk", "kaucuk",
+    "ï¿½rï¿½nler", "urunler", "ï¿½rï¿½n", "urun", "imalat", "imal.", "deï¿½erleme",
+    "degerleme", "deï¿½er.", "deger.",
 }
 
 
@@ -165,10 +165,10 @@ def adim3_vkn_web_scrape(conn, limit: int = 50) -> dict:
     UA = "AnkaraB2B-Bot/1.0 (+research contact: site owner)"
     AYRACI_YOLLAR = ["", "/hakkimizda", "/iletisim", "/kurumsal", "/kvkk", "/hakkinda"]
     VKN_DESENLER = [
-        re.compile(r'vergi\s*(?:no|numaras[ýi])\s*[:\-–]?\s*([0-9]{10})', re.IGNORECASE),
+        re.compile(r'vergi\s*(?:no|numaras[ï¿½i])\s*[:\-ï¿½]?\s*([0-9]{10})', re.IGNORECASE),
         re.compile(r'v\.?\s*d\.?\s*\.?\s*[^0-9]{0,40}([0-9]{10})', re.IGNORECASE),
         re.compile(r'vergi\s*dairesi[^0-9]{0,60}([0-9]{10})', re.IGNORECASE),
-        re.compile(r'tax\s*(?:no|number|id)\s*[:\-–]?\s*([0-9]{10})', re.IGNORECASE),
+        re.compile(r'tax\s*(?:no|number|id)\s*[:\-ï¿½]?\s*([0-9]{10})', re.IGNORECASE),
     ]
     TIMEOUT = 15
     SSL_CTX = ssl.create_default_context()
@@ -377,7 +377,7 @@ def main() -> int:
             "bottleneck": "VKN kapsami cok dusuk. Web kazima VPN/erisim sorunlari nedeniyle sinirli basari.",
             "path_to_50_plus": "VKN web kazima tamamlanmali (5000+ hedef). Adres/web backfill fetched data ile %60-70'a cikarilabilir.",
             "next_steps": [
-                "p43_ostim_vkn.py tamami calistir (eriþim varsa)",
+                "p43_ostim_vkn.py tamami calistir (eriï¿½im varsa)",
                 "p32_vkn_from_ivedik_baskent.py calistir",
                 "ASO / Ticaret Sicil kaynaklarindan VKN cross-match",
             ],

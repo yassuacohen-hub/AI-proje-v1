@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/BRIEF_Y14.md]]
+
 ## Gorev Brief: Y14
 
 **Gorev:** Degisiklik bildirimi (yeni firma/skor degisimi -> Telegram)

@@ -36,17 +36,17 @@ class PIIScanner:
 
     # E-posta Regex (RFC 5322 uyumlu, Türkçe & Avrupa karakterleri destekler)
     EMAIL_PATTERN = re.compile(r"^[a-zA-Z0-9ÄäÖöÜüßÃãÕõÎîÌìÉéÈèÊêËëÝýÀàÁáÂâçÇğĞıIİöÖşŞüÜ_.\+\-]+@[a-zA-Z0-9ÄäÖöÜüßÃãÕõÎîÌìÉéÈèÊêËëÝýÀàÁáÂâçÇğĞıIİöÖşŞüÜ\-]+\.[a-zA-Z0-9ÄäÖöÜüßÃãÕõÎîÌìÉéÈèÊêËëÝýÀàÁáÂâçÇğĞıIİöÖşŞüÜ.\-]+$", re.UNICODE)
-    
+
     # Telefon Regex (Türkiye: +90 veya 0 ile başlayan 5XX XXXXXX pattern, Diğer ülkeler)
     PHONE_PATTERN = re.compile(r"^(\+90|0)[5][0-9]{2}[0-9]{6}$|^(?!\+90)\+[1-9]\d{1,14}$", re.UNICODE)
-    
+
     # IBAN Regex (TR IBAN - 26 karakter)
     IBAN_PATTERN = re.compile(r"^TR[0-9]{2}[0-9]{4}0[0-9]{16}$", re.IGNORECASE)
 
     @staticmethod
     def validate_tckn(tckn_str: str) -> bool:
         """T.C. Kimlik Numarası matematiksel doğrulama algoritması.
-        
+
         Kurallar:
         1. 11 hanelidir ve sadece rakamlardan oluşur.
         2. İlk hane 0 olamaz.
@@ -57,7 +57,7 @@ class PIIScanner:
         clean_tckn = str(tckn_str).strip()
         if not clean_tckn.isdigit() or len(clean_tckn) != 11:
             return False
-        
+
         if clean_tckn[0] == "0":
             return False
 
@@ -98,7 +98,7 @@ class PIIScanner:
         """Tek bir değerin hassas veri tipini belirler."""
         if value is None:
             return None
-        
+
         val_str = str(value).strip()
         if not val_str:
             return None
@@ -130,7 +130,7 @@ class PIIScanner:
     def scan_column(self, column_name: str, values: Sequence[Any]) -> ColumnClassification:
         """Bir sütundaki değerleri tarayarak PII ve güvenlik seviyesini raporlar."""
         total_samples = len(values)
-        
+
         # Boş veya None-only sütun kontrolü
         non_null_values = [v for v in values if v is not None and str(v).strip()]
         if len(non_null_values) == 0:

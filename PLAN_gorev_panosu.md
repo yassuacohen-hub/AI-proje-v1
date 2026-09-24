@@ -1,6 +1,8 @@
+[[Huginn Data Insights/PLAN_gorev_panosu.md]]
+
 # Plan: Görev Panosu Yönetimi ve İş Emirleri
 
-> **Tarih:** 2026-09-03  
+> **Tarih:** 2026-09-03
 > **Durum:** Plan Aşaması
 
 ## 1. Mevcut Durum Analizi

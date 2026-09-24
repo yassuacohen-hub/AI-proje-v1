@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/harici_ajan/AGENT_OUTPUT.md]]
+
 # Harici Ajan Çıktısı — CI/CD Boilerplate
 
 **Agent ID:** harici_ajan (Inkling / Thinking Machines Lab)

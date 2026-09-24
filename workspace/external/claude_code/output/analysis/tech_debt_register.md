@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/claude_code/output/analysis/tech_debt_register.md]]
+
 # Teknik Borc Kaydi
 
 **Tarih:** 2026-09-02

@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/copilot/output/scripts/TELEGRAM_SYSTEMD_KURULUM.md]]
+
 # H004 — Telegram Bot systemd Servisi: Test Raporu ve Kurulum Dokümantasyonu
 
 **Tarih:** 2026-09-06

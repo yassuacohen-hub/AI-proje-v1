@@ -15,7 +15,7 @@ with eng.connect() as conn:
         AND raw_payload->>'emailler' != ''
     """)).scalar()
     print(f"emailler raw_payload ta var: {r}")
-    
+
     # Check how many have telefonlar in raw_payload
     r2 = conn.execute(text("""
         SELECT COUNT(*) as cnt FROM source_records
@@ -23,7 +23,7 @@ with eng.connect() as conn:
         AND raw_payload->>'telefonlar' != ''
     """)).scalar()
     print(f"telefonlar raw_payload ta var: {r2}")
-    
+
     # Check a sample raw_payload
     r3 = conn.execute(text("""
         SELECT sr.raw_payload FROM source_records sr

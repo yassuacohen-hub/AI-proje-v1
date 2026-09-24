@@ -49,7 +49,7 @@ class SchemaProfiler:
 
         for v in non_nulls[:100]:  # İlk 100 örnekle hızlı çıkarım
             val_str = str(v).strip()
-            
+
             # Boolean kontrolü
             if val_str.lower() in ("true", "false", "1", "0", "evet", "hayir"):
                 type_votes["BOOLEAN"] += 1

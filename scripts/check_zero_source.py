@@ -17,7 +17,7 @@ with eng.connect() as conn:
         GROUP BY sr.source_id
         ORDER BY cnt DESC
     """)).fetchall()
-    
+
     print("Zero-score companies by source:")
     for row in r:
         print(f"  source_id={row[0]}: {row[1]}")

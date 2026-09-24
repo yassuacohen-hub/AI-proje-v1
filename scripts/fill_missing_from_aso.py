@@ -50,25 +50,25 @@ with engine.connect() as conn:
     for row in rows:
         company_id, legal_name, current_email, raw_payload = row
         key = (legal_name or "").lower().strip()
-        
+
         if key not in aso_lookup:
             continue
-        
+
         aso = aso_lookup[key]
         updates = {}
-        
+
         # Fill address if missing
         if raw_payload is None or (raw_payload.get("adres") if isinstance(raw_payload, dict) else None) is None:
             aso_adres = (aso.get("adres") or "").strip()
             if aso_adres:
                 updates["adres"] = aso_adres
-        
+
         # Fill email if missing
         if not current_email:
             aso_email = aso.get("eposta")
             if aso_email:
                 updates["email"] = aso_email
-        
+
         if updates:
             # Update source_records payload
             payload = dict(raw_payload) if isinstance(raw_payload, dict) else {}
@@ -76,9 +76,9 @@ with engine.connect() as conn:
                 payload["adres"] = updates["adres"]
             if "email" in updates:
                 payload["email"] = updates["email"]
-            
+
             conn.execute(text("""
-                UPDATE source_records 
+                UPDATE source_records
                 SET raw_payload = :payload,
                     raw_address = COALESCE(:adres, raw_address),
                     raw_email = COALESCE(:email, raw_email)
@@ -91,21 +91,21 @@ with engine.connect() as conn:
                 "email": updates.get("email"),
                 "cid": company_id
             })
-            
+
             # Update companies table
             set_clauses = []
             params = {"cid": company_id}
             if "email" in updates:
                 set_clauses.append("primary_email = COALESCE(:email, primary_email)")
                 params["email"] = updates["email"]
-            
+
             if set_clauses:
                 conn.execute(text(f"""
                     UPDATE companies SET {', '.join(set_clauses)}
                     WHERE company_id = :cid
                 """), params)
-            
+
             updated += 1
-    
+
     conn.commit()
     print(f"Güncellenen firma: {updated}")

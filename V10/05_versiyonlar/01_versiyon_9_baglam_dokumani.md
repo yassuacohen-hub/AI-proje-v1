@@ -251,9 +251,9 @@ def compute_ensemble_score(need, fit, timing, evidence, weights=None):
         }
 
     # Safety Net: Clamp + Normalize (Düzeltme D4)
-    raw = (need * weights['need'] + 
-           fit * weights['fit'] + 
-           timing * weights['timing'] + 
+    raw = (need * weights['need'] +
+           fit * weights['fit'] +
+           timing * weights['timing'] +
            evidence * weights['evidence'])
 
     # Bonuslar sınırlı (V8 Bulgu #3)
@@ -408,12 +408,12 @@ def portfolio_score(opp, sales_capacity, strategic_value=1.0):
     if opp.product_category in recently_sold_categories:
         cannibal_penalty = 0.10
 
-    score = (ecv * 0.40 + 
-             (1/time_to_cash) * 0.20 + 
-             opp.evidence_strength * 0.20 + 
-             strategic_value * 0.10 + 
-             (1/complexity) * 0.10 - 
-             conflict_penalty - 
+    score = (ecv * 0.40 +
+             (1/time_to_cash) * 0.20 +
+             opp.evidence_strength * 0.20 +
+             strategic_value * 0.10 +
+             (1/complexity) * 0.10 -
+             conflict_penalty -
              cannibal_penalty)
 
     return max(0.0, score)
@@ -422,7 +422,7 @@ def portfolio_score(opp, sales_capacity, strategic_value=1.0):
 ### 9.2 Account Opportunity Map
 ```sql
 -- Prevent multiple product opportunities causing excessive contact pressure
-SELECT firm_id, 
+SELECT firm_id,
        COUNT(*) AS opp_count,
        MAX(timing_score) AS max_timing,
        SUM(expected_value) AS total_ev
@@ -599,20 +599,20 @@ def monthly_calibration():
 ### 13.1 AI Agent System Prompt (V7'den Geri Getirildi)
 
 ```
-YOU ARE: The Senior Field & Commercial Intelligence Agent of the 
+YOU ARE: The Senior Field & Commercial Intelligence Agent of the
 Ankara B2B Commercial Intelligence Terminal.
 
 CORE DUTIES:
-1. Instantly analyze user B2B search queries and technical RFQs to deliver 
+1. Instantly analyze user B2B search queries and technical RFQs to deliver
    concise, actionable matching results.
-2. Address concerns and handle objections from traditional industrial business 
+2. Address concerns and handle objections from traditional industrial business
    owners hesitating to adopt the platform.
 
-TONE: Never use abstract AI terminology (RAG, LLM, Vector Embeddings). 
-Speak standard industrial language: "Hot Sales Radar", "Idle Capacity", 
+TONE: Never use abstract AI terminology (RAG, LLM, Vector Embeddings).
+Speak standard industrial language: "Hot Sales Radar", "Idle Capacity",
 "B2B Findeks", "RFQ Fee".
 
-OUTPUT STRUCTURE: Jump straight to structured tables, code, or bulleted 
+OUTPUT STRUCTURE: Jump straight to structured tables, code, or bulleted
 actions without meta-introductions or conversational filler.
 ```
 
@@ -786,6 +786,81 @@ Kanıt: İş ilanı + EKAP ihale
 [Detaylar] [Sonra Hatırlat] [Yoksay]
 ```
 
+### 16.4 Panel Konumlandırma Mimarisi (Karar: 2026-09-12)
+
+**Karar:** İki ayrı panel, iki ayrı hedef kitle. Admin işlemleri müşteri arayüzüne asla sızmaz.
+
+| Panel | Teknoloji | Port | Hedef Kitle | İçerik |
+|-------|-----------|------|-------------|--------|
+| **Müşteri Paneli** | FastAPI + statik web_dashboard | 8000 | Abone firmalar (B2B alıcılar) | Firma listesi, eşleştirme, sinyal dashboard, NACE, kaynaklar, kredi/üyelik |
+| **Admin Paneli** | Streamlit | 8501 | Operasyon ekibi (iç kullanım) | Sistem sağlığı, kullanıcı onayı, API key yönetimi, webhook izleme, performans |
+
+**P7-19/20/21 Konumlandırması:**
+
+| Özellik | Konum | Gerekçe |
+|---------|-------|---------|
+| **P7-19a** Operasyonel webhook bildirimleri (başarılı/hatalı/DLQ) | Admin Paneli (Streamlit) | Operasyonel izleme verisi; müşteriye gösterilmez |
+| **P7-19b** Müşteriye yönelik gerçek zamanlı sinyal bildirimleri (yeni sinyal, yeni firma, eşleşme önerisi) | Müşteri Paneli (FastAPI + SSE) | Müşteri değer önerisinin parçası; SSE ile canlı akış |
+| **P7-20** Admin paneli (kullanıcı yönetimi, API key, kategori) | Admin Paneli (Streamlit) | Yetki sınırı: admin API'leri backend'de kalır, Streamlit tüketir |
+| **P7-21** Performans metrikleri (db_time, query_count, cache hit, slow_queries) | Admin Paneli (Streamlit) | Operasyonel izleme; `/api/performance` endpoint'i SSOT olur |
+
+**Mimari Akış:**
+
+```mermaid
+flowchart LR
+    A[Musteri Paneli FastAPI 8000] --> B[web_app API]
+    C[Admin Paneli Streamlit 8501] --> B
+    B --> D[PostgreSQL SSOT]
+    B --> E[Redis Cache]
+    C --> F[api/performance SSOT]
+    C --> G[api/admin SSOT]
+```
+
+**Kurallar:**
+1. Admin API'leri (`/api/admin/*`) yalnızca `require_admin` ile korunur; müşteri paneli bu endpoint'leri çağırmaz.
+2. Müşteri panelinde admin UI render edilmez (mevcut JS admin fonksiyonları backend uyumluluğu için durur, UI'a bağlanmaz).
+3. Performans metriklerinin tek kaynağı `/api/performance` endpoint'idir; Streamlit bu endpoint'i çağırır, kendi ölçümünü üretmez.
+4. SSE yalnızca müşteri panelinde kullanılır; admin paneli polling ile çalışır.
+
+---
+
+## 16.5 Admin Panel Roadmap (Muninn PRD Referansıyla)
+
+**Hedef:** Operasyon merkezi — SaaS işletmesinin günlük operasyon kararlarını destekleyen merkezi dashboard.
+
+**MVP (Faz 1) — Durum: 2026-09-22 kod denetimiyle güncellendi (SSOT §7 İzlenebilirlik Matrisi):**
+
+| # | Modül | Durum | Kanıt (dosya:satır) |
+|---|-------|-------|---------------------|
+| 1 | **Decision Log Sekmesi** — karar defteri, searchable, audit trail | ✅ | `web_dashboard/tabs/admin_panel.py:66` |
+| 2 | **Dashboard KPI** — müşteri, API çağrısı, sinyal, sistem sağlığı | ✅ | `web_dashboard/tabs/admin_kpi.py:41,359` |
+| 3 | **Webhook Monitor** — Apify ingest health, DLQ, rate limit | ✅ | `web_dashboard/tabs/webhook_monitor.py:135` · `admin_dlq.py:87` |
+| 4 | **AI Cost Dashboard** — 9router provider maliyet kırılımı | ✅ | `web_dashboard/tabs/admin_cost.py:507` · `admin_kpi.py:210` |
+| 5 | **Veri Kalitesi Özeti** — kalite skoru dağılımı, eksik alanlar | ✅ | `web_dashboard/tabs/admin_quality.py:74,387` |
+| 6 | **API Analytics** — endpoint kullanımı, error rate, top users | ✅ | `web_dashboard/tabs/admin_api_analytics.py:91` |
+| 7 | **Sistem Performansı** — latency, cache hit, slow query, OTel | ✅ | `web_dashboard/tabs/admin_performance.py:107` |
+
+> Faz 1 kod tarafında kapandı; kalan boşluklar **modül varlığı değil içerik derinliği**dir
+> (churn risk skoru, DAU/MAU, tenant izolasyonu). Detay: SSOT §8 ve §10.
+
+**Faz 2 (Eylül 2026):**
+- Multi-tenant structure (şu anda single-tenant)
+- Plan yönetimi (Starter/Growth/Enterprise)
+- Credit system (Search/AI/Export/API)
+- Tenant-scoped analytics
+
+**Faz 3+ (Ekim+ 2026):**
+- Faturalama + Stripe entegrasyonu
+- Destek merkezi (ticket CRUD)
+- User provisioning + MFA
+- Advanced churn detection
+
+**Stack:** Streamlit (frontend) + FastAPI (`/api/admin/*` endpoints) + PostgreSQL (audit logs) + Prometheus (metrics) + Redis (session)
+
+**İlgili Dosyalar:**
+- **[SSOT — en yüksek otorite]** [`02_admin_panel_hedef_dokumani.md`](02_admin_panel_hedef_dokumani.md) — admin panel kapsamında bu dosyayla çelişirse SSOT geçerlidir; teknik altyapı (§16.4 kuralları) için V9 üstündür.
+- [`../03_mimari/06_muninn_prd_vs_huginn_analiz.md`](../03_mimari/06_muninn_prd_vs_huginn_analiz.md) — ⚠️ SUPERSEDED (tarihsel kayıt)
+
 ---
 
 ## 17. GO-TO-MARKET & MVP ROADMAP
@@ -894,3 +969,9 @@ When improving it:
 ---
 
 **END — MASTER CONTEXT V9**
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]

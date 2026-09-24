@@ -27,27 +27,27 @@ log = logging.getLogger("fix_null_source_records")
 
 def main() -> int:
     engine = get_engine()
-    
+
     with engine.begin() as conn:
         # NULL source_record_id olan firmalari bul
         rows = conn.execute(text("""
-            SELECT c.company_id, c.legal_name, c.tax_number, c.primary_phone, 
+            SELECT c.company_id, c.legal_name, c.tax_number, c.primary_phone,
                    c.primary_email, c.website_domain, c.osb_id, c.is_osb_member
             FROM companies c
             WHERE c.source_record_id IS NULL
             ORDER BY c.company_id
         """)).mappings().all()
-        
+
         total = len(rows)
         log.info("NULL source_record_id olan %d firma bulundu", total)
-        
+
         if total == 0:
             print("Hic NULL source_record_id kaydi yok.")
             return 0
-        
+
         processed = 0
         errors = 0
-        
+
         for row in rows:
             try:
                 company_id = row["company_id"]
@@ -58,7 +58,7 @@ def main() -> int:
                 website = row["website_domain"]
                 osb_id = row["osb_id"]
                 is_osb_member = row["is_osb_member"]
-                
+
                 # Kaynak belirleme
                 if is_osb_member:
                     source_name = "ostim.org.tr"
@@ -66,17 +66,17 @@ def main() -> int:
                     source_name = str(osb_id)
                 else:
                     source_name = "manual"
-                
+
                 # Source record olustur
                 payload = {
                     "legal_name": legal_name,
                     "fix_type": "null_source_record_id_fix",
                     "fixed_at": datetime.now().isoformat(),
                 }
-                
+
                 sr_result = conn.execute(text("""
-                    INSERT INTO source_records 
-                    (source_id, external_id, raw_name, raw_phone, raw_email, 
+                    INSERT INTO source_records
+                    (source_id, external_id, raw_name, raw_phone, raw_email,
                      raw_website, raw_tax_number, raw_payload, collected_at)
                     VALUES (
                         (SELECT source_id FROM sources WHERE source_name = :sname LIMIT 1),
@@ -100,28 +100,28 @@ def main() -> int:
                     "tax": tax_number,
                     "payload": json.dumps(payload, ensure_ascii=False),
                 })
-                
+
                 source_record_id = sr_result.first()[0]
-                
+
                 # Company'yi guncelle
                 conn.execute(text("""
-                    UPDATE companies 
+                    UPDATE companies
                     SET source_record_id = :sid, updated_at = NOW()
                     WHERE company_id = :cid
                 """), {"sid": source_record_id, "cid": company_id})
-                
+
                 processed += 1
-                
+
                 if processed % 100 == 0:
                     log.info("Islenen: %d/%d", processed, total)
-                    
+
             except Exception as e:
                 errors += 1
                 log.error("Hata (%s): %s", company_id, e)
-        
+
         log.info("TAMAM! Islenen: %d, Hata: %d, Toplam: %d", processed, errors, total)
         print(f"Islenen: {processed}, Hata: {errors}, Toplam: {total}")
-    
+
     return 0
 
 

@@ -233,7 +233,7 @@ def aso_sorgula(q: str, sayfa: int = 1) -> list[dict]:
 
 ```sql
 -- Her iletişim alanı için hassasiyet
-ALTER TABLE companies ADD COLUMN telefon_hassasiyet TEXT DEFAULT 'PUBLIC' 
+ALTER TABLE companies ADD COLUMN telefon_hassasiyet TEXT DEFAULT 'PUBLIC'
     CHECK(telefon_hassasiyet IN ('PUBLIC', 'SEMI_PUBLIC', 'RESTRICTED', 'PROHIBITED'));
 ALTER TABLE companies ADD COLUMN email_hassasiyet TEXT DEFAULT 'SEMI_PUBLIC';
 ALTER TABLE companies ADD COLUMN yetkili_hassasiyet TEXT DEFAULT 'RESTRICTED';
@@ -341,3 +341,12 @@ companies tablosu
 - [[10_ankara_osb_sentez]] — Sentez kararları
 - [[10_mvp_kapsam]] — MVP kapsam
 - [[01_sirket_master_ana_belgesi]] — Ana şema
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/07_referanslar/01_veri_kaynagi_envanteri]]
+
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

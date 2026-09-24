@@ -13,15 +13,15 @@ BATCH_SIZE = 500
 
 with engine.connect() as conn:
     total = conn.execute(text("""
-        SELECT COUNT(*) FROM companies 
+        SELECT COUNT(*) FROM companies
         WHERE is_ankara = TRUE AND is_osb_member = TRUE
     """)).scalar()
-    
+
     print(f"Toplam firma: {total}")
-    
+
     offset = 0
     updated = 0
-    
+
     while offset < total:
         scores = conn.execute(text("""
             WITH batch AS (
@@ -56,17 +56,17 @@ with engine.connect() as conn:
             FROM batch
             WHERE c.company_id = batch.company_id
         """), {"limit": BATCH_SIZE, "offset": offset})
-        
+
         batch_updated = scores.rowcount or 0
         updated += batch_updated
         print(f"Batch {offset//BATCH_SIZE + 1}: {batch_updated} kayit")
-        
+
         offset += BATCH_SIZE
         conn.commit()
-    
+
     avg = conn.execute(text("""
-        SELECT AVG(data_quality_score) FROM companies 
+        SELECT AVG(data_quality_score) FROM companies
         WHERE is_ankara = TRUE AND is_osb_member = TRUE
     """)).scalar()
-    
+
     print(f"Toplam: {updated}, Ortalama: {avg:.2f}")

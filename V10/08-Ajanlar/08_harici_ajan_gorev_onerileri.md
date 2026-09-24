@@ -121,3 +121,12 @@ Claude Code; uzun bağlam okuma, mimari dokümantasyon ve güvenlik review gibi 
 - `AGENT_SYNC.md`
 - `AI proje v1/AGENTS.md`
 - Ana bağlam: `AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md`
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/08-Ajanlar/README]]
+
+
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

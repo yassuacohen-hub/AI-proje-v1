@@ -104,18 +104,18 @@ def update_task_board(status: str, details: str):
     board_path = ROOT / "data" / "orchestrator" / "task_board.json"
     if not board_path.exists():
         return
-    
+
     import json
     with open(board_path, "r", encoding="utf-8") as f:
         board = json.load(f)
-    
+
     # daily_scrape görevini güncelle
     for task in board:
         if task.get("task_id") == "daily_scrape":
             task["durum"] = status
             task["bitis"] = datetime.now().isoformat()
             task["not"] = details
-    
+
     with open(board_path, "w", encoding="utf-8") as f:
         json.dump(board, f, ensure_ascii=False, indent=2)
 
@@ -124,27 +124,27 @@ def main():
     """Ana çalıştırma."""
     start_time = datetime.now()
     log_start()
-    
+
     results = []
     results.append(("Scrape", step_scrape()))
     results.append(("Detay Scrape", step_detail_scrape()))
     results.append(("Ingest", step_ingest()))
     results.append(("Quality Recalc", step_quality_recalc()))
-    
+
     duration = (datetime.now() - start_time).total_seconds()
     success = all(r[1] for r in results)
-    
+
     # Detaylı sonuç logla
     logger.info("\n--- Adım Sonuçları ---")
     for name, ok in results:
         logger.info(f"  {name}: {'✓' if ok else '✗'}")
-    
+
     # Task board güncelle
     details = "; ".join(f"{n}: {'OK' if ok else 'FAIL'}" for n, ok in results)
     update_task_board("done" if success else "partial", details)
-    
+
     log_end(success, duration)
-    
+
     # Başarısız ise exit code > 0
     sys.exit(0 if success else 1)
 

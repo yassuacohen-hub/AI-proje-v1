@@ -1397,5 +1397,30 @@
     "bitis": null,
     "dosyalar": [],
     "not": "REVIZE (eski Y26). require_api_key istek sayaci + /metrics tier bazli rapor + enterprise key rotasyon endpoint. Su an sadece uretim zamanli key var."
+  },
+  {
+    "task_id": "TG-01",
+    "baslik": "Telegram bot mesaj gonderme sorununu giderme (env, yetki, komutlar, yollar, servis, testler)",
+    "sahip": "kilo",
+    "oncelik": "P0",
+    "durum": "aktif",
+    "baslangic": "2026-09-12T13:20:50",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/telegram_polling.py",
+      "src/company_master/utils/telegram_bot.py",
+      "src/company_master/telegram/bot_service.py",
+      "scripts/telegram_periodic.py",
+      "scripts/test_telegram.py",
+      "scripts/test_telegram_simple.py",
+      ".env.example",
+      "docker-compose.yml",
+      "scripts/README_TELEGRAM.md",
+      "scripts/telegram_bot_task.bat",
+      "requirements-app.txt",
+      "tests/test_telegram_bot.py",
+      "tests/test_telegram_polling.py"
+    ],
+    "not": ""
   }
 ]

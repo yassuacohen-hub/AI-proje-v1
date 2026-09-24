@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/claude_code/output/analysis/dependencies_app_review.md]]
+
 # Dependencies App Review
 
 **Tarih:** 2026-09-02

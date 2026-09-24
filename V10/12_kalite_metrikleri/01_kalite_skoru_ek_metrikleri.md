@@ -259,3 +259,10 @@ Güncel kalite skoru formülü (2026-09-08 tarihli güncelleme):
 ---
 
 *Son güncelleme: 2026-09-08*
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]

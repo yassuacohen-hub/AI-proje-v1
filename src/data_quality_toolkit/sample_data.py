@@ -29,7 +29,7 @@ def create_sample_banking_dataset(row_count: int = 50) -> Dict[str, List[Any]]:
 
     for i in range(1, row_count + 1):
         dataset["transaction_id"].append(f"TXN-{1000 + i}")
-        
+
         # %90 geçerli TCKN, %10 eksik/hatalı
         if random.random() < 0.90:
             dataset["customer_tckn"].append(SyntheticDataGenerator.generate_valid_mock_tckn())

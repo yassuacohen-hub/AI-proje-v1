@@ -16,7 +16,7 @@ with eng.connect() as conn:
         AND (sr.raw_payload->>'adres' IS NULL OR sr.raw_payload->>'adres' = '')
     """)).scalar()
     print(f'VKN yok ve adres yok: {r}')
-    
+
     # Companies with no vergi_no AND no website
     r2 = conn.execute(text("""
         SELECT COUNT(*) as cnt FROM companies c
@@ -25,7 +25,7 @@ with eng.connect() as conn:
         AND (c.website_domain IS NULL OR c.website_domain = '')
     """)).scalar()
     print(f'VKN yok ve web yok: {r2}')
-    
+
     # Companies with all three missing (phone+email+VKN)
     r3 = conn.execute(text("""
         SELECT COUNT(*) as cnt FROM companies c
@@ -36,10 +36,10 @@ with eng.connect() as conn:
         AND (COALESCE(c.tax_number, c.vergi_no, sr.raw_tax_number) IS NULL OR COALESCE(c.tax_number, c.vergi_no, sr.raw_tax_number) = '')
     """)).scalar()
     print(f'Phone+email+VKN hepsi yok: {r3}')
-    
+
     # Distribution of quality scores
     r4 = conn.execute(text("""
-        SELECT 
+        SELECT
             COUNT(*) FILTER (WHERE data_quality_score = 0) as zero,
             COUNT(*) FILTER (WHERE data_quality_score > 0 AND data_quality_score < 20) as low,
             COUNT(*) FILTER (WHERE data_quality_score >= 20 AND data_quality_score < 40) as mid,

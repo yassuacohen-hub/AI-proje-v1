@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/BRIEF_Y17_veri_kaynaklari.md]]
+
 # Y17 — YENI VERI KAYNAK ARASTIRMASI (sahip: arastirmaci)
 
 ## Gorev

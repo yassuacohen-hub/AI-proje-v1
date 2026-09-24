@@ -98,3 +98,13 @@ Kalite ajanı olarak veri doğruluğu benim işim. 13.500+ ham kayıt kulağa he
 - [[01_kalite_skoru_ek_metrikleri]] - [[01_mvp_gereksinimleri]] (kabul kriterleri)
 - [[01_versiyon_9_baglam_dokumani]] - dogrulama prensipleri
 - Testler: `tests/` - KPI: `data/kpi_raporu.md`
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/08-Ajanlar/README]]
+
+
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]
+- [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]

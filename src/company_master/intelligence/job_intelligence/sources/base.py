@@ -88,10 +88,10 @@ class ScrapedJob:
 
 class BaseJobSource(ABC):
     """Tüm iş ilanı kaynakları için temel sınıf.
-    
+
     Permission Router + Rate Limit + KVKK uyumlu.
     """
-    
+
     def __init__(self, source_name: str, domain: str | None = None, min_interval: float = 2.0):
         self.source_name = source_name
         self.domain = domain
@@ -100,7 +100,7 @@ class BaseJobSource(ABC):
         self.session = requests.Session()
         self.session.headers.update({"User-Agent": USER_AGENT})
         self.router = get_router()
-    
+
     def _rate_limit(self) -> None:
         """Domain bazlı rate limiting."""
         if self.domain:
@@ -111,7 +111,7 @@ class BaseJobSource(ABC):
             if wait > 0:
                 time.sleep(wait)
             self._last_request = time.time()
-    
+
     def _check_permission(self, url: str) -> bool:
         """İzin kontrolü (robots.txt + KVKK)."""
         if not self.domain:
@@ -121,14 +121,14 @@ class BaseJobSource(ABC):
             logger.warning("[%s] İzin reddedildi: %s - %s", self.source_name, url, decision.reason)
             return False
         return True
-    
+
     def _fetch(self, url: str, timeout: int = 15) -> str | None:
         """Sayfa çek (izin + rate limit + encoding düzeltme)."""
         if not self._check_permission(url):
             return None
-        
+
         self._rate_limit()
-        
+
         try:
             resp = self.session.get(url, timeout=timeout, verify=False, allow_redirects=True)
             resp.raise_for_status()
@@ -137,11 +137,11 @@ class BaseJobSource(ABC):
         except requests.RequestException as e:
             logger.debug("[%s] Fetch hatası %s: %s", self.source_name, url, e)
             return None
-    
+
     def _parse_html(self, html: str) -> BeautifulSoup:
         """HTML parse et."""
         return BeautifulSoup(html, "html.parser")
-    
+
     def _safe_text(self, text: str | None) -> str:
         """Güvenli metin işleme (Türkçe karakterler için)."""
         if not text:
@@ -150,7 +150,7 @@ class BaseJobSource(ABC):
             return text.encode("utf-8", errors="ignore").decode("utf-8")
         except Exception:
             return text
-    
+
     def _extract_technologies(self, text: str) -> list[str]:
         """Metinden teknoloji çıkar (basit keyword matching)."""
         tech_keywords = [
@@ -170,7 +170,7 @@ class BaseJobSource(ABC):
             if tech in text_lower:
                 found.append(tech)
         return list(set(found))
-    
+
     def _extract_seniority(self, text: str) -> str | None:
         """Metinden kıdem seviyesi çıkar."""
         text_lower = text.lower()
@@ -179,7 +179,7 @@ class BaseJobSource(ABC):
                 if kw in text_lower:
                     return level
         return None
-    
+
     def _extract_department(self, text: str) -> str | None:
         """Metinden departman çıkar."""
         text_lower = text.lower()
@@ -188,7 +188,7 @@ class BaseJobSource(ABC):
                 if kw in text_lower:
                     return dept
         return None
-    
+
     def _normalize_url(self, base_url: str, href: str) -> str | None:
         """URL normalize et."""
         try:
@@ -199,50 +199,50 @@ class BaseJobSource(ABC):
         except Exception:
             pass
         return None
-    
+
     @abstractmethod
     def discover_job_urls(self, max_pages: int = 10) -> list[str]:
         """İş ilanı URL'lerini keşfet (liste sayfaları)."""
         pass
-    
+
     @abstractmethod
     def parse_job_detail(self, html: str, url: str) -> ScrapedJob | None:
         """İş ilanı detay sayfasını parse et."""
         pass
-    
+
     def run_full_scrape(self, max_pages: int = 10, output_file: str | None = None) -> list[ScrapedJob]:
         """Tam scrape işlemini çalıştır."""
         logger.info("[%s] Tam scrape başlıyor (max_pages=%d)", self.source_name, max_pages)
-        
+
         urls = self.discover_job_urls(max_pages)
         logger.info("[%s] %d ilan URL'si keşfedildi", self.source_name, len(urls))
-        
+
         jobs: list[ScrapedJob] = []
         for i, url in enumerate(urls):
             html = self._fetch(url)
             if not html:
                 continue
-            
+
             job = self.parse_job_detail(html, url)
             if job:
                 jobs.append(job)
-            
+
             if (i + 1) % 20 == 0:
                 logger.info("[%s] İlerleme: %d/%d", self.source_name, i + 1, len(urls))
-        
+
         logger.info("[%s] Scrape tamamlandı: %d ilan", self.source_name, len(jobs))
-        
+
         if output_file and jobs:
             self._save_jsonl(jobs, output_file)
-        
+
         return jobs
-    
+
     def _save_jsonl(self, jobs: list[ScrapedJob], output_file: str) -> None:
         """JSONL olarak kaydet."""
         import json
         out_path = ROOT / output_file
         out_path.parent.mkdir(parents=True, exist_ok=True)
-        
+
         with open(out_path, "w", encoding="utf-8") as f:
             for job in jobs:
                 data = {
@@ -267,5 +267,5 @@ class BaseJobSource(ABC):
                     "collected_at": datetime.now().isoformat(),
                 }
                 f.write(json.dumps(data, ensure_ascii=False) + "\n")
-        
-        logger.info("[%s] %d ilan %s dosyasına yazıldı", self.source_name, len(jobs), output_file) 
+
+        logger.info("[%s] %d ilan %s dosyasına yazıldı", self.source_name, len(jobs), output_file)

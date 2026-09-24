@@ -145,3 +145,13 @@ Webkazıma uzmanı olarak teknik ve etik kısıtlar benim işim. 13.500+ firma i
 - [[01_veri_kaynagi_envanteri]] - [[02_ankara_osb_erisim_planlari]] - [[04_web_kazima_kaynak_arastirmasi]]
 - [[10_vpn_kurali]] - VPN kaynakli ag hatalarinda kullaniciya bildirim
 - Kod: `src/company_master/utils/scraping_permission_router.py` - `scripts/osint_engine.py`
+
+---
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AI proje v1/V10/08-Ajanlar/README]]
+
+
+- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]
+- [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]

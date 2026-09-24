@@ -222,7 +222,7 @@ def normalize_company_name(name) -> str:
 
     for long_phrase, short_form in sorted(_COMPANY_TYPE_ABBR.items(), key=lambda x: -len(x[0])):
         name = _re.sub(_tr_rx_key(long_phrase), short_form, name)
-    
+
     name = _re.sub(r'\s{2,}', ' ', name).strip()
     name = _clean_double_dots(name)
     # STI.STI. gibi tekrarlanan kisaltilari temizle

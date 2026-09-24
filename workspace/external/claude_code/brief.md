@@ -1,3 +1,5 @@
+[[Huginn Data Insights/workspace/external/claude_code/brief.md]]
+
 # Claude Code — Otomatik Görev Brief'i
 
 > **Paket ID:** `EXT-CLAUDE_CODE-20260906`

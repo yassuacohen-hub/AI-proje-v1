@@ -8,7 +8,7 @@ from sqlalchemy import text
 eng = get_engine()
 with eng.connect() as conn:
     r = conn.execute(text("""
-        SELECT 
+        SELECT
             COUNT(*) FILTER (WHERE data_quality_score = 0) as zero,
             COUNT(*) FILTER (WHERE data_quality_score > 0 AND data_quality_score < 20) as low,
             COUNT(*) FILTER (WHERE data_quality_score >= 20 AND data_quality_score < 40) as mid,
@@ -19,7 +19,7 @@ with eng.connect() as conn:
         FROM companies
         WHERE is_ankara=TRUE AND is_osb_member=TRUE
     """)).mappings().first()
-    
+
     print("Kalite skoru dagilimi:")
     print(f"  0: {r['zero']}")
     print(f"  1-19: {r['low']}")
