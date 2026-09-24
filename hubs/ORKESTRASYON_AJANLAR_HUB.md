@@ -53,6 +53,29 @@ Ana baglam: [[Huginn Data Insights/AGENTS]] · [[Huginn Data Insights/AGENT_SYNC
 - `Huginn Data Insights/AI proje v1/V10/wiki/agents/kalite` — Kalite wiki
 - `Huginn Data Insights/AI proje v1/V10/wiki/agents/web_kazima` — Web kazima wiki
 
+## Kapanan isler (B-14 · hafiza izi)
+
+> Altyapi/orkestrasyon gorevleri kapaninca buraya bir satir birakir.
+> `gorev_kutusu.py teslim` bu izi gormezse teslimi reddeder (B-14 kapisi).
+> Asagidaki 12 satir TUR-B2 (2026-09-24) ile geriye donuk yazildi.
+
+| task_id | Ne kapandi | Bitis |
+|---------|------------|-------|
+| ALTYAPI-MOJIBAKE-BARIYER-01 | Mojibake yazim-oncesi hasar bariyeri | 2026-09-23 |
+| ALTYAPI-D182-MIMIR-01 | `mimir` ajani `trigger.AJANLAR`'a eklendi (D-182) | 2026-09-23 |
+| ALTYAPI-DURUM-SOZLUK-01 | Gorev durum sozlugu tutarsizligi giderildi → `task_board.py` | 2026-09-23 |
+| ALTYAPI-TEST-HERMETIK-01 | Uretim verisine dokunan testler izole edildi | 2026-09-23 |
+| GRAPH-CANONICAL-SECER-02 | Canonical graph baglanti guvenligi (D-172/D-191) | 2026-09-23 |
+| ALTYAPI-TETIK-ARSIV-01 | Kanonik olmayan tetik dosyalari arsive tasindi | 2026-09-23 |
+| AGENTS-MERGE-UU | Kok/vault `AGENTS.md` kopuklugu → tek SSOT (D-189) | 2026-09-24 |
+| ALTYAPI-D66-BYPASS-TETIKLEME-01 | `tetik_senk.py` bypass bayragi duzeltildi (D-65) | 2026-09-24 |
+| ALTYAPI-GROQ-KEY-DOGRULA-01 | Groq canli anahtar dogrulamasi → `groq_client.chat()` | 2026-09-24 |
+| ALTYAPI-MOJIBAKE-DIZIN-01 | `mojibake_onar.py` dizin taramasi | 2026-09-24 |
+| ALTYAPI-TETIK-ZAMAN-01 | `tetik_senk.py` zamanlama duzeltmesi | 2026-09-24 |
+| ALTYAPI-KILIT-OTOMATIK-01 | Kilit otomatik birakma → `src/company_master/orchestrator` | 2026-09-24 |
+
+Tam liste ceyreklik arsivde: `data/orchestrator/task_board_arsiv_2026-Q3.json`
+
 ---
 
 ## Ilgili Nodlar

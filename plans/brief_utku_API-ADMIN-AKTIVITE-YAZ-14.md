@@ -3,6 +3,7 @@
 **Başlık:** [API] Giriş/arama/AI olaylarını log'a yaz → web_app.py + arama uçları (2s)
 **Öncelik:** P0 · **Kit:** `ADMIN-KİT` (AGENTS.md D-196)
 **Kilitli dosya:** `web_app.py` (+ arama/AI çağrı uçları)
+**Hub:** `hubs/ADMIN_DASHBOARD_HUB.md` — kapanista "Kapanan isler" bolumune task_id satiri yazilir (B-14).
 
 ## Neden
 SSOT §8.4 EK BULGU-8 (satır 322): aktivite verisi sıfır. `VERI-ADMIN-AKTIVITE-LOG-13` tabloyu açar ama **boş tablo değer üretmez**. K1 3-sinyal (§9:340), K9 (§9:348), G4 DAU (§12:417) bu yazma akışına bağlı.

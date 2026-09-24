@@ -3,6 +3,7 @@
 **Başlık:** [UI] Gerçek DAU kartını yaz → admin_kpi.py aktivite sorgusu (2s)
 **Öncelik:** P1 · **Kit:** `ADMIN-KİT` (AGENTS.md D-196)
 **Kilitli dosya:** `web_dashboard/tabs/admin_kpi.py`
+**Hub:** `hubs/ADMIN_DASHBOARD_HUB.md` — kapanista "Kapanan isler" bolumune task_id satiri yazilir (B-14).
 
 ## Neden
 SSOT §12 G4 (satır 417): "gerçek DAU için ayrı olay tablosu gerekir" — `-13`/`-14` ile o tablo geliyor, blokaj kalkıyor. §10 sıra 6 (satır 369) A9'u P1 tutuyor. Şu an panelde yalnız MAU var (`UI-ADMIN-MAU-08`); DAU'suz MAU tek başına angajman ölçmez.

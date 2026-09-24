@@ -3,6 +3,7 @@
 **Başlık:** [UI] Sonuçsuz aramaları frekansa göre listele → içerik boşluk raporu (2s)
 **Öncelik:** P2 · **Kit:** ADMIN-KİT (`AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md`)
 **Kilitli dosya:** `web_dashboard/tabs/admin_quality.py`
+**Hub:** `hubs/ADMIN_DASHBOARD_HUB.md` — kapanista "Kapanan isler" bolumune task_id satiri yazilir (B-14).
 **Bağımlılık:** `API-ADMIN-AKTIVITE-YAZ-14` (arama olaylarının `user_activity_log` tablosuna yazılması)
 
 ## Neden

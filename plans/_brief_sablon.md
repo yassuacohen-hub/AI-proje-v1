@@ -4,6 +4,7 @@
 **Öncelik:** P0|P1|P2 · **Kit:** `<KIT>` (AGENTS.md D-196)
 **Kilitli dosya:** `<yol/dosya.uzanti>`
 **Bağımlılık:** `<TASK_ID>` (yoksa satırı sil)
+**Hub:** `hubs/<HUB_ADI>.md` — ZORUNLU (B-14). Görev kapanınca bu hub'ın "Kapanan işler" bölümüne yazılır; yazılmazsa `teslim` reddedilir.
 
 ## Neden
 SSOT'taki hangi bulgu/satır bu görevi doğuruyor — `dosya:satır` referansıyla. Kanıtsız gerekçe yasak.
@@ -30,6 +31,7 @@ SSOT'taki hangi bulgu/satır bu görevi doğuruyor — `dosya:satır` referansı
 - **Görev sonunda** ilerlemeyi SSOT §7 (İzlenebilirlik Matrisi) satırına işle. Ayrı dosyaya yazma.
 - Kanıtsız durum beyanı yasak: her "yapıldı" satırı `dosya:satır` gösterir.
 - Yeni bağımlılık ekleme; mevcut şema/araç ile çöz.
+- **Teslimden önce** yukarıdaki `**Hub:**` dosyasının "Kapanan işler" bölümüne `<TASK_ID>` satırı yaz (B-14 kapısı).
 - Bitince `python scripts/gorev_kutusu.py teslim --ajan <ajan> --task-id <TASK_ID> --ozet "<özet>"`
 
 ## Ilgili Nodlar

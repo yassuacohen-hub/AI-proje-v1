@@ -3,6 +3,7 @@
 **Başlık:** [API] Churn kuralını 3 sinyale genişlet → churn.py tam formül (2s)
 **Öncelik:** P1 · **Kit:** `ADMIN-KİT` (AGENTS.md D-196)
 **Kilitli dosya:** `src/company_master/churn.py`
+**Hub:** `hubs/ADMIN_DASHBOARD_HUB.md` — kapanista "Kapanan isler" bolumune task_id satiri yazilir (B-14).
 
 ## Neden
 SSOT §9 K1 (satır 340): PRD formülü `sinyal = Σ(1 for g in (g_giris, g_arama, g_ai) if g>=14)`. Şu an `risk_etiketi()` yalnız `last_login` ile çalışıyor → 🟡 kısmi, formülün 2/3'ü eksik. §10 sıra 5 (satır 368) bunu P1 açık tutuyor. `-14` ile arama/AI verisi akmaya başlayınca eksik kalan tek şey formül.

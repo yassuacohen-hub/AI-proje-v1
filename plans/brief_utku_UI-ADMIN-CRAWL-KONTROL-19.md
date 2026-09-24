@@ -3,6 +3,7 @@
 **Başlık:** [UI] Crawl işlerine tetikle/durdur aksiyonu ekle → operatör kontrol paneli (3s)
 **Öncelik:** P1 · **Kit:** ADMIN-KİT (`AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md`)
 **Kilitli dosya:** `web_dashboard/tabs/webhook_monitor.py`
+**Hub:** `hubs/ADMIN_DASHBOARD_HUB.md` — kapanista "Kapanan isler" bolumune task_id satiri yazilir (B-14).
 
 ## Neden
 

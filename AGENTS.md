@@ -765,9 +765,24 @@ Bir `task_id` panoda yoksa "yeni iş" demek değildir; kapanıp arşivlenmiş ol
 | `1` | Uyarı var | Evet — uyarılar tur planına yazılır (D-65) |
 | `2` | Hata var | **Hayır** — önce hata kapatılır |
 
+### Hafıza Kapıları Nerede Yaşar (B-14 · TUR-B2 2026-09-24)
+
+Kapanan işin SSOT/hub izi zorunludur. Yeni araç açılmadı; kapı üç mevcut komutun içinde yaşar:
+
+| Kapı | Komut | Davranış | Kaçış | Test |
+|---|---|---|---|---|
+| 4.1 | `gorev_kutusu.py teslim` | `task_id` SSOT'ta ya da brief'teki hub'da geçmezse teslim reddedilir | `--zorla` (panoya `hafiza_izi=atlandi`) | [[tests/test_gorev_kutusu_hafiza]] |
+| 4.2 | `gorev_kutusu.py basla` | Önce `simulasyon` koşar; kod `2` → zincir başlamaz, kod `1` → uyarıp devam | `--simulasyonsuz` | [[tests/test_gorev_kutusu_simulasyon]] |
+| 4.3 | `gorev_kutusu.py simulasyon` | Kontrol 8 aktif pano **+ son çeyrek arşivini** tarar, izsiz `task_id`'leri UYARI olarak listeler | — | [[tests/test_gorev_kutusu_hafiza]] |
+
+Her brief'te `**Hub:**` satırı zorunludur ([[plans/_brief_sablon]]); kapı izi orada aranır.
+
 **Ilgili Nodlar**
 - [[src/company_master/orchestrator/task_board]]
 - [[scripts/gorev_kutusu]]
 - [[tests/test_gorev_mukerrer_arsiv]]
 - [[tests/test_gorev_kutusu_simulasyon]]
+- [[tests/test_gorev_kutusu_hafiza]]
+- [[hubs/ADMIN_DASHBOARD_HUB]]
+- [[hubs/ORKESTRASYON_AJANLAR_HUB]]
 - [[Huginn Data Insights/docs/GOREV_PANOSU_KULLANIM_KILAVUZU]] — §10 Proje Sağlık Simülasyonu (tablolu kullanım kılavuzu)

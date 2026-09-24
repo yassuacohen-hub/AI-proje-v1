@@ -63,6 +63,30 @@ Ana baglam: [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]] · [[Huginn Data In
 
 SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani` (ADMIN-KIT, D-196)
 
+## Kapanan isler (B-14 · hafiza izi)
+
+> Kapanan her gorev buraya bir satir birakir. `gorev_kutusu.py teslim` bu bolumde
+> task_id gormezse teslimi reddeder (`--zorla` ile gecilebilir, panoya `hafiza_izi=atlandi` islenir).
+> Asagidaki 12 satir TUR-B2 (2026-09-24) ile geriye donuk yazildi — denetim B-14 borcu.
+
+| task_id | Ne kapandi | Bitis |
+|---------|------------|-------|
+| UI-ADMIN-SAHTE-KPI-01 | Sahte API KPI karti duzeltildi → `web_dashboard/tabs/admin_kpi.py` gercek rozet | 2026-09-24 |
+| UI-ADMIN-SAHTE-EXEC-02 | Sahte gelir kartlari duzeltildi → `web_dashboard/tabs/admin_executive.py` | 2026-09-24 |
+| UI-ADMIN-SSE-IHLAL-03 | SSE mimari ihlali giderildi → `web_dashboard/tabs/admin_realtime.py` polling | 2026-09-24 |
+| VERI-ADMIN-LASTLOGIN-MIGRATION-04 | `users.last_login` kolonu → schema migration | 2026-09-24 |
+| API-ADMIN-LASTLOGIN-YAZ-05 | Giris aninda `last_login` yazimi → auth akisi | 2026-09-24 |
+| API-ADMIN-CHURN-FONKSIYON-06 | Churn risk saf fonksiyonu → `churn.py` | 2026-09-24 |
+| UI-ADMIN-CHURN-KOLON-07 | Churn risk kolonu → `web_dashboard/tabs/musteri_yonetimi.py` | 2026-09-24 |
+| UI-ADMIN-MAU-08 | Yanlis DAU etiketi MAU olarak duzeltildi → `admin_kpi.py` | 2026-09-24 |
+| UI-ADMIN-KULLANICI-BIRLESTIR-09 | Uc kopya kullanici yonetimi tek modulde birlestirildi | 2026-09-24 |
+| UI-ADMIN-GUNCELLIK-KOVA-10 | Veri guncellik kovalari → `web_dashboard/tabs/admin_quality.py` | 2026-09-24 |
+| UI-ADMIN-MALIYET-ANOMALI-11 | AI maliyet anomali blogu (z-skor) → `web_dashboard/tabs/admin_cost.py` | 2026-09-24 |
+| DOC-ADMIN-ARSIV-12 | Bayat analiz dokumani arsive tasindi + SSOT §0.1 guncellendi | 2026-09-24 |
+
+Kapanan is sayisi bu hub'da: **12**. Tam liste ceyreklik arsivde:
+`data/orchestrator/task_board_arsiv_2026-Q3.json`
+
 ---
 
 ## İlgili Nodlar

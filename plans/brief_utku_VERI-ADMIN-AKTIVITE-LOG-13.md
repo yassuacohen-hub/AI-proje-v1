@@ -3,6 +3,7 @@
 **Başlık:** [VERI] Kullanıcı aktivite log tablosunu yaz → migration 0017 (2s)
 **Öncelik:** P0 · **Kit:** `ADMIN-KİT` (AGENTS.md D-196)
 **Kilitli dosya:** `src/company_master/schema/migrations/0017_user_activity_log.sql` (+ `.down.sql`)
+**Hub:** `hubs/ADMIN_DASHBOARD_HUB.md` — kapanista "Kapanan isler" bolumune task_id satiri yazilir (B-14).
 
 ## Neden
 SSOT §8.4 EK BULGU-8 (satır 322) ve §10 sıra 3 (satır 366): giriş/arama/AI kullanım log tablosu DB'de **hiç yok** (30 tablo tarandı). Bu tek eksik 3 ayrı açık maddeyi bloke ediyor: K1 Churn 3-sinyal (§9 satır 340), K9 Arama Boşluğu (§9 satır 348), G4 gerçek DAU (§12 satır 417). Önce girdi, sonra algoritma.

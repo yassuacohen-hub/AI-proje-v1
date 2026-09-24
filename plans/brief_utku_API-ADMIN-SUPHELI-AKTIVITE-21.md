@@ -3,6 +3,7 @@
 **Başlık:** [API] Şüpheli aktivite kurallarını yaz → 3 sinyalli güvenlik uyarısı (3s)
 **Öncelik:** P2 · **Kit:** ADMIN-KİT (`AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md`)
 **Kilitli dosya:** `src/company_master/admin_audit.py`
+**Hub:** `hubs/ADMIN_DASHBOARD_HUB.md` — kapanista "Kapanan isler" bolumune task_id satiri yazilir (B-14).
 **Bağımlılık:** `API-ADMIN-AKTIVITE-YAZ-14` (`user_activity_log` kayıtları)
 
 ## Neden

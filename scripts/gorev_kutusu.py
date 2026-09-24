@@ -131,7 +131,42 @@ def cmd_al(args: argparse.Namespace) -> int:
     return 0
 
 
+def _hafiza_hedefleri(task_id: str) -> list[Path]:
+    """B-14: izin aranacagi dosyalar — SSOT + brief'te adi gecen hub'lar.
+
+    Brief `hubs/XXX` yazmiyorsa varsayilan `_HUB` kullanilir; boylece eski
+    brief'ler de kapiya takilir ama nereye yazilacagi belirsiz kalmaz.
+    """
+    gorev = tb.gorev_getir(task_id) or {}
+    hublar: list[Path] = []
+    brief = str(gorev.get("brief") or "")
+    by = (_KOK / brief) if brief else None
+    if by is not None and by.exists():
+        metin = by.read_text(encoding="utf-8", errors="replace")
+        for ad in re.findall(r"hubs/([A-Za-z0-9_\-]+)", metin):
+            yol = _KOK / "hubs" / f"{ad}.md"
+            if yol.exists() and yol not in hublar:
+                hublar.append(yol)
+    return [_SSOT] + (hublar or [_HUB])
+
+
+def _hafiza_izi(task_id: str) -> list[Path]:
+    """task_id'nin izini birakan dosyalar; bos liste = hicbir yerde gecmiyor."""
+    return [y for y in _hafiza_hedefleri(task_id)
+            if y.exists() and task_id in y.read_text(encoding="utf-8", errors="replace")]
+
+
 def cmd_teslim(args: argparse.Namespace) -> int:
+    # B-14 kapisi: kapanan is SSOT ya da hub'da iz birakmadan teslim edilemez.
+    zorla = getattr(args, "zorla", False)
+    if not zorla and not _hafiza_izi(args.task_id):
+        hedef = _hafiza_hedefleri(args.task_id)[-1]
+        print(f"HATA: {args.task_id} hafiza izi yok — teslim reddedildi (B-14).",
+              file=sys.stderr)
+        print(f"       Yaz: {hedef.relative_to(_KOK).as_posix()} "
+              f"\"Kapanan isler\" bolumune {args.task_id} satiri; ya da --zorla.",
+              file=sys.stderr)
+        return 1
     try:
         sonuc = trigger.teslim_et(
             args.task_id, args.ajan, args.ozet, _ayristir_liste(args.cikti)
@@ -140,6 +175,9 @@ def cmd_teslim(args: argparse.Namespace) -> int:
         return _hata(exc)
     print(f"TESLIM: {sonuc['task_id']} -> durum: review (onay bekliyor)")
     print("       Onaysiz done OLMAZ; kontrolor onayi sonrasi tamamlanir.")
+    if zorla and not _hafiza_izi(args.task_id):
+        tb.gorev_guncelle(args.task_id, hafiza_izi="atlandi")
+        print("       UYARI: --zorla ile gecildi; panoya hafiza_izi=atlandi islendi (D-65).")
     return 0
 
 
@@ -181,6 +219,15 @@ def cmd_basla(args: argparse.Namespace) -> int:
 
     KAHIN yalnizca "basla" der; ajan bu ciktiyi okuyup 4 gorevi sirayla bitirir.
     """
+    # D-198 kapisi: bozuk panoyla zincire girilmez (kod 2 = dur, 1 = uyarip devam).
+    if not getattr(args, "simulasyonsuz", False):
+        sim = cmd_simulasyon(argparse.Namespace(kuru=True))
+        if sim >= 2:
+            print("D-198: simulasyon HATA verdi; basla calismadi. Once duzelt "
+                  "ya da --simulasyonsuz ile gec.", file=sys.stderr)
+            return 2
+        if sim == 1:
+            print("(simulasyon uyarili; zincir devam ediyor — D-65)\n")
     ajan = args.ajan
     bekleyen = trigger.bekleyen_tetikler(ajan)
     kalan = trigger.zincir_kalan(ajan)
@@ -409,17 +456,18 @@ _PLANS = _KOK / "plans"
 _SABLON_BASLIKLAR = ("## Neden", "## Doğrulanacak varsayım", "## Adımlar", "## Kabul kriteri")
 
 
-def _kontrol_yaz(no: int, ad: str, seviye: str, bulgular: list[str], ornek: bool = True) -> int:
+def _kontrol_yaz(no: int, ad: str, seviye: str, bulgular: list[str],
+                 ornek: bool = True, limit: int = 5) -> int:
     """Tek kontrolun ciktisini basar, katki kodunu doner (0/1/2)."""
     if not bulgular:
         print(f"{no}. {ad}: OK")
         return 0
     print(f"{no}. {ad}: {seviye} {len(bulgular)} adet")
     if ornek:
-        for b in bulgular[:5]:
+        for b in bulgular[:limit]:
             print(f"     - {b}")
-        if len(bulgular) > 5:
-            print(f"     ... +{len(bulgular) - 5} daha")
+        if len(bulgular) > limit:
+            print(f"     ... +{len(bulgular) - limit} daha")
     return 2 if seviye == "HATA" else 1
 
 
@@ -509,19 +557,32 @@ def cmd_simulasyon(args: argparse.Namespace) -> int:
         kodlar.append(_kontrol_yaz(7, "Brief sablon uyumu (B-17)", "UYARI", bulgular, ornek))
 
     # 8 — B-14: kapanan is SSOT veya hub'da task_id izi birakmis mi.
+    # Aktif pano + son ceyregin arsivi birlikte taranir: arsivlenen is gozden
+    # kaybolmasin diye (D-198). Daha eski ceyrekler tarihtir, gurultu yapar.
     kapanan = [t for t in pano if t.get("durum") in tb.KAPALI_DURUMLAR]
+    arsivler = sorted(tb.STATE_DIR.glob("task_board_arsiv_*.json")) if tb.STATE_DIR.is_dir() else []
+    if arsivler:
+        kapanan += [t for t in tb._read_json(arsivler[-1])
+                    if t.get("durum") in tb.KAPALI_DURUMLAR]
     hub_metin = _HUB.read_text(encoding="utf-8", errors="replace") if _HUB.exists() else ""
     if not kapanan:
         kodlar.append(_atlandi(8, "Kapanan gorevin SSOT/hub izi (B-14)",
-                               "aktif panoda kapanmis gorev yok"))
+                               "panoda ve son ceyrek arsivinde kapanmis gorev yok"))
     elif not ssot_metin and not hub_metin:
         kodlar.append(_atlandi(8, "Kapanan gorevin SSOT/hub izi (B-14)",
                                "SSOT ve hub dosyasi diskte yok"))
     else:
-        bulgular = [f"{t['task_id']}: ne SSOT'ta ne hub'da gecmiyor" for t in kapanan
-                    if t["task_id"] not in ssot_metin and t["task_id"] not in hub_metin]
+        gorulen: set[str] = set()
+        bulgular = []
+        for t in kapanan:
+            tid = str(t.get("task_id") or "")
+            if not tid or tid in gorulen:
+                continue
+            gorulen.add(tid)
+            if tid not in ssot_metin and tid not in hub_metin:
+                bulgular.append(f"{tid}: ne SSOT'ta ne hub'da gecmiyor")
         kodlar.append(_kontrol_yaz(8, "Kapanan gorevin SSOT/hub izi (B-14)",
-                                   "UYARI", bulgular, ornek))
+                                   "UYARI", bulgular, ornek, limit=10))
 
     kod = max(kodlar)
     print(f"\nSONUC: cikis kodu {kod}  (0 temiz / 1 uyari / 2 hata)")
@@ -602,6 +663,8 @@ def main() -> int:
 
     basla_p = sub.add_parser("basla", help="Tek kelime tetik: posta+zincir+otonom talimat")
     basla_p.add_argument("--ajan", required=True)
+    basla_p.add_argument("--simulasyonsuz", action="store_true",
+                         help="D-198 simulasyon kapisini atla (kacis kapisi, D-65)")
     basla_p.set_defaults(func=cmd_basla)
 
     rapor_p = sub.add_parser("rapor-postala", help="Zincir bitis raporunu orkestratore postala")
@@ -626,6 +689,8 @@ def main() -> int:
     teslim_p.add_argument("--task-id", required=True)
     teslim_p.add_argument("--ozet", required=True, help="Ne yapıldı?")
     teslim_p.add_argument("--cikti", help="Virgülle ayrılmış çıktı dosyaları")
+    teslim_p.add_argument("--zorla", action="store_true",
+                          help="Hafiza izi olmadan teslim et (panoya hafiza_izi=atlandi islenir)")
     teslim_p.set_defaults(func=cmd_teslim)
 
     zincir_p = sub.add_parser("zincir", help="Görev zinciri oluştur")

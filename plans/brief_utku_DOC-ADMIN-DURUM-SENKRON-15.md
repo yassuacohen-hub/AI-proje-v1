@@ -3,6 +3,7 @@
 **Başlık:** [DOC] SSOT'u tek-durum yapısına ayrıştır → durum yalnız §7'de (1s)
 **Öncelik:** P1 · **Kit:** `ADMIN-KİT` (AGENTS.md D-196) · **Kural:** AGENTS.md D-197
 **Kilitli dosya:** `AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md`
+**Hub:** `hubs/ADMIN_DASHBOARD_HUB.md` — kapanista "Kapanan isler" bolumune task_id satiri yazilir (B-14).
 
 ## Neden
 SSOT kendi kendisiyle çelişiyor: §14 satır 473-474'te EK BULGU-9 ve EK BULGU-10 **giderildi** yazıyor, ama §8.4 satır 323-324 hâlâ "**P0**", §10 satır 364 hâlâ "P0 · Kritik" gösteriyor; §10 satır 366/368 "girdisiz" diyor ama `users.last_login` v0016 ile eklendi.
