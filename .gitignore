@@ -42,6 +42,8 @@ tmp/
 
 # V10 içeriklerini engelle (şikayet raporları, eski belgeler, vb.)
 V10/
+# YA-01: kasa V10 agaci SSOT icerir (02_admin_panel_hedef_dokumani.md), depoda TUTULUR
+!AI proje v1/V10/
 
 # ORCH-GIT-01 (KAHİN kararı 2026-09-18): orkestrator pano + karar defteri + rapor/bulgu
 # arşivi git'te TUTULUR. Gerekçe: yedek kritik; süreç/karar yönetimi ileride ayrı ürüne

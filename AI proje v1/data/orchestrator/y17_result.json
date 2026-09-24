@@ -1,0 +1,135 @@
+{
+  "task_id": "Y17",
+  "baslik": "Yeni veri kaynaklari arastirmasi (TOBB, il ozu, KOSGEB, ihale, EKAP)",
+  "sahip": "arastirmaci",
+  "durum": "done",
+  "tarih": "2026-09-09",
+  "ozet": "V9 veri stratejisi cercevesinde mevcut 6 kaynak disinda yeni veri kaynaklari arastirildi. Her kaynak icin erisim yontemi, maliyet ve KVKK analizi tablosu olusturuldu.",
+  "kaynaklar": [
+    {
+      "id": 1,
+      "ad": "TOBB E-Sicil (Türkiye Ticaret Sicili Gazetesi)",
+      "aciklama": "TOBB tarafindan yürütülen ticaret sicili gazetesi. Sirket kayitlari, unvan sorgulama, ticaret sicili numarasi dogrulama.",
+      "erisim_yontemi": {
+        "yontem": "Web portal + OAuth2 API (üçüncü taraf)",
+        "detay": "ticaretsicilgazetesi.gov.tr uzerinden ücretsiz unvan sorgulama ve ilan görüntüleme. Programatik erisim için KnowYourCustomer (knowyourcustomer.dev) sandbox/production API ile TOBB verisine erisim saglanabilir. Kendi ticaret sicil müdürlükleri (TSO) uzerinden de ek veri erisimi mümkün.",
+        "erisilebilirlik": "Orta - Web portal erisimi saglikli, API için üçüncü taraf entegrasyon gerekli."
+      },
+      "maliyet": {
+        "web_portal": "Ücretsiz (insan tarafindan sorgulama)",
+        "api": "KnowYourCustomer sandbox: ücretsiz; production: kaynak bazli ödeme (aylik $50-$200 arasi, kullanım fazlasi $0.002-0.01/islem)",
+        "bulk": "TOBB uzerinden onayli suret ve belge alimlari ücretli (ilan ücret tarifesi)"
+      },
+      "kvkk_analizi": {
+        "risk_seviyesi": "Düşük-Orta",
+        "kapsam": "Ticaret sicili gazetesi kamu kayitlaridir; unvan, adres, ticaret sicili no, sermaye, faaliyet alani, ortaKlari ve hissedarlari bilgileri kamuoyuna aciktir.",
+        "kayit_sahibi_verisi": "Ortağ/ hissedar isimleri ve rol bilgileri KVKK kapsaminda korunur ancak ticari amaçlarla kamuya açik olan sicil verisi 5271 sayili Ticaret Kanunu ve 6102 sayili Türk Ticaret Kanunu cercevesinde aciktir. Islenme amaci: ticari ve idari kayit geregi.",
+        "önerilen_onlem": "Sicil numarasi ve unvan acik kullanilabilir. Ortak/hissedar detaylari özetlenerek kullanilmali, bireysel kimlik numarasi gibi ek veriler eklenmemeli."
+      },
+      "oneri": "P1 - Web scraping ile unvan/VKN eslestirme icin kullanilabilir. API entegrasyonu için KnowYourCustomer sandbox test edilmeli."
+    },
+    {
+      "id": 2,
+      "ad": "İl Özu İdare (İl Özel İdaresi)",
+      "aciklama": "81 ilin ozel idareleri. Her ilin kendi alaninda (su, kanalizasyon, atik yonetimi, imar, ulaşim vb.) hizmet verir. Ihaleler, projeler, hizmet alanlari.",
+      "erisim_yontemi": {
+        "yontem": "Web sitesi + Bilgi Edinme Hakkı (4982 sayili kanun)",
+        "detay": "Her ilin ozel idaresi kendi bagimsiz web sitesini yönetir. Merkezi veri portalı yoktur. Erişim için: (1) il bazinda web sitesi scraping, (2) Bilgi Edinme Hakkı Kanunu ile resmi belge talep, (3) Bazi illerde ihale sistemleri veya acik veri portallari.",
+        "erisilebilirlik": "Düşük - 81 farkli yapi, standart olmayan formatlar, VPN/DNS engelleri olabilir."
+      },
+      "maliyet": {
+        "web_scraping": "Zaman/insan kaybi (81 il x farkli yapilar)",
+        "bilgi_edinme": "Ücretsiz (kanuni hak) ancak surec 15-30 is gunu surer",
+        "veri_satin_alma": "Bazi illerde proje verileri satin alinabilir (degisken)"
+      },
+      "kvkk_analizi": {
+        "risk_seviyesi": "Düşük",
+        "kapsam": "Kamu kurumu olarak hizmet verir. Ihaleler, projeler, hizmet alanlari kamuya açiktir. Firma listeleri genellikle ihale duyurularinda yer alir.",
+        "kayit_sahibi_verisi": "Bireysel veri KVKK kapsaminda korunur ancak ticari faaliyetlerle ilgili kamu kayitlari ve ihale verileri kamuya açiktir. Alim-satim sozlesmeleri ve teklifler hukumetlerce onaylanirsa erisilebilir.",
+        "önerilen_onlem": "Sadece ihale duyurulari ve kazanan firma bilgileri kullanilmali. Teklif detaylari ve fiyat bilgileri sadece kamuya açik olanlar kullanilmali."
+      },
+      "oneri": "P2 - Yalnizca ihale duyurulari ve kazanan firma listesi icin scraping degeri var. Merkezi sistem olmadigi icin yüksek bakim maliyeti."
+    },
+    {
+      "id": 3,
+      "ad": "KOSGEB (KOBİ Bilgi Sistemi)",
+      "aciklama": "Kucuk ve Orta Ölçekli Isletmeleri Geliştirme ve Destekleme Idaresi. KOBİ Veri Tabani destek programlari, firma performans degerlendirmeleri.",
+      "erisim_yontemi": {
+        "yontem": "E-devlet kayit + sifreli portal",
+        "detay": "KOSGEB veri tabanina sadece kayitli isletmeler erisebilir (edevlet.kosgeb.gov.tr). KOBİ Bilgi Beyannamesi otomatik onay sistemi var ancak veriler disariya acik degil. Kamuya acik veri: yillik Isletme Degerlendirme Raporu (IDR) ozet istatistikleri.",
+        "erisilebilirlik": "Çok Düşük - Veri seti kapanmis, sadece kayitli kullanicilar icin."
+      },
+      "maliyet": {
+        "kayit": "Ücretsiz (KOBİ kaydi ile)",
+        "api": "Yok - Resmi API mevcut degil",
+        "bulk_veri": "Erisim imkansiz"
+      },
+      "kvkk_analizi": {
+        "risk_seviyesi": "Yüksek",
+        "kapsam": "KOSGEB veri tabani; isletme finansal verileri, personel sayisi, destek talepleri, performans degerlendirmeleri, ticari sırlar. 5271 sayili Kişisel Verilerin Korunmasi Kanunu kapsaminda hassas veri kategorisine giriyor.",
+        "kayit_sahibi_verisi": "Isletmelerin kendi verileri KVKK kapsaminda korunur. KOSGEB tarafindan toplanan finansal ve personel verileri üçüncü tarafla paylasilamaz. Yalnizca isletmenin kendi erisim alaninda kullanilabilir.",
+        "önerilen_onlem": "Bu kaynak IHRAR. Veri seti kapali ve hassas. Yalnizca kamuya açik IDR özet istatistikleri (yillik raporlar) kullanilabilir."
+      },
+      "oneri": "P3 (IHRAR) - Resmi API yok, veri kapali. Yalnizca yillik IDR raporlarindan özet istatistikler (sektör bazli) kullanilabilir."
+    },
+    {
+      "id": 4,
+      "ad": "İhale Raporları (Kamu İhale Kurumu + agregaotörler)",
+      "aciklama": "Kamu ihale ilanlari, kazanan firmalar, ihale tutarlari, sektör dagilimi. Kaynaklar: EKAP, ihale.gov.tr, ihaledergisi.com, ihaleci.com, ab-ilan.com.",
+      "erisim_yontemi": {
+        "yontem": "Web scraping + RSS/API (agregaotörler)",
+        "detay": "EKAP (ekap.kik.gov.tr) ücretsiz kamu ihale arama ve Kamu İhale Bülteni (PDF) indirme. ihale.gov.tr resmi portal. ihaleci.com, ihaledergisi.com, hatsu.gov.tr gibi siteler RSS/API destekli olabilir. AB-ilan.com insani yardim ihale verisi.",
+        "erisilebilirlik": "Yüksek - EKAP erisimi engelsiz, PDF bültenler düzenli."
+      },
+      "maliyet": {
+        "ekap": "Ücretsiz (web arama + PDF indirme)",
+        "agregaotörler": "ihaleci.com: ücretsiz; ihaledergisi.com: üyelik bazli (degisken)",
+        "bulk_veri": "PDF to OCR + parse maliyeti (dusük)"
+      },
+      "kvkk_analizi": {
+        "risk_seviyesi": "Düşük",
+        "kapsam": "Kamu ihale verileri kamuya açiktir (4734 sayili Kamu Ihale Kanunu). Ihalenin adi, kurumu, tutari, kazanan firma, isin suresi kamu alaninda yer alir.",
+        "kayit_sahibi_verisi": "Firma unvanlari ve VKN/vergi no bilgileri ticari kayit olarak kamuya aciktir. Ihaleye katilan tum firmalarin teklif tutarlari ihale sonlandiktan sonra kamuya acik hale gelir (ayrintili ihale sonuc bildirimleri).",
+        "önerilen_onlem": "Ihale sonucu verileri ve kazanan firma bilgileri özgürce kullanilabilir. Teklif tutarlari sadece sonuclandiktan sonra kullanilmali. Bireysel yetkili isimleri maskelenmeli."
+      },
+      "oneri": "P0 - Yüksek erisilebilirlik, dusuk maliyet, dusuk KVKK riski. EKAP PDF bültenleri düzenli scrape edilebilir. ihaleci.com API/RSS ile entegre edilebilir."
+    },
+    {
+      "id": 5,
+      "ad": "EKAP (Elektronik Kamu Alımları Platformu)",
+      "aciklama": "Kamuda alimlarin tek platformda yönetildigi resmi sistem. 175.000+ ilan/yil, 100.000+ ihale, 500.000+ dogrudan temin islemi. Kamu İhale Bülteni PDF, ihale istatistikleri, kurul kararlari.",
+      "erisim_yontemi": {
+        "yontem": "Resmi web portal + PDF indirme + e-Devlet",
+        "detay": "ekap.kik.gov.tr ve ekapv2.kik.gov.tr uzerinden ücretsiz ihale arama. Kamu İhale Bülteni PDF olarak düzenli yayinlanir. Ihalelere katilmak icin kayit gerekli ancak sadece okumak/aramak icin giris yok. Istatistikler ve is zekasi raporlari mevcut.",
+        "erisilebilirlik": "Yüksek - Resmi kaynak, engelsiz erisim, düzenli güncelleme."
+      },
+      "maliyet": {
+        "okuma": "Ücretsiz (kayitsiz erisim)",
+        "pdf_indirme": "Ücretsiz",
+        "bulk_api": "Resmi API yok - web scraping veya PDF parse gerekli"
+      },
+      "kvkk_analizi": {
+        "risk_seviyesi": "Düşük",
+        "kapsam": "Kamuyu ilgilendiren her türlü alim islemi kamuya aciktir. Ihale ilanlari, sonuclari, sozlesmeleri, kurul kararlari resmi kaynitlardir.",
+        "kayit_sahibi_verisi": "Firma unvanlari, vergi numaralari, teklif tutarlari (sonuclandiktan sonra) kamuya aciktir. Is zekasi raporlari agrega istatistik içerir, bireysel firma detayi yok.",
+        "önerilen_onlem": "Ihale istatistikleri ve sektör bazli raporlar özgürce kullanilabilir. PDF bültenler parse edilip firma kazanim sinyali olarak kullanilabilir."
+      },
+      "oneri": "P0 - En degerli yeni kaynak. Resmi, guvenilir, ucuz, KVKK uyumlu. Istatistik raporlari (il bazinda ihale sayisi, tutar, sektor dagilimi) dogrudan dashboard entegrasyonuna uygun."
+    }
+  ],
+  "toplam_kaynak": 5,
+  "onerilen_oncelik": [
+    "P0: EKAP (istatistikler + ihale sonuclari)",
+    "P0: İhale Raporları (agregaotörler + EKAP PDF)",
+    "P1: TOBB E-Sicil (KnowYourCustomer API ile VKN/zenginlestirme)",
+    "P2: İl Özu İdare (sadece ihale duyurulari, merkezi sistem yok)",
+    "P3 (IHRAR): KOSGEB (veri kapali, hassas, resmi API yok)"
+  ],
+  "sonraki_adimlar": [
+    "EKAP web scraping: Kamu İhale Bülteni PDF indirme + parse (aylik ~175k ilan)",
+    "ihaleci.com / ihaledergisi.com API/RSS entegrasyonu",
+    "KnowYourCustomer sandbox test: TOBB verisi ile VKN zenginlestirme",
+    "İl Özu ihale duyurulari: merkezi scraping (engelli iller: Ivedik/Baskent benzeri risk)",
+    "KOSGEB IDR özet istatistikleri (yillik, kamuya açik)"
+  ]
+}

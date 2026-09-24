@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Huginn — Company Intelligence Dashboard</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+:root{--bg:#0b0d14;--sidebar-bg:#10121a;--panel-bg:#161924;--panel-hover:#1e2232;--border:#252840;--text:#dde1ed;--text-dim:#6b7194;--text-muted:#444a66;--accent:#4f7cff;--accent-glow:rgba(79,124,255,.15);--green:#34d399;--yellow:#fbbf24;--red:#f87171;--purple:#a78bfa;--cyan:#22d3ee}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);height:100vh;overflow:hidden;font-size:13px}
+.app{display:grid;grid-template-columns:240px 1fr 300px;height:100vh}
+.topbar{grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:52px;background:var(--sidebar-bg);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100}
+.topbar-brand{display:flex;align-items:center;gap:10px}
+.topbar-brand i{color:var(--accent);font-size:18px}
+.topbar-brand h1{font-size:15px;font-weight:700;letter-spacing:-.3px}
+.topbar-brand span{font-size:11px;color:var(--text-dim);font-weight:400}
+.topbar-actions{display:flex;align-items:center;gap:12px}
+.topbar-actions .last-update{font-size:11px;color:var(--text-dim)}
+.btn-refresh{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:12px;cursor:pointer;display:flex;align-items:center;gap:6px;transition:opacity .2s}
+.btn-refresh:hover{opacity:.85}
+.sidebar{background:var(--sidebar-bg);border-right:1px solid var(--border);overflow-y:auto;padding:16px 12px}
+.sidebar-section{margin-bottom:24px}
+.sidebar-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);margin-bottom:10px;padding:0 6px}
+.source-card{background:var(--panel-bg);border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;cursor:pointer;transition:border-color .2s,background .2s}
+.source-card:hover{border-color:var(--accent);background:var(--panel-hover)}
+.source-card.active{border-color:var(--accent);background:var(--accent-glow)}
+.source-card-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.source-card-header i{font-size:14px;color:var(--accent)}
+.source-card-header .name{font-size:12px;font-weight:600;flex:1}
+.source-card-header .badge{font-size:10px;background:var(--border);border-radius:10px;padding:2px 7px;color:var(--text-dim)}
+.source-card .stat{font-size:11px;color:var(--text-dim)}
+.source-card .stat span{color:var(--text);font-weight:600}
+.mini-bar{height:3px;background:var(--border);border-radius:2px;margin-top:6px;overflow:hidden}
+.mini-bar-fill{height:100%;border-radius:2px;background:var(--accent);transition:width .4s ease}
+.main{display:flex;flex-direction:column;overflow:hidden}
+.kpi-row{display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding:12px 16px 0}
+.kpi-card{background:var(--panel-bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px;transition:border-color .2s,box-shadow .2s}
+.kpi-card:hover{border-color:var(--accent);box-shadow:0 4px 16px rgba(79,124,255,.1)}
+.kpi-card-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-dim);margin-bottom:4px}
+.kpi-card-value{font-size:20px;font-weight:700;letter-spacing:-.4px;color:var(--text);line-height:1.1}
+.kpi-card-sub{font-size:8px;color:var(--text-dim);margin-top:2px}
+.kpi-card.highlight{border-color:var(--accent)}
+.kpi-card.highlight .kpi-card-value{color:var(--accent)}
+.kpi-card.green .kpi-card-value{color:var(--green)}
+.kpi-card.yellow .kpi-card-value{color:var(--yellow)}
+.kpi-card.red .kpi-card-value{color:var(--red)}
+.kpi-card.purple .kpi-card-value{color:var(--purple)}
+/* ── Charts ── */
+.charts-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:8px 16px 0;flex-shrink:0}
+.chart-panel{background:var(--panel-bg);border:1px solid var(--border);border-radius:8px;padding:10px 12px}
+.chart-panel-title{font-size:10px;font-weight:700;color:var(--text);margin-bottom:8px;display:flex;align-items:center;gap:4px}
+.chart-panel-title i{color:var(--accent);font-size:10px}
+/* ── Table ── */
+.table-section{flex:1;display:flex;flex-direction:column;padding:8px 16px 12px;overflow:hidden}
+.table-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-shrink:0}
+.table-header h2{font-size:11px;font-weight:700;display:flex;align-items:center;gap:6px}
+.table-header h2 i{color:var(--accent);font-size:12px}
+.search-mini{display:flex;align-items:center;gap:6px}
+.search-mini input{background:var(--panel-bg);border:1px solid var(--border);border-radius:4px;padding:5px 10px;color:var(--text);font-size:11px;width:200px}
+.search-mini input::placeholder{color:var(--text-dim)}
+.search-mini input:focus{outline:none;border-color:var(--accent)}
+.table-wrapper{flex:1;background:var(--panel-bg);border:1px solid var(--border);border-radius:8px;overflow:hidden;display:flex;flex-direction:column}
+.table-scroll{flex:1;overflow-y:auto;overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+thead th{position:sticky;top:0;background:var(--panel-bg);padding:10px 14px;text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-dim);border-bottom:1px solid var(--border);white-space:nowrap}
+tbody tr{border-bottom:1px solid var(--border);cursor:pointer;transition:background .15s}
+tbody tr:hover{background:var(--panel-hover)}
+tbody tr.selected{background:var(--accent-glow)}
+tbody tr.loading-row td{color:var(--text-dim);font-style:italic}
+tbody tr.loading-row td i{margin-right:6px}
+.table-loading{display:flex;align-items:center;justify-content:center;padding:60px 20px;background:var(--panel-bg);border-radius:8px}
+.table-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;background:var(--panel-bg);border-radius:8px;color:var(--text-dim);text-align:center}
+.table-empty i{font-size:32px;margin-bottom:12px;color:var(--text-muted)}
+.table-empty p{font-size:13px;margin:0}
+.loading-spinner{display:flex;flex-direction:column;align-items:center;gap:14px;color:var(--text)}
+tbody td{padding:10px 14px;font-size:12px;white-space:nowrap;max-width:180px;overflow:hidden;text-overflow:ellipsis}
+.td-name{font-weight:600;color:var(--text)}
+.td-mono{font-family:Consolas,monospace;font-size:11px}
+.score-badge{display:inline-block;border-radius:5px;padding:2px 8px;font-size:11px;font-weight:700}
+.score-high{background:rgba(52,211,153,.15);color:var(--green)}
+.score-medium{background:rgba(79,124,255,.15);color:var(--accent)}
+.score-low{background:rgba(251,191,36,.15);color:var(--yellow)}
+.score-very-low{background:rgba(248,113,113,.15);color:var(--red)}
+/* ── Detail panel ── */
+.detail-panel{background:var(--sidebar-bg);border-left:1px solid var(--border);overflow-y:auto;padding:16px}
+.detail-panel-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-dim);margin-bottom:14px}
+.detail-empty{text-align:center;padding:60px 20px;color:var(--text-dim);font-size:12px}
+.detail-empty i{font-size:32px;margin-bottom:12px;display:block;color:var(--text-muted)}
+.detail-section{margin-bottom:20px}
+.detail-section-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--text-dim);margin-bottom:8px}
+.detail-company-name{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.3}
+.detail-company-trade{font-size:11px;color:var(--text-dim);margin-bottom:12px}
+.detail-score-ring{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.score-circle{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;border:3px solid var(--accent);color:var(--accent)}
+.score-circle.green{border-color:var(--green);color:var(--green)}
+.score-circle.yellow{border-color:var(--yellow);color:var(--yellow)}
+.score-circle.red{border-color:var(--red);color:var(--red)}
+.detail-fields{display:flex;flex-direction:column;gap:6px}
+.detail-field{display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--panel-bg);border-radius:8px;border:1px solid var(--border)}
+.detail-field i{color:var(--text-dim);font-size:12px;margin-top:2px;width:14px;text-align:center}
+.detail-field-label{font-size:10px;color:var(--text-dim);min-width:60px}
+.detail-field-value{font-size:12px;color:var(--text);flex:1;word-break:break-all}
+.detail-field-value a{color:var(--accent);text-decoration:none}
+.detail-field-value a:hover{text-decoration:underline}
+.nace-tag{display:inline-block;background:var(--accent-glow);border:1px solid var(--accent);border-radius:5px;padding:1px 8px;font-size:11px;color:var(--accent);font-weight:600}
+.nace-tag.green{background:rgba(52,211,153,.1);border-color:var(--green);color:var(--green)}
+::-webkit-scrollbar{width:6px;height:6px}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:var(--text-dim)}
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="loading-overlay hidden">
+    <div class="spinner"></div>
+    <p>Veri yüklenirken...</p>
+</div>
+
+<!-- Error Overlay -->
+<div id="errorOverlay" class="error-overlay hidden">
+    <p id="errorMessage">Veri yüklenirken bir hata oluştu.</p>
+</div>
+</head>
+<body>
+<!-- Top bar -->
+<header class="topbar">
+    <div class="topbar-brand">
+        <i class="fas fa-layer-group"></i>
+        <div>
+            <h1>Huginn Company Intelligence</h1>
+            <span>Ankara OSB · B2B Veri Platformu</span>
+        </div>
+    </div>
+    <div class="topbar-actions">
+        <span class="last-update" id="last-update">—</span>
+        <button class="btn-refresh" onclick="refreshAll()">
+            <i class="fas fa-sync-alt"></i> Yenile
+        </button>
+    </div>
+</header>
+
+<div class="app">
+    <aside class="sidebar" id="sources-list">
+        <div class="sidebar-section">
+            <div class="sidebar-title">Veri Kaynakları</div>
+            <div class="source-card active">
+                <div class="source-card-header">
+                    <i class="fas fa-database"></i>
+                    <span class="name">Tüm Kaynaklar</span>
+                    <span class="badge" id="src-total">-</span>
+                </div>
+                <div class="stat">Toplam firma <span id="src-total-stat">-</span></div>
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:100%"></div></div>
+            </div>
+        </div>
+    </aside>
+
+    <main class="main">
+        <div class="kpi-row">
+            <div class="kpi-card"><div class="kpi-card-label">Toplam Firma</div><div class="kpi-card-value" id="kpi-total">-</div><div class="kpi-card-sub">is_ankara + osb_member</div></div>
+            <div class="kpi-card highlight"><div class="kpi-card-label">Kalite Skoru</div><div class="kpi-card-value" id="kpi-score">-</div><div class="kpi-card-sub">hedef: 50+ ✅</div></div>
+            <div class="kpi-card green"><div class="kpi-card-label">NACE Kodu</div><div class="kpi-card-value" id="kpi-nace">-</div><div class="kpi-card-sub">100% doluluk</div></div>
+            <div class="kpi-card purple"><div class="kpi-card-label">VKN / Tax No</div><div class="kpi-card-value" id="kpi-vkn">-</div><div class="kpi-card-sub">%0.4 — eksik</div></div>
+            <div class="kpi-card"><div class="kpi-card-label">Web Sitesi</div><div class="kpi-card-value" id="kpi-web">-</div><div class="kpi-card-sub">%56.2 dolu</div></div>
+            <div class="kpi-card"><div class="kpi-card-label">Telefon</div><div class="kpi-card-value" id="kpi-phone">-</div><div class="kpi-card-sub">%61.2 dolu</div></div>
+            <div class="kpi-card"><div class="kpi-card-label">E-posta</div><div class="kpi-card-value" id="kpi-email">-</div><div class="kpi-card-sub">%48.4 dolu</div></div>
+            <div class="kpi-card"><div class="kpi-card-label">Adres</div><div class="kpi-card-value" id="kpi-address">-</div><div class="kpi-card-sub">%41.6 dolu</div></div>
+        </div>
+
+        <div class="charts-row">
+            <div class="chart-panel">
+                <div class="chart-panel-title"><i class="fas fa-chart-pie"></i> Kalite Skoru Dağılımı</div>
+                <canvas id="qualityChart" style="height:140px"></canvas>
+            </div>
+            <div class="chart-panel">
+                <div class="chart-panel-title"><i class="fas fa-chart-bar"></i> Veri Doluluk Oranları</div>
+                <canvas id="coverageChart" style="height:140px"></canvas>
+            </div>
+        </div>
+
+        <div class="table-section">
+            <div class="table-header">
+                <h2><i class="fas fa-list"></i> Firma Listesi</h2>
+                <div class="search-mini">
+                    <input type="text" id="search-input" placeholder="Firma adı, VKN, tel, email…" onkeyup="if(event.key==='Enter') doSearch()">
+                    <select id="score-filter" onchange="applyFilters()">
+                        <option value="0,100">Tümü</option>
+                        <option value="80,100">80-100 (Yüksek)</option>
+                        <option value="60,79">60-79 (İyi)</option>
+                        <option value="40,59">40-59 (Orta)</option>
+                        <option value="0,39">0-39 (Düşük)</option>
+                    </select>
+                    <select id="source-filter" onchange="applyFilters()">
+                        <option value="">Tüm Kaynaklar</option>
+                        <option value="ostim.org.tr">OSTİM</option>
+                        <option value="aso.org.tr">ASO</option>
+                    </select>
+                    <button class="btn-refresh" onclick="doSearch()" style="padding:6px 10px;"><i class="fas fa-search" style="font-size:11px"></i></button>
+                    <button class="btn-refresh" onclick="exportCSV()" style="padding:6px 10px; background:var(--green);"><i class="fas fa-download" style="font-size:11px"></i></button>
+                </div>
+            </div>
+            <div class="table-wrapper">
+                <div id="companies-loading" class="table-loading">
+                    <div class="loading-spinner">
+                        <div class="spinner"></div>
+                        <p>Veri yükleniyor...</p>
+                    </div>
+                </div>
+                <div id="companies-empty" class="table-empty" style="display:none">
+                    <i class="fas fa-search"></i>
+                    <p>Hiç firma bulunamadı. Arama terimini değiştirin veya tüm kaynakları gösterin.</p>
+                </div>
+                <div class="table-scroll">
+                    <table>
+                        <thead><tr><th>Firma Adı</th><th>Ticaret Adı</th><th>Web</th><th>Telefon</th><th>E-posta</th><th>VKN</th><th>NACE</th><th>Skor</th></tr></thead>
+                        <tbody id="companies-tbody"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <aside class="detail-panel" id="detail-panel">
+        <div class="detail-panel-title">Firma Detayı</div>
+        <div class="detail-empty" id="detail-empty">
+            <i class="fas fa-mouse-pointer"></i>
+            Firmaya tıklayarak detaylarını görün
+        </div>
+        <div id="detail-content" style="display:none"></div>
+    </aside>
+</div>
+
+<script>
+const API = window.location.origin;
+let allCompanies = [];
+let qualityChart = null, coverageChart = null;
+
+document.addEventListener('DOMContentLoaded', () => { loadAll(); updateTimestamp(); });
+
+async function loadAll() {
+    showLoading();
+    try {
+        await Promise.allSettled([loadKPI(), loadSources(), loadCompanies(), loadQualityTrend()]);
+    } catch(e) { 
+        console.error('Load error:', e);
+        
+    } finally {
+        hideLoading();
+    }
+}
+
+async function loadKPI() {
+    try {
+        const r = await fetch(`${API}/api/kpi`);
+        const d = await r.json();
+        const fmt = n => (n || 0).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        document.getElementById('kpi-total').textContent = fmt(d.total);
+        document.getElementById('kpi-score').textContent = d.avg_score ? d.avg_score.toFixed(1) : '-';
+        document.getElementById('kpi-vkn').textContent = fmt(d.vkn_either);
+        document.getElementById('kpi-web').textContent = fmt(d.web);
+        document.getElementById('kpi-phone').textContent = fmt(d.tel);
+        document.getElementById('kpi-email').textContent = fmt(d.email);
+        document.getElementById('kpi-address').textContent = fmt(d.adres);
+        document.getElementById('kpi-nace').textContent = fmt(d.nace);
+        const total = d.total || 1;
+        const covLabels = ['Telefon','E-posta','Web','VKN','NACE','Adres'];
+        const covData = [d.tel, d.email, d.web, d.vkn_either, d.nace, d.adres].map(v => ((v || 0) / total * 100).toFixed(1));
+        const covColors = ['#4f7cff','#34d399','#a78bfa','#fbbf24','#22d3ee','#f87171'];
+        if (coverageChart) coverageChart.destroy();
+        coverageChart = new Chart(document.getElementById('coverageChart'), {
+            type: 'bar',
+            data: { labels: covLabels, datasets: [{ data: covData, backgroundColor: covColors, borderRadius: 6, borderWidth: 0 }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { callbacks: { label: c => `${c.parsed.y}%` } } }, scales: { y: { display: false, max: 100 }, x: { grid: { display: false }, ticks: { color: '#6b7194', font: { size: 10 } } } } }
+        });
+    } catch (e) { console.error(e); }
+}
+
+async function loadSources() {
+    try {
+        const r = await fetch(`${API}/api/sources`);
+        const d = await r.json();
+        const srcTotal = d.reduce((s, x) => s + (x.record_count || 0), 0);
+        document.getElementById('src-total').textContent = d.length;
+        document.getElementById('src-total-stat').textContent = srcTotal.toLocaleString();
+        const icons = { 'aso.org.tr': 'fa-building', 'ivedik.org.tr': 'fa-industry', 'baskent.org.tr': 'fa-city', mersis: 'fa-id-card', gib: 'fa-university', web: 'fa-globe' };
+        let html = '';
+        for (const s of d) {
+            const pct = srcTotal ? Math.round((s.record_count / srcTotal) * 100) : 0;
+            html += `<div class="source-card" onclick="filterBySource('${s.source_name}')">
+                <div class="source-card-header"><i class="fas ${icons[s.source_name] || 'fa-database'}"></i>
+                <span class="name">${s.source_name}</span><span class="badge">${s.record_count?.toLocaleString() || 0}</span></div>
+                <div class="mini-bar"><div class="mini-bar-fill" style="width:${pct}%"></div></div>
+            </div>`;
+        }
+        document.getElementById('sources-list').innerHTML =
+            `<div class="sidebar-section"><div class="sidebar-title">Veri Kaynakları</div>
+            <div class="source-card active"><div class="source-card-header"><i class="fas fa-database"></i>
+            <span class="name">Tüm Kaynaklar</span><span class="badge" id="src-total">${d.length}</span></div>
+            <div class="stat">Toplam <span>${srcTotal.toLocaleString()}</span></div>
+            <div class="mini-bar"><div class="mini-bar-fill" style="width:100%"></div></div></div></div>` + html;
+    } catch (e) { console.error(e); }
+}
+
+async function loadQualityTrend() {
+    try {
+        const r = await fetch(`${API}/api/quality-trend`);
+        const d = await r.json();
+        const bMap = { '80-100': '#34d399', '60-79': '#4f7cff', '40-59': '#fbbf24', '20-39': '#f87171', '0-19': '#a78bfa' };
+        if (qualityChart) qualityChart.destroy();
+        qualityChart = new Chart(document.getElementById('qualityChart'), {
+            type: 'doughnut',
+            data: { labels: d.map(x => x.bucket), datasets: [{ data: d.map(x => x.cnt), backgroundColor: d.map(x => bMap[x.bucket] || '#6b7194'), borderWidth: 0 }] },
+            options: { responsive: true, maintainAspectRatio: false, cutout: '65%', plugins: { legend: { position: 'right', labels: { color: '#6b7194', font: { size: 10 }, boxWidth: 10, padding: 8 } } } }
+        });
+    } catch (e) { console.error(e); }
+
+
+async function loadCompanies(search = '', minScore = 0, maxScore = 100, source = '') {
+    document.getElementById('companies-loading').classList.remove('hidden');
+    document.getElementById('companies-empty').style.display = 'none';
+    try {
+        let url = `${API}/api/companies?limit=200&min_score=${minScore}&max_score=${maxScore}`;
+        if (search) url += `&search=${encodeURIComponent(search)}`;
+        if (source) url += `&source=${encodeURIComponent(source)}`;
+        const r = await fetch(url);
+        const d = await r.json();
+        allCompanies = d.items || [];
+        renderTable(allCompanies);
+    } catch (e) {
+        showError('Firma listesi yüklenirken hata: ' + e.message);
+    } finally {
+        document.getElementById('companies-loading').classList.add('hidden');
+    }
+}
+
+function applyFilters() {
+    const search = document.getElementById('search-input').value.trim();
+    const scoreFilter = document.getElementById('score-filter').value;
+    const [minScore, maxScore] = scoreFilter.split(',').map(Number);
+    const source = document.getElementById('source-filter').value;
+    loadCompanies(search, minScore, maxScore, source);
+}
+
+function exportCSV() {
+    const search = document.getElementById('search-input').value.trim();
+    const scoreFilter = document.getElementById('score-filter').value;
+    const [minScore, maxScore] = scoreFilter.split(',').map(Number);
+    const source = document.getElementById('source-filter').value;
+    
+    let url = `${API}/api/companies/export?min_score=${minScore}&max_score=${maxScore}`;
+    if (search) url += `&search=${encodeURIComponent(search)}`;
+    if (source) url += `&source=${encodeURIComponent(source)}`;
+    
+    window.open(url, '_blank');
+}
+
+function doSearch() { applyFilters(); }
+
+function renderTable(companies = allCompanies || []) {
+    if (!companies || companies.length === 0) {
+        document.getElementById('companies-tbody').innerHTML = '<tr><td colspan="8" style="text-align:center;padding:40px;color:var(--text-dim)">Firma bulunamadı</td></tr>';
+        return;
+    }
+    document.getElementById('companies-tbody').innerHTML = companies.map(c => {
+        const score = Number(c.data_quality_score || 0);
+        const cls = score >= 80 ? 'score-high' : score >= 60 ? 'score-medium' : score >= 40 ? 'score-low' : 'score-very-low';
+        return `<tr onclick="selectCompany('${c.company_id || c.legal_name || "-"}')" tabindex="0" role="button">
+            <td class="td-name">${esc(c.legal_name || '-')}</td>
+            <td>${esc(c.trade_name || '-')}</td>
+            <td class="td-mono">${esc(c.website_domain || '-')}</td>
+            <td class="td-mono">${esc(c.primary_phone || '-')}</td>
+            <td>${esc(c.primary_email || '-')}</td>
+            <td class="td-mono">${esc(c.tax_number || c.vergi_no || '-')}</td>
+            <td class="td-mono">${esc(c.nace_code || '-')}</td>
+            <td><span class="score-badge ${cls}">${score.toFixed(1)}</span></td>
+        </tr>`;
+    }).join('');
+}
+
+function selectCompany(id) {
+    const c = allCompanies.find(x => (x.company_id || x.legal_name) === id);
+    if (!c) return;
+    document.querySelectorAll('tbody tr').forEach(r => r.classList.remove('selected'));
+    if (event && event.target) {
+        const tr = event.target.closest('tr');
+        if (tr) tr.classList.add('selected');
+    }
+    showDetail(c);
+}
+
+function showDetail(c) {
+    const score = Number(c.data_quality_score || 0);
+    const cls = score >= 80 ? 'green' : score >= 60 ? '' : score >= 40 ? 'yellow' : 'red';
+    const vkn = c.tax_number || c.vergi_no || '-';
+    document.getElementById('detail-empty').style.display = 'none';
+    document.getElementById('detail-content').style.display = 'block';
+    document.getElementById('detail-content').innerHTML = `
+        <div class="detail-section">
+            <div class="detail-company-name">${esc(c.legal_name || '-')}</div>
+            <div class="detail-company-trade">${esc(c.trade_name || '-')}</div>
+            <div class="detail-score-ring">
+                <div class="score-circle ${cls}">${score.toFixed(0)}</div>
+                <div><div style="font-size:12px;font-weight:700;color:var(--text)">Kalite Skoru</div>
+                <div style="font-size:11px;color:var(--text-dim)">${score.toFixed(1)} / 100</div></div>
+            </div>
+        </div>
+        <div class="detail-section">
+            <div class="detail-section-title">İletişim</div>
+            <div class="detail-fields">
+                <div class="detail-field"><i class="fas fa-phone"></i><span class="detail-field-label">Telefon</span><span class="detail-field-value">${esc(c.primary_phone || '-')}</span></div>
+                <div class="detail-field"><i class="fas fa-envelope"></i><span class="detail-field-label">E-posta</span><span class="detail-field-value">${esc(c.primary_email || '-')}</span></div>
+                <div class="detail-field"><i class="fas fa-globe"></i><span class="detail-field-label">Web</span><span class="detail-field-value">${c.website_domain ? `<a href="//${c.website_domain}" target="_blank">${esc(c.website_domain)}</a>` : '-'}</span></div>
+            </div>
+        </div>
+        <div class="detail-section">
+            <div class="detail-section-title">Kimlik</div>
+            <div class="detail-fields">
+                <div class="detail-field"><i class="fas fa-id-card"></i><span class="detail-field-label">VKN</span><span class="detail-field-value">${vkn === '-' ? '-' : `<span class="nace-tag">${vkn}</span>`}</span></div>
+                <div class="detail-field"><i class="fas fa-map-pin"></i><span class="detail-field-label">Parsel</span><span class="detail-field-value">${esc(c.osb_parsel || '-')}</span></div>
+                <div class="detail-field"><i class="fas fa-code"></i><span class="detail-field-label">NACE</span><span class="detail-field-value">${c.nace_code ? `<span class="nace-tag green">${c.nace_code}</span>` : '-'}</span></div>
+            </div>
+        </div>`;
+}
+
+let selectedSource = null;
+function filterBySource(name) {
+    selectedSource = name === 'all' ? null : name;
+    document.querySelectorAll('.source-card').forEach(el => el.classList.remove('active'));
+    // Bütün kartlar temizlendikten sonra, ilgili kartı aktif yap
+    const cards = document.querySelectorAll('.source-card');
+    cards.forEach((el, idx) => {
+        if (name === 'all' && idx === 0) {
+            el.classList.add('active');
+        } else if (el.querySelector('.name')?.textContent.trim() === name) {
+            el.classList.add('active');
+        }
+    });
+    loadCompanies();
+    // Sadece seçilen kaynağa ait verileri filtrele
+    if (allCompanies && allCompanies.length > 0) {
+        const filtered = selectedSource 
+            ? allCompanies.filter(c => c.source_name === selectedSource || c.source_id === selectedSource)
+            : allCompanies;
+        renderTable(filtered);
+    }
+}
+function doSearch() { const q = document.getElementById('search-input').value.trim(); loadCompanies(q); }
+function refreshAll() {
+    const btn = document.querySelector('.btn-refresh');
+    if (btn) {
+        const icon = btn.querySelector('i');
+        if (icon) { icon.classList.add('fa-spin'); setTimeout(() => icon.classList.remove('fa-spin'), 1000); }
+    }
+    loadAll();
+    updateTimestamp();
+}
+function updateTimestamp() { document.getElementById('last-update').textContent = 'Son güncelleme: ' + new Date().toLocaleTimeString('tr-TR'); }
+function esc(s) { if (!s) return '-'; const d = document.createElement('div'); d.textContent = String(s); return d.innerHTML; }
+setInterval(refreshAll, 5 * 60 * 1000);
+
+// Loading ve error overlay kontrolü
+function showLoading() {
+    const o = document.getElementById('loadingOverlay');
+    if (o) o.classList.remove('hidden');
+}
+function hideLoading() {
+    const o = document.getElementById('loadingOverlay');
+    if (o) o.classList.add('hidden');
+}
+function showError(msg) {
+    const o = document.getElementById('errorOverlay');
+    const p = document.getElementById('errorMessage');
+    if (o && p) { p.textContent = msg; o.classList.remove('hidden'); }
+    setTimeout(() => o && o.classList.add('hidden'), 5000);
+}
+</script>
+
+<style>
+.hidden{display:none !important}
+.loading-overlay{position:fixed;inset:0;background:rgba(11,13,20,.85);display:flex;flex-direction:column;align-items:center;justify-content:center;z-index:200;color:#fff;backdrop-filter:blur(6px)}
+.loading-overlay p{margin-top:14px;font-size:13px;color:#dde1ed;font-weight:500}
+.spinner{width:38px;height:38px;border:3px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.error-overlay{position:fixed;bottom:24px;right:24px;background:#1c1f2a;border:1px solid var(--red);border-radius:8px;padding:10px 14px;color:#f87171;font-size:12px;z-index:200;box-shadow:0 8px 24px rgba(0,0,0,.4);max-width:340px;animation:slideIn .3s ease}
+.error-overlay p{margin:0;display:flex;align-items:center;gap:8px}
+.error-overlay p::before{content:"\26A0";font-size:14px}
+@keyframes slideIn{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+</style>
+
+<!-- Loading Overlay -->
+<div id="loadingOverlay" class="loading-overlay hidden">
+    <div class="spinner"></div>
+    <p>Veri yüklenirken...</p>
+</div>
+
+<!-- Error Overlay -->
+<div id="errorOverlay" class="error-overlay hidden">
+    <p id="errorMessage">Veri yüklenirken bir hata oluştu.</p>
+</div>
+</body>
+</html>

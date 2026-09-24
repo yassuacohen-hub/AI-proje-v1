@@ -1,0 +1,10 @@
+[Unit]
+Description=Huginn Data Insights - Daily Scraper Refresh
+After=network.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=C:\Projeler\Huginn Data Insights
+ExecStart=C:\Users\yasin\AppData\Local\Programs\Python\Python312\python.exe scripts/refresh_all_scrapers.py
+StandardOutput=append:C:\Projeler\Huginn Data Insights\logs\refresh_all_scrapers.log
+StandardError=append:C:\Projeler\Huginn Data Insights\logs\refresh_all_scrapers.log

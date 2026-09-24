@@ -1,0 +1,17 @@
+IN : Arıtes Metal Sanayi ve Ticaret Ltd. Şti.
+OUT: ARITES METAL SAN. VE TIC. LTD. ŞTI.
+
+IN : ABC İnşaat Sanayi ve Ticaret Anonim Şirketi
+OUT: ABC İNŞAAT SAN. VE TIC. A.S.
+
+IN : Dündar Elektrik Sanayi
+OUT: DÜNDAR ELEK. SAN.
+
+IN : Örnek Mühendislik Mimarlık Ltd. Şti.
+OUT: ÖRNEK MUH. MIM. LTD. ŞTI.
+
+IN : Ankara Turizm ve Ticaret Ltd. Şti.
+OUT: ANKARA TUR. TIC. LTD. ŞTI.
+
+IN : X İthalat ve İhracat Limited Şirketi
+OUT: X ITH. IHR. LTD. ŞTI.

@@ -1,0 +1,1571 @@
+{
+  "_meta": {
+    "version": "1.1",
+    "last_updated": "2026-09-02",
+    "description": "NACE to OSTİM sector mapping with fallback rules and default assignments",
+    "total_sectors": 17,
+    "default_nace_by_sektor": {
+      "Otomotiv": "29.10",
+      "Yapı ve İnşaat": "41.20",
+      "İş Makinaları": "28.22",
+      "Makine ve Makine Ekipmanları": "28.11",
+      "Metal ve Metal İşleme": "25.11",
+      "Çeşitli Ticari Faaliyetler": "46.11",
+      "Elektrik ve Elektronik": "26.11",
+      "Hizmetler": "62.01",
+      "Teknik Malzeme Tezgah ve Ekipman": "28.41",
+      "Teknoloji ve Bilişim": "62.01",
+      "Ambalaj - Kağıt - Baskı ve Kırtasiye": "17.22",
+      "Plastik ve Kauçuk": "22.19",
+      "Kimyasallar - Boya - Temizlik ve Güvenlik": "20.20",
+      "Gıda ve Endüstriyel Mutfak": "10.11",
+      "Sağlık": "86.90",
+      "Tekstil ve Deri": "13.10",
+      "Kent Mobilyaları ve Peyzaj": "31.01"
+    },
+    "global_fallback_nace": "62.09",
+    "global_fallback_sektor": "Hizmetler",
+    "fallback_keywords": {
+      "Otomotiv": [
+        "oto",
+        "otomotiv",
+        "otobüs",
+        "otoban",
+        "tasit",
+        "taksi",
+        "otomob",
+        "akson",
+        "lastik"
+      ],
+      "Yapı ve İnşaat": [
+        "yapı",
+        "inşaat",
+        "bina",
+        "proje",
+        "yol",
+        "köprü",
+        "damga",
+        "inşaatçı"
+      ],
+      "İş Makinaları": [
+        "iş makinesi",
+        "isman",
+        "traktor",
+        "tarım makinesi",
+        "kazı makinesi"
+      ],
+      "Makine ve Makine Ekipmanları": [
+        "makine",
+        "turbin",
+        "pompa",
+        "kompresor",
+        "hidrolik",
+        "rulman",
+        "disli",
+        "sanziman"
+      ],
+      "Metal ve Metal İşleme": [
+        "metal",
+        "çelik",
+        "demir",
+        "alüminyum",
+        "kovul",
+        "hurda",
+        "döküm"
+      ],
+      "Çeşitli Ticari Faaliyetler": [
+        "ticaret",
+        "toptan",
+        "perakende",
+        "bayi",
+        "distribü",
+        "satış"
+      ],
+      "Elektrik ve Elektronik": [
+        "elektrik",
+        "elektronik",
+        "devre",
+        "sensor",
+        "relü",
+        "kabl",
+        "priz"
+      ],
+      "Hizmetler": [
+        "hizmet",
+        "danışman",
+        "muhatap",
+        "tasarım",
+        "servis",
+        "destek"
+      ],
+      "Teknik Malzeme Tezgah ve Ekipman": [
+        "tezgah",
+        "cnc",
+        "freze",
+        "fresleme",
+        "torna",
+        "laser",
+        "işleme"
+      ],
+      "Teknoloji ve Bilişim": [
+        "yazılım",
+        "bilişim",
+        "teknoloji",
+        "program",
+        "app",
+        "web",
+        "software"
+      ],
+      "Ambalaj - Kağıt - Baskı ve Kırtasiye": [
+        "kağıt",
+        "baskı",
+        "matbaa",
+        "ambalaj",
+        "karton",
+        "kırtasiye"
+      ],
+      "Plastik ve Kauçuk": [
+        "plastik",
+        "kaucuk",
+        "lastik",
+        "profil",
+        "film"
+      ],
+      "Kimyasallar - Boya - Temizlik ve Güvenlik": [
+        "kimya",
+        "boya",
+        "vernik",
+        "temizlik",
+        "deterjan",
+        "sabun"
+      ],
+      "Gıda ve Endüstriyel Mutfak": [
+        "gıda",
+        "et",
+        "süt",
+        "peynir",
+        "meyve",
+        "sebze",
+        "mutfak",
+        "içecek"
+      ],
+      "Sağlık": [
+        "sağlık",
+        "tip",
+        "hastane",
+        "klinik",
+        "medikal",
+        "diş",
+        "eczane"
+      ],
+      "Tekstil ve Deri": [
+        "tekstil",
+        "iplik",
+        "kumaş",
+        "deri",
+        "giyim",
+        "konfeksiyon"
+      ],
+      "Kent Mobilyaları ve Peyzaj": [
+        "mobilya",
+        "ofis",
+        "yasam",
+        "peyzaj",
+        "bahçe",
+        "oyuncak"
+      ]
+    }
+  },
+  "otomotiv": {
+    "sektor": "Otomotiv",
+    "sektor_sirket_sayisi": 1163,
+    "nace_codes": [
+      {
+        "code": "29.10",
+        "name_tr": "Motorlu kara taşıtı imalatı",
+        "keywords": [
+          "oto",
+          "otomotiv",
+          "arac",
+          "motor",
+          "tasit"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "29.20",
+        "name_tr": "Karoseri imalatı",
+        "keywords": [
+          "karoser",
+          "kasa",
+          "govde"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "29.31",
+        "name_tr": "Elektrik ve elektronik teçhizat imalatı",
+        "keywords": [
+          "elektrik",
+          "elektronik"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "29.32",
+        "name_tr": "Diğer parça ve aksesuar imalatı",
+        "keywords": [
+          "parca",
+          "aksesuar",
+          "yedek"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "45.11",
+        "name_tr": "Otomobil ticareti",
+        "keywords": [
+          "oto",
+          "arac",
+          "ticaret"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "45.20",
+        "name_tr": "Bakım ve onarım",
+        "keywords": [
+          "servis",
+          "bakim",
+          "onarim"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "45.19",
+        "name_tr": "Diğer kara taşıtı ticareti",
+        "keywords": [
+          "tasit ticaret",
+          "kara tasit"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "45.30",
+        "name_tr": "Yedek parça ve aksesuar ticareti",
+        "keywords": [
+          "yedek parca",
+          "aksesuar ticaret"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "29.30",
+        "name_tr": "Yedek parça ve aksesuar imalatı",
+        "keywords": [
+          "yedek parca",
+          "aksesuar imalat"
+        ],
+        "relevance": "Orta"
+      }
+    ],
+    "default_nace_code": "29.10",
+    "fallback_keywords": [
+      "oto",
+      "otomotiv",
+      "otobüs",
+      "otoban",
+      "tasit",
+      "taksi",
+      "otomob",
+      "akson",
+      "lastik"
+    ]
+  },
+  "yapi_ve_insaat": {
+    "sektor": "Yapı ve İnşaat",
+    "sektor_sirket_sayisi": 794,
+    "nace_codes": [
+      {
+        "code": "41.10",
+        "name_tr": "İnşaat projelerinin geliştirilmesi",
+        "keywords": [
+          "insaat",
+          "yapi",
+          "proje"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "41.20",
+        "name_tr": "Bina ve benzeri yapıların inşaatı",
+        "keywords": [
+          "bina",
+          "insaat",
+          "yapi"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "42.11",
+        "name_tr": "Yol ve otoyol inşaatı",
+        "keywords": [
+          "yol",
+          "otoyol"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "42.21",
+        "name_tr": "Su projesi inşaatı",
+        "keywords": [
+          "su",
+          "altyapi"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "43.11",
+        "name_tr": "Yıkım işleri",
+        "keywords": [
+          "yikim"
+        ],
+        "relevance": "Düşük"
+      },
+      {
+        "code": "43.29",
+        "name_tr": "Diğer inşaat tesisatı",
+        "keywords": [
+          "tesisat",
+          "mekanik",
+          "elektrik"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "42.23",
+        "name_tr": "Su tesisatı inşaatı",
+        "keywords": [
+          "su tesisati",
+          "inşaat tesisati"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "43.90",
+        "name_tr": "Diğer inşaat faaliyetleri",
+        "keywords": [
+          "diger inşaat"
+        ],
+        "relevance": "Düşük"
+      }
+    ],
+    "default_nace_code": "41.20",
+    "fallback_keywords": [
+      "yapı",
+      "inşaat",
+      "bina",
+      "proje",
+      "yol",
+      "köprü",
+      "damga",
+      "inşaatçı"
+    ]
+  },
+  "is_makinalari": {
+    "sektor": "İş Makinaları",
+    "sektor_sirket_sayisi": 780,
+    "nace_codes": [
+      {
+        "code": "28.22",
+        "name_tr": "Makine ve ekipman imalatı",
+        "keywords": [
+          "makina",
+          "ekipman",
+          "makine"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "28.23",
+        "name_tr": "Ofis makine ve ekipman imalatı",
+        "keywords": [
+          "ofis",
+          "makine"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "28.30",
+        "name_tr": "Tarım ve orman makineleri imalatı",
+        "keywords": [
+          "tarim",
+          "orman",
+          "traktor"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "28.92",
+        "name_tr": "Paketleme ve ambalajlama makineleri",
+        "keywords": [
+          "paketleme",
+          "ambalaj"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "28.93",
+        "name_tr": "Tarım ve orman makinesi yedek parçaları",
+        "keywords": [
+          "tarım makine",
+          "yedek parca"
+        ],
+        "relevance": "Orta"
+      }
+    ],
+    "default_nace_code": "28.22",
+    "fallback_keywords": [
+      "iş makinesi",
+      "isman",
+      "traktor",
+      "tarım makinesi",
+      "kazı makinesi"
+    ]
+  },
+  "makine_ve_makine_ekipmanlari": {
+    "sektor": "Makine ve Makine Ekipmanları",
+    "sektor_sirket_sayisi": 757,
+    "nace_codes": [
+      {
+        "code": "28.11",
+        "name_tr": "Motor ve türbin imalatı",
+        "keywords": [
+          "motor",
+          "turbin"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "28.12",
+        "name_tr": "Pompa ve kompresör imalatı",
+        "keywords": [
+          "pompa",
+          "kompresor"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "28.13",
+        "name_tr": "Hidrolik ve pnömatik ekipman",
+        "keywords": [
+          "hidrolik",
+          "pnomatik"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "28.14",
+        "name_tr": "Metal kaplama ve bağlantı elemanı",
+        "keywords": [
+          "kaplama",
+          "baglanti"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "28.15",
+        "name_tr": "Rulman, dişli ve şanzıman",
+        "keywords": [
+          "rulman",
+          "disli",
+          "sanziman"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "28.49",
+        "name_tr": "Diğer makine ve ekipman imalatı",
+        "keywords": [
+          "makine",
+          "ekipman"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "28.25",
+        "name_tr": "Çevre ekipmanları imalatı",
+        "keywords": [
+          "çevre ekipman"
+        ],
+        "relevance": "Orta"
+      }
+    ],
+    "default_nace_code": "28.11",
+    "fallback_keywords": [
+      "makine",
+      "turbin",
+      "pompa",
+      "kompresor",
+      "hidrolik",
+      "rulman",
+      "disli",
+      "sanziman"
+    ]
+  },
+  "metal_ve_metal_isleme": {
+    "sektor": "Metal ve Metal İşleme",
+    "sektor_sirket_sayisi": 752,
+    "nace_codes": [
+      {
+        "code": "24.10",
+        "name_tr": "Demir çelik üretimi",
+        "keywords": [
+          "demir",
+          "celik",
+          "metal"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "24.20",
+        "name_tr": "Çelik boru ve profil imalatı",
+        "keywords": [
+          "boru",
+          "profil"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "25.11",
+        "name_tr": "Metal yapı ve parçaları imalatı",
+        "keywords": [
+          "metal",
+          "yapi",
+          "konstruksiyon"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "25.50",
+        "name_tr": "Hurdadan metal üretimi",
+        "keywords": [
+          "hurda",
+          "metal"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "25.61",
+        "name_tr": "Silah ve cephane imalatı",
+        "keywords": [
+          "silah"
+        ],
+        "relevance": "Düşük"
+      },
+      {
+        "code": "25.73",
+        "name_tr": "Bıçak, çatal kaşık ve alet imalatı",
+        "keywords": [
+          "bicak",
+          "catal",
+          "kasik"
+        ],
+        "relevance": "Düşük"
+      },
+      {
+        "code": "25.20",
+        "name_tr": "Kaplama ve boyama (metal)",
+        "keywords": [
+          "kaplama",
+          "boyama",
+          "celik kaplama"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "25.62",
+        "name_tr": "Metal şekillendirme",
+        "keywords": [
+          "metal şekillendirme",
+          "metal döküm"
+        ],
+        "relevance": "Orta"
+      }
+    ],
+    "default_nace_code": "25.11",
+    "fallback_keywords": [
+      "metal",
+      "çelik",
+      "demir",
+      "alüminyum",
+      "kovul",
+      "hurda",
+      "döküm"
+    ]
+  },
+  "cesitli_ticari_faaliyetler": {
+    "sektor": "Çeşitli Ticari Faaliyetler",
+    "sektor_sirket_sayisi": 410,
+    "nace_codes": [
+      {
+        "code": "46.11",
+        "name_tr": "Toptan ticaret",
+        "keywords": [
+          "toptan",
+          "ticaret"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "46.90",
+        "name_tr": "Benzersiz ürünlerin toptan ticareti",
+        "keywords": [
+          "ticaret",
+          "urun"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "47.11",
+        "name_tr": "Gıda perakende ticareti",
+        "keywords": [
+          "perakende",
+          "gida"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "47.19",
+        "name_tr": "Giyim eşyası perakende ticareti",
+        "keywords": [
+          "giyim",
+          "perakende"
+        ],
+        "relevance": "Düşük"
+      },
+      {
+        "code": "46.39",
+        "name_tr": "Diğer gıda toptan ticareti",
+        "keywords": [
+          "gida toptan"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "47.91",
+        "name_tr": "Online perakende satış",
+        "keywords": [
+          "online",
+          "e-ticaret"
+        ],
+        "relevance": "Orta"
+      }
+    ],
+    "default_nace_code": "46.11",
+    "fallback_keywords": [
+      "ticaret",
+      "toptan",
+      "perakende",
+      "bayi",
+      "distribü",
+      "satış"
+    ]
+  },
+  "elektrik_ve_elektronik": {
+    "sektor": "Elektrik ve Elektronik",
+    "sektor_sirket_sayisi": 390,
+    "nace_codes": [
+      {
+        "code": "26.11",
+        "name_tr": "Elektronik bileşen imalatı",
+        "keywords": [
+          "elektronik",
+          "bilesen"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "26.12",
+        "name_tr": "Yüklü elektronik kart imalatı",
+        "keywords": [
+          "kart",
+          "elektronik"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "27.11",
+        "name_tr": "Elektrik motoru imalatı",
+        "keywords": [
+          "elektrik",
+          "motor"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "27.12",
+        "name_tr": "Trafo, jeneratör, dağıtım kontrol cihazı",
+        "keywords": [
+          "trafo",
+          "jenerator"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "27.90",
+        "name_tr": "Diğer elektrikli teçhizat imalatı",
+        "keywords": [
+          "elektrik",
+          "techizat"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "26.20",
+        "name_tr": "Elektrik kabloları",
+        "keywords": [
+          "kablo",
+          "kablolar",
+          "elektrik kablo"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "26.30",
+        "name_tr": "Elektronik bileşenler",
+        "keywords": [
+          "bilesen",
+          "elektronik kompon"
+        ],
+        "relevance": "Orta"
+      }
+    ],
+    "default_nace_code": "26.11",
+    "fallback_keywords": [
+      "elektrik",
+      "elektronik",
+      "devre",
+      "sensor",
+      "relü",
+      "kabl",
+      "priz"
+    ]
+  },
+  "hizmetler": {
+    "sektor": "Hizmetler",
+    "sektor_sirket_sayisi": 380,
+    "nace_codes": [
+      {
+        "code": "62.01",
+        "name_tr": "Bilgisayar programlama faaliyetleri",
+        "keywords": [
+          "yazilim",
+          "programlama"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "69.10",
+        "name_tr": "Hukuki hizmetler",
+        "keywords": [
+          "hukuk",
+          "avukat"
+        ],
+        "relevance": "Düşük"
+      },
+      {
+        "code": "70.10",
+        "name_tr": "Merkezler ve holding şirketleri",
+        "keywords": [
+          "holding"
+        ],
+        "relevance": "Düşük"
+      },
+      {
+        "code": "71.11",
+        "name_tr": "Mimarlık faaliyetleri",
+        "keywords": [
+          "mimarlik",
+          "tasarim"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "73.11",
+        "name_tr": "Reklam ajansı faaliyetleri",
+        "keywords": [
+          "reklam",
+          "ajans"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "78.10",
+        "name_tr": "İş bulma kuruluşu faaliyetleri",
+        "keywords": [
+          "insan kaynaklari",
+          "is bulma"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "69.20",
+        "name_tr": "Mülkiyet ve sicil kayıtları",
+        "keywords": [
+          "mülkiyet",
+          "sicil",
+          "kayit"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "70.20",
+        "name_tr": "İdari hizmetler",
+        "keywords": [
+          "idari",
+          "destek hizmet"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "72.20",
+        "name_tr": "Ar-Ge hizmetleri",
+        "keywords": [
+          "ar-ge",
+          "research",
+          "geliştirme"
+        ],
+        "relevance": "Orta"
+      }
+    ],
+    "default_nace_code": "62.01",
+    "fallback_keywords": [
+      "hizmet",
+      "danışman",
+      "muhatap",
+      "tasarım",
+      "servis",
+      "destek"
+    ]
+  },
+  "teknik_malzeme_tezgah_ve_ekipman": {
+    "sektor": "Teknik Malzeme Tezgah ve Ekipman",
+    "sektor_sirket_sayisi": 339,
+    "nace_codes": [
+      {
+        "code": "28.41",
+        "name_tr": "Metal işleme makinesi imalatı",
+        "keywords": [
+          "metal isleme",
+          "tezgah",
+          "cnc"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "28.49",
+        "name_tr": "Diğer makine ve ekipman imalatı",
+        "keywords": [
+          "makine",
+          "ekipman",
+          "techizat"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "28.91",
+        "name_tr": "Pişirme ve mutfak ekipmanları imalatı",
+        "keywords": [
+          "mutfak",
+          "pisirme"
+        ],
+        "relevance": "Düşük"
+      },
+      {
+        "code": "28.99",
+        "name_tr": "Diğer özel amaçlı makine imalatı",
+        "keywords": [
+          "makine",
+          "ozel"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "28.51",
+        "name_tr": "CNC tezgahları",
+        "keywords": [
+          "cnc",
+          "tezgah"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "28.59",
+        "name_tr": "Diğer özel amaçlı makine",
+        "keywords": [
+          "özel maksatlı",
+          "özel amaclı"
+        ],
+        "relevance": "Düşük"
+      }
+    ],
+    "default_nace_code": "28.41",
+    "fallback_keywords": [
+      "tezgah",
+      "cnc",
+      "freze",
+      "fresleme",
+      "torna",
+      "laser",
+      "işleme"
+    ]
+  },
+  "teknoloji_ve_bilisim": {
+    "sektor": "Teknoloji ve Bilişim",
+    "sektor_sirket_sayisi": 192,
+    "nace_codes": [
+      {
+        "code": "62.01",
+        "name_tr": "Bilgisayar programlama faaliyetleri",
+        "keywords": [
+          "yazilim",
+          "bilisim",
+          "teknoloji",
+          "programlama"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "62.02",
+        "name_tr": "Bilgisayar danışmanlığı faaliyetleri",
+        "keywords": [
+          "danismanlik",
+          "it"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "62.03",
+        "name_tr": "Bilgisayar tesis yönetimi faaliyetleri",
+        "keywords": [
+          "tesis",
+          "yonetim"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "63.11",
+        "name_tr": "Veri işleme, barındırma",
+        "keywords": [
+          "hosting",
+          "veri",
+          "bulut"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "63.12",
+        "name_tr": "Web portalları",
+        "keywords": [
+          "web",
+          "portal"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "62.09",
+        "name_tr": "Bilgisayar faaliyetleri (diğer)",
+        "keywords": [
+          "bilgisayar faaliyet",
+          "it hizmet"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "63.91",
+        "name_tr": "Veri işlem hizmetleri",
+        "keywords": [
+          "veri işlem",
+          "veri barındırma"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "63.99",
+        "name_tr": "Diğer bilgi hizmetleri",
+        "keywords": [
+          "bilgi hizmet"
+        ],
+        "relevance": "Düşük"
+      }
+    ],
+    "default_nace_code": "62.01",
+    "fallback_keywords": [
+      "yazılım",
+      "bilişim",
+      "teknoloji",
+      "program",
+      "app",
+      "web",
+      "software"
+    ]
+  },
+  "ambalaj_kagit_baski_ve_kirtasiye": {
+    "sektor": "Ambalaj - Kağıt - Baskı ve Kırtasiye",
+    "sektor_sirket_sayisi": 127,
+    "nace_codes": [
+      {
+        "code": "17.11",
+        "name_tr": "Kağıt hamuru imalatı",
+        "keywords": [
+          "kagit",
+          "hamur"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "17.21",
+        "name_tr": "Kağıt ve karton imalatı",
+        "keywords": [
+          "kagit",
+          "karton"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "17.22",
+        "name_tr": "Kağıt ve karton ürünleri imalatı",
+        "keywords": [
+          "kagit",
+          "ambalaj"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "18.12",
+        "name_tr": "Diğer baskı faaliyetleri",
+        "keywords": [
+          "baski",
+          "matbaa"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "18.13",
+        "name_tr": "Yayıncılık hizmetleri",
+        "keywords": [
+          "yayincilik",
+          "kitap"
+        ],
+        "relevance": "Düşük"
+      },
+      {
+        "code": "17.24",
+        "name_tr": "Karton kutular",
+        "keywords": [
+          "karton kutu",
+          "kutu"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "18.10",
+        "name_tr": "Yayın faaliyetleri",
+        "keywords": [
+          "yayin",
+          "yayinlik"
+        ],
+        "relevance": "Orta"
+      }
+    ],
+    "default_nace_code": "17.22",
+    "fallback_keywords": [
+      "kağıt",
+      "baskı",
+      "matbaa",
+      "ambalaj",
+      "karton",
+      "kırtasiye"
+    ]
+  },
+  "plastik_ve_kaucuk": {
+    "sektor": "Plastik ve Kauçuk",
+    "sektor_sirket_sayisi": 114,
+    "nace_codes": [
+      {
+        "code": "22.11",
+        "name_tr": "Lastik ve plastikten tüp veya profil",
+        "keywords": [
+          "plastik",
+          "kaucuk",
+          "lastik"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "22.19",
+        "name_tr": "Lastik ve plastikten ince film ve levha",
+        "keywords": [
+          "plastik",
+          "film"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "22.21",
+        "name_tr": "Plastikten ambalaj malzemesi",
+        "keywords": [
+          "plastik",
+          "ambalaj"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "22.23",
+        "name_tr": "Plastikten inşaat malzemesi",
+        "keywords": [
+          "plastik",
+          "insaat"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "22.29",
+        "name_tr": "Diğer plastik ürün imalatı",
+        "keywords": [
+          "plastik"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "22.30",
+        "name_tr": "Gözenlendirilmemiş elastomer",
+        "keywords": [
+          "elastomer",
+          "kaucuk elastomer"
+        ],
+        "relevance": "Orta"
+      }
+    ],
+    "default_nace_code": "22.19",
+    "fallback_keywords": [
+      "plastik",
+      "kaucuk",
+      "lastik",
+      "profil",
+      "film"
+    ]
+  },
+  "kimyasallar_boya_temizlik_ve_guvenlik": {
+    "sektor": "Kimyasallar - Boya - Temizlik ve Güvenlik",
+    "sektor_sirket_sayisi": 109,
+    "nace_codes": [
+      {
+        "code": "20.11",
+        "name_tr": "Endüstriyel gaz imalatı",
+        "keywords": [
+          "gaz",
+          "kimya"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "20.13",
+        "name_tr": "İnorganik kimya",
+        "keywords": [
+          "inorganik",
+          "kimya"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "20.14",
+        "name_tr": "Organik kimya",
+        "keywords": [
+          "organik",
+          "kimya"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "20.20",
+        "name_tr": "Boya, vernik ve benzeri ürünler",
+        "keywords": [
+          "boya",
+          "vernik"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "20.30",
+        "name_tr": "İlaç ve eczacılık",
+        "keywords": [
+          "ilac",
+          "eczacilik"
+        ],
+        "relevance": "Düşük"
+      },
+      {
+        "code": "20.41",
+        "name_tr": "Sabun ve deterjan",
+        "keywords": [
+          "sabun",
+          "deterjan",
+          "temizlik"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "20.60",
+        "name_tr": "Patlayıcı ve yangın güvenliği",
+        "keywords": [
+          "patlayici",
+          "yangin",
+          "guvenlik"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "20.12",
+        "name_tr": "Metallerdeki kimyasallar",
+        "keywords": [
+          "metal kimya",
+          "korozyon"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "20.51",
+        "name_tr": "Mayalı kağıt",
+        "keywords": [
+          "mayali kagit"
+        ],
+        "relevance": "Orta"
+      }
+    ],
+    "default_nace_code": "20.20",
+    "fallback_keywords": [
+      "kimya",
+      "boya",
+      "vernik",
+      "temizlik",
+      "deterjan",
+      "sabun"
+    ]
+  },
+  "gida_ve_endustriyel_mutfak": {
+    "sektor": "Gıda ve Endüstriyel Mutfak",
+    "sektor_sirket_sayisi": 98,
+    "nace_codes": [
+      {
+        "code": "10.11",
+        "name_tr": "Et ve et ürünleri işleme",
+        "keywords": [
+          "et",
+          "gida"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "10.13",
+        "name_tr": "Meyve ve sebze işleme",
+        "keywords": [
+          "meyve",
+          "sebze"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "10.20",
+        "name_tr": "Balık işleme",
+        "keywords": [
+          "balik"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "10.41",
+        "name_tr": "Süt ve peynir ürünleri",
+        "keywords": [
+          "sut",
+          "peynir"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "10.85",
+        "name_tr": "Endüstriyel mutfak ekipmanları",
+        "keywords": [
+          "mutfak",
+          "ekipman"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "46.31",
+        "name_tr": "Gıda toptan ticareti",
+        "keywords": [
+          "gida",
+          "toptan"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "10.51",
+        "name_tr": "Et işleme",
+        "keywords": [
+          "et işleme",
+          "etişleme"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "10.71",
+        "name_tr": "İçecekler",
+        "keywords": [
+          "içecek",
+          "içki"
+        ],
+        "relevance": "Orta"
+      }
+    ],
+    "default_nace_code": "10.11",
+    "fallback_keywords": [
+      "gıda",
+      "et",
+      "süt",
+      "peynir",
+      "meyve",
+      "sebze",
+      "mutfak",
+      "içecek"
+    ]
+  },
+  "saglik": {
+    "sektor": "Sağlık",
+    "sektor_sirket_sayisi": 78,
+    "nace_codes": [
+      {
+        "code": "21.10",
+        "name_tr": "İlaç ve eczacılık ürünleri",
+        "keywords": [
+          "ilac",
+          "eczacilik",
+          "saglik"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "32.50",
+        "name_tr": "Tıbbi ve diş hekimliği cihazları",
+        "keywords": [
+          "tip",
+          "dis",
+          "cihaz"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "86.10",
+        "name_tr": "Hastane faaliyetleri",
+        "keywords": [
+          "hastane",
+          "saglik"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "86.90",
+        "name_tr": "Diğer sağlık hizmetleri",
+        "keywords": [
+          "saglik",
+          "hizmet"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "87.30",
+        "name_tr": "Sosyal sağlık hizmetleri",
+        "keywords": [
+          "sosyal sağlık",
+          "bakım ev"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "87.90",
+        "name_tr": "Diğer sağlık hizmetleri",
+        "keywords": [
+          "diger sağlık",
+          "ambulans"
+        ],
+        "relevance": "Düşük"
+      }
+    ],
+    "default_nace_code": "86.90",
+    "fallback_keywords": [
+      "sağlık",
+      "tip",
+      "hastane",
+      "klinik",
+      "medikal",
+      "diş",
+      "eczane"
+    ]
+  },
+  "tekstil_ve_deri": {
+    "sektor": "Tekstil ve Deri",
+    "sektor_sirket_sayisi": 71,
+    "nace_codes": [
+      {
+        "code": "13.10",
+        "name_tr": "İplik eğirme ve büküm",
+        "keywords": [
+          "iplik",
+          "tekstil"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "13.20",
+        "name_tr": "Dokuma",
+        "keywords": [
+          "dokuma",
+          "kumas"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "13.30",
+        "name_tr": "Triko ve örme kumaş",
+        "keywords": [
+          "triko",
+          "orme"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "13.91",
+        "name_tr": "Hazır giyim imalatı",
+        "keywords": [
+          "giyim",
+          "konfeksiyon"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "14.11",
+        "name_tr": "Deri giyim eşyası imalatı",
+        "keywords": [
+          "deri",
+          "giyim"
+        ],
+        "relevance": "Yüksek"
+      },
+      {
+        "code": "14.20",
+        "name_tr": "Seyahat eşyası, çanta",
+        "keywords": [
+          "canta",
+          "seyahat"
+        ],
+        "relevance": "Düşük"
+      },
+      {
+        "code": "13.92",
+        "name_tr": "Konfeksiyon kumaşları",
+        "keywords": [
+          "konfeksiyon",
+          "hazir giyim"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "14.12",
+        "name_tr": "Deri hayvanesi",
+        "keywords": [
+          "deri hayvan"
+        ],
+        "relevance": "Orta"
+      }
+    ],
+    "default_nace_code": "13.10",
+    "fallback_keywords": [
+      "tekstil",
+      "iplik",
+      "kumaş",
+      "deri",
+      "giyim",
+      "konfeksiyon"
+    ]
+  },
+  "kent_mobilyalari_ve_peyzaj": {
+    "sektor": "Kent Mobilyaları ve Peyzaj",
+    "sektor_sirket_sayisi": 16,
+    "nace_codes": [
+      {
+        "code": "31.01",
+        "name_tr": "Ofis ve mağaza mobilyası imalatı",
+        "keywords": [
+          "mobilya",
+          "ofis"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "31.02",
+        "name_tr": "Mutfak mobilyası imalatı",
+        "keywords": [
+          "mutfak",
+          "mobilya"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "31.03",
+        "name_tr": "Diğer mobilya imalatı",
+        "keywords": [
+          "mobilya"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "32.40",
+        "name_tr": "Oyun ve oyuncak imalatı",
+        "keywords": [
+          "oyun",
+          "oyuncak"
+        ],
+        "relevance": "Düşük"
+      },
+      {
+        "code": "81.30",
+        "name_tr": "Bina ve peyzaj bakım faaliyetleri",
+        "keywords": [
+          "peyzaj",
+          "bahce",
+          "bakim"
+        ],
+        "relevance": "Orta"
+      },
+      {
+        "code": "31.09",
+        "name_tr": "Diğer mobilya imalatı",
+        "keywords": [
+          "diger mobilya"
+        ],
+        "relevance": "Düşük"
+      }
+    ],
+    "default_nace_code": "31.01",
+    "fallback_keywords": [
+      "mobilya",
+      "ofis",
+      "yasam",
+      "peyzaj",
+      "bahçe",
+      "oyuncak"
+    ]
+  }
+}

@@ -1,0 +1,453 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""Huginn Data Insights - Dashboard with search, real-time, agent panel"""
+
+from __future__ import annotations
+import sys
+import time
+import json
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+
+import pandas as pd
+import streamlit as st
+from sqlalchemy import text
+from company_master.db.connection import get_engine
+from company_master.orchestrator import task_board as tb
+
+st.set_page_config(page_title="Huginn Data Insights", layout="wide", initial_sidebar_state="expanded")
+engine = get_engine()
+
+# Sidebar
+st.sidebar.title("Navigasyon")
+nav = st.sidebar.radio(
+    "Sayfa",
+    ["Genel Bakış", "Firma Ara", "Ajan Durumu", "Proje Yönetimi", "Web Kazıma Raporu"],
+    index=0, key="nav"
+)
+st.sidebar.markdown("---")
+st.sidebar.subheader("Filtreler")
+ankara = st.sidebar.checkbox("Ankara", value=True)
+osb = st.sidebar.checkbox("OSB", value=False)
+if st.sidebar.button("Yenile", width='stretch'):
+    st.rerun()
+st.sidebar.markdown("---")
+st.sidebar.caption("Huginn Data Insights v1.0")
+
+# WHERE
+where = []
+if ankara:
+    where.append("c.is_ankara = TRUE")
+if osb:
+    where.append("c.is_osb_member = TRUE")
+where_sql = "WHERE " + " AND ".join(where) if where else ""
+
+if nav == "Genel Bakış":
+    st.title("Company Master Dashboard")
+    st.caption(time.strftime("%Y-%m-%d %H:%M:%S"))
+    
+    with engine.connect() as conn:
+        kpi = conn.execute(text(f"""
+            SELECT COUNT(*) as total, AVG(data_quality_score) as avg_score,
+                COUNT(*) FILTER (WHERE data_quality_score >= 70) as high,
+                COUNT(*) FILTER (WHERE data_quality_score < 30) as low,
+                COUNT(*) FILTER (WHERE c.website_domain IS NOT NULL AND c.website_domain != '') as web,
+                COUNT(*) FILTER (WHERE c.primary_phone IS NOT NULL AND c.primary_phone != '') as tel,
+                COUNT(*) FILTER (WHERE c.primary_email IS NOT NULL AND c.primary_email != '') as email,
+                COUNT(*) FILTER (WHERE COALESCE(c.tax_number, c.vergi_no) IS NOT NULL) as vkn,
+                COUNT(*) FILTER (WHERE c.nace_code IS NOT NULL AND c.nace_code != '') as nace
+            FROM companies c {where_sql}
+        """)).fetchone()
+    
+    c1, c2, c3, c4 = st.columns(4)
+    c1.metric("Toplam", f"{kpi[0]:,}")
+    c2.metric("Ortalama Skor", f"{float(kpi[1] or 0):.1f}/100")
+    c3.metric("Yüksek (≥70)", f"{kpi[2]:,}")
+    c4.metric("Düşük (<30)", f"{kpi[3]:,}")
+    
+    st.markdown("---")
+    st.subheader("Doluluk Oranları")
+    cols = st.columns(5)
+    labels = ["Web", "Telefon", "Email", "VKN", "NACE"]
+    for col, label, val in zip(cols, labels, kpi[4:9]):
+        pct = round(float(val) / max(kpi[0], 1) * 100, 1)
+        col.metric(label, f"{val:,}", delta=f"{pct}%")
+
+elif nav == "Firma Ara":
+    st.title("Firma Arama")
+    search = st.text_input("Arama", placeholder="Ad, VKN, Tel, Email")
+    if search:
+        with engine.connect() as conn:
+            results = conn.execute(text(f"""
+                SELECT legal_name, primary_phone, primary_email,
+                       COALESCE(tax_number, vergi_no) as vkn,
+                       data_quality_score, website_domain
+                FROM companies {where_sql}
+                WHERE legal_name ILIKE :term
+                   OR primary_phone::text ILIKE :term
+                   OR primary_email ILIKE :term
+                   OR COALESCE(tax_number, vergi_no, '') ILIKE :term
+                ORDER BY data_quality_score DESC LIMIT 50
+            """), {"term": f"%{search}%"}).fetchall()
+        
+        if results:
+            df = pd.DataFrame(results, columns=["Firma", "Telefon", "Email", "VKN", "Skor", "Web"])
+            st.dataframe(df, width='stretch', hide_index=True)
+            st.success(f"{len(results)} sonuç")
+        else:
+            st.info("Kayıt yok")
+
+elif nav == "Ajan Durumu":
+    st.title("Ajan Aktivite & Task Board")
+    st.caption("Gerçek zamanlı görev takibi — orkestrator panosundan beslenir")
+    
+    # --- Durum Kartları ---
+    board = tb.gorev_listesi()
+    col1, col2, col3, col4, col5 = st.columns(5)
+    for col, durum, label in [
+        (col1, "plan", "Planlanan"),
+        (col2, "aktif", "Aktif"),
+        (col3, "review", "Review"),
+        (col4, "blocked", "Tıkanık"),
+        (col5, "done", "Tamamlandı"),
+    ]:
+        cnt = len([t for t in board if t.get("durum") == durum])
+        col.metric(label, cnt)
+    
+    st.markdown("---")
+    
+    # --- Aktif & Review ---
+    st.subheader("Aktif Görevler")
+    active = [t for t in board if t.get("durum") in ("aktif", "review")]
+    if active:
+        for t in active:
+            with st.expander(f"🔴 {t.get('baslik')} — {t.get('sahip')} ({t.get('oncelik')})"):
+                c1, c2 = st.columns(2)
+                c1.write(f"**Görev ID:** {t.get('task_id')}")
+                c1.write(f"**Durum:** {t.get('durum')}")
+                c1.write(f"**Başlangıç:** {t.get('baslangic', '-')}")
+                c1.write(f"**Dosyalar:** {', '.join(t.get('dosyalar', [])) or '-'}")
+                if t.get("not"):
+                    c2.write(f"**Not:** {t.get('not')}")
+                # Lock bilgisi
+                for d in t.get("dosyalar", []):
+                    lock = tb.lock_durum(d)
+                    if lock:
+                        c2.write(f"🔒 `{d}` → {lock.get('sahip')}")
+    else:
+        st.info("Aktif görev yok")
+    
+    # --- Blocked ---
+    blocked = [t for t in board if t.get("durum") == "blocked"]
+    if blocked:
+        st.subheader("Tıkanıklar")
+        for t in blocked:
+            st.warning(f"⚠️ {t.get('baslik')} — {t.get('sahip')}: {t.get('not', '')}")
+    
+    # --- Tamamlanan ---
+    done = [t for t in board if t.get("durum") == "done"]
+    if done:
+        st.subheader("Tamamlanan (son 15)")
+        df = pd.DataFrame([{
+            "ID": t.get("task_id"), "Başlık": t.get("baslik"),
+            "Sahip": t.get("sahip"), "Bitiş": t.get("bitis", "")
+        } for t in done[-15:]])
+        st.dataframe(df, width='stretch', hide_index=True)
+    
+    # --- Dosya Lock'ları ---
+    st.markdown("---")
+    st.subheader("Dosya Kilitleri")
+    locks = tb.locklar()
+    if locks:
+        df = pd.DataFrame([{
+            "Dosya": k, "Sahip": v.get("sahip"), "Görev": v.get("task_id"),
+            "Kilitlenme": v.get("litkilendi", "")
+        } for k, v in locks.items()])
+        st.dataframe(df, width='stretch', hide_index=True)
+    else:
+        st.info("Aktif kilit yok")
+    
+    # --- Canlı Durum ---
+    st.markdown("---")
+    st.subheader("Orkestrator Canlı Durumu")
+    state = tb.durum_getir()
+    if state:
+        for k, v in state.items():
+            st.write(f"**{k}:** {v}")
+    else:
+        st.info("Durum bilgisi yok")
+    
+    # --- Harici Ajan ---
+    st.markdown("---")
+    st.subheader("Harici Ajan Görevleri")
+    h_file = Path(__file__).resolve().parents[1] / "data" / "orchestrator" / "harici_ajan_gorevleri.json"
+    if h_file.exists():
+        import json
+        h_data = json.loads(h_file.read_text(encoding="utf-8"))
+        if isinstance(h_data, list):
+            for item in h_data:
+                with st.expander(f"🌐 {item.get('baslik', item.get('id', '?'))}"):
+                    for k, v in item.items():
+                        st.write(f"**{k}:** {v}")
+        else:
+            st.json(h_data)
+    else:
+        st.info("Harici ajan verisi yok")
+
+elif nav == "Proje Yönetimi":
+    import json
+    st.title("📋 Proje Yönetimi & Durum")
+    st.caption("Huginn Data Insights — V1.0 proje durumu, kilometre taşları ve kararlar")
+    
+    PROJECT_ROOT = Path(__file__).resolve().parents[1]
+    state_md = PROJECT_ROOT / "AI proje v1" / "V10" / "project_state.md"
+    roadmap_md = PROJECT_ROOT / "PROJECT_ROADMAP.md"
+    kpi_md = PROJECT_ROOT / "data" / "kpi_raporu.md"
+    
+    # --- KPI Özeti ---
+    st.subheader("📈 Veri Kalitesi KPI Özeti")
+    if kpi_md.exists():
+        kpi_text = kpi_md.read_text(encoding="utf-8")
+        lines = kpi_text.splitlines()
+        for line in lines:
+            l = line.replace("#", "").strip()
+            if any(x in l for x in ["Toplam Firma", "Ortalama Kalite", "Hedef", "VERI KALITESI"]):
+                st.write(f"**{l}**")
+        
+        st.markdown("**Alan Doluluk Oranları:**")
+        rows = []
+        for line in lines:
+            if "|" in line and "%" in line:
+                parts = [p.strip() for p in line.split("|") if p.strip()]
+                if len(parts) >= 2 and parts[0] not in ("Alan", "------"):
+                    rows.append(parts)
+        if rows:
+            st.dataframe(pd.DataFrame(rows, columns=["Alan", "Değer", "Grafik"]),
+                        width='stretch', hide_index=True)
+        
+        st.markdown("**İlerleme Görselleştirme:**")
+        for row in rows[:7]:
+            if len(row) >= 2:
+                try:
+                    alan = row[0]
+                    val_str = row[1]
+                    if "(" in val_str:
+                        pct = float(val_str.split("(")[1].split("%")[0])
+                        st.progress(pct/100, text=f"{alan}: {pct}%")
+                except Exception:
+                    pass
+    else:
+        st.info("KPI raporu bulunamadı")
+    
+    st.markdown("---")
+    
+    # --- Proje Durumu ---
+    st.subheader("📄 Proje Durumu (project_state.md)")
+    if state_md.exists():
+        st.caption("📁 `AI proje v1/V10/project_state.md`")
+        with st.expander("Tam dosyayı görüntüle", expanded=False):
+            st.markdown(state_md.read_text(encoding="utf-8"))
+    else:
+        st.warning("project_state.md bulunamadı")
+    
+    # --- Roadmap ---
+    st.subheader("🗺️ Proje Yol Haritası")
+    if roadmap_md.exists():
+        with st.expander("PROJECT_ROADMAP.md", expanded=False):
+            st.markdown(roadmap_md.read_text(encoding="utf-8"))
+    # --- Ajan Durumu (Task Cards) ---
+    st.subheader("🤖 Ajan Durumu & Görev Paneli")
+
+    # Summary row
+    col_a, col_b, col_c, col_d, col_e = st.columns(5)
+    col_a.metric("🔴 Aktif", f"{len(active_tasks)}")
+    col_b.metric("🟡 Plan", f"{len(plan_tasks)}")
+    col_c.metric("🔵 Review", f"{len(review_tasks)}")
+    col_d.metric("⚫ Bloklanmış", f"{len(blocked_tasks)}")
+    col_e.metric("🟢 Tamamlanan", f"{len(done_tasks)}")
+
+    st.markdown("---")
+
+    # Active tasks (expandable)
+    if active_tasks:
+        with st.expander(f"📋 Aktif Görevler ({len(active_tasks)})", expanded=True):
+            for t in active_tasks:
+                with st.container():
+                    p = t.get("oncelik", "?")
+                    p_color = {"P0": "🔴", "P1": "🟠", "P2": "🟡"}.get(p, "⚪")
+                    st.markdown(f"**{p_color} {t.get('task_id', '?')} — {t.get('baslik', '??')}**")
+                    st.caption(f"Sahibi: {t.get('sahip', '?')} | Başlangıç: {t.get('baslangic', '?')}")
+                    if t.get("dosyalar"):
+                        st.caption(f"📎 Dosyalar: {', '.join(t['dosyalar'][:3])}")
+                    if t.get("not"):
+                        st.caption(f"📝 Not: {t['not']}")
+                    if t.get("bitis"):
+                        st.caption(f"✅ Bitiş: {t['bitis']}")
+                    st.markdown("")
+
+    # Plan tasks
+    if plan_tasks:
+        with st.expander(f"📌 Plan Görünümleri ({len(plan_tasks)})", expanded=False):
+            for t in plan_tasks:
+                with st.container():
+                    st.markdown(f"**📌 {t.get('task_id', '?')} — {t.get('baslik', '??')}**")
+                    st.caption(f"Sahibi: {t.get('sahip', '?')}")
+                    st.markdown("")
+
+    # Review tasks
+    if review_tasks:
+        with st.expander(f"🔍 Review Görünümleri ({len(review_tasks)})", expanded=False):
+            for t in review_tasks:
+                with st.container():
+                    st.markdown(f"**🔍 {t.get('task_id', '?')} — {t.get('baslik', '??')}**")
+                    st.caption(f"Sahibi: {t.get('sahip', '?')}")
+                    st.markdown("")
+
+    # Blocked tasks
+    if blocked_tasks:
+        with st.expander(f"🚫 Bloklanmış Görevler ({len(blocked_tasks)})", expanded=False):
+            for t in blocked_tasks:
+                with st.container():
+                    st.markdown(f"**🚫 {t.get('task_id', '?')} — {t.get('baslik', '??')}**")
+                    st.caption(f"Sahibi: {t.get('sahip', '?')}")
+                    st.markdown("")
+
+    # Done tasks
+    if done_tasks:
+        with st.expander(f"✅ Tamamlanan Görevler ({len(done_tasks)})", expanded=False):
+            for t in done_tasks:
+                with st.container():
+                    st.markdown(f"**✅ {t.get('task_id', '?')} — {t.get('baslik', '??')}**")
+                    st.caption(f"Sahibi: {t.get('sahip', '?')} | Bitiş: {t.get('bitis', '?')}")
+                    st.markdown("")
+
+    # Orkestrator durumu
+    st.markdown("---")
+    st.subheader("⚙️ Orkestrator Durumu")
+    state_json_path = Path(__file__).resolve().parents[1] / "data" / "orchestrator" / "state.json"
+    if state_json_path.exists():
+        state_data = json.loads(state_json_path.read_text(encoding="utf-8"))
+        col1, col2 = st.columns(2)
+        col1.metric("Durum", state_data.get("status", "?"))
+        col2.metric("Son Güncelleme", state_data.get("last_updated", "?"))
+        with st.expander("📄 state.json detayı", expanded=False):
+            st.json(state_data)
+    else:
+        st.info("Orkestrator state.json bulunamadı")
+
+    # Harici Ajan Verileri
+    st.markdown("---")
+    st.subheader("🌐 Harici Ajan Verileri")
+    # Check for external agent data files
+    agent_data_files = []
+    data_dir = Path(__file__).resolve().parents[1] / "data"
+    for f in data_dir.glob("**/*.json"):
+        if "agent" in f.name.lower() or "harici" in f.name.lower():
+            agent_data_files.append(f)
+    if agent_data_files:
+        for af in agent_data_files[:5]:
+            with st.expander(f"📄 {af.name}", expanded=False):
+                try:
+                    adata = json.loads(af.read_text(encoding="utf-8"))
+                    st.json(adata)
+                except Exception:
+                    st.caption(af.read_text(encoding="utf-8", errors="ignore")[:500])
+    else:
+        st.info("Harici ajan verisi dosyası bulunamadı")
+    else:
+    # --- Karar Geçmişi ---
+    
+    # --- Karar Geçmişi ---
+    st.subheader("📌 Kararlar & Riskler")
+    if state_md.exists():
+        content = state_md.read_text(encoding="utf-8")
+        for section in ["Aktif Kararlar", "Bilinen Riskler", "Açık Sorunlar", "Çözülen Kararlar"]:
+            if f"## {section}" in content:
+                st.markdown(f"**{section}:**")
+                section_content = content.split(f"## {section}")[1].split("##")[0]
+                st.markdown(section_content[:1500])
+                st.markdown("")
+
+elif nav == "Web Kazıma Raporu":
+    import json
+    st.title("🕷️ Web Kazıma Raporları")
+    st.caption("OSINT Scraper motoru verileri — kaynak bazlı scrape durumu ve kalite")
+
+    PROJECT_ROOT = Path(__file__).resolve().parents[1]
+    data_dir = PROJECT_ROOT / "data"
+    ostim_dir = data_dir / "ostim"
+    scrape_state_file = ostim_dir / ".scrape_state.json"
+    kalite_file = ostim_dir / "kalite_raporu.md"
+    detay_rapor = PROJECT_ROOT / "logs" / "ostim_detay_raporu.md"
+
+    # --- Özet Kartları ---
+    st.subheader("📊 Kazıma Özeti")
+    total_records = 0
+    completed_sectors = 0
+    if scrape_state_file.exists():
+        state = json.loads(scrape_state_file.read_text(encoding="utf-8"))
+        total_records = state.get("total_records", 0)
+        completed_sectors = len(state.get("completed_sectors", {}))
+
+    col1, col2, col3, col4 = st.columns(4)
+    col1.metric("Toplam Kayıt", f"{total_records:,}")
+    col2.metric("Tamamlanan Sektör", f"{completed_sectors}/17")
+    col3.metric("Ortalama Kalite", "69.7/100" if kalite_file.exists() else "-")
+    col4.metric("Aktif Kaynak", "OSTIM")
+
+    st.markdown("---")
+
+    # --- Sektör İlerlemesi ---
+    st.subheader("🎯 Sektör Bazlı İlerleme")
+    if scrape_state_file.exists():
+        state = json.loads(scrape_state_file.read_text(encoding="utf-8"))
+        sectors = state.get("completed_sectors", {})
+        if sectors:
+            df = pd.DataFrame([{"Sektör": k, "Tamamlanan": v} for k, v in sectors.items()]).sort_values("Tamamlanan", ascending=False)
+            st.dataframe(df, width='stretch', hide_index=True)
+            st.bar_chart(df.set_index("Sektör"))
+
+    st.markdown("---")
+
+    # --- OSTIM Kalite Raporu ---
+    st.subheader("📈 OSTİM Veri Kalite Raporu")
+    if kalite_file.exists():
+        with st.expander("📄 kalite_raporu.md — Detaylı rapor", expanded=False):
+            st.markdown(kalite_file.read_text(encoding="utf-8"))
+    else:
+        st.info("Kalite raporu yok")
+
+    # --- Detay Scrape ---
+    st.subheader("🔍 Detay Scrape Raporu")
+    if detay_rapor.exists():
+        with st.expander("📄 ostim_detay_raporu.md", expanded=False):
+            st.markdown(detay_rapor.read_text(encoding="utf-8"))
+    else:
+        st.info("Detay raporu henüz yok")
+
+    st.markdown("---")
+
+    # --- OSINT Dokümantasyon ---
+    st.subheader("⚙️ OSINT Scraper Motoru")
+    docs_file = PROJECT_ROOT / "docs" / "OSINT_SCRAPER_MOTORU.md"
+    if docs_file.exists():
+        with st.expander("📚 OSINT Scraper Dokümantasyonu", expanded=False):
+            st.markdown(docs_file.read_text(encoding="utf-8"))
+
+    # --- Ham Veri Önizleme ---
+    st.subheader("📂 Ham Veri Önizleme")
+    raw_files = []
+    for sub in ["ostim", "aso"]:
+        d = data_dir / sub
+        if d.exists():
+            for f in d.glob("*.jsonl"):
+                raw_files.append(f)
+            for f in d.glob("*.json"):
+                raw_files.append(f)
+
+    if raw_files:
+        st.selectbox("Dosya seç", [f.name for f in raw_files])
+        st.info("Seçtiğiniz dosyanın içeriğini görmek için yukarıdaki listeden birini seçin")
+    else:
+        st.info("Ham veri dosyası bulunamadı")

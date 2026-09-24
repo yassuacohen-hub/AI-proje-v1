@@ -1,0 +1,17 @@
+{
+  "total_ankara": 10105,
+  "zero_score_before": 4405,
+  "avg_before": 22.655616031667492,
+  "phone_from_raw": 0,
+  "email_from_raw": 0,
+  "adres_from_jsonl": 4776,
+  "web_from_jsonl": 4096,
+  "vkn_from_jsonl": 0,
+  "phone_from_jsonl": 6181,
+  "email_from_jsonl": 3162,
+  "sektor_from_jsonl": 6675,
+  "nace_from_jsonl": 3024,
+  "vkn_by_address": 0,
+  "vkn_backfilled": 0,
+  "avg_after_without_recalc": 22.655616031667492
+}

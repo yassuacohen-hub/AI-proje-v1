@@ -1,0 +1,306 @@
+{
+  "task_id": "Y18",
+  "title": "ARASTIRMA: Telegram musterisi icin abonelik/rate plan tasarimi",
+  "completed_at": "2026-09-09T12:00:00Z",
+  "subscription_design": {
+    "api_key_quota_system": {
+      "description": "Her API key (DASH_API_KEY) bazinda gunluk/aylik kota sistemi. web_app.pyde mevcut rate limiter (120 req/dk) uzerine kota katmani eklenecek.",
+      "quota_levels": {
+        "free": {
+          "daily_requests": 100,
+          "monthly_requests": 2000,
+          "export_limit": 0,
+          "telegram_alerts": 0,
+          "kvkk_mask": true,
+          "support": "community"
+        },
+        "starter": {
+          "daily_requests": 1000,
+          "monthly_requests": 20000,
+          "export_limit": 500,
+          "telegram_alerts": 10,
+          "kvkk_mask": true,
+          "support": "email"
+        },
+        "professional": {
+          "daily_requests": 10000,
+          "monthly_requests": 200000,
+          "export_limit": 5000,
+          "telegram_alerts": 100,
+          "kvkk_mask": true,
+          "support": "priority_email"
+        },
+        "enterprise": {
+          "daily_requests": -1,
+          "monthly_requests": -1,
+          "export_limit": -1,
+          "telegram_alerts": -1,
+          "kvkk_mask": "configurable",
+          "support": "dedicated_sla",
+          "custom_integration": true,
+          "sla_uptime": "99.9%"
+        }
+      },
+      "rate_limit_per_minute": {
+        "free": 30,
+        "starter": 60,
+        "professional": 200,
+        "enterprise": 500
+      },
+      "overage_policy": {
+        "free": "hard_block",
+        "starter": "throttle_to_10rpm",
+        "professional": "throttle_to_50rpm",
+        "enterprise": "soft_limit_with_notification"
+      }
+    },
+    "tier_table": [
+      {
+        "tier_id": "free",
+        "name_tr": "Deneme",
+        "name_en": "Free",
+        "monthly_price_try": 0,
+        "monthly_price_eur": 0,
+        "target_audience": "Girisimci, ogrenci, kucuk testler",
+        "features": [
+          "Gunluk 100 API cagrisi",
+          "Aylik 2.000 istek",
+          "Temel firma arama",
+          "KVKK maskeleme aktif",
+          "Topluluk destegi"
+        ],
+        "limitations": [
+          "Export yok",
+          "Telegram bildirim yok",
+          "Rate limit: 30/dk"
+        ]
+      },
+      {
+        "tier_id": "starter",
+        "name_tr": "Baslangic",
+        "name_en": "Starter",
+        "monthly_price_try": 499,
+        "monthly_price_eur": 14,
+        "target_audience": "Kucuk ekibler, freelancer, KOBI",
+        "features": [
+          "Gunluk 1.000 API cagrisi",
+          "Aylik 20.000 istek",
+          "CSV/JSON export (500/ay)",
+          "Telegram anlik bildirim (10/ay)",
+          "Email oncelikli destek",
+          "Gelismis filtreler (NACE, OSB, skor)"
+        ],
+        "limitations": [
+          "Rate limit: 60/dk",
+          "Asiri kullanimda throttle"
+        ]
+      },
+      {
+        "tier_id": "professional",
+        "name_tr": "Profesyonel",
+        "name_en": "Professional",
+        "monthly_price_try": 1999,
+        "monthly_price_eur": 55,
+        "target_audience": "Buyuk ekibler, satis/marketing ajanslari",
+        "features": [
+          "Gunluk 10.000 API cagrisi",
+          "Aylik 200.000 istek",
+          "CSV/JSON export (5.000/ay)",
+          "Telegram anlik bildirim (100/ay)",
+          "Oncelikli email destek",
+          "Ozel filtre kayitlari",
+          "Watchlist degisiklik bildirimi",
+          "API webhook destegi"
+        ],
+        "limitations": [
+          "Rate limit: 200/dk"
+        ]
+      },
+      {
+        "tier_id": "enterprise",
+        "name_tr": "Kurumsal",
+        "name_en": "Enterprise",
+        "monthly_price_try": "Ozel fiyatlama",
+        "monthly_price_eur": "Custom",
+        "target_audience": "Kurumsal, holding, veri analitik firmalari",
+        "features": [
+          "Sinirsiz API cagrisi (fair use)",
+          "Sinirsiz export",
+          "Sinirsiz Telegram bildirim",
+          "KVKK maskeleme konfigurable",
+          "Ozel SLA (%99.9 uptime)",
+          "Ozel entegrasyon (CRM, ERP)",
+          "Ozel veri alanlari",
+          "On-premise secenegi",
+          "Adanmis hesap yoneticisi"
+        ],
+        "limitations": [
+          "Soozlesme bazli",
+          "Fair use politikasi gecerli"
+        ]
+      }
+    ],
+    "pilot_subscription_proposal": {
+      "pilot_name": "Huginn Pilot Program",
+      "duration_months": 3,
+      "target_participants": 10,
+      "selection_criteria": [
+        "Aktif Telegram bot kullanicisi (min 30 gun)",
+        "En az 500 firma takip ediyor (watchlist)",
+        "Gercek satis/marketing/gorusme ihtiyaci",
+        "Geri bildirim verme odakli"
+      ],
+      "pilot_tiers_offered": [
+        {
+          "tier": "professional",
+          "pilot_price_try": 0,
+          "pilot_price_eur": 0,
+          "conditions": "3 ay ucretsiz, aylik en az 1 geri bildirim formu, kullanım analitiği paylaşımı"
+        },
+        {
+          "tier": "starter",
+          "pilot_price_try": 0,
+          "pilot_price_eur": 0,
+          "conditions": "3 ay ucretsiz, aylik en az 1 geri bildirim formu"
+        }
+      ],
+      "pilot_benefits": [
+        "Erken erisim: yeni ozellikler (job intelligence, smart matching)",
+        "Dogrudan urun ekibiyle iletisim (ozel Telegram grubu)",
+        "Fiyat kilidi: Pilot sonrasi ilk 12 ay %50 indirim",
+        "Ozel onboarding ve egitim oturumu",
+        "API limitleri pilot surecine gore esnetilebilir"
+      ],
+      "success_metrics": [
+        "Aktif gunluk kullanici orani > %60",
+        "Ortalama gunluk API cagrisi > 500",
+        "Telegram bildirim etkilesim orani > %40",
+        "NPS (Net Promoter Score) > 40",
+        "En az 3 pilot kullanicisindan odeme hazirligi onayi"
+      ],
+      "launch_timeline": {
+        "week_1": "Pilot duyurusu ve basvuru formu acilisi",
+        "week_2": "Basvuru degerlendirme ve 10 katilimci secimi",
+        "week_3": "Onboarding, API key dagitimi, egitim",
+        "week_4-12": "Pilot calismasi, haftalik check-in",
+        "week_13": "Pilot degerlendirme, fiyatlama finalize, genel acilis hazirligi"
+      }
+    }
+  },
+  "competitive_analysis": {
+    "kompass": {
+      "company": "Kompass International",
+      "headquarters": "Fransa",
+      "turkey_presence": "tr.kompass.com, lokal satis ekibi var",
+      "data_coverage": {
+        "companies": "40M+ dunya geneli",
+        "countries": 70,
+        "turkey_companies": "~500K+ (tahmini)",
+        "executives": "31M+",
+        "phone_numbers": "21M+",
+        "classification": "55.000+ urun/hizmet kodu (Kompass siniflandirmasi)"
+      },
+      "pricing_model": {
+        "type": "Danismanlik bazli ozel teklif + kredi sistemi",
+        "entry_level": "KSales: 59 EUR/ay (micro-biz, max 200 firma/ay)",
+        "sme_level": "EasyBusiness: Ozel fiyatlama (SME, sinirsiz erisim)",
+        "credit_system": "Veri indirme, email gonderim, export icin kredi",
+        "minimum_order": "~15 EUR (ozel liste icin)",
+        "api_access": "CRM connectorlar (Salesforce, HubSpot, Dynamics, Zoho, Pipedrive) + ozel API",
+        "contract_term": "Yillik abonelik"
+      },
+      "strengths": [
+        "Global kapsam (70 ulke)",
+        "Gucel CRM entegrasyonlari",
+        "Kendi siniflandirma sistemi",
+        "Yillic veri yatirimi (kendi toplama)"
+      ],
+      "weaknesses": [
+        "Saydam fiyatlama yok (satis gorusmesi zorunlu)",
+        "Kredi sistemi karmasik",
+        "Kucuk firmalar icin pahali (EasyBusiness ozel fiyat)",
+        "Turkiye odakli veri derinligi sinirli"
+      ],
+      "turkey_specific": "Lokal satis ofisi var, TR veri seti OSB/TOBB verilerine dayali olabilir, KDV dahil fiyatlama"
+    },
+    "euromonitor": {
+      "company": "Euromonitor International",
+      "headquarters": "Birlesik Kralik",
+      "turkey_presence": "Istanbul ofisi var, yerel analist ekibi",
+      "data_coverage": {
+        "countries": "210+",
+        "industries": "50+ tuketim mallari endustrisi",
+        "historical_data": "15-20 yil",
+        "forecast": "5 yil",
+        "analysts": "1000+ (100 ulkede)",
+        "turkey_reports": "Perakende, tuketici yasamlari, yasam tarzi, megatrendler"
+      },
+      "pricing_model": {
+        "type": "Kurumsal lisans (Passport platformu)",
+        "passport_subscription": "15.000 - 250.000 GBP/yil (lisans basina)",
+        "authorized_users": "Lisans basina max 10 yetkili kullanici",
+        "individual_reports": "USD 1.195 - 1.475 (ornegin: Consumer Lifestyle Turkey)",
+        "api_access": "Passport aboneleri icin API mevcut",
+        "academic_discount": "Universiteler icin ozel fiyat",
+        "contract_term": "12 aylik, otomatik yenileme"
+      },
+      "strengths": [
+        "Derin pazar analizi ve tahmin",
+        "Standartlastirilmis metodoloji (karsilastiribilirlik)",
+        "Gucel analyst destekli insight",
+        "API + BI entegrasyonlari",
+        "Megatrend/innovasyon takibi"
+      ],
+      "weaknesses": [
+        "Cok yuksek giris maliyeti (SME icin erisilemez)",
+        "Firma bazli veri degil, pazar/sektor bazli",
+        "Bireysel firma arama/export odakli degil",
+        "Turkiye icin firma detay veri yok"
+      ],
+      "turkey_specific": "Istanbul ofisi, yerel analistler, TR raporlari (Perakende, Tuketici Tipleri, Yasam Tarzi) satista"
+    },
+    "huginn_positioning": {
+      "differentiation": [
+        "Turkiye odakli OSB/TOBB/ASO veri kaynagi (9.000+ firma, %100 NACE)",
+        "Gercek zamanli web kazima + VKN/iletisim zenginlestirme",
+        "API-first mimari (Telegram bot entegre)",
+        "Saydam, API-key bazli kota fiyatlandirmasi",
+        "KVKK uyumlu maskeleme (tel/email mask, unvan/VKN acik)",
+        "Job Intelligence (is ilani sinyalleri) - unique ozellik",
+        "Smart Matching (NACE komsuluk + konum + kalite skoru)"
+      ],
+      "price_advantage": {
+        "vs_kompass": "Starter tier 14 EUR/ay vs Kompass KSales 59 EUR/ay (600+ firma vs 200 limiti)",
+        "vs_euromonitor": "Professional 55 EUR/ay vs Passport 15.000+ GBP/yil (firma veri vs pazar raporu)",
+        "value_prop": "Turkiye pazarina odakli, firma bazli actionable veri, uygun fiyat"
+      },
+      "target_gap": "Kompass: Global, CRM-odakli, buyuk kurumsal. Euromonitor: Pazar analizi, stratejik, cok buyuk kurumsal. Huginn: Turkiye firma veri, API/Telegram-odakli, KOBI/ajans/baslangic erisilebilir."
+    }
+  },
+  "implementation_notes": {
+    "database_changes": [
+      "api_keys tablosuna: tier, daily_quota, monthly_quota, export_quota, telegram_alert_quota kolonlari",
+      "usage_logs tablosu: api_key, endpoint, timestamp, response_status, bytes_transferred",
+      "subscription_plans tablosu: tier tanimlari, fiyatlar, ozellikler (yonetim icin)"
+    ],
+    "code_changes": [
+      "web_app.py: quota_check middleware (gunluk/aylik sayac, Redis-backed)",
+      "web_app.py: tier-based rate_limit decorator",
+      "src/company_master/telegram/bot_service.py: abonelik komutlari (/plan, /upgrade, /usage)",
+      "src/company_master/api/quota.py: yeni modul"
+    ],
+    "monitoring": [
+      "Gunluk/aylik kota kullanimi dashboard panel",
+      "Asiri kullanim uyarisi (Telegram + email)",
+      "Churn risk skoru (kullanim dusmesi)"
+    ]
+  },
+  "recommendations": [
+    "Ilk olarak Free + Starter tierlari lansman et (Professional/Enterprise talep gelince ac)",
+    "Pilot programini Y19 (Smart Matching) ve Job Intelligence (P7) hazir oldugunda baslat",
+    "Fiyatlandirma TL bazli (kur korumali), EUR referans olarak",
+    "Yillik on odemede %20 indirim",
+    "API key rotasyonu ve coklu key destegi (ekip icin) Professional+ da",
+    "Kompass/Euromonitor karsilastirma sayfasi (landing page) hazirla"
+  ]
+}

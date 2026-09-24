@@ -1,0 +1,13 @@
+﻿* text=auto eol=lf
+*.py text encoding=utf-8
+*.md text encoding=utf-8
+*.json text encoding=utf-8
+*.yaml text encoding=utf-8
+*.yml text encoding=utf-8
+*.sql text encoding=utf-8
+*.txt text encoding=utf-8
+*.sql.gz binary
+*.gz binary
+*.png binary
+*.jpg binary
+*.db binary

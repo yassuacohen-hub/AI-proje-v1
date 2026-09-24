@@ -1,0 +1,16 @@
+# API + dashboard (guncel mimari)
+fastapi>=0.110.0
+uvicorn[standard]>=0.29.0
+SQLAlchemy>=2.0.30
+psycopg[binary]>=3.2.0
+python-dotenv>=1.0.0
+
+# ETL/yardimci scriptler (scripts/)
+requests>=2.28.0
+beautifulsoup4>=4.11.0
+rapidfuzz>=3.0.0
+
+# Legacy: eski Streamlit arayuzu + Telegram botu (compose profili: legacy)
+streamlit>=1.30.0
+python-telegram-bot>=20.0
+

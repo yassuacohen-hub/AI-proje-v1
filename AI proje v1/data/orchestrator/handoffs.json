@@ -1,0 +1,140 @@
+{
+  "K2": {
+    "tamamlandi": "Delta-only board tamamlandi",
+    "sonraki_adim": "K3 uygula",
+    "dikkat_edilmesi": "UTF-8 olmali",
+    "tarih": "2026-09-03T08:59:39"
+  },
+  "P0-2": {
+    "tamamlandi": "Ingest + VKN + quality recalc + KPI tamamlandi",
+    "sonraki_adim": "",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-03T14:18:36"
+  },
+  "P0-1": {
+    "tamamlandi": "OSTIM detay scrape tamamlandi (5485 firma)",
+    "sonraki_adim": "",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-03T14:18:36"
+  },
+  "P1-3": {
+    "tamamlandi": "ASO ingest tamamlandi (785 kayit)",
+    "sonraki_adim": "Kalite skoru 27.72 -> 30.36",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T15:16:53"
+  },
+  "P1-4": {
+    "tamamlandi": "Multi-OSB merged 5665 kayit DB'ye islendi (9007 toplam)",
+    "sonraki_adim": "Sira: NACE eksik 1266 firma (P1-5) ve kalite recalc (P0-3)",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T18:00:25"
+  },
+  "P1-5": {
+    "tamamlandi": "NACE %100 (9007/9007) - 634 yeni doldurma",
+    "sonraki_adim": "Kalite skoru recalc (P0-3) ve entity resolution (P2-4) kaldi",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T21:38:08"
+  },
+  "P1-6": {
+    "tamamlandi": "Telegram bot tamamlandi",
+    "sonraki_adim": "Canli durum raporu aktif",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T11:37:43"
+  },
+  "P2-1": {
+    "tamamlandi": "MERSIS API takibi devam ediyor",
+    "sonraki_adim": "API entegrasyonu bekliyor",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T10:54:48"
+  },
+  "P2-2": {
+    "tamamlandi": "Streamlit dashboard tamamlandi",
+    "sonraki_adim": "Gorsel arayuz hazir",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T10:54:48"
+  },
+  "P2-3": {
+    "tamamlandi": "Zamanli scrape dokumani + sablonlar hazir",
+    "sonraki_adim": "refresh_all_scrapers.py ve .service/.timer/.bat dosyalari eklenmeli",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T21:38:08"
+  },
+  "P2-4": {
+    "tamamlandi": "Threshold 0.85 onaylandi (benchmark ile)",
+    "sonraki_adim": "Yeni source_record gelistiginde run_entity_resolution calistir",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T21:38:08"
+  },
+  "P2-5": {
+    "tamamlandi": "Oto atama dogrulandi",
+    "sonraki_adim": "Yeni plan gorevlerinde oto_atama.py --calistir kullanilabilir",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T16:26:51"
+  },
+  "P0-3": {
+    "tamamlandi": "Kalite skoru 56.54/100 — hedef 50+ basarili",
+    "sonraki_adim": "VKN %0.4 tek eksik alan; MERSIS API (P2-1) hedefi",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T22:54:31"
+  },
+  "H001": {
+    "tamamlandi": "ASO ingest tamamlandi ve script uretildi",
+    "sonraki_adim": "DB dogrulamasi: SELECT COUNT(*) FROM companies WHERE is_osb_member",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T16:26:51"
+  },
+  "H002": {
+    "tamamlandi": "ETL mimari review tamamlandi",
+    "sonraki_adim": "Bulgulari 01_etl_mimarisi.md guncellemesinde kullan",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T16:26:51"
+  },
+  "H003": {
+    "tamamlandi": "OSTIM scraper code review tamamlandi",
+    "sonraki_adim": "Patch uygulama karari insan onayina bagli",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T16:26:51"
+  },
+  "H004": {
+    "tamamlandi": "systemd servis dosyasi + dokumantasyon uretildi",
+    "sonraki_adim": "Linux sunucuda systemctl enable --now telegram-bot ile canli test",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T16:26:51"
+  },
+  "P1-7": {
+    "tamamlandi": "VKN web pilotu: 0/30 (dusuk verim, beklenen)",
+    "sonraki_adim": "MERSIS API basvurusu (P2-1) one cikar; web kazimi ikincil kaynak",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T21:38:08"
+  },
+  "P1-1": {
+    "tamamlandi": "Ivedik scraper implementasyonu tamam (kod hazir)",
+    "sonraki_adim": "VPN ile ivedik.org.tr'ye erisip test et; selector'lari siteye gore ayarla",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T21:55:08"
+  },
+  "P1-2": {
+    "tamamlandi": "Başkent scraper implementasyonu tamam (kod hazir)",
+    "sonraki_adim": "VPN ile baskentosb.org.tr'ye erisip test et; selector'lari siteye gore ayarla",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-06T21:55:08"
+  },
+  "P4-5": {
+    "tamamlandi": "Duplicate temizligi tamam; veri tekillestirildi, audit CSV logs/'da",
+    "sonraki_adim": "Sira: Y9 API testleri, P4-6 backup otomasyonu, root hijyen",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-08T09:26:22"
+  },
+  "P4-1": {
+    "tamamlandi": "Kalite skoru 27.5 -> ~64 tamamlandi",
+    "sonraki_adim": "VKN zenginlestirme (Y10/Y11) sonrasi P5 agirlik guncellemesi",
+    "dikkat_edilmesi": "",
+    "tarih": "2026-09-08T09:26:22"
+  },
+  "P4-4": {
+    "tamamlandi": "Dashboard performans izleme ve slow query optimization tamamlandi. 3 yeni index uygulandi (idx_companies_search_text_trgm, idx_source_records_covering, idx_companies_source_record_score, idx_companies_nace), ANALYZE calistirildi, src/company_master/dashboard/perf_monitor.py modulu olusturuldu, scripts/dashboard_perf_monitor.py guncellendi.",
+    "sonraki_adim": "web_app.py BUG-1 (export f-string) ve BUG-2 (cache_get eksikligi) duzeltmeleri gerekiyor. app.py Streamlit dashboardu DashboardPerfMonitor modulunu kullanmalidir.",
+    "dikkat_edilmesi": "ROUND-TRIP latency Supabase (~200ms/sorgu) DB execution time'dan daha yuksek. Caching ve sorgu sayisini azaltma en etkili optimizasyon. ILIKE multi-column OR aramasi search_text GIN trigram index ile 99.5% iyilestirildi.",
+    "tarih": "2026-09-09T11:32:51"
+  }
+}

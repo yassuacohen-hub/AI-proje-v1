@@ -1,0 +1,19 @@
+{
+  "ivedik_total": 3354,
+  "baskent_total": 1446,
+  "ivedik_exact": 2684,
+  "baskent_exact": 120,
+  "ivedik_fuzzy": 670,
+  "baskent_fuzzy": 777,
+  "ivedik_skipped_no_url": 0,
+  "baskent_skipped_no_url": 288,
+  "ivedik_skipped_has_vkn": 0,
+  "baskent_skipped_has_vkn": 0,
+  "ivedik_vkn_found": 0,
+  "baskent_vkn_found": 0,
+  "total_vkn_found": 0,
+  "errors": [],
+  "matched_companies": 4251,
+  "vkn_found": 0,
+  "note": "ivedikosb.org.tr detay sayfalarina erisim saglanamadi (baglanti kesildi). Baskent firmalari tarandi ancak VKN bulunamadi"
+}
