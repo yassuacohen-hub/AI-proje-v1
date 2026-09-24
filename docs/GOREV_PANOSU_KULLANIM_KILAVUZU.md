@@ -210,9 +210,57 @@ python -m src.company_master.orchestrator.cli sync
 
 ---
 
+## 11. Klon Sonrası İlk Beş Komut (taşınma hazırlığı, TUR-B2 2026-09-24)
+
+Sunucu değişince ya da yeni makinede sıfırdan başlarken **sırayla** bu beş komut koşulur.
+Amaç: "depo indi ama ajan neyi okuyacağını bilmiyor" durumunu ortadan kaldırmak.
+Komutlar Windows `cmd.exe` içindir (D-86: her Python çağrısında `PYTHONIOENCODING=utf-8`).
+
+| # | Ne | Komut |
+|---|----|-------|
+| 1 | Depoyu klonla ve dala geç | `git clone <repo-url> "Huginn Data Insights" && cd "Huginn Data Insights" && git checkout chore/monorepo-merge` |
+| 2 | Sanal ortam + bağımlılıklar | `python -m venv .venv && .venv\Scripts\activate && pip install -r requirements-app.txt -r requirements-dev.txt` |
+| 3 | Sağlık kapısı (D-198) | `set PYTHONIOENCODING=utf-8 && python scripts\gorev_kutusu.py simulasyon --kuru` |
+| 4 | Sıradaki işi gör | `set PYTHONIOENCODING=utf-8 && python scripts\gorev_kutusu.py bak --ajan <ajan_adi>` |
+| 5 | Kuralları oku (D-168) | `type AGENTS.md` — oturum başında zorunlu; hub-önce okuma için [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]] |
+
+**3. adımın çıkış kodu kararın kendisidir** (bkz. §10.3): `0` temiz, `1` uyarı — tur başlar,
+`2` hata — tur **başlamaz**, önce bulgu kapatılır. Klon sonrası `2` görülürse sorun taşınmada
+değil panodadır; `git log` ile son commit'e bakılır.
+
+`.env` klonla gelmez ve gelmemelidir (Adım 2 güvenlik kapısı). 2. adımdan sonra:
+`copy .env.example .env` ardından anahtarlar kasadan elle doldurulur.
+
+### 11.1 Docker ile ayağa kaldırma
+
+Taşınma Docker ile yapılacak. Servisler [[docker-compose]] içinde tanımlı; profilsiz servisler
+varsayılan olarak kalkar, profilli olanlar açıkça istenir.
+
+| Amaç | Komut | Adres |
+|------|-------|-------|
+| Önce `.env` | `copy .env.example .env` + anahtarları doldur | — |
+| API (FastAPI/uvicorn) | `docker compose up -d --build api` | http://localhost:8000 |
+| Streamlit arayüzü | `docker compose up -d --build streamlit` | http://localhost:8501 |
+| Yerel PostgreSQL (dev/test) | `docker compose --profile localdb up -d db` | `localhost:5433` → kapsayıcıda 5432 |
+| Tek seferlik sağlık işi | `docker compose --profile jobs run --rm healthcheck` | stdout |
+| Günlükler / durdurma | `docker compose logs -f` · `docker compose down` | — |
+
+Yerel PG kullanılacaksa `DATABASE_URL` **5433**'e çevrilir; aksi halde `.env`'deki Supabase
+bağlantısı geçerlidir. Docker yolu tercih edilse bile **3. adımdaki `simulasyon` kapısı atlanmaz** —
+kapsayıcı ayakta olması panonun sağlıklı olduğu anlamına gelmez.
+
+`Makefile` yardımcı kısayollar sunar (`make install`, `make test`, `make docker-up`) ancak
+`make clean` ve bazı hedefler Unix araçları (`find`, `rm`) varsayar ve `docker-compose` (tireli,
+eski) sözdizimi kullanır. Windows'ta yukarıdaki doğrudan komutlar esastır.
+
+---
+
 ## Ilgili Nodlar
 
 - [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]
 - [[Huginn Data Insights/AGENTS]]
 - [[scripts/gorev_kutusu]]
 - [[tests/test_gorev_kutusu_simulasyon]]
+- [[tests/test_gorev_kutusu_hafiza]]
+- [[docker-compose]]
+- [[Dockerfile]]
