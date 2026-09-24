@@ -68,3 +68,24 @@ def test_temiz_panoda_cakisma_kontrolu_sessiz(tmp_path, monkeypatch, capsys):
     gk.cmd_simulasyon(argparse.Namespace(kuru=True))
     cikti = capsys.readouterr().out
     assert "Pano<->arsiv task_id cakismasi (B-01): OK" in cikti
+
+
+def test_atlanan_kontrol_cikis_kodunu_etkiler(tmp_path, monkeypatch, capsys):
+    """YA-02: SSOT diskte yoksa kontrol 5/6 ATLANDI basar ve kod 0 OLAMAZ.
+
+    Aksi halde SSOT'suz bir ortamda D-198 kapisi iki kontrol hic calismadan
+    "temiz" der. Atlanmak hata degil -> kod 2 degil, uyari mertebesinde kalir.
+    """
+    monkeypatch.setattr(tb, "STATE_DIR", tmp_path)
+    monkeypatch.setattr(tb, "TASK_BOARD", tmp_path / "task_board.json")
+    monkeypatch.setattr(gk, "_SSOT", tmp_path / "diskte-olmayan-ssot.md")
+    tb.TASK_BOARD.write_text(json.dumps([{
+        "task_id": "TEST-ATLANDI-01", "durum": "plan",
+        "brief": "plans/_brief_sablon.md", "dosyalar": ["x.py"],
+    }]), encoding="utf-8")
+
+    kod = gk.cmd_simulasyon(argparse.Namespace(kuru=True))
+    cikti = capsys.readouterr().out
+    assert "5. SSOT yuzde satiri" in cikti and "ATLANDI" in cikti
+    assert kod != 0, f"atlanan kontrol cikis kodunu ortuyor:\n{cikti}"
+    assert kod == 1, f"atlanmak hata degil, uyari olmali:\n{cikti}"

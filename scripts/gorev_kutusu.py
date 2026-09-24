@@ -479,7 +479,9 @@ def _kontrol_yaz(no: int, ad: str, seviye: str, bulgular: list[str],
 def _atlandi(no: int, ad: str, gerekce: str) -> int:
     """Uygulanamayan kontrol uydurma OK yazmaz (urun sahibi kurali)."""
     print(f"{no}. {ad}: ATLANDI: {gerekce}")
-    return 0
+    # YA-02: atlanmak hata degil (kod 2) ama sessiz de degil -- denetlenmemis
+    # ortam D-198 kapisindan temiz diye gecmesin. Kod hesabi: max(kodlar).
+    return 1
 
 
 def cmd_simulasyon(args: argparse.Namespace) -> int:
