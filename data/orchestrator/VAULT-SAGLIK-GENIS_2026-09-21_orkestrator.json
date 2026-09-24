@@ -1,0 +1,2121 @@
+{
+  "metadata": {
+    "olusturulma": "2026-09-21T10:47:40.961454+00:00",
+    "vault_root": "C:\\Huginn Data Projesi",
+    "kapsam": "workspace tam (genişletilmiş)",
+    "mode": "rapor_genis"
+  },
+  "istatistik": {
+    "toplam_dosya": 768,
+    "krik_link_sayisi": 59,
+    "ikiz_grup_sayisi": 157,
+    "ikiz_dosya_toplam": 428,
+    "orphan_sayisi": 85
+  },
+  "buyuk_nodlar_sayisi": 36,
+  "buyuk_nodlar": [
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/V10/05_versiyonlar/01_versiyon_8_baglam_dokumani.md",
+      "boyut_kb": 46.62,
+      "satir_sayisi": 1297,
+      "referans_alinma_sayisi": 5,
+      "referans_gonderme_sayisi": 6,
+      "kategori": "huginn",
+      "sozdiziim_var": true,
+      "yuzde": 0.65
+    },
+    {
+      "dosya": "Huginn Data Insights/docs/ROO_ELESTIRI_NOTLARI.md",
+      "boyut_kb": 46.02,
+      "satir_sayisi": 344,
+      "referans_alinma_sayisi": 3,
+      "referans_gonderme_sayisi": 1,
+      "kategori": "docs",
+      "sozdiziim_var": true,
+      "yuzde": 0.39
+    },
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md",
+      "boyut_kb": 42.84,
+      "satir_sayisi": 964,
+      "referans_alinma_sayisi": 16,
+      "referans_gonderme_sayisi": 6,
+      "kategori": "huginn",
+      "sozdiziim_var": true,
+      "yuzde": 2.08
+    },
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/docs/CALISMA_GUNLUGU.md",
+      "boyut_kb": 41.87,
+      "satir_sayisi": 558,
+      "referans_alinma_sayisi": 1,
+      "referans_gonderme_sayisi": 2,
+      "kategori": "docs",
+      "sozdiziim_var": true,
+      "yuzde": 0.13
+    },
+    {
+      "dosya": "Huginn Data Insights/docs/CALISMA_GUNLUGU.md",
+      "boyut_kb": 41.28,
+      "satir_sayisi": 556,
+      "referans_alinma_sayisi": 3,
+      "referans_gonderme_sayisi": 1,
+      "kategori": "docs",
+      "sozdiziim_var": true,
+      "yuzde": 0.39
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/orchestrator/gorev_panosu.md",
+      "boyut_kb": 40.49,
+      "satir_sayisi": 354,
+      "referans_alinma_sayisi": 4,
+      "referans_gonderme_sayisi": 1,
+      "kategori": "huginn",
+      "sozdiziim_var": true,
+      "yuzde": 0.52
+    },
+    {
+      "dosya": "Huginn Data Insights/AGENTS.md",
+      "boyut_kb": 39.66,
+      "satir_sayisi": 475,
+      "referans_alinma_sayisi": 23,
+      "referans_gonderme_sayisi": 8,
+      "kategori": "huginn",
+      "sozdiziim_var": true,
+      "yuzde": 2.99
+    },
+    {
+      "dosya": "Huginn Data Insights/docs/MUNINN_STREAMLIT_PLAN_2026-09-18.md",
+      "boyut_kb": 35.91,
+      "satir_sayisi": 463,
+      "referans_alinma_sayisi": 2,
+      "referans_gonderme_sayisi": 1,
+      "kategori": "docs",
+      "sozdiziim_var": true,
+      "yuzde": 0.26
+    },
+    {
+      "dosya": "Huginn Data Insights/data/orchestrator/gorev_panosu.md",
+      "boyut_kb": 33.22,
+      "satir_sayisi": 306,
+      "referans_alinma_sayisi": 1,
+      "referans_gonderme_sayisi": 2,
+      "kategori": "orchestrator",
+      "sozdiziim_var": true,
+      "yuzde": 0.13
+    },
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/V10/04_karşılaştırmalar/01_v9_ile_karsilastirma.md",
+      "boyut_kb": 32.81,
+      "satir_sayisi": 378,
+      "referans_alinma_sayisi": 11,
+      "referans_gonderme_sayisi": 6,
+      "kategori": "huginn",
+      "sozdiziim_var": true,
+      "yuzde": 1.43
+    },
+    {
+      "dosya": "Huginn Data Insights/plans/P7-27_ai_cost_dashboard_architecture.md",
+      "boyut_kb": 30.33,
+      "satir_sayisi": 1040,
+      "referans_alinma_sayisi": 1,
+      "referans_gonderme_sayisi": 2,
+      "kategori": "plan",
+      "sozdiziim_var": true,
+      "yuzde": 0.13
+    },
+    {
+      "dosya": "Huginn Data Insights/data/orchestrator/VAULT-TARAMA-02_analiz_2026-09-20_orkestrator.md",
+      "boyut_kb": 27.32,
+      "satir_sayisi": 350,
+      "referans_alinma_sayisi": 1,
+      "referans_gonderme_sayisi": 1,
+      "kategori": "orchestrator",
+      "sozdiziim_var": true,
+      "yuzde": 0.13
+    },
+    {
+      "dosya": "Huginn Data Insights/CHANGELOG.md",
+      "boyut_kb": 26.26,
+      "satir_sayisi": 411,
+      "referans_alinma_sayisi": 9,
+      "referans_gonderme_sayisi": 0,
+      "kategori": "huginn",
+      "sozdiziim_var": false,
+      "yuzde": 1.17
+    },
+    {
+      "dosya": "Huginn Data Insights/scripts/_tavily_skill_incele.md",
+      "boyut_kb": 25.54,
+      "satir_sayisi": 539,
+      "referans_alinma_sayisi": 1,
+      "referans_gonderme_sayisi": 1,
+      "kategori": "script",
+      "sozdiziim_var": true,
+      "yuzde": 0.13
+    },
+    {
+      "dosya": "VAULT_AUTOMATION_TEMPLATE.md",
+      "boyut_kb": 24.97,
+      "satir_sayisi": 613,
+      "referans_alinma_sayisi": 1,
+      "referans_gonderme_sayisi": 8,
+      "kategori": "other",
+      "sozdiziim_var": true,
+      "yuzde": 0.13
+    },
+    {
+      "dosya": "Huginn Data Insights/docs/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md",
+      "boyut_kb": 24.14,
+      "satir_sayisi": 272,
+      "referans_alinma_sayisi": 1,
+      "referans_gonderme_sayisi": 2,
+      "kategori": "docs",
+      "sozdiziim_var": true,
+      "yuzde": 0.13
+    },
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/V10/03_mimari/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md",
+      "boyut_kb": 23.76,
+      "satir_sayisi": 268,
+      "referans_alinma_sayisi": 3,
+      "referans_gonderme_sayisi": 0,
+      "kategori": "huginn",
+      "sozdiziim_var": false,
+      "yuzde": 0.39
+    },
+    {
+      "dosya": "Huginn Data Insights/docs/UX_MENU_AGACI_WIREFRAME_2026-09-18.md",
+      "boyut_kb": 22.33,
+      "satir_sayisi": 407,
+      "referans_alinma_sayisi": 1,
+      "referans_gonderme_sayisi": 1,
+      "kategori": "docs",
+      "sozdiziim_var": true,
+      "yuzde": 0.13
+    },
+    {
+      "dosya": "Huginn Data Insights/docs/MUNINN_PLAN_UC_TUR_DEGERLENDIRME_2026-09-18.md",
+      "boyut_kb": 22.1,
+      "satir_sayisi": 221,
+      "referans_alinma_sayisi": 1,
+      "referans_gonderme_sayisi": 1,
+      "kategori": "docs",
+      "sozdiziim_var": true,
+      "yuzde": 0.13
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md",
+      "boyut_kb": 21.5,
+      "satir_sayisi": 247,
+      "referans_alinma_sayisi": 1,
+      "referans_gonderme_sayisi": 2,
+      "kategori": "huginn",
+      "sozdiziim_var": true,
+      "yuzde": 0.13
+    },
+    {
+      "dosya": "Huginn Data Insights/data/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md",
+      "boyut_kb": 21.41,
+      "satir_sayisi": 245,
+      "referans_alinma_sayisi": 2,
+      "referans_gonderme_sayisi": 1,
+      "kategori": "orchestrator",
+      "sozdiziim_var": true,
+      "yuzde": 0.26
+    },
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/V10/CHANGELOG.md",
+      "boyut_kb": 20.69,
+      "satir_sayisi": 365,
+      "referans_alinma_sayisi": 1,
+      "referans_gonderme_sayisi": 9,
+      "kategori": "huginn",
+      "sozdiziim_var": true,
+      "yuzde": 0.13
+    },
+    {
+      "dosya": "Huginn Data Insights/docs/AJAN_DETAY.md",
+      "boyut_kb": 20.55,
+      "satir_sayisi": 240,
+      "referans_alinma_sayisi": 2,
+      "referans_gonderme_sayisi": 0,
+      "kategori": "docs",
+      "sozdiziim_var": false,
+      "yuzde": 0.26
+    },
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/V10/07_referanslar/10_apify_entegrasyon_arastirmasi_20260910.md",
+      "boyut_kb": 20.28,
+      "satir_sayisi": 323,
+      "referans_alinma_sayisi": 4,
+      "referans_gonderme_sayisi": 8,
+      "kategori": "huginn",
+      "sozdiziim_var": true,
+      "yuzde": 0.52
+    },
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/V10/08-Ajanlar/07_harici_ajan_protokolu.md",
+      "boyut_kb": 17.22,
+      "satir_sayisi": 579,
+      "referans_alinma_sayisi": 6,
+      "referans_gonderme_sayisi": 11,
+      "kategori": "huginn",
+      "sozdiziim_var": true,
+      "yuzde": 0.78
+    },
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md",
+      "boyut_kb": 15.21,
+      "satir_sayisi": 718,
+      "referans_alinma_sayisi": 49,
+      "referans_gonderme_sayisi": 7,
+      "kategori": "huginn",
+      "sozdiziim_var": true,
+      "yuzde": 6.38
+    },
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/V10/05_versiyonlar/01_versiyon_6_baglam_dokumani.md",
+      "boyut_kb": 13.58,
+      "satir_sayisi": 514,
+      "referans_alinma_sayisi": 6,
+      "referans_gonderme_sayisi": 3,
+      "kategori": "huginn",
+      "sozdiziim_var": true,
+      "yuzde": 0.78
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase/skills/supabase/SKILL.md",
+      "boyut_kb": 13.26,
+      "satir_sayisi": 746,
+      "referans_alinma_sayisi": 5,
+      "referans_gonderme_sayisi": 5,
+      "kategori": "orchestrator",
+      "sozdiziim_var": true,
+      "yuzde": 0.65
+    },
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/V10/00_ana_belgeler/02_hugins_master_kaynak_dokumani.md",
+      "boyut_kb": 12.36,
+      "satir_sayisi": 888,
+      "referans_alinma_sayisi": 3,
+      "referans_gonderme_sayisi": 0,
+      "kategori": "huginn",
+      "sozdiziim_var": false,
+      "yuzde": 0.39
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase/AGENTS.md",
+      "boyut_kb": 8.75,
+      "satir_sayisi": 1136,
+      "referans_alinma_sayisi": 1,
+      "referans_gonderme_sayisi": 4,
+      "kategori": "orchestrator",
+      "sozdiziim_var": true,
+      "yuzde": 0.13
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase/CONTRIBUTING.md",
+      "boyut_kb": 6.92,
+      "satir_sayisi": 804,
+      "referans_alinma_sayisi": 1,
+      "referans_gonderme_sayisi": 2,
+      "kategori": "orchestrator",
+      "sozdiziim_var": true,
+      "yuzde": 0.13
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase/README.md",
+      "boyut_kb": 5.64,
+      "satir_sayisi": 696,
+      "referans_alinma_sayisi": 19,
+      "referans_gonderme_sayisi": 1,
+      "kategori": "orchestrator",
+      "sozdiziim_var": true,
+      "yuzde": 2.47
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/_contributing.md",
+      "boyut_kb": 5.62,
+      "satir_sayisi": 843,
+      "referans_alinma_sayisi": 0,
+      "referans_gonderme_sayisi": 2,
+      "kategori": "orchestrator",
+      "sozdiziim_var": true,
+      "yuzde": 0.0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/_contributing.md",
+      "boyut_kb": 5.62,
+      "satir_sayisi": 843,
+      "referans_alinma_sayisi": 0,
+      "referans_gonderme_sayisi": 2,
+      "kategori": "orchestrator",
+      "sozdiziim_var": true,
+      "yuzde": 0.0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/_contributing.md",
+      "boyut_kb": 5.3,
+      "satir_sayisi": 676,
+      "referans_alinma_sayisi": 0,
+      "referans_gonderme_sayisi": 2,
+      "kategori": "huginn",
+      "sozdiziim_var": true,
+      "yuzde": 0.0
+    },
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/_contributing.md",
+      "boyut_kb": 5.19,
+      "satir_sayisi": 674,
+      "referans_alinma_sayisi": 4,
+      "referans_gonderme_sayisi": 1,
+      "kategori": "orchestrator",
+      "sozdiziim_var": true,
+      "yuzde": 0.52
+    }
+  ],
+  "krik_link": [
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-ANALIZ-03_sparsity_nedenleri_raporu.md",
+      "referans_text": "[[...]]",
+      "hedef": "...",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-CANONICAL_rapor_2026-09-21.md",
+      "referans_text": "[[canonical]]",
+      "hedef": "canonical",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-CANONICAL_rapor_2026-09-21.md",
+      "referans_text": "[[Huginn Data Insights/path/to/canonical]]",
+      "hedef": "Huginn Data Insights/path/to/canonical",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-CANONICAL_rapor_2026-09-21.md",
+      "referans_text": "[[wikilink]]",
+      "hedef": "wikilink",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-CANONICAL_rapor_2026-09-21.md",
+      "referans_text": "[[...]]",
+      "hedef": "...",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-CANONICAL_rapor_2026-09-21.md",
+      "referans_text": "[markdown](link.md)",
+      "hedef": "link.md",
+      "tip": "markdown",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-FIX-01_rapor_2026-09-21.md",
+      "referans_text": "[[wikilink]]",
+      "hedef": "wikilink",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-FIX-01_rapor_2026-09-21.md",
+      "referans_text": "[markdown](link.md)",
+      "hedef": "link.md",
+      "tip": "markdown",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-FIX-02_rapor_2026-09-21.md",
+      "referans_text": "[[full/path/to/hub]]",
+      "hedef": "full/path/to/hub",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-FIX-02_rapor_2026-09-21.md",
+      "referans_text": "[[Huginn Data Insights/path/to/node]]",
+      "hedef": "Huginn Data Insights/path/to/node",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-HUB-EXPAND_rapor_2026-09-21.md",
+      "referans_text": "[[Full Path Olmadan Uzantı]]",
+      "hedef": "Full Path Olmadan Uzantı",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-HUB-EXPAND_rapor_2026-09-21.md",
+      "referans_text": "[[dosya]]",
+      "hedef": "dosya",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-HUB-EXPAND_rapor_2026-09-21.md",
+      "referans_text": "[[Huginn Data Insights/data/orchestrator/rapor_2026-09-21]]",
+      "hedef": "Huginn Data Insights/data/orchestrator/rapor_2026-09-21",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-INDEX-BUILD_rapor_2026-09-21.md",
+      "referans_text": "[[Huginn Data Insights/path/to/file]]",
+      "hedef": "Huginn Data Insights/path/to/file",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-REFACTOR-01_rapor_2026-09-21.md",
+      "referans_text": "[[indexed-in-VAULT]]",
+      "hedef": "indexed-in-VAULT",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-REFACTOR-01_rapor_2026-09-21.md",
+      "referans_text": "[[VAULT_HARITA|Merkez Harita]]",
+      "hedef": "VAULT_HARITA",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-REFACTOR-01_rapor_2026-09-21.md",
+      "referans_text": "[[OPERASYON_KILAVUZU|Operasyon Talimatı]]",
+      "hedef": "OPERASYON_KILAVUZU",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-REFACTOR-01_rapor_2026-09-21.md",
+      "referans_text": "[[indexed-in-VAULT]]",
+      "hedef": "indexed-in-VAULT",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-REFACTOR-01_rapor_2026-09-21.md",
+      "referans_text": "[[VAULT_HARITA|VAULT harita]]",
+      "hedef": "VAULT_HARITA",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-SPRINT-OZET_2026-09-21.md",
+      "referans_text": "[[wikilink]]",
+      "hedef": "wikilink",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-SPRINT-OZET_2026-09-21.md",
+      "referans_text": "[markdown](link.md)",
+      "hedef": "link.md",
+      "tip": "markdown",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/GRAPH-SPRINT-OZET_2026-09-21.md",
+      "referans_text": "[](link.md)",
+      "hedef": "link.md",
+      "tip": "markdown",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/VAULT-XREF-DUBLO-RAPOR-FINAL_2026-09-21_orkestrator.md",
+      "referans_text": "[[file#section]]",
+      "hedef": "file#section",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/VAULT-XREF-DUBLO-RAPOR-FINAL_2026-09-21_orkestrator.md",
+      "referans_text": "[[data/orchestrator/...]]",
+      "hedef": "data/orchestrator/...",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/VAULT-XREF-DUBLO-RAPOR-FINAL_2026-09-21_orkestrator.md",
+      "referans_text": "[[data/orchestrator/decision_log]]",
+      "hedef": "data/orchestrator/decision_log",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/VAULT-XREF-DUBLO-RAPOR-FINAL_2026-09-21_orkestrator.md",
+      "referans_text": "[[K1]]",
+      "hedef": "K1",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/VAULT-XREF-DUBLO-RAPOR-FINAL_2026-09-21_orkestrator.md",
+      "referans_text": "[[K2]]",
+      "hedef": "K2",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/VAULT-XREF-DUBLO-RAPOR-FINAL_2026-09-21_orkestrator.md",
+      "referans_text": "[[data/orchestrator/x]]",
+      "hedef": "data/orchestrator/x",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/VAULT-XREF-DUBLO-RAPOR-FINAL_2026-09-21_orkestrator.md",
+      "referans_text": "[[dosya#Başlık]]",
+      "hedef": "dosya#Başlık",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/AI proje v1/V10/06_arsiv/kilo_sitemap_taslaklari_2026_09_14/14_po_panel_haritasi.md",
+      "referans_text": "[[12_kalite_metrikleri]]",
+      "hedef": "12_kalite_metrikleri",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/AI proje v1/V10/06_arsiv/kilo_sitemap_taslaklari_2026_09_14/14_po_panel_haritasi.md",
+      "referans_text": "[[product_owner_kararlari]]",
+      "hedef": "product_owner_kararlari",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/AI proje v1/V10/06_arsiv/kilo_sitemap_taslaklari_2026_09_14/14_po_panel_haritasi.md",
+      "referans_text": "[[product_owner_kararlari]]",
+      "hedef": "product_owner_kararlari",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/AI proje v1/V10/06_arsiv/kilo_sitemap_taslaklari_2026_09_14/14_po_panel_haritasi.md",
+      "referans_text": "[[12_kalite_metrikleri]]",
+      "hedef": "12_kalite_metrikleri",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/AI proje v1/V10/13_po_karar_analizi.md",
+      "referans_text": "[[12_kalite_metrikleri]]",
+      "hedef": "12_kalite_metrikleri",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/AI proje v1/V10/wiki/admin_panel_kilavuz.md",
+      "referans_text": "[[DASH-UX-01]]",
+      "hedef": "DASH-UX-01",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/data/orchestrator/VAULT-BIRLESTIME-PLAN-01_strateji_2026-09-20_orkestrator.md",
+      "referans_text": "[[...]]",
+      "hedef": "...",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/data/skills/supabase/AGENTS.md",
+      "referans_text": "[references/rls-patterns.md](references/rls-patterns.md)",
+      "hedef": "references/rls-patterns.md",
+      "tip": "markdown",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/data/skills/supabase/AGENTS.md",
+      "referans_text": "[references/optimization.md](references/optimization.md)",
+      "hedef": "references/optimization.md",
+      "tip": "markdown",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/data_worktree/orchestrator/ALTYAPI-DOCS-MIGRATE-01_rapor_2026-09-20_orkestrator.md",
+      "referans_text": "[[K1]]",
+      "hedef": "K1",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/data_worktree/orchestrator/ALTYAPI-DOCS-MIGRATE-01_rapor_2026-09-20_orkestrator.md",
+      "referans_text": "[[K2]]",
+      "hedef": "K2",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/data_worktree/orchestrator/DOC-VAULT-REORG-01_rapor_2026-09-20_orkestrator.md",
+      "referans_text": "[[_home]]",
+      "hedef": "_home",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/data_worktree/orchestrator/DOC-VAULT-REORG-01_rapor_2026-09-20_orkestrator.md",
+      "referans_text": "[[AI proje v1/V10/_home]]",
+      "hedef": "AI proje v1/V10/_home",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/data_worktree/orchestrator/DOC-VAULT-REORG-01_rapor_2026-09-20_orkestrator.md",
+      "referans_text": "[[AI proje v1/V10/_changelog]]",
+      "hedef": "AI proje v1/V10/_changelog",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/data_worktree/orchestrator/DOC-VAULT-REORG-01_rapor_2026-09-20_orkestrator.md",
+      "referans_text": "[[AI proje v1/V10/13_sozluk/_lexicon]]",
+      "hedef": "AI proje v1/V10/13_sozluk/_lexicon",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/data_worktree/orchestrator/DOC-VAULT-REORG-01_rapor_2026-09-20_orkestrator.md",
+      "referans_text": "[[AI proje v1/V10/14_yardim_ve_ogrenme/_usage_guide]]",
+      "hedef": "AI proje v1/V10/14_yardim_ve_ogrenme/_usage_guide",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/data_worktree/orchestrator/VAULT-BIRLESTIME-PLAN-01_strateji_2026-09-20_orkestrator.md",
+      "referans_text": "[[...]]",
+      "hedef": "...",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/docs/OSINT_SCRAPER_MOTORU.md",
+      "referans_text": "[[task-id]]",
+      "hedef": "task-id",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/docs/OSINT_SCRAPER_MOTORU.md",
+      "referans_text": "[[agent-id]]",
+      "hedef": "agent-id",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "Huginn Data Insights/plans/P7-27_ai_cost_dashboard_architecture.md",
+      "referans_text": "[[{\"secondary_y\": True}]]",
+      "hedef": "{\"secondary_y\": True}",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "plans/VAULT-XREF-DUBLO-PLAN_2026-09-21.md",
+      "referans_text": "[[wikilink]]",
+      "hedef": "wikilink",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    }
+  ],
+  "ikiz_grup": {
+    "git-hijyen-01_rapor_2026-09-17_kilo.md": [
+      "data/orchestrator/GIT-HIJYEN-01_rapor_2026-09-17_kilo.md",
+      "Huginn Data Insights/data/orchestrator/GIT-HIJYEN-01_rapor_2026-09-17_kilo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/GIT-HIJYEN-01_rapor_2026-09-17_kilo.md"
+    ],
+    ".instructions.md": [
+      "Huginn Data Insights/.instructions.md",
+      "Huginn Data Insights/AI proje v1/.instructions.md"
+    ],
+    "agent_sync.md": [
+      "Huginn Data Insights/AGENT_SYNC.md",
+      "Huginn Data Insights/AI proje v1/AGENT_SYNC.md",
+      "Huginn Data Insights/data/orchestrator/AGENT_SYNC.md",
+      "Huginn Data Insights/data_worktree/orchestrator/AGENT_SYNC.md"
+    ],
+    "agents.md": [
+      "Huginn Data Insights/AGENTS.md",
+      "Huginn Data Insights/AI proje v1/AGENTS.md",
+      "Huginn Data Insights/data/skills/supabase/AGENTS.md"
+    ],
+    "ana_kurallar.md": [
+      "Huginn Data Insights/AI proje v1/ANA_KURALLAR.md",
+      "Huginn Data Insights/ANA_KURALLAR.md"
+    ],
+    "changelog.md": [
+      "Huginn Data Insights/AI proje v1/CHANGELOG.md",
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/CHANGELOG.md",
+      "Huginn Data Insights/AI proje v1/V10/CHANGELOG.md",
+      "Huginn Data Insights/CHANGELOG.md",
+      "Huginn Data Insights/data/skills/supabase/CHANGELOG.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase/CHANGELOG.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/CHANGELOG.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/CHANGELOG.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/CHANGELOG.md"
+    ],
+    "claude.md": [
+      "Huginn Data Insights/AI proje v1/CLAUDE.md",
+      "Huginn Data Insights/CLAUDE.md",
+      "Huginn Data Insights/data/skills/supabase/CLAUDE.md"
+    ],
+    "kpi_raporu.md": [
+      "Huginn Data Insights/AI proje v1/data/kpi_raporu.md",
+      "Huginn Data Insights/data/kpi_raporu.md",
+      "Huginn Data Insights/data_worktree/kpi_raporu.md"
+    ],
+    "merger_raporu.md": [
+      "Huginn Data Insights/AI proje v1/data/merged/merger_raporu.md",
+      "Huginn Data Insights/data/merged/merger_raporu.md",
+      "Huginn Data Insights/data_worktree/merged/merger_raporu.md"
+    ],
+    "readme.md": [
+      "Huginn Data Insights/AI proje v1/data/nace/README.md",
+      "Huginn Data Insights/AI proje v1/src/company_master/intelligence/README.md",
+      "Huginn Data Insights/AI proje v1/src/company_master/README.md",
+      "Huginn Data Insights/AI proje v1/src/data_quality_toolkit/README.md",
+      "Huginn Data Insights/AI proje v1/V10/06_arsiv/README.md",
+      "Huginn Data Insights/AI proje v1/V10/08-Ajanlar/README.md",
+      "Huginn Data Insights/AI proje v1/V10/09_kurallar_ve_promptlar/README.md",
+      "Huginn Data Insights/AI proje v1/workspace/external/copilot/output/scripts/README.md",
+      "Huginn Data Insights/data/nace/README.md",
+      "Huginn Data Insights/data/skills/supabase/README.md",
+      "Huginn Data Insights/data_worktree/nace/README.md",
+      "Huginn Data Insights/docs/brand/README.md",
+      "Huginn Data Insights/README.md",
+      "Huginn Data Insights/src/company_master/intelligence/README.md",
+      "Huginn Data Insights/src/company_master/orchestrator/README.md",
+      "Huginn Data Insights/src/company_master/README.md",
+      "Huginn Data Insights/src/company_master/ui/README.md",
+      "Huginn Data Insights/src/data_quality_toolkit/README.md",
+      "Huginn Data Insights/workspace/external/copilot/output/scripts/README.md"
+    ],
+    "gorev_panosu.md": [
+      "Huginn Data Insights/AI proje v1/data/orchestrator/gorev_panosu.md",
+      "Huginn Data Insights/data/orchestrator/gorev_panosu.md",
+      "Huginn Data Insights/data_worktree/orchestrator/gorev_panosu.md",
+      "Huginn Data Insights/gorev_panosu.md"
+    ],
+    "kalite_raporu.md": [
+      "Huginn Data Insights/AI proje v1/data/ostim/kalite_raporu.md",
+      "Huginn Data Insights/data/ostim/kalite_raporu.md",
+      "Huginn Data Insights/data_worktree/ostim/kalite_raporu.md"
+    ],
+    "_contributing.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/_contributing.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/_contributing.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/_contributing.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/_contributing.md"
+    ],
+    "_sections.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/_sections.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/_sections.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/_sections.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/_sections.md"
+    ],
+    "_template.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/_template.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/_template.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/_template.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/_template.md"
+    ],
+    "advanced-full-text-search.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/advanced-full-text-search.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/advanced-full-text-search.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/advanced-full-text-search.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/advanced-full-text-search.md"
+    ],
+    "advanced-jsonb-indexing.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/advanced-jsonb-indexing.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/advanced-jsonb-indexing.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/advanced-jsonb-indexing.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/advanced-jsonb-indexing.md"
+    ],
+    "conn-idle-timeout.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/conn-idle-timeout.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/conn-idle-timeout.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/conn-idle-timeout.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/conn-idle-timeout.md"
+    ],
+    "conn-limits.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/conn-limits.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/conn-limits.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/conn-limits.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/conn-limits.md"
+    ],
+    "conn-pooling.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/conn-pooling.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/conn-pooling.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/conn-pooling.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/conn-pooling.md"
+    ],
+    "conn-prepared-statements.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/conn-prepared-statements.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/conn-prepared-statements.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/conn-prepared-statements.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/conn-prepared-statements.md"
+    ],
+    "data-batch-inserts.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/data-batch-inserts.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/data-batch-inserts.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/data-batch-inserts.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/data-batch-inserts.md"
+    ],
+    "data-n-plus-one.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/data-n-plus-one.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/data-n-plus-one.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/data-n-plus-one.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/data-n-plus-one.md"
+    ],
+    "data-pagination.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/data-pagination.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/data-pagination.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/data-pagination.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/data-pagination.md"
+    ],
+    "data-upsert.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/data-upsert.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/data-upsert.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/data-upsert.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/data-upsert.md"
+    ],
+    "lock-advisory.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/lock-advisory.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/lock-advisory.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/lock-advisory.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/lock-advisory.md"
+    ],
+    "lock-deadlock-prevention.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/lock-deadlock-prevention.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/lock-deadlock-prevention.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/lock-deadlock-prevention.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/lock-deadlock-prevention.md"
+    ],
+    "lock-short-transactions.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/lock-short-transactions.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/lock-short-transactions.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/lock-short-transactions.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/lock-short-transactions.md"
+    ],
+    "lock-skip-locked.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/lock-skip-locked.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/lock-skip-locked.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/lock-skip-locked.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/lock-skip-locked.md"
+    ],
+    "monitor-explain-analyze.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/monitor-explain-analyze.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/monitor-explain-analyze.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/monitor-explain-analyze.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/monitor-explain-analyze.md"
+    ],
+    "monitor-pg-stat-statements.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/monitor-pg-stat-statements.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/monitor-pg-stat-statements.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/monitor-pg-stat-statements.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/monitor-pg-stat-statements.md"
+    ],
+    "monitor-vacuum-analyze.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/monitor-vacuum-analyze.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/monitor-vacuum-analyze.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/monitor-vacuum-analyze.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/monitor-vacuum-analyze.md"
+    ],
+    "query-composite-indexes.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/query-composite-indexes.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/query-composite-indexes.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-composite-indexes.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-composite-indexes.md"
+    ],
+    "query-covering-indexes.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/query-covering-indexes.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/query-covering-indexes.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-covering-indexes.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-covering-indexes.md"
+    ],
+    "query-index-types.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/query-index-types.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/query-index-types.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-index-types.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-index-types.md"
+    ],
+    "query-missing-indexes.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/query-missing-indexes.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/query-missing-indexes.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-missing-indexes.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-missing-indexes.md"
+    ],
+    "query-partial-indexes.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/query-partial-indexes.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/query-partial-indexes.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-partial-indexes.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-partial-indexes.md"
+    ],
+    "schema-constraints.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/schema-constraints.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/schema-constraints.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/schema-constraints.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/schema-constraints.md"
+    ],
+    "schema-data-types.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/schema-data-types.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/schema-data-types.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/schema-data-types.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/schema-data-types.md"
+    ],
+    "schema-foreign-key-indexes.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/schema-foreign-key-indexes.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/schema-foreign-key-indexes.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/schema-foreign-key-indexes.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/schema-foreign-key-indexes.md"
+    ],
+    "schema-lowercase-identifiers.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/schema-lowercase-identifiers.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/schema-lowercase-identifiers.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/schema-lowercase-identifiers.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/schema-lowercase-identifiers.md"
+    ],
+    "schema-partitioning.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/schema-partitioning.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/schema-partitioning.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/schema-partitioning.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/schema-partitioning.md"
+    ],
+    "schema-primary-keys.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/schema-primary-keys.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/schema-primary-keys.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/schema-primary-keys.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/schema-primary-keys.md"
+    ],
+    "security-privileges.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/security-privileges.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/security-privileges.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/security-privileges.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/security-privileges.md"
+    ],
+    "security-rls-basics.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/security-rls-basics.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/security-rls-basics.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/security-rls-basics.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/security-rls-basics.md"
+    ],
+    "security-rls-performance.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/security-rls-performance.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/security-rls-performance.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/security-rls-performance.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/security-rls-performance.md"
+    ],
+    "skill.md": [
+      "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/SKILL.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase/SKILL.md",
+      "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/SKILL.md",
+      "Huginn Data Insights/data/skills/supabase-postgres-best-practices/SKILL.md",
+      "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/SKILL.md"
+    ],
+    "calisma_gunlugu.md": [
+      "Huginn Data Insights/AI proje v1/docs/CALISMA_GUNLUGU.md",
+      "Huginn Data Insights/docs/CALISMA_GUNLUGU.md"
+    ],
+    "osint_scraper_motoru.md": [
+      "Huginn Data Insights/AI proje v1/docs/OSINT_SCRAPER_MOTORU.md",
+      "Huginn Data Insights/AI proje v1/V10/11_osint_motoru/OSINT_Scraper_Motoru.md",
+      "Huginn Data Insights/docs/OSINT_SCRAPER_MOTORU.md"
+    ],
+    "p2-3_zamanli_scrape.md": [
+      "Huginn Data Insights/AI proje v1/docs/P2-3_zamanli_scrape.md",
+      "Huginn Data Insights/docs/P2-3_zamanli_scrape.md"
+    ],
+    "kimlik doğrulama sistemi.md": [
+      "Huginn Data Insights/AI proje v1/Kimlik Doğrulama Sistemi.md",
+      "Huginn Data Insights/Kimlik Doğrulama Sistemi.md"
+    ],
+    "kullanıcı yönetimi.md": [
+      "Huginn Data Insights/AI proje v1/Kullanıcı Yönetimi.md",
+      "Huginn Data Insights/Kullanıcı Yönetimi.md"
+    ],
+    "mimari kararlar.md": [
+      "Huginn Data Insights/AI proje v1/Mimari Kararlar.md",
+      "Huginn Data Insights/Mimari Kararlar.md"
+    ],
+    "plan_gorev_panosu.md": [
+      "Huginn Data Insights/AI proje v1/PLAN_gorev_panosu.md",
+      "Huginn Data Insights/PLAN_gorev_panosu.md"
+    ],
+    "project_roadmap.md": [
+      "Huginn Data Insights/AI proje v1/PROJECT_ROADMAP.md",
+      "Huginn Data Insights/PROJECT_ROADMAP.md"
+    ],
+    "readme_arayuz.md": [
+      "Huginn Data Insights/AI proje v1/README_ARAYUZ.md",
+      "Huginn Data Insights/README_ARAYUZ.md"
+    ],
+    "mersis_api_research.md": [
+      "Huginn Data Insights/AI proje v1/scripts/mersis_api_research.md",
+      "Huginn Data Insights/scripts/mersis_api_research.md"
+    ],
+    "multi_osb_merger_plan.md": [
+      "Huginn Data Insights/AI proje v1/scripts/multi_osb_merger_plan.md",
+      "Huginn Data Insights/scripts/multi_osb_merger_plan.md"
+    ],
+    "readme_telegram.md": [
+      "Huginn Data Insights/AI proje v1/scripts/README_TELEGRAM.md",
+      "Huginn Data Insights/scripts/README_TELEGRAM.md"
+    ],
+    "01_etl_mimarisi.md": [
+      "Huginn Data Insights/AI proje v1/V10/03_mimari/01_etl_mimarisi.md",
+      "Huginn Data Insights/AI proje v1/workspace/external/claude_code/output/docs/01_etl_mimarisi.md",
+      "Huginn Data Insights/workspace/external/claude_code/output/docs/01_etl_mimarisi.md"
+    ],
+    "huginn_v10_plan_netlestirme_2026-09-18.md": [
+      "Huginn Data Insights/AI proje v1/V10/03_mimari/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md",
+      "Huginn Data Insights/docs/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md"
+    ],
+    "brief_2026-09-06.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_2026-09-06.md",
+      "Huginn Data Insights/workspace/external/BRIEF_2026-09-06.md"
+    ],
+    "brief_y10.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_Y10.md",
+      "Huginn Data Insights/workspace/external/BRIEF_Y10.md"
+    ],
+    "brief_y14.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_Y14.md",
+      "Huginn Data Insights/workspace/external/BRIEF_Y14.md"
+    ],
+    "brief_y16_sektor_zekasi.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_Y16_sektor_zekasi.md",
+      "Huginn Data Insights/workspace/external/BRIEF_Y16_sektor_zekasi.md"
+    ],
+    "brief_y17_veri_kaynaklari.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_Y17_veri_kaynaklari.md",
+      "Huginn Data Insights/workspace/external/BRIEF_Y17_veri_kaynaklari.md"
+    ],
+    "brief_y18_abonelik_plan.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_Y18_abonelik_plan.md",
+      "Huginn Data Insights/workspace/external/BRIEF_Y18_abonelik_plan.md"
+    ],
+    "brief_y2.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_Y2.md",
+      "Huginn Data Insights/workspace/external/BRIEF_Y2.md"
+    ],
+    "brief_y21_iskur.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_Y21_iskur.md",
+      "Huginn Data Insights/workspace/external/BRIEF_Y21_iskur.md"
+    ],
+    "brief.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/claude_code/brief.md",
+      "Huginn Data Insights/AI proje v1/workspace/external/copilot/brief.md",
+      "Huginn Data Insights/AI proje v1/workspace/external/cursor_grok/brief.md",
+      "Huginn Data Insights/workspace/external/claude_code/brief.md",
+      "Huginn Data Insights/workspace/external/copilot/brief.md",
+      "Huginn Data Insights/workspace/external/cursor_grok/brief.md"
+    ],
+    "dependencies_app_review.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/claude_code/output/analysis/dependencies_app_review.md",
+      "Huginn Data Insights/workspace/external/claude_code/output/analysis/dependencies_app_review.md"
+    ],
+    "dependencies_dev_review.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/claude_code/output/analysis/dependencies_dev_review.md",
+      "Huginn Data Insights/workspace/external/claude_code/output/analysis/dependencies_dev_review.md"
+    ],
+    "tech_debt_register.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/claude_code/output/analysis/tech_debt_register.md",
+      "Huginn Data Insights/workspace/external/claude_code/output/analysis/tech_debt_register.md"
+    ],
+    "01_etl_mimarisi_review.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/claude_code/output/docs/01_etl_mimarisi_review.md",
+      "Huginn Data Insights/workspace/external/claude_code/output/docs/01_etl_mimarisi_review.md"
+    ],
+    "security_audit_report.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/claude_code/output/security/security_audit_report.md",
+      "Huginn Data Insights/workspace/external/claude_code/output/security/security_audit_report.md"
+    ],
+    "telegram_systemd_kurulum.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/copilot/output/scripts/TELEGRAM_SYSTEMD_KURULUM.md",
+      "Huginn Data Insights/workspace/external/copilot/output/scripts/TELEGRAM_SYSTEMD_KURULUM.md"
+    ],
+    "code_review.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/cursor_grok/output/code_review.md",
+      "Huginn Data Insights/workspace/external/cursor_grok/output/code_review.md"
+    ],
+    "agent_output.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/harici_ajan/AGENT_OUTPUT.md",
+      "Huginn Data Insights/workspace/external/harici_ajan/AGENT_OUTPUT.md"
+    ],
+    "entity_resolution_analysis.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/harici_ajan/output/entity_resolution_analysis.md",
+      "Huginn Data Insights/workspace/external/harici_ajan/output/entity_resolution_analysis.md"
+    ],
+    "etl_pipeline_analysis.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/harici_ajan/output/etl_pipeline_analysis.md",
+      "Huginn Data Insights/workspace/external/harici_ajan/output/etl_pipeline_analysis.md"
+    ],
+    "ingest_detail_analysis.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/harici_ajan/output/ingest_detail_analysis.md",
+      "Huginn Data Insights/workspace/external/harici_ajan/output/ingest_detail_analysis.md"
+    ],
+    "normalize_analysis.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/harici_ajan/output/normalize_analysis.md",
+      "Huginn Data Insights/workspace/external/harici_ajan/output/normalize_analysis.md"
+    ],
+    "sector_analysis.md": [
+      "Huginn Data Insights/AI proje v1/workspace/external/harici_ajan/output/sector_analysis.md",
+      "Huginn Data Insights/workspace/external/harici_ajan/output/sector_analysis.md"
+    ],
+    "admin-ayar-01_rapor_2026-09-17_kilo.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-AYAR-01_rapor_2026-09-17_kilo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-AYAR-01_rapor_2026-09-17_kilo.md"
+    ],
+    "admin-exec-01_rapor_2026-09-17_roo.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-EXEC-01_rapor_2026-09-17_roo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-EXEC-01_rapor_2026-09-17_roo.md"
+    ],
+    "admin-hata-02_bulgular_2026-09-18_orkestrator.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-HATA-02_bulgular_2026-09-18_orkestrator.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-HATA-02_bulgular_2026-09-18_orkestrator.md"
+    ],
+    "admin-hitap-01_rapor_2026-09-18_roo.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-HITAP-01_rapor_2026-09-18_roo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-HITAP-01_rapor_2026-09-18_roo.md"
+    ],
+    "admin-kok-temizlik-01_rapor_2026-09-18_roo.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-KOK-TEMIZLIK-01_rapor_2026-09-18_roo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-KOK-TEMIZLIK-01_rapor_2026-09-18_roo.md"
+    ],
+    "admin-kpi-kart-01_bulgular_2026-09-17_cline.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-KPI-KART-01_bulgular_2026-09-17_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-KPI-KART-01_bulgular_2026-09-17_cline.md"
+    ],
+    "admin-kpi-kart-01_duzeltme_2026-09-17_cline.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-KPI-KART-01_duzeltme_2026-09-17_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-KPI-KART-01_duzeltme_2026-09-17_cline.md"
+    ],
+    "admin-kpi-kart-01_rapor_2026-09-17_kilo.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-KPI-KART-01_rapor_2026-09-17_kilo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-KPI-KART-01_rapor_2026-09-17_kilo.md"
+    ],
+    "admin-login-fix-01_rapor_2026-09-18_orkestrator.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-LOGIN-FIX-01_rapor_2026-09-18_orkestrator.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-LOGIN-FIX-01_rapor_2026-09-18_orkestrator.md"
+    ],
+    "admin-nav-hazir-01_rapor_2026-09-17_roo.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-NAV-HAZIR-01_rapor_2026-09-17_roo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-NAV-HAZIR-01_rapor_2026-09-17_roo.md"
+    ],
+    "admin-nav-hazir-02_rapor_2026-09-17_roo.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-NAV-HAZIR-02_rapor_2026-09-17_roo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-NAV-HAZIR-02_rapor_2026-09-17_roo.md"
+    ],
+    "admin-refresh-fix-01_rapor_2026-09-17_roo.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-REFRESH-FIX-01_rapor_2026-09-17_roo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-REFRESH-FIX-01_rapor_2026-09-17_roo.md"
+    ],
+    "admin-roo-01_rapor_2026-09-17_roo.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-ROO-01_rapor_2026-09-17_roo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-ROO-01_rapor_2026-09-17_roo.md"
+    ],
+    "admin-roo-denetim-01_rapor_2026-09-18_roo.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-ROO-DENETIM-01_rapor_2026-09-18_roo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-ROO-DENETIM-01_rapor_2026-09-18_roo.md"
+    ],
+    "admin-search-01_rapor_2026-09-17_roo.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-SEARCH-01_rapor_2026-09-17_roo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-SEARCH-01_rapor_2026-09-17_roo.md"
+    ],
+    "admin-ux-logout-01_rapor_2026-09-18_orkestrator.md": [
+      "Huginn Data Insights/data/orchestrator/ADMIN-UX-LOGOUT-01_rapor_2026-09-18_orkestrator.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ADMIN-UX-LOGOUT-01_rapor_2026-09-18_orkestrator.md"
+    ],
+    "agn-stack-01_bulgu_2026-09-18_cline.md": [
+      "Huginn Data Insights/data/orchestrator/AGN-STACK-01_bulgu_2026-09-18_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/AGN-STACK-01_bulgu_2026-09-18_cline.md"
+    ],
+    "agn-stack-01_rapor_roo.md": [
+      "Huginn Data Insights/data/orchestrator/AGN-STACK-01_rapor_roo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/AGN-STACK-01_rapor_roo.md"
+    ],
+    "api-split-01_rapor_2026-09-17_kilo.md": [
+      "Huginn Data Insights/data/orchestrator/API-SPLIT-01_rapor_2026-09-17_kilo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/API-SPLIT-01_rapor_2026-09-17_kilo.md"
+    ],
+    "ar-01_pazar_egilim_analizi_q3_2026.md": [
+      "Huginn Data Insights/data/orchestrator/AR-01_pazar_egilim_analizi_Q3_2026.md",
+      "Huginn Data Insights/data_worktree/orchestrator/AR-01_pazar_egilim_analizi_Q3_2026.md"
+    ],
+    "ar-02_rekabet_analizi.md": [
+      "Huginn Data Insights/data/orchestrator/AR-02_rekabet_analizi.md",
+      "Huginn Data Insights/data_worktree/orchestrator/AR-02_rekabet_analizi.md"
+    ],
+    "ar-03_kullanici_persona_yol_haritasi.md": [
+      "Huginn Data Insights/data/orchestrator/AR-03_kullanici_persona_yol_haritasi.md",
+      "Huginn Data Insights/data_worktree/orchestrator/AR-03_kullanici_persona_yol_haritasi.md"
+    ],
+    "audit-enc-02_bulgular_2026-09-15_cline.md": [
+      "Huginn Data Insights/data/orchestrator/AUDIT-ENC-02_bulgular_2026-09-15_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/AUDIT-ENC-02_bulgular_2026-09-15_cline.md"
+    ],
+    "brand-kimlik-01_rapor_2026-09-16_cline.md": [
+      "Huginn Data Insights/data/orchestrator/BRAND-KIMLIK-01_rapor_2026-09-16_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/BRAND-KIMLIK-01_rapor_2026-09-16_cline.md"
+    ],
+    "bulgu-claude-cift-icerik_2026-09-16_cline.md": [
+      "Huginn Data Insights/data/orchestrator/BULGU-CLAUDE-CIFT-ICERIK_2026-09-16_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/BULGU-CLAUDE-CIFT-ICERIK_2026-09-16_cline.md"
+    ],
+    "d-60_bulgular_2026-09-18_orkestrator.md": [
+      "Huginn Data Insights/data/orchestrator/D-60_bulgular_2026-09-18_orkestrator.md",
+      "Huginn Data Insights/data_worktree/orchestrator/D-60_bulgular_2026-09-18_orkestrator.md"
+    ],
+    "git-hijyen-01_capraz_inceleme_2026-09-17_cline.md": [
+      "Huginn Data Insights/data/orchestrator/GIT-HIJYEN-01_capraz_inceleme_2026-09-17_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/GIT-HIJYEN-01_capraz_inceleme_2026-09-17_cline.md"
+    ],
+    "guard-enc-01_teslim_2026-09-16_cline.md": [
+      "Huginn Data Insights/data/orchestrator/GUARD-ENC-01_teslim_2026-09-16_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/GUARD-ENC-01_teslim_2026-09-16_cline.md"
+    ],
+    "handoff-temiz-01_rapor_2026-09-17_roo.md": [
+      "Huginn Data Insights/data/orchestrator/HANDOFF-TEMIZ-01_rapor_2026-09-17_roo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/HANDOFF-TEMIZ-01_rapor_2026-09-17_roo.md"
+    ],
+    "kok-temizlik_envanter_2026-09-17_cline.md": [
+      "Huginn Data Insights/data/orchestrator/KOK-TEMIZLIK_envanter_2026-09-17_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/KOK-TEMIZLIK_envanter_2026-09-17_cline.md"
+    ],
+    "kpi-hist-01_rapor_2026-09-17_kilo.md": [
+      "Huginn Data Insights/data/orchestrator/KPI-HIST-01_rapor_2026-09-17_kilo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/KPI-HIST-01_rapor_2026-09-17_kilo.md"
+    ],
+    "marka-revize-01-bulgu_rapor_2026-09-18_orkestrator.md": [
+      "Huginn Data Insights/data/orchestrator/MARKA-REVIZE-01-BULGU_rapor_2026-09-18_orkestrator.md",
+      "Huginn Data Insights/data_worktree/orchestrator/MARKA-REVIZE-01-BULGU_rapor_2026-09-18_orkestrator.md"
+    ],
+    "marka-revize-01_bulgular_2026-09-17_cline.md": [
+      "Huginn Data Insights/data/orchestrator/MARKA-REVIZE-01_bulgular_2026-09-17_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/MARKA-REVIZE-01_bulgular_2026-09-17_cline.md"
+    ],
+    "marka-revize-01_rapor_2026-09-17_cline.md": [
+      "Huginn Data Insights/data/orchestrator/MARKA-REVIZE-01_rapor_2026-09-17_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/MARKA-REVIZE-01_rapor_2026-09-17_cline.md"
+    ],
+    "p7-6_brif_2026-09-15_roo.md": [
+      "Huginn Data Insights/data/orchestrator/P7-6_brif_2026-09-15_roo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/P7-6_brif_2026-09-15_roo.md"
+    ],
+    "po-01_urun_vizyonu_ve_kararlar.md": [
+      "Huginn Data Insights/data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md",
+      "Huginn Data Insights/data_worktree/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md"
+    ],
+    "po-back-08_kritik_bulgular_20260915_cline.md": [
+      "Huginn Data Insights/data/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md"
+    ],
+    "repo-hijyen-01_envanter.md": [
+      "Huginn Data Insights/data/orchestrator/REPO-HIJYEN-01_envanter.md",
+      "Huginn Data Insights/data_worktree/orchestrator/REPO-HIJYEN-01_envanter.md"
+    ],
+    "rev-admin-env-01_bulgular_20260915_cline.md": [
+      "Huginn Data Insights/data/orchestrator/REV-ADMIN-ENV-01_bulgular_20260915_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/REV-ADMIN-ENV-01_bulgular_20260915_cline.md"
+    ],
+    "rev-batch-01_bulgular_2026-09-16_cline.md": [
+      "Huginn Data Insights/data/orchestrator/REV-BATCH-01_bulgular_2026-09-16_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/REV-BATCH-01_bulgular_2026-09-16_cline.md"
+    ],
+    "rev-batch-01_rapor_2026-09-16_cline.md": [
+      "Huginn Data Insights/data/orchestrator/REV-BATCH-01_rapor_2026-09-16_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/REV-BATCH-01_rapor_2026-09-16_cline.md"
+    ],
+    "rev-i18n-ses-02_bulgular_2026-09-15_cline.md": [
+      "Huginn Data Insights/data/orchestrator/REV-I18N-SES-02_bulgular_2026-09-15_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/REV-I18N-SES-02_bulgular_2026-09-15_cline.md"
+    ],
+    "rev-mvp-admin-01_bulgular_20260915_cline.md": [
+      "Huginn Data Insights/data/orchestrator/REV-MVP-ADMIN-01_bulgular_20260915_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/REV-MVP-ADMIN-01_bulgular_20260915_cline.md"
+    ],
+    "rev-mvp-kd-01_rapor_20260915_cline.md": [
+      "Huginn Data Insights/data/orchestrator/REV-MVP-KD-01_rapor_20260915_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/REV-MVP-KD-01_rapor_20260915_cline.md"
+    ],
+    "rev-nav-fix-01_bulgular_2026-09-16_cline.md": [
+      "Huginn Data Insights/data/orchestrator/REV-NAV-FIX-01_bulgular_2026-09-16_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/REV-NAV-FIX-01_bulgular_2026-09-16_cline.md"
+    ],
+    "rev-ui-chart-01_bulgular_2026-09-16_cline.md": [
+      "Huginn Data Insights/data/orchestrator/REV-UI-CHART-01_bulgular_2026-09-16_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/REV-UI-CHART-01_bulgular_2026-09-16_cline.md"
+    ],
+    "rev-ui-sidebar-02_bulgilar_2026-09-17_cline.md": [
+      "Huginn Data Insights/data/orchestrator/REV-UI-SIDEBAR-02_bulgilar_2026-09-17_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/REV-UI-SIDEBAR-02_bulgilar_2026-09-17_cline.md"
+    ],
+    "review-po-back-06_rapor_20260915_cline.md": [
+      "Huginn Data Insights/data/orchestrator/REVIEW-PO-BACK-06_rapor_20260915_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/REVIEW-PO-BACK-06_rapor_20260915_cline.md"
+    ],
+    "roo-config-01_capraz_inceleme_2026-09-17_cline.md": [
+      "Huginn Data Insights/data/orchestrator/ROO-CONFIG-01_capraz_inceleme_2026-09-17_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ROO-CONFIG-01_capraz_inceleme_2026-09-17_cline.md"
+    ],
+    "roo-config-01_rapor_2026-09-17_kilo.md": [
+      "Huginn Data Insights/data/orchestrator/ROO-CONFIG-01_rapor_2026-09-17_kilo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/ROO-CONFIG-01_rapor_2026-09-17_kilo.md"
+    ],
+    "sec-auth-01_asama_b_rapor_2026-09-17_cline.md": [
+      "Huginn Data Insights/data/orchestrator/SEC-AUTH-01_asama_b_rapor_2026-09-17_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/SEC-AUTH-01_asama_b_rapor_2026-09-17_cline.md"
+    ],
+    "sec-auth-01_bulgular_2026-09-16_cline_ara.md": [
+      "Huginn Data Insights/data/orchestrator/SEC-AUTH-01_bulgular_2026-09-16_cline_ara.md",
+      "Huginn Data Insights/data_worktree/orchestrator/SEC-AUTH-01_bulgular_2026-09-16_cline_ara.md"
+    ],
+    "sections-duzelte-2026-09-17_kilo.md": [
+      "Huginn Data Insights/data/orchestrator/SECTIONS-DUZELTE-2026-09-17_kilo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/SECTIONS-DUZELTE-2026-09-17_kilo.md"
+    ],
+    "cl-03_guvenlik_raporu.md": [
+      "Huginn Data Insights/data/orchestrator/security_audit/CL-03_guvenlik_raporu.md",
+      "Huginn Data Insights/data_worktree/orchestrator/security_audit/CL-03_guvenlik_raporu.md"
+    ],
+    "test-ci-01_rapor_2026-09-17_roo.md": [
+      "Huginn Data Insights/data/orchestrator/TEST-CI-01_rapor_2026-09-17_roo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/TEST-CI-01_rapor_2026-09-17_roo.md"
+    ],
+    "test-iso-02_bulgular_2026-09-17_cline.md": [
+      "Huginn Data Insights/data/orchestrator/TEST-ISO-02_bulgular_2026-09-17_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/TEST-ISO-02_bulgular_2026-09-17_cline.md"
+    ],
+    "test-iso-03_bulgular_2026-09-17_cline.md": [
+      "Huginn Data Insights/data/orchestrator/TEST-ISO-03_bulgular_2026-09-17_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/TEST-ISO-03_bulgular_2026-09-17_cline.md"
+    ],
+    "tg-01_rapor_2026-09-18_kilo.md": [
+      "Huginn Data Insights/data/orchestrator/TG-01_rapor_2026-09-18_kilo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/TG-01_rapor_2026-09-18_kilo.md"
+    ],
+    "tok-01_teslim_2026-09-16_cline.md": [
+      "Huginn Data Insights/data/orchestrator/TOK-01_teslim_2026-09-16_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/TOK-01_teslim_2026-09-16_cline.md"
+    ],
+    "ui-mimari-02_rapor_2026-09-17_kilo.md": [
+      "Huginn Data Insights/data/orchestrator/UI-MIMARI-02_rapor_2026-09-17_kilo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/UI-MIMARI-02_rapor_2026-09-17_kilo.md"
+    ],
+    "ui-modal-01_bulgular_20260915_cline.md": [
+      "Huginn Data Insights/data/orchestrator/UI-MODAL-01_bulgular_20260915_cline.md",
+      "Huginn Data Insights/data_worktree/orchestrator/UI-MODAL-01_bulgular_20260915_cline.md"
+    ],
+    "ux-menu-03_rapor_2026-09-18_orkestrator.md": [
+      "Huginn Data Insights/data/orchestrator/UX-MENU-03_rapor_2026-09-18_orkestrator.md",
+      "Huginn Data Insights/data_worktree/orchestrator/UX-MENU-03_rapor_2026-09-18_orkestrator.md"
+    ],
+    "v10-hijyen-01_rapor_2026-09-18_orkestrator.md": [
+      "Huginn Data Insights/data/orchestrator/V10-HIJYEN-01_rapor_2026-09-18_orkestrator.md",
+      "Huginn Data Insights/data_worktree/orchestrator/V10-HIJYEN-01_rapor_2026-09-18_orkestrator.md"
+    ],
+    "v10-hijyen-02_rapor_2026-09-18_orkestrator.md": [
+      "Huginn Data Insights/data/orchestrator/V10-HIJYEN-02_rapor_2026-09-18_orkestrator.md",
+      "Huginn Data Insights/data_worktree/orchestrator/V10-HIJYEN-02_rapor_2026-09-18_orkestrator.md"
+    ],
+    "vault-birlestime-plan-01_strateji_2026-09-20_orkestrator.md": [
+      "Huginn Data Insights/data/orchestrator/VAULT-BIRLESTIME-PLAN-01_strateji_2026-09-20_orkestrator.md",
+      "Huginn Data Insights/data_worktree/orchestrator/VAULT-BIRLESTIME-PLAN-01_strateji_2026-09-20_orkestrator.md"
+    ],
+    "vault-tarama-01_analiz_2026-09-20_orkestrator.md": [
+      "Huginn Data Insights/data/orchestrator/VAULT-TARAMA-01_analiz_2026-09-20_orkestrator.md",
+      "Huginn Data Insights/data_worktree/orchestrator/VAULT-TARAMA-01_analiz_2026-09-20_orkestrator.md"
+    ],
+    "vec-test-01_rapor_2026-09-17_kilo.md": [
+      "Huginn Data Insights/data/orchestrator/VEC-TEST-01_rapor_2026-09-17_kilo.md",
+      "Huginn Data Insights/data_worktree/orchestrator/VEC-TEST-01_rapor_2026-09-17_kilo.md"
+    ],
+    "workflow_optimization.md": [
+      "Huginn Data Insights/data/orchestrator/WORKFLOW_OPTIMIZATION.md",
+      "Huginn Data Insights/data_worktree/orchestrator/WORKFLOW_OPTIMIZATION.md"
+    ],
+    "aso_ostim_kalite_raporu.md": [
+      "Huginn Data Insights/data/quality/aso_ostim_kalite_raporu.md",
+      "Huginn Data Insights/data_worktree/quality/aso_ostim_kalite_raporu.md"
+    ],
+    "optimizer_20260912_1249.md": [
+      "Huginn Data Insights/data/router/optimizer_20260912_1249.md",
+      "Huginn Data Insights/data_worktree/router/optimizer_20260912_1249.md"
+    ],
+    "optimizer_20260912_1305.md": [
+      "Huginn Data Insights/data/router/optimizer_20260912_1305.md",
+      "Huginn Data Insights/data_worktree/router/optimizer_20260912_1305.md"
+    ],
+    "optimizer_20260912_1313.md": [
+      "Huginn Data Insights/data/router/optimizer_20260912_1313.md",
+      "Huginn Data Insights/data_worktree/router/optimizer_20260912_1313.md"
+    ],
+    "osint_index.md": [
+      "Huginn Data Insights/hubs/OSINT_INDEX.md",
+      "Huginn Data Insights/indexes/osint_index.md"
+    ],
+    "brief_dashboard-01.md": [
+      "Huginn Data Insights/workspace/external/claude_code/brief_DASHBOARD-01.md",
+      "Huginn Data Insights/workspace/external/cline/brief_DASHBOARD-01.md",
+      "Huginn Data Insights/workspace/external/copilot/brief_DASHBOARD-01.md",
+      "Huginn Data Insights/workspace/external/kilo_code/brief_DASHBOARD-01.md",
+      "Huginn Data Insights/workspace/external/roo_code/brief_DASHBOARD-01.md"
+    ]
+  },
+  "orphan": [
+    {
+      "dosya": "data/orchestrator/GRAPH-CANONICAL_rapor_2026-09-21.md",
+      "boyut": 5595,
+      "satir_sayisi": 168,
+      "degistirilme": "2026-09-21T13:38:50.417544",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "data/orchestrator/GRAPH-HUB-EXPAND_rapor_2026-09-21.md",
+      "boyut": 5851,
+      "satir_sayisi": 153,
+      "degistirilme": "2026-09-21T13:33:30.383526",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "data/orchestrator/GRAPH-INDEX-BUILD_OZET_2026-09-21.md",
+      "boyut": 5783,
+      "satir_sayisi": 161,
+      "degistirilme": "2026-09-21T13:46:33.030144",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "data/orchestrator/GRAPH-INDEX-BUILD_rapor_2026-09-21.md",
+      "boyut": 1386,
+      "satir_sayisi": 46,
+      "degistirilme": "2026-09-21T13:45:47.302636",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/cop_kutusu_2026_09_09/DENET_arsiv_2026_09_09/project_state_kopyalari/project_state_iso.md",
+      "boyut": 7728,
+      "satir_sayisi": 204,
+      "degistirilme": "2026-09-17T20:06:25.981736",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/cop_kutusu_2026_09_09/DENET_arsiv_2026_09_09/project_state_kopyalari/project_state_utf8.md",
+      "boyut": 7751,
+      "satir_sayisi": 204,
+      "degistirilme": "2026-09-17T20:06:25.981736",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/AI proje v1/V10/06_arsiv/kilo_sitemap_taslaklari_2026_09_14/17_admin_panel_uygulama.md",
+      "boyut": 4725,
+      "satir_sayisi": 128,
+      "degistirilme": "2026-09-17T20:06:26.793455",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/_tmp/crewai_arastirma_deneyi.md",
+      "boyut": 615,
+      "satir_sayisi": 23,
+      "degistirilme": "2026-09-18T21:54:54.984998",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/_contributing.md",
+      "boyut": 5758,
+      "satir_sayisi": 843,
+      "degistirilme": "2026-09-21T13:38:05.472477",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/SKILL.md",
+      "boyut": 3881,
+      "satir_sayisi": 323,
+      "degistirilme": "2026-09-21T13:38:05.552140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/_contributing.md",
+      "boyut": 5758,
+      "satir_sayisi": 843,
+      "degistirilme": "2026-09-21T13:38:05.471477",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/_sections.md",
+      "boyut": 2146,
+      "satir_sayisi": 198,
+      "degistirilme": "2026-09-21T13:38:05.473476",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/_template.md",
+      "boyut": 1459,
+      "satir_sayisi": 173,
+      "degistirilme": "2026-09-21T13:38:05.475476",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/advanced-full-text-search.md",
+      "boyut": 2092,
+      "satir_sayisi": 278,
+      "degistirilme": "2026-09-21T13:38:05.478702",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/advanced-jsonb-indexing.md",
+      "boyut": 2012,
+      "satir_sayisi": 248,
+      "degistirilme": "2026-09-21T13:38:05.481139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/conn-idle-timeout.md",
+      "boyut": 1817,
+      "satir_sayisi": 233,
+      "degistirilme": "2026-09-21T13:38:05.483140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/conn-limits.md",
+      "boyut": 1836,
+      "satir_sayisi": 223,
+      "degistirilme": "2026-09-21T13:38:05.486139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/conn-pooling.md",
+      "boyut": 1867,
+      "satir_sayisi": 208,
+      "degistirilme": "2026-09-21T13:38:05.488139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/conn-prepared-statements.md",
+      "boyut": 2071,
+      "satir_sayisi": 233,
+      "degistirilme": "2026-09-21T13:38:05.490139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/data-batch-inserts.md",
+      "boyut": 1895,
+      "satir_sayisi": 273,
+      "degistirilme": "2026-09-21T13:38:05.493139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/data-n-plus-one.md",
+      "boyut": 1957,
+      "satir_sayisi": 268,
+      "degistirilme": "2026-09-21T13:38:05.495140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/data-pagination.md",
+      "boyut": 1927,
+      "satir_sayisi": 253,
+      "degistirilme": "2026-09-21T13:38:05.498140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/data-upsert.md",
+      "boyut": 1955,
+      "satir_sayisi": 253,
+      "degistirilme": "2026-09-21T13:38:05.500140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/lock-advisory.md",
+      "boyut": 2152,
+      "satir_sayisi": 283,
+      "degistirilme": "2026-09-21T13:38:05.502139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/lock-deadlock-prevention.md",
+      "boyut": 2595,
+      "satir_sayisi": 343,
+      "degistirilme": "2026-09-21T13:38:05.504140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/lock-short-transactions.md",
+      "boyut": 1927,
+      "satir_sayisi": 253,
+      "degistirilme": "2026-09-21T13:38:05.506140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/lock-skip-locked.md",
+      "boyut": 1959,
+      "satir_sayisi": 273,
+      "degistirilme": "2026-09-21T13:38:05.509140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/monitor-explain-analyze.md",
+      "boyut": 1973,
+      "satir_sayisi": 228,
+      "degistirilme": "2026-09-21T13:38:05.511140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/monitor-pg-stat-statements.md",
+      "boyut": 2043,
+      "satir_sayisi": 278,
+      "degistirilme": "2026-09-21T13:38:05.513139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/monitor-vacuum-analyze.md",
+      "boyut": 2127,
+      "satir_sayisi": 278,
+      "degistirilme": "2026-09-21T13:38:05.515140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-composite-indexes.md",
+      "boyut": 1977,
+      "satir_sayisi": 223,
+      "degistirilme": "2026-09-21T13:38:05.519141",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-covering-indexes.md",
+      "boyut": 1773,
+      "satir_sayisi": 203,
+      "degistirilme": "2026-09-21T13:38:05.521138",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-index-types.md",
+      "boyut": 2074,
+      "satir_sayisi": 243,
+      "degistirilme": "2026-09-21T13:38:05.524139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-missing-indexes.md",
+      "boyut": 1730,
+      "satir_sayisi": 218,
+      "degistirilme": "2026-09-21T13:38:05.526139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-partial-indexes.md",
+      "boyut": 1877,
+      "satir_sayisi": 228,
+      "degistirilme": "2026-09-21T13:38:05.528139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/security-privileges.md",
+      "boyut": 2175,
+      "satir_sayisi": 273,
+      "degistirilme": "2026-09-21T13:38:05.545138",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/security-rls-basics.md",
+      "boyut": 1945,
+      "satir_sayisi": 253,
+      "degistirilme": "2026-09-21T13:38:05.547141",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/security-rls-performance.md",
+      "boyut": 2798,
+      "satir_sayisi": 318,
+      "degistirilme": "2026-09-21T13:38:05.549139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/SKILL.md",
+      "boyut": 3881,
+      "satir_sayisi": 323,
+      "degistirilme": "2026-09-21T13:38:05.552140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/router/optimizer_20260912_1249.md",
+      "boyut": 2218,
+      "satir_sayisi": 62,
+      "degistirilme": "2026-09-21T13:38:05.662238",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/router/optimizer_20260912_1305.md",
+      "boyut": 3059,
+      "satir_sayisi": 80,
+      "degistirilme": "2026-09-21T13:38:05.663244",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/router/optimizer_20260912_1313.md",
+      "boyut": 3048,
+      "satir_sayisi": 80,
+      "degistirilme": "2026-09-21T13:38:05.664246",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/_contributing.md",
+      "boyut": 5424,
+      "satir_sayisi": 676,
+      "degistirilme": "2026-09-21T13:38:05.471477",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/_sections.md",
+      "boyut": 2068,
+      "satir_sayisi": 159,
+      "degistirilme": "2026-09-21T13:38:05.475476",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/_template.md",
+      "boyut": 1391,
+      "satir_sayisi": 139,
+      "degistirilme": "2026-09-21T13:38:05.477702",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/advanced-full-text-search.md",
+      "boyut": 1982,
+      "satir_sayisi": 223,
+      "degistirilme": "2026-09-21T13:38:05.479702",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/advanced-jsonb-indexing.md",
+      "boyut": 1914,
+      "satir_sayisi": 199,
+      "degistirilme": "2026-09-21T13:38:05.482140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/conn-idle-timeout.md",
+      "boyut": 1725,
+      "satir_sayisi": 187,
+      "degistirilme": "2026-09-21T13:38:05.485140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/conn-limits.md",
+      "boyut": 1748,
+      "satir_sayisi": 179,
+      "degistirilme": "2026-09-21T13:38:05.487140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/conn-pooling.md",
+      "boyut": 1785,
+      "satir_sayisi": 167,
+      "degistirilme": "2026-09-21T13:38:05.489138",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/conn-prepared-statements.md",
+      "boyut": 1979,
+      "satir_sayisi": 187,
+      "degistirilme": "2026-09-21T13:38:05.492139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/data-batch-inserts.md",
+      "boyut": 1787,
+      "satir_sayisi": 219,
+      "degistirilme": "2026-09-21T13:38:05.494140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/data-n-plus-one.md",
+      "boyut": 1851,
+      "satir_sayisi": 215,
+      "degistirilme": "2026-09-21T13:38:05.497141",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/data-pagination.md",
+      "boyut": 1827,
+      "satir_sayisi": 203,
+      "degistirilme": "2026-09-21T13:38:05.499140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/data-upsert.md",
+      "boyut": 1855,
+      "satir_sayisi": 203,
+      "degistirilme": "2026-09-21T13:38:05.501140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/lock-advisory.md",
+      "boyut": 2040,
+      "satir_sayisi": 227,
+      "degistirilme": "2026-09-21T13:38:05.503139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/lock-deadlock-prevention.md",
+      "boyut": 2459,
+      "satir_sayisi": 275,
+      "degistirilme": "2026-09-21T13:38:05.505139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/lock-short-transactions.md",
+      "boyut": 1827,
+      "satir_sayisi": 203,
+      "degistirilme": "2026-09-21T13:38:05.508140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/lock-skip-locked.md",
+      "boyut": 1851,
+      "satir_sayisi": 219,
+      "degistirilme": "2026-09-21T13:38:05.510140",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/monitor-explain-analyze.md",
+      "boyut": 1883,
+      "satir_sayisi": 183,
+      "degistirilme": "2026-09-21T13:38:05.512145",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/monitor-pg-stat-statements.md",
+      "boyut": 1933,
+      "satir_sayisi": 223,
+      "degistirilme": "2026-09-21T13:38:05.514139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/monitor-vacuum-analyze.md",
+      "boyut": 2017,
+      "satir_sayisi": 223,
+      "degistirilme": "2026-09-21T13:38:05.518141",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-composite-indexes.md",
+      "boyut": 1889,
+      "satir_sayisi": 179,
+      "degistirilme": "2026-09-21T13:38:05.520141",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-covering-indexes.md",
+      "boyut": 1693,
+      "satir_sayisi": 163,
+      "degistirilme": "2026-09-21T13:38:05.523141",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-index-types.md",
+      "boyut": 1978,
+      "satir_sayisi": 195,
+      "degistirilme": "2026-09-21T13:38:05.525139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-missing-indexes.md",
+      "boyut": 1644,
+      "satir_sayisi": 175,
+      "degistirilme": "2026-09-21T13:38:05.528139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-partial-indexes.md",
+      "boyut": 1787,
+      "satir_sayisi": 183,
+      "degistirilme": "2026-09-21T13:38:05.530138",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/security-privileges.md",
+      "boyut": 2067,
+      "satir_sayisi": 219,
+      "degistirilme": "2026-09-21T13:38:05.546138",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/security-rls-basics.md",
+      "boyut": 1845,
+      "satir_sayisi": 203,
+      "degistirilme": "2026-09-21T13:38:05.548139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/security-rls-performance.md",
+      "boyut": 2672,
+      "satir_sayisi": 255,
+      "degistirilme": "2026-09-21T13:38:05.551139",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/SKILL.md",
+      "boyut": 3753,
+      "satir_sayisi": 259,
+      "degistirilme": "2026-09-21T13:38:05.554143",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/system_prompt.md",
+      "boyut": 1635,
+      "satir_sayisi": 48,
+      "degistirilme": "2026-09-17T20:06:19.628717",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/workspace/external/BRIEF_2026-09-06.md",
+      "boyut": 2208,
+      "satir_sayisi": 58,
+      "degistirilme": "2026-09-21T13:38:05.568650",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/workspace/external/cline/brief_DASHBOARD-01.md",
+      "boyut": 7257,
+      "satir_sayisi": 113,
+      "degistirilme": "2026-09-21T13:38:05.669243",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/workspace/external/copilot/brief.md",
+      "boyut": 1809,
+      "satir_sayisi": 54,
+      "degistirilme": "2026-09-21T13:38:05.575698",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/workspace/external/copilot/brief_DASHBOARD-01.md",
+      "boyut": 5370,
+      "satir_sayisi": 99,
+      "degistirilme": "2026-09-21T13:38:05.668244",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/workspace/external/copilot/output/DASHBOARD-01-copilot-mimari-oneri.md",
+      "boyut": 5425,
+      "satir_sayisi": 76,
+      "degistirilme": "2026-09-12T14:45:49.262224",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/workspace/external/cursor_grok/brief.md",
+      "boyut": 1320,
+      "satir_sayisi": 40,
+      "degistirilme": "2026-09-21T13:38:05.576694",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/workspace/external/cursor_grok/brief_DEFAULT-TEST.md",
+      "boyut": 403,
+      "satir_sayisi": 14,
+      "degistirilme": "2026-09-11T21:08:31.753522",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/workspace/external/cursor_grok/brief_LIVE-01.md",
+      "boyut": 482,
+      "satir_sayisi": 17,
+      "degistirilme": "2026-09-11T17:43:36.271322",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/workspace/external/cursor_grok/brief_RO-01.md",
+      "boyut": 544,
+      "satir_sayisi": 18,
+      "degistirilme": "2026-09-11T17:18:53.813039",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/workspace/external/cursor_grok/brief_RO-02.md",
+      "boyut": 477,
+      "satir_sayisi": 17,
+      "degistirilme": "2026-09-11T17:37:49.370423",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/workspace/external/kilo/brief_ORCH-10_TELEGRAM.md",
+      "boyut": 2622,
+      "satir_sayisi": 50,
+      "degistirilme": "2026-09-13T04:10:02.195485",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "Huginn Data Insights/workspace/external/test_agent/roundtrip_brief.md",
+      "boyut": 433,
+      "satir_sayisi": 1,
+      "degistirilme": "2026-09-19T00:20:30.442089",
+      "referans_sayisi": 0
+    },
+    {
+      "dosya": "plans/VAULT-XREF-DUBLO-PLAN_2026-09-21.md",
+      "boyut": 5890,
+      "satir_sayisi": 172,
+      "degistirilme": "2026-09-21T10:33:11.790364",
+      "referans_sayisi": 0
+    }
+  ]
+}

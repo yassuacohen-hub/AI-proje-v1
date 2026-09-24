@@ -1,0 +1,1295 @@
+{
+  "metadata": {
+    "olusturulma": "2026-09-21T09:03:54.708229+00:00",
+    "vault_root": "C:\\Huginn Data Projesi\\worktree klasoru",
+    "mode": "rapor"
+  },
+  "istatistik": {
+    "toplam_dosya": 305,
+    "krik_link_sayisi": 153,
+    "ikiz_grup_sayisi": 5,
+    "ikiz_dosya_toplam": 21,
+    "orphan_sayisi": 4
+  },
+  "krik_link": [
+    {
+      "kaynak_dosya": "CLAUDE.md",
+      "referans_text": "[[00-Home]]",
+      "hedef": "00-Home",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "CLAUDE.md",
+      "referans_text": "[[project_state]]",
+      "hedef": "project_state",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "CLAUDE.md",
+      "referans_text": "[[TODO]]",
+      "hedef": "TODO",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "CLAUDE.md",
+      "referans_text": "[[00-Home]]",
+      "hedef": "00-Home",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "CLAUDE.md",
+      "referans_text": "[[00-Home]]",
+      "hedef": "00-Home",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/WORKFLOW_OPTIMIZATION.md",
+      "referans_text": "[[15_admin_panel_sitemap]]",
+      "hedef": "15_admin_panel_sitemap",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/WORKFLOW_OPTIMIZATION.md",
+      "referans_text": "[[16_user_panel_sitemap]]",
+      "hedef": "16_user_panel_sitemap",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "data/orchestrator/WORKFLOW_OPTIMIZATION.md",
+      "referans_text": "[[14_po_panel_haritasi]]",
+      "hedef": "14_po_panel_haritasi",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "docs/OSINT_SCRAPER_MOTORU.md",
+      "referans_text": "[[task-id]]",
+      "hedef": "task-id",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "docs/OSINT_SCRAPER_MOTORU.md",
+      "referans_text": "[[agent-id]]",
+      "hedef": "agent-id",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "OPERASYON_KILAVUZU.md",
+      "referans_text": "[[klasor/dosya|alias]]",
+      "hedef": "klasor/dosya",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "OPERASYON_KILAVUZU.md",
+      "referans_text": "[[dosya]]",
+      "hedef": "dosya",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "OPERASYON_KILAVUZU.md",
+      "referans_text": "[[dosya\\|alias]]",
+      "hedef": "dosya\\",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "OPERASYON_KILAVUZU.md",
+      "referans_text": "[[00-Home]]",
+      "hedef": "00-Home",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "OPERASYON_KILAVUZU.md",
+      "referans_text": "[[00-Home]]",
+      "hedef": "00-Home",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "OPERASYON_KILAVUZU.md",
+      "referans_text": "[[00-Home]]",
+      "hedef": "00-Home",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "OPERASYON_KILAVUZU.md",
+      "referans_text": "[[data/orchestrator/task_board|pano]]",
+      "hedef": "data/orchestrator/task_board",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "OPERASYON_KILAVUZU.md",
+      "referans_text": "[[data/orchestrator/VAULT-SAGLIK-01_rapor|saglik]]",
+      "hedef": "data/orchestrator/VAULT-SAGLIK-01_rapor",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "OPERASYON_KILAVUZU.md",
+      "referans_text": "[[00-Home]]",
+      "hedef": "00-Home",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "OPERASYON_KILAVUZU.md",
+      "referans_text": "[[00-Home]]",
+      "hedef": "00-Home",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "plans/9router_analiz_raporu.md",
+      "referans_text": "[`V9 bağlam dokümanı`](AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md)",
+      "hedef": "AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md",
+      "tip": "markdown",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "plans/9router_analiz_raporu.md",
+      "referans_text": "[`07_harici_ajan_protokolu.md`](AI proje v1/V10/08-Ajanlar/07_harici_ajan_protokolu.md)",
+      "hedef": "AI proje v1/V10/08-Ajanlar/07_harici_ajan_protokolu.md",
+      "tip": "markdown",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "plans/brief_kilo_MRK03_MRK04.md",
+      "referans_text": "[[03_marka_konumlandirma_ve_kapsam]]",
+      "hedef": "03_marka_konumlandirma_ve_kapsam",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "plans/brief_kilo_MRK03_MRK04.md",
+      "referans_text": "[[14_urun_yuzeyleri_sitemap]]",
+      "hedef": "14_urun_yuzeyleri_sitemap",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "plans/brief_kilo_MRK03_MRK04.md",
+      "referans_text": "[[01_versiyon_9_baglam_dokumani]]",
+      "hedef": "01_versiyon_9_baglam_dokumani",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "plans/brief_kilo_MRK03_MRK04.md",
+      "referans_text": "[[00-Home]]",
+      "hedef": "00-Home",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "plans/brief_kilo_MRK03_MRK04.md",
+      "referans_text": "[[02_hugins_master_kaynak_dokumani]]",
+      "hedef": "02_hugins_master_kaynak_dokumani",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "plans/MRK_marka_ve_dil_paketi_plani.md",
+      "referans_text": "[[03_marka_konumlandirma_ve_kapsam]]",
+      "hedef": "03_marka_konumlandirma_ve_kapsam",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "plans/muninn_prn_vs_huginn_analiz.md",
+      "referans_text": "[[00-Home]]",
+      "hedef": "00-Home",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "plans/muninn_prn_vs_huginn_analiz.md",
+      "referans_text": "[[02_muninn_super_admin_panel_prd_ve_yol_haritasi]]",
+      "hedef": "02_muninn_super_admin_panel_prd_ve_yol_haritasi",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "plans/muninn_prn_vs_huginn_analiz.md",
+      "referans_text": "[[TODO]]",
+      "hedef": "TODO",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "plans/P7-27_ai_cost_dashboard_architecture.md",
+      "referans_text": "[[{\"secondary_y\": True}]]",
+      "hedef": "{\"secondary_y\": True}",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "src/company_master/orchestrator/README.md",
+      "referans_text": "[[AI proje v1/V10/08-Ajanlar/07_harici_ajan_protokolu]]",
+      "hedef": "AI proje v1/V10/08-Ajanlar/07_harici_ajan_protokolu",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "src/company_master/orchestrator/README.md",
+      "referans_text": "[[AI proje v1/V10/08-Ajanlar/08_harici_ajan_gorev_onerileri]]",
+      "hedef": "AI proje v1/V10/08-Ajanlar/08_harici_ajan_gorev_onerileri",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/night_shift_report|night_shift]]",
+      "hedef": "data/orchestrator/night_shift_report",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/VAULT-TARAMA-01_analiz_2026-09-20_orkestrator|vault_tarama_analiz]]",
+      "hedef": "data/orchestrator/VAULT-TARAMA-01_analiz_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[docs/raporlar/test_kapsam_olcum_2026-09-20|test_kapsam]]",
+      "hedef": "docs/raporlar/test_kapsam_olcum_2026-09-20",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/DOC-VAULT-REORG-01_rapor_2026-09-20_orkestrator|doc_vault_reorg]]",
+      "hedef": "data/orchestrator/DOC-VAULT-REORG-01_rapor_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[docs/teknik_sozluk|teknik_sozluk]]",
+      "hedef": "docs/teknik_sozluk",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[.instructions|.instructions]]",
+      "hedef": ".instructions",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[night_shift_report|night_shift_report]]",
+      "hedef": "night_shift_report",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[plan|plan]]",
+      "hedef": "plan",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ADMIN-UX-LOGOUT-01_brif_2026-09-20_uretim|ADMIN-UX-LOGOUT-01_brif_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/ADMIN-UX-LOGOUT-01_brif_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ADMIN-UX-LOGOUT-01_rapor_2026-09-19_ihsan|ADMIN-UX-LOGOUT-01_rapor_2026-09-19_ihsan]]",
+      "hedef": "data/orchestrator/ADMIN-UX-LOGOUT-01_rapor_2026-09-19_ihsan",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-BENCHMARK-02_brif_2026-09-20_duzeltme_test|ALTYAPI-BENCHMARK-02_brif_2026-09-20_duzeltme_test]]",
+      "hedef": "data/orchestrator/ALTYAPI-BENCHMARK-02_brif_2026-09-20_duzeltme_test",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-BENCHMARK-02_brif_2026-09-20_test|ALTYAPI-BENCHMARK-02_brif_2026-09-20_test]]",
+      "hedef": "data/orchestrator/ALTYAPI-BENCHMARK-02_brif_2026-09-20_test",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-BENCHMARK-02_rapor_2026-09-20_denetim|ALTYAPI-BENCHMARK-02_rapor_2026-09-20_denetim]]",
+      "hedef": "data/orchestrator/ALTYAPI-BENCHMARK-02_rapor_2026-09-20_denetim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-BILGI-TABANI-03_brif_2026-09-20_test|ALTYAPI-BILGI-TABANI-03_brif_2026-09-20_test]]",
+      "hedef": "data/orchestrator/ALTYAPI-BILGI-TABANI-03_brif_2026-09-20_test",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-BILGI-TABANI-03_rapor_2026-09-20_denetim|ALTYAPI-BILGI-TABANI-03_rapor_2026-09-20_denetim]]",
+      "hedef": "data/orchestrator/ALTYAPI-BILGI-TABANI-03_rapor_2026-09-20_denetim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-DECISION-LOG-ENCODE-01_brif_2026-09-20_orkestrator|ALTYAPI-DECISION-LOG-ENCODE-01_brif_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ALTYAPI-DECISION-LOG-ENCODE-01_brif_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-DECISION-LOG-ENCODE-01_rapor_2026-09-20_orkestrator|ALTYAPI-DECISION-LOG-ENCODE-01_rapor_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ALTYAPI-DECISION-LOG-ENCODE-01_rapor_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-DOCS-MIGRATE-01_rapor_2026-09-20_orkestrator|ALTYAPI-DOCS-MIGRATE-01_rapor_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ALTYAPI-DOCS-MIGRATE-01_rapor_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-FORM-SETUP-03_brif_2026-09-20_uretim|ALTYAPI-FORM-SETUP-03_brif_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/ALTYAPI-FORM-SETUP-03_brif_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-FORM-SETUP-03_rapor_2026-09-20_utku|ALTYAPI-FORM-SETUP-03_rapor_2026-09-20_utku]]",
+      "hedef": "data/orchestrator/ALTYAPI-FORM-SETUP-03_rapor_2026-09-20_utku",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-GOREVAT-GUNCELLE-01_rapor_2026-09-20_utku|ALTYAPI-GOREVAT-GUNCELLE-01_rapor_2026-09-20_utku]]",
+      "hedef": "data/orchestrator/ALTYAPI-GOREVAT-GUNCELLE-01_rapor_2026-09-20_utku",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-KILIT-TEMIZLIK-V10-01_brif_2026-09-20_orkestrator|ALTYAPI-KILIT-TEMIZLIK-V10-01_brif_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ALTYAPI-KILIT-TEMIZLIK-V10-01_brif_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-PROXY-CONFIG-02_brif_2026-09-20_test|ALTYAPI-PROXY-CONFIG-02_brif_2026-09-20_test]]",
+      "hedef": "data/orchestrator/ALTYAPI-PROXY-CONFIG-02_brif_2026-09-20_test",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-PROXY-CONFIG-02_brif_2026-09-20_uretim|ALTYAPI-PROXY-CONFIG-02_brif_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/ALTYAPI-PROXY-CONFIG-02_brif_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-PROXY-CONFIG-02_rapor_2026-09-20_utku|ALTYAPI-PROXY-CONFIG-02_rapor_2026-09-20_utku]]",
+      "hedef": "data/orchestrator/ALTYAPI-PROXY-CONFIG-02_rapor_2026-09-20_utku",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-SQLITE-INIT_brif_2026-09-20_uretim|ALTYAPI-SQLITE-INIT_brif_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/ALTYAPI-SQLITE-INIT_brif_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-SQLITE-INIT_rapor_2026-09-20_uretim|ALTYAPI-SQLITE-INIT_rapor_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/ALTYAPI-SQLITE-INIT_rapor_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-TEST-FAILURE-FIX-01_brif_2026-09-20_uretim|ALTYAPI-TEST-FAILURE-FIX-01_brif_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/ALTYAPI-TEST-FAILURE-FIX-01_brif_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-TEST-FAILURE-FIX-01_rapor_2026-09-20_uretim|ALTYAPI-TEST-FAILURE-FIX-01_rapor_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/ALTYAPI-TEST-FAILURE-FIX-01_rapor_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-TEST-FAILURE-FIX-02_brif_2026-09-20_uretim|ALTYAPI-TEST-FAILURE-FIX-02_brif_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/ALTYAPI-TEST-FAILURE-FIX-02_brif_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-TEST-FAILURE-FIX-02_rapor_2026-09-20_utku|ALTYAPI-TEST-FAILURE-FIX-02_rapor_2026-09-20_utku]]",
+      "hedef": "data/orchestrator/ALTYAPI-TEST-FAILURE-FIX-02_rapor_2026-09-20_utku",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-WEB-MONITOR-01_brif_2026-09-20_test|ALTYAPI-WEB-MONITOR-01_brif_2026-09-20_test]]",
+      "hedef": "data/orchestrator/ALTYAPI-WEB-MONITOR-01_brif_2026-09-20_test",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-WEB-MONITOR-01_brif_2026-09-20_uretim|ALTYAPI-WEB-MONITOR-01_brif_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/ALTYAPI-WEB-MONITOR-01_brif_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ALTYAPI-WEB-MONITOR-01_rapor_2026-09-20_utku|ALTYAPI-WEB-MONITOR-01_rapor_2026-09-20_utku]]",
+      "hedef": "data/orchestrator/ALTYAPI-WEB-MONITOR-01_rapor_2026-09-20_utku",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ANALITIK_RAPOR_2026-09-20|ANALITIK_RAPOR_2026-09-20]]",
+      "hedef": "data/orchestrator/ANALITIK_RAPOR_2026-09-20",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/brief_UI-MENUTREE-02_utku|brief_UI-MENUTREE-02_utku]]",
+      "hedef": "data/orchestrator/brief_UI-MENUTREE-02_utku",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/brief_UI-PROFILMENU-POPOVER-02_utku|brief_UI-PROFILMENU-POPOVER-02_utku]]",
+      "hedef": "data/orchestrator/brief_UI-PROFILMENU-POPOVER-02_utku",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/bulgu_defteri|bulgu_defteri]]",
+      "hedef": "data/orchestrator/bulgu_defteri",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/D-68_RAPOR_2026-09-20_orkestrator|D-68_RAPOR_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/D-68_RAPOR_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/D72-SPRINT-BASLANGIC-TABLOSU_2026-09-20_orkestrator|D72-SPRINT-BASLANGIC-TABLOSU_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/D72-SPRINT-BASLANGIC-TABLOSU_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/DOC-V10-AUDIT-01_brif_2026-09-20_orkestrator|DOC-V10-AUDIT-01_brif_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/DOC-V10-AUDIT-01_brif_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/DOC-V10-AUDIT-01_rapor_2026-09-20_orkestrator|DOC-V10-AUDIT-01_rapor_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/DOC-V10-AUDIT-01_rapor_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/DOC-VAULT-REORG-01_rapor_2026-09-20_orkestrator|DOC-VAULT-REORG-01_rapor_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/DOC-VAULT-REORG-01_rapor_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/night_shift_report|night_shift_report]]",
+      "hedef": "data/orchestrator/night_shift_report",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/operator_briefing|operator_briefing]]",
+      "hedef": "data/orchestrator/operator_briefing",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-BACKLOG-KANIT-01_brif_2026-09-20_orkestrator|ORKESTRA-BACKLOG-KANIT-01_brif_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ORKESTRA-BACKLOG-KANIT-01_brif_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-BACKLOG-KANIT-01_rapor_2026-09-20_orkestrator|ORKESTRA-BACKLOG-KANIT-01_rapor_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ORKESTRA-BACKLOG-KANIT-01_rapor_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-BACKLOG-KANIT-KAPATMA_rapor_2026-09-20_orkestrator|ORKESTRA-BACKLOG-KANIT-KAPATMA_rapor_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ORKESTRA-BACKLOG-KANIT-KAPATMA_rapor_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-BASLIK-D57-FIX-01_brif_2026-09-20_orkestrator|ORKESTRA-BASLIK-D57-FIX-01_brif_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ORKESTRA-BASLIK-D57-FIX-01_brif_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-BASLIK-D57-FIX-01_rapor_2026-09-20_orkestrator|ORKESTRA-BASLIK-D57-FIX-01_rapor_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ORKESTRA-BASLIK-D57-FIX-01_rapor_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-BRIEF-KALITE-01_brif_2026-09-20_denetim|ORKESTRA-BRIEF-KALITE-01_brif_2026-09-20_denetim]]",
+      "hedef": "data/orchestrator/ORKESTRA-BRIEF-KALITE-01_brif_2026-09-20_denetim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-BRIEF-KALITE-01_rapor_2026-09-20_denetim|ORKESTRA-BRIEF-KALITE-01_rapor_2026-09-20_denetim]]",
+      "hedef": "data/orchestrator/ORKESTRA-BRIEF-KALITE-01_rapor_2026-09-20_denetim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-BRIEF-TALIMAT-01_brif_2026-09-20_denetim|ORKESTRA-BRIEF-TALIMAT-01_brif_2026-09-20_denetim]]",
+      "hedef": "data/orchestrator/ORKESTRA-BRIEF-TALIMAT-01_brif_2026-09-20_denetim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-DECISION-LOG-03_brif_2026-09-20_orkestrator|ORKESTRA-DECISION-LOG-03_brif_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ORKESTRA-DECISION-LOG-03_brif_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-DECISION-LOG-FORMAT-01_brif_2026-09-20_orkestrator|ORKESTRA-DECISION-LOG-FORMAT-01_brif_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ORKESTRA-DECISION-LOG-FORMAT-01_brif_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-DECISION-LOG-FORMAT-01_rapor_2026-09-20_orkestrator|ORKESTRA-DECISION-LOG-FORMAT-01_rapor_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ORKESTRA-DECISION-LOG-FORMAT-01_rapor_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-DUPLIK-KAPAYANIM-01_brif_2026-09-20_denetim|ORKESTRA-DUPLIK-KAPAYANIM-01_brif_2026-09-20_denetim]]",
+      "hedef": "data/orchestrator/ORKESTRA-DUPLIK-KAPAYANIM-01_brif_2026-09-20_denetim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-DUPLIK-KAPAYANIM-01_rapor_2026-09-20_denetim|ORKESTRA-DUPLIK-KAPAYANIM-01_rapor_2026-09-20_denetim]]",
+      "hedef": "data/orchestrator/ORKESTRA-DUPLIK-KAPAYANIM-01_rapor_2026-09-20_denetim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-KARAR-DEFTERI-AUDIT-01_brif_2026-09-20_denetim|ORKESTRA-KARAR-DEFTERI-AUDIT-01_brif_2026-09-20_denetim]]",
+      "hedef": "data/orchestrator/ORKESTRA-KARAR-DEFTERI-AUDIT-01_brif_2026-09-20_denetim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-KARAR-DEFTERI-AUDIT-01_rapor_2026-09-20_denetim|ORKESTRA-KARAR-DEFTERI-AUDIT-01_rapor_2026-09-20_denetim]]",
+      "hedef": "data/orchestrator/ORKESTRA-KARAR-DEFTERI-AUDIT-01_rapor_2026-09-20_denetim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-KARAR-DEFTERI-FIX-01_brif_2026-09-20_orkestrator|ORKESTRA-KARAR-DEFTERI-FIX-01_brif_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ORKESTRA-KARAR-DEFTERI-FIX-01_brif_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-KARAR-DEFTERI-FIX-01_rapor_2026-09-20_orkestrator|ORKESTRA-KARAR-DEFTERI-FIX-01_rapor_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ORKESTRA-KARAR-DEFTERI-FIX-01_rapor_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-NAMING-AUDIT-02_brif_2026-09-20_orkestrator|ORKESTRA-NAMING-AUDIT-02_brif_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ORKESTRA-NAMING-AUDIT-02_brif_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-STALE-TEMIZLIK-01_brif_2026-09-20_denetim|ORKESTRA-STALE-TEMIZLIK-01_brif_2026-09-20_denetim]]",
+      "hedef": "data/orchestrator/ORKESTRA-STALE-TEMIZLIK-01_brif_2026-09-20_denetim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-STALE-TEMIZLIK-01_rapor_2026-09-20_denetim|ORKESTRA-STALE-TEMIZLIK-01_rapor_2026-09-20_denetim]]",
+      "hedef": "data/orchestrator/ORKESTRA-STALE-TEMIZLIK-01_rapor_2026-09-20_denetim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-VAULT-TEKRAR-01_brif_2026-09-20_orkestrator|ORKESTRA-VAULT-TEKRAR-01_brif_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ORKESTRA-VAULT-TEKRAR-01_brif_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ORKESTRA-ZINCIR-PLAN-01_analiz_2026-09-20_orkestrator|ORKESTRA-ZINCIR-PLAN-01_analiz_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ORKESTRA-ZINCIR-PLAN-01_analiz_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/OZEL-GOREV-DELEGASYON_2026-09-20_orkestrator|OZEL-GOREV-DELEGASYON_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/OZEL-GOREV-DELEGASYON_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/RESEARCH-PONYTALE_rapor_2026-09-20_ihsan|RESEARCH-PONYTALE_rapor_2026-09-20_ihsan]]",
+      "hedef": "data/orchestrator/RESEARCH-PONYTALE_rapor_2026-09-20_ihsan",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/TEST-D77-01_brif_2026-09-20_orkestrator|TEST-D77-01_brif_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/TEST-D77-01_brif_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/TEST-D77-01_rapor_2026-09-20_orkestrator|TEST-D77-01_rapor_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/TEST-D77-01_rapor_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/TEST-KAPSAM-OLCUM-01_brif_2026-09-20_test|TEST-KAPSAM-OLCUM-01_brif_2026-09-20_test]]",
+      "hedef": "data/orchestrator/TEST-KAPSAM-OLCUM-01_brif_2026-09-20_test",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/TEST-PANO-IZOLASYON-01_brif_2026-09-20_duzeltme_test|TEST-PANO-IZOLASYON-01_brif_2026-09-20_duzeltme_test]]",
+      "hedef": "data/orchestrator/TEST-PANO-IZOLASYON-01_brif_2026-09-20_duzeltme_test",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/TEST-PANO-IZOLASYON-01_rapor_2026-09-20_denetim|TEST-PANO-IZOLASYON-01_rapor_2026-09-20_denetim]]",
+      "hedef": "data/orchestrator/TEST-PANO-IZOLASYON-01_rapor_2026-09-20_denetim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/TEST-PLAN-COVERAGE-03_brif_2026-09-20_test|TEST-PLAN-COVERAGE-03_brif_2026-09-20_test]]",
+      "hedef": "data/orchestrator/TEST-PLAN-COVERAGE-03_brif_2026-09-20_test",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/TEST-PLAN-COVERAGE-03_brif_2026-09-20_uretim|TEST-PLAN-COVERAGE-03_brif_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/TEST-PLAN-COVERAGE-03_brif_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/TEST-PLAN-COVERAGE-03_rapor_2026-09-20_utku|TEST-PLAN-COVERAGE-03_rapor_2026-09-20_utku]]",
+      "hedef": "data/orchestrator/TEST-PLAN-COVERAGE-03_rapor_2026-09-20_utku",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/UI-AYARLAR-SAYFA-02_rapor_2026-09-20_uretim|UI-AYARLAR-SAYFA-02_rapor_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/UI-AYARLAR-SAYFA-02_rapor_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/UI-D57-BASLIK-DUZELT-01_brif_2026-09-20_uretim|UI-D57-BASLIK-DUZELT-01_brif_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/UI-D57-BASLIK-DUZELT-01_brif_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/UI-FORM-VALIDATION-02_brif_2026-09-20_uretim|UI-FORM-VALIDATION-02_brif_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/UI-FORM-VALIDATION-02_brif_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/UI-FORM-VALIDATION-02_rapor_2026-09-20_utku|UI-FORM-VALIDATION-02_rapor_2026-09-20_utku]]",
+      "hedef": "data/orchestrator/UI-FORM-VALIDATION-02_rapor_2026-09-20_utku",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/UI-MENU-FORM-01_brif_2026-09-20_uretim|UI-MENU-FORM-01_brif_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/UI-MENU-FORM-01_brif_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/UI-MENU-FORM-01_rapor_2026-09-20_utku|UI-MENU-FORM-01_rapor_2026-09-20_utku]]",
+      "hedef": "data/orchestrator/UI-MENU-FORM-01_rapor_2026-09-20_utku",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/UI-MENUTREE-02_brif_2026-09-20_uretim|UI-MENUTREE-02_brif_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/UI-MENUTREE-02_brif_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/UI-MENUTREE-02_rapor_2026-09-20_uretim|UI-MENUTREE-02_rapor_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/UI-MENUTREE-02_rapor_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/UI-MUSTERI-SUBHEADER-01_rapor_2026-09-19_utku|UI-MUSTERI-SUBHEADER-01_rapor_2026-09-19_utku]]",
+      "hedef": "data/orchestrator/UI-MUSTERI-SUBHEADER-01_rapor_2026-09-19_utku",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/UI-PROFILMENU-POPOVER-02_brif_2026-09-20_uretim|UI-PROFILMENU-POPOVER-02_brif_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/UI-PROFILMENU-POPOVER-02_brif_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/UI-PROFILMENU-POPOVER-02_bulgular_2026-09-20_uretim|UI-PROFILMENU-POPOVER-02_bulgular_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/UI-PROFILMENU-POPOVER-02_bulgular_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/UI-PROFILMENU-POPOVER-02_rapor_2026-09-20_uretim|UI-PROFILMENU-POPOVER-02_rapor_2026-09-20_uretim]]",
+      "hedef": "data/orchestrator/UI-PROFILMENU-POPOVER-02_rapor_2026-09-20_uretim",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ux_zincir_durumu|ux_zincir_durumu]]",
+      "hedef": "data/orchestrator/ux_zincir_durumu",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/VAULT-BIRLESTIME-PLAN-01_strateji_2026-09-20_orkestrator|VAULT-BIRLESTIME-PLAN-01_strateji_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/VAULT-BIRLESTIME-PLAN-01_strateji_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/VAULT-TARAMA-01_analiz_2026-09-20_orkestrator|VAULT-TARAMA-01_analiz_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/VAULT-TARAMA-01_analiz_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ZINCIR-ADMIN-PANEL-UX-TASARIMI_2026-09-20_orkestrator|ZINCIR-ADMIN-PANEL-UX-TASARIMI_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ZINCIR-ADMIN-PANEL-UX-TASARIMI_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ZINCIR-TUTARLILIK-DUZELTME-01_rapor_2026-09-20_orkestrator|ZINCIR-TUTARLILIK-DUZELTME-01_rapor_2026-09-20_orkestrator]]",
+      "hedef": "data/orchestrator/ZINCIR-TUTARLILIK-DUZELTME-01_rapor_2026-09-20_orkestrator",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[data/orchestrator/ozelestiri/SABLON|SABLON]]",
+      "hedef": "data/orchestrator/ozelestiri/SABLON",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[docs/AJAN_KOMUT_REHBERI|AJAN_KOMUT_REHBERI]]",
+      "hedef": "docs/AJAN_KOMUT_REHBERI",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[docs/AJAN_ORKESTRASYON_SISTEMI|AJAN_ORKESTRASYON_SISTEMI]]",
+      "hedef": "docs/AJAN_ORKESTRASYON_SISTEMI",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[docs/degerlendirme_tablosu|degerlendirme_tablosu]]",
+      "hedef": "docs/degerlendirme_tablosu",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[docs/RUNBOOK|RUNBOOK]]",
+      "hedef": "docs/RUNBOOK",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[docs/SPRINT_ELEŞTIRI_RAPORU_TEMPLATE|SPRINT_ELEŞTIRI_RAPORU_TEMPLATE]]",
+      "hedef": "docs/SPRINT_ELEŞTIRI_RAPORU_TEMPLATE",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[docs/teknik_sozluk|teknik_sozluk]]",
+      "hedef": "docs/teknik_sozluk",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[docs/TEST_PLAN|TEST_PLAN]]",
+      "hedef": "docs/TEST_PLAN",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[docs/UYUM_DENETIM_2026-09-20|UYUM_DENETIM_2026-09-20]]",
+      "hedef": "docs/UYUM_DENETIM_2026-09-20",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[docs/AGENTS_yedek/2026-09-20T04-48-06Z_AGENTS|2026-09-20T04-48-06Z_AGENTS]]",
+      "hedef": "docs/AGENTS_yedek/2026-09-20T04-48-06Z_AGENTS",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[docs/raporlar/benchmark_2026-09-20|benchmark_2026-09-20]]",
+      "hedef": "docs/raporlar/benchmark_2026-09-20",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[docs/raporlar/test_kapsam_olcum_2026-09-20|test_kapsam_olcum_2026-09-20]]",
+      "hedef": "docs/raporlar/test_kapsam_olcum_2026-09-20",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[eleştiriler/sprint_metrikleri|sprint_metrikleri]]",
+      "hedef": "eleştiriler/sprint_metrikleri",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[plans/brief_ihsan_RESEARCH-PONYTALE|brief_ihsan_RESEARCH-PONYTALE]]",
+      "hedef": "plans/brief_ihsan_RESEARCH-PONYTALE",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[plans/brief_utku_ALTYAPI-TEST-FAILURE-FIX-02|brief_utku_ALTYAPI-TEST-FAILURE-FIX-02]]",
+      "hedef": "plans/brief_utku_ALTYAPI-TEST-FAILURE-FIX-02",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[plans/brief_utku_DOC-SIRKET-MASTER-01|brief_utku_DOC-SIRKET-MASTER-01]]",
+      "hedef": "plans/brief_utku_DOC-SIRKET-MASTER-01",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "VAULT_HARITA.md",
+      "referans_text": "[[plans/brief_yasu_REVIEW-ONAY-KUYRUGU-01|brief_yasu_REVIEW-ONAY-KUYRUGU-01]]",
+      "hedef": "plans/brief_yasu_REVIEW-ONAY-KUYRUGU-01",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "workspace/external/claude_code/output/docs/01_etl_mimarisi.md",
+      "referans_text": "[[00-Home]]",
+      "hedef": "00-Home",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "workspace/external/claude_code/output/docs/01_etl_mimarisi.md",
+      "referans_text": "[[01_sirket_master_ana_belgesi]]",
+      "hedef": "01_sirket_master_ana_belgesi",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "workspace/external/claude_code/output/docs/01_etl_mimarisi.md",
+      "referans_text": "[[01_mvp_gereksinimleri]]",
+      "hedef": "01_mvp_gereksinimleri",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "workspace/external/claude_code/output/docs/01_etl_mimarisi.md",
+      "referans_text": "[[01_veri_toplama_modeli]]",
+      "hedef": "01_veri_toplama_modeli",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "workspace/external/claude_code/output/docs/01_etl_mimarisi.md",
+      "referans_text": "[[01_versiyon_9_baglam_dokumani]]",
+      "hedef": "01_versiyon_9_baglam_dokumani",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "workspace/external/claude_code/output/docs/01_etl_mimarisi.md",
+      "referans_text": "[[01_sirket_master_ana_belgesi]]",
+      "hedef": "01_sirket_master_ana_belgesi",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "workspace/external/claude_code/output/docs/01_etl_mimarisi.md",
+      "referans_text": "[[01_versiyon_9_baglam_dokumani]]",
+      "hedef": "01_versiyon_9_baglam_dokumani",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    },
+    {
+      "kaynak_dosya": "workspace/external/claude_code/output/docs/01_etl_mimarisi.md",
+      "referans_text": "[[01_sirket_master_ana_belgesi]]",
+      "hedef": "01_sirket_master_ana_belgesi",
+      "tip": "wikilink",
+      "neden": "hedef_yok",
+      "risk": "high"
+    }
+  ],
+  "ikiz_grup": {
+    "agent_sync.md": [
+      "AGENT_SYNC.md",
+      "data/orchestrator/AGENT_SYNC.md"
+    ],
+    "changelog.md": [
+      "CHANGELOG.md",
+      "data/skills/supabase-postgres-best-practices/CHANGELOG.md"
+    ],
+    "readme.md": [
+      "data/nace/README.md",
+      "docs/brand/README.md",
+      "README.md",
+      "src/company_master/intelligence/README.md",
+      "src/company_master/orchestrator/README.md",
+      "src/company_master/README.md",
+      "src/company_master/ui/README.md",
+      "src/data_quality_toolkit/README.md",
+      "workspace/external/copilot/output/scripts/README.md"
+    ],
+    "brief.md": [
+      "workspace/external/claude_code/brief.md",
+      "workspace/external/copilot/brief.md",
+      "workspace/external/cursor_grok/brief.md"
+    ],
+    "brief_dashboard-01.md": [
+      "workspace/external/claude_code/brief_DASHBOARD-01.md",
+      "workspace/external/cline/brief_DASHBOARD-01.md",
+      "workspace/external/copilot/brief_DASHBOARD-01.md",
+      "workspace/external/kilo_code/brief_DASHBOARD-01.md",
+      "workspace/external/roo_code/brief_DASHBOARD-01.md"
+    ]
+  },
+  "orphan": [
+    {
+      "dosya": ".instructions.md",
+      "boyut": 4607,
+      "degistirilme": "2026-09-19T07:47:11.738234"
+    },
+    {
+      "dosya": "_ARSIV_ikiz_2026-09-21/data__orchestrator__agent_sync.md",
+      "boyut": 3188,
+      "degistirilme": "2026-09-21T00:08:13.180954"
+    },
+    {
+      "dosya": "_ARSIV_ikiz_2026-09-21/data__orchestrator__night_shift_report.md",
+      "boyut": 15922,
+      "degistirilme": "2026-09-21T11:08:52.357275"
+    },
+    {
+      "dosya": "OPERASYON_KILAVUZU.md",
+      "boyut": 21467,
+      "degistirilme": "2026-09-21T11:38:10.436755"
+    }
+  ]
+}

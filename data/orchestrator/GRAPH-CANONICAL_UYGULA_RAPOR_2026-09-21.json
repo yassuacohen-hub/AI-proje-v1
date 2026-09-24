@@ -1,0 +1,31 @@
+{
+  "metadata": {
+    "olusturulma": "2026-09-21T10:38:05.669243+00:00",
+    "kaynak": "GRAPH-CANONICAL_rapor_2026-09-21.json",
+    "uygulama": "GRAPH-CANONICAL-UYGULA.py"
+  },
+  "orijinal_istatistik": {
+    "toplam_grup": 156,
+    "hdi_disi_grup": 1,
+    "a3_sayi": 0,
+    "a2_sayi": 0,
+    "a1_sayi": 156,
+    "redirect_yapilacak": 270,
+    "guncelleme_yapilacak": 270
+  },
+  "uygulama_istatistik": {
+    "toplam_guncelleme_dosya": 270,
+    "basarili_guncelleme": 270,
+    "zaten_redirect_var": 0,
+    "hata": 0,
+    "skip_worktree": 0
+  },
+  "final_olcum": {
+    "grup_toplam": 156,
+    "a3_sayi": 0,
+    "a2_sayi": 0,
+    "a1_sayi": 156,
+    "redirect_eklenenleri": 270,
+    "hdi_disi_grup": 1
+  }
+}

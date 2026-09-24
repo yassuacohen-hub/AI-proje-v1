@@ -34,6 +34,10 @@ Ana baglam: [[Huginn Data Insights/AGENTS]] · [[Huginn Data Insights/AGENT_SYNC
 ## Orkestrasyon Tasarimi
 - `Huginn Data Insights/AI proje v1/V10/11_osint_motoru/Orkestrator` — OSINT orkestratoru tasarimi
 - [[Huginn Data Insights/docs/GOREV_PANOSU_KULLANIM_KILAVUZU]] — Gorev panosu kullanim kilavuzu; §10 Proje Saglik Simulasyonu (`gorev_kutusu.py simulasyon`, D-198 zorunlu tur kapisi)
+- [[Huginn Data Insights/docs/VAULT_AUTOMATION_TEMPLATE]] — Multi-ajan vault otomasyon sablonu (kok dizinden tasindi 2026-09-24)
+- [[Huginn Data Insights/scripts/gorev_analiz]] — Pano gorev analizi betigi (kok `task_analysis.py`, D-183 ile yeniden adlandirildi)
+- [[Huginn Data Insights/scripts/vault_bakim]] — Vault bakim olcumu (orphan orani, hub yogunlugu, kirik link)
+- [[Huginn Data Insights/scripts/kilo_backup_rotate]] — KILO yedek rotasyon politikasi (D-176)
 
 ## Kurallar / Politika
 - `Huginn Data Insights/AI proje v1/V10/09_kurallar_ve_promptlar/01_kasa_kurallari` — Kasa kurallari

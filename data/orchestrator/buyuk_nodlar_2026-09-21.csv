@@ -1,0 +1,37 @@
+﻿dosya,boyut_kb,satir_sayisi,referans_alinma_sayisi,referans_gonderme_sayisi,kategori,sozdiziim_var,yuzde
+Huginn Data Insights/AI proje v1/V10/05_versiyonlar/01_versiyon_8_baglam_dokumani.md,46.62,1297,5,6,huginn,True,0.65
+Huginn Data Insights/docs/ROO_ELESTIRI_NOTLARI.md,46.02,344,3,1,docs,True,0.39
+Huginn Data Insights/AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md,42.84,964,16,6,huginn,True,2.08
+Huginn Data Insights/AI proje v1/docs/CALISMA_GUNLUGU.md,41.87,558,1,2,docs,True,0.13
+Huginn Data Insights/docs/CALISMA_GUNLUGU.md,41.28,556,3,1,docs,True,0.39
+Huginn Data Insights/data_worktree/orchestrator/gorev_panosu.md,40.49,354,4,1,huginn,True,0.52
+Huginn Data Insights/AGENTS.md,39.66,475,23,8,huginn,True,2.99
+Huginn Data Insights/docs/MUNINN_STREAMLIT_PLAN_2026-09-18.md,35.91,463,2,1,docs,True,0.26
+Huginn Data Insights/data/orchestrator/gorev_panosu.md,33.22,306,1,2,orchestrator,True,0.13
+Huginn Data Insights/AI proje v1/V10/04_karşılaştırmalar/01_v9_ile_karsilastirma.md,32.81,378,11,6,huginn,True,1.43
+Huginn Data Insights/plans/P7-27_ai_cost_dashboard_architecture.md,30.33,1040,1,2,plan,True,0.13
+Huginn Data Insights/data/orchestrator/VAULT-TARAMA-02_analiz_2026-09-20_orkestrator.md,27.32,350,1,1,orchestrator,True,0.13
+Huginn Data Insights/CHANGELOG.md,26.26,411,9,0,huginn,False,1.17
+Huginn Data Insights/scripts/_tavily_skill_incele.md,25.54,539,1,1,script,True,0.13
+VAULT_AUTOMATION_TEMPLATE.md,24.97,613,1,8,other,True,0.13
+Huginn Data Insights/docs/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md,24.14,272,1,2,docs,True,0.13
+Huginn Data Insights/AI proje v1/V10/03_mimari/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md,23.76,268,3,0,huginn,False,0.39
+Huginn Data Insights/docs/UX_MENU_AGACI_WIREFRAME_2026-09-18.md,22.33,407,1,1,docs,True,0.13
+Huginn Data Insights/docs/MUNINN_PLAN_UC_TUR_DEGERLENDIRME_2026-09-18.md,22.1,221,1,1,docs,True,0.13
+Huginn Data Insights/data_worktree/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md,21.5,247,1,2,huginn,True,0.13
+Huginn Data Insights/data/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md,21.41,245,2,1,orchestrator,True,0.26
+Huginn Data Insights/AI proje v1/V10/CHANGELOG.md,20.69,365,1,9,huginn,True,0.13
+Huginn Data Insights/docs/AJAN_DETAY.md,20.55,240,2,0,docs,False,0.26
+Huginn Data Insights/AI proje v1/V10/07_referanslar/10_apify_entegrasyon_arastirmasi_20260910.md,20.28,323,4,8,huginn,True,0.52
+Huginn Data Insights/AI proje v1/V10/08-Ajanlar/07_harici_ajan_protokolu.md,17.22,579,6,11,huginn,True,0.78
+Huginn Data Insights/AI proje v1/V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md,15.21,718,49,7,huginn,True,6.38
+Huginn Data Insights/AI proje v1/V10/05_versiyonlar/01_versiyon_6_baglam_dokumani.md,13.58,514,6,3,huginn,True,0.78
+Huginn Data Insights/data/skills/supabase/skills/supabase/SKILL.md,13.26,746,5,5,orchestrator,True,0.65
+Huginn Data Insights/AI proje v1/V10/00_ana_belgeler/02_hugins_master_kaynak_dokumani.md,12.36,888,3,0,huginn,False,0.39
+Huginn Data Insights/data/skills/supabase/AGENTS.md,8.75,1136,1,4,orchestrator,True,0.13
+Huginn Data Insights/data/skills/supabase/CONTRIBUTING.md,6.92,804,1,2,orchestrator,True,0.13
+Huginn Data Insights/data/skills/supabase/README.md,5.64,696,19,1,orchestrator,True,2.47
+Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/_contributing.md,5.62,843,0,2,orchestrator,True,0.0
+Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/_contributing.md,5.62,843,0,2,orchestrator,True,0.0
+Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/_contributing.md,5.3,676,0,2,huginn,True,0.0
+Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/_contributing.md,5.19,674,4,1,orchestrator,True,0.52

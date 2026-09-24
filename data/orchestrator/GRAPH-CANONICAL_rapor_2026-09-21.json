@@ -1,0 +1,4520 @@
+{
+  "metadata": {
+    "olusturulma": "2026-09-21T10:37:14.859405+00:00",
+    "kaynak": "VAULT-SAGLIK-GENIS_2026-09-21_orkestrator.json",
+    "kural": "A3≥100wikilink:canonical | A2[10-100]:aday | A1<10:redirect",
+    "tiebreaker": "incoming_links desc > mtime asc > name_len asc",
+    "constraint": "worktree klasoru/ OLDUĞU GİBİ, HDI dosyaları güncelle"
+  },
+  "istatistik": {
+    "toplam_grup": 156,
+    "hdi_disi_grup": 1,
+    "a3_sayi": 0,
+    "a2_sayi": 0,
+    "a1_sayi": 156,
+    "redirect_yapilacak": 270,
+    "guncelleme_yapilacak": 270
+  },
+  "grupplar": [
+    {
+      "grup_adi": "git-hijyen-01_rapor_2026-09-17_kilo.md",
+      "turu": "HDI-dışı",
+      "dosya_sayisi": 3,
+      "canonical": {
+        "yol": "data/orchestrator/GIT-HIJYEN-01_rapor_2026-09-17_kilo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T20:20:31.725568",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/orchestrator/GIT-HIJYEN-01_rapor_2026-09-17_kilo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/GIT-HIJYEN-01_rapor_2026-09-17_kilo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": ".instructions.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/AI proje v1/.instructions.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T20:05:05.299698",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/.instructions.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "agent_sync.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/AI proje v1/AGENT_SYNC.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T20:06:25.855993",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AGENT_SYNC.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/AGENT_SYNC.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data/orchestrator/AGENT_SYNC.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "agents.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 3,
+      "canonical": {
+        "yol": "Huginn Data Insights/AGENTS.md",
+        "kural": "A1",
+        "incoming_link": 20,
+        "wikilink_sayisi": 8,
+        "mtime": "2026-09-21T13:12:55.126116",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase/AGENTS.md",
+          "kural": "A1",
+          "incoming_link": 1,
+          "wikilink_sayisi": 1,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/AGENTS.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 4,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "ana_kurallar.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/AI proje v1/ANA_KURALLAR.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T20:06:25.855993",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/ANA_KURALLAR.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "changelog.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 9,
+      "canonical": {
+        "yol": "Huginn Data Insights/CHANGELOG.md",
+        "kural": "A1",
+        "incoming_link": 1,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-14T18:39:51.350313",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/V10/CHANGELOG.md",
+          "kural": "A1",
+          "incoming_link": 1,
+          "wikilink_sayisi": 8,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase/CHANGELOG.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/CHANGELOG.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase/CHANGELOG.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/CHANGELOG.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/CHANGELOG.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/CHANGELOG.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/CHANGELOG.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "claude.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 3,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/CLAUDE.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.446877",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/CLAUDE.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 6,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/CLAUDE.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 6,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "kpi_raporu.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 3,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/kpi_raporu.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-03T14:17:04.070349",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/kpi_raporu.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/kpi_raporu.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "merger_raporu.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 3,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/merged/merger_raporu.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-06T16:24:00.611845",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/merged/merger_raporu.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/merged/merger_raporu.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "readme.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 19,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/README.md",
+        "kural": "A1",
+        "incoming_link": 1,
+        "wikilink_sayisi": 1,
+        "mtime": "2026-09-21T12:42:24.027592",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/nace/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/workspace/external/copilot/output/scripts/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/V10/09_kurallar_ve_promptlar/README.md",
+          "kural": "A2",
+          "incoming_link": 0,
+          "wikilink_sayisi": 10,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/V10/06_arsiv/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 5,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/nace/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/copilot/output/scripts/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/V10/08-Ajanlar/README.md",
+          "kural": "A2",
+          "incoming_link": 0,
+          "wikilink_sayisi": 25,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/docs/brand/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/src/company_master/orchestrator/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 3,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/src/company_master/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/src/company_master/intelligence/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/src/data_quality_toolkit/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/src/company_master/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/src/company_master/intelligence/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/src/company_master/ui/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/src/data_quality_toolkit/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/nace/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/README.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 4,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "gorev_panosu.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data_worktree/orchestrator/gorev_panosu.md",
+        "kural": "A1",
+        "incoming_link": 1,
+        "wikilink_sayisi": 1,
+        "mtime": "2026-09-21T12:38:29.325737",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/orchestrator/gorev_panosu.md",
+          "kural": "A1",
+          "incoming_link": 1,
+          "wikilink_sayisi": 1,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/orchestrator/gorev_panosu.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/gorev_panosu.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "kalite_raporu.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 3,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/ostim/kalite_raporu.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.442446",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/ostim/kalite_raporu.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/ostim/kalite_raporu.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "_contributing.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/_contributing.md",
+        "kural": "A1",
+        "incoming_link": 1,
+        "wikilink_sayisi": 1,
+        "mtime": "2026-09-21T12:43:42.706305",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/_contributing.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 1,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/_contributing.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 1,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/_contributing.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 1,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "_sections.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/_sections.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.488571",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/_sections.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/_sections.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/_sections.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "_template.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/_template.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.490110",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/_template.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/_template.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/_template.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "advanced-full-text-search.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/advanced-full-text-search.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.465733",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/advanced-full-text-search.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/advanced-full-text-search.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/advanced-full-text-search.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "advanced-jsonb-indexing.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/advanced-jsonb-indexing.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.466747",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/advanced-jsonb-indexing.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/advanced-jsonb-indexing.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/advanced-jsonb-indexing.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "conn-idle-timeout.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/conn-idle-timeout.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.467774",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/conn-idle-timeout.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/conn-idle-timeout.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/conn-idle-timeout.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "conn-limits.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/conn-limits.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.467774",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/conn-limits.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/conn-limits.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/conn-limits.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "conn-pooling.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/conn-pooling.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.468758",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/conn-pooling.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/conn-pooling.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/conn-pooling.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "conn-prepared-statements.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/conn-prepared-statements.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.469371",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/conn-prepared-statements.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/conn-prepared-statements.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/conn-prepared-statements.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "data-batch-inserts.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/data-batch-inserts.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.470484",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/data-batch-inserts.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/data-batch-inserts.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/data-batch-inserts.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "data-n-plus-one.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/data-n-plus-one.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.470484",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/data-n-plus-one.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/data-n-plus-one.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/data-n-plus-one.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "data-pagination.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/data-pagination.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.471489",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/data-pagination.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/data-pagination.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/data-pagination.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "data-upsert.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/data-upsert.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.472497",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/data-upsert.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/data-upsert.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/data-upsert.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "lock-advisory.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/lock-advisory.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.472497",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/lock-advisory.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/lock-advisory.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/lock-advisory.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "lock-deadlock-prevention.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/lock-deadlock-prevention.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.473496",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/lock-deadlock-prevention.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/lock-deadlock-prevention.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/lock-deadlock-prevention.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "lock-short-transactions.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/lock-short-transactions.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.474482",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/lock-short-transactions.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/lock-short-transactions.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/lock-short-transactions.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "lock-skip-locked.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/lock-skip-locked.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.475505",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/lock-skip-locked.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/lock-skip-locked.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/lock-skip-locked.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "monitor-explain-analyze.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/monitor-explain-analyze.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.475505",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/monitor-explain-analyze.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/monitor-explain-analyze.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/monitor-explain-analyze.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "monitor-pg-stat-statements.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/monitor-pg-stat-statements.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.476487",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/monitor-pg-stat-statements.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/monitor-pg-stat-statements.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/monitor-pg-stat-statements.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "monitor-vacuum-analyze.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/monitor-vacuum-analyze.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.477484",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/monitor-vacuum-analyze.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/monitor-vacuum-analyze.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/monitor-vacuum-analyze.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "query-composite-indexes.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/query-composite-indexes.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.478497",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-composite-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/query-composite-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-composite-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "query-covering-indexes.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/query-covering-indexes.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.479025",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-covering-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/query-covering-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-covering-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "query-index-types.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/query-index-types.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.479025",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-index-types.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/query-index-types.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-index-types.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "query-missing-indexes.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/query-missing-indexes.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.480053",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-missing-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/query-missing-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-missing-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "query-partial-indexes.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/query-partial-indexes.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.481045",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/query-partial-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/query-partial-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/query-partial-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "schema-constraints.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/schema-constraints.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.481045",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/schema-constraints.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/schema-constraints.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/schema-constraints.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "schema-data-types.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/schema-data-types.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.482552",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/schema-data-types.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/schema-data-types.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/schema-data-types.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "schema-foreign-key-indexes.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/schema-foreign-key-indexes.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.483559",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/schema-foreign-key-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/schema-foreign-key-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/schema-foreign-key-indexes.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "schema-lowercase-identifiers.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/schema-lowercase-identifiers.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.483559",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/schema-lowercase-identifiers.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/schema-lowercase-identifiers.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/schema-lowercase-identifiers.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "schema-partitioning.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/schema-partitioning.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.484558",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/schema-partitioning.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/schema-partitioning.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/schema-partitioning.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "schema-primary-keys.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/schema-primary-keys.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.485577",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/schema-primary-keys.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/schema-primary-keys.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/schema-primary-keys.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "security-privileges.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/security-privileges.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.486572",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/security-privileges.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/security-privileges.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/security-privileges.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "security-rls-basics.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/security-rls-basics.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.486572",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/security-rls-basics.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/security-rls-basics.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/security-rls-basics.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "security-rls-performance.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 4,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/references/security-rls-performance.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.487556",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/references/security-rls-performance.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/references/security-rls-performance.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/references/security-rls-performance.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "skill.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 5,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase/SKILL.md",
+        "kural": "A1",
+        "incoming_link": 1,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:36.460745",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase-postgres-best-practices/SKILL.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data/skills/supabase/skills/supabase-postgres-best-practices/SKILL.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/data/skills/supabase-postgres-best-practices/SKILL.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/data_worktree/skills/supabase-postgres-best-practices/SKILL.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "calisma_gunlugu.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/docs/CALISMA_GUNLUGU.md",
+        "kural": "A1",
+        "incoming_link": 1,
+        "wikilink_sayisi": 1,
+        "mtime": "2026-09-21T12:38:39.630814",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/docs/CALISMA_GUNLUGU.md",
+          "kural": "A1",
+          "incoming_link": 1,
+          "wikilink_sayisi": 1,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "osint_scraper_motoru.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 3,
+      "canonical": {
+        "yol": "Huginn Data Insights/AI proje v1/docs/OSINT_SCRAPER_MOTORU.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T20:05:05.538522",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/V10/11_osint_motoru/OSINT_Scraper_Motoru.md",
+          "kural": "A2",
+          "incoming_link": 0,
+          "wikilink_sayisi": 28,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/docs/OSINT_SCRAPER_MOTORU.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 2,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "p2-3_zamanli_scrape.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/AI proje v1/docs/P2-3_zamanli_scrape.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T20:05:05.540647",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/docs/P2-3_zamanli_scrape.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "kimlik doğrulama sistemi.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/Kimlik Doğrulama Sistemi.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:32.520579",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/Kimlik Doğrulama Sistemi.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "kullanıcı yönetimi.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/Kullanıcı Yönetimi.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-01T21:10:32.520579",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/Kullanıcı Yönetimi.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "mimari kararlar.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/Mimari Kararlar.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-03T05:51:00.261357",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/Mimari Kararlar.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "plan_gorev_panosu.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/PLAN_gorev_panosu.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T20:02:28.768706",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/PLAN_gorev_panosu.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "project_roadmap.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/AI proje v1/PROJECT_ROADMAP.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T20:05:05.320951",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/PROJECT_ROADMAP.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 7,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "readme_arayuz.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/README_ARAYUZ.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T20:02:28.768706",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/README_ARAYUZ.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "mersis_api_research.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/AI proje v1/scripts/mersis_api_research.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T20:06:26.122804",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/scripts/mersis_api_research.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "multi_osb_merger_plan.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/AI proje v1/scripts/multi_osb_merger_plan.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T20:06:26.132645",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/scripts/multi_osb_merger_plan.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "readme_telegram.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/AI proje v1/scripts/README_TELEGRAM.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T20:05:05.687137",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/scripts/README_TELEGRAM.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "01_etl_mimarisi.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 3,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/claude_code/output/docs/01_etl_mimarisi.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 9,
+        "mtime": "2026-09-03T03:44:16.808729",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/V10/03_mimari/01_etl_mimarisi.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 5,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/claude_code/output/docs/01_etl_mimarisi.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 9,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "huginn_v10_plan_netlestirme_2026-09-18.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/AI proje v1/V10/03_mimari/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md",
+        "kural": "A1",
+        "incoming_link": 2,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T16:42:21.369099",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/docs/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md",
+          "kural": "A1",
+          "incoming_link": 1,
+          "wikilink_sayisi": 1,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "brief_2026-09-06.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_2026-09-06.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-10T21:35:38.072345",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/workspace/external/BRIEF_2026-09-06.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "brief_y10.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/BRIEF_Y10.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-07T23:57:06.105238",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_Y10.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "brief_y14.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/BRIEF_Y14.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-07T23:57:06.106238",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_Y14.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "brief_y16_sektor_zekasi.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/BRIEF_Y16_sektor_zekasi.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-09T13:35:31.669091",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_Y16_sektor_zekasi.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "brief_y17_veri_kaynaklari.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/BRIEF_Y17_veri_kaynaklari.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-09T13:35:43.446748",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_Y17_veri_kaynaklari.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "brief_y18_abonelik_plan.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/BRIEF_Y18_abonelik_plan.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-09T13:35:53.741930",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_Y18_abonelik_plan.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "brief_y2.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/BRIEF_Y2.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-07T23:57:06.103239",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_Y2.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "brief_y21_iskur.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/BRIEF_Y21_iskur.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-09T14:23:37.914803",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/BRIEF_Y21_iskur.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "brief.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 6,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/claude_code/brief.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-06T11:42:20.920621",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/workspace/external/copilot/brief.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/workspace/external/cursor_grok/brief.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/claude_code/brief.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/copilot/brief.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/cursor_grok/brief.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "dependencies_app_review.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/claude_code/output/analysis/dependencies_app_review.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-02T22:04:55.598617",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/claude_code/output/analysis/dependencies_app_review.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "dependencies_dev_review.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/claude_code/output/analysis/dependencies_dev_review.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-02T22:05:55.622781",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/claude_code/output/analysis/dependencies_dev_review.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "tech_debt_register.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/claude_code/output/analysis/tech_debt_register.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-02T22:04:31.771993",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/claude_code/output/analysis/tech_debt_register.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "01_etl_mimarisi_review.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/claude_code/output/docs/01_etl_mimarisi_review.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-02T22:04:04.538401",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/claude_code/output/docs/01_etl_mimarisi_review.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "security_audit_report.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/claude_code/output/security/security_audit_report.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-02T22:05:55.701498",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/claude_code/output/security/security_audit_report.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "telegram_systemd_kurulum.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/copilot/output/scripts/TELEGRAM_SYSTEMD_KURULUM.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-06T16:19:18.662242",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/copilot/output/scripts/TELEGRAM_SYSTEMD_KURULUM.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "code_review.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/cursor_grok/output/code_review.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-03T03:42:17.798826",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/cursor_grok/output/code_review.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "agent_output.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/harici_ajan/AGENT_OUTPUT.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-02T20:19:17.925574",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/harici_ajan/AGENT_OUTPUT.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "entity_resolution_analysis.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/harici_ajan/output/entity_resolution_analysis.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-02T21:43:58.218255",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/harici_ajan/output/entity_resolution_analysis.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "etl_pipeline_analysis.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/harici_ajan/output/etl_pipeline_analysis.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-02T21:43:58.218255",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/harici_ajan/output/etl_pipeline_analysis.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "ingest_detail_analysis.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/harici_ajan/output/ingest_detail_analysis.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-02T21:43:59.184315",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/harici_ajan/output/ingest_detail_analysis.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "normalize_analysis.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/harici_ajan/output/normalize_analysis.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-02T21:43:58.225530",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/harici_ajan/output/normalize_analysis.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "sector_analysis.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/harici_ajan/output/sector_analysis.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-02T21:43:58.954120",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/AI proje v1/workspace/external/harici_ajan/output/sector_analysis.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-ayar-01_rapor_2026-09-17_kilo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-AYAR-01_rapor_2026-09-17_kilo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T06:43:57.325759",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-AYAR-01_rapor_2026-09-17_kilo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-exec-01_rapor_2026-09-17_roo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-EXEC-01_rapor_2026-09-17_roo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T07:17:41.145159",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-EXEC-01_rapor_2026-09-17_roo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-hata-02_bulgular_2026-09-18_orkestrator.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-HATA-02_bulgular_2026-09-18_orkestrator.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T13:27:41.690126",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-HATA-02_bulgular_2026-09-18_orkestrator.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-hitap-01_rapor_2026-09-18_roo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-HITAP-01_rapor_2026-09-18_roo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T05:24:40.383020",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-HITAP-01_rapor_2026-09-18_roo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-kok-temizlik-01_rapor_2026-09-18_roo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-KOK-TEMIZLIK-01_rapor_2026-09-18_roo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T05:17:47.030610",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-KOK-TEMIZLIK-01_rapor_2026-09-18_roo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-kpi-kart-01_bulgular_2026-09-17_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-KPI-KART-01_bulgular_2026-09-17_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T19:33:54.036867",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-KPI-KART-01_bulgular_2026-09-17_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-kpi-kart-01_duzeltme_2026-09-17_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-KPI-KART-01_duzeltme_2026-09-17_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T19:47:22.081903",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-KPI-KART-01_duzeltme_2026-09-17_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-kpi-kart-01_rapor_2026-09-17_kilo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-KPI-KART-01_rapor_2026-09-17_kilo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T17:51:02.863249",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-KPI-KART-01_rapor_2026-09-17_kilo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-login-fix-01_rapor_2026-09-18_orkestrator.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-LOGIN-FIX-01_rapor_2026-09-18_orkestrator.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T13:28:36.724405",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-LOGIN-FIX-01_rapor_2026-09-18_orkestrator.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-nav-hazir-01_rapor_2026-09-17_roo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-NAV-HAZIR-01_rapor_2026-09-17_roo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T07:57:54.447791",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-NAV-HAZIR-01_rapor_2026-09-17_roo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-nav-hazir-02_rapor_2026-09-17_roo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-NAV-HAZIR-02_rapor_2026-09-17_roo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T10:49:29.164670",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-NAV-HAZIR-02_rapor_2026-09-17_roo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-refresh-fix-01_rapor_2026-09-17_roo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-REFRESH-FIX-01_rapor_2026-09-17_roo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T07:41:09.904622",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-REFRESH-FIX-01_rapor_2026-09-17_roo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-roo-01_rapor_2026-09-17_roo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-ROO-01_rapor_2026-09-17_roo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T06:32:08.427820",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-ROO-01_rapor_2026-09-17_roo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-roo-denetim-01_rapor_2026-09-18_roo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-ROO-DENETIM-01_rapor_2026-09-18_roo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T05:28:21.900526",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-ROO-DENETIM-01_rapor_2026-09-18_roo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-search-01_rapor_2026-09-17_roo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-SEARCH-01_rapor_2026-09-17_roo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T07:29:27.789125",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-SEARCH-01_rapor_2026-09-17_roo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "admin-ux-logout-01_rapor_2026-09-18_orkestrator.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ADMIN-UX-LOGOUT-01_rapor_2026-09-18_orkestrator.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T21:37:43.657581",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ADMIN-UX-LOGOUT-01_rapor_2026-09-18_orkestrator.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "agn-stack-01_bulgu_2026-09-18_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/AGN-STACK-01_bulgu_2026-09-18_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T04:54:38.074167",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/AGN-STACK-01_bulgu_2026-09-18_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "agn-stack-01_rapor_roo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/AGN-STACK-01_rapor_roo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T05:40:26.290624",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/AGN-STACK-01_rapor_roo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "api-split-01_rapor_2026-09-17_kilo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/API-SPLIT-01_rapor_2026-09-17_kilo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T14:44:45.739719",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/API-SPLIT-01_rapor_2026-09-17_kilo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "ar-01_pazar_egilim_analizi_q3_2026.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/AR-01_pazar_egilim_analizi_Q3_2026.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-14T04:05:13.729077",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/AR-01_pazar_egilim_analizi_Q3_2026.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "ar-02_rekabet_analizi.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/AR-02_rekabet_analizi.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-14T04:32:13.587181",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/AR-02_rekabet_analizi.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "ar-03_kullanici_persona_yol_haritasi.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/AR-03_kullanici_persona_yol_haritasi.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-14T04:33:01.823082",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/AR-03_kullanici_persona_yol_haritasi.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "audit-enc-02_bulgular_2026-09-15_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/AUDIT-ENC-02_bulgular_2026-09-15_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-15T15:26:46.632153",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/AUDIT-ENC-02_bulgular_2026-09-15_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "brand-kimlik-01_rapor_2026-09-16_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/BRAND-KIMLIK-01_rapor_2026-09-16_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-16T20:52:31.029354",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/BRAND-KIMLIK-01_rapor_2026-09-16_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "bulgu-claude-cift-icerik_2026-09-16_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/BULGU-CLAUDE-CIFT-ICERIK_2026-09-16_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-16T19:59:09.282698",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/BULGU-CLAUDE-CIFT-ICERIK_2026-09-16_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "d-60_bulgular_2026-09-18_orkestrator.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/D-60_bulgular_2026-09-18_orkestrator.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-19T00:29:37.875699",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/D-60_bulgular_2026-09-18_orkestrator.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "git-hijyen-01_capraz_inceleme_2026-09-17_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/GIT-HIJYEN-01_capraz_inceleme_2026-09-17_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T20:39:56.487186",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/GIT-HIJYEN-01_capraz_inceleme_2026-09-17_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "guard-enc-01_teslim_2026-09-16_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/GUARD-ENC-01_teslim_2026-09-16_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-16T18:17:01.852628",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/GUARD-ENC-01_teslim_2026-09-16_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "handoff-temiz-01_rapor_2026-09-17_roo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/HANDOFF-TEMIZ-01_rapor_2026-09-17_roo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T07:01:02.251415",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/HANDOFF-TEMIZ-01_rapor_2026-09-17_roo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "kok-temizlik_envanter_2026-09-17_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/KOK-TEMIZLIK_envanter_2026-09-17_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T00:34:19.593651",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/KOK-TEMIZLIK_envanter_2026-09-17_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "kpi-hist-01_rapor_2026-09-17_kilo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/KPI-HIST-01_rapor_2026-09-17_kilo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T13:14:25.686041",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/KPI-HIST-01_rapor_2026-09-17_kilo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "marka-revize-01-bulgu_rapor_2026-09-18_orkestrator.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/MARKA-REVIZE-01-BULGU_rapor_2026-09-18_orkestrator.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T05:56:25.783316",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/MARKA-REVIZE-01-BULGU_rapor_2026-09-18_orkestrator.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "marka-revize-01_bulgular_2026-09-17_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/MARKA-REVIZE-01_bulgular_2026-09-17_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T19:25:53.595419",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/MARKA-REVIZE-01_bulgular_2026-09-17_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "marka-revize-01_rapor_2026-09-17_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/MARKA-REVIZE-01_rapor_2026-09-17_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T19:24:56.002035",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/MARKA-REVIZE-01_rapor_2026-09-17_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "p7-6_brif_2026-09-15_roo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/P7-6_brif_2026-09-15_roo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-15T17:53:01.861870",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/P7-6_brif_2026-09-15_roo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "po-01_urun_vizyonu_ve_kararlar.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-14T06:47:18.127736",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/PO-01_urun_vizyonu_ve_kararlar.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "po-back-08_kritik_bulgular_20260915_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md",
+        "kural": "A1",
+        "incoming_link": 1,
+        "wikilink_sayisi": 1,
+        "mtime": "2026-09-21T12:41:16.834120",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/PO-BACK-08_kritik_bulgular_20260915_cline.md",
+          "kural": "A1",
+          "incoming_link": 1,
+          "wikilink_sayisi": 1,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "repo-hijyen-01_envanter.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/REPO-HIJYEN-01_envanter.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-15T13:03:28.504700",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/REPO-HIJYEN-01_envanter.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "rev-admin-env-01_bulgular_20260915_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/REV-ADMIN-ENV-01_bulgular_20260915_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-15T20:11:35.965929",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/REV-ADMIN-ENV-01_bulgular_20260915_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "rev-batch-01_bulgular_2026-09-16_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/REV-BATCH-01_bulgular_2026-09-16_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-16T22:20:16.738308",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/REV-BATCH-01_bulgular_2026-09-16_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "rev-batch-01_rapor_2026-09-16_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/REV-BATCH-01_rapor_2026-09-16_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-16T22:19:21.140130",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/REV-BATCH-01_rapor_2026-09-16_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "rev-i18n-ses-02_bulgular_2026-09-15_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/REV-I18N-SES-02_bulgular_2026-09-15_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-15T15:19:12.413843",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/REV-I18N-SES-02_bulgular_2026-09-15_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "rev-mvp-admin-01_bulgular_20260915_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/REV-MVP-ADMIN-01_bulgular_20260915_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-15T18:20:13.962539",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/REV-MVP-ADMIN-01_bulgular_20260915_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "rev-mvp-kd-01_rapor_20260915_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/REV-MVP-KD-01_rapor_20260915_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-15T16:24:25.111266",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/REV-MVP-KD-01_rapor_20260915_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "rev-nav-fix-01_bulgular_2026-09-16_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/REV-NAV-FIX-01_bulgular_2026-09-16_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-16T17:55:48.677752",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/REV-NAV-FIX-01_bulgular_2026-09-16_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "rev-ui-chart-01_bulgular_2026-09-16_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/REV-UI-CHART-01_bulgular_2026-09-16_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-16T17:55:48.147146",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/REV-UI-CHART-01_bulgular_2026-09-16_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "rev-ui-sidebar-02_bulgilar_2026-09-17_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/REV-UI-SIDEBAR-02_bulgilar_2026-09-17_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T11:38:26.908656",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/REV-UI-SIDEBAR-02_bulgilar_2026-09-17_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "review-po-back-06_rapor_20260915_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/REVIEW-PO-BACK-06_rapor_20260915_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-15T14:10:33.722632",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/REVIEW-PO-BACK-06_rapor_20260915_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "roo-config-01_capraz_inceleme_2026-09-17_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ROO-CONFIG-01_capraz_inceleme_2026-09-17_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T02:40:14.306998",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ROO-CONFIG-01_capraz_inceleme_2026-09-17_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "roo-config-01_rapor_2026-09-17_kilo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/ROO-CONFIG-01_rapor_2026-09-17_kilo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T23:20:55.399741",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/ROO-CONFIG-01_rapor_2026-09-17_kilo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "sec-auth-01_asama_b_rapor_2026-09-17_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/SEC-AUTH-01_asama_b_rapor_2026-09-17_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T20:31:49.809759",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/SEC-AUTH-01_asama_b_rapor_2026-09-17_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "sec-auth-01_bulgular_2026-09-16_cline_ara.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/SEC-AUTH-01_bulgular_2026-09-16_cline_ara.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-16T23:32:32.974674",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/SEC-AUTH-01_bulgular_2026-09-16_cline_ara.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "sections-duzelte-2026-09-17_kilo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/SECTIONS-DUZELTE-2026-09-17_kilo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T18:27:50.354140",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/SECTIONS-DUZELTE-2026-09-17_kilo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "cl-03_guvenlik_raporu.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/security_audit/CL-03_guvenlik_raporu.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-14T06:28:00.472675",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/security_audit/CL-03_guvenlik_raporu.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "test-ci-01_rapor_2026-09-17_roo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/TEST-CI-01_rapor_2026-09-17_roo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T06:56:13.115202",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/TEST-CI-01_rapor_2026-09-17_roo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "test-iso-02_bulgular_2026-09-17_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/TEST-ISO-02_bulgular_2026-09-17_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T03:00:32.777977",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/TEST-ISO-02_bulgular_2026-09-17_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "test-iso-03_bulgular_2026-09-17_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/TEST-ISO-03_bulgular_2026-09-17_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T23:19:41.957498",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/TEST-ISO-03_bulgular_2026-09-17_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "tg-01_rapor_2026-09-18_kilo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/TG-01_rapor_2026-09-18_kilo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T04:38:34.923669",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/TG-01_rapor_2026-09-18_kilo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "tok-01_teslim_2026-09-16_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/TOK-01_teslim_2026-09-16_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-16T20:00:21.232521",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/TOK-01_teslim_2026-09-16_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "ui-mimari-02_rapor_2026-09-17_kilo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/UI-MIMARI-02_rapor_2026-09-17_kilo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T11:27:18.819997",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/UI-MIMARI-02_rapor_2026-09-17_kilo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "ui-modal-01_bulgular_20260915_cline.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/UI-MODAL-01_bulgular_20260915_cline.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-15T20:57:46.956996",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/UI-MODAL-01_bulgular_20260915_cline.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "ux-menu-03_rapor_2026-09-18_orkestrator.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/UX-MENU-03_rapor_2026-09-18_orkestrator.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T20:26:18.649693",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/UX-MENU-03_rapor_2026-09-18_orkestrator.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "v10-hijyen-01_rapor_2026-09-18_orkestrator.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/V10-HIJYEN-01_rapor_2026-09-18_orkestrator.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T16:50:52.067824",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/V10-HIJYEN-01_rapor_2026-09-18_orkestrator.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "v10-hijyen-02_rapor_2026-09-18_orkestrator.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/V10-HIJYEN-02_rapor_2026-09-18_orkestrator.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-18T21:09:03.052109",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/V10-HIJYEN-02_rapor_2026-09-18_orkestrator.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "vault-birlestime-plan-01_strateji_2026-09-20_orkestrator.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/VAULT-BIRLESTIME-PLAN-01_strateji_2026-09-20_orkestrator.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 1,
+        "mtime": "2026-09-21T00:20:01.487148",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/VAULT-BIRLESTIME-PLAN-01_strateji_2026-09-20_orkestrator.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 1,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "vault-tarama-01_analiz_2026-09-20_orkestrator.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/VAULT-TARAMA-01_analiz_2026-09-20_orkestrator.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-21T00:19:17.471395",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/VAULT-TARAMA-01_analiz_2026-09-20_orkestrator.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "vec-test-01_rapor_2026-09-17_kilo.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/VEC-TEST-01_rapor_2026-09-17_kilo.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-17T04:28:31.498167",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/VEC-TEST-01_rapor_2026-09-17_kilo.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "workflow_optimization.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/orchestrator/WORKFLOW_OPTIMIZATION.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 3,
+        "mtime": "2026-09-15T05:06:57.410912",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/orchestrator/WORKFLOW_OPTIMIZATION.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 3,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "aso_ostim_kalite_raporu.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/quality/aso_ostim_kalite_raporu.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-13T08:52:39.494082",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/quality/aso_ostim_kalite_raporu.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "optimizer_20260912_1249.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/router/optimizer_20260912_1249.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-12T12:49:39.660997",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/router/optimizer_20260912_1249.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "optimizer_20260912_1305.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/router/optimizer_20260912_1305.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-12T13:05:29.520441",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/router/optimizer_20260912_1305.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "optimizer_20260912_1313.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 2,
+      "canonical": {
+        "yol": "Huginn Data Insights/data/router/optimizer_20260912_1313.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-12T13:13:49.666093",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/data_worktree/router/optimizer_20260912_1313.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    },
+    {
+      "grup_adi": "brief_dashboard-01.md",
+      "turu": "HDI-içi",
+      "dosya_sayisi": 5,
+      "canonical": {
+        "yol": "Huginn Data Insights/workspace/external/claude_code/brief_DASHBOARD-01.md",
+        "kural": "A1",
+        "incoming_link": 0,
+        "wikilink_sayisi": 0,
+        "mtime": "2026-09-12T14:48:24.082306",
+        "gupdater_degistirilecek": true
+      },
+      "redirect": [
+        {
+          "yol": "Huginn Data Insights/workspace/external/kilo_code/brief_DASHBOARD-01.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/workspace/external/roo_code/brief_DASHBOARD-01.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/workspace/external/copilot/brief_DASHBOARD-01.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        },
+        {
+          "yol": "Huginn Data Insights/workspace/external/cline/brief_DASHBOARD-01.md",
+          "kural": "A1",
+          "incoming_link": 0,
+          "wikilink_sayisi": 0,
+          "durum": "OK",
+          "guncellenecek": true
+        }
+      ]
+    }
+  ]
+}

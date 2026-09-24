@@ -1,0 +1,82 @@
+{
+  "metadata": {
+    "gorev": "GRAPH-CANONICAL-SECER-02",
+    "tarih": "2026-09-23T07:40:09.959040+00:00",
+    "kaynak": "data\\orchestrator\\GRAPH-CANONICAL_rapor_2026-09-21.json"
+  },
+  "ozet": {
+    "grup_sayisi": 156,
+    "canonical_toplam": 156,
+    "canonical_eksik": 0,
+    "redirect_kirik": 8,
+    "ssot_ihlali": 0,
+    "bos_redirect_dosya": 0
+  },
+  "bulgular": [
+    {
+      "tur": "CANONICAL_KAYIP",
+      "grup": ".instructions.md",
+      "dosya": "Huginn Data Insights/AI proje v1/.instructions.md"
+    },
+    {
+      "tur": "CANONICAL_KAYIP",
+      "grup": "agent_sync.md",
+      "dosya": "Huginn Data Insights/AI proje v1/AGENT_SYNC.md"
+    },
+    {
+      "tur": "REDIRECT_KIRIK",
+      "grup": "agents.md",
+      "dosya": "Huginn Data Insights/AI proje v1/AGENTS.md"
+    },
+    {
+      "tur": "CANONICAL_KAYIP",
+      "grup": "ana_kurallar.md",
+      "dosya": "Huginn Data Insights/AI proje v1/ANA_KURALLAR.md"
+    },
+    {
+      "tur": "REDIRECT_KIRIK",
+      "grup": "changelog.md",
+      "dosya": "Huginn Data Insights/AI proje v1/CHANGELOG.md"
+    },
+    {
+      "tur": "CANONICAL_KAYIP",
+      "grup": "claude.md",
+      "dosya": "Huginn Data Insights/data/skills/supabase/CLAUDE.md"
+    },
+    {
+      "tur": "REDIRECT_KIRIK",
+      "grup": "claude.md",
+      "dosya": "Huginn Data Insights/AI proje v1/CLAUDE.md"
+    },
+    {
+      "tur": "REDIRECT_KIRIK",
+      "grup": "readme.md",
+      "dosya": "Huginn Data Insights/src/company_master/orchestrator/README.md"
+    },
+    {
+      "tur": "REDIRECT_KIRIK",
+      "grup": "kimlik doğrulama sistemi.md",
+      "dosya": "Huginn Data Insights/AI proje v1/Kimlik Doğrulama Sistemi.md"
+    },
+    {
+      "tur": "REDIRECT_KIRIK",
+      "grup": "kullanıcı yönetimi.md",
+      "dosya": "Huginn Data Insights/AI proje v1/Kullanıcı Yönetimi.md"
+    },
+    {
+      "tur": "REDIRECT_KIRIK",
+      "grup": "mimari kararlar.md",
+      "dosya": "Huginn Data Insights/AI proje v1/Mimari Kararlar.md"
+    },
+    {
+      "tur": "CANONICAL_KAYIP",
+      "grup": "project_roadmap.md",
+      "dosya": "Huginn Data Insights/AI proje v1/PROJECT_ROADMAP.md"
+    },
+    {
+      "tur": "REDIRECT_KIRIK",
+      "grup": "readme_arayuz.md",
+      "dosya": "Huginn Data Insights/AI proje v1/README_ARAYUZ.md"
+    }
+  ]
+}
