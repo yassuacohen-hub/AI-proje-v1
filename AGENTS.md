@@ -731,3 +731,24 @@ python scripts/ajan_chat.py bulgula "Tasarım (D-192)" "Font boyut tutarsız" --
 **`ADMIN-KİT` bağlı belgeleri (§0.1):** PRD kaynağı `Huginn Data Insights (HUGIns).txt` §889-1687 · V9 bağlam `01_versiyon_9_baglam_dokumani.md` §16.4/§16.5 · `docs/ARCHITECTURE_DECISION_HYBRID_ADMIN.md` · `03_mimari/06_muninn_prd_vs_huginn_analiz.md` (bayat) · `CHANGELOG.md` · görev panosu `data/orchestrator/ADMIN_PANEL_PLAN_VE_GOREV_PAKETLERI_2026-09-22.md`
 
 **Yeni kit açma.** SSOT dosyasına statü bloğu + `§0.1` + ajan kuralı satırı yazılır, kısa ad seçilir, bu tabloya satır eklenir. Onay: KAHİN.
+
+---
+
+## SSOT Tek-Durum Kuralı (D-197 — KAHİN kararı 2026-09-24)
+
+**Kapsam:** [[AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani]] ve sonraki tüm SSOT dökümanları.
+
+**Kural.**
+1. **Durum ve öncelik yalnız §7 İzlenebilirlik Matrisi'nde tutulur.** §7 tek yazma noktasıdır; bir maddenin durumu değişince yalnız oraya yazılır.
+2. **§8 / §9 / §10 / §11 / §12 tanım ve gerekçe yazar.** Bu bölümler ne yapılacağını ve nedenini anlatır; durum etiketi (`✅`, `⬜`, `devam`), öncelik etiketi (`P0`/`P1`/`P2`) veya tamamlanma yüzdesi **taşımaz**. Bir maddenin nerede durduğunu öğrenmek için §7'ye bakılır.
+3. **§14 Revizyon Tablosu saf değişiklik günlüğüdür** — "ne zaman, kim, neyi değiştirdi". İlerleme göstergesi değildir; toplam/kalan/yüzde satırı içermez.
+4. **Çelişkide §7 doğru kabul edilir.** Başka bölüm §7 ile çelişiyorsa çelişen etiket o bölümden silinir, §7 düzeltilmez.
+5. **Metrik biçimi:** ilerleme yüzde ile değil ham sayaçla verilir — `Açık görev — P0: n · P1: n · P2: n (kaynak: §7 matrisi)`. Yüzde, eşit ağırlıkta olmayan maddeleri eşitmiş gibi gösterir.
+
+**Gerekçe:** Aynı bilgi iki yerde tutulunca zamanla ayrışır; ajan hangisinin doğru olduğunu bilemez, KAHİN yanlış tabloyu okur. Kök neden "unutulan güncelleme" değil, **bilginin çoğaltılmış olması**. Tek yazma noktası bu sınıfı tümden kapatır.
+
+**Uygulama görevi:** `plans/brief_utku_DOC-ADMIN-DURUM-SENKRON-15.md` — tutarsızlıkları eşitlemez, yapıyı ayrıştırır.
+
+**Ilgili Nodlar**
+- [[AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani]]
+- [[plans/_brief_sablon]]
