@@ -2365,5 +2365,13 @@
     "ciktilar": [],
     "teslim_tarihi": "2026-09-24T05:05:58",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-ADMIN-KULLANICI-BIRLESTIR-09",
+    "ajan": "utku",
+    "ozet": "musteri_yonetimi.py _kullanicilar_onay() artik render_user_management(token)a yonlendiriyor, sahte kopya kod silindi; admin_musteriler.py:85 referansi yanlis cikti, SSOT duzeltildi; 122+4072 test gecti",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T05:15:09",
+    "durum": "bekliyor"
   }
 ]

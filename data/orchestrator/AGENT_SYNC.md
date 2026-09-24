@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-24T05:05:59
+> Son guncelleme: 2026-09-24T05:15:09
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -124,7 +124,7 @@
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | plan |
 | UI-ADMIN-SAHTE-KPI-01 | [UI] Sahte API KPI kartını düzelt → admi | utku | P0 | review |
 | UI-ADMIN-SAHTE-EXEC-02 | [UI] Sahte gelir kartlarını düzelt → adm | utku | P0 | review |
-| UI-ADMIN-KULLANICI-BIRLESTIR-09 | [UI] Üç kopya kullanıcı yönetimini taşı  | utku | P1 | plan |
+| UI-ADMIN-KULLANICI-BIRLESTIR-09 | [UI] Üç kopya kullanıcı yönetimini taşı  | utku | P1 | review |
 | UI-ADMIN-GUNCELLIK-KOVA-10 | [UI] Veri güncellik kovalarını yaz → adm | utku | P1 | plan |
 | UI-ADMIN-MALIYET-ANOMALI-11 | [UI] AI maliyet anomali bloğunu yaz → ad | utku | P1 | plan |
 | DOC-ADMIN-ARSIV-12 | [DOC] Bayat analiz dökümanını taşı → arş | utku | P2 | plan |

@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+y# -*- coding: utf-8 -*-
 """Müşteri Yönetimi ana sayfa — 6 alt sekme (NAV-IA-02).
 
 Alt sekmeler:
@@ -21,7 +21,7 @@ from sqlalchemy import text
 from company_master.db.connection import get_engine
 
 from web_dashboard.tabs import admin_destek, admin_export
-from web_dashboard.tabs.admin_extras import render_user_management, TIER_SECIMLERI
+from web_dashboard.tabs.admin_extras import render_user_management
 
 from company_master.settings.user_settings import kvkk_maske_acik  # noqa: E402
 from scripts.dash04_api_client import get_api, post_api  # noqa: E402
@@ -67,81 +67,16 @@ def render_musteri_yonetimi_tab() -> None:
 
 
 def _kullanicilar_onay() -> None:
-    """Kullanıcılar & Onay — onay bekleyen kullanıcılar listesi + tier seçimi + onaylama."""
+    """Kullanıcılar & Onay — admin_extras.render_user_management'a yönlendirir.
+
+    UI-ADMIN-KULLANICI-BIRLESTIR-09: burada onay bekleyen kullanıcı listesi,
+    tier seçimi ve onaylama mantığının ikinci kopyası vardı; kanonik uygulama
+    NAV-PLAN-01 §2.1 gereği admin_extras.render_user_management. Silme değil
+    yönlendirme — çağrı noktası (bu fonksiyon, sekme 0) korunuyor.
+    """
     BOLUMLER[0].render()
-
     token = st.session_state.get("admin_token")
-    if not token:
-        st.warning("Lütfen giriş yapın")
-        return
-
-    try:
-        # Onay bekleyen kullanıcıları ve kategorileri yükle
-        pending = get_api("/api/admin/pending", token=token)
-        categories = get_api("/api/admin/categories", token=token)
-    except Exception as exc:
-        st.error(f"Veri yüklenemedi: {exc}")
-        return
-
-    # Onay bekleyen kullanıcılar
-    if isinstance(pending, dict):
-        bekleyen = pending.get("bekleyen", [])
-        if bekleyen:
-            Section("Onay Bekleyen Kullanıcılar").render()
-            for user in bekleyen:
-                with st.container():
-                    cols = st.columns([4, 1])
-                    with cols[0]:
-                        tiers = TIER_SECIMLERI
-                        default_tier = user.get("tier", "terminal")
-                        try:
-                            default_index = tiers.index(default_tier)
-                        except ValueError:
-                            default_index = 0
-                        selected_tier = st.selectbox(
-                            "Tier",
-                            options=tiers,
-                            index=default_index,
-                            key=f"tier_select_{user.get('user_id', '')}",
-                            label_visibility="collapsed"
-                        )
-                        st.write(
-                            f"**{user.get('email', '')}** — {user.get('company_name', '')} ({user.get('tier', '')})"
-                        )
-                    with cols[1]:
-                        if st.button("Onayla", key=f"approve_{user.get('user_id', '')}", type="primary"):
-                            try:
-                                post_api(
-                                    "/api/admin/approve",
-                                    json={"user_id": user.get("user_id", ""), "tier": selected_tier},
-                                    token=token,
-                                )
-                                st.success(f"{user.get('email', '')} onaylandı ({selected_tier} tier)")
-                                st.cache_data.clear()
-                                st.rerun()
-                            except Exception as e:
-                                st.error(f"Onaylama başarısız: {e}")
-        else:
-            st.info("Onay bekleyen kullanıcı yok.")
-
-        # Son onaylı kullanıcılar
-        onayli_son = pending.get("onayli_son", [])
-        if onayli_son:
-            Section("Son Onaylanan Kullanıcılar").render()
-            import pandas as pd
-            st.dataframe(pd.DataFrame(onayli_son), width="stretch", hide_index=True)
-        else:
-            st.info("Son onaylı kullanıcı yok.")
-
-    # Kategoriler
-    if isinstance(categories, dict):
-        items = categories.get("items", [])
-        if items:
-            Section("Paket Kategorileri").render()
-            import pandas as pd
-            st.dataframe(pd.DataFrame(items), width="stretch", hide_index=True)
-        else:
-            st.info("Kategori kaydı yok.")
+    render_user_management(token)
 
 
 def _paket_kredi() -> None:
