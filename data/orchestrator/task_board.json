@@ -7340,13 +7340,13 @@
     "baslik": "[UI] Veri güncellik kovalarını yaz → admin_quality.py dağılımı (2s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-24T04:15:40",
     "bitis": null,
     "dosyalar": [
       "web_dashboard/tabs/admin_quality.py"
     ],
-    "not": "",
+    "not": "Teslim (utku): admin_quality.py: load_freshness_distribution()+_chart_freshness() eklendi, kova dagilimi bolumu render_quality_tab'a entegre; tests/test_admin_quality.py 4 test yeni; kritik yan-bulgu: musteri_yonetimi.py:1 bozuk satir bulunup duzeltildi; SSOT 6 satir guncellendi (S9/A2/K3/G6/roadmap-8/v2.2 revizyon); tam suite 4076 passed",
     "source": "ic",
     "from_agent": null,
     "mod": "code",

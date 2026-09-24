@@ -143,6 +143,48 @@ def load_score_distribution() -> pd.DataFrame:
     return pd.DataFrame(columns=["bucket", "adet"])
 
 
+_FRESHNESS_KOVALARI = ("0-7g", "8-30g", "31-90g", "90g+")
+
+
+@st.cache_data(ttl=60)
+def load_freshness_distribution() -> pd.DataFrame:
+    """UI-ADMIN-GUNCELLIK-KOVA-10 (SSOT §9 K3): updated_at yaşına göre kova dağılımı.
+
+    Yaş hesabı Python tarafında yapılır (load_quality_overview() medyan
+    hesaplamasındaki kalıpla aynı gerekçe: cross-DB uyumluluk).
+    """
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            rows = conn.execute(text(
+                "SELECT updated_at FROM companies "
+                "WHERE is_ankara=TRUE AND is_osb_member=TRUE AND updated_at IS NOT NULL"
+            )).scalars().all()
+        if rows:
+            simdi = datetime.now()
+            sayac = dict.fromkeys(_FRESHNESS_KOVALARI, 0)
+            for deger in rows:
+                try:
+                    gun = (simdi - datetime.fromisoformat(str(deger)[:19])).days
+                except (ValueError, TypeError):
+                    continue
+                if gun <= 7:
+                    sayac["0-7g"] += 1
+                elif gun <= 30:
+                    sayac["8-30g"] += 1
+                elif gun <= 90:
+                    sayac["31-90g"] += 1
+                else:
+                    sayac["90g+"] += 1
+            return pd.DataFrame({
+                "kova": list(_FRESHNESS_KOVALARI),
+                "adet": [sayac[k] for k in _FRESHNESS_KOVALARI],
+            })
+    except Exception as exc:
+        _admin_quality_logger.warning("Güncellik dağılımı yüklenemedi", exc)
+    return pd.DataFrame(columns=["kova", "adet"])
+
+
 @st.cache_data(ttl=60)
 def load_missing_field_analysis() -> pd.DataFrame:
     """Eksik alan analizi: her alanın eksiklik oranı (doluluk analizinin tersi)."""
@@ -292,6 +334,25 @@ def _chart_distribution(dist_df: pd.DataFrame) -> None:
         st.bar_chart(dist_df.set_index("bucket")["adet"], width="stretch")
 
 
+def _chart_freshness(fresh_df: pd.DataFrame) -> None:
+    """UI-ADMIN-GUNCELLIK-KOVA-10: updated_at yaş kovası grafiği."""
+    if fresh_df.empty:
+        st.info("Güncellik verisi bulunamadı.")
+        return
+    try:
+        import plotly.express as px
+        fig = px.bar(
+            fresh_df, x="kova", y="adet",
+            title="Veri Güncellik Dağılımı (updated_at Yaşı)",
+            labels={"kova": "Yaş Aralığı", "adet": "Firma Sayısı"},
+            color="adet", color_continuous_scale="Blues",
+        )
+        fig.update_layout(height=300, margin=dict(t=40, b=20))
+        st.plotly_chart(fig, width="stretch")
+    except ImportError:
+        st.bar_chart(fresh_df.set_index("kova")["adet"], width="stretch")
+
+
 def _chart_missing_fields(missing_df: pd.DataFrame) -> None:
     if missing_df.empty:
         st.info("Eksik alan verisi bulunamadı.")
@@ -417,6 +478,11 @@ def render_quality_tab() -> None:
     st.subheader("📈 Kalite Skoru Dağılımı")
     dist_df = load_score_distribution()
     _chart_distribution(dist_df)
+
+    st.divider()
+    st.subheader("📅 Veri Güncellik")
+    fresh_df = load_freshness_distribution()
+    _chart_freshness(fresh_df)
 
     st.divider()
     st.subheader("🔍 Eksik Alan Analizi")

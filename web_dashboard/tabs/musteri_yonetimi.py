@@ -1,4 +1,4 @@
-y# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """Müşteri Yönetimi ana sayfa — 6 alt sekme (NAV-IA-02).
 
 Alt sekmeler:

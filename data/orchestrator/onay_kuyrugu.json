@@ -2373,5 +2373,13 @@
     "ciktilar": [],
     "teslim_tarihi": "2026-09-24T05:15:09",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-ADMIN-GUNCELLIK-KOVA-10",
+    "ajan": "utku",
+    "ozet": "admin_quality.py: load_freshness_distribution()+_chart_freshness() eklendi, kova dagilimi bolumu render_quality_tab'a entegre; tests/test_admin_quality.py 4 test yeni; kritik yan-bulgu: musteri_yonetimi.py:1 bozuk satir bulunup duzeltildi; SSOT 6 satir guncellendi (S9/A2/K3/G6/roadmap-8/v2.2 revizyon); tam suite 4076 passed",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T05:27:58",
+    "durum": "bekliyor"
   }
 ]
