@@ -208,7 +208,7 @@ Ayni testler **ana depoda 4/4 passed**. Yani hatalarin hicbiri regresyon degil, 
 
 Bu turda **ilk kez** ortaya cikan, onceki hicbir denetimde gorulmemis bulgular.
 
-### YA-01 — `AI proje v1` gitlink kayitli, `.gitmodules` eslemesi yok (P0)
+### YA-01 — `AI proje v1` gitlink kayitli, `.gitmodules` eslemesi yok (P0) — **KAPANDI (TUR-D1, 2026-09-24)**
 
 **Kanit zinciri:**
 
@@ -264,6 +264,106 @@ git -C "AI proje v1" rev-list --count origin/main..HEAD → 0  (push edilmis)
 | B | Ana depoya goml | Alt `.git` klasorunu kaldir, dosyalari normal olarak commit et | SSOT her klonda gelir; alt depo gecmisi kaybolur |
 | C | Disari cikar | Dizini ana depo disina tasi, SSOT yolunu yeniden baglama | Ana depo temizlenir; yol referanslari guncellenmeli |
 
+---
+
+#### Kapanis — KAHIN karari: **Secenek B** (TUR-D1, 2026-09-24, utku)
+
+Uzak alt depo (`https://github.com/yassuacohen-hub/AI-proje-v1.git`) **silinmedi**, referans olarak duruyor.
+
+**ADIM 0 — veri kaybi onleme (alt depo senkron degildi).** Guvenlik kapisi ilk gecişte FAIL verdi:
+`git status --porcelain` 752 satir. Kural geregi hicbir sey silinmedi, KAHIN'e rapor edildi.
+Karar: once alt depoda commit + push.
+
+```
+alt depo eski HEAD : 5d3d700959a6dae031196c62d828cd55f75b4c87
+alt depo yeni HEAD : 3a9db07a497ab1276ae47d9325abe0d841bd0a98   (443 dosya)
+push               : 5d3d700..3a9db07  HEAD -> main
+83 adet `*.backup_*` artigi `git clean -f -q -- "*.backup_*"` ile temizlendi (AGENTS.md:502)
+```
+
+**ADIM 1 — guvenlik kapisi (2. gecis, TEMIZ).**
+
+```
+git -C "AI proje v1" rev-list --count origin/main..HEAD → 0
+git -C "AI proje v1" status --porcelain                 → BOS
+robocopy ... c:\_AI_PROJE_V1_YEDEK_2026-09-24 /MIR /XD .git → 862 dosya, FAILED=0
+```
+
+**ADIM 2 — gitlink kaldirildi (commit `84d9e6c`).**
+
+```
+git rm --cached "AI proje v1"
+rmdir /S /Q "...\AI proje v1\.git"
+git add "AI proje v1"
+git ls-files -s "AI proje v1" | findstr /B "160000" → BOS  (mode 160000 = 0)
+git ls-files --error-unmatch "AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md" → OK
+```
+
+Indekse **739** dosya girdi; diskteki 862 ile arasindaki **123** dosyalik fark tamami
+onceden var olan mesru ignore kurallarindan: `.env` (sir), `__pycache__/*.pyc`,
+`.pytest_cache/`, `.vscode/`, `.obsidian/workspace.json`, `.agents/skills/*`,
+`cop_kutusu_2026_09_09/*`, `test_reports/*`.
+
+**Tikanma ve cozumu:** ilk `git add` SSOT'u indekse almadi.
+`git check-ignore -v` kok nedeni gosterdi: `.gitignore:44:V10/`. Kural kok dizindeki
+(var olmayan) `V10/` icin yazilmis ama dizin-adi kurali oldugu icin kasa agacindaki
+`AI proje v1/V10/` agacini da vuruyordu. Tek satirlik negasyon eklendi:
+
+```gitignore
+V10/
+# YA-01: kasa V10 agaci SSOT icerir (02_admin_panel_hedef_dokumani.md), depoda TUTULUR
+!AI proje v1/V10/
+```
+
+**ADIM 3 — tekrari onleme (commit `10c1a9e`).**
+Kok neden `scripts/git_auto_push.bat` icindeki `git add -A` idi. Ayni dosyaya,
+`add -A` satirindan hemen sonra kapi eklendi (yeni arac/soyutlama uretilmedi):
+
+```bat
+"%GIT%" submodule status >nul 2>>%LOG%
+if errorlevel 1 (
+    echo [%DATE% %TIME%] ESLEMESIZ GITLINK: commit iptal, elle temizle ^(YA-01^) >> %LOG%
+    "%GIT%" reset >> %LOG% 2>&1
+    exit /b 2
+)
+```
+
+Eslemesiz gitlink varsa `git submodule status` `fatal: no submodule mapping found` verir
+ve errorlevel 1 doner; o durumda commit **yapilmaz**, indeks geri alinir.
+Mevcut `tests/test_naming_audit.py` dosyasina tek test eklendi:
+`test_eslemesiz_gitlink_yok` — `git ls-files -s` mode 160000 girdilerini `.gitmodules`
+`path` kayitlariyla karsilastirir. Sonuc: **9 passed in 0.32s**.
+
+**ADIM 4 — taze klon provasi (bilincli olarak `--recurse-submodules` OLMADAN).**
+
+```
+git clone --branch chore/monorepo-merge --single-branch <ana depo> c:\_KLON_PROVA_2026-09-24
+  Updating files: 100% (2931/2931), done.
+
+klonda SSOT var mi                                  → VAR
+klonda SSOT satir sayisi                            → 507        (beklenen 507)
+klonda git ls-files "AI proje v1" | find /C /V ""   → 739        (ana indeksle ayni)
+klonda git ls-files -s | findstr /B "160000"        → yalniz .agents/marketplace (eslemesi VAR)
+klonda gorev_kutusu.py simulasyon                   → 8/8 OK, EXIT=0
+```
+
+Ana depo ayni komutlar: `simulasyon` 8/8 OK, EXIT=0 · `pytest -q` **4093 passed, 12 skipped**.
+
+**Cikti farki (beklenen, gerekcesi):** klonda `pytest -q` → *6 failed, 4065 passed, 14 skipped, 16 errors*.
+Ayni dosyalar ana depoda kosuldugunda **116 passed** (0 hata). Fark tamami ortam kaynakli,
+`AI proje v1` icerigiyle **ilgisiz**:
+
+| Kirilan | Gerekce |
+|---|---|
+| `test_api_companies.py` (3 fail + 16 error), `test_api_integration.py`, `company_master/test_connection.py` | Klonda `.env` YOK (sir, dogru sekilde ignore) ve `data\company_master.db` YOK (ignore). Dogrulandi: `ENV-YOK` / `DB-YOK`. |
+| `test_pano_denetim.py::test_pano_yolu_kanonik` | Bilinen **YA-03**: test mutlak dizin adina bagimli. Hata metni: `PANO_DOSYA kanonik yolda degil: C:\_KLON_PROVA_2026-09-24\...`. Bu bulgu zaten acik, kapsam disi. |
+
+Prova dizini silindi (`PROVA-SILINDI`).
+
+**Sonuc:** Taze klon artik SSOT'u 507 satirla getiriyor; `simulasyon` kontrol 5 ve 6 baska
+makinede de calisir. YA-01'in etki zinciri (madde 1-5) tamamen kirildi.
+Kapanis commit'leri: `84d9e6c` (gomme) · `10c1a9e` (koruma + test).
+
 ### YA-02 — `simulasyon` eksik denetimi cikis kodu 0 ile ortuyor (P1)
 
 Kontrol 5 ve 6, hedef dosya bulunamayinca **"ATLANDI" yazip gecer** ama cikis kodunu etkilemez.
@@ -286,7 +386,7 @@ Rapor hash'leri dogrulanmadan yazilmis — bu, denetim izinin guvenilirligini du
 
 **Kapanan:** 20 denetim bulgusunun tamami (B-01…B-20) HEAD'de kapali dogrulandi; B-15 disk hijyeni yonuyle bu turda kapatildi (`2583ce2`, 32 dosya). Ana depo `simulasyon` 8/8 OK, cikis kodu 0. Regresyon yok — TUR-B raporunun "acik" dedigi bes bulgudan dordu zaten kapaliydi, rapor yanlisti.
 
-**Acik kalan:** Dort yeni acik — **YA-01** `AI proje v1` gitlink eslemesi yok (P0, taze klonda SSOT gelmiyor, KAHIN uc secenekten birini secmeli) · **YA-02** `simulasyon` atlanmis kontrolu cikis kodu 0 ile ortuyor (P1) · **YA-03** `test_pano_yolu_kanonik` dizin adina bagimli (P2) · **YA-04** TUR-B raporunda B-06 hash atfi hatali (P2). Ayrica `2583ce2` **push edilmedi** — sahip kontrolu bekliyor.
+**Acik kalan:** **YA-01 KAPANDI** (TUR-D1, 2026-09-24 — KAHIN Secenek B; `84d9e6c` + `10c1a9e`; taze klon SSOT'u 507 satirla getiriyor). Uc acik kaldi — **YA-02** `simulasyon` atlanmis kontrolu cikis kodu 0 ile ortuyor (P1) · **YA-03** `test_pano_yolu_kanonik` dizin adina bagimli (P2; TUR-D1 klon provasinda tekrar gorundu) · **YA-04** TUR-B raporunda B-06 hash atfi hatali (P2).
 
 ---
 
