@@ -189,6 +189,7 @@
   Üçünden biri eksikse atama **yapılmaz**, tetik **düşürülmez**.
 - **Kontrolü:** `tetik_ekle(task_id, ajan, talimat="")` argümanı boş stringse, çağrı yapılmaz. Orkestratör brifsiz görev atarsa (tetik hatasız düşerse de) YASU/UTKU teslim TESLİM ETMEYECEKTİR — `"brif yok"` cevabı verir, task stale kalır.
 - **Uygulanacak:** Her talimat argument'i yazılırken dosyanın var olduğu doğrulanacak; yoksa `FileNotFoundError` veya benzer hata alınacak ve işlem durdurulacak. Gerekli brief yazılıncaya kadar görevi tekrar tetiklemek yasak.
+- **Brif şablonu (zorunlu iskelet):** [[plans/_brief_sablon]] — `plans/_brief_sablon.md`. Her yeni brif bu iskeletten türetilir. `## Doğrulanacak varsayım` bölümü **`## Adımlar`dan önce** gelir ve boş bırakılamaz: brifte sabitlenen her tablo/kolon adı, fonksiyon imzası, `dosya:satır` referansı ve eşik değeri ayrı madde olarak yazılır, madde "Yoksa **dur**, panoya sorun aç, uydurma." ile biter. Jenerik kopyala-yapıştır varsayım geçersizdir.
 - **Gerekçe:** Brifsiz görev = iş maddeleri olmayan talimat = ajan ne yapacağını bilemez = zaman kaybı + block + frustration. KAHİN'in gerçek iş tanımına sahip olması şart.
 
 ## Raporlama ve Özeleştiri (D-67 — KAHİN kararı 2026-09-20)

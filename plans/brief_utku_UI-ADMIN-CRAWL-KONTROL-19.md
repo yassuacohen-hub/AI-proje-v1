@@ -10,6 +10,14 @@ SSOT §8.1 A8 (satır 272), §10 sıra 10 (satır 373) ve §12 G8 (satır 421): 
 
 Girdi hazır — `webhook_monitor.py` iş listesini zaten okuyor. Eklenen tek şey aksiyon katmanı.
 
+## Doğrulanacak varsayım
+- `webhook_monitor.py` crawl iş listesini okuyan mevcut bileşen varsayıldı ve aynı veri kaynağı kontrol için yeniden kullanılabilir. Farklı kaynak kullanıyorsa **dur**, panoya sorun aç.
+- İş durum adları `beklemede` / `calisiyor` / `basarisiz` / `durduruldu` varsayıldı. Gerçek durum kümesi farklıysa **dur**, kodun sabitinden oku, uydurma.
+- Admin rol kontrolü için projede hâlihazırda bir desen var varsayıldı; yeni yetki mekanizması yazılmayacak. Desen yoksa **dur**, KAHİN'e sor.
+- `admin_audit` kayıt altyapısının bu akışta kullanılabilir olduğu **doğrulanmadı** — belirsiz. Yoksa kontrol eylemleri denetim kaydı olmadan yayına alınmaz: **dur**, panoya sorun aç.
+- Tablo bileşeni olarak AgGrid **yasak** (SSOT §8.3 C6); yerleşik tablo bileşeni yeterli varsayıldı. Yetmiyorsa KAHİN'e sor.
+- Durdur/yeniden dene eylemleri geri alınamaz üretim etkisi taşır; onay adımı (tıklama teyidi) zorunlu varsayıldı. Aksi isteniyorsa KAHİN onayı şart.
+
 ## Adımlar
 
 1. `webhook_monitor.py` içindeki iş listesi tablosunun yanına satır bazlı iki aksiyon ekle: **Tetikle** ve **Durdur**.

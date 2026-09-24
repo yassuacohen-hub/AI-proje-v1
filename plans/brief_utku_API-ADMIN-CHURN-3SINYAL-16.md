@@ -7,6 +7,14 @@
 ## Neden
 SSOT §9 K1 (satır 340): PRD formülü `sinyal = Σ(1 for g in (g_giris, g_arama, g_ai) if g>=14)`. Şu an `risk_etiketi()` yalnız `last_login` ile çalışıyor → 🟡 kısmi, formülün 2/3'ü eksik. §10 sıra 5 (satır 368) bunu P1 açık tutuyor. `-14` ile arama/AI verisi akmaya başlayınca eksik kalan tek şey formül.
 
+## Doğrulanacak varsayım
+- `src/company_master/churn.py` içinde `risk_etiketi(son_giris, bugun)` fonksiyonu bu imzayla var varsayıldı. İmza farklıysa **dur**, panoya sorun aç, uydurma.
+- `web_dashboard/tabs/musteri_yonetimi.py:272` bu fonksiyonun tek çağıranı varsayıldı. Satır kaymış veya başka çağıran varsa **önce çağıranları tara**, sonra yaz.
+- Mevcut 14 günlük giriş yok eşiği kodda sabit varsayıldı; 3-sinyal sürümünde de aynı eşik korunacak. Kodda başka değer varsa **dur**, KAHİN'e sor.
+- `risk_etiketi_3sinyal(...)` dönüşü `{0:"Yok",1:"Düşük",2:"Orta",3:"Yüksek"}` eşlemesi varsayıldı; UI bu 4 etiketi gösterecek. Başka etiket seti isteniyorsa **dur**.
+- Üçüncü sinyalin veri kaynağı (`-13` aktivite logu) mevcut varsayıldı. Tablo yoksa sinyal sessizce 0 sayılmaz — **dur**, bağımlılığı bildir.
+- Eski `risk_etiketi` çağrıları kırılmayacak (geriye dönük uyum) varsayıldı. Kırılması gerekiyorsa KAHİN onayı şart.
+
 ## Adımlar
 1. Mevcut `risk_etiketi(son_giris, bugun)` saf fonksiyonunu **bozma** — geriye uyumlu kalsın (çağıran `musteri_yonetimi.py:272` var).
 2. Yeni saf fonksiyon: `risk_etiketi_3sinyal(son_giris, son_arama, son_ai, bugun) -> str`, eşik 14 gün, çıktı `{0:"Yok", 1:"Düşük", 2:"Orta", 3:"Yüksek"}`.

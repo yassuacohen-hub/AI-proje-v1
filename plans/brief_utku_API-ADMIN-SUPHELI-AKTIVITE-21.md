@@ -11,6 +11,15 @@ SSOT §9 K10 (satır 349) "❌ yok", §10 sıra 11 (satır 374), §12 G9 (satır
 
 Bu tur **yalnız tespit** kapsar. Otomatik hesap kilitleme, oturum sonlandırma veya e-posta bildirimi **bu göreve dahil değildir** — yanlış pozitifin gerçek kullanıcıyı kilitlemesi riski ölçüm yapılmadan alınmaz.
 
+## Doğrulanacak varsayım
+- `src/company_master/admin_audit.py` mevcut ve şüpheli aktivite mantığı buraya eklenecek varsayıldı. Dosya yoksa **dur**, yeni modül açmadan panoya sorun aç.
+- **Kritik:** "Farklı ülkeden giriş" kuralı, olay kaydında **ülke kodu veya IP alanı** bulunmasını gerektirir. `-13` şemasında (`id`/`user_id`/`olay_tipi`/`olay_zamani`/`detay`/`basarili`) böyle bir kolon **yok**; IP'nin `detay` JSONB içine yazılacağı varsayıldı. `-14` bunu yazmıyorsa bu kural **uygulanamaz**: **dur**, panoya sorun aç, kuralı sessizce atlama veya uydurma veriyle yazma.
+- IP'den ülke çözümlemesi için mevcut bir yol var varsayıldı. Yoksa yeni bağımlılık ekleme (D-kural) — **dur**, KAHİN'e sor.
+- "Toplu dışa aktarım" için ayrı bir olay tipi yazılıyor varsayıldı. `-13`'ün üç tipinde (`giris`/`arama`/`ai_kullanim`) böyle bir tip yok: **dur**, önce olay tipini tanımlat.
+- Eşikler bu brief'te sabitlendi: 5 dakikada 5 başarısız giriş; 24 saatte 2 farklı ülke; mesai dışı penceresi 00:00–06:00. SSOT'ta başka değer varsa **dur**, KAHİN'e sor.
+- `olay_zamani` `TIMESTAMPTZ` ve karşılaştırmalar **UTC** üzerinden varsayıldı; 00:00–06:00 penceresi de UTC. Yerel saat bekleniyorsa **dur** — yanlış saat dilimi yanlış alarm üretir.
+- Kural çıktısı yalnız **işaretleme/uyarı**; otomatik hesap kilitleme yok varsayıldı. Kilitleme isteniyorsa KAHİN onayı şart.
+
 ## Adımlar
 
 1. `admin_audit.py` içine saf kural fonksiyonları ekle. Her biri olay listesi alır, `bool` döner:

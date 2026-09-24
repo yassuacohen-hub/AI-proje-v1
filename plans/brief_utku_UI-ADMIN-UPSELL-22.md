@@ -11,6 +11,15 @@ SSOT §9 K7 (satır 346) "❌ yok": kota doygunluğuna yaklaşan sağlıklı mü
 
 Girdi hazır: `credit_ledger` tablosu veritabanında mevcut, ek migration gerekmez. Yalnız churn etiketi `-16` ile güncellenecek.
 
+## Doğrulanacak varsayım
+- `credit_ledger` tablosu veritabanında mevcut ve müşteri başına kota limiti + tüketim çıkarılabiliyor varsayıldı. Tablo yoksa veya kolon adları farklıysa **dur**, panoya sorun aç, uydurma kolon yazma.
+- Doygunluk oranı = tüketim / kota olarak hesaplanabilir varsayıldı; kota `NULL`/sınırsız olan müşteriler hesaptan **dışlanır**. Sınırsız kota işareti farklıysa **dur**.
+- `-16` çıktısı `risk_etiketi_3sinyal(...)` mevcut varsayıldı ve upsell adayı seçiminde risk etiketi kullanılacak. `-16` bitmediyse **dur**, bağımlılığı bildir.
+- `UPSELL_DOYGUNLUK_ESIK=0.85` bu brief'te sabitlendi. SSOT'ta/kodda başka değer varsa **dur**, KAHİN'e sor.
+- Son 30 günlük kullanım büyümesi `credit_ledger` hareketlerinden türetilebilir varsayıldı (tarih damgalı kayıt var). Tarih alanı yoksa büyüme sinyali **kullanılmaz**, sessizce sıfır sayılmaz.
+- Ekranın yeri `web_dashboard/tabs/musteri_yonetimi.py` varsayıldı; yeni sekme açılmayacak. Yapı farklıysa **dur**, doğrula.
+- Aday listesi yalnız **öneri** üretir; otomatik plan yükseltme/fatura işlemi yok varsayıldı. Aksi isteniyorsa KAHİN onayı şart.
+
 ## Adımlar
 
 1. `musteri_yonetimi.py` içine yeni bölüm: **Upsell Adayları**.

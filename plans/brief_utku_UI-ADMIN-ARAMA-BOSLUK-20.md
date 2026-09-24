@@ -11,6 +11,15 @@ SSOT §9 K9 (satır 348) "❌ yok", §10 sıra 12 (satır 375) açık: kullanıc
 
 Bu görev `-14` bitmeden çalıştırılamaz — girdi tablosu yoksa sayfa "veri kaynağı yok" rozeti göstermelidir, sahte liste değil.
 
+## Doğrulanacak varsayım
+- `-14` tamamlanmış ve arama olayları `olay_tipi='arama'` ile yazılıyor varsayıldı. Yazılmıyorsa bu ekran boş kalır: **dur**, bağımlılığı bildir.
+- Sonuçsuz arama `basarili=FALSE` ile işaretleniyor varsayıldı. `-14` başka bir işaretleme kullanıyorsa **dur**, sorguyu ona göre düzelt.
+- Arama teriminin `detay` JSONB alanında (ör. `detay->>'terim'`) tutulduğu varsayıldı — `-13`'te ayrı `terim` kolonu **yok**. Anahtar adı farklıysa **dur**, panoya sorun aç, uydurma anahtar okuma.
+- `BOSLUK_MIN_FREKANS=3` eşiği bu brief'te sabitlendi. SSOT'ta başka değer varsa **dur**, KAHİN'e sor.
+- Ekranda gösterilecek alanlar `terim` / `frekans` / `ilk_gorulme` / `son_gorulme` — hepsi tek sorgudan türetilebilir varsayıldı (`MIN`/`MAX`/`COUNT`). Türetilemiyorsa **dur**.
+- Ekranın yeri `web_dashboard/tabs/admin_quality.py` varsayıldı. Dosya/sekme yapısı farklıysa **dur**, yeni sekme açmadan doğrula.
+- Arama terimleri kullanıcı girdisidir: ekranda **ham HTML olarak basılmaz**, kaçışlanır. Bu güvenlik koşulu varsayım değil, zorunluluktur.
+
 ## Adımlar
 
 1. `admin_quality.py` içine yeni bölüm: **İçerik Boşluk Raporu**.

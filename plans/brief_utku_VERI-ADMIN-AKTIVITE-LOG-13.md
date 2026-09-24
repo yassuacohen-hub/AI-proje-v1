@@ -7,6 +7,14 @@
 ## Neden
 SSOT §8.4 EK BULGU-8 (satır 322) ve §10 sıra 3 (satır 366): giriş/arama/AI kullanım log tablosu DB'de **hiç yok** (30 tablo tarandı). Bu tek eksik 3 ayrı açık maddeyi bloke ediyor: K1 Churn 3-sinyal (§9 satır 340), K9 Arama Boşluğu (§9 satır 348), G4 gerçek DAU (§12 satır 417). Önce girdi, sonra algoritma.
 
+## Doğrulanacak varsayım
+- `src/company_master/schema/migrations/0016_users_last_login.sql` dosyası var ve numaralı migration deseni kullanılıyor varsayıldı; sıradaki boş numara `0017`. Numara doluysa **dur**, panoya sorun aç, uydurma.
+- `schema_migrations` tablosu mevcut ve migration koşucusu onu okuyor varsayıldı. Yoksa **dur**, önce koşucuyu doğrula.
+- Hedef veritabanı PostgreSQL ve `JSONB` + `TIMESTAMPTZ` tipleri destekliyor varsayıldı. SQLite/başka motor çıkarsa **dur**, tip seçimini KAHİN'e sor.
+- `users` tablosu var ve `user_id` FK verilebilir varsayıldı; PK adı `users.id`. Farklıysa **dur**.
+- `user_activity_log` adında tablo **yok** varsayıldı (SSOT §8.4:322 "30 tablo tarandı" bulgusu). `inspect().get_table_names()` ile bizzat doğrula; varsa **dur**, görev yeniden tanımlanır.
+- `olay_tipi` değer kümesi `giris`/`arama`/`ai_kullanim` yeterli varsayıldı — `-14`, `-20`, `-17` bu üç değeri yazacak/okuyacak. Dördüncü tip gerekirse **dur**, panoya sorun aç.
+
 ## Adımlar
 1. `0016_users_last_login.sql` desenini örnek al (aynı migration klasörü, `schema_migrations` zaten var).
 2. Tek tablo `user_activity_log`: `id` (PK), `user_id` (FK users), `olay_tipi` (`giris`/`arama`/`ai_kullanim`), `olay_zamani TIMESTAMPTZ NOT NULL DEFAULT NOW()`, `detay JSONB NULL` (arama terimi, sonuç adedi vb.), `basarili BOOLEAN NOT NULL DEFAULT TRUE`.

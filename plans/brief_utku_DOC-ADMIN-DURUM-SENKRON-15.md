@@ -7,6 +7,12 @@
 ## Neden
 SSOT kendi kendisiyle çelişiyor: §14 satır 473-474'te EK BULGU-9 ve EK BULGU-10 **giderildi** yazıyor, ama §8.4 satır 323-324 hâlâ "**P0**" ve §10 satır 364 (sıra 1) hâlâ "P0 · Kritik" gösteriyor. Aynı şekilde §10 satır 366 (sıra 3) ve §12 G2 notu (satır 415) `last_login` eklendiğini yansıtmıyor. Bayat durum satırı = yanlış öncelik = yanlış iş sırası.
 
+## Doğrulanacak varsayım
+- SSOT dosyası `AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md` tek doğruluk kaynağı ve başka kopyası yok varsayıldı. İkinci kopya bulursan **dur**, panoya sorun aç.
+- Brief'teki satır numaraları (§14:473-474, §8.4:323-324, §10:364/366/368/369, §12:415/417, §2:326-328) yazıldığı andaki hâliyle geçerli varsayıldı. Dosya o günden beri değiştiyse satırlar kaymıştır: **önce başlıkla (§ numarası) bul**, satır numarasına körlemesine yazma.
+- §7 İzlenebilirlik Matrisi tablo biçiminde ve her açık madde için bir satır taşıyor varsayıldı. Satır eksikse **dur**, uydurma satır ekleme yerine eksik listesini panoya bildir.
+- Durum etiketi sözlüğü `✅` / `⬜` / `devam` ve öncelik `P0`/`P1`/`P2` kümesiyle sınırlı varsayıldı. Başka etiket çıkarsa **dur**, KAHİN'e sor.
+
 ## Adımlar
 1. §8.4 satır 323 (EK BULGU-9) ve 324 (EK BULGU-10): öncelik kolonunu `✅ KAPANDI` yap, kanıt olarak `_db_yardim.py` `tablo_var_mi()` + ilgili TASK-ID'yi yaz.
 2. §10 satır 364 (sıra 1): `✅ bitti` — kapatan görevler `UI-ADMIN-SAHTE-KPI-01` / `UI-ADMIN-SAHTE-EXEC-02`.

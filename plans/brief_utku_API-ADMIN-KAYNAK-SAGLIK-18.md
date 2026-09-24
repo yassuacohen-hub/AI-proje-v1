@@ -10,6 +10,14 @@ SSOT §9 K4 (satır 343) "🟡 kısmi" durumda: kaynak güvenilirlik modülü va
 
 Bu görev **bloklu değil** — girdi tabloları (`source_records`, DLQ kayıtları) veritabanında hâlihazırda mevcut. Etki/maliyet oranı yüksek: yeni tablo yok, yeni migration yok, saf hesap fonksiyonu.
 
+## Doğrulanacak varsayım
+- `src/company_master/kaynak_guvenilirlik.py:161` civarındaki fonksiyon sağlık hesabının tek yeri varsayıldı. Satır kaymışsa fonksiyonu **adıyla** bul; ikinci hesap yeri varsa **dur**, panoya sorun aç.
+- `source_records` tablosu ve DLQ kayıtları veritabanında mevcut, kaynak başına başarı/başarısızlık sayısı çıkarılabiliyor varsayıldı. Tablo/kolon yoksa **dur**, uydurma sorgu yazma.
+- Eşikler `SAGLIK_ESIK_YESIL=0.95` ve `SAGLIK_ESIK_TURUNCU=0.70` varsayıldı (bu brief'te sabitlendi). Kodda veya SSOT'ta başka değer varsa **dur**, KAHİN'e sor — sessizce birini seçme.
+- `tests/test_kaynak_guvenilirlik.py` mevcut ve yeni testler oraya eklenecek varsayıldı. Dosya yoksa **dur**, ayrı test dosyası açmadan önce doğrula.
+- Kayıt sayısı sıfır olan kaynak "yeşil" sayılmaz; ayrı "veri yok" durumu gerekir varsayıldı. Aksi bekleniyorsa KAHİN'e sor.
+- Sağlık oranı penceresi (son N gün) SSOT'ta tanımlı varsayıldı; tanım yoksa **dur**, pencereyi kendin uydurma.
+
 ## Adımlar
 
 1. `kaynak_guvenilirlik.py` içine saf fonksiyon ekle:
