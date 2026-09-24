@@ -98,6 +98,7 @@ SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_
 | UI-ADMIN-KVKK-MODU-26 | KVKK Mode sekmesi: render_kvkk_mode_tab, strict/lenient toggle, API POST, testler | 2026-09-24 |
 | UI-ADMIN-KVKK-RAPOR-28 | KVKK Raporu sekmesi: render_kvkk_rapor_tab, admin_kvkk_mode, KPI, trend, testler | 2026-09-24 |
 | UI-KONTROL-PANOSU-32 | Kontrol Panosu sekmesi: render_kontrol_panosu_tab, KPI + bar/line chart, testler | 2026-09-24 |
+| DOC-VISIBILITY-KATMANI-29 | Visibility katmani dokumani: VISIBILITY_LAYER_GUIDE.md, Layer 1/2, modul kontor, karantina | 2026-09-25 |
 | COP-26 | MUSTERILER ekrani: firma listesi + filtre + bildirim blogu | 2026-09-24 |
 | UI-SUBHEADER-MUSTERI-01 | `musteri_yonetimi.py` subheader temizligi (sayfa iskeleti sozlesmesi) | 2026-09-24 |
 | TEST-ADMIN-PERF-01 | `admin_performance` kpi_karti gecis testi | 2026-09-24 |

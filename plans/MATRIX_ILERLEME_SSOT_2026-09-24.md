@@ -38,7 +38,7 @@
 | 8 | UI-ADMIN-KVKK-MODU-26 | Admin KVKK toggle (P1) | P1 | 🟡 aktif | 0% | 2s | - | yeni görev (ALTYAPI-VERI-GORUNURLUK-01) |
 | 9 | UI-ADMIN-KVKK-RAPOR-28 | Rapor sekmesi (P2) | P2 | 🟡 aktif | 0% | 2s | UI-26 | yeni görev |
 
-**Utku Özeti:** 7/7 done ✅ + 2 yeni (1 P1, 1 P2) başlandı (0/2 aktif)
+**Utku Özeti:** 7/7 done ✅ + 2 yeni (1 P1, 1 P2) aktif başlandı (0/2 done)
 
 ---
 
@@ -46,12 +46,12 @@
 
 | # | Görev ID | Başlık | Öncelik | Durum | % | Saat | Blokaj | Nota |
 |---|----------|--------|---------|-------|---|------|--------|------|
-| 1 | UI-ADMIN-FEATURE-FLAG-25 | Feature flag yönetimi | P2 | 🟡 bekliyor | 0% | 3s | - | yeni brief |
-| 2 | API-ADMIN-MFA-26 | Multi-Factor Authentication | P2 | 🟡 bekliyor | 0% | 3s | - | yeni brief |
-| 3 | UI-ADMIN-LTV-CAC-27 | LTV/CAC analiz panosu | P2 | 🟡 bekliyor | 0% | 2s | - | yeni brief |
-| 4 | DOC-ADMIN-MULTITENANT-KARAR-28 | Multitenant mimarı | P2 | 🟡 bekliyor | 0% | 3s | - | yeni brief |
+| 1 | UI-ADMIN-FEATURE-FLAG-25 | Feature flag yönetimi | P2 | 🟡 aktif | 0% | 3s | - | 2026-09-24T23:44:45 |
+| 2 | API-ADMIN-MFA-26 | Multi-Factor Authentication | P2 | 🟡 aktif | 0% | 3s | - | 2026-09-24T23:44:45 |
+| 3 | UI-ADMIN-LTV-CAC-27 | LTV/CAC analiz panosu | P2 | 🟡 aktif | 0% | 2s | - | 2026-09-24T23:44:45 |
+| 4 | DOC-ADMIN-MULTITENANT-KARAR-28 | Multitenant mimarı | P2 | 🟡 aktif | 0% | 3s | - | 2026-09-24T23:44:45 |
 
-**Orkestratör Özeti:** 0/4 briefler okundu (brief bekleniyor) → başlama bekleniyor
+**Orkestratör Özeti:** 0/4 done + 4/4 aktif başladı (tüm briefler yazıldı)
 
 ---
 

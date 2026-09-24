@@ -18,7 +18,7 @@
 | TEST-VISIBILITY-ENTEGRASYON-27 | [TEST] E2E senaryo testi (visibility layer + kontör) → 5 scenario + 4 conflict | yasu | P1 | baslatdi | tests/test_visibility_layer.py, src/company_master/api/core/normalize.py |
 | UI-ADMIN-KVKK-MODU-26 | [UI] Admin KVKK mode toggle (strict ↔ lenient) → web_app POST endpoint | utku | P1 | review | web_app.py, web_dashboard/tabs/admin_panel.py |
 | UI-ADMIN-KVKK-RAPOR-28 | [UI] KVKK maskeleme raporu → admin paneline ek sekme | utku | P2 | review | web_dashboard/tabs/admin_panel.py, web_app.py |
-| DOC-VISIBILITY-KATMANI-29 | [DOC] Kullanıcı dokümanı (görünürlük katmanı + kontör) → markdown guide | utku | P2 | aktif | docs/VISIBILITY_LAYER_GUIDE.md |
+| DOC-VISIBILITY-KATMANI-29 | [DOC] Kullanıcı dokümanı (görünürlük katmanı + kontör) → markdown guide | utku | P2 | review | docs/VISIBILITY_LAYER_GUIDE.md |
 | API-LAYER2-DINAMIK-YÜKLEME-30 | [API] Layer 2 dinamik yükleme → plan_field_group tablosundan görünürlük oku | yasu | P1 | bekliyor | src/company_master/api/core/normalize.py, web_app.py |
 | KONTROL-KVKK-MASKELEME-31 | [KONTROL] KVKK maskeleme end-to-end test → admin panel e2e | yasu | P1 | baslatdi | tests/test_visibility_layer.py, web_app.py |
 | UI-KONTROL-PANOSU-32 | [UI] Admin kontrol panosu → maskeleme durum metriksleri | utku | P2 | review | web_dashboard/tabs/admin_panel.py, web_app.py |

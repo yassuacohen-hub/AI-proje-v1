@@ -575,13 +575,13 @@
     "baslik": "[DOC] Kullanıcı dokümanı (görünürlük katmanı + kontör) → markdown guide",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "aktif",
+    "durum": "review",
     "baslangic": "2026-09-24T23:35:40.539462",
     "bitis": null,
     "dosyalar": [
       "docs/VISIBILITY_LAYER_GUIDE.md"
     ],
-    "not": "Baslatma bildirimi okundu (2026-09-24). Brief okundu. plans/brief_utku_DOC-VISIBILITY-KATMANI-29.md",
+    "not": "Teslim (utku): Visibility katmani dokumani hazirlandi: docs/VISIBILITY_LAYER_GUIDE.md. Icerik: Layer 1/2 mimari, Admin KVKK mode (strict/lenient), Modul kontor matrisi (5 modul x 3 tier), Celiski cozumu (C1-C4 karantina), 5 senaryo ornegi (curl/SQL), Admin panel 3 sekme, DB sema. Kodlama denetimi temiz.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",

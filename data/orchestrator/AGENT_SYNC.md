@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-25T02:45:11
+> Son guncelleme: 2026-09-25T02:46:14
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -18,7 +18,7 @@
 | TEST-VISIBILITY-ENTEGRASYON-27 | [TEST] E2E senaryo testi (visibility lay | yasu | P1 | baslatdi |
 | UI-ADMIN-KVKK-MODU-26 | [UI] Admin KVKK mode toggle (strict ↔ le | utku | P1 | review |
 | UI-ADMIN-KVKK-RAPOR-28 | [UI] KVKK maskeleme raporu → admin panel | utku | P2 | review |
-| DOC-VISIBILITY-KATMANI-29 | [DOC] Kullanıcı dokümanı (görünürlük kat | utku | P2 | aktif |
+| DOC-VISIBILITY-KATMANI-29 | [DOC] Kullanıcı dokümanı (görünürlük kat | utku | P2 | review |
 | API-LAYER2-DINAMIK-YÜKLEME-30 | [API] Layer 2 dinamik yükleme → plan_fie | yasu | P1 | bekliyor |
 | KONTROL-KVKK-MASKELEME-31 | [KONTROL] KVKK maskeleme end-to-end test | yasu | P1 | baslatdi |
 | UI-KONTROL-PANOSU-32 | [UI] Admin kontrol panosu → maskeleme du | utku | P2 | review |
