@@ -551,18 +551,18 @@
     "baslik": "[UI] KVKK maskeleme raporu → admin paneline ek sekme",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "baslatdi",
+    "durum": "review",
     "baslangic": "2026-09-24T23:35:40.539462",
     "bitis": null,
     "dosyalar": [
       "web_dashboard/tabs/admin_panel.py",
       "web_app.py"
     ],
-    "not": "Baslatma bildirimi okundu (2026-09-24). Brief okundu. plans/brief_utku_UI-ADMIN-KVKK-RAPOR-28.md",
+    "not": "Teslim (utku): KVKK Raporu sekmesi hazirlandi: render_kvkk_rapor_tab (admin_panel.py) + TabTanimi kvkk_rapor (__init__.py). admin_kvkk_mode gecmisi + KPI (strict/lenient sayilari, en sik sebep, son degisim) + gecmis tablo (30 gun) + trend grafik (7 gun line chart). Kodlama denetimi temiz.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
-    "brief": "Huginn Data Insights/plans/brief_utku_UI-ADMIN-KVKK-RAPOR-28.md",
+    "brief": "plans/brief_utku_UI-ADMIN-KVKK-RAPOR-28.md",
     "talimat": "UI-ADMIN-KVKK-RAPOR-28: Admin panel'e KVKK Maskeleme Raporu sekmesi ekle. Tablo: admin_kvkk_mode geçmiş kayıtları (mode, tarih, sebep). İstatistik: strict vs lenient geçişleri, en sık sebep, son 7 gün trend.",
     "dependencies": [
       "ALTYAPI-VERI-GORUNURLUK-01",
@@ -575,7 +575,7 @@
     "baslik": "[DOC] Kullanıcı dokümanı (görünürlük katmanı + kontör) → markdown guide",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "baslatdi",
+    "durum": "aktif",
     "baslangic": "2026-09-24T23:35:40.539462",
     "bitis": null,
     "dosyalar": [
@@ -644,14 +644,14 @@
     "baslik": "[UI] Admin kontrol panosu → maskeleme durum metriksleri",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "baslatdi",
+    "durum": "review",
     "baslangic": "2026-09-24T23:35:40.539462",
     "bitis": null,
     "dosyalar": [
       "web_dashboard/tabs/admin_panel.py",
       "web_app.py"
     ],
-    "not": "Baslatma bildirimi okundu (2026-09-24). Brief okundu. plans/brief_utku_UI-KONTROL-PANOSU-32.md",
+    "not": "Teslim (utku): Kontrol Panosu sekmesi hazirlandi: render_kontrol_panosu_tab (admin_panel.py) + TabTanimi kontrol_panosu (__init__.py). KPI: maskeli/açık alan sayilari, tier dagilimi (bar chart), gunluk trend (7 gun line chart), son mode gecisleri mini tablo. Kodlama denetimi temiz.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",

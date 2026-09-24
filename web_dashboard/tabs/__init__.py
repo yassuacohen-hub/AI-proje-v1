@@ -475,6 +475,45 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_audit_tab",
         min_rol="admin",
     ),
+    # UI-ADMIN-KVKK-MODU-26: KVKK Mode Kontrol
+    TabTanimi(
+        anahtar="kvkk_mode",
+        baslik="KVKK Mode",
+        ikon="🔒",
+        grup=GRUP_SISTEM,
+        aciklama="KVKK strict/lenient mode toggle ve yönetimi",
+        url_path="kvkk-mode",
+        ust="proje_yonetimi", sira=5,
+        modul="web_dashboard.tabs.admin_panel",
+        fonksiyon="render_kvkk_mode_tab",
+        min_rol="admin",
+    ),
+    # UI-ADMIN-KVKK-RAPOR-28: KVKK Maskeleme Raporu
+    TabTanimi(
+        anahtar="kvkk_rapor",
+        baslik="KVKK Raporu",
+        ikon="📊",
+        grup=GRUP_SISTEM,
+        aciklama="KVKK maskeleme geçmişi, istatistikler ve trend analizi",
+        url_path="kvkk-rapor",
+        ust="proje_yonetimi", sira=6,
+        modul="web_dashboard.tabs.admin_panel",
+        fonksiyon="render_kvkk_rapor_tab",
+        min_rol="admin",
+    ),
+    # UI-KONTROL-PANOSU-32: Admin Kontrol Panosu
+    TabTanimi(
+        anahtar="kontrol_panosu",
+        baslik="Kontrol Panosu",
+        ikon="📈",
+        grup=GRUP_SISTEM,
+        aciklama="Maskeli/açık alanlar, tier dağılımı, trend ve mode geçişleri",
+        url_path="kontrol-panosu",
+        ust="proje_yonetimi", sira=7,
+        modul="web_dashboard.tabs.admin_panel",
+        fonksiyon="render_kontrol_panosu_tab",
+        min_rol="admin",
+    ),
     # UX-MENU-03: menüden çıktı; sol-alt hesap kartı popover'ından açılır.
     TabTanimi(
         anahtar="ayarlar",

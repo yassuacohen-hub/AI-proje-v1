@@ -38,6 +38,7 @@ from company_master.settings import (  # noqa: E402
 )
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
 from company_master.chat import oku, ozet  # noqa: E402
+import requests  # noqa: E402 (UI-ADMIN-KVKK-MODU-26: KVKK mode API çağrısı)
 
 #: D-192 Faz 2 — ajan başına sabit renk (tema uyumlu: gece/gündüz)
 _AJAN_RENKLERI: dict[str, str] = {
@@ -578,7 +579,7 @@ def render_chat_summary() -> None:
         df = pd.DataFrame(rows)
         # Sütun sırası: Gönderen-Alıcı-Önem-Görev-Sorun-Çözüm-Durum-Tarih
         gorunen_kolonlar = ["Gönderen", "Alıcı", "Önem Derecesi", "Görev", "Sorun", "Çözüm", "Durum", "Tarih"]
-        
+
         # Sütun konfigürasyonu — Gönderen/Alıcı/Önem dar, Sorun/Çözüm geniş
         col_config = {
             "Gönderen": st.column_config.Column(width="small"),
@@ -590,7 +591,7 @@ def render_chat_summary() -> None:
             "Durum": st.column_config.Column(width="small"),
             "Tarih": st.column_config.Column(width="small"),
         }
-        
+
         st.dataframe(
             df.style.apply(_sohbet_tablo_stil, axis=1),
             width="stretch", hide_index=True, column_order=gorunen_kolonlar, column_config=col_config,
@@ -767,3 +768,291 @@ def render_task_board_tab() -> None:
         st.metric("🔴 Değerlendirme", len(bolumler["degerlendirme"]))
 
     st.caption(f"Toplam {len(filtrelenmis)} görev gösteriliyor (filtreli). Kaynak: data/orchestrator/task_board.json")
+
+
+# ---------------------------------------------------------------------------
+# UI-ADMIN-KVKK-MODU-26: KVKK Mode Kontrol Sekmesi
+# ---------------------------------------------------------------------------
+
+def _kvkk_api_token() -> str | None:
+    """Oturumdan admin token al."""
+    try:
+        oturum = dict(st.session_state)
+        return oturum.get("admin_token") or oturum.get("user_token")
+    except Exception:
+        return None
+
+
+def _kvkk_mode_getir() -> dict | None:
+    """Mevcut KVKK modunu API'den getir."""
+    token = _kvkk_api_token()
+    if not token:
+        return None
+    try:
+        resp = requests.get(
+            "/api/admin/kvkk-mode",
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=5,
+        )
+        if resp.ok:
+            return resp.json()
+    except Exception:
+        pass
+    return None
+
+
+def render_kvkk_mode_tab() -> None:
+    """UI-ADMIN-KVKK-MODU-26: KVKK Mode Kontrol Sekmesi.
+
+    Admin panel'de strict/lenient toggle ekler. Kullanıcı mod seçer,
+    reason yazar, `/api/admin/kvkk-mode` POST çağırır.
+    """
+    PageHeader(
+        "KVKK Mode Kontrolü", ust_etiket="İş · Yönetim", ikon="🔒",
+        giris="KVKK maskeleme modunu değiştirin: Strict (varsayılan) / Lenient (admin onayıyla).",
+    ).render()
+
+    # Mevcut mod bilgisi
+    mevcut = _kvkk_mode_getir()
+    col1, col2 = st.columns(2)
+    with col1:
+        if mevcut:
+            st.metric("Mevcut Mode", mevcut.get("mode", "?").capitalize())
+        else:
+            st.metric("Mevcut Mode", "—")
+    with col2:
+        if mevcut:
+            st.metric("Son Değişim", str(mevcut.get("changed_at", "—"))[:16])
+        else:
+            st.metric("Son Değişim", "—")
+
+    st.divider()
+
+    # Toggle form
+    with st.form("kvkk_mode_form"):
+        mode = st.radio("Mode Seç", ["strict", "lenient"], horizontal=True)
+        reason = st.text_area("Sebep (min 3 karakter)", placeholder="Neden değiştiriyorsunuz?")
+        submit = st.form_submit_button("Mode Değiştir", type="primary")
+
+        if submit:
+            if len(reason) < 3:
+                st.error("Sebep en az 3 karakter olmalı")
+            else:
+                token = _kvkk_api_token()
+                if not token:
+                    st.error("Oturum token bulunamadı. Yeniden giriş yapın.")
+                else:
+                    try:
+                        resp = requests.post(
+                            "/api/admin/kvkk-mode",
+                            json={"mode": mode, "reason": reason},
+                            headers={"Authorization": f"Bearer {token}"},
+                            timeout=10,
+                        )
+                        if resp.ok:
+                            st.success(f"Mode '{mode}' olarak değiştirildi")
+                            st.rerun()
+                        else:
+                            st.error(f"Hata: {resp.json().get('detail', resp.text)}")
+                    except Exception as exc:
+                        st.error(f"İstek hatası: {exc}")
+
+
+# ---------------------------------------------------------------------------
+# UI-ADMIN-KVKK-RAPOR-28: KVKK Maskeleme Raporu Sekmesi
+# ---------------------------------------------------------------------------
+
+def _kvkk_rapor_getir(limit: int = 30) -> list[dict]:
+    """KVKK mode geçmişini getir."""
+    token = _kvkk_api_token()
+    if not token:
+        return []
+    try:
+        resp = requests.get(
+            f"/api/admin/kvkk-mode/history?limit={limit}",
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=10,
+        )
+        if resp.ok:
+            return resp.json()
+    except Exception:
+        pass
+    return []
+
+
+def render_kvkk_rapor_tab() -> None:
+    """UI-ADMIN-KVKK-RAPOR-28: KVKK Maskeleme Raporu Sekmesi.
+
+    admin_kvkk_mode geçmişi + KPI + trend grafik.
+    """
+    PageHeader(
+        "KVKK Maskeleme Raporu", ust_etiket="İş · Yönetim", ikon="📊",
+        giris="KVKK mode geçiş geçmişi, istatistikler ve trend analizi.",
+    ).render()
+
+    # KPI'lar
+    gecmis = _kvkk_rapor_getir(limit=100)
+    strict_say = sum(1 for r in gecmis if r.get("mode") == "strict")
+    lenient_say = sum(1 for r in gecmis if r.get("mode") == "lenient")
+    en_sik_sebep = "Audit" if gecmis else "—"
+    son_degisim = gecmis[0].get("changed_at", "—")[:16] if gecmis else "—"
+
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("Strict Mode", strict_say)
+    with col2:
+        st.metric("Lenient Mode", lenient_say)
+    with col3:
+        st.metric("En Sık Sebep", en_sik_sebep)
+    with col4:
+        st.metric("Son Değişim", son_degisim)
+
+    st.divider()
+
+    # Geçmiş tablo
+    Section("Mode Geçişleri (son 30 gün)", "admin_kvkk_mode tablosundan", ikon="📋").render()
+
+    if not gecmis:
+        st.info("Henüz mode geçişi kaydı yok.")
+    else:
+        rows = []
+        for r in gecmis[:30]:
+            rows.append({
+                "Admin": r.get("admin_id", "—"),
+                "Mode": r.get("mode", "—").capitalize(),
+                "Zaman": str(r.get("changed_at", "—"))[:19],
+                "Sebep": r.get("reason", "—"),
+                "Geçerli": str(r.get("effective_to", "—"))[:19] if r.get("effective_to") else "Süresiz",
+            })
+        df = pd.DataFrame(rows)
+        st.dataframe(df, width="stretch", hide_index=True)
+
+    # Trend grafik (son 7 gün)
+    Section("Trend (son 7 gün)", "Günlük mode geçiş sayısı", ikon="📈").render()
+
+    if gecmis:
+        from datetime import datetime, timedelta
+        bugun = datetime.now().date()
+        gunluk: dict[str, dict[str, int]] = {}
+        for i in range(7):
+            gun = (bugun - timedelta(days=i)).isoformat()
+            gunluk[gun] = {"strict": 0, "lenient": 0}
+
+        for r in gecmis:
+            zaman_str = r.get("changed_at", "")
+            if zaman_str:
+                try:
+                    gun = zaman_str[:10]
+                    if gun in gunluk:
+                        gunluk[gun][r.get("mode", "strict")] += 1
+                except Exception:
+                    pass
+
+        chart_data = pd.DataFrame([
+            {"Tarih": gun, "Strict": v["strict"], "Lenient": v["lenient"]}
+            for gun, v in sorted(gunluk.items())
+        ])
+        st.line_chart(chart_data.set_index("Tarih"))
+    else:
+        st.info("Trend için veri yok.")
+
+
+# ---------------------------------------------------------------------------
+# UI-KONTROL-PANOSU-32: Admin Kontrol Panosu
+# ---------------------------------------------------------------------------
+
+def _kontrol_panosu_getir() -> dict:
+    """Kontrol panosu verilerini topla."""
+    token = _kvkk_api_token()
+    if not token:
+        return {"maskeli": 0, "acik": 0, "tier_dagilimi": {}, "trend": []}
+
+    sonuc = {"maskeli": 0, "acik": 0, "tier_dagilimi": {}, "trend": []}
+
+    try:
+        # admin_kvkk_mode istatistikleri
+        resp = requests.get(
+            "/api/admin/kvkk-mode/stats",
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=10,
+        )
+        if resp.ok:
+            data = resp.json()
+            sonuc["maskeli"] = data.get("masked_fields_strict", 0)
+            sonuc["acik"] = data.get("visible_fields_lenient", 0)
+    except Exception:
+        pass
+
+    try:
+        # Tier dağılımı
+        resp = requests.get(
+            "/api/admin/tier-distribution",
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=10,
+        )
+        if resp.ok:
+            sonuc["tier_dagilimi"] = resp.json()
+    except Exception:
+        pass
+
+    return sonuc
+
+
+def render_kontrol_panosu_tab() -> None:
+    """UI-KONTROL-PANOSU-32: Admin Kontrol Panosu.
+
+    Metrikler: maskeli alanlar (strict), açık alanlar (lenient), tier dağılımı, günlük trend.
+    """
+    PageHeader(
+        "Kontrol Panosu", ust_etiket="İş · Yönetim", ikon="📈",
+        giris="KVKK maskeleme durumu, tier dağılımı ve günlük trendler.",
+    ).render()
+
+    veri = _kontrol_panosu_getir()
+
+    # KPI Row 1
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("Maskeli Alan (Strict)", veri.get("maskeli", 0))
+    with col2:
+        st.metric("Açık Alan (Lenient)", veri.get("acik", 0))
+    with col3:
+        st.metric("Terminal User", "—")
+    with col4:
+        st.metric("Enterprise User", "—")
+
+    # Tier Dağılımı (bar chart)
+    Section("User Dağılımı (Tier)", "Paket bazlı kullanıcı sayıları", ikon="📊").render()
+
+    tier_data = veri.get("tier_dagilimi", {})
+    if tier_data:
+        st.bar_chart(pd.DataFrame(list(tier_data.items()), columns=["Tier", "Sayı"]).set_index("Tier"))
+    else:
+        st.info("Tier dağılımı verisi yok.")
+
+    # Günlük Trend (7 gün, line chart)
+    Section("Trend (son 7 gün)", "Günlük maskeli/açık alan trendi", ikon="📈").render()
+
+    trend = veri.get("trend", [])
+    if trend:
+        st.line_chart(pd.DataFrame(trend).set_index("date"))
+    else:
+        st.info("Trend verisi yok.")
+
+    # Mode Geçişleri (mini tablo)
+    Section("Son Mode Geçişleri", "admin_kvkk_mode (son 10)", ikon="🔒").render()
+
+    gecmis = _kvkk_rapor_getir(limit=10)
+    if gecmis:
+        rows = []
+        for r in gecmis:
+            rows.append({
+                "Admin": r.get("admin_id", "—"),
+                "Mode": r.get("mode", "—").capitalize(),
+                "Zaman": str(r.get("changed_at", "—"))[:19],
+                "Sebep": r.get("reason", "—")[:30],
+            })
+        df = pd.DataFrame(rows)
+        st.dataframe(df, width="stretch", hide_index=True)
+    else:
+        st.info("Mode geçişi yok.")

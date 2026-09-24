@@ -2532,5 +2532,29 @@
     "ciktilar": [],
     "teslim_tarihi": "2026-09-24T23:42:22",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-ADMIN-KVKK-MODU-26",
+    "ajan": "utku",
+    "ozet": "KVKK Mode sekmesi eklendi: render_kvkk_mode_tab (admin_panel.py) + TabTanimi kvkk_mode (__init__.py). strict/lenient radio + reason input (min 3 char) + API POST /api/admin/kvkk-mode + success/error feedback. Kodlama denetimi temiz.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-25T02:36:54",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-ADMIN-KVKK-RAPOR-28",
+    "ajan": "utku",
+    "ozet": "KVKK Raporu sekmesi hazirlandi: render_kvkk_rapor_tab (admin_panel.py) + TabTanimi kvkk_rapor (__init__.py). admin_kvkk_mode gecmisi + KPI (strict/lenient sayilari, en sik sebep, son degisim) + gecmis tablo (30 gun) + trend grafik (7 gun line chart). Kodlama denetimi temiz.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-25T02:41:03",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-KONTROL-PANOSU-32",
+    "ajan": "utku",
+    "ozet": "Kontrol Panosu sekmesi hazirlandi: render_kontrol_panosu_tab (admin_panel.py) + TabTanimi kontrol_panosu (__init__.py). KPI: maskeli/açık alan sayilari, tier dagilimi (bar chart), gunluk trend (7 gun line chart), son mode gecisleri mini tablo. Kodlama denetimi temiz.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-25T02:42:24",
+    "durum": "bekliyor"
   }
 ]
