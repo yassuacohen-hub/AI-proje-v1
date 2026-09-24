@@ -137,7 +137,7 @@ Turun kapsamı B-02, B-07, B-08, B-09, B-10, B-17, B-18, B-20 idi. Kapsam dış�
 | B-03 | Kapalı | önceki tur | `simulasyon` kontrol 2 OK |
 | B-04 | Kapalı | önceki tur | `simulasyon` kontrol 3 OK |
 | B-05 | **Açık** | — | KVKK IP/ülke saklama politikası — ⏳ Ürün Sahibi kararı gerekir (kapsam dışı) |
-| B-06 | **Açık** | — | Yedek görevler (Y1-Y6) hâlâ panoda değil (kapsam dışı) |
+| B-06 | Kapalı | `c9a46cc` | Yedek görevler Y1-Y6 panoda `durum: yedek` — kanıt: [`DOGRULAMA_TUR_C_2026-09-24.md:187`](DOGRULAMA_TUR_C_2026-09-24.md). Önceki `44250b9` atfı hatalıydı (pickaxe ile düzeltildi, TUR-D2/YA-04) |
 | B-07 | Kapalı | `bb794b1` | `simulasyon` kontrol 5 OK — §14 dışında yüzde satırı yok |
 | B-08 | Kapalı | `bb794b1` | SSOT §0 `v2.5` · §14 son satır `v2.5` · `AGENTS.md:731` `(v2.5)` |
 | B-09 | Kapalı | `bb794b1` | `simulasyon` kontrol 6 OK — §8-§12'de durum/öncelik etiketi yok |

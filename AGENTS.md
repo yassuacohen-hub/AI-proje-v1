@@ -180,6 +180,7 @@
   3. Orkestratör **paralelde** hatayı çözer; çözünce doğrular ve KAHİN'e bildirir.
 - **Gerekçe:** Ajan iş yaparken orkestratör onarım yapar; seri bekleme yerine paralel akış, zaman kaybı sıfır.
 - **Yasak:** "Bloke, bekliyorum" diyip durmak. Blokaj raporu **her zaman** bypass metniyle birlikte gelir.
+- **Kapı disiplini (netleştirme 2026-09-24, TUR-D2):** Bu bypass bir **kapı FAIL'i** için geçerli değildir — doğrulama kapısı (`simulasyon`, `pytest`, klon provası) FAIL verdiğinde ajan kendi kararıyla devam edemez, KAHİN'e sorar; bypass yalnız KAHİN'in açık talimatıyla yapılır ve tur raporuna gerekçesiyle kaydedilir.
 
 ## Brifsiz Atama Yasak (D-66 — KAHİN kararı 2026-09-20)
 - **Kural:** Hiçbir ajan hiçbir görev almaz brifsiz. Brif dosyası **mutlaka** `data/orchestrator/<TASK>_brif_<tarih>_<rol>.md` veya `plans/brief_<ajan>_<TASK>.md` olarak diskte hazır ve **tetik `talimat` alanına path yazılı** olmalıdır.
