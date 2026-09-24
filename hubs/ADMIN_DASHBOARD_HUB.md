@@ -4,7 +4,7 @@
 > mimari ve tasarim dokumanlari tek noktada. Yurutme raporlari (data/orchestrator/ADMIN-*_rapor*)
 > bu hub'a dahil edilmedi — gurultu onlemek icin yalnizca karar/mimari/tasarim seviyesi belgeler secildi.
 
-Uretim: Sprint Graf Hub'lastirma FAS-2 (2026-09-21). Bagli dokuman: **17**
+Uretim: Sprint Graf Hub'lastirma FAS-2 (2026-09-21). Bagli dokuman: **28** (2026-09-24: gorev taslagi + 10 brief eklendi)
 
 Ana baglam: [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]] · [[Huginn Data Insights/hubs/PLAN_STRATEGY_HUB]] · [[Huginn Data Insights/hubs/REPORTS_ANALYSIS_HUB]] · [[Huginn Data Insights/hubs/OSINT_INDEX]] · [[Huginn Data Insights/hubs/TOOLS_SCRIPTS_HUB]] · [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]] · [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]] · [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]] · [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]] · [[Huginn Data Insights/AGENTS]] · [[Huginn Data Insights/PROJECT_ROADMAP]] · [[Huginn Data Insights/hubs/V10_POC_HUB]]
 
@@ -41,6 +41,27 @@ Ana baglam: [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]] · [[Huginn Data In
 ## Uygulama Tasarim Zinciri (2026-09-20)
 
 - `Huginn Data Insights/data_worktree/orchestrator/ZINCIR-ADMIN-PANEL-UX-TASARIMI_2026-09-20_orkestrator` — UX zincir tasarimi (menu, profil, logout)
+
+## Gorev Uretim Taslagi (2026-09-24, kalici)
+
+- [[Huginn Data Insights/data/orchestrator/gorev_taslagi]] — **Kalici gorev taslagi**: ilerleme yuzdesi, ana + yedek gorevler, tur kaydi. Her yeni gorev turunda once bu dosya okunur (tekrar onleme).
+
+## Gorev Brief'leri — Tur 2026-09-24 (ADMIN-KIT · SSOT tabanli)
+
+| # | Brief | Oncelik | SSOT kaynagi |
+|---|-------|---------|--------------|
+| 13 | [[Huginn Data Insights/plans/brief_utku_VERI-ADMIN-AKTIVITE-LOG-13]] | P0 | §8.4 EK BULGU-8 · §10:366 · §12 G2 |
+| 14 | [[Huginn Data Insights/plans/brief_utku_API-ADMIN-AKTIVITE-YAZ-14]] | P0 | §8.4 EK BULGU-8 · §12 G2 |
+| 15 | [[Huginn Data Insights/plans/brief_utku_DOC-ADMIN-DURUM-SENKRON-15]] | P1 | §8.4 · §10 · §14 tutarsizligi |
+| 16 | [[Huginn Data Insights/plans/brief_utku_API-ADMIN-CHURN-3SINYAL-16]] | P1 | §9 K1 · §10:368 · §12 G2 |
+| 17 | [[Huginn Data Insights/plans/brief_utku_UI-ADMIN-DAU-17]] | P1 | §8.1 A9 · §10:369 · §12 G4 |
+| 18 | [[Huginn Data Insights/plans/brief_utku_API-ADMIN-KAYNAK-SAGLIK-18]] | P1 | §9 K4 |
+| 19 | [[Huginn Data Insights/plans/brief_utku_UI-ADMIN-CRAWL-KONTROL-19]] | P1 | §8.1 A8 · §10:373 · §12 G8 |
+| 20 | [[Huginn Data Insights/plans/brief_utku_UI-ADMIN-ARAMA-BOSLUK-20]] | P2 | §9 K9 · §10:375 |
+| 21 | [[Huginn Data Insights/plans/brief_utku_API-ADMIN-SUPHELI-AKTIVITE-21]] | P2 | §9 K10 · §10:374 · §12 G9 |
+| 22 | [[Huginn Data Insights/plans/brief_utku_UI-ADMIN-UPSELL-22]] | P2 | §9 K7 |
+
+SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani` (ADMIN-KIT, D-196)
 
 ---
 
