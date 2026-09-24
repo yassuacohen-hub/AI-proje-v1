@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-24T04:43:34
+> Son guncelleme: 2026-09-24T04:53:44
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -124,8 +124,6 @@
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | plan |
 | UI-ADMIN-SAHTE-KPI-01 | [UI] Sahte API KPI kartını düzelt → admi | utku | P0 | plan |
 | UI-ADMIN-SAHTE-EXEC-02 | [UI] Sahte gelir kartlarını düzelt → adm | utku | P0 | plan |
-| UI-ADMIN-CHURN-KOLON-07 | [UI] Churn risk kolonunu yaz → musteri_y | ihsan | P1 | plan |
-| UI-ADMIN-MAU-08 | [UI] Yanlış DAU etiketini düzelt → admin | ihsan | P1 | plan |
 | UI-ADMIN-KULLANICI-BIRLESTIR-09 | [UI] Üç kopya kullanıcı yönetimini taşı  | utku | P1 | plan |
 | UI-ADMIN-GUNCELLIK-KOVA-10 | [UI] Veri güncellik kovalarını yaz → adm | utku | P1 | plan |
 | UI-ADMIN-MALIYET-ANOMALI-11 | [UI] AI maliyet anomali bloğunu yaz → ad | utku | P1 | plan |
@@ -135,8 +133,6 @@
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| ALTYAPI-D66-BYPASS-TETIKLEME-01 | [ALTYAPI] duzelt tetik_senk.py bypass fl | ihsan | 2026-09-24 |
-| TEST-13-PREEXIST-DUZELT-01 | [TEST] düzelt 13 pre-existing hata → d19 | utku | 2026-09-24 |
 | ALTYAPI-GROQ-KEY-DOGRULA-01 | [ALTYAPI] denetle Groq canlı key → groq_ | yasu | 2026-09-24 |
 | D-192-FAZ2 | [ADMIN-UI] Ajan Chat Faz 2: Onem Dereces | orkestrator | 2026-09-23 |
 | NINEROUTER-IMAGE-GEN-01 | [SKILL] ninerouter.py'ye ninerouter_imag | yasu | 2026-09-24 |
@@ -145,6 +141,8 @@
 | VERI-ADMIN-LASTLOGIN-MIGRATION-04 | [VERI] users.last_login kolonunu yaz → s | ihsan | 2026-09-24 |
 | API-ADMIN-LASTLOGIN-YAZ-05 | [API] Giriş anında last_login değerini y | ihsan | 2026-09-24 |
 | API-ADMIN-CHURN-FONKSIYON-06 | [API] Churn risk fonksiyonunu yaz → chur | ihsan | 2026-09-24 |
+| UI-ADMIN-CHURN-KOLON-07 | [UI] Churn risk kolonunu yaz → musteri_y | ihsan | 2026-09-24 |
+| UI-ADMIN-MAU-08 | [UI] Yanlış DAU etiketini düzelt → admin | ihsan | 2026-09-24 |
 
 ## Son Handoff'lar
 

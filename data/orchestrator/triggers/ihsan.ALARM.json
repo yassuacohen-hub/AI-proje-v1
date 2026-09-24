@@ -2646,5 +2646,21 @@
     "tetik_sayisi": 4,
     "uyari_tarihi": "2026-09-24T04:39:01",
     "mesaj": "⚠️ UI-ADMIN-MAU-08 ([UI] Yanlış DAU etiketini düzelt → admin_kpi.py gerçek MAU (2s)) — ihsan 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-ADMIN-CHURN-KOLON-07",
+    "gorev_basligi": "[UI] Churn risk kolonunu yaz → musteri_yonetimi.py listesi (1s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-24T04:44:01",
+    "mesaj": "⚠️ UI-ADMIN-CHURN-KOLON-07 ([UI] Churn risk kolonunu yaz → musteri_yonetimi.py listesi (1s)) — ihsan 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-ADMIN-MAU-08",
+    "gorev_basligi": "[UI] Yanlış DAU etiketini düzelt → admin_kpi.py gerçek MAU (2s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-24T04:44:01",
+    "mesaj": "⚠️ UI-ADMIN-MAU-08 ([UI] Yanlış DAU etiketini düzelt → admin_kpi.py gerçek MAU (2s)) — ihsan 5. kez uyarıldı; henüz başlamadı."
   }
 ]

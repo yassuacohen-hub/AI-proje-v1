@@ -39,11 +39,11 @@ _admin_kpi_logger = AdminErrorHandler("admin_kpi")
 
 @st.cache_data(ttl=60)
 def load_admin_kpi_summary() -> dict[str, Any]:
-    """Genel KPI özeti: toplam firma, aktif kullanıcı, API kullanım, sinyal sayısı."""
+    """Genel KPI özeti: toplam firma, MAU, API kullanım, sinyal sayısı."""
     engine = get_engine()
     result: dict[str, Any] = {
         "toplam_firma": 0,
-        "aktif_kullanici": 0,
+        "mau": 0,
         "api_cagri_toplam": 0,
         "sinyal_toplam": 0,
         "saglik_skoru": 100,
@@ -61,13 +61,13 @@ def load_admin_kpi_summary() -> dict[str, Any]:
             if row:
                 result["toplam_firma"] = row["cnt"] or 0
 
-            # Aktif kullanıcı
+            # MAU (Monthly Active Users) — last_login son 30 gün içinde
             row = conn.execute(text(
                 "SELECT COUNT(*) as cnt FROM users "
-                "WHERE status IN ('onayli', 'aktif')"
+                "WHERE last_login >= NOW() - INTERVAL '30 days'"
             )).mappings().first()
             if row:
-                result["aktif_kullanici"] = row["cnt"] or 0
+                result["mau"] = row["cnt"] or 0
 
             # Son 24 saatte yeni firma
             row = conn.execute(text(
@@ -385,7 +385,7 @@ def render_kpi_tab() -> None:
             "🏢",
         )
     with c2:
-        _render_kpi_card("Aktif Kullanıcı", f"{kpi['aktif_kullanici']:,}", icon="👥")
+        _render_kpi_card("MAU (30 Gün)", f"{kpi['mau']:,}", icon="👥")
     with c3:
         _render_kpi_card(
             "Toplam Sinyal",
