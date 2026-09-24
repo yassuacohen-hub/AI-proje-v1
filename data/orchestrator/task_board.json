@@ -348,7 +348,7 @@
     "baslik": "[UI] Sahte API KPI kartını düzelt → admin_kpi.py rozetli boş kart (2s)",
     "sahip": "utku",
     "oncelik": 1,
-    "durum": "alındı",
+    "durum": "done",
     "dosyalar": [
       "Huginn Data Insights/web_dashboard/tabs/admin_kpi.py",
       "Huginn Data Insights/tests/test_admin_kpi.py"
@@ -366,7 +366,7 @@
     "baslik": "[UI] Sahte Exec kartını düzelt → admin_executive.py rozetli boş kart (2s)",
     "sahip": "utku",
     "oncelik": 2,
-    "durum": "teslim edildi",
+    "durum": "done",
     "dosyalar": [
       "Huginn Data Insights/web_dashboard/tabs/admin_executive.py",
       "Huginn Data Insights/tests/test_admin_executive.py"
@@ -386,7 +386,7 @@
     "baslik": "[UI] Kullanıcı birleştirme kartını düzelt",
     "sahip": "utku",
     "oncelik": 3,
-    "durum": "teslim edildi",
+    "durum": "done",
     "dosyalar": [
       "Huginn Data Insights/web_dashboard/tabs/admin_kullanici_birlestir.py",
       "Huginn Data Insights/tests/test_admin_kullanici_birlestir.py"
@@ -406,7 +406,7 @@
     "baslik": "[UI] Güncellik kova kartını düzelt",
     "sahip": "utku",
     "oncelik": 4,
-    "durum": "teslim edildi",
+    "durum": "done",
     "dosyalar": [
       "Huginn Data Insights/web_dashboard/tabs/admin_guncellik_kova.py",
       "Huginn Data Insights/tests/test_admin_guncellik_kova.py"
@@ -426,7 +426,7 @@
     "baslik": "[UI] Maliyet anomali kartını düzelt",
     "sahip": "utku",
     "oncelik": 5,
-    "durum": "teslim edildi",
+    "durum": "done",
     "dosyalar": [
       "Huginn Data Insights/web_dashboard/tabs/admin_cost.py",
       "Huginn Data Insights/tests/test_admin_maliyet_anomali.py"
@@ -446,7 +446,7 @@
     "baslik": "[DOC] Admin pano arşiv günlüğü oluştur",
     "sahip": "utku",
     "oncelik": 6,
-    "durum": "teslim edildi",
+    "durum": "done",
     "dosyalar": [
       "Huginn Data Insights/data/orchestrator/OTURUM_SONU_2026-09-24.md"
     ],
