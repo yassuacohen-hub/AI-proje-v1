@@ -151,3 +151,41 @@ def test_orkestrator_kapisi_sondaki_boslugu_yok_sayar(monkeypatch) -> None:
     assert gorev_at._orkestrator_kapisi("ihsan ") is None
     assert gorev_at._orkestrator_kapisi(" ihsan") is None
     assert gorev_at._orkestrator_kapisi("yasu") is not None
+
+
+# --- YA-01: eslemesiz gitlink (mode 160000) depoya girmesin -------------------
+
+def test_eslemesiz_gitlink_yok() -> None:
+    """Taze klonun icerigi eksik getirmesini onler.
+
+    `.gitmodules` eslemesi olmayan mode 160000 girdisi klonda bos klasor
+    birakir; YA-01'de 507 satirlik SSOT tam bu yuzden kayboldu.
+    """
+    import subprocess
+
+    try:
+        cikti = subprocess.run(
+            ["git", "ls-files", "-s"],
+            cwd=ROOT, capture_output=True, text=True, timeout=120,
+        )
+    except (OSError, subprocess.SubprocessError):  # pragma: no cover
+        pytest.skip("git calistirilamadi")
+    if cikti.returncode != 0:  # pragma: no cover
+        pytest.skip("git ls-files basarisiz (depo disi calisma)")
+
+    gitlinkler = {
+        satir.split("\t", 1)[1]
+        for satir in cikti.stdout.splitlines()
+        if satir.startswith("160000 ")
+    }
+    eslemeler = set()
+    gitmodules = ROOT / ".gitmodules"
+    if gitmodules.exists():
+        eslemeler = {
+            s.split("=", 1)[1].strip()
+            for s in gitmodules.read_text(encoding="utf-8").splitlines()
+            if s.strip().startswith("path")
+        }
+    assert not (gitlinkler - eslemeler), (
+        f"`.gitmodules` eslemesi olmayan gitlink: {sorted(gitlinkler - eslemeler)}"
+    )

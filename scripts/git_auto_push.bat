@@ -31,6 +31,18 @@ if errorlevel 1 (
 )
 
 "%GIT%" add -A >> %LOG% 2>&1
+
+REM YA-01 (2026-09-24): ic ice depo korumasi. Calisma agacinda .gitmodules
+REM eslemesi olmayan bir .git klasoru varsa "add -A" onu gitlink (160000) olarak
+REM kaydeder ve taze klon o agaci BOS getirir. Belirti: submodule status "fatal:
+REM no submodule mapping found" verir. Boyle bir durumda commit YAPILMAZ.
+"%GIT%" submodule status >nul 2>>%LOG%
+if errorlevel 1 (
+    echo [%DATE% %TIME%] ESLEMESIZ GITLINK: commit iptal, elle temizle ^(YA-01^) >> %LOG%
+    "%GIT%" reset >> %LOG% 2>&1
+    exit /b 2
+)
+
 "%GIT%" -c user.name="Yasin" -c user.email="yasin@huginn.local" commit -m "Otomatik gunluk commit (%DATE% %TIME%)" >> %LOG% 2>&1
 
 :push
