@@ -7179,9 +7179,9 @@
     "baslik": "[UI] Sahte API KPI kartını düzelt → admin_kpi.py rozetli boş kart (2s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-24T04:15:02",
-    "bitis": null,
+    "bitis": "2026-09-24T05:47:14",
     "dosyalar": [
       "web_dashboard/tabs/admin_kpi.py"
     ],
@@ -7198,9 +7198,9 @@
     "baslik": "[UI] Sahte gelir kartlarını düzelt → admin_executive.py rozetli boş kart (2s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-24T04:15:38",
-    "bitis": null,
+    "bitis": "2026-09-24T05:47:14",
     "dosyalar": [
       "web_dashboard/tabs/admin_executive.py"
     ],
@@ -7323,9 +7323,9 @@
     "baslik": "[UI] Üç kopya kullanıcı yönetimini taşı → tek modül (3s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-24T04:15:40",
-    "bitis": null,
+    "bitis": "2026-09-24T05:47:15",
     "dosyalar": [],
     "not": "Teslim (utku): musteri_yonetimi.py _kullanicilar_onay() artik render_user_management(token)a yonlendiriyor, sahte kopya kod silindi; admin_musteriler.py:85 referansi yanlis cikti, SSOT duzeltildi; 122+4072 test gecti",
     "source": "ic",
@@ -7340,9 +7340,9 @@
     "baslik": "[UI] Veri güncellik kovalarını yaz → admin_quality.py dağılımı (2s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-24T04:15:40",
-    "bitis": null,
+    "bitis": "2026-09-24T05:47:15",
     "dosyalar": [
       "web_dashboard/tabs/admin_quality.py"
     ],
@@ -7359,9 +7359,9 @@
     "baslik": "[UI] AI maliyet anomali bloğunu yaz → admin_cost.py z-skor (2s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-24T04:15:40",
-    "bitis": null,
+    "bitis": "2026-09-24T05:47:15",
     "dosyalar": [
       "web_dashboard/tabs/admin_cost.py"
     ],
@@ -7378,9 +7378,9 @@
     "baslik": "[DOC] Bayat analiz dökümanını taşı → arşiv + §0.1 güncel (1s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-24T04:15:41",
-    "bitis": null,
+    "bitis": "2026-09-24T05:41:46",
     "dosyalar": [],
     "not": "Teslim (utku): 06_muninn_prd_vs_huginn_analiz.md arsiv uyarisi guncellendi (ADMIN-KIT referansi), SSOT §0.1 ve §11 KK-4 kapatildi, dosya silinmedi",
     "source": "ic",

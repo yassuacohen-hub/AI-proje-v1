@@ -2356,7 +2356,9 @@
     "ozet": "_db_yardim.py tablo_var_mi() eklendi; admin_kpi.py api_usage_daily sorgusu tablo yokken veri kaynagi yok rozeti gosteriyor; 2 assert test gecti; SSOT SS7/SS14 guncellendi",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-24T05:00:11",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "roo",
+    "onay_tarihi": "2026-09-24T05:47:14"
   },
   {
     "task_id": "UI-ADMIN-SAHTE-EXEC-02",
@@ -2364,7 +2366,9 @@
     "ozet": "admin_executive.py load_executive_ozet(): tablo_var_mi() ile packages/company_packages kontrolu; yoksa veri_yok=True erken donus. UI'da MRR/ARR/Churn/ARPA veri kaynagi yok rozeti. engine=get_engine() try/except ile korundu (sessiz except yok sozlesmesi korundu). test_admin_executive.py 24/24 gecti, regresyon 41/41 gecti. SSOT SS7/S14 guncellendi.",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-24T05:05:58",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "roo",
+    "onay_tarihi": "2026-09-24T05:47:14"
   },
   {
     "task_id": "UI-ADMIN-KULLANICI-BIRLESTIR-09",
@@ -2372,7 +2376,9 @@
     "ozet": "musteri_yonetimi.py _kullanicilar_onay() artik render_user_management(token)a yonlendiriyor, sahte kopya kod silindi; admin_musteriler.py:85 referansi yanlis cikti, SSOT duzeltildi; 122+4072 test gecti",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-24T05:15:09",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "roo",
+    "onay_tarihi": "2026-09-24T05:47:14"
   },
   {
     "task_id": "UI-ADMIN-GUNCELLIK-KOVA-10",
@@ -2380,7 +2386,9 @@
     "ozet": "admin_quality.py: load_freshness_distribution()+_chart_freshness() eklendi, kova dagilimi bolumu render_quality_tab'a entegre; tests/test_admin_quality.py 4 test yeni; kritik yan-bulgu: musteri_yonetimi.py:1 bozuk satir bulunup duzeltildi; SSOT 6 satir guncellendi (S9/A2/K3/G6/roadmap-8/v2.2 revizyon); tam suite 4076 passed",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-24T05:27:58",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "roo",
+    "onay_tarihi": "2026-09-24T05:47:15"
   },
   {
     "task_id": "UI-ADMIN-MALIYET-ANOMALI-11",
@@ -2388,7 +2396,9 @@
     "ozet": "admin_cost.py:91-107 robust_zscore_anomaly() eklendi (z=0.6745*(deger-medyan)/MAD, MAD=0 -> None). load_cost_summary() provider gunluk maliyetine uyguluyor, |z|>3.5 high_cost AnomalyFlag olarak mevcut anomalies listesine ekleniyor, panelde mevcut tabloda gorunuyor. test_admin_sistem_cost.py 3 yeni test (outlier, MAD=0, bos seri), 6/6 gecti. SSOT K5/madde9/G7/v2.3 guncellendi.",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-24T05:36:52",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "roo",
+    "onay_tarihi": "2026-09-24T05:47:15"
   },
   {
     "task_id": "DOC-ADMIN-ARSIV-12",
@@ -2396,6 +2406,8 @@
     "ozet": "06_muninn_prd_vs_huginn_analiz.md arsiv uyarisi guncellendi (ADMIN-KIT referansi), SSOT §0.1 ve §11 KK-4 kapatildi, dosya silinmedi",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-24T05:40:39",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "oto-nobetci",
+    "onay_tarihi": "2026-09-24T05:41:46"
   }
 ]
