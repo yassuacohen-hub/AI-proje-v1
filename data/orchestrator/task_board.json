@@ -7217,13 +7217,13 @@
     "baslik": "[UI] SSE mimari ihlalini düzelt → admin_realtime.py polling (3s)",
     "sahip": "ihsan",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-24T04:15:38",
     "bitis": null,
     "dosyalar": [
       "web_dashboard/tabs/admin_realtime.py"
     ],
-    "not": "",
+    "not": "Teslim (ihsan): SSE mimari ihlali düzeltildi: admin_realtime.py SSE okuyucu (_sse_oku) kaldırıldı, polling (admin_auto_refresh.render_auto_refresh + DB sorguları) uygulandı. SSOT §11 KK-1 kapatıldı (Polling seçildi, KK-1 kararı 2026-09-24), §13 SSE satırı güncellendi, §14 Revizyon Tablosu v2.1 2026-09-24 eklendi. Testler: test_admin_realtime_tab.py 16/16 passed, test_admin_sekme_durum.py polling test passed, kodlama_denetim temiz.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",

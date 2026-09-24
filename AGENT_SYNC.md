@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-24T04:15:41
+> Son guncelleme: 2026-09-24T04:25:21
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -124,7 +124,7 @@
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | plan |
 | UI-ADMIN-SAHTE-KPI-01 | [UI] Sahte API KPI kartını düzelt → admi | utku | P0 | plan |
 | UI-ADMIN-SAHTE-EXEC-02 | [UI] Sahte gelir kartlarını düzelt → adm | utku | P0 | plan |
-| UI-ADMIN-SSE-IHLAL-03 | [UI] SSE mimari ihlalini düzelt → admin_ | ihsan | P0 | plan |
+| UI-ADMIN-SSE-IHLAL-03 | [UI] SSE mimari ihlalini düzelt → admin_ | ihsan | P0 | review |
 | VERI-ADMIN-LASTLOGIN-MIGRATION-04 | [VERI] users.last_login kolonunu yaz → s | ihsan | P1 | plan |
 | API-ADMIN-LASTLOGIN-YAZ-05 | [API] Giriş anında last_login değerini y | ihsan | P1 | plan |
 | API-ADMIN-CHURN-FONKSIYON-06 | [API] Churn risk fonksiyonunu yaz → chur | ihsan | P1 | plan |

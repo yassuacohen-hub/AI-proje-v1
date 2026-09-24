@@ -124,7 +124,7 @@
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s) | ihsan | P1 | plan | scripts/pano_denetim.py, scripts/tetik_senk.py, tests/test_d66_bypass_tetikleme.py |
 | UI-ADMIN-SAHTE-KPI-01 | [UI] Sahte API KPI kartını düzelt → admin_kpi.py rozetli boş kart (2s) | utku | P0 | plan | web_dashboard/tabs/admin_kpi.py |
 | UI-ADMIN-SAHTE-EXEC-02 | [UI] Sahte gelir kartlarını düzelt → admin_executive.py rozetli boş kart (2s) | utku | P0 | plan | web_dashboard/tabs/admin_executive.py |
-| UI-ADMIN-SSE-IHLAL-03 | [UI] SSE mimari ihlalini düzelt → admin_realtime.py polling (3s) | ihsan | P0 | plan | web_dashboard/tabs/admin_realtime.py |
+| UI-ADMIN-SSE-IHLAL-03 | [UI] SSE mimari ihlalini düzelt → admin_realtime.py polling (3s) | ihsan | P0 | review | web_dashboard/tabs/admin_realtime.py |
 | VERI-ADMIN-LASTLOGIN-MIGRATION-04 | [VERI] users.last_login kolonunu yaz → schema migration (1s) | ihsan | P1 | plan | - |
 | API-ADMIN-LASTLOGIN-YAZ-05 | [API] Giriş anında last_login değerini yaz → auth akışı (1s) | ihsan | P1 | plan | - |
 | API-ADMIN-CHURN-FONKSIYON-06 | [API] Churn risk fonksiyonunu yaz → churn.py saf fonksiyon (2s) | ihsan | P1 | plan | src/company_master/churn.py |

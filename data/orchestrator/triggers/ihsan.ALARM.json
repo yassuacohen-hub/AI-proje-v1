@@ -2518,5 +2518,45 @@
     "tetik_sayisi": 134,
     "uyari_tarihi": "2026-09-24T03:04:01",
     "mesaj": "⚠️ ALTYAPI-D66-BYPASS-TETIKLEME-01 ([ALTYAPI] duzelt tetik_senk.py bypass flag -> tetik_senk.py (2s)) — ihsan 134. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "VERI-ADMIN-LASTLOGIN-MIGRATION-04",
+    "gorev_basligi": "[VERI] users.last_login kolonunu yaz → schema migration (1s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-24T04:24:01",
+    "mesaj": "⚠️ VERI-ADMIN-LASTLOGIN-MIGRATION-04 ([VERI] users.last_login kolonunu yaz → schema migration (1s)) — ihsan 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "API-ADMIN-LASTLOGIN-YAZ-05",
+    "gorev_basligi": "[API] Giriş anında last_login değerini yaz → auth akışı (1s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-24T04:24:02",
+    "mesaj": "⚠️ API-ADMIN-LASTLOGIN-YAZ-05 ([API] Giriş anında last_login değerini yaz → auth akışı (1s)) — ihsan 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "API-ADMIN-CHURN-FONKSIYON-06",
+    "gorev_basligi": "[API] Churn risk fonksiyonunu yaz → churn.py saf fonksiyon (2s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-24T04:24:02",
+    "mesaj": "⚠️ API-ADMIN-CHURN-FONKSIYON-06 ([API] Churn risk fonksiyonunu yaz → churn.py saf fonksiyon (2s)) — ihsan 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-ADMIN-CHURN-KOLON-07",
+    "gorev_basligi": "[UI] Churn risk kolonunu yaz → musteri_yonetimi.py listesi (1s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-24T04:24:02",
+    "mesaj": "⚠️ UI-ADMIN-CHURN-KOLON-07 ([UI] Churn risk kolonunu yaz → musteri_yonetimi.py listesi (1s)) — ihsan 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ihsan",
+    "task_id": "UI-ADMIN-MAU-08",
+    "gorev_basligi": "[UI] Yanlış DAU etiketini düzelt → admin_kpi.py gerçek MAU (2s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-24T04:24:02",
+    "mesaj": "⚠️ UI-ADMIN-MAU-08 ([UI] Yanlış DAU etiketini düzelt → admin_kpi.py gerçek MAU (2s)) — ihsan 1. kez uyarıldı; henüz başlamadı."
   }
 ]

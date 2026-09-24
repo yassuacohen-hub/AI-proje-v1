@@ -5,7 +5,7 @@ Kontroller (brief D + E):
     * ``except ...: pass`` sessiz yutma kalıbı YOK (regex, yorum satırları hariç).
     * ``st.metric(`` kullanımı YOK — KPI'lar ``kpi_karti`` ile çizilir.
     * Çıplak ``requests.get/post`` yok (``api_cagir`` / ``get_api`` sarmalı zorunlu);
-      istisna: ``admin_realtime`` SSE okuyucu (try/except + ``(veri, hata)`` sözleşmesi).
+      istisna yok — ``admin_realtime`` UI-ADMIN-SSE-IHLAL-03 ile polling'e döndü.
     * ``import ... text`` — ham SQL ``sqlalchemy.text()`` ile sarılı (``.execute("...``
       dizgesi doğrudan geçmiyor).
     * Her modül import edilebilir; ``render_*`` giriş noktaları çağrıldığında
@@ -98,7 +98,7 @@ def test_kpi_karti_import_edilmis(modul: str) -> None:
     assert "kpi_karti(" in kaynak, f"{modul}.py kpi_karti çağırmıyor"
 
 
-@pytest.mark.parametrize("modul", [m for m in KAPSAM if m != "admin_realtime"])
+@pytest.mark.parametrize("modul", KAPSAM)
 def test_ciplak_requests_yok(modul: str) -> None:
     """Sekmeler HTTP'yi ``get_api``/``post_api`` + ``api_cagir`` üzerinden yapar."""
     assert not _CIPLAK_REQUESTS.search(_yorumsuz(_kaynak(modul))), (
@@ -106,11 +106,14 @@ def test_ciplak_requests_yok(modul: str) -> None:
     )
 
 
-def test_admin_realtime_sse_sarmali_ve_text() -> None:
-    """SSE okuyucu try/except + (veri, hata) sözleşmesinde; ham SQL text() ile sarılı."""
+def test_admin_realtime_polling_ve_text() -> None:
+    """ADR satır 81: admin polling. SSE kalıntısı yok; ham SQL text() ile sarılı."""
     kaynak = _kaynak("admin_realtime")
-    assert "def _sse_oku" in kaynak
-    assert "hata_kutusu" in kaynak or "api_cagir" in kaynak
+    kod = _yorumsuz(kaynak)
+    for yasak in ("_sse_oku", "SSE_URL", "load_sse_data", "import requests"):
+        assert yasak not in kod, f"admin_realtime hâlâ SSE kalıntısı içeriyor: {yasak}"
+    assert "render_auto_refresh" in kod, "admin_realtime polling sarmalını kullanmalı"
+    assert "hata_kutusu" in kaynak
     assert "text(" in kaynak, "admin_realtime ham SQL'i sqlalchemy.text() ile sarmalı"
     assert not _HAM_SQL_EXECUTE.search(_yorumsuz(kaynak)), "admin_realtime .execute(\"...\") ham SQL içeriyor"
 
