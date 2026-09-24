@@ -74,3 +74,22 @@ def test_cost_loader_returns_empty_summary_for_broken_json(monkeypatch, tmp_path
 
     assert summary.total_daily_cost_usd == 0.0
     assert summary.providers == []
+
+
+def test_robust_zscore_anomaly_flags_outlier():
+    """UI-ADMIN-MALIYET-ANOMALI-11 (SSOT §9 K5): z = 0.6745*(deger-medyan)/MAD, |z|>3.5 alarm."""
+    seri = [10.0, 11.0, 9.0, 10.0, 10.5, 9.5, 10.0]
+    z = admin_cost.robust_zscore_anomaly(100.0, seri)
+    assert z is not None
+    assert abs(z) > 3.5
+
+
+def test_robust_zscore_anomaly_mad_sifir_bolme_hatasi_vermez():
+    """MAD=0 (tekdüze seri) durumunda ZeroDivisionError yerine None (anomali yok)."""
+    seri = [5.0, 5.0, 5.0, 5.0]
+    assert admin_cost.robust_zscore_anomaly(5.0, seri) is None
+    assert admin_cost.robust_zscore_anomaly(999.0, seri) is None
+
+
+def test_robust_zscore_anomaly_bos_seri_none_doner():
+    assert admin_cost.robust_zscore_anomaly(10.0, []) is None

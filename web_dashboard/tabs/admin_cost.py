@@ -10,6 +10,7 @@ Işlevsellik:
 from __future__ import annotations
 
 import json
+import statistics
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -84,6 +85,24 @@ class CostSummary:
     provider_count: int = 0
     active_provider_count: int = 0
     problematic_provider_count: int = 0
+
+
+# ================================================================ Anomali Tespiti
+def robust_zscore_anomaly(deger: float, seri: list[float]) -> float | None:
+    """SSOT §9 K5: z = 0.6745 * (deger - medyan) / MAD.
+
+    `seri` medyan/MAD hesabı için karşılaştırma listesidir (ör. 30 günlük
+    maliyet serisi ya da o günkü provider maliyetleri). MAD=0 ise (tüm
+    değerler eşit/tekdüze) bölme hatası vermek yerine anomali yok sayılır
+    ve ``None`` döner.
+    """
+    if not seri:
+        return None
+    medyan = statistics.median(seri)
+    mad = statistics.median(abs(x - medyan) for x in seri)
+    if mad == 0:
+        return None
+    return 0.6745 * (deger - medyan) / mad
 
 
 # ================================================================ Veri Yükleme
@@ -219,18 +238,25 @@ def load_cost_summary() -> CostSummary:
             anomalies.append(af)
 
         # Ek anomaliler (hesaplı — maliyet/hata/latency bazlı, gerçek combo verisi üzerinden)
+        # SSOT §9 K5: z = 0.6745 * (bugün - medyan) / MAD, alarm |z| > 3.5.
+        # ponytail: gerçek 30 günlük arşiv seri henüz yok (trend tek nokta), o yüzden
+        # medyan/MAD provider-bazlı günlük maliyet dağılımından hesaplanır. Arşiv
+        # (data/router altında günlük snapshot biriktirme) eklenince seri oraya taşınır.
         cost_providers = [pc for pc in providers if pc.daily_cost_usd > 0]
-        avg_cost = (sum(pc.daily_cost_usd for pc in cost_providers) / len(cost_providers)) if cost_providers else 0.0
+        cost_series = [pc.daily_cost_usd for pc in cost_providers]
         for pc in providers:
-            if avg_cost > 0 and pc.daily_cost_usd > avg_cost * 2:
-                severity = "YUKSEK" if pc.daily_cost_usd > avg_cost * 3 else "ORTA"
+            if pc.daily_cost_usd <= 0:
+                continue
+            z = robust_zscore_anomaly(pc.daily_cost_usd, cost_series)
+            if z is not None and abs(z) > 3.5:
+                severity = "YUKSEK" if abs(z) > 5 else "ORTA"
                 anomalies.append(AnomalyFlag(
                     flag_type="high_cost",
                     severity=severity,
                     provider=pc.provider,
-                    reasons=f"Maliyet ${pc.daily_cost_usd:.4f} ortalamanın 2 katından fazla",
+                    reasons=f"Maliyet ${pc.daily_cost_usd:.4f} robust z-skor {z:.2f} (eşik ±3.5)",
                     value=pc.daily_cost_usd,
-                    threshold=avg_cost * 2,
+                    threshold=3.5,
                     timestamp=ts,
                 ))
 

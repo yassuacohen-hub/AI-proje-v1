@@ -7359,13 +7359,13 @@
     "baslik": "[UI] AI maliyet anomali bloğunu yaz → admin_cost.py z-skor (2s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-24T04:15:40",
     "bitis": null,
     "dosyalar": [
       "web_dashboard/tabs/admin_cost.py"
     ],
-    "not": "",
+    "not": "Teslim (utku): admin_cost.py:91-107 robust_zscore_anomaly() eklendi (z=0.6745*(deger-medyan)/MAD, MAD=0 -> None). load_cost_summary() provider gunluk maliyetine uyguluyor, |z|>3.5 high_cost AnomalyFlag olarak mevcut anomalies listesine ekleniyor, panelde mevcut tabloda gorunuyor. test_admin_sistem_cost.py 3 yeni test (outlier, MAD=0, bos seri), 6/6 gecti. SSOT K5/madde9/G7/v2.3 guncellendi.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",

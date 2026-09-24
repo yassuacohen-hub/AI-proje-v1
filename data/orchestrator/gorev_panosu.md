@@ -126,7 +126,7 @@
 | UI-ADMIN-SAHTE-EXEC-02 | [UI] Sahte gelir kartlarını düzelt → admin_executive.py rozetli boş kart (2s) | utku | P0 | review | web_dashboard/tabs/admin_executive.py |
 | UI-ADMIN-KULLANICI-BIRLESTIR-09 | [UI] Üç kopya kullanıcı yönetimini taşı → tek modül (3s) | utku | P1 | review | - |
 | UI-ADMIN-GUNCELLIK-KOVA-10 | [UI] Veri güncellik kovalarını yaz → admin_quality.py dağılımı (2s) | utku | P1 | review | web_dashboard/tabs/admin_quality.py |
-| UI-ADMIN-MALIYET-ANOMALI-11 | [UI] AI maliyet anomali bloğunu yaz → admin_cost.py z-skor (2s) | utku | P1 | plan | web_dashboard/tabs/admin_cost.py |
+| UI-ADMIN-MALIYET-ANOMALI-11 | [UI] AI maliyet anomali bloğunu yaz → admin_cost.py z-skor (2s) | utku | P1 | review | web_dashboard/tabs/admin_cost.py |
 | DOC-ADMIN-ARSIV-12 | [DOC] Bayat analiz dökümanını taşı → arşiv + §0.1 güncel (1s) | utku | P2 | plan | - |
 
 ## Tamamlananlar

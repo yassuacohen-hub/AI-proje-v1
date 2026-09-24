@@ -718,5 +718,21 @@
     "tetik_sayisi": 13,
     "uyari_tarihi": "2026-09-24T05:24:01",
     "mesaj": "⚠️ DOC-ADMIN-ARSIV-12 ([DOC] Bayat analiz dökümanını taşı → arşiv + §0.1 güncel (1s)) — utku 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "DOC-ADMIN-ARSIV-12",
+    "gorev_basligi": "[DOC] Bayat analiz dökümanını taşı → arşiv + §0.1 güncel (1s)",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-24T05:29:01",
+    "mesaj": "⚠️ DOC-ADMIN-ARSIV-12 ([DOC] Bayat analiz dökümanını taşı → arşiv + §0.1 güncel (1s)) — utku 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "DOC-ADMIN-ARSIV-12",
+    "gorev_basligi": "[DOC] Bayat analiz dökümanını taşı → arşiv + §0.1 güncel (1s)",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-24T05:34:01",
+    "mesaj": "⚠️ DOC-ADMIN-ARSIV-12 ([DOC] Bayat analiz dökümanını taşı → arşiv + §0.1 güncel (1s)) — utku 15. kez uyarıldı; henüz başlamadı."
   }
 ]

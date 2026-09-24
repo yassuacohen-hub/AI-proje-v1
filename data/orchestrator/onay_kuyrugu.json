@@ -2381,5 +2381,13 @@
     "ciktilar": [],
     "teslim_tarihi": "2026-09-24T05:27:58",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-ADMIN-MALIYET-ANOMALI-11",
+    "ajan": "utku",
+    "ozet": "admin_cost.py:91-107 robust_zscore_anomaly() eklendi (z=0.6745*(deger-medyan)/MAD, MAD=0 -> None). load_cost_summary() provider gunluk maliyetine uyguluyor, |z|>3.5 high_cost AnomalyFlag olarak mevcut anomalies listesine ekleniyor, panelde mevcut tabloda gorunuyor. test_admin_sistem_cost.py 3 yeni test (outlier, MAD=0, bos seri), 6/6 gecti. SSOT K5/madde9/G7/v2.3 guncellendi.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T05:36:52",
+    "durum": "bekliyor"
   }
 ]
