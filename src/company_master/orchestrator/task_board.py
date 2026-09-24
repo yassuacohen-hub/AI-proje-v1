@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import json
 import os
+import re
 import sys
 import time
 from datetime import datetime, timedelta
@@ -31,7 +32,12 @@ TASK_MD = STATE_DIR / "gorev_panosu.md"
 # ALTYAPI-DURUM-SOZLUK-01: durum sozlugu TEK KAYNAK burasidir.
 # "iptal" panoda fiilen kullaniliyordu ama semada yoktu; pano_denetim ve
 # orkestrator_kontrol kendi kopyalarini tutuyordu (3 farkli liste).
-GOREV_DURUMLARI = ("plan", "aktif", "review", "done", "blocked", "archive", "iptal")
+# "bekliyor" panoda 10 kayitta fiilen kullaniliyordu ama sozlukte yoktu;
+# "yedek" ise denetimde elenen, siradaki tur adayi gorevlerin durumudur (B-06).
+GOREV_DURUMLARI = (
+    "plan", "aktif", "review", "done", "blocked", "archive", "iptal",
+    "bekliyor", "yedek",
+)
 
 # Kapali = ne acik is ne stuck. Denetim betikleri BUNU import eder, kopyalamaz.
 KAPALI_DURUMLAR = ("done", "archive", "iptal")
@@ -121,6 +127,44 @@ def sema_dogrula(task: dict) -> None:
 def _read_json(path: Path) -> Any:
     _ensure()
     return json.loads(path.read_text(encoding="utf-8-sig"))
+
+
+def arsiv_dosyalari() -> list[Path]:
+    """Ceyreklik arsiv dosyalari (task_board_arsiv_*.json), ad sirasinda."""
+    return sorted(STATE_DIR.glob("task_board_arsiv_*.json"))
+
+
+def arsivde_bul(task_id: str) -> str | None:
+    """D-198: task_id hangi arsiv dosyasinda duruyor? Yoksa None.
+
+    Arsiv de mukerrer kapisidir; kapanip arsivlenmis bir is ikinci kez
+    panoya girerse ayni is iki kez uretilir (ALTYAPI-D66-BYPASS-TETIKLEME vakasi).
+    """
+    for yol in arsiv_dosyalari():
+        try:
+            kayitlar = json.loads(yol.read_text(encoding="utf-8-sig"))
+        except (OSError, ValueError):
+            continue
+        if any(str(k.get("task_id")) == task_id for k in kayitlar):
+            return yol.name
+    return None
+
+
+def brief_kilitli_dosya(brief: str) -> str | None:
+    """Brief'teki `**Kilitli dosya:** \\`yol\\`` satirindan yolu okur (yoksa None).
+
+    Kilit satiri duz metinse (orn. "(kilit yok - kapsam brifte)") None doner.
+    """
+    yol = ROOT / brief
+    try:
+        satirlar = yol.read_text(encoding="utf-8-sig").splitlines()[:20]
+    except OSError:
+        return None
+    for satir in satirlar:
+        if satir.startswith("**Kilitli dosya:**"):
+            eslesme = re.search(r"`([^`]+)`", satir)
+            return eslesme.group(1) if eslesme else None
+    return None
 
 
 def _write_json(path: Path, data: Any) -> None:
@@ -256,6 +300,19 @@ def gorev_ekle(
     board = _read_json(TASK_BOARD)
     if any(t.get("task_id") == task_id for t in board):
         raise ValueError(f"Gorev zaten var: {task_id}")
+    # D-198: arsiv de mukerrer kapisidir; hangi arsivde oldugunu soyler.
+    arsiv_adi = arsivde_bul(task_id)
+    if arsiv_adi:
+        raise ValueError(f"Gorev arsivde zaten var: {task_id} -> {arsiv_adi}")
+    # D-66 kod karsiligi: brif yolu panoda yaziliysa diskte de bulunmali.
+    if brief and not (ROOT / brief).exists():
+        raise ValueError(f"Brief diskte yok: {brief} (D-66)")
+    # Kilitsiz gorev panoya giremez: brif kilit satiri varsa dosyalar bos olamaz.
+    if brief and not dosyalar and brief_kilitli_dosya(brief):
+        raise ValueError(
+            f"Brief kilitli dosya bildiriyor ama gorev kilitsiz: {task_id} "
+            f"(brief: {brief}, kilit: {brief_kilitli_dosya(brief)})"
+        )
     task = {
         "task_id": task_id,
         "id": task_id,  # FIX-ID-01: task_id kanonik, id alias (consumer uyumlulugu)

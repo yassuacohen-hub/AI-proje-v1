@@ -752,3 +752,12 @@ python scripts/ajan_chat.py bulgula "Tasarım (D-192)" "Font boyut tutarsız" --
 **Ilgili Nodlar**
 - [[AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani]]
 - [[plans/_brief_sablon]]
+
+## Arşiv de Mükerrer Kapısıdır (D-198 — KAHİN kararı 2026-09-24)
+
+Bir `task_id` panoda yoksa "yeni iş" demek değildir; kapanıp arşivlenmiş olabilir. `gorev_ekle()` mükerrer kontrolünü yalnız `task_board.json` üzerinde değil, `task_board_arsiv_*.json` dosyalarının birleşimi üzerinde yapar ve hata metni **hangi arşiv dosyasında** bulunduğunu söyler; `bakim --rapor` aynı çakışmayı salt okunur raporlar, arşive asla yazmaz. Ayrıca **hiçbir üretim veya planlama turu, `python scripts/gorev_kutusu.py simulasyon` çıktısı temiz (çıkış kodu 0) değilken başlamaz** — tur öncesi zorunlu kapıdır. Gerekçe: `ALTYAPI-D66-BYPASS-TETIKLEME` işi arşivde `done` iken panoya ikinci kez `plan` olarak girdi ve aynı iş iki kez üretildi; kök neden unutkanlık değil, kapının yarım kapsamıdır.
+
+**Ilgili Nodlar**
+- [[src/company_master/orchestrator/task_board]]
+- [[scripts/gorev_kutusu]]
+- [[tests/test_gorev_mukerrer_arsiv]]

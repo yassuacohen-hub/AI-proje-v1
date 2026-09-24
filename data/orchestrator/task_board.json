@@ -5,21 +5,21 @@
     "baslik": "[ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s)",
     "sahip": "ihsan",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "iptal",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-24T01:28:33",
     "dosyalar": [
       "scripts/pano_denetim.py",
       "scripts/tetik_senk.py",
       "tests/test_d66_bypass_tetikleme.py",
       "Huginn Data Insights/AGENTS.md"
     ],
-    "not": "",
+    "not": "Mukerrer: ayni is ALTYAPI-D66-BYPASS-TETIKLEME-01 olarak task_board_arsiv_2026-Q3.json:7040'ta done. Kanit: plans/brief_ihsan_ALTYAPI-D66-BYPASS-TETIKLEME-01.md",
     "source": "ic",
     "from_agent": null,
     "kanit": "",
     "mod": "code",
-    "brief": "plans/brief_ihsan_ALTYAPI-D66-BYPASS-TETIKLEME.md",
+    "brief": "plans/brief_ihsan_ALTYAPI-D66-BYPASS-TETIKLEME-01.md",
     "talimat": "D-65 kural kodda yok. Blokaj 24h+ → exit 2 → tetik_senk rapor → KAHİN elle tetikle. Seçenek (a): pano_denetim.tara() blocked tespit, exit 2 dön. tetik_senk exit 2 gördüğünde AGENT_SYNC.md rapor satırı ekle. Tests: 4 (24h+, <24h, P0/P1, format). AGENTS.md: D-66 karar ekle."
   },
   {
@@ -31,13 +31,16 @@
     "durum": "bekliyor",
     "baslangic": null,
     "bitis": null,
-    "dosyalar": [],
+    "dosyalar": [
+      "src/company_master/schema/migrations/0017_user_activity_log.sql"
+    ],
     "not": "Kaynak: SSOT §8.4:322 (EK BULGU-8) · §10:366 · §12 G2:415. Bagimlilik yok. Kok blokaj: K1 tam churn, K9, G4 DAU bu tablo olmadan acilamaz.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_VERI-ADMIN-AKTIVITE-LOG-13.md",
-    "talimat": "VERI-ADMIN-AKTIVITE-LOG-13: [VERI] Kullanıcı aktivite log tablosunu yaz → migration 0017 (2s) Brif: plans/brief_utku_VERI-ADMIN-AKTIVITE-LOG-13.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle."
+    "talimat": "VERI-ADMIN-AKTIVITE-LOG-13: [VERI] Kullanıcı aktivite log tablosunu yaz → migration 0017 (2s) Brif: plans/brief_utku_VERI-ADMIN-AKTIVITE-LOG-13.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": []
   },
   {
     "task_id": "API-ADMIN-AKTIVITE-YAZ-14",
@@ -48,13 +51,18 @@
     "durum": "bekliyor",
     "baslangic": null,
     "bitis": null,
-    "dosyalar": [],
+    "dosyalar": [
+      "web_app.py"
+    ],
     "not": "Kaynak: SSOT §8.4:322 · §9:340. Bagimlilik: VERI-ADMIN-AKTIVITE-LOG-13. Desen: API-ADMIN-LASTLOGIN-YAZ-05 (web_app.py:2232 + fallback :2246). Log yazimi ana akisi dusurmez.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_API-ADMIN-AKTIVITE-YAZ-14.md",
-    "talimat": "API-ADMIN-AKTIVITE-YAZ-14: [API] Giriş/arama/AI olaylarını log'a yaz → web_app.py + arama uçları (2s) Brif: plans/brief_utku_API-ADMIN-AKTIVITE-YAZ-14.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle."
+    "talimat": "API-ADMIN-AKTIVITE-YAZ-14: [API] Giriş/arama/AI olaylarını log'a yaz → web_app.py + arama uçları (2s) Brif: plans/brief_utku_API-ADMIN-AKTIVITE-YAZ-14.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": [
+      "VERI-ADMIN-AKTIVITE-LOG-13"
+    ]
   },
   {
     "task_id": "DOC-ADMIN-DURUM-SENKRON-15",
@@ -65,13 +73,16 @@
     "durum": "bekliyor",
     "baslangic": null,
     "bitis": null,
-    "dosyalar": [],
+    "dosyalar": [
+      "AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md"
+    ],
     "not": "Kaynak: SSOT §8.4:322-324 · §10:364-366. Ic tutarsizlik: §14 EK BULGU-9/10'u kapali gosteriyor ama §8.4:323-324 ve §10:364 hala P0 yaziyor. Olcum kendini yaniltiyor.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_DOC-ADMIN-DURUM-SENKRON-15.md",
-    "talimat": "DOC-ADMIN-DURUM-SENKRON-15: [DOC] Bayat durum satırlarını senkronla → §8.4/§10 kanıtlı (1s) Brif: plans/brief_utku_DOC-ADMIN-DURUM-SENKRON-15.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle."
+    "talimat": "DOC-ADMIN-DURUM-SENKRON-15: [DOC] Bayat durum satırlarını senkronla → §8.4/§10 kanıtlı (1s) Brif: plans/brief_utku_DOC-ADMIN-DURUM-SENKRON-15.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": []
   },
   {
     "task_id": "API-ADMIN-CHURN-3SINYAL-16",
@@ -82,13 +93,18 @@
     "durum": "bekliyor",
     "baslangic": null,
     "bitis": null,
-    "dosyalar": [],
+    "dosyalar": [
+      "src/company_master/churn.py"
+    ],
     "not": "Kaynak: SSOT §9 K1:340 · §10:368 · §12 G2:415. Bagimlilik: API-ADMIN-AKTIVITE-YAZ-14. Mevcut risk_etiketi() BOZULMAZ (cagiran musteri_yonetimi.py:272), yeni fonksiyon eklenir.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_API-ADMIN-CHURN-3SINYAL-16.md",
-    "talimat": "API-ADMIN-CHURN-3SINYAL-16: [API] Churn kuralını 3 sinyale genişlet → churn.py tam formül (2s) Brif: plans/brief_utku_API-ADMIN-CHURN-3SINYAL-16.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle."
+    "talimat": "API-ADMIN-CHURN-3SINYAL-16: [API] Churn kuralını 3 sinyale genişlet → churn.py tam formül (2s) Brif: plans/brief_utku_API-ADMIN-CHURN-3SINYAL-16.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": [
+      "API-ADMIN-AKTIVITE-YAZ-14"
+    ]
   },
   {
     "task_id": "UI-ADMIN-DAU-17",
@@ -99,13 +115,18 @@
     "durum": "bekliyor",
     "baslangic": null,
     "bitis": null,
-    "dosyalar": [],
+    "dosyalar": [
+      "web_dashboard/tabs/admin_kpi.py"
+    ],
     "not": "Kaynak: SSOT §8.1 A9:273 · §10:369 · §12 G4:417. Bagimlilik: API-ADMIN-AKTIVITE-YAZ-14. MAU var DAU yok — yarim metrik yaniltici. Tablo yoksa 'veri kaynagi yok' rozeti (UI-ADMIN-SAHTE-KPI-01 deseni).",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_UI-ADMIN-DAU-17.md",
-    "talimat": "UI-ADMIN-DAU-17: [UI] Gerçek DAU kartını yaz → admin_kpi.py aktivite sorgusu (2s) Brif: plans/brief_utku_UI-ADMIN-DAU-17.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle."
+    "talimat": "UI-ADMIN-DAU-17: [UI] Gerçek DAU kartını yaz → admin_kpi.py aktivite sorgusu (2s) Brif: plans/brief_utku_UI-ADMIN-DAU-17.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": [
+      "API-ADMIN-AKTIVITE-YAZ-14"
+    ]
   },
   {
     "task_id": "API-ADMIN-KAYNAK-SAGLIK-18",
@@ -116,13 +137,16 @@
     "durum": "bekliyor",
     "baslangic": null,
     "bitis": null,
-    "dosyalar": [],
+    "dosyalar": [
+      "src/company_master/kaynak_guvenilirlik.py"
+    ],
     "not": "Kaynak: SSOT §9 K4:343. Bagimlilik yok — girdi (source_records) DB'de MEVCUT. Esikler: 0.95 yesil / 0.70 turuncu / alti kirmizi, modul sabiti olarak.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_API-ADMIN-KAYNAK-SAGLIK-18.md",
-    "talimat": "API-ADMIN-KAYNAK-SAGLIK-18: [API] Kaynak sağlık skorunu hesapla → 3 kovalı rozet + DLQ birikme hızı (2s) Brif: plans/brief_utku_API-ADMIN-KAYNAK-SAGLIK-18.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle."
+    "talimat": "API-ADMIN-KAYNAK-SAGLIK-18: [API] Kaynak sağlık skorunu hesapla → 3 kovalı rozet + DLQ birikme hızı (2s) Brif: plans/brief_utku_API-ADMIN-KAYNAK-SAGLIK-18.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": []
   },
   {
     "task_id": "UI-ADMIN-CRAWL-KONTROL-19",
@@ -133,13 +157,16 @@
     "durum": "bekliyor",
     "baslangic": null,
     "bitis": null,
-    "dosyalar": [],
+    "dosyalar": [
+      "web_dashboard/tabs/webhook_monitor.py"
+    ],
     "not": "Kaynak: SSOT §8.1 A8:272 · §10:373 · §12 G8:421. Bagimlilik yok. Durdur aksiyonu iki adimli onay gerektirir (yikici islem). AgGrid yasak (§8.3 C6).",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_UI-ADMIN-CRAWL-KONTROL-19.md",
-    "talimat": "UI-ADMIN-CRAWL-KONTROL-19: [UI] Crawl işlerine tetikle/durdur aksiyonu ekle → operatör kontrol paneli (3s) Brif: plans/brief_utku_UI-ADMIN-CRAWL-KONTROL-19.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle."
+    "talimat": "UI-ADMIN-CRAWL-KONTROL-19: [UI] Crawl işlerine tetikle/durdur aksiyonu ekle → operatör kontrol paneli (3s) Brif: plans/brief_utku_UI-ADMIN-CRAWL-KONTROL-19.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": []
   },
   {
     "task_id": "UI-ADMIN-ARAMA-BOSLUK-20",
@@ -150,13 +177,18 @@
     "durum": "bekliyor",
     "baslangic": null,
     "bitis": null,
-    "dosyalar": [],
+    "dosyalar": [
+      "web_dashboard/tabs/admin_quality.py"
+    ],
     "not": "Kaynak: SSOT §9 K9:348 · §10:375. Bagimlilik: API-ADMIN-AKTIVITE-YAZ-14. Normalize → frekans → esik>=3. Semantik kumeleme/ML bu turda yok.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_UI-ADMIN-ARAMA-BOSLUK-20.md",
-    "talimat": "UI-ADMIN-ARAMA-BOSLUK-20: [UI] Sonuçsuz aramaları frekansa göre listele → içerik boşluk raporu (2s) Brif: plans/brief_utku_UI-ADMIN-ARAMA-BOSLUK-20.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle."
+    "talimat": "UI-ADMIN-ARAMA-BOSLUK-20: [UI] Sonuçsuz aramaları frekansa göre listele → içerik boşluk raporu (2s) Brif: plans/brief_utku_UI-ADMIN-ARAMA-BOSLUK-20.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": [
+      "API-ADMIN-AKTIVITE-YAZ-14"
+    ]
   },
   {
     "task_id": "API-ADMIN-SUPHELI-AKTIVITE-21",
@@ -167,13 +199,18 @@
     "durum": "bekliyor",
     "baslangic": null,
     "bitis": null,
-    "dosyalar": [],
+    "dosyalar": [
+      "src/company_master/admin_audit.py"
+    ],
     "not": "Kaynak: SSOT §9 K10:349 · §10:374 · §12 G9:422. Bagimlilik: API-ADMIN-AKTIVITE-YAZ-14. KAPSAM: yalniz tespit — otomatik kilitleme/bildirim DAHIL DEGIL (yanlis pozitif riski olculmeden aksiyon alinmaz).",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_API-ADMIN-SUPHELI-AKTIVITE-21.md",
-    "talimat": "API-ADMIN-SUPHELI-AKTIVITE-21: [API] Şüpheli aktivite kurallarını yaz → 3 sinyalli güvenlik uyarısı (3s) Brif: plans/brief_utku_API-ADMIN-SUPHELI-AKTIVITE-21.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle."
+    "talimat": "API-ADMIN-SUPHELI-AKTIVITE-21: [API] Şüpheli aktivite kurallarını yaz → 3 sinyalli güvenlik uyarısı (3s) Brif: plans/brief_utku_API-ADMIN-SUPHELI-AKTIVITE-21.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": [
+      "API-ADMIN-AKTIVITE-YAZ-14"
+    ]
   },
   {
     "task_id": "UI-ADMIN-UPSELL-22",
@@ -184,12 +221,125 @@
     "durum": "bekliyor",
     "baslangic": null,
     "bitis": null,
-    "dosyalar": [],
+    "dosyalar": [
+      "web_dashboard/tabs/musteri_yonetimi.py"
+    ],
     "not": "Kaynak: SSOT §9 K7:346. Bagimlilik: API-ADMIN-CHURN-3SINYAL-16. Girdi (credit_ledger) DB'de MEVCUT. Kural: doygunluk>=0.85 AND churn in {Yok,Dusuk} AND buyume>0.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_UI-ADMIN-UPSELL-22.md",
-    "talimat": "UI-ADMIN-UPSELL-22: [UI] Upsell adaylarını 3 koşullu kuralla listele → satış aksiyon listesi (2s) Brif: plans/brief_utku_UI-ADMIN-UPSELL-22.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle."
+    "talimat": "UI-ADMIN-UPSELL-22: [UI] Upsell adaylarını 3 koşullu kuralla listele → satış aksiyon listesi (2s) Brif: plans/brief_utku_UI-ADMIN-UPSELL-22.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": [
+      "API-ADMIN-CHURN-3SINYAL-16"
+    ]
+  },
+  {
+    "task_id": "TEST-ADMIN-K2-AGIRLIK-23",
+    "id": "TEST-ADMIN-K2-AGIRLIK-23",
+    "baslik": "[TEST] K2 agirlik semasini dogrula -> test + SSOT kanit (1s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "yedek",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [],
+    "dependencies": [],
+    "not": "Kaynak: SSOT §9:341. Eleme: etki dusuk; K2 zaten calisiyor, yalniz dogrulama borcu.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "",
+    "talimat": ""
+  },
+  {
+    "task_id": "DOC-ADMIN-V9-KUTUCUK-24",
+    "id": "DOC-ADMIN-V9-KUTUCUK-24",
+    "baslik": "[DOC] V9 §16.5 kutucuklarini guncelle -> 6 madde (1s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "yedek",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [],
+    "dependencies": [],
+    "not": "Kaynak: SSOT §8.3 C7:309 · §11 KK-5:394. Eleme: KK-5 Urun Sahibi onayi bekliyor.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "",
+    "talimat": ""
+  },
+  {
+    "task_id": "UI-ADMIN-FEATURE-FLAG-25",
+    "id": "UI-ADMIN-FEATURE-FLAG-25",
+    "baslik": "[UI] Feature flag yonetim ekranini yaz -> A5 MVP (3s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "yedek",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [],
+    "dependencies": [],
+    "not": "Kaynak: SSOT §8.1:269 · §10:376. Eleme: §10'da etki ve etki/efor Dusuk.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "",
+    "talimat": ""
+  },
+  {
+    "task_id": "API-ADMIN-MFA-26",
+    "id": "API-ADMIN-MFA-26",
+    "baslik": "[API] MFA + hesap kilidi akisini yaz -> A6 auth (4s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "yedek",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [],
+    "dependencies": [],
+    "not": "Kaynak: SSOT §8.1:270 · §10:374. Eleme: L efor; -21 A6'nin yuksek degerli parcasini kapsiyor.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "",
+    "talimat": ""
+  },
+  {
+    "task_id": "UI-ADMIN-LTV-CAC-27",
+    "id": "UI-ADMIN-LTV-CAC-27",
+    "baslik": "[UI] LTV/CAC kartlarini yaz -> K8 tamamlama (2s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "yedek",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [],
+    "dependencies": [],
+    "not": "Kaynak: SSOT §9:347 · §10:379 · §13:435. Eleme: faturalama ertelendi, Stripe yok.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "",
+    "talimat": ""
+  },
+  {
+    "task_id": "DOC-ADMIN-MULTITENANT-KARAR-28",
+    "id": "DOC-ADMIN-MULTITENANT-KARAR-28",
+    "baslik": "[DOC] Multi-tenant kararini kapat -> KK-7 (1s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "yedek",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [],
+    "dependencies": [],
+    "not": "Kaynak: SSOT §11 KK-7:396 · §13:434. Eleme: urun karari; KAHIN yaniti olmadan icerik uretilemez.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "",
+    "talimat": ""
   }
 ]

@@ -147,6 +147,15 @@ def pano_tarama() -> dict:
         gorulen.setdefault(t["task_id"], []).append(t)
     ciftler = {tid: len(v) for tid, v in gorulen.items() if len(v) > 1}
 
+    # D-198: arşiv de mükerrer kapısıdır. Arşiv SALT OKUNUR taranır.
+    arsiv_cakisma = []
+    for t in board:
+        if t["durum"] in tb.KAPALI_DURUMLAR:
+            continue
+        dosya = tb.arsivde_bul(t["task_id"])
+        if dosya:
+            arsiv_cakisma.append(f"{t['task_id']} -> {dosya}")
+
     pano_durum = {t["task_id"]: t["durum"] for t in board}
     takilan = []
     for ajan in AJANLAR:
@@ -158,7 +167,12 @@ def pano_tarama() -> dict:
                 takilan.append(f"{ajan}/{k['task_id']} tetik=bekliyor pano={pd}")
 
     bloklu = [t["task_id"] for t in board if t["durum"] == "blocked"]
-    return {"cift_kayit": ciftler, "takili_tetik": takilan, "blocked": bloklu}
+    return {
+        "cift_kayit": ciftler,
+        "takili_tetik": takilan,
+        "blocked": bloklu,
+        "arsiv_cakisma": arsiv_cakisma,
+    }
 
 
 def pano_bakim() -> dict:
