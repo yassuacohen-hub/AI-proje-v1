@@ -22,7 +22,7 @@
 | API-LAYER2-DINAMIK-YÜKLEME-30 | [API] Layer 2 dinamik yükleme → plan_field_group tablosundan görünürlük oku | yasu | P1 | bekliyor | src/company_master/api/core/normalize.py, web_app.py |
 | KONTROL-KVKK-MASKELEME-31 | [KONTROL] KVKK maskeleme end-to-end test → admin panel e2e | yasu | P1 | baslatdi | tests/test_visibility_layer.py, web_app.py |
 | UI-KONTROL-PANOSU-32 | [UI] Admin kontrol panosu → maskeleme durum metriksleri | utku | P2 | review | web_dashboard/tabs/admin_panel.py, web_app.py |
-| DOKÜMAN-KVKK-FAQ-33 | [DOC] KVKK FAQ & sorun çözme → markdown troubleshooting guide | utku | P2 | bekliyor | docs/KVKK_FAQ.md |
+| DOKUMAN-KVKK-FAQ-33 | [DOC] KVKK FAQ & sorun çözme → markdown troubleshooting guide | utku | P2 | review | docs/KVKK_FAQ.md |
 
 ## Tamamlananlar
 

@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-25T02:46:14
+> Son guncelleme: 2026-09-25T02:50:17
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -22,7 +22,7 @@
 | API-LAYER2-DINAMIK-YÜKLEME-30 | [API] Layer 2 dinamik yükleme → plan_fie | yasu | P1 | bekliyor |
 | KONTROL-KVKK-MASKELEME-31 | [KONTROL] KVKK maskeleme end-to-end test | yasu | P1 | baslatdi |
 | UI-KONTROL-PANOSU-32 | [UI] Admin kontrol panosu → maskeleme du | utku | P2 | review |
-| DOKÜMAN-KVKK-FAQ-33 | [DOC] KVKK FAQ & sorun çözme → markdown  | utku | P2 | bekliyor |
+| DOKUMAN-KVKK-FAQ-33 | [DOC] KVKK FAQ & sorun çözme → markdown  | utku | P2 | review |
 
 ## Tamamlananlar (Son 10)
 

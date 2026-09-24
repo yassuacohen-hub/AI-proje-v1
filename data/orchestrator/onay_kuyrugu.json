@@ -2564,5 +2564,13 @@
     "ciktilar": [],
     "teslim_tarihi": "2026-09-25T02:46:14",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "DOKUMAN-KVKK-FAQ-33",
+    "ajan": "utku",
+    "ozet": "KVKK FAQ dokumani hazirlandi: docs/KVKK_FAQ.md. 7 SSS (field maskeli, strict/lenient, quarantine, tier upgrade, kontor, log, mask param) + 3 troubleshooting + 3 kod ornegi (curl/SQL). Ilgili nodlar: normalize.py, web_app.py, 0018_visibility_layer.sql. Kodlama denetimi temiz.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-25T02:50:17",
+    "durum": "bekliyor"
   }
 ]

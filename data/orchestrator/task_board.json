@@ -663,18 +663,18 @@
     ]
   },
   {
-    "task_id": "DOKÜMAN-KVKK-FAQ-33",
-    "id": "DOKÜMAN-KVKK-FAQ-33",
+    "task_id": "DOKUMAN-KVKK-FAQ-33",
+    "id": "DOKUMAN-KVKK-FAQ-33",
     "baslik": "[DOC] KVKK FAQ & sorun çözme → markdown troubleshooting guide",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "bekliyor",
+    "durum": "review",
     "baslangic": null,
     "bitis": null,
     "dosyalar": [
       "docs/KVKK_FAQ.md"
     ],
-    "not": "Yeni dosya: docs/KVKK_FAQ.md. SSS: Field neden maskeli? Strict vs Lenient fark? Karantina nedir? Tier upgrade? Kontör eksikse ne olur? Örnekler: Ç1-Ç4 çelişkiler, çözüm adımları.",
+    "not": "Teslim (utku): KVKK FAQ dokumani hazirlandi: docs/KVKK_FAQ.md. 7 SSS (field maskeli, strict/lenient, quarantine, tier upgrade, kontor, log, mask param) + 3 troubleshooting + 3 kod ornegi (curl/SQL). Ilgili nodlar: normalize.py, web_app.py, 0018_visibility_layer.sql. Kodlama denetimi temiz.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
