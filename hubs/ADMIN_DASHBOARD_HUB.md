@@ -44,7 +44,7 @@ Ana baglam: [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]] · [[Huginn Data In
 
 ## Gorev Uretim Taslagi (2026-09-24, kalici)
 
-- [[Huginn Data Insights/data/orchestrator/gorev_taslagi]] — **Kalici gorev taslagi**: ilerleme yuzdesi, ana + yedek gorevler, tur kaydi. Her yeni gorev turunda once bu dosya okunur (tekrar onleme).
+- [[Huginn Data Insights/data/orchestrator/gorev_taslagi]] — **Kalici gorev taslagi**: acik gorev sayaci (P0/P1/P2), ana + yedek gorevler, tur kaydi. Her yeni gorev turunda once bu dosya okunur (tekrar onleme).
 
 ## Gorev Brief'leri — Tur 2026-09-24 (ADMIN-KIT · SSOT tabanli)
 

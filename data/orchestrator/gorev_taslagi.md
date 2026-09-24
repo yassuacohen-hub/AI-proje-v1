@@ -6,22 +6,26 @@
 
 ---
 
-## 0. İlerleme Bloğu
+## 0. Sayaç Bloğu
 
-**Hesaplama yöntemi (her tur aynı formül):**
-`yüzde = kapalı_madde / toplam_madde`; toplam_madde = SSOT'ta sayılabilir madde kalemlerinin toplamı = §8.1 (A1-A10 = 10) + §8.3 (C1-C8 = 8) + §8.4 (EK BULGU-8/9/10 = 3) + §9 (K1-K10 = 10) + §10 (sıra 1-15 = 15) + §11 (KK-1…KK-9 = 9) + §12 (G0-G9 = 10) = **65**. Bir madde yalnızca ✅/karara bağlanmış/kapandı ise kapalı sayılır; 🟡 kısmi ve 🔴 açık = **açık**. Tahmin yok, satır sayımı var.
+> **Yüzde kullanılmaz (D-197 kural 5).** Maddeler eşit ağırlıkta değil; tek yüzde, L eforlu bir P0 ile S eforlu bir P2'yi eşitmiş gibi gösterir. Metrik ham sayaçtır.
+
+**Açık görev — P0: 2 · P1: 6 · P2: 3** (kaynak: pano `data/orchestrator/task_board.json`, 11 aktif kayıt)
+
+**Sayım yöntemi (her tur aynı):**
+toplam_madde = SSOT'ta sayılabilir madde kalemlerinin toplamı = §8.1 (A1-A10 = 10) + §8.3 (C1-C8 = 8) + §8.4 (EK BULGU-8/9/10 = 3) + §9 (K1-K10 = 10) + §10 (sıra 1-15 = 15) + §11 (KK-1…KK-9 = 9) + §12 (G0-G9 = 10) = **65**. Bir madde yalnızca ✅/karara bağlanmış/kapandı ise kapalı sayılır; 🟡 kısmi ve 🔴 açık = **açık**. Tahmin yok, satır sayımı var.
 
 | Ölçüm | Değer |
 | --- | --- |
 | Toplam SSOT maddesi | 65 |
 | Kapalı | 32 |
 | Açık | 33 |
-| **İlerleme** | **%49** |
-| Karşılaştırma | — → **%49** (ilk ölçüm, taban çizgisi) |
 
 **Kapalı madde dağılımı (sayım kanıtı):** §8.1 → 1 (A2) · §8.3 → 6 (C1,C2,C3,C4,C6,C8) · §8.4 → 2 (EK BULGU-9,10) · §9 → 4 (K2,K3,K5,K6) · §10 → 6 (sıra 1,2,4,7,8,9) · §11 → 7 (KK-1,2,3,4,6,8,9) · §12 → 6 (G0,G1,G3,G5,G6,G7).
 
-**Görev panosu durumu:** toplam üretilen admin görevi 22 · tamamlanan 12 (`-01`…`-12`) · devam eden 0 · bekleyen 10 (`-13`…`-22`) → **pano tamamlanma %55**.
+**Görev panosu durumu:** üretilen admin görevi 22 · tamamlanan 12 (`-01`…`-12`) · devam eden 0 · açık 10 (`-13`…`-22`) + 1 altyapı görevi (`ALTYAPI-D66-BYPASS-TETIKLEME`) = pano aktif 11.
+
+**SSOT §7 matrisi (40 satır) durum dağılımı:** Var 19 · Kısmi 13 · Çelişkili 2 · Yok 6.
 
 ---
 
@@ -67,7 +71,7 @@
   - **Birleştirme kararı:** `-13` (migration) ile `-14` (yazma) **ayrı tutuldu** — `-04`/`-05` çiftindeki kanıtlanmış desen; tek görevde birleştirmek 4 saat kuralını (D-57) zorlar.
   - **Sıra düzeltmesi:** `DOC-ADMIN-DURUM-SENKRON-15` denetimde 10. sıradan 3. sıraya yükseltildi — bayat durum satırları ilerleme ölçümünü bozuyor, S efor.
 - **Sonuç:** 10 ana + 6 yedek.
-- **İlerleme:** — → **%49** (taban çizgisi).
+- **Sayaç (tur sonu):** Açık görev — P0: 2 · P1: 6 · P2: 3 · SSOT açık madde 33/65 (taban çizgisi).
 
 ---
 
