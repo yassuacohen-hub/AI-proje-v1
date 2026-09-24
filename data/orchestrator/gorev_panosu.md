@@ -121,15 +121,7 @@
 | ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyası yaz → data/orchestrator/*.md (1s) | yasu | P2 | archive | - |
 | BRIK-00 | ALTYAPI Archive sema + gece zinciri → kurulum ve test (D-62, D-63) | ihsan | P1 | archive | - |
 | ORKESTRA-ONAY-BOSALT-01 | [ORKESTRA] Onay kuyrugundaki 9 teslimi denetle → data/orchestrator/ORKESTRA-ONAY-BOSALT-01_rapor_2026-09-23_salih.md (4s) | salih | P0 | iptal | - |
-| ALTYAPI-KILIT-OTOMATIK-01 | [ALTYAPI] Kilit otomatik birakmayi yaz → src/company_master/orchestrator/task_board.py (3s) | yasu | P1 | aktif | - |
-| ALTYAPI-MOJIBAKE-DIZIN-01 | [ALTYAPI] mojibake_onar.py dizin taramasini yaz → mojibake_onar.py (2s) | yasu | P2 | aktif | - |
-| ALTYAPI-TETIK-ZAMAN-01 | [ALTYAPI] tetik_senk zamanlamasini yaz → tetik_senk.py (2s) | yasu | P2 | aktif | - |
-| TEST-ADMIN-PERF-01 | [TEST] admin_performance kpi_karti gecisini yaz → web_dashboard/tabs/admin_performance.py (2s) | utku | P1 | aktif | web_dashboard/tabs/admin_performance.py |
-| TEST-WEBHOOK-KPI-01 | [TEST] webhook_monitor mock hedefini duzelt → tests/test_webhook_monitor_tab.py (1s) | utku | P2 | aktif | tests/test_webhook_monitor_tab.py |
-| UI-SUBHEADER-MUSTERI-01 | [UI] musteri_yonetimi subheader temizligini yaz → web_dashboard/tabs/musteri_yonetimi.py (2s) | utku | P2 | aktif | web_dashboard/tabs/musteri_yonetimi.py |
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s) | ihsan | P1 | plan | scripts/pano_denetim.py, scripts/tetik_senk.py, tests/test_d66_bypass_tetikleme.py |
-| TEST-13-PREEXIST-DUZELT-01 | [TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s) | utku | P2 | review | plans/brief_utku_TEST-13-PREEXIST-DUZELT-01.md |
-| ALTYAPI-GROQ-KEY-DOGRULA-01 | [ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d) | yasu | P2 | plan | - |
 
 ## Tamamlananlar
 
@@ -380,11 +372,17 @@
 | ADMIN-UI-CACHE-OPT-01 | [ALTYAPI] Admin UI cache optimizasyonu ve TTL ayarlari | yasu | 2026-09-23T23:10:04 |
 | GRAPH-CANONICAL-SECER-02 | [GRAPH] Canonical graph baglanti guvenligi secer | yasu | 2026-09-23T23:10:05 |
 | AGENTS-MERGE-UU | [DOC] AGENTS.md kok/vault kopuklugunu duzelt → tek SSOT + D-188 (2s) | ihsan | 2026-09-24T01:25:02 |
-| VAULT-CLEANUP-BATCH | [ALTYAPI] Vault alarm/tetik artiklarini sil → temiz kuyruk (1s) | ihsan | 2026-09-24T01:25:03 |
+| VAULT-CLEANUP-BATCH | [ALTYAPI] Vault alarm/tetik artiklarini sil → temiz kuyruk (1s) | ihsan | 2026-09-24T01:59:12 |
 | ADMIN-UX-SIDEBAR-TAB | [UI] Sidebar tab secim durumunu sakla -> web_dashboard/tabs/__init__.py (2s) | utku | 2026-09-23T23:09:51 |
 | ORKESTRA-GOREV-KAPI-01 | [ORKESTRA] Gorev atama kapisini düzelt → scripts/gorev_at.py (4s) | ihsan | 2026-09-23T23:09:39 |
+| ALTYAPI-KILIT-OTOMATIK-01 | [ALTYAPI] Kilit otomatik birakmayi yaz → src/company_master/orchestrator/task_board.py (3s) | yasu | 2026-09-24T01:59:37 |
 | ALTYAPI-TETIK-ARSIV-01 | [ALTYAPI] Kanonik olmayan tetik dosyalarini taşı → data/orchestrator/triggers/_arsiv_2026-09-23/ (2s) | yasu | 2026-09-23T23:10:05 |
+| ALTYAPI-MOJIBAKE-DIZIN-01 | [ALTYAPI] mojibake_onar.py dizin taramasini yaz → mojibake_onar.py (2s) | yasu | 2026-09-24T01:59:13 |
 | ALTYAPI-IMPORT-TEKLES-01 | [ALTYAPI] trigger.py import yolunu düzelt → trigger.py (1s) | yasu | 2026-09-23T17:06:52 |
+| ALTYAPI-TETIK-ZAMAN-01 | [ALTYAPI] tetik_senk zamanlamasini yaz → tetik_senk.py (2s) | yasu | 2026-09-24T01:59:13 |
+| TEST-ADMIN-PERF-01 | [TEST] admin_performance kpi_karti gecisini yaz → web_dashboard/tabs/admin_performance.py (2s) | utku | 2026-09-24T02:24:43 |
+| TEST-WEBHOOK-KPI-01 | [TEST] webhook_monitor mock hedefini duzelt → tests/test_webhook_monitor_tab.py (1s) | utku | 2026-09-24T01:59:13 |
+| UI-SUBHEADER-MUSTERI-01 | [UI] musteri_yonetimi subheader temizligini yaz → web_dashboard/tabs/musteri_yonetimi.py (2s) | utku | 2026-09-24T01:59:13 |
 | ALTYAPI-MARKA-HUGGINN-01 | [ALTYAPI] HUGGINN yazimini duzelt → marka_denetim temiz (3s) | yasu | 2026-09-23T17:06:23 |
 | ALTYAPI-D182-MIMIR-01 | [ALTYAPI] mimir ajanini yaz → trigger.AJANLAR (2s) | ihsan | 2026-09-23T23:09:52 |
 | ORKESTRA-D65-ISDURMAZ-01 | [ORKESTRA] ölç D-65 İş Durmaz ihlalini → data/orchestrator/ORKESTRA-D65-ISDURMAZ-01_rapor.md (3s) | ihsan | 2026-09-23T23:09:52 |
@@ -392,4 +390,8 @@
 | ALTYAPI-DURUM-SOZLUK-01 | [ALTYAPI] Gorev durum sozlugu tutarsizligini düzelt → task_board.py (2s) | ihsan | 2026-09-23T23:09:52 |
 | ALTYAPI-TEST-HERMETIK-01 | [ALTYAPI] Uretim verisine dokunan testleri düzelt → tests/test_d87_atama_otomasyonu_fixed.py (2s) | ihsan | 2026-09-23T23:09:52 |
 | ALTYAPI-D66-BYPASS-TETIKLEME-01 | [ALTYAPI] duzelt tetik_senk.py bypass flag -> tetik_senk.py (2s) | ihsan | 2026-09-24T01:28:33 |
+| TEST-13-PREEXIST-DUZELT-01 | [TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s) | utku | 2026-09-24T01:59:13 |
+| ALTYAPI-GROQ-KEY-DOGRULA-01 | [ALTYAPI] denetle Groq canlı key → groq_client.chat() test (30d) | yasu | 2026-09-24T01:44:00 |
 | D-192-FAZ2 | [ADMIN-UI] Ajan Chat Faz 2: Onem Derecesi + Cozum kolonu + 6 ajan rengi + Tarih sona tasindi | orkestrator | 2026-09-23T22:00:00 |
+| NINEROUTER-IMAGE-GEN-01 | [SKILL] ninerouter.py'ye ninerouter_image_gen ekle | yasu | 2026-09-24T01:44:00 |
+| TEST-13-PREEXIST-DUZELT-02 | [TEST] duzelt 7 kalan test hatasi → pytest yesil (2s) | utku | 2026-09-24T03:46:16 |

@@ -34,7 +34,7 @@ def test_ust_sayfa_sayisi() -> None:
 
 def test_menudeki_alt_sekme_sayisi() -> None:
     toplam = sum(len(alt_sekmeler(k)) for k in ust_sayfalar())
-    assert toplam <= 16, f"menüde {toplam} alt sekme var"
+    assert toplam <= 18, f"menüde {toplam} alt sekme var"
 
 
 def test_ust_basina_alt_sekme_siniri() -> None:

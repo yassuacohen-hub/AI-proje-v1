@@ -118,11 +118,11 @@ def render_performance_tab() -> None:
 
     ac1, ac2, ac3 = st.columns(3)
     with ac1:
-        MetricCard("Ortalama Maliyet/Çağrı", f"${ai_cost['ort_maliyet_cagri_usd']:.5f}", kategori="sistem").render()
+        MetricCard("Ortalama Maliyet/Çağrı", f"${ai_cost['ort_maliyet_cagri_usd']:.5f}", kategori="system").render()
     with ac2:
-        MetricCard("Toplam Çağrı (Combo).render()", f"{ai_cost['toplam_cagri']:,}", kategori="sistem")
+        MetricCard("Toplam Çağrı (Combo).render()", f"{ai_cost['toplam_cagri']:,}", kategori="system")
     with ac3:
-        MetricCard("Ortalama Latency (Combo).render()", f"{ai_cost['ort_latency_ms']:.0f} ms", kategori="sistem")
+        MetricCard("Ortalama Latency (Combo).render()", f"{ai_cost['ort_latency_ms']:.0f} ms", kategori="system")
     # --- Ana Metrik Kartları ---
     st.divider()
     st.subheader("Query Latency")
@@ -134,11 +134,11 @@ def render_performance_tab() -> None:
 
         c1, c2, c3 = st.columns(3)
         with c1:
-            MetricCard("Toplam DB Süre", f"{db_time:.2f} ms", kategori="sistem").render()
+            MetricCard("Toplam DB Süre", f"{db_time:.2f} ms", kategori="system").render()
         with c2:
-            MetricCard("Sorgu Sayısı", f"{query_count:,}", kategori="sistem").render()
+            MetricCard("Sorgu Sayısı", f"{query_count:,}", kategori="system").render()
         with c3:
-            MetricCard("Ortalama Latency", f"{avg_latency:.2f} ms/sorgu", kategori="sistem").render()
+            MetricCard("Ortalama Latency", f"{avg_latency:.2f} ms/sorgu", kategori="system").render()
     # --- Cache Hit Ratio ---
     st.divider()
     st.subheader("Cache Hit Ratio")
@@ -150,11 +150,11 @@ def render_performance_tab() -> None:
 
         c1, c2, c3 = st.columns(3)
         with c1:
-            MetricCard("Cache Hits", f"{cache_hits:,}", kategori="sistem").render()
+            MetricCard("Cache Hits", f"{cache_hits:,}", kategori="system").render()
         with c2:
-            MetricCard("Cache Misses", f"{cache_misses:,}", kategori="sistem").render()
+            MetricCard("Cache Misses", f"{cache_misses:,}", kategori="system").render()
         with c3:
-            MetricCard("Cache Hit Rate", f"{cache_hit_rate:.2%}", kategori="sistem").render()
+            MetricCard("Cache Hit Rate", f"{cache_hit_rate:.2%}", kategori="system").render()
     # --- Slow Queries ---
     st.divider()
     st.subheader("Yavaş Sorgular (>100ms)")
@@ -186,7 +186,7 @@ def render_performance_tab() -> None:
         if duration_keys:
             st.subheader("Duration Metrikleri")
             for k, v in duration_keys.items():
-                MetricCard(k, v, kategori="sistem").render()
+                MetricCard(k, v, kategori="system").render()
     else:
         st.info("Prometheus metrikleri yüklenemedi.")
 

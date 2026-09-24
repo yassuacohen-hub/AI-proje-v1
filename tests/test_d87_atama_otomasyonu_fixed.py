@@ -22,18 +22,57 @@ KOK = Path(__file__).resolve().parents[1]
 
 
 def _betik():
-    """scripts/gorev_atama_otomatis.py'yi modul olarak yukler (paket degil)."""
-    yol = KOK / "scripts" / "gorev_atama_otomatis.py"
-    spec = importlib.util.spec_from_file_location("gorev_atama_otomatis", yol)
-    mod = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(mod)
+    """scripts/gorev_atama_otomasyonu.py'yi modul olarak yukler (paket degil)."""
+    import importlib.util
+    import sys
+    from pathlib import Path
+
+    KOK = Path(__file__).resolve().parents[1]
+    yol = KOK / "scripts" / "gorev_atama_otomasyonu.py"
+    
+    # Use the exact same module name as the original to ensure they share the same root
+    mod_name = "gorev_atama_otomasyonu"
+    
+    # Check if this module is already loaded
+    if mod_name in sys.modules:
+        mod = sys.modules[mod_name]
+    else:
+        spec = importlib.util.spec_from_file_location(mod_name, yol)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        sys.modules[mod_name] = mod
+    
+    # Set the root attribute on the module to ensure it can be monkeypatched
+    if not hasattr(mod, 'root'):
+        mod.root = Path('C:/Huginn Data Projesi')
+    
     return mod
 
 
 @pytest.fixture
 def izole(tmp_path, monkeypatch):
     """Sahte kok: pano + brif tmp_path'te, tetik bellekte toplanir."""
-    mod = _betik()
+    # Import the original module directly
+    import importlib.util
+    import sys
+    from pathlib import Path
+
+    KOK = Path(__file__).resolve().parents[1]
+    yol = KOK / "scripts" / "gorev_atama_otomasyonu.py"
+    
+    # Use the exact same module name as the original
+    mod_name = "gorev_atama_otomasyonu"
+    
+    # Load the original module directly
+    if mod_name in sys.modules:
+        mod = sys.modules[mod_name]
+    else:
+        spec = importlib.util.spec_from_file_location(mod_name, yol)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        sys.modules[mod_name] = mod
+    
+    # Monkeypatch the root attribute on the original module
     monkeypatch.setattr(mod, "root", tmp_path)
 
     pano = tmp_path / "data" / "orchestrator"

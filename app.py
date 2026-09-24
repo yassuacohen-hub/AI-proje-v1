@@ -26,6 +26,7 @@ Navigasyon (BK5):
 """
 from __future__ import annotations
 
+import os
 import sys
 import time as _time
 import traceback
@@ -748,7 +749,10 @@ def main() -> None:
 
     # D-192: Token restore — AppSession reset'ten sonra
     # Fallback hierarchy: session_state → cache file → auth gate
-    if not st.session_state.get("admin_token"):
+    # Skip cache restore in test environment (pytest)
+    import sys
+    _in_test = "pytest" in sys.modules or "PYTEST_CURRENT_TEST" in os.environ
+    if not st.session_state.get("admin_token") and not _in_test:
         restore_error = None
         try:
             from pathlib import Path

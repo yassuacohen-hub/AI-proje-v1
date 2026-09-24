@@ -2279,5 +2279,15 @@
     "durum": "onaylandi",
     "onaylayan": "oto-nobetci",
     "onay_tarihi": "2026-09-24T01:59:13"
+  },
+  {
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "ajan": "utku",
+    "ozet": "7 fail düzeltildi (3 test_d87 + admin_token + alt_sekmeler + bypass_logging + menude_alt_sekme), 1 test dokunulmadı (naming_audit), 1 DB infra hatası. 4073 passed.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T03:33:00",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-24T03:46:16"
   }
 ]

@@ -102,5 +102,133 @@
     "tetik_sayisi": 13,
     "uyari_tarihi": "2026-09-23T23:39:03",
     "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-01 ([TEST] düzelt 13 pre-existing hata → d193_menu_e2e_report.md (3s)) — utku 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-24T02:14:01",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-24T02:19:02",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-24T02:24:02",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-24T02:29:01",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-24T02:34:01",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-24T02:39:01",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-24T02:44:01",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-24T02:49:01",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-24T02:54:01",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-24T02:59:01",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-24T03:04:02",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-24T03:09:01",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-24T03:14:01",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-24T03:19:01",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-24T03:24:01",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "TEST-13-PREEXIST-DUZELT-02",
+    "gorev_basligi": "[TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-24T03:29:01",
+    "mesaj": "⚠️ TEST-13-PREEXIST-DUZELT-02 ([TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)) — utku 16. kez uyarıldı; henüz başlamadı."
   }
 ]

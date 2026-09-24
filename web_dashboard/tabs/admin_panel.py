@@ -235,6 +235,106 @@ def aktif_kullanici(oturum: dict[str, Any] | None = None) -> str:
     return MISAFIR_KIMLIK
 
 
+def render_rapor_listesi_tab() -> None:
+    """D-190: Admin panelde MIMIR raporlarını göster ve indir.
+
+    - Rapor dizinini tara: *_rapor_*_mimir.md
+    - Filtrele: rapor türü, tarih
+    - Sırala: en yeni ilk
+    - İndir: Markdown dosyası download
+
+    Erişim: rol kontrolü (future: granüler)
+    """
+    # Erişim kontrolü (şu an tüm roller)
+    if not rapor_erisisim_denetimi():
+        st.error("Bu rapora erişim izniniz yok.")
+        return
+
+    PageHeader(
+        "MIMIR Architect Raporları", ust_etiket="Yönetim", ikon="📋",
+        giris="MIMIR tarafından otomatik oluşturulan architect raporlarını görüntüleyin.",
+    ).render()
+
+    # Rapor dizinini bul
+    rapor_dir = Path(_KOK) / "data" / "orchestrator" / "raporlar"
+
+    if not rapor_dir.exists():
+        st.info("Henüz rapor oluşturulmamış.")
+        return
+
+    # Raporları topla: *_rapor_*_mimir.md
+    raporlar = sorted(
+        rapor_dir.glob("*_rapor_*_mimir.md"),
+        key=lambda p: p.stat().st_mtime,
+        reverse=True
+    )
+
+    if not raporlar:
+        st.info("Henüz rapor oluşturulmamış.")
+        return
+
+    # Rapor listesi
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        Section(f"Raporlar ({len(raporlar)})", "Rapor listesi görüntüleme").render()
+
+    # Tablo: task_id | tarih | dosya | indir
+    table_data = []
+    for rapor_dosya in raporlar:
+        # Dosya adından task_id çıkar: {TASK_ID}_rapor_{TARIH}_mimir.md
+        parts = rapor_dosya.stem.rsplit("_rapor_", 1)
+        task_id = parts[0] if parts else "?"
+        tarih_str = parts[1].rsplit("_mimir", 1)[0] if len(parts) > 1 else "?"
+
+        # Dosya boyutu
+        boyut = rapor_dosya.stat().st_size
+        boyut_kb = f"{boyut / 1024:.1f} KB" if boyut > 0 else "0 B"
+
+        # İçerik oku (preview için ilk 100 karakter)
+        try:
+            icerik = rapor_dosya.read_text(encoding="utf-8")
+            ilk_100 = icerik[:100].replace("\n", " ")
+        except Exception:
+            ilk_100 = "(Okunulamadı)"
+
+        table_data.append({
+            "Task ID": task_id,
+            "Tarih": tarih_str,
+            "Boyut": boyut_kb,
+            "Dosya": rapor_dosya.name,
+        })
+
+    # DataFrame olarak göster
+    if table_data:
+        df = pd.DataFrame(table_data)
+        st.dataframe(df, use_container_width=True)
+
+    # İndir seçeneği
+    Section("İndir", "Rapor indirme seçeneği").render()
+    selected_rapor = st.selectbox(
+        "Rapor seçin",
+        [r.name for r in raporlar],
+        key="rapor_indir_select"
+    )
+
+    if selected_rapor:
+        rapor_yolu = rapor_dir / selected_rapor
+        rapor_icerik = rapor_yolu.read_text(encoding="utf-8")
+
+        st.download_button(
+            label=f"📥 {selected_rapor} indir",
+            data=rapor_icerik,
+            file_name=selected_rapor,
+            mime="text/markdown",
+            key="rapor_download"
+        )
+
+
+# ---------------------------------------------------------------------------
+# D-192: Ajan Chat Sistemi — Dashboard Widget
+# ---------------------------------------------------------------------------
+
+
 def _form_degeri(tanim: AyarTanimi, mevcut: Any) -> Any:
     """Tek bir ayar icin uygun Streamlit girdisini cizer ve degerini doner."""
     anahtar = f"ayar_{tanim.anahtar}"
@@ -384,104 +484,6 @@ def rapor_erisisim_denetimi(rol: str | None = None) -> bool:
     return True
 
 
-def render_rapor_listesi_tab() -> None:
-    """D-190: Admin panelde MIMIR raporlarını göster ve indir.
-
-    - Rapor dizinini tara: *_rapor_*_mimir.md
-    - Filtrele: rapor türü, tarih
-    - Sırala: en yeni ilk
-    - İndir: Markdown dosyası download
-
-    Erişim: rol kontrolü (future: granüler)
-    """
-    # Erişim kontrolü (şu an tüm roller)
-    if not rapor_erisisim_denetimi():
-        st.error("Bu rapora erişim izniniz yok.")
-        return
-
-    PageHeader(
-        "MIMIR Architect Raporları", ust_etiket="Yönetim", ikon="📋",
-        giris="MIMIR tarafından otomatik oluşturulan architect raporlarını görüntüleyin.",
-    ).render()
-
-    # Rapor dizinini bul
-    rapor_dir = Path(_KOK) / "data" / "orchestrator" / "raporlar"
-
-    if not rapor_dir.exists():
-        st.info("Henüz rapor oluşturulmamış.")
-        return
-
-    # Raporları topla: *_rapor_*_mimir.md
-    raporlar = sorted(
-        rapor_dir.glob("*_rapor_*_mimir.md"),
-        key=lambda p: p.stat().st_mtime,
-        reverse=True
-    )
-
-    if not raporlar:
-        st.info("Henüz rapor oluşturulmamış.")
-        return
-
-    # Rapor listesi
-    col1, col2 = st.columns([3, 1])
-    with col1:
-        Section(f"Raporlar ({len(raporlar)})", "Rapor listesi görüntüleme").render()
-
-    # Tablo: task_id | tarih | dosya | indir
-    table_data = []
-    for rapor_dosya in raporlar:
-        # Dosya adından task_id çıkar: {TASK_ID}_rapor_{TARIH}_mimir.md
-        parts = rapor_dosya.stem.rsplit("_rapor_", 1)
-        task_id = parts[0] if parts else "?"
-        tarih_str = parts[1].rsplit("_mimir", 1)[0] if len(parts) > 1 else "?"
-
-        # Dosya boyutu
-        boyut = rapor_dosya.stat().st_size
-        boyut_kb = f"{boyut / 1024:.1f} KB" if boyut > 0 else "0 B"
-
-        # İçerik oku (preview için ilk 100 karakter)
-        try:
-            icerik = rapor_dosya.read_text(encoding="utf-8")
-            ilk_100 = icerik[:100].replace("\n", " ")
-        except Exception:
-            ilk_100 = "(Okunulamadı)"
-
-        table_data.append({
-            "Task ID": task_id,
-            "Tarih": tarih_str,
-            "Boyut": boyut_kb,
-            "Dosya": rapor_dosya.name,
-        })
-
-    # DataFrame olarak göster
-    if table_data:
-        df = pd.DataFrame(table_data)
-        st.dataframe(df, use_container_width=True)
-
-    # İndir seçeneği
-    Section("İndir", "Rapor indirme seçeneği").render()
-    selected_rapor = st.selectbox(
-        "Rapor seçin",
-        [r.name for r in raporlar],
-        key="rapor_indir_select"
-    )
-
-    if selected_rapor:
-        rapor_yolu = rapor_dir / selected_rapor
-        rapor_icerik = rapor_yolu.read_text(encoding="utf-8")
-
-        st.download_button(
-            label=f"📥 {selected_rapor} indir",
-            data=rapor_icerik,
-            file_name=selected_rapor,
-            mime="text/markdown",
-            key="rapor_download"
-        )
-
-
-# ---------------------------------------------------------------------------
-# D-192: Ajan Chat Sistemi — Dashboard Widget
-# ---------------------------------------------------------------------------
 
 def render_chat_summary() -> None:
     """Ajan Chat özeti: açık sorunlar, çözüm bekleniyor, çözüldü metrikler + son 3 sorun.

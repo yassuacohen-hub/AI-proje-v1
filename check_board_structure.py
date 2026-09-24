@@ -1,6 +1,6 @@
 from src.company_master.orchestrator import task_board as tb
 
-ids = ["TRIGGER-LOGGING-CLEANUP","ALTYAPI-KILIT-OTOMATIK-01","ALTYAPI-TETIK-ZAMAN-01","ALTYAPI-MOJIBAKE-DIZIN-01","ALTYAPI-MARKA-HUGGINN-01","ALTYAPI-IMPORT-TEKLES-01"]
+ids = ["TRIGGER-LOGGING-CLEANUP","ALTYAPI-KILIT-OTOMATIK-01","ALTYAPI-TETIK-ZAMAN-01","ALTYAPI-MOJIBAKE-DIZIN-01","ALTYAPI-MARKA-Huginn-01","ALTYAPI-IMPORT-TEKLES-01"]
 print("=== Kanonik pano durumu (task_board.py) ===")
 for t in tb.gorev_listesi():
     if t.get("task_id") in ids:

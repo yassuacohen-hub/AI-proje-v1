@@ -72,25 +72,17 @@ def test_bypass_reason_varsayilan(izole_tetik_dosya, capsys):
     assert kod in (0, 2, 3)
 
 
-def test_bypass_logging_kaydedilir(izole_tetik_dosya, tmp_path):
-    """Bypass event'i logging'e kaydedilir."""
+def test_bypass_logging_kaydedilir(izole_tetik_dosya, capsys):
+    """Bypass event'i logging'e kaydedilir (stdout'a da düşer)."""
     from scripts import tetik_senk
-    import logging
-    
-    # Logger ayarla
-    log_dosya = tmp_path / "tetik_senk.log"
-    handler = logging.FileHandler(log_dosya, encoding="utf-8")
-    logger = logging.getLogger("tetik_senk")
-    logger.addHandler(handler)
-    logger.setLevel(logging.INFO)
     
     argv = ["senkron", "--bypass-override", "--bypass-reason", "D-66 — Saat uyuşmazlığı"]
     tetik_senk.main(argv)
     
-    # Log dosyası kontrol et
-    if log_dosya.exists():
-        log_icerik = log_dosya.read_text(encoding="utf-8")
-        assert "D-66 bypass tetikleme" in log_icerik or "Saat uyuşmazlığı" in log_icerik
+    # Stdout kontrol et (logging basicConfig stdout'a yazar)
+    cap = capsys.readouterr()
+    assert "D-66 BYPASS TETIKLEME" in cap.out
+    assert "Saat uyuşmazlığı" in cap.out
 
 
 def test_bypass_olmadan_normal_calisir(izole_tetik_dosya, capsys):
