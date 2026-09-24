@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-24T03:46:16
+> Son guncelleme: 2026-09-24T04:15:41
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -122,6 +122,18 @@
 | BRIK-00 | ALTYAPI Archive sema + gece zinciri → ku | ihsan | P1 | archive |
 | ORKESTRA-ONAY-BOSALT-01 | [ORKESTRA] Onay kuyrugundaki 9 teslimi d | salih | P0 | iptal |
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | plan |
+| UI-ADMIN-SAHTE-KPI-01 | [UI] Sahte API KPI kartını düzelt → admi | utku | P0 | plan |
+| UI-ADMIN-SAHTE-EXEC-02 | [UI] Sahte gelir kartlarını düzelt → adm | utku | P0 | plan |
+| UI-ADMIN-SSE-IHLAL-03 | [UI] SSE mimari ihlalini düzelt → admin_ | ihsan | P0 | plan |
+| VERI-ADMIN-LASTLOGIN-MIGRATION-04 | [VERI] users.last_login kolonunu yaz → s | ihsan | P1 | plan |
+| API-ADMIN-LASTLOGIN-YAZ-05 | [API] Giriş anında last_login değerini y | ihsan | P1 | plan |
+| API-ADMIN-CHURN-FONKSIYON-06 | [API] Churn risk fonksiyonunu yaz → chur | ihsan | P1 | plan |
+| UI-ADMIN-CHURN-KOLON-07 | [UI] Churn risk kolonunu yaz → musteri_y | ihsan | P1 | plan |
+| UI-ADMIN-MAU-08 | [UI] Yanlış DAU etiketini düzelt → admin | ihsan | P1 | plan |
+| UI-ADMIN-KULLANICI-BIRLESTIR-09 | [UI] Üç kopya kullanıcı yönetimini taşı  | utku | P1 | plan |
+| UI-ADMIN-GUNCELLIK-KOVA-10 | [UI] Veri güncellik kovalarını yaz → adm | utku | P1 | plan |
+| UI-ADMIN-MALIYET-ANOMALI-11 | [UI] AI maliyet anomali bloğunu yaz → ad | utku | P1 | plan |
+| DOC-ADMIN-ARSIV-12 | [DOC] Bayat analiz dökümanını taşı → arş | utku | P2 | plan |
 
 ## Tamamlananlar (Son 10)
 

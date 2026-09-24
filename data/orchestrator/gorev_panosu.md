@@ -122,6 +122,18 @@
 | BRIK-00 | ALTYAPI Archive sema + gece zinciri → kurulum ve test (D-62, D-63) | ihsan | P1 | archive | - |
 | ORKESTRA-ONAY-BOSALT-01 | [ORKESTRA] Onay kuyrugundaki 9 teslimi denetle → data/orchestrator/ORKESTRA-ONAY-BOSALT-01_rapor_2026-09-23_salih.md (4s) | salih | P0 | iptal | - |
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s) | ihsan | P1 | plan | scripts/pano_denetim.py, scripts/tetik_senk.py, tests/test_d66_bypass_tetikleme.py |
+| UI-ADMIN-SAHTE-KPI-01 | [UI] Sahte API KPI kartını düzelt → admin_kpi.py rozetli boş kart (2s) | utku | P0 | plan | web_dashboard/tabs/admin_kpi.py |
+| UI-ADMIN-SAHTE-EXEC-02 | [UI] Sahte gelir kartlarını düzelt → admin_executive.py rozetli boş kart (2s) | utku | P0 | plan | web_dashboard/tabs/admin_executive.py |
+| UI-ADMIN-SSE-IHLAL-03 | [UI] SSE mimari ihlalini düzelt → admin_realtime.py polling (3s) | ihsan | P0 | plan | web_dashboard/tabs/admin_realtime.py |
+| VERI-ADMIN-LASTLOGIN-MIGRATION-04 | [VERI] users.last_login kolonunu yaz → schema migration (1s) | ihsan | P1 | plan | - |
+| API-ADMIN-LASTLOGIN-YAZ-05 | [API] Giriş anında last_login değerini yaz → auth akışı (1s) | ihsan | P1 | plan | - |
+| API-ADMIN-CHURN-FONKSIYON-06 | [API] Churn risk fonksiyonunu yaz → churn.py saf fonksiyon (2s) | ihsan | P1 | plan | src/company_master/churn.py |
+| UI-ADMIN-CHURN-KOLON-07 | [UI] Churn risk kolonunu yaz → musteri_yonetimi.py listesi (1s) | ihsan | P1 | plan | - |
+| UI-ADMIN-MAU-08 | [UI] Yanlış DAU etiketini düzelt → admin_kpi.py gerçek MAU (2s) | ihsan | P1 | plan | - |
+| UI-ADMIN-KULLANICI-BIRLESTIR-09 | [UI] Üç kopya kullanıcı yönetimini taşı → tek modül (3s) | utku | P1 | plan | - |
+| UI-ADMIN-GUNCELLIK-KOVA-10 | [UI] Veri güncellik kovalarını yaz → admin_quality.py dağılımı (2s) | utku | P1 | plan | web_dashboard/tabs/admin_quality.py |
+| UI-ADMIN-MALIYET-ANOMALI-11 | [UI] AI maliyet anomali bloğunu yaz → admin_cost.py z-skor (2s) | utku | P1 | plan | web_dashboard/tabs/admin_cost.py |
+| DOC-ADMIN-ARSIV-12 | [DOC] Bayat analiz dökümanını taşı → arşiv + §0.1 güncel (1s) | utku | P2 | plan | - |
 
 ## Tamamlananlar
 
