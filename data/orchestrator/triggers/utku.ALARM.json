@@ -606,5 +606,37 @@
     "tetik_sayisi": 8,
     "uyari_tarihi": "2026-09-24T04:59:02",
     "mesaj": "⚠️ DOC-ADMIN-ARSIV-12 ([DOC] Bayat analiz dökümanını taşı → arşiv + §0.1 güncel (1s)) — utku 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-ADMIN-KULLANICI-BIRLESTIR-09",
+    "gorev_basligi": "[UI] Üç kopya kullanıcı yönetimini taşı → tek modül (3s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-24T05:04:01",
+    "mesaj": "⚠️ UI-ADMIN-KULLANICI-BIRLESTIR-09 ([UI] Üç kopya kullanıcı yönetimini taşı → tek modül (3s)) — utku 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-ADMIN-GUNCELLIK-KOVA-10",
+    "gorev_basligi": "[UI] Veri güncellik kovalarını yaz → admin_quality.py dağılımı (2s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-24T05:04:01",
+    "mesaj": "⚠️ UI-ADMIN-GUNCELLIK-KOVA-10 ([UI] Veri güncellik kovalarını yaz → admin_quality.py dağılımı (2s)) — utku 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-ADMIN-MALIYET-ANOMALI-11",
+    "gorev_basligi": "[UI] AI maliyet anomali bloğunu yaz → admin_cost.py z-skor (2s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-24T05:04:01",
+    "mesaj": "⚠️ UI-ADMIN-MALIYET-ANOMALI-11 ([UI] AI maliyet anomali bloğunu yaz → admin_cost.py z-skor (2s)) — utku 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "DOC-ADMIN-ARSIV-12",
+    "gorev_basligi": "[DOC] Bayat analiz dökümanını taşı → arşiv + §0.1 güncel (1s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-24T05:04:02",
+    "mesaj": "⚠️ DOC-ADMIN-ARSIV-12 ([DOC] Bayat analiz dökümanını taşı → arşiv + §0.1 güncel (1s)) — utku 9. kez uyarıldı; henüz başlamadı."
   }
 ]

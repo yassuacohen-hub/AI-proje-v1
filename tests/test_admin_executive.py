@@ -118,6 +118,7 @@ def test_load_tam_basari(monkeypatch):
         "kaynak": "db",
         "hata": None,
         "tenant_hata": None,
+        "veri_yok": False,
     }
 
 

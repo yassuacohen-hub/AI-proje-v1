@@ -2357,5 +2357,13 @@
     "ciktilar": [],
     "teslim_tarihi": "2026-09-24T05:00:11",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-ADMIN-SAHTE-EXEC-02",
+    "ajan": "utku",
+    "ozet": "admin_executive.py load_executive_ozet(): tablo_var_mi() ile packages/company_packages kontrolu; yoksa veri_yok=True erken donus. UI'da MRR/ARR/Churn/ARPA veri kaynagi yok rozeti. engine=get_engine() try/except ile korundu (sessiz except yok sozlesmesi korundu). test_admin_executive.py 24/24 gecti, regresyon 41/41 gecti. SSOT SS7/S14 guncellendi.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T05:05:58",
+    "durum": "bekliyor"
   }
 ]

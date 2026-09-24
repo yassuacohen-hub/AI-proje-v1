@@ -50,6 +50,7 @@ from company_master.tenant.model import VARSAYILAN_TENANT
 from company_master.ui import PageHeader, Section, hata_kutusu
 from company_master.ui.charts import line_chart
 from web_dashboard.charts import kpi_karti  # noqa: E402  (ADMIN-EXEC-01)
+from web_dashboard.tabs._db_yardim import tablo_var_mi
 
 logger = logging.getLogger(__name__)
 
@@ -90,10 +91,31 @@ def load_executive_ozet() -> dict[str, Any]:
         "kaynak": "bos",
         "hata": None,
         "tenant_hata": None,
+        "veri_yok": False,
     }
 
     try:
         engine = get_engine()
+    except Exception as exc:  # noqa: BLE001 — zarif düşüş; hata görünür kalır
+        logger.warning("Executive abonelik verisi okunamadı: %s", exc)
+        sonuc["hata"] = f"{type(exc).__name__}: {exc}"
+        return sonuc
+
+    # UI-ADMIN-SAHTE-EXEC-02: her iki tablo da yoksa sahte 0 yerine rozet.
+    # inspect() gerçek olmayan (test) engine'lerde kullanılamazsa eski
+    # davranışa düşülür (sorgu denenir, hata varsa normal akış yakalar).
+    try:
+        tablo_yok = not tablo_var_mi("packages", engine) or not tablo_var_mi(
+            "company_packages", engine
+        )
+    except Exception:
+        tablo_yok = False
+    if tablo_yok:
+        sonuc["veri_yok"] = True
+        sonuc["hata"] = "packages / company_packages tablosu DB'de yok"
+        return sonuc
+
+    try:
         with engine.connect() as conn:
             rows = conn.execute(
                 text(
@@ -277,41 +299,45 @@ def render_executive_tab() -> None:
         "Aktif aboneliklerden türetilen yinelenen gelir ve kayıp oranı.",
     ).render()
 
+    veri_yok = bool(veri.get("veri_yok"))
     kolon1, kolon2, kolon3 = st.columns(3)
     with kolon1:
         kpi_karti(
             "MRR (Aylık Yinelenen Gelir)",
-            _tl(gelir["mrr"]),
-            delta=_mrr_delta(seri),
-            ikon="💰",
-            kategori="basari",
+            "veri kaynağı yok" if veri_yok else _tl(gelir["mrr"]),
+            delta=None if veri_yok else _mrr_delta(seri),
+            ikon="⚠️" if veri_yok else "💰",
+            kategori="uyari" if veri_yok else "basari",
             yardim="Aktif aboneliklerin aylık ücret toplamı; delta son iki ayın farkı.",
             anahtar="exec-mrr",
         )
     with kolon2:
         kpi_karti(
             "ARR (Yıllık Yinelenen Gelir)",
-            _tl(gelir["arr"]),
-            ikon="📅",
-            kategori="marka",
+            "veri kaynağı yok" if veri_yok else _tl(gelir["arr"]),
+            ikon="⚠️" if veri_yok else "📅",
+            kategori="uyari" if veri_yok else "marka",
             yardim="MRR × 12.",
             anahtar="exec-arr",
         )
     with kolon3:
         kpi_karti(
             f"Churn Oranı ({CHURN_GUN} gün)",
-            f"%{churn:.2f}".replace(".", ","),
-            ikon="📉",
-            kategori="tehlike" if churn > 0 else "bilgi",
+            "veri kaynağı yok" if veri_yok else f"%{churn:.2f}".replace(".", ","),
+            ikon="⚠️" if veri_yok else "📉",
+            kategori="uyari" if veri_yok else ("tehlike" if churn > 0 else "bilgi"),
             yardim="Dönem başında aktif olup dönem içinde iptal edilen aboneliklerin payı.",
             anahtar="exec-churn",
         )
 
-    st.caption(
-        f"Aktif abonelik: {gelir['aktif_abonelik']} · "
-        f"Pasif: {gelir['pasif_abonelik']} · "
-        f"ARPA (abonelik başına gelir): {_tl(gelir['arpa'])}"
-    )
+    if veri_yok:
+        st.caption("ARPA (abonelik başına gelir): veri kaynağı yok")
+    else:
+        st.caption(
+            f"Aktif abonelik: {gelir['aktif_abonelik']} · "
+            f"Pasif: {gelir['pasif_abonelik']} · "
+            f"ARPA (abonelik başına gelir): {_tl(gelir['arpa'])}"
+        )
 
     if gelir["paket_dagilimi"]:
         st.dataframe(

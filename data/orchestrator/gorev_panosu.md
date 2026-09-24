@@ -123,7 +123,7 @@
 | ORKESTRA-ONAY-BOSALT-01 | [ORKESTRA] Onay kuyrugundaki 9 teslimi denetle → data/orchestrator/ORKESTRA-ONAY-BOSALT-01_rapor_2026-09-23_salih.md (4s) | salih | P0 | iptal | - |
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s) | ihsan | P1 | plan | scripts/pano_denetim.py, scripts/tetik_senk.py, tests/test_d66_bypass_tetikleme.py |
 | UI-ADMIN-SAHTE-KPI-01 | [UI] Sahte API KPI kartını düzelt → admin_kpi.py rozetli boş kart (2s) | utku | P0 | review | web_dashboard/tabs/admin_kpi.py |
-| UI-ADMIN-SAHTE-EXEC-02 | [UI] Sahte gelir kartlarını düzelt → admin_executive.py rozetli boş kart (2s) | utku | P0 | plan | web_dashboard/tabs/admin_executive.py |
+| UI-ADMIN-SAHTE-EXEC-02 | [UI] Sahte gelir kartlarını düzelt → admin_executive.py rozetli boş kart (2s) | utku | P0 | review | web_dashboard/tabs/admin_executive.py |
 | UI-ADMIN-KULLANICI-BIRLESTIR-09 | [UI] Üç kopya kullanıcı yönetimini taşı → tek modül (3s) | utku | P1 | plan | - |
 | UI-ADMIN-GUNCELLIK-KOVA-10 | [UI] Veri güncellik kovalarını yaz → admin_quality.py dağılımı (2s) | utku | P1 | plan | web_dashboard/tabs/admin_quality.py |
 | UI-ADMIN-MALIYET-ANOMALI-11 | [UI] AI maliyet anomali bloğunu yaz → admin_cost.py z-skor (2s) | utku | P1 | plan | web_dashboard/tabs/admin_cost.py |

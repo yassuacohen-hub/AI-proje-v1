@@ -7198,13 +7198,13 @@
     "baslik": "[UI] Sahte gelir kartlarını düzelt → admin_executive.py rozetli boş kart (2s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-24T04:15:38",
     "bitis": null,
     "dosyalar": [
       "web_dashboard/tabs/admin_executive.py"
     ],
-    "not": "",
+    "not": "Teslim (utku): admin_executive.py load_executive_ozet(): tablo_var_mi() ile packages/company_packages kontrolu; yoksa veri_yok=True erken donus. UI'da MRR/ARR/Churn/ARPA veri kaynagi yok rozeti. engine=get_engine() try/except ile korundu (sessiz except yok sozlesmesi korundu). test_admin_executive.py 24/24 gecti, regresyon 41/41 gecti. SSOT SS7/S14 guncellendi.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
