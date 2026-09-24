@@ -341,5 +341,107 @@
     "mod": "code",
     "brief": "",
     "talimat": ""
+  },
+  {
+    "task_id": "UI-ADMIN-SAHTE-KPI-01",
+    "id": "UI-ADMIN-SAHTE-KPI-01",
+    "baslik": "[UI] Sahte API KPI kartını düzelt → admin_kpi.py rozetli boş kart (2s)",
+    "sahip": "utku",
+    "oncelik": 1,
+    "durum": "teslim edildi",
+    "dosyalar": [
+      "Huginn Data Insights/web_dashboard/tabs/admin_kpi.py",
+      "Huginn Data Insights/tests/test_admin_kpi.py"
+    ],
+    "brief": "plans/brief_utku_UI-ADMIN-SAHTE-KPI-01.md",
+    "talimat": "tablo_var_mi() yardımcı yaz, test ekle, SSOT §7/§14 güncelle",
+    "dependencies": [],
+    "baslangic": "2026-09-24T19:35:05.727500",
+    "bitis": "2026-09-24T19:36:37.142995",
+    "not": "tablo_var_mi() yardımcısı yazıldı, test 2/2 geçti, SSOT §7/§14 güncellendi"
+  },
+  {
+    "task_id": "UI-ADMIN-SAHTE-EXEC-02",
+    "id": "UI-ADMIN-SAHTE-EXEC-02",
+    "baslik": "[UI] Sahte Exec kartını düzelt → admin_executive.py rozetli boş kart (2s)",
+    "sahip": "utku",
+    "oncelik": 2,
+    "durum": "beklemede",
+    "dosyalar": [
+      "Huginn Data Insights/web_dashboard/tabs/admin_executive.py",
+      "Huginn Data Insights/tests/test_admin_executive.py"
+    ],
+    "brief": "plans/brief_utku_UI-ADMIN-SAHTE-EXEC-02.md",
+    "talimat": "tablo_var_mi() kullan, test ekle, SSOT §7/§14 güncelle",
+    "dependencies": [
+      "UI-ADMIN-SAHTE-KPI-01"
+    ]
+  },
+  {
+    "task_id": "UI-ADMIN-KULLANICI-BIRLESTIR-09",
+    "id": "UI-ADMIN-KULLANICI-BIRLESTIR-09",
+    "baslik": "[UI] Kullanıcı birleştirme kartını düzelt",
+    "sahip": "utku",
+    "oncelik": 3,
+    "durum": "beklemede",
+    "dosyalar": [
+      "Huginn Data Insights/web_dashboard/tabs/admin_kullanici_birlestir.py",
+      "Huginn Data Insights/tests/test_admin_kullanici_birlestir.py"
+    ],
+    "brief": "plans/brief_utku_UI-ADMIN-KULLANICI-BIRLESTIR-09.md",
+    "talimat": "Tablo kontrol, test ekle, SSOT §7/§14 güncelle",
+    "dependencies": [
+      "UI-ADMIN-SAHTE-EXEC-02"
+    ]
+  },
+  {
+    "task_id": "UI-ADMIN-GUNCELLIK-KOVA-10",
+    "id": "UI-ADMIN-GUNCELLIK-KOVA-10",
+    "baslik": "[UI] Güncellik kova kartını düzelt",
+    "sahip": "utku",
+    "oncelik": 4,
+    "durum": "beklemede",
+    "dosyalar": [
+      "Huginn Data Insights/web_dashboard/tabs/admin_guncellik_kova.py",
+      "Huginn Data Insights/tests/test_admin_guncellik_kova.py"
+    ],
+    "brief": "plans/brief_utku_UI-ADMIN-GUNCELLIK-KOVA-10.md",
+    "talimat": "Tablo kontrol, test ekle, SSOT §7/§14 güncelle",
+    "dependencies": [
+      "UI-ADMIN-KULLANICI-BIRLESTIR-09"
+    ]
+  },
+  {
+    "task_id": "UI-ADMIN-MALIYET-ANOMALI-11",
+    "id": "UI-ADMIN-MALIYET-ANOMALI-11",
+    "baslik": "[UI] Maliyet anomali kartını düzelt",
+    "sahip": "utku",
+    "oncelik": 5,
+    "durum": "beklemede",
+    "dosyalar": [
+      "Huginn Data Insights/web_dashboard/tabs/admin_cost.py",
+      "Huginn Data Insights/tests/test_admin_maliyet_anomali.py"
+    ],
+    "brief": "plans/brief_utku_UI-ADMIN-MALIYET-ANOMALI-11.md",
+    "talimat": "Tablo kontrol, test ekle, SSOT §7/§14 güncelle",
+    "dependencies": [
+      "UI-ADMIN-GUNCELLIK-KOVA-10"
+    ]
+  },
+  {
+    "task_id": "DOC-ADMIN-ARSIV-12",
+    "id": "DOC-ADMIN-ARSIV-12",
+    "baslik": "[DOC] Admin pano arşiv günlüğü oluştur",
+    "sahip": "utku",
+    "oncelik": 6,
+    "durum": "beklemede",
+    "dosyalar": [
+      "Huginn Data Insights/data/orchestrator/OTURUM_SONU_2026-09-24.md"
+    ],
+    "brief": "plans/brief_utku_DOC-ADMIN-ARSIV-12.md",
+    "talimat": "Tümünü arşiv log'una ekle, SSOT §7/§14 güncelle",
+    "dependencies": [
+      "UI-ADMIN-MALIYET-ANOMALI-11"
+    ]
   }
 ]
