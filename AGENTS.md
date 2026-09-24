@@ -708,3 +708,25 @@ python scripts/ajan_chat.py bulgula "Tasarım (D-192)" "Font boyut tutarsız" --
 - `scripts/git_stash_guard.py` — cron tarafından çalışacak, 30 dakika kontrolü
 - `scripts/git_safety_check.py` — pre-commit hook
 - GitHub Actions yaml (yapılacak, P2)
+
+---
+
+## SSOT Kiti (D-196 — KAHİN kararı 2026-09-24)
+
+**Tanım.** **SSOT Kiti** = bir SSOT dökümanı + `§0.1 Bağlantılı dökümanlar` tablosunda listelenen bağlı belgeler + ilerleme tabloları. Kit tek isimle anılır; ürün sahibi o ismi söyleyince ajan **tüm kiti** açar.
+
+**Kural.**
+1. Her kitin **tek bir kısa adı** vardır (örn. `ADMIN-KİT`). Ad bu tabloda sabittir.
+2. Kit kapsamındaki **her görevin başında** SSOT dosyası okunur; **her görevin sonunda** ilerleme SSOT'un izlenebilirlik + revizyon tablolarına işlenir. İlerleme kaydı başka dosyaya yazılmaz — kit kendi geçmişini taşır.
+3. Yeni bağlı belge eklenince `§0.1` tablosuna satır + geri link eklenir (D-186).
+4. Kit dışı bir döküman kitle çelişirse **SSOT üstündür** (kitin kendi statü bloğundaki istisnalar saklı).
+
+**Kayıtlı kitler.**
+
+| Kit adı     | SSOT dosyası                                                          | Bağlı belge | İlerleme tabloları     |
+| ----------- | --------------------------------------------------------------------- | ----------- | ---------------------- |
+| `ADMIN-KİT` | `AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md` (v2.1) | 6           | §7 matris · §14 revizyon |
+
+**`ADMIN-KİT` bağlı belgeleri (§0.1):** PRD kaynağı `Huginn Data Insights (HUGIns).txt` §889-1687 · V9 bağlam `01_versiyon_9_baglam_dokumani.md` §16.4/§16.5 · `docs/ARCHITECTURE_DECISION_HYBRID_ADMIN.md` · `03_mimari/06_muninn_prd_vs_huginn_analiz.md` (bayat) · `CHANGELOG.md` · görev panosu `data/orchestrator/ADMIN_PANEL_PLAN_VE_GOREV_PAKETLERI_2026-09-22.md`
+
+**Yeni kit açma.** SSOT dosyasına statü bloğu + `§0.1` + ajan kuralı satırı yazılır, kısa ad seçilir, bu tabloya satır eklenir. Onay: KAHİN.
