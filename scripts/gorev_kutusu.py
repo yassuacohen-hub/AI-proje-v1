@@ -296,6 +296,62 @@ def cmd_ozet(args: argparse.Namespace) -> int:
     return 0
 
 
+def _ceyrek(kayit: dict, bugun: str) -> str:
+    """Kaydin tamamlanma tarihinden ceyregi hesapla; tarih yoksa bugununki.
+
+    `bitis` alani ISO ("2026-09-21T...") ya da bozuk/bos olabilir (panoda
+    "None", 4 karakterlik artiklar gozlemlendi) — ayristirilamayan her deger
+    bugunun ceyregine duser.
+    """
+    ham = str(kayit.get("bitis") or "")[:10]
+    if len(ham) < 7 or not ham[:4].isdigit() or not ham[5:7].isdigit():
+        ham = bugun[:10]
+    return f"{ham[:4]}-Q{(int(ham[5:7]) - 1) // 3 + 1}"
+
+
+def arsiv_bol(pano: list[dict], bugun: str) -> tuple[list[dict], dict[str, list[dict]]]:
+    """Panoyu (aktif kalanlar, {ceyrek: tasinacak kayitlar}) olarak ayir.
+
+    Terminal durum listesi `tb.KAPALI_DURUMLAR` — tek kaynak, kopyalanmaz.
+    """
+    aktif: list[dict] = []
+    kovalar: dict[str, list[dict]] = {}
+    for g in pano:
+        if g.get("durum") in tb.KAPALI_DURUMLAR:
+            kovalar.setdefault(_ceyrek(g, bugun), []).append(g)
+        else:
+            aktif.append(g)
+    return aktif, kovalar
+
+
+def cmd_arsivle(args: argparse.Namespace) -> int:
+    """Terminal kayitlari ceyreklik arsiv dosyalarina tasi (idempotent).
+
+    Her ceyrek tekrar calistirilabilir: arsiv dosyasi varsa uzerine yazilmaz,
+    ayni task_id ikinci kez eklenmez.
+    """
+    pano = tb._read_json(tb.TASK_BOARD)
+    bugun = trigger._simdi()
+    aktif, kovalar = arsiv_bol(pano, bugun)
+    tasinan = sum(len(v) for v in kovalar.values())
+    print(f"{tasinan} kayit tasinacak, aktif panoda {len(aktif)} kalacak.")
+    for ceyrek in sorted(kovalar):
+        print(f"  {ceyrek}: {len(kovalar[ceyrek])} kayit")
+    if args.kuru:
+        print("(--kuru: hicbir dosya yazilmadi)")
+        return 0
+    for ceyrek, kayitlar in sorted(kovalar.items()):
+        yol = tb.STATE_DIR / f"task_board_arsiv_{ceyrek}.json"
+        mevcut = tb._read_json(yol) if yol.exists() else []
+        bilinen = {str(k.get("task_id")) for k in mevcut}
+        yeni = [k for k in kayitlar if str(k.get("task_id")) not in bilinen]
+        tb._write_json(yol, mevcut + yeni)
+        print(f"  YAZILDI {yol.name}: +{len(yeni)} (toplam {len(mevcut) + len(yeni)})")
+    tb._write_json(tb.TASK_BOARD, aktif)
+    print(f"AKTIF PANO: {len(aktif)} kayit")
+    return 0
+
+
 def cmd_yardim(args: argparse.Namespace) -> int:
     """ORCH-12: Bosta ajanlar + onerileri goster."""
     bos = isbirligi.bos_ajanlar()
@@ -423,6 +479,10 @@ def main() -> int:
 
     ozet_p = sub.add_parser("ozet", help="Token dostu tek satirlik pano ozeti")
     ozet_p.set_defaults(func=cmd_ozet)
+
+    arsivle_p = sub.add_parser("arsivle", help="Terminal kayitlari ceyreklik arsive tasi")
+    arsivle_p.add_argument("--kuru", action="store_true", help="Yazma yok, sadece sayi raporu")
+    arsivle_p.set_defaults(func=cmd_arsivle)
 
     yardim_p = sub.add_parser("yardim", help="ORCH-12: Bosta ajanlar + onerileri goster")
     yardim_p.set_defaults(func=cmd_yardim)
