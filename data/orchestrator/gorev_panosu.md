@@ -124,10 +124,6 @@
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s) | ihsan | P1 | plan | scripts/pano_denetim.py, scripts/tetik_senk.py, tests/test_d66_bypass_tetikleme.py |
 | UI-ADMIN-SAHTE-KPI-01 | [UI] Sahte API KPI kartını düzelt → admin_kpi.py rozetli boş kart (2s) | utku | P0 | plan | web_dashboard/tabs/admin_kpi.py |
 | UI-ADMIN-SAHTE-EXEC-02 | [UI] Sahte gelir kartlarını düzelt → admin_executive.py rozetli boş kart (2s) | utku | P0 | plan | web_dashboard/tabs/admin_executive.py |
-| UI-ADMIN-SSE-IHLAL-03 | [UI] SSE mimari ihlalini düzelt → admin_realtime.py polling (3s) | ihsan | P0 | review | web_dashboard/tabs/admin_realtime.py |
-| VERI-ADMIN-LASTLOGIN-MIGRATION-04 | [VERI] users.last_login kolonunu yaz → schema migration (1s) | ihsan | P1 | review | - |
-| API-ADMIN-LASTLOGIN-YAZ-05 | [API] Giriş anında last_login değerini yaz → auth akışı (1s) | ihsan | P1 | review | - |
-| API-ADMIN-CHURN-FONKSIYON-06 | [API] Churn risk fonksiyonunu yaz → churn.py saf fonksiyon (2s) | ihsan | P1 | review | src/company_master/churn.py |
 | UI-ADMIN-CHURN-KOLON-07 | [UI] Churn risk kolonunu yaz → musteri_yonetimi.py listesi (1s) | ihsan | P1 | plan | - |
 | UI-ADMIN-MAU-08 | [UI] Yanlış DAU etiketini düzelt → admin_kpi.py gerçek MAU (2s) | ihsan | P1 | plan | - |
 | UI-ADMIN-KULLANICI-BIRLESTIR-09 | [UI] Üç kopya kullanıcı yönetimini taşı → tek modül (3s) | utku | P1 | plan | - |
@@ -407,3 +403,7 @@
 | D-192-FAZ2 | [ADMIN-UI] Ajan Chat Faz 2: Onem Derecesi + Cozum kolonu + 6 ajan rengi + Tarih sona tasindi | orkestrator | 2026-09-23T22:00:00 |
 | NINEROUTER-IMAGE-GEN-01 | [SKILL] ninerouter.py'ye ninerouter_image_gen ekle | yasu | 2026-09-24T01:44:00 |
 | TEST-13-PREEXIST-DUZELT-02 | [TEST] duzelt 7 kalan test hatasi → pytest yesil (2s) | utku | 2026-09-24T03:46:16 |
+| UI-ADMIN-SSE-IHLAL-03 | [UI] SSE mimari ihlalini düzelt → admin_realtime.py polling (3s) | ihsan | 2026-09-24T04:43:33 |
+| VERI-ADMIN-LASTLOGIN-MIGRATION-04 | [VERI] users.last_login kolonunu yaz → schema migration (1s) | ihsan | 2026-09-24T04:43:33 |
+| API-ADMIN-LASTLOGIN-YAZ-05 | [API] Giriş anında last_login değerini yaz → auth akışı (1s) | ihsan | 2026-09-24T04:43:34 |
+| API-ADMIN-CHURN-FONKSIYON-06 | [API] Churn risk fonksiyonunu yaz → churn.py saf fonksiyon (2s) | ihsan | 2026-09-24T04:43:34 |

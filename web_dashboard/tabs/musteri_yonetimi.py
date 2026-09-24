@@ -220,13 +220,15 @@ def _giris_aktinligi() -> None:
     try:
         engine = get_engine()
         with engine.connect() as conn:
-            rows = conn.execute(
+            # Giriş etkinliği (login_events)
+            login_rows = conn.execute(
                 text(
                     "SELECT ts, email_masked, ip_masked, success, method, path "
                     "FROM login_events ORDER BY ts DESC LIMIT 50"
                 )
             ).mappings().all()
-        if rows:
+        
+        if login_rows:
             _kullanici_id = st.session_state.get("kullanici_id", "misafir")
             if not isinstance(_kullanici_id, str) or not _kullanici_id.strip():
                 _kullanici_id = "misafir"
@@ -242,13 +244,43 @@ def _giris_aktinligi() -> None:
                         "Yöntem": r["method"],
                         "Yol": r["path"],
                     }
-                    for r in rows
+                    for r in login_rows
                 ]
             )
         else:
             st.info("Henüz giriş kaydı yok.")
     except Exception:
         st.info("Giriş etkinliği tablosu henüz oluşturulmamış.")
+
+    # UI-ADMIN-CHURN-KOLON-07: Churn risk listesi (users.last_login)
+    st.divider()
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            churn_rows = conn.execute(
+                text(
+                    "SELECT email, last_login, created_at "
+                    "FROM users ORDER BY last_login DESC NULLS LAST"
+                )
+            ).mappings().all()
+        if churn_rows:
+            from datetime import date
+            bugun = date.today()
+            churn_data = []
+            for r in churn_rows:
+                risk = risk_etiketi(r["last_login"], bugun) if r["last_login"] else risk_etiketi(None, bugun)
+                churn_data.append({
+                    "E-posta": r["email"],
+                    "Son Giriş": r["last_login"] or "—",
+                    "Kayıt Tarihi": r["created_at"],
+                    "Churn Riski": risk,
+                })
+            st.caption("Churn Risk: 'Yok' = son 14 günde giriş var, 'Düşük' = 14+ gün veya giriş yok (tek sinyal last_login)")
+            st.dataframe(churn_data, width="stretch", hide_index=True)
+        else:
+            st.info("Kullanıcı kaydı yok.")
+    except Exception:
+        st.info("Churn risk verisi yüklenemedi.")
 
 
 def _aramalar() -> None:

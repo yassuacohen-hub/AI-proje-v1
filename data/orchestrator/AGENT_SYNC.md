@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-24T04:40:49
+> Son guncelleme: 2026-09-24T04:43:34
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -124,10 +124,6 @@
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | plan |
 | UI-ADMIN-SAHTE-KPI-01 | [UI] Sahte API KPI kartını düzelt → admi | utku | P0 | plan |
 | UI-ADMIN-SAHTE-EXEC-02 | [UI] Sahte gelir kartlarını düzelt → adm | utku | P0 | plan |
-| UI-ADMIN-SSE-IHLAL-03 | [UI] SSE mimari ihlalini düzelt → admin_ | ihsan | P0 | review |
-| VERI-ADMIN-LASTLOGIN-MIGRATION-04 | [VERI] users.last_login kolonunu yaz → s | ihsan | P1 | review |
-| API-ADMIN-LASTLOGIN-YAZ-05 | [API] Giriş anında last_login değerini y | ihsan | P1 | review |
-| API-ADMIN-CHURN-FONKSIYON-06 | [API] Churn risk fonksiyonunu yaz → chur | ihsan | P1 | review |
 | UI-ADMIN-CHURN-KOLON-07 | [UI] Churn risk kolonunu yaz → musteri_y | ihsan | P1 | plan |
 | UI-ADMIN-MAU-08 | [UI] Yanlış DAU etiketini düzelt → admin | ihsan | P1 | plan |
 | UI-ADMIN-KULLANICI-BIRLESTIR-09 | [UI] Üç kopya kullanıcı yönetimini taşı  | utku | P1 | plan |
@@ -139,16 +135,16 @@
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| ORKESTRA-D65-ISDURMAZ-01 | [ORKESTRA] ölç D-65 İş Durmaz ihlalini → | ihsan | 2026-09-23 |
-| ALTYAPI-MOJIBAKE-BARIYER-01 | [ALTYAPI] Mojibake araci yazim-oncesi ha | ihsan | 2026-09-23 |
-| ALTYAPI-DURUM-SOZLUK-01 | [ALTYAPI] Gorev durum sozlugu tutarsizli | ihsan | 2026-09-23 |
-| ALTYAPI-TEST-HERMETIK-01 | [ALTYAPI] Uretim verisine dokunan testle | ihsan | 2026-09-23 |
 | ALTYAPI-D66-BYPASS-TETIKLEME-01 | [ALTYAPI] duzelt tetik_senk.py bypass fl | ihsan | 2026-09-24 |
 | TEST-13-PREEXIST-DUZELT-01 | [TEST] düzelt 13 pre-existing hata → d19 | utku | 2026-09-24 |
 | ALTYAPI-GROQ-KEY-DOGRULA-01 | [ALTYAPI] denetle Groq canlı key → groq_ | yasu | 2026-09-24 |
 | D-192-FAZ2 | [ADMIN-UI] Ajan Chat Faz 2: Onem Dereces | orkestrator | 2026-09-23 |
 | NINEROUTER-IMAGE-GEN-01 | [SKILL] ninerouter.py'ye ninerouter_imag | yasu | 2026-09-24 |
 | TEST-13-PREEXIST-DUZELT-02 | [TEST] duzelt 7 kalan test hatasi → pyte | utku | 2026-09-24 |
+| UI-ADMIN-SSE-IHLAL-03 | [UI] SSE mimari ihlalini düzelt → admin_ | ihsan | 2026-09-24 |
+| VERI-ADMIN-LASTLOGIN-MIGRATION-04 | [VERI] users.last_login kolonunu yaz → s | ihsan | 2026-09-24 |
+| API-ADMIN-LASTLOGIN-YAZ-05 | [API] Giriş anında last_login değerini y | ihsan | 2026-09-24 |
+| API-ADMIN-CHURN-FONKSIYON-06 | [API] Churn risk fonksiyonunu yaz → chur | ihsan | 2026-09-24 |
 
 ## Son Handoff'lar
 

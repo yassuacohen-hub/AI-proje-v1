@@ -9,16 +9,6 @@
     "task_id": "UI-ADMIN-SAHTE-EXEC-02",
     "kilitlendi": "2026-09-24T04:15:38"
   },
-  "web_dashboard/tabs/admin_realtime.py": {
-    "sahip": "ihsan",
-    "task_id": "UI-ADMIN-SSE-IHLAL-03",
-    "kilitlendi": "2026-09-24T04:15:38"
-  },
-  "src/company_master/churn.py": {
-    "sahip": "ihsan",
-    "task_id": "API-ADMIN-CHURN-FONKSIYON-06",
-    "kilitlendi": "2026-09-24T04:15:39"
-  },
   "web_dashboard/tabs/admin_quality.py": {
     "sahip": "utku",
     "task_id": "UI-ADMIN-GUNCELLIK-KOVA-10",
