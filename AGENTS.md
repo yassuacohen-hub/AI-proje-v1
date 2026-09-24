@@ -486,7 +486,7 @@
 
 ## Obsidian Vault Merkezi Yönetim (D-169 — KAHİN kararı 2026-09-20)
 - **Vault kökü = `Huginn Data Insights/` (V10 ana branch).** Tüm `.md` dosyaları buradan sayılır; Obsidian graph, orphan tespiti, cross-reference kontrolü burada yapılır.
-- **`AI proje v1/` submodule DEĞİLDİR.** Submodule kullanımından dönüldü (ürün sahibi beyanı 2026-09-20). Eski sürüm dizinidir; `.gitmodules` kaydı geçersiz, temizlenecek. Vault kapsamı dışında tutulur.
+- **`AI proje v1/` submodule DEĞİLDİR.** Submodule kullanımından dönüldü (ürün sahibi beyanı 2026-09-20). Eski sürüm dizinidir; `.gitmodules` kaydı geçersiz, temizlenecek. Vault kapsamı dışında tutulur. **Netleştirme (2026-09-24, YA-01 kapanışı):** dizinin kanonik kopyası ana depoda gömülüdür ve burada değiştirilir; uzaktaki `yassuacohen-hub/AI-proje-v1` deposu arşiv/salt-okunurdur (işaretçi: `AI proje v1/README.md`).
 - **Obsidian `userIgnoreFilters` (`.obsidian/app.json`):** Graph ve arama sınırlaması için native ayar (silme değil, geri alınabilir):
   ```json
   "userIgnoreFilters": [
