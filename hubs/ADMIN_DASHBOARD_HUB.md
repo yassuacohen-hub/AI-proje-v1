@@ -85,12 +85,35 @@ SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_
 | UI-ADMIN-GUNCELLIK-KOVA-10 | Veri guncellik kovalari → `web_dashboard/tabs/admin_quality.py` | 2026-09-24 |
 | UI-ADMIN-MALIYET-ANOMALI-11 | AI maliyet anomali blogu (z-skor) → `web_dashboard/tabs/admin_cost.py` | 2026-09-24 |
 | DOC-ADMIN-ARSIV-12 | Bayat analiz dokumani arsive tasindi + SSOT §0.1 guncellendi | 2026-09-24 |
+| ORKESTRA-AI-CHAT-KOORDINASYON-01 | SISTEM_PROMPT + ajan_chat_koordinasyon.py library + testler + AJAN_ARASI_ILETISIM.md dok | 2026-09-24 |
+| ALTYAPI-SECRETS-SETUP-01 | Credential vault kuruldu: .env.example, .env.vault, rotate_secrets.py, config_test.py | 2026-09-24 |
+| ALTYAPI-DB-MIGRATION-01 | Migration altyapisi: db_migrate.py, 0017.down.sql, db_migrate_prod.sh, AlertManager kuralari | 2026-09-24 |
+| ALTYAPI-ADMIN-PANO-01 | Task board guncel gorunum: render_task_board_tab, 4 bolum, filtreleme, testler, dok | 2026-09-24 |
+| API-ADMIN-AKTIVITE-YAZ-14 | Giris/arama/AI olaylari loglandi: aktivite_yaz, web_app.py, 5 test | 2026-09-24 |
+| API-ADMIN-CHURN-3SINYAL-16 | Churn 3 sinyalli formulu: risk_etiketi_3sinyal, musteri_yonetimi.py SQL guncellendi | 2026-09-24 |
+| UI-ADMIN-ARAMA-BOSLUK-20 | Icerik bosluk raporu: admin_quality.py, normalize+frekans+eskik, rozet, testler | 2026-09-24 |
+| API-ADMIN-SUPHELI-AKTIVITE-21 | Supheli aktivite 3 kural: admin_audit.py, skor+etiket, doctest+pytest gecti | 2026-09-24 |
+| UI-ADMIN-UPSELL-22 | Upsell aday listesi: musteri_yonetimi.py, 3 kosul (doygunluk+churn+buyume), testler | 2026-09-24 |
+| DOC-ADMIN-V9-KUTUCUK-24 | V9 §16.5 kutucuclari: 6 madde bullet listesi, format temizlendi | 2026-09-24 |
 | COP-26 | MUSTERILER ekrani: firma listesi + filtre + bildirim blogu | 2026-09-24 |
 | UI-SUBHEADER-MUSTERI-01 | `musteri_yonetimi.py` subheader temizligi (sayfa iskeleti sozlesmesi) | 2026-09-24 |
 | TEST-ADMIN-PERF-01 | `admin_performance` kpi_karti gecis testi | 2026-09-24 |
 | TEST-WEBHOOK-KPI-01 | `tests/test_webhook_monitor_tab.py` mock hedefi duzeltildi | 2026-09-24 |
+| TEST-BLOKE-FAKTOR-ARASTIRMA-01 | Test hazırlık araştırma ve test skeletleri oluşturuldu | 2026-09-24 |
+| API-ADMIN-KAYNAK-SAGLIK-18 | Kaynak sağlık skorunu ölç → 3 kovalı rozet + DLQ birikme hızı | 2026-09-24 |
+| UI-ADMIN-CRAWL-KONTROL-19 | Crawl tetikle/durdur aksiyonunu yaz → operatör kontrol paneli | 2026-09-24 |
+| TEST-ADMIN-K2-AGIRLIK-23 | K2 ağırlık şemasını denetle → test + SSOT kanıt | 2026-09-24 |
+| DOC-ADMIN-DURUM-SENKRON-15 | Bayat durum satırlarını düzelt → §8.4/§10 kanıtlı (SSOT senkronize) | 2026-09-24 |
+| API-ADMIN-AKTIVITE-YAZ-14 | Giris/arama/AI olaylari loglandi: aktivite_yaz, web_app.py, 5 test | 2026-09-24 |
+| API-ADMIN-CHURN-3SINYAL-16 | Churn 3 sinyalli formulu: risk_etiketi_3sinyal, musteri_yonetimi.py SQL guncellendi | 2026-09-24 |
+| UI-ADMIN-ARAMA-BOSLUK-20 | Icerik bosluk raporu: admin_quality.py, normalize+frekans+eskik, rozet, testler | 2026-09-24 |
+| API-ADMIN-SUPHELI-AKTIVITE-21 | Supheli aktivite 3 kural: admin_audit.py, skor+etiket, doctest+pytest gecti | 2026-09-24 |
+| UI-ADMIN-UPSELL-22 | Upsell aday listesi: musteri_yonetimi.py, 3 kosul (doygunluk+churn+buyume), testler | 2026-09-24 |
+| DOC-ADMIN-V9-KUTUCUK-24 | V9 §16.5 kutucuclari: 6 madde bullet listesi, format temizlendi | 2026-09-24 |
+| ALTYAPI-SECRETS-SETUP-01 | Credential vault kuruldu: .env.example, .env.vault, rotate_secrets.py, config_test.py | 2026-09-24 |
+| ALTYAPI-DB-MIGRATION-01 | Migration altyapisi: db_migrate.py, 0017.down.sql, db_migrate_prod.sh, AlertManager kuralari | 2026-09-24 |
 
-Kapanan is sayisi bu hub'da: **16**. Tam liste ceyreklik arsivde:
+Kapanan is sayisi bu hub'da: **30**. Tam liste ceyreklik arsivde:
 `data/orchestrator/task_board_arsiv_2026-Q3.json`
 
 ---

@@ -816,6 +816,13 @@ def api_companies(
                 result_count=total,
                 filters=f"limit={limit},offset={offset},min_score={min_score},max_score={max_score},nace={nace},mask={mask}",
             )
+            aktivite_yaz(
+                user_id=user_id,
+                olay_tipi="arama",
+                detay={"terim": search, "sonuc_adedi": total, "filtreler": f"limit={limit},offset={offset},min_score={min_score},max_score={max_score},nace={nace},mask={mask}"},
+                basarili=total > 0,
+                request=request,
+            )
         cache_set(_ck, result)
         return result
 
@@ -1820,6 +1827,47 @@ def _log_search_event(
         print(f"[DATA-LOG-01] search_event kayit hatasi: {exc}")
 
 
+
+
+def aktivite_yaz(
+    user_id: str,
+    olay_tipi: str,
+    detay: dict | None = None,
+    basarili: bool = True,
+    request: Request | None = None,
+) -> None:
+    """API-ADMIN-AKTIVITE-YAZ-14: user_activity_log tablosuna kayit.
+
+    Hata istek dusurmez (best-effort). Olay tipleri: 'giris', 'arama', 'ai_kullanim'.
+    """
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            ip = ""
+            if request and request.client:
+                ip = request.client.host
+            
+            import json
+            conn.execute(
+                text(
+                    "INSERT INTO user_activity_log (user_id, olay_tipi, olay_zamani, detay, "
+                    "basarili, ip_adresi, ulke_kodu) "
+                    "VALUES (:uid, :tip, CURRENT_TIMESTAMP, :detay, :ok, :ip, :ulke)"
+                ),
+                {
+                    "uid": user_id or "",
+                    "tip": olay_tipi,
+                    "detay": json.dumps(detay) if detay else None,
+                    "ok": basarili,
+                    "ip": ip or None,
+                    "ulke": None,
+                },
+            )
+            conn.commit()
+    except Exception as exc:
+        print(f"[API-ADMIN-AKTIVITE-YAZ-14] aktivite kayit hatasi: {exc}")
+
+
 # â”€â”€ X04: Üyelik yardımcıları (şifre sıfırlama, e-posta doğrulama, Telegram) â”€â”€â”€
 import secrets
 import smtplib
@@ -2207,7 +2255,7 @@ def require_admin(
 
 
 @app.post("/api/admin/login")
-def api_admin_login_post(req: dict, _rate: None = Depends(_auth_rate_guard)):
+def api_admin_login_post(req: dict, request: Request, _rate: None = Depends(_auth_rate_guard)):
     """ADMIN-GATE-01: POST admin girişi. {email, password} → token.
 
     SEC-AUTH-01 Y-1: `_auth_rate_guard` IP bazlı katı limit uygular.
@@ -2217,6 +2265,7 @@ def api_admin_login_post(req: dict, _rate: None = Depends(_auth_rate_guard)):
     email = (req.get("email") or "").strip()
     password = req.get("password") or ""
     if not email or not password:
+        aktivite_yaz(user_id=email, olay_tipi="giris", basarili=False, request=request)
         raise HTTPException(status_code=400, detail="email ve sifre zorunlu")
     engine = get_engine()
     with engine.connect() as conn:
@@ -2226,8 +2275,10 @@ def api_admin_login_post(req: dict, _rate: None = Depends(_auth_rate_guard)):
         ).mappings().first()
     if row:
         if row["status"] != "onayli" or row["role"] != "admin":
+            aktivite_yaz(user_id=email, olay_tipi="giris", basarili=False, request=request)
             raise HTTPException(status_code=403, detail="admin yetkisi gerekli")
         if not _verify_password(password, row["password_hash"]):
+            aktivite_yaz(user_id=email, olay_tipi="giris", basarili=False, request=request)
             raise HTTPException(status_code=401, detail="gecersiz email veya sifre")
         # API-ADMIN-LASTLOGIN-YAZ-05: Başarılı girişte last_login güncelle
         with engine.connect() as conn:
@@ -2236,6 +2287,7 @@ def api_admin_login_post(req: dict, _rate: None = Depends(_auth_rate_guard)):
                 {"e": email},
             )
             conn.commit()
+        aktivite_yaz(user_id=row["email"], olay_tipi="giris", basarili=True, request=request)
         return {"token": _user_token(row["email"])}
     try:
         secrets_path = Path(__file__).resolve().parent / ".streamlit" / "secrets.toml"
@@ -2251,9 +2303,11 @@ def api_admin_login_post(req: dict, _rate: None = Depends(_auth_rate_guard)):
                         {"e": email},
                     )
                     conn.commit()
+                aktivite_yaz(user_id=email, olay_tipi="giris", basarili=True, request=request)
                 return {"token": _user_token(email)}
     except Exception:
         pass
+    aktivite_yaz(user_id=email, olay_tipi="giris", basarili=False, request=request)
     raise HTTPException(status_code=401, detail="gecersiz email veya sifre")
 
 

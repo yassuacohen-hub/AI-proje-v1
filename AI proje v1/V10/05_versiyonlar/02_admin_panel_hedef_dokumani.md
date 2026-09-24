@@ -101,9 +101,9 @@ Panel tasarımı modülden değil **sorudan** başlar. Durumlar §7 matrisindeki
 | Kapsama ölçütü                                      | Sayaç     | Ne demek                                                              |
 | --------------------------------------------------- | --------- | --------------------------------------------------------------------- |
 | **Modül varlığı** — ekran/fonksiyon kodda var mı     | **9 Var · 3 Kısmi · 6 Yok** | Kod mevcudiyeti sayımı; veri gerçekliğini ölçmez |
-| **Veri gerçekliği** — ekran gerçek veri gösteriyor mu | **3 modül veri kaynaksız** | `api_usage_daily`, `packages`, `company_packages` yok → ilgili ekranlar 0/— basıyor |
+| **Veri gerçekliği** — ekran gerçek veri gösteriyor mu | **P0: 1 · P1: 2 · P2: 0** | Besleyen tablo yoksa ekran "veri kaynağı yok" rozetiyle çizilir (§7 matrisi sayac kaynağı) |
 
-> ⚠️ **Uyarı:** Yukarıdaki sayım bir **modül sayımıdır**, yetenek sayımı değildir. Canlı DB doğrulaması (§8.4 · EK BULGU-8/9/10) `api_usage_daily`, `packages`, `company_packages` tablolarının **olmadığını** gösterdi; `users.last_login` v0016 ile eklendi. "Var" sayılan modüllerin bir kısmı veri kaynaksız çalışıyor.
+> ⚠️ **Uyarı:** Sayılar §7 İzlenebilirlik Matrisi'nden **sayılır**, tahmin edilmez. Canlı DB doğrulaması (§8.4 kanıtla) `api_usage_daily`, `packages`, `company_packages` tablolarının olmadığını göstermiştir. Besleyen tablo olmayan ekranlar "veri kaynağı yok" rozetiyle çizilir (UI-ADMIN-SAHTE-KPI-01, UI-ADMIN-SAHTE-EXEC-02).
 
 ---
 
@@ -315,7 +315,7 @@ Panel tasarımı modülden değil **sorudan** başlar. Durumlar §7 matrisindeki
 | C7  | V9 §16.5 MVP listesi bayat — **EK BULGU-6**                         | V9 `:833-838`: Dashboard KPI, Webhook Monitor, AI Cost, Kalite Özeti, API Analytics, Perf → hepsi `[ ]` işaretsiz | Kodda **6'sı da var** (`admin_kpi.py`, `webhook_monitor.py`, `admin_cost.py`, `admin_quality.py`, `admin_api_analytics.py`, `admin_performance.py`) | V9 §16.5 kutucukları güncellenmeli → §11 KK-5                               |
 | C8  | `06_muninn_prd_vs_huginn_analiz.md:854` dosya yolu — **EK BULGU-7** | V9 `:854` "İlgili Dosya: `plans/muninn_prn_vs_huginn_analiz.md`"                                                  | Kanonik yol `AI proje v1/V10/03_mimari/06_muninn_prd_vs_huginn_analiz.md`; eski adda yazım hatası da var (`prn`)                                    | 2026-09-22 düzeltildi. `plans/muninn_prn_vs_huginn_analiz.md` **silinmedi** — 12 satırlık yönlendirme stub'ı olarak duruyor ve kanonik dosyayı gösteriyor (D-186 uyumlu), link kırık değil |
 
-### 8.4 ⛔ Şema doğrulaması — **EK BULGU-8/9/10** (DB'den canlı doğrulandı, 2026-09-22)
+### 8.4 Şema doğrulaması — **EK BULGU-8/9/10** (DB'den canlı doğrulandı, 2026-09-22)
 
 > Doğrulama komutu (tekrar üretilebilir, `Huginn Data Insights/` içinden):
 > ```
@@ -323,7 +323,7 @@ Panel tasarımı modülden değil **sorudan** başlar. Durumlar §7 matrisindeki
 > ```
 > **Sonuç: 30 tablo.** `commercial_signals, companies, company_aliases, company_capabilities, company_contacts, company_events, company_identifiers, company_industries, company_intelligence_scores, company_locations, company_names, company_products, company_signals, company_state, company_tech_profile, credit_ledger, entity_resolution, evidence, job_postings, kvkk_bireysel_email_yedek, momentum_snapshot, nace_codes, osbs, product_categories, products, quarantine_firms, schema_migrations, source_records, sources, users`
 
-| #                | Bulgu                                                                                    | Kanıt                                                                                    | Sonuç                                                                                                                                              |
+| #                | Bulgu                                                                                    | Kanıt                                                                                    | Gerekçe / tanım (durum §7'de)                                                                                                                      |
 | ---------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **EK BULGU-8**   | **Kullanıcı davranış logu hiç yok.** Giriş/arama/AI kullanım tablosu sıfır. `users.last_login` 2026-09-24'te v0016 migration ile eklendi (KK-3); arama ve AI kullanım logu hâlâ yok. | DB inspect çıktısı + `0016_users_last_login.sql`                                          | K1 churn'ün 3 sinyalinden yalnız biri (`last_login`) besleniyor. Arama ve AI sinyali için aktivite log altyapısı gerekir (VERI-ADMIN-AKTIVITE-LOG-13 → API-ADMIN-AKTIVITE-YAZ-14). |
 | **EK BULGU-9**   | **`api_usage_daily` tablosu DB'de yok.**                                                 | `admin_kpi.py:105` `SELECT COALESCE(SUM(request_count),0) FROM api_usage_daily`           | Kart eskiden sessizce **0** basıyordu — sahte metrik. `_db_yardim.tablo_var_mi()` ile "veri kaynağı yok" rozetine çevrildi (UI-ADMIN-SAHTE-KPI-01). Tablo hâlâ yok; gerçek API metriği için tablo şart. |

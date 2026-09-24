@@ -1,0 +1,215 @@
+# AlertManager Rules — DB Migration Monitoring (v0016/v0017)
+# Yazar: orkestrator
+# Tarih: 2026-09-24
+# Amaç: Prod migration sırasında ve sonrasında DB sağlığını takip et
+
+groups:
+  - name: db_migration_alerts
+    interval: 15s
+    rules:
+      # Rule 1: Replication Lag Kritik (> 5s)
+      - alert: PostgresReplicationLagCritical
+        expr: |
+          (pg_postmaster_uptime_seconds - pg_wal_lsn_recv_age_seconds) > 5
+        for: 2m
+        labels:
+          severity: critical
+          component: database
+          migration_phase: "v0016_v0017"
+        annotations:
+          summary: "Replication lag çok yüksek: {{ $value }}s"
+          description: |
+            Prod PostgreSQL replication 5 saniyeden fazla geride.
+            Migration sırasında kritik. Kontrol et:
+            - Ağ bağlantısı (firewall, DNS)
+            - WAL sender process (ps aux | grep walsender)
+            - pg_stat_replication (SELECT * FROM pg_stat_replication;)
+          runbook: "docs/runbooks/postgres_replication_lag.md"
+          action: "page"
+
+      # Rule 2: Connection Pool Saturation
+      - alert: PostgresConnectionPoolSaturated
+        expr: |
+          (pg_stat_activity_count / pg_settings_max_connections) > 0.8
+        for: 1m
+        labels:
+          severity: warning
+          component: database
+        annotations:
+          summary: "Connection pool {{ $value | humanizePercentage }} dolu"
+          description: |
+            Prod connection pool %80 üzerinde dolu. Migration sırasında sorun olabilir.
+            Kontrol et:
+            - Aktif bağlantılar: SELECT COUNT(*) FROM pg_stat_activity;
+            - İdle bağlantılar: SELECT COUNT(*) FROM pg_stat_activity WHERE state = 'idle';
+            - Connection leak varsa app restartsı yapılabilir
+
+      # Rule 3: Cache Hit Ratio Düşüş (Migration sonrası)
+      - alert: PostgresCacheHitRatioDrop
+        expr: |
+          rate(pg_stat_database_blks_hit[5m]) / (rate(pg_stat_database_blks_hit[5m]) + rate(pg_stat_database_blks_read[5m])) < 0.95
+        for: 5m
+        labels:
+          severity: warning
+          component: database
+          phase: "post_migration"
+        annotations:
+          summary: "Cache hit ratio düştü: {{ $value | humanizePercentage }}"
+          description: |
+            Migration sonrası cache hit ratio normal değerin altında.
+            Varsayılan: %95+ (heathy), Şimdi: {{ $value | humanizePercentage }}
+            Nedeni:
+            - Index yeniden oluşturma (ANALYZE yapıldı mı?)
+            - Tablo scan pattern değişti
+            İyileştirme:
+              ANALYZE; -- İstatistikleri güncelle
+              REINDEX; -- İndeksleri rebuild et
+
+      # Rule 4: Migration Lock Timeout
+      - alert: PostgresMigrationLockTimeout
+        expr: |
+          pg_locks_acquired_total{locktype="AccessExclusiveLock"} > 0
+        for: 30s
+        labels:
+          severity: warning
+          component: database
+          migration_phase: "v0016_v0017"
+        annotations:
+          summary: "AccessExclusive lock açık (migration sırasında sorunlu)"
+          description: |
+            Migration sırasında AccessExclusiveLock (table lock) tutulmuş.
+            Eğer > 1 dakika sürer, uygulamalar timeout alabilir.
+            Kontrol:
+              SELECT * FROM pg_locks WHERE locktype = 'AccessExclusiveLock';
+              SELECT * FROM pg_stat_activity WHERE wait_event IS NOT NULL;
+
+      # Rule 5: Query Duration Anomali (slow queries)
+      - alert: PostgresSlowQueryDuringMigration
+        expr: |
+          pg_slow_queries_duration_seconds > 5
+        for: 1m
+        labels:
+          severity: warning
+          component: database
+          phase: "migration"
+        annotations:
+          summary: "Yavaş query tespit edildi: {{ $value }}s"
+          description: |
+            Migration sırasında 5s+ süren query var. Log'a bak:
+              SELECT query, mean_time FROM pg_stat_statements ORDER BY mean_time DESC LIMIT 5;
+
+      # Rule 6: WAL Segment Disk Usage
+      - alert: PostgresWALDiskUsage
+        expr: |
+          node_filesystem_avail_bytes{mountpoint="/var/lib/postgresql"} / node_filesystem_size_bytes < 0.1
+        for: 2m
+        labels:
+          severity: critical
+          component: database
+          migration_phase: "v0016_v0017"
+        annotations:
+          summary: "WAL disk %10 altına düştü — migration durdurulabilir"
+          description: |
+            PostgreSQL WAL disk alanı kritik düşük. Migration durmadan devam etme!
+            Kontrol:
+              df -h /var/lib/postgresql
+              SELECT * FROM pg_stat_replication; -- WAL alıcı var mı?
+            Hızlı fix: pg_archivecleanup veya daha eski WAL sil
+
+      # Rule 7: Deadlock Tespit
+      - alert: PostgresDeadlockDetected
+        expr: |
+          rate(pg_stat_database_deadlocks[5m]) > 0
+        for: 1m
+        labels:
+          severity: warning
+          component: database
+          phase: "migration"
+        annotations:
+          summary: "Deadlock tespit edildi — migration risk yüksek"
+          description: |
+            Migration sırasında transaction deadlock var.
+            Kontrol:
+              SELECT * FROM pg_stat_database WHERE deadlocks > 0;
+            Log'ta deadlock details:
+              tail -f /var/log/postgresql/postgresql.log | grep deadlock
+
+      # Rule 8: Backup Başarısızlık (Migration öncesi)
+      - alert: DatabaseBackupFailed
+        expr: |
+          (time() - pg_backup_timestamp_seconds) > 3600
+        for: 5m
+        labels:
+          severity: critical
+          component: database
+          phase: "pre_migration"
+        annotations:
+          summary: "Son backup 1 saatten eski — migration başlatma!"
+          description: |
+            Migration öncesi backup yapılması zorunlu.
+            Son backup: {{ $value | humanizeDuration }} önce
+            Action: Migration başlatmadan önce pg_dump çalıştır
+
+      # Rule 9: Version Compatibility Check (post-migration)
+      - alert: PostgresVersionCompatibility
+        expr: |
+          pg_setting_server_version != 130000  # Expected version
+        labels:
+          severity: warning
+          component: database
+          phase: "post_migration"
+        annotations:
+          summary: "PostgreSQL versiyon uyumsuzluğu"
+          description: |
+            Migration sonrası beklenen version'dan farklı.
+            Expected: 13.x, Current: {{ $value }}
+            Kontrol: SELECT version();
+
+# AlertManager Routing (top-level config)
+---
+route:
+  receiver: ops-team
+  group_by:
+    - severity
+    - component
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  routes:
+    - match:
+        severity: critical
+        migration_phase: "v0016_v0017"
+      receiver: migration-critical
+      group_wait: 10s  # Faster alert
+      repeat_interval: 1h
+
+receivers:
+  - name: ops-team
+    slack_configs:
+      - api_url: "${SLACK_WEBHOOK_OPS}"
+        channel: "#database-alerts"
+        title: "DB Alert: {{ .GroupLabels.alertname }}"
+        text: "{{ range .Alerts }}{{ .Annotations.description }}{{ end }}"
+
+  - name: migration-critical
+    slack_configs:
+      - api_url: "${SLACK_WEBHOOK_OPS}"
+        channel: "#migration-critical"
+        title: "🚨 MIGRATION CRITICAL: {{ .GroupLabels.alertname }}"
+        text: |
+          Severity: {{ .GroupLabels.severity }}
+          {{ range .Alerts }}{{ .Annotations.summary }}
+          {{ .Annotations.description }}{{ end }}
+    pagerduty_configs:
+      - service_key: "${PAGERDUTY_SERVICE_KEY}"
+        description: "DB Migration Alert"
+
+inhibit_rules:
+  # Migration sırasında warning'leri suppress et (critical varsa)
+  - source_match:
+      severity: critical
+      phase: "migration"
+    target_match:
+      severity: warning
+    equal:
+      - component

@@ -17,6 +17,7 @@ import streamlit as st
 from company_master.ui import PageHeader
 from company_master.ui.components.page import Section
 from sqlalchemy import text
+from datetime import date
 
 from company_master.db.connection import get_engine
 
@@ -25,7 +26,17 @@ from web_dashboard.tabs.admin_extras import render_user_management
 
 from company_master.settings.user_settings import kvkk_maske_acik  # noqa: E402
 from scripts.dash04_api_client import get_api, post_api  # noqa: E402
-from company_master.churn import risk_etiketi  # noqa: E402 (UI-ADMIN-CHURN-KOLON-07)
+from company_master.churn import risk_etiketi, risk_etiketi_3sinyal  # noqa: E402 (UI-ADMIN-CHURN-KOLON-07, API-ADMIN-CHURN-3SINYAL-16)
+
+# UI-ADMIN-UPSELL-22: Upsell aday listesi
+_UPSELL_DOYGUNLUK_ESIK = 0.85  # %85 doygunluk eşiği
+
+# Tier kota limitleri (kredi bazlı)
+_TIER_KOTALAR = {
+    "terminal": 100,      # Terminal: 100 kredi/ay
+    "strategic": 500,     # Strategic: 500 kredi/ay
+    "enterprise": -1,     # Enterprise: sınırsız (credit_balance = -1)
+}
 
 
 BOLUMLER = (
@@ -35,6 +46,7 @@ BOLUMLER = (
     Section("Aramalar", "Arama kayıtları ve filtreleme — DATA-LOG-01.", ikon="🔍"),
     Section("Destek", "Ticket listesi, olusturma ve durum degistirme.", ikon="🎫"),
     Section("Dışa Aktar", "Veri dışa aktarma ve raporlar.", ikon="💾"),
+    Section("Upsell Adayları", "Kota doygunluğu yüksek, düşük churn riskli büyüyen müşteriler.", ikon="📈"),
 )
 
 __all__ = ["render_musteri_yonetimi_tab", "BOLUMLER"]
@@ -64,6 +76,8 @@ def render_musteri_yonetimi_tab() -> None:
         _destek()
     with secim[5]:
         _dissa_aktar()
+    with secim[6]:
+        _render_upsell_adaylari()
 
 
 def _kullanicilar_onay() -> None:
@@ -162,7 +176,7 @@ def _giris_aktinligi() -> None:
                     "FROM login_events ORDER BY ts DESC LIMIT 50"
                 )
             ).mappings().all()
-        
+
         if login_rows:
             _kullanici_id = st.session_state.get("kullanici_id", "misafir")
             if not isinstance(_kullanici_id, str) or not _kullanici_id.strip():
@@ -187,15 +201,25 @@ def _giris_aktinligi() -> None:
     except Exception:
         st.info("Giriş etkinliği tablosu henüz oluşturulmamış.")
 
-    # UI-ADMIN-CHURN-KOLON-07: Churn risk listesi (users.last_login)
+    # UI-ADMIN-CHURN-KOLON-07: Churn risk listesi (3 sinyal: last_login + user_activity_log)
     st.divider()
     try:
         engine = get_engine()
         with engine.connect() as conn:
+            # 3 sinyal için: last_login + son_arama + son_ai (user_activity_log)
             churn_rows = conn.execute(
                 text(
-                    "SELECT email, last_login, created_at "
-                    "FROM users ORDER BY last_login DESC NULLS LAST"
+                    """
+                    SELECT u.email, u.last_login, u.created_at,
+                           -- son_arama: user_activity_log'dan olay_tipi='arama' olan en son tarih
+                           (SELECT MAX(olay_zamani)::date FROM user_activity_log
+                            WHERE user_id = u.user_id AND olay_tipi = 'arama') as son_arama,
+                           -- son_ai: user_activity_log'dan olay_tipi='ai_kullanim' olan en son tarih
+                           (SELECT MAX(olay_zamani)::date FROM user_activity_log
+                            WHERE user_id = u.user_id AND olay_tipi = 'ai_kullanim') as son_ai
+                    FROM users u
+                    ORDER BY u.last_login DESC NULLS LAST
+                    """
                 )
             ).mappings().all()
         if churn_rows:
@@ -203,14 +227,22 @@ def _giris_aktinligi() -> None:
             bugun = date.today()
             churn_data = []
             for r in churn_rows:
-                risk = risk_etiketi(r["last_login"], bugun) if r["last_login"] else risk_etiketi(None, bugun)
+                # 3 sinyalli risk etiketi: last_login + son_arama + son_ai
+                risk = risk_etiketi_3sinyal(
+                    son_giris=r["last_login"],
+                    son_arama=r["son_arama"],
+                    son_ai=r["son_ai"],
+                    bugun=bugun,
+                )
                 churn_data.append({
                     "E-posta": r["email"],
                     "Son Giriş": r["last_login"] or "—",
+                    "Son Arama": r["son_arama"] or "—",
+                    "Son AI": r["son_ai"] or "—",
                     "Kayıt Tarihi": r["created_at"],
                     "Churn Riski": risk,
                 })
-            st.caption("Churn Risk: 'Yok' = son 14 günde giriş var, 'Düşük' = 14+ gün veya giriş yok (tek sinyal last_login)")
+            st.caption("Churn Risk (3 sinyal): 'Yok'=3 sinyal de <14g, 'Düşük'=1 sinyal bayat, 'Orta'=2 sinyal bayat, 'Yüksek'=3 sinyal bayat")
             st.dataframe(churn_data, width="stretch", hide_index=True)
         else:
             st.info("Kullanıcı kaydı yok.")
@@ -218,7 +250,237 @@ def _giris_aktinligi() -> None:
         st.info("Churn risk verisi yüklenemedi.")
 
 
-def _aramalar() -> None:
+# UI-ADMIN-UPSELL-22: Upsell aday listesi
+
+def _doygunluk_hesapla(
+    user_id: str,
+    tier: str,
+    engine,
+) -> float | None:
+    """Kullanıcının kota doygunluğunu hesapla.
+
+    Doygunluk = tüketim / kota
+    - kota = tier bazlı limit (enterprise = -1 -> sınırsız -> None)
+    - tüketim = son 30 günde credit_ledger'dan negatif delta toplamı (mutlak değer)
+    - kota 0/None -> None döner (müşteri listeden çıkarılır)
+
+    Returns:
+        float: 0.0-1.0 arası doygunluk oranı, None = hesaplanamaz (sınırsız/geçersiz)
+    """
+    kota = _TIER_KOTALAR.get(tier)
+    if kota is None or kota <= 0:
+        return None  # Sınırsız veya geçersiz tier
+
+    try:
+        with engine.connect() as conn:
+            # Son 30 günde tüketim (negatif delta = kullanım)
+            row = conn.execute(text("""
+                SELECT COALESCE(SUM(CASE WHEN delta < 0 THEN -delta ELSE 0 END), 0) as tuketim
+                FROM credit_ledger
+                WHERE user_id = :uid
+                  AND created_at >= (CURRENT_DATE - INTERVAL '30 days')
+            """), {"uid": user_id}).scalar()
+        tuketim = int(row or 0)
+        return min(tuketim / kota, 1.0) if kota > 0 else 0.0
+    except Exception:
+        return None
+
+
+def _buyume_hesapla(user_id: str, engine) -> float:
+    """Son 30 günde kullanım büyümesi (tüketim artışı).
+
+    Bu ayki tüketim - önceki ayki tüketim / önceki ayki tüketim
+    Tarih alanı yoksa 0 döner.
+    """
+    try:
+        with engine.connect() as conn:
+            # Bu ay (son 30 gün)
+            bu_ay = conn.execute(text("""
+                SELECT COALESCE(SUM(CASE WHEN delta < 0 THEN -delta ELSE 0 END), 0)
+                FROM credit_ledger
+                WHERE user_id = :uid
+                  AND created_at >= (CURRENT_DATE - INTERVAL '30 days')
+            """), {"uid": user_id}).scalar()
+
+            # Önceki ay (30-60 gün önce)
+            onceki_ay = conn.execute(text("""
+                SELECT COALESCE(SUM(CASE WHEN delta < 0 THEN -delta ELSE 0 END), 0)
+                FROM credit_ledger
+                WHERE user_id = :uid
+                  AND created_at >= (CURRENT_DATE - INTERVAL '60 days')
+                  AND created_at < (CURRENT_DATE - INTERVAL '30 days')
+            """), {"uid": user_id}).scalar()
+
+        bu_ay = int(bu_ay or 0)
+        onceki_ay = int(onceki_ay or 0)
+
+        if onceki_ay <= 0:
+            return 0.0  # Büyüme hesaplanamaz
+        return (bu_ay - onceki_ay) / onceki_ay
+    except Exception:
+        return 0.0
+
+
+def _upsell_adaylari_yukle(engine) -> list[dict]:
+    """Upsell adaylarını yükle: 3 koşul birlikte sağlanmalı.
+
+    Koşullar (AND):
+    1. doygunluk >= _UPSELL_DOYGUNLUK_ESIK (0.85)
+    2. churn_etiketi ∈ {"Yok", "Düşük"} (risk_etiketi_3sinyal)
+    3. son 30 gün büyüme > 0
+
+    Returns:
+        list[dict]: Aday listesi (doğrunluk oranına göre azalan)
+    """
+    from datetime import date
+    bugun = date.today()
+
+    try:
+        with engine.connect() as conn:
+            # credit_ledger tablosu var mı?
+            if not _db_yardim.tablo_var_mi(conn, "credit_ledger"):
+                return []
+
+            rows = conn.execute(text("""
+                SELECT u.user_id, u.email, u.company_name, u.tier, u.credit_balance,
+                       u.last_login, u.created_at
+                FROM users u
+                WHERE u.status = 'onayli'
+                  AND u.role = 'user'
+                ORDER BY u.credit_balance DESC NULLS LAST
+            """)).mappings().all()
+    except Exception:
+        return []
+
+    if not rows:
+        return []
+
+    bugun = date.today()
+    adaylar = []
+
+    for r in rows:
+        user_id = r["user_id"]
+        tier = r["tier"]
+
+        # 1. Doygunluk hesapla
+        doygunluk = _doygunluk_hesapla(user_id, tier, engine)
+        if doygunluk is None:
+            continue  # Sınırsız kota (enterprise) veya geçersiz
+
+        if doygunluk < _UPSELL_DOYGUNLUK_ESIK:
+            continue  # Eşik altında
+
+        # 2. Churn risk etiketi (3 sinyal)
+        # last_login, son_arama, son_ai için subquery
+        try:
+            with engine.connect() as conn:
+                son_arama = conn.execute(text("""
+                    SELECT MAX(olay_zamani)::date FROM user_activity_log
+                    WHERE user_id = :uid AND olay_tipi = 'arama'
+                """), {"uid": user_id}).scalar()
+
+                son_ai = conn.execute(text("""
+                    SELECT MAX(olay_zamani)::date FROM user_activity_log
+                    WHERE user_id = :uid AND olay_tipi = 'ai_kullanim'
+                """), {"uid": user_id}).scalar()
+        except Exception:
+            son_arama = None
+            son_ai = None
+
+        churn = risk_etiketi_3sinyal(
+            son_giris=r["last_login"],
+            son_arama=son_arama,
+            son_ai=son_ai,
+            bugun=bugun,
+        )
+        if churn not in ("Yok", "Düşük"):
+            continue  # Riskli müşteri
+
+        # 3. Büyüme > 0
+        buyume = _buyume_hesapla(user_id, engine)
+        if buyume <= 0:
+            continue  # Büyüme yok
+
+        # Tüm koşullar sağlandı - aday
+        adaylar.append({
+            "musteri": r["company_name"] or r["email"],
+            "email": r["email"],
+            "doygunluk": round(doygunluk * 100, 1),
+            "churn_etiketi": churn,
+            "buyume": round(buyume * 100, 1),
+            "tier": tier,
+            "paket": f"{tier.title()} Paketi",
+        })
+
+    # Doygunluğa göre azalan sırala
+    adaylar.sort(key=lambda x: x["doygunluk"], reverse=True)
+    return adaylar
+
+
+def _render_upsell_adaylari() -> None:
+    """UI-ADMIN-UPSELL-22: Upsell Adayları bölümü."""
+    Section("📈 Upsell Adayları", "Kota doygunluğu %85+, churn riski düşük, büyüme olan müşteriler.", ikon="📈").render()
+    st.caption(
+        "Kriterler (AND): Doygunluk ≥%85 · Churn ∈ {Yok,Düşük} · 30g büyüme>0. "
+        f"Eşik: {int(_UPSELL_DOYGUNLUK_ESIK*100)}%. Enterprise (sınırsız) hariç."
+    )
+
+    try:
+        engine = get_engine()
+    except Exception:
+        st.warning("Veritabanı bağlantısı kurulamadı.")
+        return
+
+    # credit_ledger tablosu var mı kontrolü
+    try:
+        with engine.connect() as conn:
+            if not _db_yardim.tablo_var_mi(conn, "credit_ledger"):
+                st.warning("⚠️ Veri kaynağı yok — credit_ledger tablosu bulunamadı.")
+                return
+    except Exception:
+        st.warning("⚠️ Veri kaynağı yok — credit_ledger tablosu kontrol edilemedi.")
+        return
+
+    adaylar = _upsell_adaylari_yukle(engine)
+
+    if not adaylar:
+        st.info("Upsell kriterlerini sağlayan müşteri bulunamadı.")
+        return
+
+    # Metrik kartları
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.metric("📋 Toplam Aday", len(adaylar))
+    with c2:
+        ort_doygunluk = sum(a["doygunluk"] for a in adaylar) / len(adaylar)
+        st.metric("📊 Ort. Doygunluk", f"%{ort_doygunluk:.1f}")
+    with c3:
+        ort_buyume = sum(a["buyume"] for a in adaylar) / len(adaylar)
+        st.metric("📈 Ort. Büyüme", f"%{ort_buyume:.1f}")
+
+    # Tablo
+    display_df = pd.DataFrame(adaylar)[
+        ["musteri", "email", "doygunluk", "churn_etiketi", "buyume", "tier", "paket"]
+    ].rename(columns={
+        "musteri": "Müşteri",
+        "email": "E-posta",
+        "doygunluk": "Doygunluk (%)",
+        "churn_etiketi": "Churn Riski",
+        "buyume": "Büyüme (%)",
+        "tier": "Tier",
+        "paket": "Mevcut Paket",
+    })
+    st.dataframe(display_df, width="stretch", hide_index=True)
+
+    # CSV indirme
+    csv = pd.DataFrame(adaylar).to_csv(index=False).encode("utf-8")
+    st.download_button(
+        label="📥 CSV İndir",
+        data=csv,
+        file_name=f"upsell_adaylari_{date.today().strftime('%Y%m%d')}.csv",
+        mime="text/csv",
+        key="upsell_download",
+    )
     BOLUMLER[3].render()
     try:
         engine = get_engine()

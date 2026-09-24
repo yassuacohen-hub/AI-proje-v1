@@ -290,3 +290,61 @@ def esik_dokumani() -> str:
         "- health.py: Tenant Health Score kaynak bileşeni",
     ]
     return "\n".join(lines)
+
+
+# --------------------------------------------------------------------------- #
+# API-ADMIN-KAYNAK-SAGLIK-18 — Yeni fonksiyonlar (2026-09-24)
+# --------------------------------------------------------------------------- #
+
+SAGLIK_ESIK_YESIL: float = 0.95
+SAGLIK_ESIK_TURUNCU: float = 0.70
+
+
+def saglik_skoru(basarili: int, toplam: int) -> float:
+    """Kaynak sağlık skoru hesapla (0.0 - 100.0).
+
+    Args:
+        basarili: Başarılı işlem sayısı
+        toplam: Toplam işlem sayısı
+
+    Returns:
+        float: Sağlık oranı (0.0 - 100.0). toplam == 0 ise 0.0 döner.
+
+    Not:
+        SSOT §9 K4 — eşikler: >=0.95 🟢, >=0.70 🟠, <0.70 🔴
+    """
+    if toplam == 0:
+        return 0.0
+    return round((basarili / toplam) * 100, 2)
+
+
+def saglik_rozeti(oran: float) -> str:
+    """Sağlık oranına göre rozet etiketi döndürür.
+
+    Args:
+        oran: Sağlık oranı (0.0 - 1.0)
+
+    Returns:
+        str: "Sağlıklı" (>=0.95), "Bozulma var" (>=0.70), "Kritik" (<0.70)
+    """
+    if oran >= SAGLIK_ESIK_YESIL:
+        return "Sağlıklı"
+    if oran >= SAGLIK_ESIK_TURUNCU:
+        return "Bozulma var"
+    return "Kritik"
+
+
+def dlq_birikme_hizi(dlq_adet_simdi: int, dlq_adet_onceki: int, saat_farki: float) -> float:
+    """DLQ birikme hızını hesapla (saat başı).
+
+    Args:
+        dlq_adet_simdi: Şu anki DLQ kayıtları
+        dlq_adet_onceki: Önceki DLQ kayıtları
+        saat_farki: Saat cinsinden süre
+
+    Returns:
+        float: Saat başı birikme hızı. saat_farki <= 0 ise 0.0 döner.
+    """
+    if saat_farki <= 0:
+        return 0.0
+    return round((dlq_adet_simdi - dlq_adet_onceki) / saat_farki, 2)

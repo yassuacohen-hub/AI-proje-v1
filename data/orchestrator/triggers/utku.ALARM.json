@@ -1,0 +1,194 @@
+[
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-SECRETS-SETUP-01",
+    "gorev_basligi": "[ALTYAPI] Vault kurup .env template yaz → .env.example (2s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-24T21:29:01",
+    "mesaj": "⚠️ ALTYAPI-SECRETS-SETUP-01 ([ALTYAPI] Vault kurup .env template yaz → .env.example (2s)) — utku 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-DB-MIGRATION-01",
+    "gorev_basligi": "[ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-24T21:29:02",
+    "mesaj": "⚠️ ALTYAPI-DB-MIGRATION-01 ([ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)) — utku 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-ADMIN-PANO-01",
+    "gorev_basligi": "[ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-24T21:29:02",
+    "mesaj": "⚠️ ALTYAPI-ADMIN-PANO-01 ([ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)) — utku 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-SECRETS-SETUP-01",
+    "gorev_basligi": "[ALTYAPI] Vault kurup .env template yaz → .env.example (2s)",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-24T21:34:01",
+    "mesaj": "⚠️ ALTYAPI-SECRETS-SETUP-01 ([ALTYAPI] Vault kurup .env template yaz → .env.example (2s)) — utku 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-DB-MIGRATION-01",
+    "gorev_basligi": "[ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-24T21:34:01",
+    "mesaj": "⚠️ ALTYAPI-DB-MIGRATION-01 ([ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)) — utku 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-ADMIN-PANO-01",
+    "gorev_basligi": "[ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-24T21:34:01",
+    "mesaj": "⚠️ ALTYAPI-ADMIN-PANO-01 ([ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)) — utku 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-SECRETS-SETUP-01",
+    "gorev_basligi": "[ALTYAPI] Vault kurup .env template yaz → .env.example (2s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-24T21:39:01",
+    "mesaj": "⚠️ ALTYAPI-SECRETS-SETUP-01 ([ALTYAPI] Vault kurup .env template yaz → .env.example (2s)) — utku 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-DB-MIGRATION-01",
+    "gorev_basligi": "[ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-24T21:39:01",
+    "mesaj": "⚠️ ALTYAPI-DB-MIGRATION-01 ([ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)) — utku 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-ADMIN-PANO-01",
+    "gorev_basligi": "[ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-24T21:39:01",
+    "mesaj": "⚠️ ALTYAPI-ADMIN-PANO-01 ([ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)) — utku 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-SECRETS-SETUP-01",
+    "gorev_basligi": "[ALTYAPI] Vault kurup .env template yaz → .env.example (2s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-24T21:44:01",
+    "mesaj": "⚠️ ALTYAPI-SECRETS-SETUP-01 ([ALTYAPI] Vault kurup .env template yaz → .env.example (2s)) — utku 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-DB-MIGRATION-01",
+    "gorev_basligi": "[ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-24T21:44:01",
+    "mesaj": "⚠️ ALTYAPI-DB-MIGRATION-01 ([ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)) — utku 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-ADMIN-PANO-01",
+    "gorev_basligi": "[ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-24T21:44:01",
+    "mesaj": "⚠️ ALTYAPI-ADMIN-PANO-01 ([ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)) — utku 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-SECRETS-SETUP-01",
+    "gorev_basligi": "[ALTYAPI] Vault kurup .env template yaz → .env.example (2s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-24T21:49:01",
+    "mesaj": "⚠️ ALTYAPI-SECRETS-SETUP-01 ([ALTYAPI] Vault kurup .env template yaz → .env.example (2s)) — utku 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-DB-MIGRATION-01",
+    "gorev_basligi": "[ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-24T21:49:01",
+    "mesaj": "⚠️ ALTYAPI-DB-MIGRATION-01 ([ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)) — utku 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-ADMIN-PANO-01",
+    "gorev_basligi": "[ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-24T21:49:01",
+    "mesaj": "⚠️ ALTYAPI-ADMIN-PANO-01 ([ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)) — utku 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-SECRETS-SETUP-01",
+    "gorev_basligi": "[ALTYAPI] Vault kurup .env template yaz → .env.example (2s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-24T21:54:01",
+    "mesaj": "⚠️ ALTYAPI-SECRETS-SETUP-01 ([ALTYAPI] Vault kurup .env template yaz → .env.example (2s)) — utku 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-DB-MIGRATION-01",
+    "gorev_basligi": "[ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-24T21:54:01",
+    "mesaj": "⚠️ ALTYAPI-DB-MIGRATION-01 ([ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)) — utku 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-ADMIN-PANO-01",
+    "gorev_basligi": "[ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-24T21:54:01",
+    "mesaj": "⚠️ ALTYAPI-ADMIN-PANO-01 ([ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)) — utku 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-SECRETS-SETUP-01",
+    "gorev_basligi": "[ALTYAPI] Vault kurup .env template yaz → .env.example (2s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-24T21:59:01",
+    "mesaj": "⚠️ ALTYAPI-SECRETS-SETUP-01 ([ALTYAPI] Vault kurup .env template yaz → .env.example (2s)) — utku 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-DB-MIGRATION-01",
+    "gorev_basligi": "[ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-24T21:59:01",
+    "mesaj": "⚠️ ALTYAPI-DB-MIGRATION-01 ([ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)) — utku 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-ADMIN-PANO-01",
+    "gorev_basligi": "[ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-24T21:59:01",
+    "mesaj": "⚠️ ALTYAPI-ADMIN-PANO-01 ([ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)) — utku 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-DB-MIGRATION-01",
+    "gorev_basligi": "[ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-24T22:04:02",
+    "mesaj": "⚠️ ALTYAPI-DB-MIGRATION-01 ([ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)) — utku 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-ADMIN-PANO-01",
+    "gorev_basligi": "[ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-24T22:04:02",
+    "mesaj": "⚠️ ALTYAPI-ADMIN-PANO-01 ([ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)) — utku 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "ALTYAPI-ADMIN-PANO-01",
+    "gorev_basligi": "[ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-24T22:09:02",
+    "mesaj": "⚠️ ALTYAPI-ADMIN-PANO-01 ([ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)) — utku 9. kez uyarıldı; henüz başlamadı."
+  }
+]

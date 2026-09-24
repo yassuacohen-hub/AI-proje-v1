@@ -53,6 +53,28 @@ _QUALITY_FIELDS: dict[str, str] = {
 
 _RISK_ESIGI = 30  # Kalite riski (QS < 30) eşiği
 
+# UI-ADMIN-ARAMA-BOSLUK-20: İçerik Boşluk Raporu (sonuçsuz arama analizi)
+_BOSLUK_MIN_FREKANS = 3  # Sonuçsuz arama eşiği (modül sabiti, sihirli sayı yok)
+
+def _terim_normalize(terim: str) -> str:
+    """Arama terimini normalize et: strip + lower + çoklu boşluk tekilleştirme.
+    
+    >>> _terim_normalize("  ERP  Yazılım ")
+    'erp yazılım'
+    >>> _terim_normalize("erp yazılım")
+    'erp yazılım'
+    >>> _terim_normalize("  ERP   Yazılım  ")
+    'erp yazılım'
+    >>> _terim_normalize("")
+    ''
+    >>> _terim_normalize(None)
+    ''
+    """
+    if not terim:
+        return ""
+    # strip + lower + çoklu boşluğu tek boşluğa indir
+    return " ".join(terim.strip().lower().split())
+
 # PO-BACK-11: sources + source_records üzerinden kaynak bazlı çekiş istatistiği
 _SOURCE_RELIABILITY_SQL = """
     SELECT s.source_id, s.source_name,
@@ -276,6 +298,76 @@ def load_risky_companies(limit: int = 100) -> pd.DataFrame:
     return pd.DataFrame(columns=["Firma ID", "Unvan", "Ticari Ad", "Kalite Skoru", "Eksik Alanlar"])
 
 
+@st.cache_data(ttl=60)
+def load_icerik_bosluk() -> pd.DataFrame:
+    """UI-ADMIN-ARAMA-BOSLUK-20: İçerik Boşluk Raporu — Sonuçsuz arama frekans analizi.
+    
+    user_activity_log tablosundan olay_tipi='arama' AND basarili=FALSE olan kayıtları
+    son 30 günde çeker, terimleri normalize edip frekans sayar, eşik >=3 uygular.
+    
+    Returns:
+        pd.DataFrame: terim, frekans, ilk_gorulme, son_gorulme kolonları.
+        Tablo/veri yoksa boş DataFrame döner (rozet kontrolü üst katmanda).
+    """
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            # Tablo var mı kontrolü
+            if not _db_yardim.tablo_var_mi(conn, "user_activity_log"):
+                return pd.DataFrame(columns=["terim", "frekans", "ilk_gorulme", "son_gorulme"])
+            
+            rows = conn.execute(text("""
+                SELECT 
+                    detay->>'terim' as ham_terim,
+                    olay_zamani::date as olay_tarih
+                FROM user_activity_log
+                WHERE olay_tipi = 'arama'
+                  AND basarili = FALSE
+                  AND olay_zamani >= (CURRENT_DATE - INTERVAL '30 days')
+                  AND detay IS NOT NULL
+                  AND detay->>'terim' IS NOT NULL
+            """)).mappings().all()
+            
+            if not rows:
+                return pd.DataFrame(columns=["terim", "frekans", "ilk_gorulme", "son_gorulme"])
+            
+            # DataFrame'e çevir ve normalize et
+            df = pd.DataFrame([dict(r) for r in rows])
+            df["terim"] = df["ham_terim"].apply(_terim_normalize)
+            
+            # Boş normalize edilmiş terimleri at
+            df = df[df["terim"] != ""]
+            
+            if df.empty:
+                return pd.DataFrame(columns=["terim", "frekans", "ilk_gorulme", "son_gorulme"])
+            
+            # Grupla ve say
+            grouped = df.groupby("terim").agg(
+                frekans=("ham_terim", "count"),
+                ilk_gorulme=("olay_tarih", "min"),
+                son_gorulme=("olay_tarih", "max"),
+            ).reset_index()
+            
+            # Eşik uygula
+            grouped = grouped[grouped["frekans"] >= _BOSLUK_MIN_FREKANS]
+            
+            if grouped.empty:
+                return pd.DataFrame(columns=["terim", "frekans", "ilk_gorulme", "son_gorulme"])
+            
+            # Sırala: frekans azalan
+            grouped = grouped.sort_values("frekans", ascending=False)
+            
+            # Tarih formatı
+            grouped["ilk_gorulme"] = grouped["ilk_gorulme"].apply(lambda x: x.strftime("%Y-%m-%d"))
+            grouped["son_gorulme"] = grouped["son_gorulme"].apply(lambda x: x.strftime("%Y-%m-%d"))
+            
+            return grouped[["terim", "frekans", "ilk_gorulme", "son_gorulme"]]
+    
+    except Exception as exc:
+        _admin_quality_logger.warning("İçerik boşluk raporu yüklenemedi", exc)
+        return pd.DataFrame(columns=["terim", "frekans", "ilk_gorulme", "son_gorulme"])
+
+
 def generate_improvement_suggestions(
     missing_df: pd.DataFrame, overview: dict[str, Any]
 ) -> list[dict[str, str]]:
@@ -405,6 +497,51 @@ def load_source_reliability() -> list[dict[str, Any]]:
         return []
 
 
+def _render_icerik_bosluk() -> None:
+    """UI-ADMIN-ARAMA-BOSLUK-20: İçerik Boşluk Raporu — Sonuçsuz arama frekans analizi."""
+    st.subheader("🔍 İçerik Boşluk Raporu (Sonuçsuz Aramalar)")
+    st.caption(
+        "Son 30 günde sonuç vermeyen aramalar (basarili=FALSE). "
+        f"Terimler normalize edilip (strip+lower+boşluk tekilleştirme) "
+        f"frekansa göre gruplandırıldı. Eşik: >= {_BOSLUK_MIN_FREKANS} tekrar."
+    )
+    
+    bosluk_df = load_icerik_bosluk()
+    
+    # _db_yardim.tablo_var_mi pattern: tablo/veri yoksa rozet göster
+    if bosluk_df.empty:
+        st.warning("⚠️ Veri kaynağı yok — user_activity_log tablosu bulunamadı veya sonuçsuz arama kaydı yok.")
+        return
+    
+    # Metrik kartları
+    c1, c2, c3 = st.columns(3)
+    with c1:
+        st.metric("📋 Farklı Terim Sayısı", len(bosluk_df))
+    with c2:
+        st.metric("🔁 Toplam Sonuçsuz Arama", int(bosluk_df["frekans"].sum()))
+    with c3:
+        st.metric("📊 Eşik", f">= {_BOSLUK_MIN_FREKANS}")
+    
+    # Tablo
+    display_df = bosluk_df.rename(columns={
+        "terim": "Arama Terimi",
+        "frekans": "Frekans",
+        "ilk_gorulme": "İlk Görülme",
+        "son_gorulme": "Son Görülme",
+    })
+    st.dataframe(display_df, width="stretch", hide_index=True)
+    
+    # İndirme butonu
+    csv = bosluk_df.to_csv(index=False).encode("utf-8")
+    st.download_button(
+        label="📥 CSV İndir",
+        data=csv,
+        file_name=f"icerik_bosluk_raporu_{datetime.now().strftime('%Y%m%d')}.csv",
+        mime="text/csv",
+        key="icerik_bosluk_download",
+    )
+
+
 def _render_kaynak_guvenilirlik() -> None:
     """PO-BACK-11: Kaynak tablosu + eşik altı uyarı kartı."""
     kaynaklar = load_source_reliability()
@@ -500,6 +637,9 @@ def render_quality_tab() -> None:
     st.divider()
     st.subheader("🛰️ Kaynak Güvenilirliği")
     _render_kaynak_guvenilirlik()
+
+    st.divider()
+    _render_icerik_bosluk()
 
     st.divider()
     st.subheader(f"🚨 Kalite Riski Filtreleme (QS < {_RISK_ESIGI})")

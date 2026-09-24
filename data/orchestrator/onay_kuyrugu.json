@@ -2429,5 +2429,108 @@
     "durum": "onaylandi",
     "onaylayan": "orkestrator",
     "onay_tarihi": "2026-09-24T19:25:07"
+  },
+  {
+    "task_id": "ORKESTRA-AI-CHAT-KOORDINASYON-01",
+    "ajan": "ihsan",
+    "ozet": "SISTEM_PROMPT güncellendi (ajan-ajan iletişim kuralı + koordinasyon protokolü). ajan_chat_koordinasyon.py library yazıldı (sorun_ac, sorun_devret, koordinasyon_ozeti). test_ai_chat_koordinasyon.py oluşturuldu (2-way linklemesi, auto-kapatış testleri). AJAN_ARASI_ILETISIM.md dokumentasyonu tamamlandı (protokol, senaryo, escalation kuralları). Tüm testler geçti.",
+    "ciktilar": [
+      "src/company_master/ai_chat.py",
+      "src/company_master/ajan_chat_koordinasyon.py",
+      "tests/test_ai_chat_koordinasyon.py",
+      "docs/AJAN_ARASI_ILETISIM.md"
+    ],
+    "teslim_tarihi": "2026-09-24T22:02:11",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-24T22:02:28"
+  },
+  {
+    "task_id": "ALTYAPI-SECRETS-SETUP-01",
+    "ajan": "utku",
+    "ozet": "Credential vault kuruldu: .env.example (repo), .env.vault (local), scripts/rotate_secrets.py (90 gun rotasyon), tests/test_secrets_rotation.py (6 test), scripts/config_test.py (key dogrulama + redaction kontrolu). Tum testler gecti, kodlama denetimi temiz.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T22:06:47",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-DB-MIGRATION-01",
+    "ajan": "utku",
+    "ozet": "Migration altyapisi hazirlandi: scripts/db_migrate.py (staging/prod runner), 0017_user_activity_log.down.sql (rollback), scripts/db_migrate_prod.sh (prod runbook + backup + monitoring), monitoring/alertmanager/migration_rules.yml (AlertManager kuralari), tests/test_db_migration.py (6 test gecti). Staging test ve rollback plani dokumante edildi.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T22:11:50",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "TEST-BLOKE-FAKTOR-ARASTIRMA-01",
+    "ajan": "yasu",
+    "ozet": "5 gorev test hazirligi arastirildi. API-14 baslayabilir (VERI-13 done), API-16/UI-20/API-21 paralel test prep hazir. API-21 icin admin_audit.py orta risk. UI-22 girdi mevcut. 5 test skeleton olusturuldu. test_bloke_hazirlik.py olusturuldu. Rapor ve bulgular olusturuldu.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T22:11:53",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-ADMIN-PANO-01",
+    "ajan": "utku",
+    "ozet": "Task board gecerel zamanli gorusumu hazirlandi: render_task_board_tab() (web_dashboard/tabs/admin_panel.py), 4 bolum (Tamamlandi/Beklemede/Yedek/Degerlendirme), filtreleme (ajan/aciliyet/tarih), renk kodlamasi, ozet metrikler. tests/test_admin_pano_board_view.py (7 test gecti), docs/ADMIN_PANO_BOARD_VIEW.md dokumantasyon.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T22:15:47",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "DOC-ADMIN-DURUM-SENKRON-15",
+    "ajan": "ihsan",
+    "ozet": "D-197 tek-durum ayrıştırması: §2 sayaca çevrildi, §8.4 durum etiketleri kaldırıldı, §7 tek kaynağı olarak işaretlendi. Rapor: DOC-ADMIN-DURUM-SENKRON-15_rapor_2026-09-24_orkestrator.md",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T22:46:35",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "API-ADMIN-AKTIVITE-YAZ-14",
+    "ajan": "utku",
+    "ozet": "Aktivite log yazimi tamamlandi: aktivite_yaz() yardimci fonksiyonu (web_app.py:1825), giris endpointine (2273, 2295), arama endpointine (819) eklendi. Tum 5 test gecti. K1, K9, G4 girdisi hazir.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T22:47:57",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "API-ADMIN-CHURN-3SINYAL-16",
+    "ajan": "utku",
+    "ozet": "Churn 3 sinyalli formulu hazirlandi: risk_etiketi_3sinyal (churn.py) + musteri_yonetimi.py SQL guncellendi (son_arama/son_ai subquery). Eski risk_etiketi geriye donuk uyumlu kaldi. Doctest 14/14, pytest 2/2 gecti.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T22:52:09",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-ADMIN-ARAMA-BOSLUK-20",
+    "ajan": "utku",
+    "ozet": "Icerik bosluk raporu hazirlandi: _terim_normalize (admin_quality.py) + load_icerik_bosluk (user_activity_log -> normalize -> frekans >=3) + _render_icerik_bosluk (rozet + tablo + CSV indirme). _db_yardim.tablo_var_mi kontrolu ile veri yok rozeti. Doctest 5/5 + pytest 4/4 gecti.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T22:56:58",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "API-ADMIN-SUPHELI-AKTIVITE-21",
+    "ajan": "utku",
+    "ozet": "Supheli aktivite 3 kural hazirlandi: admin_audit.py (supheli_basarisiz_giris, supheli_cok_ulkeli_ip, supheli_gece_toplu_export, supheli_skor, supheli_etiket). Saf fonksiyonlar (DB erisimi yok). Doctest 37/37 + pytest 4/4 gecti. Otomatik kilitleme/bildirim kapsam disi.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T23:09:01",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-ADMIN-UPSELL-22",
+    "ajan": "utku",
+    "ozet": "Upsell aday listesi hazirlandi: musteri_yonetimi.py (_doygunluk_hesapla, _buyume_hesapla, _upsell_adaylari_yukle, _render_upsell_adaylari). 3 kosul AND: doygunluk>=%85 + churn∈{Yok,Düşük} + buyume>0. Tier kota mapping, enterprise haric. _db_yardim.tablo_var_mi rozet. Test: test_ui_upsell.py 2/2 gecti.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T23:17:19",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "DOC-ADMIN-V9-KUTUCUK-24",
+    "ajan": "utku",
+    "ozet": "V9 §16.5 kutucuk formatı düzeltildi: tablo yerine 6 madde bullet listesi (Dashboard KPI, Webhook Monitor, AI Cost, Veri Kalitesi, API Analytics, Sistem Performansı). Her madde - ile başlıyor, tek paragraf, madde arası tek boş satır. Kodlama denetimi temiz.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T23:42:22",
+    "durum": "bekliyor"
   }
 ]

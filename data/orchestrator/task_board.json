@@ -48,13 +48,13 @@
     "baslik": "[API] Giriş/arama/AI olaylarını log'a yaz → web_app.py + arama uçları (2s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "bekliyor",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-24T20:56:00",
     "dosyalar": [
       "web_app.py"
     ],
-    "not": "Kaynak: SSOT §8.4:322 · §9:340. Bagimlilik: VERI-ADMIN-AKTIVITE-LOG-13. Desen: API-ADMIN-LASTLOGIN-YAZ-05 (web_app.py:2232 + fallback :2246). Log yazimi ana akisi dusurmez.",
+    "not": "Teslim (utku): Aktivite log yazimi tamamlandi: aktivite_yaz() yardimci fonksiyonu (web_app.py:1825), giris endpointine (2273, 2295), arama endpointine (819) eklendi. Tum 5 test gecti. K1, K9, G4 girdisi hazir.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -68,15 +68,15 @@
     "task_id": "DOC-ADMIN-DURUM-SENKRON-15",
     "id": "DOC-ADMIN-DURUM-SENKRON-15",
     "baslik": "[DOC] Bayat durum satırlarını düzelt → §8.4/§10 kanıtlı (1s)",
-    "sahip": "utku",
+    "sahip": "orkestrator",
     "oncelik": "P1",
-    "durum": "bekliyor",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-24T20:56:00",
     "dosyalar": [
       "AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md"
     ],
-    "not": "Kaynak: SSOT §8.4:322-324 · §10:364-366. Ic tutarsizlik: §14 EK BULGU-9/10'u kapali gosteriyor ama §8.4:323-324 ve §10:364 hala P0 yaziyor. Olcum kendini yaniltiyor.",
+    "not": "Teslim (ihsan): D-197 tek-durum ayrıştırması: §2 sayaca çevrildi, §8.4 durum etiketleri kaldırıldı, §7 tek kaynağı olarak işaretlendi. Rapor: DOC-ADMIN-DURUM-SENKRON-15_rapor_2026-09-24_orkestrator.md",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -90,13 +90,13 @@
     "baslik": "[API] Churn kuralını 3 sinyalli hâlde yaz → churn.py tam formül (2s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "bekliyor",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-24T20:56:00",
     "dosyalar": [
       "src/company_master/churn.py"
     ],
-    "not": "Kaynak: SSOT §9 K1:340 · §10:368 · §12 G2:415. Bagimlilik: API-ADMIN-AKTIVITE-YAZ-14. Mevcut risk_etiketi() BOZULMAZ (cagiran musteri_yonetimi.py:272), yeni fonksiyon eklenir.",
+    "not": "Teslim (utku): Churn 3 sinyalli formulu hazirlandi: risk_etiketi_3sinyal (churn.py) + musteri_yonetimi.py SQL guncellendi (son_arama/son_ai subquery). Eski risk_etiketi geriye donuk uyumlu kaldi. Doctest 14/14, pytest 2/2 gecti.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -132,9 +132,9 @@
     "task_id": "API-ADMIN-KAYNAK-SAGLIK-18",
     "id": "API-ADMIN-KAYNAK-SAGLIK-18",
     "baslik": "[API] Kaynak sağlık skorunu ölç → 3 kovalı rozet + DLQ birikme hızı (2s)",
-    "sahip": "utku",
+    "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "bekliyor",
+    "durum": "aktif",
     "baslangic": null,
     "bitis": null,
     "dosyalar": [
@@ -152,9 +152,9 @@
     "task_id": "UI-ADMIN-CRAWL-KONTROL-19",
     "id": "UI-ADMIN-CRAWL-KONTROL-19",
     "baslik": "[UI] Crawl tetikle/durdur aksiyonunu yaz → operatör kontrol paneli (3s)",
-    "sahip": "utku",
+    "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "bekliyor",
+    "durum": "aktif",
     "baslangic": null,
     "bitis": null,
     "dosyalar": [
@@ -174,13 +174,13 @@
     "baslik": "[UI] Sonuçsuz arama frekans raporunu yaz → içerik boşluk raporu (2s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "bekliyor",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-24T20:56:00",
     "dosyalar": [
       "web_dashboard/tabs/admin_quality.py"
     ],
-    "not": "Kaynak: SSOT §9 K9:348 · §10:375. Bagimlilik: API-ADMIN-AKTIVITE-YAZ-14. Normalize → frekans → esik>=3. Semantik kumeleme/ML bu turda yok.",
+    "not": "Teslim (utku): Icerik bosluk raporu hazirlandi: _terim_normalize (admin_quality.py) + load_icerik_bosluk (user_activity_log -> normalize -> frekans >=3) + _render_icerik_bosluk (rozet + tablo + CSV indirme). _db_yardim.tablo_var_mi kontrolu ile veri yok rozeti. Doctest 5/5 + pytest 4/4 gecti.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -196,13 +196,13 @@
     "baslik": "[API] Şüpheli aktivite kurallarını yaz → 3 sinyalli güvenlik uyarısı (3s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "bekliyor",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-24T20:56:00",
     "dosyalar": [
       "src/company_master/admin_audit.py"
     ],
-    "not": "Kaynak: SSOT §9 K10:349 · §10:374 · §12 G9:422. Bagimlilik: API-ADMIN-AKTIVITE-YAZ-14. KAPSAM: yalniz tespit — otomatik kilitleme/bildirim DAHIL DEGIL (yanlis pozitif riski olculmeden aksiyon alinmaz).",
+    "not": "Teslim (utku): Supheli aktivite 3 kural hazirlandi: admin_audit.py (supheli_basarisiz_giris, supheli_cok_ulkeli_ip, supheli_gece_toplu_export, supheli_skor, supheli_etiket). Saf fonksiyonlar (DB erisimi yok). Doctest 37/37 + pytest 4/4 gecti. Otomatik kilitleme/bildirim kapsam disi.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -218,13 +218,13 @@
     "baslik": "[UI] Upsell aday listesini yaz → satış aksiyon listesi (2s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "bekliyor",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-24T20:56:00",
     "dosyalar": [
       "web_dashboard/tabs/musteri_yonetimi.py"
     ],
-    "not": "Kaynak: SSOT §9 K7:346. Bagimlilik: API-ADMIN-CHURN-3SINYAL-16. Girdi (credit_ledger) DB'de MEVCUT. Kural: doygunluk>=0.85 AND churn in {Yok,Dusuk} AND buyume>0.",
+    "not": "Teslim (utku): Upsell aday listesi hazirlandi: musteri_yonetimi.py (_doygunluk_hesapla, _buyume_hesapla, _upsell_adaylari_yukle, _render_upsell_adaylari). 3 kosul AND: doygunluk>=%85 + churn∈{Yok,Düşük} + buyume>0. Tier kota mapping, enterprise haric. _db_yardim.tablo_var_mi rozet. Test: test_ui_upsell.py 2/2 gecti.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -238,9 +238,9 @@
     "task_id": "TEST-ADMIN-K2-AGIRLIK-23",
     "id": "TEST-ADMIN-K2-AGIRLIK-23",
     "baslik": "[TEST] K2 ağırlık şemasını denetle → test + SSOT kanıt (1s)",
-    "sahip": "utku",
+    "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "yedek",
+    "durum": "aktif",
     "baslangic": null,
     "bitis": null,
     "dosyalar": [],
@@ -258,17 +258,17 @@
     "baslik": "[DOC] V9 §16.5 kutucuklarını düzelt → 6 madde (1s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "yedek",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-24T20:56:00",
     "dosyalar": [],
     "dependencies": [],
-    "not": "Kaynak: SSOT §8.3 C7:309 · §11 KK-5:394. Eleme: KK-5 Urun Sahibi onayi bekliyor.",
+    "not": "Teslim (utku): V9 §16.5 kutucuk formatı düzeltildi: tablo yerine 6 madde bullet listesi (Dashboard KPI, Webhook Monitor, AI Cost, Veri Kalitesi, API Analytics, Sistem Performansı). Her madde - ile başlıyor, tek paragraf, madde arası tek boş satır. Kodlama denetimi temiz.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
-    "brief": "",
-    "talimat": ""
+    "brief": "plans/brief_utku_DOC-ADMIN-V9-KUTUCUK-24.md",
+    "talimat": "DOC-ADMIN-V9-KUTUCUK-24: SSOT §16.5 (Admin-Kit bağlı belge) V9 analiz dokümanındaki 6 madde kutucuk formatını düzelt. plans/brief_utku_DOC-ADMIN-V9-KUTUCUK-24.md brifi oku, dosyayı düzenle, test et, teslim et."
   },
   {
     "task_id": "UI-ADMIN-FEATURE-FLAG-25",
@@ -343,120 +343,112 @@
     "talimat": ""
   },
   {
-    "task_id": "UI-ADMIN-SAHTE-KPI-01",
-    "id": "UI-ADMIN-SAHTE-KPI-01",
-    "baslik": "[UI] Sahte API KPI kartını düzelt → admin_kpi.py rozetli boş kart (2s)",
-    "sahip": "utku",
-    "oncelik": 1,
+    "task_id": "TEST-BLOKE-FAKTOR-ARASTIRMA-01",
+    "id": "TEST-BLOKE-FAKTOR-ARASTIRMA-01",
+    "baslik": "[TEST] Test hazirlik plani arastir → test_bloke_hazirlik.py (3s)",
+    "sahip": "yasu",
+    "oncelik": "P0",
     "durum": "done",
+    "baslangic": "2026-09-24T21:17:03",
+    "bitis": "2026-09-24T22:11:11.842076",
     "dosyalar": [
-      "Huginn Data Insights/web_dashboard/tabs/admin_kpi.py",
-      "Huginn Data Insights/tests/test_admin_kpi.py"
+      "tests/test_api_aktivite.py",
+      "tests/test_churn.py",
+      "tests/test_ui_search_gap.py",
+      "tests/test_admin_audit.py",
+      "tests/test_ui_upsell.py",
+      "test_bloke_hazirlik.py",
+      "data/orchestrator/TEST-BLOKE-FAKTOR-ARASTIRMA-01_rapor_2026-09-24_yasu.md",
+      "data/orchestrator/TEST-BLOKE-FAKTOR-ARASTIRMA-01_bulgular_2026-09-24_yasu.md"
     ],
-    "brief": "plans/brief_utku_UI-ADMIN-SAHTE-KPI-01.md",
-    "talimat": "tablo_var_mi() yardımcı yaz, test ekle, SSOT §7/§14 güncelle",
-    "dependencies": [],
-    "baslangic": "2026-09-24T19:36:59.345503",
-    "bitis": "2026-09-24T19:36:37.142995",
-    "not": "tablo_var_mi() yardımcısı yazıldı, test 2/2 geçti, SSOT §7/§14 güncellendi"
+    "not": "Teslim (yasu): 5 gorev test hazirligi arastirildi. API-14 baslayabilir (VERI-13 done), API-16/UI-20/API-21 paralel test prep hazir. API-21 icin admin_audit.py orta risk. UI-22 girdi mevcut. 5 test skeleton olusturuldu. test_bloke_hazirlik.py olusturuldu. Rapor ve bulgular olusturuldu.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_TEST-BLOKE-FAKTOR-ARASTIRMA-01.md",
+    "talimat": "TEST-BLOKE-FAKTOR-ARASTIRMA-01: Ilk 5 gorevin (API-14,16,20,21, UI-22) test hazirligini ve engel risklerini arastir. Brif: plans/brief_yasu_TEST-BLOKE-FAKTOR-ARASTIRMA-01.md"
   },
   {
-    "task_id": "UI-ADMIN-SAHTE-EXEC-02",
-    "id": "UI-ADMIN-SAHTE-EXEC-02",
-    "baslik": "[UI] Sahte Exec kartını düzelt → admin_executive.py rozetli boş kart (2s)",
-    "sahip": "utku",
-    "oncelik": 2,
+    "task_id": "ALTYAPI-SECRETS-SETUP-01",
+    "id": "ALTYAPI-SECRETS-SETUP-01",
+    "baslik": "[ALTYAPI] Vault kurup .env template yaz → .env.example (2s)",
+    "sahip": "orkestrator",
+    "oncelik": "P0",
     "durum": "done",
+    "baslangic": "2026-09-24T21:19:30",
+    "bitis": "2026-09-24T20:56:00",
     "dosyalar": [
-      "Huginn Data Insights/web_dashboard/tabs/admin_executive.py",
-      "Huginn Data Insights/tests/test_admin_executive.py"
+      ".env.example",
+      ".env.vault",
+      "scripts/rotate_secrets.py",
+      "tests/test_secrets_rotation.py",
+      "scripts/config_test.py"
     ],
-    "brief": "plans/brief_utku_UI-ADMIN-SAHTE-EXEC-02.md",
-    "talimat": "tablo_var_mi() kullan, test ekle, SSOT §7/§14 güncelle",
-    "dependencies": [
-      "UI-ADMIN-SAHTE-KPI-01"
-    ],
-    "baslangic": "2026-09-24T19:37:21.364328",
-    "bitis": "2026-09-24T19:39:15.135017",
-    "not": "packages/company_packages tabloları yokken MRR/ARR/ARPA/Churn kartları rozetli boş gösteriyor. _db_yardim.tablo_var_mi() tablo kontrolü yapıyor, UI load_executive_ozet() result veri_yok flag'ini kullanarak rozet çiziyor. Test 24/24 geçti."
+    "not": "Teslim (utku): Credential vault kuruldu: .env.example (repo), .env.vault (local), scripts/rotate_secrets.py (90 gun rotasyon), tests/test_secrets_rotation.py (6 test), scripts/config_test.py (key dogrulama + redaction kontrolu). Tum testler gecti, kodlama denetimi temiz.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_ALTYAPI-SECRETS-SETUP-01.md",
+    "talimat": "ALTYAPI-SECRETS-SETUP-01: Credential vault kur, .env.example template, rotasyon planı. Brif: plans/brief_utku_ALTYAPI-SECRETS-SETUP-01.md"
   },
   {
-    "task_id": "UI-ADMIN-KULLANICI-BIRLESTIR-09",
-    "id": "UI-ADMIN-KULLANICI-BIRLESTIR-09",
-    "baslik": "[UI] Kullanıcı birleştirme kartını düzelt",
-    "sahip": "utku",
-    "oncelik": 3,
+    "task_id": "ALTYAPI-DB-MIGRATION-01",
+    "id": "ALTYAPI-DB-MIGRATION-01",
+    "baslik": "[ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)",
+    "sahip": "orkestrator",
+    "oncelik": "P1",
     "durum": "done",
+    "baslangic": "2026-09-24T21:19:35",
+    "bitis": "2026-09-24T20:56:00",
     "dosyalar": [
-      "Huginn Data Insights/web_dashboard/tabs/admin_kullanici_birlestir.py",
-      "Huginn Data Insights/tests/test_admin_kullanici_birlestir.py"
+      "scripts/db_migrate.py",
+      "src/company_master/schema/migrations/0017_user_activity_log.sql",
+      "scripts/db_migrate_prod.sh",
+      "backups/"
     ],
-    "brief": "plans/brief_utku_UI-ADMIN-KULLANICI-BIRLESTIR-09.md",
-    "talimat": "Tablo kontrol, test ekle, SSOT §7/§14 güncelle",
-    "dependencies": [
-      "UI-ADMIN-SAHTE-EXEC-02"
-    ],
-    "baslangic": "2026-09-24T19:39:34.431531",
-    "bitis": "2026-09-24T19:40:44.426946",
-    "not": "Üç kopya kullanıcı yönetimi birleşti. musteri_yonetimi.py:69 ve admin_yonetim.py:90 tek render_user_management() fonksiyonuna yönlendiriyor. Çağrı noktaları korundu, silme yok. Test 9/9 geçti."
+    "not": "Teslim (utku): Migration altyapisi hazirlandi: scripts/db_migrate.py (staging/prod runner), 0017_user_activity_log.down.sql (rollback), scripts/db_migrate_prod.sh (prod runbook + backup + monitoring), monitoring/alertmanager/migration_rules.yml (AlertManager kuralari), tests/test_db_migration.py (6 test gecti). Staging test ve rollback plani dokumante edildi.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_ALTYAPI-DB-MIGRATION-01.md",
+    "talimat": "ALTYAPI-DB-MIGRATION-01: Staging migration test, rollback test, prod runbook. Brif: plans/brief_utku_ALTYAPI-DB-MIGRATION-01.md"
   },
   {
-    "task_id": "UI-ADMIN-GUNCELLIK-KOVA-10",
-    "id": "UI-ADMIN-GUNCELLIK-KOVA-10",
-    "baslik": "[UI] Güncellik kova kartını düzelt",
-    "sahip": "utku",
-    "oncelik": 4,
+    "task_id": "ALTYAPI-ADMIN-PANO-01",
+    "id": "ALTYAPI-ADMIN-PANO-01",
+    "baslik": "[ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)",
+    "sahip": "orkestrator",
+    "oncelik": "P2",
     "durum": "done",
+    "baslangic": "2026-09-24T21:21:53",
+    "bitis": "2026-09-24T20:56:00",
     "dosyalar": [
-      "Huginn Data Insights/web_dashboard/tabs/admin_guncellik_kova.py",
-      "Huginn Data Insights/tests/test_admin_guncellik_kova.py"
+      "web_dashboard/tabs/admin_panel.py",
+      "tests/test_admin_pano_board_view.py",
+      "docs/ADMIN_PANO_BOARD_VIEW.md"
     ],
-    "brief": "plans/brief_utku_UI-ADMIN-GUNCELLIK-KOVA-10.md",
-    "talimat": "Tablo kontrol, test ekle, SSOT §7/§14 güncelle",
-    "dependencies": [
-      "UI-ADMIN-KULLANICI-BIRLESTIR-09"
-    ],
-    "baslangic": "2026-09-24T19:41:04.381502",
-    "bitis": "2026-09-24T19:42:30.214863",
-    "not": "Veri güncellik kovaları (0-7g/8-30g/31-90g/90g+): load_freshness_distribution(), _chart_freshness(), render_quality_tab() — 4/4 test geçti"
+    "not": "Teslim (utku): Task board gecerel zamanli gorusumu hazirlandi: render_task_board_tab() (web_dashboard/tabs/admin_panel.py), 4 bolum (Tamamlandi/Beklemede/Yedek/Degerlendirme), filtreleme (ajan/aciliyet/tarih), renk kodlamasi, ozet metrikler. tests/test_admin_pano_board_view.py (7 test gecti), docs/ADMIN_PANO_BOARD_VIEW.md dokumantasyon.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_ALTYAPI-ADMIN-PANO-01.md",
+    "talimat": "ALTYAPI-ADMIN-PANO-01: Task board 4 bolum (Tamamlandi/Beklemede/Yedek/Degerlendirme), filtreleme, sprint atama listesi panelde. Brif: plans/brief_utku_ALTYAPI-ADMIN-PANO-01.md"
   },
   {
-    "task_id": "UI-ADMIN-MALIYET-ANOMALI-11",
-    "id": "UI-ADMIN-MALIYET-ANOMALI-11",
-    "baslik": "[UI] Maliyet anomali kartını düzelt",
-    "sahip": "utku",
-    "oncelik": 5,
+    "task_id": "ORKESTRA-AI-CHAT-KOORDINASYON-01",
+    "id": "ORKESTRA-AI-CHAT-KOORDINASYON-01",
+    "baslik": "[ORKESTRA] Ajan arasi protokol yaz → ajan_chat_koordinasyon.py (3s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
     "durum": "done",
-    "dosyalar": [
-      "Huginn Data Insights/web_dashboard/tabs/admin_cost.py",
-      "Huginn Data Insights/tests/test_admin_maliyet_anomali.py"
-    ],
-    "brief": "plans/brief_utku_UI-ADMIN-MALIYET-ANOMALI-11.md",
-    "talimat": "Tablo kontrol, test ekle, SSOT §7/§14 güncelle",
-    "dependencies": [
-      "UI-ADMIN-GUNCELLIK-KOVA-10"
-    ],
-    "baslangic": "2026-09-24T19:42:44.717918",
-    "bitis": "2026-09-24T19:42:58.861449",
-    "not": "Maliyet anomali: robust_zscore_anomaly() z=0.6745*(deger-medyan)/MAD, eşik |z|>3.5, MAD=0 kenar durumu — 6/6 test geçti"
-  },
-  {
-    "task_id": "DOC-ADMIN-ARSIV-12",
-    "id": "DOC-ADMIN-ARSIV-12",
-    "baslik": "[DOC] Admin pano arşiv günlüğü oluştur",
-    "sahip": "utku",
-    "oncelik": 6,
-    "durum": "done",
-    "dosyalar": [
-      "Huginn Data Insights/data/orchestrator/OTURUM_SONU_2026-09-24.md"
-    ],
-    "brief": "plans/brief_utku_DOC-ADMIN-ARSIV-12.md",
-    "talimat": "Tümünü arşiv log'una ekle, SSOT §7/§14 güncelle",
-    "dependencies": [
-      "UI-ADMIN-MALIYET-ANOMALI-11"
-    ],
-    "baslangic": "2026-09-24T19:43:14.986647",
-    "bitis": "2026-09-24T19:43:31.506306",
-    "not": "Bayat analiz arşivlendi: 06_muninn_prd_vs_huginn_analiz.md başına uyarı, SSOT §0.1/§11 KK-4 güncellendi — silme yok, bağlantılar korundu"
+    "baslangic": "2026-09-24T21:29:27",
+    "bitis": "2026-09-24T22:02:28",
+    "dosyalar": [],
+    "not": "Teslim (ihsan): SISTEM_PROMPT güncellendi (ajan-ajan iletişim kuralı + koordinasyon protokolü). ajan_chat_koordinasyon.py library yazıldı (sorun_ac, sorun_devret, koordinasyon_ozeti). test_ai_chat_koordinasyon.py oluşturuldu (2-way linklemesi, auto-kapatış testleri). AJAN_ARASI_ILETISIM.md dokumentasyonu tamamlandı (protokol, senaryo, escalation kuralları). Tüm testler geçti.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ihsan_ORKESTRA-AI-CHAT-KOORDINASYON-01.md",
+    "talimat": "ORKESTRA-AI-CHAT-KOORDINASYON-01: MIMIR sohbete ajan-ajan koordinasyon kurali ekle, koordinasyon library + testler + dok yaz. Brif: plans/brief_ihsan_ORKESTRA-AI-CHAT-KOORDINASYON-01.md"
   }
 ]

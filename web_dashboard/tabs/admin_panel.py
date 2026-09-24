@@ -39,16 +39,16 @@ from company_master.settings import (  # noqa: E402
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
 from company_master.chat import oku, ozet  # noqa: E402
 
-#: D-192 Faz 2 — ajan başına sabit renk (6 ajan: ihsan/utku/salih/yasu/orkestrator/mimir)
+#: D-192 Faz 2 — ajan başına sabit renk (tema uyumlu: gece/gündüz)
 _AJAN_RENKLERI: dict[str, str] = {
-    "ihsan": "#FFD6D6",
-    "utku": "#D6E4FF",
-    "salih": "#D6FFD9",
-    "yasu": "#FFF3D6",
-    "orkestrator": "#E8D6FF",
-    "mimir": "#D6FFF7",
+    "ihsan": "#FFD4D9",
+    "utku": "#D4E8FF",
+    "salih": "#D4FFD4",
+    "yasu": "#FFF5CC",
+    "orkestrator": "#E8D4FF",
+    "mimir": "#D4FFFF",
 }
-#: Önem derecesi (4 tip) → renk + etiket
+#: Önem derecesi (4 tip) → renk + etiket (tema uyumlu kontrastlı)
 _ONEM_ETIKET: dict[str, str] = {
     "kritik": "🔴 Kritik",
     "yuksek": "🟠 Yüksek",
@@ -56,23 +56,30 @@ _ONEM_ETIKET: dict[str, str] = {
     "dusuk": "🟢 Düşük",
 }
 _ONEM_RENKLERI: dict[str, str] = {
-    "kritik": "#FF4D4D",
-    "yuksek": "#FF9F40",
-    "orta": "#FFD93D",
-    "dusuk": "#6BCB77",
+    "kritik": "#E8564D",
+    "yuksek": "#F0A540",
+    "orta": "#F5D13D",
+    "dusuk": "#5FB375",
 }
 
 
 def _sohbet_tablo_stil(row: "pd.Series") -> list[str]:
-    """Ajan ve Önem Derecesi hücrelerini renklendirir (D-192 Faz 2)."""
-    stiller = [""] * len(row)
-    if "Ajan" in row.index:
-        renk = _AJAN_RENKLERI.get(str(row["_ajan_ham"]).lower(), "#EEEEEE")
-        stiller[row.index.get_loc("Ajan")] = f"background-color: {renk}"
-    if "Önem Derecesi" in row.index:
-        renk = _ONEM_RENKLERI.get(str(row["_onem_ham"]).lower(), "#EEEEEE")
-        stiller[row.index.get_loc("Önem Derecesi")] = f"background-color: {renk}; color: white"
-    return stiller
+     """Gönderen ve Alıcı hücrelerini ajan renklerine göre, Önem Derecesi'ni önem rengine göre renklendirir (D-192 Faz 2).
+     Yazı rengi tema-uyumlu: gece modda açık, gündüz modda koyu."""
+     stiller = [""] * len(row)
+     # Gönderen renklendir
+     if "Gönderen" in row.index:
+         renk = _AJAN_RENKLERI.get(str(row["_ajan_gonderici"]).lower(), "#EEEEEE")
+         stiller[row.index.get_loc("Gönderen")] = f"background-color: {renk}; color: #0a0a0a; font-weight: 900; text-shadow: 0 0 3px rgba(255,255,255,0.5)"
+     # Alıcı renklendir
+     if "Alıcı" in row.index:
+         renk = _AJAN_RENKLERI.get(str(row["_ajan_alici"]).lower(), "#EEEEEE")
+         stiller[row.index.get_loc("Alıcı")] = f"background-color: {renk}; color: #0a0a0a; font-weight: 900; text-shadow: 0 0 3px rgba(255,255,255,0.5)"
+     # Önem Derecesi renklendir
+     if "Önem Derecesi" in row.index:
+         renk = _ONEM_RENKLERI.get(str(row["_onem_ham"]).lower(), "#EEEEEE")
+         stiller[row.index.get_loc("Önem Derecesi")] = f"background-color: {renk}; color: #ffffff; font-weight: bold; text-shadow: 0 1px 3px rgba(0,0,0,0.5)"
+     return stiller
 
 _log = logging.getLogger(__name__)
 
@@ -476,7 +483,7 @@ def rapor_erisisim_denetimi(rol: str | None = None) -> bool:
 
     Args:
         rol: Kullanıcı rolü
-        
+
     Returns:
         True = rapor erişim izni var
     """
@@ -487,21 +494,21 @@ def rapor_erisisim_denetimi(rol: str | None = None) -> bool:
 
 def render_chat_summary() -> None:
     """Ajan Chat özeti: açık sorunlar, çözüm bekleniyor, çözüldü metrikler + son 3 sorun.
-    
+
     Admin panelinde KAHİN ve orkestratör sorunları takip edebilir.
     """
     PageHeader(
         "Ajan Chat Sistemi", ust_etiket="İş · Takip", ikon="💬",
         giris="Ajanlar arasında bildirilen sorunlar ve çözüm önerileri.",
     ).render()
-    
+
     # ---- Metrikler ----
     Section("Sorun Durumu Özeti", "Açık, çözüm bekleniyor ve çözüldü sayıları.", ikon="📊").render()
-    
+
     acik = ozet("acik")
     cokundurmus = ozet("cokundurmus")
     cozuldu = ozet("cozuldu")
-    
+
     col1, col2, col3 = st.columns(3)
     with col1:
         st.metric("🔴 Açık Sorunlar", len(acik))
@@ -509,51 +516,254 @@ def render_chat_summary() -> None:
         st.metric("🟡 Çözüm Bekleniyor", len(cokundurmus))
     with col3:
         st.metric("🟢 Çözüldü", len(cozuldu))
-    
+
     # ---- Son Açık Sorunlar ----
     Section("Son 3 Açık Sorun", "Ajanlar tarafından en son bildirilen açık sorunlar.", ikon="🔴").render()
-    
+
     if not acik:
         st.info("Henüz açık sorun yok.")
     else:
         son_acik = sorted(acik, key=lambda x: x.get("timestamp", ""), reverse=True)[:3]
         for i, sorun in enumerate(son_acik, 1):
-            ajan = sorun.get("kimden", "orkestrator").upper()
-            hangi_ajana = sorun.get("ajan", "?").upper()
-            onem_etiket = _ONEM_ETIKET.get(sorun.get("onem", "orta"), sorun.get("onem", "orta"))
-            with st.expander(f"**{i}. {ajan} → {hangi_ajana}** — {sorun.get('task_id', '?')} · {onem_etiket}"):
+            ajan_gonderici = sorun.get("kimden", "orkestrator").lower()
+            ajan_alici = sorun.get("ajan", "?").lower()
+            ajan_gonderici_display = ajan_gonderici.upper()
+            ajan_alici_display = ajan_alici.upper()
+            onem_ham = sorun.get("onem", "orta")
+            onem_etiket = _ONEM_ETIKET.get(onem_ham, onem_ham)
+
+            # Ajan renklerini al
+            renk_gonderici = _AJAN_RENKLERI.get(ajan_gonderici, "#EEEEEE")
+            renk_alici = _AJAN_RENKLERI.get(ajan_alici, "#EEEEEE")
+
+            baslik = f"**{i}. "
+            baslik += f":{ajan_gonderici}:** {ajan_gonderici_display} → "
+            baslik += f":{ajan_alici}:** {ajan_alici_display} · {sorun.get('task_id', '?')}"
+
+            with st.expander(baslik):
                 st.write(f"**Sorun:** {sorun.get('sorun', '')}")
                 if sorun.get("cozum"):
                     st.write(f"**İlk Çözüm Önerisi:** {sorun.get('cozum')}")
-                st.caption(f"Zaman: {sorun.get('timestamp', '')}")
-    
+                col1, col2 = st.columns([3, 1])
+                with col1:
+                    st.write(f"**Durum:** {sorun.get('durum', '—')}")
+                with col2:
+                    st.write(f"**{onem_etiket}**")
+                st.caption(f"📅 {sorun.get('timestamp', '')}")
+
     # ---- Tüm Sorunlar (Tablo) ----
     Section("Tüm Sorunlar (Tablo Görünümü)", "Filtrelenebilir sorun listesi.", ikon="📋").render()
-    
+
     tum_sorunlar = oku()
     if tum_sorunlar:
         rows = []
         for s in sorted(tum_sorunlar, key=lambda x: x.get("timestamp", ""), reverse=True):
-            ajan_ham = s.get("kimden", "orkestrator")
+            # Eski kayıtlarda kimden yoksa orkestrator kabul et
+            ajan_gonderici = s.get("kimden") or "orkestrator"
+            ajan_alici = s.get("ajan", "?")
             onem_ham = s.get("onem", "orta")
             rows.append({
-                "Ajan": ajan_ham.upper(),
-                "Hangi Ajana?": s.get("ajan", "").upper(),
+                "Gönderen": ajan_gonderici.upper(),
+                "Alıcı": ajan_alici.upper(),
                 "Görev": s.get("task_id", ""),
                 "Sorun": s.get("sorun", "")[:50],
                 "Çözüm": s.get("cozum", "")[:50] or "—",
                 "Durum": s.get("durum", ""),
                 "Önem Derecesi": _ONEM_ETIKET.get(onem_ham, onem_ham),
                 "Tarih": s.get("timestamp", "")[:16],
-                "_ajan_ham": ajan_ham,
+                "_ajan_gonderici": ajan_gonderici,
+                "_ajan_alici": ajan_alici,
                 "_onem_ham": onem_ham,
             })
         df = pd.DataFrame(rows)
-        gorunen_kolonlar = ["Ajan", "Hangi Ajana?", "Görev", "Sorun", "Çözüm", "Durum", "Önem Derecesi", "Tarih"]
+        # Sütun sırası: Gönderen-Alıcı-Önem-Görev-Sorun-Çözüm-Durum-Tarih
+        gorunen_kolonlar = ["Gönderen", "Alıcı", "Önem Derecesi", "Görev", "Sorun", "Çözüm", "Durum", "Tarih"]
+        
+        # Sütun konfigürasyonu — Gönderen/Alıcı/Önem dar, Sorun/Çözüm geniş
+        col_config = {
+            "Gönderen": st.column_config.Column(width="small"),
+            "Alıcı": st.column_config.Column(width="small"),
+            "Önem Derecesi": st.column_config.Column(width="small"),
+            "Görev": st.column_config.Column(width="small"),
+            "Sorun": st.column_config.Column(width="medium"),
+            "Çözüm": st.column_config.Column(width="medium"),
+            "Durum": st.column_config.Column(width="small"),
+            "Tarih": st.column_config.Column(width="small"),
+        }
+        
         st.dataframe(
             df.style.apply(_sohbet_tablo_stil, axis=1),
-            width="stretch", hide_index=True, column_order=gorunen_kolonlar,
+            width="stretch", hide_index=True, column_order=gorunen_kolonlar, column_config=col_config,
         )
         st.caption(f"Toplam {len(tum_sorunlar)} sorun kaydedilmiş.")
-    else:
-        st.info("Henüz sorun kaydı yok.")
+
+
+# ---------------------------------------------------------------------------
+# ALTYAPI-ADMIN-PANO-01: Task Board Gerçek Zamanlı Görünümü
+# ---------------------------------------------------------------------------
+
+# Bölüm renkleri (D-77 pano durum eşlemeleri)
+_PANO_BOLUM_RENKLERI: dict[str, str] = {
+    "tamamlandi": "#6BCB77",   # yeşil
+    "beklemede": "#FFD93D",    # sarı
+    "yedek": "#B0B0B0",        # gri
+    "degerlendirme": "#FF4D4D", # kırmızı
+}
+
+_PANO_DURUM_BOLUM: dict[str, str] = {
+    "done": "tamamlandi",
+    "aktif": "beklemede",
+    "review": "beklemede",
+    "bekliyor": "beklemede",
+    "plan": "yedek",
+    "blocked": "degerlendirme",
+    "reddet": "degerlendirme",
+    "iptal": "degerlendirme",
+    "archive": "tamamlandi",
+    "yedek": "yedek",
+}
+
+
+def _gorev_panou_yukle() -> list[dict]:
+    """Görev panosunu data/orchestrator/task_board.json'dan yükler."""
+    panoyol = _KOK / "data" / "orchestrator" / "task_board.json"
+    if panoyol.exists():
+        import json
+        return json.loads(panoyol.read_text(encoding="utf-8-sig"))
+    return []
+
+
+def _gorev_bolum_getir(durum: str) -> str:
+    """Görev durumundan bölüm adını belirler."""
+    return _PANO_DURUM_BOLUM.get(durum, "yedek")
+
+
+def render_task_board_tab() -> None:
+    """Admin panelinde görev panosunu 4 bölüm halinde gösterir (ALTYAPI-ADMIN-PANO-01).
+
+    Bölümler:
+    1. Tamamlandı — done durumu görevler
+    2. Beklemede — aktif, review, bekliyor durumu görevler
+    3. Yedek — plan durumu görevler
+    4. Değerlendirme — blocked, reddet, iptal durumu görevler (kritik + not)
+
+    Filtreleme: ajan / aciliyet / tarih aralığı
+    Renk kodlaması: bölüme göre
+    """
+    PageHeader(
+        "Görev Panosu", ust_etiket="İş · Takip", ikon="📋",
+        giris="Merkezi görev panosu — 4 bölüm: Tamamlandı / Beklemede / Yedek / Değerlendirme",
+    ).render()
+
+    # Panoyu yükle
+    tum_gorevler = _gorev_panou_yukle()
+    if not tum_gorevler:
+        st.info("Görev panosu boş.")
+        return
+
+    # ---- Filtreler ----
+    Section("Filtreler", "Görev listesini ajan, aciliyet ve tarih ile filtreleyin.", ikon="🔍").render()
+
+    ajanlar = sorted({g.get("sahip", "") for g in tum_gorevler if g.get("sahip")})
+    aciliyetler = ["P0", "P1", "P2", "P3"]
+
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        secilen_ajan = st.selectbox("Ajan", ["Hepsi"] + ajanlar, key="pano_ajan")
+    with col2:
+        secilen_aciliyet = st.selectbox("Aciliyet", ["Hepsi"] + aciliyetler, key="pano_aciliyet")
+    with col3:
+        baslangic_tarihi = st.date_input("Başlangıç", value=None, key="pano_baslangic")
+    with col4:
+        bitis_tarihi = st.date_input("Bitiş", value=None, key="pano_bitis")
+
+    # Filtreleme uygula
+    filtrelenmis = tum_gorevler
+    if secilen_ajan != "Hepsi":
+        filtrelenmis = [g for g in filtrelenmis if g.get("sahip") == secilen_ajan]
+    if secilen_aciliyet != "Hepsi":
+        filtrelenmis = [g for g in filtrelenmis if g.get("oncelik") == secilen_aciliyet]
+    if baslangic_tarihi:
+        filtrelenmis = [g for g in filtrelenmis
+                       if g.get("baslangic") and g["baslangic"][:10] >= str(baslangic_tarihi)]
+    if bitis_tarihi:
+        filtrelenmis = [g for g in filtrelenmis
+                       if g.get("bitis") and g["bitis"][:10] <= str(bitis_tarihi)]
+
+    # Bölümlere ayır
+    bolumler: dict[str, list[dict]] = {
+        "tamamlandi": [],
+        "beklemede": [],
+        "yedek": [],
+        "degerlendirme": [],
+    }
+    for g in filtrelenmis:
+        bolum = _gorev_bolum_getir(g.get("durum", ""))
+        bolumler[bolum].append(g)
+
+    # ---- 4 Bölümü Göster ----
+    bolum_bilgileri = [
+        ("tamamlandi", "✅ Tamamlandı", "done durumu görevler"),
+        ("beklemede", "⏳ Beklemede", "aktif + review + bekliyor durumu görevler"),
+        ("yedek", "📋 Yedek", "plan durumu görevler"),
+        ("degerlendirme", "🔴 Değerlendirme", "blocked + reddet + iptal durumu görevler"),
+    ]
+
+    for bolum_key, bolum_baslik, bolum_aciklama in bolum_bilgileri:
+        gorevler = bolumler[bolum_key]
+        renk = _PANO_BOLUM_RENKLERI[bolum_key]
+
+        Section(
+            f"{bolum_baslik} ({len(gorevler)})",
+            bolum_aciklama,
+            ikon="",
+        ).render()
+
+        if not gorevler:
+            st.caption("Görev yok")
+            continue
+
+        # Tablo verisi hazırla
+        rows = []
+        for g in gorevler:
+            dosyalar = g.get("dosyalar", [])
+            dosya_str = ", ".join(dosyalar[:3]) if dosyalar else "-"
+            if len(dosyalar) > 3:
+                dosya_str += f" +{len(dosyalar)-3} daha"
+
+            rows.append({
+                "Görev ID": g.get("task_id", "-"),
+                "Ajan": g.get("sahip", "-"),
+                "Başlık": g.get("baslik", "-")[:60],
+                "Aciliyet": g.get("oncelik", "-"),
+                "Durum": g.get("durum", "-"),
+                "Başlangıç": g.get("baslangic", "-")[:10] if g.get("baslangic") else "-",
+                "Bitiş": g.get("bitis", "-")[:10] if g.get("bitis") else "-",
+                "Dosyalar": dosya_str,
+                "Not": (g.get("not", "")[:50] + "...") if g.get("not") and len(g.get("not", "")) > 50 else g.get("not", "-"),
+            })
+
+        df = pd.DataFrame(rows)
+
+        # Stil fonksiyonu: satır rengini bölüme göre ayarla
+        def _bolum_stil(row: pd.Series) -> list[str]:
+            return [f"background-color: {renk}22"] * len(row)
+
+        st.dataframe(
+            df.style.apply(_bolum_stil, axis=1),
+            width="stretch", hide_index=True,
+        )
+
+    # Özet metrikler
+    st.divider()
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("✅ Tamamlandı", len(bolumler["tamamlandi"]))
+    with col2:
+        st.metric("⏳ Beklemede", len(bolumler["beklemede"]))
+    with col3:
+        st.metric("📋 Yedek", len(bolumler["yedek"]))
+    with col4:
+        st.metric("🔴 Değerlendirme", len(bolumler["degerlendirme"]))
+
+    st.caption(f"Toplam {len(filtrelenmis)} görev gösteriliyor (filtreli). Kaynak: data/orchestrator/task_board.json")

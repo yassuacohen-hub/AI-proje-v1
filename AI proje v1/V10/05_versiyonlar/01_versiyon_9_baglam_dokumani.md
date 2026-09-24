@@ -830,15 +830,12 @@ flowchart LR
 
 **MVP (Faz 1) — Durum: 2026-09-22 kod denetimiyle güncellendi (SSOT §7 İzlenebilirlik Matrisi):**
 
-| # | Modül | Durum | Kanıt (dosya:satır) |
-|---|-------|-------|---------------------|
-| 1 | **Decision Log Sekmesi** — karar defteri, searchable, audit trail | ✅ | `web_dashboard/tabs/admin_panel.py:66` |
-| 2 | **Dashboard KPI** — müşteri, API çağrısı, sinyal, sistem sağlığı | ✅ | `web_dashboard/tabs/admin_kpi.py:41,359` |
-| 3 | **Webhook Monitor** — Apify ingest health, DLQ, rate limit | ✅ | `web_dashboard/tabs/webhook_monitor.py:135` · `admin_dlq.py:87` |
-| 4 | **AI Cost Dashboard** — 9router provider maliyet kırılımı | ✅ | `web_dashboard/tabs/admin_cost.py:507` · `admin_kpi.py:210` |
-| 5 | **Veri Kalitesi Özeti** — kalite skoru dağılımı, eksik alanlar | ✅ | `web_dashboard/tabs/admin_quality.py:74,387` |
-| 6 | **API Analytics** — endpoint kullanımı, error rate, top users | ✅ | `web_dashboard/tabs/admin_api_analytics.py:91` |
-| 7 | **Sistem Performansı** — latency, cache hit, slow query, OTel | ✅ | `web_dashboard/tabs/admin_performance.py:107` |
+- **Dashboard KPI** — müşteri, API çağrısı, sinyal, sistem sağlığı ✅ `web_dashboard/tabs/admin_kpi.py:41,359`
+- **Webhook Monitor** — Apify ingest health, DLQ, rate limit ✅ `web_dashboard/tabs/webhook_monitor.py:135` · `admin_dlq.py:87`
+- **AI Cost Dashboard** — 9router provider maliyet kırılımı ✅ `web_dashboard/tabs/admin_cost.py:507` · `admin_kpi.py:210`
+- **Veri Kalitesi Özeti** — kalite skoru dağılımı, eksik alanlar ✅ `web_dashboard/tabs/admin_quality.py:74,387`
+- **API Analytics** — endpoint kullanımı, error rate, top users ✅ `web_dashboard/tabs/admin_api_analytics.py:91`
+- **Sistem Performansı** — latency, cache hit, slow query, OTel ✅ `web_dashboard/tabs/admin_performance.py:107`
 
 > Faz 1 kod tarafında kapandı; kalan boşluklar **modül varlığı değil içerik derinliği**dir
 > (churn risk skoru, DAU/MAU, tenant izolasyonu). Detay: SSOT §8 ve §10.
@@ -975,3 +972,5 @@ When improving it:
 ## Ilgili Nodlar
 
 - [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]]
+ 
+ 
