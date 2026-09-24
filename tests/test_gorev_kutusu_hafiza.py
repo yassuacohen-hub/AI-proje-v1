@@ -97,3 +97,49 @@ def test_briefsiz_gorev_varsayilan_huba_duser(tmp_path, monkeypatch):
     _kurulum(tmp_path, monkeypatch)
     assert [y.name for y in gk._hafiza_hedefleri("TEST-B14-01")] == [
         "ssot.md", "ADMIN_DASHBOARD_HUB.md"]
+
+
+# --- kontrol 8 yururluk esigi (HAFIZA_KAPISI_YURURLUK) ---------------------
+
+def _simulasyon_kur(tmp_path, monkeypatch, bitis: str) -> None:
+    """Izsiz tek kapali gorevi olan bir pano; digerleri kontroller icin bos."""
+    _kurulum(tmp_path, monkeypatch, ssot_metin="bos", hub_metin="bos")
+    pano = [{"task_id": "TEST-ESIK-01", "durum": "done", "bitis": bitis,
+             "brief": "", "dosyalar": []}]
+    monkeypatch.setattr(tb, "gorev_listesi", lambda: pano)
+    monkeypatch.setattr(tb, "arsivde_bul", lambda tid: None)
+    monkeypatch.setattr(tb, "STATE_DIR", tmp_path / "state")  # arsiv dosyasi yok
+    monkeypatch.setattr(gk, "_PLANS", tmp_path / "plans_yok")
+
+
+def _kontrol8_satiri(capsys) -> str:
+    return [s for s in capsys.readouterr().out.splitlines() if s.startswith("8.")][0]
+
+
+def test_esik_oncesi_izsiz_kapali_gorev_uyari_uretmez(tmp_path, monkeypatch, capsys):
+    """376 gecmis borc hub arsiv ozetiyle kapandi; kapi geriye donuk calismaz."""
+    _simulasyon_kur(tmp_path, monkeypatch, "2026-09-23T10:00:00")
+    gk.cmd_simulasyon(argparse.Namespace(kuru=True))
+    assert "ATLANDI" in _kontrol8_satiri(capsys)
+
+
+def test_esik_sonrasi_izsiz_kapali_gorev_uyari_uretir(tmp_path, monkeypatch, capsys):
+    _simulasyon_kur(tmp_path, monkeypatch, gk.HAFIZA_KAPISI_YURURLUK + "T10:00:00")
+    gk.cmd_simulasyon(argparse.Namespace(kuru=True))
+    assert "UYARI 1 adet" in _kontrol8_satiri(capsys)
+
+
+def test_bitissiz_kayit_esik_sonrasi_sayilmaz(tmp_path, monkeypatch, capsys):
+    """'None' >= '2026-..' metin karsilastirmasinda True doner; tuzaga dusulmesin."""
+    _simulasyon_kur(tmp_path, monkeypatch, None)
+    gk.cmd_simulasyon(argparse.Namespace(kuru=True))
+    assert "ATLANDI" in _kontrol8_satiri(capsys)
+
+
+def test_ikinci_hubdaki_iz_de_sayilir(tmp_path, monkeypatch, capsys):
+    """Iz varsayilan hub'da degil ORKESTRASYON hub'inda olabilir (brief secer)."""
+    _simulasyon_kur(tmp_path, monkeypatch, gk.HAFIZA_KAPISI_YURURLUK + "T10:00:00")
+    (tmp_path / "hubs" / "ORKESTRASYON_AJANLAR_HUB.md").write_text(
+        "| TEST-ESIK-01 | kapandi |", encoding="utf-8")
+    gk.cmd_simulasyon(argparse.Namespace(kuru=True))
+    assert _kontrol8_satiri(capsys).endswith(": OK")

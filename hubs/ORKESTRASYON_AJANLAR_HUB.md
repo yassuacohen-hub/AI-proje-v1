@@ -57,7 +57,9 @@ Ana baglam: [[Huginn Data Insights/AGENTS]] · [[Huginn Data Insights/AGENT_SYNC
 
 > Altyapi/orkestrasyon gorevleri kapaninca buraya bir satir birakir.
 > `gorev_kutusu.py teslim` bu izi gormezse teslimi reddeder (B-14 kapisi).
-> Asagidaki 12 satir TUR-B2 (2026-09-24) ile geriye donuk yazildi.
+> Asagidaki satirlar TUR-B2 (2026-09-24) ile geriye donuk yazildi.
+> Kapi `HAFIZA_KAPISI_YURURLUK = 2026-09-24` esiginden once kapanan isleri tek tek
+> aramaz; onlarin karsiligi asagidaki ceyreklik arsiv baglantisidir (D-186, D-198).
 
 | task_id | Ne kapandi | Bitis |
 |---------|------------|-------|
@@ -73,6 +75,10 @@ Ana baglam: [[Huginn Data Insights/AGENTS]] · [[Huginn Data Insights/AGENT_SYNC
 | ALTYAPI-MOJIBAKE-DIZIN-01 | `mojibake_onar.py` dizin taramasi | 2026-09-24 |
 | ALTYAPI-TETIK-ZAMAN-01 | `tetik_senk.py` zamanlama duzeltmesi | 2026-09-24 |
 | ALTYAPI-KILIT-OTOMATIK-01 | Kilit otomatik birakma → `src/company_master/orchestrator` | 2026-09-24 |
+| VAULT-CLEANUP-BATCH | Vault alarm/tetik artiklari silindi → temiz kuyruk | 2026-09-24 |
+| NINEROUTER-IMAGE-GEN-01 | `ninerouter.py`'ye `ninerouter_image_gen` eklendi | 2026-09-24 |
+| TEST-13-PREEXIST-DUZELT-01 | 13 pre-existing test hatasi duzeltildi → `d193_menu_e2e_report.md` | 2026-09-24 |
+| TEST-13-PREEXIST-DUZELT-02 | Kalan 7 test hatasi duzeltildi → pytest yesil | 2026-09-24 |
 
 Tam liste ceyreklik arsivde: `data/orchestrator/task_board_arsiv_2026-Q3.json`
 

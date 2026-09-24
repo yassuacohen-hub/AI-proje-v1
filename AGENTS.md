@@ -777,6 +777,8 @@ Kapanan işin SSOT/hub izi zorunludur. Yeni araç açılmadı; kapı üç mevcut
 
 Her brief'te `**Hub:**` satırı zorunludur ([[plans/_brief_sablon]]); kapı izi orada aranır.
 
+**Yürürlük tarihi:** Kontrol 8 yalnız **2026-09-24 ve sonrasında** kapanan (`bitis` alanı) işleri denetler — kodda tek sabit: `gorev_kutusu.HAFIZA_KAPISI_YURURLUK`. Bu tarihten önce kapanan 376 işin karşılığı, iki hub'daki "Kapanan isler" bölümünün sonundaki çeyreklik arşiv bağlantısıdır (`data/orchestrator/task_board_arsiv_2026-Q3.json`, D-186). Geriye dönük 376 satır yazmak hafıza değil gürültü üretirdi; kapı ileriye dönük çalışır. İz araması `hubs/` dizinindeki **tüm** hub dosyalarında yapılır, çünkü brief `**Hub:**` satırıyla hedefini kendi seçer.
+
 **Ilgili Nodlar**
 - [[src/company_master/orchestrator/task_board]]
 - [[scripts/gorev_kutusu]]

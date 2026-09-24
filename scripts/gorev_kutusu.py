@@ -455,6 +455,11 @@ _HUB = _KOK / "hubs" / "ADMIN_DASHBOARD_HUB.md"
 _PLANS = _KOK / "plans"
 _SABLON_BASLIKLAR = ("## Neden", "## Doğrulanacak varsayım", "## Adımlar", "## Kabul kriteri")
 
+# B-14 hafiza kapisi bu tarihte yururluge girdi. Once kapanan 376 is tek tek
+# SSOT/hub'a yazilmaz; onlarin karsiligi hub'lardaki arsiv ozeti satirlaridir
+# (D-186 wikilink). Bu tarih ve sonrasinda kapanan her is iz birakmak zorunda.
+HAFIZA_KAPISI_YURURLUK = "2026-09-24"
+
 
 def _kontrol_yaz(no: int, ad: str, seviye: str, bulgular: list[str],
                  ornek: bool = True, limit: int = 5) -> int:
@@ -559,15 +564,30 @@ def cmd_simulasyon(args: argparse.Namespace) -> int:
     # 8 — B-14: kapanan is SSOT veya hub'da task_id izi birakmis mi.
     # Aktif pano + son ceyregin arsivi birlikte taranir: arsivlenen is gozden
     # kaybolmasin diye (D-198). Daha eski ceyrekler tarihtir, gurultu yapar.
+    # Yururluk esigi: bitis tarihi HAFIZA_KAPISI_YURURLUK oncesi olan kayitlar
+    # gecmis borcudur, hub arsiv ozetiyle kapandi; tek tek denetlenmez.
     kapanan = [t for t in pano if t.get("durum") in tb.KAPALI_DURUMLAR]
     arsivler = sorted(tb.STATE_DIR.glob("task_board_arsiv_*.json")) if tb.STATE_DIR.is_dir() else []
     if arsivler:
         kapanan += [t for t in tb._read_json(arsivler[-1])
                     if t.get("durum") in tb.KAPALI_DURUMLAR]
-    hub_metin = _HUB.read_text(encoding="utf-8", errors="replace") if _HUB.exists() else ""
+    # bitis bos/None ise kayit esikten once kapanmistir (alan sonradan eklendi);
+    # metin karsilastirmasi "None" >= "2026-.." tuzagina dusmesin diye acik kontrol.
+    def _esik_sonrasi(t: dict) -> bool:
+        b = t.get("bitis")
+        return bool(b) and str(b)[:10] >= HAFIZA_KAPISI_YURURLUK
+
+    kapanan = [t for t in kapanan if _esik_sonrasi(t)]
+    # Iz her hub'da birakilabilir (_hafiza_hedefleri brief'teki `hubs/XXX`
+    # satirini okur), o yuzden kapi tek hub'a degil hubs/ dizininin tamamina bakar.
+    _hub_dizin = _HUB.parent
+    hub_metin = "".join(
+        h.read_text(encoding="utf-8", errors="replace")
+        for h in sorted(_hub_dizin.glob("*.md"))
+    ) if _hub_dizin.is_dir() else ""
     if not kapanan:
         kodlar.append(_atlandi(8, "Kapanan gorevin SSOT/hub izi (B-14)",
-                               "panoda ve son ceyrek arsivinde kapanmis gorev yok"))
+                               f"{HAFIZA_KAPISI_YURURLUK} ve sonrasinda kapanmis gorev yok"))
     elif not ssot_metin and not hub_metin:
         kodlar.append(_atlandi(8, "Kapanan gorevin SSOT/hub izi (B-14)",
                                "SSOT ve hub dosyasi diskte yok"))

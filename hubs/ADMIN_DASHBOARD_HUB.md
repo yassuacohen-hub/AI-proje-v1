@@ -67,7 +67,9 @@ SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_
 
 > Kapanan her gorev buraya bir satir birakir. `gorev_kutusu.py teslim` bu bolumde
 > task_id gormezse teslimi reddeder (`--zorla` ile gecilebilir, panoya `hafiza_izi=atlandi` islenir).
-> Asagidaki 12 satir TUR-B2 (2026-09-24) ile geriye donuk yazildi — denetim B-14 borcu.
+> Asagidaki satirlar TUR-B2 (2026-09-24) ile geriye donuk yazildi — denetim B-14 borcu.
+> Kapi `HAFIZA_KAPISI_YURURLUK = 2026-09-24` esiginden once kapanan isleri tek tek
+> aramaz; onlarin karsiligi asagidaki ceyreklik arsiv baglantisidir (D-186, D-198).
 
 | task_id | Ne kapandi | Bitis |
 |---------|------------|-------|
@@ -83,8 +85,12 @@ SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_
 | UI-ADMIN-GUNCELLIK-KOVA-10 | Veri guncellik kovalari → `web_dashboard/tabs/admin_quality.py` | 2026-09-24 |
 | UI-ADMIN-MALIYET-ANOMALI-11 | AI maliyet anomali blogu (z-skor) → `web_dashboard/tabs/admin_cost.py` | 2026-09-24 |
 | DOC-ADMIN-ARSIV-12 | Bayat analiz dokumani arsive tasindi + SSOT §0.1 guncellendi | 2026-09-24 |
+| COP-26 | MUSTERILER ekrani: firma listesi + filtre + bildirim blogu | 2026-09-24 |
+| UI-SUBHEADER-MUSTERI-01 | `musteri_yonetimi.py` subheader temizligi (sayfa iskeleti sozlesmesi) | 2026-09-24 |
+| TEST-ADMIN-PERF-01 | `admin_performance` kpi_karti gecis testi | 2026-09-24 |
+| TEST-WEBHOOK-KPI-01 | `tests/test_webhook_monitor_tab.py` mock hedefi duzeltildi | 2026-09-24 |
 
-Kapanan is sayisi bu hub'da: **12**. Tam liste ceyreklik arsivde:
+Kapanan is sayisi bu hub'da: **16**. Tam liste ceyreklik arsivde:
 `data/orchestrator/task_board_arsiv_2026-Q3.json`
 
 ---
