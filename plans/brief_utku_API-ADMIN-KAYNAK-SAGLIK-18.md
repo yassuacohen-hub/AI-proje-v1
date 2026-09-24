@@ -1,6 +1,6 @@
 # API-ADMIN-KAYNAK-SAGLIK-18 — Brief (utku)
 
-**Başlık:** [API] Kaynak sağlık skorunu hesapla → 3 kovalı rozet + DLQ birikme hızı (2s)
+**Başlık:** [API] Kaynak sağlık skorunu ölç → 3 kovalı rozet + DLQ birikme hızı (2s)
 **Öncelik:** P1 · **Kit:** ADMIN-KİT (`AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md`)
 **Kilitli dosya:** `src/company_master/kaynak_guvenilirlik.py`
 **Hub:** `hubs/ADMIN_DASHBOARD_HUB.md` — kapanista "Kapanan isler" bolumune task_id satiri yazilir (B-14).

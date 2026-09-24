@@ -1,6 +1,6 @@
 # UI-ADMIN-UPSELL-22 — Brief (utku)
 
-**Başlık:** [UI] Upsell adaylarını 3 koşullu kuralla listele → satış aksiyon listesi (2s)
+**Başlık:** [UI] Upsell aday listesini yaz → satış aksiyon listesi (2s)
 **Öncelik:** P2 · **Kit:** ADMIN-KİT (`AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md`)
 **Kilitli dosya:** `web_dashboard/tabs/musteri_yonetimi.py`
 **Hub:** `hubs/ADMIN_DASHBOARD_HUB.md` — kapanista "Kapanan isler" bolumune task_id satiri yazilir (B-14).

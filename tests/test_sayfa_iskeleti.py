@@ -61,8 +61,13 @@ MUAF: dict[str, str] = {
 
 
 def _ekranlar() -> tuple[str, ...]:
-    """Sözleşmeye tabi ekran modüllerini dosya sisteminden türetir."""
-    mevcut = {p.stem for p in TABS_DIZIN.glob("*.py")}
+    """Sözleşmeye tabi ekran modüllerini dosya sisteminden türetir.
+
+    Alt çizgiyle başlayan modüller (örn. `_db_yardim`) Python'un özel/dahili
+    adlandırma geleneği gereği yardımcı parçadır; ekran sözleşmesine girmez.
+    Bu genel ölçüt sayesinde her yeni `_*` yardımcısı için MUAF kaydı gerekmez.
+    """
+    mevcut = {p.stem for p in TABS_DIZIN.glob("*.py") if not p.stem.startswith("_")}
     return tuple(sorted(mevcut - set(MUAF)))
 
 

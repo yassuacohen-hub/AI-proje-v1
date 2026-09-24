@@ -29,7 +29,10 @@ def izole_pano(tmp_path, monkeypatch):
     # D-66 kapisi artik brif dosyasini ZORUNLU ariyor (eskiden --talimat ile
     # atlanabiliyordu). Mod testleri kapiyi degil modu olctugu icin brifler
     # izole KOK altinda hazir yazilir.
+    # D-66 kapisi IKI yerde durur: gorev_at._brief_bul (gorev_at.KOK) ve
+    # task_board.gorev_ekle (tb.ROOT). Ikisi de izole koke bakmali.
     monkeypatch.setattr(gorev_at, "KOK", tmp_path)
+    monkeypatch.setattr(tb, "ROOT", tmp_path)
     (tmp_path / "plans").mkdir(exist_ok=True)
     for ajan in ("ihsan", "utku", "salih", "yasu"):
         for tid in ("UI-01", "UI-02", "UI-03"):

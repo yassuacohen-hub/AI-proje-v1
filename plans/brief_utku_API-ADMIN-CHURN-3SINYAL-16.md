@@ -1,6 +1,6 @@
 # API-ADMIN-CHURN-3SINYAL-16 — Brief (utku)
 
-**Başlık:** [API] Churn kuralını 3 sinyale genişlet → churn.py tam formül (2s)
+**Başlık:** [API] Churn kuralını 3 sinyalli hâlde yaz → churn.py tam formül (2s)
 **Öncelik:** P1 · **Kit:** `ADMIN-KİT` (AGENTS.md D-196)
 **Kilitli dosya:** `src/company_master/churn.py`
 **Hub:** `hubs/ADMIN_DASHBOARD_HUB.md` — kapanista "Kapanan isler" bolumune task_id satiri yazilir (B-14).

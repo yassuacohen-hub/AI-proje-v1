@@ -32,12 +32,12 @@ from src.company_master.orchestrator import task_board as tb  # noqa: E402
 # yollari, raporlar, tetik kuyrugu, wikilink'ler bu id'ye bagli).
 # ponytail: tavan = elle bakim. Yukseltme yolu = "id degistir + yonlendirme
 # kaydi birak" komutu; o gelince bu liste bosalir.
-MUAF: dict[str, str] = {
-    "ALTYAPI-D66-BYPASS-TETIKLEME": "task_id 'ALTYAPI-' ALAN sozlugunde yok (ALAN karari bekliyor)",
-}
+MUAF: dict[str, str] = {}
 # ORCH-08: COP-26, ALTYAPI-D66-BYPASS-TETIKLEME-01, AGENTS-MERGE-UU,
 # VAULT-CLEANUP-BATCH kapandi (durum=done) -> _acik_gorevler() disinda,
 # muafiyet gerekmiyor, listeden dusuruldu (2026-09-23, ihsan).
+# TUR-B: ALTYAPI-D66-BYPASS-TETIKLEME de acik gorevler arasinda kalmadi;
+# liste bosaldi. Yeni muafiyet eklemek bilincli karardir, gerekce zorunlu.
 
 
 # conftest'teki izolasyon fixture'i tb.TASK_BOARD'u tmp_path'e cevirdigi icin

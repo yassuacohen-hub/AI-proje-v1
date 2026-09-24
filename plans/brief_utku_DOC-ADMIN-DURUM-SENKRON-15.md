@@ -1,6 +1,9 @@
 # DOC-ADMIN-DURUM-SENKRON-15 — Brief (utku)
 
-**Başlık:** [DOC] SSOT'u tek-durum yapısına ayrıştır → durum yalnız §7'de (1s)
+**Başlık:** [DOC] Bayat durum satırlarını düzelt → §8.4/§10 kanıtlı (1s)
+> ⏳ belirsiz — KAHİN onayı: Başlık panoyla eşitlendi (D-77: pano kaynaktır). Bu brief'in
+> gövdesi işin kapsamını D-197 tek-durum **ayrıştırması** olarak genişletiyor; pano başlığı
+> yalnız "bayat satır düzeltme" diyor. Kapsamın hangisi olduğu KAHİN kararıdır.
 **Öncelik:** P1 · **Kit:** `ADMIN-KİT` (AGENTS.md D-196) · **Kural:** AGENTS.md D-197
 **Kilitli dosya:** `AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md`
 **Hub:** `hubs/ADMIN_DASHBOARD_HUB.md` — kapanista "Kapanan isler" bolumune task_id satiri yazilir (B-14).
