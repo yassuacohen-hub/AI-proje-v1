@@ -56,10 +56,21 @@ def _talimat_bul(ajan: str, task_id: str, gorev: dict | None = None) -> str:
     return str(gorev.get("talimat") or "").strip()
 
 
+def _yedek_blogu() -> None:
+    """B-06: denetimde elenen yedek gorevler ayri blokta gorunur."""
+    yedekler = [t for t in tb.gorev_listesi() if t.get("durum") == "yedek"]
+    if not yedekler:
+        return
+    print(f"\n--- YEDEK GOREVLER ({len(yedekler)}) — siradaki tur adaylari, atanmaz ---")
+    for t in yedekler:
+        print(f"  {t['task_id']}  ({t.get('oncelik', '?')})  {t.get('baslik', '')}")
+
+
 def cmd_bak(args: argparse.Namespace) -> int:
     bekleyen = trigger.bekleyen_tetikler(args.ajan)
     if not bekleyen:
         print(f"[{args.ajan}] posta kutusu bos.")
+        _yedek_blogu()
         return 0
     alarm_yol = tb.STATE_DIR / "triggers" / f"{args.ajan}.ALARM.json"
     alarm = []
@@ -86,6 +97,7 @@ def cmd_bak(args: argparse.Namespace) -> int:
         if gorev.get("dosyalar"):
             print(f"  KILITLI DOSYALAR: {', '.join(gorev['dosyalar'])}")
         print(f"  -> al: python scripts/gorev_kutusu.py al --ajan {args.ajan} --task-id {k['task_id']}")
+    _yedek_blogu()
     return 0
 
 
@@ -98,6 +110,18 @@ def cmd_al(args: argparse.Namespace) -> int:
             f"bilincli atlamak icin --zorla kullan."
         )
         return 1
+    gorev = tb.gorev_getir(args.task_id) or {}
+    # D-66 kod karsiligi: brif yolu panoda yaziliysa diskte de olmali (B-03).
+    brief = gorev.get("brief") or ""
+    if brief and not (tb.ROOT / brief).exists():
+        print(f"HATA: brif diskte yok -> {brief} (D-66). Pano yolunu duzelt veya brifi yaz.")
+        return 2
+    # B-12: bagimlilik kapanmadiysa uyar, DURDURMA (D-65 is durmaz).
+    for bagli in gorev.get("dependencies") or []:
+        onceki = tb.gorev_getir(bagli)
+        durum = onceki.get("durum") if onceki else "PANODA YOK"
+        if durum != "done":
+            print(f"UYARI: bagimlilik kapanmadi -> {bagli} (durum: {durum})")
     try:
         sonuc = trigger.tetik_al(args.ajan, args.task_id)
     except trigger.TriggerError as exc:
@@ -268,17 +292,37 @@ def cmd_hepsini_tamamla(args: argparse.Namespace) -> int:
     return 0
 
 
+def _yedek_sayimi() -> list[str]:
+    """AGENTS.md 'son 3 yedek' politikasinin makine karsiligi (B-15)."""
+    yedekler = sorted(
+        p for p in tb.STATE_DIR.iterdir()
+        if p.is_file() and ("yedek" in p.name or "backup" in p.name) and "task_board" in p.name
+    )
+    if len(yedekler) <= 3:
+        return []
+    fazla = yedekler[:-3]
+    return [f"{len(yedekler)} pano yedegi var (politika: son 3). Silinebilir: "
+            + ", ".join(p.name for p in fazla)]
+
+
 def cmd_bakim(args: argparse.Namespace) -> int:
     """Pano hijyeni: cift kayit, takili tetik, bayat zincir, blokaj otomasyonu."""
     if args.rapor:
         t = duzen.pano_tarama()
         print("[TARAMA] (dokunulmadi)")
         print(f"  cift kayit: {t['cift_kayit'] or 'yok'}")
+        # D-198: arsiv de mukerrer kapisidir (salt okunur tarama).
+        for s in t["arsiv_cakisma"]:
+            print(f"  arsiv cakismasi: {s}")
+        if not t["arsiv_cakisma"]:
+            print("  arsiv cakismasi: yok")
         for s in t["takili_tetik"]:
             print(f"  takili: {s}")
         if not t["takili_tetik"]:
             print("  takili tetik: yok")
         print(f"  blocked: {', '.join(t['blocked']) or 'yok'}")
+        for s in _yedek_sayimi():
+            print(f"  UYARI: {s}")
         return 0
     r = duzen.pano_bakim()
     print("[BAKIM] uygulandi:")
@@ -287,6 +331,8 @@ def cmd_bakim(args: argparse.Namespace) -> int:
         print(f"  zincir: {z}")
     print(f"  blokaj acilan: {', '.join(r['acilan']) or 'yok'}")
     print(f"  blokaj kapanan: {', '.join(r['kapanan']) or 'yok'}")
+    for s in _yedek_sayimi():
+        print(f"  UYARI: {s}")
     return 0
 
 
