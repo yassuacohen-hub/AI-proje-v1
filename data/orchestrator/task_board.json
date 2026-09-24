@@ -406,7 +406,7 @@
     "baslik": "[UI] Güncellik kova kartını düzelt",
     "sahip": "utku",
     "oncelik": 4,
-    "durum": "beklemede",
+    "durum": "teslim edildi",
     "dosyalar": [
       "Huginn Data Insights/web_dashboard/tabs/admin_guncellik_kova.py",
       "Huginn Data Insights/tests/test_admin_guncellik_kova.py"
@@ -415,7 +415,10 @@
     "talimat": "Tablo kontrol, test ekle, SSOT §7/§14 güncelle",
     "dependencies": [
       "UI-ADMIN-KULLANICI-BIRLESTIR-09"
-    ]
+    ],
+    "baslangic": "2026-09-24T19:41:04.381502",
+    "bitis": "2026-09-24T19:42:30.214863",
+    "not": "Veri güncellik kovaları (0-7g/8-30g/31-90g/90g+): load_freshness_distribution(), _chart_freshness(), render_quality_tab() — 4/4 test geçti"
   },
   {
     "task_id": "UI-ADMIN-MALIYET-ANOMALI-11",
