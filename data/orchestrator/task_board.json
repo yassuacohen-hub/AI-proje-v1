@@ -386,7 +386,7 @@
     "baslik": "[UI] Kullanıcı birleştirme kartını düzelt",
     "sahip": "utku",
     "oncelik": 3,
-    "durum": "beklemede",
+    "durum": "teslim edildi",
     "dosyalar": [
       "Huginn Data Insights/web_dashboard/tabs/admin_kullanici_birlestir.py",
       "Huginn Data Insights/tests/test_admin_kullanici_birlestir.py"
@@ -395,7 +395,10 @@
     "talimat": "Tablo kontrol, test ekle, SSOT §7/§14 güncelle",
     "dependencies": [
       "UI-ADMIN-SAHTE-EXEC-02"
-    ]
+    ],
+    "baslangic": "2026-09-24T19:39:34.431531",
+    "bitis": "2026-09-24T19:40:44.426946",
+    "not": "Üç kopya kullanıcı yönetimi birleşti. musteri_yonetimi.py:69 ve admin_yonetim.py:90 tek render_user_management() fonksiyonuna yönlendiriyor. Çağrı noktaları korundu, silme yok. Test 9/9 geçti."
   },
   {
     "task_id": "UI-ADMIN-GUNCELLIK-KOVA-10",
