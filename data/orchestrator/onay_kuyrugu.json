@@ -2349,5 +2349,13 @@
     "durum": "onaylandi",
     "onaylayan": "orkestrator",
     "onay_tarihi": "2026-09-24T04:53:44"
+  },
+  {
+    "task_id": "UI-ADMIN-SAHTE-KPI-01",
+    "ajan": "utku",
+    "ozet": "_db_yardim.py tablo_var_mi() eklendi; admin_kpi.py api_usage_daily sorgusu tablo yokken veri kaynagi yok rozeti gosteriyor; 2 assert test gecti; SSOT SS7/SS14 guncellendi",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T05:00:11",
+    "durum": "bekliyor"
   }
 ]

@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-24T04:53:44
+> Son guncelleme: 2026-09-24T05:00:11
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -122,7 +122,7 @@
 | BRIK-00 | ALTYAPI Archive sema + gece zinciri → ku | ihsan | P1 | archive |
 | ORKESTRA-ONAY-BOSALT-01 | [ORKESTRA] Onay kuyrugundaki 9 teslimi d | salih | P0 | iptal |
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | plan |
-| UI-ADMIN-SAHTE-KPI-01 | [UI] Sahte API KPI kartını düzelt → admi | utku | P0 | plan |
+| UI-ADMIN-SAHTE-KPI-01 | [UI] Sahte API KPI kartını düzelt → admi | utku | P0 | review |
 | UI-ADMIN-SAHTE-EXEC-02 | [UI] Sahte gelir kartlarını düzelt → adm | utku | P0 | plan |
 | UI-ADMIN-KULLANICI-BIRLESTIR-09 | [UI] Üç kopya kullanıcı yönetimini taşı  | utku | P1 | plan |
 | UI-ADMIN-GUNCELLIK-KOVA-10 | [UI] Veri güncellik kovalarını yaz → adm | utku | P1 | plan |

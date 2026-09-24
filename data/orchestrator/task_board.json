@@ -7179,13 +7179,13 @@
     "baslik": "[UI] Sahte API KPI kartını düzelt → admin_kpi.py rozetli boş kart (2s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-24T04:15:02",
     "bitis": null,
     "dosyalar": [
       "web_dashboard/tabs/admin_kpi.py"
     ],
-    "not": "",
+    "not": "Teslim (utku): _db_yardim.py tablo_var_mi() eklendi; admin_kpi.py api_usage_daily sorgusu tablo yokken veri kaynagi yok rozeti gosteriyor; 2 assert test gecti; SSOT SS7/SS14 guncellendi",
     "source": "ic",
     "from_agent": null,
     "mod": "code",

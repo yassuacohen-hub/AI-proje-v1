@@ -29,6 +29,7 @@ from web_dashboard.tabs.tenant_health_dashboard import (
     tenant_health_dashboard as _tenant_health_dashboard,
 )
 from web_dashboard.tabs.admin_error_handling import AdminErrorHandler
+from web_dashboard.tabs._db_yardim import tablo_var_mi
 
 # Admin KPI logger
 _admin_kpi_logger = AdminErrorHandler("admin_kpi")
@@ -45,6 +46,7 @@ def load_admin_kpi_summary() -> dict[str, Any]:
         "toplam_firma": 0,
         "mau": 0,
         "api_cagri_toplam": 0,
+        "api_veri_yok": False,
         "sinyal_toplam": 0,
         "saglik_skoru": 100,
         "dlq_adet": 0,
@@ -98,17 +100,20 @@ def load_admin_kpi_summary() -> dict[str, Any]:
     except Exception as exc:
         _admin_kpi_logger.warning("Sinyal sayısı yüklenemedi", exc)
 
-    # API kullanım toplamı
-    try:
-        with engine.connect() as conn:
-            row = conn.execute(text(
-                "SELECT COALESCE(SUM(request_count), 0) as total "
-                "FROM api_usage_daily"
-            )).mappings().first()
-            if row:
-                result["api_cagri_toplam"] = row["total"] or 0
-    except Exception as exc:
-        _admin_kpi_logger.warning("API kullanım toplamı yüklenemedi", exc)
+    # API kullanım toplamı — UI-ADMIN-SAHTE-KPI-01: tablo yoksa 0 değil rozet
+    if not tablo_var_mi("api_usage_daily", engine):
+        result["api_veri_yok"] = True
+    else:
+        try:
+            with engine.connect() as conn:
+                row = conn.execute(text(
+                    "SELECT COALESCE(SUM(request_count), 0) as total "
+                    "FROM api_usage_daily"
+                )).mappings().first()
+                if row:
+                    result["api_cagri_toplam"] = row["total"] or 0
+        except Exception as exc:
+            _admin_kpi_logger.warning("API kullanım toplamı yüklenemedi", exc)
 
     return result
 
@@ -394,7 +399,10 @@ def render_kpi_tab() -> None:
             "📡",
         )
     with c4:
-        _render_kpi_card("API Çağrıları", f"{kpi['api_cagri_toplam']:,}", icon="🔗")
+        if kpi.get("api_veri_yok"):
+            _render_kpi_card("API Çağrıları", "veri kaynağı yok", icon="⚠️")
+        else:
+            _render_kpi_card("API Çağrıları", f"{kpi['api_cagri_toplam']:,}", icon="🔗")
 
     # --- İkinci satır: Sağlık + Görev ---
     st.divider()
