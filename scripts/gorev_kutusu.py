@@ -514,16 +514,16 @@ def cmd_simulasyon(args: argparse.Namespace) -> int:
     kodlar.append(_kontrol_yaz(3, "Acik gorevde dosyalar bos mu (B-04)", "UYARI", bulgular, ornek))
 
     # 4 — B-12: bagimlilik kaydi var mi, kapandi mi. Uyari; is durmaz (D-65).
-    bilinen = {t["task_id"]: t.get("durum") for t in pano}
+    # Acik bir gorevin bagimliligi da acik olmasi BEKLENEN haldir; sira boyle
+    # kurulur, uyari degildir. Yalniz KIRIK bagimlilik -- ne panoda ne arsivde
+    # bulunan bir task_id -- gercek kayip isarettir.
+    bilinen = {t["task_id"] for t in pano}
     bulgular = []
     for t in acik:
         for d in t.get("dependencies") or []:
-            if d in bilinen:
-                if bilinen[d] not in tb.KAPALI_DURUMLAR:
-                    bulgular.append(f"{t['task_id']} <- {d} (durum: {bilinen[d]})")
-            elif not tb.arsivde_bul(d):
+            if d not in bilinen and not tb.arsivde_bul(d):
                 bulgular.append(f"{t['task_id']} <- {d} (hicbir yerde kayit yok)")
-    kodlar.append(_kontrol_yaz(4, "Bagimlilik kaydi/durumu (B-12)", "UYARI", bulgular, ornek))
+    kodlar.append(_kontrol_yaz(4, "Kirik bagimlilik kaydi (B-12)", "UYARI", bulgular, ornek))
 
     # 5 + 6 — D-197 kural 5 (yuzde yasak) ve kural 1-2 (durum yalniz §7'de).
     if not _SSOT.exists():
@@ -549,9 +549,22 @@ def cmd_simulasyon(args: argparse.Namespace) -> int:
                                    "UYARI", etiket, ornek))
 
     # 7 — B-17: brief'ler _brief_sablon.md baslik yapisina uyuyor mu.
-    briefler = sorted(_PLANS.glob("brief_*.md")) if _PLANS.is_dir() else []
+    # Kapsam AKTIF PANODAKI gorevlerin brief'leridir. plans/ altinda kapanmis
+    # islerden kalan onlarca brief duruyor; onlari bugunun sablonuna cekmek
+    # gecmisi yeniden yazmaktir, is uretmez. Denetlenen sey calisilan istir.
+    briefler: list[Path] = []
+    for t in acik:
+        ad = t.get("brief")
+        if not ad:
+            continue
+        p = _KOK / ad
+        if not p.exists():
+            p = Path(ad)
+        if p.exists() and p not in briefler:
+            briefler.append(p)
     if not briefler:
-        kodlar.append(_atlandi(7, "Brief sablon uyumu (B-17)", "plans/brief_*.md bulunamadi"))
+        kodlar.append(_atlandi(7, "Aktif brief sablon uyumu (B-17)",
+                               "aktif panoda diskte duran brief yok"))
     else:
         bulgular = []
         for b in briefler:
@@ -559,7 +572,7 @@ def cmd_simulasyon(args: argparse.Namespace) -> int:
             yok = [h for h in _SABLON_BASLIKLAR if h not in metin]
             if yok:
                 bulgular.append(f"plans/{b.name}:1  eksik baslik: {', '.join(yok)}")
-        kodlar.append(_kontrol_yaz(7, "Brief sablon uyumu (B-17)", "UYARI", bulgular, ornek))
+        kodlar.append(_kontrol_yaz(7, "Aktif brief sablon uyumu (B-17)", "UYARI", bulgular, ornek))
 
     # 8 — B-14: kapanan is SSOT veya hub'da task_id izi birakmis mi.
     # Aktif pano + son ceyregin arsivi birlikte taranir: arsivlenen is gozden
