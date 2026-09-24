@@ -1590,5 +1590,13 @@
     "tetik_sayisi": 221,
     "uyari_tarihi": "2026-09-24T05:34:01",
     "mesaj": "⚠️ ORKESTRA-ONAY-BOSALT-01 ([ORKESTRA] Onay kuyrugundaki 9 teslimi denetle → data/orchestrator/ORKESTRA-ONAY-BOSALT-01_rapor_2026-09-23_salih.md (4s)) — salih 221. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "salih",
+    "task_id": "ORKESTRA-ONAY-BOSALT-01",
+    "gorev_basligi": "[ORKESTRA] Onay kuyrugundaki 9 teslimi denetle → data/orchestrator/ORKESTRA-ONAY-BOSALT-01_rapor_2026-09-23_salih.md (4s)",
+    "tetik_sayisi": 222,
+    "uyari_tarihi": "2026-09-24T05:39:02",
+    "mesaj": "⚠️ ORKESTRA-ONAY-BOSALT-01 ([ORKESTRA] Onay kuyrugundaki 9 teslimi denetle → data/orchestrator/ORKESTRA-ONAY-BOSALT-01_rapor_2026-09-23_salih.md (4s)) — salih 222. kez uyarıldı; henüz başlamadı."
   }
 ]

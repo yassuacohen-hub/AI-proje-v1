@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-24T05:36:52
+> Son guncelleme: 2026-09-24T05:40:40
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -127,7 +127,7 @@
 | UI-ADMIN-KULLANICI-BIRLESTIR-09 | [UI] Üç kopya kullanıcı yönetimini taşı  | utku | P1 | review |
 | UI-ADMIN-GUNCELLIK-KOVA-10 | [UI] Veri güncellik kovalarını yaz → adm | utku | P1 | review |
 | UI-ADMIN-MALIYET-ANOMALI-11 | [UI] AI maliyet anomali bloğunu yaz → ad | utku | P1 | review |
-| DOC-ADMIN-ARSIV-12 | [DOC] Bayat analiz dökümanını taşı → arş | utku | P2 | plan |
+| DOC-ADMIN-ARSIV-12 | [DOC] Bayat analiz dökümanını taşı → arş | utku | P2 | review |
 
 ## Tamamlananlar (Son 10)
 

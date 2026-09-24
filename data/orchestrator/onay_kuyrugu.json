@@ -2389,5 +2389,13 @@
     "ciktilar": [],
     "teslim_tarihi": "2026-09-24T05:36:52",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "DOC-ADMIN-ARSIV-12",
+    "ajan": "utku",
+    "ozet": "06_muninn_prd_vs_huginn_analiz.md arsiv uyarisi guncellendi (ADMIN-KIT referansi), SSOT §0.1 ve §11 KK-4 kapatildi, dosya silinmedi",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T05:40:39",
+    "durum": "bekliyor"
   }
 ]
