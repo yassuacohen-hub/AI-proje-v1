@@ -28,13 +28,13 @@
     "baslik": "[VERI] Kullanıcı aktivite log tablosunu yaz → migration 0017 (2s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "bekliyor",
+    "durum": "review",
     "baslangic": null,
     "bitis": null,
     "dosyalar": [
       "src/company_master/schema/migrations/0017_user_activity_log.sql"
     ],
-    "not": "Kaynak: SSOT §8.4:322 (EK BULGU-8) · §10:366 · §12 G2:415. Bagimlilik yok. Kok blokaj: K1 tam churn, K9, G4 DAU bu tablo olmadan acilamaz.",
+    "not": "Teslim (utku): 0017_user_activity_log migration: tablo sema (BIGSERIAL PK, UUID FK, CHECK olay_tipi, INET/CHAR kolonlar NULL gecebilir, iki indeks) ve down dosyasi yazildi; test 12/12; brief kurallar tatmin; simulasyon 8/8 kod 0",
     "source": "ic",
     "from_agent": null,
     "mod": "code",

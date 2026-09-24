@@ -45,6 +45,9 @@ def load_admin_kpi_summary() -> dict[str, Any]:
     result: dict[str, Any] = {
         "toplam_firma": 0,
         "mau": 0,
+        "dau": 0,
+        "dau_mau_orani": None,
+        "dau_veri_yok": False,
         "api_cagri_toplam": 0,
         "api_veri_yok": False,
         "sinyal_toplam": 0,
@@ -114,6 +117,29 @@ def load_admin_kpi_summary() -> dict[str, Any]:
                     result["api_cagri_toplam"] = row["total"] or 0
         except Exception as exc:
             _admin_kpi_logger.warning("API kullanım toplamı yüklenemedi", exc)
+
+    # DAU (Daily Active Users) — son 24 saatte distinct user_id
+    if not tablo_var_mi("user_activity_log", engine):
+        result["dau_veri_yok"] = True
+        result["dau"] = None
+        result["dau_mau_orani"] = None
+    else:
+        try:
+            with engine.connect() as conn:
+                row = conn.execute(text(
+                    "SELECT COUNT(DISTINCT user_id) as cnt FROM user_activity_log "
+                    "WHERE created_at >= NOW() - INTERVAL '24 hours'"
+                )).mappings().first()
+                if row:
+                    dau_val = row["cnt"] or 0
+                    result["dau"] = dau_val
+                    # DAU/MAU oranı (MAU=0 ise null)
+                    mau_val = result.get("mau", 0)
+                    result["dau_mau_orani"] = (dau_val / mau_val) if mau_val > 0 else None
+        except Exception as exc:
+            _admin_kpi_logger.warning("DAU yüklenemedi", exc)
+            result["dau"] = None
+            result["dau_mau_orani"] = None
 
     return result
 
@@ -381,7 +407,7 @@ def render_kpi_tab() -> None:
                     st.empty()
         return
 
-    c1, c2, c3, c4 = st.columns(4)
+    c1, c2, c3, c4, c5 = st.columns(5)
     with c1:
         _render_kpi_card(
             "Toplam Firma",
@@ -392,13 +418,21 @@ def render_kpi_tab() -> None:
     with c2:
         _render_kpi_card("MAU (30 Gün)", f"{kpi['mau']:,}", icon="👥")
     with c3:
+        if kpi.get("dau_veri_yok"):
+            _render_kpi_card("DAU (24 Saat)", "veri kaynağı yok", icon="⚠️")
+        else:
+            dau_display = f"{kpi.get('dau', 0):,}" if kpi.get('dau') is not None else "0"
+            dau_ratio = kpi.get('dau_mau_orani')
+            ratio_display = f"({dau_ratio:.1%})" if dau_ratio is not None else ""
+            _render_kpi_card("DAU (24 Saat)", dau_display, ratio_display if ratio_display else None, icon="📱")
+    with c4:
         _render_kpi_card(
             "Toplam Sinyal",
             f"{kpi['sinyal_toplam']:,}",
             f"+{kpi['son_24s_yeni_sinyal']} (24s)" if kpi["son_24s_yeni_sinyal"] else None,
             "📡",
         )
-    with c4:
+    with c5:
         if kpi.get("api_veri_yok"):
             _render_kpi_card("API Çağrıları", "veri kaynağı yok", icon="⚠️")
         else:

@@ -2409,5 +2409,13 @@
     "durum": "onaylandi",
     "onaylayan": "oto-nobetci",
     "onay_tarihi": "2026-09-24T05:41:46"
+  },
+  {
+    "task_id": "VERI-ADMIN-AKTIVITE-LOG-13",
+    "ajan": "utku",
+    "ozet": "0017_user_activity_log migration: tablo sema (BIGSERIAL PK, UUID FK, CHECK olay_tipi, INET/CHAR kolonlar NULL gecebilir, iki indeks) ve down dosyasi yazildi; test 12/12; brief kurallar tatmin; simulasyon 8/8 kod 0",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-24T19:10:51",
+    "durum": "bekliyor"
   }
 ]
