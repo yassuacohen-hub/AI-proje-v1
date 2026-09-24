@@ -293,7 +293,10 @@ def teslim_et(
 
     kayitlar = _tetikleri_oku(ajan, data_dir)
     for k in kayitlar:
-        if k["task_id"] == task_id and k["durum"] == "alindi":
+        # D-fix: "alindi" YA DA stale "bekliyor" (al hic cagirilmadan teslim
+        # edilmis olabilir) — her iki durumda da "teslim"e cek, yoksa kayit
+        # sonsuza dek "bekliyor" gorunup ajan mailbox'inda hayalet is birakir.
+        if k["task_id"] == task_id and k["durum"] in ("alindi", "bekliyor"):
             k["durum"] = "teslim"
             k["teslim_tarihi"] = _simdi()
     _tetikleri_yaz(kayitlar, ajan, data_dir)
@@ -313,7 +316,14 @@ def onay_bekleyenler(data_dir: Path | None = None) -> list[dict[str, Any]]:
     1) onay kuyruğu (bekliyor)  2) tetik dosyasındaki 'teslim' kayıtları
     (ajanlar bazen teslimi tetik dosyasına yazar, kuyruğa yazmaz).
     """
-    kuyruk = [k for k in _kuyruk_oku(data_dir) if k["durum"] == "bekliyor"]
+    # D-fix: kuyruk-kaynakli kayitlarda da pano zaten done ise stale say —
+    # eskiden yalnizca tetik-kaynakli dala uygulaniyordu, bu da onaylanmis
+    # gorevlerin onay kuyrugunda "hayalet" gorunmesine yol aciyordu.
+    kuyruk = [
+        k for k in _kuyruk_oku(data_dir)
+        if k["durum"] == "bekliyor"
+        and (tb.gorev_getir(k["task_id"]) or {}).get("durum") != "done"
+    ]
     bilinen = {k["task_id"] for k in kuyruk}
     try:
         from . import duzen  # lokal: döngüsel risk yok

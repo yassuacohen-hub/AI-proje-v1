@@ -156,3 +156,25 @@ def test_teslim_sonrasi_yeni_tetik_ile_duzeltme_dongusu(tmp_path):
     assert tb.gorev_getir("T-08")["durum"] == "review"
     trigger.onayla("T-08", "orkestrator", data_dir=tmp_path)
     assert tb.gorev_getir("T-08")["durum"] == "done"
+
+
+def test_teslim_stale_bekliyor_kaydi_teslime_doner(tmp_path):
+    """D-fix: `al` hiç çağrılmadan (kayıt "bekliyor"da kalmış) teslim edilirse
+    tetik kaydı sonsuza dek "bekliyor" görünmemeli — "teslim"e geçmeli."""
+    _gorev_ac()
+    trigger.tetik_ekle("T-08", "kilo", data_dir=tmp_path)
+    # DİKKAT: tetik_al() çağrılmadı — kayıt "bekliyor" durumunda kaldı.
+    trigger.teslim_et("T-08", "kilo", "iş tamamlandı", data_dir=tmp_path)
+    kayitlar = trigger._tetikleri_oku("kilo", tmp_path)
+    hedef = [k for k in kayitlar if k["task_id"] == "T-08"]
+    assert hedef and hedef[0]["durum"] == "teslim"
+    assert trigger.bekleyen_tetikler("kilo", tmp_path) == []
+
+
+def test_onay_bekleyenler_done_gorevi_kuyruktan_gizler(tmp_path):
+    """D-fix: onay kuyruğunda "bekliyor" kalmış ama pano zaten "done" olan
+    kayıt hayalet olarak gösterilmemeli (yalnızca tetik-kaynaklı dal değil)."""
+    sonuc = _ac_al_teslim(tmp_path)
+    assert sonuc["durum"] == "review"
+    tb.gorev_guncelle("T-08", durum="done")  # kuyruk hâlâ "bekliyor" (stale)
+    assert trigger.onay_bekleyenler(tmp_path) == []
