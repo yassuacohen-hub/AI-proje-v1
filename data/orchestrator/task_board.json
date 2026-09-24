@@ -348,7 +348,7 @@
     "baslik": "[UI] Sahte API KPI kartını düzelt → admin_kpi.py rozetli boş kart (2s)",
     "sahip": "utku",
     "oncelik": 1,
-    "durum": "teslim edildi",
+    "durum": "alındı",
     "dosyalar": [
       "Huginn Data Insights/web_dashboard/tabs/admin_kpi.py",
       "Huginn Data Insights/tests/test_admin_kpi.py"
@@ -356,7 +356,7 @@
     "brief": "plans/brief_utku_UI-ADMIN-SAHTE-KPI-01.md",
     "talimat": "tablo_var_mi() yardımcı yaz, test ekle, SSOT §7/§14 güncelle",
     "dependencies": [],
-    "baslangic": "2026-09-24T19:35:05.727500",
+    "baslangic": "2026-09-24T19:36:59.345503",
     "bitis": "2026-09-24T19:36:37.142995",
     "not": "tablo_var_mi() yardımcısı yazıldı, test 2/2 geçti, SSOT §7/§14 güncellendi"
   },
@@ -366,7 +366,7 @@
     "baslik": "[UI] Sahte Exec kartını düzelt → admin_executive.py rozetli boş kart (2s)",
     "sahip": "utku",
     "oncelik": 2,
-    "durum": "beklemede",
+    "durum": "teslim edildi",
     "dosyalar": [
       "Huginn Data Insights/web_dashboard/tabs/admin_executive.py",
       "Huginn Data Insights/tests/test_admin_executive.py"
@@ -375,7 +375,10 @@
     "talimat": "tablo_var_mi() kullan, test ekle, SSOT §7/§14 güncelle",
     "dependencies": [
       "UI-ADMIN-SAHTE-KPI-01"
-    ]
+    ],
+    "baslangic": "2026-09-24T19:37:21.364328",
+    "bitis": "2026-09-24T19:39:15.135017",
+    "not": "packages/company_packages tabloları yokken MRR/ARR/ARPA/Churn kartları rozetli boş gösteriyor. _db_yardim.tablo_var_mi() tablo kontrolü yapıyor, UI load_executive_ozet() result veri_yok flag'ini kullanarak rozet çiziyor. Test 24/24 geçti."
   },
   {
     "task_id": "UI-ADMIN-KULLANICI-BIRLESTIR-09",

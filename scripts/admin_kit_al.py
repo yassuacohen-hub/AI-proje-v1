@@ -16,9 +16,8 @@ if sys.stdout.encoding.lower() != 'utf-8':
 
 PANO_PATH = "data/orchestrator/task_board.json"
 
-def main():
+def main(task_id):
     """Görev durumunu "alındı" olarak işle."""
-    task_id = "UI-ADMIN-SAHTE-KPI-01"
     ajan = "utku"
     
     try:
@@ -57,5 +56,9 @@ def main():
         return False
 
 if __name__ == "__main__":
-    success = main()
+    if len(sys.argv) < 2:
+        print("Kullanım: admin_kit_al.py <task_id>")
+        sys.exit(1)
+    task_id = sys.argv[1]
+    success = main(task_id)
     exit(0 if success else 1)
