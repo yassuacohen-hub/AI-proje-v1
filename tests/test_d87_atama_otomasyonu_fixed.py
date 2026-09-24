@@ -43,8 +43,9 @@ def _betik():
         sys.modules[mod_name] = mod
     
     # Set the root attribute on the module to ensure it can be monkeypatched
+    # YA-03: mutlak dizin adi varsayma; depo kokunden turet.
     if not hasattr(mod, 'root'):
-        mod.root = Path('C:/Huginn Data Projesi')
+        mod.root = KOK
     
     return mod
 

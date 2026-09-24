@@ -164,14 +164,16 @@ def ithalat_kontrol() -> dict | None:
 
 def _kanonik_yol_kontrol() -> dict | None:
     """D-186: Pano dosyası kanonik konumda mı? Reel worktree'lerde split var mı?"""
-    # STATE = tb.STATE_DIR (Huginn Data Insights/data/orchestrator)
-    # PANO_DOSYA kanonik olmalı — "Huginn Data Insights" yolunda
-    if "Huginn Data Insights" not in str(PANO_DOSYA):
+    # YA-03: kanoniklik olcutu dizin ADI degil, depo KOKUNE gorelilik.
+    # Depo baska adla klonlanirsa test/denetim kirilmasin; olcut:
+    # tb.STATE_DIR bu deponun data/orchestrator dizinini mi gosteriyor?
+    kanonik = (ROOT / "data" / "orchestrator" / "task_board.json").resolve()
+    if PANO_DOSYA.resolve() != kanonik:
         return {
             "tip": "split",
             "seviye": "hata",
             "task_id": "pano_denetim",
-            "mesaj": f"PANO_DOSYA kanonik yolda değil: {PANO_DOSYA}",
+            "mesaj": f"PANO_DOSYA kanonik yolda değil: {PANO_DOSYA} (beklenen: {kanonik})",
             "duzeltme": None
         }
     
