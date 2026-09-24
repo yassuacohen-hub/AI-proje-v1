@@ -386,7 +386,42 @@ Rapor hash'leri dogrulanmadan yazilmis — bu, denetim izinin guvenilirligini du
 
 **Kapanan:** 20 denetim bulgusunun tamami (B-01…B-20) HEAD'de kapali dogrulandi; B-15 disk hijyeni yonuyle bu turda kapatildi (`2583ce2`, 32 dosya). Ana depo `simulasyon` 8/8 OK, cikis kodu 0. Regresyon yok — TUR-B raporunun "acik" dedigi bes bulgudan dordu zaten kapaliydi, rapor yanlisti.
 
-**Acik kalan:** **YA-01 KAPANDI** (TUR-D1, 2026-09-24 — KAHIN Secenek B; `84d9e6c` + `10c1a9e`; taze klon SSOT'u 507 satirla getiriyor). Uc acik kaldi — **YA-02** `simulasyon` atlanmis kontrolu cikis kodu 0 ile ortuyor (P1) · **YA-03** `test_pano_yolu_kanonik` dizin adina bagimli (P2; TUR-D1 klon provasinda tekrar gorundu) · **YA-04** TUR-B raporunda B-06 hash atfi hatali (P2).
+**Acik kalan:** **Yok.** YA-01 TUR-D1'de (`84d9e6c` + `10c1a9e`), YA-02/YA-03/YA-04 TUR-D2'de kapandi (asagidaki bolum).
+
+---
+
+## 7. TUR-D2 kapanisi (2026-09-24)
+
+### Kapanan maddeler
+
+| Madde | Commit | Yapilan | Kanit |
+|---|---|---|---|
+| YA-02 | `49f8f60` | `_atlandi()` artik `1` donuyor; cikis kodu tek yerde `max(kodlar)` | `test_atlanan_kontrol_cikis_kodunu_etkiler` (SSOT yoksa kod `1`) |
+| YA-03 | `89f4890` | Kanoniklik olcutu dizin ADI degil depo KOKU: `pano_denetim.py:170` `kanonik = (ROOT/"data"/"orchestrator"/"task_board.json").resolve()`; `test_d87_...py` mutlak yol yerine `KOK` | Baska ada klonlanan depoda (`c:\_KLON_PROVA_D2`) 15 pano/otomasyon testi gecti |
+| YA-04 | `37a2da8` | `DENETIM_SUREC_2026-09-24.md:140` B-06 `Kapali` + `c9a46cc`; onceki `44250b9` atfi duzeltildi | Pickaxe bulgusu (bu belge §1) + panoda Y1-Y6 `durum: yedek` |
+| TUR-D1/U1 | `f7f2427` | `git_auto_push.bat` depo ici kopyasi (`AI proje v1/scripts/`) silindi; kanonik tek: `scripts/git_auto_push.bat` | `fc /B` ozdes · `schtasks` kanonik yolu cagiriyor · `git ls-files "*git_auto_push.bat"` tek sonuc |
+| TUR-D1/U2 | `f7f2427` | `AI proje v1/README.md` kanoniklik isaretcisi + D-169 satirina netlestirme cumlesi | `AGENTS.md:489` |
+| TUR-D1/U3 | `37a2da8` | D-65'e kapi disiplini cumlesi: kapi FAIL'inde ajan kendi kararyla devam edemez | `AGENTS.md:183` |
+
+### Kapi sonuclari
+
+- **Ana depo:** `simulasyon` 8/8 `OK`, cikis kodu **0** · `pytest -q` → **4094 passed, 12 skipped** · `pano_denetim.py` → `hata=0 uyari=221 acik_gorev=16`
+- **Taze klon provasi** (`c:\_KLON_PROVA_D2`, `--recurse-submodules` kullanilmadi, is bitince silindi):
+  - SSOT `AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md` var, **507 satir**
+  - `simulasyon` 8/8 `OK`, cikis kodu **0**
+  - `pytest -q` → **5 failed, 4067 passed, 14 skipped, 16 errors** (TUR-D1: 6 failed + 16 error). Kalan 21 kirigin tamami ENV/DB kaynakli: `src/company_master/db/.env` yok · `sqlite3.OperationalError: no such table: companies`. `test_pano_yolu_kanonik` dahil pano/otomasyon testleri klonda **geciyor** — YA-03 kirigi kapandi.
+- **Pano:** 17 gorev — 10 `bekliyor`, 6 `yedek`, 1 `iptal`. 221 uyarinin tamami orphan sinifi (B-19 kapsami, bilinen).
+- **Denetim bulgulari:** B-06 kapandi. Acik kalan alti bulgunun hepsi "kapsam disi / KAHIN onayi bekliyor" etiketli: B-05 (KVKK IP/ulke), B-11 (K10 veri kaynagi), B-13 (`cmd_bakim()` arsiv), B-15 (dosya hijyeni), B-16 (cp1254), B-19 (kok `AGENTS.md:80`).
+
+### Depo disi / dokunulmayan `git_auto_push.bat` kopyalari
+
+| Yol | Neden korundu |
+|---|---|
+| `.kilo/worktrees/boatneck-spleen/scripts/git_auto_push.bat` | Canli `git worktree`, `.gitignore:98:.kilo/` |
+| `.kilo/worktrees/orkestrasyon-g-revleri-g-nl-k/scripts/git_auto_push.bat` | Canli `git worktree` |
+| `.kilo/worktrees/rightful-rain/scripts/git_auto_push.bat` | Canli `git worktree` |
+| `data/orchestrator/backups/D-187_faz2_2026-09-22/worktree_klasoru_kopya/scripts/git_auto_push.bat` | Yedek arsivi |
+| `data/orchestrator/backups/D-187_faz2_2026-09-22/worktree_klasoru_kopya/.kilo/worktrees/north-swift/scripts/git_auto_push.bat` | Yedek arsivi |
 
 ---
 
