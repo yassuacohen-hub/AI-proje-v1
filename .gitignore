@@ -131,6 +131,10 @@ data/_arsiv_kok/
 data/_*.py
 data/_tmp/
 
+# TUR-C Adim 2 (2026-09-24): gecici betik + zaman damgali yedek artiklari (AGENTS.md:394, :502)
+_tmp_*
+*.backup_*
+
 # SEC-AUTH-01 D-1: Streamlit secrets (plaintext admin fallback) depoya girmez
 .streamlit/secrets.toml
 .streamlit/secrets.*.toml

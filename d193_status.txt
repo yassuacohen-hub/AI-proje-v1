@@ -1,4 +1,0 @@
-Test Suite Status: COMPLETED
-Report: d193_menu_e2e_report.md
-Errors: d193_errors.jsonl
-Total Errors: 1
