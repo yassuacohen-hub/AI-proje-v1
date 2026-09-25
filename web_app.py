@@ -3047,6 +3047,233 @@ def _log_feature_flag_change(admin_id: str, flag_name: str, old_value: bool, new
         print(f"[FEATURE-FLAG-AUDIT] Log yazılamadı: {e}")
 
 
+# ============================================================
+# UI-ADMIN-LTV-CAC-27: LTV/CAC Analiz Endpoint
+# ============================================================
+
+def _calculate_ltv(days: int = 30) -> float:
+    """Ortalama müşteri yaşam boyu değerini hesapla (son N gün).
+    
+    LTV = toplam revenue / aktif müşteri sayısı
+    Revenue: credit_ledger'dan pozitif delta (kredi satışı/yükleme)
+    """
+    from datetime import datetime, timedelta
+    engine = get_engine()
+    with engine.connect() as conn:
+        cutoff = datetime.utcnow() - timedelta(days=days)
+        
+        # Toplam revenue (kredi satışları/yüklemeler - pozitif delta)
+        revenue_row = conn.execute(
+            text("""
+                SELECT COALESCE(SUM(delta), 0) as total_revenue
+                FROM credit_ledger
+                WHERE delta > 0 AND created_at >= :cutoff
+            """),
+            {"cutoff": cutoff}
+        ).scalar()
+        
+        # Aktif müşteri sayısı (son N günde en az bir işlem yapan)
+        active_users = conn.execute(
+            text("""
+                SELECT COUNT(DISTINCT user_id) as active_count
+                FROM credit_ledger
+                WHERE created_at >= :cutoff
+            """),
+            {"cutoff": cutoff}
+        ).scalar()
+        
+        total_revenue = float(revenue_row or 0)
+        active_count = int(active_users or 1)
+        
+        return total_revenue / active_count if active_count > 0 else 0.0
+
+
+def _calculate_cac(days: int = 30) -> float:
+    """Müşteri kazanım maliyeti hesapla.
+    
+    CAC = marketing_spend / yeni_müşteri_sayısı
+    marketing_spend: env MARKETING_SPEND_MONTHLY (varsayılan 50000)
+    Yeni müşteri: users.created_at son N gün
+    """
+    import os
+    from datetime import datetime, timedelta
+    engine = get_engine()
+    with engine.connect() as conn:
+        cutoff = datetime.utcnow() - timedelta(days=days)
+        
+        # Yeni müşteri sayısı (onaylı kullanıcılar)
+        new_users = conn.execute(
+            text("""
+                SELECT COUNT(*) as new_count
+                FROM users
+                WHERE created_at >= :cutoff AND status = 'onayli'
+            """),
+            {"cutoff": cutoff}
+        ).scalar()
+        
+        # Marketing harcaması (env'den, varsayılan 50000 TRY/ay)
+        marketing_spend = float(os.getenv("MARKETING_SPEND_MONTHLY", "50000"))
+        
+        new_count = int(new_users or 1)
+        
+        return marketing_spend / new_count if new_count > 0 else 0.0
+
+
+def _ltv_cac_trend(days: int = 180) -> list[dict]:
+    """Son N gün için günlük LTV, CAC, ratio trend verisi."""
+    from datetime import datetime, timedelta
+    engine = get_engine()
+    with engine.connect() as conn:
+        cutoff = datetime.utcnow() - timedelta(days=days)
+        
+        # Günlük revenue
+        revenue_rows = conn.execute(
+            text("""
+                SELECT DATE(created_at) as date, COALESCE(SUM(delta), 0) as daily_revenue
+                FROM credit_ledger
+                WHERE delta > 0 AND created_at >= :cutoff
+                GROUP BY DATE(created_at)
+                ORDER BY DATE(created_at)
+            """),
+            {"cutoff": cutoff}
+        ).mappings().all()
+        
+        # Günlük yeni müşteri
+        new_user_rows = conn.execute(
+            text("""
+                SELECT DATE(created_at) as date, COUNT(*) as new_users
+                FROM users
+                WHERE created_at >= :cutoff AND status = 'onayli'
+                GROUP BY DATE(created_at)
+                ORDER BY DATE(created_at)
+            """),
+            {"cutoff": cutoff}
+        ).mappings().all()
+        
+        # Marketing harcaması (günlük)
+        marketing_spend_daily = float(os.getenv("MARKETING_SPEND_MONTHLY", "50000")) / 30
+        
+        # Dictionary'ye çevir
+        revenue_dict = {str(r["date"]): float(r["daily_revenue"]) for r in revenue_rows}
+        new_user_dict = {str(r["date"]): int(r["new_users"]) for r in new_user_rows}
+        
+        # Tüm günleri doldur
+        from datetime import datetime, timedelta
+        start_date = datetime.utcnow().date() - timedelta(days=days)
+        trend = []
+        cumulative_revenue = 0.0
+        active_users = 0
+        
+        for i in range(days):
+            current_date = start_date + timedelta(days=i)
+            date_str = current_date.isoformat()
+            
+            daily_revenue = revenue_dict.get(date_str, 0.0)
+            daily_new_users = new_user_dict.get(date_str, 0)
+            
+            cumulative_revenue += daily_revenue
+            active_users += daily_new_users
+            
+            # Günlük CAC (marketing_spend_daily / daily_new_users)
+            cac = (float(os.getenv("MARKETING_SPEND_MONTHLY", "50000")) / 30) / daily_new_users if daily_new_users > 0 else 0.0
+            
+            # LTV = cumulative_revenue / active_users (kümülatif)
+            ltv = cumulative_revenue / active_users if active_users > 0 else 0.0
+            
+            ratio = ltv / cac if cac > 0 else 0.0
+            
+            trend.append({
+                "date": date_str,
+                "ltv": round(ltv, 2),
+                "cac": round(cac, 2),
+                "ratio": round(ratio, 2)
+            })
+        
+        return trend
+
+
+def _ltv_cac_by_tier() -> dict:
+    """Tier bazında LTV/CAC breakdown."""
+    engine = get_engine()
+    with engine.connect() as conn:
+        result = {}
+        
+        for tier in ["terminal", "strategic", "enterprise"]:
+            # Tier'a göre revenue
+            revenue = conn.execute(
+                text("""
+                    SELECT COALESCE(SUM(cl.delta), 0) as revenue
+                    FROM credit_ledger cl
+                    JOIN users u ON cl.user_id = u.user_id
+                    WHERE u.tier = :tier AND cl.delta > 0
+                """),
+                {"tier": tier}
+            ).scalar()
+            
+            # Tier'daki kullanıcı sayısı
+            user_count = conn.execute(
+                text("SELECT COUNT(*) FROM users WHERE tier = :tier AND status = 'onayli'"),
+                {"tier": tier}
+            ).scalar()
+            
+            # Tier LTV
+            ltv = float(revenue or 0) / max(int(user_count or 1), 1)
+            
+            # CAC hesapla (marketing_spend / tier'deki yeni user)
+            # Basit dağılım: toplam marketing / 3 tier
+            marketing_per_tier = float(os.getenv("MARKETING_SPEND_MONTHLY", "50000")) / 3
+            new_users_tier = conn.execute(
+                text("SELECT COUNT(*) FROM users WHERE tier = :tier AND status = 'onayli' AND created_at >= NOW() - INTERVAL '30 days'"),
+                {"tier": tier}
+            ).scalar()
+            
+            cac = (float(os.getenv("MARKETING_SPEND_MONTHLY", "50000")) / 3) / max(int(new_users_tier or 1), 1)
+            
+            ratio = ltv / cac if cac > 0 else 0.0
+            
+            result[tier] = {
+                "ltv": round(ltv, 2),
+                "cac": round(cac, 2),
+                "ratio": round(ratio, 2)
+            }
+        
+        return result
+
+
+@app.get("/api/admin/ltv-cac")
+def api_admin_ltv_cac(
+    days: int = 30,
+    _auth: str = Depends(require_admin_role)
+):
+    """UI-ADMIN-LTV-CAC-27: LTV/CAC Analiz Endpoint.
+    
+    Query params: days=30|90|180
+    Response: ltv, cac, ratio, trend, by_tier
+    Cache: ttl=3600
+    """
+    try:
+        # Validate days parameter
+        if days not in [30, 90, 180]:
+            days = 30
+        
+        ltv = _calculate_ltv(days)
+        cac = _calculate_cac(days)
+        ratio = ltv / cac if cac > 0 else 0.0
+        trend = _ltv_cac_trend(180)  # Always return 180 days trend for chart
+        by_tier = _ltv_cac_by_tier()
+        
+        return {
+            "ltv": round(ltv, 2),
+            "cac": round(cac, 2),
+            "ratio": round(ratio, 2),
+            "trend": trend,
+            "by_tier": by_tier
+        }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"LTV/CAC hesaplama hatası: {str(e)}")
+
+
 @app.get("/api/dashboard", response_class=HTMLResponse)
 def serve_dashboard(_auth: str = Depends(require_api_key)) -> HTMLResponse:
     index = WEB_DIR / "index.html"

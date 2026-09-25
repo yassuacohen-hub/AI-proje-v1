@@ -312,7 +312,7 @@
     "baslik": "[UI] LTV/CAC kartlarını yaz → K8 tamamlama (2s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "bekliyor",
+    "durum": "aktif",
     "baslangic": null,
     "bitis": null,
     "dosyalar": [],
@@ -322,7 +322,7 @@
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_UI-ADMIN-LTV-CAC-27.md",
-    "talimat": ""
+    "talimat": "UI-ADMIN-LTV-CAC-27: web_app.py LTV/CAC endpoint + admin_panel.py analiz sekmesi. LTV/CAC calculation, trend, tier breakdown. Test: tests/test_admin_ltv_cac.py (8 test)."
   },
   {
     "task_id": "DOC-ADMIN-MULTITENANT-KARAR-28",
