@@ -10,17 +10,17 @@
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s) | ihsan | P1 | iptal | scripts/pano_denetim.py, scripts/tetik_senk.py, tests/test_d66_bypass_tetikleme.py |
 | TEST-ADMIN-K2-AGIRLIK-23 | [TEST] K2 ağırlık şemasını denetle → test + SSOT kanıt (1s) | yasu | P2 | aktif | - |
 | UI-ADMIN-FEATURE-FLAG-25 | [UI] Feature flag yönetim ekranını yaz → A5 MVP (3s) | utku | P2 | review | - |
-| API-ADMIN-MFA-26 | [API] MFA + hesap kilidi akışını yaz → A6 auth (4s) | utku | P2 | bekliyor | - |
+| API-ADMIN-MFA-26 | [API] MFA + hesap kilidi akışını yaz → A6 auth (4s) | utku | P2 | review | - |
 | UI-ADMIN-LTV-CAC-27 | [UI] LTV/CAC kartlarını yaz → K8 tamamlama (2s) | utku | P2 | bekliyor | - |
 | DOC-ADMIN-MULTITENANT-KARAR-28 | [DOC] Multi-tenant kararını belgele → KK-7 (1s) | utku | P2 | bekliyor | - |
 | ALTYAPI-VERI-GORUNURLUK-01 | [ALTYAPI] Katmanlı görünürlük & kontör sistemi → 0018 migration + 3 tablo (4s) | orkestrator | P0 | tamamlandi | src/company_master/schema/migrations/0018_visibility_layer.sql, field_catalog.md, src/company_master/api/core/normalize.py |
-| API-KVKK-KONTROL-25 | [API] Kontör endpoint entegrasyonu (match/ilan) → _charge_module_credit çağrısı | yasu | P1 | baslatdi | web_app.py, src/company_master/schema/migrations/0018_visibility_layer.sql |
-| TEST-VISIBILITY-ENTEGRASYON-27 | [TEST] E2E senaryo testi (visibility layer + kontör) → 5 scenario + 4 conflict | yasu | P1 | baslatdi | tests/test_visibility_layer.py, src/company_master/api/core/normalize.py |
+| API-KVKK-KONTROL-25 | [API] Kontör endpoint entegrasyonu (match/ilan) → _charge_module_credit çağrısı | yasu | P1 | tamamlandi | web_app.py, src/company_master/schema/migrations/0018_visibility_layer.sql |
+| TEST-VISIBILITY-ENTEGRASYON-27 | [TEST] E2E senaryo testi (visibility layer + kontör) → 5 scenario + 4 conflict | yasu | P1 | tamamlandi | tests/test_visibility_layer.py, src/company_master/api/core/normalize.py |
 | UI-ADMIN-KVKK-MODU-26 | [UI] Admin KVKK mode toggle (strict ↔ lenient) → web_app POST endpoint | utku | P1 | review | web_app.py, web_dashboard/tabs/admin_panel.py |
 | UI-ADMIN-KVKK-RAPOR-28 | [UI] KVKK maskeleme raporu → admin paneline ek sekme | utku | P2 | review | web_dashboard/tabs/admin_panel.py, web_app.py |
 | DOC-VISIBILITY-KATMANI-29 | [DOC] Kullanıcı dokümanı (görünürlük katmanı + kontör) → markdown guide | utku | P2 | review | docs/VISIBILITY_LAYER_GUIDE.md |
-| API-LAYER2-DINAMIK-YÜKLEME-30 | [API] Layer 2 dinamik yükleme → plan_field_group tablosundan görünürlük oku | yasu | P1 | bekliyor | src/company_master/api/core/normalize.py, web_app.py |
-| KONTROL-KVKK-MASKELEME-31 | [KONTROL] KVKK maskeleme end-to-end test → admin panel e2e | yasu | P1 | baslatdi | tests/test_visibility_layer.py, web_app.py |
+| API-LAYER2-DINAMIK-YÜKLEME-30 | [API] Layer 2 dinamik yükleme → plan_field_group tablosundan görünürlük oku | yasu | P1 | tamamlandi | src/company_master/api/core/normalize.py, web_app.py |
+| KONTROL-KVKK-MASKELEME-31 | [KONTROL] KVKK maskeleme end-to-end test → admin panel e2e | yasu | P1 | tamamlandi | tests/test_visibility_layer.py, web_app.py |
 | UI-KONTROL-PANOSU-32 | [UI] Admin kontrol panosu → maskeleme durum metriksleri | utku | P2 | review | web_dashboard/tabs/admin_panel.py, web_app.py |
 | DOKUMAN-KVKK-FAQ-33 | [DOC] KVKK FAQ & sorun çözme → markdown troubleshooting guide | utku | P2 | review | docs/KVKK_FAQ.md |
 

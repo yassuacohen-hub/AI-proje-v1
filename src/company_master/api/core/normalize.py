@@ -38,7 +38,8 @@ _KVKK_FIELD_CLASS: Final[dict[str, str]] = {
     # İletişim (kontrol altında — pakete göre)
     "primary_phone": "kisitli",
     "primary_email": "kisitli",
-    "website": "kisitli",
+    # website kamuya açıktır (OSINT), pakete göre kontrol edilmez
+    "website": "acik",
     "phone_validity_status": "kisitli",
     "email_validity_status": "kisitli",
     

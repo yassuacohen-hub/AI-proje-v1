@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-25T03:14:57
+> Son guncelleme: 2026-09-25T04:15:06
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -10,17 +10,17 @@
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | iptal |
 | TEST-ADMIN-K2-AGIRLIK-23 | [TEST] K2 ağırlık şemasını denetle → tes | yasu | P2 | aktif |
 | UI-ADMIN-FEATURE-FLAG-25 | [UI] Feature flag yönetim ekranını yaz → | utku | P2 | review |
-| API-ADMIN-MFA-26 | [API] MFA + hesap kilidi akışını yaz → A | utku | P2 | bekliyor |
+| API-ADMIN-MFA-26 | [API] MFA + hesap kilidi akışını yaz → A | utku | P2 | review |
 | UI-ADMIN-LTV-CAC-27 | [UI] LTV/CAC kartlarını yaz → K8 tamamla | utku | P2 | bekliyor |
 | DOC-ADMIN-MULTITENANT-KARAR-28 | [DOC] Multi-tenant kararını belgele → KK | utku | P2 | bekliyor |
 | ALTYAPI-VERI-GORUNURLUK-01 | [ALTYAPI] Katmanlı görünürlük & kontör s | orkestrator | P0 | tamamlandi |
-| API-KVKK-KONTROL-25 | [API] Kontör endpoint entegrasyonu (matc | yasu | P1 | baslatdi |
-| TEST-VISIBILITY-ENTEGRASYON-27 | [TEST] E2E senaryo testi (visibility lay | yasu | P1 | baslatdi |
+| API-KVKK-KONTROL-25 | [API] Kontör endpoint entegrasyonu (matc | yasu | P1 | tamamlandi |
+| TEST-VISIBILITY-ENTEGRASYON-27 | [TEST] E2E senaryo testi (visibility lay | yasu | P1 | tamamlandi |
 | UI-ADMIN-KVKK-MODU-26 | [UI] Admin KVKK mode toggle (strict ↔ le | utku | P1 | review |
 | UI-ADMIN-KVKK-RAPOR-28 | [UI] KVKK maskeleme raporu → admin panel | utku | P2 | review |
 | DOC-VISIBILITY-KATMANI-29 | [DOC] Kullanıcı dokümanı (görünürlük kat | utku | P2 | review |
-| API-LAYER2-DINAMIK-YÜKLEME-30 | [API] Layer 2 dinamik yükleme → plan_fie | yasu | P1 | bekliyor |
-| KONTROL-KVKK-MASKELEME-31 | [KONTROL] KVKK maskeleme end-to-end test | yasu | P1 | baslatdi |
+| API-LAYER2-DINAMIK-YÜKLEME-30 | [API] Layer 2 dinamik yükleme → plan_fie | yasu | P1 | tamamlandi |
+| KONTROL-KVKK-MASKELEME-31 | [KONTROL] KVKK maskeleme end-to-end test | yasu | P1 | tamamlandi |
 | UI-KONTROL-PANOSU-32 | [UI] Admin kontrol panosu → maskeleme du | utku | P2 | review |
 | DOKUMAN-KVKK-FAQ-33 | [DOC] KVKK FAQ & sorun çözme → markdown  | utku | P2 | review |
 

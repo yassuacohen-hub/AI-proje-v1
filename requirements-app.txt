@@ -26,5 +26,9 @@ openpyxl>=3.1.0
 # Vektor katmani (9R-02): semantik arama + dublikasyon (lazy import; yoksa matcher VKN+fuzzy ile calisir)
 chromadb>=0.5.0
 
+# MFA (API-ADMIN-MFA-26): TOTP + QR uretimi
+pyotp>=2.9.0
+qrcode[pil]>=7.4.2
+
 # TOML okuma (dash04_api_client): Python 3.10'da stdlib tomllib yok
 tomli>=2.0; python_version < "3.11"

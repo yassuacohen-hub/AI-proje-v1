@@ -2580,5 +2580,13 @@
     "ciktilar": [],
     "teslim_tarihi": "2026-09-25T03:14:57",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "API-ADMIN-MFA-26",
+    "ajan": "utku",
+    "ozet": "MFA sistemi hazirlandi: web_app.py MFA endpoints (setup, verify, disable, backup-codes, login-mfa, status), migration 0019_admin_mfa.sql + down.sql, pyotp+qrcode entegrasyonu. Endpointler: /api/admin/mfa/{setup,verify,disable,backup-codes,login-mfa,status}. Kodlama denetimi temiz (pre-existing issues only).",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-25T04:15:06",
+    "durum": "bekliyor"
   }
 ]

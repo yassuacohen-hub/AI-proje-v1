@@ -417,3 +417,32 @@ def teslim_kontrol_et(
         "engel": engel,
         "nedenler": nedenler,
     }
+
+
+def ajan_mesaj_gonder(ajan: str, mesaj: str, task_id: str = "GENEL") -> dict:
+    """Ajan Telegram'da sahip (KAHİN) ile iletişim kurar.
+    
+    Args:
+        ajan: Ajan adı (Utku, Salih, Yasu, İhsan, Mimir, orkestrator vb.)
+        mesaj: Gönderilecek mesaj metni
+        task_id: İlgili görev ID'si (opsiyonel, default: GENEL)
+    
+    Returns:
+        {"ok": bool, "message": str}
+    
+    Kullanım:
+        from src.company_master.chat import ajan_mesaj_gonder
+        ajan_mesaj_gonder("Utku", "Görev tamamlandı", task_id="P7-123")
+    """
+    try:
+        # Mesajı veritabanına kaydet
+        ac(ajan, task_id, f"👤 {ajan}: {mesaj}", durum="acik")
+        
+        # Telegram'a gönder (botun webhook'u alacak)
+        _gonder_telegram_kahin(f"📨 {ajan} → {mesaj}", task_id, onem="normal")
+        
+        logger.info(f"[AJAN_MESAJ] {ajan} → KAHİN: {mesaj[:50]}")
+        return {"ok": True, "message": f"Mesaj KAHİN'e gönderildi"}
+    except Exception as e:
+        logger.error(f"[AJAN_MESAJ_ERROR] {ajan}: {e}", exc_info=True)
+        return {"ok": False, "message": str(e)[:100]}

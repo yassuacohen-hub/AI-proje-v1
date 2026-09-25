@@ -26,7 +26,7 @@ from . import task_board as tb
 
 # D-192: Ajan Chat Sistemi entegrasyonu
 try:
-    from company_master.chat import ac as chat_ac
+    from src.company_master.chat import ac as chat_ac
     HAS_CHAT = True
 except ImportError:
     HAS_CHAT = False
@@ -190,7 +190,7 @@ def tetik_ekle(
 
 def bekleyen_tetikler(ajan: str, data_dir: Path | None = None) -> list[dict[str, Any]]:
     """Ajanın henüz almadığı (okunmamış) görevleri listele. D-211: chat açık sorularını ekle."""
-    from company_master.chat import oku as chat_oku  # noqa: E402
+    from src.company_master.chat import oku as chat_oku  # noqa: E402
     
     tetikler = [k for k in _tetikleri_oku(ajan, data_dir) if k["durum"] == "bekliyor"]
     chat_satirlar = chat_oku(data_dir=data_dir)
@@ -434,7 +434,7 @@ def onayla(
     try:
         gorev = tb.gorev_getir(task_id) or {}
         if gorev.get("mod") == "architect":
-            from company_master.intelligence.mimir_rapor import MimirRaporYazici
+            from src.company_master.intelligence.mimir_rapor import MimirRaporYazici
             yazici = MimirRaporYazici()
             yazici.rapor_yazmayi_tetikle(task_id)
     except Exception:

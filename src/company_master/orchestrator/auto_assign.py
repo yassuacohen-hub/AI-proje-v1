@@ -9,7 +9,7 @@ import json
 import logging
 from pathlib import Path
 from sqlalchemy import text
-from company_master.db.connection import get_engine
+from src.company_master.db.connection import get_engine
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)

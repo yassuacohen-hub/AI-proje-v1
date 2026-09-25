@@ -1,0 +1,21 @@
+def api_admin_login_post(req: dict, request: Request, _rate: None = Depends(_auth_rate_guard)):
+    """ADMIN-GATE-01: POST admin girişi. {email, password} → token.
+
+    SEC-AUTH-01 Y-1: `_auth_rate_guard` IP bazlı katı limit uygular.
+    Y-2: bilinmeyen e-posta ve hatalı şifre aynı 401 detayını döner
+    (var/yok sızması engellenir).
+    """
+    email = (req.get("email") or "").strip()
+    password = req.get("password") or ""
+    if not email or not password:
+        aktivite_yaz(user_id=email, olay_tipi="giris", basarili=False, request=request)
+        raise HTTPException(status_code=400, detail="email ve sifre zorunlu")
+    engine = get_engine()
+    with engine.connect() as conn:
+        row = conn.execute(
+            text("SELECT email, password_hash, role, status FROM users WHERE email = :e"),
+            {"e": email},
+        ).mappings().first()
+    if row:
+        if row["status"] != "onayli" or row["role"] != "admin":
+            aktivite_yaz(user_id=email, olay_tipi="giris", 

@@ -51,7 +51,7 @@ def check_database() -> tuple[bool, str]:
     """PostgreSQL baglantisini kontrol et."""
     try:
         from sqlalchemy import text
-        from company_master.db.connection import get_engine
+        from src.company_master.db.connection import get_engine
 
         engine = get_engine()
         with engine.connect() as conn:
@@ -66,7 +66,7 @@ def check_data_quality() -> tuple[bool, str]:
     """Kalite skoru ortalamasini kontrol et."""
     try:
         from sqlalchemy import text
-        from company_master.db.connection import get_engine
+        from src.company_master.db.connection import get_engine
 
         engine = get_engine()
         with engine.connect() as conn:
@@ -87,7 +87,7 @@ def check_data_freshness() -> tuple[bool, str]:
     """Veri tazeligini kontrol et (son 7 gun icinde scrape?)."""
     try:
         from sqlalchemy import text
-        from company_master.db.connection import get_engine
+        from src.company_master.db.connection import get_engine
 
         engine = get_engine()
         with engine.connect() as conn:

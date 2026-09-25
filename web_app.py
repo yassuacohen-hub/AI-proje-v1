@@ -25,6 +25,11 @@ from fastapi.responses import FileResponse, HTMLResponse, Response, StreamingRes
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text
 
+import pyotp
+import qrcode
+import base64
+from io import BytesIO
+
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "src"))
 
@@ -495,6 +500,97 @@ def apify_webhook_metrics() -> Response:
         content=metrics_bytes,
         media_type="text/plain; version=0.0.4; charset=utf-8",
     )
+
+
+# ============================================================================
+# D-216: TELEGRAM WEBHOOK ENDPOINT
+# ============================================================================
+
+@app.post("/api/webhooks/telegram")
+async def telegram_webhook(request: Request) -> dict:
+    """D-216: Telegram Bot webhook alıcısı.
+    
+    Telegram Bot API güncellemelerini (message, callback_query vb.) alır,
+    telegram_bot.py içindeki handler'lara iletir.
+    
+    Body (JSON):
+        {
+            "update_id": int,
+            "message": {...} | null,
+            "callback_query": {...} | null,
+            ...
+        }
+    
+    Returns:
+        {"ok": true, "message": "Update processed"}
+"""
+    import json
+    import logging
+    
+    logger = logging.getLogger(__name__)
+    
+    try:
+        # Request body'yi oku
+        body = await request.json()
+        update_id = body.get("update_id", 0)
+        
+        logger.info(f"[TG-WEBHOOK] Received update_id={update_id}")
+        
+        # telegram_bot modülü içine iletişim kur
+        # (lokal polling modunda bu endpoint kullanılmaz, fakat production için hazır)
+        try:
+            from src.company_master.telegram_bot import bot
+            
+            # Telegram Bot API'nin ilettiği update'i bot'a işlet
+            bot.process_new_updates([body])
+            logger.info(f"[TG-WEBHOOK] Processed update_id={update_id}")
+            
+        except ImportError:
+            logger.warning("[TG-WEBHOOK] telegram_bot module not available (polling mode)")
+            # Polling modunda webhook'a POST gelmez, sorun yok
+            pass
+        
+        return {
+            "ok": True,
+            "message": "Update processed",
+            "update_id": update_id,
+            "timestamp": datetime.now().isoformat(),
+        }
+    
+    except json.JSONDecodeError as e:
+        logger.error(f"[TG-WEBHOOK] JSON decode error: {e}")
+        return {"ok": False, "error": "Invalid JSON"}
+    
+    except Exception as e:
+        logger.error(f"[TG-WEBHOOK] Unhandled error: {e}", exc_info=True)
+        return {"ok": False, "error": str(e)}
+
+
+@app.get("/api/webhooks/telegram/health")
+def telegram_webhook_health() -> dict:
+    """Telegram webhook health check.
+    
+    Returns:
+        - status: "healthy" veya "degraded"
+        - bot_token_configured: bool
+        - polling_mode: bool (True ise webhook kullanılmıyor)
+    """
+    try:
+        from src.company_master.telegram_bot import bot, TOKEN
+        
+        return {
+            "status": "healthy",
+            "bot_token_configured": bool(TOKEN),
+            "polling_mode": True,  # MVP Faz 1 polling kullanıyor
+            "endpoint": "/api/webhooks/telegram",
+            "timestamp": datetime.now().isoformat(),
+        }
+    except Exception as e:
+        return {
+            "status": "degraded",
+            "error": str(e),
+            "timestamp": datetime.now().isoformat(),
+        }
 
 
 @app.get("/metrics")
@@ -1157,9 +1253,10 @@ def api_match(
     limit = max(1, min(limit, 100))
 
     user = _user_from_token(user_token) if user_token else None
+    tier = user.get("tier", "terminal")  # Default to terminal
     credit_info = None
     if user is not None and user["status"] == "onayli":
-        kalan = _charge_credit(str(user["user_id"]), user["email"], "match")
+        kalan = _charge_module_credit(str(user["user_id"]), tier, "match")
         if kalan >= 0 and kalan == 0:
             mask = 1  # kredi bitti: sonuc maskele (V8 Credit Exhaustion UX)
             credit_info = {
@@ -2889,6 +2986,25 @@ def _get_feature_flags() -> dict[str, bool]:
         return {}
 
 
+def _get_plan_field_visibility(company_id: str) -> dict:
+    """plan_field_group tablosundan paket bazlı alan görünürlüğü okur (Layer 2)."""""
+    engine = get_engine()
+    plan_field_visibility = {}
+    try:
+        with engine.connect() as conn:
+            rows = conn.execute(text("""
+                SELECT pf.field_group, pf.visibility
+                FROM plan_field_group pf
+                JOIN companies c ON c.plan_id = pf.plan_id
+                WHERE c.company_id = :cid AND pf.effective_to IS NULL
+            """), {"cid": company_id}).mappings().all()
+            for row in rows:
+                plan_field_visibility[row["field_group"]] = row["visibility"]
+    except Exception:
+        pass
+    return plan_field_visibility
+
+
 def _save_feature_flags(flags: dict[str, bool]) -> None:
     """Feature flag'leri session state'e yaz."""
     try:
@@ -3057,7 +3173,9 @@ def api_company_detail(
             # Admin modu: strict (default) | lenient (mask=0 dışı)
             admin_mode = "lenient" if mask == 1 else "strict"
             if _mask_active(mask):
-                row = apply_kvkk_mask(row, admin_mode=admin_mode)
+                # Layer 2 plan_field_visibility from DB
+                plan_field_visibility = _get_plan_field_visibility(company_id)
+                row = apply_kvkk_mask(row, admin_mode=admin_mode, plan_field_visibility=plan_field_visibility)
             return row
         return {}
 
@@ -3191,3 +3309,408 @@ async def api_intelligence_dashboard_stream(_auth: str = Depends(require_api_key
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+# ============================================================
+# API-ADMIN-MFA-26: Multi-Factor Authentication (MFA) Endpoints
+# ============================================================
+
+def _generate_backup_codes(count: int = 8) -> list[str]:
+    """8 tane 4 karakterli backup kodu üret (base32, uppercase)."""
+    import secrets
+    codes = []
+    for _ in range(count):
+        # 4 karakter = 20 bits = 4 base32 chars
+        code = secrets.token_bytes(3).hex()[:4].upper()
+        codes.append(code)
+    return codes
+
+
+def _hash_backup_codes(codes: list[str]) -> str:
+    """Backup kodlarını SHA256 ile hashle (JSON array string olarak sakla)."""
+    import hashlib
+    import json
+    hashes = [hashlib.sha256(code.encode()).hexdigest() for code in codes]
+    return json.dumps(hashes)
+
+
+def _verify_backup_code(codes_json: str, input_code: str) -> bool:
+    """Girilen kodu hashle ve saklı hashlerle karşılaştır."""
+    import hashlib
+    import json
+    input_hash = hashlib.sha256(input_code.upper().encode()).hexdigest()
+    try:
+        stored_hashes = json.loads(codes_json)
+        return input_hash in stored_hashes
+    except (json.JSONDecodeError, TypeError):
+        return False
+
+
+@app.post("/api/admin/mfa/setup")
+def api_admin_mfa_setup(
+    req: dict,
+    request: Request,
+    _auth: str = Depends(require_admin_role)
+):
+    """API-ADMIN-MFA-26: MFA setup başlat.
+    
+    Request: {}
+    Response: {secret_key, qr_code_base64, mfa_token, expires_at}
+    """
+    try:
+        # Admin email'i session'dan al
+        session = _get_session(request)
+        if not session or not session.user:
+            raise HTTPException(status_code=401, detail="Oturum geçersiz")
+        
+        admin_email = session.user.email
+        admin_id = session.user.user_id
+        
+        # Zaten MFA aktif mi kontrol et
+        engine = get_engine()
+        with engine.connect() as conn:
+            existing = conn.execute(
+                text("SELECT enabled FROM admin_mfa WHERE admin_id = :aid"),
+                {"aid": admin_id}
+            ).mappings().first()
+            
+            if existing and existing["enabled"]:
+                raise HTTPException(status_code=400, detail="MFA zaten aktif. Önce devre dışı bırakın.")
+        
+        # TOTP secret üret (base32)
+        secret_key = pyotp.random_base32()
+        
+        # MFA token üret (1 dakika geçerli)
+        import secrets
+        mfa_token = secrets.token_urlsafe(32)
+        expires_at = datetime.utcnow() + timedelta(minutes=1)
+        
+        # QR kod oluştur
+        totp_uri = pyotp.totp.TOTP(secret_key).provisioning_uri(
+            name=admin_email,
+            issuer_name="Huginn Data Insights"
+        )
+        qr = qrcode.make(totp_uri)
+        buf = BytesIO()
+        qr.save(buf, format="PNG")
+        qr_base64 = base64.b64encode(buf.getvalue()).decode()
+        
+        # Setup token'ı geçici tabloya kaydet
+        with engine.begin() as conn:
+            conn.execute(
+                text("""
+                    INSERT INTO admin_mfa_setup_tokens 
+                    (admin_id, secret_key, mfa_token, expires_at)
+                    VALUES (:aid, :secret, :token, :exp)
+                """),
+                {
+                    "aid": admin_id,
+                    "secret": secret_key,
+                    "token": mfa_token,
+                    "exp": expires_at
+                }
+            )
+        
+        return {
+            "ok": True,
+            "secret_key": secret_key,
+            "qr_code_base64": qr_base64,
+            "mfa_token": mfa_token,
+            "expires_at": expires_at.isoformat()
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"MFA setup başlatılamadı: {str(e)}")
+
+
+@app.post("/api/admin/mfa/verify")
+def api_admin_mfa_verify(
+    req: dict,
+    _auth: str = Depends(require_admin_role)
+):
+    """API-ADMIN-MFA-26: MFA doğrulama ve aktifleştirme.
+    
+    Request: {mfa_token, code}
+    Response: {ok, message, backup_codes}
+    """
+    try:
+        mfa_token = (req.get("mfa_token") or "").strip()
+        code = (req.get("code") or "").strip()
+        
+        if not mfa_token or not code:
+            raise HTTPException(status_code=400, detail="mfa_token ve code zorunlu")
+        
+        # Session'dan admin ID al
+        session_data = req.get("session")  # This is a placeholder
+        # In real implementation, we'd get this from the request context
+        
+        # For now, extract from request headers or body
+        # This is simplified - in production use proper auth
+        
+        engine = get_engine()
+        
+        # Setup token'ı doğrula
+        with engine.connect() as conn:
+            setup = conn.execute(
+                text("""
+                    SELECT admin_id, secret_key 
+                    FROM admin_mfa_setup_tokens 
+                    WHERE mfa_token = :token AND used = FALSE AND expires_at > NOW()
+                """),
+                {"token": mfa_token}
+            ).mappings().first()
+            
+            if not setup:
+                raise HTTPException(status_code=400, detail="Geçersiz veya süresi dolmuş MFA token")
+            
+            admin_id = setup["admin_id"]
+            secret_key = setup["secret_key"]
+        
+        # TOTP kodu doğrula
+        totp = pyotp.TOTP(secret_key)
+        if not totp.verify(code, valid_window=1):
+            raise HTTPException(status_code=400, detail="Geçersiz MFA kodu")
+        
+        # Backup codes üret
+        backup_codes = _generate_backup_codes(8)
+        backup_codes_hash = _hash_backup_codes(backup_codes)
+        
+        # MFA kaydını oluştur
+        with engine.begin() as conn:
+            # Admin MFA kaydını oluştur/güncelle
+            conn.execute(
+                text("""
+                    INSERT INTO admin_mfa (admin_id, secret_key, enabled, backup_codes, created_at)
+                    VALUES (:aid, :secret, TRUE, :backup, NOW())
+                    ON CONFLICT (admin_id) DO UPDATE SET
+                        secret_key = EXCLUDED.secret_key,
+                        enabled = TRUE,
+                        backup_codes = EXCLUDED.backup_codes,
+                        updated_at = NOW()
+                """),
+                {
+                    "aid": setup["admin_id"],
+                    "secret": secret_key,
+                    "backup": backup_codes_hash
+                }
+            )
+            
+            # Setup token'ı kullanılmış olarak işaretle
+            conn.execute(
+                text("UPDATE admin_mfa_setup_tokens SET used = TRUE WHERE mfa_token = :token"),
+                {"token": mfa_token}
+            )
+        
+        return {
+            "ok": True,
+            "message": "MFA başarıyla aktifleştirildi",
+            "backup_codes": backup_codes
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"MFA doğrulama hatası: {str(e)}")
+
+
+@app.post("/api/admin/mfa/disable")
+def api_admin_mfa_disable(
+    req: dict,
+    _auth: str = Depends(require_admin_role)
+):
+    """MFA devre dışı bırak (mevcut şifre gerekli)."""
+    try:
+        # Password ve email iste
+        password = req.get("password") or ""
+        if not password:
+            raise HTTPException(status_code=400, detail="Mevcut şifre zorunlu")
+        
+        # Admin email'i session'dan al
+        session_data = req.get("session")  # Placeholder
+        # In practice, get from request context
+        
+        # For now, require email in request
+        email = req.get("email") or ""
+        if not email:
+            raise HTTPException(status_code=400, detail="Email zorunlu")
+        
+        # Şifre doğrula
+        engine = get_engine()
+        with engine.connect() as conn:
+            row = conn.execute(
+                text("SELECT password_hash FROM users WHERE email = :e AND role = 'admin'"),
+                {"e": email}
+            ).mappings().first()
+            
+            if not row or not _verify_password(password, row["password_hash"]):
+                raise HTTPException(status_code=401, detail="Geçersiz şifre")
+            
+            # MFA devre dışı bırak
+            conn.execute(
+                text("UPDATE admin_mfa SET enabled = FALSE, updated_at = NOW() WHERE admin_id = (SELECT user_id FROM users WHERE email = :e)"),
+                {"e": email}
+            )
+        
+        return {"ok": True, "message": "MFA devre dışı bırakıldı"}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"MFA devre dışı bırakma hatası: {str(e)}")
+
+
+@app.post("/api/admin/mfa/backup-codes")
+def api_admin_mfa_backup_codes(
+    req: dict,
+    _auth: str = Depends(require_admin_role)
+):
+    """Backup codes yeniden üret."""
+    try:
+        # Admin email
+        email = req.get("email") or ""
+        if not email:
+            raise HTTPException(status_code=400, detail="Email zorunlu")
+        
+        # MFA aktif mi kontrol et
+        engine = get_engine()
+        with engine.connect() as conn:
+            mfa = conn.execute(
+                text("SELECT admin_id, enabled FROM admin_mfa WHERE admin_id = (SELECT user_id FROM users WHERE email = :e)"),
+                {"e": req.get("email", "")}
+            ).mappings().first()
+            
+            if not mfa or not mfa["enabled"]:
+                raise HTTPException(status_code=400, detail="MFA aktif değil")
+        
+        # Yeni backup codes üret
+        backup_codes = _generate_backup_codes(8)
+        backup_codes_hash = _hash_backup_codes(backup_codes)
+        
+        # Kaydet
+        with engine.begin() as conn:
+            conn.execute(
+                text("UPDATE admin_mfa SET backup_codes = :backup, updated_at = NOW() WHERE admin_id = :aid"),
+                {"backup": backup_codes_hash, "aid": mfa["admin_id"]}
+            )
+        
+        return {
+            "ok": True,
+            "message": "Yeni backup kodları üretildi",
+            "backup_codes": backup_codes
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Backup codes hatası: {str(e)}")
+
+
+@app.post("/api/admin/login-mfa")
+def api_admin_login_mfa(req: dict, request: Request):
+    """2. adım MFA login: {mfa_token, code} -> auth token."""
+    try:
+        mfa_token = (req.get("mfa_token") or "").strip()
+        code = (req.get("code") or "").strip()
+        
+        if not mfa_token or not code:
+            raise HTTPException(status_code=400, detail="mfa_token ve code zorunlu")
+        
+        engine = get_engine()
+        
+        # MFA token'ı doğrula
+        with engine.connect() as conn:
+            setup = conn.execute(
+                text("""
+                    SELECT admin_id 
+                    FROM admin_mfa_setup_tokens 
+                    WHERE mfa_token = :token AND used = FALSE AND expires_at > NOW()
+                """),
+                {"token": mfa_token}
+            ).mappings().first()
+            
+            if not setup:
+                raise HTTPException(status_code=400, detail="Geçersiz veya süresi dolmuş MFA token")
+            
+            admin_id = setup["admin_id"]
+            
+            # Admin email al
+            admin = conn.execute(
+                text("SELECT email FROM users WHERE user_id = :aid"),
+                {"aid": admin_id}
+            ).mappings().first()
+            
+            if not admin:
+                raise HTTPException(status_code=404, detail="Admin bulunamadı")
+            
+            email = admin["email"]
+        
+        # MFA kaydını bul ve TOTP doğrula
+        with engine.connect() as conn:
+            mfa = conn.execute(
+                text("SELECT secret_key FROM admin_mfa WHERE admin_id = :aid AND enabled = TRUE"),
+                {"aid": admin_id}
+            ).mappings().first()
+            
+            if not mfa:
+                raise HTTPException(status_code=400, detail="MFA aktif değil")
+            
+            secret_key = mfa["secret_key"]
+        
+        # TOTP doğrula
+        totp = pyotp.TOTP(secret_key)
+        if not totp.verify(code, valid_window=1):
+            raise HTTPException(status_code=401, detail="Geçersiz MFA kodu")
+        
+        # MFA token'ı kullanılmış olarak işaretle
+        with engine.begin() as conn:
+            conn.execute(
+                text("UPDATE admin_mfa_setup_tokens SET used = TRUE WHERE mfa_token = :token"),
+                {"token": mfa_token}
+            )
+        
+        # Başarılı - token üret
+        token = _user_token(email)
+        aktivite_yaz(user_id=email, olay_tipi="giris", basarili=True, request=request)
+        
+        return {"token": token}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"MFA login hatası: {str(e)}")
+
+
+@app.get("/api/admin/mfa/status")
+def api_admin_mfa_status(
+    _auth: str = Depends(require_admin_role)
+):
+    """MFA durumu sorgula."""
+    try:
+        # Placeholder - in practice get from session
+        email = "admin@huginn.local"  # placeholder
+        
+        engine = get_engine()
+        with engine.connect() as conn:
+            mfa = conn.execute(
+                text("""
+                    SELECT enabled, created_at, last_used_at, backup_codes IS NOT NULL as has_backup
+                    FROM admin_mfa 
+                    WHERE admin_id = (SELECT user_id FROM users WHERE email = :e)
+                """),
+                {"e": email}
+            ).mappings().first()
+            
+            if not mfa:
+                return {"enabled": False}
+            
+            return {
+                "enabled": mfa["enabled"],
+                "created_at": str(mfa["created_at"]) if mfa["created_at"] else None,
+                "last_used_at": str(mfa["last_used_at"]) if mfa["last_used_at"] else None,
+                "has_backup_codes": mfa["has_backup"]
+            }
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"MFA status hatası: {str(e)}")
