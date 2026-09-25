@@ -1233,3 +1233,147 @@ def render_feature_flags_tab() -> None:
         st.dataframe(df, width="stretch", hide_index=True)
     else:
         st.info("Henüz feature flag değişikliği yok.")
+
+
+
+# ---------------------------------------------------------------------------
+# UI-ADMIN-LTV-CAC-27: LTV/CAC Analiz Sekmesi
+# ---------------------------------------------------------------------------
+
+def _ltv_cac_api_token() -> str | None:
+    """Oturumdan admin token al."""
+    try:
+        oturum = dict(st.session_state)
+        return oturum.get("admin_token") or oturum.get("user_token")
+    except Exception:
+        return None
+
+
+def _ltv_cac_verileri_getir(days: int = 30) -> dict | None:
+    """LTV/CAC verilerini API'den getir."""
+    import requests
+    token = _ltv_cac_api_token()
+    if not token:
+        return None
+    try:
+        resp = requests.get(
+            f"/api/admin/ltv-cac?days={days}",
+            headers={"Authorization": f"Bearer {token}"},
+            timeout=10,
+        )
+        if resp.ok:
+            return resp.json()
+    except Exception:
+        pass
+    return None
+
+
+def render_ltv_cac_tab() -> None:
+    """UI-ADMIN-LTV-CAC-27: LTV/CAC Analiz Sekmesi.
+
+    KPI kartları: LTV, CAC, Ratio
+    3 tab: 30 gün | 90 gün | 180 gün
+    Line chart: LTV vs CAC trend
+    Stacked bar chart: Tier breakdown
+    """
+    from datetime import datetime, timedelta
+
+    PageHeader(
+        "LTV/CAC Analiz", ust_etiket="İş · Analitik", ikon="💰",
+        giris="Müşteri yaşam boyu değeri (LTV) ve kazanım maliyeti (CAC) analizi. Ratio ≥3 sağlıklı.",
+    ).render()
+
+    # Period seçici
+    days_options = {"30 gün": 30, "90 gün": 90, "180 gün": 180}
+    secilen_label = st.selectbox("Periyot", list(days_options.keys()), index=0, key="ltv_cac_periyot")
+    days = days_options[secilen_label]
+
+    # Veri getir
+    veri = _ltv_cac_verileri_getir(days)
+
+    if not veri:
+        st.warning("⚠️ Veri kaynağı yok — API endpoint çalışmıyor veya token bulunamadı.")
+        return
+
+    # KPI kartları
+    col1, col2, col3, col4 = st.columns(4)
+    with col1:
+        st.metric("LTV (Ortalama)", f"{veri.get('ltv', 0):,.0f} TRY")
+    with col2:
+        st.metric("CAC (Kazanım Maliyeti)", f"{veri.get('cac', 0):,.0f} TRY")
+    with col3:
+        ratio = veri.get('ratio', 0)
+        st.metric("LTV/CAC Ratio", f"{ratio:.1f}x")
+    with col4:
+        st.metric("Periyot", f"{days} gün")
+
+    # Ratio durumu
+    ratio = veri.get('ratio', 0)
+    if ratio >= 3:
+        st.success(f"✅ Sağlıklı: LTV/CAC = {ratio:.1f}x (≥3 hedef)")
+    elif ratio >= 1:
+        st.warning(f"⚠️ Dikkat: LTV/CAC = {ratio:.1f}x (1-3 arası)")
+    else:
+        st.error(f"🔴 Zarar: LTV/CAC = {ratio:.1f}x (<1)")
+
+    st.divider()
+
+    # 3 Tab: 30/90/180 gün trend
+    tab30, tab90, tab180 = st.tabs(["📅 30 Gün", "📅 90 Gün", "📅 180 Gün"])
+
+    trend_verisi = veri.get("trend", [])
+
+    for tab_label, tab_days, tab_obj in [
+        ("30 gün", 30, tab30),
+        ("90 gün", 90, tab90),
+        ("180 gün", 180, tab180),
+    ]:
+        with tab_obj:
+            filtered_trend = [
+                t for t in trend_verisi
+                if (datetime.strptime(t["date"], "%Y-%m-%d").date() >= datetime.now().date() - timedelta(days=tab_days))
+            ]
+
+            if filtered_trend:
+                df_trend = pd.DataFrame(filtered_trend)
+                df_trend["date"] = pd.to_datetime(df_trend["date"])
+                df_trend = df_trend.set_index("date")
+
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.line_chart(df_trend[["ltv", "cac"]])
+                with col2:
+                    st.line_chart(df_trend[["ratio"]])
+            else:
+                st.info(f"{tab_label} için trend verisi yok.")
+
+    st.divider()
+
+    # Tier breakdown (stacked bar chart)
+    Section("Tier Bazlı LTV/CAC", "Paket bazlı LTV, CAC ve Ratio dağılımı", ikon="📊").render()
+
+    by_tier = veri.get("by_tier", {})
+    if by_tier:
+        tier_df = pd.DataFrame(by_tier).T
+        tier_df = tier_df.reset_index().rename(columns={"index": "Tier"})
+
+        col1, col2 = st.columns(2)
+        with col1:
+            st.bar_chart(tier_df.set_index("Tier")[["ltv", "cac"]])
+        with col2:
+            st.bar_chart(tier_df.set_index("Tier")[["ratio"]])
+
+        # Detay tablo
+        st.dataframe(
+            tier_df.rename(columns={
+                "ltv": "LTV (TRY)",
+                "cac": "CAC (TRY)",
+                "ratio": "Ratio"
+            }),
+            width="stretch", hide_index=True
+        )
+    else:
+        st.info("Tier breakdown verisi yok.")
+
+    st.caption("Not: Ratio ≥3 sağlıklı, 1-3 arası dikkat, <1 zarar. CAC: marketing_spend / yeni_müşteri. LTV: revenue / aktif_müşteri.")
+

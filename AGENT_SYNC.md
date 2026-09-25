@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-25T11:51:29
+> Son guncelleme: 2026-09-25T12:10:16
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -9,8 +9,8 @@
 |-------|--------|-------|---------|-------|
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | iptal |
 | API-ADMIN-MFA-26 | [API] MFA + hesap kilidi akışını yaz → A | utku | P2 | review |
-| UI-ADMIN-LTV-CAC-27 | [UI] LTV/CAC kartlarını yaz → K8 tamamla | utku | P2 | aktif |
-| DOC-ADMIN-MULTITENANT-KARAR-28 | [DOC] Multi-tenant kararını belgele → KK | utku | P2 | bekliyor |
+| UI-ADMIN-LTV-CAC-27 | [UI] LTV/CAC kartlarını yaz → K8 tamamla | utku | P2 | review |
+| DOC-ADMIN-MULTITENANT-KARAR-28 | [DOC] Multi-tenant kararını belgele → KK | utku | P2 | review |
 | ALTYAPI-VERI-GORUNURLUK-01 | [ALTYAPI] Katmanlı görünürlük & kontör s | orkestrator | P0 | tamamlandi |
 | API-KVKK-KONTROL-25 | [API] Kontör endpoint entegrasyonu (matc | yasu | P1 | tamamlandi |
 | TEST-VISIBILITY-ENTEGRASYON-27 | [TEST] E2E senaryo testi (visibility lay | yasu | P1 | tamamlandi |

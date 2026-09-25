@@ -329,10 +329,18 @@ def show_tetikler_ajan(chat_id: str, ajan: str) -> None:
 
 
 def _show_tetikler_ajan_detay(chat_id: str, ajan: str) -> None:
-    """Ajanın tetiklerini göster (tetik bak)."""
+    """Ajanın tetiklerini göster (tetik bak) — task_board.json SSOT."""
     try:
-        from src.company_master.orchestrator.trigger import bekleyen_tetikler
-        tetikler = bekleyen_tetikler(ajan)
+        import json
+        from pathlib import Path
+        
+        task_board_path = Path("data/orchestrator/task_board.json")
+        with open(task_board_path, "r", encoding="utf-8") as f:
+            gorevler = json.load(f)
+        
+        # Ajanın görevlerini filtrele (durum=aktif veya plan)
+        tetikler = [g for g in gorevler if g.get("sahip", "").lower() == ajan.lower()
+                   and g.get("durum", "").lower() in ["aktif", "plan"]]
     except Exception as e:
         logger.error(f"Error fetching tetikler: {e}")
         tetikler = []
@@ -349,17 +357,14 @@ def _show_tetikler_ajan_detay(chat_id: str, ajan: str) -> None:
     for i, tetik in enumerate(tetikler[:10], 1):
         task_id = tetik.get("task_id", "?")
         talimat = tetik.get("talimat", "")[:40]
-        acik_sorular = tetik.get("chat_acik_sorular", 0)
+        durum = tetik.get("durum", "?")
         
-        if acik_sorular > 0:
-            emoji_sorun = f"⚠️ {acik_sorular} açık soru"
-        else:
-            emoji_sorun = "✅ Sorular çözüldü"
+        durum_emoji = {"aktif": "🔵", "plan": "📋"}.get(durum, "❓")
         
         lines.append(
             f"{i}. 📬 {task_id}\n"
             f"   Talimat: {talimat}\n"
-            f"   {emoji_sorun}"
+            f"   {durum_emoji} Durum: {durum}"
         )
     
     if len(tetikler) > 10:

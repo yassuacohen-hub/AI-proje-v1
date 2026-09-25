@@ -516,6 +516,19 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_feature_flags_tab",
         min_rol="admin",
     ),
+    # UI-ADMIN-LTV-CAC-27: LTV/CAC Analiz Sekmesi
+    TabTanimi(
+        anahtar="ltv_cac",
+        baslik="LTV/CAC",
+        ikon="💰",
+        grup=GRUP_SISTEM,
+        aciklama="Müşteri yaşam boyu değeri (LTV) ve kazanım maliyeti (CAC) analizi",
+        url_path="ltv-cac",
+        ust="proje_yonetimi", sira=9,
+        modul="web_dashboard.tabs.admin_panel",
+        fonksiyon="render_ltv_cac_tab",
+        min_rol="admin",
+    ),
     # UX-MENU-03: menüden çıktı; sol-alt hesap kartı popover'ından açılır.
     TabTanimi(
         anahtar="ayarlar",

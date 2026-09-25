@@ -9,8 +9,8 @@
 |-------|--------|-------|---------|-------|----------|
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s) | ihsan | P1 | iptal | scripts/pano_denetim.py, scripts/tetik_senk.py, tests/test_d66_bypass_tetikleme.py |
 | API-ADMIN-MFA-26 | [API] MFA + hesap kilidi akışını yaz → A6 auth (4s) | utku | P2 | review | - |
-| UI-ADMIN-LTV-CAC-27 | [UI] LTV/CAC kartlarını yaz → K8 tamamlama (2s) | utku | P2 | aktif | - |
-| DOC-ADMIN-MULTITENANT-KARAR-28 | [DOC] Multi-tenant kararını belgele → KK-7 (1s) | utku | P2 | bekliyor | - |
+| UI-ADMIN-LTV-CAC-27 | [UI] LTV/CAC kartlarını yaz → K8 tamamlama (2s) | utku | P2 | review | - |
+| DOC-ADMIN-MULTITENANT-KARAR-28 | [DOC] Multi-tenant kararını belgele → KK-7 (1s) | utku | P2 | review | - |
 | ALTYAPI-VERI-GORUNURLUK-01 | [ALTYAPI] Katmanlı görünürlük & kontör sistemi → 0018 migration + 3 tablo (4s) | orkestrator | P0 | tamamlandi | src/company_master/schema/migrations/0018_visibility_layer.sql, field_catalog.md, src/company_master/api/core/normalize.py |
 | API-KVKK-KONTROL-25 | [API] Kontör endpoint entegrasyonu (match/ilan) → _charge_module_credit çağrısı | yasu | P1 | tamamlandi | web_app.py, src/company_master/schema/migrations/0018_visibility_layer.sql |
 | TEST-VISIBILITY-ENTEGRASYON-27 | [TEST] E2E senaryo testi (visibility layer + kontör) → 5 scenario + 4 conflict | yasu | P1 | tamamlandi | tests/test_visibility_layer.py, src/company_master/api/core/normalize.py |

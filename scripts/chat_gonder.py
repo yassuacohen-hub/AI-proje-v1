@@ -1,0 +1,142 @@
+# -*- coding: utf-8 -*-
+"""D-210 — Ajan chat: mesaj gonder.
+
+Kullanim:
+    python scripts/chat_gonder.py --to utku --type hata --task-id UI-ADMIN-26 --mesaj "..."
+    python scripts/chat_gonder.py --to ihsan --type koordinasyon --task-id T-1 --mesaj "..."
+
+Mesaj `data/orchestrator/chat/messages.jsonl` dosyasina tek satir JSON olarak
+eklenir (append-only). Satir semasi D-210 "Chat Log Konumu" bolumuyle aynidir:
+
+    {"tarih": "...", "kimden": "...", "kime": "...", "type": "...",
+     "task_id": "...", "mesaj": "...", "yanit_alindi": false}
+
+Gonderen belirtilmezse `--kimden` → `HUGINN_AJAN` env → varsayilan `ihsan`
+sirasiyla denenir (D-70: orkestrator kimligi ihsan'dir).
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import sys
+from datetime import datetime
+from pathlib import Path
+
+_KOK = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(_KOK))
+sys.path.insert(0, str(_KOK / "src"))
+
+# Windows konsolu (cp1254) Turkce karakterlerde cokmesin (gorev_kutusu.py ile ayni desen).
+for _akis in (sys.stdout, sys.stderr):
+    try:
+        _akis.reconfigure(encoding="utf-8", errors="replace")
+    except (AttributeError, ValueError):  # pragma: no cover - eski Python / yonlendirilmis akis
+        pass
+
+from src.company_master.orchestrator import task_board as tb  # noqa: E402
+from src.company_master.orchestrator import trigger  # noqa: E402
+
+#: D-210 "Zorunlu Chat Turleri" — kabul edilen mesaj tipleri.
+MESAJ_TIPLERI: tuple[str, ...] = ("hata", "soru", "koordinasyon", "rapor", "bilgi")
+
+#: Tum ajanlara yayin icin kullanilan alici takma adlari.
+YAYIN_ALICI: tuple[str, ...] = ("hepsi", "tum", "tüm", "all")
+
+#: D-210 mesaj govdesi ust siniri (token ve okunabilirlik siniri).
+MESAJ_MAX = 1000
+
+
+def chat_yolu() -> Path:
+    """Chat log dosyasinin tam yolu (D-210)."""
+    return tb.STATE_DIR / "chat" / "messages.jsonl"
+
+
+def _alici_normalize(alici: str) -> str:
+    """Aliciyi kanonik ajana cevir; yayin takma adlarini oldugu gibi dondur."""
+    ham = (alici or "").strip().lower()
+    if ham in YAYIN_ALICI:
+        return "hepsi"
+    return trigger.ajan_normalize(ham)
+
+
+def gonder(
+    kime: str,
+    tip: str,
+    mesaj: str,
+    task_id: str = "",
+    kimden: str | None = None,
+) -> dict:
+    """Tek chat satiri yaz ve yazilan kaydi dondur."""
+    g_ajan = trigger.ajan_normalize(kimden or os.getenv("HUGINN_AJAN") or "ihsan")
+    h_ajan = _alici_normalize(kime)
+    tip = (tip or "").strip().lower()
+    metin = (mesaj or "").strip()
+
+    if tip not in MESAJ_TIPLERI:
+        raise ValueError(f"gecersiz tip: {tip!r} — izinli: {', '.join(MESAJ_TIPLERI)}")
+    if not metin:
+        raise ValueError("mesaj bos olamaz")
+    if len(metin) > MESAJ_MAX:
+        raise ValueError(f"mesaj cok uzun ({len(metin)} > {MESAJ_MAX})")
+    if h_ajan not in YAYIN_ALICI:
+        if h_ajan not in trigger.AJANLAR:
+            raise ValueError(
+                f"gecersiz alici: {kime!r} — izinli: {', '.join(trigger.AJANLAR)} (veya hepsi)"
+            )
+
+    kayit = {
+        "tarih": datetime.now().isoformat(timespec="seconds"),
+        "kimden": g_ajan,
+        "kime": h_ajan,
+        "type": tip,
+        "task_id": (task_id or "").strip(),
+        "mesaj": metin,
+        "yanit_alindi": False,
+    }
+
+    yol = chat_yolu()
+    yol.parent.mkdir(parents=True, exist_ok=True)
+    with yol.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(kayit, ensure_ascii=False) + "\n")
+    return kayit
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(
+        prog="chat_gonder",
+        description="D-210: ajanlararasi chat mesaji gonder (append-only JSONL)",
+    )
+    ap.add_argument("--to", "-t", required=True, help="Alici ajan (ihsan/utku/salih/yasu/hepsi)")
+    ap.add_argument(
+        "--type", "-y", required=True, choices=MESAJ_TIPLERI,
+        help="Mesaj tipi (D-210 zorunlu chat turleri)",
+    )
+    ap.add_argument("--mesaj", "-m", required=True, help="Mesaj metni (max %d karakter)" % MESAJ_MAX)
+    ap.add_argument("--task-id", "-i", default="", help="Ilgili gorev kimligi (opsiyonel)")
+    ap.add_argument("--kimden", "-k", default="", help="Gonderen ajan (varsayilan: HUGINN_AJAN veya ihsan)")
+    args = ap.parse_args(argv)
+
+    try:
+        kayit = gonder(
+            kime=args.to,
+            tip=args.type,
+            mesaj=args.mesaj,
+            task_id=args.task_id,
+            kimden=args.kimden or None,
+        )
+    except ValueError as exc:
+        print(f"HATA: {exc}", file=sys.stderr)
+        return 1
+
+    hedef = "" if not kayit["task_id"] else f" [{kayit['task_id']}]"
+    print(
+        f"GONDERILDI: {kayit['kimden']} -> {kayit['kime']} "
+        f"({kayit['type']}){hedef} {kayit['tarih']}"
+    )
+    print(f"  log: {chat_yolu().relative_to(_KOK).as_posix()}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

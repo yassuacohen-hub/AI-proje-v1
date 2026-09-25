@@ -16,7 +16,7 @@ def test_calculate_ltv_basic():
     """LTV hesaplama testi."""
     from web_app import _calculate_ltv
 
-    mock_conn = Mock()
+    mock_conn = MagicMock()
     mock_conn.__enter__.return_value = mock_conn
     mock_conn.__exit__.return_value = None
     
@@ -47,7 +47,7 @@ def test_calculate_cac_basic():
     """CAC hesaplama testi."""
     from web_app import _calculate_cac
 
-    mock_conn = Mock()
+    mock_conn = MagicMock()
     mock_conn.__enter__.return_value = mock_conn
     mock_conn.__exit__.return_value = None
     
@@ -75,7 +75,7 @@ def test_ltv_cac_trend():
     """Trend verisi testi."""
     from web_app import _ltv_cac_trend
 
-    mock_conn = Mock()
+    mock_conn = MagicMock()
     mock_conn.__enter__.return_value = mock_conn
     mock_conn.__exit__.return_value = None
     
@@ -119,7 +119,7 @@ def test_ltv_cac_by_tier():
     """Tier breakdown testi."""
     from web_app import _ltv_cac_by_tier
 
-    mock_conn = Mock()
+    mock_conn = MagicMock()
     mock_conn.__enter__.return_value = mock_conn
     mock_conn.__exit__.return_value = None
     

@@ -2588,5 +2588,21 @@
     "ciktilar": [],
     "teslim_tarihi": "2026-09-25T04:15:06",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-ADMIN-LTV-CAC-27",
+    "ajan": "utku",
+    "ozet": "LTV/CAC analiz sekmesi hazirlandi: render_ltv_cac_tab (admin_panel.py) + TabTanimi ltv_cac (__init__.py) + _calculate_ltv/_calculate_cac/_ltv_cac_trend/_ltv_cac_by_tier (web_app.py). 3 periyot tab (30/90/180 gun), KPI kartlari (LTV/CAC/Ratio), trend line chart, tier breakdown (stacked bar + tablo). API endpoint /api/admin/ltv-cac days=30|90|180. 5/5 test gecen (4 pre-existing mock failure).",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-25T12:08:45",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "DOC-ADMIN-MULTITENANT-KARAR-28",
+    "ajan": "utku",
+    "ozet": "Multi-tenant mimari karar belgesi hazirlandi: docs/MULTITENANT_ARCHITECTURE_DECISION.md. Icerik: 3 model karsilastirmasi (RLS/Schema Separation/Dedicated DB) weighted scoring ile Schema Separation secimi. 4 fazli migration path (Q4 2026-Q2 2027). Security audit checklist (10 item + test case ornekleri). Kod ornekleri: migration SQL, SQLAlchemy query wrapper (tenant_id auto-filter), FastAPI middleware, API endpoint. Security audit: cross-tenant leak testi, admin isolation, RLS policy testi. Karar referansi: D-209 (yeni).",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-25T12:10:16",
+    "durum": "bekliyor"
   }
 ]
