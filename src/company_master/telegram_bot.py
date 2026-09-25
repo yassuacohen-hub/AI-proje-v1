@@ -563,6 +563,200 @@ def show_gorev_takibi_durum(chat_id: str, durum: str) -> None:
     send_gorev_takibi_menu(chat_id)
 
 
+def show_gorev_sahib_menu(chat_id: str) -> None:
+    """Sahib bazlı filtreleme menüsü."""
+    markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
+    
+    markup.add("👨 Utku", "👨 Salih")
+    markup.add("👨 Yasu", "👨 İhsan")
+    markup.add("👨 Mimir", "🤖 Orkestrator")
+    markup.add("« Görev Takibi")
+    
+    bot.send_message(
+        chat_id,
+        "👤 **Sahib Bazlı Görevler**\n\n"
+        "Hangi ajana ait görevleri görmek istiyorsunuz?",
+        reply_markup=markup,
+        parse_mode="Markdown"
+    )
+
+
+def show_gorev_sahib_goster(chat_id: str, sahib: str) -> None:
+    """Sahib bazlı görev listesi."""
+    import json
+    from pathlib import Path
+    
+    try:
+        task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
+        
+        if not task_board_path.exists():
+            bot.send_message(chat_id, "❌ Görev panosuna erişilemedi.")
+            show_gorev_sahib_menu(chat_id)
+            return
+        
+        with open(task_board_path, encoding="utf-8") as f:
+            gorevler = json.load(f)
+        
+        # Sahibe göre filtrele
+        gorevler = [g for g in gorevler if g.get("sahip", "").lower() == sahib.lower()]
+        
+        if not gorevler:
+            bot.send_message(
+                chat_id,
+                f"ℹ️ **{sahib}** için görev bulunamadı.",
+                parse_mode="Markdown"
+            )
+            show_gorev_sahib_menu(chat_id)
+            return
+        
+        # Tablo oluştur (durum, task_id, baslik, onem)
+        lines = [
+            f"👤 **{sahib} — Görevler ({len(gorevler)} toplam)**\n",
+            "┌─────────────────────────────────────────────────────────┐"
+        ]
+        
+        for g in gorevler[:15]:  # Max 15
+            task_id = g.get("task_id", "?").ljust(8)
+            baslik = g.get("baslik", "")[:20]
+            durum = g.get("durum", "?")
+            onem = g.get("onem", "?")
+            
+            # Durum emoji
+            durum_emoji = {
+                "acik": "🟢",
+                "aktif": "🔵",
+                "bloke": "🟠",
+                "done": "✅"
+            }.get(durum.lower(), "❓")
+            
+            onem_emoji = {
+                "critical": "🔴",
+                "yuksek": "🟠",
+                "orta": "🟡",
+                "dusuk": "🟢"
+            }.get(onem.lower(), "❓")
+            
+            lines.append(f"│ {task_id} │ {durum_emoji} {durum:6} │ {onem_emoji} {baslik:15} │")
+        
+        if len(gorevler) > 15:
+            lines.append(f"│ ... {len(gorevler)-15} daha görev ... │")
+        
+        lines.append("└─────────────────────────────────────────────────────────┘")
+        
+        msg_text = "\n".join(lines)
+        
+        if len(msg_text) > 4000:
+            msg_text = msg_text[:3900] + "\n... (daha fazla)"
+        
+        bot.send_message(chat_id, f"```\n{msg_text}\n```", parse_mode="Markdown")
+        
+    except Exception as e:
+        logger.error(f"[GOREV_SAHIB] Error: {e}")
+        bot.send_message(chat_id, f"❌ Hata: {str(e)}")
+    
+    show_gorev_sahib_menu(chat_id)
+
+
+def send_gorev_mesaj_menu(chat_id: str) -> None:
+    """Görev ile ilgili mesaj gönder menüsü."""
+    markup = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
+    
+    markup.add("💬 Mesaj Gönder", "« Görev Takibi")
+    
+    bot.send_message(
+        chat_id,
+        "💬 **Görev Mesajı**\n\n"
+        "Görev ile ilgili mesaj/not göndermek istiyorsunuz?\n\n"
+        "Mesaj orkestratöre gönderilecek ve yeni görev oluşturulabilir.",
+        reply_markup=markup,
+        parse_mode="Markdown"
+    )
+
+
+def show_mesaj_formu(chat_id: str) -> None:
+    """Görev mesaj giriş formu."""
+    msg = bot.send_message(
+        chat_id,
+        "💬 **Görev Mesajı**\n\n"
+        "Mesaj/Not içeriğini yazın (max 500 karakter):\n\n"
+        "(« tuşu ile geri dön)",
+        parse_mode="Markdown"
+    )
+    bot.register_next_step_handler(msg, _mesaj_orkestrator_kaydet)
+
+
+def _mesaj_orkestrator_kaydet(message):
+    """Mesajı orkestratöre görev olarak kaydet."""
+    if message.text and message.text.startswith("«"):
+        send_gorev_takibi_menu(message.chat.id)
+        return
+    
+    mesaj = message.text.strip()[:500]
+    
+    try:
+        import json
+        from pathlib import Path
+        from datetime import datetime
+        
+        task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
+        
+        # Task board oku
+        if task_board_path.exists():
+            with open(task_board_path, encoding="utf-8") as f:
+                gorevler = json.load(f)
+        else:
+            gorevler = []
+        
+        # Yeni görev oluştur (task_id otomatik)
+        max_id = 0
+        for g in gorevler:
+            task_id_str = g.get("task_id", "").replace("P7-", "").replace("GOREV-", "")
+            try:
+                task_id_num = int(task_id_str)
+                max_id = max(max_id, task_id_num)
+            except:
+                pass
+        
+        yeni_task_id = f"GOREV-{max_id + 1}"
+        
+        yeni_gorev = {
+            "task_id": yeni_task_id,
+            "baslik": mesaj[:50],  # İlk 50 char başlık
+            "aciklama": mesaj,
+            "sahip": "orkestrator",
+            "durum": "acik",
+            "onem": "orta",
+            "created_at": datetime.now().isoformat(),
+            "dosyalar": []
+        }
+        
+        gorevler.append(yeni_gorev)
+        
+        # Task board'a yaz
+        with open(task_board_path, "w", encoding="utf-8") as f:
+            json.dump(gorevler, f, ensure_ascii=False, indent=2)
+        
+        logger.info(f"[MESAJ_ORKESTRATOR] Yeni görev oluşturuldu: {yeni_task_id} — {mesaj[:50]}")
+        
+        bot.send_message(
+            message.chat.id,
+            f"✅ **Mesaj Gönderildi**\n\n"
+            f"📋 Görev: {yeni_task_id}\n"
+            f"📝 İçerik: {mesaj[:100]}...\n\n"
+            f"Orkestrator tarafından incelenecek.",
+            parse_mode="Markdown"
+        )
+        
+    except Exception as e:
+        logger.error(f"[MESAJ_ORKESTRATOR_ERROR] {e}", exc_info=True)
+        bot.send_message(
+            message.chat.id,
+            f"❌ Mesaj gönderilemedi: {str(e)[:50]}"
+        )
+    
+    send_gorev_takibi_menu(message.chat.id)
+
+
 def show_yardim(chat_id: str) -> None:
     """Yardım göster."""
     lines = [
@@ -2012,6 +2206,50 @@ def handle_ayarlar_menu(call):
         bot.send_message(call.message.chat.id, f"❌ Hata: {e}")
     
     bot.answer_callback_query(call.id)
+
+
+# ============================================================================
+# BÖLÜM 8: GÖREV TAKIBI HANDLERs (Sahib Bazlı + Mesaj)
+# ============================================================================
+
+@bot.message_handler(func=lambda message: message.text and "Sahip Bazlı" in message.text and "👤" in message.text)
+def btn_gorev_sahib_bazli(message):
+    """Sahib bazlı görev filtresi."""
+    logger.info(f"[BUTTON] Görev Takibi Sahib Bazlı clicked: {message.text}")
+    show_gorev_sahib_menu(message.chat.id)
+
+
+@bot.message_handler(func=lambda message: message.text and ("Utku" in message.text or "Salih" in message.text or "Yasu" in message.text or "İhsan" in message.text or "Mimir" in message.text or "Orkestrator" in message.text) and ("👨" in message.text or "🤖" in message.text))
+def btn_gorev_sahib_sec(message):
+    """Sahib seçimi - görevleri göster."""
+    logger.info(f"[BUTTON] Gorev Sahib Sec: {message.text}")
+    
+    # Ajan adını çıkar
+    sahib = None
+    if "Utku" in message.text:
+        sahib = "Utku"
+    elif "Salih" in message.text:
+        sahib = "Salih"
+    elif "Yasu" in message.text:
+        sahib = "Yasu"
+    elif "İhsan" in message.text:
+        sahib = "İhsan"
+    elif "Mimir" in message.text:
+        sahib = "Mimir"
+    elif "Orkestrator" in message.text:
+        sahib = "Orkestrator"
+    
+    if sahib:
+        show_gorev_sahib_goster(message.chat.id, sahib)
+    else:
+        show_gorev_sahib_menu(message.chat.id)
+
+
+@bot.message_handler(func=lambda message: message.text and "Mesaj Gönder" in message.text and "💬" in message.text)
+def btn_gorev_mesaj_gonder(message):
+    """Görev mesajı gönder."""
+    logger.info(f"[BUTTON] Gorev Mesaj Gonder clicked: {message.text}")
+    show_mesaj_formu(message.chat.id)
 
 
 # ============================================================================
