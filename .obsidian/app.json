@@ -1,0 +1,33 @@
+{
+  "userIgnoreFilters": [
+    ".venv/",
+    ".kilo/",
+    ".agents/",
+    ".claude/",
+    ".cursor/",
+    ".continue/",
+    ".kombai/",
+    ".vscode/",
+    ".pytest_cache/",
+    "node_modules/",
+    ".git/",
+    ".roo/",
+    ".obsidian/",
+    ".github/",
+    "worktree klasoru/",
+    "data_worktree/",
+    "Huginn Data Insights/data/orchestrator/backups/",
+    "data/skills/supabase/",
+    "data/skills/supabase-postgres-best-practices/",
+    "Huginn Data Insights/.agents/marketplace/",
+    "Huginn Data Insights/AI proje v1/.claude/",
+    "Huginn Data Insights/AI proje v1/data/",
+    "Huginn Data Insights/AI proje v1/workspace/",
+    "Huginn Data Insights/AI proje v1/docs/",
+    "Huginn Data Insights/AI proje v1/scripts/",
+    "Huginn Data Insights/AI proje v1/src/",
+    "Huginn Data Insights/AI proje v1/cop_kutusu_2026_09_09/",
+    "Huginn Data Insights/AI proje v1/test_reports/",
+    "Huginn Data Insights/AI proje v1/PLAN_gorev_panosu.md"
+  ]
+}

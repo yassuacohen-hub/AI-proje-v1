@@ -1,0 +1,19 @@
+ADMIN-KOK-TEMIZLIK-02 log 
+Tarih: 2026-09-21 
+Desenler: .bak .tmp test_* backup_* *_old 
+Sonuc: Kokte eslesen dosya bulunamadi (0 eslesme). 
+Kok icerigi taranan: Baslikliz 1.base, Baslikliz.base, Baslikliz.canvas + klasorler (.continue .kilo .kombai .obsidian .pytest_cache .roo .vscode data docs "Huginn Data Insights" plans "worktree klasoru") 
+Islem: Tasima yapilmadi, silme yapilmadi. Kok zaten temiz.
+
+[2026-09-22 03:11] canonical tasima: 11 dosya, 4 pointer temizlendi
+  AI proje v1/.instructions.md -> AIprojev1_.instructions.md
+  AI proje v1/PROJECT_ROADMAP.md -> AIprojev1_PROJECT_ROADMAP.md
+  AI proje v1/AGENT_SYNC.md -> AIprojev1_AGENT_SYNC.md
+  AI proje v1/AGENTS.md -> AIprojev1_AGENTS.md
+  AI proje v1/ANA_KURALLAR.md -> AIprojev1_ANA_KURALLAR.md
+  AI proje v1/CHANGELOG.md -> AIprojev1_CHANGELOG.md
+  AI proje v1/CLAUDE.md -> AIprojev1_CLAUDE.md
+  AI proje v1/Kimlik Doğrulama Sistemi.md -> AIprojev1_Kimlik Doğrulama Sistemi.md
+  AI proje v1/Kullanıcı Yönetimi.md -> AIprojev1_Kullanıcı Yönetimi.md
+  AI proje v1/Mimari Kararlar.md -> AIprojev1_Mimari Kararlar.md
+  AI proje v1/README_ARAYUZ.md -> AIprojev1_README_ARAYUZ.md
