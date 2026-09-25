@@ -2365,9 +2365,20 @@ def btn_gorev_mesaj_gonder(message):
 # ============================================================================
 
 def main():
-    """Bot webhook mode'da çalıştır (FastAPI üzerinden process_new_updates)."""
-    logger.info("Telegram Bot webhook mode aktif")
-    logger.info("Polling DISABLED — FastAPI web_app.py:/api/webhooks/telegram endpoint kullan")
+    """Bot webhook/polling mode — production webhooks, dev polling."""
+    import os
+    webhook_url = os.getenv("TELEGRAM_WEBHOOK_URL", "").strip()
+    
+    if webhook_url:
+        logger.info(f"Telegram Bot webhook mode: {webhook_url}")
+        logger.info("FastAPI web_app.py:/api/webhooks/telegram endpoint kullanılacak")
+    else:
+        logger.info("Telegram Bot polling mode (dev/fallback)")
+        try:
+            bot.infinity_polling(timeout=10, long_polling_timeout=5)
+        except Exception as e:
+            logger.error(f"Bot polling error: {e}")
+            raise
 
 
 if __name__ == "__main__":
