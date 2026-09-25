@@ -853,3 +853,4 @@ Ajanlara **zorunlu sohbet ve koordinasyon** ilkesi:
 
 ### Karar Yayınıyla İlgili Nodlar
 - [[Huginn Data Insights/data/orchestrator/AJAN_CHAT_KURALI_D210]] — Tam kural belgesi + komut örnekleri
+- [[Huginn Data Insights/data/orchestrator/CHAT_SISTEMI_FAYDALARI]] — Chat ROI: hız, kalite, denetim, riski yönetme
