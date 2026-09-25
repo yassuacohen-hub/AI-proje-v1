@@ -402,6 +402,7 @@ def send_rapor_menu(chat_id: str) -> None:
     markup.add("📅 Hafta", "📅 Ay", "📅 YTD")
     markup.add("👤 Ajan Bazlı", "📊 KPI")
     markup.add("📈 Trend", "📋 Özet")
+    markup.add("📊 Pano Özeti")
     
     markup.add("« Ana Menü")
     
@@ -451,6 +452,100 @@ def show_kpi_raporu(chat_id: str) -> None:
     ]
     
     bot.send_message(chat_id, "\n".join(lines), parse_mode="Markdown")
+
+
+def show_rapor_pano_ozeti(chat_id: str) -> None:
+    """Görev panosu özeti — metrikler + dağılımlar."""
+    import json
+    from pathlib import Path
+    from collections import defaultdict
+    
+    try:
+        task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
+        
+        if not task_board_path.exists():
+            bot.send_message(chat_id, "❌ Görev panosuna erişilemedi.")
+            send_rapor_menu(chat_id)
+            return
+        
+        with open(task_board_path, encoding="utf-8") as f:
+            gorevler = json.load(f)
+        
+        # Metrikler hesapla
+        toplam = len(gorevler)
+        durum_sayisi = defaultdict(int)
+        sahib_sayisi = defaultdict(int)
+        onem_sayisi = defaultdict(int)
+        
+        for g in gorevler:
+            durum = g.get("durum", "unknown").lower()
+            sahib = g.get("sahip", "unknown").lower()
+            onem = g.get("onem", "unknown").lower()
+            
+            durum_sayisi[durum] += 1
+            sahib_sayisi[sahib] += 1
+            onem_sayisi[onem] += 1
+        
+        # Durum emoji map
+        durum_emoji = {
+            "acik": "🟢",
+            "aktif": "🔵",
+            "bloke": "🟠",
+            "done": "✅"
+        }
+        
+        onem_emoji = {
+            "critical": "🔴",
+            "yuksek": "🟠",
+            "orta": "🟡",
+            "dusuk": "🟢"
+        }
+        
+        # Tablo başlığı
+        lines = [
+            "📊 **Görev Panosu Özeti**\n",
+            "┌──────────────────────────────────────────┐",
+            f"│ 📋 Toplam Görev: {toplam:>26} │"
+        ]
+        
+        # Durum breakdown
+        lines.append("├──────────────────────────────────────────┤")
+        lines.append("│ 📊 Durum Dağılımı:                       │")
+        for durum, count in sorted(durum_sayisi.items()):
+            emoji = durum_emoji.get(durum, "❓")
+            lines.append(f"│  {emoji} {durum.capitalize():8} : {count:>3} görev      │")
+        
+        # Sahib dağılımı
+        lines.append("├──────────────────────────────────────────┤")
+        lines.append("│ 👤 Sahib Dağılımı:                       │")
+        for sahib, count in sorted(sahib_sayisi.items(), key=lambda x: -x[1])[:6]:
+            if len(sahib) > 10:
+                sahib_adi = sahib[:10]
+            else:
+                sahib_adi = sahib.capitalize()
+            lines.append(f"│  • {sahib_adi:12} : {count:>3} görev      │")
+        
+        # Önem dağılımı
+        lines.append("├──────────────────────────────────────────┤")
+        lines.append("│ ⚡ Önem Dağılımı:                        │")
+        for onem, count in sorted(onem_sayisi.items()):
+            emoji = onem_emoji.get(onem, "❓")
+            lines.append(f"│  {emoji} {onem.capitalize():8} : {count:>3} görev      │")
+        
+        lines.append("└──────────────────────────────────────────┘")
+        
+        msg_text = "\n".join(lines)
+        
+        if len(msg_text) > 4000:
+            msg_text = msg_text[:3900] + "\n... (daha fazla)"
+        
+        bot.send_message(chat_id, f"```\n{msg_text}\n```", parse_mode="Markdown")
+        
+    except Exception as e:
+        logger.error(f"[RAPOR_PANO_OZETI] Error: {e}", exc_info=True)
+        bot.send_message(chat_id, f"❌ Hata: {str(e)[:50]}")
+    
+    send_rapor_menu(chat_id)
 
 
 # ============================================================================
@@ -1742,6 +1837,13 @@ def btn_rapor_kpi(message):
     logger.info(f"[BUTTON] Rapor KPI clicked: {message.text}")
     show_kpi_raporu(message.chat.id)
     send_rapor_menu(message.chat.id)
+
+
+@bot.message_handler(func=lambda message: message.text and "Pano Özeti" in message.text)
+def btn_rapor_pano_ozeti(message):
+    """Görev panosu özeti — metrikler dashboard."""
+    logger.info(f"[BUTTON] Rapor Pano Özeti clicked: {message.text}")
+    show_rapor_pano_ozeti(message.chat.id)
 
 
 @bot.message_handler(func=lambda message: message.text and "Trend" in message.text)
