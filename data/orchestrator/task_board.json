@@ -276,7 +276,7 @@
     "baslik": "[UI] Feature flag yönetim ekranını yaz → A5 MVP (3s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "bekliyor",
+    "durum": "aktif",
     "baslangic": null,
     "bitis": null,
     "dosyalar": [],
@@ -286,7 +286,7 @@
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_UI-ADMIN-FEATURE-FLAG-25.md",
-    "talimat": ""
+    "talimat": "UI-ADMIN-FEATURE-FLAG-25: web_dashboard/tabs/admin_panel.py render_feature_flags_tab() + web_app.py POST /api/admin/feature-flags + audit log. Toggle UI, history table, admin only. Test: tests/test_feature_flags.py (3 test)."
   },
   {
     "task_id": "API-ADMIN-MFA-26",
