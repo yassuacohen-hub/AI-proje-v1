@@ -298,7 +298,9 @@ def kahin_gonder(
     kimden: str = "kahin",
     data_dir: Path | None = None,
 ) -> dict[str, Any]:
-    """KAHİN (Ürün Sahibi) mesaj gönder (D-210).
+    """KAHİN (Ürün Sahibi) mesaj gönder (D-210, D-212 Telegram).
+    
+    Broadcast mesajı chat logu + Telegram'a gönderir.
     
     Args:
         mesaj: 1-500 char sorun/istek
@@ -310,7 +312,8 @@ def kahin_gonder(
     Returns:
         Eklenen satır (dict)
     """
-    return ac(
+    # Chat logu
+    kayit = ac(
         ajan="*",  # Broadcast: tüm ajanlar bu mesajı görür
         task_id=task_id or "genel",
         sorun=mesaj[:500],
@@ -319,6 +322,48 @@ def kahin_gonder(
         onem=onem if onem in ONEM_SEVIYELERI else "orta",
         data_dir=data_dir,
     )
+    
+    # D-212: Telegram'a gönder (hata sessiz)
+    try:
+        _gonder_telegram_kahin(mesaj, task_id, onem)
+    except Exception:
+        pass  # Telegram hatası chat'i etkilemesin
+    
+    return kayit
+
+
+def _gonder_telegram_kahin(mesaj: str, task_id: str, onem: str) -> None:
+    """D-212: KAHİN mesajını Telegram grubuna gönder. (Internal)"""
+    import os
+    import requests
+    
+    token = os.getenv("TELEGRAM_BOT_TOKEN", "").strip()
+    chat_id = os.getenv("TELEGRAM_CHAT_ID", "").strip()
+    
+    if not token or not chat_id:
+        return  # Yapılandırma yoksa sessiz dön
+    
+    onem_etiket = {
+        "kritik": "🔴",
+        "yuksek": "🟠",
+        "orta": "🟡",
+        "dusuk": "🟢",
+    }.get(onem, "🟡")
+    
+    telegram_msg = (
+        f"{onem_etiket} **KAHİN Mesajı**\n\n"
+        f"__{mesaj[:400]}__\n\n"
+        f"Görev: `{task_id or 'genel'}`"
+    )
+    
+    try:
+        requests.post(
+            f"https://api.telegram.org/bot{token}/sendMessage",
+            json={"chat_id": chat_id, "text": telegram_msg, "parse_mode": "Markdown"},
+            timeout=5,
+        )
+    except Exception:
+        pass  # Ağ hatası sessiz
 
 
 def ajan_acik_sorulari(

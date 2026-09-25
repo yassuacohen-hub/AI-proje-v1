@@ -181,6 +181,7 @@ def tetik_ekle(
         "talimat": talimat,
         "tarih": _simdi(),
         "durum": "bekliyor",  # bekliyor -> alindi -> teslim
+        "chat_acik_sorular": 0,  # D-211: tetikle ilgili açık soru sayısı
     }
     kayitlar.append(kayit)
     _tetikleri_yaz(kayitlar, ajan, data_dir)
@@ -188,8 +189,22 @@ def tetik_ekle(
 
 
 def bekleyen_tetikler(ajan: str, data_dir: Path | None = None) -> list[dict[str, Any]]:
-    """Ajanın henüz almadığı (okunmamış) görevleri listele."""
-    return [k for k in _tetikleri_oku(ajan, data_dir) if k["durum"] == "bekliyor"]
+    """Ajanın henüz almadığı (okunmamış) görevleri listele. D-211: chat açık sorularını ekle."""
+    from company_master.chat import oku as chat_oku  # noqa: E402
+    
+    tetikler = [k for k in _tetikleri_oku(ajan, data_dir) if k["durum"] == "bekliyor"]
+    chat_satirlar = chat_oku(data_dir=data_dir)
+    
+    # Her tetik için task_id ile eşleşen açık soruları say
+    for tetik in tetikler:
+        task_id = tetik.get("task_id", "")
+        acik_sorunlar = [
+            s for s in chat_satirlar
+            if s.get("task_id") == task_id and s.get("durum") == "acik"
+        ]
+        tetik["chat_acik_sorular"] = len(acik_sorunlar)
+    
+    return tetikler
 
 
 #: S-06: Posta kutusunda tetik yokken panodan alınabilecek görev durumları.
