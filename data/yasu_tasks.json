@@ -1,0 +1,79 @@
+[
+  {
+    "task_id": "YASU-01",
+    "baslik": "[UI] ADIM7 menü ağacı — Sistem grubu 9 sekmeden 6'ya küçült",
+    "aciklama": "ADIM7:144-150'de Sistem grubu aşırı yüklü (9 sekme). Wireframe hedefi: 6 sekme (Teknik, Performans, API, Webhook, Canlı Veri, Hatalar & DLQ). yenileme, ayarlar, yukleme sekmelerini kaldır (profil popover'a taşın). SSOT: Huginn Data Insights/ADIM7_MENU_AGACI_DUZELTME.md:128-136 + UX_MENU_AGACI_WIREFRAME_2026-09-18.md. Proof: web_dashboard/tabs/__init__.py + app.py güncellemesi.",
+    "oncelik": "P0",
+    "durum": "yapilacak",
+    "sahip": "yasu",
+    "baslangic": "2026-09-25T11:30:00Z",
+    "bitis": "2026-09-26T11:30:00Z",
+    "bagimliliklar": [],
+    "brief": "plans/brief_yasu_ADIM7-SISTEM-ONEM-KIS.md",
+    "talimat": "web_dashboard/tabs/__init__.py: SECTIONS'te sistem.yenileme/ayarlar/yukleme'yi yorum yap. app.py: render_sidebar'dan 3 TabTanimi'ni çıkar. Test: sidebar 6 sekme göstersin. Wireframe kontrolü: 6/6 match."
+  },
+  {
+    "task_id": "YASU-02",
+    "baslik": "[UI] ADIM7 menü ağacı — Ayarlar sekmesini profil popover'a taşı",
+    "aciklama": "ADIM7:133-134'de ayarlar Sistem menüsünde (yanlış yer). Wireframe hedefi: profil popover (sağ-alt) → Ayarlar link. app.py:_hesap_karti_popover() içine 'Ayarlar' link ekle, ayarlar tab'ı menüden çıkar. SSOT: ADIM7_MENU_AGACI_DUZELTME.md:125-138 + UX_MENU_AGACI_WIREFRAME_2026-09-18.md (§3.4: profil popover). Proof: app.py + UX audit.",
+    "oncelik": "P1",
+    "durum": "yapilacak",
+    "sahip": "yasu",
+    "baslangic": "2026-09-25T11:30:00Z",
+    "bitis": "2026-09-27T11:30:00Z",
+    "bagimliliklar": [
+      "YASU-01"
+    ],
+    "brief": "plans/brief_yasu_ADIM7-AYARLAR-PROFIL.md",
+    "talimat": "app.py:_hesap_karti_popover() (satır ~500): popover içine st.divider() + st.link_button('⚙️ Ayarlar', '?bolum=ayarlar') ekle. SECTIONS'ten ayarlar tab'ı kaldır. Test: profil tıkla → Ayarlar link görünür."
+  },
+  {
+    "task_id": "YASU-03",
+    "baslik": "[UI] ADIM7 menü ağacı — Gelir & Paketler grubu oluştur (musteri_onizleme → 4 sekme)",
+    "aciklama": "ADIM7:136'da Gelir & Paketler grubu eksik/yanlış yerde. Wireframe hedefi: yeni grup 'Gelir & Paketler' = Paketler + Pazarlama + Executive + Maliyet (4 sekme). musteri_onizleme grubu altında paketler/pazarlama var ama Executive + Maliyet yok. web_dashboard/tabs/__init__.py: 4 tab'ı yeniden gruplayıp 'gelir_paketler' üst grubu ekle. SSOT: ADIM7_MENU_AGACI_DUZELTME.md:136 + UX_MENU_AGACI_WIREFRAME (§2.3: Paketler grubu).",
+    "oncelik": "P1",
+    "durum": "yapilacak",
+    "sahip": "yasu",
+    "baslangic": "2026-09-25T11:30:00Z",
+    "bitis": "2026-09-27T11:30:00Z",
+    "bagimliliklar": [
+      "YASU-01"
+    ],
+    "brief": "plans/brief_yasu_ADIM7-GELIR-PAKETLER.md",
+    "talimat": "SECTIONS'te yeni TabTanimi grubu: ust='gelir_paketler' (paketler, pazarlama, executive, maliyet). app.py render_sidebar'a grup başlığı ekle. Test: sidebar'da '💰 Gelir & Paketler' grubu (4 sekme)."
+  },
+  {
+    "task_id": "YASU-04",
+    "baslik": "[DOC] ADIM7 menü ağacı — Wireframe düzeltme tamamlama raporu yaz",
+    "aciklama": "ADIM7 tamamlandıktan sonra: 6 sorun + 6 düzeltme planı (ADIM7:142-237) kontrol et, tamamlanmış görevleri kaydederek ADIM7-COMPLETION-REPORT.md yaz. SSOT: ADIM7_MENU_AGACI_DUZELTME.md (§2-3) + UX_MENU_AGACI_WIREFRAME_2026-09-18.md. Proof: ADIM7-COMPLETION-REPORT.md (✅/❌ grid).",
+    "oncelik": "P1",
+    "durum": "yapilacak",
+    "sahip": "yasu",
+    "baslangic": "2026-09-25T11:30:00Z",
+    "bitis": "2026-09-29T11:30:00Z",
+    "bagimliliklar": [
+      "YASU-01",
+      "YASU-02",
+      "YASU-03"
+    ],
+    "brief": "plans/brief_yasu_ADIM7-COMPLETION.md",
+    "talimat": "Tablo: [Sorun | Hedef | Yapılan | Proof | Durum]. 6 sorun satırı (sistem, ayarlar, gelir_paketler, etc.). Sonunda: 'Wireframe onaylı, kod uygulama tamamlandı' sonucu. Dosya: Huginn Data Insights/ADIM7-COMPLETION-REPORT.md."
+  },
+  {
+    "task_id": "YASU-05",
+    "baslik": "[TEST] ADIM7 menü ağacı — Menü render test + screenshot (visual regression)",
+    "aciklama": "Menü değişiklikleri (YASU-01~04) tamamlandıktan sonra: Streamlit dashboard başlat, sidebar screenshot al (wireframe'deki 6 grup görünür mü?), visual regression check yap. SSOT: ADIM7_MENU_AGACI_DUZELTME.md + UX_MENU_AGACI_WIREFRAME_2026-09-18.md (hedef wireframe). Proof: screenshots/ dizini (sidebar_after_YASU.png vs wireframe_target.png).",
+    "oncelik": "P1",
+    "durum": "yapilacak",
+    "sahip": "yasu",
+    "baslangic": "2026-09-25T11:30:00Z",
+    "bitis": "2026-09-30T11:30:00Z",
+    "bagimliliklar": [
+      "YASU-01",
+      "YASU-02",
+      "YASU-03"
+    ],
+    "brief": "plans/brief_yasu_ADIM7-MENU-TEST.md",
+    "talimat": "1. streamlit run app.py. 2. Screenshot sidebar. 3. wireframe_target.png'ye karşı kontrol et (6 grup, 4 sekme sayıları). 4. Diff → test_menu_regression_YASU-05.json (passed: bool, diffs: list[str])."
+  }
+]

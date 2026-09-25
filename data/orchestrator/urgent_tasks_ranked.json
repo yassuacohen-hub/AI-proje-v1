@@ -1,0 +1,54 @@
+{
+  "metadata": {
+    "extracted_at": "2026-09-25T11:30:25.546562",
+    "total_urgent": 4,
+    "breakdown": {
+      "pending": 2,
+      "review": 2
+    }
+  },
+  "tasks": [
+    {
+      "task_id": "UI-ADMIN-KVKK-MODU-26",
+      "baslik": "[UI] Admin KVKK mode toggle (strict ↔ lenient) → web_app POST endpoint",
+      "sahip": "utku",
+      "oncelik": "P1",
+      "durum": "review",
+      "urgency_score": 10,
+      "not": "Teslim (utku): KVKK Mode sekmesi eklendi: render_kvkk_mode_tab (admin_panel.py) + TabTanimi kvkk_mode (__init__.py). strict/lenient radio + reason input (min 3 char) + API POST /api/admin/kvkk-mode + success/error feedback. Kodlama denetimi temiz. | Denetim (2026-09-25): render_kvkk_mode_tab + TabTanimi kvkk_mode mevcut; tests/test_admin_kvkk_mode_e2e.py 5/5 yesil. P1 oldugu icin elle onay bekliyor (oto-onay kapsam disi).",
+      "dependencies": [
+        "ALTYAPI-VERI-GORUNURLUK-01"
+      ]
+    },
+    {
+      "task_id": "API-ADMIN-MFA-26",
+      "baslik": "[API] MFA + hesap kilidi akışını yaz → A6 auth (4s)",
+      "sahip": "utku",
+      "oncelik": "P2",
+      "durum": "review",
+      "urgency_score": 9,
+      "not": "Teslim (utku): MFA sistemi hazirlandi: web_app.py MFA endpoints (setup, verify, disable, backup-codes, login-mfa, status), migration 0019_admin_mfa.sql + down.sql, pyotp+qrcode entegrasyonu. Endpointler: /api/admin/mfa/{setup,verify,disable,backup-codes,login-mfa,status}. Kodlama denetimi temiz (pre-existing issues only). | Denetim (2026-09-25): tests/test_mfa.py eklendi (3/3 yesil), pyotp+qrcode requirements-app.txt e girdi. ANCAK kabul kriteri eksik: login akisi MFA adimi yok (B-01), status/disable session yerine istek govdesi (B-03), hesap kilidi yok (B-04), UI sekmesi yok (B-05). Bulgular: data/orchestrator/API-ADMIN-MFA-26_bulgular_2026-09-25_denetim.md",
+      "dependencies": []
+    },
+    {
+      "task_id": "UI-ADMIN-LTV-CAC-27",
+      "baslik": "[UI] LTV/CAC kartlarını yaz → K8 tamamlama (2s)",
+      "sahip": "utku",
+      "oncelik": "P2",
+      "durum": "bekliyor",
+      "urgency_score": 7,
+      "not": "Kaynak: SSOT §9:347 · §10:379 · §13:435. Eleme: faturalama ertelendi, Stripe yok.",
+      "dependencies": []
+    },
+    {
+      "task_id": "DOC-ADMIN-MULTITENANT-KARAR-28",
+      "baslik": "[DOC] Multi-tenant kararını belgele → KK-7 (1s)",
+      "sahip": "utku",
+      "oncelik": "P2",
+      "durum": "bekliyor",
+      "urgency_score": 7,
+      "not": "Kaynak: SSOT §11 KK-7:396 · §13:434. Eleme: urun karari; KAHIN yaniti olmadan icerik uretilemez.",
+      "dependencies": []
+    }
+  ]
+}

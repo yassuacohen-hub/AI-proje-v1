@@ -1,0 +1,44 @@
+{
+  "metadata": {
+    "extracted_at": "2026-09-25T11:30:25.545552",
+    "total_count": 2
+  },
+  "tasks": [
+    {
+      "task_id": "UI-ADMIN-LTV-CAC-27",
+      "id": "UI-ADMIN-LTV-CAC-27",
+      "baslik": "[UI] LTV/CAC kartlarını yaz → K8 tamamlama (2s)",
+      "sahip": "utku",
+      "oncelik": "P2",
+      "durum": "bekliyor",
+      "baslangic": null,
+      "bitis": null,
+      "dosyalar": [],
+      "dependencies": [],
+      "not": "Kaynak: SSOT §9:347 · §10:379 · §13:435. Eleme: faturalama ertelendi, Stripe yok.",
+      "source": "ic",
+      "from_agent": null,
+      "mod": "code",
+      "brief": "plans/brief_utku_UI-ADMIN-LTV-CAC-27.md",
+      "talimat": ""
+    },
+    {
+      "task_id": "DOC-ADMIN-MULTITENANT-KARAR-28",
+      "id": "DOC-ADMIN-MULTITENANT-KARAR-28",
+      "baslik": "[DOC] Multi-tenant kararını belgele → KK-7 (1s)",
+      "sahip": "utku",
+      "oncelik": "P2",
+      "durum": "bekliyor",
+      "baslangic": null,
+      "bitis": null,
+      "dosyalar": [],
+      "dependencies": [],
+      "not": "Kaynak: SSOT §11 KK-7:396 · §13:434. Eleme: urun karari; KAHIN yaniti olmadan icerik uretilemez.",
+      "source": "ic",
+      "from_agent": null,
+      "mod": "code",
+      "brief": "plans/brief_utku_DOC-ADMIN-MULTITENANT-KARAR-28.md",
+      "talimat": ""
+    }
+  ]
+}

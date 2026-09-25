@@ -1,0 +1,73 @@
+[
+  {
+    "task_id": "UTKU-01",
+    "baslik": "[HUB] ADIM4 kriterleri — 10 görevde önem alanı ekle (task_board.json)",
+    "aciklama": "ADIM4 denetiminde bulunan 10 görevde (UTKU-11, UTKU-12, UTKU-13, UTKU-14, UTKU-15, UTKU-16, UTKU-17, UTKU-18, UTKU-19, UTKU-20/21) onem alanı (P0/P1/P2) ekle. SSOT: Huginn Data Insights/ADIM4_HUB_KRITERLER_KONTROL.md:69-72 (kritik bulgu). Proof: task_board.json güncellemesi + sanity check script.",
+    "oncelik": "P0",
+    "durum": "yapilacak",
+    "sahip": "utku",
+    "baslangic": "2026-09-25T11:30:00Z",
+    "bitis": "2026-09-26T11:30:00Z",
+    "bagimliliklar": [],
+    "brief": "plans/brief_utku_ADIM4-ONEM-EKSIK.md",
+    "talimat": "task_board.json'da kritik 10 görevde onem alanı (P0/P1) ekle. Sanity check: jq '.[] | select(.onem == null) | .task_id' — boş dönmeli."
+  },
+  {
+    "task_id": "UTKU-02",
+    "baslik": "[TEST] TEST sınıfı görevler için brief dosyaları yaz (UTKU-11, UTKU-14)",
+    "aciklama": "ADIM4:75-78'de bulunandan: task_id UTKU-11 (TEST-ADMIN-K2-AGIRLIK-23) ve UTKU-14 (TEST-BLOKE-FAKTOR-ARASTIRMA-01) brief dosyası yok. plans/brief_utku_TEST-K2-AGIRLIK.md + plans/brief_utku_TEST-BLOKE-FAKTOR.md yaz. SSOT: ADIM4_HUB_KRITERLER_KONTROL.md + ADMIN-KIT §7 (brief şablonu).",
+    "oncelik": "P1",
+    "durum": "yapilacak",
+    "sahip": "utku",
+    "baslangic": "2026-09-25T11:30:00Z",
+    "bitis": "2026-09-27T11:30:00Z",
+    "bagimliliklar": [
+      "UTKU-01"
+    ],
+    "brief": "plans/brief_utku_TEST-BRIEF-EKSIK.md",
+    "talimat": "Brief şablonu: [Görev adı] → [SSOT kaynağı] → [Teknik detay] → [Test adımları] → [Başarı kriteri]. Dosyalara plan/brief_utku_*.md olarak kaydet."
+  },
+  {
+    "task_id": "UTKU-03",
+    "baslik": "[UI] Admin Panel 33 modülü Streamlit ile test et (app.py başlatma)",
+    "aciklama": "ADIM6:23'te MANUAL TEST GEREKLI olarak işaretlendi. `streamlit run app.py` ile dashboard başlat, tüm 33 tab modülünün render süresi ölç, network hataları kayıt et. SSOT: Huginn Data Insights/ADIM6_ADMIN_PANEL_KONTROL.md:115-129. Proof: test_report_dashboard_render_UTKU-03.json (render times + errors).",
+    "oncelik": "P1",
+    "durum": "yapilacak",
+    "sahip": "utku",
+    "baslangic": "2026-09-25T11:30:00Z",
+    "bitis": "2026-09-27T11:30:00Z",
+    "bagimliliklar": [],
+    "brief": "plans/brief_utku_ADIM6-DASHBOARD-TEST.md",
+    "talimat": "1. Terminal: streamlit run app.py. 2. Her tab tıkla, render süresini ölç (ms). 3. Network tab -> hata kontrol. 4. Rapor: test_report_dashboard_render_UTKU-03.json (tab: str, render_ms: float, errors: list[str])."
+  },
+  {
+    "task_id": "UTKU-04",
+    "baslik": "[UI] Admin Panel UI/UX kontrol — Button, sidebar, modal responsiveness",
+    "aciklama": "ADIM6:120-124'de UX denetimi tanımlandı ama yapılmadı. Dashboard'da button responsiveness, sidebar navigasyon akıcılığı, modal/form işlevselliği, veri yükleme göstergesi test et. SSOT: ADIM6_ADMIN_PANEL_KONTROL.md:120-124 (öneriler). Proof: ux_audit_UTKU-04.json (test sonuçları + screenshots).",
+    "oncelik": "P1",
+    "durum": "yapilacak",
+    "sahip": "utku",
+    "baslangic": "2026-09-25T11:30:00Z",
+    "bitis": "2026-09-28T11:30:00Z",
+    "bagimliliklar": [
+      "UTKU-03"
+    ],
+    "brief": "plans/brief_utku_ADIM6-UX-AUDIT.md",
+    "talimat": "Kontrol listesi: [Button click → state change (0.5s içinde)] [Sidebar expand/collapse smooth] [Modal close button + ESC key] [Loading indicator görünür]. JSON: {checkbox: bool, note: str}. Sorun varsa issue açıkla."
+  },
+  {
+    "task_id": "UTKU-05",
+    "baslik": "[ALTYAPI] Admin Panel — API entegrasyon doğrulaması (web_app.py endpoint'leri)",
+    "aciklama": "ADIM6:126-129'da API entegrasyonu doğrulanmadı. web_app.py endpoint'leriyle (GET/POST), authentication flow'u, rate limiting test et. SSOT: ADIM6_ADMIN_PANEL_KONTROL.md:126-129 + web_app.py source. Proof: api_integration_test_UTKU-05.json (200 OK, auth headers, rate limit headers).",
+    "oncelik": "P1",
+    "durum": "yapilacak",
+    "sahip": "utku",
+    "baslangic": "2026-09-25T11:30:00Z",
+    "bitis": "2026-09-28T11:30:00Z",
+    "bagimliliklar": [
+      "UTKU-03"
+    ],
+    "brief": "plans/brief_utku_ADIM6-API-INTEGRATION.md",
+    "talimat": "curl/Python requests: GET /api/admin/kpi → 200 + JSON. POST /api/admin/log → auth header check + 201. Rate limit test: 100 req/s → 429 kontrol. JSON: {endpoint: str, status: int, latency_ms: float, auth_required: bool}."
+  }
+]
