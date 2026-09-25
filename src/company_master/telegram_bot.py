@@ -2358,35 +2358,16 @@ def btn_gorev_mesaj_gonder(message):
 # BÖLÜM 9: DEBUG HANDLER (Tüm eşleşmeyen mesajlar)
 # ============================================================================
 
-@bot.message_handler(func=lambda message: True)
-def debug_catch_all(message):
-    """Eşleşmeyen tüm mesajları log'la — emoji karakter kodlaması debug."""
-    text = message.text or ""
-    # Her karakteri hex olarak göster
-    hex_chars = " ".join(f"{ord(c):04x}" for c in text)
-    logger.info(f"[UNHANDLED_MSG] text='{text}' | hex={hex_chars} | len={len(text)}")
-    
-    # Kullanıcıya bilgi ver
-    bot.send_message(
-        message.chat.id,
-        f"❓ Bilinmeyen komut: {text}\n\n"
-        f"Hex: {hex_chars}\n"
-        f"/start ile başla."
-    )
-
+# DISABLED: debug_catch_all handler tüm mesajları yakalaması bot'u donduruyor
 
 # ============================================================================
 # BÖLÜM 10: BOT BAŞLATMA
 # ============================================================================
 
 def main():
-    """Bot başlat."""
-    logger.info("Starting Telegram Bot polling...")
-    try:
-        bot.infinity_polling(timeout=10, long_polling_timeout=5)
-    except Exception as e:
-        logger.error(f"Bot error: {e}")
-        raise
+    """Bot webhook mode'da çalıştır (FastAPI üzerinden process_new_updates)."""
+    logger.info("Telegram Bot webhook mode aktif")
+    logger.info("Polling DISABLED — FastAPI web_app.py:/api/webhooks/telegram endpoint kullan")
 
 
 if __name__ == "__main__":
