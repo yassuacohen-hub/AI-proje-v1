@@ -1,0 +1,56 @@
+[
+  {
+    "id": "CHAT-001",
+    "task_id": "P7-101",
+    "kimden": "utku",
+    "konu": "API endpoint status kontrolü gerekli",
+    "durum": "acik",
+    "oluşturuldu": "2026-09-25T09:30:00Z",
+    "güncellendi": "2026-09-25T09:30:00Z"
+  },
+  {
+    "id": "CHAT-002",
+    "task_id": "P7-102",
+    "kimden": "salih",
+    "konu": "Frontend component test yapılmadı",
+    "durum": "acik",
+    "oluşturuldu": "2026-09-25T08:45:00Z",
+    "güncellendi": "2026-09-25T08:45:00Z"
+  },
+  {
+    "id": "CHAT-003",
+    "task_id": "P7-103",
+    "kimden": "yasu",
+    "konu": "Database migration script hazır, review bekleniyor",
+    "durum": "cokundurmus",
+    "oluşturuldu": "2026-09-24T15:20:00Z",
+    "güncellendi": "2026-09-25T07:10:00Z"
+  },
+  {
+    "id": "CHAT-004",
+    "task_id": "P7-104",
+    "kimden": "ihsan",
+    "konu": "Security audit tamamlandı, açık bulgu yok",
+    "durum": "cozuldu",
+    "oluşturuldu": "2026-09-23T10:00:00Z",
+    "güncellendi": "2026-09-24T16:30:00Z"
+  },
+  {
+    "id": "CHAT-005",
+    "task_id": "P7-105",
+    "kimden": "mimir",
+    "konu": "Documentation generation script yazıldı",
+    "durum": "cozuldu",
+    "oluşturuldu": "2026-09-22T14:00:00Z",
+    "güncellendi": "2026-09-24T11:45:00Z"
+  },
+  {
+    "id": "CHAT-006",
+    "task_id": "P7-106",
+    "kimden": "utku",
+    "konu": "Performance test results analiz edilecek",
+    "durum": "acik",
+    "oluşturuldu": "2026-09-25T10:00:00Z",
+    "güncellendi": "2026-09-25T10:00:00Z"
+  }
+]

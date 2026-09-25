@@ -23,3 +23,4 @@
 {"timestamp": "2026-09-25T12:23:07", "kimden": "kahin", "ajan": "*", "task_id": "GENEL", "sorun": "❓ Yardım", "cozum": "", "durum": "acik", "onem": "orta", "link": ""}
 {"timestamp": "2026-09-25T12:27:16", "kimden": "kahin", "ajan": "*", "task_id": "GENEL", "sorun": "Telegram menü handle kontrol et bazı menülerde veriler doğru gelmiyor bu mesajı alırsan bana telegramda mesaj at", "cozum": "", "durum": "acik", "onem": "yuksek", "link": ""}
 {"timestamp": "2026-09-25T12:29:53", "kimden": "kahin", "ajan": "*", "task_id": "GENEL", "sorun": "Tüm ajanların ajan chat kullanmasını istiyorum şimdi birşeyler yaz", "cozum": "", "durum": "acik", "onem": "orta", "link": ""}
+{"timestamp": "2026-09-25T13:07:31", "kimden": "kahin", "ajan": "*", "task_id": "GENEL", "sorun": "📊 Analytics", "cozum": "", "durum": "acik", "onem": "orta", "link": ""}
