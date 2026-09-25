@@ -237,10 +237,22 @@ def send_chat_menu(chat_id: str) -> None:
 
 
 def show_chat_status(chat_id: str, status: str) -> None:
-    """Chat sorunlarını durum bazında göster."""
+    """Chat sorunlarını durum bazında göster — chat.json SSOT."""
     try:
-        from src.company_master.chat import oku
-        satirlar = oku()
+        import json
+        from pathlib import Path
+        
+        # Absolute path: task_board ile aynı lokasyonda chat.json
+        chat_path = Path(__file__).resolve().parent.parent.parent / "data" / "orchestrator" / "chat.json"
+        logger.info(f"[CHAT_STATUS] Reading from {chat_path}")
+        
+        if not chat_path.exists():
+            logger.warning(f"[CHAT_STATUS] chat.json not found at {chat_path}")
+            satirlar = []
+        else:
+            with open(chat_path, "r", encoding="utf-8") as f:
+                satirlar = json.load(f)
+            logger.info(f"[CHAT_STATUS] Loaded {len(satirlar)} chat records")
     except Exception as e:
         logger.error(f"[CHAT_FETCH_ERROR] {e}", exc_info=True)
         bot.send_message(chat_id, f"❌ Chat verileri alınamadı: {str(e)[:50]}")
@@ -495,12 +507,14 @@ def show_rapor_pano_ozeti(chat_id: str) -> None:
             sahib_sayisi[sahib] += 1
             onem_sayisi[onem] += 1
         
-        # Durum emoji map
+        # Durum emoji map — task_board.json durum değerleri
         durum_emoji = {
             "acik": "🟢",
             "aktif": "🔵",
             "bloke": "🟠",
-            "done": "✅"
+            "done": "✅",
+            "plan": "📋",
+            "iptal": "❌"
         }
         
         onem_emoji = {
