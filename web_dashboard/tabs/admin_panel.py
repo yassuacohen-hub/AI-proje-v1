@@ -37,7 +37,7 @@ from company_master.settings import (  # noqa: E402
     varsayilanlar,
 )
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
-from company_master.chat import oku, ozet  # noqa: E402
+from company_master.chat import oku, ozet, kahin_gonder  # noqa: E402
 import requests  # noqa: E402 (UI-ADMIN-KVKK-MODU-26: KVKK mode API çağrısı)
 
 #: D-192 Faz 2 — ajan başına sabit renk (tema uyumlu: gece/gündüz)
@@ -597,6 +597,51 @@ def render_chat_summary() -> None:
             width="stretch", hide_index=True, column_order=gorunen_kolonlar, column_config=col_config,
         )
         st.caption(f"Toplam {len(tum_sorunlar)} sorun kaydedilmiş.")
+
+    # ---- KAHİN Mesaj Gönderme Formu (D-213) ----
+    Section("Mesaj Gönder", "KAHİN (Ürün Sahibi) olarak tüm ajanlara broadcast mesaj gönder.", ikon="📤").render()
+
+    with st.form("kahin_mesaj_formu", clear_on_submit=True):
+        st.write("**Mesajınız tüm ajanlar tarafından görülebilecek.** Max 500 karakter.")
+        
+        mesaj = st.text_area(
+            "Mesaj",
+            placeholder="Örn: Acil update: API v2 maintenance yarın saat 14:00-15:00 arasında.",
+            max_chars=500,
+            height=100,
+        )
+        
+        col_task, col_onem = st.columns([2, 1])
+        with col_task:
+            task_id = st.text_input(
+                "Görev ID (isteğe bağlı)",
+                placeholder="Örn: API-12, P7-50, vb.",
+                max_chars=50,
+            )
+        with col_onem:
+            onem = st.selectbox(
+                "Önem Derecesi",
+                options=["orta", "yuksek", "kritik", "dusuk"],
+                index=0,
+            )
+        
+        submitted = st.form_submit_button("📨 Mesaj Gönder", type="primary", use_container_width=True)
+    
+    if submitted:
+        if not mesaj.strip():
+            st.error("Mesaj boş olamaz.")
+        else:
+            try:
+                sonuc = kahin_gonder(
+                    mesaj=mesaj.strip(),
+                    task_id=task_id.strip() if task_id else "",
+                    onem=onem,
+                )
+                st.success(
+                    f"✅ Mesaj gönderildi! (task_id: {sonuc.get('task_id', '—')})"
+                )
+            except Exception as e:
+                st.error(f"❌ Hata: {e}")
 
 
 # ---------------------------------------------------------------------------
