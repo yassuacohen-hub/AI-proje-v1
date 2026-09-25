@@ -22,5 +22,21 @@
     "tetik_sayisi": 3,
     "uyari_tarihi": "2026-09-25T12:34:02",
     "mesaj": "⚠️ utku () — ui_admin_ltv_cac_27 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ui_admin_ltv_cac_27",
+    "task_id": "utku",
+    "gorev_basligi": "",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-25T12:39:02",
+    "mesaj": "⚠️ utku () — ui_admin_ltv_cac_27 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "ui_admin_ltv_cac_27",
+    "task_id": "utku",
+    "gorev_basligi": "",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-25T12:44:02",
+    "mesaj": "⚠️ utku () — ui_admin_ltv_cac_27 5. kez uyarıldı; henüz başlamadı."
   }
 ]

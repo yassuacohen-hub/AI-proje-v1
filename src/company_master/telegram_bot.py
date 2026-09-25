@@ -133,36 +133,34 @@ def send_pano_menu(chat_id: str) -> None:
 
 
 def show_pano_status(chat_id: str, status: str) -> None:
-    """Pano görevlerini durum bazında göster."""
+    """Pano görevlerini durum bazında göster — task_board.json SSOT."""
     try:
         logger.info(f"[PANO_START] chat_id={chat_id}, status={status}")
         
-        from src.company_master.orchestrator.trigger import bekleyen_tetikler
-        logger.info(f"[PANO] Import OK, calling bekleyen_tetikler('*')")
+        import json
+        from pathlib import Path
         
-        # TIMEOUT: 5 saniye
-        import signal
+        # Absolute path: __file__ → telegram_bot.py, up 3 levels to root
+        task_board_path = Path(__file__).resolve().parent.parent.parent / "data" / "orchestrator" / "task_board.json"
+        logger.info(f"[PANO] Reading task_board from {task_board_path}")
         
-        def timeout_handler(signum, frame):
-            raise TimeoutError("bekleyen_tetikler() timeout - 5 saniye aşıldı")
-        
-        # Windows'ta signal.SIGALRM yok; basit timeout yap
         try:
-            tasks = bekleyen_tetikler("*")
-            logger.info(f"[PANO] Got tasks: type={type(tasks).__name__}, len={len(tasks) if tasks else 0}")
-        except TimeoutError as te:
-            logger.error(f"[PANO_TIMEOUT] {te}")
-            tasks = None
-        
-        if tasks is None:
-            logger.info(f"[PANO] tasks=None, setting to []")
+            with open(task_board_path, "r", encoding="utf-8") as f:
+                tasks = json.load(f)
+            logger.info(f"[PANO] Got {len(tasks)} tasks from task_board.json")
+        except Exception as read_err:
+            logger.error(f"[PANO_READ_ERROR] {read_err}", exc_info=True)
             tasks = []
         
-        # Duruma göre filtrele
+        if not tasks:
+            logger.warning(f"[PANO] No tasks loaded")
+            tasks = []
+        
+        # Duruma göre filtrele (task_board.json durum değerleri: done, aktif, bloke, plan, iptal)
         status_map = {
             "done": "done",
-            "active": "working",
-            "blocked": "blocked",
+            "active": "aktif",
+            "blocked": "bloke",
             "plan": "plan",
             "all": None
         }
@@ -334,15 +332,21 @@ def _show_tetikler_ajan_detay(chat_id: str, ajan: str) -> None:
         import json
         from pathlib import Path
         
-        task_board_path = Path("data/orchestrator/task_board.json")
+        # Absolute path: __file__ → telegram_bot.py, up 3 levels to root
+        task_board_path = Path(__file__).resolve().parent.parent.parent / "data" / "orchestrator" / "task_board.json"
+        logger.info(f"[TETIKLER_DETAY] Reading from {task_board_path}")
+        
         with open(task_board_path, "r", encoding="utf-8") as f:
             gorevler = json.load(f)
+        
+        logger.info(f"[TETIKLER_DETAY] Loaded {len(gorevler)} tasks, filtering for ajan={ajan}")
         
         # Ajanın görevlerini filtrele (durum=aktif veya plan)
         tetikler = [g for g in gorevler if g.get("sahip", "").lower() == ajan.lower()
                    and g.get("durum", "").lower() in ["aktif", "plan"]]
+        logger.info(f"[TETIKLER_DETAY] Found {len(tetikler)} tasks for {ajan}")
     except Exception as e:
-        logger.error(f"Error fetching tetikler: {e}")
+        logger.error(f"[TETIKLER_DETAY_ERROR] Error fetching tetikler: {e}", exc_info=True)
         tetikler = []
     
     if not tetikler:
