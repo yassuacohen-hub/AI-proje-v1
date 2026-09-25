@@ -35,6 +35,7 @@ from src.company_master.orchestrator import task_board as tb  # noqa: E402
 from src.company_master.orchestrator import trigger  # noqa: E402
 from src.company_master.orchestrator import duzen  # noqa: E402
 from src.company_master.orchestrator import isbirligi  # noqa: E402
+from src.company_master import chat  # noqa: E402
 
 
 def _ayristir_liste(deger: str | None) -> list[str]:
@@ -167,6 +168,18 @@ def cmd_teslim(args: argparse.Namespace) -> int:
               f"\"Kapanan isler\" bolumune {args.task_id} satiri; ya da --zorla.",
               file=sys.stderr)
         return 1
+    
+    # D-210 KAPISI 2: teslim oncesi acik sorular var mi?
+    engeller = chat.teslim_kontrol_et(args.task_id)
+    if engeller["engel"]:
+        print(f"[D-210 TESLIM KAPISI] HATA: Acik sorular var — teslim reddedildi.",
+              file=sys.stderr)
+        for neden in engeller["nedenler"]:
+            print(f"  - {neden}", file=sys.stderr)
+        print(f"\nSoruları kapadiğinda teslim yeniden calistir.",
+              file=sys.stderr)
+        return 1
+    
     try:
         sonuc = trigger.teslim_et(
             args.task_id, args.ajan, args.ozet, _ayristir_liste(args.cikti)
@@ -218,6 +231,7 @@ def cmd_basla(args: argparse.Namespace) -> int:
     """Tek kelime tetik: postayi oku, zinciri goster, otonom calisma yolunu bas.
 
     KAHIN yalnizca "basla" der; ajan bu ciktiyi okuyup 4 gorevi sirayla bitirir.
+    D-210 kapisi: acik sorular varsa, teslim engelleyiciye basvur.
     """
     # D-198 kapisi: bozuk panoyla zincire girilmez (kod 2 = dur, 1 = uyarip devam).
     if not getattr(args, "simulasyonsuz", False):
@@ -229,6 +243,19 @@ def cmd_basla(args: argparse.Namespace) -> int:
         if sim == 1:
             print("(simulasyon uyarili; zincir devam ediyor — D-65)\n")
     ajan = args.ajan
+    
+    # D-210 KAPISI 1: basla oncesi acik sorular var mi?
+    acik_sorunlar = chat.ajan_acik_sorulari(ajan)
+    if acik_sorunlar:
+        print(f"\n[D-210 BASLA KAPISI] ACIK SORULAR — cevapla, sonra basla yeniden calistir:")
+        for idx, s in enumerate(acik_sorunlar, 1):
+            print(f"  {idx}. {s['task_id']}: {s['sorun']}")
+            print(f"     (kimden: {s['kimden']}, onem: {s.get('onem', 'orta')})")
+        print(f"\nToplam {len(acik_sorunlar)} acik soru. Soruları cevapladiğinda:")
+        print(f"  python scripts/gorev_kutusu.py basla --ajan {ajan}")
+        print()
+        return 0
+    
     bekleyen = trigger.bekleyen_tetikler(ajan)
     kalan = trigger.zincir_kalan(ajan)
     rol = trigger.AJAN_ROLU.get(ajan, "uretim")

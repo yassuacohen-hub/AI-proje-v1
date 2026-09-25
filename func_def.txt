@@ -1,0 +1,13 @@
+def api_admin_kvkk_mode(req: dict, _auth: str = Depends(require_admin)):
+   """D-207: Admin KVKK mode toggle (strict ↔ lenient).
+   
+   strict: KVKK kesinlikle uygulanır (yasak alanlar maskelenir)
+   lenient: Admin riski alıp kısıtlı alanları açar (yasak kalır)
+   
+   İstek: {mode: 'strict' | 'lenient', reason: str}
+   Cevap: {ok: bool, previous_mode: str, new_mode: str, changed_at: str}
+   """
+   mode = (req.get("mode") or "").strip().lower()
+   reason = (req.get("reason") or "").strip()
+   
+  

@@ -1056,3 +1056,135 @@ def render_kontrol_panosu_tab() -> None:
         st.dataframe(df, width="stretch", hide_index=True)
     else:
         st.info("Mode geçişi yok.")
+
+
+# ---------------------------------------------------------------------------
+# UI-ADMIN-FEATURE-FLAG-25: Feature Flag Yönetim Sekmesi
+# ---------------------------------------------------------------------------
+
+def _get_feature_flags() -> dict[str, bool]:
+    """Feature flag'leri session state'ten oku."""
+    return dict(st.session_state.get("_feature_flags", {}))
+
+
+def _save_feature_flags(flags: dict[str, bool]) -> None:
+    """Feature flag'leri session state'e yaz."""
+    st.session_state["_feature_flags"] = dict(flags)
+
+
+def _feature_flag_audit_getir(limit: int = 20) -> list[dict]:
+    """Feature flag audit log'larını getir."""
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            rows = conn.execute(
+                text("""
+                    SELECT admin_id, action, target as flag_name, old_value, new_value, changed_at
+                    FROM admin_audit_log
+                    WHERE action = 'feature_flag_toggle'
+                    ORDER BY changed_at DESC
+                    LIMIT :lim
+                """),
+                {"lim": limit}
+            ).mappings().all()
+        return [dict(r) for r in rows]
+    except Exception:
+        return []
+
+
+def render_feature_flags_tab() -> None:
+    """UI-ADMIN-FEATURE-FLAG-25: Feature Flag Yönetim Sekmesi.
+    
+    - Flag listesi (aktif/pasif + açıklama)
+    - Toggle UI (switch componentli)
+    - Geçmiş kayıtları (kim, ne zaman, eski→yeni)
+    - Sadece admin rolü
+    """
+    PageHeader(
+        "Feature Flags", ust_etiket="İş · Yönetim", ikon="🚩",
+        giris="Sistem feature flag'lerini yönetin. Sadece admin rolü erişebilir.",
+    ).render()
+
+    # Admin rol kontrolü
+    try:
+        session = dict(st.session_state)
+        user_email = session.get("admin_email") or session.get("user_email")
+        user_role = session.get("user_role", "anon")
+    except Exception:
+        user_email = None
+        user_role = "anon"
+
+    if user_role != "admin":
+        st.error("Bu sekmeye sadece admin rolü erişebilir.")
+        return
+
+    # Default feature flags
+    DEFAULT_FLAGS = {
+        "new_dashboard": {"desc": "Yeni dashboard tasarımı", "default": False},
+        "advanced_analytics": {"desc": "Gelişmiş analitik modülü", "default": False},
+        "beta_api": {"desc": "Beta API erişimi", "default": False},
+        "maintenance_mode": {"desc": "Bakım modu (tüm istekleri reddet)", "default": False},
+    }
+
+    flags = _get_feature_flags()
+    # Default değerleri merge et
+    for fname, fdef in DEFAULT_FLAGS.items():
+        if fname not in flags:
+            flags[fname] = fdef["default"]
+    _save_feature_flags(flags)
+
+    # Flag listesi + toggle
+    Section("Feature Flag Listesi", "Aktif/pasif toggle + açıklama", ikon="🚩").render()
+
+    for fname, fdef in DEFAULT_FLAGS.items():
+        current = flags.get(fname, fdef["default"])
+        col1, col2, col3 = st.columns([1, 1, 3])
+        with col1:
+            st.write(f"**{fname}**")
+        with col2:
+            new_val = st.checkbox(
+                "Aktif",
+                value=current,
+                key=f"ff_toggle_{fname}",
+                label_visibility="collapsed",
+            )
+            if new_val != current:
+                # API çağrısı
+                import requests
+                try:
+                    resp = requests.post(
+                        "/api/admin/feature-flags",
+                        json={"flag_name": fname, "new_value": new_val},
+                        headers={"Authorization": f"Bearer {st.session_state.get('admin_token', '')}"},
+                        timeout=5,
+                    )
+                    if resp.ok:
+                        st.success(f"{fname} → {'Aktif' if new_val else 'Pasif'}")
+                        st.rerun()
+                    else:
+                        st.error(f"Hata: {resp.json().get('detail', 'Bilinmeyen hata')}")
+                except Exception as e:
+                    st.error(f"İstek hatası: {e}")
+        with col3:
+            st.caption(fdef["desc"])
+
+    st.divider()
+
+    # Audit trail
+    Section("Değişiklik Geçmişi (Audit Trail)", "Son 20 değişiklik", ikon="📋").render()
+
+    audit = _feature_flag_audit_getir(limit=20)
+    if audit:
+        rows = []
+        for r in audit:
+            rows.append({
+                "Admin": r.get("admin_id", "—"),
+                "Flag": r.get("flag_name", "—"),
+                "Eski": "Aktif" if r.get("old_value") == "true" else "Pasif",
+                "Yeni": "Aktif" if r.get("new_value") == "true" else "Pasif",
+                "Zaman": str(r.get("changed_at", "—"))[:19],
+            })
+        df = pd.DataFrame(rows)
+        st.dataframe(df, width="stretch", hide_index=True)
+    else:
+        st.info("Henüz feature flag değişikliği yok.")

@@ -1,0 +1,9 @@
+eated": True}
+
+
+@app.post("/api/admin/kvkk-mode")
+def api_admin_kvkk_mode(req: dict, _auth: str = Depends(require_admin)):
+   """D-207: Admin KVKK mode toggle (strict ↔ lenient).
+   
+   strict: KVKK kesinlikle uygulanır (yasak alanlar maskelenir)
+   

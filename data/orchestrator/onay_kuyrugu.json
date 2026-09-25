@@ -2572,5 +2572,13 @@
     "ciktilar": [],
     "teslim_tarihi": "2026-09-25T02:50:17",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-ADMIN-FEATURE-FLAG-25",
+    "ajan": "utku",
+    "ozet": "Feature Flag sekmesi hazirlandi: render_feature_flags_tab (admin_panel.py) + TabTanimi feature_flags (__init__.py). 4 default flags (new_dashboard, advanced_analytics, beta_api, maintenance_mode) + toggle UI (checkbox) + audit trail (admin_audit_log). Admin rol kontrolü (403). 11 test gecti. Kodlama denetimi temiz.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-25T03:14:57",
+    "durum": "bekliyor"
   }
 ]

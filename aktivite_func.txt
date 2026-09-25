@@ -1,0 +1,58 @@
+def aktivite_yaz(
+    user_id: str,
+    olay_tipi: str,
+    detay: dict | None = None,
+    basarili: bool = True,
+    request: Request | None = None,
+) -> None:
+    """API-ADMIN-AKTIVITE-YAZ-14: user_activity_log tablosuna kayit.
+
+    Hata istek dusurmez (best-effort). Olay tipleri: 'giris', 'arama', 'ai_kullanim'.
+    """
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            ip = ""
+            if request and request.client:
+                ip = request.client.host
+            
+            import json
+            conn.execute(
+                text(
+                    "INSERT INTO user_activity_log (user_id, olay_tipi, olay_zamani, detay, "
+                    "basarili, ip_adresi, ulke_kodu) "
+                    "VALUES (:uid, :tip, CURRENT_TIMESTAMP, :detay, :ok, :ip, :ulke)"
+                ),
+                {
+                    "uid": user_id or "",
+                    "tip": olay_tipi,
+                    "detay": json.dumps(detay) if detay else None,
+                    "ok": basarili,
+                    "ip": ip or None,
+                    "ulke": None,
+                },
+            )
+            conn.commit()
+    except Exception as exc:
+        print(f"[API-ADMIN-AKTIVITE-YAZ-14] aktivite kayit hatasi: {exc}")
+
+
+# â”€â”€ X04: Üyelik yardımcıları (şifre sıfırlama, e-posta doğrulama, Telegram) â”€â”€â”€
+import secrets
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+
+_SMTP_HOST = os.getenv("SMTP_HOST", "smtp.gmail.com")
+_SMTP_PORT = int(os.getenv("SMTP_PORT", "587"))
+_SMTP_USER = os.getenv("SMTP_USER", "")
+_SMTP_PASS = os.getenv("SMTP_PASS", "")
+_SMTP_FROM = os.getenv("SMTP_FROM", "noreply@huginn.local")
+
+_TELEGRAM_BOT_TOKEN = os.getenv("TELEGRAM_BOT_TOKEN", "")
+_TELEGRAM_CHAT_ID = os.getenv("TELEGRAM_CHAT_ID", "")
+_WELCOME_TELEGRAM_CHAT_ID = os.getenv("WELCOME_TELEGRAM_CHAT_ID", _TELEGRAM_CHAT_ID)
+
+_RESET_TOKEN_TTL = 3600  # 1 saat
+_VERIFY_TOKEN_TTL = 86400  # 24 saat
+

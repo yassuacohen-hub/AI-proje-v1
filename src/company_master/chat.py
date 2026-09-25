@@ -289,3 +289,86 @@ def bulgular_oku(
         satirlar = satirlar[-son:]
     
     return satirlar
+
+
+def kahin_gonder(
+    mesaj: str,
+    task_id: str = "",
+    onem: str = "orta",
+    kimden: str = "kahin",
+    data_dir: Path | None = None,
+) -> dict[str, Any]:
+    """KAHİN (Ürün Sahibi) mesaj gönder (D-210).
+    
+    Args:
+        mesaj: 1-500 char sorun/istek
+        task_id: ilgili görev (isteğe bağlı, boşsa genel)
+        onem: önem seviyesi — kritik/yuksek/orta/dusuk
+        kimden: sabit "kahin" (override edilmez)
+        data_dir: test için custom data dir
+    
+    Returns:
+        Eklenen satır (dict)
+    """
+    return ac(
+        ajan="*",  # Broadcast: tüm ajanlar bu mesajı görür
+        task_id=task_id or "genel",
+        sorun=mesaj[:500],
+        cozum="",
+        kimden="kahin",
+        onem=onem if onem in ONEM_SEVIYELERI else "orta",
+        data_dir=data_dir,
+    )
+
+
+def ajan_acik_sorulari(
+    ajan: str,
+    data_dir: Path | None = None,
+) -> list[dict[str, Any]]:
+    """Ajana yöneltilmiş açık sorunlar (D-210 basla kapısı).
+    
+    Args:
+        ajan: kanonik ajan adı
+        data_dir: test için custom data dir
+    
+    Returns:
+        Açık (durum=acik) ve ajana ait sorunlar
+    """
+    satirlar = oku(data_dir=data_dir)
+    ajan_norm = _ajan_normalize(ajan)
+    
+    # Filtrele: hedef=ajan ve durum=acik
+    acik = [s for s in satirlar
+            if s.get("ajan") == ajan_norm and s.get("durum") == "acik"]
+    
+    return acik
+
+
+def teslim_kontrol_et(
+    task_id: str,
+    data_dir: Path | None = None,
+) -> dict[str, Any]:
+    """Görevle ilgili açık sorular var mı kontrol et (D-210 teslim kapısı).
+    
+    Args:
+        task_id: görev ID
+        data_dir: test için custom data dir
+    
+    Returns:
+        {"engel": bool, "nedenler": [liste açık sorunların]}
+    """
+    satirlar = oku(task_id=task_id, data_dir=data_dir)
+    
+    # Açık sorunları filtrele
+    acik_sorunlar = [s for s in satirlar if s.get("durum") == "acik"]
+    
+    engel = len(acik_sorunlar) > 0
+    nedenler = [
+        f"{s.get('sorun', '?')} (kimden: {s.get('kimden', '?')})"
+        for s in acik_sorunlar
+    ]
+    
+    return {
+        "engel": engel,
+        "nedenler": nedenler,
+    }

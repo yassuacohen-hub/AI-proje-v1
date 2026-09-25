@@ -2291,6 +2291,28 @@ def require_admin(
 
 
 
+
+def require_admin_role(
+    authorization: str = Header(None, alias="Authorization"),
+    x_api_key: str = Header(None, alias="X-API-Key"),
+    api_key: str = "",
+):
+    """Admin rolü kontrolü: DASH_API_KEY VEYA role=admin kullanici tokeni.
+
+    Sadece role=admin olan kullanıcılar erişebilir.
+    """
+    admin_key = (os.getenv("DASH_API_KEY") or "").strip()
+    provided_key = (x_api_key or api_key or "").strip()
+    if admin_key and provided_key and provided_key == admin_key:
+        return "admin-key"
+    if authorization:
+        tok = authorization.replace("Bearer ", "").strip()
+        u = _user_from_token(tok)
+        if u and u.get("role") == "admin" and u.get("status") == "onayli":
+            return "admin-user"
+    raise HTTPException(status_code=403, detail="Admin rolü gerekli")
+
+
 @app.post("/api/admin/login")
 def api_admin_login_post(req: dict, request: Request, _rate: None = Depends(_auth_rate_guard)):
     """ADMIN-GATE-01: POST admin girişi. {email, password} → token.
@@ -2805,7 +2827,108 @@ def api_admin_kvkk_mode(req: dict, _auth: str = Depends(require_admin)):
            "changed_at": now
        }
    except Exception as e:
-       raise HTTPException(status_code=500, detail=f"Mode değiştirilemedi: {str(e)}")
+           raise HTTPException(status_code=500, detail=f"Mode değiştirilemedi: {str(e)}")
+
+
+# UI-ADMIN-FEATURE-FLAG-25: Feature Flag Yönetim Endpoint
+@app.post("/api/admin/feature-flags")
+def admin_feature_flag_toggle(
+    req: dict,
+    request: Request,
+    _auth: str = Depends(require_admin_role)
+) -> dict:
+    """Feature flag toggle: {flag_name: str, new_value: bool} -> {ok, previous, new, changed_at}.
+    
+    Admin role required. Audit log yazılır.
+    """
+    try:
+        flag_name = (req.get("flag_name") or "").strip()
+        new_value = bool(req.get("new_value"))
+        if not flag_name:
+            raise HTTPException(status_code=400, detail="flag_name zorunlu")
+        
+        # Mevcut değer
+        flags = _get_feature_flags()
+        previous = flags.get(flag_name, False)
+        
+        if previous == new_value:
+            return {
+                "ok": True,
+                "previous": previous,
+                "new": new_value,
+                "changed_at": datetime.now().isoformat(),
+                "message": "Değer zaten aynı"
+            }
+        
+        # Güncelle
+        flags[flag_name] = new_value
+        _save_feature_flags(flags)
+        
+        # Audit log
+        admin_id = _get_admin_id_from_request(request)
+        _log_feature_flag_change(admin_id, flag_name, previous, new_value)
+        
+        return {
+            "ok": True,
+            "previous": previous,
+            "new": new_value,
+            "changed_at": datetime.now().isoformat()
+        }
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Feature flag değiştirilemedi: {str(e)}")
+
+
+def _get_feature_flags() -> dict[str, bool]:
+    """Feature flag'leri session state'ten oku."""
+    try:
+        import streamlit as st
+        return dict(st.session_state.get("_feature_flags", {}))
+    except Exception:
+        return {}
+
+
+def _save_feature_flags(flags: dict[str, bool]) -> None:
+    """Feature flag'leri session state'e yaz."""
+    try:
+        import streamlit as st
+        st.session_state["_feature_flags"] = dict(flags)
+    except Exception:
+        pass
+
+
+def _get_admin_id_from_request(request: Request) -> str:
+    """Request'ten admin ID al."""
+    try:
+        session = _get_session(request)
+        if session and session.user:
+            return session.user.email
+    except Exception:
+        pass
+    return "unknown"
+
+
+def _log_feature_flag_change(admin_id: str, flag_name: str, old_value: bool, new_value: bool) -> None:
+    """Feature flag değişikliğini audit log'a yaz."""
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            conn.execute(
+                text("""
+                    INSERT INTO admin_audit_log (admin_id, action, target, old_value, new_value, changed_at)
+                    VALUES (:admin_id, 'feature_flag_toggle', :flag_name, :old_val, :new_val, CURRENT_TIMESTAMP)
+                """),
+                {
+                    "admin_id": admin_id,
+                    "flag_name": flag_name,
+                    "old_val": str(old_value).lower(),
+                    "new_val": str(new_value).lower(),
+                },
+            )
+            conn.commit()
+    except Exception as e:
+        print(f"[FEATURE-FLAG-AUDIT] Log yazılamadı: {e}")
 
 
 @app.get("/api/dashboard", response_class=HTMLResponse)

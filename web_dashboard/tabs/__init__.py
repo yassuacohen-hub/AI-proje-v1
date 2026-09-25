@@ -514,6 +514,19 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_kontrol_panosu_tab",
         min_rol="admin",
     ),
+    # UI-ADMIN-FEATURE-FLAG-25: Feature Flag Yönetim
+    TabTanimi(
+        anahtar="feature_flags",
+        baslik="Feature Flags",
+        ikon="🚩",
+        grup=GRUP_SISTEM,
+        aciklama="Sistem feature flag'lerini yönetin (admin only)",
+        url_path="feature-flags",
+        ust="proje_yonetimi", sira=8,
+        modul="web_dashboard.tabs.admin_panel",
+        fonksiyon="render_feature_flags_tab",
+        min_rol="admin",
+    ),
     # UX-MENU-03: menüden çıktı; sol-alt hesap kartı popover'ından açılır.
     TabTanimi(
         anahtar="ayarlar",

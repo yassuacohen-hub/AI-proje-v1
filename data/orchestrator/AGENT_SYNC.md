@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-25T02:50:17
+> Son guncelleme: 2026-09-25T03:14:57
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -9,7 +9,7 @@
 |-------|--------|-------|---------|-------|
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | iptal |
 | TEST-ADMIN-K2-AGIRLIK-23 | [TEST] K2 ağırlık şemasını denetle → tes | yasu | P2 | aktif |
-| UI-ADMIN-FEATURE-FLAG-25 | [UI] Feature flag yönetim ekranını yaz → | utku | P2 | bekliyor |
+| UI-ADMIN-FEATURE-FLAG-25 | [UI] Feature flag yönetim ekranını yaz → | utku | P2 | review |
 | API-ADMIN-MFA-26 | [API] MFA + hesap kilidi akışını yaz → A | utku | P2 | bekliyor |
 | UI-ADMIN-LTV-CAC-27 | [UI] LTV/CAC kartlarını yaz → K8 tamamla | utku | P2 | bekliyor |
 | DOC-ADMIN-MULTITENANT-KARAR-28 | [DOC] Multi-tenant kararını belgele → KK | utku | P2 | bekliyor |

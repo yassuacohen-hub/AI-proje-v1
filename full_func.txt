@@ -1,0 +1,77 @@
+def api_admin_kvkk_mode(req: dict, _auth: str = Depends(require_admin)):
+   """D-207: Admin KVKK mode toggle (strict ↔ lenient).
+   
+   strict: KVKK kesinlikle uygulanır (yasak alanlar maskelenir)
+   lenient: Admin riski alıp kısıtlı alanları açar (yasak kalır)
+   
+   İstek: {mode: 'strict' | 'lenient', reason: str}
+   Cevap: {ok: bool, previous_mode: str, new_mode: str, changed_at: str}
+   """
+   mode = (req.get("mode") or "").strip().lower()
+   reason = (req.get("reason") or "").strip()
+   
+   if mode not in ("strict", "lenient"):
+       raise HTTPException(status_code=400, detail="mode 'strict' veya 'lenient' olmalı")
+   if not reason or len(reason) < 3:
+       raise HTTPException(status_code=400, detail="reason en az 3 karakter olmalı")
+   
+   # Admin ID'sini token'dan al
+   auth_header = req.get("_auth_header") or ""
+   admin_id = "system"  # ponytail: Token parsing opsiyonel; system default
+   
+   engine = get_engine()
+   
+   # Mevcut mode'u oku
+   previous_mode = "strict"  # default
+   with engine.connect() as conn:
+       row = conn.execute(
+           text("SELECT mode FROM admin_kvkk_mode WHERE effective_to IS NULL ORDER BY changed_at DESC LIMIT 1")
+       ).mappings().first()
+       if row:
+           previous_mode = row["mode"]
+   
+   # Eğer zaten aynı mode'daysa, değişiklik yapma
+   if mode == previous_mode:
+       return {
+           "ok": True,
+           "previous_mode": previous_mode,
+           "new_mode": mode,
+           "changed_at": datetime.now().isoformat(),
+           "message": "Mevcut mode ile aynı"
+       }
+   
+# Eski mod'ü sonlandır ve yenisini ekle
+    now = datetime.now().isoformat()
+    try:
+        with engine.begin() as conn:
+           # Mevcut modu sonlandır
+           conn.execute(
+               text("UPDATE admin_kvkk_mode SET effective_to = :now WHERE effective_to IS NULL"),
+               {"now": now}
+           )
+           # Yeni modu ekle
+           conn.execute(
+               text("""
+                   INSERT INTO admin_kvkk_mode (admin_id, mode, changed_at, reason, effective_to)
+                   VALUES (:admin_id, :mode, :changed_at, :reason, NULL)
+               """),
+               {
+                   "admin_id": admin_id,
+                   "mode": mode,
+                   "changed_at": now,
+                   "reason": reason,
+               }
+           )
+       # Cache'i temizle
+       cache_set("kvkk_admin_mode", mode)
+       return {
+           "ok": True,
+           "previous_mode": previous_mode,
+           "new_mode": mode,
+           "changed_at": now
+       }
+except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Mode değiştirilemedi: {str(e)}")
+
+
+# UI-ADMIN-FEATURE-FLAG-25: Feature Flag Yönetim Endpoint

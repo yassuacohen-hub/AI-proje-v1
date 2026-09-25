@@ -94,12 +94,12 @@ SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_
 | UI-ADMIN-ARAMA-BOSLUK-20 | Icerik bosluk raporu: admin_quality.py, normalize+frekans+eskik, rozet, testler | 2026-09-24 |
 | API-ADMIN-SUPHELI-AKTIVITE-21 | Supheli aktivite 3 kural: admin_audit.py, skor+etiket, doctest+pytest gecti | 2026-09-24 |
 | UI-ADMIN-UPSELL-22 | Upsell aday listesi: musteri_yonetimi.py, 3 kosul (doygunluk+churn+buyume), testler | 2026-09-24 |
-| DOC-ADMIN-V9-KUTUCUK-24 | V9 §16.5 kutucuclari: 6 madde bullet listesi, format temizlendi | 2026-09-24 |
-| UI-ADMIN-KVKK-MODU-26 | KVKK Mode sekmesi: render_kvkk_mode_tab, strict/lenient toggle, API POST, testler | 2026-09-24 |
-| UI-ADMIN-KVKK-RAPOR-28 | KVKK Raporu sekmesi: render_kvkk_rapor_tab, admin_kvkk_mode, KPI, trend, testler | 2026-09-24 |
-| UI-KONTROL-PANOSU-32 | Kontrol Panosu sekmesi: render_kontrol_panosu_tab, KPI + bar/line chart, testler | 2026-09-24 |
+| DOC-ADMIN-V9-KUTUCUK-24 | V9 §16.5 kutucuclari: 6 madde bullet listesi, format temizlendi | 2026-09-25 |
+| UI-ADMIN-KVKK-MODU-26 | KVKK Mode sekmesi: render_kvkk_mode_tab, strict/lenient toggle, API POST, testler | 2026-09-25 |
+| UI-ADMIN-KVKK-RAPOR-28 | KVKK Raporu sekmesi: render_kvkk_rapor_tab, admin_kvkk_mode, KPI, trend, testler | 2026-09-25 |
 | DOC-VISIBILITY-KATMANI-29 | Visibility katmani dokumani: VISIBILITY_LAYER_GUIDE.md, Layer 1/2, modul kontor, karantina | 2026-09-25 |
 | DOKUMAN-KVKK-FAQ-33 | KVKK FAQ dokumani: docs/KVKK_FAQ.md, 7 SSS + 3 troubleshooting + 3 kod ornegi | 2026-09-25 |
+| UI-ADMIN-FEATURE-FLAG-25 | Feature Flag sekmesi: render_feature_flags_tab, 4 flag, audit trail, testler | 2026-09-25 |
 | COP-26 | MUSTERILER ekrani: firma listesi + filtre + bildirim blogu | 2026-09-24 |
 | UI-SUBHEADER-MUSTERI-01 | `musteri_yonetimi.py` subheader temizligi (sayfa iskeleti sozlesmesi) | 2026-09-24 |
 | TEST-ADMIN-PERF-01 | `admin_performance` kpi_karti gecis testi | 2026-09-24 |
