@@ -121,6 +121,7 @@ SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_
 | UI-ADMIN-FEATURE-FLAG-25 | Feature Flag sekmesi: render_feature_flags_tab, 4 flag, audit trail, testler | 2026-09-25 |
 | UI-ADMIN-LTV-CAC-27 | LTV/CAC analiz sekmesi: render_ltv_cac_tab, KPI + trend + tier breakdown, testler | 2026-09-25 |
 | DOC-ADMIN-MULTITENANT-KARAR-28 | Multi-tenant karar belgesi: MULTITENANT_ARCHITECTURE_DECISION.md, 3 model karsilastirmasi, migration path, security checklist | 2026-09-25 |
+| ADMIN-UX-GELIR-GRUP-01 | Gelir grubu: GRUP_GELIR + executive+maliyet sekmeleri (ust=gelir, sira=1/2) | 2026-09-25 |
 
 Kapanan is sayisi bu hub'da: **30**. Tam liste ceyreklik arsivde:
 `data/orchestrator/task_board_arsiv_2026-Q3.json`

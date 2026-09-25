@@ -50,8 +50,9 @@ logging.disable(logging.WARNING)
 
 def test_bolum_sayisi_ve_benzersizlik() -> None:
     """BK5: bolum listesi eksiksiz ve anahtarlar/URL'ler benzersiz."""
-    # 28 mevcut + 4 yeni üst sayfa − 2 kalkar (kimlik, yonetim) = 30; D-190: rapor_listesi +1 = 31; D-192: ajan_sohbet +1 = 32
-    assert len(SECTIONS) == 32
+    # 32 mevcut + 4 yeni ust sayfa (executive, maliyet, ltv_cac, feature_flags) + 
+    # gelis + yeni grup gelis + mfa = 37
+    assert len(SECTIONS) == 37
 
     anahtarlar = [t.anahtar for t in SECTIONS]
     urller = [t.url_path for t in SECTIONS]
@@ -316,7 +317,8 @@ def test_alt_sekmeler_sistem_analyst():
     alt_analhtar = {t.anahtar for t in alt}
     assert "teknik_altyapi" in alt_analhtar
     assert "api" in alt_analhtar
-    assert "maliyet" in alt_analhtar
+    # maliyet moved to gelir group (ADMIN-UX-GELIR-GRUP-01)
+    assert "maliyet" not in alt_analhtar
     # menuden cikarilanlar (ust=None)
     assert "performans" not in alt_analhtar
     assert "ayarlar" not in alt_analhtar
@@ -331,15 +333,21 @@ def test_alt_sekmeler_bos_ust():
 def test_alt_sekmeler_sira_sirali():
     """Alt sekme siralari korunmali.
 
-    UX-MENU-03: `hatalar` → Sistem'e taşındı (E4), `dlq` menüden çıktı.
+    UX-MENU-03: `hatalar` -> Sistem'e taşındı (E4), `dlq` menüden çıktı.
     D-190: `rapor_listesi` eklendi (sira=1).
     D-192: `ajan_sohbet` eklendi (sira=1), rapor_listesi sira=2 oldu.
+    ADMIN-UX-GELIR-GRUP-01: `executive` ve `maliyet` gelir grubuna taşındı.
+    UI-ADMIN-MFA-26: `mfa` eklendi (sira=10).
     """
     alt = alt_sekmeler("proje_yonetimi", ROL_ADMIN)
     siralar = [t.sira for t in alt]
     assert siralar == sorted(siralar)
+    # Current order: karar_defteri (0), ajan_sohbet (1), rapor_listesi (2), 
+    # abrakadabra (3), denetim (4), kvkk_mode (5), kvkk_rapor (6), 
+    # kontrol_panosu (7), feature_flags (8), ltv_cac (9), mfa (10)
     assert [t.anahtar for t in alt] == [
         "karar_defteri", "ajan_sohbet", "rapor_listesi", "abrakadabra", "denetim",
+        "kvkk_mode", "kvkk_rapor", "kontrol_panosu", "feature_flags", "ltv_cac", "mfa",
     ]
 
 

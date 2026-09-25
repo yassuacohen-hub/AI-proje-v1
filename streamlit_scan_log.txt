@@ -1,0 +1,10 @@
+2026-09-25 23:54:42.487 Uvicorn server started on :::8501
+
+  You can now view your Streamlit app in your browser.
+
+  Local URL: http://localhost:8501
+  Network URL: http://10.2.0.2:8501
+  External URL: http://130.195.216.94:8501
+
+2026-09-25 23:56:38,441 [WARNING] admin_tabs.admin_performance: Prometheus metrikleri yüklenemedi: TypeError — Request.__init__() got an unexpected keyword argument 'timeout'
+2026-09-25 23:56:38,441 [WARNING] admin_tabs.admin_performance: Prometheus metrikleri yüklenemedi: TypeError — Request.__init__() got an unexpected keyword argument 'timeout'

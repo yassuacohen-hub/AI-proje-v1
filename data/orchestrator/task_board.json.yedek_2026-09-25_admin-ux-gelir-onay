@@ -1,0 +1,1004 @@
+[
+  {
+    "task_id": "ALTYAPI-D66-BYPASS-TETIKLEME",
+    "id": "ALTYAPI-D66-BYPASS-TETIKLEME",
+    "baslik": "[ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "iptal",
+    "baslangic": null,
+    "bitis": "2026-09-24T01:28:33",
+    "dosyalar": [
+      "scripts/pano_denetim.py",
+      "scripts/tetik_senk.py",
+      "tests/test_d66_bypass_tetikleme.py",
+      "Huginn Data Insights/AGENTS.md"
+    ],
+    "not": "Mukerrer: ayni is ALTYAPI-D66-BYPASS-TETIKLEME-01 olarak task_board_arsiv_2026-Q3.json:7040'ta done. Kanit: plans/brief_ihsan_ALTYAPI-D66-BYPASS-TETIKLEME-01.md",
+    "source": "ic",
+    "from_agent": null,
+    "kanit": "",
+    "mod": "code",
+    "brief": "plans/brief_ihsan_ALTYAPI-D66-BYPASS-TETIKLEME-01.md",
+    "talimat": "D-65 kural kodda yok. Blokaj 24h+ → exit 2 → tetik_senk rapor → KAHİN elle tetikle. Seçenek (a): pano_denetim.tara() blocked tespit, exit 2 dön. tetik_senk exit 2 gördüğünde AGENT_SYNC.md rapor satırı ekle. Tests: 4 (24h+, <24h, P0/P1, format). AGENTS.md: D-66 karar ekle."
+  },
+  {
+    "task_id": "VERI-ADMIN-AKTIVITE-LOG-13",
+    "id": "VERI-ADMIN-AKTIVITE-LOG-13",
+    "baslik": "[VERI] Kullanıcı aktivite log tablosunu yaz → migration 0017 (2s)",
+    "sahip": "utku",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-24T19:25:07",
+    "dosyalar": [
+      "src/company_master/schema/migrations/0017_user_activity_log.sql"
+    ],
+    "not": "Teslim (utku): 0017_user_activity_log migration: tablo sema (BIGSERIAL PK, UUID FK, CHECK olay_tipi, INET/CHAR kolonlar NULL gecebilir, iki indeks) ve down dosyasi yazildi; test 12/12; brief kurallar tatmin; simulasyon 8/8 kod 0",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-ADMIN-AKTIVITE-LOG-13.md",
+    "talimat": "VERI-ADMIN-AKTIVITE-LOG-13: [VERI] Kullanıcı aktivite log tablosunu yaz → migration 0017 (2s) Brif: plans/brief_utku_VERI-ADMIN-AKTIVITE-LOG-13.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": []
+  },
+  {
+    "task_id": "API-ADMIN-AKTIVITE-YAZ-14",
+    "id": "API-ADMIN-AKTIVITE-YAZ-14",
+    "baslik": "[API] Giriş/arama/AI olaylarını log'a yaz → web_app.py + arama uçları (2s)",
+    "sahip": "utku",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-24T20:56:00",
+    "dosyalar": [
+      "web_app.py"
+    ],
+    "not": "Teslim (utku): Aktivite log yazimi tamamlandi: aktivite_yaz() yardimci fonksiyonu (web_app.py:1825), giris endpointine (2273, 2295), arama endpointine (819) eklendi. Tum 5 test gecti. K1, K9, G4 girdisi hazir.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_API-ADMIN-AKTIVITE-YAZ-14.md",
+    "talimat": "API-ADMIN-AKTIVITE-YAZ-14: [API] Giriş/arama/AI olaylarını log'a yaz → web_app.py + arama uçları (2s) Brif: plans/brief_utku_API-ADMIN-AKTIVITE-YAZ-14.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": [
+      "VERI-ADMIN-AKTIVITE-LOG-13"
+    ]
+  },
+  {
+    "task_id": "DOC-ADMIN-DURUM-SENKRON-15",
+    "id": "DOC-ADMIN-DURUM-SENKRON-15",
+    "baslik": "[DOC] Bayat durum satırlarını düzelt → §8.4/§10 kanıtlı (1s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-24T20:56:00",
+    "dosyalar": [
+      "AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md"
+    ],
+    "not": "Teslim (ihsan): D-197 tek-durum ayrıştırması: §2 sayaca çevrildi, §8.4 durum etiketleri kaldırıldı, §7 tek kaynağı olarak işaretlendi. Rapor: DOC-ADMIN-DURUM-SENKRON-15_rapor_2026-09-24_orkestrator.md",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_DOC-ADMIN-DURUM-SENKRON-15.md",
+    "talimat": "DOC-ADMIN-DURUM-SENKRON-15: [DOC] Bayat durum satırlarını senkronla → §8.4/§10 kanıtlı (1s) Brif: plans/brief_utku_DOC-ADMIN-DURUM-SENKRON-15.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": []
+  },
+  {
+    "task_id": "API-ADMIN-CHURN-3SINYAL-16",
+    "id": "API-ADMIN-CHURN-3SINYAL-16",
+    "baslik": "[API] Churn kuralını 3 sinyalli hâlde yaz → churn.py tam formül (2s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-24T20:56:00",
+    "dosyalar": [
+      "src/company_master/churn.py"
+    ],
+    "not": "Teslim (utku): Churn 3 sinyalli formulu hazirlandi: risk_etiketi_3sinyal (churn.py) + musteri_yonetimi.py SQL guncellendi (son_arama/son_ai subquery). Eski risk_etiketi geriye donuk uyumlu kaldi. Doctest 14/14, pytest 2/2 gecti.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_API-ADMIN-CHURN-3SINYAL-16.md",
+    "talimat": "API-ADMIN-CHURN-3SINYAL-16: [API] Churn kuralını 3 sinyale genişlet → churn.py tam formül (2s) Brif: plans/brief_utku_API-ADMIN-CHURN-3SINYAL-16.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": [
+      "API-ADMIN-AKTIVITE-YAZ-14"
+    ]
+  },
+  {
+    "task_id": "UI-ADMIN-DAU-17",
+    "id": "UI-ADMIN-DAU-17",
+    "baslik": "[UI] Gerçek DAU kartını yaz → admin_kpi.py aktivite sorgusu (2s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-24T19:25:07",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_kpi.py"
+    ],
+    "not": "Teslim (utku): DAU kartı: user_activity_log son 24h distinct user + DAU/MAU oranı, tablo yok durumu güvenli, 5 test geçti",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_UI-ADMIN-DAU-17.md",
+    "talimat": "UI-ADMIN-DAU-17: [UI] Gerçek DAU kartını yaz → admin_kpi.py aktivite sorgusu (2s) Brif: plans/brief_utku_UI-ADMIN-DAU-17.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": [
+      "API-ADMIN-AKTIVITE-YAZ-14"
+    ]
+  },
+  {
+    "task_id": "API-ADMIN-KAYNAK-SAGLIK-18",
+    "id": "API-ADMIN-KAYNAK-SAGLIK-18",
+    "baslik": "[API] Kaynak sağlık skorunu ölç → 3 kovalı rozet + DLQ birikme hızı (2s)",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-24T23:38:00",
+    "dosyalar": [
+      "src/company_master/kaynak_guvenilirlik.py"
+    ],
+    "not": "Kaynak: SSOT §9 K4:343. Bagimlilik yok — girdi (source_records) DB'de MEVCUT. Esikler: 0.95 yesil / 0.70 turuncu / alti kirmizi, modul sabiti olarak.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_API-ADMIN-KAYNAK-SAGLIK-18.md",
+    "talimat": "API-ADMIN-KAYNAK-SAGLIK-18: [API] Kaynak sağlık skorunu hesapla → 3 kovalı rozet + DLQ birikme hızı (2s) Brif: plans/brief_utku_API-ADMIN-KAYNAK-SAGLIK-18.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": []
+  },
+  {
+    "task_id": "UI-ADMIN-CRAWL-KONTROL-19",
+    "id": "UI-ADMIN-CRAWL-KONTROL-19",
+    "baslik": "[UI] Crawl tetikle/durdur aksiyonunu yaz → operatör kontrol paneli (3s)",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-24T23:38:00",
+    "dosyalar": [
+      "web_dashboard/tabs/webhook_monitor.py"
+    ],
+    "not": "Kaynak: SSOT §8.1 A8:272 · §10:373 · §12 G8:421. Bagimlilik yok. Durdur aksiyonu iki adimli onay gerektirir (yikici islem). AgGrid yasak (§8.3 C6).",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_UI-ADMIN-CRAWL-KONTROL-19.md",
+    "talimat": "UI-ADMIN-CRAWL-KONTROL-19: [UI] Crawl işlerine tetikle/durdur aksiyonu ekle → operatör kontrol paneli (3s) Brif: plans/brief_utku_UI-ADMIN-CRAWL-KONTROL-19.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": []
+  },
+  {
+    "task_id": "UI-ADMIN-ARAMA-BOSLUK-20",
+    "id": "UI-ADMIN-ARAMA-BOSLUK-20",
+    "baslik": "[UI] Sonuçsuz arama frekans raporunu yaz → içerik boşluk raporu (2s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-24T20:56:00",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_quality.py"
+    ],
+    "not": "Teslim (utku): Icerik bosluk raporu hazirlandi: _terim_normalize (admin_quality.py) + load_icerik_bosluk (user_activity_log -> normalize -> frekans >=3) + _render_icerik_bosluk (rozet + tablo + CSV indirme). _db_yardim.tablo_var_mi kontrolu ile veri yok rozeti. Doctest 5/5 + pytest 4/4 gecti.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_UI-ADMIN-ARAMA-BOSLUK-20.md",
+    "talimat": "UI-ADMIN-ARAMA-BOSLUK-20: [UI] Sonuçsuz aramaları frekansa göre listele → içerik boşluk raporu (2s) Brif: plans/brief_utku_UI-ADMIN-ARAMA-BOSLUK-20.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": [
+      "API-ADMIN-AKTIVITE-YAZ-14"
+    ]
+  },
+  {
+    "task_id": "API-ADMIN-SUPHELI-AKTIVITE-21",
+    "id": "API-ADMIN-SUPHELI-AKTIVITE-21",
+    "baslik": "[API] Şüpheli aktivite kurallarını yaz → 3 sinyalli güvenlik uyarısı (3s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-24T20:56:00",
+    "dosyalar": [
+      "src/company_master/admin_audit.py"
+    ],
+    "not": "Teslim (utku): Supheli aktivite 3 kural hazirlandi: admin_audit.py (supheli_basarisiz_giris, supheli_cok_ulkeli_ip, supheli_gece_toplu_export, supheli_skor, supheli_etiket). Saf fonksiyonlar (DB erisimi yok). Doctest 37/37 + pytest 4/4 gecti. Otomatik kilitleme/bildirim kapsam disi.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_API-ADMIN-SUPHELI-AKTIVITE-21.md",
+    "talimat": "API-ADMIN-SUPHELI-AKTIVITE-21: [API] Şüpheli aktivite kurallarını yaz → 3 sinyalli güvenlik uyarısı (3s) Brif: plans/brief_utku_API-ADMIN-SUPHELI-AKTIVITE-21.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": [
+      "API-ADMIN-AKTIVITE-YAZ-14"
+    ]
+  },
+  {
+    "task_id": "UI-ADMIN-UPSELL-22",
+    "id": "UI-ADMIN-UPSELL-22",
+    "baslik": "[UI] Upsell aday listesini yaz → satış aksiyon listesi (2s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-24T20:56:00",
+    "dosyalar": [
+      "web_dashboard/tabs/musteri_yonetimi.py"
+    ],
+    "not": "Teslim (utku): Upsell aday listesi hazirlandi: musteri_yonetimi.py (_doygunluk_hesapla, _buyume_hesapla, _upsell_adaylari_yukle, _render_upsell_adaylari). 3 kosul AND: doygunluk>=%85 + churn∈{Yok,Düşük} + buyume>0. Tier kota mapping, enterprise haric. _db_yardim.tablo_var_mi rozet. Test: test_ui_upsell.py 2/2 gecti.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_UI-ADMIN-UPSELL-22.md",
+    "talimat": "UI-ADMIN-UPSELL-22: [UI] Upsell adaylarını 3 koşullu kuralla listele → satış aksiyon listesi (2s) Brif: plans/brief_utku_UI-ADMIN-UPSELL-22.md Kit: ADMIN-KIT — gorev basinda SSOT oku, sonunda §7/§14'e isle.",
+    "dependencies": [
+      "API-ADMIN-CHURN-3SINYAL-16"
+    ]
+  },
+  {
+    "task_id": "TEST-ADMIN-K2-AGIRLIK-23",
+    "id": "TEST-ADMIN-K2-AGIRLIK-23",
+    "baslik": "[TEST] K2 ağırlık şemasını denetle → test + SSOT kanıt (1s)",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-25T04:26:42",
+    "dosyalar": [],
+    "dependencies": [],
+    "not": "Kaynak: SSOT §9:341. Eleme: etki dusuk; K2 zaten calisiyor, yalniz dogrulama borcu. Teslim: test_kaynak_guvenilirlik.py 37/37 ve test_k2_weight_schema 1/1 geçti.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "",
+    "talimat": ""
+  },
+  {
+    "task_id": "DOC-ADMIN-V9-KUTUCUK-24",
+    "id": "DOC-ADMIN-V9-KUTUCUK-24",
+    "baslik": "[DOC] V9 §16.5 kutucuklarını düzelt → 6 madde (1s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-24T20:56:00",
+    "dosyalar": [],
+    "dependencies": [],
+    "not": "Teslim (utku): V9 §16.5 kutucuk formatı düzeltildi: tablo yerine 6 madde bullet listesi (Dashboard KPI, Webhook Monitor, AI Cost, Veri Kalitesi, API Analytics, Sistem Performansı). Her madde - ile başlıyor, tek paragraf, madde arası tek boş satır. Kodlama denetimi temiz.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_DOC-ADMIN-V9-KUTUCUK-24.md",
+    "talimat": "DOC-ADMIN-V9-KUTUCUK-24: SSOT §16.5 (Admin-Kit bağlı belge) V9 analiz dokümanındaki 6 madde kutucuk formatını düzelt. plans/brief_utku_DOC-ADMIN-V9-KUTUCUK-24.md brifi oku, dosyayı düzenle, test et, teslim et."
+  },
+  {
+    "task_id": "UI-ADMIN-FEATURE-FLAG-25",
+    "id": "UI-ADMIN-FEATURE-FLAG-25",
+    "baslik": "[UI] Feature flag yönetim ekranını yaz → A5 MVP (3s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-25T04:36:47",
+    "dosyalar": [],
+    "dependencies": [],
+    "not": "Feature flag sekmesi ve 11 test gecti",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_UI-ADMIN-FEATURE-FLAG-25.md",
+    "talimat": "UI-ADMIN-FEATURE-FLAG-25: web_dashboard/tabs/admin_panel.py render_feature_flags_tab() + web_app.py POST /api/admin/feature-flags + audit log. Toggle UI, history table, admin only. Test: tests/test_feature_flags.py (3 test)."
+  },
+  {
+    "task_id": "API-ADMIN-MFA-26",
+    "id": "API-ADMIN-MFA-26",
+    "baslik": "[API] MFA + hesap kilidi akışını yaz → A6 auth (4s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "aktif",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [],
+    "dependencies": [],
+    "not": "Red (orkestrator): Denetim raporu (API-ADMIN-MFA-26_bulgular_2026-09-25_denetim.md): B-01 Kritik login flow MFA adimini cagirmiyor (dead code), B-02 Yuksek yanlis token tablosu, B-03 Yuksek status/disable endpointleri hardcoded/oturumsuz (guvenlik acigi), B-04 Yuksek hesap kilidi hic yok. utku B-01..B-04'u kapatip yeniden teslim etmeli.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_API-ADMIN-MFA-26.md",
+    "talimat": "API-ADMIN-MFA-26: web_app.py MFA endpoint + web_dashboard/tabs/admin_auth.py MFA sekmesi. TOTP setup/verify, backup codes, rate limit, lockout. Test: tests/test_mfa.py (3 test)."
+  },
+  {
+    "task_id": "UI-ADMIN-LTV-CAC-27",
+    "id": "UI-ADMIN-LTV-CAC-27",
+    "baslik": "[UI] LTV/CAC kartlarını yaz → K8 tamamlama (2s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-25T22:31:25",
+    "dosyalar": [],
+    "dependencies": [],
+    "not": "Kaynak: SSOT §9:347 · §10:379 · §13:435. Eleme: faturalama ertelendi, Stripe yok.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_UI-ADMIN-LTV-CAC-27.md",
+    "talimat": ""
+  },
+  {
+    "task_id": "DOC-ADMIN-MULTITENANT-KARAR-28",
+    "id": "DOC-ADMIN-MULTITENANT-KARAR-28",
+    "baslik": "[DOC] Multi-tenant kararını belgele → KK-7 (1s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-25T22:31:15",
+    "dosyalar": [],
+    "dependencies": [],
+    "not": "Kaynak: SSOT §11 KK-7:396 · §13:434. Eleme: urun karari; KAHIN yaniti olmadan icerik uretilemez.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_DOC-ADMIN-MULTITENANT-KARAR-28.md",
+    "talimat": ""
+  },
+  {
+    "task_id": "TEST-BLOKE-FAKTOR-ARASTIRMA-01",
+    "id": "TEST-BLOKE-FAKTOR-ARASTIRMA-01",
+    "baslik": "[TEST] Test hazirlik plani arastir → test_bloke_hazirlik.py (3s)",
+    "sahip": "yasu",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-24T21:17:03",
+    "bitis": "2026-09-24T22:11:11.842076",
+    "dosyalar": [
+      "tests/test_api_aktivite.py",
+      "tests/test_churn.py",
+      "tests/test_ui_search_gap.py",
+      "tests/test_admin_audit.py",
+      "tests/test_ui_upsell.py",
+      "test_bloke_hazirlik.py",
+      "data/orchestrator/TEST-BLOKE-FAKTOR-ARASTIRMA-01_rapor_2026-09-24_yasu.md",
+      "data/orchestrator/TEST-BLOKE-FAKTOR-ARASTIRMA-01_bulgular_2026-09-24_yasu.md"
+    ],
+    "not": "Teslim (yasu): 5 gorev test hazirligi arastirildi. API-14 baslayabilir (VERI-13 done), API-16/UI-20/API-21 paralel test prep hazir. API-21 icin admin_audit.py orta risk. UI-22 girdi mevcut. 5 test skeleton olusturuldu. test_bloke_hazirlik.py olusturuldu. Rapor ve bulgular olusturuldu.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_TEST-BLOKE-FAKTOR-ARASTIRMA-01.md",
+    "talimat": "TEST-BLOKE-FAKTOR-ARASTIRMA-01: Ilk 5 gorevin (API-14,16,20,21, UI-22) test hazirligini ve engel risklerini arastir. Brif: plans/brief_yasu_TEST-BLOKE-FAKTOR-ARASTIRMA-01.md"
+  },
+  {
+    "task_id": "ALTYAPI-SECRETS-SETUP-01",
+    "id": "ALTYAPI-SECRETS-SETUP-01",
+    "baslik": "[ALTYAPI] Vault kurup .env template yaz → .env.example (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-09-24T21:19:30",
+    "bitis": "2026-09-24T20:56:00",
+    "dosyalar": [
+      ".env.example",
+      ".env.vault",
+      "scripts/rotate_secrets.py",
+      "tests/test_secrets_rotation.py",
+      "scripts/config_test.py"
+    ],
+    "not": "Teslim (utku): Credential vault kuruldu: .env.example (repo), .env.vault (local), scripts/rotate_secrets.py (90 gun rotasyon), tests/test_secrets_rotation.py (6 test), scripts/config_test.py (key dogrulama + redaction kontrolu). Tum testler gecti, kodlama denetimi temiz.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_ALTYAPI-SECRETS-SETUP-01.md",
+    "talimat": "ALTYAPI-SECRETS-SETUP-01: Credential vault kur, .env.example template, rotasyon planı. Brif: plans/brief_utku_ALTYAPI-SECRETS-SETUP-01.md"
+  },
+  {
+    "task_id": "ALTYAPI-DB-MIGRATION-01",
+    "id": "ALTYAPI-DB-MIGRATION-01",
+    "baslik": "[ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-24T21:19:35",
+    "bitis": "2026-09-24T20:56:00",
+    "dosyalar": [
+      "scripts/db_migrate.py",
+      "src/company_master/schema/migrations/0017_user_activity_log.sql",
+      "scripts/db_migrate_prod.sh",
+      "backups/"
+    ],
+    "not": "Teslim (utku): Migration altyapisi hazirlandi: scripts/db_migrate.py (staging/prod runner), 0017_user_activity_log.down.sql (rollback), scripts/db_migrate_prod.sh (prod runbook + backup + monitoring), monitoring/alertmanager/migration_rules.yml (AlertManager kuralari), tests/test_db_migration.py (6 test gecti). Staging test ve rollback plani dokumante edildi.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_ALTYAPI-DB-MIGRATION-01.md",
+    "talimat": "ALTYAPI-DB-MIGRATION-01: Staging migration test, rollback test, prod runbook. Brif: plans/brief_utku_ALTYAPI-DB-MIGRATION-01.md"
+  },
+  {
+    "task_id": "ALTYAPI-ADMIN-PANO-01",
+    "id": "ALTYAPI-ADMIN-PANO-01",
+    "baslik": "[ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-24T21:21:53",
+    "bitis": "2026-09-24T20:56:00",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_panel.py",
+      "tests/test_admin_pano_board_view.py",
+      "docs/ADMIN_PANO_BOARD_VIEW.md"
+    ],
+    "not": "Teslim (utku): Task board gecerel zamanli gorusumu hazirlandi: render_task_board_tab() (web_dashboard/tabs/admin_panel.py), 4 bolum (Tamamlandi/Beklemede/Yedek/Degerlendirme), filtreleme (ajan/aciliyet/tarih), renk kodlamasi, ozet metrikler. tests/test_admin_pano_board_view.py (7 test gecti), docs/ADMIN_PANO_BOARD_VIEW.md dokumantasyon.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_ALTYAPI-ADMIN-PANO-01.md",
+    "talimat": "ALTYAPI-ADMIN-PANO-01: Task board 4 bolum (Tamamlandi/Beklemede/Yedek/Degerlendirme), filtreleme, sprint atama listesi panelde. Brif: plans/brief_utku_ALTYAPI-ADMIN-PANO-01.md"
+  },
+  {
+    "task_id": "ORKESTRA-AI-CHAT-KOORDINASYON-01",
+    "id": "ORKESTRA-AI-CHAT-KOORDINASYON-01",
+    "baslik": "[ORKESTRA] Ajan arasi protokol yaz → ajan_chat_koordinasyon.py (3s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-24T21:29:27",
+    "bitis": "2026-09-24T22:02:28",
+    "dosyalar": [],
+    "not": "Teslim (ihsan): SISTEM_PROMPT güncellendi (ajan-ajan iletişim kuralı + koordinasyon protokolü). ajan_chat_koordinasyon.py library yazıldı (sorun_ac, sorun_devret, koordinasyon_ozeti). test_ai_chat_koordinasyon.py oluşturuldu (2-way linklemesi, auto-kapatış testleri). AJAN_ARASI_ILETISIM.md dokumentasyonu tamamlandı (protokol, senaryo, escalation kuralları). Tüm testler geçti.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ihsan_ORKESTRA-AI-CHAT-KOORDINASYON-01.md",
+    "talimat": "ORKESTRA-AI-CHAT-KOORDINASYON-01: MIMIR sohbete ajan-ajan koordinasyon kurali ekle, koordinasyon library + testler + dok yaz. Brif: plans/brief_ihsan_ORKESTRA-AI-CHAT-KOORDINASYON-01.md"
+  },
+  {
+    "task_id": "ALTYAPI-VERI-GORUNURLUK-01",
+    "id": "ALTYAPI-VERI-GORUNURLUK-01",
+    "baslik": "[ALTYAPI] Katmanlı görünürlük & kontör sistemi → 0018 migration + 3 tablo (4s)",
+    "sahip": "ihsan",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-25T22:48:38",
+    "dosyalar": [
+      "src/company_master/schema/migrations/0018_visibility_layer.sql",
+      "field_catalog.md",
+      "src/company_master/api/core/normalize.py",
+      "web_app.py",
+      "web_dashboard/tabs/admin_panel.py",
+      "design_visibility_simulation.md"
+    ],
+    "not": "Teslim (ihsan): SELECT c.* sızıntısı kanıtlı (web_app.py:2798). Plan: 4 adım (şema + veri + kod + puanlama). Kontör modül bazlı, admin KVKK filtreleme anahtarı, paket görünürlük tablo. Senaryo 1-5 simülasyon tamamlan",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ihsan_ALTYAPI-VERI-GORUNURLUK-01.md",
+    "talimat": "ALTYAPI-VERI-GORUNURLÜK-01: [ALTYAPI] Katmanlı görünürlük & kontör sistemi → 0018 migration + 3 tablo (4s). Brief: plans/brief_ALTYAPI-VERI-GORUNURLUK-01.md. 4 adım: (A1) 0018 şema, (A2) alan kataloğu + data, (A3) apply_plan() + kontör ledger + admin sekmeler, (A4) puanlama. Deadline 3-4 gün. Sahip: orkestrator (Utku özet, Yasu kod, Orkestrator test).",
+    "dependencies": []
+  },
+  {
+    "task_id": "API-KVKK-KONTROL-25",
+    "id": "API-KVKK-KONTROL-25",
+    "baslik": "[API] Kontör endpoint entegrasyonu (match/ilan) → _charge_module_credit çağrısı",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-24T23:35:40.539462",
+    "bitis": "2026-09-25T22:48:38",
+    "dosyalar": [
+      "web_app.py",
+      "src/company_master/schema/migrations/0018_visibility_layer.sql"
+    ],
+    "not": "Teslim (yasu): Baslatma bildirimi okundu (2026-09-24). Brief okundu. plans/brief_yasu_API-KVKK-KONTROL-25.md",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_API-KVKK-KONTROL-25.md",
+    "talimat": "API-KVKK-KONTROL-25: /api/match ve /api/ilan endpoints'te _charge_module_credit() çağrısı ekle. Modül cost matrix'i module_cost tablosundan (0018 migration) oku. Terminal=10 kredi, strategic=3-8 kredi, enterprise=serbest.",
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01"
+    ]
+  },
+  {
+    "task_id": "TEST-VISIBILITY-ENTEGRASYON-27",
+    "id": "TEST-VISIBILITY-ENTEGRASYON-27",
+    "baslik": "[TEST] E2E senaryo testi (visibility layer + kontör) → 5 scenario + 4 conflict",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-24T23:35:40.539462",
+    "bitis": "2026-09-25T22:48:38",
+    "dosyalar": [
+      "tests/test_visibility_layer.py",
+      "src/company_master/api/core/normalize.py"
+    ],
+    "not": "Teslim (yasu): Baslatma bildirimi okundu (2026-09-24). Brief okundu. plans/brief_yasu_TEST-VISIBILITY-ENTEGRASYON-27.md",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_TEST-VISIBILITY-ENTEGRASYON-27.md",
+    "talimat": "TEST-VISIBILITY-ENTEGRASYON-27: test_visibility_layer.py gerçek apply_kvkk_mask() çağrısı ile entegre et. 5 scenario + 4 conflict test'leri yazı ve çalıştır. Acceptance: pytest -v başarılı.",
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01"
+    ]
+  },
+  {
+    "task_id": "UI-ADMIN-KVKK-MODU-26",
+    "id": "UI-ADMIN-KVKK-MODU-26",
+    "baslik": "[UI] Admin KVKK mode toggle (strict ↔ lenient) → web_app POST endpoint",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-24T23:35:40.539462",
+    "bitis": "2026-09-25T22:29:48",
+    "dosyalar": [
+      "web_app.py",
+      "web_dashboard/tabs/admin_panel.py"
+    ],
+    "not": "Teslim (utku): KVKK Mode sekmesi eklendi: render_kvkk_mode_tab (admin_panel.py) + TabTanimi kvkk_mode (__init__.py). strict/lenient radio + reason input (min 3 char) + API POST /api/admin/kvkk-mode + success/error feedback. Kodlama denetimi temiz. | Denetim (2026-09-25): render_kvkk_mode_tab + TabTanimi kvkk_mode mevcut; tests/test_admin_kvkk_mode_e2e.py 5/5 yesil. P1 oldugu icin elle onay bekliyor (oto-onay kapsam disi).",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_UI-ADMIN-KVKK-MODU-26.md",
+    "talimat": "UI-ADMIN-KVKK-MODU-26: Admin panel'de strict/lenient toggle ekle. Kullanıcı strict/lenient seçer, reason yazar (text), /api/admin/kvkk-mode POST çağır. Cevap: {ok, new_mode, previous_mode, changed_at}. UI feedback: mode başarıyla değiştirildi mesajı göster.",
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01"
+    ]
+  },
+  {
+    "task_id": "UI-ADMIN-KVKK-RAPOR-28",
+    "id": "UI-ADMIN-KVKK-RAPOR-28",
+    "baslik": "[UI] KVKK maskeleme raporu → admin paneline ek sekme",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-24T23:35:40.539462",
+    "bitis": "2026-09-25T04:36:54",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_panel.py",
+      "web_app.py"
+    ],
+    "not": "KVKK raporu sekmesi mevcut, testler gecti",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_UI-ADMIN-KVKK-RAPOR-28.md",
+    "talimat": "UI-ADMIN-KVKK-RAPOR-28: Admin panel'e KVKK Maskeleme Raporu sekmesi ekle. Tablo: admin_kvkk_mode geçmiş kayıtları (mode, tarih, sebep). İstatistik: strict vs lenient geçişleri, en sık sebep, son 7 gün trend.",
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01",
+      "UI-ADMIN-KVKK-MODU-26"
+    ]
+  },
+  {
+    "task_id": "DOC-VISIBILITY-KATMANI-29",
+    "id": "DOC-VISIBILITY-KATMANI-29",
+    "baslik": "[DOC] Kullanıcı dokümanı (görünürlük katmanı + kontör) → markdown guide",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-24T23:35:40.539462",
+    "bitis": "2026-09-25T04:36:47",
+    "dosyalar": [
+      "docs/VISIBILITY_LAYER_GUIDE.md"
+    ],
+    "not": "Visibility guide mevcut",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_DOC-VISIBILITY-KATMANI-29.md",
+    "talimat": "DOC-VISIBILITY-KATMANI-29: docs/VISIBILITY_LAYER_GUIDE.md yaz. İçerik: (1) Layer 1 & 2 mimarı, (2) Admin KVKK mode, (3) Module kontör matrisi, (4) Çelişki çözümü (Ç1-Ç4 karantina). 3-4 scenario örneği.",
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01"
+    ]
+  },
+  {
+    "task_id": "API-LAYER2-DINAMIK-YÜKLEME-30",
+    "id": "API-LAYER2-DINAMIK-YÜKLEME-30",
+    "baslik": "[API] Layer 2 dinamik yükleme → plan_field_group tablosundan görünürlük oku",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-25T22:48:39",
+    "dosyalar": [
+      "src/company_master/api/core/normalize.py",
+      "web_app.py"
+    ],
+    "not": "Teslim (yasu): Gap-2: Layer 2 dinamik missing. Fix: /api/company/{id} ve /api/match endpoints'te plan_field_group tablosundan alan görünürlüğü oku. apply_kvkk_mask(row, plan_field_visibility=...) parametre geç. Tier",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_API-LAYER2-DINAMIK-YÜKLEME-30.md",
+    "talimat": "API-LAYER2-DINAMIK-YÜKLEME-30: /api/company/{id}'de plan_field_group tablosundan paket-bazında alan görünürlüğü oku. apply_kvkk_mask() çağrısında plan_field_visibility parametre geç. Terminal/Strategic/Enterprise tier'ler için farklı alanlar açık/kapalı olsun.",
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01"
+    ]
+  },
+  {
+    "task_id": "KONTROL-KVKK-MASKELEME-31",
+    "id": "KONTROL-KVKK-MASKELEME-31",
+    "baslik": "[KONTROL] KVKK maskeleme end-to-end test → admin panel e2e",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-24T23:35:40.539462",
+    "bitis": "2026-09-25T22:48:39",
+    "dosyalar": [
+      "tests/test_visibility_layer.py",
+      "web_app.py"
+    ],
+    "not": "Teslim (yasu): Baslatma bildirimi okundu (2026-09-24). Brief okundu. plans/brief_yasu_KONTROL-KVKK-MASKELEME-31.md",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_KONTROL-KVKK-MASKELEME-31.md",
+    "talimat": "KONTROL-KVKK-MASKELEME-31: End-to-end test yaz. (1) /api/admin/kvkk-mode POST strict=True çağır, (2) /api/company/{test_id} oku, (3) phone maskeli olmalı. (4) Lenient'e değiştir, (5) tekrar oku, (6) phone açık olmalı. pytest test.",
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01",
+      "API-KVKK-KONTROL-25"
+    ]
+  },
+  {
+    "task_id": "UI-KONTROL-PANOSU-32",
+    "id": "UI-KONTROL-PANOSU-32",
+    "baslik": "[UI] Admin kontrol panosu → maskeleme durum metriksleri",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-24T23:35:40.539462",
+    "bitis": "2026-09-25T04:36:47",
+    "dosyalar": [
+      "web_dashboard/tabs/admin_panel.py",
+      "web_app.py"
+    ],
+    "not": "Kontrol panosu sekmesi ve testler gecti",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_UI-KONTROL-PANOSU-32.md",
+    "talimat": "UI-KONTROL-PANOSU-32: Admin Panel'e Kontrol Panosu sekmesi ekle. KPI'lar: (1) Maskeli alanlar (strict mode), (2) Açık alanlar (lenient), (3) Tier dağılımı, (4) Günlük işlem trend (son 7 gün). Bar/line chart Streamlit components.",
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01",
+      "UI-ADMIN-KVKK-MODU-26"
+    ]
+  },
+  {
+    "task_id": "DOKUMAN-KVKK-FAQ-33",
+    "id": "DOKUMAN-KVKK-FAQ-33",
+    "baslik": "[DOC] KVKK FAQ & sorun çözme → markdown troubleshooting guide",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": null,
+    "bitis": "2026-09-25T04:36:47",
+    "dosyalar": [
+      "docs/KVKK_FAQ.md"
+    ],
+    "not": "FAQ dokumani mevcut",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_DOKÜMAN-KVKK-FAQ-33.md",
+    "talimat": "DOKÜMAN-KVKK-FAQ-33: docs/KVKK_FAQ.md yaz. SSS bölümleri: (1) Field maskeli nedir? (2) Strict vs Lenient mod fark, (3) Quarantine flag nedir, (4) Tier upgrade, (5) Kontör sisteminin avantajları. Olay örnekleri + kod parçacıkları.",
+    "dependencies": [
+      "ALTYAPI-VERI-GORUNURLUK-01"
+    ]
+  },
+  {
+    "task_id": "UTKU-01",
+    "id": "UTKU-01",
+    "baslik": "[UTKU] Veri şeması doğrulama - Core modülü (2s)",
+    "sahip": "utku",
+    "oncelik": "P0",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "src/core/schema_validator.py"
+    ],
+    "not": "UTKU-01: Yeni görev. Veri şeması doğrulaması için core modülü hazırla.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_UTKU-01.md",
+    "talimat": "UTKU-01: [UTKU] Veri şeması doğrulama - Core modülü (2s) Brief: plans/brief_UTKU-01.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "UTKU-02",
+    "id": "UTKU-02",
+    "baslik": "[UTKU] API endpoint optimizasyon - response time (2s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "src/api/endpoints.py"
+    ],
+    "not": "UTKU-02: Yeni görev. API endpoint'lerin response time'ı optimize et.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_UTKU-02.md",
+    "talimat": "UTKU-02: [UTKU] API endpoint optimizasyon - response time (2s) Brief: plans/brief_UTKU-02.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "UTKU-03",
+    "id": "UTKU-03",
+    "baslik": "[UTKU] Hata loglama sistemi - production hazırlığı (2s)",
+    "sahip": "utku",
+    "oncelik": "P0",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "src/logging/error_logger.py"
+    ],
+    "not": "UTKU-03: Yeni görev. Üretim ortamı için hata loglama sistemi kur.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_UTKU-03.md",
+    "talimat": "UTKU-03: [UTKU] Hata loglama sistemi - production hazırlığı (2s) Brief: plans/brief_UTKU-03.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "UTKU-04",
+    "id": "UTKU-04",
+    "baslik": "[UTKU] Veritabanı migration - index optimizasyon (1s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/schema/migrations/0020_index_optimization.sql"
+    ],
+    "not": "UTKU-04: Yeni görev. DB index'lerini optimize et.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_UTKU-04.md",
+    "talimat": "UTKU-04: [UTKU] Veritabanı migration - index optimizasyon (1s) Brief: plans/brief_UTKU-04.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "UTKU-05",
+    "id": "UTKU-05",
+    "baslik": "[UTKU] Kullanıcı kimlik doğrulama - token yenileme (2s)",
+    "sahip": "utku",
+    "oncelik": "P0",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "src/auth/token_refresh.py"
+    ],
+    "not": "UTKU-05: Yeni görev. Token yenileme mekanizması uygula.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_UTKU-05.md",
+    "talimat": "UTKU-05: [UTKU] Kullanıcı kimlik doğrulama - token yenileme (2s) Brief: plans/brief_UTKU-05.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "YASU-01",
+    "id": "YASU-01",
+    "baslik": "[YASU] Frontend bileşen kütüphanesi - temel UI (3s)",
+    "sahip": "yasu",
+    "oncelik": "P0",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "frontend/components/base_ui.tsx"
+    ],
+    "not": "YASU-01: Yeni görev. Frontend bileşen kütüphanesini kur.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_YASU-01.md",
+    "talimat": "YASU-01: [YASU] Frontend bileşen kütüphanesi - temel UI (3s) Brief: plans/brief_YASU-01.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "YASU-02",
+    "id": "YASU-02",
+    "baslik": "[YASU] Responsive tasarım - mobil uyumluluk (2s)",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "frontend/styles/responsive.css"
+    ],
+    "not": "YASU-02: Yeni görev. Mobil cihazlar için responsive tasarım.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_YASU-02.md",
+    "talimat": "YASU-02: [YASU] Responsive tasarım - mobil uyumluluk (2s) Brief: plans/brief_YASU-02.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "YASU-03",
+    "id": "YASU-03",
+    "baslik": "[YASU] Grafiksel dashboard - veri görselleştirme (3s)",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "frontend/components/dashboard.tsx"
+    ],
+    "not": "YASU-03: Yeni görev. Dashboard'u veri görselleştirmesiyle geliştir.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_YASU-03.md",
+    "talimat": "YASU-03: [YASU] Grafiksel dashboard - veri görselleştirme (3s) Brief: plans/brief_YASU-03.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "YASU-04",
+    "id": "YASU-04",
+    "baslik": "[YASU] Durum yönetimi - state management (2s)",
+    "sahip": "yasu",
+    "oncelik": "P0",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "frontend/store/redux_store.ts"
+    ],
+    "not": "YASU-04: Yeni görev. Redux state management kur.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_YASU-04.md",
+    "talimat": "YASU-04: [YASU] Durum yönetimi - state management (2s) Brief: plans/brief_YASU-04.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "YASU-05",
+    "id": "YASU-05",
+    "baslik": "[YASU] Erişilebilirlik - WCAG 2.1 uyumu (2s)",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "frontend/accessibility/wcag_compliance.md"
+    ],
+    "not": "YASU-05: Yeni görev. WCAG 2.1 standartlarına uy.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_YASU-05.md",
+    "talimat": "YASU-05: [YASU] Erişilebilirlik - WCAG 2.1 uyumu (2s) Brief: plans/brief_YASU-05.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "ORCH-01",
+    "id": "ORCH-01",
+    "baslik": "[ORCH] İş akışı koordinasyon - görev planlama (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P0",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "orchestration/workflow_coordinator.py"
+    ],
+    "not": "ORCH-01: Yeni görev. İş akışı koordinasyonunu planla.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ORCH-01.md",
+    "talimat": "ORCH-01: [ORCH] İş akışı koordinasyon - görev planlama (2s) Brief: plans/brief_ORCH-01.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "ORCH-02",
+    "id": "ORCH-02",
+    "baslik": "[ORCH] Bağımlılık yönetimi - görüntü grafiği (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "orchestration/dependency_graph.py"
+    ],
+    "not": "ORCH-02: Yeni görev. Bağımlılık grafiğini görselleştir.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ORCH-02.md",
+    "talimat": "ORCH-02: [ORCH] Bağımlılık yönetimi - görüntü grafiği (2s) Brief: plans/brief_ORCH-02.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "ORCH-03",
+    "id": "ORCH-03",
+    "baslik": "[ORCH] Görev dağıtımı - load balancing (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P0",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "orchestration/load_balancer.py"
+    ],
+    "not": "ORCH-03: Yeni görev. Görev dağıtımı sistemi kur.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ORCH-03.md",
+    "talimat": "ORCH-03: [ORCH] Görev dağıtımı - load balancing (2s) Brief: plans/brief_ORCH-03.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "ORCH-04",
+    "id": "ORCH-04",
+    "baslik": "[ORCH] Hata toleransı - retry mekanizması (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "orchestration/retry_handler.py"
+    ],
+    "not": "ORCH-04: Yeni görev. Retry mekanizması uygula.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ORCH-04.md",
+    "talimat": "ORCH-04: [ORCH] Hata toleransı - retry mekanizması (2s) Brief: plans/brief_ORCH-04.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "ORCH-05",
+    "id": "ORCH-05",
+    "baslik": "[ORCH] İzleme ve metrikler - telemetri sistemi (3s)",
+    "sahip": "ihsan",
+    "oncelik": "P0",
+    "durum": "todo",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "orchestration/telemetry.py"
+    ],
+    "not": "ORCH-05: Yeni görev. Telemetri ve monitoring sistemi kur.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ORCH-05.md",
+    "talimat": "ORCH-05: [ORCH] İzleme ve metrikler - telemetri sistemi (3s) Brief: plans/brief_ORCH-05.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "ADMIN-UX-GELIR-GRUP-01",
+    "id": "ADMIN-UX-GELIR-GRUP-01",
+    "baslik": "Gelir&Paketler grubu tamamla: executive+maliyet sekmelerini ust=gelir'e tasi",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "review",
+    "baslangic": "2026-09-25T22:56:17",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "Teslim (utku): Gelir & Paketler grubu tamamlandi: web_dashboard/tabs/__init__.py GRUP_GELIR grubu eklendi + executive+maliyet sekmeleri gruba tasi (grup=GRUP_GELIR, ust=gelir, sira=1/2). Test: test_dashboard_nav.py 108/108 passed. kodlama denetimi temiz.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_ADMIN-UX-GELIR-GRUP-01.md",
+    "talimat": "ADMIN-UX-GELIR-GRUP-01: web_dashboard/tabs/__init__.py GRUP_GELIR grubu ekle + executive+maliyet sekmelerini gruba tasi. TabTanimi guncelle (grup=GRUP_GELIR, ust=gelir, sira=1/2). Test: test_admin_panel_tab.py."
+  }
+]

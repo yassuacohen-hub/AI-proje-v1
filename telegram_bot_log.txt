@@ -1,0 +1,23 @@
+[2026-09-25 20:38:00,396] INFO - Telegram Bot initialized: 8603398149:AAFZJTi3x...
+[2026-09-25 20:38:00,425] INFO - Telegram Bot polling mode (dev/fallback)
+[2026-09-25 20:41:58,679] INFO - [BUTTON] Ana Menu clicked: « Ana Menü
+[2026-09-25 20:42:01,382] INFO - [BUTTON] Pano Menu clicked: 📊 Pano
+[2026-09-25 20:42:03,294] INFO - [BUTTON] Pano Plan clicked: 📋 Plan
+[2026-09-25 20:42:03,297] INFO - [PANO_START] chat_id=801855376, status=plan
+[2026-09-25 20:42:03,298] INFO - [PANO] Reading task_board from C:\Huginn Data Projesi\Huginn Data Insights\data\orchestrator\task_board.json
+[2026-09-25 20:42:03,299] INFO - [PANO] Got 47 tasks from task_board.json
+[2026-09-25 20:42:03,299] INFO - [PANO] Filtering 47 tasks for status=plan
+[2026-09-25 20:42:03,299] INFO - [PANO] Filtered: 0 tasks
+[2026-09-25 20:42:03,299] INFO - [PANO] About to send_message, tablo_len=11
+[2026-09-25 20:42:03,984] INFO - [PANO] send_message OK
+[2026-09-25 20:42:08,560] INFO - [BUTTON] Pano All clicked: 🔍 Tümü
+[2026-09-25 20:42:08,560] INFO - [PANO_START] chat_id=801855376, status=all
+[2026-09-25 20:42:08,564] INFO - [PANO] Reading task_board from C:\Huginn Data Projesi\Huginn Data Insights\data\orchestrator\task_board.json
+[2026-09-25 20:42:08,565] INFO - [PANO] Got 47 tasks from task_board.json
+[2026-09-25 20:42:08,565] INFO - [PANO] Filtering 47 tasks for status=all
+[2026-09-25 20:42:08,565] INFO - [PANO] Filtered: 47 tasks
+[2026-09-25 20:42:08,565] INFO - [PANO] About to send_message, tablo_len=1721
+[2026-09-25 20:42:08,985] INFO - [PANO] send_message OK
+[2026-09-25 20:42:34,144] INFO - [BUTTON] Ana Menu clicked: « Ana Menü
+[2026-09-25 20:42:36,640] INFO - [BUTTON] Rapor Menu clicked: 📈 Rapor
+2026-09-25 21:03:44,245 (__init__.py:1175 MainThread) ERROR - TeleBot: "Infinity polling exception: HTTPSConnectionPool(host='api.telegram.org', port=443): Read timed out. (read timeout=10)"

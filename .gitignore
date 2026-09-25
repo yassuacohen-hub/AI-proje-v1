@@ -58,8 +58,10 @@ data/orchestrator/task_board_corrupt_backup.json
 # D-186: pano dosyaları runtime state (state.json gibi); repodan çıkarıldı split riski nedeniyle
 data/orchestrator/task_board.json
 data/orchestrator/onay_kuyrugu.json
+data/orchestrator/chat.json
 data_worktree/orchestrator/task_board.json
 data_worktree/orchestrator/onay_kuyrugu.json
+data_worktree/orchestrator/chat.json
 # D-186: otomatik zaman damgali yedekler ve yedek klasorleri repoya girmez
 data/orchestrator/*.bak
 data_worktree/orchestrator/*.bak

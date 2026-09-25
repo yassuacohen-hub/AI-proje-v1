@@ -37,8 +37,9 @@ from company_master.settings import (  # noqa: E402
     varsayilanlar,
 )
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
-from company_master.chat import oku, ozet, kahin_gonder  # noqa: E402
-import requests  # noqa: E402 (UI-ADMIN-KVKK-MODU-26: KVKK mode API çağrısı)
+from company_master.chat import ac, oku, ozet, kahin_gonder, guncelle  # noqa: E402
+from web_dashboard.tabs.admin_mfa import render_mfa_tab  # noqa: E402 (UI-ADMIN-MFA-26 B-05)
+import requests  # noqa: E402 (UI-ADMIN-KVKK-MODU-26: KVKK mode API çağrısı, UI-ADMIN-MFA-26: MFA API çağrısı)
 
 #: D-192 Faz 2 — ajan başına sabit renk (tema uyumlu: gece/gündüz)
 _AJAN_RENKLERI: dict[str, str] = {
@@ -90,6 +91,8 @@ BOLUMLER: tuple[Section, ...] = (
             ikon="🎛️", kimlik="ayar-gruplari"),
     Section("Sıfırlama", "Tüm tercihleri şema varsayılanlarına döndürür.",
             ikon="↩️", kimlik="ayar-sifirlama"),
+    Section("MFA Yönetimi", "Çok faktörlü kimlik doğrulama (TOTP) ayarları.",
+            ikon="🔐", kimlik="mfa-yonetimi"),
 )
 
 GIRIS_METNI = (
@@ -529,7 +532,7 @@ def render_chat_summary() -> None:
             ajan_gonderici = sorun.get("kimden", "orkestrator").lower()
             ajan_alici = sorun.get("ajan", "?").lower()
             ajan_gonderici_display = ajan_gonderici.upper()
-            ajan_alici_display = ajan_alici.upper()
+            ajan_alici_display = "📢 BROADCAST" if ajan_alici == "*" else ajan_alici.upper()
             onem_ham = sorun.get("onem", "orta")
             onem_etiket = _ONEM_ETIKET.get(onem_ham, onem_ham)
 
@@ -562,10 +565,11 @@ def render_chat_summary() -> None:
             # Eski kayıtlarda kimden yoksa orkestrator kabul et
             ajan_gonderici = s.get("kimden") or "orkestrator"
             ajan_alici = s.get("ajan", "?")
+            ajan_alici_display = "📢 BROADCAST" if ajan_alici == "*" else ajan_alici.upper()
             onem_ham = s.get("onem", "orta")
             rows.append({
                 "Gönderen": ajan_gonderici.upper(),
-                "Alıcı": ajan_alici.upper(),
+                "Alıcı": ajan_alici_display,
                 "Görev": s.get("task_id", ""),
                 "Sorun": s.get("sorun", "")[:50],
                 "Çözüm": s.get("cozum", "")[:50] or "—",
@@ -598,25 +602,27 @@ def render_chat_summary() -> None:
         )
         st.caption(f"Toplam {len(tum_sorunlar)} sorun kaydedilmiş.")
 
-    # ---- KAHİN Mesaj Gönderme Formu (D-213) ----
-    Section("Mesaj Gönder", "KAHİN (Ürün Sahibi) olarak tüm ajanlara broadcast mesaj gönder.", ikon="📤").render()
+    # ---- Çift Yönlü Mesaj Gönderme Formu (D-213, D-217: alıcı seçimi + otomatik yenileme) ----
+    Section("Mesaj Gönder", "Ajan seç, alıcı seç, mesaj yaz — gönderince tablo otomatik yenilenir.", ikon="📤").render()
+
+    _GONDEREN_SECENEKLERI = ["kahin", "ihsan", "utku", "salih", "yasu", "mimir", "orkestrator"]
+    _ALICI_SECENEKLERI = ["herkes", "ihsan", "utku", "salih", "yasu", "mimir", "orkestrator", "kahin"]
 
     with st.form("kahin_mesaj_formu", clear_on_submit=True):
-        st.write("**Mesajınız tüm ajanlar tarafından görülebilecek.** Max 500 karakter.")
-        
-        mesaj = st.text_area(
-            "Mesaj",
-            placeholder="Örn: Acil update: API v2 maintenance yarın saat 14:00-15:00 arasında.",
-            max_chars=500,
-            height=100,
-        )
-        
-        col_task, col_onem = st.columns([2, 1])
-        with col_task:
-            task_id = st.text_input(
-                "Görev ID (isteğe bağlı)",
-                placeholder="Örn: API-12, P7-50, vb.",
-                max_chars=50,
+        col_gonderen, col_alici, col_onem = st.columns([1, 1, 1])
+        with col_gonderen:
+            gonderen = st.selectbox(
+                "Gönderen",
+                options=_GONDEREN_SECENEKLERI,
+                format_func=lambda x: x.upper(),
+                index=0,
+            )
+        with col_alici:
+            alici = st.selectbox(
+                "Alıcı",
+                options=_ALICI_SECENEKLERI,
+                format_func=lambda x: "📢 HERKES" if x == "herkes" else x.upper(),
+                index=0,
             )
         with col_onem:
             onem = st.selectbox(
@@ -624,24 +630,121 @@ def render_chat_summary() -> None:
                 options=["orta", "yuksek", "kritik", "dusuk"],
                 index=0,
             )
-        
+
+        mesaj = st.text_area(
+            "Mesaj",
+            placeholder="Örn: Acil update: API v2 maintenance yarın saat 14:00-15:00 arasında.",
+            max_chars=500,
+            height=100,
+        )
+
+        task_id = st.text_input(
+            "Görev ID (isteğe bağlı)",
+            placeholder="Örn: API-12, P7-50, vb. — boşsa 'genel' kaydedilir.",
+            max_chars=50,
+        )
+
         submitted = st.form_submit_button("📨 Mesaj Gönder", type="primary", use_container_width=True)
-    
+
     if submitted:
         if not mesaj.strip():
             st.error("Mesaj boş olamaz.")
         else:
             try:
-                sonuc = kahin_gonder(
-                    mesaj=mesaj.strip(),
-                    task_id=task_id.strip() if task_id else "",
-                    onem=onem,
-                )
+                hedef_ajan = "*" if alici == "herkes" else alici
+                if gonderen == "kahin":
+                    # kahin_gonder Telegram bildirimini de tetikler (D-212)
+                    sonuc = kahin_gonder(
+                        mesaj=mesaj.strip(),
+                        task_id=task_id.strip() if task_id else "",
+                        onem=onem,
+                        ajan=hedef_ajan,
+                    )
+                else:
+                    # Diğer ajanlar: ac() ile doğru "kimden" attribution + Telegram bildirimi (D-217)
+                    sonuc = ac(
+                        ajan=hedef_ajan,
+                        task_id=task_id.strip() if task_id else "genel",
+                        sorun=mesaj.strip(),
+                        kimden=gonderen,
+                        onem=onem,
+                    )
+                    try:
+                        from company_master.chat import _gonder_telegram_kahin
+                        _gonder_telegram_kahin(mesaj.strip(), sonuc.get("task_id", ""), onem, gonderen)
+                    except Exception:
+                        pass  # Telegram hatası web kaydını etkilemesin
+                alici_gosterim = "herkes" if alici == "herkes" else alici.upper()
                 st.success(
-                    f"✅ Mesaj gönderildi! (task_id: {sonuc.get('task_id', '—')})"
+                    f"✅ Mesaj gönderildi! ({gonderen.upper()} → {alici_gosterim}, task_id: {sonuc.get('task_id', '—')})"
                 )
+                st.rerun()
             except Exception as e:
                 st.error(f"❌ Hata: {e}")
+
+    # ---- Çözüm Ekleme Formu (D-217: açık soruna çözüm iliştirme) ----
+    Section("Çözüme Bağla", "Açık bir soruna çözüm yazıp kapatın.", ikon="✅").render()
+
+    acik_sorunlar_liste = ozet("acik")
+    if not acik_sorunlar_liste:
+        st.caption("Şu an açık sorun yok.")
+    else:
+        _secim_etiketleri = [
+            f"[{s.get('task_id', '?')}] {s.get('kimden', '?').upper()}: {s.get('sorun', '')[:40]}"
+            for s in acik_sorunlar_liste
+        ]
+        with st.form("cozum_formu", clear_on_submit=True):
+            secilen_idx = st.selectbox(
+                "Hangi soruna çözüm yazılacak?",
+                options=list(range(len(acik_sorunlar_liste))),
+                format_func=lambda i: _secim_etiketleri[i],
+            )
+            cozum_metni = st.text_area(
+                "Çözüm",
+                placeholder="Örn: Migration script'i review edildi, sorun giderildi.",
+                max_chars=300,
+                height=80,
+            )
+            durum_secim = st.selectbox(
+                "Durum",
+                options=["cozuldu", "cokundurmus"],
+                format_func=lambda x: "🟢 Çözüldü" if x == "cozuldu" else "🟡 Çözüm Bekleniyor",
+                index=0,
+            )
+            cozum_submit = st.form_submit_button("✅ Çözümü Kaydet", type="primary", use_container_width=True)
+
+        if cozum_submit:
+            if not cozum_metni.strip():
+                st.error("Çözüm metni boş olamaz.")
+            else:
+                secilen_sorun = acik_sorunlar_liste[secilen_idx]
+                hedef_task_id = secilen_sorun.get("task_id", "")
+                # Aynı task_id içindeki sırayı bul (guncelle() task_id + sorun_index ile çalışır)
+                ayni_task_sorunlar = [
+                    s for s in oku(task_id=hedef_task_id) if s.get("durum") == "acik"
+                ]
+                try:
+                    sorun_index = 0
+                    for i, s in enumerate(oku(task_id=hedef_task_id)):
+                        if s is secilen_sorun or (
+                            s.get("timestamp") == secilen_sorun.get("timestamp")
+                            and s.get("sorun") == secilen_sorun.get("sorun")
+                        ):
+                            sorun_index = i
+                            break
+                    sonuc = guncelle(
+                        task_id=hedef_task_id,
+                        sorun_index=sorun_index,
+                        cozum_guncel=cozum_metni.strip(),
+                        durum=durum_secim,
+                    )
+                    if sonuc:
+                        st.success("✅ Çözüm kaydedildi.")
+                        st.rerun()
+                    else:
+                        st.error("Sorun bulunamadı — tekrar deneyin.")
+                except Exception as e:
+                    st.error(f"❌ Hata: {e}")
 
 
 # ---------------------------------------------------------------------------

@@ -14,7 +14,7 @@ import sys
 from pathlib import Path
 from typing import Any, Callable
 
-from src.company_master.queue.message_queue import RedisMessageQueue
+from .message_queue import RedisMessageQueue
 
 
 class EventBus:

@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-25T12:10:16
+> Son guncelleme: 2026-09-25T23:51:23
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -9,29 +9,36 @@
 |-------|--------|-------|---------|-------|
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | iptal |
 | API-ADMIN-MFA-26 | [API] MFA + hesap kilidi akışını yaz → A | utku | P2 | review |
-| UI-ADMIN-LTV-CAC-27 | [UI] LTV/CAC kartlarını yaz → K8 tamamla | utku | P2 | review |
-| DOC-ADMIN-MULTITENANT-KARAR-28 | [DOC] Multi-tenant kararını belgele → KK | utku | P2 | review |
-| ALTYAPI-VERI-GORUNURLUK-01 | [ALTYAPI] Katmanlı görünürlük & kontör s | orkestrator | P0 | tamamlandi |
-| API-KVKK-KONTROL-25 | [API] Kontör endpoint entegrasyonu (matc | yasu | P1 | tamamlandi |
-| TEST-VISIBILITY-ENTEGRASYON-27 | [TEST] E2E senaryo testi (visibility lay | yasu | P1 | tamamlandi |
-| UI-ADMIN-KVKK-MODU-26 | [UI] Admin KVKK mode toggle (strict ↔ le | utku | P1 | review |
-| API-LAYER2-DINAMIK-YÜKLEME-30 | [API] Layer 2 dinamik yükleme → plan_fie | yasu | P1 | tamamlandi |
-| KONTROL-KVKK-MASKELEME-31 | [KONTROL] KVKK maskeleme end-to-end test | yasu | P1 | tamamlandi |
+| UTKU-01 | [UTKU] Veri şeması doğrulama - Core modü | utku | P0 | aktif |
+| UTKU-02 | [UTKU] API endpoint optimizasyon - respo | utku | P1 | todo |
+| UTKU-03 | [UTKU] Hata loglama sistemi - production | utku | P0 | todo |
+| UTKU-04 | [UTKU] Veritabanı migration - index opti | utku | P1 | todo |
+| UTKU-05 | [UTKU] Kullanıcı kimlik doğrulama - toke | utku | P0 | todo |
+| YASU-01 | [YASU] Frontend bileşen kütüphanesi - te | yasu | P0 | aktif |
+| YASU-02 | [YASU] Responsive tasarım - mobil uyumlu | yasu | P1 | todo |
+| YASU-03 | [YASU] Grafiksel dashboard - veri görsel | yasu | P1 | todo |
+| YASU-04 | [YASU] Durum yönetimi - state management | yasu | P0 | todo |
+| YASU-05 | [YASU] Erişilebilirlik - WCAG 2.1 uyumu  | yasu | P1 | todo |
+| ORCH-01 | [ORCH] İş akışı koordinasyon - görev pla | ihsan | P0 | todo |
+| ORCH-02 | [ORCH] Bağımlılık yönetimi - görüntü gra | ihsan | P1 | todo |
+| ORCH-03 | [ORCH] Görev dağıtımı - load balancing ( | ihsan | P0 | todo |
+| ORCH-04 | [ORCH] Hata toleransı - retry mekanizmas | ihsan | P1 | todo |
+| ORCH-05 | [ORCH] İzleme ve metrikler - telemetri s | ihsan | P0 | todo |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| UI-ADMIN-FEATURE-FLAG-25 | [UI] Feature flag yönetim ekranını yaz → | utku | 2026-09-25 |
-| TEST-BLOKE-FAKTOR-ARASTIRMA-01 | [TEST] Test hazirlik plani arastir → tes | yasu | 2026-09-24 |
-| ALTYAPI-SECRETS-SETUP-01 | [ALTYAPI] Vault kurup .env template yaz  | orkestrator | 2026-09-24 |
-| ALTYAPI-DB-MIGRATION-01 | [ALTYAPI] v0016 → v0017 prod migration p | orkestrator | 2026-09-24 |
-| ALTYAPI-ADMIN-PANO-01 | [ALTYAPI] Task board 4 bolum yaz → rende | orkestrator | 2026-09-24 |
-| ORKESTRA-AI-CHAT-KOORDINASYON-01 | [ORKESTRA] Ajan arasi protokol yaz → aja | ihsan | 2026-09-24 |
+| API-KVKK-KONTROL-25 | [API] Kontör endpoint entegrasyonu (matc | yasu | 2026-09-25 |
+| TEST-VISIBILITY-ENTEGRASYON-27 | [TEST] E2E senaryo testi (visibility lay | yasu | 2026-09-25 |
+| UI-ADMIN-KVKK-MODU-26 | [UI] Admin KVKK mode toggle (strict ↔ le | utku | 2026-09-25 |
 | UI-ADMIN-KVKK-RAPOR-28 | [UI] KVKK maskeleme raporu → admin panel | utku | 2026-09-25 |
 | DOC-VISIBILITY-KATMANI-29 | [DOC] Kullanıcı dokümanı (görünürlük kat | utku | 2026-09-25 |
+| API-LAYER2-DINAMIK-YÜKLEME-30 | [API] Layer 2 dinamik yükleme → plan_fie | yasu | 2026-09-25 |
+| KONTROL-KVKK-MASKELEME-31 | [KONTROL] KVKK maskeleme end-to-end test | yasu | 2026-09-25 |
 | UI-KONTROL-PANOSU-32 | [UI] Admin kontrol panosu → maskeleme du | utku | 2026-09-25 |
 | DOKUMAN-KVKK-FAQ-33 | [DOC] KVKK FAQ & sorun çözme → markdown  | utku | 2026-09-25 |
+| ADMIN-UX-GELIR-GRUP-01 | Gelir&Paketler grubu tamamla: executive+ | utku | 2026-09-25 |
 
 ## Son Handoff'lar
 

@@ -1,0 +1,44 @@
+[
+  {
+    "timestamp": "2026-09-25T17:13:32.867251",
+    "ajan": "İhsan",
+    "mesaj": "📬 KAHİN Mesajı (Önem: critical)\n\nOldu mu",
+    "durum": "log"
+  },
+  {
+    "timestamp": "2026-09-25T17:19:00.032491",
+    "ajan": "İhsan",
+    "mesaj": "📬 KAHİN Mesajı (Önem: critical)\n\nSelam ihsan merhaba",
+    "durum": "log"
+  },
+  {
+    "timestamp": "2026-09-25T17:30:22.951165",
+    "ajan": "İhsan",
+    "mesaj": "📬 KAHİN'dan Mesaj (Önem: critical)\n\nGeri cevap ver",
+    "durum": "log"
+  },
+  {
+    "timestamp": "2026-09-25T17:39:09.480416",
+    "ajan": "İhsan",
+    "mesaj": "📬 KAHİN'dan Mesaj (Önem: critical)\n\nSelmama",
+    "durum": "log"
+  },
+  {
+    "timestamp": "2026-09-25T18:30:25.773918",
+    "ajan": "İhsan",
+    "mesaj": "📬 KAHİN'dan Mesaj (Önem: critical)\n\nTelegramdan gelen mesaj",
+    "durum": "log"
+  },
+  {
+    "timestamp": "2026-09-25T19:11:31.348708",
+    "ajan": "İhsan",
+    "mesaj": "📬 KAHİN'dan Mesaj (Önem: yuksek)\n\n👤 ihsan — Görevler (2 toplam)\n\n┌─────────────────────────────────────────────────────────┐\n│ ALTYAPI-D66-BYPASS-TETIKLEME │ ❓ iptal  │ ❓ [ALTYAPI] D-65 Is Du │\n│ ORKESTRA-AI-CHAT-KOORDINASYON-01 │ ✅ done   │ ❓ [ORKESTRA] Ajan aras │\n└─────────────────────────────────────────────────────────┘",
+    "durum": "log"
+  },
+  {
+    "timestamp": "2026-09-25T19:21:52.921613",
+    "ajan": "İhsan",
+    "mesaj": "📬 KAHİN'dan Mesaj (Önem: orta)\n\nSsss",
+    "durum": "log"
+  }
+]

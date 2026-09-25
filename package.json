@@ -9,7 +9,6 @@
     "validate:task-board": "python -c \"import json; t=json.load(open('data/orchestrator/task_board.json')); print('Toplam gorev:', len(t))\"",
     "test": "python -m pytest tests/ -x -q"
   },
-  "dependencies": {},
   "devDependencies": {},
   "keywords": [],
   "author": "",
@@ -17,5 +16,18 @@
   "type": "commonjs",
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yassuacohen-hub/-AI-proje-v1-Parent-repo.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yassuacohen-hub/-AI-proje-v1-Parent-repo/issues"
+  },
+  "homepage": "https://github.com/yassuacohen-hub/-AI-proje-v1-Parent-repo#readme"
 }

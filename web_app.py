@@ -1963,6 +1963,86 @@ def _log_search_event(
 
 
 
+def _log_search_event(
+    user_id: str,
+    email: str,
+    ip: str,
+    query: str,
+    result_count: int,
+    filters: str = "",
+) -> None:
+    """DATA-LOG-01: search_events tablosuna kayit. Hata istegi duser."""
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            conn.execute(
+                text(
+                    "INSERT INTO search_events (user_id, email_masked, ts, ip_masked, "
+                    "query, result_count, filters) "
+                    "VALUES (:uid, :email, CURRENT_TIMESTAMP, :ip, :q, :rc, :f)"
+                ),
+                {
+                    "uid": user_id or "",
+                    "email": _mask_email(email),
+                    "ip": _dl_mask_ip(ip),
+                    "q": (query or "")[:1000],
+                    "rc": result_count,
+                    "f": (filters or "")[:500],
+                },
+            )
+            conn.commit()
+    except Exception as exc:
+        print(f"[DATA-LOG-01] search_event kayit hatasi: {exc}")
+
+
+# B-04: Hesap kilidi (lockout) yardımcı fonksiyonları
+_LOGIN_MAX_ATTEMPTS = 5
+_LOCKOUT_DURATION_MINUTES = 15
+
+
+def _record_failed_login(engine, user_id: str) -> None:
+    """Başarısız giriş denemesini kaydet ve gerekirse kilitle."""
+    try:
+        with engine.begin() as conn:
+            conn.execute(
+                text("""
+                    UPDATE users 
+                    SET failed_login_attempts = failed_login_attempts + 1,
+                        locked_until = CASE 
+                            WHEN failed_login_attempts + 1 >= :max_attempts 
+                            THEN NOW() + INTERVAL ':lockout_minutes minutes'
+                            ELSE locked_until 
+                        END
+                    WHERE user_id = :uid
+                """),
+                {"uid": user_id, "max_attempts": _LOGIN_MAX_ATTEMPTS, "lockout_minutes": _LOCKOUT_DURATION_MINUTES}
+            )
+    except Exception as exc:
+        print(f"[LOCKOUT] Failed login record error: {exc}")
+
+
+def _is_account_locked(engine, user_id: str) -> bool:
+    """Hesap kilitli mi kontrol et."""
+    try:
+        with engine.connect() as conn:
+            row = conn.execute(
+                text("SELECT locked_until FROM users WHERE user_id = :uid"),
+                {"uid": user_id}
+            ).mappings().first()
+            if row and row["locked_until"]:
+                from datetime import datetime
+                if row["locked_until"] > datetime.utcnow():
+                    return True
+                # Lock expired - clear it
+                conn.execute(
+                    text("UPDATE users SET locked_until = NULL, failed_login_attempts = 0 WHERE user_id = :uid"),
+                    {"uid": user_id}
+                )
+        return False
+    except Exception:
+        return False
+
+
 def aktivite_yaz(
     user_id: str,
     olay_tipi: str,
@@ -2412,7 +2492,7 @@ def require_admin_role(
 
 @app.post("/api/admin/login")
 def api_admin_login_post(req: dict, request: Request, _rate: None = Depends(_auth_rate_guard)):
-    """ADMIN-GATE-01: POST admin girişi. {email, password} → token.
+    """ADMIN-GATE-01: POST admin girişi. {email, password} → token veya mfa_token.
 
     SEC-AUTH-01 Y-1: `_auth_rate_guard` IP bazlı katı limit uygular.
     Y-2: bilinmeyen e-posta ve hatalı şifre aynı 401 detayını döner
@@ -2426,7 +2506,7 @@ def api_admin_login_post(req: dict, request: Request, _rate: None = Depends(_aut
     engine = get_engine()
     with engine.connect() as conn:
         row = conn.execute(
-            text("SELECT email, password_hash, role, status FROM users WHERE email = :e"),
+            text("SELECT email, password_hash, role, status, user_id FROM users WHERE email = :e"),
             {"e": email},
         ).mappings().first()
     if row:
@@ -2435,16 +2515,63 @@ def api_admin_login_post(req: dict, request: Request, _rate: None = Depends(_aut
             raise HTTPException(status_code=403, detail="admin yetkisi gerekli")
         if not _verify_password(password, row["password_hash"]):
             aktivite_yaz(user_id=email, olay_tipi="giris", basarili=False, request=request)
+            # B-04: Failed login attempt tracking for lockout
+            _record_failed_login(engine, row["user_id"])
             raise HTTPException(status_code=401, detail="gecersiz email veya sifre")
+        # Check if account is locked
+        if _is_account_locked(engine, row["user_id"]):
+            aktivite_yaz(user_id=email, olay_tipi="giris", basarili=False, request=request)
+            raise HTTPException(status_code=423, detail="Hesap kilitli. Cok fazla basarisiz deneme.")
         # API-ADMIN-LASTLOGIN-YAZ-05: Başarılı girişte last_login güncelle
         with engine.connect() as conn:
             conn.execute(
-                text("UPDATE users SET last_login = NOW() WHERE email = :e"),
+                text("UPDATE users SET last_login = NOW(), failed_login_attempts = 0, locked_until = NULL WHERE email = :e"),
                 {"e": email},
             )
             conn.commit()
+        
+        # B-01/B-02: Check if MFA is enabled for this admin
+        mfa_enabled = False
+        with engine.connect() as conn:
+            mfa_row = conn.execute(
+                text("SELECT enabled, secret_key FROM admin_mfa WHERE admin_id = :aid"),
+                {"aid": row["user_id"]}
+            ).mappings().first()
+            if mfa_row and mfa_row["enabled"]:
+                mfa_enabled = True
+        
+        if mfa_enabled:
+            # B-01/B-02: Return mfa_token for second step instead of full token
+            import secrets
+            mfa_token = secrets.token_urlsafe(32)
+            expires_at = datetime.utcnow() + timedelta(minutes=5)
+            
+            # Store pending login token (separate from setup tokens)
+            with engine.begin() as conn:
+                conn.execute(
+                    text("""
+                        INSERT INTO admin_mfa_login_tokens (admin_id, mfa_token, expires_at)
+                        VALUES (:aid, :token, :exp)
+                    """),
+                    {
+                        "aid": row["user_id"],
+                        "token": mfa_token,
+                        "exp": expires_at
+                    }
+                )
+            
+            aktivite_yaz(user_id=row["email"], olay_tipi="giris", basarili=True, request=request, detay={"mfa_required": True})
+            return {
+                "mfa_required": True,
+                "mfa_token": mfa_token,
+                "expires_at": (datetime.utcnow() + timedelta(minutes=5)).isoformat(),
+                "message": "MFA kodu girin"
+            }
+        
+        # No MFA required - return full token
         aktivite_yaz(user_id=row["email"], olay_tipi="giris", basarili=True, request=request)
         return {"token": _user_token(row["email"])}
+    
     try:
         secrets_path = Path(__file__).resolve().parent / ".streamlit" / "secrets.toml"
         if secrets_path.exists():
@@ -3659,6 +3786,7 @@ def api_admin_mfa_setup(
 @app.post("/api/admin/mfa/verify")
 def api_admin_mfa_verify(
     req: dict,
+    request: Request,
     _auth: str = Depends(require_admin_role)
 ):
     """API-ADMIN-MFA-26: MFA doğrulama ve aktifleştirme.
@@ -3674,20 +3802,20 @@ def api_admin_mfa_verify(
             raise HTTPException(status_code=400, detail="mfa_token ve code zorunlu")
         
         # Session'dan admin ID al
-        session_data = req.get("session")  # This is a placeholder
-        # In real implementation, we'd get this from the request context
+        session = _get_session(request)
+        if not session or not session.user:
+            raise HTTPException(status_code=401, detail="Oturum geçersiz")
         
-        # For now, extract from request headers or body
-        # This is simplified - in production use proper auth
+        admin_id = session.user.user_id
         
         engine = get_engine()
         
-        # Setup token'ı doğrula
+        # Login token'ı doğrula (setup_tokens değil, login_tokens tablosu)
         with engine.connect() as conn:
             setup = conn.execute(
                 text("""
                     SELECT admin_id, secret_key 
-                    FROM admin_mfa_setup_tokens 
+                    FROM admin_mfa_login_tokens 
                     WHERE mfa_token = :token AND used = FALSE AND expires_at > NOW()
                 """),
                 {"token": mfa_token}
@@ -3696,7 +3824,9 @@ def api_admin_mfa_verify(
             if not setup:
                 raise HTTPException(status_code=400, detail="Geçersiz veya süresi dolmuş MFA token")
             
-            admin_id = setup["admin_id"]
+            if setup["admin_id"] != session.user.user_id:
+                raise HTTPException(status_code=403, detail="Token size ait değil")
+            
             secret_key = setup["secret_key"]
         
         # TOTP kodu doğrula
@@ -3722,15 +3852,15 @@ def api_admin_mfa_verify(
                         updated_at = NOW()
                 """),
                 {
-                    "aid": setup["admin_id"],
-                    "secret": secret_key,
+                    "aid": session.user.user_id,
+                    "secret": setup["secret_key"],
                     "backup": backup_codes_hash
                 }
             )
             
-            # Setup token'ı kullanılmış olarak işaretle
+            # Login token'ı kullanılmış olarak işaretle
             conn.execute(
-                text("UPDATE admin_mfa_setup_tokens SET used = TRUE WHERE mfa_token = :token"),
+                text("UPDATE admin_mfa_login_tokens SET used = TRUE WHERE mfa_token = :token"),
                 {"token": mfa_token}
             )
         
@@ -3749,23 +3879,22 @@ def api_admin_mfa_verify(
 @app.post("/api/admin/mfa/disable")
 def api_admin_mfa_disable(
     req: dict,
+    request: Request,
     _auth: str = Depends(require_admin_role)
 ):
     """MFA devre dışı bırak (mevcut şifre gerekli)."""
     try:
-        # Password ve email iste
+        # Password iste
         password = req.get("password") or ""
         if not password:
             raise HTTPException(status_code=400, detail="Mevcut şifre zorunlu")
         
         # Admin email'i session'dan al
-        session_data = req.get("session")  # Placeholder
-        # In practice, get from request context
+        session = _get_session(request)
+        if not session or not session.user:
+            raise HTTPException(status_code=401, detail="Oturum geçersiz")
         
-        # For now, require email in request
-        email = req.get("email") or ""
-        if not email:
-            raise HTTPException(status_code=400, detail="Email zorunlu")
+        email = session.user.email
         
         # Şifre doğrula
         engine = get_engine()
@@ -3795,21 +3924,24 @@ def api_admin_mfa_disable(
 @app.post("/api/admin/mfa/backup-codes")
 def api_admin_mfa_backup_codes(
     req: dict,
+    request: Request,
     _auth: str = Depends(require_admin_role)
 ):
     """Backup codes yeniden üret."""
     try:
-        # Admin email
-        email = req.get("email") or ""
-        if not email:
-            raise HTTPException(status_code=400, detail="Email zorunlu")
+        # Admin email'i session'dan al
+        session = _get_session(request)
+        if not session or not session.user:
+            raise HTTPException(status_code=401, detail="Oturum geçersiz")
+        
+        email = session.user.email
         
         # MFA aktif mi kontrol et
         engine = get_engine()
         with engine.connect() as conn:
             mfa = conn.execute(
                 text("SELECT admin_id, enabled FROM admin_mfa WHERE admin_id = (SELECT user_id FROM users WHERE email = :e)"),
-                {"e": req.get("email", "")}
+                {"e": email}
             ).mappings().first()
             
             if not mfa or not mfa["enabled"]:
@@ -3850,12 +3982,12 @@ def api_admin_login_mfa(req: dict, request: Request):
         
         engine = get_engine()
         
-        # MFA token'ı doğrula
+        # MFA token'ı doğrula (login_tokens tablosu)
         with engine.connect() as conn:
             setup = conn.execute(
                 text("""
                     SELECT admin_id 
-                    FROM admin_mfa_setup_tokens 
+                    FROM admin_mfa_login_tokens 
                     WHERE mfa_token = :token AND used = FALSE AND expires_at > NOW()
                 """),
                 {"token": mfa_token}
@@ -3894,10 +4026,10 @@ def api_admin_login_mfa(req: dict, request: Request):
         if not totp.verify(code, valid_window=1):
             raise HTTPException(status_code=401, detail="Geçersiz MFA kodu")
         
-        # MFA token'ı kullanılmış olarak işaretle
+        # Login token'ı kullanılmış olarak işaretle
         with engine.begin() as conn:
             conn.execute(
-                text("UPDATE admin_mfa_setup_tokens SET used = TRUE WHERE mfa_token = :token"),
+                text("UPDATE admin_mfa_login_tokens SET used = TRUE WHERE mfa_token = :token"),
                 {"token": mfa_token}
             )
         
@@ -3915,12 +4047,17 @@ def api_admin_login_mfa(req: dict, request: Request):
 
 @app.get("/api/admin/mfa/status")
 def api_admin_mfa_status(
+    request: Request,
     _auth: str = Depends(require_admin_role)
 ):
     """MFA durumu sorgula."""
     try:
-        # Placeholder - in practice get from session
-        email = "admin@huginn.local"  # placeholder
+        # Session'dan admin email al
+        session = _get_session(request)
+        if not session or not session.user:
+            raise HTTPException(status_code=401, detail="Oturum geçersiz")
+        
+        email = session.user.email
         
         engine = get_engine()
         with engine.connect() as conn:

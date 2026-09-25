@@ -68,6 +68,7 @@ __all__ = [
 
 GRUP_IS = "🏢 İş Operasyonları"
 GRUP_SISTEM = "🔧 Sistem & Yönetim"
+GRUP_GELIR = "💰 Gelir & Paketler"
 
 # --- MIG-UI-01: Ürün yüzeyleri (hedef arayüz) -------------------------------
 # Muninn 🛡️ = iç ekip (8501 Streamlit), Huginn 🦅 = müşteri (8000 HTML).
@@ -236,15 +237,15 @@ SECTIONS: tuple[TabTanimi, ...] = (
         min_rol="analyst",
     ),
     # --- PO-BACK-08: Executive Dashboard (MRR/ARR + churn + tenant sağlığı) ---
-    # UX-MENU-03/E3: menüden çıktı, "Metrikler › Özet" içine taşındı.
-    # `ust` yok => sidebar'da görünmez; /executive adresi çalışmaya devam eder.
+    # UX-MENU-03/E3: menüden çıktı, "Gelir" grubuna taşındı.
     TabTanimi(
         anahtar="executive",
         baslik="Executive Dashboard",
         ikon="📈",
-        grup=GRUP_IS,
+        grup=GRUP_GELIR,
         aciklama="MRR/ARR, churn oranı ve tenant sağlık dağılımı — yönetici özeti",
         url_path="executive",
+        ust="gelir", sira=1,
         modul="web_dashboard.tabs.admin_executive",
         fonksiyon="render_executive_tab",
         min_rol="admin",
@@ -362,10 +363,10 @@ SECTIONS: tuple[TabTanimi, ...] = (
         anahtar="maliyet",
         baslik=t("menu_maliyet"),
         ikon="💰",
-        grup=GRUP_SISTEM,
+        grup=GRUP_GELIR,
         aciklama="AI ve sistem maliyeti analizi",
         url_path="maliyet",
-        ust="sistem", sira=4,
+        ust="gelir", sira=2,
         modul="web_dashboard.tabs.admin_cost",
         fonksiyon="render_cost_tab",
         min_rol="analyst",
@@ -527,6 +528,19 @@ SECTIONS: tuple[TabTanimi, ...] = (
         ust="proje_yonetimi", sira=9,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_ltv_cac_tab",
+        min_rol="admin",
+    ),
+    # UI-ADMIN-MFA-26: MFA Yönetim Sekmesi
+    TabTanimi(
+        anahtar="mfa",
+        baslik="MFA Yönetimi",
+        ikon="🔐",
+        grup=GRUP_SISTEM,
+        aciklama="Çok faktörlü kimlik doğrulama (TOTP) ayarları",
+        url_path="mfa",
+        ust="proje_yonetimi", sira=10,
+        modul="web_dashboard.tabs.admin_mfa",
+        fonksiyon="render_mfa_tab",
         min_rol="admin",
     ),
     # UX-MENU-03: menüden çıktı; sol-alt hesap kartı popover'ından açılır.

@@ -296,6 +296,7 @@ def kahin_gonder(
     task_id: str = "",
     onem: str = "orta",
     kimden: str = "kahin",
+    ajan: str = "*",
     data_dir: Path | None = None,
 ) -> dict[str, Any]:
     """KAHİN (Ürün Sahibi) mesaj gönder (D-210, D-212 Telegram).
@@ -306,34 +307,35 @@ def kahin_gonder(
         mesaj: 1-500 char sorun/istek
         task_id: ilgili görev (isteğe bağlı, boşsa genel)
         onem: önem seviyesi — kritik/yuksek/orta/dusuk
-        kimden: sabit "kahin" (override edilmez)
+        kimden: gönderen (varsayılan "kahin")
+        ajan: hedef ajan, "*" = broadcast (D-217: artık özelleştirilebilir)
         data_dir: test için custom data dir
     
     Returns:
         Eklenen satır (dict)
     """
-    # Chat logu
+    # Chat logu — kimden artık gerçek gönderen (D-216 attribution fix, eskiden sabit "kahin"e override edilirdi)
     kayit = ac(
-        ajan="*",  # Broadcast: tüm ajanlar bu mesajı görür
+        ajan=ajan,
         task_id=task_id or "genel",
         sorun=mesaj[:500],
         cozum="",
-        kimden="kahin",
+        kimden=kimden,
         onem=onem if onem in ONEM_SEVIYELERI else "orta",
         data_dir=data_dir,
     )
     
     # D-212: Telegram'a gönder (hata sessiz)
     try:
-        _gonder_telegram_kahin(mesaj, task_id, onem)
+        _gonder_telegram_kahin(mesaj, task_id, onem, kimden)
     except Exception:
         pass  # Telegram hatası chat'i etkilemesin
     
     return kayit
 
 
-def _gonder_telegram_kahin(mesaj: str, task_id: str, onem: str) -> None:
-    """D-212: KAHİN mesajını Telegram grubuna gönder. (Internal)"""
+def _gonder_telegram_kahin(mesaj: str, task_id: str, onem: str, kimden: str = "kahin") -> None:
+    """D-212/D-217: Web'den atılan mesajı Telegram grubuna gönder. (Internal)"""
     import os
     import requests
     
@@ -351,7 +353,7 @@ def _gonder_telegram_kahin(mesaj: str, task_id: str, onem: str) -> None:
     }.get(onem, "🟡")
     
     telegram_msg = (
-        f"{onem_etiket} **KAHİN Mesajı**\n\n"
+        f"{onem_etiket} **{kimden.upper()} Mesajı**\n\n"
         f"__{mesaj[:400]}__\n\n"
         f"Görev: `{task_id or 'genel'}`"
     )

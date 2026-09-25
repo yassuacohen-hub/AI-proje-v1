@@ -119,3 +119,9 @@ wandb/
 # Diger ajan alanlari (ek)
 .roo/
 .kombai/
+
+# Orchestrator data (runtime state — Git conflict yok, Cursor indexlemez)
+# Bot tarafından runtime'da güncelleniyor, version control'a girmemeli
+data/orchestrator/task_board.json
+data/orchestrator/chat.json
+data/orchestrator/onay_kuyrugu.json
