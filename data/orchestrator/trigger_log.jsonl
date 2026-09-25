@@ -10649,3 +10649,5 @@
 {"ts": "2026-09-25T11:44:02", "kaynak": "nobetci", "ajan": "mimar", "task_id": "DASH-UX-02a", "tetik_sayisi": 562, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\mimar.ALARM.json"}
 {"ts": "2026-09-25T11:49:02", "kaynak": "nobetci", "ajan": "mimar", "task_id": "DASH-UX-02a", "tetik_sayisi": 563, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\mimar.ALARM.json"}
 {"ts": "2026-09-25T11:54:02", "kaynak": "nobetci", "ajan": "mimar", "task_id": "DASH-UX-02a", "tetik_sayisi": 564, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\mimar.ALARM.json"}
+{"ts": "2026-09-25T11:59:02", "kaynak": "nobetci", "ajan": "mimar", "task_id": "DASH-UX-02a", "tetik_sayisi": 565, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\mimar.ALARM.json"}
+{"ts": "2026-09-25T11:59:02", "kaynak": "nobetci", "ajan": "ui_admin_ltv_cac_27", "task_id": "utku", "tetik_sayisi": 1, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\ui_admin_ltv_cac_27.ALARM.json"}

@@ -3194,6 +3194,9 @@ def _ltv_cac_trend(days: int = 180) -> list[dict]:
 
 def _ltv_cac_by_tier() -> dict:
     """Tier bazında LTV/CAC breakdown."""
+    from datetime import datetime, timedelta
+
+    cutoff_30 = datetime.utcnow() - timedelta(days=30)
     engine = get_engine()
     with engine.connect() as conn:
         result = {}
@@ -3223,8 +3226,8 @@ def _ltv_cac_by_tier() -> dict:
             # Basit dağılım: toplam marketing / 3 tier
             marketing_per_tier = float(os.getenv("MARKETING_SPEND_MONTHLY", "50000")) / 3
             new_users_tier = conn.execute(
-                text("SELECT COUNT(*) FROM users WHERE tier = :tier AND status = 'onayli' AND created_at >= NOW() - INTERVAL '30 days'"),
-                {"tier": tier}
+                text("SELECT COUNT(*) FROM users WHERE tier = :tier AND status = 'onayli' AND created_at >= :cutoff"),
+                {"tier": tier, "cutoff": cutoff_30}
             ).scalar()
             
             cac = (float(os.getenv("MARKETING_SPEND_MONTHLY", "50000")) / 3) / max(int(new_users_tier or 1), 1)
@@ -3241,6 +3244,7 @@ def _ltv_cac_by_tier() -> dict:
 
 
 @app.get("/api/admin/ltv-cac")
+@admin_cache(ttl=3600)
 def api_admin_ltv_cac(
     days: int = 30,
     _auth: str = Depends(require_admin_role)
