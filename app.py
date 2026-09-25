@@ -368,14 +368,10 @@ def _nav_grubu_ciz(tanimlar: list[TabTanimi], secili: TabTanimi, kompakt: bool) 
 
 
 def _hesap_karti_popover() -> None:
-    """NAV-IA-04: Sol-alt hesap kartı popover.
+    """NAV-IA-04: Sol-alt hesap kartı popover — genişletilmiş menu.
 
-    Admin: email, Çıkış, Şifre Değiştir.
+    Admin: email, Sistem Ayarları, Dil, Yardım, Yasal, Çıkış.
     Misafir: Giriş yap (AUTH-GATE-01 modalını tetikler).
-
-    D-194: Şifre Değiştir formu popover İÇİNDE değil ayrı bir st.dialog'da
-    açılır — aksi halde popover form kadar büyüyüp "çok büyük modal" ve
-    "iki tane var" algısına yol açıyordu.
     """
     from web_dashboard.tabs.admin_auth import (
         admin_cikis,
@@ -388,18 +384,56 @@ def _hesap_karti_popover() -> None:
 
     with st.popover(f"👤 {email}"):
         if token:
-            st.caption("Rol: admin")
+            # Rol etiketi + durum
+            col1, col2 = st.columns([2, 1])
+            with col1:
+                st.caption("Rol: admin")
+            with col2:
+                st.caption("✅ Aktif")
+            
+            st.divider()
+            
+            # Sistem Ayarları → /ayarlar
+            if st.button("⚙️ Sistem Ayarları", use_container_width=True, key="pop_ayarlar"):
+                bolum_sec("ayarlar")
+                st.rerun()
+            
+            # Dil seçimi
+            lang = st.selectbox(
+                "Dil",
+                ["🇹🇷 Türkçe", "🇬🇧 English", "🇩🇪 Deutsch"],
+                label_visibility="collapsed",
+                key="pop_lang"
+            )
+            
+            # Yardım
+            if st.button("❓ Yardım", use_container_width=True, key="pop_help"):
+                st.info("📧 Destek: support@huginn.local")
+            
+            st.divider()
+            
+            # Yasal (expander)
+            with st.expander("📜 Yasal", expanded=False):
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.caption("[Gizlilik Politikası](#)")
+                with col2:
+                    st.caption("[Kullanım Koşulları](#)")
+            
+            st.divider()
+            
+            # Çıkış + Şifre Değiştir
             col1, col2 = st.columns(2)
             with col1:
-                if st.button("Şifre Değiştir", key="pop_sifre"):
+                if st.button("🔑 Şifre", key="pop_sifre"):
                     st.session_state["_sifre_degistir_dialog"] = True
                     st.rerun()
             with col2:
-                if st.button("Çıkış", key="pop_cikis"):
+                if st.button("🚪 Çıkış", key="pop_cikis"):
                     admin_cikis()
                     st.rerun()
         else:
-            if st.button("Giriş Yap", key="pop_giris"):
+            if st.button("Giriş Yap", key="pop_giris", use_container_width=True):
                 st.session_state["_force_auth_gate"] = True
                 st.rerun()
 

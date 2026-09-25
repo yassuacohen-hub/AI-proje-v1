@@ -417,17 +417,6 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_webhook_monitor_tab",
         min_rol="analyst",
     ),
-    TabTanimi(
-        anahtar="dlq",
-        baslik=t("menu_dlq"),
-        ikon="⛔",
-        grup=GRUP_SISTEM,
-        aciklama="Kuyruk hataları ve ölü harf sırası",
-        url_path="dlq",
-        modul="web_dashboard.tabs.admin_dlq",
-        fonksiyon="render_dlq_tab",
-        min_rol="analyst",
-    ),
     # UX-MENU-03: menüden çıktı; yenileme Ana Kontrol aksiyon şeridinden yönetilir.
     TabTanimi(
         anahtar="yenileme",
