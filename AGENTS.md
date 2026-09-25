@@ -817,3 +817,39 @@ Veri görünürlüğü (SELECT c.* sızıntısı, paket tanımı, kontör sistem
 - [[hubs/ADMIN_DASHBOARD_HUB]]
 - [[hubs/ORKESTRASYON_AJANLAR_HUB]]
 - [[Huginn Data Insights/docs/GOREV_PANOSU_KULLANIM_KILAVUZU]] — §10 Proje Sağlık Simülasyonu (tablolu kullanım kılavuzu)
+
+## Ajan Chat Kuralı (D-210 — KAHİN kararı 2026-09-25)
+
+Ajanlara **zorunlu sohbet ve koordinasyon** ilkesi:
+
+### Kural Özeti
+- **@mention = ZORUNLU cevap** — Ajan adı bahsedilen sohbette, o ajan P0/P1/P2'ye göre response SLA içinde cevap vermek **zorundadır.**
+  - P0 görevlerde: 5-10 dakika içinde
+  - P1 görevlerde: 10-15 dakika içinde
+  - P2 görevlerde: 15-30 dakika içinde
+- **Sessiz çalışma yasak** — Hata, soru, koordinasyon veya rapor eleştirisi oluşunca **chat'e yazma zorunluluğu.**
+- **Cevap vermeme cezası** — @mention'a cevap vermeyen ajan, sonraki 3 görev atanırken **24 saatlik gecikme** alır.
+
+### Zorunlu Chat Türleri
+1. **Hata/Sorun Bildirimi** — `@orkestrator HATA: <TASK-ID> — <sorun özeti>` formatı
+2. **Soru/Görüş** — `@<AJAN_ADI> — <sorunun adı>: <soru metni>` (soran yanıt bekleme hakkı)
+3. **Ajanlararası Koordinasyon** — `@<AJAN_ADI> — <TASK-1> ve <TASK-2> overlap. Hangisi önce?` (karar gerektiren)
+4. **Rapor Eleştirisi/Düzeltme** — `@<AJAN_ADI> — [rapor <TASK-ID>] <satır veya bölüm>: <eksiklik/hata>` (şart: rapor oku, yaz)
+
+### Chat Komutları
+- **Mesaj gönder:** `python scripts/chat_gonder.py --to <ajan> --type hata --task-id <ID> --mesaj "<metin>"`
+- **Mesaj oku:** `python scripts/chat_al.py --ajan <ajan> --limit 20`
+- **Özetle görüntüle:** `python scripts/chat_al.py --ozet gun` (günlük özet)
+
+### Chat Log Konumu
+- Konum: `data/orchestrator/chat/messages.jsonl` (JSONL format, timestamp + görev bağlantısı)
+- Her satır: `{"tarih": "2026-09-25T10:15:00", "kimden": "utku", "kime": "ihsan", "type": "hata", "task_id": "UI-ADMIN-26", "mesaj": "...", "yanıt_alındı": false}`
+
+### Gerçek Örnekler
+- **Hata:** `@ihsan HATA: UI-ADMIN-KVKK-MODU-26 — ImportError: normalize module yok`
+- **Soru:** `@orkestrator — API-LAYER2-DINAMIK-YÜKLEME-30: kontörlü yükleme vs batch yükleme farkı?`
+- **Koordinasyon:** `@utku — UI-ADMIN-KVKK-MODU-26 ve API-ADMIN-MFA-26 overlap var. Hangisi önce?`
+- **Rapor Düzeltme:** `@yasu — [rapor TEST-BLOKE-18] satır 38: audit log tablo yapısı açıklanmamış. Ekle.`
+
+### Karar Yayınıyla İlgili Nodlar
+- [[Huginn Data Insights/data/orchestrator/AJAN_CHAT_KURALI_D210]] — Tam kural belgesi + komut örnekleri
