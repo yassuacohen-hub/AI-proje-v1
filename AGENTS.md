@@ -932,3 +932,18 @@ KAHİN: *"logo biraz küçük olmuş büyüt ve sağ kısmına Admin Insights ke
 - `st.logo(size="large")` Streamlit'in üst sınırıdır; büyütme CSS ile (`3.4rem`).
 - "Admin Insights" yazısı `[data-testid="stSidebarHeader"]::after` ile basılır — **ikinci bir marka/HTML bloğu üretilmez** (D-211).
 - Denetim: `tests/test_dashboard_nav.py::test_marka_basligi_gradyan_ve_metin` (4 renk + `135deg` + metin + `max-height` sabitleri). `app.py` modül düzeyinde `main()` çağırdığı için test dosyayı import etmez, kaynak metnini okur.
+
+---
+
+## D-214 — Menü Temizliği + KVKK Birleştirme (KAHİN kararı 2026-09-26)
+
+D-213'ün "her sayfa menüde gözüksün, sonra ilgili ve alakalı olanları birleştirelim" talimatının devamı.
+
+- **İkiz çocuk temizliği (D-211 UI hâli):** `kpi` (ust=veri_kalite) ve `paketler` (ust=musteri_onizleme) çocuk kayıtları köküyle **aynı** `modul.fonksiyon` çiftini render ediyordu (`admin_kpi.render_kpi_tab`, `paketler.render_paketler_tab`) — tıklanabilir çift giriş, tek gerçek sayfa. Çocuk kayıtları silindi, `sira` boşlukları kapatıldı, `ESKI_URL["kpi"]`/`ESKI_URL["paketler"]` köke yönlendirir.
+- **Yalan yorum temizliği:** `tabs/__init__.py` içinde "hatalar + dlq + webhook tek sekmede birleşti" / "teknik_altyapi + performans tek Altyapı sekmesinde" yorumları koddan silindi — ikisi de ayrı sekme olarak duruyordu, yorum gerçekleşmemiş bir planı anlatıyordu.
+- **Ratchet testi:** `test_ust_basina_alt_sekme_siniri` artık sabit sayı değil, mevcut fiilî maksimumu (`sistem` kökü, 11 çocuk) tavan alır — KAHİN: sınır *gizlemeyle* değil *birleştirmeyle* korunur; tavan sabit kalırsa yeni dağınıklık test kırar, düşürülürse dosya elle güncellenir.
+- **`test_d214_kok_cocuk_ayni_renderer_yasak`:** kök ile çocuğunun aynı `(modul, fonksiyon)` çiftini render etmesi kalıcı olarak yasaklandı (D-211 kökler için de geçerli).
+- **KVKK birleştirme:** KAHİN: *"onaylıyorum kvkk birleştir zaten en faydalı konu buydu"*. `render_kvkk_mode_tab` (strict/lenient toggle + reason formu) ile `render_kvkk_rapor_tab` (4 metrik + geçmiş tablo + 7 günlük `st.line_chart`) ayrı sekmeydi; rapor artık mode formunun altına gömülü (`render_kvkk_mode_tab` sonunda `render_kvkk_rapor_tab()` çağrılır, ikinci fonksiyon SECTIONS'tan bağımsız yardımcı hâline geldi). Menüde tek giriş kaldı (`kvkk_mode`, ust=proje_yonetimi); `ESKI_URL["kvkk-rapor"]` bu sekmeye yönlendirir.
+- **Doğrulama:** `pytest tests/test_tabs_ia.py tests/test_dashboard_nav.py tests/test_sekme_kapsama.py -q` → 198 passed, 3 skipped (skip'ler ilgisiz/ön-mevcut).
+- **Tam suite fallout taraması:** `pytest tests/ -q` ikiz silme sonrası 24 failed verdi (24 önceki 22 backlog + 2 yeni). Tüm 24 hata gövdesi okunup tek tek triyaj edildi: 2'si gerçek fallout, 22'si backlog (madde 12) ile birebir eşleşti. Fallout: (1) `ana_kontrol.py::GIRIS_KARTLARI` içinde silinen `"kpi"` anahtarı kalmıştı → `"veri_kalite"` yapıldı; (2) `test_auth_gate.py::test_yeni_url_sections_dongusu_korunur` parametrize'i eski `"paketler"` bekliyordu → `"musteri_onizleme"`. İki düzeltme sonrası tam suite tekrar: **22 failed, 4254 passed, 12 skipped** — backlog sayısı sabit, yeni regresyon yok.
+- **Kapsam dışı bırakılan (KAHİN kararı, bekliyor):** Faz 3 çıplak `st.*_chart` çağrılarının `charts.py`'ye taşınması (8 sayfa, P2); Güvenlik çatısı (denetim+mfa+kvkk tek kök) — 7. kök D-213'ün "≤6 kök" sınırıyla çelişiyor, KAHİN onayı gerekir; `sistem` kökünün (11 çocuk) bölünmesi; `musteri_onizleme` grubunun "Gelir" adlandırması gözden geçirilecek; `tests/_tmp_onem_test/` ve `_test_groq_chat_live.py` temizliği (`.gitignore`); 22 ön-mevcut test hatası backlog'u (bkz. `ihsan_project_context.md` madde 24).

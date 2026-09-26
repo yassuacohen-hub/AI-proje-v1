@@ -110,3 +110,24 @@ Tarama tekniği: `\b(?:FROM|JOIN|INTO|UPDATE)\s+([a-z_][a-z0-9_]{2,})` regexi, `
 **Doğrulama:** tam takım `26 failed, 4258 passed, 12 skipped` (255 s). 26'nın **4'ü benim** (hepsi `test_tabs_ia.py`, NAV-AGAC-01'in su yüzüne çıkardığı) → düzeltildi: `pytest tests/test_tabs_ia.py tests/test_dashboard_nav.py tests/test_sekme_kapsama.py -q` → **206 passed, 3 skipped**. Kalan **22 hata bu çalışmadan önce de vardı** (`git show HEAD:` ile kanıtlandı): `test_api_integration` 2 (`web_app.py:1298` `tier = user.get(...)` None üzerinde), `test_error_handling` 3, `test_migration_0017` 5, `test_schema_validation` 4, `test_sayfa_iskeleti` 3, `test_musteri_yonetimi` 1 (`musteri_yonetimi.py:79 IndexError`), `test_marka_denetim_muafiyet` / `test_naming_audit` / `test_pano_denetim` / `test_user_settings` 1'er. Ayrı backlog kalemi.
 
 **Sıradaki iş (KAHİN):** *"sonra ilgili ve alakalı olanları birleştirelim yani admin tek sayfada ilgili ve alakalı konuları görebilecek şekilde optimize ediyoruz sonra her sayfayı ayrıca tasarlarız vektör çartlar ve grafikler kullanırız"* → (1) ilgili sayfaları birleştir (mevcut alt sekme sayıları: `ana_kontrol 0, musteri_yonetimi 4, proje_yonetimi 8, veri_kalite 5, musteri_onizleme 4, sistem 11`), sonra 12 sınırını düşür; (2) sayfa başına vektör grafik tasarımı.
+
+### 2026-09-26 (devam — D-214 menü temizliği + KVKK birleştirme)
+
+KAHİN onayı: *"onaylıyorum kvkk birleştir zaten en faydalı konu buydu"*. PRD (`AI proje v1/V10/07_referanslar/Muninn SUPER ADMIN PANEL PRD V1.txt`) mevcut ağaçla kıyaslandı — ilham, zorunluluk değil.
+
+**Yapılanlar (kod önceki oturumdan uygulanmış bulundu, bu oturumda doğrulandı):**
+1. **SECTIONS temizliği** — `kpi` (ust=veri_kalite) ve `paketler` (ust=musteri_onizleme) çocuk kayıtları silindi: kökle birebir aynı `modul.fonksiyon` çiftini render eden ikiz girişlerdi (D-211 UI hâli). `sira` boşlukları kapatıldı. `ESKI_URL["kpi"]` → `veri_kalite`, `ESKI_URL["paketler"]` → `musteri_onizleme`. `yukleme` sekmesi (Sistem altı, geliştirici demo) menüde **kaldı** — devir notunun açık talebiydi.
+2. **Yalan yorum temizliği** — "hatalar+dlq+webhook birleşti" ve "teknik_altyapi+performans birleşti" yorumları koddan silindi (gerçekleşmemiş plan anlatıyorlardı, ikisi de hâlâ ayrı sekme).
+3. **D-214 testleri** (`tests/test_tabs_ia.py`): `test_d214_kok_cocuk_ayni_renderer_yasak` (kök↔çocuk aynı renderer kalıcı yasak) + `test_ust_basina_alt_sekme_siniri` ratchet'e çevrildi (sabit sayı yerine mevcut maksimum `sistem=11` tavan).
+4. **KVKK birleştirme** — `render_kvkk_mode_tab` (`admin_panel.py`) kendi formunun altında `render_kvkk_rapor_tab()`'ı çağırıyor; ikinci fonksiyon SECTIONS'tan çıkarıldı, navigasyondan bağımsız yardımcı hâline geldi (öksüz değil — `test_sekme_kapsama.py` çağrı-grafiği taramasında `render_kvkk_mode_tab` içinden çağrıldığı görülüyor, MUAF gerekmedi). Menüde tek giriş: `kvkk_mode` (ust=proje_yonetimi). `ESKI_URL["kvkk-rapor"]` → `(proje_yonetimi, kvkk_mode)`.
+5. **Test güncellemeleri** doğrulandı: `test_tabs_ia.py::test_birlestirilen_sekme_basliklari`, `test_dashboard_nav.py::test_alt_sekmeler_sira_sirali` (proje_yonetimi listesi artık `kvkk_mode` içeriyor, ayrı `kvkk_rapor` yok).
+
+**Doğrulama:** `pytest tests/test_tabs_ia.py tests/test_dashboard_nav.py tests/test_sekme_kapsama.py -q` → **198 passed, 3 skipped**.
+
+**Bekleyen (uygulama yok, KAHİN kararı bekliyor):**
+- Faz 3: çıplak `st.*_chart` çağrılarının `charts.py`'ye taşınması (8 sayfa, P2).
+- Güvenlik çatısı: denetim+mfa+kvkk tek kök altında toplansın mı? 7. kök, D-213'ün "≤6 kök" sınırıyla çelişir — KAHİN onayı şart.
+- `sistem` kökünün (11 çocuk, en kalabalık) bölünmesi.
+- `musteri_onizleme` grubunun "Gelir" adlandırması gözden geçirilecek.
+- Temizlik: `tests/_tmp_onem_test/` + `_test_groq_chat_live.py` → `.gitignore`.
+- Backlog: 22 ön-mevcut test hatası (madde 24, D-214 kapsamının dışında).

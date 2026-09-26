@@ -1004,9 +1004,12 @@ def render_kvkk_mode_tab() -> None:
                     except Exception as exc:
                         st.error(f"İstek hatası: {exc}")
 
+    # D-214: KVKK Rapor (gecmis/trend) bu sayfaya gomuldu (UI-ADMIN-KVKK-RAPOR-28).
+    render_kvkk_rapor_tab()
+
 
 # ---------------------------------------------------------------------------
-# UI-ADMIN-KVKK-RAPOR-28: KVKK Maskeleme Raporu Sekmesi
+# UI-ADMIN-KVKK-RAPOR-28: KVKK Maskeleme Raporu (D-214: kvkk_mode sayfasina gomulu)
 # ---------------------------------------------------------------------------
 
 def _kvkk_rapor_getir(limit: int = 30) -> list[dict]:
@@ -1028,13 +1031,16 @@ def _kvkk_rapor_getir(limit: int = 30) -> list[dict]:
 
 
 def render_kvkk_rapor_tab() -> None:
-    """UI-ADMIN-KVKK-RAPOR-28: KVKK Maskeleme Raporu Sekmesi.
+    """UI-ADMIN-KVKK-RAPOR-28: KVKK Maskeleme Raporu.
 
-    admin_kvkk_mode geçmişi + KPI + trend grafik.
+    admin_kvkk_mode geçmişi + KPI + trend grafik. D-214: artik ayri sekme
+    degil, `render_kvkk_mode_tab` sonunda cagrilan yardimci bolum.
     """
-    PageHeader(
-        "KVKK Maskeleme Raporu", ust_etiket="İş · Yönetim", ikon="📊",
-        giris="KVKK mode geçiş geçmişi, istatistikler ve trend analizi.",
+    st.divider()
+    Section(
+        "KVKK Maskeleme Raporu",
+        "Mode geçiş geçmişi, istatistikler ve trend analizi",
+        ikon="📊",
     ).render()
 
     # KPI'lar

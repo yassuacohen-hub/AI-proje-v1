@@ -79,7 +79,8 @@ GIRIS_KARTLARI: tuple[tuple[str, str, str], ...] = (
     ("👥", "Firmalar", "musteriler"),
     ("🧑", "Kullanıcılar", "kullanicilar"),
     ("⚠️", "Olaylar & Hatalar", "hatalar"),
-    ("📊", "Metrikler", "kpi"),
+    # D-214: eski "kpi" ikizi silindi, kok bunu devraldi (SECTIONS)
+    ("📊", "Metrikler", "veri_kalite"),
 )
 
 

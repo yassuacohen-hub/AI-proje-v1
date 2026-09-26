@@ -55,7 +55,7 @@ def test_bolum_sayisi_ve_benzersizlik() -> None:
     yaratiyordu (nitekim 38'e cikmisken 37 yaziyordu). Onemli olan alt sinir +
     benzersizlik; bolum silindiyse test yine uyarir.
     """
-    assert len(SECTIONS) >= 38
+    assert len(SECTIONS) >= 35
 
     anahtarlar = [t.anahtar for t in SECTIONS]
     urller = [t.url_path for t in SECTIONS]
@@ -69,7 +69,7 @@ def test_bk5_zorunlu_bolumler_mevcut() -> None:
         "ana_kontrol",
         "musteriler",
         "sistem",
-        "paketler",
+        "musteri_onizleme",  # D-214: eski "paketler" ikizi silindi, kök bunu devraldi
         "pazarlama",
         "abrakadabra",
         "ayarlar",
@@ -82,13 +82,15 @@ def test_varsayilan_bolum_ana_kontrol() -> None:
 
 
 def test_tab_getir() -> None:
-    assert tab_getir("paketler").anahtar == "paketler"
+    assert tab_getir("musteri_onizleme").anahtar == "musteri_onizleme"
     assert tab_getir("olmayan_bolum") is None
 
 
 def test_tab_url_getir_normalize_eder() -> None:
-    """Derin baglanti: bas/son slash ve buyuk harf tolere edilmeli."""
-    assert tab_url_getir("/Paketler/").anahtar == "paketler"
+    """Derin baglanti: bas/son slash ve buyuk harf tolere edilmeli; eski
+    /Paketler/ adresi D-214 sonrasi ESKI_URL uzerinden musteri_onizleme'ye
+    yonlenir."""
+    assert tab_url_getir("/Paketler/").anahtar == "musteri_onizleme"
     assert tab_url_getir("canli-veri").anahtar == "canli_veri"
     assert tab_url_getir("") is None
     assert tab_url_getir("olmayan") is None
@@ -245,9 +247,9 @@ def test_mig_bilinmeyen_yuzey_reddedilir() -> None:
 
 
 def test_mig_musteri_ekranlari_huginn_isaretli() -> None:
-    """Sitemap MIG-UI-01: ana_kontrol, paketler, pazarlama → Huginn hedefli."""
+    """Sitemap MIG-UI-01: ana_kontrol, musteri_onizleme, pazarlama → Huginn hedefli."""
     onizleme = {t.anahtar for t in musteri_onizleme_bolumleri()}
-    assert onizleme == {"ana_kontrol", "paketler", "pazarlama"}
+    assert onizleme == {"ana_kontrol", "musteri_onizleme", "pazarlama"}
     for tanim in musteri_onizleme_bolumleri():
         assert tanim.yuzey == YUZEY_HUGINN
         assert tanim.musteri_onizleme is True
@@ -356,7 +358,7 @@ def test_alt_sekmeler_sira_sirali():
     assert siralar == sorted(siralar)
     assert [t.anahtar for t in alt] == [
         "karar_defteri", "denetim", "abrakadabra", "kvkk_mode",
-        "kvkk_rapor", "ajan_sohbet", "gorev_panosu", "rapor_listesi",
+        "ajan_sohbet", "gorev_panosu", "rapor_listesi",
     ]
 
 

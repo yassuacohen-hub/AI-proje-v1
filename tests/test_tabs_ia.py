@@ -57,12 +57,25 @@ def test_sira_bosluksuz() -> None:
 
 
 def test_ust_basina_alt_sekme_siniri() -> None:
-    """NAV-AGAC-01: sınır gizlemeyle değil BİRLEŞTİRMEYLE korunur (KAHİN: "ilgili
-    ve alakalı olanları birleştirelim"). Birleştirme yapılana kadar üst sınır
-    fiilî duruma göre 12; daha yükseğe çıkması yeni dağınıklıktır.
+    """D-214 ratchet: sınır gizlemeyle değil BİRLEŞTİRMEYLE korunur (KAHİN:
+    "ilgili ve alakalı olanları birleştirelim"). Sabit sayı yerine mevcut
+    fiilî maksimum tavan olarak alınır — bir kök bu tavanı geçerse test
+    kırılır (yeni dağınıklık); tavan düşürülürse test dosyası güncellenir.
     """
+    TAVAN = 11  # D-214 itibarıyla en kalabalık kök (`sistem`) 11 çocuğa sahip.
     for anahtar in ust_sayfalar():
-        assert len(alt_sekmeler(anahtar)) <= 12, anahtar
+        assert len(alt_sekmeler(anahtar)) <= TAVAN, anahtar
+
+
+def test_d214_kok_cocuk_ayni_renderer_yasak() -> None:
+    """D-214: bir kök ile kendi çocuklarından biri aynı (modul, fonksiyon)
+    ikilisini render edemez — ikiz sekme (D-211) kökler için de geçerli."""
+    kokler = {t.anahtar: t for t in SECTIONS if t.ust is None}
+    for tanim in SECTIONS:
+        if tanim.ust and tanim.ust in kokler:
+            kok = kokler[tanim.ust]
+            ikiz = (kok.modul, kok.fonksiyon) == (tanim.modul, tanim.fonksiyon)
+            assert not ikiz, f"{tanim.ust} == {tanim.anahtar} (aynı renderer)"
 
 
 def test_derinlik_en_fazla_uc_seviye() -> None:
@@ -86,7 +99,6 @@ def test_her_sayfanin_adresi_cozulur() -> None:
 
 
 def test_birlestirilen_sekme_basliklari() -> None:
-    assert tab_getir("kpi").baslik == "Özet"
     assert tab_getir("hatalar").baslik == "Olaylar & Hatalar"
     assert tab_getir("hatalar").ust == "sistem"
     assert tab_getir("teknik_altyapi").baslik == "Altyapı"

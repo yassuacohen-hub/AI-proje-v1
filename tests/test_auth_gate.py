@@ -137,7 +137,14 @@ def test_eski_url_sections_eslesmesinden_once_gelir(monkeypatch, yol: str) -> No
     assert durum["alt_sekme"] == "kullanicilar"
 
 
-@pytest.mark.parametrize("yol, anahtar", [("/Paketler/", "paketler"), ("canli-veri", "canli_veri")])
+@pytest.mark.parametrize(
+    "yol, anahtar",
+    [
+        # D-214: "paketler" ikiz-çocuğu silindi, ESKI_URL "musteri_onizleme" kokune yonlendirir
+        ("/Paketler/", "musteri_onizleme"),
+        ("canli-veri", "canli_veri"),
+    ],
+)
 def test_yeni_url_sections_dongusu_korunur(yol: str, anahtar: str) -> None:
     """Eski URL düzeltmesi normal bölüm çözümlemesini kaldırmamalı."""
     from web_dashboard.tabs import tab_url_getir

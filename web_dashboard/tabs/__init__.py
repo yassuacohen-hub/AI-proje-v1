@@ -189,25 +189,13 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_musteriler_tab",
     ),
     TabTanimi(
-        anahtar="paketler",
-        baslik=t("menu_h_paketler"),
-        ikon="📦",
-        grup=GRUP_IS,
-        aciklama="Paket kataloğu, fiyatlar ve çapraz satış önerileri",
-        url_path="paketler",
-        ust="musteri_onizleme", sira=0,
-        modul="web_dashboard.tabs.paketler",
-        fonksiyon="render_paketler_tab",
-        yuzey=YUZEY_HUGINN,
-    ),
-    TabTanimi(
         anahtar="pazarlama",
         baslik=t("menu_h_pazarlama"),
         ikon="📢",
         grup=GRUP_IS,
         aciklama="Kampanyalar, segmentler ve segment kapsama analizi",
         url_path="pazarlama",
-        ust="musteri_onizleme", sira=1,
+        ust="musteri_onizleme", sira=0,
         modul="web_dashboard.tabs.pazarlama",
         fonksiyon="render_pazarlama_tab",
         yuzey=YUZEY_HUGINN,
@@ -224,19 +212,6 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_abrakadabra_tab",
         min_rol="admin",
     ),
-    # --- U-11: Yeni kısayol sekmeleri (sitemap Bölüm 3 menü ağacı dağıtımı) ---
-    TabTanimi(
-        anahtar="kpi",
-        baslik="Özet",
-        ikon="📊",
-        grup=GRUP_IS,
-        aciklama="KPI kartları, özet metrikler ve yönetici görünümü",
-        url_path="kpi",
-        ust="veri_kalite", sira=0,
-        modul="web_dashboard.tabs.admin_kpi",
-        fonksiyon="render_kpi_tab",
-        min_rol="analyst",
-    ),
     # --- PO-BACK-08: Executive Dashboard (MRR/ARR + churn + tenant sağlığı) ---
     # NAV-AGAC-01: Metrikler başlığı altında birleşti (eskiden menüden düşüyordu).
     TabTanimi(
@@ -248,7 +223,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_GELIR,
         aciklama="MRR/ARR, churn oranı ve tenant sağlık dağılımı — yönetici özeti",
         url_path="executive",
-        ust="veri_kalite", sira=2,
+        ust="veri_kalite", sira=1,
         modul="web_dashboard.tabs.admin_executive",
         fonksiyon="render_executive_tab",
         min_rol="admin",
@@ -265,7 +240,6 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_destek_tab",
         min_rol="admin",
     ),
-    # UX-MENU-03/E4: hatalar + dlq + webhook tek sekmede birleşti (Sistem altında).
     TabTanimi(
         anahtar="hatalar",
         baslik="Olaylar & Hatalar",
@@ -310,7 +284,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="D-192: Ajan sorun takibi — açık/çözündürülmüş/çözüldü metrikler ve son sorunlar",
         url_path="ajan-sohbet",
-        ust="proje_yonetimi", sira=5,
+        ust="proje_yonetimi", sira=4,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_chat_summary",
         min_rol="admin",
@@ -323,7 +297,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="ALTYAPI-ADMIN-PANO-01: Ajan görevlerinin 4 bölümlü panosu",
         url_path="gorev-panosu",
-        ust="proje_yonetimi", sira=6,
+        ust="proje_yonetimi", sira=5,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_task_board_tab",
         min_rol="admin",
@@ -337,7 +311,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="MIMIR architect raporları — otomatik oluşturuldu, tüm agentle açık",
         url_path="rapor-listesi",
-        ust="proje_yonetimi", sira=7,
+        ust="proje_yonetimi", sira=6,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_rapor_listesi_tab",
     ),
@@ -348,7 +322,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Veri kalitesi ve uyum skoru",
         url_path="kalite",
-        ust="veri_kalite", sira=1,
+        ust="veri_kalite", sira=0,
         modul="web_dashboard.tabs.admin_quality",
         fonksiyon="render_quality_tab",
         min_rol="analyst",
@@ -361,7 +335,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Global arama ve filtreleme",
         url_path="arama",
-        ust="veri_kalite", sira=3,
+        ust="veri_kalite", sira=2,
         modul="web_dashboard.tabs.admin_search",
         fonksiyon="render_search_tab",
         min_rol="analyst",
@@ -385,12 +359,11 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_GELIR,
         aciklama="AI ve sistem maliyeti analizi",
         url_path="maliyet",
-        ust="musteri_onizleme", sira=3,
+        ust="musteri_onizleme", sira=2,
         modul="web_dashboard.tabs.admin_cost",
         fonksiyon="render_cost_tab",
         min_rol="analyst",
     ),
-    # UX-MENU-03/E5: teknik_altyapi + performans tek "Altyapı" sekmesinde.
     TabTanimi(
         anahtar="teknik_altyapi",
         baslik="Altyapı",
@@ -489,31 +462,17 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_audit_tab",
         min_rol="admin",
     ),
-    # UI-ADMIN-KVKK-MODU-26: KVKK Mode Kontrol
+    # UI-ADMIN-KVKK-MODU-26 + UI-ADMIN-KVKK-RAPOR-28: KVKK Mode + Rapor birlesik (D-214).
     TabTanimi(
         anahtar="kvkk_mode",
         baslik="KVKK Mode",
         ikon="🔒",
         grup=GRUP_SISTEM,
-        aciklama="KVKK strict/lenient mode toggle ve yönetimi",
+        aciklama="KVKK strict/lenient mode toggle, gecmis ve trend analizi",
         url_path="kvkk-mode",
         ust="proje_yonetimi", sira=3,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_kvkk_mode_tab",
-        min_rol="admin",
-    ),
-    # UI-ADMIN-KVKK-RAPOR-28: KVKK Maskeleme Raporu
-    # NAV-AGAC-01: Proje > KVKK Mode ile aynı başlık altında birleşti.
-    TabTanimi(
-        anahtar="kvkk_rapor",
-        baslik="KVKK Raporu",
-        ikon="🛡️",
-        grup=GRUP_SISTEM,
-        aciklama="KVKK maskeleme geçmişi, istatistikler ve trend analizi",
-        url_path="kvkk-rapor",
-        ust="proje_yonetimi", sira=4,
-        modul="web_dashboard.tabs.admin_panel",
-        fonksiyon="render_kvkk_rapor_tab",
         min_rol="admin",
     ),
     # UI-KONTROL-PANOSU-32: Admin Kontrol Panosu
@@ -525,7 +484,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Maskeli/açık alanlar, tier dağılımı, trend ve mode geçişleri",
         url_path="kontrol-panosu",
-        ust="veri_kalite", sira=4,
+        ust="veri_kalite", sira=3,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_kontrol_panosu_tab",
         min_rol="admin",
@@ -552,7 +511,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_GELIR,
         aciklama="Müşteri yaşam boyu değeri (LTV) ve kazanım maliyeti (CAC) analizi",
         url_path="ltv-cac",
-        ust="musteri_onizleme", sira=2,
+        ust="musteri_onizleme", sira=1,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_ltv_cac_tab",
         min_rol="admin",
@@ -648,7 +607,9 @@ SECTIONS: tuple[TabTanimi, ...] = (
         modul="web_dashboard.tabs.paketler",
         fonksiyon="render_paketler_tab",
         min_rol="anon",
-        yuzey=YUZEY_MUNINN,
+        # D-214: eski "paketler" ikiz-çocuğu YUZEY_HUGINN idi (MIG-UI-01); twin
+        # silinirken bu kök yanlışlıkla MUNINN kalmıştı — düzeltildi, kayıp yok.
+        yuzey=YUZEY_HUGINN,
     ),
 )
 
@@ -657,6 +618,9 @@ ESKI_URL: dict[str, tuple[str, str]] = {
     "kullanicilar": ("musteri_yonetimi", "kullanicilar"),
     "yonetim": ("admin_yonetim", ""),
     "kimlik": ("admin_auth", ""),
+    "kpi": ("veri_kalite", ""),
+    "paketler": ("musteri_onizleme", ""),
+    "kvkk-rapor": ("proje_yonetimi", "kvkk_mode"),
 }
 
 
