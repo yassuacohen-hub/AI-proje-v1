@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-26T14:30:53
+> Son guncelleme: 2026-09-26T14:48:08
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -8,7 +8,6 @@
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | iptal |
-| ALTYAPI-DB-MIGRATION-01 | [ALTYAPI] v0016 → v0017 prod migration p | utku | P1 | aktif |
 | UTKU-02 | [UTKU] API endpoint optimizasyon - respo | utku | P1 | todo |
 | UTKU-04 | [UTKU] Veritabanı migration - index opti | utku | P1 | todo |
 | UTKU-05 | [UTKU] Kullanıcı kimlik doğrulama - toke | utku | P0 | todo |

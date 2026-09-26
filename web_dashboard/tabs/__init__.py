@@ -311,6 +311,18 @@ SECTIONS: tuple[TabTanimi, ...] = (
         min_rol="admin",
         hazir=True,
     ),
+    TabTanimi(
+        anahtar="gorev_panosu",
+        baslik="Görev Panosu",
+        ikon="🗂️",
+        grup=GRUP_IS,
+        aciklama="ALTYAPI-ADMIN-PANO-01: Ajan görevlerinin 4 bölümlü panosu",
+        url_path="gorev-panosu",
+        modul="web_dashboard.tabs.admin_panel",
+        fonksiyon="render_task_board_tab",
+        min_rol="admin",
+        hazir=True,
+    ),
     # UX-MENU-04: menüden çıktı; Proje sayfa gövdesinden (seviye 3) açılır.
     TabTanimi(
         anahtar="rapor_listesi",
