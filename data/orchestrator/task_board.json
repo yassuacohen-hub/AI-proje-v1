@@ -1004,5 +1004,22 @@
     "mod": "code",
     "brief": "plans/brief_utku_ADMIN-UX-GELIR-GRUP-01.md",
     "talimat": "ADMIN-UX-GELIR-GRUP-01: web_dashboard/tabs/__init__.py GRUP_GELIR grubu ekle + executive+maliyet sekmelerini gruba tasi. TabTanimi guncelle (grup=GRUP_GELIR, ust=gelir, sira=1/2). Test: test_admin_panel_tab.py."
+  },
+  {
+    "task_id": "UI-ADMIN-MENU-D215216",
+    "id": "UI-ADMIN-MENU-D215216",
+    "baslik": "[UI] Admin menü ağacını düzelt → web_dashboard/tabs/__init__.py (3s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-09-27T00:18:25",
+    "bitis": "2026-09-27T00:20:36",
+    "dosyalar": [],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_UI-ADMIN-MENU-D215216.md",
+    "talimat": "TESLIM (geriye donuk kayit, 2026-09-26): D-215 menu agaci + D-216 hayalet gorev arsivi orkestrator tarafindan uygulandi. Commit 0601388 (D-215) + c295166 (D-216), branch chore/monorepo-merge, push edildi. Testler: test_dashboard_nav.py / test_tabs_ia.py / test_naming_audit.py yesil."
   }
 ]
