@@ -960,3 +960,13 @@ D-214'ün kapsam dışı bıraktığı iki karar (Güvenlik çatısı, "Gelir" a
 - **Ratchet güncellemesi:** `test_tabs_ia.py::test_ust_sayfa_sayisi` tavanı 6→7 (Gelir Kapısı + Güvenlik Kapısı); `test_dashboard_nav.py::test_ust_sayfalar_admin_6` → `test_ust_sayfalar_admin_7` (7 kök seti günceli); `test_alt_sekmeler_sira_sirali` listesinden `denetim`/`kvkk_mode` çıkarıldı (artık `proje_yonetimi` çocuğu değil).
 - **Doğrulama:** `pytest tests/test_tabs_ia.py tests/test_dashboard_nav.py tests/test_musteri_yonetimi.py tests/test_admin_extras_kullanici.py tests/test_sekme_kapsama.py -q` → 211 passed, 3 skipped. Tam suite: **21 failed, 4259 passed, 12 skipped** — D-214'teki 22 ön-mevcut backlog hatasına göre 1 azaldı, D-215 kapsamında yeni regresyon yok.
 - **Kapsam dışı bırakılan (bekliyor):** Faz 3 vektör grafik taşıması (8 sayfa); 21 ön-mevcut test hatası backlog'u (madde 12); tanıtım cümleleri sistemi (her başlık/sayfa/grafik için tutarlı giriş metni planı).
+
+---
+
+## D-216 — Hayalet görev arşivleme (KAHİN kararı 2026-09-26)
+
+Utku toplu emri (madde 12) yürütülmeden önce panodaki `todo` kayıtları kod tabanıyla çapraz kontrol edildi: `UTKU-02` (`src/api/endpoints.py`), `UTKU-04` (`src/company_master/schema/migrations/0020_index_optimization.sql`), `UTKU-05` (`src/auth/token_refresh.py`), `ORCH-01..05` (`orchestration/*.py`) — 8 kaydın referans verdiği dosyalar/dizinler kod tabanında hiç var olmamış (`orchestration/` dizini yok, gerçek migration adı `0020_login_lockout.sql`). Sablon/placeholder sızıntısı olarak değerlendirildi.
+
+- **Aksiyon:** 8 kayıt `scripts/_hayalet_gorev_arsiv.py` ile `durum=archive`'e taşındı, `not` alanına gerekçe eklendi. Task board dışında kod değişikliği yok.
+- **Doğrulama:** `pytest tests/test_naming_audit.py -q` → 9 passed (D-57 denetimi etkilenmedi).
+- **Sonuç:** Utku toplu emrindeki 8 backlog görevinden gerçek kalan sıfır; madde 12 kapandı (hepsi hayaletti).

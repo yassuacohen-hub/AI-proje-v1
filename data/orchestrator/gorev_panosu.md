@@ -8,14 +8,14 @@
 | Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |
 |-------|--------|-------|---------|-------|----------|
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s) | ihsan | P1 | iptal | scripts/pano_denetim.py, scripts/tetik_senk.py, tests/test_d66_bypass_tetikleme.py |
-| UTKU-02 | [UTKU] API endpoint optimizasyon - response time (2s) | utku | P1 | todo | src/api/endpoints.py |
-| UTKU-04 | [UTKU] Veritabanı migration - index optimizasyon (1s) | utku | P1 | todo | src/company_master/schema/migrations/0020_index_optimization.sql |
-| UTKU-05 | [UTKU] Kullanıcı kimlik doğrulama - token yenileme (2s) | utku | P0 | todo | src/auth/token_refresh.py |
-| ORCH-01 | [ORCH] İş akışı koordinasyon - görev planlama (2s) | ihsan | P0 | todo | orchestration/workflow_coordinator.py |
-| ORCH-02 | [ORCH] Bağımlılık yönetimi - görüntü grafiği (2s) | ihsan | P1 | todo | orchestration/dependency_graph.py |
-| ORCH-03 | [ORCH] Görev dağıtımı - load balancing (2s) | ihsan | P0 | todo | orchestration/load_balancer.py |
-| ORCH-04 | [ORCH] Hata toleransı - retry mekanizması (2s) | ihsan | P1 | todo | orchestration/retry_handler.py |
-| ORCH-05 | [ORCH] İzleme ve metrikler - telemetri sistemi (3s) | ihsan | P0 | todo | orchestration/telemetry.py |
+| UTKU-02 | [UTKU] API endpoint optimizasyon - response time (2s) | utku | P1 | archive | src/api/endpoints.py |
+| UTKU-04 | [UTKU] Veritabanı migration - index optimizasyon (1s) | utku | P1 | archive | src/company_master/schema/migrations/0020_index_optimization.sql |
+| UTKU-05 | [UTKU] Kullanıcı kimlik doğrulama - token yenileme (2s) | utku | P0 | archive | src/auth/token_refresh.py |
+| ORCH-01 | [ORCH] İş akışı koordinasyon - görev planlama (2s) | ihsan | P0 | archive | orchestration/workflow_coordinator.py |
+| ORCH-02 | [ORCH] Bağımlılık yönetimi - görüntü grafiği (2s) | ihsan | P1 | archive | orchestration/dependency_graph.py |
+| ORCH-03 | [ORCH] Görev dağıtımı - load balancing (2s) | ihsan | P0 | archive | orchestration/load_balancer.py |
+| ORCH-04 | [ORCH] Hata toleransı - retry mekanizması (2s) | ihsan | P1 | archive | orchestration/retry_handler.py |
+| ORCH-05 | [ORCH] İzleme ve metrikler - telemetri sistemi (3s) | ihsan | P0 | archive | orchestration/telemetry.py |
 
 ## Tamamlananlar
 

@@ -145,3 +145,7 @@ D-214'ün "bekleyen" listesindeki iki karar KAHİN onayıyla uygulandı: Güvenl
 **Doğrulama:** `pytest tests/test_tabs_ia.py tests/test_dashboard_nav.py tests/test_musteri_yonetimi.py tests/test_admin_extras_kullanici.py tests/test_sekme_kapsama.py -q` → **211 passed, 3 skipped**. Tam suite: **21 failed, 4259 passed, 12 skipped** (D-214'teki 22 backlog'dan 1 azaldı, yeni regresyon yok).
 
 **Bekleyen:** Faz 3 vektör grafik taşıması; tanıtım cümleleri sistemi (madde 11); 21 ön-mevcut test hatası backlog'u (madde 12); `sistem` kökünün (artık 9 çocuk) bölünmesi değerlendirilebilir.
+
+## D-216 — Hayalet görev arşivleme (2026-09-26)
+
+Utku toplu emrindeki 8 `todo` görev (`UTKU-02/04/05`, `ORCH-01..05`) çalıştırılmadan önce kod tabanıyla çapraz kontrol edildi: hepsinin referans verdiği dosya/dizin (`src/api/endpoints.py`, `src/auth/token_refresh.py`, `orchestration/*.py`, `0020_index_optimization.sql`) kodda yok — sablondan sızmış placeholder kayıtlar. `scripts/_hayalet_gorev_arsiv.py` ile `durum=archive`'e taşındı, gerekçe `not` alanına yazıldı. `test_naming_audit.py` (D-57) 9/9 yeşil kaldı. Madde 12 kapandı: gerçek backlog görevi yoktu.

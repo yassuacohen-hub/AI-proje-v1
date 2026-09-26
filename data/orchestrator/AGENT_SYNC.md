@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-26T14:48:08
+> Son guncelleme: 2026-09-26T23:54:53
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -8,14 +8,14 @@
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | iptal |
-| UTKU-02 | [UTKU] API endpoint optimizasyon - respo | utku | P1 | todo |
-| UTKU-04 | [UTKU] Veritabanı migration - index opti | utku | P1 | todo |
-| UTKU-05 | [UTKU] Kullanıcı kimlik doğrulama - toke | utku | P0 | todo |
-| ORCH-01 | [ORCH] İş akışı koordinasyon - görev pla | ihsan | P0 | todo |
-| ORCH-02 | [ORCH] Bağımlılık yönetimi - görüntü gra | ihsan | P1 | todo |
-| ORCH-03 | [ORCH] Görev dağıtımı - load balancing ( | ihsan | P0 | todo |
-| ORCH-04 | [ORCH] Hata toleransı - retry mekanizmas | ihsan | P1 | todo |
-| ORCH-05 | [ORCH] İzleme ve metrikler - telemetri s | ihsan | P0 | todo |
+| UTKU-02 | [UTKU] API endpoint optimizasyon - respo | utku | P1 | archive |
+| UTKU-04 | [UTKU] Veritabanı migration - index opti | utku | P1 | archive |
+| UTKU-05 | [UTKU] Kullanıcı kimlik doğrulama - toke | utku | P0 | archive |
+| ORCH-01 | [ORCH] İş akışı koordinasyon - görev pla | ihsan | P0 | archive |
+| ORCH-02 | [ORCH] Bağımlılık yönetimi - görüntü gra | ihsan | P1 | archive |
+| ORCH-03 | [ORCH] Görev dağıtımı - load balancing ( | ihsan | P0 | archive |
+| ORCH-04 | [ORCH] Hata toleransı - retry mekanizmas | ihsan | P1 | archive |
+| ORCH-05 | [ORCH] İzleme ve metrikler - telemetri s | ihsan | P0 | archive |
 
 ## Tamamlananlar (Son 10)
 
