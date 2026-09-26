@@ -21,7 +21,7 @@ from typing import Any
 import uvicorn
 from fastapi import Depends, FastAPI, Header, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, HTMLResponse, Response, StreamingResponse
+from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text
 
@@ -38,6 +38,13 @@ from company_master.intelligence.job_intelligence.api.router import (
     router as job_intelligence_router,
 )
 from company_master.orchestrator import task_board as tb  # noqa: E402
+from company_master.core.error_handling import (  # noqa: E402
+    get_logger as _get_app_logger,
+    handle_exception as _handle_exception,
+    log_exception as _log_exception,
+    mask_sensitive as _mask_sensitive,
+    setup_logging as _setup_app_logging,
+)
 from scripts.apify_webhook_receiver import ApifyWebhookReceiver  # noqa: E402
 from src.company_master.admin.caching import admin_cache
 
@@ -116,6 +123,31 @@ _TR_INSENSITIVE_CLS = {
 # Dashboard performance counters
 
 app = FastAPI(title="Company Master Dashboard API", version="1.0")
+
+# UTKU-03: Merkezi structured JSON logging (stdout + rotating file).
+# Production'da stdout JSON -> Datadog/ELK aggregator'e akitilir.
+_setup_app_logging()
+logger = _get_app_logger("web_app")
+
+
+@app.exception_handler(Exception)
+async def _unhandled_exception_handler(request: Request, exc: Exception) -> JSONResponse:
+    """UTKU-03: Global exception handler - hicbir hatayi sessizce yutmaz."""
+    _log_exception(
+        logger,
+        exc,
+        context={
+            "path": request.url.path,
+            "method": request.method,
+            "client": request.client.host if request.client else None,
+        },
+    )
+    return JSONResponse(
+        status_code=500,
+        content={"detail": "Internal server error", "path": request.url.path},
+    )
+
+
 if OTEL_AVAILABLE:
     # Set up tracer provider
     trace.set_tracer_provider(TracerProvider())
@@ -351,6 +383,15 @@ app.add_middleware(
     allow_headers=["*"],
     allow_credentials=True,
 )
+
+# UTKU-03: Request-scoped context enrichment (request_id / trace_id / user_id).
+# Yanit basligina X-Request-ID eklenir; her log satiri bu context ile zenginlesir.
+try:
+    from company_master.core.error_handling import LoggingMiddleware as _LoggingMiddleware
+
+    app.add_middleware(_LoggingMiddleware)
+except ImportError:  # FastAPI/Starlette yoksa middleware atlanir
+    logger.warning("LoggingMiddleware yuklenemedi — request context logging kapali")
 
 WEB_DIR = ROOT / "web_dashboard"
 WEB_DIR.mkdir(parents=True, exist_ok=True)
