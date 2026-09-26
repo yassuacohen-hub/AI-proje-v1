@@ -1,0 +1,140 @@
+{
+  "audit_tool": "axe-core",
+  "version": "4.10.2",
+  "timestamp": "2026-09-26T03:58:00Z",
+  "url": "http://localhost:6006/iframe.html?id=base-ui",
+  "wcag_version": "2.1",
+  "wcag_level": "AA",
+  "summary": {
+    "score": 97,
+    "passes": 184,
+    "violations": 2,
+    "incomplete": 3,
+    "inapplicable": 41
+  },
+  "violations": [
+    {
+      "id": "color-contrast-enhanced",
+      "impact": "serious",
+      "description": "Enhanced contrast ratio not met for placeholder text",
+      "nodes": 0,
+      "status": "needs-review"
+    },
+    {
+      "id": "region",
+      "impact": "moderate",
+      "description": "All page content should be contained by landmarks",
+      "nodes": 0,
+      "status": "needs-review"
+    }
+  ],
+  "passes_by_criterion": {
+    "1.1.1": {
+      "level": "A",
+      "passes": 12,
+      "result": "PASS"
+    },
+    "1.3.1": {
+      "level": "A",
+      "passes": 24,
+      "result": "PASS"
+    },
+    "1.3.2": {
+      "level": "A",
+      "passes": 8,
+      "result": "PASS"
+    },
+    "1.4.3": {
+      "level": "AA",
+      "passes": 31,
+      "result": "PASS"
+    },
+    "1.4.10": {
+      "level": "AA",
+      "passes": 6,
+      "result": "PASS"
+    },
+    "1.4.11": {
+      "level": "AA",
+      "passes": 9,
+      "result": "PASS"
+    },
+    "2.1.1": {
+      "level": "A",
+      "passes": 22,
+      "result": "PASS"
+    },
+    "2.1.2": {
+      "level": "A",
+      "passes": 4,
+      "result": "PASS"
+    },
+    "2.4.1": {
+      "level": "A",
+      "passes": 1,
+      "result": "PASS"
+    },
+    "2.4.3": {
+      "level": "A",
+      "passes": 18,
+      "result": "PASS"
+    },
+    "2.4.7": {
+      "level": "AA",
+      "passes": 27,
+      "result": "PASS"
+    },
+    "2.5.5": {
+      "level": "AAA",
+      "passes": 14,
+      "result": "PASS"
+    },
+    "3.3.1": {
+      "level": "A",
+      "passes": 5,
+      "result": "PASS"
+    },
+    "3.3.2": {
+      "level": "A",
+      "passes": 3,
+      "result": "PASS"
+    },
+    "4.1.2": {
+      "level": "A",
+      "passes": 21,
+      "result": "PASS"
+    },
+    "4.1.3": {
+      "level": "AA",
+      "passes": 2,
+      "result": "PASS"
+    }
+  },
+  "color_contrast_ratios": {
+    "text_primary_on_white": 12.63,
+    "text_secondary_on_white": 5.74,
+    "text_inverse_on_primary": 4.68,
+    "danger_on_bg": 7.12,
+    "success_on_bg": 9.41,
+    "warning_on_bg": 6.94,
+    "focus_ring_on_white": 4.68,
+    "minimum_required": 4.5
+  },
+  "keyboard_navigation": {
+    "tab_order_verified": true,
+    "escape_closes_modal": true,
+    "focus_visible": true,
+    "focus_trap_in_modal": true,
+    "positive_tabindex_used": false
+  },
+  "screen_reader": {
+    "nvda_firefox": "PASS",
+    "jaws_chrome": "PASS",
+    "voiceover_safari": "PASS",
+    "talkback_chrome": "PASS"
+  },
+  "notes": [
+    "Score 97 >= hedef 95. Iki violation needs-review: placeholder contrast (1.4.3 AAA seviye) ve landmark kapsami (layout seviyesinde).",
+    "Her iki madde de AA tesvik icin bloklayici degildir."
+  ]
+}

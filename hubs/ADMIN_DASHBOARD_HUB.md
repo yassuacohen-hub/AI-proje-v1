@@ -98,6 +98,11 @@ SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_
 | UI-ADMIN-KVKK-MODU-26 | KVKK Mode sekmesi: render_kvkk_mode_tab, strict/lenient toggle, API POST, testler | 2026-09-25 |
 | UI-ADMIN-KVKK-RAPOR-28 | KVKK Raporu sekmesi: render_kvkk_rapor_tab, admin_kvkk_mode, KPI, trend, testler | 2026-09-25 |
 | DOC-VISIBILITY-KATMANI-29 | Visibility katmani dokumani: VISIBILITY_LAYER_GUIDE.md, Layer 1/2, modul kontor, karantina | 2026-09-25 |
+| YASU-01 | React 18+ TypeScript Frontend Bileşen Kütüphanesi (base_ui.tsx): Button, Input, TextArea, Select, Card, Badge, Avatar, Modal (8 bileşen), TypeScript tipli, ARIA destekli, barrel export + Storybook config | 2026-09-26 |
+| YASU-04 | Redux Toolkit store: redux_store.ts + 5 reducer (authSlice, uiSlice, dataSlice, settingsSlice, notificationsSlice), DevTools entegrasyonu | 2026-09-26 |
+| YASU-02 | Responsive CSS: 4 breakpoint (320/768/1024/1280px), mobile-first, Grid/Flexbox, touch-friendly (min 44px), reduced-motion + dark mode | 2026-09-26 |
+| YASU-03 | Dashboard görselleştirme: 6 grafik türü (Bar, Line, Area, Pie, Radar, Scatter) Recharts ile, responsive grid layout | 2026-09-26 |
+| YASU-05 | WCAG 2.1 AA uyumu: wcag_compliance.md (16 kriter), audit_report.json (skor 97), 11/11 erişilebilirlik testi, Modal Escape+focus trap+aria-modal | 2026-09-26 |
 | DOKUMAN-KVKK-FAQ-33 | KVKK FAQ dokumani: docs/KVKK_FAQ.md, 7 SSS + 3 troubleshooting + 3 kod ornegi | 2026-09-25 |
 | UI-ADMIN-FEATURE-FLAG-25 | Feature Flag sekmesi: render_feature_flags_tab, 4 flag, audit trail, testler | 2026-09-25 |
 | COP-26 | MUSTERILER ekrani: firma listesi + filtre + bildirim blogu | 2026-09-24 |
