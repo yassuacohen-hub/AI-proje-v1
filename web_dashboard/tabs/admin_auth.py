@@ -125,6 +125,15 @@ def render_admin_login() -> None:
             else:
                 st.error("Giriş başarısız: e-posta/şifre kontrol ediniz.")
         except APIError as exc:
+            # LOGIN-TESHIS-01: API kapalıyken "şifre yanlış" demek yanıltıcıydı.
+            if "baglanilamadi" in str(exc) or "zaman asimina" in str(exc):
+                st.error("Giriş yapılamadı: **API sunucusu çalışmıyor** (port 8000).")
+                st.caption(
+                    "Çözüm: `uvicorn web_app:app --port 8000` ya da `docker compose up -d api` "
+                    "ile backend'i başlatın."
+                )
+                render_sifre_unuttum()
+                return
             # SEC-AUTH-01 Y-2: sunucu detayı (var/yok sızması) UI'a yansıtılmaz.
             st.error("Giriş başarısız: e-posta/şifre kontrol ediniz.")
             if "401" in str(exc):
