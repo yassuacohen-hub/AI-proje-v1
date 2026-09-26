@@ -6,3 +6,5 @@
   Network URL: http://10.2.0.2:8501
   External URL: http://130.195.216.94:8501
 
+api_cagir: Kullanýcý Yönetimi -> APIError: API HTTP 403 hatasý: Yonetici erisimi gerekli
+api_cagir: Kullanýcý Yönetimi -> APIError: API HTTP 403 hatasý: Yonetici erisimi gerekli

@@ -1,3 +1,12 @@
+Uretim oncesi `docs/brand/ai-rules.md` (AI Brand Rules) okunur; pozisyonlama: Startup Intelligence Platform, ASLA OSINT Tool.
+
+Bu dosya, logo varyasyonlarinin uretilecegi `assets/` klasorunun prompt kaynagidir.
+Kurumsal kimligin metin kaynagi: `docs/brand/brand.md`; tasarim token'lari: `docs/brand/design-tokens.json`.
+Uretilecek tum varyasyonlar ayni marka kimligini korumak zorundadir
+
+bu pormtp alternatif logoyu içerir
+
+
 Create a premium logo icon for an AI and data intelligence platform called Muninn.
 
 IMPORTANT:

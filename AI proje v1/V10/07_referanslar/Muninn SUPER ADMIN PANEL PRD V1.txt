@@ -1,0 +1,792 @@
+# Muninn Data Analysis
+
+SUPER ADMIN PANEL PRD Versiyon: 1.0
+
+---
+
+# 1. AMAÇ
+
+Bu panel yalnızca platform yöneticileri tarafından kullanılacaktır.
+
+Amaç yalnızca CRUD işlemleri yapmak değil;
+
+- Müşteri operasyonlarını yönetmek
+- Platform sağlığını izlemek
+- Geliri takip etmek
+- Veri kalitesini yönetmek
+- Yapay zeka maliyetlerini izlemek
+- Veri toplama süreçlerini yönetmek
+- Güvenlik olaylarını takip etmek
+- Churn risklerini tespit etmek
+- Ürün kullanımını analiz etmek
+
+olmalıdır.
+
+Panel SaaS işletmesinin operasyon merkezi olarak çalışacaktır.
+
+---
+
+# 2. TEKNOLOJİ STANDARTLARI
+
+## Frontend
+
+- Streamlit
+- Streamlit Multipage
+- Plotly
+- AgGrid
+
+## Backend
+
+- FastAPI
+- PostgreSQL
+- Redis
+
+## Arkaplan İşleri
+
+- Celery
+- Redis Queue
+
+## Monitoring
+
+- Prometheus
+- Grafana
+
+## Loglama
+
+- Loguru
+- PostgreSQL Audit Logs
+
+---
+
+# 3. PANEL MİMARİSİ
+
+```text
+📊 Dashboard
+
+🏢 Müşteri Yönetimi
+    Tenantlar
+    Kullanıcılar
+    Roller
+
+💳 Abonelik Yönetimi
+    Paketler
+    Faturalar
+    Ödemeler
+
+📈 Kullanım Analitiği
+    Aramalar
+    AI Kullanımı
+    API Kullanımı
+    Exportlar
+
+🔍 Veri Operasyonları
+    Veri Kaynakları
+    Veri Kalitesi
+    Crawl Yönetimi
+    Veri Güncelliği
+
+🤖 AI Operasyonları
+    Prompt Analizi
+    Token Takibi
+    Maliyet İzleme
+    Model Kullanımı
+
+🚨 Sistem İzleme
+    Hata Yönetimi
+    Queue Takibi
+    Performans
+
+🛡 Güvenlik
+    Audit Logs
+    Yetkilendirme
+    MFA
+
+⚙ Ayarlar
+```
+
+---
+
+# 4. DASHBOARD
+
+## KPI Kartları
+
+Gösterilecek metrikler:
+
+- Toplam Tenant
+- Aktif Tenant
+- Trial Tenant
+- Pasif Tenant
+- Toplam Kullanıcı
+- Günlük Aktif Kullanıcı
+- Aylık Aktif Kullanıcı
+- Toplam Arama Sayısı
+- Toplam AI Sorgu Sayısı
+- API Çağrıları
+- Aylık Gelir (MRR)
+- Yıllık Gelir (ARR)
+
+---
+
+## Tenant Büyümesi
+
+Grafikler:
+
+- Günlük
+- Haftalık
+- Aylık
+
+---
+
+## Gelir Analizi
+
+Grafikler:
+
+- MRR Trend
+- ARR Trend
+- Churn Trend
+
+---
+
+## Kullanım Analizi
+
+Grafikler:
+
+- Search Kullanımı
+- AI Kullanımı
+- Export Kullanımı
+- API Kullanımı
+
+---
+
+## Veri Kalitesi Özeti
+
+Gösterilecek:
+
+- Eksik Telefon Sayısı
+- Eksik Website Sayısı
+- Eksik Email Sayısı
+- Eksik Sektör Bilgisi
+- Veri Tamamlanma Oranı
+
+---
+
+# 5. TENANT YÖNETİMİ
+
+## Tenant Listesi
+
+Alanlar:
+
+- Tenant ID
+- Firma Adı
+- Plan
+- Kullanıcı Sayısı
+- Durum
+- Kayıt Tarihi
+- Son Aktivite
+
+Filtreler:
+
+- Plan
+- Durum
+- Ülke
+- Tarih
+
+---
+
+## Tenant Detayı
+
+### Firma Bilgileri
+
+- Firma Adı
+- Domain
+- Logo
+- Sektör
+- Ülke
+- Vergi No
+
+### Paket Bilgileri
+
+- Aktif Plan
+- Başlangıç Tarihi
+- Bitiş Tarihi
+
+### Kullanım Bilgileri
+
+- Search Kredisi
+- AI Kredisi
+- Export Kredisi
+- API Kredisi
+
+---
+
+## Tenant İşlemleri
+
+- Tenant Aktifleştir
+- Tenant Pasifleştir
+- Tenant Askıya Al
+- Plan Yükselt
+- Plan Düşür
+- Kredi Tanımla
+- Tenant Sil
+
+---
+
+# 6. KULLANICI YÖNETİMİ
+
+## Kullanıcı Listesi
+
+Alanlar:
+
+- Kullanıcı Adı
+- Email
+- Tenant
+- Rol
+- Son Giriş
+- Durum
+
+---
+
+## Kullanıcı Detayı
+
+Gösterilecek:
+
+- Oturum Geçmişi
+- İşlem Geçmişi
+- Kullanım İstatistikleri
+- Cihaz Bilgileri
+
+---
+
+## İşlemler
+
+- Kullanıcı Pasifleştir
+- Şifre Sıfırla
+- Force Logout
+- Rol Değiştir
+
+---
+
+# 7. ABONELİK YÖNETİMİ
+
+## Planlar
+
+### Starter
+
+Özelleştirilebilir:
+
+- Kullanıcı Limiti
+- Search Limiti
+- AI Limiti
+- Export Limiti
+
+### Growth
+
+- Daha yüksek limitler
+
+### Enterprise
+
+- Özel limitler
+
+---
+
+## İşlemler
+
+- Plan Oluştur
+- Plan Güncelle
+- Plan Kopyala
+- Plan Kapat
+
+---
+
+# 8. FATURALAMA
+
+## Finans KPI'ları
+
+- MRR
+- ARR
+- Churn
+- ARPU
+- LTV
+- CAC
+
+---
+
+## Ödemeler
+
+Alanlar:
+
+- Tenant
+- Tutar
+- Para Birimi
+- Plan
+- Ödeme Durumu
+- Tarih
+
+---
+
+## İşlemler
+
+- Fatura Görüntüle
+- İade Yap
+- Ödemeyi Yeniden Dene
+
+---
+
+# 9. KREDİ YÖNETİMİ
+
+## Kredi Türleri
+
+### Search Credit
+
+Şirket aramaları
+
+### AI Credit
+
+Yapay zeka sorguları
+
+### Export Credit
+
+Excel / CSV / PDF
+
+### API Credit
+
+API kullanım hakkı
+
+---
+
+## İşlemler
+
+- Kredi Ekle
+- Kredi Düş
+- Kredi Sıfırla
+- Aylık Yenile
+
+---
+
+# 10. KULLANIM ANALİTİĞİ
+
+## Arama Analitiği
+
+Göster:
+
+- En Çok Aranan Firmalar
+- En Çok Aranan Sektörler
+- En Çok Aranan Şehirler
+- Başarısız Aramalar
+- Trend Aramalar
+
+---
+
+## Kullanıcı Analitiği
+
+Göster:
+
+- En Aktif Tenantlar
+- En Aktif Kullanıcılar
+- Ortalama Oturum Süresi
+- Günlük Aktif Kullanıcı
+
+---
+
+## Churn Analizi
+
+Kurallar:
+
+- 14 gün giriş yok
+- Son 14 gün arama yok
+- Son 14 gün AI kullanımı yok
+
+Skor:
+
+- Düşük Risk
+- Orta Risk
+- Yüksek Risk
+
+---
+
+# 11. AI OPERASYONLARI
+
+## Model Kullanımı
+
+Desteklenecek:
+
+- GPT
+- Claude
+- Gemini
+
+---
+
+## Maliyet Paneli
+
+Göster:
+
+- Günlük Maliyet
+- Haftalık Maliyet
+- Aylık Maliyet
+- Tenant Bazlı Maliyet
+
+---
+
+## Token Analitiği
+
+Göster:
+
+- Input Token
+- Output Token
+- Toplam Token
+
+---
+
+## Prompt Analitiği
+
+Göster:
+
+- En Çok Kullanılan Promptlar
+- Başarısız Promptlar
+- Ortalama Yanıt Süresi
+
+---
+
+# 12. VERİ OPERASYONLARI
+
+Bu modül platformun en kritik modülüdür.
+
+Amaç veri sağlığını korumaktır.
+
+---
+
+## Veri Kaynağı Takibi
+
+Kaynaklar:
+
+- MERSİS
+- Ticaret Sicili
+- Haber Kaynakları
+- Kurumsal Veri Kaynakları
+- Web Crawlers
+
+---
+
+## Veri Kaynağı Sağlığı
+
+Durumlar:
+
+- Sağlıklı
+- Uyarı
+- Hata
+
+---
+
+## Crawl Yönetimi
+
+Göster:
+
+- Aktif Crawl
+- Başarılı Crawl
+- Başarısız Crawl
+- Son Çalışma Tarihi
+
+---
+
+## Veri Güncelliği
+
+Göster:
+
+- 1 Gün İçinde Güncellenenler
+- 7 Gün İçinde
+- 30 Gün İçinde
+- 90 Günden Eski Veriler
+
+---
+
+# 13. VERİ KALİTESİ MERKEZİ
+
+Göster:
+
+- Eksik Telefon
+- Eksik Email
+- Eksik Domain
+- Eksik Website
+- Eksik Sektör
+- Eksik LinkedIn
+- Eksik NACE
+
+---
+
+## Kalite Skoru
+
+Her şirket için:
+
+0-100
+
+Kalite skoru hesaplanmalıdır.
+
+---
+
+# 14. API YÖNETİMİ
+
+## API Anahtarları
+
+Göster:
+
+- Tenant
+- API Key
+- Son Kullanım
+- Durum
+
+---
+
+## API Analitiği
+
+Göster:
+
+- Request Sayısı
+- Hata Sayısı
+- Ortalama Yanıt Süresi
+
+---
+
+## Limit Yönetimi
+
+Tenant bazında:
+
+- Dakikalık Limit
+- Saatlik Limit
+- Günlük Limit
+
+---
+
+# 15. DESTEK MERKEZİ
+
+## Ticket Yönetimi
+
+Durumlar:
+
+- Open
+- Pending
+- Closed
+
+Öncelikler:
+
+- Low
+- Medium
+- High
+- Critical
+
+---
+
+## İşlemler
+
+- Ata
+- Kapat
+- Eskale Et
+
+---
+
+# 16. GÜVENLİK
+
+## Güvenlik Dashboardu
+
+Göster:
+
+- Başarılı Girişler
+- Başarısız Girişler
+- Şüpheli Aktiviteler
+- Kilitli Hesaplar
+
+---
+
+## MFA Yönetimi
+
+İşlemler:
+
+- MFA Zorunlu Kıl
+- MFA Kaldır
+
+---
+
+## Yetki Yönetimi
+
+Roller:
+
+- Super Admin
+- Operations Admin
+- Billing Admin
+- Security Admin
+- Support Admin
+- Readonly
+
+---
+
+# 17. AUDIT LOG
+
+Her işlem kayıt altına alınmalıdır.
+
+Alanlar:
+
+- Kullanıcı
+- Tenant
+- İşlem
+- Eski Veri
+- Yeni Veri
+- Tarih
+- IP Adresi
+
+---
+
+# 18. SİSTEM İZLEME
+
+## Performans
+
+Göster:
+
+- CPU
+- RAM
+- Disk
+- Database
+
+---
+
+## Uygulama Sağlığı
+
+Göster:
+
+- Error Rate
+- Response Time
+- Request Count
+
+---
+
+## Queue Takibi
+
+Göster:
+
+- Bekleyen İşler
+- Çalışan İşler
+- Hatalı İşler
+
+---
+
+# 19. FEATURE FLAGS
+
+Tenant bazlı özellik açma kapatma.
+
+Özellikler:
+
+- AI Assistant
+- Excel Export
+- PDF Export
+- API Access
+- CRM Integration
+- Competitor Tracking
+
+---
+
+# 20. AYARLAR
+
+## Genel
+
+- Platform Adı
+- Logo
+- SMTP
+- Domain
+
+---
+
+## AI Ayarları
+
+- Varsayılan Model
+- Token Limiti
+- Rate Limit
+
+---
+
+## Finans Ayarları
+
+- Para Birimi
+- KDV Oranı
+- Trial Süresi
+
+---
+
+# STREAMLIT ÖZEL KURALLARI
+
+## Kullanılacak Bileşenler
+
+Tablo:
+- AgGrid
+
+Grafikler:
+- Plotly
+
+Formlar:
+- Streamlit Forms
+
+Bildirimler:
+- st.toast()
+
+Durum Gösterimleri:
+- st.metric()
+- st.status()
+
+---
+
+## Performans Kuralları
+
+Zorunlu:
+
+- st.cache_data
+- st.cache_resource
+- Lazy Loading
+- Server Side Pagination
+
+---
+
+## Yasaklar
+
+- Büyük dataframe'leri direkt yükleme
+- Senkron crawl işlemleri
+- Uzun süren AI işlemlerini Streamlit içinde çalıştırma
+
+Bu işlemler Celery Worker üzerinden yönetilmelidir.
+
+---
+
+# FAZ 2 ÖZELLİKLERİ
+
+- Churn Prediction
+- Upsell Prediction
+- AI Cost Optimizer
+- Tenant Health Score
+- Executive Dashboard
+- Cohort Analysis
+- Revenue Forecasting
+- Anomali Tespiti
+- Kullanıcı Davranış Analizi
+
+---
+
+# GELİŞTİRME ÖNCELİĞİ
+
+P0
+- Dashboard
+- Tenant Yönetimi
+- Kullanıcı Yönetimi
+- Kullanım Analitiği
+
+P1
+- AI Operasyonları
+- Veri Operasyonları
+- Güvenlik
+- Audit Log
+
+P2
+- Faturalama
+- API Yönetimi
+- Destek Merkezi
+- Feature Flags
+
+P3
+- Tahminleme Modelleri
+- Gelişmiş Analitikler
+- Executive Dashboard
