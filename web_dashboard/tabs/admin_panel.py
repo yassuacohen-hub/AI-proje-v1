@@ -506,9 +506,11 @@ def render_chat_summary() -> None:
     # ---- Metrikler ----
     Section("Sorun Durumu Özeti", "Açık, çözüm bekleniyor ve çözüldü sayıları.", ikon="📊").render()
 
-    acik = ozet("acik")
-    cokundurmus = ozet("cokundurmus")
-    cozuldu = ozet("cozuldu")
+    # K3-10h madde 6: tek dosya okuma, 4 ayrı oku()/ozet() I/O yerine bellekte filtrele
+    tum_sorunlar = oku()
+    acik = [s for s in tum_sorunlar if s.get("durum") == "acik"]
+    cokundurmus = [s for s in tum_sorunlar if s.get("durum") == "cokundurmus"]
+    cozuldu = [s for s in tum_sorunlar if s.get("durum") == "cozuldu"]
 
     col1, col2, col3 = st.columns(3)
     with col1:
@@ -555,7 +557,6 @@ def render_chat_summary() -> None:
     # ---- Tüm Sorunlar (Tablo) ----
     Section("Tüm Sorunlar (Tablo Görünümü)", "Filtrelenebilir sorun listesi.", ikon="📋").render()
 
-    tum_sorunlar = oku()
     if tum_sorunlar:
         rows = []
         for s in sorted(tum_sorunlar, key=lambda x: x.get("timestamp", ""), reverse=True):
@@ -770,6 +771,7 @@ _PANO_DURUM_BOLUM: dict[str, str] = {
 }
 
 
+@st.cache_data(ttl=30)
 def _gorev_panou_yukle() -> list[dict]:
     """Görev panosunu data/orchestrator/task_board.json'dan yükler."""
     panoyol = _KOK / "data" / "orchestrator" / "task_board.json"

@@ -37,15 +37,19 @@
 - Bu kalıcı hafıza dosyası (`ihsan_project_context.md`) düzeltildi: yanlış rehber-kusur notu kaldırıldı, madde 4 tamamlandı olarak işaretlendi, pytest-çalıştırılmadı notu güncellendi.
 
 **Son bırakılan iş:**
-- Bu oturumda hâlâ hiç commit/push yapılmadı — en öncelikli açık iş.
-- Madde 6 (sayfa yükleme/cache hızı) başlanmadı.
-- `assets/huginn_logo.png` yok (madde 7, owner'dan beklenen, engellendi).
-- Agent-browser ile 8501/8502 görsel doğrulama yapılmadı (yeni kalın container border'ları gözle teyit edilebilir).
-- Ajan görev teslim kabulü, yeni görev planlama, genel temizlik (22 ön-mevcut test hatası) — başlanmadı.
+- Madde 7 hâlâ blokta (logo dosyası owner'dan bekleniyor) — dokunulmadı.
+- Genel temizlik (22 ön-mevcut test hatası, madde 12) — başlanmadı.
 
 **Sıradaki adım:**
-1. Commit + push: `styles.py`, `tests/test_ui_modal_stil.py`, `ihsan_project_context.md` — mesajda K3-10h madde 4 (container border) + context düzeltmesi açıkça yazılsın.
-2. Agent-browser ile 8501/8502'de yeni container border'ları görsel doğrula.
-3. Madde 6 (perf/cache) veya madde 12 (genel temizlik, 22 hata) öncelik sırasına göre devam et.
-4. Ajan görev teslimlerini kabul kriterine karşı doğrula, yeni öncelikli görevleri planla.
-5. Her aşama sonunda bu dosyayı güncelle.
+1. Madde 12 (genel temizlik, 22 ön-mevcut hata) önceliklendirilip başlanabilir, veya yeni görev planlamasına geçilebilir.
+2. Ajan görev teslimlerini kabul kriterine karşı periyodik doğrulamaya devam et.
+3. Her aşama sonunda bu dosyayı güncelle.
+
+### 2026-09-26 (devam — madde 6)
+**Yapılanlar:**
+- Backlog kontrolü tamamlandı: `task_board.json` ↔ `onay_kuyrugu.json` senkron doğrulandı; 18 bekliyor kayıt çözümlendi (17 onay, 1 red).
+- **K3-10h madde 6 (sayfa yükleme/cache hızı) tamamlandı** — iki somut fix, `admin_panel.py`:
+  1. `_gorev_panou_yukle()` her Streamlit rerun'da `task_board.json`'ı diskten okuyordu, cache yoktu → `@st.cache_data(ttl=30)` eklendi.
+  2. `render_chat_summary()` aynı `ajan-chat.jsonl` dosyasını tek render'da 4 kez okuyordu (3x `ozet()` + 1x `oku()`, `ozet()` içeride `oku()`'yu tekrar çağırıyor) → tek `oku()` çağrısı + bellekte 3 liste comprehension filtreye indirgendi, ikinci `oku()` çağrısı silinip aynı `tum_sorunlar` değişkeni tekrar kullanıldı.
+- Doğrulama: `pytest tests/test_sekme_kapsama.py tests/test_charts.py -q` → 1 failed (`render_task_board_tab` reachability, ön-mevcut/ilgisiz), 127 passed, 2 skipped — fix'ler öncesi/sonrası aynı tek hata, regresyon yok.
+- `render_task_board_tab` öksüz-sekme kusuru madde 12 (22 ön-mevcut hata) kapsamına devredildi, kasıtlı dokunulmadı.
