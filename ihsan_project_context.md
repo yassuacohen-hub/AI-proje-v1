@@ -131,3 +131,17 @@ KAHİN onayı: *"onaylıyorum kvkk birleştir zaten en faydalı konu buydu"*. PR
 - `musteri_onizleme` grubunun "Gelir" adlandırması gözden geçirilecek.
 - Temizlik: `tests/_tmp_onem_test/` + `_test_groq_chat_live.py` → `.gitignore`.
 - Backlog: 22 ön-mevcut test hatası (madde 24, D-214 kapsamının dışında).
+
+## D-215 — Gelir Kapısı + Güvenlik Kapısı (2026-09-26, devam)
+
+D-214'ün "bekleyen" listesindeki iki karar KAHİN onayıyla uygulandı: Güvenlik çatısı ve "Gelir" adlandırması.
+
+**Yapılanlar:**
+1. **Güvenlik Kapısı (yeni 7. kök)** — `denetim` (`proje_yonetimi` çocuğu) kök seviyesine çıktı, başlığı "Güvenlik Kapısı". `kvkk_mode` ve `mfa` bu kökün çocuğu oldu (eski konumları sırasıyla `proje_yonetimi` ve `sistem`). Kök tavanı 6→7 (`test_tabs_ia.py::test_ust_sayfa_sayisi`, `test_dashboard_nav.py::test_ust_sayfalar_admin_7`).
+2. **`paket_kredi` taşıması** — `admin_extras.render_user_management`'taki kredi formu (ikiz riski, D-211) silindi; kanonik yer `musteri_yonetimi.render_paket_kredi_tab` (yeni `TabTanimi`, `ust=musteri_onizleme`, "Gelir" grubu). Testler `test_admin_extras_kullanici.py` → `test_musteri_yonetimi.py`'ye taşındı.
+3. **Maliyet → Metrikler** — `admin_cost.render_cost_tab` `musteri_onizleme`'den `veri_kalite`'ye taşındı (ölçüm sayfası gelir kökünde durmamalı).
+4. **Bozuk docstring düzeltmesi** — `test_tabs_ia.py::test_ust_sayfa_sayisi` içindeki mojibake docstring (önceki oturumdan kalma bozuk Türkçe metin) düzeltildi.
+
+**Doğrulama:** `pytest tests/test_tabs_ia.py tests/test_dashboard_nav.py tests/test_musteri_yonetimi.py tests/test_admin_extras_kullanici.py tests/test_sekme_kapsama.py -q` → **211 passed, 3 skipped**. Tam suite: **21 failed, 4259 passed, 12 skipped** (D-214'teki 22 backlog'dan 1 azaldı, yeni regresyon yok).
+
+**Bekleyen:** Faz 3 vektör grafik taşıması; tanıtım cümleleri sistemi (madde 11); 21 ön-mevcut test hatası backlog'u (madde 12); `sistem` kökünün (artık 9 çocuk) bölünmesi değerlendirilebilir.

@@ -273,13 +273,13 @@ def test_mig_sistem_bolumleri_muninn_kalir() -> None:
 # --------------------------------------------------------------------------- #
 
 
-def test_ust_sayfalar_admin_6():
-    """NAV-IA-01: admin 6 üst sayfayı görür."""
+def test_ust_sayfalar_admin_7():
+    """NAV-IA-01: admin 7 üst sayfayı görür (D-215: denetim → Güvenlik Kapısı kök oldu)."""
     ust = ust_sayfalar(ROL_ADMIN)
-    assert len(ust) == 6
+    assert len(ust) == 7
     assert set(ust.keys()) == {
         "ana_kontrol", "musteri_yonetimi", "proje_yonetimi",
-        "veri_kalite", "sistem", "musteri_onizleme",
+        "veri_kalite", "sistem", "musteri_onizleme", "denetim",
     }
 
 
@@ -357,7 +357,7 @@ def test_alt_sekmeler_sira_sirali():
     siralar = [t.sira for t in alt]
     assert siralar == sorted(siralar)
     assert [t.anahtar for t in alt] == [
-        "karar_defteri", "denetim", "abrakadabra", "kvkk_mode",
+        "karar_defteri", "abrakadabra",
         "ajan_sohbet", "gorev_panosu", "rapor_listesi",
     ]
 

@@ -207,7 +207,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="9Router tabanlı AI sohbet ve analiz asistanı",
         url_path="abrakadabra",
-        ust="proje_yonetimi", sira=2,
+        ust="proje_yonetimi", sira=1,  # D-215: denetim/kvkk_mode çıktı, yeniden sıralandı
         modul="web_dashboard.tabs.abrakadabra",
         fonksiyon="render_abrakadabra_tab",
         min_rol="admin",
@@ -284,7 +284,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="D-192: Ajan sorun takibi — açık/çözündürülmüş/çözüldü metrikler ve son sorunlar",
         url_path="ajan-sohbet",
-        ust="proje_yonetimi", sira=4,
+        ust="proje_yonetimi", sira=2,  # D-215
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_chat_summary",
         min_rol="admin",
@@ -297,7 +297,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="ALTYAPI-ADMIN-PANO-01: Ajan görevlerinin 4 bölümlü panosu",
         url_path="gorev-panosu",
-        ust="proje_yonetimi", sira=5,
+        ust="proje_yonetimi", sira=3,  # D-215
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_task_board_tab",
         min_rol="admin",
@@ -311,7 +311,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="MIMIR architect raporları — otomatik oluşturuldu, tüm agentle açık",
         url_path="rapor-listesi",
-        ust="proje_yonetimi", sira=6,
+        ust="proje_yonetimi", sira=4,  # D-215
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_rapor_listesi_tab",
     ),
@@ -359,7 +359,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_GELIR,
         aciklama="AI ve sistem maliyeti analizi",
         url_path="maliyet",
-        ust="musteri_onizleme", sira=2,
+        ust="veri_kalite", sira=4,  # D-215: Metrikler'e taşındı (ölçüm sorumluluğu)
         modul="web_dashboard.tabs.admin_cost",
         fonksiyon="render_cost_tab",
         min_rol="analyst",
@@ -433,7 +433,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Performans, maliyet, webhook, DLQ ve denetim izi",
         url_path="sistem",
-        sira=5,  # NAV-AGAC-01: kök sıralaması
+        sira=6,  # NAV-AGAC-01: kök sıralaması (D-215: mfa Güvenlik Kapısı'na taşındı)
         modul="web_dashboard.tabs.admin_sistem",
         fonksiyon="render_sistem_tab",
         min_rol="analyst",
@@ -450,14 +450,15 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_admin_realtime_tab",
         min_rol="analyst",
     ),
+    # D-215: Proje'den kök seviyesine yükseltildi — "Güvenlik Kapısı" (erişim/uyum kapısı).
     TabTanimi(
         anahtar="denetim",
-        baslik=t("menu_m_denetim"),
+        baslik="Güvenlik Kapısı",
         ikon="🧾",
         grup=GRUP_SISTEM,
-        aciklama="Dosya kilitleri, handoff geçişleri ve tetikleyici günlüğü (DASH-08)",
+        aciklama="Denetim izi, KVKK modu ve MFA yönetimi — erişim ve uyum kontrolleri",
         url_path="denetim",
-        ust="proje_yonetimi", sira=1,
+        sira=5,  # NAV-AGAC-01: kök sıralaması (D-215)
         modul="web_dashboard.tabs.admin_audit",
         fonksiyon="render_audit_tab",
         min_rol="admin",
@@ -470,7 +471,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="KVKK strict/lenient mode toggle, gecmis ve trend analizi",
         url_path="kvkk-mode",
-        ust="proje_yonetimi", sira=3,
+        ust="denetim", sira=0,  # D-215: Güvenlik Kapısı'na taşındı
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_kvkk_mode_tab",
         min_rol="admin",
@@ -516,6 +517,19 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_ltv_cac_tab",
         min_rol="admin",
     ),
+    # D-215: Müşteriler'den Gelir Kapısı'na taşındı (para/katalog sorumluluğu).
+    TabTanimi(
+        anahtar="paket_kredi",
+        baslik="Paket & Kredi",
+        ikon="📦",
+        grup=GRUP_GELIR,
+        aciklama="Kredi yükleme, paket kategorileri ve tier yönetimi",
+        url_path="paket-kredi",
+        ust="musteri_onizleme", sira=2,
+        modul="web_dashboard.tabs.musteri_yonetimi",
+        fonksiyon="render_paket_kredi_tab",
+        min_rol="admin",
+    ),
     # UI-ADMIN-MFA-26: MFA Yönetim Sekmesi
     # NAV-AGAC-01: Sistem altında da görünür; hesap kartı popover'ı kısayol olarak kalır.
     TabTanimi(
@@ -525,7 +539,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Çok faktörlü kimlik doğrulama (TOTP) ayarları",
         url_path="mfa",
-        ust="sistem", sira=8,
+        ust="denetim", sira=1,  # D-215: Güvenlik Kapısı'na taşındı
         modul="web_dashboard.tabs.admin_mfa",
         fonksiyon="render_mfa_tab",
         min_rol="admin",
@@ -538,7 +552,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Görünüm, veri, bildirim ve bölgesel kullanıcı tercihleri (P7-46)",
         url_path="ayarlar",
-        ust="sistem", sira=9,
+        ust="sistem", sira=8,  # D-215: mfa cikinca kaydi
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_ayarlar_tab",
         min_rol="admin",
@@ -551,7 +565,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Loading state örnekleri ve skeleton gosterim (P7-42)",
         url_path="yukleme",
-        ust="sistem", sira=10,
+        ust="sistem", sira=9,  # D-215: mfa cikinca kaydi
         modul="web_dashboard.tabs.admin_loading",
         fonksiyon="render_loading_tab",
         min_rol="admin",

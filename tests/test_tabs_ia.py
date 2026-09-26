@@ -24,7 +24,16 @@ from web_dashboard.tabs import (
 
 
 def test_ust_sayfa_sayisi() -> None:
-    assert len(ust_sayfalar()) <= 6
+    """D-215 ratchet: 7 kök (Gelir Kapısı + Güvenlik Kapısı eklendi).
+
+    Tavan 6'dan 7'ye yükseldi — KAHİN onayıyla (D-214 prensibi: tavan
+    sabit kalırsa yeni dağınıklık test kırar, düşürülürse dosya elle
+    güncellenir)."""
+    assert len(ust_sayfalar()) <= 7
+    # Nav agaci sirasi (D-215):
+    # 0 Ana Kontrol | 1 Gelir Kapısı | 2 Müşteriler | 3 Metrikler
+    # 4 Proje | 5 Güvenlik Kapısı | 6 Sistem
+    assert len(ust_sayfalar()) == 7
 
 
 def test_her_sayfa_menu_agacinda() -> None:

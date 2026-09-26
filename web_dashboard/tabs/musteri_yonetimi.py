@@ -536,3 +536,85 @@ def _dissa_aktar() -> None:
         admin_export.render_export_tab()
     except Exception as exc:
         st.error(f"Dışa aktarım yüklenemedi: {exc}")
+
+
+def render_paket_kredi_tab() -> None:
+    """D-215: Paket & Kredi — Gelir Kapısı alt sekmesi (kanonik).
+    
+    Kredi yükleme, paket kategorileri ve tier yönetimi.
+    admin_extras.py'deki eski kredi formu (lines 122-139) KALDIRILDI —
+    tek kaynak burası.
+    """
+    import pandas as pd
+
+    PageHeader(
+        "Paket & Kredi",
+        "Kredi yükleme, paket kategorileri ve tier yönetimi — gelir/katalog kapısı.",
+        ust_etiket="Gelir Kapısı · Katalog",
+        ikon="📦",
+    ).render()
+    
+    token = st.session_state.get("admin_token")
+    if not token:
+        st.warning("Lütfen giriş yapın")
+        return
+    
+    Section("Kredi Yükleme").render()
+    
+    with st.form("kredi_formu_gelir_kapisi"):
+        col1, col2 = st.columns(2)
+        with col1:
+            kredi_user_id = st.text_input("Kullanıcı ID", placeholder="Örn: 123e4567-e89b-12d3-a456-426614174000")
+        with col2:
+            kredi_miktar = st.number_input("Kredi Miktarı", min_value=1, value=50)
+        if st.form_submit_button("Kredi Yükle", type="primary") and kredi_user_id:
+            try:
+                post_api(
+                    "/api/admin/credit",
+                    json={"user_id": kredi_user_id, "amount": kredi_miktar},
+                    token=token,
+                )
+                st.success(f"{kredi_miktar} kredi yüklendi.")
+                st.cache_data.clear()
+                st.rerun()
+            except Exception as e:
+                st.error(f"Kredi yükleme başarısız: {e}")
+    
+    st.divider()
+    Section("Kategori Yönetimi").render()
+    
+    try:
+        categories = get_api("/api/admin/categories", token=token)
+    except Exception as exc:
+        st.error(f"Kategoriler yüklenemedi: {exc}")
+        return
+    
+    if isinstance(categories, dict):
+        items = categories.get("items", [])
+        if items:
+            st.dataframe(pd.DataFrame(items), width="stretch", hide_index=True)
+        else:
+            st.info("Kategori kaydı yok.")
+    
+    # Yeni kategori ekleme formu
+    with st.expander("➕ Yeni Kategori Ekle"):
+        with st.form("yeni_kategori_form_gelir_kapisi"):
+            col1, col2, col3 = st.columns(3)
+            with col1:
+                cat_name = st.text_input("Kategori Adı", placeholder="Örn: Premium Paket")
+            with col2:
+                cat_credits = st.number_input("Kredi Miktarı", min_value=1, value=100)
+            with col3:
+                cat_desc = st.text_input("Açıklama", placeholder="İsteğe bağlı")
+            if st.form_submit_button("Kategori Oluştur", type="primary") and cat_name:
+                try:
+                    post_api(
+                        "/api/admin/categories",
+                        json={"name": cat_name, "credits": cat_credits, "description": cat_desc},
+                        token=token,
+                    )
+                    st.success(f"Kategori '{cat_name}' oluşturuldu.")
+                    st.cache_data.clear()
+                    st.rerun()
+                except Exception as e:
+                    st.error(f"Kategori oluşturma başarısız: {e}")

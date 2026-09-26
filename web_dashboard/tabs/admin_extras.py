@@ -119,21 +119,5 @@ def render_user_management(token: str | None = None) -> None:
             else:
                 bos_durum("Kategori kaydı yok.")
 
-        with st.form("kredi_formu"):
-            col1, col2 = st.columns(2)
-            with col1:
-                kredi_user_id = st.text_input("Kullanıcı ID")
-            with col2:
-                kredi_miktar = st.number_input("Kredi Miktarı", min_value=1, value=50)
-            if st.form_submit_button("Kredi Yükle") and kredi_user_id:
-                try:
-                    post_api(
-                        "/api/admin/credit",
-                        json={"user_id": kredi_user_id, "amount": kredi_miktar},
-                        token=token,
-                    )
-                    st.success(f"{kredi_miktar} kredi yüklendi.")
-                    st.cache_data.clear()
-                    st.rerun()
-                except APIError as e:
-                    st.error(f"Kredi yükleme başarısız: {e}")
+        # D-215: Kredi yükleme formu KALDIRILDI — kanonik yer: musteri_yonetimi.render_paket_kredi_tab()
+        # (Gelir Kapısı > Paket & Kredi). Bu dosyadaki kopyası ikiz (D-211) oluştururdu.
