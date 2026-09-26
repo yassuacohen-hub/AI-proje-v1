@@ -94,7 +94,10 @@ IPUCU_KEY = "_hg_menu_ipucu_ac"
 #: Sekme modülleri bu anahtarı okur, kendi toggle'ını çizmez.
 REHBER_KEY = "_hg_rehber"
 #: K3-10g: Sol üst köşe logosu (`st.logo`). Dosya yoksa metin başlık kullanılır.
-LOGO_YOLU = ROOT / "assets" / "huginn_logo.png"
+#: MARKA-LOGO-01: `assets/huginn_logo.png` hiç üretilmemişti -> `.exists()` daima
+#: False, marka başlığı metin olarak kalıyordu. KAHİN onaylı Muninn varyantı
+#: `docs/brand/assets/` altında; yol oraya çevrildi (yazı kalkar, logo kalır).
+LOGO_YOLU = ROOT / "docs" / "brand" / "assets" / "Muninn_logo_transparent.png"
 #: U-10: Oturum rolü. Yazılırsa `admin_token` türetimini ezer (test/gelecek RBAC).
 ROL_KEY = "_hg_rol"
 
@@ -715,34 +718,20 @@ def _auth_modal_icerik() -> None:
     """AUTH-GATE-01: Giriş kapısı modal içeriği.
 
     Akışlar: giriş yap, misafir olarak devam et, şifremi unuttum.
+
+    Not: "Şifremi unuttum" akışı yalnızca `admin_auth.py::render_sifre_unuttum()`
+    (giriş formunun altındaki expander) üzerinden yürütülür — burada ayrı bir
+    ikinci buton/form YOKTUR (önceki mükerrer buton kaldırıldı, bkz. kullanıcı
+    ekran görüntüsü şikayeti).
     """
     from web_dashboard.tabs.admin_auth import render_admin_login
 
     render_admin_login()
 
-    col1, col2 = st.columns([1, 1])
-    with col1:
-        if st.button("Misafir olarak devam et", key="misafir_gate_btn"):
-            st.session_state["misafir"] = True
-            st.session_state["admin_token"] = "guest"
-            st.rerun()
-    with col2:
-        if st.button("Şifremi unuttum", key="sifre_unuttum_gate_btn"):
-            st.session_state["_sifre_unuttum"] = True
-            st.rerun()
-
-    if st.session_state.get("_sifre_unuttum"):
-        st.info("Sıfırlama için e-posta adresinizi girin.")
-        with st.form("reset_form"):
-            reset_email = st.text_input("E-posta", key="reset_email_gate")
-            gönder = st.form_submit_button("Sıfırlama linki gönder")
-            if gönder and reset_email:
-                try:
-                    from scripts.dash04_api_client import post_api as _p
-                    _p("/api/admin/reset-request", json={"email": reset_email})
-                    st.success("Sıfırlama linki gönderildi.")
-                except Exception as exc:
-                    st.error(f"Sıfırlama başarısız: {exc}")
+    if st.button("Misafir olarak devam et", key="misafir_gate_btn", use_container_width=True):
+        st.session_state["misafir"] = True
+        st.session_state["admin_token"] = "guest"
+        st.rerun()
 
 
 def main() -> None:

@@ -1,11 +1,13 @@
 -- DATA-LOG-01: Giriş etkinliği ve arama kaydı tablolari
--- SQLite + PostgreSQL uyumlu
+-- MIGRATE-EXEC-02: Dosya "SQLite + PostgreSQL uyumlu" diyordu ama AUTOINCREMENT
+-- yalnizca SQLite sozdizimi -> Postgres'te `syntax error at or near "AUTOINCREMENT"`.
+-- Uretim DB'si Postgres oldugu icin SERIAL'e cevrildi (login_events/search_events yoktu).
 
 -- ============================================
 -- login_events
 -- ============================================
 CREATE TABLE IF NOT EXISTS login_events (
-    id            INTEGER PRIMARY KEY AUTOINCREMENT,
+    id            SERIAL PRIMARY KEY,
     user_id       TEXT,
     email_masked  TEXT NOT NULL,
     ts            TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -26,7 +28,7 @@ CREATE INDEX IF NOT EXISTS idx_login_success ON login_events(success);
 -- search_events
 -- ============================================
 CREATE TABLE IF NOT EXISTS search_events (
-    id             INTEGER PRIMARY KEY AUTOINCREMENT,
+    id             SERIAL PRIMARY KEY,
     user_id        TEXT,
     email_masked   TEXT NOT NULL,
     ts             TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,

@@ -39,9 +39,18 @@ CREATE INDEX IF NOT EXISTS idx_evidence_company ON evidence(company_id);
 CREATE INDEX IF NOT EXISTS idx_evidence_source ON evidence(source_id);
 
 -- 0002'de ertelenen FK: company_products.evidence_id → evidence
-ALTER TABLE company_products
-    ADD CONSTRAINT fk_company_products_evidence
-    FOREIGN KEY (evidence_id) REFERENCES evidence(evidence_id);
+-- MIGRATE-EXEC-02: Ciplak ADD CONSTRAINT idempotent degil -> ikinci calistirmada
+-- DuplicateObject ile tum migration zinciri duruyordu. DO blogu ile korundu.
+DO $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM pg_constraint WHERE conname = 'fk_company_products_evidence'
+    ) THEN
+        ALTER TABLE company_products
+            ADD CONSTRAINT fk_company_products_evidence
+            FOREIGN KEY (evidence_id) REFERENCES evidence(evidence_id);
+    END IF;
+END $$;
 
 -- §3.16 Şirket olayları (Intelligence katmanına geçiş kapısı)
 CREATE TABLE IF NOT EXISTS company_events (

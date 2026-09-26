@@ -42,7 +42,9 @@ CREATE TABLE IF NOT EXISTS module_cost (
 -- lenient: kısıtlı → açık, yasak → hala maskelenir (risk üstüne alınmış, audit zorunlu)
 CREATE TABLE IF NOT EXISTS admin_kvkk_mode (
   admin_kvkk_mode_id SERIAL PRIMARY KEY,
-  admin_id UUID NOT NULL REFERENCES admin_users(admin_id) ON DELETE CASCADE,
+  -- MIGRATE-EXEC-02: `admin_users` tablosu bu semada hic yok; admin kayitlari
+  -- `users` tablosunda role='admin' olarak tutuluyor -> UndefinedTable hatasi veriyordu.
+  admin_id UUID NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,
   mode VARCHAR(10) NOT NULL CHECK (mode IN ('strict', 'lenient')),
   changed_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
   previous_mode VARCHAR(10) NULL,

@@ -1,6 +1,6 @@
 {
-  "current_version": 17,
-  "last_applied": "0015_data_log.sql",
+  "current_version": 21,
+  "last_applied": "0021_missing_tables.sql",
   "migrations": [
     {
       "version": 1,
@@ -34,8 +34,9 @@
     },
     {
       "version": 7,
-      "file": "0007_job_intelligence.sql",
-      "date": "2026-09-09"
+      "file": "0007_add_address_column.sql",
+      "date": "2026-09-09",
+      "note": "MIGRATE-EXEC-02: defter olmayan 0007_job_intelligence.sql'i isaret ediyordu (gercek dosya 0013)"
     },
     {
       "version": 8,
@@ -90,6 +91,30 @@
       "file": "0017_user_activity_log.sql",
       "date": "2026-09-24",
       "note": "VERI-ADMIN-AKTIVITE-LOG-13: user_activity_log tablosu (giris/arama/ai_kullanim, KVKK KK-10)"
+    },
+    {
+      "version": 18,
+      "file": "0018_visibility_layer.sql",
+      "date": "2026-09-25",
+      "note": "KVKK 2-katman alan gorunurlugu (plan_field_group)"
+    },
+    {
+      "version": 19,
+      "file": "0019_admin_mfa.sql",
+      "date": "2026-09-25",
+      "note": "B-01/B-02: admin_mfa + setup/login token tablolari"
+    },
+    {
+      "version": 20,
+      "file": "0020_login_lockout.sql",
+      "date": "2026-09-26",
+      "note": "B-04: users.failed_login_attempts + locked_until (admin login HTTP 500 kok nedeni)"
+    },
+    {
+      "version": 21,
+      "file": "0021_missing_tables.sql",
+      "date": "2026-09-26",
+      "note": "SEMA-DENETIM-01: kodda sorgulanan ama hic olusturulmamis 5 tablo (audit_logs, admin_audit_log, entity_matches, campaign_packages, api_usage_daily)"
     }
   ]
 }

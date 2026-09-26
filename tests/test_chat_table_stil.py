@@ -6,13 +6,17 @@ from web_dashboard.tabs.admin_panel import _sohbet_tablo_stil, _AJAN_RENKLERI, _
 
 
 def test_sohbet_tablo_stil_ajan_ve_onem_renklendirir():
+    # SEMA-DENETIM-01: kolon adlari "Ajan"/"Hangi Ajana?" -> "Gonderen"/"Alici"
+    # olarak degismisti; test eski semada kaldigi icin stil hic uygulanmiyordu.
     df = pd.DataFrame([{
-        "Tarih": "x", "Ajan": "IHSAN", "Hangi Ajana?": "UTKU",
+        "Tarih": "x", "Gönderen": "IHSAN", "Alıcı": "UTKU",
         "Görev": "D-1", "Sorun": "s", "Durum": "acik",
-        "Önem Derecesi": "Kritik", "_ajan_ham": "ihsan", "_onem_ham": "kritik",
+        "Önem Derecesi": "Kritik",
+        "_ajan_gonderici": "ihsan", "_ajan_alici": "utku", "_onem_ham": "kritik",
     }])
     html = df.style.apply(_sohbet_tablo_stil, axis=1).to_html()
     assert _AJAN_RENKLERI["ihsan"] in html
+    assert _AJAN_RENKLERI["utku"] in html
     assert _ONEM_RENKLERI["kritik"] in html
 
 

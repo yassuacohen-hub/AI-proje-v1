@@ -1,0 +1,116 @@
+Create a premium logo icon for an AI and data intelligence platform called Muninn.
+
+IMPORTANT:
+- ICON ONLY
+- No text
+- No typography
+- No words
+- No letters
+- Transparent background
+- Single centered logo
+- SVG-ready
+- Enterprise quality
+
+Core Concept:
+
+Design an abstract geometric symbol inspired by intelligence, memory, knowledge networks, reasoning systems and data discovery.
+
+The icon should subtly resemble a futuristic "M" shape without explicitly drawing the letter M.
+
+Visual Structure:
+
+- Two mirrored geometric wings
+- Clean symmetrical construction
+- One diagonal connector crossing through the center
+- Small circular intelligence node attached near the upper-right corner
+- Minimal negative space
+- Strong silhouette recognition
+- Clear visibility at favicon size
+- Precise geometric proportions
+
+Design Style:
+
+- Linear.app
+- Stripe
+- Vercel
+- Raycast
+- Arc Browser
+- Modern AI startup branding
+
+Color Palette:
+
+Gradient Direction:
+Bottom Left → Top Right
+
+Colors:
+
+Electric Cyan
+#22D3EE
+
+Bright Blue
+#3B82F6
+
+Indigo
+#4F46E5
+
+Violet
+#8B5CF6
+
+Optional Highlight:
+#67E8F9
+
+Visual Characteristics:
+
+- Smooth premium gradient
+- Flat design
+- No shadows
+- No glow
+- No glass effect
+- No 3D
+- No bevel
+- No metallic effect
+- No texture
+
+Line Style:
+
+- Rounded corners
+- Consistent stroke weight
+- Balanced spacing
+- Modern vector appearance
+
+Technical Requirements:
+
+- Transparent PNG
+- 1024 × 1024
+- Perfect symmetry
+- High contrast
+- Pixel-perfect edges
+- Dashboard optimized
+- Mobile app icon ready
+- PWA ready
+- Favicon ready
+- Works on black background
+- Works on dark gray background
+- Works on light background
+
+Output:
+Professional standalone icon centered on transparent canvas with no surrounding decorative elements.
+
+
+--muninn-cyan: #22D3EE;
+--muninn-blue: #3B82F6;
+--muninn-indigo: #4F46E5;
+--muninn-violet: #8B5CF6;
+
+
+background: linear-gradient(
+135deg,
+#22D3EE 0%,
+#3B82F6 35%,
+#4F46E5 65%,
+#8B5CF6 100%
+);
+
+
+
+``
