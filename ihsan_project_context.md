@@ -15,7 +15,7 @@
 
 ## Sabitler ve Sözleşmeler
 - `REHBER_KEY = "_hg_rehber"` (`app.py`) — TEK merkezi "Sekme rehberi" toggle anahtarı, footer'da (`render_footer`) çizilir. Sekme modülleri kendi toggle'ını çizmez, bu anahtarı `st.session_state`'ten okur. **Doğrulandı (2026-09-26)**: 6 sekme (`ana_kontrol`, `admin_panel`, `admin_realtime`, `admin_musteriler`, `pazarlama`, `paketler`) hepsi `_hg_rehber` okuyor, yerel toggle YOK — önceki "açık kusur" notu hatalıydı, kaldırıldı.
-- `LOGO_YOLU = ROOT / "assets" / "huginn_logo.png"` (`app.py`) — `st.logo` ile sol üst logo; dosya yoksa metin başlığa düşer (fallback zaten kodlu, `render_sidebar`). PNG dosyası henüz sağlanmadı (owner'dan beklenen, madde 7 açık).
+- `LOGO_YOLU = ROOT / "docs" / "brand" / "assets" / "Muninn_logo_transparent.png"` (`app.py:100`) — `st.logo` ile sol üst logo; dosya yoksa metin başlığa düşer (`render_sidebar`). **MARKA-LOGO-01 (2026-09-26, ÇÖZÜLDÜ)**: eski değer `ROOT / "assets" / "huginn_logo.png"` idi, `assets/` klasörü hiç üretilmemişti → `.exists()` daima False → marka başlığı hep metin (`## 🏢 Huginn` + caption) olarak kalıyordu. KAHİN onaylı Muninn varyantına çevrildi; artık yazı yok, sadece logo.
 - `ROL_KEY = "_hg_rol"` (`app.py`) — U-10 oturum rolü override anahtarı (gelecek RBAC). `aktif_rol()` ile çapraz kontrolü henüz yapılmadı.
 - **K3-10h kart kenar reçetesi** (KPI-RENK-05, `tests/test_charts.py`): `kpi_karti_html` çıktısı `background:{surface}; border:1px solid {border}; border-left:3px solid {kategori_rengi}`. Gradient/box-shadow/renk dolgusu yasak — kategori rengi yalnız sol şerit + 6px nokta (`count == 2`). **Doğrulandı**: `pytest tests/test_charts.py -q` → 47 passed.
 - **K3-10h madde 4 (tüm container çerçeveleri)** — ÇÖZÜLDÜ. `_AKSIYON_CSS` (`ana_kontrol.py`, 5 aksiyon butonuna özel) genişletilmedi; onun yerine `styles.py`'e yeni global blok eklendi: `_CONTAINER_CSS` → `div[data-testid="stVerticalBlockBorderWrapper"]{border:2px solid var(--hg-color-border-strong)!important}`, `_BLOKLAR` tuple'ına eklendi (tüm `st.container(border=True)` çerçevelerini kapsar, tüm sayfalarda tek kural). Kategori rengi YOK, sadece `border-strong` token'ı (nötr, tema-duyarlı). Test: `tests/test_ui_modal_stil.py::test_container_cerceve_kategori_rengi_yok`.
@@ -53,3 +53,26 @@
   2. `render_chat_summary()` aynı `ajan-chat.jsonl` dosyasını tek render'da 4 kez okuyordu (3x `ozet()` + 1x `oku()`, `ozet()` içeride `oku()`'yu tekrar çağırıyor) → tek `oku()` çağrısı + bellekte 3 liste comprehension filtreye indirgendi, ikinci `oku()` çağrısı silinip aynı `tum_sorunlar` değişkeni tekrar kullanıldı.
 - Doğrulama: `pytest tests/test_sekme_kapsama.py tests/test_charts.py -q` → 1 failed (`render_task_board_tab` reachability, ön-mevcut/ilgisiz), 127 passed, 2 skipped — fix'ler öncesi/sonrası aynı tek hata, regresyon yok.
 - `render_task_board_tab` öksüz-sekme kusuru madde 12 (22 ön-mevcut hata) kapsamına devredildi, kasıtlı dokunulmadı.
+
+### 2026-09-26 (devam — admin login + şema denetimi)
+**MASTER KÖK NEDEN — `migrate.py` SQL'i hiç çalıştırmıyordu (MIGRATE-EXEC):**
+`run_migrations()` yalnızca `f"APPLY: {mig['file']}"` metinlerini bir listeye ekliyor ve `schema_versions.json`'a `current_version` yazıyordu. DB bağlantısı YOK. 0016'dan beri her migration "uygulandı" olarak deftere işlendi, veritabanı hiç değişmedi. Admin login hatası bunun türevi: eksik kolon/tablo → `try/except Exception` yutması → yanlış "şifre hatalı" algısı. **Şifre (`556233`) baştan beri doğruydu.**
+- Düzeltme: `apply_sql()` artık `conn.connection.cursor().execute(sql)` (raw DBAPI cursor) kullanıyor. Neden: `text()` → `:s` bind param sanıyor; `exec_driver_sql` → `%` psycopg format placeholder sanıyor. Ham DDL için tek güvenli yol raw cursor.
+- `tests/test_data_log.py:184-197` AST ile `run_migrations` içinde `"15"` literalini arıyor → `target: int = 15` varsayılanı korundu (17 passed).
+
+**SEMA-DENETIM-01 — kod ↔ DB kayması:**
+Tarama tekniği: `\b(?:FROM|JOIN|INTO|UPDATE)\s+([a-z_][a-z0-9_]{2,})` regexi, `SELECT|INSERT INTO|UPDATE|DELETE FROM|JOIN` içeren satırdan sonraki 40 satırlık pencerede; `from `/`import ` ile başlayan satırlar atlandı (yanlış pozitif 129 → 49).
+- 5 bozuk migration onarıldı: `0015_data_log.sql` (`AUTOINCREMENT` → `SERIAL`, SQLite sözdizimi PostgreSQL'de patlıyordu), `0018_visibility_layer.sql` (`REFERENCES admin_users(admin_id)` → `users(user_id)`, olmayan tablo), `0003_intelligence.sql` (FK `DO $$ ... pg_constraint IF NOT EXISTS` ile sarıldı).
+- 5 hiç oluşturulmamış tablo: `0021_missing_tables.sql` → `audit_logs`, `admin_audit_log`, `entity_matches`, `campaign_packages`, `api_usage_daily`. Hepsi `IF NOT EXISTS`, her DDL'de çağrı yerini adlandıran provenance yorumu var.
+- `0020_login_lockout.sql`: `users.failed_login_attempts`, `users.locked_until`.
+- Sonuç: DB 44 → 54 tablo/view. `python -m src.company_master.schema.migrations.migrate --apply` → **21/21 OK**, idempotent.
+- Kalan 49 "eksik" ad tamamen gürültü: CTE alias (`scored`, `base`, `batch`), sistem katalogu (`pg_indexes`, `information_schema`), SQL anahtar kelimesi (`join`, `using`, `end`), Türkçe log metni (`isleme`, `sayisi`). Gerçek eksik tablo YOK.
+
+**Ajan chat kapsam açığı (KAHİN uyarısının somut karşılığı):**
+`tests/test_chat_table_stil.py` eski kolon şemasında (`"Ajan"`/`"Hangi Ajana?"` + `_ajan_ham`) kalmıştı; üretim kodu `_sohbet_tablo_stil` ise `"Gönderen"`/`"Alıcı"` + `_ajan_gonderici`/`_ajan_alici` okuyor. Sonuç: ajan renklendirmesi aylarca **hiç test edilmedi**. Test güncel şemaya çekildi, alıcı rengi için ek assert konuldu → 89 passed.
+
+**Diğer:** giriş ekranındaki mükerrer "Şifremi unuttum" butonu kaldırıldı (19/19). 8501 ve 8502 aynı komutu çalıştıran iki özdeş dev örneği (staging/prod ayrımı yok) — PID 17812 / 26400.
+
+**Açık kusur (raporlandı, düzeltilmedi):** `web_app.py:2044-2084` `_record_failed_login()` / `_is_account_locked()` her istisnayı `try/except Exception` ile yutuyor. Eksik-kolon hatasının haftalarca saklanmasının sebebi tam olarak bu. Hedefli `except` + log önerilir.
+
+**Commit:** `bb40ffc` (şema + marka + test), ardından admin_auth mükerrer buton commit'i. `origin/chore/monorepo-merge` push edildi.
