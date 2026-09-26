@@ -4079,6 +4079,6 @@ def api_admin_mfa_status(
                 "last_used_at": str(mfa["last_used_at"]) if mfa["last_used_at"] else None,
                 "has_backup_codes": mfa["has_backup"]
             }
-        
     except Exception as e:
+        raise HTTPException(status_code=500, detail=f"MFA status hatas\u0131: {str(e)}")
         raise HTTPException(status_code=500, detail=f"MFA status hatası: {str(e)}")

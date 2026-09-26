@@ -481,6 +481,14 @@ def _render_upsell_adaylari() -> None:
         mime="text/csv",
         key="upsell_download",
     )
+
+
+def _aramalar() -> None:
+    """Aramalar sekmesi — search_events son 50 kayıt (DATA-LOG-01).
+
+    NAV-IA-02 onarımı: gövde `_render_upsell_adaylari` sonuna yapışmıştı,
+    `def` satırı eksikti → sekme 3 NameError veriyordu.
+    """
     BOLUMLER[3].render()
     try:
         engine = get_engine()

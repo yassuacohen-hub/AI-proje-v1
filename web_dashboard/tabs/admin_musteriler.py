@@ -48,14 +48,13 @@ def _render_baslik() -> None:
     PageHeader("Müşteriler", giris=GIRIS_METNI,
                ust_etiket="İş · Müşteriler", ikon="👥").render()
 
-    col_btn, col_rehber, col_zaman = st.columns([1, 1, 3], vertical_alignment="center")
+    # K3-10g: rehber anahtarı sayfa altında (`app.REHBER_KEY`); modül yalnız okur.
+    rehber = bool(st.session_state.get("_hg_rehber", False))
+    col_btn, col_zaman = st.columns([1, 4], vertical_alignment="center")
     with col_btn:
         yenile = st.button("🔄 Veriyi Yenile", key="musteriler_yenile",
                            type="primary", width="stretch",
                            help="Önbelleği temizler ve firma listesini yeniden sorgular.")
-    with col_rehber:
-        rehber = st.toggle("ℹ️ Sekme rehberi", key="musteriler_rehber",
-                           help="Bu ekranın amacını, veri kaynağını ve kısıtlarını gösterir.")
     with col_zaman:
         st.caption("Firma listesi ve kalite görünümü · Son güncelleme: "
                    + datetime.now().strftime("%H:%M"))

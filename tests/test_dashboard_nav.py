@@ -334,20 +334,18 @@ def test_alt_sekmeler_sira_sirali():
     """Alt sekme siralari korunmali.
 
     UX-MENU-03: `hatalar` -> Sistem'e taşındı (E4), `dlq` menüden çıktı.
-    D-190: `rapor_listesi` eklendi (sira=1).
-    D-192: `ajan_sohbet` eklendi (sira=1), rapor_listesi sira=2 oldu.
     ADMIN-UX-GELIR-GRUP-01: `executive` ve `maliyet` gelir grubuna taşındı.
-    UI-ADMIN-MFA-26: `mfa` eklendi (sira=10).
+    UX-MENU-04 (2026-09-25): wireframe §3 "üst başına en fazla 6 alt sekme"
+    kuralı uygulandı; proje_yonetimi 11 alt sekmeden 4'e indi. Menüden
+    çıkanlar (`ajan_sohbet`, `rapor_listesi`, `kvkk_rapor`, `kontrol_panosu`,
+    `feature_flags`, `mfa`) seviye-3 gövde/popover üzerinden erişilir;
+    `ltv_cac` gelir grubuna (`musteri_onizleme`) taşındı.
     """
     alt = alt_sekmeler("proje_yonetimi", ROL_ADMIN)
     siralar = [t.sira for t in alt]
     assert siralar == sorted(siralar)
-    # Current order: karar_defteri (0), ajan_sohbet (1), rapor_listesi (2), 
-    # abrakadabra (3), denetim (4), kvkk_mode (5), kvkk_rapor (6), 
-    # kontrol_panosu (7), feature_flags (8), ltv_cac (9), mfa (10)
     assert [t.anahtar for t in alt] == [
-        "karar_defteri", "ajan_sohbet", "rapor_listesi", "abrakadabra", "denetim",
-        "kvkk_mode", "kvkk_rapor", "kontrol_panosu", "feature_flags", "ltv_cac", "mfa",
+        "karar_defteri", "denetim", "abrakadabra", "kvkk_mode",
     ]
 
 

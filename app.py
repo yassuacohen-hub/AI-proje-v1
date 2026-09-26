@@ -90,6 +90,11 @@ KOMPAKT_SUTUN = 4  # ikon-only modda satır başına düşen ikon sayısı
 #: tooltip'i konumlandırılamaz ve butonların üzerine biner (sahip bulgusu,
 #: 2026-09-16). Kullanıcı isterse sidebar'dan açar.
 IPUCU_KEY = "_hg_menu_ipucu_ac"
+#: K3-10g: "Sekme rehberi" anahtarı artık **tek** ve sayfa altında (footer).
+#: Sekme modülleri bu anahtarı okur, kendi toggle'ını çizmez.
+REHBER_KEY = "_hg_rehber"
+#: K3-10g: Sol üst köşe logosu (`st.logo`). Dosya yoksa metin başlık kullanılır.
+LOGO_YOLU = ROOT / "assets" / "huginn_logo.png"
 #: U-10: Oturum rolü. Yazılırsa `admin_token` türetimini ezer (test/gelecek RBAC).
 ROL_KEY = "_hg_rol"
 
@@ -382,58 +387,30 @@ def _hesap_karti_popover() -> None:
     token = get_admin_token()
     email = st.session_state.get("admin_email") or "Misafir"
 
-    with st.popover(f"👤 {email}"):
+    with st.popover(f"👤 {email}", use_container_width=True):
         if token:
-            # Rol etiketi + durum
-            col1, col2 = st.columns([2, 1])
-            with col1:
-                st.caption("Rol: admin")
-            with col2:
-                st.caption("✅ Aktif")
-            
-            st.divider()
-            
-            # Sistem Ayarları → /ayarlar
+            st.caption(f"Rol: **admin** · ✅ Aktif")
             if st.button("⚙️ Sistem Ayarları", use_container_width=True, key="pop_ayarlar"):
                 bolum_sec("ayarlar")
                 st.rerun()
-            
-            # Dil seçimi
-            lang = st.selectbox(
-                "Dil",
-                ["🇹🇷 Türkçe", "🇬🇧 English", "🇩🇪 Deutsch"],
-                label_visibility="collapsed",
-                key="pop_lang"
-            )
-            
-            # Yardım
-            if st.button("❓ Yardım", use_container_width=True, key="pop_help"):
-                st.info("📧 Destek: support@huginn.local")
-            
-            st.divider()
-            
-            # Yasal (expander)
-            with st.expander("📜 Yasal", expanded=False):
-                col1, col2 = st.columns(2)
-                with col1:
-                    st.caption("[Gizlilik Politikası](#)")
-                with col2:
-                    st.caption("[Kullanım Koşulları](#)")
-            
-            st.divider()
-            
-            # Çıkış + Şifre Değiştir
-            col1, col2 = st.columns(2)
-            with col1:
-                if st.button("🔑 Şifre", key="pop_sifre"):
-                    st.session_state["_sifre_degistir_dialog"] = True
-                    st.rerun()
-            with col2:
-                if st.button("🚪 Çıkış", key="pop_cikis"):
-                    admin_cikis()
-                    st.rerun()
+            if st.button("🔑 Şifre Değiştir", use_container_width=True, key="pop_sifre"):
+                st.session_state["_sifre_degistir_dialog"] = True
+                st.rerun()
+            # AUTH-GUEST-01: admin -> misafir geçişi (oturum kapanmadan önizleme)
+            if st.button("👥 Misafire Geç", use_container_width=True, key="pop_misafir"):
+                admin_cikis()
+                st.session_state["admin_token"] = "guest"
+                st.rerun()
+            if st.button("🚪 Çıkış", use_container_width=True, key="pop_cikis"):
+                admin_cikis()
+                st.rerun()
+            st.caption("[Gizlilik](#) · [Koşullar](#) · destek@huginn.local")
         else:
-            if st.button("Giriş Yap", key="pop_giris", use_container_width=True):
+            st.caption("Rol: **misafir** · sınırlı görünüm")
+            # AUTH-GUEST-01: misafir -> admin geçişi (giriş kapısını açar)
+            if st.button("🔐 Admin Girişi", use_container_width=True, key="pop_giris"):
+                st.session_state.pop("admin_token", None)
+                st.session_state.pop("misafir", None)
                 st.session_state["_force_auth_gate"] = True
                 st.rerun()
 
@@ -461,25 +438,17 @@ def render_sidebar(secili: TabTanimi) -> None:
     with st.sidebar:
         kompakt = bool(st.session_state.get(KOMPAKT_KEY, False))
 
-        if kompakt:
+        # K3-10g (KAHİN: "hugin logosuna yer açmış oluruz, logoyu sol köşeye
+        # koyarsın"): logo dosyası varsa `st.logo` ile sol üst köşeye basılır,
+        # yoksa metin başlık kalır. Anahtarlar (Kompakt menü / Bölüm açıklaması)
+        # sayfa altına (`render_footer`) taşındı.
+        if LOGO_YOLU.exists():
+            st.logo(str(LOGO_YOLU), size="large")
+        elif kompakt:
             st.markdown("## 🏢")
         else:
             st.markdown("## 🏢 Huginn")
             st.caption(t("odin_command_center"))
-
-        st.toggle(
-            "Kompakt menü",
-            key=KOMPAKT_KEY,
-            help="Yalnız ikonlar görünür; başlıklar imleçle üzerine gelince çıkar.",
-        )
-        st.toggle(
-            "Bölüm açıklamasını göster",
-            key=IPUCU_KEY,
-            help="Seçili bölümün açıklaması sağ üstte, arama kutusunun altında görünür.",
-        )
-        # UI-SIDEBAR-02: Marka blogu bölümü
-        st.markdown("### 📝 Marka Blogu")
-        st.caption("Bu bölümde marka ile ilgili blog yazıları yer alacaktır. (Placeholder)")
         st.divider()
 
         # U-10: yalnızca rolün görebildiği bölümler menüde.
@@ -514,55 +483,45 @@ def render_sidebar(secili: TabTanimi) -> None:
         # Aktif üst sayfa anahtarı (alt sekme ise kendi üstüne bak)
         aktif_ust_key = secili.ust if secili.ust else secili.anahtar
 
+        def _nav_butonu(tanim: TabTanimi, aktif: bool, girinti: bool = False) -> None:
+            """Tek navigasyon butonu; kompakt modda yalnız ikon çizer."""
+            etiket = tanim.ikon if kompakt else (
+                f"  {tanim.etiket}" if girinti else tanim.etiket
+            )
+            if st.button(
+                etiket,
+                key=f"nav_{tanim.anahtar}",
+                width="stretch",
+                type="primary" if aktif else "secondary",
+                help=_nav_ipucu(tanim, kompakt),
+                disabled=aktif,
+            ):
+                bolum_sec(tanim.anahtar)
+
         for key, tanim in ustlar.items():
             aktif = tanim.anahtar == aktif_ust_key or tanim.anahtar == secili.anahtar
+            altlar = alt_sekmeler(tanim.anahtar, rol)
+
+            # Kompakt mod: yalnız üst sayfa ikonları (alt sekmeler gizli).
             if kompakt:
                 with st.columns(KOMPAKT_SUTUN)[0]:
-                    if st.button(
-                        tanim.ikon,
-                        key=f"nav_{tanim.anahtar}",
-                        width="stretch",
-                        type="primary" if aktif else "secondary",
-                        help=_nav_ipucu(tanim, True),
-                        disabled=aktif,
-                    ):
-                        bolum_sec(tanim.anahtar)
-            else:
-                if st.button(
-                    tanim.etiket,
-                    key=f"nav_{tanim.anahtar}",
-                    width="stretch",
-                    type="primary" if aktif else "secondary",
-                    help=_nav_ipucu(tanim, False),
-                    disabled=aktif,
-                ):
-                    bolum_sec(tanim.anahtar)
+                    _nav_butonu(tanim, aktif)
+                continue
 
-                # Alt sekmeleri her zaman göster
-                altlar = alt_sekmeler(tanim.anahtar, rol)
+            # Alt sekmesi yoksa akordeon gereksiz — düz buton.
+            if not altlar:
+                _nav_butonu(tanim, aktif)
+                continue
+
+            # UX-MENU-04 / wireframe §3: yalnız aktif üst sayfa açık kalır.
+            # ponytail: `st.expander` tıklanır başlığı gezinmeyi tetiklemez;
+            # bu yüzden üst sayfanın kendisi içerideki ilk buton. Tek satırda
+            # hem gezinme hem katlama isteniyorsa özel bileşen gerekir (orta
+            # bağımlılık) — o zaman burayı değiştir.
+            with st.expander(tanim.etiket, expanded=aktif):
+                _nav_butonu(tanim, aktif)
                 for alt in altlar:
-                    alt_aktif = alt.anahtar == secili.anahtar
-                    if kompakt:
-                        with st.columns(KOMPAKT_SUTUN)[0]:
-                            if st.button(
-                                f"  {alt.etiket}",
-                                key=f"nav_{alt.anahtar}",
-                                width="stretch",
-                                type="primary" if alt_aktif else "secondary",
-                                help=_nav_ipucu(alt, True) if kompakt else None,
-                                disabled=alt_aktif,
-                            ):
-                                bolum_sec(alt.anahtar)
-                    else:
-                        if st.button(
-                            f"  {alt.etiket}",
-                            key=f"nav_{alt.anahtar}",
-                            width="stretch",
-                            type="primary" if alt_aktif else "secondary",
-                            help=_nav_ipucu(alt, False),
-                            disabled=alt_aktif,
-                        ):
-                            bolum_sec(alt.anahtar)
+                    _nav_butonu(alt, alt.anahtar == secili.anahtar, girinti=True)
 
         st.divider()
         _hesap_karti_popover()
@@ -714,23 +673,40 @@ def render_icerik(tanim: TabTanimi) -> None:
 
 
 def render_footer(tanim: TabTanimi) -> None:
-    """Alt bilgi: yükleme süresi, aktif bölüm, cache ömrü.
+    """Alt bilgi: aktif bölüm → görünüm anahtarları → cache/yükleme.
 
     U-07: "Cache Temizle" düğmesi kaldırıldı — Streamlit'in ⋮ menüsündeki
     "Clear cache" ile mükerrerdi. Menü `toolbarMode = "auto"` ile geri geldi.
+    K3-10g (KAHİN: "nav bar üstündeki rehber / kompakt menü / bölüm açıklaması
+    sayfanın en altına al ve sıraya sok: 1. aktif bölüm 2. rehber anahtarları,
+    yanında cache ve sayfa yükleme"): anahtarlar sidebar'dan buraya taşındı —
+    sidebar üstü logoya açıldı.
     """
     st.divider()
-    baslangic = st.session_state["perf_metrics"].get("page_load_start")
-    if not baslangic:
-        st.caption("Performans metrikleri bir sonraki yüklemede görünecek.")
-        return
-    yukleme_ms = (_time.perf_counter() - baslangic) * 1000
-    c1, c2, c3 = st.columns(3)
+    c1, c2, c3 = st.columns([1.1, 2, 1.4], vertical_alignment="top")
     with c1:
-        st.metric("Sayfa Yükleme", f"{yukleme_ms:.0f} ms")
-    with c2:
         st.metric("Aktif Bölüm", tanim.baslik)
+    with c2:
+        st.caption("Görünüm anahtarları")
+        st.toggle(
+            "Kompakt menü",
+            key=KOMPAKT_KEY,
+            help="Yalnız ikonlar görünür; başlıklar imleçle üzerine gelince çıkar.",
+        )
+        st.toggle(
+            "Bölüm açıklamasını göster",
+            key=IPUCU_KEY,
+            help="Seçili bölümün açıklaması sağ üstte, arama kutusunun altında görünür.",
+        )
+        st.toggle(
+            "Sekme rehberi",
+            key=REHBER_KEY,
+            help="Açık bölümün amacını, veri kaynağını ve kısıtlarını içerik sonunda gösterir.",
+        )
     with c3:
+        baslangic = st.session_state["perf_metrics"].get("page_load_start")
+        yukleme = f"{(_time.perf_counter() - baslangic) * 1000:.0f} ms" if baslangic else "—"
+        st.metric("Sayfa Yükleme", yukleme)
         st.metric("Cache TTL", "30 sn")
     st.caption("Önbelleği temizlemek için sağ üst ⋮ menüsü › Clear cache.")
 

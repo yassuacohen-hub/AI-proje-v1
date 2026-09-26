@@ -182,14 +182,28 @@ def test_kpi_karti_html_kategori_ve_tema():
     sistem = kpi_karti_html("A", 1, kategori="sistem", tema="aydinlik")
     assert palet_k["metric-customer"] in musteri and palet_k["surface"] in musteri
     assert palet_a["metric-system"] in sistem and palet_a["surface"] in sistem
-    # KPI-EXA-02: sade kart — gradient/gölge/kalın sol şerit yok, 1px KATEGORİ renkli kontur
+    # KPI-RENK-05 (KAHİN 2026-09-26; KPI-RENK-04'ü ezer): "bu kartın kenar
+    # çizgileri kenar renkleri güzel, benzerlerini diğerlerine de yap" →
+    # `_vurgu_paneli` reçetesi: nötr zemin + 1px nötr çerçeve + 3px kategori
+    # renkli sol şerit. Gradient/gölge/renk **dolgusu** hâlâ yasak (gündüz
+    # modunda patlıyordu); kategori rengi yalnız sol şerit ve 6px noktada.
     assert "linear-gradient" not in musteri and "box-shadow" not in musteri
-    assert "border-left" not in musteri
-    assert f"border:1px solid {palet_k['metric-customer']}" in musteri
-    assert f"border:1px solid {palet_a['metric-system']}" in sistem
+    assert f"border-left:3px solid {palet_k['metric-customer']}" in musteri
+    assert f"background:{palet_k['surface']}" in musteri
+    assert f"border:1px solid {palet_k['border-strong']}" in musteri
+    assert f"border:1px solid {palet_a['border-strong']}" in sistem
+    # renk dolgusu yok: kategori rengi yalnız 2 yerde (sol şerit + nokta)
+    assert musteri.count(palet_k["metric-customer"]) == 2
     assert "background:#fff" not in musteri.lower()  # beyaz zemin yok
     assert "1.234.567" in kpi_karti_html("A", 1234567)
     assert "—" in kpi_karti_html("A", None)
+
+
+def test_kpi_karti_baslik_tek_satir_kalir():
+    """K3-10f (KAHİN: "birbirlerine hizala"): uzun etiket sarmaz, kart boyu kaymaz."""
+    html = kpi_karti_html("API Çağrıları (24 saat içinde)", 1234, yardim="tam ad ipuçta")
+    assert "white-space:nowrap" in html
+    assert "text-overflow:ellipsis" in html
 
 
 def test_kpi_karti_html_sabit_genislik_yok():

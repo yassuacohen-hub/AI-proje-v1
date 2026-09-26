@@ -321,7 +321,9 @@ def _render_baslik(demo_mu: bool) -> None:
         ikon="📣",
     ).render()
 
-    col_btn, col_rehber, col_zaman = st.columns([1, 1, 3], vertical_alignment="center")
+    # K3-10g: rehber anahtarı sayfa altında (`app.REHBER_KEY`); modül yalnız okur.
+    rehber = bool(st.session_state.get("_hg_rehber", False))
+    col_btn, col_zaman = st.columns([1, 4], vertical_alignment="center")
     with col_btn:
         yenile = st.button(
             "🔄 Veriyi Yenile",
@@ -329,12 +331,6 @@ def _render_baslik(demo_mu: bool) -> None:
             type="primary",
             width="stretch",
             help="Önbelleği temizler ve kampanya/segment verisini yeniden yükler.",
-        )
-    with col_rehber:
-        rehber = st.toggle(
-            "ℹ️ Sekme rehberi",
-            key="pazarlama_rehber",
-            help="Bu ekranın amacını, veri kaynağını ve kısıtlarını gösterir.",
         )
     with col_zaman:
         if demo_mu:

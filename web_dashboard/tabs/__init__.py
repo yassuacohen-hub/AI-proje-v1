@@ -178,8 +178,8 @@ SECTIONS: tuple[TabTanimi, ...] = (
     ),
     TabTanimi(
         anahtar="musteriler",
-        baslik=t("menu_m_musteriler"),
-        ikon="👥",
+        baslik="Firmalar",
+        ikon="🏢",
         grup=GRUP_IS,
         aciklama="Firma listesi, filtreler ve kalite bildirimleri",
         url_path="musteriler",
@@ -218,7 +218,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="9Router tabanlı AI sohbet ve analiz asistanı",
         url_path="abrakadabra",
-        ust="proje_yonetimi", sira=3,
+        ust="proje_yonetimi", sira=2,
         modul="web_dashboard.tabs.abrakadabra",
         fonksiyon="render_abrakadabra_tab",
         min_rol="admin",
@@ -237,7 +237,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         min_rol="analyst",
     ),
     # --- PO-BACK-08: Executive Dashboard (MRR/ARR + churn + tenant sağlığı) ---
-    # UX-MENU-03/E3: menüden çıktı, "Gelir" grubuna taşındı.
+    # UX-MENU-03/E3: menüden çıktı; Metrikler > Özet gövdesinden açılır.
     TabTanimi(
         anahtar="executive",
         baslik="Executive Dashboard",
@@ -245,7 +245,6 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_GELIR,
         aciklama="MRR/ARR, churn oranı ve tenant sağlık dağılımı — yönetici özeti",
         url_path="executive",
-        ust="gelir", sira=1,
         modul="web_dashboard.tabs.admin_executive",
         fonksiyon="render_executive_tab",
         min_rol="admin",
@@ -270,7 +269,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Hatalar, webhook olayları ve ölü harf kuyruğu (DLQ)",
         url_path="hatalar",
-        ust="sistem", sira=3,
+        ust="sistem", sira=2,
         modul="web_dashboard.tabs.admin_errors",
         fonksiyon="render_errors_tab",
         min_rol="analyst",
@@ -299,6 +298,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_decision_tab",
         min_rol="admin",
     ),
+    # UX-MENU-04: menüden çıktı; Proje sayfa gövdesinden (seviye 3) açılır.
     TabTanimi(
         anahtar="ajan_sohbet",
         baslik="Ajan Chat",
@@ -306,20 +306,19 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="D-192: Ajan sorun takibi — açık/çözündürülmüş/çözüldü metrikler ve son sorunlar",
         url_path="ajan-sohbet",
-        ust="proje_yonetimi", sira=1,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_chat_summary",
         min_rol="admin",
         hazir=True,
     ),
+    # UX-MENU-04: menüden çıktı; Proje sayfa gövdesinden (seviye 3) açılır.
     TabTanimi(
         anahtar="rapor_listesi",
         baslik="MIMIR Raporları",
-        ikon="📋",
+        ikon="📑",
         grup=GRUP_IS,
         aciklama="MIMIR architect raporları — otomatik oluşturuldu, tüm agentle açık",
         url_path="rapor-listesi",
-        ust="proje_yonetimi", sira=2,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_rapor_listesi_tab",
     ),
@@ -366,7 +365,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_GELIR,
         aciklama="AI ve sistem maliyeti analizi",
         url_path="maliyet",
-        ust="gelir", sira=2,
+        ust="musteri_onizleme", sira=3,
         modul="web_dashboard.tabs.admin_cost",
         fonksiyon="render_cost_tab",
         min_rol="analyst",
@@ -448,7 +447,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Gerçek zamanlı sinyal akışı (SSE)",
         url_path="canli-veri",
-        ust="sistem", sira=5,
+        ust="sistem", sira=3,
         modul="web_dashboard.tabs.admin_realtime",
         fonksiyon="render_admin_realtime_tab",
         min_rol="analyst",
@@ -456,11 +455,11 @@ SECTIONS: tuple[TabTanimi, ...] = (
     TabTanimi(
         anahtar="denetim",
         baslik=t("menu_m_denetim"),
-        ikon="📋",
+        ikon="🧾",
         grup=GRUP_SISTEM,
         aciklama="Dosya kilitleri, handoff geçişleri ve tetikleyici günlüğü (DASH-08)",
         url_path="denetim",
-        ust="proje_yonetimi", sira=4,
+        ust="proje_yonetimi", sira=1,
         modul="web_dashboard.tabs.admin_audit",
         fonksiyon="render_audit_tab",
         min_rol="admin",
@@ -473,38 +472,39 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="KVKK strict/lenient mode toggle ve yönetimi",
         url_path="kvkk-mode",
-        ust="proje_yonetimi", sira=5,
+        ust="proje_yonetimi", sira=3,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_kvkk_mode_tab",
         min_rol="admin",
     ),
     # UI-ADMIN-KVKK-RAPOR-28: KVKK Maskeleme Raporu
+    # UX-MENU-04: menüden çıktı; KVKK Mode sayfa gövdesinden (seviye 3) açılır.
     TabTanimi(
         anahtar="kvkk_rapor",
         baslik="KVKK Raporu",
-        ikon="📊",
+        ikon="🛡️",
         grup=GRUP_SISTEM,
         aciklama="KVKK maskeleme geçmişi, istatistikler ve trend analizi",
         url_path="kvkk-rapor",
-        ust="proje_yonetimi", sira=6,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_kvkk_rapor_tab",
         min_rol="admin",
     ),
     # UI-KONTROL-PANOSU-32: Admin Kontrol Panosu
+    # UX-MENU-04: menüden çıktı; Metrikler sayfa gövdesinden (seviye 3) açılır.
     TabTanimi(
         anahtar="kontrol_panosu",
         baslik="Kontrol Panosu",
-        ikon="📈",
+        ikon="🎚️",
         grup=GRUP_SISTEM,
         aciklama="Maskeli/açık alanlar, tier dağılımı, trend ve mode geçişleri",
         url_path="kontrol-panosu",
-        ust="proje_yonetimi", sira=7,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_kontrol_panosu_tab",
         min_rol="admin",
     ),
     # UI-ADMIN-FEATURE-FLAG-25: Feature Flag Yönetim
+    # UX-MENU-04: menüden çıktı; Sistem sayfa gövdesinden (seviye 3) açılır.
     TabTanimi(
         anahtar="feature_flags",
         baslik="Feature Flags",
@@ -512,7 +512,6 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Sistem feature flag'lerini yönetin (admin only)",
         url_path="feature-flags",
-        ust="proje_yonetimi", sira=8,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_feature_flags_tab",
         min_rol="admin",
@@ -521,16 +520,17 @@ SECTIONS: tuple[TabTanimi, ...] = (
     TabTanimi(
         anahtar="ltv_cac",
         baslik="LTV/CAC",
-        ikon="💰",
-        grup=GRUP_SISTEM,
+        ikon="📉",
+        grup=GRUP_GELIR,
         aciklama="Müşteri yaşam boyu değeri (LTV) ve kazanım maliyeti (CAC) analizi",
         url_path="ltv-cac",
-        ust="proje_yonetimi", sira=9,
+        ust="musteri_onizleme", sira=2,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_ltv_cac_tab",
         min_rol="admin",
     ),
     # UI-ADMIN-MFA-26: MFA Yönetim Sekmesi
+    # UX-MENU-04: menüden çıktı; hesap kartı popover'ından açılır (ayarlar gibi).
     TabTanimi(
         anahtar="mfa",
         baslik="MFA Yönetimi",
@@ -538,7 +538,6 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Çok faktörlü kimlik doğrulama (TOTP) ayarları",
         url_path="mfa",
-        ust="proje_yonetimi", sira=10,
         modul="web_dashboard.tabs.admin_mfa",
         fonksiyon="render_mfa_tab",
         min_rol="admin",
@@ -582,7 +581,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
     TabTanimi(
         anahtar="proje_yonetimi",
         baslik="Proje",
-        ikon="📊",
+        ikon="📋",
         grup=GRUP_IS,
         aciklama="Karar defteri, açık işler, denetim izi ve hatalar",
         url_path="proje-yonetimi",
@@ -594,7 +593,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
     TabTanimi(
         anahtar="veri_kalite",
         baslik="Metrikler",
-        ikon="📊",
+        ikon="📈",
         grup=GRUP_IS,
         aciklama="KPI, kalite, arama ve executive özeti",
         url_path="veri-kalite",

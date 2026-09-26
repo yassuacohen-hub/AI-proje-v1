@@ -153,12 +153,13 @@ def kpi_karti_html(
     ondalik: int = 0,
     birim: str = "",
 ) -> str:
-    """Sade (Exa/developer) KPI kartı HTML'i — Streamlit'siz, XSS güvenli.
+    """Sade (Claude Console / 9Router) KPI kartı HTML'i — Streamlit'siz, XSS güvenli.
 
-    KPI-EXA-01/02 tasarım sözleşmesi (sahip talebi, 2026-09-15):
-    zemin **tema yüzeyi** (beyaz kart yok), **1px kategori renkli kontur**, 10px köşe,
-    gradient/gölge/kalın sol şerit **yok**; küçük gri büyük-harf etiket → büyük değer
-    → tek satır delta. Kategori rengi kontur + etiket önündeki 6px noktada kullanılır.
+    KPI-EXA-01/02 + KPI-RENK-04 (KAHİN, 2026-09-26: "kartların arka plan renklerini
+    kaldır ... göz yoruyor, kurumsal değil, gündüz modunda hepsi patlar"):
+    zemin **nötr tema yüzeyi**, çerçeve **nötr** 1px, gradient/gölge/renk dolgusu
+    **yok**. Kategori rengi yalnızca etiket önündeki 6px noktada görünür; sayı nötr
+    metin rengindedir. Böylece aydınlık/karanlık temada aynı kontrast korunur.
     """
     palet = tema_paleti(tema)
     renk = kategori_rengi(kategori, tema)
@@ -180,18 +181,28 @@ def kpi_karti_html(
     yardim_attr = f' title="{html.escape(yardim)}"' if yardim else ""
     deger_metin = html.escape(sayi_formatla(deger, ondalik, birim))
     ikon_html = f"<span style=\"opacity:.85;margin-right:4px;\">{html.escape(ikon)}</span>" if ikon else ""
+    # KPI-RENK-04: sayı nötr `text` tonunda — renk kodlaması noktaya indi.
+    deger_renk = palet["text"]
     return (
+        # K3-10g (KAHİN: "bu kartın kenar çizgileri kenar renkleri güzel,
+        # benzerlerini diğerlerine de yap"): `_vurgu_paneli` reçetesi — 1px nötr
+        # çerçeve + 3px kategori rengi sol çizgi. Zemin hâlâ nötr yüzey.
         f'<div class="hg-kpi" {yardim_attr} style="'
         f"background:{palet['surface']};"
-        f"border:1px solid {renk};border-radius:10px;"
+        f"border:1px solid {palet['border-strong']};border-left:3px solid {renk};"
+        f"border-radius:10px;"
         f'padding:14px 16px;min-height:92px;">'
+        # KPI-RENK-04/K3-10f: etiket **tek satır** — sarınca yan kartla yükseklik
+        # farkı doğuyordu (KAHİN: "birbirlerine hizala"). Taşan ad "…" ile kısalır,
+        # tam hâli `title` ipucunda kalır.
         f'<div class="hg-kpi-baslik" style="display:flex;align-items:center;gap:6px;'
         f'color:{palet["text-muted"]};font-size:0.72rem;font-weight:500;'
-        f'letter-spacing:.06em;text-transform:uppercase;">'
+        f'letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;'
+        f'overflow:hidden;text-overflow:ellipsis;">'
         f'<span style="flex:0 0 6px;height:6px;border-radius:50%;background:{renk};"></span>'
         f"{ikon_html}{html.escape(baslik)}</div>"
-        f'<div class="hg-kpi-deger" style="color:{palet["text"]};font-size:1.65rem;'
-        f'font-weight:600;line-height:1.25;margin-top:6px;letter-spacing:-.01em;'
+        f'<div class="hg-kpi-deger" style="color:{deger_renk};font-size:1.65rem;'
+        f'font-weight:700;line-height:1.25;margin-top:6px;letter-spacing:-.01em;'
         f'font-variant-numeric:tabular-nums;">{deger_metin}</div>'
         f"{delta_html}</div>"
     )

@@ -48,7 +48,37 @@ def flash_goster() -> bool:
 
 
 def get_admin_token() -> str | None:
-    return st.session_state.get("admin_token")
+    """Gerçek admin token'ı döndürür.
+
+    AUTH-GUEST-01: `"guest"` misafir nöbetçisidir, admin oturumu değildir.
+    Aksi halde misafir kullanıcı `Rol: admin` görür ve giriş formu hiç çizilmez.
+    """
+    token = st.session_state.get("admin_token")
+    return None if token == "guest" else token
+
+
+_TOKEN_CACHE = Path.home() / ".streamlit_token_cache" / "admin_token.txt"
+
+
+def token_cache_yaz(token: str) -> None:
+    """K1-7: Token'ı diske yazar — `app.py::main()` AppSession reset sonrası okur.
+
+    Dosya izni 0o600'e çekilir (Windows'ta etkisiz; NTFS ACL devralınır).
+    """
+    try:
+        _TOKEN_CACHE.parent.mkdir(parents=True, exist_ok=True)
+        _TOKEN_CACHE.write_text(token, encoding="utf-8")
+        os.chmod(_TOKEN_CACHE, 0o600)
+    except Exception as exc:  # noqa: BLE001 - kalıcılık kaybı girişi bozmamalı
+        _LOG.warning("Token cache yazılamadı: %s", exc)
+
+
+def token_cache_sil() -> None:
+    """K1-7: Çıkışta disk token'ını siler (aksi halde çıkış kalıcı olmaz)."""
+    try:
+        _TOKEN_CACHE.unlink(missing_ok=True)
+    except Exception as exc:  # noqa: BLE001
+        _LOG.warning("Token cache silinemedi: %s", exc)
 
 
 def _gorunur_bolum_sayisi() -> tuple[int, int]:
@@ -88,6 +118,7 @@ def render_admin_login() -> None:
             if result and result.get("token"):
                 st.session_state["admin_token"] = result["token"]
                 st.session_state["admin_email"] = email
+                token_cache_yaz(result["token"])
                 # Mesaj rerun sonrasında gösterilir; aksi halde anında kaybolur.
                 flash_yaz(f"✅ Giriş başarılı: {email}")
                 st.rerun()
@@ -177,6 +208,7 @@ def admin_cikis() -> None:
     st.session_state.pop("admin_token", None)
     st.session_state.pop("admin_email", None)
     st.session_state.pop("_force_auth_gate", None)
+    token_cache_sil()
     flash_yaz("✅ Çıkış yapıldı. Oturum kapatıldı.")
 
 

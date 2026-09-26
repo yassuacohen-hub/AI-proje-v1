@@ -402,15 +402,12 @@ def render_ayarlar_tab(kullanici_id: str | None = None) -> None:
     PageHeader("Kullanıcı Ayarları", giris=GIRIS_METNI,
                ust_etiket="Sistem · Ayarlar", ikon="⚙️").render()
 
-    col_rehber, col_kimlik = st.columns([1, 3], vertical_alignment="center")
-    with col_rehber:
-        rehber = st.toggle("ℹ️ Sekme rehberi", key="ayarlar_rehber",
-                           help="Bu ekranın amacını, veri kaynağını ve kısıtlarını gösterir.")
-    with col_kimlik:
-        st.caption(
-            f"Ayarlar bu kullanıcıya özeldir (`{kullanici_id}`) ve tarayıcıdan bağımsız "
-            "olarak sunucuda saklanır."
-        )
+    # K3-10g: rehber anahtarı sayfa altında (`app.REHBER_KEY`); modül yalnız okur.
+    rehber = bool(st.session_state.get("_hg_rehber", False))
+    st.caption(
+        f"Ayarlar bu kullanıcıya özeldir (`{kullanici_id}`) ve tarayıcıdan bağımsız "
+        "olarak sunucuda saklanır."
+    )
 
     if rehber:
         st.info(

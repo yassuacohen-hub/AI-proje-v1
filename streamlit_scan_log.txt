@@ -1,4 +1,4 @@
-2026-09-25 23:54:42.487 Uvicorn server started on :::8501
+2026-09-26 00:29:10.787 Uvicorn server started on :::8501
 
   You can now view your Streamlit app in your browser.
 
@@ -6,5 +6,47 @@
   Network URL: http://10.2.0.2:8501
   External URL: http://130.195.216.94:8501
 
-2026-09-25 23:56:38,441 [WARNING] admin_tabs.admin_performance: Prometheus metrikleri yüklenemedi: TypeError — Request.__init__() got an unexpected keyword argument 'timeout'
-2026-09-25 23:56:38,441 [WARNING] admin_tabs.admin_performance: Prometheus metrikleri yüklenemedi: TypeError — Request.__init__() got an unexpected keyword argument 'timeout'
+Exception in callback _ProactorBasePipeTransport._call_connection_lost(None)
+handle: <Handle _ProactorBasePipeTransport._call_connection_lost(None)>
+Traceback (most recent call last):
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\asyncio\events.py", line 88, in _run
+    self._context.run(self._callback, *self._args)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\asyncio\proactor_events.py", line 165, in _call_connection_lost
+    self._sock.shutdown(socket.SHUT_RDWR)
+ConnectionResetError: [WinError 10054] Varolan bir baðlantý uzaktaki bir ana bilgisayar tarafýndan zorla kapatýldý
+2026-09-26 01:37:25,208 [WARNING] admin_tabs.admin_kpi: Kalite trendi yüklenemedi: ProgrammingError — (psycopg.errors.UndefinedFunction) operator does not exist: timestamp with time zone - smallint
+LINE 1: ... AND is_osb_member=TRUE   AND created_at >= NOW() - $1 || ' ...
+                                                             ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+[SQL: SELECT DATE(created_at) as tarih,        AVG(data_quality_score) as ort_skor,        COUNT(*) as firma_sayisi FROM companies WHERE is_ankara=TRUE AND is_osb_member=TRUE   AND created_at >= NOW() - %(gun)s || ' days' GROUP BY DATE(created_at) ORDER BY tarih]
+[parameters: {'gun': 30}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-09-26 01:37:25,208 [WARNING] admin_tabs.admin_kpi: Kalite trendi yüklenemedi: ProgrammingError — (psycopg.errors.UndefinedFunction) operator does not exist: timestamp with time zone - smallint
+LINE 1: ... AND is_osb_member=TRUE   AND created_at >= NOW() - $1 || ' ...
+                                                             ^
+HINT:  No operator matches the given name and argument types. You might need to add explicit type casts.
+[SQL: SELECT DATE(created_at) as tarih,        AVG(data_quality_score) as ort_skor,        COUNT(*) as firma_sayisi FROM companies WHERE is_ankara=TRUE AND is_osb_member=TRUE   AND created_at >= NOW() - %(gun)s || ' days' GROUP BY DATE(created_at) ORDER BY tarih]
+[parameters: {'gun': 30}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-09-26 01:37:26,963 [WARNING] admin_tabs.admin_kpi: Kaynak saðlýk durumu yüklenemedi: ProgrammingError — (psycopg.errors.UndefinedColumn) column sr.created_at does not exist
+LINE 1: ...(sr.source_record_id) as kayit_sayisi,        MAX(sr.created...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "s.created_at".
+[SQL: SELECT s.source_name,        COUNT(sr.source_record_id) as kayit_sayisi,        MAX(sr.created_at) as son_guncelleme FROM sources s LEFT JOIN source_records sr ON sr.source_id = s.source_id GROUP BY s.source_id, s.source_name ORDER BY kayit_sayisi DESC]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-09-26 01:37:26,963 [WARNING] admin_tabs.admin_kpi: Kaynak saðlýk durumu yüklenemedi: ProgrammingError — (psycopg.errors.UndefinedColumn) column sr.created_at does not exist
+LINE 1: ...(sr.source_record_id) as kayit_sayisi,        MAX(sr.created...
+                                                             ^
+HINT:  Perhaps you meant to reference the column "s.created_at".
+[SQL: SELECT s.source_name,        COUNT(sr.source_record_id) as kayit_sayisi,        MAX(sr.created_at) as son_guncelleme FROM sources s LEFT JOIN source_records sr ON sr.source_id = s.source_id GROUP BY s.source_id, s.source_name ORDER BY kayit_sayisi DESC]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-09-26 01:37:27,307 [WARNING] admin_tabs.admin_kpi: API kullaným trendi yüklenemedi: ProgrammingError — (psycopg.errors.UndefinedTable) relation "api_usage_daily" does not exist
+LINE 1: ...T date as tarih, SUM(request_count) as istek FROM api_usage_...
+                                                             ^
+[SQL: SELECT date as tarih, SUM(request_count) as istek FROM api_usage_daily WHERE date >= CURRENT_DATE - INTERVAL '30 days' GROUP BY date ORDER BY date]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2026-09-26 01:37:27,307 [WARNING] admin_tabs.admin_kpi: API kullaným trendi yüklenemedi: ProgrammingError — (psycopg.errors.UndefinedTable) relation "api_usage_daily" does not exist
+LINE 1: ...T date as tarih, SUM(request_count) as istek FROM api_usage_...
+                                                             ^
+[SQL: SELECT date as tarih, SUM(request_count) as istek FROM api_usage_daily WHERE date >= CURRENT_DATE - INTERVAL '30 days' GROUP BY date ORDER BY date]
+(Background on this error at: https://sqlalche.me/e/20/f405)

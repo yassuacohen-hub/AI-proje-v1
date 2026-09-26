@@ -200,7 +200,10 @@ def render_admin_realtime_tab() -> None:
     ).render()
 
     son_guncelleme = datetime.now().strftime("%H:%M:%S")
-    col_btn, col_rehber, col_zaman = st.columns([1, 1, 3], vertical_alignment="center")
+    # K3-10g: "Sekme rehberi" anahtarı tek ve sayfa altında (`app.REHBER_KEY`).
+    # Modül kendi toggle'ını çizmez, yalnız okur. Literal: app.py import'u döngü yapar.
+    rehber = bool(st.session_state.get("_hg_rehber", False))
+    col_btn, col_zaman = st.columns([1, 4], vertical_alignment="center")
     with col_btn:
         yenile = st.button(
             "🔄 Veriyi Yenile",
@@ -208,12 +211,6 @@ def render_admin_realtime_tab() -> None:
             type="primary",
             width="stretch",
             help="Önbelleği temizler ve veritabanını yeniden okur.",
-        )
-    with col_rehber:
-        rehber = st.toggle(
-            "ℹ️ Sekme rehberi",
-            key="realtime_rehber",
-            help="Bu ekranın amacını, veri kaynağını ve kısıtlarını gösterir.",
         )
     with col_zaman:
         st.caption(f"Son güncelleme: {son_guncelleme} · önbellek {CACHE_TTL}s")

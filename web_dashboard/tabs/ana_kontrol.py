@@ -22,6 +22,8 @@ ADMIN-UI-09 (pilot ekran):
 """
 from __future__ import annotations
 
+import html
+import os
 import subprocess
 import sys
 from datetime import datetime
@@ -39,7 +41,22 @@ from scripts.dash04_api_client import get_api, APIError  # noqa: E402
 from company_master.i18n import t  # noqa: E402
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
 from company_master.ui.tokens import RENKLER  # noqa: E402
-from web_dashboard.charts import donut, kpi_karti  # noqa: E402  (UI-CHART-01, KPI-EXA-02)
+from web_dashboard.charts import (  # noqa: E402  (UI-CHART-01, KPI-EXA-02)
+    KATEGORI_RENK,
+    donut,
+    kategori_rengi,
+    kpi_karti,
+    sayi_formatla,
+)
+
+#: K3-10f: blok yükseklikleri — yan yana duran iki kolon **aynı** yüksekliği
+#: alır, yoksa kart altları kaymış görünür (KAHİN: "kolonlar hizalı ve eşit
+#: değil"). Değerler alt yazıyı kırpmayacak kadar yüksek tutulur.
+#: ponytail: sabit px; içerik taşarsa blok kendi içinde kaydırır.
+_SATIR_YUKSEKLIK: dict[str, int] = {"ust": 310, "orta": 360, "alt": 340}
+#: K3-10f: blok yüksekliği − başlık/altyazı payı. Donut bundan büyük olursa
+#: alt yay çerçeveden kırpılır (KAHİN ekran görüntüsü, 2026-09-26).
+_DONUT_YUKSEKLIK: int = _SATIR_YUKSEKLIK["alt"] - 110
 
 # --- §8.4.1: Aksiyon butonu renkleri -----------------------------------------
 # Streamlit `st.button` yalnız primary/secondary/tertiary kabul eder; kontur
@@ -125,6 +142,214 @@ def bekleyen_onay_sayisi(token: str | None) -> int:
     return 0
 
 
+#: K3-10c TASLAK MODU (KAHİN, 2026-09-26): "tasarım yaparken sahte kutu üretilir,
+#: sahte kutu kalıcı olmaz sonra silinir." `set HUGINN_TASLAK=1` ile açılır.
+#: Üretimde KAPALI → sahte kutu çizilmez (K3-10 kuralı yürürlükte kalır).
+TASLAK = os.getenv("HUGINN_TASLAK") == "1"
+
+#: Taslak modda boş hücrelere basılan yer tutucu. Grep'lenebilir olsun diye sabit.
+SAHTE_DEGER = "1.234"
+SAHTE_YUZDE = 68.0
+
+
+def _dolu(deger: Any) -> bool:
+    """K3-10: Hücrede gerçek veri var mı?
+
+    KAHİN kuralı: "ızgara doldurmak için sahte kutu üretmeyin." 0, None ve boş
+    metin veri değildir — o hücre hiç çizilmez, ızgara daralır.
+    Taslak modda (`TASLAK`) hücre yine çizilir ama altında "SAHTE VERİ" yazar.
+    """
+    return deger not in (None, 0, 0.0, "", "0")
+
+
+def _kart_izgara(adaylar: list[dict[str, Any]], bos_mesaj: str) -> None:
+    """Yalnız verisi olan kartları yan yana çizer (3 veri → 3 kolon).
+
+    `adaylar` her öğesi `kpi_karti` kwargs sözlüğüdür; `deger` anahtarı boşsa
+    aday düşer. Taslak modda boş adaylar `SAHTE_DEGER` ile çizilir ve altında
+    hangi kartların sahte olduğu tek satırda listelenir.
+    """
+    gecerli = [a for a in adaylar if _dolu(a.get("deger"))]
+    sahte = [a for a in adaylar if not _dolu(a.get("deger"))] if TASLAK else []
+    if not gecerli and not sahte:
+        st.info(bos_mesaj)
+        return
+    cizilecek = gecerli + [{**a, "deger": SAHTE_DEGER} for a in sahte]
+    # K3-10g (KAHİN: "özellikle toplam firma kartı kaymış"): sparkline kartın
+    # **altına** çizilir, bu yüzden serisi olan kart komşusundan uzun kalıyordu.
+    # Kural: satırdaki *tüm* kartların serisi yoksa hiçbirinde çizilmez.
+    hepsinde_seri = all(len(a.get("sparkline") or []) >= 2 for a in cizilecek)
+    for kolon, aday in zip(st.columns(len(cizilecek)), cizilecek):
+        with kolon:
+            kpi_karti(
+                aday["baslik"], aday["deger"],
+                sparkline=aday.get("sparkline") if hepsinde_seri else None,
+                kategori=aday.get("kategori", "musteri"),
+                yardim=aday.get("yardim", ""),
+            )
+    if sahte:
+        adlar = ", ".join(a["baslik"] for a in sahte)
+        st.caption(f"⚠️ **SAHTE VERİ (taslak)**: {adlar} — gerçek veri bağlanınca silinecek.")
+        return
+    eksik = len(adaylar) - len(gecerli)
+    if eksik:
+        st.caption(f"↳ {eksik} metrik henüz veri üretmedi; veri gelince kart eklenir.")
+
+
+def _yuzde_halka(baslik: str, yuzde: float, kategori: str = "sistem") -> str:
+    """Bağımlılıksız radial gauge — saf CSS `conic-gradient`, paket yok.
+
+    `st-radial` (son sürüm 2022, Streamlit 1.4x'te test edilmemiş) yerine
+    KAHİN'in seçtiği yol. Yüzde 0–100 aralığına kırpılır.
+    KPI-RENK-03: halka **ve** ortadaki sayı kategori rengindedir.
+    """
+    y = max(0.0, min(100.0, float(yuzde)))
+    renk = kategori_rengi(kategori)
+    sayi_renk = RENKLER.get(f"{KATEGORI_RENK.get(kategori, 'primary')}-text", renk)
+    return (
+        '<div style="text-align:center">'
+        '<div style="width:96px;height:96px;margin:0 auto;border-radius:50%;'
+        f'background:conic-gradient({renk} {y}%, rgba(127,127,127,.18) 0);'
+        'display:flex;align-items:center;justify-content:center">'
+        f'<div style="width:74px;height:74px;border-radius:50%;background:{RENKLER["surface"]};'
+        f'display:flex;align-items:center;justify-content:center;font-weight:700;color:{sayi_renk};'
+        f'font-variant-numeric:tabular-nums">%{y:.0f}</div></div>'
+        '<div style="font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;'
+        f'color:{RENKLER["text-muted"]};margin-top:6px">{html.escape(baslik)}</div></div>'
+    )
+
+
+def _halka_satiri(adaylar: list[tuple[str, float | None]] | list[tuple[str, float | None, str]]) -> None:
+    """Yüzde halkalarını yan yana çizer; boş olanlar taslak modda sahte gösterilir.
+
+    Aday 2'li (`ad, yuzde`) ya da 3'lü (`ad, yuzde, kategori`) olabilir.
+    """
+    ucuz = [(a[0], a[1], a[2] if len(a) > 2 else "sistem") for a in adaylar]
+    gecerli = [(ad, y, k) for ad, y, k in ucuz if y is not None]
+    sahte = [(ad, k) for ad, y, k in ucuz if y is None] if TASLAK else []
+    cizilecek = gecerli + [(ad, SAHTE_YUZDE, k) for ad, k in sahte]
+    if not cizilecek:
+        st.caption("Oran metrikleri henüz ölçülmedi; veri gelince halkalar açılır.")
+        return
+    for kolon, (ad, y, k) in zip(st.columns(len(cizilecek)), cizilecek):
+        with kolon:
+            st.markdown(_yuzde_halka(ad, y, k), unsafe_allow_html=True)
+    if sahte:
+        adlar = ", ".join(ad for ad, _ in sahte)
+        st.caption(f"⚠️ **SAHTE VERİ (taslak)**: {adlar} halkaları — gerçek alan bağlanacak.")
+
+
+def _yatay_bar(ogeler: list[tuple[str, float, str]]) -> str:
+    """K3-10f: yatay ilerleme çubukları — tek `st.markdown`, paket yok.
+
+    KAHİN: "her şeyi yatay planlama, biraz hareket kat, veriyi başka şekilde
+    göster." En büyük değer tam genişliği alır; renk kategoriden gelir.
+    """
+    enb = max((d for _, d, _ in ogeler), default=0) or 1
+    satirlar = []
+    for ad, deger, kat in ogeler:
+        renk = kategori_rengi(kat)
+        sayi_renk = RENKLER.get(f"{KATEGORI_RENK.get(kat, 'primary')}-text", renk)
+        genislik = max(2.0, float(deger) / enb * 100)
+        satirlar.append(
+            '<div style="margin-bottom:12px">'
+            '<div style="display:flex;justify-content:space-between;align-items:baseline;'
+            f'font-size:.76rem;letter-spacing:.04em;text-transform:uppercase;'
+            f'color:{RENKLER["text-muted"]};margin-bottom:5px">'
+            f'<span>{html.escape(ad)}</span>'
+            f'<span style="color:{sayi_renk};font-weight:700;font-size:.95rem;'
+            f'text-transform:none;font-variant-numeric:tabular-nums">'
+            f'{html.escape(sayi_formatla(deger))}</span></div>'
+            '<div style="height:8px;border-radius:4px;background:rgba(127,127,127,.16)">'
+            f'<div style="width:{genislik:.1f}%;height:100%;border-radius:4px;'
+            f'background:linear-gradient(90deg,{renk},{renk}66)"></div></div></div>'
+        )
+    return "".join(satirlar)
+
+
+def _hareket_satiri(adaylar: list[tuple[str, Any, str]]) -> None:
+    """Yatay bar bloğu; verisi olmayan satır düşer, taslak modda sahte çizilir."""
+    gecerli = [(ad, float(d), k) for ad, d, k in adaylar if _dolu(d)]
+    sahte = [(ad, k) for ad, d, k in adaylar if not _dolu(d)] if TASLAK else []
+    cizilecek = gecerli + [(ad, float(SAHTE_DEGER.replace(".", "")), k) for ad, k in sahte]
+    if not cizilecek:
+        st.caption("Hareket verisi henüz toplanmadı — kullanım başlayınca burada görünecek.")
+        return
+    st.markdown(_yatay_bar(cizilecek), unsafe_allow_html=True)
+    if sahte:
+        adlar = ", ".join(ad for ad, _ in sahte)
+        st.caption(f"⚠️ **SAHTE VERİ (taslak)**: {adlar} — gerçek veri bağlanınca silinecek.")
+
+
+def _icgoru_paneli(ogeler: list[tuple[str, str, str, str]]) -> None:
+    """Referans paneldeki "Key Insights" rayı: ikon + başlık + tek cümle, **dikey** akar.
+
+    KAHİN (K3-10f): "sayfa içinde hep aynı şeyleri kullanma ... dikey ilerleyen
+    bir şeyler lazım." Bu panel kart/grafik değil; okunabilir metin rayıdır.
+    Öğe: ``(ikon, başlık, cümle, kategori)``. Boş liste → blok çizilmez.
+    """
+    if not ogeler:
+        st.caption("İçgörü üretecek veri henüz yok.")
+        return
+    parcalar: list[str] = []
+    # KPI-RENK-04: zemin **boş** bırakılır — Streamlit'in etkin teması geçer,
+    # aydınlık modda renk dolgusu patlamaz (KAHİN: "gündüz modunda hepsi patlar").
+    for ikon, baslik, metin, kategori in ogeler:
+        renk = kategori_rengi(kategori)
+        parcalar.append(
+            '<div style="display:flex;gap:10px;align-items:flex-start;padding:8px 0 8px 11px;'
+            f'margin-bottom:6px;border-left:2px solid {renk}">'
+            f'<div style="font-size:1rem;line-height:1.25;opacity:.75">{ikon}</div><div>'
+            '<div style="font-weight:600;font-size:.84rem">'
+            f'{html.escape(baslik)}</div>'
+            f'<div style="font-size:.78rem;line-height:1.35;color:{RENKLER["text-muted"]}">'
+            f'{html.escape(metin)}</div></div></div>'
+        )
+    st.markdown("".join(parcalar), unsafe_allow_html=True)
+
+
+def _durum_ozeti(
+    kpi: dict[str, Any], webhook: dict[str, Any], bekleyen: int
+) -> tuple[str, str, str]:
+    """(ışık, metin, renk) — trafik ışığı kararı tek yerde verilir."""
+    dlq = webhook.get("dlq_toplam", 0)
+    cache = kpi.get("cache_hit_rate", 0)
+    if dlq:
+        return "🔴", f"{dlq} DLQ kaydı işlenmedi — Olaylar & Hatalar sekmesine bakın.", "#ef4444"
+    if cache and cache < 0.3:
+        return "🟡", f"Cache hit %{cache * 100:.0f} — veritabanı yükü yüksek olabilir.", "#f59e0b"
+    if bekleyen > 0:
+        return "🟡", f"{bekleyen} kullanıcı onay bekliyor.", "#f59e0b"
+    return "🟢", "Kritik uyarı yok — sistem normal çalışıyor.", "#22c55e"
+
+
+def _trafik_isigi(kpi: dict[str, Any], webhook: dict[str, Any], bekleyen: int) -> None:
+    """K3-10 Blok 2: tek satırda 🟢/🟡/🔴 sistem özeti."""
+    isik, metin, _ = _durum_ozeti(kpi, webhook, bekleyen)
+    st.markdown(f"### {isik} {metin}")
+
+
+def _vurgu_paneli(isik: str, baslik: str, metin: str, renk: str, alt: str) -> str:
+    """K3-10d "4+1" düzenin **+1**'i: sağdaki vurgulu (renkli) özet sütunu.
+
+    Referans ekrandaki yeşil "Projected Launch Date" paneliyle aynı rolü oynar:
+    4 eşit metrik kolonunun yanında dar, renk kodlu tek bir durum kutusu.
+    CSS dosyası yok — inline `st.markdown` (KAHİN kısıtı).
+    """
+    # KPI-RENK-04: renk dolgusu kaldırıldı; durum rengi yalnız sol şeritte ve
+    # ikonda. Zemin belirtilmez → tema ne ise o (aydınlık/karanlık güvenli).
+    return (
+        f'<div style="border:1px solid {RENKLER["border-strong"]};border-left:3px solid {renk};'
+        'border-radius:10px;padding:14px 16px">'
+        f'<div style="font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;'
+        f'color:{RENKLER["text-muted"]};font-weight:600">{html.escape(baslik)}</div>'
+        '<div style="font-size:1rem;font-weight:600;line-height:1.4;margin:6px 0">'
+        f'{isik} {html.escape(metin)}</div>'
+        f'<div style="font-size:.76rem;color:{RENKLER["text-muted"]}">{html.escape(alt)}</div>'
+        '</div>'
+    )
+
+
 def _sonuc_yaz(tip: str, mesaj: str) -> None:
     """Aksiyon sonucunu rerun sonrası da yaşayacak biçimde saklar."""
     st.session_state["ovw_sonuc"] = (tip, mesaj, datetime.now().strftime("%H:%M:%S"))
@@ -188,11 +413,16 @@ def _csv_hazirla() -> None:
 #: hem de gövde aynı listeyi kullanır, böylece anchor'lar asla kaymaz.
 # KPI-EXA-02 (sahip, 2026-09-15): Veri Akışı diyagramı "Teknik Altyapı" sayfasına
 # taşındı; bölüm açıklama cümleleri ve küçük emojiler kaldırıldı (sade başlık).
+# K3-10b/K3-10f (KAHİN, 2026-09-26): bu sayfanın bölümleri **çerçeveli blok
+# içinde** duruyor; `seviye=2` (H1 ölçeğinde H2) küçük kartın içinde dev başlık
+# üretiyordu. `seviye=3` hem ölçeği düşürür hem `Section.ayrac = ayrac and
+# seviye == 2` kuralı gereği blok üstündeki fazla ayırıcıyı kaldırır.
+# Anchor'lar (`kimlik`) değişmedi — SectionNav ve koruma testleri bozulmaz.
 BOLUMLER: tuple[Section, ...] = (
-    Section("Müşteri", kimlik="musteri-metrikleri"),
-    Section("Sistem", kimlik="sistem-metrikleri"),
-    Section("Uyarılar", kimlik="anlik-uyarilar"),
-    Section("Webhook Akışı", kimlik="webhook-akisi"),
+    Section("Müşteri", kimlik="musteri-metrikleri", seviye=3),
+    Section("Sistem", kimlik="sistem-metrikleri", seviye=3),
+    Section("Uyarılar", kimlik="anlik-uyarilar", seviye=3),
+    Section("Webhook Akışı", kimlik="webhook-akisi", seviye=3),
 )
 
 GIRIS_METNI = t("huginn_dashboard_welcome")
@@ -215,202 +445,275 @@ def render_ana_kontrol_tab() -> None:
         ust_etiket="İş · Operasyon",
     ).render()
 
-    # --- §8.4.1: Aksiyon şeridi (5 buton, tek birincil: Veriyi Yenile) ---
-    st.markdown(_AKSIYON_CSS, unsafe_allow_html=True)
     token = st.session_state.get("admin_token")
     bekleyen = bekleyen_onay_sayisi(token)
-    b1, b2, b3, b4, b5 = st.columns(5, vertical_alignment="center")
 
-    with b1:
-        yenile = st.button(
-            "⟳ Veriyi Yenile", key="ovw_yenile", type="primary", width="stretch",
-            help="Önbelleği temizler ve tüm kartları yeniden yükler.",
-        )
-    with b2:
-        if st.button("⬇ Veri Güncelle", key="ovw_guncelle", width="stretch",
-                     help="Kaynaklardan veri çekme hattını çalıştırır (en çok 180 sn)."):
-            with st.spinner("Veri hattı çalışıyor..."):
-                _veri_guncelle()
-    with b3:
-        if st.button("♥ Sağlık Kontrolü", key="ovw_saglik", width="stretch",
-                     help="API ve webhook alıcısının ayakta olup olmadığını sorar."):
-            with st.spinner("Servisler sorgulanıyor..."):
-                _saglik_kontrolu()
-    with b4:
-        if st.button("⬆ Dışa Aktar (CSV)", key="ovw_export", width="stretch",
-                     help="Firma listesini CSV dosyası olarak hazırlar."):
-            with st.spinner("CSV hazırlanıyor..."):
-                _csv_hazirla()
-    with b5:
-        etiket = "✓ Bekleyen Onaylar" if bekleyen < 0 else f"✓ Bekleyen Onaylar ({bekleyen})"
-        if st.button(etiket, key="ovw_onay", width="stretch",
-                     help="Onay bekleyen kullanıcıları listeler."):
-            st.session_state["ovw_onay_ac"] = True
-
-    if yenile:
-        st.cache_data.clear()
-        st.rerun()
-
-    # --- Aksiyon sonucu (rerun sonrası da görünür) ---
-    sonuc = st.session_state.get("ovw_sonuc")
-    if sonuc:
-        tip, mesaj, saat = sonuc
-        {"success": st.success, "error": st.error}.get(tip, st.info)(f"{mesaj} · {saat}")
-    if st.session_state.get("ovw_csv"):
-        st.download_button(
-            "CSV dosyasını indir", st.session_state["ovw_csv"],
-            file_name=f"firmalar_{datetime.now():%Y%m%d_%H%M}.csv",
-            mime="text/csv", key="ovw_csv_indir",
-        )
-    if st.session_state.pop("ovw_onay_ac", False) and bekleyen > 0:
-        st.info(f"{bekleyen} kullanıcı onay bekliyor — **Müşteriler › Kullanıcılar** sekmesinden işleyin.")
-
-    # --- §8.4.2: Sekme giriş kartları ---
-    from web_dashboard.tabs import tab_getir  # fonksiyon içi: döngüsel import yok
-
-    kart_kolonlari = st.columns(len(GIRIS_KARTLARI))
-    for kolon, (ikon, etiket_kart, anahtar) in zip(kart_kolonlari, GIRIS_KARTLARI):
-        tanim = tab_getir(anahtar)
-        if tanim is None:
-            continue
-        with kolon:
-            st.link_button(f"{ikon} {etiket_kart}", f"/{tanim.url_path}", width="stretch")
-
-    bilgi = st.toggle(
-        "Sekme rehberi", key="ana_kontrol_rehber",
-        help="Bu ekranın amacını, veri kaynağını ve kısıtlarını gösterir.",
-    )
-    st.caption(f"Son güncelleme: {datetime.now():%H:%M} · Önbellek ömrü 30 sn")
-
-    if bilgi:
-        st.info(
-            "**Bu ekran ne işe yarar?** Müşteri tarafı (kayıt, onay, kredi) ve sistem tarafı "
-            "(firma sayısı, kalite skoru, görev durumu) metriklerini tek bakışta gösterir. "
-            "Güne başlarken \"her şey yolunda mı?\" sorusunun cevabı burada.\n\n"
-            "**Nasıl kullanılır?** Kart konturu ve sol üstteki nokta kategoriyi gösterir: mavi müşteri, gri sistem. "
-            "Sağ üstteki **Yenile** düğmesi önbelleği temizleyip verileri anında tazeler.\n\n"
-            "**Veriler nereden gelir?** `/api/kpi` ve `/metrics` uç noktaları ile "
-            "webhook izleme kayıtları.\n\n"
-            "**Dikkat:** Veriler 30 saniyede bir otomatik yenilenir. Webhook istatistikleri "
-            "şimdilik anlık değildir; canlı akış (SSE) Faz 2'de eklenecek."
-        )
-
-    # --- ADMIN-UI-09: "Bu sayfada" gezinmesi (uzun ekranı taranabilir yapar) ---
-    SectionNav(BOLUMLER, yatay=True).render()
-
-    # --- Veri yükleme ---
+    # --- Veri yükleme (bloklardan önce: trafik ışığı da veriyi kullanır) ---
     with st.spinner("Veriler yükleniyor..."):
         kpi = load_kpi_data()
         kpi_history = load_kpi_history(7)
         webhook = load_webhook_stats()
 
-    # --- K4: Müşteri Metrikleri (KPI-EXA-02: süreç diyagramı Teknik Altyapı sayfasında) ---
-    _bolum("musteri-metrikleri").render()
+    # ================= BLOK 1/5 — Aksiyon şeridi (§8.4.1) =================
+    with st.container(border=True):
+        st.markdown(_AKSIYON_CSS, unsafe_allow_html=True)
+        b1, b2, b3, b4, b5 = st.columns(5, vertical_alignment="center")
+        with b1:
+            # K3-10f (KAHİN): "veriyi güncelle ile veriyi yenile aynı şey değil mi,
+            # mavi olan fazla gibi duruyor, onun yerine firmalar kısmını getir."
+            # Yenile düğmesi kaldırıldı; önbellek temizliği Veri Güncelle'ye taşındı.
+            from web_dashboard.tabs import tab_getir  # fonksiyon içi: döngüsel import yok
 
-    if kpi:
-        series = kpi_history.get("series", {})
-        _spark_login = series.get("login", [])
-        _spark_search = series.get("search", [])
-        _spark_yf = series.get("yeni_firma", [])
+            _firma_tab = tab_getir("musteriler")
+            st.link_button(
+                "👥 Firmalar", f"/{_firma_tab.url_path}" if _firma_tab else "/",
+                width="stretch", help="Firma listesine gider.",
+            )
+        with b2:
+            if st.button("⬇ Veri Güncelle", key="ovw_guncelle", width="stretch",
+                         help="Kaynaklardan veri çekme hattını çalıştırır, önbelleği temizler."):
+                with st.spinner("Veri hattı çalışıyor..."):
+                    _veri_guncelle()
+                st.cache_data.clear()
+        with b3:
+            if st.button("♥ Sağlık Kontrolü", key="ovw_saglik", width="stretch",
+                         help="API ve webhook alıcısının ayakta olup olmadığını sorar."):
+                with st.spinner("Servisler sorgulanıyor..."):
+                    _saglik_kontrolu()
+        with b4:
+            if st.button("⬆ Dışa Aktar (CSV)", key="ovw_export", width="stretch",
+                         help="Firma listesini CSV dosyası olarak hazırlar."):
+                with st.spinner("CSV hazırlanıyor..."):
+                    _csv_hazirla()
+        with b5:
+            etiket = "✓ Bekleyen Onaylar" if bekleyen < 0 else f"✓ Bekleyen Onaylar ({bekleyen})"
+            if st.button(etiket, key="ovw_onay", width="stretch",
+                         help="Onay bekleyen kullanıcıları listeler."):
+                st.session_state["ovw_onay_ac"] = True
 
-        # UI-CHART-01: st.metric yerine gradient KPI kartı (tema uyumlu, responsive)
-        cust_c1, cust_c2, cust_c3, cust_c4 = st.columns(4)
-        with cust_c1:
-            kpi_karti(
-                "Toplam Firma",
-                kpi.get("total", 0) or None,
-                sparkline=_spark_yf if _spark_yf else None,
-                kategori="musteri",
-                yardim="Veritabanında kayıtlı aktif firma sayısı",
+        sonuc = st.session_state.get("ovw_sonuc")
+        if sonuc:
+            tip, mesaj, saat = sonuc
+            {"success": st.success, "error": st.error}.get(tip, st.info)(f"{mesaj} · {saat}")
+        if st.session_state.get("ovw_csv"):
+            st.download_button(
+                "CSV dosyasını indir", st.session_state["ovw_csv"],
+                file_name=f"firmalar_{datetime.now():%Y%m%d_%H%M}.csv",
+                mime="text/csv", key="ovw_csv_indir",
             )
-        with cust_c2:
-            kpi_karti(
-                "Aktif Kullanıcı",
-                kpi.get("active_users", 0) or None,
-                sparkline=_spark_login if _spark_login else None,
-                kategori="musteri",
-                yardim="Son 7 gün içinde api_key ile istek yapmış kullanıcılar",
+        if st.session_state.pop("ovw_onay_ac", False) and bekleyen > 0:
+            st.info(f"{bekleyen} kullanıcı onay bekliyor — **Müşteriler › Kullanıcılar** sekmesinden işleyin.")
+
+    # ============ SATIR 2 — 4+1 durum şeridi (K3-10d, yatay bölme) ============
+    # KAHİN: "sağ tarafı 5 bölmüşsün ama örnekte yatay bölme yapmış — 4+1 kolon."
+    # Sol sütun 4 eşit metrik kolonu taşır, sağdaki dar sütun vurgulu özet panelidir.
+    series = kpi_history.get("series", {})
+    sol, sag = st.columns([4, 1.4], vertical_alignment="top")
+    with sol:
+        # K3-10f: yan yana bloklar **aynı** yükseklikte (KAHİN: "kolonlar hizalı
+        # ve eşit değil ... birbirlerine hizala").
+        with st.container(border=True, height=_SATIR_YUKSEKLIK["ust"]):
+            _bolum("musteri-metrikleri").render()
+            # KPI-RENK-03: her kart ayrı kategori rengi taşır (referans panelde
+            # de her sayı farklı renkte) — renk bilgi taşır, süs değildir.
+            _kart_izgara(
+                [
+                    {"baslik": "Toplam Firma", "deger": kpi.get("total"),
+                     "sparkline": series.get("yeni_firma") or None, "kategori": "musteri",
+                     "yardim": "Veritabanında kayıtlı aktif firma sayısı"},
+                    {"baslik": "Aktif Kullanıcı", "deger": kpi.get("active_users"),
+                     "sparkline": series.get("login") or None, "kategori": "basari",
+                     "yardim": "Son 7 gün içinde api_key ile istek yapmış kullanıcılar"},
+                    {"baslik": "Sinyal Sayısı", "deger": kpi.get("signal_count"),
+                     "sparkline": series.get("search") or None, "kategori": "bilgi",
+                     "yardim": "Oluşturulmuş toplam ticari sinyal (purchase intent vb.)"},
+                    # K3-10f: etiket tek satıra sığar — iki satıra sarınca kart
+                    # yüksekliği kayıyordu (KAHİN: "birbirlerine hizala").
+                    {"baslik": "API Çağrısı", "deger": kpi.get("api_calls_total"),
+                     "kategori": "uyari", "yardim": "Son 24 saatte yapılmış API çağrı sayısı"},
+                ],
+                "Müşteri metrikleri henüz veri üretmedi.",
             )
-        with cust_c3:
-            kpi_karti(
-                "Sinyal Sayısı",
-                kpi.get("signal_count", 0) or None,
-                sparkline=_spark_search if _spark_search else None,
-                kategori="musteri",
-                yardim="Oluşturulmuş toplam ticari sinyal (purchase intent vb.)",
+    with sag:
+        with st.container(border=False, height=_SATIR_YUKSEKLIK["ust"]):
+            isik, metin, renk = _durum_ozeti(kpi, webhook, bekleyen)
+            st.markdown(
+                _vurgu_paneli(
+                    isik, "Sistem Durumu", metin, renk,
+                    f"Son güncelleme {datetime.now():%H:%M} · önbellek ömrü 30 sn",
+                ),
+                unsafe_allow_html=True,
             )
-        with cust_c4:
-            kpi_karti(
-                "API Çağrıları (24h)",
-                kpi.get("api_calls_total", 0) or None,
-                kategori="musteri",
-                yardim="Son 24 saatte yapılmış API çağrı sayısı",
+            # K3-10g (KAHİN: "kritik uyarı yok kartının altına bir tane daha koy,
+            # boşluk kapansın"): sağ sütunun kalan yüksekliğini ikinci panel doldurur.
+            st.markdown("")
+            kuyruk = int(webhook.get("dlq_toplam", 0) or 0)
+            onay = max(bekleyen, 0)
+            k_isik, k_renk = ("🟢", RENKLER["success-text"]) if kuyruk == 0 and onay == 0 else (
+                ("🟡", RENKLER["warning-text"]) if kuyruk == 0 else ("🔴", RENKLER["danger-text"])
             )
+            st.markdown(
+                _vurgu_paneli(
+                    k_isik, "Kuyruk & Onay",
+                    f"{kuyruk} hatalı kayıt · {onay} onay bekliyor",
+                    k_renk,
+                    "DLQ boşsa yeniden deneme gerekmez · onaylar Müşteriler › Kullanıcılar",
+                ),
+                unsafe_allow_html=True,
+            )
+
+    # ============ 2×2 IZGARA — sistem metrikleri | oranlar / webhook | girişler ==
+    dlq = webhook.get("dlq_toplam", 0)
+    cache_hit = kpi.get("cache_hit_rate", 0)
+    query_ms = kpi.get("avg_query_latency_ms", 0)
+    # K3-10f (KAHİN, referans panel): "hep aynı şeyi mi kullanmış?" — hayır.
+    # Bu satırda üç **farklı** gösterim yan yana durur:
+    #   dikey içgörü rayı | KPI kartları | yüzde halkaları
+    icgoruler: list[tuple[str, str, str, str]] = []
+    if _dolu(kpi.get("total")):
+        icgoruler.append(("🏢", "Firma Havuzu",
+                          f"{sayi_formatla(kpi.get('total'))} firma kayıtlı.", "musteri"))
+    if _dolu(kpi.get("active_users")):
+        icgoruler.append(("👤", "Aktif Kullanıcı",
+                          f"Son 7 günde {sayi_formatla(kpi.get('active_users'))} kullanıcı istek yaptı.",
+                          "basari"))
+    if cache_hit:
+        icgoruler.append(("⚡", "Önbellek",
+                          f"İsteklerin %{cache_hit * 100:.0f}'i veritabanına hiç gitmiyor.", "sistem"))
+    if query_ms:
+        icgoruler.append(("⏱", "Sorgu Süresi",
+                          f"Ortalama {query_ms:.0f} ms — {'yavaş' if query_ms > 300 else 'normal'}.",
+                          "bilgi"))
+    icgoruler.append(
+        ("📨", "Hata Kuyruğu", f"{dlq} kayıt DLQ'da bekliyor.", "tehlike") if dlq
+        else ("📨", "Hata Kuyruğu", "DLQ boş — webhook zinciri temiz.", "basari")
+    )
+    if bekleyen > 0:
+        icgoruler.append(("✅", "Onay Kuyruğu", f"{bekleyen} kullanıcı onay bekliyor.", "uyari"))
+
+    g_sol, g_orta, g_sag = st.columns([1.3, 2, 1.5], vertical_alignment="top")
+    with g_sol:
+        with st.container(border=True, height=_SATIR_YUKSEKLIK["orta"]):
+            st.markdown("##### Öne Çıkanlar")
+            _icgoru_paneli(icgoruler)
+    with g_orta:
+        with st.container(border=True, height=_SATIR_YUKSEKLIK["orta"]):
+            _bolum("sistem-metrikleri").render()
+            _kart_izgara(
+                [
+                    # DLQ yalnız doluyken kart olur; 0 "iyi haber"dir, özet panelinde söylenir.
+                    {"baslik": "DLQ", "deger": dlq or None, "kategori": "tehlike",
+                     "yardim": "Hata kuyruğu — webhook işlemesi başarısız kayıt sayısı"},
+                    {"baslik": "Cache Hit",
+                     "deger": f"%{cache_hit * 100:.1f}" if cache_hit else None, "kategori": "sistem",
+                     "yardim": "Veritabanı sorgusu yerine cache'den cevap %"},
+                    {"baslik": "Sorgu Süresi",
+                     "deger": f"{query_ms:.0f} ms" if query_ms else None, "kategori": "bilgi",
+                     "yardim": "Veritabanı sorgularının ortalama yanıt süresi"},
+                ],
+                "Sistem metrikleri henüz veri üretmedi — ölçüm başlayınca kartlar açılır.",
+            )
+    with g_sag:
+        with st.container(border=True, height=_SATIR_YUKSEKLIK["orta"]):
+            st.markdown("##### Oranlar")
+            # Yüzde halkaları (conic-gradient). Gerçek kaynaklar:
+            #   veri tamlığı → src/company_master/tenant/health.py
+            #   kalite skoru → admin_quality.load_quality_overview()["ortalama_skor"]
+            _halka_satiri([
+                ("Cache Hit", cache_hit * 100 if cache_hit else None, "sistem"),
+                ("Veri Tamlığı", None, "bilgi"),
+                ("Kalite Skoru", None, "basari"),
+            ])
+
+    a_sol, a_sag = st.columns(2, vertical_alignment="top")
+    with a_sol:
+        with st.container(border=True, height=_SATIR_YUKSEKLIK["alt"]):
+            _bolum("webhook-akisi").render()
+            flow_df = pd.DataFrame({
+                "Durum": ["Başarılı", "Hatalı", "DLQ"],
+                "Adet": [
+                    webhook.get("basarili", 0),
+                    webhook.get("hatali", 0),
+                    webhook.get("dlq_toplam", 0),
+                ],
+            })
+            # K3-10f: donut yüksekliği bloğa sığar — 280 px blok alt kenarından
+            # taşıyıp halkanın alt yayını kırpıyordu.
+            if flow_df["Adet"].sum() > 0:
+                donut(flow_df, "Durum", "Adet", merkez_metin="olay", yukseklik=_DONUT_YUKSEKLIK)
+            elif TASLAK:
+                # K3-10f: blok boş kalmasın — taslakta sahte dağılım çizilir.
+                donut(
+                    pd.DataFrame({"Durum": ["Başarılı", "Hatalı", "DLQ"], "Adet": [820, 47, 12]}),
+                    "Durum", "Adet", merkez_metin="olay", yukseklik=_DONUT_YUKSEKLIK,
+                )
+                st.caption("⚠️ **SAHTE VERİ (taslak)**: webhook dağılımı — gerçek veri bağlanınca silinecek.")
+            else:
+                st.caption("Webhook verisi henüz toplanmadı. Sistem kullanılınca burada görünecek.")
+    with a_sag:
+        # K3-10f (KAHİN): "her şey yatay oldu, dikey ilerleyen bir şeyler lazım —
+        # örneğin bar çubuklar." Referans panelde de donut'ın yanında **dikey**
+        # sütun grafiği var. `st.bar_chart` yerleşik; ek paket yok.
+        with st.container(border=True, height=_SATIR_YUKSEKLIK["alt"]):
+            st.markdown("##### Günlük Hacim (7 gün)")
+            gunluk = {ad: seri for ad, seri in (
+                ("Yeni Firma", series.get("yeni_firma")),
+                ("Giriş", series.get("login")),
+                ("Arama", series.get("search")),
+            ) if seri}
+            if gunluk:
+                uzunluk = max(len(s) for s in gunluk.values())
+                st.bar_chart(
+                    pd.DataFrame(
+                        {ad: list(s) + [0] * (uzunluk - len(s)) for ad, s in gunluk.items()},
+                        index=[f"G-{uzunluk - i}" for i in range(uzunluk)],
+                    ),
+                    height=200,
+                )
+            elif TASLAK:
+                st.bar_chart(
+                    pd.DataFrame(
+                        {"Yeni Firma": [4, 7, 5, 9, 6, 11, 8], "Giriş": [12, 9, 14, 11, 16, 13, 18]},
+                        index=[f"G-{7 - i}" for i in range(7)],
+                    ),
+                    height=200,
+                )
+                st.caption("⚠️ **SAHTE VERİ (taslak)**: günlük hacim — gerçek veri bağlanınca silinecek.")
+            else:
+                st.caption("Günlük hacim verisi henüz toplanmadı.")
+
+    # ---- Satır-içi barlı tablo: sayfadaki **beşinci** gösterim tipi ----------
+    # Referans panelde de grafiklerin yanında mini barlı tablo var.
+    # `st.column_config.ProgressColumn` yerleşiktir; ek paket/CSS yok.
+    st.markdown("##### Kaynak Doluluğu")
+    if TASLAK:
+        st.dataframe(
+            pd.DataFrame({
+                "Kaynak": ["OSB Üye Listesi", "Ticaret Sicili", "Web Sitesi", "LinkedIn", "Apify Crawl"],
+                "Kayıt": [8313, 6204, 4180, 2975, 1460],
+                "Doluluk": [92, 71, 48, 34, 17],
+            }),
+            hide_index=True, width="stretch", height=215,
+            column_config={
+                "Kayıt": st.column_config.NumberColumn("Kayıt", format="%d"),
+                "Doluluk": st.column_config.ProgressColumn(
+                    "Doluluk", min_value=0, max_value=100, format="%d%%",
+                ),
+            },
+        )
+        st.caption("⚠️ **SAHTE VERİ (taslak)**: kaynak doluluk tablosu — gerçek veri bağlanınca silinecek.")
     else:
-        st.info("Müşteri metrikleri yükleniyor... Veriler 24 saat içinde görünecek.")
+        st.caption("Kaynak doluluğu için `sources` tablosu henüz bağlanmadı.")
 
-    # --- K4: Sistem Metrikleri ---
-    _bolum("sistem-metrikleri").render()
-
-    if webhook or kpi:
-        sys_c1, sys_c2, sys_c3, sys_c4 = st.columns(4)
-        with sys_c1:
-            dlq_ok = webhook.get("dlq_toplam", 0) == 0
-            kpi_karti(
-                "Sistem Durumu",
-                "Sağlıklı" if dlq_ok else "Uyarı",
-                kategori="basari" if dlq_ok else "uyari",
-                yardim="DLQ kuyruğu boş → sistem çalışıyor",
-            )
-        with sys_c2:
-            dlq_count = webhook.get("dlq_toplam", 0)
-            kpi_karti(
-                "DLQ (Hata Kuyruğu)",
-                dlq_count,
-                kategori="tehlike" if dlq_count else "sistem",
-                yardim="Webhook işlemesi başarısız olan kayıt sayısı",
-            )
-        with sys_c3:
-            cache_hit = kpi.get("cache_hit_rate", 0)
-            kpi_karti(
-                "Cache Hit Oranı",
-                f"%{cache_hit * 100:.1f}" if cache_hit else None,
-                kategori="sistem",
-                yardim="Veritabanı sorgusu yerine cache'den cevap %",
-            )
-        with sys_c4:
-            query_ms = kpi.get("avg_query_latency_ms", 0)
-            kpi_karti(
-                "Ort. Query Latency",
-                f"{query_ms:.0f} ms" if query_ms else None,
-                kategori="sistem",
-                yardim="Veritabanı sorgularının ortalama yanıt süresi",
-            )
-    else:
-        st.info("Sistem metrikleri yükleniyor... Veriler kısa süre içinde görünecek.")
-
-    # --- K2: Uyarılar (boş state örneği) ---
-    _bolum("anlik-uyarilar").render()
-    if webhook.get("dlq_toplam", 0) > 0:
-        st.warning(f"{webhook['dlq_toplam']} işleme başarısız DLQ kaydı var. İncelemeyi gerektirir.")
-    elif kpi.get("cache_hit_rate", 0) and kpi.get("cache_hit_rate", 0) < 0.3:
-        st.warning("Cache hit oranı düşük (%30 altında). Veritabanı yükü yüksek olabilir.")
-    else:
-        st.success("Sistem iyi durumda. Kritik uyarı yok.")
-
-    # --- İstatistik grafiği ---
-    _bolum("webhook-akisi").render()
-    if webhook and webhook.get("olay_toplam", 0) > 0:
-        flow_df = pd.DataFrame({
-            "Durum": ["Başarılı", "Hatalı", "DLQ"],
-            "Adet": [
-                webhook.get("basarili", 0),
-                webhook.get("hatali", 0),
-                webhook.get("dlq_toplam", 0),
-            ],
-        })
-        if flow_df["Adet"].sum() > 0:
-            # UI-CHART-01: bar → donut (merkezde toplam olay, hover tooltip)
-            donut(flow_df, "Durum", "Adet", baslik="Webhook Akışı", merkez_metin="olay")
-    else:
-        st.info("Webhook verisi henüz toplanmadı. Sistem kullanılınca veriler burada görünecek.")
+    # K3-10g: rehber anahtarı sayfa altında (`app.REHBER_KEY`); modül yalnız okur.
+    if st.session_state.get("_hg_rehber", False):
+        st.info(
+            "**Bu ekran ne işe yarar?** Müşteri tarafı (kayıt, onay, kredi) ve sistem tarafı "
+            "(firma sayısı, kalite skoru, görev durumu) metriklerini tek bakışta gösterir.\n\n"
+            "**Nasıl kullanılır?** Kartlar veri geldikçe kendiliğinden açılır; verisi olmayan "
+            "metrik kart olarak çizilmez, ızgara daralır. Bölüm başlıklarından ilgili panele atlayın.\n\n"
+            "**Veriler nereden gelir?** `/api/kpi` ve `/metrics` uç noktaları ile "
+            "webhook izleme kayıtları. 30 saniyede bir yenilenir.\n\n"
+            "**Dikkat:** Taslak modunda (`HUGINN_TASLAK=1`) görünen bazı kutular **SAHTE VERİ** "
+            "etiketlidir; gerçek veri bağlanınca kaldırılacaktır."
+        )

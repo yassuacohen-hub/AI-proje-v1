@@ -16,15 +16,22 @@ from web_dashboard.tabs import (
 )
 
 # Menüden çıkarılan (ust=None) ama URL'i yaşamaya devam eden sekmeler.
+# UX-MENU-04 (2026-09-25): proje_yonetimi 11 alt sekmeden 4'e indi; taşan
+# sekmeler seviye 3'e (sayfa gövdesi) veya hesap popover'ına çıktı.
 MENUSUZ = (
     "executive",
     "arama",
     "performans",
     "webhook",
-    "dlq",
     "yenileme",
     "ayarlar",
     "yukleme",
+    "ajan_sohbet",
+    "rapor_listesi",
+    "kvkk_rapor",
+    "kontrol_panosu",
+    "feature_flags",
+    "mfa",
 )
 
 
@@ -35,6 +42,28 @@ def test_ust_sayfa_sayisi() -> None:
 def test_menudeki_alt_sekme_sayisi() -> None:
     toplam = sum(len(alt_sekmeler(k)) for k in ust_sayfalar())
     assert toplam <= 18, f"menüde {toplam} alt sekme var"
+
+
+def test_etiket_benzersiz() -> None:
+    """UX-MENU-04: aynı ikon+başlık iki kez çizilemez (çift buton kaynağı)."""
+    etiketler = [f"{t.ikon} {t.baslik}" for t in SECTIONS]
+    cift = {e for e in etiketler if etiketler.count(e) > 1}
+    assert not cift, f"çift etiket: {sorted(cift)}"
+
+
+def test_ikon_benzersiz() -> None:
+    """UX-MENU-04: menüde görünen her sekmenin ikonu ayırt edici olmalı."""
+    menudeki = [t for t in SECTIONS if t.ust or t.anahtar in ust_sayfalar()]
+    ikonlar = [t.ikon for t in menudeki]
+    cift = {i for i in ikonlar if ikonlar.count(i) > 1}
+    assert not cift, f"çift ikon: {sorted(cift)}"
+
+
+def test_sira_bosluksuz() -> None:
+    """UX-MENU-04: alt sekme sıraları 0..n-1 aralığını boşluksuz doldurur."""
+    for anahtar in ust_sayfalar():
+        siralar = [t.sira for t in alt_sekmeler(anahtar)]
+        assert siralar == list(range(len(siralar))), f"{anahtar}: {siralar}"
 
 
 def test_ust_basina_alt_sekme_siniri() -> None:

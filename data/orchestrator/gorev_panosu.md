@@ -8,17 +8,10 @@
 | Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |
 |-------|--------|-------|---------|-------|----------|
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s) | ihsan | P1 | iptal | scripts/pano_denetim.py, scripts/tetik_senk.py, tests/test_d66_bypass_tetikleme.py |
-| API-ADMIN-MFA-26 | [API] MFA + hesap kilidi akışını yaz → A6 auth (4s) | utku | P2 | review | - |
-| UTKU-01 | [UTKU] Veri şeması doğrulama - Core modülü (2s) | utku | P0 | aktif | src/core/schema_validator.py |
 | UTKU-02 | [UTKU] API endpoint optimizasyon - response time (2s) | utku | P1 | todo | src/api/endpoints.py |
-| UTKU-03 | [UTKU] Hata loglama sistemi - production hazırlığı (2s) | utku | P0 | todo | src/logging/error_logger.py |
+| UTKU-03 | [UTKU] Hata loglama sistemi - production hazırlığı (2s) | utku | P0 | aktif | src/logging/error_logger.py |
 | UTKU-04 | [UTKU] Veritabanı migration - index optimizasyon (1s) | utku | P1 | todo | src/company_master/schema/migrations/0020_index_optimization.sql |
 | UTKU-05 | [UTKU] Kullanıcı kimlik doğrulama - token yenileme (2s) | utku | P0 | todo | src/auth/token_refresh.py |
-| YASU-01 | [YASU] Frontend bileşen kütüphanesi - temel UI (3s) | yasu | P0 | aktif | frontend/components/base_ui.tsx |
-| YASU-02 | [YASU] Responsive tasarım - mobil uyumluluk (2s) | yasu | P1 | todo | frontend/styles/responsive.css |
-| YASU-03 | [YASU] Grafiksel dashboard - veri görselleştirme (3s) | yasu | P1 | todo | frontend/components/dashboard.tsx |
-| YASU-04 | [YASU] Durum yönetimi - state management (2s) | yasu | P0 | todo | frontend/store/redux_store.ts |
-| YASU-05 | [YASU] Erişilebilirlik - WCAG 2.1 uyumu (2s) | yasu | P1 | todo | frontend/accessibility/wcag_compliance.md |
 | ORCH-01 | [ORCH] İş akışı koordinasyon - görev planlama (2s) | ihsan | P0 | todo | orchestration/workflow_coordinator.py |
 | ORCH-02 | [ORCH] Bağımlılık yönetimi - görüntü grafiği (2s) | ihsan | P1 | todo | orchestration/dependency_graph.py |
 | ORCH-03 | [ORCH] Görev dağıtımı - load balancing (2s) | ihsan | P0 | todo | orchestration/load_balancer.py |
@@ -42,6 +35,7 @@
 | TEST-ADMIN-K2-AGIRLIK-23 | [TEST] K2 ağırlık şemasını denetle → test + SSOT kanıt (1s) | yasu | 2026-09-25T04:26:42 |
 | DOC-ADMIN-V9-KUTUCUK-24 | [DOC] V9 §16.5 kutucuklarını düzelt → 6 madde (1s) | utku | 2026-09-24T20:56:00 |
 | UI-ADMIN-FEATURE-FLAG-25 | [UI] Feature flag yönetim ekranını yaz → A5 MVP (3s) | utku | 2026-09-25T04:36:47 |
+| API-ADMIN-MFA-26 | [API] MFA + hesap kilidi akışını yaz → A6 auth (4s) | utku | 2026-09-26T04:06:34 |
 | UI-ADMIN-LTV-CAC-27 | [UI] LTV/CAC kartlarını yaz → K8 tamamlama (2s) | utku | 2026-09-25T22:31:25 |
 | DOC-ADMIN-MULTITENANT-KARAR-28 | [DOC] Multi-tenant kararını belgele → KK-7 (1s) | utku | 2026-09-25T22:31:15 |
 | TEST-BLOKE-FAKTOR-ARASTIRMA-01 | [TEST] Test hazirlik plani arastir → test_bloke_hazirlik.py (3s) | yasu | 2026-09-24T22:11:11.842076 |
@@ -59,4 +53,10 @@
 | KONTROL-KVKK-MASKELEME-31 | [KONTROL] KVKK maskeleme end-to-end test → admin panel e2e | yasu | 2026-09-25T22:48:39 |
 | UI-KONTROL-PANOSU-32 | [UI] Admin kontrol panosu → maskeleme durum metriksleri | utku | 2026-09-25T04:36:47 |
 | DOKUMAN-KVKK-FAQ-33 | [DOC] KVKK FAQ & sorun çözme → markdown troubleshooting guide | utku | 2026-09-25T04:36:47 |
+| UTKU-01 | [UTKU] Veri şeması doğrulama - Core modülü (2s) | utku | 2026-09-25T20:30:00 |
+| YASU-01 | [YASU] Frontend bileşen kütüphanesi - temel UI (3s) | yasu | 2026-09-26T04:06:33 |
+| YASU-02 | [YASU] Responsive tasarım - mobil uyumluluk (2s) | yasu | 2026-09-26T04:06:33 |
+| YASU-03 | [YASU] Grafiksel dashboard - veri görselleştirme (3s) | yasu | 2026-09-26T04:06:33 |
+| YASU-04 | [YASU] Durum yönetimi - state management (2s) | yasu | 2026-09-26T04:06:33 |
+| YASU-05 | [YASU] Erişilebilirlik - WCAG 2.1 uyumu (2s) | yasu | 2026-09-26T04:06:34 |
 | ADMIN-UX-GELIR-GRUP-01 | Gelir&Paketler grubu tamamla: executive+maliyet sekmelerini ust=gelir'e tasi | utku | 2026-09-25T23:21:54 |

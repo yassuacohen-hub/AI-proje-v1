@@ -294,9 +294,9 @@
     "baslik": "[API] MFA + hesap kilidi akışını yaz → A6 auth (4s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-26T04:06:34",
     "dosyalar": [],
     "dependencies": [],
     "not": "Teslim (utku): MFA sistemi tamamlandı: B-01/B-02 login flow MFA step (login returns mfa_token), B-02 login_tokens tablosu, B-03 status/disable/backup-codes session kullanımı, B-04 lockout, B-05 admin_mfa.py UI sekmesi. Migration 0019 güncellendi (login_tokens tablosu). Testler: 55 passed. Kodlama denetimi temiz (pre-existing issues only).",
@@ -690,9 +690,9 @@
     "baslik": "[UTKU] Veri şeması doğrulama - Core modülü (2s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-25T20:30:00",
     "dosyalar": [
       "src/core/schema_validator.py"
     ],
@@ -730,7 +730,7 @@
     "baslik": "[UTKU] Hata loglama sistemi - production hazırlığı (2s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "todo",
+    "durum": "aktif",
     "baslangic": null,
     "bitis": null,
     "dosyalar": [
@@ -740,7 +740,7 @@
     "source": "ic",
     "from_agent": null,
     "mod": "code",
-    "brief": "plans/brief_UTKU-03.md",
+    "brief": "plans/brief_utku_UTKU-03.md",
     "talimat": "UTKU-03: [UTKU] Hata loglama sistemi - production hazırlığı (2s) Brief: plans/brief_UTKU-03.md",
     "dependencies": []
   },
@@ -790,13 +790,13 @@
     "baslik": "[YASU] Frontend bileşen kütüphanesi - temel UI (3s)",
     "sahip": "yasu",
     "oncelik": "P0",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-26T04:06:33",
     "dosyalar": [
       "frontend/components/base_ui.tsx"
     ],
-    "not": "YASU-01: Yeni görev. Frontend bileşen kütüphanesini kur.",
+    "not": "Teslim (yasu): React 18+ TypeScript Frontend Bileşen Kütüphanesi (base_ui.tsx) kuruldu: Button, Input, TextArea, Select, Card, Badge, Avatar, Modal (8 adet styled component). TypeScript tipleri, ARIA desteği ve barrel export eklendi. Storybook konfigürasyonu (.storybook/main.ts) tamamlandı.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -810,19 +810,20 @@
     "baslik": "[YASU] Responsive tasarım - mobil uyumluluk (2s)",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "todo",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-26T04:06:33",
     "dosyalar": [
       "frontend/styles/responsive.css"
     ],
-    "not": "YASU-02: Yeni görev. Mobil cihazlar için responsive tasarım.",
+    "not": "Teslim (yasu): Responsive CSS (responsive.css) oluşturuldu: 4 breakpoint (320px, 768px, 1024px, 1280px) mobile-first, CSS Grid/Flexbox, touch-friendly interactions, prefers-reduced-motion, dark mode support, CSS variables ile consistent spacing/typography.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_YASU-02.md",
     "talimat": "YASU-02: [YASU] Responsive tasarım - mobil uyumluluk (2s) Brief: plans/brief_YASU-02.md",
-    "dependencies": []
+    "dependencies": [],
+    "hafiza_izi": "atlandi"
   },
   {
     "task_id": "YASU-03",
@@ -830,19 +831,20 @@
     "baslik": "[YASU] Grafiksel dashboard - veri görselleştirme (3s)",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "todo",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-26T04:06:33",
     "dosyalar": [
       "frontend/components/dashboard.tsx"
     ],
-    "not": "YASU-03: Yeni görev. Dashboard'u veri görselleştirmesiyle geliştir.",
+    "not": "Teslim (yasu): 6 grafik türü (Bar, Line, Area, Pie, Radar, Scatter) Recharts ile. Responsive grid layout, KPI data interface, Card bileşenleri, export to PDF/CSV fonksiyonu.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_YASU-03.md",
     "talimat": "YASU-03: [YASU] Grafiksel dashboard - veri görselleştirme (3s) Brief: plans/brief_YASU-03.md",
-    "dependencies": []
+    "dependencies": [],
+    "hafiza_izi": "atlandi"
   },
   {
     "task_id": "YASU-04",
@@ -850,19 +852,20 @@
     "baslik": "[YASU] Durum yönetimi - state management (2s)",
     "sahip": "yasu",
     "oncelik": "P0",
-    "durum": "todo",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-26T04:06:33",
     "dosyalar": [
       "frontend/store/redux_store.ts"
     ],
-    "not": "YASU-04: Yeni görev. Redux state management kur.",
+    "not": "Teslim (yasu): Redux store ve reducers kuruldu: authSlice, uiSlice, dataSlice, settingsSlice, notificationsSlice (5 reducer). redux_store.ts + RootState + devTools aktif. @reduxjs/toolkit + react-redux bağımlılıkları eklendi.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_YASU-04.md",
     "talimat": "YASU-04: [YASU] Durum yönetimi - state management (2s) Brief: plans/brief_YASU-04.md",
-    "dependencies": []
+    "dependencies": [],
+    "hafiza_izi": "atlandi"
   },
   {
     "task_id": "YASU-05",
@@ -870,13 +873,13 @@
     "baslik": "[YASU] Erişilebilirlik - WCAG 2.1 uyumu (2s)",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "todo",
+    "durum": "done",
     "baslangic": null,
-    "bitis": null,
+    "bitis": "2026-09-26T04:06:34",
     "dosyalar": [
       "frontend/accessibility/wcag_compliance.md"
     ],
-    "not": "YASU-05: Yeni görev. WCAG 2.1 standartlarına uy.",
+    "not": "Teslim (yasu): WCAG 2.1 AA uyumu: wcag_compliance.md (16 basari kriteri, kontrast tablosu, klavye haritasi), audit_report.json (skor 97), 11/11 vitest erisilebilirlik testi gecti. Modal'a Escape + focus trap + aria-modal eklendi. tsc --noEmit 0 hata.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
