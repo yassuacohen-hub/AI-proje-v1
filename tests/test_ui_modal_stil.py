@@ -6,7 +6,7 @@ Bu test o iki düzeltmenin geri gitmesini engeller.
 """
 from __future__ import annotations
 
-from company_master.ui.styles import _MODAL_CSS, tum_css
+from company_master.ui.styles import _CONTAINER_CSS, _MODAL_CSS, tum_css
 
 
 def test_backdrop_blur_var() -> None:
@@ -33,9 +33,19 @@ def test_modal_css_uretilen_temada_yer_alir() -> None:
         assert "backdrop-filter:blur(10px)" in css
 
 
+def test_container_cerceve_kategori_rengi_yok() -> None:
+    """K3-10h madde 4: tüm bordered container'lar tek global kuralla kalınlaşır;
+    kategori rengi (KATEGORI_RENK) YOK, yalnız border-strong token'ı kullanılır."""
+    assert 'div[data-testid="stVerticalBlockBorderWrapper"]' in _CONTAINER_CSS
+    assert "border:2px solid var(--hg-color-border-strong)" in _CONTAINER_CSS
+    for tema in ("karanlik", "aydinlik"):
+        assert _CONTAINER_CSS.strip() in tum_css(tema=tema)
+
+
 if __name__ == "__main__":  # tek çalıştırılabilir kontrol
     test_backdrop_blur_var()
     test_marka_kimligi_var()
     test_css_suslu_parantez_dengeli()
     test_modal_css_uretilen_temada_yer_alir()
+    test_container_cerceve_kategori_rengi_yok()
     print("OK: modal stil kontrolleri gecti")

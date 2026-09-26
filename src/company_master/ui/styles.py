@@ -449,6 +449,13 @@ bottom:var(--hg-space-3)}
 }
 """
 
+# K3-10h madde 4: st.container(border=True) çerçevelerini tek global kuralla
+# kalınlaştır/koyulaştır. Kategori rengi YOK — yalnız belirginlik artışı.
+_CONTAINER_CSS = """
+div[data-testid="stVerticalBlockBorderWrapper"]{
+border:2px solid var(--hg-color-border-strong)!important}
+"""
+
 _ERISIM_CSS = """
 @media (prefers-reduced-motion: reduce){
 .hg-btn,.hg-card,.hg-input-field,.hg-select-field,.hg-tooltip-bubble,
@@ -470,6 +477,7 @@ _BLOKLAR: tuple[str, ...] = (
     _PAGE_CSS,
     _TOPBAR_CSS,
     _CHAT_CSS,
+    _CONTAINER_CSS,
     _ERISIM_CSS,
 )
 
