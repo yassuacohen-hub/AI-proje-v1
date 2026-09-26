@@ -970,3 +970,137 @@ Utku toplu emri (madde 12) yürütülmeden önce panodaki `todo` kayıtları kod
 - **Aksiyon:** 8 kayıt `scripts/_hayalet_gorev_arsiv.py` ile `durum=archive`'e taşındı, `not` alanına gerekçe eklendi. Task board dışında kod değişikliği yok.
 - **Doğrulama:** `pytest tests/test_naming_audit.py -q` → 9 passed (D-57 denetimi etkilenmedi).
 - **Sonuç:** Utku toplu emrindeki 8 backlog görevinden gerçek kalan sıfır; madde 12 kapandı (hepsi hayaletti).
+
+---
+
+## D-217 — Tek Brif + Brifte Ajan Chat Zorunlu (KAHİN kararı 2026-09-26)
+
+D-66 "brifsiz atama yasak" der ama **kaç brif** yazılacağını söylemiyordu; toplu iş faz başına ayrı dosyaya bölünüyordu. Ayrıca D-210 ajan chat kuralı yalnız AGENTS.md'de yazılıydı — brifi okuyan ajan chat zorunluluğunu görmüyordu.
+
+### Şablon kullanımı zorunlu
+- **Her brif** [[plans/_brief_sablon]]'dan türetilir. Sıfırdan brif yazmak yasak.
+- Zorunlu bölümler (eksikse brif geçersiz, `al` reddedilir):
+  `**Başlık:**` · `**Öncelik:**` · `**Hub:**` · `## Neden` · `## Doğrulanacak varsayım` ·
+  `## Adımlar` (veya `## Faz A`) · `## Kabul kriteri` · `## Ajan chat zorunlu` · `## Teslim`
+- **Denetim:** `tests/test_brief_sablon_denetim.py` — `plans/brief_*.md` dosyalarında zorunlu bölümleri arar.
+- Kanonik şablon **tek dosya**: `plans/_brief_sablon.md`. İkinci şablon dosyası açmak D-211 ihlali.
+
+### Tek brif kuralı
+- **Bir görev = bir brif.** Toplu iş birden çok brif dosyasına bölünmez.
+- Toplu iş tek brifte `## Faz A — <ad>`, `## Faz B — <ad>` başlıklarıyla anlatılır.
+- Her fazda: kök neden + etkilenen `dosya:satır` + o fazın doğrulama komutu.
+- Fazlar **sırayla** yapılır; en riskli/veri kaybı riskli faz **ilk** sırada.
+- Kabul kriteri: faz başına bir satır + sonda bütünün tek doğrulaması.
+- **Yasak:** faz başına ayrı brif dosyası, ayrı `task_id`, ayrı tetik.
+
+### Brifte ajan chat zorunlu
+Her brif `## Ajan chat zorunlu (D-210 · D-217)` bölümünü **taşımak zorundadır**. D-210 kuralı brif metnine iner:
+- Brifteki varsayım kodda tutmuyorsa → sorun aç, **uydurma, durma**.
+- Faz tıkandıysa → sorun aç, **sonraki faza geç**, zinciri durdurma.
+- @mention → P0 5-10 dk, P1 10-15 dk, P2 15-30 dk cevap zorunlu.
+- Komut referansı (D-210 §Chat Komutları) brife kopyalanır: `ajan_chat.py ac|oku`, `chat_gonder.py`.
+
+### İkiz şablon temizliği (D-211 uygulaması)
+`plans/brief_TEMPLATE.md` silindi — `plans/_brief_sablon.md` ile ikizdi, hiçbir yerden referans almıyordu (yetim). **Kanonik şablon tek:** [[plans/_brief_sablon]].
+
+- **Şablon güncellendi:** tek brif uyarısı + faz talimatı + ajan chat bölümü eklendi.
+- **Referans:** D-66 (brifsiz atama yasak), D-210 (ajan chat), D-211 (ikiz yapı yasağı).
+
+### Mandal (ratchet) yaklaşımı
+D-217 öncesi **112 brif** eski formatta. Geriye dönük düzeltmek değer üretmez (kapanmış işlerin brifi).
+`tests/_brief_baseline.txt` bu 112 kaydı dondurur; denetim yalnız **yeni** brifleri kapıda tutar.
+Baseline **yalnız küçülür** — üst sınır testte 112'ye sabit. Yeni brifi baseline'a eklemek yasak.
+
+```bash
+python -m pytest tests/test_brief_sablon_denetim.py -q          # kapı
+python tests/test_brief_sablon_denetim.py --baseline-yaz        # yalnız KAHİN kararıyla
+```
+
+---
+
+## D-218 — Obsidyen Grafiği Zorunlu (KAHİN kararı 2026-09-26)
+
+**Sorun:** Ajanlar Obsidyen'den faydalanmıyor. Linksiz doküman grafikten kopuk kalır; ajan onu bulmak için tüm repoyu tarar. Her kopuk doküman kalıcı **token + süre maliyeti** doğuruyor.
+
+**Karar:** Obsidyen proje hafızasıdır; doküman grafiğe bağlanmadan iş kapanmaz.
+
+- **Her brif** `## Ilgili Nodlar` bölümü ve **en az 2 wikilink** taşır: kaynak SSOT + hub.
+- Görev sırasında **yeni** doküman üretilirse (rapor, plan, not) brife linklenir **ve** o dokümana kendi `## Ilgili Nodlar` bölümü eklenir — **çift yön** bağ.
+- Markdown yolu değil `[[wikilink]]` kullanılır; Obsidyen grafiği yalnız wikilink'i sayar.
+- **Denetim:** `tests/test_brief_sablon_denetim.py` — `## Ilgili Nodlar` + `[[` sayısı ≥ 2.
+- **Referans:** D-217 (brif şablonu), B-14 (hub kapısı).
+
+---
+
+## D-219 — Ajan Oturum Hafızası (KAHİN kararı 2026-09-26)
+
+**Sorun:** Oturum kapanınca ajanın bağlamı sıfırlanır. Sonraki oturum aynı keşfi baştan yapar — kalıcı token + süre maliyeti. Tek istisna `ihsan_project_context.md`; diğer ajanların hafızası yoktu.
+
+**Karar:** Her ajanın **tek** kalıcı hafıza dosyası vardır: `<ajan>_project_context.md`.
+
+- **Şablon:** [[Huginn Data Insights/_ajan_context_sablon]] — bölüm sırası **sabit**; ajan aynı bilgiyi aynı yerde bulur, arama yapmaz.
+- Dosyalar: `ihsan_` (kanonik örnek), `utku_`, `yasu_`, `salih_`.
+- **§KALDIĞIM YER** en üstte, **tek blok, üzerine yazılır** (biriktirilmez): Konum / Yapılanlar / Kritik bağlam / Sonraki adım / Görev + Son okunan karar.
+  - *Kritik bağlam* satırı en değerlisi: "SADECE şu dosyaları baz al" — ajanın gereksiz repo taramasını kesen tek satır.
+- **§Tuzaklar** ikinci değerli bölüm: *belirti → kök neden → çözüm*. Yazılmayan tuzak gelecek oturumda tekrar ödenir.
+- **Slash komutu ile üretilmez.** Komut ancak tahmin eder; tahmin hayalet görev doğurur (D-216). Yazılı olan tek güvenilir hafızadır.
+- **Context pano ile çelişirse pano üstündür** — context bayatlar, pano canlıdır.
+- **Tavan 200 satır.** Aşınca eski oturum blokları `archive/<ajan>_context_<YYYYMM>.md`'ye taşınır; şişmiş context her oturumda okunur, maliyeti kalıcıdır.
+- **Oturum kapanışı zorunlu:** §KALDIĞIM YER güncellenir + *Son okunan karar* no tazelenir. Atlanırsa dosyanın tüm faydası kaybolur.
+
+---
+
+## D-220 — Doküman Sıkılaştırma Politikası (KAHİN kararı 2026-09-26)
+
+**Ölçüm (2026-09-26):** `4924` markdown dosyası. `4174`'ü (**%85**) gürültü; yalnız `750` kanonik. `README.md` **437** ayrı yerde, `SKILL.md` **360**, `CHANGELOG.md` **133**. Aynı köke düşen ad: **425**.
+
+**Sorun:** Benzer evraklar aramayı kirletir. Ajan doğru dosyayı bulmak için onlarca yanlışı okur; her yanlış okuma token + süre + **yanlış dosyayı düzenleme riski**.
+
+### Kural 1 — Tek Kanonik Yol
+
+Her doküman türünün **tek** yaşam yeri vardır. Tabloda yoksa yeni tür açılmaz; en yakın türe yazılır.
+
+| Tür | Kanonik yol | Şablon |
+|-----|-------------|--------|
+| Kural / karar (D-NN) | `Huginn Data Insights/AGENTS.md` | — (tek dosya) |
+| Görev brifi | `plans/brief_<ajan>_<TASK_ID>.md` | `plans/_brief_sablon.md` |
+| Ajan oturum hafızası | `<ajan>_project_context.md` | `_ajan_context_sablon.md` |
+| Konu hub'ı | `hubs/<KONU>_HUB.md` | — |
+| Ürün SSOT | `AI proje v1/V10/05_versiyonlar/` | — |
+| Görev panosu | `data/orchestrator/` | — |
+
+### Kural 2 — Arama Kapsamı Dışı
+
+Ajan arama/okuma yaparken bu yolları **atlar**. Buralarda değişiklik yapmak da yasak:
+
+`.agents/` · `.kilo/` · `.claude/` · `data_worktree/` · `**/backups/` · `node_modules/` · `archive/` · `data/skills/` · `_ARSIV*` · `worktree klasoru/`
+
+Üçüncü parti skill'ler, git worktree kopyaları ve yedekler kanonik değildir. Bir dosya yalnız buralarda bulunuyorsa **kanonik karşılığı yok** demektir — kopyalamak yerine kanonik yolda oluştur.
+
+### Kural 3 — Şablon Tekliği
+
+Bir tür için **tek** şablon: `_<tür>_sablon.md`. İkinci şablon (`*_TEMPLATE.md`, `*_v2.md`, `*_yeni.md`) açmak D-211 ikiz ihlalidir. Şablon yetersizse **şablon düzeltilir**, yenisi açılmaz.
+
+### Kural 4 — Yeni Doküman Kapısı
+
+Yeni `.md` açmadan önce sırayla:
+
+1. Bu bilgi mevcut bir dokümana **eklenebilir mi**? → ekle, yeni dosya açma.
+2. Türü D-220 tablosunda var mı? → yoksa KAHİN onayı gerekir.
+3. `## Ilgili Nodlar` + en az 2 wikilink var mı? → D-218 zorunlu.
+4. Adı `_eski`, `_yeni`, `_kopya`, `_final`, `_v2` içeriyor mu? → **yasak**, git geçmişi bu işi yapar.
+
+### Denetim
+
+`tests/test_dokuman_politikasi.py` — Kural 1/3/4 kapıda. Tek başına da koşar:
+
+```bash
+python -X utf8 tests/test_dokuman_politikasi.py   # sayıları raporlar
+python -m pytest tests/test_dokuman_politikasi.py -q
+```
+
+**Mandal:** D-220 anında 15 yasak-ad ihlali vardı (`_FINAL`, `_v2`, `_YENİ`…). Geriye dönük düzeltmek değer üretmez; üst sınır **15**'e sabit, **yalnız küçülür**. Kayıtlı şablon listesi **9** — yeni şablon KAHİN kararı ister.
+
+**Kapsam dışı:** gürültü dizinlerindeki 4174 dosya temizlenmez. Üçüncü parti ve yedek; sahibi biz değiliz. Politika **kanonik 750** dosyayı korur.
+
+**Referans:** D-211 (ikiz yapı yasağı), D-217 (tek brif şablonu), D-218 (Obsidyen grafiği), D-219 (ajan hafızası).

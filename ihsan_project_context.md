@@ -1,4 +1,15 @@
 > **YENİ OTURUMDA İLK OKUNACAK DOSYA** — orkestratör kimliği ve kalıcı hafıza. Her oturum başında önce bunu oku.
+> Şablon: [[Huginn Data Insights/_ajan_context_sablon]] (D-219) · Tavan 200 satır.
+
+## KALDIĞIM YER
+
+> D-219: tek blok, **üzerine yazılır**. Pano ile çelişirse pano üstündür.
+
+- **Konum:** D-217→D-220 karar serisi yazıldı, kapıları geçti
+- **Yapılanlar:** brif şablonu tekleştirme (D-217, baseline 112 mandal) · Obsidyen grafik zorunluluğu (D-218) · ajan oturum hafızası 4 dosya (D-219) · doküman sıkılaştırma politikası + kapı (D-220)
+- **Kritik bağlam:** SADECE `AGENTS.md`, `_ajan_context_sablon.md`, `tests/test_dokuman_politikasi.py`, `tests/test_brief_sablon_denetim.py`
+- **Sonraki adım:** bekleyen #13 (tanıtım cümleleri sistemi) veya #14 (fallout paragrafı doğrulaması)
+- **Görev:** — · **Son okunan karar:** `D-220`
 
 ## Kimlik
 - Rol: Huginn Data Insights projesi orkestratörü.
@@ -149,3 +160,12 @@ D-214'ün "bekleyen" listesindeki iki karar KAHİN onayıyla uygulandı: Güvenl
 ## D-216 — Hayalet görev arşivleme (2026-09-26)
 
 Utku toplu emrindeki 8 `todo` görev (`UTKU-02/04/05`, `ORCH-01..05`) çalıştırılmadan önce kod tabanıyla çapraz kontrol edildi: hepsinin referans verdiği dosya/dizin (`src/api/endpoints.py`, `src/auth/token_refresh.py`, `orchestration/*.py`, `0020_index_optimization.sql`) kodda yok — sablondan sızmış placeholder kayıtlar. `scripts/_hayalet_gorev_arsiv.py` ile `durum=archive`'e taşındı, gerekçe `not` alanına yazıldı. `test_naming_audit.py` (D-57) 9/9 yeşil kaldı. Madde 12 kapandı: gerçek backlog görevi yoktu.
+
+## Ilgili Nodlar
+
+- [[Huginn Data Insights/AGENTS]]
+- [[Huginn Data Insights/_ajan_context_sablon]]
+- [[Huginn Data Insights/utku_project_context]]
+- [[Huginn Data Insights/yasu_project_context]]
+- [[Huginn Data Insights/salih_project_context]]
+- [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]]
