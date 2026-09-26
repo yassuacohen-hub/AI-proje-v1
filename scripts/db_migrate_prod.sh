@@ -7,6 +7,10 @@
 set -euo pipefail
 
 # Konfigürasyon
+# Prod DB URL: once ortam degiskeni (PROD_DATABASE_URL), sonra DATABASE_URL.
+#   export PROD_DATABASE_URL="postgresql://user:pass@prod-host:5432/dbname"
+# Guvenlik: URL asla loglanmaz; yalnizca sunucu adi gorunur.
+PROD_DATABASE_URL="${PROD_DATABASE_URL:-${DATABASE_URL:-}}"
 BACKUP_DIR="backups"
 TIMESTAMP=$(date +%s)
 BACKUP_FILE="${BACKUP_DIR}/prod_v0016_${TIMESTAMP}.sql.gz"
@@ -34,9 +38,23 @@ warn() {
 # Adım 1: Pre-flight checks
 log "=== ADIM 1: Ön Kontroller ==="
 
-if [ -z "${DATABASE_URL:-}" ]; then
-    error "DATABASE_URL ortam değişkeni yok"
+if [ -z "${PROD_DATABASE_URL:-}" ]; then
+    error "PROD_DATABASE_URL ortam değişkeni yok"
 fi
+
+# Baglanti sagligi (pg_isready) — migration oncesi zorunlu
+if ! pg_isready -d "${PROD_DATABASE_URL}" -q; then
+    error "PostgreSQL erisilebilir degil (pg_isready basarisiz)"
+fi
+success "pg_isready: PostgreSQL erisilebilir"
+
+# Migration dosyalari mevcut mu
+MIGRATION_UP="src/company_master/schema/migrations/0017_user_activity_log.sql"
+MIGRATION_DOWN="src/company_master/schema/migrations/0017_user_activity_log.down.sql"
+for f in "${MIGRATION_UP}" "${MIGRATION_DOWN}"; do
+    [ -f "$f" ] || error "Migration dosyasi eksik: $f"
+done
+success "0017_user_activity_log up/down dosyalari mevcut"
 
 success "Environment kontrol OK"
 
@@ -49,7 +67,7 @@ log ""
 log "=== ADIM 2: Prod Backup (v0016) ==="
 
 if ! pg_dump --compress=9 --verbose \
-    -d "${DATABASE_URL}" \
+    -d "${PROD_DATABASE_URL}" \
     -f "${BACKUP_FILE}" 2>&1 | tee -a "${MIGRATION_LOG}"; then
     error "Backup hatası"
 fi
@@ -83,7 +101,7 @@ log "=== ADIM 4: Prod Migration Uygulanıyor (v0016 → v0017) ==="
 
 MIGRATION_START=$(date +%s)
 
-if ! python scripts/db_migrate.py \
+if ! DATABASE_URL="${PROD_DATABASE_URL}" python scripts/db_migrate.py \
     --env prod --target 0017 --verify >> "${MIGRATION_LOG}" 2>&1; then
     error "Prod migration başarısız"
 fi
@@ -98,7 +116,7 @@ log ""
 log "=== ADIM 5: Post-Migration Doğrulama ==="
 
 # Tablo mevcudiyeti
-if ! psql "${DATABASE_URL}" -t -c "SELECT COUNT(*) FROM user_activity_log;" > /dev/null 2>&1; then
+if ! psql "${PROD_DATABASE_URL}" -t -c "SELECT COUNT(*) FROM user_activity_log;" > /dev/null 2>&1; then
     error "user_activity_log tablosu doğrulama hatası"
 fi
 success "user_activity_log tablosu mevcuttur"
@@ -109,17 +127,20 @@ success "Post-migration doğrulama tamamlandı"
 log ""
 log "=== ADIM 6: Rollback Belgesi ==="
 
-cat > "logs/rollback_${TIMESTAMP}.md" << 'EOF'
+cat > "logs/rollback_${TIMESTAMP}.md" << EOF
 # Rollback Plan — v0017 → v0016
 
 ## Graceful Rollback
-```bash
-DATABASE_URL=$DATABASE_URL python scripts/db_migrate.py --env prod --target 0016
-```
+\`\`\`bash
+export PROD_DATABASE_URL="postgresql://..."
+DATABASE_URL="\$PROD_DATABASE_URL" python scripts/db_migrate.py --env prod --target 0016
+\`\`\`
 
 ## Emergency Restore (Backup'tan)
-```bash
-gunzip -c backups/prod_v0016_${TIMESTAMP}.sql.gz | psql $DATABASE_URL
+\`\`\`bash
+gunzip -c backups/prod_v0016_${TIMESTAMP}.sql.gz | psql "\$PROD_DATABASE_URL"
+\`\`\`
+EOF
 ```
 EOF
 

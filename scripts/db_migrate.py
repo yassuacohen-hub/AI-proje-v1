@@ -17,14 +17,156 @@ import json
 
 ROOT = Path(__file__).resolve().parents[1]
 MIGRATIONS_DIR = ROOT / "src" / "company_master" / "schema" / "migrations"
+SCHEMA_VERSIONS_FILE = MIGRATIONS_DIR / "schema_versions.json"
+
+
+# ============================================================
+# Public API — migration dosyalari + cevrimici fonksiyonlar
+# ============================================================
+
+def get_db_url(env: str = "staging") -> str:
+    """Ortama ait DATABASE_URL degerini dondurur.
+
+    Oncelik sirasi:
+      1) DATABASE_URL_{ENV}  (orn. DATABASE_URL_PROD)
+      2) DATABASE_URL
+      3) Bos string (cagiran taraf hata mesaji verir)
+    """
+    anahtar = f"DATABASE_URL_{(env or '').upper()}"
+    return os.getenv(anahtar) or os.getenv("DATABASE_URL") or ""
+
+
+def read_migration_file(version: str, direction: str = "up") -> str:
+    """Migration SQL dosyasini oku.
+
+    Args:
+        version: Migration versiyonu, orn. "0017" veya "17".
+        direction: "up" (varsayilan) veya "down".
+
+    Returns:
+        SQL dosyasinin icerigi.
+
+    Raises:
+        FileNotFoundError: Dosya bulunamazsa.
+        ValueError: direction gecersizse.
+    """
+    if direction not in ("up", "down"):
+        raise ValueError(f"direction 'up' veya 'down' olmali, verilen: {direction!r}")
+
+    # "0017", "17", 17 -> "0017"
+    ham = str(version).strip()
+    sayi = int(ham) if ham.isdigit() else None
+    if sayi is None:
+        raise ValueError(f"Gecersiz migration versiyonu: {version!r}")
+
+    # Tam eslesme (0017_user_activity_log.sql) ya da on ek (0017_*.sql)
+    for kalip in (f"{sayi:04d}_*.sql", f"{sayi:04d}.sql"):
+        adaylar = sorted(MIGRATIONS_DIR.glob(kalip))
+        for aday in adaylar:
+            is_down = aday.name.endswith(".down.sql")
+            if (direction == "down") == is_down:
+                return aday.read_text(encoding="utf-8")
+
+    raise FileNotFoundError(
+        f"Migration dosyasi bulunamadi: {version} ({direction}) "
+        f"-> {MIGRATIONS_DIR}"
+    )
+
+
+def verify_table_exists(db_url: str, table_name: str) -> bool:
+    """Veritabaninda tablonun var oldugunu dogrula (baglanti acmadan)."""
+    if psycopg2 is None:
+        print("[HATA] psycopg2 yuklu degil - tablo dogrulamasi yapilamaz")
+        return False
+
+    conn = None
+    try:
+        conn = psycopg2.connect(db_url)
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            SELECT EXISTS (
+                SELECT 1 FROM information_schema.tables
+                WHERE table_schema = 'public' AND table_name = %s
+            )
+            """,
+            (table_name,),
+        )
+        return bool(cursor.fetchone()[0])
+    except Exception as e:
+        print(f"[HATA] Tablo dogrulama hatasi ({table_name}): {e}")
+        return False
+    finally:
+        if conn is not None:
+            conn.close()
+
+
+def migrate(
+    target_version: int,
+    env: str = "staging",
+    dry_run: bool = False,
+    db_url: str | None = None,
+) -> bool:
+    """Hedef migration versiyonuna gecer.
+
+    Args:
+        target_version: Hedef versiyon (orn. 17).
+        env: Ortam adi ("dev" | "staging" | "prod").
+        dry_run: True ise SQL yazdirilir, uygulanmaz.
+        db_url: Veritabani URL'si (verilmezse get_db_url(env) kullanilir).
+
+    Returns:
+        Basarili ise True, aksi halde False.
+    """
+    if dry_run:
+        print(f"[DRY-RUN] {get_current_version_from_disk():04d} -> {target_version:04d}")
+        for v in range(get_current_version_from_disk() + 1, target_version + 1):
+            sql_up = read_migration_file(f"{v:04d}", "up")
+            print(f"\n--- {v:04d} up ---\n{sql_up}")
+        return True
+
+    url = db_url or get_db_url(env)
+    if not url:
+        print(f"[HATA] {env} icin DATABASE_URL bulunamadi")
+        return False
+
+    manager = MigrationManager(env, dry_run=False)
+    manager.connect()
+    try:
+        return manager.migrate_to_target(target_version)
+    finally:
+        manager.disconnect()
+
+
+def get_current_version_from_disk() -> int:
+    """En yuksek migration versiyonunu dosya adlarindan bul (DB'siz)."""
+    if SCHEMA_VERSIONS_FILE.exists():
+        try:
+            veri = json.loads(SCHEMA_VERSIONS_FILE.read_text(encoding="utf-8"))
+            if isinstance(veri, dict):
+                mevcut = veri.get("current_version") or veri.get("current")
+                if isinstance(mevcut, int):
+                    return mevcut
+        except (json.JSONDecodeError, OSError):
+            pass
+
+    en_yuksek = 0
+    for aday in MIGRATIONS_DIR.glob("[0-9][0-9][0-9][0-9]_*.sql"):
+        if aday.name.endswith(".down.sql"):
+            continue
+        sayi = int(aday.name[:4])
+        en_yuksek = max(en_yuksek, sayi)
+    return en_yuksek
 
 # Import PostgreSQL client (or use psycopg2)
+psycopg2 = None
+sql = None
 try:
-    import psycopg2
-    from psycopg2 import sql
-except ImportError:
-    print("[HATA] psycopg2 yüklü değil: pip install psycopg2-binary")
-    sys.exit(1)
+    import psycopg2  # type: ignore[no-redefine]
+    from psycopg2 import sql  # type: ignore[no-redef]
+except ImportError:  # pragma: no cover - DB bagimliligi opsiyonel
+    # Test/dry-run modunda psycopg2 olmadan da modul import edilebilir olmali.
+    print("[UYARI] psycopg2 yüklü değil: pip install psycopg2-binary")
 
 
 class MigrationManager:

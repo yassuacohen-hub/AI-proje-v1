@@ -104,6 +104,7 @@ SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_
 | YASU-03 | Dashboard görselleştirme: 6 grafik türü (Bar, Line, Area, Pie, Radar, Scatter) Recharts ile, responsive grid layout | 2026-09-26 |
 | YASU-05 | WCAG 2.1 AA uyumu: wcag_compliance.md (16 kriter), audit_report.json (skor 97), 11/11 erişilebilirlik testi, Modal Escape+focus trap+aria-modal | 2026-09-26 |
 | UTKU-03 | Hata loglama sistemi: error_handling.py (JSONFormatter, mask_sensitive, LogContext, handle_exception), web_app.py entegrasyonu (startup + global handler + middleware), 30/30 test, 5 gercek hata duzeltildi | 2026-09-26 |
+| ALTYAPI-DB-MIGRATION-01 | Reddedilen 4 eksik kapatildi: (1) 0016/0017/0018 down.sql'lar ust seviyeye tasindi, (2) db_migrate.py'ye get_db_url/read_migration_file/migrate/verify_table_exists eklendi + psycopg2 opsiyonel, (3) db_migrate_prod.sh'de PROD_DATABASE_URL + pg_isready + dosya kontrolu, (4) 3 AlertManager kurali eklendi. 6/6 test | 2026-09-26 |
 | DOKUMAN-KVKK-FAQ-33 | KVKK FAQ dokumani: docs/KVKK_FAQ.md, 7 SSS + 3 troubleshooting + 3 kod ornegi | 2026-09-25 |
 | UI-ADMIN-FEATURE-FLAG-25 | Feature Flag sekmesi: render_feature_flags_tab, 4 flag, audit trail, testler | 2026-09-25 |
 | COP-26 | MUSTERILER ekrani: firma listesi + filtre + bildirim blogu | 2026-09-24 |

@@ -165,6 +165,74 @@ groups:
             Expected: 13.x, Current: {{ $value }}
             Kontrol: SELECT version();
 
+      # Rule 10: MigrationReplicationLagHigh (yeni — v0017 prod runbook)
+      # Standart eşik: 3 saniye. Rule 1 (5s) tetiklenmeden ÖNCE uyarı üretir.
+      - alert: MigrationReplicationLagHigh
+        expr: |
+          pg_wal_lsn_recv_age_seconds > 3
+        for: 1m
+        labels:
+          severity: warning
+          component: database
+          migration_phase: "v0016_v0017"
+          phase: "migration"
+        annotations:
+          summary: "Replication lag yükseliyor: {{ $value }}s (eşik 3s)"
+          description: |
+            Migration öncesi/rasında replication geriliği 3 saniyeyi aştı.
+            Migration durdurulmadan önce değerlendir:
+            - SELECT * FROM pg_stat_replication;
+            - Primary'de uzun süren transaction var mı?
+              SELECT pid, state, query FROM pg_stat_activity
+              WHERE state <> 'idle' ORDER BY query_start;
+          runbook: "scripts/db_migrate_prod.sh"
+          action: "notify"
+
+      # Rule 11: MigrationTableMissing (yeni — v0017 user_activity_log)
+      - alert: MigrationTableMissing
+        expr: |
+          absent(user_activity_log_up)
+        for: 30s
+        labels:
+          severity: critical
+          component: database
+          migration_phase: "v0016_v0017"
+          phase: "post_migration"
+        annotations:
+          summary: "user_activity_log tablosu bulunamadı"
+          description: |
+            v0017_user_activity_log migration uygulanmadi veya basarisiz oldu.
+            Kontrol:
+              SELECT * FROM information_schema.tables
+              WHERE table_name = 'user_activity_log';
+            Cozum: python scripts/db_migrate.py --env prod --target 0017
+          runbook: "scripts/db_migrate_prod.sh"
+          action: "page"
+
+      # Rule 12: ActivityLogWriteRateLow (yeni — v0017 write path sagligi)
+      - alert: ActivityLogWriteRateLow
+        expr: |
+          (rate(user_activity_log_writes_total[15m]) < 0.1)
+          and (rate(user_activity_log_writes_total[1h]) >= 0.1)
+        for: 15m
+        labels:
+          severity: warning
+          component: application
+          migration_phase: "v0016_v0017"
+          phase: "post_migration"
+        annotations:
+          summary: "user_activity_log yazma oranı düştü: {{ $value | printf \"%.2f\" }} /sn"
+          description: |
+            Tablo mevcut ama yazma hacmi beklentinin altında.
+            Olası nedenler:
+            - Uygulama loglama katmani devre disi (aktarim/connector hatasi)
+            - DB yazma hatalari (permission denied, disk dolu)
+            Kontrol:
+              SELECT count(*) FROM user_activity_log WHERE olusturma > now() - interval '1 hour';
+              df -h  # disk dolu mu?
+          runbook: "docs/runbooks/user_activity_log.md"
+          action: "notify"
+
 # AlertManager Routing (top-level config)
 ---
 route:

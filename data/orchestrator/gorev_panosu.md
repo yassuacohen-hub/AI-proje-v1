@@ -8,8 +8,8 @@
 | Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |
 |-------|--------|-------|---------|-------|----------|
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s) | ihsan | P1 | iptal | scripts/pano_denetim.py, scripts/tetik_senk.py, tests/test_d66_bypass_tetikleme.py |
+| ALTYAPI-DB-MIGRATION-01 | [ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s) | utku | P1 | aktif | scripts/db_migrate.py, src/company_master/schema/migrations/0017_user_activity_log.sql, scripts/db_migrate_prod.sh |
 | UTKU-02 | [UTKU] API endpoint optimizasyon - response time (2s) | utku | P1 | todo | src/api/endpoints.py |
-| UTKU-03 | [UTKU] Hata loglama sistemi - production hazırlığı (2s) | utku | P0 | aktif | src/logging/error_logger.py |
 | UTKU-04 | [UTKU] Veritabanı migration - index optimizasyon (1s) | utku | P1 | todo | src/company_master/schema/migrations/0020_index_optimization.sql |
 | UTKU-05 | [UTKU] Kullanıcı kimlik doğrulama - token yenileme (2s) | utku | P0 | todo | src/auth/token_refresh.py |
 | ORCH-01 | [ORCH] İş akışı koordinasyon - görev planlama (2s) | ihsan | P0 | todo | orchestration/workflow_coordinator.py |
@@ -40,7 +40,6 @@
 | DOC-ADMIN-MULTITENANT-KARAR-28 | [DOC] Multi-tenant kararını belgele → KK-7 (1s) | utku | 2026-09-25T22:31:15 |
 | TEST-BLOKE-FAKTOR-ARASTIRMA-01 | [TEST] Test hazirlik plani arastir → test_bloke_hazirlik.py (3s) | yasu | 2026-09-24T22:11:11.842076 |
 | ALTYAPI-SECRETS-SETUP-01 | [ALTYAPI] Vault kurup .env template yaz → .env.example (2s) | ihsan | 2026-09-24T20:56:00 |
-| ALTYAPI-DB-MIGRATION-01 | [ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s) | ihsan | 2026-09-24T20:56:00 |
 | ALTYAPI-ADMIN-PANO-01 | [ALTYAPI] Task board 4 bolum yaz → render_task_board_tab.py (2s) | ihsan | 2026-09-24T20:56:00 |
 | ORKESTRA-AI-CHAT-KOORDINASYON-01 | [ORKESTRA] Ajan arasi protokol yaz → ajan_chat_koordinasyon.py (3s) | ihsan | 2026-09-24T22:02:28 |
 | ALTYAPI-VERI-GORUNURLUK-01 | [ALTYAPI] Katmanlı görünürlük & kontör sistemi → 0018 migration + 3 tablo (4s) | ihsan | 2026-09-25T22:48:38 |
@@ -54,6 +53,7 @@
 | UI-KONTROL-PANOSU-32 | [UI] Admin kontrol panosu → maskeleme durum metriksleri | utku | 2026-09-25T04:36:47 |
 | DOKUMAN-KVKK-FAQ-33 | [DOC] KVKK FAQ & sorun çözme → markdown troubleshooting guide | utku | 2026-09-25T04:36:47 |
 | UTKU-01 | [UTKU] Veri şeması doğrulama - Core modülü (2s) | utku | 2026-09-25T20:30:00 |
+| UTKU-03 | [UTKU] Hata loglama sistemi - production hazırlığı (2s) | utku | 2026-09-26T14:30:53 |
 | YASU-01 | [YASU] Frontend bileşen kütüphanesi - temel UI (3s) | yasu | 2026-09-26T04:06:33 |
 | YASU-02 | [YASU] Responsive tasarım - mobil uyumluluk (2s) | yasu | 2026-09-26T04:06:33 |
 | YASU-03 | [YASU] Grafiksel dashboard - veri görselleştirme (3s) | yasu | 2026-09-26T04:06:33 |

@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-26T04:06:34
+> Son guncelleme: 2026-09-26T14:30:53
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -8,8 +8,8 @@
 | Gorev | Baslik | Sahip | Oncelik | Durum |
 |-------|--------|-------|---------|-------|
 | ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetiklem | ihsan | P1 | iptal |
+| ALTYAPI-DB-MIGRATION-01 | [ALTYAPI] v0016 → v0017 prod migration p | utku | P1 | aktif |
 | UTKU-02 | [UTKU] API endpoint optimizasyon - respo | utku | P1 | todo |
-| UTKU-03 | [UTKU] Hata loglama sistemi - production | utku | P0 | aktif |
 | UTKU-04 | [UTKU] Veritabanı migration - index opti | utku | P1 | todo |
 | UTKU-05 | [UTKU] Kullanıcı kimlik doğrulama - toke | utku | P0 | todo |
 | ORCH-01 | [ORCH] İş akışı koordinasyon - görev pla | ihsan | P0 | todo |
@@ -22,10 +22,10 @@
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| KONTROL-KVKK-MASKELEME-31 | [KONTROL] KVKK maskeleme end-to-end test | yasu | 2026-09-25 |
 | UI-KONTROL-PANOSU-32 | [UI] Admin kontrol panosu → maskeleme du | utku | 2026-09-25 |
 | DOKUMAN-KVKK-FAQ-33 | [DOC] KVKK FAQ & sorun çözme → markdown  | utku | 2026-09-25 |
 | UTKU-01 | [UTKU] Veri şeması doğrulama - Core modü | utku | 2026-09-25 |
+| UTKU-03 | [UTKU] Hata loglama sistemi - production | utku | 2026-09-26 |
 | YASU-01 | [YASU] Frontend bileşen kütüphanesi - te | yasu | 2026-09-26 |
 | YASU-02 | [YASU] Responsive tasarım - mobil uyumlu | yasu | 2026-09-26 |
 | YASU-03 | [YASU] Grafiksel dashboard - veri görsel | yasu | 2026-09-26 |
