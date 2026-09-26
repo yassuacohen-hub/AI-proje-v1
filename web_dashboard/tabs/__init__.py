@@ -172,6 +172,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="KPI'lar, müşteri ve sistem sağlığı tek bakışta",
         url_path="ana-kontrol",
+        sira=0,  # NAV-AGAC-01: kök sıralaması
         modul="web_dashboard.tabs.ana_kontrol",
         fonksiyon="render_ana_kontrol_tab",
         yuzey=YUZEY_HUGINN,
@@ -237,14 +238,17 @@ SECTIONS: tuple[TabTanimi, ...] = (
         min_rol="analyst",
     ),
     # --- PO-BACK-08: Executive Dashboard (MRR/ARR + churn + tenant sağlığı) ---
-    # UX-MENU-03/E3: menüden çıktı; Metrikler > Özet gövdesinden açılır.
+    # NAV-AGAC-01: Metrikler başlığı altında birleşti (eskiden menüden düşüyordu).
     TabTanimi(
         anahtar="executive",
         baslik="Executive Dashboard",
-        ikon="📈",
+        # NAV-AGAC-01: menüye girince `veri_kalite` (📈) ile aynı ikonu taşıyordu;
+        # iki kardeş düğme aynı ikonla ayırt edilemez → 💹 (yönetici/gelir özeti).
+        ikon="💹",
         grup=GRUP_GELIR,
         aciklama="MRR/ARR, churn oranı ve tenant sağlık dağılımı — yönetici özeti",
         url_path="executive",
+        ust="veri_kalite", sira=2,
         modul="web_dashboard.tabs.admin_executive",
         fonksiyon="render_executive_tab",
         min_rol="admin",
@@ -298,7 +302,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_decision_tab",
         min_rol="admin",
     ),
-    # UX-MENU-04: menüden çıktı; Proje sayfa gövdesinden (seviye 3) açılır.
+    # NAV-AGAC-01: Proje başlığı altında birleşti.
     TabTanimi(
         anahtar="ajan_sohbet",
         baslik="Ajan Chat",
@@ -306,6 +310,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="D-192: Ajan sorun takibi — açık/çözündürülmüş/çözüldü metrikler ve son sorunlar",
         url_path="ajan-sohbet",
+        ust="proje_yonetimi", sira=5,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_chat_summary",
         min_rol="admin",
@@ -318,12 +323,13 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="ALTYAPI-ADMIN-PANO-01: Ajan görevlerinin 4 bölümlü panosu",
         url_path="gorev-panosu",
+        ust="proje_yonetimi", sira=6,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_task_board_tab",
         min_rol="admin",
         hazir=True,
     ),
-    # UX-MENU-04: menüden çıktı; Proje sayfa gövdesinden (seviye 3) açılır.
+    # NAV-AGAC-01: Proje başlığı altında birleşti.
     TabTanimi(
         anahtar="rapor_listesi",
         baslik="MIMIR Raporları",
@@ -331,6 +337,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="MIMIR architect raporları — otomatik oluşturuldu, tüm agentle açık",
         url_path="rapor-listesi",
+        ust="proje_yonetimi", sira=7,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_rapor_listesi_tab",
     ),
@@ -346,7 +353,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_quality_tab",
         min_rol="analyst",
     ),
-    # UX-MENU-03/E1: menüden çıktı; global arama üst şeritteki arama kutusu.
+    # NAV-AGAC-01: Metrikler başlığı altında birleşti (üst şerit araması ayrıca duruyor).
     TabTanimi(
         anahtar="arama",
         baslik=t("menu_arama"),
@@ -354,6 +361,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Global arama ve filtreleme",
         url_path="arama",
+        ust="veri_kalite", sira=3,
         modul="web_dashboard.tabs.admin_search",
         fonksiyon="render_search_tab",
         min_rol="analyst",
@@ -395,6 +403,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_teknik_altyapi_tab",
         min_rol="analyst",
     ),
+    # NAV-AGAC-01: Sistem başlığı altında birleşti.
     TabTanimi(
         anahtar="performans",
         baslik=t("menu_performans"),
@@ -402,6 +411,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Sistem performansı ve gecikme metriği",
         url_path="performans",
+        ust="sistem", sira=4,
         modul="web_dashboard.tabs.admin_performance",
         fonksiyon="render_performance_tab",
         min_rol="analyst",
@@ -425,11 +435,12 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Webhook izleme ve durum",
         url_path="webhook",
+        ust="sistem", sira=5,
         modul="web_dashboard.tabs.webhook_monitor",
         fonksiyon="render_webhook_monitor_tab",
         min_rol="analyst",
     ),
-    # UX-MENU-03: menüden çıktı; yenileme Ana Kontrol aksiyon şeridinden yönetilir.
+    # NAV-AGAC-01: Sistem başlığı altında birleşti (Ana Kontrol kısayolu da duruyor).
     TabTanimi(
         anahtar="yenileme",
         baslik=t("menu_yenileme"),
@@ -437,6 +448,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Otomatik yenileme ayarları",
         url_path="yenileme",
+        ust="sistem", sira=6,
         modul="web_dashboard.tabs.admin_auto_refresh",
         fonksiyon="render_auto_refresh",
         min_rol="analyst",
@@ -448,6 +460,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Performans, maliyet, webhook, DLQ ve denetim izi",
         url_path="sistem",
+        sira=5,  # NAV-AGAC-01: kök sıralaması
         modul="web_dashboard.tabs.admin_sistem",
         fonksiyon="render_sistem_tab",
         min_rol="analyst",
@@ -490,7 +503,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         min_rol="admin",
     ),
     # UI-ADMIN-KVKK-RAPOR-28: KVKK Maskeleme Raporu
-    # UX-MENU-04: menüden çıktı; KVKK Mode sayfa gövdesinden (seviye 3) açılır.
+    # NAV-AGAC-01: Proje > KVKK Mode ile aynı başlık altında birleşti.
     TabTanimi(
         anahtar="kvkk_rapor",
         baslik="KVKK Raporu",
@@ -498,12 +511,13 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="KVKK maskeleme geçmişi, istatistikler ve trend analizi",
         url_path="kvkk-rapor",
+        ust="proje_yonetimi", sira=4,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_kvkk_rapor_tab",
         min_rol="admin",
     ),
     # UI-KONTROL-PANOSU-32: Admin Kontrol Panosu
-    # UX-MENU-04: menüden çıktı; Metrikler sayfa gövdesinden (seviye 3) açılır.
+    # NAV-AGAC-01: Metrikler başlığı altında birleşti.
     TabTanimi(
         anahtar="kontrol_panosu",
         baslik="Kontrol Panosu",
@@ -511,12 +525,13 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Maskeli/açık alanlar, tier dağılımı, trend ve mode geçişleri",
         url_path="kontrol-panosu",
+        ust="veri_kalite", sira=4,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_kontrol_panosu_tab",
         min_rol="admin",
     ),
     # UI-ADMIN-FEATURE-FLAG-25: Feature Flag Yönetim
-    # UX-MENU-04: menüden çıktı; Sistem sayfa gövdesinden (seviye 3) açılır.
+    # NAV-AGAC-01: Sistem başlığı altında birleşti.
     TabTanimi(
         anahtar="feature_flags",
         baslik="Feature Flags",
@@ -524,6 +539,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Sistem feature flag'lerini yönetin (admin only)",
         url_path="feature-flags",
+        ust="sistem", sira=7,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_feature_flags_tab",
         min_rol="admin",
@@ -542,7 +558,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         min_rol="admin",
     ),
     # UI-ADMIN-MFA-26: MFA Yönetim Sekmesi
-    # UX-MENU-04: menüden çıktı; hesap kartı popover'ından açılır (ayarlar gibi).
+    # NAV-AGAC-01: Sistem altında da görünür; hesap kartı popover'ı kısayol olarak kalır.
     TabTanimi(
         anahtar="mfa",
         baslik="MFA Yönetimi",
@@ -550,11 +566,12 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Çok faktörlü kimlik doğrulama (TOTP) ayarları",
         url_path="mfa",
+        ust="sistem", sira=8,
         modul="web_dashboard.tabs.admin_mfa",
         fonksiyon="render_mfa_tab",
         min_rol="admin",
     ),
-    # UX-MENU-03: menüden çıktı; sol-alt hesap kartı popover'ından açılır.
+    # NAV-AGAC-01: Sistem altında da görünür; hesap kartı popover'ı kısayol olarak kalır.
     TabTanimi(
         anahtar="ayarlar",
         baslik=t("menu_m_ayarlar"),
@@ -562,11 +579,12 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Görünüm, veri, bildirim ve bölgesel kullanıcı tercihleri (P7-46)",
         url_path="ayarlar",
+        ust="sistem", sira=9,
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_ayarlar_tab",
         min_rol="admin",
     ),
-    # UX-MENU-03/E2: menüden çıktı; geliştirici demo sayfası olarak URL'de kaldı.
+    # NAV-AGAC-01: geliştirici demo sayfası — Sistem başlığının en altında.
     TabTanimi(
         anahtar="yukleme",
         baslik=t("menu_loading"),
@@ -574,6 +592,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_SISTEM,
         aciklama="Loading state örnekleri ve skeleton gosterim (P7-42)",
         url_path="yukleme",
+        ust="sistem", sira=10,
         modul="web_dashboard.tabs.admin_loading",
         fonksiyon="render_loading_tab",
         min_rol="admin",
@@ -585,6 +604,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Müşteri yönetim, paket, giriş ve destek ana sayfa",
         url_path="musteri-yonetimi",
+        sira=1,  # NAV-AGAC-01: kök sıralaması
         modul="web_dashboard.tabs.musteri_yonetimi",
         fonksiyon="render_musteri_yonetimi_tab",
         hazir=True,
@@ -597,6 +617,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Karar defteri, açık işler, denetim izi ve hatalar",
         url_path="proje-yonetimi",
+        sira=2,  # NAV-AGAC-01: kök sıralaması
         modul="web_dashboard.tabs.proje_yonetimi",
         fonksiyon="render_proje_yonetimi_tab",
         hazir=True,
@@ -609,6 +630,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="KPI, kalite, arama ve executive özeti",
         url_path="veri-kalite",
+        sira=3,  # NAV-AGAC-01: kök sıralaması
         hazir=True,
         modul="web_dashboard.tabs.admin_kpi",
         fonksiyon="render_kpi_tab",
@@ -621,6 +643,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         grup=GRUP_IS,
         aciklama="Paketler ve pazarlama müşteri ekranı (Huginn önizleme)",
         url_path="musteri-onizleme",
+        sira=4,  # NAV-AGAC-01: kök sıralaması
         hazir=True,
         modul="web_dashboard.tabs.paketler",
         fonksiyon="render_paketler_tab",
@@ -647,24 +670,23 @@ def eski_url_yonlendir(yol: str) -> tuple[str, str] | None:
 
 
 def ust_sayfalar(rol: str | None = None) -> dict[str, TabTanimi]:
-    """Sidebar'da gorunen 6 ust sayfa (kimlik/yonetim/sistem cikmistir).
+    """Sidebar menü ağacının kökleri: `ust is None` olan TÜM bölümler.
 
-    Sadece `ust is None` OLAN ve `UST_SAYFA_ANAHTARLARI` listesinde
-    olan bolumler doner. `GRUP_IS/GRUP_SISTEM` geriye donuk korunur.
+    NAV-AGAC-01 (KAHİN, 2026-09-26): "oluşturulmuş bir sayfa navigatör menü
+    ağacında gözükmeli, fakat aynı başlık altında bir sayfa birleşebiliyorsa
+    birleşebilmeli." Eskiden burada 6 anahtarlık sabit bir frozenset vardı;
+    listede olmayan kök bölüm sessizce menüden düşüyordu (yalnız "Hızlı geçiş"
+    kutusundan erişilebiliyordu). Artık tek kural: bir sayfa alt sekme olacaksa
+    `ust=` verilir, olmayacaksa menü kökünde görünür. Gizlemek için ayrı liste
+    yok — `ust=` tek düğmedir (SSOT).
+    `sira` alanı kök sayfalarda da sıralamayı belirler.
     """
-    UST_SAYFA_ANAHTARLARI: frozenset[str] = frozenset({
-        "ana_kontrol", "musteri_yonetimi", "proje_yonetimi",
-        "veri_kalite", "sistem", "musteri_onizleme",
-    })
-    sonuc: dict[str, TabTanimi] = {}
-    for tanim in SECTIONS:
-        if tanim.anahtar not in UST_SAYFA_ANAHTARLARI:
-            continue
-        if tanim.ust is not None:
-            continue
-        if rol is None or erisebilir(tanim, rol):
-            sonuc[tanim.anahtar] = tanim
-    return sonuc
+    kokler = [
+        t_ for t_ in SECTIONS
+        if t_.ust is None and (rol is None or erisebilir(t_, rol))
+    ]
+    kokler.sort(key=lambda t_: t_.sira)
+    return {t_.anahtar: t_ for t_ in kokler}
 
 
 def alt_sekmeler(ust: str, rol: str | None = None) -> tuple[TabTanimi, ...]:

@@ -117,6 +117,34 @@ def test_hareket_satiri_taslak_kapali_bos_dusurur(monkeypatch):
     assert kayit2["markdown"] == [] and kayit2["caption"]
 
 
+def test_veri_etiketi_ikon_ve_kelime_basar(monkeypatch):
+    """VERI-ETIKET-01: gerçek → 🟢 GERÇEK VERİ, sahte → 🔴 SAHTE VERİ."""
+    kayit = _yakala(monkeypatch)
+    ak._veri_etiketi(["Toplam Firma"], ["Sinyal"])
+    satir = kayit["caption"][0]
+    assert "🟢 **GERÇEK VERİ**: Toplam Firma" in satir
+    assert "🔴 **SAHTE VERİ**: Sinyal" in satir
+    # Tek taraflı durumlar karşı etiketi basmaz.
+    kayit2 = _yakala(monkeypatch)
+    ak._veri_etiketi(["A"], [])
+    assert "SAHTE" not in kayit2["caption"][0]
+    kayit3 = _yakala(monkeypatch)
+    ak._veri_etiketi([], ["B"])
+    assert "GERÇEK" not in kayit3["caption"][0]
+    # İki liste de boşsa satır hiç basılmaz.
+    kayit4 = _yakala(monkeypatch)
+    ak._veri_etiketi([], [])
+    assert kayit4["caption"] == []
+
+
+def test_kart_izgara_gercek_veriyi_de_etiketler(monkeypatch):
+    kayit = _yakala(monkeypatch)
+    monkeypatch.setattr(ak, "TASLAK", True)
+    ak._kart_izgara(ADAYLAR, "veri yok")
+    satir = "".join(kayit["caption"])
+    assert "GERÇEK VERİ" in satir and "Toplam Firma" in satir
+
+
 if __name__ == "__main__":  # elle koşum: python tests/test_taslak_sahte_veri.py
     import pytest
 

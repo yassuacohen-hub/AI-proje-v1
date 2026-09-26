@@ -242,6 +242,31 @@ def test_sections_kaydi_gercek_dosyaya_isaret_eder(tanim) -> None:
     )
 
 
+def test_her_bolum_menu_agacindan_erisilebilir() -> None:
+    """NAV-AGAC-01 (KAHIN): "olusturulmus bir sayfa navigator menu agacinda gozukmeli".
+
+    Eskiden `ust_sayfalar()` icinde 6 anahtarlik sabit bir frozenset vardi;
+    listede olmayan kok bolum sessizce menuden dusuyordu. Kural artik tek:
+    bolum ya kok (`ust is None`) ya da bir kokun altinda (`ust=<kok>`).
+    `ust` baska bir alt sekmeye isaret ederse (2+ seviye) agac cizilmez.
+    """
+    from web_dashboard.tabs import ust_sayfalar
+
+    kokler = set(ust_sayfalar())
+    for tanim in SECTIONS:
+        if tanim.ust is None:
+            assert tanim.anahtar in kokler, (
+                f"{tanim.anahtar}: ust=None ama menu kokunde yok -- "
+                f"ust_sayfalar() bir yerde filtreliyor."
+            )
+        else:
+            assert tanim.ust in kokler, (
+                f"{tanim.anahtar}: ust='{tanim.ust}' bir menu koku degil; "
+                f"sayfa agacta gozukmez. Ya kok yap (ust=None) ya mevcut bir "
+                f"kokun altina bagla. Kokler: {sorted(kokler)}"
+            )
+
+
 def test_muaf_listesi_gerekcesiz_kayit_icermez() -> None:
     """Muafiyet sessizce buyumesin: her kaydin gerekcesi olmali."""
     for ad, gerekce in MUAF.items():

@@ -15,33 +15,23 @@ from web_dashboard.tabs import (
     ust_sayfalar,
 )
 
-# Menüden çıkarılan (ust=None) ama URL'i yaşamaya devam eden sekmeler.
-# UX-MENU-04 (2026-09-25): proje_yonetimi 11 alt sekmeden 4'e indi; taşan
-# sekmeler seviye 3'e (sayfa gövdesi) veya hesap popover'ına çıktı.
-MENUSUZ = (
-    "executive",
-    "arama",
-    "performans",
-    "webhook",
-    "yenileme",
-    "ayarlar",
-    "yukleme",
-    "ajan_sohbet",
-    "rapor_listesi",
-    "kvkk_rapor",
-    "kontrol_panosu",
-    "feature_flags",
-    "mfa",
-)
+# NAV-AGAC-01 (D-213, KAHİN 2026-09-26): *"oluşturulmuş bir sayfa navigatör menü
+# ağacında gözükmeli"* + *"her sayfa menüde gözüksün, sonra ilgili ve alakalı
+# olanları birleştirelim"*. Bu, UX-MENU-04'ün "taşan sekmeyi menüden çıkar"
+# kuralını geçersiz kıldı: artık MENÜSÜZ sayfa yok. Eski `MENUSUZ` demeti
+# silindi — gizlenecek sayfa listesi tutmak D-211 ikiz yasağının UI hâli
+# (üyeliği tek alan belirler: `TabTanimi.ust`).
 
 
 def test_ust_sayfa_sayisi() -> None:
     assert len(ust_sayfalar()) <= 6
 
 
-def test_menudeki_alt_sekme_sayisi() -> None:
-    toplam = sum(len(alt_sekmeler(k)) for k in ust_sayfalar())
-    assert toplam <= 18, f"menüde {toplam} alt sekme var"
+def test_her_sayfa_menu_agacinda() -> None:
+    """NAV-AGAC-01: kök değilse mutlaka bir kökün altında olmalı — öksüz sayfa yok."""
+    kokler = set(ust_sayfalar())
+    oksuz = [t.anahtar for t in SECTIONS if t.ust is None and t.anahtar not in kokler]
+    assert not oksuz, f"menü ağacında görünmeyen sayfa: {sorted(oksuz)}"
 
 
 def test_etiket_benzersiz() -> None:
@@ -67,8 +57,12 @@ def test_sira_bosluksuz() -> None:
 
 
 def test_ust_basina_alt_sekme_siniri() -> None:
+    """NAV-AGAC-01: sınır gizlemeyle değil BİRLEŞTİRMEYLE korunur (KAHİN: "ilgili
+    ve alakalı olanları birleştirelim"). Birleştirme yapılana kadar üst sınır
+    fiilî duruma göre 12; daha yükseğe çıkması yeni dağınıklıktır.
+    """
     for anahtar in ust_sayfalar():
-        assert len(alt_sekmeler(anahtar)) <= 6, anahtar
+        assert len(alt_sekmeler(anahtar)) <= 12, anahtar
 
 
 def test_derinlik_en_fazla_uc_seviye() -> None:
@@ -84,12 +78,11 @@ def test_url_path_benzersiz() -> None:
     assert len(yollar) == len(set(yollar))
 
 
-def test_menuden_cikanlarin_adresi_kirilmadi() -> None:
-    for anahtar in MENUSUZ:
-        tanim = tab_getir(anahtar)
-        assert tanim is not None, anahtar
-        assert tanim.ust is None, f"{anahtar} hâlâ menüde"
-        assert tab_url_getir(tanim.url_path) is not None, anahtar
+def test_her_sayfanin_adresi_cozulur() -> None:
+    """NAV-AGAC-01: menüye alınan sayfaların URL'i de çalışmaya devam etmeli."""
+    for tanim in SECTIONS:
+        assert tab_getir(tanim.anahtar) is not None, tanim.anahtar
+        assert tab_url_getir(tanim.url_path) is not None, tanim.url_path
 
 
 def test_birlestirilen_sekme_basliklari() -> None:

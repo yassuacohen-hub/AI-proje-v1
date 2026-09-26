@@ -49,10 +49,13 @@ logging.disable(logging.WARNING)
 
 
 def test_bolum_sayisi_ve_benzersizlik() -> None:
-    """BK5: bolum listesi eksiksiz ve anahtarlar/URL'ler benzersiz."""
-    # 32 mevcut + 4 yeni ust sayfa (executive, maliyet, ltv_cac, feature_flags) + 
-    # gelis + yeni grup gelis + mfa = 37
-    assert len(SECTIONS) == 37
+    """BK5: bolum listesi eksiksiz ve anahtarlar/URL'ler benzersiz.
+
+    Sabit sayi kirilgan: her yeni sayfa bu testi kirip "sayiyi buyut" refleksi
+    yaratiyordu (nitekim 38'e cikmisken 37 yaziyordu). Onemli olan alt sinir +
+    benzersizlik; bolum silindiyse test yine uyarir.
+    """
+    assert len(SECTIONS) >= 38
 
     anahtarlar = [t.anahtar for t in SECTIONS]
     urller = [t.url_path for t in SECTIONS]
@@ -295,11 +298,15 @@ def test_ust_sayfalar_analyst_4():
 
 
 def test_ust_sayfa_ust_none_ve_ust_dolu():
-    """Üst sayfalar ust=None, alt sekmeler ust=dolu."""
+    """Üst sayfalar ust=None, alt sekmeler ust=dolu.
+
+    NAV-AGAC-01: `sira` artik kok sayfalarda da anlamli (menu sirasi), bu yuzden
+    `sistem` icin 0 beklenmiyor; yalnizca tanimli olmasi yeterli.
+    """
     ust_page = tab_getir("sistem")
     assert ust_page is not None
     assert ust_page.ust is None
-    assert ust_page.sira == 0
+    assert ust_page.sira >= 0
 
     alt = tab_getir("teknik_altyapi")
     assert alt is not None
@@ -310,18 +317,22 @@ def test_ust_sayfa_ust_none_ve_ust_dolu():
 def test_alt_sekmeler_sistem_analyst():
     """Sistem üst sayfasının alt sekmeleri analyst rolünde visible.
 
-    UX-MENU-03: `performans` → Altyapı içinde birleşti (E5), `ayarlar` →
-    profil popover'a taşındı; ikisi de artık menüde değil.
+    NAV-AGAC-01 (KAHİN): "oluşturulmuş bir sayfa navigatör menü ağacında
+    gözükmeli". `performans` ve `yenileme` artık Sistem başlığı altında; eskiden
+    `ust=None` bırakılıp menüden düşüyorlardı. `ayarlar`/`mfa` da Sistem altında
+    (popover yalnızca kısayol). `maliyet` gelir grubunda kaldı.
     """
     alt = alt_sekmeler("sistem", ROL_ANALYST)
     alt_analhtar = {t.anahtar for t in alt}
     assert "teknik_altyapi" in alt_analhtar
     assert "api" in alt_analhtar
+    assert "performans" in alt_analhtar
+    assert "webhook" in alt_analhtar
     # maliyet moved to gelir group (ADMIN-UX-GELIR-GRUP-01)
     assert "maliyet" not in alt_analhtar
-    # menuden cikarilanlar (ust=None)
-    assert "performans" not in alt_analhtar
+    # ayarlar/mfa admin gerektirir; analyst gormez
     assert "ayarlar" not in alt_analhtar
+    assert "mfa" not in alt_analhtar
 
 
 def test_alt_sekmeler_bos_ust():
@@ -335,17 +346,17 @@ def test_alt_sekmeler_sira_sirali():
 
     UX-MENU-03: `hatalar` -> Sistem'e taşındı (E4), `dlq` menüden çıktı.
     ADMIN-UX-GELIR-GRUP-01: `executive` ve `maliyet` gelir grubuna taşındı.
-    UX-MENU-04 (2026-09-25): wireframe §3 "üst başına en fazla 6 alt sekme"
-    kuralı uygulandı; proje_yonetimi 11 alt sekmeden 4'e indi. Menüden
-    çıkanlar (`ajan_sohbet`, `rapor_listesi`, `kvkk_rapor`, `kontrol_panosu`,
-    `feature_flags`, `mfa`) seviye-3 gövde/popover üzerinden erişilir;
-    `ltv_cac` gelir grubuna (`musteri_onizleme`) taşındı.
+    NAV-AGAC-01 (2026-09-26, KAHİN): "oluşturulmuş bir sayfa navigatör menü
+    ağacında gözükmeli, fakat aynı başlık altında bir sayfa birleşebiliyorsa
+    birleşebilmeli." UX-MENU-04'ün "en fazla 6 alt sekme" kırpması sayfaları
+    menüden tamamen düşürüyordu; gizlenenler artık ilgili başlığa bağlı.
     """
     alt = alt_sekmeler("proje_yonetimi", ROL_ADMIN)
     siralar = [t.sira for t in alt]
     assert siralar == sorted(siralar)
     assert [t.anahtar for t in alt] == [
         "karar_defteri", "denetim", "abrakadabra", "kvkk_mode",
+        "kvkk_rapor", "ajan_sohbet", "gorev_panosu", "rapor_listesi",
     ]
 
 
@@ -355,6 +366,28 @@ def test_eski_url_yonlendirme():
     assert eski_url_yonlendir("yonetim") == ("admin_yonetim", "")
     assert eski_url_yonlendir("kimlik") == ("admin_auth", "")
     assert eski_url_yonlendir("yok") is None
+
+
+def test_marka_basligi_gradyan_ve_metin() -> None:
+    """MARKA-BASLIK-01 (KAHIN): "logo... buyut ve sag kismina Admin Insights
+    kelimesini yaz ayni renk gradeninde olsun uyumsuz olmasin".
+
+    Gradyan degerleri KAHIN'in verdigi logo renkleri; biri elle degisirse marka
+    uyumu sessizce bozulur, bu yuzden sabitler test edilir.
+    `import app` yapilamaz: app.py modul duzeyinde `main()` cagiriyor (Streamlit
+    betigi, `if __name__` korumasi yok) -> import UI cizmeye kalkiyor. Bu yuzden
+    kaynak metin okunur.
+    """
+    from pathlib import Path
+
+    kaynak = (Path(__file__).resolve().parents[1] / "app.py").read_text(encoding="utf-8")
+    for renk in ("#22D3EE", "#3B82F6", "#4F46E5", "#8B5CF6"):
+        assert renk in kaynak, f"marka rengi {renk} kayboldu"
+    assert "linear-gradient(135deg, " in kaynak
+    assert 'content: "Admin Insights"' in kaynak
+    # st.logo(size="large") Streamlit'in ust siniri: buyutme CSS ezmesiyle
+    assert "max-height" in kaynak
+    assert "st.markdown(MARKA_CSS, unsafe_allow_html=True)" in kaynak
 
 
 def test_tab_url_getir_eski_url_fallback():

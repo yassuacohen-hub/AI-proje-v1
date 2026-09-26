@@ -14,7 +14,7 @@ try:  # Python 3.11+ standart kutuphane
     import tomllib
 except ModuleNotFoundError:  # Python 3.10: harici tomli paketi
     import tomli as tomllib  # type: ignore[no-redef]
-from datetime import datetime
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -24,6 +24,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, HTMLResponse, JSONResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 from sqlalchemy import text
+from sqlalchemy.exc import SQLAlchemyError
 
 import pyotp
 import qrcode
@@ -2002,86 +2003,87 @@ def _log_search_event(
         print(f"[DATA-LOG-01] search_event kayit hatasi: {exc}")
 
 
-
-
-def _log_search_event(
-    user_id: str,
-    email: str,
-    ip: str,
-    query: str,
-    result_count: int,
-    filters: str = "",
-) -> None:
-    """DATA-LOG-01: search_events tablosuna kayit. Hata istegi duser."""
-    try:
-        engine = get_engine()
-        with engine.connect() as conn:
-            conn.execute(
-                text(
-                    "INSERT INTO search_events (user_id, email_masked, ts, ip_masked, "
-                    "query, result_count, filters) "
-                    "VALUES (:uid, :email, CURRENT_TIMESTAMP, :ip, :q, :rc, :f)"
-                ),
-                {
-                    "uid": user_id or "",
-                    "email": _mask_email(email),
-                    "ip": _dl_mask_ip(ip),
-                    "q": (query or "")[:1000],
-                    "rc": result_count,
-                    "f": (filters or "")[:500],
-                },
-            )
-            conn.commit()
-    except Exception as exc:
-        print(f"[DATA-LOG-01] search_event kayit hatasi: {exc}")
-
+# IKIZ-TEMIZLIK-01 (2026-09-26): `_log_search_event` bu noktada birebir ikinci kez
+# tanımlıydı; ikinci tanım birinciyi gölgeliyordu. Kopya silindi (tek tanım kaldı).
 
 # B-04: Hesap kilidi (lockout) yardımcı fonksiyonları
 _LOGIN_MAX_ATTEMPTS = 5
 _LOCKOUT_DURATION_MINUTES = 15
 
 
+def _kilit_bitisi() -> datetime:
+    """Şimdiden itibaren kilit bitiş anı (UTC, tz-aware)."""
+    return datetime.now(timezone.utc) + timedelta(minutes=_LOCKOUT_DURATION_MINUTES)
+
+
 def _record_failed_login(engine, user_id: str) -> None:
-    """Başarısız giriş denemesini kaydet ve gerekirse kilitle."""
+    """Başarısız giriş denemesini kaydet ve gerekirse kilitle.
+
+    AUTH-LOCKOUT-FIX-01 (2026-09-26): eski sürümde kilit bitişi bir SQL
+    metin sabitinin içine gömülü bind parametresiyle yazılıyordu; parametre
+    hiç yerine konmadığı için kilit hiç uygulanmıyordu. Zaman damgası artık
+    Python'da hesaplanıp bind ediliyor (dialect bağımsız).
+
+    Yazma yolu en-iyi-çaba: hata istegi düşürmez ama **sessiz yutulmaz**,
+    `logger.error` + traceback ile görünür olur.
+    """
     try:
         with engine.begin() as conn:
             conn.execute(
                 text("""
-                    UPDATE users 
+                    UPDATE users
                     SET failed_login_attempts = failed_login_attempts + 1,
-                        locked_until = CASE 
-                            WHEN failed_login_attempts + 1 >= :max_attempts 
-                            THEN NOW() + INTERVAL ':lockout_minutes minutes'
-                            ELSE locked_until 
+                        locked_until = CASE
+                            WHEN failed_login_attempts + 1 >= :max_attempts
+                            THEN :kilit_ts
+                            ELSE locked_until
                         END
                     WHERE user_id = :uid
                 """),
-                {"uid": user_id, "max_attempts": _LOGIN_MAX_ATTEMPTS, "lockout_minutes": _LOCKOUT_DURATION_MINUTES}
+                {
+                    "uid": user_id,
+                    "max_attempts": _LOGIN_MAX_ATTEMPTS,
+                    "kilit_ts": _kilit_bitisi(),
+                },
             )
-    except Exception as exc:
-        print(f"[LOCKOUT] Failed login record error: {exc}")
+    except SQLAlchemyError:
+        logger.error("[LOCKOUT] basarisiz giris kaydi yazilamadi (user_id=%s)", user_id, exc_info=True)
 
 
 def _is_account_locked(engine, user_id: str) -> bool:
-    """Hesap kilitli mi kontrol et."""
+    """Hesap kilitli mi kontrol et.
+
+    AUTH-LOCKOUT-FIX-01: eski sürüm `except Exception: return False` ile
+    **fail-open** çalışıyordu — şema hatası kilidi sessizce devre dışı
+    bırakıyordu (admin login hatası haftalarca bu yüzden gizlendi). Artık
+    DB hatası loglanıp yukarı atılır; güvenlik kontrolü sessizce atlanamaz.
+
+    Karşılaştırma bilerek SQL tarafında: sürücüye göre kolon `datetime`
+    (Postgres) ya da `str` (SQLite) dönebiliyor; Python'da kıyaslamak tip
+    varsayımı gerektirirdi.
+    """
     try:
-        with engine.connect() as conn:
+        with engine.begin() as conn:  # süresi dolmuş kilidi temizleme yazısı commit olsun
             row = conn.execute(
-                text("SELECT locked_until FROM users WHERE user_id = :uid"),
-                {"uid": user_id}
+                text(
+                    "SELECT locked_until, "
+                    "CASE WHEN locked_until > :simdi THEN 1 ELSE 0 END AS kilitli "
+                    "FROM users WHERE user_id = :uid"
+                ),
+                {"uid": user_id, "simdi": datetime.now(timezone.utc)},
             ).mappings().first()
-            if row and row["locked_until"]:
-                from datetime import datetime
-                if row["locked_until"] > datetime.utcnow():
-                    return True
-                # Lock expired - clear it
-                conn.execute(
-                    text("UPDATE users SET locked_until = NULL, failed_login_attempts = 0 WHERE user_id = :uid"),
-                    {"uid": user_id}
-                )
+            if not row or not row["locked_until"]:
+                return False
+            if row["kilitli"]:
+                return True
+            conn.execute(
+                text("UPDATE users SET locked_until = NULL, failed_login_attempts = 0 WHERE user_id = :uid"),
+                {"uid": user_id},
+            )
         return False
-    except Exception:
-        return False
+    except SQLAlchemyError:
+        logger.error("[LOCKOUT] kilit kontrolu basarisiz (user_id=%s)", user_id, exc_info=True)
+        raise
 
 
 def aktivite_yaz(
@@ -2554,15 +2556,17 @@ def api_admin_login_post(req: dict, request: Request, _rate: None = Depends(_aut
         if row["status"] != "onayli" or row["role"] != "admin":
             aktivite_yaz(user_id=email, olay_tipi="giris", basarili=False, request=request)
             raise HTTPException(status_code=403, detail="admin yetkisi gerekli")
+        # AUTH-LOCKOUT-FIX-01: kilit kontrolu sifre dogrulamasindan ONCE. Eski sirada
+        # yanlis sifre once 401 ile donuyordu; kilitli hesap hic 423 almiyor, sayac
+        # sonsuza kadar artiyordu -> kilit fiilen uygulanmiyordu.
+        if _is_account_locked(engine, row["user_id"]):
+            aktivite_yaz(user_id=email, olay_tipi="giris", basarili=False, request=request)
+            raise HTTPException(status_code=423, detail="Hesap kilitli. Cok fazla basarisiz deneme.")
         if not _verify_password(password, row["password_hash"]):
             aktivite_yaz(user_id=email, olay_tipi="giris", basarili=False, request=request)
             # B-04: Failed login attempt tracking for lockout
             _record_failed_login(engine, row["user_id"])
             raise HTTPException(status_code=401, detail="gecersiz email veya sifre")
-        # Check if account is locked
-        if _is_account_locked(engine, row["user_id"]):
-            aktivite_yaz(user_id=email, olay_tipi="giris", basarili=False, request=request)
-            raise HTTPException(status_code=423, detail="Hesap kilitli. Cok fazla basarisiz deneme.")
         # API-ADMIN-LASTLOGIN-YAZ-05: Başarılı girişte last_login güncelle
         with engine.connect() as conn:
             conn.execute(

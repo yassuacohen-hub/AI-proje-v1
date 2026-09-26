@@ -98,6 +98,48 @@ REHBER_KEY = "_hg_rehber"
 #: False, marka başlığı metin olarak kalıyordu. KAHİN onaylı Muninn varyantı
 #: `docs/brand/assets/` altında; yol oraya çevrildi (yazı kalkar, logo kalır).
 LOGO_YOLU = ROOT / "docs" / "brand" / "assets" / "Muninn_logo_transparent.png"
+#: MARKA-BASLIK-01: logo büyütme + sağına "Admin Insights" yazısı.
+#: Renkler KAHİN tarafından verilen logo gradyanı (birebir, "uyumsuz olmasın"):
+#: cyan `#22D3EE` → blue `#3B82F6` → indigo `#4F46E5` → violet `#8B5CF6`, 135deg.
+#: `st.logo(size="large")` Streamlit'in üst sınırı olduğu için büyütme CSS ile.
+#: Yazı `::after` — ayrı bir marka bileşeni değil (D-211 ikiz yasağı).
+MARKA_RENK: dict[str, str] = {
+    "cyan": "#22D3EE",
+    "blue": "#3B82F6",
+    "indigo": "#4F46E5",
+    "violet": "#8B5CF6",
+}
+MARKA_GRADYAN = (
+    "linear-gradient(135deg, "
+    f"{MARKA_RENK['cyan']} 0%, {MARKA_RENK['blue']} 35%, "
+    f"{MARKA_RENK['indigo']} 65%, {MARKA_RENK['violet']} 100%)"
+)
+MARKA_CSS = f"""
+<style>
+[data-testid="stSidebarHeader"] img, [data-testid="stLogo"] {{
+    height: 3.4rem !important;
+    max-height: 3.4rem !important;
+    width: auto !important;
+}}
+[data-testid="stSidebarHeader"] {{
+    display: flex;
+    align-items: center;
+}}
+[data-testid="stSidebarHeader"]::after {{
+    content: "Admin Insights";
+    margin-left: .55rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: .01em;
+    white-space: nowrap;
+    background: {MARKA_GRADYAN};
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}}
+</style>
+"""
 #: U-10: Oturum rolü. Yazılırsa `admin_token` türetimini ezer (test/gelecek RBAC).
 ROL_KEY = "_hg_rol"
 
@@ -445,8 +487,15 @@ def render_sidebar(secili: TabTanimi) -> None:
         # koyarsın"): logo dosyası varsa `st.logo` ile sol üst köşeye basılır,
         # yoksa metin başlık kalır. Anahtarlar (Kompakt menü / Bölüm açıklaması)
         # sayfa altına (`render_footer`) taşındı.
+        # MARKA-BASLIK-01 (KAHİN: "logo biraz küçük olmuş büyüt ve sağ kısmına
+        # Admin Insights kelimesini yaz, aynı renk gradeninde olsun uyumsuz
+        # olmasın"). `size="large"` Streamlit'in üst sınırı; daha büyüğü için CSS
+        # şart. Metin ayrı bir HTML/base64 marka bloğu değil `::after` — ikinci
+        # bir logo bileşeni doğurmuyor (D-211 ikiz yasağı).
+        # Renkler docs/brand/design-tokens.json ile aynı (logo renkleri).
         if LOGO_YOLU.exists():
             st.logo(str(LOGO_YOLU), size="large")
+            st.markdown(MARKA_CSS, unsafe_allow_html=True)
         elif kompakt:
             st.markdown("## 🏢")
         else:

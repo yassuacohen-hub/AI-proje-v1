@@ -854,3 +854,81 @@ Ajanlara **zorunlu sohbet ve koordinasyon** ilkesi:
 ### Karar Yayınıyla İlgili Nodlar
 - [[Huginn Data Insights/data/orchestrator/AJAN_CHAT_KURALI_D210]] — Tam kural belgesi + komut örnekleri
 - [[Huginn Data Insights/data/orchestrator/CHAT_SISTEMI_FAYDALARI]] — Chat ROI: hız, kalite, denetim, riski yönetme
+
+---
+
+## İkiz Yapı Yasağı (D-211 — KAHİN kararı 2026-09-26)
+
+KAHİN: *"sistemde ikiz yapılar olmasın istiyorum"*.
+
+### Kural
+Aynı işi yapan iki yapı **yasaktır**. İkiz = aynı isimli ikinci tanım, `original_*` / `*_eski` / `*_backup` kopyası, aynı kodu ikinci portta çalıştıran ikinci süreç, aynı bilgiyi tutan ikinci dosya. İkiz görülürse **düzeltilmez, silinir**; tek kalan sürüm düzeltilir.
+
+### Neden
+İkizin ikinci kopyası hiç güncellenmez ama aranınca bulunur. Ajan yanlış kopyayı okur, düzeltmeyi oraya yazar, hata sürmeye devam eder. `original_web_app.py` içinde hatalı `_record_failed_login()` aynen duruyordu; `_log_search_event` `web_app.py` içinde birebir iki kez tanımlıydı ve ikinci tanım birinciyi gölgeliyordu.
+
+### Denetim
+- Modül düzeyinde mükerrer fonksiyon tanımı: `tests/test_auth_lockout.py::test_ikiz_fonksiyon_tanimi_yok` (AST tabanlı, `web_app.py`).
+- Yeni ikiz sınıfı bulunduğunda benzer AST/kaynak taraması testi eklenir — kural yorumla değil testle korunur.
+
+### Bu kural kapsamında silinenler (2026-09-26)
+- `original_web_app.py` (~2500 satır, `web_app.py` bayat kopyası; hiçbir yerden import edilmiyordu)
+- `web_app.py` içindeki ikinci `_log_search_event` tanımı
+- 8502 portundaki ikinci Streamlit örneği (bkz. D-212)
+
+---
+
+## Tek Yapı Tek Adres (D-212 — KAHİN kararı 2026-09-26)
+
+KAHİN: *"tek bir yapı tek bir adres istiyorum; sahte veri koyacaksan sahte verilerin olduğu grafiğin altına yazarsın ve uyarılar koyarsın, yeni veriler geldiğinde onlar otomatik değişir"* ve *"`http://localhost:8501/` tüm projede tek gerçek admin paneli olarak gözüküyor, adres her zaman bu şekilde kalacak"*.
+
+### Kural
+- **Tek panel adresi: `http://localhost:8501/`.** İkinci port, "taslak sürüm", "UX kopyası" açılmaz. (Önceki 8501-gerçek / 8502-sahte ayrımı **iptal edildi**.)
+- **Sahte veri ayrı bir yapı değildir.** Verisi henüz gelmemiş kutu, tek uygulamanın içinde yer tutucu değerle çizilir ve **hemen altına** "⚠️ **SAHTE VERİ**: … — gerçek veri geldiğinde otomatik değişir." uyarısı basılır.
+- **Elle temizlik yok.** Gerçek veri geldiği anda `_dolu()` True döner, kutu gerçek değere geçer, uyarı kendiliğinden kaybolur.
+
+### Uygulama
+- `web_dashboard/tabs/ana_kontrol.py`: `TASLAK = os.getenv("HUGINN_TASLAK", "1") != "0"` — yer tutucu **varsayılan olarak açık**. `HUGINN_TASLAK=0` yalnızca ekran görüntüsü/denetim için kaçış kapısıdır, ayrı bir sürüm değildir.
+- Yer tutucu sabitleri grep'lenebilir: `SAHTE_DEGER`, `SAHTE_YUZDE`.
+- Uyarı metni tek kalıp: `⚠️ **SAHTE VERİ**: <ne> — gerçek veri geldiğinde otomatik değişir.`
+
+### Denetim
+`tests/test_taslak_sahte_veri.py` — `TASLAK` açık/kapalı iki durumda da uyarının kutunun altında çıktığını doğrular.
+
+---
+
+## Menü Ağacı, Veri Etiketi, Marka Başlığı (D-213 — KAHİN kararı 2026-09-26)
+
+Tek oturumda verilen üç KAHİN talimatı. Üçünün ortak ilkesi: **tek düğme, tek kalıp** — gizlemek/etiketlemek/renklendirmek için ikinci bir liste tutulmaz (D-211 ikiz yasağının UI karşılığı).
+
+### NAV-AGAC-01 — Oluşturulan sayfa menüde görünür
+KAHİN: *"oluşturulmuş bir sayfa navigatör menü ağacında gözükmeli, fakat aynı başlık altında bir sayfa birleşebiliyorsa birleşebilmeli"*.
+
+- Menü ağacı üyeliğini **tek alan** belirler: `TabTanimi.ust`. `ust is None` → sidebar kökü; `ust="x"` → kök `x` altında alt sekme.
+- `ust_sayfalar()` içindeki **6 anahtarlık sabit frozenset kaldırıldı**. Listede olmayan kök bölüm sessizce menüden düşüyor, yalnız "🔍 Hızlı geçiş" kutusundan erişilebiliyordu — 14 sayfa bu şekilde görünmezdi.
+- Gizlemek için ayrı liste **yasak**; sayfa gizlenecekse ilgili başlığın altına bağlanır.
+- `sira` artık kök sayfalarda da anlamlıdır (menü sırası). Kökler: `ana_kontrol=0, musteri_yonetimi=1, proje_yonetimi=2, veri_kalite=3, musteri_onizleme=4, sistem=5`.
+- **En fazla 2 seviye**: `ust` başka bir alt sekmeyi gösteremez (ağaç çizici 3. seviyeyi çizmez).
+- Sabit bölüm sayısı iddiası kırılgandır (`== 37` iddiası 38'e çıkmışken kalmıştı) → alt sınır (`>= 38`) + benzersizlik denetlenir.
+- Denetim: `tests/test_sekme_kapsama.py::test_her_bolum_menu_agacindan_erisilebilir` + `tests/test_tabs_ia.py::test_her_sayfa_menu_agacinda`.
+- **UX-MENU-04 geçersiz**: "taşan sekmeyi menüden çıkar" kuralı kaldırıldı. KAHİN: *"her sayfa menüde gözüksün, sonra ilgili ve alakalı olanları birleştirelim; admin tek sayfada ilgili ve alakalı konuları görebilecek şekilde optimize ediyoruz"*. Sınır **gizlemeyle değil birleştirmeyle** korunur. `test_tabs_ia.py::MENUSUZ` demeti ve `test_menuden_cikanlarin_adresi_kirilmadi` silindi; üst başına alt sekme sınırı geçici olarak 12 (birleştirme sonrası düşürülecek).
+- İkon çakışması: `executive` 📈 idi, `veri_kalite` ile aynı → 💹. Menüde iki kardeş aynı ikonla ayırt edilemez (`test_ikon_benzersiz`).
+- **Sıradaki iş**: ilgili sayfaların birleştirilmesi + sayfa başına vektör grafik tasarımı (KAHİN: *"sonra her sayfayı ayrıca tasarlarız, vektör chartlar ve grafikler kullanırız"*).
+
+### VERI-ETIKET-01 — Her blok verisinin kaynağını söyler
+KAHİN: *"sahte veri ve gerçek veri ayırt etmek için ikon kullan, altına sahte/gerçek diye yaz; böylece ben hangi verilerin geldiğini göreyim"*.
+
+- Tek yardımcı: `ana_kontrol._veri_etiketi(gercek, sahte)` → `🟢 **GERÇEK VERİ**: …` · `🔴 **SAHTE VERİ**: … — gerçek veri geldiğinde otomatik değişir`.
+- Eski uyarı yalnızca sahte olanı sayıyordu; gerçek verinin hangisi olduğu görünmüyordu. Artık iki taraf da yazılır.
+- Gerçek veri geldiğinde ad `sahte` listesinden `gercek` listesine geçer, etiket kendiliğinden değişir — elle metin düzenlenmez.
+- Denetim: `tests/test_taslak_sahte_veri.py` (etiket ikon + kelime, gerçek veri de etiketlenir).
+
+### MARKA-BASLIK-01 — Logo büyük + gradyan "Admin Insights"
+KAHİN: *"logo biraz küçük olmuş büyüt ve sağ kısmına Admin Insights kelimesini yaz, aynı renk gradeninde olsun uyumsuz olmasın"* + *"marka rengi logo renkleri ile aynı"*.
+
+- Marka gradyanı (logo renkleriyle birebir, tek kaynak `app.py::MARKA_RENK`):
+  `linear-gradient(135deg, #22D3EE 0%, #3B82F6 35%, #4F46E5 65%, #8B5CF6 100%)`
+  (cyan → blue → indigo → violet).
+- `st.logo(size="large")` Streamlit'in üst sınırıdır; büyütme CSS ile (`3.4rem`).
+- "Admin Insights" yazısı `[data-testid="stSidebarHeader"]::after` ile basılır — **ikinci bir marka/HTML bloğu üretilmez** (D-211).
+- Denetim: `tests/test_dashboard_nav.py::test_marka_basligi_gradyan_ve_metin` (4 renk + `135deg` + metin + `max-height` sabitleri). `app.py` modül düzeyinde `main()` çağırdığı için test dosyayı import etmez, kaynak metnini okur.

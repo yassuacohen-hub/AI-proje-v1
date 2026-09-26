@@ -76,3 +76,37 @@ Tarama tekniği: `\b(?:FROM|JOIN|INTO|UPDATE)\s+([a-z_][a-z0-9_]{2,})` regexi, `
 **Açık kusur (raporlandı, düzeltilmedi):** `web_app.py:2044-2084` `_record_failed_login()` / `_is_account_locked()` her istisnayı `try/except Exception` ile yutuyor. Eksik-kolon hatasının haftalarca saklanmasının sebebi tam olarak bu. Hedefli `except` + log önerilir.
 
 **Commit:** `bb40ffc` (şema + marka + test), ardından admin_auth mükerrer buton commit'i. `origin/chore/monorepo-merge` push edildi.
+
+### 2026-09-26 (devam — auth lockout + ikiz temizliği + tek adres)
+
+**AUTH-LOCKOUT-FIX-01 — bir fonksiyon çiftinde dört ayrı kusur.** Yukarıda "açık kusur" diye raporlanan yer kazılınca hata tek değil dört çıktı; dördü de aynı anda kilidin fiilen hiç çalışmamasına sebep oluyordu:
+1. **Bind parametresi SQL metin sabitinin içindeydi.** `INTERVAL ':lockout_minutes minutes'` — `:ad` bir string literal'in *içindeyse* SQLAlchemy yerine koymaz, sürücüye düz metin gider. Kilit bitiş zamanı hiç yazılmıyordu. Düzeltme: zaman damgası Python'da hesaplanıp bind ediliyor (`_kilit_bitisi()`), dialect bağımsız.
+2. **`except Exception: return False` → fail-open.** Şema hatası güvenlik kontrolünü *sessizce kapatıyordu*. Admin login hatasını haftalarca gizleyen mekanizmanın aynısı. Düzeltme: `except SQLAlchemyError` + `logger.error(exc_info=True)` + `raise`. Güvenlik kontrolü sessizce atlanamaz.
+3. **Süresi dolan kilidi temizleyen UPDATE `engine.connect()` içindeydi**, commit yok → yazma sessizce çöpe gidiyordu. `engine.begin()` yapıldı.
+4. **Sıra hatası (kod okunurken bulundu, raporda yoktu):** `api_admin_login_post` içinde kilit kontrolü `_verify_password`'dan **sonra** çalışıyordu. Kilitli hesap yanlış şifreyle 423 değil 401 alıyor, sayaç sonsuza kadar artıyordu — yani kilit hiç uygulanmıyordu. Kontrol şifre doğrulamasının önüne alındı.
+
+**Tip varsayımı tuzağı:** ilk düzeltmede `locked_until` Python'da karşılaştırıldı, test `AttributeError: 'str' object has no attribute 'tzinfo'` ile patladı — kolon Postgres'te `datetime`, SQLite'ta `str` dönüyor. Karşılaştırma bilerek SQL tarafına alındı (`CASE WHEN locked_until > :simdi THEN 1 ELSE 0 END`), Python'da tip varsayımı kalmadı.
+
+**Test:** `tests/test_auth_lockout.py` — 7 test, bellekte SQLite. SQLite kasıtlı seçildi: `NOW()` yok, dolayısıyla bind edilen zaman damgası olmadan test geçmiyor (1. kusur bir daha geri gelemez).
+
+**D-211 İkiz Yapı Yasağı (KAHİN: "sistemde ikiz yapılar olmasın istiyorum"):**
+- `web_app.py` içinde `_log_search_event` **birebir iki kez** tanımlıydı (1973 ve 2007); ikinci tanım birinciyi gölgeliyordu. Kopya silindi.
+- `original_web_app.py` (~2500 satır) `web_app.py`'nin bayat kopyasıydı ve içinde **hatalı** `_record_failed_login` / `_is_account_locked` aynen duruyordu. Hiçbir yerden import edilmiyordu (tek atıf `logs/git_push.log`). `git rm` edildi. İkizin asıl zararı bu: ajan yanlış kopyayı okuyup düzeltmeyi oraya yazabilirdi.
+- Kural yorumla değil testle korunuyor: `test_ikiz_fonksiyon_tanimi_yok` `web_app.py`'yi AST ile parse edip modül düzeyinde mükerrer fonksiyon adı arıyor.
+
+**D-212 Tek Yapı Tek Adres (KAHİN kararı, önceki 8501/8502 planını iptal eder):** Tek panel adresi `http://localhost:8501/`. 8502'deki ikiz Streamlit örneği kapatıldı (PID 26400). Sahte veri ayrı bir sürüm/port değil: verisi gelmemiş kutu tek uygulamanın içinde yer tutucuyla çizilir, altına "⚠️ **SAHTE VERİ**: … — gerçek veri geldiğinde otomatik değişir." uyarısı basılır, gerçek veri gelince `_dolu()` True döner ve kutu kendiliğinden gerçek değere geçer. `ana_kontrol.py`'de `TASLAK` artık **varsayılan açık** (`os.getenv("HUGINN_TASLAK", "1") != "0"`); `HUGINN_TASLAK=0` yalnızca kaçış kapısı. `_test_groq_chat_live.py` 8501'e çevrildi, `streamlit_taslak.txt` silindi.
+
+**Doğrulama:** `pytest tests/test_taslak_sahte_veri.py tests/test_auth_lockout.py -q` → **14 passed**.
+
+**D-213 Menü Ağacı + Veri Etiketi + Marka Başlığı (KAHİN kararı 2026-09-26):**
+
+- **NAV-AGAC-01** (KAHİN: *"oluşturulmuş bir sayfa navigatör menü ağacında gözükmeli"*, *"her sayfa menüde gözüksün sonra ilgili ve alakalı olanları birleştirelim"*): menü üyeliğini **tek alan** belirler — `TabTanimi.ust`. `ust is None` → kök, değilse o kökün altı. `ust_sayfalar()` içindeki 14 sayfayı gizleyen frozenset silindi; öksüz sayfalar ilgili başlıklara bağlandı. **UX-MENU-04'ün "taşan sekmeyi menüden çıkar" kuralı geçersiz**: sınır gizlemeyle değil **birleştirmeyle** korunur. Gizlenecek sayfa listesi tutmak D-211 ikiz yasağının UI hâliydi — iki doğruluk kaynağı (`ust` + gizli liste).
+- **İkon çakışması (gizlemenin sakladığı gerçek kusur):** `executive` 📈 taşıyordu, `veri_kalite` de 📈. Sayfa menüde görünmediği için `test_ikon_benzersiz` bunu yakalamıyordu. `executive` → 💹.
+- **Bayat testler yenilendi:** `tests/test_tabs_ia.py` içindeki 13 kayıtlık `MENUSUZ` demeti + `test_menuden_cikanlarin_adresi_kirilmadi` silindi; yerine `test_her_sayfa_menu_agacinda` (öksüz sayfa yok) ve `test_her_sayfanin_adresi_cozulur` geldi. Üst başına alt sekme sınırı **geçici olarak 12** (birleştirme sonrası düşürülecek).
+- **VERI-ETIKET-01** (KAHİN: *"sahte veri ve gerçek veri ayırt etmek için ikon kullan altına sahte/gerçek diye yaz"*): tek yardımcı `ana_kontrol._veri_etiketi(gercek, sahte)`, veri bloğunun altına 🟢 GERÇEK / 🔴 SAHTE serilerini adıyla basar. 7 çağrı yeri.
+- **MARKA-BASLIK-01** (KAHİN: *"logo biraz küçük olmuş büyüt ve sağ kısmına Admin Insights kelimesini yaz aynı renk gradeninde olsun"*, *"marka rengi logo renkleri ile aynı"*): tek kaynak `app.py::MARKA_RENK` — `#22D3EE / #3B82F6 / #4F46E5 / #8B5CF6`, `linear-gradient(135deg, … 0%/35%/65%/100%)`. `st.logo(size="large")` Streamlit'in üst sınırı olduğu için büyütme CSS ile (`max-height: 3.4rem`). "Admin Insights" ayrı bir marka bileşeni değil, `[data-testid="stSidebarHeader"]::after` — D-211 ikiz yasağı gereği.
+  - Kendi hatam: ilk denemede gradyanı `docs/brand/assets/LOGO.md` design-token'larından (3 durak, 90deg) kurdum; KAHİN gerçek logo gradyanını verdi, birebir uygulandı. Ders: marka rengi *üretim varlığından* okunur, dokümandaki öneriden değil.
+
+**Doğrulama:** tam takım `26 failed, 4258 passed, 12 skipped` (255 s). 26'nın **4'ü benim** (hepsi `test_tabs_ia.py`, NAV-AGAC-01'in su yüzüne çıkardığı) → düzeltildi: `pytest tests/test_tabs_ia.py tests/test_dashboard_nav.py tests/test_sekme_kapsama.py -q` → **206 passed, 3 skipped**. Kalan **22 hata bu çalışmadan önce de vardı** (`git show HEAD:` ile kanıtlandı): `test_api_integration` 2 (`web_app.py:1298` `tier = user.get(...)` None üzerinde), `test_error_handling` 3, `test_migration_0017` 5, `test_schema_validation` 4, `test_sayfa_iskeleti` 3, `test_musteri_yonetimi` 1 (`musteri_yonetimi.py:79 IndexError`), `test_marka_denetim_muafiyet` / `test_naming_audit` / `test_pano_denetim` / `test_user_settings` 1'er. Ayrı backlog kalemi.
+
+**Sıradaki iş (KAHİN):** *"sonra ilgili ve alakalı olanları birleştirelim yani admin tek sayfada ilgili ve alakalı konuları görebilecek şekilde optimize ediyoruz sonra her sayfayı ayrıca tasarlarız vektör çartlar ve grafikler kullanırız"* → (1) ilgili sayfaları birleştir (mevcut alt sekme sayıları: `ana_kontrol 0, musteri_yonetimi 4, proje_yonetimi 8, veri_kalite 5, musteri_onizleme 4, sistem 11`), sonra 12 sınırını düşür; (2) sayfa başına vektör grafik tasarımı.

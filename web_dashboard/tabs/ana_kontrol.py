@@ -142,22 +142,46 @@ def bekleyen_onay_sayisi(token: str | None) -> int:
     return 0
 
 
-#: K3-10c TASLAK MODU (KAHİN, 2026-09-26): "tasarım yaparken sahte kutu üretilir,
-#: sahte kutu kalıcı olmaz sonra silinir." `set HUGINN_TASLAK=1` ile açılır.
-#: Üretimde KAPALI → sahte kutu çizilmez (K3-10 kuralı yürürlükte kalır).
-TASLAK = os.getenv("HUGINN_TASLAK") == "1"
+#: TEK-ADRES-01 (KAHİN, 2026-09-26): "tek bir yapı tek bir adres istiyorum; sahte
+#: veri koyacaksan sahte verilerin olduğu grafiğin altına yazarsın ve uyarılar
+#: koyarsın, yeni veriler geldiğinde onlar otomatik değişir."
+#: Bu yüzden ayrı "taslak sürüm" / ikinci port YOK. Yer tutucu **varsayılan olarak
+#: açıktır**: verisi olmayan kutu sahte değerle çizilir ve hemen altına "SAHTE VERİ"
+#: uyarısı basılır. Gerçek veri geldiği anda `_dolu()` True döner → kutu gerçek
+#: değere geçer, uyarı kendiliğinden kaybolur (elle temizlik gerekmez).
+#: `HUGINN_TASLAK=0` ile kapatılabilir (ekran görüntüsü/denetim için kaçış kapısı).
+TASLAK = os.getenv("HUGINN_TASLAK", "1") != "0"
 
-#: Taslak modda boş hücrelere basılan yer tutucu. Grep'lenebilir olsun diye sabit.
+#: Yer tutucu değerler. Grep'lenebilir olsun diye sabit.
 SAHTE_DEGER = "1.234"
 SAHTE_YUZDE = 68.0
+
+
+def _veri_etiketi(gercek: list[str], sahte: list[str]) -> None:
+    """VERI-ETIKET-01 (KAHİN): her blok altına "hangi veri nereden" satırı basar.
+
+    KAHİN: "sahte veri ve gerçek veri ayırt etmek için ikon kullan, altına
+    sahte/gerçek diye yaz; böylece hangi verilerin geldiğini göreyim."
+    Tek kaynak: tüm bloklar bu fonksiyonu çağırır, metin şablonu tek yerde.
+    Gerçek veri geldiğinde ad `sahte` listesinden `gercek` listesine geçer,
+    etiket kendiliğinden değişir.
+    """
+    parcalar: list[str] = []
+    if gercek:
+        parcalar.append(f"🟢 **GERÇEK VERİ**: {', '.join(gercek)}")
+    if sahte:
+        parcalar.append(f"🔴 **SAHTE VERİ**: {', '.join(sahte)} — gerçek veri geldiğinde otomatik değişir")
+    if parcalar:
+        st.caption(" · ".join(parcalar))
 
 
 def _dolu(deger: Any) -> bool:
     """K3-10: Hücrede gerçek veri var mı?
 
     KAHİN kuralı: "ızgara doldurmak için sahte kutu üretmeyin." 0, None ve boş
-    metin veri değildir — o hücre hiç çizilmez, ızgara daralır.
-    Taslak modda (`TASLAK`) hücre yine çizilir ama altında "SAHTE VERİ" yazar.
+    metin veri değildir. TEK-ADRES-01: hücre yer tutucuyla çizilir ve altına
+    "SAHTE VERİ" uyarısı basılır; gerçek veri gelince burası True döner ve
+    kutu kendiliğinden gerçek değere geçer.
     """
     return deger not in (None, 0, 0.0, "", "0")
 
@@ -165,9 +189,9 @@ def _dolu(deger: Any) -> bool:
 def _kart_izgara(adaylar: list[dict[str, Any]], bos_mesaj: str) -> None:
     """Yalnız verisi olan kartları yan yana çizer (3 veri → 3 kolon).
 
-    `adaylar` her öğesi `kpi_karti` kwargs sözlüğüdür; `deger` anahtarı boşsa
-    aday düşer. Taslak modda boş adaylar `SAHTE_DEGER` ile çizilir ve altında
-    hangi kartların sahte olduğu tek satırda listelenir.
+    `adaylar` her öğesi `kpi_karti` kwargs sözlüğüdür. Verisi olmayan aday
+    `SAHTE_DEGER` yer tutucusuyla çizilir ve altında hangi kartların sahte
+    olduğu tek satırda listelenir (TEK-ADRES-01).
     """
     gecerli = [a for a in adaylar if _dolu(a.get("deger"))]
     sahte = [a for a in adaylar if not _dolu(a.get("deger"))] if TASLAK else []
@@ -187,9 +211,8 @@ def _kart_izgara(adaylar: list[dict[str, Any]], bos_mesaj: str) -> None:
                 kategori=aday.get("kategori", "musteri"),
                 yardim=aday.get("yardim", ""),
             )
+    _veri_etiketi([a["baslik"] for a in gecerli], [a["baslik"] for a in sahte])
     if sahte:
-        adlar = ", ".join(a["baslik"] for a in sahte)
-        st.caption(f"⚠️ **SAHTE VERİ (taslak)**: {adlar} — gerçek veri bağlanınca silinecek.")
         return
     eksik = len(adaylar) - len(gecerli)
     if eksik:
@@ -220,7 +243,7 @@ def _yuzde_halka(baslik: str, yuzde: float, kategori: str = "sistem") -> str:
 
 
 def _halka_satiri(adaylar: list[tuple[str, float | None]] | list[tuple[str, float | None, str]]) -> None:
-    """Yüzde halkalarını yan yana çizer; boş olanlar taslak modda sahte gösterilir.
+    """Yüzde halkalarını yan yana çizer; verisi olmayan halka yer tutucuyla çizilir.
 
     Aday 2'li (`ad, yuzde`) ya da 3'lü (`ad, yuzde, kategori`) olabilir.
     """
@@ -234,9 +257,7 @@ def _halka_satiri(adaylar: list[tuple[str, float | None]] | list[tuple[str, floa
     for kolon, (ad, y, k) in zip(st.columns(len(cizilecek)), cizilecek):
         with kolon:
             st.markdown(_yuzde_halka(ad, y, k), unsafe_allow_html=True)
-    if sahte:
-        adlar = ", ".join(ad for ad, _ in sahte)
-        st.caption(f"⚠️ **SAHTE VERİ (taslak)**: {adlar} halkaları — gerçek alan bağlanacak.")
+    _veri_etiketi([ad for ad, _, _ in gecerli], [ad for ad, _ in sahte])
 
 
 def _yatay_bar(ogeler: list[tuple[str, float, str]]) -> str:
@@ -268,7 +289,7 @@ def _yatay_bar(ogeler: list[tuple[str, float, str]]) -> str:
 
 
 def _hareket_satiri(adaylar: list[tuple[str, Any, str]]) -> None:
-    """Yatay bar bloğu; verisi olmayan satır düşer, taslak modda sahte çizilir."""
+    """Yatay bar bloğu; verisi olmayan satır yer tutucuyla çizilir + uyarı alır."""
     gecerli = [(ad, float(d), k) for ad, d, k in adaylar if _dolu(d)]
     sahte = [(ad, k) for ad, d, k in adaylar if not _dolu(d)] if TASLAK else []
     cizilecek = gecerli + [(ad, float(SAHTE_DEGER.replace(".", "")), k) for ad, k in sahte]
@@ -276,9 +297,7 @@ def _hareket_satiri(adaylar: list[tuple[str, Any, str]]) -> None:
         st.caption("Hareket verisi henüz toplanmadı — kullanım başlayınca burada görünecek.")
         return
     st.markdown(_yatay_bar(cizilecek), unsafe_allow_html=True)
-    if sahte:
-        adlar = ", ".join(ad for ad, _ in sahte)
-        st.caption(f"⚠️ **SAHTE VERİ (taslak)**: {adlar} — gerçek veri bağlanınca silinecek.")
+    _veri_etiketi([ad for ad, _, _ in gecerli], [ad for ad, _ in sahte])
 
 
 def _icgoru_paneli(ogeler: list[tuple[str, str, str, str]]) -> None:
@@ -641,13 +660,14 @@ def render_ana_kontrol_tab() -> None:
             # taşıyıp halkanın alt yayını kırpıyordu.
             if flow_df["Adet"].sum() > 0:
                 donut(flow_df, "Durum", "Adet", merkez_metin="olay", yukseklik=_DONUT_YUKSEKLIK)
+                _veri_etiketi(["webhook dağılımı"], [])
             elif TASLAK:
                 # K3-10f: blok boş kalmasın — taslakta sahte dağılım çizilir.
                 donut(
                     pd.DataFrame({"Durum": ["Başarılı", "Hatalı", "DLQ"], "Adet": [820, 47, 12]}),
                     "Durum", "Adet", merkez_metin="olay", yukseklik=_DONUT_YUKSEKLIK,
                 )
-                st.caption("⚠️ **SAHTE VERİ (taslak)**: webhook dağılımı — gerçek veri bağlanınca silinecek.")
+                _veri_etiketi([], ["webhook dağılımı"])
             else:
                 st.caption("Webhook verisi henüz toplanmadı. Sistem kullanılınca burada görünecek.")
     with a_sag:
@@ -670,6 +690,7 @@ def render_ana_kontrol_tab() -> None:
                     ),
                     height=200,
                 )
+                _veri_etiketi(list(gunluk), [])
             elif TASLAK:
                 st.bar_chart(
                     pd.DataFrame(
@@ -678,7 +699,7 @@ def render_ana_kontrol_tab() -> None:
                     ),
                     height=200,
                 )
-                st.caption("⚠️ **SAHTE VERİ (taslak)**: günlük hacim — gerçek veri bağlanınca silinecek.")
+                _veri_etiketi([], ["günlük hacim"])
             else:
                 st.caption("Günlük hacim verisi henüz toplanmadı.")
 
@@ -701,7 +722,7 @@ def render_ana_kontrol_tab() -> None:
                 ),
             },
         )
-        st.caption("⚠️ **SAHTE VERİ (taslak)**: kaynak doluluk tablosu — gerçek veri bağlanınca silinecek.")
+        _veri_etiketi([], ["kaynak doluluk tablosu"])
     else:
         st.caption("Kaynak doluluğu için `sources` tablosu henüz bağlanmadı.")
 
@@ -710,10 +731,11 @@ def render_ana_kontrol_tab() -> None:
         st.info(
             "**Bu ekran ne işe yarar?** Müşteri tarafı (kayıt, onay, kredi) ve sistem tarafı "
             "(firma sayısı, kalite skoru, görev durumu) metriklerini tek bakışta gösterir.\n\n"
-            "**Nasıl kullanılır?** Kartlar veri geldikçe kendiliğinden açılır; verisi olmayan "
-            "metrik kart olarak çizilmez, ızgara daralır. Bölüm başlıklarından ilgili panele atlayın.\n\n"
+            "**Nasıl kullanılır?** Kartlar veri geldikçe kendiliğinden açılır. Bölüm "
+            "başlıklarından ilgili panele atlayın.\n\n"
             "**Veriler nereden gelir?** `/api/kpi` ve `/metrics` uç noktaları ile "
             "webhook izleme kayıtları. 30 saniyede bir yenilenir.\n\n"
-            "**Dikkat:** Taslak modunda (`HUGINN_TASLAK=1`) görünen bazı kutular **SAHTE VERİ** "
-            "etiketlidir; gerçek veri bağlanınca kaldırılacaktır."
+            "**Dikkat:** Verisi henüz gelmemiş kutular yer tutucu değerle çizilir ve "
+            "hemen altlarında **SAHTE VERİ** uyarısı bulunur. Gerçek veri geldiğinde "
+            "kutu otomatik olarak gerçek değere geçer, uyarı kendiliğinden kaybolur."
         )
