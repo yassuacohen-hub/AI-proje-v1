@@ -614,7 +614,7 @@ def render_ana_kontrol_tab() -> None:
     g_sol, g_orta, g_sag = st.columns([1.3, 2, 1.5], vertical_alignment="top")
     with g_sol:
         with st.container(border=True, height=_SATIR_YUKSEKLIK["orta"]):
-            st.markdown("##### Öne Çıkanlar")
+            Section("Öne Çıkanlar", kimlik="one-cikanlar", seviye=3).render()
             _icgoru_paneli(icgoruler)
     with g_orta:
         with st.container(border=True, height=_SATIR_YUKSEKLIK["orta"]):
@@ -635,7 +635,7 @@ def render_ana_kontrol_tab() -> None:
             )
     with g_sag:
         with st.container(border=True, height=_SATIR_YUKSEKLIK["orta"]):
-            st.markdown("##### Oranlar")
+            Section("Oranlar", kimlik="oranlar", seviye=3).render()
             # Yüzde halkaları (conic-gradient). Gerçek kaynaklar:
             #   veri tamlığı → src/company_master/tenant/health.py
             #   kalite skoru → admin_quality.load_quality_overview()["ortalama_skor"]
@@ -676,7 +676,7 @@ def render_ana_kontrol_tab() -> None:
         # örneğin bar çubuklar." Referans panelde de donut'ın yanında **dikey**
         # sütun grafiği var. `st.bar_chart` yerleşik; ek paket yok.
         with st.container(border=True, height=_SATIR_YUKSEKLIK["alt"]):
-            st.markdown("##### Günlük Hacim (7 gün)")
+            Section("Günlük Hacim (7 gün)", kimlik="gunluk-hacim", seviye=3).render()
             gunluk = {ad: seri for ad, seri in (
                 ("Yeni Firma", series.get("yeni_firma")),
                 ("Giriş", series.get("login")),
@@ -707,7 +707,7 @@ def render_ana_kontrol_tab() -> None:
     # ---- Satır-içi barlı tablo: sayfadaki **beşinci** gösterim tipi ----------
     # Referans panelde de grafiklerin yanında mini barlı tablo var.
     # `st.column_config.ProgressColumn` yerleşiktir; ek paket/CSS yok.
-    st.markdown("##### Kaynak Doluluğu")
+    Section("Kaynak Doluluğu", kimlik="kaynak-dolulugu", seviye=3).render()
     if TASLAK:
         st.dataframe(
             pd.DataFrame({

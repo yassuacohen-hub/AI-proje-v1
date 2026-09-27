@@ -159,7 +159,11 @@ def render_mfa_tab() -> None:
 
     # MFA aktifse: devre dışı bırakma + backup codes
     if veri.get("enabled"):
-        st.subheader("MFA Aktif - Yönetim")
+        Section(
+            "MFA Aktif — Yönetim",
+            "MFA açık. Buradan devre dışı bırakabilir veya backup kodlarını yenileyebilirsiniz.",
+            kimlik="mfa-yonetim",
+        ).render()
         
         col1, col2 = st.columns(2)
         with col1:
@@ -214,8 +218,11 @@ def render_mfa_tab() -> None:
 
     else:
         # MFA pasifse: kurulum
-        st.subheader("MFA Kurulumu")
-        st.write("MFA henüz aktif değil. Aşağıdaki butonla kurulumu başlatın.")
+        Section(
+            "MFA Kurulumu",
+            "MFA henüz aktif değil. Aşağıdaki butonla kurulumu başlatın.",
+            kimlik="mfa-kurulum",
+        ).render()
         
         if st.button("🔐 MFA Kurulumu Başlat", type="primary"):
             result = _mfa_kurulum_baslat()
