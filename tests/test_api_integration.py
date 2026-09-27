@@ -75,6 +75,20 @@ EXPECTED_ROUTES: dict[str, set[str]] = {
     "/api/company/{company_id}": {"GET"},
     "/api/intelligence/dashboard": {"GET"},
     "/api/intelligence/dashboard/stream": {"GET"},
+    # API-07: Telegram webhook ucları
+    "/api/webhooks/telegram": {"POST"},
+    "/api/webhooks/telegram/health": {"GET"},
+    # API-07: admin operasyon ucları
+    "/api/admin/kvkk-mode": {"POST"},
+    "/api/admin/feature-flags": {"POST"},
+    "/api/admin/ltv-cac": {"GET"},
+    # API-07: B-05 MFA ucları
+    "/api/admin/mfa/setup": {"POST"},
+    "/api/admin/mfa/verify": {"POST"},
+    "/api/admin/mfa/disable": {"POST"},
+    "/api/admin/mfa/backup-codes": {"POST"},
+    "/api/admin/mfa/status": {"GET"},
+    "/api/admin/login-mfa": {"POST"},
 }
 
 

@@ -1295,7 +1295,9 @@ def api_match(
     limit = max(1, min(limit, 100))
 
     user = _user_from_token(user_token) if user_token else None
-    tier = user.get("tier", "terminal")  # Default to terminal
+    # API-07: `user` token yoksa None olur; kosulsuz .get() cagrisi anonim
+    # /api/match isteklerinin tamamini 500'e dusuruyordu.
+    tier = user.get("tier", "terminal") if user else "terminal"
     credit_info = None
     if user is not None and user["status"] == "onayli":
         kalan = _charge_module_credit(str(user["user_id"]), tier, "match")
