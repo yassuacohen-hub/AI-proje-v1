@@ -1720,3 +1720,34 @@ bir ajan kökteki betiklerden birini iş akışında kullanmak zorunda kalırsa.
   `scripts/brief_denetim.py`'den import eder — ikiz mantık imkânsız).
 - **Referans:** D-217 (brif şablonu), D-211 (ikiz gövde yasağı), D-221 (kök izin
   listesi), D-220 (tavan yalnız küçülür), D-66 (brif zorunlu).
+
+---
+
+### D-240 — Brif arşiv klasörü REDDEDİLDİ: yol taşımanın bedeli faydasından büyük
+
+**Karar.** `plans/` altındaki 124 brif **taşınmaz**. Kapanmış brifleri
+`plans/_arsiv_brief/` altına almak için açılan iş, ölçüm sonrası **reddedildi**.
+Dosyalar bulundukları yerde kalır.
+
+**Neden (ölçüm, 2026-09-27).**
+1. **108 yol kırılırdı.** Pano kayıtları brif yolunu metin olarak tutuyor:
+   **59** canlı görev + **49** arşiv kaydı. Taşıma, 108 yolun tek tek
+   güncellenmesini zorunlu kılar.
+2. **D-66 kapısı çökerdi.** [`gorev_ekle()`](src/company_master/orchestrator/task_board.py:308)
+   brif diskte yoksa `ValueError` fırlatır. Güncellemesi kaçan her yol, o görevin
+   panoya bir daha girememesi demektir — sessiz değil, gürültülü kırılma.
+3. **Kazanç sıfıra yakın.** Denetim gövdesi zaten `rglob` kullanıyor; alt klasör
+   **bugün de** destekleniyor, taşımaya gerek yok. Ajanlar `plans/` klasörünü
+   listelemiyor — brif yolunu panodan alıp **tek dosya** okuyor. 124 dosyanın
+   varlığı kimsenin bağlamına girmiyor, token yakmıyor.
+4. Geriye kalan tek fayda Obsidian'da klasörün göze temiz görünmesiydi.
+
+**Genel kural (bundan sonrası için).** Düzen amaçlı taşıma önerisi geldiğinde
+**önce kaç referansın kırılacağı sayılır**. Referans sayısı, düzenin sağladığı
+ölçülebilir kazançtan (token, süre, hata) büyükse taşıma yapılmaz. "Göze temiz
+görünmek" ölçülebilir kazanç değildir.
+
+- **Mandal yok** (bilinçli): bu bir *yapmama* kararıdır, mandallanacak davranış
+  yoktur. Karşı yön zaten D-66 kapısıyla mandallı — yol kırılırsa görev eklenemez.
+- **Referans:** D-66 (brif diskte zorunlu), D-221 (kural kanamayı durdurur, geçmişi
+  tek tek temizlemez), D-220 (tavan yalnız küçülür).
