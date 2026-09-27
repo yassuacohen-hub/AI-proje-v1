@@ -25,6 +25,10 @@
 | WK-03 | Proxy Rotation and IP Management | - | P2 | archive | - |
 | VERI-02 | [VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s) | utku | P1 | plan | - |
 | VERI-03 | [VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s) | utku | P2 | review | - |
+| VERI-NACE-SOZLUK-01 | [VERI] Resmi NACE listesini yaz → nace_codes tablosu (3s) | utku | P0 | aktif | src/company_master/etl/nace_sozluk_yukle.py |
+| VERI-NACE-COKLU-01 | [VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s) | utku | P1 | plan | src/company_master/etl/nace_coklu_ata.py |
+| VERI-NACE-TEMIZ-01 | [VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s) | utku | P1 | plan | src/company_master/etl/nace_gecersiz_temizle.py |
+| VERI-NACE-KOLON-01 | [VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s) | utku | P2 | plan | src/company_master/etl/nace_validity_duzelt.py |
 
 ## Tamamlananlar
 

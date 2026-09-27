@@ -1561,3 +1561,36 @@ dosya `git rm -r --cached` ile elendi (geçmişte duruyor); ağaç diskten silin
 - **Mandal:** `tests/test_kok_izin_listesi.py::test_canli_kodun_okudugu_yol_diskte`
   (3 yol parametrik) + `test_d233_agents_mde_kayitli`.
 - **Referans:** D-232 (yapısal tespit), D-230 (huni), D-224 (ölçmeden karar yok).
+
+---
+
+## NACE Referansı Tek Kaynaktan Kurulmaz, Seviye Kısaltılmaz (D-234 — KAHİN kararı 2026-09-27)
+
+- **Kural (iki parça, ikisi de zorunlu):**
+  1. **Seviye korunur, kısaltılmaz.** Resmi kaynak 6 haneli kod veriyorsa
+     (`47.79.04`) 6 hane **asıl** olarak saklanır; 4 hane (`47.79`) ve 2 hane
+     (`47`) ondan **türetilip ayrıca** yazılır. "6 varken 4 yazmak yanlış"
+     itirazı haklıdır — bu yüzden 4 hane asılın yerine değil, **yanına** yazılır.
+     Hiçbir seviye silinerek diğerine indirgenmez.
+  2. **Referans birleşiktir.** `nace_codes` tek bir dosyadan doldurulamaz.
+     `data/nace/` altındaki **dört** kaynak birleştirilir:
+     `sektor_meslek_nace_*_resmi.xlsx` (esnaf/sanatkâr meslek kolları),
+     `turkiye_nace.json`, `nace-rev-2-1.json`, `nace-rev-2.json`.
+     Yeni kaynak eskisinin **yerine konmaz**, üstüne eklenir.
+- **Neden (ölçüm, canlı Supabase, 8900 firma / 464 eşsiz kod):**
+  - Canlı `nace_code` şekli **%85.9 dört haneli**, %7.6 altı haneli. Resmi xlsx
+    ise **tamamen altı haneli**. Kısaltma yapılmazsa bu %85.9 hiç eşleşmez.
+  - Yalnız türetme sayesinde eşleşen firma: **3595 (%40.4)**. Türetme yoksa bu
+    firmalar sektörsüz kalır.
+  - **Tek kaynak (xlsx) yetmiyor:** türetmeyle bile **%52.3 eşleşmedi**.
+    Eşleşmeyenler çöp değil, gerçek NACE'ler: `29.10` (1882 firma), `62.09`
+    (655), `62.01` (634), `41.10` (600) — hepsi xlsx dışında, json'larda var.
+  - **Dört kaynak birleşince:** eşleşme **%47.7 → %92.9**. Kalan %7.1'in
+    büyük kısmı zaten D-... kapsamındaki sayaç çöpü (`1163`, `794`, `757`).
+- **Zaten elimizde olan yapı:** `turkiye_nace.json` (2142 satır) her kayıtta
+  `code_6digit` **ve** `code` (4 hane) alanlarını birlikte taşıyor. Kural bunu
+  icat etmiyor, mevcut doğru yapıyı zorunlu kılıyor.
+- **Yasak:** "yeni resmi liste geldi, eskiyi silelim" — ölçüm bunun %45 kapsam
+  kaybı demek olduğunu gösterdi.
+- **Mandal:** `tests/test_nace_referans_kurali.py`
+- **Referans:** D-224 (iddia değil ölçüm), VERI-NACE-SOZLUK-01 (uygulama görevi).

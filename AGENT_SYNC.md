@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-27T11:43:17
+> Son guncelleme: 2026-09-27T13:31:28
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -25,6 +25,10 @@
 | WK-03 | Proxy Rotation and IP Management | - | P2 | archive |
 | VERI-02 | [VERI] OSB ihale izleyicisini yaz → src/ | utku | P1 | plan |
 | VERI-03 | [VERI] Proxy rotasyonunu yaz → src/scrap | utku | P2 | review |
+| VERI-NACE-SOZLUK-01 | [VERI] Resmi NACE listesini yaz → nace_c | utku | P0 | aktif |
+| VERI-NACE-COKLU-01 | [VERI] Çoklu NACE kodunu yaz → company_i | utku | P1 | plan |
+| VERI-NACE-TEMIZ-01 | [VERI] Sektör sayacı kirlenmesini düzelt | utku | P1 | plan |
+| VERI-NACE-KOLON-01 | [VERI] nace_validity kolon karışmasını d | utku | P2 | plan |
 
 ## Tamamlananlar (Son 10)
 

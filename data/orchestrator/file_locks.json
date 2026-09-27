@@ -1,1 +1,22 @@
-{}
+{
+  "src/company_master/etl/nace_sozluk_yukle.py": {
+    "sahip": "utku",
+    "task_id": "VERI-NACE-SOZLUK-01",
+    "kilitlendi": "2026-09-27T13:11:29"
+  },
+  "src/company_master/etl/nace_coklu_ata.py": {
+    "sahip": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "kilitlendi": "2026-09-27T13:19:21"
+  },
+  "src/company_master/etl/nace_gecersiz_temizle.py": {
+    "sahip": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "kilitlendi": "2026-09-27T13:21:08"
+  },
+  "src/company_master/etl/nace_validity_duzelt.py": {
+    "sahip": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "kilitlendi": "2026-09-27T13:21:32"
+  }
+}

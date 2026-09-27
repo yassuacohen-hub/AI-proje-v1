@@ -1537,5 +1537,81 @@
     "mod": "code",
     "brief": "",
     "talimat": ""
+  },
+  {
+    "task_id": "VERI-NACE-SOZLUK-01",
+    "id": "VERI-NACE-SOZLUK-01",
+    "baslik": "[VERI] Resmi NACE listesini yaz → nace_codes tablosu (3s)",
+    "sahip": "utku",
+    "oncelik": "P0",
+    "durum": "aktif",
+    "baslangic": "2026-09-27T13:11:29",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/etl/nace_sozluk_yukle.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-NACE-SOZLUK-01.md",
+    "talimat": "Brif: plans/brief_utku_VERI-NACE-SOZLUK-01.md (kanitlar orada). OZET: nace_codes 0 SATIR -> atanan 8900 kodun hicbiri dogrulanamiyor, dagilim guvenilmez (10.11 et isleme -> ELEKTRO OPTIK/CEVIRI/FAKTORING). Resmi kaynak HTTP 200 dogrulandi: ticaret.gov.tr guncel-liste -> SektorMeslekNace xlsx (0.13 MB). URUN SAHIBI KARARI: ana veri kaynagi, sistemde surekli durmali. Yap: xlsx linkini DESENDEN bul (ad her guncellemede degisiyor), ayristir, nace_codes'a UPSERT (nace_code/title/level/parent_code/sector_group/version), surum+tarih kaydet. Kabul: satir>0 VE 29.10 title'i 'motorlu tasit' iceriyor VE ikinci kosu satiri ikiye katlamiyor."
+  },
+  {
+    "task_id": "VERI-NACE-COKLU-01",
+    "id": "VERI-NACE-COKLU-01",
+    "baslik": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-27T13:19:21",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/etl/nace_coklu_ata.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-NACE-COKLU-01.md",
+    "talimat": "Brif: plans/brief_utku_VERI-NACE-COKLU-01.md. ONKOSUL: VERI-NACE-SOZLUK-01 bitmeden baslamayin (referans liste gerekiyor). URUN SAHIBI: coklu NACE kanuni; 3 kod varsa 3 is yapiyor demektir, firma detayinda gosterilecek. Sema HAZIR: company_industries tablosu VAR ama 0 SATIR, is_primary kolonu VAR. Yap: source_records.raw_nace (7595 dolu) ayristirma ONCE OLCULECEK (kac kayitta >1 kod, hangi ayirici), sonra company_industries'e yaz: ana kod is_primary=true digerleri false. nace_codes'ta olmayan kodu YAZMA, eslesmeyen dokumune dus. Kabul: satir>0, firma basina en fazla 1 is_primary=true, yetim kod yok. DIKKAT brifte itirazim var: kod sayisini kalite puanina HAM eklemeyin."
+  },
+  {
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "id": "VERI-NACE-TEMIZ-01",
+    "baslik": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-27T13:21:08",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/etl/nace_gecersiz_temizle.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-NACE-TEMIZ-01.md",
+    "talimat": "Brif: plans/brief_utku_VERI-NACE-TEMIZ-01.md. ONKOSUL: VERI-NACE-SOZLUK-01. OLCULDU (canli): nace_code icinde NACE OLMAYAN degerler var — 1163 (168 firma), 410 (68), 780 (62), 794 (54), 757 (53). Bunlar OSTIM sayfalarindaki firma SAYACLARI, kazimada NACE sanilmis. Hepsi nace_source=unknown. Yap: nace_codes referansina karsi kontrol, eslesmeyenleri ONCE DOK (sayi+deger+koken rapora), sonra NULL'a cek ve nace_source=invalid_cleared isaretle. KAYIT SILME. sector_default/fallback kodlarina bu gorevde DOKUNMA. Kabul: kalan tum nace_code degerleri nace_codes'ta var, firma sayisi 14003 sabit. YEDEK AL, once 100 satir parti dene."
+  },
+  {
+    "task_id": "VERI-NACE-KOLON-01",
+    "id": "VERI-NACE-KOLON-01",
+    "baslik": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-09-27T13:21:32",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/etl/nace_validity_duzelt.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-NACE-KOLON-01.md",
+    "talimat": "Brif: plans/brief_utku_VERI-NACE-KOLON-01.md. ONKOSUL YOK, bagimsiz. OLCULDU (canli): companies.nace_validity kolonuna NACE KODU yazilmis — 86 satir ('41.00.02','35.12.00' vb). Bu kolon gecerlilik ETIKETI tasimali (unknown/medium/fallback), kod tasimamali. Yap: desen ile bul, nace_code bossa kodu oraya tasi + validity'ye uygun etiket yaz; nace_code doluysa CELISKIYI DOK, hangisi dogru UYDURMA. Mevcut etiket kumesini once sorgula, yeni etiket icat etme. Kabul: validity icinde kod deseni 0 satir. ONEMLI: sadece veriyi duzeltmeyin, bu iki alani takas eden YAZICI KODUNU da bulun — yoksa 86 yarin 200 olur."
   }
 ]
