@@ -1,13 +1,17 @@
 # Brif — VERI-SEKTOR-01: Sektör adını kurtar, normalleştir, NACE'nin YANINA koy
 
-**Sahip:** utku · **Öncelik:** P1 · **Süre:** 3s · **Veren:** ihsan
+**Başlık:** [VERI] Sektör adını kurtar, normalleştir, NACE'nin YANINA koy (3s)
+**Öncelik:** P1 · **Kit:** `VERI` (AGENTS.md D-196)
+**Kilitli dosya:** `data/sektor/sektor_sozluk.json`
+**Hub:** `hubs/VERI_KALITESI_HUB.md` — ZORUNLU (B-14). Görev kapanınca bu hub'ın "Kapanan işler" bölümüne yazılır; yazılmazsa `teslim` reddedilir.
+
+**Sahip:** utku · **Süre:** 3s · **Veren:** ihsan
 **Önkoşul:** yok (NACE işlerinden **bağımsız** ilerleyebilir)
 **Kardeş görevler:** `VERI-NACE-SOZLUK-01`, `VERI-NACE-TEMIZ-01`
 
 ---
 
-## 1. Neden bu görev var
-
+## Neden
 `VERI-NACE-TEMIZ-01` ölçümünde baskentosb'un 761 firmasının NACE yerine
 sektör adı taşıdığı görüldü. Ürün sahibi kararı: **"atmayalım, sektör adı da
 önemli."** Doğru karar — ama ölçünce iş 761 firmadan çok daha büyük çıktı.
@@ -111,8 +115,7 @@ kaynakta birden var ve birleştirme sırasında payload karışmış.
 **Ayrı görev açılacak: `VERI-KAYNAK-SIZINTI-01`.** 102 kayıt küçük ama
 sebebi önemli — aynı hata sessizce daha büyük ölçekte olabilir.
 
-## 5. Yapılacak
-
+## Adımlar
 ### 5.1 Sözlük dosyası: `data/sektor/sektor_sozluk.json`
 
 78 sade adı içeren, elle bakımlı dosya. Her satır:
@@ -151,8 +154,7 @@ ASO'nun `N. MESLEK GRUBU` değeri **sektör adı değildir** — `sector_name`'e
 yazılmaz. `sector_source='aso_meslek_grubu'` ile numara ayrı tutulur veya
 tamamen atlanır (ASO'nun gerçek NACE'si zaten var).
 
-## 6. Kabul ölçütü (test)
-
+## Kabul kriteri
 - `data/sektor/sektor_sozluk.json` 78 satır, her satırda `sade`+`gosterim`
 - Sadeleştirme fonksiyonu için test: `"Otomotiv1163"` → `"OTOMOTIV"`,
   `"Tekstil ve Deri71"` → `"TEKSTIL VE DERI"`
@@ -178,3 +180,40 @@ bazında gerçek kapsam doldurma sonrası ölçülecek; şimdiden oran vaat etmi
 *ponytail: 78 satırlık elle sözlük + iki kolon. Skipped: otomatik sektör
 sınıflandırma, sektör hiyerarşisi (üst/alt sektör) — 78 ad için gereksiz.
 Add when: kaynak sayısı artıp eşsiz ad 200'ü geçerse.*
+
+## Doğrulanacak varsayım
+
+> D-66 brif sözleşmesi. Her madde bu brifin gövdesinde **ölçülmüş** bir değere dayanır.
+> Kodda tutmayan madde varsa **dur**, panoya sorun aç, uydurma.
+
+- `source_records.raw_payload` içinde 9689 kayıtta sektör bilgisi var ve hiçbiri kullanılmıyor varsayıldı. Sayı farklıysa yeniden ölç.
+- `companies` tablosuna **iki yeni kolon** ekleneceği varsayıldı (sektör adı + normalize ad). Mevcut kolon varsa üstüne yazma, **dur**.
+- `'Diğer'` değeri 453 firmada varsayıldı; bu bir sektör adı **değil**, bilgi yokluğu — NULL işlenecek.
+- İvedik 3134 kayıtta sektör bilgisi **sıfır** varsayıldı; bu boşluk `VERI-IVEDIK-YENIDEN-01` kapsamında, burada doldurulmaya çalışılmayacak.
+- 9689 kayıt ≠ 9689 firma varsayıldı (aynı firma birden çok kaynakta). Firma bazında tekilleme gerekir.
+- Karar (ürün sahibi): sektör sözlüğü **kapı/filtre**, ünvan kesişimi **sıra** üretir. İkisi birlikte çalışır.
+
+## Ajan chat zorunlu (D-210 · D-217)
+
+Sessiz çalışma yasak. Varsayım tutmuyorsa, bir faz tıkandıysa veya @mention aldıysan
+chat'e yazmak **zorunludur** — brifi yeniden okuyup beklemek değil.
+
+```bash
+python scripts/ajan_chat.py ac utku VERI-SEKTOR-01 "<sorun>" --cozum "<oneri>"
+python scripts/ajan_chat.py oku --task-id VERI-SEKTOR-01
+```
+
+## Teslim
+
+```bash
+python scripts/gorev_kutusu.py teslim --ajan utku --task-id VERI-SEKTOR-01 --ozet "<ozet>"
+```
+
+Teslimden önce `hubs/VERI_KALITESI_HUB.md` dosyasının "Kapanan işler" bölümüne `VERI-SEKTOR-01`
+satırını yaz (B-14 kapısı) — yazılmazsa teslim reddedilir.
+
+## Ilgili Nodlar
+
+- [[hubs/VERI_KALITESI_HUB]]
+- [[Huginn Data Insights/AGENTS]]
+- [[plans/_brief_sablon]]

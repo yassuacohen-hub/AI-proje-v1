@@ -1,12 +1,15 @@
 # Brif — VERI-KAYNAK-SIZINTI-01: ostim kaydında ASO biçimli payload
 
-**Sahip:** utku · **Öncelik:** P2 · **Süre:** 2s · **Veren:** ihsan
+**Başlık:** [VERI] TEŞHİS: ostim kaydında ASO biçimli payload (102 kayıt) (2s)
+**Öncelik:** P2 · **Kit:** `VERI` (AGENTS.md D-196)
+**Hub:** `hubs/VERI_KALITESI_HUB.md` — ZORUNLU (B-14). Görev kapanınca bu hub'ın "Kapanan işler" bölümüne yazılır; yazılmazsa `teslim` reddedilir.
+
+**Sahip:** utku · **Süre:** 2s · **Veren:** ihsan
 **Tür:** TEŞHİS (düzeltme ikinci adım, ölçümden sonra karar)
 
 ---
 
-## 1. Bulgu
-
+## Neden
 `VERI-SEKTOR-01` ölçümü sırasında çıktı. `source_records` içinde
 `source_name='ostim.org.tr'` olan **102 kayıt**, ASO'nun biçiminde veri
 taşıyor:
@@ -35,7 +38,9 @@ eder.
 
 Ayrım kritik: (a) 102 satırlık tek seferlik tamir, (b) kod hatası.
 
-## 3. Ölçüm adımları (kod yazmadan önce)
+## Adımlar
+
+Ölçüm adımları — kod yazmadan önce:
 
 1. **102 kaydın `raw_payload` anahtar kümesini** ostim'in normal
    payload'ıyla karşılaştır. ASO anahtarları
@@ -62,8 +67,7 @@ Ayrım kritik: (a) 102 satırlık tek seferlik tamir, (b) kod hatası.
 regresyon testi yazılır. Bu durumda yeni brif istenir, bu görev teşhis
 raporuyla kapanır.
 
-## 5. Kabul ölçütü
-
+## Kabul kriteri
 - Hangi olasılığın doğru olduğu **kanıtla** yazılı (payload anahtar karşılaştırması)
 - Sızıntının gerçek boyutu ölçülü (102 mi, daha fazla mı)
 - (a) ise düzeltme uygulanmış + öncesi/sonrası sayı raporda
@@ -83,3 +87,37 @@ Sonrasına bırakılırsa kirli veri arayüze çıkar.
 
 *ponytail: sadece teşhis, düzeltme koşullu. Skipped: tekilleştirme refaktörü,
 add when: ölçüm (b) derse.*
+
+## Doğrulanacak varsayım
+
+> D-66 brif sözleşmesi. Her madde bu brifin gövdesinde **ölçülmüş** bir değere dayanır.
+> Kodda tutmayan madde varsa **dur**, panoya sorun aç, uydurma.
+
+- `source_records` içinde `source_id` = ostim olan 102 kayıtta ASO biçimli payload varsayıldı. Sayı farklıysa yeniden ölç.
+- İki olasılık olduğu varsayıldı: (a) yanlış `source_id`, (b) birleştirme kirlenmesi. **Ölçüm kararı vermeden kod yazılmayacak.**
+- Bu görev **teşhis** türü: çıktı bir ölçüm raporu; düzeltme ikinci adım ve ayrı karar.
+
+## Ajan chat zorunlu (D-210 · D-217)
+
+Sessiz çalışma yasak. Varsayım tutmuyorsa, bir faz tıkandıysa veya @mention aldıysan
+chat'e yazmak **zorunludur** — brifi yeniden okuyup beklemek değil.
+
+```bash
+python scripts/ajan_chat.py ac utku VERI-KAYNAK-SIZINTI-01 "<sorun>" --cozum "<oneri>"
+python scripts/ajan_chat.py oku --task-id VERI-KAYNAK-SIZINTI-01
+```
+
+## Teslim
+
+```bash
+python scripts/gorev_kutusu.py teslim --ajan utku --task-id VERI-KAYNAK-SIZINTI-01 --ozet "<ozet>"
+```
+
+Teslimden önce `hubs/VERI_KALITESI_HUB.md` dosyasının "Kapanan işler" bölümüne `VERI-KAYNAK-SIZINTI-01`
+satırını yaz (B-14 kapısı) — yazılmazsa teslim reddedilir.
+
+## Ilgili Nodlar
+
+- [[hubs/VERI_KALITESI_HUB]]
+- [[Huginn Data Insights/AGENTS]]
+- [[plans/_brief_sablon]]

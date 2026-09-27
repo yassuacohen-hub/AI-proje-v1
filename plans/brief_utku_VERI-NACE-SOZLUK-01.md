@@ -1,11 +1,16 @@
 # Brif — VERI-NACE-SOZLUK-01: Resmi NACE listesini yaz → nace_codes tablosu
 
-**Sahip:** utku · **Öncelik:** P0 · **Süre:** 3s · **Veren:** ihsan (orkestratör)
+**Başlık:** [VERI] Resmi NACE listesini `nace_codes` tablosuna yaz (referans sözlük) (3s)
+**Öncelik:** P0 · **Kit:** `VERI` (AGENTS.md D-196)
+**Kilitli dosya:** `src/company_master/etl/nace_sozluk_yukle.py`
+**Hub:** `hubs/VERI_KALITESI_HUB.md` — ZORUNLU (B-14). Görev kapanınca bu hub'ın "Kapanan işler" bölümüne yazılır; yazılmazsa `teslim` reddedilir.
+
+**Sahip:** utku · **Süre:** 3s · **Veren:** ihsan (orkestratör)
 **Tarih:** 2026-09-27 · **Ölçüm yeri:** CANLI Supabase (`aws-0-eu-west-2.pooler.supabase.com:6543`)
 
 ---
 
-## 1. Neden P0 — ölçülen durum
+## Neden
 
 `nace_codes` sözlük tablosu **0 satır**. Buna karşılık `companies.nace_code`
 **8900 satırda dolu**. Yani firmalara atanmış hiçbir NACE kodu bir referans
@@ -138,8 +143,7 @@ Tek kaynakla eşleşmeyenler çöp değil, gerçek NACE'ler: `29.10` (1882 firma
 Not: `turkiye_nace.json` zaten `code_6digit` + `code` ikilisini birlikte
 taşıyor — istenen yapı elimizde var, sıfırdan kurmayın, örnek alın.
 
-## 4. Yapılacak
-
+## Adımlar
 Yeni dosya: `src/company_master/etl/nace_sozluk_yukle.py`
 
 **Dört kaynak da yerelde** — indirme kodu yazmadan işe başlayın (D-234 madde 2).
@@ -167,8 +171,7 @@ Yeni dosya: `src/company_master/etl/nace_sozluk_yukle.py`
    linkini desenden bulun (dosya adı her güncellemede değişiyor, URL gömmeyin).
    Bugünün işi değil — dosya elimizde.
 
-## 5. Kabul ölçütü (test)
-
+## Kabul kriteri
 - `select count(*) from nace_codes` > 0; üç seviye de dolu:
   `select level, count(*) from nace_codes group by level` → 6, 4, 2 satırları var
 - `47.79.04` (`level=6`) `title`'ı dönüyor ve "kullanılmış" içeriyor
@@ -240,3 +243,39 @@ TEMIZ-01'in işi, bu görevin kusuru değil.
 *ponytail: xlsx doğrudan indirme + upsert. Skipped: NACE sürüm geçmişi tablosu
 (kod değişiklik izleme), eklenmesi gereken an — bir kod resmi listeden düşüp
 elimizdeki firmada kalırsa.*
+
+## Doğrulanacak varsayım
+
+> D-66 brif sözleşmesi. Her madde bu brifin gövdesinde **ölçülmüş** bir değere dayanır.
+> Kodda tutmayan madde varsa **dur**, panoya sorun aç, uydurma.
+
+- `nace_codes` tablosu boş veya eksik varsayıldı; gerçek NACE ataması olan firma sayısı **0** ölçüldü. Doluysa **dur**, önce içeriği ölç.
+- Dört kaynak dosyası **yerelde** varsayıldı: `data/nace/sektor_meslek_nace_2026-05_resmi.xlsx`, `nace-rev-2.json`, `nace-rev-2-1.json`, `turkiye_nace.json`. Yoksa indirme kodu yazma — **dur**, panoya sorun aç (D-234 madde 2).
+- D-234: 6 haneli kod **asıl** olarak yazılır, 4/2 haneli üst dallar **türetilip ayrıca** yazılır. Kolon 6 haneyi kabul etmiyorsa **dur**.
+- KUSUR-1 (denetim 2. tur): türetilen üst dalların başlığı **BOŞ** varsayıldı. Doluysa kusur kapanmış, doğrula ve raporla.
+- `tests/test_nace_referans_kurali.py` testinin var olduğu varsayıldı. Yoksa yaz.
+
+## Ajan chat zorunlu (D-210 · D-217)
+
+Sessiz çalışma yasak. Varsayım tutmuyorsa, bir faz tıkandıysa veya @mention aldıysan
+chat'e yazmak **zorunludur** — brifi yeniden okuyup beklemek değil.
+
+```bash
+python scripts/ajan_chat.py ac utku VERI-NACE-SOZLUK-01 "<sorun>" --cozum "<oneri>"
+python scripts/ajan_chat.py oku --task-id VERI-NACE-SOZLUK-01
+```
+
+## Teslim
+
+```bash
+python scripts/gorev_kutusu.py teslim --ajan utku --task-id VERI-NACE-SOZLUK-01 --ozet "<ozet>"
+```
+
+Teslimden önce `hubs/VERI_KALITESI_HUB.md` dosyasının "Kapanan işler" bölümüne `VERI-NACE-SOZLUK-01`
+satırını yaz (B-14 kapısı) — yazılmazsa teslim reddedilir.
+
+## Ilgili Nodlar
+
+- [[hubs/VERI_KALITESI_HUB]]
+- [[Huginn Data Insights/AGENTS]]
+- [[plans/_brief_sablon]]

@@ -1,12 +1,19 @@
 # Brif — VERI-NACE-COKLU-01: Çoklu NACE kodunu yaz → company_industries.is_primary
 
-**Sahip:** utku · **Öncelik:** P1 · **Süre:** 3s · **Veren:** ihsan
+**Başlık:** [VERI] Çoklu NACE kodunu `company_industries.is_primary` ile yaz (3s)
+**Öncelik:** P1 · **Kit:** `VERI` (AGENTS.md D-196)
+**Kilitli dosya:** `src/company_master/etl/nace_coklu_yaz.py`
+**Hub:** `hubs/VERI_KALITESI_HUB.md` — ZORUNLU (B-14). Görev kapanınca bu hub'ın "Kapanan işler" bölümüne yazılır; yazılmazsa `teslim` reddedilir.
+
+**Sahip:** utku · **Süre:** 3s · **Veren:** ihsan
 **Önkoşul:** `VERI-NACE-SOZLUK-01` (referans liste olmadan başlanamaz)
 **Kanıt tabanı:** `plans/brief_utku_VERI-NACE-SOZLUK-01.md` bölüm 1
 
 ---
 
-## 1. Ürün sahibi kararı
+## Neden
+
+Ürün sahibi kararı:
 
 > "Bir işletmenin birden fazla NACE kodu olabilir, bu kanuni bir durum. Ana NACE
 > kodu esas alınarak varsa ek NACE kodları da toplanabilir ve tabloda belirtilir."
@@ -54,8 +61,7 @@ ve **kalite/zenginlik göstergesi**.
 
 Yani yeni tablo/kolon açmaya gerek yok. Boş bırakılmış yapı doldurulacak.
 
-## 3. Yapılacak
-
+## Adımlar
 1. `source_records.raw_nace` içindeki değerleri ayrıştır. Çoklu kod tek hücrede
    ayırıcıyla gelmiş olabilir (`,` `;` `/` `|`) — **önce ölç**, kaç kayıtta
    birden fazla kod var, hangi ayırıcı kullanılmış. Ölçmeden kural yazma.
@@ -65,8 +71,7 @@ Yani yeni tablo/kolon açmaya gerek yok. Boş bırakılmış yapı doldurulacak.
    Bir firmada en fazla **bir** `is_primary=true` olacak.
 4. `companies.nace_code` ana kodla tutarlı kalsın (özet/hız kolonu olarak).
 
-## 4. Kabul ölçütü (test)
-
+## Kabul kriteri
 - `company_industries` satır sayısı > 0
 - Hiçbir firmada 1'den fazla `is_primary=true` yok (tek sorgu ile doğrulanır)
 - `company_industries.nace_code` değerlerinin **tamamı** `nace_codes`'ta var
@@ -130,3 +135,38 @@ yazsın.
 *ponytail: raw_nace ayrıştırma. Skipped: NACE kod geçerlilik tarihi (bir kod ne
 zamandan beri firmada), eklenmesi gereken an — firma faaliyet değişikliği
 geçmişi sorulduğunda.*
+
+## Doğrulanacak varsayım
+
+> D-66 brif sözleşmesi. Her madde bu brifin gövdesinde **ölçülmüş** bir değere dayanır.
+> Kodda tutmayan madde varsa **dur**, panoya sorun aç, uydurma.
+
+- Önkoşul `VERI-KAYNAK-BAG-01` **bitmiş** varsayıldı — `source_records.company_id` dolu olmalı. Boşsa **dur**, bu iş başlamaz (ilk turda %0.15 ile reddedildi).
+- `company_industries` tablosunda `nace_code` ve `is_primary` kolonları varsayıldı. Yoksa **dur**, panoya sorun aç.
+- `source_records.raw_nace` alanında birden fazla kod bulunduğu varsayıldı. Tek kod varsa çoklu yazım gereksiz — ölç, raporla.
+- İtiraz kayda geçti: **çok kod = iyi firma değil**. Kod sayısı bir kalite/önem puanı olarak kullanılmayacak.
+
+## Ajan chat zorunlu (D-210 · D-217)
+
+Sessiz çalışma yasak. Varsayım tutmuyorsa, bir faz tıkandıysa veya @mention aldıysan
+chat'e yazmak **zorunludur** — brifi yeniden okuyup beklemek değil.
+
+```bash
+python scripts/ajan_chat.py ac utku VERI-NACE-COKLU-01 "<sorun>" --cozum "<oneri>"
+python scripts/ajan_chat.py oku --task-id VERI-NACE-COKLU-01
+```
+
+## Teslim
+
+```bash
+python scripts/gorev_kutusu.py teslim --ajan utku --task-id VERI-NACE-COKLU-01 --ozet "<ozet>"
+```
+
+Teslimden önce `hubs/VERI_KALITESI_HUB.md` dosyasının "Kapanan işler" bölümüne `VERI-NACE-COKLU-01`
+satırını yaz (B-14 kapısı) — yazılmazsa teslim reddedilir.
+
+## Ilgili Nodlar
+
+- [[hubs/VERI_KALITESI_HUB]]
+- [[Huginn Data Insights/AGENTS]]
+- [[plans/_brief_sablon]]

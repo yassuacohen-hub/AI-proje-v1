@@ -8,7 +8,6 @@ KONTROLÖR tarafı:
     python scripts/gorev_nobetci.py kur --dakika 1  # zamanlayıcı kur (deneme)
     python scripts/gorev_nobetci.py durum
     python scripts/gorev_nobetci.py kaldir          # zamanlayıcı + ayarları kaldır
-    python scripts/gorev_nobetci.py uyari-goster --ajan kilo --task-id X
 
 Geri almak için: ``python scripts/gorev_nobetci.py kaldir`` (tek komut).
 """
@@ -54,7 +53,7 @@ def cmd_nobet(args: argparse.Namespace) -> int:
     if gecenler:
         print(f"Nobet: {len(gecenler)} tetik firlatildi:")
         for g in gecenler:
-            print(f"  -> {g['task_id']} ({g['ajan']}): {g['tetik_sayisi']}x — {g['alarm_dosyasi']}")
+            print(f"  -> {g['task_id']} ({g['ajan']}): {g['tetik_sayisi']}x")
     else:
         print(f"Nobet: geciken tetik yok (kademe {ayar.get('kademe_sn')} sn).")
     return 0
@@ -143,25 +142,6 @@ def cmd_tetik_ayarla(args: argparse.Namespace) -> int:
     return 0
 
 
-# ---- uyari-goster ----
-
-def cmd_uyari_goster(args: argparse.Namespace) -> int:
-    alarm_yol = tb.STATE_DIR / "triggers" / f"{args.ajan}.ALARM.json"
-    if not alarm_yol.exists():
-        print(f"Alarm dosyasi yok: {alarm_yol}")
-        return 0
-    alarm = json.loads(alarm_yol.read_text(encoding="utf-8-sig"))
-    alarm = alarm if isinstance(alarm, list) else [alarm]
-    girdi = next((a for a in alarm if a.get("task_id") == args.task_id), None)
-    if not girdi:
-        print(f"Alarm bulunamadi: {args.task_id}")
-        return 0
-    print(json.dumps(girdi, ensure_ascii=False, indent=2))
-    nobetci._ses_uyarisi()
-    print("(ses caldi)")
-    return 0
-
-
 # ---- main ----
 
 def main() -> int:
@@ -179,10 +159,6 @@ def main() -> int:
     p.add_argument("--ajan", required=True); p.add_argument("--task-id", required=True)
     p.add_argument("--sure-sn", type=int, default=120); p.add_argument("--baslik", default="")
     p.set_defaults(func=cmd_tetik_ayarla)
-    p = alt.add_parser("uyari-goster", help="ALARM dosyasini goruntule + ses dene")
-    p.add_argument("--ajan", required=True); p.add_argument("--task-id", required=True)
-    p.set_defaults(func=cmd_uyari_goster)
-
     args = parser.parse_args()
     return args.func(args)
 
