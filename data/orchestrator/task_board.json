@@ -1329,7 +1329,7 @@
   {
     "task_id": "VERI-02",
     "id": "VERI-02",
-    "baslik": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "baslik": "[VERI] OSB ihale izleyicisini yaz → src/company_master/etl/scrapers/osb_tender_monitor.py (3s)",
     "sahip": "utku",
     "oncelik": "P1",
     "durum": "plan",
@@ -1346,12 +1346,12 @@
   {
     "task_id": "VERI-03",
     "id": "VERI-03",
-    "baslik": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "baslik": "[VERI] Proxy rotasyonunu yaz → src/company_master/etl/scrapers/proxy_rotation.py (2s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-09-27T03:07:34",
-    "bitis": null,
+    "bitis": "2026-09-27T12:00:00",
     "dosyalar": [],
     "not": "Teslim (utku): Proxy rotasyonu ZATEN VARDI (src/company_master/utils/proxy_rotator.py, 125 satir, 10 metod); eksik olan TEST idi. tests/test_proxy_rotator.py yazildi: 9 test, sabit+rastgele sirada yesil. Kapsam: bos proxy listesinde None, requests formati, UA dolasimi, add/remove idempotans, son proxy silinince indeks tasmasi, bos listede rotate, dosyadan yukleme (yorum/bos satir atlama), olmayan dosya, ortam degiskeninden auto-detect. Pano yolu (src/scrapers/proxy_rotation.py) gercek yerlesimle uyusmuyordu.",
     "source": "ic",
@@ -1487,9 +1487,9 @@
   {
     "task_id": "DOC-D230-01",
     "id": "DOC-D230-01",
-    "baslik": "KAHIN",
-    "sahip": "D-230: gomulu govde kopyasi yasagi + mandal",
-    "oncelik": "AGENTS.md karari, rglob tabanli mandal, backups/ elendi",
+    "baslik": "D-230: gomulu govde kopyasi yasagi + mandal",
+    "sahip": "kahin",
+    "oncelik": "P1",
     "durum": "done",
     "baslangic": "2026-09-27T10:36:28",
     "bitis": "2026-09-27T10:36:28",
@@ -1499,14 +1499,15 @@
     "from_agent": null,
     "mod": "code",
     "brief": "",
-    "talimat": ""
+    "talimat": "",
+    "kanit": "AGENTS.md karari, rglob tabanli mandal, backups/ elendi"
   },
   {
     "task_id": "ORKESTRA-D231-01",
     "id": "ORKESTRA-D231-01",
-    "baslik": "KAHIN",
-    "sahip": "Onay kuyrugu arsive kor: pano_denetim arsive bakmiyordu",
-    "oncelik": "D-231",
+    "baslik": "Onay kuyrugu arsive kor: pano_denetim arsive bakmiyordu",
+    "sahip": "kahin",
+    "oncelik": "P1",
     "durum": "done",
     "baslangic": "2026-09-27T10:48:42",
     "bitis": "2026-09-27T10:48:42",
@@ -1516,14 +1517,15 @@
     "from_agent": null,
     "mod": "code",
     "brief": "",
-    "talimat": ""
+    "talimat": "",
+    "kanit": "D-231"
   },
   {
     "task_id": "ORKESTRA-D233-01",
     "id": "ORKESTRA-D233-01",
-    "baslik": "KAHIN",
-    "sahip": "Referansli yol kopya sanildi: AI proje v1/ butun olarak silindi, teslim kapisi kirildi",
-    "oncelik": "D-233",
+    "baslik": "Referansli yol kopya sanildi: AI proje v1/ butun olarak silindi, teslim kapisi kirildi",
+    "sahip": "kahin",
+    "oncelik": "P1",
     "durum": "done",
     "baslangic": "2026-09-27T11:24:28",
     "bitis": "2026-09-27T11:24:28",
@@ -1536,7 +1538,8 @@
     "from_agent": null,
     "mod": "code",
     "brief": "",
-    "talimat": ""
+    "talimat": "",
+    "kanit": "D-233"
   },
   {
     "task_id": "VERI-NACE-SOZLUK-01",
