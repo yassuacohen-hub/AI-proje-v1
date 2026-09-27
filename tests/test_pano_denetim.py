@@ -93,6 +93,18 @@ def test_arsivlenmis_kuyruk_kaydi_orphan_saymaz():
     assert tara([], kuyruk, SIMDI, frozenset({"ARSIVDE"})) == []              # arşiv bilinirse sessiz
 
 
+def test_pano_kapali_ama_onay_kaydi_bekliyor_uyarir():
+    """VERI-03 (d0d5d76): pano 'done' yapıldı, kuyruk kaydı 'bekliyor' kaldı.
+    Onay akışı iki dosyada yürüdüğü için sessizce kopabiliyordu."""
+    pano = [{"task_id": "K", "durum": "done", "baslangic": YENI}]
+    kuyruk = [{"task_id": "K", "durum": "bekliyor"}]
+    b = tara(pano, kuyruk, SIMDI)
+    assert ("kuyruk", "K") in _tipler(b)
+    assert [x["seviye"] for x in b] == ["uyari"]      # bilgi amaçlı, CI kırmaz
+    # negatif: pano da açıksa çelişki yok
+    assert tara([{"task_id": "K", "durum": "doing", "baslangic": YENI}], kuyruk, SIMDI) == []
+
+
 def test_arsivlenmis_gorev_icin_bekleyen_onay_hata_kalir():
     """Negatif kontrol: arşivlenmiş işe bekleyen onay gerçek çelişkidir, susturulamaz."""
     kuyruk = [{"task_id": "ARSIVDE", "durum": "bekliyor"}]

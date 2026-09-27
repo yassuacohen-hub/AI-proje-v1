@@ -157,6 +157,12 @@ def tara(pano: list[dict], kuyruk: list[dict], simdi: datetime,
             seviye = "hata" if kayit.get("durum") == "bekliyor" else "uyari"
             ekle("orphan", seviye, tid, f"kuyrukta ({kayit.get('durum')}) var, panoda yok")
             continue
+        if kayit.get("durum") == "bekliyor" and durumlar.get(tid) in KAPALI_DURUMLAR:
+            # Ters kopma: pano kapatılmış ama onay kaydı bekliyor kalmış. Onay akışı
+            # iki dosyada yürüdüğü için sessizce kopabiliyor (bkz. VERI-03, d0d5d76).
+            ekle("kuyruk", "uyari", tid,
+                 f"kuyruk=bekliyor ama pano={durumlar.get(tid)} — onay kaydı kapatılmadı")
+            continue
         if kayit.get("durum") != "onaylandi" or durumlar.get(tid) in KAPALI_DURUMLAR:
             continue
         # Kuyruk ekleme-günlüğü olduğu için eski bir onay kaydı, görev sonradan
