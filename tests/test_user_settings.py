@@ -309,11 +309,16 @@ def test_panel_ayar_hatasini_yakalar():
 def test_panel_formu_sema_uzerinden_uretir():
     """Elle yazılmış selectbox/checkbox yığını yerine döngü kullanılmalı.
 
-    Sayım yalnızca ayarlar bölgesiyle (``_form_degeri`` → dosya sonu) sınırlıdır;
-    Karar Defteri filtreleri (MVP-KD-01) aynı dosyada meşru selectbox kullanır.
+    Sayım yalnızca ayarlar bölgesiyle sınırlıdır: ``_form_degeri`` başından
+    ``render_ayarlar_tab`` sonuna kadar. Bölge sınırı önce "dosya sonu" idi;
+    panele 8 alakasız sekme eklenince (pano filtresi, LTV/CAC, Karar Defteri)
+    test yanlış alarm verdi. Ayarlar dışındaki selectbox'lar meşrudur.
     """
     kaynak = _panel_kaynak()
-    bolge = kaynak[kaynak.index("def _form_degeri("):]
+    bas = kaynak.index("def _form_degeri(")
+    ayarlar = kaynak.index("def render_ayarlar_tab(")
+    sonraki = re.search(r"^def ", kaynak[ayarlar + 1 :], re.M)
+    bolge = kaynak[bas : ayarlar + 1 + sonraki.start()]
     assert "for tanim in grup_haritasi[" in bolge
     assert bolge.count("st.selectbox(") <= 1
     assert bolge.count("st.checkbox(") <= 1
