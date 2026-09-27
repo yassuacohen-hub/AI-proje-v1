@@ -1,0 +1,30 @@
+# D-221: ust klasor politikasi
+# Kokte yalnizca su ucu bulunur:
+#   1) Huginn Data Insights/   -> ana repo, tek dogruluk kaynagi
+#   2) yedekler/               -> bundle/zip yedekleri (repoya GIRMEZ, asagida)
+#   3) AGENTS.md               -> yonlendirici (kurallar vault'ta)
+# Ayrica platform zorunlulugu olan nokta klasorleri (.vscode, .roo, .github, ...)
+# kokte kalir; listesi tests/test_kok_politikasi.py ile sabitlenir.
+
+# Yedekler: ayni diskteki gecici durak, repo gecmisine gomulmemeli
+yedekler/
+*.bundle
+*.zip
+
+# Tek kullanimlik ajan betikleri ve olcum ciktilari (D-221: kokte birikmesi yasak)
+_*.py
+_*.txt
+_*.ps1
+check_*.py
+fix_*.py
+add_*.py
+update_task_*.py
+write_*.py
+analyze.py
+output*.txt
+
+# Arac/dil artiklari
+__pycache__/
+.pytest_cache/
+*.pyc
+node_modules/

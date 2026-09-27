@@ -1,0 +1,28 @@
+{
+  "agents": [
+    {
+      "name": "ihsan",
+      "role": "orkestrator",
+      "max_concurrent_tasks": 2,
+      "skills": ["planlama", "koordinasyon", "gorev_dagitim", "karar_verme"]
+    },
+    {
+      "name": "utku",
+      "role": "uretim/hacim",
+      "max_concurrent_tasks": 3,
+      "skills": ["kod_yazma", "refactoring", "test", "ci_cd"]
+    },
+    {
+      "name": "salih",
+      "role": "QA/Release Governance",
+      "max_concurrent_tasks": 2,
+      "skills": ["test_kapsami", "regresyon", "suru_oncesi_dogrulama", "kalite_kontrol"]
+    },
+    {
+      "name": "yasu",
+      "role": "denetim/review",
+      "max_concurrent_tasks": 2,
+      "skills": ["kod_inceleme", "guvenlik", "mimari_uyum", "dokuman_dogrulama"]
+    }
+  ]
+}
