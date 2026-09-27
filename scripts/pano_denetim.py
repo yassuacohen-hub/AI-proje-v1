@@ -97,8 +97,23 @@ def arsiv_kimlikleri() -> frozenset[str]:
     return frozenset(kimlikler)
 
 
+def tetik_kimlikleri() -> frozenset[tuple[str, str]]:
+    """Tetik kanallarındaki (ajan, task_id) çiftleri. Kanal = ajanın postası."""
+    ciftler: set[tuple[str, str]] = set()
+    for yol in (STATE / "triggers").glob("*.jsonl"):
+        for satir in yol.read_text(encoding="utf-8-sig").splitlines():
+            if not satir.strip():
+                continue
+            try:
+                ciftler.add((yol.stem, str(json.loads(satir)["task_id"])))
+            except (ValueError, KeyError):
+                continue
+    return frozenset(ciftler)
+
+
 def tara(pano: list[dict], kuyruk: list[dict], simdi: datetime,
-         arsiv: frozenset[str] = frozenset()) -> list[dict]:
+         arsiv: frozenset[str] = frozenset(),
+         tetikler: frozenset[tuple[str, str]] | None = None) -> list[dict]:
     """Uyumsuzlukları bulur. Her bulgu: {tip, seviye, task_id, mesaj, duzeltme}.
 
     seviye "hata": düzeltilmesi gereken tutarsızlık (CI'yi kırar).
@@ -144,6 +159,14 @@ def tara(pano: list[dict], kuyruk: list[dict], simdi: datetime,
             if son and simdi - son > STUCK_ESIK:
                 ekle("stuck", "uyari", tid,
                      f"{durum} / son hareket {son.isoformat(timespec='minutes')}")
+
+        # Sessiz iş emri: pano "aktif" ama ajanın postasında tetik yok. Görev
+        # kimseye ulaşmamış olur; ajan beklerken pano çalışıyor görünür.
+        # (bkz. ae0fb2f: panoya yazıldı, tetik_ekle çağrılmadı.)
+        if tetikler is not None and durum == "aktif":
+            sahip = gorev.get("sahip")
+            if sahip and (sahip, tid) not in tetikler:
+                ekle("tetik", "hata", tid, f"durum=aktif ama {sahip} kanalında tetik yok")
 
     # kuyruk senkronu. Kuyruk bir ekleme-günlüğüdür: aynı task_id birden çok kez
     # geçebilir, görev onaydan sonra yeniden açılmış olabilir.
@@ -280,7 +303,8 @@ def main(argv: list[str] | None = None) -> int:
         kuyruk = _json_oku(KUYRUK_DOSYA)
         arsiv_kimlik = arsiv_kimlikleri()  # D-231: bir kez oku, iki taramada kullan
 
-        bulgular = tara(pano, kuyruk, simdi, arsiv_kimlik)
+        tetikler = tetik_kimlikleri()
+        bulgular = tara(pano, kuyruk, simdi, arsiv_kimlik, tetikler)
         ithalat = ithalat_kontrol()
         if ithalat:
             bulgular.append(ithalat)
@@ -294,7 +318,7 @@ def main(argv: list[str] | None = None) -> int:
             rapor["duzeltilen"] = uygula(bulgular, arsiv)
             pano = _json_oku(PANO_DOSYA)
             kuyruk = _json_oku(KUYRUK_DOSYA)
-            bulgular = tara(pano, kuyruk, simdi, arsiv_kimlik) + ([ithalat] if ithalat else [])
+            bulgular = tara(pano, kuyruk, simdi, arsiv_kimlik, tetikler) + ([ithalat] if ithalat else [])
 
         rapor["bulgular"] = bulgular
         rapor["gorevler"] = [
