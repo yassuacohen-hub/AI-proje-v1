@@ -1499,5 +1499,22 @@
     "mod": "code",
     "brief": "",
     "talimat": ""
+  },
+  {
+    "task_id": "ORKESTRA-D231-01",
+    "id": "ORKESTRA-D231-01",
+    "baslik": "KAHIN",
+    "sahip": "Onay kuyrugu arsive kor: pano_denetim arsive bakmiyordu",
+    "oncelik": "D-231",
+    "durum": "done",
+    "baslangic": "2026-09-27T10:48:42",
+    "bitis": "2026-09-27T10:48:42",
+    "dosyalar": [],
+    "not": "Olcum teshisi curuttu: 216 uyarinin 196si arsivde dogru kayit, 4u sahi oksuz. Budama 196 kaydi silecekti. arsiv_kimlikleri() eklendi, tara() iki cagri yerinde beslendi. uyari 216->4. Mandal test_pano_denetim.py 10 passed + negatif kontrol.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "",
+    "talimat": ""
   }
 ]

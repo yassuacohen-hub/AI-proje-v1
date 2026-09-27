@@ -1433,3 +1433,56 @@ Negatif kontrol: kopya dizini geri yaratıldığında ölçüldü →
 - **Referans:** D-186/D-187 (yedeği üreten faz), D-220 (tavan yalnız küçülür),
   D-223 (yedekte kalan doküman pratikte yoktur), D-228 (paralel gövde yasağı —
   derinlik kör noktası burada kapandı), D-229 (geçmiş zaten yedektir).
+
+## Arşiv Panonun Devamıdır, Yokluğu Değil (D-231 — KAHİN kararı 2026-09-27)
+
+**Kural:** Bir `task_id` panoda yoksa **öksüz sayılmaz**; önce arşive bakılır.
+Panoda yok + arşivde var = **kapanmış iş**, bulgu üretmez. Tek istisna: kuyruk
+durumu `bekliyor` ise arşivlenmiş işe bekleyen onay **gerçek çelişkidir**, `hata`
+kalır. Pano tutarlılığı sorgulayan her araç `arsiv_kimlikleri()` ile çalışır.
+
+**Neden:** Onay kuyruğu bir **ekleme günlüğüdür**; kapanan iş `task_board.json`'dan
+`task_board_arsiv_*.json`'a taşınır. D-198 `arsivde_bul()`'u mükerrer kapısı olarak
+zaten kullanıyordu, ama `pano_denetim.tara()` onu hiç çağırmıyordu: arşivi yokluk
+sayıp her kapanmış işi "orphan" diye bağırıyordu. 216 uyarı = gürültü tabanı;
+gürültü tabanı olan denetim okunmaz, okunmayan denetim bekçi değildir.
+
+**Ölçüm (2026-09-27, tahmin değil):**
+
+| Ölçüt | Değer |
+|---|---|
+| Pano kaydı | 74 |
+| Kuyruk kaydı | 257 (252 onaylandı, 5 reddedildi) |
+| Panoda olmayan kuyruk kaydı | 216 (200 tekil `task_id`) |
+| **Arşivde bulunan** | **196** |
+| **Hiçbir yerde yok (sahi öksüz)** | **4** — `MIG-UI-01`, `MRK-05`, `ROO-REV-01`, `U-11` |
+| Kuyrukta mükerrer `task_id` | 15 (en çok `DASH-UX-02a`, `VEC-TEST-01`, `UI-MIMARI-02` = 3) |
+| Denetim uyarısı (önce → sonra) | **216 → 4** |
+
+**Teşhis yanlıştı, ölçüm düzeltti:** Görev listesi "216 orphan kuyruğu buda"
+diyordu. Budama **196 doğru kaydı silmek** olurdu; kuyruk doğru, denetim kördü.
+D-224 bu yüzden var: kırmızıyı ölçmeden iş açılmaz.
+
+**Uygulama:** `arsiv_kimlikleri() -> frozenset[str]` arşiv dosyalarını **bir kez**
+okur (`arsivde_bul()` çağrı başına hepsini okur; 200 kimlik için O(n·m)).
+`tara(..., arsiv: frozenset[str] = frozenset())` — varsayılan boş küme eski
+davranışı korur, çağrı yerleri zorla değişmez. `main()` içindeki **iki** `tara()`
+çağrısı da beslenir; `--uygula` sonrası yeniden tarama atlanırsa 196 yanlış uyarı
+geri gelir.
+
+**Mandal:** [`tests/test_pano_denetim.py::test_gercek_kuyrukta_orphan_uyarisi_tavani_asmaz`](tests/test_pano_denetim.py:98)
+— gerçek pano+kuyruk okunur, tavan `ORPHAN_UYARI_TAVANI = 4` (D-220: yalnız küçülür).
+Yanına iki birim mandalı: arşiv bilinince uyarı susar, `bekliyor` susmaz.
+
+```bash
+python -m pytest tests/test_pano_denetim.py -q
+python scripts/pano_denetim.py
+```
+
+Negatif kontrol: `test_arsivlenmis_gorev_icin_bekleyen_onay_hata_kalir` — arşivlenmiş
+`task_id` için `durum="bekliyor"` kaydı hâlâ `seviye="hata"` üretir; susturma
+kapsamı `bekliyor`a sızarsa test kırılır.
+
+- **Referans:** D-198 (arşiv mükerrer kapısıdır — mevcut araç kullanılmıyordu),
+  D-220 (tavan yalnız küçülür), D-224 (ölçülmemiş kırmızıyla iş açılmaz — teşhisi
+  bu kural çürüttü), D-186 (pano kanonik yol bekçisi).

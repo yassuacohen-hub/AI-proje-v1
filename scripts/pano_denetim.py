@@ -81,11 +81,31 @@ def _an(ham) -> datetime | None:
         return None
 
 
-def tara(pano: list[dict], kuyruk: list[dict], simdi: datetime) -> list[dict]:
+def arsiv_kimlikleri() -> frozenset[str]:
+    """D-231: arşivlenmiş task_id kümesi (tek okuma).
+
+    tb.arsivde_bul() her çağrıda tüm arşiv dosyalarını okur; 200 kimlik için
+    O(n*m). Denetim bir kez okur, küme olarak taşır.
+    """
+    kimlikler: set[str] = set()
+    for yol in tb.arsiv_dosyalari():
+        try:
+            kayitlar = json.loads(yol.read_text(encoding="utf-8-sig"))
+        except (OSError, ValueError):
+            continue
+        kimlikler.update(str(k.get("task_id")) for k in kayitlar)
+    return frozenset(kimlikler)
+
+
+def tara(pano: list[dict], kuyruk: list[dict], simdi: datetime,
+         arsiv: frozenset[str] = frozenset()) -> list[dict]:
     """Uyumsuzlukları bulur. Her bulgu: {tip, seviye, task_id, mesaj, duzeltme}.
 
     seviye "hata": düzeltilmesi gereken tutarsızlık (CI'yi kırar).
     seviye "uyari": bilgi amaçlı (tarihsel kuyruk kaydı, uzun süren görev).
+
+    `arsiv`: D-231 — arşivlenmiş kimlikler. Arşiv panonun devamıdır, yokluğu
+    değil; boş geçilirse eski (arşive kör) davranış sürer.
     """
     bulgular: list[dict] = []
     kimlikler = {g.get("task_id") for g in pano}
@@ -130,6 +150,10 @@ def tara(pano: list[dict], kuyruk: list[dict], simdi: datetime) -> list[dict]:
     for kayit in kuyruk:
         tid = kayit.get("task_id")
         if tid not in kimlikler:
+            # D-231: arşivde duran iş öksüz değil, kapanmış iştir. Tek istisna
+            # "bekliyor": arşivlenmiş görev için bekleyen onay gerçek çelişkidir.
+            if tid in arsiv and kayit.get("durum") != "bekliyor":
+                continue
             seviye = "hata" if kayit.get("durum") == "bekliyor" else "uyari"
             ekle("orphan", seviye, tid, f"kuyrukta ({kayit.get('durum')}) var, panoda yok")
             continue
@@ -248,8 +272,9 @@ def main(argv: list[str] | None = None) -> int:
 
         pano = _json_oku(PANO_DOSYA)
         kuyruk = _json_oku(KUYRUK_DOSYA)
+        arsiv_kimlik = arsiv_kimlikleri()  # D-231: bir kez oku, iki taramada kullan
 
-        bulgular = tara(pano, kuyruk, simdi)
+        bulgular = tara(pano, kuyruk, simdi, arsiv_kimlik)
         ithalat = ithalat_kontrol()
         if ithalat:
             bulgular.append(ithalat)
@@ -263,7 +288,7 @@ def main(argv: list[str] | None = None) -> int:
             rapor["duzeltilen"] = uygula(bulgular, arsiv)
             pano = _json_oku(PANO_DOSYA)
             kuyruk = _json_oku(KUYRUK_DOSYA)
-            bulgular = tara(pano, kuyruk, simdi) + ([ithalat] if ithalat else [])
+            bulgular = tara(pano, kuyruk, simdi, arsiv_kimlik) + ([ithalat] if ithalat else [])
 
         rapor["bulgular"] = bulgular
         rapor["gorevler"] = [

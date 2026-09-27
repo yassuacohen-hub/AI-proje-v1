@@ -86,3 +86,4 @@
 | DOC-D228-01 | D-228: vault icinde paralel veri govdesi yasagi (data_worktree elendi) | kahin | 2026-09-27T08:26:16 |
 | DOC-D229-01 | D-229: zaman damgali yedek git te izlenmez (65 artik elendi) | kahin | 2026-09-27T08:36:33 |
 | DOC-D230-01 | KAHIN | D-230: gomulu govde kopyasi yasagi + mandal | 2026-09-27T10:36:28 |
+| ORKESTRA-D231-01 | KAHIN | Onay kuyrugu arsive kor: pano_denetim arsive bakmiyordu | 2026-09-27T10:48:42 |

@@ -1,8 +1,17 @@
 # -*- coding: utf-8 -*-
 """pano_denetim tarama mantığı — çerçevesiz özdenetim."""
 from datetime import datetime, timedelta
+from pathlib import Path
 
-from scripts.pano_denetim import IZINLI_DUZELTMELER, ithalat_kontrol, tara, _kanonik_yol_kontrol
+from scripts.pano_denetim import (
+    IZINLI_DUZELTMELER,
+    _kanonik_yol_kontrol,
+    arsiv_kimlikleri,
+    ithalat_kontrol,
+    tara,
+)
+
+VAULT = Path(__file__).resolve().parents[1]
 
 SIMDI = datetime(2026, 9, 22, 12, 0, 0)
 COK_ESKI = (SIMDI - timedelta(days=5)).isoformat()
@@ -72,6 +81,46 @@ def test_pano_yolu_kanonik():
     assert _kanonik_yol_kontrol() is None, "PANO_DOSYA kanonik değil veya worktree'de split kopya var"
 
 
+# --- D-231: arşiv panonun devamıdır, yokluğu değil ---------------------------
+
+ORPHAN_UYARI_TAVANI = 4  # ölçüm 2026-09-27: 216 uyarının 196'sı arşivde, 4'ü sahi öksüz
+
+
+def test_arsivlenmis_kuyruk_kaydi_orphan_saymaz():
+    """D-231: kapanıp arşive taşınan iş öksüz değil; denetim arşive bakmalı."""
+    kuyruk = [{"task_id": "ARSIVDE", "durum": "onaylandi", "onay_tarihi": ESKI}]
+    assert ("orphan", "ARSIVDE") in _tipler(tara([], kuyruk, SIMDI))          # arşive kör
+    assert tara([], kuyruk, SIMDI, frozenset({"ARSIVDE"})) == []              # arşiv bilinirse sessiz
+
+
+def test_arsivlenmis_gorev_icin_bekleyen_onay_hata_kalir():
+    """Negatif kontrol: arşivlenmiş işe bekleyen onay gerçek çelişkidir, susturulamaz."""
+    kuyruk = [{"task_id": "ARSIVDE", "durum": "bekliyor"}]
+    b = tara([], kuyruk, SIMDI, frozenset({"ARSIVDE"}))
+    assert [x["seviye"] for x in b] == ["hata"]
+
+
+def test_gercek_kuyrukta_orphan_uyarisi_tavani_asmaz():
+    """D-220 tavanı: sahi öksüz sayısı yalnız küçülebilir."""
+    import json
+
+    from scripts.pano_denetim import KUYRUK_DOSYA, PANO_DOSYA
+
+    pano = json.loads(PANO_DOSYA.read_text(encoding="utf-8-sig"))
+    kuyruk = json.loads(KUYRUK_DOSYA.read_text(encoding="utf-8-sig"))
+    orphan = [b for b in tara(pano, kuyruk, datetime.now(), arsiv_kimlikleri())
+              if b["tip"] == "orphan"]
+    assert len(orphan) <= ORPHAN_UYARI_TAVANI, (
+        f"D-231 ihlali: sahi öksüz {len(orphan)} > tavan {ORPHAN_UYARI_TAVANI} "
+        f"-> {[b['task_id'] for b in orphan]}"
+    )
+
+
+def test_d231_agents_mde_kayitli() -> None:
+    metin = (VAULT / "AGENTS.md").read_text(encoding="utf-8")
+    assert "(D-231 " in metin, "D-231 kararı AGENTS.md'de yok."
+
+
 if __name__ == "__main__":
     test_tara_uyumsuzluklari_bulur()
     test_otomat_gorevi_done_yapamaz()
@@ -79,4 +128,8 @@ if __name__ == "__main__":
     test_temiz_pano_bulgu_uretmez()
     test_ithalat_kontrol_gecerli()
     test_pano_yolu_kanonik()
+    test_arsivlenmis_kuyruk_kaydi_orphan_saymaz()
+    test_arsivlenmis_gorev_icin_bekleyen_onay_hata_kalir()
+    test_gercek_kuyrukta_orphan_uyarisi_tavani_asmaz()
+    test_d231_agents_mde_kayitli()
     print("OK")
