@@ -1702,5 +1702,53 @@
     "tetik_sayisi": 29,
     "uyari_tarihi": "2026-09-27T15:49:02",
     "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 29. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 153,
+    "uyari_tarihi": "2026-09-27T15:54:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 153. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 30,
+    "uyari_tarihi": "2026-09-27T15:54:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 30. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 30,
+    "uyari_tarihi": "2026-09-27T15:54:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 30. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 154,
+    "uyari_tarihi": "2026-09-27T15:59:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 154. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 31,
+    "uyari_tarihi": "2026-09-27T15:59:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 31. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 31,
+    "uyari_tarihi": "2026-09-27T15:59:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 31. kez uyarıldı; henüz başlamadı."
   }
 ]
