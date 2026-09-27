@@ -4,11 +4,13 @@
 
 ## KALDIĞIM YER
 
-- **Konum:** aktif iş yok — son teslim `UI-ADMIN-MENU-D215216` (done)
-- **Yapılanlar:** D-215/D-216 menü düzenlemesi geriye dönük panoya işlendi (commit `9650bf1`)
-- **Kritik bağlam:** yeni görev `TEST-BACKLOG-20` bekliyor → SADECE brifte yazılı dosyalar
-- **Sonraki adım:** `plans/brief_utku_TEST-BACKLOG-20.md` oku, Faz A'dan başla (migration down, veri kaybı riski)
-- **Görev:** `TEST-BACKLOG-20` (bekliyor) · **Son okunan karar:** `D-219`
+- **Konum:** aktif iş yok — son teslim `TEST-BACKLOG-20` (review) + `VERI-HAYALET-TEMIZ-01` (review)
+- **Yapılanlar:** 
+  - TEST-BACKLOG-20: 6 faz tamamlandı (A=9 migration down, B=3 sayfa iskeleti, C=3 log altyapısı, D=2 API rotası, E=2 denetim, F=1 kullanıcı ayarı) — tam suite 20 failed → 0
+  - VERI-HAYALET-TEMIZ-01: 4591 hayalet kayıt temizlendi, companies.legal_name UNIQUE kısıtı (migration 0022), vergi_no korundu (774), alanlar birleştirildi, yedek alındı
+- **Kritik bağlam:** her iki görev onay bekliyor (review durumunda)
+- **Sonraki adım:** ihsan onayını bekle / yeni görev posta kutusunda varsa al
+- **Görev:** `TEST-BACKLOG-20` (review), `VERI-HAYALET-TEMIZ-01` (review) · **Son okunan karar:** `D-219`
 
 ## Oturum Açılış (60 saniye, bu sırayla)
 
@@ -64,6 +66,25 @@ python scripts/gorev_kutusu.py teslim --ajan utku --task-id <TASK_ID> --ozet "<�
 ```
 
 ## Oturum Günlüğü
+
+### 2026-09-27 — TEST-BACKLOG-20 + VERI-HAYALET-TEMIZ-01 tamamlandı
+
+- **Görevler:** `TEST-BACKLOG-20` (P1, 8s), `VERI-HAYALET-TEMIZ-01` (P0, 3s)
+- **Yapılan TEST-BACKLOG-20:**
+  - Faz A (Migration down): 0016/0017 .down.sql dosyaları `down/` altına taşındı, eksik 3 down dosyası yazıldı, migrate.py glob koruması eklendi — 9 test geçti
+  - Faz B (Sayfa iskeleti): admin_mfa.py SECTIONS sözleşmesine geçirildi, ana_kontrol.py elle markdown başlığı kaldırıldı — 3 test geçti
+  - Faz C (Log altyapısı): error_handling.py setup_logging düzeltildi (JSON kapalıyken insan-okunur, dosya hedefi, stdout+dosya ikili) — 3 test geçti
+  - Faz D (API rotaları): rota envanteri gerçeğe göre güncellendi, geçersiz buyer için 404 döndürülür — 2 test geçti
+  - Faz E (Denetim): kök marka denetimi temizlendi, pano yolu kanonik hale getirildi — 2 test geçti
+  - Faz F (Kullanıcı ayarları): panel formu şemadan üretilir hale getirildi — 1 test geçti
+  - **Tam suite:** 20 failed → 0 failed, passed sayısı korundu
+- **Yapılan VERI-HAYALET-TEMIZ-01:**
+  - hayalet_kayit_temizle.py: 4591 tekrarlayan kayıt tespit edildi, vergi_no/alan sayısı/company_id önceliğiyle keeper seçildi, alanlar birleştirildi, ilişkili kayıtlar taşındı, yedek alındı (data/backup/hayalet_YYYYMMDD.jsonl), silindi
+  - Migration 0022: companies.legal_name UNIQUE INDEX eklendi (tekrar oluşmaması için)
+  - Test: test_hayalet_kayit_temizle.py (11 test) yazıldı ve geçti
+- **Doğrulama:** Tüm TEST-BACKLOG-20 faz testleri + hayalet testleri + tam suite related tests yeşil
+- **Kalan / bloke:** yok
+- **Öğrenilen tuzak:** tam suite çalıştırma uzun sürüyor, faz bazlı test koşturmak çok daha verimli
 
 ### 2026-09-26 — D-215/D-216 menü kaydı
 

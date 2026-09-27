@@ -80,8 +80,8 @@ class BaskentScraper(BaseOsfbScraper):
         self.log.info("BASLA Baskent OSB scraping (detayli=%s)", detay_al)
         state = self._load_state()
         toplam = state.get("total_records", 0)
-        file_mode = "a" if self.OUTPUT_PATH.exists() else "w"
-        with open(self.OUTPUT_PATH, file_mode, encoding="utf-8") as f:
+        # D-235/K-3: tam tur daima bastan yazar; "a" kipi kopyalari ust uste yigiyordu
+        with open(self.OUTPUT_PATH, "w", encoding="utf-8") as f:
             self.log.info("Baskent firm listesi cekiliyor...")
             firmalar = self.fetch_firma_liste()
             if not firmalar:

@@ -14,6 +14,7 @@ KOK = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(KOK / "scripts"))
 
 import gorev_at
+from brief_denetim import sablon_kopyala  # D-217 kapisi icin uyumlu brif
 
 
 def test_brifsiz_ve_talimatsiz_atama_reddedilir(tmp_path, monkeypatch, capsys) -> None:
@@ -69,7 +70,7 @@ def test_brif_ve_talimat_varsa_gecer(tmp_path, monkeypatch) -> None:
     monkeypatch.chdir(tmp_path)
     monkeypatch.setattr(gorev_at, "KOK", tmp_path)
     (tmp_path / "plans").mkdir()
-    (tmp_path / "plans" / "brief_utku_TEST-VAR-01.md").write_text("brif", encoding="utf-8")
+    sablon_kopyala(tmp_path / "plans" / "brief_utku_TEST-VAR-01.md")
 
     args = argparse.Namespace(
         task_id="TEST-VAR-01",

@@ -1,6 +1,6 @@
 {
-  "current_version": 21,
-  "last_applied": "0021_missing_tables.sql",
+  "current_version": 22,
+  "last_applied": "0022_unique_legal_name.sql",
   "migrations": [
     {
       "version": 1,
@@ -115,6 +115,12 @@
       "file": "0021_missing_tables.sql",
       "date": "2026-09-26",
       "note": "SEMA-DENETIM-01: kodda sorgulanan ama hic olusturulmamis 5 tablo (audit_logs, admin_audit_log, entity_matches, campaign_packages, api_usage_daily)"
+    },
+    {
+      "version": 22,
+      "file": "0022_unique_legal_name.sql",
+      "date": "2026-09-27",
+      "note": "VERI-HAYALET-TEMIZ-01: companies.legal_name UNIQUE kısıtı (hayalet kayıt tekrarını engelle)"
     }
   ]
 }

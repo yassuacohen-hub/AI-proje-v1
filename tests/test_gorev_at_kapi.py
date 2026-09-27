@@ -14,10 +14,13 @@ from pathlib import Path
 import pytest
 
 KOK = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(KOK / "scripts"))
 _spec = importlib.util.spec_from_file_location("gorev_at", KOK / "scripts" / "gorev_at.py")
 ga = importlib.util.module_from_spec(_spec)
 sys.modules["gorev_at"] = ga
 _spec.loader.exec_module(ga)
+
+from brief_denetim import sablon_kopyala  # noqa: E402  (D-217 kapisi icin uyumlu brif)
 
 
 class _Args:
@@ -54,14 +57,14 @@ def test_brif_yoksa_talimat_dolu_olsa_bile_reddeder(temiz, capsys):
 
 
 def test_brif_varsa_bos_talimat_reddeder(temiz, tmp_path, capsys):
-    (tmp_path / "plans" / "brief_yasu_TEST-KAPI-01.md").write_text("x", encoding="utf-8")
+    sablon_kopyala(tmp_path / "plans" / "brief_yasu_TEST-KAPI-01.md")
     assert ga.cmd_at(_args(talimat="   ")) == 6
     assert "D-80" in capsys.readouterr().err
     assert not temiz
 
 
 def test_ikisi_de_varsa_gecer_ve_brief_alani_dolar(temiz, tmp_path):
-    (tmp_path / "plans" / "brief_yasu_TEST-KAPI-01.md").write_text("x", encoding="utf-8")
+    sablon_kopyala(tmp_path / "plans" / "brief_yasu_TEST-KAPI-01.md")
     assert ga.cmd_at(_args()) == 0
     # D-66: pano 'brief' alani bos kalmamali; yol KOK'e goreli ve POSIX.
     assert temiz["brief"] == "plans/brief_yasu_TEST-KAPI-01.md"
@@ -72,8 +75,7 @@ def test_ikisi_de_varsa_gecer_ve_brief_alani_dolar(temiz, tmp_path):
 def test_eski_brif_konumu_da_kabul(temiz, tmp_path):
     """data/orchestrator/<TASK>_brif_*.md mirasi hala gecerli."""
     eski = tmp_path / "data" / "orchestrator"
-    eski.mkdir(parents=True)
-    (eski / "TEST-KAPI-01_brif_2026-09-23_yasu.md").write_text("x", encoding="utf-8")
+    sablon_kopyala(eski / "TEST-KAPI-01_brif_2026-09-23_yasu.md")
     assert ga.cmd_at(_args()) == 0
     assert temiz["brief"].startswith("data/orchestrator/TEST-KAPI-01_brif_")
 
@@ -108,7 +110,7 @@ def test_guncelle_gorev_yoksa_sifir_donmez(temiz, monkeypatch, capsys):
 
 
 def test_guncelle_var_olan_brif_gecer(temiz, tmp_path, monkeypatch, capsys):
-    (tmp_path / "plans" / "brief_yasu_TEST-KAPI-01.md").write_text("x", encoding="utf-8")
+    sablon_kopyala(tmp_path / "plans" / "brief_yasu_TEST-KAPI-01.md")
     gelen: dict = {}
     monkeypatch.setattr(ga.tb, "gorev_guncelle",
                         lambda tid, durum=None, **k: gelen.update(k, task_id=tid) or {"task_id": tid})

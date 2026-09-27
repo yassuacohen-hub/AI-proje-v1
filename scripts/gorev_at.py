@@ -27,6 +27,10 @@ from pathlib import Path
 
 KOK = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(KOK))
+# brief_denetim komşu modül; bu dosya test tarafından import edilirse
+# sys.path[0] scripts/ olmaz — açıkça ekliyoruz.
+if str(Path(__file__).resolve().parent) not in sys.path:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 # Windows konsolu cp1254; "→" ve Türkçe karakterler patlamasın.
 for _akis in (sys.stdout, sys.stderr):
@@ -36,6 +40,7 @@ for _akis in (sys.stdout, sys.stderr):
         except (OSError, ValueError):
             pass  # Streamlit ortamında başarısız olabilir; ignore
 
+import brief_denetim  # noqa: E402  (aynı klasör; D-217 kural gövdesi tek kaynak)
 from src.company_master.orchestrator import task_board as tb  # noqa: E402
 from src.company_master.orchestrator import trigger  # noqa: E402
 
@@ -269,6 +274,19 @@ def cmd_at(args: argparse.Namespace) -> int:
             file=sys.stderr,
         )
         return 6
+    # D-217/D-239: brif VAR ama ŞABLONA UYGUN MU? Ölçüm (2026-09-27): 9 brif
+    # şablonsuz yazılmış, 108 eksik bölüm vardı; test yakaladı ama ATAMA sonrası.
+    # Kapı burada. Kural gövdesi scripts/brief_denetim.py'de tek kaynak (D-211).
+    # Sıra bilinçli: ucuz argüman kontrolleri (D-66/D-80) önce, dosya okuma sonra.
+    brief_eksik = brief_denetim.eksikler(brief_yolu)
+    if brief_eksik:
+        print(
+            f"HATA (D-217): Brif sablona uygun degil: {brief_yolu.name}\n"
+            f"  Eksik: {brief_eksik}\n"
+            "  Sablon: plans/_brief_sablon.md — once brifi tamamla, sonra ata.",
+            file=sys.stderr,
+        )
+        return 7
     talimat = (args.talimat or "").strip()
     if mod == "architect":
         talimat = (talimat + "\n" + ARCHITECT_HATIRLATMA).strip()

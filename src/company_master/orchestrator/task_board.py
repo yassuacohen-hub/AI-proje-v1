@@ -154,6 +154,7 @@ def brief_kilitli_dosya(brief: str) -> str | None:
     """Brief'teki `**Kilitli dosya:** \\`yol\\`` satirindan yolu okur (yoksa None).
 
     Kilit satiri duz metinse (orn. "(kilit yok - kapsam brifte)") None doner.
+    Sablondan doldurulmamis placeholder (`<yol/dosya.uzanti>`) da kilit degildir.
     """
     yol = ROOT / brief
     try:
@@ -163,7 +164,10 @@ def brief_kilitli_dosya(brief: str) -> str | None:
     for satir in satirlar:
         if satir.startswith("**Kilitli dosya:**"):
             eslesme = re.search(r"`([^`]+)`", satir)
-            return eslesme.group(1) if eslesme else None
+            if not eslesme:
+                return None
+            deger = eslesme.group(1)
+            return None if deger.startswith("<") and deger.endswith(">") else deger
     return None
 
 

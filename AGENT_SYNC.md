@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-27T13:31:28
+> Son guncelleme: 2026-09-27T21:15:38
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -24,26 +24,30 @@
 | WK-02 | OSB Tender Monitor - Real-time Tracking | - | P1 | archive |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | archive |
 | VERI-02 | [VERI] OSB ihale izleyicisini yaz → src/ | utku | P1 | plan |
-| VERI-03 | [VERI] Proxy rotasyonunu yaz → src/scrap | utku | P2 | review |
 | VERI-NACE-SOZLUK-01 | [VERI] Resmi NACE listesini yaz → nace_c | utku | P0 | aktif |
-| VERI-NACE-COKLU-01 | [VERI] Çoklu NACE kodunu yaz → company_i | utku | P1 | plan |
-| VERI-NACE-TEMIZ-01 | [VERI] Sektör sayacı kirlenmesini düzelt | utku | P1 | plan |
-| VERI-NACE-KOLON-01 | [VERI] nace_validity kolon karışmasını d | utku | P2 | plan |
+| VERI-NACE-COKLU-01 | [VERI] Çoklu NACE kodunu yaz → company_i | utku | P1 | beklemede |
+| VERI-NACE-TEMIZ-01 | [VERI] Sektör sayacı kirlenmesini düzelt | utku | P1 | review |
+| VERI-NACE-KOLON-01 | [VERI] nace_validity kolon karışmasını d | utku | P2 | aktif |
+| VERI-KAYNAK-BAG-01 | [VERI] Firma-kaynak bagini yaz → source_ | utku | P0 | plan |
+| VERI-SEKTOR-01 | [VERI] Sektor sozlugunu yaz → 9689 kayit | utku | P1 | plan |
+| VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim | utku | P2 | plan |
+| VERI-HAYALET-TEMIZ-01 | [VERI] Hayalet kayitlari sil → companies | utku | P0 | aktif |
+| VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik verisini yeniden yaz → D-2 | utku | P1 | plan |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| VAULT-ORPHAN-INCELEME-01 | [VAULT] Orphan nod siniflama: 3361 dosya | orkestrator | 2026-09-27 |
+| VERI-03 | [VERI] Proxy rotasyonunu yaz → src/compa | utku | 2026-09-27 |
 | VERI-04 | [VERI] Migration down dosyalarini tek ad | ihsan | 2026-09-27 |
 | API-07 | [API] 11 yeni rotayi envantere yaz + gec | utku | 2026-09-27 |
 | UI-11 | [UI] admin_mfa + ana_kontrol basliklarin | utku | 2026-09-27 |
 | DOC-D227-01 | [DOC] D-227: karar numarasi yalniz AGENT | orkestrator | 2026-09-27 |
 | DOC-D228-01 | D-228: vault icinde paralel veri govdesi | kahin | 2026-09-27 |
 | DOC-D229-01 | D-229: zaman damgali yedek git te izlenm | kahin | 2026-09-27 |
-| DOC-D230-01 | KAHIN | D-230: gomulu govde kopyasi yasagi + mandal | 2026-09-27 |
-| ORKESTRA-D231-01 | KAHIN | Onay kuyrugu arsive kor: pano_denetim arsive bakmiyordu | 2026-09-27 |
-| ORKESTRA-D233-01 | KAHIN | Referansli yol kopya sanildi: AI proje v1/ butun olarak silindi, teslim kapisi kirildi | 2026-09-27 |
+| DOC-D230-01 | D-230: gomulu govde kopyasi yasagi + man | kahin | 2026-09-27 |
+| ORKESTRA-D231-01 | Onay kuyrugu arsive kor: pano_denetim ar | kahin | 2026-09-27 |
+| ORKESTRA-D233-01 | Referansli yol kopya sanildi: AI proje v | kahin | 2026-09-27 |
 
 ## Son Handoff'lar
 

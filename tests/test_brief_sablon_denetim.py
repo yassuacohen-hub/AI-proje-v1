@@ -10,6 +10,10 @@ Test iki şeyi garanti eder:
   2. Baseline **büyümez** — listeye ekleme yapmak KAHİN kararı gerektirir.
 
 Baseline'ı yenilemek için: python tests/test_brief_sablon_denetim.py --baseline-yaz
+
+Kural gövdesi burada DEĞİL: scripts/brief_denetim.py (D-211 tek kaynak).
+Sebep ölçüm: kural testin içindeyken `gorev_at.py ata` onu çağıramıyordu —
+uyumsuz brifle görev atanabiliyordu. Aynı gövde şimdi iki yerden çağrılır.
 """
 
 from __future__ import annotations
@@ -20,30 +24,19 @@ from pathlib import Path
 import pytest
 
 KOK = Path(__file__).resolve().parent.parent
+if str(KOK / "scripts") not in sys.path:
+    sys.path.insert(0, str(KOK / "scripts"))
+
+from brief_denetim import MIN_WIKILINK, ZORUNLU, eksikler as _eksikler  # noqa: E402,F401
+
 PLANS = KOK / "plans"
 SABLON = PLANS / "_brief_sablon.md"
 BASELINE = Path(__file__).resolve().parent / "_brief_baseline.txt"
 
-# D-217 zorunlu bölümler. "## Adımlar" yerine "## Faz A" da kabul (toplu iş).
-ZORUNLU = [
-    "**Başlık:**",
-    "**Öncelik:**",
-    "**Hub:**",
-    "## Neden",
-    "## Doğrulanacak varsayım",
-    "## Kabul kriteri",
-    "## Ajan chat zorunlu",
-    "## Teslim",
-    "## Ilgili Nodlar",  # D-218 Obsidyen grafiği — linksiz doküman = grep maliyeti
-]
-
-# D-218: en az bu kadar wikilink. Linksiz doküman grafikten kopuk kalır,
-# ajan onu bulmak için tüm repoyu tarar (token + süre maliyeti).
-MIN_WIKILINK = 2
-
 
 def _tum_brifler() -> list[Path]:
-    return sorted(PLANS.glob("brief_*.md"))
+    """rglob: arşiv alt klasöründeki kapanmış brifler de denetime girer."""
+    return sorted(PLANS.rglob("brief_*.md"))
 
 
 def _baseline() -> set[str]:
@@ -54,18 +47,6 @@ def _baseline() -> set[str]:
         for s in BASELINE.read_text(encoding="utf-8").splitlines()
         if s.strip() and not s.startswith("#")
     }
-
-
-def _eksikler(brif: Path) -> list[str]:
-    metin = brif.read_text(encoding="utf-8")
-    eksik = [b for b in ZORUNLU if b not in metin]
-    if "## Adımlar" not in metin and "## Faz A" not in metin:
-        eksik.append("## Adımlar|## Faz A")
-    if "ajan_chat.py" not in metin:
-        eksik.append("ajan_chat.py komut referansı")
-    if metin.count("[[") < MIN_WIKILINK:
-        eksik.append(f"en az {MIN_WIKILINK} Obsidyen wikilink [[...]] (D-218)")
-    return eksik
 
 
 def _yeni_brifler() -> list[Path]:

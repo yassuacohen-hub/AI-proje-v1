@@ -91,5 +91,42 @@ class BaseOsfbScraper:
     def fetch_firma_detay(self, slug: str) -> dict[str, Any]:
         return {}
 
+    # --- Güvenli sayfalama şablonu (D-235 / VERI-KAZIYICI-DONGU-01) -------------
+    # Kök neden: WordPress tabanlı OSB siteleri geçersiz ?page/N/ için sayfa 1'i
+    # döndürür. "liste boşalınca dur" koşulu asla gerçekleşmez -> sonsuz döngü.
+    # İvedik'te ölçüldü: 15 firma x 224 tekrar = 3375 hayalet kayıt (%99.6 kopya).
+    MAX_SAYFA: int = 500          # sert tavan: hiçbir OSB 500 sayfa değil
+    TEKRAR_TOLERANSI: int = 2     # ardışık kaç yinelenen sayfadan sonra dur
+
+    def sayfa_dongusu(self) -> Iterator[tuple[int, list[BaseOsfbFirma]]]:
+        """Sayfaları getirir; tekrar/boş/tavan görünce durur. Tekil ünvan yayar."""
+        gorulen_sayfa: set[str] = set()
+        gorulen_unvan: set[str] = set()
+        tekrar = 0
+        for sayfa in range(1, self.MAX_SAYFA + 1):
+            firmalar = self.fetch_firma_liste(sayfa)
+            if not firmalar:
+                self.log.info("Sayfa %d boş — bitti", sayfa)
+                return
+            imza = "|".join(f.unvan for f in firmalar)
+            if imza in gorulen_sayfa:
+                tekrar += 1
+                self.log.warning("Sayfa %d önceki bir sayfanın kopyası (%d/%d)",
+                                 sayfa, tekrar, self.TEKRAR_TOLERANSI)
+                if tekrar >= self.TEKRAR_TOLERANSI:
+                    self.log.error("Sayfalama döngüsü — sayfa %d'de durduruldu", sayfa)
+                    return
+                continue
+            gorulen_sayfa.add(imza)
+            tekrar = 0
+            yeni = [f for f in firmalar if f.unvan not in gorulen_unvan]
+            gorulen_unvan.update(f.unvan for f in yeni)
+            if not yeni:
+                self.log.warning("Sayfa %d: tüm ünvanlar zaten görüldü — bitti", sayfa)
+                return
+            yield sayfa, yeni
+            time.sleep(self.RATE_LIMIT_SECONDS)
+        self.log.error("MAX_SAYFA (%d) aşıldı — durduruldu", self.MAX_SAYFA)
+
     def scrape(self, detay_al: bool = False) -> Iterator[BaseOsfbFirma]:
         raise NotImplementedError

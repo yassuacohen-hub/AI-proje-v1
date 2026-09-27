@@ -1683,3 +1683,40 @@ ajanların test için SQLite kullanması **doğrudur**, hata dosyanın varlığ�
 
 - **Referans:** D-224 (ölçmeden karar yok), D-166 (ölçülmüş kanıtla teslim),
   D-66 (kanıtsız done yok), D-234 (aynı hatanın ilk vakası).
+
+## Kural Kapısı Üretim Anında Durur (D-239 — KAHİN kararı 2026-09-27)
+
+Bir kuralın mandalı yalnız **test** olursa, kural ihlali *commit sonrası* yakalanır —
+yani iş çoktan yapılmıştır. Üretim komutu varsa (`ata`, `guncelle`, `bitir`) kapı
+**o komuta** konur. Test mandal olarak kalır, kapı olarak değil.
+
+Bağlayıcı olan üç madde:
+1. Bir kuralın gövdesi (kontrol fonksiyonu) **tek dosyada** yaşar. Test ve üretim
+   komutu aynı gövdeyi çağırır; ikinci kopya yazmak D-211 ihlalidir.
+2. Kuralı çiğneyen girdi üretim komutundan **geçemez** — sıfır olmayan çıkış kodu.
+3. Geriye dönük düzeltme kapının ön koşulu **değildir**. Kapı bugünden ileri çalışır;
+   eski kirlilik mandalla dondurulur (D-220 deseni).
+
+**Neden.** Ölçüm: 9 brif şablonsuz yazılmıştı, **108 eksik bölüm**. `test_brief_sablon_denetim.py`
+kuralı doğru biliyordu ama `gorev_at.py ata` onu çağıramıyordu — kural gövdesi testin
+*içinde* yaşıyordu. Sonuç: uyumsuz brifle görev atanabiliyordu, ihlal ancak sonraki
+pytest koşusunda görünüyordu. Gövde [`scripts/brief_denetim.py`](scripts/brief_denetim.py:44)
+dosyasına taşındı; artık `ata` komutu uyumsuz brifte **çıkış kodu 7** ile durur.
+
+**Kök dizin için aynı kural — ama şimdi değil.** Ölçüm (2026-09-27): kökte **96** `.py`
+vardı; **3'ü sözdizimi hatalıydı** (hiç çalışmıyordu, `_ARSIV_bozuk_betik_2026-09-27/`
+klasörüne alındı → **93**). Kalanların **53'ü** panoya/`task_board.json`'a doğrudan
+erişiyor, **10'unda** docstring var, **0'ında** `argparse`. Bunlar D-221'in izin
+listesinde değil. Yine de **bugün taşınmıyorlar**: hiçbiri git'te takipli değil
+(`git ls-files` boş), yani taşıma geri alınamaz ve 53 dosyanın pano erişimi tek tek
+doğrulanmadan taşınırsa çalışan bir şeyi kırma riski ölçülmemiştir. D-221 zaten
+"kural önce kanamayı durdurur, içeriği tek tek temizlemez" diyor.
+
+**Tetikleyici koşul (bu olursa iş açılır):** kök `.py` sayısı **93'ü aşarsa** ya da
+bir ajan kökteki betiklerden birini iş akışında kullanmak zorunda kalırsa.
+Üst sınır **93**, yalnız küçülür (D-220).
+
+- **Mandal:** `tests/test_brief_sablon_denetim.py` (17 test, gövdeyi
+  `scripts/brief_denetim.py`'den import eder — ikiz mantık imkânsız).
+- **Referans:** D-217 (brif şablonu), D-211 (ikiz gövde yasağı), D-221 (kök izin
+  listesi), D-220 (tavan yalnız küçülür), D-66 (brif zorunlu).

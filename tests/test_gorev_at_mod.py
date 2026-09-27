@@ -20,6 +20,7 @@ sys.path.insert(0, str(ROOT / "src"))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 import gorev_at  # noqa: E402
+from brief_denetim import sablon_kopyala  # noqa: E402  (D-217 kapisi icin uyumlu brif)
 from src.company_master.orchestrator import task_board as tb  # noqa: E402
 from src.company_master.orchestrator import trigger  # noqa: E402
 
@@ -36,7 +37,7 @@ def izole_pano(tmp_path, monkeypatch):
     (tmp_path / "plans").mkdir(exist_ok=True)
     for ajan in ("ihsan", "utku", "salih", "yasu"):
         for tid in ("UI-01", "UI-02", "UI-03"):
-            (tmp_path / "plans" / f"brief_{ajan}_{tid}.md").write_text("brif", encoding="utf-8")
+            sablon_kopyala(tmp_path / "plans" / f"brief_{ajan}_{tid}.md")
     monkeypatch.setattr(tb, "AUTO_SYNC", False)
     monkeypatch.setattr(tb, "STATE_DIR", tmp_path)
     monkeypatch.setattr(tb, "TASK_BOARD", tmp_path / "task_board.json")

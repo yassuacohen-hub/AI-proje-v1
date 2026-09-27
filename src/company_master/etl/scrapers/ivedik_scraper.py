@@ -95,28 +95,13 @@ class IvedikScraper(BaseOsfbScraper):
         return detay
 
     def scrape(self, detay_al: bool = False) -> Iterator[BaseOsfbFirma]:
+        # D-235: sayfalama artık BaseOsfbScraper.sayfa_dongusu() şablonunda —
+        # tekrar/tekil/tavan korumalı. Çıktı "w" ile açılır (eski "a" kopya biriktiriyordu).
         self.log.info("BASLA İvedik OSB scraping (detayli=%s)", detay_al)
-        state = self._load_state()
-        toplam = state.get("total_records", 0)
-        file_mode = "a" if self.OUTPUT_PATH.exists() else "w"
-        with open(self.OUTPUT_PATH, file_mode, encoding="utf-8") as f:
-            sayfa = 1
-            while True:
-                if sayfa in state.get("completed_pages", []):
-                    self.log.info("Sayfa %d zaten tamamlandı, atlanıyor", sayfa)
-                    sayfa += 1
-                    continue
-                try:
-                    firmalar = self.fetch_firma_liste(sayfa)
-                except NotImplementedError:
-                    self.log.error("DETAYLI IMPLEMENTASYON GEREKLİ — scraper henüz aktif değil")
-                    break
-                except requests.RequestException as exc:
-                    self.log.error("HATA sayfa %d: %s", sayfa, exc)
-                    break
-                if not firmalar:
-                    self.log.info("Sayfa %d boş — scraping tamamlandı", sayfa)
-                    break
+        toplam = 0
+        state = {"completed_pages": [], "total_records": 0}
+        with open(self.OUTPUT_PATH, "w", encoding="utf-8") as f:
+            for sayfa, firmalar in self.sayfa_dongusu():
                 for firma in firmalar:
                     if detay_al and firma.slug:
                         time.sleep(self.RATE_LIMIT_SECONDS)
@@ -131,9 +116,7 @@ class IvedikScraper(BaseOsfbScraper):
                 state["completed_pages"].append(sayfa)
                 state["total_records"] = toplam
                 self._save_state(state)
-                self.log.info("Sayfa %d: %d firma (toplam: %d)", sayfa, len(firmalar), toplam)
-                sayfa += 1
-                time.sleep(self.RATE_LIMIT_SECONDS)
+                self.log.info("Sayfa %d: %d yeni firma (toplam: %d)", sayfa, len(firmalar), toplam)
         self.log.info("BITIS İvedik OSB — %d firma yazıldı: %s", toplam, self.OUTPUT_PATH)
 
 
