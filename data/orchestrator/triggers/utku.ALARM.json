@@ -30,5 +30,1781 @@
     "tetik_sayisi": 2,
     "uyari_tarihi": "2026-09-27T03:19:02",
     "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-27T03:24:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-27T03:24:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-27T03:29:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-27T03:29:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-27T03:34:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-27T03:34:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-27T03:39:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-27T03:39:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-27T03:44:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-27T03:44:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-27T03:49:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-27T03:49:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-27T03:54:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-27T03:54:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-27T03:59:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-27T03:59:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-27T04:04:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-27T04:04:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-27T04:09:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-27T04:09:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-27T04:14:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-27T04:14:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-27T04:19:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-27T04:19:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-27T04:19:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 1,
+    "uyari_tarihi": "2026-09-27T04:19:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 1. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-27T04:24:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-27T04:24:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-27T04:24:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 2,
+    "uyari_tarihi": "2026-09-27T04:24:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-27T04:29:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-27T04:29:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-27T04:29:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-27T04:29:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-27T04:34:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-27T04:34:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-27T04:34:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-27T04:34:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 18,
+    "uyari_tarihi": "2026-09-27T04:39:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 18. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 18,
+    "uyari_tarihi": "2026-09-27T04:39:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 18. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-27T04:39:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-27T04:39:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 19,
+    "uyari_tarihi": "2026-09-27T04:44:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 19. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 19,
+    "uyari_tarihi": "2026-09-27T04:44:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 19. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-27T04:44:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-27T04:44:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 20,
+    "uyari_tarihi": "2026-09-27T04:49:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 20. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 20,
+    "uyari_tarihi": "2026-09-27T04:49:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 20. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-27T04:49:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-27T04:49:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 21,
+    "uyari_tarihi": "2026-09-27T04:54:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 21. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 21,
+    "uyari_tarihi": "2026-09-27T04:54:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 21. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-27T04:54:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-27T04:54:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 22,
+    "uyari_tarihi": "2026-09-27T04:59:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 22. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 22,
+    "uyari_tarihi": "2026-09-27T04:59:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 22. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-27T04:59:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-27T04:59:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 23,
+    "uyari_tarihi": "2026-09-27T05:04:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 23. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 23,
+    "uyari_tarihi": "2026-09-27T05:04:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 23. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-27T05:04:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-27T05:04:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 24,
+    "uyari_tarihi": "2026-09-27T05:09:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 24. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 24,
+    "uyari_tarihi": "2026-09-27T05:09:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 24. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-27T05:09:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-27T05:09:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 25,
+    "uyari_tarihi": "2026-09-27T05:14:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 25. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 25,
+    "uyari_tarihi": "2026-09-27T05:14:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 25. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-27T05:14:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-27T05:14:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 26,
+    "uyari_tarihi": "2026-09-27T05:19:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 26. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 26,
+    "uyari_tarihi": "2026-09-27T05:19:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 26. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-27T05:19:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-27T05:19:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 27,
+    "uyari_tarihi": "2026-09-27T05:24:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 27. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 27,
+    "uyari_tarihi": "2026-09-27T05:24:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 27. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-27T05:24:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-27T05:24:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 28,
+    "uyari_tarihi": "2026-09-27T05:29:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 28. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 28,
+    "uyari_tarihi": "2026-09-27T05:29:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 28. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-27T05:29:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-27T05:29:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 29,
+    "uyari_tarihi": "2026-09-27T05:34:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 29. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 29,
+    "uyari_tarihi": "2026-09-27T05:34:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 29. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-27T05:34:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-27T05:34:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 30,
+    "uyari_tarihi": "2026-09-27T05:39:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 30. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 30,
+    "uyari_tarihi": "2026-09-27T05:39:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 30. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-27T05:39:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-27T05:39:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 31,
+    "uyari_tarihi": "2026-09-27T05:44:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 31. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 31,
+    "uyari_tarihi": "2026-09-27T05:44:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 31. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 18,
+    "uyari_tarihi": "2026-09-27T05:44:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 18. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 18,
+    "uyari_tarihi": "2026-09-27T05:44:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 18. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 32,
+    "uyari_tarihi": "2026-09-27T05:49:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 32. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 32,
+    "uyari_tarihi": "2026-09-27T05:49:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 32. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 19,
+    "uyari_tarihi": "2026-09-27T05:49:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 19. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 19,
+    "uyari_tarihi": "2026-09-27T05:49:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 19. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 33,
+    "uyari_tarihi": "2026-09-27T05:54:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 33. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 33,
+    "uyari_tarihi": "2026-09-27T05:54:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 33. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 20,
+    "uyari_tarihi": "2026-09-27T05:54:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 20. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 20,
+    "uyari_tarihi": "2026-09-27T05:54:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 20. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 34,
+    "uyari_tarihi": "2026-09-27T05:59:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 34. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 34,
+    "uyari_tarihi": "2026-09-27T05:59:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 34. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 21,
+    "uyari_tarihi": "2026-09-27T05:59:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 21. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 21,
+    "uyari_tarihi": "2026-09-27T05:59:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 21. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 35,
+    "uyari_tarihi": "2026-09-27T06:04:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 35. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 35,
+    "uyari_tarihi": "2026-09-27T06:04:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 35. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 22,
+    "uyari_tarihi": "2026-09-27T06:04:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 22. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 22,
+    "uyari_tarihi": "2026-09-27T06:04:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 22. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 36,
+    "uyari_tarihi": "2026-09-27T06:09:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 36. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 36,
+    "uyari_tarihi": "2026-09-27T06:09:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 36. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 23,
+    "uyari_tarihi": "2026-09-27T06:09:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 23. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 23,
+    "uyari_tarihi": "2026-09-27T06:09:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 23. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 37,
+    "uyari_tarihi": "2026-09-27T06:14:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 37. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 37,
+    "uyari_tarihi": "2026-09-27T06:14:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 37. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 24,
+    "uyari_tarihi": "2026-09-27T06:14:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 24. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 24,
+    "uyari_tarihi": "2026-09-27T06:14:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 24. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 38,
+    "uyari_tarihi": "2026-09-27T06:19:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 38. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 38,
+    "uyari_tarihi": "2026-09-27T06:19:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 38. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 25,
+    "uyari_tarihi": "2026-09-27T06:19:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 25. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 25,
+    "uyari_tarihi": "2026-09-27T06:19:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 25. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 39,
+    "uyari_tarihi": "2026-09-27T06:24:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 39. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 39,
+    "uyari_tarihi": "2026-09-27T06:24:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 39. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 26,
+    "uyari_tarihi": "2026-09-27T06:24:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 26. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 26,
+    "uyari_tarihi": "2026-09-27T06:24:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 26. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 40,
+    "uyari_tarihi": "2026-09-27T06:29:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 40. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 40,
+    "uyari_tarihi": "2026-09-27T06:29:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 40. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 27,
+    "uyari_tarihi": "2026-09-27T06:29:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 27. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 27,
+    "uyari_tarihi": "2026-09-27T06:29:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 27. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 41,
+    "uyari_tarihi": "2026-09-27T06:34:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 41. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 41,
+    "uyari_tarihi": "2026-09-27T06:34:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 41. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 28,
+    "uyari_tarihi": "2026-09-27T06:34:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 28. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 28,
+    "uyari_tarihi": "2026-09-27T06:34:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 28. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 42,
+    "uyari_tarihi": "2026-09-27T06:39:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 42. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 42,
+    "uyari_tarihi": "2026-09-27T06:39:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 42. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 29,
+    "uyari_tarihi": "2026-09-27T06:39:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 29. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 29,
+    "uyari_tarihi": "2026-09-27T06:39:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 29. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 43,
+    "uyari_tarihi": "2026-09-27T06:44:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 43. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 43,
+    "uyari_tarihi": "2026-09-27T06:44:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 43. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 30,
+    "uyari_tarihi": "2026-09-27T06:44:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 30. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 30,
+    "uyari_tarihi": "2026-09-27T06:44:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 30. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 44,
+    "uyari_tarihi": "2026-09-27T06:49:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 44. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 44,
+    "uyari_tarihi": "2026-09-27T06:49:02",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 44. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 31,
+    "uyari_tarihi": "2026-09-27T06:49:02",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 31. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 31,
+    "uyari_tarihi": "2026-09-27T06:49:02",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 31. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 45,
+    "uyari_tarihi": "2026-09-27T06:54:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 45. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 45,
+    "uyari_tarihi": "2026-09-27T06:54:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 45. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 32,
+    "uyari_tarihi": "2026-09-27T06:54:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 32. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 32,
+    "uyari_tarihi": "2026-09-27T06:54:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 32. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 46,
+    "uyari_tarihi": "2026-09-27T06:59:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 46. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 46,
+    "uyari_tarihi": "2026-09-27T06:59:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 46. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 33,
+    "uyari_tarihi": "2026-09-27T06:59:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 33. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 33,
+    "uyari_tarihi": "2026-09-27T06:59:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 33. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 47,
+    "uyari_tarihi": "2026-09-27T07:04:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 47. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 47,
+    "uyari_tarihi": "2026-09-27T07:04:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 47. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 34,
+    "uyari_tarihi": "2026-09-27T07:04:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 34. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 34,
+    "uyari_tarihi": "2026-09-27T07:04:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 34. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 48,
+    "uyari_tarihi": "2026-09-27T07:09:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 48. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 48,
+    "uyari_tarihi": "2026-09-27T07:09:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 48. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 35,
+    "uyari_tarihi": "2026-09-27T07:09:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 35. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 35,
+    "uyari_tarihi": "2026-09-27T07:09:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 35. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 49,
+    "uyari_tarihi": "2026-09-27T07:14:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 49. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 49,
+    "uyari_tarihi": "2026-09-27T07:14:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 49. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 36,
+    "uyari_tarihi": "2026-09-27T07:14:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 36. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 36,
+    "uyari_tarihi": "2026-09-27T07:14:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 36. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 50,
+    "uyari_tarihi": "2026-09-27T07:19:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 50. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 50,
+    "uyari_tarihi": "2026-09-27T07:19:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 50. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 37,
+    "uyari_tarihi": "2026-09-27T07:19:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 37. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 37,
+    "uyari_tarihi": "2026-09-27T07:19:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 37. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 51,
+    "uyari_tarihi": "2026-09-27T07:24:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 51. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 51,
+    "uyari_tarihi": "2026-09-27T07:24:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 51. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 38,
+    "uyari_tarihi": "2026-09-27T07:24:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 38. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 38,
+    "uyari_tarihi": "2026-09-27T07:24:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 38. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 52,
+    "uyari_tarihi": "2026-09-27T07:29:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 52. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 52,
+    "uyari_tarihi": "2026-09-27T07:29:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 52. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 39,
+    "uyari_tarihi": "2026-09-27T07:29:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 39. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 39,
+    "uyari_tarihi": "2026-09-27T07:29:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 39. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 53,
+    "uyari_tarihi": "2026-09-27T07:34:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 53. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 53,
+    "uyari_tarihi": "2026-09-27T07:34:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 53. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 40,
+    "uyari_tarihi": "2026-09-27T07:34:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 40. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 40,
+    "uyari_tarihi": "2026-09-27T07:34:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 40. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 54,
+    "uyari_tarihi": "2026-09-27T07:39:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 54. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 54,
+    "uyari_tarihi": "2026-09-27T07:39:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 54. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 41,
+    "uyari_tarihi": "2026-09-27T07:39:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 41. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 41,
+    "uyari_tarihi": "2026-09-27T07:39:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 41. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 55,
+    "uyari_tarihi": "2026-09-27T07:44:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 55. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 55,
+    "uyari_tarihi": "2026-09-27T07:44:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 55. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 42,
+    "uyari_tarihi": "2026-09-27T07:44:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 42. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 42,
+    "uyari_tarihi": "2026-09-27T07:44:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 42. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 56,
+    "uyari_tarihi": "2026-09-27T07:49:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 56. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 56,
+    "uyari_tarihi": "2026-09-27T07:49:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 56. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 43,
+    "uyari_tarihi": "2026-09-27T07:49:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 43. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 43,
+    "uyari_tarihi": "2026-09-27T07:49:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 43. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 57,
+    "uyari_tarihi": "2026-09-27T07:54:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 57. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 57,
+    "uyari_tarihi": "2026-09-27T07:54:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 57. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 44,
+    "uyari_tarihi": "2026-09-27T07:54:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 44. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 44,
+    "uyari_tarihi": "2026-09-27T07:54:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 44. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 58,
+    "uyari_tarihi": "2026-09-27T07:59:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 58. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 58,
+    "uyari_tarihi": "2026-09-27T07:59:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 58. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 45,
+    "uyari_tarihi": "2026-09-27T07:59:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 45. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 45,
+    "uyari_tarihi": "2026-09-27T07:59:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 45. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 59,
+    "uyari_tarihi": "2026-09-27T08:04:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 59. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 59,
+    "uyari_tarihi": "2026-09-27T08:04:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 59. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 46,
+    "uyari_tarihi": "2026-09-27T08:04:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 46. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 46,
+    "uyari_tarihi": "2026-09-27T08:04:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 46. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 60,
+    "uyari_tarihi": "2026-09-27T08:09:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 60. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 60,
+    "uyari_tarihi": "2026-09-27T08:09:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 60. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 47,
+    "uyari_tarihi": "2026-09-27T08:09:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 47. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 47,
+    "uyari_tarihi": "2026-09-27T08:09:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 47. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 61,
+    "uyari_tarihi": "2026-09-27T08:14:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 61. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 61,
+    "uyari_tarihi": "2026-09-27T08:14:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 61. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 48,
+    "uyari_tarihi": "2026-09-27T08:14:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 48. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 48,
+    "uyari_tarihi": "2026-09-27T08:14:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 48. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 62,
+    "uyari_tarihi": "2026-09-27T08:19:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 62. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 62,
+    "uyari_tarihi": "2026-09-27T08:19:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 62. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 49,
+    "uyari_tarihi": "2026-09-27T08:19:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 49. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 49,
+    "uyari_tarihi": "2026-09-27T08:19:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 49. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 63,
+    "uyari_tarihi": "2026-09-27T08:24:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 63. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-03",
+    "gorev_basligi": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
+    "tetik_sayisi": 63,
+    "uyari_tarihi": "2026-09-27T08:24:01",
+    "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 63. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "UI-11",
+    "gorev_basligi": "[UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)",
+    "tetik_sayisi": 50,
+    "uyari_tarihi": "2026-09-27T08:24:01",
+    "mesaj": "⚠️ UI-11 ([UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)) — utku 50. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "API-07",
+    "gorev_basligi": "[API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)",
+    "tetik_sayisi": 50,
+    "uyari_tarihi": "2026-09-27T08:24:01",
+    "mesaj": "⚠️ API-07 ([API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)) — utku 50. kez uyarıldı; henüz başlamadı."
   }
 ]

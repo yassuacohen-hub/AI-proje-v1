@@ -55,16 +55,11 @@ ATLANAN_DIZINLER = {
     ".continue",
     "workspace",
     "AI proje v1",
-    # ALTYAPI-MARKA-HUGGINN-01: data_worktree kapsam disi. Gerekce:
-    #   (a) AGENTS.md "Obsidian userIgnoreFilters" -> "data_worktree/" vault
-    #       kapsami disinda tutulur (vault kok = Huginn Data Insights).
-    #   (b) D-170: "worktree klasoru/data/ -> Huginn Data Insights/data_worktree/
-    #       (ham kopya, merge bekliyor)" — kaynak degil, ham/sentez bekleyen kopya.
-    #   (c) Ayni sinif veri kanonik konumda "data" ile zaten atlaniyor.
-    # SUSTURMA DEGIL: bu dosyalar tarihsel runtime raporu olup yasak yazimi
-    # ALINTILAR (marka karari / bulgu kaydi); genis kapsamda ne cikacagi rapora
-    # sayisiyla yazildi (bkz. ALTYAPI-MARKA-HUGGINN-01 raporu §4).
-    "data_worktree",
+    # D-228 (2026-09-27): "data_worktree" muafiyeti kaldirildi — dizin silindi
+    # (95 essiz dosya arsive tasindi). Muafiyet gerekcesi D-170'in "merge
+    # bekliyor" notuydu; 6 gun bekleyen merge merge degildir. Geri dogarsa
+    # tests/test_kok_izin_listesi.py::test_vault_icinde_paralel_veri_govdesi_yok
+    # kirmizi yanar; burada tekrar muaf yazmak yasak.
 }
 
 # B-1: yasak listeyi TANIMLAYAN dosyalar kendi kurallarina takilmasin.

@@ -1,5 +1,0 @@
-{"company_id": "firma-001", "company_name": "Ankara Teknoloji A.Ş.", "tax_number": "1234567890", "package": "Standart", "assigned_at": "2026-09-13T10:00:00", "segment": "B2B Teknoloji", "revenue": 5000000, "employee_count": 150}
-{"company_id": "firma-002", "company_name": "Istanbul Yazilim Ltd.", "tax_number": "0987654321", "package": "Temel", "assigned_at": "2026-09-12T14:30:00", "segment": "E-ticaret", "revenue": 1500000, "employee_count": 45}
-{"company_id": "firma-003", "company_name": "Anadolu Enerji A.Ş.", "tax_number": "1112223334", "package": "Profesyonel", "assigned_at": "2026-09-11T09:15:00", "segment": "Enerji", "revenue": 12000000, "employee_count": 300}
-{"company_id": "firma-004", "company_name": "Deniz Turizm A.Ş.", "tax_number": "4445556667", "package": "Temel", "assigned_at": "2026-09-10T16:45:00", "segment": "Turizm", "revenue": 3000000, "employee_count": 80}
-{"company_id": "firma-005", "company_name": "Yapı Merkezi A.Ş.", "tax_number": "7778889990", "package": "Kurumsal", "assigned_at": "2026-09-09T11:00:00", "segment": "Inşaat", "revenue": 25000000, "employee_count": 500}

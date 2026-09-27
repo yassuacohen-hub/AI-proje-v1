@@ -1,3 +1,0 @@
-scripts/check_email_dist.py
-scripts/test_growth.py
-src/company_master/schema/migrations/0006_normalize_compat.py

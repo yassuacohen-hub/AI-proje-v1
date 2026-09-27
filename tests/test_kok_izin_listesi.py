@@ -93,6 +93,26 @@ def test_kilavuz_canli_agacta(yol: str) -> None:
     )
 
 
+#: D-228 — vault ICINDE paralel veri govdesi yasagi.
+#: Bosluk olcumu (2026-09-27): YASAK_GOVDELER yalniz KOK'e bakiyordu; bu yuzden
+#: 'Huginn Data Insights/data_worktree/' (504 izlenen dosya, 50.3 MB) 6 gun
+#: yasadi ve ucuncu bir gorev panosu izi tasidi (orchestrator/gorev_panosu.md).
+VAULT_ICI_YASAK_DIZINLER = {"data_worktree", "data_eski", "data_backup"}
+
+
+def test_vault_icinde_paralel_veri_govdesi_yok() -> None:
+    """D-228: 'data' yaninda ikinci veri govdesi = ikinci SSOT = yanan zaman.
+
+    Kokteki mandal (test_ikiz_govde_yeniden_dogmadi) vault ICINI gormuyordu.
+    Bu test o bosluğu kapatir: ikiz veri dizini geri dogarsa kirmizi yanar.
+    """
+    dogan = {p.name for p in VAULT.iterdir() if p.is_dir()} & VAULT_ICI_YASAK_DIZINLER
+    assert not dogan, (
+        f"D-228 ihlali: vault icinde paralel veri govdesi -> {sorted(dogan)}. "
+        "Essiz icerik data/ veya arsive tasinir; ikiz dizin durmaz."
+    )
+
+
 def test_kok_sabit() -> None:
     """Kural 1: kok tasinmaz — 10.368 sabit yol buna bagli."""
     assert (KOK / "Huginn Data Insights").is_dir(), (
@@ -117,6 +137,12 @@ def test_d223_agents_mde_kayitli_ve_d172_emekli() -> None:
     assert "EMEKLİ — D-223" in metin, (
         "D-172 emekli isareti yok: eski kural hala yururlukte gorunuyor."
     )
+
+
+def test_d228_agents_mde_kayitli() -> None:
+    """D-228 metni SSOT'ta duruyor mu — test ile karar birbirini tutmali."""
+    metin = (VAULT / "AGENTS.md").read_text(encoding="utf-8")
+    assert "(D-228 " in metin, "D-228 karari AGENTS.md'de yok."
 
 
 if __name__ == "__main__":

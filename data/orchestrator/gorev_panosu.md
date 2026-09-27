@@ -83,3 +83,4 @@
 | API-07 | [API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s) | utku | 2026-09-27T05:35:00 |
 | UI-11 | [UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s) | utku | 2026-09-27T05:35:00 |
 | DOC-D227-01 | [DOC] D-227: karar numarasi yalniz AGENTS.md'den verilir + mandal | orkestrator | 2026-09-27T05:35:00 |
+| DOC-D228-01 | D-228: vault icinde paralel veri govdesi yasagi (data_worktree elendi) | kahin | 2026-09-27T08:26:16 |

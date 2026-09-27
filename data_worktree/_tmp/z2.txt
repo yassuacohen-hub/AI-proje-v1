@@ -1,1 +1,0 @@
-HATA: ALTYAPI-SQLITE-INIT zaten done — tekrar tetik düşmez (idempotency)

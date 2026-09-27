@@ -1,5 +1,0 @@
-{"segment_id": "SEG-001", "name": "B2B Teknoloji", "description": "Teknoloji sektörü B2B firmalari", "criteria": {"sektor": "teknoloji", "firma_tipi": "B2B", "min_hacim": 1000000}, "is_active": true, "created_at": "2026-09-01T00:00:00", "DEMO": true}
-{"segment_id": "SEG-002", "name": "E-ticaret Buyuk", "description": "Yuksek hacimli e-ticaret firmalari", "criteria": {"sektor": "e-ticaret", "min_hacim": 5000000}, "is_active": true, "created_at": "2026-09-01T00:00:00", "DEMO": true}
-{"segment_id": "SEG-003", "name": "Enerji & Cevre", "description": "Enerji ve CEVRE sektör firmalari", "criteria": {"sektor": "enerji", "min_hacim": 5000000}, "is_active": true, "created_at": "2026-09-02T00:00:00", "DEMO": true}
-{"segment_id": "SEG-004", "name": "Turizm Premium", "description": "Premium turizm operatorlari", "criteria": {"sektor": "turizm", "turu": "premium"}, "is_active": true, "created_at": "2026-09-02T00:00:00", "DEMO": true}
-{"segment_id": "SEG-005", "name": "Insaat Yuksek", "description": "Buyuk hacimli inşaat firmalari", "criteria": {"sektor": "insaat", "min_hacim": 10000000}, "is_active": false, "created_at": "2026-09-03T00:00:00", "DEMO": true}

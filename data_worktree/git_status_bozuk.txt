@@ -1,4 +1,0 @@
-?? find_poback.py
-?? src/company_master/destek.py
-?? src/company_master/ui/charts/__init__.py
-?? tests/test_destek.py

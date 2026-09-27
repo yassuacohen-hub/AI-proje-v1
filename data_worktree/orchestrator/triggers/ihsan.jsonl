@@ -1,8 +1,0 @@
-{"task_id": "TEST-D77-01", "durum": "done", "ajan_alma_tarih": null, "ajan_teslim_tarih": null}
-{"task_id": "ORKESTRA-KARAR-DEFTERI-FIX-01", "ajan": "ihsan", "talimat": "data/orchestrator/ORKESTRA-KARAR-DEFTERI-FIX-01_brif_2026-09-20_orkestrator.md", "tarih": "2026-09-20T19:34:26", "durum": "done", "alma_tarihi": "2026-09-20T19:44:33", "teslim_tarihi": "2026-09-20T19:50:27"}
-{"task_id": "ORKESTRA-BACKLOG-KANIT-01", "ajan": "ihsan", "talimat": "data/orchestrator/ORKESTRA-BACKLOG-KANIT-01_brif_2026-09-20_orkestrator.md", "tarih": "2026-09-20T20:14:17", "durum": "done"}
-{"task_id": "ALTYAPI-DECISION-LOG-ENCODE-01", "ajan": "ihsan", "talimat": "data/orchestrator/ALTYAPI-DECISION-LOG-ENCODE-01_brif_2026-09-20_orkestrator.md", "tarih": "2026-09-20T20:14:32", "durum": "done"}
-{"task_id": "ORKESTRA-BASLIK-D57-FIX-01", "ajan": "ihsan", "talimat": "data/orchestrator/ORKESTRA-BASLIK-D57-FIX-01_brif_2026-09-20_orkestrator.md", "tarih": "2026-09-20T20:45:20", "durum": "done", "alma_tarihi": "2026-09-20T20:58:52", "teslim_tarihi": "2026-09-20T21:05:14"}
-{"task_id": "ALTYAPI-KILIT-TEMIZLIK-V10-01", "ajan": "ihsan", "talimat": "data/orchestrator/ALTYAPI-KILIT-TEMIZLIK-V10-01_brif_2026-09-20_orkestrator.md", "tarih": "2026-09-20T20:45:40", "durum": "alindi"}
-{"task_id": "ORKESTRA-DECISION-LOG-FORMAT-01", "ajan": "ihsan", "talimat": "Brif: data/orchestrator/ORKESTRA-DECISION-LOG-FORMAT-01_brif_2026-09-20_orkestrator.md", "tarih": "2026-09-20T20:57:48", "durum": "done"}
-{"task_id": "RESEARCH-PONYTALE", "ajan": "ihsan", "talimat": "Brif (plans/brief_ihsan_RESEARCH-PONYTALE.md) okuyup ponytail vs caveman karşılaştırması yap, rapor yaz.", "tarih": "2026-09-20T23:29:12", "durum": "teslim", "alma_tarihi": "2026-09-21T00:05:41", "teslim_tarihi": "2026-09-21T00:08:13"}

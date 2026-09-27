@@ -1,3 +1,0 @@
-STATE_DIR: C:\Huginn Data Projesi\worktree klasoru\data\orchestrator
-YOL: C:\Huginn Data Projesi\worktree klasoru\data\orchestrator\triggers\salih.jsonl
-BEKLEYEN: []

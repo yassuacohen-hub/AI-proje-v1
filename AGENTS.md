@@ -1272,3 +1272,42 @@ python -m pytest tests/test_karar_numara_tekligi.py -q
 
 - **Referans:** D-223 (Tek Otorite: Vault), D-220 (doküman politikası, tavan deseni),
   D-224 (ölçülmeden görev açılmaz — tavanlar tahmin değil ölçümdür).
+
+---
+
+## Vault İçinde Paralel Veri Gövdesi Yasak (D-228 — KAHİN kararı 2026-09-27)
+
+**Kural:** `Huginn Data Insights/` altında `data/` dışında ikinci bir veri gövdesi
+duramaz. Yasaklı adlar: `data_worktree`, `data_eski`, `data_backup`.
+
+**Neden:** D-221 Kural 3 ikiz gövdeleri yasaklıyordu ama mandalı yalnız **kök** dizine
+bakıyordu. Bu kör nokta yüzünden `Huginn Data Insights/data_worktree/` 6 gün yaşadı:
+**504 izlenen dosya, 50.3 MB** ve içinde **üçüncü** bir görev panosu izi
+(`data_worktree/orchestrator/gorev_panosu.md`). D-222 "Tek Pano" derken vault içinde
+üçüncü pano duruyordu. Kural değil, kuralın mandalı eksikti.
+
+**Ölçüm (2026-09-27, tahmin değil):**
+
+| Ölçüt | Değer |
+|-------|-------|
+| `data_worktree` dosya | 505 (git'te izlenen 504) |
+| Yol olarak `data/`'da olmayan | 140 |
+| İçeriği `data/`'da başka yolda var | 45 |
+| **Gerçekten hiçbir yerde olmayan** | **95** |
+| `.backup_2026-09-21` ikizi | 77 |
+
+**Uygulama:** 95 eşsiz dosya `_ARSIV_data_worktree_essiz_2026-09-27/` altına
+kopyalandı, sonra `git rm -r data_worktree`. D-170'in "ham kopya, merge bekliyor"
+muafiyeti bitti: 6 gün bekleyen merge merge değil, çöptür.
+
+**Mandal:** [`tests/test_kok_izin_listesi.py::test_vault_icinde_paralel_veri_govdesi_yok`](tests/test_kok_izin_listesi.py:103)
+
+```bash
+python -m pytest tests/test_kok_izin_listesi.py -q
+```
+
+Negatif kontrol: `data_worktree` var olduğu anda ölçüldü →
+`AssertionError: D-228 ihlali: vault icinde paralel veri govdesi -> ['data_worktree']`.
+
+- **Referans:** D-221 (kök izin listesi — kör noktanın kaynağı), D-222 (Tek Pano),
+  D-170 (emekli: ham kopya muafiyeti), D-220 (geriye dönük temizlik değil, tavan).

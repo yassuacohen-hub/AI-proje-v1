@@ -1,4 +1,0 @@
-ZİNCİR OLUŞTURULDU: 3 görev (salih)
-  İlk: TEST-KAPSAM-OLCUM-01 → hemen tetiklendi
-  Sonraki: ALTYAPI-BENCHMARK-02, ALTYAPI-BILGI-TABANI-03 → zincir_bekleme
-  (Her görev tamamlanınca sonraki otomatik tetiklenir)

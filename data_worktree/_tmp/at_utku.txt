@@ -1,5 +1,0 @@
-ATANDI  : ALTYAPI-TEST-FAILURE-FIX-01 -> utku (P1)
-BASLIK  : [ALTYAPI] düzelt 4 pre-existing test failure → data/orchestrator/ALTYAPI-TEST-FAILURE-FIX-01_rapor_2026-09-20_uretim.md (2s)
-TETIK   : utku postasina dusecek; ajan bakarsa gorur.
-          python scripts/gorev_kutusu.py bak --ajan utku
-HAZIR   : Ajana gidip sadece 'başla' veya 'go' yazmanız yeterlidir (Kural dosyası postayı otomatik okur).
