@@ -580,9 +580,18 @@
   2. `migrations/0016_*.down.sql` biçimi — 3 adet, kökte,
   3. testin beklediği `migrations/down/0017_user_activity_log.sql` biçimi — karşılığı yok.
   Yani sorun **eksiklik değil, ad/yol çatallanması**. Yanlış teşhisle açılacak görev yanlış işi yaptıracaktı.
-- **20 kırmızının gerçek dağılımı:** 14'ü ölçüldü ve 3 göreve bağlandı (SEMA-01 şema/ad standardı, API-07 rota envanteri + `match` girdi doğrulaması, UI-11 başlık kalıbı). Kalan **6'sı tek başına çalıştırıldığında yeşil** → suite içi durum sızıntısı; bu ayrı bir borç, üçünün kapsamına karıştırılmaz.
+- **20 kırmızının gerçek dağılımı:** 14'ü ölçüldü ve 3 göreve bağlandı (VERI-04 şema/ad standardı, API-07 rota envanteri + `match` girdi doğrulaması, UI-11 başlık kalıbı). Kalan **6'sı tek başına çalıştırıldığında yeşil** → suite içi durum sızıntısı; bu ayrı bir borç, üçünün kapsamına karıştırılmaz.
 - **Güvenlik notu:** API-07 sadece envanter işi değildir. `/api/match?buyer_id=<geçersiz>` ucu 404 yerine `NoneType` hatası veriyor; bu güven sınırında **girdi doğrulama boşluğudur**, basitleştirilerek geçilmez.
 - **Mandal:** [`tests/test_pano_tekligi.py`](tests/test_pano_tekligi.py:60) — `plan` durumundaki her görev Markdown panoda görünmek zorunda; üç görev eklenirken bu test kırmızı verip kaydı zorladı (kural çalışıyor).
+- **Düzeltme (2026-09-27):** Bu kaydın ilk halinde görev kimliği `SEMA-01` yazılmıştı; `SEMA` kanonik ALAN değil (bkz. D-225). Kanonik kimlik **VERI-04**.
+
+## D-57 Kalıcı Panoda da Geçerli (D-225 — KAHİN kararı 2026-09-27)
+
+- **Kural:** D-57 kimlik/başlık kalıbı yalnızca görev açılışında değil, `data/orchestrator/task_board.json`'un **kalıcı halinde** de geçerlidir. Panodaki her **aktif** (done/archive/iptal dışı) kayıt, giriş kapısıyla aynı doğrulayıcıyı geçmek zorundadır. Kapanmış kayıtlar tarihsel veridir, geriye dönük kırmızılaştırılmaz.
+- **Tetikleyen hata — kendi hatam:** D-224 görevlerini panoya yazarken `gorev_at.py` yerine JSON'a doğrudan yazdım. `SEMA-01` / `[SEMA] ...` kimliği panoya girdi; `SEMA` kanonik ALAN listesinde (`UI, API, VERI, TEST, DOC, ALTYAPI, ORKESTRA`) yok. Başlıklarda ayrıca `->` ASCII oku kullanılmıştı, kalıp `→` istiyor.
+- **Asıl ders — yeşil test yanlış güven verir:** `pano_denetim.py` hata=0 dedi, `test_naming_audit.py` 9 yeşil verdi, hiçbiri yakalamadı. Doğrulayıcı sağlamdı ama **yalnızca giriş kapısına** bağlıydı; kapıyı atlayan yazım denetimsiz kaldı. Bir kural giriş kapısında zorlanıyorsa, o kuralın **kalıcı durumu** da ayrıca denetlenmelidir.
+- **Uygulama:** Görev yazımı `python scripts/gorev_at.py ...` üzerinden yapılır; JSON'a elle yazmak yasak değil ama mandal artık ihlali yakalar.
+- **Mandal:** [`tests/test_pano_d57_kalici.py`](tests/test_pano_d57_kalici.py:47) — giriş kapısındaki `_d57_dogrula` yeniden kullanılır (kural kopyalanmaz), ALAN öneki kanonik listeye karşı denetlenir, 3 bilinen ihlalle **negatif kontrol** yapılır. Yazıldığı anda 5 aktif kayıtta ihlal buldu; düzeltme sonrası 5 test yeşil.
 
 ## Hub-Önce Okuma (D-185 — KAHİN kararı 2026-09-22)
 - **Kural:** Bir konuda (osint, veri kalitesi, admin panel, müşteri paneli, araç/script, plan/rapor, teknik dok, orkestrasyon/ajan) çalışmaya başlamadan önce önce ilgili `Huginn Data Insights/hubs/*_HUB.md` dosyası okunur, oradan 2-3 hedef dosyaya inilir.
