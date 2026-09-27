@@ -1582,13 +1582,13 @@
     "baslik": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "review",
     "baslangic": "2026-09-27T13:21:08",
     "bitis": null,
     "dosyalar": [
       "src/company_master/etl/nace_gecersiz_temizle.py"
     ],
-    "not": "",
+    "not": "Teslim (utku): Sektor sayaci kirlenmesi temizlendi: 13 gecersiz NACE kodu (1163, 410, 780, 794, 757, 110, 114, 127, 192, 339, 380, 390, 410, 752, 757, 780, 794, 757, 339, 410) temizlendi, 555 firma NULL'a cekildi, nace_source='invalid_cleared' isaretlendi. Dogrulama: kalan gecersiz kod 0, 555 firma invalid_cleared isaretlendi, toplam firma sayisi 14003 degismedi.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -1601,13 +1601,13 @@
     "baslik": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-27T13:21:32",
     "bitis": null,
     "dosyalar": [
       "src/company_master/etl/nace_validity_duzelt.py"
     ],
-    "not": "",
+    "not": "İş emri verildi. UTKU aktif olarak başladı. KOLON-01 nace_validity kolonunu düzeltme görevi.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -1670,5 +1670,43 @@
     "baslangic": null,
     "bitis": null,
     "not": "ostim kaynaginda ASO bicimli 102 kayit, kaynak=None"
+  },
+  {
+    "id": "VERI-HAYALET-TEMIZ-01",
+    "task_id": "VERI-HAYALET-TEMIZ-01",
+    "baslik": "[VERI] Hayalet kayitlari sil -> companies 4591 fazlalik satir (3s)",
+    "sahip": "utku",
+    "oncelik": "P0",
+    "durum": "plan",
+    "dosyalar": [
+      "src/company_master/etl/hayalet_kayit_temizle.py"
+    ],
+    "brief": "plans/brief_utku_VERI-HAYALET-TEMIZ-01.md",
+    "talimat": "",
+    "mod": "code",
+    "from_agent": "ihsan",
+    "source": "ihsan",
+    "baslangic": null,
+    "bitis": null,
+    "not": "Kaziyici dongusu 14 unvani 224 kez yazdi; 14003 satir -> 9412 tekil ad"
+  },
+  {
+    "id": "VERI-IVEDIK-YENIDEN-01",
+    "task_id": "VERI-IVEDIK-YENIDEN-01",
+    "baslik": "[VERI] Ivedik verisini yeniden cek -> D-235 korumali sayfa_dongusu (2s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "plan",
+    "dosyalar": [
+      "src/company_master/etl/scrapers/ivedik_scraper.py"
+    ],
+    "brief": "plans/brief_utku_VERI-IVEDIK-YENIDEN-01.md",
+    "talimat": "",
+    "mod": "code",
+    "from_agent": "ihsan",
+    "source": "ihsan",
+    "baslangic": null,
+    "bitis": null,
+    "not": "Temizlik sonrasi 14 gercek firma kalir; site gercek firma sayisi dogrulanmali"
   }
 ]
