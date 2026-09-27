@@ -1648,3 +1648,38 @@ denetim yeni dosya üretmez, var olan dosyayı okur.
 
 - **Mandal:** `tests/test_pano_denetim_kayit.py` (6 test)
 - **Referans:** D-66 (kanıtsız done yok), [`pano_denetim.py`](scripts/pano_denetim.py:117).
+
+## Veri Ölçümü Canlı Veritabanında Yapılır (D-238 — KAHİN kararı 2026-09-27)
+
+Bu projede **tek üretim veritabanı Supabase Postgres'tir**. Firma verisiyle ilgili
+her sayı — teslim raporunda, denetimde, keşif notunda — canlı Postgres'ten ölçülür.
+Yerel `.db` / `.sqlite` dosyaları **yalnız test ve tarihsel yedek** amaçlıdır;
+hiçbirinden alınan sayı kabul ölçütü olamaz.
+
+Bağlayıcı olan dört madde:
+1. Bir veri sayısı bildirilirken **hangi kaynaktan** ölçüldüğü yazılır
+   (`Supabase / aws-0-eu-west-2.pooler`). Kaynağı yazılmayan sayı ölçülmemiş sayılır.
+2. Veri **değiştiren** iş (DELETE/UPDATE/migration) yerel SQLite'ta çalıştırılıp
+   canlı sayılarla raporlanamaz. Betik nereye bağlandıysa rapor orayı söyler.
+3. Denetçi, teslim raporundaki sayıyı **kendi bağımsız sorgusuyla** doğrular.
+   Eşleşmiyorsa teslim reddedilir — açıklama beklenmez.
+4. Yedek dosyası kanıttır: **satır sayısı + dosya yolu + örnek içerik** bildirilir.
+   Üç satırlık "FIRMA A" içeren dosya yedek değildir.
+
+**Neden.** VERI-HAYALET-TEMIZ-01 teslimi dört iddiada da çöktü: canlı `companies`
+14003 satır / 9412 tekil (temizlik öncesiyle birebir aynı), `uq_companies_legal_name`
+indeksi yok, yedek dosyası 3 satır test verisi. Sebep kötü niyet değil **yanlış yere
+bağlanmak**: betik yerel SQLite'ta koştu, rapor canlı sayılarla yazıldı.
+Aynı hatayı KAHİN de yaptı (D-234 öncesi NACE ölçümü `backups/…pre_dedup.db`
+üzerindeydi) — kural bu yüzden herkesi bağlar, sadece uygulayıcıyı değil.
+
+**Ölçülen kanıt (2026-09-27).** Depoda 9 SQLite dosyası var; `companies` tablosu
+yalnız ikisinde: `backups/company_master_pre_dedup_20260908_090326.db`
+(8313 satır / 8275 tekil, 2026-09-02 tarihli) ve `data/_tmp/ci_probe.db` (0 satır).
+Canlıyla fark **5690 satır** — yani iki taraf aynı veriyi tutmuyor, yedek 25 gün eski.
+`sqlite3` Python'un gömülü modülüdür, bu bilgisayarda ayrı kurulum yoktur;
+ajanların test için SQLite kullanması **doğrudur**, hata dosyanın varlığı değil
+**ölçümün oradan alınmasıdır**.
+
+- **Referans:** D-224 (ölçmeden karar yok), D-166 (ölçülmüş kanıtla teslim),
+  D-66 (kanıtsız done yok), D-234 (aynı hatanın ilk vakası).
