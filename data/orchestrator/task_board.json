@@ -1359,5 +1359,65 @@
     "mod": "code",
     "brief": "plans/brief_utku_VERI-03.md",
     "talimat": "D-222 devri: eski kimlik WK-03. VERI-02 sonrasi. Engellenme olcumu yoksa bu gorev yazilmaz."
+  },
+  {
+    "id": "SEMA-01",
+    "task_id": "SEMA-01",
+    "baslik": "Migration down dosyalarinda ad/yol duzeni tek standarda baglansin",
+    "durum": "plan",
+    "oncelik": "P1",
+    "sahip": "",
+    "mod": "code",
+    "baslangic": "2026-09-27",
+    "bitis": "",
+    "brief": "",
+    "source": "D-224 olcum",
+    "from_agent": "KAHIN",
+    "not": "OLCUM 2026-09-27: down dosyalari VAR, eksik degil; ad duzeni catallanmis. Uc ayri kalip: (a) migrations/down/0001_core.down.sql (16 adet), (b) migrations/0016..0018_*.down.sql (3 adet, kokte), (c) testin bekledigi migrations/down/0017_user_activity_log.sql. Once standart secilecek, sonra dosyalar+testler ona gore hizalanacak. 0019 down var ama 0019 up kontrol edilmeli.",
+    "dosyalar": [
+      "src/company_master/schema/migrations/",
+      "tests/test_migration_0017.py",
+      "tests/test_schema_validation.py"
+    ],
+    "talimat": "1) Uc kalibi say, kanonik kalibi sec ve AGENTS.md karar kaydina yaz. 2) Dosyalari kanonik kalba tasi (git mv). 3) test_schema_validation.py + test_migration_0017.py beklentilerini kanonige gore guncelle. 4) 5 kirmizi yesillenecek. Kabul: pytest tests/test_schema_validation.py tests/test_migration_0017.py = 0 failed."
+  },
+  {
+    "id": "API-07",
+    "task_id": "API-07",
+    "baslik": "11 yeni API rotasi envantere islensin + match 404 dogrulamasi",
+    "durum": "plan",
+    "oncelik": "P1",
+    "sahip": "",
+    "mod": "code",
+    "baslangic": "2026-09-27",
+    "bitis": "",
+    "brief": "",
+    "source": "D-224 olcum",
+    "from_agent": "KAHIN",
+    "not": "test_api_integration.py:194 BEKLENMEYEN YENI ROTALAR: telegram webhook x2, admin kvkk-mode, feature-flags, ltv-cac, mfa x5, login-mfa. Rotalar gercek, envanter listesi geride kalmis. Ayrica /api/match?buyer_id=gecersiz 404 yerine NoneType hatasi veriyor = girdi dogrulama bosluğu, guvenlik sinirinda.",
+    "dosyalar": [
+      "tests/test_api_integration.py",
+      "src/api/"
+    ],
+    "talimat": "1) 11 rotayi envanter listesine ekle (her biri icin gercekten var oldugunu dogrula). 2) match ucunda gecersiz buyer_id icin 404 don, NoneType hatasini gider. Kabul: pytest tests/test_api_integration.py = 0 failed."
+  },
+  {
+    "id": "UI-11",
+    "task_id": "UI-11",
+    "baslik": "admin_mfa + ana_kontrol ekranlari ADMIN-UI-10 kalibina tasinsin",
+    "durum": "plan",
+    "oncelik": "P2",
+    "sahip": "",
+    "mod": "code",
+    "baslangic": "2026-09-27",
+    "bitis": "",
+    "brief": "",
+    "source": "D-224 olcum",
+    "from_agent": "KAHIN",
+    "not": "admin_mfa: Section blogu yok + 2 adet st.subheader kalmis. ana_kontrol: 4 elle yazilmis ##### baslik (Kaynak Dolulugu, One Cikanlar, Oranlar, Gunluk Hacim). Tipografi olcegi ve anchor kimlikleri tutarsizlasiyor.",
+    "dosyalar": [
+      "tests/test_sayfa_iskeleti.py"
+    ],
+    "talimat": "1) admin_mfa icindeki subheader/markdown basliklari PageHeader+Section ile degistir. 2) ana_kontrol 4 basligi Section uzerine tasi. 3) MUAF sozluğune ekleme YAPMA. Kabul: pytest tests/test_sayfa_iskeleti.py = 0 failed."
   }
 ]

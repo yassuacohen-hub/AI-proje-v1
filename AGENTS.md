@@ -572,6 +572,18 @@
 - **Ders:** Dosya taşıyan her iş, aynı commit'te D-NN kaydı üretmek zorundadır. Kayıtsız taşıma = kural erimesi.
 - **Kurtarılan:** [`docs/OPERASYON_KILAVUZU.md`](docs/OPERASYON_KILAVUZU.md:1) (668 satır, ürün sahibi el kitabı) yedekten canlı ağaca geri alındı; içindeki 13 eski yol vault yoluna düzeltildi.
 
+## Kırmızı Test = Ölçülmeden Görev Açılmaz (D-224 — KAHİN kararı 2026-09-27)
+
+- **Kural:** Başarısız test, **hata mesajı okunmadan** panoya görev olarak yazılmaz. Görev kaydının `not` alanı ölçümü (kaç dosya, hangi yol, hangi assert) içermek zorundadır. "Şu dosya eksik" gibi dayanaksız teşhis yasak.
+- **Tetikleyen hata — kendi hatam:** 2026-09-26'da 20 kırmızının sebebi "migration down dosyaları yok" diye kaydedildi. Ölçüm yapılınca **yanlış çıktı**: down dosyaları var, üstelik üç ayrı adlandırma kalıbında:
+  1. `migrations/down/0001_core.down.sql` biçimi — 16 adet,
+  2. `migrations/0016_*.down.sql` biçimi — 3 adet, kökte,
+  3. testin beklediği `migrations/down/0017_user_activity_log.sql` biçimi — karşılığı yok.
+  Yani sorun **eksiklik değil, ad/yol çatallanması**. Yanlış teşhisle açılacak görev yanlış işi yaptıracaktı.
+- **20 kırmızının gerçek dağılımı:** 14'ü ölçüldü ve 3 göreve bağlandı (SEMA-01 şema/ad standardı, API-07 rota envanteri + `match` girdi doğrulaması, UI-11 başlık kalıbı). Kalan **6'sı tek başına çalıştırıldığında yeşil** → suite içi durum sızıntısı; bu ayrı bir borç, üçünün kapsamına karıştırılmaz.
+- **Güvenlik notu:** API-07 sadece envanter işi değildir. `/api/match?buyer_id=<geçersiz>` ucu 404 yerine `NoneType` hatası veriyor; bu güven sınırında **girdi doğrulama boşluğudur**, basitleştirilerek geçilmez.
+- **Mandal:** [`tests/test_pano_tekligi.py`](tests/test_pano_tekligi.py:60) — `plan` durumundaki her görev Markdown panoda görünmek zorunda; üç görev eklenirken bu test kırmızı verip kaydı zorladı (kural çalışıyor).
+
 ## Hub-Önce Okuma (D-185 — KAHİN kararı 2026-09-22)
 - **Kural:** Bir konuda (osint, veri kalitesi, admin panel, müşteri paneli, araç/script, plan/rapor, teknik dok, orkestrasyon/ajan) çalışmaya başlamadan önce önce ilgili `Huginn Data Insights/hubs/*_HUB.md` dosyası okunur, oradan 2-3 hedef dosyaya inilir.
 - **Gerekçe:** Hub, konunun küçültülmüş haritasıdır; doğrudan geniş klasör taraması veya çok sayıda dosya okuması yerine hub üzerinden hedefe gitmek token maliyetini düşürür.
