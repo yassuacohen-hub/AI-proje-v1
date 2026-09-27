@@ -1,7 +1,0 @@
-"""ETL boru hattı.
-
-V10/03_mimari/01_etl_mimarisi.md §1'deki akışı uygular:
-    SOURCE → RAW INGESTION → NORMALIZATION → VALIDATION →
-    ENTITY RESOLUTION → COMPANY MASTER → ENRICHMENT →
-    DATA QUALITY → SEARCH INDEX → INTELLIGENCE LAYER
-"""

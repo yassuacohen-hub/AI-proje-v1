@@ -1516,5 +1516,25 @@
     "mod": "code",
     "brief": "",
     "talimat": ""
+  },
+  {
+    "task_id": "ORKESTRA-D233-01",
+    "id": "ORKESTRA-D233-01",
+    "baslik": "KAHIN",
+    "sahip": "Referansli yol kopya sanildi: AI proje v1/ butun olarak silindi, teslim kapisi kirildi",
+    "oncelik": "D-233",
+    "durum": "done",
+    "baslangic": "2026-09-27T11:24:28",
+    "bitis": "2026-09-27T11:24:28",
+    "dosyalar": [
+      "tests/test_kok_izin_listesi.py",
+      "AGENTS.md"
+    ],
+    "not": "D-232 uygulamasi AI proje v1/ (787 dosya) butun olarak sildi; gorev_kutusu.py:480 _SSOT yolu kayboldu, B-14 hafiza kapisi her teslimi reddetti (test_cmd_teslim_basarili 1==0). Olcum: V10/ 94 dosya / 0 .py / 0 govde imzasi -> bilgi tabani, gercek govde 647 dosya. git checkout HEAD -- \"AI proje v1/V10\" ile geri alindi. Silme hunisine 4. soru eklendi: CANLI KOD BU YOLU OKUYOR MU (grep 43 isabet / 9 canli modul). Mandal: test_canli_kodun_okudugu_yol_diskte + negatif kontrol (ren V10 -> 1 failed, geri alindi). Tam suit 4337 passed / 0 failed.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "",
+    "talimat": ""
   }
 ]

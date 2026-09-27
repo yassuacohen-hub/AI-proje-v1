@@ -144,6 +144,71 @@ def test_gomulu_govde_kopyasi_yok() -> None:
     )
 
 
+#: D-232 — govde imzasi: vault'un tepesinde TEK olmasi gereken uygulama dosyalari.
+#: Bir kopyasi alt dizinlerde gorunuyorsa, o dizin ikinci bir govdedir; adi ne olursa.
+#: D-230 mandali ISIM imzasina bakiyordu (`worktree_klasoru_kopya`...). "AI proje v1"
+#: o listede yoktu -> 787 dosya / 400 .py gorunmedi. Her yeni isim yeni kacis demek.
+#: Isim degil YAPI tespiti: taklit etmek icin govde dosyasini yeniden adlandirmak gerekir,
+#: o da kopyayi calismaz kilar. `conftest.py` imza DEGIL: 4 test dizininde mesru cogul.
+GOVDE_IMZA_DOSYALARI = ("web_app.py", "app.py")
+
+#: Tarama disi: uretilmis/gecici agaclar, govde kopyasi degil.
+GOVDE_TARAMA_DISI = {
+    ".git", ".pytest_cache", "__pycache__", "node_modules",
+    ".venv", "venv", ".mypy_cache", ".ruff_cache", "test_reports",
+}
+
+#: D-220 tavani: 2026-09-27 olcumu 0 (AI proje v1 elendikten sonra). Yalniz KUCULEBILIR.
+IKINCI_GOVDE_TAVANI = 0
+
+
+def test_alt_dizinde_ikinci_govde_yok() -> None:
+    """D-232: govde kopyasi ISMINDEN degil YAPISINDAN yakalanir."""
+    bulunan = sorted(
+        p.relative_to(VAULT).as_posix()
+        for ad in GOVDE_IMZA_DOSYALARI
+        for p in VAULT.rglob(ad)
+        if p.parent != VAULT and not GOVDE_TARAMA_DISI & set(p.relative_to(VAULT).parts)
+    )
+    assert len(bulunan) <= IKINCI_GOVDE_TAVANI, (
+        f"D-232 ihlali: alt dizinde ikinci govde -> {bulunan} "
+        f"(tavan {IKINCI_GOVDE_TAVANI}). Essiz icerik arsive, govde silinir."
+    )
+
+
+def test_d232_agents_mde_kayitli() -> None:
+    """D-232 metni SSOT'ta duruyor mu."""
+    metin = (VAULT / "AGENTS.md").read_text(encoding="utf-8")
+    assert "(D-232 " in metin, "D-232 karari AGENTS.md'de yok."
+
+
+#: D-233 — canli kodun sabit yol referanslari. Silme hunisi "icerik essiz mi /
+#: git tutuyor mu" diye sordu; "CANLI KOD BURAYA BAKIYOR MU" diye sormadi.
+#: `AI proje v1/` 787 dosyayla silindi -> icindeki V10/ (94 dosya, 0 .py) en az
+#: 9 modulun okudugu bilgi tabaniydi; gorev_kutusu.py teslim kapisi kirildi.
+#: Referansi olan yol "kopya" degil BAGIMLILIKTIR; silinmeden once buraya bakilir.
+REFERANSLI_YOLLAR = (
+    "AI proje v1/V10",                       # gorev_kutusu, telegram_polling, wiki_automation
+    "hubs/ADMIN_DASHBOARD_HUB.md",           # B-14 hafiza kapisi
+    "data/orchestrator/task_board.json",     # pano SSOT
+)
+
+
+@pytest.mark.parametrize("yol", REFERANSLI_YOLLAR)
+def test_canli_kodun_okudugu_yol_diskte(yol: str) -> None:
+    """D-233: kod bu yolu okuyor; yoksa calisma zamaninda sessizce bozulur."""
+    assert (VAULT / yol).exists(), (
+        f"D-233 ihlali: `{yol}` yok ama canli kod onu okuyor. "
+        f"Silmeden once referansi ara; referansli yol kopya degil bagimliliktir."
+    )
+
+
+def test_d233_agents_mde_kayitli() -> None:
+    """D-233 metni SSOT'ta duruyor mu."""
+    metin = (VAULT / "AGENTS.md").read_text(encoding="utf-8")
+    assert "(D-233 " in metin, "D-233 karari AGENTS.md'de yok."
+
+
 def test_d230_agents_mde_kayitli() -> None:
     """D-230 metni SSOT'ta duruyor mu."""
     metin = (VAULT / "AGENTS.md").read_text(encoding="utf-8")

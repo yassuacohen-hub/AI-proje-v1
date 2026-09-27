@@ -1486,3 +1486,75 @@ kapsamı `bekliyor`a sızarsa test kırılır.
 - **Referans:** D-198 (arşiv mükerrer kapısıdır — mevcut araç kullanılmıyordu),
   D-220 (tavan yalnız küçülür), D-224 (ölçülmemiş kırmızıyla iş açılmaz — teşhisi
   bu kural çürüttü), D-186 (pano kanonik yol bekçisi).
+
+## Gövde Kopyası İsminden Değil Yapısından Tanınır (D-232 — KAHİN kararı 2026-09-27)
+
+**Kural:** İkinci gövde tespiti **isim imzasına** dayanmaz. Vault tepesinde tek
+olması gereken uygulama dosyaları (`web_app.py`, `app.py`) alt dizinlerin herhangi
+birinde görünüyorsa o dizin bir gövde kopyasıdır — adı ne olursa olsun. Tavan 0.
+Ayrıca: **izlenen bir ağaç silinirken `git log --all` üçüncü aşama huni geçersizdir**;
+ağacın kendi git öneki tarih kümesinden çıkarılmadan yapılan ölçüm her dosyayı
+"zaten arşivde" sayar.
+
+**Neden:** D-228 mandalı `VAULT.iterdir()` kullandı → yalnız üst seviye → derindeki
+kopya 6 gün yaşadı (D-230 bunu kapattı). D-230 mandalı derine bakıyor ama
+`GOMULU_KOPYA_IMZALARI` **sabit isim listesi**; `"AI proje v1"` o listede yoktu →
+787 dosya / 400 `.py` / 42.7 MB tam bir ikinci gövde görünmedi. Üstelik D-221
+`YASAK_GOVDELER` **"AI proje v1"'i adıyla içeriyordu**, ama yalnız `KOK` altına
+bakıyordu; gövde vault'un *içine* girince mandal hiç tetiklenmedi. Üç mandal, üç
+kör nokta, hepsi aynı hata: **isim ve yer sayıldı, yapı sayılmadı.** İsme bakan
+bekçi her yeni isme kör; yapıya bakan bekçiyi aldatmak için gövde dosyasının adını
+değiştirmek gerekir, o da kopyayı çalışmaz kılar.
+
+**Ölçüm (2026-09-27, tahmin değil):**
+
+| Ölçüm | Sonuç |
+|---|---|
+| Görev iddiası | "143 eşsiz dosya birleştir" |
+| Ağaç nerede | Kökte **değil**, `Huginn Data Insights/AI proje v1/` |
+| Ağaç | 787 dosya / 42.7 MB / 741 git'te izlenen / 400 `.py` |
+| İçerik-hash eşsiz | 496 |
+| + adı canlıda yok | 187 |
+| + adı git geçmişinde de yok (sahi eşsiz) | **41** (40 `.md` + 1 `.txt`, hepsi belge, **0 kod**) |
+| 41'den git'te izlenen | 40 |
+| **Gerçekten kaybolacak olan** | **1** → `V10/04_karşılaştırmalar/01_v9_ile_karsilastirma.md` (33.598 B) |
+| `.env` 5 anahtarı | 3'ü kökte eski değerle var, 2'si 6-7 karakter (placeholder) → kurtarılacak sır yok |
+| Gövde imzası alt dizinlerde | `web_app.py`+`app.py` → **0** (temizlik sonrası tavan) |
+
+**Uygulama:** 1 dosya `_ARSIV_ai_proje_v1_essiz_2026-09-27/`e kurtarıldı; 741 izlenen
+dosya `git rm -r --cached` ile elendi (geçmişte duruyor); ağaç diskten silindi.
+"Birleştir" yanlış fiildi: git'in zaten tuttuğu 40 dosya birleştirilmez.
+
+- **Mandal:** `tests/test_kok_izin_listesi.py::test_alt_dizinde_ikinci_govde_yok`
+  + `test_d232_agents_mde_kayitli`. Negatif kontrol: sahte `x/web_app.py` → kırmızı.
+- **Referans:** D-228 (paralel gövde yasağı), D-230 (derinlik), D-224 (iddia değil
+  ölçüm - "143" üç kez çürüdü), D-220 (tavan yalnız küçülür).
+- **DÜZELTME (aynı gün, D-233 ile):** D-232 uygulaması `AI proje v1/` dizinini
+  **bütün olarak** sildi. Yanlıştı. İçindeki `V10/` (94 dosya, **0 `.py`**, 0 gövde
+  imzası) ikinci gövde değil, en az 9 modülün okuduğu **canlı bilgi tabanıydı**.
+  `V10/` geri alındı; silinen gövde 787 → **647 dosya**. D-232 kuralı geçerli,
+  kapsamı düzeltildi: gövde = imza taşıyan ağaç, altındaki her dizin değil.
+
+---
+
+## Referanslı Yol Kopya Değil Bağımlılıktır (D-233 — KAHİN kararı 2026-09-27)
+
+- **Kural:** Bir ağaç silinmeden önce, üç aşamalı içerik hunisine (D-230) **dördüncü
+  soru** eklenir: *canlı kod bu yola bakıyor mu?* `grep` ile yol adı aranır; referans
+  varsa o yol kopya değil **bağımlılıktır**, silinemez. Referanslar mandalda donar.
+- **Neden:** D-232 uygulamasında huni "içerik eşsiz mi / git tutuyor mu" diye sordu.
+  41 sahi eşsiz dosyayı *"belge, kod değil → önemsiz"* diye eledim. Oysa belgeler
+  kodun **veri girdisiydi**. Sonuç: `gorev_kutusu.py:480` `_SSOT` yolu boşa düştü,
+  B-14 hafıza kapısı her teslimi reddetti — `test_cmd_teslim_basarili` kırmızıya döndü.
+  Test kırılmasaydı hata **sessizce üretimde** kalacaktı: `telegram_polling` `/wiki`,
+  `/state`, `/changelog` komutları, `dashboard.py` proje durumu, `oto_atama.py` TODO
+  okuması, `wiki_automation/*` dört modülü. Dosya silme hatası testle yakalandı;
+  bu şans değil kalıcı olmalı → mandal.
+- **Ölçüm:** `AI proje v1` git'te 741 dosya; `V10/` altı 94 dosya / **0 `.py`** /
+  0 gövde imzası → kod değil bilgi tabanı. Gerçek gövde = 647. `grep "AI proje v1"`
+  → **43 isabet / 9 canlı modül**. `V10/` geri alındıktan sonra 38 passed.
+- **Uygulama:** `git checkout HEAD -- "AI proje v1/V10"`. Vault'ta yalnız `V10`
+  kaldı; `src/`, `tests/`, `web_app.py`, `Dockerfile` vb. 647 dosya silinmiş durumda.
+- **Mandal:** `tests/test_kok_izin_listesi.py::test_canli_kodun_okudugu_yol_diskte`
+  (3 yol parametrik) + `test_d233_agents_mde_kayitli`.
+- **Referans:** D-232 (yapısal tespit), D-230 (huni), D-224 (ölçmeden karar yok).
