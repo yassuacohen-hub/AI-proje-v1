@@ -27,12 +27,18 @@ from company_master.db.connection import get_engine
 import json
 
 
+def _up_files() -> list[Path]:
+    """VERI-04: down dosyalarinin adi `NNNN_ad.down.sql` (nokta), `_down` degil.
+    Eski filtre `_down` ariyordu, down dosyalarini up sanıyordu."""
+    return [f for f in MIGRATIONS_DIR.glob("*.sql") if not f.name.endswith(".down.sql")]
+
+
 def test_migration_files_exist():
     """Migration dosyalarının varlığını test et."""
     # Up migration'lar
     expected_up = [f"{i:04d}" for i in range(1, 20)]
     
-    up_files = [f.stem for f in MIGRATIONS_DIR.glob("*.sql") if not f.stem.endswith("_down")]
+    up_files = [f.stem for f in _up_files()]
     
     for exp in expected_up:
         matching = [f for f in up_files if f.startswith(exp)]
@@ -50,7 +56,7 @@ def test_migration_down_files_content():
     assert len(down_files) >= 19, f"En az 19 down dosyası bekleniyor, bulundu: {len(down_files)}"
     
     # Her up migration için karşılık gelen down dosyası olmalı
-    up_files = [f.stem for f in MIGRATIONS_DIR.glob("*.sql") if not f.stem.endswith("_down")]
+    up_files = [f.stem for f in _up_files()]
     for up_stem in up_files:
         # Down dosyası aynı prefix ile başlamalı (örn: 0001_core -> 0001_core.down)
         down_match = [d for d in DOWN_DIR.glob("*.sql") if d.stem.startswith(up_stem)]
@@ -101,7 +107,7 @@ def test_migration_down_files_format():
 
 def test_fk_dependencies():
     """Foreign key dependency'lerinin migration sırasıyla tutarlılığını test et."""
-    up_files = sorted([f for f in MIGRATIONS_DIR.glob("*.sql") if not f.stem.endswith("_down")])
+    up_files = sorted(_up_files())
     
     # İlk dosya 0001_core.sql olmalı
     assert up_files[0].stem == "0001_core", "İlk migration 0001_core olmalı"
@@ -141,8 +147,7 @@ def test_companies_table_structure():
 def test_migrations_apply_rollback():
     """Migration'ların apply ve rollback testi (dry-run)."""
     for i in range(1, 20):
-        matching = list(MIGRATIONS_DIR.glob(f"{i:04d}_*.sql"))
-        matching = [f for f in matching if not f.stem.endswith("_down")]
+        matching = [f for f in _up_files() if f.name.startswith(f"{i:04d}_")]
         
         assert len(matching) == 1, f"Migration {i:04d} için tam 1 up dosyası bekleniyor"
         
