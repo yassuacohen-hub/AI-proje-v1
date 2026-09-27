@@ -1594,3 +1594,37 @@ dosya `git rm -r --cached` ile elendi (geçmişte duruyor); ağaç diskten silin
   kaybı demek olduğunu gösterdi.
 - **Mandal:** `tests/test_nace_referans_kurali.py`
 - **Referans:** D-224 (iddia değil ölçüm), VERI-NACE-SOZLUK-01 (uygulama görevi).
+
+## Veri Kaynağı Kuralları Dökümanda, Mandalda Zorlanır (D-235 — KAHİN kararı 2026-09-27)
+
+Kazıyıcı ve veri kaynağı kuralları **tek yerde** tutulur: `docs/VERI_KAYNAK_KURALLARI.md`
+(K-1…K-5, her satırda ölçülmüş sayı + mandal sütunu). Kural metni buraya kopyalanmaz.
+
+Bağlayıcı olan üç madde:
+1. Kural **mandalsız yazılmaz** — testi olmayan satır "tavsiye" etiketiyle durur, kural sayılmaz.
+2. Liste kazıyıcısı **kendi `while True` sayfalama döngüsünü yazamaz**; `BaseOsfbScraper.sayfa_dongusu()` kullanılır. Eski borç test içindeki `IZIN_LISTESI`'nde durur; liste yalnız **küçülür**.
+3. Veri kaynağı `kaynak_adi` + `kaynak_turu` (`osb`/`oda`) ile tanımlanır; güven seviyesi türden **türetilir**, elle atanmaz.
+
+**Neden.** İvedik kazıyıcısı 3375 satır yazdı, içinde **14 tekil firma** vardı (%99.6 kopya); WordPress geçersiz sayfaya 404 değil sayfa 1 döndüğü için `if not firmalar: break` asla tetiklenmedi. Aynı hata üç kazıyıcıda **bağımsızca** tekrar etti — ortak şablon ve makine denetimi olmadığı için. Mandal yazıldığı anda dördüncü bir borç (`baskent_scraper.py` ekleme kipi) kendiliğinden yakalandı ve düzeltildi.
+
+- **Mandal:** `tests/test_kaziyici_sablon_denetimi.py` (9), `tests/test_kaziyici_sayfa_dongusu.py` (5)
+- **Referans:** `docs/VERI_KAYNAK_KURALLARI.md`, VERI-KAZIYICI-DONGU-01, VERI-KAYNAK-TURU-01.
+
+## Tüketicisi Olmayan Çıktı Üretilmez (D-236 — KAHİN kararı 2026-09-27)
+
+Bir dosya/alan/rapor üretiliyorsa **onu otomatik okuyan bir tüketici** olmalı. Tüketicisi
+yalnız "elle bakılabilir" olan çıktı **üretilmez** — kaldırılır, bilgi asıl kaydına yazılır.
+
+Bağlayıcı olan iki madde:
+1. Yeni bir yan dosya (`*.ALARM.json`, `*_rapor.json`, `*.flag` vb.) eklenmeden önce
+   **hangi kodun onu okuyacağı** yazılır. Okuyan yoksa alan asıl kayda eklenir.
+2. Aynı bilgiyi iki yere yazmak **yasaktır**; ikinci kopya kaçınılmaz olarak bayatlar.
+
+**Neden.** `nobetci` her turda `<ajan>.ALARM.json` yazıyordu; `tetik_senk` her turda aynı
+dosyayı siliyordu. Ölçüm: canlı `triggers/` içinde **0 ALARM dosyası**, `_trash`/`_yedek`
+içinde **54 kopya** — üretici ile silici birbirini iptal eden ölü döngü kurmuştu. Dosyanın
+içeriği (`uyari_sayisi`, `uyari_tarihi`) zaten tetik kaydında duruyordu; tek tüketicisi iki
+elle komuttu. 282 kayıtlık `utku.ALARM.json`'ın **38'i kapalı görev içindi** — kopya bayatlamıştı.
+
+- **Mandal:** `tests/test_gorev_nobetci.py::test_tetik_firlat_olusturur_log` (ALARM üretilmediğini doğrular)
+- **Referans:** D-166 (kök kirliliği), [`nobetci.py`](src/company_master/orchestrator/nobetci.py:66).

@@ -27,7 +27,7 @@ def _data_dir(data_dir: Path | None) -> Path:
 
 # ---- Config -------------------
 def nobetci_ayar_oku(data_dir: Path | None = None) -> dict[str, Any]:
-    default = {"kademe_sn": 600, "kanallar": ["log", "alarm_dosyasi", "ses"], "telegram": False}
+    default = {"kademe_sn": 600, "kanallar": ["log", "ses"], "telegram": False}
     yol = _data_dir(data_dir) / "nobetci.json"
     if yol.exists():
         try:
@@ -63,29 +63,10 @@ def geciken_tetikler(data_dir: Path | None = None, kademe_sn: int | None = None)
                 rec["gecikme_dk"] = round(rec["gecikme_sn"] / 60, 1)
                 result.append(rec)
     return result
-# ---- Alarm dosyası ----------------
-def _alarm_dosyasi_yaz(data_dir: Path, ajan: str, task_id: str, task_title: str, sayi: int) -> Path:
-    # D-60: dosya adi her zaman kanonik ad (trigger.tetik_ekle de normalize eder).
-    dosya = _data_dir(data_dir) / "triggers" / f"{ajan_normalize(ajan) or ajan}.ALARM.json"
-    dosya.parent.mkdir(parents=True, exist_ok=True)
-    if dosya.exists():
-        try:
-            alarm = json.loads(dosya.read_text(encoding="utf-8"))
-            alarm = alarm if isinstance(alarm, list) else [alarm]
-        except Exception:
-            alarm = []
-    else:
-        alarm = []
-    alarm.append({
-        "ajan": ajan,
-        "task_id": task_id,
-        "gorev_basligi": task_title,
-        "tetik_sayisi": sayi,
-        "uyari_tarihi": _simdi(),
-        "mesaj": f"⚠️ {task_id} ({task_title}) — {ajan} {sayi}. kez uyarıldı; henüz başlamadı.",
-    })
-    tb.atomic_write_text(dosya, json.dumps(alarm, ensure_ascii=False, indent=2))
-    return dosya
+# D-236: ALARM dosyası kaldırıldı. Kimse otomatik okumuyordu (tek tüketici iki
+# elle komuttu) ve içeriği tetik kaydının (uyari_sayisi/uyari_tarihi) kopyasıydı.
+# 282 kaydın 38'i kapalı görevlere aitti. Bekleyen işler artık pano_denetim'in
+# tek satırında görünür.
 
 # ---- Ses uyarısı ----------------
 def _ses_uyarisi() -> None:
@@ -123,16 +104,15 @@ def tetik_firlat(kayit: dict[str, Any], ayar: dict[str, Any], data_dir: Path | N
     sayi = kayit.get("uyari_sayisi", 0) + 1
     tetik_uyari_ekle(ajan, task_id, data_dir)
     gorev = tb.gorev_getir(task_id) or {}
-    alarm = _alarm_dosyasi_yaz(data_dir, ajan, task_id, gorev.get("baslik", ""), sayi)
     log = data_dir / "trigger_log.jsonl"
     entry = {"ts": _simdi(), "kaynak": "nobetci", "ajan": ajan, "task_id": task_id,
-             "tetik_sayisi": sayi, "alarm_dosyasi": str(alarm)}
+             "tetik_sayisi": sayi}
     with open(log, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
     if "telegram" in ayar.get("kanallar", []) and ayar.get("telegram"):
         msg = f"🔔 ORCH-09 UYARI: {task_id} ({gorev.get('baslik','')}) — {ajan} {sayi}. kez uyandı."
         _telegram_mesajat(msg, ayar)
-    return {"task_id": task_id, "ajan": ajan, "tetik_sayisi": sayi, "alarm_dosyasi": str(alarm)}
+    return {"task_id": task_id, "ajan": ajan, "tetik_sayisi": sayi}
 
 def tetik_gecikmis_yap(ajan: str, task_id: str, sure_sn: int, data_dir: Path | None = None) -> None:
     yol = _data_dir(data_dir) / "triggers" / f"{ajan_normalize(ajan) or ajan}.jsonl"

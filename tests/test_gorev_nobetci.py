@@ -58,7 +58,7 @@ def test_tetik_uyari_ekle(izole_pano):
     assert "uyari_tarihi" in k
 
 
-def test_tetik_firlat_olusturur_alarm_log(izole_pano):
+def test_tetik_firlat_olusturur_log(izole_pano):
     k = _tetik_gec_kim()
     ayar = nobetci.nobetci_ayar_oku(izole_pano)
     nobetci.tetik_firlat(k, ayar, izole_pano)
@@ -66,8 +66,8 @@ def test_tetik_firlat_olusturur_alarm_log(izole_pano):
     log = json.loads(logline)
     assert log["kaynak"] == "nobetci"
     assert log["task_id"] == "T-09"
-    alarm = json.loads((izole_pano / "triggers" / "utku.ALARM.json").read_text(encoding="utf-8-sig"))
-    assert any(a["task_id"] == "T-09" for a in alarm)
+    # D-236: ALARM dosyası kaldırıldı — uyarı sayacı tetik kaydının kendisinde.
+    assert not (izole_pano / "triggers" / "utku.ALARM.json").exists()
 
 
 def test_geciken_tetikler_cok_geciken(izole_pano):

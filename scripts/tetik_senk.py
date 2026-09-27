@@ -89,7 +89,6 @@ def tetik_senk() -> dict[str, Any]:
 
     for ajan in ajanlar:
         tetik_dosya = data_dir / f"{ajan}.jsonl"
-        alarm_dosya = data_dir / f"{ajan}.ALARM.json"
 
         if not tetik_dosya.exists():
             rapor["detay"].append(f"ℹ️  {ajan}: tetik dosyası yok (posta boş)")
@@ -170,14 +169,6 @@ def tetik_senk() -> dict[str, Any]:
             rapor["sapma"] += 1  # yazilamayan duzeltme = uygulanmamis sapma
             rapor["detay"].append(f"❌ {ajan}.jsonl yazılamadı: {e}")
             continue
-
-        # Alarm dosyasını sıfırla (nöbetçi sayaçları artık gerekli değil)
-        if alarm_dosya.exists():
-            try:
-                alarm_dosya.unlink()
-                rapor["detay"].append(f"🧹 {ajan}.ALARM.json temizlendi")
-            except Exception as e:
-                rapor["detay"].append(f"⚠️  {ajan}.ALARM.json silinemedi: {e}")
 
     return rapor
 

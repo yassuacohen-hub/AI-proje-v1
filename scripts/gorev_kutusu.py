@@ -74,23 +74,14 @@ def cmd_bak(args: argparse.Namespace) -> int:
         print(f"[{args.ajan}] posta kutusu bos.")
         _yedek_blogu()
         return 0
-    alarm_yol = tb.STATE_DIR / "triggers" / f"{args.ajan}.ALARM.json"
-    alarm = []
-    if alarm_yol.exists():
-        try:
-            alarm = json.loads(alarm_yol.read_text(encoding="utf-8-sig"))
-            alarm = alarm if isinstance(alarm, list) else [alarm]
-        except (json.JSONDecodeError, ValueError):
-            alarm = []
-    uyarilar = {a.get("task_id"): a for a in alarm}
     print(f"[{args.ajan}] {len(bekleyen)} bekleyen gorev:")
     for k in bekleyen:
         gorev = tb.gorev_getir(k["task_id"]) or {}
         print(f"\n  {k['task_id']}  ({gorev.get('oncelik', '?')})  tetik: {k['tarih']}")
         print(f"  {gorev.get('baslik', '(pano basligi yok)')}")
         if k.get("uyari_tarihi"):
-            a = uyarilar.get(k["task_id"], {})
-            print(f"  ⚠️ UYARI ({k.get('uyari_sayisi', '?')}x) — tetik {a.get('uyari_tarihi', k['uyari_tarihi'])}'da firlatilmisti")
+            # D-236: uyarı bilgisi tetik kaydının kendisinde; ALARM kopyası kaldırıldı.
+            print(f"  ⚠️ UYARI ({k.get('uyari_sayisi', '?')}x) — tetik {k['uyari_tarihi']}'da firlatilmisti")
         talimat = _talimat_bul(args.ajan, k["task_id"], gorev)
         if talimat:
             print(f"  TALIMAT: {talimat}")
