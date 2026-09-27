@@ -593,6 +593,15 @@
 - **Uygulama:** Görev yazımı `python scripts/gorev_at.py ...` üzerinden yapılır; JSON'a elle yazmak yasak değil ama mandal artık ihlali yakalar.
 - **Mandal:** [`tests/test_pano_d57_kalici.py`](tests/test_pano_d57_kalici.py:47) — giriş kapısındaki `_d57_dogrula` yeniden kullanılır (kural kopyalanmaz), ALAN öneki kanonik listeye karşı denetlenir, 3 bilinen ihlalle **negatif kontrol** yapılır. Yazıldığı anda 5 aktif kayıtta ihlal buldu; düzeltme sonrası 5 test yeşil.
 
+## Test Modülü Global Durumu Bozamaz (D-226 — KAHİN kararı 2026-09-27)
+
+- **Kural:** Bir test modülünün **modül seviyesinde** (import anında çalışan gövdesinde) süreç genelindeki durumu değiştirmesi yasaktır. Yasaklı örnekler: `logging.disable()`, `logging.basicConfig()`, `logging.shutdown()`. Bu tür bir müdahale gerekiyorsa fixture içinde yapılır ve `finally` ile geri alınır; log gözlemi için `caplog` kullanılır.
+- **Gerekçe (ölçüm):** pytest, toplama (collection) aşamasında **tüm** test modüllerini import eder. Modül gövdesindeki çağrı böylece süitin en başında çalışır ve hiçbir yerde geri alınmaz — dosyanın kendi sınırını aşıp bütün süiti etkiler.
+- **Tetikleyen olay:** [`tests/test_dashboard_nav.py`](tests/test_dashboard_nav.py:46) Streamlit "missing ScriptRunContext" uyarısını bastırmak için modül seviyesinde `logging.disable(logging.WARNING)` çağırıyordu. Sonuç: `test_error_handling.py`'deki 3 test **tek başına yeşil, tam süitte kırmızı**. Ölçüm: satır kaldırıldığında gürültü geri gelmedi ve 3 kırmızı yeşile döndü — bastırma zaten gereksizdi.
+- **Asıl ders — "izole yeşil" teşhis değildir, semptomdur:** Bir test tek başına geçip süitte düşüyorsa mesele o testte değil, **başka bir modülün bıraktığı durumdadır**. Kaynağı bulmadan o teste dokunmak yanlış görev açar (bkz. D-224). Kök neden, süreç genelinde paylaşılan durum (logging, env, `sys.modules`, singleton, monkeypatch artığı) aranarak bulunur.
+- **Mandal:** [`tests/test_global_logging_kirlenmesi.py`](tests/test_global_logging_kirlenmesi.py:71) — iki katmanlı: **kaynak** katmanı AST ile tüm `tests/test_*.py` dosyalarının modül gövdesini tarar (fonksiyon/fixture içi serbest), **davranış** katmanı süit çalışırken `logging.root.manager.disable == 0` olduğunu doğrular. Negatif kontrol yapıldı: satır geri eklendiğinde mandal 2 testle yakaladı.
+- **Etki:** Tam süit kırmızı sayısı **20 → 17 → 14**. Kalan 14 kırmızı tam olarak 3 açık göreve denk düşüyor (API-07: 2, VERI-04: 9, UI-11: 3); süitte başka sızıntı yok.
+
 ## Hub-Önce Okuma (D-185 — KAHİN kararı 2026-09-22)
 - **Kural:** Bir konuda (osint, veri kalitesi, admin panel, müşteri paneli, araç/script, plan/rapor, teknik dok, orkestrasyon/ajan) çalışmaya başlamadan önce önce ilgili `Huginn Data Insights/hubs/*_HUB.md` dosyası okunur, oradan 2-3 hedef dosyaya inilir.
 - **Gerekçe:** Hub, konunun küçültülmüş haritasıdır; doğrudan geniş klasör taraması veya çok sayıda dosya okuması yerine hub üzerinden hedefe gitmek token maliyetini düşürür.
