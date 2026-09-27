@@ -862,5 +862,845 @@
     "tetik_sayisi": 2,
     "uyari_tarihi": "2026-09-27T13:34:02",
     "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 2. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 126,
+    "uyari_tarihi": "2026-09-27T13:39:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 126. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-27T13:39:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-27T13:39:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 3,
+    "uyari_tarihi": "2026-09-27T13:39:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 3. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 127,
+    "uyari_tarihi": "2026-09-27T13:44:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 127. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-27T13:44:01",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-27T13:44:01",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 4,
+    "uyari_tarihi": "2026-09-27T13:44:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 4. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 128,
+    "uyari_tarihi": "2026-09-27T13:49:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 128. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-27T13:49:01",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-27T13:49:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 5,
+    "uyari_tarihi": "2026-09-27T13:49:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 5. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 129,
+    "uyari_tarihi": "2026-09-27T13:54:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 129. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-27T13:54:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-27T13:54:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 6,
+    "uyari_tarihi": "2026-09-27T13:54:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 6. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 130,
+    "uyari_tarihi": "2026-09-27T13:59:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 130. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-27T13:59:01",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-27T13:59:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 7,
+    "uyari_tarihi": "2026-09-27T13:59:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 7. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 131,
+    "uyari_tarihi": "2026-09-27T14:04:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 131. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-27T14:04:01",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-27T14:04:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 8,
+    "uyari_tarihi": "2026-09-27T14:04:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 8. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 132,
+    "uyari_tarihi": "2026-09-27T14:09:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 132. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-27T14:09:01",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-27T14:09:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 9,
+    "uyari_tarihi": "2026-09-27T14:09:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 9. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 133,
+    "uyari_tarihi": "2026-09-27T14:14:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 133. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-27T14:14:01",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-27T14:14:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 10,
+    "uyari_tarihi": "2026-09-27T14:14:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 10. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 134,
+    "uyari_tarihi": "2026-09-27T14:19:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 134. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-27T14:19:01",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-27T14:19:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 11,
+    "uyari_tarihi": "2026-09-27T14:19:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 11. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 135,
+    "uyari_tarihi": "2026-09-27T14:24:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 135. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-27T14:24:01",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-27T14:24:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 12,
+    "uyari_tarihi": "2026-09-27T14:24:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 12. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 136,
+    "uyari_tarihi": "2026-09-27T14:29:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 136. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-27T14:29:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-27T14:29:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 13,
+    "uyari_tarihi": "2026-09-27T14:29:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 13. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 137,
+    "uyari_tarihi": "2026-09-27T14:34:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 137. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-27T14:34:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-27T14:34:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 14,
+    "uyari_tarihi": "2026-09-27T14:34:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 14. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 138,
+    "uyari_tarihi": "2026-09-27T14:39:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 138. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-27T14:39:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-27T14:39:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 15,
+    "uyari_tarihi": "2026-09-27T14:39:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 15. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 139,
+    "uyari_tarihi": "2026-09-27T14:44:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 139. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-27T14:44:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-27T14:44:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 16,
+    "uyari_tarihi": "2026-09-27T14:44:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 16. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 140,
+    "uyari_tarihi": "2026-09-27T14:49:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 140. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-27T14:49:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-27T14:49:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 17,
+    "uyari_tarihi": "2026-09-27T14:49:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 17. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 141,
+    "uyari_tarihi": "2026-09-27T14:54:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 141. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 18,
+    "uyari_tarihi": "2026-09-27T14:54:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 18. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 18,
+    "uyari_tarihi": "2026-09-27T14:54:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 18. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 18,
+    "uyari_tarihi": "2026-09-27T14:54:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 18. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 142,
+    "uyari_tarihi": "2026-09-27T14:59:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 142. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 19,
+    "uyari_tarihi": "2026-09-27T14:59:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 19. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 19,
+    "uyari_tarihi": "2026-09-27T14:59:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 19. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 19,
+    "uyari_tarihi": "2026-09-27T14:59:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 19. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 143,
+    "uyari_tarihi": "2026-09-27T15:04:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 143. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 20,
+    "uyari_tarihi": "2026-09-27T15:04:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 20. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 20,
+    "uyari_tarihi": "2026-09-27T15:04:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 20. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 20,
+    "uyari_tarihi": "2026-09-27T15:04:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 20. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 144,
+    "uyari_tarihi": "2026-09-27T15:09:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 144. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 21,
+    "uyari_tarihi": "2026-09-27T15:09:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 21. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 21,
+    "uyari_tarihi": "2026-09-27T15:09:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 21. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 21,
+    "uyari_tarihi": "2026-09-27T15:09:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 21. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 145,
+    "uyari_tarihi": "2026-09-27T15:14:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 145. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 22,
+    "uyari_tarihi": "2026-09-27T15:14:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 22. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 22,
+    "uyari_tarihi": "2026-09-27T15:14:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 22. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 22,
+    "uyari_tarihi": "2026-09-27T15:14:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 22. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 146,
+    "uyari_tarihi": "2026-09-27T15:19:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 146. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 23,
+    "uyari_tarihi": "2026-09-27T15:19:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 23. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 23,
+    "uyari_tarihi": "2026-09-27T15:19:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 23. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 23,
+    "uyari_tarihi": "2026-09-27T15:19:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 23. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 147,
+    "uyari_tarihi": "2026-09-27T15:24:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 147. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 24,
+    "uyari_tarihi": "2026-09-27T15:24:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 24. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 24,
+    "uyari_tarihi": "2026-09-27T15:24:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 24. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 24,
+    "uyari_tarihi": "2026-09-27T15:24:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 24. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 148,
+    "uyari_tarihi": "2026-09-27T15:29:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 148. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 25,
+    "uyari_tarihi": "2026-09-27T15:29:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 25. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 25,
+    "uyari_tarihi": "2026-09-27T15:29:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 25. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 25,
+    "uyari_tarihi": "2026-09-27T15:29:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 25. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 149,
+    "uyari_tarihi": "2026-09-27T15:34:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 149. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 26,
+    "uyari_tarihi": "2026-09-27T15:34:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 26. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "gorev_basligi": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
+    "tetik_sayisi": 26,
+    "uyari_tarihi": "2026-09-27T15:34:02",
+    "mesaj": "⚠️ VERI-NACE-TEMIZ-01 ([VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)) — utku 26. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 26,
+    "uyari_tarihi": "2026-09-27T15:34:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 26. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 150,
+    "uyari_tarihi": "2026-09-27T15:39:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 150. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 27,
+    "uyari_tarihi": "2026-09-27T15:39:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 27. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 27,
+    "uyari_tarihi": "2026-09-27T15:39:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 27. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 151,
+    "uyari_tarihi": "2026-09-27T15:44:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 151. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 28,
+    "uyari_tarihi": "2026-09-27T15:44:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 28. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 28,
+    "uyari_tarihi": "2026-09-27T15:44:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 28. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 152,
+    "uyari_tarihi": "2026-09-27T15:49:02",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 152. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-COKLU-01",
+    "gorev_basligi": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "tetik_sayisi": 29,
+    "uyari_tarihi": "2026-09-27T15:49:02",
+    "mesaj": "⚠️ VERI-NACE-COKLU-01 ([VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)) — utku 29. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-NACE-KOLON-01",
+    "gorev_basligi": "[VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)",
+    "tetik_sayisi": 29,
+    "uyari_tarihi": "2026-09-27T15:49:02",
+    "mesaj": "⚠️ VERI-NACE-KOLON-01 ([VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)) — utku 29. kez uyarıldı; henüz başlamadı."
   }
 ]

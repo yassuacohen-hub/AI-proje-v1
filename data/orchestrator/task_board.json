@@ -1550,7 +1550,7 @@
     "dosyalar": [
       "src/company_master/etl/nace_sozluk_yukle.py"
     ],
-    "not": "",
+    "not": "DENETIM: sartli kabul - 566 kodun title'i bos, 42 dal eksik",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -1563,13 +1563,13 @@
     "baslik": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "beklemede",
     "baslangic": "2026-09-27T13:19:21",
     "bitis": null,
     "dosyalar": [
       "src/company_master/etl/nace_coklu_ata.py"
     ],
-    "not": "",
+    "not": "DENETIM: 21/14003 satir; VERI-KAYNAK-BAG-01 bitmeden tavan 33",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -1582,7 +1582,7 @@
     "baslik": "[VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-09-27T13:21:08",
     "bitis": null,
     "dosyalar": [
@@ -1613,5 +1613,62 @@
     "mod": "code",
     "brief": "plans/brief_utku_VERI-NACE-KOLON-01.md",
     "talimat": "Brif: plans/brief_utku_VERI-NACE-KOLON-01.md. ONKOSUL YOK, bagimsiz. OLCULDU (canli): companies.nace_validity kolonuna NACE KODU yazilmis — 86 satir ('41.00.02','35.12.00' vb). Bu kolon gecerlilik ETIKETI tasimali (unknown/medium/fallback), kod tasimamali. Yap: desen ile bul, nace_code bossa kodu oraya tasi + validity'ye uygun etiket yaz; nace_code doluysa CELISKIYI DOK, hangisi dogru UYDURMA. Mevcut etiket kumesini once sorgula, yeni etiket icat etme. Kabul: validity icinde kod deseni 0 satir. ONEMLI: sadece veriyi duzeltmeyin, bu iki alani takas eden YAZICI KODUNU da bulun — yoksa 86 yarin 200 olur."
+  },
+  {
+    "id": "VERI-KAYNAK-BAG-01",
+    "task_id": "VERI-KAYNAK-BAG-01",
+    "baslik": "[VERI] Firma-kaynak bagini kur -> source_records.company_id (4s)",
+    "sahip": "utku",
+    "oncelik": "P0",
+    "durum": "plan",
+    "dosyalar": [
+      "src/company_master/etl/kaynak_firma_bagla.py"
+    ],
+    "brief": "plans/brief_utku_VERI-KAYNAK-BAG-01.md",
+    "talimat": "",
+    "mod": "code",
+    "from_agent": "ihsan",
+    "source": "ihsan",
+    "baslangic": null,
+    "bitis": null,
+    "not": "COKLU-01/TEMIZ-01/SEKTOR-01 onkosulu; company_id kolonu yok, tavan 33 kayit"
+  },
+  {
+    "id": "VERI-SEKTOR-01",
+    "task_id": "VERI-SEKTOR-01",
+    "baslik": "[VERI] Sektor adini topla ve normallestir -> 9689 kayit (3s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "plan",
+    "dosyalar": [
+      "src/company_master/etl/sektor_normalize.py"
+    ],
+    "brief": "plans/brief_utku_VERI-SEKTOR-01.md",
+    "talimat": "",
+    "mod": "code",
+    "from_agent": "ihsan",
+    "source": "ihsan",
+    "baslangic": null,
+    "bitis": null,
+    "not": "raw_payload.sektor 9689 dolu, companies'te sektor kolonu yok"
+  },
+  {
+    "id": "VERI-KAYNAK-SIZINTI-01",
+    "task_id": "VERI-KAYNAK-SIZINTI-01",
+    "baslik": "[VERI] Kaynak sizintisini duzelt -> ostim icinde 102 ASO kaydi (2s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "plan",
+    "dosyalar": [
+      "src/company_master/etl/kaynak_sizinti_duzelt.py"
+    ],
+    "brief": "plans/brief_utku_VERI-KAYNAK-SIZINTI-01.md",
+    "talimat": "",
+    "mod": "code",
+    "from_agent": "ihsan",
+    "source": "ihsan",
+    "baslangic": null,
+    "bitis": null,
+    "not": "ostim kaynaginda ASO bicimli 102 kayit, kaynak=None"
   }
 ]

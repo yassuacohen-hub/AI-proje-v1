@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-27T11:31:48",
+  "timestamp": "2026-09-27T15:50:49",
   "status": "ok",
   "uygula": false,
   "bulgular": [
@@ -40,8 +40,43 @@
     },
     {
       "id": "VERI-03",
-      "durum": "plan",
+      "durum": "review",
       "update": "2026-09-27T03:07"
+    },
+    {
+      "id": "VERI-NACE-SOZLUK-01",
+      "durum": "aktif",
+      "update": "2026-09-27T13:11"
+    },
+    {
+      "id": "VERI-NACE-COKLU-01",
+      "durum": "beklemede",
+      "update": "2026-09-27T13:19"
+    },
+    {
+      "id": "VERI-NACE-TEMIZ-01",
+      "durum": "aktif",
+      "update": "2026-09-27T13:21"
+    },
+    {
+      "id": "VERI-NACE-KOLON-01",
+      "durum": "plan",
+      "update": "2026-09-27T13:21"
+    },
+    {
+      "id": "VERI-KAYNAK-BAG-01",
+      "durum": "plan",
+      "update": null
+    },
+    {
+      "id": "VERI-SEKTOR-01",
+      "durum": "plan",
+      "update": null
+    },
+    {
+      "id": "VERI-KAYNAK-SIZINTI-01",
+      "durum": "plan",
+      "update": null
     }
   ],
   "duzeltilen": [],

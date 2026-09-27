@@ -198,6 +198,43 @@ Bu tablo dolmadan şu üç iş yapılamaz — hepsi referans listeye bağlı:
 Canlı DB'de 14003 firma var. Ölçümlerimin tamamı salt-okunur yapıldı.
 Yazma adımında **önce yedek**, sonra sınırlı parti (örn. 100 satır) deneyin.
 
+## 8. DENETİM (2. tur) — ŞARTLI KABUL
+
+Canlı veritabanında ölçtüm, iş **gerçekten yapılmış**:
+
+| Kabul ölçütü | Ölçüm | Hüküm |
+|---|---|---|
+| `nace_codes` > 0 | **2097** satır (önce 0) | ✅ |
+| Üç seviye dolu | seviye 1:11, 2:71, 4:484, 6:1531 | ✅ dört seviye |
+| `47.79` ayrı satır (türetme) | var | ✅ D-234'e uygun |
+| Yetim kod (ebeveyni yok) | **0** | ✅ ağaç tutarlı |
+
+### 8.1 KUSUR-1 — türetilen dalların başlığı BOŞ
+
+`title` boş olan kod sayısı: **566**. Bu sayı, seviye 1+2+4'ün (11+71+484)
+**tamamına eşit**. Yani xlsx'ten gelen 6 haneliler adlandırılmış, türetilen üst
+dallar **adsız** kalmış.
+
+Sonucu: panoda `29.10` gösterildiğinde kullanıcı boş etiket görür. Üst seviye
+kırılımı ("İmalat", "Makine ve ekipman imalatı") **hiç yapılamaz** — ki bu
+seviyelerin varlık sebebi tam olarak budur.
+
+Düzeltme: bölüm/kısım/grup adları resmi TÜİK bölüm listesinden ya da xlsx'teki
+üst kırılım kolonlarından doldurulacak. Tablo yeniden kurulmayacak, `title`
+güncellemesi yeter.
+
+### 8.2 KUSUR-2 — sözlük eksik dallı (kapsam açığı)
+
+`companies.nace_code`'daki değerlerden **4056 firma / 42 ayrı kod** geçerli
+`NN.NN` biçiminde ama sözlükte **yok**. Bunların 24'ünün 2 haneli bölümü sözlükte
+var, dalı yok → **ağaç doğru, dal eksik**.
+
+Kabul ölçütündeki *"eşleşme oranı %92.9"* hedefi bu yüzden tutmuyor. Hangi
+kaynağın atlandığı (üç json'dan biri veya OSTİM türevi) bulunup eklenmeli.
+
+*Not:* ayrıca 555 firma sektör sayacı çöpü taşıyor (`'1163'`, `'794'`) — o
+TEMIZ-01'in işi, bu görevin kusuru değil.
+
 ---
 
 *ponytail: xlsx doğrudan indirme + upsert. Skipped: NACE sürüm geçmişi tablosu

@@ -80,6 +80,51 @@ hepsinde tek kod da olabilir; o durumda çoklu NACE **şimdilik veri olarak
 yok** demektir ve iş, gelecekte gelecek kaynaklar için altyapı hazırlığına
 dönüşür. Bu da geçerli bir sonuç — ama ölçülerek söylenmeli.
 
+## 6. DENETİM (2. tur) — bu iş REDDEDİLDİ, sebebi utku değil
+
+Utku `src/company_master/etl/nace_coklu_yaz.py` yazdı ve çalıştırdı. Canlı
+veritabanında ölçtüm:
+
+| Ölçüm | Değer |
+|-------|-------|
+| `company_industries` satır | **21** |
+| 14003 firmanın kapsanma oranı | **%0.15** |
+| `companies.tax_number` DOLU | **40** |
+| `source_records.raw_tax_number` DOLU | 617 |
+| JOIN (`raw_tax_number = tax_number`) eşleşmesi | **33** ← yazılabilecek azami |
+
+Kabul ölçütü 1 ("satır > 0") teknik olarak sağlandı ama **anlamsız**: 7595 dolu
+`raw_nace`'in %99.6'sı yazılamadı. Kod doğru çalışıyor; **bağlanacak anahtar yok**.
+
+### 6.1 Kök neden — şemada firma↔kaynak bağı YOK
+
+`source_records` kolonları: `source_record_id, source_id, external_id, raw_name,
+raw_address, raw_phone, raw_email, raw_website, raw_tax_number, raw_nace,
+raw_payload, collected_at, content_hash`.
+
+**`company_id` kolonu yok.** 14000 ham kaydın hangi firmaya ait olduğu
+veritabanında hiç kayıtlı değil. Utku elindeki tek alanla (`raw_tax_number`) bağ
+kurmaya çalıştı; o da 40 firmada dolu → tavan 33.
+
+### 6.2 BENİM HATAM (brif)
+
+Bu brifin 3. maddesi *"her kodu nace_codes'a karşı doğrula"* diyor ama **firmaya
+nasıl bağlanacağını hiç söylemiyor**. Önkoşul olarak yalnız SOZLUK-01'i yazdım;
+asıl önkoşul olan firma↔kaynak bağını atladım. Utku brife uydu, brif eksikti.
+
+### 6.3 Kod kusurları (düzeltilecek)
+
+1. **`.env` mutlak yolu gömülü** — `C:/Huginn Data Projesi/...`. Başka makinede
+   veya CI'da çalışmaz. `load_dotenv()` yalın çağrılmalı.
+2. **Tekrar** — `import` ve `create_engine` blokları dosyada iki kez
+   (satır ~9-38 ve ~96-99).
+
+### 6.4 Yeni sıra
+
+COKLU-01 **askıya alındı**. Önce `VERI-KAYNAK-BAG-01`: `source_records.company_id`
+kolonu + ETL eşleme yazımı. O bitmeden bu görevin tavanı 33 satırdır, kim yazarsa
+yazsın.
+
 ---
 
 *ponytail: raw_nace ayrıştırma. Skipped: NACE kod geçerlilik tarihi (bir kod ne
