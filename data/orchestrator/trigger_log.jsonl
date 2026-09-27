@@ -11386,3 +11386,7 @@
 {"ts": "2026-09-27T11:34:01", "kaynak": "nobetci", "ajan": "utku", "task_id": "VERI-03", "tetik_sayisi": 101, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\utku.ALARM.json"}
 {"ts": "2026-09-27T11:39:01", "kaynak": "nobetci", "ajan": "utku", "task_id": "VERI-02", "tetik_sayisi": 102, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\utku.ALARM.json"}
 {"ts": "2026-09-27T11:39:01", "kaynak": "nobetci", "ajan": "utku", "task_id": "VERI-03", "tetik_sayisi": 102, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\utku.ALARM.json"}
+{"ts": "2026-09-27T11:44:01", "kaynak": "nobetci", "ajan": "utku", "task_id": "VERI-02", "tetik_sayisi": 103, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\utku.ALARM.json"}
+{"ts": "2026-09-27T11:49:01", "kaynak": "nobetci", "ajan": "utku", "task_id": "VERI-02", "tetik_sayisi": 104, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\utku.ALARM.json"}
+{"ts": "2026-09-27T11:54:01", "kaynak": "nobetci", "ajan": "utku", "task_id": "VERI-02", "tetik_sayisi": 105, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\utku.ALARM.json"}
+{"ts": "2026-09-27T11:59:01", "kaynak": "nobetci", "ajan": "utku", "task_id": "VERI-02", "tetik_sayisi": 106, "alarm_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\orchestrator\\triggers\\utku.ALARM.json"}

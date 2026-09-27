@@ -606,5 +606,37 @@
     "tetik_sayisi": 102,
     "uyari_tarihi": "2026-09-27T11:39:01",
     "mesaj": "⚠️ VERI-03 ([VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)) — utku 102. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 103,
+    "uyari_tarihi": "2026-09-27T11:44:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 103. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 104,
+    "uyari_tarihi": "2026-09-27T11:49:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 104. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 105,
+    "uyari_tarihi": "2026-09-27T11:54:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 105. kez uyarıldı; henüz başlamadı."
+  },
+  {
+    "ajan": "utku",
+    "task_id": "VERI-02",
+    "gorev_basligi": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
+    "tetik_sayisi": 106,
+    "uyari_tarihi": "2026-09-27T11:59:01",
+    "mesaj": "⚠️ VERI-02 ([VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)) — utku 106. kez uyarıldı; henüz başlamadı."
   }
 ]
