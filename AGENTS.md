@@ -1628,3 +1628,23 @@ elle komuttu. 282 kayıtlık `utku.ALARM.json`'ın **38'i kapalı görev içindi
 
 - **Mandal:** `tests/test_gorev_nobetci.py::test_tetik_firlat_olusturur_log` (ALARM üretilmediğini doğrular)
 - **Referans:** D-166 (kök kirliliği), [`nobetci.py`](src/company_master/orchestrator/nobetci.py:66).
+
+## Kapanan İşin Hafıza Kaydı Denetlenir (D-237 — KAHİN kararı 2026-09-27)
+
+Bir görev `done` olduğunda sahibinin **kişisel context dosyasına** (`<ajan>_project_context.md`)
+kayıt düşülmesi zaten kuraldı. Bu tarihten sonra kural **ölçülür**: `pano_denetim`
+kapalı her görevi sahibinin dosyasında arar, bulamazsa `[uyari/kayit]` üretir.
+
+Bağlayıcı olan üç madde:
+1. Görevi kapatan ajan, `task_id`'yi kendi context dosyasında **geçirmek zorundadır**.
+2. Denetim yalnız `bitis >= 2026-09-28` görevleri kapsar; geriye dönük 58 görev için
+   uyarı üretilmez — yoksa denetim gürültüye boğulur ve hiç okunmaz.
+3. Context dosyası olmayan sahipler (kahin, orkestrator) denetlenmez.
+
+**Neden.** Ölçüm: 59 kapanmış görevin **yalnız 1'i** (%1.7) sahibinin dosyasında geçiyordu.
+Kayıt tutulmayınca bilgi bir sonraki oturuma taşınmıyor; aynı ölçüm tekrar yapılıyor,
+aynı hata tekrar ediliyor. D-236'ya **aykırı değildir**: tek kopya, asıl kayda yazılır —
+denetim yeni dosya üretmez, var olan dosyayı okur.
+
+- **Mandal:** `tests/test_pano_denetim_kayit.py` (6 test)
+- **Referans:** D-66 (kanıtsız done yok), [`pano_denetim.py`](scripts/pano_denetim.py:117).

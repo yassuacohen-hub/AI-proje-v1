@@ -42,6 +42,9 @@ TRIGGER_DOSYA = ROOT / "src" / "company_master" / "orchestrator" / "trigger.py"
 # ALTYAPI-DURUM-SOZLUK-01: artik kopya tutulmuyor, tek kaynak task_board.
 KAPALI_DURUMLAR = tb.KAPALI_DURUMLAR
 STUCK_ESIK = timedelta(hours=24)
+# D-237: kapanan iş sahibinin kişisel context dosyasına yazılır. Geriye dönük 59
+# görevin 58'i yazılmamış; kural bu tarihten sonra kapananlar için ölçülür.
+KAYIT_YURURLUK = "2026-09-28"
 # ponytail: arşiv eşiği sabit; ayarlanabilir olmasına ihtiyaç doğarsa CLI bayrağı ekle.
 ARSIV_ESIK = timedelta(days=7)
 
@@ -111,9 +114,16 @@ def tetik_kimlikleri() -> frozenset[tuple[str, str]]:
     return frozenset(ciftler)
 
 
+def context_metinleri() -> dict[str, str]:
+    """Ajan kişisel context dosyaları: {ajan: metin}. Dosyası olmayan ajan denetlenmez."""
+    return {yol.name.split("_")[0]: yol.read_text(encoding="utf-8")
+            for yol in ROOT.glob("*_project_context.md")}
+
+
 def tara(pano: list[dict], kuyruk: list[dict], simdi: datetime,
          arsiv: frozenset[str] = frozenset(),
-         tetikler: frozenset[tuple[str, str]] | None = None) -> list[dict]:
+         tetikler: frozenset[tuple[str, str]] | None = None,
+         contextler: dict[str, str] | None = None) -> list[dict]:
     """Uyumsuzlukları bulur. Her bulgu: {tip, seviye, task_id, mesaj, duzeltme}.
 
     seviye "hata": düzeltilmesi gereken tutarsızlık (CI'yi kırar).
@@ -167,6 +177,16 @@ def tara(pano: list[dict], kuyruk: list[dict], simdi: datetime,
             sahip = gorev.get("sahip")
             if sahip and (sahip, tid) not in tetikler:
                 ekle("tetik", "hata", tid, f"durum=aktif ama {sahip} kanalında tetik yok")
+
+        # D-237: iş kapandı ama sahibinin hafızasında iz yok. Kayıt olmadan bilgi
+        # bir sonraki oturuma taşınmıyor (bkz. D-234..D-236'nın 18 karar boşluğu).
+        # ponytail: seviye "uyari" — alışkanlık oturunca "hata"ya çıkar.
+        if contextler is not None and durum == "done" \
+                and str(gorev.get("bitis") or "") >= KAYIT_YURURLUK:
+            metin = contextler.get(gorev.get("sahip") or "")
+            if metin is not None and tid not in metin:
+                ekle("kayit", "uyari", tid,
+                     f"done ama {gorev.get('sahip')} context dosyasında kayıt yok")
 
     # kuyruk senkronu. Kuyruk bir ekleme-günlüğüdür: aynı task_id birden çok kez
     # geçebilir, görev onaydan sonra yeniden açılmış olabilir.
@@ -304,7 +324,8 @@ def main(argv: list[str] | None = None) -> int:
         arsiv_kimlik = arsiv_kimlikleri()  # D-231: bir kez oku, iki taramada kullan
 
         tetikler = tetik_kimlikleri()
-        bulgular = tara(pano, kuyruk, simdi, arsiv_kimlik, tetikler)
+        contextler = context_metinleri()
+        bulgular = tara(pano, kuyruk, simdi, arsiv_kimlik, tetikler, contextler)
         ithalat = ithalat_kontrol()
         if ithalat:
             bulgular.append(ithalat)
@@ -318,7 +339,8 @@ def main(argv: list[str] | None = None) -> int:
             rapor["duzeltilen"] = uygula(bulgular, arsiv)
             pano = _json_oku(PANO_DOSYA)
             kuyruk = _json_oku(KUYRUK_DOSYA)
-            bulgular = tara(pano, kuyruk, simdi, arsiv_kimlik, tetikler) + ([ithalat] if ithalat else [])
+            bulgular = tara(pano, kuyruk, simdi, arsiv_kimlik, tetikler,
+                            contextler) + ([ithalat] if ithalat else [])
 
         rapor["bulgular"] = bulgular
         rapor["gorevler"] = [
