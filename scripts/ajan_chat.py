@@ -92,11 +92,11 @@ def cmd_oku(args: argparse.Namespace) -> int:
     """Sorunları oku."""
     try:
         satirlar = chat.oku(task_id=args.task_id, son=args.son)
-        
+
         if not satirlar:
             print("Sorun kaydı yok.")
             return 0
-        
+
         for i, s in enumerate(satirlar, 1):
             print(
                 f"\n{i}. [{s['ajan'].upper()}] {s['task_id']} ({s['durum']})\n"
@@ -104,7 +104,7 @@ def cmd_oku(args: argparse.Namespace) -> int:
                 f"   Çözüm: {s['cozum']}\n"
                 f"   Zaman: {s['timestamp']}"
             )
-        
+
         print(f"\nToplam: {len(satirlar)} sorun")
         return 0
     except Exception as e:
@@ -118,7 +118,7 @@ def cmd_ozet(args: argparse.Namespace) -> int:
         acik = chat.ozet("acik")
         cokundurmus = chat.ozet("cokundurmus")
         cozuldu = chat.ozet("cozuldu")
-        
+
         print(
             f"📊 Ajan Chat Özeti:\n"
             f"  🔴 Açık Sorunlar:      {len(acik)}\n"
@@ -127,7 +127,7 @@ def cmd_ozet(args: argparse.Namespace) -> int:
             f"  —————————————————————\n"
             f"  Toplam:                {len(acik) + len(cokundurmus) + len(cozuldu)}"
         )
-        
+
         # Filtre varsa göster
         if args.durum:
             satirlar = chat.ozet(args.durum)
@@ -136,7 +136,7 @@ def cmd_ozet(args: argparse.Namespace) -> int:
                 print(f"  {i}. [{s['ajan'].upper()}] {s['task_id']}: {s['sorun'][:50]}")
             if len(satirlar) > 5:
                 print(f"  ... ve {len(satirlar) - 5} daha")
-        
+
         return 0
     except Exception as e:
         print(f"❌ Hata: {e}", file=sys.stderr)
@@ -166,9 +166,9 @@ def main(argv: list[str] | None = None) -> int:
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
-    
+
     subparsers = ap.add_subparsers(dest="komut", help="Komut seçin")
-    
+
     # ac: Sorun aç
     p_ac = subparsers.add_parser("ac", help="Sorun aç")
     p_ac.add_argument("ajan", help="Kime — hedef ajan adı (ihsan/utku/salih/yasu)")
@@ -183,7 +183,7 @@ def main(argv: list[str] | None = None) -> int:
         help="Önem derecesi (varsayılan: orta)"
     )
     p_ac.set_defaults(func=cmd_ac)
-    
+
     # guncelle: Çözümü güncelle
     p_guncelle = subparsers.add_parser("guncelle", help="Çözümü güncelle")
     p_guncelle.add_argument("task_id", help="Görev ID")
@@ -196,20 +196,20 @@ def main(argv: list[str] | None = None) -> int:
         help="Yeni durum (varsayılan: cokundurmus)"
     )
     p_guncelle.set_defaults(func=cmd_guncelle)
-    
+
     # kapat: Sorunukapalı işaretle
     p_kapat = subparsers.add_parser("kapat", help="Sorunukapalı işaretle")
     p_kapat.add_argument("task_id", help="Görev ID")
     p_kapat.add_argument("sorun_index", type=int, help="Sorun index")
     p_kapat.add_argument("--karar", "-k", help="Karar notu (isteğe bağlı)")
     p_kapat.set_defaults(func=cmd_kapat)
-    
+
     # oku: Sorunları oku
     p_oku = subparsers.add_parser("oku", help="Sorunları oku")
     p_oku.add_argument("--task_id", "-t", help="Belirli göreve filtrele")
     p_oku.add_argument("--son", "-s", type=int, help="Son N satırı al")
     p_oku.set_defaults(func=cmd_oku)
-    
+
     # ozet: Özetini göster
     p_ozet = subparsers.add_parser("ozet", help="Sorunların özetini göster")
     p_ozet.add_argument(
@@ -218,20 +218,20 @@ def main(argv: list[str] | None = None) -> int:
         help="Belirli durum ile filtrele"
     )
     p_ozet.set_defaults(func=cmd_ozet)
-    
+
     # bulgula: Tasarım eleştirisi
     p_bulgula = subparsers.add_parser("bulgula", help="Tasarım eleştirisi kaydı")
     p_bulgula.add_argument("konu", help="Başlık (örn. 'Tasarım Belgesi (D-192)')")
     p_bulgula.add_argument("bulgu", help="Eleştiri/görüş metni")
     p_bulgula.add_argument("--link", "-l", help="İlgili dosya/karar linki")
     p_bulgula.set_defaults(func=cmd_bulgula)
-    
+
     args = ap.parse_args(argv)
-    
+
     if not args.komut:
         ap.print_help()
         return 0
-    
+
     return args.func(args)
 
 

@@ -339,7 +339,7 @@ def sohbet(
         son_hata = f"{model}: boş yanıt"
         if hata_kaydi:
             hata_kaydi(model, "boş yanıt")
-    
+
     # Fallback: NineRouter başarısız — OpenRouter'a doğrudan çağrı yap
     try:
         yanit_or = _openrouter_fallback(prompt, system)
@@ -348,45 +348,45 @@ def sohbet(
     except Exception as fallback_exc:
         if hata_kaydi:
             hata_kaydi("openrouter-fallback", str(fallback_exc))
-    
+
     raise AiChatHatasi(f"Tüm sağlayıcılar düştü — son hata: {son_hata}")
 
 
 def _openrouter_fallback(prompt: str, system: str | None = None) -> str | None:
     """OpenRouter doğrudan API çağrısı fallback.
-    
+
     NineRouter zinciri tümü başarısız olunca son çare olarak OpenRouter'a
     doğrudan HTTP POST ile gidilir. Hata durumunda None döner (istisna fırlatmaz).
-    
+
     Args:
         prompt: İstemci soru metni (tarih + mesajlar birleştirilmiş)
         system: Sistem prompt'ı (opsiyonel)
-    
+
     Returns:
         Yanıt metni ya da None (hata/timeout durumunda)
     """
     api_key = os.getenv("OPENROUTER_API_KEY")
     if not api_key:
         return None
-    
+
     try:
         headers = {
             "Authorization": f"Bearer {api_key}",
             "Content-Type": "application/json",
         }
-        
+
         messages = []
         if system:
             messages.append({"role": "system", "content": system})
         messages.append({"role": "user", "content": prompt})
-        
+
         payload = {
             "model": "meta-llama/llama-3.1-70b-instruct",
             "messages": messages,
             "temperature": 0.2,
             "max_tokens": 1024,
         }
-        
+
         resp = requests.post(
             "https://openrouter.ai/api/v1/chat/completions",
             json=payload,
@@ -394,7 +394,7 @@ def _openrouter_fallback(prompt: str, system: str | None = None) -> str | None:
             timeout=30,
         )
         resp.raise_for_status()
-        
+
         data = resp.json()
         yanit = data.get("choices", [{}])[0].get("message", {}).get("content", "")
         return yanit.strip() if yanit else None

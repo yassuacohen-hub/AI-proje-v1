@@ -249,7 +249,7 @@ def _kanonik_yol_kontrol() -> dict | None:
             "mesaj": f"PANO_DOSYA kanonik yolda değil: {PANO_DOSYA} (beklenen: {kanonik})",
             "duzeltme": None
         }
-    
+
     # Reel worktree'lerde split türemesi var mı? (iç içe worktree'ler dahil)
     for split in ROOT.glob(".kilo/worktrees/**/data/orchestrator/task_board.json"):
         return {

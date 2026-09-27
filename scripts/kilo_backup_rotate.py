@@ -23,7 +23,7 @@ def get_backup_files():
     """Yedek dosyalarını oluşturulma tarihine göre sırala (en yeni son)"""
     if not BACKUPS_DIR.exists():
         return []
-    
+
     files = []
     for item in BACKUPS_DIR.iterdir():
         if item.is_file():
@@ -34,14 +34,14 @@ def get_backup_files():
                 'mtime': stat.st_mtime,
                 'size': stat.st_size
             })
-    
+
     # Oluşturulma tarihine göre ters sırala (en yeni ilk)
     return sorted(files, key=lambda x: x['mtime'], reverse=True)
 
 def rotate_backups():
     """Rotasyonu gerçekleştir"""
     files = get_backup_files()
-    
+
     if len(files) <= KEEP_COUNT:
         return {
             'status': 'noop',
@@ -51,21 +51,21 @@ def rotate_backups():
             'files_kept': [f['name'] for f in files],
             'files_moved': []
         }
-    
+
     # Arşiv klasörünü oluştur (varsa sorun yok)
     ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
-    
+
     kept_files = files[:KEEP_COUNT]
     to_archive = files[KEEP_COUNT:]
-    
+
     moved_count = 0
     moved_files = []
     errors = []
-    
+
     for item in to_archive:
         src = item['path']
         dest = ARCHIVE_DIR / item['name']
-        
+
         try:
             # Hedef zaten varsa, taşıma (idempotent)
             if dest.exists():
@@ -83,7 +83,7 @@ def rotate_backups():
                 moved_files.append(item['name'])
         except Exception as e:
             errors.append(f"{item['name']}: taşıma hatası - {e}")
-    
+
     return {
         'status': 'success',
         'message': f'{moved_count} dosya arşive taşındı, {KEEP_COUNT} tutuldu',

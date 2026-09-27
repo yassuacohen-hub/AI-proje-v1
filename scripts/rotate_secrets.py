@@ -83,7 +83,7 @@ def update_env_file(env_file, key, new_value):
     """Update or add key=value in .env file."""
     lines = []
     found = False
-    
+
     if env_file.exists():
         with open(env_file) as f:
             for line in f:
@@ -92,10 +92,10 @@ def update_env_file(env_file, key, new_value):
                     found = True
                 else:
                     lines.append(line)
-    
+
     if not found:
         lines.append(f"{key}={new_value}\n")
-    
+
     with open(env_file, "w") as f:
         f.writelines(lines)
 
@@ -104,24 +104,24 @@ def apply_rotations(dry_run=True):
     """Apply secret rotations."""
     tracker = load_rotation_tracker()
     env_file = get_env_path()
-    
+
     rotations = {
         "SESSION_SECRET": rotate_session_secret,
         "JWT_SECRET": rotate_jwt_secret,
     }
-    
+
     applied = {}
-    
+
     for secret_name, rotation_func in rotations.items():
         last_rotation = tracker.get(secret_name, {}).get("last_rotated")
-        
+
         if needs_rotation(last_rotation):
             logger.info(f"Rotating {secret_name}...")
             new_value = rotation_func()
-            
+
             if new_value:
                 applied[secret_name] = new_value
-                
+
                 if not dry_run:
                     update_env_file(env_file, secret_name, new_value)
                     tracker[secret_name] = {
@@ -135,11 +135,11 @@ def apply_rotations(dry_run=True):
                 logger.warning(f"⚠️  {secret_name} needs manual rotation (API provider)")
         else:
             logger.info(f"⏭️  {secret_name} does not need rotation yet")
-    
+
     if applied and not dry_run:
         save_rotation_tracker(tracker)
         logger.info(f"✅ Rotation complete. {len(applied)} secret(s) rotated.")
-    
+
     return applied
 
 
@@ -156,9 +156,9 @@ def main():
         default=True,
         help="Show what would be rotated (default)",
     )
-    
+
     args = parser.parse_args()
-    
+
     if args.apply:
         logger.info("🔄 Applying secret rotations...")
         apply_rotations(dry_run=False)

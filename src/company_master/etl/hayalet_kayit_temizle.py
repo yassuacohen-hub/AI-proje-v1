@@ -434,8 +434,10 @@ def run_cleanup(dry_run: bool = False, backup_path: Path | None = None) -> dict:
     # Sil
     if not dry_run:
         deleted_ids = [r.company_id for r in all_to_delete]
-        # 1000'lik parti: tek sorguda binlerce placeholder sürücü limitini aşar
-        # (SQLite 999). Tüm partiler TEK işlemde — yarım silme olmaz.
+        # 1000'lik parti: placeholder sayısı sürücü limitine dayanmasın.
+        # Üretim PostgreSQL/Supabase (limit 65535) — 4591 geçer; ama test/yerel
+        # SQLite yolunda limit 999 ve aynı kod oradan da geçmek zorunda.
+        # Tüm partiler TEK engine.begin() içinde: yarım silme olmaz.
         with engine.begin() as conn:
             for i in range(0, len(deleted_ids), 1000):
                 batch = deleted_ids[i:i + 1000]

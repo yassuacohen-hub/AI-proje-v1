@@ -34,7 +34,7 @@ _KVKK_FIELD_CLASS: Final[dict[str, str]] = {
     "trade_name": "acik",
     "company_registration_number": "acik",
     "foundation_year": "acik",
-    
+
     # İletişim (kontrol altında — pakete göre)
     "primary_phone": "kisitli",
     "primary_email": "kisitli",
@@ -42,32 +42,32 @@ _KVKK_FIELD_CLASS: Final[dict[str, str]] = {
     "website": "acik",
     "phone_validity_status": "kisitli",
     "email_validity_status": "kisitli",
-    
+
     # Lokasyon (kontrol altında — pakete göre)
     "address": "kisitli",
     "city": "kisitli",
     "province": "kisitli",
     "country": "acik",  # Ülke açık (OSINT'ten zaten belli)
     "zip_code": "kisitli",
-    
+
     # Dijital (yarı-açık — çoğu paket)
     "website_exists": "yarisacik",
     "domain_valid": "yarisacik",
     "digital_presence": "yarisacik",
-    
+
     # Ticari (kontrol altında — pakete göre)
     "annual_turnover": "kisitli",
     "employee_count": "kisitli",
     "turnover_range": "kisitli",
     "employee_range": "kisitli",
-    
+
     # Sınai (yarı-açık — çoğu paket)
     "nace_code": "yarisacik",
     "industry_code": "yarisacik",
     "sector": "yarisacik",
     "subsector": "yarisacik",
     "manufacturing": "yarisacik",
-    
+
     # Meta / İç (yasak — görülmez)
     "quarantine_reason": "yasak",
     "entity_confidence": "yasak",
@@ -374,25 +374,25 @@ def _mask_phone(phone) -> str:
 
 def apply_kvkk_mask(row: dict, admin_mode: str = "strict", plan_field_visibility: dict | None = None) -> dict:
     """PII alanlari KVKK sınıfına + Layer 2 görünürlüğe göre maskeler.
-    
+
     Args:
         row: Firma dict (companies tablosu satırı)
         admin_mode: 'strict' (KVKK mutlak) | 'lenient' (kısıtlı → açık, yasak → hala maskeli)
         plan_field_visibility: Layer 2 dict — {field_group: visibility} (DB'den yüklü).
                                Yoksa Layer 1 sınıfından uygulanır.
-    
+
     D-202: Admin KVKK Modu — strict=KVKK uygun, lenient=yönetici riskleniyor
     D-204: Alan Grubu Görünürlüğü — plan_field_group (paket × grup) tanımlar
     """
     if not isinstance(row, dict):
         return row
-    
+
     for field, value in row.items():
         if not value or field not in _KVKK_FIELD_CLASS:
             continue  # Tanınmayan alan veya boş → maskele
-        
+
         kvkk_class = _KVKK_FIELD_CLASS[field]
-        
+
         # Layer 2 görünürlüğü var mı? Varsa bunu kullan (Layer 1 override)
         if plan_field_visibility:
             # Field hangi gruba ait? _FIELD_GROUPS'tan bul
@@ -401,7 +401,7 @@ def apply_kvkk_mask(row: dict, admin_mode: str = "strict", plan_field_visibility
                 if field in fields:
                     field_group = grp
                     break
-            
+
             if field_group and field_group in plan_field_visibility:
                 layer2_visibility = plan_field_visibility[field_group]
                 # Layer 2 görünürlüğe göre maskelensin mi?
@@ -428,7 +428,7 @@ def apply_kvkk_mask(row: dict, admin_mode: str = "strict", plan_field_visibility
                         if field == "primary_email":
                             row[field] = _mask_email(value)  # Domain açık
                     continue
-        
+
         # Layer 2 yok, Layer 1 sınıfından uygulanır
         if kvkk_class == "acik":
             continue  # Açık → maskeleme yok
@@ -452,7 +452,7 @@ def apply_kvkk_mask(row: dict, admin_mode: str = "strict", plan_field_visibility
                     row[field] = "***" if isinstance(value, str) else None
                 # dijital alanlar genelde OSINT'ten belli → minimal maskeleme
         # lenient: yarı-açık → açık
-    
+
     return row
 
 

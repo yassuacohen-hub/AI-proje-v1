@@ -66,7 +66,7 @@ def gorev_oku(task_id: str, root_dir=None) -> dict | None:
     else:
         root = _get_root()
         board_file = root / "Huginn Data Insights" / "data" / "orchestrator" / "task_board.json"
-    
+
     if not board_file.exists():
         return None
 
@@ -86,28 +86,28 @@ def main() -> int:
     parser.add_argument("--task-id", required=True, help="Görev ID'si (örn. DASH-UX-02a)")
     parser.add_argument("--ajan", required=True, help="Ajan adı (örn. utku)")
     parser.add_argument("--talimat", default="", help="Özel talimat (brif varsa yok sayılır)")
-    
+
     args = parser.parse_args()
     ajan = args.ajan.lower()
 
     # 1. Görev var mı? (büyük/küçük harf duyarsız ara, panodaki gerçek yazımı kullan)
     root_dir = _get_root()
     gorev = gorev_oku(args.task_id, root_dir)
-    
+
     if not gorev:
         print(f"[ERROR] Gorev bulunamadi: {args.task_id}")
         return 1
     task_id = gorev.get("task_id") or gorev.get("id")
-    
+
     # 2. Brif var mı?
     brif = brif_bul(task_id, ajan, gorev)
-    
+
     if not brif:
         print("[ERROR] Brif bulunamadi")
         print(f"        Beklenen: plans/brief_{ajan}_{task_id}.md")
         print(f"        veya panoda 'brief' alanı (şu an: {gorev.get('brief') or '-'})")
         return 1
-    
+
     # 3. Talimat belirle
     talimat = args.talimat.strip()
     if not talimat:
@@ -117,7 +117,7 @@ def main() -> int:
         talimat = ilk_satir.replace("#", "").strip()
         if not talimat:
             talimat = f"Brif: {brif.relative_to(root_dir)}"
-    
+
     # 4. Tetik gönder
     try:
         sonuc = trigger.tetik_ekle(task_id, ajan, talimat)

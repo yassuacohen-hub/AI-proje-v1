@@ -30,10 +30,10 @@ for task in tasks:
     sahip = task.get('sahip', None)
     durum = task.get('durum', 'unknown')
     baslangic = task.get('baslangic', '')
-    
+
     # Status sayma
     status_counts[durum] += 1
-    
+
     # Owner bazında sayma
     if sahip:
         owner_tasks[sahip][durum] += 1
@@ -43,7 +43,7 @@ for task in tasks:
             'baslik': baslik,
             'durum': durum
         })
-    
+
     # Review görevleri
     if durum == 'review':
         review_tasks.append({
@@ -52,7 +52,7 @@ for task in tasks:
             'sahip': sahip if sahip else '(Boş)',
             'baslangic': baslangic
         })
-    
+
     # Eski görevler (3 aydan eski)
     if baslangic:
         try:
@@ -80,7 +80,7 @@ report.append(f"İptal/Arşiv: {status_counts.get('iptal', 0) + status_counts.ge
 report.append("")
 
 # Diğer durumlar
-other_statuses = {k: v for k, v in status_counts.items() 
+other_statuses = {k: v for k, v in status_counts.items()
                   if k not in ['done', 'review', 'aktif', 'plan', 'iptal', 'archive']}
 if other_statuses:
     report.append("Diğer Durumlar:")

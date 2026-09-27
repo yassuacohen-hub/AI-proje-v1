@@ -1866,11 +1866,18 @@ biri "hızlısını çalıştırayım" der, 4591 kayıt yedeksiz gider. Silindi.
 işlenir. Yıkıcı iş yazan her dosyada `dry_run` **zorunludur**.
 
 **Kusur 5 — parti silme ikizde kalmıştı.** Asıl dosya 4591 kimliği **tek
-sorguda** placeholder olarak diziyordu; SQLite sınırı **999**. Yani gerçek
-veride ilk çalıştırmada patlayacaktı — ikiz zaten bunu düzeltmek için
-yazılmış ama düzeltme asıl dosyaya **taşınmamıştı**. Parti (1000'lik) asıl
-dosyaya alındı, tüm partiler **tek `engine.begin()`** içinde: yarım silme
-olmaz.
+sorguda** placeholder olarak diziyordu; ikiz bunu 1000'lik partiye bölmüştü
+ama düzeltme asıl dosyaya **taşınmamıştı**. Parti asıl dosyaya alındı, tüm
+partiler **tek `engine.begin()`** içinde: yarım silme olmaz.
+
+**Ürün sahibi düzeltmesi — hangi veritabanı?** İlk yorumumda "SQLite 999 limiti,
+üretimde patlar" yazdım; ürün sahibi "gerçek veri Supabase'de" diye uyardı ve
+ölçüm onu doğruladı: `DATABASE_URL=postgresql://...`, PostgreSQL limiti **65535**
+— 4591 orada **patlamazdı**. Parti gerekçesi yanlıştı, parti kararı doğru:
+aynı kod test/yerel **SQLite** yolundan da geçiyor (999). **Genel kural:** SQL
+limiti/lehçe gerekçesi yazarken hedef veritabanı `DATABASE_URL`'den **ölçülür**;
+"veritabanı" diye tek kelime yazılmaz — bu projede **iki** hedef var
+(üretim PostgreSQL/Supabase + test SQLite) ve kod ikisinden de geçmek zorundadır.
 
 **Ayrıca — yorum kodla çelişemez.** Aynı işin migration'ı "partial index
 kullanıyoruz" diyordu ama `WHERE` yoktu. Yorum, kodun **söylediğini** anlatır;

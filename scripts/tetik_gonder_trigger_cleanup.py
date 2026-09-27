@@ -20,9 +20,9 @@ from company_master.orchestrator import trigger
 def main():
     task_id = "TRIGGER-LOGGING-CLEANUP"
     ajan = "yasu"
-    
+
     print(f"[INFO] {task_id} tetiklemesi: {ajan}'ya gönderiliyor...")
-    
+
     try:
         result = trigger.tetik_ekle(task_id, ajan)
         print(f"[OK] Tetik gönderildi: {task_id}")

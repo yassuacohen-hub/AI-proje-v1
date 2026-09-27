@@ -159,7 +159,7 @@ def cmd_teslim(args: argparse.Namespace) -> int:
               f"\"Kapanan isler\" bolumune {args.task_id} satiri; ya da --zorla.",
               file=sys.stderr)
         return 1
-    
+
     # D-210 KAPISI 2: teslim oncesi acik sorular var mi?
     engeller = chat.teslim_kontrol_et(args.task_id)
     if engeller["engel"]:
@@ -170,7 +170,7 @@ def cmd_teslim(args: argparse.Namespace) -> int:
         print(f"\nSoruları kapadiğinda teslim yeniden calistir.",
               file=sys.stderr)
         return 1
-    
+
     try:
         sonuc = trigger.teslim_et(
             args.task_id, args.ajan, args.ozet, _ayristir_liste(args.cikti)
@@ -234,7 +234,7 @@ def cmd_basla(args: argparse.Namespace) -> int:
         if sim == 1:
             print("(simulasyon uyarili; zincir devam ediyor — D-65)\n")
     ajan = args.ajan
-    
+
     # D-210 KAPISI 1: basla oncesi acik sorular var mi?
     acik_sorunlar = chat.ajan_acik_sorulari(ajan)
     if acik_sorunlar:
@@ -246,7 +246,7 @@ def cmd_basla(args: argparse.Namespace) -> int:
         print(f"  python scripts/gorev_kutusu.py basla --ajan {ajan}")
         print()
         return 0
-    
+
     bekleyen = trigger.bekleyen_tetikler(ajan)
     kalan = trigger.zincir_kalan(ajan)
     rol = trigger.AJAN_ROLU.get(ajan, "uretim")

@@ -65,7 +65,7 @@ def main() -> int:
     parser.add_argument("--task-id", required=True, help="Görev ID'si (örn. DASH-UX-02a)")
     parser.add_argument("--ajan", required=True, help="Ajan adı (örn. utku)")
     parser.add_argument("--talimat", default="", help="Özel talimat (brif varsa yok sayılır)")
-    
+
     args = parser.parse_args()
     ajan = args.ajan.lower()
 
@@ -75,7 +75,7 @@ def main() -> int:
         print(f"[ERROR] Gorev bulunamadi: {args.task_id}")
         return 1
     task_id = gorev.get("task_id") or gorev.get("id")
-    
+
     # 2. Brif var mı?
     brif = brif_bul(task_id, ajan, gorev)
     if not brif:
@@ -83,7 +83,7 @@ def main() -> int:
         print(f"        Beklenen: plans/brief_{ajan}_{task_id}.md")
         print(f"        veya panoda 'brief' alani (su an: {gorev.get('brief') or '-'})")
         return 1
-    
+
     # 3. Talimat belirle
     talimat = args.talimat.strip()
     if not talimat:
@@ -93,7 +93,7 @@ def main() -> int:
         talimat = ilk_satir.replace("#", "").strip()
         if not talimat:
             talimat = f"Brif: {brif.relative_to(root)}"
-    
+
     # 4. Tetik gönder
     try:
         sonuc = trigger.tetik_ekle(task_id, ajan, talimat)

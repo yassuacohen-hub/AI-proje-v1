@@ -107,10 +107,10 @@ try:
     # Access internal handler list (telebot internals)
     msg_handlers = len(bot.message_handlers)
     callback_handlers = len(bot.callback_query_handlers)
-    
+
     print(f"  [OK] Message handlers: {msg_handlers}")
     print(f"  [OK] Callback handlers: {callback_handlers}")
-    
+
     if msg_handlers > 0:
         print(f"       Includes: /start, /help, /menu commands")
     if callback_handlers > 0:
