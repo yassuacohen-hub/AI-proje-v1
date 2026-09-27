@@ -5,11 +5,22 @@
 
 > D-219: tek blok, **üzerine yazılır**. Pano ile çelişirse pano üstündür.
 
-- **Konum:** D-217→D-220 karar serisi yazıldı, kapıları geçti
-- **Yapılanlar:** brif şablonu tekleştirme (D-217, baseline 112 mandal) · Obsidyen grafik zorunluluğu (D-218) · ajan oturum hafızası 4 dosya (D-219) · doküman sıkılaştırma politikası + kapı (D-220)
-- **Kritik bağlam:** SADECE `AGENTS.md`, `_ajan_context_sablon.md`, `tests/test_dokuman_politikasi.py`, `tests/test_brief_sablon_denetim.py`
-- **Sonraki adım:** bekleyen #13 (tanıtım cümleleri sistemi) veya #14 (fallout paragrafı doğrulaması)
-- **Görev:** — · **Son okunan karar:** `D-220`
+- **Konum:** VERİ ANOMALİ SERİSİ — NACE/sektör kapandı, şimdi **kopya + bölge bağı** teşhisi bitti, görev açılacak
+- **Yapılanlar (2026-09-27):** NACE 4 görev (SOZLUK/COKLU/TEMIZ/KOLON) + D-234 · SEKTOR-01 + KAYNAK-SIZINTI-01 · 3 tur canlı DB ölçümü (`scripts/_tmp_bolge_teshis{,2,3}.py`)
+- **YENİ KANITLAR (canlı Supabase, ölçüldü):**
+  - **İvedik kazıyıcısı ÇÖKMÜŞ**: 3134 kayıt → **14 tekil ad** (%99.6 kopya), tümü tek saniyede `09-08 22:58:35`
+  - Başkent OSB %36.8 kopya (761→481) · OSTİM %8.1 (9513→8740) · ASO %0 temiz
+  - **"14003 firma" YANLIŞ** — gerçek tekil ≈ **10.600**; panodaki tüm oranlar şişik
+  - `companies` 14003 ama `source_record_id` tekil 14000 → 3 kayıt çoklu koşum
+  - **`sources` ≠ bölge**: ASO bir ODA, üyeleri Çankaya/Mamak/Altındağ/OSTİM dağınık → kaynak→bölge eşlemesi GEÇERSİZ
+  - Adresten bölge türetme %21 (6424 adresli kayıtta); ilçe türetme daha iyi ama %76 adres yok
+  - **Telefon çapa OLAMAZ**: aynı tel = 10 farklı ünvan (ortak santral)
+  - `last_verified_at == created_at` 12995 kayıtta → hiç tazelenmemiş
+  - Çoklu bölge üyeliği GERÇEK: 366 ad hem baskentosb hem ostim'de
+- **ÇÜRÜTTÜĞÜM KENDİ ÖNERİM:** "her kaynak tek bölgeye aittir" varsayımı yanlış çıktı (ASO kanıtı)
+- **Kritik bağlam:** SADECE `scripts/_tmp_bolge_teshis3.py`, `src/company_master/etl/scrapers/ivedik_scraper.py`, `plans/kahin_pano.md`
+- **Sonraki adım:** (1) İvedik kazıyıcı kök neden → görev · (2) ürün sahibi isteği: **tek veri şablonu + veri seti README/kural dökümanı** · (3) Teknokent/TTP kaynak genişletme
+- **Görev:** — · **Son okunan karar:** `D-234`
 
 ## Kimlik
 - Rol: Huginn Data Insights projesi orkestratörü.
@@ -160,6 +171,22 @@ D-214'ün "bekleyen" listesindeki iki karar KAHİN onayıyla uygulandı: Güvenl
 ## D-216 — Hayalet görev arşivleme (2026-09-26)
 
 Utku toplu emrindeki 8 `todo` görev (`UTKU-02/04/05`, `ORCH-01..05`) çalıştırılmadan önce kod tabanıyla çapraz kontrol edildi: hepsinin referans verdiği dosya/dizin (`src/api/endpoints.py`, `src/auth/token_refresh.py`, `orchestration/*.py`, `0020_index_optimization.sql`) kodda yok — sablondan sızmış placeholder kayıtlar. `scripts/_hayalet_gorev_arsiv.py` ile `durum=archive`'e taşındı, gerekçe `not` alanına yazıldı. `test_naming_audit.py` (D-57) 9/9 yeşil kaldı. Madde 12 kapandı: gerçek backlog görevi yoktu.
+
+## D-234..D-236 — Veri kalitesi denetimi ve orkestrasyon kör noktaları (2026-09-27)
+
+> **Boşluk notu:** Bu dosyada D-217..D-233 arası kayıt yok; o kararlar `AGENTS.md`'de (SSOT). Aşağısı yalnızca bu oturumda benim yürüttüğüm işlerdir.
+
+**Veri kalitesi denetimi (canlı Supabase, 14003 firma).** `nace_code` kolonunun içeriği yanlış çıktı: `10.11` → "3E ELEKTRO OPTİK", `29.10` → 1882 rastgele firma. Kolonda OSTİM sektör **sayaçları** duruyordu (`1163`, `794`, `757`, `780`). Kök neden ETL değil **kaynak**: OSTİM sektör sayfasının varsayılan kodu 5705 firmaya `sector_default` olarak yazılmış; ham veri ↔ DB %96.8 aynı, yani ETL sadık kopyalamış. Ürün sahibi haklıydı — ASO kaydında firma→NACE bağı var (592 kayıt, %100 dolu). Açılan görevler: `VERI-NACE-SOZLUK-01` (resmi NACE listesi, 2097 satır sözlük), `VERI-NACE-COKLU-01`, `VERI-NACE-TEMIZ-01`, `VERI-NACE-KOLON-01`, `VERI-KAYNAK-BAG-01`, `VERI-SEKTOR-01`, `VERI-KAYNAK-SIZINTI-01`.
+
+**Hayalet kayıt bulgusu.** `companies` 14003 satır ama 9412 tekil ad → **4591 fazlalık**. İvedik en ağır vaka: 3134 satır / 14 tekil (%0.4). Kök neden kodda zaten düzeltilmişti (D-235 `sayfa_dongusu` koruması, 14 test yeşil); kirli olan yalnızca veritabanı → `VERI-HAYALET-TEMIZ-01` (P0) + `VERI-IVEDIK-YENIDEN-01` (P1).
+
+**D-234** — Seviye kısaltılmaz; NACE dört kaynağın birleşik referansıyla türetilir. Ölçüm: tek kaynak yetmiyor (%47.7 vs birleşik %92.9); türetme atlanırsa 3595 firma kaybediliyor. Commit `867a03b`.
+
+**D-236 — Tüketicisi olmayan çıktı üretilmez.** `utku.ALARM.json` 282 kayıt / 6 görev biriktirmişti; VERI-03 'done' olmasına rağmen 38 alarm almıştı. Kazı sonucu: `f7a7863`'te [`tetik_senk.py`](scripts/tetik_senk.py) ALARM'ı "temizlendi" diye siliyor, [`nobetci.py`](src/company_master/orchestrator/nobetci.py) yeniden yazıyordu — **ölü döngü**, okuyan hiçbir kod yoktu. Pano durumu kontrolü *eklemek* yerine üretici kaldırıldı (−50/+46 satır, 25 test yeşil). Commit `5d8aa87`.
+
+**Orkestrasyon kör noktaları (3 yön kapandı).** Pano ile onay kuyruğu arasındaki senkron kopmaları: (1) pano açık + kuyruk yok, (2) pano kapalı + kuyruk bekliyor (`f1750aa`), (3) pano aktif + tetik kanalı boş (`139ef57`). Ölçüm, iki dosyanın **birleştirilmemesi** gerektiğini gösterdi: pano anlık durum (85 satır, 18 alan, 7 durum), kuyruk teslim defteri (255 satır, 10 alan) — kuyrukta 15 görevin 2+ kaydı (teslim→red→düzelt→teslim) ve 196 arşivlenmemiş görev var; birleştirme bu izi silerdi.
+
+**Öz eleştiri (tekrar eden hatalar):** (a) ölçümü yanlış yerde yaptım — SQLite yedeğinde ölçüp canlı Supabase sandım; (b) `tail`/`head` kullandım, Windows cmd'de ikisi de yok, doğrusu `findstr`; (c) `git diff HEAD~1` çalışma alanını kıyaslar, commit içeriğini değil.
 
 ## Ilgili Nodlar
 
