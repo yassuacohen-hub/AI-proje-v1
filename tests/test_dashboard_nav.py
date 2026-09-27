@@ -13,8 +13,6 @@ Streamlit runtime olmadan calisir.
 """
 from __future__ import annotations
 
-import logging
-
 import pytest
 
 from web_dashboard.tabs import (
@@ -43,9 +41,13 @@ from web_dashboard.tabs import (
     varsayilan_tab,
 )
 
-# Sekme modulleri runtime disinda import edilince Streamlit "missing
-# ScriptRunContext" uyarisi basar; test ciktisini kirletmesin.
-logging.disable(logging.WARNING)
+# NOT: Burada bir zamanlar modul seviyesinde `logging.disable(logging.WARNING)`
+# vardi (Streamlit "missing ScriptRunContext" uyarisini bastirmak icin).
+# pytest tum test modullerini toplama asamasinda import ettigi icin bu cagri
+# TUM suite boyunca global kaliyor ve geri alinmiyordu; logging davranisini
+# olcen testler (test_error_handling) tek basina yesil, suite icinde kirmizi
+# oluyordu. Olcum: kaldirildiginda gurultu geri gelmiyor, 3 kirmizi yesile
+# donuyor. Gurultu bastirmak gerekirse dosya kapsaminda caplog/fixture kullan.
 
 
 def test_bolum_sayisi_ve_benzersizlik() -> None:
