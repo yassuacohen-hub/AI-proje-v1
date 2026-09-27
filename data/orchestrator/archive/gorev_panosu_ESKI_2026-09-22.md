@@ -1,4 +1,10 @@
-[[Huginn Data Insights/data_worktree/orchestrator/gorev_panosu.md]]
+> **ARŞİV — D-221 ile emekliye ayrıldı (2026-09-27).**
+> Bu dosya vault kökündeydi ve 22 Eylül'den beri güncellenmiyordu. Canlı pano: `data/orchestrator/gorev_panosu.md`.
+> Aşağıdaki **16 görev kimliğinin hiçbiri canlı panoda yok** — orkestrasyon işleri açıkta kalmış olabilir.
+> Doğrulanan iki hayalet: `ALTYAPI-TEST-FAILURE-FIX-02` (test_mcp.py 38 passed, hata yok), `DOC-SIRKET-MASTER-01` (22 Eyl raporu mevcut).
+> Yeniden ele alınacak görev `data/orchestrator/task_board.json`'a girilmeli; bu dosya artık okunmaz.
+
+[[Huginn Data Insights/data/orchestrator/gorev_panosu.md]]
 
 # Gorev Panosu (Pazar — Akiskan)
 

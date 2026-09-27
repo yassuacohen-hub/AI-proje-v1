@@ -1104,3 +1104,87 @@ python -m pytest tests/test_dokuman_politikasi.py -q
 **Kapsam dışı:** gürültü dizinlerindeki 4174 dosya temizlenmez. Üçüncü parti ve yedek; sahibi biz değiliz. Politika **kanonik 750** dosyayı korur.
 
 **Referans:** D-211 (ikiz yapı yasağı), D-217 (tek brif şablonu), D-218 (Obsidyen grafiği), D-219 (ajan hafızası).
+
+---
+
+## D-221 — Kök Dizin İzin Listesi (KAHİN kararı 2026-09-27)
+
+**Ölçüm (2026-09-27):** Çalışma kökü bir çöplüğe dönmüştü. Üst klasördeki 143 dosyanın **9'u ikiz**, **108'i çöp** (hata ayıklama artığı, ekran görüntüsü, tek seferlik betik), yalnız **26'sı eşsizdi**. `AI proje v1/` altında **829 dosya** vardı; **686'sı ikiz** (38 MB'ı boş satır), eşsiz içerik topu topu **1 MB**. Ayrıca 4 terk edilmiş worktree **184,6 MB** yer tutuyordu ve içlerindeki 838 "kirli" dosyanın **tamamı** boş satır/CRLF gürültüsüydü — tek satır kayıp iş yoktu.
+
+**Kök neden:** Kökün ne içereceği hiç tanımlanmamıştı. Tanımsız alan dolar.
+
+### Kural 1 — Kök Değişmez
+
+Kök dizin **`c:/Huginn Data Projesi`** olarak sabittir. Gerekçe ölçümdür: kod tabanında **10.368** sabit yol bu köke bağlı. Taşıma önerisi getirmek yasaktır; kazanç yok, kırılma kesin.
+
+### Kural 2 — Kökte Ne Durabilir
+
+Kökte yalnız şunlar bulunur:
+
+| İzinli | Açıklama |
+|--------|----------|
+| `Huginn Data Insights/` | Vault — asıl gövde |
+| Yedek dosyaları | `.bundle` ve arşivler |
+| `AGENTS.md` | Kural yönlendiricisi (SSOT değil) |
+| Kilitli nokta klasörler | `.git`, `.agents`, `.github`, `.vscode`, `.obsidian`, `.roo`, `.kilo`, `.continue`, `.storybook`, `.kombai`, `.n8nac` |
+
+Listede olmayan her şey köke **ait değildir**. Yeni bir kök girdisi KAHİN kararı ister.
+
+### Kural 3 — İkiz Gövde Yasağı
+
+`AI proje v1/` gibi paralel gövdeler yeniden doğmaz. İkiz gövde, hangi nüshanın doğru olduğu sorusunu üretir; bu soru her seferinde zaman yakar (D-211'in kök dizin karşılığı).
+
+**Bilinçli sınır:** Bu karar kökü **dondurur**, içeriği tek tek temizlemez. Çöp dosyaların ayıklanması ayrı ve geri alınabilir bir iştir; kural önce kanamayı durdurur.
+
+**Referans:** D-211 (ikiz yapı yasağı), D-222 (tek pano).
+
+---
+
+## D-222 — Tek Pano, Kanıtlı Kapanış (KAHİN kararı 2026-09-27)
+
+**Ölçüm (2026-09-27):** Sistemde **iki** görev panosu yaşıyordu. Kökteki `gorev_panosu.md` **5 gün** güncellenmemiş, üstünde **7 aktif** görev duruyordu; `data/orchestrator/gorev_panosu.md` canlıydı ve **0 aktif** gösteriyordu. Ajanlar canlı olanı okuyordu — eskisindeki **16 görev** kimseye görünmüyordu.
+
+**Sorun:** Bir panoyu arşive taşımak kolay; içindeki işi yok saymak **kayıt kaybıdır**. Eski panodaki 16 görev denetlendiğinde: **9'u zaten yapılmıştı** (rapor/brif dosyası mevcut), **5'i hayaletti** (düzeltilecek hata yok, kilit yok, test zaten var), **2'si gerçek backlog'du** — OSB ihale izleyicisi ve proxy rotasyonu. Bu ikisi sessizce silinseydi, kapsamda **42** ve **6** dosyada geçen iş kaybolurdu.
+
+### Kural 4 — Devralınan Görev Kanonik Kimlik Alır
+
+Arşivden backlog'a dönen görev **eski kimliğiyle** yaşatılamaz. Eski panonun `WK-` öneki D-57 kanonik alan listesinde yoktur; `gorev_at.py` bu kimliği reddeder. Görev, kanonik alan kimliğiyle **yeniden açılır** (`WK-02` → `VERI-02`, `WK-03` → `VERI-03`), eski kayıt `archive` durumunda yönlendirme notuyla bırakılır.
+
+Gerekçe ölçümdür: D-222'nin ilk uygulamasında bu iki görev `plan` durumuna sahipsiz taşındı; `test_naming_audit` anında kırmızıya döndü. Durum değiştirmek kimlik doğurmaz — **üretim kapısından geçmeyen görev, görev değildir**.
+
+### Kural 1 — Tek Pano
+
+Canlı gövdede **tek** `gorev_panosu.md` bulunur: `data/orchestrator/`. SSOT `data/orchestrator/task_board.json`'dır; Markdown pano onun Obsidian okuması içindir. Pano ile JSON çelişirse **JSON doğrudur**.
+
+### Kural 2 — Pano Kapatma Kanıt İster
+
+Bir görev panodan düşürülmeden önce üç kovadan birine **kanıtıyla** yazılır:
+
+| Durum | Anlamı | Gereken kanıt |
+|-------|--------|---------------|
+| `done` | İş yapıldı | Rapor/brif dosyası ya da commit |
+| `archive` | Hayalet — konusu yok | Neden yok olduğunun ölçümü (test çıktısı, dosya sayımı) |
+| `plan` | Gerçek backlog, başlanmadı | — (sahipsiz durur, silinmez) |
+
+`kanit` alanı boş bırakılamaz. "Eski olduğu için" kapatmak yasaktır: **tarih kanıt değildir**.
+
+### Kural 3 — Arşiv Silmez
+
+Pano arşive taşınırken içindeki her görev ID'si önce SSOT'a işlenir. Arşiv dosyası **kayıt değil, geçmiştir**; tek başına görev taşıyamaz.
+
+### Denetim
+
+`tests/test_pano_tekligi.py` — 4 mandal:
+
+```bash
+python -m pytest tests/test_pano_tekligi.py -q
+```
+
+1. Canlı gövdede tek pano var.
+2. SSOT'ta duplike görev ID yok.
+3. Arşivlenen panodaki her ID SSOT'ta duruyor (kayıt kaybı yok).
+4. `plan` durumundaki her görev Markdown panoda görünüyor.
+
+**Mandal:** 4. madde backlog'un görünmez kalmasını engeller — D-222'nin asıl hastalığı buydu.
+
+**Referans:** D-216 (hayalet görev arşivleme), D-220 (doküman politikası, pano kanonik yolu).

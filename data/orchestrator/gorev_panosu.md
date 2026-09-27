@@ -16,6 +16,15 @@
 | ORCH-03 | [ORCH] Görev dağıtımı - load balancing (2s) | ihsan | P0 | archive | orchestration/load_balancer.py |
 | ORCH-04 | [ORCH] Hata toleransı - retry mekanizması (2s) | ihsan | P1 | archive | orchestration/retry_handler.py |
 | ORCH-05 | [ORCH] İzleme ve metrikler - telemetri sistemi (3s) | ihsan | P0 | archive | orchestration/telemetry.py |
+| ALTYAPI-TEST-FAILURE-FIX-02 | [ALTYAPI] Test hatasi duzelt -> tests/test_mcp.py | utku | P1 | archive | - |
+| ALTYAPI-KILIT-TEMIZLE-01 | [ALTYAPI] Kilitleri duzelt -> file_locks.json | yasu | P2 | archive | - |
+| TEST-AYARLAR-KAPSAM-01 | Kullanici Ayarlari sayfasi icin test iskeleti yaz | yasu | P2 | archive | - |
+| ADLANDIRMA-GERIYE-01 | D-55 geriye donuk: rapor dosyalarindan ajan adini kaldir | ihsan | P3 | archive | - |
+| V10-BELGE-01 | 6 curutulen iddiaya K1/K3/K4 duzeltme notu | ihsan | P1 | archive | - |
+| WK-02 | OSB Tender Monitor - Real-time Tracking | - | P1 | archive | - |
+| WK-03 | Proxy Rotation and IP Management | - | P2 | archive | - |
+| VERI-02 | [VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s) | utku | P1 | plan | - |
+| VERI-03 | [VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s) | utku | P2 | plan | - |
 
 ## Tamamlananlar
 
@@ -60,3 +69,13 @@
 | YASU-04 | [YASU] Durum yönetimi - state management (2s) | yasu | 2026-09-26T04:06:33 |
 | YASU-05 | [YASU] Erişilebilirlik - WCAG 2.1 uyumu (2s) | yasu | 2026-09-26T04:06:34 |
 | ADMIN-UX-GELIR-GRUP-01 | Gelir&Paketler grubu tamamla: executive+maliyet sekmelerini ust=gelir'e tasi | utku | 2026-09-25T23:21:54 |
+| UI-ADMIN-MENU-D215216 | [UI] Admin menü ağacını düzelt → web_dashboard/tabs/__init__.py (3s) | utku | 2026-09-27T00:20:36 |
+| RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arastirma | ihsan | 2026-09-27T02:35:00 |
+| DOC-SIRKET-MASTER-01 | [DOC] Sirket Master ana belgesi duzelt | utku | 2026-09-27T02:35:00 |
+| REVIEW-ONAY-KUYRUGU-01 | Onay kuyrugundaki 2 teslimi denetle | yasu | 2026-09-27T02:35:00 |
+| AGN-CREWAI-PILOT-01 | crewAI hibrit worker pilotu (metin uretimi deneyi) | ihsan | 2026-09-27T02:35:00 |
+| ORKESTRA-DECISION-LOG-03 | [ORKESTRA] Karar defteri duzenleme ve validasyon | ihsan | 2026-09-27T02:35:00 |
+| ORKESTRA-NAMING-AUDIT-02 | [ORKESTRA] D-55/D-57 adlandirma kurallari denetimi | ihsan | 2026-09-27T02:35:00 |
+| ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyasi yaz | yasu | 2026-09-27T02:35:00 |
+| ORKESTRA-VAULT-TEKRAR-01 | [ORKESTRA] Vault isim tekrarlarini denetle | ihsan | 2026-09-27T02:35:00 |
+| VAULT-ORPHAN-INCELEME-01 | [VAULT] Orphan nod siniflama: 3361 dosya, D-173 | orkestrator | 2026-09-27T02:35:00 |

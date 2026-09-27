@@ -139,7 +139,7 @@ def test_migration_0017_down_cleans_schema_migrations():
 def test_migration_0017_no_root_down_file():
     """REGRESYON: Kokte 0017*.down.sql dosyasi YOKTUR.
     
-    migrate.py:36 glob("*.sql") recursive degil — kok dizindeki down dosyasi
+    migrate.py:36 glob("*.sql") recursive degil — migrations klasorundeki down dosyasi
     up sanilip uygulanir, migration kurulur kurulmaz duserilir (KABUL KRTERI).
     Bu test bu hatayi yakalar; yeni migration'da down dosyasi MUTLAKA
     down/ alt dizininde olmali.

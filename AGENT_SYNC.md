@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-26T23:54:53
+> Son guncelleme: 2026-09-27T03:07:49
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -16,21 +16,30 @@
 | ORCH-03 | [ORCH] Görev dağıtımı - load balancing ( | ihsan | P0 | archive |
 | ORCH-04 | [ORCH] Hata toleransı - retry mekanizmas | ihsan | P1 | archive |
 | ORCH-05 | [ORCH] İzleme ve metrikler - telemetri s | ihsan | P0 | archive |
+| ALTYAPI-TEST-FAILURE-FIX-02 | [ALTYAPI] Test hatasi duzelt -> tests/te | utku | P1 | archive |
+| ALTYAPI-KILIT-TEMIZLE-01 | [ALTYAPI] Kilitleri duzelt -> file_locks | yasu | P2 | archive |
+| TEST-AYARLAR-KAPSAM-01 | Kullanici Ayarlari sayfasi icin test isk | yasu | P2 | archive |
+| ADLANDIRMA-GERIYE-01 | D-55 geriye donuk: rapor dosyalarindan a | ihsan | P3 | archive |
+| V10-BELGE-01 | 6 curutulen iddiaya K1/K3/K4 duzeltme no | ihsan | P1 | archive |
+| WK-02 | OSB Tender Monitor - Real-time Tracking | - | P1 | archive |
+| WK-03 | Proxy Rotation and IP Management | - | P2 | archive |
+| VERI-02 | [VERI] OSB ihale izleyicisini yaz → src/ | utku | P1 | plan |
+| VERI-03 | [VERI] Proxy rotasyonunu yaz → src/scrap | utku | P2 | plan |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| UI-KONTROL-PANOSU-32 | [UI] Admin kontrol panosu → maskeleme du | utku | 2026-09-25 |
-| DOKUMAN-KVKK-FAQ-33 | [DOC] KVKK FAQ & sorun çözme → markdown  | utku | 2026-09-25 |
-| UTKU-01 | [UTKU] Veri şeması doğrulama - Core modü | utku | 2026-09-25 |
-| UTKU-03 | [UTKU] Hata loglama sistemi - production | utku | 2026-09-26 |
-| YASU-01 | [YASU] Frontend bileşen kütüphanesi - te | yasu | 2026-09-26 |
-| YASU-02 | [YASU] Responsive tasarım - mobil uyumlu | yasu | 2026-09-26 |
-| YASU-03 | [YASU] Grafiksel dashboard - veri görsel | yasu | 2026-09-26 |
-| YASU-04 | [YASU] Durum yönetimi - state management | yasu | 2026-09-26 |
-| YASU-05 | [YASU] Erişilebilirlik - WCAG 2.1 uyumu  | yasu | 2026-09-26 |
-| ADMIN-UX-GELIR-GRUP-01 | Gelir&Paketler grubu tamamla: executive+ | utku | 2026-09-25 |
+| UI-ADMIN-MENU-D215216 | [UI] Admin menü ağacını düzelt → web_das | utku | 2026-09-27 |
+| RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arasti | ihsan | 2026-09-27 |
+| DOC-SIRKET-MASTER-01 | [DOC] Sirket Master ana belgesi duzelt | utku | 2026-09-27 |
+| REVIEW-ONAY-KUYRUGU-01 | Onay kuyrugundaki 2 teslimi denetle | yasu | 2026-09-27 |
+| AGN-CREWAI-PILOT-01 | crewAI hibrit worker pilotu (metin ureti | ihsan | 2026-09-27 |
+| ORKESTRA-DECISION-LOG-03 | [ORKESTRA] Karar defteri duzenleme ve va | ihsan | 2026-09-27 |
+| ORKESTRA-NAMING-AUDIT-02 | [ORKESTRA] D-55/D-57 adlandirma kurallar | ihsan | 2026-09-27 |
+| ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyasi yaz | yasu | 2026-09-27 |
+| ORKESTRA-VAULT-TEKRAR-01 | [ORKESTRA] Vault isim tekrarlarini denet | ihsan | 2026-09-27 |
+| VAULT-ORPHAN-INCELEME-01 | [VAULT] Orphan nod siniflama: 3361 dosya | orkestrator | 2026-09-27 |
 
 ## Son Handoff'lar
 

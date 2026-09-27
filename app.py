@@ -483,7 +483,7 @@ def render_sidebar(secili: TabTanimi) -> None:
     with st.sidebar:
         kompakt = bool(st.session_state.get(KOMPAKT_KEY, False))
 
-        # K3-10g (KAHİN: "hugin logosuna yer açmış oluruz, logoyu sol köşeye
+        # K3-10g (KAHİN: "Huginn logosuna yer açmış oluruz, logoyu sol köşeye
         # koyarsın"): logo dosyası varsa `st.logo` ile sol üst köşeye basılır,
         # yoksa metin başlık kalır. Anahtarlar (Kompakt menü / Bölüm açıklaması)
         # sayfa altına (`render_footer`) taşındı.
