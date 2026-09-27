@@ -1751,3 +1751,82 @@ görünmek" ölçülebilir kazanç değildir.
   yoktur. Karşı yön zaten D-66 kapısıyla mandallı — yol kırılırsa görev eklenemez.
 - **Referans:** D-66 (brif diskte zorunlu), D-221 (kural kanamayı durdurur, geçmişi
   tek tek temizlemez), D-220 (tavan yalnız küçülür).
+
+---
+
+### D-241 — Dış kök (git deposu kökü) izin listesiyle kapalıdır
+
+**Karar.** Dış kökte (`<depo>/`, vault'un bir üstü) yalnızca **4 dosya** bulunur:
+`.gitignore`, `AGENTS.md`, `tsconfig.json`, `n8nac-config.json`. Bu liste
+**büyümez**. Tek kullanımlık betik, ölçüm çıktısı, ekran görüntüsü, döküm dosyası
+kökte **duramaz** — alt klasöre iner.
+
+**Neden — D-221 mandalsız yazılmıştı.** Ölçüm (2026-09-27): dış kökte **131 dosya**
+birikmişti (96 `.py`, 22 `.png`, 9 döküm). İki bağımsız kusur aynı noktaya çarptı:
+1. `.gitignore` deseni **zaten vardı** (`check_*.py`, `fix_*.py`, `_*.py`, `output*.txt`)
+   — ama dosyalar **takipli** olduğu için `.gitignore` onlara hiç uygulanmadı.
+   `.gitignore` yalnız *takipsiz* dosyayı durdurur; takipli dosya için sessizdir.
+2. D-221'in kendi metni "listesi `tests/test_kok_politikasi.py` ile sabitlenir"
+   diyordu — **o dosya hiç yazılmamıştı**. Kural kendi mandalına atıfta bulunup
+   mandalı kurmamış.
+
+Sonuç: iki yıllık birikmenin sebebi kuralın yokluğu değil, **kuralın kapısızlığı**.
+D-211'in "kural gövdesi çalıştırılabilir olmalı" ilkesinin kök dizin karşılığı.
+
+**Yapılan.** 131 dosya **0 referans** ölçümünden sonra (`git grep -F`, 130 ad,
+hiçbiri başka dosyadan çağrılmıyor) `git mv` ile sınıflandırılarak arşive alındı —
+takipli taşıma, yani `git mv` ile geri alınabilir:
+`_ARSIV_kok_betik_2026-09-27/{sorgu_check:35, duzeltme_fix:38, ekran_goruntusu:22,
+olcum_gecici:12, cikti_dokumu:9, muhtelif:14}`. Kök: **131 → 4**.
+
+**Ek tespit — `.gitignore` tek başına mandal değildir.** Takipli bir dosya için
+`.gitignore` hiçbir şey yapmaz. Kök temizliği ancak **dosya sistemini okuyan bir
+test** ile korunur; desen yazmak yeterli sanılırsa kirlilik sessizce birikir.
+
+- **Mandal:** [`tests/test_kok_politikasi.py`](tests/test_kok_politikasi.py:41)
+  (3 test: izinsiz dosya yok, izinsiz klasör yok, izin listesi ≤ 4 kalır).
+  Kapının çalıştığı **kırmızı yakarak** doğrulandı: taşıma betiği kökte kaldığı
+  anda test `Dis kokte 1 izinsiz dosya: ['_kok_tasima.py']` ile düştü.
+- **Tavan:** izin listesi **4**, yalnız küçülür (D-220). Yeni dosyaya yer açmak için
+  listeyi büyütmek ihlaldir — dosya alt klasöre ait.
+- **Referans:** D-221 (kök politikası, mandalı bu kararla kuruldu), D-211 (kural
+  gövdesi çalıştırılabilir olmalı), D-220 (tavan yalnız küçülür), D-223 (silme değil
+  arşiv).
+
+---
+
+### D-242 — Yedek/arşiv tek çatı altında; `Path.match` glob sanılmaz
+
+**Karar.** Tüm arşiv ve yedek klasörleri **tek kök** altında toplanır:
+`<depo>/yedekler/` (git takipsiz, `.gitignore:10`). İki alt yapı: `yedekler/*.bundle|*.zip`
+(repo yedeği) ve `yedekler/arsiv/_ARSIV_*` (taşınan içerik). Dış kökte dağınık
+`_ARSIV_*` klasörü **bırakılmaz**.
+
+**Neden — ürün sahibi tespiti (2026-09-27).** Dış kökte **7 ayrı** `_ARSIV_*`
+klasörü birikmişti; `yedekler/` zaten aynı işi yapıyordu. İki yerde iki farklı
+"arşiv" kavramı, "bu şey nerede?" sorusunu her seferinde yeniden sordurur —
+oysa arşivin tek amacı **aramayı kolaylaştırmaktı**. D-241 kökü 131→4 indirirken
+arşiv klasörlerini kökte bırakmıştı: temizlik yarım kalmış.
+
+**Yapılan.** 7 klasör `yedekler/arsiv/` altına taşındı. **377 dosya** diskte
+korunuyor (ölçüldü); git indeksinden **265 yol** düştü. İçerik geçmişte durur,
+`git show <commit>:<yol>` ile erişilir — D-223'ün "silme değil arşiv" ilkesi
+korunur, çünkü dosyalar hem diskte hem geçmişte.
+
+**Yan kusur — `Path.match` glob değildir.** [`muaf_dosya()`](scripts/marka_denetim.py:89)
+muafiyeti `Path(bagil).match(desen)` ile ölçüyordu. `Path.match`'te `*` **tek
+segmente** bağlıdır: `plans/*` deseni `plans/_arsiv_brief/x.md` yolunu **eşlemez**.
+Yani alt klasör açıldığı an muaf dosyalar sessizce ihlal sayılacaktı.
+[`fnmatch`](scripts/marka_denetim.py:100) ile değiştirildi — orada `*` ayırıcıyı
+da kapsar.
+
+**Genel kural.** Yol desenini "glob gibi" kullanacaksan `fnmatch` kullan.
+`Path.match` segment tabanlıdır ve alt klasör açıldığında **sessizce** kapsam
+daraltır — kırmızı yakmaz, sadece yanlış cevap verir. Muafiyet/izin listesi
+yazan her yerde bu ayrım yorumda belirtilir.
+
+- **Mandal:** [`tests/test_marka_denetim_muafiyet.py`](tests/test_marka_denetim_muafiyet.py)
+  (alt klasördeki muaf dosya ihlal sayılmıyor) + [`tests/test_kok_politikasi.py`](tests/test_kok_politikasi.py)
+  (dış kökte izinsiz klasör yok — `_ARSIV_*` geri doğarsa kırmızı yanar).
+- **Referans:** D-241 (dış kök izin listesi), D-223 (silme değil arşiv), D-211
+  (kural gövdesi çalıştırılabilir olmalı).

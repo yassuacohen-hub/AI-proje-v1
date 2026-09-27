@@ -45,3 +45,6 @@ Ana baglam: [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]] · [[Huginn Data In
 - [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]]
 - [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]
 - [[Huginn Data Insights/PROJECT_ROADMAP]]
+
+## Kapanan isler
+| VERI-HAYALET-TEMIZ-01 | 4591 hayalet kayit silindi (14003->9412), UNIQUE INDEX uq_companies_legal_name olusturuldu, vergi_no 761 korundu, count(*)=distinct legal_name=9412 dogrulandi | 2026-09-27 |

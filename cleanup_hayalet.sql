@@ -8,7 +8,7 @@ BEGIN;
 
 -- Geçici tablo: her legal_name için keeper (en eski company_id)
 CREATE TEMP TABLE tmp_keeper AS
-SELECT legal_name, MIN(company_id)::uuid as keeper_id
+SELECT legal_name, MIN(company_id::text)::uuid as keeper_id
 FROM companies
 GROUP BY legal_name
 HAVING COUNT(*) > 1;
@@ -69,7 +69,14 @@ FROM tmp_dupes d
 JOIN tmp_keeper k ON d.legal_name = k.legal_name
 WHERE er.company_id = d.company_id;
 
--- 8. Hayalet kayıtları sil (tek seferde)
+-- 8. job_postings güncelle
+UPDATE job_postings jp
+SET company_id = k.keeper_id
+FROM tmp_dupes d
+JOIN tmp_keeper k ON d.legal_name = k.legal_name
+WHERE jp.company_id = d.company_id;
+
+-- 9. Hayalet kayıtları sil (tek seferde)
 DELETE FROM companies
 WHERE company_id IN (SELECT company_id FROM tmp_dupes);
 

@@ -54,13 +54,16 @@ def _ayristir_liste(deger: str | None) -> list[str]:
 def _brief_bul(ajan: str, task_id: str) -> Path | None:
     """D-66: brif dosyasini diskte arar; bulamazsa None.
 
-    Iki kanonik konum: plans/brief_<ajan>_<TASK>.md ve
-    data/orchestrator/<TASK>_brif_<tarih>_<rol>.md. Yollar KOK'e gore mutlak —
-    CWD'ye guvenilmez, komut repo disindan da cagrilabiliyor.
+    Uc kanonik konum: plans/brief_<ajan>_<TASK>.md, plans/_arsiv_brief/ (kapanmis
+    isler) ve data/orchestrator/<TASK>_brif_<tarih>_<rol>.md. Yollar KOK'e gore
+    mutlak — CWD'ye guvenilmez, komut repo disindan da cagrilabiliyor.
     """
-    tekil = KOK / "plans" / f"brief_{ajan}_{task_id}.md"
-    if tekil.exists():
-        return tekil
+    for aday in (
+        KOK / "plans" / f"brief_{ajan}_{task_id}.md",
+        KOK / "plans" / "_arsiv_brief" / f"brief_{ajan}_{task_id}.md",
+    ):
+        if aday.exists():
+            return aday
     eskiler = sorted((KOK / "data" / "orchestrator").glob(f"{task_id}_brif_*.md"))
     return eskiler[-1] if eskiler else None
 

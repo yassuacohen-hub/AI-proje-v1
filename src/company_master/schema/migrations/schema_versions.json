@@ -1,6 +1,6 @@
 {
-  "current_version": 22,
-  "last_applied": "0022_unique_legal_name.sql",
+  "current_version": 23,
+  "last_applied": "0023_source_records_company_id.sql",
   "migrations": [
     {
       "version": 1,
@@ -120,7 +120,13 @@
       "version": 22,
       "file": "0022_unique_legal_name.sql",
       "date": "2026-09-27",
-      "note": "VERI-HAYALET-TEMIZ-01: companies.legal_name UNIQUE kısıtı (hayalet kayıt tekrarını engelle)"
+      "note": "VERI-HAYALET-TEMIZ-01: companies.legal_name UNIQUE kisiti (hayalet kayit tekrarini engelle)"
+    },
+{
+      "version": 23,
+      "file": "0023_source_records_company_id.sql",
+      "date": "2026-09-27",
+      "note": "VERI-KAYNAK-BAG-01: source_records.company_id kolonu (Firma<->Kaynak bagi)"
     }
   ]
 }
