@@ -59,17 +59,21 @@ def read_migration_file(version: str, direction: str = "up") -> str:
     if sayi is None:
         raise ValueError(f"Gecersiz migration versiyonu: {version!r}")
 
+    # VERI-04: kanonik down bicimi `migrations/down/NNNN_ad.down.sql`.
+    # Eskiden yalnizca MIGRATIONS_DIR taranıyordu; down/ alt dizini hic okunmadigi
+    # icin rollback (direction="down") hicbir dosya bulamiyordu.
+    arama_dizini = MIGRATIONS_DIR / "down" if direction == "down" else MIGRATIONS_DIR
+
     # Tam eslesme (0017_user_activity_log.sql) ya da on ek (0017_*.sql)
     for kalip in (f"{sayi:04d}_*.sql", f"{sayi:04d}.sql"):
-        adaylar = sorted(MIGRATIONS_DIR.glob(kalip))
-        for aday in adaylar:
+        for aday in sorted(arama_dizini.glob(kalip)):
             is_down = aday.name.endswith(".down.sql")
             if (direction == "down") == is_down:
                 return aday.read_text(encoding="utf-8")
 
     raise FileNotFoundError(
         f"Migration dosyasi bulunamadi: {version} ({direction}) "
-        f"-> {MIGRATIONS_DIR}"
+        f"-> {arama_dizini}"
     )
 
 

@@ -100,60 +100,61 @@ def test_migration_0017_kvkk_nullable():
 
 # ------------------------------------------------------------------- down file
 
+# VERI-04 kanonik down yolu: `migrations/down/NNNN_ad.down.sql`.
+# Bu dosya once `down/0017_user_activity_log.sql` (`.down` eki olmadan) ariyordu;
+# o bicimde tek bir dosya bile yoktu.
+DOWN_0017 = Path("src/company_master/schema/migrations/down/0017_user_activity_log.down.sql")
+
+
 def test_migration_0017_down_exists():
     """0017_user_activity_log.down.sql dosyasi down/ alt dizininde mevcut."""
-    assert (
-        Path("src/company_master/schema/migrations/down/0017_user_activity_log.sql").exists()
-    ), "down/0017_user_activity_log.sql bulunamadi"
+    assert DOWN_0017.exists(), f"{DOWN_0017} bulunamadi"
 
 
 def test_migration_0017_down_drops_table():
     """Down dosyasi DROP TABLE iceriyor."""
-    sql = Path(
-        "src/company_master/schema/migrations/down/0017_user_activity_log.sql"
-    ).read_text(encoding="utf-8")
+    sql = DOWN_0017.read_text(encoding="utf-8")
     assert "DROP TABLE IF EXISTS user_activity_log" in sql
 
 
 def test_migration_0017_down_drops_indexes():
     """Down dosyasi indeksleri dusuruyor."""
-    sql = Path(
-        "src/company_master/schema/migrations/down/0017_user_activity_log.sql"
-    ).read_text(encoding="utf-8")
+    sql = DOWN_0017.read_text(encoding="utf-8")
     assert "idx_activity_tip_zaman" in sql
     assert "idx_activity_user_zaman" in sql
     assert "DROP INDEX IF EXISTS" in sql
 
 
-def test_migration_0017_down_cleans_schema_migrations():
-    """Down dosyasi schema_migrations kaydini siliyor."""
-    sql = Path(
-        "src/company_master/schema/migrations/down/0017_user_activity_log.sql"
-    ).read_text(encoding="utf-8")
-    assert "DELETE FROM schema_migrations" in sql
-    assert "0017_user_activity_log.sql" in sql
+def test_migration_0017_surum_defteri_json():
+    """Surum defteri `schema_versions.json`'dir, `schema_migrations` tablosu DEGIL.
+
+    Eski hali down dosyasinda `DELETE FROM schema_migrations` ariyordu; boyle bir
+    tablo projede hicbir yerde (SQL veya Python) tanimli degil. Gercek sozlesme:
+    versiyon defteri JSON dosyasi ve 0017 girdisini iceriyor.
+    """
+    import json
+
+    defter = Path("src/company_master/schema/migrations/schema_versions.json")
+    veri = json.loads(defter.read_text(encoding="utf-8"))
+    assert any(m["version"] == 17 for m in veri["migrations"]), "defterde 0017 girdisi yok"
 
 
 # ------------------------------------------------------------------- regresyon kapisi
 
 def test_migration_0017_no_root_down_file():
     """REGRESYON: Kokte 0017*.down.sql dosyasi YOKTUR.
-    
-    migrate.py:36 glob("*.sql") recursive degil — migrations klasorundeki down dosyasi
-    up sanilip uygulanir, migration kurulur kurulmaz duserilir (KABUL KRTERI).
-    Bu test bu hatayi yakalar; yeni migration'da down dosyasi MUTLAKA
-    down/ alt dizininde olmali.
+
+    Down dosyalari up klasorunde durursa `migrations/*.sql` globlari onlari ileri
+    migration sanar. Yeni migration'da down dosyasi MUTLAKA down/ altinda olmali.
     """
     migrations_dir = Path("src/company_master/schema/migrations")
     # Kok dizinde 0017 ile baslayan down dosyasi araştır
     root_down_files = list(migrations_dir.glob("0017*.down.sql"))
     assert (
         not root_down_files
-    ), f"REGRESYON: Kokte 0017*.down.sql dosyasi bulundu, migrate.py glob'una sikisacak: {root_down_files}"
+    ), f"REGRESYON: Kokte 0017*.down.sql dosyasi bulundu, up globuna sikisacak: {root_down_files}"
     # Down dosyasi SADECE down/ alt dizininde olmali
-    assert Path(
-        "src/company_master/schema/migrations/down/0017_user_activity_log.sql"
-    ).exists(), "down/0017_user_activity_log.sql yok, kok dizinde mi arandi?"
+    assert DOWN_0017.exists(), f"{DOWN_0017} yok, kok dizinde mi arandi?"
 
 
 def test_schema_versions_json_updated():

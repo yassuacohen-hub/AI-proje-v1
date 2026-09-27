@@ -21,9 +21,9 @@ def test_migration_files_exist():
     assert (migrations_dir / "0016_users_last_login.sql").exists()
     assert (migrations_dir / "0017_user_activity_log.sql").exists()
 
-    # Down dosyaları
-    assert (migrations_dir / "0016_users_last_login.down.sql").exists()
-    assert (migrations_dir / "0017_user_activity_log.down.sql").exists()
+    # Down dosyaları — VERI-04 kanonik yol: migrations/down/NNNN_ad.down.sql
+    assert (migrations_dir / "down" / "0016_users_last_login.down.sql").exists()
+    assert (migrations_dir / "down" / "0017_user_activity_log.down.sql").exists()
 
     print("[TEST] migration_files_exist: PASSED")
 
