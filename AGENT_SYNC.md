@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-27T08:26:16
+> Son guncelleme: 2026-09-27T08:36:33
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -30,7 +30,6 @@
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| ORKESTRA-DECISION-LOG-03 | [ORKESTRA] Karar defteri duzenleme ve va | ihsan | 2026-09-27 |
 | ORKESTRA-NAMING-AUDIT-02 | [ORKESTRA] D-55/D-57 adlandirma kurallar | ihsan | 2026-09-27 |
 | ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyasi yaz | yasu | 2026-09-27 |
 | ORKESTRA-VAULT-TEKRAR-01 | [ORKESTRA] Vault isim tekrarlarini denet | ihsan | 2026-09-27 |
@@ -40,6 +39,7 @@
 | UI-11 | [UI] admin_mfa + ana_kontrol basliklarin | utku | 2026-09-27 |
 | DOC-D227-01 | [DOC] D-227: karar numarasi yalniz AGENT | orkestrator | 2026-09-27 |
 | DOC-D228-01 | D-228: vault icinde paralel veri govdesi | kahin | 2026-09-27 |
+| DOC-D229-01 | D-229: zaman damgali yedek git te izlenm | kahin | 2026-09-27 |
 
 ## Son Handoff'lar
 

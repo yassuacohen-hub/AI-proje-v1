@@ -9,6 +9,7 @@ kokun TANIMINI dondurur: yeni bir govde/pano dogarsa kirmizi yanar.
 """
 from __future__ import annotations
 
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -143,6 +144,44 @@ def test_d228_agents_mde_kayitli() -> None:
     """D-228 metni SSOT'ta duruyor mu — test ile karar birbirini tutmali."""
     metin = (VAULT / "AGENTS.md").read_text(encoding="utf-8")
     assert "(D-228 " in metin, "D-228 karari AGENTS.md'de yok."
+
+
+#: D-229 — zaman damgali yedek/gecici dosya git'te IZLENMEZ.
+#: Bosluk olcumu (2026-09-27): .gitignore'da `*.backup_*` ve `_tmp_*` desenleri
+#: VARDI, ama bu 65 dosya desenler yazilmadan ONCE eklenmisti; git izlenen
+#: dosyada .gitignore'a bakmaz. Yani kural yaziliydi, mandali yoktu.
+#: Silmek veri kaybi degil: hepsi git gecmisinde duruyor (ilk giris ec770e4).
+YEDEK_DESENLERI = (".backup_", ".yedek_", "_pytest_rerun", "_tmp_onem_test")
+
+#: D-220 tavani: temizlik sonrasi 0. Bu sayi yalniz KUCULEBILIR.
+IZLENEN_YEDEK_TAVANI = 0
+
+
+def test_zaman_damgali_yedek_git_te_izlenmiyor() -> None:
+    """D-229: yedegin yedegi git'te durmaz — gecmis zaten yedektir.
+
+    `git ls-files` kullanir (diskteki dosyaya degil, IZLENEN dosyaya bakar);
+    cunku sorun dosyanin varligi degil, versiyonlanmasiydi.
+    """
+    izlenen = subprocess.run(
+        ["git", "ls-files"],
+        cwd=VAULT,
+        capture_output=True,
+        text=True,
+        check=True,
+    ).stdout.splitlines()
+    artik = sorted(y for y in izlenen if any(d in y for d in YEDEK_DESENLERI))
+    assert len(artik) <= IZLENEN_YEDEK_TAVANI, (
+        f"D-229 ihlali: git'te {len(artik)} zaman damgali yedek izleniyor "
+        f"(tavan {IZLENEN_YEDEK_TAVANI}) -> {artik[:5]}... "
+        "`git rm --cached` ile cikar; icerik gecmiste duruyor."
+    )
+
+
+def test_d229_agents_mde_kayitli() -> None:
+    """D-229 metni SSOT'ta duruyor mu."""
+    metin = (VAULT / "AGENTS.md").read_text(encoding="utf-8")
+    assert "(D-229 " in metin, "D-229 karari AGENTS.md'de yok."
 
 
 if __name__ == "__main__":

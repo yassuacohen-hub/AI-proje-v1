@@ -59,14 +59,10 @@ data/orchestrator/task_board_corrupt_backup.json
 data/orchestrator/task_board.json
 data/orchestrator/onay_kuyrugu.json
 data/orchestrator/chat.json
-data_worktree/orchestrator/task_board.json
-data_worktree/orchestrator/onay_kuyrugu.json
-data_worktree/orchestrator/chat.json
+# D-228 (2026-09-27): data_worktree/ elendi -> o desenler buradan da silindi (olu ayar kalmaz).
 # D-186: otomatik zaman damgali yedekler ve yedek klasorleri repoya girmez
 data/orchestrator/*.bak
-data_worktree/orchestrator/*.bak
 data/orchestrator/_yedek_*/
-data_worktree/orchestrator/_yedek_*/
 # D-58: orkestrator devralma anahtari (gizli, repoya girmez)
 data/orchestrator/abrakadabra.key
 
@@ -120,7 +116,6 @@ data/router/yedekler/
 data/router/son_uyarilar.json
 # TUR-B2 Adim 2 (2026-09-24): maskeli de olsa saglayici anahtari + hesap envanteri sizdirir
 data/router/optimizer_latest.json
-data_worktree/router/optimizer_latest.json
 
 # 9R-05 arşiv (yardımcı _9r05_* scriptleri)
 scripts/_arsiv/
@@ -136,8 +131,12 @@ data/_*.py
 data/_tmp/
 
 # TUR-C Adim 2 (2026-09-24): gecici betik + zaman damgali yedek artiklari (AGENTS.md:394, :502)
+# D-229 (2026-09-27): bu desenler VARDI ama 65 dosyayi tutmadi -- hepsi desenlerden ONCE
+# izlenmeye alinmisti ve git izlenen dosyaya .gitignore uygulamaz. `.yedek_` deseni ise
+# hic yoktu. Mandal: tests/test_kok_izin_listesi.py (git ls-files'a bakar, diske degil).
 _tmp_*
 *.backup_*
+*.yedek_*
 
 # SEC-AUTH-01 D-1: Streamlit secrets (plaintext admin fallback) depoya girmez
 .streamlit/secrets.toml

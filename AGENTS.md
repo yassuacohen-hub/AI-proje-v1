@@ -1311,3 +1311,57 @@ Negatif kontrol: `data_worktree` var olduğu anda ölçüldü →
 
 - **Referans:** D-221 (kök izin listesi — kör noktanın kaynağı), D-222 (Tek Pano),
   D-170 (emekli: ham kopya muafiyeti), D-220 (geriye dönük temizlik değil, tavan).
+
+---
+
+## Zaman Damgalı Yedek Git'te İzlenmez (D-229 — KAHİN kararı 2026-09-27)
+
+**Kural:** Adında `.backup_`, `.yedek_`, `_pytest_rerun` veya `_tmp_onem_test` geçen
+dosya git'te **izlenmez**. Yedeğin yedeği tutulmaz; geçmiş zaten yedektir.
+
+**Neden:** `.gitignore`'da `*.backup_*` ve `_tmp_*` desenleri **vardı** (TUR-C Adım 2,
+2026-09-24) ama 65 dosyayı tutmuyordu: hepsi desenler yazılmadan **önce** izlenmeye
+alınmıştı ve **git, izlenen dosyaya `.gitignore` uygulamaz**. `.yedek_` deseni ise hiç
+yoktu. Yani kural yazılıydı, mandalı yoktu — bu yüzden D-228 commit'ine (`5655cc0`)
+`git add -A` ile yeni çöp girdi. Kuralı yazan commit, kuralı ihlal etti.
+
+**Ölçüm (2026-09-27, tahmin değil):**
+
+| Ölçüt | Değer |
+|-------|-------|
+| Git'te izlenen zaman damgalı artık | 65 |
+| SHA-256 aslıyla **aynı** | 0 |
+| Aslından **farklı** | 63 |
+| Aslı hiç yok (öksüz) | 2 |
+| `.backup_2026-09-21` ikizi | 55 (36'sı `data/skills/supabase-postgres-best-practices/`) |
+| `task_board.json.yedek_*` | 5 |
+
+**Silmek veri kaybı değil — üç bağımsız kanıt:**
+
+1. Geçmiş: `git log --diff-filter=A -- README.md.backup_2026-09-21` → `ec770e4`
+   (otomatik günlük commit, 2026-09-22). İçerik depoda duruyor.
+2. Fark küçük: `git diff --no-index --stat README.md.backup_2026-09-21 README.md` →
+   `1 file changed, 2 insertions(+)` — marka revizyonu öncesi hâli.
+3. Üreticisi de çöp sayıyor: ikizleri
+   [`GRAPH-CANONICAL-UYGULA.py`](data/orchestrator/GRAPH-CANONICAL-UYGULA.py:95) üretti,
+   [`GRAPH-INDEX-BUILD.py`](data/orchestrator/GRAPH-INDEX-BUILD.py:38) onları **atlıyor**.
+
+**Uygulama:** `git rm` (index + disk), `.gitignore`'a `*.yedek_*`. Ayrı arşiv
+**yapılmadı** — ikinci kopya tam da D-228'de yasaklanan şey. `tests/_tmp_onem_test/`
+öksüz değil, [`test_chat_table_stil.py`](tests/test_chat_table_stil.py:31)'in runtime
+çıktısı; silinince yeniden üretilir, versiyonlanması gereksizdi.
+
+**Mandal:** [`tests/test_kok_izin_listesi.py::test_zaman_damgali_yedek_git_te_izlenmiyor`](tests/test_kok_izin_listesi.py:160)
+— diske değil `git ls-files`'a bakar, çünkü sorun dosyanın varlığı değil
+**versiyonlanması**ydı. Tavan `IZLENEN_YEDEK_TAVANI = 0` (D-220: yalnız küçülebilir).
+
+```bash
+python -m pytest tests/test_kok_izin_listesi.py -q
+```
+
+Negatif kontrol: 65 dosya izlenirken ölçüldü →
+`AssertionError: D-229 ihlali: git'te 65 zaman damgali yedek izleniyor (tavan 0) ->
+['PROJECT_ROADMAP.md.backup_2026-09-21', ...]`.
+
+- **Referans:** D-186 (pano runtime state), D-220 (tavan yalnız küçülür), D-228
+  (ikinci kopya yasağı — bu yüzden arşiv yok), TUR-C Adım 2 (mandalsız kalan desen).
