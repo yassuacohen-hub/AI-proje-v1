@@ -84,25 +84,25 @@ def main():
               AND sr.raw_nace IS NOT NULL
               AND sr.raw_nace <> ''
         """)).fetchall()
-    
+
     # company_id -> raw_nace listesi
     company_raw_nace = defaultdict(list)
     for company_id, raw_nace in rows:
         company_raw_nace[company_id].append(raw_nace)
-    
+
     print(f"  raw_nace olan company sayısı: {len(company_raw_nace)}")
     total_raw = sum(len(v) for v in company_raw_nace.values())
     print(f"  Toplam raw_nace kaydı: {total_raw}")
 
     # 3. Her company için en iyi NACE kodunu belirle
     print("\n[3/6] Her company için en iyi NACE kodu belirleniyor...")
-    
+
     # nace_codes'tan valid kod seti
     valid_set = valid_codes
-    
+
     # Her raw_nace'i parse et ve valid kodları topla
     company_candidates = defaultdict(lambda: defaultdict(int))  # company_id -> {nace_code: count}
-    
+
     for company_id, raw_list in company_raw_nace.items():
         for raw in raw_list:
             if not raw:
@@ -117,14 +117,14 @@ def main():
                 norm = normalize_nace(part)
                 if norm in valid_set:
                     company_candidates[company_id][norm] += 1
-    
+
     # Her company için en sık görülen valid kodu seç
     company_best_nace = {}
     for company_id, candidates in company_candidates.items():
         if candidates:
             best = max(candidates.items(), key=lambda x: x[1])[0]
             company_best_nace[company_id] = best
-    
+
     print(f"  raw_nace'ten kod türetilen company: {len(company_best_nace)}")
 
     # 4. Mevcut companies nace_code durumunu analiz et
@@ -135,19 +135,19 @@ def main():
             SELECT company_id, nace_code FROM companies
             WHERE nace_code ~ '^[0-9]{2}\\.[0-9]{2}$'
         """)).fetchall()
-        
+
         # 6 haneli
         six_digit = conn.execute(text("""
             SELECT company_id, nace_code FROM companies
             WHERE nace_code ~ '^[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}$'
         """)).fetchall()
-        
+
         # 2 haneli
         two_digit = conn.execute(text("""
             SELECT company_id, nace_code FROM companies
             WHERE nace_code ~ '^[0-9]{2}$'
         """)).fetchall()
-        
+
         # Yetim kodlar (nace_codes'ta yok)
         orphans = conn.execute(text("""
             SELECT c.company_id, c.nace_code
@@ -165,7 +165,7 @@ def main():
     # 5. Düzeltmeleri hazırla
     print("\n[5/6] Düzeltmeler hazırlanıyor...")
     updates = []  # (company_id, new_nace_code)
-    
+
     # 5a. NN.NN format -> raw_nace'ten türet / valid 4 haneli varsa kullan / NULL
     for company_id, nace_code in nn_nn:
         # Önce raw_nace'ten türetilmiş varsa onu kullan
@@ -183,7 +183,7 @@ def main():
                 if parent2 and f"{parent2}.00" in valid_set:
                     pass  # parent valid ama child yok
                 updates.append((company_id, None))  # NULL'a çek
-    
+
     # 5b. 6 haneli -> 4 haneli sınıfa kırp (validse) / NULL
     for company_id, nace_code in six_digit:
         parent4 = get_parent_code(nace_code)  # 4 haneli parent
@@ -191,7 +191,7 @@ def main():
             updates.append((company_id, parent4))
         else:
             updates.append((company_id, None))
-    
+
     # 5c. 2 haneli -> 4 haneli varsa genişlet / NULL (98 gibi)
     for company_id, nace_code in two_digit:
         # 2 haneli kod için 4 haneli child ara
@@ -203,7 +203,7 @@ def main():
             updates.append((company_id, None))
         else:
             updates.append((company_id, None))
-    
+
     # 5d. Yetim kodlar -> valid eşleşme ara / NULL
     for company_id, nace_code in orphans:
         # Benzer kod ara (prefix match)
@@ -212,7 +212,7 @@ def main():
             updates.append((company_id, matches[0]))
         else:
             updates.append((company_id, None))
-    
+
     print(f"  Toplam güncellenecek: {len(updates)}")
 
     # 6. Güncellemeyi uygula
@@ -225,7 +225,7 @@ def main():
                     {"nace": new_nace, "cid": company_id}
                 )
         print("  Güncelleme tamamlandı.")
-    
+
     # Doğrulama
     print("\n[Doğrulama]")
     with engine.connect() as conn:
@@ -235,21 +235,21 @@ def main():
             WHERE nace_code ~ '^[0-9]{2}\\.[0-9]{2}$'
         """)).scalar()
         print(f"NN.NN format kalan: {nn}")
-        
+
         # 6 haneli kalan
         six = conn.execute(text("""
             SELECT COUNT(*) FROM companies
             WHERE nace_code ~ '^[0-9]{2}\\.[0-9]{2}\\.[0-9]{2}$'
         """)).scalar()
         print(f"6 haneli kalan: {six}")
-        
+
         # 2 haneli kalan
         two = conn.execute(text("""
             SELECT COUNT(*) FROM companies
             WHERE nace_code ~ '^[0-9]{2}$'
         """)).scalar()
         print(f"2 haneli kalan: {two}")
-        
+
         # Yetim kod kalan
         orphan = conn.execute(text("""
             SELECT COUNT(*) FROM companies c
@@ -257,7 +257,7 @@ def main():
             WHERE c.nace_code IS NOT NULL AND nc.nace_code IS NULL
         """)).scalar()
         print(f"Yetim kod kalan: {orphan}")
-        
+
         # 10.11, 29.10 örnek firmaları
         for code in ['10.11', '29.10']:
             rows = conn.execute(text(f"SELECT company_id, nace_code FROM companies WHERE nace_code = '{code}' LIMIT 3")).fetchall()

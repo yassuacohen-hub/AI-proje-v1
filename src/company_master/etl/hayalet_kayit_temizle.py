@@ -305,7 +305,7 @@ def backup_to_jsonl(backup_path: Path, records: list[CompanyRecord], related: di
     return count
 
 
-def run_cleanup(dry_run: bool = False) -> dict:
+def run_cleanup(dry_run: bool = False, backup_path: Path | None = None) -> dict:
     """Ana temizleme fonksiyonu."""
     engine = get_engine()
 
@@ -324,8 +324,9 @@ def run_cleanup(dry_run: bool = False) -> dict:
     print(f"Silinecek toplam kayıt: {total_to_delete}")
 
     # Yedek dosyası
-    timestamp = datetime.now().strftime("%Y%m%d")
-    backup_path = Path(f"data/backup/hayalet_{timestamp}.jsonl")
+    if backup_path is None:
+        timestamp = datetime.now().strftime("%Y%m%d")
+        backup_path = Path(f"yedekler/hayalet_{timestamp}.jsonl")
 
     all_to_delete = []
     all_related = {}
@@ -420,10 +421,15 @@ def run_cleanup(dry_run: bool = False) -> dict:
         all_to_delete.extend(duplicates)
         all_related.update(related)
 
-    # Yedek al
-    print(f"\nYedek alınıyor: {backup_path}")
-    backup_count = backup_to_jsonl(backup_path, all_to_delete, all_related)
-    print(f"Yedeklenen kayıt: {backup_count}")
+    # Yedek al — dry-run diske YAZMAZ (D-243)
+    if not dry_run:
+        print(f"\nYedek alınıyor: {backup_path}")
+        backup_count = backup_to_jsonl(backup_path, all_to_delete, all_related)
+        print(f"Yedeklenen kayıt: {backup_count}")
+        if backup_count != len(all_to_delete):
+            raise RuntimeError(
+                f"Yedek eksik: {backup_count} != {len(all_to_delete)} — silme iptal"
+            )
 
     # Sil
     if not dry_run:
@@ -440,7 +446,7 @@ def run_cleanup(dry_run: bool = False) -> dict:
     return {
         "deleted": len(all_to_delete),
         "merged": len(duplicate_groups),
-        "backup_path": str(backup_path),
+        "backup_path": None if dry_run else str(backup_path),
         "dry_run": dry_run
     }
 

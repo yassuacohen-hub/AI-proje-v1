@@ -109,7 +109,7 @@ def _mfa_kurulum_baslat() -> dict | None:
 
 def render_mfa_tab() -> None:
     """UI-ADMIN-MFA-26 B-05: MFA Yönetim Sekmesi.
-    
+
     - MFA durumu (aktif/pasif)
     - MFA kurulum (QR kod + secret + token)
     - MFA devre dışı bırakma (şifre ile)
@@ -117,7 +117,7 @@ def render_mfa_tab() -> None:
     """
     from company_master.ui import PageHeader
     from company_master.ui.components.page import Section
-    
+
     PageHeader(
         "MFA Yönetimi", ust_etiket="Güvenlik · Yönetim", ikon="🔐",
         giris="Çok faktörlü kimlik doğrulama (TOTP) ayarlarını yönetin. Sadece admin rolü erişebilir.",
@@ -138,7 +138,7 @@ def render_mfa_tab() -> None:
 
     # MFA durumu
     veri = _mfa_durum_getir()
-    
+
     if not veri:
         st.warning("⚠️ Veri kaynağı yok — API endpoint çalışmıyor veya token bulunamadı.")
         return
@@ -164,7 +164,7 @@ def render_mfa_tab() -> None:
             "MFA açık. Buradan devre dışı bırakabilir veya backup kodlarını yenileyebilirsiniz.",
             kimlik="mfa-yonetim",
         ).render()
-        
+
         col1, col2 = st.columns(2)
         with col1:
             st.write("**MFA Aktif** - Hesabınız korumalı.")
@@ -185,13 +185,13 @@ def render_mfa_tab() -> None:
                                 result = {"ok": False, "error": "Request objesi alınamadı"}
                         except Exception:
                             result = {"ok": False, "error": "Request objesi alınamadı"}
-                        
+
                         if result.get("ok"):
                             st.success("MFA devre dışı bırakıldı")
                             st.rerun()
                         else:
                             st.error(f"Hata: {result.get('error', 'Bilinmeyen hata')}")
-        
+
         with col2:
             st.write("**Backup Kodları**")
             if veri.get("has_backup_codes"):
@@ -206,7 +206,7 @@ def render_mfa_tab() -> None:
                             result = {"ok": False, "error": "Request objesi alınamadı"}
                     except Exception:
                         result = {"ok": False, "error": "Request objesi alınamadı"}
-                    
+
                     if result.get("ok"):
                         st.success("Yeni backup kodları üretildi")
                         st.code("\n".join(result.get("backup_codes", [])), language=None)
@@ -223,12 +223,12 @@ def render_mfa_tab() -> None:
             "MFA henüz aktif değil. Aşağıdaki butonla kurulumu başlatın.",
             kimlik="mfa-kurulum",
         ).render()
-        
+
         if st.button("🔐 MFA Kurulumu Başlat", type="primary"):
             result = _mfa_kurulum_baslat()
             if result:
                 st.success("MFA kurulumu başlatıldı! Authenticator uygulamasıyla QR kodu tarayın.")
-                
+
                 col1, col2 = st.columns([1, 2])
                 with col1:
                     st.image(f"data:image/png;base64,{result.get('qr_code_base64', '')}", caption="QR Kod")
@@ -238,7 +238,7 @@ def render_mfa_tab() -> None:
                     st.write("**MFA Token:**")
                     st.code(result.get("mfa_token", ""), language=None)
                     st.write(f"**Geçerlilik:** {result.get('expires_at', '')[:16]}")
-                
+
                 st.write("---")
                 st.write("**Doğrulama:**")
                 with st.form("mfa_verify_form"):

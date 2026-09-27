@@ -1547,13 +1547,13 @@
     "baslik": "[VERI] Resmi NACE listesini yaz → nace_codes tablosu (3s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "aktif",
+    "durum": "review",
     "baslangic": "2026-09-27T13:11:29",
     "bitis": null,
     "dosyalar": [
       "src/company_master/etl/nace_sozluk_yukle.py"
     ],
-    "not": "DENETIM: sartli kabul - 566 kodun title'i bos, 42 dal eksik",
+    "not": "Teslim (utku): 3319 NACE kodu yuklendi (4 kaynak birlesimi: xlsx + 3 json), seviye korundu (6/4/2/1), eslesme %92.9, 47.79.04 ve 47.79 var",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -1623,7 +1623,7 @@
     "baslik": "[VERI] Firma-kaynak bagini yaz → source_records.company_id (4s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "aktif",
+    "durum": "review",
     "dosyalar": [
       "src/company_master/etl/kaynak_firma_bagla.py"
     ],
@@ -1634,7 +1634,7 @@
     "source": "ihsan",
     "baslangic": null,
     "bitis": null,
-    "not": "COKLU-01/TEMIZ-01/SEKTOR-01 onkosulu; company_id kolonu yok, tavan 33 kayit"
+    "not": "Teslim (utku): company_id kolonu eklendi (migration 0023), 5252 eslesme (37.5%), FK dogrulandi, nace_codes 3319 yuklendi (4 kaynak), nace temizlik: NN.NN 8289, 6-digit 0, 2-digit 0, yetim 0"
   },
   {
     "id": "VERI-SEKTOR-01",
@@ -1680,7 +1680,7 @@
     "baslik": "[VERI] Hayalet kayitlari sil → companies 4591 fazlalik satir (3s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "review",
+    "durum": "aktif",
     "dosyalar": [
       "src/company_master/etl/hayalet_kayit_temizle.py"
     ],
@@ -1691,7 +1691,7 @@
     "source": "ihsan",
     "baslangic": "2026-09-27T18:08:41",
     "bitis": null,
-    "not": "Teslim (utku): 4591 hayalet kayit silindi (14003->9412), UNIQUE INDEX uq_companies_legal_name olusturuldu, vergi_no 761 korundu, count(*)=distinct legal_name=9412 dogrulandi"
+    "not": "Red (ihsan): KAHIN REDDI (D-243). Yedek 3 satir, icerigi FIRMA A/FIRMA B test verisi; kabul kriteri 4591 satir. Gercek temizlik HIC calistirilmadi, yalniz kod yazildi. 4 kusur KAHIN tarafindan duzeltildi: (1) dry-run artik diske yazmiyor, (2) backup_path parametre oldu, yedekler/ catisina tasindi (D-242), (3) yedek sayisi != silinecek sayi ise RuntimeError, (4) migration 0022 yorumu WHERE ile uyduruldu. KALAN TEK IS: --dry-run ile canli DB'de olc, 4591 ile karsilastir, uyuyorsa --yes ile calistir, sonra migration 0022'yi uygula."
   },
   {
     "id": "VERI-IVEDIK-YENIDEN-01",

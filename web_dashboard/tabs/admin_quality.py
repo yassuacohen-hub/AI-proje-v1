@@ -58,7 +58,7 @@ _BOSLUK_MIN_FREKANS = 3  # Sonuçsuz arama eşiği (modül sabiti, sihirli sayı
 
 def _terim_normalize(terim: str) -> str:
     """Arama terimini normalize et: strip + lower + çoklu boşluk tekilleştirme.
-    
+
     >>> _terim_normalize("  ERP  Yazılım ")
     'erp yazılım'
     >>> _terim_normalize("erp yazılım")
@@ -301,10 +301,10 @@ def load_risky_companies(limit: int = 100) -> pd.DataFrame:
 @st.cache_data(ttl=60)
 def load_icerik_bosluk() -> pd.DataFrame:
     """UI-ADMIN-ARAMA-BOSLUK-20: İçerik Boşluk Raporu — Sonuçsuz arama frekans analizi.
-    
+
     user_activity_log tablosundan olay_tipi='arama' AND basarili=FALSE olan kayıtları
     son 30 günde çeker, terimleri normalize edip frekans sayar, eşik >=3 uygular.
-    
+
     Returns:
         pd.DataFrame: terim, frekans, ilk_gorulme, son_gorulme kolonları.
         Tablo/veri yoksa boş DataFrame döner (rozet kontrolü üst katmanda).
@@ -315,9 +315,9 @@ def load_icerik_bosluk() -> pd.DataFrame:
             # Tablo var mı kontrolü
             if not _db_yardim.tablo_var_mi(conn, "user_activity_log"):
                 return pd.DataFrame(columns=["terim", "frekans", "ilk_gorulme", "son_gorulme"])
-            
+
             rows = conn.execute(text("""
-                SELECT 
+                SELECT
                     detay->>'terim' as ham_terim,
                     olay_zamani::date as olay_tarih
                 FROM user_activity_log
@@ -327,42 +327,42 @@ def load_icerik_bosluk() -> pd.DataFrame:
                   AND detay IS NOT NULL
                   AND detay->>'terim' IS NOT NULL
             """)).mappings().all()
-            
+
             if not rows:
                 return pd.DataFrame(columns=["terim", "frekans", "ilk_gorulme", "son_gorulme"])
-            
+
             # DataFrame'e çevir ve normalize et
             df = pd.DataFrame([dict(r) for r in rows])
             df["terim"] = df["ham_terim"].apply(_terim_normalize)
-            
+
             # Boş normalize edilmiş terimleri at
             df = df[df["terim"] != ""]
-            
+
             if df.empty:
                 return pd.DataFrame(columns=["terim", "frekans", "ilk_gorulme", "son_gorulme"])
-            
+
             # Grupla ve say
             grouped = df.groupby("terim").agg(
                 frekans=("ham_terim", "count"),
                 ilk_gorulme=("olay_tarih", "min"),
                 son_gorulme=("olay_tarih", "max"),
             ).reset_index()
-            
+
             # Eşik uygula
             grouped = grouped[grouped["frekans"] >= _BOSLUK_MIN_FREKANS]
-            
+
             if grouped.empty:
                 return pd.DataFrame(columns=["terim", "frekans", "ilk_gorulme", "son_gorulme"])
-            
+
             # Sırala: frekans azalan
             grouped = grouped.sort_values("frekans", ascending=False)
-            
+
             # Tarih formatı
             grouped["ilk_gorulme"] = grouped["ilk_gorulme"].apply(lambda x: x.strftime("%Y-%m-%d"))
             grouped["son_gorulme"] = grouped["son_gorulme"].apply(lambda x: x.strftime("%Y-%m-%d"))
-            
+
             return grouped[["terim", "frekans", "ilk_gorulme", "son_gorulme"]]
-    
+
     except Exception as exc:
         _admin_quality_logger.warning("İçerik boşluk raporu yüklenemedi", exc)
         return pd.DataFrame(columns=["terim", "frekans", "ilk_gorulme", "son_gorulme"])
@@ -505,14 +505,14 @@ def _render_icerik_bosluk() -> None:
         f"Terimler normalize edilip (strip+lower+boşluk tekilleştirme) "
         f"frekansa göre gruplandırıldı. Eşik: >= {_BOSLUK_MIN_FREKANS} tekrar."
     )
-    
+
     bosluk_df = load_icerik_bosluk()
-    
+
     # _db_yardim.tablo_var_mi pattern: tablo/veri yoksa rozet göster
     if bosluk_df.empty:
         st.warning("⚠️ Veri kaynağı yok — user_activity_log tablosu bulunamadı veya sonuçsuz arama kaydı yok.")
         return
-    
+
     # Metrik kartları
     c1, c2, c3 = st.columns(3)
     with c1:
@@ -521,7 +521,7 @@ def _render_icerik_bosluk() -> None:
         st.metric("🔁 Toplam Sonuçsuz Arama", int(bosluk_df["frekans"].sum()))
     with c3:
         st.metric("📊 Eşik", f">= {_BOSLUK_MIN_FREKANS}")
-    
+
     # Tablo
     display_df = bosluk_df.rename(columns={
         "terim": "Arama Terimi",
@@ -530,7 +530,7 @@ def _render_icerik_bosluk() -> None:
         "son_gorulme": "Son Görülme",
     })
     st.dataframe(display_df, width="stretch", hide_index=True)
-    
+
     # İndirme butonu
     csv = bosluk_df.to_csv(index=False).encode("utf-8")
     st.download_button(

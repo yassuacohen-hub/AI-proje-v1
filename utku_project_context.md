@@ -4,13 +4,18 @@
 
 ## KALDIĞIM YER
 
-- **Konum:** aktif iş yok — son teslim `TEST-BACKLOG-20` (review) + `VERI-HAYALET-TEMIZ-01` (review)
+- **Konum:** aktif iş yok — 5 görev onay bekliyor (review), 6 aktif/plan
 - **Yapılanlar:** 
   - TEST-BACKLOG-20: 6 faz tamamlandı (A=9 migration down, B=3 sayfa iskeleti, C=3 log altyapısı, D=2 API rotası, E=2 denetim, F=1 kullanıcı ayarı) — tam suite 20 failed → 0
-  - VERI-HAYALET-TEMIZ-01: 4591 hayalet kayıt temizlendi, companies.legal_name UNIQUE kısıtı (migration 0022), vergi_no korundu (774), alanlar birleştirildi, yedek alındı
-- **Kritik bağlam:** her iki görev onay bekliyor (review durumunda)
-- **Sonraki adım:** ihsan onayını bekle / yeni görev posta kutusunda varsa al
-- **Görev:** `TEST-BACKLOG-20` (review), `VERI-HAYALET-TEMIZ-01` (review) · **Son okunan karar:** `D-219`
+  - VERI-HAYALET-TEMIZ-01: 4591 hayalet kayıt silindi, companies.legal_name UNIQUE kısıtı (migration 0022), vergi_no korundu (774), alanlar birleştirildi, yedek alındı
+  - VERI-KAYNAK-BAG-01: company_id kolonu eklendi (migration 0023), 5252 eşleşme (37.5%), FK doğrulandı, nace_codes 3319 yüklendi (4 kaynak birleşimi)
+  - VERI-NACE-SOZLUK-01: 3319 NACE kodu yüklendi (4 kaynak birleşimi), seviye korundu (6/4/2/1), eşleşme %92.9
+  - VERI-NACE-TEMIZ-01: 7614 NN.NN format düzeltildi (raw_nace'ten türetildi), 675 altı haneli kırpıldı, 25 iki haneli NULL'a çekildi, 1 yetim kod düzeltildi
+- **Kritik bağlam:** 5 görev onay bekliyor (review), 2 P0 task onaylandığında VERI-02 ve VERI-NACE-COKLU-01 başlanabilir
+- **Aktif görevler:** VERI-02 (P1, bloke VERI-KAYNAK-BAG-01), VERI-NACE-COKLU-01 (P1, bloke VERI-NACE-SOZLUK-01), VERI-NACE-KOLON-01 (P2)
+- **Plan görevler:** VERI-SEKTOR-01 (P1), VERI-KAYNAK-SIZINTI-01 (P2), VERI-IVEDIK-YENIDEN-01 (P1)
+- **Sonraki adım:** ihsan onayını bekle / posta kutusunu kontrol et
+- **Görev:** `TEST-BACKLOG-20` (review), `VERI-HAYALET-TEMIZ-01` (review), `VERI-KAYNAK-BAG-01` (review), `VERI-NACE-SOZLUK-01` (review), `VERI-NACE-TEMIZ-01` (review) · **Son okunan karar:** `D-219`
 
 ## Oturum Açılış (60 saniye, bu sırayla)
 
@@ -67,24 +72,28 @@ python scripts/gorev_kutusu.py teslim --ajan utku --task-id <TASK_ID> --ozet "<�
 
 ## Oturum Günlüğü
 
-### 2026-09-27 — TEST-BACKLOG-20 + VERI-HAYALET-TEMIZ-01 tamamlandı
+### 2026-09-27 — VERI-KAYNAK-BAG-01 + VERI-NACE-SOZLUK-01 + VERI-NACE-TEMIZ-01 + TEST-BACKLOG-20 + VERI-HAYALET-TEMIZ-01 tamamlandı (onay bekliyor)
 
-- **Görevler:** `TEST-BACKLOG-20` (P1, 8s), `VERI-HAYALET-TEMIZ-01` (P0, 3s)
-- **Yapılan TEST-BACKLOG-20:**
-  - Faz A (Migration down): 0016/0017 .down.sql dosyaları `down/` altına taşındı, eksik 3 down dosyası yazıldı, migrate.py glob koruması eklendi — 9 test geçti
-  - Faz B (Sayfa iskeleti): admin_mfa.py SECTIONS sözleşmesine geçirildi, ana_kontrol.py elle markdown başlığı kaldırıldı — 3 test geçti
-  - Faz C (Log altyapısı): error_handling.py setup_logging düzeltildi (JSON kapalıyken insan-okunur, dosya hedefi, stdout+dosya ikili) — 3 test geçti
-  - Faz D (API rotaları): rota envanteri gerçeğe göre güncellendi, geçersiz buyer için 404 döndürülür — 2 test geçti
-  - Faz E (Denetim): kök marka denetimi temizlendi, pano yolu kanonik hale getirildi — 2 test geçti
-  - Faz F (Kullanıcı ayarları): panel formu şemadan üretilir hale getirildi — 1 test geçti
-  - **Tam suite:** 20 failed → 0 failed, passed sayısı korundu
-- **Yapılan VERI-HAYALET-TEMIZ-01:**
-  - hayalet_kayit_temizle.py: 4591 tekrarlayan kayıt tespit edildi, vergi_no/alan sayısı/company_id önceliğiyle keeper seçildi, alanlar birleştirildi, ilişkili kayıtlar taşındı, yedek alındı (data/backup/hayalet_YYYYMMDD.jsonl), silindi
-  - Migration 0022: companies.legal_name UNIQUE INDEX eklendi (tekrar oluşmaması için)
-  - Test: test_hayalet_kayit_temizle.py (11 test) yazıldı ve geçti
-- **Doğrulama:** Tüm TEST-BACKLOG-20 faz testleri + hayalet testleri + tam suite related tests yeşil
-- **Kalan / bloke:** yok
-- **Öğrenilen tuzak:** tam suite çalıştırma uzun sürüyor, faz bazlı test koşturmak çok daha verimli
+- **Görevler:** `VERI-KAYNAK-BAG-01` (P0), `VERI-NACE-SOZLUK-01` (P0), `VERI-NACE-TEMIZ-01` (P1), `TEST-BACKLOG-20` (P1), `VERI-HAYALET-TEMIZ-01` (P0)
+- **Yapılan VERI-KAYNAK-BAG-01:**
+  - Migration 0023: source_records.company_id kolonu eklendi + FK
+  - 5252 eşleşme (37.5%): 34 vergi_no + 5218 isim birebir
+  - FK doğrulandı (0 ihlal)
+- **Yapılan VERI-NACE-SOZLUK-01:**
+  - 4 kaynak birleşimi: xlsx_resmi (1547), turkiye_nace_json (2142), nace-rev-2-1.json (1562), nace-rev-2.json (1482)
+  - 3319 NACE kodu yüklendi, seviye 6/4/2/1 dolu
+  - Eşleşme %92.9 (4252/4574), 47.79.04 ve 47.79 var
+- **Yapılan VERI-NACE-TEMIZ-01:**
+  - 7614 NN.NN format düzeltildi (raw_nace'ten türetildi)
+  - 675 altı haneli kırpıldı (valid 4 haneli parent'a)
+  - 25 iki haneli NULL'a çekildi (98/71/16/78 - çoklu child)
+  - 1 yetim kod düzeltildi (13.92.11)
+  - Sonuç: NN.NN 8289 (valid), 6-digit 0, 2-digit 0, yetim 0
+- **Yapılan TEST-BACKLOG-20:** 6 faz, 20 failed → 0, 348 test passed
+- **Yapılan VERI-HAYALET-TEMIZ-01:** 4591 hayalet kayıt silindi, UNIQUE INDEX (migration 0022), vergi_no 761 korundu
+- **Doğrulama:** Tüm 5 görev `review` durumunda, onay bekliyor
+- **Kalan / bloke:** VERI-02 ve VERI-NACE-COKLU-01 bloke (P0 onayı bekliyor)
+- **Öğrenilen tuzak:** 5 görev tek seferde onay kuyruğuna girdi, tek tek onaylanmalı
 
 ### 2026-09-26 — D-215/D-216 menü kaydı
 

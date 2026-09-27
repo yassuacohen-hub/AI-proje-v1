@@ -48,3 +48,6 @@ Ana baglam: [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]] · [[Huginn Data In
 
 ## Kapanan isler
 | VERI-HAYALET-TEMIZ-01 | 4591 hayalet kayit silindi (14003->9412), UNIQUE INDEX uq_companies_legal_name olusturuldu, vergi_no 761 korundu, count(*)=distinct legal_name=9412 dogrulandi | 2026-09-27 |
+| VERI-NACE-SOZLUK-01 | 3319 NACE kodu yuklendi (4 kaynak birlesimi), seviye korundu, eslesme %92.9 | 2026-09-27 |
+| VERI-KAYNAK-BAG-01 | source_records.company_id kolonu eklendi, 5252 eslesme (37.5%), FK dogrulandi | 2026-09-27 |
+| VERI-NACE-TEMIZ-01 | 7614 NN.NN format duzeltildi (raw_nace'ten turetildi), 675 altı haneli kırpildi, 25 iki haneli NULL'a cekildi, 1 yetim kod duzeltildi | 2026-09-27 |

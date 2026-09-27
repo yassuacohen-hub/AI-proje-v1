@@ -540,7 +540,7 @@ def _dissa_aktar() -> None:
 
 def render_paket_kredi_tab() -> None:
     """D-215: Paket & Kredi — Gelir Kapısı alt sekmesi (kanonik).
-    
+
     Kredi yükleme, paket kategorileri ve tier yönetimi.
     admin_extras.py'deki eski kredi formu (lines 122-139) KALDIRILDI —
     tek kaynak burası.
@@ -553,14 +553,14 @@ def render_paket_kredi_tab() -> None:
         ust_etiket="Gelir Kapısı · Katalog",
         ikon="📦",
     ).render()
-    
+
     token = st.session_state.get("admin_token")
     if not token:
         st.warning("Lütfen giriş yapın")
         return
-    
+
     Section("Kredi Yükleme").render()
-    
+
     with st.form("kredi_formu_gelir_kapisi"):
         col1, col2 = st.columns(2)
         with col1:
@@ -579,23 +579,23 @@ def render_paket_kredi_tab() -> None:
                 st.rerun()
             except Exception as e:
                 st.error(f"Kredi yükleme başarısız: {e}")
-    
+
     st.divider()
     Section("Kategori Yönetimi").render()
-    
+
     try:
         categories = get_api("/api/admin/categories", token=token)
     except Exception as exc:
         st.error(f"Kategoriler yüklenemedi: {exc}")
         return
-    
+
     if isinstance(categories, dict):
         items = categories.get("items", [])
         if items:
             st.dataframe(pd.DataFrame(items), width="stretch", hide_index=True)
         else:
             st.info("Kategori kaydı yok.")
-    
+
     # Yeni kategori ekleme formu
     with st.expander("➕ Yeni Kategori Ekle"):
         with st.form("yeni_kategori_form_gelir_kapisi"):

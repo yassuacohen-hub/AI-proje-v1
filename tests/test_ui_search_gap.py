@@ -18,7 +18,7 @@ def test_admin_quality_bos_tabloda_hata_vermez():
         mock_conn = MagicMock()
         mock_conn.execute.return_value = []
         mock_get_engine.return_value.connect.return_value.__enter__.return_value = mock_conn
-        
+
         df = admin_quality.load_freshness_distribution()
         assert list(df.columns) == ["kova", "adet"]
         assert df.empty

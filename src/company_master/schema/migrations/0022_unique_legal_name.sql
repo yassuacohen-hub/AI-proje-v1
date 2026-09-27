@@ -2,9 +2,9 @@
 -- Hayalet kayıt temizleme sonrası tekrar oluşmaması için (VERI-HAYALET-TEMIZ-01)
 -- D-235: veri kaynağı kuralları mandalı
 
-CREATE UNIQUE INDEX IF NOT EXISTS uq_companies_legal_name ON companies(legal_name);
+-- NULL legal_name kısıt dışı: SQL'de NULL != NULL, ama niyeti açık yazıyoruz.
+CREATE UNIQUE INDEX IF NOT EXISTS uq_companies_legal_name
+    ON companies(legal_name)
+    WHERE legal_name IS NOT NULL;
 
--- Not: UNIQUE CONSTRAINT yerine UNIQUE INDEX kullanıyoruz çünkü
--- partial index (WHERE legal_name IS NOT NULL) daha esnektir.
--- Eğer CONSTRAINT istenirse:
--- ALTER TABLE companies ADD CONSTRAINT uq_companies_legal_name UNIQUE (legal_name);
+-- UNIQUE INDEX seçildi (CONSTRAINT değil): partial index'i yalnız index destekler.

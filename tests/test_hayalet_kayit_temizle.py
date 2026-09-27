@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 """Hayalet kayıt temizleme testleri."""
 import pytest
+from pathlib import Path
 from unittest.mock import Mock, patch, MagicMock
 from company_master.etl.hayalet_kayit_temizle import (
     CompanyRecord, select_keeper, merge_records, run_cleanup
@@ -205,6 +206,9 @@ class TestRunCleanup:
         assert result["deleted"] == 3
         assert result["merged"] == 2
         assert result["dry_run"] is True
+        # dry-run DİSKE YAZMAZ: yedek yolu dönmez, üretim dizini kirlenmez
+        assert result["backup_path"] is None
+        assert not list(Path("data/backup").glob("hayalet_*.jsonl"))
 
 
 if __name__ == "__main__":

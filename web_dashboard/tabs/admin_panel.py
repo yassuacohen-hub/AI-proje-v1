@@ -1247,7 +1247,7 @@ def _feature_flag_audit_getir(limit: int = 20) -> list[dict]:
 
 def render_feature_flags_tab() -> None:
     """UI-ADMIN-FEATURE-FLAG-25: Feature Flag Yönetim Sekmesi.
-    
+
     - Flag listesi (aktif/pasif + açıklama)
     - Toggle UI (switch componentli)
     - Geçmiş kayıtları (kim, ne zaman, eski→yeni)

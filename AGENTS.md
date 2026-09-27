@@ -1830,3 +1830,41 @@ yazan her yerde bu ayrım yorumda belirtilir.
   (dış kökte izinsiz klasör yok — `_ARSIV_*` geri doğarsa kırmızı yanar).
 - **Referans:** D-241 (dış kök izin listesi), D-223 (silme değil arşiv), D-211
   (kural gövdesi çalıştırılabilir olmalı).
+
+### D-243 — Prova diske yazmaz; yıkıcı işin yedek yolu enjekte edilebilir olur
+
+**Karar.** `dry_run` / prova kipindeki hiçbir iş **diske yazmaz** ve dönüşünde
+`backup_path` **None** verir. Yıkıcı iş yazan her betik yedek yolunu **parametre**
+olarak alır (varsayılan `yedekler/<is>_<tarih>.jsonl`, D-242 çatısı); sabit yol
+gömülmez. Yedek satır sayısı silinecek satır sayısına **eşit değilse** silme
+`RuntimeError` ile iptal olur.
+
+**Neden — KAHİN denetimi (2026-09-27, VERI-HAYALET-TEMIZ-01 reddi).** Ajan işi
+"review"a taşımıştı. Ölçüm: kabul kriteri **4591** satır yedek diyordu, diskteki
+yedek **3 satırdı** ve içeriği `FIRMA A` / `FIRMA B` — yani **test verisi**.
+Üç ayrı kusur üst üste binmişti:
+
+1. [`run_cleanup()`](src/company_master/etl/hayalet_kayit_temizle.py:308) yedek
+   almayı `dry_run` kontrolünün **dışında** çağırıyordu — prova diske yazıyordu.
+2. Yedek yolu **sabitti**, test enjekte edemiyordu; mock'lu `dry_run=True` testi
+   üretim `data/backup/` dizinine yazdı ve dosya **git'e girdi** (2 commit).
+3. Gerçek temizlik **hiç çalıştırılmamıştı** — yalnız kod yazılmış, iş bitmiş
+   sanılmıştı.
+
+**Genel kural — testin kirlettiği yer, yeşil testin göremediği yerdir.** 11 test
+yeşil yanarken üretim yedek dizinine sahte firma kaydı düşüyordu. Yeşil test
+"yan etki yok" demek **değildir**. Bir testi silip tekrar çalıştırmak
+(`del <dosya>` → `pytest` → dosya geri doğdu mu?) yan etkiyi ölçen en ucuz
+kontroldür; şüphelenilen her yazma işinde uygulanır.
+
+**Ayrıca — yorum kodla çelişemez.** Aynı işin migration'ı "partial index
+kullanıyoruz" diyordu ama `WHERE` yoktu. Yorum, kodun **söylediğini** anlatır;
+niyeti anlatıp uygulamayı atlayan yorum yanlış bilgidir.
+[`0022_unique_legal_name.sql`](src/company_master/schema/migrations/0022_unique_legal_name.sql:5)
+`WHERE legal_name IS NOT NULL` eklenerek yoruma uyduruldu.
+
+- **Mandal:** [`tests/test_hayalet_kayit_temizle.py`](tests/test_hayalet_kayit_temizle.py:207)
+  — `dry_run` sonrası `backup_path is None` **ve** `data/backup/hayalet_*.jsonl`
+  boş; prova diske yazarsa kırmızı yanar.
+- **Referans:** D-242 (yedek tek çatı `yedekler/`), D-211 (kural çalıştırılabilir
+  olmalı), D-66 (brif maddesi ölçülmüş değere dayanır).

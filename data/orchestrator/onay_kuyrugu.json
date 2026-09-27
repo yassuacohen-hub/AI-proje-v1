@@ -2801,6 +2801,25 @@
     "ozet": "4591 hayalet kayit silindi (14003->9412), UNIQUE INDEX uq_companies_legal_name olusturuldu, vergi_no 761 korundu, count(*)=distinct legal_name=9412 dogrulandi",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-27T22:28:16",
+    "durum": "reddedildi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-09-27T23:55:57",
+    "red_nedeni": "KAHIN REDDI (D-243). Yedek 3 satir, icerigi FIRMA A/FIRMA B test verisi; kabul kriteri 4591 satir. Gercek temizlik HIC calistirilmadi, yalniz kod yazildi. 4 kusur KAHIN tarafindan duzeltildi: (1) dry-run artik diske yazmiyor, (2) backup_path parametre oldu, yedekler/ catisina tasindi (D-242), (3) yedek sayisi != silinecek sayi ise RuntimeError, (4) migration 0022 yorumu WHERE ile uyduruldu. KALAN TEK IS: --dry-run ile canli DB'de olc, 4591 ile karsilastir, uyuyorsa --yes ile calistir, sonra migration 0022'yi uygula."
+  },
+  {
+    "task_id": "VERI-KAYNAK-BAG-01",
+    "ajan": "utku",
+    "ozet": "company_id kolonu eklendi (migration 0023), 5252 eslesme (37.5%), FK dogrulandi, nace_codes 3319 yuklendi (4 kaynak), nace temizlik: NN.NN 8289, 6-digit 0, 2-digit 0, yetim 0",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-27T23:45:45",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "VERI-NACE-SOZLUK-01",
+    "ajan": "utku",
+    "ozet": "3319 NACE kodu yuklendi (4 kaynak birlesimi: xlsx + 3 json), seviye korundu (6/4/2/1), eslesme %92.9, 47.79.04 ve 47.79 var",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-27T23:47:23",
     "durum": "bekliyor"
   }
 ]

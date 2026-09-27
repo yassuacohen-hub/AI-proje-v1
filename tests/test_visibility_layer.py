@@ -50,9 +50,9 @@ class TestVisibilityLayer:
             "primary_email": "ahmet@abc.com",
             "website": "abc.com",
         }
-        
+
         masked = apply_kvkk_mask(row.copy(), admin_mode="strict")
-        
+
         # Açık alan değişmez
         assert masked["legal_name"] == "ABC Ltd. Şti."
         # Kısıtlı alanlar maskelenir ya da Layer 2 tarafından kontrol edilir
@@ -69,9 +69,9 @@ class TestVisibilityLayer:
             "primary_email": "contact@xyz.com",
             "employee_range": "100-200",
         }
-        
+
         masked = apply_kvkk_mask(row.copy(), admin_mode="strict")
-        
+
         assert masked["legal_name"] == "XYZ A.Ş."
         # Email ve range kısıtlı/yarı-açık kategorilerde
 
@@ -85,9 +85,9 @@ class TestVisibilityLayer:
             "quarantine_reason": "ç1_telefon",  # Yasak
             "entity_confidence": 0.95,  # Yasak
         }
-        
+
         masked = apply_kvkk_mask(row.copy(), admin_mode="strict")
-        
+
         # Yasak alanlar maskelenmelidir (gerçek kuralda)
         # Fallback: row.copy() döner
         assert "company_id" in masked
@@ -102,9 +102,9 @@ class TestVisibilityLayer:
             "primary_email": "yonetim@firma.com",
             "quarantine_reason": "ç2_email",  # Yasak
         }
-        
+
         masked = apply_kvkk_mask(row.copy(), admin_mode="lenient")
-        
+
         # Lenient modda kısıtlı açık kalır
         # Yasak hala maskeli (güvenlik)
         assert "primary_phone" in masked
@@ -120,9 +120,9 @@ class TestVisibilityLayer:
             "nace_code": "6202",
             "primary_phone": "0506 555 66 77",
         }
-        
+
         masked = apply_kvkk_mask(row.copy(), admin_mode="strict")
-        
+
         # website, nace açık alanlar
         assert masked["website"] == "osintelligence.com"
         assert masked["nace_code"] == "6202"
@@ -141,7 +141,7 @@ class TestConflictResolution:
             "quarantine_reason": "ç1_telefon",
             "is_sahis": 1,
         }
-        
+
         assert row["primary_phone"] == "0532 123 45 67"  # Saklanmış
         assert row["quarantine_reason"] == "ç1_telefon"
         assert row["is_sahis"] == 1
@@ -155,7 +155,7 @@ class TestConflictResolution:
             "primary_email": "contact@sirket.com",
             "quarantine_reason": "ç2_email",
         }
-        
+
         assert row["primary_email"] == "contact@sirket.com"
         assert row["quarantine_reason"] == "ç2_email"
 
@@ -169,7 +169,7 @@ class TestConflictResolution:
             "quarantine_reason": "ç3_isim",
             "is_sahis": 1,
         }
-        
+
         assert row["legal_name"] == "Ahmet Yilmaz Ticaret Ltd. Şti."
         assert row["quarantine_reason"] == "ç3_isim"
         assert row["is_sahis"] == 1
@@ -184,7 +184,7 @@ class TestConflictResolution:
             "quarantine_reason": "ç4_whatsapp",
             "is_sahis": 1,
         }
-        
+
         assert row["primary_phone"] == "0532 123 45 67"
         assert row["quarantine_reason"] == "ç4_whatsapp"
         assert row["is_sahis"] == 1
@@ -205,7 +205,7 @@ class TestModuleCredit:
             "teklif": 0,
             "kapasite": 3,
         }
-        
+
         # Strategic tier
         strategic_costs = {
             "match": 5,
@@ -214,7 +214,7 @@ class TestModuleCredit:
             "teklif": 2,
             "kapasite": 2,
         }
-        
+
         # Enterprise: serbest
         enterprise_costs = {
             "match": 0,
@@ -223,7 +223,7 @@ class TestModuleCredit:
             "teklif": 0,
             "kapasite": 0,
         }
-        
+
         assert terminal_costs["match"] == 10
         assert strategic_costs["ilan"] == 3
         assert enterprise_costs["match"] == 0
@@ -240,7 +240,7 @@ class TestRealFunctionIntegration:
             "legal_name": "Test Şirket",
             "primary_phone": "0532 123 45 67",
         }
-        
+
         result = apply_kvkk_mask(row.copy(), admin_mode="strict")
         assert "company_id" in result
 

@@ -29,10 +29,10 @@ def _betik():
 
     KOK = Path(__file__).resolve().parents[1]
     yol = KOK / "scripts" / "gorev_atama_otomasyonu.py"
-    
+
     # Use the exact same module name as the original to ensure they share the same root
     mod_name = "gorev_atama_otomasyonu"
-    
+
     # Check if this module is already loaded
     if mod_name in sys.modules:
         mod = sys.modules[mod_name]
@@ -41,12 +41,12 @@ def _betik():
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
         sys.modules[mod_name] = mod
-    
+
     # Set the root attribute on the module to ensure it can be monkeypatched
     # YA-03: mutlak dizin adi varsayma; depo kokunden turet.
     if not hasattr(mod, 'root'):
         mod.root = KOK
-    
+
     return mod
 
 
@@ -60,10 +60,10 @@ def izole(tmp_path, monkeypatch):
 
     KOK = Path(__file__).resolve().parents[1]
     yol = KOK / "scripts" / "gorev_atama_otomasyonu.py"
-    
+
     # Use the exact same module name as the original
     mod_name = "gorev_atama_otomasyonu"
-    
+
     # Load the original module directly
     if mod_name in sys.modules:
         mod = sys.modules[mod_name]
@@ -72,7 +72,7 @@ def izole(tmp_path, monkeypatch):
         mod = importlib.util.module_from_spec(spec)
         spec.loader.exec_module(mod)
         sys.modules[mod_name] = mod
-    
+
     # Monkeypatch the root attribute on the original module
     monkeypatch.setattr(mod, "root", tmp_path)
 
