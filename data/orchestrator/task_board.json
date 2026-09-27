@@ -1465,5 +1465,39 @@
     "mod": "code",
     "brief": "",
     "talimat": ""
+  },
+  {
+    "task_id": "DOC-D229-01",
+    "id": "DOC-D229-01",
+    "baslik": "D-229: zaman damgali yedek git te izlenmez (65 artik elendi)",
+    "sahip": "kahin",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-27T08:36:33",
+    "bitis": "2026-09-27T08:36:33",
+    "dosyalar": [],
+    "not": "65 izlenen artik olculdu (0 ayni/63 farkli/2 oksuz); git rm index+disk; .gitignore *.yedek_* eklendi, olu data_worktree satirlari silindi; mandal git ls-files tabanli, tavan 0; 28 passed",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "",
+    "talimat": ""
+  },
+  {
+    "task_id": "DOC-D230-01",
+    "id": "DOC-D230-01",
+    "baslik": "KAHIN",
+    "sahip": "D-230: gomulu govde kopyasi yasagi + mandal",
+    "oncelik": "AGENTS.md karari, rglob tabanli mandal, backups/ elendi",
+    "durum": "done",
+    "baslangic": "2026-09-27T10:36:28",
+    "bitis": "2026-09-27T10:36:28",
+    "dosyalar": [],
+    "not": "2904 dosya/147.7MB silindi; 121 sahi essizden 96 bilgi dosyasi _ARSIV_backups_essiz_2026-09-27 altina; mandal 19 passed; negatif kontrol gecti",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "",
+    "talimat": ""
   }
 ]

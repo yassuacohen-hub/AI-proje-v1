@@ -1365,3 +1365,71 @@ Negatif kontrol: 65 dosya izlenirken ölçüldü →
 
 - **Referans:** D-186 (pano runtime state), D-220 (tavan yalnız küçülür), D-228
   (ikinci kopya yasağı — bu yüzden arşiv yok), TUR-C Adım 2 (mandalsız kalan desen).
+
+---
+
+## Gömülü Gövde Kopyası Yasak (D-230 — KAHİN kararı 2026-09-27)
+
+**Kural:** Gövdenin tam kopyası vault'un **hiçbir derinliğinde** duramaz. Yasaklı ad
+imzaları: `worktree_klasoru_kopya`, `vault_kopya`, `_kopya_govde`. Mandal diske bakar,
+`git ls-files`'a değil — kopya izlenmese de yasaktır.
+
+**Neden:** D-228 tam bu gövdeyi yasaklıyordu ama mandalı `VAULT.iterdir()` kullandı,
+yani yalnız **üst seviyeye** baktı. Bu yüzden
+`data/orchestrator/backups/D-187_faz2_2026-09-22/worktree_klasoru_kopya/` —
+vault'un tam kopyası, **2904 dosya / 147.7 MB** — 5 gün görülmedi. İçinde **üçüncü**
+bir pano izi de vardı (`task_board.json.tmp`, `task_board.json.20260922_130508.bak`).
+Ders: derinliğe bakmayan mandal, derinde saklananı hiç yakalamaz. D-228'in ihlali
+yeniden doğmadı, hiç bitmemişti.
+
+**Ölçüm (2026-09-27, tahmin değil):**
+
+| Ölçüt | Değer |
+|-------|-------|
+| `backups/` toplam dosya | 2904 (147.7 MB) |
+| Git'te izlenen | 0 |
+| `.pyc` hariç | 1661 |
+| İçerik-eşsiz (kıyas tabanı: çalışma kökü) | 776 |
+| …aynı adlı canlı dosya var (eski sürüm) | 602 |
+| …adı da hiçbir yerde yok (aday) | 174 |
+| …git geçmişinde adı var (kurtarılabilir) | 53 |
+| **…hiçbir yerde yok — sahi eşsiz** | **121** |
+
+**Üç aşamalı silme güvenlik süzgeci** (D-228'in inceltilmiş hâli):
+
+1. SHA-256 içerik eşsizliği — içerik canlı ağaçta var mı?
+2. Aynı **ad** canlıda var mı? Varsa eşsiz değil, **eski sürüm**.
+3. Ad `git log --all --name-only` geçmişinde var mı? Varsa **geçmiş zaten yedektir**
+   (D-229), silmek kayıp değil.
+
+Yalnız üçünden de geçen sınıf arşive değer.
+
+**Uygulama:** 121 sahi eşsizden bilgi taşıyan **96** dosya (`.md`/`.py`/`.yml`/
+`.canvas`) `_ARSIV_backups_essiz_2026-09-27/` altına kopyalandı; süreç artığı **25**
+(`.zip` anlık görüntü, `.patch` fark, 24525 satırlık `app.log`, tek kullanımlık betik
+çıktısı) silindi; sonra tüm ağaç kaldırıldı.
+
+**İki ölçüm hatamı açıkça düzelttim:**
+
+- İlk taramada yedek tarafı **0** saydı: `backups`'ı canlı taraftan çıkarmak için
+  koyduğum dizin filtresini yedek tarafına da uygulamışım. Filtre tarama köküne göre
+  **parametrik** olmalı.
+- İlk kıyas tabanı yalnız vault'tu; ama yedek `AI proje v1/` ve `_ARSIV_*` gibi
+  **çalışma kökü** klasörlerini yansıtıyor. Taban kök olmalı, yoksa "eşsiz" şişer
+  (780 → 776 ve sınıflandırma tamamen değişti).
+
+**Mandal:** [`tests/test_kok_izin_listesi.py::test_gomulu_govde_kopyasi_yok`](tests/test_kok_izin_listesi.py:130)
+— `VAULT.rglob("*")` ile **disk** taranır, çünkü bu kopya hiç izlenmemişti (git'te 0):
+sorun versiyonlama değil gövdenin kendisiydi. Tavan `GOMULU_KOPYA_TAVANI = 0`
+(D-220: yalnız küçülebilir).
+
+```bash
+python -m pytest tests/test_kok_izin_listesi.py -q
+```
+
+Negatif kontrol: kopya dizini geri yaratıldığında ölçüldü →
+`AssertionError: D-230 ihlali: gomulu govde kopyasi -> [...] (tavan 0)`.
+
+- **Referans:** D-186/D-187 (yedeği üreten faz), D-220 (tavan yalnız küçülür),
+  D-223 (yedekte kalan doküman pratikte yoktur), D-228 (paralel gövde yasağı —
+  derinlik kör noktası burada kapandı), D-229 (geçmiş zaten yedektir).

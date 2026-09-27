@@ -114,6 +114,42 @@ def test_vault_icinde_paralel_veri_govdesi_yok() -> None:
     )
 
 
+#: D-230 — GOMULU govde kopyasi yasagi.
+#: Bosluk olcumu (2026-09-27): D-228 mandali `VAULT.iterdir()` kullaniyordu,
+#: yani YALNIZ ust seviyeye bakiyordu. Bu yuzden
+#: `data/orchestrator/backups/D-187_faz2_2026-09-22/worktree_klasoru_kopya/`
+#: (vault'un TAM kopyasi; toplam 2904 dosya / 147.7 MB) 5 gun gorulmedi.
+#: Ayni klasor ucuncu bir pano izi de tasiyordu (task_board.json.tmp, .bak).
+#: Derinlige bakmayan bir mandal, derinde saklanani hic yakalamaz.
+GOMULU_KOPYA_IMZALARI = ("worktree_klasoru_kopya", "vault_kopya", "_kopya_govde")
+
+#: D-220 tavani: temizlik sonrasi 0. Bu sayi yalniz KUCULEBILIR.
+GOMULU_KOPYA_TAVANI = 0
+
+
+def test_gomulu_govde_kopyasi_yok() -> None:
+    """D-230: govde kopyasi derinde de durmaz — yer degistirmek yok saymaz.
+
+    `git ls-files` degil DISK taranir: bu kopya hic izlenmemisti (git'te 0),
+    sorun versiyonlama degil govdenin kendisiydi. Yani mandal diske bakmali.
+    """
+    bulunan = sorted(
+        p.relative_to(VAULT).as_posix()
+        for p in VAULT.rglob("*")
+        if p.is_dir() and any(imza in p.name for imza in GOMULU_KOPYA_IMZALARI)
+    )
+    assert len(bulunan) <= GOMULU_KOPYA_TAVANI, (
+        f"D-230 ihlali: gomulu govde kopyasi -> {bulunan} "
+        f"(tavan {GOMULU_KOPYA_TAVANI}). Essiz icerik arsive tasinir, kopya silinir."
+    )
+
+
+def test_d230_agents_mde_kayitli() -> None:
+    """D-230 metni SSOT'ta duruyor mu."""
+    metin = (VAULT / "AGENTS.md").read_text(encoding="utf-8")
+    assert "(D-230 " in metin, "D-230 karari AGENTS.md'de yok."
+
+
 def test_kok_sabit() -> None:
     """Kural 1: kok tasinmaz — 10.368 sabit yol buna bagli."""
     assert (KOK / "Huginn Data Insights").is_dir(), (
