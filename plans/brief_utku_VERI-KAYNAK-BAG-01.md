@@ -65,6 +65,38 @@ eşleme muhtemelen yüksek isabetle kurulabilir.
 - **Aynı `company_id`'ye bağlı kayıt sayısı dağılımı** raporlanır — 1 firmaya
   50 kayıt bağlandıysa normalizasyon hatalıdır, erken yakalanır
 
+## 4b. EK KAPSAM — TEMIZ-01 denetiminden devredildi (2026-09-27)
+
+TEMIZ-01 sayaç kirlenmesini temizledi (sayaç biçimli değer artık **0**) ama
+`nace_code`'un asıl yanlışlığı duruyor. Canlı ölçüm:
+
+```
+10.11 (et işleme)        → 911 firma: '3E ELEKTRO OPTİK', 'ACAR FAKTORİNG A.Ş.'
+29.10 (motorlu taşıt)    → 1882 firma: '3S DEMİR ÇELİK', '312 PROJE TASARIM'
+```
+
+Bu sayılar temizlik öncesiyle **birebir aynı** — 7642 NN.NN kayda dokunulmamış.
+Sayaç değeri ('1163') bariz saçmaydı; NN.NN biçimli yanlış kod **sessizce doğru
+görünür**, kesişim motoruna ve müşteriye yanlış cevap olarak sızar. Daha
+tehlikelidir.
+
+Bağ kurulduktan sonra, aynı iş emri içinde:
+
+1. **7642 NN.NN kayıt `raw_nace`'ten yeniden türetilecek.** Mevcut değer
+   güvenilmez sayılacak — üzerine yazılacak, korunmayacak.
+2. **84 yetim kod → 4146 firma** (`companies.nace_code` değeri 2097 satırlık
+   `nace_codes` sözlüğünde yok): sözlüğe göre eşlenecek, eşlenemiyorsa **NULL'a
+   çekilecek**. Uydurma kod yazılmayacak.
+3. **35 altı haneli kayıt** (`'62.10.00'` 26, `'28.99.99'` 9) ve **`'98'` (16)**:
+   4 haneli sınıfa kırpılacak veya NULL. Kolon 4 hane bekliyor.
+4. Sonrasında `nace_code` üzerine `nace_codes(nace_code)` referanslı **yabancı
+   anahtar kısıtı** önerisi raporlanacak — şu anda hiçbir kısıt yok, yani bu
+   kusur yarın tekrar üretilebilir. Kısıt eklenmesi ayrı karar, ölçüm bu turda.
+
+Kabul ölçütü eki: yetim kod sayısı **0**'a inecek (eşlenmiş veya NULL), altı
+haneli/iki haneli kalan **0**, ve 10.11/29.10 örnek firmaları sektörüyle tutarlı
+olacak (et işleme kodunda faktoring şirketi kalmayacak).
+
 ## 5. Uyarılar
 
 1. **Ünvan eşlemesi risklidir.** "ÖZ YILMAZ MAKİNA SAN. TİC. LTD. ŞTİ." ile
