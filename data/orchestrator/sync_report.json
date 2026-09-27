@@ -1,46 +1,12 @@
 {
-  "timestamp": "2026-09-27T16:01:01",
+  "timestamp": "2026-09-27T17:19:35",
   "status": "ok",
   "uygula": false,
-  "bulgular": [
-    {
-      "tip": "orphan",
-      "seviye": "uyari",
-      "task_id": "U-11",
-      "mesaj": "kuyrukta (onaylandi) var, panoda yok",
-      "duzeltme": null
-    },
-    {
-      "tip": "orphan",
-      "seviye": "uyari",
-      "task_id": "MIG-UI-01",
-      "mesaj": "kuyrukta (onaylandi) var, panoda yok",
-      "duzeltme": null
-    },
-    {
-      "tip": "orphan",
-      "seviye": "uyari",
-      "task_id": "MRK-05",
-      "mesaj": "kuyrukta (onaylandi) var, panoda yok",
-      "duzeltme": null
-    },
-    {
-      "tip": "orphan",
-      "seviye": "uyari",
-      "task_id": "ROO-REV-01",
-      "mesaj": "kuyrukta (onaylandi) var, panoda yok",
-      "duzeltme": null
-    }
-  ],
+  "bulgular": [],
   "gorevler": [
     {
       "id": "VERI-02",
       "durum": "plan",
-      "update": "2026-09-27T03:07"
-    },
-    {
-      "id": "VERI-03",
-      "durum": "review",
       "update": "2026-09-27T03:07"
     },
     {
@@ -55,12 +21,12 @@
     },
     {
       "id": "VERI-NACE-TEMIZ-01",
-      "durum": "aktif",
+      "durum": "review",
       "update": "2026-09-27T13:21"
     },
     {
       "id": "VERI-NACE-KOLON-01",
-      "durum": "plan",
+      "durum": "aktif",
       "update": "2026-09-27T13:21"
     },
     {
@@ -75,6 +41,16 @@
     },
     {
       "id": "VERI-KAYNAK-SIZINTI-01",
+      "durum": "plan",
+      "update": null
+    },
+    {
+      "id": "VERI-HAYALET-TEMIZ-01",
+      "durum": "plan",
+      "update": null
+    },
+    {
+      "id": "VERI-IVEDIK-YENIDEN-01",
       "durum": "plan",
       "update": null
     }

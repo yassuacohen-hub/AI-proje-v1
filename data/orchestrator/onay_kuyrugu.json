@@ -658,36 +658,6 @@
     "onay_tarihi": "2026-09-14T21:36:59"
   },
   {
-    "task_id": "U-11",
-    "ajan": "roo",
-    "ozet": "SECTIONS 11->25: admin_yonetim/admin_sistem korundu (Secenek A), 14 yeni kisayol kaydi eklendi (kpi, hatalar, kullanicilar, karar_defteri, kalite, arama, export, maliyet, performans, api, webhook, dlq, yenileme, kimlik). Roller: kullanicilar/karar_defteri=admin, kimlik=anon, digerleri=analyst. Degisen: web_dashboard/tabs/__init__.py, tests/test_dashboard_nav.py (sabit 25). Hedefli 6 dosya 293 passed/1 skip. Tam regresyon 2864 passed, 2 failed — ikisi de Kilo kilidinde (tenant/health.py streamlit import yasagi ihlali = TEN-01; test_odin_ai chunk dedup izole geciyor = flaky, AI-RAG-01). U-11 kapsami temiz.",
-    "ciktilar": [],
-    "teslim_tarihi": "2026-09-15T02:10:54",
-    "durum": "onaylandi",
-    "onaylayan": "orkestrator",
-    "onay_tarihi": "2026-09-15T04:20:41"
-  },
-  {
-    "task_id": "MIG-UI-01",
-    "ajan": "roo",
-    "ozet": "MIG-UI-01 Asama 1 (Musteri Onizleme ara adimi): tabs/__init__.py -> TabTanimi.yuzey (muninn/huginn, dogrulamali) + musteri_onizleme property + YUZEY_* sabitleri + musteri_onizleme_bolumleri(); ana_kontrol/paketler/pazarlama YUZEY_HUGINN. app.py -> render_musteri_onizleme seridi (render_icerik). tests/test_dashboard_nav.py +6 test. Sitemap 14 satir 156 durum notu. Hedefli: 167 yesil (2 kirmizi Kilo'nun tenant_health_dashboard.py, ROO disi -> AGENT_SYNC notu). Asama 2 (index.html tam goc) Huginn tasarim turu sonrasina ertelendi.",
-    "ciktilar": [],
-    "teslim_tarihi": "2026-09-15T03:01:02",
-    "durum": "onaylandi",
-    "onaylayan": "orkestrator",
-    "onay_tarihi": "2026-09-15T04:20:41"
-  },
-  {
-    "task_id": "MRK-05",
-    "ajan": "roo",
-    "ozet": "MRK-05 tam regresyon: 2900 passed, 2 skipped, 2 failed (test_api_integration haric). 2 kirmizi ROO disi: tests/test_sayfa_iskeleti.py[tenant_health_dashboard] -> Kilo'nun untracked web_dashboard/tabs/tenant_health_dashboard.py (PageHeader/Section eksik), AGENT_SYNC'e not dusuldu. Onceki 2 kirmizi (test_tenant_bekci, test_odin_ai flaky) bu kosuda yesil. ROO kapsaminda (U-10, U-11, MIG-UI-01 dosyalari) sifir kirmizi.",
-    "ciktilar": [],
-    "teslim_tarihi": "2026-09-15T03:02:56",
-    "durum": "onaylandi",
-    "onaylayan": "orkestrator",
-    "onay_tarihi": "2026-09-15T04:20:41"
-  },
-  {
     "task_id": "AI-CHAT-01-FIX",
     "ajan": "roo",
     "ozet": "AI-CHAT-01 kayip teslim yeniden uretildi. Dosyalar: src/company_master/ai_chat.py (9Router sohbet, UCRUZ gpt-4o-mini + 4 model fallback zinciri ABRAKADABRA_MODELS env, pano/posta salt-okunur baglam, TEKLIF parser, teklif_uygula onay kapisi, admin token zorunlu), web_dashboard/tabs/abrakadabra.py (PageHeader+Section+SectionNav, st.chat_message/chat_input, Onayla/Reddet butonlari, admin login kapisi), tests/test_ai_chat.py (21 test), web_dashboard/tabs/__init__.py (abrakadabra hazir=True, min_rol=admin). Hedefli: 202 passed. Tam regresyon: 2935 passed / 3 skipped / 2 failed (yalniz Kilo tenant_health_dashboard, TEN-01 kapsaminda). BOM yok, UTF-8.",
@@ -1343,16 +1313,6 @@
     "task_id": "ROO-GAP-NAV-IA04",
     "ajan": "roo",
     "ozet": "1) streamlit_restart PID 30312 OK; 2) test_web_dashboard_tabs 9 passed (izolasyon, ariza yok); 3) MUAF gerekceli onaylandi; 4) NAV-IA-04 done 642b92e, DATA-LOG-01 kilo aktif",
-    "ciktilar": [],
-    "teslim_tarihi": "2026-09-16T23:23:35",
-    "durum": "onaylandi",
-    "onaylayan": "roo",
-    "onay_tarihi": "2026-09-16T23:23:35"
-  },
-  {
-    "task_id": "ROO-REV-01",
-    "ajan": "roo",
-    "ozet": "ELESTIRI-01 ile defter onem sirali (K>M>V>S>O>D), S-09/S-10/D-07 kapandi, D-31..D-34, Bolum 8 gorev donusum listesi; fa104da",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-16T23:23:35",
     "durum": "onaylandi",
@@ -2804,6 +2764,14 @@
       "tests/test_proxy_rotator.py"
     ],
     "teslim_tarihi": "2026-09-27T11:43:16",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "VERI-NACE-TEMIZ-01",
+    "ajan": "utku",
+    "ozet": "Sektor sayaci kirlenmesi temizlendi: 13 gecersiz NACE kodu (1163, 410, 780, 794, 757, 110, 114, 127, 192, 339, 380, 390, 410, 752, 757, 780, 794, 757, 339, 410) temizlendi, 555 firma NULL'a cekildi, nace_source='invalid_cleared' isaretlendi. Dogrulama: kalan gecersiz kod 0, 555 firma invalid_cleared isaretlendi, toplam firma sayisi 14003 degismedi.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-27T16:13:05",
     "durum": "bekliyor"
   }
 ]
