@@ -1,0 +1,423 @@
+# Gelişmiş Ajan Orkestrasyon ve Görev Yönetim Sistemi Prompt'u
+
+## Sistem Genel Bakış
+Bu prompt, çok ajanlı (multi-agent) bir orkestrasyon sisteminin tam otomatik planlama, dağıtım, izleme ve tetikleme döngüsünü tanımlar. Sistem: öncelikli iş bitirme → darboğaz analizi → verimli yeniden planlama → 3'lü ajan gruplarına görev zinciri dağıtımı → sıfır insan müdahalesi ile organize işletim → operatör onayıyla tetikleme → ajan iletişim kanallarının kurulumu adımlarını kapsar.
+
+---
+
+## 1. BAŞLANGIÇ DURUMU VE VERİ KAYNAKLARI
+
+### 1.1 Girdi Verileri
+- **Görev Panosu**: `data/orchestrator/task_board.json` — 287+ görev, her biri: `id`, `baslik`, `aciklama`, `oncelik` (kritik/yüksek/orta/düşük), `durum` (bekliyor/devam/tamamlandı/başarısız), `baslangic`, `bitis`, `atanan_ajan`, `bagimliliklar[]`, `etiketler[]`, `tahmini_sure`, `gercek_sure`
+- **Ajan Kayıt Defteri**: `data/orchestrator/agent_registry.json` — ajan `id`, `isim`, `rol` (planner/executor/reviewer/coordinator), `yetenekler[]`, `maks_eszamanli_gorev`, `mevcut_yuk`, `durum` (müsait/meşgul/bozulmuş), `iletişim_endpoint`
+- **Performans Geçmişi**: `data/orchestrator/performance_history.json` — ajan başına başarı oranı, ortalama süre, hata türleri, darboğaz skorları
+- **Gece Vardiyası Raporu**: `night_shift_report.md` — son analiz çıktısı, beyaz ekran sorunu durumu, ajan performans tabloları
+
+### 1.2 Mevcut Durum Özeti (Context'ten)
+- Beyaz ekran sorunu: **ÇÖZÜLDÜ** — aktif görev yok, config.toml `fileWatcherType = "none"` ayarlı
+- Gece vardiyası (20:00-08:00 UTC+3) analizi tamamlandı
+- Görev panosu 287 görev içeriyor
+- Ajanlar: Planner, Executor, Reviewer, Coordinator rolleriyle tanımlı
+
+---
+
+## 2. AŞAMA 1: ÖNCELİKLİ İŞ BİTİRME VE DARBOĞAZ ANALİZİ
+
+### 2.1 Öncelikli Görev Filtreleme
+```python
+# Mantık: kritik + yüksek öncelikli, durum=bekliyor/devam, bağımlılıkları tamamlanmış
+priority_tasks = [t for t in tasks if t['oncelik'] in ('kritik','yüksek') 
+                  and t['durum'] in ('bekliyor','devam')
+                  and all(dep in completed_ids for dep in t['bagimliliklar'])]
+```
+
+### 2.2 Darboğaz Tespit Algoritması
+Her ajan için **Darboğaz Skoru** hesapla:
+```
+darbogaz_skoru = (mevcut_yuk / maks_eszamanli_gorev) * 100 
+               + (ortalama_gecikme_suresi / tahmini_sure_ort) * 50
+               + (basarisiz_gorev_sayisi / toplam_gorev) * 100
+               + (beceri_eslesme_yuzdesi_eksigi) * 30
+```
+- Skor > 70 → **Kritik Darboğaz**
+- Skor 40-70 → **Orta Darboğaz**  
+- Skor < 40 → **Sağlıklı**
+
+### 2.3 Darboğaz Çözüm Stratejileri
+| Darboğaz Türü | Çözüm |
+|--------------|-------|
+| Ajan aşırı yüklü | Görevleri müsait ajana yeniden dağıt, büyük görevleri alt görevlere böl |
+| Becerik uyuşmazlığı | Görevi uygun yetenekli ajana yönlendir, yetenek eğitimi planla |
+| Bağımlılık zinciri kilitli | Kritik yolu belirle, paralelleştirilebilecek dalları ayır |
+| Sistem kaynak limiti | Batch boyutunu küçült, async/await pattern uygula |
+
+### 2.4 Çıktı: `bottleneck_analysis_report.json`
+```json
+{
+  "timestamp": "2026-09-19T...",
+  "critical_bottlenecks": [{"agent_id": "...", "score": 85, "tasks_affected": [...], "recommended_action": "..."}],
+  "medium_bottlenecks": [...],
+  "resolution_plan": [{"action": "redistribute", "from_agent": "...", "to_agent": "...", "task_ids": [...]}],
+  "priority_completion_eta": "2026-09-19T14:30:00+03:00"
+}
+```
+
+---
+
+## 3. AŞAMA 2: VERİMLİ YENİDEN PLANLAMA
+
+### 3.1 Planlama Kısıtları
+- **Maksimum eşzamanlılık**: Ajan başına `maks_eszamanli_gorev` asla aşılmaz
+- **Beceri zorunluluğu**: Görev `etiketler` ⊆ Ajan `yetenekler`
+- **Bağımlılık sıralaması**: Topolojik sıralama (Kahn algoritması) ile DAG doğrulaması
+- **Süre tahmini**: Monte Carlo simülasyonu (1000 iterasyon) ile P50/P90 güven aralıkları
+- **Risk tamponu**: Her görev zincirine %20 süre tamponu ekle
+
+### 3.2 Optimizasyon Hedefleri (Ağırlıklı)
+1. **Makespan minimizasyonu** (ağırlık: 0.4) — toplam bitiş süresi
+2. **Yük dengeleme** (ağırlık: 0.3) — ajanlar arası iş yükü varyansı minimum
+3. **Öncelik uyumu** (ağırlık: 0.2) — kritik görevler en erken başlasın
+4. **Bağlam değiştirme maliyeti** (ağırlık: 0.1) — aynı ajan aynı etiketli görevleri ardarda yapsın
+
+### 3.3 Çıktı: `optimized_plan.json`
+```json
+{
+  "plan_id": "plan_20260919_001",
+  "created_at": "...",
+  "task_chains": [
+    {
+      "chain_id": "chain_001",
+      "priority": "kritik",
+      "tasks": [
+        {"task_id": "T-1042", "agent_id": "agent_03", "sequence": 1, "est_start": "...", "est_end": "..."},
+        {"task_id": "T-1043", "agent_id": "agent_03", "sequence": 2, "depends_on": ["T-1042"], "est_start": "...", "est_end": "..."},
+        {"task_id": "T-1044", "agent_id": "agent_07", "sequence": 3, "depends_on": ["T-1043"], "est_start": "...", "est_end": "..."}
+      ],
+      "assigned_agent_group": ["agent_03", "agent_07", "agent_11"],
+      "chain_type": "sequential",
+      "risk_buffer_minutes": 45
+    }
+  ],
+  "unassigned_tasks": [],
+  "metrics": {"estimated_makespan_min": 420, "load_balance_variance": 0.12, "priority_adherence": 0.98}
+}
+```
+
+---
+
+## 4. AŞAMA 3: 3'LÜ AJAN GRUPLARINA GÖREV ZİNCİRİ DAĞITIMI
+
+### 4.1 Grup Oluşturma Kuralı
+- Her **görev zinciri** → tam **3 ajan** (Planner + Executor + Reviewer) veya (Coordinator + 2×Executor)
+- Grup üyeleri: **Beceriler tamamlayıcı**, **yük dengeli**, **iletişim gecikmesi düşük** (aynı bölge/cluster)
+- Grup kimliği: `group_{chain_id}_{timestamp}`
+
+### 4.2 Dağıtım Protokolü
+```python
+for chain in optimized_plan['task_chains']:
+    group_agents = select_optimal_trio(chain, agent_registry)
+    create_agent_group(
+        group_id=f"group_{chain['chain_id']}",
+        agents=group_agents,
+        chain=chain,
+        communication_channel=f"redis://pubsub/group_{chain['chain_id']}",
+        shared_context_store=f"s3://orchestrator/contexts/group_{chain['chain_id']}/"
+    )
+    # Her ajana sadece KENDİ görevleri + bağlam gönder
+    for agent in group_agents:
+        push_task_bundle(agent, filter_tasks_for_agent(chain['tasks'], agent))
+```
+
+### 4.3 Görev Zinciri Yapısı
+Her zincir: **Giriş → İşleme → Çıkış/Doğrulama** üç aşaması
+| Aşama | Sorumlu Rol | Çıktı | Sonraki Aşamaya Geçiş Koşulu |
+|-------|------------|-------|------------------------------|
+| 1. Planlama/Hazırlık | Planner/Coordinator | Alt görev listesi, kaynak tahsisi, risk analizi | Plan onaylandı (otomatik: kriterler karşılandı) |
+| 2. Yürütme | Executor(x2) | Ham sonuçlar, loglar, metrikler | Tüm alt görevler `durum=tamamlandı` |
+| 3. Doğrulama/Teslim | Reviewer/Coordinator | Kalite raporu, onay/red, sonraki zincir için girdi | Kalite skoru ≥ eşik (0.85) |
+
+### 4.4 Çıktı: `deployment_manifest.json`
+```json
+{
+  "deployment_id": "deploy_20260919_001",
+  "groups": [
+    {
+      "group_id": "group_chain_001_20260919_101500",
+      "chain_id": "chain_001",
+      "agents": [
+        {"agent_id": "agent_03", "role": "planner", "tasks": ["T-1042"]},
+        {"agent_id": "agent_07", "role": "executor", "tasks": ["T-1043"]},
+        {"agent_id": "agent_11", "role": "reviewer", "tasks": ["T-1044"]}
+      ],
+      "comm_channel": "redis://pubsub/group_chain_001",
+      "context_store": "s3://orchestrator/contexts/group_chain_001/",
+      "status": "deployed_awaiting_trigger",
+      "health_check_endpoint": "http://orchestrator:8080/health/group_chain_001"
+    }
+  ],
+  "total_groups": 12,
+  "all_systems_go": true
+}
+```
+
+---
+
+## 5. AŞAMA 4: SIFIR İNSAN MÜDAHALESİ ORGANİZASYONU (FULL AUTONOMY)
+
+### 5.1 Otomatik İzleme ve Kendi Kendini Düzeltme Döngüsü
+Her grup için **ayrı bir watchdog süreci** (daemon) çalışır:
+```python
+async def group_watchdog(group_id):
+    while group_status != 'completed':
+        health = await check_group_health(group_id)
+        if health['stalled_tasks'] > 0:
+            await auto_recover_stalled_tasks(group_id, health['stalled_tasks'])
+        if health['agent_failure']:
+            await failover_agent(group_id, health['failed_agent'])
+        if health['quality_degradation']:
+            await inject_quality_gate(group_id)
+        if health['deadlock_detected']:
+            await resolve_deadlock(group_id)
+        await asyncio.sleep(30)  # 30 saniyede bir kontrol
+```
+
+### 5.2 Otomatik Kurtarma Stratejileri
+| Sorun | Otomatik Çözüm |
+|-------|----------------|
+| Ajan çöktü | Yedek ajan (standby pool'dan) 30 sn içinde devreye girer, context transferi yapılır |
+| Görev zaman aşımı | Görev bölünür, paralelleştirilir veya basitleştirilmiş versiyon çalıştırılır |
+| Kalite skoru düşük | Otomatik code review / lint / test koşturulur, düzeltme önerisi üretilir |
+| Bağımlılık kilitli | Bağımlılık grafiği yeniden çizilir, alternatif yol bulunur |
+| İletişim kesintisi | Message queue replay, idempotency key ile yeniden işleme |
+
+### 5.3 Durum Makinesi (Grup Bazında)
+```
+DEPLOYED → AWAITING_TRIGGER → PLANNING → EXECUTING → REVIEWING → COMPLETED
+                ↑                    ↑            ↑           ↑
+                |____________________|____________|___________| (hata durumunda geri dönüş)
+```
+
+### 5.4 Çıktı: `autonomy_status_stream` (Redis Pub/Sub, real-time)
+```json
+{"group_id": "group_chain_001", "state": "EXECUTING", "progress": 0.67, "health": "green", "eta": "2026-09-19T12:15:00+03:00"}
+```
+
+---
+
+## 6. AŞAMA 5: OPERATÖR BİLGİLENDİRMESİ VE TETİKLEME PROTOKOLÜ
+
+### 6.1 Operatöre Gönderilecek Özet Raporu (`operator_briefing.md`)
+```markdown
+# Operatör Bilgilendirme Raporu — 2026-09-19 10:15
+
+## ✅ Sistem Hazır
+- **12 görev zinciri** oluşturuldu, **36 ajan** (12 grup × 3) dağıtıldı
+- Tüm darboğazlar çözüldü: 3 kritik → 0, 5 orta → 1 (izleniyor)
+- İletişim kanalları (Redis Pub/Sub) + bağlam depoları (S3) aktif
+- Watchdog süreçleri başlatıldı, otomatik kurtarma etkin
+
+## 📋 Bekleyen Eylem: **TETİKLEME**
+Sistem **AWAITING_TRIGGER** durumunda. Hiçbir ajan henüz işlememeye başladı.
+
+## 🎯 Öncelik Sırası (İlk 3 Zincir)
+| Zincir | Grup | Öncelik | Tahmini Süre | Kritik Yol |
+|--------|------|---------|--------------|------------|
+| chain_001 | group_chain_001 | kritik | 45 dk | T-1042 → T-1043 → T-1044 |
+| chain_002 | group_chain_002 | kritik | 38 dk | T-1051 → T-1052 |
+| chain_003 | group_chain_003 | yüksek | 52 dk | T-1060 → T-1061 → T-1062 |
+
+## ⚠️ Riskler
+- `agent_07` hafif yüklü (%78) — standby `agent_19` hazır
+- `chain_005` dış API bağımlılığı (rate limit riski) — circuit breaker aktif
+
+## 🔘 Operatör Eylemi Gerekli
+```bash
+# Tüm grupları başlat:
+python -m orchestrator.trigger --deployment-id deploy_20260919_001 --all
+
+# Veya seçili grup(lar):
+python -m orchestrator.trigger --deployment-id deploy_20260919_001 --groups group_chain_001,group_chain_002
+```
+```
+
+### 6.2 Tetikleme Komutu (Operatör Tarafından Çalıştırılacak)
+```bash
+# scripts/trigger_deployment.py
+python scripts/trigger_deployment.py \
+  --deployment-id deploy_20260919_001 \
+  --mode all \
+  --confirm \
+  --notify-on-completion
+```
+
+### 6.3 Tetikleme Sonrası Akış
+1. Orchestrator → her grup `comm_channel`'a `{"event": "START", "timestamp": "...", "operator_id": "human_01"}` yayınlar
+2. Her grup **Planner/Coordinator** ilk mesajı alır → `state: PLANNING` → alt görevleri dağıtır
+3. Executor'lar `EXECUTING` state'ine geçer, progress stream başlar
+4. Operatör `dashboard` veya `cli` ile real-time izler
+
+---
+
+## 7. AŞAMA 6: AJAN İLETİŞİM ALTYAPISI (COMMUNICATION LAYER)
+
+### 7.1 İletişim Mimarisi
+```
+┌─────────────────────────────────────────────────────────────┐
+                    ORCHESTRATOR MESSAGE BUS
+├─────────────────────────────────────────────────────────────┤
+  Redis Cluster (Pub/Sub + Streams + Consumer Groups)         │
+  ├── Channel: orchestrator:commands (broadcast)              │
+  ├── Channel: orchestrator:events (broadcast)                │
+  ├── Stream: group:{group_id}:tasks (consumer group/agent)   │
+  ├── Stream: group:{group_id}:results (consumer group/all)   │
+  ├── Stream: group:{group_id}:control (pause/resume/abort)   │
+  └── Keys: agent:{agent_id}:heartbeat (TTL 60s)              │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### 7.2 Mesaj Şemaları (JSON Schema)
+```json
+// Command (Orchestrator → Group)
+{"$schema": "http://json-schema.org/draft-07/schema#", "type": "object", "required": ["event", "deployment_id", "group_id", "timestamp", "payload"], "properties": {"event": {"enum": ["START", "PAUSE", "RESUME", "ABORT", "REPLAN"]}, "deployment_id": {"type": "string"}, "group_id": {"type": "string"}, "timestamp": {"type": "string", "format": "date-time"}, "payload": {"type": "object"}}}
+
+// Task Assignment (Group Internal: Planner → Executor)
+{"task_id": "T-1043", "action": "execute", "input_ref": "s3://.../input.json", "output_ref": "s3://.../output.json", "timeout_sec": 1800, "retry_policy": {"max_attempts": 3, "backoff": "exponential"}}
+
+// Result (Executor → Reviewer + Orchestrator)
+{"task_id": "T-1043", "status": "completed", "output_ref": "s3://...", "metrics": {"duration_sec": 1240, "tokens_used": 45000}, "quality_score": 0.92}
+
+// Heartbeat (Agent → Orchestrator, her 30 sn)
+{"agent_id": "agent_07", "group_id": "group_chain_001", "status": "executing", "current_task": "T-1043", "progress": 0.6, "load": 0.78, "timestamp": "..."}
+```
+
+### 7.3 İletişim Protokolü Kuralları
+1. **Idempotency**: Her mesaj `message_id` (UUIDv7) taşır, alıcı deduplicate eder
+2. **Sıralama**: Stream'ler `message_id` ile sıralı, consumer group exactly-once
+3. **Timeout**: 5 sn ack gelmezse redelivery, 3 deneme sonrası DLQ'ya
+4. **Şifreleme**: TLS 1.3, mesaj içeriği AES-256-GCM (key rotation günlük)
+5. **Gözlemlenebilirlik**: Tüm mesajlar `orchestrator:audit` stream'ine kopyalanır
+
+### 7.4 Bağlam Paylaşımı (Shared Context Store)
+- **S3-compatible** (MinIO / AWS S3) bucket: `orchestrator-contexts`
+- Yapı: `contexts/{group_id}/{task_id}/{version}/`
+- İçerik: `input.json`, `output.json`, `logs/`, `artifacts/`, `metadata.yaml`
+- Erişim: Pre-signed URL (15 dk TTL), ajanlar sadece kendi grup prefix'ini görebilir
+
+### 7.5 Sağlık Kontrolü ve Service Discovery
+```yaml
+# docker-compose.orchestrator.yml snippet
+services:
+  orchestrator-api:
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 10s
+      timeout: 3s
+      retries: 3
+  redis-cluster:
+    # 3 master + 3 replica, sentinel ile failover
+  minio:
+    # distributed mode, 4 node
+```
+
+---
+
+## 8. TAM ÇALIŞMA SIRASI (END-TO-END FLOW)
+
+```mermaid
+sequenceDiagram
+    participant O as Orchestrator
+    participant H as Human Operator
+    participant G1 as Group_001 (P+E+R)
+    participant G2 as Group_002 (P+E+R)
+    participant R as Redis/MinIO
+
+    O->>R: Load task_board, agent_registry, history
+    O->>O: Phase 1: Priority filter + Bottleneck analysis
+    O->>R: Write bottleneck_analysis_report.json
+    O->>O: Phase 2: Optimized planning (constraint solver)
+    O->>R: Write optimized_plan.json
+    O->>O: Phase 3: Create 3-agent groups, deploy manifests
+    O->>R: Write deployment_manifest.json
+    O->>R: Create comm channels, context stores
+    O->>O: Phase 4: Start watchdog daemons per group
+    O->>H: Send operator_briefing.md (via CLI/email/Slack)
+    H->>O: RUN trigger command (START event)
+    O->>R: Publish START to group:{id}:control
+    G1->>R: Consume START → Planner begins
+    G1->>R: Planner publishes task assignments to group:{id}:tasks
+    G1->>R: Executors consume, execute, publish results
+    G1->>R: Reviewer consumes, validates, publishes quality gate
+    G1->>O: Chain COMPLETED event
+    O->>H: Final completion report
+```
+
+---
+
+## 9. UYGULAMA KONTROL LİSTESİ (IMPLEMENTATION CHECKLIST)
+
+### 9.1 Hazırlık (Mevcut Kod Üzerine)
+- [ ] `scripts/analyze_bottlenecks.py` — darboğaz analizi modülü
+- [ ] `scripts/optimize_plan.py` — kısıtlı planlayıcı (OR-Tools / PuLP / custom heuristic)
+- [ ] `scripts/deploy_groups.py` — grup oluşturma, kanal/bağlam provisioning
+- [ ] `scripts/watchdog.py` — grup izleme daemon'ı
+- [ ] `scripts/trigger_deployment.py` — operatör tetikleme CLI'si
+- [ ] `scripts/operator_briefing.py` — rapor üretici
+- [ ] `orchestrator/comm_layer.py` — Redis/MinIO abstraction
+- [ ] `orchestrator/schemas.py` — Pydantic modelleri (mesaj şemaları)
+- [ ] `docker-compose.orchestrator.yml` — altyapı
+
+### 9.2 Test Senaryoları
+- [ ] **Birim**: Bottleneck skor hesaplama, planlayıcı kısıt doğrulama
+- [ ] **Entegrasyon**: 3 ajan grubu START → COMPLETED akışı (mock task'lerle)
+- [ ] **Kaos**: Ajan kill, network partition, Redis failover sırasında kurtarma
+- [ ] **Yük**: 50 grup × 3 ajan = 150 eşzamanlı ajan, 1000 görev/dk throughput
+
+### 9.3 Gözlemlenebilirlik
+- [ ] Prometheus metrikleri: `orchestrator_groups_active`, `orchestrator_tasks_completed_total`, `orchestrator_bottleneck_score`, `orchestrator_trigger_latency_seconds`
+- [ ] Grafana dashboard: "Orchestrator Overview", "Group Drilldown", "Agent Health"
+- [ ] Alert: grup 10 dk progress yok → PagerDuty/Slack
+
+---
+
+## 10. SONUÇ: OPERATÖR NE YAPMALI?
+
+**Tek komut:**
+```bash
+cd /path/to/orchestrator
+python scripts/trigger_deployment.py --deployment-id deploy_20260919_001 --all --confirm
+```
+
+**Sonra:** Dashboard'ı izle (`http://orchestrator:3000/d/orchestrator-overview`). Sistem geri kalan her şeyi halleder. Hata olursa watchdog çözer, çözemiyorsa seni Slack'e mention atar.
+
+---
+
+## 11. DOSYA YAPISI ÖNERİSİ
+```
+orchestrator/
+├── scripts/
+│   ├── analyze_bottlenecks.py
+│   ├── optimize_plan.py
+│   ├── deploy_groups.py
+│   ├── watchdog.py
+│   ├── trigger_deployment.py
+│   └── operator_briefing.py
+├── orchestrator/
+│   ├── __init__.py
+│   ├── comm_layer.py
+│   ├── schemas.py
+│   ├── planner.py
+│   ├── executor.py
+│   ├── reviewer.py
+│   └── watchdog.py
+├── data/orchestrator/
+│   ├── task_board.json
+│   ├── agent_registry.json
+│   └── performance_history.json
+├── docker-compose.orchestrator.yml
+├── pyproject.toml
+└── README_ORCHESTRATOR.md
+```
+
+---
+
+**Bu prompt'u bir LLM'e veya geliştirme ekibine verirseniz; sıfırdan tam otomatik, gözlemlenebilir, operatör-onaylı başlatmalı, 3'lü ajan gruplarıyla görev zinciri işleten, darboğazsız, kendi kendini düzelten bir orkestrasyon sistemi üretebilirler.**ncirin

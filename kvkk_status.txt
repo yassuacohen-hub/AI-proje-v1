@@ -1,5 +1,0 @@
-API-KVKK-KONTROL-25 | baslatdi | P1 | [API] Kontör endpoint entegrasyonu (match/ilan) -> _charge_module_credit çağrısı
-UI-ADMIN-KVKK-MODU-26 | review | P1 | [UI] Admin KVKK mode toggle (strict ↔ lenient) -> web_app POST endpoint
-UI-ADMIN-KVKK-RAPOR-28 | review | P2 | [UI] KVKK maskeleme raporu -> admin paneline ek sekme
-KONTROL-KVKK-MASKELEME-31 | baslatdi | P1 | [KONTROL] KVKK maskeleme end-to-end test -> admin panel e2e
-DOKUMAN-KVKK-FAQ-33 | review | P2 | [DOC] KVKK FAQ & sorun çözme -> markdown troubleshooting guide
