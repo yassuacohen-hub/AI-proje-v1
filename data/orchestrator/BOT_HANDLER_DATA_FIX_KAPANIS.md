@@ -1,4 +1,7 @@
-# D-224: Handler Data Flow Fix — KAPANISH
+# Handler Data Flow Fix — Kapanış
+
+> Karar referansı: D-224 (Kırmızı Test = Ölçülmeden Görev Açılmaz) — bkz. `AGENTS.md`.
+> Bu rapor karar numarası **sahiplenmez**, yalnızca uygulamayı belgeler (D-227).
 
 **Tarih:** 2026-09-25 09:55 UTC+3
 

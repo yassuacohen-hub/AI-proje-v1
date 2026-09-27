@@ -1,4 +1,7 @@
-# D-223: Bot Handler Veri Akışı Taşıması — task_board.json SSOT
+# Bot Handler Veri Akışı Taşıması — task_board.json SSOT
+
+> Karar referansı: D-223 (Tek Otorite: Vault) — bkz. `AGENTS.md`. Bu rapor karar
+> numarası **sahiplenmez**, yalnızca uygulamayı belgeler (D-227).
 
 **Tarih:** 2026-09-25 12:37 UTC+3  
 **Sorun:** "bot yanıt veiyor amam handel eksik olabilir mi doğru veri akışları gözükmüyor tüm menülerde"  

@@ -112,7 +112,7 @@
 - **Etkilenen görevler:** DASH-UX-02a (brif: `plans/brief_utku_DASH-UX-02a.md`), DASH-UX-02b (brif: `plans/brief_utku_DASH-UX-02b.md`), UX-ZINCIR-01 (MENUTREE).
 - **Referanslar:** [[D-85]] ANALIZ_MENU_AGACI_BLOKAJ_2026-09-21.md (analiz), decision_log.jsonl (karar kaydı).
 
-### DASH-UX-02a Split: v1 (Dosya) / v2 (SECTIONS) (D-185 — KAHİN kararı 2026-09-21)
+### DASH-UX-02a Split: v1 (Dosya) / v2 (SECTIONS) (D-85 Ek — KAHİN kararı 2026-09-21)
 - **Karar:** DASH-UX-02a çakışma riskini azaltmak için v1/v2'ye bölün.
 - **v1 (Dosya):** `web_dashboard/tabs/admin_sistem.py` yazılır. SECTIONS kaydı **YAPILMAZ**. K1 kalibrasyonu tanımlanır (raporda).
 - **v2 (SECTIONS):** v1 onaylandıktan + ADMIN-UX-MENUTREE-01 bitince, `tabs/__init__.py` güncellenip SECTIONS'a admin_sistem eklenir. K1 reuse. Full regresyon test.
@@ -1241,3 +1241,34 @@ python -m pytest tests/test_pano_tekligi.py -q
 **Mandal:** 4. madde backlog'un görünmez kalmasını engeller — D-222'nin asıl hastalığı buydu.
 
 **Referans:** D-216 (hayalet görev arşivleme), D-220 (doküman politikası, pano kanonik yolu).
+
+---
+
+## Karar Numarası Yalnız AGENTS.md'den Verilir (D-227 — KAHİN kararı 2026-09-27)
+
+- **Kural:** `D-NNN` karar numarası **yalnız bu dosyada**, `## Başlık (D-NNN — KAHİN kararı TARİH)`
+  biçiminde bir kanonik başlıkla verilir. Numara tekildir. AGENTS.md dışındaki hiçbir belge
+  karar numarasını **dosya adında** veya **H1 başlığında** sahiplenmez; gövdede
+  `> Karar referansı: D-NNN (…)` satırıyla referans verir. Mevcut bir kararın uzantısı
+  yeni numara almaz, `(D-NNN Ek — KAHİN kararı TARİH)` etiketiyle yazılır.
+- **Gerekçe:** Aynı numaranın iki farklı konuyu adlandırması kayıt defterini kullanılamaz hâle
+  getirir. "D-216" AGENTS.md'de *hayalet görev arşivleme*, 12 `plans/` dosyasında *Telegram Menü*
+  demeye başladığında hangi kararın hangisi olduğu ancak tarih tahminiyle bulunabilir.
+- **Tetikleyen hata:** `BOT_HANDLER_DATA_FIX_D223.md` ve `BOT_HANDLER_DATA_FIX_D224_KAPANISH.md`
+  raporları D-223/D-224 numaralarını sahiplenmişti. Görev brifi 2 çakışma bildirdi; ölçülen
+  gerçek tablo **8+ çakışan numara** (185, 216, 217, 218, 219 …), **35 dosya adında** ve
+  **24 H1 başlığında** sahiplenme çıktı. AGENTS.md'nin kendi içinde de D-185 iki kanonik
+  başlıkta duruyordu; satır 115'teki DASH-UX-02a başlığı `D-85 Ek`e çevrildi.
+- **Mandal:** `tests/test_karar_numara_tekligi.py` — 6 test, iki katman:
+  1. **TEKLİK** — AGENTS.md'de aynı `D-NNN` iki kanonik başlıkta olamaz (sıfır tolerans).
+  2. **SAHİPLENME** — dosya adı (`TAVAN_AD = 35`) ve H1 (`TAVAN_H1 = 24`) ihlal sayıları
+     D-227 anında **ölçülmüş** tavanlardır; yalnız küçülür, asla yükseltilmez (bkz. D-220:
+     geriye dönük 37 dosyayı düzeltmek değer üretmez, artışı engellemek üretir).
+  3. Tetikleyici iki raporun referans biçiminde kaldığını doğrulayan regresyon nöbetçisi.
+
+```bash
+python -m pytest tests/test_karar_numara_tekligi.py -q
+```
+
+- **Referans:** D-223 (Tek Otorite: Vault), D-220 (doküman politikası, tavan deseni),
+  D-224 (ölçülmeden görev açılmaz — tavanlar tahmin değil ölçümdür).
