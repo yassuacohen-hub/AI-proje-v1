@@ -25,9 +25,6 @@
 | WK-03 | Proxy Rotation and IP Management | - | P2 | archive | - |
 | VERI-02 | [VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s) | utku | P1 | plan | - |
 | VERI-03 | [VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s) | utku | P2 | plan | - |
-| VERI-04 | [VERI] Migration down dosyalarini tek ad standardina tasi → schema/migrations/down/ (3s) | ihsan | P1 | plan | src/company_master/schema/migrations/, tests/test_migration_0017.py, tests/test_schema_validation.py |
-| API-07 | [API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s) | utku | P1 | plan | tests/test_api_integration.py, src/api/ |
-| UI-11 | [UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s) | utku | P2 | plan | tests/test_sayfa_iskeleti.py |
 
 ## Tamamlananlar
 
@@ -82,3 +79,7 @@
 | ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyasi yaz | yasu | 2026-09-27T02:35:00 |
 | ORKESTRA-VAULT-TEKRAR-01 | [ORKESTRA] Vault isim tekrarlarini denetle | ihsan | 2026-09-27T02:35:00 |
 | VAULT-ORPHAN-INCELEME-01 | [VAULT] Orphan nod siniflama: 3361 dosya, D-173 | orkestrator | 2026-09-27T02:35:00 |
+| VERI-04 | [VERI] Migration down dosyalarini tek ad standardina tasi → schema/migrations/down/ (3s) | ihsan | 2026-09-27T05:35:00 |
+| API-07 | [API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s) | utku | 2026-09-27T05:35:00 |
+| UI-11 | [UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s) | utku | 2026-09-27T05:35:00 |
+| DOC-D227-01 | [DOC] D-227: karar numarasi yalniz AGENTS.md'den verilir + mandal | orkestrator | 2026-09-27T05:35:00 |

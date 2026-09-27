@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-27T03:07:49
+> Son guncelleme: 2026-09-27T05:37:27
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -30,16 +30,16 @@
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| UI-ADMIN-MENU-D215216 | [UI] Admin menü ağacını düzelt → web_das | utku | 2026-09-27 |
-| RESEARCH-PONYTALE | Ponytail vs Caveman derinlemesine arasti | ihsan | 2026-09-27 |
-| DOC-SIRKET-MASTER-01 | [DOC] Sirket Master ana belgesi duzelt | utku | 2026-09-27 |
-| REVIEW-ONAY-KUYRUGU-01 | Onay kuyrugundaki 2 teslimi denetle | yasu | 2026-09-27 |
 | AGN-CREWAI-PILOT-01 | crewAI hibrit worker pilotu (metin ureti | ihsan | 2026-09-27 |
 | ORKESTRA-DECISION-LOG-03 | [ORKESTRA] Karar defteri duzenleme ve va | ihsan | 2026-09-27 |
 | ORKESTRA-NAMING-AUDIT-02 | [ORKESTRA] D-55/D-57 adlandirma kurallar | ihsan | 2026-09-27 |
 | ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyasi yaz | yasu | 2026-09-27 |
 | ORKESTRA-VAULT-TEKRAR-01 | [ORKESTRA] Vault isim tekrarlarini denet | ihsan | 2026-09-27 |
 | VAULT-ORPHAN-INCELEME-01 | [VAULT] Orphan nod siniflama: 3361 dosya | orkestrator | 2026-09-27 |
+| VERI-04 | [VERI] Migration down dosyalarini tek ad | ihsan | 2026-09-27 |
+| API-07 | [API] 11 yeni rotayi envantere yaz + gec | utku | 2026-09-27 |
+| UI-11 | [UI] admin_mfa + ana_kontrol basliklarin | utku | 2026-09-27 |
+| DOC-D227-01 | [DOC] D-227: karar numarasi yalniz AGENT | orkestrator | 2026-09-27 |
 
 ## Son Handoff'lar
 
