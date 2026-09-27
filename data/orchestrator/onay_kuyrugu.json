@@ -2764,7 +2764,9 @@
       "tests/test_proxy_rotator.py"
     ],
     "teslim_tarihi": "2026-09-27T11:43:16",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-27T17:34:08"
   },
   {
     "task_id": "VERI-NACE-TEMIZ-01",

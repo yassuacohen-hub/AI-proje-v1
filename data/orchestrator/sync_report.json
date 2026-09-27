@@ -1,16 +1,8 @@
 {
-  "timestamp": "2026-09-27T17:25:17",
+  "timestamp": "2026-09-27T17:34:30",
   "status": "ok",
   "uygula": false,
-  "bulgular": [
-    {
-      "tip": "kuyruk",
-      "seviye": "uyari",
-      "task_id": "VERI-03",
-      "mesaj": "kuyruk=bekliyor ama pano=done — onay kaydı kapatılmadı",
-      "duzeltme": null
-    }
-  ],
+  "bulgular": [],
   "gorevler": [
     {
       "id": "VERI-02",
