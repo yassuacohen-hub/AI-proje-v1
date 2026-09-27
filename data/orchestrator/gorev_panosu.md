@@ -29,6 +29,8 @@
 | VERI-NACE-COKLU-01 | [VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s) | utku | P1 | plan | src/company_master/etl/nace_coklu_ata.py |
 | VERI-NACE-TEMIZ-01 | [VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s) | utku | P1 | plan | src/company_master/etl/nace_gecersiz_temizle.py |
 | VERI-NACE-KOLON-01 | [VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s) | utku | P2 | plan | src/company_master/etl/nace_validity_duzelt.py |
+| VERI-SEKTOR-01 | [VERI] Sektör adını kurtar → 78 satırlık sözlük + companies.sector_name (3s) | utku | P1 | plan | src/company_master/etl/sektor_normalle.py |
+| VERI-KAYNAK-SIZINTI-01 | [VERI] ostim kaydında ASO biçimli 102 payload → kaynak karışması teşhisi (2s) | utku | P2 | plan | src/company_master/etl/kaynak_sizinti_teshis.py |
 
 ## Tamamlananlar
 
