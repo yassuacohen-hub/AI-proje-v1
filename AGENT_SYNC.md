@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-27T10:48:42
+> Son guncelleme: 2026-09-27T11:43:17
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -24,13 +24,12 @@
 | WK-02 | OSB Tender Monitor - Real-time Tracking | - | P1 | archive |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | archive |
 | VERI-02 | [VERI] OSB ihale izleyicisini yaz → src/ | utku | P1 | plan |
-| VERI-03 | [VERI] Proxy rotasyonunu yaz → src/scrap | utku | P2 | plan |
+| VERI-03 | [VERI] Proxy rotasyonunu yaz → src/scrap | utku | P2 | review |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| ORKESTRA-VAULT-TEKRAR-01 | [ORKESTRA] Vault isim tekrarlarini denet | ihsan | 2026-09-27 |
 | VAULT-ORPHAN-INCELEME-01 | [VAULT] Orphan nod siniflama: 3361 dosya | orkestrator | 2026-09-27 |
 | VERI-04 | [VERI] Migration down dosyalarini tek ad | ihsan | 2026-09-27 |
 | API-07 | [API] 11 yeni rotayi envantere yaz + gec | utku | 2026-09-27 |
@@ -40,6 +39,7 @@
 | DOC-D229-01 | D-229: zaman damgali yedek git te izlenm | kahin | 2026-09-27 |
 | DOC-D230-01 | KAHIN | D-230: gomulu govde kopyasi yasagi + mandal | 2026-09-27 |
 | ORKESTRA-D231-01 | KAHIN | Onay kuyrugu arsive kor: pano_denetim arsive bakmiyordu | 2026-09-27 |
+| ORKESTRA-D233-01 | KAHIN | Referansli yol kopya sanildi: AI proje v1/ butun olarak silindi, teslim kapisi kirildi | 2026-09-27 |
 
 ## Son Handoff'lar
 

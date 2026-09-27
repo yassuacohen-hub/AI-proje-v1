@@ -1349,16 +1349,17 @@
     "baslik": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-27T03:07:34",
     "bitis": null,
     "dosyalar": [],
-    "not": "",
+    "not": "Teslim (utku): Proxy rotasyonu ZATEN VARDI (src/company_master/utils/proxy_rotator.py, 125 satir, 10 metod); eksik olan TEST idi. tests/test_proxy_rotator.py yazildi: 9 test, sabit+rastgele sirada yesil. Kapsam: bos proxy listesinde None, requests formati, UA dolasimi, add/remove idempotans, son proxy silinince indeks tasmasi, bos listede rotate, dosyadan yukleme (yorum/bos satir atlama), olmayan dosya, ortam degiskeninden auto-detect. Pano yolu (src/scrapers/proxy_rotation.py) gercek yerlesimle uyusmuyordu.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_VERI-03.md",
-    "talimat": "D-222 devri: eski kimlik WK-03. VERI-02 sonrasi. Engellenme olcumu yoksa bu gorev yazilmaz."
+    "talimat": "D-222 devri: eski kimlik WK-03. VERI-02 sonrasi. Engellenme olcumu yoksa bu gorev yazilmaz.",
+    "hafiza_izi": "atlandi"
   },
   {
     "id": "VERI-04",

@@ -2795,5 +2795,15 @@
     "durum": "onaylandi",
     "onaylayan": "orkestrator",
     "onay_tarihi": "2026-09-26T14:30:53"
+  },
+  {
+    "task_id": "VERI-03",
+    "ajan": "utku",
+    "ozet": "Proxy rotasyonu ZATEN VARDI (src/company_master/utils/proxy_rotator.py, 125 satir, 10 metod); eksik olan TEST idi. tests/test_proxy_rotator.py yazildi: 9 test, sabit+rastgele sirada yesil. Kapsam: bos proxy listesinde None, requests formati, UA dolasimi, add/remove idempotans, son proxy silinince indeks tasmasi, bos listede rotate, dosyadan yukleme (yorum/bos satir atlama), olmayan dosya, ortam degiskeninden auto-detect. Pano yolu (src/scrapers/proxy_rotation.py) gercek yerlesimle uyusmuyordu.",
+    "ciktilar": [
+      "tests/test_proxy_rotator.py"
+    ],
+    "teslim_tarihi": "2026-09-27T11:43:16",
+    "durum": "bekliyor"
   }
 ]
