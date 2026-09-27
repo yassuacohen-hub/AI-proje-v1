@@ -1620,7 +1620,7 @@
   {
     "id": "VERI-KAYNAK-BAG-01",
     "task_id": "VERI-KAYNAK-BAG-01",
-    "baslik": "[VERI] Firma-kaynak bagini kur -> source_records.company_id (4s)",
+    "baslik": "[VERI] Firma-kaynak bagini yaz → source_records.company_id (4s)",
     "sahip": "utku",
     "oncelik": "P0",
     "durum": "plan",
@@ -1639,7 +1639,7 @@
   {
     "id": "VERI-SEKTOR-01",
     "task_id": "VERI-SEKTOR-01",
-    "baslik": "[VERI] Sektor adini topla ve normallestir -> 9689 kayit (3s)",
+    "baslik": "[VERI] Sektor sozlugunu yaz → 9689 kayitta sektor alani (3s)",
     "sahip": "utku",
     "oncelik": "P1",
     "durum": "plan",
@@ -1658,7 +1658,7 @@
   {
     "id": "VERI-KAYNAK-SIZINTI-01",
     "task_id": "VERI-KAYNAK-SIZINTI-01",
-    "baslik": "[VERI] Kaynak sizintisini duzelt -> ostim icinde 102 ASO kaydi (2s)",
+    "baslik": "[VERI] Kaynak sizintisini duzelt → ostim icinde 102 ASO kaydi (2s)",
     "sahip": "utku",
     "oncelik": "P2",
     "durum": "plan",
@@ -1677,7 +1677,7 @@
   {
     "id": "VERI-HAYALET-TEMIZ-01",
     "task_id": "VERI-HAYALET-TEMIZ-01",
-    "baslik": "[VERI] Hayalet kayitlari sil -> companies 4591 fazlalik satir (3s)",
+    "baslik": "[VERI] Hayalet kayitlari sil → companies 4591 fazlalik satir (3s)",
     "sahip": "utku",
     "oncelik": "P0",
     "durum": "aktif",
@@ -1696,7 +1696,7 @@
   {
     "id": "VERI-IVEDIK-YENIDEN-01",
     "task_id": "VERI-IVEDIK-YENIDEN-01",
-    "baslik": "[VERI] Ivedik verisini yeniden cek -> D-235 korumali sayfa_dongusu (2s)",
+    "baslik": "[VERI] Ivedik verisini yeniden yaz → D-235 korumali sayfa_dongusu (2s)",
     "sahip": "utku",
     "oncelik": "P1",
     "durum": "plan",

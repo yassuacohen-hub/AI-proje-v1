@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-27T20:04:26
+> Son guncelleme: 2026-09-27T21:15:38
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -28,11 +28,11 @@
 | VERI-NACE-COKLU-01 | [VERI] Çoklu NACE kodunu yaz → company_i | utku | P1 | beklemede |
 | VERI-NACE-TEMIZ-01 | [VERI] Sektör sayacı kirlenmesini düzelt | utku | P1 | review |
 | VERI-NACE-KOLON-01 | [VERI] nace_validity kolon karışmasını d | utku | P2 | aktif |
-| VERI-KAYNAK-BAG-01 | [VERI] Firma-kaynak bagini kur -> source | utku | P0 | plan |
-| VERI-SEKTOR-01 | [VERI] Sektor adini topla ve normallesti | utku | P1 | plan |
-| VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt -> osti | utku | P2 | plan |
-| VERI-HAYALET-TEMIZ-01 | [VERI] Hayalet kayitlari sil -> companie | utku | P0 | aktif |
-| VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik verisini yeniden cek -> D- | utku | P1 | plan |
+| VERI-KAYNAK-BAG-01 | [VERI] Firma-kaynak bagini yaz → source_ | utku | P0 | plan |
+| VERI-SEKTOR-01 | [VERI] Sektor sozlugunu yaz → 9689 kayit | utku | P1 | plan |
+| VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim | utku | P2 | plan |
+| VERI-HAYALET-TEMIZ-01 | [VERI] Hayalet kayitlari sil → companies | utku | P0 | aktif |
+| VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik verisini yeniden yaz → D-2 | utku | P1 | plan |
 
 ## Tamamlananlar (Son 10)
 

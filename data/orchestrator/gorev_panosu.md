@@ -28,11 +28,11 @@
 | VERI-NACE-COKLU-01 | [VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s) | utku | P1 | beklemede | src/company_master/etl/nace_coklu_ata.py |
 | VERI-NACE-TEMIZ-01 | [VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s) | utku | P1 | review | src/company_master/etl/nace_gecersiz_temizle.py |
 | VERI-NACE-KOLON-01 | [VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s) | utku | P2 | aktif | src/company_master/etl/nace_validity_duzelt.py |
-| VERI-KAYNAK-BAG-01 | [VERI] Firma-kaynak bagini kur -> source_records.company_id (4s) | utku | P0 | plan | src/company_master/etl/kaynak_firma_bagla.py |
-| VERI-SEKTOR-01 | [VERI] Sektor adini topla ve normallestir -> 9689 kayit (3s) | utku | P1 | plan | src/company_master/etl/sektor_normalize.py |
-| VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt -> ostim icinde 102 ASO kaydi (2s) | utku | P2 | plan | src/company_master/etl/kaynak_sizinti_duzelt.py |
-| VERI-HAYALET-TEMIZ-01 | [VERI] Hayalet kayitlari sil -> companies 4591 fazlalik satir (3s) | utku | P0 | aktif | src/company_master/etl/hayalet_kayit_temizle.py |
-| VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik verisini yeniden cek -> D-235 korumali sayfa_dongusu (2s) | utku | P1 | plan | src/company_master/etl/scrapers/ivedik_scraper.py |
+| VERI-KAYNAK-BAG-01 | [VERI] Firma-kaynak bagini yaz → source_records.company_id (4s) | utku | P0 | plan | src/company_master/etl/kaynak_firma_bagla.py |
+| VERI-SEKTOR-01 | [VERI] Sektor sozlugunu yaz → 9689 kayitta sektor alani (3s) | utku | P1 | plan | src/company_master/etl/sektor_normalize.py |
+| VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim icinde 102 ASO kaydi (2s) | utku | P2 | plan | src/company_master/etl/kaynak_sizinti_duzelt.py |
+| VERI-HAYALET-TEMIZ-01 | [VERI] Hayalet kayitlari sil → companies 4591 fazlalik satir (3s) | utku | P0 | aktif | src/company_master/etl/hayalet_kayit_temizle.py |
+| VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik verisini yeniden yaz → D-235 korumali sayfa_dongusu (2s) | utku | P1 | plan | src/company_master/etl/scrapers/ivedik_scraper.py |
 
 ## Tamamlananlar
 
