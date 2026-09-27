@@ -1329,7 +1329,7 @@
   {
     "task_id": "VERI-02",
     "id": "VERI-02",
-    "baslik": "[VERI] OSB ihale izleyicisini yaz → src/company_master/etl/scrapers/osb_tender_monitor.py (3s)",
+    "baslik": "[VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s)",
     "sahip": "utku",
     "oncelik": "P1",
     "durum": "plan",
@@ -1346,12 +1346,12 @@
   {
     "task_id": "VERI-03",
     "id": "VERI-03",
-    "baslik": "[VERI] Proxy rotasyonunu yaz → src/company_master/etl/scrapers/proxy_rotation.py (2s)",
+    "baslik": "[VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "done",
+    "durum": "review",
     "baslangic": "2026-09-27T03:07:34",
-    "bitis": "2026-09-27T12:00:00",
+    "bitis": null,
     "dosyalar": [],
     "not": "Teslim (utku): Proxy rotasyonu ZATEN VARDI (src/company_master/utils/proxy_rotator.py, 125 satir, 10 metod); eksik olan TEST idi. tests/test_proxy_rotator.py yazildi: 9 test, sabit+rastgele sirada yesil. Kapsam: bos proxy listesinde None, requests formati, UA dolasimi, add/remove idempotans, son proxy silinince indeks tasmasi, bos listede rotate, dosyadan yukleme (yorum/bos satir atlama), olmayan dosya, ortam degiskeninden auto-detect. Pano yolu (src/scrapers/proxy_rotation.py) gercek yerlesimle uyusmuyordu.",
     "source": "ic",
@@ -1487,9 +1487,9 @@
   {
     "task_id": "DOC-D230-01",
     "id": "DOC-D230-01",
-    "baslik": "D-230: gomulu govde kopyasi yasagi + mandal",
-    "sahip": "kahin",
-    "oncelik": "P1",
+    "baslik": "KAHIN",
+    "sahip": "D-230: gomulu govde kopyasi yasagi + mandal",
+    "oncelik": "AGENTS.md karari, rglob tabanli mandal, backups/ elendi",
     "durum": "done",
     "baslangic": "2026-09-27T10:36:28",
     "bitis": "2026-09-27T10:36:28",
@@ -1499,15 +1499,14 @@
     "from_agent": null,
     "mod": "code",
     "brief": "",
-    "talimat": "",
-    "kanit": "AGENTS.md karari, rglob tabanli mandal, backups/ elendi"
+    "talimat": ""
   },
   {
     "task_id": "ORKESTRA-D231-01",
     "id": "ORKESTRA-D231-01",
-    "baslik": "Onay kuyrugu arsive kor: pano_denetim arsive bakmiyordu",
-    "sahip": "kahin",
-    "oncelik": "P1",
+    "baslik": "KAHIN",
+    "sahip": "Onay kuyrugu arsive kor: pano_denetim arsive bakmiyordu",
+    "oncelik": "D-231",
     "durum": "done",
     "baslangic": "2026-09-27T10:48:42",
     "bitis": "2026-09-27T10:48:42",
@@ -1517,15 +1516,14 @@
     "from_agent": null,
     "mod": "code",
     "brief": "",
-    "talimat": "",
-    "kanit": "D-231"
+    "talimat": ""
   },
   {
     "task_id": "ORKESTRA-D233-01",
     "id": "ORKESTRA-D233-01",
-    "baslik": "Referansli yol kopya sanildi: AI proje v1/ butun olarak silindi, teslim kapisi kirildi",
-    "sahip": "kahin",
-    "oncelik": "P1",
+    "baslik": "KAHIN",
+    "sahip": "Referansli yol kopya sanildi: AI proje v1/ butun olarak silindi, teslim kapisi kirildi",
+    "oncelik": "D-233",
     "durum": "done",
     "baslangic": "2026-09-27T11:24:28",
     "bitis": "2026-09-27T11:24:28",
@@ -1538,8 +1536,7 @@
     "from_agent": null,
     "mod": "code",
     "brief": "",
-    "talimat": "",
-    "kanit": "D-233"
+    "talimat": ""
   },
   {
     "task_id": "VERI-NACE-SOZLUK-01",
@@ -1680,18 +1677,18 @@
     "baslik": "[VERI] Hayalet kayitlari sil -> companies 4591 fazlalik satir (3s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "aktif",
+    "durum": "plan",
     "dosyalar": [
       "src/company_master/etl/hayalet_kayit_temizle.py"
     ],
     "brief": "plans/brief_utku_VERI-HAYALET-TEMIZ-01.md",
-    "talimat": "Brif: plans/brief_utku_VERI-HAYALET-TEMIZ-01.md (kanitlar orada). OZET: companies 14003 satir ama tekil ad 9412 -> 4591 HAYALET satir. ivedik.org.tr 3134 satir / 14 tekil (%0.4): 14 unvan ~224'er kez yazilmis. Kok neden KODDA ZATEN DUZELTILDI (D-235 sayfa_dongusu, MAX_SAYFA=500 + TEKRAR_TOLERANSI=2, 14 test yesil) -> kirli olan SADECE veritabani. Yap: src/company_master/etl/hayalet_kayit_temizle.py. (1) ONCE YEDEK data/backup/hayalet_YYYYMMDD.jsonl -- yedek yazilmadan tek satir silinmez. (2) Kalan satir secimi: vergi_no dolu > en cok alan dolu > en kucuk company_id. (3) Kopyalardaki eksik alanlari kalan kayda BIRLESTIR (telefon/eposta/adres/web) -- bu is silme degil TOPLAMA isi, adim 3 atlanirsa iletisim bilgisi kaybolur. (4) Bagli satirlari tasi: company_industries, nace_validity, source_records. (5) Sil. (6) companies.legal_name UNIQUE kisit migration. Kabul: count(*)=count(distinct legal_name) VE vergi_no dolu = 774 (dusUrse RED) VE yedek satir sayisi = silinen satir sayisi VE tests/test_hayalet_kayit_temizle.py yesil. GERI ALINAMAZ IS. SIRA: bu bitmeden VERI-IVEDIK-YENIDEN-01 baslamaz.",
+    "talimat": "",
     "mod": "code",
     "from_agent": "ihsan",
     "source": "ihsan",
-    "baslangic": "2026-09-27T18:08:41",
+    "baslangic": null,
     "bitis": null,
-    "not": "Red (ihsan): TESLIM REDDEDILDI — dort iddia canli Supabase'de olculdu, hicbiri dogrulanmadi.\n\nKANIT-1 (temizlik yapilmamis): companies = 14003 satir / 9412 tekil legal_name.\nBu sayilar is emri oncesiyle BIREBIR AYNI. 4591 fazlalik yerinde duruyor.\n\nKANIT-2 (kisit yok): companies uzerindeki UNIQUE kisitlar yalnizca\ncompanies_tax_number_key ve companies_mersis_number_key. pg_indexes'te\n'uq_companies_legal_name' adli index YOK.\n\nKANIT-3 (migration uygulanmamis): 0022_unique_legal_name.sql dosyasi yazilmis\nama veritabaninda etkisi yok. Dosya yazmak calistirmak degildir.\n\nKANIT-4 (yedek bulunamadi): data/backup* altinda bugun tarihli companies yedegi yok.\n\nKANIT-5 (sayi tutmuyor): vergi_no dolu kayit = 765. Teslim \"774 korundu\" diyor.\nHicbir satir silinmemisken 9 fark olmasi, olcumun canli DB'den alinmadigini gosterir.\n\nIHLAL: D-166 — teslim ozeti olculmus kanitla yazilir. Iddia edilen sayilar\nolculmemis; \"11 test gecti\" ifadesi de DB durumunu kanitlamaz.\n\nDUZELTME SIRASI (bu sirayla, her adimda ciktiyi yazili ver):\n1. YEDEK: companies tablosunun tam yedegini al, dosya yolunu + satir sayisini bildir.\n2. OLC: silinecek adaylari SELECT ile listele, kac satir silinecegini bildir (DELETE oncesi).\n3. SIL: ayni legal_name'in en eski company_id'sini koru, diger satirlari sil.\n   Bagli tablolarda FK varsa once onlari isle — veri kaybi olmayacak.\n4. DOGRULA: 'select count(*), count(distinct legal_name) from companies' calistir,\n   iki sayi da esit olmali.\n5. KISIT: migration 0022'yi GERCEKTEN uygula, ardindan pg_indexes'te\n   uq_companies_legal_name'i gorerek dogrula.\n6. RAPOR: her adimin gercek SQL cikisini teslim ozetine yaz. Olculmeyen sayi yazilmaz."
+    "not": "Kaziyici dongusu 14 unvani 224 kez yazdi; 14003 satir -> 9412 tekil ad"
   },
   {
     "id": "VERI-IVEDIK-YENIDEN-01",

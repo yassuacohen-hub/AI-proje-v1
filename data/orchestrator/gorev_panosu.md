@@ -23,8 +23,7 @@
 | V10-BELGE-01 | 6 curutulen iddiaya K1/K3/K4 duzeltme notu | ihsan | P1 | archive | - |
 | WK-02 | OSB Tender Monitor - Real-time Tracking | - | P1 | archive | - |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | archive | - |
-| VERI-02 | [VERI] OSB ihale izleyicisini yaz → src/scrapers/osb_tender_monitor.py (3s) | utku | P1 | plan | - |
-| VERI-03 | [VERI] Proxy rotasyonunu yaz → src/scrapers/proxy_rotation.py (2s) | utku | P2 | review | - |
+| VERI-02 | [VERI] OSB ihale izleyicisini yaz → src/company_master/etl/scrapers/osb_tender_monitor.py (3s) | utku | P1 | plan | - |
 | VERI-NACE-SOZLUK-01 | [VERI] Resmi NACE listesini yaz → nace_codes tablosu (3s) | utku | P0 | aktif | src/company_master/etl/nace_sozluk_yukle.py |
 | VERI-NACE-COKLU-01 | [VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s) | utku | P1 | beklemede | src/company_master/etl/nace_coklu_ata.py |
 | VERI-NACE-TEMIZ-01 | [VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s) | utku | P1 | review | src/company_master/etl/nace_gecersiz_temizle.py |
@@ -32,7 +31,7 @@
 | VERI-KAYNAK-BAG-01 | [VERI] Firma-kaynak bagini kur -> source_records.company_id (4s) | utku | P0 | plan | src/company_master/etl/kaynak_firma_bagla.py |
 | VERI-SEKTOR-01 | [VERI] Sektor adini topla ve normallestir -> 9689 kayit (3s) | utku | P1 | plan | src/company_master/etl/sektor_normalize.py |
 | VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt -> ostim icinde 102 ASO kaydi (2s) | utku | P2 | plan | src/company_master/etl/kaynak_sizinti_duzelt.py |
-| VERI-HAYALET-TEMIZ-01 | [VERI] Hayalet kayitlari sil -> companies 4591 fazlalik satir (3s) | utku | P0 | plan | src/company_master/etl/hayalet_kayit_temizle.py |
+| VERI-HAYALET-TEMIZ-01 | [VERI] Hayalet kayitlari sil -> companies 4591 fazlalik satir (3s) | utku | P0 | aktif | src/company_master/etl/hayalet_kayit_temizle.py |
 | VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik verisini yeniden cek -> D-235 korumali sayfa_dongusu (2s) | utku | P1 | plan | src/company_master/etl/scrapers/ivedik_scraper.py |
 
 ## Tamamlananlar
@@ -88,12 +87,13 @@
 | ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyasi yaz | yasu | 2026-09-27T02:35:00 |
 | ORKESTRA-VAULT-TEKRAR-01 | [ORKESTRA] Vault isim tekrarlarini denetle | ihsan | 2026-09-27T02:35:00 |
 | VAULT-ORPHAN-INCELEME-01 | [VAULT] Orphan nod siniflama: 3361 dosya, D-173 | orkestrator | 2026-09-27T02:35:00 |
+| VERI-03 | [VERI] Proxy rotasyonunu yaz → src/company_master/etl/scrapers/proxy_rotation.py (2s) | utku | 2026-09-27T12:00:00 |
 | VERI-04 | [VERI] Migration down dosyalarini tek ad standardina tasi → schema/migrations/down/ (3s) | ihsan | 2026-09-27T05:35:00 |
 | API-07 | [API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s) | utku | 2026-09-27T05:35:00 |
 | UI-11 | [UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s) | utku | 2026-09-27T05:35:00 |
 | DOC-D227-01 | [DOC] D-227: karar numarasi yalniz AGENTS.md'den verilir + mandal | orkestrator | 2026-09-27T05:35:00 |
 | DOC-D228-01 | D-228: vault icinde paralel veri govdesi yasagi (data_worktree elendi) | kahin | 2026-09-27T08:26:16 |
 | DOC-D229-01 | D-229: zaman damgali yedek git te izlenmez (65 artik elendi) | kahin | 2026-09-27T08:36:33 |
-| DOC-D230-01 | KAHIN | D-230: gomulu govde kopyasi yasagi + mandal | 2026-09-27T10:36:28 |
-| ORKESTRA-D231-01 | KAHIN | Onay kuyrugu arsive kor: pano_denetim arsive bakmiyordu | 2026-09-27T10:48:42 |
-| ORKESTRA-D233-01 | KAHIN | Referansli yol kopya sanildi: AI proje v1/ butun olarak silindi, teslim kapisi kirildi | 2026-09-27T11:24:28 |
+| DOC-D230-01 | D-230: gomulu govde kopyasi yasagi + mandal | kahin | 2026-09-27T10:36:28 |
+| ORKESTRA-D231-01 | Onay kuyrugu arsive kor: pano_denetim arsive bakmiyordu | kahin | 2026-09-27T10:48:42 |
+| ORKESTRA-D233-01 | Referansli yol kopya sanildi: AI proje v1/ butun olarak silindi, teslim kapisi kirildi | kahin | 2026-09-27T11:24:28 |

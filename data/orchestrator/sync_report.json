@@ -1,8 +1,16 @@
 {
-  "timestamp": "2026-09-27T17:34:30",
-  "status": "ok",
+  "timestamp": "2026-09-27T20:04:27",
+  "status": "fail",
   "uygula": false,
-  "bulgular": [],
+  "bulgular": [
+    {
+      "tip": "orphan",
+      "seviye": "hata",
+      "task_id": "TEST-BACKLOG-20",
+      "mesaj": "kuyrukta (bekliyor) var, panoda yok",
+      "duzeltme": null
+    }
+  ],
   "gorevler": [
     {
       "id": "VERI-02",
@@ -46,8 +54,8 @@
     },
     {
       "id": "VERI-HAYALET-TEMIZ-01",
-      "durum": "plan",
-      "update": null
+      "durum": "aktif",
+      "update": "2026-09-27T18:08"
     },
     {
       "id": "VERI-IVEDIK-YENIDEN-01",
@@ -57,5 +65,5 @@
   ],
   "duzeltilen": [],
   "error": null,
-  "hata_sayisi": 0
+  "hata_sayisi": 1
 }
