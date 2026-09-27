@@ -513,6 +513,11 @@
 - **NOT:** D-170'teki senkronsuzluk tablosu ORCH-SENKRON-01 (D-171) ile kapatıldı; D-172 kalıcı kuralı yazdı.
 
 ## Otorite Kaynağı: Worktree Klasoru (D-172 — KAHİN kararı 2026-09-21, D-191 ile genişletildi 2026-09-23)
+
+> 🚫 **EMEKLİ — D-223 (2026-09-27) ile yürürlükten kaldırıldı.** Aşağıdaki kurallar **uygulanmaz**.
+> Güncel kural: **[D-223](#tek-otorite-d-223)** — `Huginn Data Insights/` hem yazma otoritesi hem graph canonical.
+> Bu bölüm tarihsel kayıt olarak korunur (D-002 silme yasağı), **talimat olarak okunmaz**.
+
 - **Karar:** `worktree klasoru/` = **yazma otoritesi (SSOT)**. `Huginn Data Insights/` = senkronize salt-okunur ayna (GRAPH ikinci katman).
 - **Gerekçe:** Worktree aktif geliştirme dalı (git worktree bağlı), orkestratör doğrudan burada çalışır. Kullanım kılavuzu + sözlük çalışması burada. Merkez git main tarafı, okuma/arşiv.
 - **Yazma sırası (ZORUNLU):**
@@ -534,20 +539,37 @@
 
 ## Graph Canonical vs Yazma Otoritesi (D-172 / D-177 Netleştirme — D-191 ile genişletildi 2026-09-23)
 
+> 🚫 **EMEKLİ — D-223 (2026-09-27).** İki katmanlı ayrım kaldırıldı; tek ağaç kaldı.
+> Güncel kural: **[D-223](#tek-otorite-d-223)**. Bu bölüm tarihsel kayıt.
+
 İki karar **çelişmiyor**, farklı katmanlara ait:
 
 | Karar | Tanım | Katman | Anlamı |
 |-------|-------|--------|--------|
-| **D-172** | `worktree klasoru/` = yazma otoritesi | **YAZMA / SSOT** | Kod ve doküman **buraya yazılır**. Tüm değişiklik burada yapılır. Git worktree bağlı, orkestratör doğrudan çalışır. |
-| **D-177** | GRAPH task ID + field schema = kanonik okuma | **GRAPH / CANONICAL** | Obsidian link çözümlemesi, orphan tespiti, backlink sayımı, task field tanımları **burada** kanonik. Kod dosyaları GRAPH'tan okur. |
-| **D-191** | id-migration redirect (eski ID → yeni ID) | **MIGRATION / AUDIT** | Task ID yeniden adlandırılırsa eski ID silinmez; redirect trail + D-60 uyumlu geçiş kuralı uygulanır. |
+| **D-172** | `worktree klasoru/` = yazma otoritesi | **YAZMA / SSOT** | ~~Kod ve doküman buraya yazılır.~~ **EMEKLİ (D-223).** |
+| **D-177** | GRAPH task ID + field schema = kanonik okuma | **GRAPH / CANONICAL** | ✅ **Yürürlükte.** Obsidian link çözümlemesi, orphan tespiti, backlink sayımı, task field tanımları `Huginn Data Insights/` altında kanonik. |
+| **D-191** | id-migration redirect (eski ID → yeni ID) | **MIGRATION / AUDIT** | ✅ **Yürürlükte.** Task ID yeniden adlandırılırsa eski ID silinmez; redirect trail + D-60 uyumlu geçiş kuralı uygulanır. |
 
-**Kural:**
-- `worktree klasoru/` = **yazma otoritesi (SSOT)** — kod, karar, görev burada değiştirilir.
-- `Huginn Data Insights/` = **GRAPH canonical ağaç** — task ID/field schema'nın kanonik kaynağı; link çözümlemesi ve orphan tespiti buraya bağlıdır.
-- **id-migration:** Eski task ID → yeni ID yönlendirmesi D-60 (kanonik ad geçişi) + D-189 (kök AGENTS.md kural taşımaz) ile uyumlu.
+<a id="tek-otorite-d-223"></a>
 
-Pratikte: Kod/görev worktree'ye yazılır, senkronla HDI'a kopyalanır. GRAPH şeması HDI kopyasını esas alır (yazma/denetim için). Task ID değiştiğinde id_migration.py çalıştırılır → eski ID redirect'e çevrilir → wikilink'ler senkron kalır.
+## Tek Otorite: Vault (D-223 — KAHİN kararı 2026-09-27)
+
+- **Karar:** `Huginn Data Insights/` = **hem yazma otoritesi hem graph canonical**. Tek ağaç, tek SSOT. D-172 emekli.
+- **Gerekçe — 5 bağımsız ölçüm (2026-09-27):**
+  1. **Git bağı yok.** `worktree klasoru\.git` mevcut değil, `git worktree list` klasörü listelemiyor. D-172'nin "git worktree bağlı" gerekçesi geçersiz.
+  2. **Obsidian zaten dışlıyor.** [`.obsidian/app.json`](.obsidian/app.json:15) `userIgnoreFilters` içinde `"worktree klasoru/"` var — hem vault hem kök yapılandırmasında. Graph o ağacı hiç okumuyor; D-177 fiilen zaten tek canonical'dı.
+  3. **İçerik SSOT değil.** Klasörde 5 dosya: 3'ü 2 byte boş JSON, 2'si tek seferlik dump betiği.
+  4. **Gerekçedeki dosyalar taşınmış.** D-172'nin dayandığı "sözlük + kullanım kılavuzu" (`OPERASYON_KILAVUZU.md`, `VAULT_HARITA.md`, `GOREV_PANOSU_KULLANIM_KILAVUZU.md`) D-187 Faz 2'de `data/orchestrator/backups/D-187_faz2_2026-09-22/worktree_klasoru_kopya/` altına alınmış.
+  5. **Canlı nüsha vault'ta ve daha gelişmiş.** `GOREV_PANOSU_KULLANIM_KILAVUZU.md`: yedekte 150 satır, [`docs/`](docs/GOREV_PANOSU_KULLANIM_KILAVUZU.md:1) altında 266 satır. Yazma faaliyeti vault'ta sürmüş.
+- **Uygulama:** `worktree klasoru/` → `_ARSIV_worktree_kalinti_2026-09-27/` (D-002 silme yasağı: silme değil taşıma).
+- **Tarihsel referanslara dokunulmaz.** 103 markdown dosyasında `worktree klasoru/` geçiyor; bunlar geçmiş rapor ve karar kaydıdır. Geriye dönük düzeltme **yapılmaz** (D-60 kanonik ad geçişi + D-191 redirect ilkesi: geçmiş yeniden yazılmaz).
+- **Mandal:** [`tests/test_kok_izin_listesi.py`](tests/test_kok_izin_listesi.py:1).
+
+### D-187 Geriye Dönük Kayıt (D-223 ile birlikte yazıldı)
+
+- **Tespit edilen kusur:** D-187 Faz 2 (2026-09-22) `worktree klasoru/` içeriğini yedeğe taşıdı, ancak **AGENTS.md'ye karar olarak yazılmadı**. Bu yüzden D-172 beş gün boyunca "yürürlükte" göründü.
+- **Ders:** Dosya taşıyan her iş, aynı commit'te D-NN kaydı üretmek zorundadır. Kayıtsız taşıma = kural erimesi.
+- **Kurtarılan:** [`docs/OPERASYON_KILAVUZU.md`](docs/OPERASYON_KILAVUZU.md:1) (668 satır, ürün sahibi el kitabı) yedekten canlı ağaca geri alındı; içindeki 13 eski yol vault yoluna düzeltildi.
 
 ## Hub-Önce Okuma (D-185 — KAHİN kararı 2026-09-22)
 - **Kural:** Bir konuda (osint, veri kalitesi, admin panel, müşteri paneli, araç/script, plan/rapor, teknik dok, orkestrasyon/ajan) çalışmaya başlamadan önce önce ilgili `Huginn Data Insights/hubs/*_HUB.md` dosyası okunur, oradan 2-3 hedef dosyaya inilir.

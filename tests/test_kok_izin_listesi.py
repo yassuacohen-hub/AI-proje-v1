@@ -36,16 +36,16 @@ IZINLI_DIZINLER = {
 }
 
 #: D-221 Kural 3 — yeniden dogmasi yasak paralel govdeler.
-YASAK_GOVDELER = {"AI proje v1", "data_worktree"}
+#: 'worktree klasoru' D-223 (2026-09-27) ile arsive tasindi; geri dogarsa ihlal.
+YASAK_GOVDELER = {"AI proje v1", "data_worktree", "worktree klasoru"}
 
-#: D-172/D-177 CELISKISI (2026-09-27 olcumu):
-#:   D-172 "worktree klasoru/ = yazma otorite, SSOT" der.
-#:   D-177 "Huginn Data Insights/ = graph canonical" der.
-#: Klasorun GERCEK icerigi: 5 dosya -> 3 bos JSON (2 B) + 2 tek seferlik
-#: dump betigi. Yani SSOT degil, kalinti.
-#: Silmek D-172'yi iptal etmek olur (KAHIN karari bekliyor). O karara kadar
-#: mandal yalnizca BUYUMEYI engeller: kalinti kalinti kalir, govde olamaz.
-KALINTI_UST_SINIR = 5
+#: D-223: yedekte kalip canli agacta kaybolan urun sahibi dokumanlari.
+#: Olcum (2026-09-27): OPERASYON_KILAVUZU.md 668 satir SADECE backups/ altindaydi.
+#: Bir dokuman yalnizca yedekte kalirsa pratikte yok demektir.
+CANLI_KALMASI_GEREKEN_DOKUMANLAR = (
+    "docs/OPERASYON_KILAVUZU.md",
+    "docs/GOREV_PANOSU_KULLANIM_KILAVUZU.md",
+)
 
 
 def _kok_dizinleri() -> set[str]:
@@ -70,9 +70,7 @@ def test_kokte_izinsiz_dizin_yok() -> None:
     izinsiz = {
         ad
         for ad in _kok_dizinleri()
-        if ad not in IZINLI_DIZINLER
-        and ad not in {"worktree klasoru"}  # D-172 celiskisi: asagida ayri mandal
-        and not ad.startswith(("_", "."))
+        if ad not in IZINLI_DIZINLER and not ad.startswith(("_", "."))
     }
     assert not izinsiz, (
         f"D-221 Kural 2 ihlali: kokte izinsiz dizin -> {sorted(izinsiz)}. "
@@ -80,19 +78,18 @@ def test_kokte_izinsiz_dizin_yok() -> None:
     )
 
 
-def test_worktree_kalintisi_buyumedi() -> None:
-    """D-172 celiskisi cozulene kadar: kalinti buyuyemez.
+@pytest.mark.parametrize("yol", CANLI_KALMASI_GEREKEN_DOKUMANLAR)
+def test_kilavuz_canli_agacta(yol: str) -> None:
+    """D-223: urun sahibi dokumani yedege kacmaz.
 
-    Bu test klasoru MESRULASTIRMAZ; dondurur. 5 dosyayi gecerse biri
-    orayi yeniden govde gibi kullaniyor demektir.
+    OPERASYON_KILAVUZU.md bir kez bunu yasadi: D-187 yedege aldi, canli
+    nusha geri konmadi, 5 gun kimse fark etmedi. Bu test o sessiz kaybi
+    sesli hale getirir.
     """
-    kalinti = KOK / "worktree klasoru"
-    if not kalinti.is_dir():
-        return  # D-172 cozuldu ve klasor kaldirildi: sorun yok
-    sayi = len([p for p in kalinti.rglob("*") if p.is_file()])
-    assert sayi <= KALINTI_UST_SINIR, (
-        f"'worktree klasoru' buyudu: {sayi} dosya (ust sinir {KALINTI_UST_SINIR}). "
-        "Kalinti govde olamaz — D-221 Kural 3."
+    dosya = VAULT / yol
+    assert dosya.is_file(), (
+        f"D-223 ihlali: '{yol}' canli agacta yok. "
+        "Yedekte durmasi yeterli degil — urun sahibi yedege bakmaz."
     )
 
 
@@ -107,6 +104,19 @@ def test_d221_agents_mde_kayitli() -> None:
     """Kural metni SSOT'ta duruyor mu — test ile metin birbirini tutmali."""
     metin = (VAULT / "AGENTS.md").read_text(encoding="utf-8")
     assert "## D-221" in metin, "D-221 karari AGENTS.md'de yok."
+
+
+def test_d223_agents_mde_kayitli_ve_d172_emekli() -> None:
+    """D-223 yazildi ve D-172 emekli isaretlendi mi.
+
+    D-187 dersi: tasima yapilip karar yazilmazsa eski kural 'yururlukte'
+    gorunur. Bu test o bosluğu kapatir.
+    """
+    metin = (VAULT / "AGENTS.md").read_text(encoding="utf-8")
+    assert "Tek Otorite: Vault (D-223" in metin, "D-223 karari AGENTS.md'de yok."
+    assert "EMEKLİ — D-223" in metin, (
+        "D-172 emekli isareti yok: eski kural hala yururlukte gorunuyor."
+    )
 
 
 if __name__ == "__main__":
