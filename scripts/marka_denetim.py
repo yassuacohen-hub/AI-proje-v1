@@ -22,6 +22,7 @@ from __future__ import annotations
 
 import re
 import sys
+from fnmatch import fnmatch
 from pathlib import Path
 
 KOK = Path(__file__).resolve().parents[1]
@@ -63,10 +64,13 @@ ATLANAN_DIZINLER = {
 }
 
 # B-1: yasak listeyi TANIMLAYAN dosyalar kendi kurallarina takilmasin.
+# NOT (D-242): eslestirme fnmatch iledir, Path.match ile DEGIL. Path.match
+# "plans/*" desenini TEK segmente baglar; "plans/_arsiv_brief/x.md" eslesmez.
+# fnmatch'te "*" ayirici dahil eslesir. Desen yazarken bunu varsay.
 MUAF_YOLLAR: tuple[str, ...] = (
     "scripts/marka_denetim.py",       # yasak regex burada tanimli
     "docs/plans/*",                   # brifler yasak yazimlari ornekliyor
-    "plans/*",
+    "plans/*",                        # alt klasorler dahil (_arsiv_brief/)
     "docs/ROO_ELESTIRI_NOTLARI.md",   # elestiri kayitlari ihlali alintiliyor
     "tests/test_i18n*.py",            # test regexleri yasak yazimi iceriyor
     "tests/test_marka*.py",
@@ -83,12 +87,17 @@ DOSYA_extensions = {".py", ".md", ".json", ".toml", ".sql", ".yaml", ".yml"}
 
 
 def muaf_dosya(path: Path) -> bool:
-    """Dosya MUAF_YOLLAR desenlerinden birine uyuyorsa True."""
+    """Dosya MUAF_YOLLAR desenlerinden birine uyuyorsa True.
+
+    fnmatch kullanilir, Path.match degil: Path.match'te `*` tek segmentte
+    kalir, yani `plans/*` deseni `plans/_arsiv_brief/x.md` dosyasini
+    muaf saymaz. Muafiyetin alt klasorlere inmesi kasitlidir (D-242).
+    """
     try:
         bagil = path.relative_to(KOK).as_posix()
     except ValueError:
         return False
-    return any(Path(bagil).match(desen) for desen in MUAF_YOLLAR)
+    return any(fnmatch(bagil, desen) for desen in MUAF_YOLLAR)
 
 
 def taranabilir(path: Path) -> bool:
