@@ -1857,6 +1857,21 @@ yeşil yanarken üretim yedek dizinine sahte firma kaydı düşüyordu. Yeşil t
 (`del <dosya>` → `pytest` → dosya geri doğdu mu?) yan etkiyi ölçen en ucuz
 kontroldür; şüphelenilen her yazma işinde uygulanır.
 
+**Kusur 4 — yetim yıkıcı ikiz.** Aynı işte `hayalet_kayit_temizle_fast.py`
+adında **431 satırlık kod ikizi** duruyordu: çağıran yok, testi yok,
+`dry_run` parametresi **hiç yok**, doğrudan `DELETE FROM companies` atıyor.
+Kod ikizi tek başına kokudur; **prova kipi olmayan yıkıcı ikiz** kazadır —
+biri "hızlısını çalıştırayım" der, 4591 kayıt yedeksiz gider. Silindi.
+**Kural:** aynı işi yapan ikinci dosya yazılmaz; hızlandırma asıl dosyaya
+işlenir. Yıkıcı iş yazan her dosyada `dry_run` **zorunludur**.
+
+**Kusur 5 — parti silme ikizde kalmıştı.** Asıl dosya 4591 kimliği **tek
+sorguda** placeholder olarak diziyordu; SQLite sınırı **999**. Yani gerçek
+veride ilk çalıştırmada patlayacaktı — ikiz zaten bunu düzeltmek için
+yazılmış ama düzeltme asıl dosyaya **taşınmamıştı**. Parti (1000'lik) asıl
+dosyaya alındı, tüm partiler **tek `engine.begin()`** içinde: yarım silme
+olmaz.
+
 **Ayrıca — yorum kodla çelişemez.** Aynı işin migration'ı "partial index
 kullanıyoruz" diyordu ama `WHERE` yoktu. Yorum, kodun **söylediğini** anlatır;
 niyeti anlatıp uygulamayı atlayan yorum yanlış bilgidir.

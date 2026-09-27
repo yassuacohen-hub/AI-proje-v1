@@ -24,7 +24,7 @@ class GroqError(Exception):
 
 class GroqClient:
     """Groq OpenAI-uyumlu API istemcisi.
-    
+
     Groq free tier rate limits:
     - RPM: ~30 requests/minute
     - TPM: ~6000 tokens/minute per model
@@ -34,10 +34,10 @@ class GroqClient:
 
     def __init__(self, api_key: str | None = None) -> None:
         """Groq API key'i env veya parametre'den oku.
-        
+
         Args:
             api_key: Groq API anahtarı. Boşsa env'den (GROQ_API_KEY) okur.
-        
+
         Raises:
             GroqError: API key bulunamazsa.
         """
@@ -61,17 +61,17 @@ class GroqClient:
         max_tokens: int = 1024,
     ) -> str:
         """OpenAI-uyumlu /v1/chat/completions çağrısı.
-        
+
         Args:
             prompt: Kullanıcı mesajı.
             model: Model adı (groq/* prefix'i kaldırılır).
             system: Sistem prompt'u.
             temperature: Sıcaklık (0.0-2.0).
             max_tokens: Maksimum yanıt token'ı.
-        
+
         Returns:
             Modelin yanıt metni.
-        
+
         Raises:
             GroqError: API hatası veya ağ sorunu.
         """
@@ -110,12 +110,12 @@ class GroqClient:
             choices = data.get("choices", [])
             if not choices:
                 raise GroqError("Groq API yanıt boş (choices yok)")
-            
+
             message = choices[0].get("message", {})
             content = message.get("content", "").strip()
             if not content:
                 raise GroqError("Groq API yanıt boş (content yok)")
-            
+
             return content
         except (ValueError, KeyError) as exc:
             raise GroqError(f"Groq API yanıt parse hatası: {exc}") from exc

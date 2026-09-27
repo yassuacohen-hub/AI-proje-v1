@@ -41,7 +41,7 @@ def izole_pano(tmp_path, monkeypatch):
 
 def test_architect_gorev_rapor_auto_yazilir(izole_pano, izole_rapor_dir):
     """Test 1: Architect mod görev done olunca rapor otomatik yazılır.
-    
+
     Senaryo:
     1. Architect görev ekle (mod='architect')
     2. Görev done durumuna getir
@@ -57,22 +57,22 @@ def test_architect_gorev_rapor_auto_yazilir(izole_pano, izole_rapor_dir):
         oncelik="P2",
         mod="architect",
     )
-    
+
     # Görev done yap
     gorev_guncelle(task_id, durum="done")
-    
+
     # Rapor yaz
     yazici = MimirRaporYazici()
     result = yazici.rapor_yazmayi_tetikle(task_id)
-    
+
     # Kontrol
     assert result is True, "Rapor yazılması başarısız olmalı False dönmemeli"
-    
+
     # Dosya var mı?
     tarih = datetime.now().strftime("%Y-%m-%d")
     rapor_dosya = izole_rapor_dir / f"{task_id}_rapor_{tarih}_mimir.md"
     assert rapor_dosya.exists(), f"Rapor dosyası oluşturulmalı: {rapor_dosya}"
-    
+
     # İçerik kontrol
     icerik = rapor_dosya.read_text(encoding="utf-8")
     assert task_id in icerik, "Raporda task_id olmalı"
@@ -82,7 +82,7 @@ def test_architect_gorev_rapor_auto_yazilir(izole_pano, izole_rapor_dir):
 
 def test_code_gorev_rapor_yazilmaz(izole_pano, izole_rapor_dir):
     """Test 2: Code mod görev done olsa bile rapor yazılmaz (safe check).
-    
+
     Senaryo:
     1. Code görev ekle (mod='code')
     2. Görev done durumuna getir
@@ -98,17 +98,17 @@ def test_code_gorev_rapor_yazilmaz(izole_pano, izole_rapor_dir):
         oncelik="P2",
         mod="code",  # Code modu!
     )
-    
+
     # Görev done yap
     gorev_guncelle(task_id, durum="done")
-    
+
     # Rapor yaz (rapor yazılmamalı)
     yazici = MimirRaporYazici()
     result = yazici.rapor_yazmayi_tetikle(task_id)
-    
+
     # Kontrol
     assert result is False, "Code modu için rapor yazılmamalı"
-    
+
     # Dosya olmamalı
     tarih = datetime.now().strftime("%Y-%m-%d")
     rapor_dosya = izole_rapor_dir / f"{task_id}_rapor_{tarih}_mimir.md"
@@ -117,7 +117,7 @@ def test_code_gorev_rapor_yazilmaz(izole_pano, izole_rapor_dir):
 
 def test_brief_yoksa_rapor_hala_yazilir(izole_pano, izole_rapor_dir):
     """Test 3: Brief yoksa rapor yine yazılır ("Brief bulunamadı" içeriyor).
-    
+
     Senaryo:
     1. Brief dosyası olmayan architect görev ekle
     2. Görev done yap
@@ -133,22 +133,22 @@ def test_brief_yoksa_rapor_hala_yazilir(izole_pano, izole_rapor_dir):
         oncelik="P2",
         mod="architect",
     )
-    
+
     # Görev done yap
     gorev_guncelle(task_id, durum="done")
-    
+
     # Rapor yaz
     yazici = MimirRaporYazici()
     result = yazici.rapor_yazmayi_tetikle(task_id)
-    
+
     # Kontrol
     assert result is True, "Brief yoksa bile rapor yazılmalı"
-    
+
     # Dosya var mı?
     tarih = datetime.now().strftime("%Y-%m-%d")
     rapor_dosya = izole_rapor_dir / f"{task_id}_rapor_{tarih}_mimir.md"
     assert rapor_dosya.exists(), "Brief yoksa bile rapor oluşturulmalı"
-    
+
     # İçerikte "Brief bulunamadı" olmalı
     icerik = rapor_dosya.read_text(encoding="utf-8")
     assert "Brief bulunamadı" in icerik, "Brief yoksa 'Brief bulunamadı' yazısı olmalı"
@@ -157,7 +157,7 @@ def test_brief_yoksa_rapor_hala_yazilir(izole_pano, izole_rapor_dir):
 @pytest.mark.skip(reason="Trigger integration test — fixture izolasyon kompleks, manual test önerilir")
 def test_trigger_onayla_rapor_tetikler(izole_pano, izole_rapor_dir):
     """Integration: onayla() fonksiyonu architect rapor tetiklemesini çağırmalı.
-    
+
     Senaryo:
     1. Architect görev ekle + teslim et
     2. trigger.onayla() çağır
@@ -172,7 +172,7 @@ def test_trigger_onayla_rapor_tetikler(izole_pano, izole_rapor_dir):
         oncelik="P2",
         mod="architect",
     )
-    
+
     # Teslim et
     try:
         trigger.teslim_et(
@@ -182,17 +182,17 @@ def test_trigger_onayla_rapor_tetikler(izole_pano, izole_rapor_dir):
         )
     except Exception:
         pass  # Teslim işlemi başarısız olabilir, ama durum "review" olmalı
-    
+
     # Onayla (done yapacak + rapor tetikleyecek)
     try:
         trigger.onayla(task_id=task_id, onaylayan="orkestrator")
     except Exception:
         pass  # Onay işlemi başarısız olabilir
-    
+
     # Rapor dosyası var mı?
     tarih = datetime.now().strftime("%Y-%m-%d")
     rapor_dosya = izole_rapor_dir / f"{task_id}_rapor_{tarih}_mimir.md"
-    
+
     # Rapor dosyası varsa başarı, yoksa en azından hata olmamış
     if rapor_dosya.exists():
         icerik = rapor_dosya.read_text(encoding="utf-8")

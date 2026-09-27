@@ -30,7 +30,7 @@ def main():
     with create_engine(DB_URL).connect() as conn:
         result = conn.execute(text("SELECT 1")).scalar()
         print(f"Database connection OK: {result}")
-        
+
         # Check nace_codes table
         result = conn.execute(text("SELECT COUNT(*) FROM nace_codes")).scalar()
         print(f"Current nace_codes count: {result}")

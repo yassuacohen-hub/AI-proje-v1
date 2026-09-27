@@ -145,16 +145,16 @@ def main():
         src_id = row.source_record_id
         raw_name = row.raw_name
         raw_tax = row.raw_tax_number
-        
+
         # Hizli normalize
         norm_name = None
         if raw_name:
             norm_name = ' '.join(str(raw_name).strip().split()).upper().translate(TR_MAP)
-        
+
         tax_norm = None
         if raw_tax:
             tax_norm = RE_NON_DIGIT.sub('', str(raw_tax))
-        
+
         source_data.append((src_id, norm_name, tax_norm))
 
     # Eslestir

@@ -19,17 +19,17 @@ def test_calculate_ltv_basic():
     mock_conn = MagicMock()
     mock_conn.__enter__.return_value = mock_conn
     mock_conn.__exit__.return_value = None
-    
+
     # Mock revenue query
     mock_revenue_result = Mock()
     mock_revenue_result.scalar.return_value = 10000.0
-    
+
     # Mock active users query
     mock_active_result = Mock()
     mock_active_result.scalar.return_value = 50
-    
+
     mock_conn.execute.side_effect = [mock_revenue_result, mock_active_result]
-    
+
     mock_engine = Mock()
     mock_engine.connect.return_value = mock_conn
 
@@ -50,13 +50,13 @@ def test_calculate_cac_basic():
     mock_conn = MagicMock()
     mock_conn.__enter__.return_value = mock_conn
     mock_conn.__exit__.return_value = None
-    
+
     # Mock new users query
     mock_new_users = Mock()
     mock_new_users.scalar.return_value = 100
-    
+
     mock_conn.execute.return_value = mock_new_users
-    
+
     mock_engine = Mock()
     mock_engine.connect.return_value = mock_conn
 
@@ -78,23 +78,23 @@ def test_ltv_cac_trend():
     mock_conn = MagicMock()
     mock_conn.__enter__.return_value = mock_conn
     mock_conn.__exit__.return_value = None
-    
+
     # Mock revenue rows
     mock_revenue_result = Mock()
     mock_revenue_result.mappings.return_value.all.return_value = [
         {"date": "2026-09-20", "daily_revenue": 1000.0},
         {"date": "2026-09-21", "daily_revenue": 1500.0},
     ]
-    
+
     # Mock new user rows
     mock_user_result = Mock()
     mock_user_result.mappings.return_value.all.return_value = [
         {"date": "2026-09-20", "new_users": 5},
         {"date": "2026-09-21", "new_users": 3},
     ]
-    
+
     mock_conn.execute.side_effect = [mock_revenue_result, mock_user_result]
-    
+
     mock_engine = Mock()
     mock_engine.connect.return_value = mock_conn
 
@@ -122,7 +122,7 @@ def test_ltv_cac_by_tier():
     mock_conn = MagicMock()
     mock_conn.__enter__.return_value = mock_conn
     mock_conn.__exit__.return_value = None
-    
+
     # Mock queries for each tier
     mock_conn.execute.side_effect = [
         Mock(scalar=Mock(return_value=5000)),   # terminal revenue
@@ -135,7 +135,7 @@ def test_ltv_cac_by_tier():
         Mock(scalar=Mock(return_value=2)),      # enterprise user count
         Mock(scalar=Mock(return_value=1)),      # enterprise new users
     ]
-    
+
     mock_engine = Mock()
     mock_engine.connect.return_value = mock_conn
 
@@ -145,7 +145,7 @@ def test_ltv_cac_by_tier():
             assert "terminal" in by_tier
             assert "strategic" in by_tier
             assert "enterprise" in by_tier
-            
+
             for tier_data in by_tier.values():
                 assert "ltv" in tier_data
                 assert "cac" in tier_data

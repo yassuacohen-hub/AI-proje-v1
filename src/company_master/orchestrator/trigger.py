@@ -191,10 +191,10 @@ def tetik_ekle(
 def bekleyen_tetikler(ajan: str, data_dir: Path | None = None) -> list[dict[str, Any]]:
     """Ajanın henüz almadığı (okunmamış) görevleri listele. D-211: chat açık sorularını ekle."""
     from src.company_master.chat import oku as chat_oku  # noqa: E402
-    
+
     tetikler = [k for k in _tetikleri_oku(ajan, data_dir) if k["durum"] == "bekliyor"]
     chat_satirlar = chat_oku(data_dir=data_dir)
-    
+
     # Her tetik için task_id ile eşleşen açık soruları say
     for tetik in tetikler:
         task_id = tetik.get("task_id", "")
@@ -203,7 +203,7 @@ def bekleyen_tetikler(ajan: str, data_dir: Path | None = None) -> list[dict[str,
             if s.get("task_id") == task_id and s.get("durum") == "acik"
         ]
         tetik["chat_acik_sorular"] = len(acik_sorunlar)
-    
+
     return tetikler
 
 
@@ -428,7 +428,7 @@ def onayla(
         kapilar = {}
     k["zincir_devam"] = (devam or {}).get("task_id") if isinstance(devam, dict) else (devam[0]["task_id"] if devam else None)
     k["kapilar_acilan"] = kapilar.get("acilan", []) if isinstance(kapilar, dict) else []
-    
+
     # D-190: MIMIR architect rapor otomasyonu
     # Görev done oldu → architect mod ise rapor yaz (zero insan müdahalesi tasarım)
     try:
@@ -439,7 +439,7 @@ def onayla(
             yazici.rapor_yazmayi_tetikle(task_id)
     except Exception:
         logger.exception("Rapor yazma hatası", exc_info=True)
-    
+
     return k
 
 
@@ -581,7 +581,7 @@ def rapor_postala(
 
     Ayni posta dosyasi kullanilir; durum `rapor` oldugu icin `bekleyen_tetikler`
     (durum == bekliyor) bu kaydi gorev sanmaz.
-    
+
     D-192: Rapor WARNING/ERROR içerse, chat.ac() ile sorun kaydı yapılır.
     """
     ajan = ajan_normalize(ajan)
@@ -598,7 +598,7 @@ def rapor_postala(
     }
     kayitlar.append(kayit)
     _tetikleri_yaz(kayitlar, hedef, data_dir)
-    
+
     # D-192: Rapor özetini oku ve sorun seviyesi logları chat.ac() ile kaydet
     if HAS_CHAT:
         try:
@@ -618,7 +618,7 @@ def rapor_postala(
                     )
         except Exception as e:
             logger.warning(f"D-192 chat.ac() hatası: {e}", exc_info=False)
-    
+
     return kayit
 
 

@@ -41,29 +41,29 @@ def main_with_protection():
     retry_count = 0
     max_retries = 10
     backoff_base = 1  # 1 second initial backoff
-    
+
     while True:
         try:
             logger.info(f"[POLLING] Starting polling loop (attempt {retry_count + 1})")
             bot.infinity_polling(timeout=10, long_polling_timeout=5)
-            
+
         except KeyboardInterrupt:
             logger.info("[SHUTDOWN] Received SIGINT, stopping gracefully...")
             break
-            
+
         except Exception as e:
             retry_count += 1
             backoff_seconds = min(backoff_base * (2 ** (retry_count - 1)), 300)  # Cap at 5min
-            
+
             logger.error(f"[CRASH] Polling failed (attempt {retry_count}/{max_retries}): {e}", exc_info=True)
-            
+
             if retry_count >= max_retries:
                 logger.critical(f"[FATAL] Max retries ({max_retries}) exceeded. Giving up.")
                 sys.exit(1)
-            
+
             logger.warning(f"[RETRY] Reconnecting in {backoff_seconds}s...")
             time.sleep(backoff_seconds)
-            
+
             # Reset counter on successful polling
             retry_count = 0
 

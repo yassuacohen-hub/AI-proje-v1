@@ -46,12 +46,12 @@ def test_dau_dict_yapisi():
         "son_24s_yeni_firma": 0,
         "son_24s_yeni_sinyal": 0,
     }
-    
+
     # DAU anahtarları var mı?
     assert "dau" in result_template, "dau anahtarı olmalidir"
     assert "dau_mau_orani" in result_template, "dau_mau_orani anahtarı olmalidir"
     assert "dau_veri_yok" in result_template, "dau_veri_yok anahtarı olmalidir"
-    
+
     # Başlangıç değerleri doğru mu?
     assert result_template["dau"] == 0, "DAU başlangıç 0 olmalidir"
     assert result_template["dau_mau_orani"] is None, "Oran başlangıç None olmalidir"
@@ -66,7 +66,7 @@ def test_dau_veri_yok_rozeti():
         "dau_mau_orani": None,
         "dau_veri_yok": True,
     }
-    
+
     # Render: if kpi.get("dau_veri_yok"): _render_kpi_card(..., "veri kaynağı yok")
     should_show_no_data = kpi_tablo_yok.get("dau_veri_yok", False)
     assert should_show_no_data is True, "Rozet gösterilmeli"
@@ -80,7 +80,7 @@ def test_dau_normal_veri_varsa():
         "dau_mau_orani": 0.6,
         "dau_veri_yok": False,
     }
-    
+
     should_show_no_data = kpi_normal.get("dau_veri_yok", False)
     assert should_show_no_data is False, "Rozet gösterilmemeli"
     assert kpi_normal["dau"] == 30, "DAU 30 olmalidir"

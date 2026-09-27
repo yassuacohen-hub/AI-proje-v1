@@ -72,38 +72,38 @@ logger.info(f"Telegram Bot initialized: {TOKEN[:20]}...")
 
 def send_agent_message(ajan_adi: str, mesaj: str) -> bool:
     """Ajan mesajını log dosyasına kaydet (Telegram loop önlemek için).
-    
+
     Test ortamı: Ajanlar KAHİN'e Telegram üzerinden değil, log dosyasına mesaj yazıyor.
     Production'da: Ajanların kendi chat_id'leri olacak ve gerçek Telegram mesajı alacaklar.
     """
     try:
         from datetime import datetime
-        
+
         # Agent mesajlarını log dosyasına yaz
         agent_responses_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "agent_responses.json"
         agent_responses_path.parent.mkdir(parents=True, exist_ok=True)
-        
+
         if agent_responses_path.exists():
             with open(agent_responses_path, encoding="utf-8") as f:
                 responses = json.load(f)
         else:
             responses = []
-        
+
         response_record = {
             "timestamp": datetime.now().isoformat(),
             "ajan": ajan_adi,
             "mesaj": mesaj,
             "durum": "log"  # Test ortamında: log; production'da: telegram
         }
-        
+
         responses.append(response_record)
-        
+
         with open(agent_responses_path, "w", encoding="utf-8") as f:
             json.dump(responses, f, ensure_ascii=False, indent=2)
-        
+
         logger.info(f"[AGENT_MSG_LOG] {ajan_adi} mesaji log dosyasina kaydedildi")
         return True
-    
+
     except Exception as e:
         logger.error(f"[AGENT_MSG_ERROR] {e}", exc_info=True)
         return False
@@ -116,7 +116,7 @@ def send_agent_message(ajan_adi: str, mesaj: str) -> bool:
 def send_ana_menu(chat_id: str) -> None:
     """Ana menüyü gönder."""
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-    
+
     # Görev & Harita satırı
     markup.add(
         "📊 Pano",
@@ -126,30 +126,30 @@ def send_ana_menu(chat_id: str) -> None:
         "✉️ Tetikler",
         "📝 Mesaj",
     )
-    
+
     # Yönetim satırı
     markup.add(
         "📈 Rapor",
         "⚙️ Ayarlar",
     )
-    
+
     # Görev takibi
     markup.add(
         "📋 Görev Takibi",
     )
-    
+
     # Hızlı erişim satırı
     markup.add(
         "🚨 ACİL",
         "⚡ Q",
         "📌 ÖZET",
     )
-    
+
     # Yardım satırı
     markup.add(
         "❓ Yardım",
     )
-    
+
     bot.send_message(
         chat_id,
         "🤖 **Huginn Bot — Ana Menü**\n\n"
@@ -166,7 +166,7 @@ def send_ana_menu(chat_id: str) -> None:
 def send_pano_menu(chat_id: str) -> None:
     """Pano menüsünü gönder."""
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-    
+
     markup.add(
         "✅ Tamamlandı",
         "✔️ Aktif",
@@ -178,11 +178,11 @@ def send_pano_menu(chat_id: str) -> None:
     markup.add(
         "🔍 Tümü",
     )
-    
+
     markup.add(
         "« Ana Menü",
     )
-    
+
     bot.send_message(
         chat_id,
         "📊 **Pano Menüsü**\n\n"
@@ -196,14 +196,14 @@ def show_pano_status(chat_id: str, status: str) -> None:
     """Pano görevlerini durum bazında göster — task_board.json SSOT."""
     try:
         logger.info(f"[PANO_START] chat_id={chat_id}, status={status}")
-        
+
         import json
         from pathlib import Path
-        
+
         # Absolute path: __file__ → telegram_bot.py, up 3 levels to root
         task_board_path = Path(__file__).resolve().parent.parent.parent / "data" / "orchestrator" / "task_board.json"
         logger.info(f"[PANO] Reading task_board from {task_board_path}")
-        
+
         try:
             with open(task_board_path, "r", encoding="utf-8") as f:
                 tasks = json.load(f)
@@ -211,11 +211,11 @@ def show_pano_status(chat_id: str, status: str) -> None:
         except Exception as read_err:
             logger.error(f"[PANO_READ_ERROR] {read_err}", exc_info=True)
             tasks = []
-        
+
         if not tasks:
             logger.warning(f"[PANO] No tasks loaded")
             tasks = []
-        
+
         # Duruma göre filtrele (task_board.json durum değerleri: done, aktif, bloke, plan, iptal)
         status_map = {
             "done": "done",
@@ -224,14 +224,14 @@ def show_pano_status(chat_id: str, status: str) -> None:
             "plan": "plan",
             "all": None
         }
-        
+
         logger.info(f"[PANO] Filtering {len(tasks)} tasks for status={status}")
         filtered = tasks
         if status != "all":
             filtered = [t for t in tasks if t.get("durum") == status_map[status]]
-        
+
         logger.info(f"[PANO] Filtered: {len(filtered)} tasks")
-        
+
         # Etiket
         etiketler = {
             "done": "✅ Tamamlandı",
@@ -240,7 +240,7 @@ def show_pano_status(chat_id: str, status: str) -> None:
             "plan": "📋 Plan",
             "all": "🔍 Tümü"
         }
-        
+
         # D-improvement: okunaklı tablo — Görev | Önem | Amaç (task_board.json: oncelik, talimat)
         LIMIT = 20
         rows = []
@@ -249,7 +249,7 @@ def show_pano_status(chat_id: str, status: str) -> None:
             oncelik = task.get("oncelik") or "-"
             amac = (task.get("talimat") or task.get("baslik") or "").replace("\n", " ")[:45]
             rows.append((task_id, oncelik, amac))
-        
+
         if rows:
             id_w = max(len(r[0]) for r in rows)
             onc_w = max(len(r[1]) for r in rows + [("", "Önem", "")])
@@ -261,13 +261,13 @@ def show_pano_status(chat_id: str, status: str) -> None:
             tablo = "\n".join(tablo_lines)
         else:
             tablo = "(görev yok)"
-        
+
         header = f"**{etiketler[status]} Görevler ({len(filtered)})**"
         if len(filtered) > LIMIT:
             header += f"\n_(ilk {LIMIT} gösteriliyor)_"
-        
+
         logger.info(f"[PANO] About to send_message, tablo_len={len(tablo)}")
-        
+
         try:
             bot.send_message(chat_id, header, parse_mode="Markdown")
             bot.send_message(chat_id, f"```\n{tablo}\n```", parse_mode="Markdown")
@@ -279,7 +279,7 @@ def show_pano_status(chat_id: str, status: str) -> None:
                 bot.send_message(chat_id, f"❌ Mesaj gönderimi başarısız: {str(send_err)[:50]}")
             except Exception as fallback_err:
                 logger.critical(f"[PANO_FALLBACK_FAILED] {fallback_err}")
-        
+
     except Exception as e:
         logger.error(f"[PANO_OUTER_ERROR] {e}", exc_info=True)
         try:
@@ -295,12 +295,12 @@ def show_pano_status(chat_id: str, status: str) -> None:
 def send_chat_menu(chat_id: str) -> None:
     """Chat menüsünü gönder."""
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-    
+
     markup.add("🔴 Açık", "🟡 Çözüm Bekl.")
     markup.add("🟢 Çözüldü", "📜 Son 10")
     markup.add("✉️ Mesaj Gönder")
     markup.add("« Ana Menü")
-    
+
     bot.send_message(
         chat_id,
         "💬 **Chat Menüsü**\n\n"
@@ -322,27 +322,27 @@ def show_chat_status(chat_id: str, status: str) -> None:
         logger.error(f"[CHAT_FETCH_ERROR] {e}", exc_info=True)
         bot.send_message(chat_id, f"❌ Chat verileri alınamadı: {str(e)[:50]}")
         return
-    
+
     status_map = {
         "acik": "acik",
         "cokundurmus": "cokundurmus",
         "cozuldu": "cozuldu",
         "all": None
     }
-    
+
     filtered = satirlar
     if status != "all":
         filtered = [s for s in satirlar if s.get("durum") == status_map[status]]
-    
+
     etiketler = {
         "acik": "🔴 Açık",
         "cokundurmus": "🟡 Çözüm Bekl.",
         "cozuldu": "🟢 Çözüldü",
         "all": "📜 Son 10"
     }
-    
+
     msg = f"{etiketler[status]} Sorunlar ({len(filtered)} kayıt)\n\n"
-    
+
     if not filtered:
         msg += "Kayıt yok."
     else:
@@ -351,19 +351,19 @@ def show_chat_status(chat_id: str, status: str) -> None:
             task_id = soru.get("task_id", "?")
             konu = soru.get("sorun", "?")[:50]
             durum = soru.get("durum", "?")
-            
+
             durum_icon = {"acik": "🔴", "cokundurmus": "🟡", "cozuldu": "🟢"}.get(durum, "⚫")
             msg += f"{durum_icon} [{task_id}] {ajan_from}\n➜ {konu}\n\n"
-        
+
         if len(filtered) > 10:
             msg += f"... (+{len(filtered) - 10} daha)"
-    
+
     # Mesaj türü seçme butonları
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
     markup.add("📢 Broadcast", "👤 Targeted")
     markup.add("🎯 Tag Seç", "🔔 Uyarı")
     markup.add("« Chat Menüsü", "« Ana Menü")
-    
+
     bot.send_message(chat_id, msg, reply_markup=markup)
 
 
@@ -374,12 +374,12 @@ def show_chat_status(chat_id: str, status: str) -> None:
 def send_tetikler_menu(chat_id: str) -> None:
     """Tetikler menüsünü gönder."""
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-    
+
     markup.add("👨 Utku", "👨 Salih")
     markup.add("👨 Yasu", "👨 İhsan")
     markup.add("👨 Mimir", "🔍 Tümü")
     markup.add("« Ana Menü")
-    
+
     bot.send_message(
         chat_id,
         "✉️ **Tetikler Menüsü**\n\n"
@@ -393,11 +393,11 @@ def show_tetikler_ajan(chat_id: str, ajan: str) -> None:
     """Ajan seçildikten sonra işlem seçme menüsü."""
     # State'e ajan adını kaydet (Tetik Bak button'ında kullanılacak)
     _tetikler_state[str(chat_id)] = ajan
-    
+
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
     markup.add("📬 Tetik Bak", "✉️ Tetik Gönder")
     markup.add("« Tetikler Menüsü")
-    
+
     msg = bot.send_message(
         chat_id,
         f"👤 {ajan}\n\n📋 Ne yapmak istiyorsunuz?",
@@ -410,16 +410,16 @@ def _show_tetikler_ajan_detay(chat_id: str, ajan: str) -> None:
     try:
         import json
         from pathlib import Path
-        
+
         # Absolute path: __file__ → telegram_bot.py, up 3 levels to root
         task_board_path = Path(__file__).resolve().parent.parent.parent / "data" / "orchestrator" / "task_board.json"
         logger.info(f"[TETIKLER_DETAY] Reading from {task_board_path}")
-        
+
         with open(task_board_path, "r", encoding="utf-8") as f:
             gorevler = json.load(f)
-        
+
         logger.info(f"[TETIKLER_DETAY] Loaded {len(gorevler)} tasks, filtering for ajan={ajan}")
-        
+
         # Ajanın görevlerini filtrele (durum=aktif veya plan)
         tetikler = [g for g in gorevler if g.get("sahip", "").lower() == ajan.lower()
                    and g.get("durum", "").lower() in ["aktif", "plan"]]
@@ -427,34 +427,34 @@ def _show_tetikler_ajan_detay(chat_id: str, ajan: str) -> None:
     except Exception as e:
         logger.error(f"[TETIKLER_DETAY_ERROR] Error fetching tetikler: {e}", exc_info=True)
         tetikler = []
-    
+
     if not tetikler:
         msg = f"✅ **{ajan.upper()} İçin Tetik Yok!**\n\n" \
               "Tüm görevler tamamlandı veya devam ediyor.\n\n" \
               "[« Tetikler Menüsü] [« Ana Menü]"
         bot.send_message(chat_id, msg, parse_mode="Markdown")
         return
-    
+
     lines = [f"📬 **{ajan.upper()} Posta Kutusu ({len(tetikler)})**\n"]
-    
+
     for i, tetik in enumerate(tetikler[:10], 1):
         task_id = tetik.get("task_id", "?")
         talimat = tetik.get("talimat", "")[:40]
         durum = tetik.get("durum", "?")
-        
+
         durum_emoji = {"aktif": "🔵", "plan": "📋"}.get(durum, "❓")
-        
+
         lines.append(
             f"{i}. 📬 {task_id}\n"
             f"   Talimat: {talimat}\n"
             f"   {durum_emoji} Durum: {durum}"
         )
-    
+
     if len(tetikler) > 10:
         lines.append(f"\n... (+{len(tetikler) - 10} daha)")
-    
+
     lines.append("\n[« Tetikler Menüsü] [« Ana Menü]")
-    
+
     bot.send_message(chat_id, "\n\n".join(lines), parse_mode="Markdown")
 
 
@@ -465,12 +465,12 @@ def _show_tetikler_ajan_detay(chat_id: str, ajan: str) -> None:
 def send_mesaj_menu(chat_id: str) -> None:
     """Mesaj menüsünü gönder."""
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-    
+
     markup.add("📢 Broadcast", "👤 Targeted")
     markup.add("🎯 Tag Seç", "🔔 Uyarı")
     markup.add("💬 KAHİN'e Mesaj")  # Ajan → KAHİN mesajlaşması
     markup.add("« Ana Menü")
-    
+
     bot.send_message(
         chat_id,
         "📝 **Mesaj Gönder**\n\n"
@@ -487,14 +487,14 @@ def send_mesaj_menu(chat_id: str) -> None:
 def send_rapor_menu(chat_id: str) -> None:
     """Rapor menüsünü gönder."""
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-    
+
     markup.add("📅 Hafta", "📅 Ay", "📅 YTD")
     markup.add("👤 Ajan Bazlı", "📊 KPI")
     markup.add("📈 Trend", "📋 Özet")
     markup.add("📊 Pano Özeti", "📚 Belgeler")
-    
+
     markup.add("« Ana Menü")
-    
+
     bot.send_message(
         chat_id,
         "📈 **Raporlar & Analitik**\n\n"
@@ -620,21 +620,21 @@ def show_hafta_raporu(chat_id: str) -> None:
     """Haftalık rapor — task_board'dan."""
     import json
     from pathlib import Path
-    
+
     try:
         task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
         tasks = []
         if task_board_path.exists():
             with open(task_board_path, "r", encoding="utf-8") as f:
                 tasks = json.load(f)
-        
+
         # Metrikler
         acik = len([t for t in tasks if t.get('durum') == 'Açık'])
         aktif = len([t for t in tasks if t.get('durum') == 'Aktif'])
         bloke = len([t for t in tasks if t.get('durum') == 'Bloke'])
         done = len([t for t in tasks if t.get('durum') == 'Tamamlandı'])
         toplam = len(tasks)
-        
+
         lines = [
             "📊 **HAFTALIK RAPOR**\n",
             "```",
@@ -656,21 +656,21 @@ def show_hafta_raporu(chat_id: str) -> None:
             "• ✅ **Tamamlandı**: Bitmiş ve onaylı görevler",
             "\n**📋 Son 5 Görev (İşlem Tarihi):**"
         ]
-        
+
         for i, task in enumerate(tasks[-5:], 1):
             task_id = task.get("task_id", "?")
             durum = task.get("durum", "?")
             baslik = task.get("baslik", "")[:30]
             sahip = task.get("sahip", "?")
             onem = task.get("onem", "orta")
-            
+
             durum_emoji = {"Açık": "🟢", "Aktif": "🔵", "Bloke": "🟠", "Tamamlandı": "✅", "Plan": "📋"}.get(durum, "❓")
             onem_emoji = {"kritik": "🔴", "yuksek": "🟠", "orta": "🟡", "dusuk": "🟢"}.get(onem, "⚪")
-            
+
             lines.append(f"\n{i}. {durum_emoji} **{task_id}** ({onem_emoji} {onem.capitalize()})")
             lines.append(f"   📌 {baslik}")
             lines.append(f"   👤 {sahip}")
-        
+
         lines.append("\n[« Rapor Menüsü]")
         bot.send_message(chat_id, "\n".join(lines), parse_mode="Markdown")
     except Exception as e:
@@ -683,14 +683,14 @@ def show_kpi_raporu(chat_id: str) -> None:
     import json
     from pathlib import Path
     from collections import Counter
-    
+
     try:
         task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
         tasks = []
         if task_board_path.exists():
             with open(task_board_path, "r", encoding="utf-8") as f:
                 tasks = json.load(f)
-        
+
         # KPI metrikler
         done = len([t for t in tasks if t.get('durum') == 'Tamamlandı'])
         acik = len([t for t in tasks if t.get('durum') == 'Açık'])
@@ -698,10 +698,10 @@ def show_kpi_raporu(chat_id: str) -> None:
         bloke = len([t for t in tasks if t.get('durum') == 'Bloke'])
         toplam = len(tasks)
         tamamlama_orani = int(done * 100 / toplam) if toplam else 0
-        
+
         # Ajan bazlı görev sayısı
         ajan_counts = Counter(t.get('sahip', 'unknown') for t in tasks)
-        
+
         lines = [
             "📊 **KPI ANALİZİ — Genel Durum**\n",
             "```",
@@ -724,12 +724,12 @@ def show_kpi_raporu(chat_id: str) -> None:
             "• **Bloke**: Tamamlanmış fakat onay beklemede",
             "\n**👥 Ajan Performansı (Görev Sayısı):**"
         ]
-        
+
         for ajan, count in sorted(ajan_counts.items(), key=lambda x: x[1], reverse=True):
             ajan_done = len([t for t in tasks if t.get('sahip') == ajan and t.get('durum') == 'Tamamlandı'])
             oran = int(ajan_done * 100 / count) if count > 0 else 0
             lines.append(f"   • {ajan}: {count} görev ({ajan_done} tamamlı, {oran}%)")
-        
+
         lines.append("\n[« Rapor Menüsü]")
         bot.send_message(chat_id, "\n".join(lines), parse_mode="Markdown")
     except Exception as e:
@@ -742,18 +742,18 @@ def show_rapor_pano_ozeti(chat_id: str) -> None:
     import json
     from pathlib import Path
     from collections import defaultdict
-    
+
     try:
         task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
-        
+
         if not task_board_path.exists():
             bot.send_message(chat_id, "❌ Görev panosuna erişilemedi.")
             send_rapor_menu(chat_id)
             return
-        
+
         with open(task_board_path, encoding="utf-8") as f:
             gorevler = json.load(f)
-        
+
         # Metrikler hesapla
         toplam = len(gorevler)
         acik = len([g for g in gorevler if g.get('durum') == 'Açık'])
@@ -761,17 +761,17 @@ def show_rapor_pano_ozeti(chat_id: str) -> None:
         bloke = len([g for g in gorevler if g.get('durum') == 'Bloke'])
         done = len([g for g in gorevler if g.get('durum') == 'Tamamlandı'])
         plan = len([g for g in gorevler if g.get('durum') == 'Plan'])
-        
+
         # Sahib ve önem dağılımı
         sahib_sayisi = defaultdict(int)
         onem_sayisi = defaultdict(int)
-        
+
         for g in gorevler:
             sahib = g.get('sahip', 'unknown')
             onem = g.get('onem', 'unknown')
             sahib_sayisi[sahib] += 1
             onem_sayisi[onem] += 1
-        
+
         # Tablo başlığı
         lines = [
             "📊 **GÖREV PANOSU ÖZETİ**\n",
@@ -790,11 +790,11 @@ def show_rapor_pano_ozeti(chat_id: str) -> None:
             "```",
             "\n**👤 Sahip Dağılımı:**"
         ]
-        
+
         for sahib, count in sorted(sahib_sayisi.items(), key=lambda x: -x[1])[:6]:
             yuzde = (count * 100 // toplam) if toplam else 0
             lines.append(f"   • {sahib.capitalize():12} : {count:3d} görev ({yuzde:3d}%)")
-        
+
         lines.append("\n**⚡ Önem Dağılımı:**")
         for onem in ['kritik', 'yuksek', 'orta', 'dusuk']:
             count = onem_sayisi.get(onem, 0)
@@ -802,14 +802,14 @@ def show_rapor_pano_ozeti(chat_id: str) -> None:
                 yuzde = (count * 100 // toplam) if toplam else 0
                 onem_emoji = {"kritik": "🔴", "yuksek": "🟠", "orta": "🟡", "dusuk": "🟢"}.get(onem, "⚪")
                 lines.append(f"   {onem_emoji} {onem.capitalize():12} : {count:3d} görev ({yuzde:3d}%)")
-        
+
         lines.append("\n[« Rapor Menüsü]")
         bot.send_message(chat_id, "\n".join(lines), parse_mode="Markdown")
-        
+
     except Exception as e:
         logger.error(f"[RAPOR_PANO_OZETI] Error: {e}", exc_info=True)
         bot.send_message(chat_id, f"❌ Hata: {str(e)[:50]}")
-    
+
     send_rapor_menu(chat_id)
 
 
@@ -820,14 +820,14 @@ def show_rapor_pano_ozeti(chat_id: str) -> None:
 def send_ayarlar_menu(chat_id: str) -> None:
     """Ayarlar menüsünü gönder."""
     markup = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-    
+
     markup.add("🔌 Bağlantı Kontrol")
     markup.add("🔑 Token Doğrula")
     markup.add("📋 Bot Bilgisi")
     markup.add("🔄 Bot Restart", "🔄 Streamlit Restart")
     markup.add("❓ Yardım")
     markup.add("« Ana Menü")
-    
+
     bot.send_message(
         chat_id,
         "⚙️ **Ayarlar**\n\n"
@@ -844,12 +844,12 @@ def send_ayarlar_menu(chat_id: str) -> None:
 def send_gorev_takibi_menu(chat_id: str) -> None:
     """Görev takibi menüsü - durum filtresi."""
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-    
+
     markup.add("🟢 Açık", "🔵 Aktif")
     markup.add("🟠 Bloke", "✅ Tamamlandı")
     markup.add("📋 Tümü", "👤 Sahip Bazlı")
     markup.add("« Ana Menü")
-    
+
     bot.send_message(
         chat_id,
         "📋 **Görev Takibi**\n\n"
@@ -869,22 +869,22 @@ def show_gorev_takibi_durum(chat_id: str, durum: str) -> None:
     """Durum bazlı görev listesi."""
     import json
     from pathlib import Path
-    
+
     try:
         task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
-        
+
         if not task_board_path.exists():
             bot.send_message(chat_id, "❌ Görev panosuna erişilemedi.")
             send_gorev_takibi_menu(chat_id)
             return
-        
+
         with open(task_board_path, encoding="utf-8") as f:
             gorevler = json.load(f)
-        
+
         # Duruma göre filtrele
         if durum != "all":
             gorevler = [g for g in gorevler if g.get("durum", "").lower() == durum.lower()]
-        
+
         if not gorevler:
             bot.send_message(
                 chat_id,
@@ -893,7 +893,7 @@ def show_gorev_takibi_durum(chat_id: str, durum: str) -> None:
             )
             send_gorev_takibi_menu(chat_id)
             return
-        
+
         # Tablo oluştur (durum, task_id, baslik, sahip, onem)
         onem_sira = {"critical": 0, "yuksek": 1, "orta": 2, "dusuk": 3}
         gorevler.sort(key=lambda g: onem_sira.get(str(g.get("onem", "")).lower(), 9))
@@ -925,31 +925,31 @@ def show_gorev_takibi_durum(chat_id: str, durum: str) -> None:
 
         lines.append("└────────────┴──────────────────────┴────────────┴────┘")
         lines.append("\n🔴 Kritik  🟠 Yüksek  🟡 Orta  🟢 Düşük")
-        
+
         msg_text = "\n".join(lines)
-        
+
         if len(msg_text) > 4000:
             msg_text = msg_text[:3900] + "\n... (daha fazla)"
-        
+
         bot.send_message(chat_id, f"```\n{msg_text}\n```", parse_mode="Markdown")
-        
+
     except Exception as e:
         logger.error(f"[GOREV_TAKIBI] Error: {e}")
         bot.send_message(chat_id, f"❌ Hata: {str(e)}")
-    
+
     send_gorev_takibi_menu(chat_id)
 
 
 def show_gorev_sahib_menu(chat_id: str) -> None:
     """Sahib bazlı filtreleme menüsü."""
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-    
+
     # Butonları doğru emojilerle göster (görev takibi menüsünde bu butonlar kullanılıyor)
     markup.add("😊 Utku", "😊 Salih")
     markup.add("😊 Yasu", "😊 İhsan")
     markup.add("😊 Mimir", "🤖 Orkestrator")
     markup.add("« Görev Takibi")
-    
+
     bot.send_message(
         chat_id,
         "👤 **Sahib Bazlı Görevler**\n\n"
@@ -963,21 +963,21 @@ def show_gorev_sahib_goster(chat_id: str, sahib: str) -> None:
     """Sahib bazlı görev listesi."""
     import json
     from pathlib import Path
-    
+
     try:
         task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
-        
+
         if not task_board_path.exists():
             bot.send_message(chat_id, "❌ Görev panosuna erişilemedi.")
             show_gorev_sahib_menu(chat_id)
             return
-        
+
         with open(task_board_path, encoding="utf-8") as f:
             gorevler = json.load(f)
-        
+
         # Sahibe göre filtrele
         gorevler = [g for g in gorevler if g.get("sahip", "").lower() == sahib.lower()]
-        
+
         if not gorevler:
             bot.send_message(
                 chat_id,
@@ -986,19 +986,19 @@ def show_gorev_sahib_goster(chat_id: str, sahib: str) -> None:
             )
             show_gorev_sahib_menu(chat_id)
             return
-        
+
         # Tablo oluştur (durum, task_id, baslik, onem)
         lines = [
             f"👤 **{sahib} — Görevler ({len(gorevler)} toplam)**\n",
             "┌─────────────────────────────────────────────────────────┐"
         ]
-        
+
         for g in gorevler[:15]:  # Max 15
             task_id = g.get("task_id", "?").ljust(8)
             baslik = g.get("baslik", "")[:20]
             durum = g.get("durum", "?")
             onem = g.get("onem", "?")
-            
+
             # Durum emoji
             durum_emoji = {
                 "acik": "🟢",
@@ -1006,28 +1006,28 @@ def show_gorev_sahib_goster(chat_id: str, sahib: str) -> None:
                 "bloke": "🟠",
                 "done": "✅"
             }.get(durum.lower(), "❓")
-            
+
             onem_emoji = {
                 "critical": "🔴",
                 "yuksek": "🟠",
                 "orta": "🟡",
                 "dusuk": "🟢"
             }.get(onem.lower(), "❓")
-            
+
             lines.append(f"│ {task_id} │ {durum_emoji} {durum:6} │ {onem_emoji} {baslik:15} │")
-        
+
         if len(gorevler) > 15:
             lines.append(f"│ ... {len(gorevler)-15} daha görev ... │")
-        
+
         lines.append("└─────────────────────────────────────────────────────────┘")
-        
+
         msg_text = "\n".join(lines)
-        
+
         if len(msg_text) > 4000:
             msg_text = msg_text[:3900] + "\n... (daha fazla)"
-        
+
         bot.send_message(chat_id, f"```\n{msg_text}\n```", parse_mode="Markdown")
-        
+
     except Exception as e:
         logger.error(f"[GOREV_SAHIB] Error: {e}")
         bot.send_message(chat_id, f"❌ Hata: {str(e)}")
@@ -1036,10 +1036,10 @@ def show_gorev_sahib_goster(chat_id: str, sahib: str) -> None:
 def _show_gorev_sahib_aksiyonlar_menu(chat_id: str) -> None:
     """Ajan görevleri gösterdikten sonra: Tetik Bak veya Mesaj Gönder seçeneği."""
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-    
+
     markup.add("📬 Tetik Bak", "💬 Mesaj Gönder")
     markup.add("« Sahib Bazlı")
-    
+
     bot.send_message(
         chat_id,
         "📋 **Görevler gösterildi.**\n\n"
@@ -1052,9 +1052,9 @@ def _show_gorev_sahib_aksiyonlar_menu(chat_id: str) -> None:
 def send_gorev_mesaj_menu(chat_id: str) -> None:
     """Görev ile ilgili mesaj gönder menüsü."""
     markup = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-    
+
     markup.add("💬 Mesaj Gönder", "« Görev Takibi")
-    
+
     bot.send_message(
         chat_id,
         "💬 **Görev Mesajı**\n\n"
@@ -1082,23 +1082,23 @@ def _mesaj_orkestrator_kaydet(message):
     if message.text and message.text.startswith("«"):
         send_gorev_takibi_menu(message.chat.id)
         return
-    
+
     mesaj = message.text.strip()[:500]
-    
+
     try:
         import json
         from pathlib import Path
         from datetime import datetime
-        
+
         task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
-        
+
         # Task board oku
         if task_board_path.exists():
             with open(task_board_path, encoding="utf-8") as f:
                 gorevler = json.load(f)
         else:
             gorevler = []
-        
+
         # Yeni görev oluştur (task_id otomatik)
         max_id = 0
         for g in gorevler:
@@ -1108,9 +1108,9 @@ def _mesaj_orkestrator_kaydet(message):
                 max_id = max(max_id, task_id_num)
             except:
                 pass
-        
+
         yeni_task_id = f"GOREV-{max_id + 1}"
-        
+
         yeni_gorev = {
             "task_id": yeni_task_id,
             "baslik": mesaj[:50],  # İlk 50 char başlık
@@ -1121,15 +1121,15 @@ def _mesaj_orkestrator_kaydet(message):
             "created_at": datetime.now().isoformat(),
             "dosyalar": []
         }
-        
+
         gorevler.append(yeni_gorev)
-        
+
         # Task board'a yaz
         with open(task_board_path, "w", encoding="utf-8") as f:
             json.dump(gorevler, f, ensure_ascii=False, indent=2)
-        
+
         logger.info(f"[MESAJ_ORKESTRATOR] Yeni görev oluşturuldu: {yeni_task_id} — {mesaj[:50]}")
-        
+
         bot.send_message(
             message.chat.id,
             f"✅ **Mesaj Gönderildi**\n\n"
@@ -1138,14 +1138,14 @@ def _mesaj_orkestrator_kaydet(message):
             f"Orkestrator tarafından incelenecek.",
             parse_mode="Markdown"
         )
-        
+
     except Exception as e:
         logger.error(f"[MESAJ_ORKESTRATOR_ERROR] {e}", exc_info=True)
         bot.send_message(
             message.chat.id,
             f"❌ Mesaj gönderilemedi: {str(e)[:50]}"
         )
-    
+
     send_gorev_takibi_menu(message.chat.id)
 
 
@@ -1172,7 +1172,7 @@ def show_yardim(chat_id: str) -> None:
         "• Tüm menülerden [« Ana Menü] ile dön",
         "\n[« Ayarlar] [« Ana Menü]"
     ]
-    
+
     bot.send_message(chat_id, "\n".join(lines), parse_mode="Markdown")
 
 
@@ -1183,7 +1183,7 @@ def show_yardim_detay(chat_id: str) -> None:
     markup.add("✉️ Tetikler", "📝 Mesaj")
     markup.add("📈 Raporlar", "⚙️ Ayarlar")
     markup.add("« Yardım", "« Ana Menü")
-    
+
     msg = bot.send_message(
         chat_id,
         "📚 **Detaylı Yardım Menüsü**\n\n"
@@ -1198,11 +1198,11 @@ def _handle_yardim_detay_selection(message):
     if not message.text:
         show_yardim_detay(message.chat.id)
         return
-    
+
     if "«" in message.text:
         show_yardim(message.chat.id)
         return
-    
+
     helps = {
         "📋 Pano": _yardim_pano,
         "💬 Chat": _yardim_chat,
@@ -1211,12 +1211,12 @@ def _handle_yardim_detay_selection(message):
         "📈 Raporlar": _yardim_raporlar,
         "⚙️ Ayarlar": _yardim_ayarlar,
     }
-    
+
     for key, func in helps.items():
         if key in message.text:
             func(message.chat.id)
             return
-    
+
     show_yardim_detay(message.chat.id)
 
 
@@ -1245,7 +1245,7 @@ Tüm görevleri durum bazında görmek ve takip etmek için kullanılır.
 • Görev sahibi ve son güncelleme zamanı görülür
 
 [« Yardım Menüsü] [« Ana Menü]"""
-    
+
     bot.send_message(chat_id, text, parse_mode="Markdown")
 
 
@@ -1279,7 +1279,7 @@ Ajanların bildirdiği sorunları, çözüm durumlarını ve mesajları yönetme
 • Her mesaj kimden geldiği bilgisi ile kaydedilir
 
 [« Yardım Menüsü] [« Ana Menü]"""
-    
+
     bot.send_message(chat_id, text, parse_mode="Markdown")
 
 
@@ -1315,7 +1315,7 @@ Her ajanın yapması gereken görevleri (tetikleri) görmek ve gönder.
 • Tetikler priorite sırası ile gösterilir
 
 [« Yardım Menüsü] [« Ana Menü]"""
-    
+
     bot.send_message(chat_id, text, parse_mode="Markdown")
 
 
@@ -1358,7 +1358,7 @@ Farklı yollarla ajanlar ve gruplara mesaj göndermek için kullanılır.
 • Targeted mesajlar kimden (👤) ajan adı ile işaretlenir
 
 [« Yardım Menüsü] [« Ana Menü]"""
-    
+
     bot.send_message(chat_id, text, parse_mode="Markdown")
 
 
@@ -1403,7 +1403,7 @@ Görevleri, ajanları ve sistemin performansını raporlar halinde gösterir.
 • Excel/PDF'e aktarma seçeneği olabilir
 
 [« Yardım Menüsü] [« Ana Menü]"""
-    
+
     bot.send_message(chat_id, text, parse_mode="Markdown")
 
 
@@ -1443,7 +1443,7 @@ Bot ayarlarını kontrol etmek, bağlantı duğrulamak ve bilgi almak.
 • Sorun yaşanırsa sistem yöneticisine başvurun
 
 [« Yardım Menüsü] [« Ana Menü]"""
-    
+
     bot.send_message(chat_id, text, parse_mode="Markdown")
 
 
@@ -1463,10 +1463,10 @@ def cmd_register(message):
     """Ajan kendisini kaydet: /register Adı"""
     import json
     from pathlib import Path
-    
+
     text = message.text.strip()
     parts = text.split(maxsplit=1)
-    
+
     if len(parts) < 2:
         bot.send_message(
             message.chat.id,
@@ -1475,26 +1475,26 @@ def cmd_register(message):
             parse_mode="Markdown"
         )
         return
-    
+
     ajan_adi = parts[1].strip().capitalize()
     chat_id = message.chat.id
-    
+
     # Agent chat_id'lerini sakla
     agent_chats_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "agent_chats.json"
     agent_chats_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     try:
         if agent_chats_path.exists():
             with open(agent_chats_path, encoding="utf-8") as f:
                 agent_chats = json.load(f)
         else:
             agent_chats = {}
-        
+
         agent_chats[ajan_adi] = str(chat_id)
-        
+
         with open(agent_chats_path, "w", encoding="utf-8") as f:
             json.dump(agent_chats, f, ensure_ascii=False, indent=2)
-        
+
         bot.send_message(
             message.chat.id,
             f"✅ **{ajan_adi}** başarıyla kaydedildi.\n\n"
@@ -1502,7 +1502,7 @@ def cmd_register(message):
             parse_mode="Markdown"
         )
         logger.info(f"[REGISTER] Ajan {ajan_adi} kaydedildi (chat_id={chat_id})")
-    
+
     except Exception as e:
         logger.error(f"[REGISTER_ERROR] {e}", exc_info=True)
         bot.send_message(
@@ -1517,7 +1517,7 @@ def cmd_register_admin(message):
     """Sahip: Ajana manuel chat_id ata (test ortamı için). /register_admin ajan_adi chat_id"""
     import json
     from pathlib import Path
-    
+
     # Sadece sahip (owner) kullanabilsin
     OWNER_CHAT_ID = "801855376"  # Sen
     if str(message.chat.id) != OWNER_CHAT_ID:
@@ -1527,10 +1527,10 @@ def cmd_register_admin(message):
             parse_mode="Markdown"
         )
         return
-    
+
     text = message.text.strip()
     parts = text.split()
-    
+
     if len(parts) < 3:
         bot.send_message(
             message.chat.id,
@@ -1539,7 +1539,7 @@ def cmd_register_admin(message):
             parse_mode="Markdown"
         )
         return
-    
+
     ajan_adi = parts[1].strip().capitalize()
     try:
         chat_id = str(int(parts[2]))  # Sayı olduğu kontrol et
@@ -1550,23 +1550,23 @@ def cmd_register_admin(message):
             parse_mode="Markdown"
         )
         return
-    
+
     # Agent chat_id'lerini sakla
     agent_chats_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "agent_chats.json"
     agent_chats_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     try:
         if agent_chats_path.exists():
             with open(agent_chats_path, encoding="utf-8") as f:
                 agent_chats = json.load(f)
         else:
             agent_chats = {}
-        
+
         agent_chats[ajan_adi] = chat_id
-        
+
         with open(agent_chats_path, "w", encoding="utf-8") as f:
             json.dump(agent_chats, f, ensure_ascii=False, indent=2)
-        
+
         bot.send_message(
             message.chat.id,
             f"✅ **{ajan_adi}** chat_id ile kaydedildi.\n\n"
@@ -1575,7 +1575,7 @@ def cmd_register_admin(message):
             parse_mode="Markdown"
         )
         logger.info(f"[REGISTER_ADMIN] Ajan {ajan_adi} manuel kaydedildi (chat_id={chat_id})")
-    
+
     except Exception as e:
         logger.error(f"[REGISTER_ADMIN_ERROR] {e}", exc_info=True)
         bot.send_message(
@@ -1783,9 +1783,9 @@ _tetikler_gonder_state = {}
 def btn_tetikler_bak_action(message):
     """Tetik bakma aksiyon."""
     logger.info(f"[BUTTON] Tetikler Bak clicked: {message.text}")
-    
+
     chat_id = str(message.chat.id)
-    
+
     # Ajan adı state'de varsa direkt tetikleri göster
     if chat_id in _tetikler_state:
         ajan = _tetikler_state.pop(chat_id)
@@ -1808,10 +1808,10 @@ def _tetik_bak_ajan_secimi(message):
     if message.text and message.text.startswith("«"):
         send_tetikler_menu(message.chat.id)
         return
-    
+
     ajan = message.text.strip()
     valid_ajanlar = ["Utku", "Salih", "Yasu", "İhsan", "Mimir"]
-    
+
     if ajan not in valid_ajanlar:
         msg = bot.send_message(
             message.chat.id,
@@ -1821,7 +1821,7 @@ def _tetik_bak_ajan_secimi(message):
         )
         bot.register_next_step_handler(msg, _tetik_bak_ajan_secimi)
         return
-    
+
     _show_tetikler_ajan_detay(message.chat.id, ajan)
     send_tetikler_menu(message.chat.id)
 
@@ -1836,11 +1836,11 @@ def btn_tetikler_gonder_action(message):
 def _show_tetikler_gonder_ajan_menu(chat_id: str) -> None:
     """Tetik gönderme için ajan seçim menüsü."""
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-    
+
     markup.add("👨 Utku (✉️)", "👨 Salih (✉️)")
     markup.add("👨 Yasu (✉️)", "👨 İhsan (✉️)")
     markup.add("👨 Mimir (✉️)", "« Tetikler Menüsü")
-    
+
     bot.send_message(
         chat_id,
         "📮 **Tetik Gönder**\n\n"
@@ -1867,10 +1867,10 @@ def _tetik_gonder_ajan_secimi(message):
     if message.text and message.text.startswith("«"):
         send_tetikler_menu(message.chat.id)
         return
-    
+
     ajan = message.text.strip()
     valid_ajanlar = ["Utku", "Salih", "Yasu", "İhsan", "Mimir"]
-    
+
     if ajan not in valid_ajanlar:
         msg = bot.send_message(
             message.chat.id,
@@ -1880,7 +1880,7 @@ def _tetik_gonder_ajan_secimi(message):
         )
         bot.register_next_step_handler(msg, _tetik_gonder_ajan_secimi)
         return
-    
+
     msg = bot.send_message(
         message.chat.id,
         f"👤 {ajan}\n\n"
@@ -1894,13 +1894,13 @@ def _tetik_gonder_mesaj(message, ajan):
     if message.text and message.text.startswith("«"):
         send_tetikler_menu(message.chat.id)
         return
-    
+
     tetik_mesaj = message.text.strip()[:500]
-    
+
     try:
         from orchestrator.trigger import tetik_uyari_ekle
         result = tetik_uyari_ekle(ajan)
-        
+
         bot.send_message(
             message.chat.id,
             f"✅ **Tetik Gönderildi**\n\n"
@@ -1910,10 +1910,10 @@ def _tetik_gonder_mesaj(message, ajan):
             f"Tetik {ajan}'ın posta kutusuna eklendi.",
             parse_mode="Markdown"
         )
-        
+
         # Tetikle beraber post seçeneği sun
         _show_tetik_post_menu(message.chat.id, ajan)
-        
+
     except Exception as e:
         logger.error(f"Error sending tetik to {ajan}: {e}")
         bot.send_message(
@@ -1927,9 +1927,9 @@ def _tetik_gonder_mesaj(message, ajan):
 def _show_tetik_post_menu(chat_id: str, ajan: str) -> None:
     """Tetikle beraber post göndermek için menü."""
     markup = types.ReplyKeyboardMarkup(row_width=2, resize_keyboard=True)
-    
+
     markup.add("📮 Post Gönder", "« Tetikler Menüsü")
-    
+
     bot.send_message(
         chat_id,
         f"📮 **{ajan}'a Mesaj Gönder?**\n\n"
@@ -1944,7 +1944,7 @@ def _show_tetik_post_menu(chat_id: str, ajan: str) -> None:
 def btn_tetik_post_gonder(message):
     """Tetikle beraber post gönder."""
     logger.info(f"[BUTTON] Tetik Post Gönder clicked: {message.text}")
-    
+
     # Son ajan bilgisini state'ten al (ya da yeniden sor)
     msg = bot.send_message(
         message.chat.id,
@@ -1960,14 +1960,14 @@ def _tetik_post_kaydet(message):
     if message.text and message.text.startswith("«"):
         send_tetikler_menu(message.chat.id)
         return
-    
+
     post_mesaj = message.text.strip()[:500]
-    
+
     try:
         # Post kaydı (örneğin, orchestrator mesaj kuyruğuna ekle)
         # Şimdilik loglama + konfirmasyonla yetiniyoruz
         logger.info(f"[TETIK_POST] Post kaydedildi: {post_mesaj}")
-        
+
         bot.send_message(
             message.chat.id,
             f"✅ **Post Gönderildi**\n\n"
@@ -1981,7 +1981,7 @@ def _tetik_post_kaydet(message):
             message.chat.id,
             f"❌ Post gönderilemedi: {str(e)}"
         )
-    
+
     send_tetikler_menu(message.chat.id)
 
 
@@ -2143,7 +2143,7 @@ def _mesaj_ajan_onem(message, ajan):
     if message.text and message.text.startswith("«"):
         btn_mesaj_targeted(message)
         return
-    
+
     onem_map = {
         "🔴 Kritik": "critical",
         "🟠 Yüksek": "yuksek",
@@ -2151,7 +2151,7 @@ def _mesaj_ajan_onem(message, ajan):
         "🟢 Düşük": "dusuk"
     }
     onem = onem_map.get(message.text, "orta")
-    
+
     msg = bot.send_message(message.chat.id, f"📝 {ajan}'a gönderilecek mesaj yazın:")
     bot.register_next_step_handler(msg, lambda m: _mesaj_ajan_gonder(m, ajan, onem))
 
@@ -2184,17 +2184,17 @@ def _mesaj_ajan_gonder(message, ajan, onem="orta"):
         from chat import kahin_gonder
         gonderen = _gonderen_ajan_bul(message.chat.id)
         logger.info(f"[MESAJ_AJAN_START] {gonderen} -> {ajan} mesaj gönderme başladı")
-        
+
         # Audit trail: KAHİN'e mesajı gönder (chat.json'e kaydet)
         kahin_gonder(message.text, onem=onem, kimden=f"👤 {gonderen} → {ajan}")
         logger.info(f"[MESAJ_AJAN_KAHIN] KAHİN'e kaydedildi")
-        
+
         # Ajanın Telegram chat_id'sine mesajı gönder (gönderen bilgisiyle)
         mesaj_metni = f"📬 {gonderen}'dan Mesaj (Önem: {onem})\n\n{message.text}"
         logger.info(f"[MESAJ_AJAN_AGENT] {ajan}'a Telegram mesajı gönderiliyor...")
         agent_result = send_agent_message(ajan, mesaj_metni)
         logger.info(f"[MESAJ_AJAN_RESULT] {ajan} sonuç: {agent_result}")
-        
+
         if agent_result:
             bot.send_message(message.chat.id, f"✅ Mesaj {ajan}'a gönderildi.")
         else:
@@ -2301,16 +2301,16 @@ def _kahin_mesaj_gonder(message):
     if message.text and message.text.startswith("«"):
         send_mesaj_menu(message.chat.id)
         return
-    
+
     try:
         import json
         from pathlib import Path
         from chat import kahin_gonder
-        
+
         # agent_chats.json'dan ajan adını bul (reverse lookup: chat_id → ajan_adi)
         agent_chats_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "agent_chats.json"
         ajan_adi = None
-        
+
         if agent_chats_path.exists():
             with open(agent_chats_path, "r", encoding="utf-8") as f:
                 agent_chats = json.load(f)
@@ -2319,24 +2319,24 @@ def _kahin_mesaj_gonder(message):
                     if str(chat_id) == str(message.chat.id):
                         ajan_adi = ad
                         break
-        
+
         if not ajan_adi:
             ajan_adi = f"Ajan#{message.chat.id}"
-        
+
         # Mesajı KAHİN'e gönder (kahin_gonder → chat.json'a kaydet)
         kahin_gonder(
             message.text,
             onem="orta",
             kimden=f"👤 {ajan_adi} (Ajan)"
         )
-        
+
         # agent_responses.json'a da log et
         agent_responses_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "agent_responses.json"
         responses = []
         if agent_responses_path.exists():
             with open(agent_responses_path, "r", encoding="utf-8") as f:
                 responses = json.load(f)
-        
+
         from datetime import datetime
         responses.append({
             "timestamp": datetime.now().isoformat(),
@@ -2345,17 +2345,17 @@ def _kahin_mesaj_gonder(message):
             "alici": "KAHİN",
             "durum": "sent"
         })
-        
+
         with open(agent_responses_path, "w", encoding="utf-8") as f:
             json.dump(responses, f, ensure_ascii=False, indent=2)
-        
+
         logger.info(f"[AJAN_KAHIN_DONE] {ajan_adi} → KAHİN mesajı gönderildi")
         bot.send_message(message.chat.id, "✅ Mesajın KAHİN'e iletildi.")
-        
+
     except Exception as e:
         logger.error(f"[AJAN_KAHIN_ERROR] {e}", exc_info=True)
         bot.send_message(message.chat.id, f"❌ Hata: {str(e)[:80]}")
-    
+
     send_mesaj_menu(message.chat.id)
 
 
@@ -2381,21 +2381,21 @@ def show_rapor_ay(chat_id: str) -> None:
     import json
     from pathlib import Path
     from collections import Counter
-    
+
     try:
         task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
         tasks = []
         if task_board_path.exists():
             with open(task_board_path, "r", encoding="utf-8") as f:
                 tasks = json.load(f)
-        
+
         # Calculate metrics
         acik = len([t for t in tasks if t.get('durum') == 'Açık'])
         aktif = len([t for t in tasks if t.get('durum') == 'Aktif'])
         bloke = len([t for t in tasks if t.get('durum') == 'Bloke'])
         done = len([t for t in tasks if t.get('durum') == 'Tamamlandı'])
         toplam = len(tasks)
-        
+
         lines = [
             "📊 **AYLIK RAPOR**\n",
             f"📅 Dönem: {datetime.now().strftime('%Y-%m')}\n",
@@ -2413,21 +2413,21 @@ def show_rapor_ay(chat_id: str) -> None:
             "```",
             "\n**📋 Son 5 Görev:**"
         ]
-        
+
         for i, task in enumerate(tasks[-5:], 1):
             task_id = task.get("task_id", "?")
             durum = task.get("durum", "?")
             baslik = task.get("baslik", "")[:30]
             sahip = task.get("sahip", "?")
             onem = task.get("onem", "orta")
-            
+
             durum_emoji = {"Açık": "🟢", "Aktif": "🔵", "Bloke": "🟠", "Tamamlandı": "✅", "Plan": "📋"}.get(durum, "❓")
             onem_emoji = {"kritik": "🔴", "yuksek": "🟠", "orta": "🟡", "dusuk": "🟢"}.get(onem, "⚪")
-            
+
             lines.append(f"\n{i}. {durum_emoji} **{task_id}** ({onem_emoji} {onem.capitalize()})")
             lines.append(f"   📌 {baslik}")
             lines.append(f"   👤 {sahip}")
-        
+
         lines.append("\n[« Rapor Menüsü]")
         bot.send_message(chat_id, "\n".join(lines), parse_mode="Markdown")
     except Exception as e:
@@ -2447,14 +2447,14 @@ def show_rapor_ytd(chat_id: str) -> None:
     """YTD raporu — task_board'dan."""
     import json
     from pathlib import Path
-    
+
     try:
         task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
         tasks = []
         if task_board_path.exists():
             with open(task_board_path, "r", encoding="utf-8") as f:
                 tasks = json.load(f)
-        
+
         # Calculate metrics
         acik = len([t for t in tasks if t.get('durum') == 'Açık'])
         aktif = len([t for t in tasks if t.get('durum') == 'Aktif'])
@@ -2463,7 +2463,7 @@ def show_rapor_ytd(chat_id: str) -> None:
         plan = len([t for t in tasks if t.get('durum') == 'Plan'])
         toplam = len(tasks)
         tamamlama_orani = (done * 100 // toplam) if toplam else 0
-        
+
         lines = [
             "📊 **YTD RAPORU**\n",
             f"📅 Dönem: 2026-01 → {datetime.now().strftime('%Y-%m')}\n",
@@ -2482,21 +2482,21 @@ def show_rapor_ytd(chat_id: str) -> None:
             "```",
             "\n**📋 Son 5 Görev:**"
         ]
-        
+
         for i, task in enumerate(tasks[-5:], 1):
             task_id = task.get("task_id", "?")
             durum = task.get("durum", "?")
             baslik = task.get("baslik", "")[:30]
             sahip = task.get("sahip", "?")
             onem = task.get("onem", "orta")
-            
+
             durum_emoji = {"Açık": "🟢", "Aktif": "🔵", "Bloke": "🟠", "Tamamlandı": "✅", "Plan": "📋"}.get(durum, "❓")
             onem_emoji = {"kritik": "🔴", "yuksek": "🟠", "orta": "🟡", "dusuk": "🟢"}.get(onem, "⚪")
-            
+
             lines.append(f"\n{i}. {durum_emoji} **{task_id}** ({onem_emoji} {onem.capitalize()})")
             lines.append(f"   📌 {baslik}")
             lines.append(f"   👤 {sahip}")
-        
+
         lines.append("\n[« Rapor Menüsü]")
         bot.send_message(chat_id, "\n".join(lines), parse_mode="Markdown")
     except Exception as e:
@@ -2517,14 +2517,14 @@ def show_rapor_ajan(chat_id: str) -> None:
     import json
     from pathlib import Path
     from collections import Counter
-    
+
     try:
         task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
         tasks = []
         if task_board_path.exists():
             with open(task_board_path, "r", encoding="utf-8") as f:
                 tasks = json.load(f)
-        
+
         # Agent task counts and completion
         ajan_tasks = {}
         for task in tasks:
@@ -2539,7 +2539,7 @@ def show_rapor_ajan(chat_id: str) -> None:
                 ajan_tasks[ajan]['aktif'] += 1
             elif durum == 'Bloke':
                 ajan_tasks[ajan]['bloke'] += 1
-        
+
         lines = [
             "👤 **AJAN BAZLI RAPOR**\n",
             "```",
@@ -2547,17 +2547,17 @@ def show_rapor_ajan(chat_id: str) -> None:
             "│ AJAN       │ TOPLAM │ TAMA. │ AKTİF │ BLOKE│",
             "├─────────────────────────────────────────────┤"
         ]
-        
+
         # Sort by total tasks descending
         for ajan in sorted(ajan_tasks.keys(), key=lambda x: ajan_tasks[x]['toplam'], reverse=True):
             stats = ajan_tasks[ajan]
             tamamlama_orani = (stats['done'] * 100 // stats['toplam']) if stats['toplam'] else 0
             ajan_display = ajan[:10].ljust(10)
             lines.append(f"│ {ajan_display} │  {stats['toplam']:2d}   │  {stats['done']:2d}   │  {stats['aktif']:2d}   │  {stats['bloke']:2d}  │")
-        
+
         lines.append("└─────────────────────────────────────────────┘")
         lines.append("```")
-        
+
         # Show ajan details
         lines.append("\n**📊 Detay:**")
         for ajan in sorted(ajan_tasks.keys(), key=lambda x: ajan_tasks[x]['toplam'], reverse=True):
@@ -2566,7 +2566,7 @@ def show_rapor_ajan(chat_id: str) -> None:
             lines.append(f"\n👤 **{ajan.capitalize()}**")
             lines.append(f"   📊 Toplam: {stats['toplam']} | Tamamlanan: {stats['done']} ({tamamlama_orani}%)")
             lines.append(f"   🔵 Aktif: {stats['aktif']} | 🟠 Bloke: {stats['bloke']}")
-        
+
         lines.append("\n[« Rapor Menüsü]")
         bot.send_message(chat_id, "\n".join(lines), parse_mode="Markdown")
     except Exception as e:
@@ -2601,25 +2601,25 @@ def show_rapor_trend(chat_id: str) -> None:
     """Trend raporu — task_board'dan."""
     import json
     from pathlib import Path
-    
+
     try:
         task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
         tasks = []
         if task_board_path.exists():
             with open(task_board_path, "r", encoding="utf-8") as f:
                 tasks = json.load(f)
-        
+
         # Current metrics
         acik = len([t for t in tasks if t.get('durum') == 'Açık'])
         aktif = len([t for t in tasks if t.get('durum') == 'Aktif'])
         bloke = len([t for t in tasks if t.get('durum') == 'Bloke'])
         done = len([t for t in tasks if t.get('durum') == 'Tamamlandı'])
         toplam = len(tasks)
-        
+
         # Trend indicators (simulated based on task counts)
         # Higher done % = positive trend
         tamamlama_orani = (done * 100 // toplam) if toplam else 0
-        
+
         lines = [
             "📈 **TREND ANALİZİ**\n",
             "```",
@@ -2634,20 +2634,20 @@ def show_rapor_trend(chat_id: str) -> None:
             "```",
             "\n**📊 Sonuç:**"
         ]
-        
+
         if tamamlama_orani >= 70:
             lines.append("   ✅ Güçlü performans — tamamlama oranı yüksek")
         elif tamamlama_orani >= 50:
             lines.append("   ⚠️ Orta performans — iyileştirme alanı var")
         else:
             lines.append("   🔴 Düşük performans — acil müdahale gerekli")
-        
+
         if bloke > 0:
             lines.append(f"   🟠 {bloke} bloke görev var — inceleme gerekli")
-        
+
         if acik > 0:
             lines.append(f"   🟢 {acik} açık görev — atanmayı bekliyor")
-        
+
         lines.append("\n[« Rapor Menüsü]")
         bot.send_message(chat_id, "\n".join(lines), parse_mode="Markdown")
     except Exception as e:
@@ -2801,20 +2801,20 @@ def btn_urgent(message):
     try:
         import json
         from pathlib import Path
-        
+
         task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
         tasks = []
         if task_board_path.exists():
             with open(task_board_path, "r", encoding="utf-8") as f:
                 tasks = json.load(f)
-        
+
         # Bloke + Kritik görevleri filtrele
         kritik_gorevler = [
             t for t in tasks
             if t.get('durum') in ['Bloke', 'Aktif'] and
             t.get('onem', 'orta').lower() in ['critical', 'yuksek']
         ]
-        
+
         if not kritik_gorevler:
             bot.send_message(
                 message.chat.id,
@@ -2823,7 +2823,7 @@ def btn_urgent(message):
                 parse_mode="Markdown"
             )
             return
-        
+
         lines = [
             "🚨 **ACİL GÖREVLER — Kritik & Bloke**\n",
             "```",
@@ -2831,34 +2831,34 @@ def btn_urgent(message):
             "│ TASK_ID │ DURUM  │ ÖNEM    │ SAHİP    │",
             "├─────────────────────────────────────────┤"
         ]
-        
+
         for task in kritik_gorevler[:10]:
             task_id = task.get("task_id", "?").ljust(7)
             durum = task.get("durum", "?").ljust(6)
             onem = task.get("onem", "?")
-            
+
             onem_emoji = {
                 "critical": "🔴",
                 "yuksek": "🟠",
                 "orta": "🟡",
                 "dusuk": "🟢"
             }.get(onem, "❓")
-            
+
             sahip = task.get("sahip", "?")[:8].ljust(8)
-            
+
             lines.append(f"│ {task_id} │ {durum} │ {onem_emoji} {onem:5s} │ {sahip} │")
-        
+
         if len(kritik_gorevler) > 10:
             lines.append(f"│ ... {len(kritik_gorevler)-10} daha görev ... │")
-        
+
         lines.append("└─────────────────────────────────────────┘")
         lines.append("```")
         lines.append("\n**Detaylı görmek için [📋 Pano] → [🟠 Bloke]")
         lines.append("\n[« Ana Menü]")
-        
+
         msg_text = "\n".join(lines)
         bot.send_message(message.chat.id, msg_text, parse_mode="Markdown")
-        
+
     except Exception as e:
         logger.error(f"[URGENT_ERROR] {e}", exc_info=True)
         bot.send_message(message.chat.id, f"❌ Acil görevler yüklenemedi: {str(e)[:50]}")
@@ -2893,26 +2893,26 @@ def btn_summary(message):
     logger.info(f"[BUTTON] Summary clicked: {message.text}")
     try:
         from orchestrator.trigger import bekleyen_tetikler
-        
+
         # Task board'dan tüm görevleri oku
         import json
         from pathlib import Path
-        
+
         task_board_path = Path(__file__).parent.parent.parent / "data" / "orchestrator" / "task_board.json"
         tasks = []
         if task_board_path.exists():
             with open(task_board_path, "r", encoding="utf-8") as f:
                 tasks = json.load(f)
-        
+
         # Durum bazında sayılar
         acik = len([t for t in tasks if t.get('durum') == 'Açık'])
         aktif = len([t for t in tasks if t.get('durum') == 'Aktif'])
         bloke = len([t for t in tasks if t.get('durum') == 'Bloke'])
         done = len([t for t in tasks if t.get('durum') == 'Tamamlandı'])
         plan = len([t for t in tasks if t.get('durum') == 'Plan'])
-        
+
         toplam = len(tasks)
-        
+
         # Tablo formatında mesaj
         lines = [
             "📌 **GÜNLÜK ÖZET — Task Board Durumu**\n",
@@ -2931,7 +2931,7 @@ def btn_summary(message):
             "```",
             "\n**📋 Son 5 Görev (Detaylı):**"
         ]
-        
+
         # Son 5 görev - genişletilmiş bilgi
         for i, task in enumerate(tasks[-5:], 1):
             task_id = task.get("task_id", "?")
@@ -2940,7 +2940,7 @@ def btn_summary(message):
             sahip = task.get("sahip", "?")
             aciklama = task.get("aciklama", "")[:50]
             onem = task.get("onem", "orta")
-            
+
             durum_emoji = {
                 "Açık": "🟢",
                 "Aktif": "🔵",
@@ -2948,25 +2948,25 @@ def btn_summary(message):
                 "Tamamlandı": "✅",
                 "Plan": "📋"
             }.get(durum, "❓")
-            
+
             onem_emoji = {
                 "kritik": "🔴",
                 "yuksek": "🟠",
                 "orta": "🟡",
                 "dusuk": "🟢"
             }.get(onem, "⚪")
-            
+
             lines.append(f"\n{i}. {durum_emoji} **{task_id}** ({onem_emoji} {onem.capitalize()})")
             lines.append(f"   📌 {baslik}")
             lines.append(f"   👤 Sahip: {sahip}")
             if aciklama:
                 lines.append(f"   📝 {aciklama}")
-        
+
         lines.append("\n[« Ana Menü]")
-        
+
         msg_text = "\n".join(lines)
         bot.send_message(message.chat.id, msg_text, parse_mode="Markdown")
-        
+
     except ImportError as ie:
         logger.error(f"[SUMMARY_IMPORT_ERROR] {ie}", exc_info=True)
         bot.send_message(message.chat.id, "⚠️ Tetikler modülü bulunamadı. Task board verisi gösteriliyor...")
@@ -2981,7 +2981,7 @@ def handle_main_menu(call):
     """Ana menü butonları."""
     data = call.data
     logger.info(f"[CALLBACK] Received: {data} from user {call.from_user.id}")
-    
+
     try:
         if data == "menu:ana":
             logger.debug(f"[CALLBACK] Sending ana menu")
@@ -3017,7 +3017,7 @@ def handle_main_menu(call):
             bot.send_message(call.message.chat.id, f"❌ Hata: {e}")
         except:
             pass
-    
+
     try:
         bot.answer_callback_query(call.id)
     except:
@@ -3028,7 +3028,7 @@ def handle_main_menu(call):
 def handle_pano_menu(call):
     """Pano menü butonları."""
     data = call.data.split(":")[1]
-    
+
     try:
         if data in ["done", "active", "blocked", "plan", "all"]:
             show_pano_status(call.message.chat.id, data)
@@ -3039,7 +3039,7 @@ def handle_pano_menu(call):
     except Exception as e:
         logger.error(f"Error in pano handler: {e}")
         bot.send_message(call.message.chat.id, f"❌ Hata: {e}")
-    
+
     bot.answer_callback_query(call.id)
 
 
@@ -3047,7 +3047,7 @@ def handle_pano_menu(call):
 def handle_chat_menu(call):
     """Chat menü butonları."""
     data = call.data.split(":")[1]
-    
+
     try:
         if data in ["acik", "cokundurmus", "cozuldu", "all"]:
             show_chat_status(call.message.chat.id, data)
@@ -3060,7 +3060,7 @@ def handle_chat_menu(call):
     except Exception as e:
         logger.error(f"Error in chat handler: {e}")
         bot.send_message(call.message.chat.id, f"❌ Hata: {e}")
-    
+
     bot.answer_callback_query(call.id)
 
 
@@ -3068,7 +3068,7 @@ def handle_chat_menu(call):
 def handle_tetikler_menu(call):
     """Tetikler menü butonları."""
     data = call.data.split(":")[1]
-    
+
     try:
         if data == "all":
             bot.send_message(call.message.chat.id, "🔍 Tüm tetikler özeti...")
@@ -3077,7 +3077,7 @@ def handle_tetikler_menu(call):
     except Exception as e:
         logger.error(f"Error in tetikler handler: {e}")
         bot.send_message(call.message.chat.id, f"❌ Hata: {e}")
-    
+
     bot.answer_callback_query(call.id)
 
 
@@ -3085,7 +3085,7 @@ def handle_tetikler_menu(call):
 def handle_mesaj_menu(call):
     """Mesaj menü butonları."""
     data = call.data.split(":")[1]
-    
+
     try:
         if data == "broadcast":
             bot.send_message(call.message.chat.id, "📢 Broadcast henüz aktif değil.")
@@ -3098,7 +3098,7 @@ def handle_mesaj_menu(call):
     except Exception as e:
         logger.error(f"Error in mesaj handler: {e}")
         bot.send_message(call.message.chat.id, f"❌ Hata: {e}")
-    
+
     bot.answer_callback_query(call.id)
 
 
@@ -3106,7 +3106,7 @@ def handle_mesaj_menu(call):
 def handle_rapor_menu(call):
     """Rapor menü butonları."""
     data = call.data.split(":")[1]
-    
+
     try:
         if data == "hafta":
             show_hafta_raporu(call.message.chat.id)
@@ -3123,7 +3123,7 @@ def handle_rapor_menu(call):
     except Exception as e:
         logger.error(f"Error in rapor handler: {e}")
         bot.send_message(call.message.chat.id, f"❌ Hata: {e}")
-    
+
     bot.answer_callback_query(call.id)
 
 
@@ -3131,7 +3131,7 @@ def handle_rapor_menu(call):
 def handle_ayarlar_menu(call):
     """Ayarlar menü butonları."""
     data = call.data.split(":")[1]
-    
+
     try:
         if data == "baglanti":
             bot.send_message(call.message.chat.id, "🔌 Bağlantı kontrol henüz aktif değil.")
@@ -3144,7 +3144,7 @@ def handle_ayarlar_menu(call):
     except Exception as e:
         logger.error(f"Error in ayarlar handler: {e}")
         bot.send_message(call.message.chat.id, f"❌ Hata: {e}")
-    
+
     bot.answer_callback_query(call.id)
 
 
@@ -3164,7 +3164,7 @@ def btn_gorev_sahib_bazli(message):
 def btn_gorev_sahib_sec(message):
     """Sahib seçimi - görevleri göster."""
     logger.info(f"[BUTTON] Gorev Sahib Sec: {message.text}")
-    
+
     # Ajan adını çıkar (lowercase)
     sahib = None
     if "Utku" in message.text:
@@ -3179,7 +3179,7 @@ def btn_gorev_sahib_sec(message):
         sahib = "mimir"
     elif "Orkestrator" in message.text:
         sahib = "orkestrator"
-    
+
     if sahib:
         show_gorev_sahib_goster(message.chat.id, sahib)
         # Orkestrator için tetikler menüsüne git, diğerleri için aksiyonlar menüsü sun
@@ -3236,7 +3236,7 @@ def main():
     """Bot webhook/polling mode — production webhooks, dev polling."""
     import os
     webhook_url = os.getenv("TELEGRAM_WEBHOOK_URL", "").strip()
-    
+
     if webhook_url:
         logger.info(f"Telegram Bot webhook mode: {webhook_url}")
         logger.info("FastAPI web_app.py:/api/webhooks/telegram endpoint kullanılacak")

@@ -434,14 +434,18 @@ def run_cleanup(dry_run: bool = False, backup_path: Path | None = None) -> dict:
     # Sil
     if not dry_run:
         deleted_ids = [r.company_id for r in all_to_delete]
-        if deleted_ids:
-            placeholders = ",".join([f":cid_{i}" for i in range(len(deleted_ids))])
-            params = {f"cid_{i}": cid for i, cid in enumerate(deleted_ids)}
-            with engine.begin() as conn:
-                # Cascade sayesinde ilgili tablolardaki kayıtlar da silinecek
-                # ama biz zaten taşımıştık, sadece companies'ten sil
-                conn.execute(text(f"DELETE FROM companies WHERE company_id IN ({placeholders})"), params)
-            print(f"Silinen kayıt: {len(deleted_ids)}")
+        # 1000'lik parti: tek sorguda binlerce placeholder sürücü limitini aşar
+        # (SQLite 999). Tüm partiler TEK işlemde — yarım silme olmaz.
+        with engine.begin() as conn:
+            for i in range(0, len(deleted_ids), 1000):
+                batch = deleted_ids[i:i + 1000]
+                placeholders = ",".join(f":cid_{j}" for j in range(len(batch)))
+                params = {f"cid_{j}": cid for j, cid in enumerate(batch)}
+                conn.execute(
+                    text(f"DELETE FROM companies WHERE company_id IN ({placeholders})"),
+                    params,
+                )
+        print(f"Silinen kayıt: {len(deleted_ids)}")
 
     return {
         "deleted": len(all_to_delete),

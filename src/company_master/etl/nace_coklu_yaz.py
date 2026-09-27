@@ -94,7 +94,7 @@ def main():
     print(f"[BİLGİ] Dosya okunuyor: {XLSX_PATH}")
 
     engine = create_engine(os.getenv("DATABASE_URL"))
-    
+
     # Mevcut nace_codes'ları cache'le
     engine = create_engine(os.getenv("DATABASE_URL"))
     with engine.connect() as conn:
@@ -102,14 +102,14 @@ def main():
         result = conn.execute(text("SELECT nace_code FROM nace_codes")).fetchall()
         existing_codes = {row[0] for row in result}
         print(f"[BİLGİ] Mevcut NACE kodları: {len(existing_codes)}")
-        
+
         # Mevcut company_industries kayıtlarını kontrol et
         result = conn.execute(text("SELECT COUNT(*) FROM company_industries")).scalar()
         print(f"[BİLGİ] Mevcut company_industries kayıtları: {result}")
 
     # 1. Adım: Source_records'tan şirket-NACE eşleşmelerini çıkar
     print("[BİLGİ] Source_records'tan şirket-NACE eşleşmeleri çıkarılıyor...")
-    
+
     with engine.connect() as conn:
         # source_records'tan şirket vergi numarası ile şirketleri eşleştir
         rows = conn.execute(
@@ -120,13 +120,13 @@ def main():
                 WHERE sr.raw_nace IS NOT NULL
             """)
         ).fetchall()
-    
+
     print(f"[BİLGİ] {len(rows)} kaynak kayıt bulundu")
-    
+
     # Şirket başına NACE kodlarını topla
     company_nace_codes = defaultdict(set)
     company_names = {}
-    
+
     for row in rows:
         company_id = row[0]
         nace_code = normalize_nace_code(row[1])
@@ -134,19 +134,19 @@ def main():
             company_nace_codes[company_id].add(nace_code)
             if row[3] and company_id not in company_names:
                 company_names[company_id] = clean_turkish_chars(str(row[3]))
-    
+
     print(f"[BİLGİ] {len(company_nace_codes)} şirket için NACE kodu bulundu")
-    
+
     # Mevcut company_industries kayıtlarını kontrol et
     with engine.connect() as conn:
         existing = conn.execute(text("SELECT company_id, nace_code FROM company_industries")).fetchall()
         existing_pairs = set((row[0], row[1]) for row in existing)
         print(f"[BİLGİ] Mevcut company_industries kayıtları: {len(existing_pairs)}")
-    
+
     # Yeni kayıtları hazırla
     new_records = []
     skipped = 0
-    
+
     for company_id, nace_codes in company_nace_codes.items():
         # Mevcut companies.nace_code'u al (ana kod olarak)
         with engine.connect() as conn:
@@ -155,7 +155,7 @@ def main():
                 {"cid": company_id}
             ).scalar()
             primary_nace = normalize_nace_code(result) if result else None
-        
+
         # Tüm kodları sırala: ana kod önce, sonra diğerleri
         all_codes = list(nace_codes)
         if primary_nace and primary_nace in all_codes:
@@ -165,17 +165,17 @@ def main():
         elif primary_nace:
             # Ana kod listede yoksa da başa al
             all_codes.insert(0, primary_nace)
-        
+
         for idx, nace_code in enumerate(all_codes):
             if (company_id, nace_code) in existing_pairs:
                 skipped += 1
                 continue
-            
+
             # nace_codes tablosunda var mı kontrol et
             if nace_code not in existing_codes:
                 print(f"[UYARI] NACE kodu nace_codes'ta yok: {nace_code} - atlanıyor")
                 continue
-            
+
             is_primary = (idx == 0)
             new_records.append({
                 'company_id': company_id,
@@ -186,19 +186,19 @@ def main():
                 'source_id': None,  # TODO: source_id belirlenebilir
                 'confidence': 0.9 if is_primary else 0.7,
             })
-    
+
     print(f"[BİLGİ] Eklenecek yeni kayıtlar: {len(new_records)}, Atlanan: {skipped}")
-    
+
     if not new_records:
         print("[BİLGİ] Eklenecek yeni kayıt yok.")
         return
-    
+
     # Batch insert
     print("[BİLGİ] Veritabanına yazılıyor...")
     batch_size = 100
     inserted = 0
     errors = 0
-    
+
     for i in range(0, len(new_records), batch_size):
         batch = new_records[i:i+batch_size]
         try:
@@ -206,7 +206,7 @@ def main():
                 for data in batch:
                     conn.execute(
                         text("""
-                            INSERT INTO company_industries 
+                            INSERT INTO company_industries
                             (company_id, nace_code, nace_version, nace_level, is_primary, source_id, confidence, verified_at)
                             VALUES (:company_id, :nace_code, :nace_version, :nace_level, :is_primary, :source_id, :confidence, NOW())
                             ON CONFLICT (company_id, nace_code) DO UPDATE SET
@@ -230,7 +230,7 @@ def main():
         except Exception as e:
             errors += len(batch)
             print(f"  [HATA] Batch {i//batch_size + 1}: {e}")
-    
+
     print(f"\n[SONUÇ] Eklenen: {inserted}, Hatalı: {errors}, Atlanan: {skipped}")
     print("[TAMAM] Çoklu NACE yazma işlemi tamamlandı.")
 
