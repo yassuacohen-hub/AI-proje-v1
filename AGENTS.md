@@ -561,7 +561,8 @@
   3. **İçerik SSOT değil.** Klasörde 5 dosya: 3'ü 2 byte boş JSON, 2'si tek seferlik dump betiği.
   4. **Gerekçedeki dosyalar taşınmış.** D-172'nin dayandığı "sözlük + kullanım kılavuzu" (`OPERASYON_KILAVUZU.md`, `VAULT_HARITA.md`, `GOREV_PANOSU_KULLANIM_KILAVUZU.md`) D-187 Faz 2'de `data/orchestrator/backups/D-187_faz2_2026-09-22/worktree_klasoru_kopya/` altına alınmış.
   5. **Canlı nüsha vault'ta ve daha gelişmiş.** `GOREV_PANOSU_KULLANIM_KILAVUZU.md`: yedekte 150 satır, [`docs/`](docs/GOREV_PANOSU_KULLANIM_KILAVUZU.md:1) altında 266 satır. Yazma faaliyeti vault'ta sürmüş.
-- **Uygulama:** `worktree klasoru/` → `_ARSIV_worktree_kalinti_2026-09-27/` (D-002 silme yasağı: silme değil taşıma).
+- **Uygulama:** `worktree klasoru/` → `_ARSIV_worktree_kalinti_2026-09-27/` (D-002 silme yasağı: silme değil taşıma). Üst repo commit `a02fd87`.
+- **Arşivdeki 5 dosyanın 3'ü git'te izleniyor, 2'si değil.** Sebep: kök `.gitignore:15` kuralı `_*.py`, arşivdeki `_dump_charts.py` / `_dump_receiver.py` adlarını yakalıyor. Kayıp yok — dosyalar **diskte mevcut** ve eski yollarıyla **git geçmişinde** duruyor (`git show 62f0c52:"worktree klasoru/_dump_charts.py"`). Bu bir kusur değil, beklenen davranış; not düşülmesinin sebebi ileride "arşivde 5, git'te 3" çelişkisinin yanlış alarma yol açmaması.
 - **Tarihsel referanslara dokunulmaz.** 103 markdown dosyasında `worktree klasoru/` geçiyor; bunlar geçmiş rapor ve karar kaydıdır. Geriye dönük düzeltme **yapılmaz** (D-60 kanonik ad geçişi + D-191 redirect ilkesi: geçmiş yeniden yazılmaz).
 - **Mandal:** [`tests/test_kok_izin_listesi.py`](tests/test_kok_izin_listesi.py:1).
 
