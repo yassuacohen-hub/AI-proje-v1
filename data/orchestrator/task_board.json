@@ -1680,16 +1680,16 @@
     "baslik": "[VERI] Hayalet kayitlari sil -> companies 4591 fazlalik satir (3s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "aktif",
     "dosyalar": [
       "src/company_master/etl/hayalet_kayit_temizle.py"
     ],
     "brief": "plans/brief_utku_VERI-HAYALET-TEMIZ-01.md",
-    "talimat": "",
+    "talimat": "Brif: plans/brief_utku_VERI-HAYALET-TEMIZ-01.md (kanitlar orada). OZET: companies 14003 satir ama tekil ad 9412 -> 4591 HAYALET satir. ivedik.org.tr 3134 satir / 14 tekil (%0.4): 14 unvan ~224'er kez yazilmis. Kok neden KODDA ZATEN DUZELTILDI (D-235 sayfa_dongusu, MAX_SAYFA=500 + TEKRAR_TOLERANSI=2, 14 test yesil) -> kirli olan SADECE veritabani. Yap: src/company_master/etl/hayalet_kayit_temizle.py. (1) ONCE YEDEK data/backup/hayalet_YYYYMMDD.jsonl -- yedek yazilmadan tek satir silinmez. (2) Kalan satir secimi: vergi_no dolu > en cok alan dolu > en kucuk company_id. (3) Kopyalardaki eksik alanlari kalan kayda BIRLESTIR (telefon/eposta/adres/web) -- bu is silme degil TOPLAMA isi, adim 3 atlanirsa iletisim bilgisi kaybolur. (4) Bagli satirlari tasi: company_industries, nace_validity, source_records. (5) Sil. (6) companies.legal_name UNIQUE kisit migration. Kabul: count(*)=count(distinct legal_name) VE vergi_no dolu = 774 (dusUrse RED) VE yedek satir sayisi = silinen satir sayisi VE tests/test_hayalet_kayit_temizle.py yesil. GERI ALINAMAZ IS. SIRA: bu bitmeden VERI-IVEDIK-YENIDEN-01 baslamaz.",
     "mod": "code",
     "from_agent": "ihsan",
     "source": "ihsan",
-    "baslangic": null,
+    "baslangic": "2026-09-27T18:08:41",
     "bitis": null,
     "not": "Kaziyici dongusu 14 unvani 224 kez yazdi; 14003 satir -> 9412 tekil ad"
   },
