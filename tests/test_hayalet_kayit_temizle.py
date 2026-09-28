@@ -17,8 +17,8 @@ def make_record(company_id: str, legal_name: str, **kwargs) -> CompanyRecord:
         "primary_phone": None, "primary_email": None, "description": None,
         "is_ankara": None, "is_osb_member": None, "osb_id": None,
         "nace_validity": None, "quarantine_reason": None, "data_quality_score": None,
-        "entity_confidence": None, "web_sitesi": None, "vergi_no": None,
-        "osb_parsel": None, "first_seen_at": None, "last_verified_at": None,
+        "entity_confidence": None,
+        "osb_parcel": None, "first_seen_at": None, "last_verified_at": None,
         "created_at": None, "updated_at": None,
     }
     defaults.update(kwargs)
@@ -30,22 +30,17 @@ class TestCompanyRecord:
 
     def test_filled_field_count(self):
         """Dolu alan sayımı doğru mu?"""
-        rec = make_record("1", "TEST FIRMA", trade_name="TEST", tax_number="1234567890", primary_phone="5551234567", web_sitesi="test.com")
-        assert rec.filled_field_count() == 4  # trade_name, tax_number, primary_phone, web_sitesi
+        rec = make_record("1", "TEST FIRMA", trade_name="TEST", tax_number="1234567890", primary_phone="5551234567", website_domain="test.com")
+        assert rec.filled_field_count() == 4  # trade_name, tax_number, primary_phone, website_domain
 
     def test_has_tax_number_tax_number(self):
         """tax_number dolu olduğunda True döner."""
         rec = make_record("1", "TEST", tax_number="123")
         assert rec.has_tax_number() is True
 
-    def test_has_tax_number_vergi_no(self):
-        """vergi_no dolu olduğunda True döner."""
-        rec = make_record("1", "TEST", vergi_no="123")
-        assert rec.has_tax_number() is True
-
-    def test_has_tax_number_both_empty(self):
-        """İkisi de boşsa False döner."""
-        rec = make_record("1", "TEST", tax_number="", vergi_no=None)
+    def test_has_tax_number_bos(self):
+        """D-254: tek kaynak tax_number; bos dize False sayilir."""
+        rec = make_record("1", "TEST", tax_number="")
         assert rec.has_tax_number() is False
 
 
@@ -62,7 +57,7 @@ class TestSelectKeeper:
     def test_filled_field_count_priority(self):
         """Vergi numarası yoksa dolu alan sayısı öncelikli."""
         rec1 = make_record("1", "TEST", trade_name="A")
-        rec2 = make_record("2", "TEST", trade_name="B", primary_phone="1", web_sitesi="b.com")
+        rec2 = make_record("2", "TEST", trade_name="B", primary_phone="1", website_domain="b.com")
         keeper = select_keeper([rec1, rec2])
         assert keeper.company_id == "2"
 
@@ -80,13 +75,13 @@ class TestMergeRecords:
     def test_merge_fills_empty_fields(self):
         """Keeper'ın boş alanları duplicate'dan doldurulur."""
         keeper = make_record("1", "TEST", trade_name="K")
-        dup = make_record("2", "TEST", primary_phone="555", web_sitesi="dup.com")
+        dup = make_record("2", "TEST", primary_phone="555", website_domain="dup.com")
 
         merged = merge_records(keeper, [dup])
 
         assert merged.trade_name == "K"  # keeper'ın olduğu korunur
         assert merged.primary_phone == "555"  # duplicate'dan alınır
-        assert merged.web_sitesi == "dup.com"  # duplicate'dan alınır
+        assert merged.website_domain == "dup.com"  # duplicate'dan alınır
 
     def test_keeper_field_not_overwritten(self):
         """Keeper'ın dolu alanı duplicate ile ezilmez."""
@@ -130,9 +125,7 @@ class TestRunCleanup:
         row1.quarantine_reason = None
         row1.data_quality_score = None
         row1.entity_confidence = None
-        row1.web_sitesi = None
-        row1.vergi_no = None
-        row1.osb_parsel = None
+        row1.osb_parcel = None
         row1.first_seen_at = None
         row1.last_verified_at = None
         row1.created_at = None
@@ -146,7 +139,7 @@ class TestRunCleanup:
                      "website_domain", "primary_phone", "primary_email", "description",
                      "is_ankara", "is_osb_member", "osb_id", "nace_validity",
                      "quarantine_reason", "data_quality_score", "entity_confidence",
-                     "web_sitesi", "vergi_no", "osb_parsel", "first_seen_at",
+                     "osb_parcel", "first_seen_at",
                      "last_verified_at", "created_at", "updated_at"]:
             setattr(row2, attr, None)
 
@@ -178,8 +171,8 @@ class TestRunCleanup:
                 "primary_phone": None, "primary_email": None, "description": None,
                 "is_ankara": None, "is_osb_member": None, "osb_id": None,
                 "nace_validity": None, "quarantine_reason": None, "data_quality_score": None,
-                "entity_confidence": None, "web_sitesi": None, "vergi_no": None,
-                "osb_parsel": None, "first_seen_at": None, "last_verified_at": None,
+                "entity_confidence": None,
+                "osb_parcel": None, "first_seen_at": None, "last_verified_at": None,
                 "created_at": None, "updated_at": None,
             }
             defaults.update(kwargs)

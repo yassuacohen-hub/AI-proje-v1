@@ -42,12 +42,10 @@ def test_row_to_dashboard_basic():
         "company_id": "c1",
         "legal_name": "Firma A",
         "website_domain": "example.com",
-        "web_sitesi": "www.example.com",
         "primary_phone": "0312 123 45 67",
         "primary_email": "info@example.com",
         "tax_number": "1234567890",
-        "vergi_no": "1234567890",
-        "osb_parsel": "123/45",
+        "osb_parcel": "123/45",
         "data_quality_score": 85.0,
         "raw_phone": "0312 123 45 67",
         "raw_email": "info@example.com",
@@ -60,7 +58,8 @@ def test_row_to_dashboard_basic():
     result = _row_to_dashboard(row)
     assert result["company_id"] == "c1"
     assert result["unvan"] == "Firma A"
-    assert result["web_sitesi"] == "www.example.com"
+    # Cikti anahtarlari Turkce (API sozlesmesi), girdi kolonlari Ingilizce (D-251/1).
+    assert result["web_sitesi"] == "example.com"
     assert result["telefonler"] == ["0312 111 22 33"]
     assert result["emailler"] == ["info@test.com"]
     assert result["adres"] == "Ankara"

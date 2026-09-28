@@ -10,23 +10,27 @@ from src.company_master.etl.normalize import _data_quality_score
 
 
 def _row(raw_phone=None, raw_email=None, raw_website=None, website_domain=None,
-         raw_tax_number=None, raw_payload=None):
+         raw_tax_number=None, trade_name=None, raw_payload=None):
     return {
         "raw_phone": raw_phone,
         "raw_email": raw_email,
         "raw_website": raw_website,
         "website_domain": website_domain,
         "raw_tax_number": raw_tax_number,
+        "trade_name": trade_name,
         "raw_payload": raw_payload or {},
     }
 
 
 def test_full_row_scores_100():
+    # D-250 tek kapi agirliklari: VKN 15 + adres 15 + tel 15 + eposta 15
+    # + NACE 15 + web 10 + parsel 10 + tabela 5 = 100.
     row = _row(
         raw_phone="0312 123 45 67",
         raw_email="info@abc.com",
         raw_website="https://abc.com",
         raw_tax_number="1234567890",
+        trade_name="ABC",
         raw_payload={
             "adres": "Ankara OSB",
             "sektor": "İmalat",
@@ -50,12 +54,13 @@ def test_missing_vergi_and_adres_penalties():
         raw_website="https://abc.com",
         raw_payload={"sektor": "İmalat"},
     )
-    assert _data_quality_score(row) == 15.0
+    # tel 15 + eposta 15 + web 10 = 40 (VKN/adres/NACE/parsel/tabela bos).
+    assert _data_quality_score(row) == 40.0
 
 
 def test_only_vergi_no():
     row = _row(raw_tax_number="1234567890")
-    assert _data_quality_score(row) == 5.0
+    assert _data_quality_score(row) == 15.0  # D-250: VKN agirligi 15
 
 
 def test_score_clamped_to_100():
@@ -64,6 +69,7 @@ def test_score_clamped_to_100():
         raw_email="info@abc.com",
         raw_website="https://abc.com",
         raw_tax_number="1234567890",
+        trade_name="ABC",
         raw_payload={
             "adres": "Ankara OSB",
             "sektor": "İmalat",

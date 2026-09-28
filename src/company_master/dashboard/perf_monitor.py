@@ -189,12 +189,15 @@ class DashboardPerfMonitor:
 
 KPI_QUERY = """
     SELECT COUNT(*) AS total,
+      -- D-254: tek kimlik kolonu kaldi. tax/vergi/vkn_either ayni sayiyi
+      -- verir; tuketiciler .get(anahtar, 0) ile okudugu icin (sessizce 0
+      -- dondurmesin) ucu de duruyor. web_app.py KPI ucu ile ayni sozlesme.
       SUM(CASE WHEN c.tax_number IS NOT NULL AND c.tax_number != '' THEN 1 ELSE 0 END) AS tax,
-      SUM(CASE WHEN c.vergi_no IS NOT NULL AND c.vergi_no != '' THEN 1 ELSE 0 END) AS vergi,
-      SUM(CASE WHEN COALESCE(c.tax_number, c.vergi_no) IS NOT NULL AND COALESCE(c.tax_number, c.vergi_no) != '' THEN 1 ELSE 0 END) AS vkn_either,
+      SUM(CASE WHEN c.tax_number IS NOT NULL AND c.tax_number != '' THEN 1 ELSE 0 END) AS vergi,
+      SUM(CASE WHEN c.tax_number IS NOT NULL AND c.tax_number != '' THEN 1 ELSE 0 END) AS vkn_either,
       SUM(CASE WHEN c.website_domain IS NOT NULL AND c.website_domain != '' THEN 1 ELSE 0 END) AS web,
-      SUM(CASE WHEN c.osb_parsel IS NOT NULL AND c.osb_parsel != '' THEN 1 ELSE 0 END) AS parsel,
-      SUM(CASE WHEN c.adres IS NOT NULL AND c.adres != '' THEN 1 ELSE 0 END) AS adres,
+      SUM(CASE WHEN c.osb_parcel IS NOT NULL AND c.osb_parcel != '' THEN 1 ELSE 0 END) AS parsel,
+      SUM(CASE WHEN c.address IS NOT NULL AND c.address != '' THEN 1 ELSE 0 END) AS adres,
       SUM(CASE WHEN c.primary_phone IS NOT NULL AND c.primary_phone != '' THEN 1 ELSE 0 END) AS tel,
       SUM(CASE WHEN c.primary_email IS NOT NULL AND c.primary_email != '' THEN 1 ELSE 0 END) AS email,
       SUM(CASE WHEN c.nace_code IS NOT NULL AND c.nace_code != '' THEN 1 ELSE 0 END) AS nace,
@@ -215,7 +218,7 @@ SOURCES_QUERY = """
 
 COMPANIES_LIST_QUERY = """
     SELECT c.legal_name, c.trade_name, c.website_domain, c.primary_phone, c.primary_email,
-           c.tax_number, c.vergi_no, c.nace_code, c.data_quality_score
+           c.tax_number, c.nace_code, c.data_quality_score
     FROM companies c
     WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
       AND c.data_quality_score >= :min_score
@@ -226,15 +229,14 @@ COMPANIES_LIST_QUERY = """
 
 ILIKE_SEARCH_QUERY = """
     SELECT c.legal_name, c.trade_name, c.website_domain, c.primary_phone, c.primary_email,
-           c.tax_number, c.vergi_no, c.nace_code, c.data_quality_score
+           c.tax_number, c.nace_code, c.data_quality_score
     FROM companies c
     WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
       AND (c.legal_name ILIKE :search
            OR c.trade_name ILIKE :search
            OR c.primary_phone ILIKE :search
            OR c.primary_email ILIKE :search
-           OR c.tax_number ILIKE :search
-           OR c.vergi_no ILIKE :search)
+           OR c.tax_number ILIKE :search)
     ORDER BY c.data_quality_score DESC
     LIMIT 50
 """
@@ -242,7 +244,7 @@ ILIKE_SEARCH_QUERY = """
 
 ILIKE_SEARCH_OPTIMIZED_QUERY = """
     SELECT c.legal_name, c.trade_name, c.website_domain, c.primary_phone, c.primary_email,
-           c.tax_number, c.vergi_no, c.nace_code, c.data_quality_score
+           c.tax_number, c.nace_code, c.data_quality_score
     FROM companies c
     WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
       AND c.search_text ILIKE :search
@@ -251,7 +253,7 @@ ILIKE_SEARCH_OPTIMIZED_QUERY = """
 """
 SOURCE_FILTER_QUERY = """
     SELECT c.legal_name, c.trade_name, c.website_domain, c.primary_phone, c.primary_email,
-           c.tax_number, c.vergi_no, c.nace_code, c.data_quality_score
+           c.tax_number, c.nace_code, c.data_quality_score
     FROM companies c
     WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
       AND c.source_record_id IN (

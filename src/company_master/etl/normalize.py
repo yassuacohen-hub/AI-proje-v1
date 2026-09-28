@@ -153,14 +153,16 @@ def _data_quality_score(row: Dict[str, Any]) -> float:
     duzeninde bekler; asagidaki esleme o farki kapatir.
     """
     payload = row.get("raw_payload") or {}
+    # Anahtarlar kapinin (companies) dili: Ingilizce. Degerler payload'un
+    # dili: Turkce. D-251/1 kolon adini baglar, JSON anahtarini baglamaz.
     return kalite_puani({
         "tax_number": row.get("raw_tax_number") or payload.get("vergi_no"),
-        "adres": payload.get("adres"),
+        "address": payload.get("adres"),
         "primary_phone": row.get("raw_phone"),
         "primary_email": row.get("raw_email"),
         "website_domain": row.get("raw_website") or row.get("website_domain"),
         "nace_code": payload.get("nace_code"),
-        "osb_parsel": payload.get("osb_parsel"),
+        "osb_parcel": payload.get("osb_parsel"),
         "trade_name": row.get("trade_name"),
     })
 

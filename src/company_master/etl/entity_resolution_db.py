@@ -12,6 +12,7 @@ from typing import List, Dict, Optional
 from sqlalchemy import text
 
 from ..db.connection import get_engine
+from .kimlik_no import kimlik_dogrula
 
 
 @dataclass
@@ -69,7 +70,10 @@ def run_entity_resolution(limit: Optional[int] = None) -> ResolutionResult:
         batch = []
         for row in rows:
             src_id = row["source_record_id"]
-            vkn = row["raw_tax_number"]
+            # D-254: raw_tax_number ham degerdir (ASO'da oda uye no olabilir).
+            # D-246 kapisindan gecmeyen deger kimlik sayilmaz; vkn_exact +
+            # %100 guven yazmak yalan olur. Gecersizse isim yoluna duser.
+            vkn, _tur = kimlik_dogrula(row["raw_tax_number"])
             name = (row["raw_name"] or "").strip()
 
             if not name:

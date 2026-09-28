@@ -657,8 +657,8 @@ def metrics() -> dict:
                    SUM(CASE WHEN nace_code IS NOT NULL AND nace_code != '' THEN 1 ELSE 0 END) as with_nace,
                    SUM(CASE WHEN primary_phone IS NOT NULL AND primary_phone != '' THEN 1 ELSE 0 END) as with_phone,
                    SUM(CASE WHEN primary_email IS NOT NULL AND primary_email != '' THEN 1 ELSE 0 END) as with_email,
-                   SUM(CASE WHEN osb_parsel IS NOT NULL AND osb_parsel != '' THEN 1 ELSE 0 END) as with_parsel,
-                   SUM(CASE WHEN adres IS NOT NULL AND adres != '' THEN 1 ELSE 0 END) as with_adres
+                   SUM(CASE WHEN osb_parcel IS NOT NULL AND osb_parcel != '' THEN 1 ELSE 0 END) as with_parsel,
+                   SUM(CASE WHEN address IS NOT NULL AND address != '' THEN 1 ELSE 0 END) as with_adres
             FROM companies
             WHERE is_ankara=TRUE
         """)).mappings().first()
@@ -700,12 +700,14 @@ def api_kpi(_auth: str = Depends(require_api_key)) -> dict:
     with engine.connect() as conn:
         r = conn.execute(text("""
             SELECT COUNT(*) as total,
+                -- D-254: tek kimlik kolonu kaldi. tax/vergi/vkn_either ayni
+                -- sayiyi verir; API sozlesmesi bozulmasin diye ucu de duruyor.
                 SUM(CASE WHEN c.tax_number IS NOT NULL AND c.tax_number != '' THEN 1 ELSE 0 END) as tax,
-                SUM(CASE WHEN c.vergi_no IS NOT NULL AND c.vergi_no != '' THEN 1 ELSE 0 END) as vergi,
-                SUM(CASE WHEN COALESCE(c.tax_number, c.vergi_no) IS NOT NULL AND COALESCE(c.tax_number, c.vergi_no) != '' THEN 1 ELSE 0 END) as vkn_either,
+                SUM(CASE WHEN c.tax_number IS NOT NULL AND c.tax_number != '' THEN 1 ELSE 0 END) as vergi,
+                SUM(CASE WHEN c.tax_number IS NOT NULL AND c.tax_number != '' THEN 1 ELSE 0 END) as vkn_either,
                 SUM(CASE WHEN c.website_domain IS NOT NULL AND c.website_domain != '' THEN 1 ELSE 0 END) as web,
-                SUM(CASE WHEN c.osb_parsel IS NOT NULL AND c.osb_parsel != '' THEN 1 ELSE 0 END) as parsel,
-                SUM(CASE WHEN c.adres IS NOT NULL AND c.adres != '' THEN 1 ELSE 0 END) as adres,
+                SUM(CASE WHEN c.osb_parcel IS NOT NULL AND c.osb_parcel != '' THEN 1 ELSE 0 END) as parsel,
+                SUM(CASE WHEN c.address IS NOT NULL AND c.address != '' THEN 1 ELSE 0 END) as adres,
                 SUM(CASE WHEN c.primary_phone IS NOT NULL AND c.primary_phone != '' THEN 1 ELSE 0 END) as tel,
                 SUM(CASE WHEN c.primary_email IS NOT NULL AND c.primary_email != '' THEN 1 ELSE 0 END) as email,
                 SUM(CASE WHEN c.nace_code IS NOT NULL AND c.nace_code != '' THEN 1 ELSE 0 END) as nace,
@@ -866,8 +868,7 @@ def api_companies(
                 OR c.trade_name ILIKE :search
                 OR c.primary_phone ILIKE :search
                 OR c.primary_email ILIKE :search
-                OR c.tax_number ILIKE :search
-                OR c.vergi_no ILIKE :search)
+                OR c.tax_number ILIKE :search)
             """)
             params["search"] = f"%{search}%"
 
@@ -912,7 +913,7 @@ def api_companies(
             conn.execute(
                 text(f"""
             SELECT c.legal_name, c.trade_name, c.website_domain, c.primary_phone, c.primary_email,
-                   c.tax_number, c.vergi_no, c.osb_parsel, c.nace_code, c.data_quality_score
+                   c.tax_number, c.osb_parcel, c.nace_code, c.data_quality_score
             FROM companies c
             WHERE {where_sql}
             ORDER BY c.data_quality_score DESC
@@ -1008,8 +1009,7 @@ def api_companies_export(
                 OR c.trade_name ILIKE :search
                 OR c.primary_phone ILIKE :search
                 OR c.primary_email ILIKE :search
-                OR c.tax_number ILIKE :search
-                OR c.vergi_no ILIKE :search)
+                OR c.tax_number ILIKE :search)
             """)
             params["search"] = f"%{search}%"
 
@@ -1049,7 +1049,7 @@ def api_companies_export(
             conn.execute(
                 text(f"""
             SELECT c.legal_name, c.trade_name, c.website_domain, c.primary_phone, c.primary_email,
-                   c.tax_number, c.vergi_no, c.osb_parsel, c.nace_code, c.data_quality_score
+                   c.tax_number, c.osb_parcel, c.nace_code, c.data_quality_score
             FROM companies c
             WHERE {where_sql}
             ORDER BY c.created_at DESC
@@ -1090,7 +1090,7 @@ def api_companies_export(
                     row.get("website_domain", ""),
                     row.get("primary_phone", ""),
                     row.get("primary_email", ""),
-                    row.get("tax_number") or row.get("vergi_no", ""),
+                    row.get("tax_number") or "",
                     row.get("nace_code", ""),
                     row.get("data_quality_score", ""),
                 ]
@@ -1183,7 +1183,7 @@ def _match_puan(
 
     # 4) kanıt gücü (0-10): web 5 + email 3 + telefon 2
     kanit = (
-        (5.0 if row.get("web_sitesi") else 0.0)
+        (5.0 if row.get("website_domain") else 0.0)
         + (3.0 if row.get("primary_email") else 0.0)
         + (2.0 if row.get("primary_phone") else 0.0)
     )
@@ -1231,7 +1231,7 @@ def _profil_bonus(buyer_profil: dict | None, hedef_row: dict) -> tuple[float, li
     # 2) sertifika sinyali (0-2): buyer sertifikalarini yazmis ise
     #    kanit gucu yuksek (web+email) firmalari tercih et
     if (buyer_profil.get("certificates") or "").strip():
-        cert_sinyal = (2.0 if hedef_row.get("web_sitesi") else 0.0) + (
+        cert_sinyal = (2.0 if hedef_row.get("website_domain") else 0.0) + (
             1.0 if hedef_row.get("primary_email") else 0.0
         )
         bonus += min(cert_sinyal, 2.0)
@@ -1257,7 +1257,7 @@ def buyer_scale_uygun(buyer_profil: dict, hedef_row: dict) -> bool:
     except (TypeError, ValueError):
         kalite = 0.0
     kanit = (
-        (1 if hedef_row.get("web_sitesi") else 0)
+        (1 if hedef_row.get("website_domain") else 0)
         + (1 if hedef_row.get("primary_email") else 0)
         + (1 if hedef_row.get("primary_phone") else 0)
     )
@@ -1366,7 +1366,7 @@ def api_match(
             conn.execute(
                 text(
                     "SELECT company_id, legal_name, trade_name, nace_code, nace_name, osb_id, "
-                    "is_ankara, is_osb_member, data_quality_score, web_sitesi, primary_phone, "
+                    "is_ankara, is_osb_member, data_quality_score, primary_phone, "
                     "primary_email, website_domain "
                     "FROM companies WHERE nace_code IS NOT NULL AND is_ankara = TRUE "
                     "ORDER BY data_quality_score DESC NULLS LAST LIMIT 5000"
@@ -2110,7 +2110,7 @@ def aktivite_yaz(
             conn.execute(
                 text(
                     "INSERT INTO user_activity_log (user_id, olay_tipi, olay_zamani, detay, "
-                    "basarili, ip_adresi, ulke_kodu) "
+                    "basarili, ip_address, ulke_kodu) "
                     "VALUES (:uid, :tip, CURRENT_TIMESTAMP, :detay, :ok, :ip, :ulke)"
                 ),
                 {

@@ -76,7 +76,7 @@ def _calculate_db_quality_score(row: dict) -> float:
     nace = row.get("nace_code") or row.get("nace") or row.get("sektor_kodu") or ""
     if nace and str(nace).strip():
         score += 15
-    parsel = row.get("osb_parsel") or row.get("parsel") or ""
+    parsel = row.get("osb_parcel") or row.get("osb_parsel") or row.get("parsel") or ""
     if parsel and str(parsel).strip():
         score += 10
     trade = row.get("trade_name") or row.get("unvan") or row.get("title") or ""
@@ -153,7 +153,7 @@ class QualityGate:
         self.db_weights = db_weights if db_weights else {
             "tax_number": 15, "address": 15, "primary_phone": 15,
             "primary_email": 15, "website_domain": 10, "nace_code": 15,
-            "osb_parsel": 10, "trade_name": 5
+            "osb_parcel": 10, "trade_name": 5
         }
         self.min_score = min_score
         self.custom_rules = rules or self.DEFAULT_RULES

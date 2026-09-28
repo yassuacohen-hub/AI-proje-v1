@@ -1,5 +1,10 @@
 -- Migration 0010: Additional performance indexes for dashboard optimization
 -- Target: ILIKE search, source filtering, KPI covering
+--
+-- D-254 / 0027: vergi_no ustundeki ifade indeksi dustu. idx_companies_kpi_covering
+-- ise dusmedi: INCLUDE listesi ikiz kolonlari saydigi icin 0027 onu dusurup
+-- Ingilizce adlarla geri kuruyor, yani izi hala gecerli.
+-- dusen-iz: idx_companies_vergi_no_lower
 
 -- Expression indexes for ILIKE search (lowercased)
 CREATE INDEX IF NOT EXISTS idx_companies_tax_number_lower

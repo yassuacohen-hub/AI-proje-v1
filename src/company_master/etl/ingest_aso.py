@@ -6,6 +6,7 @@ import pandas as pd
 from pathlib import Path
 from sqlalchemy import text
 from company_master.db.connection import get_engine
+from company_master.etl.kimlik_no import kimlik_dogrula
 
 ASO_DATA_DIR = Path("data/aso")
 
@@ -32,6 +33,9 @@ def ingest_aso_data():
             continue
 
         # Sütunları companies tablosuna uyarlama
+        # D-254: ASO'nun "Vergi No" sutunu cogunlukla ODA UYE NO tasir
+        # (olcum: 761 degerden 590'i oda uye no, 7'si gecerli kimlik).
+        # Basligina bakip kimlik saymak yasak; asagida kapidan geciyor.
         column_mapping = {
             'Firma Adı': 'legal_name',
             'Ticaret Adı': 'trade_name',
@@ -40,11 +44,19 @@ def ingest_aso_data():
             'Telefon': 'phone',
             'Web': 'website_domain',
             'NACE': 'nace_code',
-            'OSB Parsel': 'osb_parsel',
+            'OSB Parsel': 'osb_parcel',
             'İletişim': 'contact_info',
         }
 
         df = df.rename(columns=column_mapping)
+
+        # D-246 kapisi: gecmeyen deger tax_number'a yazilmaz (NULL olur).
+        # Ham hali kaynak dosyada durur; kimlik defterine
+        # scripts/kimlik_ayikla.py tasir.
+        if 'tax_number' in df.columns:
+            df['tax_number'] = df['tax_number'].map(
+                lambda v: kimlik_dogrula(None if pd.isna(v) else str(v))[0]
+            )
 
         # Zorunlu alanları doldur
         df['is_ankara'] = True
@@ -56,7 +68,7 @@ def ingest_aso_data():
         # Sadece gerekli sütunları tut
         valid_columns = [
             'legal_name', 'trade_name', 'tax_number', 'address',
-            'phone', 'website_domain', 'nace_code', 'osb_parsel',
+            'phone', 'website_domain', 'nace_code', 'osb_parcel',
             'is_ankara', 'is_osb_member', 'source_name', 'source_type'
         ]
         df = df[[c for c in valid_columns if c in df.columns]]

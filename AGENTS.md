@@ -2486,3 +2486,209 @@ ayni sonucu verdi.
 
 **Referans:** D-245, D-249, D-251; is: GOC-DEFTER-01. Arac:
 `scripts/goc_defteri.py`, mandal: `tests/test_goc_defteri.py`.
+
+## D-254 — Kimlik Defteri: iddia ile kanit ayri durur
+
+**Tarih:** 2026-09-28 · **Is:** SEMA-IKIZ-01 · **Goc:** `0027_ikiz_kolonlari_birlestir.sql`
+
+### Bulgu
+
+`companies` tablosunda alti ikiz kolon vardi: `vergi_no`/`tax_number`,
+`web_sitesi`/`website_domain`, `adres`/`address`, `osb_parsel`/`osb_parcel` ve
+karsiliksiz `ip_adresi`. Duz `RENAME` her ikisinin de dolu oldugu satirlarda
+patlardi.
+
+Asil bulgu adlandirma degildi. **`vergi_no` kolonunda 761 dolu deger vardi;
+D-246 kapisindan (`kimlik_dogrula()`) gecen sadece 7 taneydi** — 5 VKN, 2 TCKN.
+Geri kalan 764 deger sicil no, MERSIS, telefon kirintisi ve bicimsiz metindi.
+Yani kolon "vergi numarasi" diye okunuyordu ama icerigi **kaynagin soyledigi
+sey**di, dogrulanmis bir kimlik degil. Sekil dogrulugu ile gercek ayni sey
+degildir; bir alanin adi onun icerigini dogrulamaz.
+
+### Kural
+
+1. **`companies.tax_number` bir iddia degil, kanittir.** Yalnizca D-246
+   kapisindan gecmis VKN yazilir. Kapiyi atlayan hicbir yol bu kolona yazamaz.
+   Sekil kurali veritabanindadir: `ck_companies_tax_number_sekil` (NULL ya da
+   tam 10 hane). Uygulama kodundaki kural, her yeni betigin unutabilecegi bir
+   kuraldir; kisit unutulmaz.
+
+2. **Dogrulanmamis her kimlik `company_identifiers` defterine gider.**
+   Tur (`identifier_type`), deger, **kaynak** (`source_id`) ve guven
+   (`confidence`) ile birlikte. Deger atilmaz — D-245: kaynagi olmayan deger
+   kabul edilemez, ama **kaynagi olan deger de silinmez**. Bugun defterde
+   771 kimlik var: 5 vkn, 2 tckn, 764 diger (sicil/mersis/bicimsiz).
+
+3. **Ikiz kolon yasaktir** (D-251/2'nin olculebilir hali). Ayni olguyu iki
+   kolon anlatiyorsa hangisinin dogru oldugunu kimse bilmez. Ikisi de dolu ve
+   **farkli** ise otomatik "biri kazanir" kurali yazilmaz; karar urun
+   sahibinindir (D-251/6).
+
+4. **Kolon adi Ingilizce, sozlesme anahtari Turkce kalir.** Satir/kolon adlari
+   D-251/1 geregi Ingilizce'dir. `raw_payload` anahtarlari, kaziyici veri
+   sinifi alanlari ve **API cikti** anahtarlari kaynagin/istemcinin
+   sozlesmesidir; oldugu gibi kalir. `_row_to_dashboard` ikisini ayni anda
+   tasir: girdi Ingilizce, cikti Turkce.
+
+5. **Mandal commit'te calisir.** `tests/test_goc_defteri.py` pre-commit
+   kancasi olarak tanimlidir (`goc-defteri`). DB'ye bagli oldugu icin
+   `always_run` degil: yalnizca `src/company_master/schema/` altina dokunan
+   commit tetikler. Semaya dokunan commit denetimsiz gecemez.
+
+   **Acik borc (MANDAL-KURULUM-01):** tanimli kanca ile *kurulu* kanca ayni
+   sey degildir. Olcum: `.git/hooks/pre-commit` YOK ve `pre_commit` modulu
+   kurulu degil; ayrica `.pre-commit-config.yaml` git kokunde degil
+   `Huginn Data Insights/` altinda. Yani bugun hicbir kanca --- eskisi de
+   dahil --- fiilen kosmuyor. Kancalar calisir hale gelene kadar mandal elle
+   kosulur: `python -X utf8 "Huginn Data Insights/tests/test_goc_defteri.py"`.
+   Betikler artik `__file__`'a gore yol kurar, her dizinden kosar.
+
+   > **D-255 duzeltmesi:** bu maddedeki ucuncu iddia (`.pre-commit-config.yaml`
+   > git kokunde degil) **yanlisti**. Vault kendi git reposudur, config tam
+   > onun kokundedir. Borc kurulumdaydi, konumda degil. Kapatildi.
+
+### Bu kararla yapilanlar
+
+- `0027_ikiz_kolonlari_birlestir.sql`: bekci blogu, kimlik defterine geri
+  yazim, normalizasyon, ikiz kolon dusurme, uretilmis kolon ve KPI indeksinin
+  yeniden kurulmasi, `ck_companies_tax_number_sekil`. Uygulandi, deftere
+  yazildi, izi dogrulandi (8 denetim, D-253).
+- `scripts/kimlik_ayikla.py` — kalici arac (`--dene` / `--yaz`). Dagilmis
+  olcum betiklerinin yerini alir.
+- 9 tuketici modul gocuruldu; `tax_number` yazan 3 yol D-246 kapisina baglandi;
+  `entity_resolution`'daki `vkn_exact` hatasi kapatildi.
+- Eski goclere `ustunden-gecen:` / `dusen-iz:` isaretleri kondu (D-253/2).
+- `BILINEN_DIL_BORCU` **bos**: bes Turkce kolon adinin besi de kapandi.
+
+### Olcum (2026-09-28)
+
+| Olcu | Deger |
+|---|---|
+| firma | 9412 |
+| `tax_number` dolu (kapidan gecmis) | 5 |
+| `company_identifiers` | 771 (5 vkn / 2 tckn / 764 diger) |
+| `address` / `website_domain` / `osb_parcel` dolu | 5798 / 5446 / 19 |
+| kalan ikiz kolon | **0** |
+| goc dosyasi = defter kaydi | 27 = 27 |
+
+**Referans:** D-245, D-246, D-249, D-250, D-251, D-253. Arac:
+`scripts/kimlik_ayikla.py`, `scripts/goc_defteri.py`; mandal:
+`tests/test_goc_defteri.py` (pre-commit `goc-defteri`).
+
+---
+
+## D-255 — Kanca fiilen kuruldu; yarim kalan 0024 tamamlandi (2026-09-28)
+
+**Baglam:** iki borc ayni turda kapatildi --- MANDAL-KURULUM-01 (D-254/5) ve
+GOC-0024-YARIM-01 (D-249'un eksik uygulanmasi).
+
+### 1. Depo cogul: **iki ayri git reposu var**
+
+`c:/Huginn Data Projesi` ve `c:/Huginn Data Projesi/Huginn Data Insights`
+**ayri** git repolaridir (`git rev-parse --show-toplevel` ile olculdu). Vault
+kendi reposudur ve `.pre-commit-config.yaml` **tam onun kokundedir**.
+
+D-254/5'teki "config git kokunde degil" iddiasi yanlisti. Sorun konum degil,
+**kurulum** idi: `.git/hooks/pre-commit` dosyasi hic yoktu.
+
+**Kural:** kanca, betik veya yol tartisan her olcum once `git rev-parse
+--show-toplevel` ile hangi repoda oldugunu soyler. Bu vault'ta "git koku"
+tek basina anlamsiz bir ifadedir.
+
+### 2. Kanca framework'suz kuruldu (ucuz ruhsat)
+
+`pre_commit` modulu kurulu degil, ag erisimi yok, yeni bagimlilik eklenmedi.
+`.pre-commit-config.yaml` icindeki iki **local** mandali dogrudan kosan duz
+`sh` betigi yazildi: `Huginn Data Insights/.git/hooks/pre-commit`.
+
+- `kodlama_denetim.py --kapsam git` --- her commit (config: `always_run`)
+- `tests/test_goc_defteri.py` --- yalnizca sema/goc dosyasina dokunan commit
+  (config: `files:` deseni `grep -qE` ile birebir tekrarlandi)
+
+Uzak mandallar (bandit, safety) bu betikte **yok**. `pre-commit` ileride
+kurulursa `pre-commit install` bu dosyayi devralir ve hepsini kosar.
+
+### 3. "Kurdum" demek kanit degildir
+
+Kanca bilerek kirilarak sinandi. **Ilk deneme yanlis negatif verdi:** BOM'lu
+dosya vault **kokune** kondu, kanca kostu ama "temiz" dedi ve commit gecti ---
+kok dizin `KAPSAM_DIZINLERI` disinda. Ayni dosya `scripts/` altina konunca:
+
+```
+ALLOWLIST DISI IHLAL (1): utf8_bom: scripts/_kanca_kanit.py
+```
+
+ve commit **olusmadi** (`git log -1` ayni commit'te kaldi). Deneme geri alindi.
+
+**Kural:** bir mandalin kuruldugunu iddia eden her karar, mandalin *gercekten
+durdurdugunu* gosteren bir kirma denemesi tasir. Denemenin **kapsam icinde**
+bir dosyayla yapildigi ayrica dogrulanir; kapsam disi bir dosyanin gecmesi
+"kanca calismiyor" demek degildir.
+
+**Sure (kacis cazibesi olcusu):** `kodlama_denetim` 0.28 sn, `test_goc_defteri`
+3.88 sn. Yavas kanca `--no-verify` ile atlanir, yani yine olur. Kanca toplami
+saniyeler mertebesini asarsa bolunur, gevsetilmez.
+
+### 4. 0024 neden yarim kaldi: **olcumun kapsami kararin kapsamini belirledi**
+
+D-249 dokuz skor kolonunun hepsi icin gecerliydi. `0024` dosyasi yalnizca
+**bes** kolon yazmis; kalan dort kolon dosyaya **hic girmemis** --- yani
+"uygulanmadi" degil, **eksik yazildi**.
+
+Sebep dosyanin kendi yorumunda duruyor: kanit listesi "farkli deger sayisi = 1"
+olan kolonlardan olusuyordu. Dort kolon coklu deger tasidigi icin o listeye
+girmedi ve goc onlari hic gormedi.
+
+**Kural:** bir kararin kapsami *karardan* okunur, onu destekleyen olcumun
+filtresinden degil. Goc yazarken "karar kac nesneyi kapsiyor" ile "olcum kac
+nesne dondurdu" ayri ayri sayilir; esit degilse fark gerekcelendirilir.
+
+### 5. `0028_skor_varsayilan_kalan_dort.sql`
+
+Dort kolonun `DEFAULT 0`'i dusuruldu ve sahte 0'lar toplu `UPDATE` ile NULL'a
+cekildi (D-249/6). **Sahte 0 = besleyen girdi NULL.** Girdi dolu ama sinyal yok
+ise 0 **gercek olcumdur, dokunulmadi** (D-245).
+
+| kolon | sahte 0 -> NULL | korunan gercek 0 | korunan >0 |
+|---|---|---|---|
+| `data_freshness_score` | 707 | 0 | 8705 |
+| `email_validity_score` | 5364 | 91 | 3957 |
+| `phone_format_score` | 1161 | 303 | 7948 |
+| `social_media_score` | 908 | 3488 | 5016 |
+| **toplam** | **8140** | 3882 | --- |
+
+Uygulandi, deftere yazildi, semadaki izi dogrulandi (D-253/1). Dort kolonun
+`column_default` degeri artik `None`.
+
+### 6. Gocun tek basina yetmedigi yer: hesaplayici da yalan soyluyordu
+
+`quality_metrics.py` icindeki dort hesaplayici, girdi yokken `0` donuyordu.
+Goc NULL'a cekse bile **bir sonraki `run_all_metrics_update()` turunda 8140
+sahte 0 geri gelirdi.** Dordu de `int | None` dondurecek sekilde duzeltildi.
+
+**Kural:** bir varsayilani sema tarafinda dusurmek, o degeri **ureten** kodu
+duzeltmeden yarim istir. Her `DROP DEFAULT` gocu, ayni kolona yazan uygulama
+yolunu da ayni turda arar.
+
+### 7. Acik borc notu
+
+- **BORC-QUALITY-BETIK-01:** `scripts/recalc_quality_scores.py` bu dort kolonu
+  yalnizca `COALESCE(..., 0)` ile **okuyor**, uzerine yazmiyor --- gocu geri
+  almiyor. Bu turda dokunulmadi, risk yok.
+- **BORC-SCRIPTS-01:** bu turun gecici betikleri silindi. `scripts/` altinda
+  onceki oturumlardan kalma 30+ `_tmp_*` / `_olcum_*` dosyasi duruyor.
+
+### Olcum (2026-09-28, gocten sonra)
+
+| Olcu | Deger |
+|---|---|
+| firma | 9412 |
+| `DEFAULT 0` tasiyan skor kolonu | **0** (9'un 9'u temiz) |
+| NULL'a cekilen sahte 0 | 8140 |
+| goc dosyasi = defter kaydi | **28 = 28** |
+| kurulu pre-commit kancasi | 1 (kanit: commit durduruldu) |
+| kanca suresi | 0.28 sn + 3.88 sn |
+
+**Referans:** D-245, D-249, D-251, D-253, D-254. Arac:
+`.git/hooks/pre-commit`, `scripts/kodlama_denetim.py`, `scripts/goc_defteri.py`;
+mandal: `tests/test_goc_defteri.py`.

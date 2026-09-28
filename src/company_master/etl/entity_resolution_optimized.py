@@ -11,6 +11,7 @@ from rapidfuzz import fuzz
 from sqlalchemy import text
 
 from ..db.connection import get_engine
+from .kimlik_no import kimlik_dogrula
 
 
 @dataclass
@@ -57,7 +58,8 @@ def run_entity_resolution(limit: Optional[int] = None, threshold: float = 0.80) 
         batch = []
         for row in rows:
             src_id = row["source_record_id"]
-            vkn = row["raw_tax_number"]
+            # D-254: ham deger kimlik degildir; D-246 kapisindan gecirilir.
+            vkn, _tur = kimlik_dogrula(row["raw_tax_number"])
             name = (row["raw_name"] or "").strip()
 
             if not name:

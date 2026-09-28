@@ -33,6 +33,7 @@ try:
     import requests
     from sqlalchemy import text
     from company_master.db.connection import get_engine
+    from company_master.etl.kimlik_no import kimlik_dogrula
 except ImportError as e:
     print(f"Bagimlilik hatasi: {e}")
     sys.exit(1)
@@ -46,14 +47,14 @@ CIKTI = ROOT / "data" / "orchestrator" / "vkn_enrich_result.jsonl"
 
 
 def vkn_gecerli_mi(v: str) -> bool:
-    if len(v) != 10 or not v.isdigit():
-        return False
-    d = [int(c) for c in v]
-    toplam = 0
-    for i in range(9):
-        t = (d[i] + 10 - (i + 1)) % 10
-        toplam += (t * (2 ** (9 - i))) % 9
-    return (10 - (toplam % 10)) % 10 == d[9]
+    """D-254: kopya algoritma yerine tek kapi (D-246, kimlik_no.py).
+
+    Eski surum burada kendi VKN algoritmasini tasiyordu; kapi
+    degisince bu betik sessizce eski kurala gore yazmaya devam
+    ederdi. Tek kaynak: kimlik_dogrula().
+    """
+    deger, tur = kimlik_dogrula(v)
+    return tur == "vkn" and deger is not None
 
 
 def vkn_metinden_cikar(metin: str) -> List[str]:
@@ -204,7 +205,6 @@ def main() -> None:
                     conn.execute(text("""
                         UPDATE companies
                         SET tax_number = COALESCE(:vkn, tax_number),
-                            vergi_no = COALESCE(:vkn, vergi_no),
                             updated_at = :upd
                         WHERE company_id = :cid
                           AND (tax_number IS NULL OR tax_number = '')

@@ -7,10 +7,12 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from company_master.etl import normalize  # noqa: E402
 from company_master.etl.quality_recalc import kalite_puani  # noqa: E402
 
+# D-251/1: satir anahtarlari kolon adidir, Ingilizce. raw_payload anahtarlari
+# (asagida) kaynagin sozlesmesidir, Turkce kalir.
 TAM = {
-    "tax_number": "1234567890", "adres": "Ostim Mah. 1. Cadde No:1",
+    "tax_number": "1234567890", "address": "Ostim Mah. 1. Cadde No:1",
     "primary_phone": "03123120000", "primary_email": "a@b.com",
-    "website_domain": "b.com", "nace_code": "25.11", "osb_parsel": "12/3",
+    "website_domain": "b.com", "nace_code": "25.11", "osb_parcel": "12/3",
     "trade_name": "ORNEK A.S.",
 }
 
@@ -31,7 +33,7 @@ def test_agirliklar_toplami_100():
 
 
 def test_bos_dize_dolu_sayilmaz():
-    assert kalite_puani({"adres": "   ", "trade_name": ""}) == 0.0
+    assert kalite_puani({"address": "   ", "trade_name": ""}) == 0.0
 
 
 def test_tek_kapi_normalize_ayni_puani_verir():
@@ -41,8 +43,8 @@ def test_tek_kapi_normalize_ayni_puani_verir():
         "raw_tax_number": TAM["tax_number"], "raw_phone": TAM["primary_phone"],
         "raw_email": TAM["primary_email"], "raw_website": TAM["website_domain"],
         "trade_name": TAM["trade_name"],
-        "raw_payload": {"adres": TAM["adres"], "nace_code": TAM["nace_code"],
-                        "osb_parsel": TAM["osb_parsel"]},
+        "raw_payload": {"adres": TAM["address"], "nace_code": TAM["nace_code"],
+                        "osb_parsel": TAM["osb_parcel"]},
     }
     assert normalize._data_quality_score(kaynak) == 100.0
 

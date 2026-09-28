@@ -101,7 +101,7 @@ def test_data_quality_score_website_domain_only():
         "raw_payload": {"adres": "Ankara"},
     }
     skor = _data_quality_score(row)
-    assert skor == 55.0
+    assert skor == 40.0  # D-250: web 10 + VKN 15 + adres 15
 
 def test_data_quality_score_all_critical_filled():
     row = {
@@ -109,6 +109,7 @@ def test_data_quality_score_all_critical_filled():
         "raw_email": "info@firma.com",
         "raw_website": "firma.com",
         "raw_tax_number": "1234567890",
+        "trade_name": "FIRMA",  # D-250: tabela ismi de 5 puan
         "raw_payload": {
             "adres": "Ankara",
             "sektor": "Imalat",

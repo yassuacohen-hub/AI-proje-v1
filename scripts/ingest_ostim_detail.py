@@ -9,6 +9,7 @@ from sqlalchemy import text
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from company_master.db.connection import get_engine
+from company_master.etl.kimlik_no import kimlik_dogrula
 
 DETAY_PATH = ROOT / "data" / "ostim" / "firmalar_detayli.jsonl"
 LOG_PATH = ROOT / "logs" / "ingest_ostim_detail.log"
@@ -46,9 +47,16 @@ def normalize_website(v):
     return s
 
 def extract_vkn(unvan):
+    """Unvandaki 11 haneli sayiyi D-246 kapisindan gecirir.
+
+    D-254: sekil esitligi kimlik degildir. Kapiyi gecmeyen deger
+    companies.tax_number'a yazilmaz; ham hali raw_payload'da kalir.
+    """
     if not unvan: return None
     m = VKN_PATTERN.search(unvan)
-    return m.group(1) if m else None
+    if not m: return None
+    deger, _tur = kimlik_dogrula(m.group(1))
+    return deger
 
 def is_parsel_payload(v):
     if not v: return False
@@ -92,7 +100,7 @@ def main():
                 stats["matched"] += 1
                 company_id, source_record_id = row[0], row[1]
                 conn.execute(
-                    text("UPDATE companies SET website_domain = COALESCE(:web, website_domain), primary_phone = COALESCE(:phone, primary_phone), primary_email = COALESCE(:email, primary_email), tax_number = COALESCE(:vkn, tax_number), vergi_no = COALESCE(:vkn, vergi_no), web_sitesi = COALESCE(:web, web_sitesi), osb_parsel = COALESCE(:parsel, osb_parsel) WHERE company_id = :cid"),
+                    text("UPDATE companies SET website_domain = COALESCE(:web, website_domain), primary_phone = COALESCE(:phone, primary_phone), primary_email = COALESCE(:email, primary_email), tax_number = COALESCE(:vkn, tax_number), osb_parcel = COALESCE(:parsel, osb_parcel) WHERE company_id = :cid"),
                     {"web": web, "phone": (rec.get("telefonler") or [None])[0], "email": (rec.get("emailler") or [None])[0], "vkn": vkn, "parsel": parsel, "cid": company_id})
                 conn.execute(
                     text("UPDATE source_records SET raw_payload = raw_payload || (:payload)::jsonb, raw_website = COALESCE(:web, raw_website), raw_tax_number = COALESCE(:vkn, raw_tax_number) WHERE source_record_id = :sid"),

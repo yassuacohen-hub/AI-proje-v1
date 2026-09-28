@@ -11,9 +11,10 @@ from sqlalchemy import text
 from company_master.db.connection import get_engine
 
 
-def calculate_data_freshness_score(last_verified_at: Any) -> int:
+def calculate_data_freshness_score(last_verified_at: Any) -> int | None:
+    """D-249: hic dogrulanmamissa NULL. 0 = 'dogrulandi ama bir yildan bayat'."""
     if not last_verified_at:
-        return 0
+        return None
     if isinstance(last_verified_at, str):
         try:
             last_verified_at = datetime.fromisoformat(last_verified_at.replace("Z", "+00:00"))
@@ -32,9 +33,10 @@ def calculate_data_freshness_score(last_verified_at: Any) -> int:
         return 0
 
 
-def calculate_phone_format_score(phone: str | None) -> int:
+def calculate_phone_format_score(phone: str | None) -> int | None:
+    """D-249: telefon yoksa NULL. 0 = 'telefon var ama bicimi taninmadi'."""
     if not phone:
-        return 0
+        return None
     digits = re.sub(r"\D", "", phone)
     if re.match(r"^\+?90\d{10}$", phone.replace(" ", "").replace("-", "")):
         return 2
@@ -47,9 +49,10 @@ def calculate_phone_format_score(phone: str | None) -> int:
     return 0
 
 
-def calculate_social_media_score(social_media: dict | None) -> int:
+def calculate_social_media_score(social_media: dict | None) -> int | None:
+    """D-249: sosyal medya alani hic yoksa NULL. 0 = 'alan var, gecerli URL yok'."""
     if not social_media or not isinstance(social_media, dict):
-        return 0
+        return None
     valid_platforms = 0
     for platform, url in social_media.items():
         if url and isinstance(url, str) and url.startswith(("http://", "https://")):
@@ -116,9 +119,10 @@ def calculate_employee_count_score(employee_count: int | None) -> int | None:
         return 7
 
 
-def calculate_email_validity_score(email: str | None) -> int:
+def calculate_email_validity_score(email: str | None) -> int | None:
+    """D-249: e-posta yoksa NULL. 0 = 'e-posta var ama gecersiz'."""
     if not email:
-        return 0
+        return None
     if re.match(r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$", email):
         return 2
     return 0

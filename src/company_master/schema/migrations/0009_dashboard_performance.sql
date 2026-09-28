@@ -1,5 +1,11 @@
 -- Migration 0009: Dashboard slow query indexes
 -- Target: app.py KPI, web_app.py /api/metrics, /api/companies, /api/companies/export
+--
+-- D-254 / 0027: iki indeks ikiz kolonlara bagliydi, kolonlarla birlikte
+-- dustu. Dosyanin geri kalan 6 indeksi hala gecerli; bu yuzden dosya bazli
+-- "ustunden-gecen" degil, iz bazli isaret kullaniliyor.
+-- dusen-iz: idx_companies_vergi_no
+-- dusen-iz: idx_companies_web_sitesi
 
 -- Composite index for KPI + filtered lists (is_ankara + is_osb_member + score)
 CREATE INDEX IF NOT EXISTS idx_companies_ankara_osb_score

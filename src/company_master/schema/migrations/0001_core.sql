@@ -3,6 +3,14 @@
 -- Kaynak: V10/00_ana_belgeler/01_sirket_master_ana_belgesi.md §3.1, §3.5, §3.12, §3.13
 -- Not: Karar 6 (2026-09-01) ile companies'e eklenen web_sitesi/vergi_no/osb_parsel
 -- sütunları taze kurulumda doğrudan tablo tanımına dahil edilmiştir.
+--
+-- D-254 / 0027_ikiz_kolonlari_birlestir.sql: bu üç sütun ikizdi (D-251/2).
+-- vergi_no + web_sitesi düşürüldü, osb_parsel -> osb_parcel oldu. Dosyanın
+-- geri kalan izleri hâlâ geçerli; bu yüzden dosya bazlı "ustunden-gecen"
+-- değil, iz bazlı işaret kullanılıyor.
+-- dusen-iz: companies.vergi_no
+-- dusen-iz: companies.web_sitesi
+-- dusen-iz: companies.osb_parsel
 
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";  -- gen_random_uuid()
 CREATE EXTENSION IF NOT EXISTS "pg_trgm";   -- unvan benzerlik araması (trigram)

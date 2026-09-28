@@ -22,3 +22,15 @@ repos:
         pass_filenames: false
         always_run: true
         stages: [pre-commit]
+
+      # MANDAL-CI-01 (D-253): goc dosyasi = defter kaydi ve kolon adlari Ingilizce
+      # (D-251/1). Mandal DB'ye baglanir; bu yuzden always_run DEGIL --- yalnizca
+      # sema/goc dosyasina dokunan commit tetikler. DB'siz ortamda sirali commit
+      # engellenmez, semaya dokunan commit ise denetimsiz gecemez.
+      - id: goc-defteri
+        name: goc defteri mandali (dosya=kayit, kolon adi Ingilizce)
+        entry: python -X utf8 tests/test_goc_defteri.py
+        language: system
+        pass_filenames: false
+        files: ^(src/company_master/schema/|tests/test_goc_defteri\.py$|scripts/goc_defteri\.py$)
+        stages: [pre-commit]

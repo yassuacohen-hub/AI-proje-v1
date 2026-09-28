@@ -22,12 +22,12 @@ def kalite_puani(row: dict) -> float:
     "kotu firma" diye yansitir (D-249 ihlali).
     """
     score = 0.0
-    # VKN (tax_number veya vergi_no) - 15 puan
-    vkn = row.get("tax_number") or row.get("vergi_no") or ""
+    # VKN (dogrulanmis; D-254: kaynak kimlik defteri) - 15 puan
+    vkn = row.get("tax_number") or ""
     if vkn and vkn.strip():
         score += 15
     # Adres - 15 puan
-    adres = row.get("adres") or ""
+    adres = row.get("address") or ""
     if adres and adres.strip():
         score += 15
     # Telefon - 15 puan
@@ -39,7 +39,7 @@ def kalite_puani(row: dict) -> float:
     if email and email.strip():
         score += 15
     # Web sitesi - 10 puan
-    web = row.get("website_domain") or row.get("web_sitesi") or ""
+    web = row.get("website_domain") or ""
     if web and web.strip():
         score += 10
     # NACE kodu - 15 puan
@@ -47,7 +47,7 @@ def kalite_puani(row: dict) -> float:
     if nace and nace.strip():
         score += 15
     # OSB parsel - 10 puan
-    parsel = row.get("osb_parsel") or ""
+    parsel = row.get("osb_parcel") or ""
     if parsel and parsel.strip():
         score += 10
     # Ticaret unvani - 5 puan
@@ -69,9 +69,9 @@ def recalc_quality_scores() -> int:
     engine = get_engine()
     with engine.connect() as conn:
         rows = conn.execute(text("""
-            SELECT company_id, legal_name, trade_name, tax_number, vergi_no,
-                   adres, primary_phone, primary_email, website_domain, web_sitesi,
-                   nace_code, osb_parsel
+            SELECT company_id, legal_name, trade_name, tax_number,
+                   address, primary_phone, primary_email, website_domain,
+                   nace_code, osb_parcel
             FROM companies
         """)).mappings().all()
 

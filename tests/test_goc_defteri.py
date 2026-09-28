@@ -45,15 +45,10 @@ def test_defter_semayla_uyusuyor():
     return len(izler)
 
 
-# D-251/1 kapsamindaki bilinen borc. SEMA-IKIZ-01 ve IP-ADRESI isleriyle
-# kapatilacak. Mandalin isi bu listeyi KUCULTMEK degil, BUYUMESINI engellemek.
-BILINEN_DIL_BORCU = {
-    "adres",        # -> address      (SEMA-IKIZ-01, 5797 dolu)
-    "osb_parsel",   # -> osb_parcel   (SEMA-IKIZ-01)
-    "vergi_no",     # -> tax_number   (SEMA-IKIZ-01, 761 dolu, ikiz)
-    "web_sitesi",   # -> website_domain (SEMA-IKIZ-01, 5049 dolu, ikiz)
-    "ip_adresi",    # -> ip_address   (GOC-DEFTER-01 olcumunde bulundu)
-}
+# D-251/1 kapsamindaki bilinen borc. SEMA-IKIZ-01 (goc 0027) ile besinin
+# besi de kapandi; liste BOS. Mandalin isi bu listeyi KUCULTMEK degil,
+# BUYUMESINI engellemek. Buraya yeni ad eklemek bilincli bir borc kaydidir.
+BILINEN_DIL_BORCU: set[str] = set()
 
 # Kolon adi "_" ile parcalanir, her parca bu koklerle karsilastirilir.
 # Parca bazli olmasinin sebebi: govde icinde arama yanlis alarm uretir

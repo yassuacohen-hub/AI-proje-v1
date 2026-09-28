@@ -5,6 +5,10 @@
 --       ulke_kodu suresiz. KK-11 (2A): son kullanici olaylari burada, admin eylemleri admin_audit'te.
 -- Yalnizca sema acar; veri yazmaz (yazma isi API-ADMIN-AKTIVITE-YAZ-14).
 -- Geri alma: down/0017_user_activity_log.sql
+--
+-- D-254 / 0027: ip_adresi -> ip_address oldu (D-251/1; audit_logs.ip_address emsali).
+-- Tablonun diger izleri gecerli, dosya bazli isaret kullanilmiyor.
+-- dusen-iz: user_activity_log.ip_adresi
 CREATE TABLE IF NOT EXISTS user_activity_log (
   id          BIGSERIAL PRIMARY KEY,
   user_id     UUID NOT NULL REFERENCES users(user_id) ON DELETE CASCADE,

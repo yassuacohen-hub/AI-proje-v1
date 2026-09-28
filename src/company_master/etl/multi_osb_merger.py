@@ -59,7 +59,7 @@ def merge_to_database(df: pd.DataFrame):
             "phone": stmt.excluded.phone,
             "website_domain": stmt.excluded.website_domain,
             "nace_code": stmt.excluded.nace_code,
-            "osb_parsel": stmt.excluded.osb_parsel,
+            "osb_parcel": stmt.excluded.osb_parcel,
             "is_osb_member": True,
             "updated_at": "NOW()",
         }

@@ -36,9 +36,7 @@ class CompanyRecord:
     quarantine_reason: Optional[str]
     data_quality_score: Optional[float]
     entity_confidence: Optional[float]
-    web_sitesi: Optional[str]
-    vergi_no: Optional[str]
-    osb_parsel: Optional[str]
+    osb_parcel: Optional[str]
     first_seen_at: Optional[str]
     last_verified_at: Optional[str]
     created_at: Optional[str]
@@ -53,7 +51,7 @@ class CompanyRecord:
             "website_domain", "primary_phone", "primary_email", "description",
             "is_ankara", "is_osb_member", "osb_id", "nace_validity",
             "quarantine_reason", "data_quality_score", "entity_confidence",
-            "web_sitesi", "vergi_no", "osb_parsel", "first_seen_at",
+            "osb_parcel", "first_seen_at",
             "last_verified_at", "created_at", "updated_at"
         ]:
             val = getattr(self, field)
@@ -62,15 +60,15 @@ class CompanyRecord:
         return count
 
     def has_tax_number(self) -> bool:
-        """Vergi numarası var mı?"""
-        return bool(self.tax_number and self.tax_number.strip()) or bool(self.vergi_no and self.vergi_no.strip())
+        """Doğrulanmış VKN var mı? (D-254: tek kaynak `tax_number`)"""
+        return bool(self.tax_number and self.tax_number.strip())
 
 
 def select_keeper(records: list[CompanyRecord]) -> CompanyRecord:
     """Aynı legal_name grubunda hangi kaydın kalacağını seçer.
 
     Sıralama:
-    1. vergi_no/tax_number dolu olan
+    1. tax_number dolu olan
     2. En çok alanı dolu olan
     3. En küçük company_id
     """
@@ -92,7 +90,7 @@ def merge_records(keeper: CompanyRecord, duplicates: list[CompanyRecord]) -> Com
             "website_domain", "primary_phone", "primary_email", "description",
             "is_ankara", "is_osb_member", "osb_id", "nace_validity",
             "quarantine_reason", "data_quality_score", "entity_confidence",
-            "web_sitesi", "vergi_no", "osb_parsel", "first_seen_at",
+            "osb_parcel", "first_seen_at",
             "last_verified_at", "created_at", "updated_at"
         ]:
             keeper_val = getattr(keeper, field)
@@ -110,7 +108,7 @@ def get_companies_by_legal_name(engine) -> dict[str, list[CompanyRecord]]:
                employee_count, website_domain, primary_phone, primary_email,
                description, is_ankara, is_osb_member, osb_id, nace_validity,
                quarantine_reason, data_quality_score, entity_confidence,
-               web_sitesi, vergi_no, osb_parsel, first_seen_at, last_verified_at,
+               osb_parcel, first_seen_at, last_verified_at,
                created_at, updated_at
         FROM companies
         ORDER BY legal_name, company_id
@@ -143,9 +141,7 @@ def get_companies_by_legal_name(engine) -> dict[str, list[CompanyRecord]]:
             quarantine_reason=row.quarantine_reason,
             data_quality_score=float(row.data_quality_score) if row.data_quality_score else None,
             entity_confidence=float(row.entity_confidence) if row.entity_confidence else None,
-            web_sitesi=row.web_sitesi,
-            vergi_no=row.vergi_no,
-            osb_parsel=row.osb_parsel,
+            osb_parcel=row.osb_parcel,
             first_seen_at=str(row.first_seen_at) if row.first_seen_at else None,
             last_verified_at=str(row.last_verified_at) if row.last_verified_at else None,
             created_at=str(row.created_at) if row.created_at else None,
@@ -289,9 +285,7 @@ def backup_to_jsonl(backup_path: Path, records: list[CompanyRecord], related: di
                     "quarantine_reason": record.quarantine_reason,
                     "data_quality_score": record.data_quality_score,
                     "entity_confidence": record.entity_confidence,
-                    "web_sitesi": record.web_sitesi,
-                    "vergi_no": record.vergi_no,
-                    "osb_parsel": record.osb_parsel,
+                    "osb_parcel": record.osb_parcel,
                     "first_seen_at": record.first_seen_at,
                     "last_verified_at": record.last_verified_at,
                     "created_at": record.created_at,
@@ -337,9 +331,9 @@ def run_cleanup(dry_run: bool = False, backup_path: Path | None = None) -> dict:
         duplicates = [r for r in records if r.company_id != keeper.company_id]
 
         print(f"\n{legal_name}:")
-        print(f"  Kalacak: {keeper.company_id} (vergi_no: {keeper.has_tax_number()}, alan: {keeper.filled_field_count()})")
+        print(f"  Kalacak: {keeper.company_id} (vkn: {keeper.has_tax_number()}, alan: {keeper.filled_field_count()})")
         for dup in duplicates:
-            print(f"  Silinecek: {dup.company_id} (vergi_no: {dup.has_tax_number()}, alan: {dup.filled_field_count()})")
+            print(f"  Silinecek: {dup.company_id} (vkn: {dup.has_tax_number()}, alan: {dup.filled_field_count()})")
 
         # Alanları birleştir
         merge_records(keeper, duplicates)
@@ -350,6 +344,8 @@ def run_cleanup(dry_run: bool = False, backup_path: Path | None = None) -> dict:
                 UPDATE companies SET
                     trade_name = COALESCE(NULLIF(:trade_name, ''), trade_name),
                     company_type = COALESCE(NULLIF(:company_type, ''), company_type),
+                    -- D-254: buradaki tax_number yeni kimlik uretmez; zaten
+                    -- defterle arindirilmis bir kopyadan devralinir.
                     tax_number = COALESCE(NULLIF(:tax_number, ''), tax_number),
                     mersis_number = COALESCE(NULLIF(:mersis_number, ''), mersis_number),
                     establishment_date = COALESCE(:establishment_date, establishment_date),
@@ -367,9 +363,7 @@ def run_cleanup(dry_run: bool = False, backup_path: Path | None = None) -> dict:
                     quarantine_reason = COALESCE(NULLIF(:quarantine_reason, ''), quarantine_reason),
                     data_quality_score = COALESCE(:data_quality_score, data_quality_score),
                     entity_confidence = COALESCE(:entity_confidence, entity_confidence),
-                    web_sitesi = COALESCE(NULLIF(:web_sitesi, ''), web_sitesi),
-                    vergi_no = COALESCE(NULLIF(:vergi_no, ''), vergi_no),
-                    osb_parsel = COALESCE(NULLIF(:osb_parsel, ''), osb_parsel),
+                    osb_parcel = COALESCE(NULLIF(:osb_parcel, ''), osb_parcel),
                     first_seen_at = COALESCE(:first_seen_at, first_seen_at),
                     last_verified_at = COALESCE(:last_verified_at, last_verified_at),
                     updated_at = NOW()
@@ -386,8 +380,8 @@ def run_cleanup(dry_run: bool = False, backup_path: Path | None = None) -> dict:
                     "is_ankara": keeper.is_ankara, "is_osb_member": keeper.is_osb_member,
                     "osb_id": keeper.osb_id, "nace_validity": keeper.nace_validity,
                     "quarantine_reason": keeper.quarantine_reason, "data_quality_score": keeper.data_quality_score,
-                    "entity_confidence": keeper.entity_confidence, "web_sitesi": keeper.web_sitesi,
-                    "vergi_no": keeper.vergi_no, "osb_parsel": keeper.osb_parsel,
+                    "entity_confidence": keeper.entity_confidence,
+                    "osb_parcel": keeper.osb_parcel,
                     "first_seen_at": keeper.first_seen_at, "last_verified_at": keeper.last_verified_at,
                     "company_id": keeper.company_id
                 })

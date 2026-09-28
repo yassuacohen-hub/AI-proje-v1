@@ -64,7 +64,7 @@ def test_aktivite_yaz_basarili():
         assert "olay_tipi" in sql_text
         assert "detay" in sql_text
         assert "basarili" in sql_text
-        assert "ip_adresi" in sql_text
+        assert "ip_address" in sql_text  # D-254/0027: ip_adresi -> ip_address
 
         params = get_params(call_args)
         assert params["uid"] == "test-user"

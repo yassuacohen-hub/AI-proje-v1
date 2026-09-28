@@ -18,13 +18,17 @@ import re
 import sys
 from pathlib import Path
 
-sys.path.insert(0, "src")
+# D-254: yol calisma dizinine degil dosyanin yerine baglidir. Mandal
+# pre-commit'te git kokunden kosar; "src" goreli yolu orada bos cikardi
+# ve defter TUM goclere "hayalet" derdi.
+KOK = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(KOK / "src"))
 
 from sqlalchemy import text  # noqa: E402
 
 from company_master.db.connection import get_engine  # noqa: E402
 
-GOC_DIZINI = Path("src/company_master/schema/migrations")
+GOC_DIZINI = KOK / "src/company_master/schema/migrations"
 
 RE_TABLO = re.compile(r"CREATE\s+TABLE\s+(?:IF\s+NOT\s+EXISTS\s+)?([\w.]+)", re.I)
 RE_KOLON = re.compile(
@@ -44,6 +48,12 @@ RE_DEFAULT_DUSUR = re.compile(r"ALTER\s+COLUMN\s+([\w]+)\s+DROP\s+DEFAULT", re.I
 # Sonraki bir goc bu gocun izini degistirdiyse (RENAME/DROP) burada bildirilir.
 # D-245: "iz yok" demek yetmez, neden yok yazili olmali.
 RE_USTUNDEN = re.compile(r"ustunden-gecen:\s*([\w.]+)", re.I)
+# D-254: dosyanin TAMAMI degil, TEK izi eskidiginde kullanilir. 0001_core
+# gibi hala gecerli 20 iz tasiyan bir goce "ustunden-gecen" yazmak defteri
+# kor ederdi; burada yalniz adi gecen iz aranmaz.
+#     -- dusen-iz: companies.vergi_no       (kolon)
+#     -- dusen-iz: idx_companies_adres      (indeks)
+RE_DUSEN_IZ = re.compile(r"dusen-iz:\s*([\w.]+)", re.I)
 
 
 def _sqlsiz(metin: str) -> str:
@@ -73,6 +83,7 @@ def goc_izleri() -> dict[str, dict[str, set]]:
             "indeks": {i.lower() for i in RE_INDEKS.findall(s)},
             "varsayilansiz": varsayilansiz,
             "ustunden": ustunden.group(1) if ustunden else None,
+            "dusen": {d.lower() for d in RE_DUSEN_IZ.findall(ham)},
         }
     return izler
 
@@ -134,6 +145,10 @@ def degerlendir(izler, sema):
         toplam = 0
         for tur in ("tablo", "kolon", "indeks", "varsayilansiz"):
             for x in sorted(iz[tur], key=str):
+                # "dusen-iz" ile bildirilen iz aranmaz; geri kalani aranir.
+                ad = ".".join(x) if isinstance(x, tuple) else x
+                if ad in iz["dusen"]:
+                    continue
                 toplam += 1
                 if x not in sema[tur]:
                     eksik.append(f"{tur}:{x}")

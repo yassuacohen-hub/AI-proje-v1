@@ -44,9 +44,10 @@ def _row_to_dashboard(row: Dict[str, Any]) -> Dict[str, Any]:
         payload = {}
     phones = _as_list(payload.get("telefonler")) or _as_list(row.get("raw_phone")) or _as_list(row.get("primary_phone"))
     emails = _as_list(payload.get("emailler")) or _as_list(row.get("raw_email")) or _as_list(row.get("primary_email"))
+    # Not: sozluk anahtarlari (web_sitesi/vergi_no/osb_parsel) API sozlesmesidir,
+    # kolon adi degil. Kolonlar D-251/1 geregi Ingilizce; anahtarlar oldugu gibi kalir.
     web = (
         payload.get("web_sitesi")
-        or row.get("web_sitesi")
         or row.get("website_domain")
         or row.get("raw_website")
     )
@@ -60,8 +61,8 @@ def _row_to_dashboard(row: Dict[str, Any]) -> Dict[str, Any]:
         "web_sitesi": web,
         "adres": payload.get("adres") or row.get("raw_address"),
         "sosyal_medya": payload.get("sosyal_medya") or {},
-        "vergi_no": payload.get("vergi_no") or row.get("tax_number") or row.get("vergi_no"),
-        "osb_parsel": payload.get("osb_parsel") or row.get("osb_parsel"),
+        "vergi_no": row.get("tax_number"),
+        "osb_parsel": payload.get("osb_parsel") or row.get("osb_parcel"),
         "nace_code": payload.get("nace_code") or row.get("raw_nace"),
         "kaynak_tipi": source_name,
         "data_quality_score": row.get("data_quality_score"),
@@ -76,12 +77,10 @@ def fetch_dashboard_companies(limit: Optional[int] = None) -> List[Dict[str, Any
             c.company_id,
             c.legal_name,
             c.website_domain,
-            c.web_sitesi,
             c.primary_phone,
             c.primary_email,
             c.tax_number,
-            c.vergi_no,
-            c.osb_parsel,
+            c.osb_parcel,
             c.data_quality_score,
             sr.raw_phone,
             sr.raw_email,
@@ -178,13 +177,13 @@ def fetch_filtered_companies(
     if has_email:
         where.append("((c.primary_email IS NOT NULL AND c.primary_email <> '') OR (sr.raw_email IS NOT NULL AND sr.raw_email <> ''))")
     if has_web:
-        where.append("((c.website_domain IS NOT NULL AND c.website_domain <> '') OR (c.web_sitesi IS NOT NULL AND c.web_sitesi <> '') OR (sr.raw_website IS NOT NULL AND sr.raw_website <> ''))")
+        where.append("((c.website_domain IS NOT NULL AND c.website_domain <> '') OR (sr.raw_website IS NOT NULL AND sr.raw_website <> ''))")
     where.append("COALESCE(c.data_quality_score, 0) >= :kalite_min")
     where.append("COALESCE(c.data_quality_score, 0) <= :kalite_max")
     sql = (
-        "SELECT c.company_id, c.legal_name, c.website_domain, c.web_sitesi, "
-        "c.primary_phone, c.primary_email, c.tax_number, c.vergi_no, "
-        "c.osb_parsel, c.data_quality_score, "
+        "SELECT c.company_id, c.legal_name, c.website_domain, "
+        "c.primary_phone, c.primary_email, c.tax_number, "
+        "c.osb_parcel, c.data_quality_score, "
         "sr.raw_phone, sr.raw_email, sr.raw_address, sr.raw_website, "
         "sr.raw_nace, sr.raw_payload, src.source_name "
         "FROM companies c "
