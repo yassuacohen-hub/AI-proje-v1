@@ -39,10 +39,12 @@ PANO_IPUCU = "`data/orchestrator/task_board.json` var mı ve geçerli JSON mu?"
 
 #: Sorgu türü → (SQL, tek satır mı?)
 _SORGULAR: dict[str, tuple[str, bool]] = {
+    # D-250: olculen sey "kimlik dosyasi tamligi"dir, firma kalitesi degil ---
+    # kolon adi da disari gider, "avg_quality" yaziyordu.
     "kpi": (
         """
         SELECT COUNT(*) as total_firma,
-               AVG(data_quality_score) as avg_quality,
+               AVG(identity_completeness) as avg_identity_completeness,
                SUM(CASE WHEN tax_number IS NOT NULL AND tax_number != '' THEN 1 ELSE 0 END) as with_vkn,
                SUM(CASE WHEN website_domain IS NOT NULL AND website_domain != '' THEN 1 ELSE 0 END) as with_web,
                SUM(CASE WHEN primary_phone IS NOT NULL AND primary_phone != '' THEN 1 ELSE 0 END) as with_phone,
@@ -55,8 +57,9 @@ _SORGULAR: dict[str, tuple[str, bool]] = {
     "companies": (
         """
         SELECT company_id, legal_name, tax_number, company_type, status,
-               data_quality_score, entity_confidence, is_ankara, is_osb_member,
-               primary_phone, primary_email, website_domain, nace_code,
+               identity_completeness, entity_confidence, is_ankara, is_osb_member,
+               primary_phone, primary_email, website_domain,
+               nace_code, nace_source,
                establishment_date, updated_at
         FROM companies
         WHERE is_ankara=TRUE

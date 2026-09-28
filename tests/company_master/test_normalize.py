@@ -8,6 +8,15 @@ import pytest
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))\
 
 from src.company_master.etl.normalize import _map_row, run_normalize, NormalizeResult, main
+from src.company_master.etl.quality_recalc import AGIRLIKLAR, SURUM
+
+
+def _bekle(*alanlar: str) -> float:
+    """Beklenen tamlik puanini AGIRLIKLAR'dan TURETIR (D-250/7).
+
+    Sabit sayi yazmak yasak: agirlik seti v2 olunca test sessizce bayatlar.
+    """
+    return round(sum(AGIRLIKLAR[a] for a in alanlar), 1)
 
 
 def test_map_row_basic():
@@ -31,7 +40,12 @@ def test_map_row_basic():
     assert result["is_ankara"] is True
     assert result["status"] == "active"
     assert result["nace_validity"] == "high"
-    assert result["data_quality_score"] == 40.0  # yeni formul: telefon 10 + email 5 + web 15 + vergi 20 - adres cezasi 10 = 40
+    # D-250/1: kolon adi `identity_completeness`, olcek 0-10.
+    # tax_number puan ALMAZ: '1234567890' D-246 VKN kapisindan gecmiyor.
+    assert result["identity_completeness"] == _bekle(
+        "legal_name", "primary_phone", "primary_email", "website_domain"
+    )
+    assert result["score_version"] == SURUM
     assert result["entity_confidence"] == 0.9
 
 
@@ -49,7 +63,8 @@ def test_map_row_no_phone():
     assert result["legal_name"] == "TEST FIRMA"
     assert result["primary_phone"] is None
     assert result["primary_email"] is None
-    assert result["data_quality_score"] == 0.0
+    # D-249: alan yok demek 0 puan demek degil; yalniz unvan kazanildi.
+    assert result["identity_completeness"] == _bekle("legal_name")
     assert result["nace_validity"] == "unknown"
 
 

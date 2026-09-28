@@ -9,6 +9,7 @@ import pytest
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))\
 
+from src.company_master.etl.quality_recalc import AZAMI
 from src.company_master.search.engine import (
     _as_list,
     _row_to_dashboard,
@@ -46,7 +47,7 @@ def test_row_to_dashboard_basic():
         "primary_email": "info@example.com",
         "tax_number": "1234567890",
         "osb_parcel": "123/45",
-        "data_quality_score": 85.0,
+        "identity_completeness": 8.5,
         "raw_phone": "0312 123 45 67",
         "raw_email": "info@example.com",
         "raw_address": "Ankara",
@@ -67,7 +68,11 @@ def test_row_to_dashboard_basic():
     assert result["osb_parsel"] == "123/45"
     assert result["sektor"] == "İmalat"
     assert result["kaynak_tipi"] == "OSTİM OSB"
-    assert result["data_quality_score"] == 85.0
+    # D-250/1: terk edilmis `data_quality_score` (0-100) yerine canli
+    # `identity_completeness` (0-10) tasinir; tavani asamaz.
+    assert result["identity_completeness"] == 8.5
+    assert result["identity_completeness"] <= AZAMI
+    assert "data_quality_score" not in result
 
 
 def test_search_jsonl_with_data():

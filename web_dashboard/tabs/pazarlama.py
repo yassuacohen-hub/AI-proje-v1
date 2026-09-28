@@ -217,34 +217,48 @@ def hedef_tablosu_kaynagi() -> str:
 
 
 @st.cache_data(ttl=60)
-def load_kapsam_verisi() -> tuple[list[dict[str, Any]], dict[str, int], int]:
-    """PO-BACK-10: Kapsam kartı girdileri. Donus: (firmalar, nace_hedefleri, hedef_evren).
+def load_kapsam_verisi() -> tuple[list[dict[str, Any]], dict[str, int], int, int]:
+    """PO-BACK-10: Kapsam karti girdileri.
+
+    Donus: ``(firmalar, nace_hedefleri, hedef_evren, tahmin_haric)``.
 
     DB yoksa/hata halinde bos liste doner; kart yer tutucu gosterir.
     HEDEF-NACE-01: ``nace_hedefleri`` once ``data/nace_hedefleri.json``'dan okunur
     (``HUGINN_NACE_HEDEF_DOSYASI`` ile yol ezilebilir); dosya yok/bozuksa DB'deki
     gruplar arasinda esit paylasim (hedef evren / grup sayisi) fallback'i kullanilir.
+
+    D-252/5: tahmin kaynakli NACE kodu sektor sayacina GIRMEZ. Dorduncu donus
+    degeri, kapsamdan haric tutulan tahmin kutlesidir; panel bunu ayri ilan
+    eder. Eski hali tahminleri "yakalandi" sayiyordu --- 29.10 varsayilaninda
+    yigilmis kutle kapsam oranini sisiriyordu.
     """
     hedef_evren = _hedef_evren_oku()
     try:
         from sqlalchemy import text
 
+        from company_master import sunum
         from company_master.db.connection import get_engine
 
         engine = get_engine()
         with engine.connect() as conn:
             rows = conn.execute(
-                text("SELECT LEFT(nace_code, 2) AS nace_grup FROM companies WHERE nace_code IS NOT NULL")
+                text("SELECT nace_code, nace_source FROM companies "
+                     "WHERE nace_code IS NOT NULL")
             ).fetchall()
-        firmalar = [{"nace_grup": str(r[0] or "").strip()} for r in rows]
+        sayac = sunum.sektor_sayaci((r[0], r[1]) for r in rows)
     except Exception:
-        return [], {}, hedef_evren
+        return [], {}, hedef_evren, 0
+    firmalar = [
+        {"nace_grup": str(kod)[:2]}
+        for kod, adet in sayac["kanitli"].items()
+        for _ in range(adet)
+    ]
     gruplar = sorted({f["nace_grup"] for f in firmalar if f["nace_grup"]})
     hedefler, kaynak = nace_hedeflerini_yukle(_nace_hedef_dosyasi(), gruplar, hedef_evren)
     if kaynak == "dosya":
         # Dosyadaki hedeflerin toplami gercek evrendir; env degeri yalnizca fallback.
         hedef_evren = sum(hedefler.values()) or hedef_evren
-    return firmalar, hedefler, hedef_evren
+    return firmalar, hedefler, hedef_evren, sayac["tahmin_haric"]
 
 
 def ozet_hesapla(
@@ -552,13 +566,29 @@ def _render_segment_kampanya_eslesme(
 
 
 def _render_kapsam_karti(
-    firmalar: list[dict[str, Any]], nace_hedefleri: dict[str, int], hedef_evren: int
+    firmalar: list[dict[str, Any]],
+    nace_hedefleri: dict[str, int],
+    hedef_evren: int,
+    tahmin_haric: int = 0,
 ) -> None:
-    """PO-BACK-10: Hedef evren kapsamı — kpi_karti + en düşük sektörler tablosu."""
+    """PO-BACK-10: Hedef evren kapsamı — kpi_karti + en düşük sektörler tablosu.
+
+    ``tahmin_haric``: D-252/5 gereği sayaçtan çıkarılan tahmini NACE kütlesi.
+    Gizlenmez, ayrı ilan edilir; yoksa kapsam oranı sebepsiz düşük görünür.
+    """
     _bolum("alt-kapsam-evren").render()
     ozet = coverage_ozeti(firmalar, hedef_evren, nace_hedefleri)
     if not ozet["veri_var"]:
-        st.info("Veri gelince hedef evren kapsam analizi burada görünecek.")
+        if tahmin_haric:
+            # Bugunku gercek durum: kanitli NACE sifir, kutlenin tamami tahmin.
+            # "Veri gelince" demek yalan olurdu --- veri VAR, kaniti yok.
+            st.warning(
+                f"⚠️ {tahmin_haric:,} firmanın NACE kodu var ama hiçbiri kanıt "
+                "kaynağından gelmiyor (tahmini). D-252 gereği tahmin sektör "
+                "sayacına girmez; bu yüzden kapsam hesaplanamıyor."
+            )
+        else:
+            st.info("Veri gelince hedef evren kapsam analizi burada görünecek.")
         return
 
     if hedef_tablosu_kaynagi() == "dosya":
@@ -574,15 +604,15 @@ def _render_kapsam_karti(
             ikon="📈",
             ondalik=1,
             birim="%",
-            aciklama="Hedef evrenin ne kadarını yakaladık?",
+            aciklama="Hedef evrenin ne kadarını yakaladık? (yalnız kanıtlı NACE)",
         )
     with m2:
         kpi_karti(
-            "Yakalanan Firma",
+            "Doğrulanmış Sektör",
             ozet["toplam"],
             ikon="🏢",
             kategori="basari",
-            aciklama="NACE kodu bilinen kayıt sayısı.",
+            aciklama="NACE kodu kanıt kaynağından gelen kayıt sayısı.",
         )
     with m3:
         kpi_karti(
@@ -604,6 +634,12 @@ def _render_kapsam_karti(
     )
     st.dataframe(tablo, width="stretch", hide_index=True)
     st.caption("📊 Hangi sektörde veri toplamaya öncelik vermeliyiz?")
+    if tahmin_haric:
+        st.info(
+            f"ℹ️ {tahmin_haric:,} firma kanıt kaynağı olmayan (tahmini) NACE kodu "
+            "taşıdığı için bu sayaçlara girmedi (D-252). Kapsam yalnız "
+            "doğrulanmış kodlardan hesaplanır."
+        )
 
 
 def render_pazarlama_tab() -> None:
@@ -635,5 +671,5 @@ def render_pazarlama_tab() -> None:
         _render_segmentler(segmentler, demo_mu)
     with sekme_kapsama:
         _render_segment_kampanya_eslesme(kampanyalar, segmentler)
-        firmalar, nace_hedefleri, hedef_evren = load_kapsam_verisi()
-        _render_kapsam_karti(firmalar, nace_hedefleri, hedef_evren)
+        firmalar, nace_hedefleri, hedef_evren, tahmin_haric = load_kapsam_verisi()
+        _render_kapsam_karti(firmalar, nace_hedefleri, hedef_evren, tahmin_haric)

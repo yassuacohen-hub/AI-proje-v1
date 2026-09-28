@@ -5,12 +5,13 @@ from __future__ import annotations
 
 import pytest
 
+from company_master.sunum import tavan_getir
 from company_master.tenant.health import (
     TenantHealthScore,
     hesapla,
     esik_dokumani,
     _banti_bul,
-    _data_quality_score,
+    _identity_completeness,
     _source_reliability_score,
     _coverage_score,
     _activity_score,
@@ -29,17 +30,21 @@ VARSAYILAN_TENANT = TenantContext("huginn", "Huginn Data", "kurumsal")
 TENANT_STANDART = TenantContext("ankara_tech", "Ankara Teknoloji A.Ş.", "standart")
 TENANT_TEMEL = TenantContext("istanbul_yazilim", "İstanbul Yazılım Ltd.", "temel")
 
+# D-250/7: tamlik puani 0-10 olceginde uretilir; test verisi de tavandan
+# turetilir. Sabit yazilsa agirlik seti v2 olunca testler yalan soylerdi.
+TAVAN = tavan_getir()
+
 ORNEK_FIRMALAR_GUCLU = [
     {
         "company_id": "c1",
-        "data_quality_score": 90,
+        "identity_completeness": TAVAN,          # tavana oturmus -> %100
         "nace_code": "6201",
         "adres": "Ankara OSB",
         "son_guncelleme_gun": 5,
     },
     {
         "company_id": "c2",
-        "data_quality_score": 85,
+        "identity_completeness": TAVAN * 0.8,    # -> %80
         "nace_code": "6202",
         "adres": "İstanbul",
         "son_guncelleme_gun": 10,
@@ -49,14 +54,14 @@ ORNEK_FIRMALAR_GUCLU = [
 ORNEK_FIRMALAR_ZAYIF = [
     {
         "company_id": "c1",
-        "data_quality_score": 20,
+        "identity_completeness": TAVAN * 0.2,
         "nace_code": None,
         "adres": None,
         "son_guncelleme_gun": None,
     },
     {
         "company_id": "c2",
-        "data_quality_score": 15,
+        "identity_completeness": TAVAN * 0.15,
         "nace_code": "",
         "adres": "",
         "son_guncelleme_gun": None,
@@ -89,17 +94,32 @@ def test_banti_red():
 # Bileşen formül testleri
 # ---------------------------------------------------------------------------
 
-def test_data_quality_score_bos():
-    assert _data_quality_score([]) == 0.0
+def test_tamlik_bos():
+    assert _identity_completeness([]) == 0.0
 
 
-def test_data_quality_score_ortalama():
+def test_tamlik_tavana_oranlanir():
+    """0-10'luk puan yuzdeye cevrilir; yoksa digerleriyle toplanamaz."""
     firms = [
-        {"data_quality_score": 80},
-        {"data_quality_score": 60},
-        {"data_quality_score": 40},
+        {"identity_completeness": TAVAN},
+        {"identity_completeness": TAVAN / 2},
     ]
-    assert _data_quality_score(firms) == 60.0
+    assert _identity_completeness(firms) == 75.0
+
+
+def test_tamlik_olculmemis_firma_ortalamayi_dusurmez():
+    """D-249: None 0 degildir; ortalamaya girmez."""
+    firms = [
+        {"identity_completeness": TAVAN},
+        {"identity_completeness": None},
+    ]
+    assert _identity_completeness(firms) == 100.0
+
+
+def test_tamlik_yuz_olcekli_veri_sessizce_kabul_edilmez():
+    """Mandal: 0-100'luk veri sizarsa ValueError; sessizce %1500 olmaz."""
+    with pytest.raises(ValueError, match="tavani"):
+        _identity_completeness([{"identity_completeness": 90}])
 
 
 def test_source_reliability_bos():
@@ -133,26 +153,37 @@ def test_coverage_score_bos():
 
 def test_coverage_score_tum_uygun():
     firms = [
-        {"data_quality_score": 80, "nace_code": "6201", "adres": "Ankara"},
-        {"data_quality_score": 70, "nace_code": "6202", "adres": "İstanbul"},
+        {"identity_completeness": TAVAN, "nace_code": "6201", "adres": "Ankara"},
+        {"identity_completeness": TAVAN * 0.7, "nace_code": "6202", "adres": "İstanbul"},
     ]
     assert _coverage_score(firms) == 100.0
 
 
 def test_coverage_score_hicbir_uygun_degil():
     firms = [
-        {"data_quality_score": 20, "nace_code": None, "adres": None},
-        {"data_quality_score": 30, "nace_code": "", "adres": ""},
+        {"identity_completeness": TAVAN * 0.2, "nace_code": None, "adres": None},
+        {"identity_completeness": TAVAN * 0.3, "nace_code": "", "adres": ""},
     ]
     assert _coverage_score(firms) == 0.0
 
 
 def test_coverage_score_kismi():
     firms = [
-        {"data_quality_score": 80, "nace_code": "6201", "adres": "Ankara"},
-        {"data_quality_score": 20, "nace_code": None, "adres": None},
+        {"identity_completeness": TAVAN, "nace_code": "6201", "adres": "Ankara"},
+        {"identity_completeness": TAVAN * 0.2, "nace_code": None, "adres": None},
     ]
     assert _coverage_score(firms) == 50.0
+
+
+def test_coverage_esigi_tavandan_turetilir():
+    """Esik sabit 50 yazilsa 0-10 olcekte hicbir firma uygun sayilmaz,
+    skor sessizce daima 0 donerdi."""
+    tam_firma = [{
+        "identity_completeness": TAVAN,
+        "nace_code": "6201",
+        "adres": "Ankara",
+    }]
+    assert _coverage_score(tam_firma) == 100.0, "esik hala 0-100 olceginde"
 
 
 def test_activity_score_bos():
@@ -203,8 +234,9 @@ def test_hesapla_guclu_tenant():
 
     assert isinstance(result, TenantHealthScore)
     assert result.tenant_id == "huginn"
-    # DQ=87.5, SR=66.67, CV=100, AC=100 -> 0.35*87.5 + 0.25*66.67 + 0.25*100 + 0.15*100
-    # = 30.625 + 16.6675 + 25 + 15 = 87.29 -> GREEN
+    # DQ=90 (tavanin %90'i), SR=66.67, CV=100, AC=100
+    # 0.35*90 + 0.25*66.67 + 0.25*100 + 0.15*100 = 88.17 -> GREEN
+    assert result.components["data_quality"] == 90.0
     assert result.overall >= HEALTH_GREEN
     assert result.band == "green"
     assert "data_quality" in result.components
@@ -224,8 +256,10 @@ def test_hesapla_zayif_tenant():
 def test_hesapla_orta_tenant():
     """Orta seviye tenant — YELLOW beklenir."""
     orta_firmalar = [
-        {"data_quality_score": 70, "nace_code": "6201", "adres": "Ankara", "son_guncelleme_gun": 5},
-        {"data_quality_score": 60, "nace_code": "6202", "adres": "", "son_guncelleme_gun": 10},
+        {"identity_completeness": TAVAN * 0.7, "nace_code": "6201",
+         "adres": "Ankara", "son_guncelleme_gun": 5},
+        {"identity_completeness": TAVAN * 0.6, "nace_code": "6202",
+         "adres": "", "son_guncelleme_gun": 10},
     ]
     camps = [
         {"durum": "aktif", "tedarikci": "A", "bitis_tarihi": "2026-12-31"},
@@ -243,10 +277,16 @@ def test_hesapla_kampanaysiz():
 
     assert result.overall > 0
     assert result.details["kampanya_sayisi"] == 0
-    # SR = 100 (boş), DQ = 87.5, CV = 100, AC = 100
-    # 0.35*87.5 + 0.25*100 + 0.25*100 + 0.15*100 = 30.625 + 25 + 25 + 15 = 95.625
-    # round(95.625, 2) = 95.62 (Python banker's rounding)
-    assert result.overall == 95.62
+    # SR = 100 (bos), DQ = 90, CV = 100, AC = 100. Beklenen deger agirlik
+    # setinden turetilir; sabit yazilsa agirlik degisince test yalan soylerdi.
+    beklenen = round(
+        WEIGHTS["data_quality"] * 90.0
+        + WEIGHTS["source_reliability"] * 100.0
+        + WEIGHTS["coverage"] * 100.0
+        + WEIGHTS["activity"] * 100.0,
+        2,
+    )
+    assert result.overall == beklenen
 
 
 # ---------------------------------------------------------------------------
@@ -290,7 +330,8 @@ def test_esik_dokumani_icerir():
     assert "Tenant Health Score v1" in doc
     assert str(int(HEALTH_GREEN)) in doc
     assert str(int(HEALTH_YELLOW)) in doc
-    assert "Data Quality" in doc
+    assert "Kimlik Dosyası Tamlığı" in doc
+    assert "/100" not in doc, "D-250: puan 100'luk olcekte sunulamaz"
     assert "Source Reliability" in doc
     assert "Coverage" in doc
     assert "Activity" in doc

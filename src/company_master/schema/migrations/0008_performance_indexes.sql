@@ -1,4 +1,9 @@
 -- Migration 0008: Performance indexes for dashboard queries
+--
+-- 0029: puan indeksi terk edilmis `data_quality_score` kolonundaydi; canli
+-- `identity_completeness` kolonuna tasindi (idx_companies_identity_completeness).
+-- Dosyanin diger 4 indeksi hala gecerli -> iz bazli isaret kullaniliyor.
+-- dusen-iz: idx_companies_quality_score
 CREATE INDEX IF NOT EXISTS idx_companies_ankara_osb ON companies(is_ankara, is_osb_member);
 CREATE INDEX IF NOT EXISTS idx_companies_quality_score ON companies(data_quality_score);
 CREATE INDEX IF NOT EXISTS idx_companies_source_record ON companies(source_record_id);

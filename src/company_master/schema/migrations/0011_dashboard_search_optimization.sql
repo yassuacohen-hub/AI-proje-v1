@@ -6,6 +6,11 @@
 --   -> Seq Scan on 14K rows, ~110ms DB time
 -- After:  SELECT ... WHERE search_text ILIKE :s
 --   -> Bitmap Index Scan on GIN trigram, ~3.5ms DB time (96.8% improvement)
+--
+-- 0029: puan indeksi terk edilmis `data_quality_score` kolonundaydi; canli
+-- `identity_completeness` kolonuna tasindi (idx_companies_source_record_tamlik).
+-- Dosyanin diger izleri hala gecerli -> iz bazli isaret.
+-- dusen-iz: idx_companies_source_record_score
 
 -- Computed column: concatenates all searchable fields (stored, not virtual)
 ALTER TABLE companies

@@ -107,6 +107,10 @@ class _Sonuc:
     def mappings(self):
         return self
 
+    def scalars(self):
+        # Tek kolonluk SELECT: rows dogrudan deger listesidir.
+        return self
+
     def all(self):
         return self._rows
 
@@ -300,17 +304,37 @@ class TestVeriUclari:
         r = client.get("/api/match", params={"buyer_id": "uuid-degil"})
         assert r.status_code == 404
 
-    def test_quality_trend_liste(self, client, dev_modu, monkeypatch):
-        _db_yukle(monkeypatch, _Sonuc(rows=[{"bucket": "60-79", "cnt": 5}]))
+    def test_quality_trend_bantlar_tavandan_turetilir(
+        self, client, dev_modu, monkeypatch
+    ):
+        """D-250/7: bantlar 0-100 sabiti degil, ulasilabilir tavandir.
+
+        Eski hali "60-79" gibi sabit bant bekliyordu; kolon 0-10 olcekli
+        oldugu icin panel TUM firmalari en kotu banda dusuruyordu.
+        D-249: olculmemis firma hicbir banda yazilmaz, ayri durur.
+        """
+        from company_master import sunum
+
+        tavan = sunum.tavan_getir()
+        _db_yukle(monkeypatch, _Sonuc(rows=[tavan, None]))
         r = client.get("/api/quality-trend")
         assert r.status_code == 200
-        assert r.json() == [{"bucket": "60-79", "cnt": 5}]
+        d = {x["bucket"]: x["cnt"] for x in r.json()}
+        assert d["olculmedi"] == 1, "olculmemis firma banda yazilmis"
+        assert d[sunum.bantlar(tavan)[-1][0]] == 1
+        assert "60-79" not in d, "0-100 olcegi bandi hala yayinlaniyor"
 
-    def test_nace_distribution_liste(self, client, dev_modu, monkeypatch):
-        _db_yukle(monkeypatch, _Sonuc(rows=[{"nace_code": "29", "cnt": 7}]))
+    def test_nace_distribution_tahmini_kod_dagilima_girmez(
+        self, client, dev_modu, monkeypatch
+    ):
+        """D-252/5: sektor dagilimi yalniz kanitli koddan kurulur."""
+        _db_yukle(monkeypatch, _Sonuc(rows=[("29.10", "sector_default")] * 3
+                                      + [("62.01", "mersis")]))
         r = client.get("/api/nace-distribution")
         assert r.status_code == 200
-        assert r.json()[0]["nace_code"] == "29"
+        govde = r.json()
+        assert govde["dagilim"] == [{"nace_code": "62.01", "cnt": 1}]
+        assert govde["tahmin_haric"] == 3, "tahmin kutlesi ilan edilmiyor"
 
     def test_sources_liste(self, client, dev_modu, monkeypatch):
         _db_yukle(monkeypatch, _Sonuc(rows=[{"source_name": "ostim", "record_count": 3}]))

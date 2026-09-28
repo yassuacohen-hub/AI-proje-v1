@@ -14,6 +14,7 @@ import pandas as pd
 import streamlit as st
 from sqlalchemy import text
 
+from company_master import sunum
 from company_master.db.connection import get_engine
 from company_master.orchestrator import task_board as tb
 
@@ -47,12 +48,18 @@ where_sql = "WHERE " + " AND ".join(where) if where else ""
 if nav == "Genel Bakış":
     st.title("🏢 Firma Ana Veri Paneli")
     st.caption(time.strftime("%Y-%m-%d %H:%M:%S"))
+    # Esikler tavandan TURETILIR. Eski hali 70/30 yaziyordu; puan 0-10
+    # olceginde oldugu icin "Yuksek" her zaman 0, "Dusuk" her zaman tum
+    # firmalar cikiyordu.
+    tavan = sunum.tavan_getir()
+    esik_dusuk = sunum.risk_esigi(tavan)
+    esik_yuksek = round(tavan * 0.7, 2)
     with engine.connect() as conn:
         kpi = conn.execute(text(f"""
             SELECT COUNT(*) AS total,
-                   AVG(data_quality_score) AS avg_score,
-                   COUNT(*) FILTER (WHERE data_quality_score >= 70) AS high,
-                   COUNT(*) FILTER (WHERE data_quality_score < 30) AS low,
+                   AVG(identity_completeness) AS avg_score,
+                   COUNT(*) FILTER (WHERE identity_completeness >= {esik_yuksek}) AS high,
+                   COUNT(*) FILTER (WHERE identity_completeness < {esik_dusuk}) AS low,
                    COUNT(*) FILTER (WHERE website_domain IS NOT NULL AND website_domain <> '') AS web,
                    COUNT(*) FILTER (WHERE primary_phone IS NOT NULL AND primary_phone <> '') AS tel,
                    COUNT(*) FILTER (WHERE primary_email IS NOT NULL AND primary_email <> '') AS email,
@@ -62,9 +69,10 @@ if nav == "Genel Bakış":
         """)).fetchone()
     c1, c2, c3, c4 = st.columns(4)
     c1.metric("Toplam", f"{kpi[0]:,}")
-    c2.metric("Ortalama Skor", f"{float(kpi[1] or 0):.1f}/100")
-    c3.metric("Yüksek (≥70)", f"{kpi[2]:,}")
-    c4.metric("Düşük (<30)", f"{kpi[3]:,}")
+    c2.metric("Ort. Kimlik Tamlığı", sunum.puan_metni(kpi[1], tavan))
+    c3.metric(f"Yüksek (≥{esik_yuksek})", f"{kpi[2]:,}")
+    c4.metric(f"Kimlik Riski (<{esik_dusuk})", f"{kpi[3]:,}")
+    st.caption(sunum.tavan_metni(tavan))
     st.markdown("---")
     st.subheader("Doluluk Oranları")
     cols = st.columns(5)
@@ -73,20 +81,23 @@ if nav == "Genel Bakış":
         col.metric(label, f"{val:,}", delta=f"{pct}%")
 
     st.markdown("---")
-    st.subheader("📊 Kalite Skoru Dağılımı")
+    st.subheader("📊 Kimlik Tamlığı Dağılımı")
     try:
+        # Bantlama SQL'de degil tek kapida: D-249 geregi olculmemis puan
+        # hicbir banda girmez, "olculmedi" olarak ayri durur. Eski hali
+        # COALESCE(...,0) ile NULL'u 0 bandina yaziyordu.
         with engine.connect() as conn:
-            buckets = conn.execute(text(f"""
-                SELECT width_bucket(COALESCE(data_quality_score, 0), 0, 100, 10) AS b,
-                       COUNT(*) AS adet
-                FROM companies {where_sql}
-                GROUP BY b ORDER BY b
-            """)).fetchall()
-        if buckets:
+            puanlar = [
+                r[0] for r in conn.execute(
+                    text(f"SELECT identity_completeness FROM companies {where_sql}")
+                )
+            ]
+        if puanlar:
             hist = pd.DataFrame(
-                [{"Skor Aralığı": f"{int(b) * 10 - 10}-{int(b) * 10}", "Firma": int(n)} for b, n in buckets]
+                [{"Tamlık Aralığı": e, "Firma": n}
+                 for e, n in sunum.bant_dagilimi(puanlar, tavan).items()]
             )
-            st.bar_chart(hist.set_index("Skor Aralığı"))
+            st.bar_chart(hist.set_index("Tamlık Aralığı"))
         else:
             st.info("Veri yok")
     except Exception as exc:
@@ -128,10 +139,10 @@ elif nav == "Firma Ara":
                 rows = conn.execute(text(f"""
                     SELECT legal_name, primary_phone, primary_email,
                            COALESCE(tax_number::text, vergi_no::text) AS vkn,
-                           data_quality_score, website_domain
+                           identity_completeness, website_domain
                     FROM companies
                     {full_where}
-                    ORDER BY data_quality_score DESC
+                    ORDER BY identity_completeness DESC
                     LIMIT 50
                 """), {"term": term}).fetchall()
         except Exception as exc:
@@ -371,7 +382,10 @@ elif nav == "Web Kazıma Raporu":
     col1, col2, col3, col4 = st.columns(4)
     col1.metric("Toplam Kayıt", f"{total_records:,}")
     col2.metric("Tamamlanan Sektör", f"{completed_sectors}/17")
-    col3.metric("Ortalama Kalite", "69.7/100" if kalite_file.exists() else "-")
+    # Eski hali "69.7/100" SABIT yaziyordu: hicbir olcumden gelmiyor, yalnizca
+    # dosyanin varligina bakiyordu. Kaziim ozetinde puan yeri yok; puan
+    # "Genel Bakis"ta canli olculur.
+    col3.metric("Kalite Dosyası", "var" if kalite_file.exists() else "-")
     col4.metric("Aktif Kaynak", "OSTİM")
 
     st.markdown("---")

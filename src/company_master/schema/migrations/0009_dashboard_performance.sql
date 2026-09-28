@@ -6,6 +6,10 @@
 -- "ustunden-gecen" degil, iz bazli isaret kullaniliyor.
 -- dusen-iz: idx_companies_vergi_no
 -- dusen-iz: idx_companies_web_sitesi
+--
+-- 0029: puan indeksi terk edilmis `data_quality_score` kolonundaydi; canli
+-- `identity_completeness` kolonuna tasindi (idx_companies_ankara_osb_tamlik).
+-- dusen-iz: idx_companies_ankara_osb_score
 
 -- Composite index for KPI + filtered lists (is_ankara + is_osb_member + score)
 CREATE INDEX IF NOT EXISTS idx_companies_ankara_osb_score

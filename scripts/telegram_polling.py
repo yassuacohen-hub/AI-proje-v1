@@ -171,14 +171,22 @@ def read_done_count() -> int:
     return len([t for t in board if t.get("durum") == "done"])
 
 
-def read_quality_score() -> str:
-    """Kalite skorunu kpi_raporu.md'den cikarir; yoksa ostim raporuna duser."""
-    for path in ("data/kpi_raporu.md", "data/ostim/kalite_raporu.md"):
-        text = _read_file(path)
-        match = re.search(r"Ortalama Kalite Skoru:\s*([\d.]+)/100", text, re.IGNORECASE)
-        if match:
-            return match.group(1)
-    return "bilinmiyor"
+def read_tamlik_metni() -> str:
+    """Kimlik dosyasi tamligini kpi_raporu.md'den cikarir; sunuma hazir metin.
+
+    D-250/7: donen dize zaten olcegi tasir ("3.71 / 6.50 ulasilabilir").
+    Cagiran ustune "/100" eklemez --- eski hali 0-10'luk puani 0-100 diye
+    sunuyordu. Eski ad ("quality score") da bir beyandi.
+
+    Eski ikinci kaynak (data/ostim/kalite_raporu.md) kaldirildi: o rapor
+    "| Ortalama skor | **75.5** / 100 |" yaziyor, yani desenle hicbir zaman
+    eslesmedi --- olu fallback'ti. Ayrica orasi JSONL'den hesaplanan ayri bir
+    0-100 metrigi; kimlik dosyasi tamligi degil, yerine gecemez.
+    """
+    match = re.search(
+        r"Ortalama Kimlik Dosyasi Tamligi:\s*(.+)", _read_file("data/kpi_raporu.md")
+    )
+    return match.group(1).strip() if match else "bilinmiyor"
 
 
 def count_lines(rel_path: str) -> int:
@@ -459,7 +467,7 @@ def cmd_status(text: str) -> str:
     """/status komutu — proje durumu + aktif goresv."""
     active = read_active_tasks()
     done = read_done_count()
-    quality = read_quality_score()
+    tamlik = read_tamlik_metni()
     title = read_project_state_title()
     jsonl_count = _count_lines("data/ostim/firmalar_sayfa1.jsonl")
     md_count = _count_markdown("AI proje v1/V10")
@@ -471,7 +479,7 @@ def cmd_status(text: str) -> str:
     lines.append(f"Toplam gorev: {len(read_task_board())}")
     lines.append(f"Aktif gorev: <b>{len(active)}</b>")
     lines.append(f"Tamamlandi: <b>{done}</b>")
-    lines.append(f"Kalite skoru: <b>{quality}</b>/100")
+    lines.append(f"Kimlik dosyasi tamligi: <b>{tamlik}</b>")
 
     if active:
         lines.append("\n<b>Aktif Gorevler:</b>")
@@ -574,13 +582,13 @@ def cmd_gunluk(text: str) -> str:
     board = read_task_board()
     active = read_active_tasks()
     done = read_done_count()
-    quality = read_quality_score()
+    tamlik = read_tamlik_metni()
     today = time.strftime("%Y-%m-%d")
 
     lines = [f"<b>GUNLUK OZET — {today}</b>\n"]
     lines.append(f"Toplam gorev: {len(board)}")
     lines.append(f"Aktif: {len(active)} | Tamamlandi: {done}")
-    lines.append(f"Kalite skoru: {quality}/100")
+    lines.append(f"Kimlik dosyasi tamligi: {tamlik}")
     lines.append(f"API tabanli: {bool(board)}")
 
     # Son 5 tamamlanmamis gorev
@@ -598,13 +606,13 @@ def cmd_gunluk(text: str) -> str:
 
 
 def cmd_izleme(text: str) -> str:
-    """/izleme komutu — kalite ve proje izleme."""
-    quality = read_quality_score()
+    """/izleme komutu — tamlik ve proje izleme."""
+    tamlik = read_tamlik_metni()
     state = read_project_state()
     active = read_active_tasks()
 
     lines = ["<b>IZLEME PANELI</b>\n"]
-    lines.append(f"Kalite skoru: <b>{quality}</b>/100")
+    lines.append(f"Kimlik dosyasi tamligi: <b>{tamlik}</b>")
     lines.append(f"Aktif gorev: <b>{len(active)}</b>")
 
     # State dosyasindan basliklari cikar

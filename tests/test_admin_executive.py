@@ -167,11 +167,12 @@ def test_churn_donemi_pencere():
 def test_firma_kayitlari_30_gun_esigi():
     simdi = datetime.now()
     rows = [
-        {"data_quality_score": 80, "nace_code": "62.01", "adres": "Ankara",
+        {"identity_completeness": 6.5, "nace_code": "62.01", "adres": "Ankara",
          "updated_at": simdi - timedelta(days=3)},
-        {"data_quality_score": None, "nace_code": None, "adres": None,
+        {"identity_completeness": None, "nace_code": None, "adres": None,
          "updated_at": (simdi - timedelta(days=60)).isoformat()},
-        {"data_quality_score": 50, "nace_code": "x", "adres": "y", "updated_at": "bozuk"},
+        {"identity_completeness": 3.0, "nace_code": "x", "adres": "y",
+         "updated_at": "bozuk"},
     ]
     kayitlar = ex._firma_kayitlari(_Engine(rows))
 
@@ -179,8 +180,11 @@ def test_firma_kayitlari_30_gun_esigi():
     assert kayitlar[0]["son_guncelleme_gun"] == 3
     assert kayitlar[0]["adres"] == "Ankara"
     assert kayitlar[1]["son_guncelleme_gun"] is None  # 30 günden eski
-    assert kayitlar[1]["data_quality_score"] == 0
+    # D-249: olculmemis firma 0 puanli gibi saglik ortalamasina girmez
+    assert kayitlar[1]["identity_completeness"] is None
     assert kayitlar[2]["son_guncelleme_gun"] is None  # parse edilemedi
+    assert all("data_quality_score" not in k for k in kayitlar), \
+        "terk edilmis kolon geri sizdi"
 
 
 # ---------------------------------------------------------------------------

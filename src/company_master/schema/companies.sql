@@ -24,7 +24,11 @@ CREATE TABLE IF NOT EXISTS companies (
     osb_id              UUID,
     nace_validity       TEXT DEFAULT 'unknown',
     quarantine_reason   TEXT,
-    data_quality_score  NUMERIC(5,2),
+    -- D-250/1: kimlik dosyasi tamligi, olcek 0-10, ulasilabilir tavan ayri ilan edilir.
+    -- Terk edilmis `data_quality_score` (0-100) bilerek yazilmaz: yeni kurulan
+    -- veritabani olu kolonla dogmasin (0024-0028 gocleri onu zaten tasidi).
+    identity_completeness NUMERIC(4,2),
+    score_version       TEXT,
     entity_confidence   NUMERIC(5,2),
     first_seen_at       TIMESTAMPTZ NOT NULL DEFAULT NOW(),
     last_verified_at    TIMESTAMPTZ,
@@ -38,6 +42,7 @@ ALTER TABLE companies ADD COLUMN vergi_no TEXT;
 ALTER TABLE companies ADD COLUMN osb_parsel TEXT;
 
 
+CREATE INDEX IF NOT EXISTS idx_companies_identity_completeness ON companies(identity_completeness);
 CREATE INDEX IF NOT EXISTS idx_companies_tax_number ON companies(tax_number);
 CREATE INDEX IF NOT EXISTS idx_companies_legal_name_trgm ON companies USING gin (legal_name gin_trgm_ops);
 CREATE INDEX IF NOT EXISTS idx_companies_status ON companies(status);

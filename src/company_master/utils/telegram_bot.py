@@ -310,13 +310,24 @@ def send_alert(title: str, message: str) -> dict[str, Any]:
 
 
 def send_daily_summary(stats: dict[str, Any]) -> dict[str, Any]:
-    """Gunluk ozet raporu gonderir."""
+    """Gunluk ozet raporu gonderir.
+
+    D-250/7: kimlik dosyasi tamligi 0-10 olceklidir; "/100" yalandi ve
+    "kalite" adi da bir beyandir. Puan tek kapidan (``sunum.puan_metni``)
+    gecer, ulasilabilir tavanla birlikte sunulur. D-249: olculmemis ortalama
+    0 degil bos gosterilir --- 0 "en kotu firma" demektir, "olculmedi" demez.
+    ``tavan`` verilmezse canli tavan okunur (DB'ye yalniz puan varsa gidilir).
+    """
+    from ..sunum import BOS, puan_metni, tavan_getir  # DB dokunusu cagri aninda
+
+    ort = stats.get("avg_identity_completeness")
+    tamlik = BOS if ort is None else puan_metni(ort, stats.get("tavan") or tavan_getir())
     text = (
         "<b>Gunluk Ozet</b> "
         f"({time.strftime('%Y-%m-%d')})\n\n"
         f"- Toplam firma: <b>{stats.get('total_firms', 0):,}</b>\n"
         f"- Yeni eklenen: <b>{stats.get('new_firms', 0):,}</b>\n"
-        f"- Ortalama kalite: <b>{stats.get('avg_quality', 0):.1f}</b>/100\n"
+        f"- Kimlik dosyasi tamligi (ort.): <b>{tamlik}</b>\n"
         f"- Aktif gorev: <b>{stats.get('active_tasks', 0)}</b>\n"
         f"- Tamamlanan: <b>{stats.get('completed_tasks', 0)}</b>"
     )

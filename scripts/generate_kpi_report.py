@@ -11,6 +11,7 @@ from sqlalchemy import text
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "src"))
 from company_master.db.connection import get_engine
+from company_master import sunum
 
 def main():
     engine = get_engine()
@@ -26,7 +27,7 @@ def main():
                 COUNT(*) FILTER(WHERE c.nace_code IS NOT NULL AND c.nace_code != '') as nace,
                 COUNT(*) FILTER(WHERE sr.raw_payload ? 'adres'
                                   AND NULLIF(sr.raw_payload->>'adres', '') IS NOT NULL) as adres,
-                AVG(c.data_quality_score) as ort_skor
+                AVG(c.identity_completeness) as ort_skor
             FROM companies c
             LEFT JOIN source_records sr ON sr.source_record_id = c.source_record_id
             WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
@@ -34,7 +35,10 @@ def main():
 
         total = r["total"] or 0
         def p(n): return f"{n} ({n/total*100:.1f}%)" if total else "0 (0.0%)"
-        def s(v): return f"{v:.2f}" if v else "0.00"
+        # D-250/7 + D-249: puan tavanla birlikte, olculmemis ise bos.
+        # Eski hali terk edilmis 0-100'luk kolonu "/100" diye yaziyordu.
+        tavan = sunum.tavan_getir()
+        tamlik = sunum.puan_metni(r["ort_skor"], tavan)
 
         report = f"""# Veri Kalitesi KPI Dashboard
 
@@ -53,20 +57,24 @@ Toplam Firma: {total}
 | Adres | {p(r['adres'])} | bar |
 | OSB Parsel | {p(r['parsel'])} | bar |
 
-## Kalite Skorlari
+## Kimlik Dosyasi Tamligi
 
-- Ortalama Kalite Skoru: {s(r['ort_skor'])}/100
-- Hedef: 50+/100 (MVP kabul edilebilir)
+- Ortalama Kimlik Dosyasi Tamligi: {tamlik}
+- {sunum.tavan_metni(tavan)}
 
 ## Durum
 
 """
-        if r["ort_skor"] and r["ort_skor"] >= 50:
-            report += "VERI KALITESI: YETERLI - MVP icin uygun\n"
-        elif r["ort_skor"] and r["ort_skor"] >= 30:
-            report += "VERI KALITESI: ORTA - Detay scrape ile yukseltilebilir\n"
+        # Esikler de tavandan turetilir; 0-100 olcegindeki 50/30 sabitleri
+        # bu puan icin anlamsizdi (tavan 6.5 iken "50+" hic ulasilamaz).
+        if r["ort_skor"] is None:
+            report += "KIMLIK DOSYASI TAMLIGI: OLCULMEDI\n"
+        elif r["ort_skor"] >= tavan * 0.75:
+            report += "KIMLIK DOSYASI TAMLIGI: YETERLI - MVP icin uygun\n"
+        elif r["ort_skor"] >= sunum.risk_esigi(tavan):
+            report += "KIMLIK DOSYASI TAMLIGI: ORTA - Detay scrape ile yukseltilebilir\n"
         else:
-            report += "VERI KALITESI: DUSUK - Detay scrape oncelikli\n"
+            report += "KIMLIK DOSYASI TAMLIGI: DUSUK - Detay scrape oncelikli\n"
 
         print(report)
         # Markdown dosyaya kaydet

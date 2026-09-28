@@ -2,7 +2,8 @@
 """Tenant Health Score v1 — Tenant bazlı sağlık skoru hesaplama modülü.
 
 Kapsam (PRD Faz 2, PO-BACK-01):
-  - Data Quality Score: Firma veri kalitesi ortalaması (0-100)
+  - Kimlik Dosyası Tamlığı: firmaların ``identity_completeness`` (0-10)
+    ortalamasının **ulaşılabilir tavana oranı** — yüzde (D-250/7)
   - Source Reliability: Kaynak güvenilirliği (kampanya durum makinesi)
   - Coverage Score: Segment uygunluk oranı
   - Activity Score: Son etkinlik tazeliği
@@ -10,7 +11,12 @@ Kapsam (PRD Faz 2, PO-BACK-01):
 Skor formülü:
     Health = 0.35 * DQ + 0.25 * SR + 0.25 * CV + 0.15 * AC
 
-Eşikler:
+Dört bileşenin tamamı **yüzde** (0-100); bu yüzden toplanabilirler. Tamlık
+puanı 0-10 ölçeğinde üretildiği için burada tavana bölünerek yüzdeye çevrilir
+(`sunum.tavan_getir()`). Tavan sabit yazılmaz; ağırlık seti değişince kendi
+kendine güncellenir.
+
+Eşikler (yüzde):
     GREEN (sağlıklı):  >= 85
     YELLOW (uyarı):    60-84
     RED (kritik):       < 60
@@ -25,6 +31,7 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any
 
+from company_master.sunum import tavan_getir
 from company_master.tenant.model import TenantContext
 
 # ---------------------------------------------------------------------------
@@ -87,16 +94,30 @@ def _banti_bul(score: float) -> str:
 # Formül fonksiyonları
 # ---------------------------------------------------------------------------
 
-def _data_quality_score(companies: list[dict[str, Any]]) -> float:
-    """Data Quality Score — firmaların data_quality_score ortalaması (0-100).
+def _identity_completeness(companies: list[dict[str, Any]]) -> float:
+    """Kimlik dosyası tamlığı — ölçülmüş firmaların tavana oranı, yüzde.
 
     Formül:
-        DQ = avg(companies.data_quality_score) veya 0 eğer firma yoksa.
+        DQ = avg(olculmus.identity_completeness) / ulasilabilir_tavan * 100
+
+    D-249: ölçülmemiş firma (None) ortalamaya 0 olarak **girmez**, dışlanır.
+    D-250/7: 0-10'luk puan tavana bölünmeden diğer yüzde bileşenlerle
+    toplanamaz. Tavanı aşan değer ölçek hatasıdır; sessizce kırpılmaz.
     """
-    if not companies:
+    olculmus = [
+        c["identity_completeness"] for c in companies
+        if c.get("identity_completeness") is not None
+    ]
+    if not olculmus:
         return 0.0
-    scores = [c.get("data_quality_score", 0) for c in companies]
-    return round(sum(scores) / len(scores), 2)
+    tavan = tavan_getir()
+    ortalama = sum(olculmus) / len(olculmus)
+    if ortalama > tavan:
+        raise ValueError(
+            f"tamlik ortalamasi ({ortalama:.2f}) ulasilabilir tavani "
+            f"({tavan:.2f}) asiyor - veri 0-100 olceginde olabilir"
+        )
+    return round(ortalama / tavan * 100, 2)
 
 
 def _source_reliability_score(
@@ -125,13 +146,17 @@ def _coverage_score(companies: list[dict[str, Any]]) -> float:
 
     Formül:
         Uygun segmente sahip firma sayısı / toplam firma sayısı * 100
-        Uygun: data_quality_score >= 50 AND nace_code dolu AND adres dolu
+        Uygun: tamlık >= tavanın yarısı AND nace_code dolu AND adres dolu
+
+    Eşik tavandan türetilir; sabit yazılsa ölçek değişince hiçbir firma
+    uygun sayılmaz ve skor sessizce daima 0 döner.
     """
     if not companies:
         return 0.0
+    esik = tavan_getir() / 2
     uygun = sum(
         1 for c in companies
-        if c.get("data_quality_score", 0) >= 50
+        if (c.get("identity_completeness") or 0) >= esik
         and c.get("nace_code")
         and c.get("adres")
     )
@@ -164,22 +189,24 @@ def hesapla(
     Args:
         tenant_ctx: TenantContext — hesaplanacak tenant
         companies: Firma verileri listesi
-                 (dict with data_quality_score, nace_code, ...)
+                 (dict with identity_completeness [0-10], nace_code, ...)
+                 Ölçülmemiş firma ``None`` taşır, 0 taşımaz (D-249).
         campaigns: Opsiyonel kampanya verileri listesi
 
     Returns:
-        TenantHealthScore — genel skor, bant ve bileşen ayrıntıları
+        TenantHealthScore — genel skor (yüzde), bant ve bileşen ayrıntıları
 
     Örnek:
         >>> ctx = TenantContext("huginn", "Huginn Data", "standart")
-        >>> firms = [{"data_quality_score": 75, "nace_code": "6201", "adres": "Ankara"}]
-        >>> result = hesapla(ctx, firms)
-        >>> result.overall
-        75.0
+        >>> tam = tavan_getir()  # ulasilabilir tavan, sabit degil
+        >>> firms = [{"identity_completeness": tam, "nace_code": "6201",
+        ...           "adres": "Ankara", "son_guncelleme_gun": 3}]
+        >>> hesapla(ctx, firms).band
+        'green'
     """
     campaigns = campaigns or []
 
-    dq = _data_quality_score(companies)
+    dq = _identity_completeness(companies)
     sr = _source_reliability_score(campaigns)
     cv = _coverage_score(companies)
     ac = _activity_score(companies)
@@ -241,7 +268,8 @@ def esik_dokumani() -> str:
         "",
         "| Bileşen | Ağırlık | Açıklama |",
         "|---------|---------|----------|",
-        "| Data Quality | 35% | Firma veri tamamlığı ve doğruluk |",
+        f"| Kimlik Dosyası Tamlığı | 35% | Tamlık ortalamasının ulaşılabilir "
+        f"tavana ({tavan_getir():.2f}) oranı, yüzde |",
         "| Source Reliability | 25% | Kaynak/kampanya güvenilirliği |",
         "| Coverage | 25% | Segment uygunluk oranı |",
         "| Activity | 15% | Son güncelleme tazeliği |",

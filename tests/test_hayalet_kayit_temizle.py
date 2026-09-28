@@ -192,6 +192,10 @@ class TestRunCleanup:
         mock_get_engine.return_value = mock_engine
 
         # get_related_records için de mock
+        # D-243: "dizin bos" degil "BU kosu yazmadi" olculur. Dizinde duran
+        # hayalet_20260927.jsonl gercek bir silme denetim kaydidir (4591 firma,
+        # git'te izli); testin onu yok saymasi kanit silmek olurdu.
+        onceki = set(Path("data/backup").glob("hayalet_*.jsonl"))
         with patch("company_master.etl.hayalet_kayit_temizle.get_related_records", return_value={}):
             result = run_cleanup(dry_run=True)
 
@@ -201,7 +205,7 @@ class TestRunCleanup:
         assert result["dry_run"] is True
         # dry-run DİSKE YAZMAZ: yedek yolu dönmez, üretim dizini kirlenmez
         assert result["backup_path"] is None
-        assert not list(Path("data/backup").glob("hayalet_*.jsonl"))
+        assert set(Path("data/backup").glob("hayalet_*.jsonl")) == onceki
 
 
 if __name__ == "__main__":

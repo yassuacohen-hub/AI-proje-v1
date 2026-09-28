@@ -2923,3 +2923,124 @@ teknik secenek olarak degerlendirilmez.
 
 **Referans:** D-245, D-247, D-248, D-249, D-250, D-252, D-256. Rapor:
 `docs/OLCUM_MERSIS_2026-09-28.md`.
+
+## D-258 — Panel tavani ilan eder; "yarim goc" yedi ayri yerde bulundu (2026-09-28)
+
+**Gorev:** PANEL-DURUSTLUK-01. Panel sayilari gerceginden IYI gorunuyordu.
+Iki yalan olculdu, ikisi de kapatildi; arama kapsami genisletilince ayni
+desenin yedi varyanti cikti.
+
+### 1. Tavan artik turetilir, sabit yazilmaz
+
+`etl/quality_recalc.py` icindeki `AGIRLIKLAR` tek beyandir; ulasilabilir tavan
+o setten **hesaplanir**. Agirlik seti v2 olunca tavan, bantlar ve risk esigi
+kendiliginden guncellenir. Mandal bunu kirilarak dogrular: tavan sabite
+donerse `test_tavan_agirlik_setinden_turetilir` kirmizi yanar.
+
+- Olculen: ortalama **3.71**, en yuksek **6.50**, n=**9412**.
+- Ulasilabilir tavan **6.50/10**. Kalan 3.50 puan `mersis` (1.0),
+  `trade_registry` (1.0), `nace_code` (1.0), `tax_office` (0.5) alanlarinda
+  **kilitli** --- kaynak yok (D-257: MERSIS kapali, TOBB 401, TSG captcha).
+- Panel artik `3.71 / 6.50 ulasilabilir` yazar. Kilitli alanlar ayri listelenir
+  ve **nicin** kilitli oldugu okunur. **BORC-PANEL-TAVAN-01 kapandi.**
+
+### 2. Sunum tek kapidan gecer: `src/company_master/sunum.py`
+
+D-256 puan **URETIMINI** tek kapiya baglamisti; puan **SUNUMU** hala 20+
+dosyaya dagilmisti. Tek yer duzeltilse ikinci ekran eski yalani gostermeye
+devam ederdi. Kapi fonksiyonlari: `tavan_getir`, `puan_metni`, `tavan_metni`,
+`kilit_satirlari`, `nace_metni`, `sektor_sayaci`, `bantlar`, `bant_dagilimi`,
+`risk_esigi`. Mandal: hicbir panel dosyasi `/100` olcegi yazamaz.
+
+### 3. NACE tahmini artik etiketli
+
+D-252 olcumu: NACE kodlarinin **%100'u tahmin**, dogrulanmis kod **sifir**.
+1880 firma tek bir `29.10` kodunda yigilmis --- bu sektor dagilimi degil,
+**varsayilan deger kutlesi**. `sektor_sayaci()` tahmini kodu sayaca almaz;
+ekranda "tahmin haric: N" olarak **ilan edilir**. Sayactan cikarmak yetmez;
+kullanici NICIN dustugunu gormeli.
+
+### 4. "Yarim goc" deseni: ad degisti, ona bagli sey kaldi
+
+Ayni desenin **yedi** varyanti olculdu. Kolon `data_quality_score` (0-100) ->
+`identity_completeness` (0-10) tasinmisti; tasinmayanlar:
+
+1. **Performans ayagi** --- 27 indeksin 5'i terk edilmis kolondaydi, sorgular
+   seq scan'e dusuyordu. `0029` gocu ile tasindi.
+2. **Ana sema beyani** --- `companies.sql` canli kolonu bilmiyordu; sifirdan
+   kurulan DB olu kolonla doguyordu.
+3. **SQL esigi** --- `/api/quality-trend` kolonu yeni, CASE esikleri (80/60/40/20)
+   eskiydi; panel **butun** firmalari en kotu banda dusuruyordu.
+4. **Tenant sagligi** --- olcek karisimi yuzunden tenant yapisal olarak GREEN'e
+   ulasamiyordu.
+5. **Silme karari (en agiri)** --- `scripts/dedup_apply.py` kazanani bayat
+   kolonla seciyordu. Bayat kolon yanlis kaydi kazandirip **dogrusunu
+   siliyordu**. Veri kaybi riski; kazanan artik canli kolonla secilir.
+6. **Sabit esik** --- `scripts/quality_remediation.py` esigi `30.0` yaziliydi.
+   Kolon 0-10 oldugu icin **9412 firmanin tamami** "duzeltilmeli" listesine
+   giriyordu. Esik artik `risk_esigi(tavan_getir())` ile turetilir.
+7. **Ikinci indeks kaynagi** --- `setup_local_indexes.py` ve
+   `p44_apply_indexes.py` gocun **eski** indeks adini geri kuruyordu;
+   calistirilsalardi goc defteri kirilirdi. Ikisinden de puan indeksi tanimi
+   kaldirildi; `0029` tek kanonik kaynaktir.
+
+**Kural:** kolon adi degistiginde arama kapsami sadece okuyan kodla
+sinirlandirilmaz. Ayni turda **indeks / sema beyani / SQL esigi / silme
+karari / esik sabiti / ikincil DDL betigi** taranir. Bunlarin hicbiri testte
+gorunmez --- altisi da sifir test kapsamindaydi.
+
+### 5. `dusen-iz:` --- goc defteri korlesmeden daraltilir
+
+`0029`, `0008/0009/0011` gocelerinin indekslerini yeniden adlandirinca defter
+o uc gocu "uygulanmamis" saydi. `ustunden-gecen:` dosyanin **tamamini**
+eskitir --- hala gecerli 4-6 iz tasiyan bir dosyaya yazmak defteri **kor**
+ederdi. Bunun yerine iz bazli isaret kullanildi:
+
+```sql
+-- dusen-iz: idx_companies_quality_score
+```
+
+Yalniz adi gecen iz aranmaz; dosyanin geri kalani denetlenmeye devam eder.
+
+### 6. Mandal ve kanca
+
+`tests/test_panel_durustluk.py` --- 16 assert. Kanca
+`scripts/hooks/pre-commit` (depoda durur, `.git/hooks` surumlenmez;
+`git config core.hooksPath scripts/hooks` ile kurulur) artik **iki** takim
+kosar: panel durustlugu + goc defteri. Sema degisikligi commit'e tek basina
+giremez (D-251/3). Tam takim (~170 sn) kancaya konmaz; kanca ~15 sn.
+
+### 7. Bayat testler duzeltildi --- test de bir beyandir
+
+- `test_api_integration.py::test_quality_trend_liste` **duzeltilen yalani
+  savunuyordu**: `"60-79"` gibi 0-100 bandi bekliyordu. Yeni sozlesmeye
+  tasindi; artik bandin tavandan turedigini ve olculmemis firmanin hicbir
+  banda yazilmadigini (D-249) dogrular.
+- `test_hayalet_kayit_temizle.py` uretim dizinini **mutlak** bos kontrol
+  ediyordu. Dizindeki `hayalet_20260927.jsonl` 4591 firmanin silinme denetim
+  kaydidir, git'te izlidir. Test artik "dizin bos" degil "**bu kosu
+  yazmadi**" olcer. Prova testinin gecmesi icin kanit silinmez.
+
+**Sonuc:** 4439 -> **4441 passed**, kalan tek kirmizi `test_kok_politikasi`
+(dis koktekki iki kullanici dosyasi, ajanla ilgisiz).
+
+### 8. Arac notu
+
+`apply_diff` bu turda **4 kez ustuste** tuttu (D-256/8'deki tersine).
+Yine de cok-dosyali yama betikle yapildi. Betik iki ders birden ogretti:
+**idempotent olmali** (yarim uygulanmis durumdan devam edebilsin) ve
+**yamanin icerigini basmamali** --- terminal cp1254, yamada `→` vardi,
+`UnicodeEncodeError` betigi 13 yamanin 7'sinde kesti (D-86).
+
+### 9. Acik borc
+
+- **BORC-KOLON-DUSUR-01** --- `data_quality_score` kolonu hala duruyor
+  (9412 satir dolu). `0029` bilerek dusurmedi; dusurme ayri karar ister.
+  Duruyorken **her yeni kod onu yeniden kullanabilir** --- bu turda 7 kez oldu.
+- **BORC-VKN-01** ve **BORC-NACE-DOGRULAMA-01** acik; ikisi de kaynak bekler
+  (D-257/5: A veya B secenegi).
+- Dis kokte 2 izinsiz dosya (`_kalan.txt`, `veri kumesi maxmum kolon .txt`)
+  --- D-241 ihlali, urun sahibinin dosyalari, dokunulmadi.
+
+**Referans:** D-86, D-241, D-243, D-245, D-249, D-250, D-251, D-252, D-253,
+D-256, D-257.

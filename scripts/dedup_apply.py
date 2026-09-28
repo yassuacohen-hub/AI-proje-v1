@@ -59,7 +59,9 @@ def pick_winner(group: list[dict]) -> tuple[dict, list[dict]]:
     def key(r):
         return (
             0 if is_tasfiye(r) else 1,
-            r['data_quality_score'] or 0,
+            # D-250/1: canli puan kolonu; bayat `data_quality_score` ile
+            # secim yapmak yanlis kaydi kazandirip dogrusunu siliyordu.
+            r['identity_completeness'] or 0,
             filled_count(r),
         )
     ranked = sorted(group, key=key, reverse=True)
@@ -75,7 +77,7 @@ def main(apply: bool) -> None:
         rows = [dict(r) for r in conn.execute(text("""
             SELECT company_id, legal_name, trade_name, tax_number, vergi_no,
                    website_domain, primary_phone, primary_email,
-                   nace_code, osb_parsel, adres, data_quality_score
+                   nace_code, osb_parsel, adres, identity_completeness
             FROM companies
         """)).mappings().all()]
 

@@ -163,7 +163,7 @@ def _firma_kayitlari(engine: Any) -> list[dict[str, Any]]:
     with engine.connect() as conn:
         rows = conn.execute(
             text(
-                "SELECT data_quality_score, nace_code, "
+                "SELECT identity_completeness, nace_code, "
                 "address_line AS adres, updated_at "
                 "FROM companies WHERE is_ankara = TRUE LIMIT :limit"
             ),
@@ -182,7 +182,9 @@ def _firma_kayitlari(engine: Any) -> list[dict[str, Any]]:
         taze = guncelleme if isinstance(guncelleme, datetime) else None
         kayitlar.append(
             {
-                "data_quality_score": row.get("data_quality_score") or 0,
+                # D-249: olculmemis firma 0 tasimaz; None gecer ve
+                # health.py ortalamadan disar. `or 0` ortalamayi bastirirdi.
+                "identity_completeness": row.get("identity_completeness"),
                 "nace_code": row.get("nace_code"),
                 "adres": row.get("adres"),
                 "son_guncelleme_gun": (

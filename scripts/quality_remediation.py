@@ -20,6 +20,7 @@ ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from company_master.db.connection import get_engine
+from company_master import sunum as _sunum
 from sqlalchemy import text
 
 REMEDIATION_RULES: dict[str, dict[str, Any]] = {
@@ -74,16 +75,22 @@ REMEDIATION_RULES: dict[str, dict[str, Any]] = {
 }
 
 
-def get_low_quality_companies(engine, min_score: float = 30.0, limit: int = 500):
-    """QS<min_score olan firmalari getir."""
+def get_low_quality_companies(engine, min_score: float | None = None, limit: int = 500):
+    """Esigin altinda kalan firmalari getir.
+
+    D-250/7: esik SABIT yazilmaz, ulasilabilir tavandan turetilir. Eski hali
+    30.0 idi; kolon 0-10 oldugu icin 9412 firmanin TAMAMI "kotu" sayiliyordu.
+    """
+    if min_score is None:
+        min_score = _sunum.risk_esigi(_sunum.tavan_getir())
     with engine.connect() as conn:
         rows = conn.execute(text("""
             SELECT company_id, legal_name, tax_number, address, primary_phone,
                    primary_email, website_domain, nace_code, osb_parsel, trade_name,
-                   data_quality_score, entity_confidence
+                   identity_completeness, entity_confidence
             FROM companies
-            WHERE data_quality_score < :min_score
-            ORDER BY data_quality_score ASC
+            WHERE identity_completeness < :min_score
+            ORDER BY identity_completeness ASC
             LIMIT :limit
         """), {"min_score": min_score, "limit": limit}).mappings().all()
         return [dict(r) for r in rows]
@@ -109,7 +116,7 @@ def build_remediation_tasks(company: dict[str, Any]) -> list[dict[str, Any]]:
             "task_id": f"RQ-{company.get('company_id', 'unknown')}-{field}",
             "company_id": company.get("company_id"),
             "company_name": company.get("legal_name", "Bilinmeyen"),
-            "data_quality_score": company.get("data_quality_score"),
+            "identity_completeness": company.get("identity_completeness"),
             "field": rule["field"],
             "action": rule["action"],
             "priority": rule["priority"],
@@ -122,11 +129,12 @@ def build_remediation_tasks(company: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 def generate_report(tasks: list[dict[str, Any]], min_score: float) -> str:
-    """Rapor metni olustur."""
+    """Rapor metni olustur. Esik ve puanlar tavanla birlikte yazilir (D-250/7)."""
+    _tavan = _sunum.tavan_getir()
     lines = [
-        f"# Veri Kalitesi Duzeltme Raporu",
+        "# Kimlik Dosyasi Tamligi Duzeltme Raporu",
         f" Tarih: {datetime.now(timezone.utc).isoformat()}",
-        f" Min Kalite Skoru: {min_score}",
+        f" Esik: {_sunum.puan_metni(min_score, _tavan)}",
         f" Toplam Duzeltme Gorevi: {len(tasks)}",
         f"",
         f"## Gorev Ozeti",
@@ -152,7 +160,7 @@ def generate_report(tasks: list[dict[str, Any]], min_score: float) -> str:
     for t in tasks:
         lines.append(
             f"- **{t['task_id']}** [{t['priority']}]: {t['company_name']} "
-            f"(QS:{t['data_quality_score']}) → {t['action']}"
+            f"({_sunum.puan_metni(t['identity_completeness'], _tavan)}) → {t['action']}"
         )
     lines.append("")
     return "\n".join(lines)
@@ -160,7 +168,10 @@ def generate_report(tasks: list[dict[str, Any]], min_score: float) -> str:
 
 def main():
     parser = argparse.ArgumentParser(description="Veri Kalitesi Duzeltme Scripti")
-    parser.add_argument("--min-score", type=float, default=30.0, help="Min kalite skoru")
+    parser.add_argument(
+        "--min-score", type=float, default=None,
+        help="Esik; verilmezse ulasilabilir tavandan turetilir",
+    )
     parser.add_argument("--limit", type=int, default=500, help="Firma siniri")
     parser.add_argument("--dry-run", action="store_true", help="Raporlama yap, DB yazma")
     parser.add_argument("--output", type=str, default=None, help="Cikis dosyasi")
@@ -170,7 +181,7 @@ def main():
     companies = get_low_quality_companies(engine, min_score=args.min_score, limit=args.limit)
 
     if not companies:
-        print(f"QS < {args.min_score} olan firma bulunamadi.")
+        print("Esigin altinda firma bulunamadi.")
         return
 
     all_tasks: list[dict[str, Any]] = []

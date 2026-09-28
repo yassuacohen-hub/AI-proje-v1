@@ -152,7 +152,7 @@ def load_quality_trend(gun: int = 30) -> pd.DataFrame:
         with engine.connect() as conn:
             rows = conn.execute(text(
                 "SELECT DATE(created_at) as tarih, "
-                "       AVG(data_quality_score) as ort_skor, "
+                "       AVG(identity_completeness) as ort_skor, "
                 "       COUNT(*) as firma_sayisi "
                 "FROM companies "
                 "WHERE is_ankara=TRUE AND is_osb_member=TRUE "

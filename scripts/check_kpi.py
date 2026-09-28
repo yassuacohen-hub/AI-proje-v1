@@ -6,6 +6,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 
 from sqlalchemy import text
 from company_master.db.connection import get_engine
+from company_master import sunum
 
 engine = get_engine()
 with engine.connect() as conn:
@@ -19,7 +20,7 @@ with engine.connect() as conn:
             COUNT(*) FILTER(WHERE c.nace_code IS NOT NULL AND c.nace_code != '') as nace,
             COUNT(*) FILTER(WHERE sr.raw_payload ? 'adres'
                               AND NULLIF(sr.raw_payload->>'adres', '') IS NOT NULL) as adres,
-            AVG(c.data_quality_score) as ort_skor
+            AVG(c.identity_completeness) as ort_skor
         FROM companies c
         LEFT JOIN source_records sr ON sr.source_record_id = c.source_record_id
         WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
@@ -30,9 +31,6 @@ with engine.connect() as conn:
     def p(n):
         return f"{n} ({n/total*100:.1f}%)" if total else "0 (0.0%)"
 
-    def s(v):
-        return f"{v:.2f}" if v else "0.00"
-
     print(f"Toplam: {total}")
     print(f"Telefon: {p(r['telefon'])}")
     print(f"Email: {p(r['email'])}")
@@ -41,4 +39,8 @@ with engine.connect() as conn:
     print(f"NACE: {p(r['nace'])}")
     print(f"Adres: {p(r['adres'])}")
     print(f"Parsel: {p(r['parsel'])}")
-    print(f"Ortalama Kalite Skoru: {s(r['ort_skor'])}/100")
+    # D-250/7 + D-249: puan tavanla birlikte, olculmemis ise bos.
+    # Eski hali terk edilmis 0-100'luk kolonu "/100" diye yaziyordu.
+    tavan = sunum.tavan_getir()
+    print(f"Ortalama Kimlik Dosyasi Tamligi: {sunum.puan_metni(r['ort_skor'], tavan)}")
+    print(sunum.tavan_metni(tavan))

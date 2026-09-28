@@ -71,7 +71,7 @@ def check_data_quality() -> tuple[bool, str]:
         engine = get_engine()
         with engine.connect() as conn:
             avg = conn.execute(text("""
-                SELECT AVG(data_quality_score) as avg_score
+                SELECT AVG(identity_completeness) as avg_score
                 FROM companies WHERE is_ankara = TRUE
             """)).fetchone()[0]
 

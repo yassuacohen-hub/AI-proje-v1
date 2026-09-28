@@ -17,7 +17,7 @@ from src.company_master.db.connection import (
     _engine_for, init_db, _load_env,
 )
 from src.company_master.etl.normalize import (
-    _data_quality_score, _map_row, run_normalize,
+    _map_row, run_normalize,
 )
 from src.company_master.search.engine import (
     _as_list, _row_to_dashboard, _data_root,
@@ -90,40 +90,11 @@ def test_init_db_creates_quarantine(monkeypatch):
         assert cur.fetchone() is not None
         conn.close()
 
-def test_data_quality_score_empty_row():
-    assert _data_quality_score({}) == 0.0
-
-def test_data_quality_score_website_domain_only():
-    row = {
-        "raw_website": None,
-        "website_domain": "firma.com",
-        "raw_tax_number": "1234567890",
-        "raw_payload": {"adres": "Ankara"},
-    }
-    skor = _data_quality_score(row)
-    assert skor == 40.0  # D-250: web 10 + VKN 15 + adres 15
-
-def test_data_quality_score_all_critical_filled():
-    row = {
-        "raw_phone": "0312 111 22 33",
-        "raw_email": "info@firma.com",
-        "raw_website": "firma.com",
-        "raw_tax_number": "1234567890",
-        "trade_name": "FIRMA",  # D-250: tabela ismi de 5 puan
-        "raw_payload": {
-            "adres": "Ankara",
-            "sektor": "Imalat",
-            "osb_parsel": "123/45",
-            "nace_code": "71.12",
-        },
-    }
-    skor = _data_quality_score(row)
-    assert skor == 100.0
-
-def test_data_quality_score_clamped_at_zero():
-    row = {"raw_payload": {}}
-    skor = _data_quality_score(row)
-    assert 0.0 <= skor <= 100.0
+# D-250/D-256: `normalize._data_quality_score` (0-100, ikinci puan yolu)
+# kaldirildi; puan tek kapidan (etl/quality_recalc.py, 0-10) uretilir.
+# Burada duran 4 test import'u kirip DOSYANIN TAMAMINI toplanamaz
+# yapiyordu --- yani db/normalize/search testlerinin hicbiri kosmuyordu.
+# Kaldirmanin mandali: tests/test_kalite_puani.py::<hasattr kontrolu>.
 
 def test_map_row_multi_phone():
     row = {
@@ -155,15 +126,17 @@ def test_search_as_list_str_split_semicolon():
     assert _as_list("a; ; b") == ["a", "b"]
 
 def test_search_row_to_dashboard_no_payload():
+    """D-249: olculmemis firma 0 degil None tasir; kolon adi da canli olan."""
     row = {
         "company_id": "c2",
         "legal_name": "Firma B",
-        "data_quality_score": None,
+        "identity_completeness": None,
         "raw_payload": None,
     }
     out = _row_to_dashboard(row)
     assert out["unvan"] == "Firma B"
-    assert out["data_quality_score"] is None
+    assert out["identity_completeness"] is None
+    assert "data_quality_score" not in out, "terk edilmis kolon geri sizdi"
 
 def test_search_row_to_dashboard_payload_not_dict():
     row = {

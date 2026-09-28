@@ -214,7 +214,7 @@ class TestCokluKaynak:
 
 
 class TestPagination:
-    """Y5: limit/offset + data_quality_score DESC siralama."""
+    """Y5: limit/offset + identity_completeness DESC siralama."""
 
     def test_limit_offset_calisir(self, client):
         s1 = _companies(client, limit=5, offset=0)
@@ -231,15 +231,28 @@ class TestPagination:
 
     def test_kalite_skoruna_gore_azalan_siralama(self, client):
         d = _companies(client, limit=20)
-        skorlar = [i["data_quality_score"] for i in d["items"] if i["data_quality_score"] is not None]
+        skorlar = [
+            i["identity_completeness"]
+            for i in d["items"]
+            if i.get("identity_completeness") is not None
+        ]
         assert skorlar == sorted(skorlar, reverse=True)
+        # D-250/7: sunulan puan ulasilabilir tavani asamaz.
+        assert all(s <= web_app._sunum.tavan_getir() for s in skorlar)
 
 
 class TestNaceFiltre:
     def test_nace_onek_filtresi(self, client):
-        # En yaygin sektoru dinamik sec (veri degisse de test kirilmasin)
-        dist = client.get("/api/nace-distribution", params={"limit": 1}).json()
-        assert dist, "nace-distribution bos"
+        # En yaygin sektoru dinamik sec (veri degisse de test kirilmasin).
+        # D-252/5: dagilim yalniz KANITLI koddan kurulur. Kanitli kod yoksa
+        # filtrenin dogrulanacagi veri de yoktur --- bu bir kusur degil, veri
+        # gercegi; sahte bir on_ek uydurmak testi yalanci yapar.
+        govde = client.get("/api/nace-distribution", params={"limit": 1}).json()
+        dist = govde["dagilim"]
+        if not dist:
+            pytest.skip(
+                f"kanitli NACE kodu yok ({govde['tahmin_haric']} firma tahmini)"
+            )
         on_ek = (dist[0].get("nace_code") or "")[:2]
         assert on_ek, f"nace_code yok: {dist[0]}"
 

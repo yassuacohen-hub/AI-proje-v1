@@ -201,7 +201,7 @@ KPI_QUERY = """
       SUM(CASE WHEN c.primary_phone IS NOT NULL AND c.primary_phone != '' THEN 1 ELSE 0 END) AS tel,
       SUM(CASE WHEN c.primary_email IS NOT NULL AND c.primary_email != '' THEN 1 ELSE 0 END) AS email,
       SUM(CASE WHEN c.nace_code IS NOT NULL AND c.nace_code != '' THEN 1 ELSE 0 END) AS nace,
-      AVG(c.data_quality_score) AS avg_score
+      AVG(c.identity_completeness) AS avg_score
     FROM companies c
     WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
 """
@@ -218,18 +218,18 @@ SOURCES_QUERY = """
 
 COMPANIES_LIST_QUERY = """
     SELECT c.legal_name, c.trade_name, c.website_domain, c.primary_phone, c.primary_email,
-           c.tax_number, c.nace_code, c.data_quality_score
+           c.tax_number, c.nace_code, c.identity_completeness
     FROM companies c
     WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
-      AND c.data_quality_score >= :min_score
-      AND c.data_quality_score <= :max_score
-    ORDER BY c.data_quality_score DESC
+      AND c.identity_completeness >= :min_score
+      AND c.identity_completeness <= :max_score
+    ORDER BY c.identity_completeness DESC
     LIMIT :limit
 """
 
 ILIKE_SEARCH_QUERY = """
     SELECT c.legal_name, c.trade_name, c.website_domain, c.primary_phone, c.primary_email,
-           c.tax_number, c.nace_code, c.data_quality_score
+           c.tax_number, c.nace_code, c.identity_completeness
     FROM companies c
     WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
       AND (c.legal_name ILIKE :search
@@ -237,23 +237,23 @@ ILIKE_SEARCH_QUERY = """
            OR c.primary_phone ILIKE :search
            OR c.primary_email ILIKE :search
            OR c.tax_number ILIKE :search)
-    ORDER BY c.data_quality_score DESC
+    ORDER BY c.identity_completeness DESC
     LIMIT 50
 """
 
 
 ILIKE_SEARCH_OPTIMIZED_QUERY = """
     SELECT c.legal_name, c.trade_name, c.website_domain, c.primary_phone, c.primary_email,
-           c.tax_number, c.nace_code, c.data_quality_score
+           c.tax_number, c.nace_code, c.identity_completeness
     FROM companies c
     WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
       AND c.search_text ILIKE :search
-    ORDER BY c.data_quality_score DESC
+    ORDER BY c.identity_completeness DESC
     LIMIT 50
 """
 SOURCE_FILTER_QUERY = """
     SELECT c.legal_name, c.trade_name, c.website_domain, c.primary_phone, c.primary_email,
-           c.tax_number, c.nace_code, c.data_quality_score
+           c.tax_number, c.nace_code, c.identity_completeness
     FROM companies c
     WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
       AND c.source_record_id IN (
@@ -262,7 +262,7 @@ SOURCE_FILTER_QUERY = """
         JOIN sources s ON sr.source_id = s.source_id
         WHERE s.source_name = :source_name
       )
-    ORDER BY c.data_quality_score DESC
+    ORDER BY c.identity_completeness DESC
     LIMIT 50
 """
 
@@ -273,10 +273,10 @@ ASO_COUNT_QUERY = """
 
 QUALITY_TREND_QUERY = """
     SELECT CASE
-        WHEN data_quality_score >= 80 THEN '80-100'
-        WHEN data_quality_score >= 60 THEN '60-79'
-        WHEN data_quality_score >= 40 THEN '40-59'
-        WHEN data_quality_score >= 20 THEN '20-39'
+        WHEN identity_completeness >= 80 THEN '80-100'
+        WHEN identity_completeness >= 60 THEN '60-79'
+        WHEN identity_completeness >= 40 THEN '40-59'
+        WHEN identity_completeness >= 20 THEN '20-39'
         ELSE '0-19'
     END AS bucket, COUNT(*) AS cnt
     FROM companies

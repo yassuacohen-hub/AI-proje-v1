@@ -4,7 +4,7 @@
 Kapsam:
 - ``_firma_ara`` / ``_kaynak_adlari`` → ``(veri, hata)`` sözleşmesi
 - ``_sorgu_kur`` parametreli SQL üretimi
-- ``kalite_bantlari`` dağılımı
+- ``tamlik_bantlari`` dağılımı (bantlar TAVANDAN türetilir, PANEL-DURUSTLUK-01)
 - geriye dönük ``search_companies`` / ``get_source_names``
 - ``render_search_tab`` senaryoları (kpi_karti / hata_kutusu / bos_durum / info)
 - kaynak guard: ``st.metric`` ve sessiz ``except`` yok
@@ -19,7 +19,12 @@ from typing import Any
 import pandas as pd
 import pytest
 
+from company_master import sunum
 from web_dashboard.tabs import admin_search as modul
+
+# PANEL-DURUSTLUK-01: canlı ölçüm tavanı 6.50. Testler DB'ye gitmesin diye
+# sabitlenir; sabit yazılan tek yer BURASI — üretim kodu tavanı türetir.
+TAVAN = 6.5
 
 # ---------------------------------------------------------------------------
 # Sahte DB
@@ -74,7 +79,7 @@ def _satir(skor: float, cid: Any | None = None) -> dict[str, Any]:
     return {
         "company_id": cid if cid is not None else uuid.uuid4(),
         "legal_name": "Firma",
-        "data_quality_score": skor,
+        "identity_completeness": skor,
     }
 
 
@@ -84,15 +89,21 @@ def _satir(skor: float, cid: Any | None = None) -> dict[str, Any]:
 
 
 def test_sorgu_kur_filtresiz_sadece_skor_ve_limit():
-    sql, params = modul._sorgu_kur("", 0, 100, "", 50)
+    sql, params = modul._sorgu_kur("", 0.0, TAVAN, "", 50)
     assert "ILIKE" not in sql
     assert "source_records" not in sql
-    assert params == {"score_min": 0, "score_max": 100, "limit": 50}
-    assert "ORDER BY data_quality_score DESC LIMIT :limit" in sql
+    assert params == {"score_min": 0.0, "score_max": TAVAN, "limit": 50}
+    assert "ORDER BY identity_completeness DESC LIMIT :limit" in sql
+
+
+def test_sorgu_kur_terk_edilmis_kolona_bakmaz():
+    """D-249/D-250: ``data_quality_score`` ölü kolondur, sorguya giremez."""
+    sql, _params = modul._sorgu_kur("abc", 1.0, 5.0, "ostim", 20)
+    assert "data_quality_score" not in sql
 
 
 def test_sorgu_kur_tum_filtreler_parametreli():
-    sql, params = modul._sorgu_kur("abc", 10, 90, "ostim", 20)
+    sql, params = modul._sorgu_kur("abc", 1.0, 5.0, "ostim", 20)
     assert "legal_name ILIKE :q" in sql
     assert "source_name = :src" in sql
     assert params["q"] == "%abc%"
@@ -107,12 +118,12 @@ def test_sorgu_kur_tum_filtreler_parametreli():
 
 def test_firma_ara_basarili_company_id_str_ve_skor_yuvarlanir(monkeypatch):
     cid = uuid.uuid4()
-    conn = _engine_kur(monkeypatch, rows=[_satir(87.456, cid)])
+    conn = _engine_kur(monkeypatch, rows=[_satir(3.456, cid)])
     df, hata = modul._firma_ara(query="x")
     assert hata is None
     assert isinstance(df, pd.DataFrame)
     assert df.loc[0, "company_id"] == str(cid)
-    assert df.loc[0, "data_quality_score"] == 87.5
+    assert df.loc[0, "identity_completeness"] == 3.5
     assert len(conn.sorgular) == 1
 
 
@@ -132,10 +143,23 @@ def test_firma_ara_hata_yakalanir_ve_loglanir(monkeypatch, caplog):
     assert "firma arama" in caplog.text
 
 
-def test_firma_ara_none_skor_sifira_cevrilir(monkeypatch):
+def test_firma_ara_olculmemis_skor_sifira_cevrilmez(monkeypatch):
+    """D-249: "veri yok" ile "0 puan" ayrı değerlerdir; NULL 0'a düşmez."""
     _engine_kur(monkeypatch, rows=[_satir(None)])
     df, _ = modul._firma_ara()
-    assert df.loc[0, "data_quality_score"] == 0
+    assert pd.isna(df.loc[0, "identity_completeness"])
+
+
+def test_nace_kodu_etiketsiz_sunulmaz(monkeypatch):
+    """D-252/4: tahmini kod ekranda "29.10" diye ciplak duramaz."""
+    _engine_kur(monkeypatch, rows=[
+        {**_satir(5.0), "nace_code": "29.10", "nace_source": "sector_default"},
+        {**_satir(5.0), "nace_code": "25.11", "nace_source": "mersis"},
+    ])
+    df, _ = modul._firma_ara()
+    assert "tahmin" in df.loc[0, "nace_code"], "tahmini kod etiketsiz gosteriliyor"
+    assert df.loc[1, "nace_code"] == "25.11", "kanitli kod etiket tasimamali"
+    assert "nace_source" not in df.columns, "teknik kolon ekrana sizdi"
 
 
 def test_kaynak_adlari_basarili(monkeypatch):
@@ -153,25 +177,40 @@ def test_kaynak_adlari_hata_bos_liste_ve_metin(monkeypatch, caplog):
 
 
 # ---------------------------------------------------------------------------
-# kalite_bantlari
+# tamlik_bantlari — bantlar tavandan türetilir
 # ---------------------------------------------------------------------------
 
 
-def test_kalite_bantlari_dagilim():
-    df = pd.DataFrame({"data_quality_score": [95, 80, 79.9, 60, 45, 20, 5, 0]})
-    bant = modul.kalite_bantlari(df)
-    assert bant["80-100 (Yüksek)"] == 2
-    assert bant["60-79 (İyi)"] == 2
-    assert bant["40-59 (Orta)"] == 1
-    assert bant["20-39 (Düşük)"] == 1
-    assert bant["0-19 (Çok Düşük)"] == 2
+def test_tamlik_bantlari_dagilim():
+    """Tavan 6.5 iken bantlar 1.30'luk dilimler; 0-100 eşiği kullanılmaz."""
+    df = pd.DataFrame({"identity_completeness": [6.5, 5.2, 4.0, 2.6, 1.3, 0.0]})
+    bant = modul.tamlik_bantlari(df, TAVAN)
+    assert bant["5.20-6.50"] == 1  # 6.5
+    assert bant["2.60-3.90"] == 0
+    assert bant["3.90-5.20"] == 2  # 5.2 ve 4.0
     assert sum(bant.values()) == len(df)
 
 
+def test_tamlik_bantlari_sabit_bant_adi_kullanmaz():
+    """Tavan değişince bant adları da değişir; sabit yazılırsa bu kırılır."""
+    assert set(modul.tamlik_bantlari(pd.DataFrame(), 6.5)) != set(
+        modul.tamlik_bantlari(pd.DataFrame(), 10.0)
+    )
+
+
+def test_tamlik_bantlari_olculmedi_ayri_durur():
+    """D-249: None puan 0 bandına yazılmaz, ayrı kovada durur."""
+    df = pd.DataFrame({"identity_completeness": [None, 3.0]})
+    bant = modul.tamlik_bantlari(df, TAVAN)
+    assert bant["olculmedi"] == 1
+    assert bant["0.00-1.30"] == 0
+
+
 @pytest.mark.parametrize("df", [None, pd.DataFrame(), pd.DataFrame({"x": [1]})])
-def test_kalite_bantlari_bos_girdi_sifir(df):
-    bant = modul.kalite_bantlari(df)
-    assert len(bant) == 5 and all(v == 0 for v in bant.values())
+def test_tamlik_bantlari_bos_girdi_sifir(df):
+    bant = modul.tamlik_bantlari(df, TAVAN)
+    assert len(bant) == sunum.BANT_SAYISI + 1  # + "olculmedi"
+    assert all(v == 0 for v in bant.values())
 
 
 # ---------------------------------------------------------------------------
@@ -235,7 +274,9 @@ def cikti(monkeypatch):
     monkeypatch.setattr(st, "subheader", lambda *a, **k: None)
     monkeypatch.setattr(st, "columns", lambda n, **k: [_Col() for _ in range(n if isinstance(n, int) else len(n))])
     monkeypatch.setattr(st, "text_input", lambda *a, **k: "")
-    monkeypatch.setattr(st, "slider", lambda *a, **k: (0, 100))
+    monkeypatch.setattr(st, "slider", lambda *a, **k: (0.0, TAVAN))
+    # Tavan DB'den okunur; testte sabitlenir (import anında DB'ye gidilmez).
+    monkeypatch.setattr(modul.sunum, "tavan_getir", lambda: TAVAN)
     monkeypatch.setattr(st, "selectbox", lambda label, opts, **k: opts[k.get("index", 0)])
     monkeypatch.setattr(st, "info", lambda m, **k: c.info.append(m))
     monkeypatch.setattr(st, "success", lambda m, **k: c.success.append(m))
@@ -260,12 +301,12 @@ def test_render_filtre_yoksa_yalniz_bilgi(monkeypatch, cikti):
 
 def test_render_sonuc_varsa_uc_kpi_karti_ve_metric_yok(monkeypatch, cikti):
     monkeypatch.setattr(modul.st, "text_input", lambda *a, **k: "firma")
-    df = pd.DataFrame({"data_quality_score": [90.0, 20.0, 50.0]})
+    # risk eşiği = 6.5 * 0.3 = 1.95 → yalnız 1.0 riskli
+    df = pd.DataFrame({"identity_completeness": [6.0, 1.0, 3.0]})
     monkeypatch.setattr(modul, "firma_ara", lambda **k: (df, None))
     modul.render_search_tab()
-    assert [k["baslik"] for k in cikti.kpi] == ["Toplam Sonuç", "Ort. Kalite", "Düşük Kalite"]
+    assert [k["baslik"] for k in cikti.kpi] == ["Toplam Sonuç", "Ort. Tamlık", "Kimlik Riski"]
     assert cikti.kpi[0]["deger"] == 3
-    assert cikti.kpi[1]["deger"] == pytest.approx(53.333, abs=0.01)
     assert cikti.kpi[2]["deger"] == 1 and cikti.kpi[2]["kategori"] == "uyari"
     assert {k["anahtar"] for k in cikti.kpi} == {"search-toplam", "search-ortalama", "search-dusuk"}
     assert cikti.metric == 0
@@ -273,9 +314,23 @@ def test_render_sonuc_varsa_uc_kpi_karti_ve_metric_yok(monkeypatch, cikti):
     assert cikti.hata == [] and cikti.bos == []
 
 
+def test_render_ortalama_tavanla_birlikte_sunulur(monkeypatch, cikti):
+    """D-250/7: puan tek başına gösterilmez; '/100' hiç yazılmaz."""
+    monkeypatch.setattr(modul.st, "text_input", lambda *a, **k: "firma")
+    monkeypatch.setattr(
+        modul, "firma_ara", lambda **k: (pd.DataFrame({"identity_completeness": [3.71]}), None)
+    )
+    modul.render_search_tab()
+    metin = str(cikti.kpi[1]["deger"])
+    assert "6.50" in metin and "3.71" in metin
+    assert "/100" not in metin
+
+
 def test_render_dusuk_kalite_yoksa_basari_kategorisi(monkeypatch, cikti):
     monkeypatch.setattr(modul.st, "text_input", lambda *a, **k: "x")
-    monkeypatch.setattr(modul, "firma_ara", lambda **k: (pd.DataFrame({"data_quality_score": [80.0]}), None))
+    monkeypatch.setattr(
+        modul, "firma_ara", lambda **k: (pd.DataFrame({"identity_completeness": [5.0]}), None)
+    )
     modul.render_search_tab()
     assert cikti.kpi[2]["kategori"] == "basari"
 
@@ -299,7 +354,9 @@ def test_render_bos_sonuc_bos_durum(monkeypatch, cikti):
 def test_render_kaynak_hatasi_kucuk_hata_kutusu_ama_arama_surer(monkeypatch, cikti):
     monkeypatch.setattr(modul, "kaynak_adlari", lambda: ([], "ValueError: tablo yok"))
     monkeypatch.setattr(modul.st, "text_input", lambda *a, **k: "x")
-    monkeypatch.setattr(modul, "firma_ara", lambda **k: (pd.DataFrame({"data_quality_score": [70.0]}), None))
+    monkeypatch.setattr(
+        modul, "firma_ara", lambda **k: (pd.DataFrame({"identity_completeness": [4.0]}), None)
+    )
     modul.render_search_tab()
     assert cikti.hata[0][0] == "Kaynak listesi okunamadı"
     assert len(cikti.kpi) == 3
@@ -308,7 +365,7 @@ def test_render_kaynak_hatasi_kucuk_hata_kutusu_ama_arama_surer(monkeypatch, cik
 def test_render_filtre_parametreleri_dogru_iletilir(monkeypatch, cikti):
     yakalanan: dict[str, Any] = {}
     monkeypatch.setattr(modul.st, "text_input", lambda *a, **k: "abc")
-    monkeypatch.setattr(modul.st, "slider", lambda *a, **k: (30, 70))
+    monkeypatch.setattr(modul.st, "slider", lambda *a, **k: (2.0, 5.0))
     monkeypatch.setattr(modul.st, "selectbox", lambda label, opts, **k: "ostim" if "Kaynak" in label else 200)
 
     def _ara(**k):
@@ -317,7 +374,25 @@ def test_render_filtre_parametreleri_dogru_iletilir(monkeypatch, cikti):
 
     monkeypatch.setattr(modul, "firma_ara", _ara)
     modul.render_search_tab()
-    assert yakalanan == {"query": "abc", "score_min": 30, "score_max": 70, "source": "ostim", "limit": 200}
+    assert yakalanan == {
+        "query": "abc", "score_min": 2.0, "score_max": 5.0, "source": "ostim", "limit": 200
+    }
+
+
+def test_render_slider_tavani_asamaz(monkeypatch, cikti):
+    """Kaydırma çubuğu 0-100 değil, 0-tavan aralığında olmalı."""
+    yakalanan: dict[str, Any] = {}
+
+    def _slider(label, alt, ust, varsayilan, **k):
+        yakalanan.update({"label": label, "alt": alt, "ust": ust})
+        return varsayilan
+
+    monkeypatch.setattr(modul.st, "slider", _slider)
+    monkeypatch.setattr(modul.st, "text_input", lambda *a, **k: "x")
+    monkeypatch.setattr(modul, "firma_ara", lambda **k: (pd.DataFrame(), None))
+    modul.render_search_tab()
+    assert yakalanan["ust"] == TAVAN
+    assert "100" not in yakalanan["label"]
 
 
 # ---------------------------------------------------------------------------

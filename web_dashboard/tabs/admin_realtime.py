@@ -80,7 +80,7 @@ _KPI_SQL = text(
     SELECT
         (SELECT COUNT(*) FROM companies) AS total,
         (SELECT COUNT(*) FROM company_signals) AS signals,
-        (SELECT COALESCE(ROUND(AVG(data_quality_score)), 0) FROM companies) AS score
+        (SELECT COALESCE(ROUND(AVG(identity_completeness)), 0) FROM companies) AS score
     """
 )
 

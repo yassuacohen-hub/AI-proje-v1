@@ -65,7 +65,7 @@ def _row_to_dashboard(row: Dict[str, Any]) -> Dict[str, Any]:
         "osb_parsel": payload.get("osb_parsel") or row.get("osb_parcel"),
         "nace_code": payload.get("nace_code") or row.get("raw_nace"),
         "kaynak_tipi": source_name,
-        "data_quality_score": row.get("data_quality_score"),
+        "identity_completeness": row.get("identity_completeness"),
     }
 
 
@@ -81,7 +81,7 @@ def fetch_dashboard_companies(limit: Optional[int] = None) -> List[Dict[str, Any
             c.primary_email,
             c.tax_number,
             c.osb_parcel,
-            c.data_quality_score,
+            c.identity_completeness,
             sr.raw_phone,
             sr.raw_email,
             sr.raw_address,
@@ -178,12 +178,12 @@ def fetch_filtered_companies(
         where.append("((c.primary_email IS NOT NULL AND c.primary_email <> '') OR (sr.raw_email IS NOT NULL AND sr.raw_email <> ''))")
     if has_web:
         where.append("((c.website_domain IS NOT NULL AND c.website_domain <> '') OR (sr.raw_website IS NOT NULL AND sr.raw_website <> ''))")
-    where.append("COALESCE(c.data_quality_score, 0) >= :kalite_min")
-    where.append("COALESCE(c.data_quality_score, 0) <= :kalite_max")
+    where.append("COALESCE(c.identity_completeness, 0) >= :kalite_min")
+    where.append("COALESCE(c.identity_completeness, 0) <= :kalite_max")
     sql = (
         "SELECT c.company_id, c.legal_name, c.website_domain, "
         "c.primary_phone, c.primary_email, c.tax_number, "
-        "c.osb_parcel, c.data_quality_score, "
+        "c.osb_parcel, c.identity_completeness, "
         "sr.raw_phone, sr.raw_email, sr.raw_address, sr.raw_website, "
         "sr.raw_nace, sr.raw_payload, src.source_name "
         "FROM companies c "

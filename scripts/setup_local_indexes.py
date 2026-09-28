@@ -30,7 +30,8 @@ INDEXES = [
     ("idx_sr_source_id", "CREATE INDEX IF NOT EXISTS idx_sr_source_id ON source_records (source_id)"),
     ("idx_sr_external_id", "CREATE INDEX IF NOT EXISTS idx_sr_external_id ON source_records (external_id)"),
     ("idx_companies_nace", "CREATE INDEX IF NOT EXISTS idx_companies_nace ON companies (nace_code)"),
-    ("idx_companies_score", "CREATE INDEX IF NOT EXISTS idx_companies_score ON companies (data_quality_score DESC)"),
+    # Puan indeksi burada TANIMLANMAZ: 0029 gocu kanonik
+    # (idx_companies_identity_completeness). Iki tanim = iki dogruluk kaynagi.
 ]
 
 

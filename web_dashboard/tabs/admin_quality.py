@@ -2,16 +2,17 @@
 """P7-31 — Admin Panel Faz 2: Veri Kalitesi Özeti sekmesi.
 
 Kapsam:
-  - company.data_quality_score aggregation (toplam/ortalama/medyan/min/max)
-  - Kalite skoru dağılımı (bucket bazlı: 0-19, 20-39, 40-59, 60-79, 80-100)
+  - company.identity_completeness aggregation (toplam/ortalama/medyan/min/max)
+  - Kimlik tamlığı dağılımı — bantlar ULAŞILABILIR TAVANDAN türetilir (D-250/7)
   - Eksik alan analizi (telefon, e-posta, web, VKN, NACE, adres, parsel)
   - Kural bazlı iyileştirme önerileri
-  - Kalite riski (QS < 30) filtreleme — riskli firma listesi + eksik alan özeti
+  - Kimlik riski (tavanın %30'u altı) filtreleme — riskli firma listesi + eksik alan
 
 Kurallar:
   - st.cache_data ttl=60
   - Plotly fallback: st.bar_chart
   - kpi_karti (web_dashboard.charts) kullanımı
+  - PANEL-DURUSTLUK-01: ölçek/etiket metni company_master.sunum tek kapısından gelir.
 """
 from __future__ import annotations
 
@@ -28,6 +29,7 @@ from sqlalchemy import text
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
+from company_master import sunum
 from company_master.db.connection import get_engine
 from company_master.kaynak_guvenilirlik import (
     RELIABILITY_GREEN,
@@ -51,7 +53,13 @@ _QUALITY_FIELDS: dict[str, str] = {
     "osb_parsel": "Parsel",
 }
 
-_RISK_ESIGI = 30  # Kalite riski (QS < 30) eşiği
+def _risk_esigi() -> float:
+    """Risk eşiği sabit yazılmaz: tavanın oranı (D-250/7). Tavan 6.5 iken 1.95.
+
+    Modül seviyesinde çağrılmaz — import anında DB'ye gitmek testleri ve
+    DB'siz açılışı kırar.
+    """
+    return sunum.risk_esigi(sunum.tavan_getir())
 
 # UI-ADMIN-ARAMA-BOSLUK-20: İçerik Boşluk Raporu (sonuçsuz arama analizi)
 _BOSLUK_MIN_FREKANS = 3  # Sonuçsuz arama eşiği (modül sabiti, sihirli sayı yok)
@@ -108,11 +116,11 @@ def load_quality_overview() -> dict[str, Any]:
         engine = get_engine()
         with engine.connect() as conn:
             row = conn.execute(text(
-                "SELECT COUNT(*) as toplam, AVG(data_quality_score) as ort, "
-                "MIN(data_quality_score) as min_s, MAX(data_quality_score) as max_s, "
-                "SUM(CASE WHEN data_quality_score < :esik THEN 1 ELSE 0 END) as riskli "
+                "SELECT COUNT(*) as toplam, AVG(identity_completeness) as ort, "
+                "MIN(identity_completeness) as min_s, MAX(identity_completeness) as max_s, "
+                "SUM(CASE WHEN identity_completeness < :esik THEN 1 ELSE 0 END) as riskli "
                 "FROM companies WHERE is_ankara=TRUE AND is_osb_member=TRUE"
-            ), {"esik": _RISK_ESIGI}).mappings().first()
+            ), {"esik": _risk_esigi()}).mappings().first()
             if row and row["toplam"]:
                 result["toplam_firma"] = row["toplam"]
                 result["ortalama_skor"] = round(float(row["ort"] or 0), 1)
@@ -125,9 +133,9 @@ def load_quality_overview() -> dict[str, Any]:
 
             # Medyan: cross-DB uyumluluk için Python tarafında hesapla
             scores = conn.execute(text(
-                "SELECT data_quality_score FROM companies "
+                "SELECT identity_completeness FROM companies "
                 "WHERE is_ankara=TRUE AND is_osb_member=TRUE "
-                "AND data_quality_score IS NOT NULL"
+                "AND identity_completeness IS NOT NULL"
             )).scalars().all()
             if scores:
                 scores_f = [float(s) for s in scores]
@@ -139,25 +147,26 @@ def load_quality_overview() -> dict[str, Any]:
 
 @st.cache_data(ttl=60)
 def load_score_distribution() -> pd.DataFrame:
-    """Kalite skoru dağılımı (bucket bazlı) — 8313+ firma için histogram verisi."""
+    """Kimlik tamlığı dağılımı. Bantlar SQL'de sabit değil, tavandan türetilir.
+
+    Eski hali 80-100/60-79 gibi 0-100 eşikleri kullanıyordu; puan azami 6.50
+    olduğu için tüm firmalar tek kovaya yığılıyordu (PANEL-DURUSTLUK-01).
+    """
     try:
         engine = get_engine()
         with engine.connect() as conn:
-            rows = conn.execute(text("""
-                SELECT CASE
-                    WHEN data_quality_score >= 80 THEN '80-100'
-                    WHEN data_quality_score >= 60 THEN '60-79'
-                    WHEN data_quality_score >= 40 THEN '40-59'
-                    WHEN data_quality_score >= 20 THEN '20-39'
-                    ELSE '0-19'
-                END as bucket, COUNT(*) as adet
-                FROM companies
-                WHERE is_ankara=TRUE AND is_osb_member=TRUE
-                GROUP BY 1
-            """)).mappings().all()
-            if rows:
-                df = pd.DataFrame([dict(r) for r in rows])
-                sira = ["0-19", "20-39", "40-59", "60-79", "80-100"]
+            puanlar = conn.execute(text(
+                "SELECT identity_completeness FROM companies "
+                "WHERE is_ankara=TRUE AND is_osb_member=TRUE"
+            )).scalars().all()
+        if puanlar:
+            tavan = sunum.tavan_getir()
+            sayac = sunum.bant_dagilimi(puanlar, tavan)
+            sira = [e for e, _a, _u in sunum.bantlar(tavan)] + ["olculmedi"]
+            df = pd.DataFrame(
+                [{"bucket": k, "adet": sayac[k]} for k in sira if sayac.get(k)]
+            )
+            if not df.empty:
                 df["bucket"] = pd.Categorical(df["bucket"], categories=sira, ordered=True)
                 return df.sort_values("bucket").reset_index(drop=True)
     except Exception as exc:
@@ -246,12 +255,12 @@ def load_missing_field_analysis() -> pd.DataFrame:
 
 @st.cache_data(ttl=60)
 def load_risky_companies(limit: int = 100) -> pd.DataFrame:
-    """Kalite riski (QS < 30) firmaları — eksik alan özetiyle birlikte."""
+    """Kimlik riski (tamlık < risk eşiği) firmaları — eksik alan özetiyle."""
     try:
         engine = get_engine()
         with engine.connect() as conn:
             rows = conn.execute(text("""
-                SELECT company_id, legal_name, trade_name, data_quality_score,
+                SELECT company_id, legal_name, trade_name, identity_completeness,
                        CASE WHEN primary_phone IS NULL OR primary_phone='' THEN 1 ELSE 0 END as e_tel,
                        CASE WHEN primary_email IS NULL OR primary_email='' THEN 1 ELSE 0 END as e_email,
                        CASE WHEN website_domain IS NULL OR website_domain='' THEN 1 ELSE 0 END as e_web,
@@ -260,10 +269,10 @@ def load_risky_companies(limit: int = 100) -> pd.DataFrame:
                        CASE WHEN adres IS NULL OR adres='' THEN 1 ELSE 0 END as e_adres
                 FROM companies
                 WHERE is_ankara=TRUE AND is_osb_member=TRUE
-                  AND data_quality_score < :esik
-                ORDER BY data_quality_score ASC
+                  AND identity_completeness < :esik
+                ORDER BY identity_completeness ASC
                 LIMIT :limit
-            """), {"esik": _RISK_ESIGI, "limit": limit}).mappings().all()
+            """), {"esik": _risk_esigi(), "limit": limit}).mappings().all()
             if rows:
                 df = pd.DataFrame([dict(r) for r in rows])
 
@@ -285,17 +294,20 @@ def load_risky_companies(limit: int = 100) -> pd.DataFrame:
 
                 df["Eksik Alanlar"] = df.apply(_eksik_ozet, axis=1)
                 df = df.drop(columns=["e_tel", "e_email", "e_web", "e_vkn", "e_nace", "e_adres"])
-                df["data_quality_score"] = df["data_quality_score"].apply(
+                df["identity_completeness"] = df["identity_completeness"].apply(
                     lambda x: round(float(x), 1) if x is not None else 0
                 )
                 df = df.rename(columns={
                     "company_id": "Firma ID", "legal_name": "Unvan",
-                    "trade_name": "Ticari Ad", "data_quality_score": "Kalite Skoru",
+                    "trade_name": "Ticari Ad",
+                    "identity_completeness": "Kimlik Tamlığı",
                 })
                 return df
     except Exception as exc:
         _admin_quality_logger.warning("Riskli firmalar yüklenemedi", exc)
-    return pd.DataFrame(columns=["Firma ID", "Unvan", "Ticari Ad", "Kalite Skoru", "Eksik Alanlar"])
+    return pd.DataFrame(
+        columns=["Firma ID", "Unvan", "Ticari Ad", "Kimlik Tamlığı", "Eksik Alanlar"]
+    )
 
 
 @st.cache_data(ttl=60)
@@ -398,7 +410,8 @@ def generate_improvement_suggestions(
             "Öncelik": "🔴 Yüksek",
             "Alan": "Genel Kalite",
             "Eksiklik (%)": f"%{riskli_oran}",
-            "Öneri": f"Firmaların %{riskli_oran}'i risk eşiğinin (QS<{_RISK_ESIGI}) altında — "
+            "Öneri": f"Firmaların %{riskli_oran}'i risk eşiğinin "
+                     f"(tamlık<{_risk_esigi():.2f}) altında — "
                      f"toplu yeniden zenginleştirme (recalc + scrape) planlanmalı.",
         })
     return suggestions
@@ -583,16 +596,28 @@ def _render_kaynak_guvenilirlik() -> None:
 
 
 def render_quality_tab() -> None:
-    """P7-31: Admin Panel Faz 2 — Veri Kalitesi Özeti sekmesi."""
+    """P7-31: Admin Panel Faz 2 — Kimlik Dosyası Tamlığı sekmesi."""
 
-    st.subheader("🧪 Veri Kalitesi Özeti")
+    st.subheader("🧪 Kimlik Dosyası Tamlığı")
     st.caption(
-        "Kalite skoru dağılımı, eksik alan analizi, iyileştirme önerileri — "
+        "Tamlık dağılımı, eksik alan analizi, iyileştirme önerileri — "
         "Son güncelleme: " + datetime.now().strftime("%Y-%m-%d %H:%M")
     )
     if st.button("🔄 Yenile", key="admin-quality-refresh"):
         st.cache_data.clear()
         st.rerun()
+
+    # D-250/7: puan tek başına gösterilmez; tavan ve kilitli alanlar ilan edilir.
+    ozet = sunum.tavan_ozeti()
+    tavan = ozet["tavan"]
+    st.info(ozet["metin"])
+    with st.expander("Kilitli alanlar — puan niçin bu tavanda duruyor"):
+        st.dataframe(
+            pd.DataFrame(ozet["kilit_satirlari"]).rename(columns={
+                "alan": "Alan", "kayip_puan": "Kayıp Puan", "gerekce": "Gerekçe",
+            }),
+            width="stretch", hide_index=True,
+        )
 
     overview = load_quality_overview()
 
@@ -600,19 +625,27 @@ def render_quality_tab() -> None:
     with c1:
         kpi_karti("📦 Toplam Firma", f"{overview['toplam_firma']:,}", kategori="kalite")
     with c2:
-        kpi_karti("📊 Ortalama Skor", f"{overview['ortalama_skor']:.1f}", kategori="kalite")
+        kpi_karti(
+            "📊 Ortalama Tamlık",
+            sunum.puan_metni(overview["ortalama_skor"], tavan),
+            kategori="kalite",
+        )
     with c3:
-        kpi_karti("📐 Medyan Skor", f"{overview['medyan_skor']:.1f}", kategori="kalite")
+        kpi_karti(
+            "📐 Medyan Tamlık",
+            sunum.puan_metni(overview["medyan_skor"], tavan),
+            kategori="kalite",
+        )
     with c4:
         kpi_karti(
-            "⚠️ Riskli Firma (QS<30)",
+            f"⚠️ Riskli Firma (< {sunum.risk_esigi(tavan):.2f})",
             f"{overview['riskli_sayisi']:,}",
             delta=f"%{overview['riskli_orani']} oranında" if overview["riskli_sayisi"] else None,
             kategori="kalite",
         )
 
     st.divider()
-    st.subheader("📈 Kalite Skoru Dağılımı")
+    st.subheader("📈 Kimlik Tamlığı Dağılımı")
     dist_df = load_score_distribution()
     _chart_distribution(dist_df)
 
@@ -642,7 +675,8 @@ def render_quality_tab() -> None:
     _render_icerik_bosluk()
 
     st.divider()
-    st.subheader(f"🚨 Kalite Riski Filtreleme (QS < {_RISK_ESIGI})")
+    esik = sunum.risk_esigi(tavan)
+    st.subheader(f"🚨 Kimlik Riski Filtreleme (tamlık < {esik:.2f})")
     limit = st.slider(
         "Gösterilecek maksimum firma sayısı",
         min_value=10, max_value=500, value=100, step=10,
@@ -650,7 +684,7 @@ def render_quality_tab() -> None:
     )
     risky_df = load_risky_companies(limit=limit)
     if risky_df.empty:
-        st.success(f"QS<{_RISK_ESIGI} aralığında firma bulunamadı — risk yok.")
+        st.success(f"Tamlık < {esik:.2f} aralığında firma bulunamadı — risk yok.")
     else:
         st.caption(f"{len(risky_df)} firma listeleniyor (limit: {limit})")
         st.dataframe(risky_df, width="stretch", hide_index=True)

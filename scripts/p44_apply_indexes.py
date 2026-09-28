@@ -19,12 +19,9 @@ INDEXES = [
         "CREATE INDEX IF NOT EXISTS idx_source_records_covering "
         "ON source_records(source_id) INCLUDE (source_record_id, collected_at)",
     ),
-    (
-        "idx_companies_source_record_score",
-        "CREATE INDEX IF NOT EXISTS idx_companies_source_record_score "
-        "ON companies(source_record_id, data_quality_score DESC) "
-        "WHERE is_ankara = TRUE AND is_osb_member = TRUE",
-    ),
+    # Puan indeksi burada TANIMLANMAZ: 0029 gocu kanonik
+    # (idx_companies_source_record_tamlik). Eski adi geri kurmak goc
+    # defterini kirardi (D-251/3).
     (
         "idx_companies_nace",
         "CREATE INDEX IF NOT EXISTS idx_companies_nace "

@@ -68,7 +68,9 @@ def test_render_musteriler_shows_empty_state(monkeypatch, st_sahte):
 
 
 def test_render_musteriler_renders_filtered_companies(monkeypatch, st_sahte):
-    frame = pd.DataFrame([{"legal_name": "Test Firma", "data_quality_score": 82.0}])
+    frame = pd.DataFrame(
+        [{"legal_name": "Test Firma", "identity_completeness": 8.2}]
+    )
     monkeypatch.setattr(
         admin_musteriler,
         "load_admin_kpi_summary",

@@ -34,6 +34,7 @@ from io import BytesIO
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT / "src"))
 
+from company_master import sunum as _sunum
 from company_master.db.connection import get_engine
 from company_master.intelligence.job_intelligence.api.router import (
     router as job_intelligence_router,
@@ -651,7 +652,7 @@ def metrics() -> dict:
     with engine.connect() as conn:
         r = conn.execute(text("""
             SELECT COUNT(*) as total,
-                   AVG(data_quality_score) as avg_score,
+                   AVG(identity_completeness) as avg_score,
                    SUM(CASE WHEN tax_number IS NOT NULL AND tax_number != '' THEN 1 ELSE 0 END) as with_tax,
                    SUM(CASE WHEN website_domain IS NOT NULL AND website_domain != '' THEN 1 ELSE 0 END) as with_web,
                    SUM(CASE WHEN nace_code IS NOT NULL AND nace_code != '' THEN 1 ELSE 0 END) as with_nace,
@@ -667,11 +668,17 @@ def metrics() -> dict:
         _db_elapsed = (_perf_time.perf_counter() - _q_start) * 1000
         global _DB_TIME_MS
         _DB_TIME_MS += _db_elapsed
+        # D-250: metrik adi da bir beyandir --- "quality_score" yaziyordu,
+        # olculen sey kimlik dosyasi tamligi. D-249: olculmemis ortalama 0
+        # degildir, None kalir (0 yazmak "en kotu firma" yalani uretiyordu).
+        # Tavan ayri metrik: 3.71'in neye gore okunacagi olceksiz belirsizdir.
         return {
             "huginn_companies_total": r["total"],
-            "huginn_companies_avg_quality_score": round(
-                float(r["avg_score"]) if r.get("avg_score") is not None else 0, 2
+            "huginn_companies_avg_identity_completeness": (
+                round(float(r["avg_score"]), 2)
+                if r.get("avg_score") is not None else None
             ),
+            "huginn_identity_completeness_reachable_max": _sunum.tavan_getir(),
             "huginn_companies_with_tax_number": r["with_tax"],
             "huginn_companies_with_website": r["with_web"],
             "huginn_companies_with_nace_code": r["with_nace"],
@@ -711,7 +718,7 @@ def api_kpi(_auth: str = Depends(require_api_key)) -> dict:
                 SUM(CASE WHEN c.primary_phone IS NOT NULL AND c.primary_phone != '' THEN 1 ELSE 0 END) as tel,
                 SUM(CASE WHEN c.primary_email IS NOT NULL AND c.primary_email != '' THEN 1 ELSE 0 END) as email,
                 SUM(CASE WHEN c.nace_code IS NOT NULL AND c.nace_code != '' THEN 1 ELSE 0 END) as nace,
-                AVG(c.data_quality_score) as avg_score
+                AVG(c.identity_completeness) as avg_score
             FROM companies c
             WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE
         """)).mappings().first()
@@ -900,8 +907,8 @@ def api_companies(
                     WHERE s.source_name IN ({", ".join(placeholders)})
                 )""")
 
-        where_clauses.append("c.data_quality_score >= :min_score")
-        where_clauses.append("c.data_quality_score <= :max_score")
+        where_clauses.append("c.identity_completeness >= :min_score")
+        where_clauses.append("c.identity_completeness <= :max_score")
 
         where_sql = " AND ".join(where_clauses)
 
@@ -913,10 +920,10 @@ def api_companies(
             conn.execute(
                 text(f"""
             SELECT c.legal_name, c.trade_name, c.website_domain, c.primary_phone, c.primary_email,
-                   c.tax_number, c.osb_parcel, c.nace_code, c.data_quality_score
+                   c.tax_number, c.osb_parcel, c.nace_code, c.identity_completeness
             FROM companies c
             WHERE {where_sql}
-            ORDER BY c.data_quality_score DESC
+            ORDER BY c.identity_completeness DESC
             LIMIT :limit OFFSET :offset
         """),
                 params,
@@ -931,8 +938,8 @@ def api_companies(
         items = []
         for r in rows:
             row = dict(r)
-            if row.get("data_quality_score") is not None:
-                row["data_quality_score"] = float(row["data_quality_score"])
+            if row.get("identity_completeness") is not None:
+                row["identity_completeness"] = float(row["identity_completeness"])
             row = normalize_company(row)
             if _mask_active(mask):
                 row = apply_kvkk_mask(row)
@@ -1039,8 +1046,8 @@ def api_companies_export(
             where_clauses.append("c.nace_code LIKE :nace")
             params["nace"] = f"{nace}%"
 
-        where_clauses.append("c.data_quality_score >= :min_score")
-        where_clauses.append("c.data_quality_score <= :max_score")
+        where_clauses.append("c.identity_completeness >= :min_score")
+        where_clauses.append("c.identity_completeness <= :max_score")
 
         where_sql = " AND ".join(where_clauses)
 
@@ -1049,7 +1056,7 @@ def api_companies_export(
             conn.execute(
                 text(f"""
             SELECT c.legal_name, c.trade_name, c.website_domain, c.primary_phone, c.primary_email,
-                   c.tax_number, c.osb_parcel, c.nace_code, c.data_quality_score
+                   c.tax_number, c.osb_parcel, c.nace_code, c.identity_completeness
             FROM companies c
             WHERE {where_sql}
             ORDER BY c.created_at DESC
@@ -1092,7 +1099,7 @@ def api_companies_export(
                     row.get("primary_email", ""),
                     row.get("tax_number") or "",
                     row.get("nace_code", ""),
-                    row.get("data_quality_score", ""),
+                    row.get("identity_completeness", ""),
                 ]
             )
 
@@ -1177,7 +1184,9 @@ def _match_puan(
 
     # 3) firma kalitesi (0-25)
     try:
-        kalite = min(max(float(row.get("data_quality_score") or 0), 0), 100) * 0.25
+        # D-250/7: 0-10 olcegi tavana oranlanir, sonra 25 puanlik paya olceklenir.
+        _ham = min(max(float(row.get("identity_completeness") or 0), 0), _sunum.tavan_getir())
+        kalite = (_ham / _sunum.tavan_getir()) * 25.0
     except (TypeError, ValueError):
         kalite = 0.0
 
@@ -1253,7 +1262,7 @@ def buyer_scale_uygun(buyer_profil: dict, hedef_row: dict) -> bool:
     if buyer_scale <= 0:
         return False
     try:
-        kalite = float(hedef_row.get("data_quality_score") or 0)
+        kalite = float(hedef_row.get("identity_completeness") or 0)
     except (TypeError, ValueError):
         kalite = 0.0
     kanit = (
@@ -1366,10 +1375,10 @@ def api_match(
             conn.execute(
                 text(
                     "SELECT company_id, legal_name, trade_name, nace_code, nace_name, osb_id, "
-                    "is_ankara, is_osb_member, data_quality_score, primary_phone, "
+                    "is_ankara, is_osb_member, identity_completeness, primary_phone, "
                     "primary_email, website_domain "
                     "FROM companies WHERE nace_code IS NOT NULL AND is_ankara = TRUE "
-                    "ORDER BY data_quality_score DESC NULLS LAST LIMIT 5000"
+                    "ORDER BY identity_completeness DESC NULLS LAST LIMIT 5000"
                 )
             )
             .mappings()
@@ -3478,50 +3487,52 @@ def performance_report(_auth: str = Depends(require_api_key)) -> dict:
 
 @app.get("/api/quality-trend")
 def api_quality_trend(_auth: str = Depends(require_api_key)) -> list[dict]:
-    """Kalite skoru dagilimi (bucket bazli) - SQLite/PostgreSQL uyumlu."""
+    """Kimlik tamligi dagilimi — bantlar ULASILABILIR TAVANDAN turetilir.
+
+    D-250/7: eskiden esikler 80/60/40/20 sabitti. Kolon 0-10 olceginde
+    oldugu icin butun firmalar '0-19' bandina dusuyordu; panel tum veriyi
+    en kotu bantta gosteriyordu. Bantlar artik sunum tek kapisindan gelir.
+    D-249: olculmemis firma (NULL) hicbir banda yazilmaz, ayri raporlanir.
+    """
     engine = get_engine()
     _q_start = _perf_time.perf_counter()
     with engine.connect() as conn:
-        rows = conn.execute(text("""
-            SELECT CASE
-                WHEN data_quality_score >= 80 THEN '80-100'
-                WHEN data_quality_score >= 60 THEN '60-79'
-                WHEN data_quality_score >= 40 THEN '40-59'
-                WHEN data_quality_score >= 20 THEN '20-39'
-                ELSE '0-19'
-            END as bucket, COUNT(*) as cnt
-            FROM companies
-            WHERE is_ankara=TRUE AND is_osb_member=TRUE
-            GROUP BY 1
-            ORDER BY 1 DESC
-        """)).mappings().all()
-        return [dict(r) for r in rows] if rows else []
+        rows = conn.execute(text(
+            "SELECT identity_completeness FROM companies "
+            "WHERE is_ankara=TRUE AND is_osb_member=TRUE"
+        )).scalars().all()
+    tavan = _sunum.tavan_getir()
+    dagilim = _sunum.bant_dagilimi(rows, tavan)
+    return [{"bucket": ad, "cnt": adet} for ad, adet in dagilim.items()]
 
 
 @app.get("/api/nace-distribution")
 def api_nace_distribution(
     limit: int = 20, _auth: str = Depends(require_api_key)
-) -> list[dict]:
-    """NACE kodu x firma sayisi (top N) - nace_codes tablosu olmadan."""
+) -> dict:
+    """Dogrulanmis NACE kodu x firma sayisi (top N).
+
+    D-252/5: tahmin kaynakli kod dagilima GIRMEZ. Eski hali ``GROUP BY
+    nace_code`` yapiyordu; 29.10 varsayilaninda yigilmis kutle listenin
+    tepesinde "en buyuk sektor" diye gorunuyordu. Sayim ``sunum.sektor_sayaci``
+    tek kapisindan gecer --- kanit kaynagi listesi SQL'e kopyalanmaz.
+    """
     engine = get_engine()
     _q_start = _perf_time.perf_counter()
     with engine.connect() as conn:
-        rows = (
-            conn.execute(
-                text("""
-            SELECT c.nace_code, COUNT(*) as cnt
+        rows = conn.execute(
+            text("""
+            SELECT c.nace_code, c.nace_source
             FROM companies c
             WHERE c.is_ankara=TRUE AND c.is_osb_member=TRUE AND c.nace_code IS NOT NULL AND c.nace_code != ''
-            GROUP BY c.nace_code
-            ORDER BY cnt DESC
-            LIMIT :lim
-        """),
-                {"lim": limit},
-            )
-            .mappings()
-            .all()
-        )
-        return [dict(r) for r in rows] if rows else []
+        """)
+        ).all()
+    sayim = _sunum.sektor_sayaci((r[0], r[1]) for r in rows)
+    ilk = sorted(sayim["kanitli"].items(), key=lambda kv: -kv[1])[:limit]
+    return {
+        "dagilim": [{"nace_code": k, "cnt": n} for k, n in ilk],
+        "tahmin_haric": sayim["tahmin_haric"],
+    }
 
 
 @app.get("/api/sources")

@@ -58,13 +58,13 @@ def build_periodic_message() -> str:
         board = polling.read_task_board()
         active = [t for t in board if t.get("durum") not in ("done",)]
         done = len([t for t in board if t.get("durum") == "done"])
-        quality = polling.read_quality_score()
+        tamlik = polling.read_tamlik_metni()
         today = time.strftime("%Y-%m-%d %H:%M")
 
         lines = [f"<b>Periodik Durum - {html_escape(today)}</b>\n"]
         lines.append(f"Toplam gorev: {len(board)}")
         lines.append(f"Aktif: <b>{len(active)}</b> | Tamamlandi: <b>{done}</b>")
-        lines.append(f"Kalite skoru: <b>{quality}</b>/100")
+        lines.append(f"Kimlik dosyasi tamligi: <b>{tamlik}</b>")
 
         if active:
             lines.append("\n<b>Aktif Gorevler:</b>")

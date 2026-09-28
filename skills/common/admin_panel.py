@@ -105,10 +105,21 @@ def track_ai_costs(cost_data: dict) -> dict:
 
 @registry.register(
     name="analyze_data_quality",
-    description="Veri kalitesi merkezi: eksik telefon, email, domain, sektör, LinkedIn, NACE sayısı ve kalite skoru."
+    description=(
+        "İletişim bilgisi doluluğu: eksik telefon, email, website, sektör, "
+        "LinkedIn, NACE sayısı ve 0-100 doluluk yüzdesi. "
+        "Kimlik dosyası tamlığı (0-10) DEĞİLDİR."
+    )
 )
 def analyze_data_quality(company_data: list) -> dict:
-    """Şirket verileri üzerinden kalite analizi yapar."""
+    """Şirket verileri üzerinden iletişim bilgisi doluluk yüzdesi hesaplar.
+
+    D-250: "kalite skoru" adi yanltiiciydi. Bu metrik `identity_completeness`
+    (0-10, tek kapi `etl/quality_recalc.py`) DEGILDIR; burada verilen listedeki
+    alanlarin doluluk yuzdesidir ve 100'u gercekten ulasilabilir. Bu yuzden
+    `sunum.puan_metni` ile sunulmaz --- tavan kisitli degil. Karismasin diye
+    donen anahtarlar olcegini adinda tasir.
+    """
     total = len(company_data)
     if total == 0:
         return {"error": "Veri yok"}
@@ -146,8 +157,8 @@ def analyze_data_quality(company_data: list) -> dict:
         "completion_rate": {
             k: round((total - v) / total * 100, 1) for k, v in missing.items()
         },
-        "avg_quality_score": round(avg_quality, 1),
-        "quality_distribution": {
+        "ort_iletisim_dolulugu_yuzde": round(avg_quality, 1),
+        "iletisim_dolulugu_dagilimi_yuzde": {
             "0-20": sum(1 for s in quality_scores if s <= 20),
             "21-40": sum(1 for s in quality_scores if 21 <= s <= 40),
             "41-60": sum(1 for s in quality_scores if 41 <= s <= 60),

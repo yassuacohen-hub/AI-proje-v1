@@ -410,16 +410,29 @@ def test_send_alert_escapes():
 
 
 def test_send_daily_summary():
+    """D-250/7: puan tavanla birlikte, '/100' olmadan gider."""
     with patch("src.company_master.utils.telegram_bot.requests.post",
                return_value=_mock_response(True, "OK", {"message_id": 1})) as mock_post, \
          patch.dict("os.environ", {"TELEGRAM_BOT_TOKEN": "123:ABC", "TELEGRAM_CHAT_ID": "999"}):
         result = send_daily_summary({"total_firms": 1000, "new_firms": 50,
-                                      "avg_quality": 65.5, "active_tasks": 3,
-                                      "completed_tasks": 10})
+                                      "avg_identity_completeness": 3.71, "tavan": 6.5,
+                                      "active_tasks": 3, "completed_tasks": 10})
         assert result["ok"] is True
         sent = mock_post.call_args.kwargs.get("json") or mock_post.call_args[1].get("json")
         assert "1,000" in sent["text"]
-        assert "65.5" in sent["text"]
+        assert "3.71 / 6.50 ulaşılabilir" in sent["text"]
+        assert "/100" not in sent["text"], "0-10 puan 0-100 olcekli sunuluyor"
+
+
+def test_send_daily_summary_olculmemis_puan_sifir_gosterilmez():
+    """D-249: ortalama yoksa 0.0 degil bos isaret gider (DB'ye de gidilmez)."""
+    with patch("src.company_master.utils.telegram_bot.requests.post",
+               return_value=_mock_response(True, "OK", {"message_id": 1})) as mock_post, \
+         patch.dict("os.environ", {"TELEGRAM_BOT_TOKEN": "123:ABC", "TELEGRAM_CHAT_ID": "999"}):
+        send_daily_summary({"total_firms": 5})
+        sent = mock_post.call_args.kwargs.get("json") or mock_post.call_args[1].get("json")
+        assert "tamligi (ort.): <b>—</b>" in sent["text"]
+        assert "0.0" not in sent["text"]
 
 
 def test_send_status_report():

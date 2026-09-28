@@ -82,7 +82,10 @@ def _tmp_board(tmp_path, monkeypatch):
     # kalite raporu icin gerekli dosyalari olustur
     kpi_path = tmp_path / "data" / "kpi_raporu.md"
     kpi_path.parent.mkdir(parents=True, exist_ok=True)
-    kpi_path.write_text("# KPI\nOrtalama Kalite Skoru: 75.5/100\n", encoding="utf-8")
+    kpi_path.write_text(
+        "# KPI\n- Ortalama Kimlik Dosyasi Tamligi: 3.71 / 6.50 ulaşılabilir\n",
+        encoding="utf-8",
+    )
 
     quality_path = tmp_path / "data" / "ostim" / "kalite_raporu.md"
     quality_path.parent.mkdir(parents=True, exist_ok=True)
@@ -139,9 +142,17 @@ def test_read_done_count(_tmp_board):
     assert telegram_polling.read_done_count() == 2
 
 
-def test_read_quality_score(_tmp_board):
-    score = telegram_polling.read_quality_score()
-    assert "75" in score or "75.5" in score
+def test_read_tamlik_metni(_tmp_board):
+    """D-250/7: ayristirilan metin olcegini kendisi tasir, '/100' yok."""
+    tamlik = telegram_polling.read_tamlik_metni()
+    assert tamlik == "3.71 / 6.50 ulaşılabilir"
+    assert "/100" not in telegram_polling.cmd_status("/status")
+
+
+def test_read_tamlik_metni_rapor_yoksa_bilinmiyor(_tmp_board, monkeypatch):
+    """Rapor yoksa sayi uydurulmaz."""
+    (telegram_polling.ROOT / "data" / "kpi_raporu.md").unlink()
+    assert telegram_polling.read_tamlik_metni() == "bilinmiyor"
 
 
 def test_read_task_board_missing_file(monkeypatch):

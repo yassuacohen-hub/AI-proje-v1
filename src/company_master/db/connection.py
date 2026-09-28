@@ -212,7 +212,7 @@ def init_db(sql_path: Optional[str] = None) -> None:
 
             description TEXT,
 
-            data_quality_score REAL,
+            identity_completeness REAL,
 
             entity_confidence REAL,
 

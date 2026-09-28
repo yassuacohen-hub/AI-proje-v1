@@ -3,7 +3,7 @@
 
 Tüm dashboard sekmelerinde ortak arama/filtreleme:
 - Global arama (firma adı, VKN, telefon, e-posta, NACE, açıklama)
-- Kalite skoru aralığı filtresi
+- Kimlik tamlığı aralığı filtresi (ölçek tavandan türetilir, PANEL-DURUSTLUK-01)
 - Kaynak tipi filtresi
 - Sonuç sayısı gösterimi
 
@@ -28,6 +28,7 @@ from sqlalchemy import text
 ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
+from company_master import sunum  # noqa: E402
 from company_master.db.connection import get_engine  # noqa: E402
 from company_master.ui import bos_durum, hata_kutusu  # noqa: E402
 from web_dashboard.charts import kpi_karti  # noqa: E402
@@ -35,20 +36,15 @@ from web_dashboard.charts import kpi_karti  # noqa: E402
 log = logging.getLogger(__name__)
 
 DB_IPUCU = "DATABASE_URL `.env` içinde doğru mu? `docker compose ps` ile servisi kontrol edin."
-DUSUK_KALITE_ESIK = 30
 SONUC_SECENEKLERI: tuple[int, ...] = (50, 100, 200, 500)
-KALITE_BANTLARI: tuple[tuple[str, int, int], ...] = (
-    ("80-100 (Yüksek)", 80, 101),
-    ("60-79 (İyi)", 60, 80),
-    ("40-59 (Orta)", 40, 60),
-    ("20-39 (Düşük)", 20, 40),
-    ("0-19 (Çok Düşük)", 0, 20),
-)
 
+# nace_source SECILIR: kodu etiketsiz gostermek D-252/4 ihlalidir. Bugun
+# kodlarin %100'u tahmin; kullanici "29.10" gorup dogrulanmis saniyor.
 _SECIM_SUTUNLARI = (
     "company_id, legal_name, trade_name, tax_number, company_type, "
-    "status, data_quality_score, entity_confidence, primary_phone, "
-    "primary_email, website_domain, nace_code, is_ankara, is_osb_member, updated_at"
+    "status, identity_completeness, entity_confidence, primary_phone, "
+    "primary_email, website_domain, nace_code, nace_source, "
+    "is_ankara, is_osb_member, updated_at"
 )
 
 
@@ -58,7 +54,7 @@ _SECIM_SUTUNLARI = (
 
 
 def _sorgu_kur(
-    query: str, score_min: int, score_max: int, source: str, limit: int
+    query: str, score_min: float, score_max: float, source: str, limit: int
 ) -> tuple[str, dict[str, Any]]:
     """Filtrelerden parametreli SQL üretir → ``(sql, params)``."""
     where: list[str] = []
@@ -71,9 +67,9 @@ def _sorgu_kur(
         )
         params["q"] = f"%{query}%"
 
-    where.append("data_quality_score >= :score_min")
+    where.append("identity_completeness >= :score_min")
     params["score_min"] = score_min
-    where.append("data_quality_score <= :score_max")
+    where.append("identity_completeness <= :score_max")
     params["score_max"] = score_max
 
     if source:
@@ -85,7 +81,7 @@ def _sorgu_kur(
     params["limit"] = limit
     sql = (
         f"SELECT {_SECIM_SUTUNLARI} FROM companies WHERE {' AND '.join(where)} "
-        "ORDER BY data_quality_score DESC LIMIT :limit"
+        "ORDER BY identity_completeness DESC LIMIT :limit"
     )
     return sql, params
 
@@ -96,25 +92,35 @@ def _satirlari_df_yap(rows: list[Any]) -> pd.DataFrame:
     BUG-COMPANYID-01: ``company_id`` DB'den UUID nesnesi gelir; pandas/Arrow
     bunu byte-sözlüğüne çevirdiği için DataFrame kurulmadan ÖNCE ``str()``
     ile tam UUID metnine çevrilir (kısaltma yok).
+
+    D-249: ölçülmemiş puan 0'a çevrilmez, NaN kalır. Eski hali ``else 0``
+    yazıyordu — "veri yok" ile "sıfır puan" aynı hücreye düşüyordu.
+
+    D-252/4: ``nace_code`` etiketlenerek sunulur ("29.10 (tahmini sektör)");
+    ``nace_source`` teknik kolondur, ekrana girmez.
     """
     kayitlar: list[dict[str, Any]] = []
     for r in rows:
         kayit = dict(r)
         if kayit.get("company_id") is not None:
             kayit["company_id"] = str(kayit["company_id"])
+        if "nace_code" in kayit:
+            kayit["nace_code"] = sunum.nace_metni(
+                kayit.get("nace_code"), kayit.pop("nace_source", None)
+            )
         kayitlar.append(kayit)
     df = pd.DataFrame(kayitlar)
-    if "data_quality_score" in df.columns:
-        df["data_quality_score"] = df["data_quality_score"].apply(
-            lambda x: round(float(x), 1) if x is not None else 0
-        )
+    if "identity_completeness" in df.columns:
+        df["identity_completeness"] = pd.to_numeric(
+            df["identity_completeness"], errors="coerce"
+        ).round(1)
     return df
 
 
 def _firma_ara(
     query: str = "",
-    score_min: int = 0,
-    score_max: int = 100,
+    score_min: float = 0.0,
+    score_max: float = sunum.AZAMI,
     source: str = "",
     limit: int = 100,
 ) -> tuple[pd.DataFrame | None, str | None]:
@@ -144,12 +150,18 @@ def _kaynak_adlari() -> tuple[list[str], str | None]:
         return [], f"{type(exc).__name__}: {exc}"
 
 
-def kalite_bantlari(df: pd.DataFrame) -> dict[str, int]:
-    """Kalite skorunu 5 banda dağıtır (grafik ve test için saf)."""
-    if df is None or df.empty or "data_quality_score" not in df.columns:
-        return {ad: 0 for ad, _, _ in KALITE_BANTLARI}
-    skor = df["data_quality_score"]
-    return {ad: int(((skor >= alt) & (skor < ust)).sum()) for ad, alt, ust in KALITE_BANTLARI}
+def tamlik_bantlari(df: pd.DataFrame, tavan: float) -> dict[str, int]:
+    """Tamlığı bantlara dağıtır. Bantlar tavandan türetilir (PANEL-DURUSTLUK-01).
+
+    ``tavan`` parametre olarak alınır, içeride ``tavan_getir()`` çağrılmaz:
+    fonksiyon saf kalsın ki testi DB istemesin.
+
+    Boş girdide de anahtar kümesi dolu girdiyle aynıdır ("olculmedi" dahil);
+    aksi halde grafiğin sütun sayısı veriye göre oynar.
+    """
+    if df is None or df.empty or "identity_completeness" not in df.columns:
+        return sunum.bant_dagilimi([], tavan)
+    return sunum.bant_dagilimi(df["identity_completeness"], tavan)
 
 
 # ---------------------------------------------------------------------------
@@ -160,8 +172,8 @@ def kalite_bantlari(df: pd.DataFrame) -> dict[str, int]:
 @st.cache_data(ttl=60)
 def firma_ara(
     query: str = "",
-    score_min: int = 0,
-    score_max: int = 100,
+    score_min: float = 0.0,
+    score_max: float = sunum.AZAMI,
     source: str = "",
     limit: int = 100,
 ) -> tuple[pd.DataFrame | None, str | None]:
@@ -177,8 +189,8 @@ def kaynak_adlari() -> tuple[list[str], str | None]:
 
 def search_companies(
     query: str = "",
-    score_min: int = 0,
-    score_max: int = 100,
+    score_min: float = 0.0,
+    score_max: float = sunum.AZAMI,
     source: str = "",
     limit: int = 100,
 ) -> pd.DataFrame | None:
@@ -198,45 +210,52 @@ def get_source_names() -> list[str]:
 # ---------------------------------------------------------------------------
 
 
-def _ozet_kartlari(df: pd.DataFrame) -> None:
-    """3 KPI kartı: toplam sonuç · ortalama kalite · düşük kalite (tek KPI dili)."""
+def _ozet_kartlari(df: pd.DataFrame, tavan: float) -> None:
+    """3 KPI kartı: toplam sonuç · ortalama tamlık · riskli (tek KPI dili).
+
+    Ortalama, tavanla birlikte sunulur (D-250/7). Eski hali ``/100`` yazıyordu;
+    puan 0-10 ölçeğinde olduğu için bu düpedüz yalandı.
+    """
     toplam = int(len(df))
-    ortalama = float(df["data_quality_score"].mean()) if toplam else 0.0
-    dusuk = int((df["data_quality_score"] < DUSUK_KALITE_ESIK).sum())
+    ortalama = float(df["identity_completeness"].mean()) if toplam else 0.0
+    esik = sunum.risk_esigi(tavan)
+    dusuk = int((df["identity_completeness"] < esik).sum())
     kpi_karti(
         "Toplam Sonuç", toplam, ikon="🔎", kategori="musteri",
         aciklama="Filtreye uyan firma sayısı (limitle sınırlı).",
         anahtar="search-toplam",
     )
     kpi_karti(
-        "Ort. Kalite", ortalama, ondalik=1, birim="/100", ikon="⭐", kategori="basari",
-        aciklama="Sonuç kümesinin ortalama veri kalitesi.",
+        "Ort. Tamlık", sunum.puan_metni(ortalama, tavan), ikon="⭐", kategori="basari",
+        aciklama="Sonuç kümesinin ortalama kimlik dosyası tamlığı.",
         anahtar="search-ortalama",
     )
     kpi_karti(
-        "Düşük Kalite", dusuk, ikon="⚠️", kategori="uyari" if dusuk else "basari",
-        aciklama=f"Skoru {DUSUK_KALITE_ESIK} altında kalan firmalar.",
+        "Kimlik Riski", dusuk, ikon="⚠️", kategori="uyari" if dusuk else "basari",
+        aciklama=f"Tamlığı {esik:.2f} altında kalan firmalar (tavanın %30'u).",
         anahtar="search-dusuk",
     )
 
 
-def _sonuclari_ciz(df: pd.DataFrame) -> None:
+def _sonuclari_ciz(df: pd.DataFrame, tavan: float) -> None:
     st.success(f"✅ {len(df)} sonuç bulundu")
     col_tablo, col_kpi = st.columns([3, 1])
     with col_tablo:
         st.dataframe(df, width="stretch", hide_index=True)
     with col_kpi:
-        _ozet_kartlari(df)
+        _ozet_kartlari(df, tavan)
 
     st.divider()
-    st.caption("Kalite skoru dağılımı")
-    st.bar_chart(pd.Series(kalite_bantlari(df)), width="stretch")
+    st.caption(f"Kimlik tamlığı dağılımı (ulaşılabilir tavan {tavan:.2f})")
+    st.bar_chart(pd.Series(tamlik_bantlari(df, tavan)), width="stretch")
 
 
 def render_search_tab() -> None:
     """Global arama/filtreleme alt bölümünü çizer (``admin_yonetim`` altında)."""
     st.subheader("🔍 Global Arama ve Filtreleme")
 
+    tavan = sunum.tavan_getir()
+    tam_aralik = (0.0, float(tavan))
     kaynaklar, kaynak_hatasi = kaynak_adlari()
     if kaynak_hatasi:
         hata_kutusu("Kaynak listesi okunamadı", kaynak_hatasi, DB_IPUCU)
@@ -249,7 +268,11 @@ def render_search_tab() -> None:
             key="global_search",
         )
     with col_filter:
-        score_range = st.slider("Kalite Skoru Aralığı", 0, 100, (0, 100))
+        score_range = st.slider(
+            f"Kimlik Tamlığı Aralığı (tavan {tavan:.2f})",
+            *tam_aralik, tam_aralik, step=0.1,
+            help=sunum.tavan_metni(tavan),
+        )
 
     col_source, col_limit = st.columns(2)
     with col_source:
@@ -257,7 +280,7 @@ def render_search_tab() -> None:
     with col_limit:
         limit = st.selectbox("Sonuç Sayısı", list(SONUC_SECENEKLERI), index=1, key="limit_filter")
 
-    if not (query or score_range != (0, 100) or source != "Tümü"):
+    if not (query or tuple(score_range) != tam_aralik or source != "Tümü"):
         st.info("🔍 Arama yapın veya filtre seçin; sonuçlar burada listelenir.")
         return
 
@@ -275,7 +298,7 @@ def render_search_tab() -> None:
         bos_durum(
             "Bu filtrelerle eşleşen firma yok.",
             ikon="🔍",
-            aksiyon="Arama metnini kısaltın veya kalite aralığını genişletin.",
+            aksiyon="Arama metnini kısaltın veya tamlık aralığını genişletin.",
         )
         return
-    _sonuclari_ciz(df)
+    _sonuclari_ciz(df, tavan)

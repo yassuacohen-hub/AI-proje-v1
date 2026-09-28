@@ -18,9 +18,13 @@ from .kimlik_no import kimlik_dogrula, mersis_dogrula, sicil_dogrula
 __all__ = [
     "SURUM",
     "AGIRLIKLAR",
+    "AZAMI",
+    "KILIT_GEREKCESI",
     "identity_completeness",
     "alan_puanlari",
     "bayat_mi",
+    "ulasilabilir_tavan",
+    "tavan_raporu",
     "recalc_quality_scores",
 ]
 
@@ -41,8 +45,20 @@ AGIRLIKLAR: dict[str, float] = {
     "website_domain": 0.3,
 }
 
+# Azami puan agirlik setinden TURETILIR; sabit yazilmaz (D-250/7 mandali).
+AZAMI = round(sum(AGIRLIKLAR.values()), 1)
+
 # D-245: kanit sayilan NACE kaynaklari. Tahmin/varsayilan puan almaz.
 NACE_KANIT_KAYNAKLARI = frozenset({"mersis", "external"})
+
+# D-257: bu alanlar niye kilitli — panelde gerekce okunabilir olacak.
+KILIT_GEREKCESI: dict[str, str] = {
+    "mersis_number": "MERSIS'te anonim sorgu ekrani yok (D-257)",
+    "trade_registry_number": "TOBB API 401, TSG captcha + uyelik istiyor (D-257)",
+    "tax_office": "GIB e-Fatura VKN'yi girdi ister, cikti vermez (D-257)",
+    "nace_code": "kodlarin tamami tahmin, kanit kaynagi yok (D-245/D-252)",
+    "tax_number": "dogrulanmis VKN/TCKN kaynagi bagli degil (D-246)",
+}
 
 
 def _dolu(v) -> bool:
@@ -97,6 +113,18 @@ def bayat_mi(score_version: str | None) -> bool:
     return score_version != SURUM
 
 
+def ulasilabilir_tavan(kilitli) -> float:
+    """D-250/7: kaynagi olmayan alanin agirligi kalici kayiptir.
+
+    Tavan AGIRLIKLAR'dan turetilir — agirlik seti degisince tavan da degisir.
+    """
+    kilitli = set(kilitli)
+    bilinmeyen = kilitli - set(AGIRLIKLAR)
+    if bilinmeyen:
+        raise ValueError(f"agirlik setinde olmayan alan: {sorted(bilinmeyen)}")
+    return round(sum(w for a, w in AGIRLIKLAR.items() if a not in kilitli), 1)
+
+
 _SORGU = """
     SELECT company_id, legal_name, tax_number, tax_office, mersis_number,
            trade_registry_number, trade_registry_office, nace_code, nace_source,
@@ -112,6 +140,32 @@ _YAZ = """
                    unnest(CAST(:skorlar AS numeric[]))   AS s) v
      WHERE c.company_id = v.cid
 """
+
+
+def tavan_raporu() -> dict:
+    """Canli veriden ulasilabilir tavan (D-238: olcum canli veritabaninda).
+
+    Hicbir firmanin puan alamadigi alan "kilitli"dir; agirligi tavandan duser.
+    """
+    engine = get_engine()
+    with engine.connect() as conn:
+        rows = conn.execute(text(_SORGU)).mappings().all()
+
+    sayac = dict.fromkeys(AGIRLIKLAR, 0)
+    for r in rows:
+        for alan, puan in alan_puanlari(dict(r)).items():
+            if puan > 0:
+                sayac[alan] += 1
+
+    kilitli = {a: AGIRLIKLAR[a] for a, n in sayac.items() if n == 0}
+    return {
+        "surum": SURUM,
+        "firma": len(rows),
+        "azami": AZAMI,
+        "tavan": ulasilabilir_tavan(kilitli),
+        "kilitli": kilitli,
+        "dolu_sayac": sayac,
+    }
 
 
 def recalc_quality_scores() -> int:

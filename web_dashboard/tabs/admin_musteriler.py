@@ -14,6 +14,7 @@ from datetime import datetime
 import pandas as pd  # noqa: F401  (tablo tipleri icin dolayli bagimlilik)
 import streamlit as st
 
+from company_master import sunum
 from company_master.ui import PageHeader, Section, SectionNav
 from web_dashboard.tabs.admin_kpi import load_admin_kpi_summary
 from web_dashboard.tabs.admin_search import get_source_names, search_companies
@@ -22,9 +23,9 @@ from web_dashboard.tabs.admin_search import get_source_names, search_companies
 BOLUMLER: tuple[Section, ...] = (
     Section("Operasyon Bildirimleri", "Son 24 saatteki yeni firma ve sinyal hareketi.",
             ikon="🔔", kimlik="musteri-bildirimleri"),
-    Section("Filtreler", "Arama metni, kalite skoru aralığı, kaynak ve satır sayısı.",
+    Section("Filtreler", "Arama metni, kimlik tamlığı aralığı, kaynak ve satır sayısı.",
             ikon="🔍", kimlik="musteri-filtreleri"),
-    Section("Firma Listesi", "Filtreye uyan firmalar ve ortalama kalite skoru.",
+    Section("Firma Listesi", "Filtreye uyan firmalar ve ortalama kimlik tamlığı.",
             ikon="📋", kimlik="musteri-listesi"),
 )
 
@@ -97,11 +98,17 @@ def render_musteriler_tab() -> None:
         st.info("Bildirim verisi henüz hazır değil; firma verisi geldiğinde burada görünecek.")
 
     _bolum("musteri-filtreleri").render()
+    tavan = sunum.tavan_getir()
     col_query, col_score = st.columns([3, 2])
     with col_query:
         query = st.text_input("🔍 Firma ara", placeholder="Unvan, VKN, telefon, e-posta veya NACE", key="musteriler-query")
     with col_score:
-        score_range = st.slider("Kalite skoru", 0, 100, (0, 100), key="musteriler-score")
+        # Kaydirici 0-100 degil 0-tavan: puan 0-10 olceginde ve 6.50 uzeri
+        # hicbir firmanin ulasamadigi bolge (D-250/7).
+        score_range = st.slider(
+            f"Kimlik Tamlığı (tavan {tavan:.2f})", 0.0, float(tavan), (0.0, float(tavan)),
+            step=0.1, help=sunum.tavan_metni(tavan), key="musteriler-score",
+        )
 
     sources = get_source_names()
     source = st.selectbox("Kaynak", ["Tümü"] + sources, key="musteriler-source")
@@ -121,4 +128,7 @@ def render_musteriler_tab() -> None:
 
     st.success(f"{len(df)} firma bulundu")
     st.dataframe(df, width="stretch", hide_index=True)
-    st.caption(f"Ortalama kalite skoru: {df['data_quality_score'].mean():.1f}/100")
+    st.caption(
+        "Ortalama kimlik tamlığı: "
+        + sunum.puan_metni(df["identity_completeness"].mean(), tavan)
+    )

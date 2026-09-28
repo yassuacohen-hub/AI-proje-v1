@@ -390,11 +390,15 @@ async function loadQualityTrend() {
   qualityChart = new Chart(document.getElementById('qualityChart'),{type:'doughnut',data:{labels,datasets:[{data,backgroundColor:colors,borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{color:'#64748b',font:{size:11},padding:8}}},cutout:'60%'}});
 }
 
-let allNace = [], showAllNace = false;
+let allNace = [], showAllNace = false, naceTahminHaric = 0;
 async function loadNACE() {
   const r = await fetch(apiUrl('/api/nace-distribution?limit=100'));
-  const d = await r.json();
+  // D-252/5: uc nokta {dagilim, tahmin_haric} donuyor. Tahmini kodlar
+  // dagilima girmez; kac firmanin disarida kaldigi kullaniciya soylenir.
+  const j = await r.json();
+  const d = j.dagilim || [];
   allNace = d;
+  naceTahminHaric = j.tahmin_haric || 0;
   renderNaceList();
   // NACE dropdown'ini doldur
   const naceFilter = document.getElementById('nace-filter');
@@ -420,6 +424,12 @@ function renderNaceList() {
     </div>`;
   }).join('');
   updateListToggle('nace-toggle','nace-toggle-label',allNace.length,showAllNace);
+  const not = document.getElementById('nace-tahmin-not');
+  if (not) {
+    not.textContent = naceTahminHaric
+      ? `${fmt(naceTahminHaric)} firma kanit kaynagi olmayan (tahmini) NACE kodu tasidigi icin bu dagilima girmedi.`
+      : '';
+  }
 }
 
 function toggleNaceList() { showAllNace = !showAllNace; renderNaceList(); }

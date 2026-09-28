@@ -1,0 +1,11 @@
+#!/bin/sh
+# PANEL-DURUSTLUK-01 mandallari. Kurulum (bir kez):
+#   git config core.hooksPath scripts/hooks
+#
+# .git/hooks surumlenmez; oradaki kanca klonda kaybolur. Bu dosya depoda
+# durur, herkeste ayni davranir. Acil durumda: git commit --no-verify
+set -e
+echo "[pre-commit] panel durustluk mandallari..."
+# Goc defteri de burada: sema degisikligi commit'e tek basina giremesin
+# (D-251/3). Ikisi birlikte ~15 sn; tam takim (~170 sn) kancaya konmaz.
+python -m pytest tests/test_panel_durustluk.py tests/test_goc_defteri.py -q
