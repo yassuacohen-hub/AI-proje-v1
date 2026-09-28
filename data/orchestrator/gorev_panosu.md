@@ -24,14 +24,10 @@
 | WK-02 | OSB Tender Monitor - Real-time Tracking | - | P1 | archive | - |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | archive | - |
 | VERI-02 | [VERI] OSB ihale izleyicisini yaz → src/company_master/etl/scrapers/osb_tender_monitor.py (3s) | utku | P1 | aktif | - |
-| VERI-NACE-SOZLUK-01 | [VERI] Resmi NACE listesini yaz → nace_codes tablosu (3s) | utku | P0 | review | src/company_master/etl/nace_sozluk_yukle.py |
 | VERI-NACE-COKLU-01 | [VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s) | utku | P1 | aktif | src/company_master/etl/nace_coklu_ata.py |
-| VERI-NACE-TEMIZ-01 | [VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s) | utku | P1 | review | src/company_master/etl/nace_gecersiz_temizle.py |
-| VERI-NACE-KOLON-01 | [VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s) | utku | P2 | aktif | src/company_master/etl/nace_validity_duzelt.py |
-| VERI-KAYNAK-BAG-01 | [VERI] Firma-kaynak bagini yaz → source_records.company_id (4s) | utku | P0 | review | src/company_master/etl/kaynak_firma_bagla.py |
+| VERI-KAYNAK-BAG-01 | [VERI] Firma-kaynak bagini yaz → source_records.company_id (4s) | utku | P0 | aktif | src/company_master/etl/kaynak_firma_bagla.py |
 | VERI-SEKTOR-01 | [VERI] Sektor sozlugunu yaz → 9689 kayitta sektor alani (3s) | utku | P1 | plan | src/company_master/etl/sektor_normalize.py |
 | VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim icinde 102 ASO kaydi (2s) | utku | P2 | plan | src/company_master/etl/kaynak_sizinti_duzelt.py |
-| VERI-HAYALET-TEMIZ-01 | [VERI] Hayalet kayitlari sil → companies 4591 fazlalik satir (3s) | utku | P0 | aktif | src/company_master/etl/hayalet_kayit_temizle.py |
 | VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik verisini yeniden yaz → D-235 korumali sayfa_dongusu (2s) | utku | P1 | plan | src/company_master/etl/scrapers/ivedik_scraper.py |
 
 ## Tamamlananlar
@@ -97,3 +93,7 @@
 | DOC-D230-01 | D-230: gomulu govde kopyasi yasagi + mandal | kahin | 2026-09-27T10:36:28 |
 | ORKESTRA-D231-01 | Onay kuyrugu arsive kor: pano_denetim arsive bakmiyordu | kahin | 2026-09-27T10:48:42 |
 | ORKESTRA-D233-01 | Referansli yol kopya sanildi: AI proje v1/ butun olarak silindi, teslim kapisi kirildi | kahin | 2026-09-27T11:24:28 |
+| VERI-NACE-SOZLUK-01 | [VERI] Resmi NACE listesini yaz → nace_codes tablosu (3s) | utku | 2026-09-28T19:38:49 |
+| VERI-NACE-TEMIZ-01 | [VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s) | utku | 2026-09-28T19:38:48 |
+| VERI-NACE-KOLON-01 | [VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s) | utku | 2026-09-28T19:38:49 |
+| VERI-HAYALET-TEMIZ-01 | [VERI] Hayalet kayitlari sil → companies 4591 fazlalik satir (3s) | utku | 2026-09-28T19:38:49 |

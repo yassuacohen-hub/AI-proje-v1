@@ -251,8 +251,9 @@
                 <select class="filter-select" id="source-filter" onchange="applyQuickFilter()"><option value="">Tüm Kaynaklar</option></select>
               </div>
               <div class="quick-filter-item">
-                <label for="min-score-slider">Min Kalite Skoru <output id="score-label" for="min-score-slider">0</output></label>
-                <input type="range" id="min-score-slider" min="0" max="100" value="0" oninput="updateScoreLabel()" onchange="applyQuickFilter()" aria-label="Minimum kalite skoru">
+                <!-- D-259: ust sinir ULASILABILIR TAVAN; syncScoreSlider() calisma aninda yazar. -->
+                <label for="min-score-slider">Min Kimlik Tamlığı <output id="score-label" for="min-score-slider">0.0</output></label>
+                <input type="range" id="min-score-slider" min="0" max="10" step="0.1" value="0" oninput="updateScoreLabel()" onchange="applyQuickFilter()" aria-label="Minimum kimlik tamlığı puanı">
               </div>
               <div class="quick-filter-item filter-action">
                 <button class="btn-refresh" type="button" onclick="clearAllFilters()"><i class="fas fa-redo" aria-hidden="true"></i> Tümünü Sıfırla</button>
@@ -277,7 +278,7 @@
                   <th data-sort="primary_phone" class="sortable" scope="col">Telefon <span class="sort-icon" aria-hidden="true"></span></th>
                   <th data-sort="vkn" class="sortable" scope="col">VKN <span class="sort-icon" aria-hidden="true"></span></th>
                   <th data-sort="nace_code" class="sortable" scope="col">NACE / Sektör <span class="sort-icon" aria-hidden="true"></span></th>
-                  <th data-sort="data_quality_score" class="sortable" scope="col">Skor <span class="sort-icon" aria-hidden="true"></span></th>
+                  <th data-sort="identity_completeness" class="sortable" scope="col">Kimlik Tamlığı <span class="sort-icon" aria-hidden="true"></span></th>
                   <th scope="col" class="watch-column" title="İzleme listesi"><i class="fas fa-star" aria-hidden="true"></i></th>
                 </tr></thead>
                 <tbody id="companies-tbody"></tbody>

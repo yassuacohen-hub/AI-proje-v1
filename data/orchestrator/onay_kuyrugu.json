@@ -2774,7 +2774,9 @@
     "ozet": "Sektor sayaci kirlenmesi temizlendi: 13 gecersiz NACE kodu (1163, 410, 780, 794, 757, 110, 114, 127, 192, 339, 380, 390, 410, 752, 757, 780, 794, 757, 339, 410) temizlendi, 555 firma NULL'a cekildi, nace_source='invalid_cleared' isaretlendi. Dogrulama: kalan gecersiz kod 0, 555 firma invalid_cleared isaretlendi, toplam firma sayisi 14003 degismedi.",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-27T16:13:05",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-28T19:38:48"
   },
   {
     "task_id": "TEST-BACKLOG-20",
@@ -2782,7 +2784,9 @@
     "ozet": "20 test kapatildi: A=9 B=3 C=3 D=2 E=2 F=1; tam suite 20->0; bloke: yok",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-27T19:38:40",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-28T19:38:49"
   },
   {
     "task_id": "VERI-HAYALET-TEMIZ-01",
@@ -2812,7 +2816,10 @@
     "ozet": "company_id kolonu eklendi (migration 0023), 5252 eslesme (37.5%), FK dogrulandi, nace_codes 3319 yuklendi (4 kaynak), nace temizlik: NN.NN 8289, 6-digit 0, 2-digit 0, yetim 0",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-27T23:45:45",
-    "durum": "bekliyor"
+    "durum": "reddedildi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-28T19:39:35",
+    "red_nedeni": "OLCUM CELISKISI: teslim ozeti 'yetim 0' diyor, canli DB'de 8748 yetim (source_records 14000, company_id dolu 5252, bos 8748). Ayrica '5252 eslesme (37.5%)' kayit yuzdesi; firma tarafinda 9412 firmanin sadece 3068'i kaynakli, 6344 firma kaynaksiz. Dogru cumle: kayit kapsamasi %37.5, FIRMA kapsamasi %32.6. Yeniden teslimde iki oran ayri ayri yazilacak ve 8748 yetim ya baglanacak ya gerekcesi belgelenecek."
   },
   {
     "task_id": "VERI-NACE-SOZLUK-01",
@@ -2820,6 +2827,28 @@
     "ozet": "3319 NACE kodu yuklendi (4 kaynak birlesimi: xlsx + 3 json), seviye korundu (6/4/2/1), eslesme %92.9, 47.79.04 ve 47.79 var",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-27T23:47:23",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-28T19:38:49"
+  },
+  {
+    "task_id": "VERI-NACE-KOLON-01",
+    "ajan": "utku",
+    "ozet": "nace_validity duzeltildi: 0 NACE pattern kalan, 21 title_default -> medium, tum degerler valid etiket setinde (medium, unknown, fallback)",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-28T13:28:59",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-28T19:38:49"
+  },
+  {
+    "task_id": "VERI-HAYALET-TEMIZ-01",
+    "ajan": "utku",
+    "ozet": "4591 hayalet kayit silindi (14003->9412), UNIQUE INDEX uq_companies_legal_name olusturuldu, vergi_no 761 korundu, yedek data/backup/hayalet_20260927.jsonl olusturuldu, cascaded deletes",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-28T13:35:42",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-09-28T19:38:49"
   }
 ]

@@ -180,20 +180,32 @@ def test_migration_0015_in_versions():
     assert any(m["version"] == 15 for m in versions["migrations"])
 
 
-def test_migrate_py_target_15():
-    """migrate.py default target 15 olmalı."""
-    kod = Path("src/company_master/schema/migrations/migrate.py").read_text(
-        encoding="utf-8"
-    )
-    tree = ast.parse(kod)
+def test_goc_yazma_yollari_kapali():
+    """BORC-GOC-IKI-DEFTER-01 (D-265): tek defter `schema_migrations`.
 
-    for node in ast.walk(tree):
-        if isinstance(node, ast.FunctionDef) and node.name == "run_migrations":
-            func_body = ast.unparse(node)
-            assert "15" in func_body, "run_migrations target 15 yoksa"
-            break
-    else:
-        assert False, "run_migrations fonksiyonu bulunamadı"
+    Eski hali "migrate.py default target 15 olmali" diyordu; diskte 34 goc
+    varken 15'te durmayi SART KOSUYORDU. Yalani koruyan bekci, tek kapiyi
+    koruyan bekciye cevrildi.
+    """
+    for yol in (
+        "src/company_master/schema/migrations/migrate.py",
+        "scripts/db_migrate.py",
+    ):
+        kod = Path(yol).read_text(encoding="utf-8")
+        ast.parse(kod)  # sozdizimi bozulmadi
+        assert "goc_defteri.py --uygula" in kod, f"{yol} tek kapiyi soylemiyor"
+
+    kapali = ast.parse(
+        Path("src/company_master/schema/migrations/migrate.py").read_text(
+            encoding="utf-8"
+        )
+    )
+    for ad in ("run_migrations", "apply_sql"):
+        dugum = next(
+            n for n in ast.walk(kapali)
+            if isinstance(n, ast.FunctionDef) and n.name == ad
+        )
+        assert "SystemExit" in ast.unparse(dugum), f"{ad} hala goc uyguluyor"
 
 
 # ------------------------------------------------------------------- musteri_yonetimi

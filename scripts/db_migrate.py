@@ -364,6 +364,16 @@ def main():
 
     args = parser.parse_args()
 
+    # BORC-GOC-IKI-DEFTER-01 (D-265): Bu CLI kendi defterini (`_schema_version`)
+    # yaratiyordu. Canli DB'nin defteri `schema_migrations`; `_schema_version`
+    # tablosu orada HIC OLUSMAMIS -> bu yol uretimde hic kosmadi. Kossaydi 0'dan
+    # baslayip 34 gocu yeniden uygulamaya kalkardi. Yazma yolu kapatildi.
+    raise SystemExit(
+        "KAPALI (D-265). Goc uygulama kapisi: "
+        "python scripts/goc_defteri.py --uygula <dosya.sql>\n"
+        "Defter `schema_migrations` tablosudur; `_schema_version` kullanilmaz."
+    )
+
     print(f"[Başlat] DB Migration Manager")
     print(f"  Ortam: {args.env}")
     print(f"  Hedef: {args.target:04d}")

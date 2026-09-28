@@ -44,7 +44,15 @@ RE_INDEKS = re.compile(
 # 0024 gibi "DEFAULT dusur" gocleri kolon/tablo uretmez; izi default'un
 # yoklugudur. Ayristirilmazsa goc IZSIZ kalir = defterdeki kayit dogrulanamaz.
 RE_ALTER = re.compile(r"ALTER\s+TABLE\s+(?:ONLY\s+)?([\w.]+)(.*?);", re.I | re.S)
+# 0031 gibi "kisit koy" gocleri tablo/kolon/indeks uretmez; izi kisit adidir.
+# Ayristirilmazsa goc IZSIZ kalir = defter onu dogrulayamaz.
+RE_KISIT = re.compile(r"ADD\s+CONSTRAINT\s+([\w]+)", re.I)
 RE_DEFAULT_DUSUR = re.compile(r"ALTER\s+COLUMN\s+([\w]+)\s+DROP\s+DEFAULT", re.I)
+# 0030 gibi "kolonu pasiflestir" gocleri de tablo/kolon/indeks uretmez; izi
+# kolon yorumudur (pg_description). Ayristirilmazsa goc IZSIZ kalir.
+RE_YORUM = re.compile(
+    r"COMMENT\s+ON\s+COLUMN\s+(?:[\w]+\.)?([\w]+)\.([\w]+)\s+IS", re.I
+)
 # Sonraki bir goc bu gocun izini degistirdiyse (RENAME/DROP) burada bildirilir.
 # D-245: "iz yok" demek yetmez, neden yok yazili olmali.
 RE_USTUNDEN = re.compile(r"ustunden-gecen:\s*([\w.]+)", re.I)
@@ -81,7 +89,9 @@ def goc_izleri() -> dict[str, dict[str, set]]:
             "tablo": {_ad(t) for t in RE_TABLO.findall(s)},
             "kolon": {(_ad(t), k.lower()) for t, k in RE_KOLON.findall(s)},
             "indeks": {i.lower() for i in RE_INDEKS.findall(s)},
+            "kisit": {k.lower() for k in RE_KISIT.findall(s)},
             "varsayilansiz": varsayilansiz,
+            "yorum": {(t.lower(), k.lower()) for t, k in RE_YORUM.findall(s)},
             "ustunden": ustunden.group(1) if ustunden else None,
             "dusen": {d.lower() for d in RE_DUSEN_IZ.findall(ham)},
         }
@@ -115,6 +125,17 @@ def sema_durumu(conn) -> dict[str, set]:
                 text("SELECT indexname FROM pg_indexes WHERE schemaname='public'")
             )
         },
+        # Kisit adlari (0031 tipi "kisit koy" goclerinin izi)
+        "kisit": {
+            r[0]
+            for r in conn.execute(
+                text(
+                    "SELECT conname FROM pg_constraint c "
+                    "JOIN pg_namespace n ON n.oid = c.connamespace "
+                    "WHERE n.nspname='public'"
+                )
+            )
+        },
         # DEFAULT'u dusurulmus kolonlar (0024 tipi goclerin izi)
         "varsayilansiz": {
             (r[0], r[1])
@@ -122,6 +143,20 @@ def sema_durumu(conn) -> dict[str, set]:
                 text(
                     "SELECT table_name, column_name FROM information_schema.columns "
                     "WHERE table_schema='public' AND column_default IS NULL"
+                )
+            )
+        },
+        # Yorumu olan kolonlar (0030 tipi "pasiflestir" goclerinin izi)
+        "yorum": {
+            (r[0], r[1])
+            for r in conn.execute(
+                text(
+                    "SELECT c.relname, a.attname FROM pg_description d "
+                    "JOIN pg_class c ON c.oid = d.objoid "
+                    "JOIN pg_namespace n ON n.oid = c.relnamespace "
+                    "JOIN pg_attribute a ON a.attrelid = c.oid "
+                    "AND a.attnum = d.objsubid "
+                    "WHERE n.nspname='public' AND d.objsubid > 0"
                 )
             )
         },
@@ -143,7 +178,7 @@ def degerlendir(izler, sema):
             continue
         eksik = []
         toplam = 0
-        for tur in ("tablo", "kolon", "indeks", "varsayilansiz"):
+        for tur in ("tablo", "kolon", "indeks", "kisit", "varsayilansiz", "yorum"):
             for x in sorted(iz[tur], key=str):
                 # "dusen-iz" ile bildirilen iz aranmaz; geri kalani aranir.
                 ad = ".".join(x) if isinstance(x, tuple) else x
@@ -226,7 +261,30 @@ def uygula(dosya: str) -> None:
     print(f"UYGULANDI + DEFTERE YAZILDI: {dosya}")
 
 
+def uygula_tumu() -> None:
+    """Diskteki tum gocleri sirayla uygular (kurulum/deploy yolu, D-265).
+
+    Eskiden bu is `migrate.py --apply` idi; o yol DB defterine YAZMIYORDU,
+    bu yuzden ikinci bir defter dogurdu. Her goc idempotent (`IF NOT EXISTS`)
+    oldugu icin bastan calistirilabilir.
+    """
+    for yol in sorted(GOC_DIZINI.glob("[0-9][0-9][0-9][0-9]_*.sql")):
+        uygula(yol.name)
+
+
 if __name__ == "__main__":
-    if "--uygula" in sys.argv:
-        uygula(sys.argv[sys.argv.index("--uygula") + 1])
-    calistir("--esitle" in sys.argv)
+    # D-264: taninmayan arguman sessizce baska bir dala dusemez. argparse
+    # bilinmeyeni exit 2 ile reddeder; elle yazilan filtre gereksiz.
+    import argparse
+
+    ap = argparse.ArgumentParser(description=__doc__)
+    ap.add_argument("--esitle", action="store_true", help="izi tam gocleri deftere yaz")
+    ap.add_argument("--uygula", metavar="DOSYA.sql", help="tek goc calistir + deftere yaz")
+    ap.add_argument("--uygula-tumu", action="store_true", help="tum gocleri sirayla uygula")
+    arg = ap.parse_args()
+
+    if arg.uygula_tumu:
+        uygula_tumu()
+    elif arg.uygula:
+        uygula(arg.uygula)
+    calistir(arg.esitle)

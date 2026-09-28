@@ -27,8 +27,28 @@ let totalRecords = 0;
 let currentPage = 1;
 const pageSize = 200;
 // Sort state
-let sortKey = 'data_quality_score';
+let sortKey = 'identity_completeness';
 let sortDir = 'desc';
+// D-259: puan tavani API'den gelir (GET /api/companies -> tavan). Sabit 0-100 esik
+// yazilmaz; bantlar sunum.bantlar() ile ayni formulden turetilir.
+let scoreTavan = null;
+function scoreCls(v) {
+  if (v === null || v === undefined || Number.isNaN(v) || !scoreTavan) return 'score-none';
+  const b = scoreTavan / 5;               // 5 bant, sunum.BANT_SAYISI ile ayni
+  if (v >= b * 4) return 'score-high';
+  if (v >= b * 3) return 'score-medium';
+  if (v >= b * 2) return 'score-low';
+  return 'score-very-low';
+}
+// D-249: "veri yok" 0 ile gosterilmez.
+function scoreNum(c) {
+  const v = c ? c.identity_completeness : null;
+  return (v === null || v === undefined || v === '') ? null : Number(v);
+}
+function scoreMetni(v) {
+  if (v === null || Number.isNaN(v)) return '—';
+  return scoreTavan ? `${v.toFixed(2)} / ${scoreTavan.toFixed(2)}` : v.toFixed(2);
+}
 // Watchlist state (Y13) - localStorage kalici
 let watchSet = new Set();
 try { watchSet = new Set(JSON.parse(localStorage.getItem('huginn_watchlist') || '[]')); } catch(e){ watchSet = new Set(); }
@@ -60,8 +80,8 @@ function renderWatchlist() {
     const c = allCompanies.find(x => (x.company_id || x.legal_name) === id);
     const name = (c ? (c.legal_name || id) : id).toUpperCase();
     const nameS = name.length > 18 ? name.substring(0,17) + '…' : name;
-    const score = c ? Math.round(Number(c.data_quality_score||0)) : null;
-    const scoreTag = score !== null ? ` <span class="watchlist-score">${score}</span>` : '';
+    const score = scoreNum(c);
+    const scoreTag = score !== null ? ` <span class="watchlist-score">${score.toFixed(1)}</span>` : '';
     return `<div class="watchlist-item" onclick="selectCompany('${esc(id)}')" title="${esc(name)}">
       <span class="watchlist-name">${esc(nameS)}</span>${scoreTag}
       <span class="watchlist-x" onclick="event.stopPropagation(); toggleWatch('${esc(id)}')">&times;</span>
@@ -204,9 +224,13 @@ async function loadKPI() {
   const r = await fetch(apiUrl('/api/kpi'));
   const d = await r.json();
   const total = d.total || 0;
+  if (d.tavan) scoreTavan = Number(d.tavan);
+  // D-249/D-250: olculmemis ortalama 0 degil '—'; puan tavaniyla birlikte yazilir.
+  const avg = (d.avg_score === null || d.avg_score === undefined) ? null : Number(d.avg_score);
   const cards = [
     {label:'Toplam Firma',value:fmt(d.total),icon:'fa-building',color:''},
-    {label:'Kalite Skoru',value:(d.avg_score||0).toFixed(1)+'/100',icon:'fa-star',color:'green'},
+    {label:'Kimlik Tamlığı',value:scoreMetni(avg),icon:'fa-star',color:'green',
+     sub:scoreTavan?`ulaşılabilir tavan ${scoreTavan.toFixed(2)} / 10.00`:''},
     {label:'VKN Dolu',value:fmt(d.vkn_either),icon:'fa-id-card',color:'purple',sub:total?'%'+((d.vkn_either/total)*100).toFixed(1):''},
     {label:'Web Sitesi',value:fmt(d.web),icon:'fa-globe',color:'cyan',sub:total?'%'+((d.web/total)*100).toFixed(1):''},
     {label:'Telefon',value:fmt(d.tel),icon:'fa-phone',color:'orange',sub:total?'%'+((d.tel/total)*100).toFixed(1):''},
@@ -304,7 +328,17 @@ function clearNACEFilter() {
 function updateScoreLabel() {
   const slider = document.getElementById('min-score-slider');
   const label = document.getElementById('score-label');
-  if (slider && label) label.textContent = slider.value;
+  if (slider && label) label.textContent = Number(slider.value).toFixed(1);
+}
+// D-259: slider ust siniri TAVAN'dir. Eski 0-100 slider'da 20'yi secmek
+// 0-10'luk kolonda tum firmalari eliyordu (sessiz sifir sonuc).
+function syncScoreSlider() {
+  const slider = document.getElementById('min-score-slider');
+  if (!slider || !scoreTavan) return;
+  slider.max = scoreTavan.toFixed(2);
+  slider.step = '0.1';
+  if (Number(slider.value) > scoreTavan) slider.value = 0;
+  updateScoreLabel();
 }
 
 // Kayitli filtreler (Y13): son filtre localStorage'a kaydedilir, sayfa acilinca geri yuklenir
@@ -347,7 +381,7 @@ function applyQuickFilter() {
   const scoreSlider = document.getElementById('min-score-slider');
   const nace = naceSelect ? naceSelect.value : '';
   const source = sourceSelect ? sourceSelect.value : '';
-  const minScore = scoreSlider ? parseInt(scoreSlider.value) : 0;
+  const minScore = scoreSlider ? Number(scoreSlider.value) : 0;
   // Coklu kaynak secimi varsa, ilk secileni API'ye gonder (API tek kaynak destekliyor)
   let activeSource = source;
   if (selectedSources.size > 0) {
@@ -357,7 +391,7 @@ function applyQuickFilter() {
   currentSourceFilter = activeSource;
   // Son filtreyi kaydet (Y13 - kayitli filtreler)
   saveLastFilter(search, nace, activeSource, minScore);
-  loadCompanies(search, minScore, 100, activeSource, nace);
+  loadCompanies(search, minScore, scoreTavan || 10, activeSource, nace);
 }
 
 function clearAllFilters() {
@@ -457,7 +491,7 @@ function renderSkeleton() {
   if (tb) tb.innerHTML = rows;
 }
 
-async function loadCompanies(search='',minScore=0,maxScore=100,source='',nace='') {
+async function loadCompanies(search='',minScore=0,maxScore=10,source='',nace='') {
   renderSkeleton();
   let url = `/api/companies?limit=${pageSize}&offset=${(currentPage-1)*pageSize}&min_score=${minScore}&max_score=${maxScore}`;
   if (search) url += `&search=${encodeURIComponent(search)}`;
@@ -466,6 +500,7 @@ async function loadCompanies(search='',minScore=0,maxScore=100,source='',nace=''
   if (nace) url += `&nace=${encodeURIComponent(nace)}`;
   const r = await fetch(apiUrl(url));
   const d = await r.json();
+  if (d.tavan) { scoreTavan = Number(d.tavan); syncScoreSlider(); }
   allCompanies = d.items || [];
   totalRecords = d.total || 0;
   renderTable(allCompanies);
@@ -476,14 +511,15 @@ async function loadCompanies(search='',minScore=0,maxScore=100,source='',nace=''
   // Arama sonucu gostergesi
   const resultBar = document.getElementById('search-result');
   if (resultBar) {
-    if (search || source || nace || minScore>0 || maxScore<100) {
+    const _tvn = scoreTavan || 10;
+    if (search || source || nace || minScore>0 || maxScore<_tvn) {
       resultBar.classList.remove('hidden');
       document.getElementById('result-count').textContent = fmt(totalRecords);
       let filterParts = [];
       if (search) filterParts.push(`"${search}"`);
       if (nace) filterParts.push(`Sektör: ${getNaceSector(nace)} (${nace})`);
       if (source) filterParts.push(`Kaynak: ${source}`);
-      if (minScore>0 || maxScore<100) filterParts.push(`Skor: ${minScore}-${maxScore}`);
+      if (minScore>0 || maxScore<_tvn) filterParts.push(`Kimlik tamlığı: ${Number(minScore).toFixed(1)}-${Number(maxScore).toFixed(1)}`);
       document.getElementById('result-filter').textContent = filterParts.join(' • ');
     } else {
       resultBar.classList.add('hidden');
@@ -509,8 +545,10 @@ function renderTable(companies) {
     rows.sort((a,b) => {
       let va = a[sortKey==='vkn' ? 'tax_number' : sortKey];
       let vb = b[sortKey==='vkn' ? 'tax_number' : sortKey];
-      if (sortKey === 'data_quality_score') {
-        va = Number(va||0); vb = Number(vb||0);
+      if (sortKey === 'identity_completeness') {
+        // Olculmemis puan en sona duser (D-249: yokluk 0 degildir)
+        va = (va === null || va === undefined || va === '') ? -1 : Number(va);
+        vb = (vb === null || vb === undefined || vb === '') ? -1 : Number(vb);
         return sortDir==='asc' ? va-vb : vb-va;
       }
       va = (va||'').toString().toUpperCase();
@@ -522,8 +560,8 @@ function renderTable(companies) {
     });
   }
   document.getElementById('companies-tbody').innerHTML = rows.map(c=>{
-    const score = Number(c.data_quality_score||0);
-    const cls = score>=80?'score-high':score>=60?'score-medium':score>=40?'score-low':'score-very-low';
+    const score = scoreNum(c);
+    const cls = scoreCls(score);
     const naceLabel = c.nace_code ? getNaceSector(c.nace_code) : '-';
     // ANA KURAL: Firma adlari BUYUK HARFLE, ticaret adi ilk 2 hece
     const legalName = (c.legal_name||'-').toUpperCase();
@@ -544,7 +582,7 @@ function renderTable(companies) {
       <td class="td-mono">${missPhone}</td>
       <td class="td-mono">${missVkn}</td>
       <td class="td-mono" title="${getNaceLabel(c.nace_code)}"><span class="nace-tag">${esc(c.nace_code||'-')}</span><br><span class="nace-sector">${esc(naceLabel)}</span></td>
-      <td><span class="score-badge ${cls}">${score.toFixed(1)}</span></td>
+      <td><span class="score-badge ${cls}" title="${scoreTavan?`Ulaşılabilir tavan ${scoreTavan.toFixed(2)} / 10.00`:''}">${scoreMetni(score)}</span></td>
       <td class="td-watch" onclick="event.stopPropagation(); toggleWatch('${esc(c.company_id||c.legal_name)}', this)"><i class="fas ${isWatched(c)?'fa-star':'fa-star-o'}"></i></td>
     </tr>`;
   }).join('');
@@ -586,7 +624,7 @@ function sortTable(key) {
     sortDir = sortDir === 'asc' ? 'desc' : 'asc';
   } else {
     sortKey = key;
-    sortDir = (key === 'data_quality_score') ? 'desc' : 'asc';
+    sortDir = (key === 'identity_completeness') ? 'desc' : 'asc';
   }
   // Sort ikonlarini guncelle
   document.querySelectorAll('th.sortable').forEach(th => {
@@ -678,8 +716,11 @@ function selectCompany(id) {
 
 function showDetail(c) {
   openDetailPanel();
-  const score = Number(c.data_quality_score||0);
-  const cls = score>=80?'var(--green)':score>=60?'var(--accent)':score>=40?'var(--yellow)':'var(--red)';
+  const score = scoreNum(c);
+  const _renk = {'score-high':'var(--green)','score-medium':'var(--accent)',
+                 'score-low':'var(--yellow)','score-very-low':'var(--red)',
+                 'score-none':'var(--text-dim)'};
+  const cls = _renk[scoreCls(score)];
   // ANA KURAL: Firma adlari BUYUK HARFLE
   const legalName = (c.legal_name||'-').toUpperCase();
   const tradeName = (c.trade_name||'').toUpperCase();
@@ -692,10 +733,11 @@ function showDetail(c) {
       <div class="detail-company-name">${esc(legalName)}</div>
       <div class="detail-company-trade">${esc(tradeName)}</div>
       <div class="detail-score-ring">
-        <div class="score-circle" style="border-color:${cls};color:${cls}">${score.toFixed(0)}</div>
+        <div class="score-circle" style="border-color:${cls};color:${cls}">${score===null?'—':score.toFixed(1)}</div>
         <div class="score-info">
-          <div class="score-label">Kalite Skoru</div>
-          <div class="score-value" style="color:${cls}">${score.toFixed(1)}/100</div>
+          <div class="score-label">Kimlik Tamlığı</div>
+          <div class="score-value" style="color:${cls}">${scoreMetni(score)}</div>
+          ${scoreTavan?`<div class="score-label">ulaşılabilir tavan ${scoreTavan.toFixed(2)} / 10.00</div>`:''}
         </div>
       </div>
     </div>
@@ -793,11 +835,11 @@ function exportCSV() {
   const sourceSelect = document.getElementById('source-filter');
   const source = sourceSelect ? sourceSelect.value : '';
   const slider = document.getElementById('min-score-slider');
-  const minScore = slider ? parseInt(slider.value) : 0;
+  const minScore = slider ? Number(slider.value) : 0;
   // Coklu kaynak secimi kutucuklardan yapildiysa onu onceliklendir
   let activeSource = source;
   if (selectedSources.size > 0) activeSource = Array.from(selectedSources).join(',');
-  let url = `/api/companies/export?min_score=${minScore}&max_score=100`;
+  let url = `/api/companies/export?min_score=${minScore}&max_score=${scoreTavan || 10}`;
   if (search) url += `&search=${encodeURIComponent(search)}`;
   if (activeSource) url += `&sources=${encodeURIComponent(activeSource)}`;
   if (nace) url += `&nace=${encodeURIComponent(nace)}`;

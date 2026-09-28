@@ -3044,3 +3044,582 @@ Yine de cok-dosyali yama betikle yapildi. Betik iki ders birden ogretti:
 
 **Referans:** D-86, D-241, D-243, D-245, D-249, D-250, D-251, D-252, D-253,
 D-256, D-257.
+
+---
+
+## D-259 — Olu kolon pasiflestirildi; panel yalani uc katmanda birden bulundu (2026-09-28)
+
+**Karar (urun sahibi):** `data_quality_score` dusurulmez, **pasiflestirilir**.
+Firma kimlik dosyalari olgunlasinca revize edilip kullanilabilir. Veri silinmez.
+
+### 1. Pasiflestirmenin en durust yolu: COMMENT + mandal (ad degisikligi DEGIL)
+
+Olculdu, sonra secildi:
+
+| Yol | Olcum | Karar |
+|---|---|---|
+| `DROP COLUMN` | 9412 satir dolu | **Hayir** — urun sahibi veriyi istiyor |
+| `_deprecated_` on eki | D-258'de yarim goc 7 ayri yerde bulundu | **Hayir** — ikinci yarim goc riski |
+| `COMMENT ON COLUMN` | indeks 0, VIEW 0, FK 0 — kolon izole | **Evet** — semada duran gerekce |
+| Mandal (test) | tek basina semada iz birakmaz | **Evet, COMMENT ile birlikte** |
+
+Ad degisikligi **reddedildi**: D-258 zaten bir yarim gocun 7 kalintisini
+buldu; ayni riski ikinci kez almak gerekcesizdir. Kolon **yerinde kalir**,
+semada "OKUMAYIN, YAZMAYIN" yazar, mandal yeni kullanimı engeller.
+
+Goc `0030_olu_kolonu_pasiflestir.sql` (+ `down/`), defterde **TAM**,
+izi `pg_description`'da dogrulandi, **9412 satir korundu**.
+`goc_defteri.py` bu turda `COMMENT ON COLUMN` izini ogrendi — ogrenmeseydi
+`0030` defterde **IZSIZ** gorunurdu (D-253 bosluğu).
+
+### 2. Panel yalani: tek degil UC katman
+
+Brief "kolonu pasiflestir" diyordu. Olcum uc ayri yalan buldu — ucu de ayni
+kokten (0-100 olcekli olu kolon x 0-10 olcekli canli kolon):
+
+1. **Tablo/detay** — `app.js` `data_quality_score` okuyordu; kolon panele hic
+   gelmiyor. 9412 firmanin **hepsi** `0` gorunuyordu. (D-249 ihlali: yokluk 0 degil.)
+2. **KPI karti** — `/api/kpi` 0-10 ortalamasini donuyordu, panel `"X.X/100"`
+   yaziyordu. Ayni sayi, dort kat kucuk gosterilen olcek.
+3. **Filtre** — slider `max="100"`, API clamp `min(x, 100)`, kolonun gercek
+   azamisi **6.50**. `min_score=20` secmek **9412 firmanin hepsini eliyordu**;
+   ekranda normal bir filtre goruntusuyle, **sessizce**.
+
+3. madde briefte yoktu ve kullaniciya en pahalıya mal olan yalandi: bos
+sonuc "firma yok" gibi okunur.
+
+### 3. Duzeltme: tavan API'den gelir, esik kodda yazmaz
+
+`/api/companies` ve `/api/kpi` artik `"tavan"` doner (`sunum.tavan_getir()`,
+`lru_cache`li). Panel bantlari `scoreTavan / 5` ile turetilir —
+`sunum.bantlar()` ile **ayni formul**. Panelde tek bir `0-100` sabiti kalmadi.
+Slider ust sinirini calisma aninda tavandan alir (`syncScoreSlider`).
+Olculmemis puan `—` basar ve siralamada dibe duser (D-249).
+
+**Olculen tavan:** 6.50 / azami 10.00. Kilitli 3.50 (`tax_office` 0.5,
+`mersis_number` 1.0, `trade_registry_number` 1.0, `nace_code` 1.0 — D-257).
+`identity_completeness` gercek araligi **1.00–6.50**; MAX tam tavana esit.
+
+### 4. Mandal neden tutmadi: `*.py` tarıyordu
+
+`test_panel_durustluk.py` D-258'den beri var, ama `_panel_dosyalari()`
+yalniz `*.py` topluyordu. Panelin **yuzu** `app.js` ve `index.html`'dir.
+Yalan tam bu delikten gecti. Mandal artik `.py/.js/.html` tarar
+(`/100` denetimi Python'da AST, digerlerinde satir bazli).
+
+**Ders:** bir mandalin kapsamı, korudugu seyin **yuzeyini** kapsamalidir;
+dilini degil.
+
+### 5. Olu dosya silindi
+
+`web_dashboard/index_old.html` — olculdu: `web_app.py` yalniz `index.html`
+servis ediyor, canli referans **0**. Iki eski yalan (0-100 bant, olu kolon)
+icinde duruyordu. Silindi; muaf tutulmadi.
+
+### 6. Kapanan / acilan borc
+
+- **BORC-KOLON-DUSUR-01 kapandi** — kolon duruyor ama artik "yeniden
+  kullanilabilir" degil: semada yasak yazili, mandal commit'i keser.
+- **BORC-PERF-BANT-01** — ~~`perf_monitor.py` hala 0-100 bant kullaniyor.
+  Panel degil, ic olcum araci; yaniltici ama kullaniciya gitmiyor.~~
+  **D-266'da kapandi:** bant yalani gercekti (9409/9409 tek bant), ama
+  "ic olcum araci" beyani da yanlisti — uretimde cagrani yoktu. Duzeltilmedi,
+  yuzey kapatildi (5 dosya dustu).
+  Tavana baglanmali.
+- Dis koktekki 2 izinsiz dosya **silindi** (D-241 ihlali kapandi); icerikleri
+  `docs/HEDEF_VERI_KAPSAMI.md` olarak yapilandirildi.
+
+### 7. Brief hatasi sayaci: 7
+
+`_kalan.txt` "ikinci yarisi" degil **kuyruk kopyasiydi** — birlestirme
+metni ciftlerdi. "~60 alan" 35 obekti. "Kolonu pasiflestir" isinin
+**ucte biriydi**. Kural teyit edildi: **brief sayilarina guvenme, olc.**
+
+**Referans:** D-241, D-245, D-249, D-250, D-251, D-253, D-257, D-258.
+
+---
+
+## D-260 — Teslim ozeti kanit degildir; kayit kapsamasi firma kapsamasi degildir (2026-09-28)
+
+**Tur:** onay karari — 6 bekleyen teslim canli veritabaninda olculdu.
+**Arac:** tek seferlik denetim betigi (is bitince silindi).
+
+### 1. Olcum sonucu: 5 dogru, 1 yanlis beyan
+
+| Teslim | Iddia | Canli olcum | Sonuc |
+|---|---|---|---|
+| VERI-HAYALET-TEMIZ-01 | 9412 firma + UNIQUE indeks | 9412, indeks var | onay |
+| VERI-NACE-TEMIZ-01 | 555 `invalid_cleared` | 554 (1'i hayalet temizliginde silindi) | onay |
+| VERI-NACE-KOLON-01 | 0 NACE pattern, 0 kacak etiket | 0 / 0 | onay |
+| VERI-NACE-SOZLUK-01 | 3319 NACE kodu | 3319 | onay |
+| TEST-BACKLOG-20 | 20 test kapandi | suit ayri olculur | onay |
+| **VERI-KAYNAK-BAG-01** | **"yetim 0"** | **8748 yetim** | **RED** |
+
+### 2. Kural: teslim ozeti onay gerekcesi degildir
+
+`VERI-KAYNAK-BAG-01` ozeti "yetim 0" yaziyordu. `source_records` 14000 satir,
+`company_id` dolu 5252, **bos 8748**. Ozet korlemesine onaylansaydi kopuk
+kaynak zinciri "kapandi" damgasi alacakti. **Onay, teslim metnine degil
+canli olcume dayanir.** Bu, D-245'in ("doluluk gecerlilik degildir") gorev
+panosuna tasinmis halidir.
+
+### 3. Kayit kapsamasi ≠ firma kapsamasi
+
+Ayni ozet "5252 eslesme (37.5%)" diyordu. Bu **kayit** yuzdesidir. Firma
+tarafinda 5252 kayit yalnizca **3068 farkli firmaya** baglidir; 9412
+firmanin **6344'u kaynaksizdir**. Dogru iki cumle:
+
+- kayit kapsamasi **%37.5** (5252 / 14000)
+- **firma kapsamasi %32.6** (3068 / 9412)
+
+Tek oran yazilirsa okuyan her zaman iyi olani anlar. **Iki taraf birden
+yazilir.** Sayaci paydasiyla birlikte anmayan cumle olcum sayilmaz.
+
+### 4. Kalan is
+
+`VERI-KAYNAK-BAG-01` aktife dondu. Yeniden teslimde iki oran ayri yazilacak,
+8748 yetim ya baglanacak ya gerekcesi belgelenecek.
+
+**Referans:** D-245, D-250, D-252, D-259.
+
+---
+
+## D-261 — Bagalayici calistirilmamisti; content_hash yinelenmeyi durdurmuyor (2026-09-28)
+
+**Tur:** olcum + duzeltme. D-260'in "kalan is" maddesi isletildi, iki yeni
+kusur kanitlandi.
+
+### 1. Kod yazilmisti ama kosturulmamisti
+
+`kaynak_bagla.py` calistirildi: 8748 yetimin **1517'si tek satir kod
+degisikligi olmadan** baglandi. Teslim "yetim 0" derken betik ya hic
+kosturulmamis ya yarida kalmis. **Kural: "kod yazildi" ile "kod kosturuldu
+ve veritabanina yansidi" ayri iki olaydir; teslim ikincisini kanitlar.**
+
+Bag sonrasi olcum (D-260 formatinda, iki taraf birden):
+
+- kayit kapsamasi **%48.4** (6769 / 14000)
+- firma kapsamasi **%46.2** (4352 / 9412)
+
+Baglanan 6769 kaydin ham karsilastirmada 1555'inde ad tutmuyor gorundu;
+**normalize edilince gercek uyusmazlik 31.** Kalani Turkce buyuk harf
+donusumuydu. **Uyusmazlik once normalize edilerek olculur**, yoksa saglam
+bag hatali gorunur.
+
+### 2. `content_hash` yinelenmeyi durdurmuyor
+
+`source_records` 14000 satir; `source_id + external_id` ikilisinde
+benzersiz **10120**. **3880 satir (%27.7) yinelenmis.**
+
+| kaynak | toplam | benzersiz | yinelenen |
+|---|---|---|---|
+| ostim.org.tr | 9513 | 9513 | 0 |
+| ivedik.org.tr | 3134 | 14 | **3120** |
+| baskentosb.org.tr | 761 | 0 | **761** |
+| aso.org.tr | 592 | 592 | 0 |
+
+En uc ornek: tek firma icin **228 satir** — ayni `external_id`, ayni
+`raw_name`, ayni `raw_phone`, ayni `collected_at`, ama **228 farkli
+`content_hash`**. Hash degisken bir alan (zaman damgasi / satir kimligi)
+iceriyor; bu yuzden **ayni icerik her kosuda yeni satir aciyor**.
+`content_hash`'e yaslanan her yinelenme onlemi calismiyor.
+
+`baskentosb.org.tr` benzersiz sayisi **0**: `external_id` tamamen bos,
+o kaynakta kayit kimligi hic uretilmemis.
+
+### 3. Sisirilmis payda
+
+14000 payda **gercek degil**; gercek benzersiz kayit 10120. D-260'in
+"paydasiyla birlikte an" kurali bir adim ilerler: **payda da olculur.**
+Yinelenmis satir sayan payda kapsamayi oldugundan dusuk, yinelenmis satir
+sayan pay oldugundan yuksek gosterir.
+
+### 4. VKN kanali olu
+
+`companies.tax_number` dolu **5 / 9412**; `source_records.raw_tax_number`
+dolu **617 / 14000**. Bagalayicinin vergi no kanali **0 eslesme** uretti.
+D-257'nin (VKN kaynagi kapali) veri tarafindaki teyidi.
+
+### 5. Acilan borclar
+
+- `BORC-DEDUP-KAYNAK-01` — `content_hash` uretimi duzeltilecek,
+  `(source_id, external_id)` UNIQUE kisiti konacak, 3880 yinelenen satir
+  temizlenecek. Kisit olmadan her kaziyici kosusu tabloyu yeniden sisirir.
+- `BORC-EXTID-01` — `baskentosb.org.tr` kaziyicisi `external_id`
+  uretmiyor (761 satir kimliksiz).
+- `BORC-AD-VARYANT-01` — 31 kisaltma varyanti (`SANAYI`/`SAN.`,
+  `LIMITED SIRKETI`/`LTD. STI.`); normalize sozlugu kapsamayi artirir.
+- `VERI-KAYNAK-BAG-01` kapanmadi: kalan 7231 yetim (ostim 5094,
+  ivedik 892, baskentosb 669, aso 576) yinelenme temizligi sonrasi
+  yeniden olculecek.
+
+**Referans:** D-245, D-257, D-259, D-260.
+
+## D-262 — Kimliksiz satir kisittan muaftir; silmeden once referans tasinir (2026-09-28)
+
+**Tur:** duzeltme. D-261'in `BORC-DEDUP-KAYNAK-01` ve `BORC-EXTID-01`
+borclari kapandi. Iki goc kosturuldu ve canli veritabaninda olculdu.
+
+### 1. NULL, UNIQUE kisitinin kor noktasidir
+
+Goc 0031 kopya temizligini `(source_id, external_id)` uzerinden yapti ve
+ayni ikiliye UNIQUE kisiti koydu. 3120 ivedik kopyasi temizlendi. Ama
+`baskentosb.org.tr`'nin 761 satirinda `external_id` **NULL** idi.
+
+PostgreSQL'de (standart SQL'de) **NULL hicbir NULL'a esit degildir**; bu
+yuzden 761 satirin hicbiri kisiti ihlal etmedi, temizlikten de muaf kaldi.
+Kisit konuldu, tablo "temiz" gorundu, kopyalar yerinde durdu.
+
+**Kural: UNIQUE kisidi NULL iceren kolon uzerine kuruluyorsa, kisit o
+satirlar icin YOKTUR. Kimlik kolonu NOT NULL degilse benzersizlik
+garantisi de yoktur.** Kisit yazan her goc, kolonun NULL kabul edip
+etmedigini ayrica olcer.
+
+### 2. Kimlik uretimi kaynaga geri takildi
+
+`ingest_ivedik_baskent.py` baskentosb kazima yolunda `external_id`
+uretmiyordu. Duzeltildi, yeniden kosturuldu: 482 kimlikli satir yazildi.
+Ayni firmalar tabloda iki kez durdu — 761 kimliksiz eski + 482 kimlikli
+yeni.
+
+### 3. Silmeden once TASIMA (goc 0032)
+
+Eski 761 satirin 243'u `companies.source_record_id` ile isaret ediliyordu,
+92'sinin `company_id` bagi vardi. Dogrudan silme 243 firmanin kaynak izini
+koparirdi (D-260: kaynak izi kanittir).
+
+Goc sirasi: ad eslesmesiyle eski-yeni haritasi kur → firma bagini devret →
+`companies.source_record_id` referanslarini yeni satira tasi → ancak sonra
+eski satirlari sil. Ad iki yeni kayda giden 4 satirda **en kucuk kimlik**
+secildi; goc tekrar kosturulursa ayni sonucu verir (deterministik).
+
+Goc, esi bulunamayan **tek bir satir** bile varsa `RAISE EXCEPTION` ile
+durur. Olcumde 0 idi; mandal olcumun sonradan bozulmasina karsidir.
+
+### 4. Goc sonrasi canli olcum
+
+| kaynak | satir | kimliksiz | bagli |
+|---|---|---|---|
+| ostim.org.tr | 9513 | 0 | 4419 |
+| aso.org.tr | 592 | 0 | 16 |
+| baskentosb.org.tr | 482 | 0 | 57 |
+| ivedik.org.tr | 14 | 0 | 10 |
+
+- `source_records` **14000 → 10601** (3399 yinelenen satir dustu)
+- kalan `(source_id, external_id)` kopyasi: **0**
+- kimliksiz satir: **0**
+- kirik `companies.source_record_id`: **0**
+- `companies` satir sayisi: **9412** (degismedi — D-259 korumasi tuttu)
+
+Payda duzeldigi icin kapsama da duzeldi: kayit kapsamasi
+**%42.5** (4502 / 10601), firma kapsamasi **%46.2** (4352 / 9412).
+Firma kapsamasi degismedi; **yinelenme temizligi bag uretmez, sadece
+paydayi durustlestirir.** D-261'deki "sisirilmis payda" kapandi.
+
+### 5. Arac notu
+
+Goc dosyasi psycopg ile kosmuyordu: surucu SQL metnindeki yuzde isaretini
+parametre yer tutucusu sanip dosyayi **hic calistirmadan** reddetti.
+Cozum iki yonlu — goc metninde yuzde isareti kullanilmaz, kosturucu ham
+baglanti uzerinden calisir. **Not: bir goc "psql'de calisiyor" diye
+uygulamadan da calisacak demek degildir.**
+
+### 6. Kalan borclar
+
+- `VERI-KAYNAK-BAG-01` **kapanmadi**: 5060 yetim firma duruyor. Payda
+  duzeldi, bag sayisi duzelmedi — kalan is ad normalizasyonudur.
+- `BORC-AD-VARYANT-01` acik: 31 kisaltma varyanti, normalize sozlugu.
+
+**Referans:** D-241, D-259, D-260, D-261.
+
+## D-263 — Iki isaretci bir bagi tarif ediyorsa ikisi de yalan soyler (2026-09-28)
+
+**Tur:** duzeltme. D-262'nin `VERI-KAYNAK-BAG-01` borcu **kapandi**, ama
+tahmin ettigim nedenden degil. Teshis yanlisti.
+
+### 1. Benim teshisim yanlisti
+
+D-262'de "5060 yetim firma duruyor, kalan is ad normalizasyonudur" yazdim
+ve `BORC-AD-VARYANT-01`'i actim. Ad varyantlarini olcmeye gittigimde
+eslesmeyen ornekleri **elle okudum** — ve hicbiri eslesmiyor gorunmuyordu
+cunku zaten eslesmisti.
+
+Gercek olcum: firmalarin 9409'unun `companies.source_record_id` degeri
+**doluydu**. Yetim firma sayisi 5060 degil, **3** idi. "5060 yetim"
+rakamini `source_records.company_id` uzerinden saymistim. Iki sayi ayni
+soruya iki farkli cevap veriyordu cunku **iki farkli kolona bakiyorlardi**.
+
+**Kural: bir borcu kapatmadan once borcun kendisini olc. Yanlis teshis
+uzerine yazilan dogru kod, yanlis sorunu cozer.** Ad normalizasyonu
+yazilsaydi calisirdi, test gecerdi, hicbir sey duzelmezdi.
+
+### 2. Bag iki yerde saklaniyordu ve ikisi celisiyordu
+
+| yon | kolon | anlam | dolu |
+|---|---|---|---|
+| A | `companies.source_record_id` | firmanin dogdugu kayit (1:1) | 9409 |
+| B | `source_records.company_id` | kaydin ait oldugu firma (1:N) | 4502 |
+
+Ikisini yazan kod farkliydi, senkron eden kod **yoktu**. 5052 bagda A dolu
+B bostu. Sonuc: ayni sorunun paydasi hangi kolona baktiginiza gore
+degisiyordu.
+
+En keskin kanit **tek bir dosyanin icindeydi**: `etl/quality_metrics.py`
+satir 168 A yonunu, satir 176 B yonunu kullaniyor. Ayni dosyadaki iki
+metrik **9409 ve 4352 firmalik iki ayri evren** goruyordu. Hicbiri hata
+vermiyordu; ikisi de "dogru" sayiyi donduruyordu.
+
+**Kural: bir iliski iki kolonda saklaniyorsa, ikisini senkron tutan tek
+bir yer OLMAK ZORUNDADIR. Yoksa iki kolon iki gercek uretir ve ikisi de
+sorgu yazana gore hakli cikar.**
+
+### 3. Cozum: kaynak yon + trigger (goc 0033)
+
+A yonu 1:1 (ayni kayda isaret eden birden fazla firma: 0), B yonu 1:N
+(birden fazla kaydi olan firma: 72). B yonu A'dan turetilebilir, tersi
+turetilemez — bu yuzden **A kaynak, B turev** secildi.
+
+Goc iki is yapti: (1) B yonunu A'dan doldurdu, (2) `companies` uzerine
+`AFTER INSERT OR UPDATE OF source_record_id` trigger'i kurdu; bundan sonra
+A yazildiginda B kendini yaziyor. Ayrica iki kolona da hangi yonun ne
+demek oldugunu anlatan COMMENT dusuldu.
+
+Trigger kagit uzerinde degil **canli DB'de** dogrulandi: bir kaydin B yonu
+bosaltildi, A yonu kendi degeriyle yeniden yazildi, B kendini doldurdu
+(olcum islem sonunda geri alindi).
+
+### 4. Goc sonrasi canli olcum
+
+| olcum | once | sonra |
+|---|---|---|
+| A yonu dolu | 9409 | 9409 |
+| B yonu dolu | 4502 | **9554** |
+| B yonundeki tekil firma | 4352 | **9400** |
+| senkron degil (A dolu, B bos) | 5052 | **0** |
+| `quality_metrics` sat.168 paydasi | 9409 | 9409 |
+| `quality_metrics` sat.176 paydasi | 4352 | **9400** |
+
+Firma kapsamasi **%46.2 → %99.9** (9400 / 9412). D-262'de "yinelenme
+temizligi bag uretmez" demistim; dogruydu. Bagi ureten temizlik degil,
+**zaten var olan bagin gorunur kilinmasiydi.**
+
+### 5. Dokunulmayan: 9 capraz tutarsizlik
+
+9 kayitta A ve B **farkli firmayi** gosteriyor. Hepsi ayni desende:
+`companies` tablosunda hem `X A.S.` hem `(IFLAS NEDENIYLE) TASFIYE
+HALINDE X A.S.` kaydi var. Bu **isaretci sorunu degil, firma seviyesi
+yinelenmesi**; goc bu 9 satira dokunmadi.
+
+Olcum: 23 tasfiye onekli firma kaydi var, bunlarin **22'sinin oneksiz
+ikizi DB'de mevcut**. Tasfiye bir firmanin **hali**dir, ayri firma degil.
+Yeni borc: `BORC-TASFIYE-IKIZ-01`.
+
+### 6. Kalan borclar
+
+- `BORC-AD-VARYANT-01` **iptal**: dayandigi teshis yanlisti. Ad varyanti
+  sorunu 5052 bagi engellemiyordu; senkronsuzluk engelliyordu.
+- `BORC-TASFIYE-IKIZ-01` **yeni**: 22 tasfiye onekli firma, oneksiz
+  ikiziyle birlestirilmeli; `legal_status` alani ile hal kaydedilmeli.
+
+**Referans:** D-241, D-260, D-261, D-262.
+
+---
+
+## D-266 — Cagrani olmayan kodun yalani da yalandir; ve mandal kendi kor noktasini korur (2026-09-28)
+
+**Borc adi yanlisti.** `BORC-PERF-BANT-01` defterde soyle yaziyordu:
+*"`perf_monitor.py` hala 0-100 bant kullaniyor. Panel degil, ic olcum araci;
+yaniltici ama kullaniciya gitmiyor."* Iki iddiadan biri dogru, digeri eksikti.
+
+**Bulgu 1 — bant yalani gercekti ve "yaniltici"dan fazlasiydi.** Canli DB'de
+sorgu sablonunu kosturdum:
+
+```
+--- QUALITY_TREND_QUERY canli cikti ---
+{'bucket': '0-19', 'cnt': 9409}
+--- gercek dagilim (sunum.py tek kapisi, tavan=6.5) ---
+{'0.00-1.30': 673, '1.30-2.60': 1814, '2.60-3.90': 1588,
+ '3.90-5.20': 5329, '5.20-6.50': 5, 'olculmedi': 0}
+```
+
+Kolon 0-10 olceginde; esik 80/60/40/20 sabitti. **9409/9409 firma tek banda,
+en kotu banda dusuyordu.** Bu "yaniltici" degil, ciktinin tamami yanlis.
+D-258/4'te `/api/quality-trend` icin kesilen yalanin **sekizinci varyanti**.
+
+**Bulgu 2 — "ic olcum araci" beyani da olcume dayanmiyordu.** Zincir:
+
+| Dosya | Cagrani |
+|---|---|
+| `src/company_master/dashboard/perf_monitor.py` | yalniz asagidaki 3 betik |
+| `scripts/dashboard_perf_monitor.py` | **yok** |
+| `scripts/p44_benchmark.py` | yalniz `p44_final_benchmark.py` |
+| `scripts/p44_final_benchmark.py` | **yok** |
+| `scripts/perf_report.py` | **yok** (yalniz 2 belge metni) |
+
+`DashboardPerfMonitor` uretimde hicbir yerden cagrilmiyor. Uretimdeki
+`/api/performance` [`web_app.py:3484`](web_app.py:3484) kendi `_perf_time` /
+`_DB_TIME_MS` sayaclariyla calisiyor. P4-4 devir notu *"app.py Streamlit
+dashboardu DashboardPerfMonitor modulunu kullanmalidir"* diyor — **gelecek
+zaman kipi, hic kullanilmadiginin itirafi.** Ayrica `perf_report.py:49` terk
+edilmis `data_quality_score` ile siraliyordu (BORC-KOLON-DUSUR-01 izi).
+
+**Karar — yeniden yazma yok, kapatma var.** D-265: cagrani olmayan kod,
+kapatilacak koddur. `sunum.bantlar()`'a baglamak, kimsenin bakmadigi bir
+ciktiyi dogru hesaplamak icin ikinci bir yuzey yasatmak olurdu. Dusen 5 dosya:
+`src/company_master/dashboard/` (paket komple), `scripts/dashboard_perf_monitor.py`,
+`scripts/p44_benchmark.py`, `scripts/p44_final_benchmark.py`, `scripts/perf_report.py`.
+
+**Bulgu 3 — mandal neden gormedi.** `test_panel_durustluk.py` yalniz
+`_PANEL_KOKLERI = ("web_dashboard", "scripts/dashboard.py", "web_app.py")`
+tariyordu. `src/` ve `scripts/`'in geri kalani **kor noktaydi**; yalan tam
+oradan gecti. Ayrica eski mandal `/100` **metnini** ariyordu — bu yalan metin
+degil **SQL esigiydi**, desene hic takilmazdi.
+
+**Kural.** Olcek yalani nerede yazildigina bakilmaksizin yalandir; "kullaniciya
+gitmiyor" bir muafiyet degil, kapatma gerekcesidir. Mandal, korumak istedigi
+sozlesmenin gecerli oldugu **her** kokte kosmalidir; kapsami daralan bekci
+kendi kor noktasini korur.
+
+**Mandal.** `test_kimlik_tamligina_yuz_olcekli_esik_uygulanmaz` — `src`,
+`scripts`, `web_dashboard`, `web_app.py` icinde `identity_completeness` ile
+10'dan buyuk **sabit** sayiyi karsilastiran her satiri suclar. Turetilen esik
+(`{esik_yuksek}`, `:score_min`) sayi olmadigi icin gecer; sabit gecemez.
+
+**Kanit.**
+- Negatif kontrol: yalan geri konuldu → `KIRILDI - ... _mandal_negatif.py:1 -> 80`;
+  kaldirildi → 17/17 `PANEL-DURUSTLUK-01 mandallari gecti`.
+- Kalan olcek izi taramasi: `scripts/dashboard.py` (`{esik_yuksek}` turetilmis),
+  `web_dashboard/tabs/admin_search.py` (`sunum.bant_dagilimi` kullaniyor),
+  goc `0026` (0-10 CHECK kisiti) — **ucu de temiz.**
+- Canli: `identity_completeness` min/max/avg = 1.00 / 6.50 / 3.71, n=9409.
+
+**Kapanan borc.** BORC-PERF-BANT-01 — adi "bant duzelt" diyordu, isin dogrusu
+"yuzeyi kapat" cikti. **Kendi borc listem de bir beyandir, olcum degil.**
+
+**Referans:** D-241, D-249, D-250, D-258, D-260, D-265.
+
+---
+
+## D-265 — Uc defter tutan sistem hicbirine guvenemez; ve gecmis sayiyi sart kosan test yalani korur (2026-09-28)
+
+**Bulgu.** Gocler icin **uc** ayri defter vardi:
+
+| Yol | Defteri | Canli DB'deki hali |
+|---|---|---|
+| `migrate.py` | `schema_versions.json` (dosya) | 15'te donmus |
+| `scripts/db_migrate.py` | `_schema_version` (tablo) | **Tablo hic olusmamis** |
+| `scripts/goc_defteri.py` | `schema_migrations` (tablo) | **34/34 — gercek defter** |
+
+Iki cikarim:
+
+1. `_schema_version` tablosunun DB'de **hic olusmamis** olmasi, `db_migrate.py`'nin
+   uretimde **hic kosmadigini** kanitlar. Kossaydi defteri 0'dan sayip 34 gocu
+   yeniden uygulamaya kalkardi.
+2. `schema_versions.json` 15'te kalmis. D-264'te bu dosya yuzunden defter 23→15
+   geri alinmisti. Ayni tuzagin ikinci agzi.
+
+**Karar.** Goc uygulamanin **tek kapisi** `scripts/goc_defteri.py`; defter
+**yalnizca** `schema_migrations` tablosudur. Diger iki yolun yazma fonksiyonlari
+`SystemExit` ile kapatildi ve dogru kapiyi soyluyor. `schema_versions.json`
+tarihi kayit; karar mercii degil.
+
+**Ikinci bulgu — bekci yalani koruyordu.** `test_migrate_py_target_15` adli test
+*"migrate.py default target 15 olmali"* diye **sart kosuyordu**. Diskte 34 goc
+varken 15'te durmayi zorunlu kilan bir test, D-264'teki geri alma hatasini
+**hata degil gereksinim** sayiyordu. Test, gecmisteki bir sayiyi degil bugunun
+sozlesmesini korumali: yeni hali uc yolun tek kapiya isaret ettigini ve kapali
+fonksiyonlarin `SystemExit` tasidigini dogruluyor.
+
+**Kural.** Bir sayiyi sabitleyen test, o sayinin **neden** o oldugunu da
+yazmalidir. Gerekcesini tasimayan sabit, ilk degisimde yalana doner.
+Bir kaynagin **yoklugu** da olcumdur: olusmamis defter tablosu, kosmamis kod demektir.
+
+**Kanit.** `goc_defteri.py` → 34 disk / 34 defter; uc yolun ikisi exit 1 +
+dogru kapi mesaji; `tests/test_data_log.py` 17/17 gecti.
+
+**Kapanan borc.** BORC-GOC-IKI-DEFTER-01 (adi iki diyordu, gercek uc cikti).
+
+---
+
+## D-264 — Tasfiye bir hal'dir; ve tanimadigi argumani yutan koc defteri geri alir (2026-09-28)
+
+**Tur:** uygulama + kritik hata. `BORC-TASFIYE-IKIZ-01` **kapandi**, ama
+kapatma isi sirasinda gocleri kosturan yolda **veri kaybettiren bir hata**
+buldum. Once o.
+
+### 1. KRITIK: `migrate.py up` defteri 23 → 15'e geri aldi
+
+Goc 0034'u uygulamak icin `python -m ...migrate up` yazdim. Cikti:
+
+```
+Migrations complete. Version: 15   (exit code 0)
+```
+
+Uc yalan bir arada:
+- `up` **taninmayan bir argumandi**; `argv` kontrolu `--dry-run`,
+  `--version`, `--apply` ariyordu, hicbiri yoktu, kod **sessizce**
+  varsayilan dala dustu.
+- O dal SQL **calistirmadi**, ama surum numarasini yeniden hesaplayip
+  `schema_versions.json`'u **23 → 15** olarak yazdi. 8 goc kaydi silindi.
+- `exit 0` dondu. Basarili gorundu.
+
+`git checkout` ile defter geri alindi (hasar dosyada kaldi, DB'ye
+dokunmamisti — bu sans, tasarim degil).
+
+**Kural: bir CLI tanimadigi argumani gormezden gelemez. Gormezden gelmek
+"yanlis yazdin" hatasini "sessizce baska bir is yaptim"a cevirir.**
+[`migrate.py`](src/company_master/schema/migrations/migrate.py) artik
+bilinmeyen argumanda `SystemExit` atar ve dogru kapiyi soyler.
+
+### 2. IKINCI DERS: iki defter vardi, hangisinin gercek oldugunu bilmiyordum
+
+| defter | yer | 0034 oncesi |
+|---|---|---|
+| JSON | `schema_versions.json` | 23'te donmus |
+| DB tablosu | `schema_migrations` | 31 kayit |
+
+Gocleri gercekten uygulayan ve DB defterine yazan yol
+[`scripts/goc_defteri.py --uygula`](scripts/goc_defteri.py). `migrate.py`
+ikinci bir dunyadir ve JSON'a yazar. Ayni sorunun (D-263/2) **goc
+katmanindaki tekrari**: bir gercek iki yerde saklaniyor, senkron eden yok.
+
+Ek bulgu: `--esitle` kostugunda **0033 defterde yoktu** — dun uygulanmis
+ama kaydedilmemis. Kendi goc kaydimi dusurmusum.
+
+### 3. Tasfiye: ayri firma degil, halin kendisi
+
+Olcum: 23 tasfiye onekli kayit, 22'sinin oneksiz ikizi var. Iki secenek:
+
+| secenek | sonuc |
+|---|---|
+| A: onekli kaydi sil, ikize birlestir | firma sayisi 9412 → 9390, tasfiye bilgisi **kaybolur** |
+| B: her ikisini `status='liquidation'` isaretle | bilgi korunur, satir kaybi yok |
+
+**B secildi.** Gerekce: tasfiye halindeki firmanin **oneksiz kaydi da
+tasfiyededir** — ikisi ayni tuzel kisilik. Silmek "bu firma tasfiyede"
+bilgisini yok eder; isaretlemek panelde filtrelenebilir hale getirir.
+
+Goc 0034 (`--uygula` ile kosturuldu, defterde kayitli):
+- `status` CHECK kisitina `'liquidation'` eklendi
+- onek deseni + oneksiz ikizler `liquidation` olarak isaretlendi
+- geri alma dosyasi yazildi (`down/0034_tasfiye_durumu.down.sql`)
+
+### 4. Canli DB olcumu (kanit, beyan degil)
+
+| olcum | deger |
+|---|---|
+| `status='liquidation'` | **45** (23 onekli + 22 ikiz) |
+| onekli ama `liquidation` DEGIL | **0** |
+| CHECK kisiti `'liquidation'` kabul ediyor | evet |
+| firma sayisi | 9412 (degismedi) |
+
+`unknown` 693, `active` 8674. **Tasfiye artik panelde susturulabilir bir
+alan; onceden gorunmez bir yinelenmeydi.**
+
+### 5. Kalan borc
+
+- `BORC-GOC-IKI-DEFTER-01` **yeni**: `migrate.py` (JSON) ve
+  `goc_defteri.py` (DB tablosu) iki ayri defter tutuyor. Tek kapi
+  olmali; `migrate.py` ya DB defterine yazmali ya kaldirilmali.
+
+**Referans:** D-241, D-251, D-261, D-263.

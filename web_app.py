@@ -727,6 +727,8 @@ def api_kpi(_auth: str = Depends(require_api_key)) -> dict:
             row["avg_score"] = (
                 float(row["avg_score"]) if row.get("avg_score") is not None else None
             )
+            # D-250/7: ortalama puan tavansiz gonderilmez (panel "/100" yaziyordu).
+            row["tavan"] = _sunum.tavan_getir()
             return row
         return {}
 
@@ -820,8 +822,8 @@ def api_companies(
     limit: int = 50,
     offset: int = 0,
     search: str = "",
-    min_score: int = 0,
-    max_score: int = 100,
+    min_score: float = 0.0,
+    max_score: float = 10.0,
     source: str = "",
     sources: str = "",
     nace: str = "",
@@ -834,8 +836,12 @@ def api_companies(
     limit = min(max(limit, 1), MAX_COMPANIES_LIMIT)
     offset = max(offset, 0)
     search = search.strip()[:MAX_SEARCH_LENGTH]
-    min_score = max(0, min(min_score, 100))
-    max_score = max(0, min(max_score, 100))
+    # D-259: filtre identity_completeness (0-10) uzerinde calisir. Eski 0-100 clamp'i
+    # 0-10'luk kolonda her esigi "hic firma yok"a cevirip sessizce yaniltiyordu.
+    # Ust sinir TAVAN: olculen en yuksek puan tavana esit (6.50), ustu erisilemez.
+    _tavan = _sunum.tavan_getir()  # lru_cache'li, istek basina DB yok
+    min_score = max(0.0, min(float(min_score), _tavan))
+    max_score = max(0.0, min(float(max_score), _tavan))
 
     # Coklu kaynak: sources="ostim.org.tr,aso.org.tr" -> liste
     # Geriye donuk uyum: tek source= parametresi de desteklenir
@@ -948,6 +954,8 @@ def api_companies(
             "total": total,
             "limit": limit,
             "offset": offset,
+            # D-250/7: puan tavansiz gonderilmez; panel bandi/esigi bundan turetir.
+            "tavan": _tavan,
             "items": items,
         }
         if search and request is not None:
@@ -977,8 +985,8 @@ def api_companies(
 def api_companies_export(
     format: str = "csv",
     search: str = "",
-    min_score: int = 0,
-    max_score: int = 100,
+    min_score: float = 0.0,
+    max_score: float = 10.0,
     source: str = "",
     sources: str = "",
     nace: str = "",
@@ -991,8 +999,11 @@ def api_companies_export(
     import io
 
     search = search.strip()[:MAX_SEARCH_LENGTH]
-    min_score = max(0, min(min_score, 100))
-    max_score = max(0, min(max_score, 100))
+    # D-259: esik identity_completeness (0-10) uzerinde; eski 0-100 clamp'i
+    # her filtreyi bos sonuca cevirirdi.
+    _tavan = _sunum.tavan_getir()
+    min_score = max(0.0, min(float(min_score), _tavan))
+    max_score = max(0.0, min(float(max_score), _tavan))
     nace = nace.strip()[:8]
 
     # Coklu kaynak: sources= oncelikli, source= geriye donuk uyum

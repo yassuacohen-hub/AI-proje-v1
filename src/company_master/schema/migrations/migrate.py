@@ -32,61 +32,25 @@ def needs_migration(target: int = 15) -> bool:
     return get_current_version() < target
 
 
+# BORC-GOC-IKI-DEFTER-01 (D-265): Asagidaki iki fonksiyon goc UYGULUYORDU ve
+# kendi defterini (`schema_versions.json`) tutuyordu. Canli DB'nin defteri ise
+# `schema_migrations` tablosu. JSON 23'te donmus, diskteki 34 gocun son 11'ini
+# HIC GORMUYOR -> `--apply` bu 11'ini sessizce atlayip "OK" derdi.
+# Iki defter = iki gercek. Yazma yolu kapatildi, okuma yolu (`--version`) kaldi.
+TEK_KAPI = (
+    "Goc uygulama kapisi: python scripts/goc_defteri.py --uygula <dosya.sql>\n"
+    "Defter `schema_migrations` tablosudur; schema_versions.json tarihi kayittir."
+)
+
+
 def run_migrations(target: int = 15, dry_run: bool = False) -> list[str]:
-    """Migration defterini isaretler. SQL calistirmaz -> `apply_sql` kullanin.
-
-    MIGRATE-EXEC-01: Bu fonksiyon yalnizca `schema_versions.json` sayacini gunceller.
-    Gecmiste bu davranis 'uygulandi' sanildi; 0016-0019 SQL'leri DB'ye hic gitmedi
-    ve admin login HTTP 500 verdi (UndefinedColumn/UndefinedTable). Gercek uygulama
-    icin `--apply` kullanin.
-    """
-    versions = load_versions()
-    current = versions["current_version"]
-    applied = []
-
-    for mig in versions["migrations"]:
-        if mig["version"] > current and mig["version"] <= target:
-            action = "DRY-RUN" if dry_run else "APPLY"
-            applied.append(f"{action}: {mig['file']} (v{mig['version']})")
-
-    if not dry_run:
-        versions["current_version"] = target
-        with open(VERSIONS_FILE, "w", encoding="utf-8") as f:
-            json.dump(versions, f, ensure_ascii=False, indent=2)
-
-    return applied
+    """KAPALI (D-265). SQL calistirmadan JSON sayacini yazip 'uygulandi' sanilirdi."""
+    raise SystemExit(TEK_KAPI)
 
 
 def apply_sql(database_url: str, target: int | None = None) -> list[str]:
-    """MIGRATE-EXEC-01: Defterdeki SQL dosyalarini gercekten DB'ye uygular.
-
-    Tum migration'lar idempotent (`IF NOT EXISTS`) oldugu icin bastan calistirilabilir;
-    bu yuzden `current_version` atlanan dosyalari da kapsar.
-
-    MIGRATE-EXEC-02: Ham DBAPI cursor kullanilir. `text()` DDL icindeki `:isim`
-    dizilimini bind parametresi sanıyordu; `exec_driver_sql` ise SQL icindeki `%`
-    karakterinde (orn. "96.8% improvement" yorumu) psycopg formatlamasini tetikliyordu.
-    Cursor'a parametresiz verilince her iki yorumlama da devre disi kalir.
-    """
-    from sqlalchemy import create_engine
-
-    engine = create_engine(database_url)
-    sonuc = []
-    for mig in list_migrations():
-        if target is not None and mig["version"] > target:
-            continue
-        yol = MIGRATIONS_DIR / mig["file"]
-        if not yol.exists():
-            sonuc.append(f"YOK: {mig['file']}")
-            continue
-        try:
-            with engine.begin() as conn:
-                cur = conn.connection.cursor()
-                cur.execute(yol.read_text(encoding="utf-8"))
-            sonuc.append(f"OK: {mig['file']} (v{mig['version']})")
-        except Exception as e:
-            sonuc.append(f"HATA: {mig['file']} -> {str(e)[:160]}")
-    return sonuc
+    """KAPALI (D-265). JSON defteri eksik oldugu icin gocleri sessizce atliyordu."""
+    raise SystemExit(TEK_KAPI)
 
 
 def _database_url() -> str:
@@ -105,21 +69,19 @@ def _database_url() -> str:
 
 
 if __name__ == "__main__":
-    dry = "--dry-run" in sys.argv
-    version = "--version" in sys.argv
-    apply = "--apply" in sys.argv
+    # MIGRATE-ARG-01 (D-261): taninmayan argüman sessizce `run_migrations()`e dusuyordu.
+    # `up` yazan cagri SQL calistirmadan defteri 23 -> 15 geri aldi ve exit 0 verdi.
+    BILINEN = {"--dry-run", "--version"}
+    if yabanci := [a for a in sys.argv[1:] if a not in BILINEN]:
+        raise SystemExit(
+            f"Bilinmeyen argüman: {yabanci}. Gecerli: {sorted(BILINEN)}\n"
+            "Tek goc uygulamak icin: python scripts/goc_defteri.py --uygula <dosya.sql>"
+        )
 
-    if version:
-        print(f"Mevcut versiyon: {get_current_version()}")
+    if "--version" in sys.argv:
+        print(f"Tarihi JSON kayit, versiyon: {get_current_version()}")
         for mig in list_migrations():
             print(f"  v{mig['version']}: {mig['file']}")
-    elif apply:
-        url = _database_url()
-        if not url:
-            raise SystemExit("DATABASE_URL bulunamadi")
-        for r in apply_sql(url):
-            print(r)
+        print(f"\n{TEK_KAPI}")
     else:
-        results = run_migrations(dry_run=dry)
-        for r in results:
-            print(r)
+        raise SystemExit(TEK_KAPI)

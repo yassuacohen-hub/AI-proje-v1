@@ -55,10 +55,27 @@ def ensure_source(name: str, url: str) -> str:
         return str(row[0])
 
 
+# D-261 / BORC-DEDUP-KAYNAK-01: hash YALNIZ kimlik alanlarindan hesaplanir.
+# Onceki surum tum kaydi hashliyordu; icinde `cekilme_tarihi` (mikrosaniyeli)
+# vardi, bu yuzden ayni firma her kosuda yeni hash uretip yeni satir aciyordu
+# (ivedik: 3134 satir -> 14 benzersiz).
+KIMLIK_ALANLARI = (
+    "unvan", "adres", "telefonlar", "emailler", "web_sitesi",
+    "vergi_no", "sektor", "slug",
+)
+
+
 def _content_hash(payload: dict) -> str:
+    kimlik = {k: payload.get(k) for k in KIMLIK_ALANLARI}
     return hashlib.sha256(
-        json.dumps(payload, sort_keys=True, ensure_ascii=False).encode("utf-8")
+        json.dumps(kimlik, sort_keys=True, ensure_ascii=False).encode("utf-8")
     ).hexdigest()
+
+
+def _external_id(payload: dict, h: str) -> str:
+    """slug yoksa hash'ten turetilmis kimlik. baskentosb slug uretmiyordu;
+    external_id NULL kalinca UNIQUE(source_id, external_id) korumasi calismaz."""
+    return payload.get("slug") or f"auto:{h[:32]}"
 
 
 def _iter(path: Path):
@@ -108,7 +125,7 @@ def ingest(source_key: str, path: Path, domain: str, dry: bool) -> dict:
         existing.add(h)
         batch.append({
             "sid": sid,
-            "ext": rec.get("slug"),
+            "ext": _external_id(rec, h),
             "name": rec.get("unvan"),
             "addr": rec.get("adres"),
             "phone": "; ".join(rec.get("telefonlar") or []),
@@ -121,12 +138,27 @@ def ingest(source_key: str, path: Path, domain: str, dry: bool) -> dict:
         })
     if batch and not dry:
         with eng.begin() as conn:
+            # Goc 0031 UNIQUE(source_id, external_id) koydu. content_hash suzgeci
+            # yalniz hash'e bakar: ayni slug'in adresi degisirse yeni hash cikar,
+            # duz INSERT kisiti ihlal eder ve TUM kosu coker. Ayni dis kimlik =
+            # ayni firma demek; yeni satir degil, mevcut satir TAZELENIR.
             conn.execute(
                 text(
                     "INSERT INTO source_records"
                     " (source_id, external_id, raw_name, raw_address, raw_phone, raw_email,"
                     "  raw_website, raw_tax_number, raw_nace, raw_payload, content_hash)"
                     " VALUES (:sid, :ext, :name, :addr, :phone, :email, :web, :vkn, :nace, :payload, :hash)"
+                    " ON CONFLICT (source_id, external_id) DO UPDATE SET"
+                    "   raw_name = EXCLUDED.raw_name,"
+                    "   raw_address = EXCLUDED.raw_address,"
+                    "   raw_phone = EXCLUDED.raw_phone,"
+                    "   raw_email = EXCLUDED.raw_email,"
+                    "   raw_website = EXCLUDED.raw_website,"
+                    "   raw_tax_number = EXCLUDED.raw_tax_number,"
+                    "   raw_nace = EXCLUDED.raw_nace,"
+                    "   raw_payload = EXCLUDED.raw_payload,"
+                    "   content_hash = EXCLUDED.content_hash"
+                    " WHERE source_records.content_hash IS DISTINCT FROM EXCLUDED.content_hash"
                 ),
                 batch,
             )

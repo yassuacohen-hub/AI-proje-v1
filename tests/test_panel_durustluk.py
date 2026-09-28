@@ -160,13 +160,19 @@ _TERK = "data_quality_score"
 _PANEL_KOKLERI = ("web_dashboard", "scripts/dashboard.py", "web_app.py")
 
 
+# D-259: mandal yalniz *.py tarariyordu; panel yalani (app.js'in olu kolonu
+# okumasi) tam bu delikten gecti. Kullaniciya ekran basan her uzanti taranir.
+_PANEL_UZANTILARI = ("*.py", "*.js", "*.html")
+
+
 def _panel_dosyalari():
     for kok in _PANEL_KOKLERI:
         p = KOK / kok
         if p.is_file():
             yield p
         elif p.is_dir():
-            yield from p.rglob("*.py")
+            for desen in _PANEL_UZANTILARI:
+                yield from p.rglob(desen)
 
 
 def test_tek_kapi_terk_edilmis_kolona_yazmaz():
@@ -210,15 +216,55 @@ def _ekran_metinleri(kaynak: str):
             yield d.lineno, d.value
 
 
+def _metin_satirlari(kaynak: str):
+    """JS/HTML icin AST yok; yorum satirlari disinda ham satirlar taranir."""
+    for no, satir in enumerate(kaynak.splitlines(), 1):
+        if not satir.lstrip().startswith(("//", "<!--", "*")):
+            yield no, satir
+
+
 def test_panelde_bolu_yuz_olcegi_yazmaz():
     """'/100' metni kimlik tamligi (0-10) icin yalandir."""
     desen = re.compile(r"/\s*100\b")
     suclular = []
     for p in _panel_dosyalari():
-        for no, metin in _ekran_metinleri(p.read_text("utf-8", errors="replace")):
+        kaynak = p.read_text("utf-8", errors="replace")
+        # D-259: AST yalniz Python'da calisir; JS/HTML satir bazli taranir.
+        uret = _ekran_metinleri if p.suffix == ".py" else _metin_satirlari
+        for no, metin in uret(kaynak):
             if desen.search(metin) and "width_bucket" not in metin:
                 suclular.append(f"{p.relative_to(KOK)}:{no}")
     assert not suclular, "panelde '/100' olcegi: " + ", ".join(sorted(set(suclular)))
+
+
+# D-266: mandal yalniz panel koklerini tariyordu; perf_monitor.py src/ icinde
+# olduğu icin 0-100 esigini iki yil tasidi. Olcek yalani nerede olursa olsun
+# yakalanir: 0-10 kolonuna 10'dan buyuk sabit esik uygulayan her satir.
+_OLCEK_ESIK = re.compile(r"identity_completeness\s*(?:>=|<=|>|<)\s*(\d+(?:\.\d+)?)")
+_OLCEK_KOKLERI = ("src", "scripts", "web_dashboard", "web_app.py")
+
+
+def test_kimlik_tamligina_yuz_olcekli_esik_uygulanmaz():
+    """identity_completeness 0-10'dur; 10'u asan sabit esik olcek yalanidir.
+
+    Esik TAVANDAN turetilmeli (D-258). Sabit 20/40/60/80 yazildiginda butun
+    firmalar en dusuk banda duser: olculen 9409/9409 kayit tek bant.
+    Turetilen esik ({...} ya da :param) sayi olmadigi icin bu mandaldan gecer.
+    """
+    suclular = []
+    for kok in _OLCEK_KOKLERI:
+        p = KOK / kok
+        yollar = [p] if p.is_file() else [
+            y for d in ("*.py", "*.sql", "*.js", "*.html") for y in p.rglob(d)
+        ]
+        for y in yollar:
+            for no, satir in enumerate(y.read_text("utf-8", errors="replace").splitlines(), 1):
+                for sayi in _OLCEK_ESIK.findall(satir):
+                    if float(sayi) > 10:
+                        suclular.append(f"{y.relative_to(KOK)}:{no} -> {sayi}")
+    assert not suclular, (
+        "kimlik tamligina (0-10) 100'luk olcek esigi: " + ", ".join(sorted(suclular))
+    )
 
 
 # --- 6. Olu import sessizce dosya oldurmesin --------------------------------
