@@ -16,6 +16,7 @@ sys.path.insert(0, str(KOK / "src"))
 from sqlalchemy import text  # noqa: E402
 
 from company_master.db.connection import get_engine  # noqa: E402
+from company_master.etl.quality_recalc import tavan_raporu  # noqa: E402
 from scripts.goc_defteri import degerlendir, goc_izleri, sema_durumu  # noqa: E402
 
 
@@ -42,7 +43,12 @@ def test_defter_semayla_uyusuyor():
 
     # 4) Sayilar esit (gorevin acik mandali).
     assert len(izler) == len(defter), f"{len(izler)} goc != {len(defter)} kayit"
-    return len(izler)
+
+    # 5) D-267: "IZSIZ" = arac dogrulayamadi demektir; bir dosya icin dogruysa
+    #    dosyada "veri-gocu:" ile YAZILI olmalidir. Yazisiz IZSIZ kalan her goc
+    #    bugun yanlis alarm, yarin gercek alarmi gizleyen gurultudur.
+    izsiz = sorted(d for d, (durum, _) in sonuc.items() if durum == "IZSIZ")
+    assert not izsiz, f"Sebebi yazilmamis izsiz goc (veri-gocu: ekle): {izsiz}"
 
 
 # D-251/1 kapsamindaki bilinen borc. SEMA-IKIZ-01 (goc 0027) ile besinin
@@ -93,10 +99,41 @@ def test_sema_dili_ingilizce():
     # Kapanan borc listede kalmasin (liste bayatlamasin).
     bayat = BILINEN_DIL_BORCU - kolonlar
     assert not bayat, f"Borc listesinde olmayan kolon var, silinmeli: {sorted(bayat)}"
-    return len(BILINEN_DIL_BORCU)
+
+
+def test_sicil_semada_duruyor():
+    """D-267 (GOC 0035): sicil degeri ham arsivde degil, semada okunabilir mi?
+
+    Sayilarin kaynagi tek tek olculmustur, uydurulmamistir:
+      619 = raw_payload->>'ticaretSicilNo' tasiyan 620 kaydin firmaya bagli olani
+             (1 kayit hicbir firmaya bagli degil), hepsi sicil_dogrula()'dan gecti
+       25 = bu 619'un icinde sicil DAIRESI de tasiyan firma sayisi. D-250 puan
+             icin no VE daire'yi birlikte ister; puan alan bu 25'tir.
+    Sayi degisirse once olcum yenilenmeli, test degil.
+    """
+    with get_engine().connect() as conn:
+        n = dict(
+            conn.execute(
+                text(
+                    "SELECT count(trade_registry_number) no, "
+                    "count(trade_registry_office) daire FROM companies"
+                )
+            ).mappings().one()
+        )
+    assert n["no"] == 619, f"sicil no dolu firma {n['no']}, beklenen 619 (goc 0035)"
+    assert n["daire"] == 25, f"sicil dairesi dolu firma {n['daire']}, beklenen 25"
+
+    # Tavan bu 25 sayesinde acilir: "kilitli" = SIFIR firma puan aliyor demek.
+    # 25 > 0 oldugu icin trade_registry_number artik kilitli degil (D-258).
+    r = tavan_raporu()
+    assert "trade_registry_number" not in r["kilitli"], (
+        f"sicil hala kilitli gorunuyor: {r['kilitli']}"
+    )
+    assert r["tavan"] == 7.5, f"tavan {r['tavan']}, beklenen 7.5 (D-267)"
 
 
 if __name__ == "__main__":
-    n = test_defter_semayla_uyusuyor()
-    b = test_sema_dili_ingilizce()
-    print(f"MANDAL GECTI: {n} goc = {n} defter kaydi; {b} bilinen dil borcu.")
+    test_defter_semayla_uyusuyor()
+    test_sema_dili_ingilizce()
+    test_sicil_semada_duruyor()
+    print("MANDAL GECTI.")

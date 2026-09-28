@@ -1,6 +1,8 @@
 -- Migration 0032: baskentosb.org.tr kimliksiz (external_id IS NULL) eski
 -- satirlarin referanslari kimlikli esine TASINIR, sonra eski satirlar silinir.
 --
+-- veri-gocu: 761 kimliksiz satir silindi, 243 referans + 92 bag tasindi (sema izi yok, olmamali)
+--
 -- NEDEN:
 -- 0031 kopya temizligini (source_id, external_id) uzerinden yapti. baskentosb
 -- kazicisi o tarihte external_id URETMIYORDU; NULL'lar UNIQUE kisitina hic

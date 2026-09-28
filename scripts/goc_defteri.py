@@ -62,6 +62,12 @@ RE_USTUNDEN = re.compile(r"ustunden-gecen:\s*([\w.]+)", re.I)
 #     -- dusen-iz: companies.vergi_no       (kolon)
 #     -- dusen-iz: idx_companies_adres      (indeks)
 RE_DUSEN_IZ = re.compile(r"dusen-iz:\s*([\w.]+)", re.I)
+# D-267: 0032 gibi SAF VERI goclerinin semada izi yoktur, olmasi da gerekmez.
+# Bunlar "IZSIZ" (= arac dogrulayamadi) diye raporlaniyordu. Bugunku yanlis
+# alarm, yarinki gercek alarmi gizler. Iz birakmayan goc, iz birakmadigini
+# KENDI yazar; aracin sessizce varsaymasi degil:
+#     -- veri-gocu: 23 satir status='liquidation' isaretlendi
+RE_VERI_GOCU = re.compile(r"veri-gocu:\s*(.+)", re.I)
 
 
 def _sqlsiz(metin: str) -> str:
@@ -85,6 +91,7 @@ def goc_izleri() -> dict[str, dict[str, set]]:
             for kol in RE_DEFAULT_DUSUR.findall(govde):
                 varsayilansiz.add((_ad(tablo), kol.lower()))
         ustunden = RE_USTUNDEN.search(ham)
+        veri = RE_VERI_GOCU.search(ham)
         izler[yol.name] = {
             "tablo": {_ad(t) for t in RE_TABLO.findall(s)},
             "kolon": {(_ad(t), k.lower()) for t, k in RE_KOLON.findall(s)},
@@ -93,6 +100,7 @@ def goc_izleri() -> dict[str, dict[str, set]]:
             "varsayilansiz": varsayilansiz,
             "yorum": {(t.lower(), k.lower()) for t, k in RE_YORUM.findall(s)},
             "ustunden": ustunden.group(1) if ustunden else None,
+            "veri": veri.group(1).strip() if veri else None,
             "dusen": {d.lower() for d in RE_DUSEN_IZ.findall(ham)},
         }
     return izler
@@ -169,7 +177,8 @@ def degerlendir(izler, sema):
     TAM     = butun izleri semada duruyor
     EKSIK   = izlerinin bir kismi yok -> goc uygulanmamis olabilir
     ESKIMIS = sonraki bir goc uzerinden gecti, izi aranmaz (dosyada yazili)
-    IZSIZ   = ayristirilabilir iz yok -> arac dogrulayamaz, elle bakilir
+    VERI    = saf veri gocu, semada izi OLMAMASI dogru (dosyada yazili)
+    IZSIZ   = ayristirilabilir iz yok, sebebi de yazili degil -> elle bakilir
     """
     sonuc = {}
     for dosya, iz in izler.items():
@@ -187,7 +196,9 @@ def degerlendir(izler, sema):
                 toplam += 1
                 if x not in sema[tur]:
                     eksik.append(f"{tur}:{x}")
-        if toplam == 0:
+        if toplam == 0 and iz["veri"]:
+            sonuc[dosya] = ("VERI", [iz["veri"]])
+        elif toplam == 0:
             sonuc[dosya] = ("IZSIZ", eksik)
         elif not eksik:
             sonuc[dosya] = ("TAM", eksik)
@@ -211,7 +222,8 @@ def calistir(esitle: bool) -> int:
             d = "defterde" if dosya in defter else "DEFTERDE YOK"
             satirlar.append(f"{dosya:45s} {durum:6s} {d}")
             if eksik:
-                satirlar.append("      eksik iz: " + ", ".join(eksik[:6]))
+                etiket = "beyan" if durum == "VERI" else "eksik iz"
+                satirlar.append(f"      {etiket}: " + ", ".join(eksik[:6]))
             if dosya not in defter and durum == "TAM":
                 yazilacak.append(dosya)
 

@@ -24,6 +24,7 @@ from typing import Any, Dict, List
 from sqlalchemy import text
 
 from ..db.connection import get_engine
+from .kimlik_no import sicil_dogrula
 from .quality_recalc import SURUM as SCORE_SURUM
 from .quality_recalc import identity_completeness
 
@@ -155,13 +156,20 @@ def _identity_completeness(row: Dict[str, Any]) -> float:
     payload = row.get("raw_payload") or {}
     # Anahtarlar kapinin (companies) dili: Ingilizce. Degerler payload'un
     # dili: Turkce. D-251/1 kolon adini baglar, JSON anahtarini baglamaz.
+    #
+    # D-267: buradaki anahtarlar ONCE UYDURULMUSTU, olculmemisti. Canli
+    # payload'da olculen sayilar (9401 kayit):
+    #   vergi_no 8809 | adres 9401 | nace_code 8313 | ticaretSicilNo 620
+    #   vergi_dairesi 0 | mersis_no 0 | ticaret_sicil_no 0 | sicil_dairesi 0
+    # Son dordu HIC YOK; onlari okumak her zaman None dondurur. Kaynagi
+    # olmayan alan artik burada okunmaz — yoklugu da bir olcumdur (D-265).
+    # tax_office/mersis_number kaynagi kapali (D-257), NULL kalir.
+    sicil_no, sicil_daire = sicil_dogrula(payload.get("ticaretSicilNo"))
     return identity_completeness({
         "legal_name": row.get("legal_name") or row.get("raw_name"),
         "tax_number": row.get("raw_tax_number") or payload.get("vergi_no"),
-        "tax_office": payload.get("vergi_dairesi"),
-        "mersis_number": payload.get("mersis_no"),
-        "trade_registry_number": payload.get("ticaret_sicil_no"),
-        "trade_registry_office": payload.get("sicil_dairesi"),
+        "trade_registry_number": sicil_no,
+        "trade_registry_office": sicil_daire,
         "nace_code": payload.get("nace_code"),
         "nace_source": payload.get("nace_source"),
         "address": payload.get("adres"),
@@ -179,6 +187,7 @@ def _map_row(row: Dict[str, Any], osb_id: str | None) -> Dict[str, Any]:
       - trade_name -> ilk 2 KELIME (hece degil)
     """
     payload = row.get("raw_payload") or {}
+    sicil_no, sicil_daire = sicil_dogrula(payload.get("ticaretSicilNo"))
     phones = [p for p in (row.get("raw_phone") or "").split("; ") if p]
     emails = [e for e in (row.get("raw_email") or "").split("; ") if e]
     nace_conf = payload.get("nace_confidence", "low")
@@ -192,6 +201,9 @@ def _map_row(row: Dict[str, Any], osb_id: str | None) -> Dict[str, Any]:
         "trade_name": trade_name,
         "company_type": None,
         "tax_number": row.get("raw_tax_number"),
+        # D-267: sicil puana giriyordu ama companies'e HIC YAZILMIYORDU.
+        "trade_registry_number": sicil_no,
+        "trade_registry_office": sicil_daire,
         "website_domain": row.get("raw_website"),
         "primary_phone": phones[0] if phones else None,
         "primary_email": emails[0] if emails else None,
@@ -241,11 +253,13 @@ def run_normalize(limit: int | None = None) -> NormalizeResult:
             text("""
                 INSERT INTO companies
                 (legal_name, trade_name, company_type, tax_number, website_domain,
+                 trade_registry_number, trade_registry_office,
                  primary_phone, primary_email, osb_id, is_osb_member, is_ankara,
                  status, nace_validity, identity_completeness, score_version,
                  entity_confidence, source_record_id, last_verified_at)
                 VALUES
                 (:legal_name, :trade_name, :company_type, :tax_number, :website_domain,
+                 :trade_registry_number, :trade_registry_office,
                  :primary_phone, :primary_email, :osb_id, :is_osb_member, :is_ankara,
                  :status, :nace_validity, :identity_completeness, :score_version,
                  :entity_confidence, :source_record_id, NOW())

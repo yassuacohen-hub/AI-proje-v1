@@ -3623,3 +3623,186 @@ alan; onceden gorunmez bir yinelenmeydi.**
   olmali; `migrate.py` ya DB defterine yazmali ya kaldirilmali.
 
 **Referans:** D-241, D-251, D-261, D-263.
+
+---
+
+## D-267 — Deger yanlis kolonda degildi, hic kolonda degildi; ve uydurulmus anahtar sessiz kalir (2026-09-28)
+
+### 1. BORCUN ADI YINE YANLISTI (D-265/D-266 deseni ucuncu kez)
+
+`SICIL-TASIMA-01` devir notunda soyle yaziyordu: *"620 firmanin sicil
+degeri YANLIS ALANDA; `trade_registry_number`'a tasinmali."* Iddia
+"tasima" kelimesi uzerine kuruluydu. Olcum:
+
+| olcum | deger |
+|---|---|
+| `companies.trade_registry_number` dolu | **0** / 9412 |
+| `companies.trade_registry_office` dolu | **0** / 9412 |
+| `tax_number` icinde 3-6 haneli sicil deseni | **0** satir |
+| `tax_number` dolu (herhangi bir deger) | 5 |
+| `source_records.raw_payload ->> 'ticaretSicilNo'` | **620** kayit |
+
+Deger yanlis kolonda **degildi** — hic kolonda **degildi**. Tek
+bulundugu yer ham arsiv. Yani is kolon→kolon *tasima* degil,
+arsiv→sema **cikarma**'ydi. Tasima varsayimiyla yazilacak goc kaynak
+kolonu arardi, bulamazdi.
+
+**Kural (D-265/1'in guclendirilmesi): devir notundaki FIIL de olculur.
+"tasi", "birlestir", "duzelt" fiilleri bir topoloji iddiasidir; once o
+topoloji dogrulanir, sonra kod yazilir.**
+
+### 2. Uydurulmus payload anahtari sessizce None doner
+
+Kok nedeni ararken `etl/normalize.py`'nin okudugu **butun** anahtarlari
+saydim (9401 canli kayit, `jsonb_object_keys`):
+
+| anahtar | kayit sayisi |
+|---|---|
+| `sektor` | 10532 |
+| `adres` / `kaynak` | 9401 |
+| `vergi_no` | 8809 |
+| `nace_code` | 8313 |
+| `naceKod` / `naceDetay` / `meslekGrubu` / `ticaretSicilNo` | 620 |
+| **`vergi_dairesi`** | **0** |
+| **`mersis_no`** | **0** |
+| **`ticaret_sicil_no`** | **0** |
+| **`sicil_dairesi`** | **0** |
+
+Dort anahtar payload'da **hic yok**. `_identity_completeness()` bunlari
+okuyordu; `.get()` her zaman `None` donduruyordu. Ne hata, ne uyari, ne
+test kirmizisi. Sicil icin gercek anahtar `ticaretSicilNo` (camelCase);
+kodda `ticaret_sicil_no` (snake_case) yaziyordu. **Hic olculmemis,
+uydurulmus anahtarlar.**
+
+Daha kotusu: `_map_row()`'un donduren sozlugunde ve `run_normalize()`
+INSERT listesinde `trade_registry_number` **hic yoktu**. Yani anahtar
+dogru olsa bile ETL bu kolonu yazamazdi. Puana giriyordu, semaya
+girmiyordu.
+
+**Kural: `dict.get()` bir sozlesme degildir; yoklugu basari gibi
+gorunur. Payload anahtari kodda gecmeden once canli veride SAYILIR.
+Sifir ciktiysa o alan okunmaz — yoklugu da bir olcumdur (D-265).**
+
+### 3. SQL'e cevrilen dogrulama, Python kapisiyla karsilastirilir
+
+Goc `sicil_dogrula()`'yi (D-247 tek kapi) SQL'de yeniden yaziyordu:
+`split_part` + `btrim` + `upper` + `~ '^[0-9]{3,6}$'`. Risk Turkce
+`upper()` yerel davranisi. Dosyayi yazmadan once iki uygulamayi 619
+canli satirda karsilastirdim:
+
+```
+SQL ifadesi ile sicil_dogrula() FARKI = 0 satir
+gecerli=619  gecersiz=0  dairesi_olan=25
+```
+
+**Kural: bir dogrulama kapisi SQL'e kopyalaniyorsa, goc yazilmadan
+ONCE iki uygulama canli veride karsilastirilir. Fark 0 degilse kopya
+degil, ikinci bir gercektir (D-263 deseni).**
+
+### 4. Goc 0035 ve iki kapsama orani (D-260)
+
+[`0035_sicil_tasima.sql`](src/company_master/schema/migrations/0035_sicil_tasima.sql)
+`--uygula` ile kosturuldu, defterde kayitli (35 disk / 35 defter):
+
+| olcum | deger |
+|---|---|
+| kayit kapsamasi | **620 / 9401** source_records |
+| firma kapsamasi | **619 / 9412** companies (1 kayit firmaya bagli degil) |
+| ayni firmaya iki FARKLI sicil degeri | 0 (cakisma yok) |
+| goc sonrasi `trade_registry_number` dolu | **619** |
+| goc sonrasi `trade_registry_office` dolu | **25** |
+| firma sayisi | 9412 (satir kaybi yok) |
+
+Ikiz kolon **olusmadi**: kaynak bir kolon degil, `raw_payload` — ve
+D-246/4 onu kalici ham arsiv olarak tanimlar. Arsivden okumak ikizlik
+degildir; dusurulecek kolon yok. Geri alma dosyasi durust: goc oncesi
+olculen deger tam olarak 0/9412 oldugu icin NULL'a cekmek
+"bilmiyoruz" degil, "onceki durum buydu" demektir.
+
+### 5. Tavan 6.50 → 7.50 — ama sebebi "620 firma puan aldi" DEGIL
+
+`tavan_raporu()` (D-258 tek tureten kapi) goc sonrasi:
+
+```
+GOC SONRASI TAVAN: 7.5 / 10.0
+kilitli: {'tax_office': 0.5, 'mersis_number': 1.0, 'nace_code': 1.0}
+dolu_sayac['trade_registry_number'] = 25
+recalc_quality_scores() yazilan satir: 9412
+```
+
+**Durustluk notu:** D-250 puan icin sicil no **VE** dairesini birlikte
+ister. Daire tasiyan firma 25/9412 = binde 2.7. Yani 619 firma *deger*
+kazandi, sadece 25'i *puan* kazandi. Tavan yukseldi cunku D-258'de
+"kilitli" tanimi **sifir firma puan aliyor** demektir; 25 > 0 oldugu an
+1.0 agirligin tamami acilir. Ortalama puan kayda deger artmadi.
+**Acilan sey ortalama degil, TAVAN'dir.**
+
+Yan bulgu (yalan degil, dogru calisan kural): `companies.nace_code`
+8289/9412 dolu ama `dolu_sayac['nace_code'] = 0`. Sebep D-245 —
+tahmin edilmis NACE kanit degil, `nace_source` kanit listesinde
+olmali. Celiski gibi gorundu, olculdu, **dogru** cikti; dokunulmadi.
+
+### 6. Yarim goc olmasin: gecmis + gelecek birlikte onarildi
+
+Goc gecmisi onarir. `normalize.py` duzeltilmezse bir sonraki ETL
+kosusu ayni bosluğu yeniden uretir — D-258/4'un tanimladigi **yarim
+goc**. Bu yuzden ayni turda:
+
+- `_identity_completeness()`: 4 olu anahtar cikarildi, sicil
+  `sicil_dogrula()` kapisindan geciriliyor
+- `_map_row()`: `trade_registry_number` + `trade_registry_office`
+  eklendi
+- `run_normalize()` INSERT: iki kolon + iki bind parametresi eklendi
+
+**Kural: kolonu dolduran goc ile o kolonu yazan ETL yolu AYNI turda
+duzeltilir. Sadece biri yapilirsa is bitmis gorunur, bitmemistir.**
+
+### 7. Iz birakmayan goc, iz birakmadigini KENDI yazar
+
+`goc_defteri.py` yalnizca DDL izi (tablo/kolon/index/kisit) ariyordu.
+0032 gibi **saf veri** goclerinin semada izi yoktur, olmasi da
+gerekmez — ama arac onlari `IZSIZ` (= dogrulayamadim) diye
+raporluyordu. **Bugunku yanlis alarm, yarinki gercek alarmi gizler.**
+
+En kucuk cozum: dosya kendi izsizligini beyan eder, arac sessizce
+varsaymaz.
+
+```sql
+-- veri-gocu: 761 kimliksiz satir silindi, 243 referans + 92 bag tasindi
+```
+
+Yeni durum `VERI` eklendi. `IZSIZ` artik yalnizca *sebebi yazilmamis*
+gocler icin kalir ve mandal onu **kirmizi** yapar:
+
+```python
+izsiz = sorted(d for d, (durum, _) in sonuc.items() if durum == "IZSIZ")
+assert not izsiz, f"Sebebi yazilmamis izsiz goc (veri-gocu: ekle): {izsiz}"
+```
+
+Kanit: 0032 onceden `IZSIZ`, simdi `VERI  defterde`.
+
+### 8. `return` eden test hicbir sey garanti etmez
+
+`tests/test_goc_defteri.py`'de iki test sayi **donduruyordu**, `assert`
+etmiyordu. pytest bunu uyariyla gecer — yesil renk yalani ortuyordu
+(D-265/2 deseni). Ikisi de `assert`'e cevrildi ve gercekten neyi
+korudugu yazildi. Pinlenen her sayinin **nicin** o sayi oldugu test
+docstring'inde duruyor (619 = firmaya bagli kayit sayisi, 25 = D-250
+puan alan alt kume). Sayi degisirse once olcum yenilenir, test degil.
+
+### 9. Kapanan borclar
+
+- `SICIL-TASIMA-01` **kapandi** — ama adi yanlisti; is arsiv→sema
+  cikarmaydi. Goc 0035 + `normalize.py` kok neden onarimi.
+- `GOC-DEFTER-VERI-01` **kapandi** — `VERI` durumu + `veri-gocu:`
+  beyani + yazisiz `IZSIZ`'i kiran mandal.
+- `TEST-DONUS-01` **kapandi** — iki test `assert`'e cevrildi.
+
+### 10. Kalan borc
+
+- `BORC-SICIL-DAIRE-01` **yeni**: 619 firmanin sicil numarasi var,
+  sadece 25'inin dairesi var. D-250 ikisini birlikte istedigi icin 594
+  firma puan alamiyor. Daire kaynagi aranmali (MERSIS kapali, D-257).
+
+**Referans:** D-241, D-245, D-246, D-247, D-250, D-251, D-254, D-258,
+D-260, D-263, D-265, D-266.
