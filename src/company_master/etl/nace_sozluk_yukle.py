@@ -170,7 +170,6 @@ def load_xlsx_source(engine, existing_codes: set) -> list[dict]:
             'parent_code': parent_code,
             'title': nace_tanim,
             'sector_group': sektor_tanim,
-            'is_manufacturing': False,
             'source': 'xlsx_resmi',
         })
 
@@ -206,7 +205,6 @@ def load_xlsx_source(engine, existing_codes: set) -> list[dict]:
             'parent_code': extract_parent_code(p4),
             'title': info['title'],
             'sector_group': info['sector_group'],
-            'is_manufacturing': False,
             'source': 'xlsx_derived',
         })
 
@@ -219,7 +217,6 @@ def load_xlsx_source(engine, existing_codes: set) -> list[dict]:
             'parent_code': None,
             'title': info['title'],
             'sector_group': info['sector_group'],
-            'is_manufacturing': False,
             'source': 'xlsx_derived',
         })
 
@@ -240,7 +237,6 @@ def load_xlsx_source(engine, existing_codes: set) -> list[dict]:
             'parent_code': None,
             'title': sector_title,
             'sector_group': '',
-            'is_manufacturing': False,
             'source': 'xlsx_derived',
         })
 
@@ -279,7 +275,6 @@ def load_turkiye_nace_json(engine, existing_codes: set) -> list[dict]:
                 'parent_code': extract_parent_code(nace_code_6),
                 'title': name_tr,
                 'sector_group': '',
-                'is_manufacturing': False,
                 'source': 'turkiye_nace_json',
             })
 
@@ -292,7 +287,6 @@ def load_turkiye_nace_json(engine, existing_codes: set) -> list[dict]:
                 'parent_code': extract_parent_code(code_4digit),
                 'title': name_tr,
                 'sector_group': '',
-                'is_manufacturing': False,
                 'source': 'turkiye_nace_json',
             })
 
@@ -328,7 +322,6 @@ def load_nace_rev_json(engine, existing_codes: set, json_name: str, version: str
                 'parent_code': None,
                 'title': activity,
                 'sector_group': '',
-                'is_manufacturing': False,
                 'source': json_name,
             })
 
@@ -341,7 +334,6 @@ def load_nace_rev_json(engine, existing_codes: set, json_name: str, version: str
                 'parent_code': None,
                 'title': activity,
                 'sector_group': '',
-                'is_manufacturing': False,
                 'source': json_name,
             })
 
@@ -355,7 +347,6 @@ def load_nace_rev_json(engine, existing_codes: set, json_name: str, version: str
                 'parent_code': extract_parent_code(group_norm),
                 'title': activity,
                 'sector_group': '',
-                'is_manufacturing': False,
                 'source': json_name,
             })
 
@@ -369,7 +360,6 @@ def load_nace_rev_json(engine, existing_codes: set, json_name: str, version: str
                 'parent_code': extract_parent_code(class_norm),
                 'title': activity,
                 'sector_group': '',
-                'is_manufacturing': False,
                 'source': json_name,
             })
 
@@ -439,17 +429,19 @@ def upsert_nace_codes(engine, records: list[dict]) -> tuple[int, int]:
         try:
             with engine.begin() as conn:
                 for data in batch:
+                    # D-268: is_manufacturing dusuruldu (goc 0036). Bu yazici kolona
+                    # her zaman sabit False yaziyordu (3319/3319), uretimde okuyani
+                    # yoktu -> D-249 sifir bilgi.
                     conn.execute(
                         text("""
-                            INSERT INTO nace_codes (nace_code, version, level, parent_code, title, sector_group, is_manufacturing)
-                            VALUES (:nace_code, :version, :level, :parent_code, :title, :sector_group, :is_manufacturing)
+                            INSERT INTO nace_codes (nace_code, version, level, parent_code, title, sector_group)
+                            VALUES (:nace_code, :version, :level, :parent_code, :title, :sector_group)
                             ON CONFLICT (nace_code) DO UPDATE SET
                                 version = EXCLUDED.version,
                                 level = EXCLUDED.level,
                                 parent_code = EXCLUDED.parent_code,
                                 title = EXCLUDED.title,
-                                sector_group = EXCLUDED.sector_group,
-                                is_manufacturing = EXCLUDED.is_manufacturing
+                                sector_group = EXCLUDED.sector_group
                         """),
                         {
                             "nace_code": data['nace_code'],
@@ -458,7 +450,6 @@ def upsert_nace_codes(engine, records: list[dict]) -> tuple[int, int]:
                             "parent_code": data['parent_code'],
                             "title": data['title'],
                             "sector_group": data['sector_group'],
-                            "is_manufacturing": data['is_manufacturing'],
                         },
                     )
             processed += len(batch)

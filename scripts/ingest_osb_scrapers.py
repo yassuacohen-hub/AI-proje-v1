@@ -70,7 +70,6 @@ def main() -> int:
             email = rec["email"]
             web = rec["web"]
             adres = rec["adres"]
-            sektor = rec["sektor"]
 
             if unvan in existing:
                 conn.execute(
@@ -80,7 +79,9 @@ def main() -> int:
                          "website_domain = COALESCE(:web, website_domain), "
                          "primary_phone = COALESCE(:phone, primary_phone), "
                          "primary_email = COALESCE(:email, primary_email), "
-                         "nace_name = COALESCE(:sektor, nace_name), "
+                         # D-268: OSB'nin kendi sektor etiketi NACE adi kolonuna
+                         # yazilmiyor (goc 0036). Etiket ham arsivde durur:
+                         # source_records.raw_payload ->> 'sektor'.
                          "is_ankara = TRUE, is_osb_member = TRUE, "
                          "updated_at = NOW() "
                          "WHERE company_id = :cid"),
@@ -90,7 +91,6 @@ def main() -> int:
                         "web": web,
                         "phone": phone,
                         "email": email,
-                        "sektor": sektor,
                         "cid": existing[unvan],
                     },
                 )
@@ -101,8 +101,8 @@ def main() -> int:
                 conn.execute(
                     text("INSERT INTO companies "
                          "(company_id, legal_name, trade_name, website_domain, primary_phone, "
-                         "primary_email, nace_name, is_ankara, is_osb_member, created_at, updated_at) "
-                         "VALUES (:cid, :legal_name, :trade_name, :web, :phone, :email, :sektor, TRUE, TRUE, NOW(), NOW())"),
+                         "primary_email, is_ankara, is_osb_member, created_at, updated_at) "
+                         "VALUES (:cid, :legal_name, :trade_name, :web, :phone, :email, TRUE, TRUE, NOW(), NOW())"),
                     {
                         "cid": company_id,
                         "legal_name": unvan,
@@ -110,7 +110,6 @@ def main() -> int:
                         "web": web,
                         "phone": phone,
                         "email": email,
-                        "sektor": sektor,
                     },
                 )
                 inserted += 1

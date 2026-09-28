@@ -53,7 +53,7 @@ def main():
                        mersis_number, establishment_date, status, status_confidence,
                        employee_count, website_domain, primary_phone, primary_email,
                        description, data_quality_score, web_sitesi, vergi_no, osb_parsel,
-                       adres, nace_name, nace_source, nace_code
+                       adres, nace_source, nace_code
                 FROM companies
             """)).mappings().all()
             company_map = {c["company_id"]: c for c in all_companies}
@@ -134,7 +134,8 @@ def main():
                 "establishment_date", "status", "status_confidence", "employee_count",
                 "website_domain", "primary_phone", "primary_email", "description",
                 "web_sitesi", "vergi_no", "osb_parsel", "adres",
-                "nace_name", "nace_source", "nace_code"
+                # D-268: nace_name dusuruldu (goc 0036)
+                "nace_source", "nace_code"
             ]
 
             # Her keep_id icin hangi remove_id'ler birlesecek

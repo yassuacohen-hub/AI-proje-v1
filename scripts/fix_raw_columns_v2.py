@@ -76,12 +76,12 @@ with engine.begin() as conn:
     """))
     print(f"    hatali email temizlendi: {r.rowcount}")
 
-    # 6) companies nace_name ve nace_source - CONSTRAINT UYUMLU HALDE
-    print("[6] NACE NAME / NACE SOURCE (companies)...")
+    # 6) companies nace_code ve nace_source - CONSTRAINT UYUMLU HALDE
+    #    D-268: nace_name yazisi kaldirildi (goc 0036 kolonu dusurdu).
+    print("[6] NACE CODE / NACE SOURCE (companies)...")
     r = conn.execute(text("""
         UPDATE companies c
-        SET nace_name = NULLIF(sr.raw_payload->>'nace_name_tr', ''),
-            nace_code = NULLIF(sr.raw_payload->>'nace_code', ''),
+        SET nace_code = NULLIF(sr.raw_payload->>'nace_code', ''),
             nace_source = CASE
                 WHEN sr.raw_payload->>'nace_source' = 'sektor_reverse' THEN 'sector_default'
                 WHEN sr.raw_payload->>'nace_source' = 'none' THEN 'unknown'
@@ -90,7 +90,6 @@ with engine.begin() as conn:
         FROM source_records sr
         WHERE c.source_record_id = sr.source_record_id
           AND sr.raw_payload IS NOT NULL
-          AND (c.nace_name IS NULL OR c.nace_name = '')
           AND (c.nace_code IS NULL OR c.nace_code = '')
     """))
     print(f"    updated: {r.rowcount}")
@@ -122,7 +121,7 @@ with engine.begin() as conn:
         print(f"  {col}: {cnt}/{total} ({cnt/total*100:.1f}%)")
 
     print("\n--- companies doluluk ---")
-    for col in ["primary_phone", "primary_email", "nace_code", "nace_name", "nace_source"]:
+    for col in ["primary_phone", "primary_email", "nace_code", "nace_source"]:
         cnt = conn.execute(text(
             f"SELECT COUNT(*) FROM companies WHERE {col} IS NOT NULL AND {col} != '' AND {col} != 'None'"
         )).scalar()

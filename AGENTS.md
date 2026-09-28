@@ -3806,3 +3806,136 @@ puan alan alt kume). Sayi degisirse once olcum yenilenir, test degil.
 
 **Referans:** D-241, D-245, D-246, D-247, D-250, D-251, D-254, D-258,
 D-260, D-263, D-265, D-266.
+
+## D-268 — NACE kumesi: olculdu, ikiye bolundu, biri dustu
+
+**Tur:** kaynak zinciri onarim hatti, NACE kumesi. Goc `0036_nace_olu_kolon.sql`.
+
+### 1. Devir notunun fiili yine yanlisti (D-267/1 deseni dorduncu kez)
+
+Devir notu dort borc sayiyordu ve `NACE-OLU-KOLON-01`'i **tek fiil** olarak
+tarif ediyordu: "iki olu kolonu dusur". Olculdugunde iki kolonun gerekcesi
+AYNI DEGIL cikti. Borc tek degil, **ikiye bolundu**:
+
+| Kolon | Siniflandirma | Olculen gerekce |
+|---|---|---|
+| `nace_codes.is_manufacturing` | **GERCEK OLU** | 3319 / 3319 satir `false`. Tek bir `true` yok (D-249: tek degerli kolon = sifir bilgi). Yazan `nace_sozluk_yukle.py` her zaman SABIT `False` yaziyordu. Uretimde okuyan **yok**. |
+| `companies.nace_name` | **YANLIS TARIF** — "olu" degildi | 52 / 9412 dolu, 8 farkli deger. Uretim okuyani VARDI: `web_app.py` `/api/match` SELECT listesi. "Cagirani yok, dusur" gerekcesi bu kolon icin yanlisti. |
+
+### 2. `nace_name` yine de dustu — ama bambaska bir gerekceyle
+
+Dolu bir kolonu dusurmek beyanla degil olcumle savunulur (D-260):
+
+- **Puana girmiyor:** `_match_puan()` yalnizca `nace_code`, `osb_id`,
+  `is_ankara`, `identity_completeness`, website/email/telefon okuyor.
+  `nace_name` hicbir bilesende gecmiyor.
+- **Cagiran fiilen deger gormuyor:** SELECT sarti `nace_code IS NOT NULL AND
+  is_ankara` ile 8289 satir donuyor; bunlarin `nace_name` DOLU olani **2**.
+  52 dolu satirin 50'si bu cagirana hic ugramiyor.
+- **Tuketici yok:** hicbir `.html` / `.js` sablonu ve hicbir test bu alana
+  dokunmuyor (0 sonuc). Yanit sozlugune girip kimsenin okumadigi alan.
+- **Kaynak kaybi yok (D-246/4):** 52 degerin 47'si ham arsivde birebir
+  duruyor (`source_records.raw_payload ->> 'sektor'`). Kalan 5'te payload
+  anahtari yok; o 5 deger de NACE bilgisi degil, OSB sektor etiketi.
+- **Degerin kendisi zaten NACE adi degildi:** 'Metalurji ve Makina Sanayi'
+  (22), 'Diger' (17), 'KIMYA-LABARATUVAR' (4), 'GIDA' (4), 'Medikal - Ilac'
+  (2), 'Endustriyel Market' (1), 'Elektrikli Cihaz Sanayi' (1), 'Savunma' (1).
+  `ingest_osb_scrapers.py` OSB sitesinin `sektor` alanini dogrudan "NACE adi"
+  kolonuna akitiyordu. Yani kolonun **adi** veriyi yanlis tanitiyordu.
+
+### 3. Diger uc borcun siniflandirmasi
+
+- `NACE-ACILIM-01` — **GERCEK, acik kalir.** 6387/8289 acilimi var; 1902
+  acilimsiz beyani dogrulandi. Ancak `acilim_getir` kodda hic yok; D-266
+  geregi once cagiran, sonra duzeltme.
+- `NACE-SOZLUK-DIL-01` — **GERCEK, acik kalir.** 3319 satir; 572 TR harfli
+  basligin 572'si yarim asciilesmis; mojibake 0; level-2 52/88 ve level-4
+  483/957 bassiz; level-6 2252 tam. Cozum TUIK listesi indirmeye bagli.
+- `NACE-COKLU-01` — **VARSAYIM, iptal adayi.** `company_industries` 21 satir
+  / 21 firma, hepsi `is_primary`. Ayni firmada birden fazla farkli `nace_code`
+  tasiyan firma sayisi **0**. Coklu NACE ihtiyaci olculmus degil, varsayilmis.
+
+### 4. Kural (D-268)
+
+**Bir borc tek fiil gibi yazilmis olabilir; olcum onu ikiye bolebilir.
+Kolonlari "ayni fiile bagli" diye birlikte dusurmek, gerekcelerinden en
+zayifini ikisine birden uygulamaktir. Her kolon KENDI gerekcesiyle duser.**
+
+Ikincil kural: **dusurulen kolonun dusme gerekcesi "cagirani yok" DEGILSE,
+gerekce goc basligina yazilir.** `nace_name`'in cagirani vardi; onu dusuren
+sey cagiranin fiilen deger gormemesiydi (2/8289). Bu ayrim yazilmazsa bir
+sonraki tur "cagirani vardi, nicin dustu?" diye geri aciyor.
+
+### 5. Kanit (calistirilmis komut ciktisi)
+
+```
+goc_defteri.py --uygula 0036_nace_olu_kolon.sql
+  -> UYGULANDI + DEFTERE YAZILDI: 0036_nace_olu_kolon.sql
+     Diskte 36 goc, defterde 36 kayit.
+
+information_schema kontrolu (is_manufacturing + nace_name):
+  -> kalan kolon: []
+
+pytest tests/test_dusurulen_kolon.py
+  -> 1. kosu: FAILED  scripts/fix_raw_columns_v2.py:124, scripts/_olcum_nace.py:75
+     (mandal ilk kosusunda iki kacak yakaladi; findstr taramasi ikisini de
+      kacirmisti -- metin taramasi mandal yerine gecmez)
+  -> duzeltme sonrasi: 1 passed
+```
+
+### 6. ETL yolu ayni turda kesildi (D-267/6)
+
+Goc gecmisi temizler; yaziyi birakmayan ETL kolonu bir sonraki kosuda geri
+dogurur. Ayni commit'te kesilenler:
+
+- `web_app.py` — `/api/match` SELECT'inden `nace_name` cikti (tek okuyan)
+- `scripts/ingest_osb_scrapers.py` — UPDATE + INSERT yazisi silindi (tek yazan)
+- `src/company_master/etl/nace_sozluk_yukle.py` — 10 sozluk literali +
+  INSERT/VALUES/ON CONFLICT + parametre (`is_manufacturing` tek yazani)
+- `scripts/p45_validate_and_dedup.py` — SELECT + `merge_fields`
+- `scripts/fix_raw_columns_v2.py` — `SET` yazisi, `WHERE` sarti, doluluk raporu
+- `scripts/nace_eksik_doldur.py` — olu `kod_isim` sozlugu + bayat import
+
+**Mandal:** `tests/test_dusurulen_kolon.py` — `src/`, `scripts/`, `templates/`,
+`web_dashboard/`, `web_app.py` icinde `*.py/*.js/*.html/*.sql` tarar. Goc
+dizini muaftir (arsiv). Kolon DB'den dustugu icin geri sizma calisma aninda
+`UndefinedColumn` demektir; mandal o patlamayi commit anina ceker.
+
+**Dusen dosyalar (D-241, cagirani olmayan tek seferlik araclar):**
+`debug_xlsx.py`, `test_upsert.py` (kok dizin ad-hoc hata ayiklama betikleri,
+hicbir yerden cagrilmiyor), `scripts/_olcum_nace.py`, `scripts/_olcum_nace2.py`.
+
+### 7. Kapanan / acik kalan borc
+
+- `NACE-OLU-KOLON-01` **kapandi** — iki kolon da semadan dustu, yazici/okuyucu
+  yollari kesildi, mandal kondu.
+- `NACE-ACILIM-01` **acik** — kaynak var, cagiran yok.
+- `NACE-SOZLUK-DIL-01` **acik** — TUIK listesi indirmeye bagli.
+- `NACE-COKLU-01` **iptal adayi** — ihtiyac olculmedi, varsayildi. Gercek
+  coklu-NACE talebi olcene kadar acilmaz.
+- `BORC-NACE-DOGRULAMA-01` **acik kalir** (D-252/D-245): `nace_validity`'de
+  `verified` **sifir** (medium 5732 / unknown 2942 / fallback 738);
+  `companies.nace_confidence` kolonu yok. NACE'nin %100'u hala tahmin.
+  **Doluluk skoru acmaz — dogrulama acar.** Dogrulama kaynagi olmadan sistem
+  kendi kendine "dogrulandi" isaretlemez.
+
+### 8. Yan bulgu (bu turun isi degil, kayit icin)
+
+`information_schema` `schema_migrations` icin `version` kolonunu **iki kez**
+donduruyor: tablo birden fazla semada var. Defter tek kapi olmali (D-265);
+iki semada ayni adla duran defter ileride "hangisini okudum?" sorusunu
+doguracaktir. Olculmedi, borc acilmadi — bir sonraki goc turunda bakilmali.
+
+### 9. Yeni borc: BORC-TEST-SIRA-01 (bu turda olculdu)
+
+Tam takim rastgele sirada (pytest-randomly) **1 failed, 4444 passed**; sabit
+sirada (-p no:randomly) **4445 passed, 13 skipped, 172.52s**. Ayni kod, iki
+farkli sonuc: kirilma kodun degil test SIRASININ fonksiyonu — bir test
+kendinden oncekinin biraktigi global duruma baglanmis (D-226 ihlali). Kirilan
+testin adi izole edilemedi, ikinci kosuda ayni tohum cikmadi.
+**Acik borc: BORC-TEST-SIRA-01.** Cozulene kadar "takim yesil" beyani hangi
+sirayla kosuldugu bilgisiyle birlikte verilir; sirasiz yesil kanit degildir
+(D-260).
+
+**Referans:** D-241, D-245, D-246, D-249, D-250, D-252, D-258, D-259, D-260,
+D-263, D-265, D-266, D-267.

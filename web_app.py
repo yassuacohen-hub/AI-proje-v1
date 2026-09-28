@@ -1385,7 +1385,9 @@ def api_match(
         rows = (
             conn.execute(
                 text(
-                    "SELECT company_id, legal_name, trade_name, nace_code, nace_name, osb_id, "
+                    # D-268: nace_name kolonu dusuruldu (goc 0036). Puanlamaya girmiyordu,
+                    # tuketicisi yoktu, 8289 satirin sadece 2'sinde degeri vardi.
+                    "SELECT company_id, legal_name, trade_name, nace_code, osb_id, "
                     "is_ankara, is_osb_member, identity_completeness, primary_phone, "
                     "primary_email, website_domain "
                     "FROM companies WHERE nace_code IS NOT NULL AND is_ankara = TRUE "

@@ -14,7 +14,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from sqlalchemy import text
 from company_master.db.connection import get_engine
-from company_master.etl.nace_mapper import nace_bul, load_nace_taxonomy
+from company_master.etl.nace_mapper import nace_bul
 
 GLOBAL_FALLBACK = "62.09"
 SEKTOR_SAYI = re.compile(r"\d+\s*$")
@@ -32,8 +32,6 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="NACE doldur (P1-5)")
     ap.add_argument("--limit", type=int, default=0)
     args = ap.parse_args()
-
-    kod_isim = {r.code: r.name_tr for r in load_nace_taxonomy()}
 
     map_path = ROOT / "data" / "nace_to_ostim_sektor.json"
     ostim_map = json.loads(map_path.read_text(encoding="utf-8"))
@@ -72,13 +70,14 @@ def main() -> None:
         sayim: Counter = Counter()
         for cid, (unvan, src_id) in firma.items():
             raw = raw_by_src.get(str(src_id), {})
-            nace, kaynak, isim = None, None, None
+            # D-268: nace_name yazisi kaldirildi (goc 0036 kolonu dusurdu);
+            # kod adi nace_codes.title'dan okunur, kopyalanmaz.
+            nace, kaynak = None, None
 
             rn = raw.get("nace_code") or raw.get("naceKod")
             if rn:
                 nace = str(rn)[:12]
                 kaynak = "external"
-                isim = kod_isim.get(nace)
 
             if not nace:
                 sek = raw.get("sektor") or raw.get("meslekGrubu")
@@ -94,7 +93,6 @@ def main() -> None:
                 if tahminler:
                     nace = tahminler[0].code
                     kaynak = "predicted"
-                    isim = tahminler[0].name_tr
 
             if not nace and unvan:
                 u = norm_tr(unvan)
@@ -110,27 +108,25 @@ def main() -> None:
                 nace = GLOBAL_FALLBACK
                 kaynak = "fallback"
 
-            guncelle.append((cid, nace, isim, kaynak))
+            guncelle.append((cid, nace, kaynak))
             sayim[kaynak] += 1
 
         for i in range(0, len(guncelle), 250):
             parca = guncelle[i:i + 250]
             valf = ",".join(
-                "(:cid%d, :n%d, :ni%d, :k%d)" % (j, j, j, j)
+                "(:cid%d, :n%d, :k%d)" % (j, j, j)
                 for j in range(len(parca))
             )
             p = {}
-            for j, (cid, nace, isim, kaynak) in enumerate(parca):
+            for j, (cid, nace, kaynak) in enumerate(parca):
                 p["cid%d" % j] = cid
                 p["n%d" % j] = nace
-                p["ni%d" % j] = isim
                 p["k%d" % j] = kaynak
             conn.execute(text(
                 "UPDATE companies AS c SET nace_code = v.nace, "
-                "nace_name = COALESCE(v.nace_name, c.nace_name), "
                 "nace_source = v.kaynak, nace_validity = v.kaynak, "
                 "updated_at = NOW() "
-                "FROM (VALUES " + valf + ") AS v(cid, nace, nace_name, kaynak) "
+                "FROM (VALUES " + valf + ") AS v(cid, nace, kaynak) "
                 "WHERE c.company_id = v.cid::uuid"
             ), p)
 

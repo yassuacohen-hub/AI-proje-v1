@@ -55,6 +55,15 @@ RE_YORUM = re.compile(
 )
 # Sonraki bir goc bu gocun izini degistirdiyse (RENAME/DROP) burada bildirilir.
 # D-245: "iz yok" demek yetmez, neden yok yazili olmali.
+# D-268: DROP-only goc (0036) tablo/kolon URETMEZ, izi kolonun YOKLUGUDUR.
+# Arac bunu ayristirmayinca goc IZSIZ kaliyordu; yanlis alarm yarinki gercek
+# alarmi gizler. Dusurme de dogrulanabilir bir izdir: kolon hala duruyorsa
+# goc uygulanmamistir.
+RE_DROP_KOLON = re.compile(
+    r"ALTER\s+TABLE\s+(?:IF\s+EXISTS\s+)?([\w.]+)\s+DROP\s+COLUMN\s+"
+    r"(?:IF\s+EXISTS\s+)?([\w]+)",
+    re.I,
+)
 RE_USTUNDEN = re.compile(r"ustunden-gecen:\s*([\w.]+)", re.I)
 # D-254: dosyanin TAMAMI degil, TEK izi eskidiginde kullanilir. 0001_core
 # gibi hala gecerli 20 iz tasiyan bir goce "ustunden-gecen" yazmak defteri
@@ -102,6 +111,7 @@ def goc_izleri() -> dict[str, dict[str, set]]:
             "ustunden": ustunden.group(1) if ustunden else None,
             "veri": veri.group(1).strip() if veri else None,
             "dusen": {d.lower() for d in RE_DUSEN_IZ.findall(ham)},
+            "drop_kolon": {(_ad(t), k.lower()) for t, k in RE_DROP_KOLON.findall(s)},
         }
     return izler
 
@@ -196,6 +206,15 @@ def degerlendir(izler, sema):
                 toplam += 1
                 if x not in sema[tur]:
                     eksik.append(f"{tur}:{x}")
+        # D-268: dusurme izi TERS dogrulanir: kolon HALA duruyorsa goc
+        # uygulanmamistir. Ekleme izleriyle ayni sayaca girer ki DROP-only
+        # goc IZSIZ gorunmesin.
+        # Ayni dosyada dusurulup GERI KURULAN kolon (0027: search_text) drop
+        # izi saymaz; nihai iz eklemedir ve yukarida zaten arandi.
+        for t_k in sorted(iz["drop_kolon"] - iz["kolon"]):
+            toplam += 1
+            if t_k in sema["kolon"]:
+                eksik.append(f"dusurulmemis kolon:{t_k}")
         if toplam == 0 and iz["veri"]:
             sonuc[dosya] = ("VERI", [iz["veri"]])
         elif toplam == 0:
