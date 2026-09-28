@@ -34,3 +34,14 @@ repos:
         pass_filenames: false
         files: ^(src/company_master/schema/|tests/test_goc_defteri\.py$|scripts/goc_defteri\.py$)
         stages: [pre-commit]
+
+      # MANDAL-D250-01: kimlik tamligi tek kapisi. DB'ye BAGLANMAZ (saf hesap),
+      # bu yuzden always_run --- ikinci bir puan yolu acan herhangi bir commit de
+      # tetiklesin. Agirlik toplami 10.0 bozulursa commit gecmez.
+      - id: d250-kalite-puani
+        name: D-250 mandali (agirlik 10.0, dogrulanmamis=0, surum/bayat, 0-10)
+        entry: python -X utf8 tests/test_kalite_puani.py
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]

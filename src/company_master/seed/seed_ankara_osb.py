@@ -140,7 +140,8 @@ def generate_osb_firm(osb_id: str, n: int) -> list:
 
         # Kalite skoru
 
-        dq_score = round(60 + random.random() * 35, 2)
+        # D-245: kalite puani UYDURULMAZ; identity_completeness yalnizca
+        # quality_recalc.identity_completeness() tarafindan yazilir.
 
         ec_score = round(70 + random.random() * 25, 2)
 
@@ -176,7 +177,7 @@ def generate_osb_firm(osb_id: str, n: int) -> list:
 
             "description": f"{sector_name} (NACE {sector_code})",
 
-            "data_quality_score": dq_score,
+
 
             "entity_confidence": ec_score,
 
@@ -228,7 +229,7 @@ def generate_non_osb_or_outside_ankara(n: int) -> list:
 
             "is_osb_member": False,
 
-            "data_quality_score": round(40 + random.random() * 30, 2),
+
 
             "quarantine_reason": "not_ankara" if not is_ankara else "not_osb_member",
 

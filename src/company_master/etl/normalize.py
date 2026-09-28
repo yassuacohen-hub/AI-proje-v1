@@ -24,7 +24,8 @@ from typing import Any, Dict, List
 from sqlalchemy import text
 
 from ..db.connection import get_engine
-from .quality_recalc import kalite_puani
+from .quality_recalc import SURUM as SCORE_SURUM
+from .quality_recalc import identity_completeness
 
 
 # ── ANA KURAL: Firma ad normalizasyonu (ingest-time) ──
@@ -145,25 +146,28 @@ def _has(value: Any) -> bool:
     return True
 
 
-def _data_quality_score(row: Dict[str, Any]) -> float:
-    """Toplam kalite puani — TEK KAPI: quality_recalc.kalite_puani().
+def _identity_completeness(row: Dict[str, Any]) -> float:
+    """Kimlik tamligi (0-10) — TEK KAPI: quality_recalc.identity_completeness().
 
-    D-250: iki celisen formul vardi (bu dosya + quality_recalc). Tek kapiya
-    indirildi. Bu dosya source_records duzeninde okur, kapi companies
-    duzeninde bekler; asagidaki esleme o farki kapatir.
+    D-250: bu dosya source_records duzeninde okur, kapi companies duzeninde
+    bekler; asagidaki esleme o farki kapatir. Puan formulu burada YOK.
     """
     payload = row.get("raw_payload") or {}
     # Anahtarlar kapinin (companies) dili: Ingilizce. Degerler payload'un
     # dili: Turkce. D-251/1 kolon adini baglar, JSON anahtarini baglamaz.
-    return kalite_puani({
+    return identity_completeness({
+        "legal_name": row.get("legal_name") or row.get("raw_name"),
         "tax_number": row.get("raw_tax_number") or payload.get("vergi_no"),
+        "tax_office": payload.get("vergi_dairesi"),
+        "mersis_number": payload.get("mersis_no"),
+        "trade_registry_number": payload.get("ticaret_sicil_no"),
+        "trade_registry_office": payload.get("sicil_dairesi"),
+        "nace_code": payload.get("nace_code"),
+        "nace_source": payload.get("nace_source"),
         "address": payload.get("adres"),
         "primary_phone": row.get("raw_phone"),
         "primary_email": row.get("raw_email"),
         "website_domain": row.get("raw_website") or row.get("website_domain"),
-        "nace_code": payload.get("nace_code"),
-        "osb_parcel": payload.get("osb_parsel"),
-        "trade_name": row.get("trade_name"),
     })
 
 
@@ -196,7 +200,10 @@ def _map_row(row: Dict[str, Any], osb_id: str | None) -> Dict[str, Any]:
         "is_ankara": True,
         "status": "active",
         "nace_validity": nace_validity,
-        "data_quality_score": _data_quality_score(row),
+        "identity_completeness": _identity_completeness(
+            dict(row, legal_name=legal_name)
+        ),
+        "score_version": SCORE_SURUM,
         "entity_confidence": 0.9,
     }
 
@@ -235,13 +242,13 @@ def run_normalize(limit: int | None = None) -> NormalizeResult:
                 INSERT INTO companies
                 (legal_name, trade_name, company_type, tax_number, website_domain,
                  primary_phone, primary_email, osb_id, is_osb_member, is_ankara,
-                 status, nace_validity, data_quality_score, entity_confidence,
-                 source_record_id, last_verified_at)
+                 status, nace_validity, identity_completeness, score_version,
+                 entity_confidence, source_record_id, last_verified_at)
                 VALUES
                 (:legal_name, :trade_name, :company_type, :tax_number, :website_domain,
                  :primary_phone, :primary_email, :osb_id, :is_osb_member, :is_ankara,
-                 :status, :nace_validity, :data_quality_score, :entity_confidence,
-                 :source_record_id, NOW())
+                 :status, :nace_validity, :identity_completeness, :score_version,
+                 :entity_confidence, :source_record_id, NOW())
             """),
             batch,
         )

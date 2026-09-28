@@ -1,116 +1,132 @@
 # -*- coding: utf-8 -*-
-"""Kalite skoru recalculation scripti.
+"""D-250 TEK KAPI: kimlik tamligi puani (identity_completeness, 0-10).
 
-Tum firmalar icin kalite skorunu yeniden hesaplar ve DB'ye yazar.
-SQLite/PostgreSQL uyumlu.
+Puan ureten baska yol yoktur. Bir alan puan alabilmek icin:
+  1. Dolu olacak (bos dize dolu sayilmaz),
+  2. D-246 kapisindan (kimlik_no.py) gecen bir kimlik ise dogrulanmis olacak,
+  3. D-245 geregi kanit olacak; tahmin/varsayilan puan almaz.
+
+Agirlik seti degisirse SURUM artar ve eski puanlar BAYAT sayilir (D-250/4).
 """
 from __future__ import annotations
 
 from sqlalchemy import text
-from company_master.db.connection import get_engine
+
+from ..db.connection import get_engine
+from .kimlik_no import kimlik_dogrula, mersis_dogrula, sicil_dogrula
+
+__all__ = [
+    "SURUM",
+    "AGIRLIKLAR",
+    "identity_completeness",
+    "alan_puanlari",
+    "bayat_mi",
+    "recalc_quality_scores",
+]
+
+SURUM = "v1"
+
+# D-250 agirlik seti v1 — toplam tam 10.0.
+# Kimlik omurgasi 6.0 + Erisim 4.0.
+AGIRLIKLAR: dict[str, float] = {
+    "legal_name": 1.0,              # ticaret unvani
+    "tax_number": 1.5,              # D-250/3: kaynak baglaninca 3.0 -> v2
+    "tax_office": 0.5,
+    "mersis_number": 1.0,
+    "trade_registry_number": 1.0,   # sicil no + dairesi birlikte
+    "nace_code": 1.0,
+    "address": 1.5,
+    "primary_phone": 1.5,
+    "primary_email": 0.7,
+    "website_domain": 0.3,
+}
+
+# D-245: kanit sayilan NACE kaynaklari. Tahmin/varsayilan puan almaz.
+NACE_KANIT_KAYNAKLARI = frozenset({"mersis", "external"})
 
 
-def kalite_puani(row: dict) -> float:
-    """Toplam kalite puani (0-100) — TEK KAPI (D-250).
-
-    Alan agirliklari: VKN 15, adres 15, telefon 15, e-posta 15, NACE 15,
-    web 10, OSB parsel 10, unvan 5.
-
-    Alt skorlar (tazelik, telefon bicimi, sosyal medya, kaynak cesitliligi,
-    calisan sayisi, is ilani) BU PUANA GIRMEZ — D-250/2. Sebep:
-    employee_count %100, job_postings %99.9 bos; puana katmak "veri yok"u
-    "kotu firma" diye yansitir (D-249 ihlali).
-    """
-    score = 0.0
-    # VKN (dogrulanmis; D-254: kaynak kimlik defteri) - 15 puan
-    vkn = row.get("tax_number") or ""
-    if vkn and vkn.strip():
-        score += 15
-    # Adres - 15 puan
-    adres = row.get("address") or ""
-    if adres and adres.strip():
-        score += 15
-    # Telefon - 15 puan
-    phone = row.get("primary_phone") or ""
-    if phone and phone.strip():
-        score += 15
-    # E-posta - 15 puan
-    email = row.get("primary_email") or ""
-    if email and email.strip():
-        score += 15
-    # Web sitesi - 10 puan
-    web = row.get("website_domain") or ""
-    if web and web.strip():
-        score += 10
-    # NACE kodu - 15 puan
-    nace = row.get("nace_code") or ""
-    if nace and nace.strip():
-        score += 15
-    # OSB parsel - 10 puan
-    parsel = row.get("osb_parcel") or ""
-    if parsel and parsel.strip():
-        score += 10
-    # Ticaret unvani - 5 puan
-    trade = row.get("trade_name") or ""
-    if trade and trade.strip():
-        score += 5
-    return round(min(score, 100.0), 1)
+def _dolu(v) -> bool:
+    return bool(v) and bool(str(v).strip())
 
 
-_score = kalite_puani  # geriye donuk ad
+def alan_puanlari(row: dict) -> dict[str, float]:
+    """Her alanin kazandigi puan. Kazanilmayan alan 0.0 dondurur (D-249/3:
+    "veri yok" kolonda NULL kalir, puana katkisi 0'dir)."""
+    p = dict.fromkeys(AGIRLIKLAR, 0.0)
+
+    if _dolu(row.get("legal_name")):
+        p["legal_name"] = AGIRLIKLAR["legal_name"]
+
+    # D-246 kapisi: dogrulanmayan VKN/TCKN puan almaz.
+    # kimlik_dogrula -> (deger, tur); tur "vkn"/"tckn"/"gecersiz".
+    _deger, _tur = kimlik_dogrula(row.get("tax_number"))
+    if _deger and _tur in ("vkn", "tckn"):
+        p["tax_number"] = AGIRLIKLAR["tax_number"]
+
+    if _dolu(row.get("tax_office")):
+        p["tax_office"] = AGIRLIKLAR["tax_office"]
+
+    if mersis_dogrula(row.get("mersis_number"))[0]:
+        p["mersis_number"] = AGIRLIKLAR["mersis_number"]
+
+    # D-250: sicil no TEK BASINA yetmez, dairesi de gerekir.
+    if sicil_dogrula(row.get("trade_registry_number"))[0] and _dolu(
+        row.get("trade_registry_office")
+    ):
+        p["trade_registry_number"] = AGIRLIKLAR["trade_registry_number"]
+
+    # D-245: tahmin edilmis NACE kanit degildir.
+    if _dolu(row.get("nace_code")) and row.get("nace_source") in NACE_KANIT_KAYNAKLARI:
+        p["nace_code"] = AGIRLIKLAR["nace_code"]
+
+    for alan in ("address", "primary_phone", "primary_email", "website_domain"):
+        if _dolu(row.get(alan)):
+            p[alan] = AGIRLIKLAR[alan]
+
+    return p
+
+
+def identity_completeness(row: dict) -> float:
+    """Kimlik tamligi puani, 0.0-10.0."""
+    toplam = round(sum(alan_puanlari(row).values()), 1)
+    return min(max(toplam, 0.0), 10.0)
+
+
+def bayat_mi(score_version: str | None) -> bool:
+    """D-250/4: baska bir agirlik setiyle hesaplanmis puan bayattir."""
+    return score_version != SURUM
+
+
+_SORGU = """
+    SELECT company_id, legal_name, tax_number, tax_office, mersis_number,
+           trade_registry_number, trade_registry_office, nace_code, nace_source,
+           address, primary_phone, primary_email, website_domain
+    FROM companies
+"""
+
+# D-249/2: satir basina UPDATE yasak. Tum puanlar tek ifadede yazilir.
+_YAZ = """
+    UPDATE companies c
+       SET identity_completeness = v.s, score_version = :v
+      FROM (SELECT unnest(CAST(:ids AS uuid[]))          AS cid,
+                   unnest(CAST(:skorlar AS numeric[]))   AS s) v
+     WHERE c.company_id = v.cid
+"""
 
 
 def recalc_quality_scores() -> int:
-    """Tum firmalar icin kalite puanini yeniden hesapla ve DB'ye yaz.
-
-    D-249/2: satir basina UPDATE yasak — tek toplu yazma.
-    D-250/3: is_ankara filtresi kaldirildi; bayat puan Ankara disinda da olusur.
-    """
+    """Tum firmalarin kimlik tamligini yeniden hesaplar ve toplu yazar."""
     engine = get_engine()
-    with engine.connect() as conn:
-        rows = conn.execute(text("""
-            SELECT company_id, legal_name, trade_name, tax_number,
-                   address, primary_phone, primary_email, website_domain,
-                   nace_code, osb_parcel
-            FROM companies
-        """)).mappings().all()
-
-        print(f"Toplam firma: {len(rows)}")
+    with engine.begin() as conn:
+        rows = conn.execute(text(_SORGU)).mappings().all()
         if not rows:
             return 0
-
-        veri = [{"cid": r["company_id"], "s": kalite_puani(dict(r))} for r in rows]
-        conn.execute(text(
-            "UPDATE companies SET data_quality_score = :s WHERE company_id = :cid"
-        ), veri)
-        conn.commit()
-        updated = len(veri)
-
-        # Ozet
-        avg = conn.execute(text(
-            "SELECT AVG(data_quality_score) FROM companies"
-        )).fetchone()[0]
-        print(f"Guncellenen: {updated}")
-        print(f"Ortalama kalite puani: {avg:.2f}")
-
-        # Dagilim
-        dist = conn.execute(text("""
-            SELECT CASE
-                WHEN data_quality_score >= 80 THEN '80-100'
-                WHEN data_quality_score >= 60 THEN '60-79'
-                WHEN data_quality_score >= 40 THEN '40-59'
-                WHEN data_quality_score >= 20 THEN '20-39'
-                ELSE '0-19'
-            END as bucket, COUNT(*) as cnt
-            FROM companies
-            GROUP BY 1 ORDER BY 1 DESC
-        """)).fetchall()
-        print("\nSkor Dagilimi:")
-        for bucket, cnt in dist:
-            print(f"  {bucket}: {cnt} firma")
-
-        return updated
-
-
-if __name__ == "__main__":
-    recalc_quality_scores()
+        conn.execute(
+            text(_YAZ),
+            {
+                "ids": [str(r["company_id"]) for r in rows],
+                "skorlar": [identity_completeness(dict(r)) for r in rows],
+                "v": SURUM,
+            },
+        )
+    return len(rows)

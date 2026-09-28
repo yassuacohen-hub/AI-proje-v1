@@ -2692,3 +2692,145 @@ yolunu da ayni turda arar.
 **Referans:** D-245, D-249, D-251, D-253, D-254. Arac:
 `.git/hooks/pre-commit`, `scripts/kodlama_denetim.py`, `scripts/goc_defteri.py`;
 mandal: `tests/test_goc_defteri.py`.
+
+---
+
+## D-256 — D-250 uygulandi: puan tek kapidan gecer, tavan ilan edilir (2026-09-28)
+
+**Baglam:** D-250 karari yaziliydi ama **uygulanmamisti**. Kolonlar (`identity_completeness`,
+`score_version`) ve kisitlar semada duruyordu; icini dolduran tek kapi yoktu ve
+puan yazan **en az 17 ayri yol** vardi. Bu tur karari koda cevirdi.
+
+### 1. Tek kapi: `etl/quality_recalc.py`
+
+`identity_completeness(row) -> 0.0..10.0`. Puan ureten baska yol yoktur.
+`AGIRLIKLAR` sozlugu **tek** agirlik beyanidir; `SURUM = "v1"`.
+
+Bir alan puan alabilmek icin **uc** sart birlikte gecerli olacak:
+1. Dolu (bos dize dolu sayilmaz),
+2. Kimlik alani ise **D-246 kapisindan** gecmis (`etl/kimlik_no.py`),
+3. **D-245** geregi kanit --- tahmin/varsayilan puan almaz
+   (`NACE_KANIT_KAYNAKLARI = {mersis, external}`; `sector_default`,
+   `title_default`, `predicted`, `fallback`, `unknown` = 0 puan).
+
+`alan_puanlari()` alan bazli dokumu ayrica dondurur; kayip tablosu buradan
+uretilir, ikinci bir formulden degil.
+
+### 2. Ikinci yollar kesildi --- **gocun tek basina yetmedigi yer, ikinci kez**
+
+D-255/6 dersi burada tekrar dogrulandi: kolon dogru, hesaplayici yanlissa
+bir sonraki tur yanlisi geri yazar. Bu turda kesilenler:
+
+| yol | ne yapiyordu | ne yapildi |
+|---|---|---|
+| `seed/seed_ankara_osb.py` | `round(60 + random.random()*35, 2)` --- puani **uyduruyordu** | uretim satiri kaldirildi (D-245) |
+| `etl/hayalet_kayit_temizle.py` | birlesmede `COALESCE` ile eski puani **tasiyordu** | tasima kesildi; birlesme sonrasi tek kapidan hesaplanir |
+| 15 adet `scripts/recalc*`,`p41_quality_boost*`,`p3_3_*` | her biri **kendi 0-100 formulunu** SQL'de yaziyordu | silindi |
+| `tests/company_master/test_quality_score.py` | silinmis modulu test ediyordu (kirik) | silindi |
+
+Kesme sonrasi 69 esleseme elle tarandi: **yazan yol kalmadi.** Kalanlar yalnizca
+okuyor (`check_*`, `debug_*`, panel sekmeleri, `tenant/health`) veya test
+fixture'i. `data_quality_toolkit/validator/quality_engine.py` **ayri sistemdir**,
+`companies.identity_completeness`'e dokunmaz; karistirilmayacak.
+
+### 3. Yazma tek ifadeyle (D-249/2)
+
+`recalc_quality_scores()` ilk halinde `executemany` idi --- 9412 ayri UPDATE.
+Gercek toplu yazmaya cevrildi:
+
+```sql
+UPDATE companies c SET identity_completeness = v.s, score_version = :v
+  FROM (SELECT unnest(CAST(:ids AS uuid[])), unnest(CAST(:skorlar AS numeric[]))) v
+ WHERE c.company_id = v.cid
+```
+
+**Kural:** "toplu yazma" = tek SQL ifadesi. `executemany` toplu **gonderimdir**,
+toplu yazma degil; D-249/2'yi karsilamaz.
+
+### 4. Mandal: 11 assert, kanca kurulu, **kirilarak** dogrulandi
+
+`tests/test_kalite_puani.py`, framework yok, `python -X utf8` ile kosar.
+Kapsanan: agirlik toplami tam 10.0 (kayan nokta), kimlik 6.0 + erisim 4.0,
+tam satir 10 / bos satir 0, dogrulanmamis deger 0 puan, tahmin NACE 0 puan,
+sicil no tek basina yetmez, bos dize dolu degil, 0-10 disina cikilamaz,
+surum uyusmazsa bayat, zenginlik verisi puana girmez, `normalize.py` kendi
+formulunu yazmaz.
+
+Kanca: `.pre-commit-config.yaml` + `.git/hooks/pre-commit`, **always_run**
+(DB'ye baglanmaz, 0.84 sn). D-255/3 geregi **kirma denemesi** yapildi:
+agirlik 0.3 -> 0.4 yapildiginda kanca cikis kodu **1**, saglam halde **0**.
+Mandal gercekten kosuyor.
+
+### 5. Puan dibe yakin cikti --- bu **dogru** olcumdur
+
+| Olcu | Deger |
+|---|---|
+| yazilan firma | 9412 (surum `v1`, bayat **0**) |
+| en az / en cok | 1.00 / **6.50** |
+| ortalama | **3.71** |
+| **ulasilabilir tavan** | **6.5 / 10** |
+
+Bant dagilimi (`width_bucket`): 1-2: 697, 2-3: 2155, 3-4: 1226, 4-5: 3021,
+5-6: 2309, 6-7: 4.
+
+**Ulasilabilir tavan kavrami:** **hicbir** firmanin alamadigi alanlarin agirligi
+kalici kayiptir --- `tax_office` 0.5 + `mersis_number` 1.0 +
+`trade_registry_number` 1.0 + `nace_code` 1.0 = **3.5 puan**, bugunku
+kaynaklarla erisilemez. Tavan panelde/raporda **ilan edilir**; yoksa 3.71
+"veri kotu" gibi okunur, oysa **kaynak yok**.
+
+### 6. Alan bazli kayip tablosu --- yatirimin nereye yapilacagini bu soyler
+
+9412 firma, toplam kayip 59167 puan.
+
+| alan | agirlik | puansiz firma | kayip | ort. katki |
+|---|---|---|---|---|
+| `tax_number` | 1.5 | 9407 | **14110.5** | 0.00 |
+| `mersis_number` | 1.0 | 9412 | 9412.0 | 0.00 |
+| `trade_registry_number` | 1.0 | 9412 | 9412.0 | 0.00 |
+| `nace_code` | 1.0 | 9412 | 9412.0 | 0.00 |
+| `address` | 1.5 | 3614 | 5421.0 | 0.92 |
+| `tax_office` | 0.5 | 9412 | 4706.0 | 0.00 |
+| `primary_email` | 0.7 | 5374 | 3761.8 | 0.30 |
+| `primary_phone` | 1.5 | 1161 | 1741.5 | 1.31 |
+| `website_domain` | 0.3 | 3966 | 1189.8 | 0.17 |
+| `legal_name` | 1.0 | 0 | 0.0 | 1.00 |
+
+**Tek hamlede en cok acan yatirim: MERSIS kaynagi.** MERSIS kaydi VKN, vergi
+dairesi, sicil no+dairesi ve NACE'yi **birlikte** tasir; baglanirsa
+1.5+0.5+1.0+1.0+1.0 = **5.0 puan** acilir ve tavan 6.5 -> 10.0 olur.
+Ikinci sirada adres (5421 puan, 3614 firma) --- ama tek alan, tavani yukseltmez.
+
+**Kural:** yatirim siralamasi "hangi alan bos" degil, **"hangi kaynak kac alani
+birden acar"** ile yapilir.
+
+### 7. Sema: yeni goc **gerekmedi** (D-253)
+
+Olculdu: goc disk = defter = 28; `0026_kimlik_kolonlari_ingilizce.sql` defterde;
+`identity_completeness` numeric + `score_version` text mevcut; CHECK kisitlari
+`companies_identity_completeness_range` (0-10) ve
+`companies_score_version_required` zaten kurulu. 9412 satirlik yazma hatasiz
+gecti --- yani kisitlar **fiilen** dogrulandi. Karar kapsaminda olmayan goc
+yazilmadi.
+
+### 8. Arac notu: `apply_diff` tekrar tekrar patladi, betik ilk seferde tuttu
+
+`seed_ankara_osb.py` ve `hayalet_kayit_temizle.py` satir aralari bos oldugu icin
+`apply_diff` 6 denemede tutmadi (96%/90%/85%/83%/48%). Cozum: `str.replace` +
+`assert t.count(eski) == 1` kullanan tek seferlik betik --- bos satir duzeninden
+bagimsiz ve **coklu eslesmede patlar**.
+
+**Kural:** ayni dosyada iki `apply_diff` denemesi tutmazsa ucuncusu denenmez;
+assert'li tek seferlik betige gecilir.
+
+### 9. Acik borc
+
+- **BORC-VKN-01:** 9412 firmanin **9407**'sinde dogrulanmis VKN yok. Tek basina
+  en buyuk kayip kalemi (14110.5 puan). D-250/3: kaynak baglaninca agirlik
+  1.5 -> 3.0 ve `SURUM` v2 olur; o an tum puanlar **bayat** isaretlenir.
+- **BORC-PANEL-TAVAN-01:** tavan (6.5/10) henuz panelde **yazmiyor**; yalnizca
+  bu kayitta ve raporda duruyor.
+
+**Referans:** D-245, D-246, D-249, D-250, D-251, D-253, D-255. Arac:
+`src/company_master/etl/quality_recalc.py`; mandal:
+`tests/test_kalite_puani.py`; kanca: `.git/hooks/pre-commit`.

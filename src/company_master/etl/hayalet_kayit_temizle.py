@@ -361,7 +361,8 @@ def run_cleanup(dry_run: bool = False, backup_path: Path | None = None) -> dict:
                     osb_id = COALESCE(:osb_id, osb_id),
                     nace_validity = COALESCE(NULLIF(:nace_validity, ''), nace_validity),
                     quarantine_reason = COALESCE(NULLIF(:quarantine_reason, ''), quarantine_reason),
-                    data_quality_score = COALESCE(:data_quality_score, data_quality_score),
+                    -- D-250: puan burada TASINMAZ; birlesme sonrasi
+                    -- identity_completeness tek kapidan hesaplanir.
                     entity_confidence = COALESCE(:entity_confidence, entity_confidence),
                     osb_parcel = COALESCE(NULLIF(:osb_parcel, ''), osb_parcel),
                     first_seen_at = COALESCE(:first_seen_at, first_seen_at),
@@ -379,7 +380,7 @@ def run_cleanup(dry_run: bool = False, backup_path: Path | None = None) -> dict:
                     "primary_email": keeper.primary_email, "description": keeper.description,
                     "is_ankara": keeper.is_ankara, "is_osb_member": keeper.is_osb_member,
                     "osb_id": keeper.osb_id, "nace_validity": keeper.nace_validity,
-                    "quarantine_reason": keeper.quarantine_reason, "data_quality_score": keeper.data_quality_score,
+                    "quarantine_reason": keeper.quarantine_reason,
                     "entity_confidence": keeper.entity_confidence,
                     "osb_parcel": keeper.osb_parcel,
                     "first_seen_at": keeper.first_seen_at, "last_verified_at": keeper.last_verified_at,
