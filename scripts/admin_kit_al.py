@@ -19,14 +19,14 @@ PANO_PATH = "data/orchestrator/task_board.json"
 def main(task_id):
     """Görev durumunu "alındı" olarak işle."""
     ajan = "utku"
-    
+
     try:
         with open(PANO_PATH, 'r', encoding='utf-8') as f:
             pano = json.load(f)
     except Exception as e:
         print(f"Hata: {PANO_PATH} oku: {e}")
         return False
-    
+
     # Görev bul
     gorev = None
     idx = -1
@@ -35,16 +35,16 @@ def main(task_id):
             gorev = g
             idx = i
             break
-    
+
     if not gorev:
         print(f"Hata: {task_id} pano'da bulunamadı")
         return False
-    
+
     # Durum güncelle
     gorev["durum"] = "alındı"
     gorev["baslangic"] = datetime.now().isoformat()
     pano[idx] = gorev
-    
+
     try:
         with open(PANO_PATH, 'w', encoding='utf-8') as f:
             json.dump(pano, f, ensure_ascii=False, indent=2)

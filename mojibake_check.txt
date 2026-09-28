@@ -1,0 +1,74 @@
+src/company_master/etl/nace_sozluk_yukle.py:5: 'D-234 kuralına göre: 4 kaynak birleştirir, seviye kısaltılmaz, upsert yapar\n'
+src/company_master/etl/nace_sozluk_yukle.py:7: '  1. data/nace/sektor_meslek_nace_2026-05_resmi.xlsx (esnaf/sanatkâr meslek kolları)\n'
+src/company_master/etl/nace_sozluk_yukle.py:35: '    # Önce yaygın encoding hatalarını düzelt\n'
+src/company_master/etl/nace_sozluk_yukle.py:38: "        'ı': 'i', 'İ': 'I',\n"
+src/company_master/etl/nace_sozluk_yukle.py:39: "        'ğ': 'g', 'Ğ': 'G',\n"
+src/company_master/etl/nace_sozluk_yukle.py:41: "        'ş': 's', 'Ş': 'S',\n"
+src/company_master/etl/nace_sozluk_yukle.py:44: '        # Yaygın mojibake düzeltmeleri\n'
+src/company_master/etl/nace_sozluk_yukle.py:45: "        'ÅŸ': 'ş', 'Å': 'İ', 'Ÿ': 'ş', 'ž': 'ş',\n"
+src/company_master/etl/nace_sozluk_yukle.py:46: "        'Đ': 'Ğ', 'đ': 'ğ', 'Ý': 'İ', 'ý': 'ı',\n"
+src/company_master/etl/nace_sozluk_yukle.py:56: '    """NACE kodunu normalize et (noktalı formatı koru)."""\n'
+src/company_master/etl/nace_sozluk_yukle.py:72: '    """NACE kodundan seviye çıkar."""\n'
+src/company_master/etl/nace_sozluk_yukle.py:90: '    """NACE kodundan parent kod çıkar."""\n'
+src/company_master/etl/nace_sozluk_yukle.py:109: '    """Kaynak 1: XLSX dosyasını oku - sektör/meslek/NACE üçlüsü.\n'
+src/company_master/etl/nace_sozluk_yukle.py:111: '    Hem yeni kayıtları hem de mevcut kayıtları (title güncellemesi için) döndürür.\n'
+src/company_master/etl/nace_sozluk_yukle.py:115: '        print(f"[UYARI] XLSX dosyası bulunamadı: {xlsx_path}")\n'
+src/company_master/etl/nace_sozluk_yukle.py:121: '    print(f"[BİLGİ] XLSX satır: {ws.max_row}, sütun: {ws.max_column}")\n'
+src/company_master/etl/nace_sozluk_yukle.py:126: "    # Parent kodlarını (level 4, 2) XLSX'ten topla - title ve sector_group ile birlikte\n"
+src/company_master/etl/nace_sozluk_yukle.py:131: '    # Tüm satırları tek geçişte işle\n'
+src/company_master/etl/nace_sozluk_yukle.py:155: '        # 4 haneli kodlar için sector_group (meslek tanımından da gelebilir)\n'
+src/company_master/etl/nace_sozluk_yukle.py:165: '        # 6 haneli kod kaydı (ana kayıt)\n'
+src/company_master/etl/nace_sozluk_yukle.py:177: "        # Parent kodlarını (level 4, 2) XLSX'ten topla - title ve sector_group ile birlikte\n"
+src/company_master/etl/nace_sozluk_yukle.py:179: '            # 4 haneli parent için - meslek tanımından title al\n'
+src/company_master/etl/nace_sozluk_yukle.py:200: '    # Parent level 4 kodları ekle (title ve sector_group dolu)\n'
+src/company_master/etl/nace_sozluk_yukle.py:213: '    # Parent level 2 kodları ekle\n'
+src/company_master/etl/nace_sozluk_yukle.py:226: "    # Sektör harfleri (level 1) - XLSX'ten sektör tanımını al\n"
+src/company_master/etl/nace_sozluk_yukle.py:228: "        # XLSX'ten bu sektör harfine ait tanımı bul\n"
+src/company_master/etl/nace_sozluk_yukle.py:248: '          f"{len([r for r in rows_data if r[\'source\']==\'xlsx_derived\'])} türetilmiş")\n'
+src/company_master/etl/nace_sozluk_yukle.py:256: '        print(f"[UYARI] JSON dosyası bulunamadı: {json_path}")\n'
+src/company_master/etl/nace_sozluk_yukle.py:299: '    print(f"[BİLGİ] turkiye_nace.json: {len(rows_data)} kayıt")\n'
+src/company_master/etl/nace_sozluk_yukle.py:307: '        print(f"[UYARI] JSON dosyası bulunamadı: {json_path}")\n'
+src/company_master/etl/nace_sozluk_yukle.py:362: '        # Class (level 6) - 01.11.01, 01.11.02... (noktalı 6 haneli)\n'
+src/company_master/etl/nace_sozluk_yukle.py:376: '    print(f"[BİLGİ] {json_name}: {len(rows_data)} kayıt")\n'
+src/company_master/etl/nace_sozluk_yukle.py:381: '    """Eksik title\'ları diğer kaynaklardan doldur (öncelik: xlsx > turkiye_nace > rev2-1 > rev2)."""\n'
+src/company_master/etl/nace_sozluk_yukle.py:382: "    # Title'ı olan kayıtları topla\n"
+src/company_master/etl/nace_sozluk_yukle.py:386: '    # Öncelik sırası\n'
+src/company_master/etl/nace_sozluk_yukle.py:416: "    # XLSX'ten gelen sektör/meslek bilgilerini kullanarak parent kodların title'larını doldur\n"
+src/company_master/etl/nace_sozluk_yukle.py:417: "    # XLSX'teki her satır hem 6 haneli kodu hem de sektör/meslek tanımını içeriyor\n"
+src/company_master/etl/nace_sozluk_yukle.py:418: '    # Bu tanımları parent kodlarına (level 4, 2, 1) da yay\n'
+src/company_master/etl/nace_sozluk_yukle.py:423: '    """NACE kodlarını veritabanına upsert et."""\n'
+src/company_master/etl/nace_sozluk_yukle.py:427: "    # Level'a göre sırala (parent önce gelsin)\n"
+src/company_master/etl/nace_sozluk_yukle.py:431: '    print(f"[BİLGİ] {len(records)} kayıt upsert ediliyor...")\n'
+src/company_master/etl/nace_sozluk_yukle.py:466: '                print(f"  İşlenen: {min(i+batch_size, len(records))}/{len(records)}")\n'
+src/company_master/etl/nace_sozluk_yukle.py:475: '    """Sonuçları doğrula."""\n'
+src/company_master/etl/nace_sozluk_yukle.py:480: '        # Seviye dağılımı\n'
+src/company_master/etl/nace_sozluk_yukle.py:488: '        # 47.79 kontrolü (türetilmiş)\n'
+src/company_master/etl/nace_sozluk_yukle.py:497: '        # Title boş olanlar\n'
+src/company_master/etl/nace_sozluk_yukle.py:522: '    print("VERI-NACE-SOZLUK-01: NACE Sözlüğü Yükleme - 4 Kaynak Birleşimi")\n'
+src/company_master/etl/nace_sozluk_yukle.py:524: '    print("D-234: Seviye korunur, referans birleşiktir (4 kaynak)")\n'
+src/company_master/etl/nace_sozluk_yukle.py:529: '    # Mevcut kodları al (sadece raporlama için)\n'
+src/company_master/etl/nace_sozluk_yukle.py:532: '    print(f"[BİLGİ] Mevcut Kayıt: {len(existing)}")\n'
+src/company_master/etl/nace_sozluk_yukle.py:536: '    # 4 Kaynağı sırayla oku\n'
+src/company_master/etl/nace_sozluk_yukle.py:549: "    # Eksik title'ları doldur\n"
+src/company_master/etl/nace_sozluk_yukle.py:550: '    print("\\n--- TITLE DOLDURMA (eksik parent kodları) ---")\n'
+src/company_master/etl/nace_sozluk_yukle.py:557: '    # Doğrulama\n'
+src/company_master/etl/nace_sozluk_yukle.py:561: '    print(f"Toplam kayıt: {results[\'total\']}")\n'
+src/company_master/etl/nace_sozluk_yukle.py:562: '    print("Seviye dağılımı:")\n'
+src/company_master/etl/nace_sozluk_yukle.py:569: '        print(f"47.79 (level 4, türetilmiş): {results[\'rec_4779\'][1]}")\n'
+src/company_master/etl/nace_sozluk_yukle.py:575: '    print(f"Title boş olan: {results[\'empty_titles\']}")\n'
+src/company_master/etl/nace_sozluk_yukle.py:595: '        print("[OK] 47.79 ayrı satır var (turetim calisti)")\n'
+Found ÅŸ in src/company_master/etl/nace_sozluk_yukle.py
+Found Å in src/company_master/etl/nace_sozluk_yukle.py
+Found Ÿ in src/company_master/etl/nace_sozluk_yukle.py
+Found ž in src/company_master/etl/nace_sozluk_yukle.py
+Found Đ in src/company_master/etl/nace_sozluk_yukle.py
+Found đ in src/company_master/etl/nace_sozluk_yukle.py
+Found Ý in src/company_master/etl/nace_sozluk_yukle.py
+Found ý in src/company_master/etl/nace_sozluk_yukle.py
+Found Â in src/company_master/etl/nace_sozluk_yukle.py
+Found İ in src/company_master/etl/nace_sozluk_yukle.py
+Found Ö in src/company_master/etl/nace_sozluk_yukle.py
+Found Ü in src/company_master/etl/nace_sozluk_yukle.py
+Found Ç in src/company_master/etl/nace_sozluk_yukle.py
+Found Ğ in src/company_master/etl/nace_sozluk_yukle.py
+Found Ş in src/company_master/etl/nace_sozluk_yukle.py

@@ -63,6 +63,8 @@ data/orchestrator/chat.json
 # D-186: otomatik zaman damgali yedekler ve yedek klasorleri repoya girmez
 data/orchestrator/*.bak
 data/orchestrator/_yedek_*/
+# D-242: yedekler/ tek yedek catisi. KVKK: vergi_no + e-posta icerir, repoya girmez.
+yedekler/
 # D-58: orkestrator devralma anahtari (gizli, repoya girmez)
 data/orchestrator/abrakadabra.key
 

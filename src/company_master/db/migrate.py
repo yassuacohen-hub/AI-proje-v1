@@ -37,17 +37,24 @@ def _pending_files(applied: set[str]) -> List[Path]:
     return [f for f in files if f.name not in applied]
 
 def _split_statements(sql: str) -> List[str]:
-    """Basit noktalı virgül ayırıcı; yorum satırlarını atar."""
-    statements: List[str] = []
-    for chunk in sql.split(";"):
-        lines = [
-            line for line in chunk.splitlines()
-            if line.strip() and not line.strip().startswith("--")
-        ]
-        stmt = "\n".join(lines).strip()
-        if stmt:
-            statements.append(stmt)
-    return statements
+    """Yorumları atar, SONRA noktalı virgülle böler.
+
+    D-251/3 — GOC-DEFTER-01'in kök nedeni buradaydı: eski hali önce bölüp
+    sonra yorumu atıyordu. Yorum içindeki tek bir ';' (0012'de vardı) deyimi
+    ortadan kesiyor, göç her denemede sözdizimi hatasıyla düşüyordu. Göç
+    uygulanamadığı için DDL elle çekildi, defter de yalan söylemeye başladı.
+
+    BEGIN/COMMIT atılır: çalıştırıcı kendi işlemini `engine.begin()` ile açar.
+    """
+    temiz = "\n".join(
+        satir.split("--")[0].rstrip() if "--" in satir else satir
+        for satir in sql.splitlines()
+        if satir.strip() and not satir.strip().startswith("--")
+    )
+    return [
+        s.strip() for s in temiz.split(";")
+        if s.strip() and s.strip().upper() not in ("BEGIN", "COMMIT")
+    ]
 
 def _engine_url(database_url: str | None = None) -> str:
     url = database_url or get_database_url()

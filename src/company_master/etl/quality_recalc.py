@@ -10,8 +10,17 @@ from sqlalchemy import text
 from company_master.db.connection import get_engine
 
 
-def _score(row: dict) -> float:
-    """Kalite skoru formulu (0-100)."""
+def kalite_puani(row: dict) -> float:
+    """Toplam kalite puani (0-100) — TEK KAPI (D-250).
+
+    Alan agirliklari: VKN 15, adres 15, telefon 15, e-posta 15, NACE 15,
+    web 10, OSB parsel 10, unvan 5.
+
+    Alt skorlar (tazelik, telefon bicimi, sosyal medya, kaynak cesitliligi,
+    calisan sayisi, is ilani) BU PUANA GIRMEZ — D-250/2. Sebep:
+    employee_count %100, job_postings %99.9 bos; puana katmak "veri yok"u
+    "kotu firma" diye yansitir (D-249 ihlali).
+    """
     score = 0.0
     # VKN (tax_number veya vergi_no) - 15 puan
     vkn = row.get("tax_number") or row.get("vergi_no") or ""
@@ -48,8 +57,15 @@ def _score(row: dict) -> float:
     return round(min(score, 100.0), 1)
 
 
+_score = kalite_puani  # geriye donuk ad
+
+
 def recalc_quality_scores() -> int:
-    """Tum firmalar icin kalite skorunu yeniden hesapla ve DB'ye yaz."""
+    """Tum firmalar icin kalite puanini yeniden hesapla ve DB'ye yaz.
+
+    D-249/2: satir basina UPDATE yasak — tek toplu yazma.
+    D-250/3: is_ankara filtresi kaldirildi; bayat puan Ankara disinda da olusur.
+    """
     engine = get_engine()
     with engine.connect() as conn:
         rows = conn.execute(text("""
@@ -57,30 +73,25 @@ def recalc_quality_scores() -> int:
                    adres, primary_phone, primary_email, website_domain, web_sitesi,
                    nace_code, osb_parsel
             FROM companies
-            WHERE is_ankara = TRUE
         """)).mappings().all()
 
         print(f"Toplam firma: {len(rows)}")
         if not rows:
             return 0
 
-        updated = 0
-        for r in rows:
-            row = dict(r)
-            score = _score(row)
-            conn.execute(text(
-                "UPDATE companies SET data_quality_score = :s WHERE company_id = :cid"
-            ), {"s": score, "cid": row["company_id"]})
-            updated += 1
-
+        veri = [{"cid": r["company_id"], "s": kalite_puani(dict(r))} for r in rows]
+        conn.execute(text(
+            "UPDATE companies SET data_quality_score = :s WHERE company_id = :cid"
+        ), veri)
         conn.commit()
+        updated = len(veri)
 
         # Ozet
         avg = conn.execute(text(
-            "SELECT AVG(data_quality_score) FROM companies WHERE is_ankara = TRUE"
+            "SELECT AVG(data_quality_score) FROM companies"
         )).fetchone()[0]
         print(f"Guncellenen: {updated}")
-        print(f"Ortalama kalite skoru: {avg:.2f}")
+        print(f"Ortalama kalite puani: {avg:.2f}")
 
         # Dagilim
         dist = conn.execute(text("""
@@ -91,7 +102,7 @@ def recalc_quality_scores() -> int:
                 WHEN data_quality_score >= 20 THEN '20-39'
                 ELSE '0-19'
             END as bucket, COUNT(*) as cnt
-            FROM companies WHERE is_ankara = TRUE
+            FROM companies
             GROUP BY 1 ORDER BY 1 DESC
         """)).fetchall()
         print("\nSkor Dagilimi:")

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-VERI-NACE-SOZLUK-01: Resmi NACE listesini nace_codes tablosuna yükle
-D-234 kuralına göre: 4 kaynak birleştirir, seviye kısaltılmaz, upsert yapar
+VERI-NACE-SOZLUK-01: Resmi NACE listesini nace_codes tablosuna yÃ¼kle
+D-234 kuralÄ±na gÃ¶re: 4 kaynak birleÅtirir, seviye kÄ±saltÄ±lmaz, upsert yapar
 Kaynaklar:
-  1. data/nace/sektor_meslek_nace_2026-05_resmi.xlsx (esnaf/sanatkâr meslek kolları)
+  1. data/nace/sektor_meslek_nace_2026-05_resmi.xlsx (esnaf/sanatkÃ¢r meslek kollarÄ±)
   2. data/nace/turkiye_nace.json (TR NACE, code_6digit + code)
   3. data/nace/nace-rev-2-1.json (AB Rev 2.1)
   4. data/nace/nace-rev-2.json (AB Rev 2)
@@ -29,23 +29,23 @@ from sqlalchemy import create_engine, text
 
 
 def clean_turkish_chars(text: str) -> str:
-    """Türkçe karakterleri normalize et (encoding düzeltmesi dahil)."""
+    """TÃ¼rkÃ§e karakterleri normalize et (encoding dÃ¼zeltmesi dahil)."""
     if not text:
         return ""
-    # Önce yaygın encoding hatalarını düzelt
+    # Ãnce yaygÄ±n encoding hatalarÄ±nÄ± dÃ¼zelt
     replacements = {
-        'â': 'a', 'Â': 'A',
-        'ı': 'i', 'İ': 'I',
-        'ğ': 'g', 'Ğ': 'G',
-        'ü': 'u', 'Ü': 'U',
-        'ş': 's', 'Ş': 'S',
-        'ö': 'o', 'Ö': 'O',
-        'ç': 'c', 'Ç': 'C',
-        # Yaygın mojibake düzeltmeleri
-        'ÅŸ': 'ş', 'Å': 'İ', 'Ÿ': 'ş', 'ž': 'ş',
-        'Đ': 'Ğ', 'đ': 'ğ', 'Ý': 'İ', 'ý': 'ı',
-        'Ö': 'Ö', 'ö': 'ö', 'Ü': 'Ü', 'ü': 'ü',
-        'Ç': 'Ç', 'ç': 'ç',
+        'Ã¢': 'a', 'Ã': 'A',
+        'Ä±': 'i', 'Ä°': 'I',
+        'Ä': 'g', 'Ä': 'G',
+        'Ã¼': 'u', 'Ã': 'U',
+        'Å': 's', 'Å': 'S',
+        'Ã¶': 'o', 'Ã': 'O',
+        'Ã§': 'c', 'Ã': 'C',
+        # YaygÄ±n mojibake dÃ¼zeltmeleri
+        'Å': 'Å', 'Ã': 'Ä°', 'Å¸': 'Å', 'Å¾': 'Å',
+        'Ä': 'Ä', 'Ä': 'Ä', 'Ã': 'Ä°', 'Ã½': 'Ä±',
+        'Ã': 'Ã', 'Ã¶': 'Ã¶', 'Ã': 'Ã', 'Ã¼': 'Ã¼',
+        'Ã': 'Ã', 'Ã§': 'Ã§',
     }
     for k, v in replacements.items():
         text = text.replace(k, v)
@@ -53,7 +53,7 @@ def clean_turkish_chars(text: str) -> str:
 
 
 def normalize_nace_code(code: str) -> str:
-    """NACE kodunu normalize et (noktalı formatı koru)."""
+    """NACE kodunu normalize et (noktalÄ± formatÄ± koru)."""
     if not code:
         return ""
     code = str(code).strip()
@@ -69,7 +69,7 @@ def normalize_nace_code(code: str) -> str:
 
 
 def extract_level(code: str) -> int:
-    """NACE kodundan seviye çıkar."""
+    """NACE kodundan seviye Ã§Ä±kar."""
     if not code:
         return 0
     code = str(code).strip()
@@ -87,7 +87,7 @@ def extract_level(code: str) -> int:
 
 
 def extract_parent_code(code: str) -> str | None:
-    """NACE kodundan parent kod çıkar."""
+    """NACE kodundan parent kod Ã§Ä±kar."""
     if not code:
         return None
     code = str(code).strip()
@@ -99,36 +99,36 @@ def extract_parent_code(code: str) -> str | None:
         parts = code.split('.')
         return parts[0]  # 47.79 -> 47
     elif code.isdigit() and len(code) == 2:
-        return None  # 2 haneli -> None (bölüm seviyesi)
+        return None  # 2 haneli -> None (bÃ¶lÃ¼m seviyesi)
     elif len(code) == 1:
         return None  # 1 haneli -> None
     return None
 
 
 def load_xlsx_source(engine, existing_codes: set) -> list[dict]:
-    """Kaynak 1: XLSX dosyasını oku - sektör/meslek/NACE üçlüsü.
+    """Kaynak 1: XLSX dosyasÄ±nÄ± oku - sektÃ¶r/meslek/NACE Ã¼Ã§lÃ¼sÃ¼.
 
-    Hem yeni kayıtları hem de mevcut kayıtları (title güncellemesi için) döndürür.
+    Hem yeni kayÄ±tlarÄ± hem de mevcut kayÄ±tlarÄ± (title gÃ¼ncellemesi iÃ§in) dÃ¶ndÃ¼rÃ¼r.
     """
     xlsx_path = PROJECT_ROOT / "data" / "nace" / "sektor_meslek_nace_2026-05_resmi.xlsx"
     if not xlsx_path.exists():
-        print(f"[UYARI] XLSX dosyası bulunamadı: {xlsx_path}")
+        print(f"[UYARI] XLSX dosyasÄ± bulunamadÄ±: {xlsx_path}")
         return []
 
-    print(f"[BİLGİ] XLSX okunuyor: {xlsx_path}")
+    print(f"[BÄ°LGÄ°] XLSX okunuyor: {xlsx_path}")
     wb = openpyxl.load_workbook(xlsx_path)
     ws = wb.active
-    print(f"[BİLGİ] XLSX satır: {ws.max_row}, sütun: {ws.max_column}")
+    print(f"[BÄ°LGÄ°] XLSX satÄ±r: {ws.max_row}, sÃ¼tun: {ws.max_column}")
 
     rows_data = []
     sector_group_map = {}  # nace_code (4/2/1 haneli) -> sector_group
 
-    # Parent kodlarını (level 4, 2) XLSX'ten topla - title ve sector_group ile birlikte
+    # Parent kodlarÄ±nÄ± (level 4, 2) XLSX'ten topla - title ve sector_group ile birlikte
     parent_l4_info = {}  # code -> {title, sector_group}
     parent_l2_info = {}
     sector_letters = set()
 
-    # Tüm satırları tek geçişte işle
+    # TÃ¼m satÄ±rlarÄ± tek geÃ§iÅte iÅle
     for row in ws.iter_rows(min_row=2, max_row=ws.max_row, values_only=True):
         sektor_kodu = clean_turkish_chars(str(row[0])) if row[0] else ""
         sektor_tanim = clean_turkish_chars(str(row[1])) if row[1] else ""
@@ -147,22 +147,22 @@ def load_xlsx_source(engine, existing_codes: set) -> list[dict]:
         level = extract_level(nace_code)
         parent_code = extract_parent_code(nace_code)
 
-        # Sektör harfi (level 1) - A, B, C, D...
+        # SektÃ¶r harfi (level 1) - A, B, C, D...
         if level == 1 and sektor_kodu:
             sector_letters.add(sektor_kodu.upper())
             sector_group_map[nace_code] = sektor_tanim
 
-        # 4 haneli kodlar için sector_group (meslek tanımından da gelebilir)
+        # 4 haneli kodlar iÃ§in sector_group (meslek tanÄ±mÄ±ndan da gelebilir)
         if parent_code:
             sector_group_map[parent_code] = sektor_tanim
 
-        # 2 haneli kodlar için sector_group
+        # 2 haneli kodlar iÃ§in sector_group
         if parent_code:
             parent2 = extract_parent_code(parent_code)
             if parent2:
                 sector_group_map[parent2] = sektor_tanim
 
-        # 6 haneli kod kaydı (ana kayıt)
+        # 6 haneli kod kaydÄ± (ana kayÄ±t)
         rows_data.append({
             'nace_code': nace_code,
             'version': '2026.01.01_Mayis2026',
@@ -174,15 +174,15 @@ def load_xlsx_source(engine, existing_codes: set) -> list[dict]:
             'source': 'xlsx_resmi',
         })
 
-        # Parent kodlarını (level 4, 2) XLSX'ten topla - title ve sector_group ile birlikte
+        # Parent kodlarÄ±nÄ± (level 4, 2) XLSX'ten topla - title ve sector_group ile birlikte
         if level == 6 and parent_code:
-            # 4 haneli parent için - meslek tanımından title al
+            # 4 haneli parent iÃ§in - meslek tanÄ±mÄ±ndan title al
             if parent_code not in parent_l4_info:
                 parent_l4_info[parent_code] = {
                     'title': meslek_tanim,
                     'sector_group': sektor_tanim
                 }
-            # 2 haneli parent için
+            # 2 haneli parent iÃ§in
             parent2 = extract_parent_code(parent_code)
             if parent2 and parent2 not in parent_l2_info:
                 parent_l2_info[parent2] = {
@@ -190,14 +190,14 @@ def load_xlsx_source(engine, existing_codes: set) -> list[dict]:
                     'sector_group': ''
                 }
         elif level == 4 and parent_code:
-            # 2 haneli parent için
+            # 2 haneli parent iÃ§in
             if parent_code not in parent_l2_info:
                 parent_l2_info[parent_code] = {
                     'title': meslek_tanim,
                     'sector_group': ''
                 }
 
-    # Parent level 4 kodları ekle (title ve sector_group dolu)
+    # Parent level 4 kodlarÄ± ekle (title ve sector_group dolu)
     for p4, info in parent_l4_info.items():
         rows_data.append({
             'nace_code': p4,
@@ -210,7 +210,7 @@ def load_xlsx_source(engine, existing_codes: set) -> list[dict]:
             'source': 'xlsx_derived',
         })
 
-    # Parent level 2 kodları ekle
+    # Parent level 2 kodlarÄ± ekle
     for p2, info in parent_l2_info.items():
         rows_data.append({
             'nace_code': p2,
@@ -223,9 +223,9 @@ def load_xlsx_source(engine, existing_codes: set) -> list[dict]:
             'source': 'xlsx_derived',
         })
 
-    # Sektör harfleri (level 1) - XLSX'ten sektör tanımını al
+    # SektÃ¶r harfleri (level 1) - XLSX'ten sektÃ¶r tanÄ±mÄ±nÄ± al
     for sl in sector_letters:
-        # XLSX'ten bu sektör harfine ait tanımı bul
+        # XLSX'ten bu sektÃ¶r harfine ait tanÄ±mÄ± bul
         sector_title = ''
         for row in ws.iter_rows(min_row=2, max_row=ws.max_row, values_only=True):
             sektor_kodu = clean_turkish_chars(str(row[0])) if row[0] else ""
@@ -244,19 +244,19 @@ def load_xlsx_source(engine, existing_codes: set) -> list[dict]:
             'source': 'xlsx_derived',
         })
 
-    print(f"[BİLGİ] XLSX: {len([r for r in rows_data if r['source']=='xlsx_resmi'])} ana, "
-          f"{len([r for r in rows_data if r['source']=='xlsx_derived'])} türetilmiş")
+    print(f"[BÄ°LGÄ°] XLSX: {len([r for r in rows_data if r['source']=='xlsx_resmi'])} ana, "
+          f"{len([r for r in rows_data if r['source']=='xlsx_derived'])} tÃ¼retilmiÅ")
     return rows_data
 
 
 def load_turkiye_nace_json(engine, existing_codes: set) -> list[dict]:
-    """Kaynak 2: turkiye_nace.json - code_6digit + code (4 haneli) çifti."""
+    """Kaynak 2: turkiye_nace.json - code_6digit + code (4 haneli) Ã§ifti."""
     json_path = PROJECT_ROOT / "data" / "nace" / "turkiye_nace.json"
     if not json_path.exists():
-        print(f"[UYARI] JSON dosyası bulunamadı: {json_path}")
+        print(f"[UYARI] JSON dosyasÄ± bulunamadÄ±: {json_path}")
         return []
 
-    print(f"[BİLGİ] turkiye_nace.json okunuyor...")
+    print(f"[BÄ°LGÄ°] turkiye_nace.json okunuyor...")
     with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
@@ -296,7 +296,7 @@ def load_turkiye_nace_json(engine, existing_codes: set) -> list[dict]:
                 'source': 'turkiye_nace_json',
             })
 
-    print(f"[BİLGİ] turkiye_nace.json: {len(rows_data)} kayıt")
+    print(f"[BÄ°LGÄ°] turkiye_nace.json: {len(rows_data)} kayÄ±t")
     return rows_data
 
 
@@ -304,10 +304,10 @@ def load_nace_rev_json(engine, existing_codes: set, json_name: str, version: str
     """Kaynak 3/4: nace-rev-2-1.json veya nace-rev-2.json - Section/Division/Group/Class."""
     json_path = PROJECT_ROOT / "data" / "nace" / json_name
     if not json_path.exists():
-        print(f"[UYARI] JSON dosyası bulunamadı: {json_path}")
+        print(f"[UYARI] JSON dosyasÄ± bulunamadÄ±: {json_path}")
         return []
 
-    print(f"[BİLGİ] {json_name} okunuyor...")
+    print(f"[BÄ°LGÄ°] {json_name} okunuyor...")
     with open(json_path, 'r', encoding='utf-8') as f:
         data = json.load(f)
 
@@ -359,7 +359,7 @@ def load_nace_rev_json(engine, existing_codes: set, json_name: str, version: str
                 'source': json_name,
             })
 
-        # Class (level 6) - 01.11.01, 01.11.02... (noktalı 6 haneli)
+        # Class (level 6) - 01.11.01, 01.11.02... (noktalÄ± 6 haneli)
         if class_code:
             class_norm = normalize_nace_code(class_code)
             rows_data.append({
@@ -373,17 +373,17 @@ def load_nace_rev_json(engine, existing_codes: set, json_name: str, version: str
                 'source': json_name,
             })
 
-    print(f"[BİLGİ] {json_name}: {len(rows_data)} kayıt")
+    print(f"[BÄ°LGÄ°] {json_name}: {len(rows_data)} kayÄ±t")
     return rows_data
 
 
 def fill_missing_titles(engine, all_records: list[dict]) -> list[dict]:
-    """Eksik title'ları diğer kaynaklardan doldur (öncelik: xlsx > turkiye_nace > rev2-1 > rev2)."""
-    # Title'ı olan kayıtları topla
+    """Eksik title'larÄ± diÄer kaynaklardan doldur (Ã¶ncelik: xlsx > turkiye_nace > rev2-1 > rev2)."""
+    # Title'Ä± olan kayÄ±tlarÄ± topla
     title_map = {}
     sector_group_map = {}
 
-    # Öncelik sırası
+    # Ãncelik sÄ±rasÄ±
     source_priority = {
         'xlsx_resmi': 1,
         'xlsx_derived': 2,
@@ -413,22 +413,22 @@ def fill_missing_titles(engine, all_records: list[dict]) -> list[dict]:
         if not record.get('sector_group') and code in sector_group_map:
             record['sector_group'] = sector_group_map[code][0]
 
-    # XLSX'ten gelen sektör/meslek bilgilerini kullanarak parent kodların title'larını doldur
-    # XLSX'teki her satır hem 6 haneli kodu hem de sektör/meslek tanımını içeriyor
-    # Bu tanımları parent kodlarına (level 4, 2, 1) da yay
+    # XLSX'ten gelen sektÃ¶r/meslek bilgilerini kullanarak parent kodlarÄ±n title'larÄ±nÄ± doldur
+    # XLSX'teki her satÄ±r hem 6 haneli kodu hem de sektÃ¶r/meslek tanÄ±mÄ±nÄ± iÃ§eriyor
+    # Bu tanÄ±mlarÄ± parent kodlarÄ±na (level 4, 2, 1) da yay
     return all_records
 
 
 def upsert_nace_codes(engine, records: list[dict]) -> tuple[int, int]:
-    """NACE kodlarını veritabanına upsert et."""
+    """NACE kodlarÄ±nÄ± veritabanÄ±na upsert et."""
     if not records:
         return 0, 0
 
-    # Level'a göre sırala (parent önce gelsin)
+    # Level'a gÃ¶re sÄ±rala (parent Ã¶nce gelsin)
     level_order = {1: 0, 2: 1, 4: 2, 6: 3}
     records.sort(key=lambda x: (level_order.get(x.get('level', 99), 99), x['nace_code']))
 
-    print(f"[BİLGİ] {len(records)} kayıt upsert ediliyor...")
+    print(f"[BÄ°LGÄ°] {len(records)} kayÄ±t upsert ediliyor...")
 
     processed = 0
     errors = 0
@@ -463,7 +463,7 @@ def upsert_nace_codes(engine, records: list[dict]) -> tuple[int, int]:
                     )
             processed += len(batch)
             if (i // batch_size + 1) % 20 == 0:
-                print(f"  İşlenen: {min(i+batch_size, len(records))}/{len(records)}")
+                print(f"  Ä°Ålenen: {min(i+batch_size, len(records))}/{len(records)}")
         except Exception as e:
             print(f"  [HATA] Batch {i//batch_size + 1}: {e}")
             errors += len(batch)
@@ -472,29 +472,29 @@ def upsert_nace_codes(engine, records: list[dict]) -> tuple[int, int]:
 
 
 def verify_results(engine) -> dict:
-    """Sonuçları doğrula."""
+    """SonuÃ§larÄ± doÄrula."""
     with engine.connect() as conn:
         # Toplam
         total = conn.execute(text("SELECT count(*) FROM nace_codes")).scalar()
 
-        # Seviye dağılımı
+        # Seviye daÄÄ±lÄ±mÄ±
         level_dist = conn.execute(text("""
             SELECT level, count(*) FROM nace_codes GROUP BY level ORDER BY level
         """)).fetchall()
 
-        # 47.79.04 kontrolü
+        # 47.79.04 kontrolÃ¼
         rec_477904 = conn.execute(text("SELECT nace_code, title, level FROM nace_codes WHERE nace_code='47.79.04'")).fetchone()
 
-        # 47.79 kontrolü (türetilmiş)
+        # 47.79 kontrolÃ¼ (tÃ¼retilmiÅ)
         rec_4779 = conn.execute(text("SELECT nace_code, title, level FROM nace_codes WHERE nace_code='47.79'")).fetchone()
 
-        # 29.10, 62.01, 41.10 kontrolü (xlsx'te olmayanlar)
+        # 29.10, 62.01, 41.10 kontrolÃ¼ (xlsx'te olmayanlar)
         missing_check = conn.execute(text("""
             SELECT nace_code, title, level FROM nace_codes
             WHERE nace_code IN ('29.10', '62.01', '62.09', '41.10', '29.10.01')
         """)).fetchall()
 
-        # Title boş olanlar
+        # Title boÅ olanlar
         empty_titles = conn.execute(text("""
             SELECT count(*) FROM nace_codes WHERE title IS NULL OR title = ''
         """)).scalar()
@@ -519,22 +519,22 @@ def verify_results(engine) -> dict:
 
 def main():
     print("=" * 70)
-    print("VERI-NACE-SOZLUK-01: NACE Sözlüğü Yükleme - 4 Kaynak Birleşimi")
+    print("VERI-NACE-SOZLUK-01: NACE SÃ¶zlÃ¼ÄÃ¼ YÃ¼kleme - 4 Kaynak BirleÅimi")
     print("=" * 70)
-    print("D-234: Seviye korunur, referans birleşiktir (4 kaynak)")
+    print("D-234: Seviye korunur, referans birleÅiktir (4 kaynak)")
     print()
 
     engine = create_engine(DB_URL)
 
-    # Mevcut kodları al (sadece raporlama için)
+    # Mevcut kodlarÄ± al (sadece raporlama iÃ§in)
     with engine.connect() as conn:
         existing = {row[0] for row in conn.execute(text("SELECT nace_code FROM nace_codes")).fetchall()}
-    print(f"[BİLGİ] Mevcut Kayıt: {len(existing)}")
+    print(f"[BÄ°LGÄ°] Mevcut KayÄ±t: {len(existing)}")
 
     all_records = []
 
-    # 4 Kaynağı sırayla oku
-    print("\n--- KAYNAK 1: XLSX (Resmi Türkiye NACE - Esnaf/Sanatkâr) ---")
+    # 4 KaynaÄÄ± sÄ±rayla oku
+    print("\n--- KAYNAK 1: XLSX (Resmi TÃ¼rkiye NACE - Esnaf/SanatkÃ¢r) ---")
     all_records.extend(load_xlsx_source(engine, existing))
 
     print("\n--- KAYNAK 2: turkiye_nace.json (TR NACE) ---")
@@ -546,37 +546,37 @@ def main():
     print("\n--- KAYNAK 4: nace-rev-2.json (AB Rev 2) ---")
     all_records.extend(load_nace_rev_json(engine, existing, 'nace-rev-2.json', 'EU_NACE_Rev2'))
 
-    # Eksik title'ları doldur
-    print("\n--- TITLE DOLDURMA (eksik parent kodları) ---")
+    # Eksik title'larÄ± doldur
+    print("\n--- TITLE DOLDURMA (eksik parent kodlarÄ±) ---")
     all_records = fill_missing_titles(engine, all_records)
 
     # Upsert
-    print(f"\n--- TOPLAM {len(all_records)} KAYIT UPSERT EDİLİYOR ---")
+    print(f"\n--- TOPLAM {len(all_records)} KAYIT UPSERT EDÄ°LÄ°YOR ---")
     processed, errors = upsert_nace_codes(engine, all_records)
 
-    # Doğrulama
-    print("\n--- DOĞRULAMA ---")
+    # DoÄrulama
+    print("\n--- DOÄRULAMA ---")
     results = verify_results(engine)
 
-    print(f"Toplam kayıt: {results['total']}")
-    print("Seviye dağılımı:")
+    print(f"Toplam kayÄ±t: {results['total']}")
+    print("Seviye daÄÄ±lÄ±mÄ±:")
     for level, count in results['level_dist']:
         print(f"  Level {level}: {count}")
 
     if results['rec_477904']:
         print(f"47.79.04 (level 6): {results['rec_477904'][1]}")
     if results['rec_4779']:
-        print(f"47.79 (level 4, türetilmiş): {results['rec_4779'][1]}")
+        print(f"47.79 (level 4, tÃ¼retilmiÅ): {results['rec_4779'][1]}")
 
-    print("Eksik kod kontrolü (xlsx'te olmayanlar):")
+    print("Eksik kod kontrolÃ¼ (xlsx'te olmayanlar):")
     for m in results['missing_check']:
         print(f"  {m[0]} (level {m[2]}): {m[1]}")
 
-    print(f"Title boş olan: {results['empty_titles']}")
+    print(f"Title boÅ olan: {results['empty_titles']}")
     print(f"Yetim kod (parent eksik): {results['orphan']}")
 
-    # Kabul ölçütleri
-    print("\n--- KABUL ÖLÇÜTLERİ ---")
+    # Kabul Ã¶lÃ§Ã¼tleri
+    print("\n--- KABUL ÃLÃÃTLERÄ° ---")
     ok = True
     if results['total'] <= 0:
         print("[FAIL] count(*) > 0")
@@ -592,7 +592,7 @@ def main():
         print(f"[OK] Seviyeler dolu: {level_counts}")
 
     if results['rec_4779'] and results['rec_4779'][1]:
-        print("[OK] 47.79 ayrı satır var (turetim calisti)")
+        print("[OK] 47.79 ayrÄ± satÄ±r var (turetim calisti)")
     else:
         print("[FAIL] 47.79 turetilmis satir eksik/bos")
         ok = False

@@ -135,7 +135,7 @@ SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_
 | VERI-NACE-KOLON-01 | nace_validity kolonu duzeltme: 86 satir duzeltme, nace_validity gecerlilik etiketi (unknown/medium/fallback) | 2026-09-27 |
 | VERI-NACE-TEMIZ-01 | Sektor sayaci kirlenmesi temizlendi: 13 gecersiz kod (1163, 410, 780, 794, 757, 110, 114, 127, 192, 339, 380, 390, 410, 752, 757, 780, 794, 757, 339, 410), 555 firma NULL'a cekildi, invalid_cleared isaretlendi | 2026-09-27 |
 | VERI-NACE-KOLON-01 | nace_validity kolonu duzeltme: 86 satir duzeltme, nace_validity gecerlilik etiketi (unknown/medium/fallback) | 2026-09-27 |
-| VERI-HAYALET-TEMIZ-01 | 4591 hayalet kayit temizlendi: companies.legal_name UNIQUE kısıt (migration 0022), vergi_no korundu (774), alanlar birlestirildi, yedek alindi | 2026-09-27 |
+| VERI-HAYALET-TEMIZ-01 | 4591 hayalet kayit temizlendi, UNIQUE kisit kuruldu. Kusur: silme yedeksiz yapildi (D-244). vergi_no 774->761 farki kayip degil, mukerrer sayim erimesi. Detay: hubs/VERI_KALITESI_HUB.md | 2026-09-27 |
 | TEST-BACKLOG-20 | Tam suite 20 failed -> 0: A=9 migration down, B=3 sayfa iskeleti, C=3 log, D=2 API rota, E=2 denetim, F=1 ayar; 6 faz, tek brif | 2026-09-27 |
 | ADMIN-UX-GELIR-GRUP-01 | Gelir grubu: GRUP_GELIR + executive+maliyet sekmeleri (ust=gelir, sira=1/2) | 2026-09-25 |
 | UI-ADMIN-FEATURE-FLAG-25 | Feature Flag sekmesi: render_feature_flags_tab, 4 flag, audit trail, testler | 2026-09-25 |

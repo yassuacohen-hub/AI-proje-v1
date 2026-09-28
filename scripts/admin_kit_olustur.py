@@ -124,10 +124,10 @@ def main():
     except json.JSONDecodeError as e:
         print(f"Hata: {PANO_PATH} JSON parse hatası: {e}")
         return False
-    
+
     # Var olan görev ID'lerini kontrol et
     var_olan_ids = {g.get("task_id") for g in pano}
-    
+
     # Eklenecek görevleri say
     eklenen = 0
     for gorev in ADMIN_KIT_GOREVLER:
@@ -138,7 +138,7 @@ def main():
             print(f"✓ {task_id} panoya eklendi")
         else:
             print(f"⚠ {task_id} zaten panoda var, atlandı")
-    
+
     # Pano JSON'ını yaz
     try:
         with open(PANO_PATH, 'w', encoding='utf-8') as f:

@@ -29,6 +29,8 @@ __all__ = [
     "ayarlari_getir",
     "ayarlari_sifirla",
     "kvkk_maske_acik",
+    "tckn_kullaniciya_gorunur",
+    "tckn_sun",
     "ayarlari_yaz",
     "dogrula",
     "gruplar",
@@ -135,6 +137,18 @@ AYAR_SEMASI: Final[tuple[AyarTanimi, ...]] = (
         varsayilan=True,
         grup="Veri",
         aciklama="Telefon ve e-posta alanlarını maskeli gösterir. Kapatmak yetki gerektirir.",
+    ),
+    AyarTanimi(
+        anahtar="tckn_kullaniciya_gorunur",
+        etiket="TCKN kullanıcı panelinde görünsün",
+        tip="bool",
+        varsayilan=False,
+        grup="Veri",
+        aciklama=(
+            "Şahıs işletmelerinin T.C. kimlik numarasını KULLANICI panelinde açık "
+            "gösterir. Kapalıyken maskelenir. Admin panelinde her hâlde açıktır. "
+            "Varsayılan KAPALI: kişisel veriyi göstermek bilinçli bir seçim olmalı."
+        ),
     ),
     AyarTanimi(
         anahtar="disa_aktarim_bicimi",
@@ -356,3 +370,32 @@ def kvkk_maske_acik(kullanici_id: str, dizin: Path | None = None) -> bool:
     """Kullanıcının KVKK maskeleme ayarının etkin olup olmadığını döndürür."""
     result = ayarlari_getir(kullanici_id, dizin)
     return bool(result.get("kvkk_maskeleme", True))
+
+
+def tckn_kullaniciya_gorunur(kullanici_id: str, dizin: Path | None = None) -> bool:
+    """Kullanıcı panelinde TCKN açık gösterilecek mi? Varsayılan False."""
+    ayarlar = ayarlari_getir(kullanici_id, dizin)
+    return bool(ayarlar.get("tckn_kullaniciya_gorunur", False))
+
+
+def tckn_sun(
+    tckn: str | None,
+    kullanici_id: str,
+    *,
+    admin: bool = False,
+    dizin: Path | None = None,
+) -> str | None:
+    """TCKN'yi role ve ayara göre açık ya da maskeli döndürür.
+
+    - `admin=True`  -> her zaman açık (ürün sahibi kararı: admin hepsini görür).
+    - `admin=False` -> `tckn_kullaniciya_gorunur` ayarına bakar; kapalıysa maskeli.
+
+    Gösterim tek kapıdan geçer (K-1): ekranlar ham `tckn` yazmaz, bu fonksiyonu
+    çağırır. Böylece düğme kapatıldığında tüm kullanıcı ekranları birlikte
+    maskelenir; bir ekranın maskelemeyi unutması mümkün olmaz.
+    """
+    if not tckn:
+        return None
+    if admin or tckn_kullaniciya_gorunur(kullanici_id, dizin):
+        return tckn
+    return "•" * len(tckn)

@@ -16,6 +16,8 @@ from company_master.settings.user_settings import (
     ayarlari_yaz,
     dogrula,
     gruplar,
+    tckn_kullaniciya_gorunur,
+    tckn_sun,
     varsayilanlar,
 )
 
@@ -29,5 +31,7 @@ __all__ = [
     "ayarlari_yaz",
     "dogrula",
     "gruplar",
+    "tckn_kullaniciya_gorunur",
+    "tckn_sun",
     "varsayilanlar",
 ]

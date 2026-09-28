@@ -23,7 +23,7 @@ def main():
     except Exception as e:
         print(f"Hata: {PANO_PATH} oku: {e}")
         return False
-    
+
     degisiklik = 0
     for gorev in pano:
         brief = gorev.get("brief", "")
@@ -32,11 +32,11 @@ def main():
             gorev["brief"] = brief.replace("Huginn Data Insights/", "")
             degisiklik += 1
             print(f"Düzelt: {gorev.get('task_id')} -> {gorev['brief']}")
-    
+
     if degisiklik == 0:
         print("Düzeltme yok, tüm brief yolları OK")
         return True
-    
+
     try:
         with open(PANO_PATH, 'w', encoding='utf-8') as f:
             json.dump(pano, f, ensure_ascii=False, indent=2)

@@ -64,8 +64,11 @@ def calculate_social_media_score(social_media: dict | None) -> int:
         return 5
 
 
-def calculate_source_diversity_score(source_count: int) -> int:
-    if source_count <= 1:
+def calculate_source_diversity_score(source_count: int | None) -> int | None:
+    """D-249: veri yoksa NULL. 0 degeri 'tek kaynaktan geldi' demektir."""
+    if source_count is None or source_count <= 0:
+        return None
+    if source_count == 1:
         return 0
     elif source_count == 2:
         return 2
@@ -75,7 +78,10 @@ def calculate_source_diversity_score(source_count: int) -> int:
         return 5
 
 
-def calculate_job_postings_score(job_count: int) -> int:
+def calculate_job_postings_score(job_count: int | None) -> int | None:
+    """D-249: is ilani verisi yoksa NULL; 0 'aradik, ilan yok' demektir."""
+    if job_count is None:
+        return None
     if job_count <= 0:
         return 0
     elif job_count <= 2:
@@ -90,8 +96,11 @@ def calculate_job_postings_score(job_count: int) -> int:
         return 8
 
 
-def calculate_employee_count_score(employee_count: int | None) -> int:
-    if not employee_count or employee_count <= 0:
+def calculate_employee_count_score(employee_count: int | None) -> int | None:
+    """D-249: calisan sayisi bilinmiyorsa NULL, 0 puan degil."""
+    if employee_count is None:
+        return None
+    if employee_count <= 0:
         return 0
     elif employee_count <= 10:
         return 2
@@ -115,59 +124,81 @@ def calculate_email_validity_score(email: str | None) -> int:
     return 0
 
 
+def _sosyal_medya_coz(deger: Any) -> dict:
+    if not deger:
+        return {}
+    if isinstance(deger, dict):
+        return deger
+    try:
+        cozulen = json.loads(deger)
+    except Exception:
+        return {}
+    return cozulen if isinstance(cozulen, dict) else {}
+
+
 def run_all_metrics_update() -> dict[str, int]:
+    """D-249: her skor tek toplu UPDATE ile yazilir.
+
+    Onceki hali firma basina ayri UPDATE atiyordu (9412 x 7 ~ 66 bin tur);
+    tek islem icinde saatler suruyordu. Hesap mantigi Python'da kalir,
+    yazma executemany ile tek tura duser.
+    """
     engine = get_engine()
-    stats = {"data_freshness": 0, "phone_format": 0, "social_media": 0,
-             "source_diversity": 0, "job_postings": 0, "employee_count": 0, "email_valid": 0}
+    # (istatistik adi, kolon, kaynak sorgusu, satirdan puan ureten islev)
+    isler: list[tuple[str, str, str, Any]] = [
+        ("data_freshness", "data_freshness_score",
+         "SELECT company_id, last_verified_at AS v FROM companies",
+         calculate_data_freshness_score),
+        ("phone_format", "phone_format_score",
+         "SELECT company_id, primary_phone AS v FROM companies",
+         calculate_phone_format_score),
+        ("email_valid", "email_validity_score",
+         "SELECT company_id, primary_email AS v FROM companies",
+         calculate_email_validity_score),
+        ("employee_count", "employee_count_score",
+         "SELECT company_id, employee_count AS v FROM companies",
+         calculate_employee_count_score),
+        ("social_media", "social_media_score",
+         "SELECT c.company_id, sr.raw_payload->>'sosyal_medya' AS v"
+         " FROM companies c"
+         " JOIN source_records sr ON sr.source_record_id = c.source_record_id",
+         lambda d: calculate_social_media_score(_sosyal_medya_coz(d))),
+        # D-249/2: dogru bag source_records.company_id. Eski sorgu
+        # companies.source_record_id uzerinden gidiyordu; o tanim geregi tek
+        # kayit dondurur, bu yuzden skor 9412 satirda sabit 0 kaliyordu.
+        ("source_diversity", "source_diversity_score",
+         "SELECT c.company_id, COUNT(DISTINCT sr.source_id) AS v"
+         " FROM companies c"
+         " LEFT JOIN source_records sr ON sr.company_id = c.company_id"
+         " GROUP BY c.company_id",
+         calculate_source_diversity_score),
+    ]
+    stats: dict[str, int] = {}
     with engine.begin() as conn:
-        rows = conn.execute(text("SELECT company_id, last_verified_at FROM companies")).mappings().all()
-        for row in rows:
-            score = calculate_data_freshness_score(row["last_verified_at"])
-            conn.execute(text("UPDATE companies SET data_freshness_score = :s WHERE company_id = :id"), {"s": score, "id": row["company_id"]})
-            stats["data_freshness"] += 1
-        rows = conn.execute(text("SELECT company_id, primary_phone FROM companies")).mappings().all()
-        for row in rows:
-            score = calculate_phone_format_score(row["primary_phone"])
-            conn.execute(text("UPDATE companies SET phone_format_score = :s WHERE company_id = :id"), {"s": score, "id": row["company_id"]})
-            stats["phone_format"] += 1
-        rows = conn.execute(text("""
-            SELECT c.company_id, sr.raw_payload->>"sosyal_medya" as social_media
+        for ad, kolon, sorgu, hesapla in isler:
+            satirlar = conn.execute(text(sorgu)).mappings().all()
+            veri = [{"id": r["company_id"], "s": hesapla(r["v"])} for r in satirlar]
+            if veri:
+                conn.execute(
+                    text(f"UPDATE companies SET {kolon} = :s WHERE company_id = :id"),
+                    veri,
+                )
+            stats[ad] = len(veri)
+        # D-249/1: bu dongu hic yazilmamisti, kolon DEFAULT 0 ile dolu sanilirdi.
+        satirlar = conn.execute(text("""
+            SELECT c.company_id, COUNT(j.job_posting_id) AS v
             FROM companies c
-            JOIN source_records sr ON sr.source_record_id = c.source_record_id
-        """)).mappings().all()
-        for row in rows:
-            social_media = row["social_media"]
-            if social_media:
-                try:
-                    sm_dict = json.loads(social_media) if isinstance(social_media, str) else social_media
-                except Exception:
-                    sm_dict = {}
-            else:
-                sm_dict = {}
-            score = calculate_social_media_score(sm_dict)
-            conn.execute(text("UPDATE companies SET social_media_score = :s WHERE company_id = :id"), {"s": score, "id": row["company_id"]})
-            stats["social_media"] += 1
-        rows = conn.execute(text("""
-            SELECT c.company_id, COUNT(DISTINCT s.source_id) as src_count
-            FROM companies c
-            JOIN source_records sr ON sr.source_record_id = c.source_record_id
-            JOIN sources s ON s.source_id = sr.source_id
+            LEFT JOIN job_postings j ON j.company_id = c.company_id
             GROUP BY c.company_id
         """)).mappings().all()
-        for row in rows:
-            score = calculate_source_diversity_score(row["src_count"])
-            conn.execute(text("UPDATE companies SET source_diversity_score = :s WHERE company_id = :id"), {"s": score, "id": row["company_id"]})
-            stats["source_diversity"] += 1
-        rows = conn.execute(text("SELECT company_id, employee_count FROM companies")).mappings().all()
-        for row in rows:
-            score = calculate_employee_count_score(row["employee_count"])
-            conn.execute(text("UPDATE companies SET employee_count_score = :s WHERE company_id = :id"), {"s": score, "id": row["company_id"]})
-            stats["employee_count"] += 1
-        rows = conn.execute(text("SELECT company_id, primary_email FROM companies")).mappings().all()
-        for row in rows:
-            score = calculate_email_validity_score(row["primary_email"])
-            conn.execute(text("UPDATE companies SET email_validity_score = :s WHERE company_id = :id"), {"s": score, "id": row["company_id"]})
-            stats["email_valid"] += 1
+        veri = [{"id": r["company_id"], "n": r["v"] or None,
+                 "s": calculate_job_postings_score(r["v"] or None)} for r in satirlar]
+        if veri:
+            conn.execute(text(
+                "UPDATE companies SET job_postings_count = :n, job_postings_score = :s"
+                " WHERE company_id = :id"
+            ), veri)
+        stats["job_postings"] = len(veri)
     return stats
 
 

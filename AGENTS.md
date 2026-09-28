@@ -1890,3 +1890,599 @@ niyeti anlatıp uygulamayı atlayan yorum yanlış bilgidir.
   boş; prova diske yazarsa kırmızı yanar.
 - **Referans:** D-242 (yedek tek çatı `yedekler/`), D-211 (kural çalıştırılabilir
   olmalı), D-66 (brif maddesi ölçülmüş değere dayanır).
+
+### D-244 — Canlı veritabanı yıkıcı iş: yedek dosyası kanıt, "yapıldı" beyanı değil
+
+**Karar.** Üretim veritabanında satır silen/güncelleyen hiçbir iş, `yedekler/`
+altında **o işe ait yedek dosyası diskte durmadan** `done` olamaz. Kapanış
+kanıtı üç parçadır ve üçü de brife yazılır: (1) yedek dosya yolu + satır
+sayısı, (2) işlem öncesi/sonrası `COUNT(*)`, (3) korunması vaat edilen alanın
+öncesi/sonrası sayısı. Kanıtı üretilemeyen iş `blocked` olur, `review` olmaz.
+
+**Neden — KAHİN ölçümü (2026-09-27, D-243'ün devamı).** D-243'te "gerçek
+temizlik hiç çalıştırılmamıştı" diye yazdım. Canlı Supabase'i ölçünce tablo
+tersine döndü: temizlik **çalıştırılmış**. `companies` **9412** satır,
+`legal_name` fazlalığı **0**, `uq_companies_legal_name` index **mevcut** —
+yani 4591 satır silinmiş ve migration 0022 uygulanmış. Ama:
+
+- `yedekler/` dizini **hiç yoktu**; diskteki tek yedek D-243'te bulunan
+  3 satırlık test verisiydi ve o da git'ten silinmişti.
+- Silinen 4591 satır **hiçbir yerden geri getirilemiyor**. Ham kazı dosyaları
+  kurtarma kaynağı değil: `data/aso/*` 0, `data/baskent/*` 0,
+  `data/ivedik/*` 0, `data/merged/multi_osb_merged.jsonl` 0 — hiçbirinde
+  `vergi_no` yok. Vergi numaraları ayrı bir zenginleştirme işinden gelmiş ve
+  yalnız veritabanında yaşıyordu.
+- Kabul kriteri "774 `vergi_no` korunur" diyordu; ölçüm **761**. Fark 13.
+  Ama kriterin kendisi hatalı yazılmış: 774, **14003 satırlık kirli tabloda**
+  sayılmıştı. Aynı ünvanın iki kaydında da vergi numarası varsa tekilleşince
+  sayaç bir düşer — **veri kaybı değil, mükerrer sayımın erimesi**. 494 tekrarlı
+  grubun 13'ünde bu durumun olması beklenen bir sonuç. Doğru kriter
+  `count(distinct vergi_no)` olmalıydı; satır sayısı tekilleştirmeden sonra
+  zaten korunamaz. Kanıt yine de yok (öncesi kaydı yok), ama fark artık
+  **açıklanabilir** ve alarm gerektirmiyor.
+
+**Genel kural — geri alınamazlığın maliyeti, işin süresinden bağımsızdır.**
+"Yedek al" adımı 40 saniye sürüyordu; atlanınca 4591 satır kalıcı gitti.
+Yıkıcı işte sıra asla değişmez: **yedek → doğrula → sil**. Yedek adımı
+başarısız olursa iş başlamaz; yedek satır sayısı beklenenle uyuşmazsa iş
+durur (D-243'ün `RuntimeError` mandalı bunu zorlar, ama mandal ancak
+**betik gerçekten çalıştırılırsa** korur — elle SQL atan yolu korumaz).
+
+**Bundan çıkan ikinci kural — elle SQL yasak.** Üretimde `DELETE`/`UPDATE`
+yalnız testi olan, `dry_run` destekleyen, yedek yazan betikle atılır. Konsoldan
+veya ad-hoc script'ten atılan yıkıcı SQL, mandalların tamamını atlar; bu
+oturumdaki kaybın yolu tam olarak budur.
+
+**Üçüncü kural — kolon ikizi her ölçümü yanlış yapılabilir kılar.** `companies`
+tablosunda `tax_number` (40 dolu) **ve** `vergi_no` (761 dolu) ayrı ayrı
+duruyor; aynı şekilde `website_domain` (5397) / `web_sitesi` (5049). "774
+vergi_no" kriterini ilk ölçümde `tax_number` üzerinden okuyup **40** gördüm ve
+yanlış alarm verdim. Aynı anlamı taşıyan iki kolon, her sorguyu "hangisini
+okudun?" sorusuna bağımlı kılar — sessiz yanlış sonuç üretir, çünkü sorgu
+hata vermez, sadece eksik sayar. FAZ 2 müşteri beyni bu alanları okuyacağı için
+`VERI-KOLON-IKIZ-01` **FAZ 2'den önce** kapatılır.
+
+**Dördüncü kural — sayı kriteri, tekilleştirmeden önce mi sonra mı sayıldığını
+söylemeli.** "774 korunur" kriteri kirli tabloda sayılmış bir değerdi ve
+tekilleştirmeden sonra matematiksel olarak korunamazdı. Kabul kriterine sayı
+yazarken `count(*)` mi `count(distinct X)` mi olduğu ve hangi satır kümesinde
+sayıldığı belirtilir. Aksi halde doğru çalışan iş yanlış başarısız görünür —
+bugün olduğu gibi.
+
+- **Mandal:** `yedekler/companies_20260927_2124.jsonl` (9412 satır) — silme
+  sonrası ilk gerçek yedek. `yedekler/` `.gitignore`'a alındı (KVKK: `vergi_no`
+  + e-posta içerir, D-242 çatısı).
+- **Referans:** D-243 (prova diske yazmaz, yedek yolu enjekte edilir), D-242
+  (yedek tek çatı), D-66 (brif maddesi ölçülmüş değere dayanır), D-230
+  (ölçmeden tamamlandı denmez).
+
+---
+
+## D-245 — Kolon adı veri türünü garanti etmez: doluluk ≠ geçerlilik
+
+**Bağlam:** `VERI-KOLON-IKIZ-01` Faz A ölçümü, `companies.vergi_no`'daki 761
+değerin **633'ünün vergi numarası olmadığını** gösterdi (526 tanesi 6 haneli OSB
+üye/parsel numarası, biri `'1105-BEYP.'` gibi harf içeriyor). Geçerli VKN sayısı
+774 değil, **128**. Aynı ölçümde `website_domain`'deki 5397 değerin ~2660'ının
+firma sitesi değil OSB portalı olduğu ortaya çıktı (`isim.org.tr` x2143,
+`ostimistihdam.com` x474, `ostimonline.com` x49).
+
+**Kural — bundan sonra:**
+
+1. **Doluluk oranı kalite kanıtı değildir.** `count(*) WHERE col IS NOT NULL`
+   bir şey ölçmez. Kolonun anlamı varsa (VKN, NACE, domain, telefon) ölçüm
+   **biçim doğrulamasıyla** yapılır: `count(*) WHERE col ~ '<desen>'`. Brif ve
+   kalite puanı yalnızca bu ikinci sayıyı kullanır.
+
+2. **Tekrar eden değer, kaynak sızıntısı işaretidir.** Bir kolonda aynı değer
+   yüzlerce satırda görünüyorsa (x2143) o veri firmaya ait değil, kazıyıcının
+   sayfa şablonundan kaptığı sabittir. Yeni kazıyıcı/ETL işi teslim edilirken
+   `GROUP BY col HAVING count(*) > 1 ORDER BY 2 DESC LIMIT 10` çıktısı brife
+   yapıştırılır; tepede 3 haneli bir sayı varsa iş done olamaz.
+
+3. **Birleştirme migration'ı öncesi UNIQUE + mükerrer ölçümü zorunludur.**
+   `COALESCE(a, b)` ile iki kolon birleştirilecekse, hedef kolonda UNIQUE kısıt
+   varken birleşimin tekil olduğu önce kanıtlanır
+   (`count(*) - count(distinct ...)`). Bu ölçüm yapılmadan yazılan migration
+   üretimde kısıt ihlaliyle patlar — bu işte 9 mükerrer değer bulundu.
+
+4. **Kalite puanı kirli kolondan beslenmez.** `website_domain` dolu olduğu için
+   ~2660 firmaya haksız puan verilmiş. Puanlayıcıya yeni sinyal eklenirken o
+   sinyalin biçim doğrulamasından geçtiği gösterilir; geçmiyorsa sinyal eklenmez.
+
+- **Mandal:** `plans/brief_utku_VERI-KOLON-IKIZ-01.md` § "Faz A SONUCU" —
+  ölçüm çıktısı ve üç kusurun kaydı.
+- **Referans:** D-244 (sayı kriteri hangi kümede sayıldığını söyler), D-235
+  (İvedik kazıyıcı sayfa döngüsü kök nedeni), D-66, D-230.
+
+## D-246 - Alan sozlesmesi yazili degilse kolon kirlenir; dogrulama tek kapidan gecer
+
+**Baglam:** `vergi_no` kolonu 761 satirda dolu gorunuyordu. Olculdu: 9412 firmada
+**yalnizca 5** deger resmi saglama toplamindan geciyor (3 VKN + 2 TCKN). Geri kalan
+icerik ticaret sicil no (526), saglama tutmayan 11 hane (122), 5 haneli cop (78),
+adres kirintisi (23). Yani kolon dolu, veri yok.
+
+**Kok neden kolonun kendisi degil:** her kaziyici alan bicimine kendi regex'i ile
+karar veriyordu ve hicbir yerde "bu alana ne girer, ne girmez" yazili degildi.
+ASO kaziyicisi sicil numarasini vergi numarasi sandi; kimse itiraz etmedi cunku
+itiraz edecek sozlesme yoktu.
+
+**Karar:**
+
+1. **Alan sozlesmesi yazilidir.** Tek kaynak: `docs/VERI_KALITE_SOZLESMESI.md`.
+   Her alan alti maddeyle tanimlanir: anlam, bicim, saglama, **kabul edilmez**,
+   gecmezse ne olur, kim doldurur. Alti madde dolmadan o alana kod yazilmaz.
+
+2. **En kritik madde "kabul edilmez" maddesidir.** 526 satirlik hata bu madde
+   yazilmadigi icin olustu. Benzer veri her zaman ayni kolona sizmaya calisir:
+   sicil no vergi no'ya, kaynak sitesinin alan adi firma sitesine, oda meslek
+   grubu NACE koduna.
+
+3. **Dogrulama tek kapidan gecer.** Kaziyici/ETL alan bicimine karar vermez;
+   ilgili dogrulayiciyi cagirir. Vergi kimligi icin tek kapi:
+   `src/company_master/etl/kimlik_no.py` -> `kimlik_dogrula()`.
+
+4. **Gecersiz deger kolona yazilmaz.** `NULL` kalir. Ham deger
+   `source_records.raw_payload` icinde durur, kaybolmaz. Yari gecerli deger bos
+   degerden tehlikelidir cunku raporda gecerli sayilir (D-245).
+
+5. **Uzunluk bicimi saglamanin yerine gecmez.** 11 hane olmak TCKN olmayi
+   kanitlamaz: 124 satirin 122'si dogru uzunlukta ama saglama toplami tutmuyor.
+   Resmi saglama algoritmasi olan alanda regex tek basina kabul kriteri olamaz.
+
+6. **Turetilmis alan elle yazilmaz.** `tuzel_tip` (sahis/tuzel) yalnizca
+   saglamadan gecmis `vkn`/`tckn` kolonundan turetilir. Unvandan tahmin
+   yasaktir: 11 haneli 124 satirin 101'i unvaninda LTD/A.S. tasiyor, yani
+   unvan sinyali bu veride yanlis sonuc uretir.
+
+7. **Veri yeniden kazinabilir, sozlesme kazinamaz.** Kirli 633 degeri kurtarmak
+   icin migration yazmak yerine kurali yazip yeniden kazimak dogrudur. Onarim
+   emegi tek seferliktir; sozlesme her kazimada calisir.
+
+**Mandal:** `python src/company_master/etl/kimlik_no.py` -> "tum mandallar gecti".
+Mandal degerleri gercek olcum verisinden alinmistir (uydurma ornek degil).
+
+**Referans:** D-245 (doluluk != gecerlilik), D-244 (yikici iste yedek kanit),
+D-243 (prova diske yazmaz).
+
+---
+
+## D-247 - Kisisel veri gosterimi role gore ayrilir; maskeleme tek kapidan gecer
+
+**Baglam:** TCKN saklama karari (KVKK-TCKN-01) beklerken gosterim tarafi acik
+kalmisti. Urun sahibi karari: **admin panelinde tum alanlar acik, kullanici
+panelinde TCKN acilip kapatilabilir olmali.**
+
+**Karar:**
+
+1. **Saklamak ile gostermek ayri kararlardir.** TCKN veritabaninda saglamadan
+   gecmis haliyle durur; panelde gorunup gorunmemesi ayri bir ayardir. Ayni
+   kolon iki farkli role iki farkli sekilde sunulur.
+
+2. **Gosterim tek kapidan gecer.** Ekranlar ham `tckn` degerini yazmaz;
+   `company_master.settings.tckn_sun(tckn, kullanici_id, admin=...)` cagirir.
+   Neden: onceki maskeleme (`kvkk_maske_acik`) her ekranda tekrar tekrar
+   yorumlaniyordu; bir ekranin maskelemeyi unutmasi mumkundu. Tek kapi olunca
+   dugme kapandiginda tum kullanici ekranlari birlikte maskelenir.
+
+3. **Varsayilan KAPALI.** `tckn_kullaniciya_gorunur` varsayilani `False`.
+   Kisisel veriyi gostermek bilincli bir secim olmali; unutulan ayar veriyi
+   sizdirmamali.
+
+4. **Admin istisnasi ayarla degil rolle belirlenir.** `admin=True` cagrisi
+   ayara bakmaz. Admin'in kendi ayarini kapatmasi onu kor etmemeli; denetim
+   yapan kisi ham veriyi gorebilmelidir.
+
+5. **Bos deger maskeye donusmez.** `None`/bos giren `None` doner. Maskelenmis
+   nokta dizisi "veri var" izlenimi verir; olmayan veri icin sahte doluluk
+   uretmek D-245 ihlalidir.
+
+6. **Ayar semaya eklenir, panele elle kodlanmaz.** `AYAR_SEMASI` tek kaynak;
+   panel `gruplar()` ile formu kendisi uretir. Panele elle widget eklemek sema
+   ile arayuzun ayrisma riskidir.
+
+**Mandal:** `python scripts/_kontrol_tckn_dugme.py` -> 6 mandal (varsayilan
+maskeli, admin acik, dugme ac/kapa, bos deger).
+
+**Referans:** D-246 (dogrulama tek kapidan gecer - ayni ilkenin gosterim
+tarafi), D-245 (sahte doluluk uretme). Ilgili bekleyen karar: KVKK-TCKN-01
+(saklama suresi + erisim kaydi).
+
+---
+
+## D-248 - TCKN saklanir; "suresiz" yerine "kayit aktif oldugu surece" yazilir
+
+**Baglam:** KVKK-TCKN-01 saklama tarafi. Urun sahibi karari: TCKN saklanacak,
+sure siniri yok, diger firma alanlariyla ayni akistan toplanacak, admin
+panelinde ac/kapa olacak; **ileride ucretli pakete konulmasi dusunuluyor**
+(senaryo henuz olgunlasmamis).
+
+**Karar:**
+
+1. **TCKN saklanir.** Ayri bir toplama akisi kurulmaz; `kimlik_dogrula()`
+   kapisindan gecen deger `tckn` kolonuna yazilir (D-246/3). Sahis
+   isletmesinde TCKN vergi numarasi yerine gectigi icin ticari veridir.
+
+2. **"Suresiz" yazilmaz; "kayit aktif oldugu surece" yazilir.** Ikisi pratikte
+   ayni sonucu verir ama hukuken ayrisir: KVKK m.4 sinirli sure ilkesi
+   "suresiz" ifadesini savunulamaz kilar. Ayni davranis, savunulabilir ifade.
+   Firma kaydi silindiginde/kapandiginda TCKN de duser.
+
+3. **Toplama karari ile satis karari ayridir.** Kendi paneli icinde gostermek
+   (mesru menfaat, ticari sicil verisi) ile **ucretli pakette ucuncu kisiye
+   aktarmak** ayni hukuki temele dayanmaz. Aktarim `KVKK-TCKN-02` altinda
+   **BLOKE**; hukuki gorus alinmadan tek satir kod yazilmaz.
+
+4. **Paket/kademe modeli simdi kodlanmaz.** Senaryo olgunlasmamis
+   ("muhtemelen", "olabilir"). Bugun yazilacak rol/kademe soyutlamasi yarin
+   degisecek varsayimi betonlastirir. Mevcut `admin` / `kullanici` ayrimi
+   yeterlidir; kademe geldiginde `tckn_sun()` icindeki tek kosul buyur.
+
+5. **Aktarim aninda erisim kaydi zorunlu olur.** TCKN kendi panelinde
+   gorunurken log istege bagli; ucretli pakete girdigi an "kim, hangi firmanin
+   TCKN'sini, ne zaman gordu" kaydi zorunludur. Aktarimin on kosulu budur,
+   sonradan eklenecek sus degil.
+
+**Referans:** D-247 (gosterim tek kapidan gecer), D-246 (dogrulama tek kapi),
+sozlesme 3.2. Bekleyen: `KVKK-TCKN-02` (aktarimin hukuki temeli).
+
+## D-249 - "Veri yok" ile "0 puan" ayri degerlerdir; olu skor NULL'a cekilir
+
+**Baglam:** KALITE-SKOR-01 olcumu: `companies` tablosunda 5 skor kolonu 9412
+satirda tek deger tasiyordu. `employee_count_score` %100 NULL,
+`job_postings_score` %99.9 NULL, `source_diversity_score` %67 NULL, kalanlar
+sabit 0. Kolonlar `DEFAULT 0` ile tanimliydi; bu yuzden "hic hesaplanmadi" ile
+"hesaplandi, sifir cikti" ayirt edilemiyordu.
+
+**Kok neden - uc ayri hata, tek sonuc:**
+
+1. `job_postings_score` **hic hesaplanmiyordu.** `quality_metrics.py` icinde o
+   dongu yazilmamisti; kolon DEFAULT 0 ile dolu oldugu icin "hesaplanmis"
+   gorunuyordu. Sessiz bosluk.
+2. `source_diversity_score` **yanlis bag uzerinden** sayiyordu:
+   `companies.source_record_id` -> tanim geregi tek kayit -> her firma icin 1
+   kaynak -> sabit 0. Dogru bag `source_records.company_id` (0023 sonrasi).
+3. `employee_count_score` dogru calisiyordu ama **girdi hic yok**
+   (`employee_count` %100 bos). Skor hatasi degil, kaynak eksigi.
+
+**Karar:**
+
+1. **`NOT NULL DEFAULT 0` skor kolonlarindan kaldirilir.** Bir puan kolonu icin
+   `DEFAULT 0` sessiz yalandir: "olcmedim" yerine "olctum, sifir" der. Puanlar
+   `NULL` baslar (goc `0024`).
+2. **Uc durum ayrilir:** `NULL` = olculmedi/veri yok, `0` = olculdu ve sinyal
+   yok, `>0` = sinyal var. Hesaplayicilar veri yoksa `None` doner.
+3. **Toplam puan, NULL skoru pay ve paydadan birlikte duser.** Eksik veri
+   firmayi cezalandirmaz (sozlesme K-5: haksiz puan yasagi).
+   `employee_count_score` %100 NULL oldugu icin bugun toplam puana hic girmez.
+4. **Olu kolon silinmez, isaretlenir.** Kolon silmek girdi geldiginde geri
+   ekleme maliyeti dogurur; NULL kalmasi zaten "bilgi yok" der. `employee_count`
+   ve `job_postings` icin kaynak gorevleri acik kalir.
+5. **Mandal:** `tests/test_kalite_skor.py` - `None` girdide `None`, `0` girdide
+   `0` doner. Ikisi karisirsa mandal kirmizi olur.
+
+6. **Satir basina UPDATE yasaktir; toplu yazma kullanilir.** Hesaplayicinin
+   eski hali firma basina ayri UPDATE atiyordu: 9412 x 7 = ~66 bin tur, tek
+   islem icinde 40 dakikada 7 dongunun ancak 2'sini bitirdi ve commit
+   olmadigi icin sonuc hic gorunmedi. `executemany` ile ayni is **~2
+   dakikada** bitti. Hesap mantigi Python'da kalir (SQL'e kopyalanmaz, ikilik
+   uretir), yazma tek tura iner.
+   Ek bulgu: veritabani **PostgreSQL**'dir. Kodda MySQL sozdizimi
+   (`raw_payload->>"$.alan"`, `information_schema.processlist`) kalintisi
+   varsa yanlistir; dogrusu `raw_payload->>'alan'` ve `pg_stat_activity`.
+
+**Referans:** D-245 (doluluk != gecerlilik), sozlesme K-5, goc
+`0024_kalite_skor_olu_sinyal.sql`.
+
+## D-250 - Olculen sey "Kimlik Dosyasi Tamligi"dir; firma kalitesi degil
+
+**Baglam:** KALITE-PUAN-01 olcumu iki celisen formul, 583 bayat skor ve
+ortak bir adlandirma hatasi buldu. Kolon adi `data_quality_score` ("firma
+kalite puani") idi; oysa hesaplanan sey firmanin niteligi degil, **bizim o
+firma hakkinda toplayabildigimiz veri miktari**. Uc alan (vergi dairesi,
+ticaret sicil no, MERSIS no) veritabaninda **hic yoktu**.
+
+**Olculen baslangic durumu (9412 firma):**
+
+| Alan | Doluluk |
+|---|---|
+| Ticaret unvani | %100 |
+| NACE kodu | %88.1 |
+| Telefon | %87.7 |
+| Adres | %61.6 |
+| Internet sitesi | %57.9 |
+| E-posta | %42.9 |
+| VKN | %8.2 |
+| Vergi dairesi / Ticaret sicil / MERSIS | KOLON YOK |
+
+Tam kimlik dosyasi olan firma: **128 (%1.4)**. VKN haric hepsi tam: 2157 (%22.9).
+
+**Karar:**
+
+1. **Ad degisir: "Kimlik Dosyasi Tamligi" (0-10).** "Kalite" kelimesi yasak —
+   eksiklik firmanin degil bizim toplama basarimizindir (D-249 mantiginin
+   devami). Panel dili de boyle olur: dusuk puan = bizim is listemiz.
+
+2. **Agirlik seti v1 — iki grup, 10 puan:**
+
+   *Kimlik omurgasi (6 puan) — "bu firma hangi tuzel kisi?"*
+   | Alan | Agirlik |
+   |---|---|
+   | Ticaret unvani | 1.0 |
+   | VKN | 1.5 |
+   | Vergi dairesi | 0.5 |
+   | MERSIS no | 1.0 |
+   | Ticaret sicil no + dairesi | 1.0 |
+   | NACE kodu | 1.0 |
+
+   *Erisim (4 puan) — "bu firmaya nasil ulasirim?"*
+   | Alan | Agirlik |
+   |---|---|
+   | Adres | 1.5 |
+   | Telefon | 1.5 |
+   | E-posta | 0.7 |
+   | Internet sitesi | 0.3 |
+
+3. **VKN agirligi gecici olarak 1.5'tir.** Ilk tasarimda 3.0 onerildi; veriye
+   uygulandiginda firmalarin %91.8'i 7.0 tavanina mahkum oldu. Sebep firmalarin
+   VKN'sinin olmamasi degil, **bizim GIB'den cekemememiz** (GIB-MUKELLEF-01
+   acik, erisim yontemi henuz belirsiz). Kaynak baglandiginda agirlik 3.0'a
+   cikar, diger agirliklar orantili duser, surum v2 olur.
+
+4. **Puan yalnizca DOGRULAMADAN GECEN alani sayar.** Dolu ama gecersiz deger
+   puan kazandirmaz — `kimlik_dogrula()` / `sicil_dogrula()` tek kapisindan
+   gecmeyen VKN 0 puandir (D-245, D-246 devami).
+
+5. **Zenginlik verisi puana girmez.** Calisan sayisi, is ilani, sosyal medya
+   ayri bir "zenginlik rozeti" olarak gosterilir. Gerekce: ikisi de ~%100 bos;
+   puana katilirsa tum firmalar ayni oranda duser, puan ayirt etme gucunu
+   kaybeder (D-249/3 ile ayni gerekce).
+
+6. **`puan_surumu` kolonu zorunludur.** Agirlik seti degistiginde eski puanlar
+   sessizce yanlis olur — bugun yasanan 583 bayat skorun koku budur. Agirlik
+   seti tek sozlukte, surum numarasiyla tutulur; surumu eski olan satirlar
+   panelde "yeniden hesap bekliyor" diye isaretlenir.
+
+7. **"Ulasilabilir tavan" gostergesi zorunludur.** Bugun hicbir firma 10
+   alamaz: 10.0 − 2.5 (hic toplanmayan 3 alan) − 1.5 (VKN yok) = **6.0**.
+   Panelde tek satir olarak gosterilir. Ortalama puanin yukselmesi degil,
+   **tavanin yukselmesi** gercek ilerlemedir.
+
+8. **Alan bazli kayip tablosu yol haritasidir.** Her alan icin
+   `eksik_firma x agirlik` = kayip puan. En buyuk kayip = siradaki is. Tablo
+   kendi kendini gunceller; oncelik tartismasi ortadan kalkar.
+
+9. **MERSIS, GIB'den once denenir.** MERSIS kaydi olan her firmanin VKN'si
+   vardir ve MERSIS portali ucretsizdir. GIB erisimi belirsizken MERSIS bilinen
+   bir yoldur; basarili olursa VKN boslugunun buyuk kismi GIB olmadan kapanir.
+
+**Referans:** D-245, D-246, D-249; sozlesme 3.2-3.4, K-5. Bekleyen:
+`SEMA-VKN-01` (vergi_dairesi + mersis_no + ticaret_sicil_no + sicil_dairesi
+kolonlari), `GIB-MUKELLEF-01`, `MERSIS-KAYNAK-01`.
+
+---
+
+## D-251 - Sema tek dilde olur; goc defteri semanin tek anlaticisidir
+
+**Tarih:** 2026-09-28 · **Karar:** urun sahibi · **Tetikleyen:** `SEMA-IKIZ-01` +
+`GOC-DEFTER-01` · **Olcum:** [[docs/OLCUM_NACE_2026-09-28]]
+
+### Neden
+
+Iki ayri sorun ayni kokten cikti: **semaya elle dokunuldu, kimse yazmadi.**
+
+Olcum: 54 tablo / 515 kolon. 511 kolon Ingilizce (%99.2). Turkce 4 kolon
+(`vergi_no`, `web_sitesi`, `adres`, `osb_parsel`) — hepsi `companies` uzerinde,
+hepsi sonradan yamanmis. Ikisi mevcut kolonun **ikizi**: `tax_number` (40 dolu)
+yaninda `vergi_no` (761 dolu); `website_domain` (5397) yaninda `web_sitesi` (5049).
+
+Ayni anda: diskteki 25 goc dosyasindan **6 tanesi uygulanmis ama deftere
+yazilmamis** (0012, 0014, 0017, 0018, 0021, 0023). Defter 12 kayit gosteriyor,
+sema baska sey soyluyor.
+
+### Kural
+
+1. **Sema dili Ingilizce'dir.** Kolon, tablo, kisit, indeks adlari Ingilizce.
+   Turkce **sadece** panel etiketlerinde ve belgelerde. Sebep: cogunluk zaten
+   Ingilizce, karisik dil "hangisi dolu?" sorusunu her seferinde doguruyor.
+
+2. **Ikiz kolon yasaktir.** Ayni anlami tasiyan iki kolon = iki farkli dogru.
+   Bir kolon eklenmeden once "bunun esdegeri var mi?" sorusu sorulur. Ikiz
+   dogduysa: veri hedefe tasinir, kaynak **hemen** dusurulur. Kolon birakilmaz.
+
+3. **Goc defteri semanin tek anlaticisidir.** Uygulanan her DDL
+   `schema_migrations` tablosuna yazilir. Yazilmayan goc **uygulanmamis
+   sayilir**. Defter bugun yalan soyluyor; semadan yeniden insa edilir.
+
+4. **Elle DDL yasaktir.** `ALTER TABLE` / `CREATE TABLE` yalnizca goc dosyasi
+   icinden calisir. `psql`'den elle sema degistirmek defteri bozar — bugunku
+   6 kayip goc bunun kanitidir.
+
+5. **Goc idempotent olmalidir.** `IF NOT EXISTS` / `IF EXISTS` zorunlu. Defter
+   bozulursa goc ikinci kez calisabilmeli, patlamamali.
+
+6. **Tasima sirasinda celisen kayit rapor edilir, sessizce ezilmez.** Olcumde
+   celisen 2 kayit cikti; ikisi de yanlisti (KAL-MET'in `website_domain` alanina
+   uye oldugu dernegin sitesi yazilmis — D-245 kaynak sizintisi). Celisen kayit
+   gormeden karar verilmez.
+
+### Uygulama sirasi
+
+```
+1. Defter semadan yeniden insa (kayip 7 goc: 0012,0014,0017,0018,0021,0023,0024)
+2. 0025 duzeltilir (mersis_no IPTAL -> mevcut mersis_number) + uygulanir
+3. Ikiz tasima: vergi_no->tax_number, web_sitesi->website_domain,
+   adres->address, osb_parsel->osb_parcel ; kaynak kolonlar dusurulur
+4. Mandal: sema kolon adlarinda Turkce karakter/kelime taramasi
+```
+
+**Not:** `0025` icinde ucuncu bir ikiz doguyordu — `mersis_no` eklenecekti, oysa
+`mersis_number` zaten var (0 dolu). Goc uygulanmadan yakalandi. Kural 2'nin ilk
+sinavi, gecti.
+
+**Referans:** D-245 (kaynak sizintisi), D-246 (alan sozlesmesi), D-249.
+**Onkosul:** D-250 uygulamasi bu karara baglidir (0025 uygulanmadan
+`kimlik_tamligi` ve `puan_surumu` kolonlari yok).
+
+---
+
+## D-252 - NACE uc katmandir: yapabilir / yapiyor / uzman
+
+**Tarih:** 2026-09-28 · **Karar:** urun sahibi · **Tetikleyen:** urun sahibi
+gozlemi — *"x firmanin nace kodu ve yaninda nace koduna bagli isler; bu firma
+bu isleri resmi olarak yapabilir. Fakat firma tek bir konuda uzmanlasmis da
+olabilir."* · **Olcum:** [[docs/OLCUM_NACE_2026-09-28]]
+
+### Olcumun soyledigi
+
+**NACE kodlarimizin %100'u tahmindir. Tek bir firmanin bile gercek NACE kodu
+elimizde yoktur.**
+
+| `nace_source` | Firma | Nitelik |
+|---|---:|---|
+| `sector_default` | 5679 | tahmin — kaynagin varsayilani |
+| `unknown` | 1935 | bilinmiyor |
+| `fallback` | 654 | tahmin — yedek |
+| `title_default` | 21 | tahmin — unvandan cikarim |
+| **gercek (MERSIS/TSG)** | **0** | — |
+
+En sik kod **29.10**, **1880 firmaya** atanmis. Acilimi: *"Kamyonet, Kamyon,
+Yari Romork Cekicileri, Tanker Imalati"*. Ankara'da 1880 kamyon fabrikasi yok.
+Bu tek bir OSB kaynaginin varsayilan kodunun herkese yapistirilmasidir —
+**D-245 kaynak sizintisinin bugune kadarki en buyuk ornegi.**
+
+### Kural
+
+1. **Uc katman ayrilir, ayni kolonda tutulmaz.**
+
+   | Katman | Soru | Yer | Kaynak |
+   |---|---|---|---|
+   | **YETKI** | resmi olarak ne yapabilir? | `company_industries` | MERSIS / TSG |
+   | **FIIL** | fiilen ne yapiyor? | kanit kayitlari | web, katalog, ihale |
+   | **TAHMIN** | biz ne saniyoruz? | `companies.nace_code` | cikarim |
+
+2. **Tahmin edilmis koda "NACE kodu" denmez.** `nace_validity <> 'verified'`
+   olan her kod panelde **"tahmini sektor"** etiketiyle gosterilir. "Bu firma
+   bu isi resmi olarak yapabilir" cumlesi **yalnizca** YETKI katmani doluysa
+   kurulur. D-249'un ("veri yok" ≠ "0 puan") sektor karsiligi.
+
+3. **Coklu NACE `company_industries`'e tasinir; ikinci kolon acilmaz.** Duz
+   kolon coklu kodu tasiyamaz. Tablo zaten dogru tasarlanmis (`is_primary`,
+   `source_id`, `confidence`, `verified_at`) ama 9412 firmadan **21'inde**
+   kullanilmis — ve o 21 satirin **hepsi `is_primary=true`**, yani yan
+   faaliyet kaydi bugun **sifir**.
+
+   Urun sahibi "ana kod icin bir kolon, yan kodlar icin bir kolon" onerdi.
+   **Reddedildi**, sebep: yan kodlarin her birinin ayri kaynagi ve ayri
+   guven derecesi olur (biri MERSIS'ten, biri web sitesinden, biri
+   ihaleden). Tek kolona `"25.11, 28.99"` yazmak D-245'in yasakladigi
+   durumu uretir: deger var, kaynagi yok. Ustelik ucuncu ikiz kolon
+   dogar (D-251/2). Istenen ayrim `is_primary` ile **zaten** mumkun.
+
+   Panelde gorunum yine iki alan olur ("Ana faaliyet" / "Yan faaliyetler");
+   ayrim **gorunumde**, depolamada degil.
+
+4. **Acilim level-6'dan gelir, bagi `parent_code` kurar.** Sozlukte level-4'un
+   **%50'si bassiz** (957 kodun 483'u), level-6'nin **%100'u dolu ve Turkce**
+   (2252 kod). Urun sahibinin istedigi "koda bagli isler listesi" = o kodun
+   `parent_code` ile bagli alt basliklaridir. Ornek: 29.10 altinda 7 alt kod
+   (otomobil / otobus / motor / itfaiye-ambulans-mikser imalati...).
+
+   **Kapsama olculdu, iki sayi celisiyor ve dogru olan ikincisidir:**
+
+   | Olcum | Sonuc |
+   |---|---|
+   | kod sayisina gore | 256 / 261 kod (%98) |
+   | **firma agirlikli** | **6387 / 8289 firma (%77)** |
+
+   Kod sayisi yaniltici: en kalabalik 5 kodun **3'unde acilim sifir**
+   (62.09 · 654 firma, 62.01 · 632, 41.10 · 598 — hizmet kodlari).
+   Yani 1902 firma icin "yapabilecegi isler" listesi **bugun uretilemez**.
+   Panelde bos liste gosterilmez; alan gizlenir (D-249 mantigi).
+
+5. **Tek kaynaktan kopyalanmis kod kutlesi sektor sayacindan cikarilir.**
+   1880 firmalik 29.10 kutlesi bugun her sektor grafigini yaniltiyor. Esik:
+   ayni kod + ayni kaynak + ayni gun = supheli kutle, isaretlenir.
+
+6. **Sozluk tek dile cekilir ve Turkce harfler geri gelir.** 3319 kodun 572'si
+   Turkce, gerisi Ingilizce. TUIK NACE Rev.2 Turkce listesi ucretsizdir,
+   indirilir. D-251/1'in sozluk karsiligi.
+
+   Ek bulgu: Turkce basliklar **yarim asciilestirilmis**. Ornek:
+   *"Motorlu Kara **Tasitlarinin** Motorlarinin **Imalati**"* — ş/ı/ğ dusmus,
+   c/o/u korunmus (`Çekiciler`, `Römorklar` saglam). Veritabani kodlamasi
+   **saglam** (3319 satirda bozuk kodlama sifir); kayip **yazma aninda**
+   olusmus. Panelde satis yuzune boyle cikar. TUIK listesi indirildiginde
+   bu kendiliginden duzelir; ayri temizlik iki kere is olur.
+
+7. **Olu kolonlar dusurulur.** `nace_codes.is_manufacturing` tek degerli (3319
+   satirin hepsi ayni) → D-249'a gore sifir bilgi. `companies.nace_name` (52
+   dolu, 8 deger: *"GIDA"*, *"Savunma"*, *"KIMYA-LABARATUVAR"*) NACE adi degil,
+   kaynak sitenin kendi etiketi — yanlis kolona yazilmis serbest metin.
+
+### Bugun yapilabilir / bugun yapilamaz
+
+**Kaynak gerektirmez (4 is):** 2, 3, 4, 5 numarali kurallar.
+**Bloke:** gercek NACE kodu → `MERSIS-KAYNAK-01`. TSG captcha ile kapali
+(`TSG-KAYNAK-01`). MERSIS hem kimlik (D-250/9) hem yetki katmani icin ayni
+kapidir — tek olcum iki sorunu birden acar.
+
+**Referans:** D-245, D-249, D-250, D-251; sozlesme 3.8.
+
+---
+
+## D-253 - Defter kaydi kanit degildir; iz dogrulanir
+
+**Tarih:** 2026-09-28 · **Karar:** KAHIN · **Tetikleyen:** GOC-DEFTER-01 —
+defterin 12 kayit gosterdigi iddiasi · **Olcum:** `scripts/goc_defteri.py`
+
+### Olcumun soyledigi
+
+Iddia bayatti. Defter olculdugunde **25/25** ciktı; "yazilmamis" denen 6 goc
+(0012, 0014, 0017, 0018, 0021, 0023) `2026-09-28 08:05`'te zaten yazilmisti.
+0025 de uygulanmis, `mersis_no` ikizi daha once iptal edilmisti.
+
+Asil bulgu baskaydi: **defterde satir olmasi gocun uygulandigini kanitlamiyor.**
+Kanit semadadir. Ayrica veritabani Supabase bicimindedir — `auth` (82 kayit),
+`public` (25), `realtime` (81) semalarinin **her birinde** ayri bir
+`schema_migrations` vardir. `table_schema='public'` filtresi olmayan her sorgu
+yanlis sayar.
+
+### Kural
+
+1. **Goc durumu uc kaynagin kesisiminden okunur:** disk dosyasi + defter
+   kaydi + **semadaki iz**. Iki tanesi yeterli degildir. `goc_defteri.py`
+   her goc dosyasindan tablo / kolon / indeks / dusurulen varsayilan izlerini
+   cikarir ve semayla karsilastirir. Durumlar: `TAM`, `EKSIK`, `ESKIMIS`,
+   `IZSIZ`. Defterde yazili ama izi `EKSIK` olan goc **uygulanmamis sayilir**
+   (D-251/3'un olculebilir hali).
+
+2. **Ustunden gecilen goc kendi halefini beyan eder.** Sonraki bir goc onceki
+   gocun izini degistirdiginde (ornek: kolon adi degisti), eski dosyaya
+   `-- ustunden-gecen: <dosya>` satiri yazilir. Arac izi orada aramayi birakir.
+   Sessizce gormezden gelmek D-245 ihlalidir: iz yoksa **sebebi yazili olmali**.
+
+3. **Sema dili mandalla korunur** (D-251/1). `tests/test_goc_defteri.py`
+   `public` semasindaki her kolon adini denetler. Bilinen borc listelidir ve
+   **buyuyemez**; liste bayatlarsa (kolon kapandi ama listede kaldi) mandal
+   yine kirilir. Bugunku borc **5 kolon**: `adres`, `osb_parsel`, `vergi_no`,
+   `web_sitesi`, `ip_adresi`. Ilk dordu SEMA-IKIZ-01'in isi; `ip_adresi` bu
+   olcumde **yeni bulundu**, listeye eklendi.
+
+4. **Sorgu semasiz yazilmaz.** `information_schema` ve `pg_*` sorgularinda
+   `table_schema='public'` zorunludur. Filtresiz sorgu Supabase semalarini
+   karistirir ve yanlis rapor uretir.
+
+### Bu kararla yapilanlar
+
+`0026_kimlik_kolonlari_ingilizce.sql` — 0025'in actigi 5 Turkce kolon
+Ingilizce'ye cevrildi: `vergi_dairesi`→`tax_office`,
+`ticaret_sicil_no`→`trade_registry_number`, `sicil_dairesi`→
+`trade_registry_office`, `kimlik_tamligi`→`identity_completeness`,
+`puan_surumu`→`score_version`. Bedeli sifirdi: 9412 firmada **0 dolu satir**,
+kodda **0 referans**. `RENAME` idempotent olmadigi icin `DO` blogu +
+`information_schema` kontrolu ile sarildi (D-251/5); iki kez calistirildi,
+ayni sonucu verdi.
+
+**Referans:** D-245, D-249, D-251; is: GOC-DEFTER-01. Arac:
+`scripts/goc_defteri.py`, mandal: `tests/test_goc_defteri.py`.

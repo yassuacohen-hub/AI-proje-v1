@@ -24,6 +24,7 @@ from typing import Any, Dict, List
 from sqlalchemy import text
 
 from ..db.connection import get_engine
+from .quality_recalc import kalite_puani
 
 
 # ── ANA KURAL: Firma ad normalizasyonu (ingest-time) ──
@@ -134,25 +135,6 @@ class NormalizeResult:
     errors: List[str] = field(default_factory=list)
 
 
-# Kritik alan agirliklari (toplam = 100; cezalar ayrica)
-CRITICAL_FIELDS = {
-    "adres": 20,
-    "web_sitesi": 15,
-    "vergi_no": 20,
-    "osb_parsel": 15,
-    "sektor": 10,
-    "nace_code": 5,
-    "telefon": 10,
-    "email": 5,
-}
-
-CRITICAL_PENALTIES = {
-    "adres": 10,
-    "vergi_no": 15,
-    "web_sitesi": 5,
-}
-
-
 def _has(value: Any) -> bool:
     if value is None:
         return False
@@ -164,46 +146,23 @@ def _has(value: Any) -> bool:
 
 
 def _data_quality_score(row: Dict[str, Any]) -> float:
-    """Veri kalite skoru (0-100).
+    """Toplam kalite puani — TEK KAPI: quality_recalc.kalite_puani().
 
-    - Kritik alanlar: adres (20), vergi_no (20), web_sitesi (15), osb_parsel (15),
-      sektor (10), nace_code (5), telefon (10), email (5) -> toplam 100
-    - Bos kritik alanlara ek ceza: vergi_no (-15), adres (-10), web_sitesi (-5)
-    - Tum telefon/email/vergi_no birlikte bossa ekstra -5
+    D-250: iki celisen formul vardi (bu dosya + quality_recalc). Tek kapiya
+    indirildi. Bu dosya source_records duzeninde okur, kapi companies
+    duzeninde bekler; asagidaki esleme o farki kapatir.
     """
     payload = row.get("raw_payload") or {}
-    skor = 0.0
-
-    if _has(row.get("raw_phone")):
-        skor += CRITICAL_FIELDS["telefon"]
-    if _has(row.get("raw_email")):
-        skor += CRITICAL_FIELDS["email"]
-    if _has(row.get("raw_website")):
-        skor += CRITICAL_FIELDS["web_sitesi"]
-    elif _has(row.get("website_domain")):
-        skor += CRITICAL_FIELDS["web_sitesi"]
-    if _has(payload.get("adres")):
-        skor += CRITICAL_FIELDS["adres"]
-    if _has(payload.get("sektor")):
-        skor += CRITICAL_FIELDS["sektor"]
-    if _has(row.get("raw_tax_number")):
-        skor += CRITICAL_FIELDS["vergi_no"]
-    if _has(payload.get("osb_parsel")):
-        skor += CRITICAL_FIELDS["osb_parsel"]
-    if _has(payload.get("nace_code")):
-        skor += CRITICAL_FIELDS["nace_code"]
-
-    if not _has(row.get("raw_tax_number")) and not _has(payload.get("vergi_no")):
-        skor -= CRITICAL_PENALTIES["vergi_no"]
-    if not _has(payload.get("adres")):
-        skor -= CRITICAL_PENALTIES["adres"]
-    if not _has(row.get("raw_website")) and not _has(row.get("website_domain")):
-        skor -= CRITICAL_PENALTIES["web_sitesi"]
-
-    if not _has(row.get("raw_phone")) and not _has(row.get("raw_email")) and not _has(row.get("raw_tax_number")):
-        skor -= 5
-
-    return min(max(skor, 0.0), 100.0)
+    return kalite_puani({
+        "tax_number": row.get("raw_tax_number") or payload.get("vergi_no"),
+        "adres": payload.get("adres"),
+        "primary_phone": row.get("raw_phone"),
+        "primary_email": row.get("raw_email"),
+        "website_domain": row.get("raw_website") or row.get("website_domain"),
+        "nace_code": payload.get("nace_code"),
+        "osb_parsel": payload.get("osb_parsel"),
+        "trade_name": row.get("trade_name"),
+    })
 
 
 def _map_row(row: Dict[str, Any], osb_id: str | None) -> Dict[str, Any]:

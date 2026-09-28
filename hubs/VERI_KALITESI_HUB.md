@@ -39,6 +39,9 @@ Ana baglam: [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]] · [[Huginn Data In
 ## Tenant / Ortam Hazirligi
 - [[Huginn Data Insights/docs/TENANT_HAZIRLIK]] — Tenant hazirlik belgesi
 
+## Aktif isler
+- [[Huginn Data Insights/plans/brief_utku_VERI-KOLON-IKIZ-01]] — **P0** kolon ikizi: `vergi_no`/`tax_number` + `web_sitesi`/`website_domain`. Eslestirme motoru 730 firmanin vergi numarasini gormuyor. FAZ 2 on kosulu.
+
 ---
 
 ## Ilgili Nodlar (Ust Hub)
@@ -47,7 +50,7 @@ Ana baglam: [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]] · [[Huginn Data In
 - [[Huginn Data Insights/PROJECT_ROADMAP]]
 
 ## Kapanan isler
-| VERI-HAYALET-TEMIZ-01 | 4591 hayalet kayit silindi (14003->9412), UNIQUE INDEX uq_companies_legal_name olusturuldu, vergi_no 761 korundu, count(*)=distinct legal_name=9412 dogrulandi | 2026-09-27 |
+| VERI-HAYALET-TEMIZ-01 | 4591 hayalet kayit silindi: 9412 satir, fazlalik 0, uq_companies_legal_name mevcut. vergi_no 774->761 farki KAYIP DEGIL — 774 kirli tabloda sayilmisti, tekillesmede mukerrer sayim eridi (D-244/4). KUSUR: silme yedeksiz yapilmis; yedek sonradan alindi (D-244) | 2026-09-27 |
 | VERI-NACE-SOZLUK-01 | 3319 NACE kodu yuklendi (4 kaynak birlesimi), seviye korundu, eslesme %92.9 | 2026-09-27 |
 | VERI-KAYNAK-BAG-01 | source_records.company_id kolonu eklendi, 5252 eslesme (37.5%), FK dogrulandi | 2026-09-27 |
 | VERI-NACE-TEMIZ-01 | 7614 NN.NN format duzeltildi (raw_nace'ten turetildi), 675 altı haneli kırpildi, 25 iki haneli NULL'a cekildi, 1 yetim kod duzeltildi | 2026-09-27 |
