@@ -2834,3 +2834,92 @@ assert'li tek seferlik betige gecilir.
 **Referans:** D-245, D-246, D-249, D-250, D-251, D-253, D-255. Arac:
 `src/company_master/etl/quality_recalc.py`; mandal:
 `tests/test_kalite_puani.py`; kanca: `.git/hooks/pre-commit`.
+
+---
+
+## D-257 --- MERSIS kapali, tavuk-yumurta dogrulandi (MERSIS-KAYNAK-01 olcumu)
+
+**Tarih:** 2026-09-28 | **Rapor:** `docs/OLCUM_MERSIS_2026-09-28.md`
+**Tur:** olcum karari --- D-256'nin "MERSIS baglanirsa 5.0 puan acilir" iddiasi sinandi.
+
+### 1. MERSIS'te anonim sorgu ekrani **yoktur**
+
+Olculdu: `mersis.ticaret.gov.tr/`, `/Portal/Home/Index`, `/uygulamalar` ve
+`mersis.gtb.gov.tr` --- **dordu de ayni 30701B tanitim sayfasini** doner.
+`/Portal/Firma/Sorgula` = 404. `robots.txt` = 404. Sayfada tek eylem "Giris"tir ve
+sayfa metni aynen sunu yazar: "E-Devlet Yonetimi ile Giris **entegrasyon
+asamasindadir**".
+
+MERSIS bir **islem portalidir** (kurulus/tescil), sorgulama portali degildir.
+Engel captcha degil --- **islev mevcut degil**.
+
+### 2. D-256'nin 5.0 puan iddiasi **dogrulanamadi**
+
+Cikti ekranina ulasilamadigi icin "MERSIS kaydi VKN + vergi dairesi + sicil no +
+NACE'yi **birlikte** tasir" iddiasi sinanamadi. **Bugun acilan puan: 0.0.**
+
+| alan | agirlik | bugun acilir mi | neden |
+|---|---|---|---|
+| tax_number | 1.5 | hayir | acik uclar VKN'yi **girdi** ister, cikti vermez |
+| tax_office | 0.5 | hayir | hicbir acik kaynakta yok |
+| mersis_number | 1.0 | hayir | sorgu ekrani yok |
+| trade_registry_number | 1.0 | hayir | TSG captcha + uyelik |
+| nace_code | 1.0 | hayir | kaynagi MERSIS (D-252), kapali |
+
+Kilitli: 5.0 puan x 9412 firma = **47060 puan**. Tavan **6.50/10'da kalir**.
+
+### 3. TAVUK-YUMURTA gercektir --- artik kanitli
+
+Elde 9412 **unvan**, 5 **VKN** var. Olculen tum acik uclar girdi olarak
+**VKN/TCKN** istiyor:
+
+- GIB e-Fatura kayitli kullanicilar (uc kat iframe altinda bulundu:
+  `ebelge.gib.gov.tr/efaturakayitlikullanicilar.html` -> `sorgu.efatura.gov.tr/kullanicilar/`
+  -> `.../xliste.php`). Form alani etiketi **"VKN/TCKN"**, 2197374 kayit.
+  Captcha gercek JPEG (`img.php`, 1285B, `\xff\xd8\xff\xe0`). Captcha'siz ve
+  yanlis kodlu POST: "Guvenlik kodu hatali". Toplu ihrac yok
+  (`xls.php`/`liste.php`/`kullanicilar.xml`/`.zip` = 404; `?xls=1` ayni form).
+  **Yonu ters:** VKN -> unvan gider, unvan -> VKN gitmez. Ayrica vergi dairesi,
+  sicil no ve NACE **tasimaz**.
+- TOBB API uclari (`/api/sanayi`, `/api/sanayi-veri-tabani`, `/api/v1/sanayi/arama`)
+  = **401**.
+- EKAP: standart TLS el sikismasi basarisiz; `SECLEVEL=1` ile 200 (`ekapv2.kik.gov.tr`),
+  `/ihale-arama` ve `/api/ihale/arama` = **406**.
+- `veri.gov.tr`: uc varyantta da `ConnectionResetError 10054` --- **erisemedim** (D-245).
+- `sorgu.gib.gov.tr`: DNS cozulmuyor --- **erisemedim** (D-245).
+
+**Unvanla sorguya izin veren tek kaynak TSG'dir** (`unvansorgulama.php`, form
+`FormUnvanSorgulama`, `Captcha` maxlength=**4**); captcha'siz POST sonuc dondurmez,
+ilan goruntuleme `girisyap.php`'ye yonlenir. `TSG-KAYNAK-01` **kapali kalir**.
+
+### 4. Yasal dayanak **yoktur**
+
+MERSIS, TSG ve GIB'in kullanim sartlari/gizlilik sayfalarinin **besi de 404**.
+Yazili izin de yazili yasak da bulunamadi. GIB form etiketinde **TCKN** acikca
+geciyor --- gercek kisi tacir kayitlari kisisel veri tasir; **D-247/D-248 riski
+dogrulandi**.
+
+**Kural:** yazili izin bulunmayan, captcha ile korunan ve TCKN tasiyabilen
+kaynaktan toplu otomatik cekim **yapilmaz**. Captcha kirma / oturum taklidi
+teknik secenek olarak degerlendirilmez.
+
+### 5. Beklenen karar (urun sahibi)
+
+- **A) Resmi basvuru** --- Ticaret Bakanligi'na MERSIS erisim talebi + TOBB API
+  yetki basvurusu (401 donen uc). Tek mesru yol.
+- **B) Ticari veri saglayici** --- unvan -> VKN eslemesi satin al. Saglayicinin
+  kaynagi da D-245'e tabidir.
+- **C) Kapsami kabul et** --- kimlik tamligi tavanini **6.50/10** olarak dondur,
+  kilitli 5 alani D-249 geregi **NULL** say (0 puan sayma).
+
+**Onerilen: C simdi + A paralel.** B ancak A reddedilirse.
+
+### 6. Acik borc
+
+- **BORC-VKN-01** kapanmadi; kaynak bulunamadi (bkz. D-256/9).
+- **BORC-PANEL-TAVAN-01** kapanmadi; tavan 6.5/10 hala panelde yazmiyor.
+- **MERSIS-KAYNAK-01 kapandi** --- sonuc: **kapali**. Yeniden acilmasi ancak
+  A veya B secenegi ile mumkundur.
+
+**Referans:** D-245, D-247, D-248, D-249, D-250, D-252, D-256. Rapor:
+`docs/OLCUM_MERSIS_2026-09-28.md`.
