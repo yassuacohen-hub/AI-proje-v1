@@ -43,7 +43,8 @@ def test_quality_loaders_return_empty_states_when_source_is_unavailable(monkeypa
 
     assert admin_quality.load_quality_overview.__wrapped__()["toplam_firma"] == 0
     assert admin_quality.load_score_distribution.__wrapped__().empty
-    assert admin_quality.load_missing_field_analysis.__wrapped__().shape[0] == 7
+    # D-249: olculemeyen kaynak "7 alan, hepsi %0 eksik" diye sunulamaz; bos doner.
+    assert admin_quality.load_missing_field_analysis.__wrapped__().empty
     assert admin_quality.load_risky_companies.__wrapped__().empty
 
 

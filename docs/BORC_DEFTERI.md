@@ -79,7 +79,44 @@ yüzden ayrı bölümde durur. Silinmezler: adları `AGENTS.md`'de geçtiği sü
   bir arttı. Kayıt tutmanın kendisi ölçümü değiştirdi; sayı kılıfına uydurulmadı, gerçeğe
   çekildi (D-271'in tavanı 3 değil 4 yapmasıyla aynı karar).
 
-## Devir — sonraki oturum (D-295 sonrası)
+## Devir — sonraki oturum (D-299 sonrası)
+
+Bu tur **panelin yüzeyi** ölçüldü. Teslim: [`docs/YOL_HARITASI.md`](YOL_HARITASI.md).
+
+### Kesilenler (hepsi kırarak doğrulandı)
+
+- **D-299 — şablon değer yalanı.** `website_domain` kolonundaki 2.142 `http://www.isim.org.tr`
+  placeholder'ın kendisiydi (`AD_ICINDE=0/2142`). Dört şablon daha ölçüldü. Tek kapı
+  `admin_quality._dolu_kosulu()`; `admin_kpi` import eder, kopyalamaz. **Web Sitesi %57,9 → %29,6.**
+  Veri **silinmedi** — silme PO'da.
+- **`BORC-PANEL-SAHTE-TEST-01` kapandı.** `admin_executive._firma_kayitlari()` canlıda üç ayrı
+  katmanda patlıyordu: kolon adı (`address_line` yok), naive/aware datetime, `Decimal`/`float`.
+- `admin_quality` + `admin_kpi`: "hepsi %0 eksik" yalanı (D-249) ve transaction-abort zinciri.
+- NACE etiketi export çıkış kapısına bağlandı; `sunum.nace_metni` NaN sızıntısı (D-287).
+
+### Ölçüldü ama kesilmedi
+
+- **Yasu'nun OSTİM zenginleştirmesi panele ulaşmamış.** Yasu **SQLite** (`company_master.db`),
+  panel **Postgres**. 3.338 kayıt izole klasörde. Eşleşen 1.577 → **adres +1.427, e-posta +982,
+  telefon +0**; canlıda hiç olmayan 1.742. Yazma kararı PO'da (`BORC-D-281`).
+- **9 kolon tamamen boş, 54 tablodan 31'i boş.** Devir notu "28 kolon / 8 tablo" diyordu — yanlış.
+  D-266 gereği düşürülmedi, haritaya donduruldu.
+
+### Kendi kırmızım
+
+`admin_kpi.py` ve `admin_quality.py` dosyalarında **BOM (U+FEFF)** vardı; `test_panel_durustluk`
+`ast.parse` ile `SyntaxError` atıyordu. Ben açtım, ben ölçtüm, ben sildim. Sonrası `86 passed`.
+
+### Açık kalan borçlar
+
+- `admin_quality.load_risky_companies` hâlâ `except` ile hatayı yutuyor → kullanıcı
+  "riskli firma yok" sanır (D-249 ihlali).
+- **`tests/test_admin_kpi.py` hiç yok.** Panel testsiz.
+- `karar_no.py` **`CATISMA: ['D-281']`** bildiriyor: `AGENTS.md` D-281 = index hayaleti,
+  bu dosyada D-281 = OSTİM kaynak araştırması. İki farklı karar aynı numarada; yasu'nun satırı
+  olduğu için D-226 gereği dokunulmadı.
+
+## Devir — sonraki oturum (D-295 sonrası, tarihî kayıt)
 
 Bu tur **ürünün kendisi** ölçüldü: altyapı değil, müşteriye satılacak veri.
 Sonuç tek cümleyle: **ürün bugün satılabilir durumda değil.** Aşağıdaki bölümler

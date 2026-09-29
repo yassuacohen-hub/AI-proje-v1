@@ -170,7 +170,7 @@ def _firma_kayitlari(engine: Any) -> list[dict[str, Any]]:
     ``adres``; ``updated_at`` → ``son_guncelleme_gun`` (yalnızca son 30 gün
     içinde güncellenenler dolu sayılır, tazelik metriği bu alanı okur).
 
-    D-298: kolon adı ``address_line`` yazılıydı, ``companies``te böyle kolon yok
+    D-299: kolon adı ``address_line`` yazılıydı, ``companies``te böyle kolon yok
     (canlı ``psycopg.errors.UndefinedColumn``). ``address_line`` yalnız
     ``company_locations``ta var, o tablo 0 satır. Gerçek kolon: ``address``.
     """
@@ -184,7 +184,7 @@ def _firma_kayitlari(engine: Any) -> list[dict[str, Any]]:
             {"limit": SAGLIK_ORNEK_LIMITI},
         ).mappings().all()
 
-    # D-298: canli `updated_at` timestamptz (offset-aware), test sahtesi naive
+    # D-299: canli `updated_at` timestamptz (offset-aware), test sahtesi naive
     # veriyordu; `datetime.now()` ile karsilastirma canlida TypeError atiyordu.
     # Tek olcut: her sey UTC-aware'e cevrilir.
     simdi = datetime.now(timezone.utc)
@@ -208,7 +208,7 @@ def _firma_kayitlari(engine: Any) -> list[dict[str, Any]]:
             {
                 # D-249: olculmemis firma 0 tasimaz; None gecer ve
                 # health.py ortalamadan disar. `or 0` ortalamayi bastirirdi.
-                # D-298: canli kolon NUMERIC -> Decimal gelir, health.py float
+                # D-299: canli kolon NUMERIC -> Decimal gelir, health.py float
                 # ile boler (TypeError). Donusum sinirda yapilir; health.py
                 # sozlesmesi degistirilmez.
                 "identity_completeness": _sayi(row.get("identity_completeness")),

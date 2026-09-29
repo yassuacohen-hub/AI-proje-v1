@@ -80,7 +80,7 @@ def test_chart_freshness_bos_df_hata_vermez(monkeypatch):
 
 
 # ---------------------------------------------------------------------------
-# D-298: `_QUALITY_FIELDS` anahtarlari SQL'e ad olarak gomulur; `adres` ve
+# D-299: `_QUALITY_FIELDS` anahtarlari SQL'e ad olarak gomulur; `adres` ve
 # `osb_parsel` yaziliydi, canlida yok. Hata `except` ile yutulup `eksik = 0`
 # yazildigi icin panel "%0 eksik" diyordu (gercek: adres %38,4 parsel %99,8).
 # Tek gercek sema kaynagi canli DB -- schema/*.sql bayat.
@@ -106,7 +106,7 @@ def test_kpi_doluluk_kosulu_ayni_kapidan_gecer():
 
 
 def test_kpi_alan_sozlugu_kopya_degil():
-    """D-298: `adres`/`osb_parsel` kirigi iki dosyada birden yasadi.
+    """D-299: `adres`/`osb_parsel` kirigi iki dosyada birden yasadi.
 
     Kopya sozluk geri gelirse kirik da geri gelir -- ayni nesne olmali.
     """

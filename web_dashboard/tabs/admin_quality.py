@@ -43,7 +43,7 @@ from web_dashboard.tabs.admin_error_handling import AdminErrorHandler
 _admin_quality_logger = AdminErrorHandler("admin_quality")
 
 # Analiz edilecek alanlar: kolon adı -> okunabilir etiket
-# D-298: anahtarlar SQL'e ad olarak gömülür; canlı `companies` kolon adlarıyla
+# D-299: anahtarlar SQL'e ad olarak gömülür; canlı `companies` kolon adlarıyla
 # birebir aynı olmak zorunda. `adres`/`osb_parsel` yazılıydı, canlıda yok
 # (psycopg UndefinedColumn, HINT: companies.address). Gerçek adlar:
 # `address` ve `osb_parcel`.
@@ -263,7 +263,7 @@ def load_missing_field_analysis() -> pd.DataFrame:
                     )).mappings().first()
                     eksik = cnt_row["cnt"] if cnt_row else 0
                 except Exception as exc:
-                    # D-249/D-298: ölçülemeyen alan 0 taşımaz. `eksik = 0`
+                    # D-249/D-299: ölçülemeyen alan 0 taşımaz. `eksik = 0`
                     # panelde "%0 eksik" yalanı üretiyordu — kolon adı yanlışken
                     # kullanıcı alanı tam sanıyordu. Ölçülemeyen satır çizilmez.
                     # Rollback şart: tek hatalı alan transaction'ı abort edince

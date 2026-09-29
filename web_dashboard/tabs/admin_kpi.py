@@ -30,7 +30,7 @@ from web_dashboard.tabs.tenant_health_dashboard import (
 )
 from web_dashboard.tabs.admin_error_handling import AdminErrorHandler
 from web_dashboard.tabs._db_yardim import tablo_var_mi
-from web_dashboard.tabs.admin_quality import _QUALITY_FIELDS
+from web_dashboard.tabs.admin_quality import _dolu_kosulu, _QUALITY_FIELDS
 
 # Admin KPI logger
 _admin_kpi_logger = AdminErrorHandler("admin_kpi")
@@ -173,7 +173,7 @@ def load_field_quality_breakdown() -> pd.DataFrame:
     """Alan bazlı kalite analizi: her alanın doluluk oranı."""
     engine = get_engine()
     result = []
-    # D-298: bu sozluk admin_quality'nin kopyasiydi; ayni `adres`/`osb_parsel`
+    # D-299: bu sozluk admin_quality'nin kopyasiydi; ayni `adres`/`osb_parsel`
     # kirigi iki yerde birden yasadi (canlida kolonlar `address`/`osb_parcel`).
     # Kopya kaldirildi -- tek kaynak `admin_quality._QUALITY_FIELDS`.
     fields = _QUALITY_FIELDS
@@ -194,7 +194,7 @@ def load_field_quality_breakdown() -> pd.DataFrame:
                     )).mappings().first()
                     cnt = cnt_row["cnt"] if cnt_row else 0
                 except Exception as exc:
-                    # D-249/D-298: olculemeyen alan 0 tasimaz. `cnt = 0`
+                    # D-249/D-299: olculemeyen alan 0 tasimaz. `cnt = 0`
                     # "Doluluk %0" yalani uretiyordu. Rollback sart: tek hatali
                     # alan transaction'i abort edince arkasindakiler de duser.
                     conn.rollback()

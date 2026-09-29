@@ -5142,8 +5142,43 @@ patlar (`set PYTHONIOENCODING=utf-8` gerekir).
 
 **Referans:** D-241, D-245, D-249, D-250, D-257, D-258, D-260, D-272, D-281, D-286, D-288, D-292, D-293.
 
+## D-299 — Şablon değer "dolu" sayılmaz; panelin web sitesi oranının yarısı placeholder'dı (2026-09-29)
+
+**Bulgu.** `companies.website_domain` kolonunda **2.142 kayıt** literal `http://www.isim.org.tr`
+taşıyor. "isim" şablonun kendisi — kazıyıcı placeholder'ı veri diye kaydetmiş; firma adıyla
+ilgisi olan **0/2142** (ölçüldü). Aynı kalıpta dört şablon daha: `ostimistihdam.com` ×474,
+`ostimonline.com/Home/OstimMain` ×49, `Adres bilgisi girilmemiştir.` ×87,
+`bilinmeyen@bilinmeyen.com` ×17. Hepsi panelde "dolu" sayılıyordu.
+
+**Karar.** Sayarken yokluk sayılır, **veri silinmez** (silme PO'da). Tek kapı:
+`admin_quality._dolu_kosulu(col)`; `admin_kpi` aynı fonksiyonu **import eder**, kopyalamaz.
+
+**Kural.** *Doluluk ≠ bilgi (D-292) yalnız puanda değil, panel yüzeyinde de geçerlidir.*
+Bir kolonun `NOT NULL AND <> ''` olması o alanın bilgi taşıdığını göstermez.
+
+**Kanıt.** Canlı ölçüm, 9.409 OSB kaydı: Web Sitesi **%57,9 → %29,6** (5.446 → 2.781),
+Adres %61,6 → %60,7, E-posta %42,9 → %42,7. Mandal `86 passed`; kırarak doğrulandı —
+`NOT IN` çıkarılınca `test_sablon_deger_dolu_sayilmaz` kırmızıya döndü.
+
+**Ek ölçüm (devir notu düzeltmesi).** Devir notu "28 kolon okunmuyor / 8 tablo boş" diyordu.
+Gerçek: **9 kolon tamamen boş** (`company_type`, `employee_count`, `employee_count_estimate`,
+`employee_count_score`, `establishment_date`, `mersis_number`, `quarantine_reason`,
+`status_confidence`, `tax_office`), **54 tablodan 31'i boş**. Veri kaybı riski nedeniyle
+hiçbiri düşürülmedi (D-266) — [`docs/YOL_HARITASI.md`](docs/YOL_HARITASI.md) §6'ya dondurularak yazıldı.
+
+**Ek bulgu — numara çatışması.** `karar_no.py --al` `CATISMA: ['D-281']` bildirdi. Ölçüldü:
+`AGENTS.md` D-281 = index hayaleti, `BORC_DEFTERI.md` D-281 = OSTİM kaynak araştırması —
+**iki farklı karar, aynı numara**. Yasu'nun satırı olduğu için D-226 gereği dokunulmadı.
+
+**Kapanan borç.** `BORC-PANEL-SAHTE-TEST-01` (aynı turda `admin_executive` üç katmanlı canlı
+hatası kesildi). **Açık kalan:** `load_risky_companies` hâlâ hatayı yutuyor (D-249 ihlali);
+`tests/test_admin_kpi.py` **hiç yok**.
+
+**Referans:** D-8, D-226, D-249, D-260, D-266, D-281, D-286, D-287, D-288, D-292, D-295.
+
 ## Ilgili Nodlar
 
 - [[docs/BORC_DEFTERI]]
+- [[docs/YOL_HARITASI]]
 - [[scripts/kilit_zorla]]
 - [[scripts/karar_no]]
