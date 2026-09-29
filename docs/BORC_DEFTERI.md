@@ -21,7 +21,7 @@ yanlış okudu — altı tur üst üste (D-265, D-266, D-267/1, D-268/1, D-271/1
 
 | Kimlik | Ölçülen sapma | Durum | Kaynak D | Kapanış D |
 |---|---|---|---|---|
-| `BORC-NACE-DOGRULAMA-01` | `nace_validity` alanı kaynaksız | ACIK | D-258 | — |
+| `BORC-NACE-DOGRULAMA-01` | `nace_validity` alanı kaynaksız | KAPANDI | D-258 | D-287: doğrulama **yapılamaz değil, anlamsız** — sözlük var (3319) ama yetim kod **0**, hiçbir şeyi ayırt etmiyor; `verified` değeri hiç üretilmiyor, kolon `src/`de hiç **okunmuyor**. Ağırlık çekilmedi (kilit dürüst), puan kapısı iki mandalla korundu |
 | `BORC-PANO-BORC-00` | borç listesinin kanonik kaydı yok | KAPANDI | D-271 | D-272 |
 | `BORC-SCRIPTS-01` | `scripts/` altında 41 `_*` girdi (29 `.py` hepsi derlenir, **0 çürük**, üretim çağıranı **0**); kökte ayrıca **76 index hayaleti** tek kullanımlık betik. D-281'de ölçüldü ve **tavanlandı** (76/2), kesme ürün sahibinde | ACIK | D-255 | — |
 | `BORC-KARAR-NUMARA-01` | karar numarası **iki ayrı dosyadan** tahsis ediliyordu (`AGENTS.md` max D-281, bu defter max D-282); çakışma: **D-281 iki karara birden** verilmiş. D-227 mandalı yalnız `AGENTS.md`'yi ve yalnız `(D-NNN — KAH` biçimini tarıdığı için çatışma görünmezdi | KAPANDI | D-281 | D-286: `scripts/karar_no.py` tek havuz + `TAVAN_CATISMA=1` mandalı (kırılarak doğrulandı; D-283 eşzamanlı ajan yarışında çakıştı, **mandal yakaladı**, kayıt D-286'e taşındı — tavan yükseltilmedi) |
@@ -73,11 +73,30 @@ yüzden ayrı bölümde durur. Silinmezler: adları `AGENTS.md`'de geçtiği sü
   bir arttı. Kayıt tutmanın kendisi ölçümü değiştirdi; sayı kılıfına uydurulmadı, gerçeğe
   çekildi (D-271'in tavanı 3 değil 4 yapmasıyla aynı karar).
 
-## Devir — sonraki oturum (D-281 sonrası)
+## Devir — sonraki oturum (D-287 sonrası)
 
 Bu bölüm devir notunun kaynağıdır (D-219 mantığı). Ajan hafıza dosyasına yazılmadı: ölçüldü,
 dört `*_project_context.md` dosyasında bu hattın hiçbir izi yok — hat panoya bağlı değil,
 doğrudan ürün sahibiyle yürüyor.
+
+### Bu turda bitenler (D-287)
+
+| İş | Sonuç | Kanıt |
+|---|---|---|
+| Karar A — `ac` yanlış kapı uyarısı | `chat.acik_sahipler()` + `cmd_ac` stderr uyarısı, **engelleme yok** | `tests/test_ajan_chat.py` 21 geçti (15→21) |
+| Karar B — karar numarası kancaya | `test_karar_numara_tekligi.py` pre-commit'e eklendi; `karar_no.py` **değişmedi** (mandal zaten vardı) | Sahte D-286 başlığı → commit **durdu** (`2 <= 1` düştü), geri alındı → yeşil. Kanca yeni maliyet **19,4 sn** |
+| Karar C — yazma kapısı ölçümü | motor çağıran **163**, gerçekten YAZAN **70**, doğrudan `create_engine` **25**, motorsuz yazan **0**; dağılım `src/` 22, `scripts/` 47, **`web_dashboard/` 0** | mimari **değiştirilmedi** (ürün sahibi kararı) |
+| NACE doğrulama | doğrulama **reddedildi**, ağırlık **çekilmedi**, iki mandal kondu | `tests/test_panel_durustluk.py` 19 geçti (17→19), kırarak doğrulandı |
+
+**Karar C okuması (ürün sahibine):** yazma kapısı **tek değil** — 25 dosya `create_engine`'i
+doğrudan çağırıyor, 24'ü `connection.py`'yi atlıyor. Ama panel **hiç yazmıyor** (0), yani
+canlı-DB ayrımının dayandığı risk panelde yok. Motorsuz gizli yazma yolu da yok (0).
+
+**NACE okuması:** `verified` sıfır değil, değer kümesinde **yok** (`medium` 5732 / `unknown`
+2942 / `fallback` 738). Kod doluluğu 8289/9412 = **%88,07**, kanıt kaynaklı NACE **0/9412 = %0**.
+Sözlüğü puana bağlamak 8289 **tahmin** koda 1.0 dağıtırdı — puan uydurmanın ta kendisi.
+Tavan kilidi (7,5/10) **dürüst**, bu yüzden ağırlık gerçeğe çekilmedi; kilit kaldıracak olan
+şey kanıt kaynağıdır (`BORC-VKN-01` / MERSİS), bu tur açılmadı.
 
 ### ÜRÜN SAHİBİNE SORU — `BORC-SCRIPTS-01` (cevapsız silme YOK)
 
@@ -781,3 +800,59 @@ python -m pytest tests/test_ostim_birlestirme_kalite.py -q   # 18/18
 - `data/tobb_cookie.json` canlı oturum çerezidir; paylaşılmamalı
 
 - TOBB parolası sohbette açıkça paylaşıldı ve `.env`'e yazıldı →
+
+## D-287 — NACE doğrulaması anlamsız çıktı; iki küçük kapı mandallandı (2026-09-29)
+
+### 1. `verified` yok, sıfır değil
+
+`companies.nace_validity` değer kümesi: `medium` 5732, `unknown` 2942, `fallback` 738.
+`verified` **hiç üretilmiyor**. Kolon `src/` altında hiçbir yerde **okunmuyor** — yalnız
+yazılıyor ve `nace_source`'un aynası: `sector_default→medium` 5679, `unknown→unknown` 2388,
+`fallback→fallback` 654, `invalid_cleared→unknown` 554. Bilgi taşımıyor (D-266 biçimli borç).
+
+### 2. Sözlük var ama ayırt etmiyor
+
+`nace_codes` 3319 satır. **Yetim kod = 0** — 8289 kodun tamamı sözlükte. "Sözlükte mi?"
+sorusu hiçbir firmayı diğerinden ayırmaz. Devir notunun önerdiği "en ucuz doğrulama"
+(sözlük üyeliği + biçim) bu yüzden **ölçümle reddedildi**: puana bağlansaydı 8289 tahmin
+koda 1.0 ağırlık dağıtırdı = puan uydurmak (D-245/D-252'nin tersi yönden ihlali).
+
+### 3. Ağırlık çekilmedi — kilit dürüst
+
+`nace_code` ağırlığı 1.0'da kaldı. Sebep: NACE gerçekten %100 tahmin
+(`HEDEF_VERI_KAPSAMI.md` s.190, D-258). Sistem "bu firma eksik" derken doğru söylüyor;
+eksik olan ölçüm değil, veri. Ağırlığı düşürmek tavanı **sahte** yükseltirdi.
+
+### 4. Kural
+
+> Biçim/sözlük doğrulaması kanıt değildir. Kaynak doğrular, şekil doğrulamaz.
+> Ayırt etmeyen bir kontrol puana bağlanamaz.
+
+Mandallar (`tests/test_panel_durustluk.py`, kancada):
+`test_nace_puani_sozluge_veya_validity_kolonuna_bakmaz`,
+`test_nace_kanit_kaynaklari_tahmin_etiketi_tasimaz`.
+Kırılarak doğrulandı: `NACE_KANIT_KAYNAKLARI`'ya `sector_default` eklendi → **3 kırmızı**
+(yeni iki mandal + mevcut D-252 mandalı), geri alındı → **19 yeşil**.
+
+### 5. Karar A — `ac` yanlış kapı uyarısı (ürün sahibi onayı)
+
+`chat.acik_sahipler(task_id, haric)` aynı görevde **başka** ajanın açık kaydını döner;
+`cmd_ac` bunu stderr'e yazar. **Engelleme yok** (ürün sahibi: uyarı yeter). Saf fonksiyon,
+mevcut `oku()`'yu kullanır, yeni dosya/bağımlılık yok. 6 mandal, `test_cli_uyariyi_cagirir`
+çağıranı zorlar (D-266).
+
+### 6. Karar B — karar numarası kancaya
+
+`karar_no.py` **değiştirilmedi**: aranan mandal (`TAVAN_CATISMA = 1`) zaten vardı, eksik olan
+tek şey kancaya bağlı olmamasıydı. `scripts/hooks/pre-commit` tek satır genişletildi.
+Kanca alt kümesi artık **19,4 sn** (yorumdaki "~15 sn" düzeltildi).
+
+### 7. Karar C — yazma kapısı ölçüldü, mimari değişmedi
+
+motor çağıran **163** · gerçekten YAZAN **70** · doğrudan `create_engine` **25** ·
+motorsuz yazan **0** · `src/` 22, `scripts/` 47, **`web_dashboard/` 0**.
+Kapı tek değil (24 dosya `connection.py`'yi atlıyor) ama panel hiç yazmıyor.
+
+### 8. Ölçüm aracı
+
+`scripts/_nace_olcum.py` tek kullanımlıktı, **silindi** (D-241).

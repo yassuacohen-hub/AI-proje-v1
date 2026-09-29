@@ -1,0 +1,3 @@
+DASH-UX-02a => sahip=copilot durum=done oncelik=P1
+DASH-UX-02a-v1 => BULUNAMADI
+ADMIN-UX-MENUTREE-01 => sahip=ihsan durum=iptal oncelik=P1

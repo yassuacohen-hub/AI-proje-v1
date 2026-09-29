@@ -15,7 +15,13 @@
 - **Aktif görevler:** VERI-02 (P1, bloke VERI-KAYNAK-BAG-01), VERI-NACE-COKLU-01 (P1, bloke VERI-NACE-SOZLUK-01), VERI-NACE-KOLON-01 (P2)
 - **Plan görevler:** VERI-SEKTOR-01 (P1), VERI-KAYNAK-SIZINTI-01 (P2), VERI-IVEDIK-YENIDEN-01 (P1)
 - **Sonraki adım:** ihsan onayını bekle / posta kutusunu kontrol et
-- **Görev:** `TEST-BACKLOG-20` (review), `VERI-HAYALET-TEMIZ-01` (review), `VERI-KAYNAK-BAG-01` (review), `VERI-NACE-SOZLUK-01` (review), `VERI-NACE-TEMIZ-01` (review) · **Son okunan karar:** `D-219`
+- **Görev:** `TEST-BACKLOG-20` (review), `VERI-HAYALET-TEMIZ-01` (review), `VERI-KAYNAK-BAG-01` (review), `VERI-NACE-SOZLUK-01` (review), `VERI-NACE-TEMIZ-01` (review) · **Son okunan karar:** `D-268`
+
+> **2026-09-29 notu (D-268):** Kökten 130 tek kullanımlık dosya `_ARSIV_tek_kullanimlik/`'a
+> taşındı. **Senin 6 görevinin hiçbir dosyası taşınanlarla çakışmıyor** (brif taraması:
+> 0 eşleşme). Senin kilitli dosyaların (`nace_coklu_ata.py`, `kaynak_firma_bagla.py`,
+> `sektor_normalize.py`, `kaynak_sizinti_duzelt.py`, `ivedik_scraper.py`) **yerinde**.
+> D-220 gereği `_ARSIV*` arama kapsamı dışıdır — aramana girmesi gerekmez.
 
 ## Oturum Açılış (60 saniye, bu sırayla)
 

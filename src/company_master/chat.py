@@ -47,6 +47,32 @@ def _ajan_normalize(ad: str | None) -> str:
 ONEM_SEVIYELERI: tuple[str, ...] = ("kritik", "yuksek", "orta", "dusuk")
 
 
+def acik_sahipler(
+    task_id: str,
+    haric: str,
+    data_dir: Path | None = None,
+) -> list[str]:
+    """Aynı task_id altında BAŞKA ajanın açık kaydı var mı (D-287 / Karar A).
+
+    `ac` yanlış kapıdır: cevap yazarken yeni sorun açılırsa karşı tarafın
+    kaydı açık kalır (D-286 dersi). Burada sadece ÖLÇÜLÜR — engelleme yok.
+
+    Args:
+        task_id: görev ID
+        haric: çağıran ajan (kendi açık kaydı uyarı üretmez)
+        data_dir: test için custom data dir
+
+    Returns:
+        Açık kaydı olan diğer ajan adları (tekil, sıralı)
+    """
+    ben = _ajan_normalize(haric)
+    return sorted({
+        s.get("kimden", "")
+        for s in oku(task_id=task_id, data_dir=data_dir)
+        if s.get("durum") == "acik" and s.get("kimden") != ben
+    } - {""})
+
+
 def ac(
     ajan: str,
     task_id: str,

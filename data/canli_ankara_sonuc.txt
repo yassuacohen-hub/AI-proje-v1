@@ -1,0 +1,5 @@
+HTTP=200 len=156
+GIRIS YAPMALISINIZ = False
+goster.php = 0 | Sayfalar = False
+
+=== SONUÇ BÖLGESİ ===

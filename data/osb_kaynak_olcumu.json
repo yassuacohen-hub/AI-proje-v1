@@ -1,0 +1,117 @@
+{
+  "kaynaklar": [
+    {
+      "http": 200,
+      "bayt": 152031,
+      "sure_saniye": 1.14,
+      "son_url": "https://ostim.org.tr/",
+      "erisim": true,
+      "ad": "OSTIM ana sayfa",
+      "url": "https://ostim.org.tr/"
+    },
+    {
+      "http": 200,
+      "bayt": 334276,
+      "sure_saniye": 1.21,
+      "son_url": "https://ostim.org.tr/firmalar",
+      "erisim": true,
+      "ad": "OSTIM firmalar",
+      "url": "https://ostim.org.tr/firmalar"
+    },
+    {
+      "http": 404,
+      "bayt": 829,
+      "sure_saniye": 0.83,
+      "son_url": "https://ostim.org.tr/uye-listesi",
+      "erisim": false,
+      "ad": "OSTIM uye listesi",
+      "url": "https://ostim.org.tr/uye-listesi"
+    },
+    {
+      "http": 200,
+      "bayt": 2801654,
+      "sure_saniye": 3.59,
+      "son_url": "https://www.atonet.org.tr/",
+      "erisim": true,
+      "ad": "ATO (Ankara Ticaret Odası)",
+      "url": "https://www.atonet.org.tr/"
+    },
+    {
+      "http": 200,
+      "bayt": 70240,
+      "sure_saniye": 2.03,
+      "son_url": "https://www.atb.org.tr/",
+      "erisim": true,
+      "ad": "ATB (Ankara Ticaret Borsası)",
+      "url": "https://www.atb.org.tr/"
+    },
+    {
+      "http": 200,
+      "bayt": 104184,
+      "sure_saniye": 1.05,
+      "son_url": "https://www.aso.org.tr/",
+      "erisim": true,
+      "ad": "ASO (Ankara Sanayi Odası)",
+      "url": "https://www.aso.org.tr/"
+    },
+    {
+      "http": 200,
+      "bayt": 37211,
+      "sure_saniye": 1.07,
+      "son_url": "https://www.gib.gov.tr/",
+      "erisim": true,
+      "ad": "GIB VKN sorgu",
+      "url": "https://www.gib.gov.tr/"
+    },
+    {
+      "http": 200,
+      "bayt": 83224,
+      "sure_saniye": 1.29,
+      "son_url": "https://ticaret.gov.tr/",
+      "erisim": true,
+      "ad": "Ticaret Bakanlığı",
+      "url": "https://ticaret.gov.tr/"
+    },
+    {
+      "http": 200,
+      "bayt": 31027,
+      "sure_saniye": 1.18,
+      "son_url": "https://mersis.ticaret.gov.tr/",
+      "erisim": true,
+      "ad": "MERSIS (e-Devlet kontrol)",
+      "url": "https://mersis.ticaret.gov.tr/"
+    }
+  ],
+  "erisilebilir": [
+    "OSTIM ana sayfa",
+    "OSTIM firmalar",
+    "ATO (Ankara Ticaret Odası)",
+    "ATB (Ankara Ticaret Borsası)",
+    "ASO (Ankara Sanayi Odası)",
+    "GIB VKN sorgu",
+    "Ticaret Bakanlığı",
+    "MERSIS (e-Devlet kontrol)"
+  ],
+  "robots": {
+    "ostim.org.tr": {
+      "url": "https://ostim.org.tr/robots.txt",
+      "http": 200,
+      "icerik": "User-agent: *\r\nDisallow: /admin/\r\nDisallow: /portal/\r\nDisallow: /auth/\r\nSitemap: https://ostim.org.tr/sitemap.xml\r\n"
+    },
+    "atonet.org.tr": {
+      "url": "https://atonet.org.tr/robots.txt",
+      "http": 200,
+      "icerik": "User-agent: *\r\nDisallow:\r\nSitemap: https://www.atonet.org.tr/1site.xml"
+    },
+    "aso.org.tr": {
+      "url": "https://aso.org.tr/robots.txt",
+      "http": 200,
+      "icerik": "controller bulunamadı."
+    },
+    "atb.org.tr": {
+      "url": "https://atb.org.tr/robots.txt",
+      "http": 200,
+      "icerik": "User-Agent: *\r\nAllow: \r\n\r\nSitemap: http://www.atb.org.tr/sitemap.xml"
+    }
+  }
+}

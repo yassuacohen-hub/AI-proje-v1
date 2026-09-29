@@ -1,0 +1,33 @@
+vergi_no dolu: 761
+
+vergi_no icerik dagilimi:
+    526  6 hane -> SICIL adayi
+    122  11 hane -> siniflandirilamadi
+     78  5 hane -> SICIL adayi
+     16  4 hane -> SICIL adayi
+     11  3 hane -> SICIL adayi
+      5  10 hane -> VKN gecerli
+      2  11 hane -> TCKN gecerli
+      1  2 hane -> siniflandirilamadi
+  => sicil_dogrula() gecen: 631
+
+sicil kolonu durumu (vergi_no dolu satirlarda):
+  trade_registry_number dolu: 0
+
+=== tax_number kolonunun kendi kalitesi ===
+  tax_number dolu: 40
+     21  6 hane -> gecersiz
+     14  11 hane -> gecersiz
+      4  10 hane -> vkn
+      1  5 hane -> gecersiz
+
+=== D-246 kapisini gecen ve tasinabilir olanlar ===
+  sadece vergi_no dolu + gecerli = 3
+    390b19a4-6773-4e6d-b19e-710b46a82541 | YARIMKÜRE İNŞ. MÜM. TURZ. İTH. İHR. SAN. VE TİC. LTD. ŞTİ. | '9380023742' -> 9380023742 (vkn)
+    a7745a17-87d0-4a1e-adca-21b808e71227 | EKREM SAHIN-AVRASYA ÇELIK KAPI | '51692509524' -> 51692509524 (tckn)
+    e84f0bb6-3f38-4600-852b-efd9644c085c | DRK ELEK. | '11113191042' -> 11113191042 (tckn)
+
+=== ikisi de dolu (31) - hangisi gecerli? ===
+     26  vergi_no=gecersiz / tax_number=gecersiz / ayni=True
+      4  vergi_no=vkn / tax_number=vkn / ayni=True
+      1  vergi_no=gecersiz / tax_number=gecersiz / ayni=False

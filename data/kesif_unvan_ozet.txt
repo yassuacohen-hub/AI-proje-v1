@@ -1,0 +1,32 @@
+UZUNLUK=35613
+
+=== FORMLAR ===
+  FormUyeGirisi
+  FormSifremiUnuttum
+  FormUyeOl
+  FormUnvanSorgulama
+=== INPUT/SELECT NAME ===
+  query
+  LoginEmail
+  LoginSifre
+  Captcha
+  SifremiUnuttumEmail
+  CaptchaSifremiUnuttum
+  UyeTuru
+  Unvan
+  SicilNo
+  Email
+  Sifre
+  SifreTekrar
+  CaptchaUyeOl
+  YeniSorgu
+  UnvanSorgu
+  Captcha
+=== AJAX URL ===
+  /view/modal/uyegirisi_ok.php
+  /view/modal/sifremiunuttum_ok.php
+  /view/modal/uyeol_ok.php
+  unvansorgulama_ok.php
+=== TABLO BASLIKLARI ===
+=== ILK 3000 JS/HTML (form bolgesi) ===
+&times; --> ANA SAYFA MENÜ HAKKIMIZDA Türkiye Ticaret Sicili Gazetesi Müdürlüğümüz Ticaret Sicili Müdürlükleri GENEL BİLGİLER İlan Yayın Süreci Örnek İlan Metinleri Abonelik İlan Ücretleri Banka Hesap Bilgileri </l

@@ -1,0 +1,95 @@
+ 55| Unvan/Ad Soyad
+ 56| Ticaret Sicili Numarası (Zorunlu değildir)
+ 57| E-Posta Adresiniz
+ 58| Şifre
+ 59| Şifre Tekrar
+ 60| KAYIT
+ 61| Giriş Formuna Git
+ 62| Abonelik
+ 63| 10.06.2019
+ 64| 475,323 Görüntülenme
+ 65| TÜRKİYE TİCARET SİCİLİ GAZETESİ ABONELİK HİZMETLERİ
+ 66| VERİ ABONELİĞİ
+ 67| Veri Aboneliği Düzey_1, Düzey_2 ve Düzey_3 olmak üzere üç farklı model ile hizmet
+ 68| sunmaktadır.
+ 69| Veri
+ 70| Abonelik Tipi
+ 71| PDF
+ 72| TÜRÜ / VERİ SETİ
+ 73| 2026 Yılı
+ 74| HİZMET
+ 75| SUNUŞ ŞEKLİ
+ 76| 1
+ 77| Düzey_1
+ 78| Standart Elektronik Gazete Veri Aboneliği
+ 79| (Yıllık) (İlan türlerini içeren fihristli)
+ 80| Not
+ 81| _1
+ 82| : 2026 yılında 251 iş günü vardır. (251 x 1.932) = 484.932 TL
+ 83| Not_2: Bir ilan için ödenecek
+ 84| muhtemel tutar: 484.932 TL / 930.000 ilan sayısı
+ 85| = 0,521 TL
+ 86| Aranamaz-Resim (non-searchable)
+ 87| PDF / TSM – TSM No – Unvan1 – Unvan2 – İlan Türü – Yayın Tarihi – Sayısı –
+ 88| Baş Sayfa – Son Sayfa – Bağlı İlan – Bağlı İlan Sicil No
+ 89| 484.932 TL
+ 90| WEB SERVİS
+ 91| 2
+ 92| Düzey_2
+ 93| Detaylı Elektronik Gazete Veri Aboneliği
+ 94| (Yıllık) (İlan türlerini içeren fihristli)
+ 95| Not_1:
+ 96| 2026 yılında 251 iş günü vardır. (251 x 3.792) = 951.792
+ 97| TL
+ 98| Not_2: Bir ilan için ödenecek
+ 99| muhtemel tutar: 951.792
+100| TL / 930.000 ilan sayısı
+101| = 1,023 TL
+102| Aranabilir (searchable)
+103| PDF (finansal tablolar hariç) / TSM – TSM No – Unvan1 – Unvan2 –
+104| İlan Türü – Yayın Tarihi – Sayısı – Baş Sayfa – Son Sayfa – Bağlı İlan –
+105| Bağlı İlan Sicil No –
+106| Çoklu İlan Türü -  MERSİS No –
+107| Kuruluşlar için Adres – AŞ ve LŞ Kuruluşlar için Sermaye
+108| 951.792 TL
+109| WEB SERVİS
+110| 3
+111| Düzey_3
+112| Detaylı Elektronik Gazete Veri Aboneliği
+113| (Yıllık) (İlan türlerini içeren fihristli)
+114| Not_1:
+115| 2026 yılında 251 iş günü vardır.
+116| (251 x 5.688) = 1.427.688
+117| TL
+118| Not_2: Bir ilan için ödenecek
+119| muhtemel tutar: 1.427.688
+120| TL / 930.000 ilan sayısı
+121| = 1,535 TL
+122| Aranabilir (searchable) PDF (finansal tablolar hariç)
+123| / TSM – TSM No – Unvan1 – Unvan2 – İlan Türü – Yayın Tarihi – Sayısı – Baş
+124| Sayfa – Son Sayfa – Bağlı İlan – Bağlı İlan Sicil No – Çoklu İlan Türü -
+125| MERSİS No – Kuruluşlar için Adres –
+126| Tüm Kuruluşlar (
+127| anonim
+128| şirket, limited şirket, Kollektif şirket, komandit şirket, kooperatif, gerçek
+129| kişi ticari işletmesi, diğer iktisadi işletmeler, yabancı şirket Türkiye merkez
+130| şubesi ve adi (iş ortaklığı) ortaklığı kuruluş
+131| ) için Toplam Sermaye
+132| Vergi No
+133| Vergi Dairesi
+134| Adres Kodu (UAVT
+135| adres kodu bilgisi)
+136| Amaç Konu (tekst
+137| metin)
+138| Ana NACE Kodu
+139| Ana NACE Konu
+140| Açıklaması
+141| Alt NACE Kodları (n
+142| tane gelebilir)
+143| Alt NACE Kodlarının
+144| Açıklamaları (n tane gelebilir)
+145| Ortaklar (Liste)
+146| TC Kimlik No (* Maskeli ilk 3 son 2 hane açık)
+147| Vergi No (* Maskeli)
+148| Pasaport No (* Maskeli)
+149| Ortak Türü (Gerçek, Tüzel, Dış Tüzel)

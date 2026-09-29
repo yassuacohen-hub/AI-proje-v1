@@ -1,0 +1,8 @@
+--- {'SicilMudurluguId': '18', 'Tarih1': '01.01.2026', 'Tarih2': '02.01.2026', 'TicaretUnvani': 'A'}
+    HTTP=200 len=156 | Sicil No veya En Az 5 Karakter Ticaret Unvanı Giriniz
+--- {'SicilMudurluguId': '18', 'Tarih1': '01.01.2026', 'Tarih2': '02.01.2026', 'TicSicNo': '448217'}
+    HTTP=200 len=8762 | Yayınlanmış Türkiye Ticaret Sicili Gazetesi İlanları (4 Adet) Müdürlük Sicil No Unvan Yayın Tarihi Sayı Sayfa İlan Türü Gazete Sepete Ekle Geri Bildirim ANKARA 448217 AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT ORGANİZE ŞUBESİ 21.08.2026 11649 67 ŞUBE (ADRES DEĞİŞİKLİĞİ) MERKEZİ TÜRKİYE’ DE 
+--- {'SicilMudurluguId': '18', 'Tarih1': '01.01.2026', 'Tarih2': '02.01.2026', 'TicaretUnvani': 'AKANA', 'TicSicNo': ''}
+    HTTP=200 len=79104 | Yayınlanmış Türkiye Ticaret Sicili Gazetesi İlanları (71 Adet) Müdürlük Sicil No Unvan Yayın Tarihi Sayı Sayfa İlan Türü Gazete Sepete Ekle Geri Bildirim ANKARA 448217 AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT ORGANİZE ŞUBESİ 21.08.2026 11649 67 ŞUBE (ADRES DEĞİŞİKLİĞİ) MERKEZİ TÜRKİYE’ DE
+--- {'SicilMudurluguId': '18', 'Tarih': '1', 'Tarih1': '01.01.2026', 'Tarih2': '02.01.2026', 'TicaretUnvani': 'AKANA', 'TicSicNo': '', 'BagliIlan': '1'}
+    HTTP=200 len=3014 | Sonuç Bulunamadı &times; Geri Bildirim Sorguladığınız ilan ile ilgili hata olduğunu düşünüyorsanız, aşağıdaki bildirim sebeplerinden uygun olanı seçip tarafımıza iletebilirsiniz. Bildirim Sebebi Seçiniz İlan ilgili sayfalarda yer almıyor İlanın baş sayfa bilgisi hatalı İlanın son sayfa bilgisi hatal

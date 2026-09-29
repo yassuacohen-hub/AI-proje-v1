@@ -1711,5 +1711,65 @@
     "baslangic": null,
     "bitis": null,
     "not": "Temizlik sonrasi 14 gercek firma kalir; site gercek firma sayisi dogrulanmali"
+  },
+  {
+    "task_id": "ALTYAPI-AJAN-CAKISMA-01",
+    "id": "ALTYAPI-AJAN-CAKISMA-01",
+    "baslik": "[ALTYAPI] Eszamanli ajan kacak kilit kapisini yaz → ajan_cakisma_kilidi.py (4s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-09-29T00:42:35",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/ajan_cakisma_kilidi.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ihsan_ALTYAPI-AJAN-CAKISMA-01.md",
+    "talimat": "Brif: plans/brief_ihsan_ALTYAPI-AJAN-CAKISMA-01.md. FAZ-0'da ihsan aktifken 130 kok dosyasi tasinmisti; canli olcum betigi arsive kaysdi (geri alindi). Kok neden: cakisma kapisi gorev adi duzeyinde kontrol edildi, dosya kilidi duzeyinde degil. Kanit: data/orchestrator/FAZ0_RAPOR_kok_hijyeni_2026-09-29_orkestrator.md"
+  },
+  {
+    "task_id": "ALTYAPI-SKILL-YAPISI-01",
+    "id": "ALTYAPI-SKILL-YAPISI-01",
+    "baslik": "[ALTYAPI] Skill sistemini tek havuzda birlestir → SKILLS_INDEX.md yaz (6s)",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "review",
+    "baslangic": "2026-09-29T01:23:04",
+    "bitis": null,
+    "dosyalar": [
+      "skills/devops/__init__.py",
+      "skills/streamlit/__init__.py",
+      "tests/test_skill_havuzu.py"
+    ],
+    "not": "Teslim (yasu): 6 faz tamam: A kirik paket imzalari duzeltildi (skills/tools/{devops,streamlit}), B devops_agent 9Router'a gecirildi (anthropic SDK eklenmedi), C .kilo/skills kaldirildi + 6 skill .agents/skills'e, .claude 5 kopya junction, .continue 5 bos klasor silindi, .roo/sistemsel junction, D skills/common -> {tools,services} + prompts/ + SKILLS_INDEX.md, E tests/test_skill_havuzu.py 13 passed, F regresyon 4465 passed 13 skipped 0 failed",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-SKILL-YAPISI-01.md",
+    "talimat": "Brif: plans/brief_yasu_ALTYAPI-SKILL-YAPISI-01.md. SKILL.md havuzu (4 klasor, kopyalar) + Python registry (skills/, 37 yetenek) TEK yerde birlestirilecek. 6 faz: A kirik paket imzalari, B devops_agent, C havuz tekillestirme, D Python tarafi birlestirme (tools/services/utils + SKILLS_INDEX.md), E havuz mandali, F regresyon. Kanit: data/orchestrator/SISTEM_TARAMASI_2026-09-29_orkestrator.md"
+  },
+  {
+    "task_id": "ALTYAPI-TICARET-KANIT-01",
+    "id": "ALTYAPI-TICARET-KANIT-01",
+    "baslik": "[ALTYAPI] Kanit katmanini yaz → skills/services/ticaret_sicili_kanit.py (2s)",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "review",
+    "baslangic": "2026-09-29T02:35:29",
+    "bitis": null,
+    "dosyalar": [
+      "skills/services/ticaret_sicili_kanit.py",
+      "tests/test_ticaret_sicili_kanit.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-TICARET-KANIT-01.md",
+    "talimat": "Gercek kayit olculdu: MERSIS 00120320741000024, Sicil 448217, Ilan 49136, icerik (21341515). D-268 DUZELTMESI: MERSIS 17 hane (0+VKN10+ek6); Webtekno 16 diyordu, yanlis. TOBB girisi UCRETSIZ. kanit_kaydet + kanit_listele yazildi, 20/20 test gecti. 3 hata yakalandi. Rapor: plans/rapor_yasu_BROWSERUSE-TICARET-SICIL-01.md"
   }
 ]

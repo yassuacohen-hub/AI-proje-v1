@@ -1,0 +1,43 @@
+{
+  "ilan_sira_no": "49136",
+  "icerik_no": "21341515",
+  "mersis_no": "00120320741000024",
+  "ticaret_sicil_no": "448217",
+  "ticaret_unvani": "AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT ORGANİZE ŞUBESİ",
+  "adres": "Malıköy Başkent OSB Mah. 16 Cad. Akana No: 9 Sincan / Ankara",
+  "mudurluk": "ANKARA",
+  "yayin_tarihi": "21.08.2026",
+  "gazete_sayi": "11649",
+  "gazete_sayfa": "67",
+  "tescil_tarihi": "20.08.2026",
+  "tescil_edilen_husus": "Adres",
+  "delil_belgeler": null,
+  "kaynak": "https://www.ticaretsicil.gov.tr/view/hizlierisim/ilangoruntuleme.php",
+  "alinma_zamani": "2026-09-28T23:33:54+00:00",
+  "ham_metin": "T.C. ANKARA TİCARET SİCİLİ MÜDÜRLÜĞÜ'NDEN\nİlan Sıra No: 49136\nMersis No: 00120320741000024\nTicaret Sicil/Dosya No: 448217\nTicaret Unvanı: AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT ORGANİZE ŞUBESİ\nAdres : Malıköy Başkent OSB Mah. 16 Cad. Akana No: 9 Sincan / Ankara\nTescil Edilen Hususlar: Adres\n(21341515)",
+  "dogrulama": {
+    "sonuc": "gecerli",
+    "bulgular": [
+      {
+        "kod": "MERSIS_ACILIM",
+        "seviye": "bilgi",
+        "mesaj": "MERSİS çözüldü → VKN=0120320741, ek=000024"
+      },
+      {
+        "kod": "SUBE_KAYIT",
+        "seviye": "bilgi",
+        "mesaj": "Kayıt bir ŞUBE; ana şirket sicil no ile eşleşmeyebilir"
+      }
+    ],
+    "turetilen": {
+      "anahtar": "49136-11649-67",
+      "sirket_tipi": "sube",
+      "alan_doluluk": {
+        "dolu": 12,
+        "bos": [
+          "delil_belgeler"
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+  0| Kullanıcı Adı (E-Posta)
+  1| Şifre
+  2| E-Posta Adresiniz
+  3| Üye Türü
+  4| Unvan/Ad Soyad
+  5| Ticaret Sicili Numarası (Zorunlu değildir)
+  6| Şifre Tekrar

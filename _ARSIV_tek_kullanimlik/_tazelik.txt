@@ -1,0 +1,55 @@
+=== 1) KAYNAK KAYIT YAPISI ===
+tablolar: ['companies', 'company_industries', 'nace_codes', 'source_records', 'sources']
+sources kolonlari: ['source_id', 'source_name', 'source_type', 'url', 'authority_score', 'collection_method', 'legal_basis', 'active', 'created_at']
+   {'source_id': UUID('0a27baf8-6dfa-4e57-851b-412470f480e7'), 'source_name': 'ostim.org.tr', 'source_type': 'osb', 'url': 'https://www.ostim.org.tr/', 'authority_score': Decimal('0.90'), 'collection_method': 'web_scrape', 'legal_basis': None, 'active': True, 'created_at': datetime.datetime(2026, 9, 1, 22, 15, 43, 539081, tzinfo=datetime.timezone.utc)}
+   {'source_id': UUID('534bc9d8-6faa-4fde-a60d-626eb4ff65df'), 'source_name': 'aso.org.tr', 'source_type': 'chamber', 'url': 'https://www.aso.org.tr', 'authority_score': Decimal('0.80'), 'collection_method': None, 'legal_basis': None, 'active': True, 'created_at': datetime.datetime(2026, 9, 6, 6, 4, 14, 859156, tzinfo=datetime.timezone.utc)}
+   {'source_id': UUID('f9a86932-cdbd-401e-b856-c8a3cfbd2886'), 'source_name': 'ivedik.org.tr', 'source_type': 'osb', 'url': 'https://ivedik.org.tr/', 'authority_score': Decimal('0.90'), 'collection_method': 'web_scrape', 'legal_basis': None, 'active': True, 'created_at': datetime.datetime(2026, 9, 8, 22, 58, 26, 963979, tzinfo=datetime.timezone.utc)}
+   {'source_id': UUID('e7868576-76a9-4a68-a6ea-4ded0e8dfa2e'), 'source_name': 'baskentosb.org.tr', 'source_type': 'osb', 'url': 'https://baskentosb.org.tr/', 'authority_score': Decimal('0.90'), 'collection_method': 'web_scrape', 'legal_basis': None, 'active': True, 'created_at': datetime.datetime(2026, 9, 8, 22, 58, 27, 806181, tzinfo=datetime.timezone.utc)}
+
+=== 2) TAZELIK ===
+source_records zaman kolonlari: ['collected_at']
+
+  -- collected_at --
+     baskentosb.org.tr        ilk=2026-09-08 son=2026-09-08  n=761
+     ivedik.org.tr            ilk=2026-09-08 son=2026-09-08  n=3134
+     ostim.org.tr             ilk=2026-09-01 son=2026-09-07  n=9513
+     aso.org.tr               ilk=2026-09-06 son=2026-09-06  n=592
+
+companies zaman kolonlari: ['establishment_date', 'first_seen_at', 'last_verified_at', 'created_at', 'updated_at', 'email_validated_at']
+   establishment_date   ilk=None son=None dolu=0
+   first_seen_at        ilk=2026-09-02 son=2026-09-17 dolu=14003
+   last_verified_at     ilk=2026-09-02 son=2026-09-08 dolu=12995
+   created_at           ilk=2026-09-02 son=2026-09-17 dolu=14003
+   updated_at           ilk=2026-09-09 son=2026-09-17 dolu=14003
+   email_validated_at   ilk=2026-09-09 son=2026-09-09 dolu=8994
+
+=== 3) KONUM BILGISI (Ankara ici dagilim gorulebilir mi) ===
+konum kolonlari: ['email_validity_score', 'email_validation_data', 'email_validated_at', 'is_osb_member', 'osb_id', 'adres', 'osb_parsel', 'primary_email']
+   email_validity_score     dolu=14003
+   email_validation_data    dolu=8994
+   email_validated_at       dolu=8994
+   is_osb_member            dolu=14003
+   osb_id                   dolu=8222
+   adres                    dolu=6100
+   osb_parsel               dolu=20
+   primary_email            dolu=4085
+
+=== 4) FIRMA TEKRARI ===
+companies satir / essiz company_id: (14003, 14003)
+OSB ile ilgili tablolar: ['osbs']
+osb_id dagilimi:
+   828c15a7-922a-41a6-b0ba-2104aec80a4c     8222
+   None                                     5781
+ad/vkn kolonlari: ['legal_name', 'trade_name', 'tax_number', 'nace_name']
+   legal_name               dolu= 14003  tekrarli_deger=494
+   trade_name               dolu= 14000  tekrarli_deger=710
+   tax_number               dolu=    40  tekrarli_deger=0
+   nace_name                dolu=   330  tekrarli_deger=14
+
+=== 5) KAYNAK KAPSAMI ===
+   ostim.org.tr             [osb] 9513
+   ivedik.org.tr            [osb] 3134
+   baskentosb.org.tr        [osb] 761
+   aso.org.tr               [chamber] 592
+
+source_records kolonlari: ['source_record_id', 'source_id', 'external_id', 'raw_name', 'raw_address', 'raw_phone', 'raw_email', 'raw_website', 'raw_tax_number', 'raw_nace', 'raw_payload', 'collected_at', 'content_hash']

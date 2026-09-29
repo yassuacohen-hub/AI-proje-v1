@@ -1,0 +1,67 @@
+=== A) KOPYA MI, FARKLI FIRMA MI? 'EGEMEN PANO' ornegi ===
+   kaynak=ivedik.org.tr  raw='EGEMEN PANO'  tel=None  srid=3b018012
+   kaynak=ivedik.org.tr  raw='EGEMEN PANO'  tel=None  srid=2c527135
+   kaynak=ivedik.org.tr  raw='EGEMEN PANO'  tel=None  srid=91711515
+   kaynak=ivedik.org.tr  raw='EGEMEN PANO'  tel=None  srid=13ac89b8
+   kaynak=ivedik.org.tr  raw='EGEMEN PANO'  tel=None  srid=815db77f
+   kaynak=ivedik.org.tr  raw='EGEMEN PANO'  tel=None  srid=4c2d47de
+
+=== B) raw_name TEKIL MI? (kopya kaynakta mi, ETL'de mi) ===
+   source_records: n=14000  tekil raw_name=9461  tekil srid=14000
+   companies     : n=14003  tekil source_record_id=14000
+   -> u < n ise ETL ayni kaydi birden fazla yazmis (COKLU KOSUM)
+
+=== C) legal_name uretimi bilgi kaybi mi? ===
+   raw='Berat Makina                                          ' -> legal='BERAT MAK.'
+   raw='Hilal                                                 ' -> legal='HILAL'
+   raw='Berat Makina                                          ' -> legal='BERAT MAK.'
+   raw='Hilal                                                 ' -> legal='HILAL'
+   raw='Berat Makina                                          ' -> legal='BERAT MAK.'
+   raw='EGEMEN PANO                                           ' -> legal='EGEMEN PANO'
+   raw='Hilal                                                 ' -> legal='HILAL'
+   raw='EGEMEN PANO                                           ' -> legal='EGEMEN PANO'
+   raw='Hilal                                                 ' -> legal='HILAL'
+   raw='EGEMEN PANO                                           ' -> legal='EGEMEN PANO'
+
+=== D) ADRESTEN BOLGE TURETILEBILIR MI? ===
+   adres dolu kayit: 6424
+   ESLESMEDI        5077  % 79.0
+   BASKENT OSB       783  % 12.2
+   OSTIM             426  %  6.6
+   IVEDIK             62  %  1.0
+   GENEL OSB          59  %  0.9
+   ANADOLU OSB         9  %  0.1
+   ASO 1               5  %  0.1
+   TEKNOKENT           2  %  0.0
+   DOKUMCULER          1  %  0.0
+   eslesmeyen ornek:
+      1235. CADDE (ESKİ 58) 147
+      KORU MAH. AKMEŞE SK. NO: 4/1A ÇANKAYA / ANKARA
+      MUSTAFA KEMAL MAH. 2079 CAD. NO: 2B İÇ KAPI NO: 53 ÇANKAYA / ANKARA
+      ÇİĞİLTEPE MAH. BOSTANCIK CAD.  NO: 25A MAMAK / ANKARA
+      ÖNDER MAHALLESİ KOÇAK CAD.  NO: 61 B  ALTINDAĞ/ANKARA
+      ÖNDER MAHALLESİ TEZCAN CAD.  NO: 17/3  ALTINDAĞ/ANKARA
+
+=== E) ILCE TURETME (OSB disi firmalar icin) ===
+   YOK              4872
+   SINCAN            769
+   YENİMAHALLE       207
+   ÇANKAYA           141
+   YENIMAHALLE       107
+   SİNCAN            104
+   KAHRAMANKAZAN      90
+   ALTINDAĞ           55
+   AKYURT             21
+   MAMAK              11
+   ETİMESGUT          11
+   GÖLBAŞI            11
+
+=== F) TELEFON CAPASI: ayni tel = ayni firma mi? ===
+   tel=905344018261       kayit=  10  farkli_unvan=10
+   tel=903124397800       kayit=   9  farkli_unvan=9
+   tel=03123954860        kayit=   5  farkli_unvan=5
+   tel=903123860666       kayit=   4  farkli_unvan=4
+   tel=903123545334       kayit=   4  farkli_unvan=4
+   tel=903123863707       kayit=   4  farkli_unvan=4
+   tel=03122159000        kayit=   4  farkli_unvan=4
+   tel=903123851897       kayit=   4  farkli_unvan=4

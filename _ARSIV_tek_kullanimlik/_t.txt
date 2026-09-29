@@ -1,0 +1,20 @@
+.....................................................F......             [100%]
+================================== FAILURES ===================================
+_____________________ test_panelde_bolu_yuz_olcegi_yazmaz _____________________
+
+    def test_panelde_bolu_yuz_olcegi_yazmaz():
+        """'/100' metni kimlik tamligi (0-10) icin yalandir."""
+        desen = re.compile(r"/\s*100\b")
+        suclular = []
+        for p in _panel_dosyalari():
+            for no, satir in enumerate(p.read_text("utf-8", errors="replace").splitlines(), 1):
+                if desen.search(satir) and "width_bucket" not in satir:
+                    suclular.append(f"{p.relative_to(KOK)}:{no}")
+>       assert not suclular, "panelde '/100' olcegi: " + ", ".join(suclular)
+E       AssertionError: panelde '/100' olcegi: web_dashboard\tabs\admin_cost.py:509, web_dashboard\tabs\admin_musteriler.py:124, web_dashboard\tabs\admin_search.py:206, scripts\dashboard.py:65, scripts\dashboard.py:321, scripts\dashboard.py:374
+E       assert not ['web_dashboard\\tabs\\admin_cost.py:509', 'web_dashboard\\tabs\\admin_musteriler.py:124', 'web_dashboard\\tabs\\admin_search.py:206', 'scripts\\dashboard.py:65', 'scripts\\dashboard.py:321', 'scripts\\dashboard.py:374']
+
+tests\test_panel_durustluk.py:169: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_panel_durustluk.py::test_panelde_bolu_yuz_olcegi_yazmaz - A...
+1 failed, 59 passed in 1.65s

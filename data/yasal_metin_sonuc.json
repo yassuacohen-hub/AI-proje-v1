@@ -1,0 +1,175 @@
+{
+  "OSTIM": {
+    "kok": "https://ostim.org.tr/",
+    "hedef": [
+      "https://ostim.org.tr/kurumsal/gizlilik-politikasi",
+      "https://ostim.org.tr/kurumsal/kullanim-kosullari"
+    ],
+    "bulunan_sayfalar": [
+      {
+        "url": "https://ostim.org.tr/kurumsal/gizlilik-politikasi",
+        "http": 200,
+        "metin_uzunluk": 15986,
+        "kavramlar": {
+          "ticari_kullanim": false,
+          "kopyalama_yasagi": true,
+          "izin_gerekir": false,
+          "ucret": true,
+          "otomasyon_yasagi": false,
+          "kvkk_6698": true,
+          "sorumluluk": true
+        },
+        "cumleler": [
+          "Bölge Müdürlüğümüze ait sitede yayınlanan reklamlar, reklamcılık yapan iş ortaklarımız aracılığı ile kullanıcılarımıza dağıtılır.",
+          "Bölge Müdürlüğümüz, işbu &quot;Gizlilik Politikası&quot; hükümlerini dilediği zaman sitede yayınlamak veya kullanıcılara elektronik posta göndermek veya sitesinde yayınlamak suretiyle değiştirebilir.",
+          "Gizlilik Politikası hükümleri değiştiği takdirde, yayınlandığı tarihte yürürlük kazanır.",
+          "Hakk&#x131;nda Bilgi GİZLİLİK VE GÜVENLİK POLİTİKASI Ostim Organize Sanayi Bölge Müdürlüğü web sitesinde ziyaretçilerin kişisel verilerini toplamaz ve herhangi bir üçüncü tarafa herhangi bir kişisel veri vermez.",
+          "ölge Müdürlüğümüz, bu linkler vasıtasıyla erişilen sitelerin gizlilik uygulamaları ve içeriklerine yönelik herhangi bir sorumluluk taşımamaktadır."
+        ]
+      }
+    ]
+  },
+  "ATO": {
+    "kok": "https://www.atonet.org.tr/",
+    "hedef": [
+      "https://www.atonet.org.tr/IcerikDetay/25024_is-ekipmanlarinin-kullaniminda-saglik-ve-guvenlik-sartlari-yonetmeliginde-degisiklik-yapilmasina-dair-yonetmelik-taslagi",
+      "https://www.atonet.org.tr/IcerikDetay/25283_yuksek-gelir-gruplari-gozetim-ve-uyum-programi",
+      "https://www.atonet.org.tr/IcerikDetay/25332_gida-etiketleme-mevzuati-uyum-suresi",
+      "https://www.atonet.org.tr/IcerikDetay/25441_bazi-tutsu-aroma-vericilerinin-gecis-ve-uyum-surecleri-hakkinda-onemli-duyuru",
+      "https://www.atonet.org.tr/IcerikDetay/25467_indirimli-satis-reklamlarinda-mevzuata-uyum-ve-dikkat-edilmesi-gereken-hususlar",
+      "https://www.atonet.org.tr/IcerikDetay/25469_is-teftisi--rehberlik-ve-sosyal-diyalog-yoluyla-isyeri-uyumunun-guclendirilmesi-projesi",
+      "https://www.atonet.org.tr/IcerikDetay/25470_toplu-tuketim-yerlerinde-alerjen--bilesen-ve-enerji-bildirimi-zorunlulugu-ve-uyum-sureleri",
+      "https://www.atonet.org.tr/IcerikDetay/25506_birlesik-krallik-ormansizlasmanin-onlenmesi-mevzuati-ve-ab-uyum-sureci",
+      "https://www.atonet.org.tr/IcerikDetay/25536_kvkk-uyum-rehberi",
+      "https://www.atonet.org.tr/ato-ya-bakis/kvkk"
+    ],
+    "bulunan_sayfalar": [
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25283_yuksek-gelir-gruplari-gozetim-ve-uyum-programi",
+        "http": 200,
+        "metin_uzunluk": 5099,
+        "kavramlar": {
+          "ticari_kullanim": false,
+          "kopyalama_yasagi": false,
+          "izin_gerekir": false,
+          "ucret": true,
+          "otomasyon_yasagi": false,
+          "kvkk_6698": true,
+          "sorumluluk": false
+        },
+        "cumleler": []
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25467_indirimli-satis-reklamlarinda-mevzuata-uyum-ve-dikkat-edilmesi-gereken-hususlar",
+        "http": 200,
+        "metin_uzunluk": 5557,
+        "kavramlar": {
+          "ticari_kullanim": false,
+          "kopyalama_yasagi": false,
+          "izin_gerekir": false,
+          "ucret": false,
+          "otomasyon_yasagi": false,
+          "kvkk_6698": true,
+          "sorumluluk": true
+        },
+        "cumleler": [
+          "ler, reklam ajansları ve mecra kuruluşları hakkında durdurma, aynı yöntemle düzeltme veya 3 aya kadar tedbiren durdurma cezası uygulanabilecektir.",
+          "Ayrıca Reklam Kurulu tarafından aldatıcı ve mevzuata aykırı reklamlar nedeniyle uygulanan idari para cezaları, reklamın yer aldığı mecranın türüne göre 99.",
+          "Cezaların miktarında aykırılığın niteliği, elde edilen menfaat ve kusur durumu gibi kriterler dikkate alınmaktadır."
+        ]
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25470_toplu-tuketim-yerlerinde-alerjen--bilesen-ve-enerji-bildirimi-zorunlulugu-ve-uyum-sureleri",
+        "http": 200,
+        "metin_uzunluk": 5412,
+        "kavramlar": {
+          "ticari_kullanim": false,
+          "kopyalama_yasagi": false,
+          "izin_gerekir": false,
+          "ucret": false,
+          "otomasyon_yasagi": false,
+          "kvkk_6698": true,
+          "sorumluluk": true
+        },
+        "cumleler": []
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25536_kvkk-uyum-rehberi",
+        "http": 200,
+        "metin_uzunluk": 3580,
+        "kavramlar": {
+          "ticari_kullanim": false,
+          "kopyalama_yasagi": true,
+          "izin_gerekir": false,
+          "ucret": false,
+          "otomasyon_yasagi": false,
+          "kvkk_6698": true,
+          "sorumluluk": false
+        },
+        "cumleler": [
+          "Söz konusu Rehber&#39;e, Kurumun resmi internet sitesindeki &quot;Yayınlar&quot; sekmesinde yer alan &quot;Rehberler&quot; bölümünden veya ( https://www.",
+          "nmasına katkı sağlanması amacıyla &quot;Kamu Kurum ve Kuruluşları ile Kamu Kurumu Niteliğindeki Meslek Kuruluşları İçin Kişisel Verilerin Korunması Kanununa Uyum Rehberi&quot; hazırlandığı belirtilmiştir.",
+          "kvkk."
+        ]
+      }
+    ]
+  },
+  "ASO": {
+    "kok": "https://www.aso.org.tr/",
+    "hedef": [
+      "https://www.aso.org.tr/post/aso-baskani-seyit-ardic-2026-yili-ikinci-ceyrek-buyume-rakamlarini-degerlendirdi-7791",
+      "https://www.aso.org.tr/tekil/kisisel-verilerin-korunmasi-hakkinda-aydinlatma-metni-7583"
+    ],
+    "bulunan_sayfalar": [
+      {
+        "url": "https://www.aso.org.tr/post/aso-baskani-seyit-ardic-2026-yili-ikinci-ceyrek-buyume-rakamlarini-degerlendirdi-7791",
+        "http": 200,
+        "metin_uzunluk": 6965,
+        "kavramlar": {
+          "ticari_kullanim": false,
+          "kopyalama_yasagi": true,
+          "izin_gerekir": false,
+          "ucret": false,
+          "otomasyon_yasagi": true,
+          "kvkk_6698": true,
+          "sorumluluk": false
+        },
+        "cumleler": [
+          "ikası Etik Komisyon Çalışmaları Yardımlar ve Destekler Copyright © 2026, Ankara Sanayi Odası Gizlilik ve Hukuki Şartlar KVKK Kullanım Koşulları Bu sitede yer alan tüm metinlerin ve görsellerin her türlü hakkı Ankara Sana"
+        ]
+      },
+      {
+        "url": "https://www.aso.org.tr/tekil/kisisel-verilerin-korunmasi-hakkinda-aydinlatma-metni-7583",
+        "http": 200,
+        "metin_uzunluk": 13591,
+        "kavramlar": {
+          "ticari_kullanim": false,
+          "kopyalama_yasagi": true,
+          "izin_gerekir": false,
+          "ucret": false,
+          "otomasyon_yasagi": false,
+          "kvkk_6698": true,
+          "sorumluluk": true
+        },
+        "cumleler": [
+          "tarılabileceği alıcı grupları, toplanma y&ouml;ntemi ve veri işleme faaliyetlerimizin hukuki sebebi ile s&ouml;z konusu kişisel verilere ilişkin Kanun kapsamındaki haklarınızı i&ccedil;ermektedir.",
+          "lgili kişilere &ouml;nerilmesi ve tanıtılması i&ccedil;in gerekli olan aktivitelerin planlanması veya icrası kapsamında kişisel verilerin işlenmesi ama&ccedil;larıyla; 6698 sayılı Kişisel Verilerin Korunması Kanunu&rsquo",
+          "maddelerinde belirtilen kişisel veri işleme şartları d&acirc;hilinde işlenebilecektir.",
+          "etleyici kurumlara veya &uuml;&ccedil;&uuml;nc&uuml; kişilere bu ama&ccedil;ların yerine getirilmesi ile sınırlı olarak 6698 sayılı Kişisel Verilerin Korunması Kanunu&rsquo;nun 8.",
+          "&nbsp; KİŞİSEL VERİ SAHİBİNİN HAKLARI Kişisel Veri Sahibinin 6698 sayılı Kanun&rsquo;un 11.",
+          "Maddesi gereği veri sorumlusundan kişisel verilerine ilişkin taleplerini y&ouml;neltme hakkı bulunmaktadır.",
+          "taleplerini ileten başvurucunun başvurusuna konu işlemin ayrıca bir maliyeti gerektirmesi h&acirc;linde, ASO tarafından Kişisel Verileri Koruma Kurulunca belirlenen tarifedeki &uuml;cret alınacaktır.",
+          "s&uuml;renin sona ermesi ile veya herhangi bir s&uuml;re &ouml;ng&ouml;r&uuml;lmemiş ise yapılacak işlemler &ldquo; ASO Kişisel Veri Saklama ve İmha Politikası&rsquo;nda belirtilmiştir."
+        ]
+      }
+    ]
+  },
+  "ATB": {
+    "kok": "https://www.atb.org.tr/",
+    "hedef": [
+      "https://www.atb.org.traydinlatma-metni.asp",
+      "https://www.atb.org.trcerez-politikasi.asp"
+    ],
+    "bulunan_sayfalar": []
+  }
+}

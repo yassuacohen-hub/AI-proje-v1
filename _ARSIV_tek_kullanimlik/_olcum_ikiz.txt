@@ -1,0 +1,78 @@
+Turkce kolonlarin tum semadaki yeri:
+  audit_logs.ip_address  (character varying)
+  companies.adres  (text)
+  companies.osb_parsel  (text)
+  companies.vergi_no  (text)
+  companies.web_sitesi  (text)
+  user_activity_log.ip_adresi  (inet)
+  users.address  (text)
+
+companies satir: 9412
+
+kolon varligi:
+  vergi_no     VAR    tax_number       VAR
+  web_sitesi   VAR    website_domain   VAR
+  adres        VAR    address          yok
+  osb_parsel   VAR    osb_parcel       yok
+  ip_adresi    yok    ip_address       yok
+
+=== vergi_no -> tax_number ===
+  TR dolu=761  EN dolu=40
+  sadece TR=730  sadece EN=9  ikisi de=31
+  ikisi de dolu icinde: ayni=30  FARKLI=1
+  --- farkli deger tasiyan kayitlar ---
+    id=f9ba5f7c-7045-441f-9689-980a2d6df451 | ABDÜLKADİR HANÇERLİ SİTELER ŞUBESİ
+       vergi_no=(UUID('f9ba5f7c-7045-441f-9689-980a2d6df451'), 'ABDÜLKADİR HANÇERLİ SİTELER ŞUBESİ', '262843', '548871')
+       tax_number='548871'
+
+=== web_sitesi -> website_domain ===
+  TR dolu=5049  EN dolu=5397
+  sadece TR=49  sadece EN=397  ikisi de=5000
+  ikisi de dolu icinde: ayni=4999  FARKLI=1
+  --- farkli deger tasiyan kayitlar ---
+    id=b0ee3d30-42a4-421f-8618-b4eca8b096a8 | KAL-MET KALİBRASYON TİC. LTD. ŞTİ.
+       web_sitesi=(UUID('b0ee3d30-42a4-421f-8618-b4eca8b096a8'), 'KAL-MET KALİBRASYON TİC. LTD. ŞTİ.', 'http://kal-met.com', 'http://www.isim.org.tr')
+       website_domain='http://www.isim.org.tr'
+
+=== adres -> address ===
+  hedef kolon YOK -> duz RENAME. kaynak dolu: 5798
+
+=== osb_parsel -> osb_parcel ===
+  hedef kolon YOK -> duz RENAME. kaynak dolu: 19
+
+=== ip_adresi -> ip_address ===
+  kaynak kolon yok, atla
+
+=== vergi_no D-246 kapisi (kimlik_dogrula) ===
+  toplam=761 vkn=5 tckn=2 gecersiz=754
+    gecersiz id=06853de1-b3dc-4274-aa69-9e75a7506bdc | YENI KROMSAN-FATMA KAYMAK | '85334148121' (len=11)
+    gecersiz id=08a88bd9-fcf3-437d-a11b-35cd62594ea8 | AKIN BABADAĞ | '915-ELMADAĞ' (len=11)
+    gecersiz id=0adb14d1-5009-489c-a663-24a7b3001017 | FERHAT ALACALI | '71788429969' (len=11)
+    gecersiz id=1514159e-3876-458e-bc7f-b51edb05b800 | ADAS GALVANİZ METAL SAN. TİC. LTD. ŞTİ. | '540030' (len=6)
+    gecersiz id=176ca918-f578-4d2e-80e7-4951d2632f75 | 4BEY TUR. GIDA VE MAK. SAN. TİC. LTD. ŞTİ. | '443473' (len=6)
+    gecersiz id=19c94701-95a6-4247-8010-ca86c73750aa | ADM GRUP ENERJİ ÜRETİM TİC. VE LTD. ŞTİ. | '453366' (len=6)
+    gecersiz id=1d0a054b-b624-465a-8904-d3c6f7c92410 | MY AKÜ OSTIM | '61352130317' (len=11)
+    gecersiz id=274427c0-1694-415a-b10e-061a1f85ff95 | EGE ATLAS IS M.YD.P.SR.O.I.NK.HF.IT.IH.SN.VE T.L.S | '61661343852' (len=11)
+    gecersiz id=3c87f8d9-599e-4b92-8813-eb848581a384 | KARGOKAR TAŞIMACILIK A.Ş. | '47787084056' (len=11)
+    gecersiz id=4219e16b-78ca-4ab6-b422-2d0e20254f64 | A.ATAK YAPI İNŞ. VE İNŞ. MALZEMELERİ İZOLASYON GIDA TAR. VE HAYVANCILIK OTO. İTH. İMAL. İHR. SAN. VE TİC. LTD. ŞTİ. | '318606' (len=6)
+    gecersiz id=473c0257-7a48-4dab-a4f5-f46dcc50355a | MURAT BOZDOĞAN - CANELSAN ENDÜSTRİYEL SIYIRCI SİSTEMLERİ | '24259838167' (len=11)
+    gecersiz id=47fabd10-34e8-44ab-a465-5a6ceb4e2ced | ADIM ELEKTROMEKANİK ENDÜSTRİYEL MONTAJ SAN. VE TİC. LTD. ŞTİ. | '427250' (len=6)
+    gecersiz id=4b2df30f-d954-4269-a892-2e103b12b13c | 2K TEKNİK YAPI İNŞ. TAAHHÜT TUR. OTO. VE TİC. LTD. ŞTİ. | '469839' (len=6)
+    gecersiz id=4c6ac5c6-40aa-4132-9fdb-abe4ffc22b7f | SILA RULMAN MEKANİK TİC. VE SAN. LTD. ŞTİ. | '61383766284' (len=11)
+    gecersiz id=50b60eaa-b3c2-4dbc-b045-10e9f10528a9 | AKA SU TEKNOLOJİLERİ A.Ş. | '141432' (len=6)
+    gecersiz id=523c0f3e-75c7-43c5-8b1d-f85a3f500929 | 2SSOFT YAZ. BİL. A.Ş. | '463765' (len=6)
+    gecersiz id=52c380b4-bc19-4a93-857c-3a0013cf19f8 | MEHMET EMIN SEZER | '82914522356' (len=11)
+    gecersiz id=55aa37a7-b86e-475c-8d40-4e39130bf01c | AKÇA ÇELIK PARA KASALARI İMALATHANESI | '20012013212' (len=11)
+    gecersiz id=5982b287-2f5c-44c1-895f-6917610e7cab | (İFLAS NEDENİYLE) TASFİYE HALİNDE ANADOLU ELEK. SAN. VE TİC. A.Ş. | '31625' (len=5)
+    gecersiz id=5fed8595-3f01-4443-9ba2-2a78379dd85d | ABDULLAH TORUN | '168365' (len=6)
+    gecersiz id=6695d97f-fc18-458a-b659-6936048563e8 | ALBERK QA ULUSLARARASI TEKNIK KONTROL VE BELG.A.Ş. | '17065632854' (len=11)
+    gecersiz id=6b5e8f05-39fd-4c8f-b290-161bf459fdbb | LAZER KESIM, ABKANT SAC BÜKÜM, LAZER KAYNAK | '22303420371' (len=11)
+    gecersiz id=7231833b-eb1a-4cfd-ae09-6d36fae732ff | AHMET UYANIK | '149323' (len=6)
+    gecersiz id=73f8b140-23a0-48f3-baf2-d429d6879f1b | ADNAN BAHAR | '240393' (len=6)
+    gecersiz id=75308535-3455-44fb-ab11-130b11fdafc6 | ABDULLAH ÖZDEMİR MAD. PEYZAJ GIDA | '430122' (len=6)
+    gecersiz id=75df5451-2a2e-4bce-a765-2332f41151ca | BEKIR UYSAL | '08507243387' (len=11)
+    gecersiz id=82addc66-e439-4fc8-89a5-c14d080374db | ÖZTAŞMIKS TRANSMIKSER İMAL. VE YED.PRÇ.MAK.İNŞ.OTO | '15389547932' (len=11)
+    gecersiz id=82fa64da-cf1b-46cf-bd84-a26b0e7c7b2a | TURKOJEN ENERJI GÜÇ SISTEMLERI JENERATÖR A.Ş. | '31220480927' (len=11)
+    gecersiz id=84f74f6a-4b84-491c-b76a-272ec3bc4053 | SERDAR MAT - TOZ-MAK ÇEVRE TEKNOLOJILERI | '11012013727' (len=11)
+    gecersiz id=90eb36ac-ed20-46bf-8e6d-2e7524e8345d | MAHIR CEYLAN | '51337281885' (len=11)
+    ... +724 kayit daha

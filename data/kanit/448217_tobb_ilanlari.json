@@ -1,0 +1,61 @@
+{
+  "kanit_turu": "tobb_ticaret_sicili_ilan",
+  "kaynak": "https://www.ticaretsicil.gov.tr",
+  "erisim_yolu": "dogrudan TOBB uyesi (e-Devlet kullanilmadi)",
+  "sorgu": {
+    "SicilMudurluguId": "18 (ANKARA)",
+    "TicSicNo": "448217",
+    "Tarih1": "01.01.2026",
+    "Tarih2": "02.01.2026"
+  },
+  "ilan_sayisi": 4,
+  "ilanlar": [
+    {
+      "mudurluk": "ANKARA",
+      "sicil_no": "448217",
+      "unvan": "AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT ORGANİZE ŞUBESİ",
+      "yayin_tarihi": "21.08.2026",
+      "sayi": "11649",
+      "sayfa": "67",
+      "ilan_turu": "ŞUBE (ADRES DEĞİŞİKLİĞİ) MERKEZİ TÜRKİYE’ DE BULUNAN ŞUBE Değişiklik - Adres",
+      "ilan_guid": "a18a2282-9ca3-11f1-8a12-48df373f4850",
+      "pdf_yolu": null
+    },
+    {
+      "mudurluk": "ANKARA",
+      "sicil_no": "448217",
+      "unvan": "AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT ORGANİZE ŞUBESİ",
+      "yayin_tarihi": "28.04.2026",
+      "sayi": "11572",
+      "sayfa": "1228",
+      "ilan_turu": "ŞUBE (YÖNETİM - TEMSİL) MERKEZİ TÜRKİYE’ DE BULUNAN ŞUBE Değişiklik - Yönetim Kurulu / Yetkililer",
+      "ilan_guid": "de1d67b3-4309-11f1-b7e5-48df373f5970",
+      "pdf_yolu": null
+    },
+    {
+      "mudurluk": "ANKARA",
+      "sicil_no": "448217",
+      "unvan": "AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT ORGANİZE ŞUBESİ",
+      "yayin_tarihi": "07.05.2025",
+      "sayi": "11326",
+      "sayfa": "656",
+      "ilan_turu": "ŞUBE (YÖNETİM - TEMSİL) MERKEZİ TÜRKİYE’ DE BULUNAN ŞUBE Değişiklik - Yönetim Kurulu / Yetkililer",
+      "ilan_guid": "0be7039e-2b2a-11f0-90bc-48df373f5970",
+      "pdf_yolu": null
+    },
+    {
+      "mudurluk": "ANKARA",
+      "sicil_no": "448217",
+      "unvan": "AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT ORGANİZE ŞUBESİ",
+      "yayin_tarihi": "27.07.2020",
+      "sayi": "10126",
+      "sayfa": "1055",
+      "ilan_turu": "ŞUBE AÇILIŞ MERKEZİ TÜRKİYE’ DE BULUNAN ŞUBE Kuruluş -",
+      "ilan_guid": "b920cd11-cffa-11ea-8270-48df373f5970",
+      "pdf_yolu": null
+    }
+  ],
+  "pdf_metin_katmani": false,
+  "not_pdf": "PDF taranmis gorsel; metin katmani YOK -> OCR gerekir",
+  "toplanma_zamani": "2026-09-29T04:10:06"
+}

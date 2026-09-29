@@ -12,7 +12,8 @@ _KOK = Path(__file__).resolve().parent.parent
 if str(_KOK / "src") not in sys.path:
     sys.path.insert(0, str(_KOK / "src"))
 
-from company_master.chat import ac, guncelle, kapat, oku, ozet, bulgula, bulgular_oku
+from company_master.chat import (ac, acik_sahipler, guncelle, kapat, oku, ozet,
+                                 bulgula, bulgular_oku)
 
 
 @pytest.fixture
@@ -245,3 +246,36 @@ class TestIntegration:
 
         assert len(cokundurmus) == 1
         assert len(cozuldu) == 2
+
+
+class TestAcikSahipler:
+    """D-287: `ac` yanlis kapi uyarisi — olcum kismi."""
+
+    def test_baskasinin_acik_kaydi_gorunur(self, izole_chat_dir):
+        ac("yasu", "NACE-01", "olculmedi", kimden="ihsan", data_dir=izole_chat_dir)
+        assert acik_sahipler("NACE-01", "yasu", data_dir=izole_chat_dir) == ["ihsan"]
+
+    def test_kendi_kaydi_uyari_uretmez(self, izole_chat_dir):
+        ac("yasu", "NACE-01", "olculmedi", kimden="ihsan", data_dir=izole_chat_dir)
+        assert acik_sahipler("NACE-01", "ihsan", data_dir=izole_chat_dir) == []
+
+    def test_kapali_kayit_uyari_uretmez(self, izole_chat_dir):
+        ac("yasu", "NACE-01", "olculmedi", kimden="ihsan", data_dir=izole_chat_dir)
+        kapat("NACE-01", 0, data_dir=izole_chat_dir)
+        assert acik_sahipler("NACE-01", "yasu", data_dir=izole_chat_dir) == []
+
+    def test_baska_gorev_sizmaz(self, izole_chat_dir):
+        ac("yasu", "NACE-01", "olculmedi", kimden="ihsan", data_dir=izole_chat_dir)
+        assert acik_sahipler("UI-99", "yasu", data_dir=izole_chat_dir) == []
+
+    def test_uyari_engellemez(self, izole_chat_dir):
+        """PO karari: uyari yeter, blok yok. `ac` yine kayit yazar."""
+        ac("yasu", "NACE-01", "olculmedi", kimden="ihsan", data_dir=izole_chat_dir)
+        ac("ihsan", "NACE-01", "cevap", kimden="yasu", data_dir=izole_chat_dir)
+        assert len(oku(task_id="NACE-01", data_dir=izole_chat_dir)) == 2
+
+    def test_cli_uyariyi_cagirir(self):
+        """D-266: cagirani olmayan olcum yoktur. CLI `ac` kapisi bunu kullanir."""
+        kaynak = (_KOK / "scripts" / "ajan_chat.py").read_text(encoding="utf-8")
+        govde = kaynak.split("def cmd_ac", 1)[1].split("\ndef ", 1)[0]
+        assert "acik_sahipler" in govde, "cmd_ac uyariyi cagirmiyor"

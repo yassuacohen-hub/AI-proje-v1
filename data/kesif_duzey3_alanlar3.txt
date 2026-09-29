@@ -1,0 +1,65 @@
+150| Adı Soyadı / Unvanı
+151| Ortağın Sermayesi
+152| Temsilciler (Liste)
+153| TC Kimlik No (* Maskeli ilk 3 son 2 hane açık)
+154| Pasaport No (* Maskeli)
+155| Adı Soyadı Unvanı
+156| Temsilci Türü
+157| Temsilci Görevi
+158| Temsil Şekli
+159| Temsil Başlangıç Tarihi
+160| Temsil Bitiş Tarihi
+161| Tüzel Temsilci Adına Hareket Eden Kişi Kimlik No (* Maskeli)
+162| Tüzel Temsilci Adına Hareket Eden Kişi Pasaport No (* Maskeli)
+163| Tüzel Temsilci Adına Hareket Eden Kişi Adı Soyadı
+164| Müşterek Listesi (Müşterek Temsilci Listesi – JSON)
+165| 1
+166| .
+167| 427
+168| .
+169| 688
+170| TL
+171| WEB SERVİS
+172| Veri Aboneliği İlan Tür
+173| Bilgisine İlişkin Önemli Uyarı:
+174| Türkiye Ticaret Sicili Gazetesi 6102 sayılı Türk Ticaret Kanunu’nun 35 inci
+175| maddesinin dördüncü fıkrası ile 5174 sayılı Türkiye Odalar ve Borsalar Birliği
+176| ile Odalar ve Borsalar Kanunu’nun 56 ncı maddesinin (m) bendine dayanılarak
+177| Türkiye Odalar ve Borsalar Birliği tarafından tatil günleri dışında her gün
+178| Ankara'da çıkarılmaktadır. Gazetede yayımlanacak ilanlar kod cetveli esas
+179| alınarak Türkiye Ticaret Sicili Gazetesi Müdürlüğü personelince ilanların
+180| takibi ve tasnifi amacıyla bilgisayara kaydedilmektedir. Kayıt esnasında
+181| çeşitli nedenlerle kodlama hatası olabilmektedir. Dolayısıyla Gazetede
+182| yayımlanan ilan metni esas kabul edilmeli ve türün ilanla uyumlu olup olmadığı
+183| kontrol edilmelidir. İlan metni esas alınarak işlem tesis edilmesi, 6102 sayılı
+184| Türk Ticaret Kanunu’nun 37 nci maddesi çerçevesinde görünüşe güven ilkesi ile
+185| korunmaktadır. Bu itibarla, Türkiye Odalar ve Borsalar Birliği, ilan
+186| incelenmeden salt ilan türü esas alınarak tesis edilecek işlemler nedeniyle
+187| doğacak ihtilaflar sonucunda oluşacak zararlardan sorumlu olmayacaktır.
+188| Abonelik süreci, aşağıdaki formun abonelik ücretinin tamamının yatırıldığını gösteren
+189| banka dekontu ile birlikte
+190| ttsgmd@tobb.org.tr
+191| e-posta adresi ile
+192| Müdürlüğümüz adresine (ıslak imzalı olarak) iletilmesi halinde başlatılmış olacaktır.
+193| Abonelik Formu için lütfen tıklayınız.
+194| Bir Günlük Elektronik Gazete:
+195| Günlük olarak
+196| yayımlanan gazete, PDF formatında (yaklaşık 1.350 sayfadan oluşur) ilan
+197| türlerini de içerecek şekilde fihristli (düzey_1 fihristi) olarak (fihrist
+198| excell dosyası olacaktır. İçerdiği bilgi: sıra no, tsm no, ticaret unvanı,
+199| ticaret sicili müdürlüğü, Gazete tarihi, sayısı, ilanın yayımlandığı baş sayfa
+200| ve son sayfa, ilanın türü) CD’ye kaydedilmek suretiyle kargo ile veya web
+201| transfer yöntemleri ile talep sahiplerine gönderilecektir. 2026 yılı bir günlük gazete ücreti 2.730 ₺’dir.
+202| Elektronik gazete
+203| talebi, ücretinin yatırıldığını gösteren banka dekontu ile birlikte
+204| ttsgmd@tobb.org.tr
+205| e-posta adresine
+206| iletilmelidir.
+207| Banka Şubesi
+208| Hesap Numarası
+209| Açıklama
+210| AKBANK BAKANLIKLAR ŞUBESİ
+211| TR510004600153888000069075
+212| Abone Bedeli / Elektronik Gazete Talebi
+213| HIZLI ERİŞİM
+214| İlan Görüntüleme

@@ -1,0 +1,62 @@
+{
+  "dosya": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\ostim\\firmalar_birlestirilmis.jsonl",
+  "kayit": 8313,
+  "kacis_taramasi": {
+    "kacis_bulundu": 0,
+    "dagilim": {},
+    "ornekler": []
+  },
+  "k2_uyum": {
+    "kayit": 8313,
+    "kaynak_adi_hepsi": true,
+    "kaynak_turu_hepsi": true,
+    "kaynak_degerleri": {
+      "ostim": 8313
+    },
+    "nace_guven_dagilimi": {
+      "medium": 7047,
+      "none": 1266
+    },
+    "vergi_no_dolu": 0,
+    "nace_guvensiz_kayit": 0,
+    "unvan_bos": 0
+  },
+  "celiski": {
+    "web_sitesi": {
+      "dolu": 2388,
+      "tekil": 2334,
+      "tekillestirme_orani": 97.7,
+      "en_cok_tekrar": {
+        "deger": "http://www.senkronplastik.com",
+        "adet": 3
+      }
+    },
+    "adres": {
+      "dolu": 4908,
+      "tekil": 4421,
+      "tekillestirme_orani": 90.1,
+      "en_cok_tekrar": {
+        "deger": "100. YIL BULVARI 55E 14",
+        "adet": 11
+      }
+    },
+    "telefonler": {
+      "dolu": 7652,
+      "tekil": 7116,
+      "tekillestirme_orani": 93.0,
+      "en_cok_tekrar": {
+        "deger": "905344018261",
+        "adet": 10
+      }
+    },
+    "emailler": {
+      "dolu": 3677,
+      "tekil": 3460,
+      "tekillestirme_orani": 94.1,
+      "en_cok_tekrar": {
+        "deger": "uyum@yucelengrubu.com",
+        "adet": 11
+      }
+    }
+  }
+}

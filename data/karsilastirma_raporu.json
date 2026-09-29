@@ -1,0 +1,198 @@
+{
+  "dosyalar": {
+    "firmalar_full.jsonl": {
+      "kayit": 8313,
+      "kolonlar": {
+        "unvan": {
+          "dolu": 8313,
+          "oran_yuzde": 100.0
+        },
+        "adres": {
+          "dolu": 0,
+          "oran_yuzde": 0.0
+        },
+        "telefonler": {
+          "dolu": 7650,
+          "oran_yuzde": 92.0
+        },
+        "emailler": {
+          "dolu": 3668,
+          "oran_yuzde": 44.1
+        },
+        "web_sitesi": {
+          "dolu": 0,
+          "oran_yuzde": 0.0
+        },
+        "vergi_no": {
+          "dolu": 0,
+          "oran_yuzde": 0.0
+        },
+        "sektor": {
+          "dolu": 5770,
+          "oran_yuzde": 69.4
+        },
+        "nace_code": {
+          "dolu": 7047,
+          "oran_yuzde": 84.8
+        },
+        "nace_name_tr": {
+          "dolu": 7047,
+          "oran_yuzde": 84.8
+        },
+        "nace_source": {
+          "dolu": 8313,
+          "oran_yuzde": 100.0
+        },
+        "nace_confidence": {
+          "dolu": 8313,
+          "oran_yuzde": 100.0
+        },
+        "sosyal_medya": {
+          "dolu": 0,
+          "oran_yuzde": 0.0
+        },
+        "osb_parsel": {
+          "dolu": 0,
+          "oran_yuzde": 0.0
+        },
+        "slug": {
+          "dolu": 8313,
+          "oran_yuzde": 100.0
+        },
+        "kaynak": {
+          "dolu": 8313,
+          "oran_yuzde": 100.0
+        },
+        "cekilme_tarihi": {
+          "dolu": 8313,
+          "oran_yuzde": 100.0
+        }
+      },
+      "kaynak_dagilimi": {
+        "ostim.org.tr": 8313
+      },
+      "nace_hane_dagilimi": {
+        "4": 7047
+      },
+      "coklu_kaynakli_kayit": 0,
+      "coklu_kaynakli_ornek": []
+    },
+    "firmalar_vkn_ekli.jsonl": {
+      "kayit": 5040,
+      "kolonlar": {
+        "unvan": {
+          "dolu": 5040,
+          "oran_yuzde": 100.0
+        },
+        "adres": {
+          "dolu": 5038,
+          "oran_yuzde": 100.0
+        },
+        "telefonler": {
+          "dolu": 4656,
+          "oran_yuzde": 92.4
+        },
+        "emailler": {
+          "dolu": 2417,
+          "oran_yuzde": 48.0
+        },
+        "web_sitesi": {
+          "dolu": 5038,
+          "oran_yuzde": 100.0
+        },
+        "vergi_no": {
+          "dolu": 0,
+          "oran_yuzde": 0.0
+        },
+        "sektor": {
+          "dolu": 5040,
+          "oran_yuzde": 100.0
+        },
+        "sosyal_medya": {
+          "dolu": 5038,
+          "oran_yuzde": 100.0
+        },
+        "yetkili": {
+          "dolu": 0,
+          "oran_yuzde": 0.0
+        },
+        "osb_parsel": {
+          "dolu": 5,
+          "oran_yuzde": 0.1
+        },
+        "slug": {
+          "dolu": 5040,
+          "oran_yuzde": 100.0
+        },
+        "kaynak": {
+          "dolu": 5040,
+          "oran_yuzde": 100.0
+        },
+        "cekilme_tarihi": {
+          "dolu": 5040,
+          "oran_yuzde": 100.0
+        }
+      },
+      "kaynak_dagilimi": {
+        "ostim.org.tr": 5040
+      },
+      "nace_hane_dagilimi": {},
+      "coklu_kaynakli_kayit": 0,
+      "coklu_kaynakli_ornek": []
+    }
+  },
+  "karsilastirma": {
+    "a_kayit": 8313,
+    "b_kayit": 5040,
+    "a_tekil_unvan": 8251,
+    "b_tekil_unvan": 4954,
+    "ortak_unvan": 4954,
+    "b_ile_yeni_unvan": 0,
+    "a_ile_kalan_unvan": 3297,
+    "ortusma_yuzde": 60.0,
+    "zenginlestirilen_kolonlar": {
+      "adres": 4952,
+      "web_sitesi": 4952,
+      "sosyal_medya": 4952,
+      "sektor": 1398,
+      "osb_parsel": 5,
+      "emailler": 3,
+      "telefonler": 1
+    },
+    "ornekler": {
+      "adres": [
+        "Yapımall Ins.Yapı Malz.San.Ve Dıs Tıc.Ltd.Stı.",
+        "Hüseyin Ekici",
+        "Tayosis Tarımsal Arş. Yen. Sist. A.Ş."
+      ],
+      "web_sitesi": [
+        "Yapımall Ins.Yapı Malz.San.Ve Dıs Tıc.Ltd.Stı.",
+        "Hüseyin Ekici",
+        "Tayosis Tarımsal Arş. Yen. Sist. A.Ş."
+      ],
+      "sosyal_medya": [
+        "Yapımall Ins.Yapı Malz.San.Ve Dıs Tıc.Ltd.Stı.",
+        "Hüseyin Ekici",
+        "Tayosis Tarımsal Arş. Yen. Sist. A.Ş."
+      ],
+      "sektor": [
+        "Hüseyin Ekici",
+        "ME-GE TEKNİK ELEKTRONİK SAN. VE TİC. A.Ş.",
+        "Orhun Müt. Dek. İnş. San. Tic. Ltd. Şti."
+      ],
+      "osb_parsel": [
+        "Ostim Akü",
+        "Serkan Çakmak",
+        "Gülal Pen Alüm.Plastik Doğ İnş Taah.Tic. San. Ltd."
+      ],
+      "emailler": [
+        "KOZLUOĞLU SAC METAL SAN. TİC. İHR. İTH. LTD. ŞTİ.",
+        "DOĞSAN GROSS MADENİ YAĞ MAĞAZALARI A.Ş.",
+        "HASAN PARLAK"
+      ],
+      "telefonler": [
+        "DOĞSAN GROSS MADENİ YAĞ MAĞAZALARI A.Ş."
+      ]
+    }
+  }
+}

@@ -1,0 +1,187 @@
+..................F..............F....................F................. [ 71%]
+............................F                                            [100%]
+================================== FAILURES ===================================
+___________________ test_ekran_section_kullanir[admin_mfa] ____________________
+
+modul = 'admin_mfa'
+
+    @pytest.mark.parametrize("modul", EKRANLAR)
+    def test_ekran_section_kullanir(modul: str) -> None:
+        """Her ekran gövdeyi `Section` bloklarýna ayýrýr."""
+        isimler = _kullanilan_isimler(_agac(modul))
+>       assert "Section" in isimler, (
+            f"{modul}: içerik `Section` bloklarý ile gruplanmalý "
+            f"(H2 + açýklama + ayraç). {_IPUCU}"
+        )
+E       AssertionError: admin_mfa: içerik `Section` bloklarý ile gruplanmalý (H2 + açýklama + ayraç). Modül bir ekran deðilse MUAF sözlüðüne gerekçesiyle ekleyin; ekransa ADMIN-UI-10 kalýbýna taþýyýn.
+E       assert 'Section' in {'Exception', 'PageHeader', '_mfa_api_token', '_mfa_backup_codes_getir', '_mfa_devre_disi_birak', '_mfa_durum_getir', ...}
+
+tests\test_sayfa_iskeleti.py:146: AssertionError
+__________________ test_ekranda_subheader_kalmaz[admin_mfa] ___________________
+
+modul = 'admin_mfa'
+
+    @pytest.mark.parametrize("modul", EKRANLAR)
+    def test_ekranda_subheader_kalmaz(modul: str) -> None:
+        """`st.subheader` sayfa iskeletiyle çakýþan eski kalýptýr."""
+        kalanlar = _st_cagrilari(_agac(modul), "subheader")
+>       assert not kalanlar, (
+            f"{modul}: {len(kalanlar)} adet `st.subheader` kaldý. "
+            "Bunlar `PageHeader` veya `Section` ile deðiþtirilmeli."
+        )
+E       AssertionError: admin_mfa: 2 adet `st.subheader` kaldý. Bunlar `PageHeader` veya `Section` ile deðiþtirilmeli.
+E       assert not [<ast.Call object at 0x00000242F4DD7E90>, <ast.Call object at 0x00000242F3C99010>]
+
+tests\test_sayfa_iskeleti.py:156: AssertionError
+____________ test_ekranda_elle_markdown_baslik_kalmaz[ana_kontrol] ____________
+
+modul = 'ana_kontrol'
+
+    @pytest.mark.parametrize("modul", EKRANLAR)
+    def test_ekranda_elle_markdown_baslik_kalmaz(modul: str) -> None:
+        """`st.markdown("### ...")` tipografi ölçeðini atlar; yasak."""
+        kalanlar = _markdown_basliklari(_agac(modul))
+>       assert not kalanlar, (
+            f"{modul}: elle yazýlmýþ markdown baþlýðý kaldý: {kalanlar}. "
+            "Baþlýklar `Section` üzerinden kurulmalý ki tipografi ölçeði "
+            "ve anchor kimlikleri tutarlý kalsýn."
+        )
+E       AssertionError: ana_kontrol: elle yazýlmýþ markdown baþlýðý kaldý: ['##### Kaynak Doluluðu', '##### Öne Çýkanlar', '##### Oranlar', '##### Günlük Hacim (7 gün)']. Baþlýklar `Section` üzerinden kurulmalý ki tipografi ölçeði ve anchor kimlikleri tutarlý kalsýn.
+E       assert not ['##### Kaynak Doluluðu', '##### Öne Çýkanlar', '##### Oranlar', '##### Günlük Hacim (7 gün)']
+
+tests\test_sayfa_iskeleti.py:166: AssertionError
+______________________ test_musteri_yonetimi_6_alt_sekme ______________________
+
+    def test_musteri_yonetimi_6_alt_sekme():
+        """6 alt sekme mevcut (st.tubs ile)."""
+        st_mock = MagicMock()
+        st_mock.tabs = MagicMock(return_value=[MagicMock() for _ in range(6)])
+        st_mock.subheader = MagicMock()
+        st_mock.divider = MagicMock()
+        st_mock.info = MagicMock()
+        st_mock.caption = MagicMock()
+        st_mock.columns = lambda n: [MagicMock() for _ in range(n)]
+        st_mock.form = MagicMock(return_value=MagicMock())
+        st_mock.text_input = MagicMock(return_value="")
+        st_mock.number_input = MagicMock(return_value=50)
+        st_mock.form_submit_button = MagicMock(return_value=False)
+        st_mock.selectbox = MagicMock(return_value="terminal")
+    
+        ph_mock = MagicMock()
+        ph_mock.render = MagicMock()
+    
+        admin_destek = MagicMock()
+        admin_destek.render_destek_tab = MagicMock()
+    
+        admin_export = MagicMock()
+        admin_export.render_export_tab = MagicMock()
+    
+        with patch.object(musteri_yonetimi, "st", st_mock), patch.object(
+            musteri_yonetimi, "PageHeader", lambda *a, **kw: ph_mock
+        ), patch.object(
+            musteri_yonetimi, "admin_destek", admin_destek
+        ), patch.object(
+            musteri_yonetimi, "admin_export", admin_export
+        ), patch(
+            "web_dashboard.tabs.admin_extras.post_api", MagicMock()
+        ), patch(
+            "web_dashboard.tabs.admin_extras.get_api", MagicMock(return_value={"items": []})
+        ):
+            with patch(
+                "web_dashboard.tabs.musteri_yonetimi.render_user_management", MagicMock()
+            ):
+>               musteri_yonetimi.render_musteri_yonetimi_tab()
+
+tests\test_musteri_yonetimi.py:79: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def render_musteri_yonetimi_tab() -> None:
+        """Müþteri Yönetimi üst sayfasý — 6 alt sekme."""
+        PageHeader(
+            "Müþteri Yönetimi",
+            "Kullanýcý onaylarý, paket/kredi, giriþ etkinliði, aramalar, destek ve dýþa aktarma.",
+            ust_etiket="Ýþ · Yönetim",
+            ikon="\U0001f465",
+        ).render()
+    
+        sekme_basliklari = [b.baslik for b in BOLUMLER]
+        secim = st.tabs(sekme_basliklari)
+    
+        with secim[0]:
+            _kullanicilar_onay()
+        with secim[1]:
+            _paket_kredi()
+        with secim[2]:
+            _giris_aktinligi()
+        with secim[3]:
+            _aramalar()
+        with secim[4]:
+            _destek()
+        with secim[5]:
+            _dissa_aktar()
+>       with secim[6]:
+             ^^^^^^^^
+E       IndexError: list index out of range
+
+web_dashboard\tabs\musteri_yonetimi.py:79: IndexError
+---------------------------- Captured stderr call -----------------------------
+2026-09-26 23:14:05.466 WARNING streamlit.runtime.scriptrunner_utils.script_run_context: Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:05.484 
+  [33m[1mWarning:[0m to view this Streamlit app on a browser, run it with the following
+  command:
+
+    streamlit run C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\pytest\__main__.py [ARGUMENTS]
+2026-09-26 23:14:05.484 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:05.484 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:05.485 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:05.485 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:05.485 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:05.485 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:05.485 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:05.485 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:05.549 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:05.549 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:05.549 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:07.609 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:07.609 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:07.609 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:09.760 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:09.760 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:09.760 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:09.990 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:09.990 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:09.990 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:09.991 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:09.991 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+2026-09-26 23:14:09.991 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+------------------------------ Captured log call ------------------------------
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+WARNING  streamlit.runtime.scriptrunner_utils.script_run_context:script_run_context.py:476 Thread 'MainThread': missing ScriptRunContext! This warning can be ignored when running in bare mode.
+=========================== short test summary info ===========================
+FAILED tests/test_sayfa_iskeleti.py::test_ekran_section_kullanir[admin_mfa]
+FAILED tests/test_sayfa_iskeleti.py::test_ekranda_subheader_kalmaz[admin_mfa]
+FAILED tests/test_sayfa_iskeleti.py::test_ekranda_elle_markdown_baslik_kalmaz[ana_kontrol]
+FAILED tests/test_musteri_yonetimi.py::test_musteri_yonetimi_6_alt_sekme - In...
+4 failed, 97 passed in 7.03s

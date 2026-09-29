@@ -1,0 +1,7 @@
+=== ABONELIK TABLOSU (6 satir) ===
+  &nbsp; | &nbsp;Veri Abonelik Tipi | PDF TÜRÜ / VERİ SETİ | 2026 Yılı | HİZMET SUNUŞ ŞEKLİ
+  1 | Düzey_1 Standart Elektronik Gazete Veri Aboneliği (Yıllık) (İlan türlerini içeren fihristli) Not _1 : 2026 yılında 251 iş günü vardır. (251 x 1.932) = 484.932 TL Not_2: Bir ilan için ödenecek muhtemel tutar: 484.932 
+  2 | Düzey_2 Detaylı Elektronik Gazete Veri Aboneliği (Yıllık) (İlan türlerini içeren fihristli) Not_1: 2026 yılında 251 iş günü vardır. (251 x 3.792) = 951.792 &nbsp;TL Not_2: Bir ilan için ödenecek muhtemel tutar: 951.7
+  3 | Düzey_3 Detaylı Elektronik Gazete Veri Aboneliği (Yıllık) (İlan türlerini içeren fihristli) Not_1: 2026 yılında 251 iş günü vardır. &nbsp; (251 x 5.688) = 1.427.688 &nbsp;TL Not_2: Bir ilan için ödenecek muhtemel tut
+  Banka Şubesi | Hesap Numarası | Açıklama
+  AKBANK BAKANLIKLAR ŞUBESİ | TR510004600153888000069075 | Abone Bedeli / Elektronik Gazete Talebi

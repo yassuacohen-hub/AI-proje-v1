@@ -13,11 +13,53 @@
       "skillPath": "skills/data-designer/SKILL.md",
       "computedHash": "2cf4af3e3df0ce7a25cd4eb3dc1d136a5194e36425070a77a569a67c114074e5"
     },
+    "elite-product-ux-architect": {
+      "source": "Elite Product UX Architect",
+      "sourceType": "internal",
+      "skillPath": "skills/elite-product-ux-architect/SKILL.md",
+      "computedHash": "1.0.0"
+    },
+    "elite-saas-architect": {
+      "source": "Elite SaaS Architect",
+      "sourceType": "internal",
+      "skillPath": "skills/elite-saas-architect/SKILL.md",
+      "computedHash": "1.0.0"
+    },
+    "osint-web-scraping-toolkit": {
+      "source": "Cline, Kilo Code",
+      "sourceType": "internal",
+      "skillPath": "skills/osint-web-scraping-toolkit/SKILL.md",
+      "computedHash": "1.0.0"
+    },
+    "receiving-code-review": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/receiving-code-review/SKILL.md",
+      "computedHash": "59361179fc9225173e0c145ffd9bafbf9fdbf8b43ce3dc308497a0b4f83a6063"
+    },
+    "requesting-code-review": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/requesting-code-review/SKILL.md",
+      "computedHash": "2abaeac1de432c76abda0ca7ba618901d2e94f8817b3650f9c523acea2d224f5"
+    },
+    "senior-engineer": {
+      "source": "Cline, Kilo",
+      "sourceType": "internal",
+      "skillPath": "skills/senior-engineer/SKILL.md",
+      "computedHash": "1.0.0"
+    },
     "skill-card-generator": {
       "source": "nvidia/skills",
       "sourceType": "github",
       "skillPath": "skills/skill-card-generator/SKILL.md",
       "computedHash": "8a90bbc81c036cb51ec1024bfc521769a89d22b2ea8ae7ec508a593d094c9d8d"
+    },
+    "streemit-product-intelligence": {
+      "source": "Streemit Product Intelligence",
+      "sourceType": "internal",
+      "skillPath": "skills/streemit-product-intelligence/SKILL.md",
+      "computedHash": "1.0.0"
     },
     "supabase": {
       "source": "supabase/agent-skills",
@@ -31,41 +73,35 @@
       "skillPath": "skills/supabase-postgres-best-practices/SKILL.md",
       "computedHash": "128fac78002d916c8ca908245d398e634f540d8bcf20915b2b2359aeb18eba59"
     },
-    "senior-engineer": {
-      "source": "Cline, Kilo",
-      "sourceType": "internal",
-      "skillPath": "skills/senior-engineer/SKILL.md",
-      "computedHash": "1.0.0"
+    "systematic-debugging": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/systematic-debugging/SKILL.md",
+      "computedHash": "3589907ee34dc8b1b7223a33fac98ab841a9e42f9960ab4433a832f0c6f00be0"
     },
-    "osint-web-scraping-toolkit": {
-      "source": "Cline, Kilo Code",
-      "sourceType": "internal",
-      "skillPath": "skills/osint-web-scraping-toolkit/SKILL.md",
-      "computedHash": "1.0.0"
-    },
-    "streemit-product-intelligence": {
-      "source": "Streemit Product Intelligence",
-      "sourceType": "internal",
-      "skillPath": "skills/streemit-product-intelligence/SKILL.md",
-      "computedHash": "1.0.0"
-    },
-    "elite-product-ux-architect": {
-      "source": "Elite Product UX Architect",
-      "sourceType": "internal",
-      "skillPath": "skills/elite-product-ux-architect/SKILL.md",
-      "computedHash": "1.0.0"
-    },
-    "elite-saas-architect": {
-      "source": "Elite SaaS Architect",
-      "sourceType": "internal",
-      "skillPath": "skills/elite-saas-architect/SKILL.md",
-      "computedHash": "1.0.0"
+    "test-driven-development": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/test-driven-development/SKILL.md",
+      "computedHash": "3cfe4ebb6fa7288f668d87880d279c8e48f7a92b63415e296857060f5ce22e05"
     },
     "venture-category-architect": {
       "source": "Venture & Category Architect",
       "sourceType": "internal",
       "skillPath": "skills/venture-category-architect/SKILL.md",
       "computedHash": "1.0.0"
+    },
+    "verification-before-completion": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/verification-before-completion/SKILL.md",
+      "computedHash": "b529822bdac4b197b180fe12225cff86b930b65910435103c10622df7f041651"
+    },
+    "writing-skills": {
+      "source": "obra/superpowers",
+      "sourceType": "github",
+      "skillPath": "skills/writing-skills/SKILL.md",
+      "computedHash": "7a13d9b3fd40e886c97f4b467ccc0f5edce03d606ea0dedc72d568d6e813e206"
     }
   }
 }

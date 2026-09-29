@@ -1,0 +1,145 @@
+..................................................s..................... [  1%]
+........................................................................ [  3%]
+........................................................................ [  4%]
+........................................................................ [  6%]
+...............................................ssssss.s................. [  8%]
+........................................................................ [  9%]
+........................................................................ [ 11%]
+........................................................................ [ 13%]
+........................................................................ [ 14%]
+........................................................................ [ 16%]
+..F.............F....................................................... [ 18%]
+........................................................................ [ 19%]
+........................................................................ [ 21%]
+........................................................................ [ 23%]
+....................................s................................... [ 24%]
+.......................................s................................ [ 26%]
+........................................................................ [ 28%]
+..............................................F.......................FF [ 29%]
+........................................................................ [ 31%]
+........................................................................ [ 33%]
+........................................................................ [ 34%]
+........................................................................ [ 36%]
+........................................................................ [ 38%]
+........................................................................ [ 39%]
+........................................................................ [ 41%]
+........................................................................ [ 43%]
+........................................................................ [ 44%]
+........................................................................ [ 46%]
+........................................................................ [ 48%]
+........................................................................ [ 49%]
+........................................................................ [ 51%]
+........................................................................ [ 53%]
+........................................................................ [ 54%]
+........................................................................ [ 56%]
+........................................................................ [ 58%]
+........................................................................ [ 59%]
+........................................................................ [ 61%]
+........................................................................ [ 63%]
+........................................................................ [ 64%]
+........................................................................ [ 66%]
+........................................................................ [ 68%]
+........................................................................ [ 69%]
+........................................................................ [ 71%]
+........................................FFFFF........................... [ 73%]
+........................................................................ [ 74%]
+........................................................................ [ 76%]
+...............................................F..............F......... [ 78%]
+...........F...........................................FF.F..F.......... [ 79%]
+........................................................s............... [ 81%]
+.....................s.................................................. [ 83%]
+........................................................................ [ 84%]
+........................................................................ [ 86%]
+........................................................................ [ 88%]
+........................................................................ [ 89%]
+........................................................................ [ 91%]
+........................................................................ [ 93%]
+........................................................................ [ 94%]
+........................................................................ [ 96%]
+........................................F............................... [ 98%]
+........................................................................ [ 99%]
+.                                                                        [100%]
+============================== warnings summary ===============================
+tests\test_secrets_rotation.py:174
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\test_secrets_rotation.py:174: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration
+
+tests/company_master/test_ankara_osb.py: 15 warnings
+  C:\Huginn Data Projesi\Huginn Data Insights\src\company_master\seed\seed_ankara_osb.py:147: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.utcnow().isoformat()
+
+tests/company_master/test_web_app.py::TestIntelligenceDashboardEndpoint::test_intelligence_dashboard_returns_expected_structure
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3594: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now_iso = datetime.utcnow().isoformat()
+
+tests/test_admin_ltv_cac.py::test_calculate_ltv_basic
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3235: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_calculate_cac_basic
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3274: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3299: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3334: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    start_date = datetime.utcnow().date() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_by_tier
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3371: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff_30 = datetime.utcnow() - timedelta(days=30)
+
+tests/test_api_integration.py: 2 warnings
+tests/test_benchmark.py: 100 warnings
+  c:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3594: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now_iso = datetime.utcnow().isoformat()
+
+tests/test_auth_lockout.py: 10 warnings
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\sqlalchemy\engine\default.py:952: DeprecationWarning: The default datetime adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+    cursor.execute(statement, parameters)
+
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+  C:\Huginn Data Projesi\Huginn Data Insights\tests\test_job_intelligence_e2e.py:321: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "detected_at": datetime.utcnow() - timedelta(days=1),
+
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+  C:\Huginn Data Projesi\Huginn Data Insights\src\company_master\intelligence\job_intelligence\pipeline\scorer.py:28: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return datetime.utcnow()
+
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+  C:\Huginn Data Projesi\Huginn Data Insights\tests\test_job_intelligence_e2e.py:370: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    sig.setdefault("detected_at", datetime.utcnow() - timedelta(days=1))
+
+tests/test_mcp_transport.py::TestHTTPTransport::test_http_list_tools
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydantic_settings\sources\utils.py:47: IncompleteFieldDefinitionWarning: Field 'lifespan' has an incomplete definition: its annotation contains an unresolved forward reference, so settings sources may fail to correctly resolve its value. Call `model_rebuild()` on the model where the field is defined, once all the referenced types are defined.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_api_integration.py::TestRotaEnvanteri::test_tum_api_rotalari_tanimli_listeyle_eslesir
+FAILED tests/test_api_integration.py::TestVeriUclari::test_match_gecersiz_buyer_404
+FAILED tests/test_error_handling.py::TestSetupLogging::test_json_format_kapaliyken_insan_okuunur
+FAILED tests/test_error_handling.py::TestFileRotation::test_dosya_hedefine_yazilir
+FAILED tests/test_error_handling.py::TestFileRotation::test_stdout_ve_dosya_ikili_cikti
+FAILED tests/test_migration_0017.py::test_migration_0017_down_exists - Assert...
+FAILED tests/test_migration_0017.py::test_migration_0017_down_drops_table - F...
+FAILED tests/test_migration_0017.py::test_migration_0017_down_drops_indexes
+FAILED tests/test_migration_0017.py::test_migration_0017_down_cleans_schema_migrations
+FAILED tests/test_migration_0017.py::test_migration_0017_no_root_down_file - ...
+FAILED tests/test_sayfa_iskeleti.py::test_ekran_section_kullanir[admin_mfa]
+FAILED tests/test_sayfa_iskeleti.py::test_ekranda_subheader_kalmaz[admin_mfa]
+FAILED tests/test_sayfa_iskeleti.py::test_ekranda_elle_markdown_baslik_kalmaz[ana_kontrol]
+FAILED tests/test_schema_validation.py::test_migration_files_exist - Assertio...
+FAILED tests/test_schema_validation.py::test_migration_down_files_content - A...
+FAILED tests/test_schema_validation.py::test_migration_down_files_format - As...
+FAILED tests/test_schema_validation.py::test_migrations_apply_rollback - Asse...
+FAILED tests/test_user_settings.py::test_panel_formu_sema_uzerinden_uretir - ...
+18 failed, 4291 passed, 12 skipped, 143 warnings in 159.06s (0:02:39)

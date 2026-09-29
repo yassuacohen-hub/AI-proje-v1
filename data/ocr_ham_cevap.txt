@@ -1,0 +1,38 @@
+{
+  "id": "chatcmpl-ETHZMS2eQvXonAuN4HZMiYHB8iuqI",
+  "object": "chat.completion",
+  "created": 1790647756,
+  "model": "gpt-4o-mini-2024-07-18",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "```json\n[\n    {\n        \"mersis_no\": \"0012032074100004\",\n        \"ticaret_sicil_no\": \"448217\",\n        \"ticaret_unvani\": \"AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT ORGANİZ ŞUBESİ\",\n        \"ilan_sira_no\": \"49136\"\n    },\n    {\n        \"mersis_no\": \"0641780861000001\",\n        \"ticaret_sicil_no\": \"510144\",\n        \"ticaret_unvani\": \"MELODI OTEL TURİZM TİCARET LİMİTED ŞİRKETİ\",\n        \"ilan_sira_no\": \"49132\"\n    }\n]\n```",
+        "refusal": null,
+        "annotations": []
+      },
+      "logprobs": null,
+      "finish_reason": "stop"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 48594,
+    "completion_tokens": 167,
+    "total_tokens": 48761,
+    "prompt_tokens_details": {
+      "cached_tokens": 43008,
+      "audio_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0,
+      "audio_tokens": 0,
+      "accepted_prediction_tokens": 0,
+      "rejected_prediction_tokens": 0
+    }
+  },
+  "service_tier": "default",
+  "system_fingerprint": "fp_8c12b002a5"
+}
+data: [DONE]
+

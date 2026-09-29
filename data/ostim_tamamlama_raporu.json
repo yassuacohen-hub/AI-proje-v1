@@ -1,0 +1,16 @@
+{
+  "calisma_zamani": "2026-09-29T09:47:42",
+  "toplam_kayit": 8313,
+  "eksik_detay": 3339,
+  "bu_turda_islenen": 5,
+  "basarili_kayit": 5,
+  "hata": 0,
+  "tekil_unvan": 5,
+  "tekil_oran_yuzde": 100.0,
+  "P6_esik_yuzde": 95.0,
+  "tur_basarisiz": false,
+  "sure_saniye": 1.5,
+  "cikti": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\ostim\\firmalar_tamamlanmis.jsonl",
+  "durum_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\ostim\\.detay_tamamla_state.json",
+  "kalan_islenmemis": 3334
+}

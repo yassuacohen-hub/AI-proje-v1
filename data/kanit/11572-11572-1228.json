@@ -1,0 +1,56 @@
+{
+  "ilan_sira_no": "11572",
+  "icerik_no": "11816",
+  "mersis_no": null,
+  "ticaret_sicil_no": "448217",
+  "ticaret_unvani": "AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT ORGANİZE ŞUBESİ",
+  "adres": null,
+  "mudurluk": "ANKARA",
+  "yayin_tarihi": "28.04.2026",
+  "gazete_sayi": "11572",
+  "gazete_sayfa": "1228",
+  "tescil_tarihi": null,
+  "tescil_edilen_husus": "ŞUBE (YÖNETİM - TEMSİL) MERKEZİ TÜRKİYE’ DE BULUNAN ŞUBE Değişiklik - Yönetim Kurulu / Yetkililer",
+  "delil_belgeler": null,
+  "il_turu": null,
+  "grup_anahtari": null,
+  "iliskili_kayitlar": [],
+  "guid": null,
+  "katman": 0,
+  "kaynak": "https://www.ticaretsicil.gov.tr/view/hizlierisim/ilangoruntuleme.php",
+  "alinma_zamani": "2026-09-29T01:10:40+00:00",
+  "ham_metin": "",
+  "dogrulama": {
+    "sonuc": "supheli",
+    "bulgular": [
+      {
+        "kod": "MERSIS_YOK",
+        "seviye": "hata",
+        "mesaj": "MERSİS numarası boş"
+      },
+      {
+        "kod": "SUBE_KAYIT",
+        "seviye": "bilgi",
+        "mesaj": "Kayıt bir ŞUBE; ana şirket sicil no ile eşleşmeyebilir"
+      }
+    ],
+    "turetilen": {
+      "anahtar": "11572-11572-1228",
+      "sirket_tipi": "sube",
+      "alan_doluluk": {
+        "dolu": 9,
+        "bos": [
+          "mersis_no",
+          "adres",
+          "tescil_tarihi",
+          "delil_belgeler",
+          "il_turu",
+          "grup_anahtari",
+          "iliskili_kayitlar",
+          "guid",
+          "katman"
+        ]
+      }
+    }
+  }
+}

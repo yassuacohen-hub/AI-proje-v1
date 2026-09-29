@@ -3,5 +3,35 @@
     "sahip": "utku",
     "task_id": "VERI-NACE-COKLU-01",
     "kilitlendi": "2026-09-27T13:19:21"
+  },
+  "scripts/ajan_cakisma_kilidi.py": {
+    "sahip": "ihsan",
+    "task_id": "ALTYAPI-AJAN-CAKISMA-01",
+    "kilitlendi": "2026-09-29T00:42:35"
+  },
+  "skills/devops/__init__.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-SKILL-YAPISI-01",
+    "kilitlendi": "2026-09-29T01:23:04"
+  },
+  "skills/streamlit/__init__.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-SKILL-YAPISI-01",
+    "kilitlendi": "2026-09-29T01:23:04"
+  },
+  "tests/test_skill_havuzu.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-SKILL-YAPISI-01",
+    "kilitlendi": "2026-09-29T01:23:04"
+  },
+  "skills/services/ticaret_sicili_kanit.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-TICARET-KANIT-01",
+    "kilitlendi": "2026-09-29T02:35:29"
+  },
+  "tests/test_ticaret_sicili_kanit.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-TICARET-KANIT-01",
+    "kilitlendi": "2026-09-29T02:35:29"
   }
 }

@@ -1,0 +1,91 @@
+{
+  "kaynak_pdf": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\kanit\\448217_a18a2282.pdf",
+  "model": "openai/gpt-4o-mini",
+  "toplam_sure_saniye": 15.42,
+  "dilim_sayisi": 3,
+  "basarili_dilim": 3,
+  "hatali_dilim": 0,
+  "toplam_token": 124536,
+  "kanonik_veri": {
+    "ilan_sira_no": "49136",
+    "mersis_no": "001203074100024",
+    "ticaret_sicil_no": "448217",
+    "ticaret_unvani": "AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT ORGANİZ ŞUBESİ",
+    "adres_kisa": "Adres : Malkıyı Başkent Osb Mah. 16 Cad. Akana No: 9 Sincan / Ankara",
+    "tescil_edilen_hususlar": "Adres",
+    "ic_yonergesi_madde": null,
+    "ilan_turu": null,
+    "emniyet_uyarisi": null
+  },
+  "dilimler": [
+    {
+      "gorsel": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\kanit\\448217_a18a2282_sayfa_sag.png",
+      "model": "openai/gpt-4o-mini",
+      "sure_saniye": 6.64,
+      "veri": {
+        "ilan_sira_no": "49136",
+        "mersis_no": "001203074100024",
+        "ticaret_sicil_no": "448217",
+        "ticaret_unvani": "AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT ORGANİZ ŞUBESİ",
+        "adres_kisa": "Adres : Malkıyı Başkent Osb Mah. 16 Cad. Akana No: 9 Sincan / Ankara",
+        "tescil_edilen_hususlar": "Adres",
+        "ic_yonergesi_madde": null,
+        "ilan_turu": null,
+        "emniyet_uyarisi": null
+      },
+      "ham_cevap": "```json\n{\n  \"ilan_sira_no\": \"49136\",\n  \"mersis_no\": \"001203074100024\",\n  \"ticaret_sicil_no\": \"448217\",\n  \"ticaret_unvani\": \"AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT ORGANİZ ŞUBESİ\",\n  \"adres_kisa\": \"Adres : Malkıyı Başkent Osb Mah. 16 Cad. Akana No: 9 Sincan / Ankara\",\n  \"tescil_edilen_hususlar\": \"Adres\",\n  \"ic_yonergesi_madde\": null,\n  \"ilan_turu\": null,\n  \"emniyet_uyarisi\": null\n}\n```",
+      "kullanim": {
+        "prompt_token": 48979,
+        "tamam_token": 168,
+        "toplam_token": 49147
+      },
+      "hata": null
+    },
+    {
+      "gorsel": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\kanit\\448217_a18a2282_sayfa_sol_ust.png",
+      "model": "openai/gpt-4o-mini",
+      "sure_saniye": 4.15,
+      "veri": {
+        "ilan_sira_no": null,
+        "mersis_no": null,
+        "ticaret_sicil_no": null,
+        "ticaret_unvani": "TÜRKİYE TİCARET SİCİL GAZETESİ",
+        "adres_kisa": null,
+        "tescil_edilen_hususlar": null,
+        "ic_yonergesi_madde": "11",
+        "ilan_turu": null,
+        "emniyet_uyarisi": null
+      },
+      "ham_cevap": "```json\n{\n  \"ilan_sira_no\": null,\n  \"mersis_no\": null,\n  \"ticaret_sicil_no\": null,\n  \"ticaret_unvani\": \"TÜRKİYE TİCARET SİCİL GAZETESİ\",\n  \"adres_kisa\": null,\n  \"tescil_edilen_hususlar\": null,\n  \"ic_yonergesi_madde\": \"11\",\n  \"ilan_turu\": null,\n  \"emniyet_uyarisi\": null\n}\n```",
+      "kullanim": {
+        "prompt_token": 37588,
+        "tamam_token": 116,
+        "toplam_token": 37704
+      },
+      "hata": null
+    },
+    {
+      "gorsel": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\kanit\\448217_a18a2282_sayfa_sol_alt.png",
+      "model": "openai/gpt-4o-mini",
+      "sure_saniye": 4.63,
+      "veri": {
+        "ilan_sira_no": null,
+        "mersis_no": null,
+        "ticaret_sicil_no": null,
+        "ticaret_unvani": null,
+        "adres_kisa": null,
+        "tescil_edilen_hususlar": null,
+        "ic_yonergesi_madde": "13",
+        "ilan_turu": null,
+        "emniyet_uyarisi": null
+      },
+      "ham_cevap": "```json\n{\n  \"ilan_sira_no\": null,\n  \"mersis_no\": null,\n  \"ticaret_sicil_no\": null,\n  \"ticaret_unvani\": null,\n  \"adres_kisa\": null,\n  \"tescil_edilen_hususlar\": null,\n  \"ic_yonergesi_madde\": \"13\",\n  \"ilan_turu\": null,\n  \"emniyet_uyarisi\": null\n}\n```",
+      "kullanim": {
+        "prompt_token": 37588,
+        "tamam_token": 97,
+        "toplam_token": 37685
+      },
+      "hata": null
+    }
+  ]
+}

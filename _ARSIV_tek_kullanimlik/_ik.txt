@@ -1,0 +1,26 @@
+=== CANLI SITE: sayfalama davranisi ===
+   page=1     http=403  firma=  0  imza=d41d8cd98f
+      ilk 3: []
+   page=2     http=403  firma=  0  imza=d41d8cd98f <-- SAYFA 1 ILE AYNI!
+   page=3     http=403  firma=  0  imza=d41d8cd98f <-- SAYFA 1 ILE AYNI!
+   page=50    http=403  firma=  0  imza=d41d8cd98f <-- SAYFA 1 ILE AYNI!
+   page=500   http=403  firma=  0  imza=d41d8cd98f <-- SAYFA 1 ILE AYNI!
+   page=9999  http=403  firma=  0  imza=d41d8cd98f <-- SAYFA 1 ILE AYNI!
+
+=== SECTOR DOGRULAMA: kart yapisi degismis mi? ===
+   div.osb-list-card       -> 0
+   h3.osb-card-title a     -> 0
+   article                  -> 0
+   .firma                   -> 0
+   .card                    -> 0
+   table tr                 -> 0
+   .company-item            -> 0
+   li a                     -> 0
+
+=== YEREL JSONL: kopya orani ===
+   data\ivedik\firmalar.jsonl: satir=3354 tekil_unvan=14
+   data\ivedik\ivedik_full.jsonl YOK
+
+=== DURUM DOSYASI (completed_pages kac sayfa?) ===
+   completed_pages: 225 adet, max=225
+   total_records  : 3375

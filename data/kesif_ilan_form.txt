@@ -1,0 +1,163 @@
+=== FORM ILAN ===
+	<div class="col-md-12">
+												<div class="c-contact" style="margin-left: 0px;">
+													<div class="c-content-title-1">
+														<h3 class="c-font-uppercase c-font-bold">İLAN GÖRÜNTÜLEME</h3>
+														<div class="c-line-left"></div>
+													</div>
+													<form id="FormIlanGoruntuleme">
+														<div class="form-group">
+															<div class="row">
+																<div class="col-md-11">
+																	<div class="row">
+																		<div class="col-md-3">
+																			<select class="form-control c-square c-theme input-lg" id="SicilMudurluguId" name="SicilMudurluguId" style="background-color: #32c5d2;color:#FFFFFF;">
+																				<option value="0">Sicil Müdürlüğü Seçiniz...</option>
+																																									<option value="232">İSTANBUL</option>
+																																										<option value="18">ANKARA</option>
+																																										<option value="233">İZMİR</option>
+																																										<option value="1">ACIPAYAM</option>
+																																										<option value="2">ADANA</option>
+																																										<option value="3">ADIYAMAN</option>
+																																										<option value="4">AFYONKARAHİSAR</option>
+																																										<option value="5">AFŞİN</option>
+																																										<option value="6">AKHİSAR</option>
+																																										<option value="7">AKSARAY</option>
+																																										<option value="8">AKYAZI</option>
+																																										<option value="9">AKÇAKOCA</option>
+																																										<option value="10">AKŞEHİR</option>
+																																										<option value="11">ALACA</option>
+																																										<option value="12">ALANYA</option>
+																																										<option value="13">ALAPLI</option>
+																																										<option value="14">ALAŞEHİR</option>
+																																										<option value="15">ALİAĞA</option>
+																																										<option value="16">AMASYA</option>
+																																										<option value="17">ANAMUR</option>
+																																										<option value="19">ANTALYA</option>
+																																										<option value="20">ARDAHAN</option>
+																																										<option value="21">ARDEŞEN</option>
+																																										<option value="22">ARHAVİ</option>
+																																										<option value="23">ARTVİN</option>
+																																										<option value="24">AYDIN</option>
+																																										<option value="25">AYVALIK</option>
+																																										<option value="26">AĞRI</option>
+																																										<option value="27">BABADAĞ</option>
+																																										<option value="28">BABAESKİ</option>
+																																										<option value="29">BAFRA</option>
+																																										<option value="30">BALIKESİR</option>
+																																										<option value="31">BANDIRMA</option>
+																																										<option value="32">BARTIN</option>
+																																										<option value="33">BATMAN</option>
+																																										<option value="34">BAYBURT</option>
+																																										<option value="35">BAYINDIR</option>
+																																										<option value="36">BERGAMA</option>
+																																										<option value="37">BEYPAZARI</option>
+																																										<option value="38">BEYŞEHİR</option>
+																																										<option value="39">BODRUM</option>
+																																										<option value="40">BOLU</option>
+																																										<option value="41">BOLVADİN</option>
+																																										<option value="42">BOR</option>
+																																										<option value="43">BORÇKA</option>
+																																										<option value="44">BOYABAT</option>
+																																										<option value="45">BOZÜYÜK</option>
+																																										<option value="46">BOĞAZLIYAN</option>
+																							
+
+=== JS: ilangoruntuleme_ok cagrisi ===
+>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 col-sm-12 c-col">
+					<p class="c-copyright c-font-grey">2019 © TOBB | Bilgi Hizmetleri Dairesi						<span class="c-font-grey-3"> Tüm hakkı saklıdır.</span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</footer>
+<div class="c-layout-go2top">
+	<i class="fa fa-chevron-up"></i>
+</div>				<script src="/js/moment.min.js" type="text/javascript"></script>
+<script src="/assets/bootstrap-daterangepicker/daterangepicker.min.js" type="text/javascript"></script>
+<script src="/assets/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
+<script src="/assets/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
+<script src="/js/datepicker.js" type="text/javascript"></script>
+		<script language="JavaScript" type="text/javascript">
+		function SepeteEkle(IlanId)
+		{
+			$.ajax
+			(
+				{
+					type:'POST',
+					url:'sepete_ekle.php',
+					data:'IlanId=' + IlanId +
+						  '&Bos=0',
+					success:function(AjaxCevap)
+					{
+						//Sepet simgesi kaybolsun
+						$('#IlanId'+IlanId).html('');
+						//Gazete Pdf simgesi kaybolsun
+						$('#IlanIdG'+IlanId).html('');
+						$('#SpanSepetSayisi').show();
+						$('#SpanSepetSayisi').html(AjaxCevap);
+					}
+				}
+			);
+		}
+		$(document).ready
+		(
+			function()
+			{
+				$('.Tarih').on("change",function() { 
+				$('#'+$(this).attr('data-name')).toggle(this.checked);
+				}).change();
+				//İLAN SORGULAMA FORMU
+				$('#FormIlanGoruntuleme').submit
+				(
+					function (e) 
+					{
+						if (($.trim($('#SicilMudurluguId').val())=='') || ($.trim($('#SicilMudurluguId').val())=='0'))
+						{
+							toastr.error('Sicil Müdürlüğü Seçiniz','Hata');
+							$('#SicilMudurluguId').trigger('chosen:activate');
+							return false;
+						}
+						var Veri;
+						Veri = new FormData(this);
+						$.ajax
+						(
+							{
+								url: 'ilangoruntuleme_ok.php',
+								data: Veri,
+								processData: false,
+								type: 'POST',
+								contentType: false, 
+								success: function (AjaxCevap) 
+								{
+									$('#DivIlanSonuc').html(AjaxCevap);
+								}
+							}
+						);
+						e.preventDefault();
+					}
+				);
+				$('#FormIlanGoruntuleme')
+				//Tarih
+				$('.input-group.date').datepicker
+				(
+					{
+						language: 'TRK'
+					}
+				);
+				$('.DateMasked').mask
+				(
+					'00.00.0000',
+					{
+						"placeholder": "gg.aa.yyyy"
+					}
+				);
+			}
+		)
+		</script>
+	</body>
+</html>

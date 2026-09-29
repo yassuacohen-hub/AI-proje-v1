@@ -1,0 +1,64 @@
+=== V1) sources TABLOSU: kaynak -> bolge tekilligi ===
+   kolonlar: source_id, source_name, source_type, url, authority_score, collection_method, legal_basis, active, created_at
+    {'source_id': UUID('0a27baf8-6dfa-4e57-851b-412470f480e7'), 'source_name': 'ostim.org.tr', 'source_type': 'osb', 'url': 'https://www.ostim.org.tr/'}
+    {'source_id': UUID('534bc9d8-6faa-4fde-a60d-626eb4ff65df'), 'source_name': 'aso.org.tr', 'source_type': 'chamber', 'url': 'https://www.aso.org.tr'}
+    {'source_id': UUID('e7868576-76a9-4a68-a6ea-4ded0e8dfa2e'), 'source_name': 'baskentosb.org.tr', 'source_type': 'osb', 'url': 'https://baskentosb.org.tr/'}
+    {'source_id': UUID('f9a86932-cdbd-401e-b856-c8a3cfbd2886'), 'source_name': 'ivedik.org.tr', 'source_type': 'osb', 'url': 'https://ivedik.org.tr/'}
+
+=== V2) KAYNAKTA BOLGE IPUCU: parsel/adres ===
+   HATA: ProgrammingError (psycopg2.errors.UndefinedColumn) column s.name does not exist
+LINE 1: SELECT COALESCE(s.name, s.source_name, 'YOK') AS kaynak, COU...
+                        ^
+
+[SQL: SELECT COALESCE(s.name, s.source
+
+=== V2b) ADRESTE BOLGE ADI GECIYOR MU (ornek) ===
+    ABDULKADİR GEYLANİ CAD. FATİH İŞ MERKEZİ NO:36 OSTİM/ANKARA
+    1235. CADDE (ESKİ 58) 147
+    KORU MAH. AKMEŞE SK. NO: 4/1A ÇANKAYA / ANKARA
+    MUSTAFA KEMAL MAH. 2079 CAD. NO: 2B İÇ KAPI NO: 53 ÇANKAYA / ANKARA
+    1173. SOKAK NO :27 OSTİM YENİMAHALLE/ANKARA
+    ÇİĞİLTEPE MAH. BOSTANCIK CAD.  NO: 25A MAMAK / ANKARA
+    ÖNDER MAHALLESİ KOÇAK CAD.  NO: 61 B  ALTINDAĞ/ANKARA
+    ÖNDER MAHALLESİ TEZCAN CAD.  NO: 17/3  ALTINDAĞ/ANKARA
+
+=== V3) AYNI FIRMA COKLU KAYNAKTA MI? (unvan cakismasi) ===
+   tekrarlı ünvan grubu (ilk 12):
+     FATIH BAĞBAŞI                                      kayit=228  farkli_bolge=0
+     EGEMEN PANO                                        kayit=224  farkli_bolge=0
+     ARAD BRANDING                                      kayit=224  farkli_bolge=0
+     DÜZEY GAYRİMENKUL DEĞERLEME A.Ş.                   kayit=224  farkli_bolge=0
+     ALİ EŞREF ERKANİ                                   kayit=224  farkli_bolge=0
+     ELASTIKA KAUÇUK VE PLASTIK ÜRÜNLER SAN. VE DIŞ T   kayit=224  farkli_bolge=0
+     ARTÜRK YAZ. TEKNOLOJILERI                          kayit=224  farkli_bolge=0
+     ARSAŞ TASARIM                                      kayit=224  farkli_bolge=0
+     BERAT MAK.                                         kayit=224  farkli_bolge=0
+     COŞKUN PİROTEKNİK ORG.AV.TUR.TİC.LTD.ŞTİ.          kayit=224  farkli_bolge=0
+     HILAL                                              kayit=223  farkli_bolge=0
+     HS LABS                                            kayit=223  farkli_bolge=0
+   TOPLAM: 494 grup / 5085 kayit tekrarli
+
+=== V4) KOPYA CAPASI ADAYLARI: hangisi ne kadar ayirici? ===
+   toplam firma      : 14003
+   tekil unvan       :   9412  (dolu 14003)
+   tekil domain      :   2729  (dolu 6774  kapsam %48.4)
+   tekil telefon     :   7715  (dolu 8316  kapsam %59.4)
+   tekil vergi no    :     40  (dolu 40  kapsam %0.3)
+
+=== V5) BAYATLIK: last_verified_at dagilimi ===
+   None  n=1008
+   2026-09-08  n=4773
+   2026-09-02  n=8222
+   last_verified == created (±5sn): 12995  -> hic tazelenmemis demek
+
+=== V6) osbs TABLOSU KOLONLARI (genisleme yeri) ===
+   osb_id                 uuid               null=NO
+   name                   text               null=NO
+   city                   text               null=NO
+   district               text               null=YES
+   website                text               null=YES
+   osb_type               text               null=YES
+   status                 text               null=YES
+   source_id              uuid               null=YES
+   verified_at            timestamp with time zone null=YES
+   created_at             timestamp with time zone null=NO

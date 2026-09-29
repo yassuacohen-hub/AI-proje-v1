@@ -1,0 +1,38 @@
+=== 403 TESTI: farkli UA / baslik ===
+   kaziyicinin UA         /            -> http=403 boyut=0
+   kaziyicinin UA         /firmalar/   -> http=403 boyut=0
+   kaziyicinin UA         /robots.txt  -> http=403 boyut=0
+   tam tarayici basligi   /            -> http=403 boyut=0
+   tam tarayici basligi   /firmalar/   -> http=403 boyut=0
+   tam tarayici basligi   /robots.txt  -> http=403 boyut=0
+   UA yok                 /            -> http=401 boyut=5434
+   UA yok                 /firmalar/   -> http=401 boyut=5434
+   UA yok                 /robots.txt  -> http=401 boyut=5434
+
+=== JSONL: dongu izi ===
+   toplam satir : 3354
+   tekil unvan  : 14
+   ilk 20 satir sirasi: ['ALİ EŞREF ERKANİ', 'ARAD BRANDING', 'Arsaş Tasarım', 'Artürk Yazılım Teknolojileri', 'Berat Makina', 'COŞKUN PİROTEKNİK ORG.AV.TUR.TİC.LTD.ŞTİ.', 'DÜZEY GAYRİMENKUL DEĞERLEME A.Ş.', 'EGEMEN PANO', 'Elastika Kauçuk Ve Plastik Ürünler San. ve Dış Tic. A.Ş.', 'Fatih bağbaşı', 'Fatih bağbaşı', 'Hilal', 'HS Labs', 'karaman teneke san.tic ltd şti', 'MERCAN MAKİNE', 'ALİ EŞREF ERKANİ', 'ARAD BRANDING', 'Arsaş Tasarım', 'Artürk Yazılım Teknolojileri', 'Berat Makina']
+
+   tekil unvanlar ve tekrar sayisi:
+        448 x Fatih bağbaşı
+        224 x ALİ EŞREF ERKANİ
+        224 x ARAD BRANDING
+        224 x Arsaş Tasarım
+        224 x Artürk Yazılım Teknolojileri
+        224 x Berat Makina
+        224 x COŞKUN PİROTEKNİK ORG.AV.TUR.TİC.LTD.ŞTİ.
+        224 x DÜZEY GAYRİMENKUL DEĞERLEME A.Ş.
+        224 x EGEMEN PANO
+        224 x Elastika Kauçuk Ve Plastik Ürünler San. ve Dış Tic. A.Ş.
+        223 x Hilal
+        223 x HS Labs
+        222 x karaman teneke san.tic ltd şti
+        222 x MERCAN MAKİNE
+
+   'ALİ EŞREF ERKANİ' konumlari: [0, 15, 30, 45, 60, 75]
+   -> DONGU UZUNLUGU = 15 kayit/sayfa
+
+=== DURUM: 225 sayfa x dongu = ? ===
+   completed_pages=225 total_records=3375
+   kayit/sayfa = 15.0

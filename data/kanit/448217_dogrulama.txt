@@ -1,0 +1,4 @@
+ilan_sayisi = 4
+ornek tur   = ŞUBE (ADRES DEĞİŞİKLİĞİ) MERKEZİ TÜRKİYE’ DE BULUNAN ŞUBE De
+turler      = ['ŞUBE (ADRES DEĞİŞİKL', 'ŞUBE (YÖNETİM - TEMS', 'ŞUBE AÇILIŞ MERKEZİ ']
+yillar      = ['2020', '2025', '2026']

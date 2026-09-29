@@ -1,0 +1,732 @@
+..................................................s..................... [  1%]
+........................................................................ [  3%]
+........................................................................ [  5%]
+........................................................................ [  6%]
+...............................................ssssss.s................. [  8%]
+........................................................................ [ 10%]
+........................................................................ [ 11%]
+........................................................................ [ 13%]
+........................................................................ [ 15%]
+........................................................................ [ 16%]
+..F.............F....................................................... [ 18%]
+........................................................................ [ 20%]
+........................................................................ [ 21%]
+........................................................................ [ 23%]
+............................s........................................... [ 25%]
+...............................s........................................ [ 26%]
+........................................................................ [ 28%]
+.................................F.......................FF............. [ 30%]
+........................................................................ [ 31%]
+........................................................................ [ 33%]
+........................................................................ [ 35%]
+........................................................................ [ 36%]
+........................................................................ [ 38%]
+........................................................................ [ 40%]
+........................................................................ [ 41%]
+........................................................................ [ 43%]
+........................................................................ [ 45%]
+........................................................................ [ 46%]
+........................................................................ [ 48%]
+........................................................................ [ 50%]
+........................................................................ [ 52%]
+........................................................................ [ 53%]
+........................................................................ [ 55%]
+........................................................................ [ 57%]
+........................................................................ [ 58%]
+........................................................................ [ 60%]
+........................................................................ [ 62%]
+........................................................................ [ 63%]
+........................................................................ [ 65%]
+........................................................................ [ 67%]
+........................................................................ [ 68%]
+........................................................................ [ 70%]
+..............................F......................................... [ 72%]
+....................FFFFF..................F............................ [ 73%]
+...................................F.................................... [ 75%]
+........................................................................ [ 77%]
+..................F..............F....................F................. [ 78%]
+..........................FF.F..F....................................... [ 80%]
+...........................s....................................s....... [ 82%]
+........................................................................ [ 83%]
+........................................................................ [ 85%]
+........................................................................ [ 87%]
+........................................................................ [ 88%]
+........................................................................ [ 90%]
+........................................................................ [ 92%]
+........................................................................ [ 93%]
+........................................................................ [ 95%]
+........................................................................ [ 97%]
+...........F............................................................ [ 98%]
+............................................                             [100%]
+================================== FAILURES ===================================
+______ TestRotaEnvanteri.test_tum_api_rotalari_tanimli_listeyle_eslesir _______
+
+self = <tests.test_api_integration.TestRotaEnvanteri object at 0x000001AFACA95880>
+
+    def test_tum_api_rotalari_tanimli_listeyle_eslesir(self):
+        actual: dict[str, set[str]] = {}
+        for r in app.routes:
+            methods = getattr(r, "methods", None)
+            path = getattr(r, "path", "")
+            if methods and (path.startswith("/api/") or path == "/metrics"):
+                actual.setdefault(path, set()).update(m for m in methods if m != "HEAD")
+        eksik = {p: m for p, m in EXPECTED_ROUTES.items() if p not in actual}
+        fazla = {p: m for p, m in actual.items() if p not in EXPECTED_ROUTES}
+        method_fark = {
+            p: (EXPECTED_ROUTES.get(p), actual.get(p))
+            for p in EXPECTED_ROUTES.keys() & actual.keys()
+            if EXPECTED_ROUTES[p] != actual[p]
+        }
+        assert not eksik, f"TEST EDILMEYEN/OLSAMAYAN ROTALAR: {eksik}"
+>       assert not fazla, f"BEKLENMEYEN YENI ROTALAR (suite'e ekle): {fazla}"
+E       AssertionError: BEKLENMEYEN YENI ROTALAR (suite'e ekle): {'/api/webhooks/telegram': {'POST'}, '/api/webhooks/telegram/health': {'GET'}, '/api/admin/kvkk-mode': {'POST'}, '/api/admin/feature-flags': {'POST'}, '/api/admin/ltv-cac': {'GET'}, '/api/admin/mfa/setup': {'POST'}, '/api/admin/mfa/verify': {'POST'}, '/api/admin/mfa/disable': {'POST'}, '/api/admin/mfa/backup-codes': {'POST'}, '/api/admin/login-mfa': {'POST'}, '/api/admin/mfa/status': {'GET'}}
+E       assert not {'/api/webhooks/telegram': {'POST'}, '/api/webhooks/telegram/health': {'GET'}, '/api/admin/kvkk-mode': {'POST'}, '/api/admin/feature-flags': {'POST'}, ...}
+
+tests\test_api_integration.py:194: AssertionError
+________________ TestVeriUclari.test_match_gecersiz_buyer_404 _________________
+
+self = <tests.test_api_integration.TestVeriUclari object at 0x000001AFACABA3F0>
+client = <starlette.testclient.TestClient object at 0x000001AFB1602390>
+dev_modu = None
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001AFB16216D0>
+
+    def test_match_gecersiz_buyer_404(self, client, dev_modu, monkeypatch):
+        _db_yukle(monkeypatch)  # engine uretilir ama baglanti acilmaz
+>       r = client.get("/api/match", params={"buyer_id": "uuid-degil"})
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_api_integration.py:286: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\testclient.py:483: in get
+    return super().get(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx2\_client.py:1113: in get
+    return self.request(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\testclient.py:455: in request
+    return super().request(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx2\_client.py:797: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx2\_client.py:980: in send
+    response = self._send_handling_auth(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx2\_client.py:1008: in _send_handling_auth
+    response = self._send_handling_redirects(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx2\_client.py:1043: in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx2\_client.py:1076: in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\testclient.py:354: in handle_request
+    raise exc
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\testclient.py:351: in handle_request
+    portal.call(self.app, scope, receive, send)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\from_thread.py:338: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\from_thread.py:263: in _call_func
+    retval = await retval_or_awaitable
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\applications.py:1163: in __call__
+    await super().__call__(scope, receive, send)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\applications.py:96: in __call__
+    await self.middleware_stack(scope, receive, send)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\errors.py:186: in __call__
+    raise exc
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\errors.py:164: in __call__
+    await self.app(scope, receive, _send)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py:193: in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_master\core\error_handling.py:412: in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py:168: in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py:144: in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py:88: in __call__
+    await self.app(scope, receive, send)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\exceptions.py:63: in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py:670: in __call__
+    await self.middleware_stack(scope, receive, send)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py:2734: in app
+    await route.handle(scope, receive, send)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py:1281: in handle
+    await super().handle(scope, receive, send)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py:280: in handle
+    await self.app(scope, receive, send)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py:158: in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py:53: in wrapped_app
+    raise exc
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py:42: in wrapped_app
+    await app(scope, receive, sender)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py:144: in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py:706: in app
+    raw_response = await run_endpoint_function(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py:354: in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\concurrency.py:34: in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\to_thread.py:65: in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\_backends\_asyncio.py:2641: in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\_backends\_asyncio.py:1033: in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+buyer_id = 'uuid-degil', nace = '', osb_id = '', mode = 'komple'
+yon = 'tedarikci', min_puan = 30, limit = 20, offset = 0, mask = 0
+user_token = '', _auth = 'public'
+
+    @app.get("/api/match")
+    def api_match(
+        buyer_id: str = "",
+        nace: str = "",
+        osb_id: str = "",
+        mode: str = "komple",
+        yon: str = "tedarikci",
+        min_puan: int = 30,
+        limit: int = 20,
+        offset: int = 0,
+        mask: int = 0,
+        user_token: str = "",
+        _auth: str = Depends(require_api_key),
+    ) -> dict:
+        """V9 smart matching MVP: buyer profiline uygun firmalarý puanla.
+    
+        - buyer_id verirse: DB'den buyer alýnýr (nace + osb)
+        - yoksa nace (+ opsiyonel osb_id) ile serbest profil
+        - mode: komple (komþu sektörler dahil) | ayni (sadece ayný ana grup)
+        - yon (Y22): tedarikci (varsayilan) | musteri (ters yon satis kanali) | rakip
+          (sadece ayni grup; rakip analizi)
+        - user_token: onaylý kullanýcý tokený â†’ 1 kredi düþülür; kredi bittiyse
+          sonuçlar otomatik maskelenir + credit_pack önerisi döner
+        """
+        mode = mode if mode in ("komple", "ayni") else "komple"
+        yon = yon if yon in ("tedarikci", "musteri", "rakip") else "tedarikci"
+        limit = max(1, min(limit, 100))
+    
+        user = _user_from_token(user_token) if user_token else None
+>       tier = user.get("tier", "terminal")  # Default to terminal
+               ^^^^^^^^
+E       AttributeError: 'NoneType' object has no attribute 'get'
+
+web_app.py:1298: AttributeError
+---------------------------- Captured stdout call -----------------------------
+{"timestamp":"2026-09-26T20:10:30.998874+00:00","level":"ERROR","logger":"http.request","message":"Request failed","module":"error_handling","function":"dispatch","line":429,"method":"GET","url":"http://testserver/api/match?buyer_id=uuid-degil","duration_ms":1.52,"error":"'NoneType' object has no attribute 'get'"}
+{"timestamp":"2026-09-26T20:10:31.000474+00:00","level":"ERROR","logger":"web_app","message":"'NoneType' object has no attribute 'get'","module":"error_handling","function":"log_exception","line":354,"exception":{"type":"AttributeError","message":"'NoneType' object has no attribute 'get'","traceback":"Traceback (most recent call last):\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\starlette\\middleware\\errors.py\", line 164, in __call__\n    await self.app(scope, receive, _send)\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\starlette\\middleware\\base.py\", line 193, in __call__\n    response = await self.dispatch_func(request, call_next)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Huginn Data Projesi\\Huginn Data Insights\\src\\company_master\\core\\error_handling.py\", line 412, in dispatch\n    response = await call_next(request)\n               ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\starlette\\middleware\\base.py\", line 168, in call_next\n    raise app_exc from app_exc.__cause__ or app_exc.__context__\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\starlette\\middleware\\base.py\", line 144, in coro\n    await self.app(scope, receive_or_disconnect, send_no_error)\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\starlette\\middleware\\cors.py\", line 88, in __call__\n    await self.app(scope, receive, send)\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\starlette\\middleware\\exceptions.py\", line 63, in __call__\n    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\starlette\\_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\starlette\\_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\fastapi\\middleware\\asyncexitstack.py\", line 18, in __call__\n    await self.app(scope, receive, send)\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\starlette\\routing.py\", line 670, in __call__\n    await self.middleware_stack(scope, receive, send)\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\fastapi\\routing.py\", line 2734, in app\n    await route.handle(scope, receive, send)\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\fastapi\\routing.py\", line 1281, in handle\n    await super().handle(scope, receive, send)\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\starlette\\routing.py\", line 280, in handle\n    await self.app(scope, receive, send)\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\fastapi\\routing.py\", line 158, in app\n    await wrap_app_handling_exceptions(app, request)(scope, receive, send)\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\starlette\\_exception_handler.py\", line 53, in wrapped_app\n    raise exc\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\starlette\\_exception_handler.py\", line 42, in wrapped_app\n    await app(scope, receive, sender)\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\fastapi\\routing.py\", line 144, in app\n    response = await f(request)\n               ^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\fastapi\\routing.py\", line 706, in app\n    raw_response = await run_endpoint_function(\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\fastapi\\routing.py\", line 354, in run_endpoint_function\n    return await run_in_threadpool(dependant.call, **values)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\starlette\\concurrency.py\", line 34, in run_in_threadpool\n    return await anyio.to_thread.run_sync(func)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\anyio\\to_thread.py\", line 65, in run_sync\n    return await get_async_backend().run_sync_in_worker_thread(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\anyio\\_backends\\_asyncio.py\", line 2641, in run_sync_in_worker_thread\n    return await future\n           ^^^^^^^^^^^^\n  File \"C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\anyio\\_backends\\_asyncio.py\", line 1033, in run\n    result = context.run(func, *args)\n             ^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"C:\\Huginn Data Projesi\\Huginn Data Insights\\web_app.py\", line 1298, in api_match\n    tier = user.get(\"tier\", \"terminal\")  # Default to terminal\n           ^^^^^^^^\nAttributeError: 'NoneType' object has no attribute 'get'"},"exception_type":"AttributeError","path":"/api/match","method":"GET","client":"testclient"}
+------------------------------ Captured log call ------------------------------
+ERROR    http.request:error_handling.py:429 Request failed
+ERROR    web_app:error_handling.py:354 'NoneType' object has no attribute 'get'
+Traceback (most recent call last):
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 193, in __call__
+    response = await self.dispatch_func(request, call_next)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Huginn Data Projesi\Huginn Data Insights\src\company_master\core\error_handling.py", line 412, in dispatch
+    response = await call_next(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 168, in call_next
+    raise app_exc from app_exc.__cause__ or app_exc.__context__
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\base.py", line 144, in coro
+    await self.app(scope, receive_or_disconnect, send_no_error)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py", line 88, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\middleware\asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 670, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 2734, in app
+    await route.handle(scope, receive, send)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 1281, in handle
+    await super().handle(scope, receive, send)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py", line 280, in handle
+    await self.app(scope, receive, send)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 158, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 144, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 706, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py", line 354, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\concurrency.py", line 34, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\to_thread.py", line 65, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\_backends\_asyncio.py", line 2641, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\_backends\_asyncio.py", line 1033, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Huginn Data Projesi\Huginn Data Insights\web_app.py", line 1298, in api_match
+    tier = user.get("tier", "terminal")  # Default to terminal
+           ^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'get'
+_________ TestSetupLogging.test_json_format_kapaliyken_insan_okuunur __________
+
+self = <tests.test_error_handling.TestSetupLogging object at 0x000001AFACD93320>
+tmp_path = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-1996/test_json_format_kapaliyken_in0')
+
+    def test_json_format_kapaliyken_insan_okuunur(self, tmp_path):
+        log_file = tmp_path / "human.log"
+        eh.setup_logging(level="INFO", json_format=False, log_file=str(log_file))
+        eh.get_logger("human").info("merhaba")
+        for h in logging.getLogger().handlers:
+            _dokun(h)
+        icerik = log_file.read_text(encoding="utf-8")
+>       assert "merhaba" in icerik
+E       AssertionError: assert 'merhaba' in ''
+
+tests\test_error_handling.py:90: AssertionError
+________________ TestFileRotation.test_dosya_hedefine_yazilir _________________
+
+self = <tests.test_error_handling.TestFileRotation object at 0x000001AFACDB3BF0>
+tmp_path = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-1996/test_dosya_hedefine_yazilir0')
+
+    def test_dosya_hedefine_yazilir(self, tmp_path):
+        hedef = tmp_path / "rotasyon.log"
+        eh.setup_logging(level="INFO", log_file=str(hedef))
+        eh.get_logger("rot").warning("mesaj")
+        for h in logging.getLogger().handlers:
+            _dokun(h)
+>       assert "mesaj" in hedef.read_text(encoding="utf-8")
+E       AssertionError: assert 'mesaj' in ''
+E        +  where '' = read_text(encoding='utf-8')
+E        +    where read_text = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-1996/test_dosya_hedefine_yazilir0/rotasyon.log').read_text
+
+tests\test_error_handling.py:297: AssertionError
+______________ TestFileRotation.test_stdout_ve_dosya_ikili_cikti ______________
+
+self = <tests.test_error_handling.TestFileRotation object at 0x000001AFACDCC080>
+tmp_path = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-1996/test_stdout_ve_dosya_ikili_cik0')
+capsys = <_pytest.capture.CaptureFixture object at 0x000001AFAFDE8E60>
+
+    def test_stdout_ve_dosya_ikili_cikti(self, tmp_path, capsys):
+        hedef = tmp_path / "dual.log"
+        eh.setup_logging(level="INFO", log_file=str(hedef), console_output=True)
+        eh.get_logger("dual").info("stdout-ve-dosya")
+        for h in logging.getLogger().handlers:
+            _dokun(h)
+>       assert "stdout-ve-dosya" in capsys.readouterr().out
+E       AssertionError: assert 'stdout-ve-dosya' in ''
+E        +  where '' = CaptureResult(out='', err='').out
+E        +    where CaptureResult(out='', err='') = readouterr()
+E        +      where readouterr = <_pytest.capture.CaptureFixture object at 0x000001AFAFDE8E60>.readouterr
+
+tests\test_error_handling.py:305: AssertionError
+___________________________ test_kok_denetimi_temiz ___________________________
+
+    def test_kok_denetimi_temiz() -> None:
+        """Regresyon kalkani: repo genelinde 0 ihlal (140 -> 0)."""
+        sonuc = md.tarama()
+>       assert sonuc["yasal_yazim"] == [], sonuc["yasal_yazim"][:5]
+E       AssertionError: ['C:\\Huginn Data Projesi\\Huginn Data Insights\\app.py:486: \'hugin\' -> # K3-10g (KAHÝN: "hugin logosuna yer açmýþ oluruz, logoyu sol köþeye']
+E       assert ['C:\\Huginn ...u sol köþeye'] == []
+E         
+E         Left contains one more item: 'C:\\Huginn Data Projesi\\Huginn Data Insights\\app.py:486: \'hugin\' -> # K3-10g (KAHÝN: "hugin logosuna yer açmýþ oluruz, logoyu sol köþeye'
+E         Use -v to get more diff
+
+tests\test_marka_denetim_muafiyet.py:68: AssertionError
+_______________________ test_migration_0017_down_exists _______________________
+
+    def test_migration_0017_down_exists():
+        """0017_user_activity_log.down.sql dosyasi down/ alt dizininde mevcut."""
+>       assert (
+            Path("src/company_master/schema/migrations/down/0017_user_activity_log.sql").exists()
+        ), "down/0017_user_activity_log.sql bulunamadi"
+E       AssertionError: down/0017_user_activity_log.sql bulunamadi
+E       assert False
+E        +  where False = exists()
+E        +    where exists = WindowsPath('src/company_master/schema/migrations/down/0017_user_activity_log.sql').exists
+E        +      where WindowsPath('src/company_master/schema/migrations/down/0017_user_activity_log.sql') = Path('src/company_master/schema/migrations/down/0017_user_activity_log.sql')
+
+tests\test_migration_0017.py:105: AssertionError
+____________________ test_migration_0017_down_drops_table _____________________
+
+    def test_migration_0017_down_drops_table():
+        """Down dosyasi DROP TABLE iceriyor."""
+        sql = Path(
+            "src/company_master/schema/migrations/down/0017_user_activity_log.sql"
+>       ).read_text(encoding="utf-8")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_migration_0017.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('src/company_master/schema/migrations/down/0017_user_activity_log.sql')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'src\\company_master\\schema\\migrations\\down\\0017_user_activity_log.sql'
+
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\pathlib.py:1013: FileNotFoundError
+___________________ test_migration_0017_down_drops_indexes ____________________
+
+    def test_migration_0017_down_drops_indexes():
+        """Down dosyasi indeksleri dusuruyor."""
+        sql = Path(
+            "src/company_master/schema/migrations/down/0017_user_activity_log.sql"
+>       ).read_text(encoding="utf-8")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_migration_0017.py:122: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('src/company_master/schema/migrations/down/0017_user_activity_log.sql')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'src\\company_master\\schema\\migrations\\down\\0017_user_activity_log.sql'
+
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\pathlib.py:1013: FileNotFoundError
+______________ test_migration_0017_down_cleans_schema_migrations ______________
+
+    def test_migration_0017_down_cleans_schema_migrations():
+        """Down dosyasi schema_migrations kaydini siliyor."""
+        sql = Path(
+            "src/company_master/schema/migrations/down/0017_user_activity_log.sql"
+>       ).read_text(encoding="utf-8")
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_migration_0017.py:132: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('src/company_master/schema/migrations/down/0017_user_activity_log.sql')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'src\\company_master\\schema\\migrations\\down\\0017_user_activity_log.sql'
+
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\pathlib.py:1013: FileNotFoundError
+____________________ test_migration_0017_no_root_down_file ____________________
+
+    def test_migration_0017_no_root_down_file():
+        """REGRESYON: Kokte 0017*.down.sql dosyasi YOKTUR.
+    
+        migrate.py:36 glob("*.sql") recursive degil — kok dizindeki down dosyasi
+        up sanilip uygulanir, migration kurulur kurulmaz duserilir (KABUL KRTERI).
+        Bu test bu hatayi yakalar; yeni migration'da down dosyasi MUTLAKA
+        down/ alt dizininde olmali.
+        """
+        migrations_dir = Path("src/company_master/schema/migrations")
+        # Kok dizinde 0017 ile baslayan down dosyasi araþtýr
+        root_down_files = list(migrations_dir.glob("0017*.down.sql"))
+>       assert (
+            not root_down_files
+        ), f"REGRESYON: Kokte 0017*.down.sql dosyasi bulundu, migrate.py glob'una sikisacak: {root_down_files}"
+E       AssertionError: REGRESYON: Kokte 0017*.down.sql dosyasi bulundu, migrate.py glob'una sikisacak: [WindowsPath('src/company_master/schema/migrations/0017_user_activity_log.down.sql')]
+E       assert not [WindowsPath('src/company_master/schema/migrations/0017_user_activity_log.down.sql')]
+
+tests\test_migration_0017.py:150: AssertionError
+__________________ test_acik_gorevlerde_yeni_d57_ihlali_yok ___________________
+
+    def test_acik_gorevlerde_yeni_d57_ihlali_yok() -> None:
+        ihlal = {}
+        for g in _acik_gorevler():
+            tid = g.get("task_id", "")
+            sebep = gorev_at._d57_dogrula(tid, g.get("baslik", ""), g.get("sahip", ""))
+            if sebep and tid not in MUAF:
+                ihlal[tid] = sebep
+>       assert not ihlal, f"acik gorevlerde D-57 ihlali: {ihlal}"
+E       AssertionError: acik gorevlerde D-57 ihlali: {'UTKU-02': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'UTKU-04': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'UTKU-05': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'ORCH-01': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'ORCH-02': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'ORCH-03': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'ORCH-04': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'ORCH-05': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)'}
+E       assert not {'UTKU-02': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz ->...or: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', ...}
+
+tests\test_naming_audit.py:63: AssertionError
+___________________________ test_pano_yolu_kanonik ____________________________
+
+    def test_pano_yolu_kanonik():
+        """D-186: denetim her zaman merkez panosunu okur; worktree kopyasý split üretir."""
+>       assert _kanonik_yol_kontrol() is None, "PANO_DOSYA kanonik deðil veya worktree'de split kopya var"
+E       AssertionError: PANO_DOSYA kanonik deðil veya worktree'de split kopya var
+E       assert {'tip': 'split', 'seviye': 'hata', 'task_id': 'pano_denetim', 'mesaj': "Reel worktree'de split tespit: C:\\Huginn Data Projesi\\Huginn Data Insights\\.kilo\\worktrees\\puddle-weeder\\data\\orchestrator\\task_board.json", ...} is None
+E        +  where {'tip': 'split', 'seviye': 'hata', 'task_id': 'pano_denetim', 'mesaj': "Reel worktree'de split tespit: C:\\Huginn Data Projesi\\Huginn Data Insights\\.kilo\\worktrees\\puddle-weeder\\data\\orchestrator\\task_board.json", ...} = _kanonik_yol_kontrol()
+
+tests\test_pano_denetim.py:72: AssertionError
+___________________ test_ekran_section_kullanir[admin_mfa] ____________________
+
+modul = 'admin_mfa'
+
+    @pytest.mark.parametrize("modul", EKRANLAR)
+    def test_ekran_section_kullanir(modul: str) -> None:
+        """Her ekran gövdeyi `Section` bloklarýna ayýrýr."""
+        isimler = _kullanilan_isimler(_agac(modul))
+>       assert "Section" in isimler, (
+            f"{modul}: içerik `Section` bloklarý ile gruplanmalý "
+            f"(H2 + açýklama + ayraç). {_IPUCU}"
+        )
+E       AssertionError: admin_mfa: içerik `Section` bloklarý ile gruplanmalý (H2 + açýklama + ayraç). Modül bir ekran deðilse MUAF sözlüðüne gerekçesiyle ekleyin; ekransa ADMIN-UI-10 kalýbýna taþýyýn.
+E       assert 'Section' in {'Exception', 'PageHeader', '_mfa_api_token', '_mfa_backup_codes_getir', '_mfa_devre_disi_birak', '_mfa_durum_getir', ...}
+
+tests\test_sayfa_iskeleti.py:146: AssertionError
+__________________ test_ekranda_subheader_kalmaz[admin_mfa] ___________________
+
+modul = 'admin_mfa'
+
+    @pytest.mark.parametrize("modul", EKRANLAR)
+    def test_ekranda_subheader_kalmaz(modul: str) -> None:
+        """`st.subheader` sayfa iskeletiyle çakýþan eski kalýptýr."""
+        kalanlar = _st_cagrilari(_agac(modul), "subheader")
+>       assert not kalanlar, (
+            f"{modul}: {len(kalanlar)} adet `st.subheader` kaldý. "
+            "Bunlar `PageHeader` veya `Section` ile deðiþtirilmeli."
+        )
+E       AssertionError: admin_mfa: 2 adet `st.subheader` kaldý. Bunlar `PageHeader` veya `Section` ile deðiþtirilmeli.
+E       assert not [<ast.Call object at 0x000001AFB2270810>, <ast.Call object at 0x000001AFB5107F10>]
+
+tests\test_sayfa_iskeleti.py:156: AssertionError
+____________ test_ekranda_elle_markdown_baslik_kalmaz[ana_kontrol] ____________
+
+modul = 'ana_kontrol'
+
+    @pytest.mark.parametrize("modul", EKRANLAR)
+    def test_ekranda_elle_markdown_baslik_kalmaz(modul: str) -> None:
+        """`st.markdown("### ...")` tipografi ölçeðini atlar; yasak."""
+        kalanlar = _markdown_basliklari(_agac(modul))
+>       assert not kalanlar, (
+            f"{modul}: elle yazýlmýþ markdown baþlýðý kaldý: {kalanlar}. "
+            "Baþlýklar `Section` üzerinden kurulmalý ki tipografi ölçeði "
+            "ve anchor kimlikleri tutarlý kalsýn."
+        )
+E       AssertionError: ana_kontrol: elle yazýlmýþ markdown baþlýðý kaldý: ['##### Kaynak Doluluðu', '##### Öne Çýkanlar', '##### Oranlar', '##### Günlük Hacim (7 gün)']. Baþlýklar `Section` üzerinden kurulmalý ki tipografi ölçeði ve anchor kimlikleri tutarlý kalsýn.
+E       assert not ['##### Kaynak Doluluðu', '##### Öne Çýkanlar', '##### Oranlar', '##### Günlük Hacim (7 gün)']
+
+tests\test_sayfa_iskeleti.py:166: AssertionError
+_________________________ test_migration_files_exist __________________________
+
+    def test_migration_files_exist():
+        """Migration dosyalarýnýn varlýðýný test et."""
+        # Up migration'lar
+        expected_up = [f"{i:04d}" for i in range(1, 20)]
+    
+        up_files = [f.stem for f in MIGRATIONS_DIR.glob("*.sql") if not f.stem.endswith("_down")]
+    
+        for exp in expected_up:
+            matching = [f for f in up_files if f.startswith(exp)]
+>           assert len(matching) == 1, f"Migration {exp} için tam 1 up dosyasý bekleniyor, bulundu: {matching}"
+E           AssertionError: Migration 0016 için tam 1 up dosyasý bekleniyor, bulundu: ['0016_users_last_login.down', '0016_users_last_login']
+E           assert 2 == 1
+E            +  where 2 = len(['0016_users_last_login.down', '0016_users_last_login'])
+
+tests\test_schema_validation.py:39: AssertionError
+______________________ test_migration_down_files_content ______________________
+
+    def test_migration_down_files_content():
+        """Down migration dosyalarýnýn içeriðini test et."""
+        # Down dosyalarýnýn naming pattern: 0001_core.down.sql, 0002_relations.down.sql, etc.
+        down_files = [f.stem for f in DOWN_DIR.glob("*.sql")]
+    
+        # En az 19 down migration dosyasý olmalý (1-19)
+>       assert len(down_files) >= 19, f"En az 19 down dosyasý bekleniyor, bulundu: {len(down_files)}"
+E       AssertionError: En az 19 down dosyasý bekleniyor, bulundu: 16
+E       assert 16 >= 19
+E        +  where 16 = len(['0001_core.down', '0002_relations.down', '0003_intelligence.down', '0004_faz_1_2.down', '0005_etl_tracking.down', '0006_nace_details.down', ...])
+
+tests\test_schema_validation.py:50: AssertionError
+______________________ test_migration_down_files_format _______________________
+
+    def test_migration_down_files_format():
+        """Down migration dosyalarýnýn formatýný test et."""
+        for i in range(1, 20):
+            # Down dosyasý bul (prefix ile baþlayan)
+            matching = list(DOWN_DIR.glob(f"{i:04d}_*.down.sql"))
+>           assert len(matching) == 1, f"{i:04d}_*.down.sql dosyasý yok veya birden fazla"
+E           AssertionError: 0016_*.down.sql dosyasý yok veya birden fazla
+E           assert 0 == 1
+E            +  where 0 = len([])
+
+tests\test_schema_validation.py:86: AssertionError
+_______________________ test_migrations_apply_rollback ________________________
+
+    def test_migrations_apply_rollback():
+        """Migration'larýn apply ve rollback testi (dry-run)."""
+        for i in range(1, 20):
+            matching = list(MIGRATIONS_DIR.glob(f"{i:04d}_*.sql"))
+            matching = [f for f in matching if not f.stem.endswith("_down")]
+    
+>           assert len(matching) == 1, f"Migration {i:04d} için tam 1 up dosyasý bekleniyor"
+E           AssertionError: Migration 0016 için tam 1 up dosyasý bekleniyor
+E           assert 2 == 1
+E            +  where 2 = len([WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/src/company_master/schema/migrations/0016_users_last_login.d...dowsPath('C:/Huginn Data Projesi/Huginn Data Insights/src/company_master/schema/migrations/0016_users_last_login.sql')])
+
+tests\test_schema_validation.py:147: AssertionError
+___________________ test_panel_formu_sema_uzerinden_uretir ____________________
+
+    def test_panel_formu_sema_uzerinden_uretir():
+        """Elle yazýlmýþ selectbox/checkbox yýðýný yerine döngü kullanýlmalý.
+    
+        Say\u0131m yaln\u0131zca ayarlar b\xf6lgesiyle (``_form_degeri`` \u2192 dosya sonu) s\u0131n\u0131rl\u0131d\u0131r;
+        Karar Defteri filtreleri (MVP-KD-01) ayný dosyada meþru selectbox kullanýr.
+        """
+        kaynak = _panel_kaynak()
+        bolge = kaynak[kaynak.index("def _form_degeri("):]
+        assert "for tanim in grup_haritasi[" in bolge
+>       assert bolge.count("st.selectbox(") <= 1
+E       assert 9 <= 1
+E        +  where 9 = <built-in method count of str object at 0x000001AFB384C170>('st.selectbox(')
+E        +    where <built-in method count of str object at 0x000001AFB384C170> = 'def _form_degeri(tanim: AyarTanimi, mevcut: Any) -> Any:\\n    """Tek bir ayar icin uygun Streamlit girdisini cizer ve...atio \u22653 sa\u011fl\u0131kl\u0131, 1-3 aras\u0131 dikkat, <1 zarar. CAC: marketing_spend / yeni_m\xfc\u015fteri. LTV: revenue / aktif_m\xfc\u015fteri.")\\n\\n'.count
+
+tests\test_user_settings.py:318: AssertionError
+============================== warnings summary ===============================
+tests\test_secrets_rotation.py:174
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\test_secrets_rotation.py:174: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration
+
+tests/company_master/test_ankara_osb.py: 15 warnings
+  C:\Huginn Data Projesi\Huginn Data Insights\src\company_master\seed\seed_ankara_osb.py:147: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.utcnow().isoformat()
+
+tests/company_master/test_web_app.py::TestIntelligenceDashboardEndpoint::test_intelligence_dashboard_returns_expected_structure
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3594: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now_iso = datetime.utcnow().isoformat()
+
+tests/test_admin_ltv_cac.py::test_calculate_ltv_basic
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3235: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_calculate_cac_basic
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3274: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3299: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3334: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    start_date = datetime.utcnow().date() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_by_tier
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3371: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff_30 = datetime.utcnow() - timedelta(days=30)
+
+tests/test_api_integration.py: 2 warnings
+tests/test_benchmark.py: 100 warnings
+  c:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3594: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now_iso = datetime.utcnow().isoformat()
+
+tests/test_auth_lockout.py: 10 warnings
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\sqlalchemy\engine\default.py:952: DeprecationWarning: The default datetime adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+    cursor.execute(statement, parameters)
+
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+  C:\Huginn Data Projesi\Huginn Data Insights\tests\test_job_intelligence_e2e.py:321: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "detected_at": datetime.utcnow() - timedelta(days=1),
+
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+  C:\Huginn Data Projesi\Huginn Data Insights\src\company_master\intelligence\job_intelligence\pipeline\scorer.py:28: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return datetime.utcnow()
+
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+  C:\Huginn Data Projesi\Huginn Data Insights\tests\test_job_intelligence_e2e.py:370: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    sig.setdefault("detected_at", datetime.utcnow() - timedelta(days=1))
+
+tests/test_mcp_transport.py::TestHTTPTransport::test_http_list_tools
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydantic_settings\sources\utils.py:47: IncompleteFieldDefinitionWarning: Field 'lifespan' has an incomplete definition: its annotation contains an unresolved forward reference, so settings sources may fail to correctly resolve its value. Call `model_rebuild()` on the model where the field is defined, once all the referenced types are defined.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_api_integration.py::TestRotaEnvanteri::test_tum_api_rotalari_tanimli_listeyle_eslesir
+FAILED tests/test_api_integration.py::TestVeriUclari::test_match_gecersiz_buyer_404
+FAILED tests/test_error_handling.py::TestSetupLogging::test_json_format_kapaliyken_insan_okuunur
+FAILED tests/test_error_handling.py::TestFileRotation::test_dosya_hedefine_yazilir
+FAILED tests/test_error_handling.py::TestFileRotation::test_stdout_ve_dosya_ikili_cikti
+FAILED tests/test_marka_denetim_muafiyet.py::test_kok_denetimi_temiz - Assert...
+FAILED tests/test_migration_0017.py::test_migration_0017_down_exists - Assert...
+FAILED tests/test_migration_0017.py::test_migration_0017_down_drops_table - F...
+FAILED tests/test_migration_0017.py::test_migration_0017_down_drops_indexes
+FAILED tests/test_migration_0017.py::test_migration_0017_down_cleans_schema_migrations
+FAILED tests/test_migration_0017.py::test_migration_0017_no_root_down_file - ...
+FAILED tests/test_naming_audit.py::test_acik_gorevlerde_yeni_d57_ihlali_yok
+FAILED tests/test_pano_denetim.py::test_pano_yolu_kanonik - AssertionError: P...
+FAILED tests/test_sayfa_iskeleti.py::test_ekran_section_kullanir[admin_mfa]
+FAILED tests/test_sayfa_iskeleti.py::test_ekranda_subheader_kalmaz[admin_mfa]
+FAILED tests/test_sayfa_iskeleti.py::test_ekranda_elle_markdown_baslik_kalmaz[ana_kontrol]
+FAILED tests/test_schema_validation.py::test_migration_files_exist - Assertio...
+FAILED tests/test_schema_validation.py::test_migration_down_files_content - A...
+FAILED tests/test_schema_validation.py::test_migration_down_files_format - As...
+FAILED tests/test_schema_validation.py::test_migrations_apply_rollback - Asse...
+FAILED tests/test_user_settings.py::test_panel_formu_sema_uzerinden_uretir - ...
+21 failed, 4259 passed, 12 skipped, 143 warnings in 176.94s (0:02:56)

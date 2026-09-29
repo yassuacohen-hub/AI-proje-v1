@@ -73,6 +73,7 @@ SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_
 
 | task_id | Ne kapandi | Bitis |
 |---------|------------|-------|
+| ALTYAPI-SKILL-YAPISI-01 | Skill sistemi tek havuzda birlestirildi: `skills/{tools,services,utils,prompts}` + `.agents/skills` (33 SKILL.md); kırık paket imzalari duzeltildi, `devops_agent` 9Router'a gecirildi (anthropic SDK hic eklenmedi), kopya/boş ajan dizinleri junction yapildi, `.kilo/skills` kaldirildi → `tests/test_skill_havuzu.py` 13 passed | 2026-09-29 |
 | UI-ADMIN-SAHTE-KPI-01 | Sahte API KPI karti duzeltildi → `web_dashboard/tabs/admin_kpi.py` gercek rozet | 2026-09-24 |
 | UI-ADMIN-SAHTE-EXEC-02 | Sahte gelir kartlari duzeltildi → `web_dashboard/tabs/admin_executive.py` | 2026-09-24 |
 | UI-ADMIN-SSE-IHLAL-03 | SSE mimari ihlali giderildi → `web_dashboard/tabs/admin_realtime.py` polling | 2026-09-24 |

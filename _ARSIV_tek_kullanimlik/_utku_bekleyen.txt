@@ -1,0 +1,18 @@
+toplam=353 utku_bekleyen=17
+FMT-01 | archive | P2 | ruff format/lint standardizasyonu (web_app/app/web_dashboard haric)
+GUARD-ENC-02 | archive | P2 | kodlama_denetim genisletme (CRLF/bosluk/tab/EOF + fix)
+ORCH-09 | archive | P1 | Otomatik tetikleme nobetcisi: Gorev Zamanlayici poll (1dk deneme -> 10dk hedef, kaldirilab
+ORCH-10 | archive | P1 | Telegram Orkestrator Entegrasyonu (ORCH-10)
+YENI-3 | archive | P0 | Supabase companies tablosu olusturma
+YENI-5 | archive | P1 | Apify webhook DLQ monitor
+BRIF-02 | archive | P1 | [BRIF] kilo brifi: 03_mimari kararlari okunup oneri/kritik/ekleme yazilsin
+DASH-UX-03 | archive | P1 | [DASH-UX] DASH-UX-03: Paket + Cagraz Satis backend: paketler.py (paket CRUD +
+AR-02 | archive | P2 | Competitor Analysis — Direct and Indirect
+PO-BACK-05 | archive | P2 | Veri Tazelik Etiketi + Manuel Yenileme (Freshness)
+PO-BACK-07 | archive | P2 | Feature Flags MVP (Data Quality + Source Reliability)
+ADMIN-WF-01 | archive | P1 | İş akışı optimizasyonu ve görev sıralaması
+TEN-01 | archive | P1 | Multi-tenant hazirligi: TenantContext + bekci + doc
+GAM-01 | archive | P2 | Rozet/Kesif motoru: 3 rozet + kullanici_ilerleme.json
+AI-RAG-01 | archive | P2 | Odin AI RAG iskeleti: kaynak protokolu + baglam derleyici (ai_chat.py'ye dokunma)
+TEN-02 | archive | P1 | Tenant health Streamlit import ayrıştırması
+DASH-UX-02a-SECTIONS | blocked | P1 | [DASH-UX] DASH-UX-02a-SECTIONS: admin_sistem sekmesini SECTIONS'a kaydet

@@ -1,0 +1,7 @@
+HTTP=200 len=79104
+ADET = 71
+TBL SATIR = 72
+SAYFALAMA LINKLERI (0):
+=== sayfa/Page parametreleri ===
+  Guid
+=== benzersiz GUID sayisi = 71

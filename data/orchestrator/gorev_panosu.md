@@ -29,6 +29,9 @@
 | VERI-SEKTOR-01 | [VERI] Sektor sozlugunu yaz → 9689 kayitta sektor alani (3s) | utku | P1 | plan | src/company_master/etl/sektor_normalize.py |
 | VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim icinde 102 ASO kaydi (2s) | utku | P2 | plan | src/company_master/etl/kaynak_sizinti_duzelt.py |
 | VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik verisini yeniden yaz → D-235 korumali sayfa_dongusu (2s) | utku | P1 | plan | src/company_master/etl/scrapers/ivedik_scraper.py |
+| ALTYAPI-AJAN-CAKISMA-01 | [ALTYAPI] Eszamanli ajan kacak kilit kapisini yaz → ajan_cakisma_kilidi.py (4s) | ihsan | P1 | plan | scripts/ajan_cakisma_kilidi.py |
+| ALTYAPI-SKILL-YAPISI-01 | [ALTYAPI] Skill sistemini tek havuzda birlestir → SKILLS_INDEX.md yaz (6s) | yasu | P1 | review | skills/devops/__init__.py, skills/streamlit/__init__.py, tests/test_skill_havuzu.py |
+| ALTYAPI-TICARET-KANIT-01 | [ALTYAPI] Kanit katmanini yaz → skills/services/ticaret_sicili_kanit.py (2s) | yasu | P1 | review | skills/services/ticaret_sicili_kanit.py, tests/test_ticaret_sicili_kanit.py |
 
 ## Tamamlananlar
 

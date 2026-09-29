@@ -1,0 +1,9 @@
+  9| Veri Aboneliği Düzey_1, Düzey_2 ve Düzey_3 olmak üzere üç farklı model ile hizmet
+ 10| Standart Elektronik Gazete Veri Aboneliği
+ 11| (Yıllık) (İlan türlerini içeren fihristli)
+ 18| Detaylı Elektronik Gazete Veri Aboneliği
+ 19| (Yıllık) (İlan türlerini içeren fihristli)
+ 27| Detaylı Elektronik Gazete Veri Aboneliği
+ 28| (Yıllık) (İlan türlerini içeren fihristli)
+ 86| türlerini de içerecek şekilde fihristli (düzey_1 fihristi) olarak (fihrist
+ 89| ve son sayfa, ilanın türü) CD’ye kaydedilmek suretiyle kargo ile veya web

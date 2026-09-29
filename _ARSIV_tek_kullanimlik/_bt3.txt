@@ -1,0 +1,36 @@
+=== G) KAYNAK BASINA KOPYA ORANI ===
+   ostim.org.tr         n=  9513 tekil=  8740 KOPYA=   773 (%8.1)  09-01 22:25 -> 09-07 20:39
+   ivedik.org.tr        n=  3134 tekil=    14 KOPYA=  3120 (%99.6)  09-08 22:58 -> 09-08 22:58
+   baskentosb.org.tr    n=   761 tekil=   481 KOPYA=   280 (%36.8)  09-08 22:58 -> 09-08 22:58
+   aso.org.tr           n=   592 tekil=   592 KOPYA=     0 (%0.0)  09-06 06:18 -> 09-06 12:08
+
+=== H) KOPYALAR TAM AYNI MI? (payload karsilastirma) ===
+   n=14000  tekil (raw_name+payload)=13995  -> tam kopya=5
+
+=== I) IVEDIK KOPYASI: collected_at damgasi ne diyor? ===
+   09-08 22:58:35  n=3134
+
+=== J) BOLGE TURETME: kaynak->bolge eslemesi yeterli mi? ===
+   kaynak bazinda ADRES ipucu tutarliligi:
+   aso.org.tr           adresli=  592  ostim_izi=  38  ivedik_izi=  53  baskent_izi=  27
+   ostim.org.tr         adresli= 5071  ostim_izi= 389  ivedik_izi=  25  baskent_izi=   4
+   baskentosb.org.tr    adresli=  761  ostim_izi=   0  ivedik_izi=   0  baskent_izi= 761
+
+=== K) ASO FIRMALARI HANGI BOLGEDE? (oda -> bolge cikarimi) ===
+    KORU MAH. AKMEŞE SK. NO: 4/1A ÇANKAYA / ANKARA
+    MUSTAFA KEMAL MAH. 2079 CAD. NO: 2B İÇ KAPI NO: 53 ÇANKAYA / ANKARA
+    1173. SOKAK NO :27 OSTİM YENİMAHALLE/ANKARA
+    ÇİĞİLTEPE MAH. BOSTANCIK CAD.  NO: 25A MAMAK / ANKARA
+    ÖNDER MAHALLESİ KOÇAK CAD.  NO: 61 B  ALTINDAĞ/ANKARA
+    ÖNDER MAHALLESİ TEZCAN CAD.  NO: 17/3  ALTINDAĞ/ANKARA
+
+=== L) COKLU BOLGE UYELIGI OLASI MI? (ayni firma 2 kaynakta) ===
+   ayni raw_name birden fazla KAYNAKTA: 366 ad
+   3E BAŞKENT 4 METAL SANAYİ A.Ş.             [baskentosb.org.tr, ostim.org.tr]
+   5S OTOMOTİV İMALAT SANAYİ VE TİCARET A.Ş   [baskentosb.org.tr, ostim.org.tr]
+   A.H.M EVCİL HAYVAN VE HAYVAN ÜRÜNLERİ TE   [baskentosb.org.tr, ostim.org.tr]
+   A4 DOĞALTAŞ GRANİT TİCARET VE SANAYİ LTD   [baskentosb.org.tr, ostim.org.tr]
+   ABAY GIDA TURİZM İNŞAAT VE ELEKTRONİK SA   [baskentosb.org.tr, ostim.org.tr]
+   ABDULKADİR ÖZCAN OTOMOTİV LASTİK SANAYİ    [baskentosb.org.tr, ostim.org.tr]
+   ABFEN FARMA İLAÇ SANAYİ VE TİCARET A.Ş.    [baskentosb.org.tr, ostim.org.tr]
+   3DTİM ELEKTRONİK A.Ş.                      [baskentosb.org.tr, ostim.org.tr]

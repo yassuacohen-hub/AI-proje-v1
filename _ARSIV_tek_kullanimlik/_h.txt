@@ -1,0 +1,28 @@
+1726 ### D-240 — Brif arşiv klasörü REDDEDİLDİ: yol taşımanın bedeli faydasından büyük
+1757 ### D-241 — Dış kök (git deposu kökü) izin listesiyle kapalıdır
+1798 ### D-242 — Yedek/arşiv tek çatı altında; `Path.match` glob sanılmaz
+1834 ### D-243 — Prova diske yazmaz; yıkıcı işin yedek yolu enjekte edilebilir olur
+1894 ### D-244 — Canlı veritabanı yıkıcı iş: yedek dosyası kanıt, "yapıldı" beyanı değil
+1961 ## D-245 — Kolon adı veri türünü garanti etmez: doluluk ≠ geçerlilik
+1998 ## D-246 - Alan sozlesmesi yazili degilse kolon kirlenir; dogrulama tek kapidan gecer
+2050 ## D-247 - Kisisel veri gosterimi role gore ayrilir; maskeleme tek kapidan gecer
+2093 ## D-248 - TCKN saklanir; "suresiz" yerine "kayit aktif oldugu surece" yazilir
+2129 ## D-249 - "Veri yok" ile "0 puan" ayri degerlerdir; olu skor NULL'a cekilir
+2177 ## D-250 - Olculen sey "Kimlik Dosyasi Tamligi"dir; firma kalitesi degil
+2265 ## D-251 - Sema tek dilde olur; goc defteri semanin tek anlaticisidir
+2329 ## D-252 - NACE uc katmandir: yapabilir / yapiyor / uzman
+2434 ## D-253 - Defter kaydi kanit degildir; iz dogrulanir
+2490 ## D-254 — Kimlik Defteri: iddia ile kanit ayri durur
+2580 ## D-255 — Kanca fiilen kuruldu; yarim kalan 0024 tamamlandi (2026-09-28)
+2698 ## D-256 — D-250 uygulandi: puan tek kapidan gecer, tavan ilan edilir (2026-09-28)
+2840 ## D-257 --- MERSIS kapali, tavuk-yumurta dogrulandi (MERSIS-KAYNAK-01 olcumu)
+2927 ## D-258 — Panel tavani ilan eder; "yarim goc" yedi ayri yerde bulundu (2026-09-28)
+3050 ## D-259 — Olu kolon pasiflestirildi; panel yalani uc katmanda birden bulundu (2026-09-28)
+3142 ## D-260 — Teslim ozeti kanit degildir; kayit kapsamasi firma kapsamasi degildir (2026-09-28)
+3187 ## D-261 — Bagalayici calistirilmamisti; content_hash yinelenmeyi durdurmuyor (2026-09-28)
+3258 ## D-262 — Kimliksiz satir kisittan muaftir; silmeden once referans tasinir (2026-09-28)
+3335 ## D-263 — Iki isaretci bir bagi tarif ediyorsa ikisi de yalan soyler (2026-09-28)
+3428 ## D-266 — Cagrani olmayan kodun yalani da yalandir; ve mandal kendi kor noktasini korur (2026-09-28)
+3503 ## D-265 — Uc defter tutan sistem hicbirine guvenemez; ve gecmis sayiyi sart kosan test yalani korur (2026-09-28)
+3544 ## D-264 — Tasfiye bir hal'dir; ve tanimadigi argumani yutan koc defteri geri alir (2026-09-28)
+3629 ## D-267 — Deger yanlis kolonda degildi, hic kolonda degildi; ve uydurulmus anahtar sessiz kalir (2026-09-28)

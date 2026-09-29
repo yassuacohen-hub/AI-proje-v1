@@ -1,0 +1,35 @@
+{
+  "zaman": null,
+  "liste_kayit": 8313,
+  "detay_kayit": 5045,
+  "cikis_kayit": 8313,
+  "unvan_eslesmesi": 5002,
+  "doldurulan_alanlar": {
+    "adres": 4908,
+    "web_sitesi": 2388,
+    "sektor": 1410,
+    "emailler": 9,
+    "osb_parsel": 3,
+    "telefonler": 2
+  },
+  "doluluk_yuzde": {
+    "unvan": 100.0,
+    "adres": 59.0,
+    "telefonler": 92.0,
+    "emailler": 44.2,
+    "web_sitesi": 28.7,
+    "sektor": 86.4,
+    "nace_code": 84.8,
+    "nace_name_tr": 84.8,
+    "vergi_no": 0.0,
+    "vergi_no_kaynagi": 0.0,
+    "sosyal_medya": 0.0,
+    "osb_parsel": 0.0
+  },
+  "k2_uyum": {
+    "kaynak_adi_hepsi": true,
+    "kaynak_turu_hepsi": true,
+    "vergi_no_yalniz_dogrulanmis": true
+  },
+  "cikti": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\ostim\\firmalar_birlestirilmis.jsonl"
+}

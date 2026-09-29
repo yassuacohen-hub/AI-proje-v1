@@ -1,0 +1,24 @@
+SESSION CANLI = False
+uzunluk=57926
+
+=== FORMLAR ===
+  FormUyeGirisi
+  FormSifremiUnuttum
+  FormUyeOl
+  FormIlanGoruntuleme
+=== AJAX URL ===
+  /view/modal/uyegirisi_ok.php
+  /view/modal/sifremiunuttum_ok.php
+  /view/modal/uyeol_ok.php
+  sepete_ekle.php
+  ilangoruntuleme_ok.php
+=== SELECT (il/ilce/ay/yil/tur) ===
+  id=UyeTuru name=UyeTuru
+  id=SicilMudurluguId name=SicilMudurluguId
+=== SORGULA/BUTON ===
+  UyeTuru
+  BagliIlan
+  Tarih
+  DivTarih
+  Tarih1
+  Tarih2

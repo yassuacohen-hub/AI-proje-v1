@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-28T19:39:35
+> Son guncelleme: 2026-09-29T02:41:26
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -29,6 +29,9 @@
 | VERI-SEKTOR-01 | [VERI] Sektor sozlugunu yaz → 9689 kayit | utku | P1 | plan |
 | VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim | utku | P2 | plan |
 | VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik verisini yeniden yaz → D-2 | utku | P1 | plan |
+| ALTYAPI-AJAN-CAKISMA-01 | [ALTYAPI] Eszamanli ajan kacak kilit kap | ihsan | P1 | plan |
+| ALTYAPI-SKILL-YAPISI-01 | [ALTYAPI] Skill sistemini tek havuzda bi | yasu | P1 | review |
+| ALTYAPI-TICARET-KANIT-01 | [ALTYAPI] Kanit katmanini yaz → skills/s | yasu | P1 | review |
 
 ## Tamamlananlar (Son 10)
 

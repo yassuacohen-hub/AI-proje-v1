@@ -1,0 +1,70 @@
+[
+  {
+    "ad": "OSTIM firmalar",
+    "url": "https://ostim.org.tr/firmalar",
+    "http": 200,
+    "inline_script_adedi": 12,
+    "harici_script": [
+      "https://www.googletagmanager.com/gtag/js?id=G-QLBSCJ9VWZ",
+      "/public/_astro/PopupManagement.astro_astro_type_script_index_0_lang.idTkgp6N.js",
+      "/public/_astro/_root.astro_astro_type_script_index_0_lang.BAUvyyfh.js",
+      "https://cdn.cookiehub.eu/c2/504d2a9b.js"
+    ],
+    "api_adaylari": [
+      "https://ostim.org.tr/firmalar/2n-cam-teknolojileri-ve-yapi-sistemleri-sanayi-ltd-sti",
+      "https://ostim.org.tr/firmalar/a-s-endstryel-yapila",
+      "https://ostim.org.tr/firmalar/acarturk-yapi-malzemeleri-ltdsti",
+      "https://ostim.org.tr/firmalar/acikyol-yapi-insaat-demir-celik-madencilik-turizm-bilisim-ti",
+      "https://ostim.org.tr/firmalar/adabag-yapi-sanayi-anonim-sirketi",
+      "https://ostim.org.tr/firmalar/aderans-grup-yapi-malzeme-sac-metal-plastik-peyzaj-santicltd",
+      "https://ostim.org.tr/firmalar/adr-karoser-ust-yapi-limited-sirketi",
+      "https://ostim.org.tr/firmalar/ads-1-yapi-malalmpvcimlithihrsanticltdsti",
+      "https://ostim.org.tr/firmalar/ads-yalitim-yapi-malzemeleri-ins-san-ve-tic-ltdsti",
+      "https://ostim.org.tr/firmalar/aet-grup-insaat-yapi-malzemeleri-sanayi-ve-tic-ltd-sti",
+      "https://ostim.org.tr/firmalar/ahv-yapi-malzemeleri-elekt-hird-peyzaj-tedarik-taahhut-tic-v",
+      "https://ostim.org.tr/firmalar/akar-otomdemir-insyapi-malzelekthafriyat-taah",
+      "https://ostim.org.tr/firmalar/akesan-yapi-muhmakasansor-eleksanticltdsti",
+      "https://ostim.org.tr/firmalar/b-seramk-yapi-naat-m",
+      "https://ostim.org.tr/firmalar/be-yapi-metal-pazarl"
+    ],
+    "fetch_cagrilari": [],
+    "data_degiskenleri": [],
+    "ajax_kw": {
+      "fetch": 0,
+      "axios": 0,
+      "ajax": 0,
+      "datatable": 0,
+      "axios.post": 0
+    },
+    "servis_izleri": []
+  },
+  {
+    "ad": "ATO uye sirketleri",
+    "url": "https://www.atonet.org.tr/uye-sirketler",
+    "http": 200,
+    "inline_script_adedi": 6,
+    "harici_script": [
+      "https://www.googletagmanager.com/gtag/js?id=UA-89300266-1",
+      "/Content/js/jquery-1.10.2.min.js",
+      "/Content/js/modernizr-2.6.2.min.js",
+      "https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js",
+      "/Content/js/royalslider/jquery.royalslider.min.js",
+      "/Content/js/tulios/example/js/script.js",
+      "/Content/js/tulios/src/jquery.silver_track.js",
+      "/Content/js/tulios/src/plugins/jquery.silver_track.navigator.js",
+      "/Content/js/tulios/src/plugins/jquery.silver_track.bullet_navigator.js",
+      "/Content/js/tulios/src/plugins/jquery.silver_track.remote_content.js"
+    ],
+    "api_adaylari": [],
+    "fetch_cagrilari": [],
+    "data_degiskenleri": [],
+    "ajax_kw": {
+      "fetch": 0,
+      "axios": 0,
+      "ajax": 1,
+      "datatable": 0,
+      "axios.post": 0
+    },
+    "servis_izleri": []
+  }
+]

@@ -1,0 +1,44 @@
+
+== vergi_no hane x ham kayitta iz
+     6 hane  adet= 526  ham_ayni= 497  payload_icinde= 463
+    11 hane  adet= 124  ham_ayni=   0  payload_icinde=  12
+     5 hane  adet=  78  ham_ayni=  78  payload_icinde=  68
+     4 hane  adet=  16  ham_ayni=  16  payload_icinde=  14
+     3 hane  adet=  11  ham_ayni=  11  payload_icinde=  11
+    10 hane  adet=   5  ham_ayni=   3  payload_icinde=   0
+     2 hane  adet=   1  ham_ayni=   1  payload_icinde=   0
+
+== 11 hane kaynak kurumu
+     124  ostim.org.tr
+
+== 3-6 hane kaynak kurumu
+     590  aso.org.tr
+      41  ostim.org.tr
+
+== raw_payload'da vergi/tax anahtarlari (ornek 3 kayit)
+   adres
+   detay_kaynagi
+   osb_parsel
+   vergi_no
+   kaynak
+   web_sitesi
+   sosyal_medya
+   slug
+   nace_confidence
+   nace_source
+   telefonler
+   osb_parsel_extracted
+   nace_name_tr
+   emailler
+   yetkili
+   nace_code
+   unvan
+   vergi_no_extracted
+   sektor
+   cekilme_tarihi
+
+== tax_number hane x ham iz
+     6 hane  adet=  21  ham_ayni=  21
+    11 hane  adet=  14  ham_ayni=   0
+    10 hane  adet=   4  ham_ayni=   3
+     5 hane  adet=   1  ham_ayni=   1

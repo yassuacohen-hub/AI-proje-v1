@@ -1,0 +1,634 @@
+{
+  "OSTIM": {
+    "kok": "https://ostim.org.tr/",
+    "hedef_linkler": [],
+    "test_edilen": [],
+    "hata": "[WinError 10054] Varolan bir bağlantı uzaktaki bir ana bilgisayar tarafından zorla kapatıldı"
+  },
+  "ATO": {
+    "kok": "https://www.atonet.org.tr/",
+    "hedef_linkler": [
+      "/IcerikDetay/24864_kanada-hukumetinin-karsilik-esasli-kamu-alimi-politikasi-hakkinda",
+      "/IcerikDetay/24907_dahilde-isleme-rejimi-mevzuatinda-yapilan-degisiklik-hakkinda",
+      "/IcerikDetay/24928_10-abidjan-uluslararasi-turizm-ve-tatil-fuari-sitla---fildisi-sahili",
+      "/IcerikDetay/25024_is-ekipmanlarinin-kullaniminda-saglik-ve-guvenlik-sartlari-yonetmeliginde-degisiklik-yapilmasina-dair-yonetmelik-taslagi",
+      "/IcerikDetay/25165_izinsiz-calistigi-icin-haklarinda-sinir-disi-etme-karari-alinan-yabancilarin-cesitli-masraflarinin-isverenlerinden-tahsili-hakkinda-yonetmelik",
+      "/IcerikDetay/25183_uretim-girdisi-muafiyetleri-",
+      "/IcerikDetay/25283_yuksek-gelir-gruplari-gozetim-ve-uyum-programi",
+      "/IcerikDetay/25307_ataturk-universitesi-sertifikali-kamu-ihale-mevzuati-egitimi-antalya",
+      "/IcerikDetay/25310_yolcu-tasimaciligi-yapan-ticari-araclarda-sofor-yas-sartini-belirleyen-ukome-karari",
+      "/IcerikDetay/25332_gida-etiketleme-mevzuati-uyum-suresi",
+      "/IcerikDetay/25441_bazi-tutsu-aroma-vericilerinin-gecis-ve-uyum-surecleri-hakkinda-onemli-duyuru",
+      "/IcerikDetay/25467_indirimli-satis-reklamlarinda-mevzuata-uyum-ve-dikkat-edilmesi-gereken-hususlar",
+      "/IcerikDetay/25469_is-teftisi--rehberlik-ve-sosyal-diyalog-yoluyla-isyeri-uyumunun-guclendirilmesi-projesi",
+      "/IcerikDetay/25470_toplu-tuketim-yerlerinde-alerjen--bilesen-ve-enerji-bildirimi-zorunlulugu-ve-uyum-sureleri",
+      "/IcerikDetay/25506_birlesik-krallik-ormansizlasmanin-onlenmesi-mevzuati-ve-ab-uyum-sureci",
+      "/IcerikDetay/25512_erciyes-universitesi-dis-paydas-memnuniyet-anketi",
+      "/IcerikDetay/25521_ab-ormansizlasmanin-onlenmesi-mevzuati-kapsaminda-iki-yeni-uygulamanin-kabul-edilmesi",
+      "/IcerikDetay/25536_kvkk-uyum-rehberi",
+      "/IcerikDetay/25538_foodist-istanbul-uluslararasi-gida-ve-icecek-urunleri-fuari",
+      "/IcerikDetay/25554_kik-mevzuati-hakkinda",
+      "/IcerikDetay/25565_yurt-disi-esim-kullanimlarinda-indirim-kampanyasi-hakkinda",
+      "/IcerikDetay/25628_tst-12821-is-yerleri-dis-protez-laboratuvarlari-icin-genel-kurallar-standart-tasarisi",
+      "/IcerikDetay/25631_5-turk-dunyasi-uluslararasi-muhendislik-zirvesi",
+      "/IcerikDetay/54_dis-ticaret-istihbarat-merkezi/ft",
+      "/ato-ya-bakis/disiplin-kurulu"
+    ],
+    "test_edilen": [
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/24864_kanada-hukumetinin-karsilik-esasli-kamu-alimi-politikasi-hakkinda",
+        "http": 200,
+        "bayt": 77750,
+        "metin": 3594,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/24907_dahilde-isleme-rejimi-mevzuatinda-yapilan-degisiklik-hakkinda",
+        "http": 200,
+        "bayt": 77978,
+        "metin": 3765,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/24928_10-abidjan-uluslararasi-turizm-ve-tatil-fuari-sitla---fildisi-sahili",
+        "http": 200,
+        "bayt": 77603,
+        "metin": 3254,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25024_is-ekipmanlarinin-kullaniminda-saglik-ve-guvenlik-sartlari-yonetmeliginde-degisiklik-yapilmasina-dair-yonetmelik-taslagi",
+        "http": 200,
+        "bayt": 77285,
+        "metin": 3161,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25165_izinsiz-calistigi-icin-haklarinda-sinir-disi-etme-karari-alinan-yabancilarin-cesitli-masraflarinin-isverenlerinden-tahsili-hakkinda-yonetmelik",
+        "http": 200,
+        "bayt": 77516,
+        "metin": 3295,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25183_uretim-girdisi-muafiyetleri-",
+        "http": 200,
+        "bayt": 78805,
+        "metin": 4233,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25283_yuksek-gelir-gruplari-gozetim-ve-uyum-programi",
+        "http": 200,
+        "bayt": 80572,
+        "metin": 5099,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25307_ataturk-universitesi-sertifikali-kamu-ihale-mevzuati-egitimi-antalya",
+        "http": 200,
+        "bayt": 77137,
+        "metin": 3031,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25310_yolcu-tasimaciligi-yapan-ticari-araclarda-sofor-yas-sartini-belirleyen-ukome-karari",
+        "http": 200,
+        "bayt": 77714,
+        "metin": 3358,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": true,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25332_gida-etiketleme-mevzuati-uyum-suresi",
+        "http": 200,
+        "bayt": 80892,
+        "metin": 5101,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25441_bazi-tutsu-aroma-vericilerinin-gecis-ve-uyum-surecleri-hakkinda-onemli-duyuru",
+        "http": 200,
+        "bayt": 78383,
+        "metin": 4650,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25467_indirimli-satis-reklamlarinda-mevzuata-uyum-ve-dikkat-edilmesi-gereken-hususlar",
+        "http": 200,
+        "bayt": 79386,
+        "metin": 5557,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": true,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25469_is-teftisi--rehberlik-ve-sosyal-diyalog-yoluyla-isyeri-uyumunun-guclendirilmesi-projesi",
+        "http": 200,
+        "bayt": 77254,
+        "metin": 3874,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25470_toplu-tuketim-yerlerinde-alerjen--bilesen-ve-enerji-bildirimi-zorunlulugu-ve-uyum-sureleri",
+        "http": 200,
+        "bayt": 79629,
+        "metin": 5412,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25506_birlesik-krallik-ormansizlasmanin-onlenmesi-mevzuati-ve-ab-uyum-sureci",
+        "http": 200,
+        "bayt": 78363,
+        "metin": 4871,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": true,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25512_erciyes-universitesi-dis-paydas-memnuniyet-anketi",
+        "http": 200,
+        "bayt": 78231,
+        "metin": 3296,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25521_ab-ormansizlasmanin-onlenmesi-mevzuati-kapsaminda-iki-yeni-uygulamanin-kabul-edilmesi",
+        "http": 200,
+        "bayt": 79590,
+        "metin": 5090,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25536_kvkk-uyum-rehberi",
+        "http": 200,
+        "bayt": 77200,
+        "metin": 3580,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": true,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25538_foodist-istanbul-uluslararasi-gida-ve-icecek-urunleri-fuari",
+        "http": 200,
+        "bayt": 75330,
+        "metin": 2621,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25554_kik-mevzuati-hakkinda",
+        "http": 200,
+        "bayt": 76785,
+        "metin": 3200,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25565_yurt-disi-esim-kullanimlarinda-indirim-kampanyasi-hakkinda",
+        "http": 200,
+        "bayt": 77118,
+        "metin": 3281,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25628_tst-12821-is-yerleri-dis-protez-laboratuvarlari-icin-genel-kurallar-standart-tasarisi",
+        "http": 200,
+        "bayt": 76525,
+        "metin": 3136,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/25631_5-turk-dunyasi-uluslararasi-muhendislik-zirvesi",
+        "http": 200,
+        "bayt": 1568394,
+        "metin": 3468,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": true,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/IcerikDetay/54_dis-ticaret-istihbarat-merkezi/ft",
+        "http": 200,
+        "bayt": 80771,
+        "metin": 3956,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": true,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      },
+      {
+        "url": "https://www.atonet.org.tr/ato-ya-bakis/disiplin-kurulu",
+        "http": 200,
+        "bayt": 43313,
+        "metin": 2274,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": false,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;ze"
+      }
+    ]
+  },
+  "ASO": {
+    "kok": "https://www.aso.org.tr/",
+    "hedef_linkler": [
+      "https://www.aso.org.tr/birimler/uluslararasi-iliskiler-ve-dis-ticaret-mudurlugu-5246",
+      "https://www.aso.org.tr/kurumsal/birim-politikalarimiz-5223",
+      "https://www.aso.org.tr/kurumsal/birim-politikamiz-5223",
+      "https://www.aso.org.tr/kurumsal/disiplin-kurulu-5229",
+      "https://www.aso.org.tr/kurumsal/kalite-politikamiz-5193",
+      "https://www.aso.org.tr/kurumsal/uye-memnuniyet-politikasi-5224",
+      "https://www.aso.org.tr/post/aso-baskani-seyit-ardic-2026-yili-ikinci-ceyrek-buyume-rakamlarini-degerlendirdi-7791",
+      "https://www.aso.org.tr/tekil/bilgi-guvenligi-politikasi-5210",
+      "https://www.aso.org.tr/tekil/kisisel-verilerin-korunmasi-hakkinda-aydinlatma-metni-7583"
+    ],
+    "test_edilen": [
+      {
+        "url": "https://www.aso.org.tr/birimler/uluslararasi-iliskiler-ve-dis-ticaret-mudurlugu-5246",
+        "http": 200,
+        "bayt": 40617,
+        "metin": 6561,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Sanayi Odası FİRMA REHBERİ KURUMSAL YAPI ASO'nun Tarihçesi Kalite Politikamız Birim Politikalarımız Üye Memnuniyet Politikası Misyon &amp; Vizyon Stratejik Planlama Faaliyet Raporu &amp; Çalışma Programı Organizasyon Şeması Meclis Başkanlik Divanı Yönetim Kurulu Meclis Üyeleri ve Meslek Komit"
+      },
+      {
+        "url": "https://www.aso.org.tr/kurumsal/birim-politikalarimiz-5223",
+        "http": 200,
+        "bayt": 45012,
+        "metin": 9923,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": true,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Sanayi Odası FİRMA REHBERİ KURUMSAL YAPI ASO'nun Tarihçesi Kalite Politikamız Birim Politikalarımız Üye Memnuniyet Politikası Misyon &amp; Vizyon Stratejik Planlama Faaliyet Raporu &amp; Çalışma Programı Organizasyon Şeması Meclis Başkanlik Divanı Yönetim Kurulu Meclis Üyeleri ve Meslek Komit"
+      },
+      {
+        "url": "https://www.aso.org.tr/kurumsal/birim-politikamiz-5223",
+        "http": 200,
+        "bayt": 45012,
+        "metin": 9923,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": true,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Sanayi Odası FİRMA REHBERİ KURUMSAL YAPI ASO'nun Tarihçesi Kalite Politikamız Birim Politikalarımız Üye Memnuniyet Politikası Misyon &amp; Vizyon Stratejik Planlama Faaliyet Raporu &amp; Çalışma Programı Organizasyon Şeması Meclis Başkanlik Divanı Yönetim Kurulu Meclis Üyeleri ve Meslek Komit"
+      },
+      {
+        "url": "https://www.aso.org.tr/kurumsal/disiplin-kurulu-5229",
+        "http": 200,
+        "bayt": 38460,
+        "metin": 3539,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Sanayi Odası FİRMA REHBERİ KURUMSAL YAPI ASO'nun Tarihçesi Kalite Politikamız Birim Politikalarımız Üye Memnuniyet Politikası Misyon &amp; Vizyon Stratejik Planlama Faaliyet Raporu &amp; Çalışma Programı Organizasyon Şeması Meclis Başkanlik Divanı Yönetim Kurulu Meclis Üyeleri ve Meslek Komit"
+      },
+      {
+        "url": "https://www.aso.org.tr/kurumsal/kalite-politikamiz-5193",
+        "http": 200,
+        "bayt": 38234,
+        "metin": 3757,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": true,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Sanayi Odası FİRMA REHBERİ KURUMSAL YAPI ASO'nun Tarihçesi Kalite Politikamız Birim Politikalarımız Üye Memnuniyet Politikası Misyon &amp; Vizyon Stratejik Planlama Faaliyet Raporu &amp; Çalışma Programı Organizasyon Şeması Meclis Başkanlik Divanı Yönetim Kurulu Meclis Üyeleri ve Meslek Komit"
+      },
+      {
+        "url": "https://www.aso.org.tr/kurumsal/uye-memnuniyet-politikasi-5224",
+        "http": 200,
+        "bayt": 38077,
+        "metin": 3648,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Sanayi Odası FİRMA REHBERİ KURUMSAL YAPI ASO'nun Tarihçesi Kalite Politikamız Birim Politikalarımız Üye Memnuniyet Politikası Misyon &amp; Vizyon Stratejik Planlama Faaliyet Raporu &amp; Çalışma Programı Organizasyon Şeması Meclis Başkanlik Divanı Yönetim Kurulu Meclis Üyeleri ve Meslek Komit"
+      },
+      {
+        "url": "https://www.aso.org.tr/post/aso-baskani-seyit-ardic-2026-yili-ikinci-ceyrek-buyume-rakamlarini-degerlendirdi-7791",
+        "http": 200,
+        "bayt": 44521,
+        "metin": 6965,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": false,
+          "otomasyon|robot|scrap": true
+        },
+        "ornek": "Ankara Sanayi Odası FİRMA REHBERİ KURUMSAL YAPI ASO'nun Tarihçesi Kalite Politikamız Birim Politikalarımız Üye Memnuniyet Politikası Misyon &amp; Vizyon Stratejik Planlama Faaliyet Raporu &amp; Çalışma Programı Organizasyon Şeması Meclis Başkanlik Divanı Yönetim Kurulu Meclis Üyeleri ve Meslek Komit"
+      },
+      {
+        "url": "https://www.aso.org.tr/tekil/bilgi-guvenligi-politikasi-5210",
+        "http": 200,
+        "bayt": 40002,
+        "metin": 5118,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": false,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": true,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Sanayi Odası FİRMA REHBERİ KURUMSAL YAPI ASO'nun Tarihçesi Kalite Politikamız Birim Politikalarımız Üye Memnuniyet Politikası Misyon &amp; Vizyon Stratejik Planlama Faaliyet Raporu &amp; Çalışma Programı Organizasyon Şeması Meclis Başkanlik Divanı Yönetim Kurulu Meclis Üyeleri ve Meslek Komit"
+      },
+      {
+        "url": "https://www.aso.org.tr/tekil/kisisel-verilerin-korunmasi-hakkinda-aydinlatma-metni-7583",
+        "http": 200,
+        "bayt": 49495,
+        "metin": 13591,
+        "soft404": true,
+        "kavramlar": {
+          "ticari": true,
+          "kopyala": false,
+          "izin": true,
+          "ücret|ucret": false,
+          "KVKK": true,
+          "6698": true,
+          "otomasyon|robot|scrap": false
+        },
+        "ornek": "Ankara Sanayi Odası FİRMA REHBERİ KURUMSAL YAPI ASO'nun Tarihçesi Kalite Politikamız Birim Politikalarımız Üye Memnuniyet Politikası Misyon &amp; Vizyon Stratejik Planlama Faaliyet Raporu &amp; Çalışma Programı Organizasyon Şeması Meclis Başkanlik Divanı Yönetim Kurulu Meclis Üyeleri ve Meslek Komit"
+      }
+    ]
+  }
+}

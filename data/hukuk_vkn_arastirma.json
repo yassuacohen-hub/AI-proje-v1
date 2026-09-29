@@ -1,0 +1,185 @@
+{
+  "hukuk": [
+    {
+      "etiket": "OSTIM kullanim sartlari",
+      "url": "https://ostim.org.tr/kurumsal/portal-kullanim-sartlari",
+      "hata": "ConnectError: [WinError 10054] Varolan bir bağlantı uzaktaki bir ana bilgisayar tarafından zorla kapatıldı",
+      "erisim": false
+    },
+    {
+      "etiket": "OSTIM KVKK",
+      "url": "https://ostim.org.tr/kvkk-bilgilendirme-metni",
+      "hata": "ConnectError: [WinError 10054] Varolan bir bağlantı uzaktaki bir ana bilgisayar tarafından zorla kapatıldı",
+      "erisim": false
+    },
+    {
+      "etiket": "OSTIM gizlilik",
+      "url": "https://ostim.org.tr/gizlilik",
+      "hata": "ConnectError: [WinError 10054] Varolan bir bağlantı uzaktaki bir ana bilgisayar tarafından zorla kapatıldı",
+      "erisim": false
+    },
+    {
+      "etiket": "ATO kullanim sartlari",
+      "url": "https://www.atonet.org.tr/kullanim-sartlari",
+      "http": 200,
+      "bayt": 2801654,
+      "erisim": true,
+      "metin_uzunluk": 35288,
+      "anahtar_kavramlar": {
+        "ticari": true,
+        "kopyala": false,
+        "çeviri|ceviri": false,
+        "yeniden yayın|yayın": true,
+        "izin": true,
+        "ücret|ucret": false,
+        "kişisel veri|kisisel veri": false,
+        "KVKK": true,
+        "6698": false,
+        "otomasyon|robot|scrap|kazıma|kazima": false
+      },
+      "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;zel İhtisas Komisyonları &#199;alışma Grupları Y&#252;ksek İstişare Kurulu Genel Sekreterlik Tarihsel Gelişim Organizasyon Yapısı Stratejik Plan Vizyonumuz ve Misyonumuz Kalite Politikamız Mevzuat Kurumsal Kimlik KOMİTELERİMİZ HİZMETLERİMİZ Ticaret Sicili İşlemleri &#220;yelik Hizmetleri Kapasite / Ekspertiz Hizmetleri İ&#231; Ticaret İşlemleri Dış Ticaret İşlemleri Sanayi Belgelendirme Hizmetleri S"
+    },
+    {
+      "etiket": "ATO KVKK",
+      "url": "https://www.atonet.org.tr/kvkk",
+      "http": 200,
+      "bayt": 2801654,
+      "erisim": true,
+      "metin_uzunluk": 35288,
+      "anahtar_kavramlar": {
+        "ticari": true,
+        "kopyala": false,
+        "çeviri|ceviri": false,
+        "yeniden yayın|yayın": true,
+        "izin": true,
+        "ücret|ucret": false,
+        "kişisel veri|kisisel veri": false,
+        "KVKK": true,
+        "6698": false,
+        "otomasyon|robot|scrap|kazıma|kazima": false
+      },
+      "ornek": "Ankara Ticaret Odası Web Portali ANASAYFA BAŞKANIMIZ Başkanın Mesajı Fotoğraf Galerisi Özgeçmiş Başkana İletin ATO&#39;YA BAKIŞ Oda Meclisi Oda Meclisi Başkanlık Divanı Y&#246;netim Kurulu Meslek Komiteleri Disiplin Kurulu KVKK Faaliyet Raporu B&#252;t&#231;e ve Hesapları İnceleme Komisyonu &#214;zel İhtisas Komisyonları &#199;alışma Grupları Y&#252;ksek İstişare Kurulu Genel Sekreterlik Tarihsel Gelişim Organizasyon Yapısı Stratejik Plan Vizyonumuz ve Misyonumuz Kalite Politikamız Mevzuat Kurumsal Kimlik KOMİTELERİMİZ HİZMETLERİMİZ Ticaret Sicili İşlemleri &#220;yelik Hizmetleri Kapasite / Ekspertiz Hizmetleri İ&#231; Ticaret İşlemleri Dış Ticaret İşlemleri Sanayi Belgelendirme Hizmetleri S"
+    },
+    {
+      "etiket": "ASO kullanim sartlari",
+      "url": "https://www.aso.org.tr/kullanim-sartlari",
+      "http": 200,
+      "bayt": 23,
+      "erisim": true,
+      "metin_uzunluk": 22,
+      "anahtar_kavramlar": {
+        "ticari": false,
+        "kopyala": false,
+        "çeviri|ceviri": false,
+        "yeniden yayın|yayın": false,
+        "izin": false,
+        "ücret|ucret": false,
+        "kişisel veri|kisisel veri": false,
+        "KVKK": false,
+        "6698": false,
+        "otomasyon|robot|scrap|kazıma|kazima": false
+      },
+      "ornek": "controller bulunamadı."
+    },
+    {
+      "etiket": "ASO KVKK",
+      "url": "https://www.aso.org.tr/kvkk-aydinlatma-metni",
+      "http": 200,
+      "bayt": 23,
+      "erisim": true,
+      "metin_uzunluk": 22,
+      "anahtar_kavramlar": {
+        "ticari": false,
+        "kopyala": false,
+        "çeviri|ceviri": false,
+        "yeniden yayın|yayın": false,
+        "izin": false,
+        "ücret|ucret": false,
+        "kişisel veri|kisisel veri": false,
+        "KVKK": false,
+        "6698": false,
+        "otomasyon|robot|scrap|kazıma|kazima": false
+      },
+      "ornek": "controller bulunamadı."
+    },
+    {
+      "etiket": "TicBakan KVKK",
+      "url": "https://ticaret.gov.tr/kvkk",
+      "http": 200,
+      "bayt": 5839,
+      "erisim": true,
+      "metin_uzunluk": 27,
+      "anahtar_kavramlar": {
+        "ticari": false,
+        "kopyala": false,
+        "çeviri|ceviri": false,
+        "yeniden yayın|yayın": false,
+        "izin": false,
+        "ücret|ucret": false,
+        "kişisel veri|kisisel veri": false,
+        "KVKK": false,
+        "6698": false,
+        "otomasyon|robot|scrap|kazıma|kazima": false
+      },
+      "ornek": "﻿ Internal Server Error 404"
+    }
+  ],
+  "gib": [
+    {
+      "etiket": "GIB VKN sorgulama",
+      "url": "https://www.gib.gov.tr/yardim-ve-kaynaklar/yararli-bilgiler/vergi-kimlik-numarasi-sorgulama",
+      "http": 200,
+      "bayt": 39872,
+      "erisim": true,
+      "metin_uzunluk": 24,
+      "anahtar_kavramlar": {
+        "ticari": false,
+        "kopyala": false,
+        "çeviri|ceviri": false,
+        "yeniden yayın|yayın": false,
+        "izin": false,
+        "ücret|ucret": false,
+        "kişisel veri|kisisel veri": false,
+        "KVKK": false,
+        "6698": false,
+        "otomasyon|robot|scrap|kazıma|kazima": false
+      },
+      "ornek": "Gelir İdaresi Başkanlığı"
+    },
+    {
+      "etiket": "GIB e-hizmetler",
+      "url": "https://www.gib.gov.tr/e-hizmetler",
+      "http": 404,
+      "bayt": 37073,
+      "erisim": false
+    },
+    {
+      "etiket": "GIB acik veri",
+      "url": "https://www.gib.gov.tr/acik-veri",
+      "http": 404,
+      "bayt": 37071,
+      "erisim": false
+    },
+    {
+      "etiket": "GIB VKN sorgu e-Devlet",
+      "url": "https://www.turkiye.gov.tr/gib-vergi-kimlik-numarasi-sorgulama",
+      "http": 200,
+      "bayt": 9007,
+      "erisim": true,
+      "metin_uzunluk": 313,
+      "anahtar_kavramlar": {
+        "ticari": false,
+        "kopyala": false,
+        "çeviri|ceviri": false,
+        "yeniden yayın|yayın": false,
+        "izin": false,
+        "ücret|ucret": false,
+        "kişisel veri|kisisel veri": false,
+        "KVKK": false,
+        "6698": false,
+        "otomasyon|robot|scrap|kazıma|kazima": false
+      },
+      "ornek": "404 Sayfa Bulunamadı 404 Sayfa Görüntülenemiyor Erişmek istediğiniz sayfa sistemde bulununamadı. Sayfa silinmiş , başka bir adrese taşınmış ya da geçici olarak hizmet dışı kalmış olabilir. Aradığınız sayfaya ulaşmak için aşağıdaki bağlantıları deneyebilirsiniz. ⇠ GERİ DÖN ANASAYFA Kurumlar | Hizmetler | İletişim"
+    }
+  ]
+}

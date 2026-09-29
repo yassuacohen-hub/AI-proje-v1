@@ -1,0 +1,78 @@
+{
+  "denenen": 7,
+  "calisan": 1,
+  "en_ucuz_calisan": {
+    "model": "openai/gpt-4o-mini",
+    "erisim": "TAMAM",
+    "sure_saniye": 5.89,
+    "token": 49146,
+    "alan_sayisi": 9,
+    "ornek": "{'ilan_sira_no': '49136', 'mersis_no': '001203074100024', 'ticaret_sicil_no': '448217', 'ticaret_unvani': 'AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT O",
+    "hata": null
+  },
+  "sonuclar": [
+    {
+      "model": "ag/gemini-3.5-flash-low",
+      "erisim": "HATA",
+      "sure_saniye": 3.0,
+      "token": null,
+      "alan_sayisi": 0,
+      "ornek": "",
+      "hata": "Cevap ayristirilamadi (Expecting value: line 1 column 1 (char 0)); ilk 300: data: {\"id\":\"chatcmpl-msg_1790647808649\",\"object\":\"chat.completion.chunk\",\"created\":1790647808,\"model\":\""
+    },
+    {
+      "model": "ag/gemini-3.6-flash-low",
+      "erisim": "HATA",
+      "sure_saniye": 9.72,
+      "token": null,
+      "alan_sayisi": 0,
+      "ornek": "",
+      "hata": "Cevap ayristirilamadi (Expecting value: line 1 column 1 (char 0)); ilk 300: data: {\"id\":\"chatcmpl-Ah67auyZOOGC3boP9I3j6Qo\",\"object\":\"chat.completion.chunk\",\"created\":1790647818,\"mo"
+    },
+    {
+      "model": "gemini/gemini-3.5-flash-lite",
+      "erisim": "HATA",
+      "sure_saniye": 4.43,
+      "token": null,
+      "alan_sayisi": 0,
+      "ornek": "",
+      "hata": "Cevap ayristirilamadi (Expecting value: line 1 column 1 (char 0)); ilk 300: data: {\"id\":\"chatcmpl-DB67avvTL6qb3boP2-PVyQY\",\"object\":\"chat.completion.chunk\",\"created\":1790647822,\"mo"
+    },
+    {
+      "model": "gc/gemini-2.5-flash-lite",
+      "erisim": "HATA",
+      "sure_saniye": 2.24,
+      "token": null,
+      "alan_sayisi": 0,
+      "ornek": "",
+      "hata": "HTTP 503: {\"error\":{\"message\":\"[gemini-cli/gemini-2.5-flash-lite] [403]: HTTP 403 (reset after 6s)\"}}"
+    },
+    {
+      "model": "bzl/gemini-3.1-pro-preview",
+      "erisim": "HATA",
+      "sure_saniye": 2.21,
+      "token": null,
+      "alan_sayisi": 0,
+      "ornek": "",
+      "hata": "HTTP 503: {\"error\":{\"message\":\"[bazaarlink/gemini-3.1-pro-preview] [402]: {\\\"error\\\":{\\\"message\\\":\\\"Insufficient credits. Please top up to continue.\\\",\\\"type\\\":\\\"invalid_request_er"
+    },
+    {
+      "model": "openai/gpt-4o-mini",
+      "erisim": "TAMAM",
+      "sure_saniye": 5.89,
+      "token": 49146,
+      "alan_sayisi": 9,
+      "ornek": "{'ilan_sira_no': '49136', 'mersis_no': '001203074100024', 'ticaret_sicil_no': '448217', 'ticaret_unvani': 'AKANA MÜHENDİSLİK VE TİCARET ANONİM ŞİRKETİ BAŞKENT O",
+      "hata": null
+    },
+    {
+      "model": "cl/openai/gpt-4o",
+      "erisim": "HATA",
+      "sure_saniye": 2.25,
+      "token": null,
+      "alan_sayisi": 0,
+      "ornek": "",
+      "hata": "HTTP 503: {\"error\":{\"message\":\"[cline/openai/gpt-4o] [402]: {\\\"error\\\":{\\\"code\\\":\\\"insufficient_credits\\\",\\\"message\\\":\\\"Insufficient balance. Your Cline Credits balance is $-0.13\\\""
+    }
+  ]
+}

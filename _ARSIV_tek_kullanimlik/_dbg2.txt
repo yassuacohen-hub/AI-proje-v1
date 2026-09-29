@@ -1,0 +1,8 @@
+UTKU-02|todo|utku|P1|[UTKU] API endpoint optimizasyon - response time (2s)|['src/api/endpoints.py']
+UTKU-04|todo|utku|P1|[UTKU] Veritabanı migration - index optimizasyon (1s)|['src/company_master/schema/migrations/0020_index_optimization.sql']
+UTKU-05|todo|utku|P0|[UTKU] Kullanıcı kimlik doğrulama - token yenileme (2s)|['src/auth/token_refresh.py']
+ORCH-01|todo|ihsan|P0|[ORCH] İş akışı koordinasyon - görev planlama (2s)|['orchestration/workflow_coordinator.py']
+ORCH-02|todo|ihsan|P1|[ORCH] Bağımlılık yönetimi - görüntü grafiği (2s)|['orchestration/dependency_graph.py']
+ORCH-03|todo|ihsan|P0|[ORCH] Görev dağıtımı - load balancing (2s)|['orchestration/load_balancer.py']
+ORCH-04|todo|ihsan|P1|[ORCH] Hata toleransı - retry mekanizması (2s)|['orchestration/retry_handler.py']
+ORCH-05|todo|ihsan|P0|[ORCH] İzleme ve metrikler - telemetri sistemi (3s)|['orchestration/telemetry.py']

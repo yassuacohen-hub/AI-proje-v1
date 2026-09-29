@@ -1,0 +1,3 @@
+plan/backlog toplam: 2
+ALTYAPI-D66-BYPASS-TETIKLEME | ihsan | P1 | [ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme 
+TEST-13-PREEXIST-DUZELT-02 | utku | P1 | [TEST] duzelt 7 kalan test hatasi → pytest yesil (2s)

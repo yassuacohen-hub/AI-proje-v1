@@ -1,0 +1,7 @@
+ANA SAYFA = 42685 bayt
+
+=== TUM IC LINKLER (ilan/unvan/sorgu/ara) ===
+  /view/hizlierisim/ilangoruntuleme.php
+  /view/hizlierisim/unvansorgulama.php
+
+=== DIŞ/ABONE SAYFALARI ===

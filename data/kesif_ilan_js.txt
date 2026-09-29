@@ -1,0 +1,44 @@
+=== JS DEVAM ===
+ilangoruntuleme_ok.php',
+								data: Veri,
+								processData: false,
+								type: 'POST',
+								contentType: false, 
+								success: function (AjaxCevap) 
+								{
+									$('#DivIlanSonuc').html(AjaxCevap);
+								}
+							}
+						);
+						e.preventDefault();
+					}
+				);
+				$('#FormIlanGoruntuleme')
+				//Tarih
+				$('.input-group.date').datepicker
+				(
+					{
+						language: 'TRK'
+					}
+				);
+				$('.DateMasked').mask
+				(
+					'00.00.0000',
+					{
+						"placeholder": "gg.aa.yyyy"
+					}
+				);
+			}
+		)
+		</script>
+	</body>
+</html>
+
+=== SAYFALAMA / SAYFA metni ===
+Sayfa kelimesi sayisi = 3
+  Sayfalar
+  Sayfalar
+  AnaSayfa
+
+=== Tarih1/Tarih2 ve diger form alanlari ===
+  alanlar: BagliIlan, DivTarih, SicilMudurluguId, Tarih, Tarih1, Tarih2, TicSicNo, TicaretUnvani, footer

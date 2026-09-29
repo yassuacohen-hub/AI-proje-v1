@@ -2850,5 +2850,13 @@
     "durum": "onaylandi",
     "onaylayan": "orkestrator",
     "onay_tarihi": "2026-09-28T19:38:49"
+  },
+  {
+    "task_id": "ALTYAPI-SKILL-YAPISI-01",
+    "ajan": "yasu",
+    "ozet": "6 faz tamam: A kirik paket imzalari duzeltildi (skills/tools/{devops,streamlit}), B devops_agent 9Router'a gecirildi (anthropic SDK eklenmedi), C .kilo/skills kaldirildi + 6 skill .agents/skills'e, .claude 5 kopya junction, .continue 5 bos klasor silindi, .roo/sistemsel junction, D skills/common -> {tools,services} + prompts/ + SKILLS_INDEX.md, E tests/test_skill_havuzu.py 13 passed, F regresyon 4465 passed 13 skipped 0 failed",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-29T01:36:42",
+    "durum": "bekliyor"
   }
 ]

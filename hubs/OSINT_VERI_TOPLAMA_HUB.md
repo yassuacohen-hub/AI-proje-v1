@@ -41,6 +41,18 @@ Ana baglam: [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]] · [[Huginn Data In
 
 ---
 
+## Ticaret Sicili / Kanit Katmani
+- `Huginn Data Insights/plans/rapor_yasu_BROWSERUSE-TICARET-SICIL-01.md` — TOBB kanit arastirmasi (EK-1 §16-23 canli dogrulama, EK-2 §24-28 Duzey_3)
+- `Huginn Data Insights/skills/services/ticaret_sicili_kanit.py` — IlanKaniti kanit kapisi (MERSIS->VKN tek kapı: `kimlik_no.py`)
+- `Huginn Data Insights/scripts/tobb_oturum.py` — Dogrudan TOBB oturumu (e-Devlet yok, multipart login D-276)
+- `Huginn Data Insights/scripts/pdf_kanit_analiz.py` — PDF scan mı metin katmanı mı ayırt eder (D-277/D-278)
+- `Huginn Data Insights/scripts/gazete_ocr.py` — **PASIF** (D-278): vision-LLM OCR, silinmedi, `--aktif` ile açılır
+- `Huginn Data Insights/data/pdf_analiz.json` — Ölçüm kanıtı (font=0, Tj=0, 3 gorsel XObject)
+
+**Kaynak farkı (ölçülmüş):** TOBB *ücretsiz üye PDF'i* taranmış görsel (OCR şart);
+*abonelik verisi* (Düzey_2/3) **WEB SERVİS / TSM-XML** makine-okunur (OCR gerekmez).
+Düzey_3 = 1.427.688 TL/yıl; NACE + Vergi No + Ortaklar + Temsilciler kapsar.
+
 ## Ilgili Nodlar (Ust Hub)
 - [[Huginn Data Insights/hubs/OSINT_INDEX]]
 - [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]]

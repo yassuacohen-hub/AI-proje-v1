@@ -34,6 +34,15 @@ from company_master import chat
 def cmd_ac(args: argparse.Namespace) -> int:
     """Sorun aç."""
     try:
+        # D-287: ac yanlis kapi olabilir. Baskasinin acik kaydi varsa uyar
+        # ama ENGELLEME (PO karari: uyari yeter).
+        sahipler = chat.acik_sahipler(args.task_id, args.kimden or "orkestrator")
+        if sahipler:
+            print(
+                f"⚠️  {args.task_id} altinda acik kayit var: {', '.join(sahipler)}. "
+                f"Cevap yaziyorsan 'kapat --karar' veya 'guncelle' kullan (D-286).",
+                file=sys.stderr,
+            )
         satir = chat.ac(
             ajan=args.ajan,
             task_id=args.task_id,

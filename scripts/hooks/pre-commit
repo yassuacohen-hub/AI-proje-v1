@@ -10,5 +10,7 @@ set -e
 python scripts/kilit_zorla.py
 echo "[pre-commit] panel durustluk mandallari..."
 # Goc defteri de burada: sema degisikligi commit'e tek basina giremesin
-# (D-251/3). Ikisi birlikte ~15 sn; tam takim (~170 sn) kancaya konmaz.
-python -m pytest tests/test_panel_durustluk.py tests/test_goc_defteri.py -q
+# (D-251/3). Karar numarasi tekligi de eklendi (D-287): yaris iki kez oldu,
+# gonullu koruma koruma degildir (D-261) — mandal 0.7 sn, yeni altyapi yok.
+# Uculu birlikte ~15 sn; tam takim (~170 sn) kancaya konmaz.
+python -m pytest tests/test_panel_durustluk.py tests/test_goc_defteri.py tests/test_karar_numara_tekligi.py -q

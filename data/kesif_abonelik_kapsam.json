@@ -1,0 +1,39 @@
+{
+  "abonelik_suresi_kaniti": [
+    "(Yıllık) (İlan türlerini içeren fihristli)",
+    ": 2026 yılında 251 iş günü vardır. (251 x 1.932) = 484.932 TL",
+    "(Yıllık) (İlan türlerini içeren fihristli)",
+    "2026 yılında 251 iş günü vardır. (251 x 3.792) = 951.792",
+    "(Yıllık) (İlan türlerini içeren fihristli)",
+    "2026 yılında 251 iş günü vardır."
+  ],
+  "gunluk_gazete_kaniti": [
+    "Bir Günlük Elektronik Gazete:",
+    "Günlük olarak",
+    "transfer yöntemleri ile talep sahiplerine gönderilecektir. 2026 yılı bir günlük gazete ücreti 2.730 ₺’dir."
+  ],
+  "fihrist_kaniti": [
+    "(Yıllık) (İlan türlerini içeren fihristli)",
+    "(Yıllık) (İlan türlerini içeren fihristli)",
+    "(Yıllık) (İlan türlerini içeren fihristli)",
+    "türlerini de içerecek şekilde fihristli (düzey_1 fihristi) olarak (fihrist"
+  ],
+  "gecmis_yil_kaniti": [
+    "2026 Yılı",
+    ": 2026 yılında 251 iş günü vardır. (251 x 1.932) = 484.932 TL",
+    "2026 yılında 251 iş günü vardır. (251 x 3.792) = 951.792",
+    "2026 yılında 251 iş günü vardır."
+  ],
+  "empirik_448217": {
+    "ilan_sayisi": 4,
+    "yillar": [
+      2020,
+      2025,
+      2026,
+      2026
+    ],
+    "2026_adet": 2,
+    "2026_disi_adet": 2,
+    "yil_kapsam_yuzde": 50
+  }
+}

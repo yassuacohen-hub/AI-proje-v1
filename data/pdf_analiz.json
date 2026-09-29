@@ -1,0 +1,44 @@
+{
+  "dosya": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\kanit\\448217_a18a2282.pdf",
+  "ham": {
+    "toplam_bayt": 38853,
+    "gorsel_xobject": 3,
+    "font": 0,
+    "tounicode_cmap": 0,
+    "metin_Tj": 0,
+    "metin_TJ": 0,
+    "flate_stream": 2,
+    "sayfa_nesnesi": 2
+  },
+  "icerik_akisi": {
+    "cozulmus_stream": 2,
+    "metin_operatoru_olan_stream": 0,
+    "gorseli_olan_stream": 0,
+    "icerik_akis_ornekleri": []
+  },
+  "kutuphaneler": {
+    "pdfplumber": {
+      "ok": true,
+      "sayfalar": [
+        {
+          "genislik": 841.9,
+          "yukseklik": 1190.7,
+          "karakter_sayisi": 0,
+          "gorsel_sayisi": 2,
+          "metin_ornegi": ""
+        }
+      ]
+    },
+    "pypdf": {
+      "ok": false,
+      "hata": "ModuleNotFoundError: No module named 'pypdf'"
+    },
+    "pdfminer": {
+      "ok": true,
+      "karakter_sayisi": 1,
+      "metin_ornegi": "\f"
+    }
+  },
+  "karar": "TARANMIS_GORSEL",
+  "gerekce": "3 gorsel XObject, 0 metin operatoru. PDF gercekten scan; OCR gerekli."
+}

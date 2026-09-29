@@ -5,10 +5,10 @@
 ## KALDIĞIM YER
 
 - **Konum:** aktif iş yok
-- **Yapılanlar:** —
+- **Yapılanlar:** 2026-09-29 — FAZ-0 kök hijyeni sonrası test ortamı güncellendi
 - **Kritik bağlam:** mekanik görev — SADECE ölçüm/plan çıktısı üret, kod değiştirme
 - **Sonraki adım:** `python scripts/gorev_kutusu.py liste --ajan salih` ile pano kontrolü
-- **Görev:** — · **Son okunan karar:** `D-219`
+- **Görev:** — · **Son okunan karar:** `D-268`
 
 ## Oturum Açılış (60 saniye, bu sırayla)
 
@@ -34,17 +34,27 @@
 
 - **SSOT:** `AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md`
 - **Kural kaynağı:** [[Huginn Data Insights/AGENTS]] — tek SSOT, kural kopyalamak yasak
-- **Test:** `python -m pytest tests/ -q` → **son bilinen: 20 failed / 4260 passed / 12 skipped** (2026-09-26)
+- **Test:** `python -m pytest tests/ -q` → **4457 test toplanıyor. Kırık sayısı
+  `.pytest_cache/lastfailed`'a bakılarak ÖLÇÜLMEZ** (D-268) — canlı koşu çıktısı tek kaynak
 
 ## Sabitler (doğrulanmış gerçekler)
 
-- Test kökü `tests/`; tam suite ~4292 test
-- Denetim testleri: `tests/test_naming_audit.py` (D-57), `tests/test_brief_sablon_denetim.py` (D-217/D-218)
+- Test kökü `tests/`; tam suite **4457** test toplanıyor (2026-09-29)
+- Denetim testleri: `tests/test_naming_audit.py` (D-57), `tests/test_brief_sablon_denetim.py`
+  (D-217/D-218), `tests/test_kok_politikasi.py` (D-221/D-241 + kök yarısı)
+- `AGENTS.md` son karar: **D-268** (satır 3943)
+- `_ARSIV_tek_kullanimlik/` (130 dosya) — **arama kapsamı dışı** (D-220), teste girmez
+- D-57 başlıkta `→` (U+2192) şart; D-217 `## Ilgili Nodlar` ASCII `I` ile yazılır
 
 ## Tuzaklar (aynı hatayı iki kez yapma)
 
 - Plan üretirken var olmayan dosyaya atıf → hayalet görev doğurur (D-216) → her atıf `dosya:satır` doğrulanır
 - Ölçüm sayısı brifteki sayı ile tutmuyor → **dur**, chat aç; sayıyı brife uydurma
+- **`.pytest_cache/lastfailed` kanıt DEĞİLDİR** → 330 bayat kayıt görüldü, fiilen 18 passed
+  → kırık test iddiası daima **canlı koşudan** (D-268). "N test kırık" dersen
+  önce `pytest` koştur, çıktı satırını yapıştır
+- **"Takım yeşil" tek satır beyanı kanıt değildir** → sıra + komut + çıktı gerekir (D-260)
+- Kırık test raporlayacaksan **canlı koşu** yap; `lastfailed`'a bakma
 
 ## Bilinen Açıklar (kapsam dışı backlog)
 

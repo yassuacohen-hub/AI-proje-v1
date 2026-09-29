@@ -1,0 +1,43 @@
+=== 1) osbs TABLOSU ===
+kolonlar: ['osb_id', 'name', 'city', 'district', 'website', 'osb_type', 'status', 'source_id', 'verified_at', 'created_at']
+satir sayisi: 9
+   {'osb_id': UUID('828c15a7-922a-41a6-b0ba-2104aec80a4c'), 'name': 'OSTİM OSB', 'city': 'Ankara', 'district': 'Yenimahalle', 'website': None, 'osb_type': 'karma', 'status': 'active', 'source_id': None, 'verified_at': None, 'created_at': datetime.datetime(2026, 9, 1, 20, 37, 36, 881943, tzinfo=datetime.timezone.utc)}
+   {'osb_id': UUID('c269e34a-574d-48a9-b7b0-1e55096a98d8'), 'name': 'İvedik OSB', 'city': 'Ankara', 'district': 'Yenimahalle', 'website': None, 'osb_type': 'karma', 'status': 'active', 'source_id': None, 'verified_at': None, 'created_at': datetime.datetime(2026, 9, 1, 20, 37, 36, 881943, tzinfo=datetime.timezone.utc)}
+   {'osb_id': UUID('1dae2037-1d79-4d1c-91b7-7c6e6b67add1'), 'name': 'ASO 1. OSB', 'city': 'Ankara', 'district': 'Sincan', 'website': None, 'osb_type': 'karma', 'status': 'active', 'source_id': None, 'verified_at': None, 'created_at': datetime.datetime(2026, 9, 1, 20, 37, 36, 881943, tzinfo=datetime.timezone.utc)}
+   {'osb_id': UUID('eff5e669-be8c-44a4-a224-4949161dc30f'), 'name': 'ASO 2-3 OSB', 'city': 'Ankara', 'district': 'Sincan', 'website': None, 'osb_type': 'karma', 'status': 'active', 'source_id': None, 'verified_at': None, 'created_at': datetime.datetime(2026, 9, 1, 20, 37, 36, 881943, tzinfo=datetime.timezone.utc)}
+   {'osb_id': UUID('112acde4-be98-4b79-ad11-f8773592cb9b'), 'name': 'Başkent OSB', 'city': 'Ankara', 'district': 'Kazan', 'website': None, 'osb_type': 'karma', 'status': 'active', 'source_id': None, 'verified_at': None, 'created_at': datetime.datetime(2026, 9, 1, 20, 37, 36, 881943, tzinfo=datetime.timezone.utc)}
+   {'osb_id': UUID('1839e91a-dedf-4ec2-82d2-28a84cc0da31'), 'name': 'HAB OSB (Havaalanı)', 'city': 'Ankara', 'district': 'Yenimahalle', 'website': None, 'osb_type': 'ihtisas', 'status': 'active', 'source_id': None, 'verified_at': None, 'created_at': datetime.datetime(2026, 9, 1, 20, 37, 36, 881943, tzinfo=datetime.timezone.utc)}
+   {'osb_id': UUID('4380db0b-6eff-4178-8054-bd4c477b0b6a'), 'name': 'Dökümcüler OSB', 'city': 'Ankara', 'district': 'Sincan', 'website': None, 'osb_type': 'ihtisas', 'status': 'active', 'source_id': None, 'verified_at': None, 'created_at': datetime.datetime(2026, 9, 1, 20, 37, 36, 881943, tzinfo=datetime.timezone.utc)}
+   {'osb_id': UUID('46d936bb-c903-4dfb-974f-a4bb79b7e95e'), 'name': 'Anadolu OSB', 'city': 'Ankara', 'district': 'Sincan', 'website': None, 'osb_type': 'karma', 'status': 'active', 'source_id': None, 'verified_at': None, 'created_at': datetime.datetime(2026, 9, 1, 20, 37, 36, 881943, tzinfo=datetime.timezone.utc)}
+   {'osb_id': UUID('ca2702f2-ede3-41f1-893e-c70db4b2ce43'), 'name': 'Polatlı OSB', 'city': 'Ankara', 'district': 'Polatlı', 'website': None, 'osb_type': 'karma', 'status': 'active', 'source_id': None, 'verified_at': None, 'created_at': datetime.datetime(2026, 9, 1, 20, 37, 36, 881943, tzinfo=datetime.timezone.utc)}
+
+=== 2) OSB BASINA FIRMA SAYISI ===
+   OSTİM OSB                Yenimahalle  karma    n=  8222  OK
+   Başkent OSB              Kazan        karma    n=     0  >> FIRMA YOK
+   İvedik OSB               Yenimahalle  karma    n=     0  >> FIRMA YOK
+   Polatlı OSB              Polatlı      karma    n=     0  >> FIRMA YOK
+   ASO 1. OSB               Sincan       karma    n=     0  >> FIRMA YOK
+   Dökümcüler OSB           Sincan       ihtisas  n=     0  >> FIRMA YOK
+   Anadolu OSB              Sincan       karma    n=     0  >> FIRMA YOK
+   ASO 2-3 OSB              Sincan       karma    n=     0  >> FIRMA YOK
+   HAB OSB (Havaalanı)      Yenimahalle  ihtisas  n=     0  >> FIRMA YOK
+
+=== 3) YENI KAYNAK ADAYLARI: ERISILEBILIRLIK + FIRMA DIZINI ===
+   [osb      ] Anadolu OSB                        200  113971kr  dizin_izi=['firma', 'katılımcı', 'şirket']
+   [osb      ] Dokumculer OSB                     HATA: ConnectError
+   [osb      ] Polatli OSB                        HATA: ConnectError
+   [osb      ] HAB OSB (Havaalani)                HATA: ConnectError
+   [osb      ] ASO 2-3 OSB                        200   63590kr  dizin_izi=['firma', 'katılımcı']
+   [teknokent] ODTU Teknokent                     200     428kr  dizin_izi=[]
+   [teknokent] Bilkent Cyberpark                  HATA: ConnectError
+   [teknokent] Hacettepe Teknokent                200   33678kr  dizin_izi=['firma', 'üye', 'şirket', 'sirket']
+   [teknokent] Ankara Universitesi Teknokent      200  192083kr  dizin_izi=['firma', 'rehber']
+   [teknokent] Gazi Teknopark                     200    2586kr  dizin_izi=[]
+   [teknokent] OSTIM Teknopark                    200   78107kr  dizin_izi=['firma', 'üye', 'rehber']
+   [teknokent] Ankara Teknoloji Gelistirme Bolgesi HATA: ConnectError
+   [kulucka  ] ODTU Teknokent ATOM kulucka        HATA: ConnectError
+   [tto      ] ODTU TTO                           200   52884kr  dizin_izi=['firma']
+   [tto      ] Hacettepe TTO                      HATA: ConnectError
+   [tto      ] Gazi TTO                           HATA: ConnectError
+   [resmi    ] Sanayi Bakanligi TGB listesi       200     245kr  dizin_izi=[]
+   [resmi    ] OSBUK                              200  136928kr  dizin_izi=['üye']

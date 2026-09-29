@@ -267,6 +267,35 @@ def test_kimlik_tamligina_yuz_olcekli_esik_uygulanmaz():
     )
 
 
+# --- 5b. NACE: sozluk uyeligi kanit degildir (D-287) ------------------------
+
+# Olculdu (2026-09-29): nace_codes sozlugu 3319 satir VAR, ama yetim kod = 0 —
+# 8289 kodun TAMAMI sozlukte. Yani "sozlukte mi?" sorusu hicbir seyi ayirt
+# etmez; puana baglanirsa 8289 TAHMIN koda 1.0 dagitir = puan uydurmak.
+# nace_validity ise src'de hic OKUNMUYOR ve nace_source'un aynasidir
+# (sector_default->medium 5679, fallback->fallback 654, invalid_cleared->
+# unknown 554); 'verified' degeri hic uretilmez. Kanit yalniz nace_source.
+_NACE_YASAK = re.compile(r"\bnace_codes\b|\bnace_validity\b|\bnace_level\b")
+
+
+def test_nace_puani_sozluge_veya_validity_kolonuna_bakmaz():
+    """Bicim/sozluk dogrulamasi kanit degildir: kaynak dogrular, sekil dogrulamaz."""
+    kaynak = (KOK / "src" / "company_master" / "etl" / "quality_recalc.py").read_text("utf-8")
+    bulgu = sorted(set(_NACE_YASAK.findall(kaynak)))
+    assert not bulgu, (
+        "puan kapisi NACE'yi sekil/sozluk ile dogruluyor: " + ", ".join(bulgu)
+        + " — olculdu: yetim kod 0, sozluk hicbir seyi ayirt etmiyor (D-287)"
+    )
+
+
+def test_nace_kanit_kaynaklari_tahmin_etiketi_tasimaz():
+    """Tahmin kaynagi kanit setine sizarsa 8289 tahmin koda puan akar (D-287)."""
+    tahminler = {"sector_default", "title_default", "fallback",
+                 "invalid_cleared", "unknown", "predicted"}
+    sizan = tahminler & set(qr.NACE_KANIT_KAYNAKLARI)
+    assert not sizan, f"tahmin kaynagi kanit sayildi: {sorted(sizan)}"
+
+
 # --- 6. Olu import sessizce dosya oldurmesin --------------------------------
 
 def test_hicbir_test_dosyasi_olu_import_tasimaz():
