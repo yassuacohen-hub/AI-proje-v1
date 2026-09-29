@@ -53,6 +53,12 @@ Ana baglam: [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]] · [[Huginn Data In
 *abonelik verisi* (Düzey_2/3) **WEB SERVİS / TSM-XML** makine-okunur (OCR gerekmez).
 Düzey_3 = 1.427.688 TL/yıl; NACE + Vergi No + Ortaklar + Temsilciler kapsar.
 
+## Kapanan isler
+
+| TASK_ID | Sonuc | Tarih |
+|---|---|---|
+| VERI-OSB-Tazelik-01 | 13 Ankara OSB icin ayri veri seti uretildi: 8.987 kayit (data/osb/). Polatli Ticaret tarandi (+8 firma). Supabase YAZILMADI - onay bekliyor. 3 site DNS cozulmuyor, Sereflikochisar liste yayinlamiyor. Rapor: data/orchestrator/osb_rapor_2026-09-29.md | 2026-09-29 |
+
 ## Ilgili Nodlar (Ust Hub)
 - [[Huginn Data Insights/hubs/OSINT_INDEX]]
 - [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]]

@@ -151,6 +151,8 @@ Kapanan is sayisi bu hub'da: **32**. Tam liste ceyreklik arsivde:
 
 ---
 
+
+| VERI-OSB-Tazelik-01 | [VERI] 13 Ankara OSB icin ayri veri seti uretildi: 8.987 kayit (data/osb/). Polatli Ticaret tarandi (+8 firma, tekil %100). Supabase YAZILMADI - orkestrator onayi bekliyor. 3 site DNS cozulmuyor, Sereflikochisar liste yayinlamiyor. Rapor: data/orchestrator/osb_rapor_2026-09-29.md | 2026-09-29 |
 ## İlgili Nodlar
 
 - [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]]

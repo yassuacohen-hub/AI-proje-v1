@@ -86,7 +86,10 @@ OSB_TANIM: dict[str, dict] = {
         "ilce": S_UML + "erefliko" + C_CEDIL + "hisar", "tur": "Karma",
         "kaynaklar": ["data/aso/aso_full_clean.jsonl",
                       "data/merged/multi_osb_merged.jsonl"],
-        "anahtar": ["sereflikochisar"], "uyari": None,
+        "anahtar": ["sereflikochisar"],
+        "uyari": ("Site OLCEKLI: firma listesi YAYINLANMIYOR "
+                  "(Ltd/San./Tic. sayimi 0; 9 'liste' linkinin tamami "
+                  "aylik parsel tahsis duyurusu). Tarama yapilamaz."),
     },
     "kazan_hab": {
         "ad": ("Ankara Uzay ve Havac" + I_DOT + "l" + I_DOT + "k "
@@ -130,8 +133,10 @@ OSB_TANIM: dict[str, dict] = {
     "polatli_ticaret": {
         "ad": "Polatl" + I_DOT + " Ticaret Odas" + I_DOT + " OSB",
         "ilce": "Polatl" + I_DOT, "tur": "Karma",
-        "kaynaklar": [], "anahtar": ["ptoosb"],
-        "uyari": "KAYNAK YOK - CSV'de web sitesi var, taranmali.",
+        "kaynaklar": ["data/osb_tarama/polatli_ticaret/firmalar.jsonl"],
+        "anahtar": ["ptoosb", "polatli ticaret"],
+        "uyari": ("D-305 ile tarandi: 8 firma (tekil %100). Onceki "
+                  "kaynak YOK'tu."),
     },
 }
 

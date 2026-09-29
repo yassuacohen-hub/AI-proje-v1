@@ -59,7 +59,7 @@ Bu brifin ilk taslağında yerel SQLite'a bakmıştım ve şunları yazdım. **H
 | `.env` git'te mi | **HAYIR** (`.gitignore:11`) | ✅ |
 | `.env` git geçmişinde mi | **HAYIR** | ✅ |
 
-## ✅ D-306 TAMAMLANDI — Supabase güvenliği
+## ✅ D-305 / API KAPATMA — Supabase güvenliği
 
 **KAHİN:** "bu sorunu kesin çözelim yoksa api kullanmayacağız"
 
@@ -85,7 +85,7 @@ Bu brifin ilk taslağında yerel SQLite'a bakmıştım ve şunları yazdım. **H
 **30 Ekim 2026 kuralı:** Yeni tablolara artık GRANT verilmeyecek. Supabase
 zaten GRANT'siz yeni tabloları API'ye kapatacak — bu bizim istediğimizle
 
-## ✅ D-307 TAMAMLANDI — Sarı lint uyarıları
+## ✅ D-305 / SARI LINT — Sarı lint uyarıları
 
 KAHİN: "rls hataları çözüldü fakat sarı uyarılar duruyor" (3 uyarı).
 
@@ -114,7 +114,7 @@ Doğrulama: `python scripts/supabase_lint_coz.py`
 
 aynı sonuç. Gelecek migration'lara GRANT eklenmeyecek.
 
-## ✅ D-308/D-309/D-310 — Köken kuralı artık FİİLEN zorlanıyor
+## ✅ D-305 / KOKEN KOLONLARI — Köken kuralı artık FİİLEN zorlanıyor
 
 **KAHİN tespiti (doğrulandı):** "her kaydın kökeni yazılır" kuralı
 `VERI_YAZMA_KURALLARI.md`'de yazılı, ama `companies` tablosunda
@@ -161,7 +161,7 @@ Denetim: `python scripts/kopen_denetim.py`
 
 
 
-## ✅ D-305 — 13 OSB için ayrı veri setleri
+## ✅ D-305 / OSB VERI SETLERI 13 OSB için ayrı veri setleri
 
 KAHİN: "osb'ler için ayrı ayrı tek bir veri seti istiyorum, senden ayrı ayrı
 veri setleri istiyorum osb'leri için, sonra hepsi birleştirilecek."
@@ -256,36 +256,3 @@ python scripts/gorev_kutusu.py teslim --ajan yasu --task-id VERI-OSB-Tazelik-01 
 - [[Huginn Data Insights/docs/BORC_DEFTERI]]
 
 
-## İlgili Nodlar
-> **Zorunlu (D-218).** En az 2 wikilink. Göreve dokunan her dokümanı bağla.
-
-- [[Huginn Data Insights/AGENTS]]
-- [[plans/_brief_sablon]]
-- [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]
-- [[Huginn Data Insights/docs/BORC_DEFTERI]]
-
-- [x] RLS 52/52 açık, `anon`/`authenticated` GRANT 0
-- [x] search_path uyarısı 0, `pg_trgm` `extensions` şemasında
-- [x] trigram indeksleri 4/4 geçerli
-- [x] `companies` 9.412 korundu
-- [x] 13 OSB için ayrı veri seti üretildi
-- [x] `company_slug` her dosyada tekil
-- [ ] `osbs` tablosu 13 OSB'yi kapsıyor
-- [ ] `polatli_ticaret` tarandı
-- [ ] `aso2` ayrımı doğrulandı
-- [ ] Birleştirme yapıldı (KAHİN onayıyla)
-- [ ] Supabase'e yazıldı (KAHİN onayıyla)
-
-## ⚠️ Riskler
-
-| # | Risk | Etki | Önlem |
-|---|---|---|---|
-| R1 | **Yerel DB'den çıkarım** | Yanlış karar (oldu!) | Yalnız Supabase ölçümü |
-| R2 | Supabase parolası sızarsa | Tam veri kaybı | RLS + GRANT kapalı (D-306) |
-| R3 | Yazma sırasında transaction kopması | Kısmi veri | Tek transaction (K-3) |
-| R4 | `aso2` ayrımı yanlış | Yanlış OSB ataması | Doğrulama (Faz B) |
-| R5 | Çok kaynaklı mükerrer | Bozuk veri | Faz C raporu, silme yok |
-| R6 | 500/gün tavanı aşılır | Dilekçe ihlali | `time.sleep` zorunlu |
-| R7 | İvedik kaynak düşürüldü (D-301) | 1 OSB eksik | KAHİN kararı |
-| R8 | Extension taşınca arama bozulur mu | Panel araması | 4/4 indeks geçerli ✅ |
-| R9 | 30 Ekim sonrası yeni tablo erişilemez | Migration hatası | GRANT eklenmeyecek (kasıtlı) |

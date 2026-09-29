@@ -1,0 +1,15 @@
+{
+  "osb_slug": "polatli_ticaret",
+  "ad": "Polatlı Ticaret Odası OSB",
+  "ilce": "Polatlı",
+  "tur": "Karma",
+  "kaynak_dosyalar": [
+    "data/osb_tarama/polatli_ticaret/firmalar.jsonl"
+  ],
+  "kayit": 8,
+  "doluluk_yuzde": {
+    "legal_name": 100
+  },
+  "uyari": "D-305 ile tarandi: 8 firma (tekil %100). Onceki kaynak YOK'tu.",
+  "zaman": "2026-09-30T01:19:37"
+}
