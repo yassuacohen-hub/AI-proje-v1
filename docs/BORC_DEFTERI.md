@@ -77,8 +77,10 @@ Bu bölüm devir notunun kaynağıdır (D-219 mantığı). Ajan hafıza dosyası
 dört `*_project_context.md` dosyasında bu hattın hiçbir izi yok — hat panoya bağlı değil,
 doğrudan ürün sahibiyle yürüyor.
 
-- **Kaldığım yer:** D-272 yazıldı, commit'lendi. Alt depo `18fe5a6`, üst depo `120416d`.
-  Bu defterin hayalet satırı ve devir bloğu o commit'ten **sonra** eklendi.
+- **Kaldığım yer:** D-272 yazıldı ve commit'lendi; hat kapalı. **Hash yazılmıyor:** bu satıra
+  hash yazan commit hash'i değiştirir (sonsuz gerileme — ilk yazımda `18fe5a6`/`120416d`
+  hemen bayatladı). Konum dalın tepesidir: alt depo `chore/monorepo-merge`, üst depo `master`;
+  `git log --oneline -3` ile okunur.
 - **Test tabanı yeni:** **4511 passed, 12 skipped** — sabit sıra (`-p no:randomly`, 170.87s)
   ve **iki** rastgele tohum (`--randomly-seed=272`, 185.94s; `=273`, 204.21s). Üçüncü koşu
   bu dosyanın ve D-272/5'in son düzenlemelerinden **sonra** yapıldı; düzenlemeler takımı
