@@ -1,0 +1,20 @@
+{
+  "osb_slug": "cubuk",
+  "ad": "Ankara-çubuk TDİ (Besi) OSB",
+  "ilce": "çubuk",
+  "tur": "İhtisas",
+  "kaynak_dosyalar": [
+    "data/aso/aso_full_clean.jsonl",
+    "data/merged/multi_osb_merged.jsonl"
+  ],
+  "kayit": 7,
+  "doluluk_yuzde": {
+    "legal_name": 100,
+    "adres": 100,
+    "emails": 42,
+    "nace_code": 42,
+    "website_domain": 14
+  },
+  "uyari": null,
+  "zaman": "2026-09-29T22:43:57"
+}

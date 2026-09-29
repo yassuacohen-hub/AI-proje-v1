@@ -1,0 +1,17 @@
+{
+  "osb_slug": "baskent",
+  "ad": "Başkent OSB",
+  "ilce": "Sincan (MalıkÖy)",
+  "tur": "Karma",
+  "kaynak_dosyalar": [
+    "data/baskent/firmalar.jsonl"
+  ],
+  "kayit": 481,
+  "doluluk_yuzde": {
+    "legal_name": 100,
+    "adres": 100,
+    "website_domain": 76
+  },
+  "uyari": null,
+  "zaman": "2026-09-29T22:43:56"
+}

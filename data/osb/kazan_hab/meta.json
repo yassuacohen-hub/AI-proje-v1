@@ -1,0 +1,20 @@
+{
+  "osb_slug": "kazan_hab",
+  "ad": "Ankara Uzay ve Havacılık İhtisas OSB (HAB)",
+  "ilce": "Kahramankazan",
+  "tur": "İhtisas",
+  "kaynak_dosyalar": [
+    "data/aso/aso_full_clean.jsonl",
+    "data/ostim/OSTIM_TEMIZ.jsonl"
+  ],
+  "kayit": 111,
+  "doluluk_yuzde": {
+    "legal_name": 100,
+    "adres": 100,
+    "phones": 17,
+    "emails": 15,
+    "website_domain": 12
+  },
+  "uyari": null,
+  "zaman": "2026-09-29T22:43:57"
+}

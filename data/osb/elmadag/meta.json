@@ -1,0 +1,20 @@
+{
+  "osb_slug": "elmadag",
+  "ad": "Elmadağ Mobilyacılar İhtisas OSB",
+  "ilce": "Elmadağ",
+  "tur": "İhtisas",
+  "kaynak_dosyalar": [
+    "data/aso/aso_full_clean.jsonl",
+    "data/ostim/OSTIM_TEMIZ.jsonl"
+  ],
+  "kayit": 1,
+  "doluluk_yuzde": {
+    "legal_name": 100,
+    "adres": 100,
+    "phones": 100,
+    "emails": 100,
+    "website_domain": 100
+  },
+  "uyari": null,
+  "zaman": "2026-09-29T22:43:57"
+}
