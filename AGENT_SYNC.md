@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-29T15:51:21
+> Son guncelleme: 2026-09-29T20:06:52
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -30,7 +30,7 @@
 | VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim | utku | P2 | plan |
 | VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik verisini yeniden yaz → D-2 | utku | P1 | plan |
 | ALTYAPI-AJAN-CAKISMA-01 | [ALTYAPI] Eszamanli ajan kacak kilit kap | ihsan | P1 | plan |
-| VERI-OSTIM-TAM-TARAMA-01 | [VERI] OSTIM 3.339 eksik detayi tara + t | yasu | P1 | plan |
+| VERI-OSTIM-TAM-TARAMA-01 | [VERI] OSTIM detay verisini denetle → fi | yasu | P1 | review |
 
 ## Tamamlananlar (Son 10)
 

@@ -1777,17 +1777,17 @@
   {
     "task_id": "VERI-OSTIM-TAM-TARAMA-01",
     "id": "VERI-OSTIM-TAM-TARAMA-01",
-    "baslik": "[VERI] OSTIM 3.339 eksik detayi tara + tam veri denetimi (koruma onlemleriyle)",
+    "baslik": "[VERI] OSTIM detay verisini denetle → firmalar_tamamlanmis.jsonl (2s)",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-09-29T15:33:16",
     "bitis": null,
     "dosyalar": [
       "data/ostim/tamamlama_2026-09-29/firmalar_tamamlanmis.jsonl",
       "data/ostim/tamamlama_2026-09-29/rapor.md"
     ],
-    "not": "",
+    "not": "Teslim (yasu): 3.338 kayit tarandi (1 hata: 404 kaldirilmis slug). 0 mukerrer slug, 0 K-2 kacisi, 0 rakamli sektor. Zenginlesme: adres %97,2, telefon %91,6, eposta %91,4. Koruma: kaynak SHA-256 ayni, companies 8.313 sabit. D-293->D-296/D-297 numara catismasi cozuldu. D-298 asili istek kok nedeni duzeltildi. Pano basligi D-57 kalibina uyduruldu (14/14 yesil).",
     "source": "ic",
     "from_agent": "ihsan",
     "mod": "code",

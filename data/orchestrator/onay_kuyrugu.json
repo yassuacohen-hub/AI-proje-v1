@@ -2858,5 +2858,17 @@
     "ciktilar": [],
     "teslim_tarihi": "2026-09-29T01:36:42",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "VERI-OSTIM-TAM-TARAMA-01",
+    "ajan": "yasu",
+    "ozet": "3.338 kayit tarandi (1 hata: 404 kaldirilmis slug). 0 mukerrer slug, 0 K-2 kacisi, 0 rakamli sektor. Zenginlesme: adres %97,2, telefon %91,6, eposta %91,4. Koruma: kaynak SHA-256 ayni, companies 8.313 sabit. D-293->D-296/D-297 numara catismasi cozuldu. D-298 asili istek kok nedeni duzeltildi. Pano basligi D-57 kalibina uyduruldu (14/14 yesil).",
+    "ciktilar": [
+      "data/ostim/tamamlama_2026-09-29/rapor.md",
+      "data/ostim/tamamlama_2026-09-29/mukerrer_raporu.json",
+      "data/ostim/veri_koruma_raporu.json"
+    ],
+    "teslim_tarihi": "2026-09-29T20:06:52",
+    "durum": "bekliyor"
   }
 ]

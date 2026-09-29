@@ -12,7 +12,10 @@ Kapsam:
 from __future__ import annotations
 
 import logging
-from datetime import datetime, timedelta
+import os
+from datetime import datetime, timedelta, timezone
+from decimal import Decimal
+from pathlib import Path
 from typing import Any
 
 import pytest
@@ -165,7 +168,9 @@ def test_churn_donemi_pencere():
 
 
 def test_firma_kayitlari_30_gun_esigi():
-    simdi = datetime.now()
+    # D-298: naive `datetime.now()` yerel saatti (UTC+3); kod naive girdiyi UTC
+    # sayinca 3 gun 2'ye dusuyordu. Canli `updated_at` timestamptz -> aware.
+    simdi = datetime.now(timezone.utc)
     rows = [
         {"identity_completeness": 6.5, "nace_code": "62.01", "adres": "Ankara",
          "updated_at": simdi - timedelta(days=3)},
@@ -185,6 +190,64 @@ def test_firma_kayitlari_30_gun_esigi():
     assert kayitlar[2]["son_guncelleme_gun"] is None  # parse edilemedi
     assert all("data_quality_score" not in k for k in kayitlar), \
         "terk edilmis kolon geri sizdi"
+
+
+def test_firma_kayitlari_canli_tipleri_aware_ve_decimal():
+    """D-298: canli DB `updated_at`i timestamptz (offset-aware),
+    `identity_completeness`i NUMERIC (-> ``Decimal``) dondurur. Sahte engine
+    naive datetime + float veriyordu, iki canli TypeError gizlendi. DB yokken
+    de bu iki tip regresyonu yakalansin diye canli tipler taklit edilir.
+    """
+    simdi = datetime.now(timezone.utc)
+    rows = [
+        {"identity_completeness": Decimal("6.50"), "nace_code": "62.01",
+         "adres": "Ankara", "updated_at": simdi - timedelta(days=3)},
+    ]
+    kayitlar = ex._firma_kayitlari(_Engine(rows))
+
+    assert kayitlar[0]["son_guncelleme_gun"] == 3
+    # health.py float ile boler; Decimal sizarsa canlida TypeError
+    assert isinstance(kayitlar[0]["identity_completeness"], float)
+    assert kayitlar[0]["identity_completeness"] == 6.5
+
+
+# ---------------------------------------------------------------------------
+# D-298: sahte engine SQL'i hic calistirmiyordu; uc canli ariza yesil gorundu.
+# Tek gercek sema kaynagi canli DB (schema/*.sql bayat: `address` yok,
+# `raw_address` yaziyor). DB yoksa atlanir.
+# ---------------------------------------------------------------------------
+
+def _db_var() -> bool:
+    if not os.getenv("DATABASE_URL") and not (Path(__file__).resolve().parents[1] / ".env").exists():
+        return False
+    try:
+        from company_master.db.connection import get_engine
+
+        with get_engine().connect() as conn:
+            conn.exec_driver_sql("SELECT 1")
+        return True
+    except Exception:
+        return False
+
+
+@pytest.mark.skipif(not _db_var(), reason="DATABASE_URL erisimi yok; canli sema mandali atlandi")
+def test_firma_kayitlari_canli_semaya_karsi_kosar():
+    """SQL gercek semada kosar; kolon adi/tz/Decimal uclusu burada kirilir."""
+    from company_master.db.connection import get_engine
+
+    kayitlar = ex._firma_kayitlari(get_engine())
+
+    assert isinstance(kayitlar, list)
+    for k in kayitlar:
+        assert set(k) == {
+            "identity_completeness", "nace_code", "adres", "son_guncelleme_gun",
+        }
+        assert k["identity_completeness"] is None or isinstance(
+            k["identity_completeness"], float
+        )
+        assert k["son_guncelleme_gun"] is None or isinstance(
+            k["son_guncelleme_gun"], int
+        )
 
 
 # ---------------------------------------------------------------------------
