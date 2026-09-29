@@ -1385,3 +1385,57 @@ korumak istiyordu, üretilmiş bir çıktı dosyasını kilitlemişti.
 
 **Doğrulama:** yeni kilit → `koruma_kontrolu() == None`, tarama akıyor.
 
+
+## D-298 — Tek parametreli timeout asılı istek üretir; kalan kayıt bitti
+
+**KAHİN:** "kanalar için devam et, hepsi bitsin." Görev:
+`VERI-OSTIM-TAM-TARAMA-01`.
+
+### 1. Sonuç: tarama TAMAMLANDI
+
+| Ölçüm | Değer |
+|---|---|
+| Taranan kayıt | **3.338** |
+| Hata | **1** — `objektf-proje-kopyal` HTTP 404 (siteden kaldırılmış) |
+| P-8 imza tekrarı | 0 |
+| Mükerrer slug | 0 |
+| K-2 kaçışı | 0 |
+| Mükerrer unvan grubu | 16 (9 birleşecek · 7 ayrı kayıt korunacak) |
+| Kaynak SHA değişimi | **yok** |
+| `companies` tablosu | 8.313 → 8.313 |
+
+Doluluk: adres %97,2 · telefon %91,6 · e-posta %91,4.
+
+### 2. Asılı kalan istek (kök neden)
+
+Sürücü 3.303'te **15+ dakika** ilerleme göstermedi. Ölçüm: sunucu
+1 saniyede yanıt veriyor, dosya güncelleniyordu — yani sorun ağda
+değil, **istemcide**ydi.
+
+Neden: `httpx.Client(timeout=30)` **tek parametre** kullanılıyordu.
+Bu, connect/read/write zaman aşımlarını **ayrı ayrı ayarlamaz**;
+varsayılan olarak hepsine aynı süre verilir ama bir bağlantı
+sunucuya bağlandıktan sonra cevap vermezse istemci süresiz
+bekleyebilir. Politika gereği 2 sn bekleme uygulandığı için tarama
+"yavaş" görünüyor, aslında **takılmıştı**.
+
+**Karar:**
+
+1. `httpx.Timeout(8.0, connect=5.0)` kullanılır — asılı kalan istek
+   hata sayılır ve **atlanır**, tur devam eder.
+2. `scripts/ostim_tamamla_kalan.py`: yalnız kalan kayıtları çeker.
+3. Politika **değişmedi**: P-3 (2 sn bekleme) ve P-5 (403/401 turu
+   keser) aynen korundu. Sadece asılı kalmak engellendi.
+
+### 3. Kısmi yazımın kanıtı
+
+Sürücü zorla öldürüldüğünde 3.303 kayıt **korundu**; yeniden
+başlatıldığında kaldığı yerden devam etti. D-291 olmasa bu kayıtlar
+kaybolurdu.
+
+### 4. Hukuki not (dürüstlük)
+
+Tarama **yazılı izin alınmadan** yapıldı. D-281 borcu hâlâ açık;
+KAHİN "izinli olarak devam et" dediği için sürdürüldü. Bu karar
+kayda geçmiştir.
+

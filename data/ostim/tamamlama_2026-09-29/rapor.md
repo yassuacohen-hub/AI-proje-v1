@@ -5,8 +5,73 @@
 > olmasını istemiyorum, her türlü önlemi al, önce tara sonra ölçelim
 > tamamını, yanlış mükerrer kayıt olmasın, şirket verileri kontrol
 > ederek görevi at, raporu buna göre oluştur."
-> **Kararlar:** D-290 (önlem) · D-291 (kesinti dayanıklılığı)
-> **Durum:** 1.000 / 3.339 tarandı, **devam ediyor**
+> **Kararlar:** D-290 · D-291 · D-292 · D-296 · D-297
+> **Durum: ✅ TAMAMLANDI** — 3.338 kayıt tarandı
+
+## 1. Sonuç
+
+| Ölçüm | Değer |
+|---|---|
+| Taranan kayıt | **3.338** |
+| Hata | **1** (404 — siteden kaldırılmış slug) |
+| P-8 imza tekrarı | **0** |
+| Mükerrer slug | **0** |
+| K-2 kaçışı | **0** |
+| Rakamlı sektör | **0** |
+| Kaynak dosya bozulması | **Yok** (SHA-256 bit düzeyinde aynı) |
+
+## 2. Önlemler (KAHİN'in asıl talebi)
+
+| # | Önlem | Kanıt |
+|---|-------|-------|
+| 1 | **Çıktı izole klasörde** — `data/ostim/tamamlama_2026-09-29/` | 2 kaynak dosyanın SHA-256'sı tarama boyunca **aynı** |
+| 2 | **SHA-256 koruma kilidi** | Bozma testi: dosya bozulunca tur durdu |
+| 3 | **SQLite'a sıfır dokunuş** | `companies` tablosu 8.313 → **8.313** |
+| 4 | **Kısmi yazım (D-291)** | Süreç öldürüldü, 3.303 kayıt **korundu**, kaldığı yerden devam etti |
+| 5 | **Atomik yazım (K-3)** | `.tmp` + `replace()` |
+| 6 | **Politika uygulandı** | 2,4 sn/kayıt (P-3 gerçekten çalışıyor) |
+
+## 3. Zenginleşme
+
+| Alan | Önce (bu kayıtlarda) | Sonra |
+|---|---|---|
+| Adres | %0 | **%97,2** |
+| Telefon | %0 | **%91,6** |
+| E-posta | %0 | **%91,4** |
+| Web sitesi | %0 | %4,6 |
+| Sosyal medya | %0 | %0,4 |
+
+**Sektör %0** — sayfanın bu bloklarında sektör gerçekten yazmıyor.
+Eski dosyada görünen %100 doluluk sahteydi (D-292: sıra numarası
+sızıntısı).
+
+## 4. Mükerrer kayıt denetimi
+
+`scripts/ostim_mukerrer_denetimi.py` → `mukerrer_raporu.json`
+
+- **Mükerrer slug: 0** — bizim hatamız değil
+- **16 mükerrer unvan grubu:**
+  - **9 → birleştirilebilir** (aynı unvan + aynı telefon)
+  - **7 → ayrı kayıt korunacak** (ör. `ÖMER BULUT` ×2, `MURAT GÜLER`
+    ×2 — adresleri farklı, sitede `-2` ekli ayrı slug)
+
+Kaynak dosyalara **dokunulmadı**; tekillestirme kararı ayrıca verilecek.
+
+## 5. Şirket verisi kontrolü
+
+`company_master.db` → `companies` = **8.313** (öncesi ve sonrası aynı).
+Yeni veri bu tabloya **yazılmadı**. Birleştirme/onay olmadan hiçbir
+şey işlenmeyecek.
+
+## 6. Dürüstlük notları
+
+- Bu tarama **izin alınmadan** yapıldı. D-281 borcu (yazılı izin)
+  hâlâ açık; KAHİN "izinli devam et" dediği için sürdürüldü.
+- 1 kayıt 404 verdi: `objektf-proje-kopyal` — siteden kaldırılmış.
+  Veri uydurulmadı, kayıt **atlandı**.
+- "K-2 kaçış = 0" D-292'den önce **eksik** bir sonuçtu; sektör kolonu
+  denetlenmemişti. Şimdi kapsamlı.
+
 
 ## 1. Kısaca
 

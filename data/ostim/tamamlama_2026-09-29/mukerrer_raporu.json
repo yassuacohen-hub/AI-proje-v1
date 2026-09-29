@@ -1,12 +1,12 @@
 {
-  "zaman": "2026-09-29T18:31:22",
-  "kayit": 1278,
-  "tekil_slug": 1278,
+  "zaman": "2026-09-29T19:56:35",
+  "kayit": 3338,
+  "tekil_slug": 3338,
   "mukerrer_slug": 0,
-  "tekil_unvan": 1274,
-  "mukerrer_unvan_grubu": 4,
-  "birlestirilebilir": 1,
-  "ayri_korunacak": 3,
+  "tekil_unvan": 3322,
+  "mukerrer_unvan_grubu": 16,
+  "birlestirilebilir": 9,
+  "ayri_korunacak": 7,
   "detay_birlestir": [
     {
       "unvan": "BNB MEKATRONİK SAVUNMA SANAYİ VE TİC. LTD. ŞTİ.",
@@ -21,6 +21,134 @@
       ],
       "telefonlar": [
         "052234224"
+      ],
+      "karar": "MUKERRER (tek kayda indirilebilir)"
+    },
+    {
+      "unvan": "LAKTON LABORATUVAR HİZMETLERİ A.Ş.",
+      "adet": 2,
+      "sluglar": [
+        "lakton-laboratuvar-hizmetleri-as",
+        "lakton-laboratuvar-hizmetleri-as-2"
+      ],
+      "adresler": [
+        "ALINTERİ BULVARI 1151. SOKAK 1 42",
+        "ALINTERİ BULVARI 1151. SOKAK 1 42"
+      ],
+      "telefonlar": [
+        "123861562"
+      ],
+      "karar": "MUKERRER (tek kayda indirilebilir)"
+    },
+    {
+      "unvan": "MEHMET TAŞDELEN-DEVİRDAİM TAŞGAR MAKİNA",
+      "adet": 2,
+      "sluglar": [
+        "mehmet-tasdelen-devirdaim-tasgar-makina",
+        "mehmet-tasdelen-devirdaim-tasgar-makina-2"
+      ],
+      "adresler": [
+        "1231/1. CADDE (ESKİ 41/A) 36 P-2",
+        "1231/1. CADDE (ESKİ 41/A) 36 P-2"
+      ],
+      "telefonlar": [
+        "353203676"
+      ],
+      "karar": "MUKERRER (tek kayda indirilebilir)"
+    },
+    {
+      "unvan": "MİKROSİM ELEKTRONİK OTOMAS. SAN.VE DIŞ TİC.LTD.ŞTİ.",
+      "adet": 2,
+      "sluglar": [
+        "mikrosim-elektronik-otomas-sanve-dis-ticltdsti-1",
+        "mikrosim-elektronik-otomas-sanve-dis-ticltdsti-2"
+      ],
+      "adresler": [
+        "100. YIL BULVARI 55C 29",
+        null
+      ],
+      "telefonlar": [
+        "123863194"
+      ],
+      "karar": "MUKERRER (tek kayda indirilebilir)"
+    },
+    {
+      "unvan": "MUSTAFA ÖZSOY - GM GÖÇÜK CENTER",
+      "adet": 2,
+      "sluglar": [
+        "mustafa-ozsoy-gm-gocuk-center",
+        "mustafa-ozsoy-gm-gocuk-center-2"
+      ],
+      "adresler": [
+        "OSTİM OSB MAH. 1256 CAD. 50",
+        "OSTİM OSB MAH. 1256 CAD. 50"
+      ],
+      "telefonlar": [
+        "533201200"
+      ],
+      "karar": "MUKERRER (tek kayda indirilebilir)"
+    },
+    {
+      "unvan": "RAMAZAN ARSLAN",
+      "adet": 2,
+      "sluglar": [
+        "ramazan-arslan",
+        "ramazan-arslan-1"
+      ],
+      "adresler": [
+        "1200. CADDE (ESKİ 29) 15",
+        "1200. CADDE (ESKİ 29) 15"
+      ],
+      "telefonlar": [
+        "366008318"
+      ],
+      "karar": "MUKERRER (tek kayda indirilebilir)"
+    },
+    {
+      "unvan": "TAŞYAPI İNŞAAT TAAHHÜT SANAYİ VE TİCARET ANONİM ŞİRKETİ",
+      "adet": 2,
+      "sluglar": [
+        "tasyapi-insaat-taahhut-sanayi-ve-ticaret-anonim-sirketi",
+        "tasyapi-insaat-taahhut-sanayi-ve-ticaret-anonim-sirketi-2"
+      ],
+      "adresler": [
+        "UZAYÇAĞI CAD. 82 B-16",
+        "UZAYÇAĞI CAD. 82 B-16"
+      ],
+      "telefonlar": [
+        "357686809"
+      ],
+      "karar": "MUKERRER (tek kayda indirilebilir)"
+    },
+    {
+      "unvan": "TOLMED MEDİKAL TEKSTİL SANAYİ VE TİCARET LİMİTED ŞİRKETİ",
+      "adet": 2,
+      "sluglar": [
+        "tolmed-medikal-tekstil-sanayi-ve-ticaret-limited-sirketi",
+        "tolmed-medikal-tekstil-sanayi-ve-ticaret-limited-sirketi-2"
+      ],
+      "adresler": [
+        null,
+        null
+      ],
+      "telefonlar": [
+        "124722299"
+      ],
+      "karar": "MUKERRER (tek kayda indirilebilir)"
+    },
+    {
+      "unvan": "ZİYA CÖMERTOĞLU İLAVE DİNGİL DAMPER İNŞ. TUR. TİC. LTD. ŞTİ.",
+      "adet": 2,
+      "sluglar": [
+        "ziya-comertoglu-ilave-dingil-damper-ins-tur-tic-ltd-sti",
+        "ziya-comertoglu-ilave-dingil-damper-ins-tur-tic-ltd-sti-2"
+      ],
+      "adresler": [
+        "AHİ EVRAN CAD. 93",
+        "AHİ EVRAN CAD. 93"
+      ],
+      "telefonlar": [
+        "123541389"
       ],
       "karar": "MUKERRER (tek kayda indirilebilir)"
     }
@@ -71,6 +199,72 @@
       ],
       "telefonlar": [
         "367700108"
+      ],
+      "karar": "AYRI_KAYIT (ayri isletme olabilir — KORU)"
+    },
+    {
+      "unvan": "ÖMER BULUT",
+      "adet": 2,
+      "sluglar": [
+        "mer-bulut",
+        "mer-bulut-1"
+      ],
+      "adresler": [
+        "1246. CADDE (ESKİ 31/A) 25 16",
+        "1246. CADDE (ESKİ 31/A) 25 16"
+      ],
+      "telefonlar": [
+        "336974546",
+        "464364312"
+      ],
+      "karar": "AYRI_KAYIT (ayri isletme olabilir — KORU)"
+    },
+    {
+      "unvan": "MURAT GÜLER",
+      "adet": 2,
+      "sluglar": [
+        "murat-gler",
+        "murat-gler-2"
+      ],
+      "adresler": [
+        "100. YIL BULVARI 55A 10",
+        "1137. SOKAK (ESKİ 234) 20"
+      ],
+      "telefonlar": [
+        "364150900",
+        "544875449"
+      ],
+      "karar": "AYRI_KAYIT (ayri isletme olabilir — KORU)"
+    },
+    {
+      "unvan": "MY YEDEK PARÇA MOTORLU ARAÇLAR SAN. VE TİC. LTD. ŞTİ.",
+      "adet": 2,
+      "sluglar": [
+        "my-yedek-para-motorl",
+        "my-yedek-parca-motorlu-araclar-san-ve-tic-ltd-sti"
+      ],
+      "adresler": [
+        "100. YIL BULVARI 55B 10",
+        "100. YIL BULVARI 1 11"
+      ],
+      "telefonlar": [
+        "122241602"
+      ],
+      "karar": "AYRI_KAYIT (ayri isletme olabilir — KORU)"
+    },
+    {
+      "unvan": "Serdar Altıok",
+      "adet": 2,
+      "sluglar": [
+        "serdar-altiok",
+        "serdar-altiok-1"
+      ],
+      "adresler": [
+        "1580. CADDE (ESKİ 26) 399",
+        "1580. CADDE (ESKİ 26) 66"
+      ],
+      "telefonlar": [
+        "356908865"
       ],
       "karar": "AYRI_KAYIT (ayri isletme olabilir — KORU)"
     }

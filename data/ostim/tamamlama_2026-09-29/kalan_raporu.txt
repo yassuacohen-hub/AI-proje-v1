@@ -1,0 +1,44 @@
+  P-1: robots.txt uygun (/firmalar/ serbest; yasakli: /admin/, /portal/, /auth/)
+Kalan kayit: 37
+  [1/37] objektf-proje-kopyal ATLANDI (HTTPStatusError)
+  [2/37] zentrona-teknoloj-an OK
+  [3/37] zepar-maknalari-oto OK
+  [4/37] zer-salii-ve-gvenl OK
+  [5/37] zeynel-abdn-bayramol OK
+  [6/37] zeynep-can OK
+  [7/37] zeynep-snmez OK
+  [8/37] zgen-civata-hirdavat OK
+  [9/37] zgen-topda OK
+  [10/37] zgn-yalitim-mhendslk OK
+  [11/37] zgnay-tasarim-mekank OK
+  [12/37] zgne-grup-metal-elek OK
+  [13/37] ziya-comertoglu-ilave-dingil-damper-ins-tur-ti OK
+  [14/37] ziya-comertoglu-ilave-dingil-damper-ins-tur-ti OK
+  [15/37] ziya-kalem OK
+  [16/37] zkan-blg OK
+  [17/37] zkan-pern OK
+  [18/37] zkk-savunma-ve-havac OK
+  [19/37] zlder-hdrolk-maknel OK
+  [20/37] zlem-ztrk OK
+  [21/37] zm-ml-boru-hdrolk-tc OK
+  [22/37] zm-teknk-hirdavat-ma OK
+  [23/37] zmt-pto-hdrolk-pnmat OK
+  [24/37] znl-maknalari-sanay OK
+  [25/37] zolatek-yalitim-naat OK
+  [26/37] zrve-ems-enerj-sanay OK
+  [27/37] zrve-grup-bkm-makna OK
+  [28/37] zrve-sstem-yedek-par OK
+  [29/37] zrve-tcar-aralar-yed OK
+  [30/37] zrvedek-beynler-blm OK
+  [31/37] zrvem-havacilik-sana OK
+  [32/37] ztekno-fren-motorlu OK
+  [33/37] ztrk-savunma-havacil OK
+  [34/37] zuha-muhendislik-otomasyon-proje-ithalat-ihrac OK
+  [35/37] zyen-grup-motorlu-ar OK
+  [36/37] zzet-aygin OK
+  [37/37] zzet-kandemr OK
+
+Cikti: 3338 mevcut + 0 yeni = 3338
+Atlanan (asili/404): 1
+Sure: 87 sn
+Kalan kayit: 1

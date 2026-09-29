@@ -27,7 +27,7 @@ from __future__ import annotations
 
 import logging
 import sys
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import Any
 
@@ -153,24 +153,42 @@ def _tl(deger: Any, ondalik: int = 0) -> str:
     return ham.replace(",", "#").replace(".", ",").replace("#", ".") + " ₺"
 
 
+def _sayi(deger: Any) -> float | None:
+    """``Decimal``/``str`` sayiyi ``float``a cevirir; olculmemisi ``None`` tutar."""
+    if deger is None:
+        return None
+    try:
+        return float(deger)
+    except (TypeError, ValueError):
+        return None
+
+
 def _firma_kayitlari(engine: Any) -> list[dict[str, Any]]:
     """Sağlık hesabı için örnek firma kayıtlarını üretir.
 
-    Alan adları ``tenant/health.py`` sözleşmesine çevrilir: ``address_line`` →
+    Alan adları ``tenant/health.py`` sözleşmesine çevrilir: ``address`` →
     ``adres``; ``updated_at`` → ``son_guncelleme_gun`` (yalnızca son 30 gün
     içinde güncellenenler dolu sayılır, tazelik metriği bu alanı okur).
+
+    D-298: kolon adı ``address_line`` yazılıydı, ``companies``te böyle kolon yok
+    (canlı ``psycopg.errors.UndefinedColumn``). ``address_line`` yalnız
+    ``company_locations``ta var, o tablo 0 satır. Gerçek kolon: ``address``.
     """
     with engine.connect() as conn:
         rows = conn.execute(
             text(
                 "SELECT identity_completeness, nace_code, "
-                "address_line AS adres, updated_at "
+                "address AS adres, updated_at "
                 "FROM companies WHERE is_ankara = TRUE LIMIT :limit"
             ),
             {"limit": SAGLIK_ORNEK_LIMITI},
         ).mappings().all()
 
-    esik = datetime.now() - timedelta(days=30)
+    # D-298: canli `updated_at` timestamptz (offset-aware), test sahtesi naive
+    # veriyordu; `datetime.now()` ile karsilastirma canlida TypeError atiyordu.
+    # Tek olcut: her sey UTC-aware'e cevrilir.
+    simdi = datetime.now(timezone.utc)
+    esik = simdi - timedelta(days=30)
     kayitlar: list[dict[str, Any]] = []
     for row in rows:
         guncelleme = row.get("updated_at")
@@ -180,15 +198,24 @@ def _firma_kayitlari(engine: Any) -> list[dict[str, Any]]:
             except ValueError:
                 guncelleme = None
         taze = guncelleme if isinstance(guncelleme, datetime) else None
+        if taze is not None:
+            taze = (
+                taze.astimezone(timezone.utc)
+                if taze.tzinfo is not None
+                else taze.replace(tzinfo=timezone.utc)
+            )
         kayitlar.append(
             {
                 # D-249: olculmemis firma 0 tasimaz; None gecer ve
                 # health.py ortalamadan disar. `or 0` ortalamayi bastirirdi.
-                "identity_completeness": row.get("identity_completeness"),
+                # D-298: canli kolon NUMERIC -> Decimal gelir, health.py float
+                # ile boler (TypeError). Donusum sinirda yapilir; health.py
+                # sozlesmesi degistirilmez.
+                "identity_completeness": _sayi(row.get("identity_completeness")),
                 "nace_code": row.get("nace_code"),
                 "adres": row.get("adres"),
                 "son_guncelleme_gun": (
-                    (datetime.now() - taze).days
+                    (simdi - taze).days
                     if taze is not None and taze >= esik
                     else None
                 ),
