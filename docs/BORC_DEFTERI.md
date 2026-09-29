@@ -98,6 +98,30 @@ Sözlüğü puana bağlamak 8289 **tahmin** koda 1.0 dağıtırdı — puan uydu
 Tavan kilidi (7,5/10) **dürüst**, bu yüzden ağırlık gerçeğe çekilmedi; kilit kaldıracak olan
 şey kanıt kaynağıdır (`BORC-VKN-01` / MERSİS), bu tur açılmadı.
 
+### Tam takım (D-287 kapanışı)
+
+Sabit sıra `2 failed, 4562 passed, 12 skipped — 190,29 sn`; rastgele sıra `2 failed, 4562 passed,
+12 skipped — 176,88 sn`. **Sıra bağımlılığı yok.** Taban 4555 geçti → +7: Karar A 6 mandal +
+NACE 2 mandal − aşağıdaki yeni kırmızı 1.
+
+| Kırmızı | Sahip | Sebep | Karar |
+|---|---|---|---|
+| `test_dokuman_politikasi.py::test_d219_ajan_context_dosyalari` | yasu | `yasu_project_context.md` 213 > 200 satır | **Kesilmedi** (D-226), bilinen kırmızı |
+| `test_kok_izin_listesi.py::test_zaman_damgali_yedek_git_te_izlenmiyor` | Yasin (otomasyon) | `_ARSIV_tek_kullanimlik/_pytest_rerun.txt` git'e **izlendi** → `1 <= 0` düştü | **Kesilmedi** — benim dosyam değil, ürün sahibi kararı bekliyor (`git rm --cached`) |
+
+### ⚠ Yeni tehlike — otomatik günlük commit tüm ağacı süpürüyor
+
+`dfc5f0a Yasin — Otomatik gunluk commit (29.09.2026 12:01)`: **352 dosya, 41619 ekleme**.
+Bu commit tur ortasında çalıştı ve **uçuştaki dosyalarımı** (`src/company_master/chat.py`,
+`scripts/ajan_chat.py`, `tests/test_ajan_chat.py`, `tests/test_panel_durustluk.py`,
+`scripts/hooks/pre-commit`, hatta D-241 gereği sonradan sildiğim `scripts/_nace_olcum.py`)
+tarihe soktu. Yedek dosyasını izleyen de aynı commit.
+
+**Sonuç:** "tek tek sahnele, `git add -A` yasak" kuralı üç ajan için geçerli ama otomasyon bu
+kuralın dışında ve kuralı **fiilen geçersiz kılıyor**. HEAD artık `38ad9f7` değil `dfc5f0a`.
+Karar ürün sahibinin: otomasyon ya durdurulmalı ya da `git add -A` yerine beyaz liste ile
+çalışmalı. Ölçüldü, kesilmedi, bekliyor.
+
 ### ÜRÜN SAHİBİNE SORU — `BORC-SCRIPTS-01` (cevapsız silme YOK)
 
 `ask_followup_question` aracı üç denemede de düştü; soru kanala sorulamadı, buraya yazıldı.
@@ -801,58 +825,7 @@ python -m pytest tests/test_ostim_birlestirme_kalite.py -q   # 18/18
 
 - TOBB parolası sohbette açıkça paylaşıldı ve `.env`'e yazıldı →
 
-## D-287 — NACE doğrulaması anlamsız çıktı; iki küçük kapı mandallandı (2026-09-29)
-
-### 1. `verified` yok, sıfır değil
-
-`companies.nace_validity` değer kümesi: `medium` 5732, `unknown` 2942, `fallback` 738.
-`verified` **hiç üretilmiyor**. Kolon `src/` altında hiçbir yerde **okunmuyor** — yalnız
-yazılıyor ve `nace_source`'un aynası: `sector_default→medium` 5679, `unknown→unknown` 2388,
-`fallback→fallback` 654, `invalid_cleared→unknown` 554. Bilgi taşımıyor (D-266 biçimli borç).
-
-### 2. Sözlük var ama ayırt etmiyor
-
-`nace_codes` 3319 satır. **Yetim kod = 0** — 8289 kodun tamamı sözlükte. "Sözlükte mi?"
-sorusu hiçbir firmayı diğerinden ayırmaz. Devir notunun önerdiği "en ucuz doğrulama"
-(sözlük üyeliği + biçim) bu yüzden **ölçümle reddedildi**: puana bağlansaydı 8289 tahmin
-koda 1.0 ağırlık dağıtırdı = puan uydurmak (D-245/D-252'nin tersi yönden ihlali).
-
-### 3. Ağırlık çekilmedi — kilit dürüst
-
-`nace_code` ağırlığı 1.0'da kaldı. Sebep: NACE gerçekten %100 tahmin
-(`HEDEF_VERI_KAPSAMI.md` s.190, D-258). Sistem "bu firma eksik" derken doğru söylüyor;
-eksik olan ölçüm değil, veri. Ağırlığı düşürmek tavanı **sahte** yükseltirdi.
-
-### 4. Kural
-
-> Biçim/sözlük doğrulaması kanıt değildir. Kaynak doğrular, şekil doğrulamaz.
-> Ayırt etmeyen bir kontrol puana bağlanamaz.
-
-Mandallar (`tests/test_panel_durustluk.py`, kancada):
-`test_nace_puani_sozluge_veya_validity_kolonuna_bakmaz`,
-`test_nace_kanit_kaynaklari_tahmin_etiketi_tasimaz`.
-Kırılarak doğrulandı: `NACE_KANIT_KAYNAKLARI`'ya `sector_default` eklendi → **3 kırmızı**
-(yeni iki mandal + mevcut D-252 mandalı), geri alındı → **19 yeşil**.
-
-### 5. Karar A — `ac` yanlış kapı uyarısı (ürün sahibi onayı)
-
-`chat.acik_sahipler(task_id, haric)` aynı görevde **başka** ajanın açık kaydını döner;
-`cmd_ac` bunu stderr'e yazar. **Engelleme yok** (ürün sahibi: uyarı yeter). Saf fonksiyon,
-mevcut `oku()`'yu kullanır, yeni dosya/bağımlılık yok. 6 mandal, `test_cli_uyariyi_cagirir`
-çağıranı zorlar (D-266).
-
-### 6. Karar B — karar numarası kancaya
-
-`karar_no.py` **değiştirilmedi**: aranan mandal (`TAVAN_CATISMA = 1`) zaten vardı, eksik olan
-tek şey kancaya bağlı olmamasıydı. `scripts/hooks/pre-commit` tek satır genişletildi.
-Kanca alt kümesi artık **19,4 sn** (yorumdaki "~15 sn" düzeltildi).
-
-### 7. Karar C — yazma kapısı ölçüldü, mimari değişmedi
-
-motor çağıran **163** · gerçekten YAZAN **70** · doğrudan `create_engine` **25** ·
-motorsuz yazan **0** · `src/` 22, `scripts/` 47, **`web_dashboard/` 0**.
-Kapı tek değil (24 dosya `connection.py`'yi atlıyor) ama panel hiç yazmıyor.
-
-### 8. Ölçüm aracı
-
-`scripts/_nace_olcum.py` tek kullanımlıktı, **silindi** (D-241).
+D-287'nin gerekçesi `AGENTS.md`'de (tek kanonik başlık). Buraya kopyalanmadı: aynı `D-NNN`
+iki dosyada birden kanonik başlık olursa havuz çatışır — bu tur **mandal yakaladı**
+(`CATISMA: ['D-281','D-287']`), kayıt tek dosyaya çekildi. Defter durumu tutar, `AGENTS.md`
+gerekçeyi (D-272/1).

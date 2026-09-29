@@ -4780,6 +4780,85 @@ her yol bu kapıdan geçirilir, `--al` kancaya bağlanır.
 
 **Referans:** D-220, D-227, D-241, D-243, D-256, D-260, D-261, D-266, D-270, D-272, D-281.
 
+## D-287 — Ayırt etmeyen doğrulama kanıt değildir (2026-09-29)
+
+### Bulgu 1 — `verified` sıfır değil, değer kümesinde yok
+
+`companies.nace_validity`: `medium` 5732 · `unknown` 2942 · `fallback` 738. `verified`
+**hiç üretilmiyor**. Kolon `src/` altında hiçbir yerde **okunmuyor**; yalnız yazılıyor ve
+`nace_source`'un aynası (`sector_default→medium` 5679, `unknown→unknown` 2388,
+`fallback→fallback` 654, `invalid_cleared→unknown` 554). Yani bilgi taşımayan bir kolon
+tavanı kilitliyor sanılıyordu; kilidi tutan aslında `nace_source`.
+
+NACE kod doluluğu **8289/9412 = %88,07**; kanıt kaynaklı (`mersis`/`external`) NACE
+**0/9412 = %0** (D-260: iki oran birlikte).
+
+### Bulgu 2 — Sözlük var, ama hiçbir şeyi ayırt etmiyor
+
+`nace_codes` **3319** satır, **yetim kod 0** — 8289 kodun tamamı sözlükte. Devir notunun
+"en ucuz doğrulama" önerisi (sözlük üyeliği + biçim/uzunluk) **ölçümle reddedildi**:
+her firma geçtiği için hiçbir firmayı ayırmaz, puana bağlanırsa 8289 **tahmin** koda 1.0
+ağırlık dağıtırdı. Bu, D-245/D-252'nin yasakladığı puan uydurmanın ta kendisidir.
+
+### Karar — ağırlık çekilmedi, kilit dürüst
+
+`nace_code` ağırlığı **1.0'da kaldı**. NACE gerçekten %100 tahmin
+([`docs/HEDEF_VERI_KAPSAMI.md`](docs/HEDEF_VERI_KAPSAMI.md) s.190, D-258); sistem "bu firma
+eksik" derken doğru söylüyor. Ağırlığı düşürmek tavanı **sahte** yükseltirdi — ölçümü
+gerçeğe değil, gerçeği ölçüme uydurmak olurdu. Kilidi ancak kanıt kaynağı açar
+(`BORC-VKN-01` / MERSİS); bu tur açılmadı.
+
+### Kural
+
+> **Biçim/sözlük doğrulaması kanıt değildir. Kaynak doğrular, şekil doğrulamaz.**
+> Ayırt etmeyen bir kontrol puana bağlanamaz.
+
+Mandallar ([`tests/test_panel_durustluk.py`](tests/test_panel_durustluk.py), kancada):
+`test_nace_puani_sozluge_veya_validity_kolonuna_bakmaz` ·
+`test_nace_kanit_kaynaklari_tahmin_etiketi_tasimaz`.
+**Kırılarak doğrulandı:** `NACE_KANIT_KAYNAKLARI`'ya `sector_default` eklendi → **3 kırmızı**
+(yeni iki mandal + mevcut D-252 mandalı), geri alındı → **19 yeşil** (17→19).
+
+### Karar A — `ac` yanlış kapı uyarısı (ürün sahibi onayı)
+
+[`chat.acik_sahipler()`](src/company_master/chat.py:50) aynı `task_id` altında **başka**
+ajanın açık kaydını döner; [`cmd_ac`](scripts/ajan_chat.py:34) stderr'e uyarır.
+**Engelleme yok** — ürün sahibi kararı: uyarı yeter. Saf fonksiyon, mevcut `oku()`'yu
+kullanır; yeni dosya, yeni bağımlılık yok. 6 mandal (15→21), `test_cli_uyariyi_cagirir`
+çağıranı zorlar (D-266).
+
+### Karar B — karar numarası mandalı kancaya bağlandı
+
+`karar_no.py` **değiştirilmedi**. Aranan koruma (`TAVAN_CATISMA = 1`,
+[`tests/test_karar_numara_tekligi.py`](tests/test_karar_numara_tekligi.py)) zaten vardı;
+eksik olan tek şey kancaya bağlı olmamasıydı — gönüllü koruma koruma değildir (D-261).
+[`scripts/hooks/pre-commit`](scripts/hooks/pre-commit) **tek satır** genişletildi.
+**Kırılarak doğrulandı:** deftere sahte `## D-286` başlığı eklendi → commit **durdu**
+(`KARAR NUMARASI CATISMASI ARTTI: ['D-281','D-286']`, `assert 2 <= 1`), geri alındı → yeşil.
+Kanca alt kümesinin yeni maliyeti **19,4 sn** (dosyadaki "~15 sn" notu düzeltildi).
+
+### Karar C — yazma kapısı ölçüldü, mimari değişmedi
+
+Canlı-DB ayrımına ürün sahibi **HAYIR** dedi (D-221/1); yerine kapı ölçüldü:
+
+| Ölçüm | Sayı |
+|---|---|
+| motor çağıran dosya | 163 |
+| gerçekten **YAZAN** (SQL + execute) | 70 |
+| doğrudan `create_engine` | 25 (24'ü `connection.py`'yi atlıyor) |
+| yazan ama motorsuz (gizli üçüncü yol) | **0** |
+| dağılım | `src/` 22 · `scripts/` 47 · **`web_dashboard/` 0** |
+
+Okuma: yazma kapısı **tek değil**; ama **panel hiç yazmıyor**, yani ayrımın dayandığı risk
+panelde yok. Göç kapısı tekliği (D-269) veri yazma kapısı için geçerli değilmiş.
+
+### Kapanan borç
+
+`BORC-NACE-DOGRULAMA-01` → **KAPANDI** (defterde işlendi, D-272/1).
+Ölçüm aracı `scripts/_nace_olcum.py` tek kullanımlıktı, **silindi** (D-241).
+
+**Referans:** D-221, D-241, D-245, D-249, D-252, D-258, D-260, D-261, D-266, D-269, D-272, D-286.
+
 ## Ilgili Nodlar
 
 - [[docs/BORC_DEFTERI]]
