@@ -4378,6 +4378,24 @@ diğer yüzü: tarama **varlığı** da uydurabilir. Ders: kimlik kalıbı iki u
 bağlanır. D-271'in 8/4 tavanı bu düzeltmeden sonra da tutuyor (uydurma kimlik
 `FIIL`/`SAYI` kümelerine girmiyordu).
 
+**Ve sonra mandal ikinci kez kırmızı verdi — sebebi bu paragrafın kendisiydi.**
+Kalıp düzeltmesi diskte duruyordu (`tests/test_dokuman_politikasi.py:104`, ölçüldü),
+ama yukarıdaki metin `VERI-GORUNURLUK-01` dizesini **tek başına** andığı için hayalet
+kimlik artık taranan gövdede **gerçekten** var (`AGENTS.md:4367`). Hayaleti kayda
+geçirmek hayaleti var etti. Mandalın gördüğü kimlik sayısı **26 → 27**.
+
+Karar: sayı kılıfına uydurulmadı, gerçeğe çekildi. `VERI-GORUNURLUK-01` deftere
+`IPTAL | D-272` olarak girdi — "böyle bir kimlik yok" açıklamasıyla; çıkarmanın tek
+yolu bu kaydı silmek olurdu. D-271'in tavanı 3 değil 4 yapmasıyla aynı karar.
+Genel ders: **metin tarayan mandalda gözlemci etkisi vardır** — bulguyu yazmak
+ölçümü değiştirir; değişikliği mandala değil deftere yazarsın.
+
+**Araç tuzağı (bu turda üçüncü kez):** `apply_diff` `docs/BORC_DEFTERI.md`'de üç kez
+tutmadı (%55/%54/%43), ve **çok satırlı `python -c` cmd.exe'de sessizce hiçbir şey
+yapmadı** — çıktı yok, çıkış kodu 0, dosya değişmemiş. Yalnız dosyayı sonradan
+ölçtüğüm için yakalandı; "komut geçti" ekranı kanıt değildir (D-260). Kural: tek
+satır `-c` veya gerçek dosya.
+
 ### 6. Rastgele sıra ilk kez ÜRETİLDİ — ve yeşil
 
 `requirements-dev.txt:8` `pytest-randomly>=3.15.0` **beyan ediyordu**, paket
@@ -4389,6 +4407,11 @@ değil**, var olan beyanın karşılığı; üretim bağımlılığı da değil.
 |---|---|---|
 | sabit | `-p no:randomly` | **4511 passed, 12 skipped** (170.87s) |
 | rastgele | `-p randomly --randomly-seed=272` | **4511 passed, 12 skipped** (185.94s) |
+| rastgele | `-p randomly --randomly-seed=273` | **4511 passed, 12 skipped** (204.21s) |
+
+Üçüncü satır §5'in ek metninden **sonra** koşuldu: bu kararın kendi düzenlemeleri
+takımı bozmadı. Tek tohum bir iddiadır, iki tohum bir ölçümdür; bundan sonra
+"rastgele sırada yeşil" cümlesi **tohum numarasıyla** yazılır, yoksa beyandır.
 
 Taban 4510 → 4511: fark `test_d272_borc_defteri_eksiksiz`. Toplama sayımı
 `4522 → koşu → 4522`, kayma yok.

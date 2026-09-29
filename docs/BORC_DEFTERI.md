@@ -55,10 +55,11 @@ yüzden ayrı bölümde durur. Silinmezler: adları `AGENTS.md`'de geçtiği sü
 | `VERI-NACE-KOLON-01` | 0 kaçak NACE etiketi, onaylandı | KURAL | D-260 |
 | `VERI-NACE-SOZLUK-01` | 3319 NACE kodu, onaylandı | KURAL | D-260 |
 | `VERI-NACE-TEMIZ-01` | 554 `invalid_cleared`, onaylandı | KURAL | D-260 |
+| `VERI-GORUNURLUK-01` | **böyle bir kimlik yok.** D-272/5'in anlattığı hayalet; o metni yazmak hayaleti gerçek bir dizeye çevirdi. Deftere iptal olarak girer, çünkü çıkarmanın yolu kaydı silmek olurdu | IPTAL | D-272 |
 
 ## Ölçülmüş sayılar (D-272)
 
-- `AGENTS.md`'de kimlik: **71**. Mandalın gördüğü (`BORC|VERI`): **26**. Dışında kalan: **45**.
+- `AGENTS.md`'de kimlik: **71**. Mandalın gördüğü (`BORC|VERI`): **27**. Dışında kalan: **45**.
 - Borç (gerçek): **18** — açık 4, kapandı 10, iptal 4.
 - **Kapanmış ama açık/çelişkili sanılan: 2** — `BORC-KOLON-DUSUR-01` ve `BORC-PANEL-TAVAN-01`.
   D-271/6 bunları "çelişki" ilan etti; çelişki yoktu, satır sırası yanlış okundu
@@ -66,6 +67,35 @@ yüzden ayrı bölümde durur. Silinmezler: adları `AGENTS.md`'de geçtiği sü
 - 45 kimlik mandalın regex kapsamı dışında (`NACE-*`, `KVKK-*`, `GOC-*`, `SEMA-*`…).
   Bu bilinen kör nokta; genişletme ayrı bir tur işi — kapsam büyütmek defteri şişirir,
   fayda ölçülmedi.
+- **26 → 27:** D-272/5 metni hayalet kimliği tek başına andığı için mandalın gördüğü kimlik
+  bir arttı. Kayıt tutmanın kendisi ölçümü değiştirdi; sayı kılıfına uydurulmadı, gerçeğe
+  çekildi (D-271'in tavanı 3 değil 4 yapmasıyla aynı karar).
+
+## Devir — sonraki oturum (D-272 sonrası)
+
+Bu bölüm devir notunun kaynağıdır (D-219 mantığı). Ajan hafıza dosyasına yazılmadı: ölçüldü,
+dört `*_project_context.md` dosyasında bu hattın hiçbir izi yok — hat panoya bağlı değil,
+doğrudan ürün sahibiyle yürüyor.
+
+- **Kaldığım yer:** D-272 yazıldı, commit'lendi. Alt depo `18fe5a6`, üst depo `120416d`.
+  Bu defterin hayalet satırı ve devir bloğu o commit'ten **sonra** eklendi.
+- **Test tabanı yeni:** **4511 passed, 12 skipped** — sabit sıra (`-p no:randomly`, 170.87s)
+  ve **iki** rastgele tohum (`--randomly-seed=272`, 185.94s; `=273`, 204.21s). Üçüncü koşu
+  bu dosyanın ve D-272/5'in son düzenlemelerinden **sonra** yapıldı; düzenlemeler takımı
+  bozmadı. Eski taban 4510'du; fark tam olarak yeni mandaldır. Toplama çerçevesi:
+  `4522 → koşu → 4522` (sapma yok).
+- **Sıra artık ölçülebilir:** `pytest-randomly` 5.0.0 kurulu. Bundan sonra "rastgele sırada
+  yeşil" iddiası **tohumla birlikte** yazılır, yoksa beyandır (D-260).
+- **Ürün sahibi kararı bekliyor (taşıma YAPILMADI):** eşzamanlı ajan izolasyonu, D-272/7'deki
+  üç seçenek. Önerim 1+2 (sıra düzeni + var olan kilidi zorlamak); ayrı worktree canlı
+  veritabanını ayırmadığı için tek başına yetmez.
+- **Açık 4 borç, öncelik ürün sahibinde:** `BORC-VKN-01` (kaynak yok, MERSIS A/B kararına
+  bağlı), `BORC-NACE-DOGRULAMA-01`, `BORC-SICIL-DAIRE-01` (§5 saklı karar), `BORC-SCRIPTS-01`.
+- **Araç tuzağı (bu turda üç kez):** `apply_diff` bu dosyada tutmadı; çok satırlı
+  `python -c` cmd.exe'de **sessizce hiçbir şey yapmadı** — çıktı yok, çıkış kodu 0.
+  Tek satır `-c` veya gerçek dosya kullan; "komut geçti" ekranı kanıt değil (D-260).
+- **Bir sonraki turda ilk iş:** bu defteri oku, `AGENTS.md`'yi baştan tarama. Borcun son sözü
+  **en yüksek D numarasında**dır, dosyadaki son satırda değil.
 
 ## Ilgili Nodlar
 
