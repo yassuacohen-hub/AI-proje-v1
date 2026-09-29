@@ -5317,6 +5317,132 @@ eşzamanlı tahsiste çakışmayı **önlemiyor, sadece sonradan haber veriyor**
 
 **Referans:** D-226, D-255, D-260, D-261, D-281, D-286, D-288, D-301.
 
+## D-303 — Kimlik çatalı, sahipsiz kilit, veri yazma kapısı ve tek repo (2026-09-29)
+
+Dört kesim, hepsi ölçümle. Devir notunun üç iddiası ölçümde **yanlış çıktı** (D-260 gereği
+beyan ediyorum — aşağıda).
+
+### 1) Karar numarası: sorun atomiklik değildi, **kimlik çatalıydı**
+
+Devir notu "tahsis atomik olsun" diyordu. Ölçüm: `karar_no.al()` **zaten atomik**
+(`os.open(..., O_CREAT|O_EXCL)`). Gerçek kök: kimlik **iki ayrı zincirden** okunuyordu.
+`karar_no.py` yalnız `HUGINN_AJAN` env'ine bakıyordu; kurulu olmadığı için D-300..302
+`bilinmeyen` adına tahsis edildi ve **kimin aldığı kayda geçmedi** — D-281/D-301 çift numara
+vakalarının zemini bu.
+
+**Kesim.** `kilit_zorla.ajan_kimligi()` projedeki **tek kimlik kaynağıdır**
+(`HUGINN_AJAN` > `git config huginn.ajan` > `user.name` içinde geçen bilinen ajan).
+`karar_no.py` artık bunu import ediyor. Kırarak doğrulandı: `KIMLIK = yasu` (eskiden
+`bilinmeyen`); bu karar `data/karar_tahsis/D-303.txt` = **yasu**.
+
+### 2) Kilit sahipsiz kalıyordu — `bayat()`
+
+Ölçüm: `data/orchestrator/file_locks.json` içinde `nace_coklu_ata.py` kilidi
+(`utku`, `2026-09-27T13:19:21`) **2 gündür** açıktı. Kilidin bırakılmama hâli ağacı süresiz
+bloke ediyordu.
+
+**Kesim.** `BAYAT_SAAT=24` (env ile ayarlanabilir) + `bayat()`; `ihlaller()` bayat kilitleri
+atlıyor. Kırarak doğrulandı: `bayat 2gun = True`, `bayat taze = False`,
+`bayat zamansiz = False` (zamansız kilit bayatlatılmaz — sahibi durur).
+
+**Kuyruk kurulmadı, bilerek.** Ölçüm üç ajan için kuyruğu haklı çıkarmadı; sahipsiz kilit
+tek gerçek arızaydı. `ponytail:` dosya kilidi + yaş sınırı — kuyruk, eşzamanlı yazma ölçülen
+bir sorun hâline gelirse.
+
+### 3) Veri yazma kapısı — kök sebep filtre değil, **kanonik liste yokluğu**
+
+| Ölçüm | Sonuç |
+|---|---|
+| `companies` / `source_records` | 9.412 / 10.601 |
+| Şablon `website_domain` | **2.666** (devir notu 2.142 diyordu — yanlış) |
+| Bu 2.666'nın kaynağı | **%100 tek kaynak:** `ostim.org.tr` / `web_scrape` |
+| Şablon e-posta / adres | 17 / 0 |
+| `companies.source_record_id` NULL | 3 |
+| `source_records.collected_at` NULL | 0 |
+| Bağımsız DB bağlantısı | **58** (devir notu 25 diyordu — yanlış) |
+| SQL yazan dosya | 79 |
+| Şablon listesini **kopyalayan** dosya | **23** (5 ayrı isimle: `GENERIC`, `PLACEHOLDER_DOMAINS`, `skip_domains`, `WEB_BLOCKLIST`, `_ALT_YAPI_WEB`) |
+
+Kök sebep: filtre eksikliği değil — **filtre 23 yerde vardı ve birbirinden sapmıştı**.
+
+**Şema düzeltmesi (kayda geçsin):** `companies` üzerinde `source`, `collected_at`,
+`postal_code`, `data_source`, `verified` **kolonları YOKTUR**. Köken zinciri
+`companies.source_record_id` → `source_records.source_id` → `sources` üzerinden gider.
+"Her yazmada `source`/`collected_at` doldur" talimatı bu şemada uygulanamaz.
+
+**Kesim.** `src/company_master/db/yazma_kapisi.py` — tek kanonik liste ve tek kapı:
+`SABLON_WEB`, `SABLON_EPOSTA`, `BOS_SAYILAN`, `temizle()`, `sablon_mu()`, `kabul()`.
+Yokluk 0 değil boştur (D-249); kökensiz kayıt işaretlenir (D-287); **veri silinmez**,
+yazılmaz/işaretlenir — silme ürün sahibindedir.
+
+**Mandal: `tests/test_yazma_kapisi.py`** (`MANDAL-SABLON-01`, `TAVAN_KOPYA=23`). Kopya sayısı
+artamaz; yeni kod kanonik listeyi **import eder, kopyalamaz**.
+
+**Kırma kanıtı (D-288).** Mandal ilk koşuda **kırmızı** verdi (`25 > 23`) — ve yakaladığı şey
+**benim kendi tek seferlik ölçüm betiklerimdi**. D-241 gereği silindiler → `7 passed`.
+Kapının kendisi de kırılarak doğrulandı: `yazma_kapisi: kapi calisiyor`.
+
+**Kancaya bağlandı (D-302 dersi).** `scripts/hooks/pre-commit` — fiilen koşan dosya budur
+(`core.hooksPath=scripts/hooks`); `.pre-commit-config.yaml` bu depoda **hiç okunmuyor**.
+
+**Kapsam bilerek dar tutuldu.** 58 bağlantının hepsi tek turda birleştirilmedi; kalan yollar
+`docs/VERI_YAZMA_KURALLARI.md` içinde **sıralı** yazılı (`BORC-YAZMA-KAPISI`).
+
+### 4) Dal belirsizliği kaza değildi — **iki ayrı depo** (ürün sahibi talimatı: tek repo)
+
+| | Üst depo `C:/Huginn Data Projesi` | İç depo `Huginn Data Insights` |
+|---|---|---|
+| Dal | `master` | `chore/monorepo-merge` |
+| Kanca | **yok** (sadece `.sample`) | `core.hooksPath=scripts/hooks` |
+| İç proje | `160000` gitlink, ama `.gitmodules` **YOK** → yarım submodule | — |
+
+Yarım submodule yüzünden her iç commit üst depoda ` M` üretiyor, "alt depo isaretcisi
+guncellendi" gürültü commit'leri doğuyor ve commit yanlış depoya düşebiliyordu (D-302).
+Üst `.gitignore` zaten D-221'de "iç depo = tek doğruluk kaynağı" diyordu; **yazılı kural ile
+fiilî durum çelişiyordu.**
+
+**Kesim (ürün sahibi kararı).** Gitlink index'ten kaldırıldı, `/Huginn Data Insights/`
+ignore'landı; üst depo commit `df82690`. Kırarak doğrulandı:
+`git add "Huginn Data Insights"` → **reddediliyor** (`-f` gerekiyor), sızıntı `0` satır.
+**Dal değiştirilmedi, birleştirilmedi** (devir notu §E yasağı).
+`ponytail:` üst depo hâlâ 64 kök ayar dosyasını izliyor; tümden kaldırmak ürün sahibinin kararı.
+
+### 5) Üçüncü çift numara aynı turda oldu — tahsisin zorlayanı yoktu (MANDAL-TAHSIS-01)
+
+Yukarıdaki kimlik kesimi yazıldıktan **sonra** ölçüldü: iç depo HEAD `ff210e4`
+(`feat(denetim): D-303 kapsamli veri denetimi...`) **başka bir ajanın** commit'i ve "D-303"
+diyor; ama `data/karar_tahsis/D-303.txt` = `yasu 2026-09-29T22:11:36`. O ajan `--al`
+**hiç çalıştırmamış.** D-281 ve D-301'den sonra **üçüncüsü**, aynı tur içinde.
+
+Ortak kök sebep: tahsis sistemi vardı, **zorlayanı yoktu** (D-261). Kimlik kesimi `--al`
+çalıştıranı korur — hiç çalıştırmayanı korumaz.
+
+**Kesim:** `karar_no.py --dogrula <mesaj_dosyasi>` + yeni `scripts/hooks/commit-msg` kancası.
+Commit mesajındaki her `D-NNN` için tahsis dosyası aranır; yoksa commit durur.
+Kırarak doğrulandı: `D-303` (tahsisli) → exit `0`; `D-999` (tahsissiz) → exit `1`.
+`ponytail:` yalnızca commit mesajına bakar, belgeye yazılan numarayı görmez.
+
+**Kapı ilk kurbanı kendisi oldu — bilinen sınır:** bu kaydın commit'i, mesaj gövdesinde
+kırma kanıtı olarak `D-999` yazdığı için **durduruldu**. Kanca `D-NNN`'i *sahiplenme* ile
+*alıntı* ayırt etmez. Yanlış alarm pahalı değil (mesajı yeniden yaz), sessiz geçiş pahalı
+olurdu; bu yön bilinçli seçildi. Kanıt cümlelerinde `D-<üç hane>` biçimi kullanılmaz —
+"tahsissiz numara" gibi yazılır. Ayrıştırma eklemek yeni bir yalan yüzeyidir.
+
+**Mandalın kendisi de mandallandı:** `tests/test_sahne_kapisi_kurulu.py` iki test daha alır —
+kanca dosyası var mı ve `--dogrula` çağrısı yorum satırı değil, fiilen yazılı mı.
+Bu mandal önce `pre-commit` listesine **konulmadan** yazılmıştı, yani D-302'nin hatasını
+birebir tekrarlıyordu; listeye eklendi, beşli birlikte `45 passed`.
+
+### Sıraya yazıldı, çözülmedi (D-226)
+
+`data/karar_tahsis/` içinde **D-281 ve D-301 çift tahsisli**, ayrıca **D-303** commit
+mesajı düzeyinde çakıştı (yukarıda). D-301'in ikinci sahibi `bilinmeyen` (kimlik çatalının
+kurbanı — yukarıda kesildi, geriye dönük düzeltilmedi).
+**Numara kaydırılmadı; hakemlik ürün sahibindedir.** İki kesim de bundan sonrasını korur,
+mevcut üçünü çözmez.
+
+**Referans:** D-221, D-226, D-241, D-249, D-260, D-261, D-281, D-287, D-288, D-299, D-301, D-302.
+
 ## Ilgili Nodlar
 
 - [[docs/BORC_DEFTERI]]

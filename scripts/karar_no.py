@@ -79,17 +79,44 @@ def al(ajan: str) -> int:
         return n
 
 
+def dogrula(mesaj: str) -> tuple[int, str]:
+    """Commit mesajindaki D-NNN tahsis edilmis mi: (exit_kodu, aciklama).
+
+    D-303 olcumu: uc kez ayni numara iki karara gitti (D-281, D-301, D-303).
+    Hepsinde commit mesaji "D-NNN" diyordu ama `data/karar_tahsis/D-NNN.txt`
+    yoktu -- yani `--al` hic calistirilmamisti. Gonullu koruma koruma degildir
+    (D-261). Bu fonksiyon commit-msg kancasindan cagrilir.
+    ponytail: yalnizca commit mesajina bakar; belgeye yazilan numarayi gormez.
+    """
+    istenen = {int(n) for n in re.findall(r"\bD-(\d{1,3})\b", mesaj)}
+    if not (eksik := sorted(istenen - tahsisli())):
+        return 0, ""
+    ad = ", ".join(f"D-{n}" for n in eksik)
+    return 1, (f"TAHSIS EDILMEMIS KARAR NUMARASI: {ad}\n"
+               f"Once al: python scripts/karar_no.py --al\n"
+               f"(Uc kez ayni numara iki karara gitti: D-281, D-301, D-303.)")
+
+
 def main() -> int:
+    if "--dogrula" in sys.argv:
+        yol = Path(sys.argv[sys.argv.index("--dogrula") + 1])
+        kod, aciklama = dogrula(yol.read_text(encoding="utf-8", errors="replace"))
+        if kod:
+            print(aciklama, file=sys.stderr)
+        return kod
     h = havuz()
     for yol, d in zip(HAVUZ, h):
         print(f"{yol.name}: {len(d)} baslik, max=D-{max(d) if d else 0}")
     if c := catismalar():
         print(f"CATISMA: {['D-%d' % n for n in c]}", file=sys.stderr)
     if "--al" in sys.argv:
-        # ponytail: ajan adi git'ten; tahsis ancak TUM ajanlar `--al` kullanirsa
-        # tam korur. Yukseltme: karar yazan her yol bu kapidan gecirilir.
-        ad = os.environ.get("HUGINN_AJAN") or "bilinmeyen"
-        print(f"TAHSIS EDILDI = D-{al(ad)}")
+        # D-303: kimlik TEK kaynaktan (kilit_zorla.ajan_kimligi). Once burada
+        # yalnizca HUGINN_AJAN'a bakiliyordu; kurulu olmadigi icin D-300..302
+        # "bilinmeyen" adina tahsis edildi ve kim aldigi kayda gecmedi.
+        # ponytail: tahsis ancak TUM ajanlar `--al` kullanirsa tam korur.
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from kilit_zorla import ajan_kimligi
+        print(f"TAHSIS EDILDI = D-{al(ajan_kimligi() or 'bilinmeyen')}")
     else:
         print(f"sonraki bos numara = D-{sonraki()}")
     return 0

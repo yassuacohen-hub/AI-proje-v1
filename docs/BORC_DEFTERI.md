@@ -29,12 +29,15 @@ yanlış okudu — altı tur üst üste (D-265, D-266, D-267/1, D-268/1, D-271/1
 | `BORC-KIMLIK-ANAHTAR-01` | `config/certs/selfsigned.key` (gerçek RSA özel anahtar) `90c4702` ile elle commit edilmiş; blob `216cfdd…` hâlâ ulaşılabilir. **D-293 ölçümü:** commit **hiçbir dalda/etikette/uzakta yok** (`for-each-ref --contains` boş; uzaktaki dal ebeveyn `993ce8a`'da) — yalnız yerel cline checkpoint ref'leri yaşatıyor. Sertifika `CN=localhost`/`SAN=DNS:localhost`, tek tüketicisi `config/nginx.conf` ve o da hiçbir serviste mount edilmiyor. Tarih **temizlenmedi**; A (rotasyon) / B (filter-repo, 421 commit) kararı ürün sahibinde | ACIK | D-288 | D-293'te kapsam ölçüldü; mandal `tests/test_kimlik_dosyalari.py` (kırılarak doğrulandı) — kesme kararı bekliyor |
 | `BORC-SICIL-DAIRE-01` | 619 firmada sicil no var, sicil dairesi yok. **D-295 ölçümü:** eksik olan tam **594**; bu alan puan kapısında `number AND office` istediği için 619 sicilin **25'i** puan alıyor, 594'ü **kayıp**. Daire tamamlanırsa ortalama +0.06 (ağırlık 1.0 × 594/9412) | ACIK | D-260 | — |
 | `BORC-PANEL-ADRES-01` | `web_dashboard/tabs/admin_executive.py::_firma_kayitlari()` **var olmayan kolonu** okuyor: `SELECT … address_line … FROM companies` → canlı `psycopg.errors.UndefinedColumn`. Veri `companies.address`'te (5798 dolu). `address_line` yalnız `company_locations`'ta var, o tablo **0 satır**. Test `tests/test_admin_executive.py::test_firma_kayitlari_30_gun_esigi` **sahte engine** ile hazır satır döndürdüğü için yeşil — D-288'in "yeşil test de beyandır" kuralının canlı örneği | ACIK | D-295 | — |
-| `BORC-SITE-COP-01` | `website_domain` 5446 dolu görünüyor ama **2779 kayıt yalnız 58 adresi paylaşıyor**: `http://www.isim.org.tr` **2142** kez, `ostimistihdam.com` 474 kez. Ayrıca 3799 kayıtta (%69.8) alan adı ile unvan arasında **tek ortak sözcük yok**. Dizin/portal bağlantısı firma sitesi sayılıyor (D-292: doluluk ≠ bilgi) | ACIK | D-295 | — |
+| `BORC-SITE-COP-01` | `website_domain` 5446 dolu görünüyor ama **2779 kayıt yalnız 58 adresi paylaşıyor**: `http://www.isim.org.tr` **2142** kez, `ostimistihdam.com` 474 kez. Ayrıca 3799 kayıtta (%69.8) alan adı ile unvan arasında **tek ortak sözcük yok**. Dizin/portal bağlantısı firma sitesi sayılıyor (D-292: doluluk ≠ bilgi). **D-303 düzeltmesi:** şablon/yer-tutucu sayılan toplam **2666** (devir notu "2142" diyordu — o yalnız tek desenin sayısıydı); hepsi tek yazma yolundan (`ostim.org.tr` / `web_scrape`) girmiş, kök sebep kaynak değil **kapısız yazma** (`BORC-YAZMA-KAPISI-01`) | ACIK | D-295 | — |
 | `BORC-ILETISIM-ORTAK-01` | `primary_phone`: 1057 kayıt 498 yinelenen numarayı paylaşıyor (tepe `905344018261` ×10); 913 numara ne cep ne sabit biçiminde. `primary_email`: 444 kayıt 196 yinelenen adresi paylaşıyor, tepe değer **yer tutucu** `bilinmeyen@bilinmeyen.com` ×17. Bu kayıtlar puan alıyor ama firmaya ait olduğu doğrulanmadı | ACIK | D-295 | — |
 | `BORC-ADRES-KALITE-01` | `address` 5798 dolu (%61.6) ve tamamı puan alıyor; ama 4795'inde (%82.7) "ankara" **geçmiyor**, 626'sı (%10.8) 20 karakterden kısa, **0'ında** posta kodu var. Adres ağırlığı 1.5 — puanın en pahalı ikinci alanı doğrulanmamış metinle besleniyor | ACIK | D-295 | — |
 | `BORC-ESLESME-KAPSAM-01` | `entity_resolution` 8905 satır tutuyor ama **8820 firmanın** (9412'nin %93.7'si) hiç eşleşme kaydı yok. Tablo dolu görünüyor, kapsamı yok. `source_records` tarafında yalnız 12 yetim var — sorun kaynak bağında değil, çözümleme kapsamında | ACIK | D-295 | — |
 | `BORC-KAPI-KURULUM-01` | `MANDAL-SAHNE-01` yazılıydı ama **koşmuyordu**: kapı yalnız `.pre-commit-config.yaml`'a yazılmıştı, oysa `git config core.hooksPath` = `scripts/hooks` ve `pre_commit` modülü kurulu değil. Kanıt: `8a25798` commit'i **24 dosyayla** (kendi eşiğim 20) kapıdan geçti ve **dört mandalımın hepsini** içine aldı — kapının önlemek için kurulduğu olay, kapıya rağmen, kapının kendi dosyasına oldu | KAPANDI | D-302 | D-302: `scripts/hooks/pre-commit`'e eklendi + `tests/test_sahne_kapisi_kurulu.py` mandalı (kanca satırı silindi → `1 failed`, geri yüklendi → `8 passed`) |
-| `BORC-KARAR-ESZAMAN-01` | `karar_no.py` eşzamanlı tahsiste çakışmayı **önlemiyor**, yalnız sonradan haber veriyor. Ölçüm: `data/karar_tahsis/D-301.txt` = `bilinmeyen` — başka bir ajan D-301'i benimle aynı anda aldı (`8a25798` başlığı da "D-301" diyor). **İkinci çift numara vakası**; birincisi D-281, o da hâlâ `CATISMA` veriyor. Hakemlik ürün sahibinde (D-226) | ACIK | D-302 | — |
+| `BORC-KARAR-ESZAMAN-01` | `karar_no.py` eşzamanlı tahsiste çakışmayı **önlemiyor**, yalnız sonradan haber veriyor. Ölçüm: `data/karar_tahsis/D-301.txt` = `bilinmeyen` — başka bir ajan D-301'i benimle aynı anda aldı (`8a25798` başlığı da "D-301" diyor). **İkinci çift numara vakası**; birincisi D-281, o da hâlâ `CATISMA` veriyor. Hakemlik ürün sahibinde (D-226) | KAPANDI | D-302 | D-303: iki kök sebep ayrı ayrı kesildi — (1) `al()` zaten atomikti, çatal **kimlikteydi**: `karar_no.py` yalnız `HUGINN_AJAN`'a bakıyordu, `kilit_zorla.ajan_kimligi()` tek kaynak yapıldı (`bilinmeyen` → `yasu`); (2) kilit sahipsiz kalıyordu → `bayat()` + `BAYAT_SAAT=24`. **Hakemlik hâlâ ürün sahibinde**: mevcut D-281/D-301/D-303 çakışmaları çözülmedi |
+| `BORC-TAHSIS-ZORLAMA-01` | Tahsis sistemi vardı, **zorlayanı yoktu** (D-261). Ölçüm: iç depo HEAD `ff210e4` "D-303 kapsamli veri denetimi" diyor, **başka bir ajanın** commit'i; ama `data/karar_tahsis/D-303.txt` = `yasu` — o ajan `--al` hiç çalıştırmamış. D-281 ve D-301'den sonra **üçüncü** vaka, aynı tur içinde | KAPANDI | D-303 | D-303: `karar_no.py --dogrula` + `scripts/hooks/commit-msg` kancası; kırarak doğrulandı (`D-303`→exit 0, `D-999`→exit 1). Mandal `tests/test_sahne_kapisi_kurulu.py`, `pre-commit` listesine eklendi (`45 passed`) |
+| `BORC-TEK-REPO-01` | `Huginn Data Insights` üst depoda `160000` **gitlink** olarak duruyordu ama `.gitmodules` **yoktu** → yarım submodule. Her iç commit üst depoda ` M` üretiyor, "alt depo isaretcisi guncellendi" gürültü commit'leri doğuyor, commit yanlış depoya düşebiliyordu. Üst depoda kanca da yok (`.git/hooks` sadece `.sample`); tüm koruma iç depoda | KAPANDI | D-303 | D-303 (ürün sahibi kararı): gitlink index'ten kaldırıldı, `/Huginn Data Insights/` ignore'landı, üst depo commit `df82690` (`delete mode 160000`). Kırarak: `git add "Huginn Data Insights"` **reddediliyor**, sızıntı `0` satır. `ponytail:` üst depo hâlâ 64 kök ayar dosyasını izliyor |
+| `BORC-YAZMA-KAPISI-01` | Veriye **tek kapı yoktu**: 58 ayrı bağlantı noktası, 79 SQL dosyası, **23 dosyada** aynı temizleme mantığının 5 ayrı kopyası. Kök sebep filtre yokluğu değil, **kanonik liste yokluğu** — herkes kendi listesini yazmış | ACIK | D-303 | D-303: `src/company_master/db/yazma_kapisi.py` (tek kanonik liste + `kabul()`) + `docs/VERI_YAZMA_KURALLARI.md` + `MANDAL-SABLON-01` (`TAVAN_KOPYA=23`, kırılarak doğrulandı: `25>23` kırmızı). **23 kopya birleştirilmedi** — kapsam uyarısı gereği yalnız tavanlandı |
 | `BORC-VKN-01` | VKN kanalı ölü, kaynak bulunamadı | ACIK | D-253 | — |
 | `BORC-AD-VARYANT-01` | 31 kısaltma varyantı | IPTAL | D-261 | D-263 |
 | `BORC-ADLANDIRMA-01` | kimlik hiç açılmamıştı (devir notu uydurdu) | IPTAL | — | D-271 |
@@ -81,7 +84,46 @@ yüzden ayrı bölümde durur. Silinmezler: adları `AGENTS.md`'de geçtiği sü
   bir arttı. Kayıt tutmanın kendisi ölçümü değiştirdi; sayı kılıfına uydurulmadı, gerçeğe
   çekildi (D-271'in tavanı 3 değil 4 yapmasıyla aynı karar).
 
-## Devir — sonraki oturum (D-301 sonrası)
+## Devir — sonraki oturum (D-303 sonrası)
+
+Bu tur **üç kesim + bir düzeltme**. Gerekçe: `AGENTS.md` D-303 (beş bölüm).
+Teslim: [`docs/YOL_HARITASI.md`](YOL_HARITASI.md), [`docs/VERI_YAZMA_KURALLARI.md`](VERI_YAZMA_KURALLARI.md).
+
+### Kesilenler — hepsi kırılarak doğrulandı (D-288)
+
+| Ne | Dosya | Kırma kanıtı |
+|---|---|---|
+| Kimlik çatalı (kilit) | `scripts/karar_no.py` → `kilit_zorla.ajan_kimligi()` | tahsis sahibi `bilinmeyen` → `yasu` |
+| Bayat kilit | `scripts/kilit_zorla.py::bayat()`, `BAYAT_SAAT=24` | `2gun=True`, `taze=False`, `zamansiz=False` |
+| Veri yazma kapısı | `src/company_master/db/yazma_kapisi.py` | `MANDAL-SABLON-01` `25>23` → kırmızı → `7 passed` |
+| Tahsis zorlaması | `scripts/hooks/commit-msg` + `karar_no.py --dogrula` | `D-303`→exit 0, `D-999`→exit 1 |
+| Tek repo tek sistem | üst `.gitignore`, commit `df82690` | `git add "Huginn Data Insights"` **reddediliyor**, sızıntı 0 satır |
+
+`pre-commit` listesi beşe çıktı (`test_sahne_kapisi_kurulu.py` eklendi) → `45 passed`.
+
+### Devir notunun yanlış çıkan iddiaları (D-260: beyan kanıt değildir)
+
+| İddia | Ölçüm |
+|---|---|
+| "tahsis atomik olsun" | `al()` **zaten** `O_CREAT\|O_EXCL`; sorun kimlikteydi |
+| "2142 şablon site" | **2666** (2142 yalnız tek desen) |
+| "25 ayrı yazma yolu" | **58** bağlantı noktası, **79** SQL dosyası |
+| "11 dosyada kopya" | **23** dosya |
+
+### Sonraki turun ilk işleri
+
+1. **Hakemlik ürün sahibinde:** D-281, D-301, **D-303** çift numaralı. Üç kesim de
+   bundan sonrasını korur, **mevcut üçünü çözmez**. Numara kaydırmak geçmişi bozar.
+2. `BORC-YAZMA-KAPISI-01` açık: 23 kopya birleştirilmedi, yalnız tavanlandı.
+   En çok yalan üreten yol kesildi; kalanı sıraya yazıldı.
+3. **MERSIS etkisi hiç ölçülmedi** — ürün sahibi A/B kararı bunu bekliyor.
+4. Şema gerçeği: `companies` tablosunda `source`, `collected_at`, `postal_code`
+   kolonları **yok**. Köken zinciri `companies.source_record_id` →
+   `source_records.source_id` → `sources` üzerinden kurulur.
+
+---
+
+## Devir — D-301 turu (tarihî kayıt)
 
 Bu tur **dört mandal** kuruldu. Hepsi kırılarak doğrulandı (D-288: kırmadığın yeşil yeşil değildir).
 Teslim: [`docs/YOL_HARITASI.md`](YOL_HARITASI.md). Gerekçe: `AGENTS.md` D-301.

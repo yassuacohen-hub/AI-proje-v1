@@ -3,7 +3,7 @@
 > Bu dosya **özet ve işaretçidir**, kopya değildir. Ayrıntı: [`docs/BORC_DEFTERI.md`](BORC_DEFTERI.md),
 > kural ve karar kaydı: [`AGENTS.md`](../AGENTS.md), kapsam: [`docs/HEDEF_VERI_KAPSAMI.md`](HEDEF_VERI_KAPSAMI.md).
 > Her satır bir borç kimliğine veya D numarasına bağlıdır. **Ölçülmemiş sayı yazılmaz** — "ölçülmedi" yazılır.
-> Son güncelleme: D-301 turu (2026-09-29).
+> Son güncelleme: D-303 turu (2026-09-29).
 
 ---
 
@@ -62,8 +62,9 @@ Hiçbiri ajan tarafından kesilemez (D-8, D-226).
 | **KVKK-TCKN-02** | ölçülmedi | `BORC-KVKK-TCKN-02` |
 | **KAPSAM-HEDEF-01** | ölçülmedi | `BORC-KAPSAM-HEDEF-01` |
 | **VERI-02** | ölçülmedi | `BORC-VERI-02` |
-| **Üst depo özel repo** | ölçülmedi | D-295 devir |
-| **Yazma kapısı birleştirme** | ölçülmedi | D-295 devir |
+| **Üst depo özel repo** | **KAPANDI (PO kararı)** — D-303: üst depo pasifleştirildi, tek repo tek sistem; gitlink kaldırıldı, commit `df82690` | `BORC-TEK-REPO-01` |
+| **Yazma kapısı birleştirme** | **23 dosyadaki kopya mantık birleştirilmedi**, yalnız tavanlandı (`TAVAN_KOPYA=23`). Tek kanonik kapı kuruldu, eski yollar hâlâ duruyor. Birleştirme maliyeti ölçülmedi | `BORC-YAZMA-KAPISI-01` |
+| **Çift karar numarası hakemliği** | **D-281, D-301, D-303** aynı numarayı iki karara verdi. Üç kesim sonrakini korur, mevcut üçünü **çözmez**. Numara kaydırmak geçmişi bozar — karar PO'da | D-303 |
 | **Şablon verinin silinmesi** | ~2.769 kayıt (bkz. §5). D-299'da **silinmedi**, yalnız sayılmadı. Silme kararı PO'da | D-299 |
 | **Mükerrer tekilleştirme** | yasu ölçtü: 16 unvan grubu → 9 birleştirilebilir, 7 ayrı kalmalı. Uygulanmadı | yasu, bu tur |
 
@@ -97,6 +98,10 @@ Dış kaynağa bağlı **değil**. Etki sırasına göre:
 | 8 | CI sabit sırada koşuyor → "N passed" beyan, kanıt değil | **KESİLDİ** — `pytest-randomly` beyan edilmişti ama `test` job'ı kurmuyordu; kurulum + `-p randomly` eklendi | D-301 |
 | 9 | NACE %88,1 dolu ama puanlanmıyor; "tahmin" etiketiyle gösterim | **AÇIK** — D-287 puan vermemekte haklı, gösterim ayrı | D-287 |
 | 10 | `pytest-timeout` yerelde kurulu değil (CI'da kurulu) — `--timeout` bayrağı yerelde `unrecognized arguments` veriyor | **AÇIK** — küçük, `requirements-dev.txt` satırı | D-301 yan bulgu |
+| 11 | Veriye **tek kapı yok**: 58 bağlantı noktası, 79 SQL dosyası, **23 dosyada** aynı temizleme mantığının 5 kopyası. Şablon web toplamı **2.666** (2142 değil), hepsi tek yoldan (`ostim.org.tr`/`web_scrape`) | **KISMEN KESİLDİ** — `db/yazma_kapisi.py` tek kanonik liste + `docs/VERI_YAZMA_KURALLARI.md` + `MANDAL-SABLON-01`. 23 kopya **birleştirilmedi** | `BORC-YAZMA-KAPISI-01`, D-303 |
+| 12 | Karar numarası tahsisi **gönüllüydü** — üçüncü çift numara (`ff210e4` "D-303" diyor, tahsis `yasu` adına) | **KESİLDİ** — `commit-msg` kancası + `karar_no.py --dogrula`; kırarak: `D-999`→exit 1 | `BORC-TAHSIS-ZORLAMA-01`, D-303 |
+| 13 | Kilit sahipsiz kalıyordu; kimlik iki kaynaktan okunuyordu (`bilinmeyen` tahsisler) | **KESİLDİ** — `ajan_kimligi()` tek kaynak + `bayat()` `BAYAT_SAAT=24` | `BORC-KARAR-ESZAMAN-01`, D-303 |
+| 14 | Üst depo yarım submodule (`160000` gitlink, `.gitmodules` yok) → gürültü commit'leri, commit yanlış depoya düşüyordu | **KESİLDİ** — ignore + `df82690`; `git add` reddediliyor, sızıntı 0 | `BORC-TEK-REPO-01`, D-303 |
 
 ---
 
@@ -109,9 +114,14 @@ Dış kaynağa bağlı **değil**. Etki sırasına göre:
 | Otomasyon durdurma | PO kararı | D-295 devir |
 | Git temizliği | PO kararı | D-295 devir |
 | **D-281 numara çatışması** | `AGENTS.md` D-281 = index hayaleti, `BORC_DEFTERI.md` D-281 = OSTİM kaynak araştırması. **İki farklı karar, aynı numara.** Yasu'nun satırı → D-226 gereği dokunulmadı | `karar_no.py --al` çıktısı |
+| **D-301 ve D-303 numara çatışması** | D-301'in ikinci sahibi `bilinmeyen` (kimlik çatalı, D-303'te kesildi). D-303'ü başka bir ajan `--al` çalıştırmadan kullandı (`ff210e4`). **Geriye dönük düzeltilmedi**; hakemlik PO'da | D-303 |
 
 ---
 
 ## Ölçülmedi diye yazılanlar
 
-Bu haritada **13 satır "ölçülmedi"** taşıyor. Sayı uydurmak yerine boşluk bırakıldı (D-260: beyan kanıt değildir).
+Bu haritada **12 satır "ölçülmedi"** taşıyor (D-303'te sayıldı; 13 yazıyordu, iki satır ölçülüp
+kapandı, bir satır eklendi). Sayı uydurmak yerine boşluk bırakıldı (D-260: beyan kanıt değildir).
+
+**En pahalı boşluk: MERSIS.** Kolon %100 boş, etki hiç ölçülmedi; ürün sahibinin A/B kararı
+buna bağlı. Sonraki turun ilk ölçümü bu olmalı.

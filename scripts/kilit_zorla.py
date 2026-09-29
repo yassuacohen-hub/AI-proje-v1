@@ -6,7 +6,9 @@ okuyan 48 yer vardi, **zorlayan yoktu** (D-261: zorlayani olmayan kayit beyandir
 Bu betik `scripts/hooks/pre-commit`ten cagrilir: staged dosya baskasinin
 kilidindeyse commit durur.
 
-Kimlik sirasi: `git config huginn.ajan` > `user.name` icinde gecen bilinen ajan.
+Kimlik sirasi: `HUGINN_AJAN` > `git config huginn.ajan` > `user.name` icinde gecen
+bilinen ajan. D-303: bu fonksiyon projedeki TEK kimlik kaynagidir; `karar_no.py`
+de buradan okur (once iki ayri zincir vardi, D-301 iki ajana ayni anda verildi).
 ponytail: kimlik cozulemezse UYARIR ve gecer — ucu birden bloke etmemek icin.
 Yukseltme: her ajan `git config huginn.ajan <ad>` kurdugunda burasi `return 1` olur.
 
@@ -18,6 +20,7 @@ import json
 import os
 import subprocess
 import sys
+from datetime import datetime, timedelta
 from pathlib import Path
 
 KOK = Path(__file__).resolve().parents[1]
@@ -25,6 +28,9 @@ KOK = Path(__file__).resolve().parents[1]
 KILIT = Path(os.environ.get("HUGINN_KILIT_YOL")
              or KOK / "data" / "orchestrator" / "file_locks.json")
 AJANLAR = ("yasu", "utku", "ihsan", "salih", "orkestrator")
+# D-303: sahipsiz kilit olculdu (utku/nace_coklu_ata.py 2 gun acik kaldi).
+# Bu yasi asan kilit dusmus sayilir — kilit sonsuza kadar agaci bloke etmez.
+BAYAT_SAAT = int(os.environ.get("HUGINN_KILIT_BAYAT_SAAT", "24"))
 
 
 def _git(*arg: str) -> str:
@@ -34,18 +40,31 @@ def _git(*arg: str) -> str:
 
 
 def ajan_kimligi() -> str | None:
-    """Kilit sahipligiyle karsilastirilabilir ajan adi (yoksa None)."""
-    if ad := _git("config", "huginn.ajan"):
+    """Kilit sahipligiyle karsilastirilabilir ajan adi (yoksa None).
+
+    D-303: projedeki tek kimlik kaynagi. `karar_no.py` de bunu cagirir.
+    """
+    if ad := (os.environ.get("HUGINN_AJAN") or _git("config", "huginn.ajan")):
         return ad.strip().lower()
     adi = _git("config", "user.name").lower()
     return next((a for a in AJANLAR if a in adi), None)
 
 
+def bayat(k: dict, simdi: datetime | None = None) -> bool:
+    """Kilit `BAYAT_SAAT`'ten eskiyse sahipsiz sayilir."""
+    try:
+        t = datetime.fromisoformat(k["kilitlendi"])
+    except (KeyError, TypeError, ValueError):
+        return False  # zamansiz kilit: bayatlatma, sahibi dursun
+    return (simdi or datetime.now()) - t > timedelta(hours=BAYAT_SAAT)
+
+
 def ihlaller(staged: list[str], ben: str | None,
              kilitler: dict) -> list[tuple[str, dict]]:
-    """Staged yollardan `ben` disinda bir ajanin kilidinde olanlar."""
+    """Staged yollardan `ben` disinda bir ajanin TAZE kilidinde olanlar."""
     return [(y, kilitler[y]) for y in staged
-            if y in kilitler and kilitler[y]["sahip"] != ben]
+            if y in kilitler and kilitler[y]["sahip"] != ben
+            and not bayat(kilitler[y])]
 
 
 def main() -> int:

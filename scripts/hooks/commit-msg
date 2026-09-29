@@ -1,0 +1,12 @@
+#!/bin/sh
+# MANDAL-TAHSIS-01 (D-303): commit mesajindaki D-NNN tahsis edilmis mi.
+#
+# Olcum: ayni numara UC kez iki karara gitti (D-281, D-301, D-303). Ucunde de
+# commit mesaji "D-NNN" diyor ama `data/karar_tahsis/D-NNN.txt` yok -- yani
+# `karar_no.py --al` hic calistirilmamis. Tahsis sistemi vardi, ZORLAYANI yoktu
+# (D-261: zorlayani olmayan kayit beyandir).
+#
+# Kurulum pre-commit ile ayni: git config core.hooksPath scripts/hooks
+# Acil durumda: git commit --no-verify
+set -e
+python scripts/karar_no.py --dogrula "$1"

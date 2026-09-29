@@ -18,5 +18,10 @@ echo "[pre-commit] panel durustluk mandallari..."
 # Goc defteri de burada: sema degisikligi commit'e tek basina giremesin
 # (D-251/3). Karar numarasi tekligi de eklendi (D-287): yaris iki kez oldu,
 # gonullu koruma koruma degildir (D-261) — mandal 0.7 sn, yeni altyapi yok.
-# Uculu birlikte ~15 sn; tam takim (~170 sn) kancaya konmaz.
-python -m pytest tests/test_panel_durustluk.py tests/test_goc_defteri.py tests/test_karar_numara_tekligi.py -q
+# MANDAL-SABLON-01 (D-303): veri yazma kapisi. Olcum: 2666 kayitta sablon web,
+# hepsi tek kaynaktan; kok sebep kanonik liste yoklugu (23 dosyada kopya).
+# MANDAL-TAHSIS-01 (D-303): kancalarin KENDISI kosuyor mu. Bu mandal listede
+# olmadan yazilmisti -- yani "kapi yazili ama kosmuyor" hatasini tam olarak
+# tekrarliyordu (D-302). Kendi kuralini kendine uygula.
+# Besli birlikte ~16 sn; tam takim (~170 sn) kancaya konmaz.
+python -m pytest tests/test_panel_durustluk.py tests/test_goc_defteri.py tests/test_karar_numara_tekligi.py tests/test_yazma_kapisi.py tests/test_sahne_kapisi_kurulu.py -q
