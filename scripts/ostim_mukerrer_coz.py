@@ -91,6 +91,95 @@ def _guvenli(alan: str, deger) -> bool:
     return True
 
 
+#: D-300: telefon uzunlugu olculdu. Turk mobil 11, sabit 10-11 hanedir.
+#:   12+ haneli degerler BIRBIRINE BITISIK URLESIYOR: `903123852424`
+#:   = "0 312 385 24 24" -> bastaki 0 ve aradaki bosluk kaybolmus.
+#:   Cozum: Turk numaralari 5 haneli alan kodu + 7 haneli abone
+#:   gecer. 12 hanede bolup ILK 10 haneyi al ve boslugu onune koy.
+_TEL_MIN, _TEL_MAX = 10, 11
+
+
+def telefonlari_temizle(ham: list) -> list[str]:
+    """Bitisik URLESIYEN telefon numaralarini duzeltir. D-300.
+
+    Turk sabit: 0312 385 40 00 -> 10 hane
+    Turk mobil: 0532 123 45 67 -> 11 hane
+    12+ hane   : iki numara birlestmis veya format bozulmus.
+    Cift sayi bile varsa AYIRIRIZ, tek sayiyi KIRPARIZ (veri uydurulmaz).
+    """
+    temiz: list[str] = []
+    for t in ham or []:
+        s = re.sub(r"\D", "", str(t))
+        if _TEL_MIN <= len(s) <= _TEL_MAX:
+            temiz.append(s)
+            continue
+        if len(s) > _TEL_MAX:
+            # 12 hane: bolup bak - iki parcaya ayrilabiliyor mu?
+            bas, kalan = s[:10], s[10:]
+            if kalan and 3 <= len(kalan) <= 4:
+                temiz.append(bas)
+                continue                     # ikinci parca numara degil
+            # 12 haneyi tek numara kabul etme; 90/0 prefiksini dene
+            govde = s[2:] if s.startswith("90") else s.lstrip("0")
+            if _TEL_MIN <= len(govde) <= _TEL_MAX:
+                temiz.append(govde)
+                continue
+        # AYIRILAMADI -> kirp BIRAKILIR (uydurma numara uretme)
+    return sorted(set(temiz))
+
+
+#: D-300: adres alanina sayfa blogu sizmis olabilir
+#: ("Merkez: X Sube: Y", "Fabrika: X Lojistik adresi: Y", "Tel: X").
+#: Bunlar TEK adres DEGILDIR; ama ikisi de GERCEK adres oldugu icin
+#: ilki alinir ve kirp BIRAKILMAZ (bilgi kaybi olmaz).
+#:
+#: DIKKAT (D-300 duzeltme): Turkce "Ş" = U+015E, "ş" = U+015F, "Ü" =
+#: U+00DC, "ü" = U+00FC. Duz "Şube" yazmak terminal/editor kodlamasina
+#: gore BOZULUR ve desen HIC eslesmez. Bu yuzden karakter sinifi
+#: kullanilir: S, s, Ş, ş, ŞU, şu, ŞÜ, şÜ hepsi eslesir.
+_SS = "[Ss\u015e\u015f\u0158]"        # S / s / Ş / ş / Ş
+_UU = "[uU\u00fc\u0131\u0130\u00d6\u00f6]"   # u / U / ü / Ü / ı / İ / ö / Ö
+_ADRES_BLOGU = re.compile(
+    rf"({_SS}\s*{_UU}be|Lojistik\s+adresi|Fabrika|Merkez|Telefon|Tel|"
+    rf"E-?Posta|Web\s*Site|Sekt{_UU}r|Faks)\s*:", re.IGNORECASE)
+_ADRES_MAX = 120
+_ADRES_MIN = 8
+
+
+def adresi_temizle(ham) -> str | None:
+    """Adres alanindaki sayfa blogunu kirpar. D-300."""
+    if not ham:
+        return None
+    s = str(ham).strip()
+    if not s:
+        return None
+    # "Merkez: X Sube: Y" -> X al (ilk blok), "Sube:" ve sonrasi atilir.
+    # D-300: `m.start() > 0` sarti YANLIS: ilk etiket metnin BASINDA
+    # oldugunda ("Merkez: ...") hicbir sey kesilmezdi. Dogru kural:
+    # etiket + iki nokta + BOSLUK geliyorsa o etiketten SONRASI alinir.
+    m = _ADRES_BLOGU.search(s)
+    if m:
+        s = s[m.end():].strip()
+        # sonraki bloklari da kes
+        m2 = _ADRES_BLOGU.search(s)
+        if m2:
+            s = s[:m2.start()].strip(" ,;-")
+    s = re.sub(r"^\s*(Merkez|Şube|Fabrika)\s*:\s*", "", s, flags=re.I)
+    s = s.strip(" :;-")
+    # cok uzunsa: ilk adres benzeri blok
+    if len(s) > _ADRES_MAX:
+        parca = re.split(r"(?<=\d)\s*[/,;]\s+(?=[A-ZÇĞİÖŞÜa-zçğıöşü])", s)
+        if parca and len(parca[0]) <= _ADRES_MAX:
+            s = parca[0]
+    s = re.sub(r"\s+", " ", s).strip(" ,;-")
+    # adres icinde RAKAM olmali ve makul uzunlukta olmali
+    if len(s) < _ADRES_MIN or not re.search(r"\d", s):
+        return None
+    return s
+
+
+
+
 def _yukle(yol: pathlib.Path) -> list[dict]:
     if not yol.is_file():
         return []
@@ -116,6 +205,15 @@ def temizle(kayit: dict) -> tuple[dict, list[str]]:
                 [] if alan in ("telefonler", "emailler") else None)
     kayit["vergi_no"] = None              # D-282: bu kaynakta yok
     kayit["vergi_no_kaynagi"] = None
+    # D-300: telefon/adres alanlarinda sayfa blogu ve bitisik urlesme var
+    temiz_tel = telefonlari_temizle(kayit.get("telefonler"))
+    if temiz_tel != (kayit.get("telefonler") or []):
+        kirp.append("telefonler")
+        kayit["telefonler"] = temiz_tel
+    temiz_adres = adresi_temizle(kayit.get("adres"))
+    if temiz_adres != kayit.get("adres"):
+        kirp.append("adres")
+        kayit["adres"] = temiz_adres
     # K-2: kaynak kolonlari AYRI ve BOS BIRAKILMAZ. Eski detayli dosyada
     # bu kolonlar 4.969 kayitta YOK; birlestirme sirasinda eklendi.
     kayit.setdefault("kaynak_adi", "ostim")

@@ -1,5 +1,5 @@
 {
-  "uretim_zamani": "2026-09-29T20:24:28",
+  "uretim_zamani": "2026-09-29T20:54:59",
   "girdi": {
     "tarama": 3338,
     "mevcut_detayli": 5040,
@@ -17,11 +17,13 @@
     "mukerrer_unvan_kaldi": 29
   },
   "filtre": {
-    "temizlenen_kayit": 4969,
+    "temizlenen_kayit": 8023,
     "alan_bazinda": {
       "web_sitesi": 2593,
       "sektor": 4969,
       "sosyal_medya": 4967,
+      "telefonler": 7623,
+      "adres": 117,
       "osb_parsel": 3
     }
   },
@@ -32,12 +34,12 @@
   },
   "doluluk": {
     "adres": {
-      "dolu": 8203,
-      "oran_yuzde": 98.9
+      "dolu": 8091,
+      "oran_yuzde": 97.5
     },
     "telefonler": {
-      "dolu": 7635,
-      "oran_yuzde": 92.0
+      "dolu": 7506,
+      "oran_yuzde": 90.5
     },
     "emailler": {
       "dolu": 5418,
