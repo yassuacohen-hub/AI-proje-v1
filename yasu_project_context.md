@@ -123,7 +123,31 @@
   Python içinde yaz; doğrulamayı `x.encode('unicode_escape')` ile yap.
 
 
+## Bilmen Gereken Her Şey Chat'e Yazılır (D-306, KAHİN 2026-09-29)
+
+> "bilmem gereken her şeyi bundan sonra chatte yazacaksın, orkestrator'a
+> ihsana yazacaksın"
+
+**Benim için zorunlu:** ölçüm, bulgu, hata, karar, engel — hepsi chat'e.
+
+```bash
+python scripts/ajan_chat.py ac yasu <TASK_ID> "<bulgu>" --cozum "<oneri>" --onem yuksek
+python scripts/chat_gonder.py --to ihsan --type koordinasyon --task-id <TASK_ID> --mesaj "<metin>"
+```
+
+**Sessiz kalmak yasak.** "Sorun yok" demek, ölçtüğünü yazmamaktır.
+Bulgu yoksa da "kontrol edildi, temiz" diye yazılır.
+
+- Ölçüm sonucu → `ajan_chat.py ac`
+- Gerçek hata → `ajan_chat.py ac`
+- Yapılamayan iş + sebebi → `ajan_chat.py ac`
+- KAHİN kararı gereken → `chat_gonder.py --to ihsan`
+- Teslim durumu / kapı → `ajan_chat.py ac`
+
 ## Bilinen Açıklar (kapsam dışı backlog)
+
+- **D-306 BİLDİRME KURALI (KAHİN):** öğrenmem gereken her şeyi
+  chat'e yazacağım, orkestrator'a/ihsan'a. Sessiz kalmak yasak.
 
 - 112 brif D-217 şablonuna uymuyor — bilinçli mandal, geriye dönük düzeltilmiyor
 - `_ARSIV_tek_kullanimlik/` 130 dosya: silinip silinmeyeceği **KAHİN kararı bekliyor**

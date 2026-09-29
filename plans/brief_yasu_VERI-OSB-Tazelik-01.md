@@ -220,6 +220,34 @@ Kurallar: kaynak dosyalara dokunulmadı · hiçbir kayıt silinmedi ·
 - Kanıtsız durum beyanı yasak: her "yapıldı" satırı `dosya:satır` gösterir.
 - **Teslimden önce** `**Hub:**` dosyasının "Kapanan işler" bölümüne yaz (B-14).
 
+## 🔴 D-306 BİLDİRME KURALI (KAHİN, 2026-09-29)
+
+> "bilmem gereken her şeyi bundan sonra chatte yazacaksın, orkestrator'a
+> ihsana yazacaksın"
+
+**Bu kural D-306'nun ikinci maddesidir ve tüm ajanlar için geçerlidir.**
+
+Ölçüm, bulgu, hata, karar, engel — **hepsi** chat kaydına girer:
+
+| Ne | Nereye |
+|---|---|
+| Ölçüm sonucu (sayı, oran) | `scripts/ajan_chat.py ac` |
+| Bulgu / gerçek hata | `scripts/ajan_chat.py ac` |
+| Yapılamayan iş + sebebi | `scripts/ajan_chat.py ac` |
+| KAHİN'e gereken karar | `scripts/chat_gonder.py --to ihsan` |
+| Teslim durumu / kapı | `scripts/ajan_chat.py ac` |
+
+**Yasak:** sessiz kalmak. "Sorun yok" demek, ölçtüğünü yazmamaktır.
+Bulgu yoksa da **kontrol edildi ve temiz** diye yazılır.
+
+**Bu turda tespit edilen, benim alanımda OLMAYAN 3 hata:**
+1. `gorev_at.py:80` — D-57 regex'inde `->` yerine `ÔåÆ` (mojibake,
+   UTF-8 çift kodlama) → **hiçbir görev atanamıyor**
+2. `companies` tablosunda `son_teyit_tarihi` kolonu → D-251 şema dili
+   ihlali (55 → 56. kolon; benim eklediğim kolonlar değil)
+3. `0037_tsg_olay_hatti.sql` migration'ı göç defterinde kayıtlı değil
+   → `test_goc_defteri` kırık
+
 ## Ajan chat zorunlu (D-210 · D-217)
 - Varsayım tutmuyorsa → `ac` ile sorun aç, **uydurma, durma**
 - Bir faz tıkandıysa → sorun aç, sonraki faza geç
