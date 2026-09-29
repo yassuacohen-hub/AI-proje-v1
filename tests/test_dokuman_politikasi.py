@@ -98,7 +98,10 @@ def test_kural4_yasak_ad_kalibi_artmiyor() -> None:
 
 # D-271 — borç başlığı fiil taşımaz. Segment bazlı: "UC" gibi kısa belirteçler
 # kelime içinde kaybolmasın diye kimlik "-" ile bölünür, parça karşılaştırılır.
-BORC_KIMLIK = re.compile(r"\b(?:BORC|VERI)-[A-Z0-9-]+-\d{2}\b")
+# D-272: kimlik SOLDAN bağlanır. `\b` tireyi sınır saydığı için eski kalıp
+# `ALTYAPI-VERI-GORUNURLUK-01` içinden olmayan bir `VERI-GORUNURLUK-01`
+# kimliği uyduruyordu — D-270'in aynası, mandalın kendi kör noktası.
+BORC_KIMLIK = re.compile(r"(?<![A-Z0-9-])(?:BORC|VERI)-[A-Z0-9-]+-\d{2}\b")
 FIIL = {"DUSUR", "DOGRULAMA", "DEDUP", "TEMIZ", "BAG", "SOZLUK", "BETIK"}
 SAYI = {"IKI", "UC", "IKIZ", "TEK"}
 
@@ -117,6 +120,26 @@ def _fiilli_sayili() -> tuple[list[str], list[str]]:
         if parca & SAYI:
             sayili.append(k)
     return fiilli, sayili
+
+
+def test_d272_borc_defteri_eksiksiz() -> None:
+    """D-272: AGENTS.md'de adı geçen her borç kimliği defterde yazılı olmalı.
+
+    Mandalın yönü tek: AGENTS.md → defter. Tersi (defterde olup AGENTS.md'de
+    olmayan) kontrol edilmez, çünkü kapanan borcun D-kaydı silinmez; defter
+    AGENTS.md'nin üst kümesi olamaz ama alt kümesi de olmamalı.
+
+    D-270 dersi uygulandı: kimlikler defterde **sabit dize** olarak durur,
+    parçadan kurulmaz; iki tarafta aynı BORC_KIMLIK regexi tarar.
+    """
+    defter = KOK / "docs" / "BORC_DEFTERI.md"
+    assert defter.exists(), f"borç defteri yok: {defter}"
+    yazili = set(BORC_KIMLIK.findall(defter.read_text(encoding="utf-8")))
+    eksik = sorted(_borc_kimlikleri() - yazili)
+    assert not eksik, (
+        f"AGENTS.md'de adı geçip docs/BORC_DEFTERI.md'de olmayan {len(eksik)} kimlik: "
+        f"{eksik}. Borç kapatan/açan D-kaydı aynı turda defteri de güncellemeli."
+    )
 
 
 def test_d271_borc_adinda_fiil_artmiyor() -> None:

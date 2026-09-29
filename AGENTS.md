@@ -4311,3 +4311,143 @@ geçerlidir; kaymışsa sonuç beyan edilemez.
 
 **Referans:** D-211, D-222, D-226, D-227, D-230, D-241, D-243, D-258,
 D-260, D-263, D-265, D-266, D-268.
+
+## D-272 — Defterin kendisi sırasız; borcun son sözü satırda değil D numarasındadır (2026-09-29)
+
+**Tür:** kök neden + uygulama. `BORC-PANO-BORC-00` **kapandı**.
+
+### 1. Altı turun kök nedeni: AGENTS.md kronolojik değil
+
+D-245'ten sonraki başlık dizisi ölçüldü:
+
+```
+[245…263, 266, 265, 264, 267, 268, 270, 269, 271]
+```
+
+Sırasız geçiş: `(266→265)`, `(265→264)`, `(270→269)`. Yani bir borcun **son sözü
+dosyada aşağıda değil**, en büyük D numarasındadır. Her tur satır sırasıyla okudu
+ve yanlış okudu — D-265/1, D-266/1, D-267/1, D-268/1, D-271/1 aynı desenin beş
+tekrarıdır. Ad yanlıştı diye düzeltilen şey **adlandırma değil, okuma yönüydü**.
+
+### 2. D-271'in "çelişki" iddiası da yanlıştı — çelişki yoktu
+
+D-271/6 iki borcu çelişkili ilan etti. D-numarası atanarak ölçüldüğünde çelişki
+yok, **kronoloji var**:
+
+| Borç | D-271'in gördüğü | Gerçek |
+|---|---|---|
+| `BORC-PANEL-TAVAN-01` | s2920 "kapanmadı" vs s2945 "kapandı" | D-256 kapanmadı → **D-258 kapandı** |
+| `BORC-KOLON-DUSUR-01` | s3037 "hâlâ duruyor" vs s3121 "kapandı" | D-258 duruyor → **D-259 kapandı** |
+
+Kendi bulgumu geri alıyorum: bunlar **kapanmış**, açık sanılan iki borçtu — devir
+notunun "en tehlikelisi" dediği sınıfın tam örneği. Sayı: **2**.
+
+### 3. Tek kanonik kayıt: `docs/BORC_DEFTERI.md`
+
+18 borç (açık 4, kapandı 10, iptal 4) + 8 kural kimliği tek tabloda. Yeni araç,
+şema, tablo **yok** — 30 satırlık liste veritabanı istemez (D-240 mantığı).
+
+Açık kalan dört borç: `BORC-VKN-01`, `BORC-NACE-DOGRULAMA-01`,
+`BORC-SICIL-DAIRE-01`, `BORC-SCRIPTS-01`.
+
+### 4. Kural (D-272)
+
+1. Bir D-kaydı borç kapatıyor/iptal ediyorsa **aynı turda** `docs/BORC_DEFTERI.md`
+   güncellenir. Deftersiz kapanış kapanış değildir.
+2. Borç durumu **satır sırasından okunmaz**; kaynak ve kapanış D numarası yazılır.
+3. Devir notu borçları defterden okur, hafızadan değil.
+4. Durum dört değer alır: `ACIK` · `KAPANDI` · `IPTAL` · `KURAL`.
+
+**Mandal:** `tests/test_dokuman_politikasi.py::test_d272_borc_defteri_eksiksiz` —
+AGENTS.md'de adı geçip defterde olmayan kimlik varsa düşer. Yön tek (AGENTS.md →
+defter); tersi denetlenmez, çünkü kapanan borcun D-kaydı silinmez.
+
+### 5. Mandal kendi kör noktasını ilk koşuşta gösterdi — D-270'in aynası
+
+`test_d272` ilk koşuşta kırmızı verdi: `VERI-GORUNURLUK-01` defterde yok. **Böyle
+bir kimlik yok.** D-271'in `BORC_KIMLIK` kalıbı `\b` ile başlıyordu; `\b` tireyi
+sözcük sınırı sayar, bu yüzden `ALTYAPI-VERI-GORUNURLUK-01` içinden olmayan bir
+kimlik uyduruyordu. Kalıp soldan bağlandı:
+
+```python
+BORC_KIMLIK = re.compile(r"(?<![A-Z0-9-])(?:BORC|VERI)-[A-Z0-9-]+-\d{2}\b")
+```
+
+D-270 metin taramasının **yokluğu** kanıtlayamadığını söylüyordu; bu, aynı kusurun
+diğer yüzü: tarama **varlığı** da uydurabilir. Ders: kimlik kalıbı iki uçtan da
+bağlanır. D-271'in 8/4 tavanı bu düzeltmeden sonra da tutuyor (uydurma kimlik
+`FIIL`/`SAYI` kümelerine girmiyordu).
+
+### 6. Rastgele sıra ilk kez ÜRETİLDİ — ve yeşil
+
+`requirements-dev.txt:8` `pytest-randomly>=3.15.0` **beyan ediyordu**, paket
+**kurulu değildi** (D-260: beyan kanıt değildir). `TEST-ISO-02` tarihsel olarak
+"teslim" sayılmıştı; teslim hiç etki etmemişti. Kuruldu — **yeni bağımlılık
+değil**, var olan beyanın karşılığı; üretim bağımlılığı da değil.
+
+| Sıra | Komut | Sonuç |
+|---|---|---|
+| sabit | `-p no:randomly` | **4511 passed, 12 skipped** (170.87s) |
+| rastgele | `-p randomly --randomly-seed=272` | **4511 passed, 12 skipped** (185.94s) |
+
+Taban 4510 → 4511: fark `test_d272_borc_defteri_eksiksiz`. Toplama sayımı
+`4522 → koşu → 4522`, kayma yok.
+
+**Yan bulgu:** kod tabanında **hiçbir config dosyasında `-p no:randomly` yok**
+(`pytest.ini` tarandı, 0 eşleşme). Bayraklar yalnız AGENTS.md ve
+`docs/plans/TEST-ISO-02_brief.md` metninde yaşıyordu — temizlenecek bayrak yoktu,
+temizlenecek **iddia** vardı.
+
+### 7. Eşzamanlı ajan — ölçüldü, karar ürün sahibinde (taşıma YAPILMADI)
+
+| Ölçüm | Kanıt |
+|---|---|
+| Aynı ağaca yazan ajan | **3** — utku, ihsan, yasu (`data/orchestrator/file_locks.json`, 7 kilit) |
+| Commit imzası | tek: `Yasua <yassuacohen@gmail.com>` — imza ayrımı **yok** |
+| `.git/index.lock` | ölçüm anında yok |
+| `.worktreeinclude` | **ölü** — 73 kural, hepsi `.gitignore`'un (95) içinde; yalnız-kendinde: **0**. Hiçbir kod okumuyor |
+| Süper depo worktree | 2 (`master 1c3dd8c`, `.kilo/worktrees/bow-tarsier` detached; alt modül **boş**) |
+| `scripts/ajan_cakisma_kilidi.py` | **kilitli ama diskte yok** — çakışma kilidi henüz kurulmamış (`ALTYAPI-AJAN-CAKISMA-01`, ihsan, plan) |
+
+`.worktreeinclude` bir worktree düzeni **değildir**, `.gitignore` kopyasıdır.
+"Tasarlanmış düzen var" varsayımı ölçümle çürütüldü.
+
+**Seçenekler (karar ürün sahibinde, D-221/1: yol taşımanın bedeli faydasından
+büyük olabilir):**
+
+1. **Sıra düzeni (en ucuz):** tek ajan yazar, diğerleri bekler. Yeni kod 0.
+   `file_locks.json` zaten var ve 48 yerden okunuyor — eksik olan **zorlama**.
+2. **Kilidi zorla (orta):** `ALTYAPI-AJAN-CAKISMA-01` tamamlanır; yazma öncesi
+   kilit kontrolü kapı olur. Ölçülen boşluk: dosya yok, kural kâğıtta.
+3. **Ayrı worktree (en pahalı):** her ajan kendi ağacında. Bedel: alt modül her
+   ağaçta ayrı doldurulur, `.venv` çoğalır, göç defteri tek canlı DB'ye bakmaya
+   devam eder — **izolasyon testte var, veritabanında yok**. `.worktreeinclude`
+   silinmeli veya gerçekten kullanılmalı.
+
+Benim önerim **1 + 2**: kilit altyapısı zaten kurulu, eksik olan zorlama; worktree
+ise DB'yi ayırmadığı için asıl çakışmayı çözmez.
+
+### 8. Kapanan / iptal / açık borç
+
+- `BORC-PANO-BORC-00` — **kapandı**: `docs/BORC_DEFTERI.md` kuruldu, mandal kırılarak doğrulandı.
+- Yeni borç **açılmadı**. Defterin 45 kimliği kapsamayan regexi bilinen kör nokta
+  olarak deftere yazıldı; borç değil, ölçülmüş sınır.
+
+### 9. Doğrulama (çalıştırılmış komut)
+
+```cmd
+python -m pytest tests/test_dokuman_politikasi.py -q
+# 7 passed
+
+# kırma denemesi: defterden BORC-VKN-01 çıkarıldı
+# AssertionError: ...olmayan 1 kimlik: ['BORC-VKN-01']  -> 1 failed
+# geri alındı -> 7 passed
+
+python -m pytest -p no:randomly -q
+# 4511 passed, 12 skipped in 170.87s
+
+python -m pytest -p randomly --randomly-seed=272 -q
+# 4511 passed, 12 skipped in 185.94s
+```
+
+**Referans:** D-221, D-240, D-241, D-260, D-265, D-266, D-270, D-271.
