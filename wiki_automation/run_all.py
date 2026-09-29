@@ -40,11 +40,25 @@ def run_script(script: str, args: list[str]) -> int:
     return result.returncode
 
 
+#: D-288: otomasyonun sahneleyebilecegi yollar. Veri ve not; kod/test/betik DEGIL.
+#: Beyaz liste, cunku kara liste yeni dizin acildiginda sessizce sizdirir ve
+#: tarihe giren sir geri alinamaz.
+SAHNELENEBILIR = ("data", "docs", "hubs", "plans", "indexes")
+
+
 def git_commit() -> int:
+    """D-288: `git add -A` yerine beyaz liste.
+
+    Wiki otomasyonu yalnizca urettigi notlari sahneler. Eskiden `-A` ile tum
+    agaci aliyordu; ucustaki kod, yarim is ve D-241 geregi silinmis araclar
+    ayrim yapilmadan tarihe giriyordu.
+    Mandal: tests/test_otomasyon_sahneleme.py
+    """
     week = datetime.now(timezone.utc).isocalendar()[1]
     msg = f"Y{week}: auto-wiki update"
     print(f"\n>>> git commit: {msg}")
-    subprocess.run(["git", "add", "-A"], cwd=str(PROJECT_ROOT), check=False)
+    mevcut = [p for p in SAHNELENEBILIR if (PROJECT_ROOT / p).is_dir()]
+    subprocess.run(["git", "add", "--", *mevcut], cwd=str(PROJECT_ROOT), check=False)
     r = subprocess.run(["git", "commit", "-m", msg], cwd=str(PROJECT_ROOT))
     return r.returncode
 

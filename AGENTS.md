@@ -748,7 +748,8 @@ python scripts/ajan_chat.py bulgula "Tasarım (D-192)" "Font boyut tutarsız" --
 **Çözüm:** İki katmanlı koruma:
 
 1. **Ajan Sorumluluğu (Zorunlu)**
-   - Her görev bitiminde `git add -A && git commit -m "<görev_özeti>"` ile commit et. Push'u tetik sisteminde veya oturum kapatılmadan önce yap.
+   - Her görev bitiminde **kendi dokunduğun dosyaları tek tek sahneleyip** commit et: `git add -- <yol> [<yol>...] && git commit -m "<görev_özeti>"`. Push'u tetik sisteminde veya oturum kapatılmadan önce yap.
+     > **D-288 düzeltmesi (2026-09-29):** bu satır eskiden `git add -A` emrediyordu. Kural kitabının kendisi, "toptan sahneleme yok" kuralını ihlal ediyordu — ağaçta üç ajan var, `-A` başkasının uçuştaki işini de tarihe sokar. Ölçüm ve gerekçe: D-288 kaydı. Mandal: `tests/test_otomasyon_sahneleme.py`.
    - Uncommitted dosyalar 30 dakika sonra `git stash` ile saklanır (otomatik cron, `scripts/git_stash_guard.py`, D-193 ile yürürlüğe girecek).
    - Stash mesajı: `AUTO-STASH [session_start_timestamp] [modified_files_count]` — session bitiminde roo'ya alert gider.
 
@@ -4858,6 +4859,91 @@ panelde yok. Göç kapısı tekliği (D-269) veri yazma kapısı için geçerli 
 Ölçüm aracı `scripts/_nace_olcum.py` tek kullanımlıktı, **silindi** (D-241).
 
 **Referans:** D-221, D-241, D-245, D-249, D-252, D-258, D-260, D-261, D-266, D-269, D-272, D-286.
+
+## D-288 — Otomasyon toptan sahneleme yapamaz (2026-09-29)
+
+### Bulgu
+
+Günde iki kez çalışan bir zamanlanmış görev tüm ağacı `git add -A` ile sahneliyordu.
+
+- **Otomasyon:** `scripts/git_auto_push.bat`, Windows Zamanlanmış Görev `\Huginn Git Push`,
+  **iki tetik** (00:01 ve 12:01, günlük), ikisi de `2026-09-11`'den beri, kuran `EXCALIBUR\yasin`.
+  Son çalışma 29.09.2026 12:01:01, sonraki 30.09.2026 00:01:00.
+- **Kaç yol:** kodda **iki** toptan sahneleme noktası — `scripts/git_auto_push.bat:33` ve
+  `wiki_automation/run_all.py` `git_commit()`. Diğer Huginn görevleri (DB Backup, Nöbetçi,
+  Telegram Bot, TetikSenk, KILO-BackupRotate) commit atmıyor; ölçüldü.
+- **Etki:** `Otomatik gunluk commit` başlıklı **64 commit**, **2150 benzersiz dosya**.
+  Dağılım: `data_worktree` 507, `data` 349, `scripts` 233, `src` 217,
+  `_ARSIV_tek_kullanimlik` 160, `tests` 143, kök 141, `docs` 92, `.claude` 84.
+  Yani kod ve test, otomasyon eliyle tarihe girdi.
+- **Kural çelişkisi:** kural kitabının kendisi (`AGENTS.md`, D-193 maddesi) ajanlara
+  `git add -A && git commit` **emrediyordu**. Zorlayıcı eksik değildi sadece; yazılı kural
+  ikiye bölünmüştü. D-261 deseninin daha kötü hali: kural kuralla çelişiyor.
+
+### Sır araması (zorunluydu, yapıldı)
+
+`git log --all --diff-filter=AM` ile `.env`, `*.key`, `*.pem`, `*secret*`, `*token*`,
+`*password*`, `*credential*` desenleri tarandı.
+
+- **Otomatik commit'lerin içinde sır YOK.** Çıkan isimler yalnızca sır *aracı*:
+  `scripts/rotate_secrets.py`, `tests/test_secrets_rotation.py`, bir kurulum raporu.
+- **Ama tarihte gerçek bir özel anahtar var:** `config/certs/selfsigned.key`,
+  içeriği `-----BEGIN RSA PRIVATE KEY-----`. Ekleyen commit `90c4702` (2026-09-20).
+  HEAD ağacında **yok**, izlenmiyor (`git ls-files` boş) — **ama** `90c4702` HEAD'in
+  atası (`git merge-base --is-ancestor` → 0) ve blob ulaşılabilir:
+  `216cfdd540712a8c327ceb1cd4bc1ec37c6048fe`. **Otomasyonun ürünü değil, elle girmiş.**
+- `workspace/external/cursor_grok/.../leak.py` = `API_KEY = 'secret123'`, kasıtlı sahte fikstür.
+
+**Temizlik YAPILMADI.** Tarih yazmak geri dönüşsüzdür; karar ürün sahibinindir.
+
+### Karar
+
+`git add -A` **beyaz listeye** çevrildi. Otomasyon durdurulmadı (ürün sahibinin kararı).
+
+Ölçülen seçenekler: **(A)** otomasyonu durdur → günlük yedek kaybolur, PO kararı, yapılmadı.
+**(B)** beyaz liste → **uygulandı**, en küçük değişiklik, yedek yaşamaya devam eder.
+**(C)** `pre-commit`'e bırak → kanca commit **anında** çalışır, `add`'i engellemez; yetmez.
+
+Kapsam: `data docs hubs plans indexes`. `data_worktree` bilerek dışarıda — D-228'de tasfiye
+edildi, diskte yok (`git worktree list` tek ağaç gösteriyor).
+
+### Kural
+
+**Hiçbir betik toptan sahneleme yapmaz.** `git add -A`, `git add --all`, `git add .` yasak;
+yol vererek sahnele: `git add -- <yol> [<yol>...]`.
+
+Beyaz liste, kara liste değil: kara liste yeni bir dizin açıldığında **sessizce** sızdırır ve
+tarihe giren tek bir kimlik dosyası geri alınamaz. Bu bir güvenlik sınırıdır, kolaylık değil.
+
+### Kanıt
+
+Mandal: `tests/test_otomasyon_sahneleme.py` — `git ls-files` üzerinden izlenen yürütülebilir
+dosyaları tarar (diske değil), yorum/docstring soyar (kuralı *anlatan* metin ihlal değildir),
+kendini muaf tutar.
+
+**Kırarak doğrulandı ve mandal ilk sürümünde YALANCI YEŞİLDİ.** İlk desen düz `git` arıyordu;
+`.bat` git'i `"%GIT%"` değişkeniyle çağırdığı için gerçek `"%GIT%" add -A` satırını
+**kaçırıyordu**. İlk koşuda gelen kırmızı, çalışan koddan değil kendi gerekçe yorumumdan
+geliyordu. Kırma testi olmasaydı bu mandal hiç çalışmadan yeşil duracaktı — D-260'ın
+(beyan kanıt değildir) mandallara uygulanmış hâli: **yeşil test de beyandır, kırılana kadar.**
+Desen `%GIT%` / `$GIT` biçimlerini kapsayacak şekilde düzeltildi, `.bat` ve `.py` yolları
+ayrı ayrı kırılıp kırmızı görüldü, geri alındı.
+
+### Kapanan borç
+
+`_ARSIV_tek_kullanimlik/_pytest_rerun.txt` sahneden çıkarıldı (`git rm --cached`);
+`test_zaman_damgali_yedek_git_te_izlenmiyor` yeşil.
+
+`.gitignore` neden tutmadı (ölçüldü): kural eksikliği değil, **kapsam hatası**.
+`/_*.txt` baştaki eğik çizgi yüzünden yalnız köke bağlıydı, alt dizine inmiyordu;
+`git check-ignore -v` çıkış kodu 1 ve çıktısı boştu — hiçbir desen eşleşmemişti.
+`_pytest_rerun*` eklendi, doğrulandı.
+
+**Yan bulgu, kesilmedi:** `_ARSIV_tek_kullanimlik/` altında **~160 izlenen dosya** var
+(tek kullanımlık `check_*`, `fix_*`, `run_*` betikleri + `kilo_skills_yedek/`).
+`BORC-SCRIPTS-01` DONDURULMUŞ durumda; ölçüldü, rapor edildi, dokunulmadı.
+
+**Referans:** D-193 (düzeltildi), D-226, D-228, D-229, D-241, D-260, D-261, D-267, D-270, D-281, D-286.
 
 ## Ilgili Nodlar
 

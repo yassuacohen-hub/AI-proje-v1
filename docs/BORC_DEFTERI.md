@@ -23,7 +23,7 @@ yanlış okudu — altı tur üst üste (D-265, D-266, D-267/1, D-268/1, D-271/1
 |---|---|---|---|---|
 | `BORC-NACE-DOGRULAMA-01` | `nace_validity` alanı kaynaksız | KAPANDI | D-258 | D-287: doğrulama **yapılamaz değil, anlamsız** — sözlük var (3319) ama yetim kod **0**, hiçbir şeyi ayırt etmiyor; `verified` değeri hiç üretilmiyor, kolon `src/`de hiç **okunmuyor**. Ağırlık çekilmedi (kilit dürüst), puan kapısı iki mandalla korundu |
 | `BORC-PANO-BORC-00` | borç listesinin kanonik kaydı yok | KAPANDI | D-271 | D-272 |
-| `BORC-SCRIPTS-01` | `scripts/` altında 41 `_*` girdi (29 `.py` hepsi derlenir, **0 çürük**, üretim çağıranı **0**); kökte ayrıca **76 index hayaleti** tek kullanımlık betik. D-281'de ölçüldü ve **tavanlandı** (76/2), kesme ürün sahibinde | ACIK | D-255 | — |
+| `BORC-SCRIPTS-01` | `scripts/` altında 41 `_*` girdi (29 `.py` hepsi derlenir, **0 çürük**, üretim çağıranı **0**); kökte ayrıca **76 index hayaleti** tek kullanımlık betik. D-281'de ölçüldü ve **tavanlandı** (76/2), kesme ürün sahibinde. **D-288 eki:** `_ARSIV_tek_kullanimlik/` altında ayrıca **~160 izlenen dosya** var — aynı sapmanın ikinci yuvası, otomasyonun `git add -A`'sı ile büyümüştü; kapı kapatıldı, mevcut dosyalar **kesilmedi** (sahiplik belirsiz) | ACIK | D-255 | — |
 | `BORC-KARAR-NUMARA-01` | karar numarası **iki ayrı dosyadan** tahsis ediliyordu (`AGENTS.md` max D-281, bu defter max D-282); çakışma: **D-281 iki karara birden** verilmiş. D-227 mandalı yalnız `AGENTS.md`'yi ve yalnız `(D-NNN — KAH` biçimini tarıdığı için çatışma görünmezdi | KAPANDI | D-281 | D-286: `scripts/karar_no.py` tek havuz + `TAVAN_CATISMA=1` mandalı (kırılarak doğrulandı; D-283 eşzamanlı ajan yarışında çakıştı, **mandal yakaladı**, kayıt D-286'e taşındı — tavan yükseltilmedi) |
 | `BORC-AJAN-HAFIZA-01` | `yasu_project_context.md` **213 satır > 200** (D-219 tavanı); mandal kırmızı: `tests/test_dokuman_politikasi.py::test_d219_ajan_context_dosyalari`. **SAHİBİNDE** — başka ajanın hafıza dosyası, bu turda kesilmedi (D-226/sahiplik) | ACIK | D-286 | — |
 | `BORC-SICIL-DAIRE-01` | 619 firmada sicil no var, sicil dairesi yok | ACIK | D-260 | — |
@@ -73,7 +73,114 @@ yüzden ayrı bölümde durur. Silinmezler: adları `AGENTS.md`'de geçtiği sü
   bir arttı. Kayıt tutmanın kendisi ölçümü değiştirdi; sayı kılıfına uydurulmadı, gerçeğe
   çekildi (D-271'in tavanı 3 değil 4 yapmasıyla aynı karar).
 
-## Devir — sonraki oturum (D-287 sonrası)
+## Devir — sonraki oturum (D-288 sonrası)
+
+Bu turda otomasyonun git kapısı daraltıldı. Aşağıdaki D-287 bölümü **tarihî kayıttır**,
+güncel durum bu başlığın altındadır.
+
+### Bu turda bitenler (D-288)
+
+| İş | Sonuç | Kanıt |
+|---|---|---|
+| Otomasyon nerede yaşıyor | `scripts/git_auto_push.bat`, Zamanlanmış Görev `\Huginn Git Push`, **iki tetik** (00:01 + 12:01, günlük), 2026-09-11'den beri, kuran `EXCALIBUR\yasin` | `schtasks /query /xml ONE` → `<Command>…git_auto_push.bat</Command>`, iki `<StartBoundary>` |
+| Kaç yol var | **2** toptan sahneleme: `git_auto_push.bat:33` + `wiki_automation/run_all.py::git_commit` | `git grep -n -E "git add (-A\|--all\|\.)"` |
+| Tarih etkisi | **64** otomatik commit, **2150** benzersiz dosya (`src/` 217, `tests/` 143, `scripts/` 233, `_ARSIV…` 160) | `git log --name-only --grep=…` + Counter |
+| Kapı daraltıldı | her iki yolda beyaz liste: `data docs hubs plans indexes` | docstring/REM gerekçe (D-267) |
+| Mandal | `tests/test_otomasyon_sahneleme.py` (2 test) | **kırarak** doğrulandı, aşağıya bak |
+| Yeni kırmızı kesildi | `_ARSIV_tek_kullanimlik/_pytest_rerun.txt` → `git rm --cached` | `test_zaman_damgali_yedek_git_te_izlenmiyor` **1 passed** |
+| Kural çelişkisi | `AGENTS.md` D-193 maddesi ajanlara `git add -A` **emrediyordu** → düzeltildi | AGENTS.md:751 |
+
+### ⚠ MANDAL İLK SÜRÜMÜNDE YALANCI YEŞİLDİ — kendi hatam, beyan ediyorum
+
+Mandalın ilk deseni düz `git` arıyordu. `.bat` git'i `"%GIT%"` değişkeniyle çağırdığı için
+gerçek `"%GIT%" add -A` satırını **kaçırdı**. İlk koşuda gelen kırmızı, çalışan koddan değil
+benim yazdığım **gerekçe yorumundan** geliyordu — yorumu soyunca test yeşile döndü ve
+"tamam" görünüyordu. Kırma testi yapılmasaydı bu mandal **hiç çalışmadan** yeşil duracaktı.
+
+**Ders (D-260'ın mandala uygulanışı): yeşil test de bir beyandır, kırılana kadar kanıt değildir.**
+Desen `%GIT%` / `$GIT` biçimlerini kapsayacak şekilde düzeltildi; `.bat` ve `.py` yolları
+**ayrı ayrı** kırılıp kırmızı görüldü, sonra geri alındı.
+
+### 🔴 ÜRÜN SAHİBİNE — TARİHTE GERÇEK ÖZEL ANAHTAR VAR (temizlik YAPILMADI)
+
+Zorunlu sır araması yapıldı. İki ayrı sonuç:
+
+1. **Otomatik commit'lerin içinde sır YOK.** Çıkan isimler yalnızca sır *aracı*
+   (`rotate_secrets.py`, `test_secrets_rotation.py`, bir kurulum raporu). Bu iyi haber.
+2. **Ama tarihte elle girmiş gerçek bir anahtar var:** `config/certs/selfsigned.key`,
+   içeriği `-----BEGIN RSA PRIVATE KEY-----`.
+
+| Ölçüm | Sonuç |
+|---|---|
+| Ekleyen commit | `90c4702` (2026-09-20) — **otomasyonun ürünü değil, elle** |
+| HEAD ağacında mı | **Hayır** (`git ls-tree -r HEAD` boş) |
+| İzleniyor mu | **Hayır** (`git ls-files -- config/certs/` boş) |
+| Commit HEAD'in atası mı | **EVET** (`git merge-base --is-ancestor` → 0) |
+| Blob ulaşılabilir mi | **EVET** — `216cfdd540712a8c327ceb1cd4bc1ec37c6048fe` |
+
+Yani dosya çalışma ağacından kalkmış ama **tarihten kalkmamış**; depoyu klonlayan herkes
+`git show 90c4702:config/certs/selfsigned.key` ile anahtarı okuyabilir.
+
+**Hiçbir şey temizlenmedi.** Tarih yazmak geri dönüşsüzdür, karar sizindir. Seçenekler:
+**(A)** anahtarı **döndür** (yenisini üret, eskisini iptal et) — tarihi hiç ellemez, en güvenli,
+self-signed sertifika için genelde yeterli. **(B)** `git filter-repo` ile tarihten sök — tüm
+commit karmaları değişir, üç ajanın ağacı ve üst depo işaretçisi bozulur, **ağır**.
+**Önerim A**, çünkü depo şu an özel ve anahtar self-signed; ama depo bir gün herkese açılırsa
+B kaçınılmaz olur.
+
+Ek not: `workspace/external/cursor_grok/.../leak.py` içindeki `API_KEY = 'secret123'`
+**kasıtlı sahte fikstürdür**, zarar yok.
+
+### Otomasyon: durdurulmadı, daraltıldı
+
+Ölçülen seçenekler — **(A)** durdur: günlük yedek kaybolur, **sizin kararınız**, yapılmadı.
+**(B)** beyaz liste: **uygulandı**. **(C)** `pre-commit`'e bırak: kanca commit anında çalışır,
+`add`'i engellemez, yetmez.
+
+Otomasyon artık yalnız `data docs hubs plans indexes` sahneliyor. Kod, test, betik ve
+`_ARSIV_tek_kullanimlik` **otomasyonun işi değil** — ajanlar tek tek sahneler.
+`data_worktree` bilerek dışarıda: D-228'de tasfiye edildi, diskte yok.
+
+### `.gitignore` neden tutmadı (ölçüldü)
+
+Kural eksikliği değil, **kapsam hatası**: `/_*.txt` baştaki eğik çizgi yüzünden yalnız köke
+bağlıydı, alt dizine hiç inmiyordu. `git check-ignore -v` çıkış kodu **1**, çıktı **boş** —
+hiçbir desen eşleşmemişti. `_pytest_rerun*` eklendi; tekrar ölçüldü, artık eşleşiyor
+(`.gitignore:148`).
+
+**Yan bulgu, kesilmedi:** `_ARSIV_tek_kullanimlik/` altında **~160 izlenen dosya** var.
+`BORC-SCRIPTS-01` DONDURULMUŞ; ölçüldü, rapor edildi, dokunulmadı.
+
+### Tam takım (D-288 kapanışı)
+
+Sabit sıra `4 failed, 4580 passed, 12 skipped — 202,13 sn`; rastgele sıra **aynı 4 kırmızı**
+(`203,25 sn` koşusunda 5'ti, beşinci benim çöpümdü, aşağıda). **Sıra bağımlılığı yok.**
+Taban 4562 → +18 geçen (D-288 mandalı 2, kalan 16 başka ajanların bu turdaki testleri).
+
+| Kırmızı | Sahibi | Bu turda kesildi mi |
+|---|---|---|
+| `test_kok_izin_listesi::test_zaman_damgali_yedek_git_te_izlenmiyor` | **benim** (`_pytest_rerun.txt`) | **EVET** — `git rm --cached` + `.gitignore` kapsam düzeltmesi |
+| `test_kok_politikasi::test_vault_kokte_tek_kullanimlik_yok` | **benim** (`_k.tmp`, `_oc.tmp`, `_oc2.tmp`, `_sir_taramasi.txt`) | **EVET** — D-241, silindi, mandal yeşile döndü |
+| `test_dokuman_politikasi::test_d219_ajan_context_dosyalari` | yasu (`yasu_project_context.md` 213>200) | hayır — `BORC-AJAN-HAFIZA-01`, D-226/sahiplik |
+| `test_brief_sablon_denetim::…[brief_yasu_VERI-OSTIM-TAM-TARAMA-01.md]` | yasu | hayır — brief 11 zorunlu bölümün **hiçbirini** taşımıyor (D-217) |
+| `test_naming_audit::test_acik_gorevlerde_yeni_d57_ihlali_yok` | yasu | hayır — aynı görev, başlık D-57 kalıbına uymuyor |
+| `test_pano_d57_kalici::test_aktif_gorevler_d57_gecer` | yasu | hayır — aynı görev, aynı sebep |
+
+**Ölçülen not:** son üç kırmızı **tek kaynak** — `VERI-OSTIM-TAM-TARAMA-01` görevi bu tur
+açıldı ve üç ayrı mandalı birden kırdı. Üçü tek düzeltmeyle (başlığı D-57 kalıbına çekip
+brief'i `plans/_brief_sablon.md`'ye uydurmak) kapanır; sahibi yasu, kesme bende değil.
+
+### Sonraki tura
+
+- Anahtar kararı (A döndür / B tarih temizliği) — **bekliyor**.
+- Otomasyonun beyaz listesi doğru kapsamda mı, ilk gerçek koşudan sonra
+  `git log -1 --name-only` ile **ölçülmeli** (bu tur çalışmadı; sonraki tetik 00:01).
+- `data/` altına sır düşerse otomasyon yine alır. Beyaz liste kod sızmasını kesti,
+  **veri sızmasını kesmedi**. Gerekirse `data/` için ayrı bir desen mandalı.
+
+---
+
+## Devir — D-287 turu (tarihî kayıt)
 
 Bu bölüm devir notunun kaynağıdır (D-219 mantığı). Ajan hafıza dosyasına yazılmadı: ölçüldü,
 dört `*_project_context.md` dosyasında bu hattın hiçbir izi yok — hat panoya bağlı değil,
@@ -742,35 +849,30 @@ sahte UA yok, günlük limit.
 2. **Detay taraması** (3.297) izin sonrası başlayacak.
 3. **ihsan'dan beklenen:** (a) izin adımının sahibi, (b) birlestirme
    sorumluluğu.
-
-## Güvenlik borcu (açık)
-
-
-
 ## D-285 — OSTİM birleştirmesi kalite denetimi: kirp ölçüldü, 10.002 → 0
 
-**Tarih:** 2026-09-29 · **Aj an:** yasu · **Görev:** ALTYAPI-TICARET-KANIT-01
+**Tarih:** 2026-09-29 · **Ajan:** yasu · **Görev:** ALTYAPI-TICARET-KANIT-01
 
 ### 1. Bağlam
 
 D-283'te parser düzeltmesi sonrası "site/footer verileri firma kolonlarına
-karışmış" uyarısı vardı ama **ölçülmemişti**. Uyarı spekülasyondu.
-D-285 bu iddiayı ölçer ve kanıtlanan kısımları düzeltir.
+karışmış" uyarısı vardı ama **ölçülmemişti**. D-285 bu iddiayı ölçer ve
+kanıtlanan kısımları düzeltir.
 
 ### 2. Karar
 
 1. **Birleştirme çıktısı kalite denetiminden geçmeden teslim edilemez.**
-   Yeni araç: `scripts/birlestirme_kalite_kontrol.py` (statik, ağ erişimi yok).
-   Rapor: `data/birlestirme_kalite_raporu.json`.
-2. **"Aynı değer binlerce firmada" ölçümü zorunlu kuraldır.**
-   Tekil oranı %50'nin altına düşen kolon kirp sayılır ve teslim edilmez.
+   Araç: `scripts/birlestirme_kalite_kontrol.py` · Rapor:
+   `data/birlestirme_kalite_raporu.json`.
+2. **"Aynı değer binlerce firmada" ölçümü zorunlu kuraldır.** Tekil oranı
+   %50'nin altına düşen kolon kirp sayılır ve teslim edilmez.
 3. **Filtre listeleri tahminle değil ÖLÇÜMLE yazılır.** Ölçüm bir
-   numarada/ domain'de tekrar göstermiyorsa liste **boş bırakılır** —
+   domain'de/numarada tekrar göstermiyorsa liste **boş bırakılır** —
    doğru veriyi silmemek, kirli veriyi tutmaktan önce gelir.
 4. **Dolgu metni alan bazlı uygulanır.** `-` ve `n/a` yalnız serbest metin
    alanlarında geçersizdir; URL ve telefon alanlarında aranmaz.
-5. **Birlestirme temizdir** (K-2 kaçış = 0). 3.297 kayıt taraması
-   yazılı izin olmadan başlatılmaz (D-281 borcu).
+5. **Birlestirme temizdir** (K-2 kaçış = 0). Detay taraması yazılı izin
+   olmadan başlatılmaz (D-281 borcu).
 
 ### 3. Ölçülen bulgular
 
@@ -791,23 +893,101 @@ Varsayım: "OSTİM merkez telefonu her firmada tekrar ediyor" → sabit numara
 listesi yazıldı. **Ölçüm bunu çürüttü:** en çok tekrar eden numara 5 kez
 (`903124397800`). Yani merkez numara veriye *bulaşmamış*. Liste
 `frozenset()` olarak **boş bırakıldı**; tahminle iyi telefon numaraları
-silinmedi. Regresyon testi (`test_tire_ve_na_yalnizca_adres_alani`)
-buna karşı koruma içerir.
+silinmedi. Regresyon testi buna karşı koruma içerir.
 
-### 5. Regresyon testi bir gerçek hatayı yakaladı
+### 5. Regresyon testi iki gerçek hatayı yakaladı
 
-İlk sürümde `_DOLGU_METIN` içindeki `-` **her alanda** aranıyordu.
-`sosyal_medya` bir dict olduğu için `str(dict)` üzerinde arama yapılıyor
-ve URL'li **her** hesap reddediliyordu — yani düzeltme, kirp veriyi
-temizlerken iyi veriyi de siliyordu. Alan bazlı düzeltme yapıldı
-(`_METIN_ALAN`).
+## D-289 — İzin taslağı hazır; kazıyıcı politikaya uyduruldu
+
+**Tarih:** 2026-09-29 · **Ajan:** yasu · **Görev:** ALTYAPI-TICARET-KANIT-01
+**KAHİN kararı:** izin başvurusunun sahibi **KAHİN**; yasu izinli olarak
+devam edecek.
+
+### 1. Dilekçe — iki hata düzeltildi
+
+`plans/OSTIM-izin-dilekcesi-taslagi.md` yeniden üretildi
+(`scripts/ostim_izin_dilekcesi.py`).
+
+1. **Yanlış kanıt dosyası atfı.** Eski taslak
+   `data/ostim_kaynak_olcumu.json` dosyasına atıf yapıyordu; **dosya
+   yoktu**. Yerine gerçekten var olan kanıtlar yazıldı.
+2. **8.473 iddiası ölçümle çelişiyordu.** Site "Toplam 8473 sonuç"
+   diyor, elimizdeki liste 8.313 (8.313 benzersiz slug, tekrar yok).
+   Fark **ölçüldü**: liste 28-29. sayfalarında 13 yeni firma var —
+   liste tarama sırasında güncellenmiş. Dilekçe artık iki sayıyı da
+   ayrı ayrı veriyor ve farkın kaynağını belirtiyor.
+   Kanıt: `data/ostim/kapsam_dogrulama.json`.
+
+Ayrıca politika metni **canlı olarak yeniden okundu**; dosyadaki kopya
+bozuktu (HTML entity kaçışları çözülmemiş: `G├╝ZL├╝L├╝K`). Birebir
+alıntı: *"Bu web sitesi sadece bilgi amaçlı olarak ticari olmayan kullanım
+için hazırlanmıştır"*. `robots.txt` birebir doğrulandı (`/firmalar/`
+**serbest**).
+
+### 2. Kazıyıcı — 4 politika maddesi kodda DEĞİLDİ
+
+D-283'te yazılan politika P-1..P-10'un dördü hiç uygulanmamıştı:
+
+| Politika | Durum | Düzeltme |
+|---|---|---|
+| P-3 2 sn gecikme | `time.sleep` **hiç çağrılmamıştı** (beyaz satır) | `if i > 1: time.sleep(GECIKME)` |
+| P-8 sayfa imzası | fonksiyon yoktu | `imza()` + tekrarında kayıt **atlanır** |
+| P-1/P-2 robots.txt | `robots_kontrol` parametresi **hiç tanımlı değildi** | `robots_uyumlu_mu()`, varsayılan **açık** |
+| P-9 güvenli resume | dosya `"w"` ile **yeniden yazılıyordu** | mevcut kayıtlar okunur, slug ile birleştirilir |
+
+P-9 bulgusu en ciddisiydi: 3.297 kayıt `--limit 500` ile 7 parçaya
+bölünseydi, **her parçada önceki 6 parçanın verisi silinirdi**.
+
+### 3. Pilot — "5/5" yetmezdi, satır denetimi gerekti
+
+İlk pilot K-2 açısından temizdi (0/5 kirp) ama sosyal medyada
+`{"instagram": "accounts"}` vardı. Bu bir hesap değil, sayfadaki geçici
+login linkinin (`/accounts/login/?next=`) son parçasıydı.
+
+**Ders: regex doğru olsa bile sahte hesap üretebilir.** `_gercek_hesap_mi()`
+eklendi; düzeltilmiş parser ile pilot tekrar koşuldu:
+
+- 5/5 başarılı, 0 hata, P-3 uygulandı (11,1 sn = 2 sn × 5)
+- `accounts` sahtesi **gitti**, gerçek `333Reklam` hesapları **korundu**
+- K-2 kaçış **0/5**
+
+### 4. Doğrulama
+
+```bash
+python -m pytest tests/test_ostim_detay_parser.py -q        # 17/17
+python -m pytest tests/test_ostim_birlestirme_kalite.py -q  # 18/18
+python -m pytest tests/test_ostim_detay_parser.py \
+  tests/test_ostim_birlestirme_kalite.py -q                # 35/35
+```
+
+### 5. Karar
+
+1. **Detay taraması izin gelene kadar başlatılmaz.** (D-281 borcu)
+2. İzin geldiğinde hattın tümü hazırdır: P-1..P-10 uygulanmış, 35 test
+   yeşil, kalite denetimi mevcut.
+3. Eksik detay sayısı 3.297 değil **3.339** — liste güncellendiği için
+   arttı (D-286 ölçümü).
+
+### 6. Güvenlik borcu (açık)
+
+- TOBB parolası sohbette açığa paylaşıldı ve `.env`'e yazıldı —
+  **çıkış sonrası parola değiştirilmeli**
+- `data/tobb_cookie.json` canlı oturum çerezidir; paylaşılmamalı
+
+
+1. `_DOLGU_METIN` içindeki `-` **her alanda** aranıyordu. `sosyal_medya`
+   bir dict olduğu için `str(dict)` üzerinde arama yapılıyor ve URL'li
+   **her** hesap reddediliyordu — düzeltme, kirp veriyi temizlerken iyi
+   veriyi de siliyordu. Alan bazlı düzeltme yapıldı (`_METIN_ALAN`).
+2. `tests/test_ostim_detay_parser.py` fixture'ı gerçek sayfa yapısını
+   yansıtmıyordu; parser'ın doğru olduğu ortaya çıktı.
 
 ### 6. Teslim edilen çıktı
 
 - 8.313 kayıt, 8.275 tekil unvan, 19 kolon
 - `kaynak_adi` / `kaynak_turu` %100 dolu
-- NACE güven: `medium` 7.047 / `none` 1.266 — OSTİM resmi NACE yayımlamaz,
-  sektörden türetilir, bu yüzden `medium` işaretlidir (K-2)
+- NACE güven: `medium` 7.047 / `none` 1.266 — OSTİM resmî NACE
+  yayımlamaz, sektörden türetilir (K-2)
 - `vergi_no` 0 dolu — OSTİM'de VKN yoktur; bu kaynakla zenginleştirilemez
 
 ### 7. Ölçüm aracı
@@ -817,15 +997,4 @@ python scripts/birlestirme_kalite_kontrol.py   # statik denetim
 python -m pytest tests/test_ostim_birlestirme_kalite.py -q   # 18/18
 ```
 
-### 8. Güvenlik borcu (açık)
 
-- TOBB parolası sohbette açığa paylaşıldı ve `.env`'e yazıldı —
-  **çıkış sonrası parola değiştirilmeli**
-- `data/tobb_cookie.json` canlı oturum çerezidir; paylaşılmamalı
-
-- TOBB parolası sohbette açıkça paylaşıldı ve `.env`'e yazıldı →
-
-D-287'nin gerekçesi `AGENTS.md`'de (tek kanonik başlık). Buraya kopyalanmadı: aynı `D-NNN`
-iki dosyada birden kanonik başlık olursa havuz çatışır — bu tur **mandal yakaladı**
-(`CATISMA: ['D-281','D-287']`), kayıt tek dosyaya çekildi. Defter durumu tutar, `AGENTS.md`
-gerekçeyi (D-272/1).

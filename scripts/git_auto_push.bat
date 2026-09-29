@@ -30,7 +30,21 @@ if errorlevel 1 (
     goto :push
 )
 
-"%GIT%" add -A >> %LOG% 2>&1
+REM D-288 (2026-09-29): "add -A" BEYAZ LISTEYE cevrildi.
+REM OLCUM: 64 otomatik commit, 2150 benzersiz dosya; icinde src/ 217, tests/ 143,
+REM scripts/ 233, _ARSIV_tek_kullanimlik/ 160. dfc5f0a tek basina 352 dosya/41619 satir
+REM aldi ve tur ortasinda UCUSTAKI kodu (chat.py, ajan_chat.py, iki test, pre-commit)
+REM ve D-241 geregi SILINMIS scripts/_nace_olcum.py'yi tarihe soktu.
+REM NEDEN BEYAZ LISTE, KARA LISTE DEGIL: kara liste yeni dizin acildiginda sessizce
+REM sizdirir; sir sizmasi geri alinamaz (tarih yazmak geri donussuzdur).
+REM KAPSAM: yalnizca VERI ve NOT. Kod/test/betik otomasyonun isi degil — onlari
+REM ajan tek tek sahneler (AGENTS.md "git add -A YOK" kurali).
+REM SECENEKLER (olculdu, biri uygulandi):
+REM   A) otomasyonu durdur  -> gunluk yedek kaybolur, URUN SAHIBI karari, YAPILMADI
+REM   B) beyaz liste        -> UYGULANDI; en kucuk degisiklik, yedek yasamaya devam eder
+REM   C) pre-commit'e birak -> kanca commit ANINDA calisir, add'i engellemez; yetmez
+REM Mandal: tests/test_otomasyon_sahneleme.py (hicbir betik toptan sahneleme yapmaz).
+for %%P in (data docs hubs plans indexes) do if exist "%%P\" "%GIT%" add -- "%%P" >> %LOG% 2>&1
 
 REM YA-01 (2026-09-24): ic ice depo korumasi. Calisma agacinda .gitmodules
 REM eslemesi olmayan bir .git klasoru varsa "add -A" onu gitlink (160000) olarak

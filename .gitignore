@@ -140,6 +140,13 @@ _tmp_*
 *.backup_*
 *.yedek_*
 
+# D-288 (2026-09-29): `_pytest_rerun.txt` alt dizinde dogdu ve HICBIR desene takilmadi.
+# Sebep KURAL EKSIKLIGI DEGIL, KAPSAM HATASI: yukaridaki `/_*.txt` bastaki egik cizgi
+# yuzunden yalniz KOKE bagli; alt dizine hic inmiyor. `git check-ignore -v` cikis kodu 1,
+# ciktisi bos -> hicbir desen eslesmedi. Mandal test_kok_izin_listesi.py'nin dort
+# deseninden (`.backup_`, `.yedek_`, `_pytest_rerun`, `_tmp_onem_test`) biri burada yoktu.
+_pytest_rerun*
+
 # SEC-AUTH-01 D-1: Streamlit secrets (plaintext admin fallback) depoya girmez
 .streamlit/secrets.toml
 .streamlit/secrets.*.toml
