@@ -86,6 +86,25 @@ def test_chart_freshness_bos_df_hata_vermez(monkeypatch):
 # Tek gercek sema kaynagi canli DB -- schema/*.sql bayat.
 # ---------------------------------------------------------------------------
 
+def test_sablon_deger_dolu_sayilmaz():
+    """D-299: `isim.org.tr` sablonu 2142 kayitta "dolu" sayiliyordu.
+
+    Doluluk kosulu sablon listesini dislamali; yoksa panel bilgi tasimayan
+    metni veri gibi sunar (D-292'nin panel yuzeyindeki esi).
+    """
+    kosul = admin_quality._dolu_kosulu("website_domain")
+    assert "isim.org.tr" in kosul
+    assert "NOT IN" in kosul
+    assert "'' " in kosul or "<> ''" in kosul
+
+
+def test_kpi_doluluk_kosulu_ayni_kapidan_gecer():
+    """D-299: iki panel ayni sablon listesini kullanmali, kopya olmamali."""
+    from web_dashboard.tabs import admin_kpi
+
+    assert admin_kpi._dolu_kosulu is admin_quality._dolu_kosulu
+
+
 def test_kpi_alan_sozlugu_kopya_degil():
     """D-298: `adres`/`osb_parsel` kirigi iki dosyada birden yasadi.
 

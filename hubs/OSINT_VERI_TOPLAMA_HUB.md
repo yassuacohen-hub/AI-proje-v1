@@ -58,3 +58,4 @@ Düzey_3 = 1.427.688 TL/yıl; NACE + Vergi No + Ortaklar + Temsilciler kapsar.
 - [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]]
 - [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]]
 - [[Huginn Data Insights/PROJECT_ROADMAP]]
+| VERI-IVEDIK-YENIDEN-01 | Ivedik OSB sitesi HTTP 403 donuyor (nginx bot korumasi; DNS cozuluyor, sunucu ayakta). Kazi YAPILMADI. Mevcut veri: 3.354 satir / 14 tekil firma, tum alanlar %0 - kullanilamaz. Brief varsayimi tutmadi (D-66) -> durduruldu, panoya sorun acildi. Rapor: plans/IVERI_ERISIM_RAPORU.md | 2026-09-29 |

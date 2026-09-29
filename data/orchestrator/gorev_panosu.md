@@ -28,7 +28,7 @@
 | VERI-KAYNAK-BAG-01 | [VERI] Firma-kaynak bagini yaz → source_records.company_id (4s) | utku | P0 | aktif | src/company_master/etl/kaynak_firma_bagla.py |
 | VERI-SEKTOR-01 | [VERI] Sektor sozlugunu yaz → 9689 kayitta sektor alani (3s) | utku | P1 | plan | src/company_master/etl/sektor_normalize.py |
 | VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim icinde 102 ASO kaydi (2s) | utku | P2 | plan | src/company_master/etl/kaynak_sizinti_duzelt.py |
-| VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik verisini yeniden yaz → D-235 korumali sayfa_dongusu (2s) | utku | P1 | plan | src/company_master/etl/scrapers/ivedik_scraper.py |
+| VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik erisim engelini denetle → IVERI_ERISIM_RAPORU.md (2s) | yasu | P1 | review | src/company_master/etl/scrapers/ivedik_scraper.py |
 | ALTYAPI-AJAN-CAKISMA-01 | [ALTYAPI] Eszamanli ajan kacak kilit kapisini yaz → ajan_cakisma_kilidi.py (4s) | ihsan | P1 | plan | scripts/ajan_cakisma_kilidi.py |
 | VERI-OSTIM-TAM-TARAMA-01 | [VERI] OSTIM detay verisini denetle → firmalar_tamamlanmis.jsonl (2s) | yasu | P1 | review | data/ostim/tamamlama_2026-09-29/firmalar_tamamlanmis.jsonl, data/ostim/tamamlama_2026-09-29/rapor.md |
 

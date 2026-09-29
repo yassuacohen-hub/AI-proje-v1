@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-29T20:06:52
+> Son guncelleme: 2026-09-29T20:28:55
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -28,7 +28,7 @@
 | VERI-KAYNAK-BAG-01 | [VERI] Firma-kaynak bagini yaz → source_ | utku | P0 | aktif |
 | VERI-SEKTOR-01 | [VERI] Sektor sozlugunu yaz → 9689 kayit | utku | P1 | plan |
 | VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim | utku | P2 | plan |
-| VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik verisini yeniden yaz → D-2 | utku | P1 | plan |
+| VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik erisim engelini denetle →  | yasu | P1 | review |
 | ALTYAPI-AJAN-CAKISMA-01 | [ALTYAPI] Eszamanli ajan kacak kilit kap | ihsan | P1 | plan |
 | VERI-OSTIM-TAM-TARAMA-01 | [VERI] OSTIM detay verisini denetle → fi | yasu | P1 | review |
 

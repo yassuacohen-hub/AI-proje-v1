@@ -190,7 +190,7 @@ def load_field_quality_breakdown() -> pd.DataFrame:
                     cnt_row = conn.execute(text(
                         f"SELECT COUNT(*) as cnt FROM companies "
                         f"WHERE is_ankara=TRUE AND is_osb_member=TRUE "
-                        f"AND {col} IS NOT NULL AND {col} != ''"
+                        f"AND {_dolu_kosulu(col)}"
                     )).mappings().first()
                     cnt = cnt_row["cnt"] if cnt_row else 0
                 except Exception as exc:

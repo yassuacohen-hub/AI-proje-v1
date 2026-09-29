@@ -2870,5 +2870,16 @@
     ],
     "teslim_tarihi": "2026-09-29T20:06:52",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "VERI-IVEDIK-YENIDEN-01",
+    "ajan": "yasu",
+    "ozet": "KAZI YAPILMADI - erisim engeli. OLCUM: DNS cozuluyor (185.151.30.153) ama nginx HTTP 403 donuyor; https, http ve robots.txt dahil. Mevcut veri: 3.354 satir / 14 tekil firma, tum alanlar %0 - kullanilamaz. Brief varsayimi tutmadi (D-66) -> durduruldu. Sektor sorusu yanitlanamadi, uydurma cevap verilmedi. 403'e karsi tekrar istek atilmadi (P-5). Rapor: plans/IVERI_ERISIM_RAPORU.md",
+    "ciktilar": [
+      "plans/IVERI_ERISIM_RAPORU.md",
+      "hubs/OSINT_VERI_TOPLAMA_HUB.md"
+    ],
+    "teslim_tarihi": "2026-09-29T20:28:55",
+    "durum": "bekliyor"
   }
 ]

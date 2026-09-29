@@ -57,6 +57,27 @@ _QUALITY_FIELDS: dict[str, str] = {
     "osb_parcel": "Parsel",
 }
 
+# D-299: "dolu" gorunen ama bilgi tasimayan sablon degerler -- D-292'nin panel
+# yuzeyindeki esi. 2142 kayitta `website_domain` literal 'http://www.isim.org.tr'
+# (sablonun kendisi kaydedilmis, hicbiri firma adiyla ilgili degil), 523 kayitta
+# OSB'nin kendi portali, 87 kayitta adres "girilmemistir" cumlesi. Bunlari dolu
+# saymak "Web Sitesi %57,9" yalanini uretiyordu. Veri silinmiyor (D-8: silme
+# PO'da) -- yalnizca sayarken yokluk sayiliyor.
+_SABLON_DEGERLER: tuple[str, ...] = (
+    "http://www.isim.org.tr",
+    "https://www.ostimistihdam.com",
+    "https://www.ostimonline.com/Home/OstimMain",
+    "bilinmeyen@bilinmeyen.com",
+    "Adres bilgisi girilmemiştir.",
+)
+
+
+def _dolu_kosulu(col: str) -> str:
+    """Sablon degerleri yokluk sayan SQL doluluk kosulu (D-299)."""
+    liste = ", ".join("'" + d.replace("'", "''") + "'" for d in _SABLON_DEGERLER)
+    return f"{col} IS NOT NULL AND {col} <> '' AND {col} NOT IN ({liste})"
+
+
 def _risk_esigi() -> float:
     """Risk eşiği sabit yazılmaz: tavanın oranı (D-250/7). Tavan 6.5 iken 1.95.
 
@@ -238,7 +259,7 @@ def load_missing_field_analysis() -> pd.DataFrame:
                     cnt_row = conn.execute(text(
                         f"SELECT COUNT(*) as cnt FROM companies "
                         f"WHERE is_ankara=TRUE AND is_osb_member=TRUE "
-                        f"AND ({col} IS NULL OR {col} = '')"
+                        f"AND NOT ({_dolu_kosulu(col)})"
                     )).mappings().first()
                     eksik = cnt_row["cnt"] if cnt_row else 0
                 except Exception as exc:
@@ -257,9 +278,8 @@ def load_missing_field_analysis() -> pd.DataFrame:
                     "Eksiklik (%)": round(eksik / max(total, 1) * 100, 1),
                 })
     except Exception as exc:
+        # D-249: olculmemis tablo "hepsi %0 eksik" diye sunulamaz; bos birakilir.
         _admin_quality_logger.warning("Eksik alan analizi yüklenemedi", exc)
-        for label in _QUALITY_FIELDS.values():
-            result.append({"Alan": label, "Eksik": 0, "Toplam": 0, "Eksiklik (%)": 0})
     return pd.DataFrame(result)
 
 
