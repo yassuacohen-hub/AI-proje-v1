@@ -3939,3 +3939,375 @@ sirayla kosuldugu bilgisiyle birlikte verilir; sirasiz yesil kanit degildir
 
 **Referans:** D-241, D-245, D-246, D-249, D-250, D-252, D-258, D-259, D-260,
 D-263, D-265, D-266, D-267.
+
+## D-270 — Kırık test iddiası canlı koşudan gelir; `lastfailed` kanıt değildir
+
+> D-227 onarımı (2026-09-28): bu karar `D-268` numarasıyla yazılmıştı, o numara
+> zaten "NACE kumesi: olculdu, ikiye bolundu, biri dustu" kararına aitti.
+> `D-269` da başka ajan tarafından alınmıştı. Numara boşa çekildi: **D-270**.
+
+**Bağlam:** FAZ-0 kök hijyeni sırasında `.pytest_cache/v/cache/lastfailed`
+içinde **330 kayıt** bulundu. Aynı dosyanın fiilen koşumu
+`tests/test_brief_sablon_denetim.py` → **18 passed** verdi. Kayıtlar bayattı:
+pytest `lastfailed`'ı yalnız **son koşulan** testler için günceller, silmez.
+
+**Risk:** Bir ajan `lastfailed`'a bakıp "330 test kırık" sanar ve **1-2 günlük
+gereksiz kurtarma işi** açar. Bu tam olarak D-261'in (iz doğrulanmadan kanıt
+sayılmaz) dosya eşdeğeridir: dosya bayat, iddia gerçek değil.
+
+**Karar:**
+
+1. **Fiilen kırık test = son koşunun `failed`/`error` çıktısı.** Başka hiçbir
+   kaynak kırık test iddiası üretmez.
+2. **`.pytest_cache/` kanıt kaynağı değildir.** Raporlanmaz, karara dayanak
+   yapılmaz. Ajan "kaç test kırık" derken **kendi koşusunu çalıştırır.**
+3. **Bayat kayıt temizliği:** Şüpheli `lastfailed` görülürse dosya silinir;
+   silmek kanıt değildir ama yanlış kanıttan kurtulur.
+4. **"Takım yeşil" beyanı sıra + komut ister** (D-260 zaten): tek satır
+   "pytest 4300 passed" kanıt değildir, çıktı satırı kanıttır.
+
+**Mandal:** `tests/test_kok_politikasi.py` bu kararın **kök** yarısını kapatır
+(`test_vault_kokte_tek_kullanimlik_yok`, D-221). `lastfailed` yarısı dosya
+temizliğiyle karşılanır — otomatik kapı yok, **kural disiplini gerekir.**
+
+**Referans:** D-219, D-220, D-221, D-241, D-260, D-261, D-267.
+
+## D-269 — Skill tek havuzdur; ajan dizini junction'dır, kopya değil
+
+**Bağlam:** Ölçüm (2026-09-29): SKILL.md havuzu **4 klasöre** dağılmıştı
+(`.agents/skills` 26 + `.kilo/skills` 6 + `.claude/skills` 5 + `.continue/skills` 5)
+ve ajan dizinlerindeki 5 kopya **junction değil, ayrı dosya** idi.
+`.continue/skills` içindeki 5 klasör ise **tamamen boştu** — ajan skill var
+sanıyordu. Sonuç: "hangi skill'i kullanayım?" sorusu belirsiz; kopya sessizce
+eskidi (D-266'nın dosya eşdeğeri: bayat ikiz yalan söyler).
+
+Ayrıca ikinci bir "skill" dünyası vardı: `skills/` altında `@registry.register`
+ile kayıtlı **51 Python yeteneği** (ajan *çalıştırır*), `.agents/skills/` altında
+**SKILL.md belgeleri** (ajan *okur*). Aynı ad iki mekanizma gösteriyordu.
+
+**Karar — 1. Tek kanonik SKILL.md havuzu (ajan OKUR):**
+
+1. **Kanonik yol: `.agents/skills/`.** Bir SKILL.md'nin tek yaşam yeri budur.
+2. **Ajan dizini junction'dır, kopya değil.** `.claude/skills/`, `.continue/skills/`,
+   `.roo/skills/` yalnız `.agents/skills` dizinine **işaret eder**.
+   - *Neden:* Kopya sessizce eskir; iki ajan farklı SKILL.md okur.
+   - *Nasıl:* `npx skills add` zaten junction kurar (Windows'ta `Junction`).
+3. **Boş klasör yasak.** Junction olmayan boş skill klasörü, ajana
+   "skill var" izlenimi verir. Bu bir **hatadır** (2026-09-29'da 5 tane vardı).
+4. **`.kilo/skills` ve `data/skills/` yasak.** Kilo Code proje dizini
+   `.agents/skills` olarak tanımlı; ikinci havuz otomatik çarpışma üretir.
+5. **Ajan "hangi skill?" diye sorarsa:** yanıt `skills/SKILLS_INDEX.md` + `.agents/skills/`.
+   Arama yapmak, tahmin etmek yasak (D-216 hayalet görev mantığı).
+
+**Karar — 2. Python yetenekleri ayrı çatı altında (ajan ÇALIŞTIRIR):**
+
+6. **`skills/` = Python yetenek havuzu.** Alt paketler ve tek iş kuralı:
+   | Konum | İçerik |
+   |---|---|
+   | `skills/tools/` | iş mantığı (osint, orchestrator, admin_panel, devops, streamlit) |
+   | `skills/services/` | **yalnız** dış servis çağrısı (9Router) |
+   | `skills/utils/` | giriş/doğrulama yardımcıları |
+   | `skills/prompts/` | sistem prompt metinleri (`.py` **değil**) |
+   | `skills/base.py` | `SkillRegistry` — **tek kayıt kapısı** |
+7. **Bir iş mantığı, bir servis çağrısını çağırmaz.** Çağrı `services/`'e gider.
+8. **`skills/common/` yasak** (D-220 Kural 1: tür başına tek yol). 2026-09-29'da
+   `tools/` + `services/` altına toplandı.
+9. **Yeni yetenek = `@registry.register` + `__init__.py` dışa aktarımı.**
+   `__init__.py` sınıf bekliyorsa modül o sınıfı tanımlamak zorundadır; aksi
+   halde **ImportError** (2026-09-29'da `skills.devops` ve `skills.streamlit`
+   tam olarak bu yüzden çalışmıyordu).
+10. **Kayıt: `skills/SKILLS_INDEX.md`.** İki dünyayı **birlikte** listeler;
+    tek dizin olmazsa ajan hangisini arayacağını bilemez.
+
+**Karar — 3. Geliştirme ve yükleme disiplini:**
+
+11. **Yeni bağımlılık yasak.** Dış servis çağrısı ek SDK gerektiriyorsa
+    **önce mevcut gateway'e bak** — 9Router Claude dahil tüm modelleri
+    karşılıyor (`ninerouter_chat_anthropic`).
+12. **Model adı koda gömülmez.** `NINEROUTER_MODEL` ortam değişkeninden okunur.
+    API anahtarı `.env`'te kalır (D-241: kök izin listesi değişmez).
+13. **İçerik değişmeden taşı.** Taşımadan önce: (a) yedek al,
+    (b) **içeriği doğrula** — ad deseni tek kullanımlık *görünür*, içerik
+    kalıcı olabilir (2026-09-29'da `run_tests.py` 613 satır, `test_reports/`
+    üretiyordu). (c) hedefte aynı ad zaten varsa **üstüne yazma, bildir**.
+14. **Ajan dosya kilidi alır.** Pano boş olmak dosyanın boşta olduğunu
+    **kanıtlamaz** (D-268). Taşıma/silme öncesi `gorev_kutusu.py bak` + son
+    5 dakikadaki dosya hareketi sorgulanır.
+
+**Mandal:** `tests/test_skill_havuzu.py` (13 test) — kanonik havuz dışı skill
+yok, boş klasör yok, `.kilo/skills` ve `skills/common/` yok, alt paketler
+import edilebilir, registry ≥30 kayıt, `SKILLS_INDEX.md` iki dünyayı da anlatıyor.
+**Kanıt üretti:** ilk koşuda `.roo/skills/sistemsel`'i yakaladı (kanonik
+havuzda yoktu) → taşındı → yeşil.
+
+**Doğrulama:** `python -m pytest tests/test_skill_havuzu.py -q` → 13 passed ·
+`python -m pytest tests/ -q` → 4465 passed, 13 skipped, 0 failed
+
+**Referans:** D-216, D-219, D-220, D-221, D-241, D-266, D-268 ·
+ALTYAPI-SKILL-YAPISI-01 (Faz A–F).
+
+---
+
+## D-271 — Borç adı fiil taşımaz; ve borç listesinin kendisi bir beyandır (2026-09-28)
+
+**Tür:** kural + düzeltme. Üç madde ölçüldü; **ikisinin adı yanlıştı**, biri
+defterde **hiç yoktu**.
+
+### 1. Devir notunun adlandırdığı iki borç defterde YOK
+
+Devir notu iki borç kimliği verdi. Ölçüm:
+
+```
+python -c "import pathlib;t=pathlib.Path('AGENTS.md').read_text(encoding='utf-8');
+[print(k,'->',t.count(k)) for k in ('BORC-DEFTER-IKI-SEMA-01','BORC-ADLANDIRMA-01')]"
+BORC-DEFTER-IKI-SEMA-01 -> 0
+BORC-ADLANDIRMA-01 -> 0
+```
+
+İkisi de devir notunda **doğdu**, defterde hiç yaşamadı. D-260'ın kardeşi:
+*devir notu da bir beyandır.* Bir kimliğe atıfta bulunmak onu var etmez.
+Kimlik yalnız AGENTS.md'de doğar — D-227'nin borç karşılığı.
+
+### 2. İki şema uyarısı: borç İPTAL, kusur GERÇEK
+
+`information_schema` `schema_migrations` için `version` kolonunu iki kez
+döndürüyordu. Canlı ölçüm:
+
+```sql
+SELECT table_schema FROM information_schema.tables
+WHERE table_name='schema_migrations';
+-> auth, public, realtime
+SHOW search_path;  -> "$user", public, extensions
+```
+
+Üç şemada var, ikisi değil. `auth`/`realtime` **Supabase'in kendi
+defterleridir**, bizim değil → "iki defter tutuyoruz" borcu **iptal**.
+
+Ama ölçüm başka bir kusur buldu: `goc_defteri.py` defteri hiçbir ifadede
+nitelendirmiyordu. Doğru defter bugün yalnızca `search_path` öyle olduğu
+için açılıyor. Sunucu ayarı değişse araç **sessizce başka bir defteri**
+düzenler ve kimse fark etmez. Kesildi: dört SQL ifadesinin hepsi artık
+`public.schema_migrations` yazıyor.
+
+### 3. Kapatılan göç yolu üç değil DÖRT'tü
+
+D-265 üç yol saydı. `src/company_master/db/migrate.py` listede yoktu:
+çağıranı yoktu (D-266) ama `python -m` ile koşabiliyordu ve D-264'te
+defteri 23 → 15'e geri almıştı. **Düşürüldü** (gövde `RuntimeError`).
+
+Yolu tek tek saymak dördüncüsünü bulmamı sağlamadı; onu ancak
+`INSERT INTO schema_migrations` **arayarak** buldum. Bu yüzden yeni mandal
+listeyi ezberlemiyor, aramayı kendisi yapıyor:
+`tests/test_data_log.py::test_defter_yazan_baska_yol_yok`.
+
+### 4. Test sırası: kirleten bir değil İKİ taneydi
+
+Devir notu "bir test global durum bırakıyor" dedi. İki bulundu:
+
+1. `benchmark_http.kos()` ölçüm için `web_app.engine`i sahte motorla
+   değiştirip **geri koymuyordu**. Aynı süreçte sonra koşan her test sahte
+   motoru görüyordu.
+2. Bare modda `st.form("yeni_karar")` form kimliğini `main_dg`'ye
+   **kaynak yapıyor**. `DeltaGenerator._block` `_cursor is None` iken
+   `dg`'nin kendisini döndürür; `FormMixin.form` da `block_dg._form_data`'ya
+   yazar — yani `main_dg`'ye. `with` çıkışı bunu temizlemez.
+
+Mandallar: `tests/test_benchmark.py::TestKirletmeMandali` ve
+`tests/conftest.py::_streamlit_form_durumu_temiz`. İkisi de **kırılarak**
+doğrulandı.
+
+**Dürüst not:** bir ters-sıra düşüşü yakalanamadı. Koşu 1: `1 failed,
+4464 passed`. Koşu 2 (aynı komut, `-rf` ile): `4465 passed`. Kimliği
+kaydedilemedi. `pytest-randomly` kurulu değil; tohum sabitlenemedi.
+Bu satır "temiz" beyanı değildir — **yakalanamadı** beyanıdır.
+
+### 5. Kural (D-271) — borç başlığı fiil taşımaz
+
+**Ölçüm (2026-09-28, mandal çıktısı):** defterde **27** borç/iş kimliği var.
+**8'i fiil** taşıyor (`DUSUR`, `DOGRULAMA`, `DEDUP`, `TEMIZ`, `BAG`,
+`SOZLUK`, `BETIK`), **4'ü sayı** taşıyor (`IKI`, `IKIZ`). Fiil ya da sayı
+taşıyan kimliklerden **üçü** sonradan "adı yanlıştı" diye kapandı:
+
+| Kimlik | Ad ne dedi | Ölçüm ne buldu |
+|--------|------------|----------------|
+| `BORC-PERF-BANT-01` | "bandı düzelt" | yüzeyin çağıranı yoktu → kapatıldı (D-266) |
+| `BORC-GOC-IKI-DEFTER-01` | "iki defter" | üç defter (D-265), sonra dört yol |
+| `BORC-AD-VARYANT-01` | "normalize sözlüğü" | teşhis yanlıştı → iptal (D-263) |
+
+**Kural:**
+
+1. Borç başlığında **fiil yasak**. Yalnız **ölçülen sapma** yazılır.
+   `nace_name doldur` **değil** → `nace_name 52/8289 dolu, değerler isim değil`.
+2. Başlıkta **sayı sayma** yasak (`IKI`, `UC`, `IKIZ`). Sayı ölçülür,
+   adlandırılmaz — ad sayıyı dondurur, ölçüm değiştirir.
+3. **Fiil, ölçen tura aittir.** "Ne yapılacak" kararı ölçümden sonra
+   verilir; borç kaydı yalnız "ne bozuk" der.
+4. Yeni kimlik `BORC-<ALAN>-<NN>` biçimindedir; alan **isim**dir.
+5. Mevcut 8 fiilli kimlik **yeniden adlandırılmaz** — git geçmişi ve 30+
+   karar girdisi onlara atıf yapıyor; yeniden adlandırma kazancı yok,
+   kırılma kesin (D-221/1 mantığı). **Mandal: sayı yalnız küçülür.**
+
+**Mandal ilk koşuşta bu girdinin kendisini yakaladı.** Tavanı 3 yazmıştım;
+ölçüm 4 döndü. Dördüncü kimlik `BORC-DEFTER-IKI-SEMA-01` — §1'de "defterde
+yok" diye yazdığım kimlik, **onu yazmakla deftere girdi**. Sayıyı mandala
+uydurmak yerine mandalı gerçeğe uydurdum: tavan **4**, dördüncünün iptal
+edilmiş bir kimlik olduğu mandalın docstring'inde yazılı.
+
+Ders (D-260'ın üçüncü yüzü): *bir kimliğin yokluğunu deftere yazmak onu var
+eder.* Ölçüm, ölçümü kaydetmekle değişir. Bu yüzden tavan sayısı karar
+metninden değil **mandal çıktısından** alınır.
+
+### 6. Daha büyük bulgu: borç listesinin kanonik kaydı YOK
+
+Kural yazarken asıl kusur çıktı. Ölçüm:
+
+```
+data/orchestrator/gorev_panosu.md -> 0 adet "BORC-"
+PLAN_gorev_panosu.md              -> 0 adet "BORC-"
+```
+
+Borçların **tek** kaydı 4048 satırlık bu karar metninin içine saçılmış
+durumda ve aynı borç çelişik durumlarla geçiyor:
+
+- `BORC-KOLON-DUSUR-01` satır 3037'de "hala duruyor", satır 3121'de
+  "kapandı".
+- `BORC-PANEL-TAVAN-01` satır 2920'de "kapanmadı", satır 2945'te "kapandı".
+
+D-222 "tek pano" diyor; borçlar panoya **hiç girmemiş**. Bu, D-265'in
+aynısıdır bir katman yukarıda: *üç defter tutan sistem hiçbirine
+güvenemez* — burada defter **sıfır**, durum anlatıya gömülü.
+
+**Bu turda iki borç ölçümle çürüdü:**
+
+- `BORC-QUALITY-BETIK-01` **iptal**: `scripts/recalc_quality_scores.py`
+  **diskte yok** (`pathlib.Path(...).exists() -> False`). Borç var olmayan
+  bir dosyayı işaret ediyordu.
+- `BORC-SCRIPTS-01` **yanlış sayı**: "30+ `_tmp_*`/`_olcum_*`" dedi;
+  ölçüm `_tmp_*` 19 + `_olcum_*` 3 = **22** (toplam `_*` girdi 44).
+
+**Açık kalan borç — `BORC-PANO-BORC-00`:** borçlar tek panoya taşınacak,
+her satır kanonik durumunu **kendi** söyleyecek. Bu turda **açıldı, kapanmadı**;
+taşıma ayrı ve ölçüm gerektiren bir iştir, kuralla birlikte yapılmaz.
+
+### 7. Araç dersi: kendi aracım hedefini ÜÇÜNCÜ kez bozdu
+
+`D-269` → `D-271` yeniden adlandırmasını tek Python ifadesine sıkıştırdım:
+
+```python
+io.open(d,'w',encoding='utf-8').write(io.open(d,encoding='utf-8').read().replace(...))
+```
+
+`open(path,'w')` dosyayı **çağrı anında** kırpar — okuma argümanı
+değerlendirilmeden önce. Altı kaynak dosya sıfır bayta indi.
+`git checkout --` ile `5e2a354`'ten geri alındı (12897/4039/2175/8045/5548/6510
+bayt doğrulandı), A maddesi işi tek tek yeniden uygulandı.
+
+**Kural:** yerinde düzenleyen onarım aracı, **hiçbir dosyayı yazmak için
+açmadan önce** tüm dosyaları okumuş olmalıdır. D-243'ün ("prova diske
+yazmaz") doğrudan torunu. Sayaç: vault kökü yazımı, ters çevrilmiş modül
+listesi, şimdi altı kırpılmış dosya → **3**.
+
+Çürütülen iki hipotez de kayda geçer: `context_dg_stack` derinliği ve
+`DeltaGeneratorSingleton` kimliği — ikisi de sebep değildi.
+
+### 8. Kapanan / açılan borç
+
+- `BORC-DEFTER-IKI-SEMA-01` — **kimlik yoktu**; uyarı ölçüldü, borç olarak
+  **iptal**; gerçek kusur (nitelendirme) kesildi.
+- `BORC-ADLANDIRMA-01` — **kimlik yoktu**; kural bu girdide yazıldı (§5).
+- `BORC-TEST-SIRA-01` — **kapandı**: iki kirleten kesildi, iki mandal kuruldu.
+  Yakalanamayan tek düşüş §4'te dürüstçe yazılı.
+- `BORC-QUALITY-BETIK-01` — **iptal** (dosya yok).
+- `BORC-PANO-BORC-00` — **yeni, açık**: borçların kanonik kaydı yok.
+
+### 9. Doğrulama
+
+```
+python -m pytest tests/test_goc_defteri.py tests/test_data_log.py \
+  tests/test_benchmark.py tests/test_migration_0017.py -q
+40 passed, 100 warnings in 29.37s
+```
+
+Mandal `tests/test_dokuman_politikasi.py::test_d271_borc_adinda_fiil_artmiyor`
+kuruldu ve **kırılarak** doğrulandı:
+
+```
+python -m pytest tests/test_dokuman_politikasi.py -q
+6 passed in 3.39s
+
+# kirma denemesi: FIIL kumesine gecici 'DEFTER' eklendi
+AssertionError: D-271/1: fiil tasiyan borc kimligi 10, ust sinir 8.
+```
+
+Mandal çıktısı (kanonik sayı buradan alınır, karar metninden değil):
+`borç kimliği 27 · fiilli 8/8 · sayılı 4/4`.
+
+### 10. Yetim göç kopyaları — ve metin taramasının kör noktası
+
+Kanonik göç dizini `src/company_master/schema/migrations` (36 dosya,
+`scripts/goc_defteri.py::GOC_DIZINI`). Ölçüm iki **yetim kopya** buldu:
+
+| yol | bayt | defterde |
+|---|---|---|
+| `db/migrations/0007_job_intelligence.sql` | 11252 | **yok** |
+| `db/schema/migrations/0013_job_intelligence.sql` | 11256 | yok |
+| `schema/migrations/0013_job_intelligence.sql` (kanonik) | 11518 | **var** |
+
+Defter `0013`ü kaydeder, `0007`yi hiç görmemiş; üç dosya birbirinden bayt
+olarak farklı. D-211/D-230 gereği ikisi silindi, mandal kuruldu
+(`tests/company_master/test_migrate.py::test_tek_goc_dizini_var`),
+`9999_kirma_denemesi.sql` ekilerek **kırılarak** doğrulandı.
+
+**Asıl ders — bu kez yanlış ad BENİMDİ.** Silmeden önce "bu dosyalara
+kod referansı yok" diye beyan ettim. Dayanağım `db/migrations` /
+`db\migrations` metin taramasıydı. Oysa
+`tests/test_job_intelligence_dikey.py:30` yolu **parça parça** kuruyordu:
+
+```python
+REPO_ROOT / "src" / "company_master" / "db" / "migrations" / "0007_job_intelligence.sql"
+```
+
+Ortada eşleşecek bir alt dize yoktu; tarama yapısal olarak kördü. Silme
+kararı doğruydu, **kanıtı yanlıştı** — takım `FileNotFoundError` ile düştü.
+
+> **Kural:** metin taraması, parçalardan kurulan bir yolun **yokluğunu**
+> kanıtlayamaz. "Referansı yok" beyanı ya takımın yeşil koşusuna ya da
+> sembol/AST taramasına dayanır; `grep` çıktısı tek başına yetmez.
+
+Onarımdan önce kanonik dosyanın testin üç iddiasını da karşıladığı ölçüldü
+(`DROP TRIGGER IF NOT EXISTS` yok · `job_postings` var · `UNIQUE` var);
+test yalnızca **yanlış dosyaya** bakıyormuş — D-258/4 "yarım göç" deseni.
+
+### 11. Sıra bilgisi — devir notunun karşılaştırması bu ortamda üretilemez
+
+Devir notu "rastgele sıra → 1 failed / sabit sıra → 4445 passed" diyordu.
+Ölçüm: **bu ortamda sıralama eklentisi hiç kurulu değil.**
+
+```
+pytest 9.1.1
+{'pytest_randomly': False, 'pytest_reverse': False, 'pytest_random_order': False}
+```
+
+Sonuç: `-p no:randomly` bayrağı **etkisizdi**, `--reverse` reddedildi.
+Rastgele sıra bu ortamda yeniden üretilemez (D-260: beyan kanıt değildir).
+Ters sıra, bağımlılık eklemeden 2 satırlık yerel eklentiyle üretildi.
+
+| sıra | sonuç |
+|---|---|
+| sabit | `4510 passed, 12 skipped` |
+| ters (`items.reverse()`) | `4509 passed, 12 skipped, 1 deselected` |
+| rastgele | **üretilemedi** — eklenti yok |
+
+Ters sıradaki tek düşüş `test_vault_kokte_tek_kullanimlik_yok` idi ve
+sebebi **kendi ölçüm aracımdı** (`_ters.py` kökte duruyordu) — D-226
+bağımlılığı değil. Bu turda mandal ikinci kez kendi turunun artığını
+yakaladı (birincisi §5'teki fiil mandalı). Araç D-241 gereği silindi.
+
+**Kayma denetimi (yeni).** Ağaçta eşzamanlı başka ajan çalışıyordu
+(`tests/test_ticaret_sicili_kanit.py` koşunun ortasında değişti; toplam
+4524 → 4522'ye düştü). Bu yüzden son koşu **öncesi/sonrası toplama
+sayımıyla** çerçevelendi: `4522 → koşu → 4522`. Sayı kaymamışsa koşu
+geçerlidir; kaymışsa sonuç beyan edilemez.
+
+**Referans:** D-211, D-222, D-226, D-227, D-230, D-241, D-243, D-258,
+D-260, D-263, D-265, D-266, D-268.

@@ -1,115 +1,49 @@
-"""Migration çalıştırıcı (PostgreSQL).
+"""KAPALI göç yolu (D-266, D-271).
 
-`schema/migrations/` altındaki numaralı SQL dosyalarını sırayla uygular.
-Uygulanan migration'lar `schema_migrations` tablosunda takip edilir.
+Bu modül eskiden `schema/migrations/` altındaki SQL dosyalarını uygular ve
+kendi `schema_migrations` kaydını tutardı. **Düşürüldü.**
 
-Kullanım:
-    python -m company_master.db.migrate            # bekleyen migration'ları uygula
-    python -m company_master.db.migrate --status   # durum raporu
+Neden düşürüldü, ölçümle:
+
+1. **Çağıranı yoktu.** `apply_migrations` / `main` fonksiyonlarını kod
+   tabanında çağıran tek bir yer bile yoktu; yalnız `python -m` ile elle
+   çalıştırılabiliyordu. D-266: çağıranı olmayan kod onarılmaz, düşürülür.
+2. **İkinci defter doğuruyordu.** D-264'te ölçüldü: bu yol defteri 23 →
+   15 kaydına geri almıştı. `goc_defteri.py` ile aynı tabloya farklı
+   kurallarla yazan ikinci bir kapı, defteri anlatıcı olmaktan çıkarır
+   (D-265: üç defter tutan sistem hiçbirine güvenemez).
+3. **Şemayı nitelendirmiyordu.** `FROM schema_migrations` yazıyordu;
+   canlı DB'de bu ad üç şemada birden var (public, auth, realtime).
+
+Tek göç kapısı:
+
+    python scripts/goc_defteri.py --uygula 00NN_x.sql   # tek göç
+    python scripts/goc_defteri.py --uygula-tumu         # kurulum/deploy
+    python scripts/goc_defteri.py                        # rapor (yazmaz)
+
+Mandal: `tests/test_data_log.py::test_goc_yazma_yollari_kapali`.
 """
 
 from __future__ import annotations
-import argparse
+
 import sys
-from dataclasses import dataclass
-from pathlib import Path
-from typing import List
-from sqlalchemy import create_engine, text
-from .connection import get_database_url
 
-MIGRATIONS_DIR = Path(__file__).resolve().parents[1] / "schema" / "migrations"
-
-_TRACKING_DDL = """
-CREATE TABLE IF NOT EXISTS schema_migrations (
-    filename   TEXT PRIMARY KEY,
-    applied_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+_KAPALI = (
+    "company_master.db.migrate KAPALI (D-266/D-271). Göç tek kapıdan geçer:\n"
+    "    python scripts/goc_defteri.py --uygula <dosya.sql>\n"
+    "    python scripts/goc_defteri.py --uygula-tumu\n"
+    "Bu yol ikinci bir defter doğurduğu için düşürüldü (D-264: defter 23 → 15)."
 )
-"""
 
-@dataclass
-class MigrationResult:
-    filename: str
-    applied: bool
-    error: str | None = None
 
-def _pending_files(applied: set[str]) -> List[Path]:
-    files = sorted(MIGRATIONS_DIR.glob("*.sql"))
-    return [f for f in files if f.name not in applied]
+def apply_migrations(database_url: str | None = None):  # noqa: ARG001
+    raise RuntimeError(_KAPALI)
 
-def _split_statements(sql: str) -> List[str]:
-    """Yorumları atar, SONRA noktalı virgülle böler.
-
-    D-251/3 — GOC-DEFTER-01'in kök nedeni buradaydı: eski hali önce bölüp
-    sonra yorumu atıyordu. Yorum içindeki tek bir ';' (0012'de vardı) deyimi
-    ortadan kesiyor, göç her denemede sözdizimi hatasıyla düşüyordu. Göç
-    uygulanamadığı için DDL elle çekildi, defter de yalan söylemeye başladı.
-
-    BEGIN/COMMIT atılır: çalıştırıcı kendi işlemini `engine.begin()` ile açar.
-    """
-    temiz = "\n".join(
-        satir.split("--")[0].rstrip() if "--" in satir else satir
-        for satir in sql.splitlines()
-        if satir.strip() and not satir.strip().startswith("--")
-    )
-    return [
-        s.strip() for s in temiz.split(";")
-        if s.strip() and s.strip().upper() not in ("BEGIN", "COMMIT")
-    ]
-
-def _engine_url(database_url: str | None = None) -> str:
-    url = database_url or get_database_url()
-    if url.startswith("postgresql://"):
-        return url.replace("postgresql://", "postgresql+psycopg://", 1)
-    return url
-
-def apply_migrations(database_url: str | None = None) -> List[MigrationResult]:
-    engine = create_engine(_engine_url(database_url), future=True)
-    with engine.begin() as conn:
-        conn.execute(text(_TRACKING_DDL))
-        applied = {
-            row[0] for row in conn.execute(text("SELECT filename FROM schema_migrations"))
-        }
-
-    results: List[MigrationResult] = []
-    for path in _pending_files(applied):
-        sql = path.read_text(encoding="utf-8")
-        try:
-            with engine.begin() as conn:
-                for stmt in _split_statements(sql):
-                    conn.execute(text(stmt))
-                conn.execute(
-                    text("INSERT INTO schema_migrations (filename) VALUES (:f)"),
-                    {"f": path.name},
-                )
-            results.append(MigrationResult(filename=path.name, applied=True))
-        except Exception as exc:
-            results.append(MigrationResult(filename=path.name, applied=False, error=str(exc)))
-            break
-    return results
 
 def main() -> int:
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--status", action="store_true")
-    args = parser.parse_args()
+    print(_KAPALI, file=sys.stderr)
+    return 2
 
-    engine = create_engine(_engine_url(), future=True)
-    with engine.begin() as conn:
-        conn.execute(text(_TRACKING_DDL))
-        applied = {
-            row[0] for row in conn.execute(text("SELECT filename FROM schema_migrations"))
-        }
-
-    all_files = sorted(MIGRATIONS_DIR.glob("*.sql"))
-    if args.status:
-        for f in all_files:
-            mark = "[uygulandı]" if f.name in applied else "[bekliyor]"
-            print(f"{mark} {f.name}")
-        return 0
-
-    results = apply_migrations()
-    for r in results:
-        print(f"{'OK' if r.applied else 'HATA'} {r.filename} {r.error or ''}")
-    return 0 if not results or all(r.applied for r in results) else 1
 
 if __name__ == "__main__":
     sys.exit(main())

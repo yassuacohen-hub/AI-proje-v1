@@ -181,15 +181,20 @@ def test_migration_0015_in_versions():
 
 
 def test_goc_yazma_yollari_kapali():
-    """BORC-GOC-IKI-DEFTER-01 (D-265): tek defter `schema_migrations`.
+    """BORC-GOC-IKI-DEFTER-01 (D-265): tek defter `public.schema_migrations`.
 
     Eski hali "migrate.py default target 15 olmali" diyordu; diskte 34 goc
     varken 15'te durmayi SART KOSUYORDU. Yalani koruyan bekci, tek kapiyi
     koruyan bekciye cevrildi.
+
+    D-271: kapatilan yol UC degil DORT'tu. `src/company_master/db/migrate.py`
+    bu listede yoktu; cagirani da yoktu (D-266) ama `python -m` ile
+    calisabiliyordu ve D-264'te defteri 23 -> 15'e geri almisti.
     """
     for yol in (
         "src/company_master/schema/migrations/migrate.py",
         "scripts/db_migrate.py",
+        "src/company_master/db/migrate.py",  # D-271: dorduncu yol
     ):
         kod = Path(yol).read_text(encoding="utf-8")
         ast.parse(kod)  # sozdizimi bozulmadi
@@ -206,6 +211,50 @@ def test_goc_yazma_yollari_kapali():
             if isinstance(n, ast.FunctionDef) and n.name == ad
         )
         assert "SystemExit" in ast.unparse(dugum), f"{ad} hala goc uyguluyor"
+
+    # Dorduncu yol: govde tamamen dusuruldu, cagirilirsa patlar.
+    dorduncu = ast.parse(Path("src/company_master/db/migrate.py").read_text("utf-8"))
+    dugum = next(
+        n for n in ast.walk(dorduncu)
+        if isinstance(n, ast.FunctionDef) and n.name == "apply_migrations"
+    )
+    govde = ast.unparse(dugum)
+    assert "RuntimeError" in govde, "apply_migrations hala goc uyguluyor (D-271)"
+    assert "create_engine" not in govde, "apply_migrations hala DB'ye baglaniyor"
+
+
+def test_defter_yazan_baska_yol_yok():
+    """D-271: deftere YAZAN tek kaynak `scripts/goc_defteri.py`.
+
+    Ust test yolun KAPALI oldugunu soyluyor; bu test YENI bir yolun
+    acilmadigini soyluyor. Ikisi ayri sey: kapatilan uc yolu tek tek
+    saymak, dorduncusunu bulmami saglamadi -- onu ancak "INSERT INTO
+    schema_migrations" arayarak buldum. Mandal artik aramayi kendisi yapar.
+
+    Sema adi da denetlenir: nitelendirmesiz yazma, `search_path`
+    degisirse baska bir semanin defterine yazar (canli DB'de
+    `schema_migrations` adi public/auth/realtime olmak uzere UC semada var).
+    """
+    IZINLI = {
+        Path("scripts/goc_defteri.py"),
+        Path("src/company_master/schema/migrations/0001_core.sql"),
+    }
+    suclu = []
+    for yol in ROOT.rglob("*.py"):
+        bagil = yol.relative_to(ROOT)
+        if bagil in IZINLI or ".venv" in bagil.parts or bagil.parts[0] == "tests":
+            continue
+        for satir in yol.read_text(encoding="utf-8", errors="ignore").splitlines():
+            if "INTO schema_migrations" in satir or "INTO public.schema_migrations" in satir:
+                suclu.append(f"{bagil}: {satir.strip()}")
+    assert not suclu, "Deftere yazan ikinci yol (D-271/D-265):\n" + "\n".join(suclu)
+
+    # Izinli kaynak semayi ACIKCA yazar.
+    kaynak = (ROOT / "scripts/goc_defteri.py").read_text(encoding="utf-8")
+    assert "INTO public.schema_migrations" in kaynak, "defter semasi nitelendirilmemis"
+    assert "INTO schema_migrations" not in kaynak.replace(
+        "INTO public.schema_migrations", ""
+    ), "goc_defteri.py'de nitelendirmesiz yazma kalmis"
 
 
 # ------------------------------------------------------------------- musteri_yonetimi

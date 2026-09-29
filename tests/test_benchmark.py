@@ -56,6 +56,28 @@ class TestBenchmarkSuiteEsikler:
         assert sonuc["p50_ms"] < tavan_ms, f"{url} p50={sonuc['p50_ms']}ms >= {tavan_ms}ms"
 
 
+class TestKirletmeMandali:
+    """D-226 mandali: `kos()` global durumu GERI KOYMALIDIR.
+
+    Olculen kirletme (2026-09-28): `benchmark_http.kos()` olcum icin
+    `web_app.engine`i sahte bir motorla degistiriyor, sonunda geri
+    koymuyordu. Ayni surecte sonra kosan HER test sahte motoru goruyordu;
+    sabit sirada kirleten kurbandan SONRA geldigi icin takim yesil,
+    ters sirada kirmizi oluyordu. Ayni kod, iki sonuc.
+
+    Mandal kirilarak dogrulandi: geri koyma satiri silinince bu test duser.
+    """
+
+    def test_kos_sahte_motoru_geri_koyar(self):
+        import web_app
+
+        onceki = getattr(web_app, "engine", None)
+        benchmark_http.kos("/api/health", 5, 1)
+        assert getattr(web_app, "engine", None) is onceki, (
+            "kos() sahte motoru geri koymadi -- sonraki testler kirlenir (D-226)"
+        )
+
+
 class TestBenchmarkRapor:
     def test_rapor_dosyasi_yazilir(self, tmp_path=None):
         veri = _suite_json()

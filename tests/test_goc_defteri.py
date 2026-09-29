@@ -25,7 +25,10 @@ def test_defter_semayla_uyusuyor():
     with get_engine().connect() as conn:
         sema = sema_durumu(conn)
         defter = {
-            r[0] for r in conn.execute(text("SELECT filename FROM schema_migrations"))
+            r[0]
+            for r in conn.execute(
+                text("SELECT filename FROM public.schema_migrations")  # D-271
+            )
         }
     sonuc = degerlendir(izler, sema)
 
@@ -132,8 +135,61 @@ def test_sicil_semada_duruyor():
     assert r["tavan"] == 7.5, f"tavan {r['tavan']}, beklenen 7.5 (D-267)"
 
 
+def test_defter_semasi_acikca_nitelendirilir():
+    """D-271: defter adi `search_path`e birakilmaz, `public.` yazilir.
+
+    Olcum (2026-09-28): `schema_migrations` adi canli DB'de UC semada
+    birden var. Kanit:
+
+        SELECT table_schema FROM information_schema.tables
+        WHERE table_name='schema_migrations';
+        -> auth, public, realtime
+
+    auth/realtime Supabase'in kendi ic defterleridir; "iki defter tutuyoruz"
+    borcu bu yuzden IPTAL. Ama nitelendirme eksigi GERCEK: bugun dogru
+    defter yalnizca `search_path` = `"$user", public, extensions` oldugu
+    icin aciliyor. Sunucu ayari degisirse arac sessizce baska bir defteri
+    duzenler ve kimse fark etmez.
+
+    Mandal iki seyi birden tutar:
+      1) Bizim defterimiz gercekten `public` semasindadir.
+      2) Defteri OKUYAN/YAZAN her ifade semayi acikca yazar.
+    """
+    with get_engine().connect() as conn:
+        semalar = {
+            r[0]
+            for r in conn.execute(
+                text(
+                    "SELECT table_schema FROM information_schema.tables "
+                    "WHERE table_name='schema_migrations'"
+                )
+            )
+        }
+        assert "public" in semalar, f"defter public'te degil: {sorted(semalar)}"
+        n = conn.execute(
+            text("SELECT count(*) FROM public.schema_migrations")
+        ).scalar_one()
+    assert n > 0, "public.schema_migrations bos -- yanlis defteri okuyor olabiliriz"
+
+    # Kaynak mandali: nitelendirmesiz `FROM schema_migrations` kalmasin.
+    for yol in (
+        KOK / "scripts/goc_defteri.py",
+        Path(__file__),
+    ):
+        metin = yol.read_text(encoding="utf-8")
+        for satir in metin.splitlines():
+            if "schema_migrations" not in satir or satir.lstrip().startswith("#"):
+                continue
+            # Sadece SQL ifadeleri denetlenir; aciklama/docstring degil.
+            if "FROM " in satir or "INTO " in satir:
+                assert "public.schema_migrations" in satir, (
+                    f"{yol.name}: sema nitelendirilmemis (D-271): {satir.strip()}"
+                )
+
+
 if __name__ == "__main__":
     test_defter_semayla_uyusuyor()
     test_sema_dili_ingilizce()
     test_sicil_semada_duruyor()
+    test_defter_semasi_acikca_nitelendirilir()
     print("MANDAL GECTI.")

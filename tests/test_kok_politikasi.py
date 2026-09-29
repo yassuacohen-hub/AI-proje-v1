@@ -70,3 +70,56 @@ def test_izin_listesi_kucuk_kalir() -> None:
         f"Izin listesi {len(IZINLI_DOSYA)} ada cikmis. Tavan 4 ve yalniz kuculur; "
         "yeni dosyaya yer acmak icin buyutmek D-241 ihlalidir."
     )
+
+
+# ---------------------------------------------------------------------------
+# Vault kokunde tek kullanimlik betik birikmesi (D-221)
+# ---------------------------------------------------------------------------
+
+# tests/ -> vault koku
+VAULT_KOK = pathlib.Path(__file__).resolve().parents[1]
+
+#: Koke dusecek tek kullanimlik desenler (D-221). Ayni desenler vault
+#: .gitignore'inda da yasakli; burada mandal onlari diske dusuruyor.
+TEK_KULLANIMLIK_ONEK = (
+    "check_", "fix_", "run_", "verify_", "add_", "clean_", "debug_", "count_",
+)
+
+#: Koke kalan _onekli dosyalar bunlar disinda (D-219 canli sablon).
+IZINLI_ONEKLI = frozenset({"_ajan_context_sablon.md"})
+
+
+def _vault_kok_tek_kullanimlik() -> list[str]:
+    """Vault kokunde D-221'e aykiri tek kullanimlik dosyalar."""
+    supheli = {
+        p.name
+        for p in VAULT_KOK.iterdir()
+        if p.is_file()
+        and p.name not in IZINLI_ONEKLI
+        and (p.name.startswith("_") or p.name.startswith(TEK_KULLANIMLIK_ONEK))
+    }
+    return sorted(supheli)
+
+
+def test_vault_kokte_tek_kullanimlik_yok() -> None:
+    """Vault kokunde tek kullanimlik betik/cikti birikmez (D-221).
+
+    Ajanlar `check_*.py` / `run_*.py` gorup YANLIS betigi calistirir:
+    ayni isin 5-7 kopyasi koke birikmisti. Cozum: `_ARSIV_tek_kullanimlik/`
+    altina tasinir; izin listesi BUYUTULMEZ.
+    """
+    fazla = _vault_kok_tek_kullanimlik()
+    assert not fazla, (
+        f"Vault kokte {len(fazla)} tek kullanimlik dosya: {fazla[:10]}\n"
+        "Cozum: `_ARSIV_tek_kullanimlik/` altina tasinir. D-221 bu olcumun "
+        "gereklidir: kokte biriken betik ajanin yanlis calistirmasina yol acar."
+    )
+
+
+def test_ajan_sablonu_kokte_kalir() -> None:
+    """D-219 sablonu arsive kacar; 3 referans onu okuyor."""
+    assert (VAULT_KOK / "_ajan_context_sablon.md").is_file(), (
+        "D-219 ajan context sablonu kokten tasinmis/tasinmamaya calisiliyor. "
+        "Bu dosya olmadan ajanlar kalici hafiza uretemiyor."
+    )
+

@@ -128,8 +128,19 @@ def _istatistik(sureler: list[float]) -> dict:
 
 
 def kos(url: str, n: int = 100, c: int = 4) -> dict:
+    """Tek uc icin yuk olcumu; `web_app` global durumunu GERI KOYAR (D-226).
+
+    Onceki surum `web_app.get_engine`/`DASH_API_KEY` degerlerini sahte motorla
+    degistirip birakiyordu. `tests/test_benchmark.py` bu fonksiyonu cagirdiginda
+    ayni surecte kosan sonraki testler sahte motora baglaniyordu: sorgular bos
+    donuyor, `web_app.api_companies` icinde `total` None oluyor ve
+    `basarili=total > 0` TypeError veriyordu. Sabit sirada kurban modul
+    benchmark'tan ONCE kostugu icin gorunmuyordu; ters sirada 10 test dustu.
+    """
     kuyruk = _KilitliKuyruk(_fabrika_sec(url))
     kuyruk.sonuclari_yenile()
+    eski_motor = web_app.get_engine
+    eski_anahtar = web_app.DASH_API_KEY
     web_app.get_engine = lambda: _FakeEngine(kuyruk)
     web_app.DASH_API_KEY = ""
     web_app._RATE_LIMIT.clear()
@@ -158,10 +169,15 @@ def kos(url: str, n: int = 100, c: int = 4) -> dict:
         dagilim[i] += 1
     basla = time.perf_counter()
     threads = [threading.Thread(target=_isci, args=(k,)) for k in dagilim]
-    for t in threads:
-        t.start()
-    for t in threads:
-        t.join()
+    try:
+        for t in threads:
+            t.start()
+        for t in threads:
+            t.join()
+    finally:
+        web_app.get_engine = eski_motor
+        web_app.DASH_API_KEY = eski_anahtar
+        web_app._RATE_LIMIT.clear()
     duvar = time.perf_counter() - basla
     ist = _istatistik(sonuclar) if sonuclar else {"n": 0}
     ist.update({

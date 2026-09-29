@@ -27,7 +27,11 @@ from company_master.intelligence.job_intelligence.pipeline.normalizer import (
 from scripts.ingest_job_postings import _insert_batch, prepare_job_record
 
 REPO_ROOT = ROOT
-MIGRATION = REPO_ROOT / "src" / "company_master" / "db" / "migrations" / "0007_job_intelligence.sql"
+# D-271: eskiden `db/migrations/0007_job_intelligence.sql`a bakiyordu. O dosya
+# kanonik defterde YOKTU (defter `0013`u kaydediyor) ve kanonikten byte olarak
+# farkliydi (11252 vs 11518) — yalan soyleyen bir kopya (D-211/D-230). Silindi.
+# Kanonik dizin: `scripts/goc_defteri.py::GOC_DIZINI`.
+MIGRATION = REPO_ROOT / "src" / "company_master" / "schema" / "migrations" / "0013_job_intelligence.sql"
 
 
 class FakeMatcher:

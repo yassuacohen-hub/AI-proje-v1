@@ -11,6 +11,14 @@ defteri gercekle esitler.
 
 Idempotent (D-251/5): ikinci calisma hicbir sey degistirmez.
 D-251/4: DDL yalniz goc dosyasindan calisir; bu arac elle SQL kabul etmez.
+
+D-271: defter adi her ifadede ACIKCA nitelendirilir (`public.`), asla
+`search_path`e birakilmaz. Olcum (2026-09-28): canli DB'de
+`schema_migrations` adi UC semada birden var -- public, auth, realtime.
+auth/realtime Supabase'in kendi defterleridir, bizim degil (borc iptal).
+Bugun dogru defter aciliyor cunku `search_path` = `"$user", public,
+extensions`; ama bunu garanti eden bir sey yok. Ayar degisirse arac
+sessizce BASKA bir defteri duzenlerdi -- ve bunu kimse fark etmezdi.
 """
 from __future__ import annotations
 
@@ -231,7 +239,10 @@ def calistir(esitle: bool) -> int:
     with get_engine().begin() as conn:
         sema = sema_durumu(conn)
         defter = {
-            r[0] for r in conn.execute(text("SELECT filename FROM schema_migrations"))
+            r[0]
+            for r in conn.execute(
+                text("SELECT filename FROM public.schema_migrations")  # D-271
+            )
         }
         sonuc = degerlendir(izler, sema)
 
@@ -253,7 +264,7 @@ def calistir(esitle: bool) -> int:
             # ON CONFLICT DO NOTHING -> ikinci calismada sessiz gecer (D-251/5).
             conn.execute(
                 text(
-                    "INSERT INTO schema_migrations (filename) VALUES (:f) "
+                    "INSERT INTO public.schema_migrations (filename) VALUES (:f) "
                     "ON CONFLICT (filename) DO NOTHING"
                 ),
                 [{"f": f} for f in yazilacak],  # toplu yazma, D-249
@@ -284,7 +295,7 @@ def uygula(dosya: str) -> None:
         conn.connection.cursor().execute(yol.read_text(encoding="utf-8"))
         conn.execute(
             text(
-                "INSERT INTO schema_migrations (filename) VALUES (:f) "
+                "INSERT INTO public.schema_migrations (filename) VALUES (:f) "
                 "ON CONFLICT (filename) DO NOTHING"
             ),
             {"f": dosya},

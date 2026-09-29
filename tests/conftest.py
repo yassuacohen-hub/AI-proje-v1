@@ -114,3 +114,39 @@ def _uretim_verisi_dokunulmaz():
             "Test uretim verisine yazdi (geri yuklendi): " + ", ".join(kirlenen)
         )
 
+
+@pytest.fixture(autouse=True)
+def _streamlit_form_durumu_temiz():
+    """D-226 mandali: bare modda `st.form` main_dg'ye form kimligi yapistirir.
+
+    Olculen mekanizma (2026-09-28):
+      * ScriptRunContext yokken `DeltaGenerator._block` erken `return dg`
+        yapar (`_cursor is None`), yani form blogu main_dg'nin KENDISIDIR.
+      * `st.form` donen bloga `_form_data = FormData(key)` yazar; `with`
+        cikisi bunu temizlemez -> main_dg kalici olarak "form icinde" olur.
+      * `is_in_form` once `this_dg._form_data`ya bakar; sonraki `AppTest`
+        kosusu bu yuzden "Forms cannot be nested in other forms." verir.
+
+    Kanit: `render_decision_tab([])` oncesi main_form_id=None, sonrasi
+    main_form_id='yeni_karar'. Kirleten test tek basina gecer, kurbani
+    (`tests/test_app_menu_rol.py`) ayni surecte dusurur.
+
+    Mandal: geri yukle ve testi kir -- ihlal sessiz kalamaz.
+    """
+    yield
+    try:
+        from streamlit.delta_generator_singletons import get_dg_singleton_instance
+
+        ana = get_dg_singleton_instance().main_dg
+    except Exception:  # noqa: BLE001 - streamlit yoksa korunacak durum da yok
+        return
+    if getattr(ana, "_form_data", None) is not None:
+        kimlik = ana._form_data.form_id
+        ana._form_data = None  # once geri yukle, sonra sikayet et
+        raise AssertionError(
+            f"Test main_dg'ye form durumu birakti (form_id={kimlik!r}, geri "
+            "yuklendi). ScriptRunContext'siz `st.form` kullanan uretim "
+            "fonksiyonunu cagiran test, cagri sonrasi main_dg._form_data'yi "
+            "geri koymalidir (D-226)."
+        )
+

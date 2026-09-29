@@ -1,142 +1,98 @@
-"""Migration dosyaları ve çalıştırıcı için birim testleri.
+"""KAPALI göç yolunun mandalı (D-266, D-271).
 
+Bu dosya eskiden `src/company_master/db/migrate.py`'nin `MIGRATIONS_DIR` ve
+`_split_statements` API'sini test ediyordu. O yol bu turda **düşürüldü**
+(çağıranı yoktu, ikinci defter doğuruyordu, şemayı nitelendirmiyordu).
 
+Test de bir beyandır (D-258/7): düşen kodun testi silinmez, kapalılığı
+bekçileyen mandala çevrilir. Aksi halde takım toplama anında ölür —
+bu dosya tam olarak bunu yaptı: `AttributeError: MIGRATIONS_DIR`.
 
-Gerçek PostgreSQL gerektirmez: dosya sıralaması, sözdizimi (pglast varsa)
+Göç dosyalarının kendi doğrulaması kanonik dizinde yapılır:
+`tests/test_goc_defteri.py`.
 
-ve _split_statements davranışı doğrulanır.
-
+Tek başına da koşar: python tests/company_master/test_migrate.py
 """
 
-
-
-import re
-
 import sys
-
 from pathlib import Path
 
-
-
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-
-
-
-from src.company_master.db import migrate
-
-
-
-
-
-MIGRATIONS_DIR = migrate.MIGRATIONS_DIR
-
-
-
-
-
-def test_migration_dosyalari_sirali_ve_numarali():
-
-    files = sorted(MIGRATIONS_DIR.glob("*.sql"))
-
-    assert len(files) >= 4, "En az 4 migration dosyası bekleniyor"
-
-    for f in files:
-
-        assert re.match(r"^\d{4}_.+\.sql$", f.name), f"Geçersiz dosya adı: {f.name}"
-
-
-
-
-
-def test_split_statements_yorumlari_atlar():
-
-    sql = "-- yorum satırı\nCREATE TABLE t (id INT); -- son yorum\nSELECT 1;"
-
-    stmts = migrate._split_statements(sql)
-
-    assert stmts == ["CREATE TABLE t (id INT)", "SELECT 1"]
-
-
-
-
-
-def test_split_statements_bos_sql():
-
-    assert migrate._split_statements("-- sadece yorum\n") == []
-
-
-
-
-
-def test_migration_sql_syntax_pglast():
-
-    """pglast (libpg_query) ile gerçek PostgreSQL sözdizimi doğrulaması."""
-
-    try:
-
-        import pglast
-
-    except ImportError:
-
-        import pytest
-
-        pytest.skip("pglast kurulu değil")
-
-
-
-    for f in sorted(MIGRATIONS_DIR.glob("*.sql")):
-
-        sql = f.read_text(encoding="utf-8")
-
-        stmts = pglast.parse_sql(sql)  # hata fırlatırsa test düşer
-
-        assert len(stmts) > 0, f"{f.name} boş görünüyor"
-
-
-
-
-
-def test_core_tablolari_tanimli():
-
-    """0001 çekirdek tabloları içerir."""
-
-    sql = (MIGRATIONS_DIR / "0001_core.sql").read_text(encoding="utf-8")
-
-    for table in ("companies", "osbs", "sources", "source_records", "quarantine_firms"):
-
-        assert f"CREATE TABLE IF NOT EXISTS {table}" in sql, f"{table} eksik"
-
-
-
-
-
-def test_tum_master_tablolari_kapsaniyor():
-
-    """Ana belgedeki 19 tablo + Faz 1.2 tabloları migration'larda tanımlı."""
-
-    beklenen = [
-
-        "companies", "company_names", "company_identifiers", "company_locations",
-
-        "osbs", "company_industries", "nace_codes", "company_products",
-
-        "products", "product_categories", "company_contacts", "sources",
-
-        "source_records", "entity_resolution", "evidence", "company_events",
-
-        "company_state", "commercial_signals", "momentum_snapshot",
-
-        "company_capabilities", "certifications", "key_personnel",
-
+import pytest
+
+KOK = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(KOK))
+
+from src.company_master.db import migrate  # noqa: E402
+
+# Kanonik göç dizini — `scripts/goc_defteri.py::GOC_DIZINI` ile aynı yol.
+KANONIK = KOK / "src/company_master/schema/migrations"
+
+
+def test_kapali_yol_yazmaya_kalkmaz() -> None:
+    """D-266: düşürülen yol sessizce çalışmaz, yüksek sesle reddeder."""
+    with pytest.raises(RuntimeError, match="KAPALI"):
+        migrate.apply_migrations()
+    assert migrate.main() == 2, "kapalı yol sıfır dönerse CI onu başarı sanar"
+
+
+def test_kapali_yol_api_geri_gelmiyor() -> None:
+    """D-271 mandalı: bu adlar geri gelirse ikinci defter de geri gelir.
+
+    `MIGRATIONS_DIR` kendi dizinini, `_split_statements` kendi uygulayıcısını
+    ima eder; ikisi birlikte `goc_defteri.py`'nin yanında ikinci bir kapı
+    kurar (D-265: üç defter tutan sistem hiçbirine güvenemez).
+    """
+    for ad in ("MIGRATIONS_DIR", "_split_statements", "_ensure_table"):
+        assert not hasattr(migrate, ad), (
+            f"migrate.{ad} geri gelmiş — kapalı yol yeniden açılıyor.\n"
+            "Göç tek kapıdan geçer: python scripts/goc_defteri.py --uygula <x.sql>"
+        )
+
+
+def test_tek_goc_dizini_var() -> None:
+    """D-211/D-230: göç dosyaları tek dizinde durur, kopyası olmaz.
+
+    Ölçüm (2026-09-28): `db/migrations/0007_job_intelligence.sql` ve
+    `db/schema/migrations/0013_job_intelligence.sql` yetim kopyalardı —
+    kanonik dosyadan byte olarak FARKLI (11252 / 11256 / 11518) ve hiçbir
+    kod onlara bakmıyordu. Tabloları canlıda var, ama defterdeki kayıt
+    kanonik `0013`e ait. Kopyalar silindi; bu mandal geri gelmelerini durdurur.
+    """
+    assert KANONIK.is_dir(), f"kanonik göç dizini yok: {KANONIK}"
+    yetim = [
+        p
+        for p in (KOK / "src/company_master/db").rglob("*.sql")
+        if "migrations" in p.parts
     ]
+    assert not yetim, (
+        "`db/` altında göç dosyası var — kanonik dizin "
+        "`src/company_master/schema/migrations`:\n"
+        + "\n".join(str(p.relative_to(KOK)) for p in yetim)
+    )
 
-    tum_sql = ""
 
-    for f in sorted(MIGRATIONS_DIR.glob("*.sql")):
+def test_kanonik_dizin_numarali_ve_dolu() -> None:
+    """Eski `test_migration_dosyalari_sirali_ve_numarali` — doğru dizinde."""
+    import re
 
-        tum_sql += f.read_text(encoding="utf-8")
+    dosyalar = sorted(KANONIK.glob("*.sql"))
+    assert len(dosyalar) >= 4, f"en az 4 göç bekleniyor, {len(dosyalar)} var"
+    for f in dosyalar:
+        assert re.match(r"^\d{4}_.+\.sql$", f.name), f"geçersiz ad: {f.name}"
 
-    for table in beklenen:
 
-        assert f"CREATE TABLE IF NOT EXISTS {table}" in tum_sql, f"{table} tanımlı değil"
+def test_core_tablolari_tanimli() -> None:
+    """0001 çekirdek tabloları içerir (eski testin kanonik dizindeki hâli)."""
+    sql = (KANONIK / "0001_core.sql").read_text(encoding="utf-8")
+    for tablo in ("companies", "osbs", "sources", "source_records", "quarantine_firms"):
+        assert f"CREATE TABLE IF NOT EXISTS {tablo}" in sql, f"{tablo} eksik"
 
+
+if __name__ == "__main__":
+    print(f"kanonik göç dosyası: {len(list(KANONIK.glob('*.sql')))}")
+    test_kapali_yol_yazmaya_kalkmaz()
+    test_kapali_yol_api_geri_gelmiyor()
+    test_tek_goc_dizini_var()
+    test_kanonik_dizin_numarali_ve_dolu()
+    test_core_tablolari_tanimli()
+    print("hepsi geçti")

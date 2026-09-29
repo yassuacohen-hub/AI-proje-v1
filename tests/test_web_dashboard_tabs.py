@@ -4,6 +4,8 @@ import json
 from pathlib import Path
 from unittest.mock import MagicMock
 
+import pytest
+
 from web_dashboard.tabs import (
     admin_audit,
     admin_auth,
@@ -26,7 +28,22 @@ def test_admin_auth_reads_token_and_reports_missing_token(monkeypatch):
     admin_auth.st.info.assert_called_once()
 
 
-def test_decision_tab_handles_empty_and_limits_recent_rows(monkeypatch):
+@pytest.fixture
+def form_durumu_geri():
+    """`render_decision_tab` bare modda `st.form("yeni_karar")` cagirir.
+
+    ScriptRunContext yokken form blogu main_dg'nin kendisidir ve `with`
+    cikisi `_form_data`yi temizlemez; kalinti sonraki `AppTest` kosusunda
+    "Forms cannot be nested in other forms." olur (D-226).
+    Mandal: tests/conftest.py::_streamlit_form_durumu_temiz.
+    """
+    yield
+    from streamlit.delta_generator_singletons import get_dg_singleton_instance
+
+    get_dg_singleton_instance().main_dg._form_data = None
+
+
+def test_decision_tab_handles_empty_and_limits_recent_rows(monkeypatch, form_durumu_geri):
     admin_panel.st.info = MagicMock()
     admin_panel.render_decision_tab([])
     admin_panel.st.info.assert_called_once()

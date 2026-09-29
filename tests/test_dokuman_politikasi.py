@@ -96,6 +96,55 @@ def test_kural4_yasak_ad_kalibi_artmiyor() -> None:
     )
 
 
+# D-271 — borç başlığı fiil taşımaz. Segment bazlı: "UC" gibi kısa belirteçler
+# kelime içinde kaybolmasın diye kimlik "-" ile bölünür, parça karşılaştırılır.
+BORC_KIMLIK = re.compile(r"\b(?:BORC|VERI)-[A-Z0-9-]+-\d{2}\b")
+FIIL = {"DUSUR", "DOGRULAMA", "DEDUP", "TEMIZ", "BAG", "SOZLUK", "BETIK"}
+SAYI = {"IKI", "UC", "IKIZ", "TEK"}
+
+
+def _borc_kimlikleri() -> set[str]:
+    t = (KOK / "AGENTS.md").read_text(encoding="utf-8")
+    return set(BORC_KIMLIK.findall(t))
+
+
+def _fiilli_sayili() -> tuple[list[str], list[str]]:
+    fiilli, sayili = [], []
+    for k in sorted(_borc_kimlikleri()):
+        parca = set(k.split("-"))
+        if parca & FIIL:
+            fiilli.append(k)
+        if parca & SAYI:
+            sayili.append(k)
+    return fiilli, sayili
+
+
+def test_d271_borc_adinda_fiil_artmiyor() -> None:
+    """D-271: borç başlığı ölçülen sapmayı söyler, yapılacak fiili değil.
+
+    Mandal: D-271 anında 8 fiilli + 4 sayılı kimlik vardı. Geriye dönük
+    yeniden adlandırma 30+ karar girdisini ve git geçmişini kırar, kazancı
+    yok (D-221/1 mantığı). Yeni kimlik kapıda durur; sayı yalnız küçülür.
+
+    Tavan neden 4, 3 değil: bu mandal ilk koşuşta D-271 girdisinin kendisini
+    yakaladı. Girdi "`BORC-DEFTER-IKI-SEMA-01` defterde yok" diyordu; bunu
+    yazmak kimliği deftere soktu. Dördüncü sayılı kimlik iptal edilmiş bir
+    kimliktir — sayıyı mandala uydurmak yerine tavan gerçeğe çekildi.
+    """
+    fiilli, sayili = _fiilli_sayili()
+    assert len(fiilli) <= 8, (
+        f"D-271/1: fiil taşıyan borç kimliği {len(fiilli)}, üst sınır 8.\n"
+        "Yeni borç adında fiil yasak — yalnız ölçülen sapma yazılır.\n"
+        "'nace_name doldur' DEĞİL -> 'nace_name 52/8289 dolu, değerler isim değil'.\n"
+        + "\n".join(fiilli)
+    )
+    assert len(sayili) <= 4, (
+        f"D-271/2: sayı sayan borç kimliği {len(sayili)}, üst sınır 4.\n"
+        "Ad sayıyı dondurur, ölçüm değiştirir (D-265: 'iki defter' üç çıktı).\n"
+        + "\n".join(sayili)
+    )
+
+
 def test_d219_ajan_context_dosyalari() -> None:
     """Her ajanın hafıza dosyası: §KALDIĞIM YER + wikilink + 200 satır tavanı."""
     ajanlar = ("ihsan", "utku", "yasu", "salih")
@@ -130,9 +179,14 @@ if __name__ == "__main__":
     print(f"yasak ad ihlali: {len(ihlal)} / üst sınır 15")
     for y in ihlal:
         print("  -", y)
+    fiilli, sayili = _fiilli_sayili()
+    print(f"borç kimliği   : {len(_borc_kimlikleri())}")
+    print(f"  fiilli       : {len(fiilli)} / üst sınır 8  {fiilli}")
+    print(f"  sayılı       : {len(sayili)} / üst sınır 4  {sayili}")
     test_kural1_kanonik_yollar_mevcut()
     test_kural3_sablon_tekligi()
     test_kural4_yasak_ad_kalibi_artmiyor()
+    test_d271_borc_adinda_fiil_artmiyor()
     test_d219_ajan_context_dosyalari()
     test_gurultu_orani_raporlanabilir()
     print("D-220 kapisi: OK")

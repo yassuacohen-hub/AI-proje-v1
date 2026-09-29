@@ -6,7 +6,12 @@ Kapsam:
 - Tablo ve indeksler olusturuluyor
 - PK, FK, CHECK constraint'leri var
 - ip_adresi ve ulke_kodu kolonlari NULL gecebiliyor
-- Regresyon kapisi: kokte 0017*.down.sql yok (migrate.py glob("*.sql") recursive degil)
+- Regresyon kapisi: kokte 0017*.down.sql yok.
+  Gerekce (D-271): eskiden `migrate.py` goc dizinini `glob("*.sql")` ile
+  tariyordu; kokteki bir `.down.sql` ileri goc sanilip uygulanirdi. O yol
+  artik KAPALI (tek kapi `scripts/goc_defteri.py`), ama `goc_defteri.py` de
+  ayni dizini tarar -- desen `[0-9][0-9][0-9][0-9]_*.sql` oldugu icin
+  `down/` disinda kalan bir dosya yine yanlis siraya girer. Kapi duruyor.
 """
 from __future__ import annotations
 
