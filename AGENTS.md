@@ -4474,3 +4474,100 @@ python -m pytest -p randomly --randomly-seed=272 -q
 ```
 
 **Referans:** D-221, D-240, D-241, D-260, D-265, D-266, D-270, D-271.
+
+## D-281 — Diskte yokluk silme değildir; index'te duran kayıt sonraki ajana yalan söyler (2026-09-29)
+
+> Bu kayıt **D-273 olacaktı**. Olamadı: bkz. §5.
+
+### 1. Devir notunun üç iddiası da yanlış çıktı (D-267/1 deseni **beşinci** kez)
+
+| İddia | Ölçüm | Gerçek |
+|---|---|---|
+| Kökte 41 geçici betik (`check_*.py`, `debug_*.py`) **duruyor** | `dir /b check_*.py` → `File Not Found` | Diskte **yok**; git **index'inde 76 tane var** |
+| `scripts/ajan_cakisma_kilidi.py` `.pre-commit-config.yaml`'a kayıtlı ama yok | `findstr` → eşleşme yok | Kayıt `data/orchestrator/file_locks.json`'da; ve **hayalet değil** |
+| `.worktreeinclude` ölü | 73 kuralın **73'ü** `.gitignore`'da, okuyan kod 0 | Doğru — **tek doğru iddia** |
+
+### 2. Bulgu: "hayalet" diye tek bir şey yok, **iki** ayrı hal var
+
+| Disk | Index | Anlam |
+|---|---|---|
+| yok | yok | **Rezervasyon** — henüz yazılmamış dosyanın meşru kilidi (ihsan, `ALTYAPI-AJAN-CAKISMA-01`) |
+| yok | **var** | **Index hayaleti** — commit edilmemiş silme; sonraki ajan `git ls-files`'a bakınca "bu dosya var" sanır |
+
+Kilit dosyasındaki 7 kayıttan 2'si rezervasyon, 2'si index hayaleti
+(`skills/devops/__init__.py`, `skills/streamlit/__init__.py` — yasu'nun D-269
+sırasındaki silmesi), 3'ü diskte.
+
+### 3. Kök neden: D-221 mandalı **yalnız diske bakıyordu**
+
+`tests/test_kok_politikasi.py::_vault_kok_tek_kullanimlik()` `VAULT_KOK.iterdir()`
+kullanıyordu. 76 betik diskten silinmiş ama commit edilmemiş olduğu için mandal
+**yeşil yanıyordu** — yanlış öncülle. D-270'in ("yokluk metin/disk taramasıyla
+kanıtlanmaz") birebir tekrarı; bu kez kanıt aracı mandalın kendisiydi.
+
+### 4. Kural (D-281)
+
+1. **Diskte yokluk silme değildir.** Silme ancak commit edilince biter. Kilit
+   sahibi ajan, silmesini commit etmeden işini bitmiş saymaz.
+2. Kök temizliği mandalı **disk ∪ index** üzerinden ölçülür. Yalnız diske bakan
+   kontrol, kanıt değil beyandır (D-260).
+3. Kesilemeyen borç **sıfırlanmaz, tavanlanır**: ölçülen sayı sabit yazılır,
+   test yalnız "artmasın" der. Tavan yalnız **küçülür**.
+
+### 5. Karar numarası çatışması — D-227 ve D-272 ihlali (bulgu, düzeltme değil)
+
+Ölçüm: `AGENTS.md` en yüksek D = **272**, `docs/BORC_DEFTERI.md` en yüksek D = **280**.
+Defterde **8 karar başlığı** var (D-273…D-280, TOBB/MERSİS/OCR konuları).
+
+- **D-227 ihlali:** karar numarası yalnız `AGENTS.md`'den verilir; defter numara üretemez.
+- **D-272 ihlali:** defter **durum** tutar, `AGENTS.md` **gerekçe** tutar; defter karar kaydı barındıramaz.
+
+Başka ajanın işi **sessizce taşınmadı** — bulgu kaydedildi, taşıma kararı ürün
+sahibinin. Bu turun kaydı numara çakışmasın diye **D-273 → D-281** olarak kaydırıldı.
+
+### 6. Yapılanlar
+
+- `.worktreeinclude` **düşürüldü** (`git rm`, D-266); tek belge referansı gerekçesiyle düzeltildi.
+- `tests/test_kok_politikasi.py`'ye **genel mandal**: `test_d281_kilitli_dosya_index_hayaleti_degil`,
+  `test_d281_kokte_index_hayaleti_tek_kullanimlik_yok`. Dosyaya özel değil, **kayıtlı ama yok** desenini yakalar.
+- `BORC-SCRIPTS-01` **ölçüldü, kesilmedi**: `scripts/_*` = 41 girdi (29 `.py` **hepsi derlenir**,
+  **0 çürük**, 1 dizin, 11 veri), **üretim çağıranı 0** (tüm isabetler belge/rapor).
+  Kesme kararı ürün sahibinde — "borcumuz kalsın" kararı `docs/BORC_DEFTERI.md`'de,
+  `AGENTS.md`'de ve `git log --all -i --grep` içinde **bulunamadı** (kaynaksız iddia).
+  Ağaçta 3 ajanın 94 commit edilmemiş silmesi var; başkasının işini commit etmedim.
+
+### 7. Araç kusuru (kendi engelim, beyan)
+
+`ask_followup_question` **üç** denemede de `Missing value for required parameter 'follow_up'`
+ile düştü; parametre her seferinde tamdı. Soruyu kanala soramadığım için
+**hiçbir şey silmedim**, soruyu deftere `## Devir` bloğuna yazdım.
+
+### 8. Kapanan / açık borç
+
+- `.worktreeinclude` ölü dosyası — **kapandı** (düşürüldü).
+- `BORC-SCRIPTS-01` — **açık**, ölçüldü ve **tavanlandı** (76/2), karar ürün sahibinde.
+- Yeni borç: karar numarası çatışması (defterde 8 karar kaydı) — ürün sahibine sunuldu.
+
+### 9. Doğrulama (çalıştırılmış komut)
+
+```cmd
+python -m pytest tests/test_kok_politikasi.py -q
+# 7 passed in 1.19s
+
+# kırma denemesi: tavanlar 76/2 -> 75/1
+# 2 failed, 5 passed in 1.25s   (her iki D-281 testi de düştü)
+# geri alındı -> 7 passed in 1.39s
+
+python -m pytest -q -p no:randomly
+# 1 failed, 4527 passed, 12 skipped in 215.80s
+
+python -m pytest -q -p randomly --randomly-seed=281
+# 1 failed, 4527 passed, 12 skipped in 175.54s
+# FAILED tests/test_dokuman_politikasi.py::test_d219_ajan_context_dosyalari
+```
+
+Tek kırmızı iki sırada da aynı → sıra bağımlılığı yok, gerçek kusur:
+`yasu_project_context.md` 213 satır, D-219 tavanı 200. **Benim dosyam değil, düzeltilmedi**
+(başka ajanın açık işi). Mandal doğru çalıştı; kusuru yakalayan mandalın kendisidir.
+
+**Referans:** D-221, D-224, D-227, D-241, D-256, D-260, D-266, D-269, D-270, D-272.

@@ -462,7 +462,7 @@ Her satır bağımsız JSON. Append-only. Düzenleme yok — yanlış karar yeni
 - [ ] `git worktree add <yol> -b <branch> --track origin/<base>`
 - [ ] **Upstream tracking set edildi:** `git push -u origin <branch>` (bu sprintte atlandı, sorun çıkardı)
 - [ ] `git worktree list` çıktısı doğrulandı
-- [ ] `.worktreeinclude` / ignore dosyaları her ağaçta tutarlı
+- [ ] ignore dosyaları her ağaçta tutarlı (`.worktreeinclude` D-281'te düşürüldü: `.gitignore` kopyasıydı, okuyan kod yoktu)
 
 ### Obsidian vault
 - [ ] `.obsidian/app.json` → `userIgnoreFilters` dolduruldu (**script yazmadan önce**)
