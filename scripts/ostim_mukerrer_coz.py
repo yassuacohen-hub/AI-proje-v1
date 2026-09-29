@@ -91,40 +91,71 @@ def _guvenli(alan: str, deger) -> bool:
     return True
 
 
-#: D-300: telefon uzunlugu olculdu. Turk mobil 11, sabit 10-11 hanedir.
-#:   12+ haneli degerler BIRBIRINE BITISIK URLESIYOR: `903123852424`
-#:   = "0 312 385 24 24" -> bastaki 0 ve aradaki bosluk kaybolmus.
-#:   Cozum: Turk numaralari 5 haneli alan kodu + 7 haneli abone
-#:   gecer. 12 hanede bolup ILK 10 haneyi al ve boslugu onune koy.
-_TEL_MIN, _TEL_MAX = 10, 11
+#: D-300 + KAHIN kurali (2026-09-29) — Turk telefonu YAZIM KURALLARI:
+#:
+#:   1) ULKE KODU YOK. Bastaki `90` / `0090` SILINIR. `+90 312...` yazimi
+#:      goruldugunde hicbir ulke kodu saklanmaz.
+#:   2) 0 BASLANGIC ZORUNLU. Alan kodu `312` degil `0312` olur; `0`
+#:      yoksa EKLENIR. Cep `532` degil `0532` olur.
+#:   3) SABIT HAT: `0` + 3 haneli alan kodu + 7 haneli abone = 10 hane.
+#:      0312 ile baslar (Ankara). Alan kodu ile abone arasinda BOSLUK.
+#:   4) CEP: `05` ile baslar. Alan kodu YOKTUR; 05 + 9 haneli numara
+#:      = 11 hane. Arada bolum yok.
+#:   5) AYIRILAMAZSA BIRAKILIR. Kirpmak bastaki `0`'yi dusurup gecersiz
+#:      numara uretir — uretmek, birakmaktan kotudur.
+#:
+#: D-300 hatasi: `903123852424` sessizce `3123852424` olurdu; bastaki 0
+#: kAYBOLURDU. Artik boyle bir deger uretilmez.
+_ALAN_KODU_UZ = 3          # 312 / 212 / 555
+_ABONE_UZ = 7              # sabit hat abone no
+
+
+def _tel_bicimlendir(rakamlar: str) -> str | None:
+    """Normalize edilmis rakam dizisini Turk yazim kuralina gore bicimlendirir.
+
+    Girdi: yalniz rakam. Cikti: "0312 3854000" (sabit) veya
+    "05321234567" (cep), ya da None (ayrilamadi -> BIRAKILIR).
+    """
+    s = rakamlar
+    if not s:
+        return None
+    # 1) ulke kodunu soy
+    if s.startswith("0090"):
+        s = s[4:]
+    elif s.startswith("90"):
+        s = s[2:]
+
+    # 2) basinda 0 yoksa ekle
+    if not s.startswith("0"):
+        s = "0" + s
+
+    # 3) CEP: 05 ile baslar, alan kodu yok, 05 + 9 hane = 11
+    if s.startswith("05"):
+        govde = s[2:]                    # 9 hane beklenir
+        if len(govde) == _ABONE_UZ + 2:  # 05 + 7 = 9 -> 11 hane
+            return "05" + govde
+        return None
+
+    # 4) SABIT: 0 + 3 alan kodu + 7 abone = 10 hane
+    if len(s) == 1 + _ALAN_KODU_UZ + _ABONE_UZ:      # 10
+        return s[:1 + _ALAN_KODU_UZ] + " " + s[1 + _ALAN_KODU_UZ:]
+
+    return None
 
 
 def telefonlari_temizle(ham: list) -> list[str]:
-    """Bitisik URLESIYEN telefon numaralarini duzeltir. D-300.
+    """Bitisik URLESIYEN telefon numaralarini duzeltir. D-300 + KAHIN kurali.
 
-    Turk sabit: 0312 385 40 00 -> 10 hane
-    Turk mobil: 0532 123 45 67 -> 11 hane
-    12+ hane   : iki numara birlestmis veya format bozulmus.
-    Cift sayi bile varsa AYIRIRIZ, tek sayiyi KIRPARIZ (veri uydurulmaz).
+    Turk sabit: 0312 385 40 00  -> "0312 3854000"   (alan kodu sonrasi bosluk)
+    Turk mobil: 0532 123 45 67  -> "05321234567"    (alan kodu YOK)
+    12+ hane    : ayrilamazsa BIRAKILIR (kirpma gecersiz numara uretir).
     """
     temiz: list[str] = []
     for t in ham or []:
         s = re.sub(r"\D", "", str(t))
-        if _TEL_MIN <= len(s) <= _TEL_MAX:
-            temiz.append(s)
-            continue
-        if len(s) > _TEL_MAX:
-            # 12 hane: bolup bak - iki parcaya ayrilabiliyor mu?
-            bas, kalan = s[:10], s[10:]
-            if kalan and 3 <= len(kalan) <= 4:
-                temiz.append(bas)
-                continue                     # ikinci parca numara degil
-            # 12 haneyi tek numara kabul etme; 90/0 prefiksini dene
-            govde = s[2:] if s.startswith("90") else s.lstrip("0")
-            if _TEL_MIN <= len(govde) <= _TEL_MAX:
-                temiz.append(govde)
-                continue
-        # AYIRILAMADI -> kirp BIRAKILIR (uydurma numara uretme)
+        bicim = _tel_bicimlendir(s)
+        if bicim:
+            temiz.append(bicim)
     return sorted(set(temiz))
 
 
@@ -139,6 +170,25 @@ def telefonlari_temizle(ham: list) -> list[str]:
 #: kullanilir: S, s, Ş, ş, ŞU, şu, ŞÜ, şÜ hepsi eslesir.
 _SS = "[Ss\u015e\u015f\u0158]"        # S / s / Ş / ş / Ş
 _UU = "[uU\u00fc\u0131\u0130\u00d6\u00f6]"   # u / U / ü / Ü / ı / İ / ö / Ö
+#: IKI ETIKET SINIFI AYRI OLMALI (D-300 duzeltme):
+#:
+#:  - ADRES_BASLATICI (Merkez/Fabrika/Sube/Lojistik adresi): metnin
+#:    BASINDA gelirse arkadaki deger ADRESTIR -> etiket atilir, deger alinir.
+#:  - GECIS_ETIKETI (Tel/Telefon/Faks/E-Posta/Web Site/Sektör): bunlar
+#:    ilk bloktan SONRA gelir ve o blogun devami degildir -> kirpilir.
+#:
+#: Once tek desen kullanildi; `Tel:` gecis etiketi de "adres basindadir"
+#: sanildigi icin metnin basinda kalinca telefon numarasi adres sanildi.
+#: Ayri desen olmadan bu AYIRT EDILEMEZ.
+#: DIKKAT: bu desen ANCHOR'SIZ olmali. `^` ile derlenirse `search()`
+#: icteki ikinci etiketi ("Merkez: Fabrika: X Sube: Y") bulamaz ve
+#: kirpma calismaz. Basinda kontrol `match()` ile AYRI yapilir.
+_ADRES_BASLATICI = re.compile(
+    rf"(?:{_SS}\s*{_UU}be|Lojistik\s+adresi|Fabrika|Merkez)\s*:",
+    re.IGNORECASE)
+_GECIS_ETIKETI = re.compile(
+    r"(Telefon|Tel|Faks|E-?Posta|Web\s*Site|Sekt\u00f6?r)\s*:",
+    re.IGNORECASE)
 _ADRES_BLOGU = re.compile(
     rf"({_SS}\s*{_UU}be|Lojistik\s+adresi|Fabrika|Merkez|Telefon|Tel|"
     rf"E-?Posta|Web\s*Site|Sekt{_UU}r|Faks)\s*:", re.IGNORECASE)
@@ -147,24 +197,35 @@ _ADRES_MIN = 8
 
 
 def adresi_temizle(ham) -> str | None:
-    """Adres alanindaki sayfa blogunu kirpar. D-300."""
+    """Adres alanindaki sayfa blogunu kirpar. D-300.
+
+    Kurallar:
+      1) Basinda ADRES_BASLATICI varsa (`Merkez: X`) X alinir.
+      2) Sonraki GECIS_ETIKETI'nden (`Sube: Y`, `Tel: Z`) itibaren kesilir.
+      3) Etiketsiz metin aynen korunur.
+    """
     if not ham:
         return None
     s = str(ham).strip()
     if not s:
         return None
-    # "Merkez: X Sube: Y" -> X al (ilk blok), "Sube:" ve sonrasi atilir.
-    # D-300: `m.start() > 0` sarti YANLIS: ilk etiket metnin BASINDA
-    # oldugunda ("Merkez: ...") hicbir sey kesilmezdi. Dogru kural:
-    # etiket + iki nokta + BOSLUK geliyorsa o etiketten SONRASI alinir.
-    m = _ADRES_BLOGU.search(s)
-    if m:
-        s = s[m.end():].strip()
-        # sonraki bloklari da kes
-        m2 = _ADRES_BLOGU.search(s)
-        if m2:
-            s = s[:m2.start()].strip(" ,;-")
-    s = re.sub(r"^\s*(Merkez|Şube|Fabrika)\s*:\s*", "", s, flags=re.I)
+
+    # 1) basta adres baslatici varsa degeri al. ARKA ARKAYA etiketler
+    #    ("Merkez: Fabrika: X") olabilir; ilki bosluk birakmasin diye
+    #    etiket basinda oldugu surece dongu.
+    while True:
+        m = _ADRES_BASLATICI.match(s)
+        if not m:
+            break
+        s = s[m.end():].strip(" :;-")
+        if not s:
+            return None
+
+    # 2) sonraki GECIS etiketinden itibaren kes (ilk olana kadar)
+    g = _ADRES_BASLATICI.search(s) or _GECIS_ETIKETI.search(s)
+    if g:
+        s = s[:g.start()].strip(" ,;-")
+
     s = s.strip(" :;-")
     # cok uzunsa: ilk adres benzeri blok
     if len(s) > _ADRES_MAX:

@@ -1,5 +1,5 @@
 {
-  "uretim_zamani": "2026-09-29T20:54:59",
+  "uretim_zamani": "2026-09-29T21:41:22",
   "girdi": {
     "tarama": 3338,
     "mevcut_detayli": 5040,
@@ -22,7 +22,7 @@
       "web_sitesi": 2593,
       "sektor": 4969,
       "sosyal_medya": 4967,
-      "telefonler": 7623,
+      "telefonler": 7635,
       "adres": 117,
       "osb_parsel": 3
     }
@@ -38,8 +38,8 @@
       "oran_yuzde": 97.5
     },
     "telefonler": {
-      "dolu": 7506,
-      "oran_yuzde": 90.5
+      "dolu": 7313,
+      "oran_yuzde": 88.2
     },
     "emailler": {
       "dolu": 5418,
