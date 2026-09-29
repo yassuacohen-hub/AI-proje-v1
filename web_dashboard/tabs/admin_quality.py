@@ -43,14 +43,18 @@ from web_dashboard.tabs.admin_error_handling import AdminErrorHandler
 _admin_quality_logger = AdminErrorHandler("admin_quality")
 
 # Analiz edilecek alanlar: kolon adı -> okunabilir etiket
+# D-298: anahtarlar SQL'e ad olarak gömülür; canlı `companies` kolon adlarıyla
+# birebir aynı olmak zorunda. `adres`/`osb_parsel` yazılıydı, canlıda yok
+# (psycopg UndefinedColumn, HINT: companies.address). Gerçek adlar:
+# `address` ve `osb_parcel`.
 _QUALITY_FIELDS: dict[str, str] = {
     "primary_phone": "Telefon",
     "primary_email": "E-posta",
     "website_domain": "Web Sitesi",
     "tax_number": "VKN",
     "nace_code": "NACE",
-    "adres": "Adres",
-    "osb_parsel": "Parsel",
+    "address": "Adres",
+    "osb_parcel": "Parsel",
 }
 
 def _risk_esigi() -> float:
@@ -238,8 +242,14 @@ def load_missing_field_analysis() -> pd.DataFrame:
                     )).mappings().first()
                     eksik = cnt_row["cnt"] if cnt_row else 0
                 except Exception as exc:
+                    # D-249/D-298: ölçülemeyen alan 0 taşımaz. `eksik = 0`
+                    # panelde "%0 eksik" yalanı üretiyordu — kolon adı yanlışken
+                    # kullanıcı alanı tam sanıyordu. Ölçülemeyen satır çizilmez.
+                    # Rollback şart: tek hatalı alan transaction'ı abort edince
+                    # arkasındaki tüm alanlar da InFailedSqlTransaction ile düşüyordu.
+                    conn.rollback()
                     _admin_quality_logger.warning(f"Alan {label} eksik sayımı başarısız", exc)
-                    eksik = 0
+                    continue
                 result.append({
                     "Alan": label,
                     "Eksik": eksik,
@@ -266,7 +276,7 @@ def load_risky_companies(limit: int = 100) -> pd.DataFrame:
                        CASE WHEN website_domain IS NULL OR website_domain='' THEN 1 ELSE 0 END as e_web,
                        CASE WHEN tax_number IS NULL OR tax_number='' THEN 1 ELSE 0 END as e_vkn,
                        CASE WHEN nace_code IS NULL OR nace_code='' THEN 1 ELSE 0 END as e_nace,
-                       CASE WHEN adres IS NULL OR adres='' THEN 1 ELSE 0 END as e_adres
+                       CASE WHEN address IS NULL OR address='' THEN 1 ELSE 0 END as e_adres
                 FROM companies
                 WHERE is_ankara=TRUE AND is_osb_member=TRUE
                   AND identity_completeness < :esik

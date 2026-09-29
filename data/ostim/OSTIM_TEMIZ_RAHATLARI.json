@@ -1,0 +1,73 @@
+{
+  "uretim_zamani": "2026-09-29T20:24:28",
+  "girdi": {
+    "tarama": 3338,
+    "mevcut_detayli": 5040,
+    "liste": 8313,
+    "havuz_tekilli": 8312
+  },
+  "cikti": {
+    "kayit": 8296,
+    "dusen_mukerrer": 16,
+    "birlestirilen_grup": 15,
+    "ayri_korunan_grup": 28
+  },
+  "tekillestirme": {
+    "mukerrer_slug_kaldi": 0,
+    "mukerrer_unvan_kaldi": 29
+  },
+  "filtre": {
+    "temizlenen_kayit": 4969,
+    "alan_bazinda": {
+      "web_sitesi": 2593,
+      "sektor": 4969,
+      "sosyal_medya": 4967,
+      "osb_parsel": 3
+    }
+  },
+  "kalan_kirlilik": {
+    "rakamli_sektor": 0,
+    "kirli_sosyal_hesap": 0,
+    "alt_yapi_web": 0
+  },
+  "doluluk": {
+    "adres": {
+      "dolu": 8203,
+      "oran_yuzde": 98.9
+    },
+    "telefonler": {
+      "dolu": 7635,
+      "oran_yuzde": 92.0
+    },
+    "emailler": {
+      "dolu": 5418,
+      "oran_yuzde": 65.3
+    },
+    "web_sitesi": {
+      "dolu": 2527,
+      "oran_yuzde": 30.5
+    },
+    "sektor": {
+      "dolu": 0,
+      "oran_yuzde": 0.0
+    },
+    "sosyal_medya": {
+      "dolu": 13,
+      "oran_yuzde": 0.2
+    }
+  },
+  "kaynak_disi": {
+    "vergi_no_dolu": 0,
+    "aciklama": "OSTIM VKN yayimlamaz (D-282); uydurulmadi"
+  },
+  "kaynak_isaretleme": {
+    "kaynak_adi_dolu": 8296,
+    "kaynak_turu_dolu": 8296,
+    "kaynak_adi_degerleri": {
+      "ostim": 8296
+    },
+    "nace_confidence": {
+      "none": 8296
+    }
+  }
+}

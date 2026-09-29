@@ -134,8 +134,12 @@ def nace_metni(nace_code: str | None, nace_source: str | None) -> str:
     '29.10'
     >>> nace_metni(None, 'mersis')
     '—'
+    >>> nace_metni(float('nan'), 'sector_default')
+    '—'
     """
-    if not nace_code or not str(nace_code).strip():
+    # NaN da yokluktur: pandas `None`i NaN'a cevirdigi icin export yolunda
+    # "nan (tahmini sektör)" yaziliyordu.
+    if _yok_mu(nace_code) or not str(nace_code).strip():
         return BOS
     etiket = nace_etiketi(nace_source)
     return f"{nace_code} ({etiket})" if etiket else str(nace_code)

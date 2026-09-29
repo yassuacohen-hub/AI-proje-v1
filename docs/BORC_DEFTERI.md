@@ -1233,11 +1233,10 @@ python -m pytest tests/test_ostim_detay_parser.py \
 3. Eksik detay sayısı 3.297 değil **3.339** — liste güncellendiği için
    arttı (D-286 ölçümü).
 
-### 6. Güvenlik borcu (açık)
+### 6. Güvenlik borcu — KAPATILDI (KAHİN, 2026-09-29)
 
-- TOBB parolası sohbette açığa paylaşıldı ve `.env`'e yazıldı —
-  **çıkış sonrası parola değiştirilmeli**
-- `data/tobb_cookie.json` canlı oturum çerezidir; paylaşılmamalı
+- ~~TOBB parolası değiştirilmeli~~ → **KAHİN kararıyla kapatıldı**
+- `data/tobb_cookie.json` canlı oturum çerezidir; paylaşılmaz
 
 
 1. `_DOLGU_METIN` içindeki `-` **her alanda** aranıyordu. `sosyal_medya`
@@ -1330,11 +1329,15 @@ D-285'te `K-2 kaçış = 0` denmişti. D-292'de **bu sonuç eksik çıktı.**
 **Genel ders:** *doluluk* ile *bilgi* farklıdır. Bir kolonun dolu
 olması, taşıdığı bilginin gerçek olduğunu göstermez.
 
-### Güvenlik borcu (açık)
+### Güvenlik borcu — **KAPATILDI (KAHİN kararı, 2026-09-29)**
 
-- TOBB parolası sohbette açığa paylaşıldı ve `.env`'e yazıldı —
-  **çıkış sonrası parola değiştirilmeli**
-- `data/tobb_cookie.json` canlı oturum çerezidir; paylaşılmamalı
+- ~~TOBB parolası sohbette açığa paylaşıldı ve `.env`'e yazıldı —
+  **çıkış sonrası parola değiştirilmeli**~~
+  **KAHİN: "tobb parolasını şimdi değiştirmeyecek, o konuyu kapat."**
+  Konu kapanmıştır; artık açık borç **değildir** ve her turda
+  hatırlatılmaz.
+- `data/tobb_cookie.json` canlı oturum çerezidir; **paylaşılmaz**
+  (bu madde açık kalmaya devam eder — çerez başkasına sızar).
 
 
 ## D-296 — Parça sürücüsü: tarama kesintisiz bitsin

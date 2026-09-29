@@ -30,6 +30,7 @@ ROOT = Path(__file__).resolve().parent.parent.parent
 sys.path.insert(0, str(ROOT / "src"))
 
 from company_master.db.connection import get_engine  # noqa: E402
+from company_master.sunum import nace_metni  # noqa: E402
 from company_master.ui import bos_durum, hata_kutusu  # noqa: E402
 
 log = logging.getLogger(__name__)
@@ -115,10 +116,27 @@ def _pano_oku(board_path: Path | None = None) -> tuple[pd.DataFrame | None, str 
         return None, f"{type(exc).__name__}: {exc}"
 
 
+def _nace_etiketle(df: pd.DataFrame) -> pd.DataFrame:
+    """D-252/2: etiketsiz NACE dışarı çıkamaz; D-252/4: ``nace_source`` teknik kolon.
+
+    D-287 bozulmaz — puan değişmez, yalnızca sunum katmanı etiketlenir. Canlıda
+    NACE %100 tahmin olduğu için etiketsiz CSV müşteriye kanıt gibi gidiyordu.
+    """
+    if "nace_code" not in df.columns or "nace_source" not in df.columns:
+        return df
+    df = df.copy()
+    df["nace_code"] = [
+        nace_metni(kod, kaynak)
+        for kod, kaynak in zip(df["nace_code"], df["nace_source"], strict=True)
+    ]
+    return df.drop(columns=["nace_source"])
+
+
 def _export_verisi_oku(query_type: str) -> tuple[pd.DataFrame | None, str | None]:
     """Sorgu türüne göre veri okur → ``(df, hata)``; bilinmeyen tür → ``(None, mesaj)``."""
     if query_type in _SORGULAR:
-        return _db_sorgu_oku(query_type)
+        df, hata = _db_sorgu_oku(query_type)
+        return (df if df is None else _nace_etiketle(df)), hata
     if query_type == "tasks":
         return _pano_oku()
     return None, f"Bilinmeyen export türü: {query_type!r}"

@@ -116,6 +116,36 @@ def test_kodsuz_nace_bos_gosterilir():
     assert sunum.nace_metni("", "sector_default") == sunum.BOS
 
 
+def test_export_nace_etiketli_cikar_ve_kaynak_sizmaz(monkeypatch):
+    """D-252/2 + D-252/4: CSV/Excel de bir sunum yuzeyidir.
+
+    Etiketleme altyapisi vardi ama yalniz `admin_search` kullaniyordu; export
+    ham `nace_code` + `nace_source` veriyordu -> musteriye etiketsiz tahmin
+    kanit gibi gidiyordu. D-287 bozulmaz: puan degil, yalnizca sunum degisti.
+
+    Olcum noktasi gercek cikis kapisi (`_export_verisi_oku`); yardimciyi
+    dogrudan cagirmak, bagli olup olmadigini olcmezdi.
+    """
+    import pandas as pd
+
+    from web_dashboard.tabs import admin_export
+
+    ham = pd.DataFrame(
+        {
+            "company_id": [1, 2, 3],
+            "nace_code": ["29.10", "25.11", None],
+            "nace_source": ["sector_default", "mersis", "fallback"],
+        }
+    )
+    monkeypatch.setattr(admin_export, "_db_sorgu_oku", lambda _t: (ham, None))
+    df, hata = admin_export._export_verisi_oku("companies")
+    assert hata is None
+    assert "nace_source" not in df.columns, "teknik kolon disari sizdi"
+    assert sunum.TAHMIN_ETIKETI in df["nace_code"][0]
+    assert df["nace_code"][1] == "25.11"
+    assert df["nace_code"][2] == sunum.BOS
+
+
 def test_tahmin_kutlesi_sektor_sayacina_girmez():
     """D-252/5: 29.10 kutlesi sektor dagilimini sismanlatamaz."""
     satirlar = ([("29.10", "sector_default")] * 1876

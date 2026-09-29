@@ -30,6 +30,7 @@ from web_dashboard.tabs.tenant_health_dashboard import (
 )
 from web_dashboard.tabs.admin_error_handling import AdminErrorHandler
 from web_dashboard.tabs._db_yardim import tablo_var_mi
+from web_dashboard.tabs.admin_quality import _QUALITY_FIELDS
 
 # Admin KPI logger
 _admin_kpi_logger = AdminErrorHandler("admin_kpi")
@@ -172,15 +173,10 @@ def load_field_quality_breakdown() -> pd.DataFrame:
     """Alan bazlı kalite analizi: her alanın doluluk oranı."""
     engine = get_engine()
     result = []
-    fields = {
-        "primary_phone": "Telefon",
-        "primary_email": "E-posta",
-        "website_domain": "Web Sitesi",
-        "tax_number": "VKN",
-        "nace_code": "NACE",
-        "adres": "Adres",
-        "osb_parsel": "Parsel",
-    }
+    # D-298: bu sozluk admin_quality'nin kopyasiydi; ayni `adres`/`osb_parsel`
+    # kirigi iki yerde birden yasadi (canlida kolonlar `address`/`osb_parcel`).
+    # Kopya kaldirildi -- tek kaynak `admin_quality._QUALITY_FIELDS`.
+    fields = _QUALITY_FIELDS
     try:
         with engine.connect() as conn:
             row = conn.execute(text(
@@ -198,8 +194,12 @@ def load_field_quality_breakdown() -> pd.DataFrame:
                     )).mappings().first()
                     cnt = cnt_row["cnt"] if cnt_row else 0
                 except Exception as exc:
+                    # D-249/D-298: olculemeyen alan 0 tasimaz. `cnt = 0`
+                    # "Doluluk %0" yalani uretiyordu. Rollback sart: tek hatali
+                    # alan transaction'i abort edince arkasindakiler de duser.
+                    conn.rollback()
                     _admin_kpi_logger.warning(f"Alan {label} sayımı başarısız", exc)
-                    cnt = 0
+                    continue
                 result.append({
                     "Alan": label,
                     "Dolu": cnt,
@@ -207,11 +207,8 @@ def load_field_quality_breakdown() -> pd.DataFrame:
                     "Doluluk (%)": round(cnt / max(total, 1) * 100, 1),
                 })
     except Exception as exc:
+        # D-249: olculmemis tablo "hepsi %0" diye sunulamaz; bos birakilir.
         _admin_kpi_logger.warning("Alan kalite analizi yüklenemedi", exc)
-        for col, label in fields.items():
-            result.append({
-                "Alan": label, "Dolu": 0, "Toplam": 0, "Doluluk (%)": 0,
-            })
     return pd.DataFrame(result)
 
 
