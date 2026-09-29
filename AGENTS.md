@@ -4945,6 +4945,105 @@ ayrı ayrı kırılıp kırmızı görüldü, geri alındı.
 
 **Referans:** D-193 (düzeltildi), D-226, D-228, D-229, D-241, D-260, D-261, D-267, D-270, D-281, D-286.
 
+## D-293 — `selfsigned.key` hiçbir dalda değil; D-288'in "atası EVET" kaydı ölçümle çürütüldü (2026-09-29)
+
+### 1. Bulgu — kendi ölçüm aracım yalan söyledi
+
+İlk ölçümüm `git merge-base --is-ancestor 90c4702 HEAD & echo ATA_EXIT=%errorlevel%`
+biçimindeydi ve `ATA_EXIT=0` verdi — yani D-288'i doğruluyor göründü. Yanlıştı.
+cmd.exe `%errorlevel%` değişkenini **satır ayrıştırılırken** genişletir, komut
+çalıştıktan sonra değil. Tek satıra zincirlenen her `EXIT=` okuması **bayat**.
+
+Komutlar **ayrı ayrı** koşturulunca:
+
+```
+git cat-file -e HEAD:config/certs/selfsigned.key
+# fatal: path 'config/certs/selfsigned.key' does not exist in 'HEAD'   (çıkış 128)
+git merge-base --is-ancestor 90c4702 HEAD
+# çıkış 1  →  ATA DEĞİL
+```
+
+**D-288 defterine `Commit HEAD'in atası mı | EVET` yazmıştı. HAYIR.**
+
+### 2. Anahtarın kapsamı (JOB 1, ölçüldü, kesilmedi)
+
+| Soru | Ölçüm | Kanıt |
+|---|---|---|
+| Kim okuyor | **tek tüketici**: `config/nginx.conf` `ssl_certificate_key /etc/nginx/certs/selfsigned.key` | `git show 90c4702:config/nginx.conf` |
+| O dosya nerede | yalnız `90c4702` içinde — diskte yok, HEAD'de yok, index'te yok | `git ls-files config/` → yalnız `quality_gate.yaml` |
+| Servise bağlı mı | **hayır** — `docker-compose.yml`'de nginx servisi yok, 443 yok, certs mount yok | `findstr` nginx/certs/443 |
+| Yerel mi üretim mi | **yerel** — sertifika `CN=localhost`, `SAN=DNS:localhost`, issuer==subject (kendi imzalı), 2026-09-20→2027-09-20 | `ssl._ssl._test_decode_cert` (stdlib, yeni bağımlılık yok) |
+| Servis kimliği mi | **hayır** — Supabase/servis hesabı/imza anahtarı değil, düz TLS | aynı sertifika çözümü |
+| Üretim HTTPS'i nereden | CI `deploy-staging.yml` → `https://staging.huginn.example.com`, iş akışında hiç cert malzemesi yok → TLS başka yerde sonlanıyor | `.github/workflows/deploy-staging.yml` |
+| Başka kimlik dosyası | **yok** — tüm nesne veritabanında (987 commit) yalnız 2 nesne: `c0881ee…crt`, `216cfdd…key` | `git rev-list --objects --all` süzüldü |
+
+### 3. A/B bedeli — B seçeneği **konusuz**
+
+```
+git branch -a --contains 90c4702           → boş
+git tag --contains 90c4702                 → boş
+git for-each-ref refs/remotes refs/heads refs/tags --contains 90c4702  → BOŞ
+git for-each-ref --contains 90c4702        → yalnız refs/cline/checkpoints/1789915554965_dwoi5/{4,5}
+git log --format="%h %p" -1 90c4702        → 90c4702 993ce8a
+git ls-remote origin                       → refs/heads/worktree/…-UX-v2 = 993ce8a
+```
+
+Uzaktaki dal, anahtar commit'inin **bir öncesinde** duruyor: `993ce8a` = `90c4702`'nin
+ebeveyni. **Anahtar hiçbir zaman push edilmedi.** Blob'u yaşatan tek şey yerel cline
+checkpoint ref'leri (169 adet `refs/cline/*`, fetch refspec `+refs/heads/*` olduğu için
+asla gönderilmez).
+
+- **B (filter-repo):** HEAD'de 421 commit yeniden yazılır, üç ajanın klonu kırılır —
+  **yayımlanmamış ve hiçbir daldan ulaşılamayan** bir blob için. D-221/1'e göre bedel > fayda.
+- **A (rotasyon):** sertifika `localhost`'a bağlı, sunan servis yok, süresi 2027-09-20.
+  Döndürülecek bir üretim bağı **ölçülemedi**.
+
+Devir notunun ön değerlendirmesi **doğrulandı ve güçlendi**: yalnız B değil, **A da konusuz**
+görünüyor. Karar ürün sahibinin (D-2xx "kendi başına karar verme" listesi).
+
+### 4. Kural (D-293)
+
+Kimlik sırrı taşıyan uzantılar (`.key .pem .p12 .pfx .jks .keystore`) **izlenemez**.
+`.crt`/`.cer`/`.pub` kapsam dışı: açık anahtardır, sızması zarar vermez.
+
+`.gitignore:155-156` (`*.key`, `*.pem`) 2026-09-24'te `7a9ff2c` ile zaten eklenmişti —
+ama **zorlayıcısı yoktu**; desenler tek elle düzenlemeyle kaybolsa kimse görmezdi
+(D-261 deseni). Mandal: `tests/test_kimlik_dosyalari.py`, iki ayrı şeyi ölçer:
+`git ls-files` (gerçek durum) ve `git check-ignore --no-index` (desen **gerçekten**
+eşliyor mu — D-270: `.gitignore` metnini okumak yetmez).
+
+### 5. Kanıt — mandal KIRILARAK doğrulandı (D-288 dersi)
+
+```
+# temiz koşu
+2 passed in 1.05s
+
+# kırma 1: .gitignore  *.key → /*.key   (D-288'in tam hatası: köke bağlı desen)
+AssertionError: .gitignore bu kimlik yollarini tutmuyor: ['config/certs/selfsigned.key']
+1 failed, 1 passed
+
+# kırma 2: git checkout -- .gitignore; echo …> _kirma_denemesi.key; git add -f
+AssertionError: izlenen kimlik dosyasi: ['_kirma_denemesi.key']
+1 failed, 1 passed
+```
+
+Her iki iddia da gerçekten ateşliyor. Artık `git rm --cached -f` + `del` ile kaldırıldı.
+
+### 6. Yan bulgu — D-281'in kendi artığı index'te duruyordu
+
+`scripts/_nace_olcum.py` (D-287'nin tek seferlik aracı) diskten silinmişti ama
+**index'te kalmıştı**. D-281 tam bunu yasaklıyor; kural yazıldıktan sonra bir tur daha
+ihlal edildi. `git rm --cached` ile kesildi. Ders: silme beyanı `git ls-files` ile
+doğrulanmadıkça beyandır (D-260).
+
+### 7. Kesilmeyen — sahiplik yasu'da (D-226)
+
+4 kırmızının 3'ü `VERI-OSTIM-TAM-TARAMA-01` (başlık D-57 kalıbına uymuyor + brifte
+11 zorunlu bölümün **hepsi** eksik), 4'ü `BORC-AJAN-HAFIZA-01` (`yasu_project_context.md`
+213 > 200). Düzeltilmedi; `ajan_chat.py ac` ile ölçülmüş eksik listesi yasu'ya açıldı.
+
+**Referans:** D-57, D-217, D-218, D-219, D-221, D-226, D-241, D-260, D-261, D-267, D-270, D-281, D-286, D-288.
+
 ## Ilgili Nodlar
 
 - [[docs/BORC_DEFTERI]]

@@ -26,6 +26,7 @@ yanlış okudu — altı tur üst üste (D-265, D-266, D-267/1, D-268/1, D-271/1
 | `BORC-SCRIPTS-01` | `scripts/` altında 41 `_*` girdi (29 `.py` hepsi derlenir, **0 çürük**, üretim çağıranı **0**); kökte ayrıca **76 index hayaleti** tek kullanımlık betik. D-281'de ölçüldü ve **tavanlandı** (76/2), kesme ürün sahibinde. **D-288 eki:** `_ARSIV_tek_kullanimlik/` altında ayrıca **~160 izlenen dosya** var — aynı sapmanın ikinci yuvası, otomasyonun `git add -A`'sı ile büyümüştü; kapı kapatıldı, mevcut dosyalar **kesilmedi** (sahiplik belirsiz) | ACIK | D-255 | — |
 | `BORC-KARAR-NUMARA-01` | karar numarası **iki ayrı dosyadan** tahsis ediliyordu (`AGENTS.md` max D-281, bu defter max D-282); çakışma: **D-281 iki karara birden** verilmiş. D-227 mandalı yalnız `AGENTS.md`'yi ve yalnız `(D-NNN — KAH` biçimini tarıdığı için çatışma görünmezdi | KAPANDI | D-281 | D-286: `scripts/karar_no.py` tek havuz + `TAVAN_CATISMA=1` mandalı (kırılarak doğrulandı; D-283 eşzamanlı ajan yarışında çakıştı, **mandal yakaladı**, kayıt D-286'e taşındı — tavan yükseltilmedi) |
 | `BORC-AJAN-HAFIZA-01` | `yasu_project_context.md` **213 satır > 200** (D-219 tavanı); mandal kırmızı: `tests/test_dokuman_politikasi.py::test_d219_ajan_context_dosyalari`. **SAHİBİNDE** — başka ajanın hafıza dosyası, bu turda kesilmedi (D-226/sahiplik) | ACIK | D-286 | — |
+| `BORC-KIMLIK-ANAHTAR-01` | `config/certs/selfsigned.key` (gerçek RSA özel anahtar) `90c4702` ile elle commit edilmiş; blob `216cfdd…` hâlâ ulaşılabilir. **D-293 ölçümü:** commit **hiçbir dalda/etikette/uzakta yok** (`for-each-ref --contains` boş; uzaktaki dal ebeveyn `993ce8a`'da) — yalnız yerel cline checkpoint ref'leri yaşatıyor. Sertifika `CN=localhost`/`SAN=DNS:localhost`, tek tüketicisi `config/nginx.conf` ve o da hiçbir serviste mount edilmiyor. Tarih **temizlenmedi**; A (rotasyon) / B (filter-repo, 421 commit) kararı ürün sahibinde | ACIK | D-288 | D-293'te kapsam ölçüldü; mandal `tests/test_kimlik_dosyalari.py` (kırılarak doğrulandı) — kesme kararı bekliyor |
 | `BORC-SICIL-DAIRE-01` | 619 firmada sicil no var, sicil dairesi yok | ACIK | D-260 | — |
 | `BORC-VKN-01` | VKN kanalı ölü, kaynak bulunamadı | ACIK | D-253 | — |
 | `BORC-AD-VARYANT-01` | 31 kısaltma varyantı | IPTAL | D-261 | D-263 |
@@ -73,10 +74,116 @@ yüzden ayrı bölümde durur. Silinmezler: adları `AGENTS.md`'de geçtiği sü
   bir arttı. Kayıt tutmanın kendisi ölçümü değiştirdi; sayı kılıfına uydurulmadı, gerçeğe
   çekildi (D-271'in tavanı 3 değil 4 yapmasıyla aynı karar).
 
-## Devir — sonraki oturum (D-288 sonrası)
+## Devir — sonraki oturum (D-293 sonrası)
 
-Bu turda otomasyonun git kapısı daraltıldı. Aşağıdaki D-287 bölümü **tarihî kayıttır**,
-güncel durum bu başlığın altındadır.
+Bu turda anahtarın kapsamı ölçüldü ve D-288'in bir kaydı **çürütüldü**. Aşağıdaki
+D-288 ve D-287 bölümleri **tarihî kayıttır**, güncel durum bu başlığın altındadır.
+
+### ⚠ D-288'İN KAYDI YANLIŞ — düzeltildi
+
+D-288 defterine `Commit HEAD'in atası mı | **EVET**` yazmıştı. **Ölçüm: HAYIR.**
+
+```
+git merge-base --is-ancestor 90c4702 HEAD     → çıkış 1  (ATA DEĞİL)
+git cat-file -e HEAD:config/certs/selfsigned.key → fatal: does not exist in 'HEAD' (128)
+```
+
+Yanlışın sebebi benim de ilk turda düştüğüm tuzak: cmd.exe `%errorlevel%` değişkenini
+**satır ayrıştırılırken** genişletir. `komut & echo EXIT=%errorlevel%` biçiminde
+zincirlenen her okuma **bayattır**. Komutlar ayrı ayrı koşturulmalı.
+
+### 🔴 ÜRÜN SAHİBİNE — anahtar kararı: **B konusuz, A da muhtemelen konusuz**
+
+Anahtar `90c4702` **hiçbir dalda değil**:
+
+```
+git branch -a --contains 90c4702   → boş
+git tag --contains 90c4702         → boş
+git for-each-ref refs/remotes refs/heads refs/tags --contains 90c4702  → BOŞ
+git log --format="%h %p" -1 90c4702 → 90c4702 993ce8a
+git ls-remote origin → refs/heads/worktree/…-UX-v2 = 993ce8a
+```
+
+Uzaktaki dal anahtar commit'inin **ebeveyninde** duruyor (`993ce8a`). **Anahtar hiç
+push edilmedi.** Blob'u yaşatan tek şey yerel cline checkpoint ref'leri
+(`refs/cline/checkpoints/1789915554965_dwoi5/{4,5}`; toplam 169 `refs/cline/*`,
+fetch refspec `+refs/heads/*` olduğu için asla gönderilmez).
+
+Anahtarın neye bağlı olduğu (ölçüldü):
+
+| Soru | Ölçüm |
+|---|---|
+| Kim okuyor | **tek tüketici** `config/nginx.conf` (`ssl_certificate_key`) — o dosya da yalnız `90c4702` içinde, diskte/HEAD'de/index'te **yok** |
+| Servise bağlı mı | **hayır** — `docker-compose.yml`'de nginx servisi yok, 443 yok, certs mount yok |
+| Yerel mi üretim mi | **yerel** — `CN=localhost`, `SAN=DNS:localhost`, issuer==subject, 2026-09-20→2027-09-20 |
+| Servis kimliği mi | **hayır** — Supabase/servis hesabı/imza anahtarı değil |
+| Üretim HTTPS'i | CI `deploy-staging.yml` `https://staging.huginn.example.com`, iş akışında cert malzemesi **yok** → TLS başka yerde sonlanıyor |
+| Başka kimlik dosyası | **yok** — 987 commit'lik tüm nesne veritabanında yalnız 2 nesne: `c0881ee…crt`, `216cfdd…key` |
+
+Bedel:
+
+- **(B) `filter-repo`:** HEAD'de **421 commit** yeniden yazılır, üç ajanın klonu kırılır —
+  **yayımlanmamış, hiçbir daldan ulaşılamayan** bir blob için. D-221/1: bedel > fayda.
+- **(A) rotasyon:** sertifika `localhost`'a bağlı, onu sunan servis yok, süresi 2027-09-20.
+  Döndürülecek bir üretim bağı **ölçülemedi**.
+
+Devir notunun ön değerlendirmesi doğrulandı ve güçlendi. **Hiçbir şey temizlenmedi**, karar sizde.
+
+### Mandal — `tests/test_kimlik_dosyalari.py` (D-293)
+
+`.gitignore:155-156` (`*.key`, `*.pem`) 2026-09-24'te `7a9ff2c` ile zaten vardı ama
+**zorlayıcısı yoktu**. Mandal iki ayrı şeyi ölçer: `git ls-files` (gerçek durum) ve
+`git check-ignore --no-index` (desen **gerçekten** eşliyor mu). `.crt`/`.cer` kapsam
+dışı — açık anahtar, sızması zarar vermez.
+
+**Kırılarak doğrulandı** (D-288 dersi):
+
+```
+temiz:  2 passed
+kırma1: *.key → /*.key  →  AssertionError: .gitignore bu kimlik yollarini tutmuyor:
+        ['config/certs/selfsigned.key']          ← D-288'in tam hatası (köke bağlı desen)
+kırma2: git add -f _kirma_denemesi.key  →  AssertionError: izlenen kimlik dosyasi: [...]
+geri alındı: 2 passed
+```
+
+### Yan bulgu — D-281'in kendi artığı index'te duruyordu
+
+`scripts/_nace_olcum.py` (D-287'nin tek seferlik aracı) diskten silinmiş, **index'te
+kalmıştı**. Kural yazıldıktan sonra bir tur daha ihlal edildi. `git rm --cached` ile
+kesildi. Ders: silme beyanı `git ls-files` ile doğrulanmadıkça beyandır (D-260).
+
+### Tam takım (D-293 kapanışı)
+
+Sabit sıra `4 failed, 4582 passed, 12 skipped — 209,09 sn`; rastgele sıra **aynı 4 kırmızı**
+(`207,63 sn`). **Sıra bağımlılığı yok.** Taban 4580 → +2, ikisi de D-293 mandalı.
+**Benim hiçbir kırmızım yok.**
+
+### Kırmızılar — hepsi yasu'da, kesilmedi (D-226)
+
+`ajan_chat.py ac` ile yasu'ya **tek kayıt** açıldı, ölçülmüş eksik listesiyle.
+
+| Kırmızı | Sahibi | Eksik |
+|---|---|---|
+| `test_naming_audit::test_acik_gorevlerde_yeni_d57_ihlali_yok` | yasu | başlık D-57 kalıbı: `[ALAN] FIIL + NESNE -> CIKTI (SURE)` |
+| `test_pano_d57_kalici::test_aktif_gorevler_d57_gecer` | yasu | aynı görev, aynı sebep |
+| `test_brief_sablon_denetim::…[brief_yasu_VERI-OSTIM-TAM-TARAMA-01.md]` | yasu | 11 zorunlu bölümün **hepsi**: `**Başlık:**`, `**Hub:**`, `## Neden`, `## Doğrulanacak varsayım`, `## Kabul kriteri`, `## Ajan chat zorunlu`, `## Teslim`, `## Ilgili Nodlar`, `## Adımlar\|## Faz A`, `ajan_chat.py` komut referansı, ≥2 wikilink (D-218) |
+| `test_dokuman_politikasi::test_d219_ajan_context_dosyalari` | yasu | `yasu_project_context.md` 213 > 200 (`BORC-AJAN-HAFIZA-01`) |
+
+**Ürün sahibine:** ilk üçü **tek düzeltmeyle** kapanır (başlığı kalıba çek + brief'i
+`plans/_brief_sablon.md`'ye uydur). Bu 4 kırmızı her ajanın tam takım beyanını kirletiyor;
+gerçek arızalar gürültüye karışıyor. Yanıt gelmezse **devri üreticiye taşıma** kararı sizde.
+
+### Sonraki tura
+
+- Anahtar kararı (A / B / hiçbiri) — **bekliyor**, ölçüm yukarıda tamam.
+- Otomasyonun beyaz listesi ilk gerçek koşudan sonra `git log -1 --name-only` ile ölçülmeli.
+- `data/` altına sır düşerse otomasyon yine alır — veri sızması kesilmedi.
+
+---
+
+## Devir — D-288 turu (tarihî kayıt)
+
+Bu turda otomasyonun git kapısı daraltıldı. Aşağıdaki D-287 bölümü **tarihî kayıttır**.
 
 ### Bu turda bitenler (D-288)
 
@@ -997,4 +1104,77 @@ python scripts/birlestirme_kalite_kontrol.py   # statik denetim
 python -m pytest tests/test_ostim_birlestirme_kalite.py -q   # 18/18
 ```
 
+
+
+## D-290 — Tarama koruma duvarı: izole çıktı + kaynak kilidi
+
+**KAHİN talebi (2026-09-29):** "eski database tekrar kirli ve hatalı
+olmasını istemiyorum, her türlü önlemi al." Görev:
+`VERI-OSTIM-TAM-TARAMA-01` (P1, yasu).
+
+### 1. Karar
+
+1. **Çıktı izole klasöredir.** `data/ostim/tamamlama_2026-09-29/`.
+   Mevcut hiçbir dosyaya dokunulmaz — yeni kayıt eski verinin
+   **üzerine yazılmaz**.
+2. **Kaynak dosyalar SHA-256 kilitlidir.** Değişmişse tur **durdurulur**
+   (`koruma_kontrolu()`). Bozma testi yapıldı: dosya bozulunca
+   `"KAYNAK DOSYALAR DEĞİŞMİŞ"` çıktı, geri alınınca serbest bıraktı.
+3. **Tarama SQLite'a dokunmaz** (ölçüldü: 0 `sqlite`/`INSERT` referansı).
+   `companies` tablosu 8.313 → **8.313** değişmedi.
+4. **Onay olmadan `companies`'a hiçbir şey yazılmaz.**
+
+### 2. Ölçülen sonuç (ilk 1.000 kayıt)
+
+- 1.000 işlendi · **0 hata** · 0 P-8 imza tekrarı · 0 K-2 kaçışı
+- Tempo **2,4 sn/kayıt** → P-3 (2 sn bekleme) gerçekten uygulanıyor
+- Mükerrer slug **0**; 2 unvan grubu **ayrı kayıt** olarak korundu
+  (adresleri farklı, sitede `-tik` / `-tik-2` olarak ayrı slug)
+
+### 3. Araçlar
+
+- `scripts/ostim_veri_koruma.py` — korunacak dosya/DB envanteri
+- `scripts/ostim_mukerrer_denetimi.py` — mükerrer grupları sınıflandırır
+  (birleştirilebilir / ayrı korunacak), kaynağa **dokunmaz**
+- Rapor: `data/ostim/tamamlama_2026-09-29/rapor.md`
+
+## D-291 — Kesinti dayanıklılığı: kısmi yazım
+
+Tur başarısız olsa bile toplanan veri **kayboluyordu**: çıktı dosyası
+sadece döngü sonunda yazılıyordu. 1.000 kayıtlik bir turda süreç
+kesilirse yüzlerce kayıt giderdi.
+
+**Karar:** her 25 kayıtta kısmi yazım (atomik: `.tmp` + `replace()`).
+Doğrulama: süreç çalışırken çıktı 503 → **603** satıra çıktı.
+
+## D-292 — Doluluk tek başına kalite kanıtı DEĞİLDİR
+
+D-285'te `K-2 kaçış = 0` denmişti. D-292'de **bu sonuç eksik çıktı.**
+
+`firmalar_vkn_ekli.jsonl` (5.040 kayıt) denetlenince:
+
+- `sektor` kolonu **%100 dolu** görünüyordu — ama **5.040/5.040
+  değerin tamamı** sıra numarasıyla bitiyordu: `Otomotiv1163`,
+  `Yapı ve İnşaat794`. Yani dolu bir kolon **hiçbir bilgi taşımıyordu.**
+- Birlestirilmiş çıktıya **1.410** kayıt olarak taşınmıştı.
+- `osb_parsel` bir kayıtta **591 karakter** almıştı: sayfanın tamamı
+  (menu + footer + tüm bloklar).
+
+**Karar:**
+
+1. Kalite denetim aracına **`sayi_sizintisi` ölçümü** eklendi: metin
+   kolonu sonunda tek rakamla bitiyorsa şüpheli.
+2. `ostim_set_birlestir.py`'ye filtre: `sektor` için `\d+\s*$`
+   reddi; `osb_parsel`/`nace_name_tr` için 60 karakter üstü reddi.
+3. Sonuç: rakamlı sektör **1.410 → 0**. Kalan 2 `osb_parsel` gerçek
+   parsel bilgisi (`C BLOK 1135. SOKAK 16 PARSEL`) — korundu.
+
+**Genel ders:** *doluluk* ile *bilgi* farklıdır. Bir kolonun dolu
+olması, taşıdığı bilginin gerçek olduğunu göstermez.
+
+### Güvenlik borcu (açık)
+
+- TOBB parolası sohbette açığa paylaşıldı ve `.env`'e yazıldı —
+  **çıkış sonrası parola değiştirilmeli**
+- `data/tobb_cookie.json` canlı oturum çerezidir; paylaşılmamalı
 
