@@ -6,6 +6,16 @@
 # Ayrica platform zorunlulugu olan nokta klasorleri (.vscode, .roo, .github, ...)
 # kokte kalir; listesi tests/test_kok_politikasi.py ile sabitlenir.
 
+# D-303: "Huginn Data Insights" ust depoda `160000` gitlink olarak duruyordu,
+# ama `.gitmodules` YOKTU -> yarim submodule. Sonucu: her ic commit ust depoda
+# ` M` uretti, "alt depo isaretcisi guncellendi" gurultu commit'leri dogdu ve
+# commit yanlis depoya dusebildi (D-302). Ust depoda kanca da yok (sadece
+# .sample); tum koruma ic depoda (`core.hooksPath=scripts/hooks`).
+# Karar: TEK REPO TEK SISTEM. Ic depo tek orijinaldir; ust depo ona bakmaz.
+# ponytail: ust depo hala kok ayar dosyalarini (.vscode, .roo, AGENTS.md...)
+# izliyor. Ust depoyu tumden kaldirmak urun sahibinin karari.
+/Huginn Data Insights/
+
 # Yedekler: ayni diskteki gecici durak, repo gecmisine gomulmemeli
 yedekler/
 *.bundle
