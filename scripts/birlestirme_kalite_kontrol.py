@@ -98,6 +98,28 @@ def k2_uyum(kayitlar: list[dict]) -> dict:
             if s.get("nace_code") and not s.get("nace_confidence")),
         "unvan_bos": sum(1 for s in kayitlar if not s.get("unvan")),
     }
+
+    # D-292: doluluk TEK BASINA kalite kaniti DEGILDIR.
+    # `firmalar_vkn_ekli.jsonl` icin "sektor %100 dolu" denetimi
+    # sonuc: %100 dolu idi ama DEGERLERIN TAMAMI rakamla bitiyordu
+    # (`Otomotiv1163` = sektor + firma sira no). Yani dolu bir kolon
+    # hicbir bilgi tasimiyordu. Ayni tuzak web_sitesi/sosyal_medya'da
+    # vardi. Bu yuzden her metin kolonunun SAYI SIZINTISI olculur.
+    sizinti = {}
+    for alan in ("sektor", "nace_name_tr", "web_sitesi", "osb_parsel"):
+        degerler = [str(s.get(alan) or "") for s in kayitlar if s.get(alan)]
+        if not degerler:
+            continue
+        rakamli = [d for d in degerler if re.search(r"\d", d)]
+        oran = len(rakamli) / len(degerler)
+        sizinti[alan] = {
+            "dolu": len(degerler),
+            "rakam_iciyor": len(rakamli),
+            "oran_yuzde": round(100 * oran, 1),
+            "supheli": oran > 0.5,
+            "ornek": (rakamli[:3] or degerler[:2]),
+        }
+    sonuc["sayi_sizintisi"] = sizinti
     return sonuc
 
 

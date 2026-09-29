@@ -1,45 +1,51 @@
 {
-  "timestamp": "2026-09-27T20:04:27",
-  "status": "fail",
+  "timestamp": "2026-09-29T15:51:29",
+  "status": "ok",
   "uygula": false,
   "bulgular": [
     {
+      "tip": "stuck",
+      "seviye": "uyari",
+      "task_id": "VERI-02",
+      "mesaj": "aktif / son hareket 2026-09-27T03:07",
+      "duzeltme": null
+    },
+    {
+      "tip": "stuck",
+      "seviye": "uyari",
+      "task_id": "VERI-NACE-COKLU-01",
+      "mesaj": "aktif / son hareket 2026-09-27T13:19",
+      "duzeltme": null
+    },
+    {
       "tip": "orphan",
-      "seviye": "hata",
+      "seviye": "uyari",
       "task_id": "TEST-BACKLOG-20",
-      "mesaj": "kuyrukta (bekliyor) var, panoda yok",
+      "mesaj": "kuyrukta (onaylandi) var, panoda yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kuyruk",
+      "seviye": "uyari",
+      "task_id": "ALTYAPI-SKILL-YAPISI-01",
+      "mesaj": "kuyruk=bekliyor ama pano=done — onay kaydı kapatılmadı",
       "duzeltme": null
     }
   ],
   "gorevler": [
     {
       "id": "VERI-02",
-      "durum": "plan",
+      "durum": "aktif",
       "update": "2026-09-27T03:07"
     },
     {
-      "id": "VERI-NACE-SOZLUK-01",
-      "durum": "aktif",
-      "update": "2026-09-27T13:11"
-    },
-    {
       "id": "VERI-NACE-COKLU-01",
-      "durum": "beklemede",
+      "durum": "aktif",
       "update": "2026-09-27T13:19"
     },
     {
-      "id": "VERI-NACE-TEMIZ-01",
-      "durum": "review",
-      "update": "2026-09-27T13:21"
-    },
-    {
-      "id": "VERI-NACE-KOLON-01",
-      "durum": "aktif",
-      "update": "2026-09-27T13:21"
-    },
-    {
       "id": "VERI-KAYNAK-BAG-01",
-      "durum": "plan",
+      "durum": "aktif",
       "update": null
     },
     {
@@ -53,17 +59,22 @@
       "update": null
     },
     {
-      "id": "VERI-HAYALET-TEMIZ-01",
-      "durum": "aktif",
-      "update": "2026-09-27T18:08"
-    },
-    {
       "id": "VERI-IVEDIK-YENIDEN-01",
       "durum": "plan",
       "update": null
+    },
+    {
+      "id": "ALTYAPI-AJAN-CAKISMA-01",
+      "durum": "plan",
+      "update": "2026-09-29T00:42"
+    },
+    {
+      "id": "VERI-OSTIM-TAM-TARAMA-01",
+      "durum": "plan",
+      "update": "2026-09-29T15:33"
     }
   ],
   "duzeltilen": [],
   "error": null,
-  "hata_sayisi": 1
+  "hata_sayisi": 0
 }

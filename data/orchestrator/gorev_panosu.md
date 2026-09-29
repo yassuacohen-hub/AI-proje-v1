@@ -30,8 +30,7 @@
 | VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim icinde 102 ASO kaydi (2s) | utku | P2 | plan | src/company_master/etl/kaynak_sizinti_duzelt.py |
 | VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik verisini yeniden yaz → D-235 korumali sayfa_dongusu (2s) | utku | P1 | plan | src/company_master/etl/scrapers/ivedik_scraper.py |
 | ALTYAPI-AJAN-CAKISMA-01 | [ALTYAPI] Eszamanli ajan kacak kilit kapisini yaz → ajan_cakisma_kilidi.py (4s) | ihsan | P1 | plan | scripts/ajan_cakisma_kilidi.py |
-| ALTYAPI-SKILL-YAPISI-01 | [ALTYAPI] Skill sistemini tek havuzda birlestir → SKILLS_INDEX.md yaz (6s) | yasu | P1 | review | skills/devops/__init__.py, skills/streamlit/__init__.py, tests/test_skill_havuzu.py |
-| ALTYAPI-TICARET-KANIT-01 | [ALTYAPI] Kanit katmanini yaz → skills/services/ticaret_sicili_kanit.py (2s) | yasu | P1 | review | skills/services/ticaret_sicili_kanit.py, tests/test_ticaret_sicili_kanit.py |
+| VERI-OSTIM-TAM-TARAMA-01 | [VERI] OSTIM 3.339 eksik detayi tara + tam veri denetimi (koruma onlemleriyle) | yasu | P1 | plan | data/ostim/tamamlama_2026-09-29/firmalar_tamamlanmis.jsonl, data/ostim/tamamlama_2026-09-29/rapor.md |
 
 ## Tamamlananlar
 
@@ -100,3 +99,5 @@
 | VERI-NACE-TEMIZ-01 | [VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s) | utku | 2026-09-28T19:38:48 |
 | VERI-NACE-KOLON-01 | [VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s) | utku | 2026-09-28T19:38:49 |
 | VERI-HAYALET-TEMIZ-01 | [VERI] Hayalet kayitlari sil → companies 4591 fazlalik satir (3s) | utku | 2026-09-28T19:38:49 |
+| ALTYAPI-SKILL-YAPISI-01 | [ALTYAPI] Skill sistemini tek havuzda birlestir → SKILLS_INDEX.md yaz (6s) | yasu | 2026-09-29T15:51:21 |
+| ALTYAPI-TICARET-KANIT-01 | [ALTYAPI] Kanit katmanini yaz → skills/services/ticaret_sicili_kanit.py (2s) | yasu | 2026-09-29T15:51:21 |

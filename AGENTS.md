@@ -5044,6 +5044,104 @@ doğrulanmadıkça beyandır (D-260).
 
 **Referans:** D-57, D-217, D-218, D-219, D-221, D-226, D-241, D-260, D-261, D-267, D-270, D-281, D-286, D-288.
 
+## D-295 — Ürün ölçüldü: 9412 firmanın 5'i 6+ puan; panelin sağlık sorgusu canlıda kırık (2026-09-29)
+
+On bir tur altyapı hijyeni yapıldı. Bu tur **ürünün kendisi** ölçüldü. Ayrıntılı tablolar
+[`docs/BORC_DEFTERI.md`](docs/BORC_DEFTERI.md) → `## Devir — sonraki oturum (D-295 sonrası)`.
+
+### 1. Bulgu — dağılım tavandan çok daha kötü
+
+D-258 "ulaşılabilir tavan 7.5" demişti ve dürüsttü. Ama **dağılım hiç ölçülmemişti**.
+
+| Bant | Firma |
+|---|---|
+| 8–10 | **0** |
+| 6–8 | **5** |
+| 4–6 | 5329 |
+| 2–4 | 3381 |
+| 0–2 | 697 |
+
+Ortalama **3.72**, en yüksek **6.5**. Tavan 7.5 iken tavana yaklaşan firma yok.
+Veritabanına yazılı puanlar yeniden hesapla **birebir** aynı (hepsi `v1`) — puanlama
+kapısı (D-250) dürüst; kötü olan veri.
+
+### 2. Bulgu — "dolu" alan puan almıyor, çünkü kanıt değil
+
+| Alan | Puanlı | Ham dolu | KAYIP |
+|---|---|---|---|
+| `nace_code` | **0** | 8289 | **8289** |
+| `trade_registry_number` | 25 | 619 | **594** |
+| `tax_number` | 5 | 5 | 0 |
+| `mersis_number` / `tax_office` | 0 | 0 | 0 |
+
+NACE kaynak dağılımı: `sector_default` %60.3, `unknown` %26.6, `fallback` %6.9,
+`invalid_cleared` %5.9, `title_default` %0.2 — **kanıta dayalı sıfır**. D-245 kapısı
+doğru çalışıyor: 8289 tahmin puan almıyor.
+
+### 3. Bulgu — puan **alan** alanların içeriği de doğrulanmamış (D-292 tekrar)
+
+- `website_domain`: 2779 kayıt 58 adresi paylaşıyor; `http://www.isim.org.tr` **2142** kez.
+  3799 kayıtta (%69.8) alan adı ile unvanın ortak sözcüğü yok → dizin bağlantısı.
+- `address`: 4795'inde (%82.7) "ankara" geçmiyor, posta kodu olan **0**.
+- `primary_email`: en sık değer yer tutucu `bilinmeyen@bilinmeyen.com` (17 firma).
+- `primary_phone`: 498 numara 1057 kayıtta yineleniyor.
+- `entity_resolution` 8905 satır tutuyor ama **8820 firmanın** eşleşme kaydı yok (%93.7).
+
+Yeni borçlar: `BORC-SITE-COP-01`, `BORC-ADRES-KALITE-01`, `BORC-ILETISIM-ORTAK-01`,
+`BORC-ESLESME-KAPSAM-01`.
+
+### 4. Bulgu — panelin okuma tarafı: modüller sağlam, bir sorgu ölü
+
+D-288 panelin **yazmadığını** ölçmüştü; **okuma** tarafı ölçülmemişti. Ölçüm:
+
+- 33 sekme modülünün **33'ü** import oluyor, kırık import **0** (`SECTIONS` 36 kayıt).
+- Panelin okuduğu tabloların **6'sı dolu**, **8'i tamamen boş** (`admin_audit_log`,
+  `api_usage_daily`, `audit_logs`, `company_packages`, `company_signals`, `login_events`,
+  `packages`, `user_activity_log`). Veritabanında 91 tablonun 71'i boş.
+- `companies` 49 kolonunun **28'i** panelde hiç geçmiyor — `address`, `mersis_number`,
+  `tax_office`, `trade_registry_number`, `osb_id` dahil.
+- **Canlı kırık sorgu** — [`web_dashboard/tabs/admin_executive.py`](web_dashboard/tabs/admin_executive.py:163)
+  `_firma_kayitlari()` var olmayan kolonu okuyor:
+
+```
+psycopg.errors.UndefinedColumn: column "address_line" does not exist
+LINE 1: SELECT address_line AS adres FROM companies LIMIT 1
+```
+
+`address_line` yalnız `company_locations`'ta var, o tablo **0 satır**. Veri
+`companies.address`'te (5798 dolu) — yani panelde hiç okunmayan 28 kolondan biri.
+
+**Testi yeşil:** `tests/test_admin_executive.py::test_firma_kayitlari_30_gun_esigi`
+sahte engine'e hazır satır verdiği için sorgu metni hiç çalışmıyor. **D-288'in
+"yeşil test de beyandır, kırılana kadar" kuralının canlı kanıtı.** Borç:
+`BORC-PANEL-ADRES-01`. Bu tur ölçüm turuydu, **düzeltilmedi** — ürün sahibi öncelik verecek.
+
+### 5. En büyük tek kazanç — kapalı kapıların arkasında
+
+Ortalama 3.72; alan tamamen dolsaydı: `tax_number` +1.50, `mersis_number` +1.00,
+`nace_code` +1.00, `trade_registry_number` +1.00, `address` +0.58, `tax_office` +0.50.
+**İlk dördü D-257'de kapalı ilan edilen kaynaklara bağlı.** Yani puanı yükseltecek iş
+veri toplamak değil, **kapalı kapıyı açmak**.
+
+Dış kaynak gerektirmeyen tek gerçek kazanç: `BORC-SICIL-DAIRE-01` — 619 sicil numarasının
+594'ünde daire eksik; tamamlanırsa 594 firma 1.0 puan, ortalama +0.06.
+
+### 6. Öneri — ürün sahibine üç soru (defterde ayrıntılı)
+
+1. **Bu ürün satılabilir mi?** Benim okumam: **hayır.** Bugünkü ürün "Ankara firma listesi
+   + telefon"dur, "firma istihbaratı" değil. Kurumsal kimlik hiçbir firmada tam değil.
+2. **Şişik puan mı, dürüst düşük puan mı?** Doğrulanmamış site/adres ayıklanırsa ortalama
+   3.72 → ~3.5 düşer. D-292 ayıklamayı söylüyor, vitrin düşer.
+3. **D-257 kapalı kaynakları yeniden denenecek mi?** Puanın 4.5/10'u o kapıların arkasında.
+
+### 7. Yöntem notu — cmd.exe
+
+D-293'ün `%errorlevel%` tuzağına ek iki tuzak ölçüldü: `python -c` içinde `<>` karakteri
+cmd tarafından yönlendirme sanılır (`!=` kullanıldı); Türkçe/emoji çıktı `cp1254`'te
+patlar (`set PYTHONIOENCODING=utf-8` gerekir).
+
+**Referans:** D-241, D-245, D-249, D-250, D-257, D-258, D-260, D-272, D-281, D-286, D-288, D-292, D-293.
+
 ## Ilgili Nodlar
 
 - [[docs/BORC_DEFTERI]]

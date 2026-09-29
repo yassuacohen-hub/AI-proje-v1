@@ -1,9 +1,11 @@
-# OSTIM Organize Sanayi Bölgesi Müdürlüğü
-# Ticari Veri Kullanımı İzin Talebi — TASLAK
+# OSTİM Organize Sanayi Bölgesi Müdürlüğü
+# Ticari Veri Kullanımı İzin Talebi
 
-> **DURUM: TASLAK — gönderilmemiştir.** Resmî yanıt kurumun adına
-> yazılmalı; gönderimi **KAHİN** yapar (bkz. `plans/BRIEF`).
-> Hazırlayan: yasu (D-283) · Tarih: 2026-09-29
+> **Durum: gönderime hazır taslak.** Gönderimi **KAHİN** yapar
+> (izin sahibi D-286'da KAHİN olarak belirlendi). Resmî yanıt kurumun
+> adına yazılmalıdır. Hazırlayan: yasu · Tarih: 2026-09-29
+>
+> **Aşağıdaki boş alanlar KAHİN tarafından doldurulacaktır.**
 
 ## 1. Talep eden
 
@@ -30,38 +32,56 @@ Talep edilen veri kapsamı:
 | Web sitesi | Site üzerinde yayımlanan bağlantı |
 | Sektör / faaliyet | Site üzerinde yayımlanan bilgi |
 
-**Talep edilmeyenler:** vergi kimlik numarası, ortak bilgisi, temsilci
-kimlik bilgisi, mali/finansal tablo verisi. Bu alanlar kapsam **dışındadır**.
+**Talep edilmeyenler (kapsam dışı):** vergi kimlik numarası (VKN),
+ortak bilgisi, temsilci kimlik bilgisi, mali/finansal tablo verisi,
+çalışan kişisel verisi. Bu alanların hiçbiri kullanılmayacak ve
+taranmayacaktır.
 
-## 3. Kaynak ve doğruluk
+> **Not:** Bölgenizin sitesinde VKN / NACE kodu / ticaret sicili
+> **yayımlanmamaktadır**. Bu nedenle talep edilen veri bu alanları
+> **içermez**; başka kaynaklardan zenginleştirme yapılmayacaktır.
+
+## 3. Kaynak ve doğrulama
 
 | Ölçüm | Değer |
 |---|---|
-| Firma sayisi | 8.473 uye firmasi (sayfada yazili: 'Toplam 8473 sonuç') |
-| Listeleme | 29 sayfa, 300 firma/sayfa (son sayfa 73) |
-| Detay adresi | https://ostim.org.tr/firmalar/<slug> (kalici) |
-| Politika | https://ostim.org.tr/kurumsal/gizlilik-politikasi |
-| Mevcut kullanim kosulu | “bilgi amaçlı ve ticari olmayan kullanım için hazırlanmıştır” |
+| Üye firma sayısı (sitenin ilanı) | “Toplam 8473 sonuç bulundu” — ostim.org.tr/firmalar |
+| Bizim taramamızda ulaştığımız kayıt | 8.313 kayıt / 8.313 benzersiz slug (tekrar kayıt yok) |
+| Fark ve kaynağı | 160 firma; liste 28-29. sayfalarında 13 yenisi görüldü (liste tarama sırasında güncellenmiş) |
+| Listeleme yapısı | 300 firma/sayfa; son dolu sayfa 29 (73 firma); sayfa 30 boş |
+| Detay adresi | https://ostim.org.tr/firmalar/<slug> (kalıcı) |
+| Politika sayfası | https://ostim.org.tr/kurumsal/gizlilik-politikasi |
+| Mevcut kullanım koşulu (birebir) | “Bu web sitesi sadece bilgi amaçlı olarak ticari olmayan kullanım için hazırlanmıştır” |
+| robots.txt (birevir) | User-agent: * / Disallow: /admin/ /portal/ /auth/ — firma sayfaları YASAK DEĞİL |
+
+**Kapsam doğrulaması:** Canlı doğrulama: 8313 kayıt / 8313 benzersiz slug; site ilanı 8473; fark 160.
 
 ## 4. Kullanım taahhüdü
 
+
 1. Veriler **yalnızca** belirtilen ticari amaçla kullanılacaktır.
-2. Kaynak belirtilecektir: *“Kaynak: OSTİM OSB”*.
-3. Veriler **üçüncü taraflara satılmayacak, dağıtılmayacaktır.**
-4. İçe aktarım gerekirse yazılı izin ayrıca alınacaktır.
+2. Her kullanımda kaynak belirtilecektir: *“Kaynak: OSTİM OSB”*.
+3. Veriler **üçüncü taraflara satılmayacak, yeniden dağıtılmayacaktır.**
+4. İçe aktarım (API/entegrasyon) gerekirse **ayrıca yazılı izin**
+   alınacaktır; mevcut izin içe aktarımı kapsamaz.
 5. Maskeli veriler (KVKK gereği) **kopyalanmayacaktır.**
 6. Veri seti **6 ayda bir** güncellenecektir.
-7. Kurumun talebi üzerine **derhal** silinir.
+7. Kurumun talebi üzerine **derhal** silinecektir.
+8. Kurum listeden çıkan bir firmanın verisinin kopyası taşıyor ise
+   talebi üzerine **48 saat içinde** o kayıt silinecektir.
 
 ## 5. Teknik taahhüt
 
 - `robots.txt` kurallarına **uyulacaktır** (ölçüldü: yalnız
-  `/admin/`, `/portal/`, `/auth/` yasak).
-- İstekler arası **en az 2 saniye** beklenecektir.
-- Sahte kullanıcı adı/tampon **kullanılmayacaktır**; sabit ve
+  `/admin/`, `/portal/`, `/auth/` yasak; `/firmalar/` **serbest**).
+- İstekler arası **en az 2 saniye** gerçek beklenecektir.
+- Sahte kullanıcı adı / bot taklidi **kullanılmayacaktır**; sabit ve
   gerçek User-Agent gönderilecektir.
-- Günlük istek sayısı **sınırlı** tutulacaktır (isteğe göre:
-  günde 500 firma detayı).
+- Günlük istek sayısı **sınırlı** tutulacaktır: **en fazla 500 firma
+  detayı / gün**.
+- Veri kalitesi otomatik denetimle süzülecektir; hatalı veya şüpheli
+  kayıtlar (ör. kuruma ait altyapı siteleri) veri tabanına
+  alınmayacaktır.
 
 ## 6. İletişim
 
@@ -72,7 +92,8 @@ kimlik bilgisi, mali/finansal tablo verisi. Bu alanlar kapsam **dışındadır**
 
 ## Ek — Ölçüm dayanağı (kanıt dosyaları)
 
+- `data/ostim/kapsam_dogrulama.json` — 8.473 / 8.313 farkının canlı ölçümü
 - `data/karsilastirma_raporu.json` — kolon bazlı doluluk ölçümü
-- `data/ostim_kaynak_olcumu.json` — erişim + robots.txt ölçümü
+- `data/birlestirme_kalite_raporu.json` — kalite denetimi (D-285)
 - `data/ostim_gizlilik_bolumler.json` — kullanım koşulu alıntısı
-- `docs/BORC_DEFTERI.md` D-281 / D-282 / D-283
+- `docs/BORC_DEFTERI.md` — D-281 / D-282 / D-283 / D-285 / D-286

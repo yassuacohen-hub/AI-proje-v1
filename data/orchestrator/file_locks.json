@@ -9,29 +9,14 @@
     "task_id": "ALTYAPI-AJAN-CAKISMA-01",
     "kilitlendi": "2026-09-29T00:42:35"
   },
-  "skills/devops/__init__.py": {
+  "data/ostim/tamamlama_2026-09-29/firmalar_tamamlanmis.jsonl": {
     "sahip": "yasu",
-    "task_id": "ALTYAPI-SKILL-YAPISI-01",
-    "kilitlendi": "2026-09-29T01:23:04"
+    "task_id": "VERI-OSTIM-TAM-TARAMA-01",
+    "kilitlendi": "2026-09-29T15:33:16"
   },
-  "skills/streamlit/__init__.py": {
+  "data/ostim/tamamlama_2026-09-29/rapor.md": {
     "sahip": "yasu",
-    "task_id": "ALTYAPI-SKILL-YAPISI-01",
-    "kilitlendi": "2026-09-29T01:23:04"
-  },
-  "tests/test_skill_havuzu.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-SKILL-YAPISI-01",
-    "kilitlendi": "2026-09-29T01:23:04"
-  },
-  "skills/services/ticaret_sicili_kanit.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-TICARET-KANIT-01",
-    "kilitlendi": "2026-09-29T02:35:29"
-  },
-  "tests/test_ticaret_sicili_kanit.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-TICARET-KANIT-01",
-    "kilitlendi": "2026-09-29T02:35:29"
+    "task_id": "VERI-OSTIM-TAM-TARAMA-01",
+    "kilitlendi": "2026-09-29T15:33:16"
   }
 }

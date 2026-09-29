@@ -1,0 +1,79 @@
+{
+  "zaman": "2026-09-29T18:31:22",
+  "kayit": 1278,
+  "tekil_slug": 1278,
+  "mukerrer_slug": 0,
+  "tekil_unvan": 1274,
+  "mukerrer_unvan_grubu": 4,
+  "birlestirilebilir": 1,
+  "ayri_korunacak": 3,
+  "detay_birlestir": [
+    {
+      "unvan": "BNB MEKATRONİK SAVUNMA SANAYİ VE TİC. LTD. ŞTİ.",
+      "adet": 2,
+      "sluglar": [
+        "bnb-mekatronik-savunma-sanayi-ve-tic-ltd-sti",
+        "bnb-mekatronik-savunma-sanayi-ve-tic-ltd-sti-2"
+      ],
+      "adresler": [
+        "ALINTERİ BULVARI 25 33",
+        null
+      ],
+      "telefonlar": [
+        "052234224"
+      ],
+      "karar": "MUKERRER (tek kayda indirilebilir)"
+    }
+  ],
+  "detay_ayri": [
+    {
+      "unvan": "ASAY LAZER KESİM SAVUNMA SİSTEMLERİ MAKİNA İMALAT SAN. VE TİC. LTD.ŞTİ.",
+      "adet": 2,
+      "sluglar": [
+        "asay-lazer-kesim-savunma-sistemleri-makina-imalat-san-ve-tic",
+        "asay-lazer-kesim-savunma-sistemleri-makina-imalat-san-ve-tic-1"
+      ],
+      "adresler": [
+        "1185. CADDE (ESKİ 17) 26",
+        "OSTİM OSB MAH. 1185 CADDE NO:26-28"
+      ],
+      "telefonlar": [
+        "125430727"
+      ],
+      "karar": "AYRI_KAYIT (ayri isletme olabilir — KORU)"
+    },
+    {
+      "unvan": "ATASAM SAĞLIK VE SAĞLIK SİSTEMLERİ SAN. VE TİC. LTD. ŞTİ.",
+      "adet": 2,
+      "sluglar": [
+        "atasam-saglik-ve-saglik-sistemleri-san-ve-tic-ltd-sti",
+        "atasam-saglik-ve-saglik-sistemleri-san-ve-tic-ltd-sti-2"
+      ],
+      "adresler": [
+        "ALINTERİ BULVARI 1151. SOKAK 1 91",
+        "ALINTERİ BULVARI 1151. SOKAK 1 90"
+      ],
+      "telefonlar": [
+        "123862576"
+      ],
+      "karar": "AYRI_KAYIT (ayri isletme olabilir — KORU)"
+    },
+    {
+      "unvan": "ERSAN BEŞER",
+      "adet": 2,
+      "sluglar": [
+        "ersan-beer",
+        "ersan-beser-2"
+      ],
+      "adresler": [
+        "1241. CADDE (ESKİ 46) 4 B",
+        "AHİ EVRAN CAD. 18/1 30"
+      ],
+      "telefonlar": [
+        "367700108"
+      ],
+      "karar": "AYRI_KAYIT (ayri isletme olabilir — KORU)"
+    }
+  ],
+  "not": "Kaynak dosyalara DOKUNULMADI. Bu bir denetim raporudur; tekillestirme karari ayrica verilir."
+}

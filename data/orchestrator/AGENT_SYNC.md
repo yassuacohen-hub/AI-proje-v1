@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-09-29T02:41:26
+> Son guncelleme: 2026-09-29T15:51:21
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -30,15 +30,12 @@
 | VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim | utku | P2 | plan |
 | VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik verisini yeniden yaz → D-2 | utku | P1 | plan |
 | ALTYAPI-AJAN-CAKISMA-01 | [ALTYAPI] Eszamanli ajan kacak kilit kap | ihsan | P1 | plan |
-| ALTYAPI-SKILL-YAPISI-01 | [ALTYAPI] Skill sistemini tek havuzda bi | yasu | P1 | review |
-| ALTYAPI-TICARET-KANIT-01 | [ALTYAPI] Kanit katmanini yaz → skills/s | yasu | P1 | review |
+| VERI-OSTIM-TAM-TARAMA-01 | [VERI] OSTIM 3.339 eksik detayi tara + t | yasu | P1 | plan |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| DOC-D227-01 | [DOC] D-227: karar numarasi yalniz AGENT | orkestrator | 2026-09-27 |
-| DOC-D228-01 | D-228: vault icinde paralel veri govdesi | kahin | 2026-09-27 |
 | DOC-D229-01 | D-229: zaman damgali yedek git te izlenm | kahin | 2026-09-27 |
 | DOC-D230-01 | D-230: gomulu govde kopyasi yasagi + man | kahin | 2026-09-27 |
 | ORKESTRA-D231-01 | Onay kuyrugu arsive kor: pano_denetim ar | kahin | 2026-09-27 |
@@ -47,6 +44,8 @@
 | VERI-NACE-TEMIZ-01 | [VERI] Sektör sayacı kirlenmesini düzelt | utku | 2026-09-28 |
 | VERI-NACE-KOLON-01 | [VERI] nace_validity kolon karışmasını d | utku | 2026-09-28 |
 | VERI-HAYALET-TEMIZ-01 | [VERI] Hayalet kayitlari sil → companies | utku | 2026-09-28 |
+| ALTYAPI-SKILL-YAPISI-01 | [ALTYAPI] Skill sistemini tek havuzda bi | yasu | 2026-09-29 |
+| ALTYAPI-TICARET-KANIT-01 | [ALTYAPI] Kanit katmanini yaz → skills/s | yasu | 2026-09-29 |
 
 ## Son Handoff'lar
 

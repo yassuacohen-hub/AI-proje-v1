@@ -1,0 +1,27 @@
+{
+  "bizim_kayit": 8313,
+  "bizim_benzersiz_slug": 8313,
+  "site_ilan_sayisi": 8473,
+  "fark": 160,
+  "kontrol_edilen_sayfalar": {
+    "28": 300,
+    "29": 73,
+    "30": 0
+  },
+  "kontrol_sayfalarda_bizde_olmayan": [
+    "yasam-filtre-otomotiv-sanayi-ve-ticaret-limited-sirketi",
+    "yasar-makina-insaat-malzemeleri-san-ve-tic-ltd-sti",
+    "yasin-ozsari",
+    "yildiz-teknik-imalat-makine-sanayi-ve-ticaret-limited-sirket",
+    "yny-savunma-havacilik-sanayi-ve-ticaret-limited-sirketi",
+    "yuksel-hayta-mefa-otomotiv",
+    "yunus-emre-guventurk",
+    "yusuf-alkan",
+    "yusuf-yasar",
+    "zavagar-tekstil-is-elbiseleri-santicltdsti",
+    "zemin-teknik-market-makina-ticaret-limited-sirketi",
+    "zheron-teknoloji-muhendislik-havacilik-makina-ve-imalat-itha",
+    "zirve-vida-makina-ve-disli-teknolojileri-sanayi-ticaret-limi"
+  ],
+  "kontrol_sayfa_sayisi": 3
+}

@@ -1,0 +1,25 @@
+{
+  "calisma_zamani": "2026-09-29T15:54:00",
+  "toplam_kayit": 8313,
+  "eksik_detay": 3339,
+  "bu_turda_islenen": 500,
+  "basarili_kayit": 500,
+  "hata": 0,
+  "P8_tekrar_imza": 0,
+  "P3_gecikme_saniye": 2.0,
+  "P3_uygulandi": true,
+  "D290_izole_klasor": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\ostim\\tamamlama_2026-09-29",
+  "D290_korunan_sha": {
+    "firmalar_full.jsonl": "7e97916acb23dd19b2557b9b9b4ea3196041c7ea36bebbf3bcea70739f9eb5aa",
+    "firmalar_vkn_ekli.jsonl": "3cfaf66e4410ee4267a10b7e911e0131c89cdd14639cb52adbd9e03e9a4a6f29",
+    "firmalar_birlestirilmis.jsonl": "d95a3012443f622e8294f168e02749773edbe59748fe7a3c8cccfd29e8b15680"
+  },
+  "tekil_unvan": 499,
+  "tekil_oran_yuzde": 99.8,
+  "P6_esik_yuzde": 95.0,
+  "tur_basarisiz": false,
+  "sure_saniye": 1198.0,
+  "cikti": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\ostim\\tamamlama_2026-09-29\\firmalar_tamamlanmis.jsonl",
+  "durum_dosyasi": "C:\\Huginn Data Projesi\\Huginn Data Insights\\data\\ostim\\tamamlama_2026-09-29\\durum.json",
+  "kalan_islenmemis": 2836
+}

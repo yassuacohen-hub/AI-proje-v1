@@ -1,0 +1,66 @@
+{
+  "zaman": "2026-09-29T15:30:39",
+  "amac": "Tarama oncesi mevcut verinin korunmasi",
+  "korunacak_dosyalar": {
+    "data/ostim/firmalar_full.jsonl": {
+      "var": true,
+      "boyut_bayt": 4126717,
+      "satir": 8313,
+      "sha256_16": "7e97916acb23dd19",
+      "son_degisim": "2026-09-03T05:11:18"
+    },
+    "data/ostim/firmalar_vkn_ekli.jsonl": {
+      "var": true,
+      "boyut_bayt": 3692323,
+      "satir": 5040,
+      "sha256_16": "3cfaf66e4410ee42",
+      "son_degisim": "2026-09-08T03:45:48"
+    },
+    "data/ostim/firmalar_birlestirilmis.jsonl": {
+      "var": true,
+      "boyut_bayt": 4942178,
+      "satir": 8313,
+      "sha256_16": "d95a3012443f622e",
+      "son_degisim": "2026-09-29T10:13:51"
+    }
+  },
+  "veritabanlari": {
+    "company_master.db": {
+      "yol": "company_master.db",
+      "tablolar": {}
+    },
+    "test.db": {
+      "yol": "test.db",
+      "tablolar": {}
+    },
+    "backups\\company_master_pre_dedup_20260908_090326.db": {
+      "yol": "backups\\company_master_pre_dedup_20260908_090326.db",
+      "tablolar": {
+        "companies": 8313,
+        "osbs": 0,
+        "quarantine_firms": 0
+      }
+    },
+    "data\\app.db": {
+      "yol": "data\\app.db",
+      "tablolar": {}
+    },
+    "data\\orchestrator\\ajan_chat.db": {
+      "yol": "data\\orchestrator\\ajan_chat.db",
+      "tablolar": {}
+    },
+    "data\\_tmp\\ci_probe.db": {
+      "yol": "data\\_tmp\\ci_probe.db",
+      "tablolar": {
+        "companies": 0,
+        "osbs": 0,
+        "quarantine_firms": 0
+      }
+    }
+  },
+  "birlestirilmis": {
+    "kayit": 8313,
+    "tekil_slug": 8313,
+    "tekrar_kayit": 0
+  }
+}

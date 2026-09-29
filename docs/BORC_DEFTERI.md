@@ -27,7 +27,12 @@ yanlış okudu — altı tur üst üste (D-265, D-266, D-267/1, D-268/1, D-271/1
 | `BORC-KARAR-NUMARA-01` | karar numarası **iki ayrı dosyadan** tahsis ediliyordu (`AGENTS.md` max D-281, bu defter max D-282); çakışma: **D-281 iki karara birden** verilmiş. D-227 mandalı yalnız `AGENTS.md`'yi ve yalnız `(D-NNN — KAH` biçimini tarıdığı için çatışma görünmezdi | KAPANDI | D-281 | D-286: `scripts/karar_no.py` tek havuz + `TAVAN_CATISMA=1` mandalı (kırılarak doğrulandı; D-283 eşzamanlı ajan yarışında çakıştı, **mandal yakaladı**, kayıt D-286'e taşındı — tavan yükseltilmedi) |
 | `BORC-AJAN-HAFIZA-01` | `yasu_project_context.md` **213 satır > 200** (D-219 tavanı); mandal kırmızı: `tests/test_dokuman_politikasi.py::test_d219_ajan_context_dosyalari`. **SAHİBİNDE** — başka ajanın hafıza dosyası, bu turda kesilmedi (D-226/sahiplik) | ACIK | D-286 | — |
 | `BORC-KIMLIK-ANAHTAR-01` | `config/certs/selfsigned.key` (gerçek RSA özel anahtar) `90c4702` ile elle commit edilmiş; blob `216cfdd…` hâlâ ulaşılabilir. **D-293 ölçümü:** commit **hiçbir dalda/etikette/uzakta yok** (`for-each-ref --contains` boş; uzaktaki dal ebeveyn `993ce8a`'da) — yalnız yerel cline checkpoint ref'leri yaşatıyor. Sertifika `CN=localhost`/`SAN=DNS:localhost`, tek tüketicisi `config/nginx.conf` ve o da hiçbir serviste mount edilmiyor. Tarih **temizlenmedi**; A (rotasyon) / B (filter-repo, 421 commit) kararı ürün sahibinde | ACIK | D-288 | D-293'te kapsam ölçüldü; mandal `tests/test_kimlik_dosyalari.py` (kırılarak doğrulandı) — kesme kararı bekliyor |
-| `BORC-SICIL-DAIRE-01` | 619 firmada sicil no var, sicil dairesi yok | ACIK | D-260 | — |
+| `BORC-SICIL-DAIRE-01` | 619 firmada sicil no var, sicil dairesi yok. **D-295 ölçümü:** eksik olan tam **594**; bu alan puan kapısında `number AND office` istediği için 619 sicilin **25'i** puan alıyor, 594'ü **kayıp**. Daire tamamlanırsa ortalama +0.06 (ağırlık 1.0 × 594/9412) | ACIK | D-260 | — |
+| `BORC-PANEL-ADRES-01` | `web_dashboard/tabs/admin_executive.py::_firma_kayitlari()` **var olmayan kolonu** okuyor: `SELECT … address_line … FROM companies` → canlı `psycopg.errors.UndefinedColumn`. Veri `companies.address`'te (5798 dolu). `address_line` yalnız `company_locations`'ta var, o tablo **0 satır**. Test `tests/test_admin_executive.py::test_firma_kayitlari_30_gun_esigi` **sahte engine** ile hazır satır döndürdüğü için yeşil — D-288'in "yeşil test de beyandır" kuralının canlı örneği | ACIK | D-295 | — |
+| `BORC-SITE-COP-01` | `website_domain` 5446 dolu görünüyor ama **2779 kayıt yalnız 58 adresi paylaşıyor**: `http://www.isim.org.tr` **2142** kez, `ostimistihdam.com` 474 kez. Ayrıca 3799 kayıtta (%69.8) alan adı ile unvan arasında **tek ortak sözcük yok**. Dizin/portal bağlantısı firma sitesi sayılıyor (D-292: doluluk ≠ bilgi) | ACIK | D-295 | — |
+| `BORC-ILETISIM-ORTAK-01` | `primary_phone`: 1057 kayıt 498 yinelenen numarayı paylaşıyor (tepe `905344018261` ×10); 913 numara ne cep ne sabit biçiminde. `primary_email`: 444 kayıt 196 yinelenen adresi paylaşıyor, tepe değer **yer tutucu** `bilinmeyen@bilinmeyen.com` ×17. Bu kayıtlar puan alıyor ama firmaya ait olduğu doğrulanmadı | ACIK | D-295 | — |
+| `BORC-ADRES-KALITE-01` | `address` 5798 dolu (%61.6) ve tamamı puan alıyor; ama 4795'inde (%82.7) "ankara" **geçmiyor**, 626'sı (%10.8) 20 karakterden kısa, **0'ında** posta kodu var. Adres ağırlığı 1.5 — puanın en pahalı ikinci alanı doğrulanmamış metinle besleniyor | ACIK | D-295 | — |
+| `BORC-ESLESME-KAPSAM-01` | `entity_resolution` 8905 satır tutuyor ama **8820 firmanın** (9412'nin %93.7'si) hiç eşleşme kaydı yok. Tablo dolu görünüyor, kapsamı yok. `source_records` tarafında yalnız 12 yetim var — sorun kaynak bağında değil, çözümleme kapsamında | ACIK | D-295 | — |
 | `BORC-VKN-01` | VKN kanalı ölü, kaynak bulunamadı | ACIK | D-253 | — |
 | `BORC-AD-VARYANT-01` | 31 kısaltma varyantı | IPTAL | D-261 | D-263 |
 | `BORC-ADLANDIRMA-01` | kimlik hiç açılmamıştı (devir notu uydurdu) | IPTAL | — | D-271 |
@@ -74,10 +79,163 @@ yüzden ayrı bölümde durur. Silinmezler: adları `AGENTS.md`'de geçtiği sü
   bir arttı. Kayıt tutmanın kendisi ölçümü değiştirdi; sayı kılıfına uydurulmadı, gerçeğe
   çekildi (D-271'in tavanı 3 değil 4 yapmasıyla aynı karar).
 
-## Devir — sonraki oturum (D-293 sonrası)
+## Devir — sonraki oturum (D-295 sonrası)
+
+Bu tur **ürünün kendisi** ölçüldü: altyapı değil, müşteriye satılacak veri.
+Sonuç tek cümleyle: **ürün bugün satılabilir durumda değil.** Aşağıdaki bölümler
+sayıdır, yorum değil. D-293 ve öncesi başlıklar **tarihî kayıttır**.
+
+### 1 — Dağılım: 9412 firmanın kaç tanesi müşteriye hazır?
+
+`identity_completeness`, azami **10.0**, ortalama **3.72**, en düşük 1.0, en yüksek **6.5**.
+
+| Bant | Firma | Oran |
+|---|---|---|
+| 8–10 | **0** | %0.0 |
+| 6–8 | **5** | %0.1 |
+| 4–6 | 5329 | %56.6 |
+| 2–4 | 3381 | %35.9 |
+| 0–2 | 697 | %7.4 |
+
+**Hiçbir firma 7'ye ulaşmıyor.** D-258'in "ulaşılabilir tavan 7.5" kaydı dürüsttü ama
+tavana yaklaşan **yok**: en dolu firma 6.5, ondan sadece 5 tane var. "6+ müşteriye hazır"
+dense bile **elde 5 firma** var, 9412 değil.
+
+Veritabanındaki yazılı puanlar yeniden hesaplananla **birebir** aynı, hepsi `score_version=v1`
+— bayat puan yok. Puanlama kapısı (D-250) dürüst çalışıyor; kötü olan veri.
+
+### 2 — Temsilî firma kartları (alan alan)
+
+| | EN BOŞ (1.0) | ORTANCA (4.3) | EN DOLU (6.5) |
+|---|---|---|---|
+| `legal_name` | ✔ puanlı | ✔ puanlı | ✔ puanlı |
+| `tax_number` | — | — | ✔ `9380023742` |
+| `tax_office` | — | — | — |
+| `mersis_number` | — | — | — |
+| `trade_registry_number` | — | — | — |
+| `nace_code` | `62.01` **puansız** (`title_default`) | `10.11` **puansız** (`sector_default`) | `47.78` **puansız** (`unknown`) |
+| `address` | — | ✔ puanlı | ✔ puanlı |
+| `primary_phone` | — | ✔ puanlı | ✔ puanlı |
+| `primary_email` | — | — | ✔ puanlı |
+| `website_domain` | — | ✔ puanlı | ✔ puanlı |
+
+Üç firmanın **üçünde de** NACE dolu ama üçünde de puansız: kaynak tahmin (D-245).
+Üçünde de MERSİS ve sicil yok. **En dolu firmanın kartında bile** vergi dairesi,
+MERSİS ve sicil boş — yani bir kurumsal kimlik doğrulaması yapılamıyor.
+
+### 3 — Alan doluluğu: puanlı mı, yoksa sadece dolu mu?
+
+`KAYIP` = alan dolu ama puan kapısından geçmiyor.
+
+| Alan | Ağırlık | Puanlı | Ham dolu | KAYIP |
+|---|---|---|---|---|
+| `legal_name` | 1.0 | 9412 (%100) | 9412 | 0 |
+| `tax_number` | 1.5 | **5** (%0.1) | 5 | 0 |
+| `tax_office` | 0.5 | **0** | 0 | 0 |
+| `mersis_number` | 1.0 | **0** | 0 | 0 |
+| `trade_registry_number` | 1.0 | 25 (%0.3) | 619 (%6.6) | **594** |
+| `nace_code` | 1.0 | **0** | 8289 (%88.1) | **8289** |
+| `address` | 1.5 | 5798 (%61.6) | 5798 | 0 |
+| `primary_phone` | 1.5 | 8251 (%87.7) | 8251 | 0 |
+| `primary_email` | 0.7 | 4038 (%42.9) | 4038 | 0 |
+| `website_domain` | 0.3 | 5446 (%57.9) | 5446 | 0 |
+
+NACE kaynak dağılımı: `sector_default` %60.3, `unknown` %26.6, `fallback` %6.9,
+`invalid_cleared` %5.9, `title_default` %0.2 — **kanıta dayalı sıfır**. 8289 firmada
+NACE "var" ama tamamı tahmin; puan kapısı doğru davranıp 0 veriyor.
+
+**`HEDEF_VERI_KAPSAMI.md` vaadiyle karşılaştırma:** belgede 35 öbek sayılıyor —
+VAR 5, BOŞ 4, KAPALI 4, YOK 22. Yani **vaadin %14'ü** (5/35) veri taşıyor. Bu turda
+ölçülen o 5 öbeğin **içeriği** de sorunlu (aşağıda); yani "%14 var" bile iyimser.
+
+### 4 — Doluluk ≠ bilgi (D-292 dersi, bu turda tekrar çıktı)
+
+Puanlanan alanların içeriği ölçüldü:
+
+- **Adres** (ağırlık 1.5, 5798 puanlı): 4795'inde (%82.7) "ankara" geçmiyor; 626'sı (%10.8)
+  20 karakterden kısa; **posta kodu olan 0**.
+- **Web sitesi** (5446 puanlı): 2779 kayıt yalnız **58** adresi paylaşıyor —
+  `http://www.isim.org.tr` **2142** kez, `ostimistihdam.com` 474 kez. 3799 kayıtta (%69.8)
+  alan adı ile unvan arasında ortak sözcük yok. Bu kolon büyük ölçüde **dizin bağlantısı**.
+- **Telefon** (8251 puanlı): 1057 kayıt 498 yinelenen numarayı paylaşıyor
+  (tepe `905344018261` ×10); 913'ü ne cep ne sabit biçiminde.
+- **E-posta** (4038 puanlı): 444 kayıt 196 yinelenen adresi paylaşıyor; en sık değer
+  **yer tutucu** `bilinmeyen@bilinmeyen.com` (17 firma). Olumlu yan: ücretsiz sağlayıcı
+  yalnız %0.6.
+- **`entity_resolution`**: 8905 satır var ama **8820 firmanın** hiç eşleşme kaydı yok (%93.7).
+
+### 5 — Panel okuma tarafı (D-288 yazma tarafını ölçmüştü, okuma ölçülmemişti)
+
+- 33 sekme modülünün **33'ü** import ediliyor, kırık import **0**. `SECTIONS` 36 kayıt.
+- Panelin okuduğu tablolardan **6'sı dolu**: `source_records` 10601, `companies` 9412,
+  `search_events` 379, `users` 7, `sources` 4, `credit_ledger` 3.
+- **8'i tamamen boş**: `admin_audit_log`, `api_usage_daily`, `audit_logs`,
+  `company_packages`, `company_signals`, `login_events`, `packages`, `user_activity_log`.
+  Bu sekmeler çiziliyor ama gösterecek satırları yok.
+- Veritabanında **91 tablo**, dolu olan **20**, boş **71**.
+- `companies` 49 kolon; **28'i panelde hiç geçmiyor** — aralarında `address`,
+  `mersis_number`, `tax_office`, `trade_registry_number`, `trade_registry_office`,
+  `osb_id`, `osb_parcel`, `nace_validity`, `score_version` ve tüm `*_score` kolonları.
+- **Canlı kırık sorgu** (`BORC-PANEL-ADRES-01`): `admin_executive._firma_kayitlari()`
+  `address_line` okuyor, o kolon `companies`'te **yok**:
+
+```
+psycopg.errors.UndefinedColumn: column "address_line" does not exist
+LINE 1: SELECT address_line AS adres FROM companies LIMIT 1
+```
+
+`address_line` yalnız `company_locations`'ta var ve o tablo **0 satır**. Testi
+(`test_firma_kayitlari_30_gun_esigi`) sahte engine kullandığı için yeşil —
+**D-288 kuralının canlı örneği: yeşil test de beyandır.**
+
+### 6 — En büyük tek kazanç (benzetim)
+
+Alan tamamen doldurulsaydı ortalamanın nereye çıkacağı (3.72'den):
+
+| Alan | Eksik firma | Ortalama kazanç | Sonuç | Kaynak durumu |
+|---|---|---|---|---|
+| `tax_number` | 9407 | **+1.50** | 5.22 | **KAPALI** (D-257: GİB tek yönlü) |
+| `mersis_number` | 9412 | +1.00 | 4.72 | **KAPALI** (MERSİS 404) |
+| `nace_code` | 9412 | +1.00 | 4.72 | kanıt kaynağı yok |
+| `trade_registry_number` | 9387 | +1.00 | 4.71 | **KAPALI** (TSG captcha) |
+| `address` | 3614 | +0.58 | 4.29 | açık |
+| `tax_office` | 9412 | +0.50 | 4.22 | KAPALI |
+| `primary_email` | 5374 | +0.40 | 4.12 | açık |
+| `primary_phone` | 1161 | +0.19 | 3.90 | açık |
+| `website_domain` | 3966 | +0.13 | 3.84 | açık |
+
+**Acı gerçek: en büyük dört kazancın dördü de D-257'de kapalı ilan edilen kaynakların
+arkasında.** Yani puanı yükseltecek iş, veri toplamak değil **kapalı kapıyı açmak**.
+
+Kaynak gerektirmeyen, ölçülmüş üç iş:
+
+1. **`BORC-PANEL-ADRES-01`** — tek satırlık sorgu düzeltmesi; panelin sağlık sayfası
+   şu an ölü. Puana etkisi 0, **ürünün görünürlüğüne etkisi tam**.
+2. **`BORC-SICIL-DAIRE-01`** — elde 619 sicil no var, 594'ünde daire eksik.
+   Daire tamamlanırsa **+0.06 ortalama**, 594 firma 1.0 puan kazanır. Dış kaynak gerekmez
+   (sicil no'dan daire çıkarımı / tek seferlik eşleme).
+3. **`BORC-SITE-COP-01` temizliği** — 2779 kayıttaki dizin bağlantısı silinirse ortalama
+   **düşer** (−0.09), ama puan **dürüstleşir**. Ürün sahibinin kararı: dürüst düşük puan mı,
+   şişik puan mı?
+
+### 🔴 ÜRÜN SAHİBİNE — karar bekleyen üç soru
+
+1. **Ürün bu haliyle satılabilir mi?** Ölçüm: 9412 firmanın **5'i** 6+ puan. Kurumsal
+   kimlik (VKN/MERSİS/sicil) **hiçbir firmada tam değil**. Benim okumam: **satılamaz**;
+   bugünkü ürün "Ankara'da firma listesi + telefon"dur, "firma istihbaratı" değil.
+2. **Şişik puan mı, dürüst düşük puan mı?** `website_domain` ve `address` alanlarındaki
+   doğrulanmamış içerik ayıklanırsa ortalama 3.72'den ~3.5'e düşer. D-292'nin dersi
+   ayıklamayı söylüyor, ama bu **ürün vitrinini** düşürür.
+3. **Kapalı kaynaklar (D-257) yeniden denenecek mi?** Puanın %45'i (4.5/10) o kapıların
+   arkasında. Denenmezse tavan pratikte **~5.5**'te kalır; bu turda ölçülen dağılım da
+   zaten oraya sıkışmış durumda.
+
+---
+
+## Tarihî kayıt — D-293 ve öncesi
 
 Bu turda anahtarın kapsamı ölçüldü ve D-288'in bir kaydı **çürütüldü**. Aşağıdaki
-D-288 ve D-287 bölümleri **tarihî kayıttır**, güncel durum bu başlığın altındadır.
+D-288 ve D-287 bölümleri **tarihî kayıttır**, güncel durum yukarıdaki D-295 başlığındadır.
 
 ### ⚠ D-288'İN KAYDI YANLIŞ — düzeltildi
 
@@ -1177,4 +1335,53 @@ olması, taşıdığı bilginin gerçek olduğunu göstermez.
 - TOBB parolası sohbette açığa paylaşıldı ve `.env`'e yazıldı —
   **çıkış sonrası parola değiştirilmeli**
 - `data/tobb_cookie.json` canlı oturum çerezidir; paylaşılmamalı
+
+
+## D-296 — Parça sürücüsü: tarama kesintisiz bitsin
+
+**KAHİN talebi:** "kanalar için devam et, hepsi bitsin." 3.339 kayıt
+500'lik parçalara bölünmüştü ve her parça bitince **elle yeniden
+başlatılmak** gerekiyordu.
+
+**Karar:** `scripts/ostim_tarama_surucu.py` parçaları sıraya koyar,
+her biri bitince bir sonrakini otomatik başlatır.
+
+- `--durum` ile salt okunur ilerleme
+- Çift sürücü kilidi: asılı kalırsa ikinci sürücü kaçar
+  (`surucu_kilidi.json` + PID canlılık kontrolü)
+- Her parça sonrası `eksik_sayi()` yeniden hesaplanır
+
+### D-296'te yakalanan sonsuz döngü hatası
+
+İlk sürüm `eksik_sayi()` hesabında yalnız `firmalar_vkn_ekli.jsonl`
+dosyasına bakıyordu. Bu turun çekilen kayıtlar **başka bir dosyada**
+biriktiği için "kalan" hep 3.339 dönüyordu → sürücü bitmeden aynı
+parçayı tekrar tekrar çekerdi.
+
+**Düzeltme:** çekilen slug'lar da "var" kümesine eklenir. Test:
+kalan sayısı 3.339 → **2.336** (1.003 çekilmiş).
+
+**Ders:** "ne kaldı" sorusu, **ne yapıldığını da bilmelidir**. Aksi
+hâlde otomatik döngü hiç bitmez ve yüzlerce gereksiz istek atılır.
+
+## D-297 — Koruma kilidi kaynak/çıktı ayrımı
+
+D-290'da `firmalar_birlestirilmis.jsonl` de kilitliydi. D-292
+düzeltmesinde birlestirme yeniden çalıştırılınca bu dosya bilerek
+değişti ve tarama **kalıcı olarak** "KAYNAK DOSYALAR DEĞİŞMİŞ" diyerek
+durdu.
+
+Bu, koruma duvarının **yanlış yere** yönelmesiydi: kaynak veriyi
+korumak istiyordu, üretilmiş bir çıktı dosyasını kilitlemişti.
+
+**Karar:**
+
+1. Kilit **yalnız gerçek kaynakları** kapsar —
+   `firmalar_full.jsonl` ve `firmalar_vkn_ekli.jsonl`. İkisi de
+   salt okunur; tarama bunlara hiç yazmaz.
+2. `firmalar_birlestirilmis.jsonl` bir **çıktıdır**; birlestirme
+   her çalıştığında değişmesi normaldir ve beklenen davranıştır.
+3. Kilit dosyası kaldırılıp yeniden oluşturuldu.
+
+**Doğrulama:** yeni kilit → `koruma_kontrolu() == None`, tarama akıyor.
 

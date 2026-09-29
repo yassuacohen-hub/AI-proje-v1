@@ -19,12 +19,56 @@
     },
     "vergi_no_dolu": 0,
     "nace_guvensiz_kayit": 0,
-    "unvan_bos": 0
+    "unvan_bos": 0,
+    "sayi_sizintisi": {
+      "sektor": {
+        "dolu": 5770,
+        "rakam_iciyor": 0,
+        "oran_yuzde": 0.0,
+        "supheli": false,
+        "ornek": [
+          "Teknoloji ve Bilişim",
+          "Makine ve Makine Ekipmanları"
+        ]
+      },
+      "nace_name_tr": {
+        "dolu": 6445,
+        "rakam_iciyor": 5,
+        "oran_yuzde": 0.1,
+        "supheli": false,
+        "ornek": [
+          "Sarı Pasta (U3o8) İmalatı (Uranyum Cevherinden Elde Edilen)",
+          "Sarı Pasta (U3o8) İmalatı (Uranyum Cevherinden Elde Edilen)",
+          "Sarı Pasta (U3o8) İmalatı (Uranyum Cevherinden Elde Edilen)"
+        ]
+      },
+      "web_sitesi": {
+        "dolu": 2389,
+        "rakam_iciyor": 35,
+        "oran_yuzde": 1.5,
+        "supheli": false,
+        "ornek": [
+          "https://www.2hyazilim.com",
+          "https://www.2n-cam.com",
+          "http://3ddenetim.com"
+        ]
+      },
+      "osb_parsel": {
+        "dolu": 2,
+        "rakam_iciyor": 2,
+        "oran_yuzde": 100.0,
+        "supheli": true,
+        "ornek": [
+          "C BLOK 1135. SOKAK (ESKİ 231) 16 PARSEL YANLIŞ",
+          "C BLOK 1135. SOKAK (ESKİ 231) 16 PARSEL YANLIŞ"
+        ]
+      }
+    }
   },
   "celiski": {
     "web_sitesi": {
-      "dolu": 2388,
-      "tekil": 2334,
+      "dolu": 2389,
+      "tekil": 2335,
       "tekillestirme_orani": 97.7,
       "en_cok_tekrar": {
         "deger": "http://www.senkronplastik.com",
@@ -32,8 +76,8 @@
       }
     },
     "adres": {
-      "dolu": 4908,
-      "tekil": 4421,
+      "dolu": 4913,
+      "tekil": 4426,
       "tekillestirme_orani": 90.1,
       "en_cok_tekrar": {
         "deger": "100. YIL BULVARI 55E 14",
@@ -50,8 +94,8 @@
       }
     },
     "emailler": {
-      "dolu": 3677,
-      "tekil": 3460,
+      "dolu": 3679,
+      "tekil": 3462,
       "tekillestirme_orani": 94.1,
       "en_cok_tekrar": {
         "deger": "uyum@yucelengrubu.com",

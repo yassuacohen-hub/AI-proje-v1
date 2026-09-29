@@ -31,6 +31,7 @@ Kullanim:
 from __future__ import annotations
 
 import argparse
+import hashlib
 import html as html_mod
 import json
 import pathlib
@@ -45,9 +46,66 @@ KOK = pathlib.Path(__file__).resolve().parents[1]
 DATA = KOK / "data" / "ostim"
 GIRIS = DATA / "firmalar_full.jsonl"
 VAR = DATA / "firmalar_vkn_ekli.jsonl"
-CIKTI = DATA / "firmalar_tamamlanmis.jsonl"
-DURUM = DATA / ".detay_tamamla_state.json"
-RAPOR = KOK / "data" / "ostim_tamamlama_raporu.json"
+
+#: D-290 — GUECENLIK DUVARI (KAHIN: "eski database tekrar kirli ve
+#: hatali olmasini istemiyorum, her turlu onlemi al").
+#:
+#: 1) Cikti TAMAMEN IZOLE: gonderiye ayri bir klasor, hicbir mevcut
+#:    dosyaya dokunulmaz. Yeni kayit eski verinin UZERINE yazilmaz.
+#: 2) Kaynak dosyalar SALT-OKUNUR: asagidaki koruma kilidi, her yazma
+#:    denemesinden once SHA-256 dogrular. Biri degistiyse tur DURUR.
+#: 3) Tarama hicbir SQLite/DB dosyasina dokunmaz (olculdu: 0 referans).
+
+#: D-290: yalnizca BU dosyalar yazilir.
+KAZANIM = DATA / "tamamlama_2026-09-29"
+CIKTI = KAZANIM / "firmalar_tamamlanmis.jsonl"
+DURUM = KAZANIM / "durum.json"
+RAPOR = KAZANIM / "rapor.json"
+
+#: D-290: korunacak kaynak dosyalar (SHA-256 ile kilitlenir).
+#:
+#: D-297: `firmalar_birlestirilmis.jsonl` KILIT LISTESINDEN CIKARILDI.
+#: Sebep: bu bir KAYNAK degil, bir CIKTI dosyasidir; birlestirme
+#: calistiginda (D-292 sayi sizintisi duzeltmesi) bilerek degisir.
+#: Kilitlenmeye devam ederse tarama kalici olarak "kaynak degismis"
+#: diyerek durur — yani asil koruma amacini (kaynak veri degismesin)
+#: yanlis yere yonlendirir.
+#:
+#: KORUNAN = yalnizca OKUNAN kaynak dosyalar. Tarama bunlari hic
+#: yazmaz; kilit, "baska biri bozdu mu" sorusunu yanitlar.
+KORUNAN = [
+    DATA / "firmalar_full.jsonl",        # ana liste (8.313) — salt okunur
+    DATA / "firmalar_vkn_ekli.jsonl",    # mevcut detayli (5.040) — salt okunur
+]
+KILIT = DATA / "kaynak_kilidi.json"
+
+
+def _sha(yol: pathlib.Path) -> str:
+    import hashlib
+    return hashlib.sha256(yol.read_bytes()).hexdigest()
+
+
+def koruma_kontrolu() -> Optional[str]:
+    """Korunan dosyalar degistiyse turu DURDURUR.
+
+    D-290: "eski database tekrar kirli olmasin" talebinin TEK GARANTISI
+    budur. Kilit dosyasi yoksa OLUSTURULUR (ilk calisma). Varsa
+    karşılaştırılır; fark varsa hicbir sey yazilmaz.
+    """
+    if not KILIT.is_file():
+        KILIT.parent.mkdir(parents=True, exist_ok=True)
+        KILIT.write_text(json.dumps(
+            {p.name: _sha(p) for p in KORUNAN if p.is_file()},
+            indent=2), encoding="utf-8")
+        return None
+    eski = json.loads(KILIT.read_text(encoding="utf-8"))
+    bozuk = [p.name for p in KORUNAN
+             if p.is_file() and eski.get(p.name) not in (None, _sha(p))]
+    if bozuk:
+        return ("KAYNAK DOSYALAR DEGISMIS: " + ", ".join(bozuk) +
+                ". Tur durduruldu; eski veri korunuyor.")
+    return None
+
 
 #: P-1: Sabit, gercek User-Agent. Bot taklidi YAPILMAZ.
 UA = ("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
@@ -144,6 +202,39 @@ def _bilgi_kutulari(html: str) -> dict[str, str]:
     return sonuc
 
 
+#: Gercek kullanici adi OLABILECEK ozel adlar: kisa/tek harf olanlar
+#: ve altyazi/URL parcasi olanlar hesap DEGILDIR.
+_GEcersiz_AD = frozenset({
+    "sharer", "share", "home", "tr", "intent", "plugins", "accounts",
+    "login", "signup", "about", "privacy", "terms", "help", "search",
+    "explore", "p", "reel", "tv", "watch", "pg", "pg2", "settings",
+    "ostimosb", "ostim-osb", "ostim_osb",
+})
+
+
+def _gercek_hesap_mi(ad: str) -> bool:
+    """Bu metin gercek bir sosyal medya hesabi mi?
+
+    D-286: pilot kosuda `{"instagram": "accounts"}` uretildi. Kaynak,
+    sayfadaki gecici-login linki (`/accounts/login/?next=`) idi. Yani
+    **dogru bir regex bile** sahte hesap uretebilir; sadece platformun
+    kendi altyapisina ait segmentleri elemek gerekir.
+
+    Kurallar:
+      * ozel listede olan segmentler (login, accounts, share ...)
+      * 1 haneden kisa adlar (anlamli bir kullanici adi olamaz)
+      * OSTIM'in kendi hesaplari (firma hesabi DEGILDIR, D-285)
+    """
+    if not ad:
+        return False
+    a = ad.strip().lower()
+    if a in _GEcersiz_AD or len(a) < 2:
+        return False
+    if a.startswith("ostim") or "ostim_osb" in a:
+        return False
+    return True
+
+
 def detay_ayikla(html: str, slug: str) -> dict:
     """Tek detay sayfasindan KOLON KOLON alan cikarir (K-2: karistirma YOK)."""
     kutular = _bilgi_kutulari(html)
@@ -207,15 +298,16 @@ def detay_ayikla(html: str, slug: str) -> dict:
     ):
         for m in re.finditer(desen, html, re.I):
             bulunan = m.group(1)
-            if bulunan.lower() in ("sharer", "share", "home", "tr", "intent",
-                                   "plugins", "ostimosb", "ostim-osb"):
-                continue
-            # Sitenin kendi sosyal hesaplari firma degildir
-            if bulunan.lower().startswith("ostim"):
+            # D-286 PILOT KIRP: `{"instagram": "accounts"}` cikti. Bu hesap
+            # DEGIL, gecici-login linkinin (`/accounts/login/?next=`) son
+            # parcasi. Duz metin olarak yazilsa bile gercek bir kullanici
+            # adi uretmek mumkun degil; boyle degerler UZAKLASTIRILIR.
+            if not _gercek_hesap_mi(bulunan):
                 continue
             sosyal[plat] = bulunan
             break
     kayit["sosyal_medya"] = sosyal
+
 
     # --- P-10: maskeli alan kopyalanmaz
     if ep and maskeli_mi(ep):
@@ -293,7 +385,84 @@ def durum_yaz(d: dict) -> None:
                      encoding="utf-8")
 
 
+#: P-1/P-2: robots.txt'te yasakli yol kalibrasi (canli olcum: Disallow
+#: /admin/, /portal/, /auth/ — /firmalar/ SERBESTTIR).
+ROBOTS_YASAK = ("/admin/", "/portal/", "/auth/")
+
+#: Politika ac kapi degil: /firmalar/ yasaksa tur BASLAMAZ.
+_ROBOTS_KAPALI = False
+
+
+def robots_uyumlu_mu(yol: str = "/firmalar/") -> bool:
+    """robots.txt uyumunu canli okuyarak dogrular (P-1/P-2).
+
+    D-286: onceki surumde `robots_kontrol` adiyle bir parametre
+    bekleniyordu ama HIC tanimli degildi; politika maddesi koda
+    hic yansimamisti. Artik:
+      * varsayilan AÇIK — uyum degilse tur baslamaz
+      * `--robots-kontrol kapat` ile uzerebilir
+    """
+    global _ROBOTS_KAPALI
+    if _ROBOTS_KAPALI:
+        return True
+    try:
+        with httpx.Client(headers={"User-Agent": UA}, timeout=20,
+                          follow_redirects=True) as c:
+            r = c.get(f"{DIZIN}/robots.txt")
+        if r.status_code != 200:
+            print("  P-1: robots.txt okunamadi (HTTP "
+                  f"{r.status_code}) — tur baslamadi")
+            return False
+        yasak = [ln.split(":", 1)[1].strip() for ln in r.text.splitlines()
+                 if ln.lower().startswith("disallow:")]
+    except Exception as e:
+        print(f"  P-1: robots.txt hatasi ({type(e).__name__}) — "
+              "tur baslamadi")
+        return False
+
+    cakisi = [y for y in yasak if yol.startswith(y)]
+    if cakisi:
+        print(f"  P-1: '{yol}' robots.txt'te YASAK ({cakisi}) — "
+              "tur baslamadi")
+        return False
+    print(f"  P-1: robots.txt uygun ({yol} serbest; "
+          f"yasakli: {', '.join(yasak) or '-'})")
+    return True
+
+
+def imza(html: str) -> str:
+    """P-8: sayfa 'imzasi'. Ayni icerik iki kez geldiyse tespit icin.
+
+    OSTIM bir hatada hep ayni hata/boş sayfayi dondurebilir. O durumda
+    "firma sayisi" degil, ayni sayfa sayilir. Ozellikle liste sonu
+    sayfalarinda (28-29) gozlenmistir: her sayfa kendini tekrarliyor.
+    """
+    t = re.sub(r"<(script|style)[^>]*>.*?</\1>", " ", html, flags=re.S | re.I)
+    return hashlib.sha256(t.encode("utf-8", "ignore")).hexdigest()[:16]
+
+
 def calistir(limit: Optional[int] = None) -> dict:
+    """Eksik detaylari tamamlar.
+
+    D-286: `robots_kontrol` parametresi KULLANICI TARAINDAN verilemiyordu
+    (cagri imzasi ile uyusmuyordu). Politika P-1..P-10 `robots.txt` uyumunu
+    sart koşuyor; bu yuzden kontrol `robots_uyumlu_mu()` ile **zorunlu adim**
+    olarak eklendi ve `--robots-kontrol` bayragi ile kapatilabilir hâle
+    getirildi (varsayilan: ACIK, yani kapalıysa tur baslamaz).
+    """
+    # D-290: en basta koruma kilidi. Kaynak dosyalardan biri degistiyse
+    # hicbir is yapilmaz.
+    ihlal = koruma_kontrolu()
+    if ihlal:
+        raise RuntimeError(f"D-290: {ihlal}")
+
+    if not robots_uyumlu_mu():
+        raise RuntimeError(
+            "P-1/P-2: robots.txt uyumsuz. "
+            "Tur baslatilmadi. (uzerinde gecmek icin --robots-kontrol kapat)")
+
+    KAZANIM.mkdir(parents=True, exist_ok=True)   # D-290: izole cikti
+
     global istek
     istek = httpx.Client(headers={"User-Agent": UA}, timeout=30,
                          follow_redirects=True)
@@ -316,14 +485,35 @@ def calistir(limit: Optional[int] = None) -> dict:
     yeni: list[dict] = []                     # P-7: dosya "w" ile
     hata_sayisi = 0
     baslangic = time.time()
+    imzalar: dict[str, str] = {}              # P-8: slug -> sayfa imzasi
+    tekrar_imza = 0                           # P-8 sayaci
 
     for i, slug in enumerate(hedef, 1):
+        # P-3: istekler arasi GERCEK 2 sn bekleme. D-286'da tespit edildi:
+        # `time.sleep` HIC CAGRILMAMISTI (beyaz satir) -> sunucuya kesintisiz
+        # istek gidiyordu. Politika vaadi ile davranis uyusmuyordu.
+        if i > 1:
+            time.sleep(GECIKME)
         try:
             r = istek.get(f"{DIZIN}/firmalar/{slug}")
+
             if r.status_code in (401, 403):   # P-5
                 raise RuntimeError(
                     f"P-5: erisim reddi HTTP {r.status_code}; TUR BIRAKILDI")
             r.raise_for_status()
+
+            # P-8: sayfa imzasi tekrarinda DUR. Icerik birebir ayni ise
+            # bu gercek bir firma detayi degil; sunucu ayni sayfayi
+            # donduruyor demektir. K-1: sessizce tekrarlamak yasak.
+            im = imza(r.text)
+            if im in imzalar.values():
+                tekrar_imza += 1
+                islenmis[slug] = f"P8: imza tekrari ({im})"
+                if tekrar_imza <= 3:
+                    print(f"  P-8: ayni sayfa imzasi ({im}) -> atlandi")
+                continue
+            imzalar[slug] = im
+
             kayit = detay_ayikla(r.text, slug)
             dolu = sum(
                 1 for k, v in kayit.items()
@@ -346,16 +536,54 @@ def calistir(limit: Optional[int] = None) -> dict:
         if i % 25 == 0:
             durum["islenen"] = islenmis
             durum_yaz(durum)
+            # D-291: surec ortada kesilirse yuzlerce kayit KAYBOLMASIN.
+            # Kumulatif cikti burada da yazilir (atomik).
+            _cikti_yaz(yeni)
             print(f"  [{i}/{len(hedef)}] okunan={len(yeni)} "
                   f"hata={hata_sayisi} ({time.time() - baslangic:.0f}s)")
 
     durum["islenen"] = islenmis
     durum_yaz(durum)
 
+    cikti_ozet = None
     if yeni:
-        with CIKTI.open("w", encoding="utf-8") as f:
-            for k in yeni:
-                f.write(json.dumps(k, ensure_ascii=False) + "\n")
+        m, e, t = _cikti_yaz(yeni)
+        cikti_ozet = f"{m} mevcut + {e} yeni = {t}"
+        print(f"  Cikti: {cikti_ozet}")
+
+def _cikti_yaz(yeni: list[dict]) -> tuple[int, int, int]:
+    """Kumulatif ciktiyi guvenli yazar. D-290 + D-291.
+
+    D-290: dosya "w" ile YENIDEN yaziliyordu; `--limit` ile parcalanan
+    bir turda onceki parcalar SILINIYORDU. Duzeltme: mevcut kayitlar
+    okunur, slug ile birlestirilir, sonra tek seferde yazilir.
+
+    D-291: yazma yalnizca TUR SONUNDA olurdu. Surec ortada kesilirse
+    (asili, reboot, hata) o ana kadar toplanan yuzlerce kayit KAYBOLURDU.
+    Artik her N kayitta kismi yazim yapilir (`KISIM_YAZIM`).
+    """
+    mevcut: list[dict] = []
+    if CIKTI.is_file():
+        for satir in CIKTI.read_text(encoding="utf-8").splitlines():
+            if satir.strip():
+                try:
+                    mevcut.append(json.loads(satir))
+                except json.JSONDecodeError:
+                    continue
+    birlesik = {m.get("slug"): m for m in mevcut if m.get("slug")}
+    eklenen = 0
+    for k in yeni:
+        s = k.get("slug")
+        if s and s not in birlesik:
+            birlesik[s] = k
+            eklenen += 1
+    tumu = list(birlesik.values())
+    gecici = CIKTI.with_suffix(".jsonl.tmp")     # K-3: atomik yazim
+    with gecici.open("w", encoding="utf-8") as f:
+        for k in tumu:
+            f.write(json.dumps(k, ensure_ascii=False) + "\n")
+    gecici.replace(CIKTI)                        # atomik degisim
+    return len(mevcut), eklenen, len(tumu)
 
     unvanlar = [k.get("unvan") for k in yeni if k.get("unvan")]
     tekil = len(set(unvanlar))
@@ -369,6 +597,13 @@ def calistir(limit: Optional[int] = None) -> dict:
         "bu_turda_islenen": len(hedef),
         "basarili_kayit": len(yeni),
         "hata": hata_sayisi,
+        "P8_tekrar_imza": tekrar_imza,          # D-286
+        "P3_gecikme_saniye": GECIKME,
+        "P3_uygulandi": True,                   # D-286: daha once hic cagrilmisti
+        "D290_izole_klasor": str(KAZANIM),
+        "D290_korunan_sha": {
+            p.name: _sha(p) for p in KORUNAN if p.is_file()
+        },
         "tekil_unvan": tekil,
         "tekil_oran_yuzde": round(100 * oran, 2),
         "P6_esik_yuzde": round(100 * TEKIL_ESIK, 2),
@@ -388,7 +623,12 @@ if __name__ == "__main__":
     ay = argparse.ArgumentParser()
     ay.add_argument("--limit", type=int, default=None,
                     help="P-4: bu turda en fazla N firma")
+    ay.add_argument("--robots-kontrol", choices=["acik", "kapat"],
+                    default="acik",
+                    help="P-1/P-2 robots.txt kontrolu (varsayilan: acik)")
     ns = ay.parse_args()
+    # D-286: politika varsayilan olarak ACIK; kapali ise tur baslamaz.
+    globals()["_ROBOTS_KAPALI"] = (ns.robots_kontrol == "kapat")
     r = calistir(ns.limit)
     print("=" * 60)
     for a, b in r.items():

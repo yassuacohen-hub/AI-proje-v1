@@ -134,6 +134,12 @@ _METIN_ALAN = ("adres", "unvan", "sektor", "nace_name_tr")
 _TEKRARLI_TELEFON: frozenset[str] = frozenset()
 
 
+#: D-292: metin kolonlarina yapisan SIRA NUMARASI. Sektor adi tek bir
+#: rakamla bitiyorsa bu bir sayfa sizintisidir, sektor degil
+#: (`Otomotiv1163` = "Otomotiv" + sira no 1163).
+_SAYI_SIZINTISI = re.compile(r"\d+\s*$")
+
+
 def _deger_guvenli_mi(alan: str, deger: Any) -> bool:
     """D-285: bu deger gercekten o alana ait mi? (kirp/kacis filtresi)
 
@@ -167,6 +173,17 @@ def _deger_guvenli_mi(alan: str, deger: Any) -> bool:
         t = re.sub(r"\D", "", s)
         if t in _TEKRARLI_TELEFON:
             return False
+    if alan == "sektor" and _SAYI_SIZINTISI.search(s):
+        # D-292: "Otomotiv1163" = sektor + firma sira no. Eski kaziyicida
+        # bu sayi sizintisi vardi; 5.040 kaydin TAMAMI bozulmustu ve
+        # birlestirilmis ciktiya 1.410 kayit olarak tasinmisti.
+        # Sektor adi tek bir sayiyla bitiyorsa kirp sayilir.
+        return False
+    if alan in ("osb_parsel", "nace_name_tr") and len(s) > 60:
+        # D-292: `osb_parsel` icine sayfanin TAMAMI dokulmus
+        # (591 karakter: menu + footer + tum bloklar). Parsel kisa bir
+        # alan; uzunca metin sayfa sizintisidir.
+        return False
     return True
 
 
