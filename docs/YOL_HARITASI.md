@@ -3,7 +3,7 @@
 > Bu dosya **özet ve işaretçidir**, kopya değildir. Ayrıntı: [`docs/BORC_DEFTERI.md`](BORC_DEFTERI.md),
 > kural ve karar kaydı: [`AGENTS.md`](../AGENTS.md), kapsam: [`docs/HEDEF_VERI_KAPSAMI.md`](HEDEF_VERI_KAPSAMI.md).
 > Her satır bir borç kimliğine veya D numarasına bağlıdır. **Ölçülmemiş sayı yazılmaz** — "ölçülmedi" yazılır.
-> Son güncelleme: D-299 turu (2026-09-29).
+> Son güncelleme: D-301 turu (2026-09-29).
 
 ---
 
@@ -43,7 +43,7 @@ Tek cümle: **kapalı kaynaklar**. Aşağıdaki iki kapı açılmadan kimlik ala
 
 | Kapı | Bugün | Açılırsa | Süre |
 |---|---|---|---|
-| MERSIS (`mersis_number`) | **%0** — kolon tamamen boş (D-299 ölçümü) | ölçülmedi — A/B seçimi yapılmadan tahmin edilemez | ölçülmedi |
+| MERSIS (`mersis_number`) | **%0** — kolon tamamen boş (D-299 ölçümü) | **ÖLÇÜLMELİ — sıraya alındı (D-301).** PO A/B kararı vermeden önce etki ölçülmeli; OSTİM'de ölçüldü (+1.427/+982/+0), MERSIS'te ölçülmedi | ölçülmedi |
 | OSTİM (yazılı izin, `BORC-D-281`) | izinsiz tarama yapıldı, veri izole klasörde bekliyor | adres **+1.427**, e-posta **+982**, telefon **+0** (bu tur ölçüldü) | yazma işi ölçülmedi |
 
 OSTİM satırı ölçülmüş, MERSIS satırı **ölçülmedi** — karar gelmeden ölçülemez de.
@@ -91,9 +91,12 @@ Dış kaynağa bağlı **değil**. Etki sırasına göre:
 | 2 | `admin_executive._firma_kayitlari()` canlıda patlıyordu (kolon adı + naive/aware datetime + Decimal/float) | **KESİLDİ**, kırarak doğrulandı | `BORC-PANEL-SAHTE-TEST-01` |
 | 3 | `admin_quality` / `admin_kpi` "hepsi %0 eksik" yalanı + transaction abort | **KESİLDİ** | D-249 |
 | 4 | NACE etiketi export çıkış kapısına bağlandı + `nace_metni` NaN sızıntısı | **KESİLDİ** | D-287 |
-| 5 | `load_risky_companies` hatayı yutuyor → kullanıcı "riskli firma yok" sanıyor | **AÇIK** | D-249 ihlali |
-| 6 | `tests/test_admin_kpi.py` **hiç yok** — panel testsiz | **AÇIK** | yeni borç |
-| 7 | NACE %88,1 dolu ama puanlanmıyor; "tahmin" etiketiyle gösterim | **AÇIK** — D-287 puan vermemekte haklı, gösterim ayrı | D-287 |
+| 5 | `load_risky_companies` hatayı yutuyor → kullanıcı "riskli firma yok" sanıyor | **KESİLDİ** — `df.attrs` + `olculemedi()`, panel artık nedeni yazıyor. Kardeş taraması: 7 loader'ın yalnız **2'si** yokluğu olumluyordu | D-301 |
+| 6 | `tests/test_admin_kpi.py` **hiç yok** — panel testsiz | **KESİLDİ** — canlı şemaya karşı yazıldı, ilk koşuda **3 canlı kusur** yakaladı (`olay_zamani`, `sr.collected_at`, `INTERVAL` önceliği) | D-301 |
+| 7 | `git add -A` kapısı yok — başka ajanın dosyası yanlışlıkla commit'e giriyor | **KESİLDİ** — `scripts/sahne_kapisi.py` + `scripts/hooks/pre-commit`, `SAHNE_TAVAN=20`. Eşik 49 commit ölçülerek seçildi (medyan 8, %24'ü 20 üstü). **D-302 düzeltmesi:** kapı önce yanlış dosyaya yazılmıştı (`core.hooksPath=scripts/hooks`), fiilen koşmuyordu; `8a25798` 24 dosyayla geçti. Kurulum mandalı: `tests/test_sahne_kapisi_kurulu.py` | D-301 → D-302 |
+| 8 | CI sabit sırada koşuyor → "N passed" beyan, kanıt değil | **KESİLDİ** — `pytest-randomly` beyan edilmişti ama `test` job'ı kurmuyordu; kurulum + `-p randomly` eklendi | D-301 |
+| 9 | NACE %88,1 dolu ama puanlanmıyor; "tahmin" etiketiyle gösterim | **AÇIK** — D-287 puan vermemekte haklı, gösterim ayrı | D-287 |
+| 10 | `pytest-timeout` yerelde kurulu değil (CI'da kurulu) — `--timeout` bayrağı yerelde `unrecognized arguments` veriyor | **AÇIK** — küçük, `requirements-dev.txt` satırı | D-301 yan bulgu |
 
 ---
 

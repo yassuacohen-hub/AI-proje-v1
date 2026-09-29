@@ -8,6 +8,12 @@ set -e
 # Kilit zorlamasi once: baskasinin dosyasini commit'lemek testten once durur
 # (D-261: zorlayani olmayan kayit beyandir).
 python scripts/kilit_zorla.py
+# MANDAL-SAHNE-01 (D-301): toplu sahneleme kapisi. BURAYA yazilmasinin sebebi
+# olculdu: kapiyi once yalniz `.pre-commit-config.yaml`a yazmistim, ama fiilen
+# kosan kanca bu dosya (`core.hooksPath=scripts/hooks`) ve `pre_commit` moduLu
+# kurulu degil -- yani kapi yaziliydi, KOSMUYORDU. Kanit: `8a25798` commit'i
+# 24 dosyayla kapidan gecti ve benim dort mandalimi da icine aldi (D-260).
+python scripts/sahne_kapisi.py
 echo "[pre-commit] panel durustluk mandallari..."
 # Goc defteri de burada: sema degisikligi commit'e tek basina giremesin
 # (D-251/3). Karar numarasi tekligi de eklendi (D-287): yaris iki kez oldu,

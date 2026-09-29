@@ -25,7 +25,7 @@ yanlış okudu — altı tur üst üste (D-265, D-266, D-267/1, D-268/1, D-271/1
 | `BORC-PANO-BORC-00` | borç listesinin kanonik kaydı yok | KAPANDI | D-271 | D-272 |
 | `BORC-SCRIPTS-01` | `scripts/` altında 41 `_*` girdi (29 `.py` hepsi derlenir, **0 çürük**, üretim çağıranı **0**); kökte ayrıca **76 index hayaleti** tek kullanımlık betik. D-281'de ölçüldü ve **tavanlandı** (76/2), kesme ürün sahibinde. **D-288 eki:** `_ARSIV_tek_kullanimlik/` altında ayrıca **~160 izlenen dosya** var — aynı sapmanın ikinci yuvası, otomasyonun `git add -A`'sı ile büyümüştü; kapı kapatıldı, mevcut dosyalar **kesilmedi** (sahiplik belirsiz) | ACIK | D-255 | — |
 | `BORC-KARAR-NUMARA-01` | karar numarası **iki ayrı dosyadan** tahsis ediliyordu (`AGENTS.md` max D-281, bu defter max D-282); çakışma: **D-281 iki karara birden** verilmiş. D-227 mandalı yalnız `AGENTS.md`'yi ve yalnız `(D-NNN — KAH` biçimini tarıdığı için çatışma görünmezdi | KAPANDI | D-281 | D-286: `scripts/karar_no.py` tek havuz + `TAVAN_CATISMA=1` mandalı (kırılarak doğrulandı; D-283 eşzamanlı ajan yarışında çakıştı, **mandal yakaladı**, kayıt D-286'e taşındı — tavan yükseltilmedi) |
-| `BORC-AJAN-HAFIZA-01` | `yasu_project_context.md` **213 satır > 200** (D-219 tavanı); mandal kırmızı: `tests/test_dokuman_politikasi.py::test_d219_ajan_context_dosyalari`. **SAHİBİNDE** — başka ajanın hafıza dosyası, bu turda kesilmedi (D-226/sahiplik) | ACIK | D-286 | — |
+| `BORC-AJAN-HAFIZA-01` | `yasu_project_context.md` **213 satır > 200** (D-219 tavanı); mandal kırmızı: `tests/test_dokuman_politikasi.py::test_d219_ajan_context_dosyalari`. **SAHİBİNDE** — başka ajanın hafıza dosyası, D-299'da kesilmedi (D-226/sahiplik) | KAPANDI | D-286 | D-301: **ölçüldü, sahibi kapatmış** — dosya **149 satır** (tavan 200). Devir notu hâlâ "213" diyordu; not bayattı, borç değil |
 | `BORC-KIMLIK-ANAHTAR-01` | `config/certs/selfsigned.key` (gerçek RSA özel anahtar) `90c4702` ile elle commit edilmiş; blob `216cfdd…` hâlâ ulaşılabilir. **D-293 ölçümü:** commit **hiçbir dalda/etikette/uzakta yok** (`for-each-ref --contains` boş; uzaktaki dal ebeveyn `993ce8a`'da) — yalnız yerel cline checkpoint ref'leri yaşatıyor. Sertifika `CN=localhost`/`SAN=DNS:localhost`, tek tüketicisi `config/nginx.conf` ve o da hiçbir serviste mount edilmiyor. Tarih **temizlenmedi**; A (rotasyon) / B (filter-repo, 421 commit) kararı ürün sahibinde | ACIK | D-288 | D-293'te kapsam ölçüldü; mandal `tests/test_kimlik_dosyalari.py` (kırılarak doğrulandı) — kesme kararı bekliyor |
 | `BORC-SICIL-DAIRE-01` | 619 firmada sicil no var, sicil dairesi yok. **D-295 ölçümü:** eksik olan tam **594**; bu alan puan kapısında `number AND office` istediği için 619 sicilin **25'i** puan alıyor, 594'ü **kayıp**. Daire tamamlanırsa ortalama +0.06 (ağırlık 1.0 × 594/9412) | ACIK | D-260 | — |
 | `BORC-PANEL-ADRES-01` | `web_dashboard/tabs/admin_executive.py::_firma_kayitlari()` **var olmayan kolonu** okuyor: `SELECT … address_line … FROM companies` → canlı `psycopg.errors.UndefinedColumn`. Veri `companies.address`'te (5798 dolu). `address_line` yalnız `company_locations`'ta var, o tablo **0 satır**. Test `tests/test_admin_executive.py::test_firma_kayitlari_30_gun_esigi` **sahte engine** ile hazır satır döndürdüğü için yeşil — D-288'in "yeşil test de beyandır" kuralının canlı örneği | ACIK | D-295 | — |
@@ -33,6 +33,8 @@ yanlış okudu — altı tur üst üste (D-265, D-266, D-267/1, D-268/1, D-271/1
 | `BORC-ILETISIM-ORTAK-01` | `primary_phone`: 1057 kayıt 498 yinelenen numarayı paylaşıyor (tepe `905344018261` ×10); 913 numara ne cep ne sabit biçiminde. `primary_email`: 444 kayıt 196 yinelenen adresi paylaşıyor, tepe değer **yer tutucu** `bilinmeyen@bilinmeyen.com` ×17. Bu kayıtlar puan alıyor ama firmaya ait olduğu doğrulanmadı | ACIK | D-295 | — |
 | `BORC-ADRES-KALITE-01` | `address` 5798 dolu (%61.6) ve tamamı puan alıyor; ama 4795'inde (%82.7) "ankara" **geçmiyor**, 626'sı (%10.8) 20 karakterden kısa, **0'ında** posta kodu var. Adres ağırlığı 1.5 — puanın en pahalı ikinci alanı doğrulanmamış metinle besleniyor | ACIK | D-295 | — |
 | `BORC-ESLESME-KAPSAM-01` | `entity_resolution` 8905 satır tutuyor ama **8820 firmanın** (9412'nin %93.7'si) hiç eşleşme kaydı yok. Tablo dolu görünüyor, kapsamı yok. `source_records` tarafında yalnız 12 yetim var — sorun kaynak bağında değil, çözümleme kapsamında | ACIK | D-295 | — |
+| `BORC-KAPI-KURULUM-01` | `MANDAL-SAHNE-01` yazılıydı ama **koşmuyordu**: kapı yalnız `.pre-commit-config.yaml`'a yazılmıştı, oysa `git config core.hooksPath` = `scripts/hooks` ve `pre_commit` modülü kurulu değil. Kanıt: `8a25798` commit'i **24 dosyayla** (kendi eşiğim 20) kapıdan geçti ve **dört mandalımın hepsini** içine aldı — kapının önlemek için kurulduğu olay, kapıya rağmen, kapının kendi dosyasına oldu | KAPANDI | D-302 | D-302: `scripts/hooks/pre-commit`'e eklendi + `tests/test_sahne_kapisi_kurulu.py` mandalı (kanca satırı silindi → `1 failed`, geri yüklendi → `8 passed`) |
+| `BORC-KARAR-ESZAMAN-01` | `karar_no.py` eşzamanlı tahsiste çakışmayı **önlemiyor**, yalnız sonradan haber veriyor. Ölçüm: `data/karar_tahsis/D-301.txt` = `bilinmeyen` — başka bir ajan D-301'i benimle aynı anda aldı (`8a25798` başlığı da "D-301" diyor). **İkinci çift numara vakası**; birincisi D-281, o da hâlâ `CATISMA` veriyor. Hakemlik ürün sahibinde (D-226) | ACIK | D-302 | — |
 | `BORC-VKN-01` | VKN kanalı ölü, kaynak bulunamadı | ACIK | D-253 | — |
 | `BORC-AD-VARYANT-01` | 31 kısaltma varyantı | IPTAL | D-261 | D-263 |
 | `BORC-ADLANDIRMA-01` | kimlik hiç açılmamıştı (devir notu uydurdu) | IPTAL | — | D-271 |
@@ -79,7 +81,88 @@ yüzden ayrı bölümde durur. Silinmezler: adları `AGENTS.md`'de geçtiği sü
   bir arttı. Kayıt tutmanın kendisi ölçümü değiştirdi; sayı kılıfına uydurulmadı, gerçeğe
   çekildi (D-271'in tavanı 3 değil 4 yapmasıyla aynı karar).
 
-## Devir — sonraki oturum (D-299 sonrası)
+## Devir — sonraki oturum (D-301 sonrası)
+
+Bu tur **dört mandal** kuruldu. Hepsi kırılarak doğrulandı (D-288: kırmadığın yeşil yeşil değildir).
+Teslim: [`docs/YOL_HARITASI.md`](YOL_HARITASI.md). Gerekçe: `AGENTS.md` D-301.
+
+### Kesilenler
+
+| Mandal | Dosya | Kırma kanıtı |
+|---|---|---|
+| `MANDAL-SAHNE-01` — `git add -A` kapısı | `scripts/sahne_kapisi.py`, `.pre-commit-config.yaml` | `SAHNE_TAVAN=1` → exit 1 |
+| `MANDAL-KPI-01` — panel testsizdi | `tests/test_admin_kpi.py` | ilk koşuda **3 kırmızı** (aşağıda) |
+| `MANDAL-YUTULAN-01` — yutulan hata "veri yok" diye sunuluyordu | `web_dashboard/tabs/admin_quality.py`, `tests/test_yutulan_hata.py` | patlayan engine → panel nedeni yazıyor |
+| `MANDAL-SIRA-01` — CI sabit sırada koşuyordu | `.github/workflows/ci.yml`, `tests/test_ci_rastgele_sira.py` | konfig bozuldu → **2 failed**, geri alındı → **5 passed** |
+
+### Yeni bulgular (mandal kurulur kurulmaz çıkan canlı yalanlar)
+
+`tests/test_admin_kpi.py` ilk koşusunda **üç ayrı canlı kusur** yakalandı. Üçü de yutulan
+`except` içinde yıllardır sessizce duruyordu:
+
+| Loader | Ölçülen hata | Kullanıcının gördüğü |
+|---|---|---|
+| `load_quality_trend` | `operator does not exist: timestamp with time zone - smallint` | kalite trendi grafiği **hiç çalışmamış** |
+| `load_admin_kpi_summary` | `column "created_at" does not exist` → doğrusu `olay_zamani` | DAU kartı **hiç dolmamış** |
+| `load_source_health` | `column sr.created_at does not exist` → doğrusu `collected_at` | kaynak sağlık tablosu **hep boş** |
+
+Birincinin kök nedeni Postgres **operatör önceliği**: `NOW() - :gun || ' days'` ifadesi
+`(NOW() - :gun) || ' days'` diye ayrışıyor. Doğrusu `NOW() - (:gun * INTERVAL '1 day')`.
+
+**Kardeş taraması tahmini yarıya indirdi.** `admin_quality.py`'de 7 loader hata yutuyor ama
+yalnız **2'si** (satır 698, 717) yokluğu `st.success` ile **olumluyordu** — D-249'u ihlal eden
+bunlar. Diğerleri "bulunamadı"/"DB erişilemiyor" diyor, belirsiz, dokunulmadı. Ölçüm olmasa
+6 yere gereksiz kod yazacaktım.
+
+**`pytest-randomly` beyan edilmişti ama kurulmuyordu.** `requirements-dev.txt:8`'de duruyor;
+CI'ın `test` job'ı o dosyayı hiç kurmuyor (`pip install -r requirements-dev.txt` yalnız `lint`
+job'ında, satır 28). Yazılı olan ile koşan aynı şey değildi.
+
+### Kendi kırmızım / kendi hatam (D-260)
+
+1. **Sahne kapısı eşiğinin ilk gerekçesi yanlıştı.** "Sadece otomasyon 20'yi aşar" demiştim;
+   49 commit ölçüldü: medyan 8, **%24'ü 20 üstü**. Eşik ölçümle yeniden seçildi.
+2. **Kod tarayan mandal kendi yorumunu kod sandı — aynı turda iki kez.** Hem `test_admin_kpi.py`
+   hem `test_ci_rastgele_sira.py` ilk sürümünde kırma denemesi yeşil kaldı, çünkü mandal
+   "şu hatayı arıyoruz" diyen *yorum satırını* eşleşme saydı. İkisinde de yorum satırları
+   atlanacak şekilde düzeltildi. **Ders: kod tarayan mandal, açıklamayı koddan ayırmadan yazılmaz.**
+
+Test kırmızısı olarak **kendi kırmızım yok**: tam takım **iki sırada da** `4613 passed,
+12 skipped, 0 failed` (rastgele 224.89s, sabit 191.60s).
+
+### Yasu'nun üç kırmızısı — varsayılmadı, ölçüldü: **üçü de kapanmış**
+
+Devir notu `3 failed` diyordu; ölçüm `0 failed`. `yasu_project_context.md` **149 satır**
+(not "213" diyordu). D-226 tartması gereksiz kaldı — **yasu'nun hiçbir dosyasına dokunulmadı**,
+çünkü dokunulacak kırık yoktu. Not beş tur bayatlamıştı.
+
+### Beşinci kusur: kapım yazılıydı, koşmuyordu (D-302) — kendi hatam
+
+Commit aşamasında HEAD'i kendim ölçtüm: `8a25798`. `git show --stat` → **24 dosya**, ve içinde
+**dört mandalımın hepsi** var. Başka bir ajanın commit'i benim işimi yuttu — yani
+**`MANDAL-SAHNE-01`'in önlemek için kurulduğu olay, kapı kurulduktan sonra, kapıya rağmen oldu.**
+
+Kök neden ölçüldü: `git config core.hooksPath` = `scripts/hooks`. Fiilen koşan kanca
+`scripts/hooks/pre-commit` ve o dosya `sahne_kapisi.py`'yi çağırmıyordu. Kapıyı yazdığım
+`.pre-commit-config.yaml` ise `pre_commit` modülü kurulu olmadığı için **hiç okunmuyor**.
+
+D-301'de "kırılarak doğrulandı" dediğim şey **betikti**, kurulum değildi. *Yazılı olan ile koşan
+aynı şey değildir* — aynı turda **üçüncü kez** aynı kök. Kesim: kanca satırı + mandal
+`tests/test_sahne_kapisi_kurulu.py` (silindi → `1 failed`, geri yüklendi → `8 passed`).
+
+### Açık kalan / sıraya yazılan
+
+- **MERSIS etkisi ÖLÇÜLMEDİ.** OSTİM'de ölçüldü (adres +1.427, e-posta +982, telefon +0),
+  MERSIS'te ölçülmedi. PO A/B kararı vermeden **önce ölçülmeli**; bu turun işi değil.
+- `pytest-timeout` **yerelde kurulu değil** (CI'da kurulu): `--timeout=300` yerelde
+  `unrecognized arguments` veriyor. Küçük, `requirements-dev.txt` satırı.
+- `karar_no.py` hâlâ **`CATISMA: ['D-281']`**: `AGENTS.md:4484` = index hayaleti kuralı,
+  `docs/BORC_DEFTERI.md:856` = OSTİM kaynak araştırması (yasu'nun satırı). İki farklı karar,
+  aynı numara. **Ölçüldü, çözülmedi** — hakemlik PO'da (D-226). Tavan yükseltilmedi.
+
+---
+
+## Devir — D-299 turu (tarihî kayıt)
 
 Bu tur **panelin yüzeyi** ölçüldü. Teslim: [`docs/YOL_HARITASI.md`](YOL_HARITASI.md).
 

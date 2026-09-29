@@ -5176,6 +5176,147 @@ hatası kesildi). **Açık kalan:** `load_risky_companies` hâlâ hatayı yutuyo
 
 **Referans:** D-8, D-226, D-249, D-260, D-266, D-281, D-286, D-287, D-288, D-292, D-295.
 
+## D-301 — Dört mandal kuruldu; ikisi kurulur kurulmaz üç canlı yalanı ortaya çıkardı (2026-09-29)
+
+**Bağlam.** D-299 dört kusuru açık bırakmıştı. Dördü de **ölçüldü, hâlâ açıktı** (devir notu beş
+tur bayatlamıştı; HEAD notta `b4fe76a` yazıyordu, ölçülen `a82ef35`).
+
+### 1. MANDAL-SAHNE-01 — `git add -A` kapısı
+`scripts/sahne_kapisi.py` + `.pre-commit-config.yaml` kancası. Tek commit'te sahnelenen dosya
+tavanı (`SAHNE_TAVAN`, varsayılan 20). **İlk gerekçem ölçülüp yanlış çıktı**: "sadece otomasyon
+20'yi aşar" demiştim; 49 commit ölçüldü, medyan 8, **12'si 20 üstü (%24)**. Eşik 20-30 ile 30-40
+arasındaki boşluktan seçildi; olay commit'i `7343cec` tam **22 dosya**. `SAHNE_TAVAN=1` ile
+kırılarak doğrulandı (exit 1).
+
+> **DÜZELTME (D-302):** Yukarıdaki "kırılarak doğrulandı" **betik** için doğruydu, **kurulum**
+> için değildi. Kapı fiilen koşmuyordu. Gerekçe ve düzeltme: D-302.
+
+### 2. MANDAL-KPI-01 — `tests/test_admin_kpi.py` (hiç yoktu)
+Sahte engine **yasak** (D-288: sahte engine SQL'i hiç koşturmaz, kırık sorguyu yeşil gösterir).
+Canlı şemaya karşı yazıldı. Yutulan hatayı görmek için **logger kehanet olarak** kullanıldı:
+loader `except` içinde `warning` çağırıp boş veri döndüğü için "boş df" ile "hata yedi" aynı
+görünür; `_admin_kpi_logger.warning` bir listeye monkeypatch edilir, liste doluysa kırmızı.
+Mandal veri **varlığına** değil, sorgunun **koşabilirliğine** bakar.
+
+**İlk koşuda 3 kırmızı — üçü de yıllardır görünmeyen canlı yalan:**
+
+| Kusur | Ölçülen hata | Kullanıcının gördüğü |
+|---|---|---|
+| `load_quality_trend` | `operator does not exist: timestamp with time zone - smallint` | Kalite trendi grafiği **hiç çalışmamış** |
+| `load_admin_kpi_summary` | `column "created_at" does not exist` → doğrusu `olay_zamani` | DAU kartı **hiç dolmamış** |
+| `load_source_health` | `column sr.created_at does not exist` → doğrusu `collected_at` | Kaynak sağlık tablosu **hep boş** |
+
+Birinci kusurun sebebi Postgres **operatör önceliği**: `NOW() - :gun || ' days'` ifadesi
+`(NOW() - :gun) || ' days'` diye ayrışır. Doğrusu `NOW() - (:gun * INTERVAL '1 day')`.
+
+**Kendi hatam (D-260):** DB'siz desen mandalım tüm dosyayı tarayınca, hatayı *anlatan yorumu*
+kırık sandı. Yorum satırları atlanacak şekilde düzeltildi.
+
+### 3. MANDAL-YUTULAN-01 — yutulan hata "veri yok" diye sunulmasın
+`load_risky_companies` patlayınca panel `st.success("… risk yok")` yazıyordu: kullanıcı kırık
+sorguyu **iyi haber** olarak okuyordu (D-249'un panel yüzeyindeki son kalıntısı).
+
+Mekanizma: `df.attrs` üstünde `_hata_isaretle()` / `olculemedi()`. Seçilme sebebi **ölçüm**:
+`st.cache_data` `df.attrs`'ı koruyor (varsayılmadı, tek satırla doğrulandı). Dönüş tipi
+değişmediği için çağıran hiçbir yer kırılmadı.
+
+**Kardeş taraması tahmini yarıya indirdi.** "Bir tane bulduysan kardeşleri var" doğruydu ama
+`admin_quality.py`'deki 7 yutan loader'ın yalnız **2'si** yokluğu `st.success` ile **olumluyordu**
+(satır 698, 717). Diğer dördü "bulunamadı"/"DB erişilemiyor" diyor — **belirsiz**, yani D-249'a
+aykırı değil; dokunulmadı. Ölçüm olmasa 6 yere gereksiz kod yazacaktım.
+
+### 4. MANDAL-SIRA-01 — CI rastgele sıra
+**Ölçülen sürpriz: paket zaten beyan edilmişti, ama kurulmuyordu.** `pytest-randomly>=3.15.0`
+`requirements-dev.txt:8`'de duruyor; CI'ın `test` job'ı o dosyayı hiç kurmuyor —
+`pip install -r requirements-dev.txt` yalnızca `lint` job'ında. Test job'ı elle
+`pytest pytest-cov pytest-timeout` kuruyordu. **Yazılı olan ile koşan aynı şey değildi.**
+
+Düzeltme: kuruluma `pytest-randomly` + çağrıya `-p randomly`. İkincisinin gerekçesi ölçüldü:
+eklenti kurulu değilken `-p <eklenti>` pytest'i **RC=1** ile patlatıyor. Yani eklenti bir gün
+kurulumdan düşerse CI kırmızı olur, **sessizce sabit sıraya düşmez**.
+
+`tests/test_ci_rastgele_sira.py` konfigürasyonu okur. CI'ı bozarak kırıldı (**2 failed**),
+geri yükleyince yeşil (**5 passed**).
+
+**Kendi hatam, aynı turda ikinci kez (D-260).** Mandalın ilk sürümü `run:` bloğunu yorumlarıyla
+tarayınca "pytest-randomly ZORUNLU" diyen *yorumu* kurulum sandı ve kırma denemesinde yeşil
+kaldı. Aynı tuzağa MANDAL-KPI-01'de de düşmüştüm. **Ders: kod tarayan mandal, açıklamayı koddan
+ayırmadan yazılmaz.**
+
+### 5. yasu'nun 3 kırmızısı — varsayılmadı, ölçüldü: **üçü de kapanmış**
+`yasu_project_context.md` **149 satır** (tavan 200; notta 213 yazıyordu). Tam takım iki sırada da
+**0 failed** — sıra bağımlı `test_ui_search_gap` de dahil. D-226 tartması gereksiz kaldı:
+**yasu'nun hiçbir dosyasına dokunulmadı**, çünkü dokunulacak kırık yoktu. Devir notu bayattı.
+
+### 6. D-281 çift numarası — ölçüldü, çözülmedi (D-226)
+`karar_no.py --al` hâlâ `CATISMA: ['D-281']` diyor. `AGENTS.md:4484` = index hayaleti kuralı;
+`docs/BORC_DEFTERI.md:856` = OSTİM kaynak araştırması (yasu'nun satırı). İki farklı karar, aynı
+numara. Hakemlik ürün sahibinde; **tavan yükseltilmedi**, numara kaydırılmadı.
+
+**Ölçüm (beyan değil).** Tam takım **iki sırada da**: `4613 passed, 12 skipped, 0 failed`
+(rastgele 224.89s, sabit 191.60s). **Kendi kırmızım yok.** Yan bulgu: `pytest-timeout` yerelde
+kurulu değil (CI'da kurulu) — `--timeout` bayrağı yerelde çalışmıyor.
+
+**Kapanan borç.** `load_risky_companies` yutması (D-249 kalıntısı), `tests/test_admin_kpi.py`
+yokluğu, CI sabit sıra, `git add -A` kapısı — YOL_HARITASI §5'in dört satırı da kapandı.
+
+**Referans:** D-217, D-226, D-241, D-249, D-260, D-281, D-286, D-288, D-299.
+
+## D-302 — Kendi kapım yazılıydı ama koşmuyordu; ilk kurbanı kendi işim oldu (2026-09-29)
+
+**Kendi hatam (D-260), aynı turda üçüncü kez aynı kökten: *yazılı olan ile koşan aynı şey
+değildir*.**
+
+D-301'de `git add -A` kapısını (`MANDAL-SAHNE-01`) kurdum ve "kırılarak doğrulandı" diye
+yazdım. Doğruladığım şey **betikti** (`SAHNE_TAVAN=1` → exit 1). **Kurulumu doğrulamadım.**
+
+**Ölçüm.** Commit aşamasında HEAD'i kendim ölçtüm (devir notu `b4fe76a`, önceki ölçüm
+`a82ef35`):
+
+```
+git rev-parse --short HEAD   → 8a25798
+git show --stat 8a25798      → 24 dosya
+```
+
+`8a25798` = *"feat(ivedik): D-301 Ivedik kaynak listesinden dusuruldu + 2 test kirigi
+duzeltildi"* — **başka bir ajanın commit'i**, ve içinde benim **dört mandalımın hepsi** var
+(`scripts/sahne_kapisi.py`, `tests/test_admin_kpi.py`, `tests/test_yutulan_hata.py`,
+`tests/test_ci_rastgele_sira.py`, `.github/workflows/ci.yml`, `.pre-commit-config.yaml`,
+`web_dashboard/tabs/admin_quality.py`).
+
+Yani **kapının önlemek için kurulduğu olayın aynısı, kapı kurulduktan sonra, kapıya rağmen,
+kapının kendi dosyasına oldu.** 24 dosya, kendi eşiğim olan 20'nin üstünde.
+
+**Kök neden — varsayılmadı, ölçüldü:**
+
+| Ölçüm | Sonuç |
+|---|---|
+| `git config core.hooksPath` | `scripts/hooks` |
+| `scripts/hooks/pre-commit` (fiilen koşan) | `sahne_kapisi.py` **çağırmıyordu** |
+| `.git/hooks/pre-commit` (zaten geçersiz) | çağırmıyor; kendi yorumu "`pre_commit` modulu KURULU DEGIL" diyor |
+| `.pre-commit-config.yaml` (kapıyı yazdığım yer) | `pre_commit` kurulu olmadığı için **hiç okunmuyor** |
+
+`core.hooksPath` `.git/hooks`'u eziyor. Kapıyı tek başına `.pre-commit-config.yaml`'a yazmak
+bu depoda **hiçbir şey zorlamıyor**.
+
+**Kesim.** `scripts/hooks/pre-commit`'e `python scripts/sahne_kapisi.py` eklendi — depoda
+sürümlenen, herkeste aynı davranan dosya bu.
+
+**Mandal: `tests/test_sahne_kapisi_kurulu.py`.** D-261'in kuralını uygular (*zorlayanı olmayan
+kayıt beyandır*). Emsali vardı ve göremedim: `tests/test_kilit_zorla.py::test_kanca_zorlayiciyi_cagirir`
+aynı işi `kilit_zorla.py` için yapıyor. Yeni mandal yorum satırlarını **baştan** ayıklıyor —
+bu turda iki kez düştüğüm tuzağa üçüncü kez düşmemek için.
+
+**Kırma kanıtı (D-288).** Kanca satırı silindi → `1 failed`; geri yüklendi →
+`8 passed` (`test_kilit_zorla.py` ile birlikte).
+
+**Sıraya yazıldı, çözülmedi (D-226):** `data/karar_tahsis/D-301.txt` = `bilinmeyen`. Başka bir
+ajan D-301'i benimle aynı anda aldı; commit başlığı da "D-301" diyor. **İkinci çift numara
+vakası** (birincisi D-281). Numara kaydırılmadı, hakemlik ürün sahibinde. `karar_no.py`
+eşzamanlı tahsiste çakışmayı **önlemiyor, sadece sonradan haber veriyor** — asıl borç bu.
+
+**Referans:** D-226, D-255, D-260, D-261, D-281, D-286, D-288, D-301.
+
 ## Ilgili Nodlar
 
 - [[docs/BORC_DEFTERI]]
