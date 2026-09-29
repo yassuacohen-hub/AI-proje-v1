@@ -5,22 +5,16 @@
 
 > D-219: tek blok, **üzerine yazılır**. Pano ile çelişirse pano üstündür.
 
-- **Konum:** VERİ ANOMALİ SERİSİ — NACE/sektör kapandı, şimdi **kopya + bölge bağı** teşhisi bitti, görev açılacak
-- **Yapılanlar (2026-09-27):** NACE 4 görev (SOZLUK/COKLU/TEMIZ/KOLON) + D-234 · SEKTOR-01 + KAYNAK-SIZINTI-01 · 3 tur canlı DB ölçümü (`scripts/_tmp_bolge_teshis{,2,3}.py`)
-- **YENİ KANITLAR (canlı Supabase, ölçüldü):**
-  - **İvedik kazıyıcısı ÇÖKMÜŞ**: 3134 kayıt → **14 tekil ad** (%99.6 kopya), tümü tek saniyede `09-08 22:58:35`
-  - Başkent OSB %36.8 kopya (761→481) · OSTİM %8.1 (9513→8740) · ASO %0 temiz
-  - **"14003 firma" YANLIŞ** — gerçek tekil ≈ **10.600**; panodaki tüm oranlar şişik
-  - `companies` 14003 ama `source_record_id` tekil 14000 → 3 kayıt çoklu koşum
-  - **`sources` ≠ bölge**: ASO bir ODA, üyeleri Çankaya/Mamak/Altındağ/OSTİM dağınık → kaynak→bölge eşlemesi GEÇERSİZ
-  - Adresten bölge türetme %21 (6424 adresli kayıtta); ilçe türetme daha iyi ama %76 adres yok
-  - **Telefon çapa OLAMAZ**: aynı tel = 10 farklı ünvan (ortak santral)
-  - `last_verified_at == created_at` 12995 kayıtta → hiç tazelenmemiş
-  - Çoklu bölge üyeliği GERÇEK: 366 ad hem baskentosb hem ostim'de
-- **ÇÜRÜTTÜĞÜM KENDİ ÖNERİM:** "her kaynak tek bölgeye aittir" varsayımı yanlış çıktı (ASO kanıtı)
-- **Kritik bağlam:** SADECE `scripts/_tmp_bolge_teshis3.py`, `src/company_master/etl/scrapers/ivedik_scraper.py`, `plans/kahin_pano.md`
-- **Sonraki adım:** (1) İvedik kazıyıcı kök neden → görev · (2) ürün sahibi isteği: **tek veri şablonu + veri seti README/kural dökümanı** · (3) Teknokent/TTP kaynak genişletme
-- **Görev:** — · **Son okunan karar:** `D-234`
+- **Konum:** FAZ-0 kök hijyeni **kapandı** (D-268). Aktif iş yok; `ALTYAPI-AJAN-CAKISMA-01` atandı.
+- **Yapılanlar (2026-09-29):** 130 tek kullanımlık kök dosyası `_ARSIV_tek_kullanimlik/`'a
+  taşındı (içerik değişmedi). `tests/test_kok_politikasi.py:104-124` → 2 mandal (D-221 kök yarısı).
+  `.pytest_cache/lastfailed` silindi (330 bayat kayıt). `AGENTS.md:3943` → **D-268**.
+  **İHLAL + ONARIM:** ihsan aktifken 130 dosya taşındı; canlı `_defter_olcum.py` arşive kaydı
+  → **geri alındı**. Chat tetiği 00:40:46. Görev+brif açıldı.
+- **KRİTİK BAĞLAM:** SADECE `data/orchestrator/FAZ0_RAPOR_kok_hijyeni_2026-09-29_orkestrator.md`,
+  `tests/test_kok_politikasi.py:74-124`, `AGENTS.md:3943-3969`, `plans/brief_ihsan_ALTYAPI-AJAN-CAKISMA-01.md`
+- **Sonraki adım:** `python scripts/gorev_kutusu.py bak --ajan ihsan` → ALTYAPI-AJAN-CAKISMA-01 postada mı
+- **Görev:** `ALTYAPI-AJAN-CAKISMA-01` (plan, kilitli: `scripts/ajan_cakisma_kilidi.py`) · **Son okunan karar:** `D-268`
 
 ## Kimlik
 - Rol: Huginn Data Insights projesi orkestratörü.
@@ -187,6 +181,11 @@ Utku toplu emrindeki 8 `todo` görev (`UTKU-02/04/05`, `ORCH-01..05`) çalışt�
 **Orkestrasyon kör noktaları (3 yön kapandı).** Pano ile onay kuyruğu arasındaki senkron kopmaları: (1) pano açık + kuyruk yok, (2) pano kapalı + kuyruk bekliyor (`f1750aa`), (3) pano aktif + tetik kanalı boş (`139ef57`). Ölçüm, iki dosyanın **birleştirilmemesi** gerektiğini gösterdi: pano anlık durum (85 satır, 18 alan, 7 durum), kuyruk teslim defteri (255 satır, 10 alan) — kuyrukta 15 görevin 2+ kaydı (teslim→red→düzelt→teslim) ve 196 arşivlenmemiş görev var; birleştirme bu izi silerdi.
 
 **Öz eleştiri (tekrar eden hatalar):** (a) ölçümü yanlış yerde yaptım — SQLite yedeğinde ölçüp canlı Supabase sandım; (b) `tail`/`head` kullandım, Windows cmd'de ikisi de yok, doğrusu `findstr`; (c) `git diff HEAD~1` çalışma alanını kıyaslar, commit içeriğini değil.
+
+## Kimlik — ihsan = orkestratör = bu ajan (D-286)
+
+Ürün sahibi bildirdi: ihsan ile orkestratör **aynı kişi**; bu dosya benim hafızam. `git config user.name` `Yasua` döndüğü için `kilit_zorla.ajan_kimligi()` beni `yasu` sanıyor, `ajan_chat.py` ise `orkestrator` yazıyor — **üç isim, tek aktör** (D-265 deseni). `ponytail:` kanonik ad tek kaynağa bağlı değil; yükseltme: `ajan_kimligi()` `git config huginn.ajan` okur (tek satır).
+D-286'te yasu'ya iki karar bu sıfatla verildi: OSTİM izin adımı **bende**, birleştirme **yasu'da** (assert D-270 + boş tabloya prova D-243 şartıyla). `yasu_project_context.md` benim değil — 213 satırlık kırmızısı sahibinde (`BORC-AJAN-HAFIZA-01`).
 
 ## Ilgili Nodlar
 

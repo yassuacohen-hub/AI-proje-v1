@@ -24,7 +24,8 @@ yanlış okudu — altı tur üst üste (D-265, D-266, D-267/1, D-268/1, D-271/1
 | `BORC-NACE-DOGRULAMA-01` | `nace_validity` alanı kaynaksız | ACIK | D-258 | — |
 | `BORC-PANO-BORC-00` | borç listesinin kanonik kaydı yok | KAPANDI | D-271 | D-272 |
 | `BORC-SCRIPTS-01` | `scripts/` altında 41 `_*` girdi (29 `.py` hepsi derlenir, **0 çürük**, üretim çağıranı **0**); kökte ayrıca **76 index hayaleti** tek kullanımlık betik. D-281'de ölçüldü ve **tavanlandı** (76/2), kesme ürün sahibinde | ACIK | D-255 | — |
-| `BORC-KARAR-NUMARA-01` | bu defterde 8 karar kaydı var (D-273…D-280); D-227 (numara yalnız `AGENTS.md`) + D-272 (defter durum tutar) ihlali | ACIK | D-281 | — |
+| `BORC-KARAR-NUMARA-01` | karar numarası **iki ayrı dosyadan** tahsis ediliyordu (`AGENTS.md` max D-281, bu defter max D-282); çakışma: **D-281 iki karara birden** verilmiş. D-227 mandalı yalnız `AGENTS.md`'yi ve yalnız `(D-NNN — KAH` biçimini tarıdığı için çatışma görünmezdi | KAPANDI | D-281 | D-286: `scripts/karar_no.py` tek havuz + `TAVAN_CATISMA=1` mandalı (kırılarak doğrulandı; D-283 eşzamanlı ajan yarışında çakıştı, **mandal yakaladı**, kayıt D-286'e taşındı — tavan yükseltilmedi) |
+| `BORC-AJAN-HAFIZA-01` | `yasu_project_context.md` **213 satır > 200** (D-219 tavanı); mandal kırmızı: `tests/test_dokuman_politikasi.py::test_d219_ajan_context_dosyalari`. **SAHİBİNDE** — başka ajanın hafıza dosyası, bu turda kesilmedi (D-226/sahiplik) | ACIK | D-286 | — |
 | `BORC-SICIL-DAIRE-01` | 619 firmada sicil no var, sicil dairesi yok | ACIK | D-260 | — |
 | `BORC-VKN-01` | VKN kanalı ölü, kaynak bulunamadı | ACIK | D-253 | — |
 | `BORC-AD-VARYANT-01` | 31 kısaltma varyantı | IPTAL | D-261 | D-263 |
@@ -102,17 +103,29 @@ Devir notunun dayandığı **"borcumuz kalsın" kararı kaynaksızdır**: bu def
 
 Seçim yapılmadan **hiçbir silme yapılmadı**.
 
-- **Kaldığım yer:** D-281 yazıldı. **Hash yazılmıyor:** bu satıra hash yazan commit hash'i
+- **Kaldığım yer:** D-286 yazıldı. **Hash yazılmıyor:** bu satıra hash yazan commit hash'i
   değiştirir (sonsuz gerileme). Konum dalın tepesidir: alt depo `chore/monorepo-merge`,
   üst depo `master`; `git log --oneline -3` ile okunur.
-- **Karar numarası çatışması (yeni borç `BORC-KARAR-NUMARA-01`):** başka ajan bu deftere
-  **D-273…D-280** arası 8 karar kaydı yazdı. `AGENTS.md` en yüksek D = 272'de kaldı.
-  D-227 (numara yalnız `AGENTS.md`'den) ve D-272 (defter **durum**, AGENTS.md **gerekçe**)
-  birlikte ihlal. Bu turun kaydı çakışmasın diye **D-273 → D-281**'e kaydırıldı.
-  Taşıma **YAPILMADI** — başka ajanın işi sessizce taşınmaz, karar ürün sahibinde.
-- **Test tabanı yeni: 4527 passed, 12 skipped, 1 FAILED.** Sabit sıra (`-p no:randomly`,
-  215.80s) ve rastgele (`--randomly-seed=281`, 175.54s) **aynı** sonucu verdi → sıra
-  bağımlılığı yok. 4511 → 4527: +2 benim D-281 mandalım, +14 başka ajanların yeni testleri.
+- **TEŞHİS DÜZELTİLDİ (D-286):** D-281'in "D-273…D-280 D-227+D-272 ihlalidir" iddiası
+  **yanlıştı**. Ürün sahibi bildirdi: o kayıtlar **emirle** yazıldı, ihlal değil, ajan
+  suçlu değil. Ölçülen gerçek sapma: numara **iki ayrı dosyadan** tahsis ediliyordu ve
+  D-227 mandalı çatışmayı **göremiyordu** (yalnız `AGENTS.md`'yi, yalnız `(D-NNN — KAH`
+  biçimini tarıyordu). Çözüm: `python scripts/karar_no.py` — **tek havuz**.
+  D-227'ye ürün sahibi istisnası eklendi: kayıt başka dosyada durabilir, **numaranın
+  kaynağı** tektir.
+- **Eşzamanlı ajan yarışı CANLI ve İKİ KEZ yaşandı:** kaydı önce `D-283` yazdım, yazarken
+  başka ajan aynı numarayı deftere verdi → `D-284`'e taşıdım; tam takım koşusunda
+  **ikinci kırmızı** geldi (`CATISMA: ['D-281','D-284']`), çünkü yasu deftere `## D-284`
+  **ve** `## D-285` yazmıştı. **Ölçüm anlıktır, tahsis değildir.**
+- **TAHSİS ARTIK ATOMİK (D-286):** `python scripts/karar_no.py --al` numarayı
+  `data/karar_tahsis/D-NNN.txt` dosyasını `O_EXCL` ile açarak **kapatır**; dosya varsa bir
+  sonrakine geçer. Kırılarak doğrulandı: ardışık iki tahsis `D-286` ve `D-287` verdi.
+  Kayıt tahsisli **D-286**'ya taşındı (yasu'nun D-284/D-285'ine dokunulmadı), deney artığı
+  `D-287.txt` düşürüldü. Düz `karar_no.py` yalnız **ölçer**, tahsis etmez.
+- **Test tabanı yeni: 4555 passed, 12 skipped, 1 FAILED.** Sabit sıra (`-p no:randomly`)
+  ve rastgele (`--randomly-seed=286`, 269.26s) **aynı** sonucu verdi → sıra bağımlılığı yok.
+  4527 → 4555: +1 benim tahsis mandalım, +27 başka ajanların yeni testleri
+  (yasu'nun `test_ostim_birlestirme_kalite.py` 18 test dahil).
 - **AÇIK KIRMIZI — benim işim değil, düzeltilmedi:**
   `tests/test_dokuman_politikasi.py::test_d219_ajan_context_dosyalari` —
   `yasu_project_context.md` **213 satır**, D-219 tavanı **200**. Dosya yasu'nun açık işi
@@ -122,12 +135,21 @@ Seçim yapılmadan **hiçbir silme yapılmadı**.
 - **Yeni ayrım (D-281, ezberlenecek):** diskte yok + index'te yok = **rezervasyon** (meşru);
   diskte yok + index'te **var** = **index hayaleti** (commit edilmemiş silme). Kilit
   dosyasındaki `scripts/ajan_cakisma_kilidi.py` **hayalet değil**, ihsan'ın rezervasyonu.
+- **KİLİT ARTIK ZORLANIYOR (D-286):** `scripts/kilit_zorla.py` + `scripts/hooks/pre-commit`.
+  Gerçek commit denemesiyle **kırılarak** doğrulandı: kanca ateşledi, `DURDU` bastı,
+  `git log` `6c52bdd`'de kaldı — commit olmadı. **Ölçülen tavan:** rezervasyon
+  (ne diskte ne index'te) **stage edilemez**, bu yüzden commit anındaki zorlayıcı
+  rezervasyonu asla yakalayamaz. Yalnız var olan dosyayı korur.
+- **Kimlik:** `AJAN` env yok, `huginn.ajan` git config yok; tek kaynak `git config user.name`.
+  Her ajan `git config huginn.ajan <ad>` kurarsa zorlayıcı kimliksiz halde de durur.
 - **Ürün sahibi kararı bekliyor (taşıma YAPILMADI):** eşzamanlı ajan izolasyonu, D-272/7'deki
   üç seçenek. Önerim 1+2 (sıra düzeni + var olan kilidi zorlamak); ayrı worktree canlı
-  veritabanını ayırmadığı için tek başına yetmez.
-- **Açık 5 borç, öncelik ürün sahibinde:** `BORC-VKN-01` (kaynak yok, MERSIS A/B kararına
+  veritabanını ayırmadığı için tek başına yetmez. **Canlı DB ölçümü:** üç ajan da aynı
+  Supabase Postgres'e yazıyor (~80 betik + ~20 modül `get_engine` çağırıyor), göç kapısı tek.
+- **Açık 4 borç, öncelik ürün sahibinde:** `BORC-VKN-01` (kaynak yok, MERSIS A/B kararına
   bağlı), `BORC-NACE-DOGRULAMA-01`, `BORC-SICIL-DAIRE-01` (§5 saklı karar),
-  `BORC-SCRIPTS-01` (yukarıdaki soru), `BORC-KARAR-NUMARA-01`.
+  `BORC-SCRIPTS-01` (76 hayalet **donduruldu**, ürün sahibi kararı). `BORC-KARAR-NUMARA-01`
+  **kapandı**.
 - **Araç tuzağı:** çok satırlı `python -c` cmd.exe'de **sessizce hiçbir şey yapmaz** —
   çıktı yok, çıkış kodu 0. Tek satır `-c` veya gerçek dosya kullan; "komut geçti" ekranı
   kanıt değil (D-260). `ask_followup_question` bu turda **üç kez** kusurla düştü.
@@ -429,22 +451,333 @@ Detay sayfası alan taraması (**11 alan denendi, 6 bulundu**):
 > **Genel ders:** "e-Devlet gerekir" önyargısı ölçümle çürütüldü; resmî
 > merkezî yol kapandı ama **8.473 firma ücretsiz ve yasal** bulundu.
 
+## D-282 — Hukuk + VKN araştırması: iki ÖNEMLİ bulgu (KAHİN)
+
+KAHİN iki konuyu birden istedi: (1) hukuki uygunluk, (2) GİB VKN yolu.
+İkisi de **ölçüldü**. Birincisi **kritik engel**, ikincisi **zaten yapılmış iş**.
+
+### 1. ⛔ OSTİM Kullanım Koşulu — ticari kullanımı açıkça yasaklıyor
+
+**Alıntı** (`ostim.org.tr/kurumsal/gizlilik-politikasi` → "Kullanım Koşulları"):
+> *"Bu web sitesi sadece **bilgi amaçlı ve ticari olmayan** kullanım için
+> hazırlanmıştır."*
+
+Aynı politikanın diğer hükümleri:
+
+| Hüküm | Alıntı |
+|---|---|
+| Üçüncü tarafa aktarım | *"elde edilen veriler belirlenen amaçlar ve kapsam dışında **üçüncü kişilere açıklanmayacaktır**"* |
+| Ziyaretçi verisi | *"ziyaretçilerin kişisel verilerini **toplamaz** ve herhangi bir üçüncü tarafa **vermez**"* |
+| Gerekçe | *"gizli bilginin tamamının veya herhangi bir kısmının **kamu alanına girmesini**… engellemek için tüm tedbirleri alma"* |
+
+> **D-282 KARARI:** OSTİM 8.473 firma listesi **ticari amaçlı ürün verisi
+> olarak kullanılamaz.** D-281'deki "8.473 ücretsiz ve yasal" ifadesi
+> **DÜZELTİLDİ**: teknik olarak erişilebilir, ama **ticari kullanım
+> koşulu bunu yasaklıyor.**
+>
+> Bu, 14.000'lık hedef için ciddi darboğazdır. Karar **KAHİN'in.**
+
+### 2. ✅ GİB VKN yolu: e-Devlet zorunlu
+
+| Kaynak | Bulgu |
+|---|---|
+| `turkiye.gov.tr/gib-intvrg-vergi-kimlik-numarasi-sorgulama` | e-Devlet şifresi / e-İmza / TCKK / bankacılık |
+| `gib.gov.tr/…/vergi-kimlik-numarasi-sorgulama` | HTTP 200 ama **içerik boş** (JS-rendered) |
+| `gib.gov.tr/e-hizmetler`, `/acik-veri` | **404** — yayımlanmıyor |
+| `gib.gov.tr/…/VERI_PAYLASIMI.pdf` | **404** |
+
+> Projenin kendi notu (`vkn_bulma_stratejisi.md` §7) bunu zaten yazmıştı:
+> *"GİB VKN Doğrulama (vkn.gov.tr) — sorgu servisi **captcha/bot korumalı**;
+> tekil doğrulama için uygun, **toplu kazımaya uygun değil**."*
+> Ölçüm bunu **doğruladı**. GİB'de e-Devletsiz toplu yol **yok**.
+
+### 3. ⭐ En önemli bulgu: VKN işi **zaten denenmiş ve başarısız olmuş**
+
+Projede mevcut çıktı ölçüldü — `data/ostim/firmalar_vkn_ekli.jsonl`:
+
+| Ölçüm | Değer |
+|---|---|
+| Toplam kayıt | **5.040** |
+| unvan · adres · sektor · slug | **%100** |
+| telefon | %92 · e-posta %48 · web %100 |
+| **`vergi_no`** | **%0 — 5.040/5.040 boş** |
+
+**Neden başarısız olduğu loglarda yazılı** (`logs/vkn_extractor_v2.log`):
+> `İşlenen: 5485/5485, **VKN bulundu: 3**, Atlanan placeholder: **2.646**,
+> Çekim hatası: 774`
+
+> Yani 5.485 denemenin **5.482'si (%99,9) sonuç vermedi.**
+> Web kazıması da (`vkn_web_run2.log`): *"Taranan site: 30, **VKN bulunan: 0**"*.
+
+**Kök neden (yeni):** OSTİM detay sayfası **VKN'yi hiç yayımlamıyor**
+(ölçüldü: 11 alan denendi, `vergi_no` **yok** — D-281). Yani web kazıması
+hedefi **kaynağın vermediği** bir alandaydı.
+
+### 4. Bağımlılık tuzağı (D-282 kuralı)
+
+`data/ostim/firmalar_vkn_ekli.jsonl` 5.040 satır, `web_sitesi` %100 dolu —
+ancak bunlar **OSTİM'ın kendi listelediği** alanlar. Proje kaydı bunları
+"kaynak" sanıyor. Oysa:
+- OSTİM → unvan/adres/telefon/e-posta (VKN **yok**)
+- Web → site var ama içinde VKN çıkmadı (%0)
+- GİB → e-Devlet
+
+> **Sonuç: VKN eksikliği OSTİM kaynaklı DEĞİLDİR; proje içi bir
+> varsayımdan kaynaklanmıştır.** Yeniden denemek aynı sonucu verir.
+
+### 5. Karar tablosu
+
+| Alan | Durum |
+|---|---|
+| OSTİM 8.473 (ticari) | ⛔ **Koşulla yasak** (D-282 §1) |
+| GİB VKN e-Devletsiz | ❌ **Yok** (ölçüldü) |
+| Web kazıması VKN | ❌ **Zaten denendi: %0** |
+| MERSİS | ❌ e-Devlet |
+| TOBB Düzey_3 | ❌ Kapsam yetersiz (D-279) |
+
+> **Açık kalan tek yasal yol: e-Devlet (KAHİN'in önceki tercihi) veya
+> OSTİM'den resmî yazılı izin.** Her ikisi de KAHİN'in kararıdır.
+
+> **Genel ders:** "VKN web'den bulunur" varsayımı **3 kez ölçüldü** ve
+> 3'ünde de başarısız çıktı. Var olmayan alanı kazımak boşa çalışmaktır;
+> **önce kaynağın alanı var mı diye bak.**
+
+## D-283 — Veri çekme politikası + KIYASLAMA cevabı (KAHİN onayı)
+
+> KAHİN: *"veriyi ticari kullanılacak şekilde çek, kolon kolon, tane tane,
+> doluluk oranları ile referansla, kolonları karıştırma. Politikamız var,
+> listeyi yap. Sonra ihsan'a gönder."*
+
+### 1. Kaynak adresleri (ölçülmüş)
+
+| # | Adres | Doğrulama |
+|---|---|---|
+| 1 | `https://ostim.org.tr/firmalar` | `Toplam 8473 sonuç` |
+| 2 | `https://ostim.org.tr/firmalar?page=N` | 300+300+73 ✓, sayfa 30 boş |
+| 3 | `https://ostim.org.tr/firmalar/<slug>` | HTTP 200, 78.554 bayt |
+| 4 | `https://ostim.org.tr/sitemap.xml` | 10 URL — **firmaları içermez** |
+| 5 | `https://ostim.org.tr/robots.txt` | `/admin/`, `/portal/`, `/auth/` yasak |
+
+### 2. Çekme politikası P-1..P-10 (KAHİN onayladı: 2026-09-29)
+
+| # | Kural | Uygulama | Dayanak |
+|---|---|---|---|
+| P-1 | Sahte UA yok | Sabit gerçek UA | politika |
+| P-2 | Sayfa başına 1 istek | 1 liste + 1 detay | ölçüm |
+| P-3 | Nazik gecikme | **2 sn** | nazik kazıma |
+| P-4 | Gece vardiyası yok | 3.297 firma ≈ **1,8 saat** | hesap |
+| P-5 | 403/401 = **açık hata** | boş liste sayılmaz | **K-5** |
+| P-6 | `tekil/toplam < %95` → **başarısız** | tur reddi | **K-4** |
+| P-7 | Ham dosya `"w"` | kopyalamaz | **K-3** |
+| P-8 | Sayfa imzası tekrarında dur | 3 koruma | **K-1** |
+| P-9 | Yeniden çalıştırılabilir | durum dosyası | **K-1** |
+| P-10 | Maskeli alan kopyalanmaz | KVKK | — |
+
+### 3. Filtreleme — kolonlar KARIŞTIRILMAZ (K-2)
+
+| Kolon | Kural |
+|---|---|
+| `unvan` | Asla normalize/kısaltma edilmez (D-11) |
+| `adres`·`telefon`·`emailler` | **Yalnız OSTİM detay sayfasından** |
+| `nace_code` | `nace_source` ile birlikte; tahmin ≠ resmi |
+| `nace_confidence` | high=resmi · medium=türetilmiş · none=yok |
+| `vergi_no` | Yalnız doğrulanmış; tahmin yasak (D-274) |
+| `kaynak_adi` / `kaynak_turu` | `ostim` / `osb` (K-2 zorunlu kolon) |
+
+> **Ölçülen K-2 riski:** `firmalar_full.jsonl` NACE'leri **4 haneli ve
+> `sektor_reverse`** (türetilmiş tahmin) — 7.047 kayıt. ASO'nun resmi 6
+> haneli NACE'i ile **aynı güvenle karıştırılmamalı.**
+
+### 4. ⭐ KIYASLAMA CEVABI (KAHİN'in asıl sorusu)
+
+`scripts/veri_karsilastir.py` → `data/karsilastirma_raporu.json`
+
+| Set | Kayıt | adres | web | sosyal | sektor | NACE |
+|---|---|---|---|---|---|---|
+| `firmalar_full` | 8.313 | ⛔ %0 | ⛔ %0 | ⛔ %0 | %69,4 | %84,8 (4 hane, türetilmiş) |
+| `firmalar_vkn_ekli` | 5.040 | ✅ %100 | ✅ %100 | ✅ %100 | ✅ %100 | — |
+
+| Ölçüm | Değer |
+|---|---|
+| Ortak unvan | 4.954 (%60,0) |
+| **`b` ile yeni unvan** | **0** |
+| `a` ile kalan (detaysız) | **3.297** |
+
+**Zenginleştirme katkısı** (eşleşen 4.954): `adres` +4.952 · `web_sitesi`
++4.952 · `sosyal_medya` +4.952 · `sektor` +1.398 · `vergi_no` **0**
+
+> **CEVAP: EVET zenginleştirir** — ama **3 kolonda**, ve yeni firma
+> getirmez. Asıl kazanç: **3.297 firmanın adres/web/sosyal medya alanı.**
+> `vergi_no` sorunu çözülmez (D-282: hiçbir kaynakta yok).
+
+**KAHİN ONAYI (2026-09-29):** Politika P-1..P-10 uygulanacak; 3.297 eksik
+detay taranacak; ardından ihsan'a teslim.
+
+## D-284 — Organize hareket + izin dilekcesi + birlestirme (D-283 devam)
+
+KAHİN: *"ihsan ajanı ile organize hareket edin… problem varsa ihsan
+ajanına chat'ten yaz, bekliyorum."*
+
+### 1. İhsan'a yazıldı (ajan chat D-210 — zorunlu kanal)
+
+`data/orchestrator/ajan-chat.jsonl` → **3 kayıt** bu görevde:
+
+| Önem | Konu |
+|---|---|
+| kritik | OSTIM detay sayfası **K-2 ihlali** (kolon karışması) + düzeltme |
+| yuksek | **Kıyaslama sonucu** (zenginleşme ölçümü) |
+| yuksek | **Görüşme talebi** (2 karar: izin adımı + birlestirme sahipliği) |
+
+Ayrıca `chat_gonder.py` ile **2 mesaj** (`data/orchestrator/chat/messages.jsonl`).
+
+### 2. ⛔ K-2 İHLALİ — tarama sırasında yakalandı ve düzeltildi
+
+KAHİN'in uyarısı üzerine kolonlar tek tek denetlendi. İlk pilot çıktısı
+**kullanılamazdı**:
+
+| Kolon | Çıkan (YANLIŞ) | Neden |
+|---|---|---|
+| `web_sitesi` | `htk.org.tr` | fuar sitesi, firma değil |
+| `sosyal_medya` | `ostim-osb` | **sitenin kendi** sosyal hesabı |
+| `adres` | boş | etiket `<strong>` ile geliyordu |
+
+**Kök neden:** Sayfada iki ayrı blok var — (1) firma bilgi kutuları,
+(2) site menüleri/footer. İlk sürüm bunları **ayırmıyordu**.
+
+**Düzeltme:** `_bilgi_kutulari()` yalnız
+`<p bg-secondary fw-bold>Başlık</p><div bg-light>…</div>` kutularını okur;
+anahtar `bölüm:etiket` olur (`Merkez:Telefon`).
+
+**Doğrulama (gerçek çıktı):**
+```
+Merkez:Telefon → +90 552 005 29 35
+Merkez:Adres   → AHIT EVRAN CAD. 63
+Merkez:E-Posta → mehmetcantugay1@gmail.com
+```
+Pilot: **5/5 başarılı**, P-6 tekil oranı **%100**, 0 hata.
+
+### 3. İzin dilekçesi taslağı hazırlandı
+
+`scripts/ostim_izin_dilekcesi.py` → `plans/OSTIM-izin-dilekcesi-taslagi.md`
+(2.606 karakter). Kapsam dışı bırakılanlar **yazılı**: VKN, ortak, temsilci
+kimlik bilgisi, mali tablo. Teknik taahhütler: robots.txt, 2 sn bekleme,
+sahte UA yok, günlük limit.
+
+> **Gönderimi KAHİN yapar** (resmî yanıt kurumun adına yazılmalı).
+
+### 4. Birlestirme hazır (kuru çalışma ölçüldü)
+
+`scripts/ostim_set_birlestir.py --kuru`:
+
+| Ölçüm | Değer |
+|---|---|
+| liste | 8.313 |
+| detay | 5.045 |
+| **çıkış** | **8.313** (artış yok — doğru) |
+| unvan eşleşmesi | 5.002 |
+
+**Doldurulan alanlar:** `web_sitesi` +5.000 · `sosyal_medya` +5.000 ·
+`adres` +4.997 · `sektor` +1.410 · `emailler` +9 · `telefonler` +2
+
+**Doluluk değişimi:**
+
+| Kolon | Önce | Sonra |
+|---|---|---|
+| **adres** | %0,0 | ✅ **%60,1** |
+| **web_sitesi** | %0,0 | ✅ **%60,1** |
+| **sosyal_medya** | %0,0 | ✅ **%60,1** |
+| sektor | %69,4 | ✅ %86,4 |
+| `vergi_no` | %0,0 | %0,0 (değişmedi — kaynak yok) |
+
+**K-2 uyum ölçüldü:** `kaynak_adi` + `kaynak_turu` her kayıtta ✓ ·
+`vergi_no` yalnız doğrulanmış ✓ · NACE tahmini `nace_source` ile işaretli ✓
+
+### 5. Karar
+
+1. **Birlestirme kodu hazır ve kuru çalışmada doğrulandı** — dosyaya
+   yazılmadı (`--kuru`), çünkü ihsan'ın yönlendirmesi bekleniyor.
+2. **Detay taraması** (3.297) izin sonrası başlayacak.
+3. **ihsan'dan beklenen:** (a) izin adımının sahibi, (b) birlestirme
+   sorumluluğu.
+
 ## Güvenlik borcu (açık)
 
+
+
+## D-285 — OSTİM birleştirmesi kalite denetimi: kirp ölçüldü, 10.002 → 0
+
+**Tarih:** 2026-09-29 · **Aj an:** yasu · **Görev:** ALTYAPI-TICARET-KANIT-01
+
+### 1. Bağlam
+
+D-283'te parser düzeltmesi sonrası "site/footer verileri firma kolonlarına
+karışmış" uyarısı vardı ama **ölçülmemişti**. Uyarı spekülasyondu.
+D-285 bu iddiayı ölçer ve kanıtlanan kısımları düzeltir.
+
+### 2. Karar
+
+1. **Birleştirme çıktısı kalite denetiminden geçmeden teslim edilemez.**
+   Yeni araç: `scripts/birlestirme_kalite_kontrol.py` (statik, ağ erişimi yok).
+   Rapor: `data/birlestirme_kalite_raporu.json`.
+2. **"Aynı değer binlerce firmada" ölçümü zorunlu kuraldır.**
+   Tekil oranı %50'nin altına düşen kolon kirp sayılır ve teslim edilmez.
+3. **Filtre listeleri tahminle değil ÖLÇÜMLE yazılır.** Ölçüm bir
+   numarada/ domain'de tekrar göstermiyorsa liste **boş bırakılır** —
+   doğru veriyi silmemek, kirli veriyi tutmaktan önce gelir.
+4. **Dolgu metni alan bazlı uygulanır.** `-` ve `n/a` yalnız serbest metin
+   alanlarında geçersizdir; URL ve telefon alanlarında aranmaz.
+5. **Birlestirme temizdir** (K-2 kaçış = 0). 3.297 kayıt taraması
+   yazılı izin olmadan başlatılmaz (D-281 borcu).
+
+### 3. Ölçülen bulgular
+
+| # | Kolon | Kirp | Adet |
+|---|-------|------|------|
+| 1 | `sosyal_medya` | OSTİM'in kendi hesapları (`OstimOSB`, `ostim-osb`, `x.com/ostimosb`) | **5.000** |
+| 2 | `web_sitesi` | `isim.org.tr` (OSB altyapısı) | **2.155** |
+| 3 | `web_sitesi` | `ostimistihdam.com` (iş başvuru portalı) | **475** |
+| 4 | `web_sitesi` | `htk.org.tr` (fuar/organizasyon domain'i) | 2 |
+| 5 | `adres` | `"Adres bilgisi girilmemistir"` dolgu metni | 87 |
+
+**Toplam K-2 kaçışı: 10.002 → 0.**
+Web tekillleşme oranı: **%46,7 → %97,7.**
+
+### 4. Telefon taraması — boş sonuç dürüstçe kaydedildi
+
+Varsayım: "OSTİM merkez telefonu her firmada tekrar ediyor" → sabit numara
+listesi yazıldı. **Ölçüm bunu çürüttü:** en çok tekrar eden numara 5 kez
+(`903124397800`). Yani merkez numara veriye *bulaşmamış*. Liste
+`frozenset()` olarak **boş bırakıldı**; tahminle iyi telefon numaraları
+silinmedi. Regresyon testi (`test_tire_ve_na_yalnizca_adres_alani`)
+buna karşı koruma içerir.
+
+### 5. Regresyon testi bir gerçek hatayı yakaladı
+
+İlk sürümde `_DOLGU_METIN` içindeki `-` **her alanda** aranıyordu.
+`sosyal_medya` bir dict olduğu için `str(dict)` üzerinde arama yapılıyor
+ve URL'li **her** hesap reddediliyordu — yani düzeltme, kirp veriyi
+temizlerken iyi veriyi de siliyordu. Alan bazlı düzeltme yapıldı
+(`_METIN_ALAN`).
+
+### 6. Teslim edilen çıktı
+
+- 8.313 kayıt, 8.275 tekil unvan, 19 kolon
+- `kaynak_adi` / `kaynak_turu` %100 dolu
+- NACE güven: `medium` 7.047 / `none` 1.266 — OSTİM resmi NACE yayımlamaz,
+  sektörden türetilir, bu yüzden `medium` işaretlidir (K-2)
+- `vergi_no` 0 dolu — OSTİM'de VKN yoktur; bu kaynakla zenginleştirilemez
+
+### 7. Ölçüm aracı
+
+```bash
+python scripts/birlestirme_kalite_kontrol.py   # statik denetim
+python -m pytest tests/test_ostim_birlestirme_kalite.py -q   # 18/18
+```
+
+### 8. Güvenlik borcu (açık)
+
+- TOBB parolası sohbette açığa paylaşıldı ve `.env`'e yazıldı —
+  **çıkış sonrası parola değiştirilmeli**
+- `data/tobb_cookie.json` canlı oturum çerezidir; paylaşılmamalı
+
 - TOBB parolası sohbette açıkça paylaşıldı ve `.env`'e yazıldı →
-  **çalışma sonrası parola değiştirilmeli**.
-- `data/tobb_cookie.json` canlı oturum çerezidir; paylaşılmamalı, expire olur.
-- **D-281 yeni borç:** 8.473 firma için ticari amaçlı toplu derlemenin
-  hukuki uygunluğu doğrulanmadan **toplu indirme başlatılamaz**
-  (`robots.txt` izni hukuki izin **değildir**).
-
-
-
-
-
-- TOBB parolası sohbette açıkça paylaşıldı ve `.env`'e yazıldı →
-  **çalışma sonrası parola değiştirilmeli**.
-- `data/tobb_cookie.json` canlı oturum çerezidir; paylaşılmamalı, expire olur.
-
-
-

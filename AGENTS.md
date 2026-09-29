@@ -1273,8 +1273,13 @@ python -m pytest tests/test_pano_tekligi.py -q
 python -m pytest tests/test_karar_numara_tekligi.py -q
 ```
 
+- **Ürün sahibi istisnası (D-286 ile eklendi):** Ürün sahibi kararın **başka bir dosyaya**
+  (örn. `docs/BORC_DEFTERI.md`) yazılmasını emredebilir; bu D-227 ihlali **değildir** ve
+  ajan suçlu ilan edilmez. Kısıtlanan tek şey numaranın **kaynağıdır**: numara havuzu tektir
+  ve `python scripts/karar_no.py` ile verilir. Kayıt nerede durursa dursun, aynı `D-NNN`
+  iki ayrı kararı adlandıramaz.
 - **Referans:** D-223 (Tek Otorite: Vault), D-220 (doküman politikası, tavan deseni),
-  D-224 (ölçülmeden görev açılmaz — tavanlar tahmin değil ölçümdür).
+  D-224 (ölçülmeden görev açılmaz — tavanlar tahmin değil ölçümdür), D-286 (tek havuz).
 
 ---
 
@@ -4571,3 +4576,212 @@ Tek kırmızı iki sırada da aynı → sıra bağımlılığı yok, gerçek kus
 (başka ajanın açık işi). Mandal doğru çalıştı; kusuru yakalayan mandalın kendisidir.
 
 **Referans:** D-221, D-224, D-227, D-241, D-256, D-260, D-266, D-269, D-270, D-272.
+
+---
+
+## D-286 — Zorlayıcısı olan kilit; ve numara havuzu tek kapıdan verilir (2026-09-29)
+
+### 1. Kilit bir **beyandı** — artık değil
+
+`data/orchestrator/file_locks.json`'u **yazan** var (`task_board._lock_alan`, yalnız görev
+açılışında), **okuyan** var (panel, doğrulama betikleri, testler), **zorlayan yoktu**.
+`trigger.py` kilide yalnız görev bitince *dokunur* — bırakır (satır 381, 472); hiçbir yazmayı
+durdurmaz. Kanca dizininde `file_locks` geçen tek satır yoktu. D-261'e göre bu bir mekanizma
+değil **beyandır**.
+
+- **Zorlayıcı:** `scripts/kilit_zorla.py` (~40 satır, stdlib, yeni bağımlılık yok).
+  Staged yolları kilit tablosuyla kesiştirir; sahibi ben değilsem `1` döner.
+- **Kanca:** `scripts/hooks/pre-commit` (canlı olan bu — `core.hooksPath=scripts/hooks`,
+  `.git/hooks/pre-commit` **ölüdür**), testlerden **önce** çağırır.
+- **Kimlik:** `AJAN` env değişkeni yok, `huginn.ajan` git config'i yok. Tek kaynak
+  `git config user.name` (`Yasua` → `yasu`).
+  `ponytail:` kimlik çözülemezse **uyarır ve geçer** — üç ajanı birden bloke etmemek için.
+  Yükseltme: her ajan `git config huginn.ajan <ad>` kurduğunda orası `return 1` olur.
+
+### 2. Mekanizmanın **ölçülen tavanı**: rezervasyon zorlanamaz
+
+Kırma provasında utku'nun kilitli dosyasını stage etmeyi denedim:
+`fatal: pathspec 'src/company_master/etl/nace_coklu_ata.py' did not match any files`.
+Sebep D-281'in kendisi: o kilit bir **rezervasyon** (ne diskte ne index'te). Var olmayan
+dosya stage edilemez → **commit anındaki zorlayıcı rezervasyonu asla yakalayamaz.**
+Yalnız *var olan* dosyanın kilidini korur. Bu bir kusur değil, ilan edilen sınırdır;
+rezervasyonu korumak yazma anında (editör/ajan katmanında) kapı ister — bu turda yapılmadı.
+
+### 3. Üçüncü yol — açıkça beyan
+
+Devir notu `scripts/ajan_cakisma_kilidi.py` için "ya yaz ya kaydı düş, üçüncü yol yok" dedi.
+Ölçüm üçüncü bir hâl gösterdi: o yol **ihsan'ın canlı rezervasyonu**
+(`ALTYAPI-AJAN-CAKISMA-01`, durum `plan`). Kaydı düşürmek yalan olurdu; oraya yazmak
+**tam da zorlamaya çalıştığım kilidi ihlal** ederdi. Zorlayıcıyı **kilitsiz başka bir
+dosyaya** (`scripts/kilit_zorla.py`) yazdım. Talimattan sapmadır, gizlemiyorum.
+
+### 4. Numara havuzu tek kapı (BORC-KARAR-NUMARA-01 **yeniden yazıldı**)
+
+Önceki turun teşhisi **yanlıştı**: "defterdeki D-273…D-280 D-227+D-272 ihlalidir" dedi.
+Ürün sahibi düzeltti — o kayıtlar **emirle** yazıldı, ihlal değil. Ölçülen gerçek sapma:
+numara **iki ayrı dosyadan** tahsis ediliyordu ve çatışma **görünmüyordu**.
+
+D-227 mandalının üç kör noktası (ölçüldü):
+1. `KANONIK` regex'i yalnız `(D-NNN — KAH…` biçimini görür; `## D-NNN — …` biçimini görmez.
+2. `H1_SAHIPLENME` yalnız `^# ` tarar, `## ` taramaz.
+3. `test_kanonik_karar_numaralari_tekil` yalnız `AGENTS.md` okur — defteri hiç görmez.
+
+Sonuç: **D-281 iki ayrı karara birden** verilmiş (AGENTS.md'de bu kayıt; OSTİM tarafında
+başka bir karar). Çift anlam **duruyor**; çözümü numara değiştirmek maliyetli
+(OSTİM tarafı ~12 referans / 7 betik + 1200 satırlık rapor) → ürün sahibine bırakıldı.
+
+- **Kural:** karar numarası **tek havuzdan** verilir: `python scripts/karar_no.py`.
+  Havuz = `AGENTS.md` + `docs/BORC_DEFTERI.md`, iki başlık biçimini de tanır.
+- **Ürün sahibinin yetkisi kısıtlanmaz:** karar başka dosyaya yazdırılabilir (D-227 istisnası
+  yazıldı). Kısıtlanan tek şey numaranın **kaynağıdır**.
+- **Mandal:** `tests/test_karar_numara_tekligi.py` +3 test, `TAVAN_CATISMA = 1`
+  (D-220 deseni: ölçülen gerçek tavanlanır, yalnız küçülür).
+  `test_havuz_iki_dosyayi_da_gorur` kök nedenin nöbetçisidir — havuzdan defter düşerse
+  çatışma yine görünmez olur.
+
+### 5. Araç tuzağı: `%errorlevel%` **yalan söyledi** (yeni D-86 varyantı)
+
+`... & echo EXIT=%errorlevel%` tek satırda `0` yazdı — oysa betik `DURDU` basmıştı.
+Sebep: `%errorlevel%` **ayrıştırma anında** genişler, komut çalışmadan önceki değeri basar.
+Doğru ölçüm `if errorlevel 1` ile yapılır. Ayrıca çok satırlı komut bu turda **iki kez**
+yalnız ilk satırı çalıştırdı; biri tavanı `0`'da bıraktı — `findstr /n` ile yakalandı.
+Her yazma ölçümle doğrulanır; kazayı kırma kanıtına çevirdim.
+Ek not: `sh` PATH'te **yok**; kancayı elle koşturmak mümkün değil, tek dürüst kanıt
+gerçek `git commit` denemesidir.
+
+### 6. Doğrulama (çalıştırılmış komut çıktısı)
+
+```cmd
+python scripts\kilit_zorla.py
+REM temiz durum -> exit 0
+
+REM KIRMA: sahte kilit (D-243, yol enjekte edilebilir; canlı dosyaya dokunulmadı)
+set HUGINN_KILIT_YOL=.kir_kilit.json&& python scripts\kilit_zorla.py
+REM [kilit] 0) -> utku (TEST-KIR-01)
+REM [kilit] DURDU: 1 dosya yasu disinda bir ajanin kilidinde...
+REM if errorlevel 1 -> GERCEK_EXIT=1
+
+REM UÇTAN UCA: gerçek commit denemesi
+set HUGINN_KILIT_YOL=.kir_kilit.json&& git commit -m "KIRMA PROVASI"
+REM [kilit] DURDU: ... (kanca ateşledi)
+git log --oneline -1
+REM 6c52bdd   <- commit OLMADI
+
+python -m pytest tests/test_kilit_zorla.py -q -p no:randomly
+REM 6 passed in 3.78s
+
+python scripts\karar_no.py
+REM CATISMA: ['D-281']
+REM AGENTS.md: 103 baslik, max=D-281
+REM BORC_DEFTERI.md: 10 baslik, max=D-282
+REM sonraki bos numara = D-283  <- BAYATLADI: baska ajan ayni anda defterde
+REM D-283'u kullandi; mandal yakaladi, bu kayit D-286'e tasindi (bkz. §8)
+
+python -m pytest tests/test_karar_numara_tekligi.py -q -p no:randomly
+REM 9 passed in 1.96s
+REM kırma: TAVAN_CATISMA 1 -> 0
+REM AssertionError: KARAR NUMARASI CATISMASI ARTTI: ['D-281'] (tavan 0)
+REM geri alındı -> 9 passed
+```
+
+### 7. Kapanan / açık borç
+
+- `BORC-KARAR-NUMARA-01` — **kapandı** (yeniden adlandırıldı + tek kapı kuruldu).
+- Kilidin zorlayıcısızlığı — **kapandı** (var olan dosyalar için).
+- `BORC-AJAN-HAFIZA-01` — **açıldı**: `yasu_project_context.md` 213 satır > D-219 tavanı 200.
+  **Kesilmedi** — başka ajanın hafıza dosyası; deftere "SAHİBİNDE" yazıldı, sahibine chat açıldı.
+- **Açık:** rezervasyon zorlaması (commit anında imkânsız), D-281 çift anlamı,
+  `BORC-SCRIPTS-01` 76 hayalet (**donduruldu**, ürün sahibinde), canlı DB ayrımı.
+
+### 8. Ajan chat (D-210/D-217 zorunlu)
+
+```cmd
+python scripts/ajan_chat.py bulgula "Karar numarasi tahsisi (D-286)" "..."
+python scripts/ajan_chat.py bulgula "Kilit zorlamasi tavani (D-286)" "..."
+```
+
+İki bulgu kaydedildi: (1) numara tahsisinde eşzamanlı ajan yarışı, (2) kilit
+zorlamasının rezervasyonu kapsamayan tavanı. İkisi de aşağıda açıklanıyor.
+
+Ürün sahibi emriyle **ajanlar arası organizasyon** da chatten kuruldu:
+
+```cmd
+python scripts/ajan_chat.py ac yasu  BORC-AJAN-HAFIZA-01       "213>200, SAHIBINDE, kesmedim..."
+python scripts/ajan_chat.py ac ihsan ALTYAPI-AJAN-CAKISMA-01   "kilit zorlaniyor; kilit dosyani bitirecek misin..."
+```
+
+- **yasu'ya:** hafıza dosyası tavanı (kesim sahibinde) + `scripts/ostim_detay_tamamla.py`
+  73/78 girinti hatası (onun açık işi, dokunulmadı).
+- **ihsan'a:** kilit artık zorlanıyor; `ajan_cakisma_kilidi.py` **onun canlı rezervasyonu** —
+  bitirecek mi yoksa kayıt düşürülecek mi, kararı sahibinde. Numara tek kapı duyurusu.
+
+**Kimlik düzeltmesi (ürün sahibi bildirdi):** orkestratör = **ihsan** = bu ajan. `git config
+user.name` `Yasua` döndüğü için `kilit_zorla.ajan_kimligi()` beni `yasu` sanıyor; `ajan_chat.py`
+ise `orkestrator` yazıyor. **Üç isim, tek aktör** (D-265'in "üç defter tutan sistem hiçbirine
+güvenemez" deseni). `ponytail:` kanonik ad tek kaynağa bağlanmadı; ajan kendi adını kendi
+seçemez. Yükseltme: ad netleşince `ajan_kimligi()` `git config huginn.ajan` okur, `user.name`
+tahminini bırakır (tek satır).
+
+**Karşılıklı okuma + ihsan kararları (ürün sahibi emri):** `ajan_chat.py oku --son 12` ile
+bekleyen talepler okundu ve cevaplandı:
+
+| Kimden | Talep | Karar |
+|---|---|---|
+| yasu | OSTİM izin adımının sahibi kim? | **ihsan (ben)** — resmî yanıt kurum adına yazılır, hukuki taahhüt ajana devredilmez (D-257 sınırı). Metni yasu hazırladı, ilerletme bende. |
+| yasu | Birleştirme sorumluluğu kimde? | **yasu'da kalıyor.** Talimat beklerken tamamlaması **doğru** karardı: boş beklemek iş kaybı, dosya geri alınabilir, veri kaybı riski yoktu. Şart: kolon karışması **assert** ile mandallanır (D-270), prova boş tabloya yazar (D-243). |
+| yasu | 3.297 detay taraması izin gelmeden başlatılmadı | **Onaylandı** — "ticari olmayan kullanım" koşuluna saygı; ölçülmüş doğru duruş, kayda geçti. |
+| utku | `source_records.company_id` blokajı | **Bayat** — `VERI-KAYNAK-BAG-01` D-263'te kapandı (göç 0033). Blokaj değil. |
+| utku | `tender_monitor` tablosu yok | **İtiraz geçerli** ama tablo açmak kapsam kararı — `KAPSAM-HEDEF-01` ürün sahibinde. Kendi göçünü yazma. |
+
+**Karşılıklı okuma (ürün sahibi emri):** `ajan_chat.py oku --son 12` ile diğer ajanların
+kayıtları okundu; bekleyen üç talep cevaplandı:
+
+| Kimden | Talep | Cevabım |
+|---|---|---|
+| ihsan | OSTİM ticari kullanım izni kim ilerletsin? | **KAHİN'in** — hukuki taahhüt, ajan karar veremez (D-257 deseni). Metni hazırla, gönderme. |
+| ihsan | Veri birleştirme sahibi kim? | **Sen** — ama kolon karışması metin taramasıyla değil **assert** ile yakalanır (D-270), prova boş tabloda (D-243). |
+| ihsan | D-283 numarası | **Sende kalıyor**, itiraz yok; kaydımı D-286'e taşıdım. |
+| utku | `source_records.company_id` blokajı | **Bayat** — `VERI-KAYNAK-BAG-01` D-263'te kapandı (göç 0033). Blokaj değil. |
+| utku | `tender_monitor` tablosu yok | **İtiraz geçerli** ama tablo açmak kapsam kararı — `KAPSAM-HEDEF-01` ürün sahibinde. Kendi göçünü yazma. |
+
+### 9. Mandal daha mürekkebi kurumadan **kendi yazarını** yakaladı
+
+Bu kaydı `D-283` olarak yazdım; ölçüm (`sonraki bos numara = D-283`) o anda doğruydu.
+Yazdıktan sonraki ilk koşuda mandal kırmızı verdi:
+`KARAR NUMARASI CATISMASI ARTTI: ['D-281', 'D-283']`. Sebep: **başka bir ajan aynı anda**
+deftere `## D-283 — Veri çekme politikası…` yazmıştı (satır 523). Kayıt `D-286`'e taşındı.
+
+Bu, eşzamanlı ajan düzeninin gerçek dersidir: **ölçüm anlıktır, tahsis değildir.**
+`karar_no.py` çatışmayı *sonradan* görür, *önceden* rezerve etmez.
+
+### 10. Aynı yarış **ikinci kez** yaşandı — tahsis artık atomik
+
+Tam takım koşusunda ikinci kırmızı: `CATISMA: ['D-281', 'D-284']`. Sebep yine eşzamanlılık —
+yasu deftere `## D-284` **ve** `## D-285` yazarken ben AGENTS.md'ye `## D-284` yazmıştım.
+§9'da koyduğum yükseltme şartı ("ikinci kez yaşanırsa rezerve eder") **gerçekleşti**, uyguladım:
+
+`karar_no.py --al` numarayı `data/karar_tahsis/D-NNN.txt` dosyasını `O_EXCL` ile açarak
+**kapatır**; dosya varsa bir sonrakine geçer. Yarışı kaybeden ajan çakışan numarayı alamaz.
+`sonraki()` artık tahsis edilmiş ama henüz belgeye yazılmamış numaraları da sayar.
+
+Kırılarak doğrulandı — iki ardışık tahsis farklı numara verdi:
+
+```
+set HUGINN_AJAN=ihsan& python scripts\karar_no.py --al   → TAHSIS EDILDI = D-286
+set HUGINN_AJAN=yasu&  python scripts\karar_no.py --al   → TAHSIS EDILDI = D-287
+```
+
+Bu kayıt tahsisli **D-286**'ya taşındı (yasu'nun D-284/D-285'ine dokunulmadı); deney artığı
+`D-287.txt` düşürüldü. Ölçüm: `CATISMA: ['D-281']` — tavan yine **yükseltilmedi** (D-220).
+
+`ponytail:` tahsis ancak **tüm** ajanlar `--al` kullanırsa tam korur; ajan adı `HUGINN_AJAN`
+ortam değişkeninden okunur (tek kaynak değil — bkz. §8 kimlik notu). Yükseltme: karar yazan
+her yol bu kapıdan geçirilir, `--al` kancaya bağlanır.
+
+**Referans:** D-220, D-227, D-241, D-243, D-256, D-260, D-261, D-266, D-270, D-272, D-281.
+
+## Ilgili Nodlar
+
+- [[docs/BORC_DEFTERI]]
+- [[scripts/kilit_zorla]]
+- [[scripts/karar_no]]

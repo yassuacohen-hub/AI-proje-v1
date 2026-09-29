@@ -13,6 +13,7 @@ yükseltilemez.
 
 from __future__ import annotations
 
+import importlib.util
 import re
 from pathlib import Path
 
@@ -96,3 +97,44 @@ def test_cakisan_raporlar_referansa_cevrildi(ad: str) -> None:
     assert not H1_SAHIPLENME.match(metin.lstrip().split("\n", 1)[0]), (
         f"{ad} yine H1'de karar numarasi sahipleniyor"
     )
+
+
+# --- D-286: numara havuzu TEK; catisma tavani yalniz kuculur ---------------
+# D-286 aninda OLCULEN catisma: D-281 iki ayri karara birden verilmis.
+# Yukarida ki KANONIK regex'in kor noktasi: `## D-NNN — ...` bicimini gormuyor.
+TAVAN_CATISMA = 1
+
+_kn = importlib.util.spec_from_file_location(
+    "karar_no", KOK / "scripts" / "karar_no.py")
+assert _kn and _kn.loader
+karar_no = importlib.util.module_from_spec(_kn)
+_kn.loader.exec_module(karar_no)
+
+
+def test_karar_numarasi_catismasi_artmaz() -> None:
+    """Ayni D-NNN iki dosyada birden kanonik baslik olamaz (tavan: 1)."""
+    c = karar_no.catismalar()
+    assert len(c) <= TAVAN_CATISMA, (
+        f"KARAR NUMARASI CATISMASI ARTTI: {['D-%d' % n for n in c]} "
+        f"(tavan {TAVAN_CATISMA}). Yeni numarayi 'python scripts/karar_no.py' ver."
+    )
+
+
+def test_havuz_iki_dosyayi_da_gorur() -> None:
+    """D-281 korlugu: mandal BORC_DEFTERI.md'yi de saymazsa catisma gorunmez."""
+    for yol in karar_no.HAVUZ:
+        assert karar_no.numaralar(yol), f"{yol.name} havuzda gorunmuyor"
+
+
+def test_sonraki_numara_havuzun_ustunde() -> None:
+    en_buyuk = max(max(d) for d in karar_no.havuz() if d)
+    assert karar_no.sonraki() > en_buyuk
+
+
+def test_tahsis_ayni_numarayi_iki_kez_vermez(tmp_path, monkeypatch) -> None:
+    """D-286: olcum anliktir, tahsis degildir. `al()` O_EXCL ile numarayi kapatir."""
+    monkeypatch.setattr(karar_no, "TAHSIS", tmp_path / "tahsis")
+    a, b = karar_no.al("ihsan"), karar_no.al("yasu")
+    assert a != b, f"ayni numara iki ajana verildi: D-{a}"
+    assert karar_no.tahsisli() == {a, b}
+    assert karar_no.sonraki() > max(a, b), "tahsisli numara bos sayiliyor"
