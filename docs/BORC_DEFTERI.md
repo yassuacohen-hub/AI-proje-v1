@@ -102,10 +102,17 @@ Bu tur **panelin yüzeyi** ölçüldü. Teslim: [`docs/YOL_HARITASI.md`](YOL_HAR
 - **9 kolon tamamen boş, 54 tablodan 31'i boş.** Devir notu "28 kolon / 8 tablo" diyordu — yanlış.
   D-266 gereği düşürülmedi, haritaya donduruldu.
 
-### Kendi kırmızım
+### Kendi kırmızım (ikisi de kesildi)
 
-`admin_kpi.py` ve `admin_quality.py` dosyalarında **BOM (U+FEFF)** vardı; `test_panel_durustluk`
-`ast.parse` ile `SyntaxError` atıyordu. Ben açtım, ben ölçtüm, ben sildim. Sonrası `86 passed`.
+1. **BOM (U+FEFF)** — `admin_kpi.py`, `admin_quality.py`, `tests/test_admin_quality.py`.
+   `test_panel_durustluk` `ast.parse` ile `SyntaxError`, `test_guard_bom_ratchet` ratchet ihlali.
+   Ben açtım, ben ölçtüm, ben sildim.
+2. **`test_admin_sistem_quality.py:46`** `assert ...shape[0] == 7` — DB erişilemezken
+   `load_missing_field_analysis`'ten "7 alan, hepsi %0 eksik" bekliyordu. D-249 kesimimden sonra
+   kırmızıya döndü. **Testi düzelttim, kodu değil**: test yalanı koruyordu, aynı testin diğer üç
+   satırı zaten `empty` bekliyor. Yeni hâli `.empty`.
+
+Sonrası: `45 passed` (dört ilgili dosya), tam takım `4592 passed`.
 
 ### Açık kalan borçlar
 
@@ -115,6 +122,21 @@ Bu tur **panelin yüzeyi** ölçüldü. Teslim: [`docs/YOL_HARITASI.md`](YOL_HAR
 - `karar_no.py` **`CATISMA: ['D-281']`** bildiriyor: `AGENTS.md` D-281 = index hayaleti,
   bu dosyada D-281 = OSTİM kaynak araştırması. İki farklı karar aynı numarada; yasu'nun satırı
   olduğu için D-226 gereği dokunulmadı.
+
+### Yasu'nun üç kırmızısı — kesilmedi (D-226), beyan edildi
+
+Tam takım, rastgele sıra: `3 failed, 4592 passed, 12 skipped in 203.47s`. Üçü de yasu'nun
+dosyasında; ben dokunmadım.
+
+1. `test_brief_sablon_denetim::test_yeni_brif_sablona_uyar[brief_yasu_VERI-OSTIM-TAM-TARAMA-01.md]`
+   — brief D-217 şablonunu taşımıyor (`**Başlık:**`, `**Hub:**`, `## Neden` eksik).
+2. `test_dokuman_politikasi::test_d219_ajan_context_dosyalari` — `yasu_project_context.md`
+   **213 satır**, tavan 200. Eski oturum blokları `archive/`e taşınmalı.
+3. `test_ui_search_gap::test_admin_quality_bos_tabloda_hata_vermez` — **sıra bağımlı**, tek başına
+   yeşil. Kök sebep ölçüldü ve yeniden üretildi: test `load_freshness_distribution.clear()`
+   çağırmıyor, `st.cache_data` bir önceki testin sonucunu döndürüyor. Yani test kendi iddiasını
+   değil cache'i okuyor (D-288). Sabit sırada gizlenir, rastgele sırada patlar. Tek satırlık
+   düzeltme: fonksiyon çağrısından önce `.clear()`.
 
 ## Devir — sonraki oturum (D-295 sonrası, tarihî kayıt)
 
@@ -1265,6 +1287,11 @@ python -m pytest tests/test_ostim_detay_parser.py \
 ### 5. Karar
 
 1. **Detay taraması izin gelene kadar başlatılmaz.** (D-281 borcu)
+   > **KAHİN kararı (2026-09-29): "izin olayı EN SON PLAN."**
+   > Yazılı izin süreci **ertelendi** — en son iş kalemi. Tarama zaten
+   > tamamlandı; bu madde artık **verinin kullanımı** içindir:
+   > `OSTIM_TEMIZ.jsonl` üründe **yayımlanmayacak** ve üçüncü taraflara
+   > dağıtılmayacak, izin gelene kadar.
 2. İzin geldiğinde hattın tümü hazırdır: P-1..P-10 uygulanmış, 35 test
    yeşil, kalite denetimi mevcut.
 3. Eksik detay sayısı 3.297 değil **3.339** — liste güncellendiği için
@@ -1478,4 +1505,10 @@ kaybolurdu.
 Tarama **yazılı izin alınmadan** yapıldı. D-281 borcu hâlâ açık;
 KAHİN "izinli olarak devam et" dediği için sürdürüldü. Bu karar
 kayda geçmiştir.
+
+> **KAHİN kararı (2026-09-29): "izin olayı EN SON PLAN."**
+> İzin dilekçesi hazır (`plans/OSTIM-izin-dilekcesi-taslagi.md`) ama
+> gönderimi **ertelendi**. Borç kapanmadı; öncelik sırası en sona alındı.
+> Kısıt: `OSTIM_TEMIZ.jsonl` izin gelene kadar **üründe yayımlanmaz**,
+> üçüncü taraflara dağıtılmaz.
 
