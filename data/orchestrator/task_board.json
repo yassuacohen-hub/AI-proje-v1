@@ -1696,10 +1696,10 @@
   {
     "id": "VERI-IVEDIK-YENIDEN-01",
     "task_id": "VERI-IVEDIK-YENIDEN-01",
-    "baslik": "[VERI] Ivedik erisim engelini denetle → IVERI_ERISIM_RAPORU.md (2s)",
+    "baslik": "[VERI] Ivedik kaynak listesinden dusuruldu (KAHIN 2026-09-29)",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "dosyalar": [
       "src/company_master/etl/scrapers/ivedik_scraper.py"
     ],
@@ -1710,7 +1710,10 @@
     "source": "ihsan",
     "baslangic": null,
     "bitis": null,
-    "not": "Teslim (yasu): KAZI YAPILMADI - erisim engeli. OLCUM: DNS cozuluyor (185.151.30.153) ama nginx HTTP 403 donuyor; https, http ve robots.txt dahil. Mevcut veri: 3.354 satir / 14 tekil firma, tum alanlar %0 - kullanilamaz. Brief varsayimi tutmadi (D-66) -> durduruldu. Sektor sorusu yanitlanamadi, uydurma cevap verilmedi. 403'e karsi tekrar istek atilmadi (P-5). Rapor: plans/IVERI_ERISIM_RAPORU.md"
+    "not": "Teslim (yasu): KAZI YAPILMADI - erisim engeli. OLCUM: DNS cozuluyor (185.151.30.153) ama nginx HTTP 403 donuyor; https, http ve robots.txt dahil. Mevcut veri: 3.354 satir / 14 tekil firma, tum alanlar %0 - kullanilamaz. Brief varsayimi tutmadi (D-66) -> durduruldu. Sektor sorusu yanitlanamadi, uydurma cevap verilmedi. 403'e karsi tekrar istek atilmadi (P-5). Rapor: plans/IVERI_ERISIM_RAPORU.md",
+    "sonuc": "KAHIN karari: 'Ivedik'i kaynak listesinden dusur.' 4 yontem denendi, hepsi basarisiz (401 / Browser-Use BLOCKED). Mevcut veri 3.354 satir ama 14 tekil firma ve %0 alan = kullanilamaz.",
+    "kapanis_notu": "KAYNAK LISTESINDEN DUSTURULDU. Veri SILINMEDI (geri donusu olmayan silme riski) - data/ivedik/firmalar.jsonl referans icin bekletildi, urune alinmayacak. Kayit: data/ivedik/kaynaktan_dusuruldu.json (D-301). DB'de zaten yuklu degildi; hub listesinden cikarildi.",
+    "kapandi": "2026-09-29T20:59:57"
   },
   {
     "task_id": "ALTYAPI-AJAN-CAKISMA-01",

@@ -78,6 +78,27 @@ def _dolu_kosulu(col: str) -> str:
     return f"{col} IS NOT NULL AND {col} <> '' AND {col} NOT IN ({liste})"
 
 
+# D-301 (MANDAL-YUTULAN-01): yutulan hatayi veriye yazma anahtari.
+# Ayni dosyada 7 loader `except` icinde bos veri donuyordu. Dordu ("Skor dagilimi
+# bulunamadi" gibi) yoklugu **belirsiz** sunuyor -- bu D-249'a aykiri degil.
+# Ikisi ise `st.success` ile yoklugu **olumluyordu**: "risk yok" ve "veri
+# kalitesi iyi durumda". Kirik SQL varken bunlar duz yalandi. Olculdu: kardes
+# sayisi 6 degil 2; yalnizca olumlayan yuzeyler kesildi.
+# `df.attrs` secildi cunku olculdu: st.cache_data attrs'i koruyor (D-301).
+_HATA = "hata"
+
+
+def _hata_isaretle(veri, exc: Exception):
+    """Bos sonuca 'bu bos degil, olculemedi' notunu takar."""
+    veri.attrs[_HATA] = f"{exc.__class__.__name__}: {exc}"
+    return veri
+
+
+def olculemedi(veri) -> str | None:
+    """Yukleyici hata yuttuysa mesaji verir; gercekten bossa None."""
+    return getattr(veri, "attrs", {}).get(_HATA)
+
+
 def _risk_esigi() -> float:
     """Risk eşiği sabit yazılmaz: tavanın oranı (D-250/7). Tavan 6.5 iken 1.95.
 
@@ -280,6 +301,8 @@ def load_missing_field_analysis() -> pd.DataFrame:
     except Exception as exc:
         # D-249: olculmemis tablo "hepsi %0 eksik" diye sunulamaz; bos birakilir.
         _admin_quality_logger.warning("Eksik alan analizi yüklenemedi", exc)
+        # D-301: bu bos df "kritik eksiklik yok" ovgusune donusuyordu.
+        return _hata_isaretle(pd.DataFrame(result), exc)
     return pd.DataFrame(result)
 
 
@@ -335,6 +358,10 @@ def load_risky_companies(limit: int = 100) -> pd.DataFrame:
                 return df
     except Exception as exc:
         _admin_quality_logger.warning("Riskli firmalar yüklenemedi", exc)
+        # D-301: bos df "risk yok" diye sunuluyordu. Hata artik veriyle tasiniyor.
+        return _hata_isaretle(pd.DataFrame(
+            columns=["Firma ID", "Unvan", "Ticari Ad", "Kimlik Tamlığı", "Eksik Alanlar"]
+        ), exc)
     return pd.DataFrame(
         columns=["Firma ID", "Unvan", "Ticari Ad", "Kimlik Tamlığı", "Eksik Alanlar"]
     )
@@ -694,6 +721,9 @@ def render_quality_tab() -> None:
     suggestions = generate_improvement_suggestions(missing_df, overview)
     if suggestions:
         st.dataframe(pd.DataFrame(suggestions), width="stretch", hide_index=True)
+    elif (neden := olculemedi(missing_df)):
+        # D-301: hata yutulmusken "kalite iyi durumda" ovgusu cikiyordu (D-249).
+        st.error(f"⚠️ Eksik alan analizi ölçülemedi — öneri üretilemez. Neden: {neden}")
     else:
         st.success("Kritik eksiklik tespit edilmedi — veri kalitesi genel olarak iyi durumda.")
 
@@ -713,7 +743,10 @@ def render_quality_tab() -> None:
         key="quality_risk_limit",
     )
     risky_df = load_risky_companies(limit=limit)
-    if risky_df.empty:
+    if (neden := olculemedi(risky_df)):
+        # D-301: sorgu patlarken kullanici "risk yok" okuyordu (D-249).
+        st.error(f"⚠️ Riskli firma sorgusu çalışmadı — bu liste boş DEĞİL, ölçülemedi. Neden: {neden}")
+    elif risky_df.empty:
         st.success(f"Tamlık < {esik:.2f} aralığında firma bulunamadı — risk yok.")
     else:
         st.caption(f"{len(risky_df)} firma listeleniyor (limit: {limit})")

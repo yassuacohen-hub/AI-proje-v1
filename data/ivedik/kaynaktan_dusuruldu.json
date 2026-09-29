@@ -1,0 +1,24 @@
+{
+  "zaman": "2026-09-29T20:59:57",
+  "karar": "IVEDIK kaynak listesinden dusuruldu (KAHIN, 2026-09-29)",
+  "gerekce": "Cloudflare bot korumasi; 4 yontem denendi, hicbiri acmadi (D-299). Elimizdeki veri 14 tekil firma + %0 alan -> kullanilamaz.",
+  "veri_silindi_mi": false,
+  "silinme_gerekcesi": "Geri donusu olmayan silme 14 kaydi da kaybettirirdi. KAHIN 'dusur' dedi = listede gorunmesin.",
+  "kayitli_oldugu_yerler": {
+    "database": [],
+    "dosya": [
+      {
+        "yol": "data\\ivedik\\firmalar.jsonl",
+        "satir": 3354,
+        "tekil_slug": 14
+      }
+    ],
+    "hub": [
+      {
+        "yol": "hubs\\OSINT_VERI_TOPLAMA_HUB.md",
+        "ivedik_mentiyon": 2
+      }
+    ]
+  },
+  "kural": "IVEDIK bu projede KAYNAK OLARAK KULLANILMAZ. Yeni cekim YAPILMAZ; mevcut 14 kayit referans icin dosyada bekletilir, urune alinmaz."
+}

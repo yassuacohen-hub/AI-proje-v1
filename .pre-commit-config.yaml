@@ -35,6 +35,18 @@ repos:
         files: ^(src/company_master/schema/|tests/test_goc_defteri\.py$|scripts/goc_defteri\.py$)
         stages: [pre-commit]
 
+      # MANDAL-SAHNE-01 (D-301): kazara toplu sahneleme kapisi. Olculmus olay:
+      # `7343cec` 22 dosya ile D-299'un iki testini yuttu. Mevcut mandal
+      # `git add -A`'yi betiklerde yakalar, ajanin elle yazdigi komutu yakalamaz.
+      # Bu kapi niyeti degil sonucu olcer; kacis yolu: SAHNE_TAVAN=<sayi>.
+      - id: sahne-kapisi
+        name: MANDAL-SAHNE-01 (tek commit'te dosya sayisi tavani)
+        entry: python -X utf8 scripts/sahne_kapisi.py
+        language: system
+        pass_filenames: false
+        always_run: true
+        stages: [pre-commit]
+
       # MANDAL-D250-01: kimlik tamligi tek kapisi. DB'ye BAGLANMAZ (saf hesap),
       # bu yuzden always_run --- ikinci bir puan yolu acan herhangi bir commit de
       # tetiklesin. Agirlik toplami 10.0 bozulursa commit gecmez.

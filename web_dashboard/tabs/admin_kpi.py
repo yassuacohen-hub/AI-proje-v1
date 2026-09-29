@@ -127,9 +127,11 @@ def load_admin_kpi_summary() -> dict[str, Any]:
     else:
         try:
             with engine.connect() as conn:
+                # D-301: kolon `created_at` degil `olay_zamani` -- MANDAL-KPI-01
+                # yakaladi. DAU karti canlida hic dolmamis, sessizce None kalmisti.
                 row = conn.execute(text(
                     "SELECT COUNT(DISTINCT user_id) as cnt FROM user_activity_log "
-                    "WHERE created_at >= NOW() - INTERVAL '24 hours'"
+                    "WHERE olay_zamani >= NOW() - INTERVAL '24 hours'"
                 )).mappings().first()
                 if row:
                     dau_val = row["cnt"] or 0
@@ -157,7 +159,11 @@ def load_quality_trend(gun: int = 30) -> pd.DataFrame:
                 "       COUNT(*) as firma_sayisi "
                 "FROM companies "
                 "WHERE is_ankara=TRUE AND is_osb_member=TRUE "
-                "  AND created_at >= NOW() - :gun || ' days' "
+                # D-301: `NOW() - :gun || ' days'` canlida HER ZAMAN patliyordu
+                # (`timestamp - smallint` operatoru yok; `-` once baglaniyor).
+                # Yani KPI sekmesinin kalite trendi hic calismamis, sessizce bos
+                # donmustu. MANDAL-KPI-01 bu SQL'i canliya karsi kosturuyor.
+                "  AND created_at >= NOW() - (:gun * INTERVAL '1 day') "
                 "GROUP BY DATE(created_at) "
                 "ORDER BY tarih"
             ), {"gun": gun}).mappings().all()
@@ -218,10 +224,12 @@ def load_source_health() -> pd.DataFrame:
     engine = get_engine()
     try:
         with engine.connect() as conn:
+            # D-301: `sr.created_at` yok, dogrusu `sr.collected_at` --
+            # MANDAL-KPI-01 yakaladi. Kaynak saglik tablosu canlida hep bostu.
             rows = conn.execute(text(
                 "SELECT s.source_name, "
                 "       COUNT(sr.source_record_id) as kayit_sayisi, "
-                "       MAX(sr.created_at) as son_guncelleme "
+                "       MAX(sr.collected_at) as son_guncelleme "
                 "FROM sources s "
                 "LEFT JOIN source_records sr ON sr.source_id = s.source_id "
                 "GROUP BY s.source_id, s.source_name "

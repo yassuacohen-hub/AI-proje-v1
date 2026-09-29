@@ -70,7 +70,13 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements-app.txt
-          pip install pytest pytest-cov pytest-timeout
+          # D-301 (MANDAL-SIRA-01): pytest-randomly ZORUNLU. Olculdu: paket
+          # requirements-dev.txt'te beyan edilmis ama bu job onu hic kurmuyordu
+          # (o satir yalnizca lint job'inda). Yani CI sabit sirada kosuyordu ve
+          # "4592 passed" bir beyandi, kanit degil (D-288). D-299'un yakaladigi
+          # sira bagimli test (st.cache_data onceki testin sonucunu donduruyor)
+          # yalnizca rastgele sirada gorunur hale gelmisti.
+          pip install pytest pytest-cov pytest-timeout pytest-randomly
           echo "# CI ortami: gercek gizli bilgi yok" > .env
       - name: Init schema
         run: |
@@ -86,9 +92,12 @@ jobs:
         # (--cov=<dosya/yolu> pytest-cov'da paket adi sayilir -> %0 "No data").
         # TEST-CI-01: -p no:cacheprovider (CI'da .pytest_cache gereksiz),
         # --timeout (asili test isi kilitlemesin), -x YOK (matris raporu tam olsun).
+        # D-301: sira rastgele; tohum pytest basligina basilir, kirmizi tekrar
+        # uretilebilsin diye log'dan `-p randomly --randomly-seed=<N>` ile alinir.
         run: |
           python -m pytest tests/ \
             -p no:cacheprovider \
+            -p randomly \
             --timeout=${{ env.PYTEST_TIMEOUT_SN }} \
             --continue-on-collection-errors \
             --cov \
