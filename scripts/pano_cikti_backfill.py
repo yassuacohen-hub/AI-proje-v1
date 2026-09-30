@@ -19,6 +19,7 @@ PANO = KOK / "data" / "orchestrator" / "task_board.json"
 BACKFILL = {
     "TSG-PILOT-20": "plans/rapor_yasu_TSG-PILOT-20.md",
     "VERI-TOBB2B-KESISIM-01": "data/pilots/VERI-TOBB2B-KESISIM-01/ozet.json",
+    "VERI-LONCA-FIRMA-01": "plans/rapor_yasu_VERI-LONCA-FIRMA-01.md",
 }
 
 
