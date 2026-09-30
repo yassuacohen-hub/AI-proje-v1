@@ -1,0 +1,41 @@
+{
+  "ilan_sira_no": "11524",
+  "icerik_no": null,
+  "mersis_no": null,
+  "ticaret_sicil_no": "143409",
+  "ticaret_unvani": "ALFA TREND TEKNOLOJİ ANONİM ŞİRKETİ",
+  "adres": null,
+  "mudurluk": "ANKARA",
+  "yayin_tarihi": "17.02.2026",
+  "gazete_sayi": "11524",
+  "gazete_sayfa": "615",
+  "tescil_tarihi": null,
+  "tescil_edilen_husus": "LİMİTED'den ANONİM'e (TÜR DEĞİŞİKLİĞİ) TEK PAY SAHİPLİ ANONİM ŞİRKET Nevi Değişikliği - Tür Değişikliği Nevi Değişikliği - Sözleşme",
+  "delil_belgeler": null,
+  "il_turu": "LİMİTED'den ANONİM'e (TÜR DEĞİŞİKLİĞİ) TEK PAY SAHİPLİ ANONİM ŞİRKET Nevi Değişikliği - Tür Değişikliği Nevi Değişikliği - Sözleşme",
+  "grup_anahtari": null,
+  "iliskili_kayitlar": [],
+  "guid": null,
+  "katman": 0,
+  "kaynak": "https://www.ticaretsicil.gov.tr/view/hizlierisim/ilangoruntuleme.php",
+  "alinma_zamani": "2026-09-29T23:46:48.833819+00:00",
+  "ham_metin": "",
+  "dogrulama": {
+    "sonuc": "olculdu",
+    "bulgular": [
+      {
+        "kod": "PILOT_OLCUM",
+        "seviye": "bilgi",
+        "mesaj": "TSG-PILOT-20 olcumu; VKN/MERSIS bu turde kapanmadi (tabloda sutun yok)"
+      }
+    ],
+    "turetilen": {
+      "anahtar": "11524-11524-615"
+    }
+  },
+  "olcum": {
+    "company_id": "23ec47fb-d393-469c-bd7f-c8729934d606",
+    "sira": 4,
+    "il_turu_ham": "LİMİTED'den ANONİM'e (TÜR DEĞİŞİKLİĞİ) TEK PAY SAHİPLİ ANONİM ŞİRKET Nevi Değişikliği - Tür Değişikliği Nevi Değişikliği - Sözleşme"
+  }
+}

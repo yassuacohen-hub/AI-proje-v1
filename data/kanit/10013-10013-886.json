@@ -1,0 +1,41 @@
+{
+  "ilan_sira_no": "10013",
+  "icerik_no": null,
+  "mersis_no": null,
+  "ticaret_sicil_no": "442830",
+  "ticaret_unvani": "ADEM KOÇ PLASTİK TURİZM İNŞAAT TEKSTİL GIDA İMALAT SANAYİ VE TİCARET LİMİTED ŞİRKETİ KAHRAMANKAZAN ŞUBESİ",
+  "adres": null,
+  "mudurluk": "ANKARA",
+  "yayin_tarihi": "11.02.2020",
+  "gazete_sayi": "10013",
+  "gazete_sayfa": "886",
+  "tescil_tarihi": null,
+  "tescil_edilen_husus": "ŞUBE AÇILIŞ",
+  "delil_belgeler": null,
+  "il_turu": "ŞUBE AÇILIŞ",
+  "grup_anahtari": null,
+  "iliskili_kayitlar": [],
+  "guid": null,
+  "katman": 0,
+  "kaynak": "https://www.ticaretsicil.gov.tr/view/hizlierisim/ilangoruntuleme.php",
+  "alinma_zamani": "2026-09-29T23:46:48.833819+00:00",
+  "ham_metin": "",
+  "dogrulama": {
+    "sonuc": "olculdu",
+    "bulgular": [
+      {
+        "kod": "PILOT_OLCUM",
+        "seviye": "bilgi",
+        "mesaj": "TSG-PILOT-20 olcumu; VKN/MERSIS bu turde kapanmadi (tabloda sutun yok)"
+      }
+    ],
+    "turetilen": {
+      "anahtar": "10013-10013-886"
+    }
+  },
+  "olcum": {
+    "company_id": "87b21798-d6a7-4177-a8b7-9746f557dcc3",
+    "sira": 19,
+    "il_turu_ham": "ŞUBE AÇILIŞ"
+  }
+}

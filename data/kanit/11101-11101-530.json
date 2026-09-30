@@ -1,0 +1,41 @@
+{
+  "ilan_sira_no": "11101",
+  "icerik_no": null,
+  "mersis_no": null,
+  "ticaret_sicil_no": "400932",
+  "ticaret_unvani": "ALFİN ALÜMİNYUM İNŞAAT PROJE DANIŞMANLIK İÇ VE DIŞ TİCARET LİMİTED ŞİRKETİ",
+  "adres": null,
+  "mudurluk": "ANKARA",
+  "yayin_tarihi": "11.06.2024",
+  "gazete_sayi": "11101",
+  "gazete_sayfa": "530",
+  "tescil_tarihi": null,
+  "tescil_edilen_husus": "LİMİTED ŞİRKET (SERMAYE ARTIRIMI) TEK ORTAKLI LİMİTED ŞİRKET Değişiklik - Sermaye Artırımı",
+  "delil_belgeler": null,
+  "il_turu": "LİMİTED ŞİRKET (SERMAYE ARTIRIMI) TEK ORTAKLI LİMİTED ŞİRKET Değişiklik - Sermaye Artırımı",
+  "grup_anahtari": null,
+  "iliskili_kayitlar": [],
+  "guid": null,
+  "katman": 0,
+  "kaynak": "https://www.ticaretsicil.gov.tr/view/hizlierisim/ilangoruntuleme.php",
+  "alinma_zamani": "2026-09-29T23:46:48.833819+00:00",
+  "ham_metin": "",
+  "dogrulama": {
+    "sonuc": "olculdu",
+    "bulgular": [
+      {
+        "kod": "PILOT_OLCUM",
+        "seviye": "bilgi",
+        "mesaj": "TSG-PILOT-20 olcumu; VKN/MERSIS bu turde kapanmadi (tabloda sutun yok)"
+      }
+    ],
+    "turetilen": {
+      "anahtar": "11101-11101-530"
+    }
+  },
+  "olcum": {
+    "company_id": "8b09a926-82ef-4577-a145-3f99f26f2389",
+    "sira": 6,
+    "il_turu_ham": "LİMİTED ŞİRKET (SERMAYE ARTIRIMI) TEK ORTAKLI LİMİTED ŞİRKET Değişiklik - Sermaye Artırımı"
+  }
+}

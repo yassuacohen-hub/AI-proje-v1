@@ -1,0 +1,41 @@
+{
+  "ilan_sira_no": "11663",
+  "icerik_no": null,
+  "mersis_no": null,
+  "ticaret_sicil_no": "225164",
+  "ticaret_unvani": "ALP İNŞAAT SANAYİ VE TİCARET ANONİM ŞİRKETİ",
+  "adres": null,
+  "mudurluk": "ANKARA",
+  "yayin_tarihi": "10.09.2026",
+  "gazete_sayi": "11663",
+  "gazete_sayfa": "189",
+  "tescil_tarihi": null,
+  "tescil_edilen_husus": "TEK ORTAKLIK BİLGİSİ TEK PAY SAHİPLİ ANONİM ŞİRKET Değişiklik - Yönetim Kurulu / Yetkililer Değişiklik - Tek Pay Sahipliğinde Değişiklik",
+  "delil_belgeler": null,
+  "il_turu": "TEK ORTAKLIK BİLGİSİ TEK PAY SAHİPLİ ANONİM ŞİRKET Değişiklik - Yönetim Kurulu / Yetkililer Değişiklik - Tek Pay Sahipliğinde Değişiklik",
+  "grup_anahtari": null,
+  "iliskili_kayitlar": [],
+  "guid": null,
+  "katman": 0,
+  "kaynak": "https://www.ticaretsicil.gov.tr/view/hizlierisim/ilangoruntuleme.php",
+  "alinma_zamani": "2026-09-29T23:46:48.833819+00:00",
+  "ham_metin": "",
+  "dogrulama": {
+    "sonuc": "olculdu",
+    "bulgular": [
+      {
+        "kod": "PILOT_OLCUM",
+        "seviye": "bilgi",
+        "mesaj": "TSG-PILOT-20 olcumu; VKN/MERSIS bu turde kapanmadi (tabloda sutun yok)"
+      }
+    ],
+    "turetilen": {
+      "anahtar": "11663-11663-189"
+    }
+  },
+  "olcum": {
+    "company_id": "6ac04c63-fb1a-488c-877e-3feb4afcbc45",
+    "sira": 8,
+    "il_turu_ham": "TEK ORTAKLIK BİLGİSİ TEK PAY SAHİPLİ ANONİM ŞİRKET Değişiklik - Yönetim Kurulu / Yetkililer Değişiklik - Tek Pay Sahipliğinde Değişiklik"
+  }
+}

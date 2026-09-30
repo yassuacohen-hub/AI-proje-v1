@@ -1,0 +1,41 @@
+{
+  "ilan_sira_no": "11443",
+  "icerik_no": null,
+  "mersis_no": null,
+  "ticaret_sicil_no": "121906",
+  "ticaret_unvani": "(İFLAS NEDENİYLE) TASFİYE HALİNDE AVRASYA ENERJİ İNŞAAT TURİZM VE TİCARET ANONİM ŞİRKETİ",
+  "adres": null,
+  "mudurluk": "ANKARA",
+  "yayin_tarihi": "23.10.2025",
+  "gazete_sayi": "11443",
+  "gazete_sayfa": "152",
+  "tescil_tarihi": null,
+  "tescil_edilen_husus": "KONKORDATO ALACAKLI TOP. - DURUŞMA GÜNÜ VE DİĞER",
+  "delil_belgeler": null,
+  "il_turu": "KONKORDATO ALACAKLI TOP. - DURUŞMA GÜNÜ VE DİĞER",
+  "grup_anahtari": null,
+  "iliskili_kayitlar": [],
+  "guid": null,
+  "katman": 0,
+  "kaynak": "https://www.ticaretsicil.gov.tr/view/hizlierisim/ilangoruntuleme.php",
+  "alinma_zamani": "2026-09-29T23:46:48.833819+00:00",
+  "ham_metin": "",
+  "dogrulama": {
+    "sonuc": "olculdu",
+    "bulgular": [
+      {
+        "kod": "PILOT_OLCUM",
+        "seviye": "bilgi",
+        "mesaj": "TSG-PILOT-20 olcumu; VKN/MERSIS bu turde kapanmadi (tabloda sutun yok)"
+      }
+    ],
+    "turetilen": {
+      "anahtar": "11443-11443-152"
+    }
+  },
+  "olcum": {
+    "company_id": "b6a7ebea-8980-480f-abad-5423ed491b9d",
+    "sira": 3,
+    "il_turu_ham": "KONKORDATO ALACAKLI TOP. - DURUŞMA GÜNÜ VE DİĞER"
+  }
+}

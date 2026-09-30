@@ -1,0 +1,41 @@
+{
+  "ilan_sira_no": "11423",
+  "icerik_no": null,
+  "mersis_no": null,
+  "ticaret_sicil_no": "268949",
+  "ticaret_unvani": "A.H.M EVCİL HAYVAN VE HAYVAN ÜRÜNLERİ TEKSTİL KİMYA İNŞAAT DANIŞMANLIK SANAYİ VE TİCARET LİMİTED ŞİRKETİ",
+  "adres": null,
+  "mudurluk": "ANKARA",
+  "yayin_tarihi": "25.09.2025",
+  "gazete_sayi": "11423",
+  "gazete_sayfa": "443",
+  "tescil_tarihi": null,
+  "tescil_edilen_husus": "LİMİTED ŞİRKET (PAY DEVRİ) TEK ORTAKLI LİMİTED ŞİRKET Değişiklik - Pay Devri Değişiklik - Yönetim Kurulu / Yetkililer",
+  "delil_belgeler": null,
+  "il_turu": "LİMİTED ŞİRKET (PAY DEVRİ) TEK ORTAKLI LİMİTED ŞİRKET Değişiklik - Pay Devri Değişiklik - Yönetim Kurulu / Yetkililer",
+  "grup_anahtari": null,
+  "iliskili_kayitlar": [],
+  "guid": null,
+  "katman": 0,
+  "kaynak": "https://www.ticaretsicil.gov.tr/view/hizlierisim/ilangoruntuleme.php",
+  "alinma_zamani": "2026-09-29T23:46:48.833819+00:00",
+  "ham_metin": "",
+  "dogrulama": {
+    "sonuc": "olculdu",
+    "bulgular": [
+      {
+        "kod": "PILOT_OLCUM",
+        "seviye": "bilgi",
+        "mesaj": "TSG-PILOT-20 olcumu; VKN/MERSIS bu turde kapanmadi (tabloda sutun yok)"
+      }
+    ],
+    "turetilen": {
+      "anahtar": "11423-11423-443"
+    }
+  },
+  "olcum": {
+    "company_id": "19f886e0-07b1-44e8-9796-887dd314eeb1",
+    "sira": 2,
+    "il_turu_ham": "LİMİTED ŞİRKET (PAY DEVRİ) TEK ORTAKLI LİMİTED ŞİRKET Değişiklik - Pay Devri Değişiklik - Yönetim Kurulu / Yetkililer"
+  }
+}

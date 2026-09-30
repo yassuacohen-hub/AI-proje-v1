@@ -1,0 +1,41 @@
+{
+  "ilan_sira_no": "11429",
+  "icerik_no": null,
+  "mersis_no": null,
+  "ticaret_sicil_no": "27031",
+  "ticaret_unvani": "AKARAY GRUP İNŞAAT TİCARET İTHALAT VE İHRACAT LİMİTED ŞİRKETİ",
+  "adres": null,
+  "mudurluk": "ANKARA",
+  "yayin_tarihi": "03.10.2025",
+  "gazete_sayi": "11429",
+  "gazete_sayfa": "1397",
+  "tescil_tarihi": null,
+  "tescil_edilen_husus": "LİMİTED ŞİRKET (PAY DEVRİ) ORTAK SAYISI BİRDEN FAZLA LİMİTED ŞİRKET Değişiklik - Pay Devri",
+  "delil_belgeler": null,
+  "il_turu": "LİMİTED ŞİRKET (PAY DEVRİ) ORTAK SAYISI BİRDEN FAZLA LİMİTED ŞİRKET Değişiklik - Pay Devri",
+  "grup_anahtari": null,
+  "iliskili_kayitlar": [],
+  "guid": null,
+  "katman": 0,
+  "kaynak": "https://www.ticaretsicil.gov.tr/view/hizlierisim/ilangoruntuleme.php",
+  "alinma_zamani": "2026-09-29T23:46:48.833819+00:00",
+  "ham_metin": "",
+  "dogrulama": {
+    "sonuc": "olculdu",
+    "bulgular": [
+      {
+        "kod": "PILOT_OLCUM",
+        "seviye": "bilgi",
+        "mesaj": "TSG-PILOT-20 olcumu; VKN/MERSIS bu turde kapanmadi (tabloda sutun yok)"
+      }
+    ],
+    "turetilen": {
+      "anahtar": "11429-11429-1397"
+    }
+  },
+  "olcum": {
+    "company_id": "3d1cd111-56b1-4dfc-9166-a44c4f67aafc",
+    "sira": 11,
+    "il_turu_ham": "LİMİTED ŞİRKET (PAY DEVRİ) ORTAK SAYISI BİRDEN FAZLA LİMİTED ŞİRKET Değişiklik - Pay Devri"
+  }
+}

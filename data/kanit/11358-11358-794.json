@@ -1,0 +1,41 @@
+{
+  "ilan_sira_no": "11358",
+  "icerik_no": null,
+  "mersis_no": null,
+  "ticaret_sicil_no": "386900",
+  "ticaret_unvani": "AGARTHA TEKNOLOJİ ANONİM ŞİRKETİ",
+  "adres": null,
+  "mudurluk": "ANKARA",
+  "yayin_tarihi": "25.06.2025",
+  "gazete_sayi": "11358",
+  "gazete_sayfa": "794",
+  "tescil_tarihi": null,
+  "tescil_edilen_husus": "ANONİM ŞİRKET (YÖNETİM - TEMSİL VE DİĞER) TEK PAY SAHİPLİ ANONİM ŞİRKET Değişiklik - Yönetim Kurulu / Yetkililer",
+  "delil_belgeler": null,
+  "il_turu": "ANONİM ŞİRKET (YÖNETİM - TEMSİL VE DİĞER) TEK PAY SAHİPLİ ANONİM ŞİRKET Değişiklik - Yönetim Kurulu / Yetkililer",
+  "grup_anahtari": null,
+  "iliskili_kayitlar": [],
+  "guid": null,
+  "katman": 0,
+  "kaynak": "https://www.ticaretsicil.gov.tr/view/hizlierisim/ilangoruntuleme.php",
+  "alinma_zamani": "2026-09-29T23:46:48.833819+00:00",
+  "ham_metin": "",
+  "dogrulama": {
+    "sonuc": "olculdu",
+    "bulgular": [
+      {
+        "kod": "PILOT_OLCUM",
+        "seviye": "bilgi",
+        "mesaj": "TSG-PILOT-20 olcumu; VKN/MERSIS bu turde kapanmadi (tabloda sutun yok)"
+      }
+    ],
+    "turetilen": {
+      "anahtar": "11358-11358-794"
+    }
+  },
+  "olcum": {
+    "company_id": "01cf3ec6-4de6-4721-a66f-7b8a89d0f93c",
+    "sira": 5,
+    "il_turu_ham": "ANONİM ŞİRKET (YÖNETİM - TEMSİL VE DİĞER) TEK PAY SAHİPLİ ANONİM ŞİRKET Değişiklik - Yönetim Kurulu / Yetkililer"
+  }
+}

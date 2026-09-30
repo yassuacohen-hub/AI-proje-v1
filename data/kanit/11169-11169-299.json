@@ -1,0 +1,41 @@
+{
+  "ilan_sira_no": "11169",
+  "icerik_no": null,
+  "mersis_no": null,
+  "ticaret_sicil_no": "173994",
+  "ticaret_unvani": "AKMİSAN POMPA VE MAKİNA ANONİM ŞİRKETİ",
+  "adres": null,
+  "mudurluk": "ANKARA",
+  "yayin_tarihi": "20.09.2024",
+  "gazete_sayi": "11169",
+  "gazete_sayfa": "299",
+  "tescil_tarihi": null,
+  "tescil_edilen_husus": "ANONİM ŞİRKET (SERMAYE ARTIRIMI) PAY SAHİBİ SAYISI BİRDEN FAZLA ANONİM ŞİRKET Değişiklik - Sermaye Artırımı",
+  "delil_belgeler": null,
+  "il_turu": "ANONİM ŞİRKET (SERMAYE ARTIRIMI) PAY SAHİBİ SAYISI BİRDEN FAZLA ANONİM ŞİRKET Değişiklik - Sermaye Artırımı",
+  "grup_anahtari": null,
+  "iliskili_kayitlar": [],
+  "guid": null,
+  "katman": 0,
+  "kaynak": "https://www.ticaretsicil.gov.tr/view/hizlierisim/ilangoruntuleme.php",
+  "alinma_zamani": "2026-09-29T23:46:48.833819+00:00",
+  "ham_metin": "",
+  "dogrulama": {
+    "sonuc": "olculdu",
+    "bulgular": [
+      {
+        "kod": "PILOT_OLCUM",
+        "seviye": "bilgi",
+        "mesaj": "TSG-PILOT-20 olcumu; VKN/MERSIS bu turde kapanmadi (tabloda sutun yok)"
+      }
+    ],
+    "turetilen": {
+      "anahtar": "11169-11169-299"
+    }
+  },
+  "olcum": {
+    "company_id": "376aef18-a3fa-43c3-b238-af9123b4324f",
+    "sira": 1,
+    "il_turu_ham": "ANONİM ŞİRKET (SERMAYE ARTIRIMI) PAY SAHİBİ SAYISI BİRDEN FAZLA ANONİM ŞİRKET Değişiklik - Sermaye Artırımı"
+  }
+}

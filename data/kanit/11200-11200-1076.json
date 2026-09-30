@@ -1,0 +1,41 @@
+{
+  "ilan_sira_no": "11200",
+  "icerik_no": null,
+  "mersis_no": null,
+  "ticaret_sicil_no": "458580",
+  "ticaret_unvani": "3K ASANSÖR İTHALAT İHRACAT SANAYİ VE TİCARET LİMİTED ŞİRKETİ",
+  "adres": null,
+  "mudurluk": "ANKARA",
+  "yayin_tarihi": "05.11.2024",
+  "gazete_sayi": "11200",
+  "gazete_sayfa": "1076",
+  "tescil_tarihi": null,
+  "tescil_edilen_husus": "LİMİTED ŞİRKET (ADRES DEĞİŞİKLİĞİ) TEK ORTAKLI LİMİTED ŞİRKET Değişiklik - Adres",
+  "delil_belgeler": null,
+  "il_turu": "LİMİTED ŞİRKET (ADRES DEĞİŞİKLİĞİ) TEK ORTAKLI LİMİTED ŞİRKET Değişiklik - Adres",
+  "grup_anahtari": null,
+  "iliskili_kayitlar": [],
+  "guid": null,
+  "katman": 0,
+  "kaynak": "https://www.ticaretsicil.gov.tr/view/hizlierisim/ilangoruntuleme.php",
+  "alinma_zamani": "2026-09-29T23:46:48.833819+00:00",
+  "ham_metin": "",
+  "dogrulama": {
+    "sonuc": "olculdu",
+    "bulgular": [
+      {
+        "kod": "PILOT_OLCUM",
+        "seviye": "bilgi",
+        "mesaj": "TSG-PILOT-20 olcumu; VKN/MERSIS bu turde kapanmadi (tabloda sutun yok)"
+      }
+    ],
+    "turetilen": {
+      "anahtar": "11200-11200-1076"
+    }
+  },
+  "olcum": {
+    "company_id": "d26b0715-9f74-4f8c-b0c1-55035fa5e6b7",
+    "sira": 13,
+    "il_turu_ham": "LİMİTED ŞİRKET (ADRES DEĞİŞİKLİĞİ) TEK ORTAKLI LİMİTED ŞİRKET Değişiklik - Adres"
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "ilan_sira_no": "11461",
+  "icerik_no": null,
+  "mersis_no": null,
+  "ticaret_sicil_no": "405429",
+  "ticaret_unvani": "AET MADENCİLİK VE YATIRIM ANONİM ŞİRKETİ",
+  "adres": null,
+  "mudurluk": "ANKARA",
+  "yayin_tarihi": "19.11.2025",
+  "gazete_sayi": "11461",
+  "gazete_sayfa": "652",
+  "tescil_tarihi": null,
+  "tescil_edilen_husus": "ANONİM ŞİRKET (SERMAYE ARTIRIMI) PAY SAHİBİ SAYISI BİRDEN FAZLA ANONİM ŞİRKET Değişiklik - Sermaye Artırımı",
+  "delil_belgeler": null,
+  "il_turu": "ANONİM ŞİRKET (SERMAYE ARTIRIMI) PAY SAHİBİ SAYISI BİRDEN FAZLA ANONİM ŞİRKET Değişiklik - Sermaye Artırımı",
+  "grup_anahtari": null,
+  "iliskili_kayitlar": [],
+  "guid": null,
+  "katman": 0,
+  "kaynak": "https://www.ticaretsicil.gov.tr/view/hizlierisim/ilangoruntuleme.php",
+  "alinma_zamani": "2026-09-29T23:46:48.833819+00:00",
+  "ham_metin": "",
+  "dogrulama": {
+    "sonuc": "olculdu",
+    "bulgular": [
+      {
+        "kod": "PILOT_OLCUM",
+        "seviye": "bilgi",
+        "mesaj": "TSG-PILOT-20 olcumu; VKN/MERSIS bu turde kapanmadi (tabloda sutun yok)"
+      }
+    ],
+    "turetilen": {
+      "anahtar": "11461-11461-652"
+    }
+  },
+  "olcum": {
+    "company_id": "c2512a1f-44fb-4630-bf09-7f4bb8eebef0",
+    "sira": 10,
+    "il_turu_ham": "ANONİM ŞİRKET (SERMAYE ARTIRIMI) PAY SAHİBİ SAYISI BİRDEN FAZLA ANONİM ŞİRKET Değişiklik - Sermaye Artırımı"
+  }
+}

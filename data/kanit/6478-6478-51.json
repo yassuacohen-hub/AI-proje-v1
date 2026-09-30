@@ -1,0 +1,41 @@
+{
+  "ilan_sira_no": "6478",
+  "icerik_no": null,
+  "mersis_no": null,
+  "ticaret_sicil_no": "118709",
+  "ticaret_unvani": null,
+  "adres": null,
+  "mudurluk": null,
+  "yayin_tarihi": null,
+  "gazete_sayi": null,
+  "gazete_sayfa": null,
+  "tescil_tarihi": null,
+  "tescil_edilen_husus": null,
+  "delil_belgeler": null,
+  "il_turu": null,
+  "grup_anahtari": null,
+  "iliskili_kayitlar": [],
+  "guid": null,
+  "katman": 0,
+  "kaynak": "https://www.ticaretsicil.gov.tr/view/hizlierisim/ilangoruntuleme.php",
+  "alinma_zamani": "2026-09-29T23:46:48.833819+00:00",
+  "ham_metin": "",
+  "dogrulama": {
+    "sonuc": "olculdu",
+    "bulgular": [
+      {
+        "kod": "PILOT_OLCUM",
+        "seviye": "bilgi",
+        "mesaj": "TSG-PILOT-20 olcumu; VKN/MERSIS bu turde kapanmadi (tabloda sutun yok)"
+      }
+    ],
+    "turetilen": {
+      "anahtar": "6478-6478-51"
+    }
+  },
+  "olcum": {
+    "company_id": "3a63a4b8-ee3b-4ca4-8880-6c070c5d0a8a",
+    "sira": 9,
+    "il_turu_ham": null
+  }
+}
