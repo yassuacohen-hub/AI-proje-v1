@@ -38,6 +38,17 @@ for _akis in (sys.stdout, sys.stderr):
 from src.company_master.orchestrator import task_board as tb  # noqa: E402
 from src.company_master.orchestrator import trigger  # noqa: E402
 
+#: D-303: projenin TEK kimlik kaynagi. `HUGINN_AJAN` > `git config huginn.ajan`
+#: > `git config user.name` icinde gecen bilinen ajan.
+#:
+#: D-306: bu script KENDI kimlik zincirini kurmamalidir. Once kurdugu
+#: zincir `--kimden` -> HUGINN_AJAN -> "ihsan" idi; HUGINN_AJAN tanimli
+#: olmadigi icin yasu'nun mesajlari "ihsan -> ihsan" olarak dustu ve
+#: orkestrator bunlari kendi mesaji sanip cevap vermedi (11 kayit).
+#: Tek kaynak: scripts/kilit_zorla.ajan_kimligi()
+sys.path.insert(0, str(_KOK / "scripts"))
+from kilit_zorla import ajan_kimligi  # noqa: E402
+
 #: D-210 "Zorunlu Chat Turleri" — kabul edilen mesaj tipleri.
 MESAJ_TIPLERI: tuple[str, ...] = ("hata", "soru", "koordinasyon", "rapor", "bilgi")
 
@@ -90,11 +101,13 @@ def gonder(
 ) -> dict:
     """Tek chat satiri yaz ve yazilan kaydi dondur.
 
-    Gonderen ajan KESINLIKLE belirtilmis olmalidir (D-306). Bos birakilirsa
-    hata verilir: mesaj baska bir ajan adina yazilirsa alici onu kendi
-    mesaji sanip cevap vermez ve bildirim sessizce kaybolur.
+    Kimlik sirasi (D-303 TEK KAYNAK):
+        --kimden  >  kilit_zorla.ajan_kimligi()  (HUGINN_AJAN > git config
+        huginn.ajan > git user.name)
+    Cozulemezse HATA verilir: gonderen ajan baska birinin adina yazilirsa
+    alici mesaji kendi mesaji sanip cevap vermez (D-306).
     """
-    ham_kimden = (kimden or os.getenv("HUGINN_AJAN") or "").strip()
+    ham_kimden = (kimden or ajan_kimligi() or "").strip()
     if not ham_kimden:
         raise ValueError(_BOS_KIMDEN_UYARI)
     g_ajan = trigger.ajan_normalize(ham_kimden)
