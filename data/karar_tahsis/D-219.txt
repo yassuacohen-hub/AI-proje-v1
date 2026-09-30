@@ -1,0 +1,4 @@
+D-219 — Ajan Oturum Hafızası (KAHİN kararı 2026-09-26)
+yasu_project_context.md 200 satır tavanı. D-309'da tespit edildi:
+başlık AGENTS.md'de var ama tahsis dosyası yoktu; mandal bu yüzden
+her commit'i reddediyordu. Numara geride kaldığı için --al onu veremez.

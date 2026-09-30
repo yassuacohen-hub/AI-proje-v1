@@ -144,6 +144,43 @@ Bulgu yoksa da "kontrol edildi, temiz" diye yazılır.
 - KAHİN kararı gereken → `chat_gonder.py --to ihsan`
 - Teslim durumu / kapı → `ajan_chat.py ac`
 
+## D-309 DERSLERİ (KAHİN 2026-09-30) — unuttuklarım, atladıklarım
+
+**"Bitti" demek için 4 kapı — hepsi dolmadan bitti denmez:**
+**(1) kod** · **(2) ölçülmüş kanıt** · **(3) borç defteri satırı** ·
+**(4) karar kaydı + bildirim.**
+
+- **Aracın yeşil demesi kanıt DEĞİL, tetikleyicidir.** `goc_defteri.py`
+  "TAM defterde" dedi → ben "bitti" dedim → 2 borç **ACIK**tı. Gerçek kayıt
+  `docs/BORC_DEFTERI.md`; **önce oraya bak.**
+- **Test yeşil ≠ bitti.** `test_sema_dili_ingilizce` yalnız `ığüşöç`
+  **içeren** kolonları görür; `ilan_basligi`, `osb_adi` gibi ASCII-Türkçe
+  kolonları **göremez**. Test yeşilken tablo bozuk olabilir.
+- **Sahiplik = gerekçe değil, koordinasyon işidir.** `osb_tender_monitor.py`
+  sahibi utku (VERI-02, aktif) → 13 uyumsuzluk bulup **sessizce bıraktım**.
+  Doğrusu: `ajan_chat.py` + borca sahibi + gerekiyorsa KAHİN'e soru.
+  **Sessizce atlama yok.**
+- **Sahiplik = gerekçe değil, koordinasyon işidir.** `osb_tender_monitor.py`
+  sahibi utku (VERI-02, aktif) → 13 uyumsuzluk bulup **sessizce bıraktım**.
+  Doğrusu: `ajan_chat.py` + borca sahibi + gerekiyorsa KAHİN'e soru.
+  **Sessizce atlama yok.**
+- **`0 satır` ölçümü isim kontrolünü temsil etmez.** Ad denetimi ayrı yapılır.
+- **Yarım değişiklik yazılmamış sayılır.** 4/12 kolon çevirdim, `:aktif`→
+  `:is_active` yapıp dict anahtarını bozunca bind hatası ürettim; geri aldım.
+  **Geri alınan deneme = kaza kaydıdır** — yazılmazsa tekrar üretilir.
+- **`--no-verify` tekrarlayan hata.** "Hook başkasının işi" geçersiz:
+  **benim commitim, benim sorumluluğum.** Hook kırıkken onar.
+- **`git commit`'i PowerShell'den çağırma** → `NotSpecifiedError` + yanlış
+  red. Hook sağlam (`sh scripts/hooks/pre-commit` → exit 0, 45 passed);
+  `cmd /c "git commit ..."` ile sorun yok.
+- **Önce ölç, sonra düzelt.** O hata kancayı değil kendi çağrımı
+  işaret ediyordu; ölçmeden "onar"ım hatayı iki kat büyüttü.
+- **Karar numarası İKİ adım:** (1) `karar_no.py --al D-NNN` (2) kaydı yaz.
+  Gövdede referans yazma.
+- **PowerShell ekran çıktısına güvenme** (stderr → "reddedildi" sandım,
+  oysa 45 passed). Çıktıyı `Out-File`'a yaz, **dosyadan** oku.
+- **Türkçe karakter dosya yazımında bozulur** (`fazla`→`faza`); yazdıktan sonra oku.
+
 ## Bilinen Açıklar (kapsam dışı backlog)
 
 - **D-306 BİLDİRME KURALI (KAHİN):** öğrenmem gereken her şeyi
