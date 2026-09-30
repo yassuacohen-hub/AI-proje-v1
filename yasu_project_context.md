@@ -100,7 +100,6 @@
 
 - "Yapıldı" beyanı `dosya:satır` kanıtı taşımıyorsa → doğrulanmamış iddia → **reddet**, kanıt iste
 - Pano kaydının dosyası kod tabanında yok → hayalet görev (D-216) → arşiv öner, kod yazılmasına izin verme
-- Aynı işin iki dosyaya yazılması → D-211 ikiz ihlali → hangisi kanonik, diğeri silinir
 - **`.pytest_cache/lastfailed` kanıt DEĞİLDİR** → 330 bayat kayıt görüldü, fiilen 18 passed
   → kırık test iddiası **canlı koşudan** gelir (D-268)
 - **Pano boş ≠ dosya boşta** → görev kaydı olmayan ajan da dosya yazabilir; FAZ-0'da
@@ -160,10 +159,6 @@ Bulgu yoksa da "kontrol edildi, temiz" diye yazılır.
   sahibi utku (VERI-02, aktif) → 13 uyumsuzluk bulup **sessizce bıraktım**.
   Doğrusu: `ajan_chat.py` + borca sahibi + gerekiyorsa KAHİN'e soru.
   **Sessizce atlama yok.**
-- **Sahiplik = gerekçe değil, koordinasyon işidir.** `osb_tender_monitor.py`
-  sahibi utku (VERI-02, aktif) → 13 uyumsuzluk bulup **sessizce bıraktım**.
-  Doğrusu: `ajan_chat.py` + borca sahibi + gerekiyorsa KAHİN'e soru.
-  **Sessizce atlama yok.**
 - **`0 satır` ölçümü isim kontrolünü temsil etmez.** Ad denetimi ayrı yapılır.
 - **Yarım değişiklik yazılmamış sayılır.** 4/12 kolon çevirdim, `:aktif`→
   `:is_active` yapıp dict anahtarını bozunca bind hatası ürettim; geri aldım.
@@ -175,16 +170,24 @@ Bulgu yoksa da "kontrol edildi, temiz" diye yazılır.
   `cmd /c "git commit ..."` ile sorun yok.
 - **Önce ölç, sonra düzelt.** O hata kancayı değil kendi çağrımı
   işaret ediyordu; ölçmeden "onar"ım hatayı iki kat büyüttü.
-- **Karar numarası İKİ adım:** (1) `karar_no.py --al D-NNN` (2) kaydı yaz.
-  Gövdede referans yazma.
-- **PowerShell ekran çıktısına güvenme** (stderr → "reddedildi" sandım,
-  oysa 45 passed). Çıktıyı `Out-File`'a yaz, **dosyadan** oku.
+- **Karar numarası İKİ adım:** (1) `karar_no.py --al D-NNN` (2) kaydı yaz. Gövdede referans yazma.
+- **PowerShell ekran çıktısına güvenme** (stderr → "reddedildi" sandım, oysa 45 passed). Çıktıyı `Out-File`'a yaz, **dosyadan** oku.
 - **Türkçe karakter dosya yazımında bozulur** (`fazla`→`faza`); yazdıktan sonra oku.
+- **Defter kaydı = uygulandı demek DEĞİL** (D-308, ihsan kararı).
+  `goc_defteri.py --esitle` SQL'i **çalıştırmaz**, sadece `filename`
+  yazar. 0043 `--esitle` ile "defterde" göründü, `test_goc_defteri.py`
+  yeşildi — ama canlı şemada **8 kolonun 8'i de Türkçeydi** (ölçüldü:
+  `TAM CEVRILEN: 0/8`). Defter adı gördüğü için izi doğruladı.
+  *Defter yalan söyleyebilir; tek anlamlı kanıt `information_schema`'dır.*
+- **Dosya adı kanıt değildir, okumadan adına güvenme.**
+  `0043_sector_columns.sql` adı "sektör" diyor, içeriği ihale kolonları.
+  Adı okuyup içeriği okumadım; ihsan'a "utku'nun dosyası" diye yazdım,
+  o da bana "0044 yap" dedi. **Hatanın kaynağı: tek kanıtı iki kez saydım.**
+- **Yeniden adlandırma defterde iz bırakır.** `0043` → yeni ad ile
+  `--esitle` → **iki kayıt** (44 kayıt, 43 goc) → mandal kırıldı. Düzeltme:
+  yalnız diskte karşılığı olmayan kayıt silindi (hayalet temizliği).
 
 ## Bilinen Açıklar (kapsam dışı backlog)
-
-- **D-306 BİLDİRME KURALI (KAHİN):** öğrenmem gereken her şeyi
-  chat'e yazacağım, orkestrator'a/ihsan'a. Sessiz kalmak yasak.
 
 - 112 brif D-217 şablonuna uymuyor — bilinçli mandal, geriye dönük düzeltilmiyor
 - `_ARSIV_tek_kullanimlik/` 130 dosya: silinip silinmeyeceği **KAHİN kararı bekliyor**

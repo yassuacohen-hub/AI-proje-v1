@@ -34,7 +34,7 @@ DECLARE
         ['belge_url',       'document_url']
     ];
     i INT;
-    var_say TIMESTAMP;
+    var_say INT;
     yeni_say INT;
 BEGIN
     SELECT count(*) INTO var_say FROM information_schema.columns
