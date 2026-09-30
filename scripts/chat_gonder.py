@@ -47,7 +47,7 @@ from src.company_master.orchestrator import trigger  # noqa: E402
 #: orkestrator bunlari kendi mesaji sanip cevap vermedi (11 kayit).
 #: Tek kaynak: scripts/kilit_zorla.ajan_kimligi()
 sys.path.insert(0, str(_KOK / "scripts"))
-from kilit_zorla import ajan_kimligi  # noqa: E402
+from ajan_kimligi import ajan_kimligi  # noqa: E402
 
 #: D-210 "Zorunlu Chat Turleri" — kabul edilen mesaj tipleri.
 MESAJ_TIPLERI: tuple[str, ...] = ("hata", "soru", "koordinasyon", "rapor", "bilgi")
@@ -101,13 +101,18 @@ def gonder(
 ) -> dict:
     """Tek chat satiri yaz ve yazilan kaydi dondur.
 
-    Kimlik sirasi (D-303 TEK KAYNAK):
-        --kimden  >  kilit_zorla.ajan_kimligi()  (HUGINN_AJAN > git config
-        huginn.ajan > git user.name)
-    Cozulemezse HATA verilir: gonderen ajan baska birinin adina yazilirsa
-    alici mesaji kendi mesaji sanip cevap vermez (D-306).
+    Kimlik sirasi (D-303 TEK KAYNAK -> scripts/ajan_kimligi.py):
+        --kimden  >  HUGINN_AJAN  >  ajan_<ad>.json  >  git config
+        huginn.ajan  >  git user.name
+    Cozulemezse veya belirsizse HATA verilir: gonderen ajan baska birinin
+    adina yazilirsa alici mesaji kendi mesaji sanip cevap vermez (D-306).
     """
-    ham_kimden = (kimden or ajan_kimligi() or "").strip()
+    try:
+        kim = ajan_kimligi()
+    except Exception as exc:                     # KimlikBelirsiz dahil
+        raise ValueError(f"kimlik cozulemedi: {exc}") from exc
+
+    ham_kimden = (kimden or kim or "").strip()
     if not ham_kimden:
         raise ValueError(_BOS_KIMDEN_UYARI)
     g_ajan = trigger.ajan_normalize(ham_kimden)

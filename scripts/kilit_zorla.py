@@ -43,7 +43,23 @@ def ajan_kimligi() -> str | None:
     """Kilit sahipligiyle karsilastirilabilir ajan adi (yoksa None).
 
     D-303: projedeki tek kimlik kaynagi. `karar_no.py` de bunu cagirir.
+    D-306: gercek cozum burada. Kimlik zinciri:
+
+        HUGINN_AJAN  >  ajan_<ad>.json (ajan basina, PAYLASMAZ)
+                     >  git config huginn.ajan  (paylasilan .git/config)
+                     >  git config user.name
+
+    Neden ajan basina dosya oncelikli? Cunku ayni makinede birden fazla
+    ajan calisabiliyor (olculdu: utku/ihsan/yasu ayni anda kilitli). `.git/
+    config` ve `.env` PAYLASILAN oldugu icin oraya yazilan kimlik BUTUN
+    ajanlara ayni degeri bilerdi - hata bastan sona yayilir.
     """
+    try:
+        from ajan_kimligi import ajan_kimligi as _coz
+        return _coz()
+    except ImportError:                      # pragma: no cover - yedek yol
+        pass
+
     if ad := (os.environ.get("HUGINN_AJAN") or _git("config", "huginn.ajan")):
         return ad.strip().lower()
     adi = _git("config", "user.name").lower()
