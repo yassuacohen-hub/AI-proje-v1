@@ -3956,6 +3956,29 @@ yaratmıyor (yalnız yetki + RLS). Araç onu "İZSİZ" raporladı; D-267 gereği
 `veri-gocu:` beyanı dosyaya yazıldı — yazılmamış izsiz bugün yanlış alarm,
 yarın gerçek alarmı gizler.
 
+**D-308 ölçümünün açtığı ikinci boşluk — 0042 TAM değil.** 0042 yalnız
+**Türkçe karakter içeren** kolonları çevirdi. `ihale_ilanlari` hâlâ
+**ASCII-Türkçe** adlarla duruyor: `ilan_basligi`, `ilan_turu`, `il`,
+`osb_adi`, `tahmini_maliyet`, `birim`, `aciklama`, `belge_url`. Bunlar
+`ığüşöç` içermediği için `test_sema_dili_ingilizce` onları **hiç görmüyor** —
+test yeşil, tablo yarı-Türkçe. Karar: **bu turda dokunulmadı**; kod
+tarafında sahiplik engeli vardı (aşağıya bak). Doğru çözüm `0043` ile ASCII
+kolonların çevrilmesi, ama o göç **utku'nun işine** dokunduğu için
+koordine edilmeden yazılmaz. Borç: `BORC-TENDER-KOD-01`.
+
+**Dokunulmayan dosya (kural).** `osb_tender_monitor.py` ölçüldü, sonra
+**dokunulmadı**. Sahibi `VERI-02` = **utku**, görev 2026-09-27'den beri
+`aktif`. Yaptığım denemeyi yedek alıp **geri aldım**; `git diff` boş,
+kaynak dosya bayt bayt özgün. Paylaşımlı ağaçta başkasının `aktif`
+görevi üzerine yazmak, hatanın kaynağına dokunmak demektir. Ölçümü
+yapıp **kayda geçirmek**, dosyayı düzeltmekten daha az iş değildir.
+
+**Kod hiç çalışmadı (kanıt).** Kod `kaynak_adi` arıyor; semada kolon
+`isim`. Bu ad 0039'dan beri hiç kullanılmadı → ilk SELECT'te hata.
+Ayrıca kod `cekilme_tarihi` kolonuna INSERT ediyor, kolon **sema hiç yok**.
+Yani 13 uyumsuzluk; hiçbiri "yeni regresyon" değil, hepsi ilk çalıştırmadan
+beri mevcut. Commit edilmemiş (`??`) olması iyi şans: hiç üretime girmedi.
+
 **Mandal kanıtı:** `tests/test_goc_defteri.py` **4 passed**. Bu commit
 `--no-verify` **kullanılmadan** atıldı; hook kendi çalıştı.
 
