@@ -35,6 +35,10 @@ KAHİN talebi (2026-09-29):
   → **firma satış hedefi** ifadesi
 
 **3. lonca.gov.tr → NACE SÖZLÜĞÜ AÇIK, TARAMA YAPILAMAZ** (2026-09-30)
+> ⚠️ **30 EYLÜL DÜZELTMESİ (KAHİN ekran görüntüsü):** Aşağıdaki
+> *"tarama yapılamaz"* sonucu **eksiktir**. `/FirmaBilgisi?Id=` ucu **GET ile
+> açılıyor** ve **adres, telefon, faks, e-posta, web, firma ürün grupları**
+> veriyor. O ucu hiç denemedim. Ayrıntı → `VERI-LONCA-FIRMA-01`.
 
 T.C. Sanayi ve Teknoloji Bakanlığı — *Sanayi Sicil Belgesi Sorgulama*
 (ihracatçı firma / ürün kataloğu). HTTP 200, 81.313 bayt.

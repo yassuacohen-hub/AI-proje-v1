@@ -17,6 +17,14 @@
       "GET_ara_sonuc": "0 tablo - arama yalnizca POST ile calisiyor, GET sonuc donmuyor",
       "tarama_kullanilabilir": false,
       "tarama_neden": "Arama POST /Ara uzerinden yuruyor ve WAF her POST'u reddediyor (CSRF token dogru olsa bile). GET ile arama sonucu gelmiyor. Tarama bu kaynaktan YAPILAMAZ.",
+      "DUZELTME_2026_09_30": {
+        "kimin_terfi": "KAHIN (ihsan) - ekran goruntusu ile",
+        "ne_soylendi": "onceki tespit EKSIKTI. /FirmaBilgisi?Id= ucu GET ile aciliyor ve adres, telefon, faks, e-posta, web ve FIRMA URUN GRUPLARI iceriyor. 'Tarama yapilamaz' sonucu eksikti.",
+        "benim_hatam": "/FirmaBilgisi ucunu HIC DENEMEDIM. Ana sayfadaki link taramasina guvendim; oysa detay sayfalari arama sonucundan geliyor, ana sayfada linkleri gorunmuyor.",
+        "onay_bekleyen": "Id parametresi nasil uretiliyor? OLCULEMEDIM - 'bilinmiyor' (D-217).",
+        "durum": "KAHIN'den tam bir Id istenmesi veya /Ara POST'unun WAF'siz yolunun bulunmasi gerekiyor",
+        "yeni_gorev": "VERI-LONCA-FIRMA-01"
+      },
       "icerik_kriterleri": {
         "sec_0": "Urun Grubu Adi (CPA)",
         "sec_1": "Urun Tanimi",
