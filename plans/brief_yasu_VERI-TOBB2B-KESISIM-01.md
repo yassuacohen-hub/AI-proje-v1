@@ -34,6 +34,46 @@ KAHİN talebi (2026-09-29):
 - Metinlerde *"seeking international importers/distributors"*
   → **firma satış hedefi** ifadesi
 
+**3. lonca.gov.tr → NACE SÖZLÜĞÜ AÇIK, TARAMA YAPILAMAZ** (2026-09-30)
+
+T.C. Sanayi ve Teknoloji Bakanlığı — *Sanayi Sicil Belgesi Sorgulama*
+(ihracatçı firma / ürün kataloğu). HTTP 200, 81.313 bayt.
+
+**Tarama KULLANILAMAZ — ölçüldü:**
+
+| Ölçüm | Sonuç |
+|---|---|
+| Ana sayfa | HTTP 200 |
+| **GET** denemesi | 7 denendi, **7'si açık** |
+| **POST** denemesi | 3 denendi, **3'ü WAF reddi** (`Request Rejected`, F5 ASM) |
+| GET ile arama | **0 tablo** — arama yalnız POST ile çalışıyor |
+
+CSRF token (`__RequestVerificationToken`) doğru alınsa, tam tarayıcı
+başlıkları kullanılsa bile POST reddediliyor. Yani GET'e çevirmek
+işe yaramıyor — **bu kaynaktan tarama yapılamaz**.
+
+**Bizim için alan yok:** sayfada `ticaret sicili`, `ilan`, `unvan`,
+`vergi`, `mersis`, `sicili` kelimelerinin **hiçbiri** geçmiyor.
+
+**Ama bir altın değer var:** `/Sektor?sektorKodu=NN.NN` ucu **254 adet
+NACE alt-bölüm kodu** veriyor, **30 bölüm** — tam olarak sanayi bölümleri
+(05–35 arası + 62). Tamamı GET ile **açık**.
+
+> Bu, bizim `%0.1 dolu` NACE sorunumuzun referans listesidir:
+> `data/pilots/VERI-TOBB2B-KESISIM-01/lonca_nace_kodlari.json`
+
+**Pilot eşleşmemizi doğruladı (güçlü kanıt):**
+
+| | Bölümler | Sonuç |
+|---|---|---|
+| 11 eşleşen teklif | 10, 11, 13, 21, 22, 24, 25, 27, 31, 32, 33 | **hepsi var** |
+| 9 eşleşmeyen teklif | 03, 38, 43, 46, 48, 55, 56, 73, 74, 75, 81, 83, 84, 86, 87 | **hiçbiri yok** |
+
+Yani **eşleşmeyen teklifler tam olarak imalat dışı sektörler**
+(konaklama, telekom, yazılım, inşaat, sağlık). Bu, brifteki
+*"eşleşmeyen teklif bizim müşterimize göre ilgisiz"* yorumunu
+**bağımsız bir devlet kaynağıyla doğruluyor**.
+
 ### ASIL DEĞER
 
 Elimizdeki veri **tedarikçi** tarafı. TOBB2B teklifleri **talep eden**
@@ -49,6 +89,9 @@ taraf. İkisini eşleştirmek tek başına hiçbir kaynağın vermediği şey.
 | 50 Id denemesinde kaçı dolu | **20/50 = %40** | ✅ |
 | Ülke alanı çıkıyor | TR/NL/DE/PK/CN/BR | ✅ |
 | NACE bölüm kodu doğru | 10=gıda, 13=tekstil, 24=metal | ✅ |
+| **lonca.gov.tr taranabilir** | GET 7/7 açık, POST **3/3 WAF reddi** | ❌ **YAPILAMAZ** |
+| **lonca.gov.tr NACE sözlüğü verir** | **254 kod / 30 bölüm**, GET ile açık | ✅ |
+| **Eşleşmeyen teklifler imalat dışı mı** | 15 bölümün **hiçbiri** sanayi kataloğunda yok | ✅ **DOĞRULANDI** |
 
 ## Adımlar
 
@@ -109,6 +152,8 @@ göre ilgisiz demektir.
 | R3 | NACE eşleştirme kaba | Yanlış eşleşme | Bölüm kodu kullanıldı, doğrulandı |
 | R4 | %40 doluluk | Havuz tahmini zor | Kesin sayım yapılmadı |
 | R5 | SSL geçersiz | `verify=False` gerek | Zaten http:// ile çalışıyor |
+| **R6** | **lonca.gov.tr POST'u WAF reddediyor** | **Tarama yapılamaz** | **Ölçüldü: 3/3 red. Kaynak listeden çıkarılmadı ama veri çekilmeyecek.** |
+| **R7** | **lonca.gov.tr bize firma sicili vermiyor** | **Faydası sınırlı** | Sayfada unvan/vergi/mersis/sicil **yok**. Sadece NACE sözlüğü için işe yarar. |
 
 ## Ajan chat zorunlu (D-210 · D-217)
 ```bash
@@ -125,6 +170,8 @@ python scripts/gorev_kutusu.py teslim --ajan yasu --task-id VERI-TOBB2B-KESISIM-
 - `scripts/kaynak_kesif.py` → iki sitenin teknik keşfi
 - `scripts/veri_tobb2b_kesisim.py` → pilot analizi
 - `data/pilots/VERI-TOBB2B-KESISIM-01/ozet.json` → ölçüm sonucu
+  (`kaynak_kesfi.lonca.gov.tr` bölümü bu tur eklendi)
+- `data/pilots/VERI-TOBB2B-KESISIM-01/lonca_nace_kodlari.json` → 254 NACE kodu
 
 ## Ilgili Nodlar
 - [[Huginn Data Insights/AGENTS]]

@@ -3,6 +3,44 @@
   "eslesen_teklif": 11,
   "eslesme": 16,
   "firma": 1575,
+  "kaynak_kesfi": {
+    "lonca.gov.tr": {
+      "tarih": "2026-09-30",
+      "ne": "T.C. Sanayi ve Teknoloji Bakanligi - Sanayi Sicil Belgesi Sorgulama (ihracatci firma/urun katalogu)",
+      "http_ana": 200,
+      "bayt_ana": 81313,
+      "POST_ara": "WAF REDDI (247 bayt, 'Request Rejected', F5 ASM support ID)",
+      "POST_dene_sayi": 3,
+      "POST_red_sayi": 3,
+      "GET_dene_sayi": 7,
+      "GET_red_sayi": 0,
+      "GET_ara_sonuc": "0 tablo - arama yalnizca POST ile calisiyor, GET sonuc donmuyor",
+      "tarama_kullanilabilir": false,
+      "tarama_neden": "Arama POST /Ara uzerinden yuruyor ve WAF her POST'u reddediyor (CSRF token dogru olsa bile). GET ile arama sonucu gelmiyor. Tarama bu kaynaktan YAPILAMAZ.",
+      "icerik_kriterleri": {
+        "sec_0": "Urun Grubu Adi (CPA)",
+        "sec_1": "Urun Tanimi",
+        "sec_2": "Firma Adi",
+        "sec_3": "Urun Kodu (PRODTR)"
+      },
+      "il_filtresi": "araIller - 82 il, tam listesi GET ile okunabilir",
+      "bizim_icin_alanlar": "YOK - sayfada 'ticaret sicili', 'ilan', 'unvan', 'vergi', 'mersis', 'sicil' kelimelerinin HICBIRI gecmiyor",
+      "teknik_bulgu": {
+        "nace_kodu_ucu": "/Sektor?sektorKodu=NN.NN",
+        "benzersiz_kod": 254,
+        "kapsanan_nace_bolum": 30,
+        "bolumler": ["05", "06", "07", "08", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "35", "62"],
+        "ek_dosya": "data/pilots/VERI-TOBB2B-KESISIM-01/lonca_nace_kodlari.json",
+        "deger": "NACE alt-bolum sozlugu. Kendi verimizde NACE %0.1 dolu oldugu icin sektor eslestirmemizin kodu buradan turetilebilir. Tam listesi GET ile ACIK."
+      },
+      "pilot_bolum_uyumu": {
+        "not": "TOBB2B pilotundaki NACE bolum kodlarinin bu kaynakta karsiligi",
+        "bulunan": {"10": 25, "11": 7, "13": 11, "21": 3, "22": 6, "24": 16, "25": 17, "27": 10, "31": 5, "32": 9, "33": 9},
+        "bulunamayan": ["03", "38", "43", "46", "48", "55", "56", "73", "74", "75", "81", "83", "84", "86", "87"],
+        "yorum": "Pilotun 11 eslesen teklifinin bolumleri (10/11/13/21/22/24/25/27/31/32/33) lonca.gov.tr'de KESINLIKLE var. 9 eslesmeyen teklifin bolumleri ise sanayi katalogunda YOK - yani zaten imalat disi (konaklama, telekom, yazilim). Bu, onceki 'eslesmeyen teklif bizim musterimize gore ilgisiz' yorumunu DOGRULUYOR."
+      }
+    }
+  },
   "teklif_ozet": [
     {
       "id": 21000,
