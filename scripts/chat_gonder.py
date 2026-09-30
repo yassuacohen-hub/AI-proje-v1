@@ -11,8 +11,9 @@ eklenir (append-only). Satir semasi D-210 "Chat Log Konumu" bolumuyle aynidir:
     {"tarih": "...", "kimden": "...", "kime": "...", "type": "...",
      "task_id": "...", "mesaj": "...", "yanit_alindi": false}
 
-Gonderen belirtilmezse `--kimden` → `HUGINN_AJAN` env → varsayilan `ihsan`
-sirasiyla denenir (D-70: orkestrator kimligi ihsan'dir).
+Gonderen belirtilmezse `--kimden` → `HUGINN_AJAN` env sirasina bakar.
+Ikisi de bos ise HATA verir (D-306): gonderen ajan baska birinin adina
+yazilirsa alici mesaji kendi mesaji sanip cevap vermez.
 """
 from __future__ import annotations
 
@@ -47,6 +48,26 @@ YAYIN_ALICI: tuple[str, ...] = ("hepsi", "tum", "tüm", "all")
 MESAJ_MAX = 1000
 
 
+#: D-306 — Kim oldugunu bilmeyen ajan mesajini KENDI ADINA yazamaz.
+#:
+#: Bu esik daha once gercek bir hataya yol acti: `HUGINN_AJAN` tanimli
+#: degilken `chat_gonder.py` varsayilan olarak `ihsan` yaziyordu; boylece
+#: yasu'nun mesajlari log'a "ihsan -> ihsan" olarak dustu ve orkestrator
+#: bunlari kendi mesaji sanip CEVAP VERMIYORDU (11 kayit).
+#:
+#: Duzeltme: gonderen belirtilmezse HATA verilir. Orkestrator kimligi
+#: `ihsan` DEGIL, gonderen ajanin kendisidir (D-70: orkestrator *rol*,
+#: gonderen *ajandir*; ikisi karistirilamaz).
+_BOS_KIMDEN_UYARI = (
+    "gonderen ajan belirtilmedi. --kimden <ajan> verin veya "
+    "HUGINN_AJAN ortam degiskenini tanimlayin. "
+    "Bos birakilirsa mesaj yanlis adla log'a yazilir."
+)
+
+#: Gercekten gonderen ajan olabilecek kanonik adlar.
+GONDEREN_ADAY = frozenset({"yasu", "ihsan", "utku", "salih", "mimir", "mimar"})
+
+
 def chat_yolu() -> Path:
     """Chat log dosyasinin tam yolu (D-210)."""
     return tb.STATE_DIR / "chat" / "messages.jsonl"
@@ -67,8 +88,20 @@ def gonder(
     task_id: str = "",
     kimden: str | None = None,
 ) -> dict:
-    """Tek chat satiri yaz ve yazilan kaydi dondur."""
-    g_ajan = trigger.ajan_normalize(kimden or os.getenv("HUGINN_AJAN") or "ihsan")
+    """Tek chat satiri yaz ve yazilan kaydi dondur.
+
+    Gonderen ajan KESINLIKLE belirtilmis olmalidir (D-306). Bos birakilirsa
+    hata verilir: mesaj baska bir ajan adina yazilirsa alici onu kendi
+    mesaji sanip cevap vermez ve bildirim sessizce kaybolur.
+    """
+    ham_kimden = (kimden or os.getenv("HUGINN_AJAN") or "").strip()
+    if not ham_kimden:
+        raise ValueError(_BOS_KIMDEN_UYARI)
+    g_ajan = trigger.ajan_normalize(ham_kimden)
+    if g_ajan not in GONDEREN_ADAY:
+        raise ValueError(
+            f"gecersiz gonderen: {kimden!r} — izinli: {', '.join(sorted(GONDEREN_ADAY))}"
+        )
     h_ajan = _alici_normalize(kime)
     tip = (tip or "").strip().lower()
     metin = (mesaj or "").strip()
@@ -114,7 +147,10 @@ def main(argv: list[str] | None = None) -> int:
     )
     ap.add_argument("--mesaj", "-m", required=True, help="Mesaj metni (max %d karakter)" % MESAJ_MAX)
     ap.add_argument("--task-id", "-i", default="", help="Ilgili gorev kimligi (opsiyonel)")
-    ap.add_argument("--kimden", "-k", default="", help="Gonderen ajan (varsayilan: HUGINN_AJAN veya ihsan)")
+    ap.add_argument(
+        "--kimden", "-k", default="",
+        help="Gonderen ajan (ZORUNLU: --kimden veya HUGINN_AJAN; bos birakilamaz)",
+    )
     args = ap.parse_args(argv)
 
     try:
