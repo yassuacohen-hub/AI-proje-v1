@@ -1,0 +1,262 @@
+{
+  "teklif": 20,
+  "eslesen_teklif": 11,
+  "eslesme": 16,
+  "firma": 1575,
+  "teklif_ozet": [
+    {
+      "id": 21000,
+      "no": "202500014",
+      "ulke": "TR",
+      "nace": [
+        "10"
+      ],
+      "ortak_arayan": true,
+      "bizim_firma": 18,
+      "sektorler": [
+        "gida"
+      ]
+    },
+    {
+      "id": 21001,
+      "no": "202500015",
+      "ulke": "TR",
+      "nace": [
+        "24",
+        "25",
+        "32",
+        "75",
+        "81",
+        "83"
+      ],
+      "ortak_arayan": true,
+      "bizim_firma": 431,
+      "sektorler": [
+        "metal ve metal i̇şleme752",
+        "metalurji ve makina sanayi"
+      ]
+    },
+    {
+      "id": 21002,
+      "no": "202500016",
+      "ulke": "TR",
+      "nace": [
+        "32",
+        "43",
+        "74",
+        "84"
+      ],
+      "ortak_arayan": false,
+      "bizim_firma": 215,
+      "sektorler": [
+        "metalurji ve makina sanayi"
+      ]
+    },
+    {
+      "id": 21006,
+      "no": "202500020",
+      "ulke": "PK",
+      "nace": [],
+      "ortak_arayan": true,
+      "bizim_firma": 0,
+      "sektorler": []
+    },
+    {
+      "id": 21010,
+      "no": "202500024",
+      "ulke": "NL",
+      "nace": [
+        "13",
+        "15",
+        "41",
+        "68"
+      ],
+      "ortak_arayan": true,
+      "bizim_firma": 1,
+      "sektorler": [
+        "tekstil"
+      ]
+    },
+    {
+      "id": 21011,
+      "no": "202500025",
+      "ulke": "TR",
+      "nace": [],
+      "ortak_arayan": false,
+      "bizim_firma": 0,
+      "sektorler": []
+    },
+    {
+      "id": 21012,
+      "no": "202500026",
+      "ulke": "TR",
+      "nace": [],
+      "ortak_arayan": false,
+      "bizim_firma": 0,
+      "sektorler": []
+    },
+    {
+      "id": 21018,
+      "no": "202500032",
+      "ulke": "CN",
+      "nace": [],
+      "ortak_arayan": true,
+      "bizim_firma": 0,
+      "sektorler": []
+    },
+    {
+      "id": 21019,
+      "no": "202500033",
+      "ulke": "TR",
+      "nace": [
+        "10",
+        "11",
+        "46",
+        "21",
+        "22",
+        "48"
+      ],
+      "ortak_arayan": true,
+      "bizim_firma": 18,
+      "sektorler": [
+        "gida"
+      ]
+    },
+    {
+      "id": 21021,
+      "no": "202500035",
+      "ulke": "TR",
+      "nace": [],
+      "ortak_arayan": false,
+      "bizim_firma": 0,
+      "sektorler": []
+    },
+    {
+      "id": 21022,
+      "no": "202500036",
+      "ulke": "TR",
+      "nace": [
+        "03",
+        "55",
+        "86",
+        "87"
+      ],
+      "ortak_arayan": true,
+      "bizim_firma": 0,
+      "sektorler": []
+    },
+    {
+      "id": 21030,
+      "no": "202500044",
+      "ulke": "TR",
+      "nace": [],
+      "ortak_arayan": false,
+      "bizim_firma": 0,
+      "sektorler": []
+    },
+    {
+      "id": 21032,
+      "no": "202500046",
+      "ulke": "DE",
+      "nace": [],
+      "ortak_arayan": true,
+      "bizim_firma": 0,
+      "sektorler": []
+    },
+    {
+      "id": 21034,
+      "no": "202500048",
+      "ulke": "BR",
+      "nace": [
+        "46",
+        "56"
+      ],
+      "ortak_arayan": false,
+      "bizim_firma": 18,
+      "sektorler": [
+        "gida"
+      ]
+    },
+    {
+      "id": 21036,
+      "no": "202500050",
+      "ulke": "TR",
+      "nace": [
+        "22",
+        "31",
+        "38"
+      ],
+      "ortak_arayan": true,
+      "bizim_firma": 5,
+      "sektorler": [
+        "mobilya"
+      ]
+    },
+    {
+      "id": 21037,
+      "no": "202500051",
+      "ulke": "TR",
+      "nace": [],
+      "ortak_arayan": true,
+      "bizim_firma": 0,
+      "sektorler": []
+    },
+    {
+      "id": 21038,
+      "no": "202600001",
+      "ulke": "TR",
+      "nace": [
+        "24",
+        "25",
+        "27",
+        "32"
+      ],
+      "ortak_arayan": false,
+      "bizim_firma": 438,
+      "sektorler": [
+        "elektrikli cihaz sanayi",
+        "metal ve metal i̇şleme752",
+        "metalurji ve makina sanayi"
+      ]
+    },
+    {
+      "id": 21039,
+      "no": "202600002",
+      "ulke": "TR",
+      "nace": [
+        "24",
+        "32",
+        "33"
+      ],
+      "ortak_arayan": false,
+      "bizim_firma": 431,
+      "sektorler": [
+        "metal ve metal i̇şleme752",
+        "metalurji ve makina sanayi"
+      ]
+    },
+    {
+      "id": 21048,
+      "no": "202600010",
+      "ulke": "TR",
+      "nace": [
+        "73"
+      ],
+      "ortak_arayan": false,
+      "bizim_firma": 0,
+      "sektorler": []
+    },
+    {
+      "id": 21049,
+      "no": "202600011",
+      "ulke": "TR",
+      "nace": [
+        "73",
+        "48"
+      ],
+      "ortak_arayan": false,
+      "bizim_firma": 0,
+      "sektorler": []
+    }
+  ]
+}

@@ -25,12 +25,13 @@
 | WK-03 | Proxy Rotation and IP Management | - | P2 | archive | - |
 | VERI-02 | [VERI] OSB ihale izleyicisini yaz → src/company_master/etl/scrapers/osb_tender_monitor.py (3s) | utku | P1 | aktif | - |
 | VERI-NACE-COKLU-01 | [VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s) | utku | P1 | aktif | src/company_master/etl/nace_coklu_ata.py |
-| VERI-KAYNAK-BAG-01 | [VERI] Firma-kaynak bagini yaz → source_records.company_id (4s) | utku | P0 | aktif | src/company_master/etl/kaynak_firma_bagla.py |
+| VERI-KAYNAK-BAG-01 | [VERI] Firma-kaynak bagini yaz → source_records.company_id (4s) | utku | P0 | review | src/company_master/etl/kaynak_firma_bagla.py |
 | VERI-SEKTOR-01 | [VERI] Sektor sozlugunu yaz → 9689 kayitta sektor alani (3s) | utku | P1 | plan | src/company_master/etl/sektor_normalize.py |
-| VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim icinde 102 ASO kaydi (2s) | utku | P2 | plan | src/company_master/etl/kaynak_sizinti_duzelt.py |
-| VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik erisim engelini denetle → IVERI_ERISIM_RAPORU.md (2s) | yasu | P1 | review | src/company_master/etl/scrapers/ivedik_scraper.py |
+| VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim icinde 102 ASO kaydi (2s) | utku | P2 | review | src/company_master/etl/kaynak_sizinti_duzelt.py |
 | ALTYAPI-AJAN-CAKISMA-01 | [ALTYAPI] Eszamanli ajan kacak kilit kapisini yaz → ajan_cakisma_kilidi.py (4s) | ihsan | P1 | plan | scripts/ajan_cakisma_kilidi.py |
 | VERI-OSTIM-TAM-TARAMA-01 | [VERI] OSTIM detay verisini denetle → firmalar_tamamlanmis.jsonl (2s) | yasu | P1 | review | data/ostim/tamamlama_2026-09-29/firmalar_tamamlanmis.jsonl, data/ostim/tamamlama_2026-09-29/rapor.md |
+| TSG-PILOT-20 | [OSINT] TSG 20 firma pilot OLCUMU -> plans/rapor_yasu_TSG-PILOT-20.md (1g) | yasu | P0 | review | plans/rapor_yasu_TSG-PILOT-20.md |
+| VERI-TOBB2B-KESISIM-01 | [VERI] TOBB2B teklif havuzunu OSB verisiyle arastir -> kesisim_raporu (5d) | yasu | P1 | review | data/pilots/VERI-TOBB2B-KESISIM-01 |
 
 ## Tamamlananlar
 
@@ -99,5 +100,6 @@
 | VERI-NACE-TEMIZ-01 | [VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s) | utku | 2026-09-28T19:38:48 |
 | VERI-NACE-KOLON-01 | [VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s) | utku | 2026-09-28T19:38:49 |
 | VERI-HAYALET-TEMIZ-01 | [VERI] Hayalet kayitlari sil → companies 4591 fazlalik satir (3s) | utku | 2026-09-28T19:38:49 |
+| VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik kaynak listesinden dusuruldu (KAHIN 2026-09-29) | yasu | - |
 | ALTYAPI-SKILL-YAPISI-01 | [ALTYAPI] Skill sistemini tek havuzda birlestir → SKILLS_INDEX.md yaz (6s) | yasu | 2026-09-29T15:51:21 |
 | ALTYAPI-TICARET-KANIT-01 | [ALTYAPI] Kanit katmanini yaz → skills/services/ticaret_sicili_kanit.py (2s) | yasu | 2026-09-29T15:51:21 |

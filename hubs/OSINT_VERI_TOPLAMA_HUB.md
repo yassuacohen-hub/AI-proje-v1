@@ -58,6 +58,8 @@ Düzey_3 = 1.427.688 TL/yıl; NACE + Vergi No + Ortaklar + Temsilciler kapsar.
 | TASK_ID | Sonuc | Tarih |
 |---|---|---|
 | VERI-OSB-Tazelik-01 | 13 Ankara OSB icin ayri veri seti uretildi: 8.987 kayit (data/osb/). Polatli Ticaret tarandi (+8 firma). Supabase YAZILMADI - onay bekliyor. 3 site DNS cozulmuyor, Sereflikochisar liste yayinlamiyor. Rapor: data/orchestrator/osb_rapor_2026-09-29.md | 2026-09-29 |
+| VERI-TOBB2B-KESISIM-01 | SANAYI/TOBB2B degerlendirmesi genisletildi. sanayi.org.tr: 28 API ucu denendi, HEPSI 401 -> kamuya acik veri YOK, lisansli zenginlestirme adayi. tobb2b.org.tr: SSL gecersiz ama http:// ile 200, teklif_goster.php?id= ACIK. PILOT 20 teklif: 11/20 eslesti, 1.575 firma. KRITIK BULGU: 8.987 kaydin NACE kodu sadece 12sinde dolu (%0.1) -> sektor eslestirmesi METIN ile kurulur, NACE ile kurulamaz. Cikti: data/pilots/VERI-TOBB2B-KESISIM-01/ozet.json | 2026-09-30 |
+| TSG-PILOT-20 | **7 kalemin 7si sayiyla doldu.** 20/20 firma, 320 ilan, 0 hata. 1) CAPTCHA 1/1 (GIRIS basina zorunlu, sorgu basina degil). 2) Oturum 9,9 sn / 20 sorgu dustu. 3) Sure min 0,29 / medyan 0,37 / maks 1,54 sn -> 10 dk SLA'da ~1.600 firma. 4) **ILAN TURU ETIKETLERI: 65 cesit / 320 adet** (ILAN_TURU_ESLEME buradan dolar; 3 yazim bicimi var, birlestirme TSG-04'e kalmali). 5) **Icra/iflas ayri kutu YOK** - sadece etiket icinde. 6) Tarih araligi DESTEKLENIYOR (Tarih1/Tarih2), siniri bilinmiyor. 7) **sicil->VKN 0/20 (%0)** - ucretsiz katmanda VKN/MERSIS sutunu YOK, yapisal olarak kapanmiyor. Yan bulgu: sunucu CAPTCHA'yi 'Content-Type: text/html' gonderiyor ama govde gercek PNG. Test 65 passed 0 failed. Kanit 320 dosya. Rapor: plans/rapor_yasu_TSG-PILOT-20.md | 2026-09-30 |
 
 ## Ilgili Nodlar (Ust Hub)
 - [[Huginn Data Insights/hubs/OSINT_INDEX]]

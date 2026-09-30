@@ -2881,5 +2881,49 @@
     ],
     "teslim_tarihi": "2026-09-29T20:28:55",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "VERI-OSB-Tazelik-01",
+    "ajan": "yasu",
+    "ozet": "13 OSB veri seti hazir: 8.987 kayit, slug tekil. Polatli Ticaret tarandi (+8, tekil %100). Supabase YAZILMADI - onay bekliyor. 3 site DNS cozulmuyor, Sereflikochisar liste yayinlamiyor. Rapor: data/orchestrator/D-305_osb_rapor_2026-09-29.md",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-30T01:28:31",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "VERI-KAYNAK-SIZINTI-01",
+    "ajan": "utku",
+    "ozet": "OSTIM kaynagindaki 1200 kaynak=NULL + 28 kaynak=aso.org.tr duzeltildi, tum 9513 kayit kaynak=ostim.org.tr olarak guncellendi",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-30T01:55:17",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "VERI-TOBB2B-KESISIM-01",
+    "ajan": "yasu",
+    "ozet": "SANAYI 28 API 401 (kamuya acik veri yok); TOBB2B http:// ile acik. 20 teklif pilotu: 11/20 eslesti, 1575 firma. NACE kodu %0.1 dolu -> eslestirme sektor metniyle kurulur. Cikti: data/pilots/VERI-TOBB2B-KESISIM-01/ozet.json",
+    "ciktilar": [
+      "data/pilots/VERI-TOBB2B-KESISIM-01/ozet.json"
+    ],
+    "teslim_tarihi": "2026-09-30T02:27:21",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "VERI-KAYNAK-BAG-01",
+    "ajan": "utku",
+    "ozet": "1047 yetim kayit analiz edildi: 8 eslesme (isim kisaslamalari duzeltildi), 1039 yetim kaldi (vergi_no yok, sirketler companies tablosunda yok). OSTIM 827, BASKENT 211, ASO 1.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-09-30T02:30:08",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "TSG-PILOT-20",
+    "ajan": "yasu",
+    "ozet": "7 kalemin 7si doldu. 20/20 firma, 320 ilan, 0 hata. 1) CAPTCHA 1/1 giris basina zorunlu. 2) Oturum 9,9 sn / 20 sorgu dustu. 3) Sure min 0,29 medyan 0,37 maks 1,54 sn -> 10 dk SLA'da ~1.600 firma. 4) ILAN TURU ETIKETLERI 65 cesit / 320 adet; birlestirme TSG-04'e kalmali. 5) Icra/iflas ayri kutu YOK. 6) Tarih araligi destekleniyor, siniri bilinmiyor. 7) sicil->VKN 0/20 = %0, VKN/MERSIS sutunu yapisal olarak yok. Test 65 passed 0 failed. Kanit 320 dosya.",
+    "ciktilar": [
+      "plans/rapor_yasu_TSG-PILOT-20.md"
+    ],
+    "teslim_tarihi": "2026-09-30T02:55:55",
+    "durum": "bekliyor"
   }
 ]

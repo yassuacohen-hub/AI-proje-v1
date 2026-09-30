@@ -32,7 +32,7 @@ sys.path.insert(0, str(KOK))
 if str(Path(__file__).resolve().parent) not in sys.path:
     sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-# Windows konsolu cp1254; "→" ve Türkçe karakterler patlamasın.
+# Windows konsolu cp1254; "->" ve Türkçe karakterler patlamasın.
 for _akis in (sys.stdout, sys.stderr):
     if hasattr(_akis, "reconfigure"):
         try:
@@ -77,7 +77,7 @@ AJANLAR = trigger.AJANLAR
 ARCHITECT_AJANLARI = ("ihsan", "utku")
 ARCHITECT_HATIRLATMA = "⚠️ Bu görev Architect modunda açılmalıdır."
 _BASLIK = re.compile(
-    r"^\[(?P<alan>[A-ZĞÜŞİÖÇ]+)\]\s+(?P<fiil>\S+).*?→.+\((?P<sure>\d+[sd])\)$"
+    r"^\[(?P<alan>[A-ZĞÜŞİÖÇ]+)\]\s+(?P<fiil>\S+).*?->.+\((?P<sure>\d+[sd])\)$"
 )
 
 
@@ -222,7 +222,7 @@ def cmd_abrakadabra(args: argparse.Namespace) -> int:
 def _baslik_coz(args: argparse.Namespace) -> str | None:
     """--baslik-b64 verilmişse çözer, yoksa --baslik'i döner. Hata metni döner ya da None.
 
-    cmd.exe cp1254 olduğu için "→" ve Türkçe karakterler doğrudan argüman
+    cmd.exe cp1254 olduğu için "->" ve Türkçe karakterler doğrudan argüman
     olarak geçirildiğinde bozulur; base64 bu katmanı atlatır.
     """
     b64 = getattr(args, "baslik_b64", None)
@@ -515,7 +515,7 @@ def main() -> int:
     p_abra.set_defaults(func=cmd_abrakadabra)
 
     args = parser.parse_args()
-    # D-33 ajan adı kuralı: "Ajan kilo" / "Kilo" / "kilo_code" → "kilo".
+    # D-33 ajan adı kuralı: "Ajan kilo" / "Kilo" / "kilo_code" -> "kilo".
     if getattr(args, "ajan", None):
         try:
             args.ajan = trigger.ajan_normalize(args.ajan)

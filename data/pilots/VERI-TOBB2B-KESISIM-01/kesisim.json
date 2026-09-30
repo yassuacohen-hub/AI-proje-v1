@@ -1,0 +1,210 @@
+[
+  {
+    "teklif_id": 21000,
+    "teklif_no": "202500014",
+    "ulke": "TR",
+    "ortak_arayan": true,
+    "nace_bolum": "gida",
+    "bizim_sektor": "gida",
+    "bizim_osb": [
+      "baskent"
+    ],
+    "bizim_firma_sayisi": 18,
+    "ornek_firma": "A.H.M EVCİL HAYVAN VE HAYVAN ÜRÜNLERİ TEKS. KİM. İNŞ. DAN. S"
+  },
+  {
+    "teklif_id": 21001,
+    "teklif_no": "202500015",
+    "ulke": "TR",
+    "ortak_arayan": true,
+    "nace_bolum": "metal",
+    "bizim_sektor": "metal ve metal i̇şleme752",
+    "bizim_osb": [
+      "aso2"
+    ],
+    "bizim_firma_sayisi": 1,
+    "ornek_firma": "ÖZBEN SAVUNMA LİMİTED ŞİRKETİ"
+  },
+  {
+    "teklif_id": 21001,
+    "teklif_no": "202500015",
+    "ulke": "TR",
+    "ortak_arayan": true,
+    "nace_bolum": "metal",
+    "bizim_sektor": "metalurji ve makina sanayi",
+    "bizim_osb": [
+      "baskent"
+    ],
+    "bizim_firma_sayisi": 215,
+    "ornek_firma": "3DTİM ELEKTRONİK A.Ş."
+  },
+  {
+    "teklif_id": 21001,
+    "teklif_no": "202500015",
+    "ulke": "TR",
+    "ortak_arayan": true,
+    "nace_bolum": "makine",
+    "bizim_sektor": "metalurji ve makina sanayi",
+    "bizim_osb": [
+      "baskent"
+    ],
+    "bizim_firma_sayisi": 215,
+    "ornek_firma": "3DTİM ELEKTRONİK A.Ş."
+  },
+  {
+    "teklif_id": 21002,
+    "teklif_no": "202500016",
+    "ulke": "TR",
+    "ortak_arayan": false,
+    "nace_bolum": "makine",
+    "bizim_sektor": "metalurji ve makina sanayi",
+    "bizim_osb": [
+      "baskent"
+    ],
+    "bizim_firma_sayisi": 215,
+    "ornek_firma": "3DTİM ELEKTRONİK A.Ş."
+  },
+  {
+    "teklif_id": 21010,
+    "teklif_no": "202500024",
+    "ulke": "NL",
+    "ortak_arayan": true,
+    "nace_bolum": "tekstil",
+    "bizim_sektor": "tekstil",
+    "bizim_osb": [
+      "baskent"
+    ],
+    "bizim_firma_sayisi": 1,
+    "ornek_firma": "İNOVA DERİ TEKSTİL SANAYİ VE TİCARET A.Ş."
+  },
+  {
+    "teklif_id": 21019,
+    "teklif_no": "202500033",
+    "ulke": "TR",
+    "ortak_arayan": true,
+    "nace_bolum": "gida",
+    "bizim_sektor": "gida",
+    "bizim_osb": [
+      "baskent"
+    ],
+    "bizim_firma_sayisi": 18,
+    "ornek_firma": "A.H.M EVCİL HAYVAN VE HAYVAN ÜRÜNLERİ TEKS. KİM. İNŞ. DAN. S"
+  },
+  {
+    "teklif_id": 21034,
+    "teklif_no": "202500048",
+    "ulke": "BR",
+    "ortak_arayan": false,
+    "nace_bolum": "gida",
+    "bizim_sektor": "gida",
+    "bizim_osb": [
+      "baskent"
+    ],
+    "bizim_firma_sayisi": 18,
+    "ornek_firma": "A.H.M EVCİL HAYVAN VE HAYVAN ÜRÜNLERİ TEKS. KİM. İNŞ. DAN. S"
+  },
+  {
+    "teklif_id": 21036,
+    "teklif_no": "202500050",
+    "ulke": "TR",
+    "ortak_arayan": true,
+    "nace_bolum": "mobilya",
+    "bizim_sektor": "mobilya",
+    "bizim_osb": [
+      "baskent"
+    ],
+    "bizim_firma_sayisi": 5,
+    "ornek_firma": "DK KARAVAN MOBİLYA İNŞAAT SANAYİ TİCARET LTD. ŞTİ."
+  },
+  {
+    "teklif_id": 21038,
+    "teklif_no": "202600001",
+    "ulke": "TR",
+    "ortak_arayan": false,
+    "nace_bolum": "metal",
+    "bizim_sektor": "metal ve metal i̇şleme752",
+    "bizim_osb": [
+      "aso2"
+    ],
+    "bizim_firma_sayisi": 1,
+    "ornek_firma": "ÖZBEN SAVUNMA LİMİTED ŞİRKETİ"
+  },
+  {
+    "teklif_id": 21038,
+    "teklif_no": "202600001",
+    "ulke": "TR",
+    "ortak_arayan": false,
+    "nace_bolum": "metal",
+    "bizim_sektor": "metalurji ve makina sanayi",
+    "bizim_osb": [
+      "baskent"
+    ],
+    "bizim_firma_sayisi": 215,
+    "ornek_firma": "3DTİM ELEKTRONİK A.Ş."
+  },
+  {
+    "teklif_id": 21038,
+    "teklif_no": "202600001",
+    "ulke": "TR",
+    "ortak_arayan": false,
+    "nace_bolum": "makine",
+    "bizim_sektor": "metalurji ve makina sanayi",
+    "bizim_osb": [
+      "baskent"
+    ],
+    "bizim_firma_sayisi": 215,
+    "ornek_firma": "3DTİM ELEKTRONİK A.Ş."
+  },
+  {
+    "teklif_id": 21038,
+    "teklif_no": "202600001",
+    "ulke": "TR",
+    "ortak_arayan": false,
+    "nace_bolum": "elektronik",
+    "bizim_sektor": "elektrikli cihaz sanayi",
+    "bizim_osb": [
+      "baskent"
+    ],
+    "bizim_firma_sayisi": 7,
+    "ornek_firma": "ELİN ELEKTRİK İNŞAAT MÜŞAVİRLİK PROJE TAAHHÜT TİCARET VE SAN"
+  },
+  {
+    "teklif_id": 21039,
+    "teklif_no": "202600002",
+    "ulke": "TR",
+    "ortak_arayan": false,
+    "nace_bolum": "metal",
+    "bizim_sektor": "metal ve metal i̇şleme752",
+    "bizim_osb": [
+      "aso2"
+    ],
+    "bizim_firma_sayisi": 1,
+    "ornek_firma": "ÖZBEN SAVUNMA LİMİTED ŞİRKETİ"
+  },
+  {
+    "teklif_id": 21039,
+    "teklif_no": "202600002",
+    "ulke": "TR",
+    "ortak_arayan": false,
+    "nace_bolum": "metal",
+    "bizim_sektor": "metalurji ve makina sanayi",
+    "bizim_osb": [
+      "baskent"
+    ],
+    "bizim_firma_sayisi": 215,
+    "ornek_firma": "3DTİM ELEKTRONİK A.Ş."
+  },
+  {
+    "teklif_id": 21039,
+    "teklif_no": "202600002",
+    "ulke": "TR",
+    "ortak_arayan": false,
+    "nace_bolum": "makine",
+    "bizim_sektor": "metalurji ve makina sanayi",
+    "bizim_osb": [
+      "baskent"
+    ],
+    "bizim_firma_sayisi": 215,
+    "ornek_firma": "3DTİM ELEKTRONİK A.Ş."
+  }
+]
