@@ -35,6 +35,7 @@
 | Red kalıbı eklenince meşru cevap "red" sanılıyor | `yapmam`/`uygulamam` gibi geniş kökler | Kök eklerken **önce** yanlış pozitif mandalı yazılır |
 | `python -c` kırma testi hiçbir şey ölçmüyor, exit 0 | Tek satır kurgusu sessiz düşüyor | Kırma testi de kırılarak doğrulanır (D-256/4) |
 | Commit çıktısı `[chore/monorepo-merge]`, `git status` `## master` | Teşhis edilmedi — borç #48, 8. görünüm | Açık |
+| `git add` → `paths are ignored by .gitignore: Huginn Data Insights` | **İki ayrı repo var** (D-255); dış kök vault'u yok sayar | Vault dosyası vault içinden commit edilir: `cd "Huginn Data Insights" && git add ...` |
 
 ## Yapılacaklar (emir #47-b · 2026-10-01)
 
