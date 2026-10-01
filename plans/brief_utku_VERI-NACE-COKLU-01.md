@@ -101,7 +101,13 @@ veritabanında ölçtüm:
 Kabul ölçütü 1 ("satır > 0") teknik olarak sağlandı ama **anlamsız**: 7595 dolu
 `raw_nace`'in %99.6'sı yazılamadı. Kod doğru çalışıyor; **bağlanacak anahtar yok**.
 
-### 6.1 Kök neden — şemada firma↔kaynak bağı YOK
+### 6.1 ~~Kök neden — şemada firma↔kaynak bağı YOK~~ — BU TEŞHİS YANLIŞTI (2026-10-01)
+
+> **DÜZELTME (ihsan, 2026-10-01):** Aşağıdaki bölüm **geçersizdir.**
+> `source_records.company_id` kolonu **vardır** — D-263 ile 2026-09-28'de kuruldu.
+> Bu yüzden verdiğim RED kararı **yanlış gerekçeliydi; utku haklıydı.**
+> Geçerli tavan 33 değil **7065 satır** → bkz. §6.4. Hatam ajan chat'e yazıldı (#16).
+> Bölüm tarihsel kayıt olarak duruyor, karar dayanağı olarak **kullanılmaz.**
 
 `source_records` kolonları: `source_record_id, source_id, external_id, raw_name,
 raw_address, raw_phone, raw_email, raw_website, raw_tax_number, raw_nace,
@@ -124,11 +130,13 @@ asıl önkoşul olan firma↔kaynak bağını atladım. Utku brife uydu, brif ek
 2. **Tekrar** — `import` ve `create_engine` blokları dosyada iki kez
    (satır ~9-38 ve ~96-99).
 
-### 6.4 Yeni sıra
+### 6.4 Yeni sıra (D-263 güncellemesi, 2026-10-01)
 
-COKLU-01 **askıya alındı**. Önce `VERI-KAYNAK-BAG-01`: `source_records.company_id`
-kolonu + ETL eşleme yazımı. O bitmeden bu görevin tavanı 33 satırdır, kim yazarsa
-yazsın.
+~~COKLU-01 askıya alındı~~ — **artık değil.** `VERI-KAYNAK-BAG-01` D-263 ile
+2026-09-28'de KAPANDI (`source_records.company_id` kolonu + trigger kuruldu).
+Canlı ölçüm (2026-10-01): `company_id` VE `raw_nace` ikisi de dolu = **7065
+satır** — eski 33 tavanının yerine geçen gerçek tavan budur. Önkoşul bitti,
+iş başlayabilir.
 
 ---
 
