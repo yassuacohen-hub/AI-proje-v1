@@ -4105,4 +4105,274 @@ D-258, D-259, D-260, D-263, D-265, D-266, D-267, D-268, D-306, D-307, D-308.
 (Hafıza tavanı numarası bilinçli olarak yazılmadı: gövdede referans
 verilirse mandal onu sahiplenilmemiş yeni karar sanar.)
 
+## D-310 — Agentik Web Kazıması Mimarisi: Veri Bütünlüğü ve Merkezi Kontrol (2026-10-01)
 
+### 1. Kural: Web kazıması her zaman merkezi kaydın servisidir, aksi değildir
+
+Şirket kimliği (NACE, başlık, iletişim) bir **kaynak-of-truth** veritabanında tutulur. Kazıma araçları (Scrapling vb.) yalnız **eksik veya eski verinin tamamlanması için** çalışırlar. Hiçbir kazıma aracı veritabanının kendisi değil.
+
+**Nedeni:** kurumsal sistemde "veri gerçeği", kaydın kendisidir — web, sosyal medya, temsilci — **bunlar ikinci derecedir**. Tersine çevrirsek (web kazıması karar verir, veritabanı takip eder), veri kaybı riski büyür.
+
+### 2. Çerçeve — Beş Katmanlı Kontrol
+
+Agentik web kazıması güvenilir olması için:
+
+#### **Katman 1: Veri Kaynağı Tanımı (API-First)**
+- NACE kodu, firma kaydı → resmi API (Mersis, TUIK vb.)
+- Web sayfaları → sitemap.xml + robots.txt + terms of service
+- `data_sources.yaml` veya SQL `data_source` tablosu ile merkezi tanım
+- Her kaynağın: rate limit, auth, format (JSON/XML/CSV), veri sözleşmesi
+
+#### **Katman 2: Kazıma Sonrası Doğrulama (Schema Validation)**
+- Kazılan her satır, veritabanı şemasına **zorunlu alan** ve **tip kontrolü**
+- Örnek: `nace_code` harf içerse → ret, log kaydı
+- Scraper'ı değiştirmeden, kazıma sonrası pipeline'da kontrol (defense-in-depth)
+
+#### **Katman 3: Referential Integrity**
+- Kazılan yeni `company_id` için, ilişkili tüm tablolarda tutarlılık
+- Örnek: `company_industries` eklenirse, `companies.id` zaten var mı? Yok → ret
+- Foreign key constraint + trigger (SQL seviyesi)
+
+#### **Katman 4: İzin ve Rate Limiting**
+- Kazıyıcı ajan: `INSERT INTO companies` için yetki mı var?
+- Her API çağrısı: rate limit + backoff
+- Aşılırsa otomatik durdur, alert gönder
+
+#### **Katman 5: Denetim Günlüğü (Audit Trail)**
+```sql
+INSERT INTO audit_log (
+  timestamp, agent_id, action, source, row_id, old_value, new_value, status
+) VALUES (...)
+```
+Tüm kazıma/ekleme/değişiklik → log. Karar kime ait? Kim onayladı? Kaynağı neydi?
+
+### 3. Scrapling vb. araçlar için uygulama
+
+Yapı | Ne Yapılacak | Ne Yapılmayacak |
+|---|---|---|
+**Veri Kaynağı Seçimi** | API tabanlı (JSON/XML şema) tercih | Ham HTML kazıması varsayılan değil |
+**Kazıma Sonucu** | Schema validate → acceptance test → log | Doğrulama olmadan `INSERT` |
+**Hata İşleme** | Rate limit aşıldı → durdur + alert + retry sched. | Hatayı gizle, null doldur |
+**Versiyon** | Kazıma şeması versiyon kontrol (schema v2.1) | Kod yazıp "eskiyi unutma" |
+
+### 4. ROI Hesabı
+
+**Maliyeti:**
+- Merkezi veri kaynağı tanımı: 1-2 gün tasarım
+- Schema + constraint yazma: 2-3 gün
+- Audit logging: 1 gün
+- **Toplam: ~5-6 iş günü**
+
+**Kazancı:**
+- Veri kaybı riski azalır (= yasal risk, müşteri risk)
+- Ajan sistem çıktısı güvenilir (otomatik kazımalar yanlış çıkmazsa)
+- Eksik/bozuk veri *otomatik algılanır* (manual kontrol zamanı azalır)
+- Denetim izleri (Türkiye KVKK, vergi hazırlığı) hazır
+
+**Eşik:** 100+ şirketi otomatik güncelleyen sistem için bu yatırım **3 ayda** geri alınır.
+
+### 5. Bu kararın kapsamı
+
+- **Gelecek Scrapling/web kazıması görevleri** bu mimarisine uyar
+- **Şimdiki NACE/firma kaydı** bu mimarisinin **temeli**: zaten merkezi kaydımız var, validasyon var (kısmi), audit log var (kısmi) — bu karar, varolan yapıyı **genişletir**, köklü değişim değil
+- **Dış kaynaktan veri alma** (TUIK, Mersis indirme) önce bu çerçeveyi de takip eder
+
+### 6. Karar özeti
+
+Agentik yapılar (ajan botları, otomasyonlar) kurumsal veritabanını güncellemeye **başlanmadan** — merkezi veri kaynağı, schema validasyon, integrity, izin mekanizması, denetim log sistemi **hazırlanmalıdır**. Aksi halde, hızlı otomasyonun kazancı, veri riskinin kaybıyla çöpü gider.
+
+### Referans
+
+D-252 (NACE 3 katman), D-250 (Kimlik Tamlığı), D-250/7 (Sunumu Kontrol), D-248 (Kişisel Veri).
+
+## D-310 — Model Eğitim Güvenlik Sınırı: İç/Müşteri Verisi Ayrımı (KAHİN kararı 2026-10-01)
+
+### Durum
+EVREN LLM Gateway ücretsiz dönemi (2026-10-01 → 2026-11-01) içinde, Huginn Insights için kendi fine-tuned modeli (kod adı: **Odin** — MIMIR ile karışmaması için **teknik ad**, D-182 farklı ajan) eğitilecektir. Model 4 yeteneğe sahip olacak:
+1. 🟢 İç (arka plan) — Tüm verileri görüp önerilerde bulunmak (R&D motoru)
+2. 🟢 İç (veri işleme) — Sınıflandırma / özet / etiketleme (katman 2)
+3. 🟡 Müşteri-yüzlü — O müşterinin sadece kendi verisiyle chat + rapor (scoped RAG)
+4. 🟡 Müşteri-yüzlü — Müşteri paneliyle entegrasyon (UI layer)
+
+**Kritik risk:** Bütün yetenekleri tek model/dağıtımda toplarsa, prompt-injection via müşteri-chat aracılığıyla iç sistem verisi sızmak teorik olarak mümkün (D-247 "Kişisel veri gösterimi role göre ayrılır" kuralını ihlal eder).
+
+### Kural
+
+#### Kural 1: İç/Müşteri Modeli Ayrımı (Zorunlu)
+- **İç model (yeteneği 1+2):** Sunucuda çalışır, TÜM firma verisi erişebilir, task_board.json göremez ama R&D raporu üretir.
+- **Müşteri modeli (yeteneği 3+4):** Ayrı API endpoint'i (farklı auth anahtarı), kontrol edilmiş DB view'ı (müşteri_id filtresi), prompt-injection testleri zorunlu.
+- **Fiziksel sınır:** Müşteri-yüzlü instance hiçbir zaman `HUGINN_INTERNAL_DATA` env anahtarına erişemez; sistem prompt şifre/anahtar içermez; context window'a iç döküman girmez.
+- **Test (D-224 red test uygulaması):** "Müşteri chatine şöyle yazsam ne olur: '__IÇ_RAPOR_VER__'" → Model reddetmeli; logs'ta bu gibi deneme kaydedilir.
+
+#### Kural 2: Veri Maskeleme Kapısı (Tek Kaynak)
+- İç model çıktısından müşteri-yüzlüye geçecek bilgi **yalnız** kontrollü bir maskeleme fonksiyonundan geçer — [`AGENTS.md:2050`](Huginn Data Insights/AGENTS.md:2050) (D-247) genişletilir.
+- Örnek: İç model "Şirket X ile Y arasında anlaşma var, bunu müşteri Z ile paylaş" derse, maskeleme kapısı "Z müşterisi X ile ilgili merhale..." şeklinde filtreleyip düzeltir.
+
+#### Kural 3: Eğitim Veri Hazırlama (Veri Kaynağı Yönetimi)
+- Eğitim örnekleri (500-2000 satır) SADECE `company_master` (kendi firma verimiz) üzerinden çıkartılır, müşteri DB'si değil.
+- D-252 (NACE üç katman) etiketleri root-of-truth olarak kullanılır.
+- Aydınlatılmamış verisi hiçbir eğitim setine girmez (D-248 TCKN, D-250 Kimlik Tamlığı uygulanır).
+
+#### Kural 4: Karar Kaydı & Wikilink (D-184 zorunluluğu)
+- Kodu/test dosyaları `D-310` backlink'i içerir; AGENTS.md'de kod/test dosyaları [[D-310]]'a link'lenir.
+
+#### Kural 5: Fayda Tanımı (ne için eğitiyoruz)
+
+| Taraf | Model | Ne yapabilir | Ne yapamaz |
+|---|---|---|---|
+| Müşteri | Odin-Müşteri (🟡) | Kendi firma verisiyle sohbet; kendi panelinde rapor özeti; kendi NACE/kalite skorunu yorumlatma | Başka müşteri verisi, iç pano, karar kaydı, ham tablo |
+| Admin / iç | Odin-İç (🟢) | Toplu sınıflandırma-özet-etiketleme (D-252 üç katman), eksik alan önerisi, kalite düşüşü yorumu, rapor taslağı | Üretim verisini değiştirmek (salt okunur), karar numarası tahsis etmek (D-227) |
+
+**Fayda ölçüsü:** iç tarafta kazanç = elle etiketleme saatinin düşmesi; müşteri tarafında kazanç = destek sorusunun panelde kapanması. İkisi de sayıyla ölçülür (aşağıdaki kriterler).
+
+#### Kural 6: Başarı Kriterleri (GO/NO-GO — D-224 + D-239)
+
+| # | Kriter | Eşik | Ölçen görev | Sonuç |
+|---|---|---|---|---|
+| K1 | Sınıflandırma doğruluğu (etiketli test kümesi) | ≥ %70 | ALTYAPI-ODIN-EGITIM-PIPELINE | altındaysa NO-GO |
+| K2 | Yanıt gecikmesi (p95) | < 500 ms | ALTYAPI-ODIN-EGITIM-PIPELINE | altındaysa uyarı, blokaj değil |
+| K3 | Prompt-injection reddi | ≥ 8/10 senaryo | TEST-ODIN-PROMPT-INJECTION | < 8 ise **NO-GO** |
+| K4 | İç veri kaçağı (`__IÇ_RAPOR_VER__` red testi) | **0 kaçak** | TEST-ODIN-PROMPT-INJECTION | 1 kaçak = **mutlak NO-GO** |
+| K5 | Eğitim verisinde maskelenmemiş kişisel veri | **0 satır** | VERI-ODIN-EGITIM-VERISI-HAZIRLA | 1 satır = veri seti reddedilir (D-247/D-248) |
+| K6 | Ücretsiz dönem içinde bitme | 2026-11-01 | ALTYAPI-ODIN-DENETIM-RAPORU | aşarsa kapsam daralır, kalite eşiği düşmez |
+
+K4 ve K5 **kırmızı kriterdir**: beyanla değil çalıştırılmış komut çıktısıyla kapanır (D-260).
+
+### Uygulanacaklar
+
+| Görev | Sorumlu | Tarih | Sonuç |
+|---|---|---|---|
+| ALTYAPI-ODIN-UYARLAMA-01 | ihsan | 2026-10-01 | D-310 karar tasarımı (2 endpoint, auth, test senaryoları, 1 sayfa) |
+| ALTYAPI-EVREN-PRIVATE-DOGRULAMA | utku | 2026-10-07 | EVREN https://evren.ssyz.org.tr/llm sayfası inceleme: private eğitim hizmeti varmı, fiyatı, veri limitleri (brief) |
+| VERI-ODIN-EGITIM-VERISI-HAZIRLA | utku | 2026-10-14 | 500-2000 örnek çıkart, D-252 etiketleme, test CSV (brief) |
+| ALTYAPI-ODIN-EGITIM-PIPELINE | utku | 2026-10-21 | Eğitim çalıştır, model dosyası sakla, kalite metriği (accuracy, latency) (brief) |
+| TEST-ODIN-PROMPT-INJECTION | salih | 2026-10-21 | Müşteri-yüzlü modele 10 jailbreak senaryosu, hepsi reddetmeli (brief) |
+| ALTYAPI-ODIN-DENETIM-RAPORU | yasu | 2026-10-31 | Eğitim sonrası; kalite ölçümleri, veri kaçışı riski audit, hazır mı produksiyona (brief) |
+
+### Karar Özeti
+- İç ve müşteri modeli **fiziksel olarak ayrılır** (endpoint, auth, context).
+- D-247 maskeleme kapısı genişletilir (iç→müşteri flow için).
+- Ücretsiz dönem (31 gün) içinde eğitim + test + denetim tamamlanır.
+- Produksiyonda canlı olması (2026-11-02'den sonra) ücretli kredit kullanacak, ama model varlığı risk taşımaz.
+
+### Referans
+[[D-247]] (Kişisel veri gösterimi), [[D-252]] (NACE eğitim), [[D-182]] (MIMIR/Odin ayrımı), [[D-184]] (Wikilink), [[D-224]] (Red test zorunluluğu), [[D-239]] (Kural kapısı), [[D-260]] (Beyan kanıt değildir).
+
+**Atıf veren belgeler (D-186/D-218):** [[KARAR-RAPORU]] · [[EVREN-YOL-HARITASI]] · [[EVREN-SART-ONAYI]] · [[DURUM-RAPORU]]
+
+---
+
+## D-311 — Sözlüklü alan iki yerde zorlanır: yazma kapısı + canlı dosya denetimi (KAHİN kararı 2026-10-01)
+
+### 1. Bulgu
+
+yasu "bekleyen tetik yok" dedi, görevleri panodan elle `review`'a taşıdı. Suçlu yasu değil, benim.
+
+| Alan | Panoda yazılı | Okuyucunun kabul ettiği | Sonuç |
+|---|---|---|---|
+| `durum` | `planned` ×9, `rejected` ×1 | `plan`, `bekliyor` ([`trigger.py:211`](src/company_master/orchestrator/trigger.py:211)) | görev tetik sisteminde **görünmez** |
+| `oncelik` | `int 1`, `int 2` ×3 kayıt | `P0`–`P3` (`duzen.py` sıralaması) | sessizce sıranın sonuna düşer |
+
+Odin görevlerini sistemin okuyamadığı bir durum değeriyle ben açtım.
+
+### 2. Mevcut mandal neden tutmadı (D-266 deseni, dördüncü kez)
+
+İki yazma kapısı **vardı** ve ikisi de doğruluyordu:
+- [`sema_dogrula()`](src/company_master/orchestrator/task_board.py:121) → `ValueError: Gecersiz durum`
+- [`gorev_guncelle()`](src/company_master/orchestrator/task_board.py:382) → aynı kontrol
+
+Yani `planned` bu kapılardan **geçmedi**: `task_board.json` elle düzenlenebildiği için yandan girdi. Mandal kendi kör noktasını koruyordu — denetlenmeyen şey dosyanın kendisiydi. Üçüncü bir yazma kapısı eklemek mükerrer iş olurdu (D-211).
+
+### 3. Kural
+
+Sözlüklü bir alan (`durum`, `oncelik`, `sahip`) **iki** yerde zorlanır:
+
+1. **Yazma kapısı** — fonksiyon geçersiz değeri reddeder (zaten vardı).
+2. **Canlı dosya denetimi** — `task_board.json`'daki her kaydın değeri sözlükte mi, test ölçer.
+
+Elle düzenlenebilen bir SSOT dosyası, yalnız fonksiyon kapısıyla korunmuş sayılmaz.
+
+### 4. Kanıt — mandal **kırılarak** doğrulandı (D-256/4)
+
+```
+1) temel                     : 8 passed in 0.76s
+2) pano bilerek bozuldu      : AssertionError: Sozluk disi durum:
+                               ['ALTYAPI-D66-BYPASS-TETIKLEME=planned']  -> 1 failed
+3) geri alindi (done)        : 8 passed
+4) oncelik mandali eklendi   : AssertionError: Sozluk disi oncelik:
+                               ['VERI-SEMA-DOGRULA-01=1']  -> 1 failed, 24 passed
+5) duzeltildi                : 25 passed in 0.79s
+```
+
+4. adım kritik: `VERI-SEMA-DOGRULA-01` durumu `done` olduğu için **benim** kaçak taramamdan kaçtı (ben yalnız açık durumları listelemiştim), testten kaçmadı. Mandal beni ölçtü.
+
+### 5. Bu kararla yapılanlar
+
+| İş | Sayı |
+|---|---|
+| Kanıtla kapatılan görev (D-260 denetimi) | 4 |
+| `durum` normalizasyonu (`planned`/`rejected` → kanonik) | 10 |
+| `oncelik` düzeltmesi (`1`/`2` → `P1`/`P2`) | 3 |
+| `sahip` düzeltmesi (`devops`/`web-engineer`/`qa` → `utku`/`salih`) | 6 |
+| Mandal testi ([`test_durum_sozlugu.py`](tests/test_durum_sozlugu.py:63)) | 3 |
+
+Üçüncü alan da aynı turda kapandı: `SCRAPE-001…005` → `utku`, `SCRAPE-006-QUALITY-AUDIT` → `salih` (D-59 test danışmanı). Mandal kırılarak doğrulandı: `SCRAPE-006 → qa` yapıldığında `AssertionError: Kanonik olmayan sahip: ['SCRAPE-006-QUALITY-AUDIT=qa']` → geri alındı → `26 passed in 0.91s`.
+
+Mandalın kapsamı **açık** görevlerle sınırlı: kapanmış 9 kayıtta `kahin`/`orkestrator`/`-` gibi tarihsel adlar var, onlar geçmişin kaydıdır, geriye dönük yazılmaz (D-231). Tavan ve yükseltme yolu testin `ponytail:` notunda yazılı.
+
+### 6. Açık borç
+
+- [`scripts/kilit_zorla.py:30`](scripts/kilit_zorla.py:30) ikiz `AJANLAR` tuple — **ölçüldü, D-211 ihlali değil**: docstring'i git kimliği çözümü için bilinçli olarak geniş kümeyi (`+orkestrator`) belgeliyor. [`scripts/ajan_kimligi.py:25`](scripts/ajan_kimligi.py:25) üçüncü kümeyi tutuyor (`+mimar`, `+orkestrator`) — birleştirme düşük değerli, borç defterinde kalır.
+
+### Referans
+[[D-260]] (Beyan kanıt değildir) · [[D-266]] (Mandal kendi kör noktasını korur) · [[D-256]] (Mandal kırılarak doğrulanır) · [[D-211]] (İkiz yapı yasağı) · [[D-68]] (Tetik ↔ pano tutarlılığı) · [[D-33]] / [[D-60]] (Kanonik ajan adları)
+
+## D-312 — Teslim bitiş değil, döngünün bir turu (2026-10-01)
+
+### 1. Bulgu
+
+Ajan teslim ettikten sonra duruyordu. `cmd_basla` posta boşsa `"Posta bos, zincir yok. Orkestratore haber ver."` basıp çıkıyor, `cmd_teslim` ise `review` yazıp bırakıyordu. Her iki yol da **insan tetiği bekleyen** bir son hal üretiyordu. Ürün Sahibi emri: *"insandan bağımsız görev geldikçe tüm ajanlar posta ve chat kontrolü yapıp gerekirse cevap verip yeni görev varsa alıp yapacaklar ve bunu sonsuza kadar tekrarlayacaklar."*
+
+### 2. Kural
+
+İş bitti demek "bekle" demek değildir. Teslimden sonra **zorunlu** sıra:
+
+| # | Adım | Komut |
+|---|---|---|
+| 1 | Posta yokla | `python scripts/gorev_kutusu.py bak --ajan <ajan>` |
+| 2 | Chat yokla | `python scripts/ajan_chat.py oku --son 10` |
+| 3 | Mesaj varsa **cevapla** | `python scripts/chat_gonder.py --to <ajan> --kimden <ben> --type bilgi --mesaj "..."` |
+| 4 | Yeni görev varsa **al** | `python scripts/gorev_kutusu.py al --ajan <ajan> --task-id <ID>` |
+| 5 | İkisi de boşsa **yeniden yokla** | `python scripts/gorev_kutusu.py basla --ajan <ajan>` |
+| 6 | 3 tur üst üste boşsa | orkestratöre rapor at, **sonra yoklamaya devam et** |
+
+Durma yalnız iki halde meşrudur: (a) D-210 açık soru kapısı kapalı, (b) D-198 mükerrer kapısı kapalı. Bunların dışında "ne yapayım" diye beklemek kural ihlalidir.
+
+### 3. Uygulama
+
+- [`plans/_brief_sablon.md`](plans/_brief_sablon.md) `## Teslim` gövdesine D-312 bloğu yazıldı. **Yeni `##` başlığı açılmadı** — bu bilinçli: [`scripts/brief_denetim.py`](scripts/brief_denetim.py:36) `ZORUNLU` listesine dokunulmadı ki mevcut brifler ve `gorev_at.py ata` kapısı kırılmasın (D-217 mandal yaklaşımı).
+- [`scripts/gorev_kutusu.py`](scripts/gorev_kutusu.py:180) `cmd_teslim` sonu: üç komutluk D-312 yönlendirmesi.
+- [`scripts/gorev_kutusu.py`](scripts/gorev_kutusu.py:254) `cmd_basla` "posta boş" dalı: durma yerine chat → cevap → yeniden yokla yolu.
+- [`scripts/gorev_kutusu.py`](scripts/gorev_kutusu.py:272) KURAL bloğu: 5. adım (posta+chat, atlanmaz) ve 8. adım (zincir bitince durma, yeniden yokla).
+
+### 4. Kanıt (çalıştırılmış komut çıktısı)
+
+```
+python scripts/brief_denetim.py plans/_brief_sablon.md  -> UYUMLU : _brief_sablon.md (exit 0)
+pytest test_brief_sablon_denetim test_gorev_at_kapi -q  -> 6 failed, 46 passed
+python scripts/gorev_kutusu.py basla --ajan salih       -> exit 0, D-210 kapisi durdurdu (dogru)
+```
+
+6 kırık test **bu değişiklikten değil**: eksik listeleri `**Başlık:**`, `**Hub:**`, `## Ilgili Nodlar` — hiçbirinde D-312 yok, `ZORUNLU` listesine dokunmadım. Değişiklik öncesi ve sonrası sayı birebir aynı (6/46) → bağımsız borç, ayrı kaydedildi.
+
+### 5. Açık borç
+
+- 6 brif şablona uymuyor: `brief_utku_VERI-TSG-ESLEME-CASE-01`, `brief_salih_VERI-SEMA-DOGRULA-01/02/03`, `brief_yasu_VERI-SEMA-DOGRULA-02/03`.
+- Aktif 6 Odin brifi D-312 metnini taşımıyor (şablon güncel, brifler değil).
+
+### 6. Öz-eleştiri — hatam #13
+
+[`scripts/gorev_kutusu.py:1`](scripts/gorev_kutusu.py:1) satırına kaçak `n ` karakteri sızdı → `from __future__ imports must occur at the beginning of the file`. **E25'te [`scripts/gorev_at.py:1`](scripts/gorev_at.py:1) ile birebir aynı desen, ikinci kez.** Ders: her `apply_diff` sonrası dosyanın **ilk satırı** kontrol edilir. Chat'e yazıldı (N3, sayaç 13).
+
+### Referans
+[[D-69]] (`basla` tüketicidir) · [[D-198]] (Arşiv mükerrer kapısı) · [[D-210]] (Ajan chat kuralı) · [[D-217]] (Tek brif + mandal) · [[D-222]] (Kanıtlı kapanış) · [[D-227]] (Karar numarası yalnız AGENTS.md'den) · [[D-260]] (Beyan kanıt değildir)

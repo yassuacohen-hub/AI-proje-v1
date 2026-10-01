@@ -179,6 +179,11 @@ def cmd_teslim(args: argparse.Namespace) -> int:
         return _hata(exc)
     print(f"TESLIM: {sonuc['task_id']} -> durum: review (onay bekliyor)")
     print("       Onaysiz done OLMAZ; kontrolor onayi sonrasi tamamlanir.")
+    # D-312: teslim bitis degil, dongunun bir turu. Durmak yasak.
+    print(f"\n[D-312] SIRADAKI ADIM ZORUNLU — durma, insan bekleme:")
+    print(f"  posta: python scripts/gorev_kutusu.py bak --ajan {args.ajan}")
+    print(f"  chat : python scripts/ajan_chat.py oku --son 10")
+    print(f"  devam: python scripts/gorev_kutusu.py basla --ajan {args.ajan}")
     if zorla and not _hafiza_izi(args.task_id):
         tb.gorev_guncelle(args.task_id, hafiza_izi="atlandi")
         print("       UYARI: --zorla ile gecildi; panoya hafiza_izi=atlandi islendi (D-65).")
@@ -252,7 +257,13 @@ def cmd_basla(args: argparse.Namespace) -> int:
     rol = trigger.AJAN_ROLU.get(ajan, "uretim")
     print(f"=== {trigger.ajan_goster(ajan)} OTONOM ZINCIR ===")
     if not bekleyen and not kalan:
-        print("Posta bos, zincir yok. Orkestratore haber ver.")
+        # D-312: posta bos olmak durma sebebi degil. Chat'e bak, cevapla, yeniden yokla.
+        print("Posta bos, zincir yok — ama DURMA (D-312).")
+        print("  1) chat kontrol : python scripts/ajan_chat.py oku --son 10")
+        print(f"  2) cevap gerekirse: python scripts/chat_gonder.py --to <ajan> "
+              f"--kimden {ajan} --type bilgi --mesaj \"<metin>\"")
+        print(f"  3) yeniden yokla : python scripts/gorev_kutusu.py basla --ajan {ajan}")
+        print("  4) 3 tur ust uste bos ise orkestratore rapor at, sonra yoklamaya devam et.")
         return 0
     sira = [k["task_id"] for k in bekleyen] + [k["task_id"] for k in kalan]
     print(f"Zincir ({len(sira)} gorev): {' -> '.join(sira)}\n")
@@ -270,11 +281,15 @@ KURAL (her gorev icin sirayla, DURMADAN):
   2) isi yap (AGENTS.md teslim kontrol listesi)
   3) denetim: python scripts/kodlama_denetim.py
   4) teslim : python scripts/gorev_kutusu.py teslim --ajan {ajan} --task-id <ID> --ozet "..."
-     -> teslim sonrasi ZINCIR sonraki gorevi otomatik tetikler; postaya tekrar bak.
+  5) posta + chat kontrol (D-312, ZORUNLU — atlanmaz):
+       python scripts/gorev_kutusu.py bak --ajan {ajan}
+       python scripts/ajan_chat.py oku --son 10
+     -> mesaj varsa CEVAPLA, yeni gorev varsa AL ve 1. adima don.
 ZINCIR BITINCE (tum gorevler teslim):
-  5) toplu raporu yaz: {rapor}
-  6) postala: python scripts/gorev_kutusu.py rapor-postala --ajan {ajan} \\
+  6) toplu raporu yaz: {rapor}
+  7) postala: python scripts/gorev_kutusu.py rapor-postala --ajan {ajan} \\
        --rapor "{rapor}" --baslik "zincir bitti: {len(sira)} gorev"
+  8) DURMA: python scripts/gorev_kutusu.py basla --ajan {ajan} ile yeniden yokla (D-312).
 Arada KAHIN'e soru sorma; blokaj varsa raporda yaz.""")
     return 0
 
@@ -705,6 +720,27 @@ def cmd_devret(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_ekle(args: argparse.Namespace) -> int:
+    """BORC-GOREV-EKLE-01: Panoya gorev ekle (elle JSON duzenleme yerine)."""
+    try:
+        gorev = tb.gorev_ekle(
+            args.task_id, args.baslik, args.sahip, args.oncelik,
+            dosyalar=_ayristir_liste(args.dosyalar),
+            brief=args.brief or None, talimat=args.talimat or None,
+            mod=args.mod,
+        )
+    except ValueError as exc:
+        return _hata(exc)
+    print(f"EKLENDI: {gorev['task_id']} -> {gorev['sahip']} ({gorev['oncelik']})")
+    if args.tetikle:
+        try:
+            trigger.tetik_ekle(args.task_id, args.sahip, args.talimat or "")
+            print(f"  -> tetiklendi: {args.sahip}")
+        except trigger.TriggerError as exc:
+            print(f"  UYARI: tetik atilamadi ({exc})")
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="ORCH-08 — Ajan posta kutusu + kontrolör onay")
 
@@ -800,10 +836,22 @@ def main() -> int:
     devret_p.add_argument("--neden", default="")
     devret_p.set_defaults(func=cmd_devret)
 
+    ekle_p = sub.add_parser("ekle", help="BORC-GOREV-EKLE-01: Panoya gorev ekle")
+    ekle_p.add_argument("--task-id", required=True)
+    ekle_p.add_argument("--baslik", required=True)
+    ekle_p.add_argument("--sahip", required=True, help="Atanacak ajan")
+    ekle_p.add_argument("--oncelik", default="P1")
+    ekle_p.add_argument("--dosyalar", default="", help="Virgülle ayrılmış kilitli dosyalar")
+    ekle_p.add_argument("--brief", default="", help="Brif dosya yolu (D-66)")
+    ekle_p.add_argument("--talimat", default="", help="Görev talimatı (D-80)")
+    ekle_p.add_argument("--mod", default="code", choices=["code", "architect"])
+    ekle_p.add_argument("--tetikle", action="store_true", help="Ekle + sahibe hemen tetikle")
+    ekle_p.set_defaults(func=cmd_ekle)
+
     args = parser.parse_args()
     # D-33 ajan adı kuralı: "Ajan kilo" / "Kilo" / "kilo_code" → "kilo".
     # Tüm alt komutlar tek noktadan kanonik ada çevrilir.
-    for alan in ("ajan", "yeni_ajan", "hedef"):
+    for alan in ("ajan", "yeni_ajan", "hedef", "sahip"):
         deger = getattr(args, alan, None)
         if deger:
             try:
