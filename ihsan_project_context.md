@@ -63,12 +63,28 @@ e-ticaret, banka, fintech, sigorta, kurumsal satış, tedarik zinciri.
 Prompt v4 madde 15c bu atlamanın dürüst cümlesi: *"bu skor henüz ölçülmüyor."*
 ⚠ Görev başlıkları yazılırken 8 skorun adı SSOT'tan okunur, uydurulmaz (D-260 · borç #53/#54).
 
-**A planı (onaylandı) — 4 kusuru kapat, 7. kez ölç:**
+**İŞ BÖLÜMÜ — Ürün Sahibi emri #49 (2026-10-01): A planı BENDE (ihsan),
+diğer tüm kalemler utku ve yasu'ya dağıtılır. Ben dağıtırım, kendim yapmam.**
+
+**A planı (ihsan, onaylandı) — 4 kusuru kapat, 7. kez ölç:**
 1. **#71** `DUSUNME_KALIPLARI` + Türkçe kökler (`kullanici turkce`, `kurallar:`, `sistem promptum`, `asistaniyiz`) + yanlış pozitif mandalı + kırma testi — *en ciddi, gerçek oran bunun yüzünden bilinmiyor*
 2. **#72** `inj-11` ret sırasında prompt metnini sızdırıyor ("Madde 0c'si") → sızıntı kapısı veya prompt maddesi
 3. **#73** `inj-10` ayna dil ihlali → MUTLAK KURAL 0'a "ret cümlesi de soru diliyle yazılır"
 4. **#74** `mesru-04` senaryosuna `<KATALOG>` bloğu eklenir (yoksa yanlış ölçüyor)
 5. **7. koşu** `--tekrar 3` (57 çağrı, ~4 dk, 0 TL) + commit (N7)
+
+**Dağıtılacaklar (ihsan yalnız brif yazar + onaylar):**
+
+| # | İş | Kime | Öncelik |
+|---|---|---|---|
+| G-0a | Faz 2 risk motoru (8 skor; adlar SSOT'tan okunur, D-260) | utku | P1 |
+| G-0b | Faz 3 entity graph / ilişki ağı v0 | yasu | P1 |
+| G-0c | Faz 5 vendor due diligence | yasu | P3 |
+| G-0d | Faz 6 global corporate intelligence | utku | P4 |
+| 12 | A senaryosu: 2 `iptal` görev → `plan` + maskeleme kapısı (D-247) | utku | P2 |
+| 14 | N8 kalan: `osb_veri_denetim.py` + Supabase yazımı | yasu | P2 |
+| 11 | AGENTS.md 5 karar + numara tahsisi (D-227) | ihsan (devredilemez) | P2 |
+| 9/10 | salih brifi + chat (D-210) | ihsan (devredilemez) | P1 |
 
 **Ardından:**
 6. salih brifini güncelle (19 senaryo, %83.3, üç kusur sınıfı, LLM-as-judge borcu #61)
