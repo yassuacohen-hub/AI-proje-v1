@@ -7,7 +7,6 @@
 
 | Gorev | Baslik | Sahip | Oncelik | Durum | Dosyalar |
 |-------|--------|-------|---------|-------|----------|
-| ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s) | ihsan | P1 | iptal | scripts/pano_denetim.py, scripts/tetik_senk.py, tests/test_d66_bypass_tetikleme.py |
 | UTKU-02 | [UTKU] API endpoint optimizasyon - response time (2s) | utku | P1 | archive | src/api/endpoints.py |
 | UTKU-04 | [UTKU] Veritabanı migration - index optimizasyon (1s) | utku | P1 | archive | src/company_master/schema/migrations/0020_index_optimization.sql |
 | UTKU-05 | [UTKU] Kullanıcı kimlik doğrulama - token yenileme (2s) | utku | P0 | archive | src/auth/token_refresh.py |
@@ -23,20 +22,31 @@
 | V10-BELGE-01 | 6 curutulen iddiaya K1/K3/K4 duzeltme notu | ihsan | P1 | archive | - |
 | WK-02 | OSB Tender Monitor - Real-time Tracking | - | P1 | archive | - |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | archive | - |
-| VERI-02 | [VERI] OSB ihale izleyicisini yaz → src/company_master/etl/scrapers/osb_tender_monitor.py (3s) | utku | P1 | aktif | - |
-| VERI-NACE-COKLU-01 | [VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s) | utku | P1 | aktif | src/company_master/etl/nace_coklu_ata.py |
-| VERI-KAYNAK-BAG-01 | [VERI] Firma-kaynak bagini yaz → source_records.company_id (4s) | utku | P0 | review | src/company_master/etl/kaynak_firma_bagla.py |
-| VERI-SEKTOR-01 | [VERI] Sektor sozlugunu yaz → 9689 kayitta sektor alani (3s) | utku | P1 | plan | src/company_master/etl/sektor_normalize.py |
-| VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim icinde 102 ASO kaydi (2s) | utku | P2 | review | src/company_master/etl/kaynak_sizinti_duzelt.py |
 | ALTYAPI-AJAN-CAKISMA-01 | [ALTYAPI] Eszamanli ajan kacak kilit kapisini yaz → ajan_cakisma_kilidi.py (4s) | ihsan | P1 | plan | scripts/ajan_cakisma_kilidi.py |
-| VERI-OSTIM-TAM-TARAMA-01 | [VERI] OSTIM detay verisini denetle → firmalar_tamamlanmis.jsonl (2s) | yasu | P1 | review | data/ostim/tamamlama_2026-09-29/firmalar_tamamlanmis.jsonl, data/ostim/tamamlama_2026-09-29/rapor.md |
-| TSG-PILOT-20 | [OSINT] TSG 20 firma pilot OLCUMU -> plans/rapor_yasu_TSG-PILOT-20.md (1g) | yasu | P0 | review | plans/rapor_yasu_TSG-PILOT-20.md |
-| VERI-TOBB2B-KESISIM-01 | [VERI] TOBB2B teklif havuzunu OSB verisiyle arastir -> kesisim_raporu (5d) | yasu | P1 | review | data/pilots/VERI-TOBB2B-KESISIM-01 |
+| TEST-EKLE-DENEME | test | ihsan | P2 | iptal | - |
+| VERI-TSG-ESLEME-CASE-01 | [VERI] TSG ilan turu eslermesini duzel -> olay_esle normalize + canli unknown olcumu (1s) | utku | P1 | plan | src/company_master/etl/tsg_yazici.py, skills/services/ticaret_sicili_kanit.py, tests/test_ticaret_sicili_kanit.py |
+| VERI-TENDER-KOLON-01 | [VERI] D-308 tender sema kolon cevirisi -> osb_tender_monitor.py uyumlu hale getir (1s) | utku | P1 | plan | src/company_master/etl/osb_tender_monitor.py |
+| SCRAPE-001-DOCKER-SETUP | [DOCKER] PostgreSQL 16 + Kazıma servisi entegrasyonu → compose (2s) | utku | P1 | plan | Huginn Data Insights/docker-compose.yml, src/company_master/schema/migrations/0046_scrape_audit_log.sql, src/company_master/schema/migrations/down/0046_scrape_audit_log.down.sql |
+| SCRAPE-002-LEMMLESS-ANKARA-OSB | [KAZIMA] LLM-less: ostim.org.tr + ivedik.org.tr + baskentosb.org.tr → scrape_pages (3s) | utku | P0 | plan | scripts/kazima_ostim.py, scripts/kazima_ivedik.py, scripts/kazima_baskent.py |
+| SCRAPE-003-9ROUTER-JINA-FALLBACK | [KAZIMA] 9Router Jina-Reader fallback: yapı unknown sayfalar (2s) | utku | P1 | plan | scripts/kazima_jina_fallback.py, .agents/skills/9router_web_fetch_upstream.md |
+| SCRAPE-004-QWEN-SINIFLANDIRMA | [KAZIMA] Qwen-7b-chat (9Router local): yapı unknown + sınıflandırma (2s) | utku | P1 | plan | scripts/kazima_qwen_classify.py, .agents/skills/9router_chat_upstream.md |
+| SCRAPE-005-KAZIMA-DOCKER-INTEGRATION | [DOCKER] Kazıma servisi: profile jobs, healthcheck, cron (1s) | utku | P0 | plan | Huginn Data Insights/docker-compose.yml, src/company_master/scrapers/Dockerfile, scripts/refresh_pipeline.py |
+| SCRAPE-006-QUALITY-AUDIT | [QA] Kazıma quality audit: D-250 field tamlık + D-310 kontrol (1s) | salih | P1 | plan | scripts/_kazima_dogrula.py, src/company_master/etl/quality_recalc.py |
+| SCRAPE-007-FINAL-REPORT | [DOC] Kazıma dönem sonu raporu: coverage, cost=0 doğrulaması, v2.0 roadmap (1s) | ihsan | P2 | plan | plans/2026-10-01_kazima_verimlilik_ve_eksiklik_analizi.md, scripts/_kazima_dogrula.py |
+| ALTYAPI-ODIN-UYARLAMA-01 | [ALTYAPI] Odin iç/müşteri endpoint ayrımını belgele → docs/ODIN_SECURITY_CHECKLIST.md (7d) | ihsan | P0 | plan | docs/ODIN_DEPLOYMENT_ARCHITECTURE.md, docs/ODIN_SECURITY_CHECKLIST.md, docs/ODIN_PROMPT_INJECTION_SCENARIOS.md |
+| VERI-ODIN-EGITIM-VERISI-HAZIRLA | [VERI] Odin eğitim veri setini yaz → data/odin_training_data.csv (7d) | utku | P1 | iptal | data/odin_training_data.csv, scripts/odin_veri_hazirla.py, data/odin_veri_dogrulama_raporu.md |
+| ALTYAPI-ODIN-EGITIM-PIPELINE | [ALTYAPI] Odin eğitim hattını yaz → scripts/odin_training_pipeline.py (7d) | utku | P1 | iptal | scripts/odin_training_pipeline.py, data/models/odin_model.bin, data/odin_training_metrics.csv |
+| TEST-ODIN-PROMPT-INJECTION | [TEST] Odin müşteri modelini prompt-injection ile ölç → data/odin_injection_test_log.jsonl (7d) | salih | P1 | aktif | scripts/odin_prompt_injection_test.py, data/odin_injection_test_scenarios.json, data/odin_injection_test_log.jsonl |
+| VERI-OSB-TEMIZLIK-01 | [VERI] 647 kimliksiz + 44 mukerrer kaydi sil -> osb_firma_dosyalari temiz (2s) | yasu | P0 | plan | data/osb/ |
+| ALTYAPI-RAG-EMBEDDER-01 | [ALTYAPI] Sahte hash embedder'i sil -> odin_ai/rag.py (2s) | yasu | P0 | plan | src/company_master/odin_ai/rag.py |
+| VERI-RAG-KORPUS-01 | [VERI] Firma kayitlarini korpusa yaz -> vector/service.py (3s) | utku | P1 | plan | src/company_master/vector/service.py |
+| ALTYAPI-MIMIR-BAGLAM-01 | [ALTYAPI] Mimir baglam ucunu yaz -> odin_ai/mimir_servis.py (3s) | salih | P1 | plan | src/company_master/odin_ai/mimir_servis.py |
 
 ## Tamamlananlar
 
 | Görev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
+| ALTYAPI-D66-BYPASS-TETIKLEME | [ALTYAPI] D-65 Is Durmaz Bypass Tetikleme -> pano_duzenleme (2s) | ihsan | 2026-09-24T01:28:33 |
 | VERI-ADMIN-AKTIVITE-LOG-13 | [VERI] Kullanıcı aktivite log tablosunu yaz → migration 0017 (2s) | utku | 2026-09-24T19:25:07 |
 | API-ADMIN-AKTIVITE-YAZ-14 | [API] Giriş/arama/AI olaylarını log'a yaz → web_app.py + arama uçları (2s) | utku | 2026-09-24T20:56:00 |
 | DOC-ADMIN-DURUM-SENKRON-15 | [DOC] Bayat durum satırlarını düzelt → §8.4/§10 kanıtlı (1s) | ihsan | 2026-09-24T20:56:00 |
@@ -86,6 +96,7 @@
 | ORKESTRA-BRIEF-TALIMAT-01 | [ORKESTRA] 4 brife talimat dosyasi yaz | yasu | 2026-09-27T02:35:00 |
 | ORKESTRA-VAULT-TEKRAR-01 | [ORKESTRA] Vault isim tekrarlarini denetle | ihsan | 2026-09-27T02:35:00 |
 | VAULT-ORPHAN-INCELEME-01 | [VAULT] Orphan nod siniflama: 3361 dosya, D-173 | orkestrator | 2026-09-27T02:35:00 |
+| VERI-02 | [VERI] OSB ihale izleyicisini yaz → src/company_master/etl/scrapers/osb_tender_monitor.py (3s) | utku | 2026-10-01T19:21:19 |
 | VERI-03 | [VERI] Proxy rotasyonunu yaz → src/company_master/etl/scrapers/proxy_rotation.py (2s) | utku | 2026-09-27T12:00:00 |
 | VERI-04 | [VERI] Migration down dosyalarini tek ad standardina tasi → schema/migrations/down/ (3s) | ihsan | 2026-09-27T05:35:00 |
 | API-07 | [API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s) | utku | 2026-09-27T05:35:00 |
@@ -97,9 +108,25 @@
 | ORKESTRA-D231-01 | Onay kuyrugu arsive kor: pano_denetim arsive bakmiyordu | kahin | 2026-09-27T10:48:42 |
 | ORKESTRA-D233-01 | Referansli yol kopya sanildi: AI proje v1/ butun olarak silindi, teslim kapisi kirildi | kahin | 2026-09-27T11:24:28 |
 | VERI-NACE-SOZLUK-01 | [VERI] Resmi NACE listesini yaz → nace_codes tablosu (3s) | utku | 2026-09-28T19:38:49 |
+| VERI-NACE-COKLU-01 | [VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s) | utku | 2026-10-01T19:36:35 |
 | VERI-NACE-TEMIZ-01 | [VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s) | utku | 2026-09-28T19:38:48 |
 | VERI-NACE-KOLON-01 | [VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s) | utku | 2026-09-28T19:38:49 |
+| VERI-KAYNAK-BAG-01 | [VERI] Firma-kaynak bagini yaz → source_records.company_id (4s) | utku | 2026-09-30T19:41:16 |
+| VERI-SEKTOR-01 | [VERI] Sektor sozlugunu yaz → 9689 kayitta sektor alani (3s) | utku | 2026-09-30T19:41:21 |
+| VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim icinde 102 ASO kaydi (2s) | utku | 2026-09-30T19:41:07 |
 | VERI-HAYALET-TEMIZ-01 | [VERI] Hayalet kayitlari sil → companies 4591 fazlalik satir (3s) | utku | 2026-09-28T19:38:49 |
 | VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik kaynak listesinden dusuruldu (KAHIN 2026-09-29) | yasu | - |
 | ALTYAPI-SKILL-YAPISI-01 | [ALTYAPI] Skill sistemini tek havuzda birlestir → SKILLS_INDEX.md yaz (6s) | yasu | 2026-09-29T15:51:21 |
 | ALTYAPI-TICARET-KANIT-01 | [ALTYAPI] Kanit katmanini yaz → skills/services/ticaret_sicili_kanit.py (2s) | yasu | 2026-09-29T15:51:21 |
+| VERI-OSTIM-TAM-TARAMA-01 | [VERI] OSTIM detay verisini denetle → firmalar_tamamlanmis.jsonl (2s) | yasu | 2026-09-30T19:41:04 |
+| TSG-PILOT-20 | [OSINT] TSG 20 firma pilot OLCUMU -> plans/rapor_yasu_TSG-PILOT-20.md (1g) | yasu | 2026-09-30T03:31:32 |
+| VERI-TOBB2B-KESISIM-01 | [VERI] TOBB2B teklif havuzunu OSB verisiyle arastir → kesisim_raporu (5d) | yasu | 2026-09-30T19:41:13 |
+| VERI-LONCA-FIRMA-01 | [VERI] lonca firma bilgi ucunt tarama ile olc → firma_kaydi_raporu (5d) | yasu | 2026-09-30T19:41:37 |
+| VERI-TSG-04-YAZICI-01 | [VERI] TSG-04 yazma hattini yaz → company_events INSERT pipeline'i (3s) | utku | 2026-10-01T17:19:03 |
+| VERI-NACE-ACILIM-01 | [VERI] NACE acilimini yaz → sunum.acilim_getir + musteri karti (3s) | utku | 2026-10-01T17:19:04 |
+| VERI-NACE-SOZLUK-DIL-01 | [VERI] NACE sozluk basliklarini duzelt → 572 TR karakter (4s) | utku | 2026-10-01T17:19:04 |
+| VERI-SEMA-DOGRULA-01 | Şema Migrasyon Tutarsızlığını Düzelt (V7) | salih | 2026-10-01T17:19:04 |
+| VERI-SEMA-DOGRULA-02 | Eksik Tablolar İçin Kod Taraması (entity_matches, api_usage_daily) | yasu | 2026-10-01T17:58:34 |
+| VERI-SEMA-DOGRULA-03 | NACE Dil Kolonları Kontrol Raporu | yasu | 2026-10-01T17:58:44 |
+| ALTYAPI-EVREN-PRIVATE-DOGRULAMA | [ALTYAPI] EVREN private eğitim hizmetini araştır → docs/EVREN_PRIVATE_EGITIM_DOGRULAMA.md (7d) | yasu | 2026-10-01T20:31:32 |
+| ALTYAPI-ODIN-DENETIM-RAPORU | [ALTYAPI] Odin üretim öncesi GO/NO-GO kararını denetle → ALTYAPI-ODIN-DENETIM-RAPORU_2026-10-31_denetim.md (10d) | yasu | 2026-10-01T17:59:33 |

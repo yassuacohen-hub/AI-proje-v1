@@ -2233,9 +2233,9 @@
     "baslik": "[ALTYAPI] EVREN private eğitim hizmetini araştır → docs/EVREN_PRIVATE_EGITIM_DOGRULAMA.md (7d)",
     "sahip": "yasu",
     "oncelik": "P0",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-10-01T16:59:48",
-    "bitis": "2026-10-01T18:19:45",
+    "bitis": "2026-10-01T20:31:32",
     "dosyalar": [
       "docs/EVREN_PRIVATE_EGITIM_DOGRULAMA.md"
     ],
@@ -2254,7 +2254,7 @@
     "baslik": "[VERI] Odin eğitim veri setini yaz → data/odin_training_data.csv (7d)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "iptal",
     "baslangic": "2026-10-01T16:59:48",
     "bitis": null,
     "dosyalar": [
@@ -2268,7 +2268,7 @@
     "mod": "code",
     "dependencies": [],
     "brief": "plans/brief_utku_VERI-ODIN-EGITIM-VERISI-HAZIRLA.md",
-    "talimat": "1. company_master canlı DB'den eğitim örneği üret (50/30/20: sınıflandırma/özetleme/etiketleme). 2. TCKN/kişisel veri taraması — sızma varsa sıfır tolerans (D-248). 3. maskeleme kapısından geçir (D-247). 4. Doğrulama raporu yaz. 5. chat_gonder.py ile bildir. Kurallar: D-310, D-247, D-248, D-238. Brif: plans/brief_utku_VERI-ODIN-EGITIM-VERISI-HAZIRLA.md"
+    "talimat": "IPTAL (D-310 duzeltmesi): EVREN'de metin modeli egitimi fiziken yok (10/10 API ucu 404 + panelde Metin kilitli). Yerine VERI-RAG-KORPUS-01 acildi."
   },
   {
     "task_id": "ALTYAPI-ODIN-EGITIM-PIPELINE",
@@ -2276,7 +2276,7 @@
     "baslik": "[ALTYAPI] Odin eğitim hattını yaz → scripts/odin_training_pipeline.py (7d)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "iptal",
     "baslangic": "2026-10-01T16:59:48",
     "bitis": null,
     "dosyalar": [
@@ -2293,7 +2293,7 @@
       "ALTYAPI-ODIN-UYARLAMA-01"
     ],
     "brief": "plans/brief_utku_ALTYAPI-ODIN-EGITIM-PIPELINE.md",
-    "talimat": "1. Eğitim hattı: veri yükle → fine-tune → metrik yaz. 2. İç ve müşteri modeli AYRI çıktı (D-310 Kural 1). 3. Kabul: doğruluk >70%, gecikme <500ms — ölçülmüş olacak. 4. Metrik CSV'si kanıt; beyan kabul edilmez (D-260). 5. chat_gonder.py ile bildir. Brif: plans/brief_utku_ALTYAPI-ODIN-EGITIM-PIPELINE.md"
+    "talimat": "IPTAL (D-310 duzeltmesi): fine-tune hatti yerine prompt+RAG. Yerine ALTYAPI-MIMIR-BAGLAM-01 acildi."
   },
   {
     "task_id": "TEST-ODIN-PROMPT-INJECTION",
@@ -2346,7 +2346,7 @@
   {
     "task_id": "VERI-OSB-TEMIZLIK-01",
     "id": "VERI-OSB-TEMIZLIK-01",
-    "baslik": "[VERI-KIT] OSB firma dosyalarindaki 647 kimliksiz + 44 mukerrer kaydi temizle",
+    "baslik": "[VERI] 647 kimliksiz + 44 mukerrer kaydi sil -> osb_firma_dosyalari temiz (2s)",
     "sahip": "yasu",
     "oncelik": "P0",
     "durum": "plan",
@@ -2361,5 +2361,62 @@
     "mod": "code",
     "brief": "plans/brief_yasu_VERI-OSB-TEMIZLIK-01.md",
     "talimat": "Supabase yazimi KAPSAM DISI. Sadece dosyalari temizle ve raporla. Kabul: osb_veri_denetim.py ciktisinda KIMLIKSIZ=0 ve MUKERRER=0."
+  },
+  {
+    "task_id": "ALTYAPI-RAG-EMBEDDER-01",
+    "id": "ALTYAPI-RAG-EMBEDDER-01",
+    "baslik": "[ALTYAPI] Sahte hash embedder'i sil -> odin_ai/rag.py (2s)",
+    "sahip": "yasu",
+    "oncelik": "P0",
+    "durum": "plan",
+    "baslangic": "2026-10-01T20:52:26",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/odin_ai/rag.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-RAG-EMBEDDER-01.md",
+    "talimat": "Brief: plans/brief_yasu_ALTYAPI-RAG-EMBEDDER-01.md. Once olc (boyut + kosinus benzerligi), cikmazsa DUR ve chat'e yaz. Boyutu koda sabit yazma."
+  },
+  {
+    "task_id": "VERI-RAG-KORPUS-01",
+    "id": "VERI-RAG-KORPUS-01",
+    "baslik": "[VERI] Firma kayitlarini korpusa yaz -> vector/service.py (3s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-10-01T20:52:26",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/vector/service.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-RAG-KORPUS-01.md",
+    "talimat": "Brief: plans/brief_utku_VERI-RAG-KORPUS-01.md. Beyaz liste alan secimi (siyah liste YASAK). D-247 kisisel veri taramasi 0 eslesme sarti. Veriyi DEGISTIRME, sadece oku+indeksle."
+  },
+  {
+    "task_id": "ALTYAPI-MIMIR-BAGLAM-01",
+    "id": "ALTYAPI-MIMIR-BAGLAM-01",
+    "baslik": "[ALTYAPI] Mimir baglam ucunu yaz -> odin_ai/mimir_servis.py (3s)",
+    "sahip": "salih",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-10-01T20:52:27",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/odin_ai/mimir_servis.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_salih_ALTYAPI-MIMIR-BAGLAM-01.md",
+    "talimat": "Brief: plans/brief_salih_ALTYAPI-MIMIR-BAGLAM-01.md. Prompt dosyadan okunacak (D-230), varsayilan rol DIS, bos baglamda modeli CAGIRMA. finish_reason yazdir."
   }
 ]

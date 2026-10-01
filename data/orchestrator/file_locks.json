@@ -1,22 +1,87 @@
 {
-  "src/company_master/etl/nace_coklu_ata.py": {
-    "sahip": "utku",
-    "task_id": "VERI-NACE-COKLU-01",
-    "kilitlendi": "2026-09-27T13:19:21"
-  },
   "scripts/ajan_cakisma_kilidi.py": {
     "sahip": "ihsan",
     "task_id": "ALTYAPI-AJAN-CAKISMA-01",
     "kilitlendi": "2026-09-29T00:42:35"
   },
-  "data/ostim/tamamlama_2026-09-29/firmalar_tamamlanmis.jsonl": {
-    "sahip": "yasu",
-    "task_id": "VERI-OSTIM-TAM-TARAMA-01",
-    "kilitlendi": "2026-09-29T15:33:16"
+  "docs/ODIN_DEPLOYMENT_ARCHITECTURE.md": {
+    "sahip": "ihsan",
+    "task_id": "ALTYAPI-ODIN-UYARLAMA-01",
+    "kilitlendi": "2026-10-01T16:59:48"
   },
-  "data/ostim/tamamlama_2026-09-29/rapor.md": {
+  "docs/ODIN_SECURITY_CHECKLIST.md": {
+    "sahip": "ihsan",
+    "task_id": "ALTYAPI-ODIN-UYARLAMA-01",
+    "kilitlendi": "2026-10-01T16:59:48"
+  },
+  "docs/ODIN_PROMPT_INJECTION_SCENARIOS.md": {
+    "sahip": "ihsan",
+    "task_id": "ALTYAPI-ODIN-UYARLAMA-01",
+    "kilitlendi": "2026-10-01T16:59:48"
+  },
+  "data/odin_training_data.csv": {
+    "sahip": "utku",
+    "task_id": "VERI-ODIN-EGITIM-VERISI-HAZIRLA",
+    "kilitlendi": "2026-10-01T16:59:48"
+  },
+  "scripts/odin_veri_hazirla.py": {
+    "sahip": "utku",
+    "task_id": "VERI-ODIN-EGITIM-VERISI-HAZIRLA",
+    "kilitlendi": "2026-10-01T16:59:48"
+  },
+  "data/odin_veri_dogrulama_raporu.md": {
+    "sahip": "utku",
+    "task_id": "VERI-ODIN-EGITIM-VERISI-HAZIRLA",
+    "kilitlendi": "2026-10-01T16:59:48"
+  },
+  "scripts/odin_training_pipeline.py": {
+    "sahip": "utku",
+    "task_id": "ALTYAPI-ODIN-EGITIM-PIPELINE",
+    "kilitlendi": "2026-10-01T16:59:48"
+  },
+  "data/models/odin_model.bin": {
+    "sahip": "utku",
+    "task_id": "ALTYAPI-ODIN-EGITIM-PIPELINE",
+    "kilitlendi": "2026-10-01T16:59:48"
+  },
+  "data/odin_training_metrics.csv": {
+    "sahip": "utku",
+    "task_id": "ALTYAPI-ODIN-EGITIM-PIPELINE",
+    "kilitlendi": "2026-10-01T16:59:48"
+  },
+  "scripts/odin_prompt_injection_test.py": {
+    "sahip": "salih",
+    "task_id": "TEST-ODIN-PROMPT-INJECTION",
+    "kilitlendi": "2026-10-01T16:59:48"
+  },
+  "data/odin_injection_test_scenarios.json": {
+    "sahip": "salih",
+    "task_id": "TEST-ODIN-PROMPT-INJECTION",
+    "kilitlendi": "2026-10-01T16:59:48"
+  },
+  "data/odin_injection_test_log.jsonl": {
+    "sahip": "salih",
+    "task_id": "TEST-ODIN-PROMPT-INJECTION",
+    "kilitlendi": "2026-10-01T16:59:48"
+  },
+  "data/osb/": {
     "sahip": "yasu",
-    "task_id": "VERI-OSTIM-TAM-TARAMA-01",
-    "kilitlendi": "2026-09-29T15:33:16"
+    "task_id": "VERI-OSB-TEMIZLIK-01",
+    "kilitlendi": "2026-10-01T19:43:41"
+  },
+  "src/company_master/odin_ai/rag.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-RAG-EMBEDDER-01",
+    "kilitlendi": "2026-10-01T20:52:26"
+  },
+  "src/company_master/vector/service.py": {
+    "sahip": "utku",
+    "task_id": "VERI-RAG-KORPUS-01",
+    "kilitlendi": "2026-10-01T20:52:26"
+  },
+  "src/company_master/odin_ai/mimir_servis.py": {
+    "sahip": "salih",
+    "task_id": "ALTYAPI-MIMIR-BAGLAM-01",
+    "kilitlendi": "2026-10-01T20:52:27"
   }
 }

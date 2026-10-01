@@ -81,3 +81,14 @@ def test_negatif_kontrol_ihlal_yakalanir(task_id, baslik):
     assert ga._d57_dogrula(task_id, baslik, "ihsan") is not None, (
         "ihlal tespit edilmedi; mandal sahte guven veriyor"
     )
+
+
+@pytest.mark.parametrize("ok", ["→", "->"])
+def test_ascii_ok_kabul_edilir(ok):
+    """E48: hata mesaji ASCII '->' ogretiyordu, regex Unicode '→' istiyordu.
+    cmd.exe Unicode'u bozdugu icin ikisi de gecerli olmali (D-86)."""
+    ga = _gorev_at()
+    baslik = f"[VERI] Firma kayitlarini korpusa yaz {ok} vector/service.py (3s)"
+    assert ga._d57_dogrula("VERI-RAG-KORPUS-01", baslik, "utku") is None, (
+        f"'{ok}' reddedildi; kod ile hata mesaji yine celisiyor"
+    )

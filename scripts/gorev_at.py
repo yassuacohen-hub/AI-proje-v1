@@ -76,8 +76,10 @@ AJANLAR = trigger.AJANLAR
 # D-63: Architect gorevini yalnız orkestratör (ihsan) ve üretim (utku) alır.
 ARCHITECT_AJANLARI = ("ihsan", "utku")
 ARCHITECT_HATIRLATMA = "⚠️ Bu görev Architect modunda açılmalıdır."
+# Ok isareti: Unicode → ya da ASCII -> (cmd.exe Unicode'u bozar, hata mesaji da
+# ASCII gosteriyordu; kod ile mesaj celisiyordu).
 _BASLIK = re.compile(
-    r"^\[(?P<alan>[A-ZĞÜŞİÖÇ]+)\]\s+(?P<fiil>\S+).*?->.+\((?P<sure>\d+[sd])\)$"
+    r"^\[(?P<alan>[A-ZĞÜŞİÖÇ]+)\]\s+(?P<fiil>\S+).*?(?:→|->).+\((?P<sure>\d+[sd])\)$"
 )
 
 
@@ -374,6 +376,11 @@ def cmd_guncelle(args: argparse.Namespace) -> int:
         alanlar["brief"] = Path(args.brief).as_posix()
     if args.talimat:
         alanlar["talimat"] = args.talimat.strip()
+    # D-222: kapanis kanit ister; `sonuc` alani CLI'da yoktu, tek yol pano
+    # JSON'una elle dokunmakti (D-77 ihlali). Buradan gecince atomic_write_text
+    # ve D-58 kapisindan gecer.
+    if getattr(args, "sonuc", None):
+        alanlar["sonuc"] = args.sonuc.strip()
     if args.oncelik:
         alanlar["oncelik"] = args.oncelik
     if not alanlar and not args.durum:
@@ -501,6 +508,7 @@ def main() -> int:
     p_upd.add_argument("--sahip", default=None, help="Sahibi duzelt (kanonik ajan)")
     p_upd.add_argument("--brief", default=None, help="KÖK'e göreli brif yolu; varlığı doğrulanır")
     p_upd.add_argument("--talimat", default=None)
+    p_upd.add_argument("--sonuc", default=None, help="D-222 kapanis kaniti (ozet + dosya yolu)")
     p_upd.add_argument("--oncelik", default=None, choices=["P0", "P1", "P2", "P3"])
     p_upd.add_argument("--durum", default=None, choices=list(tb.GOREV_DURUMLARI))
     p_upd.add_argument("--cagiran", default=None, help="Komutu veren ajan (D-58 kapısı)")
