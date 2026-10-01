@@ -1,0 +1,612 @@
+[
+  {
+    "sade": "Otomotiv",
+    "gosterim": "Otomotiv",
+    "varyantlar": [
+      "Otomotiv"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "29"
+    ]
+  },
+  {
+    "sade": "Yapı ve İnşaat",
+    "gosterim": "Yapı Ve İnşaat",
+    "varyantlar": [
+      "Yapı ve İnşaat"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Gıda ve Endüstriyel Mutfak",
+    "gosterim": "Gıda Ve Endüstriyel Mutfak",
+    "varyantlar": [
+      "Gıda ve Endüstriyel Mutfak"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "10",
+      "11"
+    ]
+  },
+  {
+    "sade": "Metalurji ve Makina Sanayi",
+    "gosterim": "Metalurji Ve Makina Sanayi",
+    "varyantlar": [
+      "Metalurji ve Makina Sanayi"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "24",
+      "25",
+      "28"
+    ]
+  },
+  {
+    "sade": "Metal ve Metal İşleme",
+    "gosterim": "Metal Ve Metal İşleme",
+    "varyantlar": [
+      "Metal ve Metal İşleme"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "24",
+      "25"
+    ]
+  },
+  {
+    "sade": "Makine ve Makine Ekipmanları",
+    "gosterim": "Makine Ve Makine Ekipmanları",
+    "varyantlar": [
+      "Makine ve Makine Ekipmanları"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "28"
+    ]
+  },
+  {
+    "sade": "İş Makinaları",
+    "gosterim": "İş Makinaları",
+    "varyantlar": [
+      "İş Makinaları"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Çeşitli Ticari Faaliyetler",
+    "gosterim": "Çeşitli Ticari Faaliyetler",
+    "varyantlar": [
+      "Çeşitli Ticari Faaliyetler"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "46",
+      "47"
+    ]
+  },
+  {
+    "sade": "Hizmetler",
+    "gosterim": "Hizmetler",
+    "varyantlar": [
+      "Hizmetler"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "46",
+      "47",
+      "49",
+      "50",
+      "51",
+      "52",
+      "53",
+      "55",
+      "56",
+      "58",
+      "59",
+      "60",
+      "61",
+      "62",
+      "63",
+      "64",
+      "65",
+      "66",
+      "68",
+      "69",
+      "70",
+      "71",
+      "72",
+      "73",
+      "74",
+      "75",
+      "77",
+      "78",
+      "79",
+      "80",
+      "81",
+      "82",
+      "84",
+      "85",
+      "86",
+      "87",
+      "88",
+      "90",
+      "91",
+      "92",
+      "93",
+      "94",
+      "95",
+      "96"
+    ]
+  },
+  {
+    "sade": "Diger",
+    "gosterim": "Diger",
+    "varyantlar": [
+      "Diger"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Teknoloji ve Bilişim",
+    "gosterim": "Teknoloji Ve Bilişim",
+    "varyantlar": [
+      "Teknoloji ve Bilişim"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Teknik Malzeme Tezgah ve Ekipman",
+    "gosterim": "Teknik Malzeme Tezgah Ve Ekipman",
+    "varyantlar": [
+      "Teknik Malzeme Tezgah ve Ekipman"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Elektrik ve Elektronik",
+    "gosterim": "Elektrik Ve Elektronik",
+    "varyantlar": [
+      "Elektrik ve Elektronik"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "26",
+      "27"
+    ]
+  },
+  {
+    "sade": "Kimyasallar - Boya - Temizlik ve Güvenlik",
+    "gosterim": "Kimyasallar - Boya - Temizlik Ve Güvenlik",
+    "varyantlar": [
+      "Kimyasallar - Boya - Temizlik ve Güvenlik"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Ambalaj - Kağıt - Baskı ve Kırtasiye",
+    "gosterim": "Ambalaj - Kağıt - Baskı Ve Kırtasiye",
+    "varyantlar": [
+      "Ambalaj - Kağıt - Baskı ve Kırtasiye"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "KİMYA-LABARATUVAR",
+    "gosterim": "KİMYA-LABARATUVAR",
+    "varyantlar": [
+      "KİMYA-LABARATUVAR"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Plastik ve Kauçuk",
+    "gosterim": "Plastik Ve Kauçuk",
+    "varyantlar": [
+      "Plastik ve Kauçuk"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Sağlık",
+    "gosterim": "Sağlık",
+    "varyantlar": [
+      "Sağlık"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "21",
+      "26",
+      "32",
+      "86",
+      "87",
+      "88"
+    ]
+  },
+  {
+    "sade": "Tekstil ve Deri",
+    "gosterim": "Tekstil Ve Deri",
+    "varyantlar": [
+      "Tekstil ve Deri"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "13",
+      "14",
+      "15"
+    ]
+  },
+  {
+    "sade": "Savunma",
+    "gosterim": "Savunma",
+    "varyantlar": [
+      "Savunma"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "25"
+    ]
+  },
+  {
+    "sade": "GIDA",
+    "gosterim": "GIDA",
+    "varyantlar": [
+      "GIDA"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Medikal - İlaç",
+    "gosterim": "Medikal - İlaç",
+    "varyantlar": [
+      "Medikal - İlaç"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "21",
+      "26",
+      "32"
+    ]
+  },
+  {
+    "sade": "Endüstriyel Market",
+    "gosterim": "Endüstriyel Market",
+    "varyantlar": [
+      "Endüstriyel Market"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Elektrikli Cihaz Sanayi",
+    "gosterim": "Elektrikli Cihaz Sanayi",
+    "varyantlar": [
+      "Elektrikli Cihaz Sanayi"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Kent Mobilyaları ve Peyzaj",
+    "gosterim": "Kent Mobilyaları Ve Peyzaj",
+    "varyantlar": [
+      "Kent Mobilyaları ve Peyzaj"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "31"
+    ]
+  },
+  {
+    "sade": "Maden",
+    "gosterim": "Maden",
+    "varyantlar": [
+      "Maden"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Mobilya",
+    "gosterim": "Mobilya",
+    "varyantlar": [
+      "Mobilya"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Ziraat",
+    "gosterim": "Ziraat",
+    "varyantlar": [
+      "Ziraat"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Matbaa",
+    "gosterim": "Matbaa",
+    "varyantlar": [
+      "Matbaa"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Hırdavat",
+    "gosterim": "Hırdavat",
+    "varyantlar": [
+      "Hırdavat"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "HİZMET-DANIŞMANLIK",
+    "gosterim": "HİZMET-DANIŞMANLIK",
+    "varyantlar": [
+      "HİZMET-DANIŞMANLIK"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Kargo",
+    "gosterim": "Kargo",
+    "varyantlar": [
+      "Kargo"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "HİZMET-İLAÇLAMA",
+    "gosterim": "HİZMET-İLAÇLAMA",
+    "varyantlar": [
+      "HİZMET-İLAÇLAMA"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  },
+  {
+    "sade": "Muhtelif Gaz Dolum",
+    "gosterim": "Muhtelif Gaz Dolum",
+    "varyantlar": [
+      "Muhtelif Gaz Dolum"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "20"
+    ]
+  },
+  {
+    "sade": "Tekstil",
+    "gosterim": "Tekstil",
+    "varyantlar": [
+      "Tekstil"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "13",
+      "14",
+      "15"
+    ]
+  },
+  {
+    "sade": "Perakende",
+    "gosterim": "Perakende",
+    "varyantlar": [
+      "Perakende"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": [
+      "47"
+    ]
+  },
+  {
+    "sade": "HİZMET-İSG",
+    "gosterim": "HİZMET-İSG",
+    "varyantlar": [
+      "HİZMET-İSG"
+    ],
+    "kaynaklar": [
+      "ostim.org.tr",
+      "baskentosb.org.tr",
+      "aso.org.tr",
+      "ivedik.org.tr"
+    ],
+    "nace_ipucu": []
+  }
+]
