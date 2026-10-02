@@ -1939,7 +1939,7 @@
     "baslik": "[VERI] TSG ilan turu eslermesini duzel -> olay_esle normalize + canli unknown olcumu (1s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-10-01",
     "bitis": null,
     "dosyalar": [
@@ -1947,7 +1947,7 @@
       "skills/services/ticaret_sicili_kanit.py",
       "tests/test_ticaret_sicili_kanit.py"
     ],
-    "not": "Kapsam: ilan_turu_normalize_et().upper() + oday_esle buyuk/kucuk harf duyarli ILAN_TURU_ESLEME (65 anahtar, karisik harf). 306/326 unknown bos etiketten; hata yalniz dolu 20'yi vurur. Adimlar: (1) ILAN_TURU_ESLEME normalize ya da oday_esle girisi standartlastir, (2) canli DB olcumu (SELECT event_type, COUNT(...) GROUP BY), (3) get_engine() kapisi + _kisi_ve_rol_cikar stub + zincir test.",
+    "not": "Teslim (utku): TSG ilan turu esleme: _TR_ASCII katlamasi, ILAN_TURU_ESLEME (17 anahtar), olay_esle() fonksiyonu. Turkce ı/ş/ğ yutulmasi duzeltildi (sessiz veri kaybi). Canli DB: event_type NULL 404->387, 19 satir etiketlendi. Hedefli suret 118 passed. D-193 notu: kod once stash'e dustu, kanitli sekilde geri yuklendi.",
     "source": "ic",
     "from_agent": "orkestrator",
     "mod": "code",
@@ -2368,13 +2368,13 @@
     "baslik": "[ALTYAPI] Sahte hash embedder'i sil -> odin_ai/rag.py (2s)",
     "sahip": "yasu",
     "oncelik": "P0",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-10-01T20:52:26",
     "bitis": null,
     "dosyalar": [
       "src/company_master/odin_ai/rag.py"
     ],
-    "not": "",
+    "not": "Teslim (yasu): BOYUT 4096 (koda sabit yazilmadi, .env okunur); k(Demir-Metal)=0.8759 > k(Demir-Gida)=0.6316 - Turkce siralama dogru. Varsayim 1 dustu ama yol yanlisti: 9Router 404; dogrudan EVREN calisiyor (/v1/models: task=embedding tek model qwen3-embedding-8b, 0.0 CR, free_until 2026-11-01). Anahtar .env'de evren_llm_ prefix'iyle. Yeni gateway/evren_client.py. Sahte hashlib embedder SILINDI -> vector.embedder (D-211/D-230). Mandal kırildi (D-256/4). Test 47 passed. Hub + bulgu defteri yazildi.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -2387,13 +2387,13 @@
     "baslik": "[VERI] Firma kayitlarini korpusa yaz -> vector/service.py (3s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-10-01T20:52:26",
     "bitis": null,
     "dosyalar": [
       "src/company_master/vector/service.py"
     ],
-    "not": "",
+    "not": "Teslim (utku): Firma satiri -> korpus donusturucu (vector/service.py, 331 satir). KORPUS_ALANLARI beyaz liste 10 kolon; description cikarildi (632 dolunun 624'u adres deseni = D-247 ihlali), yerine sector_name (7595 dolu, adres deseni 0). TCKN deseni hex-duyarli (44 gercek kaydi yanlis reddediyordu). Canli Supabase olcumu (D-238): metin ortancasi 213.0 karakter (kriter >=80), kisisel veri 0/9412, chunk YAPILMAZ (448 embedder penceresi asilmadi, maks 306). Hedefli test 57 passed. Not: onceki oturumda teslim komutu hic calismamis; bu kayit ilk gercek teslim.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -2444,13 +2444,13 @@
     "baslik": "[VERI] Firma ilişki ağı v0 yaz → 0047_entity_graph.sql (4s)",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-10-02T02:28:41",
     "bitis": null,
     "dosyalar": [
       "src/company_master/schema/migrations/0047_entity_graph.sql"
     ],
-    "not": "",
+    "not": "Teslim (yasu): 0047_entity_graph.sql + down + schema_versions v47. company_edges: yonsuz kenar CHECK(a<b), PK(a,b,edge_type), btrim(evidence)<>'' reddi, strength DEFAULT 0 YOK (D-249). 11 kanonik edge_type; v0'da yalniz 2 uretilir (same_osb, nace_complementary); 9'u bos. D-245 IKI CURUTME: companies.id -> companies(company_id) (0001_core.sql:35); osb_slug kolonu YOK -> osb_id FK (0001_core.sql:51). Uretici graph/kenarlar.py; tek yazma kapisi kenarlari_yaz() ON CONFLICT DO NOTHING, grep 1 INSERT (D-256/2). MANDAL KIRILDI (D-256/4) -> YESIL. Test 16/16 passed. Hub yazildi. Canli DB'ye yazim YOK (D-238).",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -2463,13 +2463,13 @@
     "baslik": "[DOC] Faz 5 tedarikçi denetim kapsamını araştır → docs/FAZ5_VENDOR_DUE_DILIGENCE_KAPSAM.md (4s)",
     "sahip": "yasu",
     "oncelik": "P3",
-    "durum": "plan",
+    "durum": "review",
     "baslangic": "2026-10-02T02:29:03",
     "bitis": null,
     "dosyalar": [
       "docs/FAZ5_VENDOR_DUE_DILIGENCE_KAPSAM.md"
     ],
-    "not": "",
+    "not": "Teslim (yasu): docs/FAZ5_VENDOR_DUE_DILIGENCE_KAPSAM.md yazildi (KOD YOK - brif kapsam disi). SSOT satir sayisi olculdu: 1687. 8 DENETIM SORUSU (S1-S8) + 8 EKSIK VERI KAYNAGI (Engel kolonunda bos hucre YOK; 6'si 'bilmiyorum') + 3 yol + ONERIM: Yol B + 3 oz-eleştiri + 9 wikilink. KOK BULGU: 7 musteri sorusunun 4'une cevap veremiyoruz; eksik olan ekran degil kaynakta veri. annual_turnover semada KOLON DEGIL (sadece 0018:18 yorumu); employee_count var ama 0024:22 '0 dolu -> hepsi NULL'; vergi/SGK borcu tablosu YOK; ortaklik bilgisi YOK; risk_scores 8 kolon semada var (0046) ama hesabi yok (D-238) -> NULL='olculmedi' (D-249). D-245 CURUTME: brif ornegi 'companies.vkn' yaziyordu, diskte oyle kolon YOK; kanonik ad companies.tax_number (0001_core.sql:39). Faz B kapisi GECTI: 19 kolon + 9 tablo adi migrations/*.sql icinde grep ile dogrulandi. Hub PLAN_STRATEGY_HUB yazildi (B-14). Sonraki onerilen gorev: Faz 2 hesaplama.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -2494,5 +2494,43 @@
     "mod": "code",
     "brief": "plans/brief_utku_DOC-GLOBAL-INTEL-ARASTIRMA-01.md",
     "talimat": "Brif: plans/brief_utku_DOC-GLOBAL-INTEL-ARASTIRMA-01.md. KOD GOREVI DEGIL. 'Faz 6 bugun yapilamaz' sonucu basarisizlik degil, dogru cevaptir. Calistirmadigin komutun sonucunu yazmak yasak (D-266). Bagimli: DOC-VENDOR-DD-ARASTIRMA-01."
+  },
+  {
+    "task_id": "VERI-SKOR-MOTORU-01",
+    "id": "VERI-SKOR-MOTORU-01",
+    "baslik": "[VERI] Need/Fit/Timing/Ensemble dort skor tablosu -> 0049_firsat_skorlari.sql (5-10g)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-10-02T16:35:00",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/schema/migrations/0049_firsat_skorlari.sql"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-SKOR-MOTORU-01.md",
+    "talimat": "D-319: K4 Three-Score System resmi skor seti. Brief'i oku, Faz A sema dogrulama ile basla."
+  },
+  {
+    "task_id": "VERI-TOBB2B-BUYUTME-01",
+    "id": "VERI-TOBB2B-BUYUTME-01",
+    "baslik": "[VERI] TOBB2B pilot buyutme - tobb2b.org.tr ucretsiz, genis Id araligi (3-5g)",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-10-02T16:35:02",
+    "bitis": null,
+    "dosyalar": [
+      "data/pilots/VERI-TOBB2B-BUYUTME-01/teklifler.json"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_VERI-TOBB2B-BUYUTME-01.md",
+    "talimat": "D-319: tobb2b.org.tr ucretsiz onaylandi. Brief'i oku, pilotun denemedigi Id araligiyla basla, rate-limit zorunlu."
   }
 ]

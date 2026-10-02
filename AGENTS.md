@@ -4376,3 +4376,32 @@ python scripts/gorev_kutusu.py basla --ajan salih       -> exit 0, D-210 kapisi 
 
 ### Referans
 [[D-69]] (`basla` tüketicidir) · [[D-198]] (Arşiv mükerrer kapısı) · [[D-210]] (Ajan chat kuralı) · [[D-217]] (Tek brif + mandal) · [[D-222]] (Kanıtlı kapanış) · [[D-227]] (Karar numarası yalnız AGENTS.md'den) · [[D-260]] (Beyan kanıt değildir)
+
+## D-319 — Resmi skor seti K4, TOBB2B kaynağı ücretsiz katman (KAHİN kararı 2026-10-02)
+
+### 1. Bulgu
+
+İki açık soru vardı: (K-B) müşteriye gösterilecek resmî skor seti K2'nin 8 skoru mu, K4'ün need/fit/timing'i mi? Ve TOBB2B/sanayi.org.tr veri kaynağı hangisi onaylı? Pilot ölçümü (`VERI-TOBB2B-KESISIM-01`) tobb2b.org.tr'nin ücretsiz `teklif_goster.php?Id=N` uç noktasından 50 Id'de 20 dolu, 11 eşleşme, 1.575 firma verdi; sanayi.org.tr ve lonca.gov.tr pilot sırasında ölçülüp reddedildi (erişim/içerik kriterleri tutmadı).
+
+### 2. Karar
+
+KAHİN onayı: *"Onaylıyorum: K4 + tobb2b.org.tr (ücretsiz) ile başla, F5 ve pilot büyütme görevlerini aç."*
+
+- **Resmî skor seti = K4** ([`AI proje v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md:229-240`](AI%20proje%20v1/V10/05_versiyonlar/01_versiyon_9_baglam_dokumani.md:229)) — Need/Fit/Timing/Ensemble dört skor. K2'nin 8 skorlu risk motoru (D-256, `company_risk_scores`) **ayrı amaçlı kalır, kaldırılmaz** — risk motoru iç kalite/risk ölçümü, K4 müşteriye gösterilecek fırsat skoru. İkisi birlikte yaşar.
+- **TOBB2B kaynağı = tobb2b.org.tr ücretsiz katman**, D-306/D-307 kazıma disiplini altında (rate-limit zorunlu, kanıt log'u zorunlu). sanayi.org.tr ve lonca.gov.tr kapalı kalır (pilotta reddedildi, yeniden açılmaz).
+- K-B ve TOBB2B açık soruları **kapandı**.
+
+### 3. Uygulama
+
+- **F5 açıldı**: `VERI-SKOR-MOTORU-01` → utku, brief [`plans/brief_utku_VERI-SKOR-MOTORU-01.md`](plans/brief_utku_VERI-SKOR-MOTORU-01.md), kilitli dosya [`src/company_master/schema/migrations/0049_firsat_skorlari.sql`](src/company_master/schema/migrations/0049_firsat_skorlari.sql) (migration + down dosyası orkestratör tarafından önceden yazıldı, D-253 göç defteri deseni).
+- **Pilot büyütme açıldı**: `VERI-TOBB2B-BUYUTME-01` → yasu, brief [`plans/brief_yasu_VERI-TOBB2B-BUYUTME-01.md`](plans/brief_yasu_VERI-TOBB2B-BUYUTME-01.md), kilitli dosya `data/pilots/VERI-TOBB2B-BUYUTME-01/teklifler.json`.
+- **Bilinen sınırlama** (F5 brifine yazıldı): `fit_score`'un girdisi `company_capabilities`/`certifications`/`key_personnel` şema olarak var ama ETL doldurması F3'te — F3 bitene kadar fit_score sparse/NULL kalır (D-249: "veri yok" ≠ "0 puan"). Bloklayıcı değil, kabul edilen durum.
+- `schema_versions.json` bu göç için **güncellenmeyecek** — migration 46/47/48'de de güncellenmedi (dondurulmuş tarihsel kayıt, #22 triyaj kararı beklemede), 49 aynı fiili pratiği izler.
+
+### 4. Açık borç
+
+- F3 tamamlanana kadar F5'in fit_score çıktısı ölçülemez — F3 bitişi F5'in gerçek doğrulama tarihidir.
+- #22 (schema_versions.json 23'te donmuş triyaj kararı) hâlâ bekliyor; 0049 de bu borca eklendi.
+
+### Referans
+[[D-249]] (veri yok ≠ 0 puan) · [[D-253]] (göç defteri) · [[D-256]] (tek yazma kapısı) · [[D-306]] (kazıma merkezi kaydın servisidir) · [[D-307]] (ihale şema kararı) · [[D-312]] (teslim döngünün bir turu)

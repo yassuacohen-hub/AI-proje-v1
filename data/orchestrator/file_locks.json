@@ -83,5 +83,10 @@
     "sahip": "salih",
     "task_id": "ALTYAPI-MIMIR-BAGLAM-01",
     "kilitlendi": "2026-10-01T20:52:27"
+  },
+  "data/pilots/VERI-TOBB2B-BUYUTME-01/teklifler.json": {
+    "sahip": "yasu",
+    "task_id": "VERI-TOBB2B-BUYUTME-01",
+    "kilitlendi": "2026-10-02T16:35:02"
   }
 }
