@@ -74,19 +74,9 @@
     "task_id": "ALTYAPI-RAG-EMBEDDER-01",
     "kilitlendi": "2026-10-01T20:52:26"
   },
-  "src/company_master/vector/service.py": {
-    "sahip": "utku",
-    "task_id": "VERI-RAG-KORPUS-01",
-    "kilitlendi": "2026-10-01T20:52:26"
-  },
   "src/company_master/odin_ai/mimir_servis.py": {
     "sahip": "salih",
     "task_id": "ALTYAPI-MIMIR-BAGLAM-01",
     "kilitlendi": "2026-10-01T20:52:27"
-  },
-  "data/pilots/VERI-TOBB2B-BUYUTME-01/teklifler.json": {
-    "sahip": "yasu",
-    "task_id": "VERI-TOBB2B-BUYUTME-01",
-    "kilitlendi": "2026-10-02T16:35:02"
   }
 }

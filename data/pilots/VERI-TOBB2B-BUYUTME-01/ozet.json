@@ -1,0 +1,26 @@
+{
+ "teklif": 10,
+ "eslesen_teklif": 5,
+ "eslesme": 5,
+ "firma": 5,
+ "denenen_id": 100,
+ "bos_id": 90,
+ "hata": 0,
+ "doluluk_yuzde": 10,
+ "sure_sn": 128.3,
+ "rate_limit_sn": 1.0,
+ "id_araligi": [
+  21050,
+  21149
+ ],
+ "pilot_id_araligi": [
+  21000,
+  21049
+ ],
+ "pilot_karsilastirma": {
+  "teklif": 20,
+  "eslesen": 11,
+  "firma": 1575,
+  "doluluk_yuzde": 40
+ }
+}

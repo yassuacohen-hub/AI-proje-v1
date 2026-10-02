@@ -1939,9 +1939,9 @@
     "baslik": "[VERI] TSG ilan turu eslermesini duzel -> olay_esle normalize + canli unknown olcumu (1s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-10-01",
-    "bitis": null,
+    "bitis": "2026-10-02T18:00:31",
     "dosyalar": [
       "src/company_master/etl/tsg_yazici.py",
       "skills/services/ticaret_sicili_kanit.py",
@@ -2387,9 +2387,9 @@
     "baslik": "[VERI] Firma kayitlarini korpusa yaz -> vector/service.py (3s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-10-01T20:52:26",
-    "bitis": null,
+    "bitis": "2026-10-02T18:00:31",
     "dosyalar": [
       "src/company_master/vector/service.py"
     ],
@@ -2501,7 +2501,7 @@
     "baslik": "[VERI] Need/Fit/Timing/Ensemble dort skor tablosu -> 0049_firsat_skorlari.sql (5-10g)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-10-02T16:35:00",
     "bitis": null,
     "dosyalar": [
@@ -2520,13 +2520,13 @@
     "baslik": "[VERI] TOBB2B pilot buyutme - tobb2b.org.tr ucretsiz, genis Id araligi (3-5g)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-10-02T16:35:02",
-    "bitis": null,
+    "bitis": "2026-10-02T18:22:32",
     "dosyalar": [
       "data/pilots/VERI-TOBB2B-BUYUTME-01/teklifler.json"
     ],
-    "not": "",
+    "not": "Teslim (yasu): Pilot buyutuldu (D-319). Yeni Id araligi 21050-21149 tarandi; pilottaki 21000-21049 TEKRAR TARANMADI. 100 Id denendi -> 10 teklif dolu (%10 DOLULUK) vs PILOT %40 (20/50); 90 Id bos. Brif varsayimi '%40 buyuk olcekte gecerli' CURUTULDU; sebep olculmedi. Eslesme orani korundu 5/10 (%50) vs 11/20 (%55); mutlak firma 5 (pilot 1.575). Rate-limit zorunlu ARALIK_SN=1.0 kodda gorunur (kabul kriteri). R8 IP kontrolu: 3 hatada DUR. Kalici arac scripts/veri_tobb2b_buyutme.py. Cikti data/pilots/VERI-TOBB2B-BUYUTME-01/{teklifler,ozet}.json. Hub + bulgu defteri yazildi. EK OLCUM (--kuru, dosya yazilmadi): 500 Id (21150-21649) tarandi -> 0 TEKLIF. Nokta testleri (21060/21068=VAR, 21065/69/70/72/75/80/21100/21149=yok) TOBB2B kaynaginin Id 21068'de SONA ERDIGINI kanitladi. SONUC: %10 doluluk aralik seyrekligi degil, KAYNAK TUKENMESI; pilotun %40'i o araligin ozelligiydi, genellenmedi (D-260). KARAR: TOBB2B buyutme bu kapsamda KAPANDI; ek genisletme GEREKSIZ (kaynakta veri yok). Yeni kaynak acma ihsan kararina birakildi (brif kurali).",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
