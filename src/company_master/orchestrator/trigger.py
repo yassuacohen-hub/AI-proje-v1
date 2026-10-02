@@ -171,10 +171,10 @@ def tetik_ekle(
     kayitlar = _tetikleri_oku(ajan, data_dir)
     if any(k["task_id"] == task_id and k["durum"] == "bekliyor" for k in kayitlar):
         raise TriggerError(f"{ajan} için bekleyen tetik zaten var: {task_id}")
-    # ORCH-12: Idempotency — tamamlanmış göreve tekrar tetik DÜŞMEZ.
+    # ORCH-12/D-317: Idempotency — kapalı göreve (done/archive/iptal) tekrar tetik DÜŞMEZ.
     gorev = tb.gorev_getir(task_id)
-    if gorev and gorev.get("durum") == "done":
-        raise TriggerError(f"{task_id} zaten done — tekrar tetik düşmez (idempotency)")
+    if gorev and gorev.get("durum") in tb.KAPALI_DURUMLAR:
+        raise TriggerError(f"{task_id} zaten {gorev['durum']} — tekrar tetik düşmez (idempotency)")
     kayit = {
         "task_id": task_id,
         "ajan": ajan,

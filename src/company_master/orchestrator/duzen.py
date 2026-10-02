@@ -204,7 +204,10 @@ def pano_bakim() -> dict:
         degisti = False
         for k in kayitlar:
             pd = pano_durum.get(k["task_id"])
-            if pd in ("done", "blocked") and k["durum"] not in ("done", "blocked"):
+            # D-317: KAPALI_DURUMLAR (done/archive/iptal) + blocked hepsi senkronize olur.
+            if (pd in tb.KAPALI_DURUMLAR or pd == "blocked") and k["durum"] not in (
+                *tb.KAPALI_DURUMLAR, "blocked"
+            ):
                 k["durum"] = pd
                 k.pop("onceki_gorev", None)
                 degisti = True
