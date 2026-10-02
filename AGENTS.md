@@ -4634,7 +4634,7 @@ dosyalarında da utku'da hiç kayıt yok. Yük transferi değil, **ilk atama**.
 
 ---
 
-## D-330 — `onayla` tetik dengesini kendiliğinden tetikler (KAHİN kararı 2026-10-02)
+## D-331 — `onayla` tetik dengesini kendiliğinden tetikler (KAHİN kararı 2026-10-02)
 
 ### 1. Bulgu
 D-329 tetik dengesini **elle** çalışan `denge` komutuyla çözdü, ama kök

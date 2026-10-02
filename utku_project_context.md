@@ -4,8 +4,34 @@
 
 ## KALDIĞIM YER
 
-- **Konum:** `SCRAPE-002-LEMMLESS-ANKARA-OSB` **teslim edildi → `review`** (2026-10-02 23:00).
-  Sonraki hedef: `bak --ajan utku` ile yeni tetik (D-312 döngüsü).
+- **Konum:** `DOC-GLOBAL-INTEL-ARASTIRMA-01` **teslim edildi → `review`** (2026-10-02 23:50).
+  `SCRAPE-002` de `review`'da. Commit `2ae39f8` (45 pre-commit testi geçti).
+  Sonraki hedef: D-312 döngüsü — `bak`/`ajan_chat.py oku`; SCRAPE-005 hâlâ **bloke**.
+- **Yapılanlar (2026-10-02 23:40 DOC-GLOBAL turu):**
+  - `docs/FAZ6_GLOBAL_INTEL_KAPSAM.md` yazıldı (370 satır) + `hubs/PLAN_STRATEGY_HUB.md`
+    B-14 kapanış satırı. Kod yazılmadı (brif: dokümantasyon görevi).
+  - **Ölçülen toplam:** `osb_veri_denetim.py` → 8987 kayıt / 8296 tekil / 44 mükerrer /
+    647 kimliksiz / 0 mojibake. `--self` muhasebe ok, `--kontrol 8987` exit 0.
+  - **D-260 tuzağı:** 8987 `data/osb/` ham çıktıdır, **`companies` DEĞİL**
+    (9412 = D-263/D-264 tarihli ölçüm, bu turda yeniden ölçülmedi).
+  - **Ülke kolonu `companies`'ta YOK.** Ama projede **iki tutarsız ülke geleneği** var:
+    `user_activity_log.ulke_kodu CHAR(2)` ISO 3166-1 (0017:20) ·
+    `job_postings.location_country TEXT DEFAULT 'Türkiye'` (0013:20). İkisi de taşınmamış.
+  - 5 engel: E1 ülke · E2 `tax_number` VKN odaklı · E3 NACE (NAICS 50 migration'da **0**) ·
+    E4 `is_ankara` tek soruya cevap veren kolon · E5 Türkçe dil varsayımı.
+  - **Öneri: Yol A (ertele)** — E1-E5 veri değil öncelik eksikliği; Yol B'nin bedeli
+    ölçülmüş (D-249 / 0024 gocu 8140 sahte 0 buldu).
+  - 3 bulgu `bulgu_defteri.md`'ye yazıldı (acil: ülke geleneği çatışması).
+- **İki brif sapması (ikisi de neredeyse yanlış karara yol açıyordu):**
+  1. Brif E3'te `entity_resolution/` dedi → orada `maketrans` **0 eşleşme**.
+     Gerçek yer `api/core/normalize.py:602,681` + `etl/kaynak_bagla.py:22`.
+  2. İlk `findstr` **boş** döndü, "ülke kolonu yok" yazmak üzereydim.
+     Pozitif kontrol (`vkn` → 12 satır) PowerShell `\"` tırnaklamasının
+     bozuk olduğunu gösterdi. **Boş sonuç, sağlam sonuç kadar güvenilir değildir.**
+- **KRİTİK — çok ajanlı kirli ağaç:** `git add` sonrası `AGENTS.md` ve
+  `scripts/gorev_kutusu.py` **başka ajanların staged** işi olarak geldi.
+  `git restore --staged <dosya>` ile stage'ten çıkar, içeriğine dokunma.
+  `git add -A` **asla**.
 - **Yapılanlar (2026-10-02 SCRAPE-002 turu):**
   - `SCRAPE-002-LEMMLESS-ANKARA-OSB` → **teslim (review)**. 5 yeni dosya:
     `src/company_master/etl/scrape_kayit.py` (0050 tek yazıcı),
@@ -35,7 +61,12 @@
   kırma denemesi kanıtlı. `audit_kaydet()` artık `audit_id` döndürüyor →
   hata kayıtları FK'li (canlı: error_id=2 → audit_id=7, orphan=0).
   İdempotens **3. kez** doğrulandı (hash'ler değişmedi).
-- **Görev:** `SCRAPE-002-LEMMLESS-ANKARA-OSB` (review) ·
+- **Öz-eleştiri (KALICI — SİLİNMEZ)** — bu turda *yazılan belgenin yarım
+  kalması* önemli bir tuzak: uzun markdown `write` çağrısı sessizce ortada
+  kesilebiliyor ve tool "başarılı" diyor. Teslimden önce dosyanın **sonunu
+  okumak** zorunlu; `grep` ile son başlığı aramak yetmiyor.
+- **Görev:** `DOC-GLOBAL-INTEL-ARASTIRMA-01` (review) · `SCRAPE-002` (review) ·
+  `SCRAPE-005-KAZIMA-DOCKER-INTEGRATION` (**bloke**, brif + locked path eksik) ·
   **Son okunan karar:** `D-323`
 
 > **SCRAPE-002'de briften 3 yerde sapıldı — hepsi diskte ölçülerek bulundu.**
