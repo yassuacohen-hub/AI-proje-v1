@@ -182,6 +182,22 @@ def ozet_yenile() -> str:
     return f"ozet: 1 blok (silinen kopya {silinen})"
 
 
+def _matris_yenile() -> str:
+    """Ilerleme Matrisi tablolarini da gunceller.
+
+    Neden ayri dosya: matris kendi olcumlerini yapar (notion_matris.py),
+    senkron yalnizca gorunumu tazeler.
+    """
+    try:
+        import notion_matris_kur
+        notion_matris_kur.kur()
+        return "matris: guncellendi"
+    except ImportError:
+        return "matris: kurulu degil (atlandi)"
+    except SystemExit as exc:
+        return f"matris: atlandi ({str(exc)[:60]})"
+
+
 def senkron(bilesik_test: bool = False) -> None:
     gorevler = pano_gorevleri()
     mevcut = _mevcut()
@@ -207,6 +223,7 @@ def senkron(bilesik_test: bool = False) -> None:
     print(f"eklendi={eklendi} guncellendi={guncellendi} degismedi={ayni}")
     print(f"yerel gorev={len(gorevler)} notion satiri={len(mevcut)}")
     print(ozet_yenile())
+    _matris_yenile()
 
 
 if __name__ == "__main__":

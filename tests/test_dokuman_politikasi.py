@@ -28,6 +28,14 @@ GURULTU = (
     "data/skills",
     "_ARSIV",
     "worktree klasoru",
+    # Sanal ortam: pip install ettigin her paket kendi .md sablonlarini
+    # getirir (huggingface_hub/templates/modelcard_template.md gibi).
+    # Bunlar proje sablonu DEGIL; listeye girmeyince Kural 3 yanlis alarm
+    # verir ve asil sablon ihlalini gizler (D-220: gurultu gercek alarmi gizlemez).
+    ".venv",
+    ".venv_test",
+    "site-packages",
+    "__pycache__",
 )
 
 # D-220 Kural 4 — git geçmişi bu işi yapar, dosya adı yapmaz.
