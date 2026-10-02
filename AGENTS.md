@@ -741,33 +741,31 @@ python scripts/ajan_chat.py bulgula "Tasarım (D-192)" "Font boyut tutarsız" --
 - Otomatik eleştiri önerileri (bulgu → çözüm)
 - Chat geçmişi grafiklendirme (trend analiz)
 
-## Git Değişiklik Kaybı Önleme (D-193 — KAHİN kararı 2026-09-23)
+## Git Değişiklik Kaybı Önleme (D-193 — KAHİN kararı 2026-09-23, D-320 ile düzeltildi 2026-10-02)
 
 **Sorun:** Uncommitted değişiklikler session sonunda kayboluyor (geçerli olay: dün yapılan admin menu + küçük iyileştirmeler kaybedildi).
 
-**Çözüm:** İki katmanlı koruma:
+**Çözüm (D-320 güncellemesi — cron daemon YAZILMADI, gerçek koruma zaten vardı):**
 
 1. **Ajan Sorumluluğu (Zorunlu)**
    - Her görev bitiminde `git add -A && git commit -m "<görev_özeti>"` ile commit et. Push'u tetik sisteminde veya oturum kapatılmadan önce yap.
-   - Uncommitted dosyalar 30 dakika sonra `git stash` ile saklanır (otomatik cron, `scripts/git_stash_guard.py`, D-193 ile yürürlüğe girecek).
-   - Stash mesajı: `AUTO-STASH [session_start_timestamp] [modified_files_count]` — session bitiminde roo'ya alert gider.
+   - Oturum sonunda commit edilmemiş dosya kalırsa `basla` komutu `git status` uyarısı basar (aşağıya bak) — ajan bunu görüp commit eder.
 
-2. **Sistem Koruma (Arka planda)**
-   - `.git/hooks/pre-commit`: değişiklik dosya sayısı > 5 ise commit öncesi `git diff --stat` raporunu loglar (basit audit).
-   - `.github/workflows/git-guard.yml` (yapılacak): Her 1 saatte uncommitted değişiklik varsa, automatic branch oluşturur (`auto-save-TIMESTAMP`), stash uygulanır, PR draft açılır. Ajan onaylaması gerekir.
+2. **Sistem Koruma (fiilen çalışan, `.git/hooks/pre-commit`)**
+   - Her commit'te `kodlama_denetim.py --kapsam git` (syntax/UTF-8/line-ending doğrulama).
+   - Sema/göç dosyasına dokunan commit'te `test_goc_defteri.py`.
+   - Her commit'te `test_kalite_puani.py`.
+   - Bu üçü birlikte D-193'ün "sistem koruma" katmanının fiilen yaptığı iş; ayrı bir `git_safety_check.py` dosyası gerekmiyor.
 
 3. **Oturum Başında (Ajan Zorunluluk)**
-   - Oturum başında `git status` çalıştır. Stash varsa (`git stash list`), `git stash pop` yapıp değişiklikleri review et. Artık dosya varsa manuel olarak çalış veya `git reset --hard`.
-   - Pre-commit hook: `scripts/git_safety_check.py` Python dosya syntaxını, UTF-8'i, line ending'leri doğrular. Bozuk dosya commit edilemez.
+   - `basla` komutu artık commit edilmemiş dosya varsa 5 satırlık uyarı basar (D-320, `cmd_basla`).
+   - Stash varsa (`git stash list`), `git stash pop` yapıp değişiklikleri review et. Artık dosya varsa manuel olarak çalış veya `git reset --hard`.
 
 **Kapsam:** Başladığı tarihten (2026-09-23) sonrası tüm oturumlar. Geriye dönük stash var ise `git stash list` ile görülür; poplayabilir.
 
 **Amacı:** Uncommitted değişiklik > 30 dakika hiçbir zaman kalmasın. Ajan + sistem çift tarafından korunmuş.
 
-**Kaynaklar:**
-- `scripts/git_stash_guard.py` — cron tarafından çalışacak, 30 dakika kontrolü
-- `scripts/git_safety_check.py` — pre-commit hook
-- GitHub Actions yaml (yapılacak, P2)
+**Not (D-320 öz-eleştiri):** `scripts/git_stash_guard.py` ve `scripts/git_safety_check.py` 2026-09-23'ten beri dokümanda "yazılacak" diye duruyordu, **hiçbir zaman yazılmadı** — 3 ayrı taramada doğrulandı. Cron daemon kurmak yerine zaten çalışan `.git/hooks/pre-commit` koruması + hafif bir `basla` uyarısı yeterli; kurulmayan dosyayı dokümanda "yapılacak" bırakmak kendi başına bir D-309/1 deseni (yazılmayan şey yapılmış gibi durur).
 
 ---
 
@@ -1099,9 +1097,10 @@ python tests/test_brief_sablon_denetim.py --baseline-yaz        # yalnız KAHİN
 - **§KALDIĞIM YER** en üstte, **tek blok, üzerine yazılır** (biriktirilmez): Konum / Yapılanlar / Kritik bağlam / Sonraki adım / Görev + Son okunan karar.
   - *Kritik bağlam* satırı en değerlisi: "SADECE şu dosyaları baz al" — ajanın gereksiz repo taramasını kesen tek satır.
 - **§Tuzaklar** ikinci değerli bölüm: *belirti → kök neden → çözüm*. Yazılmayan tuzak gelecek oturumda tekrar ödenir.
+- **§Öz-eleştiri (KALICI — SİLİNMEZ)** — her ajan kendi hatasını/öğrendiği dersi buraya yazar. Bu bölüm **200/400 satır tavanına dahil değildir ve arşiv rotasyonunda taşınmaz**; dosyada kalıcı kalır (KAHİN kararı 2026-10-02, Ürün Sahibi onayı: "tüm ajanlar öz eleştirilerini cortex dosyasında sabit tutsun, silmesinler").
 - **Slash komutu ile üretilmez.** Komut ancak tahmin eder; tahmin hayalet görev doğurur (D-216). Yazılı olan tek güvenilir hafızadır.
 - **Context pano ile çelişirse pano üstündür** — context bayatlar, pano canlıdır.
-- **Tavan 200 satır.** Aşınca eski oturum blokları `archive/<ajan>_context_<YYYYMM>.md`'ye taşınır; şişmiş context her oturumda okunur, maliyeti kalıcıdır.
+- **Tavan 400 satır** (D-219 Ek, Ürün Sahibi 2026-10-02: "cortex dosya karakter sayısınıda iki katına çıkart" — 200'den 400'e çıkarıldı, tüm ajanlar için). Aşınca eski oturum blokları `archive/<ajan>_context_<YYYYMM>.md`'ye taşınır; **§Öz-eleştiri hariç** — o bölüm hiçbir zaman taşınmaz/silinmez.
 - **Oturum kapanışı zorunlu:** §KALDIĞIM YER güncellenir + *Son okunan karar* no tazelenir. Atlanırsa dosyanın tüm faydası kaybolur.
 
 ---
@@ -4405,3 +4404,64 @@ KAHİN onayı: *"Onaylıyorum: K4 + tobb2b.org.tr (ücretsiz) ile başla, F5 ve 
 
 ### Referans
 [[D-249]] (veri yok ≠ 0 puan) · [[D-253]] (göç defteri) · [[D-256]] (tek yazma kapısı) · [[D-306]] (kazıma merkezi kaydın servisidir) · [[D-307]] (ihale şema kararı) · [[D-312]] (teslim döngünün bir turu)
+
+## D-320 — Git uyarısı cron daemon değil, `basla` içi uyarı (KAHİN kararı 2026-10-02)
+
+### 1. Bulgu
+[[D-193]] 2026-09-23'ten beri `scripts/git_stash_guard.py` ve `scripts/git_safety_check.py`'yi "yazılacak" diye duruyordu; 3 ayrı taramada hiç yazılmadığı doğrulandı (D-193 öz-eleştiri notu).
+
+### 2. Karar
+Cron daemon kurulmaz. `.git/hooks/pre-commit` zaten commit anını koruyor; eksik olan tek şey oturum **başındaki** hatırlatmaydı. `cmd_basla` ([`scripts/gorev_kutusu.py:252`](scripts/gorev_kutusu.py:252)) artık `git status --porcelain` çalıştırır (5 sn timeout, hata olursa sessizce geçer), commit edilmemiş dosya varsa ilk 5'ini + sayıyı basar.
+
+### 3. Kanıt
+`python scripts/gorev_kutusu.py basla --ajan ihsan --simulasyonsuz` canlı çalıştırıldı: `[D-320 GIT UYARISI] 217 commit edilmemis dosya var:` + 5 örnek + "... ve 212 dosya daha" çıktısı doğrulandı.
+
+### Referans
+[[D-193]] (Git değişiklik kaybı önleme) · [[D-261]] (gönüllü koruma koruma değildir)
+
+## D-321 — Teslim kimliği board'la birebir karşılaştırılır; bypass kapısı kendi sahibini kilitlemez (KAHİN kararı 2026-10-02)
+
+### 1. Bulgu
+`bulgu_defteri.md` satır 72 (utku, VERI-SKOR-MOTORU-01): görev kimliği board'da Türkçe **SKOR** (`VERI-SKOR-MOTORU-01`) iken hub ve rapora yanlışlıkla **SCOR** yazılmış. Ayrıca kendi açtığı D-198 bypass kaydı `durum=acik` olduğu için D-210 kapısı kendi teslimini de engelledi; çözüm yalnızca `chat.kapat` ile mümkün oldu.
+
+### 2. Karar
+1. Hub/rapor satırı yazıldıktan sonra, içindeki görev kimliği board'daki (`task_board.json`) `task_id` alanıyla **birebir string karşılaştırması** yapılır — kısaltma/yazım sapması (SKOR↔SCOR gibi) teslim öncesi yakalanır.
+2. D-210 kapısı (`chat.ajan_acik_sorulari`) yalnızca **karşı tarafın** açık kaydını engel sayar; ajanın kendi açtığı D-198 bypass kaydı kendi teslimini kilitlemez.
+
+### 3. Açık borç
+~~Madde 1~~ ve ~~Madde 2~~ kodlandı (2026-10-02): `cmd_teslim` (`scripts/gorev_kutusu.py`) artık `tb.gorev_getir(task_id)` ile board-karşılaştırma kapısını (D-321 BOARD KAPISI) çalıştırır; `ajan_acik_sorulari` (`src/company_master/chat.py`, önceki metinde yanlışlıkla `scripts/ajan_chat.py` denmişti) `kimden != ajan_norm` filtresiyle kendi kaydını engel saymaz. Kanıt: `tests/test_bulgu_defteri.py::test_d321_board_kapisi_reddeder` (kırma testi) ve `tests/test_ajan_chat.py::TestAjanAcikSorulari` (3 test, biri kırma testi) — hepsi geçti.
+
+### Referans
+[[D-198]] (bypass kaydı) · [[D-210]] (ajan chat kuralı) · [[D-55]] (rapor yazmak teslim değildir)
+
+## D-322 — Virgüllü sayı tipleri regex mandalını kırar; satır-bazlı tarama + kırma testi zorunlu (KAHİN kararı 2026-10-02)
+
+### 1. Bulgu
+`bulgu_defteri.md` satır 77 (utku, VERI-SKOR-MOTORU-01): regex tabanlı "yoktur" denetimi `NUMERIC(5,2)` içindeki virgülde kırıldı, yanlış negatif verdi (D-309/3 deseni tekrarı).
+
+### 2. Karar
+Yeni yazılan metin mandallarında (regex ile "X yoktur" denetleyen testler), tip tanımı virgül içerebiliyorsa (`NUMERIC(p,s)` gibi) regex tüm dosya metni üzerinde değil **satır bazlı** çalıştırılır, ve mandalın gerçekten kırılabildiğini kanıtlayan en az bir **kırma testi** (negatif örnek, mandal olmadan hatayı üretir) eklenir.
+
+### 3. Açık borç
+Kural yazıldı; geriye dönük var olan regex-mandallarının taranıp satır-bazlı forma çevrilmesi henüz yapılmadı.
+
+### Referans
+[[D-309]] (desen #3: regex kör nokta) · [[D-266]] (mandal kendi kör noktasını korur)
+
+## D-323 — Migration 0046 numara çakışması: scrape göçü 0050'ye taşındı (KAHİN kararı 2026-10-02)
+
+### 1. Bulgu
+Plan dokümanı (`plans/2026-10-01_docker_taşıma_kazıma_entegrasyon_değerlendirmesi.md`) `0046_scrape_audit_log.sql` numarasını önerdi, ama 0046 zaten `0046_risk_skorlari.sql` tarafından kullanılıyordu (0047-0049 de dolu: entity_graph, firma_turu_etiketi, firsat_skorlari). SCRAPE-001/SCRAPE-002 (utku) bu nedenle bloke oldu. Ayrıca plan dokümanının "✅ Ready" dediği bazı dosyalar (migration SQL, `_kazima_dogrula.py`) gerçekte diskte yoktu — iddia ile kanıt ayrışıyordu (D-254 deseni tekrarı).
+
+### 2. Karar
+Göç 0050'ye taşındı (ilk boş numara). Oluşturulan/düzeltilen dosyalar:
+- `src/company_master/schema/migrations/0050_scrape_audit_log.sql` (+ `down/0050_scrape_audit_log.down.sql`)
+- `scripts/_kazima_dogrula.py` (yeni; import deseni `goc_defteri.py` ile birebir: `sys.path.insert(0, str(ROOT/"src"))` + `from company_master.db.connection import get_engine`)
+- `.agents/skills/huginn-web-kazima/SKILL.md` — 4 adet "0046" referansı "0050"ye çevrildi
+- `data/orchestrator/task_board.json` — SCRAPE-001/SCRAPE-002 `dosyalar`/`talimat` alanları 0050'ye güncellendi
+
+### 3. Açık borç
+Plan dokümanlarındaki (`2026-10-01_docker_taşıma_...md`, `2026-10-01_kazima_verimlilik_...md`) "0046" tarihsel referansları ve "✅ Ready" iddiaları henüz düzeltilmedi (ayrı, düşük öncelikli temizlik).
+
+### Referans
+[[D-254]] (iddia ile kanıt ayrı durur) · [[D-227]] (karar numarası yalnız AGENTS.md'den)

@@ -187,3 +187,19 @@ ALAN: `TEST` · `DOC` · `ORKESTRA` · FİİL: `denetle`/`düzelt`/`belgele`/`ö
 |--------|---------------|
 | Streamlit (8501) | `python scripts/streamlit_restart.py` |
 | FastAPI (8000) | `docker compose up -d --build api` + curl |
+
+## Notion Pano Senkronu (D-323)
+
+Gorev durumu degistiginde Notion panosu **otomatik** guncellenir.
+Bunu sen ayrica yapmazsin — `scripts/gorev_kutusu.py` her komut sonunda
+`scripts/notion_senkron.py` calistirir.
+
+**Sana duser:**
+- Pano **yalnizca goruntur**, oradan is almaz. Karar buradan cikarilmaz.
+- Notion cokerse **gorev durmaz**; uyari yazilir, asil is devam eder.
+- Panodaki bilgi bayatlarsa kimse uyari almaz — bu yuzden **gorev durumunu
+  `gorev_kutusu.py` ile yonet**, panoya elle yazma.
+
+**Yanlislar (yapma):**
+- Panoya elle durum yazma — bir sonraki senkron ezilir.
+- Notion'dan panoya geri yazim yok; kaynak daima `data/orchestrator/task_board.json`.

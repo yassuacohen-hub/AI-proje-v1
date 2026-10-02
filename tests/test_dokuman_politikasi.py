@@ -168,20 +168,36 @@ def test_d271_borc_adinda_fiil_artmiyor() -> None:
     )
 
 
-def test_d219_ajan_context_dosyalari() -> None:
-    """Her ajanın hafıza dosyası: §KALDIĞIM YER + wikilink + 200 satır tavanı."""
+TAVAN = 400          # D-219 Ek (2026-10-02): 200 -> 400
+OZ_BOLUM = "\u00a7\u00d6z-ele\u015ftiri"   # kalici ogrenme blogu, tavana dahil DEGIL
+
+
+def test_d320_ajan_context_dosyalari() -> None:
+    """Her ajanin hafiza dosyasi: KALDIĞIM YER + wikilink + 400 satir tavani.
+
+    D-320 DUZELTMESI: onceki test 200 satir ve Oz-eleştiri'yi tavana sayiyordu.
+    Iki yanlis vardi:
+      1) Tavan 2026-10-02'de Uretim Sahibi karariyla 400'e cikarildi (D-219 Ek).
+      2) §Öz-eleştiri KALICI ve tavana DAHIL DEGIL; ajanin ogrendigi ders
+         arsiv rotasyonuyla silinmez. Yanlis olcum, ajani dogru davranisindan
+         dolayi cezalandirir (ölçüm yaniltmaz, D-260).
+    """
     ajanlar = ("ihsan", "utku", "yasu", "salih")
     for a in ajanlar:
         p = KOK / f"{a}_project_context.md"
-        assert p.is_file(), f"D-219: {p.name} yok — her ajanın hafıza dosyası zorunlu"
+        assert p.is_file(), f"D-219: {p.name} yok — her ajanin hafiza dosyasi zorunlu"
         t = p.read_text(encoding="utf-8")
-        assert "## KALDIĞIM YER" in t, f"D-219: {p.name} §KALDIĞIM YER bloğu yok"
+        assert "## KALDIĞIM YER" in t, f"D-219: {p.name} §KALDIĞIM YER blogu yok"
         assert "## Ilgili Nodlar" in t, f"D-218: {p.name} §Ilgili Nodlar yok"
         assert t.count("[[") >= 2, f"D-218: {p.name} en az 2 wikilink ister"
-        satir = len(t.splitlines())
-        assert satir <= 200, (
-            f"D-219: {p.name} {satir} satır, tavan 200. "
-            "Eski oturum bloklarını archive/<ajan>_context_<YYYYMM>.md'ye taşı."
+
+        sat = t.splitlines()
+        bas = next((i for i, l in enumerate(sat) if OZ_BOLUM in l), len(sat))
+        sayilan = bas                     # tavana sayilan kisim
+        assert sayilan <= TAVAN, (
+            f"D-320: {p.name} {sayilan} satir, tavan {TAVAN} "
+            f"(Oz-eleştiri bolumu {len(sat) - bas} satir haric).\n"
+            "Eski oturum bloklarini archive/<ajan>_context_<YYYYMM>.md'ye tasi."
         )
 
 

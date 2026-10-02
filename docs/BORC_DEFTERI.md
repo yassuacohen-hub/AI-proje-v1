@@ -21,6 +21,8 @@ yanlış okudu — altı tur üst üste (D-265, D-266, D-267/1, D-268/1, D-271/1
 
 | Kimlik | Ölçülen sapma | Durum | Kaynak D | Kapanış D |
 |---|---|---|---|---|
+| `BORC-SKOR-EVIDENCE-01` | `ensemble_score` **tablo yeniden üretilemez**: SSOT:263 formülü `evidence` girdisini kullanır (ağırlık 0.15), ama SSOT:232-237 dört skoru sayar ve `evidence_strength` bir **gate girdisi**dir — `company_opportunity_scores`'ta **kolonu yok**. D-319 tabloyu 4 kolonla sabitlediği için kolon açılmadı. Sonuç: satırdaki `ensemble_score` ile o satırın `need/fit/timing` değerleri arasındaki ilişki **doğrulanamaz**; `score_version` değişse bile eski satırın neden o değer olduğu bilinmez | ACIK | D-319 | — |
+| `BORC-F3-FIT-BOS-01` | `fit_score` (ensemble ağırlığı **0.35**, en yüksek) üç girdi tablosundan okuyor: `company_capabilities` / `certifications` / `key_personnel`. Şema **var** (0004), ETL **yok** (F3 tamamlanmadı) → bu üç tablo boş → `fit_score` her zaman `None` → **ensemble de `None`** (bileşen eksikse ensemble ölçülmez). Yani bugün hiçbir firmanın ensemble skoru **hesaplanamaz** | ACIK | D-319 | — |
 | `BORC-NACE-DOGRULAMA-01` | `nace_validity` alanı kaynaksız | KAPANDI | D-258 | D-287: doğrulama **yapılamaz değil, anlamsız** — sözlük var (3319) ama yetim kod **0**, hiçbir şeyi ayırt etmiyor; `verified` değeri hiç üretilmiyor, kolon `src/`de hiç **okunmuyor**. Ağırlık çekilmedi (kilit dürüst), puan kapısı iki mandalla korundu |
 | `BORC-PANO-BORC-00` | borç listesinin kanonik kaydı yok | KAPANDI | D-271 | D-272 |
 | `BORC-SCRIPTS-01` | `scripts/` altında 41 `_*` girdi (29 `.py` hepsi derlenir, **0 çürük**, üretim çağıranı **0**); kökte ayrıca **76 index hayaleti** tek kullanımlık betik. D-281'de ölçüldü ve **tavanlandı** (76/2), kesme ürün sahibinde. **D-288 eki:** `_ARSIV_tek_kullanimlik/` altında ayrıca **~160 izlenen dosya** var — aynı sapmanın ikinci yuvası, otomasyonun `git add -A`'sı ile büyümüştü; kapı kapatıldı, mevcut dosyalar **kesilmedi** (sahiplik belirsiz) | ACIK | D-255 | — |
@@ -54,6 +56,9 @@ yanlış okudu — altı tur üst üste (D-265, D-266, D-267/1, D-268/1, D-271/1
 | `BORC-QUALITY-BETIK-01` | adı geçen betik diskte yok | IPTAL | D-255 | D-271 |
 | `BORC-TASFIYE-IKIZ-01` | 22 tasfiye önekli firma öneksiziyle ikiz | KAPANDI | D-263 | D-264 |
 | `BORC-TEST-SIRA-01` | test sırası bağımlılığı; iki kirleten | KAPANDI | D-267 | D-271 |
+| `VERI-SEMA-DOGRULA-01` | şema dogrulama (1. tur) | KAPANDI | — | gorev `done` — |
+| `VERI-SEMA-DOGRULA-02` | şema dogrulama (2. tur) | KAPANDI | — | gorev `done` — |
+| `VERI-TOBB2B-BUYUTME-01` | TOBB2B buyutme: kaynak 21068'de bitti | KAPANDI | — | gorev `done` — Id 21068 olcum kaniti |
 | `VERI-KAYNAK-BAG-01` | 5060 yetim firma, kaynak bağı yok | KAPANDI | D-260 | D-263 |
 
 ## Borç değil — kural / görev kimlikleri
@@ -71,6 +76,8 @@ yüzden ayrı bölümde durur. Silinmezler: adları `AGENTS.md`'de geçtiği sü
 | `VERI-NACE-KOLON-01` | 0 kaçak NACE etiketi, onaylandı | KURAL | D-260 |
 | `VERI-NACE-SOZLUK-01` | 3319 NACE kodu, onaylandı | KURAL | D-260 |
 | `VERI-NACE-TEMIZ-01` | 554 `invalid_cleared`, onaylandı | KURAL | D-260 |
+| `VERI-SKOR-MOTORU-01` | Fırsat motoru — D-319/K4 resmi skor seti (`need`/`fit`/`timing`/`ensemble`), tek yazma kapısı `firsat_recalc()`; teslim edildi, 35/35 mandal + 3/3 kırma kanıtı | KURAL | D-319 |
+| `VERI-TSG-ESLEME-CASE-01` | TSG olay→sektör eşleme tablosu (17 `ILAN_TURU_ESLEME` anahtarı), teslim edildi; `review`a alındı, onay bekliyor | KURAL | D-318 |
 | `VERI-GORUNURLUK-01` | **böyle bir kimlik yok.** D-272/5'in anlattığı hayalet; o metni yazmak hayaleti gerçek bir dizeye çevirdi. Deftere iptal olarak girer, çünkü çıkarmanın yolu kaydı silmek olurdu | IPTAL | D-272 |
 
 ## Ölçülmüş sayılar (D-272)

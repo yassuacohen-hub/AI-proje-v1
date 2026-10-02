@@ -16,6 +16,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import subprocess
 import sys
 from pathlib import Path
 
@@ -30,6 +31,14 @@ for _akis in (sys.stdout, sys.stderr):
         _akis.reconfigure(encoding="utf-8", errors="replace")
     except (AttributeError, ValueError):  # pragma: no cover - eski Python / yonlendirilmis akis
         pass
+
+import importlib.util as _ilu  # noqa: E402
+
+_spec = _ilu.spec_from_file_location(
+    "bulgu_defteri", Path(__file__).resolve().parent / "bulgu_defteri.py"
+)
+bulgu = _ilu.module_from_spec(_spec)
+_spec.loader.exec_module(bulgu)
 
 from src.company_master.orchestrator import task_board as tb  # noqa: E402
 from src.company_master.orchestrator import trigger  # noqa: E402
@@ -171,6 +180,32 @@ def cmd_teslim(args: argparse.Namespace) -> int:
               file=sys.stderr)
         return 1
 
+    # D-318 KAPISI: bulgu defteri kanonik dokuman; teslimden once doldurulur.
+    # D-239 deseni: kural gövdesi tek yerde (bulgu_defteri.py), bu komut onu
+    # çağırır. Ölçüm: 123 teslim raporunun yalnız 25'inde bulgu bölümü vardı;
+    # kural yazılıydı, zorlayıcı yoktu.
+    if not bulgu.task_var_mi(args.task_id):
+        print("[D-318 BULGU KAPISI] HATA: bulgu defterinde bu görev kaydi yok — "
+              "teslim reddedildi.", file=sys.stderr)
+        print(f"       Defter: {bulgu.DEFLER.as_posix()} (tek kanonik dosya)", file=sys.stderr)
+        print(f"       Once bulgunu yaz, sonra teslim et:", file=sys.stderr)
+        print(f"       python scripts/bulgu_defteri.py ekle "
+              f"--task-id {args.task_id} --rol {args.ajan} \\", file=sys.stderr)
+        print("         --ozet \"...\" --karar \"D-NNN | kapandi:<kanit>\" "
+              "--renk oneri|dikkat|acil|tamam", file=sys.stderr)
+        print("       Bulgun yoksa: --ozet \"bulgu yok, nedeni\" "
+              "--karar \"red: <gerekce>\"", file=sys.stderr)
+        return 1
+
+    # D-321 KAPISI: hub/rapor satirindaki task_id ile board'daki task_id
+    # birebir eslesmeli (SKOR/SCOR gibi yazim sapmalarini teslim oncesi yakalar).
+    if tb.gorev_getir(args.task_id) is None:
+        print(f"[D-321 BOARD KAPISI] HATA: {args.task_id} task_board.json'da "
+              f"birebir bulunamadi — teslim reddedildi.", file=sys.stderr)
+        print("       Yazim sapmasi olabilir (orn. SKOR/SCOR); gorev_getir ile "
+              "panoda gecerli task_id'yi dogrula.", file=sys.stderr)
+        return 1
+
     try:
         sonuc = trigger.teslim_et(
             args.task_id, args.ajan, args.ozet, _ayristir_liste(args.cikti)
@@ -239,6 +274,24 @@ def cmd_basla(args: argparse.Namespace) -> int:
         if sim == 1:
             print("(simulasyon uyarili; zincir devam ediyor — D-65)\n")
     ajan = args.ajan
+
+    # D-320: oturum basinda commit edilmemis dosya varsa uyar (git_stash_guard.py yerine,
+    # hafif versiyon — .git/hooks/pre-commit zaten commit anini koruyor, burada sadece hatirlatma).
+    try:
+        git_durum = subprocess.run(
+            ["git", "status", "--porcelain"], cwd=_KOK, capture_output=True,
+            text=True, timeout=5,
+        )
+        if git_durum.returncode == 0 and git_durum.stdout.strip():
+            satirlar = git_durum.stdout.strip().splitlines()
+            print(f"\n[D-320 GIT UYARISI] {len(satirlar)} commit edilmemis dosya var:")
+            for s in satirlar[:5]:
+                print(f"  {s}")
+            if len(satirlar) > 5:
+                print(f"  ... ve {len(satirlar) - 5} dosya daha")
+            print("  Onceki oturumdan kalmis olabilir — once incele, gerekirse commit et.\n")
+    except Exception:
+        pass  # git yoksa veya zaman asimi olursa basla akisini durdurma
 
     # D-210 KAPISI 1: basla oncesi acik sorular var mi?
     acik_sorunlar = chat.ajan_acik_sorulari(ajan)
@@ -858,7 +911,34 @@ def main() -> int:
                 setattr(args, alan, trigger.ajan_normalize(deger))
             except trigger.TriggerError as exc:
                 return _hata(exc)
-    return args.func(args)
+    sonuc = args.func(args)
+    _notion_senkron()
+    return sonuc
+
+
+def _notion_senkron() -> None:
+    """Gorev durumu degistiginde Notion panosunu gunceller.
+
+    NEDEN BURADA: pano her komutta elle guncellenmezse 2 saat sonra bayatlar
+    ve bakan kisi yanlis bilgi gorur (D-260: kanitsiz durum beyani yasak).
+
+    NEDEN SESSIZ: Notion cokerse asil is (gorev yonetimi) durmamali. Hata
+    yazilir, pano eski kalir; ajanlar calismaya devam eder.
+
+    NEDEN TEK YONLU: buradan sadece OKUMA + Notion'a yazim. Notion'dan
+    panoya geri yazim YOK.
+    """
+    try:
+        sys.path.insert(0, str(Path(__file__).resolve().parent))
+        from notion_senkron import senkron
+        senkron()
+    except SystemExit as exc:
+        print(f"[NOTION SENKRON] atlandi: {str(exc)[:80]}", file=sys.stderr)
+    except ImportError:
+        pass          # notion_senkron.py yoksa pano kurulmamistir
+    except Exception as exc:                      # noqa: BLE001
+        print(f"[NOTION SENKRON] hata: {type(exc).__name__}: {str(exc)[:90]}",
+              file=sys.stderr)
 
 
 if __name__ == "__main__":
