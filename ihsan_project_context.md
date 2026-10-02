@@ -17,6 +17,11 @@
 - **KRİTİK BAĞLAM:** SADECE `prompts/mimir_sistem_promptu.md`,
   `scripts/odin_prompt_injection_test.py`, `tests/test_odin_prompt_injection.py`,
   `data/odin_injection_test_log.jsonl`, `data/odin_injection_test_scenarios.json`
+- **Dağıtım bitti (2026-10-01, emir #52):** 4 brif yazıldı, 4'ü de `brief_denetim.py`'den
+  `UYUMLU`, 4'ü de `gorev_at.py at --baslik-b64` ile panoya kondu (**4/4 ATANDI**):
+  `VERI-RISK-MOTORU-01`→utku P1 · `VERI-ENTITY-GRAPH-01`→yasu P1 ·
+  `DOC-VENDOR-DD-ARASTIRMA-01`→yasu P3 · `DOC-GLOBAL-INTEL-ARASTIRMA-01`→utku P3.
+  Göç 0046 utku'ya, 0047 yasu'ya kilitli; sıradaki boş numara **0048**.
 - **Sonraki adım:** A planı → borç **#71** (Türkçe düşünme kalıpları + yanlış pozitif mandalı),
   sonra #72/#73/#74, sonra **7. koşu** `--tekrar 3`. Kıyas tabanı: %83.3 · kararsız 4 ·
   `dil_uyumsuz ["inj-10"]` · `dusunme_sizan []`.
@@ -34,6 +39,9 @@
 | Model Türkçe düşünmesini ekrana yazıyor ama araç görmüyor | `DUSUNME_KALIPLARI` sadece İngilizce | Borç #71 — Türkçe kökler + yanlış pozitif mandalı |
 | Red kalıbı eklenince meşru cevap "red" sanılıyor | `yapmam`/`uygulamam` gibi geniş kökler | Kök eklerken **önce** yanlış pozitif mandalı yazılır |
 | `python -c` kırma testi hiçbir şey ölçmüyor, exit 0 | Tek satır kurgusu sessiz düşüyor | Kırma testi de kırılarak doğrulanır (D-256/4) |
+| `UnicodeEncodeError: charmap ... '\u2192'` | Konsol cp1254; `print()` ile `→` yazılamaz | Türkçe başlık `--baslik-b64` ile geçirilir; stdout'a yalnız ASCII yaz (`print(f[6:20], b64)`) |
+| regex `\*\*Basl.k:\*\*` → `NoneType.group` | `Başlık`ta **iki** Türkçe karakter var (`ş`+`ı`), tek `.` yetmez | `\*\*Ba\w+k:\*\*` |
+| `gorev_at.py ata` → argparse `invalid choice` | Alt komutun adı `at`, "ata" değil (`gorev_at.py:483`) | Komut adını uydurma, `main()`'den oku |
 | Commit çıktısı `[chore/monorepo-merge]`, `git status` `## master` | Teşhis edilmedi — borç #48, 8. görünüm | Açık |
 | `git add` → `paths are ignored by .gitignore: Huginn Data Insights` | **İki ayrı repo var** (D-255); dış kök vault'u yok sayar | Vault dosyası vault içinden commit edilir: `cd "Huginn Data Insights" && git add ...` |
 
@@ -57,8 +65,8 @@ e-ticaret, banka, fintech, sigorta, kurumsal satış, tedarik zinciri.
 | 2 | **Risk motoru (8 skor)** | 🔴 tablo bile yok | **EVET — P1, 7 sorunun cevabı burada** |
 | 3 | **Entity graph (firma ilişki ağı)** | 🔴 yok | **EVET — P1 (v0 brifi madde 10)** |
 | 4 | AI Analyst (Mimir/Odin) | 🟢 şu an bu | devam |
-| 5 | Vendor due diligence | 🔴 yok | EVET — P3 |
-| 6 | Global corporate intelligence | 🔴 yok | EVET — P4 |
+| 5 | Vendor due diligence | 🔴 yok | EVET — P3, **kapsam araştırması** (SSOT:867-869 yalnız başlık) |
+| 6 | Global corporate intelligence | 🔴 yok | EVET — P3, **kapsam araştırması** ("P4" diye öncelik YOK: P0-P3) |
 
 **Dürüst itiraf (kayıtta kalsın):** sırayı atlıyoruz — Faz 2 ve 3 bitmeden Faz 4'ü yapıyoruz.
 Prompt v4 madde 15c bu atlamanın dürüst cümlesi: *"bu skor henüz ölçülmüyor."*
@@ -74,18 +82,18 @@ diğer tüm kalemler utku ve yasu'ya dağıtılır. Ben dağıtırım, kendim ya
 4. **#74** `mesru-04` senaryosuna `<KATALOG>` bloğu eklenir (yoksa yanlış ölçüyor)
 5. **7. koşu** `--tekrar 3` (57 çağrı, ~4 dk, 0 TL) + commit (N7)
 
-**Dağıtılacaklar (ihsan yalnız brif yazar + onaylar):**
+**Dağıtılanlar (2026-10-01 — hepsi panoda, tetik ajan postasına düştü):**
 
-| # | İş | Kime | Öncelik |
-|---|---|---|---|
-| G-0a | Faz 2 risk motoru (8 skor; adlar SSOT'tan okunur, D-260) | utku | P1 |
-| G-0b | Faz 3 entity graph / ilişki ağı v0 | yasu | P1 |
-| G-0c | Faz 5 vendor due diligence | yasu | P3 |
-| G-0d | Faz 6 global corporate intelligence | utku | P4 |
-| 12 | A senaryosu: 2 `iptal` görev → `plan` + maskeleme kapısı (D-247) | utku | P2 |
-| 14 | N8 kalan: `osb_veri_denetim.py` + Supabase yazımı | yasu | P2 |
-| 11 | AGENTS.md 5 karar + numara tahsisi (D-227) | ihsan (devredilemez) | P2 |
-| 9/10 | salih brifi + chat (D-210) | ihsan (devredilemez) | P1 |
+| # | İş | Kime | Öncelik | Durum |
+|---|---|---|---|---|
+| G-0a | Faz 2 risk motoru (8 skor; adlar SSOT:791-822'den okundu, D-260) | utku | P1 | ATANDI |
+| G-0b | Faz 3 entity graph v0 (yalnız `same_osb` + `nace_complementary`) | yasu | P1 | ATANDI |
+| G-0c | Faz 5 vendor DD **kapsam araştırması** (kod değil) | yasu | P3 | ATANDI |
+| G-0d | Faz 6 küresel istihbarat **kapsam araştırması** (kod değil) | utku | P3 | ATANDI |
+| 12 | ~~A senaryosu: 2 `iptal` → `plan`~~ | — | — | **DÜŞTÜ** — `task_board.json:2271,2296`: ikisi de D-310 ile bilinçli iptal; yerine `VERI-RAG-KORPUS-01` + `ALTYAPI-MIMIR-BAGLAM-01` zaten panoda |
+| 14 | ~~N8 kalan: OSB temizlik~~ | — | — | **DÜŞTÜ** — `task_board.json:2347`: `VERI-OSB-TEMIZLIK-01` zaten `plan`, brifi var |
+| 11 | AGENTS.md 5 karar + numara tahsisi (D-227) | ihsan (devredilemez) | P2 | açık |
+| 9/10 | salih brifi + chat (D-210) | ihsan (devredilemez) | P1 | açık |
 
 **Ardından:**
 6. salih brifini güncelle (19 senaryo, %83.3, üç kusur sınıfı, LLM-as-judge borcu #61)

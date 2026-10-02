@@ -2406,7 +2406,7 @@
     "baslik": "[ALTYAPI] Mimir baglam ucunu yaz -> odin_ai/mimir_servis.py (3s)",
     "sahip": "salih",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-10-01T20:52:27",
     "bitis": null,
     "dosyalar": [
@@ -2418,5 +2418,81 @@
     "mod": "code",
     "brief": "plans/brief_salih_ALTYAPI-MIMIR-BAGLAM-01.md",
     "talimat": "Brief: plans/brief_salih_ALTYAPI-MIMIR-BAGLAM-01.md. Prompt dosyadan okunacak (D-230), varsayilan rol DIS, bos baglamda modeli CAGIRMA. finish_reason yazdir."
+  },
+  {
+    "task_id": "VERI-RISK-MOTORU-01",
+    "id": "VERI-RISK-MOTORU-01",
+    "baslik": "[VERI] Sekiz risk skoru tablosunu yaz → 0046_risk_skorlari.sql (4s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-10-02T02:28:21",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/schema/migrations/0046_risk_skorlari.sql"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-RISK-MOTORU-01.md",
+    "talimat": "Brif tam yol gosterir: plans/brief_utku_VERI-RISK-MOTORU-01.md. 8 skor adi SSOT (HUGIns).txt:791-822 den alindi. DEFAULT 0 YASAK (D-249), hesaplama bu gorevde kosulmaz (D-238)."
+  },
+  {
+    "task_id": "VERI-ENTITY-GRAPH-01",
+    "id": "VERI-ENTITY-GRAPH-01",
+    "baslik": "[VERI] Firma ilişki ağı v0 yaz → 0047_entity_graph.sql (4s)",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-10-02T02:28:41",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/schema/migrations/0047_entity_graph.sql"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_VERI-ENTITY-GRAPH-01.md",
+    "talimat": "Brif: plans/brief_yasu_VERI-ENTITY-GRAPH-01.md. v0 BILINCLI DAR: sadece same_osb + nace_complementary. networkx YASAK, saf SQL + stdlib. OSB kolonunu OLCEREK bul (D-245). evidence bossa kenar yazmak yasak (D-260)."
+  },
+  {
+    "task_id": "DOC-VENDOR-DD-ARASTIRMA-01",
+    "id": "DOC-VENDOR-DD-ARASTIRMA-01",
+    "baslik": "[DOC] Faz 5 tedarikçi denetim kapsamını araştır → docs/FAZ5_VENDOR_DUE_DILIGENCE_KAPSAM.md (4s)",
+    "sahip": "yasu",
+    "oncelik": "P3",
+    "durum": "plan",
+    "baslangic": "2026-10-02T02:29:03",
+    "bitis": null,
+    "dosyalar": [
+      "docs/FAZ5_VENDOR_DUE_DILIGENCE_KAPSAM.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_DOC-VENDOR-DD-ARASTIRMA-01.md",
+    "talimat": "Brif: plans/brief_yasu_DOC-VENDOR-DD-ARASTIRMA-01.md. KOD GOREVI DEGIL - sema/goc/Python kapsam disi. SSOT ta Faz 5 yalniz baslik (satir 867-869), o yuzden once kapsam arastirilir. Uydurma = D-260 ihlali."
+  },
+  {
+    "task_id": "DOC-GLOBAL-INTEL-ARASTIRMA-01",
+    "id": "DOC-GLOBAL-INTEL-ARASTIRMA-01",
+    "baslik": "[DOC] Faz 6 küresel istihbarat ağı kapsamını araştır → docs/FAZ6_GLOBAL_INTEL_KAPSAM.md (4s)",
+    "sahip": "utku",
+    "oncelik": "P3",
+    "durum": "plan",
+    "baslangic": "2026-10-02T02:29:23",
+    "bitis": null,
+    "dosyalar": [
+      "docs/FAZ6_GLOBAL_INTEL_KAPSAM.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_DOC-GLOBAL-INTEL-ARASTIRMA-01.md",
+    "talimat": "Brif: plans/brief_utku_DOC-GLOBAL-INTEL-ARASTIRMA-01.md. KOD GOREVI DEGIL. 'Faz 6 bugun yapilamaz' sonucu basarisizlik degil, dogru cevaptir. Calistirmadigin komutun sonucunu yazmak yasak (D-266). Bagimli: DOC-VENDOR-DD-ARASTIRMA-01."
   }
 ]
