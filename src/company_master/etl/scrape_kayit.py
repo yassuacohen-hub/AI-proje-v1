@@ -151,17 +151,24 @@ class KazimaYazici:
         ms: float | None = None,
         hata: str | None = None,
         llm_model: str | None = None,
-    ) -> None:
-        """Her fetch/parse denemesi denetim kaydi birakir (D-310 katman 5)."""
+    ) -> int | None:
+        """Her fetch/parse denemesi denetim kaydi birakir (D-310 katman 5).
+
+        Yeni `audit_id` degerini dondurur. Dondurmemesi `scrape_errors.audit_id`
+        FK'sini bos birakirdi: hata kaydi hangi kaynaktan geldigine ulasiyordu
+        ama kaynak degeri `audit_log`'da duruyordu. Artik ayni INSERT'ten
+        geliyor, ikinci bir sorgu gerekmiyor (D-211 ikiz SQL kaldirildi).
+        """
         with get_engine().begin() as c:
-            c.execute(
+            aid = c.execute(
                 text(
                     "INSERT INTO scrape_audit_log "
                     "(source_name, source_url, task_id, action, status, "
                     " bytes_fetched, duration_ms, error_msg, llm_used, "
                     " llm_model, cost_usd) "
                     "VALUES (:src, :url, :task, :act, :st, :bayt, :ms, "
-                    "        :err, false, :model, 0.00)"
+                    "        :err, false, :model, 0.00) "
+                    "RETURNING audit_id"
                 ),
                 {
                     "src": self.kaynak_adi,
@@ -171,11 +178,12 @@ class KazimaYazici:
                     "st": status,
                     "bayt": bayt,
                     "ms": ms,
-                    "err": hata,
+                    "err": hata[:2000] if hata else None,
                     "model": llm_model,
                 },
-            )
+            ).scalar()
         self.sonuc.yazilan_audit += 1
+        return aid
 
     # ---- hata kuyrugu (olculmus sema) ----
     def hata_kaydet(
@@ -190,8 +198,7 @@ class KazimaYazici:
         """Hata/retry kuyrugu (SKILL.md B-3.1).
 
         0050 semasinda `source_name`/`source_url` kolonlari YOK; kaynak
-        yalnizca `audit_id` FK'si uzerinden tasinir. `audit_kaydet()`
-        `audit_id` dondurmedigi icin hata kaydi audit_id'siz yazilir.
+        yalnizca `audit_id` FK'si uzerinden tasinir.
         """
         with get_engine().begin() as c:
             c.execute(
@@ -217,24 +224,9 @@ class KazimaYazici:
 
         `scrape_errors.audit_id` FK'si sayesinde hata kaydi hangi kaynaktan
         geldigine ulasir — bu yuzden kaynak yalniz `scrape_audit_log`'da tutulur.
+        `audit_kaydet()` `audit_id` dondurdugu icin ikinci bir INSERT yazilmaz.
         """
-        with get_engine().begin() as c:
-            aid = c.execute(
-                text(
-                    "INSERT INTO scrape_audit_log "
-                    "(source_name, source_url, task_id, action, status, "
-                    " error_msg, llm_used, llm_model, cost_usd) "
-                    "VALUES (:src, :url, :task, 'fetch', 'error', "
-                    "        :err, false, NULL, 0.00) RETURNING audit_id"
-                ),
-                {
-                    "src": self.kaynak_adi,
-                    "url": url,
-                    "task": self.task_id,
-                    "err": mesaj[:2000],
-                },
-            ).scalar()
-        self.sonuc.yazilan_audit += 1
+        aid = self.audit_kaydet(url, action="fetch", status="error", hata=mesaj)
         self.hata_kaydet(error_code=hata_turu, error_message=mesaj, audit_id=aid)
         self.sonuc.hatali_url.append(url)
 

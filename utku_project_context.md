@@ -24,12 +24,17 @@
   300 `a[href^='/firmalar/']`, **0 `<table>`** (brifin tablo varsayımı yanlış).
 - **Kritik bağlam (SADECE bu dosyalara bak):**
   `src/company_master/etl/scrape_kayit.py` · `src/company_master/etl/scrape_kosu.py`
+  · `tests/test_scrape_kayit_mandali.py`
   · `scripts/kazima_{ostim,ivedik,baskent}.py` ·
   `src/company_master/schema/migrations/0050_scrape_audit_log.sql` ·
   `src/company_master/utils/scraping_permission_router.py`
 - **Sonraki adım:** teslim sonrası `bak --ajan utku` + `ajan_chat.py oku`;
-  açık bulgular: (1) baskentosb ölü domain, (2) SKILL.md router imzası yanlış,
-  (3) `scrape_kayit` için birim testi yok (kanonik defterde 3 kayıt açıldı).
+  açık bulgular: (1) baskentosb ölü domain, (2) SKILL.md router imzası yanlış.
+  **(3) birim testi ve `audit_kaydet` FK borcu KAPANDI (23:30 turu):**
+  `tests/test_scrape_kayit_mandali.py` = 34 test, canlı DB'ye bağlanmaz,
+  kırma denemesi kanıtlı. `audit_kaydet()` artık `audit_id` döndürüyor →
+  hata kayıtları FK'li (canlı: error_id=2 → audit_id=7, orphan=0).
+  İdempotens **3. kez** doğrulandı (hash'ler değişmedi).
 - **Görev:** `SCRAPE-002-LEMMLESS-ANKARA-OSB` (review) ·
   **Son okunan karar:** `D-323`
 

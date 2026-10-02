@@ -123,15 +123,37 @@ baskentosb.org.tr -> izin reddi: robots.txt Disallow (DNS cozumlenmiyor)
   liste sayfasının ham içeriği `scrape_pages`'a yazıldı. Detay sayfalarının
   kanonik kazıyıcı tarafından kapsanması bekleniyor; kayıt katmanı
   kapsamı dışında tutuldu.
-- **`scrape_kayit.audit_kaydet()` `audit_id` döndürmüyor**; bu yüzden
-  `url_hata_kaydet()` audit kaydını ayrı yazıp `scalar()` ile kimliği alıyor.
-  API tutarsızlığı, temizlenebilir.
-- **Birim test yazılmadı.** `scrape_kayit.py` saf hash fonksiyonları ve
-  `KazimaYazici` için `tests/` altında test dosyası yok. Canlı DB ölçümü
-  yapıldı ancak kalıcı mandal yok — `ON CONFLICT` davranışı yeniden
-  bozulursa yeni kosuda ancak yakalanır. **Açık borç.**
-- **Kodlama denetimi 45 önceden var ihlah** raporlanmış durumda; bu işin
+- **Aynı liste sayfası iki kez okunuyor** (kayıt katmanı + kanonik kazıyıcı).
+  Tek çekim için kanonik scraper'lara ham içerik yakalama kancası gerekir;
+  kanonik dosyalara dokunulmadığı için açık borç olarak kalıyor.
+- **Kodlama denetimi 45 önceden var ihlal** raporlanmış durumda; bu işin
   dosyaları temiz. Global temizlik ayrı iş kalemidir.
+
+### Kapandı (teslim sonrası ikinci tur, 2026-10-02 23:30)
+
+Aşağıdaki iki açık kalem bu turda kapatıldı; ölçüm canlı Supabase'ten alındı.
+
+- 🟢 **`audit_kaydet()` artık `audit_id` döndürüyor.** Döndürmediği için
+  `scrape_errors` kayıtları `audit_id` FK'siz kalıyordu — hata kaydı hangi
+  kaynaktan geldiğine ulaşamıyordu. `url_hata_kaydet()` ayrıca aynı audit
+  INSERT'ini ikinci kez yazıyordu (aynı SQL'in ikiz kopyası, D-211); o da silindi.
+  Canlı kanıt: `error_id=1 → audit_id NULL` (önce), `error_id=2 → audit_id=7`
+  (sonra), `audit_id_orphan=0`, kaynak izine ulaşabilen hata kaydı **2/2**.
+- 🟢 **Birim mandalı yazıldı:** `tests/test_scrape_kayit_mandali.py` — **34 test**.
+  Canlı DB'ye bağlanmaz; `get_engine` sahte motorla değiştirilir
+  (ALTYAPI-TEST-HERMETIK-01). Kapsam: hash tekilliği (zaman damgasisiz),
+  `ON CONFLICT (source_url, content_hash)`, `llm_used=false` + `cost_usd=0`,
+  `scrape_errors`'ta **0050'da olmayan** `source_name`/`source_url` yazılmadığı,
+  hata kodu 50 / mesaj 2000 kısaltması, retry penceresi, router API imzası,
+  izin yoksa fetch yapılmaması, fetch hatasının kayda düşmesi, kırık ayıklayıcıda
+  kaydın yine yazılması, kanonik kazıyıcılara dokunulmaması, INSERT hedeflerinin
+  yalnız 0050 tabloları olması.
+  **Kırma denemesi (D-256/4):** `scrape_errors`'a `source_name` kolonu geri
+  kondu → mandal kırmızı verdi (`1 failed, 33 passed`) → geri alındı → 34/34.
+- 🟢 **Idempotens 3. kez canlı doğrulandı:** OSTİM + İvedik `yazilan=0 /
+  atlanan=1`; `content_hash` önekleri değişmedi (`0fc4e9657704` / `78ab8f1d676f`).
+- 📋 Bulgu defterine 2 kapanış kaydı eklendi; iki hub satırındaki "birim testi
+  yok" ifadesi güncellendi (bayat beyan bırakılmadı, D-260).
 
 ## İlgili Nodlar
 
@@ -145,6 +167,7 @@ baskentosb.org.tr -> izin reddi: robots.txt Disallow (DNS cozumlenmiyor)
 - [[D-310]] katman 5 — denetim izi
 - [[src/company_master/etl/scrape_kayit]] — 0050 tek yazma kapısı
 - [[src/company_master/etl/scrape_kosu]] — ortak koşu iskeleti
+- [[tests/test_scrape_kayit_mandali]] — 34 test birim mandalı
 - [[scripts/kazima_ostim]] · [[scripts/kazima_ivedik]] · [[scripts/kazima_baskent]]
 - [[plans/brief_utku_SCRAPE-002-LEMMLESS-ANKARA-OSB]] — görev brifi
 - [[SCRAPE-001-DOCKER-SETUP_rapor_2026-10-02_uretim]] — 0050 göçünün sahibi
