@@ -4582,3 +4582,52 @@ içinde **olmayanlar** arşivlenir.
 
 ### Referans
 [[D-324]] (pano) · [[D-325]] (senkron) · [[D-260]] (ölçülen yazılır)
+
+---
+
+## D-329 — Tetik kuyruğu denge komutu: boş kuyruğa plan işi düşsün (KAHİN kararı 2026-10-02)
+
+### 1. Bulgu (ölçüm)
+Ajan tetik kuyrukları dengesizdi:
+
+| Ajan | Tetik | Panodaki durumu |
+|---|---|---|
+| yasu | **3** | 3 plan işi (hepsi zaten kendi işi) |
+| utku | **0** | `SCRAPE-005` **P0** plan — tetiksiz |
+| salih | **0** | `SCRAPE-006` P1 plan — tetiksiz |
+| ihsan | 1 | `ALTYAPI-ODIN-UYARLAMA-01` P0 plan — tetikli |
+
+**Kök neden:** tetik yalnız `gorev_at.py`, `devret` ve `ekle` sırasında düşüyor.
+`onayla` komutu tetik **üretmez**. Bu yüzden `SCRAPE-002` onaylandıktan sonra
+bile utku'nun kuyruğu boş kaldı; bir P0 iş (`SCRAPE-005`) tetiklenmedi.
+
+### 2. Karar
+`scripts/gorev_kutusu.py`e **`denge`** komutu eklendi.
+
+- **Kural:** kuyruğu **boş** olan ajanın `plan` durumundaki işine, **önceliğe
+  göre sırayla**, tetik düşer.
+- **Dokunulmaz:** kuyruğu dolu ajanlar, `aktif`/`review` görevler, zaten tetikli
+  görevler. Bu bir **dağıtım**, görev **transferi** değildir — sahiplik değişmez.
+- **Geri alınabilir:** `--kuru` ile hiçbir şey yazmadan önce/sonra raporu alınır.
+
+### 3. Ölçülen sonuç
+`denge` çalıştırıldı:
+
+| Ajan | Önce | Sonra |
+|---|---|---|
+| yasu | 3 | 3 |
+| utku | **0** | **2** (`SCRAPE-005` P0, `DOC-GLOBAL-INTEL` P3) |
+| ihsan | 1 | 1 |
+| salih | **0** | **1** (`SCRAPE-006` P1) |
+
+Yasu 3'te kaldı — **bu hata değil:** üç işi de zaten kendi `plan` işleriydi,
+başka ajandan alınmış bir iş yok. Ölçüldü ve doğrulandı.
+
+### 4. Yanlış varsayım (bu işte çürütüldü)
+"Bu görevler utkudan alınıp yasu'ya verilmiş olabilir mi" sorusu ölçüldü:
+`git diff` → `utku` → `yasu` **değil**, kayıt zaten `ihsan` tarafından
+`09228b4` commit'inde açılmış ve **doğrudan** yasu'ya atanmış. Tetik
+dosyalarında da utku'da hiç kayıt yok. Yük transferi değil, **ilk atama**.
+
+### Referans
+[[D-68]] (tetik ↔ pano tutarlılığı) · [[D-260]] (ölçülen yazılır)

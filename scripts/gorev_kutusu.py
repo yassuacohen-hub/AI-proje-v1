@@ -742,6 +742,75 @@ def cmd_destek_al(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_denge(args: argparse.Namespace) -> int:
+    """Tetik kuyrugunu dengeler: bos kuyrugu olan ajana plan isi tetikler.
+
+    SORUN (olcum 2026-10-02): yasu kuyruk=3 iken utku ve salih kuyruk=0.
+    `onayla` tetik URETMEZ; tetik yalniz gorev_at.py / devret / ekle
+    sirasinda duser. Boylece is bitse bile kuyruk bosalmaz.
+
+    KURAL (geri alinabilir): yalniz `plan` durumunda, sahibi kuyrugu
+    bos olan gorevlere tetik dusulur. Aktif/tetikli ise dokunulmaz.
+    --kuru ile once/sonra raporu gorulur, yazmadan once onay istenir.
+    """
+    AJANLAR = ("yasu", "utku", "ihsan", "salih")
+    ONCELIK = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
+
+    def bekleyen(ajan: str) -> list:
+        try:
+            return [k for k in trigger._tetikleri_oku(ajan) if k["durum"] == "bekliyor"]
+        except Exception:
+            return []
+
+    def pano_gorevleri() -> list:
+        return tb.gorev_listesi()
+
+    ts = [g for g in pano_gorevleri()
+          if g.get("durum") == "plan" and g.get("sahip") in AJANLAR]
+
+    once = {a: len(bekleyen(a)) for a in AJANLAR}
+    print("== TETIK KUYRUKLARI (once) ==")
+    for a in AJANLAR:
+        print(f"   {a:<7} {once[a]}")
+
+    # aday: kuyrugu bos olan ajanin plan isleri, oncelige gore
+    adaylar: list = []
+    for a in AJANLAR:
+        if once[a] > 0:
+            continue
+        for g in ts:
+            if g.get("sahip") != a:
+                continue
+            if any(k["task_id"] == g.get("task_id") for k in bekleyen(a)):
+                continue          # zaten tetikli (alindi/bekliyor)
+            adaylar.append(g)
+    adaylar.sort(key=lambda g: (ONCELIK.get(g.get("oncelik"), 9),
+                                g.get("task_id", "")))
+    print()
+    print("== TETIK DUSELECEK ADAMLAR ==")
+    if not adaylar:
+        print("   (yok: butun ajanlarin kuyrugu dolu veya plan isi yok)")
+    for g in adaylar:
+        print(f"   {g.get('task_id')} -> {g.get('sahip')} ({g.get('oncelik')})")
+
+    if args.kuru:
+        print()
+        print("KURU: hicbir sey yazilmadi.")
+        return 0
+
+    for g in adaylar:
+        trigger.tetik_ekle(g.get("task_id"), g.get("sahip"),
+                           "DENGE: kuyrugu bos olan ajana tetik dusruldu.")
+        print(f"   tetik dustu: {g.get('task_id')} -> {g.get('sahip')}")
+
+    sonra = {a: len(bekleyen(a)) for a in AJANLAR}
+    print()
+    print("== TETIK KUYRUKLARI (sonra) ==")
+    for a in AJANLAR:
+        print(f"   {a:<7} {once[a]} -> {sonra[a]}")
+    return 0
+
+
 def cmd_devret(args: argparse.Namespace) -> int:
     """Gorevi baska ajana devret: sahip + kilitler + yeni ajana tetik."""
     g = tb.gorev_getir(args.task_id)
@@ -888,6 +957,9 @@ def main() -> int:
     devret_p.add_argument("--yeni-ajan", required=True)
     devret_p.add_argument("--neden", default="")
     devret_p.set_defaults(func=cmd_devret)
+    denge_p = sub.add_parser("denge", help="Tetik kuyrugunu dengele (bos kuyruga plan isi)")
+    denge_p.add_argument("--kuru", action="store_true", help="Sadece raporla, yazma")
+    denge_p.set_defaults(func=cmd_denge)
 
     ekle_p = sub.add_parser("ekle", help="BORC-GOREV-EKLE-01: Panoya gorev ekle")
     ekle_p.add_argument("--task-id", required=True)
