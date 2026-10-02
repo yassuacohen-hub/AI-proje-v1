@@ -43,6 +43,35 @@ def ilerleme_sema() -> dict:
     }
 
 
+def kritik_sema() -> dict:
+    return {
+        "Gorev": {"title": {}},
+        "Kim yapiyor": {"rich_text": {}},
+        "Durum": {"rich_text": {}},
+        "Neyi bekliyor": {"rich_text": {}},
+        "Ne yapti": {"rich_text": {}},
+    }
+
+
+def kritik_gorevler() -> list[dict]:
+    """Yalnizca P0 (kirmizi) aktif gorevler - 'simdi buraya bak' tablosu."""
+    from notion_pano import pano_gorevleri, aciklama_getir
+    out = []
+    for g in pano_gorevleri():
+        if g.get("oncelik") != "P0":
+            continue
+        a = aciklama_getir(g.get("task_id") or g.get("id", ""))
+        out.append({
+            "Gorev": _baslik(a["baslik"]),
+            "Kim yapiyor": _metin(str(g.get("sahip", "-"))),
+            "Durum": _metin({"plan": "YAPILACAK", "aktif": "SU ANDA CALISIYOR",
+                             "review": "ONAY BEKLIYOR"}.get(g.get("durum"), "?")),
+            "Neyi bekliyor": _metin(a["bagli"]),
+            "Ne yapti": _metin(a["yapti"]),
+        })
+    return out
+
+
 def ajan_sema() -> dict:
     return {
         "Ajan": {"title": {}},
@@ -84,6 +113,7 @@ def kur() -> None:
     for etiket, sema, anahtar in (
         ("Ilerleme Matrisi", ilerleme_sema(), ILK_SUTUN),
         ("Ajan Ilerlemesi", ajan_sema(), "Ajan"),
+        ("KRITIK - Simdi Buraya Bak", kritik_sema(), "Gorev"),
     ):
         db = _veritabani_bul_by_name(etiket)
         if not db:
@@ -91,7 +121,10 @@ def kur() -> None:
             print(f"veritabani acildi: {etiket}")
         mevcut = _satirlar(db, anahtar)
 
-        veriler = ([{"Alan": _baslik(x["alan"]),
+        if anahtar == "Gorev":
+            veriler = kritik_gorevler()
+        else:
+            veriler = ([{"Alan": _baslik(x["alan"]),
                      "Olcum ne diyor": _metin(x["olcu"]),
                      "Simdi nerede": _metin(x["ilerleme"]),
                      "Toplam": _sayi(x["toplam"]),

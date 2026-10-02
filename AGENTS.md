@@ -4465,3 +4465,120 @@ Plan dokümanlarındaki (`2026-10-01_docker_taşıma_...md`, `2026-10-01_kazima_
 
 ### Referans
 [[D-254]] (iddia ile kanıt ayrı durur) · [[D-227]] (karar numarası yalnız AGENTS.md'den)
+
+---
+
+## D-324 — Notion görev panosu: tek yönlü ayna, kaynak dosya (KAHİN kararı 2026-10-02)
+
+### 1. Bulgu
+Yönetim ve takip için paylaşılabilir bir pano gerekiyordu. Mevcut yüzeyler
+Obsidian (bilgi grafiği), `gorev_kutusu.py` (terminal) ve `task_board.json`
+(veri) idi — üçü de tek kişiye özel, ekip/stakeholder ile paylaşılamıyordu.
+
+### 2. Karar
+Notion bir **AYNA** olarak kullanılacak, kaynak olarak değil:
+- Tek yönlü: `task_board.json` -> Notion. **Geri yazım yok.**
+- Kaynak daima `data/orchestrator/task_board.json` (D-223: tek otorite).
+- Biten görevler (done/archive) panoya sızmaz; panoda yalnız **aktif** işler.
+- Ajanlar Notion'ı okumaz; karar buradan çıkarılmaz.
+
+Dosyalar: `scripts/notion_pano.py`, `notion_aciklama.py`, `notion_kur.py`,
+`notion_bloklar.py`, `notion_blok_ekle.py`.
+
+### 3. Kural
+Her satır iki soruyu cevaplar: **ne yaptı** ve **ne yi etkiledi** (D-260:
+ölçülebilen bilgi yazılır). Görev açıklamaları 10 yaşındaki çocuğun
+okuyabileceği düz Türkçe yazılır.
+
+### Referans
+[[D-223]] (tek otorite) · [[D-260]] (ölçülen yazılır) · [[D-325]] (otomasyon)
+
+---
+
+## D-325 — Pano senkronu: her komutta otomatik, sessiz hata (KAHİN kararı 2026-10-02)
+
+### 1. Bulgu
+Elle kurulan pano **bayatlar**: görev teslim edilir, Notion'daki durum
+eski kalır, bakan kişi yanlış bilgi görür. İlk kurulumda ölçüldü:
+19/19 tutuyordu — ama yalnızca az önce kurulmuş olduğu için.
+
+### 2. Karar
+`scripts/gorev_kutusu.py` **her komut sonunda** `notion_senkron.py`'yi çağırır.
+Ajanlar ayrıca hiçbir şey yapmaz.
+
+- **Idempotans:** aynı komut N kez çalışsa N satır olmaz. Ölçüldü:
+  3 ardışık koşuda 19 satır sabit, 1 özet bloğu.
+- **Sade yazım:** yalnız değişen alanlar PATCH edilir (ölçüldü: 0 gereksiz yazım).
+- **Sessiz hata:** Notion çökerse **görev durmaz**, uyarı `stderr`'e yazılır.
+
+### 3. Düzeltilen hata
+İlk yazımda karşılaştırma ham sözlük üzerinden yapılıyordu; API yanıtı
+`plain_text` dönerken hedef tarafta `text.content` vardı — her satır
+"farklı" görünüyor, 19 satır her seferinde yeniden yazılıyordu. `_duzle()`
+ile düz metne indirgendi.
+
+### Referans
+[[D-324]] (pano) · [[D-260]] (ölçülen yazılır) · [[D-326]] (ilerleme matrisi)
+
+---
+
+## D-326 — SSOT İlerleme Matrisi: her sayı dosyadan ölçülür (KAHİN kararı 2026-10-02)
+
+### 1. Bulgu
+"Projenin nereye kadar geldiği" sorusu her seferinde farklı cevap alıyordu;
+her ölçüm ayrı komutla yapılıyordu ve sonuç panoya elle yazılıyordu.
+
+### 2. Karar
+Notion'da iki tablo, **tamamen ölçülerek** üretilir:
+- **İlerleme Matrisi** (8 alan): görev, öncelik, onay kapısı, karar, veritabanı,
+  ajan, kod, dokümantasyon. Her satırda **"Nerede ölçülüyor"** sütunu.
+- **Ajan İlerlemesi** (4 satır): ajan bazlı toplam/çalışıyor/onay/yapılacak.
+
+Kaynaklar: `task_board.json`, `AGENTS.md`, `schema/migrations/`,
+`docs/ajanlar/`, `src/company_master/`. **Elle yazım yok** (D-260).
+
+### 3. Düzeltilen hata
+İlk yazımda "bitti" yüzdesi **aktif** görev listesinden sayılıyordu; `done`
+durumu aktif listede bulunmadığı için oran daima **%0** çıkıyordu. Tüm
+kayıtlardan sayıldığında **%70** çıktı. Yanlış ölçüm panoya yanlış ilerleme
+yazardı — ölçüm yanıltmaz.
+
+### 4. Açık borç
+`test_dokuman_politikasi.py` `GURULTU` listesinde `.venv` yoktu; pip ile gelen
+paketlerin kendi Markdown şablonları Kural 3'te **yanlış alarm** üretiyordu.
+Ayrı sıra: gürültü filtresi yeni paketlerle yeniden sınanmalı.
+
+### Referans
+[[D-324]] (pano) · [[D-325]] (senkron) · [[D-260]] (ölçülen yazılır)
+
+---
+
+## D-327 — Kritik görünüm ve kapanan görev arşivleme (KAHİN kararı 2026-10-02)
+
+### 1. Bulgu
+İki eksiğe denk gelindi.
+1. "Sadece en önemli işlere bakmak" için Notion'da kalıcı **filtrelenmiş
+   görünüm API ile kurulamıyor** (Notion API'sinde saved-view uç noktası yok).
+   Elle 12 işi gözden geçirmek, 3 işe bakmaktan farksız değil.
+2. **Ölçüm:** pano 19 görevken 12'ye düştü — ajanlar çalışırken görevleri
+   teslim etmiş. Panoda 7 **bitmiş** iş kalmıştı. Görüntüleyen kişi
+   "bitmiş" işleri açık sanardı.
+
+### 2. Karar
+- Ayrı bir **`KRITIK - Simdi Buraya Bak`** tablosu açıldı: yalnız P0 (kırmızı)
+  aktif görevler, otomatik senkronlanır. Kaynak yine `task_board.json`;
+  ikinci kaynak **yok** (kopya değil, türetilmiş görünüm).
+- `notion_senkron.py` artık **panoda olup yerelde olmayan** görevi arşivler
+  (Notion Trash → silinmez, geri alınabilir).
+
+### 3. Uyarı — yazım hatası (kendi ölçümümüzle yakalandı)
+Arşivleme fonksiyonunun ilk yazımı **sözlüğün tamamını** tarıyordu; sonuç
+12 aktif görevin **hepsi** arşivlendi, pano boşaldı. Doğrulama koşusu yakaladı
+(`yerel gorev=11 notion satiri=12`). Düzeltildi: yalnız `aktif_kimlikler`
+içinde **olmayanlar** arşivlenir.
+
+**Kural:** temizlik/arşivleme yazan kod, çalıştırıldıktan sonra **eşitlik
+ölçümüyle** doğrulanır (`yerel == notion`), yoksa sessizce veri kaybeder.
+
+### Referans
+[[D-324]] (pano) · [[D-325]] (senkron) · [[D-260]] (ölçülen yazılır)

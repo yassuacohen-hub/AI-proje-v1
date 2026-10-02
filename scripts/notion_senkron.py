@@ -198,6 +198,25 @@ def _matris_yenile() -> str:
         return f"matris: atlandi ({str(exc)[:60]})"
 
 
+def kapatilanlari_temizle(mevcut: dict, aktif_kimlikler: set) -> int:
+    """Panoda olup YERELDE olmayan gorevi arsivler.
+
+    Neden gerekli (olcum): ajanlar calisirken pano 19 -> 12 dustu; panoda
+    7 BITMIS is kalmisti. Gosteren bir yuzeyde yalan bilgi olmaz (D-260).
+    Arsiv Notion Trash'ina gider, silinmez.
+
+    DIKKAT: yalnizca `aktif_kimlikler` icinde OLMAYANLAR silinir. Tum
+    sozlugu taramak (onceki yazim hatasi) aktif gorevleri de siliyordu ve
+    pano bosaldi.
+    """
+    silinen = 0
+    for gid, sayfa in list(mevcut.items()):
+        if gid and gid not in aktif_kimlikler:
+            istek(f"/pages/{sayfa['id']}", {"archived": True}, yontem="PATCH")
+            silinen += 1
+    return silinen
+
+
 def senkron(bilesik_test: bool = False) -> None:
     gorevler = pano_gorevleri()
     mevcut = _mevcut()
@@ -220,7 +239,10 @@ def senkron(bilesik_test: bool = False) -> None:
             istek("/pages", {"parent": {"database_id": VERITABANI},
                              "properties": hedef})
             eklendi += 1
-    print(f"eklendi={eklendi} guncellendi={guncellendi} degismedi={ayni}")
+    aktif_kimlikler = {g.get("task_id") or g.get("id", "") for g in gorevler}
+    kapali = kapatilanlari_temizle(mevcut, aktif_kimlikler)
+    print(f"eklendi={eklendi} guncellendi={guncellendi} degismedi={ayni}"
+          f" arsivlendi={kapali}")
     print(f"yerel gorev={len(gorevler)} notion satiri={len(mevcut)}")
     print(ozet_yenile())
     _matris_yenile()

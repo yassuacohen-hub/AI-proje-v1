@@ -13,6 +13,15 @@ BLOKLAR: list[tuple[str, str, list[tuple[str, str]]]] = [
           "ne zaman bitecek ve neyi degistirecek. Sadece bakmak icindir; burada yazan "
           "bilgiler bilgisayardaki asil dosyadan gelir.", []),
 
+    ("h2", "Burada neye bakmalisin?", []),
+    ("p", "Uc tablo var. Hangisine bakacagin ona gore sec:", []),
+    ("bulleted_list_item", "", [
+        ("KRITIK - Simdi Buraya Bak", "Sadece en onemli (kirmizi) isler. "
+         "Bunlara bakarsan sistem ilerler."),
+        ("Tum Gorevler", "Acik olan butun isler. Kim yapiyor, ne bekliyor."),
+        ("Ilerleme Matrisi", "Projenin nereye kadar geldigi."),
+        ("Ajan Ilerlemesi", "Kim ne kadar is tasidi."),
+    ]),
     ("h2", "Once bu uc yeri bil", []),
     ("callout", "\u26a0\ufe0f Tek kural: Gercek kaynak hep bilgisayardaki dosyadadir. "
                "Bu pano sadece bir ayna. Iki ayri yere yazilirsa karisirlik olur.", []),
