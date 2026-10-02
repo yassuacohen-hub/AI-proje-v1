@@ -8,13 +8,55 @@ digerleri yine de sonuca eklenir (kismi basari korunur).
 from __future__ import annotations
 
 import logging
+import os
 import time
 from dataclasses import dataclass, field
 from typing import Any, Iterable
 
+try:  # .env'i burada yükle: model/URL os.environ ile okunuyor (D-224).
+    from pathlib import Path
+
+    from dotenv import load_dotenv
+
+    for _cand in (Path(__file__).resolve().parents[3], Path(__file__).resolve().parents[2]):
+        if (_cand / ".env").is_file():
+            load_dotenv(_cand / ".env")
+            break
+except ImportError:  # pragma: no cover
+    pass
+
 logger = logging.getLogger(__name__)
 
-DEFAULT_EMBED_MODEL = "openrouter/openai/text-embedding-3-small"
+#: EVREN ücretsiz embedding kanalı (ALTYAPI-RAG-EMBEDDER-01).
+#: Ölçüldü 2026-10-02: `qwen3-embedding-8b` → 4096 boyut, `credits_remaining_cr`
+#: 1030.0000, `free_until: 2026-11-01`. Türkçe sıralama doğrulandı:
+#: k(Demir döküm, Metal döküm)=0.8759 > k(.,Gıda paketleme)=0.6316.
+#: Değer KODA GÖMÜLMEZ; `.env` üzerinden okunur (brif adım 4).
+DEFAULT_EMBED_MODEL = os.environ.get("EVREN_EMBED_MODEL", "qwen3-embedding-8b")
+
+#: EVREN OpenAI-uyumlu geçit adresi (scripts/evren_model_turkce_kalite.py ile aynı).
+EVREN_BASE_URL = os.environ.get(
+    "EVREN_BASE_URL", "https://evren-llmapi.ssyz.org.tr"
+)
+
+
+def _evren_anahtari() -> str | None:
+    """`.env` içindeki EVREN anahtarını döner; yoksa None.
+
+    Kural: `scripts/evren_model_turkce_kalite.py:37-40` ile AYNI — anahtar
+    `evren_llm_` prefix'iyle saklanıyor, ayrı `EVREN_API_KEY` değişkeni yok.
+    """
+    if os.environ.get("EVREN_API_KEY"):
+        return os.environ["EVREN_API_KEY"]
+    kok = Path(__file__).resolve().parents[3] / ".env"
+    try:
+        if kok.is_file():
+            for satir in kok.read_text(encoding="utf-8-sig").splitlines():
+                if "evren_llm_" in satir:
+                    return "evren_llm_" + satir.split("evren_llm_", 1)[1].split()[0].strip()
+    except OSError:  # pragma: no cover
+        return None
+    return None
 
 try:  # 9Router istemcisi opsiyonel
     # Önce src-root deseni (pytest/src.company_master), sonra eski desen
@@ -71,12 +113,20 @@ class Embedder:
     @property
     def client(self) -> Any:
         if self._client is None:
-            if get_client is None:
+            # EVREN anahtarı varsa doğrudan EVREN kullanılır (ölçüldü: 9Router
+            # üzerinden `qwen3-embedding-8b` 404 veriyor; EVREN 0 kredi).
+            evren_key = _evren_anahtari()
+            if evren_key:
+                from ..gateway.evren_client import EvrenClient
+
+                self._client = EvrenClient(base_url=EVREN_BASE_URL, api_key=evren_key)
+            elif get_client is not None:
+                self._client = get_client()
+            else:
                 raise RuntimeError(
-                    "9Router istemcisi kurulu degil; once .env'de NINEROUTER_* "
-                    "ve requirements kurulumu gerekli."
+                    "Ne EVREN_API_KEY ne 9Router kurulu. .env'e evren_llm_* "
+                    "veya NINEROUTER_* tanimla."
                 )
-            self._client = get_client()
         return self._client
 
     def embed(self, texts: Iterable[str]) -> EmbeddingResult:
