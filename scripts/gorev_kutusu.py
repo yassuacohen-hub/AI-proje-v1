@@ -246,6 +246,18 @@ def cmd_onayla(args: argparse.Namespace) -> int:
     except trigger.TriggerError as exc:
         return _hata(exc)
     print(f"ONAYLANDI: {args.task_id} -> done (kilitler otomatik dustu)")
+
+    # D-329: onay tek basina tetik URETMEZ; is bitince kuyruk bosalir ama
+    # yerine yeni tetik dusmez. Bu yuzden onayin ardindan tetik dengesi
+    # tetiklenir. Hata olursa ONAY BOZULMAZ (D-260: asil is onay).
+    try:
+        dusen = _tetik_dengele(kuru=False, sessiz=False)
+        if dusen:
+            print(f"DENGE: bos kuyruga tetik dustu -> {', '.join(dusen)}")
+        else:
+            print("DENGE: tetik dusecek bos kuyruk yok")
+    except Exception as exc:                  # noqa: BLE001
+        print(f"[denge] atlandi: {type(exc).__name__}: {exc}", file=sys.stderr)
     return 0
 
 
@@ -742,50 +754,92 @@ def cmd_destek_al(args: argparse.Namespace) -> int:
     return 0
 
 
-def cmd_denge(args: argparse.Namespace) -> int:
-    """Tetik kuyrugunu dengeler: bos kuyrugu olan ajana plan isi tetikler.
+AJANLAR_TUM = ("yasu", "utku", "ihsan", "salih")
+ONCELIK_SIRA = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
 
-    SORUN (olcum 2026-10-02): yasu kuyruk=3 iken utku ve salih kuyruk=0.
-    `onayla` tetik URETMEZ; tetik yalniz gorev_at.py / devret / ekle
-    sirasinda duser. Boylece is bitse bile kuyruk bosalmaz.
 
-    KURAL (geri alinabilir): yalniz `plan` durumunda, sahibi kuyrugu
-    bos olan gorevlere tetik dusulur. Aktif/tetikli ise dokunulmaz.
-    --kuru ile once/sonra raporu gorulur, yazmadan once onay istenir.
+def _tetik_dengele(kuru: bool = False, sessiz: bool = False) -> list:
+    """Bos tetik kuyrugu olan ajanin plan isine tetik dusurur.
+
+    Neden ayri yardimci: hem `denge` komutu hem `onayla` ayni kurali
+    uygular; iki kopyasi olursa biri guncellenip digeri eskir.
+
+    KURAL (D-68 ruhu): yalniz `plan` durumunda ve kuyrugu bos olan
+    ajanlara. Aktif/review gorevlere, dolu kuyruklara ve zaten tetikli
+    gorevlere DOKUNULMAZ. Bu dagitimdir, gorev transferi DEGILDIR -
+    sahiplik degismez.
     """
-    AJANLAR = ("yasu", "utku", "ihsan", "salih")
-    ONCELIK = {"P0": 0, "P1": 1, "P2": 2, "P3": 3}
-
     def bekleyen(ajan: str) -> list:
         try:
             return [k for k in trigger._tetikleri_oku(ajan) if k["durum"] == "bekliyor"]
         except Exception:
             return []
 
-    def pano_gorevleri() -> list:
-        return tb.gorev_listesi()
+    ts = [g for g in tb.gorev_listesi()
+          if g.get("durum") == "plan" and g.get("sahip") in AJANLAR_TUM]
+    kuyruk = {a: len(bekleyen(a)) for a in AJANLAR_TUM}
 
-    ts = [g for g in pano_gorevleri()
-          if g.get("durum") == "plan" and g.get("sahip") in AJANLAR]
-
-    once = {a: len(bekleyen(a)) for a in AJANLAR}
-    print("== TETIK KUYRUKLARI (once) ==")
-    for a in AJANLAR:
-        print(f"   {a:<7} {once[a]}")
-
-    # aday: kuyrugu bos olan ajanin plan isleri, oncelige gore
     adaylar: list = []
-    for a in AJANLAR:
-        if once[a] > 0:
-            continue
+    for a in AJANLAR_TUM:
+        if kuyruk[a] > 0:
+            continue                      # kuyrugu dolu -> dokunma
         for g in ts:
             if g.get("sahip") != a:
                 continue
             if any(k["task_id"] == g.get("task_id") for k in bekleyen(a)):
-                continue          # zaten tetikli (alindi/bekliyor)
+                continue                  # zaten tetikli
             adaylar.append(g)
-    adaylar.sort(key=lambda g: (ONCELIK.get(g.get("oncelik"), 9),
+    adaylar.sort(key=lambda g: (ONCELIK_SIRA.get(g.get("oncelik"), 9),
                                 g.get("task_id", "")))
+
+    # AJAN BASINA EN FAZLA 1 TETIK (olcum): kuyrugu bos olan her ajana
+    # butun plan isleri tek seferde dusulurse kuyruk yeniden birikir ve
+    # denge yine bozulur. Kuyruk bos olan ajan ISE ALIR, bos kalir.
+    secilen = []
+    alinan = set()
+    for g in adaylar:
+        a = g.get("sahip")
+        if a in alinan:
+            continue
+        secilen.append(g)
+        alinan.add(a)
+
+    if kuru:
+        return secilen
+
+    dusen = []
+    for g in adaylar:
+        try:
+            trigger.tetik_ekle(g.get("task_id"), g.get("sahip"),
+                               "DENGE: kuyrugu bos olan ajana tetik dusruldu.")
+            dusen.append(g.get("task_id"))
+        except Exception as exc:          # noqa: BLE001
+            if not sessiz:
+                print(f"   [denge] tetik duseMEDI {g.get('task_id')}: {exc}",
+                      file=sys.stderr)
+    if dusen and not sessiz:
+        print("DENGE tetik dusen: " + ", ".join(dusen))
+    return dusen
+
+
+def cmd_denge(args: argparse.Namespace) -> int:
+    """Tetik kuyrugunu dengeler (bos kuyruga plan isi tetikler).
+
+    Kural `_tetik_dengele` icinde; bu komut yalniz raporlar ve uygular.
+    --kuru ile hicbir sey yazmadan once/sonra gorulur.
+    """
+    once = {}
+    for a in AJANLAR_TUM:
+        try:
+            once[a] = len([k for k in trigger._tetikleri_oku(a)
+                           if k["durum"] == "bekliyor"])
+        except Exception:
+            once[a] = 0
+    print("== TETIK KUYRUKLARI (once) ==")
+    for a in AJANLAR_TUM:
+        print(f"   {a:<7} {once[a]}")
+
+    adaylar = _tetik_dengele(kuru=True)
     print()
     print("== TETIK DUSELECEK ADAMLAR ==")
     if not adaylar:
@@ -798,18 +852,17 @@ def cmd_denge(args: argparse.Namespace) -> int:
         print("KURU: hicbir sey yazilmadi.")
         return 0
 
-    for g in adaylar:
-        trigger.tetik_ekle(g.get("task_id"), g.get("sahip"),
-                           "DENGE: kuyrugu bos olan ajana tetik dusruldu.")
-        print(f"   tetik dustu: {g.get('task_id')} -> {g.get('sahip')}")
+    _tetik_dengele(kuru=False)
 
-    sonra = {a: len(bekleyen(a)) for a in AJANLAR}
     print()
     print("== TETIK KUYRUKLARI (sonra) ==")
-    for a in AJANLAR:
-        print(f"   {a:<7} {once[a]} -> {sonra[a]}")
+    for a in AJANLAR_TUM:
+        try:
+            n = len([k for k in trigger._tetikleri_oku(a) if k["durum"] == "bekliyor"])
+        except Exception:
+            n = 0
+        print(f"   {a:<7} {once[a]} -> {n}")
     return 0
-
 
 def cmd_devret(args: argparse.Namespace) -> int:
     """Gorevi baska ajana devret: sahip + kilitler + yeni ajana tetik."""

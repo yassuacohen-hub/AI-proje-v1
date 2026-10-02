@@ -4631,3 +4631,47 @@ dosyalarında da utku'da hiç kayıt yok. Yük transferi değil, **ilk atama**.
 
 ### Referans
 [[D-68]] (tetik ↔ pano tutarlılığı) · [[D-260]] (ölçülen yazılır)
+
+---
+
+## D-330 — `onayla` tetik dengesini kendiliğinden tetikler (KAHİN kararı 2026-10-02)
+
+### 1. Bulgu
+D-329 tetik dengesini **elle** çalışan `denge` komutuyla çözdü, ama kök
+neden yerinde duruyordu: `onayla` tetik üretmiyor. Bir iş `done` olunca
+kuyruk boşalır, yerine hiçbir şey düşmez.
+
+### 2. Karar
+`_tetik_dengele()` adlı tek bir yardımcı yazıldı; **iki giriş noktası** var:
+- `gorev_kutusu.py denge` — elle tetikleme (rapor + uygulama, `--kuru` destekler)
+- `gorev_kutusu.py onayla` — onaydan **sonra otomatik** çalışır
+
+Tek mantık, iki kapı: kopyalanırsa biri eskir.
+
+**Onay bozulmaz.** Denge bir `try/except` içindedir; tetik düşmezse onay yine
+geçer, yalnız `stderr`'e uyarı düşer. D-260: asıl iş (onay) tetik yüzünden
+kaybolmaz.
+
+### 3. Ölçülen sınır — ajan başına en fazla 1 tetik
+İlk yazımda tüm boş ajanlara **bütün** plan işleri düşüyordu: kuyruklar tamamen
+boşaltıldığında **8 aday** çıktı. Bu, dengeyi bir tur sonra yine bozardı.
+
+Ölçüldü ve sınır kondu — boş kuyruk senaryosu, tetik dosyaları **yedeklenip
+geri yüklenerek** denendi (canlı veri bozulmadı):
+
+| | Aday sayısı |
+|---|---|
+| Sınırsız | 8 |
+| **Ajan başına 1** | **4** |
+
+```
+ALTYAPI-ODIN-UYARLAMA-01              -> ihsan (P0)
+SCRAPE-005-KAZIMA-DOCKER-INTEGRATION  -> utku  (P0)
+ALTYAPI-AJAN-CAKISMA-01               -> yasu  (P1)
+SCRAPE-006-QUALITY-AUDIT              -> salih (P1)
+```
+
+Öncelik sırası korunur: P0 → P1 → P2.
+
+### Referans
+[[D-329]] (denge komutu) · [[D-68]] (tetik ↔ pano) · [[D-260]] (ölçülen yazılır)

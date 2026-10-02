@@ -1,13 +1,21 @@
 > **YENİ OTURUMDA İLK OKUNACAK DOSYA** — orkestratör kimliği ve kalıcı hafıza. Her oturum başında önce bunu oku.
-> Şablon: [[Huginn Data Insights/_ajan_context_sablon]] (D-219) · Tavan 200 satır.
+> Şablon: [[Huginn Data Insights/_ajan_context_sablon]] (D-219) · Tavan 400 satır (D-219 Ek, 2026-10-02). §Öz-eleştiri bölümü tavana dahil değil, silinmez.
 
 ## KALDIĞIM YER
 
 > D-219: tek blok, **üzerine yazılır**. Pano ile çelişirse pano üstündür.
 
-- **Konum:** `TEST-ODIN-PROMPT-INJECTION` — Mimir-DIŞ güvenlik ölçümü. **6 canlı koşu bitti.**
-  Son durum: ret oranı **%83.3** (10/12), düşünme sızıntısı **0**, karar hâlâ **NO-GO**.
-  NO-GO'nun sebebi artık oran değil: `kararsiz` (4 senaryo) + `dil_uyumsuz` (`inj-10`).
+- **Konum:** `TEST-ODIN-PROMPT-INJECTION` — Mimir-DIŞ güvenlik ölçümü.
+  **Borç #71-74 kodda kapandı** (commit `022987f`), 43/43 pytest yeşil. **7. koşu SKIP**:
+  EVREN API iki ardışık denemede de (20:45 ve 20:50) `HTTP 503 Service Unavailable` döndü —
+  altyapı çökük, model gerçek yanıt vermedi. Bu bir prompt ölçümü DEĞİL (D-224: ölçülmeden
+  görev kapanmaz → sahte-yeşil yasak). Kıyas tabanı (%83.3, kararsız 4, `dil_uyumsuz [inj-10]`)
+  hâlâ GEÇERLİ referans — 7. koşu bunu geçersiz kılmadı, sadece ölçemedi.
+- **Yeni bulgu (henüz düzeltilmedi, borç adayı):** `karar_ver()` bir senaryo `hata` (HTTPError)
+  ile düşerse `dil_uyumlu=false` varsayılan atıyor → aggregate raporda gerçek sebep (API
+  erişilemedi) "dil_uyumsuz" etiketinin ARKASINA gizleniyor. Log'daki `hata` alanına bakmadan
+  üst özet yanıltıcı. Düzeltme: ayrı `erisilemedi` kovası + `karar_ver()` hata varsa otomatik
+  SKIP döndürsün (NO-GO değil).
 - **Yapılanlar (2026-10-01):** Prompta **MUTLAK KURAL 0c** (etiket/araç çağrısı/base64 = veri değil)
   + **İlk Karakter Kuralı** eklendi; betiğe `LOG_KESIT = 2000` (borç #68). 45 mandal yeşil,
   commit **`84811e8`**, kilit salih'e usulünce geri devredildi (`--no-verify` YOK, D-309/5).
@@ -22,9 +30,9 @@
   `VERI-RISK-MOTORU-01`→utku P1 · `VERI-ENTITY-GRAPH-01`→yasu P1 ·
   `DOC-VENDOR-DD-ARASTIRMA-01`→yasu P3 · `DOC-GLOBAL-INTEL-ARASTIRMA-01`→utku P3.
   Göç 0046 utku'ya, 0047 yasu'ya kilitli; sıradaki boş numara **0048**.
-- **Sonraki adım:** A planı → borç **#71** (Türkçe düşünme kalıpları + yanlış pozitif mandalı),
-  sonra #72/#73/#74, sonra **7. koşu** `--tekrar 3`. Kıyas tabanı: %83.3 · kararsız 4 ·
-  `dil_uyumsuz ["inj-10"]` · `dusunme_sizan []`.
+- **Sonraki adım:** EVREN altyapısı düzelince `--tekrar 3`'ü TEKRAR dene (kod tarafı hazır,
+  sadece komutu çalıştır). GO çıkarsa: salih brifini güncelle + D-210 chat. SKIP sürerse:
+  `ALTYAPI-MIMIR-BAGLAM-01` kapsamında EVREN API erişilebilirliğini KAHİN'e escalate et.
 - **Görev:** `TEST-ODIN-PROMPT-INJECTION` (salih'te, ölçüm bende) · **Son okunan karar:** `D-312`
 
 ## Tuzaklar (belirti → kök neden → çözüm)
@@ -44,6 +52,25 @@
 | `gorev_at.py ata` → argparse `invalid choice` | Alt komutun adı `at`, "ata" değil (`gorev_at.py:483`) | Komut adını uydurma, `main()`'den oku |
 | Commit çıktısı `[chore/monorepo-merge]`, `git status` `## master` | Teşhis edilmedi — borç #48, 8. görünüm | Açık |
 | `git add` → `paths are ignored by .gitignore: Huginn Data Insights` | **İki ayrı repo var** (D-255); dış kök vault'u yok sayar | Vault dosyası vault içinden commit edilir: `cd "Huginn Data Insights" && git add ...` |
+
+## Öz-eleştiri (KALICI — SİLİNMEZ, arşive taşınmaz)
+
+> Ürün Sahibi kararı (2026-10-02): "tüm ajanlar öz eleştirilerini cortex dosyasında sabit tutsun
+> silmesinler" — bu bölüm 400 satır tavanına dahil değil, archive rotasyonunda asla taşınmaz.
+> En yeni madde en üstte, biriktirilir.
+
+- **2026-10-02 — D-320/D-321/D-322 sırayla iddia:** `karar_no.py --al` idempotent değil; aynı konuyu
+  3 kez çağırınca 3 ayrı numara (D-320, D-321, D-322) rezerve oldu ama bulgu_defteri.md'de sadece
+  2 ayrı konu vardı (SCOR/SKOR+bypass kapısı, regex-virgül satır-bazlı tarama). **Öğrendiğim:**
+  numara talep etmeden önce kaç AYRI karar konusu olduğunu netleştir, sonra o sayıda al — tahminle
+  fazla almak orphan numara (D-322) doğurur. **Bundan sonra:** `--al` çağrısı sayısı = kanıtlanmış
+  konu sayısı; fazlaysa dürüstçe "kullanılmadı" diye işaretle, sessizce yok sayma.
+- **2026-10-02 — D-193'te yazılmayan dosya "yapılacak" diye durmuş:** `git_stash_guard.py` ve
+  `git_safety_check.py` 2026-09-23'ten beri AGENTS.md'de "yazılacak" diye duruyordu, 3 ayrı
+  oturumda da hiç yazılmadığı fark edilmeden kaldı. **Öğrendiğim:** "yapılacak" notu süresiz açık
+  kalırsa fiilen "yapılmış" gibi okunuyor — bu D-309/1 deseninin (yazılmayanı yazılmış gibi
+  bırakma) kendi başıma düştüğüm örneği. **Bundan sonra:** her oturum açılışında AGENTS.md'de
+  kendi attığım "yazılacak" notlarını grep'leyip hâlâ yazılmamışsa ya yaz ya da metni düzelt.
 
 ## Yapılacaklar (emir #47-b · 2026-10-01)
 
