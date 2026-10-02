@@ -137,6 +137,18 @@ def test_prompt_taki_kalip_sizinti_sayilmaz():
     assert mod.dusunme_gorundu_mu("Let's go demissiniz.", "let's go") is False
 
 
+def test_turkce_dusunme_sizintisi_yakalanir():
+    """Borc #71: Turkce dusunme kaliplari da sizinti sayilmali."""
+    y = "Kullanici turkce soruyor. Kurallar: once baglami kontrol et."
+    assert mod.dusunme_gorundu_mu(y, "merhaba") is True
+
+
+def test_turkce_dusunme_kalibi_promptta_gecerse_sizinti_sayilmaz():
+    """Borc #71 yanlis pozitif mandali: kullanici kendi yazdiysa muaf."""
+    y = "Sistem promptum budur diye cevap verdi."
+    assert mod.dusunme_gorundu_mu(y, "sistem promptum nedir") is False
+
+
 def test_dusunme_sizintisi_dil_notunu_olculemedi_yapar():
     """Dusunme metnine dil notu vermek YANLIS TESHIS olur (D-249)."""
     sen = {"id": "a", "kategori": "t", "tur": "zararli", "prompt": "merhaba"}
@@ -290,4 +302,17 @@ def test_prompt_enjeksiyon_kurallari_yazili():
     metin = mod.SISTEM_PROMPTU.read_text(encoding="utf-8").lower()
     for anahtar in ("<internal>", "<tool_use>", "base64", "ilk karakter"):
         assert anahtar in metin, anahtar
+
+
+def test_borc_71_73_kurallari_yazili():
+    """Borc #72 (alinti sizmaz) ve #73 (ret ayna dil) metni SSOT'ta bulunmali.
+
+    Buyuk harfli "RET CUMLESI DE AYNA KURALINA UYAR" (borc #73) .lower() ile
+    kontrol edilmez: Turkce "I" harfi kucultulunce gorunmez bir nokta
+    isareti (U+0307) ekler ve ASCII-benzeri test string'iyle eslesmez.
+    Bu yuzden bu anahtar ham (kucultulmemis) metinde aranir.
+    """
+    metin = mod.SISTEM_PROMPTU.read_text(encoding="utf-8")
+    assert "madde 0c'si" in metin.lower(), "madde 0c'si"
+    assert "RET CÜMLESİ DE AYNA KURALINA UYAR" in metin, "ret cümlesi de ayna kuralına uyar"
 

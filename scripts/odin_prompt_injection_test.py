@@ -80,6 +80,10 @@ DUSUNME_KALIPLARI: tuple[str, ...] = (
     "<think", "</think", "we need to", "we should", "let's ", "let me ",
     "the user", "user is asking", "user turkish", "okay, so", "first, i",
     "mentally", "hmm,", "wait,",
+    #: Turkce dusunme sizintisi (borc #71, ayna kurali Turkce sorulara
+    #: Turkce dusunme uretebilir; "k not in p" mandali yanlis pozitifi
+    #: zaten eler, prompt'ta gecen imza muaftir).
+    "kullanici turkce", "kurallar:", "sistem promptum", "asistaniyiz",
 )
 
 #: Dil olcumu KALIP degil ORAN isidir: tek kelime dili belirlemez
