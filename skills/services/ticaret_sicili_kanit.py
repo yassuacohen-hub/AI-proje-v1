@@ -79,6 +79,61 @@ KATMANLAR = {
 
 
 
+#: TSG ilan türü -> `(event_type, direction)` eşlemesi (TSG-04 olay hattı).
+#:
+#: ### SÖZLÜK NEDEN EKSİK TUTULUYOR
+#:
+#: Anahtarlar **kasıtlı olarak** yalnız ölçülmüş ilan türlerini içerir:
+#: `data/kanit/*.json` içindeki 326 dosyanın 17 ayrı `il_turu` değeri
+#: (19 kayıtta dolu). Sözlükte **olmayan** bir ilan türü `unknown` döner ve
+#: `tsg_rapor.olumsuz_ilanlar()` kapısını tetikler: rapor "olumsuz ilan yok"
+#: diyemez. Bu D-216/D-307'nin istediği davranıştır — eksik sözlük bir hata
+#: değil, **kapının çalıştığının kanıtıdır**.
+#:
+#: ### ANAHTAR BİÇİMİ
+#:
+#: Anahtarlar ASCII'ye indirgenmiş büyük harf **tam** değerlerdir; eşleme
+#: alt dizi (substring) değil, tam eşleşmedir. Tam eşleşme şart: `Tasfiye`
+#: gibi bir anahtar kelimeyi eşleştirmek, `TASFİYE İLANI` yazan başka bir
+#: ilanı da yanlışlıkla sınıflandırırdı.
+#:
+#: `olay_esle()` iki adımda arar: (1) verilen metin **olduğu gibi**,
+#: (2) ASCII'ye indirgenmiş hâli. Bu sayede hem ham (`tsg_rapor`) hem
+#: normalize büyük harf (`tsg_yazici`) çağrı yolu tek anahtar kümesiyle
+#: çalışır — ikinci bir sözlük ikizi üretilmez (D-211).
+#:
+#: ### ÇAKIŞMA ÇÖZÜMÜ ÖLÇÜLEBİLİR
+#:
+#: Bir ilanda birden fazla olay geçebiliyor; ölçülen örnek:
+#: `"... Değişiklik - Pay Devri Değişiklik - Sermaye Artırımı"`.
+#: Burada yönü belirgin olan olay **sermaye artırımı**dır (`positive`),
+#: pay devri yön taşımaz (`stable`). Sıralama bu yüzden ölçülen örneğe
+#: göre yapıldı; yeni bir çakışma çıkarsa `direction` değil `event_type`
+#: kaydedilir (bir olay tek satırdır — tavan ponytail kuralı).
+ILAN_TURU_ESLEME: dict[str, tuple[str, str]] = {
+    # --- Büyüme: yönü belirgin ---
+    "LIMITED SIRKET (SERMAYE ARTIRIMI) ORTAK SAYISI BIRDEN FAZLA LIMITED SIRKET DEGISIKLIK - SERMAYE ARTIRIMI": ("sermaye_artisimi", "positive"),
+    "LIMITED SIRKET (SERMAYE ARTIRIMI) TEK ORTAKLI LIMITED SIRKET DEGISIKLIK - SERMAYE ARTIRIMI": ("sermaye_artisimi", "positive"),
+    "ANONIM SIRKET (SERMAYE ARTIRIMI) PAY SAHIBI SAYISI BIRDEN FAZLA ANONIM SIRKET DEGISIKLIK - SERMAYE ARTIRIMI": ("sermaye_artisimi", "positive"),
+    "LIMITED SIRKET (SERMAYE ARTIRIMI) ORTAK SAYISI BIRDEN FAZLA LIMITED SIRKET DEGISIKLIK - PAY DEVRI DEGISIKLIK - SERMAYE ARTIRIMI": ("sermaye_artisimi", "positive"),
+    "LIMITED SIRKET (SERMAYE ARTIRIMI)": ("sermaye_artisimi", "positive"),
+    "SUBE ACILIS": ("sube_acilisi", "positive"),
+    # --- Sıkıntı: yönü belirgin ---
+    "KONKORDATO ALACAKLI TOP. - DURUSMA GUNU VE DIGER": ("konkordato", "negative"),
+    # --- Sınıflandırılmış ama yönü olmayan ---
+    "LIMITED SIRKET (YONETIM (MUDUR) - TEMSIL VE DIGER) ORTAK SAYISI BIRDEN FAZLA LIMITED SIRKET DEGISIKLIK - YONETIM KURULU / YETKILILER": ("yonetim_kurulu_degisikligi", "stable"),
+    "ANONIM SIRKET (YONETIM - TEMSIL VE DIGER) TEK PAY SAHIPLI ANONIM SIRKET DEGISIKLIK - YONETIM KURULU / YETKILILER": ("yonetim_kurulu_degisikligi", "stable"),
+    "ANONIM SIRKET (YONETIM - TEMSIL VE DIGER) PAY SAHIBI SAYISI BIRDEN FAZLA ANONIM SIRKET DEGISIKLIK - YONETIM KURULU / YETKILILER": ("yonetim_kurulu_degisikligi", "stable"),
+    "TEMSIL IC YONERGESI (TTK - M.371 - F.7) TEK PAY SAHIPLI ANONIM SIRKET DEGISIKLIK - YONETIM KURULU / YETKILILER DEGISIKLIK - YONETIM IC YONERGESI": ("yonetim_kurulu_degisikligi", "stable"),
+    "TEK ORTAKLIK BILGISI PAY SAHIBI SAYISI BIRDEN FAZLA ANONIM SIRKET DEGISIKLIK - YONETIM KURULU / YETKILILER DEGISIKLIK - TEK PAY SAHIPLIGINDE DEGISIKLIK": ("tek_pay_sahipligi", "stable"),
+    "TEK ORTAKLIK BILGISI TEK PAY SAHIPLI ANONIM SIRKET DEGISIKLIK - YONETIM KURULU / YETKILILER DEGISIKLIK - TEK PAY SAHIPLIGINDE DEGISIKLIK": ("tek_pay_sahipligi", "stable"),
+    "LIMITED SIRKET (PAY DEVRI) ORTAK SAYISI BIRDEN FAZLA LIMITED SIRKET DEGISIKLIK - PAY DEVRI": ("pay_devri", "stable"),
+    "LIMITED SIRKET (PAY DEVRI) TEK ORTAKLI LIMITED SIRKET DEGISIKLIK - PAY DEVRI DEGISIKLIK - YONETIM KURULU / YETKILILER": ("pay_devri", "stable"),
+    "LIMITED SIRKET (ADRES DEGISIKLIGI) TEK ORTAKLI LIMITED SIRKET DEGISIKLIK - ADRES": ("adres_degisikligi", "stable"),
+    "LIMITED'DEN ANONIM'E (TUR DEGISIKLIGI) TEK PAY SAHIPLI ANONIM SIRKET NEVI DEGISIKLIGI - TUR DEGISIKLIGI NEVI DEGISIKLIGI - SOZLESME": ("tur_degisikligi", "stable"),
+}
+
+
 def vkn_kontrol(vkn: str) -> dict:
     """VKN doğrulaması — **TEK KAYNAK DELEGASYONU** (K-1, D-275).
 
@@ -130,20 +185,162 @@ MERSIS_VKN_IDDIASI = {
 }
 
 
+#: Türkçe harflerin ASCII karşılığı — **sıralama önemli**.
+#:
+#: Boşluğun (`str.maketrans`) sebebi: ASCII'ye indirgeme yapmadan önce
+#: Türkçe harfleri karşılıklarına çeviriyoruz. Aksi halde Unicode katmanı
+#: bunları **sessizce düşürüyor** ve iki farklı kelime aynı anahtara düşüyor.
+#:
+#: ÖLÇÜLEN KANIT (VERI-TSG-ESLEME-CASE-01, D-224 — beyan değil):
+#:   eski katlama:  "Artırımı"     -> "ARTRM"     (4 harf yutuldu)
+#:                 "Şube Açılış"   -> "SUBE ACLS"  (2 harf yutuldu)
+#:   yeni katlama:  "Artırımı"     -> "ARTIRIMI"
+#:                 "Şube Açılış"   -> "SUBE ACILIS"
+#:
+#: Bunun sonucu şuydu: `ILAN_TURU_ESLEME` sözlüğündeki anahtarlar **elle**
+#: ASCII yazıldığı için (`SERMAYE ARTIRIMI`, `SUBE ACILIS`), katlama
+#: yolu onları **hiç üretemiyordu**. 20 dolu `il_turu` kaydından 13'ü
+#: eşleşiyor, 4'ü sermaye artırımıydı ve **hepsi** `unknown` dönüyordu.
+#:
+#: **Sözlük ile katlama aynı normalize'yi paylaşmalıdır** (D-211, D-239):
+#: ikisi ayrı elle yazılırsa biri diğerini çürütür — burada da öyle oldu.
+_TR_ASCII = str.maketrans(
+    {
+        "ı": "I",
+        "İ": "I",
+        "i": "I",
+        "ş": "S",
+        "Ş": "S",
+        "ğ": "G",
+        "Ğ": "G",
+        "ü": "U",
+        "Ü": "U",
+        "ö": "O",
+        "Ö": "O",
+        "ç": "C",
+        "Ç": "C",
+        "â": "A",
+        "î": "I",
+        "û": "U",
+    }
+)
+
+
 def _asciiye(metin: str) -> str:
     """Turkce metni ASCII'ye indirger ve buyuk harfe cevirir.
 
     D-271: kaynak metin Turkce karakter icerebilir. `ŞUBESİ` ile `SUBESI`
     esit olmali, aksi halde sirket tipi tespiti sessizce `diger` doner.
+
+    D-317/VERI-TSG-ESLEME-CASE-01: once Turkce harfler **adli karsiliklarina**
+    cevrilir; NFKD + `encode("ascii", "ignore")` sadece aksan artiklarini
+    temizler. Eski halde `ı`/`ş` Unicode katmaninda **yok sayiliyordu** ve
+    "Artırımı" -> "ARTRM" oluyordu; sozlukteki `SERMAYE ARTIRIMI` anahtari
+    bu yolla hic uretilemedigi icin 4 gercek kayit `unknown` donuyordu.
+
+    Donusum **cift yonlu olmak zorunda**: `ILAN_TURU_ESLEME` anahtarlari da
+    bu fonksiyondan gecirilir, boylece iki taraf ayni kurali paylasir.
     """
     if not metin:
         return ""
+    katlanmis = metin.translate(_TR_ASCII)
     return (
-        unicodedata.normalize("NFKD", metin)
+        unicodedata.normalize("NFKD", katlanmis)
         .encode("ascii", "ignore")
         .decode("ascii")
         .upper()
     )
+
+
+def _sozluk_normalize() -> dict[str, tuple[str, str]]:
+    """`ILAN_TURU_ESLEME`'yi **aynı** katlamadan geçirir.
+
+    Kural gövdesi tek yerde yaşar (D-239): `olay_esle()` bir katlama
+    uygularsa, sözlük de aynısını uygulamak zorundadır. Sözlük elle
+    normalize edilmiş bir ikinci gerçek olurdu (D-211).
+
+    **Neden her çağrıda hesaplanıyor, `lru_cache` ile değil:** Testler
+    `monkeypatch.setitem(ILAN_TURU_ESLEME, ...)` ile sözlüğe geçici anahtar
+    ekliyor. Bir kez hesaplanmış sabit (`_ESLEME_KATLANMIS`) bu yazmayı
+    görmez ve test **sessizce** yanlış sonuç üretir — 17 anahtarlık sözlükte
+    katlama ihmal edilebilir maliyet, ikinci gerçek pahalıdır (D-211).
+    """
+    return {
+        _asciiye(k): v
+        for k, v in ILAN_TURU_ESLEME.items()
+        if _asciiye(k)
+    }
+
+
+def olay_esle(ilan_turu: str | None) -> tuple[Optional[str], str]:
+    """TSG ilan türü -> `company_events` satırı: `(event_type, direction)`.
+
+    **Boş/None -> `(None, "unknown")`.** Bilinmeyen tür de aynı değeri döner;
+    bu ayrım bilinçlidir, aşağıdaki `direction` sözlüğüne bakın.
+
+    ### `unknown` ile `stable` FARKLI ŞEYDİR (D-268: tek kolon iki anlam)
+
+    `direction` CHECK kısıtı (`company_events`, migration 0003) beş değere
+    izin verir: `positive | negative | mixed | stable | unknown`.
+
+    - `unknown` = **eşleşme yok** — ilan türü sözlükte bulunamadı ya da
+      `il_turu` alanı boş. Bu, `tsg_rapor.olumsuz_ilanlar()` kapısının
+      tetikleyicisidir: o satır "negatif değil" sayılmaz, `etiketsiz`
+      listesine düşer ve rapor "olumsuz ilan yok" diyemez.
+    - `stable` = **eşleşme var, yönsel sinyal yok** — ilan sınıflandı,
+      ancak şirketin lehine/aleyhine işaret taşımıyor.
+
+    İkisini aynı değere indirgemek kapıyı **anlamsız** kılardı: kapı,
+    "sınıflandırılmamış ilan var mı?" sorusunu soruyor. Sınıflandırılmış
+    ama yönü olmayan ilan o soruya "hayır" demektir. Birleştirilirse kapı
+    ya hiç tetiklenmez ya da her zaman tetiklenir.
+
+    ### Neden `stable` dürüst, `positive` spekülatif değil
+
+    Yön ataması **işareti olan** olaylara yapılır (sermaye artırımı =
+    büyüme, şube açılışı = genişleme, konkordato/iflas/tahsisat = sıkıntı).
+    Pay devri, yönetim değişikliği, adres değişikliği gibi olaylarda
+    yönsel sinyal **yoktur**; `stable` yazmak tahmin değil, ölçülen
+    boşluğu göstermektir (D-249: "veri yok" ile "0" aynı şey değildir).
+
+    **Eşleme ölçülmüş veriden gelir, tahminle değil** (D-224): anahtarlar
+    `data/kanit/*.json` içindeki gerçek `il_turu` değerlerinden alındı
+    (326 dosya, 19 kayıtta `il_turu` dolu). Anahtarlar ASCII'ye indirgenmiş
+    yazılır çünkü eşleme `_asciiye()` çıktısı üzerinden yapılır.
+
+    Python `str.upper()` Türkçe `i` harfini `I` yapar, `İ` yapmaz; bu yüzden
+    `"Değişiklik"` normalize edilince `DEĞIŞIKLIK` olur. `_asciiye()` bunu
+    `DEGISIKLIK`a indirger — eşleme iki biçimi de yakalar.
+    """
+    if not ilan_turu:
+        return None, "unknown"
+
+    # Sözlük **her çağrıda** aynı katlamadan geçer (bakınız `_sozluk_normalize`
+    # docstring'i) — sözlük ve arama aynı normalizasyonu paylaşır.
+    sozluk = _sozluk_normalize()
+
+    # 1) Verilen metin **oldugu gibi** — testlerin monkeypatchledigi anahtarlar
+    #    ve ham kaynak metni bu yoldan yakalanir.
+    dogrudan = sozluk.get(ilan_turu)
+    if dogrudan is not None:
+        return dogrudan
+
+    # 2) ASCII'ye indirgenmis hali — `tsg_yazici` buyuk harf, Turkce `i`
+    #    `I` olur ve `str.upper()` `İ` uretmez; `Değişiklik` -> `DEGISIKLIK`.
+    #    Turkce `ı`/`ş` de ayni kapidan gecer (D-317/ESLEME-CASE-01):
+    #    `Artırımı` -> `ARTIRIMI`, aksi halde `ARTRM` olurdu.
+    arama = _asciiye(ilan_turu)
+    if not arama:
+        return None, "unknown"
+    katlanmis = sozluk.get(arama)
+    if katlanmis is not None:
+        return katlanmis
+
+    # 3) Eslesme yok. Sözlük **kasitli olarak** eksik: yeni bir ilan turu
+    #    `unknown` doner ve `tsg_rapor.olumsuz_ilanlar()` kapisi tetiklenir.
+    #    Sözlüğe yeni anahtar eklemek icin `test_olay_esle_tum_kanitlar_eslesin`
+    #    kirmiziya doner — yani bakim borcu teste baglanmistir.
+    return None, "unknown"
 
 
 @dataclass
