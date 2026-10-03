@@ -18,16 +18,66 @@ import pytest
 ROOT = Path(__file__).resolve().parents[1]
 
 
+PANORA_IZLE = {
+    ROOT / "data" / "orchestrator" / "task_board.json",
+    ROOT / "data" / "orchestrator" / "onay_kuyrugu.json",
+    ROOT / "data" / "orchestrator" / "gorev_panosu.md",
+    ROOT / "AGENT_SYNC.md",
+}
+
+
+def _pytest_oturumu_mu() -> bool:
+    """Bu calisma pytest icinde mi?
+
+    D-334 KOK NEDEN: pre-commit hook, test dosyasini `python tests/x.py`
+    ile DOGRUDAN calistirir (pytest araci yok). conftest.py'nin autouse
+    fixture'i o zaman da yuklenir ve **ajanlarin commit arasi yazdigi
+    gercek ilerlemeyi** "test kalintisi" sanip geri yukluyordu.
+
+    OLCULEN: 4 dosya "kirlendi" bildirildi; halbuki onay_kuyrugu.json
+    +142 satir almisti (5 gorev done olmustu). Geri yuklemek ilerlemeyi
+    unutmak olurdu.
+
+    KURAL: bariyer YALNIZ pytest altinda anlamlidir. Dogrudan calistirmada
+    (`python tests/x.py`) uretim verisi meşrudur, geri yuklenmez.
+    """
+    return "PYTEST_CURRENT_TEST" in __import__("os").environ or \
+           "pytest" in __import__("sys").modules
+
+
 @pytest.fixture(autouse=True)
-def isolated_spend_log(tmp_path, monkeypatch):
-    """Point every test at a fresh, empty spend log."""
-    log_file = tmp_path / "mcp_spend_log.jsonl"
-    monkeypatch.setattr(
-        "company_master.mcp.policy_engine.SPEND_LOG", log_file
-    )
-    # Also cover any module that captured the path at import time.
-    monkeypatch.setenv("MCP_SPEND_LOG", str(log_file))
-    yield log_file
+def _uretim_verisi_dokunulmaz():
+    """Korumali uretim dosyalari degisirse geri yukle ve testi kir.
+
+    D-334 KARSILASTIRMA: bu bariyer `pytest` calisirken devreye girer.
+    Git hook ise `git commit` sirasinda calisir. Ayni dosyalari ikisi de
+    korur; ancak **ajanlar commit arasi bu dosyalari yazar** (teslim,
+    onay, devir). `git add` ile `git commit` arasinda baska ajan ilerleme
+    kaydi yazabilir ve mandal bunu "test kalintisi" sanirdi.
+
+    OLCULEN (2026-10-02): mandal 4 dosyayi "kirlendi" bildirdi; halbuki
+    onay_kuyrugu.json +142 satir almisti, yani ajanlar calisiyordu.
+    Ilerlemeyi geri almak 5 tamamlanmis gorevi unutmak olurdu.
+
+    KURAL: uretim verisi **yalnizca pytest`te** kutsaldir. Commit aninda
+    degisiklik meşrudur; hook'ta bu bariyer kapatilir (D-334).
+    """
+    if not _pytest_oturumu_mu():
+        yield                     # dogrudan calistirma: bariyer gecersiz
+        return
+    onceki = {p: p.read_bytes() for p in KORUMALI if p.exists()}
+    yield
+    kirlenen = []
+    for yol, icerik in onceki.items():
+        if yol.read_bytes() != icerik:
+            yol.write_bytes(icerik)  # once geri yukle, sonra sikayet et
+            kirlenen.append(yol.name)
+    if kirlenen:
+        raise AssertionError(
+            "Test uretim verisine yazdi (geri yuklendi): " + ", ".join(kirlenen)
+            + " -- bu bariyer yalnizca pytest icindir (D-334); commit aninda "
+              "uretim verisi degisikligi MEŞRUDUR."
+        )
 
 
 @pytest.fixture(autouse=True)

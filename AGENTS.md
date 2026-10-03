@@ -4675,3 +4675,78 @@ SCRAPE-006-QUALITY-AUDIT              -> salih (P1)
 
 ### Referans
 [[D-329]] (denge komutu) · [[D-68]] (tetik ↔ pano) · [[D-260]] (ölçülen yazılır)
+
+---
+
+## D-333 — Hook repo içine taşındı: `scripts/hook_kur.py` (KAHİN kararı 2026-10-02)
+
+### 1. Bulgu
+D-332'de yazılan TOCTOU koruması ve hook `exit` düzeltmesi
+`.git/hooks/pre-commit` altına yazıldı. **`.git/` versiyonlanmaz** —
+başka ajanlara, yeni makineye ve türev klonlara **gitmez**.
+
+**Ağır sonuç:** hook olmayan bir ortamda mandallar (doğrulama kapıları)
+sessizce devre dışı kalır. Commit'ler doğrulamasız geçer ve kimse fark etmez.
+
+### 2. Karar
+Hook'un kanlı kaynağı repo içine alındı:
+
+| Rol | Yol |
+|---|---|
+| Kaynak (versiyonlanır) | `scripts/hooks/pre-commit.sh` |
+| Hedef (git'e özel) | `.git/hooks/pre-commit` |
+| Kurulum | `python scripts/hook_kur.py` |
+| Kontrol (yazmaz) | `python scripts/hook_kur.py --kontrol` |
+
+Dört ajan belgesine de kurulum komutu eklendi; her ajan ilk işinde çalıştırır.
+
+### 3. Kural
+Kaynak dosya değişirse `hook_kur.py` **tekrar** çalıştırılır. `--kontrol`
+iki kopyanın aynı olduğunu SHA-256 ile gösterir (yazmaz).
+
+### Referans
+[[D-332]] (TOCTOU koruması) · [[D-255]] (hook kurulumu) · [[D-223]] (tek otorite)
+
+---
+
+## D-334 — Üretim verisi bariyeri yalnız pytest içinde (KAHİN kararı 2026-10-02)
+
+### 1. Bulgu (ölçüm)
+Commit engellendi: *"Test uretim verisine yazdı: task_board.json,
+onay_kuyrugu.json, gorev_panosu.md, AGENT_SYNC.md"*. Dört dosya da
+"kirlenmiş" görünüyordu.
+
+Ama ölçüm **ilerleme** gösterdi:
+
+| Dosya | Değişim |
+|---|---|
+| `task_board.json` | `done` 91→96, `plan` 12→7 |
+| `onay_kuyrugu.json` | **+142 satır** |
+
+Yani ajanlar çalışıyordu; mandal **gerçek ilerlemeyi** test kalıntısı
+sanmıştı.
+
+### 2. Kök neden
+`tests/conftest.py` içindeki autouse fixture, korumalı dosyaları
+kaydedip sonra karşılaştırıyor; değişmişse **geri yükleyip** hata veriyor.
+
+Bu bariyer **mantıklı ama yanlış yere konmuş.** Pre-commit hook, test
+dosyasını `python tests/test_goc_defteri.py` ile **doğrudan** (pytest
+aracı olmadan) çalıştırır. O zaman da `conftest.py` yüklenir, fixture
+devreye girer ve ajanların commit arası yazdığı meşru ilerlemeyi
+siler.
+
+### 3. Karar
+Bariyer **yalnız gerçek pytest oturumunda** çalışır
+(`_pytest_oturumu_mu()`). Doğrudan çalıştırmada üretim verisi
+**meşrudur**, geri yüklenmez.
+
+Kural: *üretim verisine yazmak* suç değildir. **Test sırasında** yazmak
+suçtur. Ayrım çalıştırma biçiminden gelir, niyetten değil.
+
+### 4. Geri alma yolu (ölçüldü)
+Panoyu geri yüklemek seçeneği **reddedildi**: 5 tamamlanmış görev
+unutulurdu. Yedek alındı, doğrulama yapıldı, ilerleme korundu.
+
+### Referans
+[[D-332]] (TOCTOU) · [[D-333]] (hook kalıcılığı) · [[D-260]] (ölçülen yazılır)

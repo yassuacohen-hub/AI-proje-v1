@@ -226,3 +226,25 @@ Bunu sen ayrica yapmazsin — `scripts/gorev_kutusu.py` her komut sonunda
 **Yanlislar (yapma):**
 - Panoya elle durum yazma — bir sonraki senkron ezilir.
 - Notion'dan panoya geri yazim yok; kaynak daima `data/orchestrator/task_board.json`.
+
+## Git Hook Kurulumu (D-333)
+
+Bu repo `.git/hooks/` altinda hook kullanir ama **hook git'e ozeldir,
+versiyonlanmaz**. Turev (fork) veya yeni makinede hook **kaybolur** —
+mandallar (dogrulama kapilari) sessizce devre disi kalir.
+
+**Ilk ise su komutu calistir:**
+
+```
+python scripts/hook_kur.py
+```
+
+Kontrol icin: `python scripts/hook_kur.py --kontrol`
+
+**Ne yapiyor:** kanli `scripts/hooks/pre-commit.sh` dosyasini
+`.git/hooks/pre-commit` konumuna kopyalar.
+
+**Neden onemli:** hook olmadan commit'ler dogrulamasiz gecer. D-332'de
+olculdu: mandallar bir sureligine hic calismiyordu, bu yuzden baska
+ajanin degisikligi iki kez yanlis commit'e karisti. Kaynak dosya
+guncellendiginde komutu TEKRAR calistir.
