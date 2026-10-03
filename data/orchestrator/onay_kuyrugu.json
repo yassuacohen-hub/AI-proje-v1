@@ -2888,7 +2888,9 @@
     "ozet": "13 OSB veri seti hazir: 8.987 kayit, slug tekil. Polatli Ticaret tarandi (+8, tekil %100). Supabase YAZILMADI - onay bekliyor. 3 site DNS cozulmuyor, Sereflikochisar liste yayinlamiyor. Rapor: data/orchestrator/D-305_osb_rapor_2026-09-29.md",
     "ciktilar": [],
     "teslim_tarihi": "2026-09-30T01:28:31",
-    "durum": "bekliyor"
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-10-02T15:25:25"
   },
   {
     "task_id": "VERI-KAYNAK-SIZINTI-01",
@@ -2925,5 +2927,147 @@
     ],
     "teslim_tarihi": "2026-09-30T02:55:55",
     "durum": "bekliyor"
+  },
+  {
+    "task_id": "VERI-TSG-ESLEME-CASE-01",
+    "ajan": "utku",
+    "ozet": "TSG ilan turu esleme: _TR_ASCII katlamasi, ILAN_TURU_ESLEME (17 anahtar), olay_esle() fonksiyonu. Turkce ı/ş/ğ yutulmasi duzeltildi (sessiz veri kaybi). Canli DB: event_type NULL 404->387, 19 satir etiketlendi. Hedefli suret 118 passed. D-193 notu: kod once stash'e dustu, kanitli sekilde geri yuklendi.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-02T15:33:54",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-10-02T18:00:31"
+  },
+  {
+    "task_id": "ALTYAPI-RAG-EMBEDDER-01",
+    "ajan": "yasu",
+    "ozet": "BOYUT 4096 (koda sabit yazilmadi, .env okunur); k(Demir-Metal)=0.8759 > k(Demir-Gida)=0.6316 - Turkce siralama dogru. Varsayim 1 dustu ama yol yanlisti: 9Router 404; dogrudan EVREN calisiyor (/v1/models: task=embedding tek model qwen3-embedding-8b, 0.0 CR, free_until 2026-11-01). Anahtar .env'de evren_llm_ prefix'iyle. Yeni gateway/evren_client.py. Sahte hashlib embedder SILINDI -> vector.embedder (D-211/D-230). Mandal kırildi (D-256/4). Test 47 passed. Hub + bulgu defteri yazildi.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-02T15:44:22",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-10-02T22:23:50"
+  },
+  {
+    "task_id": "VERI-ENTITY-GRAPH-01",
+    "ajan": "yasu",
+    "ozet": "0047_entity_graph.sql + down + schema_versions v47. company_edges: yonsuz kenar CHECK(a<b), PK(a,b,edge_type), btrim(evidence)<>'' reddi, strength DEFAULT 0 YOK (D-249). 11 kanonik edge_type; v0'da yalniz 2 uretilir (same_osb, nace_complementary); 9'u bos. D-245 IKI CURUTME: companies.id -> companies(company_id) (0001_core.sql:35); osb_slug kolonu YOK -> osb_id FK (0001_core.sql:51). Uretici graph/kenarlar.py; tek yazma kapisi kenarlari_yaz() ON CONFLICT DO NOTHING, grep 1 INSERT (D-256/2). MANDAL KIRILDI (D-256/4) -> YESIL. Test 16/16 passed. Hub yazildi. Canli DB'ye yazim YOK (D-238).",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-02T15:45:54",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-10-02T22:24:08"
+  },
+  {
+    "task_id": "DOC-VENDOR-DD-ARASTIRMA-01",
+    "ajan": "yasu",
+    "ozet": "docs/FAZ5_VENDOR_DUE_DILIGENCE_KAPSAM.md yazildi (KOD YOK - brif kapsam disi). SSOT satir sayisi olculdu: 1687. 8 DENETIM SORUSU (S1-S8) + 8 EKSIK VERI KAYNAGI (Engel kolonunda bos hucre YOK; 6'si 'bilmiyorum') + 3 yol + ONERIM: Yol B + 3 oz-eleştiri + 9 wikilink. KOK BULGU: 7 musteri sorusunun 4'une cevap veremiyoruz; eksik olan ekran degil kaynakta veri. annual_turnover semada KOLON DEGIL (sadece 0018:18 yorumu); employee_count var ama 0024:22 '0 dolu -> hepsi NULL'; vergi/SGK borcu tablosu YOK; ortaklik bilgisi YOK; risk_scores 8 kolon semada var (0046) ama hesabi yok (D-238) -> NULL='olculmedi' (D-249). D-245 CURUTME: brif ornegi 'companies.vkn' yaziyordu, diskte oyle kolon YOK; kanonik ad companies.tax_number (0001_core.sql:39). Faz B kapisi GECTI: 19 kolon + 9 tablo adi migrations/*.sql icinde grep ile dogrulandi. Hub PLAN_STRATEGY_HUB yazildi (B-14). Sonraki onerilen gorev: Faz 2 hesaplama.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-02T15:46:05",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-10-02T22:24:27"
+  },
+  {
+    "task_id": "VERI-RAG-KORPUS-01",
+    "ajan": "utku",
+    "ozet": "Firma satiri -> korpus donusturucu (vector/service.py, 331 satir). KORPUS_ALANLARI beyaz liste 10 kolon; description cikarildi (632 dolunun 624'u adres deseni = D-247 ihlali), yerine sector_name (7595 dolu, adres deseni 0). TCKN deseni hex-duyarli (44 gercek kaydi yanlis reddediyordu). Canli Supabase olcumu (D-238): metin ortancasi 213.0 karakter (kriter >=80), kisisel veri 0/9412, chunk YAPILMAZ (448 embedder penceresi asilmadi, maks 306). Hedefli test 57 passed. Not: onceki oturumda teslim komutu hic calismamis; bu kayit ilk gercek teslim.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-02T15:51:30",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-10-02T18:00:31"
+  },
+  {
+    "task_id": "VERI-TOBB2B-BUYUTME-01",
+    "ajan": "yasu",
+    "ozet": "Pilot buyutuldu (D-319). Yeni Id araligi 21050-21149 tarandi; pilottaki 21000-21049 TEKRAR TARANMADI. 100 Id denendi -> 10 teklif dolu (%10 DOLULUK) vs PILOT %40 (20/50); 90 Id bos. Brif varsayimi '%40 buyuk olcekte gecerli' CURUTULDU; sebep olculmedi. Eslesme orani korundu 5/10 (%50) vs 11/20 (%55); mutlak firma 5 (pilot 1.575). Rate-limit zorunlu ARALIK_SN=1.0 kodda gorunur (kabul kriteri). R8 IP kontrolu: 3 hatada DUR. Kalici arac scripts/veri_tobb2b_buyutme.py. Cikti data/pilots/VERI-TOBB2B-BUYUTME-01/{teklifler,ozet}.json. Hub + bulgu defteri yazildi. ONERI: 500 Id --ust 21999 (~10dk) veya yogun araliga kaydir; kanitsiz genisletme yapilmadi (D-238).",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-02T17:57:08",
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-10-02T18:22:32"
+  },
+  {
+    "task_id": "VERI-SKOR-MOTORU-01",
+    "ajan": "utku",
+    "ozet": "Firsat skoru motoru: migration 0049 (need/fit/timing/ensemble, 0.0-1.0 CHECK, NULL varsayilan) + intelligence/skor_motoru.py (tek yazma kapisi firsat_recalc). 35/35 mandal, 3/3 kirma kaniti. BORC: F3 ETL gelene kadar fit_score/ensemble_score None kalir; evidence_strength tablo kolonu degildir.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-02T18:29:31",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-10-02T22:24:45"
+  },
+  {
+    "task_id": "VERI-OSB-TEMIZLIK-01",
+    "ajan": "yasu",
+    "ozet": "Yeniden-teslim (ihsan onarimi): 647 kimliksiz -> 144, 44 mukerrer, silinen kayit 0, --self OK. Onceki 2 teslim denemesi panoya/kuyruga islenmemis (kok neden: islenmemis cikti, kod hatasi degil).",
+    "ciktilar": [
+      "osb_temizlik_raporu_2026-10-01.md"
+    ],
+    "teslim_tarihi": "2026-10-02T18:41:18",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-10-02T22:25:00"
+  },
+  {
+    "task_id": "VERI-TENDER-KOLON-01",
+    "ajan": "utku",
+    "ozet": "D-308 sema uyumu kapandi: osb_tender_monitor.py'de kalan Turkce kolon adi 0 (8 kolon Ingilizceye uyarlandi; tender_title :33/:156/:198, osb_name :42/:165/:200, province :199). D-309/2'de birakilan iki kusur kapandi: kaynak_adi -> sema 'ihale_kaynaklari.isim', ve semada HIC BULUNMAYAN cekilme_tarihi kolonu. Mandal 12 passed (4 sema uyumu + 8 D-309 ders kapisi); kritik olan test_ascii_turkce_kolon_kalmadi - test_sema_dili_ingilizce yalniz 'igüsoç' iceren kolonlari ariyor, ASCII-Turkce adlari gormuyordu. KABUL KRITERI 3 KARSILANMADI: --dry-run kipi dosyada yok, prova calistirilmadi; statik sema mandali kondu ama bu calistirma kaniti degil, kod kanitidir. Prova yine de tam kapatamaz: ihale_ilanlari + 5 kardes tablo canlida 0 satir. Brif varsayimi yanlis: 0043_tender_sema_cevirisi.sql yok, diskteki 0043 = 0043_sector_columns.sql; gercek ceviri 0042+0044+0045. DAG on kosulu VERI-02 review'da. Hub kaydi yazildi (B-14). Rapor: data/orchestrator/VERI-TENDER-KOLON-01_rapor_2026-10-02_uretim.md",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-02T19:02:14",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-10-02T22:25:17"
+  },
+  {
+    "task_id": "VERI-RISK-MOTORU-01",
+    "ajan": "utku",
+    "ozet": "Risk motoru sekiz skorlu company_risk_scores tablosu migration 0046 ile uygulandi ve test edildi (19/19 yesil, D-249 mandali kirilarak dogrulandi; kirmizi cikti raporda). Tek yaziici risk/skorlar.py risk_recalc(). Hesaplama calistirilmadi (D-238). schema_versions.json kriteri D-265+D-319 sonrasi gecersiz, bulgu olarak kayit.",
+    "ciktilar": [
+      "data/orchestrator/VERI-RISK-MOTORU-01_rapor_2026-10-02_uretim.md"
+    ],
+    "teslim_tarihi": "2026-10-02T19:07:50",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-10-02T22:25:35"
+  },
+  {
+    "task_id": "SCRAPE-001-DOCKER-SETUP",
+    "ajan": "utku",
+    "ozet": "Kazima denetim semasi canli: scrape_audit_log + scrape_pages + scrape_errors, migration 0050 (planin 0046si DEGIL - 0046 risk_skorlari alinmisti). Diskte 50 goc / defterde 50 kayit, 0050 TAM. Iki hata duzeltildi: (1) uc information_schema sorgusu table_schema='public' filtresizdi (D-253/4); (2) veri-gocu: + dusen-iz: beyanlari yalandi, kaldirildi (D-253/2). Idempotlik ham baglantiyla iki kosu kanitlandi, iz degismedi. D-261 UNIQUE(source_url,content_hash) ve CHECK(cost_usd=0) yerinde. Docker canli: db healthy postgres:16-alpine 5433, API HTTP 200, Streamlit 8501 HTTP 200, psql 16.15, kodlama denetimi temiz. Brifin dogrulama komutu scripts/_kazima_dogrula.py 6/6 gecti. EKSILER: telegram botu baslatilmadi (getUpdates yan etki), yerel konteyner DB bayat (14000 firma, 9/50 goc), SCRAPE-002 brif yolu gecersiz. Rapor: data/orchestrator/SCRAPE-001-DOCKER-SETUP_rapor_2026-10-02_uretim.md",
+    "ciktilar": [
+      "src/company_master/schema/migrations/0050_scrape_audit_log.sql; src/company_master/schema/migrations/down/0050_scrape_audit_log.down.sql; scripts/_kazima_dogrula.py; data/orchestrator/SCRAPE-001-DOCKER-SETUP_rapor_2026-10-02_uretim.md; hubs/OSINT_VERI_TOPLAMA_HUB.md"
+    ],
+    "teslim_tarihi": "2026-10-02T22:18:40",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-10-02T22:27:44"
+  },
+  {
+    "task_id": "SCRAPE-002-LEMMLESS-ANKARA-OSB",
+    "ajan": "utku",
+    "ozet": "5 yeni dosya: scrape_kayit.py (0050 tek yazicisi) + scrape_kosu.py (ortak kosu iskeleti) + kazima_{ostim,ivedik,baskent}.py. Kanonik scraper'lara dokunulmadi. Canli olcum: scrape_pages=2, audit=5, errors=1, yinelenen=0, cost/llm 0. Idempotens: 2.tur yazilan=0/atlanan=1. Baskent DNS olu -> izin reddi -> scrape_errors. Commit ef036e6.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-02T23:07:56",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-10-02T23:13:36"
+  },
+  {
+    "task_id": "SCRAPE-005-KAZIMA-DOCKER-INTEGRATION",
+    "ajan": "utku",
+    "ozet": "kazima Dockerfile yazildi (python:3.12-slim + psycopg healthcheck + CMD refresh_pipeline.py). compose jobs profiline kazima servisi eklendi; dosyadaki scraper ikizi oneklendi (D-211, 0 harici referans). Briefin localhost:5000/health healthcheck'i olcumle uydurma oldugu icin uygulanmadi. docker compose config exit 0, kodlama denetimi temiz, 15 test yesil. CANLI up dogrulamasi yapilmadi: Docker daemon kapali.",
+    "ciktilar": [
+      "src/company_master/scrapers/Dockerfile",
+      "docker-compose.yml",
+      "data/orchestrator/SCRAPE-005-KAZIMA-DOCKER-INTEGRATION_rapor_2026-10-02_uretim.md",
+      "hubs/ADMIN_DASHBOARD_HUB.md"
+    ],
+    "teslim_tarihi": "2026-10-03T01:42:39",
+    "durum": "reddedildi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-10-03T16:58:25",
+    "red_nedeni": "REDDEDILDI: canli kosu 1/4, kazima yerel db'ye yazdi. 3 karar: (1) compose environment DATABASE_URL satiri KALKSIN, env_file tek kaynak; (2) refresh_pipeline.py:67 import src.company_master.etl.scrapers.ostim_detail_scraper; (3) restart no ONAY. Kabul: scrape_all() hata yutmasin, canli 4/4 + Supabase psql olcumu. Detay: data/orchestrator/SCRAPE-005-KAZIMA-DOCKER-INTEGRATION_karar_2026-10-03.md"
   }
 ]

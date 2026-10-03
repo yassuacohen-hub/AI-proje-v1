@@ -22,28 +22,18 @@
 | V10-BELGE-01 | 6 curutulen iddiaya K1/K3/K4 duzeltme notu | ihsan | P1 | archive | - |
 | WK-02 | OSB Tender Monitor - Real-time Tracking | - | P1 | archive | - |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | archive | - |
-| ALTYAPI-AJAN-CAKISMA-01 | [ALTYAPI] Eszamanli ajan kacak kilit kapisini yaz → ajan_cakisma_kilidi.py (4s) | ihsan | P1 | plan | scripts/ajan_cakisma_kilidi.py |
+| ALTYAPI-AJAN-CAKISMA-01 | [ALTYAPI] Eszamanli ajan kacak kilit kapisini yaz → ajan_cakisma_kilidi.py (4s) | yasu | P1 | plan | scripts/ajan_cakisma_kilidi.py |
 | TEST-EKLE-DENEME | test | ihsan | P2 | iptal | - |
-| VERI-TENDER-KOLON-01 | [VERI] D-308 tender sema kolon cevirisi -> osb_tender_monitor.py uyumlu hale getir (1s) | utku | P1 | plan | src/company_master/etl/osb_tender_monitor.py |
-| SCRAPE-001-DOCKER-SETUP | [DOCKER] PostgreSQL 16 + Kazıma servisi entegrasyonu → compose (2s) | utku | P1 | plan | Huginn Data Insights/docker-compose.yml, src/company_master/schema/migrations/0046_scrape_audit_log.sql, src/company_master/schema/migrations/down/0046_scrape_audit_log.down.sql |
-| SCRAPE-002-LEMMLESS-ANKARA-OSB | [KAZIMA] LLM-less: ostim.org.tr + ivedik.org.tr + baskentosb.org.tr → scrape_pages (3s) | utku | P0 | plan | scripts/kazima_ostim.py, scripts/kazima_ivedik.py, scripts/kazima_baskent.py |
-| SCRAPE-003-9ROUTER-JINA-FALLBACK | [KAZIMA] 9Router Jina-Reader fallback: yapı unknown sayfalar (2s) | utku | P1 | plan | scripts/kazima_jina_fallback.py, .agents/skills/9router_web_fetch_upstream.md |
-| SCRAPE-004-QWEN-SINIFLANDIRMA | [KAZIMA] Qwen-7b-chat (9Router local): yapı unknown + sınıflandırma (2s) | utku | P1 | plan | scripts/kazima_qwen_classify.py, .agents/skills/9router_chat_upstream.md |
-| SCRAPE-005-KAZIMA-DOCKER-INTEGRATION | [DOCKER] Kazıma servisi: profile jobs, healthcheck, cron (1s) | utku | P0 | plan | Huginn Data Insights/docker-compose.yml, src/company_master/scrapers/Dockerfile, scripts/refresh_pipeline.py |
+| SCRAPE-003-9ROUTER-JINA-FALLBACK | [KAZIMA] 9Router Jina-Reader fallback: yapı unknown sayfalar (2s) | yasu | P1 | plan | scripts/kazima_jina_fallback.py, ../.agents/skills/9router_web_fetch_upstream.md |
+| SCRAPE-004-QWEN-SINIFLANDIRMA | [KAZIMA] Qwen-7b-chat (9Router local): yapı unknown + sınıflandırma (2s) | yasu | P1 | plan | scripts/kazima_qwen_classify.py, ../.agents/skills/9router_chat_upstream.md |
+| SCRAPE-005-KAZIMA-DOCKER-INTEGRATION | [DOCKER] Kazıma servisi: profile jobs, healthcheck, cron (1s) | utku | P0 | aktif | Huginn Data Insights/docker-compose.yml, src/company_master/scrapers/Dockerfile, scripts/refresh_pipeline.py |
 | SCRAPE-006-QUALITY-AUDIT | [QA] Kazıma quality audit: D-250 field tamlık + D-310 kontrol (1s) | salih | P1 | plan | scripts/_kazima_dogrula.py, src/company_master/etl/quality_recalc.py |
 | SCRAPE-007-FINAL-REPORT | [DOC] Kazıma dönem sonu raporu: coverage, cost=0 doğrulaması, v2.0 roadmap (1s) | ihsan | P2 | plan | plans/2026-10-01_kazima_verimlilik_ve_eksiklik_analizi.md, scripts/_kazima_dogrula.py |
 | ALTYAPI-ODIN-UYARLAMA-01 | [ALTYAPI] Odin iç/müşteri endpoint ayrımını belgele → docs/ODIN_SECURITY_CHECKLIST.md (7d) | ihsan | P0 | plan | docs/ODIN_DEPLOYMENT_ARCHITECTURE.md, docs/ODIN_SECURITY_CHECKLIST.md, docs/ODIN_PROMPT_INJECTION_SCENARIOS.md |
 | VERI-ODIN-EGITIM-VERISI-HAZIRLA | [VERI] Odin eğitim veri setini yaz → data/odin_training_data.csv (7d) | utku | P1 | iptal | data/odin_training_data.csv, scripts/odin_veri_hazirla.py, data/odin_veri_dogrulama_raporu.md |
 | ALTYAPI-ODIN-EGITIM-PIPELINE | [ALTYAPI] Odin eğitim hattını yaz → scripts/odin_training_pipeline.py (7d) | utku | P1 | iptal | scripts/odin_training_pipeline.py, data/models/odin_model.bin, data/odin_training_metrics.csv |
 | TEST-ODIN-PROMPT-INJECTION | [TEST] Odin müşteri modelini prompt-injection ile ölç → data/odin_injection_test_log.jsonl (7d) | salih | P1 | aktif | scripts/odin_prompt_injection_test.py, data/odin_injection_test_scenarios.json, data/odin_injection_test_log.jsonl |
-| VERI-OSB-TEMIZLIK-01 | [VERI] 647 kimliksiz + 44 mukerrer kaydi sil -> osb_firma_dosyalari temiz (2s) | yasu | P0 | plan | data/osb/ |
-| ALTYAPI-RAG-EMBEDDER-01 | [ALTYAPI] Sahte hash embedder'i sil -> odin_ai/rag.py (2s) | yasu | P0 | review | src/company_master/odin_ai/rag.py |
 | ALTYAPI-MIMIR-BAGLAM-01 | [ALTYAPI] Mimir baglam ucunu yaz -> odin_ai/mimir_servis.py (3s) | salih | P1 | aktif | src/company_master/odin_ai/mimir_servis.py |
-| VERI-RISK-MOTORU-01 | [VERI] Sekiz risk skoru tablosunu yaz → 0046_risk_skorlari.sql (4s) | utku | P1 | plan | src/company_master/schema/migrations/0046_risk_skorlari.sql |
-| VERI-ENTITY-GRAPH-01 | [VERI] Firma ilişki ağı v0 yaz → 0047_entity_graph.sql (4s) | yasu | P1 | review | src/company_master/schema/migrations/0047_entity_graph.sql |
-| DOC-VENDOR-DD-ARASTIRMA-01 | [DOC] Faz 5 tedarikçi denetim kapsamını araştır → docs/FAZ5_VENDOR_DUE_DILIGENCE_KAPSAM.md (4s) | yasu | P3 | review | docs/FAZ5_VENDOR_DUE_DILIGENCE_KAPSAM.md |
-| DOC-GLOBAL-INTEL-ARASTIRMA-01 | [DOC] Faz 6 küresel istihbarat ağı kapsamını araştır → docs/FAZ6_GLOBAL_INTEL_KAPSAM.md (4s) | utku | P3 | plan | docs/FAZ6_GLOBAL_INTEL_KAPSAM.md |
-| VERI-SKOR-MOTORU-01 | [VERI] Need/Fit/Timing/Ensemble dort skor tablosu -> 0049_firsat_skorlari.sql (5-10g) | utku | P1 | aktif | src/company_master/schema/migrations/0049_firsat_skorlari.sql |
 
 ## Tamamlananlar
 
@@ -129,10 +119,21 @@
 | VERI-NACE-ACILIM-01 | [VERI] NACE acilimini yaz → sunum.acilim_getir + musteri karti (3s) | utku | 2026-10-01T17:19:04 |
 | VERI-NACE-SOZLUK-DIL-01 | [VERI] NACE sozluk basliklarini duzelt → 572 TR karakter (4s) | utku | 2026-10-01T17:19:04 |
 | VERI-TSG-ESLEME-CASE-01 | [VERI] TSG ilan turu eslermesini duzel -> olay_esle normalize + canli unknown olcumu (1s) | utku | 2026-10-02T18:00:31 |
+| VERI-TENDER-KOLON-01 | [VERI] D-308 tender sema kolon cevirisi -> osb_tender_monitor.py uyumlu hale getir (1s) | utku | 2026-10-02T22:25:17 |
+| SCRAPE-001-DOCKER-SETUP | [DOCKER] PostgreSQL 16 + Kazıma servisi entegrasyonu → compose (2s) | utku | 2026-10-02T22:27:44 |
+| SCRAPE-002-LEMMLESS-ANKARA-OSB | [KAZIMA] LLM-less: ostim.org.tr + ivedik.org.tr + baskentosb.org.tr → scrape_pages (3s) | utku | 2026-10-02T23:13:36 |
 | VERI-SEMA-DOGRULA-01 | Şema Migrasyon Tutarsızlığını Düzelt (V7) | salih | 2026-10-01T17:19:04 |
 | VERI-SEMA-DOGRULA-02 | Eksik Tablolar İçin Kod Taraması (entity_matches, api_usage_daily) | yasu | 2026-10-01T17:58:34 |
 | VERI-SEMA-DOGRULA-03 | NACE Dil Kolonları Kontrol Raporu | yasu | 2026-10-01T17:58:44 |
 | ALTYAPI-EVREN-PRIVATE-DOGRULAMA | [ALTYAPI] EVREN private eğitim hizmetini araştır → docs/EVREN_PRIVATE_EGITIM_DOGRULAMA.md (7d) | yasu | 2026-10-01T20:31:32 |
 | ALTYAPI-ODIN-DENETIM-RAPORU | [ALTYAPI] Odin üretim öncesi GO/NO-GO kararını denetle → ALTYAPI-ODIN-DENETIM-RAPORU_2026-10-31_denetim.md (10d) | yasu | 2026-10-01T17:59:33 |
+| VERI-OSB-TEMIZLIK-01 | [VERI] 647 kimliksiz + 44 mukerrer kaydi sil -> osb_firma_dosyalari temiz (2s) | yasu | 2026-10-02T22:25:00 |
+| ALTYAPI-RAG-EMBEDDER-01 | [ALTYAPI] Sahte hash embedder'i sil -> odin_ai/rag.py (2s) | yasu | 2026-10-02T22:23:50 |
 | VERI-RAG-KORPUS-01 | [VERI] Firma kayitlarini korpusa yaz -> vector/service.py (3s) | utku | 2026-10-02T18:00:31 |
+| VERI-RISK-MOTORU-01 | [VERI] Sekiz risk skoru tablosunu yaz → 0046_risk_skorlari.sql (4s) | utku | 2026-10-02T22:25:35 |
+| VERI-ENTITY-GRAPH-01 | [VERI] Firma ilişki ağı v0 yaz → 0047_entity_graph.sql (4s) | yasu | 2026-10-02T22:24:08 |
+| DOC-VENDOR-DD-ARASTIRMA-01 | [DOC] Faz 5 tedarikçi denetim kapsamını araştır → docs/FAZ5_VENDOR_DUE_DILIGENCE_KAPSAM.md (4s) | yasu | 2026-10-02T22:24:27 |
+| DOC-GLOBAL-INTEL-ARASTIRMA-01 | [DOC] Faz 6 küresel istihbarat ağı kapsamını araştır → docs/FAZ6_GLOBAL_INTEL_KAPSAM.md (4s) | utku | 2026-10-03T17:00:29 |
+| VERI-SKOR-MOTORU-01 | [VERI] Need/Fit/Timing/Ensemble dort skor tablosu -> 0049_firsat_skorlari.sql (5-10g) | utku | 2026-10-02T22:24:45 |
 | VERI-TOBB2B-BUYUTME-01 | [VERI] TOBB2B pilot buyutme - tobb2b.org.tr ucretsiz, genis Id araligi (3-5g) | yasu | 2026-10-02T18:22:32 |
+| ALTYAPI-PANO-ARSIV-CAKISMA-02 | [ALTYAPI] B-01 pano<->arsiv task_id cakismasi: 105 kayit yeniden cikti (eski 17 kapanis sonrasi) | ihsan | 2026-10-03T16:41:10 |

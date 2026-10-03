@@ -147,6 +147,20 @@ def test_reddet_nedensiz_engellenir(tmp_path):
         trigger.reddet("T-08", "orkestrator", "  ", data_dir=tmp_path)
 
 
+def test_reddet_tetik_teslimini_alindiya_ceker(tmp_path):
+    """Red sonrasi tetik kaydi 'teslim'de kalirsa onay_bekleyenler hayalet gosterir.
+
+    2026-10-03 SCRAPE-005'te olculdu: reddet() kuyruk+pano guncelliyor,
+    tetik dosyasina dokunmuyordu -> reddedilen gorev onay-bekleyen'de kaliyordu.
+    """
+    _ac_al_teslim(tmp_path)
+    trigger.reddet("T-08", "orkestrator", "eksik", data_dir=tmp_path)
+    assert trigger.onay_bekleyenler(tmp_path) == []
+    kayitlar = [k for k in trigger._tetikleri_oku("kilo", tmp_path) if k["task_id"] == "T-08"]
+    assert kayitlar and all(k["durum"] == "alindi" for k in kayitlar)
+    assert kayitlar[0]["red_nedeni"] == "eksik"
+
+
 def test_teslim_sonrasi_yeni_tetik_ile_duzeltme_dongusu(tmp_path):
     """Red -> ajan yeniden teslim -> onay: tam düzeltme döngüsü."""
     _ac_al_teslim(tmp_path)

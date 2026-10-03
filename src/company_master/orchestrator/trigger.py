@@ -469,7 +469,11 @@ def reddet(
     task_id: str, onaylayan: str, neden: str, data_dir: Path | None = None
 ) -> dict[str, Any]:
     """Kontrolör reddi → görev `aktif`'e geri döner; ajan nedenle düzeltir.
-    Kilitler düşmez (iş sahanın ajanında kalmaya devam eder)."""
+    Kilitler düşmez (iş sahanın ajanında kalmaya devam eder).
+
+    Tetik dosyasındaki `teslim` kaydı da `alindi`ya çekilir; yoksa
+    `onay_bekleyenler()` reddedilen işi "hayalet teslim" olarak göstermeye
+    devam eder (onayla() ile simetri — 2026-10-03 SCRAPE-005'te ölçüldü)."""
     if not neden.strip():
         raise TriggerError("Reddetme nedeni zorunludur")
     k = _kuyruk_guncelle(
@@ -478,6 +482,18 @@ def reddet(
         red_nedeni=neden,
     )
     tb.gorev_guncelle(task_id, durum="aktif", **{"not": f"Red ({onaylayan}): {neden}"})
+    ajan = k.get("ajan") or (tb.gorev_getir(task_id) or {}).get("sahip", "")
+    if ajan:
+        kayitlar = _tetikleri_oku(ajan, data_dir)
+        degisti = False
+        for rk in kayitlar:
+            if rk["task_id"] == task_id and rk["durum"] == "teslim":
+                rk["durum"] = "alindi"
+                rk["red_tarihi"] = _simdi()
+                rk["red_nedeni"] = neden
+                degisti = True
+        if degisti:
+            _tetikleri_yaz(kayitlar, ajan, data_dir)
     return k
 def tetik_uyari_ekle(ajan: str, task_id: str, data_dir: Path | None = None) -> dict[str, Any]:
     """Nobetci tarafından tetik fırlatma uyarısı ekle (uyari_tarihi + uyari_sayisi)."""

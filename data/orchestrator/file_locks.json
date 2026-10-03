@@ -1,6 +1,6 @@
 {
   "scripts/ajan_cakisma_kilidi.py": {
-    "sahip": "ihsan",
+    "sahip": "yasu",
     "task_id": "ALTYAPI-AJAN-CAKISMA-01",
     "kilitlendi": "2026-09-29T00:42:35"
   },
@@ -63,16 +63,6 @@
     "sahip": "salih",
     "task_id": "TEST-ODIN-PROMPT-INJECTION",
     "kilitlendi": "2026-10-01T16:59:48"
-  },
-  "data/osb/": {
-    "sahip": "yasu",
-    "task_id": "VERI-OSB-TEMIZLIK-01",
-    "kilitlendi": "2026-10-01T19:43:41"
-  },
-  "src/company_master/odin_ai/rag.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-RAG-EMBEDDER-01",
-    "kilitlendi": "2026-10-01T20:52:26"
   },
   "src/company_master/odin_ai/mimir_servis.py": {
     "sahip": "salih",

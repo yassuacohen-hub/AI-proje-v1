@@ -2077,7 +2077,7 @@
     "baslik": "[DOCKER] Kazıma servisi: profile jobs, healthcheck, cron (1s)",
     "sahip": "utku",
     "oncelik": "P0",
-    "durum": "review",
+    "durum": "aktif",
     "baslangic": "2026-10-09",
     "bitis": null,
     "dosyalar": [
@@ -2085,7 +2085,7 @@
       "src/company_master/scrapers/Dockerfile",
       "scripts/refresh_pipeline.py"
     ],
-    "not": "Teslim (utku): kazima Dockerfile yazildi (python:3.12-slim + psycopg healthcheck + CMD refresh_pipeline.py). compose jobs profiline kazima servisi eklendi; dosyadaki scraper ikizi oneklendi (D-211, 0 harici referans). Briefin localhost:5000/health healthcheck'i olcumle uydurma oldugu icin uygulanmadi. docker compose config exit 0, kodlama denetimi temiz, 15 test yesil. CANLI up dogrulamasi yapilmadi: Docker daemon kapali.",
+    "not": "Red (orkestrator): REDDEDILDI: canli kosu 1/4, kazima yerel db'ye yazdi. 3 karar: (1) compose environment DATABASE_URL satiri KALKSIN, env_file tek kaynak; (2) refresh_pipeline.py:67 import src.company_master.etl.scrapers.ostim_detail_scraper; (3) restart no ONAY. Kabul: scrape_all() hata yutmasin, canli 4/4 + Supabase psql olcumu. Detay: data/orchestrator/SCRAPE-005-KAZIMA-DOCKER-INTEGRATION_karar_2026-10-03.md",
     "source": "ic",
     "from_agent": "ihsan",
     "mod": "code",
@@ -2482,9 +2482,9 @@
     "baslik": "[DOC] Faz 6 küresel istihbarat ağı kapsamını araştır → docs/FAZ6_GLOBAL_INTEL_KAPSAM.md (4s)",
     "sahip": "utku",
     "oncelik": "P3",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-10-02T02:29:23",
-    "bitis": null,
+    "bitis": "2026-10-03T17:00:29",
     "dosyalar": [
       "docs/FAZ6_GLOBAL_INTEL_KAPSAM.md"
     ],
