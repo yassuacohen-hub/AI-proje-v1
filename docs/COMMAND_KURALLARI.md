@@ -25,3 +25,25 @@ Sebep yazma isleminin kendisi degil, yolun dinamik olmasiydi.
 
 Bu kuralin kendisi de yeni desenle yazildi: kisa python -c + pathlib + goreli yol,
 bolum bolum eklendi. Uzun tek-komut yazimi PowerShell kacisinda basarisiz oldu.
+
+## 4. En sik DCG engeli: redirect zinciri
+
+Sik gelen hata deseni:
+
+    komut > data/tmp.txt 2>&1 + type data/tmp.txt
+
+Uc neden engellenir:
+
+1. > redirect: dosyayi truncate edebilir
+2. 2>&1: PowerShellde bu dosyaya yaz demek (grep/head ciktisi DEGIL)
+3. Zincir: arka plan isi + tip komutu
+
+AYNI ISI ZATEN EKRANA YAZIYOR. Dogrusu:
+
+    komut
+
+Ciktiyi dosyaya almak gerekiyorsa AYRI komut:
+
+    komut | Out-File data\rapor.txt
+
+Gecici dosyayi silmek de ayri komutta yapilir.
