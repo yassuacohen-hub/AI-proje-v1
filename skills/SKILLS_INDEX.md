@@ -74,7 +74,7 @@ validate_llm_response
 
 ## 2) SKILL.md Belgeleri (ajan OKUR)
 
-Kanonik yol: .agents/skills/ - **32 skill**
+Kanonik yol: .agents/skills/ - **33 skill**
 
 | Skill | Link |
 |---|---|
@@ -99,6 +99,7 @@ Kanonik yol: .agents/skills/ - **32 skill**
 | elite-saas-architect | [elite-saas-architect/SKILL.md](.agents/skills/elite-saas-architect/SKILL.md) |
 | enterprise-data-classification | [enterprise-data-classification/SKILL.md](.agents/skills/enterprise-data-classification/SKILL.md) |
 | frontend-design | [frontend-design/SKILL.md](.agents/skills/frontend-design/SKILL.md) |
+| huginn-rag-egitim-guvenlik | [huginn-rag-egitim-guvenlik/SKILL.md](.agents/skills/huginn-rag-egitim-guvenlik/SKILL.md) |
 | interactive-mentor | [interactive-mentor/SKILL.md](.agents/skills/interactive-mentor/SKILL.md) |
 | marketing-strategy | [marketing-strategy/SKILL.md](.agents/skills/marketing-strategy/SKILL.md) |
 | osint-web-scraping-toolkit | [osint-web-scraping-toolkit/SKILL.md](.agents/skills/osint-web-scraping-toolkit/SKILL.md) |

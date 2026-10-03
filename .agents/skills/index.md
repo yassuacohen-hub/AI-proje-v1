@@ -16,6 +16,7 @@ paylaşılır. Ajanlar ilgili `SKILL.md`’yi okur; aynı talimata göre çalı�
 | data-quality-testing | [SKILL.md](data-quality-testing/SKILL.md) | Veri kalite testleri |
 | dbt-testing | [SKILL.md](dbt-testing/SKILL.md) | dbt model test stratejileri |
 | enterprise-data-classification | [SKILL.md](enterprise-data-classification/SKILL.md) | PII / DLP tespit |
+| huginn-rag-egitim-guvenlik | [SKILL.md](huginn-rag-egitim-guvenlik/SKILL.md) | Mimir RAG/ingestion, LoRA veri seti, prompt-injection red-team, GO/NO-GO kapısı |
 | elite-product-ux-architect | [SKILL.md](elite-product-ux-architect/SKILL.md) | UX mimarisi, dashboard, karar odaklı tasarım |
 | elite-saas-architect | [SKILL.md](elite-saas-architect/SKILL.md) | Sistem mimarisi, SaaS değerlendirme, ölçeklenebilirlik |
 | frontend-design | [SKILL.md](frontend-design/SKILL.md) | Web dashboard UI |
