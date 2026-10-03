@@ -83,17 +83,18 @@ VARSAYILAN_KILIT = "abrakadabra"
 #: Model zinciri env anahtarları (yeni → eski, geri uyumlu).
 MODEL_ENV_ANAHTARLARI: tuple[str, ...] = ("MIMIR_MODELS", "ABRAKADABRA_MODELS")
 
-#: K6 — sağlayıcı düşerse sırayla denenecek modelller (ücretsiz, yüksek bağlam).
-#: Ranking (D-195 Groq decommissioned hatasından sonra OpenRouter fallback):
-#:  1. meta-llama/llama-3.1-70b-instruct — 128k context, free tier, stabil
-#:  2. mistralai/mixtral-8x7b-instruct — 32k context, free tier, fast
-#:  3. gpt-3.5-turbo — 4k context, free tier, fallback
-#: ponytail: Groq direct client bypass kullanılmadı (modellerinin deprecated olması).
-#: Add when: Groq yeni free modelleri açarsa.
+#: K6 — sağlayıcı düşerse sırayla denenecek modeller (9Router combo adları).
+#: F0-b ölçümü (2026-10-03): eski zincir 3/3 ölüydü
+#: (meta-llama/mixtral → 404 "No active credentials", gpt-3.5-turbo → 429 "no credits").
+#:  1. mimir-dis — claude-haiku-4-5 üstünde 9Router combo; ~2.850 token gömülü prompt (BORÇ)
+#:  2. claude_sadece — yedek combo
+#:  3. fullclaude — son yedek combo
+#: ponytail: fiyat optimizasyonu yapılmadı; ürün sahibi "yedek araç şart, combo yaparız" dedi.
+#: Add when: 9Router usage'dan fiyat okunabilince zincir maliyete göre yeniden sıralanır.
 VARSAYILAN_MODELLER: tuple[str, ...] = (
-    "meta-llama/llama-3.1-70b-instruct",
-    "mistralai/mixtral-8x7b-instruct",
-    "gpt-3.5-turbo",
+    "mimir-dis",
+    "claude_sadece",
+    "fullclaude",
 )
 
 #: Onay kapısından geçebilen komutlar. Anahtar → (argüman sayısı, açıklama).

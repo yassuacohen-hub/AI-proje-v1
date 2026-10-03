@@ -40,7 +40,7 @@ def sahte_baglam(monkeypatch):
 
 def test_model_zinciri_varsayilan():
     assert ai_chat.model_zinciri("") == ai_chat.VARSAYILAN_MODELLER
-    assert ai_chat.model_zinciri()[0] == "meta-llama/llama-3.1-70b-instruct"
+    assert ai_chat.model_zinciri()[0] == "mimir-dis"
 
 
 def test_model_zinciri_env_ayristirir(monkeypatch):
@@ -59,6 +59,16 @@ def test_model_zinciri_yeni_env_oncelikli(monkeypatch):
     monkeypatch.setenv("MIMIR_MODELS", "yeni")
     monkeypatch.setenv("ABRAKADABRA_MODELS", "eski")
     assert ai_chat.model_zinciri() == ("yeni",)
+
+
+def test_varsayilan_zincir_olu_modelleri_icermez():
+    """F0-b (2026-10-03): meta-llama/mixtral 404, gpt-3.5-turbo 429 — hepsi ölü.
+    Zincir mimir-dis ile başlar ve en az bir yedek (combo) içerir."""
+    z = ai_chat.VARSAYILAN_MODELLER
+    assert z[0] == "mimir-dis"
+    assert len(z) >= 2, "yedek araç şart (ürün sahibi kararı)"
+    for olu in ("meta-llama/", "mistralai/", "gpt-3.5-turbo"):
+        assert not any(olu in m for m in z), f"ölü model zincirde: {olu}"
 
 
 # --- Kilit sözü (S11) --------------------------------------------------------

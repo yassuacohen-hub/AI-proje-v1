@@ -107,6 +107,40 @@ class TestUtf8Decode:
         assert payload["sektor"] == "BİLİŞİM"
 
 
+class TestChatStreamKapali:
+    """F0-b (2026-10-03): 9Router /v1/chat/completions varsayılanı SSE akışı.
+
+    _parse_body ilk ``data:`` chunk'ını alır → ``message.content`` yok →
+    ``chat()`` "Chat yanıtı beklenen şekilde değil" fırlatır. Gövdeye
+    ``stream: False`` eklenince tek-parça JSON döner. Bu mandal, bayrağın
+    sessizce silinmesini engeller.
+    """
+
+    def test_chat_govdesi_stream_false_gonderir(self, monkeypatch) -> None:
+        nr = NineRouter(base_url="http://localhost:20128", max_retries=0)
+        gorulen: dict = {}
+
+        def sahte_request(method, path, **kw):
+            gorulen.update(kw["json"])
+            return {"choices": [{"message": {"content": "selam"}}]}
+
+        monkeypatch.setattr(nr, "_request", sahte_request)
+        assert nr.chat("merhaba", model="mimir-dis") == "selam"
+        assert gorulen["stream"] is False
+        assert gorulen["model"] == "mimir-dis"
+
+    def test_sse_ilk_chunk_hata_verir(self, monkeypatch) -> None:
+        """Gerçek SSE ilk chunk'ı — stream bayrağı olmasa düşülecek şekil."""
+        from src.company_master.gateway.ninerouter_client import NineRouterError
+
+        nr = NineRouter(base_url="http://localhost:20128", max_retries=0)
+        chunk = {"object": "chat.completion.chunk",
+                 "choices": [{"delta": {"role": "assistant"}}]}
+        monkeypatch.setattr(nr, "_request", lambda *a, **k: chunk)
+        with pytest.raises(NineRouterError):
+            nr.chat("merhaba")
+
+
 class TestWebFetchSözleşmesi:
     """9R-04: /v1/web/fetch sözleşmesi — suffix'siz provider + format alanı.
 

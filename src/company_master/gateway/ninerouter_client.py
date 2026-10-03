@@ -248,6 +248,11 @@ class NineRouter:
         body: dict[str, Any] = {
             "model": model or self.default_model,
             "messages": messages,
+            # 9Router varsayılanı SSE akışı; _parse_body ilk chunk'ı alır ve
+            # message.content bulunamaz (F0-b ölçümü, 2026-10-03).
+            # ponytail: akış birleştirme yerine tek-parça yanıt iste.
+            # Add when: streaming UI gerekirse scripts/odin_prompt_injection_test.govde_coz taşınır.
+            "stream": False,
         }
         if temperature is not None:
             body["temperature"] = temperature
