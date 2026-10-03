@@ -5,7 +5,19 @@
 
 > D-219: tek blok, **üzerine yazılır**. Pano ile çelişirse pano üstündür.
 
-- **Konum (2026-10-03 16:45):** Mimir tıkanması + simülasyon blokajı turu.
+- **Konum (2026-10-03 18:35) — emir #50 turu (Mimir odak + F2/F3/SearchAPI/S1-S4/I1-I4 dağıtımı):**
+  - **salih CEVAP VERDİ** chat #9 `2026-10-03T18:01:20` ("V4 okundu, mimir_servis.py yazılıyor, 7. koşu task kapanınca").
+    D-210 sayacı durdu. Dosya **hâlâ yok**; son tarih **2026-10-04 16:43 değişmedi** → devralma TETİKLENMEDİ.
+    salih hafızası "17:27" diyor, chat 18:01 — chat üstündür. Ayrıca chat #7 (03:20) N12: 36 senaryo 2 kırmızı (kilavuz-01, mesru-02) NO-GO, commit `4f0c69e`.
+  - **3 yeni görev + 1 yükseltme** (pano `gorev_at.py at`, brief D-217, chat tetik 18:30:29):
+    `ALTYAPI-MIMIR-HABER-KUSU-01` utku P1 (F2, son 10-05 18:00) · `ALTYAPI-KREDI-CUZDANI-01` yasu P1 (F3, son 10-06 18:00) ·
+    `TEST-ODIN-REDTEAM-S1S4-I1I4-01` salih P1 (Faz A bağımsız / Faz B mimir_servis sonrası, son 10-06 16:43) ·
+    `ALTYAPI-9ROUTER-ANAHTAR-01` yasu P2→**P1** (SearchAPI anahtar, son 10-07 18:00; yeni anahtar ürün sahibinden).
+  - **I5-I8 YOK** — yalnız I1-I4 tanımlı (`.agents/skills/huginn-mimir-ic/SKILL.md:121-130`). Ürün sahibine soruldu; tanım gelirse salih brief'ine Faz C.
+  - `TEST-SIMULASYON-B17-KIRIK-01` kilit kararı: utku uygular (monkeypatch `bulgu.task_var_mi -> True`); chat ile bildirildi.
+  - Simülasyon exit 1 (uyarı): B-17 3 eski plans dosyası (kapanmış iş, kapsam dışı) · B-14 38 kapanmış görev hub izi yok.
+  - D-57 tuzağı: FİİL "ekle" izinli değil → "yaz". `set /p` base64 `=` padding'i kesiyor → b64'ü doğrudan yapıştır.
+- **Önceki konum (2026-10-03 16:45):** Mimir tıkanması + simülasyon blokajı turu.
   **Simülasyon blokajı ÇÖZÜLDÜ** (commit `7baf16a0`): `gorev_kutusu.py` B-01 döngüsü `for t in acik`
   (105 sahte HATA → 0), `gorev_at.py _brief_bul` pano `brief` alanını 3. aday okur, pano
   `ALTYAPI-PANO-ARSIV-CAKISMA-02` done. Simülasyon exit **2 → 1** (yalnız B-14/B-17 uyarı);
@@ -43,9 +55,10 @@
   | `TEST-SIMULASYON-B17-KIRIK-01` | utku | P1 | `tests/test_gorev_kutusu_cli.py`, `..._simulasyon.py` |
 
   `plans/brief_utku_VERI-TSG-ESLEME-CASE-01.md` 2 satır değişmiş (benim değil) — commit dışı bırakıldı.
-- **Sonraki adım:** Mimir odak (emir #49). Önce `ajan_chat.py oku --son 10` → salih cevabı var mı;
-  2026-10-04 16:43'te teslim yoksa `gorev_kutusu.py devret` → `mimir_servis.py` → TEST-ODIN 7. koşu.
-- **Görev:** `ALTYAPI-MIMIR-BAGLAM-01` (salih, bekleme) · **Son okunan karar:** `D-322`
+- **Sonraki adım:** 2026-10-04 16:43 kontrolü: `dir src\company_master\odin_ai\mimir_servis.py` + `ajan_chat.py oku --task-id ALTYAPI-MIMIR-BAGLAM-01`.
+  Yoksa `gorev_kutusu.py devret --task-id ALTYAPI-MIMIR-BAGLAM-01 --yeni-ajan ihsan` → `mimir_servis.py` → TEST-ODIN 7. koşu (`--tekrar 3`, 40 senaryo).
+  Varsa 7. koşuyu hemen tetikle; salih Faz B'ye geçer.
+- **Görev:** `ALTYAPI-MIMIR-BAGLAM-01` (salih, bekleme) · **Son okunan karar:** `D-323`
 
 ## Tuzaklar (belirti → kök neden → çözüm)
 

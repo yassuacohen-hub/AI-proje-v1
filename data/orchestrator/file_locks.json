@@ -148,5 +148,35 @@
     "sahip": "utku",
     "task_id": "TEST-SIMULASYON-B17-KIRIK-01",
     "kilitlendi": "2026-10-03T17:35:44"
+  },
+  "src/company_master/odin_ai/arac_dongusu.py": {
+    "sahip": "utku",
+    "task_id": "ALTYAPI-MIMIR-HABER-KUSU-01",
+    "kilitlendi": "2026-10-03T18:28:44"
+  },
+  "tests/test_arac_dongusu_kaynak.py": {
+    "sahip": "utku",
+    "task_id": "ALTYAPI-MIMIR-HABER-KUSU-01",
+    "kilitlendi": "2026-10-03T18:28:44"
+  },
+  "migrations/0050_kredi_cuzdani.sql": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-KREDI-CUZDANI-01",
+    "kilitlendi": "2026-10-03T18:28:44"
+  },
+  "src/company_master/kredi.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-KREDI-CUZDANI-01",
+    "kilitlendi": "2026-10-03T18:28:44"
+  },
+  "tests/test_kredi.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-KREDI-CUZDANI-01",
+    "kilitlendi": "2026-10-03T18:28:44"
+  },
+  "tests/test_prompt_yukle_roller.py": {
+    "sahip": "salih",
+    "task_id": "TEST-ODIN-REDTEAM-S1S4-I1I4-01",
+    "kilitlendi": "2026-10-03T18:29:43"
   }
 }
