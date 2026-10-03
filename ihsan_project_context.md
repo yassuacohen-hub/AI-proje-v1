@@ -30,11 +30,21 @@
   Faz 6 ertelendi, belgede 6 görev önerisi — orkestratör açar, düşük öncelik). Onay kuyruğu **boş**.
   Yan bulgu düzeltildi: `trigger.reddet()` tetik `teslim`→`alindi` (hayalet onay-bekleyen), test +
   `scripts/tetik_teslim_geri_al.py`.
-- **Kırık test (benim değil, P2):** `test_cmd_teslim_basarili` D-318 bulgu kapısı — test
-  `bulgu_defteri` kaydı yazmıyor.
-- **Sonraki adım:** P2 toplu devir (`gorev_at.py at --baslik-b64`: 9Router anahtar betiği,
-  `continue_haftalik_bildir.py` kalıcı, ostim href filtresi, Apify ≤10 $, `sync_paket_fiyatlari.py`,
-  B-17 + 3 kırık test) → salih 2026-10-04 16:43'te teslim yoksa Mimir'i devral.
+- **P2 toplu devir BİTTİ (17:38, commit `fa091f3`):** 6 görev `scripts/toplu_gorev_at.py` +
+  `data/orchestrator/devir_2026-10-03.json` ile atandı (6/6 rc=0), onay kuyruğu boş. Dağıtılanlar:
+
+  | Görev | Ajan | P | Kilitli dosya |
+  |---|---|---|---|
+  | `ALTYAPI-9ROUTER-ANAHTAR-01` | yasu | P2 | `scripts/ninerouter_anahtar_guncelle.py` |
+  | `ALTYAPI-OPENROUTER-ARAC-01` | yasu | P2 | `scripts/continue_haftalik_bildir.py` + 5 `or_*.py` |
+  | `VERI-PAKET-FIYAT-SENKRON-01` | yasu | P2 | `scripts/sync_paket_fiyatlari.py` |
+  | `VERI-OSTIM-HREF-FILTRE-01` | utku | P2 | `etl/scrapers/ostim_detail_scraper.py` |
+  | `VERI-APIFY-BUTCE-01` | utku | P3 | `docs/APIFY_BUTCE.md`, `scripts/apify_butce_olc.py` |
+  | `TEST-SIMULASYON-B17-KIRIK-01` | utku | P1 | `tests/test_gorev_kutusu_cli.py`, `..._simulasyon.py` |
+
+  `plans/brief_utku_VERI-TSG-ESLEME-CASE-01.md` 2 satır değişmiş (benim değil) — commit dışı bırakıldı.
+- **Sonraki adım:** Mimir odak (emir #49). Önce `ajan_chat.py oku --son 10` → salih cevabı var mı;
+  2026-10-04 16:43'te teslim yoksa `gorev_kutusu.py devret` → `mimir_servis.py` → TEST-ODIN 7. koşu.
 - **Görev:** `ALTYAPI-MIMIR-BAGLAM-01` (salih, bekleme) · **Son okunan karar:** `D-322`
 
 ## Tuzaklar (belirti → kök neden → çözüm)
@@ -59,6 +69,8 @@
 | Simülasyon B-01 105 HATA, hiçbir ajan `basla` yapamıyor | B-01 arşiv dosyasında da olan `done` görevleri tarıyordu (`arsivle` idempotent) | `for t in acik` (`7baf16a0`); kök neden düzeltilir, `--simulasyonsuz` kaçış kapısı açılmaz |
 | Ajan chat'teki sorun/çözüm metni yarıda kesik | `ajan_chat.py` yazarken ~200 karaktere kırpıyor | Uzun karar → `data/orchestrator/<TASK>_karar_<tarih>.md`, chat'e yol; tam kaydı `scripts/chat_satir_oku.py <task_id>` ile oku |
 | Reddedilen görev `onay-bekleyen`de hâlâ listeleniyor | `reddet()` kuyruk+pano güncelliyor, tetik dosyasındaki `teslim` kaydına dokunmuyordu (`onayla()` ile simetri yoktu) | `38c8d56`: `reddet()` tetik `teslim`→`alindi`; eski kayıt için `scripts/tetik_teslim_geri_al.py <ajan> <task_id> "<neden>"` |
+| `gorev_at.py at` rc=7 `Brif sablona uygun degil` | D-217 kapısı (`brief_denetim`) başlık adlarını birebir arar: `## Adımlar`/`## Faz A`, `## Kabul kriteri`, `## Ajan chat zorunlu` + `ajan_chat.py` komutu, ≥2 wikilink | Brif `plans/_brief_sablon.md`'den kopyalanır; kendi başlık uydurma (`## Yapılacak` geçmez) |
+| `gorev_at.py at` rc=1 `Brief kilitli dosya bildiriyor ama gorev kilitsiz` | Brifte `**Kilitli dosya:**` varsa `--dosya` zorunlu | `toplu_gorev_at.py` JSON'una `"dosya": "a.py,b.py"` (virgülle) |
 
 ## Öz-eleştiri (KALICI — SİLİNMEZ, arşive taşınmaz)
 
