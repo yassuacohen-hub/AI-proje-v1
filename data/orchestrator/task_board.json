@@ -2550,5 +2550,129 @@
     "brief": "",
     "talimat": "D-198 B-01 kapisi 105 HATA veriyor (2026-10-02). Eski kapanis (ALTYAPI-PANO-ARSIV-CAKISMA-17) 17 kayit icin yapilmisti, simdi 105'e cikmis - arastir: hangi yeni gorevler arsiv+pano cakismasi yaratiyor, kok nedeni bul (muhtemelen arsivle komutu her calismada otomatik calismiyor). Henuz kimseye atanmadi/tetiklenmedi, ihsan karari bekliyor.",
     "sonuc": "2026-10-03: B-01 dongusu yalniz acik gorevleri tarar (scripts/gorev_kutusu.py cmd_simulasyon); kapali gorevin pano+arsivde durmasi arsivle bekliyor demektir, cakisma degil. Olcum: 105 HATA -> B-01 OK."
+  },
+  {
+    "task_id": "ALTYAPI-9ROUTER-ANAHTAR-01",
+    "id": "ALTYAPI-9ROUTER-ANAHTAR-01",
+    "baslik": "[ALTYAPI] 9Router anahtar guncelleme betigini yaz -> scripts/ninerouter_anahtar_guncelle.py (2s)",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-10-03T17:35:43",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/ninerouter_anahtar_guncelle.py",
+      "tests/test_ninerouter_anahtar_guncelle.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-9ROUTER-ANAHTAR-01.md",
+    "talimat": "NINEROUTER_KEY .env'de tek yerden guncellenir; anahtar degeri stdout'a YAZILMAZ; scripts/api_anahtar_testi.py ile dogrula; test: tests/ altina 1 dosya. Kaynak: scripts/api_anahtar_testi.py"
+  },
+  {
+    "task_id": "ALTYAPI-OPENROUTER-ARAC-01",
+    "id": "ALTYAPI-OPENROUTER-ARAC-01",
+    "baslik": "[ALTYAPI] continue_haftalik_bildir.py + or_*.py betiklerini kalici yaz -> scripts/ commit + zamanlanmis gorev (2s)",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-10-03T17:35:44",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/continue_haftalik_bildir.py",
+      "scripts/or_batch_cikar.py",
+      "scripts/or_fiyat_ara.py",
+      "scripts/or_kod_liste.py",
+      "scripts/or_sablon_ekle.py",
+      "scripts/or_seckin.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-OPENROUTER-ARAC-01.md",
+    "talimat": "scripts/continue_haftalik_bildir.py ve scripts/or_batch_cikar.py or_fiyat_ara.py or_kod_liste.py or_sablon_ekle.py or_seckin.py git'te ?? durumda. Her birine docstring + utf-8 stdout sarmali; schtasks ile haftalik zamanlanmis gorev (komut dosyaya yazilir, calistirilir, cikti kanit olur). Anahtar degerleri yazilmaz."
+  },
+  {
+    "task_id": "VERI-OSTIM-HREF-FILTRE-01",
+    "id": "VERI-OSTIM-HREF-FILTRE-01",
+    "baslik": "[VERI] OSTIM detay kaziyicida href filtresini duzelt -> ostim_detail_scraper.py + brave 100 firma pilot (3s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-10-03T17:35:44",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/etl/scrapers/ostim_detail_scraper.py",
+      "tests/test_ostim_detail_scraper.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-OSTIM-HREF-FILTRE-01.md",
+    "talimat": "src/company_master/etl/scrapers/ostim_detail_scraper.py::_is_company_website sosyal/ostim ici linkleri firma sitesi saniyor. Filtreyi duzelt, test yaz, 100 firma pilot kos; satir denetimi (D-292: doluluk kanit degil). SCRAPE-005 kabul sartlari karar belgesinde: data/orchestrator/SCRAPE-005-KAZIMA-DOCKER-INTEGRATION_karar_2026-10-03.md"
+  },
+  {
+    "task_id": "VERI-APIFY-BUTCE-01",
+    "id": "VERI-APIFY-BUTCE-01",
+    "baslik": "[VERI] Apify kullanimini olc ve 10 dolar tavanina sabitle -> docs/APIFY_BUTCE.md + kota kodu (2s)",
+    "sahip": "utku",
+    "oncelik": "P3",
+    "durum": "plan",
+    "baslangic": "2026-10-03T17:35:44",
+    "bitis": null,
+    "dosyalar": [
+      "docs/APIFY_BUTCE.md",
+      "scripts/apify_butce_olc.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-APIFY-BUTCE-01.md",
+    "talimat": "Apify aylik harcama olculur (API'den, tahmin degil); tavan 10 USD; asimda webhook/DLQ durur. Kaynak: data/orchestrator/apify_webhook_dlq.jsonl, .agents/skills/osint-web-scraping-toolkit/SKILL.md"
+  },
+  {
+    "task_id": "VERI-PAKET-FIYAT-SENKRON-01",
+    "id": "VERI-PAKET-FIYAT-SENKRON-01",
+    "baslik": "[VERI] sync_paket_fiyatlari.py betigini denetle ve DB ile esle -> paketler.py fiyat_katalogu tek kaynak (2s)",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-10-03T17:35:44",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/sync_paket_fiyatlari.py",
+      "tests/test_paket_fiyat_senkron.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_VERI-PAKET-FIYAT-SENKRON-01.md",
+    "talimat": "scripts/sync_paket_fiyatlari.py ile src/company_master/paketler.py::_ORJINAL_FIYATLAR ayni degerleri mi tasiyor? Olc, farki kapat, test yaz. Tasarim: docs/PAKET_KOTA_TASARIMI.md"
+  },
+  {
+    "task_id": "TEST-SIMULASYON-B17-KIRIK-01",
+    "id": "TEST-SIMULASYON-B17-KIRIK-01",
+    "baslik": "[TEST] Simulasyon B-17 sablon uyarilari + 3 kirik testi duzelt -> pytest yesil, simulasyon exit 0 (2s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-10-03T17:35:44",
+    "bitis": null,
+    "dosyalar": [
+      "tests/test_gorev_kutusu_cli.py",
+      "tests/test_gorev_kutusu_simulasyon.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_TEST-SIMULASYON-B17-KIRIK-01.md",
+    "talimat": "python scripts/gorev_kutusu.py simulasyon -> B-14/B-17 uyarilari. tests/test_gorev_kutusu_cli.py::test_cmd_teslim_basarili D-318 bulgu kapisinda kiriliyor (test bulgu_defteri kaydi yazmiyor) + diger 2 kirik test olculur. Kok neden duzeltilir, kacis kapisi acilmaz."
   }
 ]

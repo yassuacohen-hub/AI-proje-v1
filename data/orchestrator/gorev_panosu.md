@@ -34,6 +34,12 @@
 | ALTYAPI-ODIN-EGITIM-PIPELINE | [ALTYAPI] Odin eğitim hattını yaz → scripts/odin_training_pipeline.py (7d) | utku | P1 | iptal | scripts/odin_training_pipeline.py, data/models/odin_model.bin, data/odin_training_metrics.csv |
 | TEST-ODIN-PROMPT-INJECTION | [TEST] Odin müşteri modelini prompt-injection ile ölç → data/odin_injection_test_log.jsonl (7d) | salih | P1 | aktif | scripts/odin_prompt_injection_test.py, data/odin_injection_test_scenarios.json, data/odin_injection_test_log.jsonl |
 | ALTYAPI-MIMIR-BAGLAM-01 | [ALTYAPI] Mimir baglam ucunu yaz -> odin_ai/mimir_servis.py (3s) | salih | P1 | aktif | src/company_master/odin_ai/mimir_servis.py |
+| ALTYAPI-9ROUTER-ANAHTAR-01 | [ALTYAPI] 9Router anahtar guncelleme betigini yaz -> scripts/ninerouter_anahtar_guncelle.py (2s) | yasu | P2 | plan | scripts/ninerouter_anahtar_guncelle.py, tests/test_ninerouter_anahtar_guncelle.py |
+| ALTYAPI-OPENROUTER-ARAC-01 | [ALTYAPI] continue_haftalik_bildir.py + or_*.py betiklerini kalici yaz -> scripts/ commit + zamanlanmis gorev (2s) | yasu | P2 | plan | scripts/continue_haftalik_bildir.py, scripts/or_batch_cikar.py, scripts/or_fiyat_ara.py |
+| VERI-OSTIM-HREF-FILTRE-01 | [VERI] OSTIM detay kaziyicida href filtresini duzelt -> ostim_detail_scraper.py + brave 100 firma pilot (3s) | utku | P2 | plan | src/company_master/etl/scrapers/ostim_detail_scraper.py, tests/test_ostim_detail_scraper.py |
+| VERI-APIFY-BUTCE-01 | [VERI] Apify kullanimini olc ve 10 dolar tavanina sabitle -> docs/APIFY_BUTCE.md + kota kodu (2s) | utku | P3 | plan | docs/APIFY_BUTCE.md, scripts/apify_butce_olc.py |
+| VERI-PAKET-FIYAT-SENKRON-01 | [VERI] sync_paket_fiyatlari.py betigini denetle ve DB ile esle -> paketler.py fiyat_katalogu tek kaynak (2s) | yasu | P2 | plan | scripts/sync_paket_fiyatlari.py, tests/test_paket_fiyat_senkron.py |
+| TEST-SIMULASYON-B17-KIRIK-01 | [TEST] Simulasyon B-17 sablon uyarilari + 3 kirik testi duzelt -> pytest yesil, simulasyon exit 0 (2s) | utku | P1 | plan | tests/test_gorev_kutusu_cli.py, tests/test_gorev_kutusu_simulasyon.py |
 
 ## Tamamlananlar
 

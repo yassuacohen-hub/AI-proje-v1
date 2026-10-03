@@ -68,5 +68,85 @@
     "sahip": "salih",
     "task_id": "ALTYAPI-MIMIR-BAGLAM-01",
     "kilitlendi": "2026-10-01T20:52:27"
+  },
+  "scripts/ninerouter_anahtar_guncelle.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-9ROUTER-ANAHTAR-01",
+    "kilitlendi": "2026-10-03T17:35:43"
+  },
+  "tests/test_ninerouter_anahtar_guncelle.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-9ROUTER-ANAHTAR-01",
+    "kilitlendi": "2026-10-03T17:35:43"
+  },
+  "scripts/continue_haftalik_bildir.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-OPENROUTER-ARAC-01",
+    "kilitlendi": "2026-10-03T17:35:44"
+  },
+  "scripts/or_batch_cikar.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-OPENROUTER-ARAC-01",
+    "kilitlendi": "2026-10-03T17:35:44"
+  },
+  "scripts/or_fiyat_ara.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-OPENROUTER-ARAC-01",
+    "kilitlendi": "2026-10-03T17:35:44"
+  },
+  "scripts/or_kod_liste.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-OPENROUTER-ARAC-01",
+    "kilitlendi": "2026-10-03T17:35:44"
+  },
+  "scripts/or_sablon_ekle.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-OPENROUTER-ARAC-01",
+    "kilitlendi": "2026-10-03T17:35:44"
+  },
+  "scripts/or_seckin.py": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-OPENROUTER-ARAC-01",
+    "kilitlendi": "2026-10-03T17:35:44"
+  },
+  "src/company_master/etl/scrapers/ostim_detail_scraper.py": {
+    "sahip": "utku",
+    "task_id": "VERI-OSTIM-HREF-FILTRE-01",
+    "kilitlendi": "2026-10-03T17:35:44"
+  },
+  "tests/test_ostim_detail_scraper.py": {
+    "sahip": "utku",
+    "task_id": "VERI-OSTIM-HREF-FILTRE-01",
+    "kilitlendi": "2026-10-03T17:35:44"
+  },
+  "docs/APIFY_BUTCE.md": {
+    "sahip": "utku",
+    "task_id": "VERI-APIFY-BUTCE-01",
+    "kilitlendi": "2026-10-03T17:35:44"
+  },
+  "scripts/apify_butce_olc.py": {
+    "sahip": "utku",
+    "task_id": "VERI-APIFY-BUTCE-01",
+    "kilitlendi": "2026-10-03T17:35:44"
+  },
+  "scripts/sync_paket_fiyatlari.py": {
+    "sahip": "yasu",
+    "task_id": "VERI-PAKET-FIYAT-SENKRON-01",
+    "kilitlendi": "2026-10-03T17:35:44"
+  },
+  "tests/test_paket_fiyat_senkron.py": {
+    "sahip": "yasu",
+    "task_id": "VERI-PAKET-FIYAT-SENKRON-01",
+    "kilitlendi": "2026-10-03T17:35:44"
+  },
+  "tests/test_gorev_kutusu_cli.py": {
+    "sahip": "utku",
+    "task_id": "TEST-SIMULASYON-B17-KIRIK-01",
+    "kilitlendi": "2026-10-03T17:35:44"
+  },
+  "tests/test_gorev_kutusu_simulasyon.py": {
+    "sahip": "utku",
+    "task_id": "TEST-SIMULASYON-B17-KIRIK-01",
+    "kilitlendi": "2026-10-03T17:35:44"
   }
 }
