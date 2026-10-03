@@ -41,6 +41,7 @@ from typing import Any, Callable, Protocol
 import requests
 
 from company_master.gateway.ninerouter_client import NineRouter, NineRouterError
+from company_master.odin_ai import arac_dongusu as ad
 from company_master.orchestrator import task_board as tb
 from company_master.orchestrator import trigger as tr
 
@@ -307,6 +308,7 @@ def sohbet(
     baglam: str | None = None,
     ajan: str = "roo",
     hata_kaydi: Callable[[str, str], None] | None = None,
+    araclar: bool = False,
 ) -> tuple[str, str]:
     """Sohbet turu çalıştırır; ``(yanit, kullanilan_model)`` döner.
 
@@ -314,6 +316,10 @@ def sohbet(
     * Modeller sırayla denenir; ``NineRouterError`` türevleri bir sonrakine
       düşürür. Hepsi düşerse ``AiChatHatasi`` (son hata mesajıyla).
     * ``hata_kaydi(model, hata)`` her düşüşte çağrılır (UI'da gösterim için).
+    * ``araclar=True`` (yalnız İÇ/ODIN): sistem promptuna ``ARAC_PROTOKOLU``
+      eklenir; model ``ARA:``/``GETIR:`` yazarsa :mod:`odin_ai.arac_dongusu`
+      web aracını çalıştırıp aynı modele geri sorar (tavan ``MAKS_TUR``).
+      Müşteri panelinde (DIŞ) bu bayrak **asla** açılmaz.
     """
     if not admin_token:
         raise AiChatHatasi("Admin token zorunlu — önce giriş yapın.")
@@ -323,7 +329,8 @@ def sohbet(
     istemci = istemci or NineRouter()
     zincir = modeller or model_zinciri()
     baglam = baglam if baglam is not None else baglam_metni(ajan)
-    system = f"{SISTEM_PROMPT}\n\n{baglam}"
+    protokol = f"{ad.ARAC_PROTOKOLU}\n\n" if araclar else ""
+    system = f"{SISTEM_PROMPT}\n\n{protokol}{baglam}"
     prompt = _gecmisi_katla(mesajlar)
 
     son_hata = "model zinciri boş"
@@ -336,6 +343,14 @@ def sohbet(
                 hata_kaydi(model, str(exc))
             continue
         if isinstance(yanit, str) and yanit.strip():
+            if araclar and hasattr(istemci, "web_fetch"):
+                # Araç turlarında aynı model kullanılır; tur içi düşüş zincire
+                # geri dönmez (ponytail: tur ortasında model değişimi yok).
+                sonuc = ad.arac_dongusu(
+                    lambda p: istemci.chat(p, model=model, system=system, temperature=0.2),
+                    prompt, yanit, istemci,  # type: ignore[arg-type]
+                )
+                return sonuc.yanit, model
             return yanit.strip(), model
         son_hata = f"{model}: boş yanıt"
         if hata_kaydi:
