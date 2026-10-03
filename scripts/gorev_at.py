@@ -55,12 +55,16 @@ def _brief_bul(ajan: str, task_id: str) -> Path | None:
     """D-66: brif dosyasini diskte arar; bulamazsa None.
 
     Uc kanonik konum: plans/brief_<ajan>_<TASK>.md, plans/_arsiv_brief/ (kapanmis
-    isler) ve data/orchestrator/<TASK>_brif_<tarih>_<rol>.md. Yollar KOK'e gore
-    mutlak — CWD'ye guvenilmez, komut repo disindan da cagrilabiliyor.
+    isler) ve data/orchestrator/<TASK>_brif_<tarih>_<rol>.md. Gorev panoda zaten
+    varsa `brief` alani da adaydir (2026-10-03: SCRAPE-005 brifi ad kuralina
+    uymayan dosyayi gosteriyordu, P0 is saatlerce D-66'da takildi). Yollar KOK'e
+    gore mutlak — CWD'ye guvenilmez, komut repo disindan da cagrilabiliyor.
     """
+    panodaki = str((tb.gorev_getir(task_id) or {}).get("brief") or "")
     for aday in (
         KOK / "plans" / f"brief_{ajan}_{task_id}.md",
         KOK / "plans" / "_arsiv_brief" / f"brief_{ajan}_{task_id}.md",
+        *((KOK / panodaki,) if panodaki else ()),
     ):
         if aday.exists():
             return aday

@@ -592,8 +592,11 @@ def cmd_simulasyon(args: argparse.Namespace) -> int:
     print("=== SIMULASYON (salt okunur; hicbir dosyaya yazilmaz) ===")
 
     # 1 — B-01: arsivde kapanmis is panoya ikinci kez girmis mi.
+    # Yalniz ACIK gorev sayilir: kapanmis gorevin hem panoda hem arsivde
+    # durmasi "arsivle henuz kosmamis" demektir, cakisma degil (2026-10-03:
+    # 105 sahte HATA tum ajanlari kilitledi; arsivle idempotent, kopya yazmaz).
     bulgular = []
-    for t in pano:
+    for t in acik:
         yer = tb.arsivde_bul(t["task_id"])
         if yer:
             bulgular.append(f"{t['task_id']} -> {yer}")
