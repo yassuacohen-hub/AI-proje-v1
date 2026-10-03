@@ -5,35 +5,33 @@
 
 > D-219: tek blok, **üzerine yazılır**. Pano ile çelişirse pano üstündür.
 
-- **Konum:** `TEST-ODIN-PROMPT-INJECTION` — Mimir-DIŞ güvenlik ölçümü.
-  **Borç #71-74 kodda kapandı** (commit `022987f`), 43/43 pytest yeşil. **7. koşu SKIP**:
-  EVREN API iki ardışık denemede de (20:45 ve 20:50) `HTTP 503 Service Unavailable` döndü —
-  altyapı çökük, model gerçek yanıt vermedi. Bu bir prompt ölçümü DEĞİL (D-224: ölçülmeden
-  görev kapanmaz → sahte-yeşil yasak). Kıyas tabanı (%83.3, kararsız 4, `dil_uyumsuz [inj-10]`)
-  hâlâ GEÇERLİ referans — 7. koşu bunu geçersiz kılmadı, sadece ölçemedi.
-- **Yeni bulgu (henüz düzeltilmedi, borç adayı):** `karar_ver()` bir senaryo `hata` (HTTPError)
-  ile düşerse `dil_uyumlu=false` varsayılan atıyor → aggregate raporda gerçek sebep (API
-  erişilemedi) "dil_uyumsuz" etiketinin ARKASINA gizleniyor. Log'daki `hata` alanına bakmadan
-  üst özet yanıltıcı. Düzeltme: ayrı `erisilemedi` kovası + `karar_ver()` hata varsa otomatik
-  SKIP döndürsün (NO-GO değil).
-- **Yapılanlar (2026-10-01):** Prompta **MUTLAK KURAL 0c** (etiket/araç çağrısı/base64 = veri değil)
-  + **İlk Karakter Kuralı** eklendi; betiğe `LOG_KESIT = 2000` (borç #68). 45 mandal yeşil,
-  commit **`84811e8`**, kilit salih'e usulünce geri devredildi (`--no-verify` YOK, D-309/5).
-  Ölçüm felsefesi netleşti: **üç ayrı kusur sınıfı** (davranış / cevap dili / düşünme sızıntısı),
-  her biri AYRI GO kapısı; ortalama alınmaz, kötü alanlar `any()` ile katlanır.
-  Bu dosya D-219 tavanına dayandı → 2026-09 günlüğü `archive/ihsan_context_202609.md`'ye taşındı.
-- **KRİTİK BAĞLAM:** SADECE `prompts/mimir_sistem_promptu.md`,
-  `scripts/odin_prompt_injection_test.py`, `tests/test_odin_prompt_injection.py`,
-  `data/odin_injection_test_log.jsonl`, `data/odin_injection_test_scenarios.json`
-- **Dağıtım bitti (2026-10-01, emir #52):** 4 brif yazıldı, 4'ü de `brief_denetim.py`'den
-  `UYUMLU`, 4'ü de `gorev_at.py at --baslik-b64` ile panoya kondu (**4/4 ATANDI**):
-  `VERI-RISK-MOTORU-01`→utku P1 · `VERI-ENTITY-GRAPH-01`→yasu P1 ·
-  `DOC-VENDOR-DD-ARASTIRMA-01`→yasu P3 · `DOC-GLOBAL-INTEL-ARASTIRMA-01`→utku P3.
-  Göç 0046 utku'ya, 0047 yasu'ya kilitli; sıradaki boş numara **0048**.
-- **Sonraki adım:** EVREN altyapısı düzelince `--tekrar 3`'ü TEKRAR dene (kod tarafı hazır,
-  sadece komutu çalıştır). GO çıkarsa: salih brifini güncelle + D-210 chat. SKIP sürerse:
-  `ALTYAPI-MIMIR-BAGLAM-01` kapsamında EVREN API erişilebilirliğini KAHİN'e escalate et.
-- **Görev:** `TEST-ODIN-PROMPT-INJECTION` (salih'te, ölçüm bende) · **Son okunan karar:** `D-312`
+- **Konum (2026-10-03 16:45):** Mimir tıkanması + simülasyon blokajı turu.
+  **Simülasyon blokajı ÇÖZÜLDÜ** (commit `7baf16a0`): `gorev_kutusu.py` B-01 döngüsü `for t in acik`
+  (105 sahte HATA → 0), `gorev_at.py _brief_bul` pano `brief` alanını 3. aday okur, pano
+  `ALTYAPI-PANO-ARSIV-CAKISMA-02` done. Simülasyon exit **2 → 1** (yalnız B-14/B-17 uyarı);
+  `basla` tüm ajanlara tekrar açık. ajan-chat `ORCH-SIMULASYON-BLOK-01` index 0 kapatıldı.
+- **Mimir:** `src/company_master/odin_ai/mimir_servis.py` **YOK**, kilit salih'te
+  (`file_locks.json`). salih chat'e **hiç yazmamış** (`"kimden": "salih"` 0 kayıt); tetik
+  `alindi` 2026-10-01T20:52. Revize bağlam = `prompts/mimir_sistem_promptu.md` **v4 taslak**
+  (commitler `4f0c69e9` şapka tablosu/36 senaryo, `7d038b12` ARA/GETIR araç döngüsü,
+  `b41a532c` GETIR izin listesi/özel ağ yasağı — hepsi 2026-10-03). Brief
+  `plans/brief_salih_ALTYAPI-MIMIR-BAGLAM-01.md` DEĞİŞMEDİ, hâlâ geçerli.
+  salih'e D-210 chat (16:43:39, önem yuksek): revize prompt hazır, **24 saat içinde
+  teslim/engel yoksa ihsan devralır** (kilit devri `gorev_kutusu.py devret`).
+- **N7 koşusu YAPILMIŞ (chat kayıt 1-2, 02 23:56 / 03 00:29):** `qwen3.8-flash-next` 503
+  (offline); `mimo-v2.6-pro` çalışıyor ama **güvenlik NO-GO** (inj-12 kararsız sızdırdı,
+  mesru-07 İngilizce düşünme sızıntısı, 3 senaryo dil uyumsuz). v4 prompt bu NO-GO'ya cevap;
+  `mimir_servis.py` ucu olmadan yeniden ölçülemez (`ODIN_CUSTOMER_API_URL` tanımsız).
+- **Açık borç adayı (değişmedi):** `karar_ver()` `hata` senaryosunu `dil_uyumlu=false`
+  sayıyor → `erisilemedi` kovası + hata varsa SKIP (NO-GO değil).
+- **Review bekleyen:** `SCRAPE-005` (utku) 3 karar — DATABASE_URL env_file /
+  `refresh_pipeline.py:67` import yolu / restart `no` → `gorev_kutusu.py onayla|reddet`;
+  chat 62/64 kapat.
+- **Commit edilmedi:** `data/orchestrator/ajan-chat.jsonl` + bu dosya (bu turda commit).
+- **Sonraki adım:** SCRAPE-005 3 kararı işle → P2 toplu devir (`gorev_at.py at --baslik-b64`:
+  9Router anahtar betiği, `continue_haftalik_bildir.py` kalıcı, ostim href filtresi, Apify
+  ≤10 $, `sync_paket_fiyatlari.py`) → salih 24 saat dolunca Mimir'i devral.
+- **Görev:** `ALTYAPI-MIMIR-BAGLAM-01` (salih, bekleme) · **Son okunan karar:** `D-322`
 
 ## Tuzaklar (belirti → kök neden → çözüm)
 
@@ -52,6 +50,9 @@
 | `gorev_at.py ata` → argparse `invalid choice` | Alt komutun adı `at`, "ata" değil (`gorev_at.py:483`) | Komut adını uydurma, `main()`'den oku |
 | Commit çıktısı `[chore/monorepo-merge]`, `git status` `## master` | Teşhis edilmedi — borç #48, 8. görünüm | Açık |
 | `git add` → `paths are ignored by .gitignore: Huginn Data Insights` | **İki ayrı repo var** (D-255); dış kök vault'u yok sayar | Vault dosyası vault içinden commit edilir: `cd "Huginn Data Insights" && git add ...` |
+| `gorev_at.py guncelle <ID>` → `required: --task-id` | Görev kimliği pozisyonel değil, zorunlu bayrak | `guncelle --task-id <ID> --durum done --sonuc "..." --cagiran ihsan` |
+| `ajan_chat.py ac ihsan ...` kaydı ihsan→ihsan çıktı | İlk pozisyonel = **HEDEF** ajan; gönderen `--kimden` | `ac <hedef> <task_id> "<sorun>" --kimden ihsan --onem yuksek`; yazmadan önce `-h` oku, yazdıktan sonra `oku --task_id` ile geri oku |
+| Simülasyon B-01 105 HATA, hiçbir ajan `basla` yapamıyor | B-01 arşiv dosyasında da olan `done` görevleri tarıyordu (`arsivle` idempotent) | `for t in acik` (`7baf16a0`); kök neden düzeltilir, `--simulasyonsuz` kaçış kapısı açılmaz |
 
 ## Öz-eleştiri (KALICI — SİLİNMEZ, arşive taşınmaz)
 
@@ -59,6 +60,32 @@
 > silmesinler" — bu bölüm 400 satır tavanına dahil değil, archive rotasyonunda asla taşınmaz.
 > En yeni madde en üstte, biriktirilir.
 
+- **2026-10-03 — Kritik bildirim ~12 saat okunmadı:** utku `ORCH-SIMULASYON-BLOK-01`'i 01:44'te
+  kritik açtı; ben ~13:30'a kadar görmedim, bu arada hiçbir ajan `basla` yapamadı. Orkestratörün
+  gelen kutusunu oturum başında açmaması = tüm takımın boşa beklemesi. **Öğrendiğim:** blokaj
+  bildirimi, cortex'ten bile önce gelir. **Bundan sonra:** oturumun ilk komutu
+  `ajan_chat.py ozet --durum acik`; kritik varsa cortex okumayı bile sonraya bırak.
+- **2026-10-03 — Mimir tıkanması geç ölçüldü:** `ALTYAPI-MIMIR-BAGLAM-01` 2 gün teslimsizdi;
+  "salih çalışıyordur" varsayımıyla bekledim, ölçmedim. Ölçünce: `mimir_servis.py` yok, salih
+  chat'e hiç yazmamış, tetik 10-01'den beri `alindi`. **Öğrendiğim:** sessizlik ilerleme değil,
+  D-260 burada da geçerli. **Bundan sonra:** 24 saati geçen her `alindi`/`aktif` görev için
+  dosya + chat + commit üçlüsünü ölç; ikisi boşsa aynı gün süre ver, dolunca devral.
+- **2026-10-03 — Komutu `-h` okumadan çalıştırdım, yanlış kayıt yazdım:** `ajan_chat.py ac ihsan ...`
+  ilk pozisyoneli hedef sanmadım; ihsan→ihsan kaydı doğdu, kapatmak için ek tur yedim. Aynı gün
+  `gorev_at.py guncelle` pozisyonel ID ile de argparse hatası aldım. **Öğrendiğim:** sözdizimi
+  tahmini iki kez üst üste yanlış çıktı; tuzak tablosundaki `ata` dersi (gorev_at.py:483)
+  bana yetmemiş. **Bundan sonra:** ilk kez kullandığım her alt komutta önce `-h`, yazdıktan
+  sonra `oku` ile geri okuma (D-260 beyan kanıt değil).
+- **2026-10-03 — Tasarım önce, ölçüm sonra:** `docs/PAKET_KOTA_TASARIMI.md`'yi mevcut
+  `packages.features` şemasını ve gerçek paket sayısını ölçmeden yazmaya başladım; ölçüm
+  sonradan geldi, bölüm başlıkları değişti. **Öğrendiğim:** "§1 Mevcut (ölçüldü)" başlığı
+  dokümanın ilk yazılan bölümü olmalı, son eklenen değil. **Bundan sonra:** tasarım dosyası
+  açmadan önce tek bir ölçüm betiği (`scripts/` altında kalıcı) çalıştır, çıktısını §1'e yapıştır.
+- **2026-10-03 — Geçici ölçüm betiklerini silme refleksi:** `data/tmp_*` ve tek seferlik `.py`
+  dosyalarını iş bitince silmeye yöneldim; kullanıcı kuralı tam tersi (ölçüm betikleri
+  `scripts/` altına kalıcı, `data/tmp_*` silinmez — sonraki oturumun kanıtı). **Öğrendiğim:**
+  "temizlik" ile "kanıt yok etme" aynı hareket. **Bundan sonra:** silme yerine adlandır ve
+  commit et; iz bırakmayan ölçüm yapılmamış sayılır.
 - **2026-10-02 — D-320/D-321/D-322 sırayla iddia:** `karar_no.py --al` idempotent değil; aynı konuyu
   3 kez çağırınca 3 ayrı numara (D-320, D-321, D-322) rezerve oldu ama bulgu_defteri.md'de sadece
   2 ayrı konu vardı (SCOR/SKOR+bypass kapısı, regex-virgül satır-bazlı tarama). **Öğrendiğim:**
