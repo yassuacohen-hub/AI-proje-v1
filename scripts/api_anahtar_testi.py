@@ -63,7 +63,8 @@ SAGLAYICILAR: tuple[tuple[str, str, str, str, dict[str, str], dict | None], ...]
      "GET", {"Authorization": "Bearer {k}"}, None),
     ("perplexity", "PERPLEXITY_API_KEY", "https://api.perplexity.ai/chat/completions",
      "POST", {"Authorization": "Bearer {k}", "Content-Type": "application/json"},
-     {"model": "sonar", "messages": [{"role": "user", "content": "hi"}], "max_tokens": 1}),
+     # ponytail: Perplexity max_tokens<16 -> HTTP 400 "must be at least 16"; 1 yalanci OLU veriyordu (2026-10-03)
+     {"model": "sonar", "messages": [{"role": "user", "content": "hi"}], "max_tokens": 16}),
     ("9router", "NINEROUTER_KEY", "{NINEROUTER_URL}/v1/models",
      "GET", {"Authorization": "Bearer {k}"}, None),
     ("brave", "BRAVE_API_KEY", "https://api.search.brave.com/res/v1/web/search?q=test&count=1",
