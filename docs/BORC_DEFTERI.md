@@ -67,6 +67,7 @@ yanlış okudu — altı tur üst üste (D-265, D-266, D-267/1, D-268/1, D-271/1
 | `BORC-EKAP-CLOUDFLARE-01` | EKAP (`ekap.kik.gov.tr`) düz HTTP ve jina ile **0 kayıt** (Cloudflare duvarı, F0 ölçümü); haber kuşu EKAP'sız başlar | ACIK | — | — · çözüm EKAP açık veri/RSS kanalı ya da ürün sahibi kararıyla ücretli sağlayıcı; tarayıcı taklidi **yapılmaz** (P-1..P-10) |
 | `BORC-PLAN-ALANI-01` | Müşteri `plan` alanı şemada var ama **dolduran kod yok**; `plan=="premium"` kapısı (F3) boş alana bakacak | ACIK | — | — |
 | `BORC-KREDI-PAKET-01` | PREMIUM internete çıkış için kredi/paket/kota tablosu **yok** (F0 ölçümü); F3 öncesi şema + yazma kapısı gerekir | ACIK | — | — |
+| `BORC-9ROUTER-SAGLAYICI-KIRIK-01` | 9Router'da 7 arama sağlayıcısı **kırık** (2026-10-03 ölçümü, [[SAGLAYICI_OLCUMU_2026-10-03]]): perplexity 401, kimi 401, xai 403 kredi, searxng 502 internal host, openai 502, gemini 404, antigravity 503 (**57 s** bekletiyor). Fetch: ollama 401/502; exa DMO'da **0 ihale**. `.env` `SearchAPI_API_KEY` doğrudan çağrıda **401** (9Router'daki anahtar ayrı, çalışıyor). Çözüm 9Router UI'da anahtar/kredi; koddan değil. Combo sırası önerisi raporda §6 | ACIK | — | — · tekrar ölçüm `python scripts/saglayici_olc.py ara` |
 
 ## Borç değil — kural / görev kimlikleri
 
@@ -778,6 +779,7 @@ Seçim yapılmadan **hiçbir silme yapılmadı**.
 
 - [[AGENTS]]
 - [[docs/HEDEF_VERI_KAPSAMI]]
+- [[SAGLAYICI_OLCUMU_2026-10-03]]
 
 ---
 

@@ -47,10 +47,11 @@ __all__ = [
 MAKS_TUR = 6
 #: Tek araç çıktısından prompt'a alınan en fazla karakter (token tavanı).
 MAKS_KARAKTER = 6000
-#: Sayfa çekme sağlayıcısı (F0: DMO + Resmî Gazete jina ile çalıştı).
-FETCH_SAGLAYICI = "jina-reader"
-#: Arama sağlayıcısı.
-SEARCH_SAGLAYICI = "tavily"
+#: Sayfa çekme sağlayıcısı — 9Router combo: biri düşerse gateway sıradakine geçer.
+#: Ölçüm 2026-10-03 (docs/SAGLAYICI_OLCUMU_2026-10-03.md): fetch-combo DMO 37 ihale / 1.2 s.
+FETCH_SAGLAYICI = "fetch-combo"
+#: Arama sağlayıcısı — combo; sıra 9Router UI'dan (öneri: brave → tavily → exa → searchapi → serper).
+SEARCH_SAGLAYICI = "search-combo"
 
 #: Bilinen resmî kaynaklar — model aramaya gitmeden doğrudan GETIR yapar.
 #: F0'da ölçüldü: DMO liste düz HTTP 200 / 44 ihale; RG jina ile okundu.
