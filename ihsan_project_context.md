@@ -24,13 +24,17 @@
   `mimir_servis.py` ucu olmadan yeniden ölçülemez (`ODIN_CUSTOMER_API_URL` tanımsız).
 - **Açık borç adayı (değişmedi):** `karar_ver()` `hata` senaryosunu `dil_uyumlu=false`
   sayıyor → `erisilemedi` kovası + hata varsa SKIP (NO-GO değil).
-- **Review bekleyen:** `SCRAPE-005` (utku) 3 karar — DATABASE_URL env_file /
-  `refresh_pipeline.py:67` import yolu / restart `no` → `gorev_kutusu.py onayla|reddet`;
-  chat 62/64 kapat.
-- **Commit edilmedi:** `data/orchestrator/ajan-chat.jsonl` + bu dosya (bu turda commit).
-- **Sonraki adım:** SCRAPE-005 3 kararı işle → P2 toplu devir (`gorev_at.py at --baslik-b64`:
-  9Router anahtar betiği, `continue_haftalik_bildir.py` kalıcı, ostim href filtresi, Apify
-  ≤10 $, `sync_paket_fiyatlari.py`) → salih 24 saat dolunca Mimir'i devral.
+- **Review turu BİTTİ (17:12, commit `38c8d56`):** `SCRAPE-005` **REDDEDİLDİ → aktif (utku)**;
+  3 karar + 5 kabul şartı `data/orchestrator/SCRAPE-005-KAZIMA-DOCKER-INTEGRATION_karar_2026-10-03.md`,
+  chat 64 kapatıldı. `DOC-GLOBAL-INTEL-ARASTIRMA-01` **ONAYLANDI** (`docs/FAZ6_GLOBAL_INTEL_KAPSAM.md`;
+  Faz 6 ertelendi, belgede 6 görev önerisi — orkestratör açar, düşük öncelik). Onay kuyruğu **boş**.
+  Yan bulgu düzeltildi: `trigger.reddet()` tetik `teslim`→`alindi` (hayalet onay-bekleyen), test +
+  `scripts/tetik_teslim_geri_al.py`.
+- **Kırık test (benim değil, P2):** `test_cmd_teslim_basarili` D-318 bulgu kapısı — test
+  `bulgu_defteri` kaydı yazmıyor.
+- **Sonraki adım:** P2 toplu devir (`gorev_at.py at --baslik-b64`: 9Router anahtar betiği,
+  `continue_haftalik_bildir.py` kalıcı, ostim href filtresi, Apify ≤10 $, `sync_paket_fiyatlari.py`,
+  B-17 + 3 kırık test) → salih 2026-10-04 16:43'te teslim yoksa Mimir'i devral.
 - **Görev:** `ALTYAPI-MIMIR-BAGLAM-01` (salih, bekleme) · **Son okunan karar:** `D-322`
 
 ## Tuzaklar (belirti → kök neden → çözüm)
@@ -53,6 +57,8 @@
 | `gorev_at.py guncelle <ID>` → `required: --task-id` | Görev kimliği pozisyonel değil, zorunlu bayrak | `guncelle --task-id <ID> --durum done --sonuc "..." --cagiran ihsan` |
 | `ajan_chat.py ac ihsan ...` kaydı ihsan→ihsan çıktı | İlk pozisyonel = **HEDEF** ajan; gönderen `--kimden` | `ac <hedef> <task_id> "<sorun>" --kimden ihsan --onem yuksek`; yazmadan önce `-h` oku, yazdıktan sonra `oku --task_id` ile geri oku |
 | Simülasyon B-01 105 HATA, hiçbir ajan `basla` yapamıyor | B-01 arşiv dosyasında da olan `done` görevleri tarıyordu (`arsivle` idempotent) | `for t in acik` (`7baf16a0`); kök neden düzeltilir, `--simulasyonsuz` kaçış kapısı açılmaz |
+| Ajan chat'teki sorun/çözüm metni yarıda kesik | `ajan_chat.py` yazarken ~200 karaktere kırpıyor | Uzun karar → `data/orchestrator/<TASK>_karar_<tarih>.md`, chat'e yol; tam kaydı `scripts/chat_satir_oku.py <task_id>` ile oku |
+| Reddedilen görev `onay-bekleyen`de hâlâ listeleniyor | `reddet()` kuyruk+pano güncelliyor, tetik dosyasındaki `teslim` kaydına dokunmuyordu (`onayla()` ile simetri yoktu) | `38c8d56`: `reddet()` tetik `teslim`→`alindi`; eski kayıt için `scripts/tetik_teslim_geri_al.py <ajan> <task_id> "<neden>"` |
 
 ## Öz-eleştiri (KALICI — SİLİNMEZ, arşive taşınmaz)
 
