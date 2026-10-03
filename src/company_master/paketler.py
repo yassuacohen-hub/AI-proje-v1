@@ -220,6 +220,32 @@ _ORJINAL_OZELLIKLER: dict[str, list[str]] = {
 
 _ORJINAL_SIRALAMA = ["Temel", "Standart", "Profesyonel", "Kurumsal"]
 
+# Paket → Mimir-DIŞ haber kaynakları (PAKET_KOTA_TASARIMI §4). Üst paket alttakini kapsar.
+# ponytail: sabit sözlük; packages.features JSON'a taşınır ilk müşteri paket değiştirince.
+VARSAYILAN_KAYNAKLAR: tuple[str, ...] = ("dmo", "rg")
+PAKET_KAYNAKLARI: dict[str, tuple[str, ...]] = {
+    "Temel": VARSAYILAN_KAYNAKLAR,
+    "Standart": VARSAYILAN_KAYNAKLAR + ("google_news", "linkedin", "patent"),
+    "Profesyonel": VARSAYILAN_KAYNAKLAR + ("google_news", "linkedin", "patent", "instagram", "facebook", "is_ilani"),
+    "Kurumsal": VARSAYILAN_KAYNAKLAR + ("google_news", "linkedin", "patent", "instagram", "facebook", "is_ilani"),
+}
+
+
+def paket_kaynaklari(paket_adlari: list[str] | tuple[str, ...]) -> frozenset[str]:
+    """Paket adlarının izin verdiği kaynakların birleşimi; paket yoksa VARSAYILAN_KAYNAKLAR.
+
+    Bilinmeyen paket adı sessizce yok sayılır (kapı kapalı kalır, açılmaz).
+    """
+    izinli: set[str] = set()
+    for ad in paket_adlari:
+        izinli.update(PAKET_KAYNAKLARI.get(ad, ()))
+    return frozenset(izinli or VARSAYILAN_KAYNAKLAR)
+
+
+def firma_haber_kaynaklari(company_id: str) -> frozenset[str]:
+    """BORC-PLAN-ALANI-01 kapısı: firmanın aktif paketlerinden kaynak kümesi (DB okur)."""
+    return paket_kaynaklari([p["name"] for p in firma_paketleri_getir(company_id)])
+
 
 def fiyat_katalogu() -> list[dict[str, Any]]:
     """

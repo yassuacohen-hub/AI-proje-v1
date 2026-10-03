@@ -45,6 +45,8 @@ Rakamlar **ölçülmedi**; sayı tutmak için ilk 30 gün gerçek kullanım logl
 
 Admin paneli: paket düzenleme ekranında 2 sayı kutusu + 6 onay kutusu. Rapor/haber üretilirken `firma_paketleri_getir()` → `features.haber_kaynaklari` filtre. `BORC-PLAN-ALANI-01` böylece kapanır (`plan` alanı yerine paket ilişkisi okunur).
 
+**Yapılan (2026-10-03, daha tembel yol):** JSON yerine koda sabit sözlük `paketler.PAKET_KAYNAKLARI` (4 fiyat tier'ı → kaynak kümesi) + `firma_haber_kaynaklari(company_id)`. Ölçüm `scripts/paket_olc.py`: `packages` ve `company_packages` **boş** — panel kutuları ilk gerçek müşteriye kadar yazılmaz. Test `tests/test_paket_kaynaklari.py` (5).
+
 ## 5. Kullanım ve cüzdan — en az şema
 
 | Tablo | Kolonlar | Not |
