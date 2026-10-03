@@ -146,8 +146,8 @@
 ### Orkestratör Devralma Örneği (D-76 — KAHİN kararı 2026-09-20)
 **Senaryo:** KAHİN başka ajan (UTKU) orkestratör yapmak isterse. İHSAN (mevcut orkestratör) bunu yönetir:
 
-1. KAHİN, mevcut `ABRAKADABRA_KEY`'i İHSAN'a verir: `Up2Fz6pje6lA6J-3x8iY9hPtiogo4DKQnOiW_yyKf6k`
-2. İHSAN, kilit açma komutu çalıştırır: `python scripts/gorev_at.py abrakadabra --ajan utku --anahtar Up2Fz6pje6lA6J-3x8iY9hPtiogo4DKQnOiW_yyKf6k`
+1. KAHİN, mevcut `ABRAKADABRA_KEY`'i İHSAN'a verir: `<ABRAKADABRA_KEY>` (sohbette; dosyaya yazılmaz — D-73. Bu örnekte eskiden duran gerçek anahtar 2026-09-18 devralmasının anahtarıydı, parmak izi `0ad2ea75…`; 2026-10-03'te yer tutucuya çevrildi, aktif anahtar yalnız `.env`'de)
+2. İHSAN, kilit açma komutu çalıştırır: `python scripts/gorev_at.py abrakadabra --ajan utku --anahtar <ABRAKADABRA_KEY>`
 3. İHSAN, yeni anahtar üretir: `python -c "import secrets; print(secrets.token_urlsafe(32))"` → örn. `ABC123...`
 4. İHSAN, yeni anahtarı KAHİN'e verir (sohbette, dosya yok): "Yeni key: `ABC123...`"
 5. KAHİN, `.env` dosyasını günceller: `ABRAKADABRA_KEY=ABC123...`

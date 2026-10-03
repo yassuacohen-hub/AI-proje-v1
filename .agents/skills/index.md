@@ -16,7 +16,8 @@ paylaşılır. Ajanlar ilgili `SKILL.md`’yi okur; aynı talimata göre çalı�
 | data-quality-testing | [SKILL.md](data-quality-testing/SKILL.md) | Veri kalite testleri |
 | dbt-testing | [SKILL.md](dbt-testing/SKILL.md) | dbt model test stratejileri |
 | enterprise-data-classification | [SKILL.md](enterprise-data-classification/SKILL.md) | PII / DLP tespit |
-| huginn-rag-egitim-guvenlik | [SKILL.md](huginn-rag-egitim-guvenlik/SKILL.md) | Mimir RAG/ingestion, LoRA veri seti, prompt-injection red-team, GO/NO-GO kapısı |
+| huginn-mimir-dis | [SKILL.md](huginn-mimir-dis/SKILL.md) | Mimir-DIŞ müşteri paneli: tenant sandbox, RAG/ingestion (ortak), prompt-injection red-team, GO/NO-GO kapısı |
+| huginn-mimir-ic | [SKILL.md](huginn-mimir-ic/SKILL.md) | Mimir-İÇ (ODIN) admin paneli: TEKLİF + kilit sözü kapısı, LoRA eğitim seti, iç red-team |
 | elite-product-ux-architect | [SKILL.md](elite-product-ux-architect/SKILL.md) | UX mimarisi, dashboard, karar odaklı tasarım |
 | elite-saas-architect | [SKILL.md](elite-saas-architect/SKILL.md) | Sistem mimarisi, SaaS değerlendirme, ölçeklenebilirlik |
 | frontend-design | [SKILL.md](frontend-design/SKILL.md) | Web dashboard UI |
@@ -30,7 +31,6 @@ paylaşılır. Ajanlar ilgili `SKILL.md`’yi okur; aynı talimata göre çalı�
 | supabase | [SKILL.md](supabase/SKILL.md) | Supabase entegrasyonu |
 | supabase-postgres-best-practices | [SKILL.md](supabase-postgres-best-practices/SKILL.md) | PostgreSQL best practices |
 | venture-category-architect | [SKILL.md](venture-category-architect/SKILL.md) | Kategori yaratma, konumendirme, marka, Büyüme |
-| **abrakadabra-orchestrator** | [SKILL.md](abrakadabra-orchestrator/SKILL.md) | **Multi-agent orchestration supreme mode — tüm ajanları tek yapıda yönet, bağımlılık grafiği çıkar, risk değerlendir, kaynak optimize** |
 
 ## Eklenenlar (v2 — 2026-09-12)
 

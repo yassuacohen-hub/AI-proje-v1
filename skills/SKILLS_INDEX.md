@@ -79,7 +79,6 @@ Kanonik yol: .agents/skills/ - **33 skill**
 | Skill | Link |
 |---|---|
 | 9router | [9router/SKILL.md](.agents/skills/9router/SKILL.md) |
-| abrakadabra-orchestrator | [abrakadabra-orchestrator/SKILL.md](.agents/skills/abrakadabra-orchestrator/SKILL.md) |
 | adbc | [adbc/SKILL.md](.agents/skills/adbc/SKILL.md) |
 | agent-md-refactor | [agent-md-refactor/SKILL.md](.agents/skills/agent-md-refactor/SKILL.md) |
 | airflow | [airflow/SKILL.md](.agents/skills/airflow/SKILL.md) |
@@ -99,7 +98,8 @@ Kanonik yol: .agents/skills/ - **33 skill**
 | elite-saas-architect | [elite-saas-architect/SKILL.md](.agents/skills/elite-saas-architect/SKILL.md) |
 | enterprise-data-classification | [enterprise-data-classification/SKILL.md](.agents/skills/enterprise-data-classification/SKILL.md) |
 | frontend-design | [frontend-design/SKILL.md](.agents/skills/frontend-design/SKILL.md) |
-| huginn-rag-egitim-guvenlik | [huginn-rag-egitim-guvenlik/SKILL.md](.agents/skills/huginn-rag-egitim-guvenlik/SKILL.md) |
+| huginn-mimir-dis | [huginn-mimir-dis/SKILL.md](.agents/skills/huginn-mimir-dis/SKILL.md) |
+| huginn-mimir-ic | [huginn-mimir-ic/SKILL.md](.agents/skills/huginn-mimir-ic/SKILL.md) |
 | interactive-mentor | [interactive-mentor/SKILL.md](.agents/skills/interactive-mentor/SKILL.md) |
 | marketing-strategy | [marketing-strategy/SKILL.md](.agents/skills/marketing-strategy/SKILL.md) |
 | osint-web-scraping-toolkit | [osint-web-scraping-toolkit/SKILL.md](.agents/skills/osint-web-scraping-toolkit/SKILL.md) |

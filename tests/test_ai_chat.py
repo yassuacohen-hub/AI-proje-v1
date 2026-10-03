@@ -24,6 +24,12 @@ class SahteIstemci:
         return sonuc
 
 
+@pytest.fixture(autouse=True)
+def _kilit_env_temiz(monkeypatch):
+    """Gerçek kilit sözü .env'den sızmasın; testler varsayılanla koşar (D-182)."""
+    monkeypatch.delenv(ai_chat.KILIT_ENV, raising=False)
+
+
 @pytest.fixture
 def sahte_baglam(monkeypatch):
     monkeypatch.setattr(ai_chat, "baglam_metni", lambda ajan="roo", limit=12: "[BAĞLAM]")
@@ -109,7 +115,7 @@ def test_teklif_uygula_kilitsiz_reddedilir(monkeypatch):
         ai_chat.teklif_uygula(Teklif("gorev_guncelle", ("T-1", "aktif")), kilit="yanlış")
 
 
-KILIT = "abrakadabra"
+KILIT = ai_chat.VARSAYILAN_KILIT
 
 
 # --- Sohbet / fallback -------------------------------------------------------
