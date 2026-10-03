@@ -68,6 +68,7 @@ yanlış okudu — altı tur üst üste (D-265, D-266, D-267/1, D-268/1, D-271/1
 | `BORC-PLAN-ALANI-01` | Müşteri `plan` alanı şemada var ama **dolduran kod yok**; `plan=="premium"` kapısı (F3) boş alana bakacak | ACIK | — | — |
 | `BORC-KREDI-PAKET-01` | PREMIUM internete çıkış için kredi/paket/kota tablosu **yok** (F0 ölçümü); F3 öncesi şema + yazma kapısı gerekir | ACIK | — | — |
 | `BORC-9ROUTER-SAGLAYICI-KIRIK-01` | 9Router'da 7 arama sağlayıcısı **kırık** (2026-10-03 ölçümü, [[SAGLAYICI_OLCUMU_2026-10-03]]): perplexity 401, kimi 401, xai 403 kredi, searxng 502 internal host, openai 502, gemini 404, antigravity 503 (**57 s** bekletiyor). Fetch: ollama 401/502; exa DMO'da **0 ihale**. `.env` `SearchAPI_API_KEY` doğrudan çağrıda **401** (9Router'daki anahtar ayrı, çalışıyor). Çözüm 9Router UI'da anahtar/kredi; koddan değil. Combo sırası önerisi raporda §6 | ACIK | — | — · tekrar ölçüm `python scripts/saglayici_olc.py ara` |
+| `BORC-SOSYAL-ADRES-SAHTE-01` | `source_records.raw_payload->'sosyal_medya'` 5.016 firmada dolu görünür ama **hepsi OSTİM'in kendi hesapları** (`linkedin.com/company/ostim-osb`, `x.com/ostimosb`…) — kazıyıcı sayfa altbilgisini firma linki sanmış (`ostim_scraper.py:316`, `ostim_detail_scraper.py:53`). Gerçek firma adresi **0/9.412**. `quality_metrics.py:165 social_media_score` bu yüzden yalancı yeşil. D-292 tekrar: doluluk ≠ bilgi | ACIK | — | ölçüm `python scripts/sosyal_adres_olc.py` · çözüm: kazıyıcıda `ostim` içeren href ele + brave `site:linkedin.com/company "<unvan>"` keşfi (plan [[PAKET_KOTA_TASARIMI]] §4) |
 
 ## Borç değil — kural / görev kimlikleri
 
@@ -780,6 +781,7 @@ Seçim yapılmadan **hiçbir silme yapılmadı**.
 - [[AGENTS]]
 - [[docs/HEDEF_VERI_KAPSAMI]]
 - [[SAGLAYICI_OLCUMU_2026-10-03]]
+- [[PAKET_KOTA_TASARIMI]]
 
 ---
 
