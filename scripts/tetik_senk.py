@@ -49,6 +49,10 @@ FINAL_PANO_DURUMLARI = ("done", "blocked", "archive", "reddedildi", "iptal")
 #: tetigi bu durumlardan birindeyse sapma vardir; `kapandi` yapilarak duzeltilir.
 ACIK_TETIK_DURUMLARI = ("bekliyor", "alindi", "teslim", "zincir_bekleme", "blocked")
 
+#: D-58 bildirim tetikleri: panoda karsiligi OLMAZ (gorev degil, duyuru).
+#: Okundugu an kapanir; "panoda gorev yok" sapmasi uretmez (ihsan+yasu 38 uyari).
+BILDIRIM_TETIKLERI = ("ORKESTRA-DEVRALMA",)
+
 #: Gunluk senkron log dosyasi (JSONL).
 LOG_DOSYA_ADI = "tetik_senk_log.jsonl"
 
@@ -115,6 +119,14 @@ def tetik_senk() -> dict[str, Any]:
         for tetik in tetikler:
             task_id = tetik.get("task_id")
             pano_bilgi = pano_durum_map.get(task_id)
+
+            if task_id in BILDIRIM_TETIKLERI:
+                if tetik.get("durum") in ACIK_TETIK_DURUMLARI:
+                    tetik["durum"] = "kapandi"
+                    tetik["kapanma_nedeni"] = "bildirim tetigi; panoda gorev olmaz (D-58)"
+                    duzeltilen.append(f"{task_id}: bildirim → kapandi")
+                tetikler_guncel.append(tetik)
+                continue
 
             if not pano_bilgi:
                 # Pano'da bu görev yok -> bekliyor kalır (bayat tetik).

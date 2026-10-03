@@ -783,9 +783,9 @@ python scripts/ajan_chat.py bulgula "Tasarım (D-192)" "Font boyut tutarsız" --
 
 | Kit adı     | SSOT dosyası                                                          | Bağlı belge | İlerleme tabloları     |
 | ----------- | --------------------------------------------------------------------- | ----------- | ---------------------- |
-| `ADMIN-KİT` | `AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md` (v2.6) | 6           | §7 matris · §14 revizyon |
+| `ADMIN-KİT` | `AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md` (v2.11) | 7           | §7 matris · §14 revizyon |
 
-**`ADMIN-KİT` bağlı belgeleri (§0.1):** PRD kaynağı `Huginn Data Insights (HUGIns).txt` §889-1687 · V9 bağlam `01_versiyon_9_baglam_dokumani.md` §16.4/§16.5 · `docs/ARCHITECTURE_DECISION_HYBRID_ADMIN.md` · `03_mimari/06_muninn_prd_vs_huginn_analiz.md` (bayat) · `CHANGELOG.md` · görev panosu `data/orchestrator/ADMIN_PANEL_PLAN_VE_GOREV_PAKETLERI_2026-09-22.md`
+**`ADMIN-KİT` bağlı belgeleri (§0.1):** PRD kaynağı `Huginn Data Insights (HUGIns).txt` §889-1687 · V9 bağlam `01_versiyon_9_baglam_dokumani.md` §16.4/§16.5 · `docs/ARCHITECTURE_DECISION_HYBRID_ADMIN.md` · `03_mimari/06_muninn_prd_vs_huginn_analiz.md` (bayat) · `CHANGELOG.md` · görev panosu `data/orchestrator/ADMIN_PANEL_PLAN_VE_GOREV_PAKETLERI_2026-09-22.md` · vizyon boşluğu [[Huginn Data Insights/docs/ADMIN_8SAYFA_VIZYON_KAPSAM]] (KK-12 A′, v2.8 · 2026-10-03)
 
 **Yeni kit açma.** SSOT dosyasına statü bloğu + `§0.1` + ajan kuralı satırı yazılır, kısa ad seçilir, bu tabloya satır eklenir. Onay: KAHİN.
 
@@ -4750,3 +4750,54 @@ unutulurdu. Yedek alındı, doğrulama yapıldı, ilerleme korundu.
 
 ### Referans
 [[D-332]] (TOCTOU) · [[D-333]] (hook kalıcılığı) · [[D-260]] (ölçülen yazılır)
+
+---
+
+## D-335 — Nöbet komutu: teslim sonrası bekleme kodlandı (KAHİN kararı 2026-10-03)
+
+### 1. Bulgu (ölçüm)
+KAHİN: *"görev raporu yazınca arkasında chate bakmaları gerekiyor … ajan
+araçları çok duruyor ve bekliyor sürekli döngüye girmesi gerekiyor."*
+
+D-312 yalnız **metin** kuralıydı: teslimden sonra `bak` + `oku` öneriyordu,
+ajan ikisini de atlayıp "bitti" diyebiliyordu (utku öz-eleştiri #2,
+2026-10-02). Ölçüm: 3 ajanın da son teslimlerinde posta/chat kontrolü
+**yok**; ihsan'ın 5 açık sorusu salih'te cevapsız bekliyordu.
+
+### 2. Kök neden
+Kural ajana "yap" diyordu ama **komut yoktu**. İki ayrı kanal (posta +
+`ajan-chat.jsonl` + `chat/messages.jsonl`) üç ayrı komutla okunuyordu;
+hiçbiri "iş gelene kadar bekle" yapmıyordu. Durmak en kolay yoldu.
+
+### 3. Karar
+`gorev_kutusu.py nobet --ajan <ajan>` — **bloklayan** tek komut.
+
+| Çıkış | Anlam | Ajan ne yapar |
+|---|---|---|
+| `0` | **İŞ VAR** (POSTA / SORU / CHAT satırları basılır) | Hemen yapar; cevap yazar veya `al` |
+| `3` | `--azami-dk` doldu (vars. 60 dk), iş yok | Oturumu kapatabilir; önce ihsan'a kısa rapor |
+
+- Üç kaynak tek turda: `trigger.bekleyen_tetikler` + `trigger.zincir_kalan`
+  (POSTA), `chat.ajan_acik_sorulari` (SORU), `chat/messages.jsonl`'de
+  `kime ∈ {ajan, hepsi}`, `yanit_alindi=false`, komut başlangıcından yeni (CHAT).
+- `--bekle` saniye (vars. 120). 3. boş turda ihsan'a durum raporu hatırlatılır.
+- `teslim` ve `basla` çıktıları artık **nobet**'e yönlendirir; `bak`/`oku`
+  tavsiyesi kaldırıldı.
+
+**Kural:** Teslimden sonra `nobet` çağrılmadan "bitti" denmez. `nobet`
+0 dönerse iş yapılır, 3 dönerse rapor yazılır. İnsan tetiği beklenmez.
+
+### 4. Uygulama
+- [`gorev_kutusu.py`](scripts/gorev_kutusu.py:388) `cmd_nobet`, `nobet_turu`, `_chat_yeni_mesajlar`.
+- [`tests/test_gorev_kutusu_nobet.py`](tests/test_gorev_kutusu_nobet.py) — 3 test (boş → 3; hepsi'ye chat → 0; kendi/cevaplanmış/eski mesaj iş değil).
+- `plans/_brief_sablon.md` ## Teslim bloğu → `nobet`.
+- Canlı ölçüm: `nobet --ajan ihsan` → 3 İŞ VAR (1 POSTA + 2 SORU); `nobet --ajan salih` → 7 İŞ VAR.
+
+### Öz-eleştiri
+`ajan-chat.jsonl` ve `chat/messages.jsonl` ikiliği hâlâ duruyor; nobet
+ikisini de okuyarak sorunu **örtüyor**, çözmüyor. Birleştirme ayrı borç
+(`BORC-CHAT-TEK-KANAL-01`, P2). `nobet` ajanın terminalini kilitler —
+paralel iş için ikinci terminal gerekir; bu bilinçli: durmak yerine bekle.
+
+### Referans
+[[D-312]] (öncül metin kuralı) · [[D-306]] (chat kimden zorunlu) · [[D-210]] (teslim kapısı)

@@ -17,7 +17,11 @@ baslayarak her yazma yolu bu kapidan gecirilir (sira BORC_DEFTERI'nde).
 """
 from __future__ import annotations
 
-# Kanonik sablon degerler. ALT dizgi olarak aranir (protokol/www/slash farketmez).
+import re
+
+# Kanonik sablon degerler. Alan adi SINIRINDA aranir: solunda harf/rakam/tire
+# olamaz (protokol/www/slash farketmez). Duz alt dizgi `wixsite.com`,
+# `epsiloncomposite.com` gibi gercek alanlari yakaliyordu (olcum 2026-10-04: 4 satir).
 SABLON_WEB = (
     "isim.org.tr",
     "osp.com.tr",
@@ -30,6 +34,14 @@ SABLON_WEB = (
 SABLON_EPOSTA = (
     "isim@", "ornek@", "example@", "test@", "info@isim", "mail@mail",
 )
+def desen(liste: tuple[str, ...] = SABLON_WEB) -> str:
+    """POSIX ERE + Python `re` ortak desen; goc 0052 trigger'i AYNI dizgiyi kullanir
+    (mandal: tests/test_website_sablon_kisiti.py)."""
+    return "(^|[^a-z0-9-])(" + "|".join(x.replace(".", r"\.") for x in liste) + ")"
+
+
+SABLON_WEB_DESEN = desen()
+
 # Yokluk 0 degildir, bostur (D-249): bu degerler "bilgi" sayilmaz.
 BOS_SAYILAN = ("", "-", "--", "yok", "bilinmiyor", "n/a", "na", "null", "none", "0")
 
@@ -43,9 +55,9 @@ def temizle(deger: str | None) -> str | None:
 
 
 def sablon_mu(deger: str | None, liste: tuple[str, ...] = SABLON_WEB) -> bool:
-    """Deger kanonik sablonlardan birini iceriyor mu."""
+    """Deger kanonik sablonlardan birini alan adi sinirinda iceriyor mu."""
     s = temizle(deger)
-    return bool(s) and any(x in s.lower() for x in liste)
+    return bool(s) and re.search(desen(liste), s.lower()) is not None
 
 
 def kabul(kayit: dict) -> tuple[dict, list[str]]:
@@ -86,4 +98,6 @@ if __name__ == "__main__":  # kirarak dogrulama (D-288)
                     "source_record_id": "x"})
     assert t2["website_domain"] == "https://gercekfirma.com.tr", t2
     assert s2 == [], s2
+    assert not sablon_mu("https://enerjilastik.wixsite.com"), "sinir: wixsite gercek"
+    assert sablon_mu("x.osp.com.tr") and sablon_mu("HTTP://WWW.ISIM.ORG.TR")
     print("yazma_kapisi: kapi calisiyor")

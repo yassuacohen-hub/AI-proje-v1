@@ -80,6 +80,24 @@ def test_senk_artisi_loga_yansir(tmp_path, monkeypatch):
     assert kalan["durum"] == "kapandi"
 
 
+def test_bildirim_tetigi_sapma_degil_kapanir(tmp_path, monkeypatch):
+    """D-58 ORKESTRA-DEVRALMA panoda gorev degildir; sapma uretmez, okununca kapanir."""
+    ts = _izole(
+        tmp_path,
+        monkeypatch,
+        tetik_satirlari=[
+            {"task_id": "ORKESTRA-DEVRALMA", "ajan": "yasu", "durum": "bekliyor", "tarih": "t"}
+        ],
+    )
+
+    rapor = ts.tetik_senk()
+    assert rapor["sapma"] == 0, "bildirim tetigi hayalet sayilmamali"
+    assert rapor["basarili"] == 1, "bildirim tetigi kapandi olarak duzeltilmeli"
+    kalan = json.loads((tmp_path / "triggers" / "yasu.jsonl").read_text(encoding="utf-8").splitlines()[0])
+    assert kalan["durum"] == "kapandi"
+    assert ts.main(["--gunluk"]) == 0
+
+
 def test_duzeltilemeyen_sapmada_exit_sifir_degil(tmp_path, monkeypatch):
     """Panoda karsiligi olmayan ACIL tetik duzeltilemez -> exit != 0 (sapma)."""
     ts = _izole(

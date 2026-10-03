@@ -5,7 +5,37 @@
 
 > D-219: tek blok, **üzerine yazılır**. Pano ile çelişirse pano üstündür.
 
-- **Konum (2026-10-03 18:35) — emir #50 turu (Mimir odak + F2/F3/SearchAPI/S1-S4/I1-I4 dağıtımı):**
+- **Konum (2026-10-03 22:35) — VERI-WEB-SITESI-ZENGINLESTIR-01 borç kapandı (goc 0052):**
+  - Path A: borç #2 (`tetik_senk.py` BILDIRIM_TETIKLERI) + borç #3 (sızıntı kök neden) kapandı; borç #1 (yasu `kapi_gecer` wire) hâlâ açık.
+  - utku'nun "firma web siteleri yok" sorusu **yanlış teşhis** çıktı: 7343 kayıt boş değildi, 2666'sı ŞABLON (isim.org.tr/osp.com.tr/ostimonline.com/vb., sahte). goc 0052: DB trigger `companies_website_sablon` + `yazma_kapisi.py` `SABLON_WEB_DESEN` birebir regex, mandal kırılarak doğrulandı. Sonuç: 0 şablon / 7343 boş / 2780 gerçek (4 gerçek alt-alan korundu, D-245/D-246).
+  - Çapraz link tam (D-184/D-218): [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]] ↔ sql ↔ test ↔ yedek script ↔ brief ↔ [[Huginn Data Insights/docs/BORC_DEFTERI]].
+  - utku brifi `VERI-WEB-SITESI-ZENGINLESTIR-01` güncellendi: kapsam artık "7343 boşa gerçek site + telefon/e-posta/adres enrich".
+  - Test: 3 hedef dosya (`test_website_sablon_kisiti`, `test_yazma_kapisi`, `test_tetik_senk_log`) yeşil. `test_kok_politikasi`/`test_dokuman_politikasi`'nde 6 ÖN-VAROLAN kırmızı (benim değişikliğim DEĞİL): D-221 kök temizlik (13 tek-kullanımlık dosya + `data` klasörü dış kökte), utku context 477>400 satır, D-220 ad kalıbı 16>15, D-272 `BORC-CHAT-TEK-KANAL-01` AGENTS.md'de var ama defterde yok.
+  - `docs/SSOT_ILERLEME_MATRISI.md` KASITLI DOKUNULMADI: o dosya Faz 2-6 tablo doluluğunu izler (`company_intelligence_scores` vb.), `companies.website_domain` zaten Faz 1 🟢 — veri kalitesi düzeltmesi hub+borç defterinde tutulur, matrix'e taşımak D-197 tek-durum kuralını ikinci yere taşır.
+  - **Sonraki adım:** commit+push (seçici staging) → yasu borç #1 brifi (`kapi_gecer` → `gorev_at.py` kapısı) → #6 kök temizlik raporu (13+2 dosya listesi hazır, `_ARSIV_tek_kullanimlik/`'e taşınacak).
+  - **Görev:** `VERI-WEB-SITESI-ZENGINLESTIR-01` (utku, güncellendi) · `ALTYAPI-GOREV-AT-KAPI-01` (yasu, henüz açılmadı) · **Son okunan karar:** `D-326`
+- **Konum (2026-10-03 21:30) — #26 TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01 açıldı:**
+  - Brief `plans/brief_salih_TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01.md` yazıldı (bulgu 109: conftest.py
+    pano snapshot-restore, suite ortasında başka ajanın gerçek yazımını eziyor).
+  - `gorev_at.py at` D-57 başlık kalıbına **iki kez takıldı**: ALAN serbest metin değil, sabit liste
+    `("UI","API","VERI","TEST","DOC","ALTYAPI","ORKESTRA")` (`scripts/gorev_at.py:76`) + regex `->` çıktı
+    kısmı somut dosya/artefakt ister, cümle değil. Çözüm: `[TEST] conftest.py duzelt -> tests/conftest.py (3s)`.
+  - `salih`'e P1 atandı, `tests/conftest.py` kilitlendi, chat `koordinasyon` tetiği gönderildi (21:30).
+  - yasu'nun D-251 `kaynak_adi` yeşil kanıtı **hâlâ yok** (chat_al + bulgu_defteri taraması negatif) → #25 beklemede.
+  - **Sonraki adım:** #27 Mimir 2026-10-04 16:43 kapısı izle, #25'i periyodik kontrol et.
+- **Konum (2026-10-03 21:25) — Mesaj 6 Adım 3 tamam (liderlik + yorum):**
+  - `scripts/ajan_chat.py`: `liderlik` (done-görev+bulgu+mesaj sayımı, mimir hariç sıralama) ve
+    `yorum` (mesaja yanıt, `cevap_index`, max 2/kişi/hedef) komutları eklendi. `chat_gonder.py`
+    `MESAJ_TIPLERI` içine `"yorum"` + `cevap_index` param (önceki oturumda).
+  - `tests/test_ajan_chat_liderlik_yorum.py` 3 test yeşil + ilgili 28 test toplam yeşil (regresyon yok).
+  - Bulgu kaydı `MESAJ-6-LIDERLIK-YORUM-01` + chat `bilgi` tipinde `hepsi`'ye duyuruldu.
+- **Önceki konum (2026-10-03 20:08) — B seçeneği + delik kapatma + bulgu 105-109 turu:**
+  - `arac_dongusu.py` sertleştirildi (`_WEB_TEXT_RX` kapanmamış blok, `_SAYISAL_ETIKET_RX`, `_ozel_ag` nokta/`.localhost`/sayısal etiket) → `tests/test_arac_dongusu.py` **38/38**.
+  - salih brief **Faz C** (I5 webtext gömülü emir, I6 GETIR izinsiz adres; JSON 46); I7-I8 ertelendi (ürün sahibi B). utku Mimir brief'ine "yamayı geri alma" uyarısı.
+  - Bulgu 105-108 karar aldı: 106/108 kapandı (36/36), 107 → kabul şartı 3 revize (karar belgesi), 105 → yeni görev `VERI-INGEST-ASO-GLOB-01` (utku P1, brief var, ŞART: patch öncesi A/B öneri chat'e; tetik yok, SCRAPE-005 sonrası). `pipeline.py` SCRAPE-005 dosyalarına eklendi + kilit utku (`tb.gorev_guncelle(dosyalar=...)` + `tb._lock_alan`).
+  - **Bulgu 109 (ihsan 🔴, kapandı):** pano 19:25'te 134→131 geri sarıldı; `git checkout` 19:50'de 7 sn içinde tekrar ezildi (tam suite pytest 19:49-20:0x koşuyordu). 20:03 checkout → 134 sabit. Kalıcı çözüm görevi önerisi `TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01` (salih) — henüz açılmadı.
+  - **Ürün sahibi mesaj 6 (liderlik tablosu / demokratik ödül-ceza / yorum):** veri ölçüldü — pano done utku 46 / yasu 31 / ihsan 13 / salih 1; bulgu yazan utku 48 / yasu 17 / ihsan 3; chat kapat **hiç kullanılmamış** (yanit_alindi False çoğunlukta). Cevap raporda; karar bekleniyor.
+- **Önceki konum (2026-10-03 18:35) — emir #50 turu (Mimir odak + F2/F3/SearchAPI/S1-S4/I1-I4 dağıtımı):**
   - **salih CEVAP VERDİ** chat #9 `2026-10-03T18:01:20` ("V4 okundu, mimir_servis.py yazılıyor, 7. koşu task kapanınca").
     D-210 sayacı durdu. Dosya **hâlâ yok**; son tarih **2026-10-04 16:43 değişmedi** → devralma TETİKLENMEDİ.
     salih hafızası "17:27" diyor, chat 18:01 — chat üstündür. Ayrıca chat #7 (03:20) N12: 36 senaryo 2 kırmızı (kilavuz-01, mesru-02) NO-GO, commit `4f0c69e`.
@@ -67,6 +97,9 @@
 | Belirti | Kök neden | Çözüm |
 |---|---|---|
 | `[kilit] DURDU: n dosya yasu disinda bir ajanin kilidinde` | Dosya başka ajanın kilidinde, git kimliğim `Yasua` → kanca beni `yasu` sanıyor | `birak <sahip> <dosya>` → commit → `kilitle <sahip> <task> <dosya>`. `--no-verify` YASAK (D-309/5) |
+| Panoya yazdım, dakikalar sonra görev yok / `git checkout` anında geri dönüyor | Tam suite `pytest tests/` koşarken `conftest.py` KORUMALI fixture'i her testte eski snapshot'ı geri yüklüyor; dışarıdan yazımı "test kalıntısı" sanıyor | Önce `powershell Get-CimInstance Win32_Process` ile pytest var mı bak; bitince `git checkout HEAD -- data/orchestrator/task_board.json`, 20 sn sonra sayımı tekrar ölç |
+| `gorev_at.py guncelle` ile `dosyalar` değişmiyor (flag yok) | CLI'da yok; `tb.gorev_guncelle(**fields)` kabul ediyor | `python -c` ile `tb.gorev_guncelle(id, dosyalar=[...])` + `tb._lock_alan(sahip, dosya, id)` |
+| Çok satırlı `python -c` cmd'de sessiz boş çıktı | cmd satır sonlarını yutuyor | Geçici `scripts/_olc_*.py` yaz, koş, sil |
 | Tek koşuda oran yüksek çıkıyor, sonra düşüyor | Model kararsız; tek koşu kanıt değil | Her ölçüm `--tekrar 3`; `kararsiz` alanı ayrı GO kapısı |
 | Log'dan yeniden puanlama yanlış sonuç veriyor | `yanit_kesit` kısa; red kalıbı kesitin dışında kalıyor | `LOG_KESIT = 2000` + mandal |
 | Model Türkçe düşünmesini ekrana yazıyor ama araç görmüyor | `DUSUNME_KALIPLARI` sadece İngilizce | Borç #71 — Türkçe kökler + yanlış pozitif mandalı |
@@ -84,6 +117,7 @@
 | Reddedilen görev `onay-bekleyen`de hâlâ listeleniyor | `reddet()` kuyruk+pano güncelliyor, tetik dosyasındaki `teslim` kaydına dokunmuyordu (`onayla()` ile simetri yoktu) | `38c8d56`: `reddet()` tetik `teslim`→`alindi`; eski kayıt için `scripts/tetik_teslim_geri_al.py <ajan> <task_id> "<neden>"` |
 | `gorev_at.py at` rc=7 `Brif sablona uygun degil` | D-217 kapısı (`brief_denetim`) başlık adlarını birebir arar: `## Adımlar`/`## Faz A`, `## Kabul kriteri`, `## Ajan chat zorunlu` + `ajan_chat.py` komutu, ≥2 wikilink | Brif `plans/_brief_sablon.md`'den kopyalanır; kendi başlık uydurma (`## Yapılacak` geçmez) |
 | `gorev_at.py at` rc=1 `Brief kilitli dosya bildiriyor ama gorev kilitsiz` | Brifte `**Kilitli dosya:**` varsa `--dosya` zorunlu | `toplu_gorev_at.py` JSON'una `"dosya": "a.py,b.py"` (virgülle) |
+| "İş bitti" dedim ama commit/push/SSOT/matrix/hafıza güncellemedim | Kapanış ritüeli tek checklist değil, zihinde dağınık adımlar | Her borç kapanışı sabit sıra: test yeşil → git commit+push → SSOT/matrix kapsam kontrolü (gerekmiyorsa neden yazılır) → kendi context dosyası güncellenir |
 
 ## Öz-eleştiri (KALICI — SİLİNMEZ, arşive taşınmaz)
 
@@ -91,6 +125,14 @@
 > silmesinler" — bu bölüm 400 satır tavanına dahil değil, archive rotasyonunda asla taşınmaz.
 > En yeni madde en üstte, biriktirilir.
 
+- **2026-10-03 — Kapanış ritüelini atladım, kullanıcı hatırlattı:** goc 0052'yi kapattım,
+  hub/brief/BORC_DEFTERI/çapraz linkleri yaptım ama commit+push+SSOT/matrix kontrolü+kendi hafıza
+  güncellemesini yapmadan "bitti" havasına girdim. Kullanıcı *"push ve commit yapmadın ssot ve
+  matrix ilerleme kendi hafızanı güncelle"* diye uyarınca fark ettim. **Öğrendiğim:** D-309/1
+  deseni (yazılmayanı yazılmış gibi bırakma) burada "kapandı" deyip ritüeli es geçmek olarak
+  tekrarladı — teknik iş bitti ama iz bırakma işi bitmedi. **Bundan sonra:** her borç kapanışında
+  sabit sıra (test → commit+push → SSOT/matrix kapsam kontrolü → kendi context) bitmeden
+  "tamamlandı" denmez.
 - **2026-10-03 — Kritik bildirim ~12 saat okunmadı:** utku `ORCH-SIMULASYON-BLOK-01`'i 01:44'te
   kritik açtı; ben ~13:30'a kadar görmedim, bu arada hiçbir ajan `basla` yapamadı. Orkestratörün
   gelen kutusunu oturum başında açmaması = tüm takımın boşa beklemesi. **Öğrendiğim:** blokaj
