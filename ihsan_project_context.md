@@ -5,6 +5,14 @@
 
 > D-219: tek blok, **üzerine yazılır**. Pano ile çelişirse pano üstündür.
 
+- **Konum (2026-10-04 00:55) — ALTYAPI-ODIN-UYARLAMA-01 review'a devredildi:**
+  - Brief'in 5 adımından 2'si (prompt-injection senaryoları, maskeleme_odin() kodu) önceden tamamlanmış bulundu; 2 eksik doc yazıldı: `docs/ODIN_DEPLOYMENT_ARCHITECTURE.md`, `docs/ODIN_SECURITY_CHECKLIST.md`.
+  - Kanıt: `pytest --doctest-modules src/company_master/sunum.py -q -k maskeleme_odin` → 1 passed. Checklist'teki ilk yanlış komut (`python -m doctest`, ImportError veriyordu) D-260 gereği gerçek çalışan komutla düzeltildi.
+  - Ajan chat: `ajan_chat.py ac` + `chat_gonder.py --to yasu` ikisi de gönderildi (ikincisi `HUGINN_AJAN` set edilmeden "kimlik cozulemedi" verdi — bu makinede ihsan için `ajan_ihsan.json` yok, workaround: `set HUGINN_AJAN=ihsan`, açık borç olarak rapora yazıldı).
+  - Rapor: `data/orchestrator/ALTYAPI-ODIN-UYARLAMA-01_rapor_2026-10-07_orkestrator.md`. Pano: durum `aktif` → `review` (kabul kriteri "YASU denetim onayı" henüz kapanmadı).
+  - Commit+push: `b9a9528b` → `chore/monorepo-merge` (6 dosya, 45 pre-commit testi yeşil).
+  - **Sonraki adım:** YASU checklist'i D-310 ile karşılaştırıp GO/NO-GO verince görev `done`'a çekilir. Yeni oturum: sıradaki kuyruktan (SCRAPE-006-QUALITY-AUDIT, SCRAPE-007-FINAL-REPORT, TEST-ODIN-REDTEAM-S1S4-I1I4-01, TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01) öncelik seçilir.
+  - **Öz-eleştiri:** `chat_gonder.py` kimlik hatasını ilk denemede atlamadım, ikinci komutta tekrar karşılaştım — `HUGINN_AJAN` ihtiyacını ilk hata mesajından hemen genelleştirip commit/push öncesi de uygulayabilirdim (commit de aynı hatayı verdi, ikinci kez şaşırdım). Ders: bir kimlik hatası görülünce o oturumun geri kalanında env'i baştan set etmek daha verimli.
 - **Konum (2026-10-04 00:38) — oturum kapanışı: arşiv + review + pano kontrolü bitti:**
   - B seçeneği uygulandı: D-221 kök temizlik 3 kalemi arşive taşındı, mandal 7/7 yeşil.
   - Chat/review taraması: 8 review görevi kapandı (SCRAPE-004-QWEN-SINIFLANDIRMA, ALTYAPI-OPENROUTER-ARAC-01, VERI-PAKET-FIYAT-SENKRON-01, UI-ADMIN-CRAWL-TASI-35, UI-ADMIN-ACIKLAMA-METIN-37, UI-ADMIN-REHBER-ALAN-38, ALTYAPI-GOREV-AT-KAPI-01, VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01) — her biri taze temel ölçüme (28 başarısız, 5297 başarılı) karşı doğrulanıp kapatıldı, hiçbirinden kırmızı çıkmadı.
