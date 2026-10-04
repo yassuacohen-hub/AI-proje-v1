@@ -210,3 +210,23 @@ def test_cmd_onay_bekleyen_var(tmp_path):
     args = argparse.Namespace()
     rc = gk.cmd_onay_bekleyen(args)
     assert rc == 0
+
+
+# ---- _tetik_dengele: D-DENGE-TARIH-BAGIMLILIK-01 (2026-10-04) ----
+
+def test_tetik_dengele_gelecek_ve_bagimlilik_ertelenir_hazir_tetiklenir(tmp_path):
+    # bagimlilik bitmemis -> DENGE-DEP ertelenir (ts asamasinda elenir)
+    tb.gorev_ekle("BEKLE-DEP", "bekle", "salih", "P1")
+    tb.gorev_ekle("DENGE-DEP", "denge dep", "salih", "P1")
+    tb.gorev_guncelle("DENGE-DEP", dependencies=["BEKLE-DEP"])
+    # gelecek tarihli -> ertelenir
+    tb.gorev_ekle("DENGE-GELECEK", "denge gelecek", "ihsan", "P1", baslangic="2099-01-01")
+    # hazir (gecmis tarih, bagimliliksiz) -> tetiklenir
+    tb.gorev_ekle("DENGE-HAZIR", "denge hazir", "utku", "P1", baslangic="2020-01-01")
+
+    secilen_idler = {g["task_id"] for g in gk._tetik_dengele(kuru=True)}
+
+    assert "DENGE-DEP" not in secilen_idler
+    assert "DENGE-GELECEK" not in secilen_idler
+    assert "DENGE-HAZIR" in secilen_idler
+    assert "BEKLE-DEP" in secilen_idler

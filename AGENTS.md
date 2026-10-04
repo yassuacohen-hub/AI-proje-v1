@@ -5121,3 +5121,40 @@ Daha hızlı yol: bu kararı utku'nun bulgusunu beklemeden, rapor yazıldığı 
 
 ### Referans
 [[D-262]] (GOMAP/gomap.be deseni, aynı filtre mantığı) · [[VERI-WEB-SITESI-ZENGINLESTIR-01]]
+
+## D-344 — DENGE tarih/bağımlılık kontrolsüz tetikliyordu; `hazir_mi()` kapısı eklendi (2026-10-04)
+
+### 1. Bulgu (ölçüm)
+[`_tetik_dengele()`](Huginn Data Insights/scripts/gorev_kutusu.py:874) bos kuyruklu
+ajana `durum=="plan"` olan HER işi tetikliyordu — `baslangic` gelecekte olsa da,
+`dependencies` bitmemiş olsa da. Kanıt: tetik kayıtlarında `uyari_sayisi` canavarca
+büyümüş —
+
+| task_id | ajan | baslangic | dependencies | uyari_sayisi (kapatılmadan önce) |
+|---|---|---|---|---|
+| `SCRAPE-006-QUALITY-AUDIT` | salih | 2026-10-11 (gelecek) | `SCRAPE-001-DOCKER-SETUP` | 374 |
+| `SCRAPE-007-FINAL-REPORT` | ihsan | 2026-10-14 (gelecek) | `SCRAPE-005...`, `SCRAPE-006...` | 170 |
+
+Üçüncü şüpheli (`TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01`) ölçüldü, **hariç tutuldu**:
+`baslangic: 2026-10-03T21:29:46` (geçmiş/vadesi gelmiş), `dependencies` alanı yok →
+yeni kapıdan da geçerli bir aday, dokunulmadı.
+
+### 2. Kural
+`_tetik_dengele()` artık `hazir_mi(g)` kapısından geçmeyen işi aday listesine
+almaz: `baslangic` tarihin ilk 10 karakteri bugünden büyükse VEYA
+`dependencies` listesindeki herhangi bir `task_id` `durum != "done"` ise iş
+ertelenir — kuyruk boş olsa bile tetik düşmez.
+
+### 3. Uygulama
+- [`gorev_kutusu.py:874-954`](Huginn Data Insights/scripts/gorev_kutusu.py:874) — `hazir_mi()` eklendi, `ts` filtre listesine bağlandı.
+- [`test_gorev_kutusu_cli.py`](Huginn Data Insights/tests/test_gorev_kutusu_cli.py:216) — `test_tetik_dengele_gelecek_ve_bagimlilik_ertelenir_hazir_tetiklenir` (gelecek tarihli, bağımlılığı açık, hazır üç iş birlikte test edilir).
+- 2 stale tetik kapatıldı (`durum: kapandi`, D-227 öncesi defalarca kullanılan `kapanma_nedeni` deseniyle): [`salih.jsonl`](Huginn Data Insights/data/orchestrator/triggers/salih.jsonl:5) `SCRAPE-006-QUALITY-AUDIT`, [`ihsan.jsonl`](Huginn Data Insights/data/orchestrator/triggers/ihsan.jsonl:89) `SCRAPE-007-FINAL-REPORT`.
+
+### 4. Öz-eleştiri
+Daha ucuz çözüm aynı sonucu verirdi mi? Hayır — `hazir_mi()` kontrolü zaten
+panoda var olan `baslangic`/`dependencies` alanlarını okuyor, yeni alan/şema
+gerekmedi; en kısa diff bu oldu. Atlanılan: `kuyruk` birikme hızı metriği
+(kaç gün sonra tekrar tıkanır) — izlenmiyor, ileri iş.
+
+### Referans
+[[D-68]] (Tetik↔Pano tutarlılığı) · [[SCRAPE-006-QUALITY-AUDIT]] · [[SCRAPE-007-FINAL-REPORT]]

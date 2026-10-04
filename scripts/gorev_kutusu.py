@@ -18,6 +18,7 @@ import json
 import re
 import subprocess
 import sys
+from datetime import date
 from pathlib import Path
 
 _KOK = Path(__file__).resolve().parents[1]
@@ -880,6 +881,12 @@ def _tetik_dengele(kuru: bool = False, sessiz: bool = False) -> list:
     ajanlara. Aktif/review gorevlere, dolu kuyruklara ve zaten tetikli
     gorevlere DOKUNULMAZ. Bu dagitimdir, gorev transferi DEGILDIR -
     sahiplik degismez.
+
+    D-DENGE-TARIH-BAGIMLILIK-01 (2026-10-04): `baslangic` gelecekte olan
+    veya `dependencies` icinde henuz `done` olmayan bir is varsa, ajanin
+    kuyrugu bos olsa da tetik dusurulmez. Eskiden bu kontrol yoktu; plan
+    isleri gunler/hafta once tetiklenip yuzlerce UYARI biriktiriyordu
+    (olcum: SCRAPE-006/007, 2026-10-04 — bkz. AGENTS.md karar kaydi).
     """
     def bekleyen(ajan: str) -> list:
         try:
@@ -887,8 +894,21 @@ def _tetik_dengele(kuru: bool = False, sessiz: bool = False) -> list:
         except Exception:
             return []
 
+    bugun = date.today().isoformat()
+    durumlar = {g.get("task_id"): g.get("durum") for g in tb.gorev_listesi()}
+
+    def hazir_mi(g: dict) -> bool:
+        baslangic = str(g.get("baslangic") or "")[:10]
+        if baslangic and baslangic > bugun:
+            return False                  # gelecek tarihli is, henuz sira gelmedi
+        for dep in g.get("dependencies") or []:
+            if durumlar.get(dep) != "done":
+                return False              # bagimlilik bitmemis
+        return True
+
     ts = [g for g in tb.gorev_listesi()
-          if g.get("durum") == "plan" and g.get("sahip") in AJANLAR_TUM]
+          if g.get("durum") == "plan" and g.get("sahip") in AJANLAR_TUM
+          and hazir_mi(g)]
     kuyruk = {a: len(bekleyen(a)) for a in AJANLAR_TUM}
 
     adaylar: list = []
