@@ -19,14 +19,49 @@ from company_master.db.yazma_kapisi import (  # noqa: E402
     SABLON_WEB, kabul, sablon_mu, temizle,
 )
 
-# D-303 olcumu: 23 dosya kanonik listeyi kopyaliyor. Tavan yalniz kucuulur.
-TAVAN_KOPYA = 23
+#: D-303 mandalinin ANLAM olcumu. Onceki kural herhangi bir IZ dizgisini
+#: iceren dosyayi sayiyordu; OSTIM portal adresleri (kazinacak siteler) de
+#: o dizgileri icerdigi icin 23->24 cikiyordu ve gercek kopya sayilmadan
+#: meşru is yasaklaniyordu.
+#:
+#: GERCEK KOPYA IMZASI: ayni satIRDA birden fazla YER TUTUCU adres.
+#: - `isim.org.tr` = "isim" (ad), `example.com`, `site.com`, `domain.com`
+#:   -> hicbir gercek firma bunlari kullanmaz; hepsi SABLON_WEB'in parcasi.
+#: - `ostim.org.tr`, `ostimonline.com`, `ostimistihdam.com`, `osp.com.tr`
+#:   -> OSTIM'nin GERCEK portal adresleri; kazinacak sitelerdir (D-303
+#:      mandali bunlari saymamalidir).
+#: Ayri satirlarda tekil gecen yer tutucu (orn. User-Agent e-postasi:
+#: research@example.com) kopya degildir.
+YER_TUTUCU = ("isim.org.tr", "example.com", "site.com", "domain.com")
+#: Esik: bu kadar yer tutucu AYNI DOSYADA bulununca kopya sayilir.
+#: Neden 3 ve neden dosya genelinde:
+#:   - kanonik SABLON_WEB'in 4 yer tutucusu birden vardir (isim.org.tr,
+#:     example.com, site.com, domain.com); kopya bunlari tasir.
+#:   - OSTIM'nin GERCEK portal listeleri en fazla 1-2 yer tutucu gecer
+#:     (olcum: ostim_scraper.py yalniz `isim.org.tr` + User-Agent icindeki
+#:     `example.com` = 2). Kazinacak siteler yaslanmaz.
+#:   - SATIR BASI olcum HATALIYDI: cok satirlik kopya (en yaygin Python
+#:     stili) kaciyordu. Kirma kanitiyla olculdu ve duzeltildi.
+KOPYA_ESIK = 3
+# D-303 olcumu: gercek kopya sayisi. Tavan yalnizce artarsa bir kanitla.
+# Rasgele bir rakam DEGIL: olcumle konur (asagida), kural kendini gerekce
+# yorumuyla birlikte tutar.
+TAVAN_KOPYA = 0
 ATLA = {".venv", ".git", "node_modules", "__pycache__", "backups",
         "_ARSIV_tek_kullanimlik", "tests"}
 IZ = ("isim.org.tr", "osp.com.tr", "ostimonline", "ostimistihdam")
 
 
 def _kopyalayanlar() -> list[str]:
+    """SABLON_WEB'in yer tutucu adreslerini tasyan dosyalar.
+
+    Onceki olcum IZ dizgilerinden birinin dosyada gecmesi yeterli sayiyordu;
+    OSTIM portal listeleri de o dizgileri icerdigi icin meşru kazınma
+    hedefleri kopya sanildi (23 -> 24) ve mandal kirmayi ONLEMDI.
+
+    Artik olcut: dosyada en az KOPYA_ESIK (3) YER TUTUCU adres. Tekil
+    gecisler (orn. User-Agent e-postasi `research@example.com`) sayilmaz.
+    """
     bulgu = []
     for p in KOK.rglob("*.py"):
         if ATLA & set(p.parts) or p.name == "yazma_kapisi.py":
@@ -35,7 +70,7 @@ def _kopyalayanlar() -> list[str]:
             m = p.read_text(encoding="utf-8", errors="replace")
         except OSError:
             continue
-        if any(i in m for i in IZ):
+        if sum(1 for y in YER_TUTUCU if y in m) >= KOPYA_ESIK:
             bulgu.append(p.relative_to(KOK).as_posix())
     return sorted(bulgu)
 

@@ -9,11 +9,15 @@ Komutlar:
   oku           — Sorunları oku (--task_id, --son)
   ozet          — Sorunların özetini göster (--durum)
   bulgula       — Tasarım eleştirisi kaydı (konu, bulgu, --link)
+  yorum         — Mesaja yanıt ekle (kime, cevap_index, mesaj) (Mesaj 6 · D-3xx)
+  liderlik      — Ajan liderlik tablosu: görev+bulgu+mesaj sayısı (Mesaj 6 · Yol A)
 
 Örnek:
   python scripts/ajan_chat.py ac ihsan UI-01 "Button hover eksik"
   python scripts/ajan_chat.py ozet --durum acik
   python scripts/ajan_chat.py bulgula "Tasarım (D-192)" "Font boyut tutarsız" --link "data/..."
+  python scripts/ajan_chat.py yorum utku 42 "Kabul, SLA'yi 15dk yaptim" --kimden ihsan
+  python scripts/ajan_chat.py liderlik
 """
 
 import argparse
@@ -27,16 +31,33 @@ if sys.platform == "win32":
 _KOK = Path(__file__).resolve().parent.parent
 if str(_KOK / "src") not in sys.path:
     sys.path.insert(0, str(_KOK / "src"))
+if str(_KOK / "scripts") not in sys.path:
+    sys.path.insert(0, str(_KOK / "scripts"))
 
 from company_master import chat
+from company_master.orchestrator import task_board as tb  # noqa: E402
+from company_master.orchestrator import trigger  # noqa: E402
+import bulgu_defteri  # noqa: E402  (scripts/ — liderlik bulgu sayimi icin)
+import chat_al  # noqa: E402  (scripts/ — liderlik mesaj sayimi icin)
+import chat_gonder  # noqa: E402  (scripts/ — yorum yazimi icin, tek-yazici D-211)
 
 
 def cmd_ac(args: argparse.Namespace) -> int:
     """Sorun aç."""
     try:
+        # D-336: --kimden bosken sabit "orkestrator" YAZILMAZ (ORCH-KIMLIK-ZINCIRI-01
+        # deseni, D-306 ile ayni kalip — yorum komutuyla tutarli).
+        kimden_ham = (args.kimden or "").strip() or (chat_gonder.ajan_kimligi() or "")
+        if not kimden_ham:
+            print(
+                "❌ Hata: gonderen ajan belirsiz. --kimden <ajan> verin veya "
+                "HUGINN_AJAN ortam degiskenini tanimlayin.",
+                file=sys.stderr,
+            )
+            return 1
         # D-287: ac yanlis kapi olabilir. Baskasinin acik kaydi varsa uyar
         # ama ENGELLEME (PO karari: uyari yeter).
-        sahipler = chat.acik_sahipler(args.task_id, args.kimden or "orkestrator")
+        sahipler = chat.acik_sahipler(args.task_id, kimden_ham)
         if sahipler:
             print(
                 f"⚠️  {args.task_id} altinda acik kayit var: {', '.join(sahipler)}. "
@@ -48,7 +69,7 @@ def cmd_ac(args: argparse.Namespace) -> int:
             task_id=args.task_id,
             sorun=args.sorun,
             cozum=args.cozum or "",
-            kimden=args.kimden or "orkestrator",
+            kimden=kimden_ham,
             onem=args.onem or "orta",
         )
         print(f"✅ Sorun kaydedildi: {satir['kimden']} → {satir['ajan']} | {satir['task_id']} ({satir['timestamp']}) [önem={satir['onem']}]")
@@ -167,6 +188,93 @@ def cmd_bulgula(args: argparse.Namespace) -> int:
         return 1
 
 
+def cmd_yorum(args: argparse.Namespace) -> int:
+    """Mesaja yanıt ekle (Mesaj 6 · en fazla 2 yorum / kişi / hedef mesaj)."""
+    try:
+        kimden_ham = (args.kimden or "").strip()
+        if not kimden_ham:
+            kimden_ham = chat_gonder.ajan_kimligi()
+        kimden_norm = trigger.ajan_normalize(kimden_ham)
+        mevcut = [
+            k for k in chat_al._satirlari_yukle()
+            if k.get("type") == "yorum"
+            and k.get("cevap_index") == args.cevap_index
+            and k.get("kimden") == kimden_norm
+        ]
+        if len(mevcut) >= 2:
+            print(
+                f"❌ Hata: {kimden_norm} bu mesaja zaten 2 yorum yazdı (satır {args.cevap_index}).",
+                file=sys.stderr,
+            )
+            return 1
+        kayit = chat_gonder.gonder(
+            kime=args.kime,
+            tip="yorum",
+            mesaj=args.mesaj,
+            task_id=args.task_id or "",
+            kimden=args.kimden or None,
+            cevap_index=args.cevap_index,
+        )
+        print(
+            f"✅ Yorum gönderildi: {kayit['kimden']} → {kayit['kime']} "
+            f"(satır {args.cevap_index}) {kayit['tarih']}"
+        )
+        return 0
+    except Exception as e:
+        print(f"❌ Hata: {e}", file=sys.stderr)
+        return 1
+
+
+def liderlik_verisi() -> list[dict]:
+    """Gorev/bulgu/mesaj sayimini hesaplar, azalan siralar (Mesaj 6 · Yol A).
+
+    CLI (`cmd_liderlik`) ve Streamlit admin paneli ortak kullanir — tek hesap, iki gorunum.
+    """
+    ajanlar = [a for a in trigger.AJANLAR if a != "mimir"]
+
+    gorev_sayim: dict[str, int] = {a: 0 for a in ajanlar}
+    for g in tb.gorev_listesi("done"):
+        sahip = g.get("sahip")
+        if sahip in gorev_sayim:
+            gorev_sayim[sahip] += 1
+
+    bulgu_sayim: dict[str, int] = {a: 0 for a in ajanlar}
+    for satir in bulgu_defteri._veri_satirlari(bulgu_defteri._coz(None)):
+        alanlar = [p.strip() for p in satir.split("|")]
+        if len(alanlar) >= 3 and alanlar[2] in bulgu_sayim:
+            bulgu_sayim[alanlar[2]] += 1
+
+    mesaj_sayim: dict[str, int] = {a: 0 for a in ajanlar}
+    for m in chat_al._satirlari_yukle():
+        kimden = m.get("kimden")
+        if kimden in mesaj_sayim:
+            mesaj_sayim[kimden] += 1
+
+    siralama = sorted(
+        ajanlar,
+        key=lambda a: (gorev_sayim[a], bulgu_sayim[a], mesaj_sayim[a]),
+        reverse=True,
+    )
+    return [
+        {"ajan": a, "gorev": gorev_sayim[a], "bulgu": bulgu_sayim[a], "mesaj": mesaj_sayim[a]}
+        for a in siralama
+    ]
+
+
+def cmd_liderlik(args: argparse.Namespace) -> int:
+    """Ajan liderlik tablosu: done görev + bulgu satırı + mesaj sayısı (Mesaj 6 · Yol A)."""
+    try:
+        satirlar = liderlik_verisi()
+        print("🏆 Liderlik Tablosu (Mesaj 6 · Yol A)")
+        print(f"{'#':<3}{'Ajan':<10}{'Gorev(done)':>14}{'Bulgu':>8}{'Mesaj':>8}")
+        for i, s in enumerate(satirlar, 1):
+            print(f"{i:<3}{s['ajan']:<10}{s['gorev']:>14}{s['bulgu']:>8}{s['mesaj']:>8}")
+        return 0
+    except Exception as e:
+        print(f"❌ Hata: {e}", file=sys.stderr)
+        return 1
+
+
 def main(argv: list[str] | None = None) -> int:
     """Ana CLI entry point."""
     ap = argparse.ArgumentParser(
@@ -184,7 +292,7 @@ def main(argv: list[str] | None = None) -> int:
     p_ac.add_argument("task_id", help="Görev ID (örn. UI-01)")
     p_ac.add_argument("sorun", help="Sorun açıklaması (1-200 karakter)")
     p_ac.add_argument("--cozum", "-c", help="İlk çözüm önerisi (isteğe bağlı)")
-    p_ac.add_argument("--kimden", "-k", default="orkestrator", help="Gönderen ajan adı (varsayılan: orkestrator)")
+    p_ac.add_argument("--kimden", "-k", default="", help="Gönderen ajan adı (boşsa kimlik zinciri çözer, D-336)")
     p_ac.add_argument(
         "--onem", "-o",
         choices=["kritik", "yuksek", "orta", "dusuk"],
@@ -234,6 +342,19 @@ def main(argv: list[str] | None = None) -> int:
     p_bulgula.add_argument("bulgu", help="Eleştiri/görüş metni")
     p_bulgula.add_argument("--link", "-l", help="İlgili dosya/karar linki")
     p_bulgula.set_defaults(func=cmd_bulgula)
+
+    # yorum: Mesaja yanıt (Mesaj 6)
+    p_yorum = subparsers.add_parser("yorum", help="Mesaja yanıt ekle (max 2/kişi/hedef)")
+    p_yorum.add_argument("kime", help="Alıcı ajan (veya hepsi)")
+    p_yorum.add_argument("cevap_index", type=int, help="Hedef mesajın satır no'su (chat_al _satir)")
+    p_yorum.add_argument("mesaj", help="Yorum metni")
+    p_yorum.add_argument("--task-id", "-i", default="", help="İlgili görev kimliği (opsiyonel)")
+    p_yorum.add_argument("--kimden", "-k", default="", help="Gönderen ajan (boşsa kimlik zinciri çözer)")
+    p_yorum.set_defaults(func=cmd_yorum)
+
+    # liderlik: Ajan liderlik tablosu (Mesaj 6 · Yol A)
+    p_liderlik = subparsers.add_parser("liderlik", help="Ajan liderlik tablosu")
+    p_liderlik.set_defaults(func=cmd_liderlik)
 
     args = ap.parse_args(argv)
 

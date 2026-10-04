@@ -4801,3 +4801,48 @@ paralel iş için ikinci terminal gerekir; bu bilinçli: durmak yerine bekle.
 
 ### Referans
 [[D-312]] (öncül metin kuralı) · [[D-306]] (chat kimden zorunlu) · [[D-210]] (teslim kapısı)
+
+## `ajan_chat ac` sabit kimlik + D-210 kapıları ikinci dosyayı görmüyordu (D-336 — KAHİN kararı 2026-10-04)
+
+### 1. Bulgu
+ORCH-KIMLIK-ZINCIRI-01 (yasu bulgusu): iki ayrı chat dosyası var —
+`ajan-chat.jsonl` (`company_master/chat.py`, `ajan_chat.py` CLI) ve
+`chat/messages.jsonl` (`chat_gonder.py`). İki ayrı hata:
+a) `ajan_chat.py ac` komutu `--kimden` boşken sabit `"orkestrator"` yazıyordu
+   (D-306'nın `chat_gonder.py`'de düzelttiği AYNI hata, `ajan_chat.py`'de hâlâ vardı).
+b) `gorev_kutusu.py` D-210 KAPISI 1 (`basla`) ve KAPISI 2 (`teslim`) sadece
+   `chat.ajan_acik_sorulari`/`chat.teslim_kontrol_et` (yalnız `ajan-chat.jsonl`)
+   okuyordu; `chat_gonder.py`'nin yazdığı `messages.jsonl`'deki cevaplanmamış
+   mesajı görmüyordu → bazı teslimler "açık soru var" diye haksız reddedildi.
+
+### 2. Karar
+D-335'in `nobet` için kabul ettiği desen ("ikisini de oku, `BORC-CHAT-TEK-KANAL-01`
+birleştirmeyi ayrı P2 borcu bırak") KAPISI 1/2'ye de uygulanır — tam birleştirme
+bu kararın kapsamı DEĞİL.
+- `ajan_chat.py cmd_ac`: `--kimden` → `(args.kimden or "").strip() or chat_gonder.ajan_kimligi()`;
+  hâlâ boşsa hata ver, YAZMA (D-306 ile aynı desen, `yorum` komutuyla tutarlı).
+- `gorev_kutusu.py` KAPISI 2 (`cmd_teslim`): `chat.teslim_kontrol_et` + yeni
+  `_mesaj_kontrol_et(task_id)` (messages.jsonl, `task_id` eşleşen cevapsız kayıt) birlikte.
+- `gorev_kutusu.py` KAPISI 1 (`cmd_basla`): `chat.ajan_acik_sorulari` + mevcut
+  `_chat_yeni_mesajlar(ajan, "")` birlikte.
+
+### 3. Uygulama
+- [`ajan_chat.py`](scripts/ajan_chat.py:46) `cmd_ac` — kimlik zinciri; `--kimden` default `""`.
+- [`gorev_kutusu.py`](scripts/gorev_kutusu.py:370) `_mesaj_kontrol_et` (yeni) — KAPISI 2.
+- [`gorev_kutusu.py`](scripts/gorev_kutusu.py:308) `cmd_basla` — KAPISI 1, `_chat_yeni_mesajlar` eklendi.
+- Kanıt: `set HUGINN_AJAN=yasu&& python scripts/ajan_chat.py ac ihsan TEST-... "..."` →
+  JSONL kaydında `"kimden": "yasu"` (artık `"orkestrator"` değil).
+- Regresyon: `pytest tests/test_bulgu_defteri.py tests/test_gorev_kutusu_cli.py
+  tests/test_gorev_kutusu_hafiza.py tests/test_ajan_chat.py` → 3 hata var ama bu
+  hatalar değişiklikten ÖNCE de vardı (D-318 bulgu kapısı + bozuk defter satırı,
+  bu kararla ilgisiz — `git stash` ile doğrulandı).
+
+### Öz-eleştiri
+`BORC-CHAT-TEK-KANAL-01` hâlâ açık — bu, üçüncü yama noktası (`nobet`, şimdi
+`basla`/`teslim`). Dördüncü bir okuma noktası çıkarsa (ör. yeni bir kapı) aynı
+unutma riski tekrar eder. Gerçek kalıcı çözüm: `chat_gonder.py`'nin de
+`ajan-chat.jsonl`'e yazması ya da iki dosyayı tek okuma fonksiyonunda
+birleştirmek — bu oturumda yapılmadı, kapsam dışı bırakıldı (P2).
+
+### Referans
+[[D-335]] (nobet aynı desen) · [[D-306]] (kimden zorunlu) · [[D-210]] (teslim/basla kapısı) · [[D-227]] (karar numarası)

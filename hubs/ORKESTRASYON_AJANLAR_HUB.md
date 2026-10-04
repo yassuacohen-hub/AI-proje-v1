@@ -9,6 +9,21 @@ Uretim: Sprint Graf Hub'lastirma FAS-2 (2026-09-21). Bagli dokuman: **22**
 Ana baglam: [[Huginn Data Insights/AGENTS]] · [[Huginn Data Insights/AGENT_SYNC]] · [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]] · [[Huginn Data Insights/hubs/PLAN_STRATEGY_HUB]] · [[Huginn Data Insights/hubs/REPORTS_ANALYSIS_HUB]] · [[Huginn Data Insights/hubs/OSINT_INDEX]] · [[Huginn Data Insights/hubs/TOOLS_SCRIPTS_HUB]] · [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]] · [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]] · [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]] · [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]] · [[Huginn Data Insights/PROJECT_ROADMAP]] · [[Huginn Data Insights/hubs/V10_POC_HUB]]
 
 ---
+### ALTYAPI-GOREV-AT-KAPI-01 — Kilit on-kapısı `gorev_at` akışında (yasu, 2026-10-04)
+
+- **Neden:** `ALTYAPI-AJAN-CAKISMA-01`'de üretilen `kapi_gecer()` hiçbir yerden
+  çağrılmıyordu — üretilmiş ama bağlanmamış.
+- `tb.gorev_ekle` → `_lock_alan` (`task_board.py:587`) **bayat** kilidi
+  (D-303, >24 saat) kontrol etmiyor; 24 saat önce kilitleyip bırakılan dosya
+  sonsuza kadar atamayı reddediyordu. `kapi_gecer()` önce üzerinden geçer:
+  bayat elenir, taze reddedilir.
+- **`_lock_alan` değiştirilmedi** — ön kapı (D-211 tek kaynak).
+- **Çıkış kodu 8** (ölçümle): `2` = PermissionError, `4` = D-58 orkestratör
+  kapısı (`gorev_at.py:252`, `:344`), kullanılan kodlar 1-7 → 8 serbest.
+- Ölçüm: 31 passed (yeni `test_gorev_at_kilit_kapisi.py` 11 + mevcut
+  `test_gorev_at_kapi.py` 11 + `test_ajan_cakisma_kilidi.py` 9). `test_kapi_gecer`
+  mevcut testi bozulmadan geçti.
+- `hareket_uyarisi()` bilgi olarak yazılır, atamayı **durdurmaz**.
 
 ## Temel Kurallar / Koordinasyon
 - [[Huginn Data Insights/AGENTS]] — Calisma alani kurallarinun temel dokumani; ajan adlari, roller, gorev yasam dongusu

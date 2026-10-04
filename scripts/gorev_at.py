@@ -41,6 +41,10 @@ for _akis in (sys.stdout, sys.stderr):
             pass  # Streamlit ortamında başarısız olabilir; ignore
 
 import brief_denetim  # noqa: E402  (aynı klasör; D-217 kural gövdesi tek kaynak)
+from ajan_cakisma_kilidi import (  # noqa: E402  (D-211 tek kaynak)
+    hareket_uyarisi,
+    kapi_gecer,
+)
 from src.company_master.orchestrator import task_board as tb  # noqa: E402
 from src.company_master.orchestrator import trigger  # noqa: E402
 
@@ -299,6 +303,24 @@ def cmd_at(args: argparse.Namespace) -> int:
     talimat = (args.talimat or "").strip()
     if mod == "architect":
         talimat = (talimat + "\n" + ARCHITECT_HATIRLATMA).strip()
+    # ALTYAPI-GOREV-AT-KAPI-01: kilit on-kapisi. `tb.gorev_ekle` icindeki
+    # `_lock_alan` (task_board.py:587) BAYAT kilidi (D-303, >24 saat)
+    # kontrolu YAPMIYOR; 24 saat once kilitleyip birakilmis dosya sonsuza
+    # kadar atamayi reddeder. `kapi_gecer()` once uzerinden gecer: bayat
+    # kilit elenir (ajan_cakisma_kilidi.py:52), TAZE kilit reddeder.
+    # `_lock_alan` DEGISTIRILMEDI - bu bir on-kapi (D-211 tek kaynak).
+    dosyalar = _ayristir_liste(args.dosya)
+    if dosyalar:
+        gecti, mesaj = kapi_gecer(dosyalar, ajan=args.ajan)
+        if not gecti:
+            print(f"HATA (kilit kapisi): {mesaj}", file=sys.stderr)
+            print("Baskasinin kilidindeki dosyaya atama yapilamaz; once kilidi "
+                  "serbest birak ya da kapsami daralt.", file=sys.stderr)
+            return 8
+    uyari = hareket_uyarisi()
+    if uyari:
+        # BILDIRI: atamayi durdurmaz, yalnizca TAZE kilit engeller.
+        print(f"UYARI: {uyari}")
     try:
         gorev = tb.gorev_ekle(
             task_id=args.task_id,

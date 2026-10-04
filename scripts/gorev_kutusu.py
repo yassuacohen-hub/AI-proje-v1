@@ -170,11 +170,15 @@ def cmd_teslim(args: argparse.Namespace) -> int:
         return 1
 
     # D-210 KAPISI 2: teslim oncesi acik sorular var mi?
+    # D-336 (ORCH-KIMLIK-ZINCIRI-01): ajan-chat.jsonl (chat.teslim_kontrol_et)
+    # TEK BASINA yeterli degil — chat_gonder.py yazdigi messages.jsonl'de
+    # cevapsiz mesaj varsa bu kapi onu GORMUYORDU. Ikisi birlikte kontrol edilir.
     engeller = chat.teslim_kontrol_et(args.task_id)
-    if engeller["engel"]:
+    mesaj_nedenleri = _mesaj_kontrol_et(args.task_id)
+    if engeller["engel"] or mesaj_nedenleri:
         print(f"[D-210 TESLIM KAPISI] HATA: Acik sorular var — teslim reddedildi.",
               file=sys.stderr)
-        for neden in engeller["nedenler"]:
+        for neden in engeller["nedenler"] + mesaj_nedenleri:
             print(f"  - {neden}", file=sys.stderr)
         print(f"\nSoruları kapadiğinda teslim yeniden calistir.",
               file=sys.stderr)
@@ -215,10 +219,10 @@ def cmd_teslim(args: argparse.Namespace) -> int:
     print(f"TESLIM: {sonuc['task_id']} -> durum: review (onay bekliyor)")
     print("       Onaysiz done OLMAZ; kontrolor onayi sonrasi tamamlanir.")
     # D-312: teslim bitis degil, dongunun bir turu. Durmak yasak.
+    # D-335: tek komut — is gelene kadar bekler, gelince ne yapilacagini basar.
     print(f"\n[D-312] SIRADAKI ADIM ZORUNLU — durma, insan bekleme:")
-    print(f"  posta: python scripts/gorev_kutusu.py bak --ajan {args.ajan}")
-    print(f"  chat : python scripts/ajan_chat.py oku --son 10")
-    print(f"  devam: python scripts/gorev_kutusu.py basla --ajan {args.ajan}")
+    print(f"  nobet: python scripts/gorev_kutusu.py nobet --ajan {args.ajan}")
+    print(f"         (posta + chat is gelene kadar bekler; cikis 0 = IS VAR, hemen yap)")
     if zorla and not _hafiza_izi(args.task_id):
         tb.gorev_guncelle(args.task_id, hafiza_izi="atlandi")
         print("       UYARI: --zorla ile gecildi; panoya hafiza_izi=atlandi islendi (D-65).")
@@ -306,13 +310,20 @@ def cmd_basla(args: argparse.Namespace) -> int:
         pass  # git yoksa veya zaman asimi olursa basla akisini durdurma
 
     # D-210 KAPISI 1: basla oncesi acik sorular var mi?
+    # D-336: ajan-chat.jsonl + messages.jsonl birlikte (ORCH-KIMLIK-ZINCIRI-01).
     acik_sorunlar = chat.ajan_acik_sorulari(ajan)
-    if acik_sorunlar:
+    acik_mesajlar = _chat_yeni_mesajlar(ajan, "")
+    if acik_sorunlar or acik_mesajlar:
         print(f"\n[D-210 BASLA KAPISI] ACIK SORULAR — cevapla, sonra basla yeniden calistir:")
-        for idx, s in enumerate(acik_sorunlar, 1):
-            print(f"  {idx}. {s['task_id']}: {s['sorun']}")
+        i = 0
+        for i, s in enumerate(acik_sorunlar, 1):
+            print(f"  {i}. {s['task_id']}: {s['sorun']}")
             print(f"     (kimden: {s['kimden']}, onem: {s.get('onem', 'orta')})")
-        print(f"\nToplam {len(acik_sorunlar)} acik soru. Soruları cevapladiğinda:")
+        for j, m in enumerate(acik_mesajlar, i + 1):
+            print(f"  {j}. {m.get('task_id') or '-'}: {str(m.get('mesaj', ''))[:120]}")
+            print(f"     (kimden: {m.get('kimden', '?')}, kaynak: chat_gonder)")
+        toplam = len(acik_sorunlar) + len(acik_mesajlar)
+        print(f"\nToplam {toplam} acik soru. Soruları cevapladiğinda:")
         print(f"  python scripts/gorev_kutusu.py basla --ajan {ajan}")
         print()
         return 0
@@ -322,13 +333,10 @@ def cmd_basla(args: argparse.Namespace) -> int:
     rol = trigger.AJAN_ROLU.get(ajan, "uretim")
     print(f"=== {trigger.ajan_goster(ajan)} OTONOM ZINCIR ===")
     if not bekleyen and not kalan:
-        # D-312: posta bos olmak durma sebebi degil. Chat'e bak, cevapla, yeniden yokla.
+        # D-312: posta bos olmak durma sebebi degil. D-335: nobet komutu is gelene kadar bekler.
         print("Posta bos, zincir yok — ama DURMA (D-312).")
-        print("  1) chat kontrol : python scripts/ajan_chat.py oku --son 10")
-        print(f"  2) cevap gerekirse: python scripts/chat_gonder.py --to <ajan> "
-              f"--kimden {ajan} --type bilgi --mesaj \"<metin>\"")
-        print(f"  3) yeniden yokla : python scripts/gorev_kutusu.py basla --ajan {ajan}")
-        print("  4) 3 tur ust uste bos ise orkestratore rapor at, sonra yoklamaya devam et.")
+        print(f"  simdi: python scripts/gorev_kutusu.py nobet --ajan {ajan}")
+        print("         (is gelene kadar bekler; cikis 0 = IS VAR -> listeyi yap, sonra yine nobet)")
         return 0
     sira = [k["task_id"] for k in bekleyen] + [k["task_id"] for k in kalan]
     print(f"Zincir ({len(sira)} gorev): {' -> '.join(sira)}\n")
@@ -357,6 +365,92 @@ ZINCIR BITINCE (tum gorevler teslim):
   8) DURMA: python scripts/gorev_kutusu.py basla --ajan {ajan} ile yeniden yokla (D-312).
 Arada KAHIN'e soru sorma; blokaj varsa raporda yaz.""")
     return 0
+
+
+def _mesaj_kontrol_et(task_id: str) -> list[str]:
+    """messages.jsonl: task_id'ye bagli cevapsiz mesaj var mi (D-210 teslim kapisi).
+
+    D-336 / ORCH-KIMLIK-ZINCIRI-01: chat.teslim_kontrol_et() yalnizca
+    ajan-chat.jsonl'yi okur; chat_gonder.py'nin yazdigi messages.jsonl'yi
+    gormuyordu. Bu yuzden bazi teslimler "acik soru var" diye reddedildi
+    halbuki cevap messages.jsonl'deydi (ya da hic cevap yoktu, kapi bunu
+    gormemisti). Ikisi artik birlikte kontrol edilir.
+    """
+    yol = tb.STATE_DIR / "chat" / "messages.jsonl"
+    if not yol.exists():
+        return []
+    nedenler: list[str] = []
+    for satir in yol.read_text(encoding="utf-8").splitlines():
+        try:
+            k = json.loads(satir)
+        except json.JSONDecodeError:
+            continue
+        if k.get("task_id") == task_id and not k.get("yanit_alindi"):
+            nedenler.append(
+                f"{str(k.get('mesaj', ''))[:120]} (kimden: {k.get('kimden', '?')}, chat_gonder)"
+            )
+    return nedenler
+
+
+def _chat_yeni_mesajlar(ajan: str, sonra: str) -> list[dict]:
+    """messages.jsonl: ajana (veya hepsi) gelen, `sonra` tarihinden yeni, cevapsiz mesajlar."""
+    yol = tb.STATE_DIR / "chat" / "messages.jsonl"
+    if not yol.exists():
+        return []
+    cikti: list[dict] = []
+    for satir in yol.read_text(encoding="utf-8").splitlines():
+        try:
+            k = json.loads(satir)
+        except json.JSONDecodeError:
+            continue
+        if (k.get("kime") in (ajan, "hepsi") and k.get("kimden") != ajan
+                and not k.get("yanit_alindi") and str(k.get("tarih", "")) > sonra):
+            cikti.append(k)
+    return cikti
+
+
+def nobet_turu(ajan: str, sonra: str) -> list[str]:
+    """Tek yoklama: posta + acik soru + yeni chat. Bos liste = is yok (D-335)."""
+    isler: list[str] = []
+    for k in trigger.bekleyen_tetikler(ajan) + trigger.zincir_kalan(ajan):
+        isler.append(f"POSTA  {k['task_id']} -> python scripts/gorev_kutusu.py al --ajan {ajan} --task-id {k['task_id']}")
+    for s in chat.ajan_acik_sorulari(ajan):
+        isler.append(f"SORU   {s['task_id']} ({s['kimden']}): {s['sorun'][:80]} -> ajan_chat.py guncelle")
+    for m in _chat_yeni_mesajlar(ajan, sonra):
+        isler.append(f"CHAT   {m.get('task_id') or '-'} ({m.get('kimden')}): {str(m.get('mesaj', ''))[:80]} -> chat_gonder.py --to {m.get('kimden')}")
+    return isler
+
+
+def cmd_nobet(args: argparse.Namespace) -> int:
+    """D-335: is gelene kadar bekle. Cikis 0 = IS VAR (liste basildi), 3 = azami sure doldu.
+
+    Ajan teslimden sonra bunu calistirir; komut donmeden 'bitti' diyemez.
+    ponytail: tek surec, dosya yoklama; event/websocket gerekirse buraya takilir.
+    """
+    import time
+    ajan = trigger.ajan_normalize(args.ajan)
+    sonra = trigger._simdi()
+    azami = args.azami_dk * 60
+    baslangic = time.monotonic()
+    tur = 0
+    while True:
+        tur += 1
+        isler = nobet_turu(ajan, sonra)
+        if isler:
+            print(f"[NOBET {ajan}] tur {tur}: {len(isler)} IS VAR — simdi yap, sonra yine nobet:")
+            for i in isler:
+                print(f"  {i}")
+            return 0
+        gecen = int(time.monotonic() - baslangic)
+        print(f"[NOBET {ajan}] tur {tur} bos ({gecen}s). {args.bekle}s sonra yine bakacagim.", flush=True)
+        if tur == 3:
+            print(f"  3 tur bos: orkestratore kisa rapor at (chat_gonder.py --to ihsan --kimden {ajan} "
+                  f"--type rapor --mesaj \"nobet: 3 tur bos\"), beklemeye devam.")
+        if gecen + args.bekle > azami:
+            print(f"[NOBET {ajan}] azami {args.azami_dk} dk doldu, is yok. Yeniden: "
+                  f"python scripts/gorev_kutusu.py nobet --ajan {ajan}")
+            return 3
+        time.sleep(args.bekle)
 
 
 def cmd_rapor_postala(args: argparse.Namespace) -> int:
@@ -934,6 +1028,12 @@ def main() -> int:
                          help="D-198 simulasyon kapisini atla (kacis kapisi, D-65)")
     basla_p.set_defaults(func=cmd_basla)
 
+    nobet_p = sub.add_parser("nobet", help="D-335: is gelene kadar bekle (posta+soru+chat); cikis 0 = IS VAR")
+    nobet_p.add_argument("--ajan", required=True)
+    nobet_p.add_argument("--bekle", type=int, default=120, help="Turlar arasi saniye (varsayilan 120)")
+    nobet_p.add_argument("--azami-dk", type=int, default=60, help="Bos beklemenin ust siniri, dakika (cikis 3)")
+    nobet_p.set_defaults(func=cmd_nobet)
+
     rapor_p = sub.add_parser("rapor-postala", help="Zincir bitis raporunu orkestratore postala")
     rapor_p.add_argument("--ajan", required=True, help="Raporu yazan ajan")
     rapor_p.add_argument("--rapor", required=True, help="Rapor dosya yolu")
@@ -1040,8 +1140,16 @@ def main() -> int:
             except trigger.TriggerError as exc:
                 return _hata(exc)
     sonuc = args.func(args)
-    _notion_senkron()
+    if args.komut not in SALT_OKUR_KOMUTLAR:
+        _notion_senkron()
     return sonuc
+
+
+# 2026-10-03 olcum (cProfile): `bak` 14.7 s, bunun 14.66 s'si _notion_senkron (10 HTTP + 4 s sleep).
+# Pano degismeyen komutta senkron anlamsiz; 4 ajan x nobet turu = makine donmasi (sahip sikayeti).
+SALT_OKUR_KOMUTLAR = frozenset({
+    "bak", "nobet", "onay-bekleyen", "raporlar", "ozet", "yardim", "simulasyon", "basla",
+})
 
 
 def _notion_senkron() -> None:
