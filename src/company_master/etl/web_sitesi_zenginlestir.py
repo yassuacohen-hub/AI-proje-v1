@@ -461,6 +461,22 @@ def _telefon_adayi(metin: str) -> str | None:
     return "+90" + rakam[1:]
 
 
+def _telefon_kisisel_mi(telefon: str | None) -> bool | None:
+    """KVKK ipucu: TR GSM onbeki `5` ile basliyorsa olasi kisisel cep.
+
+    Silmez/reddetmez (utku notu: cep numaralari kabul edilir) -- sadece
+    D-252/3 ile ayni "sadece ipucu, raw_payload'a, hic skorlanmaz" kalibinda
+    etiket uretir. Sabit hat (2/3/4 ile baslayan alan kodu) -> False.
+    `None`: telefon yok, karar verilecek bir sey yok.
+    """
+    if not telefon:
+        return None
+    rakam = re.sub(r"\D", "", telefon)  # +905xxxxxxxxx -> 905xxxxxxxxx
+    if rakam.startswith("90"):
+        rakam = rakam[2:]
+    return rakam.startswith("5")
+
+
 _EPOSTA_DESENI = re.compile(r"[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}")
 
 
@@ -664,6 +680,9 @@ def _yaz(engine, kaynak_id, company_id, unvan: str, kayit: dict) -> int:
                 "dogrulama": kayit.get("sebep"),
                 # NACE ipucu SADECE ham arsive gider; puanlanmaz (D-252/3).
                 "nace_tahmin": None,
+                # KVKK ipucu: ayni D-252/3 kalibi -- sadece ham arsive,
+                # hic skorlanmaz/maskelenmez; elle inceleme icin isaret.
+                "telefon_kisisel_olabilir": _telefon_kisisel_mi(kayit.get("telefon")),
             }, ensure_ascii=False),
         })
     return yazilan
