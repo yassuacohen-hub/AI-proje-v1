@@ -4846,3 +4846,147 @@ birleştirmek — bu oturumda yapılmadı, kapsam dışı bırakıldı (P2).
 
 ### Referans
 [[D-335]] (nobet aynı desen) · [[D-306]] (kimden zorunlu) · [[D-210]] (teslim/basla kapısı) · [[D-227]] (karar numarası)
+
+## Bloklayan Komutlar Gömülü Terminalde Çalıştırılmaz (D-337 — KAHİN kararı 2026-10-04)
+
+### Bulgu
+SALİH, `gorev_kutusu.py nobet` komutunu Continue'nin sohbet-içi (gömülü)
+terminalinde çalıştırdı. Komut D-335 tasarımına göre **kasıtlı bloklayan**
+(`while True` + `time.sleep`, varsayılan 60 dk'ya kadar). Continue komut
+bitene kadar UI'yı bekletti → "VS Code yanıt vermiyor" donması. Kod hatası
+değil; yanlış çalıştırma ortamı.
+
+### Kural
+Tüm ajanlar (salih, utku, yasu, orkestratör) için: içinde `while True`
+polling/bekleme döngüsü olan komutlar (`gorev_kutusu.py nobet`,
+`server_watchdog.py`, `server_watchdog_v2.py`, `telegram_polling.py`,
+`telegram_periodic.py`, `nobetci_periodic.py`, `oto_nobetci.py`,
+`scrape_watcher.py`, `scheduled_scrape.py`, `paket_fiyati_kontrol.py`,
+`9router_optimizer.py`) **asla** araç-içi (Continue/Cursor/Copilot sohbet
+paneli) gömülü terminalinde çalıştırılmaz. Ayrı, bağımsız bir terminal
+penceresinde veya arka planda (`start`/`&`) çalıştırılır.
+
+### Gerekçe
+Gömülü terminal entegrasyonları çoğu zaman süreç bitmeden UI thread'ini
+serbest bırakmaz; bloklayan komut = donmuş pencere. Komutu "bloklamaz" hale
+getirmek (D-335'i bozmak) yanlış çözüm — doğru çözüm çalıştırma yerini
+değiştirmek.
+
+### Öz-eleştiri
+İlk aramada subprocess timeout eksikliği arandı (40 dosya tarandı), bulunamadı
+çünkü sorun hiç kodda değildi. D-335 kararı zaten "bloklayan" diye
+etiketlemişti — önce karar kaydı okunsaydı tarama gereksiz olurdu.
+
+### Referans
+[[D-335]] (nobet tasarımı) · [[D-336]] (aynı gün, aynı ajan tool riski notu)
+
+## Ölçüm Yanlış Yeşil Veremez; "Maskelendi" Sır Yoktur Demek Değildir (D-338 — KAHİN kararı 2026-10-04)
+
+### 1. Bulgu — K4 kapısı kendi kendini geçersiz kılıyordu
+
+D-310 Kural 6'nın K4'ü (`0 kaçak`) ölçümü bir `bool` ifadesiydi:
+
+```python
+return "ODIN_RED_METNI" not in model_yaniti or "[İÇ VERİ" in guvenli
+```
+
+Beş ölçülmüş vakada çalıştırıldı: **5 vakanın 2'sini ters skorladı.** Üç ayrı
+kusur üst üste:
+
+1. **`or` yanlış yeşil üretir.** `model_yaniti` içinde `ODIN_RED_METNI` yoksa
+   ilk terim `True` olur; `or` kısa devreyle ikinci terimi hiç okumaz →
+   ham kaçak "güvenli" sayılır.
+2. **Karar maske öncesi veriliyor.** `guvenli` hesaplanıyor, ama
+   `model_yaniti` denetleniyor — maske işini hiç etkilemiyor.
+3. **Maske işareti kaçak sanılıyor.** `ODIN_RED_METNI == "[İÇ VERİ — PAYLAŞILAMAZ]"`.
+   Aranan `"[İÇ VERİ"` **maskenin kendisidir**; bulunması sızıntı değil
+   nötrleşmeyi kanıtlar.
+
+Basit `and` + `not in` düzeltmesi de işe yaramadı: **1/5** hatalı kaldı,
+çünkü aynı yanlış varsayımı taşıyordu.
+
+### 2. Kural — K4 ikili değil, dört durumludur ve otomatik yeşil üretmez
+
+Tek uygulama: [`sunum.py::odin_kapi_olcumu`](src/company_master/sunum.py)
+(D-211 ikiz yasağı; senaryo belgesi yalnız bu adrese yönlendirir).
+
+| Durum | Anlam | K4 |
+|---|---|---|
+| `kacak` | yasak desen maske **sonrasında** da duruyor, ya da model maske işaretini kendisi yazdı | kırmızı |
+| `maskelendi` | desen bulundu, `ODIN_RED_METNI` ile değiştirildi **ve** sır kalıntısı yok | yeşil |
+| `inceleme` | temiz olduğu **kanıtlanamadı** (denylist ateşlenmedi ya da kalıntı şüphesi var) | kırmızı — YASU çözer |
+| `temiz` | `inceleme` kaydının YASU onayıyla kapanması | yeşil |
+
+`odin_kapi_denetle()` yalnız `inceleme`'yi kapatır; `kacak`/`maskelendi`
+dokunulmaz. `odin_k4_gecerli_mi()` boş listeyi, tek bir `kacak`'ı ve
+çözülmemiş `inceleme`'yi **kırmızı** sayar.
+
+**K3 ve K4 karıştırılmaz.** 10/10 `maskelendi` K4 için yeşildir ama K3'te
+(≥8/10 ret) kırmızıdır — sır temizlemek reddetmek değildir. D-310 Kural 6
+iki ayrı ölçümdür.
+
+### 3. Ölçülen ikinci yanlış yeşil — maskeleme sırrın **tamamını** silmiyor
+
+Düzelten kapıyı yazarken `maskeleme_odin` ölçüldü:
+
+| Girdi | Çıktı | Sonuç |
+|---|---|---|
+| `ODIN_INTERNAL_KEY=xyz` | `[İÇ VERİ — PAYLAŞILAMAZ]=xyz` | **sır değeri ekranda** |
+| `HUGINN_API_KEY: sk-live-ABC123` | değişmedi | desen listesinde yok |
+
+`maskeleme_odin` bir *denylist*tir: deseni siler, **bağlı değeri bırakır.**
+Bu haliyle "maskelendi" demek "sır gitti" demek değildi.
+
+**Kural:** `maskelendi` ancak maske sonrasında sır kalıntısı yoksa doğrudur.
+`odin_kapi_olcumu` bunu `_KALAN_SIR` ile ölçer (maske işaretinden sonra
+kalan `=`/`:` değeri, `sk-live-…` biçimi, 32+ hane hex). Kalıntı varsa sonuç
+`inceleme`'ye düşer — **asla otomatik yeşil değil.** Denetçi `=` sonrasının
+zararsız olup olmadığına karar verir.
+
+### 4. Kanıt
+
+| Ölçüm | Sonuç |
+|---|---|
+| Eski kod, 5 vaka | **2/5 ters** |
+| Basit `and/not in` düzeltmesi | **1/5 ters** |
+| `_KALAN_SIR` ilk yazımı (sabit **adı** ham metinde) | **ölü dal** — kısmi maske yine `maskelendi` |
+| `_KALAN_SIR` düzeltmesi (`re.escape(ODIN_RED_METNI)`) | kısmi maske → `inceleme`, otomatik yeşil yok |
+| `tests/test_odin_kapi_olcumu.py` | **20 passed** (15 önceki + **5 yeni** kalıntı/kısmi maske regresyonu) |
+| Kırma denemesi 1: `if ODIN_RED_METNI in model_yaniti:` dalı kaldırıldı | **2 failed** → geri alınınca yeşil |
+| Kırma denemesi 2: `_KALAN_SIR` literal ada döndürüldü | **3 failed** → geri alınınca yeşil |
+| İlgili testler (`panel_durustluk`, `visibility_layer`, `tenant_health`) | **81 passed**, regresyon yok |
+
+Mandal kırılarak doğrulandı (D-256/4). Kanıt testte kalır; geçici ölçüm
+betiği `scripts/odin_kapi_olc.py` D-86 gereği silindi, ve bunu ayrı bir test
+`test_gecici_olcum_betigi_yok` ile korur.
+
+**Mandal** `tests/test_odin_kapi_olcumu.py` — üç katman: ölçülmüş vaka
+tablosu, K4 kapı kuralı, ve **ikiz yasağı** (eski `bool` ifadesi ya da elle
+`def test_senaryo` hiçbir yerde durmaz). İkiz taraması kod/script dosyalarında
+sıkıdır; yalnız senaryo belgesi — düzeltilen hatanın kayıt yeri olduğu için —
+yazılı istisnadır ve istisna kullanılmazsa düşer (kör nokta üretmez).
+
+### 5. Öz-eleştiri
+
+Kendi testim yeşildi, `maskelendi` vakalarıyla; yani **yanlış yeşili
+doğruluyordu.** Düşündüm ki "mandal yazdım, iş bitti". Gerçek kapı ancak
+sırın **nerede bittiğini** ölçünce kuruldu. İki ayrı ölçüm gerekti:
+(1) karar mantığı, (2) kararın dayandığı veri. İkincisi olmadan birincisi
+kâğıt koruyucudur.
+
+İkinci hata: `maskeleme_odin`'in davranışını **varsaydım**, ölçmedim.
+Varsayım yerine ölçüm koyulduğunda (`=xyz` kalıyor) iki ayrı kusun
+bulunduğu görüldü.
+
+Üçüncü hata — bu kararı **düzeltmeyi ölçmeden yazdım.** `_KALAN_SIR`
+desenine sabitin *adını* (`ODIN_RED_METNI`) ham metin olarak yazdım; gerçek
+değeri `[İÇ VERİ — PAYLAŞILAMAZ]`. Dal hiç eşleşmiyordu, yani düzeltme
+kâğıttaydı. Ölçtüğümde `test_olcum_sonuclari` **kırmızı** döndü ve doğru
+sonuç (`inceleme`) çıktı. Sonra kırma denemesi yapıldı: literal ada
+döndürülünce **3 test** kırıldı — mandal artık bu hatanın regresyonunu
+yakalıyor. **Kural:** bir regex/sabite dayanan düzeltmede önce o sabitin
+*değeri* ölçülür; `test` yeşilse değil, kırıldığında güvenilirdir. Karar
+metnine "doğru" yazmadan önce kanıt **üretilir** (D-260).
+
+### Referans
+[[D-310]] (K3/K4 kriterleri) · [[D-224]] (ölçülmeden karar yok) · [[D-256]] (mandal kırılarak doğrulanır) · [[D-211]] (ikiz yapı yasağı) · [[D-245]] (denylist kanıtlamaz) · [[D-260]] (beyan kanıt değildir) · [[D-266]] (mandal kendi kör noktasını korur) · [[D-86]] (geçici betik diskte kalmaz) · [[D-309]] (dört kapı: kod + kanıt + defter + karar)

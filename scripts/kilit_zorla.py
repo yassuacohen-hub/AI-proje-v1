@@ -55,10 +55,21 @@ def ajan_kimligi() -> str | None:
     ajanlara ayni degeri bilerdi - hata bastan sona yayilir.
     """
     try:
-        from ajan_kimligi import ajan_kimligi as _coz
-        return _coz()
+        from ajan_kimligi import KimlikBelirsiz, ajan_kimligi as _coz
     except ImportError:                      # pragma: no cover - yedek yol
         pass
+    else:
+        try:
+            return _coz()
+        except KimlikBelirsiz:
+            # Sozlesme bu fonksiyonun "cozulemezse None" demesidir, ama
+            # paylasilan cozucu (ajan_kimligi.py:77-83) belirsizlikte
+            # istisna firlatir. O istisna yukseltilirse main()'in
+            # "kimlik yok -> uyar ve gec" dalina (satir 97-100) HIC
+            # ulasilamaz ve pre-commit kancası HUGINN_AJAN tanimli
+            # olmayan her ajan icin kalici olarak exit 1 verir
+            # (olculdu: 3 ajan dosyali makinede, 2026-10-04).
+            return None
 
     if ad := (os.environ.get("HUGINN_AJAN") or _git("config", "huginn.ajan")):
         return ad.strip().lower()

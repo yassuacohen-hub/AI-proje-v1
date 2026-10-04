@@ -95,6 +95,7 @@ Ana baglam: [[Huginn Data Insights/AGENTS]] · [[Huginn Data Insights/AGENT_SYNC
 | NINEROUTER-IMAGE-GEN-01 | `ninerouter.py`'ye `ninerouter_image_gen` eklendi | 2026-09-24 |
 | TEST-13-PREEXIST-DUZELT-01 | 13 pre-existing test hatasi duzeltildi → `d193_menu_e2e_report.md` | 2026-09-24 |
 | TEST-13-PREEXIST-DUZELT-02 | Kalan 7 test hatasi duzeltildi → pytest yesil | 2026-09-24 |
+| ORCHESTRA-KIMLIK-ZINCIRI-01 | Pre-commit kilit kapisi `KimlikBelirsiz` ile cokuyordu → `kilit_zorla.py` duzeltildi, kirma 3/3 kanitli | 2026-10-04 |
 
 Tam liste ceyreklik arsivde: `data/orchestrator/task_board_arsiv_2026-Q3.json`
 

@@ -50,7 +50,9 @@ sys.path.insert(0, str(_KOK / "scripts"))
 from ajan_kimligi import ajan_kimligi  # noqa: E402
 
 #: D-210 "Zorunlu Chat Turleri" — kabul edilen mesaj tipleri.
-MESAJ_TIPLERI: tuple[str, ...] = ("hata", "soru", "koordinasyon", "rapor", "bilgi")
+#: "yorum" (Mesaj 6 · liderlik+yorum tasarimi, 2026-10-03): bir mesaja
+#: ekli yanit; `cevap_index` alaniyla hedef mesaji isaretler.
+MESAJ_TIPLERI: tuple[str, ...] = ("hata", "soru", "koordinasyon", "rapor", "bilgi", "yorum")
 
 #: Tum ajanlara yayin icin kullanilan alici takma adlari.
 YAYIN_ALICI: tuple[str, ...] = ("hepsi", "tum", "tüm", "all")
@@ -98,6 +100,7 @@ def gonder(
     mesaj: str,
     task_id: str = "",
     kimden: str | None = None,
+    cevap_index: int | None = None,
 ) -> dict:
     """Tek chat satiri yaz ve yazilan kaydi dondur.
 
@@ -107,12 +110,15 @@ def gonder(
     Cozulemezse veya belirsizse HATA verilir: gonderen ajan baska birinin
     adina yazilirsa alici mesaji kendi mesaji sanip cevap vermez (D-306).
     """
-    try:
-        kim = ajan_kimligi()
-    except Exception as exc:                     # KimlikBelirsiz dahil
-        raise ValueError(f"kimlik cozulemedi: {exc}") from exc
-
-    ham_kimden = (kimden or kim or "").strip()
+    # --kimden acikca verildiyse kimlik zinciri CALISMAZ (docstring sirasi).
+    # Aksi halde 3 ajan_<ad>.json olan makinede (ihsan/orkestrator) her
+    # mesaj "kimlik cozulemedi" ile duser — 2026-10-03 D-335 yayininda olctu.
+    ham_kimden = (kimden or "").strip()
+    if not ham_kimden:
+        try:
+            ham_kimden = (ajan_kimligi() or "").strip()
+        except Exception as exc:                 # KimlikBelirsiz dahil
+            raise ValueError(f"kimlik cozulemedi: {exc}") from exc
     if not ham_kimden:
         raise ValueError(_BOS_KIMDEN_UYARI)
     g_ajan = trigger.ajan_normalize(ham_kimden)
@@ -145,6 +151,8 @@ def gonder(
         "mesaj": metin,
         "yanit_alindi": False,
     }
+    if cevap_index is not None:
+        kayit["cevap_index"] = cevap_index
 
     yol = chat_yolu()
     yol.parent.mkdir(parents=True, exist_ok=True)
