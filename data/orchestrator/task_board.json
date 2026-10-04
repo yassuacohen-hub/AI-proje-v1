@@ -2221,14 +2221,14 @@
       "docs/ODIN_SECURITY_CHECKLIST.md",
       "docs/ODIN_PROMPT_INJECTION_SCENARIOS.md"
     ],
-    "not": "Kilit birakildi 2026-10-04 (ihsan/D-337 sonrasi). YASU denetimi ALTYAPI-ODIN-DENETIM-RAPORU'da teslim edilmis (NO-GO, 2026-10-01). Bekleme bitti.",
+    "not": "Kilit birakildi 2026-10-04 (ihsan/D-337 sonrasi). YASU denetimi ALTYAPI-ODIN-DENETIM-RAPORU'da teslim edilmis (NO-GO, 2026-10-01). Bekleme bitti. DUZELTME 2026-10-04: bulgu_defteri #199 KAPI-OLCUM-KIRMIZI tespit etti - 'done' kapanisi dogrulanmamisti (10 test TypeError). Kok neden: untracked D-211 ikiz modulu src/company_master/odin_kacak_olcer.py silindi (hic uretim cagirani yoktu), pytest tests/test_odin_kapi_olcumu.py simdi 20/20 yesil.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_ihsan_ALTYAPI-ODIN-UYARLAMA-01.md",
     "talimat": "1. İç vs müşteri endpoint tasarımı (ODIN_INTERNAL_KEY, ODIN_CUSTOMER_KEY). 2. Prompt-injection test senaryoları (8+ kategori). 3. Maskeleme kapısı genişletmesi: src/company_master/sunum.py → maskeleme_odin(). 4. Güvenlik belgeleri + deployment guide. 5. chat_gonder.py ile bildir. Kurallar: D-310, D-247, D-182. Brif: plans/brief_ihsan_ALTYAPI-ODIN-UYARLAMA-01.md",
     "dependencies": [],
-    "sonuc": "2 yeni doc + mevcut kod/senaryo dogrulandi. YASU denetimi bekleniyor. Rapor: data/orchestrator/ALTYAPI-ODIN-UYARLAMA-01_rapor_2026-10-07_orkestrator.md"
+    "sonuc": "2 yeni doc + sunum.py kanonik olcum (odin_kapi_olcumu/odin_k4_gecerli_mi) dogrulandi, pytest 20/20 yesil (2026-10-04). D-211 ikiz modul odin_kacak_olcer.py + testi silindi (untracked, uretimde cagiran yok, yasu #195 geri cekme notuyla da gereksizdi). YASU denetimi bekleniyor. Rapor: data/orchestrator/ALTYAPI-ODIN-UYARLAMA-01_rapor_2026-10-07_orkestrator.md"
   },
   {
     "task_id": "ALTYAPI-EVREN-PRIVATE-DOGRULAMA",
@@ -2918,9 +2918,9 @@
     "baslik": "[VERI] website_domain zenginleştirme kaynağını yaz -> unvan arama + canlı HTTP doğrulama, 7343 boş alana gerçek site (4s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-10-04T00:50:31",
-    "bitis": null,
+    "bitis": "2026-10-04T17:01:04",
     "dosyalar": [
       "src/company_master/etl/web_sitesi_zenginlestir.py",
       "tests/test_web_sitesi_zenginlestir.py"
@@ -2958,7 +2958,7 @@
     "baslik": "[ORKESTRA] Kimlik zinciri kaydını düzelt → plans/brief_ihsan_ORKESTRA-KIMLIK-ZINCIRI-01.md (1s)",
     "sahip": "ihsan",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-10-04T15:37:09",
     "bitis": null,
     "dosyalar": [
@@ -2971,5 +2971,24 @@
     "mod": "code",
     "brief": "plans/brief_ihsan_ORKESTRA-KIMLIK-ZINCIRI-01.md",
     "talimat": "plans/brief_ihsan_ORKESTRA-KIMLIK-ZINCIRI-01.md brifini oku; kanonik gorev kaydi acildi. Kanit: kimlik zinciri iki ajanla dogrula, iki chat kapisini kirarak kanitla, bulgu kaydini karara bagla."
+  },
+  {
+    "task_id": "ALTYAPI-9ROUTER-MITM-PATCH-01",
+    "id": "ALTYAPI-9ROUTER-MITM-PATCH-01",
+    "baslik": "[ALTYAPI] 9router MITM NODE_ENV patch kaliciligini denetle + clinepass OAuth testi olc -> bulgu_defteri.md (1s)",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-10-04T17:00:43",
+    "bitis": null,
+    "dosyalar": [
+      "C:/Users/yasin/AppData/Roaming/npm/node_modules/9router/app/.next-cli-build/server/chunks/915.js"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-9ROUTER-MITM-PATCH-01.md",
+    "talimat": "Bulgu defteri DEBUG-9ROUTER-COPILOT-502 task-id altinda 3 kayit var, once onlari oku. 1) 915.js spawn env NODE_ENV:production kaliyor, DEBUG_MITM patch'i yeniden uygula, restart sonrasi logs/mitm/ klasorunde dump olusuyor mu dogrula. 2) OAuth clinepass hesaplari (yassuacohen@gmail.com, muhammeddcan82@gmail.com) ERROR veriyor, yeniden test et, orijinal Copilot 502 ile iliskisini belirle. Sonucu bulgu_defteri.py ekle ile DEBUG-9ROUTER-COPILOT-502 task-id'sine kaydet."
   }
 ]
