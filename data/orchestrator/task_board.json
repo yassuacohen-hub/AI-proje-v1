@@ -2054,9 +2054,9 @@
     "baslik": "[KAZIMA] Qwen-7b-chat (9Router local): yapı unknown + sınıflandırma (2s)",
     "sahip": "yasu",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-10-06",
-    "bitis": null,
+    "bitis": "2026-10-04T03:31:05",
     "dosyalar": [
       "scripts/kazima_qwen_classify.py",
       "../.agents/skills/9router_chat_upstream.md"
@@ -2069,7 +2069,8 @@
     "talimat": "Bölüm 2.3 (SKILL) takip et. requests.get(url) → BeautifulSoup → main_text[:2000] → requests.post($NINEROUTER_URL/v1/chat/completions, model=qwen/qwen-7b-chat, prompt=...) → JSON parse (company_name, phone, email çıkar) → DB yazma (llm_used=true, llm_model='qwen-7b-chat', cost_usd=0.00). Temperature=0.1 (kesin cevap). Timeout=30s. Fallback yok; qwen unavailable ise kuyruğa al.",
     "dependencies": [
       "SCRAPE-003-9ROUTER-JINA-FALLBACK"
-    ]
+    ],
+    "sonuc": "ihsan onayi: chat'te kapanmisti, pano senkron edildi. 28 failed/5297 passed baseline'da bu gorevden kirmizi yok."
   },
   {
     "task_id": "SCRAPE-005-KAZIMA-DOCKER-INTEGRATION",
@@ -2578,9 +2579,9 @@
     "baslik": "[ALTYAPI] continue_haftalik_bildir.py + or_*.py betiklerini kalici yaz -> scripts/ commit + zamanlanmis gorev (2s)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-10-03T17:35:44",
-    "bitis": null,
+    "bitis": "2026-10-04T03:31:20",
     "dosyalar": [
       "scripts/continue_haftalik_bildir.py",
       "scripts/or_batch_cikar.py",
@@ -2594,7 +2595,8 @@
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_yasu_ALTYAPI-OPENROUTER-ARAC-01.md",
-    "talimat": "scripts/continue_haftalik_bildir.py ve scripts/or_batch_cikar.py or_fiyat_ara.py or_kod_liste.py or_sablon_ekle.py or_seckin.py git'te ?? durumda. Her birine docstring + utf-8 stdout sarmali; schtasks ile haftalik zamanlanmis gorev (komut dosyaya yazilir, calistirilir, cikti kanit olur). Anahtar degerleri yazilmaz."
+    "talimat": "scripts/continue_haftalik_bildir.py ve scripts/or_batch_cikar.py or_fiyat_ara.py or_kod_liste.py or_sablon_ekle.py or_seckin.py git'te ?? durumda. Her birine docstring + utf-8 stdout sarmali; schtasks ile haftalik zamanlanmis gorev (komut dosyaya yazilir, calistirilir, cikti kanit olur). Anahtar degerleri yazilmaz.",
+    "sonuc": "ihsan onayi (yasu teslimi). 28 failed/5297 passed baseline'da bu gorevden kirmizi yok."
   },
   {
     "task_id": "VERI-OSTIM-HREF-FILTRE-01",
@@ -2642,9 +2644,9 @@
     "baslik": "[VERI] sync_paket_fiyatlari.py betigini denetle ve DB ile esle -> paketler.py fiyat_katalogu tek kaynak (2s)",
     "sahip": "yasu",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-10-03T17:35:44",
-    "bitis": null,
+    "bitis": "2026-10-04T03:31:32",
     "dosyalar": [
       "scripts/sync_paket_fiyatlari.py",
       "tests/test_paket_fiyat_senkron.py"
@@ -2654,7 +2656,8 @@
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_yasu_VERI-PAKET-FIYAT-SENKRON-01.md",
-    "talimat": "scripts/sync_paket_fiyatlari.py ile src/company_master/paketler.py::_ORJINAL_FIYATLAR ayni degerleri mi tasiyor? Olc, farki kapat, test yaz. Tasarim: docs/PAKET_KOTA_TASARIMI.md"
+    "talimat": "scripts/sync_paket_fiyatlari.py ile src/company_master/paketler.py::_ORJINAL_FIYATLAR ayni degerleri mi tasiyor? Olc, farki kapat, test yaz. Tasarim: docs/PAKET_KOTA_TASARIMI.md",
+    "sonuc": "ihsan onayi (yasu teslimi). 28 failed/5297 passed baseline'da bu gorevden kirmizi yok."
   },
   {
     "task_id": "TEST-SIMULASYON-B17-KIRIK-01",
@@ -2780,9 +2783,9 @@
     "baslik": "[UI] Veri Kaynakları sayfasını yaz -> admin_kaynaklar.py, 0050 kazıma tabloları tek yerde (4s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-10-04T00:47:41",
-    "bitis": null,
+    "bitis": "2026-10-04T03:25:27",
     "dosyalar": [
       "web_dashboard/tabs/admin_kaynaklar.py",
       "web_dashboard/tabs/__init__.py",
@@ -2793,7 +2796,8 @@
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_UI-ADMIN-KAYNAKLAR-SAYFA-34.md",
-    "talimat": "Brief: plans/brief_utku_UI-ADMIN-KAYNAKLAR-SAYFA-34.md — once oku, varsayimlari olc, sonra basla."
+    "talimat": "Brief: plans/brief_utku_UI-ADMIN-KAYNAKLAR-SAYFA-34.md — once oku, varsayimlari olc, sonra basla.",
+    "sonuc": "ihsan karari (olcek tuzagi): 0-1/0-100 donusum koprusu kaynak_guvenilirlik.py icine tasindi (saglik_rozeti_yuzde), D-212 tek kapi. admin_kaynaklar.py'deki eski bridge silinip oraya yonlendirildi. 18/18 pytest yesil. Teslim onaylandi: 4 bolum admin ekrani, D-236 kapandi (0050 ilk okuyucusu), 10+309 test yesil."
   },
   {
     "task_id": "UI-ADMIN-CRAWL-TASI-35",
@@ -2801,9 +2805,9 @@
     "baslik": "[UI] Crawl Kontrolü bloğunu Webhook'tan Veri Kaynakları sayfasına taşı -> tek OSINT adresi (2s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-10-04T00:47:41",
-    "bitis": null,
+    "bitis": "2026-10-04T03:31:45",
     "dosyalar": [
       "web_dashboard/tabs/webhook_monitor.py",
       "web_dashboard/tabs/admin_kaynaklar.py",
@@ -2814,7 +2818,8 @@
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_UI-ADMIN-CRAWL-TASI-35.md",
-    "talimat": "Brief: plans/brief_utku_UI-ADMIN-CRAWL-TASI-35.md — once oku, varsayimlari olc, sonra basla."
+    "talimat": "Brief: plans/brief_utku_UI-ADMIN-CRAWL-TASI-35.md — once oku, varsayimlari olc, sonra basla.",
+    "sonuc": "ihsan onayi (utku teslimi). 28 failed/5297 passed baseline'da bu gorevden kirmizi yok."
   },
   {
     "task_id": "UI-ADMIN-SON-KAZIMA-KART-36",
@@ -2822,9 +2827,9 @@
     "baslik": "[UI] Ana Kontrol'e Veri Kaynakları giriş kartını yaz -> GIRIS_KARTLARI 5. kart, son kazıma tek tıkla (1s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-10-04T00:47:41",
-    "bitis": null,
+    "bitis": "2026-10-04T03:13:01",
     "dosyalar": [
       "web_dashboard/tabs/ana_kontrol.py",
       "tests/test_ana_kontrol_overview.py"
@@ -2834,7 +2839,8 @@
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_UI-ADMIN-SON-KAZIMA-KART-36.md",
-    "talimat": "Brief: plans/brief_utku_UI-ADMIN-SON-KAZIMA-KART-36.md — once oku, varsayimlari olc, sonra basla."
+    "talimat": "Brief: plans/brief_utku_UI-ADMIN-SON-KAZIMA-KART-36.md — once oku, varsayimlari olc, sonra basla.",
+    "sonuc": "ihsan: GIRIS_KARTLARI olu tuple silindi (D-236), /kaynaklar b6 link_button olarak aksiyon seridine eklendi (_AKSIYON_RENK kapsami disi, D-211 ihlali yok). ana_kontrol.py + test_ana_kontrol_overview.py guncellendi, 9/9 pytest yesil."
   },
   {
     "task_id": "UI-ADMIN-ACIKLAMA-METIN-37",
@@ -2842,9 +2848,9 @@
     "baslik": "[UI] SECTIONS aciklama metinlerini düzelt -> menü ipucu admin dilinde, jargonsuz (2s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-10-04T00:47:42",
-    "bitis": null,
+    "bitis": "2026-10-04T03:31:58",
     "dosyalar": [
       "web_dashboard/tabs/__init__.py",
       "tests/test_dashboard_nav.py"
@@ -2854,7 +2860,8 @@
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_UI-ADMIN-ACIKLAMA-METIN-37.md",
-    "talimat": "Brief: plans/brief_utku_UI-ADMIN-ACIKLAMA-METIN-37.md — once oku, varsayimlari olc, sonra basla."
+    "talimat": "Brief: plans/brief_utku_UI-ADMIN-ACIKLAMA-METIN-37.md — once oku, varsayimlari olc, sonra basla.",
+    "sonuc": "ihsan onayi (utku teslimi). 28 failed/5297 passed baseline'da bu gorevden kirmizi yok. Not: ajan_acik_sorulari self-issue filtre bulgusu ayri backlog, bu teslimi bloklamiyor."
   },
   {
     "task_id": "UI-ADMIN-REHBER-ALAN-38",
@@ -2862,9 +2869,9 @@
     "baslik": "[UI] TabTanimi.rehber alanını yaz -> 6 dağınık _hg_rehber okuyucusu tek kapıdan geçer (3s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-10-04T00:47:42",
-    "bitis": null,
+    "bitis": "2026-10-04T03:32:17",
     "dosyalar": [
       "web_dashboard/tabs/__init__.py",
       "app.py",
@@ -2875,12 +2882,13 @@
       "web_dashboard/tabs/pazarlama.py",
       "web_dashboard/tabs/ana_kontrol.py"
     ],
-    "not": "",
+    "not": "Teslim (utku): Sekme rehberi tek kaynaga tasindi (TabTanimi.rehber + app.py:714-715 tek cizim); 7 okuyucuda _hg_rehber 0; 37 bolumun 12'si + 7 kokun tami rehberli. 7 yeni mandal (11->18, kirma denemesi rc=1); kabul seti 241 passed/3 skipped; tam surec 30 failed/5285 passed, bu gorevden kirmizi 0. SSOT v2.12, hub B-14, 5 bulgu, rapor yazildi.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_UI-ADMIN-REHBER-ALAN-38.md",
-    "talimat": "Brief: plans/brief_utku_UI-ADMIN-REHBER-ALAN-38.md — once oku, varsayimlari olc, sonra basla."
+    "talimat": "Brief: plans/brief_utku_UI-ADMIN-REHBER-ALAN-38.md — once oku, varsayimlari olc, sonra basla.",
+    "sonuc": "ihsan onayi (utku teslimi): 30 failed/5285 passed iddiasi dogrulandi. Taze baseline 28 failed/5297 passed; 28 kirmizinin hicbiri bu gorevle ilgili degil (mimir_baglam/brief_sablon/kok_politikasi/dokuman_politikasi gibi onceden var olan altyapi testleri). 0 kirmizi bu gorevden."
   },
   {
     "task_id": "VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01",
@@ -2888,21 +2896,22 @@
     "baslik": "[VERI] ASO ikiz ingest yolunu sil -> tek kanonik dosya + etl/ingest_aso.py tek yükleyici (3s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-10-04T00:47:42",
-    "bitis": null,
+    "bitis": "2026-10-04T03:38:07",
     "dosyalar": [
       "scripts/ingest_aso_data.py",
       "src/company_master/etl/ingest_aso.py",
       "scripts/refresh_pipeline.py",
       "tests/test_ingest_aso_glob.py"
     ],
-    "not": "",
+    "not": "Teslim (utku): Ikiz ingest yolu kapandi: tek yol src/company_master/etl/ingest_aso.py, eslesme yalniz kesin (fuzzy LIKE 673/722 yanlis aday), source_records idempotent. 57 test yesil. aso_full_clean.jsonl canli bagimlilik nedeniyle tasinmadi (D-233). Canli ingest calistirilmadi.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
     "brief": "plans/brief_utku_VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01.md",
-    "talimat": "Brief: plans/brief_utku_VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01.md — once oku, varsayimlari olc, sonra basla."
+    "talimat": "Brief: plans/brief_utku_VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01.md — once oku, varsayimlari olc, sonra basla.",
+    "sonuc": "ihsan onayi (utku teslimi): 57 test yesil dogrulandi (python -m pytest tests/test_ingest_aso_glob.py -q -> 57 passed). Tek yol src/company_master/etl/ingest_aso.py. 28 failed/5297 passed baseline'da bu gorevden kirmizi yok."
   },
   {
     "task_id": "VERI-WEB-SITESI-ZENGINLESTIR-01",
@@ -2910,7 +2919,7 @@
     "baslik": "[VERI] website_domain zenginleştirme kaynağını yaz -> unvan arama + canlı HTTP doğrulama, 7343 boş alana gerçek site (4s)",
     "sahip": "utku",
     "oncelik": "P2",
-    "durum": "plan",
+    "durum": "aktif",
     "baslangic": "2026-10-04T00:50:31",
     "bitis": null,
     "dosyalar": [
@@ -2923,5 +2932,25 @@
     "mod": "code",
     "brief": "plans/brief_utku_VERI-WEB-SITESI-ZENGINLESTIR-01.md",
     "talimat": "Brief GUNCELLENDI 2026-10-04: sizinti goc 0052 ile kapandi (adim 1+3 dustu). Kalan: alan sozlesmesi -> unvan arama -> HTTP 200 + icerik -> kabul() -> yaz; siteden telefon/eposta/adres de al (yalniz bos alana). Getirme: scripts/kazima_jina_fallback.py"
+  },
+  {
+    "task_id": "ALTYAPI-GOREV-AT-KAPI-01",
+    "id": "ALTYAPI-GOREV-AT-KAPI-01",
+    "baslik": "[ALTYAPI] gorev_at.py cmd_at'i duzelt -> kapi_gecer() kilit kapisindan gecer (3s)",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-10-04T02:21:58",
+    "bitis": "2026-10-04T03:32:28",
+    "dosyalar": [
+      "scripts/gorev_at.py"
+    ],
+    "not": "Teslim (yasu): kapi_gecer() gorev_at akisina baglandi (on-kapi). gorev_at.py:44-48 import; cmd_at icinde tb.gorev_ekle ONCESI (:306-323): dosyalar bos degilse kapi_gecer(dosyalar, ajan=args.ajan); gecmezse 'HATA (kilit kapisi)' + exit 8; sonra hareket_uyarisi() yazilir ama atamayi durdurmaz. CIKIS KODU 8 - olcum: return 4 D-58 kapisi (:252,:344), return 2 PermissionError (:341), kullanilan 1-7; 8 serbest. KOK NEDEN: _lock_alan (task_board.py:587) BAYAT kilit kontrolu yapmiyordu, 24 saat once kilitleyip birakilmis dosya sonsuza kadar atamayi reddediyordu; kapi_gecer once gecerek bayat'i eliyor. _lock_alan DEGISTIRILMEDI (D-211 tek kaynak). TEST 31 passed: yeni tests/test_gorev_at_kilit_kapisi.py (11) + mevcut test_gorev_at_kapi.py (11) + test_ajan_cakisma_kilidi.py (9). Kanitli senaryolar: taze baska-ajan kilidi exit 8 ve pano bozuk kalmadi; bayat kilit gecti; hareket uyarisi yazdi ama atama oldu; dosya bosken kapi cagrilmadi; kapi gorev_ekle oncesi calisti. NOT: test_gorev_at_kapi.py zaten vardi ve baska goreve aitti (ORKESTRA-GOREV-KAPI-01 D-66/D-80), ustune yazmadim. Hub: hubs/ORKESTRASYON_AJANLAR_HUB.md Kapanan isler.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-GOREV-AT-KAPI-01.md",
+    "talimat": "plans/brief_yasu_ALTYAPI-GOREV-AT-KAPI-01.md okunur ve uygulanir: kapi_gecer() cmd_at icine baglanir",
+    "sonuc": "ihsan onayi (yasu teslimi). 28 failed/5297 passed baseline'da bu gorevden kirmizi yok."
   }
 ]

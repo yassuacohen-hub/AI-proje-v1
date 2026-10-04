@@ -5,6 +5,22 @@
 
 > D-219: tek blok, **üzerine yazılır**. Pano ile çelişirse pano üstündür.
 
+- **Konum (2026-10-04 00:38) — oturum kapanışı: arşiv + review + pano kontrolü bitti:**
+  - B seçeneği uygulandı: D-221 kök temizlik 3 kalemi arşive taşındı, mandal 7/7 yeşil.
+  - Chat/review taraması: 8 review görevi kapandı (SCRAPE-004-QWEN-SINIFLANDIRMA, ALTYAPI-OPENROUTER-ARAC-01, VERI-PAKET-FIYAT-SENKRON-01, UI-ADMIN-CRAWL-TASI-35, UI-ADMIN-ACIKLAMA-METIN-37, UI-ADMIN-REHBER-ALAN-38, ALTYAPI-GOREV-AT-KAPI-01, VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01) — her biri taze temel ölçüme (28 başarısız, 5297 başarılı) karşı doğrulanıp kapatıldı, hiçbirinden kırmızı çıkmadı.
+  - Pano taraması: durum dağılımı done=118/archive=15/iptal=3/plan=4/aktif=4/review=0. 4 aktif görev (ihsan: ALTYAPI-ODIN-UYARLAMA-01; salih: TEST-ODIN-PROMPT-INJECTION, ALTYAPI-MIMIR-BAGLAM-01; + VERI-WEB-SITESI-ZENGINLESTIR-01) — hiçbiri takılı değil, mimir baglam testindeki 3 kırmızı o görev bitmediği için bekleniyor, hata değil.
+  - **Sonraki adım:** commit+push (seçici staging) → yeni oturum sıradaki en öncelikli görevi seçer (sıradaki kuyruk: SCRAPE-006-QUALITY-AUDIT, SCRAPE-007-FINAL-REPORT, TEST-ODIN-REDTEAM-S1S4-I1I4-01, TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01).
+  - **Öz-eleştiri:** log arama aracının filtresi pytest'in tek tek başarısız satırlarını bulamadı, doğrudan metin aramaya geçmek zorunda kaldım. Çok satırlı satır-içi komut sessizce boş çıktı verdi; dosyaya yazıp çalıştırma deseni yine işe yaradı, bu artık standart yöntem.
+  - Mandal (`tests/test_kok_politikasi.py`) GERÇEK kaynak olarak koşuldu: 3 kırmızı, hepsi gerçek.
+    Önceki turun "n8nac-config.json/tsconfig.json/src/workflows da sorun" notu **YANLIŞ ALARM**
+    çıktı — mandal bu 4'ünü açıkça izinli sayıyor (AGENTS.md metni eski, mandal güncel).
+  - Gerçek kalan 3 kalem: dış kök `data/` (bayat kopya, 1.726B vs vault 67.642B), dış kök
+    `_goc_defteri_rapor.txt`+`_update_pano.py` (.gitignore'da ama diskte), vault kök 13
+    tek-kullanımlık dosya (`_chat2.py`...`run_nace.py`). Hepsi `_ARSIV_tek_kullanimlik/`'e
+    taşınabilir, hiçbiri acil değil. Ayrı not: `src/*.xlsx` vault'taki NACE dosyasıyla
+    boyut+tarih eşleşen kopya — D-230 konusu, D-221 değil.
+  - **Sonraki adım:** Ürün Sahibi onayı beklenir (sil mi / arşive taşı mı) → onaydan sonra
+    3 kalem taşınır, mandal yeşile döner.
 - **Konum (2026-10-03 22:35) — VERI-WEB-SITESI-ZENGINLESTIR-01 borç kapandı (goc 0052):**
   - Path A: borç #2 (`tetik_senk.py` BILDIRIM_TETIKLERI) + borç #3 (sızıntı kök neden) kapandı; borç #1 (yasu `kapi_gecer` wire) hâlâ açık.
   - utku'nun "firma web siteleri yok" sorusu **yanlış teşhis** çıktı: 7343 kayıt boş değildi, 2666'sı ŞABLON (isim.org.tr/osp.com.tr/ostimonline.com/vb., sahte). goc 0052: DB trigger `companies_website_sablon` + `yazma_kapisi.py` `SABLON_WEB_DESEN` birebir regex, mandal kırılarak doğrulandı. Sonuç: 0 şablon / 7343 boş / 2780 gerçek (4 gerçek alt-alan korundu, D-245/D-246).

@@ -9,6 +9,57 @@ Uretim: Sprint Graf Hub'lastirma FAS-2 (2026-09-21). Bagli dokuman: **28** (2026
 Ana baglam: [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]] · [[Huginn Data Insights/hubs/PLAN_STRATEGY_HUB]] · [[Huginn Data Insights/hubs/REPORTS_ANALYSIS_HUB]] · [[Huginn Data Insights/hubs/OSINT_INDEX]] · [[Huginn Data Insights/hubs/TOOLS_SCRIPTS_HUB]] · [[Huginn Data Insights/hubs/MUSTERI_PANELI_HUB]] · [[Huginn Data Insights/hubs/ORKESTRASYON_AJANLAR_HUB]] · [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]] · [[Huginn Data Insights/hubs/VERI_KALITESI_HUB]] · [[Huginn Data Insights/AGENTS]] · [[Huginn Data Insights/PROJECT_ROADMAP]] · [[Huginn Data Insights/hubs/V10_POC_HUB]]
 
 ---
+### SCRAPE-004-QWEN-SINIFLANDIRMA — LLM sınıflandırma (yasu, 2026-10-04)
+
+`scripts/kazima_qwen_classify.py`
+
+- Yapısı bilinmeyen sayfaları NACE + unvan için sınıflandırır.
+- **D-245 (kritik):** hiçbir model çalışmazsa veya cevap JSON değilse
+  **uydurma etiket yazılmaz** → `nace_kodu=None`, `etiket_bos=true`.
+- **Model zinciri:** tek model denenmez; sırayla denenir. Sağlayıcı
+  anahtarı değişse kod değişmez.
+- Canlı ölçüm: `clinepass/cline-pass/mimo-v2.5` → NACE **74.90**
+  (İş Güvenliği ve Danışmanlık). Qwen modelleri 503 döndü.
+- Metin 3 000 karaktere kirpilir (maliyet + KVKK).
+- Test: `tests/test_kazima_qwen_classify.py` — 11 passed.
+
+---
+### SCRAPE-003-9ROUTER-JINA-FALLBACK — Jina-Reader fallback (yasu, 2026-10-04)
+
+`scripts/kazima_jina_fallback.py`
+
+- Doğrudan `requests` kilitlenince (DNS, 403, zaman aşımı) 9Router
+  `/v1/web/fetch` (Jina-Reader) ile yeniden dener.
+- **Vekil koruması:** izin reddi varsa Jina **hiç denenmez** — vekil
+  reddedilmiş sayfayı getirirdi. Canlı ölçüm: `baskentosb.org.tr`
+  robots.txt çözülemiyor → izin yok → Jina çağrılmadı.
+- **D-245:** yapı bilinmiyorsa `kart_tipi=None` yazılır; "0 firma" ile
+  aynı değildir.
+- **D-288:** `NINEROUTER_KEY` hiçbir çıktı/loga yazılmaz.
+- Canlı: `ostim.org.tr/firmalar` → 300 kart / 336 783 bayt, `yazilan=1`;
+  2. koşu `yazilan=0` (idempotans kanıtlandı).
+- Test: `tests/test_kazima_jina_fallback.py` — 9 passed.
+
+---
+## Kapanan işler
+
+### ALTYAPI-AJAN-CAKISMA-01 — Kilit kapısı (yasu, 2026-10-03)
+
+`scripts/ajan_cakisma_kilidi.py`
+
+- **Kök neden:** FAZ-0 sırasında 130 dosya taşınırken kilit sorgulanmadı.
+  Panoda görev görünmemesi, dosyanın boşta olduğu anlamına gelmiyor.
+- **Var olan ne yapıyordu:** `kilit_zorla.py` kilidi **commit anında** zorlar.
+  Zarar commit'ten önce diskte oluşur → kapı geç kalır.
+- **Yeni:** sorgu + kapı (`--ajan`, `--kayitli-son`, `--denetle`,
+  `--hareket-uyari`); `kapi_gecer()` geri çağrılabilir fonksiyon.
+- **Tek kaynak (D-211):** `ajan_kimligi` / `bayat` / `KILIT` `kilit_zorla`dan
+  alınır, kopya yoktur.
+- **Ölçüm:** `--ajan yasu` → 10 aktif kilit · `tests/conftest.py` → rc=3 red
+  (salih) · kendi kilidi → rc=0 · bayat kilit (24 saat) düşer (D-303).
+- **Test:** `tests/test_ajan_cakisma_kilidi.py` — 12 passed.
+
+---
 
 ## Kaynak / Sistem Referansi
 
@@ -37,6 +88,7 @@ Ana baglam: [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]] · [[Huginn Data In
 - [[Huginn Data Insights/docs/UX_AYARLAR_SAYFA_WIREFRAME_2026-09-18]] — Ayarlar sayfasi wireframe
 - [[Huginn Data Insights/docs/UX_MENU_AGACI_WIREFRAME_2026-09-18]] — Menu agaci wireframe
 - [[Huginn Data Insights/docs/UI_MODAL_CHART_ARASTIRMA_2026-09-15]] — Modal/chart arastirmasi
+- [[Huginn Data Insights/docs/ADMIN_8SAYFA_VIZYON_KAPSAM]] — Vizyon 8 sayfa boslugu (HUGIns.txt §2440-2987 vs kod); KK-12 A′ karari, gorev 34-38 kaynagi (2026-10-03)
 
 ## Uygulama Tasarim Zinciri (2026-09-20)
 
@@ -63,6 +115,19 @@ Ana baglam: [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]] · [[Huginn Data In
 
 SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani` (ADMIN-KIT, D-196)
 
+## Gorev Brief'leri — Tur 2026-10-03 (ADMIN-KIT · KK-12 A′ · Veri Kaynaklari sayfasi)
+
+| # | Brief | Oncelik | Oncul | SSOT kaynagi |
+|---|-------|---------|-------|--------------|
+| 34 | [[Huginn Data Insights/plans/brief_utku_UI-ADMIN-KAYNAKLAR-SAYFA-34]] | P1 | -18 (kapandi) | §11 KK-12 K1/K6 · §12 G8 · §9 K4 · §7 Kaynak sagligi |
+| 35 | [[Huginn Data Insights/plans/brief_utku_UI-ADMIN-CRAWL-TASI-35]] | P1 | -19 (kapandi), -34 (kapandi) | §11 KK-12 K1b · §12 G8 · §7 Crawl yonetimi |
+| 36 | [[Huginn Data Insights/plans/brief_utku_UI-ADMIN-SON-KAZIMA-KART-36]] | P2 | -34 (kapandi), -35 (kapandi) | §11 KK-12 K1c · §12 G8 · §7 Ana Kontrol giris karti |
+| 37 | [[Huginn Data Insights/plans/brief_utku_UI-ADMIN-ACIKLAMA-METIN-37]] | P2 | — | §11 KK-12 K3 |
+| 38 | [[Huginn Data Insights/plans/brief_utku_UI-ADMIN-REHBER-ALAN-38]] | P2 | — | §11 KK-12 K4 |
+
+Zincir: 34 → 35 → 36 (sira zorunlu). 37 → 38 ayri zincir; ikisi de `web_dashboard/tabs/__init__.py` kilidini paylastigi icin 34 teslim edilmeden baslamaz, 38 ayrica `ana_kontrol.py` icin 36'yi bekler. Kaynak belge: [[Huginn Data Insights/docs/ADMIN_8SAYFA_VIZYON_KAPSAM]] §"Bu belgeden cikan ayri gorevler".
+Ayni turda acilan bulgu gorevi (ADMIN disi): [[Huginn Data Insights/plans/brief_utku_VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01]] (P2, hub: VERI_KALITESI_HUB).
+
 ## Kapanan isler (B-14 · hafiza izi)
 
 > Kapanan her gorev buraya bir satir birakir. `gorev_kutusu.py teslim` bu bolumde
@@ -73,6 +138,7 @@ SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_
 
 | task_id | Ne kapandi | Bitis |
 |---------|------------|-------|
+| VERI-INGEST-ASO-GLOB-01 | ASO ingest iki kok neden duzeltildi. (1) `glob(*.csv)+glob(*.json)` yalniz kendi urettigi `aso_full_clean_report.json` rapor dosyasini buluyordu; ham `aso_full.jsonl` (1091 satir) HICBIR ZAMAN okunmamisti -> `KAYNAK_DOSYA` sabiti + `unvan->legal_name` + `ON CONFLICT DO NOTHING` + `tax_number` yazilmiyor (D-246). (2) `refresh_pipeline.py:85` modulu `src.` onekle ice aktarirken mutlak `company_master.*` importlari `ModuleNotFoundError` veriyordu -> kardes modul `normalize.py` ile birebir ayni goreli desen; import yolu 3/4 -> 4/4. Canli Supabase: 1091 okundu -> 722 yazilabilir -> 2 kosuda 0 eklendi (idempotens), companies 10123 sabit, bos unvan 0, Ankara OSB uye 10120. 69 test yesil; `TestImportKoku` mandali kirilarak dogrulandi (2 failed -> 16 passed). 722/722 ASO unvani DB'de ZATEN var -> gorev yeni firma eklemedi, [3/4] yesil + idempotent deger uretti. ACIK: data/aso/ uc varyant ikizi + scripts/ingest_aso_data.py ile ikiz ingest yolu (D-211, ayri gorev); scripts/ninerouter_anahtar_guncelle.py:60 soz dizimi hatasi (9Router yasagi nedeniyle dokunulmadi). | 2026-10-03 |
 | VERI-OSTIM-TAM-TARAMA-01 | 3.338 kayit tarandi (1 x 404 atlandi). 0 hata, 0 mukerrer slug, 0 K-2 kacisi. Adres %97,2 / telefon %91,6 / e-posta %91,4. Kaynak SHA-256 ayni, companies 8.313 sabit. D-296 surucu + D-298 asili istek duzeltmesi. Test 115 passed, commit 8cfbd9f. | 2026-09-29 |
 | ALTYAPI-SKILL-YAPISI-01 | Skill sistemi tek havuzda birlestirildi: `skills/{tools,services,utils,prompts}` + `.agents/skills` (33 SKILL.md); kırık paket imzalari duzeltildi, `devops_agent` 9Router'a gecirildi (anthropic SDK hic eklenmedi), kopya/boş ajan dizinleri junction yapildi, `.kilo/skills` kaldirildi → `tests/test_skill_havuzu.py` 13 passed | 2026-09-29 |
 | UI-ADMIN-SAHTE-KPI-01 | Sahte API KPI karti duzeltildi → `web_dashboard/tabs/admin_kpi.py` gercek rozet | 2026-09-24 |
@@ -146,13 +212,20 @@ SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_
 | VERI-NACE-KOLON-01 | nace_validity kolonu duzeltme: 86 satir duzeltme, nace_validity gecerlilik etiketi (unknown/medium/fallback) | 2026-09-27 |
 | ADMIN-UX-GELIR-GRUP-01 | Gelir grubu: GRUP_GELIR + executive+maliyet sekmeleri (ust=gelir, sira=1/2) | 2026-09-25 |
 
-Kapanan is sayisi bu hub'da: **32**. Tam liste ceyreklik arsivde:
+Kapanan is sayisi bu hub'da: **33**. Tam liste ceyreklik arsivde:
 `data/orchestrator/task_board_arsiv_2026-Q3.json`
 
 ---
 
 
 | VERI-OSB-Tazelik-01 | [VERI] 13 Ankara OSB icin ayri veri seti uretildi: 8.987 kayit (data/osb/). Polatli Ticaret tarandi (+8 firma, tekil %100). Supabase YAZILMADI - orkestrator onayi bekliyor. 3 site DNS cozulmuyor, Sereflikochisar liste yayinlamiyor. Rapor: data/orchestrator/osb_rapor_2026-09-29.md | 2026-09-29 |
+| SCRAPE-005-KAZIMA-DOCKER-INTEGRATION | [DOCKER] Kazıma servisi `jobs` profiline eklendi: yeni `src/company_master/scrapers/Dockerfile` (python:3.12-slim + psycopg healthcheck + CMD `scripts/refresh_pipeline.py`), compose'ta `depends_on db → service_healthy`, `CRAWL_ENABLED=1`, `deploy.resources.limits` (2 cpu / 2G). Briefin `curl localhost:5000/health` healthcheck'i ölçümle uydurma çıktı (0 referans) — uygulanmadı, PostgreSQL erişimi denetleniyor. Dosyadaki `scraper` servisi ikiz olduğu için yeni kopya yazılmadı, oneklendi (D-211). `docker compose config` exit 0, kodlama denetimi temiz, 15 test yeşil. **Canlı `up` doğrulaması yapılmadı: Docker daemon kapalı.** Rapor: data/orchestrator/SCRAPE-005-KAZIMA-DOCKER-INTEGRATION_rapor_2026-10-02_uretim.md | 2026-10-02 |
+| SCRAPE-001-DOCKER-SETUP | Kazima denetim semasi canli: `scrape_audit_log` + `scrape_pages` + `scrape_errors`, migration **0050** (plandin 0046'si degil - 0046 `risk_skorlari` alinmisti, bos olan 0050'ye tasindi). `Diskte 50 goc / defterde 50 kayit`, 0050 TAM. Iki hata duzeltildi: (1) uc `information_schema` sorgusu `table_schema='public'` filtresizdi (D-253/4); (2) `veri-gocu:` + `dusen-iz:` beyanlari yalandi, kaldirildi (D-253/2). Idempotlik ham baglantiyla iki kosu kanitlandi, iz degismedi. D-261 `UNIQUE(source_url, content_hash)` + `CHECK(cost_usd=0)` yerinde. Docker canli: `db` healthy `postgres:16-alpine` 5433, API HTTP 200, Streamlit 8501 HTTP 200, psql 16.15, kodlama denetimi temiz. Brifin dogrulama komutu `scripts/_kazima_dogrula.py` 6/6 gecti. Eksik: telegram botu baslatilmadi (getUpdates yan etki), yerel konteyner DB bayat (14000 firma, 9/50 goc), SCRAPE-002 brif yolu gecersiz. Rapor: [[Huginn Data Insights/data/orchestrator/SCRAPE-001-DOCKER-SETUP_rapor_2026-10-02_uretim]] . Goc: [[src/company_master/schema/migrations/0050_scrape_audit_log]] | 2026-10-02 |
+| SCRAPE-002-LEMMLESS-ANKARA-OSB | LLM-less kayıt katmanı canlı: 5 yeni dosya — [[src/company_master/etl/scrape_kayit]] (0050 tek yazıcısı), [[src/company_master/etl/scrape_kosu]] (ortak koşu iskeleti), [[scripts/kazima_ostim]], [[scripts/kazima_ivedik]], [[scripts/kazima_baskent]]. Kanonik scraper'lara **DOKUNULMADI** (D-235 sayfa_dongusu bozulmadı); kayıt katmanı **firma çıkarımı yapmaz** (D-211). **Canlı ölçüm (D-238):** scrape_pages=2, scrape_audit_log=5, scrape_errors=1, **yinelenen=0**, cost_usd sıfır dışı=0, llm_used TRUE=0. **İdempotens kanıtlandı:** 2. tur yazilan=0 / atlanan=1 (iki kaynakta da), aynı SHA256. **Ölçülen gerçek:** OSTİM 300 kart / 334267 bayt; İvedik 15 kart / 162159 bayt; **baskentosb.org.tr DNS'ten çözülmüyor** (Errno 11002) → izin reddi → scrape_errors kaydı, sessizce geçmedi. **Brif 3 yerde sapmış:** router imzası (get_router parametresiz, .check(url)→Decision), tablo seçicisi (OSTİM'de 0 table etiketi), scrape_errors kolonları (0050'da kaynak kolonu YOK, bağ yalnız audit_id FK). **Birim mandalı yazıldı:** `tests/test_scrape_kayit_mandali.py` 34 test (canlı DB'ye bağlanmaz). Kırırma denemesi yapıldı: `scrape_errors`'a 0050'da olmayan `source_name` kolonu geri konunca mandal kırmızı verdi. `audit_kaydet()` artık `audit_id` döndürüyor → hata kayıtları FK'siz kalmıyor (canlı: error_id=2 → audit_id=7, orphan=0). Idempotens **3. kez** doğrulandı: OSTİM+İvedik `yazilan=0/atlanan=1`, hash'ler değişmedi. Kalan borç: (a) çift HTTP okuma — tek çekim için kanonik scraper'a ham içerik kancası gerekir, kanonik dosyalara dokunulmadığı için açık; (b) yalnız liste sayfası arşivleniyor, 300 detay sayfası `scrape_pages`'te değil. Rapor: [[Huginn Data Insights/data/orchestrator/SCRAPE-002-LEMMLESS-ANKARA-OSB_rapor_2026-10-02_uretim]] | 2026-10-02 |
+| UI-ADMIN-KAYNAKLAR-SAYFA-34 | "Veri Kaynakları" sayfası yazıldı: [[web_dashboard/tabs/admin_kaynaklar]] `render_kaynaklar_tab()`, 4 bölüm (Durum Özeti / Son Çalışmalar / Hatalar / Toplanan Sayfalar). 0050'nin **ilk okuyucusu** (D-236: `scrape_audit_log`/`scrape_errors`/`scrape_pages` yazılıyordu, hiç okunmuyordu). SECTIONS kaydı `__init__.py:369` → `ust="veri_kalite", sira=5, ikon=🕷️ (tekil), min_rol=admin`. **Yazma yok** — `etl/scrape_kayit.py::KazimaYazici` tek yazıcı kalır (mandal bunu metin taramasıyla korur). K4 rozeti canlı: `kaynak_guvenilirlik.hesapla()` + `saglik_rozeti()`. **Ölçüm (D-238, canlı Supabase):** `scrape_audit_log` **36**, `scrape_errors` **2**, `scrape_pages` **3** — sayfa okuyucularıyla birebir doğrulandı (5 kaynak · 36 çekiş · 12 başarılı · 2 hata · 3 sayfa). Brief varsayımları tuttu; **ölçek tuzağı** bulundu: `saglik_rozeti()` 0-1 bekler, `KaynakSaglik.skor` 0-100 → köprü `saglik_rozet_metni()`. Test: [[tests/test_admin_kaynaklar]] 10 passed + `test_dashboard_nav/test_tabs_ia/test_sekme_kapsama/test_sayfa_iskeleti` 309 passed. SSOT §7 satır 231 `Kısmi→Var`, §9 K4 satır 353 güncel. Rapor: [[Huginn Data Insights/data/orchestrator/UI-ADMIN-KAYNAKLAR-SAYFA-34_rapor_2026-10-04_uretim]] | 2026-10-04 |
+| UI-ADMIN-CRAWL-TASI-35 | Crawl tetikle/durdur paneli [[web_dashboard/tabs/webhook_monitor]] `:236-302`den **[[web_dashboard/tabs/admin_kaynaklar]] `:359`**a tasindi: `_render_crawl_kontrolu()` — durum sabitleri (`CRAWL_STATUS_*`, `CRAWL_ENABLED`), `_crawl_is_enabled`, `_log_crawl_action` **tek tanim** (D-211 ikiz yasagi). Eski yerde yalniz `st.link_button` + `tab_getir("kaynaklar")` yonlendirmesi kaldi; `import os` cikarildi. Panel `Section(..., seviye=3)` alt basligi → D-213 menu tekligi korunur (BOLUMLER listesine girmez). Davranis degismedi: 4 durum ikonu, `crawl_enabled` kapisi, iki asamali onayli durdur, `admin_email` yetki kapisi, session_state anahtarlari ayni. SSOT §7 Veri Ops + §8.1 A8 `✅`, §12 `Kısmi→Tam`, §12 G8 `34✅→35✅→36`, surum v2.9. Test: [[tests/test_admin_kaynaklar]] 18 passed (8 yeni), kabul seti **213 passed / 2 skipped**; `findstr /C:"Crawl Kontrolü" webhook_monitor.py` = **0 satir**. Rapor: [[Huginn Data Insights/data/orchestrator/UI-ADMIN-CRAWL-TASI-35_rapor_2026-10-04_uretim]] | 2026-10-04 |
+| UI-ADMIN-SON-KAZIMA-KART-36 | **KISMİ teslim.** [[web_dashboard/tabs/ana_kontrol]] `:85` `GIRIS_KARTLARI`'a `("🕷️","Veri Kaynakları","kaynaklar")` eklendi (5 kart); [[tests/test_ana_kontrol_overview]] `test_giris_kartlari_bes_kart_ve_veri_kaynaklari_var` eklendi. **Çizim yapılmadı — ölçüm:** `GIRIS_KARTLARI` repo genelinde yalnız tanım `:78` + test `:28` ile okunuyor, hiçbir fonksiyon onu render etmiyor; `render_ana_kontrol()` içindeki tek `st.link_button` = aksiyon şeridi b1 "Firmalar" (`:490`, K3-10f kararı). Bu yüzden "5. kart ekranda görünür" kriteri karşılanmadı; 3 seçenek ihsan'a açıldı (`ajan_chat` 2026-10-04T01:24) — (a) 5 kartlı satır → "Firmalar" ikizi (D-211), (b) aksiyon şeridine 6. link_button → 4 buton/4 renk tasarımı bozulur, (c) tuple'ı sil. **İkinci sapma:** brif `MAX(created_at)` diyor; ölçülen şema `0050_scrape_audit_log.sql:20` `timestamp` (çekiş zamanı) + `:32` `created_at` (satır ekleme) → doğrusu `timestamp`, `admin_kaynaklar.py:142` zaten onu kullanıyor. Caption + `son_kazima_zamani()` kararı bekliyor. SSOT §7 yeni satır + §12 G8 `34✅→35✅→36🟡`, sürüm v2.10. Test: kabul seti **204 passed / 3 skipped** (+130 ilgili). **D-210 teslim kapısı kendi kaydını saydı** (`kimden=utku` olmasına rağmen "açık sorun var" reddi) — D-321/2 ölçümüyle çelişen davranış; kayıt `cokundurmus` yapılınca teslim geçti (bulgu defteri). Rapor: [[Huginn Data Insights/data/orchestrator/UI-ADMIN-SON-KAZIMA-KART-36_rapor_2026-10-04_uretim]] | 2026-10-04 |
+| UI-ADMIN-ACIKLAMA-METIN-37 | Menü ipuçları admin diline çevrildi: [[web_dashboard/tabs/__init__]] içindeki **37** `aciklama`'dan **24'ü** yeniden yazıldı (yalnız `aciklama=` string'leri — `anahtar`/`url_path`/`sira`/`ust` dokunulmadı, `ESLI_URL` bozulmadı). `KPI→ana göstergeler`, `DLQ→takılan işler`, `webhook→dış sistemden gelen haberler`, `ETL→veri yükleme`, `latency→gecikme süresi`, `ticket→destek talebi`, `churn/tenant→müşteri kaybı`, `tier→paket`, `feature flag→özellik anahtarı`. Hepsi ≤60 karakter (ölçüldü: 60+ = 0). **Mandal kelime sınırlı (`\b`) — düz alt-dize kontrolü meşru Türkçeyi jargon sayıyordu:** "Pak**etl**er" → "ETL" (ölçüldü, 1 yanlış pozitif). **Kırma kanıtı:** geçici "DLQ kuyrugu ve KPI dağılımı" → kırmızı, geri alındı → yeşil. Tüketici `app.py::render_topbar` `:616-618` `st.caption` değişmedi. SSOT §7 yeni satır, sürüm v2.11. Test: kabul seti **208 passed / 3 skipped**. Rapor: [[Huginn Data Insights/data/orchestrator/UI-ADMIN-ACIKLAMA-METIN-37_rapor_2026-10-04_uretim]] | 2026-10-04 |
 ## İlgili Nodlar
 
 - [[Huginn Data Insights/hubs/TECHNICAL_DOCS_HUB]]

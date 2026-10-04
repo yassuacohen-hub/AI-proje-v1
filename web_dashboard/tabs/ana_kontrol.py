@@ -74,14 +74,10 @@ _AKSIYON_CSS = "<style>" + "".join(
     for anahtar, renk in _AKSIYON_RENK.items()
 ) + "</style>"
 
-#: §8.4.2 — Overview'dan ilgili sekmeye giriş kartları (ikon, etiket, tab anahtarı).
-GIRIS_KARTLARI: tuple[tuple[str, str, str], ...] = (
-    ("👥", "Firmalar", "musteriler"),
-    ("🧑", "Kullanıcılar", "kullanicilar"),
-    ("⚠️", "Olaylar & Hatalar", "hatalar"),
-    # D-214: eski "kpi" ikizi silindi, kok bunu devraldi (SECTIONS)
-    ("📊", "Metrikler", "veri_kalite"),
-)
+# D-266/KART-36: eski GIRIS_KARTLARI tuple'ı hicbir fonksiyon tarafindan
+# cizilmiyordu (olu kod, test yanilti yesildi). KK-12 K1c ihtiyaci (tek
+# tikla /kaynaklar) asagidaki aksiyon seridine b6 link_button olarak
+# tasindi; tuple kaldirildi (D-236: tuketicisi olmayan cikti uretilmez).
 
 
 @st.cache_data(ttl=30)
@@ -477,7 +473,7 @@ def render_ana_kontrol_tab() -> None:
     # ================= BLOK 1/5 — Aksiyon şeridi (§8.4.1) =================
     with st.container(border=True):
         st.markdown(_AKSIYON_CSS, unsafe_allow_html=True)
-        b1, b2, b3, b4, b5 = st.columns(5, vertical_alignment="center")
+        b1, b2, b3, b4, b5, b6 = st.columns(6, vertical_alignment="center")
         with b1:
             # K3-10f (KAHİN): "veriyi güncelle ile veriyi yenile aynı şey değil mi,
             # mavi olan fazla gibi duruyor, onun yerine firmalar kısmını getir."
@@ -510,6 +506,13 @@ def render_ana_kontrol_tab() -> None:
             if st.button(etiket, key="ovw_onay", width="stretch",
                          help="Onay bekleyen kullanıcıları listeler."):
                 st.session_state["ovw_onay_ac"] = True
+        with b6:
+            # KK-12 K1c (KART-36): "son kazıma ne zaman" sorusu tek tıkla yanıtlansın.
+            _kaynak_tab = tab_getir("kaynaklar")
+            st.link_button(
+                "🕷️ Kaynaklar", f"/{_kaynak_tab.url_path}" if _kaynak_tab else "/",
+                width="stretch", help="Veri Kaynakları sekmesine gider.",
+            )
 
         sonuc = st.session_state.get("ovw_sonuc")
         if sonuc:
@@ -728,15 +731,3 @@ def render_ana_kontrol_tab() -> None:
         st.caption("Kaynak doluluğu için `sources` tablosu henüz bağlanmadı.")
 
     # K3-10g: rehber anahtarı sayfa altında (`app.REHBER_KEY`); modül yalnız okur.
-    if st.session_state.get("_hg_rehber", False):
-        st.info(
-            "**Bu ekran ne işe yarar?** Müşteri tarafı (kayıt, onay, kredi) ve sistem tarafı "
-            "(firma sayısı, kalite skoru, görev durumu) metriklerini tek bakışta gösterir.\n\n"
-            "**Nasıl kullanılır?** Kartlar veri geldikçe kendiliğinden açılır. Bölüm "
-            "başlıklarından ilgili panele atlayın.\n\n"
-            "**Veriler nereden gelir?** `/api/kpi` ve `/metrics` uç noktaları ile "
-            "webhook izleme kayıtları. 30 saniyede bir yenilenir.\n\n"
-            "**Dikkat:** Verisi henüz gelmemiş kutular yer tutucu değerle çizilir ve "
-            "hemen altlarında **SAHTE VERİ** uyarısı bulunur. Gerçek veri geldiğinde "
-            "kutu otomatik olarak gerçek değere geçer, uyarı kendiliğinden kaybolur."
-        )

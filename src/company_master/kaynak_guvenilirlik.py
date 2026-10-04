@@ -334,6 +334,15 @@ def saglik_rozeti(oran: float) -> str:
     return "Kritik"
 
 
+def saglik_rozeti_yuzde(skor: float) -> str:
+    """0-100 skor → rozet metni (D-212 tek kapı: 0-1/0-100 köprüsü burada yaşar).
+
+    Args:
+        skor: `hesapla()`'dan gelen 0-100 skor (bkz. KaynakSaglik.skor)
+    """
+    return saglik_rozeti(round(skor / 100.0, 4))
+
+
 def dlq_birikme_hizi(dlq_adet_simdi: int, dlq_adet_onceki: int, saat_farki: float) -> float:
     """DLQ birikme hızını hesapla (saat başı).
 

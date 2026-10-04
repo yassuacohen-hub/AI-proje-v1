@@ -1,4 +1,4 @@
-Diskte 36 goc, defterde 36 kayit.
+Diskte 50 goc, defterde 50 kayit.
 
 0001_core.sql                                 TAM    defterde
 0002_relations.sql                            TAM    defterde
@@ -39,5 +39,23 @@ Diskte 36 goc, defterde 36 kayit.
 0034_tasfiye_durumu.sql                       TAM    defterde
 0035_sicil_tasima.sql                         TAM    defterde
 0036_nace_olu_kolon.sql                       TAM    defterde
+0037_tsg_olay_hatti.sql                       TAM    defterde
+0038_sorgu_talepleri.sql                      ESKIMIS defterde
+      eksik iz: ustunden gecen: 0041_tsg_kolon_adlari_ingilizce.sql
+0039_tender_tracking.sql                      TAM    defterde
+0040_rls_anon_kapisi.sql                      VERI   defterde
+      beyan: bu dosya YENI TABLO veya KOLON OLUSTURMAZ. Yalniz yetki ve
+0041_tsg_kolon_adlari_ingilizce.sql           TAM    defterde
+0042_tender_kolonlari_ingilizce.sql           TAM    defterde
+0043_sector_columns.sql                       TAM    defterde
+0044_tender_remaining_columns.sql             VERI   defterde
+      beyan: isim->name RENAME, cekilme_tarihi eklendi (sonra 0045'te crawled_at oldu)
+0045_tender_cekilme_tarihi_rename.sql         VERI   defterde
+      beyan: cekilme_tarihi -> crawled_at RENAME (D-251/1 Ingilizce sema uyumu)
+0046_risk_skorlari.sql                        TAM    defterde
+0047_entity_graph.sql                         TAM    defterde
+0048_firma_turu_etiketi.sql                   TAM    defterde
+0049_firsat_skorlari.sql                      TAM    defterde
+0050_scrape_audit_log.sql                     TAM    defterde
 
 Deftere yazilacak (semada izi tam): 0

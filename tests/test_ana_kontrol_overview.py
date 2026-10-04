@@ -24,17 +24,20 @@ def _oturum(monkeypatch):
     return ak
 
 
-def test_giris_kartlari_gercek_sekmeye_isaret_eder(_oturum) -> None:
-    for _ikon, _etiket, anahtar in _oturum.GIRIS_KARTLARI:
-        tanim = tab_getir(anahtar)
-        assert tanim is not None, anahtar
-        assert tanim.url_path, anahtar
+def test_giris_karti_dead_code_kaldirildi(_oturum) -> None:
+    """D-266/KART-36: cizilmeyen GIRIS_KARTLARI tuple'i kaldirildi."""
+    assert not hasattr(_oturum, "GIRIS_KARTLARI")
+
+
+def test_kaynaklar_sekmesi_tab_getirden_cozulur(_oturum) -> None:
+    """KK-12 K1c: Ana Kontrol'den /kaynaklar tek tıkla erişilebilir olmalı."""
+    assert tab_getir("kaynaklar").url_path == "kaynaklar"
 
 
 def test_buton_renkleri_token_disina_cikmaz(_oturum) -> None:
     izinli = set(RENKLER.values())
     assert set(_oturum._AKSIYON_RENK.values()) <= izinli
-    assert len(_oturum._AKSIYON_RENK) == 4  # 5. buton birincil (primary)
+    assert len(_oturum._AKSIYON_RENK) == 4  # link_button'lar bu sozlukte degil
 
 
 def test_sonuc_yaz_oturuma_yazar(_oturum) -> None:
