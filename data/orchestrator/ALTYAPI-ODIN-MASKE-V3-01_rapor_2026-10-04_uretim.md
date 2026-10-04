@@ -72,30 +72,77 @@ Yeni dosya acilmadi. Bagimlilik eklenmedi. `web_app.py` **dokunulmadi** (KAHIN k
 | `__all__` dan `"ODIN_KAYNAK_MUSTERI"` cikarildi | `test_kaynak_musteri_sabiti_disa_aktarilir` **kirmizi** |
 | Geri alindi | 35 passed, doctest 20/0 |
 
-### Bilinen kirmizilar — hicbiri bu gorevden
+### Teslim sonrası canlı kapı ölçümü — kusur yok, **iki ölçüm hatası** bulundu
 
-Onceki teslim denemesinde **23** kirmizi olculdu (migration down 2, D-57 pano 3, brif sablonu 6, dokuman politikasi 3, gorev kutusu hafiza/arsiv 3, dusurulen kolon/marka/mcp/d309/bulgu/vector 6). Bu turun sonunda tam paket **26** kirmizi verdi; farkin **tamamı** calisma agacindaki **baska ajanlarin** degisikliklerinden (D-336, D-337, D-339, D-341, D-343). Kendi dosyalarima ait kirmizi olup olmadigi ayri dosyaya yazilip tek tek kontrol edildi; `sunum.py` ve `tests/test_odin_kapi_olcumu.py` kirmizi listesinde **yok**.
+Ölçümü **doğru çağrıyla** yapınca kapı tasarıma uygun çalışıyor. İlk iki
+denemede ölçüm hatası yaptım; ikisi de sahte "kırılma" üretti (kayda geçti:
+`data/orchestrator/bulgu_defteri.md` satır 205).
+
+| Hata | Argüman | Sahte sonuç |
+|---|---|---|
+| 1 | `maskeleme_odin(t, hedef=["firma"])` — liste verildi | `hedef != "musteri"` → metin **aynen** döner; "maskeleme hiç çalışmıyor" sanıldı |
+| 2 | `odin_kapi_olcumu(maskeleme_odin(t))` — **maskelenmiş** metin verildi | `satır:494` maske işaretini görüp `kacak` verir; "her çıktı kaçak" sanıldı |
+
+Doğru kullanım: `odin_kapi_olcumu` **ham** model yanıtı bekler; maske + ölçüm
+iç içe `odin_musteri_cikis_kapisi(ham_yanit)` yapar.
+
+| Girdi (ham) | Çıktı (maskeli) | `kapi` | Değerlendirme |
+|---|---|---|---|
+| `ODIN_INTERNAL_KEY=xyz` | `[İÇ VERİ — PAYLAŞILAMAZ]=xyz` | `inceleme` | doğru — değer `xyz` kaldı, D-338 |
+| `Gorev ALTYAPI-ODIN-UYARLAMA-01 devam` | maske | `maskelendi` | doğru |
+| `Sirli D-339 karari yazildi.` | maske | `maskelendi` | doğru |
+| `HUGINN_API_KEY: sk-live-ABC123` | **değişmedi** | `inceleme` | doğru — desen listesinde yok, bilinen sınır |
+| model maske işaretini kendi yazdı | — | `kacak` | doğru |
+| `Merhaba, siparisiniz hazir.` | değişmedi | `inceleme` | **kusur değil** — `tests/test_odin_kapi_olcumu.py:51` açıkça bekliyor; denylist temizliği kanıtlayamaz (D-338: "otomatik yeşil üretilemez") |
+| `kaynak="v1"` | V3 maskesi | `kapi_tanimli=False` + `inceleme` | doğru — fail-closed **ve** görünür |
+
+Geçici ölçüm betikleri silindi; hedefli test tekrar koşuldu: **35 passed (1.59 s)**.
+**Sonuç: yeni bulgu yok, kod değişikliği gerekmiyor.**
+
+### Bilinen kırmızılar (27 kayıt) — **kendi dosyalarımda 0**, ölçüldü
+
+Tam paket çıktısı geçici dosyaya yazılıp her satır tarandı: `sunum.py`,
+`tests/test_odin_kapi_olcumu.py`, `utku_project_context.md` ve bu rapor
+**kırmızı listesinde yok**. Geçici liste kullanıldıktan sonra **silindi** (D-86);
+kalıcı kanıt bu tablodur.
+
+| Sınıf | Adet | Test |
+|---|---|---|
+| Migration down | 2 | `test_migration_down_standarti::test_her_up_icin_tam_bir_down`, `test_schema_validation::test_migration_down_files_content` |
+| D-57 pano | 3 | `test_naming_audit`, `test_pano_d57_kalici` ×2 |
+| Brief şablonu | 6 | `test_brief_sablon_denetim` (salih ×3, yasu ×2, `brief_utku_VERI-INGEST-ASO-GLOB-01`) |
+| Doküman politikası | 3 | `test_d320_ajan_context_dosyalari` (**salih'in** hafızasında `## Ilgili Nodlar` yok), `test_kural4_yasak_ad_kalibi_artmiyor` (18 > 15), `test_d272_borc_defteri_eksiksiz` |
+| Görev kutusu hafıza/arsiv | 3 | `test_gorev_kutusu_hafiza` ×2, `test_gorev_kutusu_arsiv` |
+| Düşürülen kolon / marka / mcp / d309 / bulgu / vector | 6 | `test_dusurulen_kolon`, `test_marka_denetim_muafiyet`, `test_mcp` ×3, `test_d309_ders_kapisi` (ihsan'ın hafızası 267/200), `test_bulgu_defteri`, `tests/vector/test_embedder.py` |
+| Kök politikası | 1 | `test_kokte_izinsiz_dosya_yok` (`_git_status_full.txt`, `_tmp_diffstat.txt` — **başka ajanların** bıraktığı, kökte 2 dosya) |
+| Dedup metrics (ERROR) | 1 | `test_dedup_metrics::TestDedupResult::test_oran_yuvarlama` (collection hatası) |
+
+**Fark nereden geldi (23 → 26):** çalışma ağacındaki **başka ajanların**
+değişiklikleri (D-336, D-337, D-339, D-341, D-343). Kendi iki dosyam
+şu ana kadar hiç kırmızı üretmedi.
 
 ## Bulgular
 
 | Renk | Bulgu | Kanit | Nasil cozulecek | Hangi ajan |
 |---|---|---|---|---|
-| 🔴 | **Onemli varsayim yanlislikle kesin gercek yazildi.** Onceki ajan chat kaydi `--cozum` metninde "Olculebilir kisim yazildi: maskeleme_odin()e kaynak parametresi **eklendi**; ... V3 cikis kapisi **sunum.py'ye yazildi**" diyordu. Kod **hic yazilmamisti** — bu oturumda `git diff` sifirdi. | Kayit `utku → utku` (kendine), 2026-10-04T18:23Z; `git diff --stat` bu oturum oncesi bos | Her durum beyani "yazildi" degil "yazildi/olculdu" olmali; yanlis kayit duzeltici mesajla kapandi (asagida) | ihsan (ajan chat kaydi duzeltildi) |
+| 🔴 | **Onemli varsayim yanlislikle kesin gercek yazildi.** Onceki ajan chat kaydi `--cozum` metninde "Olculebilir kisim yazildi: maskeleme_odin()e kaynak parametresi **eklendi**; ... V3 cikis kapisi **sunum.py'ye yazildi**" diyordu. Kod **hic yazilmamisti** — bu oturumda `git diff` sifirdi. | Kayit `utku → utku` (kendine), 2026-10-04T18:23Z; `git diff --stat` bu oturum oncesi bos | Her durum beyani "yazildi" degil "yazildi/olculdu" olmali. Kayit `ajan_chat.py kapat ... 0 --karar "..."` ile **kapatildi** (düzeltici mesaj gonderilmedi; kayit `durum=cozuldu`) | ihsan (kayit kapatildi) |
 | 🔴 | **Brief varsayimi tutmadi, brief'te "dur ve sor" yaziyordu.** Brief'in "Doğrulanacak varsayım" bolumu "`hedef` parametresi olabilir; imza degismis olabilir" diyordu. Olcum: `hedef` **var**, imza degismemis. | `git diff HEAD -- src/company_master/sunum.py` onceki oturumda bos | Brief yazildiginda varsayim **her iki yonuyle** olculmeli; "degismis olabilir" tek yonlu ve yaniltici | ihsan (brief sablonu) |
-| 🟡 | **"V3 endpoint" tanimi yalniz mimari belgede, kodda hicbir yerde.** Route hedefi belirsiz: `sunum.py` icinde mi, `web_app.py` icinde mi? | `git grep -E '\bV[123]\b' -- '*.py'` → 0; `odin_ai/serve.py` yok | KAHIN karari bekleniyor (ajan chat 2026-10-04T18:43Z). Karar `web_app.py` ise ayri kilit + ayri gorev | ihsan |
-| 🟡 | **V3 kapisinin uretimde **cagrani yok.** Fonksiyon dogru ve testli, ama hicbir uretim yolu cagirmiyor — `git grep` maske/K4 cagrisinda yalniz `sunum.py` + testler cikiyor. | `git grep -n "maskeleme_odin\|odin_musteri_cikis_kapisi"` → 3 isabet, hepsi `sunum.py`/test | Endpoint kararindan sonra **tek bir** cagri noktasi secilmeli; iki cagri noktasi = D-211 ikiz | ihsan → sonra utku |
-| 🟡 | **Varsayilan `kaynak="v3"` secildi, brief `kaynak="v1"` oneriyordu.** Secim olcumle yapildi (mevcut davranis = tam denylist) ama **briefin oneriyle celisiyor**; KAHIN onayi alinmadi. | `sunum.py:340` vs brief "varsayilan `kaynak: str = "v1"`" | KAHIN onayi; onay degilse tek satirlik degisiklik yeterli | ihsan |
+| 🟢 | **"V3 endpoint" tanimi ve varsayilan kaynak icin KAHIN karari alindi (2026-10-04).** Uc soru tek seferde soruldu: (1) varsayilan `v3` mi kalsin, (2) kapı `sunum.py` fonksiyonu mu olsun yoksa HTTP route mu, (3) V1/V2 icin uydurma alt kume. KAHIN: **`v3` kalsin, fonksiyon kalsin (route ayri gorev), V1/V2 tanimsiz fail-closed.** Yanit kodla birebir ortusuyor. | Ajan chat kaydi `2026-10-04T18:43:33Z`, `durum=cozuldu`, `ac ihsan` ile acildi (ilk deneme `utku` yazdiginda `utku → utku` kaydi olusmustu, o **kapatildi**) | Yok — kapatildi | — |
+| 🟡 | **"V3 kapisinin uretimde **cagrani yok.** Fonksiyon dogru ve testli, ama hicbir uretim yolu cagirmiyor — `git grep` maske/K4 cagrisinda yalniz `sunum.py` + testler cikiyor. | `git grep -n "maskeleme_odin\|odin_musteri_cikis_kapisi"` → 3 isabet, hepsi `sunum.py`/test | KAHIN karari: once **tek bir** cagri noktasi secilmeli; iki cagri noktasi = D-211 ikiz. Route ayri gorev | ihsan → sonra utku |
+| 🟡 | **Sertlestirmede bulunan kusur: tanimsiz kaynak sessizce yutuluyordu.** `kaynak="v1"` cagrisi `{"kapi":"maskelendi","kaynak":"v3"}` donuyordu; cagiran "v1 uygulandi" saniyordu. Fail-closed dogruydu, **gorunurluk yoktu**. | `odin_musteri_cikis_kapisi("...", kaynak="v1")` ciktisi — kirma denemesi: `else` dal kaldirilinca `test_tanimsiz_kaynak_kapiyi_incelemeye_dusurur` kirmizi | **Kapatildi:** `kapi_tanimli` + `kaynak_istenen` alanlari eklendi, uyusmazlikta `kapi` her kosulda `inceleme`. `test_ol_kod_kalmadi` ile olu dalin donmediği mandallanir | — |
+| 🔵 | **Normalizasyon iki yere yazilsaydi iki gercek olusurdu.** `odin_kaynak_dogrula()` ve `odin_musteri_cikis_kapisi()` ikisi de "istenen kaynak neydi" soruyor; her biri kendi `.strip().lower().lstrip("v")` zincirini yazsaydi ikiz olurdu (D-211). | `test_normalizasyon_tek_yerde` — `_odin_kaynak_temizle` her iki fonksiyonun da kaynagi | **Kapatildi:** tek yardimci fonksiyon | — |
 | 🟢 | **Ajan chat `ac` komutunun ilk argumani "kime" (hedef).** `--help` bunu acikca yaziyor: `ajan  Kime — hedef ajan adı`. Ilk denemede `utku` yazildi → kayit `utku → utku` olustu. Duzeltildi: `... ac ihsan ...` → `utku → ihsan`. | `ajan_chat.py ac --help` cikti; kayit `2026-10-04T18:43:33Z` | Yok — D-336'nin "kimden zorunlu" kurali calisiyor, hedef secimi ajana kalmis | — |
 | 🔵 | `tests/test_mcp.py::TestApifyAdapter` iki kosuda farkli sonuc verdi (25-failed kosuda kirmizi, 23-failed kosuda yesil). Flaky test; regresyon mu degil. | Iki tam paket kosu cikti | Ayri borc; bu gorev disinda | yasu |
+| 🟡 | **Olcum kapisi yanlis argumanla cagrilinca sahte kirilma uretiyor.** `odin_kapi_olcumu` **ham** yanit bekler; maskeli metin verilirse `satır:494` maske isaretini **kaçak** sayıyor. Bu oturumda iki kez yanlis cagri yapildi ve iki kez sahte sonuc cikti. | Ayni oturum: `hedef=["firma"]` → "calismiyor"; maskeli metin → "her cikti kacak". Dogru cagri ile 7 vaka olculdu, hepsi tasarima uygun | **KAHIN'a bildirildi** (ajan chat `utku → ihsan`, 2026-10-04T19:53Z): SALIH'in aktif K3/K4 kosusu ayni tuzaga duserse sonucu yanlis okur. Kod gerekmiyor | ihsan → salih |
 
 ## Eksik / erteleme
 
-1. **V1/V2 desen alt kumeleri yazilmadi** — kanit yok (D-224). KAHIN karar verirse `ODIN_KAYNAK_TANIM`'a iki satir eklenmesi yeterli; testler `set(ODIN_KAYNAK_TANIM) == set(ODIN_KAYNAKLAR) == {"v3"}` mandali **kirmiziya doner**, yani ekleme unutulmaz.
-2. **HTTP route yazilmadi** — `web_app.py` bu gorevde kilitli degil ve brief "mevcut sunum katmaninda, yeni dosya acma" diyor. Karar gelene kadar bekleniyor (ajan chat acik soru).
-3. **Varsayilan kaynak onayi alinmadi** — `v3` uygulandi (geriye uyumlu), `v1` onerisi onerildi. Onay farkli ise tek satirlik degisiklik.
-4. **23 kirmizi test** — hicbiri bu gorevden; tablo ustte. Ayri borc olarak panoda.
+1. **V1/V2 desen alt kumeleri yazilmadi** — kanit yok (D-224), KAHIN karari ile de teyit edildi. `ODIN_KAYNAK_TANIM`'a iki satir eklenmesi yeterli; testler `set(ODIN_KAYNAK_TANIM) == set(ODIN_KAYNAKLAR) == {"v3"}` mandali **kirmiziya doner**, yani ekleme unutulmaz.
+2. **HTTP route yazilmadi** — KAHIN karari (2026-10-04): kapı `sunum.py` fonksiyonu olarak kalir, route **ayri gorev**. `web_app.py` bu gorevde kilitli degil ama karar geregi dokunulmadi.
+3. **V3 kapisinin uretim cagri noktasi yok** — karar geldi, ikinci adim kaldi: endpoint secimi ayri kayda. Iki cagri noktasi secilirse D-211 ikiz olur.
+4. **Tam paketteki 27 kırmızı kayıt** — kendi dosyalarımda **0**; tablo üstte (geçici liste kullanımdan sonra silindi, D-86). Artışın tamamı başka ajanlardan. Ayrı borç.
 5. **Commit atilmadi** — ajan commit atmaz (AGENTS.md "Commit: Sabah roo/KAHIN"). Degisiklik calisma agacinda hazir.
-6. **D-210 parked degisiklik** (`scripts/gorev_kutusu.py`, ih-san kilitli) bu oturumda **dokunulmadi**; onceki oturumdan park halde duruyor, test edilmedi.
+6. **D-210 parked degisiklik** (`scripts/gorev_kutusu.py`, ihsan kilitli) bu oturumda **dokunulmadi**; onceki oturumdan park halde duruyor, test edilmedi.
 
 ## Oneri
 

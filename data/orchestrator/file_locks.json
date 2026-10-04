@@ -68,10 +68,5 @@
     "sahip": "yasu",
     "task_id": "ALTYAPI-9ROUTER-MITM-PATCH-01",
     "kilitlendi": "2026-10-04T17:00:43"
-  },
-  "src/company_master/sunum.py": {
-    "sahip": "utku",
-    "task_id": "ALTYAPI-ODIN-MASKE-V3-01",
-    "kilitlendi": "2026-10-04T18:23:59"
   }
 }

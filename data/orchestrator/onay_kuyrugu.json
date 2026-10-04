@@ -3302,5 +3302,15 @@
     "durum": "onaylandi",
     "onaylayan": "ihsan",
     "onay_tarihi": "2026-10-04T17:01:04"
+  },
+  {
+    "task_id": "ALTYAPI-ODIN-MASKE-V3-01",
+    "ajan": "utku",
+    "ozet": "V3 kaynak-duyarli musteri cikis kapisi: sunum.py icinde ODIN_KAYNAK_MUSTERI/TANIM tek kaynak, fail-closed dogrulama, kaynak parametreli maskeleme + K4 olcumu. Sertlestirme: tanimsiz kaynak artik sessizce yutulmuyor (kapi_tanimli + kaynak_istenen, uyusmazlikta kapi=inceleme), normalizasyon tek yerde. 35 test passed, 2 kirilma denemesi yakalandi, kirilma yok. KAHIN karari: v3 kalir, fonksiyon kalir (HTTP route ayri gorev), V1/V2 uydurulmaz.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-04T19:39:28",
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-10-04T20:15:44"
   }
 ]

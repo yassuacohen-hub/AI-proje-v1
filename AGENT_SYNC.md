@@ -1,6 +1,6 @@
 # AGENT_SYNC — Otomatik Olusturuldu (task_board'dan)
 
-> Son guncelleme: 2026-10-04T18:38:19
+> Son guncelleme: 2026-10-04T20:15:44
 > Kaynak: data/orchestrator/task_board.json
 
 ## Aktif Isler
@@ -33,13 +33,11 @@
 | TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01 | [TEST] conftest.py duzelt -> tests/conft | salih | P1 | plan |
 | ORKESTRA-KIMLIK-ZINCIRI-01 | [ORKESTRA] Kimlik zinciri kaydını düzelt | ihsan | P1 | aktif |
 | ALTYAPI-9ROUTER-MITM-PATCH-01 | [ALTYAPI] 9router MITM NODE_ENV patch ka | yasu | P2 | plan |
-| ALTYAPI-ODIN-MASKE-V3-01 | [ALTYAPI] maskeleme_odin() V1/V2/V3 kayn | utku | P1 | aktif |
 
 ## Tamamlananlar (Son 10)
 
 | Gorev | Baslik | Sahip | Bitis |
 |-------|--------|-------|-------|
-| ALTYAPI-KREDI-CUZDANI-01 | [ALTYAPI] F3 kredi cuzdani: kullanim_log | yasu | 2026-10-04 |
 | VERI-INGEST-ASO-GLOB-01 | [VERI] ingest_aso glob daralt: rapor dos | utku | 2026-10-04 |
 | UI-ADMIN-KAYNAKLAR-SAYFA-34 | [UI] Veri Kaynakları sayfasını yaz -> ad | utku | 2026-10-04 |
 | UI-ADMIN-CRAWL-TASI-35 | [UI] Crawl Kontrolü bloğunu Webhook'tan  | utku | 2026-10-04 |
@@ -49,6 +47,7 @@
 | VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01 | [VERI] ASO ikiz ingest yolunu sil -> tek | utku | 2026-10-04 |
 | VERI-WEB-SITESI-ZENGINLESTIR-01 | [VERI] website_domain zenginleştirme kay | utku | 2026-10-04 |
 | ALTYAPI-GOREV-AT-KAPI-01 | [ALTYAPI] gorev_at.py cmd_at'i duzelt -> | yasu | 2026-10-04 |
+| ALTYAPI-ODIN-MASKE-V3-01 | [ALTYAPI] maskeleme_odin() V1/V2/V3 kayn | utku | 2026-10-04 |
 
 ## Son Handoff'lar
 

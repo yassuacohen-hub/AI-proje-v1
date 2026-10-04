@@ -2997,13 +2997,13 @@
     "baslik": "[ALTYAPI] maskeleme_odin() V1/V2/V3 kaynak ayrımı + V3 endpoint (2s)",
     "sahip": "utku",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-10-04T18:23:59",
-    "bitis": null,
+    "bitis": "2026-10-04T20:15:44",
     "dosyalar": [
       "src/company_master/sunum.py"
     ],
-    "not": "",
+    "not": "Teslim (utku): V3 kaynak-duyarli musteri cikis kapisi: sunum.py icinde ODIN_KAYNAK_MUSTERI/TANIM tek kaynak, fail-closed dogrulama, kaynak parametreli maskeleme + K4 olcumu. Sertlestirme: tanimsiz kaynak artik sessizce yutulmuyor (kapi_tanimli + kaynak_istenen, uyusmazlikta kapi=inceleme), normalizasyon tek yerde. 35 test passed, 2 kirilma denemesi yakalandi, kirilma yok. KAHIN karari: v3 kalir, fonksiyon kalir (HTTP route ayri gorev), V1/V2 uydurulmaz.",
     "source": "ic",
     "from_agent": null,
     "mod": "code",

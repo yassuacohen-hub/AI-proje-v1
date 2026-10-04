@@ -33,7 +33,6 @@
 | TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01 | [TEST] conftest.py duzelt -> tests/conftest.py (3s) | salih | P1 | plan | tests/conftest.py |
 | ORKESTRA-KIMLIK-ZINCIRI-01 | [ORKESTRA] Kimlik zinciri kaydını düzelt → plans/brief_ihsan_ORKESTRA-KIMLIK-ZINCIRI-01.md (1s) | ihsan | P1 | aktif | scripts/ajan_chat.py, scripts/gorev_kutusu.py |
 | ALTYAPI-9ROUTER-MITM-PATCH-01 | [ALTYAPI] 9router MITM NODE_ENV patch kaliciligini denetle + clinepass OAuth testi olc -> bulgu_defteri.md (1s) | yasu | P2 | plan | C:/Users/yasin/AppData/Roaming/npm/node_modules/9router/app/.next-cli-build/server/chunks/915.js |
-| ALTYAPI-ODIN-MASKE-V3-01 | [ALTYAPI] maskeleme_odin() V1/V2/V3 kaynak ayrımı + V3 endpoint (2s) | utku | P1 | aktif | src/company_master/sunum.py |
 
 ## Tamamlananlar
 
@@ -159,3 +158,4 @@
 | VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01 | [VERI] ASO ikiz ingest yolunu sil -> tek kanonik dosya + etl/ingest_aso.py tek yükleyici (3s) | utku | 2026-10-04T03:38:07 |
 | VERI-WEB-SITESI-ZENGINLESTIR-01 | [VERI] website_domain zenginleştirme kaynağını yaz -> unvan arama + canlı HTTP doğrulama, 7343 boş alana gerçek site (4s) | utku | 2026-10-04T17:01:04 |
 | ALTYAPI-GOREV-AT-KAPI-01 | [ALTYAPI] gorev_at.py cmd_at'i duzelt -> kapi_gecer() kilit kapisindan gecer (3s) | yasu | 2026-10-04T03:32:28 |
+| ALTYAPI-ODIN-MASKE-V3-01 | [ALTYAPI] maskeleme_odin() V1/V2/V3 kaynak ayrımı + V3 endpoint (2s) | utku | 2026-10-04T20:15:44 |

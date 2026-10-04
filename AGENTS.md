@@ -5158,3 +5158,65 @@ gerekmedi; en kısa diff bu oldu. Atlanılan: `kuyruk` birikme hızı metriği
 
 ### Referans
 [[D-68]] (Tetik↔Pano tutarlılığı) · [[SCRAPE-006-QUALITY-AUDIT]] · [[SCRAPE-007-FINAL-REPORT]]
+
+## D-345 — ODIN NO-GO kağıt üzerinde donuk kaldı; temeldeki kanıt 3 günde değişti, denetim yenilenmedi (2026-10-04)
+
+### 1. Bulgu
+`ALTYAPI-ODIN-DENETIM-RAPORU` (yasu, 2026-10-01) **NO-GO** kararını verdi; gerekçe:
+(a) rag.py SHA-256 hash sahte embedder — ML değil, (b) ML kütüphanesi kurulu
+değil, (c) EVREN kataloğunda fine-tune ucu yok, (d) 5 ön görevin 5'i de `plan`.
+Bugün (2026-10-04) pano + kod okunduğunda üç bulgu da **değişmiş**:
+- (a) `ALTYAPI-RAG-EMBEDDER-01` (yasu, done 2026-10-02) sahte embedder'i
+  sildi → gerçek EVREN `qwen3-embedding-8b` (4096 boyut) devrede, Türkçe
+  anlamsal sıralama ölçüldü (k=0.8759 > 0.6316), 47 test geçti.
+  [`embedder.py`](Huginn Data Insights/src/company_master/vector/embedder.py:96)
+- (b) ML kütüphanesi hâlâ kurulu değil — ama artık gerekmiyor: strateji D-310
+  düzeltmesiyle fine-tune'dan **prompt+RAG**'a döndü, embedding EVREN'in
+  barındırdığı API'den geliyor (yerel torch/transformers gereksiz).
+- (c) EVREN eğitim konsolu **var** ama metin/LLM eğitimi bugün kapalı
+  (vision-only: YOLO/SAM-2, "Text" sekmesi gri/placeholder) — "uç yok" değil,
+  "bugün kapalı, teknik olarak imkânsız değil" (daha nüanslı, aynı sonuç: ODIN
+  bugün EVREN'de fine-tune edilemez).
+- (d) 5 ön görevden: 2'si done (UYARLAMA-01, EVREN-PRIVATE-DOGRULAMA), 2'si
+  iptal edilip yerine açılan görevler tamamlandı/sürüyor
+  (VERI-RAG-KORPUS-01 done, ALTYAPI-MIMIR-BAGLAM-01 aktif), 1'i hâlâ açık
+  (TEST-ODIN-PROMPT-INJECTION, salih, aktif) → K3/K4 (injection reddi ≥8/10,
+  iç veri sızıntısı=0) hâlâ ölçülmedi, bu NO-GO'yu tek başına ayakta tutan
+  gerçek kalan sebep budur.
+
+### 2. Kural
+Denetim raporu bir **zaman damgalı kanıt fotoğrafı**dır, kalıcı karar değil.
+Panoda `dependencies` kapandıkça eski NO-GO raporu otomatik geçersiz
+sayılmaz (D-239 hâlâ bağlayıcı) — ama rapor metni "güncel durum" diye
+okunamaz. Yeniden denetim koşulu (orijinal raporun §8'i) karşılanmadan resmi
+GO/NO-GO değişmez; bu karar o yeniden-denetimin **ön bulgusu**dur, kendisi
+değil.
+
+### 3. Mevcut durum (2026-10-04, kanıtlı)
+| Bloke (B1-B5, orijinal) | Şimdi |
+|---|---|
+| B1 — 5 ön görev | 4/5 kapandı, 1 açık (TEST-ODIN-PROMPT-INJECTION) |
+| B2 — eğitim veri seti | İPTAL, yerine VERI-RAG-KORPUS-01 **done** |
+| B3 — eğitim pipeline | İPTAL, yerine ALTYAPI-MIMIR-BAGLAM-01 **aktif** |
+| B4 — injection testi | **açık** (salih, aktif) — tek gerçek blokaj |
+| B5 — ML kütüphane/EVREN onayı | Moot: EVREN API embedding kullanılıyor |
+
+### 4. Karar
+Resmi durum **NO-GO kalır** (B4 kapanmadan K3/K4 kanıtlanamaz, D-224/D-239).
+Ama blokaj artık tek madde: `TEST-ODIN-PROMPT-INJECTION` + ona bağımlı
+`TEST-ODIN-REDTEAM-S1S4-I1I4-01` (salih, ikisi de aktif, mimir_servis.py
+bitince Faz B başlayacak). Bu iki görev kapanınca yasu'ya (D-196: denetçi
+kendi işini onaylamaz, farklı kişi) **yeniden denetim** tetiklenmeli —
+yeni rapor eski `ALTYAPI-ODIN-DENETIM-RAPORU` dosyasının üstüne yazılmaz,
+D-183 tarih damgalı yeni dosya açılır.
+
+### 5. Öz-eleştiri
+Daha ucuz yol var mıydı? Hayır — 4 dosya + pano okuma gerekti çünkü iddia
+("NO-GO hâlâ geçerli mi?") tek dosyadan doğrulanamazdı, tam olarak D-260'ın
+uyardığı "teslim özeti kanıt değildir" tuzağı. Atlanan: `mimir_servis.py`
+ve `TEST-ODIN-REDTEAM` senaryo içeriğinin satır satır okunması — görev
+durumu + dosya varlığı yeterli kanıt sayıldı, iç mantık incelenmedi; B4
+kapandığında yasu'nun yeniden denetimi bunu zaten yapacak.
+
+### Referans
+[[D-224]] · [[D-239]] · [[D-310]] · [[D-311]] · [[ALTYAPI-ODIN-DENETIM-RAPORU]] · [[ALTYAPI-RAG-EMBEDDER-01]] · [[TEST-ODIN-PROMPT-INJECTION]]
