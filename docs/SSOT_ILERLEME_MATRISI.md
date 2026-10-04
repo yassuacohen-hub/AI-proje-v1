@@ -29,15 +29,22 @@ cd "Huginn Data Insights" & python scripts/ssot_ilerleme.py
 
 ## 2. Altı faz → canlı durum
 
-| Faz | SSOT vaadi | Taşıyıcı tablo | Sayım (2026-10-01) | Durum | Sorumlu |
+| Faz | SSOT vaadi | Taşıyıcı tablo | Sayım (2026-10-04) | Durum | Sorumlu |
 |---|---|---|---|---|---|
-| 1 | OSINT + Şirket Doğrulama | `companies` | **9.412** | 🟢 | utku |
+| 1 | OSINT + Şirket Doğrulama | `companies` | **10.123** | 🟢 | utku |
 | 1 | — kimlik eşleştirme | `entity_resolution` | **8.905** | 🟢 | utku |
 | 1 | — ne iş yapar (NACE) | `company_industries` | **6.788** | 🟢 | utku |
+| 1 | — yasal olay/ilan | `company_events` | **407** | 🟢 | utku |
 | 2 | **Risk Motoru** (8 skor) | `company_intelligence_scores` | **0** | 🔴 | — |
 | 2 | — sinyal kaydı | `company_signals` | **0** | 🔴 | — |
-| 3 | **Entity Graph / ilişki ağı** | `company_signals` (geo/küme) | **0** | 🔴 | **utku (AG-01)** |
-| 4 | **AI Analyst** (MİMİR/ODIN) | prompt + RAG | prompt **v4 hazır** | 🟡 | salih |
+| 2 | — teknoloji profili | `company_tech_profile` | **0** | 🔴 | — |
+| 2 | — şirket durumu | `company_state` | **0** | 🔴 | — |
+| 2 | — kanıt zinciri | `evidence` | **0** | 🔴 | — |
+| 2 | — yönetici kişiler | `key_personnel` | **0** | 🔴 | — |
+| 3 | **Entity Graph / ilişki ağı** | `company_locations`, `momentum_snapshot` | **0 / 0** | 🔴 | **utku (AG-01)** |
+| 4 | **AI Analyst** (MİMİR/ODIN) | prompt + RAG | D-345 planı yazıldı | 🟡 | ihsan/salih |
+| 4 | — ürün/kapasite katalogu | `company_products`, `company_capabilities` | **0 / 0** | 🔴 | — |
+| 4 | — iş ilanları (yeni kanal) | `job_postings` | **8** | 🟡 ilk veri | utku |
 | 5 | Vendor Due Diligence | — | — | 🔴 | — |
 | 6 | Global Intelligence Network | — | — | 🔴 | — |
 

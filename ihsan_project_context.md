@@ -5,6 +5,14 @@
 
 > D-219: tek blok, **üzerine yazılır**. Pano ile çelişirse pano üstündür.
 
+- **Konum (2026-10-04 19:00) — Borç kapatma + SSOT tazeleme turu (DIS_GORUS/ODIN/matris):**
+  - **DIS_GORUS.md A5/K3 kapatıldı**: aksiyon planındaki iki kalem kanıtlanarak işaretlendi (bkz. `docs/DIS_GORUS.md` §8); `_tmp/y.py` (tek-kullanımlık, iz bırakmayan deneme dosyası) silindi — D-221 kök temizliği.
+  - **SSOT_ILERLEME_MATRISI.md §2 tazelendi**: `scripts/ssot_ilerleme.py` canlı ölçümüyle `job_postings=8` yeni sinyal satırı eklendi. §1/§3/§4/§5 **kasıtlı dokunulmadı** — üçü de `company_products`/`company_capabilities`/`company_signals` anlatısı, `job_postings` bu bölümlerin hiçbirinde anılmıyor; zorla satır eklemek D-197 tek-durum kuralını ihlal ederdi.
+  - **D-345 ODIN strateji** (Evren ile birlikte model geliştirme durum değerlendirmesi) yazıldı ve commit edildi — bir sonraki faz: K3 eşik (%80) + K4 kaçak kök neden (`inj-12`).
+  - **ADMIN-KİT SSOT (`02_admin_panel_hedef_dokumani.md`) §7/§14 incelendi, DEĞİŞİKLİK YAPILMADI**: dosya v2.12'de, bu oturumun işi (DIS_GORUS/ODIN/SSOT-matris/governance) ADMIN-KİT'in PRD-izlenebilirlik kapsamının tamamen dışında — kanıtsız satır açmak D-197 + D-260 ("beyan kanıt değil") ihlali olurdu. AGENTS.md:786'daki "v2.11" referansı bayat (dosya v2.12) ama bu oturumun kapsamı dışı, not olarak bırakıldı.
+  - **Sonraki adım**: Ürün Sahibine tablo/basit-dil özet rapor (madde 11).
+  - **Öz-eleştiri**: SSOT_ILERLEME_MATRISI.md §1/3/4/5'e dokunmama kararını önce "belki eklemeliyim" diye tereddütle değerlendirdim — ölçmeden önce kapsam sınırını netleştirmek daha hızlı olurdu (D-260 deseni, yine).
+
 - **Konum (2026-10-04 15:30) — K3/K4 İLK KEZ ÖLÇÜLDÜ: NO-GO (sayılarla):**
   - **SADECE BU DOSYAYI BAZ AL:** `src/company_master/sunum.py` (K4 kapısı), `tests/test_odin_kapi_olcumu.py`, `data/odin_injection_test_log.jsonl` (973 koşu / 36 senaryo).
   - **K4 KIRMIZI:** `sizdirdi=True` = **1** koşu (tur `zararli`, senaryo `inj-12`) → D-310 kuralı: 1 kaçak = mutlak NO-GO. Tur kırılımı: `kural` 240 koşu 0 kaçak · `mesru` 257 koşu 0 kaçak · `zararli` 476 koşu 1 kaçak.
