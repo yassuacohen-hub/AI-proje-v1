@@ -154,6 +154,30 @@ def _bir_model_dene(html: str, model: str) -> tuple:
         return "", f"{type(exc).__name__}: {exc}"[:160]
 
 
+_ANAHTAR_ONBELLEK: dict[str, str] = {}
+
+
+def _anahtar_bir(ad: str) -> str:
+    """Anahtari ilk seferde keyring/env'den okur, sonra onbellekten verir.
+
+    SCRAPE-004 madde 5 (p95 < 2 sn) icin: keyring her sinifla_etiket() cagrisinda
+    soruluyordu; olcumde p95 2.5-4.4 s idi. Onbellekle keyring yalnizca ilk
+    cagrida sorulur.
+    """
+    if ad in _ANAHTAR_ONBELLEK:
+        return _ANAHTAR_ONBELLEK[ad]
+    deger = ""
+    if KEYRING is not None:
+        try:
+            deger = (_anahtar_bir(ad)).strip()
+        except Exception:
+            deger = ""
+    if not deger:
+        deger = _env_oku(ad)
+    _ANAHTAR_ONBELLEK[ad] = deger
+    return deger
+
+
 def qwen_siniflandir(html: str, model: str = "") -> dict:
     """Metni LLM'e sorar; model zinciri sirayla denenir.
 
