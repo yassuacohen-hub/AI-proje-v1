@@ -1,0 +1,7 @@
+AKTIF: SCRAPE-005-KAZIMA-DOCKER-INTEGRATION(utku) TEST-ODIN-PROMPT-INJECTION(salih) ALTYAPI-MIMIR-BAGLAM-01(salih) | TETIK: ihsan=1 salih=1 yasu=3 | ONAY: 0 | BLOCKED: 0
+eklendi=0 guncellendi=0 degismedi=9 arsivlendi=0
+yerel gorev=9 notion satiri=9
+ozet: 1 blok (silinen kopya 1)
+  Ilerleme Matrisi: eklendi 0, guncellendi 0, toplam 8
+  Ajan Ilerlemesi: eklendi 0, guncellendi 0, toplam 4
+  KRITIK - Simdi Buraya Bak: eklendi 0, guncellendi 0, toplam 2

@@ -13,6 +13,8 @@ Streamlit runtime olmadan calisir.
 """
 from __future__ import annotations
 
+import re
+
 import pytest
 
 from web_dashboard.tabs import (
@@ -399,4 +401,45 @@ def test_tab_url_getir_eski_url_fallback():
     tanim = tab_url_getir("kullanicilar")
     assert tanim is not None
     assert tanim.anahtar == "kullanicilar"
+
+
+# ---------------------------------------------------------------------------
+# UI-ADMIN-ACIKLAMA-METIN-37: menü ipuçları admin dilinde (jargonsuz)
+# ---------------------------------------------------------------------------
+
+# Tasarım kararı: eşleşme KELİME SINIRINDA yapılır, düz alt-dize değil.
+# Ölçülen çakışma: "Paketler ve müşteri ekranı önizlemesi" kelimesinde
+# "Pak-**etl**-er" alt-dize olarak "ETL"yi tutuyor. Düz `in` kontrolü
+# meşru Türkçe kelimeyi jargon sayardı; `\\b` bu yanlış pozitifi kapatir.
+JARGON = ("DLQ", "ETL", "KPI", "webhook", "latency")
+_JARGON_DESEN = re.compile(
+    r"\b(" + "|".join(JARGON) + r")\b", re.IGNORECASE,
+)
+
+
+def test_aciklama_menusunde_jargon_yok() -> None:
+    """KK-12 K2: menü ipucu teknik jargonsuz okunmalı.
+
+    Kırma kanıtı (D-256/4): `_JARGON_DESEN.search("DLQ kuyrugu")` True,
+    `_JARGON_DESEN.search("Paketler ve musteri")` False.
+    """
+    # Mandal gerçekten kırılabiliyor mu? (negatif kontrol)
+    assert _JARGON_DESEN.search("DLQ kuyrugu"), "mandal jargonu gormuyor"
+    assert not _JARGON_DESEN.search("Paketler ve musteri ekrani"), "yanlis pozitif"
+
+    ihlaller = [
+        (t.anahtar, t.aciklama)
+        for t in SECTIONS
+        if _JARGON_DESEN.search(t.aciklama)
+    ]
+    assert not ihlaller, f"menü ipucunda kalan jargon: {ihlaller}"
+
+
+def test_aciklama_kisa_ve_dolu() -> None:
+    """Her ipucu boş değil ve 60 karakteri geçmez (menü ipucu satırına sığar)."""
+    for tanim in SECTIONS:
+        assert tanim.aciklama.strip(), f"{tanim.anahtar} ipucu bos"
+        assert len(tanim.aciklama) <= 60, (
+            f"{tanim.anahtar} ipucu {len(tanim.aciklama)} karakter: {tanim.aciklama}"
+        )
 

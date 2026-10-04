@@ -1,0 +1,26 @@
+...........F......................                                       [100%]
+================================== FAILURES ===================================
+__________________________ test_cmd_teslim_basarili ___________________________
+
+tmp_path = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-3280/test_cmd_teslim_basarili0')
+
+    def test_cmd_teslim_basarili(tmp_path):
+        _gorev()
+        trigger.tetik_ekle("T-01", "kilo", data_dir=tmp_path)
+        trigger.tetik_al("kilo", "T-01", data_dir=tmp_path)
+        args = argparse.Namespace(ajan="kilo", task_id="T-01", ozet="test", cikti=None)
+        rc = gk.cmd_teslim(args)
+>       assert rc == 0
+E       assert 1 == 0
+
+tests\test_gorev_kutusu_cli.py:122: AssertionError
+---------------------------- Captured stderr call -----------------------------
+[D-318 BULGU KAPISI] HATA: bulgu defterinde bu görev kaydi yok — teslim reddedildi.
+       Defter: data/orchestrator/bulgu_defteri.md (tek kanonik dosya)
+       Once bulgunu yaz, sonra teslim et:
+       python scripts/bulgu_defteri.py ekle --task-id T-01 --rol kilo \
+         --ozet "..." --karar "D-NNN | kapandi:<kanit>" --renk oneri|dikkat|acil|tamam
+       Bulgun yoksa: --ozet "bulgu yok, nedeni" --karar "red: <gerekce>"
+=========================== short test summary info ===========================
+FAILED tests/test_gorev_kutusu_cli.py::test_cmd_teslim_basarili - assert 1 == 0
+1 failed, 33 passed in 2.44s

@@ -12,8 +12,8 @@ _KOK = Path(__file__).resolve().parent.parent
 if str(_KOK / "src") not in sys.path:
     sys.path.insert(0, str(_KOK / "src"))
 
-from company_master.chat import (ac, acik_sahipler, guncelle, kapat, oku, ozet,
-                                 bulgula, bulgular_oku)
+from company_master.chat import (ac, acik_sahipler, ajan_acik_sorulari, guncelle,
+                                 kapat, oku, ozet, bulgula, bulgular_oku)
 
 
 @pytest.fixture
@@ -279,3 +279,26 @@ class TestAcikSahipler:
         kaynak = (_KOK / "scripts" / "ajan_chat.py").read_text(encoding="utf-8")
         govde = kaynak.split("def cmd_ac", 1)[1].split("\ndef ", 1)[0]
         assert "acik_sahipler" in govde, "cmd_ac uyariyi cagirmiyor"
+
+
+class TestAjanAcikSorulari:
+    """D-321: `basla` kapisi karsi tarafin acik kaydini engel sayar; ajanin
+    kendi actigi kayit (orn. D-198 bypass) kendi teslimini kilitlemez."""
+
+    def test_baskasinin_acik_kaydi_engeller(self, izole_chat_dir):
+        ac("utku", "T-1", "sorun", kimden="ihsan", data_dir=izole_chat_dir)
+        sonuc = ajan_acik_sorulari("utku", data_dir=izole_chat_dir)
+        assert len(sonuc) == 1
+        assert sonuc[0]["kimden"] == "ihsan"
+
+    def test_kendi_actigi_kayit_engellemez(self, izole_chat_dir):
+        """Kirma testi: fix olmadan bu satir kirilirdi (kendi kaydi da sayilirdi)."""
+        ac("utku", "T-1", "bypass kaydi", kimden="utku", data_dir=izole_chat_dir)
+        assert ajan_acik_sorulari("utku", data_dir=izole_chat_dir) == []
+
+    def test_karisik_kayitlar_sadece_karsi_taraf_sayilir(self, izole_chat_dir):
+        ac("utku", "T-1", "kendi kaydi", kimden="utku", data_dir=izole_chat_dir)
+        ac("utku", "T-2", "baskasinin kaydi", kimden="ihsan", data_dir=izole_chat_dir)
+        sonuc = ajan_acik_sorulari("utku", data_dir=izole_chat_dir)
+        assert len(sonuc) == 1
+        assert sonuc[0]["task_id"] == "T-2"

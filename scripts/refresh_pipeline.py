@@ -7,7 +7,7 @@ Kullanım:
     0 3 * * * /usr/bin/python3 /path/to/refresh_pipeline.py >> /var/log/huginn_scrape.log 2>&1
 
     # Windows Task Scheduler
-    # schtasks /create /tn "Huginn Daily Scrape" /tr "python C:\Projeler\Huginn Data Insights\scripts\refresh_pipeline.py" /sc daily /st 03:00
+    # schtasks /create /tn "Huginn Daily Scrape" /tr "python scripts/refresh_pipeline.py" /sc daily /st 03:00
 
     # Docker
     # docker run --restart unless-stopped -v $(pwd):/app crontab -e
@@ -52,7 +52,12 @@ def step_scrape() -> bool:
     logger.info("[1/4] OSB scrape başlatılıyor...")
     try:
         from src.company_master.etl.pipeline import scrape_all
-        scrape_all()
+        basarili = scrape_all()
+        if not basarili:
+            # scrape_all() hatayı yutmaz; en az bir kaynak başarısız olduysa
+            # burada görünür. Yeşil sinyal yalan söylemez (D-224).
+            logger.error("[1/4] ✗ OSB scrape: en az bir kaynak başarısız")
+            return False
         logger.info("[1/4] ✓ OSB scrape tamamlandı")
         return True
     except Exception as e:
@@ -64,7 +69,7 @@ def step_detail_scrape() -> bool:
     """2. Adım: OSTİM detay sayfalarını scrape et."""
     logger.info("[2/4] OSTİM detay scrape başlatılıyor...")
     try:
-        from src.company_master.etl.ostim_detail_scraper import run_scraper
+        from src.company_master.etl.scrapers.ostim_detail_scraper import run_scraper
         run_scraper()
         logger.info("[2/4] ✓ OSTİM detay scrape tamamlandı")
         return True
@@ -99,27 +104,6 @@ def step_quality_recalc() -> bool:
         return False
 
 
-def update_task_board(status: str, details: str):
-    """Task board JSON'unu güncelle."""
-    board_path = ROOT / "data" / "orchestrator" / "task_board.json"
-    if not board_path.exists():
-        return
-
-    import json
-    with open(board_path, "r", encoding="utf-8") as f:
-        board = json.load(f)
-
-    # daily_scrape görevini güncelle
-    for task in board:
-        if task.get("task_id") == "daily_scrape":
-            task["durum"] = status
-            task["bitis"] = datetime.now().isoformat()
-            task["not"] = details
-
-    with open(board_path, "w", encoding="utf-8") as f:
-        json.dump(board, f, ensure_ascii=False, indent=2)
-
-
 def main():
     """Ana çalıştırma."""
     start_time = datetime.now()
@@ -139,9 +123,9 @@ def main():
     for name, ok in results:
         logger.info(f"  {name}: {'✓' if ok else '✗'}")
 
-    # Task board güncelle
-    details = "; ".join(f"{n}: {'OK' if ok else 'FAIL'}" for n, ok in results)
-    update_task_board("done" if success else "partial", details)
+    # Task board güncelleme YOK: pano SSOT'tur ve yalnız orkestratör yazar
+    # (D-77/D-222). Bu betik kilitsiz `task_board.json` yazıyordu; pano
+    # güncellemesi `gorev_kutusu.py teslim` akışında zaten yapılıyor.
 
     log_end(success, duration)
 

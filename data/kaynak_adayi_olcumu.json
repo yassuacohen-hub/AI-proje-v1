@@ -1,0 +1,95 @@
+[
+ {
+  "ad": "ATO uye bilgileri",
+  "url": "https://www.atonet.org.tr/uye-bilgileri",
+  "http": 200,
+  "bayt": 2802018,
+  "anahtar_sayi": {
+   "uye": 0,
+   "firma": 0,
+   "sicil": 1,
+   "unvan": 0,
+   "vkn": 0
+  },
+  "link_sayi": 628,
+  "linkler": [
+   "/IcerikDetay/23316_ato-uyesi-sigorta-acentelerine-ve-eksperlerine-halkbank-destek-paketi-hakkinda",
+   "/IcerikDetay/25059_bolivya-tarimsal-saglik-ve-gida-guvenligi-kurumu-senasag-yetkili-personel-listesi-hakkinda",
+   "/IcerikDetay/25124_yerli-mali-teblig-firma-webinari",
+   "/IcerikDetay/25129_nukleer-enerji-tedarikci-bilgi-sistemi-netbis---yerli-firma-kayitlari",
+   "/IcerikDetay/25142_2026-yili-ihracatta-hedef-ulkeler-listesi-konulu-yazi-hakkinda",
+   "/IcerikDetay/25173_get-app-pin-kodu-olusturma-ve-sorgu-islemleri",
+   "/IcerikDetay/25197_ato-uyelerine-tomer-hizli-okuma-programlarinda-indirim",
+   "/IcerikDetay/25287_konaklama-istatistik-sistemi-veri-girisleri-hk",
+   "/IcerikDetay/25491_cezayir-2026-ikinci-yariyil-uluslararasi-fuar-ve-sergiler-listesi",
+   "/IcerikDetay/25493_elektrikli-ve-elektronik-esyalarda-zararli-maddelerin-kisitlanmasina-iliskin-muafiyet-listesi-guncellendi",
+   "/IcerikDetay/25597_2026-yili-ankara-ticaret-odasi-organ-secimleri-uye-bilgilendirme-ve-sikca-sorulan-sorular",
+   "/ticaret-noktası/istatistiki-veriler"
+  ]
+ },
+ {
+  "ad": "ATO istatistik",
+  "url": "https://www.atonet.org.tr/istatistik",
+  "http": 200,
+  "bayt": 2802018,
+  "anahtar_sayi": {
+   "uye": 0,
+   "firma": 0,
+   "sicil": 1,
+   "unvan": 0
+  },
+  "link_sayi": 628,
+  "linkler": [
+   "/IcerikDetay/23316_ato-uyesi-sigorta-acentelerine-ve-eksperlerine-halkbank-destek-paketi-hakkinda",
+   "/IcerikDetay/25059_bolivya-tarimsal-saglik-ve-gida-guvenligi-kurumu-senasag-yetkili-personel-listesi-hakkinda",
+   "/IcerikDetay/25124_yerli-mali-teblig-firma-webinari",
+   "/IcerikDetay/25129_nukleer-enerji-tedarikci-bilgi-sistemi-netbis---yerli-firma-kayitlari",
+   "/IcerikDetay/25142_2026-yili-ihracatta-hedef-ulkeler-listesi-konulu-yazi-hakkinda",
+   "/IcerikDetay/25173_get-app-pin-kodu-olusturma-ve-sorgu-islemleri",
+   "/IcerikDetay/25197_ato-uyelerine-tomer-hizli-okuma-programlarinda-indirim",
+   "/IcerikDetay/25287_konaklama-istatistik-sistemi-veri-girisleri-hk",
+   "/IcerikDetay/25491_cezayir-2026-ikinci-yariyil-uluslararasi-fuar-ve-sergiler-listesi",
+   "/IcerikDetay/25493_elektrikli-ve-elektronik-esyalarda-zararli-maddelerin-kisitlanmasina-iliskin-muafiyet-listesi-guncellendi",
+   "/IcerikDetay/25597_2026-yili-ankara-ticaret-odasi-organ-secimleri-uye-bilgilendirme-ve-sikca-sorulan-sorular",
+   "/ticaret-noktası/istatistiki-veriler"
+  ]
+ },
+ {
+  "ad": "ASO uye listesi",
+  "url": "https://www.aso.org.tr/uye-listesi",
+  "http": 200,
+  "bayt": 23,
+  "anahtar_sayi": {
+   "uye": 0,
+   "firma": 0,
+   "sicil": 0,
+   "unvan": 0
+  },
+  "link_sayi": 0,
+  "linkler": []
+ },
+ {
+  "ad": "Ticaret Bakanligi uye",
+  "url": "https://ticaret.gov.tr/",
+  "http": 200,
+  "bayt": 82212,
+  "anahtar_sayi": {
+   "firma": 2,
+   "sicil": 1,
+   "unvan": 0,
+   "liste": 3
+  },
+  "link_sayi": 240,
+  "linkler": [
+   " https://ticaret.gov.tr/istatistikler",
+   "/e-islemler/evrak-sorgu-ekrani",
+   "https://ticaret.gov.tr/e-islemler/evrak-sorgu-ekrani",
+   "https://ticaret.gov.tr/istatistikler",
+   "https://ticaret.gov.tr/istatistikler/arastirma-ve-raporlar",
+   "https://ticaret.gov.tr/istatistikler/bakanlik-istatistikleri",
+   "https://ticaret.gov.tr/istatistikler/dis-ticaret-istatistikleri",
+   "https://ticaret.gov.tr/istatistikler/istatistiki-veri-kaynaklari",
+   "https://ticaret.gov.tr/serbest-bolgeler/serbest-bolgeler-istatistikleri"
+  ]
+ }
+]

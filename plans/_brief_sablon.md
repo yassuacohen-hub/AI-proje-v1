@@ -60,17 +60,15 @@ python scripts/chat_gonder.py --to <ajan> --type hata --task-id <TASK_ID> --mesa
 python scripts/gorev_kutusu.py teslim --ajan <ajan> --task-id <TASK_ID> --ozet "<özet>"
 ```
 
-**Teslimden sonra DURMAK YASAK (D-312).** İnsan tetiği bekleme; posta + chat kontrolü zorunlu:
+**Teslimden sonra DURMAK YASAK (D-312 · D-335).** İnsan tetiği bekleme; tek komutla nöbete gir:
 
 ```bash
-python scripts/gorev_kutusu.py bak --ajan <ajan>      # posta: yeni gorev var mi?
-python scripts/ajan_chat.py oku --son 10              # chat: cevap bekleyen mesaj var mi?
+python scripts/gorev_kutusu.py nobet --ajan <ajan>
 ```
 
-- Mesaj varsa → **cevapla** (`chat_gonder.py` / `ajan_chat.py`).
-- Yeni görev varsa → `al` ile al, baştan başla.
-- İkisi de boşsa → `basla --ajan <ajan>` ile zinciri yeniden yokla.
-- Döngü sonsuzdur: iş bitti demek "bekle" demek değildir.
+- Çıkış `0` = **İŞ VAR** (POSTA / SORU / CHAT satırları) → hemen yap: soruya cevap yaz (`chat_gonder.py --kimden <ajan>`), görevi `al`.
+- Çıkış `3` = 60 dk iş gelmedi → ihsan'a kısa rapor yaz, sonra kapat.
+- `nobet` dönmeden "bitti" denmez. Döngü: teslim → nobet → iş → teslim → nobet.
 
 ## Ilgili Nodlar
 > **Zorunlu (D-218).** Obsidyen proje hafızasıdır. Linksiz doküman grafikten kopuk kalır ve

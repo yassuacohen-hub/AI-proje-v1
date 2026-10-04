@@ -1,0 +1,6 @@
+VERI-KAYNAK-BAG-01 | utku | P0 | [VERI] Firma-kaynak bagini yaz → source_records.company_id (4s)
+VERI-SEKTOR-01 | utku | P1 | [VERI] Sektor sozlugunu yaz → 9689 kayitta sektor alani (3s)
+VERI-KAYNAK-SIZINTI-01 | utku | P2 | [VERI] Kaynak sizintisini duzelt → ostim icinde 102 ASO kaydi (2s)
+VERI-OSTIM-TAM-TARAMA-01 | yasu | P1 | [VERI] OSTIM detay verisini denetle → firmalar_tamamlanmis.jsonl (2s)
+VERI-TOBB2B-KESISIM-01 | yasu | P1 | [VERI] TOBB2B teklif havuzunu OSB verisiyle arastir → kesisim_raporu (5d)
+VERI-LONCA-FIRMA-01 | yasu | P1 | [VERI] lonca firma bilgi ucunt tarama ile olc → firma_kaydi_raporu (5d)

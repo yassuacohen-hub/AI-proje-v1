@@ -33,6 +33,7 @@ from urllib.parse import urlsplit
 __all__ = [
     "ARAC_PROTOKOLU",
     "KAYNAK_HARITASI",
+    "KAYNAK_PAKET_ADI",
     "MAKS_TUR",
     "MAKS_KARAKTER",
     "AracSonucu",
@@ -55,11 +56,34 @@ SEARCH_SAGLAYICI = "search-combo"
 
 #: Bilinen resmî kaynaklar — model aramaya gitmeden doğrudan GETIR yapar.
 #: F0'da ölçüldü: DMO liste düz HTTP 200 / 44 ihale; RG jina ile okundu.
-#: ponytail: 3 adres; F2 haber kuşu aynı haritayı genişletir (DMO e-Satış ölçülünce).
+#: F2 haber kuşu 2026-10-03'te 38 aday adres ölçtü (3 tur); **yalnız HTTP 200 +
+#: gerçek içerik** dönenler girdi. Ölçüm kanıtı: `docs/HABER_KUSU_KAYNAK_OLCUMU.md`.
+#: Elenenler: linkedin (giriş duvarı), instagram (JS kabuk, metin = "Instagram"),
+#: facebook (HTTP 400). EKAP/Apify kapsam dışı (`BORC-EKAP-CLOUDFLARE-01`).
+#: ponytail: 6 adres, hepsi 200; KAP/TOBB 200 ama PAKET_KAYNAKLARI'nda karşılığı
+#: yok → eklenmedi. Yeni adres ancak 200 + gerçek metin + paket kodu varsa girer.
 KAYNAK_HARITASI: dict[str, str] = {
     "DMO yayındaki ihaleler": "https://www.dmo.gov.tr/Ihale/Liste?type=1",
     "DMO Sağlık Market ihaleleri": "https://www.dmo.gov.tr/SM/Ihale",
     "Resmî Gazete (bugünkü sayı)": "https://www.resmigazete.gov.tr/",
+    "Resmî Gazete (eski sayılar arşivi)": "https://www.resmigazete.gov.tr/eskiler/",
+    "TÜRKPATENT (patent kaydı)": "https://www.turkpatent.gov.tr/",
+    "Eleman.net (iş ilanları)": "https://www.eleman.net/",
+    "Google Haberler RSS (TR)": "https://news.google.com/rss?hl=tr&gl=TR&ceid=TR:tr",
+}
+
+#: Köprü: harita etiketi → paket kaynak kodu (`paketler.PAKET_KAYNAKLARI`).
+#: Haber kuşu ikinci bir kaynak listesi açmaz; tek kaynak paket SSOT'udur (D-211).
+#: Model etiketi okur, kota kararı pakete göre verilir — bu yüzden iki alan ayrıdır:
+#: etiket = insan dili (prompt), kod = makine dili (kota). Anahtarlar birebir eşleşir.
+KAYNAK_PAKET_ADI: dict[str, str] = {
+    "DMO yayındaki ihaleler": "dmo",
+    "DMO Sağlık Market ihaleleri": "dmo",
+    "Resmî Gazete (bugünkü sayı)": "rg",
+    "Resmî Gazete (eski sayılar arşivi)": "rg",
+    "TÜRKPATENT (patent kaydı)": "patent",
+    "Eleman.net (iş ilanları)": "is_ilani",
+    "Google Haberler RSS (TR)": "google_news",
 }
 
 #: Sistem promptuna eklenen protokol metni (SSOT §2 "ARAÇ PROTOKOLÜ" ile aynı kural).
@@ -86,9 +110,14 @@ _KOMUT_RX = re.compile(
     r"^[ \t]*(ARA|GET[İI]R)[ \t]*:[ \t]*(.+?)[ \t]*$",
     re.MULTILINE | re.IGNORECASE,
 )
-_WEB_TEXT_RX = re.compile(r"<web_text\b.*?</web_text>", re.DOTALL | re.IGNORECASE)
+# Kapanışı olmayan blok da metnin sonuna kadar silinir: model araç çıktısını yarım
+# yankılarsa içindeki "GETIR:" tetikleyici olamaz (ölçüm 2026-10-03: açık blok komutu sızdırıyordu).
+_WEB_TEXT_RX = re.compile(r"<web_text\b.*?(?:</web_text>|\Z)", re.DOTALL | re.IGNORECASE)
 _KAPANIS_RX = re.compile(r"</\s*web_text", re.IGNORECASE)
 _URL_RX = re.compile(r"https?://[^\s<>\"'()\[\]]+", re.IGNORECASE)
+# ipaddress'in çözemediği sayısal ev sahipleri: ondalık (2130706433), onaltılık (0x7f000001),
+# sekizlik (0177.0.0.1), kısa nokta (127.1). İstemci bunları loopback'e çözer; biz reddederiz.
+_SAYISAL_ETIKET_RX = re.compile(r"^(0x[0-9a-f]*|[0-9]+)$")
 
 
 def _url_norm(url: str) -> str:
@@ -101,12 +130,15 @@ def urlleri_topla(metin: str) -> set[str]:
 
 
 def _ozel_ag(url: str) -> bool:
-    host = (urlsplit(url).hostname or "").lower()
-    if not host or host == "localhost" or host.endswith((".local", ".internal")):
+    host = (urlsplit(url).hostname or "").lower().rstrip(".")  # 'localhost.' = 'localhost'
+    if not host or host == "localhost" or host.endswith((".local", ".internal", ".localhost")):
         return True
     try:
         return not ipaddress.ip_address(host).is_global
     except ValueError:
+        # Her etiketi sayısal ama IP olarak çözülmeyen ev sahibi = kılık değiştirmiş IP → yasak.
+        if all(_SAYISAL_ETIKET_RX.match(e) for e in host.split(".")):
+            return True
         return False  # alan adı → DNS çözümü ölçülmez (ponytail: DNS-rebinding kapsam dışı)
 
 

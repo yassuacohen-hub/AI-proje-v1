@@ -336,7 +336,6 @@ def _render_baslik(demo_mu: bool) -> None:
     ).render()
 
     # K3-10g: rehber anahtarı sayfa altında (`app.REHBER_KEY`); modül yalnız okur.
-    rehber = bool(st.session_state.get("_hg_rehber", False))
     col_btn, col_zaman = st.columns([1, 4], vertical_alignment="center")
     with col_btn:
         yenile = st.button(
@@ -362,21 +361,6 @@ def _render_baslik(demo_mu: bool) -> None:
         st.cache_data.clear()
         st.rerun()
 
-    if rehber:
-        st.info(
-            "**Bu ekran ne işe yarar?** Pazarlama kampanyalarını ve müşteri segmentlerini "
-            "tek ekrandan izler. Hangi segmentin hangi kampanyayla beslendiğini, hangisinin "
-            "boşta kaldığını ve hedef pazarın ne kadarını kapsadığımızı gösterir.\n\n"
-            "**Nasıl kullanılır?** Üstteki özet kartlar aktif kampanya ve segment sayısını "
-            "verir. **Kampanyalar**, **Segmentler** ve **Kapsam** sekmeleri arasında geçiş "
-            "yaparak ayrıntılara inebilirsiniz. Segment başlığına tıklayınca kriterleri "
-            "ve içindeki firmalar açılır.\n\n"
-            "**Veriler nereden gelir?** `company_master.pazarlama` modülü (kampanya ve "
-            "segment tabloları). Bağlantı yoksa `data/demo/` altındaki örnek veri gösterilir "
-            "ve ekranda **Demo** rozeti belirir.\n\n"
-            "**Dikkat:** Demo modda kampanya oluşturma ve düzenleme kapalıdır. "
-            "Gösterim/tıklama/dönüşüm metrikleri yalnızca kaynakta kayıtlıysa hesaplanır."
-        )
 
     SectionNav(BOLUMLER, yatay=True).render()
 

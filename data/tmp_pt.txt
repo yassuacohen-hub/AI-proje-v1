@@ -1,0 +1,89 @@
+........F.....F..F.                                                      [100%]
+================================== FAILURES ===================================
+___________________ test_ikinci_calistirma_kayit_cogaltmaz ____________________
+
+tmp_path = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-3276/test_ikinci_calistirma_kayit_c0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029532A51C70>
+
+    def test_ikinci_calistirma_kayit_cogaltmaz(tmp_path, monkeypatch):
+        pano_yol = tmp_path / "task_board.json"
+        pano_yol.write_text(json.dumps(PANO, ensure_ascii=False), encoding="utf-8")
+        monkeypatch.setattr(gk.tb, "TASK_BOARD", pano_yol)
+        monkeypatch.setattr(gk.tb, "STATE_DIR", tmp_path)
+    
+        args = argparse.Namespace(kuru=False)
+        assert gk.cmd_arsivle(args) == 0
+        arsiv = tmp_path / "task_board_arsiv_2026-Q3.json"
+>       assert len(json.loads(arsiv.read_text(encoding="utf-8"))) == 2
+E       assert 1 == 2
+E        +  where 1 = len([{'task_id': 'A-1', 'durum': 'done', 'bitis': '2026-09-21T10:00:00'}])
+E        +    where [{'task_id': 'A-1', 'durum': 'done', 'bitis': '2026-09-21T10:00:00'}] = <function loads at 0x0000029506A8E020>('[\n  {\n    "task_id": "A-1",\n    "durum": "done",\n    "bitis": "2026-09-21T10:00:00"\n  }\n]')
+E        +      where <function loads at 0x0000029506A8E020> = json.loads
+E        +      and   '[\n  {\n    "task_id": "A-1",\n    "durum": "done",\n    "bitis": "2026-09-21T10:00:00"\n  }\n]' = read_text(encoding='utf-8')
+E        +        where read_text = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-3276/test_ikinci_calistirma_kayit_c0/task_board_arsiv_2026-Q3.json').read_text
+
+tests\test_gorev_kutusu_arsiv.py:44: AssertionError
+---------------------------- Captured stdout call -----------------------------
+3 kayit tasinacak, aktif panoda 2 kalacak.
+  2026-Q1: 1 kayit
+  2026-Q3: 1 kayit
+  2026-Q4: 1 kayit
+  YAZILDI task_board_arsiv_2026-Q1.json: +1 (toplam 1)
+  YAZILDI task_board_arsiv_2026-Q3.json: +1 (toplam 1)
+  YAZILDI task_board_arsiv_2026-Q4.json: +1 (toplam 1)
+AKTIF PANO: 2 kayit
+_______________________ test_hub_izi_varsa_teslim_gecer _______________________
+
+tmp_path = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-3276/test_hub_izi_varsa_teslim_gece0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029532A52C00>
+
+    def test_hub_izi_varsa_teslim_gecer(tmp_path, monkeypatch):
+        """Hub'da task_id geciyorsa kapi acilir; teslim normal akisina devam eder."""
+        _kurulum(tmp_path, monkeypatch, hub_metin="| TEST-B14-01 | kapandi | 2026-09-24 |")
+        monkeypatch.setattr(gk.trigger, "teslim_et", lambda *a, **k: {"task_id": "TEST-B14-01"})
+    
+>       assert gk.cmd_teslim(_args()) == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = <function cmd_teslim at 0x00000295316B9EE0>(Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=False))
+E        +    where <function cmd_teslim at 0x00000295316B9EE0> = gk.cmd_teslim
+E        +    and   Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=False) = _args()
+
+tests\test_gorev_kutusu_hafiza.py:70: AssertionError
+---------------------------- Captured stderr call -----------------------------
+[D-318 BULGU KAPISI] HATA: bulgu defterinde bu görev kaydi yok — teslim reddedildi.
+       Defter: data/orchestrator/bulgu_defteri.md (tek kanonik dosya)
+       Once bulgunu yaz, sonra teslim et:
+       python scripts/bulgu_defteri.py ekle --task-id TEST-B14-01 --rol utku \
+         --ozet "..." --karar "D-NNN | kapandi:<kanit>" --renk oneri|dikkat|acil|tamam
+       Bulgun yoksa: --ozet "bulgu yok, nedeni" --karar "red: <gerekce>"
+__________________ test_zorla_gecerse_panoya_atlandi_islenir __________________
+
+tmp_path = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-3276/test_zorla_gecerse_panoya_atla0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029532A52720>
+
+    def test_zorla_gecerse_panoya_atlandi_islenir(tmp_path, monkeypatch):
+        """--zorla kacis kapisi (D-65): is durmaz ama borc panoya yazilir."""
+        _kurulum(tmp_path, monkeypatch, ssot_metin="bos", hub_metin="bos")
+        monkeypatch.setattr(gk.trigger, "teslim_et", lambda *a, **k: {"task_id": "TEST-B14-01"})
+        yazilan: dict = {}
+        monkeypatch.setattr(tb, "gorev_guncelle", lambda tid, **f: yazilan.update({tid: f}))
+    
+>       assert gk.cmd_teslim(_args(zorla=True)) == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = <function cmd_teslim at 0x00000295316B9EE0>(Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=True))
+E        +    where <function cmd_teslim at 0x00000295316B9EE0> = gk.cmd_teslim
+E        +    and   Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=True) = _args(zorla=True)
+
+tests\test_gorev_kutusu_hafiza.py:80: AssertionError
+---------------------------- Captured stderr call -----------------------------
+[D-318 BULGU KAPISI] HATA: bulgu defterinde bu görev kaydi yok — teslim reddedildi.
+       Defter: data/orchestrator/bulgu_defteri.md (tek kanonik dosya)
+       Once bulgunu yaz, sonra teslim et:
+       python scripts/bulgu_defteri.py ekle --task-id TEST-B14-01 --rol utku \
+         --ozet "..." --karar "D-NNN | kapandi:<kanit>" --renk oneri|dikkat|acil|tamam
+       Bulgun yoksa: --ozet "bulgu yok, nedeni" --karar "red: <gerekce>"
+=========================== short test summary info ===========================
+FAILED tests/test_gorev_kutusu_arsiv.py::test_ikinci_calistirma_kayit_cogaltmaz
+FAILED tests/test_gorev_kutusu_hafiza.py::test_hub_izi_varsa_teslim_gecer - A...
+FAILED tests/test_gorev_kutusu_hafiza.py::test_zorla_gecerse_panoya_atlandi_islenir
+3 failed, 16 passed in 15.00s

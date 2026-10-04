@@ -1,0 +1,12 @@
+HATA (D-66): Brif dosyasi diskte yok. Once yaz: plans/brief_yasu_ALTYAPI-9ROUTER-ANAHTAR-01.md (veya data/orchestrator/ALTYAPI-9ROUTER-ANAHTAR-01_brif_<tarih>_<rol>.md)
+HATA (D-66): Brif dosyasi diskte yok. Once yaz: plans/brief_yasu_ALTYAPI-OPENROUTER-ARAC-01.md (veya data/orchestrator/ALTYAPI-OPENROUTER-ARAC-01_brif_<tarih>_<rol>.md)
+HATA (D-66): Brif dosyasi diskte yok. Once yaz: plans/brief_utku_VERI-OSTIM-HREF-FILTRE-01.md (veya data/orchestrator/VERI-OSTIM-HREF-FILTRE-01_brif_<tarih>_<rol>.md)
+HATA (D-66): Brif dosyasi diskte yok. Once yaz: plans/brief_utku_VERI-APIFY-BUTCE-01.md (veya data/orchestrator/VERI-APIFY-BUTCE-01_brif_<tarih>_<rol>.md)
+HATA (D-66): Brif dosyasi diskte yok. Once yaz: plans/brief_yasu_VERI-PAKET-FIYAT-SENKRON-01.md (veya data/orchestrator/VERI-PAKET-FIYAT-SENKRON-01_brif_<tarih>_<rol>.md)
+HATA (D-66): Brif dosyasi diskte yok. Once yaz: plans/brief_utku_TEST-SIMULASYON-B17-KIRIK-01.md (veya data/orchestrator/TEST-SIMULASYON-B17-KIRIK-01_brif_<tarih>_<rol>.md)
+ALTYAPI-9ROUTER-ANAHTAR-01: rc=6
+ALTYAPI-OPENROUTER-ARAC-01: rc=6
+VERI-OSTIM-HREF-FILTRE-01: rc=6
+VERI-APIFY-BUTCE-01: rc=6
+VERI-PAKET-FIYAT-SENKRON-01: rc=6
+TEST-SIMULASYON-B17-KIRIK-01: rc=6

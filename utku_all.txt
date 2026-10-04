@@ -1,0 +1,39 @@
+VERI-ADMIN-AKTIVITE-LOG-13 | P0 | done | [VERI] Kullanıcı aktivite log tablosunu yaz → migration 0017 (2s)
+API-ADMIN-AKTIVITE-YAZ-14 | P0 | done | [API] Giriş/arama/AI olaylarını log'a yaz → web_app.py + arama uçları (2s)
+API-ADMIN-CHURN-3SINYAL-16 | P1 | done | [API] Churn kuralını 3 sinyalli hâlde yaz → churn.py tam formül (2s)
+UI-ADMIN-DAU-17 | P1 | done | [UI] Gerçek DAU kartını yaz → admin_kpi.py aktivite sorgusu (2s)
+UI-ADMIN-ARAMA-BOSLUK-20 | P2 | done | [UI] Sonuçsuz arama frekans raporunu yaz → içerik boşluk raporu (2s)
+API-ADMIN-SUPHELI-AKTIVITE-21 | P2 | done | [API] Şüpheli aktivite kurallarını yaz → 3 sinyalli güvenlik uyarısı (3s)
+UI-ADMIN-UPSELL-22 | P2 | done | [UI] Upsell aday listesini yaz → satış aksiyon listesi (2s)
+DOC-ADMIN-V9-KUTUCUK-24 | P2 | done | [DOC] V9 §16.5 kutucuklarını düzelt → 6 madde (1s)
+UI-ADMIN-FEATURE-FLAG-25 | P2 | done | [UI] Feature flag yönetim ekranını yaz → A5 MVP (3s)
+API-ADMIN-MFA-26 | P2 | done | [API] MFA + hesap kilidi akışını yaz → A6 auth (4s)
+UI-ADMIN-LTV-CAC-27 | P2 | done | [UI] LTV/CAC kartlarını yaz → K8 tamamlama (2s)
+DOC-ADMIN-MULTITENANT-KARAR-28 | P2 | done | [DOC] Multi-tenant kararını belgele → KK-7 (1s)
+ALTYAPI-DB-MIGRATION-01 | P1 | done | [ALTYAPI] v0016 → v0017 prod migration planı yaz → db_migrate_prod.sh (1s)
+UI-ADMIN-KVKK-MODU-26 | P1 | done | [UI] Admin KVKK mode toggle (strict ↔ lenient) → web_app POST endpoint
+UI-ADMIN-KVKK-RAPOR-28 | P2 | done | [UI] KVKK maskeleme raporu → admin paneline ek sekme
+DOC-VISIBILITY-KATMANI-29 | P2 | done | [DOC] Kullanıcı dokümanı (görünürlük katmanı + kontör) → markdown guide
+UI-KONTROL-PANOSU-32 | P2 | done | [UI] Admin kontrol panosu → maskeleme durum metriksleri
+DOKUMAN-KVKK-FAQ-33 | P2 | done | [DOC] KVKK FAQ & sorun çözme → markdown troubleshooting guide
+UTKU-01 | P0 | done | [UTKU] Veri şeması doğrulama - Core modülü (2s)
+UTKU-02 | P1 | archive | [UTKU] API endpoint optimizasyon - response time (2s)
+UTKU-03 | P0 | done | [UTKU] Hata loglama sistemi - production hazırlığı (2s)
+UTKU-04 | P1 | archive | [UTKU] Veritabanı migration - index optimizasyon (1s)
+UTKU-05 | P0 | archive | [UTKU] Kullanıcı kimlik doğrulama - token yenileme (2s)
+ADMIN-UX-GELIR-GRUP-01 | P2 | done | Gelir&Paketler grubu tamamla: executive+maliyet sekmelerini ust=gelir'e tasi
+UI-ADMIN-MENU-D215216 | P2 | done | [UI] Admin menü ağacını düzelt → web_dashboard/tabs/__init__.py (3s)
+DOC-SIRKET-MASTER-01 | P1 | done | [DOC] Sirket Master ana belgesi duzelt
+ALTYAPI-TEST-FAILURE-FIX-02 | P1 | archive | [ALTYAPI] Test hatasi duzelt -> tests/test_mcp.py
+VERI-02 | P1 | aktif | [VERI] OSB ihale izleyicisini yaz → src/company_master/etl/scrapers/osb_tender_monitor.py (3s)
+VERI-03 | P2 | done | [VERI] Proxy rotasyonunu yaz → src/company_master/etl/scrapers/proxy_rotation.py (2s)
+API-07 | P1 | done | [API] 11 yeni rotayi envantere yaz + gecersiz buyer_id icin 404 dondur → src/api/ (2s)
+UI-11 | P2 | done | [UI] admin_mfa + ana_kontrol basliklarini Section kalibina tasi → admin_mfa.py (2s)
+VERI-NACE-SOZLUK-01 | P0 | done | [VERI] Resmi NACE listesini yaz → nace_codes tablosu (3s)
+VERI-NACE-COKLU-01 | P1 | aktif | [VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)
+VERI-NACE-TEMIZ-01 | P1 | done | [VERI] Sektör sayacı kirlenmesini düzelt → nace_code temizliği (2s)
+VERI-NACE-KOLON-01 | P2 | done | [VERI] nace_validity kolon karışmasını düzelt → 86 satır (1s)
+VERI-KAYNAK-BAG-01 | P0 | review | [VERI] Firma-kaynak bagini yaz → source_records.company_id (4s)
+VERI-SEKTOR-01 | P1 | review | [VERI] Sektor sozlugunu yaz → 9689 kayitta sektor alani (3s)
+VERI-KAYNAK-SIZINTI-01 | P2 | review | [VERI] Kaynak sizintisini duzelt → ostim icinde 102 ASO kaydi (2s)
+VERI-HAYALET-TEMIZ-01 | P0 | done | [VERI] Hayalet kayitlari sil → companies 4591 fazlalik satir (3s)

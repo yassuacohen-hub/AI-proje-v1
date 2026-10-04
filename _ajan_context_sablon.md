@@ -6,8 +6,10 @@
 > **Kullanım:** `<ajan>_project_context.md` adıyla kopyala (örn. `utku_project_context.md`).
 > Oturum **başında oku**, oturum **sonunda yaz**. Kanonik örnek: [[Huginn Data Insights/ihsan_project_context]].
 >
-> **Boyut tavanı 200 satır.** Aşınca en eski oturum bloklarını
-> `archive/<ajan>_context_<YYYYMM>.md`'ye taşı. Şişmiş context her oturumda okunur; maliyeti kalıcıdır.
+> **Boyut tavanı 400 satır** (D-219 Ek, 2026-10-02 — Ürün Sahibi onayıyla 200'den ikiye katlandı).
+> Aşınca en eski oturum bloklarını `archive/<ajan>_context_<YYYYMM>.md`'ye taşı. **§Öz-eleştiri
+> bölümü bu tavana dahil değildir ve hiçbir zaman arşive taşınmaz/silinmez** — kalıcıdır.
+> Şişmiş context her oturumda okunur; maliyeti kalıcıdır.
 > **Bölüm sırası sabittir** — ajan aynı yerde aynı bilgiyi bulur, arama yapmaz.
 
 ## KALDIĞIM YER
@@ -66,6 +68,14 @@
 > *belirti → kök neden → çözüm*. Tuzak yazılmazsa gelecek oturum aynı bedeli tekrar öder.
 
 - <belirti> → <kök neden> → <çözüm> (`<dosya:satır>`)
+
+## Öz-eleştiri (KALICI — SİLİNMEZ, arşive taşınmaz)
+
+> Ürün Sahibi kararı (2026-10-02): tüm ajanlar öz-eleştirilerini/öğrendiklerini burada **kalıcı**
+> tutar. Bu bölüm 400 satır tavanına **dahil değildir** ve arşiv rotasyonunda (archive/*) hiçbir
+> zaman taşınmaz/silinmez. Biriktirilir — üzerine yazılmaz. En yeni madde en üstte.
+
+- <tarih> — <ne hata yaptım> → <ne öğrendim> → <bundan sonra ne yapacağım>
 
 ## Bilinen Açıklar (kapsam dışı backlog)
 

@@ -242,7 +242,6 @@ def _render_baslik(demo_mu: bool) -> None:
     ).render()
 
     # K3-10g: rehber anahtarı sayfa altında (`app.REHBER_KEY`); modül yalnız okur.
-    rehber = bool(st.session_state.get("_hg_rehber", False))
     col_btn, col_zaman = st.columns([1, 4], vertical_alignment="center")
     with col_btn:
         yenile = st.button(
@@ -268,20 +267,6 @@ def _render_baslik(demo_mu: bool) -> None:
         st.cache_data.clear()
         st.rerun()
 
-    if rehber:
-        st.info(
-            "**Bu ekran ne işe yarar?** Sattığımız paketleri, fiyatlarını ve hangi firmaya "
-            "hangi paketin atandığını tek ekranda gösterir. Bir firmaya teklif hazırlarken "
-            "uygun paketi buradan seçebilirsiniz.\n\n"
-            "**Nasıl kullanılır?** Üstteki özet kartlar toplam paket ve atama sayısını verir. "
-            "Aşağıdaki tabloda paketleri karşılaştırabilir, firma bazında atama geçmişini "
-            "görebilirsiniz.\n\n"
-            "**Veriler nereden gelir?** `packages` ve `company_packages` tabloları. "
-            "Tablolar henüz yoksa `data/demo/paketler_demo.jsonl` örnek verisi gösterilir "
-            "ve ekranda **Demo** rozeti belirir.\n\n"
-            "**Dikkat:** Demo modda paket ekleme, düzenleme ve atama kapalıdır; yalnızca "
-            "görüntüleme yapılır. Fiyatlar KDV hariç ve aylık olarak listelenir."
-        )
 
     SectionNav(BOLUMLER, yatay=True).render()
 

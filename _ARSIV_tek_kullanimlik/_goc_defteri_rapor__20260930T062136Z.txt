@@ -1,0 +1,50 @@
+Diskte 41 goc, defterde 41 kayit.
+
+0001_core.sql                                 TAM    defterde
+0002_relations.sql                            TAM    defterde
+0003_intelligence.sql                         TAM    defterde
+0004_faz_1_2.sql                              TAM    defterde
+0005_etl_tracking.sql                         TAM    defterde
+0006_nace_details.sql                         TAM    defterde
+0007_add_address_column.sql                   ESKIMIS defterde
+      eksik iz: ustunden gecen: 0027_ikiz_kolonlari_birlestir.sql
+0008_performance_indexes.sql                  TAM    defterde
+0009_dashboard_performance.sql                TAM    defterde
+0010_dashboard_optimization.sql               TAM    defterde
+0011_dashboard_search_optimization.sql        TAM    defterde
+0012_users_and_catalog.sql                    TAM    defterde
+0013_job_intelligence.sql                     TAM    defterde
+0014_packages_marketing.sql                   TAM    defterde
+0015_data_log.sql                             TAM    defterde
+0016_users_last_login.sql                     TAM    defterde
+0017_user_activity_log.sql                    TAM    defterde
+0018_visibility_layer.sql                     TAM    defterde
+0019_admin_mfa.sql                            TAM    defterde
+0020_login_lockout.sql                        TAM    defterde
+0021_missing_tables.sql                       TAM    defterde
+0022_unique_legal_name.sql                    TAM    defterde
+0023_source_records_company_id.sql            TAM    defterde
+0024_kalite_skor_olu_sinyal.sql               TAM    defterde
+0025_kimlik_dosyasi_alanlari.sql              ESKIMIS defterde
+      eksik iz: ustunden gecen: 0026_kimlik_kolonlari_ingilizce.sql
+0026_kimlik_kolonlari_ingilizce.sql           TAM    defterde
+0027_ikiz_kolonlari_birlestir.sql             TAM    defterde
+0028_skor_varsayilan_kalan_dort.sql           TAM    defterde
+0029_indeksleri_canli_kolona_tasi.sql         TAM    defterde
+0030_olu_kolonu_pasiflestir.sql               TAM    defterde
+0031_kaynak_kayit_yinelenme.sql               TAM    defterde
+0032_baskentosb_kimliksiz_kopya.sql           VERI   defterde
+      beyan: 761 kimliksiz satir silindi, 243 referans + 92 bag tasindi (sema izi yok, olmamali)
+0033_ikiz_isaretci_senkron.sql                TAM    defterde
+0034_tasfiye_durumu.sql                       TAM    defterde
+0035_sicil_tasima.sql                         TAM    defterde
+0036_nace_olu_kolon.sql                       EKSIK  defterde
+      eksik iz: dusurulmemis kolon:('companies', 'nace_name')
+0037_tsg_olay_hatti.sql                       TAM    defterde
+0038_sorgu_talepleri.sql                      ESKIMIS defterde
+      eksik iz: ustunden gecen: 0041_tsg_kolon_adlari_ingilizce.sql
+0039_tender_tracking.sql                      TAM    defterde
+0040_rls_anon_kapisi.sql                      IZSIZ  defterde
+0041_tsg_kolon_adlari_ingilizce.sql           TAM    defterde
+
+Deftere yazilacak (semada izi tam): 0

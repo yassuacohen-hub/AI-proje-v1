@@ -131,6 +131,20 @@ Bağlayıcı kurallar:
 > Gerekçe: Ağırlık seti değiştiğinde eski puanlar sessizce yanlış olur —
 > KALITE-PUAN-01'de 583 bayat skorun kökü budur.
 
+### K-7 — Arama adayı doğrulanmadan alana yazılmaz
+
+Arama motorundan gelen alan adı bir **adaydır**, veri değildir. Aday
+`website_domain` sütununa ancak **(1) canlı HTTP 200** ve **(2) içerik
+doğrulaması** (sayfa metninde firmanın ayırt edici unvan kelimesi) geçerse
+yazılır. Doğrulamasız aday yalnız `raw_payload`'da iz olarak kalır.
+
+Yazma yolu **yalnız boş alana** dokunur; dolu alanın üzerine yazılmaz.
+
+> Gerekçe (ölçüm, 2026-10-04): boş alanlı 2614 firmanın ham adaylarının
+> **tamamı** şablondur; şablon listesi genişletilse bile (yeni goc gerekir)
+> bu havuzdan doğrulanabilir site çıkmaz. Arama olmadan `website_domain`
+> doldurulamaz.
+
 ---
 
 ## 3. Alan sözleşmeleri
@@ -247,16 +261,30 @@ Bağlayıcı kurallar:
 | **Geçmezse** | Yazılmaz. |
 | **Kim doldurur** | ÖLÇÜLMEDİ. |
 
-### 3.7 `website_domain` — **TASLAK, KUSUR BİLİNİYOR**
+### 3.7 `website_domain` — **BAĞLAYICI**
 
 | # | |
 |---|---|
-| **Anlam** | Firmanın **kendi** web sitesi alan adı. |
-| **Biçim** | Geçerli alan adı; şema/yol taşımaz. |
-| **Sağlama** | Bilinen kusur: alan dolu olduğu için ~2660 firmaya haksız kalite puanı verilmiş. |
-| **Kabul edilmez** | **Kaynak sitesinin kendi alan adı** (`ostim.org.tr`, `aso.org.tr`) — bu kaynak sızıntısıdır, firmanın sitesi değildir. |
-| **Geçmezse** | Yazılmaz + puan üretmez (K-5). |
-| **Kim doldurur** | ÖLÇÜLMEDİ. |
+| **Anlam** | Firmanın **kendi** web sitesi alan adı. Kaynağın (OSB, oda, arama motoru) alan adı değildir. |
+| **Biçim** | Yalnız alan adı: şema (`https://`), yol (`/iletisim`), `www.`, port veya sorgu taşımaz. Sonda nokta yok. |
+| **Sağlama** | **İki kapı birlikte:** (1) canlı HTTP **200**; (2) **içerik doğrulaması** — sayfa metninde firmanın ayırt edici unvan kelimesi geçer. Sağlamadan geçen aday **yazılmaz**. |
+| **Kabul edilmez** | (a) **Kanonik şablon listesi** — `yazma_kapisi.SABLON_WEB` (ikinci liste yazılmaz, D-211); (b) **kaynak sızıntısı** — OSB/oda/arama motoru/dernek alan adı (`ostim.org.tr`, `aso.org.tr`, `baskentosb.org.tr`); (c) **sosyal medya ve pazar yeri** — `facebook.com`, `instagram.com`, `linkedin.com`, `youtube.com`, `sahibinden.com`, `trendyol.com` vb.; (d) **alan adı pazarlama sayfası** — "domain is for sale", "parklanmış alan adı" metni. |
+| **Geçmezse** | Yazılmaz (`NULL` kalır) + puan üretmez (K-5). Ham aday `source_records.raw_website` ve `raw_payload` içinde durur, kaybolmaz. |
+| **Kim doldurur** | Tek kapı: [`web_sitesi_zenginlestir.py`](../src/company_master/etl/web_sitesi_zenginlestir.py) → `kabul()` ([`yazma_kapisi.py`](../src/company_master/db/yazma_kapisi.py)). Kazıyıcı doğrudan yazmaz (K-1). |
+
+> **Ölçüm (canlı Supabase, 2026-10-04, `scripts/web_kaynak_olcum.py`).**
+> Firma **10123** · dolu **2780** · boş **7343**.
+> Sızıntı giderildikten sonra boş alanlı **2614** firmanın ham `raw_website`
+> adayı var; **ancak `bos_alan_sablonsuz_ham_aday` = 0** — yani bu 2614'ün
+> **tamamının** ham adayı şablondur (`isim.org.tr` ×2140, `ostimistihdam.com` ×474,
+> ikisi de birden fazla firmaya yazılacak tek değer). Ham veriden bedava site
+> **gelmez**; site ancak arama + doğrulama ile bulunur.
+> Kalan gerçek adaylar (`erve.com.tr` ×20, `aksacomposites.com` ×8 …) zaten
+> `website_domain` dolu olan firmalara ait — boş havuzda kullanılabilir aday **0**.
+
+> **Kapı zinciri:** goc `0052` trigger'ı şablonu DB'de keser (ikinci savunma),
+> `kabul()` kodu reddeder (birinci savunma), içerik doğrulaması yanlış pozitifi
+> eler. **Sıralama tersine çevrilmez**: önce doğrula, sonra yaz.
 
 ### 3.8 `nace_code` — **TASLAK, KUSUR BİLİNİYOR**
 

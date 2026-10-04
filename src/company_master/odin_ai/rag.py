@@ -1,10 +1,22 @@
 # -*- coding: utf-8 -*-
-"""Odin AI RAG iskeleti — Embedder, Chunk ve metin parçalama."""
+"""Odin AI RAG iskeleti — Chunk ve metin parçalama.
+
+Embedder BURADA TANIMLANMAZ. Gerçek embedder `company_master.vector.embedder`
+modülündedir; iki embedder birden D-211 ikiz yapısı yaratırdı. Geriye dönük
+uyumluluk için `Embedder` / `EmbeddingResult` / `embed_texts` oradan dışa
+aktarılır (gövde kopyalanmaz — D-230).
+
+SSOT: `yedekler/Huginn Data Insights (HUGIns).txt:760-774`, :779, :837-839.
+KÖPRÜ (D-184): görev plans/brief_yasu_ALTYAPI-RAG-EMBEDDER-01.md
+· test tests/test_rag_embedder.py · hub hubs/TOOLS_SCRIPTS_HUB.md
+"""
 from __future__ import annotations
 
-import hashlib
 from dataclasses import dataclass
 from typing import List
+
+# D-230: gövde kopyalanmaz, isim korunur (D-211 ikiz yapı yasağı).
+from ..vector.embedder import Embedder, EmbeddingResult, embed_texts  # noqa: F401
 
 
 @dataclass(frozen=True)
@@ -17,26 +29,14 @@ class Chunk:
     ozet: str
 
 
-class Embedder:
-    """Deterministik yerel embedding sınıfı — API anahtarı gerektirmez."""
-
-    def __init__(self, boyut: int = 16) -> None:
-        self.boyut = boyut
-
-    def embed(self, text: str) -> List[float]:
-        """Metni deterministik vektöre dönüştürür."""
-        if not text:
-            return [0.0] * self.boyut
-
-        hash_obj = hashlib.sha256(text.encode("utf-8"))
-        hash_bytes = hash_obj.digest()
-
-        vector = []
-        for i in range(self.boyut):
-            byte_val = hash_bytes[i % len(hash_bytes)]
-            vector.append((byte_val / 255.0) * 2.0 - 1.0)
-
-        return vector
+@dataclass(frozen=True)
+class Chunk:
+    """Metin parçası (chunk) veri sınıfı."""
+    icerik: str
+    baslangic: int
+    bitis: int
+    boyut: int
+    ozet: str
 
 
 def chunk_metin(metin: str, boyut: int = 200) -> List[Chunk]:

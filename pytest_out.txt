@@ -1,0 +1,519 @@
+........................................................................ [  1%]
+........................................................................ [  2%]
+........................................................................ [  4%]
+........................................................................ [  5%]
+........................................................F............... [  7%]
+........................................................................ [  8%]
+........................................................................ [ 10%]
+....................................................................FF.. [ 11%]
+...........s............................................................ [ 13%]
+........................................................................ [ 14%]
+........................................................................ [ 16%]
+........................................................................ [ 17%]
+........................................................................ [ 18%]
+........................................................................ [ 20%]
+........................................................................ [ 21%]
+........................................................................ [ 23%]
+........................................................................ [ 24%]
+........................................................................ [ 26%]
+........................................................................ [ 27%]
+........................................................................ [ 29%]
+........................................................................ [ 30%]
+........................................................................ [ 32%]
+........................................................................ [ 33%]
+........................................................................ [ 34%]
+........................................................................ [ 36%]
+........................................................................ [ 37%]
+........................................................................ [ 39%]
+........................................................................ [ 40%]
+........................................................................ [ 42%]
+........................................................................ [ 43%]
+.........F.............................................................. [ 45%]
+..........F..............sssssss........................................ [ 46%]
+........................................................................ [ 48%]
+........................................................................ [ 49%]
+........................................................................ [ 51%]
+........................................................................ [ 52%]
+.....................................................................E.. [ 53%]
+........................................................................ [ 55%]
+........................................................................ [ 56%]
+........................................................................ [ 58%]
+........................................................................ [ 59%]
+.................................s...................................... [ 61%]
+........................................................................ [ 62%]
+........................................................................ [ 64%]
+............................................F........................... [ 65%]
+........................................................................ [ 67%]
+........................................................................ [ 68%]
+........................................................................ [ 69%]
+.....................................F.................................. [ 71%]
+..............................................F..F.............F..F..... [ 72%]
+F...F................................................................... [ 74%]
+..................................................................F..... [ 75%]
+F....................................................................... [ 77%]
+........................................................................ [ 78%]
+........................................................................ [ 80%]
+........................................................................ [ 81%]
+........................................................................ [ 83%]
+.s..................s................................................... [ 84%]
+........................................................................ [ 85%]
+..........................................s............................. [ 87%]
+......................................................................FF [ 88%]
+........................................................................ [ 90%]
+........................................................................ [ 91%]
+........................................................................ [ 93%]
+........................................................................ [ 94%]
+........................................................................ [ 96%]
+........................................................................ [ 97%]
+........................................................................ [ 99%]
+..............................................                           [100%]
+=================================== ERRORS ====================================
+_______________ ERROR at teardown of test_api_ltv_cac_endpoint ________________
+
+    @pytest.fixture(autouse=True)
+    def _uretim_verisi_dokunulmaz():
+        """Korumali uretim dosyalari degisirse geri yukle ve testi kir."""
+        onceki = {p: p.read_bytes() for p in KORUMALI if p.exists()}
+        yield
+        kirlenen = []
+        for yol, icerik in onceki.items():
+            if yol.read_bytes() != icerik:
+                yol.write_bytes(icerik)  # once geri yukle, sonra sikayet et
+                kirlenen.append(yol.name)
+        if kirlenen:
+>           raise AssertionError(
+                "Test uretim verisine yazdi (geri yuklendi): " + ", ".join(kirlenen)
+            )
+E           AssertionError: Test uretim verisine yazdi (geri yuklendi): task_board.json, gorev_panosu.md, AGENT_SYNC.md
+
+tests\conftest.py:113: AssertionError
+---------------------------- Captured stdout call -----------------------------
+{"timestamp":"2026-10-02T10:29:05.223566+00:00","level":"WARNING","logger":"company_master.cache.redis_cache","message":"Redis baglanamadi (localhost:6379), in-memory fallback: Error 10061 connecting to localhost:6379. Hedef makine etkin olarak reddettiðinden baðlantý kurulamadý.","module":"redis_cache","function":"_connect","line":97}
+[TEST] api_admin_ltv_cac_endpoint: PASSED
+------------------------------ Captured log call ------------------------------
+WARNING  company_master.cache.redis_cache:redis_cache.py:97 Redis baglanamadi (localhost:6379), in-memory fallback: Error 10061 connecting to localhost:6379. Hedef makine etkin olarak reddettiðinden baðlantý kurulamadý.
+================================== FAILURES ===================================
+___________________________ test_guard_bom_ratchet ____________________________
+
+denetim = <module 'kodlama_denetim' from 'C:\\Huginn Data Projesi\\Huginn Data Insights\\scripts\\kodlama_denetim.py'>
+
+    def test_guard_bom_ratchet(denetim) -> None:
+        """Allowlist disinda UTF-8 BOM -> kirmizi (ratchet: liste asagi gitmeli)."""
+        mevcut_bom = _kapsam_bulgulari(denetim).get("utf8_bom", [])
+        allowlist: list[str] = []
+        if ALLOWLIST_YOLU.is_file():
+            veri = json.loads(ALLOWLIST_YOLU.read_text(encoding="utf-8"))
+            allowlist = sorted(veri.get("bom", []))
+        disinda = sorted(set(mevcut_bom) - set(allowlist))
+>       assert disinda == [], (
+            "Allowlist disinda UTF-8 BOM'lu dosyalar bulundu (ratchet ihlali): "
+            + ", ".join(disinda)
+        )
+E       AssertionError: Allowlist disinda UTF-8 BOM'lu dosyalar bulundu (ratchet ihlali): scripts/continue_haftalik_bildir.py, scripts/rag_korpus_olcum.py
+E       assert ['scripts/con...pus_olcum.py'] == []
+E         
+E         Left contains 2 more items, first extra item: 'scripts/continue_haftalik_bildir.py'
+E         Use -v to get more diff
+
+tests\test_kodlama_denetim.py:169: AssertionError
+___________________________ test_alan_oneki_kanonik ___________________________
+
+    def test_alan_oneki_kanonik():
+        """task_id on eki gorev_at.ALANLAR icinde olmali (SEMA-01 hatasinin mandali)."""
+        ga = _gorev_at()
+        yabanci = [
+            k.get("task_id")
+            for k in _aktif_kayitlar()
+            if str(k.get("task_id", "")).split("-")[0] not in ga.ALANLAR
+        ]
+>       assert not yabanci, (
+            f"kanonik olmayan ALAN oneki: {yabanci}; izinli: {', '.join(ga.ALANLAR)}"
+        )
+E       AssertionError: kanonik olmayan ALAN oneki: ['SCRAPE-001-DOCKER-SETUP', 'SCRAPE-002-LEMMLESS-ANKARA-OSB', 'SCRAPE-003-9ROUTER-JINA-FALLBACK', 'SCRAPE-004-QWEN-SINIFLANDIRMA', 'SCRAPE-005-KAZIMA-DOCKER-INTEGRATION', 'SCRAPE-006-QUALITY-AUDIT', 'SCRAPE-007-FINAL-REPORT']; izinli: UI, API, VERI, TEST, DOC, ALTYAPI, ORKESTRA
+E       assert not ['SCRAPE-001-DOCKER-SETUP', 'SCRAPE-002-LEMMLESS-ANKARA-OSB', 'SCRAPE-003-9ROUTER-JINA-FALLBACK', 'SCRAPE-004-QWEN-SINIFLANDIRMA', 'SCRAPE-005-KAZIMA-DOCKER-INTEGRATION', 'SCRAPE-006-QUALITY-AUDIT', ...]
+
+tests\test_pano_d57_kalici.py:65: AssertionError
+________________________ test_aktif_gorevler_d57_gecer ________________________
+
+    def test_aktif_gorevler_d57_gecer():
+        """Panodaki her aktif kayit giris kapisi dogrulamasini gecmeli."""
+        ga = _gorev_at()
+        ihlaller = []
+        for k in _aktif_kayitlar():
+            # Pano kaydinda ajan alani "sahip" adiyla tutulur (D-57 sahip zorunlu).
+            hata = ga._d57_dogrula(k.get("task_id", ""), k.get("baslik", ""), k.get("sahip", ""))
+            if hata:
+                ihlaller.append(f"{k.get('task_id')}: {hata}")
+>       assert not ihlaller, "aktif panoda D-57 ihlali:\n  " + "\n  ".join(ihlaller)
+E       AssertionError: aktif panoda D-57 ihlali:
+E           VERI-TENDER-KOLON-01: kanonik FIIL yok; izinli: yaz, düzelt, taþý, sil, denetle, ölç, belgele, araþtýr
+E           SCRAPE-001-DOCKER-SETUP: ALAN 'DOCKER' kanonik degil; izinli: UI, API, VERI, TEST, DOC, ALTYAPI, ORKESTRA
+E           SCRAPE-002-LEMMLESS-ANKARA-OSB: ALAN 'KAZIMA' kanonik degil; izinli: UI, API, VERI, TEST, DOC, ALTYAPI, ORKESTRA
+E           SCRAPE-003-9ROUTER-JINA-FALLBACK: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E           SCRAPE-004-QWEN-SINIFLANDIRMA: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E           SCRAPE-005-KAZIMA-DOCKER-INTEGRATION: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E           SCRAPE-006-QUALITY-AUDIT: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E           SCRAPE-007-FINAL-REPORT: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E       assert not ['VERI-TENDER-KOLON-01: kanonik FIIL yok; izinli: yaz, düzelt, taþý, sil, denetle, ölç, belgele, araþtýr', "SCRAPE-001...or: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', ...]
+
+tests\test_pano_d57_kalici.py:54: AssertionError
+_________________________ test_hafiza_tavani_asmiyor __________________________
+
+    def test_hafiza_tavani_asmiyor() -> None:
+        """Ajan hafizasi 200 satiri gecmemeli (tavan karari AGENTS.md'de)."""
+        n = len(_oku(HAFIZA).splitlines())
+>       assert n <= 200, "hafiza %d satir, tavan 200" % n
+E       AssertionError: hafiza 213 satir, tavan 200
+E       assert 213 <= 200
+
+tests\test_d309_ders_kapisi.py:139: AssertionError
+_________________ test_dusurulen_kolonlar_uretim_kodunda_yok __________________
+
+    def test_dusurulen_kolonlar_uretim_kodunda_yok():
+        desen = re.compile(r"\b(" + "|".join(_DUSENLER) + r")\b")
+        suclular = []
+        for p in _uretim_dosyalari():
+            yol = str(p.relative_to(KOK))
+            if any(m in yol for m in _MUAF):
+                continue
+            metin = p.read_text("utf-8", errors="replace")
+            for no, satir in enumerate(metin.splitlines(), 1):
+                if satir.lstrip().startswith(("#", "--", "//")):
+                    continue  # D-268 aciklama yorumu ihlal degil
+                if desen.search(satir):
+                    suclular.append(f"{yol}:{no}")
+>       assert not suclular, (
+            "Goc 0036'da dusurulen kolon uretim koduna geri sizdi "
+            "(DB'de yok -> calisma aninda UndefinedColumn): " + ", ".join(suclular)
+        )
+E       AssertionError: Goc 0036'da dusurulen kolon uretim koduna geri sizdi (DB'de yok -> calisma aninda UndefinedColumn): scripts\yasu_canli_olcum_d260.py:47, scripts\yasu_canli_olcum_d260.py:48
+E       assert not ['scripts\\yasu_canli_olcum_d260.py:47', 'scripts\\yasu_canli_olcum_d260.py:48']
+
+tests\test_dusurulen_kolon.py:57: AssertionError
+_______________________ test_d272_borc_defteri_eksiksiz _______________________
+
+    def test_d272_borc_defteri_eksiksiz() -> None:
+        """D-272: AGENTS.md'de adý geçen her borç kimliði defterde yazýlý olmalý.
+    
+        Mandal\u0131n y\xf6n\xfc tek: AGENTS.md \u2192 defter. Tersi (defterde olup AGENTS.md'de
+        olmayan) kontrol edilmez, çünkü kapanan borcun D-kaydý silinmez; defter
+        AGENTS.md'nin üst kümesi olamaz ama alt kümesi de olmamalý.
+    
+        D-270 dersi uygulandý: kimlikler defterde **sabit dize** olarak durur,
+        parçadan kurulmaz; iki tarafta ayný BORC_KIMLIK regexi tarar.
+        """
+        defter = KOK / "docs" / "BORC_DEFTERI.md"
+        assert defter.exists(), f"borç defteri yok: {defter}"
+        yazili = set(BORC_KIMLIK.findall(defter.read_text(encoding="utf-8")))
+        eksik = sorted(_borc_kimlikleri() - yazili)
+>       assert not eksik, (
+            f"AGENTS.md'de adý geçip docs/BORC_DEFTERI.md'de olmayan {len(eksik)} kimlik: "
+            f"{eksik}. Borç kapatan/açan D-kaydý ayný turda defteri de güncellemeli."
+        )
+E       AssertionError: AGENTS.md'de adý geçip docs/BORC_DEFTERI.md'de olmayan 4 kimlik: ['VERI-RAG-KORPUS-01', 'VERI-SEMA-DOGRULA-01', 'VERI-SEMA-DOGRULA-02', 'VERI-TSG-ESLEME-CASE-01']. Borç kapatan/açan D-kaydý ayný turda defteri de güncellemeli.
+E       assert not ['VERI-RAG-KORPUS-01', 'VERI-SEMA-DOGRULA-01', 'VERI-SEMA-DOGRULA-02', 'VERI-TSG-ESLEME-CASE-01']
+
+tests\test_dokuman_politikasi.py:139: AssertionError
+____________________ test_canli_panoda_sessiz_is_emri_yok _____________________
+
+    def test_canli_panoda_sessiz_is_emri_yok():
+        """Gercek durum bekcisi: su an aktif her gorevin tetigi olmali."""
+        pano = pd._json_oku(pd.PANO_DOSYA)
+        eksik = [
+            g["task_id"]
+            for g in pano
+            if g.get("durum") == "aktif"
+            and g.get("sahip")
+            and (g["sahip"], g["task_id"]) not in pd.tetik_kimlikleri()
+        ]
+>       assert not eksik, f"tetigi gonderilmemis aktif gorevler: {eksik}"
+E       AssertionError: tetigi gonderilmemis aktif gorevler: ['VERI-RISK-MOTORU-01']
+E       assert not ['VERI-RISK-MOTORU-01']
+
+tests\test_pano_denetim_tetik.py:91: AssertionError
+_____ test_yeni_brif_sablona_uyar[brief_utku_VERI-TSG-ESLEME-CASE-01.md] ______
+
+brif = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/plans/brief_utku_VERI-TSG-ESLEME-CASE-01.md')
+
+    @pytest.mark.parametrize("brif", _yeni_brifler(), ids=lambda p: p.name)
+    def test_yeni_brif_sablona_uyar(brif: Path):
+        """D-217 sonrasý yazýlan her brif kanonik þablonun bölümlerini taþýr."""
+        eksik = _eksikler(brif)
+>       assert not eksik, (
+            f"{brif.name} eksik bölüm (D-217): {eksik}\n"
+            f"Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur."
+        )
+E       AssertionError: brief_utku_VERI-TSG-ESLEME-CASE-01.md eksik bölüm (D-217): ['## Ilgili Nodlar']
+E         Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur.
+E       assert not ['## Ilgili Nodlar']
+
+tests\test_brief_sablon_denetim.py:102: AssertionError
+______ test_yeni_brif_sablona_uyar[brief_salih_VERI-SEMA-DOGRULA-01.md] _______
+
+brif = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/plans/brief_salih_VERI-SEMA-DOGRULA-01.md')
+
+    @pytest.mark.parametrize("brif", _yeni_brifler(), ids=lambda p: p.name)
+    def test_yeni_brif_sablona_uyar(brif: Path):
+        """D-217 sonrasý yazýlan her brif kanonik þablonun bölümlerini taþýr."""
+        eksik = _eksikler(brif)
+>       assert not eksik, (
+            f"{brif.name} eksik bölüm (D-217): {eksik}\n"
+            f"Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur."
+        )
+E       AssertionError: brief_salih_VERI-SEMA-DOGRULA-01.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+E         Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur.
+E       assert not ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+
+tests\test_brief_sablon_denetim.py:102: AssertionError
+______ test_yeni_brif_sablona_uyar[brief_salih_VERI-SEMA-DOGRULA-03.md] _______
+
+brif = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/plans/brief_salih_VERI-SEMA-DOGRULA-03.md')
+
+    @pytest.mark.parametrize("brif", _yeni_brifler(), ids=lambda p: p.name)
+    def test_yeni_brif_sablona_uyar(brif: Path):
+        """D-217 sonrasý yazýlan her brif kanonik þablonun bölümlerini taþýr."""
+        eksik = _eksikler(brif)
+>       assert not eksik, (
+            f"{brif.name} eksik bölüm (D-217): {eksik}\n"
+            f"Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur."
+        )
+E       AssertionError: brief_salih_VERI-SEMA-DOGRULA-03.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+E         Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur.
+E       assert not ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+
+tests\test_brief_sablon_denetim.py:102: AssertionError
+______ test_yeni_brif_sablona_uyar[brief_salih_VERI-SEMA-DOGRULA-02.md] _______
+
+brif = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/plans/brief_salih_VERI-SEMA-DOGRULA-02.md')
+
+    @pytest.mark.parametrize("brif", _yeni_brifler(), ids=lambda p: p.name)
+    def test_yeni_brif_sablona_uyar(brif: Path):
+        """D-217 sonrasý yazýlan her brif kanonik þablonun bölümlerini taþýr."""
+        eksik = _eksikler(brif)
+>       assert not eksik, (
+            f"{brif.name} eksik bölüm (D-217): {eksik}\n"
+            f"Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur."
+        )
+E       AssertionError: brief_salih_VERI-SEMA-DOGRULA-02.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+E         Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur.
+E       assert not ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+
+tests\test_brief_sablon_denetim.py:102: AssertionError
+_______ test_yeni_brif_sablona_uyar[brief_yasu_VERI-SEMA-DOGRULA-03.md] _______
+
+brif = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/plans/brief_yasu_VERI-SEMA-DOGRULA-03.md')
+
+    @pytest.mark.parametrize("brif", _yeni_brifler(), ids=lambda p: p.name)
+    def test_yeni_brif_sablona_uyar(brif: Path):
+        """D-217 sonrasý yazýlan her brif kanonik þablonun bölümlerini taþýr."""
+        eksik = _eksikler(brif)
+>       assert not eksik, (
+            f"{brif.name} eksik bölüm (D-217): {eksik}\n"
+            f"Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur."
+        )
+E       AssertionError: brief_yasu_VERI-SEMA-DOGRULA-03.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', '## Ajan chat zorunlu', 'ajan_chat.py komut referansý']
+E         Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur.
+E       assert not ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', '## Ajan chat zorunlu', 'ajan_chat.py komut referansý']
+
+tests\test_brief_sablon_denetim.py:102: AssertionError
+_______ test_yeni_brif_sablona_uyar[brief_yasu_VERI-SEMA-DOGRULA-02.md] _______
+
+brif = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/plans/brief_yasu_VERI-SEMA-DOGRULA-02.md')
+
+    @pytest.mark.parametrize("brif", _yeni_brifler(), ids=lambda p: p.name)
+    def test_yeni_brif_sablona_uyar(brif: Path):
+        """D-217 sonrasý yazýlan her brif kanonik þablonun bölümlerini taþýr."""
+        eksik = _eksikler(brif)
+>       assert not eksik, (
+            f"{brif.name} eksik bölüm (D-217): {eksik}\n"
+            f"Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur."
+        )
+E       AssertionError: brief_yasu_VERI-SEMA-DOGRULA-02.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+E         Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur.
+E       assert not ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+
+tests\test_brief_sablon_denetim.py:102: AssertionError
+___________________ test_ikinci_calistirma_kayit_cogaltmaz ____________________
+
+tmp_path = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-3051/test_ikinci_calistirma_kayit_c0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001EA7DA4B590>
+
+    def test_ikinci_calistirma_kayit_cogaltmaz(tmp_path, monkeypatch):
+        pano_yol = tmp_path / "task_board.json"
+        pano_yol.write_text(json.dumps(PANO, ensure_ascii=False), encoding="utf-8")
+        monkeypatch.setattr(gk.tb, "TASK_BOARD", pano_yol)
+        monkeypatch.setattr(gk.tb, "STATE_DIR", tmp_path)
+    
+        args = argparse.Namespace(kuru=False)
+        assert gk.cmd_arsivle(args) == 0
+        arsiv = tmp_path / "task_board_arsiv_2026-Q3.json"
+>       assert len(json.loads(arsiv.read_text(encoding="utf-8"))) == 2
+E       assert 1 == 2
+E        +  where 1 = len([{'task_id': 'A-1', 'durum': 'done', 'bitis': '2026-09-21T10:00:00'}])
+E        +    where [{'task_id': 'A-1', 'durum': 'done', 'bitis': '2026-09-21T10:00:00'}] = <function loads at 0x000001EA0521E020>('[\n  {\n    "task_id": "A-1",\n    "durum": "done",\n    "bitis": "2026-09-21T10:00:00"\n  }\n]')
+E        +      where <function loads at 0x000001EA0521E020> = json.loads
+E        +      and   '[\n  {\n    "task_id": "A-1",\n    "durum": "done",\n    "bitis": "2026-09-21T10:00:00"\n  }\n]' = read_text(encoding='utf-8')
+E        +        where read_text = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-3051/test_ikinci_calistirma_kayit_c0/task_board_arsiv_2026-Q3.json').read_text
+
+tests\test_gorev_kutusu_arsiv.py:44: AssertionError
+---------------------------- Captured stdout call -----------------------------
+3 kayit tasinacak, aktif panoda 2 kalacak.
+  2026-Q1: 1 kayit
+  2026-Q3: 1 kayit
+  2026-Q4: 1 kayit
+  YAZILDI task_board_arsiv_2026-Q1.json: +1 (toplam 1)
+  YAZILDI task_board_arsiv_2026-Q3.json: +1 (toplam 1)
+  YAZILDI task_board_arsiv_2026-Q4.json: +1 (toplam 1)
+AKTIF PANO: 2 kayit
+__________________ test_acik_gorevlerde_yeni_d57_ihlali_yok ___________________
+
+    def test_acik_gorevlerde_yeni_d57_ihlali_yok() -> None:
+        ihlal = {}
+        for g in _acik_gorevler():
+            tid = g.get("task_id", "")
+            sebep = gorev_at._d57_dogrula(tid, g.get("baslik", ""), g.get("sahip", ""))
+            if sebep and tid not in MUAF:
+                ihlal[tid] = sebep
+>       assert not ihlal, f"acik gorevlerde D-57 ihlali: {ihlal}"
+E       AssertionError: acik gorevlerde D-57 ihlali: {'VERI-TENDER-KOLON-01': 'kanonik FIIL yok; izinli: yaz, düzelt, taþý, sil, denetle, ölç, belgele, araþtýr', 'SCRAPE-001-DOCKER-SETUP': "ALAN 'DOCKER' kanonik degil; izinli: UI, API, VERI, TEST, DOC, ALTYAPI, ORKESTRA", 'SCRAPE-002-LEMMLESS-ANKARA-OSB': "ALAN 'KAZIMA' kanonik degil; izinli: UI, API, VERI, TEST, DOC, ALTYAPI, ORKESTRA", 'SCRAPE-003-9ROUTER-JINA-FALLBACK': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'SCRAPE-004-QWEN-SINIFLANDIRMA': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'SCRAPE-005-KAZIMA-DOCKER-INTEGRATION': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'SCRAPE-006-QUALITY-AUDIT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'SCRAPE-007-FINAL-REPORT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)'}
+E       assert not {'VERI-TENDER-KOLON-01': 'kanonik FIIL yok; izinli: yaz, düzelt, taþý, sil, denetle, ölç, belgele, araþtýr', 'SCRAPE-0...or: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', ...}
+
+tests\test_naming_audit.py:63: AssertionError
+________________________ test_kokte_izinsiz_dosya_yok _________________________
+
+    @pytest.mark.skipif(
+        not (DIS_KOK / ".gitignore").exists(),
+        reason="dis kok bulunamadi (farkli klasor yapisi)",
+    )
+    def test_kokte_izinsiz_dosya_yok() -> None:
+        """Kokte izin listesi disinda dosya birikmez (D-241)."""
+        fazla = sorted(set(_kok_dosyalari()) - IZINLI_DOSYA)
+>       assert not fazla, (
+            f"Dis kokte {len(fazla)} izinsiz dosya: {fazla[:10]}\n"
+            "Cozum: tek kullanimlik betik/cikti alt klasore tasinir "
+            "(_ARSIV_* veya ilgili repo). Izin listesi buyutulmez (D-241)."
+        )
+E       AssertionError: Dis kokte 1 izinsiz dosya: ['_update_pano.py']
+E         Cozum: tek kullanimlik betik/cikti alt klasore tasinir (_ARSIV_* veya ilgili repo). Izin listesi buyutulmez (D-241).
+E       assert not ['_update_pano.py']
+
+tests\test_kok_politikasi.py:47: AssertionError
+____________________ test_vault_kokte_tek_kullanimlik_yok _____________________
+
+    def test_vault_kokte_tek_kullanimlik_yok() -> None:
+        """Vault kokunde tek kullanimlik betik/cikti birikmez (D-221).
+    
+        Ajanlar `check_*.py` / `run_*.py` gorup YANLIS betigi calistirir:
+        ayni isin 5-7 kopyasi koke birikmisti. Cozum: `_ARSIV_tek_kullanimlik/`
+        altina tasinir; izin listesi BUYUTULMEZ.
+        """
+        fazla = _vault_kok_tek_kullanimlik()
+>       assert not fazla, (
+            f"Vault kokte {len(fazla)} tek kullanimlik dosya: {fazla[:10]}\n"
+            "Cozum: `_ARSIV_tek_kullanimlik/` altina tasinir. D-221 bu olcumun "
+            "gereklidir: kokte biriken betik ajanin yanlis calistirmasina yol acar."
+        )
+E       AssertionError: Vault kokte 7 tek kullanimlik dosya: ['_goc_defteri_rapor.txt', '_tmp_chat_oku.py', 'check_empty.py', 'check_specific.py', 'check_task.py', 'check_titles.py', 'run_nace.py']
+E         Cozum: `_ARSIV_tek_kullanimlik/` altina tasinir. D-221 bu olcumun gereklidir: kokte biriken betik ajanin yanlis calistirmasina yol acar.
+E       assert not ['_goc_defteri_rapor.txt', '_tmp_chat_oku.py', 'check_empty.py', 'check_specific.py', 'check_task.py', 'check_titles.py', ...]
+
+tests\test_kok_politikasi.py:129: AssertionError
+============================== warnings summary ===============================
+tests\test_secrets_rotation.py:174
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\test_secrets_rotation.py:174: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration
+
+tests/test_ostim_d300_temizlik.py::TestDizinButunlugu::test_hicbir_adres_etiket_tasiMiYor
+tests/test_veri_denetim_d303.py::TestCaprazKuraliYanlisAlarm::test_dosya_ici_capraz_kurali_temiz
+tests/test_veri_denetim_d303.py::TestCanliDizi::test_hicbir_eposta_bozuk_degil
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\fixtures.py:1313: PytestRemovedIn10Warning: Class-scoped fixture defined as instance method is deprecated.
+  Instance attributes set in this fixture will NOT be visible to test methods,
+  as each test gets a new instance while the fixture runs only once per class.
+  Use @classmethod decorator and set attributes on cls instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method
+    fixturefunc = resolve_fixture_function(fixturedef, request)
+
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+  C:\Huginn Data Projesi\Huginn Data Insights\tests\test_job_intelligence_e2e.py:370: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    sig.setdefault("detected_at", datetime.utcnow() - timedelta(days=1))
+
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+  C:\Huginn Data Projesi\Huginn Data Insights\src\company_master\intelligence\job_intelligence\pipeline\scorer.py:28: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return datetime.utcnow()
+
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+  C:\Huginn Data Projesi\Huginn Data Insights\tests\test_job_intelligence_e2e.py:321: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "detected_at": datetime.utcnow() - timedelta(days=1),
+
+tests/company_master/test_ankara_osb.py: 15 warnings
+  C:\Huginn Data Projesi\Huginn Data Insights\src\company_master\seed\seed_ankara_osb.py:148: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.utcnow().isoformat()
+
+tests/test_benchmark.py: 100 warnings
+tests/test_api_integration.py: 2 warnings
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3620: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now_iso = datetime.utcnow().isoformat()
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_by_tier
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3395: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff_30 = datetime.utcnow() - timedelta(days=30)
+
+tests/test_admin_ltv_cac.py::test_calculate_ltv_basic
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3259: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_calculate_cac_basic
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3298: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3323: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3358: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    start_date = datetime.utcnow().date() - timedelta(days=days)
+
+tests/test_auth_lockout.py: 10 warnings
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\sqlalchemy\engine\default.py:952: DeprecationWarning: The default datetime adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+    cursor.execute(statement, parameters)
+
+tests/test_mcp_transport.py::TestHTTPTransport::test_http_call_apify_list_actors
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydantic_settings\sources\utils.py:47: IncompleteFieldDefinitionWarning: Field 'lifespan' has an incomplete definition: its annotation contains an unresolved forward reference, so settings sources may fail to correctly resolve its value. Call `model_rebuild()` on the model where the field is defined, once all the referenced types are defined.
+    warnings.warn(
+
+tests/company_master/test_web_app.py::TestIntelligenceDashboardEndpoint::test_intelligence_dashboard_returns_expected_structure
+  c:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3620: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now_iso = datetime.utcnow().isoformat()
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_kodlama_denetim.py::test_guard_bom_ratchet - AssertionError...
+FAILED tests/test_pano_d57_kalici.py::test_alan_oneki_kanonik - AssertionErro...
+FAILED tests/test_pano_d57_kalici.py::test_aktif_gorevler_d57_gecer - Asserti...
+FAILED tests/test_d309_ders_kapisi.py::test_hafiza_tavani_asmiyor - Assertion...
+FAILED tests/test_dusurulen_kolon.py::test_dusurulen_kolonlar_uretim_kodunda_yok
+FAILED tests/test_dokuman_politikasi.py::test_d272_borc_defteri_eksiksiz - As...
+FAILED tests/test_pano_denetim_tetik.py::test_canli_panoda_sessiz_is_emri_yok
+FAILED tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-TSG-ESLEME-CASE-01.md]
+FAILED tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_salih_VERI-SEMA-DOGRULA-01.md]
+FAILED tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_salih_VERI-SEMA-DOGRULA-03.md]
+FAILED tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_salih_VERI-SEMA-DOGRULA-02.md]
+FAILED tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_VERI-SEMA-DOGRULA-03.md]
+FAILED tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_VERI-SEMA-DOGRULA-02.md]
+FAILED tests/test_gorev_kutusu_arsiv.py::test_ikinci_calistirma_kayit_cogaltmaz
+FAILED tests/test_naming_audit.py::test_acik_gorevlerde_yeni_d57_ihlali_yok
+FAILED tests/test_kok_politikasi.py::test_kokte_izinsiz_dosya_yok - Assertion...
+FAILED tests/test_kok_politikasi.py::test_vault_kokte_tek_kullanimlik_yok - A...
+ERROR tests/test_admin_ltv_cac.py::test_api_ltv_cac_endpoint - AssertionError...
+17 failed, 4912 passed, 12 skipped, 146 warnings, 1 error in 227.23s (0:03:47)

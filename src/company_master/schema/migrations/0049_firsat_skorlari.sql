@@ -46,7 +46,50 @@ COMMENT ON COLUMN company_opportunity_scores.ensemble_score IS 'SSOT:240,241-266
 COMMENT ON COLUMN company_opportunity_scores.calculated_at IS 'Hesaplanma zamanı';
 COMMENT ON COLUMN company_opportunity_scores.score_version IS 'Skor hesaplama sürümü (ör. v1, v2)';
 
--- 3) İndeksler
+-- 3) ARALIK KISITLARI (0.0 - 1.0)
+--
+-- NEDEN: SSOT 6.2 (baglam:229-240) dort skoru 0.0-1.0 araliginda tanimlar.
+-- NUMERIC(5,2) tek basina bu araligi KORUMAZ (999.99'a kadar kabul eder);
+-- kolon adi icerigi dogrulamaz (D-245). Bu nedenle kisi Python'a birakildiysa
+-- "sessizce bozuk veri" olusur. Kisit veritabaninda olmalidir (D-267/1:
+-- kisit unutulmaz, koruma disarida birakilirsa kaybolur).
+--
+-- NOT: Kisit adlari explicit olsa bile ADD CONSTRAINT idempotent DEGILDIR;
+-- bu yuzden pg_constraint kataloğundan varlik kontrolu yapilir (D-251/5).
+DO $$
+DECLARE
+    kisit_adlari TEXT[] := ARRAY[
+        'ck_cos_need_score_aralik',
+        'ck_cos_fit_score_aralik',
+        'ck_cos_timing_score_aralik',
+        'ck_cos_ensemble_score_aralik'
+    ];
+    k TEXT;
+    varlik BOOLEAN;
+BEGIN
+    FOREACH k IN ARRAY kisit_adlari LOOP
+        SELECT EXISTS (
+            SELECT 1 FROM pg_constraint
+            WHERE conrelid = 'company_opportunity_scores'::regclass
+              AND conname = k
+        ) INTO varlik;
+
+        IF NOT varlik THEN
+            EXECUTE format(
+                'ALTER TABLE company_opportunity_scores ADD CONSTRAINT %I '
+                'CHECK (%I BETWEEN 0.0 AND 1.0)',
+                k, k LIKE 'ck_cos_need%'      THEN 'need_score'
+                     k LIKE 'ck_cos_fit%'     THEN 'fit_score'
+                     k LIKE 'ck_cos_timing%'  THEN 'timing_score'
+                                           ELSE 'ensemble_score'
+                END
+            );
+            RAISE NOTICE '0049: % kisiti eklendi', k;
+        END IF;
+    END LOOP;
+END $$;
+
+-- 4) İndeksler
 CREATE INDEX IF NOT EXISTS idx_company_opportunity_scores_ensemble
     ON company_opportunity_scores(ensemble_score);
 CREATE INDEX IF NOT EXISTS idx_company_opportunity_scores_calculated_at

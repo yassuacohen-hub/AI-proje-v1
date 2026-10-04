@@ -1,0 +1,14 @@
+warning: in the working copy of 'data/orchestrator/AGENT_SYNC.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/ajan-chat.jsonl', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/gorev_panosu.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/onay_kuyrugu.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/task_board.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/triggers/utku.jsonl', CRLF will be replaced by LF the next time Git touches it
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 25.14s
+[chore/monorepo-merge 38c8d56] orkestrator: SCRAPE-005 reddedildi (3 karar), DOC-GLOBAL-INTEL onaylandi; reddet() tetik teslimini alindiya ceker (hayalet onay-bekleyen duzeltmesi) + test + onarim betigi
+ 12 files changed, 325 insertions(+), 57 deletions(-)
+ create mode 100644 data/orchestrator/SCRAPE-005-KAZIMA-DOCKER-INTEGRATION_karar_2026-10-03.md
+ create mode 100644 scripts/chat_satir_oku.py
+ create mode 100644 scripts/tetik_teslim_geri_al.py

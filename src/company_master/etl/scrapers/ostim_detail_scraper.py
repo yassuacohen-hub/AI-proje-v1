@@ -17,22 +17,67 @@ TIMEOUT = 15
 MAX_WORKERS = 4
 
 WEB_BLOCKLIST = (
-    "ostim.org.tr", "ostimonline.com", "ostimradyo.com",
+    # OSTIM OSB ve kendi varliklari
+    "ostim.org.tr", "ostimonline.com", "ostimradyo.com", "ostimistihdam.com",
     "isim.org.tr", "osp.com.tr",
-    "facebook.com", "twitter.com", "x.com",
-    "linkedin.com", "instagram.com", "youtube.com",
+    # SAYFA SABLONU SIZINTISI (D-245): canli detay sayfasinda firma web
+    # sitesi YOK; dis linkler yalnizca OSB portalinin kendi ayaklaridir.
+    # 1555/1555 kayit tek portal adresine bakiyordu. Tek tek denemek yerine
+    # buraya yazildi (canli sayfa taramasiyla olculdu, 2026-10-03).
+    "nsosyal.com", "ostimkooperatifi.com", "ostimsavunma.org",
+    "ostimvakfi.org", "ostimyatirim.com.tr", "htk.org.tr",
+    "odtuteknokent.com.tr", "kaucukteknolojileri.com", "ostimteknik.edu.tr",
+    # sosyal medya
+    "facebook.com", "fb.com", "twitter.com", "x.com", "linkedin.com",
+    "instagram.com", "youtube.com", "youtu.be", "tiktok.com",
+    "wa.me", "whatsapp.com", "viber.com", "telegram.me",
+    # harita / arama
+    "maps.google", "google.com/maps", "goo.gl", "maps.app.goo.gl",
+    # sabit desenler (semaya girmeden once elenir)
+    "mailto:", "javascript:", "tel:", "sms:",
 )
+
+WEB_ETIKETLER = ("Web Sitesi", "İnternet Sitesi", "Internet Sitesi",
+                 "Web Sites", "Internet", "Web")
+
+IZINLI_SEMALAR = ("http://", "https://")
 
 
 def _is_company_website(href: str) -> bool:
-    if not href or not href.startswith("http"):
+    if not href:
         return False
-    low = href.lower()
+    low = href.strip().lower()
+    if not low.startswith(IZINLI_SEMALAR):
+        return False
     if any(b in low for b in WEB_BLOCKLIST):
         return False
-    if low.endswith(("/", "/index.html", "/home")):
+    if low.endswith(("/index.html", "/index.htm", "/home")):
         return False
     return True
+
+
+def _etiketten_site(soup) -> Optional[str]:
+    """Firma web sitesini etiket cevresinden bulur.
+
+    Neden etiket: sayfa sablonunun kendi linki (portal/sosyal) firma linkinden
+    once gelir. "Ilk http adresi" kurali 1555 kaydin tamamini tek bir portal
+    adresine baglamisti (D-245 kaynak sizintisi). Etiket yoksa bos kalir;
+    tahmin edilmez (D-245: veri yok, uydurma veri degildir).
+    """
+    for label in WEB_ETIKETLER:
+        el = soup.find(string=re.compile(re.escape(label), re.IGNORECASE))
+        if not el:
+            continue
+        kap = el.find_parent("li") or el.find_parent("td") or el.find_parent("div")
+        if kap is None and el.parent is not None:
+            kap = el.parent
+        if kap is None:
+            continue
+        for a in kap.select("a[href]"):
+            href = a.get("href", "")
+            if _is_company_website(href):
+                return href
+    return None
 
 
 def extract_detail(slug: str) -> dict:
@@ -45,11 +90,7 @@ def extract_detail(slug: str) -> dict:
     except Exception: return {}
     soup = BeautifulSoup(resp.text, "html.parser")
     data = {"web_sitesi": None, "adres": None, "sosyal_medya": {}, "vergi_no": None, "osb_parsel": None}
-    for a in soup.select("a[href^='http']"):
-        href = a.get("href", "")
-        if _is_company_website(href):
-            data["web_sitesi"] = href
-            break
+    data["web_sitesi"] = _etiketten_site(soup)
     for a in soup.select("a[href*='linkedin.com'], a[href*='twitter.com'], a[href*='x.com'], a[href*='facebook.com'], a[href*='instagram.com']"):
         href = a.get("href", "")
         if "linkedin.com" in href: data["sosyal_medya"]["linkedin"] = href
@@ -83,10 +124,13 @@ def process_firm(firm: dict) -> dict:
     firm["detail_scraped_at"] = datetime.now().isoformat()
     return firm
 
-def run_scraper(limit: Optional[int] = None):
+def run_scraper(limit: Optional[int] = None, cikti: Optional[Path] = None,
+                girdi: Optional[Path] = None):
+    output_file = Path(cikti) if cikti else OUTPUT_FILE
+    input_file = Path(girdi) if girdi else INPUT_FILE
     completed_slugs = set()
-    if OUTPUT_FILE.exists():
-        with open(OUTPUT_FILE, "r", encoding="utf-8") as f:
+    if output_file.exists():
+        with open(output_file, "r", encoding="utf-8-sig") as f:
             for line in f:
                 if line.strip():
                     try:
@@ -94,7 +138,7 @@ def run_scraper(limit: Optional[int] = None):
                         if r.get("slug"): completed_slugs.add(r["slug"])
                     except: pass
     firms_to_scrape = []
-    with open(INPUT_FILE, "r", encoding="utf-8") as f:
+    with open(input_file, "r", encoding="utf-8-sig") as f:
         for line in f:
             if line.strip():
                 firm = json.loads(line)
@@ -102,8 +146,8 @@ def run_scraper(limit: Optional[int] = None):
     if limit: firms_to_scrape = firms_to_scrape[:limit]
     total = len(firms_to_scrape)
     if total == 0: print("Yeni firma kalmadı."); return
-    print(f"Çekilecek: {total}")
-    with open(OUTPUT_FILE, "a", encoding="utf-8") as out_f:
+    print(f"Çekilecek: {total} -> {output_file}")
+    with open(output_file, "a", encoding="utf-8") as out_f:
         with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
             future_to_firm = {executor.submit(process_firm, firm): firm for firm in firms_to_scrape}
             count = 0
@@ -120,4 +164,6 @@ def run_scraper(limit: Optional[int] = None):
 if __name__ == "__main__":
     import sys
     limit = int(sys.argv[1]) if len(sys.argv) > 1 else None
-    run_scraper(limit)
+    cikti = Path(sys.argv[2]) if len(sys.argv) > 2 else None
+    girdi = Path(sys.argv[3]) if len(sys.argv) > 3 else None
+    run_scraper(limit, cikti, girdi)

@@ -113,7 +113,16 @@ def test_cmd_al_hata(tmp_path):
 
 # ---- teslim ----
 
-def test_cmd_teslim_basarili(tmp_path):
+def _bulgu_kapisi_ac(monkeypatch):
+    """D-318 bulgu kapisini gecer. Bu testler kapinin kendisini degil
+    teslim davranisini olcer; bulgu yazmadan teslim reddedilir.
+    Kapinin gercekten calistigini test_cmd_teslim_bulgu_kapisi_reddeder
+    dogrular."""
+    monkeypatch.setattr(gk.bulgu, "task_var_mi", lambda task_id: True)
+
+
+def test_cmd_teslim_basarili(tmp_path, monkeypatch):
+    _bulgu_kapisi_ac(monkeypatch)
     _gorev()
     trigger.tetik_ekle("T-01", "kilo", data_dir=tmp_path)
     trigger.tetik_al("kilo", "T-01", data_dir=tmp_path)
@@ -122,7 +131,18 @@ def test_cmd_teslim_basarili(tmp_path):
     assert rc == 0
 
 
-def test_cmd_teslim_hata(tmp_path):
+def test_cmd_teslim_bulgu_kapisi_reddeder(tmp_path):
+    """Kapinin kendisi: bulgu yoksa teslim reddedilir (D-318)."""
+    _gorev()
+    trigger.tetik_ekle("T-01", "kilo", data_dir=tmp_path)
+    trigger.tetik_al("kilo", "T-01", data_dir=tmp_path)
+    args = argparse.Namespace(ajan="kilo", task_id="T-01", ozet="test", cikti=None)
+    rc = gk.cmd_teslim(args)
+    assert rc == 1, "bulgu kapisi devre disi kalmis"
+
+
+def test_cmd_teslim_hata(tmp_path, monkeypatch):
+    _bulgu_kapisi_ac(monkeypatch)
     _gorev()
     trigger.tetik_ekle("T-01", "kilo", data_dir=tmp_path)
     trigger.tetik_al("kilo", "T-01", data_dir=tmp_path)

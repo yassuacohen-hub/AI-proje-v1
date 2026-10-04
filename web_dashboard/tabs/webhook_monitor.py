@@ -11,7 +11,6 @@ Kurallar:
 from __future__ import annotations
 
 import json
-import os
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -26,28 +25,11 @@ sys.path.insert(0, str(ROOT / "src"))
 from scripts.apify_webhook_receiver import ApifyWebhookReceiver
 from web_dashboard.charts import kpi_karti  # UI-CHART-01
 from web_dashboard.tabs.admin_error_handling import AdminErrorHandler
-# Crawl Kontrolü sabitleri
-CRAWL_STATUS_BEKLEMEDE = "beklemede"
-CRAWL_STATUS_CALISIYOR = "calisiyor"
-CRAWL_STATUS_BASARISIZ = "basarisiz"
-CRAWL_STATUS_DURDURULDU = "durduruldu"
 
-# Crawl aktiflik konfigürasyonu (env var)
-CRAWL_ENABLED = os.getenv("CRAWL_ENABLED", "0") == "1"
-
-def _crawl_is_enabled() -> bool:
-    """Crawl kontrolünün etkin olup olmadığını döndürür."""
-    return CRAWL_ENABLED
-
-def _log_crawl_action(action: str, task_id: str | None = None) -> None:
-    """Crawl eylemini loglar. TODO: admin_audit altyapısı gelince gerçek log yaz."""
-    # TODO: API-ADMIN-SUPHELI-AKTIVITE-21 ile hizalanacak admin_audit yazılacak
-    import logging
-    logger = logging.getLogger("crawl_control")
-    msg = f"Crawl eylemi: {action}"
-    if task_id:
-        msg += f" | Görev: {task_id}"
-    logger.info(msg)
+# UI-ADMIN-CRAWL-TASI-35: crawl başlat/durdur paneli buradan taşındı.
+# Kanonik yer: `admin_kaynaklar.py` (Veri Kaynakları ekranı). Durum sabitleri ve
+# `_crawl_is_enabled` / `_log_crawl_action` yardımcıları da orada tek tanımlı
+# (D-211 ikiz yasağı). Aşağıdaki satır yönlendirmedir, ikinci bir kontrol değil.
 
 WEBHOOK_EVENTS = ROOT / "data" / "orchestrator" / "apify_webhook_events.jsonl"
 WEBHOOK_DLQ = ROOT / "data" / "orchestrator" / "apify_webhook_dlq.jsonl"
@@ -233,73 +215,17 @@ def render_webhook_monitor_tab() -> None:
     else:
         st.info("Health check verisi yüklenemedi.")
 
-# --- Crawl Kontrolü ---
-    st.divider()
-    st.subheader("🕷️ Crawl Kontrolü")
+# UI-ADMIN-CRAWL-TASI-35: crawl başlat/durdur artık Veri Kaynakları sayfasında.
+    from web_dashboard.tabs import tab_getir  # fonksiyon içi: döngüsel import yok
 
-    # Admin yetkisi kontrolü (basit: session_state'te admin_email varsa)
-    is_admin = st.session_state.get("admin_email", "") != ""
-
-    # Crawl durumu (session_state'te sakla)
-    if "crawl_status" not in st.session_state:
-        st.session_state["crawl_status"] = CRAWL_STATUS_BEKLEMEDE
-
-    crawl_status = st.session_state["crawl_status"]
-    crawl_enabled = _crawl_is_enabled()
-
-    # Yetkisiz kullanıcılar için sadece okuma
-    disabled_for_role = not is_admin
-
-    # Kontrol paneli
-    c1, c2, c3 = st.columns([2, 2, 3])
-    with c1:
-        # Crawl etkin/pasif toggle (env değerini gösterir, değiştirmez)
-        st.checkbox(
-            "Crawl etkin (ENV)",
-            value=crawl_enabled,
-            disabled=True,
-            help="CRAWL_ENABLED environment variable ile kontrol edilir",
-        )
-    with c2:
-        # Başlat butonu
-        if crawl_status in (CRAWL_STATUS_BEKLEMEDE, CRAWL_STATUS_BASARISIZ, CRAWL_STATUS_DURDURULDU):
-            if st.button("▶️ Crawl Başlat", disabled=disabled_for_role):
-                st.session_state["crawl_status"] = CRAWL_STATUS_CALISIYOR
-                _log_crawl_action("start")
-                st.success("Crawl başlatıldı")
-                st.rerun()
-    with c3:
-        # Durdur butonu (iki adımlı onay)
-        if crawl_status == CRAWL_STATUS_CALISIYOR:
-            if "crawl_stop_confirm" not in st.session_state:
-                st.session_state["crawl_stop_confirm"] = False
-
-            if not st.session_state["crawl_stop_confirm"]:
-                if st.button("⏹️ Crawl Durdur", disabled=disabled_for_role):
-                    st.session_state["crawl_stop_confirm"] = True
-                    st.rerun()
-            else:
-                cc1, cc2 = st.columns(2)
-                with cc1:
-                    if st.button("✅ Evet, Durdur", type="primary", disabled=disabled_for_role):
-                        st.session_state["crawl_status"] = CRAWL_STATUS_DURDURULDU
-                        st.session_state["crawl_stop_confirm"] = False
-                        _log_crawl_action("stop")
-                        st.success("Crawl durduruldu")
-                        st.rerun()
-                with cc2:
-                    if st.button("❌ İptal", disabled=disabled_for_role):
-                        st.session_state["crawl_stop_confirm"] = False
-                        st.rerun()
-
-    # Mevcut durum göstergesi
-    status_icons = {
-        CRAWL_STATUS_BEKLEMEDE: "⏳",
-        CRAWL_STATUS_CALISIYOR: "🟢",
-        CRAWL_STATUS_BASARISIZ: "🔴",
-        CRAWL_STATUS_DURDURULDU: "⏸️",
-    }
-    st.caption(f"Mevcut durum: {status_icons.get(crawl_status, '⚪')} {crawl_status.upper()}")
+    _kaynaklar_tab = tab_getir("kaynaklar")
+    st.caption("🕷️ Crawl başlat/durdur → Veri Kaynakları sayfasında")
+    st.link_button(
+        "🕷️ Veri Kaynakları",
+        f"/{_kaynaklar_tab.url_path}" if _kaynaklar_tab else "/",
+        width="stretch",
+        help="Kazımayı tetikleme ve kaynak durumları bu sayfada.",
+    )
     # --- Istatistik Kartları ---
     st.divider()
     st.subheader("📊 Webhook Olay İstatistikleri")

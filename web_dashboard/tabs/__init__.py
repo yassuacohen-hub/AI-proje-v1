@@ -124,6 +124,9 @@ class TabTanimi:
             (8501, iç ekip) varsayılandır. `YUZEY_HUGINN` işaretli bölümler
             müşteri ekranıdır; Huginn tasarım turu tamamlanana kadar
             Streamlit'te "Müşteri Önizleme" etiketiyle kalırlar.
+        rehber: Uzun "bu ekran ne yarar / nasıl kullanılır / veri nereden
+            gelir / dikkat" metni. Tek kapı `app.render_icerik` içinde
+            `st.info` olarak basılır; sekme dosyası okumaz (D-211).
     """
 
     anahtar: str
@@ -140,6 +143,7 @@ class TabTanimi:
     bekleyen_gorev: str = ""
     min_rol: str = "anon"
     yuzey: str = YUZEY_MUNINN
+    rehber: str = ""
 
     def __post_init__(self) -> None:
         if self.min_rol not in ROL_SEVIYE:
@@ -170,12 +174,22 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik=t("menu_h_ana"),
         ikon="🏠",
         grup=GRUP_IS,
-        aciklama="KPI'lar, müşteri ve sistem sağlığı tek bakışta",
+        aciklama="Müşteri ve sistem sağlığı, ana göstergeler tek bakışta",
         url_path="ana-kontrol",
         sira=0,  # NAV-AGAC-01: kök sıralaması
         modul="web_dashboard.tabs.ana_kontrol",
         fonksiyon="render_ana_kontrol_tab",
         yuzey=YUZEY_HUGINN,
+        rehber=        "**Bu ekran ne işe yarar?** Müşteri tarafı (kayıt, onay, kredi) ve sistem tarafı "
+                "(firma sayısı, kalite skoru, görev durumu) metriklerini tek bakışta gösterir.\n\n"
+                "**Nasıl kullanılır?** Kartlar veri geldikçe kendiliğinden açılır. Bölüm "
+                "başlıklarından ilgili panele atlayın.\n\n"
+                "**Veriler nereden gelir?** `/api/kpi` ve `/metrics` uç noktaları ile "
+                "webhook izleme kayıtları. 30 saniyede bir yenilenir.\n\n"
+                "**Dikkat:** Verisi henüz gelmemiş kutular yer tutucu değerle çizilir ve "
+                "hemen altlarında **SAHTE VERİ** uyarısı bulunur. Gerçek veri geldiğinde "
+                "kutu otomatik olarak gerçek değere geçer, uyarı kendiliğinden kaybolur."
+
     ),
     TabTanimi(
         anahtar="musteriler",
@@ -187,6 +201,18 @@ SECTIONS: tuple[TabTanimi, ...] = (
         ust="musteri_yonetimi", sira=0,
         modul="web_dashboard.tabs.admin_musteriler",
         fonksiyon="render_musteriler_tab",
+        rehber=        "**Bu ekran ne işe yarar?** Veritabanındaki firma kayıtlarını arar, kalite "
+                "skoruna göre süzer ve eksik bilgi taşıyan (telefon, e-posta, web sitesi olmayan) "
+                "kayıtları öne çıkarır. Veri temizliği ve müşteri araştırması için başlangıç "
+                "noktasıdır.\n\n"
+                "**Nasıl kullanılır?** Arama kutusuna firma adı veya NACE kodu yazın; kalite "
+                "eşiğini kaydırıcıdan seçin. Sonuç tablosunda sütun başlığına tıklayarak "
+                "sıralama yapabilirsiniz.\n\n"
+                "**Veriler nereden gelir?** `companies` tablosu "
+                "(`admin_search.search_companies` sorgusu).\n\n"
+                "**Dikkat:** Liste, seçtiğiniz satır sayısı kadar kayıt gösterir. Tüm sonuçları "
+                "indirmek için **Yönetim › Veri Export** ekranını kullanın."
+
     ),
     TabTanimi(
         anahtar="pazarlama",
@@ -199,13 +225,26 @@ SECTIONS: tuple[TabTanimi, ...] = (
         modul="web_dashboard.tabs.pazarlama",
         fonksiyon="render_pazarlama_tab",
         yuzey=YUZEY_HUGINN,
+        rehber=        "**Bu ekran ne işe yarar?** Pazarlama kampanyalarını ve müşteri segmentlerini "
+                "tek ekrandan izler. Hangi segmentin hangi kampanyayla beslendiğini, hangisinin "
+                "boşta kaldığını ve hedef pazarın ne kadarını kapsadığımızı gösterir.\n\n"
+                "**Nasıl kullanılır?** Üstteki özet kartlar aktif kampanya ve segment sayısını "
+                "verir. **Kampanyalar**, **Segmentler** ve **Kapsam** sekmeleri arasında geçiş "
+                "yaparak ayrıntılara inebilirsiniz. Segment başlığına tıklayınca kriterleri "
+                "ve içindeki firmalar açılır.\n\n"
+                "**Veriler nereden gelir?** `company_master.pazarlama` modülü (kampanya ve "
+                "segment tabloları). Bağlantı yoksa `data/demo/` altındaki örnek veri gösterilir "
+                "ve ekranda **Demo** rozeti belirir.\n\n"
+                "**Dikkat:** Demo modda kampanya oluşturma ve düzenleme kapalıdır. "
+                "Gösterim/tıklama/dönüşüm metrikleri yalnızca kaynakta kayıtlıysa hesaplanır."
+
     ),
     TabTanimi(
         anahtar="abrakadabra",
         baslik=t("menu_m_abrakadabra"),
         ikon="🤖",
         grup=GRUP_IS,
-        aciklama="9Router tabanlı AI sohbet ve analiz asistanı",
+        aciklama="Yapay zekâ asistanı: sohbet ve analiz",
         url_path="abrakadabra",
         ust="proje_yonetimi", sira=1,  # D-215: denetim/kvkk_mode çıktı, yeniden sıralandı
         modul="web_dashboard.tabs.abrakadabra",
@@ -221,7 +260,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         # iki kardeş düğme aynı ikonla ayırt edilemez → 💹 (yönetici/gelir özeti).
         ikon="💹",
         grup=GRUP_GELIR,
-        aciklama="MRR/ARR, churn oranı ve tenant sağlık dağılımı — yönetici özeti",
+        aciklama="Aylık gelir, müşteri kaybı ve sağlık dağılımı",
         url_path="executive",
         ust="veri_kalite", sira=1,
         modul="web_dashboard.tabs.admin_executive",
@@ -233,7 +272,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik="Destek Merkezi",
         ikon="🎫",
         grup=GRUP_IS,
-        aciklama="Ticket listesi, olusturma ve durum degistirme",
+        aciklama="Destek talepleri: açma ve durum değiştirme",
         url_path="destek",
         ust="musteri_yonetimi", sira=2,
         modul="web_dashboard.tabs.admin_destek",
@@ -245,7 +284,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik="Olaylar & Hatalar",
         ikon="⚠️",
         grup=GRUP_SISTEM,
-        aciklama="Hatalar, webhook olayları ve ölü harf kuyruğu (DLQ)",
+        aciklama="Hatalar, dış sistemden gelen haberler, takılan işler",
         url_path="hatalar",
         ust="sistem", sira=2,
         modul="web_dashboard.tabs.admin_errors",
@@ -282,7 +321,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik="Ajan Chat",
         ikon="💬",
         grup=GRUP_IS,
-        aciklama="D-192: Ajan sorun takibi — açık/çözündürülmüş/çözüldü metrikler ve son sorunlar",
+        aciklama="Ajan sorunları: açık, önerilen çözüm ve kapananlar",
         url_path="ajan-sohbet",
         ust="proje_yonetimi", sira=2,  # D-215
         modul="web_dashboard.tabs.admin_panel",
@@ -295,7 +334,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik="Görev Panosu",
         ikon="🗂️",
         grup=GRUP_IS,
-        aciklama="ALTYAPI-ADMIN-PANO-01: Ajan görevlerinin 4 bölümlü panosu",
+        aciklama="Ajan görevlerinin dört bölümlü panosu",
         url_path="gorev-panosu",
         ust="proje_yonetimi", sira=3,  # D-215
         modul="web_dashboard.tabs.admin_panel",
@@ -309,7 +348,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik="MIMIR Raporları",
         ikon="📑",
         grup=GRUP_IS,
-        aciklama="MIMIR architect raporları — otomatik oluşturuldu, tüm agentle açık",
+        aciklama="MIMIR mimari raporları: otomatik üretilir, herkese açık",
         url_path="rapor-listesi",
         ust="proje_yonetimi", sira=4,  # D-215
         modul="web_dashboard.tabs.admin_panel",
@@ -357,12 +396,35 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik=t("menu_maliyet"),
         ikon="💰",
         grup=GRUP_GELIR,
-        aciklama="AI ve sistem maliyeti analizi",
+        aciklama="Yapay zekâ ve sistem maliyeti analizi",
         url_path="maliyet",
         ust="veri_kalite", sira=4,  # D-215: Metrikler'e taşındı (ölçüm sorumluluğu)
         modul="web_dashboard.tabs.admin_cost",
         fonksiyon="render_cost_tab",
         min_rol="analyst",
+    ),
+    # UI-ADMIN-KAYNAKLAR-SAYFA-34: 0050 kazıma tablolarının tek okuyucusu (D-236).
+    TabTanimi(
+        anahtar="kaynaklar",
+        baslik="Veri Kaynakları",
+        ikon="🕷️",
+        grup=GRUP_IS,
+        aciklama="Kazıma kaynakları: son çalışma, hata ve toplanan sayfa",
+        url_path="kaynaklar",
+        ust="veri_kalite", sira=5,
+        modul="web_dashboard.tabs.admin_kaynaklar",
+        fonksiyon="render_kaynaklar_tab",
+        min_rol="admin",
+        rehber=        "**Bu ekran ne işe yarar?** OSINT kazıma kaynaklarının sağlığını gösterir: "
+                "kaynak başına toplam ve başarılı çekiş, son çalışma zamanı, son hatalar ve "
+                "toplanan sayfa adedi. Ayrıca crawl'ı başlatma/durdurma kontrolü buradadır "
+                "(eski Webhook Monitor ekranından taşındı).\n\n"
+                "**Veriler nereden gelir?** Üç 0050 tablosu: `scrape_audit_log` (çekiş "
+                "denemeleri), `scrape_errors` (hata kayıtları), `scrape_pages` (ham sayfa "
+                "içeriği). Hepsi salt okunur; bu ekran hiçbir kayıt yazmaz.\n\n"
+                "**Dikkat:** Kayıt yoksa ekran “Henüz kazıma yapılmadı” der — bu, sıfır "
+                "başarısız çekiş anlamına gelmez."
+
     ),
     TabTanimi(
         anahtar="teknik_altyapi",
@@ -394,7 +456,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik=t("menu_api"),
         ikon="🔌",
         grup=GRUP_SISTEM,
-        aciklama="API analitiği ve kullanım",
+        aciklama="Sunucu isteği analizi ve kullanımı",
         url_path="api",
         ust="sistem", sira=1,
         modul="web_dashboard.tabs.admin_api_analytics",
@@ -406,7 +468,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik=t("menu_webhook"),
         ikon="🔗",
         grup=GRUP_SISTEM,
-        aciklama="Webhook izleme ve durum",
+        aciklama="Dış sistemden gelen haberlerin durumu",
         url_path="webhook",
         ust="sistem", sira=5,
         modul="web_dashboard.tabs.webhook_monitor",
@@ -431,24 +493,37 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik=t("menu_sistem_bilesik"),
         ikon="⚙️",
         grup=GRUP_SISTEM,
-        aciklama="Performans, maliyet, webhook, DLQ ve denetim izi",
+        aciklama="Performans, maliyet, takılan işler ve denetim izi",
         url_path="sistem",
         sira=6,  # NAV-AGAC-01: kök sıralaması (D-215: mfa Güvenlik Kapısı'na taşındı)
         modul="web_dashboard.tabs.admin_sistem",
         fonksiyon="render_sistem_tab",
         min_rol="analyst",
+        rehber="**Bu ekran ne işe yarar?** Sistemin operasyonel durumunu tek yerde toplar: webhook ve işlenemeyen kayıt kuyruğu (DLQ), sorgu gecikmesi ile AI maliyeti, uç nokta kullanımı ve tüketim dağılımı."
+        "Üstteki **Yenile** düğmesi önbelleği temizleyip tüm panelleri yeniden yükler. Boş bölümler, ilgili veri kaynağı ilk verisini ürettiğinde otomatik dolar; boş görünen bir bölüm hata değildir."
     ),
     TabTanimi(
         anahtar="canli_veri",
         baslik=t("menu_m_canli_veri"),
         ikon="📡",
         grup=GRUP_SISTEM,
-        aciklama="Gerçek zamanlı sinyal akışı (SSE)",
+        aciklama="Gerçek zamanlı sinyal akışı",
         url_path="canli-veri",
         ust="sistem", sira=3,
         modul="web_dashboard.tabs.admin_realtime",
         fonksiyon="render_admin_realtime_tab",
         min_rol="analyst",
+        rehber=        "**Bu ekran ne işe yarar?** Sistemin şu anki nabzını gösterir: firma "
+                "sayısı, sinyal hacmi ve veri kalitesi. \"Şu an ne oluyor?\" sorusu "
+                "için bakılacak yerdir.\n\n"
+                "**Nasıl kullanılır?** Otomatik yenilemeyi açarsanız seçtiğiniz "
+                "aralıkta sayfa tazelenir; kapalıyken 🔄 Veriyi Yenile ile elle "
+                "tazelersiniz.\n\n"
+                "**Veriler nereden gelir?** Doğrudan veritabanından (`companies`, "
+                "`company_signals`). Admin panelinde SSE kullanılmaz — mimari kural "
+                "gereği canlı akış yalnız müşteri panelindedir.\n\n"
+                "**Dikkat:** Değerler kısa süreli bir önbellekten okunur."
+
     ),
     # D-215: Proje'den kök seviyesine yükseltildi — "Güvenlik Kapısı" (erişim/uyum kapısı).
     TabTanimi(
@@ -456,12 +531,14 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik="Güvenlik Kapısı",
         ikon="🧾",
         grup=GRUP_SISTEM,
-        aciklama="Denetim izi, KVKK modu ve MFA yönetimi — erişim ve uyum kontrolleri",
+        aciklama="Denetim izi, kişisel veri ve giriş güvenliği ayarları",
         url_path="denetim",
         sira=5,  # NAV-AGAC-01: kök sıralaması (D-215)
         modul="web_dashboard.tabs.admin_audit",
         fonksiyon="render_audit_tab",
         min_rol="admin",
+        rehber="**Bu ekran ne işe yarar?** Çalışma izlerinin kaydını toplar: son 30 karar kaydı (Karar Defteri), aktif dosya kilitleri, ajanlar arası handoff kayıtları, görev durum özeti ve son 20 tetik kaydı."
+        "Bu ekran yalnız okuma amaçlıdır; hiçbir kaydı değiştirmez. Karar, kilit ve tetik kayıtları yalnız orkestratör tarafından yazılır, bu ekrandan değiştirilemez."
     ),
     # UI-ADMIN-KVKK-MODU-26 + UI-ADMIN-KVKK-RAPOR-28: KVKK Mode + Rapor birlesik (D-214).
     TabTanimi(
@@ -469,7 +546,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik="KVKK Mode",
         ikon="🔒",
         grup=GRUP_SISTEM,
-        aciklama="KVKK strict/lenient mode toggle, gecmis ve trend analizi",
+        aciklama="Kişisel veri modu, geçmiş ve eğilim analizi",
         url_path="kvkk-mode",
         ust="denetim", sira=0,  # D-215: Güvenlik Kapısı'na taşındı
         modul="web_dashboard.tabs.admin_panel",
@@ -483,7 +560,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik="Kontrol Panosu",
         ikon="🎚️",
         grup=GRUP_SISTEM,
-        aciklama="Maskeli/açık alanlar, tier dağılımı, trend ve mode geçişleri",
+        aciklama="Maskeli alanlar, paket dağılımı ve eğilimler",
         url_path="kontrol-panosu",
         ust="veri_kalite", sira=3,
         modul="web_dashboard.tabs.admin_panel",
@@ -497,7 +574,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik="Feature Flags",
         ikon="🚩",
         grup=GRUP_SISTEM,
-        aciklama="Sistem feature flag'lerini yönetin (admin only)",
+        aciklama="Sistem özellik anahtarlarını yönetin (yalnız admin)",
         url_path="feature-flags",
         ust="sistem", sira=7,
         modul="web_dashboard.tabs.admin_panel",
@@ -510,7 +587,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik="LTV/CAC",
         ikon="📉",
         grup=GRUP_GELIR,
-        aciklama="Müşteri yaşam boyu değeri (LTV) ve kazanım maliyeti (CAC) analizi",
+        aciklama="Müşteri kazandırma maliyeti ve yaşam boyu değeri",
         url_path="ltv-cac",
         ust="musteri_onizleme", sira=1,
         modul="web_dashboard.tabs.admin_panel",
@@ -523,7 +600,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik="Paket & Kredi",
         ikon="📦",
         grup=GRUP_GELIR,
-        aciklama="Kredi yükleme, paket kategorileri ve tier yönetimi",
+        aciklama="Kredi yükleme, paket kategorileri ve paket yönetimi",
         url_path="paket-kredi",
         ust="musteri_onizleme", sira=2,
         modul="web_dashboard.tabs.musteri_yonetimi",
@@ -537,7 +614,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik="MFA Yönetimi",
         ikon="🔐",
         grup=GRUP_SISTEM,
-        aciklama="Çok faktörlü kimlik doğrulama (TOTP) ayarları",
+        aciklama="İki adımlı giriş doğrulama ayarları",
         url_path="mfa",
         ust="denetim", sira=1,  # D-215: Güvenlik Kapısı'na taşındı
         modul="web_dashboard.tabs.admin_mfa",
@@ -550,12 +627,23 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik=t("menu_m_ayarlar"),
         ikon="🎛️",
         grup=GRUP_SISTEM,
-        aciklama="Görünüm, veri, bildirim ve bölgesel kullanıcı tercihleri (P7-46)",
+        aciklama="Görünüm, veri, bildirim ve bölge tercihleri",
         url_path="ayarlar",
         ust="sistem", sira=8,  # D-215: mfa cikinca kaydi
         modul="web_dashboard.tabs.admin_panel",
         fonksiyon="render_ayarlar_tab",
         min_rol="admin",
+        rehber=        "**Bu ekran ne işe yarar?** Panel tercihlerinizi (tema, tablo satır sayısı, "
+                "bildirimler vb.) kullanıcı bazında kalıcı olarak saklar. Bir kez kaydettiğinizde "
+                "farklı tarayıcı veya cihazdan girseniz bile aynı ayarlar geçerli olur.\n\n"
+                "**Nasıl kullanılır?** Her sekme bir ayar grubudur. İstediğiniz alanları değiştirip "
+                "en alttaki **Kaydet** düğmesine basın. **Varsayılana dön** ile tüm ayarları "
+                "başlangıç değerlerine sıfırlayabilirsiniz.\n\n"
+                "**Veriler nereden gelir?** Ayar tanımları `company_master.settings` şemasından "
+                "otomatik üretilir; yeni bir ayar eklendiğinde bu ekranda kendiliğinden görünür.\n\n"
+                "**Dikkat:** Kaydetme işlemi hepsi-ya-hiç çalışır. Bir alan geçersizse "
+                "hata gösterilir ve hiçbir değer kaydedilmez; düzeltip yeniden kaydedin."
+
     ),
     # NAV-AGAC-01: geliştirici demo sayfası — Sistem başlığının en altında.
     TabTanimi(
@@ -563,7 +651,7 @@ SECTIONS: tuple[TabTanimi, ...] = (
         baslik=t("menu_loading"),
         ikon="⏳",
         grup=GRUP_SISTEM,
-        aciklama="Loading state örnekleri ve skeleton gosterim (P7-42)",
+        aciklama="Yükleniyor göstergesi ve iskelet ekran örnekleri",
         url_path="yukleme",
         ust="sistem", sira=9,  # D-215: mfa cikinca kaydi
         modul="web_dashboard.tabs.admin_loading",
@@ -582,6 +670,8 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_musteri_yonetimi_tab",
         hazir=True,
         min_rol="admin",
+        rehber="**Bu ekran ne işe yarar?** Müteri tarafının idari işlerini yönetir: kullanıcı onayları, paket ve kredi işlemleri, giriş etkinliği, arama kayıtları, destek talepleri ve dışa aktarım."
+        "En sondaki **Upsell Adayları** sekmesi, kullanım davranışına göre büyüme fırsatı olan firmaları listeler. Arama kayıtları KVKK gereği maskelenmiştir; ham e-posta görmek için maskeleme yetkisi gerekir."
     ),
     TabTanimi(
         anahtar="proje_yonetimi",
@@ -595,26 +685,30 @@ SECTIONS: tuple[TabTanimi, ...] = (
         fonksiyon="render_proje_yonetimi_tab",
         hazir=True,
         min_rol="admin",
+        rehber="**Bu ekran ne işe yarar?** Proje çalışma defterini gösterir: karar defteri, 9Router (Abrakadabra) durumu, denetim izi, hata kayıtları ve işlenemeyen kayıt kuyruğu (DLQ)."
+        "**Denetim İzi** sekmesi, ayrı **Denetim** sayfasındaki panelin satır içi çağrısıdır ve aynı kayıtları gösterir. Kararlar, dosya kilitleri ve görev durumu yalnız orkestratör tarafından güncellenir."
     ),
     TabTanimi(
         anahtar="veri_kalite",
         baslik="Metrikler",
         ikon="📈",
         grup=GRUP_IS,
-        aciklama="KPI, kalite, arama ve executive özeti",
+        aciklama="Ana göstergeler, kalite, arama ve yönetici özeti",
         url_path="veri-kalite",
         sira=3,  # NAV-AGAC-01: kök sıralaması
         hazir=True,
         modul="web_dashboard.tabs.admin_kpi",
         fonksiyon="render_kpi_tab",
         min_rol="analyst",
+        rehber="**Bu ekran ne işe yarar?** Müşteri ve sistem tarafının ölçülebilir özetini verir: toplam firma, MAU (30 gün), DAU (24 saat), toplam sinyal, API çağrısı, sistem durumu ve aktif/tamamlanan/blokaj görev sayıları."
+        "Alt bölümler tenant sağlığı, kalite skoru trendi, alan bazlı kalite analizi, veri kaynaklarının durumu ve son 30 günün API kullanım trendini gösterir. Veri kaynağı henüz oluşmadıysa kart **veri kaynağı yok** yazar — bu, ölçülen değerin sıfır olduğu anlamına gelmez."
     ),
     TabTanimi(
         anahtar="musteri_onizleme",
         baslik="Gelir",
         ikon="💼",
         grup=GRUP_IS,
-        aciklama="Paketler ve pazarlama müşteri ekranı (Huginn önizleme)",
+        aciklama="Paketler ve müşteri ekranı önizlemesi (Huginn)",
         url_path="musteri-onizleme",
         sira=4,  # NAV-AGAC-01: kök sıralaması
         hazir=True,
@@ -624,6 +718,18 @@ SECTIONS: tuple[TabTanimi, ...] = (
         # D-214: eski "paketler" ikiz-çocuğu YUZEY_HUGINN idi (MIG-UI-01); twin
         # silinirken bu kök yanlışlıkla MUNINN kalmıştı — düzeltildi, kayıp yok.
         yuzey=YUZEY_HUGINN,
+        rehber=        "**Bu ekran ne işe yarar?** Sattığımız paketleri, fiyatlarını ve hangi firmaya "
+                "hangi paketin atandığını tek ekranda gösterir. Bir firmaya teklif hazırlarken "
+                "uygun paketi buradan seçebilirsiniz.\n\n"
+                "**Nasıl kullanılır?** Üstteki özet kartlar toplam paket ve atama sayısını verir. "
+                "Aşağıdaki tabloda paketleri karşılaştırabilir, firma bazında atama geçmişini "
+                "görebilirsiniz.\n\n"
+                "**Veriler nereden gelir?** `packages` ve `company_packages` tabloları. "
+                "Tablolar henüz yoksa `data/demo/paketler_demo.jsonl` örnek verisi gösterilir "
+                "ve ekranda **Demo** rozeti belirir.\n\n"
+                "**Dikkat:** Demo modda paket ekleme, düzenleme ve atama kapalıdır; yalnızca "
+                "görüntüleme yapılır. Fiyatlar KDV hariç ve aylık olarak listelenir."
+
     ),
 )
 

@@ -50,7 +50,6 @@ def _render_baslik() -> None:
                ust_etiket="İş · Müşteriler", ikon="👥").render()
 
     # K3-10g: rehber anahtarı sayfa altında (`app.REHBER_KEY`); modül yalnız okur.
-    rehber = bool(st.session_state.get("_hg_rehber", False))
     col_btn, col_zaman = st.columns([1, 4], vertical_alignment="center")
     with col_btn:
         yenile = st.button("🔄 Veriyi Yenile", key="musteriler_yenile",
@@ -64,20 +63,6 @@ def _render_baslik() -> None:
         st.cache_data.clear()
         st.rerun()
 
-    if rehber:
-        st.info(
-            "**Bu ekran ne işe yarar?** Veritabanındaki firma kayıtlarını arar, kalite "
-            "skoruna göre süzer ve eksik bilgi taşıyan (telefon, e-posta, web sitesi olmayan) "
-            "kayıtları öne çıkarır. Veri temizliği ve müşteri araştırması için başlangıç "
-            "noktasıdır.\n\n"
-            "**Nasıl kullanılır?** Arama kutusuna firma adı veya NACE kodu yazın; kalite "
-            "eşiğini kaydırıcıdan seçin. Sonuç tablosunda sütun başlığına tıklayarak "
-            "sıralama yapabilirsiniz.\n\n"
-            "**Veriler nereden gelir?** `companies` tablosu "
-            "(`admin_search.search_companies` sorgusu).\n\n"
-            "**Dikkat:** Liste, seçtiğiniz satır sayısı kadar kayıt gösterir. Tüm sonuçları "
-            "indirmek için **Yönetim › Veri Export** ekranını kullanın."
-        )
 
     SectionNav(BOLUMLER, yatay=True).render()
 

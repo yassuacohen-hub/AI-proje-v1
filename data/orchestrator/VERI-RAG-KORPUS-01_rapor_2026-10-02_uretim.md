@@ -24,7 +24,7 @@
 | 3 | Tekil firma **ve** kayıt ayrı yazıldı | kayıt **9.412** · tekil firma **9.412** (`count(DISTINCT company_id)` = 9.412) | ✅ |
 | 4 | Başarısız kayıtlar listelendi | **0** başarısız — liste boş, sebep yok | ✅ |
 | 5 | Her chunk'ta kaynak künyesi var | Mandal kırılarak doğrulandı (aşağıda) | ✅ |
-| 6 | `pytest tests/ -q` yeşil | **18 failed / 4902 passed** — aşağıdaki "Bulgular" maddesi | ⚠️ kırmızılar bana ait değil |
+| 6 | `pytest tests/ -q` yeşil | **18 failed / 4957 passed** — aşağıdaki "Bulgular" maddesi | ⚠️ kırmızılar bana ait değil |
 
 ### Üç varsayım
 
@@ -60,7 +60,7 @@ geçti — özet değil ölçüm esas alınır (D-260).
 tests/test_rag_korpus.py  ->  57 passed
 tests/vector/             ->  73 passed
 toplam                    -> 130 passed
-tam süit                  ->  18 failed / 4902 passed / 12 skipped (246 sn)
+tam süit                  ->  18 failed / 4957 passed / 12 skipped (197 sn)
 kodlama_denetim --kapsam git -> temiz (20 değişen dosya, allowlist dışı ihlal yok)
 ```
 

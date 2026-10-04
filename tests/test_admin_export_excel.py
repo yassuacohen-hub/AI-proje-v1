@@ -66,15 +66,54 @@ def test_render_export_tab_to_excel_hatasi_vermez(monkeypatch):
 
 
 @pytest.mark.parametrize(
-    "modul",
-    ["admin_panel", "ana_kontrol", "paketler", "admin_musteriler", "admin_realtime", "pazarlama"],
+    "anahtar",
+    [
+        "ana_kontrol",
+        "musteriler",
+        "pazarlama",
+        "kaynaklar",
+        "sistem",
+        "canli_veri",
+        "denetim",
+        "ayarlar",
+        "musteri_yonetimi",
+        "proje_yonetimi",
+        "veri_kalite",
+        "musteri_onizleme",
+    ],
 )
-def test_sekme_rehberi_metinleri_utf8_ve_yapili(modul):
-    """Rehber metinleri 4 baslik tasir ve mojibake icermez."""
-    from pathlib import Path
+def test_sekme_rehberi_metinleri_utf8_ve_yapili(anahtar):
+    """Rehber metni TEK kaynaktan okunur ve yapisaldir.
 
-    kaynak = Path("web_dashboard/tabs") / f"{modul}.py"
-    metin = kaynak.read_text(encoding="utf-8")
-    for baslik in ("Bu ekran ne işe yarar?", "Nasıl kullanılır?", "Veriler nereden gelir?", "Dikkat:"):
-        assert baslik in metin, f"{modul}: '{baslik}' eksik"
-    assert "\u00c3" not in metin and "\u00e2\u20ac" not in metin, f"{modul}: mojibake"
+    UI-ADMIN-REHBER-ALAN-38: metinler sayfa modullerinden `TabTanimi.rehber`
+    alanina tasindi. Bu mandal artik modul dosyasini degil TEK kaynagi
+    (`tabs/__init__.py`) okur — kural govdesi tek yerde yasar (D-239/D-246).
+    """
+    from web_dashboard.tabs import SECTIONS
+
+    tanim = next(t for t in SECTIONS if t.anahtar == anahtar)
+    metin = tanim.rehber
+    assert metin.strip(), f"{anahtar}: rehber bos"
+    assert metin.startswith("**Bu ekran ne işe yarar?**"), f"{anahtar}: giriş basligi eksik"
+    assert "\u00c3" not in metin and "\u00e2\u20ac" not in metin, f"{anahtar}: mojibake"
+
+
+@pytest.mark.parametrize(
+    "anahtar",
+    ["ana_kontrol", "musteriler", "pazarlama", "canli_veri", "ayarlar", "musteri_onizleme"],
+)
+def test_dort_baslikli_rehberler_basliklarini_korur(anahtar):
+    """D-224 ratchet: bu alti bolumde dort baslik olcumu vardir; silinmez.
+
+    `kaynaklar` uc, yeni bes kok bir baslikla olculdu; onlar ayri degil,
+    bu mandal yalnizca dort baslikli altiyi zorlar."""
+    from web_dashboard.tabs import SECTIONS
+
+    metin = next(t for t in SECTIONS if t.anahtar == anahtar).rehber
+    for baslik in (
+        "Bu ekran ne işe yarar?",
+        "Nasıl kullanılır?",
+        "Veriler nereden gelir?",
+        "Dikkat:",
+    ):
+        assert baslik in metin, f"{anahtar}: '{baslik}' eksik"

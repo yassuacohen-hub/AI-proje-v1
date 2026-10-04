@@ -1,10 +1,13 @@
-# Huginn Data Insights - docker-compose (Faz 1, 2026-09-09)
+﻿# Huginn Data Insights - docker-compose (Faz 1, 2026-09-09)
 # Kullanim:
 #   API + Supabase (prod benzeri):   docker compose up -d --build api
 #   API + yerel PG (dev/test):       docker compose --profile localdb up -d --build
 #     -> DATABASE_URL'i localhost:5433'e cevirerek .env.local ile calistir
 #   Eski Streamlit arayuzu:          docker compose --profile legacy up -d streamlit
 #   Telegram bot (canonical polling): docker compose --profile telegram up -d telegram-bot telegram-periodic
+#   Gunluk kazima (SCRAPE-005):        docker compose --profile jobs run --rm kazima
+#     -> `jobs` profili tek basina yeterlidir; `kazima` `db` servisine bagimli
+#        degildir (canli Supabase'e `env_file` ile baglanir)
 
 services:
   # Ana servis: FastAPI + vanilla JS dashboard
@@ -60,16 +63,34 @@ services:
       retries: 3
       start_period: 40s
 
-  scraper:
-    build: .
-    command: ["python", "scripts/refresh_pipeline.py"]
+  # ---- Kazima servisi (SCRAPE-005) — profile jobs ----
+  # NOT: brief "kazima" adli ayri bir servis istiyordu; bu dosyada zaten ayni isi
+  # yapan `scraper` servisi vardi (ayni command, ayni profile, ayni volume'lar).
+  # D-211 (ikiz yasagi) geregi ikinci kopya yazilmadi; mevcut servis bu haliyle
+  # oneklenip gerekli bagliliklar eklendi.
+  # Calistirma: docker compose --profile jobs run --rm kazima
+  kazima:
+    build:
+      context: .
+      dockerfile: src/company_master/scrapers/Dockerfile
     profiles: ["jobs"]
+    command: ["python", "scripts/refresh_pipeline.py"]
+    networks:
+      - default
     env_file: .env
+    environment:
+      - PYTHONPATH=/app:/app/src
+      - LOG_LEVEL=INFO
+      - CRAWL_ENABLED=1
     volumes:
       - ./logs:/app/logs
       - ./data:/app/data
-    environment:
-      - PYTHONPATH=/app:/app/src
+    restart: "no"
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
 
   healthcheck:
     build: .

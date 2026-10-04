@@ -83,6 +83,12 @@ Musteri Paneli Ajan Brifleri:
 
 ---
 
+## Kapanan Isler
+
+| Gorev | Ne yapildi | Kanit | Tarih |
+|---|---|---|---|
+| ALTYAPI-KREDI-CUZDANI-01 | F3 kredi cuzdani: kullanim_log + kredi_hareket semasi, bakiye hesabi ve yazma kapisi | 0051_kredi_cuzdani.sql; kredi.py (55 satir); test_kredi.py 4/4 | 2026-10-03 |
+
 ## Ilgili Nodlar
 
 - [[Huginn Data Insights/hubs/ADMIN_DASHBOARD_HUB]] — Kardes hub: Admin/Muninn paneli (ayni urun, ayri kullanici kitlesi; kimlik dogrulama + kullanici yonetimi ortak)

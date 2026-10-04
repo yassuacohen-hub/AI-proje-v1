@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 22.86s
+[chore/monorepo-merge c26d253] cortex(ihsan): P2 toplu devir kapanisi + 2 tuzak (brif sablon kapisi, kilitli dosya)
+ 1 file changed, 17 insertions(+), 5 deletions(-)

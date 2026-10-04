@@ -710,6 +710,9 @@ def render_icerik(tanim: TabTanimi) -> None:
 
     try:
         fn()
+        # UI-ADMIN-REHBER-ALAN-38: rehber tek kapı — `TabTanimi.rehber`.
+        if tanim.rehber and st.session_state.get(REHBER_KEY, False):
+            st.info(tanim.rehber)
     except Exception as exc:  # hata siniri: navigasyon ayakta kalsin
         # Merkezi hata loglamasi
         try:

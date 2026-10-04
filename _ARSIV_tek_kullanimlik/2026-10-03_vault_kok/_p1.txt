@@ -1,0 +1,22 @@
+# -*- coding: utf-8
+'''9Router anahtar guvenli guncelleme.
+
+Kural: anahtar HICBIR YERDE yazilmaz - ne stdout, ne log.
+Yalniz ilk 4 karakter basilir.
+
+Atomik yazma: once .env.bak al, sonra gecici dosyaya yaz,
+os.replace ile degistir. Boylece yarim .env olusmaz.
+
+Kullanim:
+    python scripts/ninerouter_anahtar_guncelle.py <yeni_anahtar>
+'''
+import os
+import shutil
+import sys
+from datetime import datetime, timezone
+from pathlib import Path
+
+KOK = Path(__file__).resolve().parent.parent
+ENV = KOK / '.env'
+ANAHTAR_ADI = 'NINEROUTER_KEY'
+GOSTER = 4

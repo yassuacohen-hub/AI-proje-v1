@@ -1,0 +1,24 @@
+HATA (D-217): Brif sablona uygun degil: brief_yasu_ALTYAPI-9ROUTER-ANAHTAR-01.md
+  Eksik: ['## Kabul kriteri', '## Ajan chat zorunlu', '## Adımlar|## Faz A', 'ajan_chat.py komut referansı']
+  Sablon: plans/_brief_sablon.md — once brifi tamamla, sonra ata.
+HATA (D-217): Brif sablona uygun degil: brief_yasu_ALTYAPI-OPENROUTER-ARAC-01.md
+  Eksik: ['## Kabul kriteri', '## Ajan chat zorunlu', '## Adımlar|## Faz A', 'ajan_chat.py komut referansı']
+  Sablon: plans/_brief_sablon.md — once brifi tamamla, sonra ata.
+HATA (D-217): Brif sablona uygun degil: brief_utku_VERI-OSTIM-HREF-FILTRE-01.md
+  Eksik: ['## Kabul kriteri', '## Ajan chat zorunlu', '## Adımlar|## Faz A', 'ajan_chat.py komut referansı']
+  Sablon: plans/_brief_sablon.md — once brifi tamamla, sonra ata.
+HATA (D-217): Brif sablona uygun degil: brief_utku_VERI-APIFY-BUTCE-01.md
+  Eksik: ['## Kabul kriteri', '## Ajan chat zorunlu', '## Adımlar|## Faz A', 'ajan_chat.py komut referansı', 'en az 2 Obsidyen wikilink [[...]] (D-218)']
+  Sablon: plans/_brief_sablon.md — once brifi tamamla, sonra ata.
+HATA (D-217): Brif sablona uygun degil: brief_yasu_VERI-PAKET-FIYAT-SENKRON-01.md
+  Eksik: ['## Kabul kriteri', '## Ajan chat zorunlu', '## Adımlar|## Faz A', 'ajan_chat.py komut referansı']
+  Sablon: plans/_brief_sablon.md — once brifi tamamla, sonra ata.
+HATA (D-217): Brif sablona uygun degil: brief_utku_TEST-SIMULASYON-B17-KIRIK-01.md
+  Eksik: ['## Kabul kriteri', '## Ajan chat zorunlu', '## Adımlar|## Faz A', 'ajan_chat.py komut referansı']
+  Sablon: plans/_brief_sablon.md — once brifi tamamla, sonra ata.
+ALTYAPI-9ROUTER-ANAHTAR-01: rc=7
+ALTYAPI-OPENROUTER-ARAC-01: rc=7
+VERI-OSTIM-HREF-FILTRE-01: rc=7
+VERI-APIFY-BUTCE-01: rc=7
+VERI-PAKET-FIYAT-SENKRON-01: rc=7
+TEST-SIMULASYON-B17-KIRIK-01: rc=7

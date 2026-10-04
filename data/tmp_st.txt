@@ -1,0 +1,350 @@
+warning: in the working copy of 'scripts/gorev_kutusu.py', CRLF will be replaced by LF the next time Git touches it
+Saved working directory and index state WIP on chore/monorepo-merge: 55b1dcbf Paket kapisi: PAKET_KAYNAKLARI + firma_haber_kaynaklari; paket_olc.py kalici olcum; BORC-PLAN-ALANI-01 kismen
+warning: in the working copy of 'scripts/gorev_kutusu.py', CRLF will be replaced by LF the next time Git touches it
+....F...F.F                                                              [100%]
+================================== FAILURES ===================================
+__________________ test_zorla_gecerse_panoya_atlandi_islenir __________________
+
+tmp_path = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-3277/test_zorla_gecerse_panoya_atla0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F4182C81A0>
+
+    def test_zorla_gecerse_panoya_atlandi_islenir(tmp_path, monkeypatch):
+        """--zorla kacis kapisi (D-65): is durmaz ama borc panoya yazilir."""
+        _kurulum(tmp_path, monkeypatch, ssot_metin="bos", hub_metin="bos")
+        monkeypatch.setattr(gk.trigger, "teslim_et", lambda *a, **k: {"task_id": "TEST-B14-01"})
+        yazilan: dict = {}
+        monkeypatch.setattr(tb, "gorev_guncelle", lambda tid, **f: yazilan.update({tid: f}))
+    
+>       assert gk.cmd_teslim(_args(zorla=True)) == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = <function cmd_teslim at 0x000001F418295260>(Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=True))
+E        +    where <function cmd_teslim at 0x000001F418295260> = gk.cmd_teslim
+E        +    and   Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=True) = _args(zorla=True)
+
+tests\test_gorev_kutusu_hafiza.py:80: AssertionError
+---------------------------- Captured stderr call -----------------------------
+[D-318 BULGU KAPISI] HATA: bulgu defterinde bu görev kaydi yok — teslim reddedildi.
+       Defter: data/orchestrator/bulgu_defteri.md (tek kanonik dosya)
+       Once bulgunu yaz, sonra teslim et:
+       python scripts/bulgu_defteri.py ekle --task-id TEST-B14-01 --rol utku \
+         --ozet "..." --karar "D-NNN | kapandi:<kanit>" --renk oneri|dikkat|acil|tamam
+       Bulgun yoksa: --ozet "bulgu yok, nedeni" --karar "red: <gerekce>"
+_______________________ test_hub_izi_varsa_teslim_gecer _______________________
+
+tmp_path = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-3277/test_hub_izi_varsa_teslim_gece0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F4197B5130>
+
+    def test_hub_izi_varsa_teslim_gecer(tmp_path, monkeypatch):
+        """Hub'da task_id geciyorsa kapi acilir; teslim normal akisina devam eder."""
+        _kurulum(tmp_path, monkeypatch, hub_metin="| TEST-B14-01 | kapandi | 2026-09-24 |")
+        monkeypatch.setattr(gk.trigger, "teslim_et", lambda *a, **k: {"task_id": "TEST-B14-01"})
+    
+>       assert gk.cmd_teslim(_args()) == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = <function cmd_teslim at 0x000001F418295260>(Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=False))
+E        +    where <function cmd_teslim at 0x000001F418295260> = gk.cmd_teslim
+E        +    and   Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=False) = _args()
+
+tests\test_gorev_kutusu_hafiza.py:70: AssertionError
+---------------------------- Captured stderr call -----------------------------
+[D-318 BULGU KAPISI] HATA: bulgu defterinde bu görev kaydi yok — teslim reddedildi.
+       Defter: data/orchestrator/bulgu_defteri.md (tek kanonik dosya)
+       Once bulgunu yaz, sonra teslim et:
+       python scripts/bulgu_defteri.py ekle --task-id TEST-B14-01 --rol utku \
+         --ozet "..." --karar "D-NNN | kapandi:<kanit>" --renk oneri|dikkat|acil|tamam
+       Bulgun yoksa: --ozet "bulgu yok, nedeni" --karar "red: <gerekce>"
+___________________ test_ikinci_calistirma_kayit_cogaltmaz ____________________
+
+tmp_path = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-3277/test_ikinci_calistirma_kayit_c0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F4197B6840>
+
+    def test_ikinci_calistirma_kayit_cogaltmaz(tmp_path, monkeypatch):
+        pano_yol = tmp_path / "task_board.json"
+        pano_yol.write_text(json.dumps(PANO, ensure_ascii=False), encoding="utf-8")
+        monkeypatch.setattr(gk.tb, "TASK_BOARD", pano_yol)
+        monkeypatch.setattr(gk.tb, "STATE_DIR", tmp_path)
+    
+        args = argparse.Namespace(kuru=False)
+        assert gk.cmd_arsivle(args) == 0
+        arsiv = tmp_path / "task_board_arsiv_2026-Q3.json"
+>       assert len(json.loads(arsiv.read_text(encoding="utf-8"))) == 2
+E       assert 1 == 2
+E        +  where 1 = len([{'task_id': 'A-1', 'durum': 'done', 'bitis': '2026-09-21T10:00:00'}])
+E        +    where [{'task_id': 'A-1', 'durum': 'done', 'bitis': '2026-09-21T10:00:00'}] = <function loads at 0x000001F46D75E020>('[\n  {\n    "task_id": "A-1",\n    "durum": "done",\n    "bitis": "2026-09-21T10:00:00"\n  }\n]')
+E        +      where <function loads at 0x000001F46D75E020> = json.loads
+E        +      and   '[\n  {\n    "task_id": "A-1",\n    "durum": "done",\n    "bitis": "2026-09-21T10:00:00"\n  }\n]' = read_text(encoding='utf-8')
+E        +        where read_text = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-3277/test_ikinci_calistirma_kayit_c0/task_board_arsiv_2026-Q3.json').read_text
+
+tests\test_gorev_kutusu_arsiv.py:44: AssertionError
+---------------------------- Captured stdout call -----------------------------
+3 kayit tasinacak, aktif panoda 2 kalacak.
+  2026-Q1: 1 kayit
+  2026-Q3: 1 kayit
+  2026-Q4: 1 kayit
+  YAZILDI task_board_arsiv_2026-Q1.json: +1 (toplam 1)
+  YAZILDI task_board_arsiv_2026-Q3.json: +1 (toplam 1)
+  YAZILDI task_board_arsiv_2026-Q4.json: +1 (toplam 1)
+AKTIF PANO: 2 kayit
+=========================== short test summary info ===========================
+FAILED tests/test_gorev_kutusu_hafiza.py::test_zorla_gecerse_panoya_atlandi_islenir
+FAILED tests/test_gorev_kutusu_hafiza.py::test_hub_izi_varsa_teslim_gecer - A...
+FAILED tests/test_gorev_kutusu_arsiv.py::test_ikinci_calistirma_kayit_cogaltmaz
+3 failed, 8 passed in 0.90s
+On branch chore/monorepo-merge
+Your branch is ahead of 'origin/chore/monorepo-merge' by 103 commits.
+  (use "git push" to publish your local commits)
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   data/karar_tahsis/D-265.txt
+	new file:   data/karar_tahsis/D-316.txt
+	new file:   data/karar_tahsis/D-317.txt
+	new file:   data/karar_tahsis/D-318.txt
+	new file:   data/karar_tahsis/D-319.txt
+	new file:   data/karar_tahsis/D-320.txt
+	new file:   data/karar_tahsis/D-321.txt
+	new file:   data/karar_tahsis/D-322.txt
+	new file:   data/karar_tahsis/D-324.txt
+	new file:   data/karar_tahsis/D-325.txt
+	new file:   data/karar_tahsis/D-326.txt
+	new file:   data/karar_tahsis/D-327.txt
+	new file:   data/karar_tahsis/D-328.txt
+	new file:   data/karar_tahsis/D-329.txt
+	new file:   data/karar_tahsis/D-331.txt
+	new file:   data/karar_tahsis/D-334.txt
+	new file:   data/kaynak_adayi_olcumu.json
+	new file:   data/orchestrator/SCRAPE-001-DOCKER-SETUP_rapor_2026-10-02_uretim.md
+	new file:   data/orchestrator/SCRAPE-005-KAZIMA-DOCKER-INTEGRATION_rapor_2026-10-02_uretim.md
+	new file:   data/orchestrator/VERI-RISK-MOTORU-01_rapor_2026-10-02_uretim.md
+	new file:   data/orchestrator/VERI-SKOR-MOTORU-01_rapor_2026-10-02_uretim.md
+	new file:   data/orchestrator/VERI-TENDER-KOLON-01_rapor_2026-10-02_uretim.md
+	new file:   data/orchestrator/VERI-TSG-ESLEME-CASE-01_rapor_2026-10-02_uretim.md
+	new file:   data/orchestrator/ajan-chat.jsonl.bak_2026-10-02
+	new file:   data/orchestrator/ajanlar/ajan_utku.json
+	new file:   data/orchestrator/bulgu_defteri.md
+	new file:   data/orchestrator/osb_temizlik_raporu_2026-10-01.md
+	new file:   data/orchestrator/task_board_arsiv_2026-Q4.json
+	new file:   docs/OLCUM_BELIRSIZ_2026-10-02.md
+
+Changes not staged for commit:
+  (use "git add/rm <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+	modified:   .agents/marketplace (modified content, untracked content)
+	modified:   AGENT_SYNC.md
+	modified:   _ajan_context_sablon.md
+	modified:   data/aso/aso_full.jsonl
+	modified:   data/errors/error_log.jsonl
+	modified:   data/orchestrator/AGENT_SYNC.md
+	modified:   data/orchestrator/VERI-RAG-KORPUS-01_rapor_2026-10-02_uretim.md
+	modified:   data/orchestrator/ajan-chat.jsonl
+	modified:   data/orchestrator/apify_webhook_dlq.jsonl
+	modified:   data/orchestrator/benchmark/CL-02_benchmark_raporu.json
+	modified:   data/orchestrator/chat/messages.jsonl
+	modified:   data/orchestrator/file_locks.json
+	modified:   data/orchestrator/gorev_panosu.md
+	modified:   data/orchestrator/onay_kuyrugu.json
+	modified:   data/orchestrator/sync_report.json
+	modified:   data/orchestrator/task_board.json
+	modified:   data/orchestrator/task_board_arsiv_2026-Q3.json
+	modified:   data/orchestrator/trigger_log.jsonl
+	modified:   data/orchestrator/triggers/ihsan.jsonl
+	modified:   data/orchestrator/triggers/salih.jsonl
+	modified:   data/orchestrator/triggers/utku.jsonl
+	modified:   data/orchestrator/triggers/yasu.jsonl
+	modified:   data/osb_kaynak_olcumu.json
+	modified:   docker-compose.yml
+	modified:   hubs/ADMIN_DASHBOARD_HUB.md
+	modified:   hubs/OSINT_VERI_TOPLAMA_HUB.md
+	modified:   hubs/TOOLS_SCRIPTS_HUB.md
+	modified:   hubs/VERI_KALITESI_HUB.md
+	modified:   plans/brief_utku_VERI-TSG-ESLEME-CASE-01.md
+	deleted:    scripts/_olcum_k6.py
+	deleted:    scripts/_olcum_skor.py
+	deleted:    scripts/_olcum_skor2.py
+	modified:   scripts/gorev_at.py
+	modified:   scripts/gorev_kutusu.py
+	modified:   src/company_master/chat.py
+	modified:   src/company_master/odin_ai/rag.py
+	modified:   src/company_master/schema/migrations/0049_firsat_skorlari.sql
+	modified:   tests/test_ajan_chat.py
+	modified:   tests/test_odin_ai.py
+	modified:   workspace/.error_ledger.json
+	modified:   yasu_project_context.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	.claude/skills/typesafe-ai/
+	_ARSIV_tek_kullanimlik/388f80a2-430c-11f1-b7e5-48df373f5970.pdf
+	_ARSIV_tek_kullanimlik/_goc_defteri_rapor__20260930T062136Z.txt
+	_ARSIV_tek_kullanimlik/_tb_bak.py
+	_ARSIV_tek_kullanimlik/_tsg04_ihale_olcum.py
+	_ARSIV_tek_kullanimlik/check_102.py
+	_ARSIV_tek_kullanimlik/check_active2__20260930T062136Z.py
+	_ARSIV_tek_kullanimlik/check_active3.py
+	_ARSIV_tek_kullanimlik/check_active__20260930T062136Z.py
+	_ARSIV_tek_kullanimlik/check_all_osb.py
+	_ARSIV_tek_kullanimlik/check_all_tasks.py
+	_ARSIV_tek_kullanimlik/check_all_tasks2.py
+	_ARSIV_tek_kullanimlik/check_aso_format.py
+	_ARSIV_tek_kullanimlik/check_aso_in_ostim.py
+	_ARSIV_tek_kullanimlik/check_aso_source.py
+	_ARSIV_tek_kullanimlik/check_bytes__20260930T062136Z.py
+	_ARSIV_tek_kullanimlik/check_cols.py
+	_ARSIV_tek_kullanimlik/check_companies_mojibake.py
+	_ARSIV_tek_kullanimlik/check_company_match.py
+	_ARSIV_tek_kullanimlik/check_counts.py
+	_ARSIV_tek_kullanimlik/check_detailed.py
+	_ARSIV_tek_kullanimlik/check_fffd.py
+	_ARSIV_tek_kullanimlik/check_fffd2.py
+	_ARSIV_tek_kullanimlik/check_hex.py
+	_ARSIV_tek_kullanimlik/check_kaynak_field.py
+	_ARSIV_tek_kullanimlik/check_names.py
+	_ARSIV_tek_kullanimlik/check_nested_asofmt.py
+	_ARSIV_tek_kullanimlik/check_nested_payload.py
+	_ARSIV_tek_kullanimlik/check_one.py
+	_ARSIV_tek_kullanimlik/check_orphan_tax.py
+	_ARSIV_tek_kullanimlik/check_orphans.py
+	_ARSIV_tek_kullanimlik/check_orphans2.py
+	_ARSIV_tek_kullanimlik/check_orphans3.py
+	_ARSIV_tek_kullanimlik/check_ostim_detail.py
+	_ARSIV_tek_kullanimlik/check_ostim_source.py
+	_ARSIV_tek_kullanimlik/check_source_leak.py
+	_ARSIV_tek_kullanimlik/check_source_leak2.py
+	_ARSIV_tek_kullanimlik/check_sources_cols.py
+	_ARSIV_tek_kullanimlik/check_sr_mojibake.py
+	_ARSIV_tek_kullanimlik/check_sr_mojibake2.py
+	_ARSIV_tek_kullanimlik/check_veri02_assumptions.py
+	_ARSIV_tek_kullanimlik/check_veri02_assumptions2.py
+	_ARSIV_tek_kullanimlik/check_veri02_assumptions3.py
+	_ARSIV_tek_kullanimlik/check_version.py
+	_ARSIV_tek_kullanimlik/debug_match.py
+	_ARSIV_tek_kullanimlik/debug_match2.py
+	_ARSIV_tek_kullanimlik/debug_regex.py
+	_ARSIV_tek_kullanimlik/f4.txt
+	_ARSIV_tek_kullanimlik/fix_match_nfc.py
+	_ARSIV_tek_kullanimlik/fix_orphans.py
+	_ARSIV_tek_kullanimlik/fix_orphans_final.py
+	_ARSIV_tek_kullanimlik/fix_ostim_aso.py
+	_ARSIV_tek_kullanimlik/fix_ostim_kaynak.py
+	_ARSIV_tek_kullanimlik/fix_sr_encoding.py
+	_ARSIV_tek_kullanimlik/mig_check.py
+	_ARSIV_tek_kullanimlik/verify_final__20260930T062136Z.py
+	active_tasks.txt
+	all_review.txt
+	archive/yasu_context_202610.md
+	check_empty.py
+	check_specific.py
+	check_task.py
+	check_titles.py
+	cm.err
+	compare_codepoints.py
+	create_sektor_sozluk.py
+	create_sektor_sozluk_final.py
+	create_sektor_sozluk_v2.py
+	create_sektor_sozluk_v3.py
+	create_sektor_sozluk_v4.py
+	data/tmp_ars.txt
+	data/tmp_chat.txt
+	data/tmp_pt.txt
+	data/tmp_sim.txt
+	data/tmp_st.txt
+	get_task_details.py
+	insert_simple.py
+	link_source_records.py
+	link_source_records_v2.py
+	normalize_db.py
+	normalize_test.py
+	out.txt
+	populate_sector_columns.py
+	populate_sector_columns_v2.py
+	populate_sector_final.py
+	pytest_out.txt
+	pytest_stderr.txt
+	pytest_stdout.txt
+	review_tasks.txt
+	run_nace.py
+	scripts/_hafiza_kisalt.py
+	scripts/_ilan_turu_esleme_kurtarma.json
+	scripts/_kazima_dogrula.py
+	scripts/bagli_is_taramasi.py
+	scripts/bulgu_defteri.py
+	scripts/bulgu_defteri_karar_olcumu.py
+	scripts/continue_haftalik_bildir.py
+	scripts/continue_sablon_guncelle.py
+	scripts/d310_gorev_cesitlilik_olcumu.py
+	scripts/d317_mandal_kirma_denemesi.py
+	scripts/d318_eszamanli_yazma_denemesi.py
+	scripts/d318_mandal_kirma_denemesi.py
+	scripts/evren_egitim_uc_taramasi.py
+	scripts/f8507a6_yan_etki_olcumu.py
+	scripts/firma_turu_etiketle.py
+	scripts/huginn_services.bat
+	scripts/iddia_kanit_olcumu.py
+	scripts/karar_kaydi_ekle.py
+	scripts/kaybolan_kod_olcumu.py
+	scripts/kaynak_adayi_olcer.py
+	scripts/mudahale_kaniti_olcumu.py
+	scripts/or_batch_cikar.py
+	scripts/or_fiyat_ara.py
+	scripts/or_kod_liste.py
+	scripts/or_sablon_ekle.py
+	scripts/or_seckin.py
+	scripts/osb_veri_temizle.py
+	scripts/rapor_teslim_ayrimi_olcumu.py
+	scripts/skor_motoru_faz_a_olcumu.py
+	scripts/supervise_api.bat
+	scripts/supervise_streamlit.bat
+	scripts/tam_suit_kova_olcumu.py
+	scripts/tehis_betik_olcumu.py
+	scripts/tetik_pano_tutarlilik_olcum.py
+	scripts/tsg_sozluk_kurtarma.py
+	scripts/tsg_sozluk_kurtarma2.py
+	scripts/yasu_board_teslim_d260.py
+	scripts/yasu_canli_olcum_d260.py
+	scripts/yasu_kolon_denetim_d260.py
+	skills/services/tsg_rapor.py
+	skills/typesafe-ai/
+	src/company_master/etl/firma_turu.py
+	src/company_master/etl/scrapers/osb_tender_monitor.py
+	src/company_master/etl/tsg_yazici.py
+	src/company_master/gateway/evren_client.py
+	src/company_master/intelligence/skor_motoru.py
+	src/company_master/schema/migrations/0037_tsg_olay_hatti.sql
+	src/company_master/schema/migrations/0038_sorgu_talepleri.sql
+	src/company_master/schema/migrations/0039_tender_tracking.sql
+	src/company_master/schema/migrations/0041_tsg_kolon_adlari_ingilizce.sql
+	src/company_master/schema/migrations/0044_tender_remaining_columns.sql
+	src/company_master/schema/migrations/0045_tender_cekilme_tarihi_rename.sql
+	src/company_master/schema/migrations/0048_firma_turu_etiketi.sql
+	src/company_master/schema/migrations/0050_scrape_audit_log.sql
+	src/company_master/schema/migrations/down/0037_tsg_olay_hatti.down.sql
+	src/company_master/schema/migrations/down/0038_sorgu_talepleri.down.sql
+	src/company_master/schema/migrations/down/0039_tender_tracking.down.sql
+	src/company_master/schema/migrations/down/0040_rls_anon_kapisi.down.sql
+	src/company_master/schema/migrations/down/0041_tsg_kolon_adlari_ingilizce.down.sql
+	src/company_master/schema/migrations/down/0042_tender_kolonlari_ingilizce.down.sql
+	src/company_master/schema/migrations/down/0050_scrape_audit_log.down.sql
+	src/company_master/scrapers/Dockerfile
+	src/company_master/talep_durum.py
+	sup.err
+	task_details.txt
+	test_full_output.txt
+	test_regex.py
+	test_regex2.py
+	test_regex3.py
+	test_regex4.py
+	test_regex5.py
+	test_roo.py
+	tests/test_bulgu_defteri.py
+	tests/test_firsat_skorlari.py
+	tests/test_ihale_scraper_sema_uyumu.py
+	tests/test_rag_embedder.py
+	tests/test_talep_durum.py
+	tests/test_tetik_pano_tutarlilik.py
+	tests/test_tsg_rapor.py
+	tests/test_tsg_zincir.py
+	utku_all.txt
+	utku_tasks.txt
+
+Dropped refs/stash@{0} (78e12391b9dbb84bc6c68b20a1dc06f184c61879)

@@ -1,0 +1,6 @@
+warning: in the working copy of 'data/orchestrator/ajan-chat.jsonl', CRLF will be replaced by LF the next time Git touches it
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 20.51s
+[chore/monorepo-merge d1c2a73] cortex(ihsan): 2026-10-03 oz-elestiri (5 madde) + kaldigim yer + 3 tuzak; chat: simulasyon blokaji kapandi, salih'e revize Mimir promptu bildirildi
+ 2 files changed, 69 insertions(+), 30 deletions(-)

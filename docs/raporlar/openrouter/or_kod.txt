@@ -1,0 +1,41 @@
+OpenRouter toplam model: 466
+
+Ucretli model: 437 | kod ilgili: 278
+
+=== EN UCUZ KOD MODELLERI (harman: 3 girdi + 1 cikti, $/M tok) ===
+model                                            girdi   cikti   harman      ctx  oz
+mistralai/mistral-nemo                           0.019   0.030    0.087  131,072  +kod
+deepseek/deepseek-v4-flash                       0.028   0.056    0.1401,048,576  +kod+reason
+openai/gpt-oss-20b                               0.018   0.090    0.144  131,072  +kod+reason
+ibm-granite/granite-4.0-h-micro                  0.017   0.112    0.163  131,000  
+openai/gpt-oss-20b:batch                         0.024   0.112    0.184  131,072  +kod+reason
+qwen/qwen3.7-flash                               0.030   0.130    0.2201,000,000  +kod+reason
+openai/gpt-oss-120b:batch                        0.030   0.136    0.225  131,072  +kod+reason
+mistralai/mistral-small-24b-instruct-2501        0.050   0.080    0.230   32,768  
+openai/gpt-5-nano:batch                          0.025   0.200    0.275  400,000  +kod+reason
+openai/gpt-oss-120b                              0.037   0.170    0.281  131,072  +kod+reason
+mistralai/ministral-8b-2512:batch                0.075   0.075    0.300  262,144  +kod
+qwen/qwen3-30b-a3b-instruct-2507                 0.048   0.193    0.338  262,144  +kod
+google/gemini-2.5-flash-lite:batch               0.050   0.200    0.3501,048,576  +kod+reason
+z-ai/glm-5.3-flash:batch                         0.060   0.200    0.3801,048,576  +kod+reason
+mistralai/ministral-3b-2512                      0.100   0.100    0.400  131,072  +kod
+openai/gpt-6-luna-pro:batch                      0.050   0.250    0.4001,050,000  +kod+reason
+openai/gpt-6-luna:batch                          0.050   0.250    0.4001,050,000  +kod+reason
+ibm-granite/granite-4.2-8b                       0.060   0.250    0.430  131,072  +kod+reason
+qwen/qwen3.5-9b                                  0.100   0.150    0.450  262,144  +kod+reason
+qwen/qwen3.5-flash-02-23                         0.065   0.260    0.4551,000,000  +kod+reason
+qwen/qwen3-coder-30b-a3b-instruct                0.070   0.280    0.490  262,144  +kod
+qwen/qwen-2.5-7b-instruct                        0.100   0.200    0.500   32,768  +kod
+qwen/qwen3-32b                                   0.080   0.280    0.520  131,072  +kod+reason
+mistralai/mistral-small-2603:batch               0.075   0.300    0.525  262,144  +kod+reason
+openai/gpt-oss-safeguard-20b                     0.075   0.300    0.525  131,072  +kod+reason
+mistralai/mistral-small-3.2-24b-instruct         0.094   0.250    0.531  256,000  +kod
+openai/gpt-5-nano                                0.050   0.400    0.550  400,000  +kod+reason
+z-ai/glm-4.7-flash                               0.061   0.400    0.582  200,000  +kod+reason
+~z-ai/glm-flash-latest                           0.027   0.500    0.5821,048,576  +kod+reason
+mistralai/ministral-8b-2512                      0.150   0.150    0.600  262,144  +kod
+mistralai/voxtral-small-24b-2507                 0.100   0.300    0.600   32,768  +kod
+qwen/qwen3-14b                                   0.120   0.240    0.600  131,072  +kod+reason
+qwen/qwen3-235b-a22b-2507                        0.087   0.350    0.612  262,144  +kod
+deepseek/deepseek-v4.1-flash:batch               0.112   0.336    0.6721,048,576  +kod+reason
+google/gemini-2.5-flash-lite                     0.100   0.400    0.7001,048,576  +kod+reason

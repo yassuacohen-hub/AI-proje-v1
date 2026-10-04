@@ -33,11 +33,17 @@ from company_master.sunum import (  # noqa: E402
     ODIN_KAPI_KACAK,
     ODIN_KAPI_MASKELENDI,
     ODIN_KAPI_TEMIZ,
+    ODIN_KAYNAK_MUSTERI,
+    ODIN_KAYNAK_TANIM,
+    ODIN_KAYNAKLAR,
     ODIN_RED_METNI,
+    _odin_kaynak_temizle,
     maskeleme_odin,
     odin_k4_gecerli_mi,
     odin_kapi_denetle,
     odin_kapi_olcumu,
+    odin_kaynak_dogrula,
+    odin_musteri_cikis_kapisi,
 )
 
 # ── Ölçülmüş vakalar (2026-10-04) ────────────────────────────────────────
@@ -181,6 +187,70 @@ def test_denetleme_kesin_duruma_dokunmaz():
     assert odin_kapi_denetle(ODIN_KAPI_MASKELENDI, False) == ODIN_KAPI_MASKELENDI
 
 
+# ── 3b. Kaynak (sürüm) ayrımı — ALTYAPI-ODIN-MASKE-V3-01 ───────────────
+# ÖLÇÜM: `git grep -E '\bV[123]\b' -- '*.py'` → tanım yok. Tek geçtiği yer
+# `docs/ODIN_DEPLOYMENT_ARCHITECTURE.md:78-82` ("V3 = müşteri endpoint").
+# Bu yüzden V1/V2'ye gevşek alt küme ATANMADI (D-224: ölçülmeyen ayrım
+# uydurulamaz) ve fail-closed uygulandı: bilinmeyen kaynak v3'e düşer.
+def test_kanonik_kaynak_normalizasyonu():
+    assert odin_kaynak_dogrula("v3") == ODIN_KAYNAK_MUSTERI
+    assert odin_kaynak_dogrula("V3") == ODIN_KAYNAK_MUSTERI
+    assert odin_kaynak_dogrula("3") == ODIN_KAYNAK_MUSTERI
+    assert odin_kaynak_dogrula("  v3  ") == ODIN_KAYNAK_MUSTERI
+
+
+def test_bilinmeyen_kaynak_fail_closed_v3_duser():
+    """D-245 mantığı: "bu kaynağa izin var" demek için kanıt gerekir."""
+    for belirsiz in (None, "", "v1", "v2", "v9", "bilinmeyen", 3, 99):
+        assert odin_kaynak_dogrula(belirsiz) == ODIN_KAYNAK_MUSTERI, belirsiz
+
+
+def test_v1_v2_icin_gevsek_alt_kume_olusturulmadi():
+    """Kırılma denemesi noktası — D-224 ihlali bu kümeyle yakalanır.
+
+    V1/V2'nin hangi desenleri gevşettiği **ölçülmedi**. Bu küme onlara
+    gevşek bir desen atanırsa sessizce yanlış yeşil üretir.
+    """
+    assert set(ODIN_KAYNAK_TANIM) == set(ODIN_KAYNAKLAR) == {"v3"}
+
+
+def test_bilinmeyen_kaynak_ile_v3_ayni_kapidan_gecer():
+    """Fail-closed'un ölçülebilir tarafı: sonuç AYNI olmalı, gevşeme yok."""
+    ham = "Sirket X ic kayit ALTYAPI-ODIN-UYARLAMA-01 ve D-310"
+    kanonik = maskeleme_odin(ham, hedef="musteri", kaynak="v3")
+    for belirsiz in (None, "", "v1", "v2", "v9", "bilinmeyen"):
+        assert maskeleme_odin(ham, hedef="musteri", kaynak=belirsiz) == kanonik
+
+
+def test_maske_varsayilan_kaynagi_v3_ve_geriye_uyumlu():
+    """İmza uyumluluğu: iki konumlu çağrılar eski davranışı korur."""
+    ham = "Karar D-310 ve HUGINN_INTERNAL_DATA"
+    assert maskeleme_odin(ham) == maskeleme_odin(ham, "musteri", "v3")
+    assert maskeleme_odin(ham, hedef="ic", kaynak="v9") == ham
+
+
+def test_v3_musteri_cikis_kapisi_maskeler_ve_olcer():
+    """V3 kapısı: maske + K4 aynı yanıtta, ikisi de ayrı raporlanır."""
+    sonuc = odin_musteri_cikis_kapisi("D-310 karari aciklandi")
+    assert sonuc["kaynak"] == ODIN_KAYNAK_MUSTERI
+    assert sonuc["kapi"] == ODIN_KAPI_MASKELENDI
+    assert ODIN_RED_METNI in sonuc["metin"] and "D-310" not in sonuc["metin"]
+
+
+def test_v3_kapisi_temiz_metanı_bozmaz():
+    temiz = "Firmanin NACE kodu 25.11"
+    sonuc = odin_musteri_cikis_kapisi(temiz)
+    assert sonuc["metin"] == temiz
+    assert sonuc["kapi"] == ODIN_KAPI_INCELEME  # denylist ateşlenmedi = kanıtlanamadı
+
+
+def test_v3_kapisi_bos_yanitta_cokmez():
+    for bos in (None, ""):
+        sonuc = odin_musteri_cikis_kapisi(bos)
+        assert sonuc["metin"] == (bos or "")
+        assert sonuc["kapi"] == ODIN_KAPI_INCELEME
+
+
 # ── 4. İkiz / yanlış kopya koruması (D-211) ─────────────────────────────
 TARAMALAR = ["src", "scripts", "web_dashboard", "tests", "docs", "plans", "hubs"]
 ISTISNA = {Path(__file__).resolve()}
@@ -241,6 +311,108 @@ def test_dokuman_istisnasi_kullanilmiyor():
 def test_gecici_olcum_betigi_yok():
     """D-86: tek seferlik ölçüm betiği diskte kalmaz; kanıt test'te durur."""
     assert not (ROOT / "scripts" / "odin_kapi_olc.py").exists()
+
+
+# ── Kaynak sözleşmesi (ALTYAPI-ODIN-MASKE-V3-01 kalite turu, 2026-10-04)
+#
+# Bu blok, teslimden sonra yapılan gözden geçirmede çıkan 5 açığı kapatır.
+# Kırılma denemesi: `odin_musteri_cikis_kapisi` içindeki `if tanimli:` dalı
+# `else: kapi = ODIN_KAPI_INCELEME` yapılırsa
+# `test_tanimsiz_kaynak_kapiyi_incelemeye_dusurur` kırmızıya döner.
+
+
+def test_tanimsiz_kaynak_kapiyi_incelemeye_dusurur():
+    """D-339'in kapıdaki hâli: `kaynak="v1"` **sessizce** v3'e yutulmaz.
+
+    Ölçülen kusur: kapı `{"kaynak": "v3"}` döndürüyordu ama çağıran
+    "v1 uygulandı" sanıyordu — uyuşmazlık hiçbir yerde görünmüyordu.
+    Fail-closed zaten v3'ü uyguluyor; eksik olan **görünürlüktü**.
+    """
+    c = odin_musteri_cikis_kapisi("Görev ALTYAPI-ODIN-UYARLAMA-01", kaynak="v1")
+    assert c["kapi"] == ODIN_KAPI_INCELEME, "tanimsiz kaynak insan kararina acilmali"
+    assert c["kaynak"] == ODIN_KAYNAK_MUSTERI, "maske yine en kati kume uygulanmali"
+    assert c["kaynak_istenen"] == "v1", "istenen ham ad gorunur olmali"
+    assert c["kapi_tanimli"] is False
+
+
+def test_tanimli_kaynak_kapiyi_etkilemez():
+    """Sertleştirme mevcut davranışı bozmaz: v3'te K4 normal hesaplanır."""
+    ham = "Anahtar: ODIN_INTERNAL_KEY=xyz"
+    c = odin_musteri_cikis_kapisi(ham, kaynak="v3")
+    assert c["kapi_tanimli"] is True
+    assert c["kaynak_istenen"] == "v3"
+    assert c["kapi"] == odin_kapi_olcumu(ham, kaynak=ODIN_KAYNAK_MUSTERI)
+
+    # v3 / "V3" / 3 hepsi aynı kapıdır — yoksa yalnız boşluk çıkardı.
+    for ayni in ("V3", " v3 ", 3):
+        c2 = odin_musteri_cikis_kapisi(ham, kaynak=ayni)
+        assert c2["kapi_tanimli"] is True, f"{ayni!r} v3 ile ayni olmali"
+        assert c2["kapi"] == c["kapi"]
+
+
+def test_kapi_sozlugu_kaynak_alanini_gosterir():
+    """Sözlük şeması sabit: tüketici hangi alanı okuyacağını bilmeli."""
+    c = odin_musteri_cikis_kapisi("Merhaba")
+    assert set(c) == {
+        "metin", "kapi", "kaynak", "kaynak_istenen", "kapi_tanimli",
+    }
+
+
+def test_kapi_olcumu_kaynak_parametresi_ayni_kumeyi_olcer():
+    """D-211: `odin_kapi_olcumu` ikinci desen listesi açmaz.
+
+    `kaynak` eklemenin tek sebebi ileriye dönük açıktı; ölçüm yine
+    `ODIN_KAYNAK_TANIM[kaynak]` kümesini kullanır. Bugün tanımlı tek küme
+    V3 olduğu için varsayılanla aynı sonucu vermesi zorunludur.
+    """
+    ham = "Anahtar: ODIN_INTERNAL_KEY=xyz"
+    assert odin_kapi_olcumu(ham, kaynak=ODIN_KAYNAK_MUSTERI) == odin_kapi_olcumu(ham)
+    # Tanımsız kaynak da aynı kümeye düşer (fail-closed).
+    assert odin_kapi_olcumu(ham, kaynak="v1") == odin_kapi_olcumu(ham)
+
+
+def test_normalizasyon_tek_yerde():
+    """D-211: ham adı kanonikleştiren tek fonksiyon var.
+
+    `odin_kaynak_dogrula` ve `odin_musteri_cikis_kapisi` ikisi de "istenen
+    kaynak neydi" sorusunu sorar. Normalizasyon ikinci kez yazılırsa iki
+    gerçek oluşur; bu test kopyayı yakalar.
+    """
+    assert _odin_kaynak_temizle("V3") == "v3"
+    assert _odin_kaynak_temizle(3) == "v3"
+    assert _odin_kaynak_temizle("v1") == "v1"
+    assert _odin_kaynak_temizle(None) == ""
+    assert odin_kaynak_dogrula("v9") == ODIN_KAYNAK_MUSTERI
+    # Kapı istenen/uygulanan ayrımını bu tek yardımcıdan türetir.
+    assert odin_musteri_cikis_kapisi("x", kaynak="v1")["kaynak_istenen"] == \
+        _odin_kaynak_temizle("v1")
+
+
+def test_ol_kod_kalmadi():
+    """`if ad == "3": ad = "3"` gibi ölü dal bırakılmaz (kod okunabilirliği)."""
+    p = ROOT / "src" / "company_master" / "sunum.py"
+    metin = p.read_text(encoding="utf-8")
+    assert 'if ad == "3":\n        ad = "3"' not in metin, "olu dal sunum.py icinde duruyor"
+    # Bayat yorum: karar 2026-10-04'te kesinleşti, "soruldu" yazmaz.
+    assert "karar KAHİN'e soruldu" not in metin, "bayat yorum kodda kaldi (D-265/1)"
+
+
+def test_kaynak_musteri_sabiti_disa_aktarilir():
+    """`__all__` her public sabiti ve fonksiyonu kapsar.
+
+    Kırılma denemesi: `__all__`'dan `"ODIN_KAYNAK_MUSTERI"` silinirse bu
+    test kırmızıya döner.
+    """
+    import company_master.sunum as sunum
+
+    assert "ODIN_KAYNAK_MUSTERI" in sunum.__all__
+    for ad in ("ODIN_KAYNAKLAR", "ODIN_KAYNAK_TANIM", "odin_kaynak_dogrula",
+               "maskeleme_odin", "odin_musteri_cikis_kapisi"):
+        assert ad in sunum.__all__, f"{ad} disa aktarilmiyor"
+    # Yıldız içe aktarma gerçekten erişilebilir olmalı.
+    yildiz = {ad for ad in dir(sunum) if not ad.startswith("_")}
+    for ad in ("ODIN_KAYNAK_MUSTERI", "odin_musteri_cikis_kapisi"):
+        assert ad in yildiz or hasattr(sunum, ad)
 
 
 if __name__ == "__main__":

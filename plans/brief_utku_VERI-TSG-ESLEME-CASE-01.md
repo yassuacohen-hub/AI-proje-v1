@@ -82,7 +82,7 @@ python scripts/ajan_chat.py oku --task-id VERI-TSG-ESLEME-CASE-01
 python scripts/gorev_kutusu.py teslim --ajan utku --task-id VERI-TSG-ESLEME-CASE-01 --ozet "<özet>"
 ```
 
-## İlgili Nodlar
+## Ilgili Nodlar
 
 - [[Huginn Data Insights/AGENTS]]
 - [[Huginn Data Insights/hubs/OSINT_VERI_TOPLAMA_HUB]]

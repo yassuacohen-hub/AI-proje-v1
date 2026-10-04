@@ -1,0 +1,31 @@
+from sqlalchemy import create_engine, text
+import os
+from dotenv import load_dotenv
+load_dotenv()
+engine = create_engine(os.getenv('DATABASE_URL'))
+with engine.connect() as conn:
+    ostim_id = '0a27baf8-6dfa-4e57-851b-412470f480e7'
+    
+    # Check if the fields are nested in 'payload' or similar
+    rows = conn.execute(text("""
+        SELECT sr.source_record_id, sr.raw_name, sr.raw_payload
+        FROM source_records sr
+        WHERE sr.source_id = :sid
+          AND sr.raw_payload::text LIKE '%naceKod%'
+        LIMIT 10
+    """), {"sid": ostim_id}).fetchall()
+    print(f"Records with 'naceKod' in payload text: {len(rows)}")
+    for r in rows:
+        print(f"  {r[0]} | {r[1][:50]} | {r[2]}")
+    
+    # Check for 'naceKod' in payload at any level
+    rows = conn.execute(text("""
+        SELECT sr.source_record_id, sr.raw_name, sr.raw_payload
+        FROM source_records sr
+        WHERE sr.source_id = :sid
+          AND sr.raw_payload::text LIKE '%naceKod%'
+          AND sr.raw_payload->>'kaynak' IS NULL
+    """), {"sid": ostim_id}).fetchall()
+    print(f"\nRecords with naceKod in text AND kaynak=None: {len(rows)}")
+    for r in rows[:20]:
+        print(f"  {r[0]} | {r[1][:50]}")

@@ -1,0 +1,12 @@
+HATA: Brief kilitli dosya bildiriyor ama gorev kilitsiz: ALTYAPI-9ROUTER-ANAHTAR-01 (brief: plans/brief_yasu_ALTYAPI-9ROUTER-ANAHTAR-01.md, kilit: scripts/ninerouter_anahtar_guncelle.py)
+HATA: Brief kilitli dosya bildiriyor ama gorev kilitsiz: ALTYAPI-OPENROUTER-ARAC-01 (brief: plans/brief_yasu_ALTYAPI-OPENROUTER-ARAC-01.md, kilit: scripts/continue_haftalik_bildir.py)
+HATA: Brief kilitli dosya bildiriyor ama gorev kilitsiz: VERI-OSTIM-HREF-FILTRE-01 (brief: plans/brief_utku_VERI-OSTIM-HREF-FILTRE-01.md, kilit: src/company_master/etl/scrapers/ostim_detail_scraper.py)
+HATA: Brief kilitli dosya bildiriyor ama gorev kilitsiz: VERI-APIFY-BUTCE-01 (brief: plans/brief_utku_VERI-APIFY-BUTCE-01.md, kilit: docs/APIFY_BUTCE.md)
+HATA: Brief kilitli dosya bildiriyor ama gorev kilitsiz: VERI-PAKET-FIYAT-SENKRON-01 (brief: plans/brief_yasu_VERI-PAKET-FIYAT-SENKRON-01.md, kilit: scripts/sync_paket_fiyatlari.py)
+HATA: Brief kilitli dosya bildiriyor ama gorev kilitsiz: TEST-SIMULASYON-B17-KIRIK-01 (brief: plans/brief_utku_TEST-SIMULASYON-B17-KIRIK-01.md, kilit: tests/test_gorev_kutusu_cli.py)
+ALTYAPI-9ROUTER-ANAHTAR-01: rc=1
+ALTYAPI-OPENROUTER-ARAC-01: rc=1
+VERI-OSTIM-HREF-FILTRE-01: rc=1
+VERI-APIFY-BUTCE-01: rc=1
+VERI-PAKET-FIYAT-SENKRON-01: rc=1
+TEST-SIMULASYON-B17-KIRIK-01: rc=1

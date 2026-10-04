@@ -1,42 +1,63 @@
 # -*- coding: utf-8 -*-
-"""Odin AI RAG testleri."""
+"""Odin AI RAG testleri.
+
+Embedder testleri 2026-10-02'de güncellendi (ALTYAPI-RAG-EMBEDDER-01):
+eski sürüm 16 boyutlu `hashlib` sahte vektörü varsayıyordu. Sahte embedder
+silindi; artık `Embedder` gerçek `vector.embedder.Embedder` ile AYNI nesne.
+Bu yüzden ağ gerektiren testler **sahte istemci** kullanır (canlı ölçüm
+teslim özetindedir: 4096 boyut, k(demir,metal)=0.8428 > k(demir,gida)=0.6767).
+"""
 from __future__ import annotations
 
 import pytest
 from company_master.odin_ai.rag import Embedder, Chunk, chunk_metin, chunk_bol, chunk_topla
 
 
-class TestEmbedder:
-    """Embedder testleri."""
+class _SahteIstemci:
+    """4096 boyutlu sahte vektor dondurur; ag cagrisi yapmaz."""
 
-    def test_embed_returns_list_of_float_length_16(self):
-        embedder = Embedder()
-        result = embedder.embed("test metni")
-        assert isinstance(result, list)
-        assert len(result) == 16
-        assert all(isinstance(x, float) for x in result)
+    def __init__(self, boyut: int = 4096) -> None:
+        self.boyut = boyut
+
+    def embed(self, texts, model):
+        return [
+            [float(hash((t, i)) % 1000) / 1000.0 for i in range(self.boyut)]
+            for t in texts
+        ]
+
+
+class TestEmbedder:
+    """Embedder testleri (sahte istemci ile, ag gerektirmez)."""
+
+    def test_embed_returns_embedding_result(self):
+        sonuc = Embedder(client=_SahteIstemci()).embed(["test metni"])
+        assert sonuc.ok_count == 1, f"beklenen 1, {sonuc.ok_count}"
+        assert sonuc.failed_count == 0
+        assert len(sonuc.embeddings[0]) == 4096
+        assert all(isinstance(x, float) for x in sonuc.embeddings[0])
 
     def test_embed_deterministic_same_text_same_vector(self):
-        embedder = Embedder()
-        v1 = embedder.embed("aynı metin")
-        v2 = embedder.embed("aynı metin")
+        e = Embedder(client=_SahteIstemci())
+        v1 = e.embed(["ayni metin"]).embeddings[0]
+        v2 = e.embed(["ayni metin"]).embeddings[0]
         assert v1 == v2
 
     def test_embed_different_texts_different_vectors(self):
-        embedder = Embedder()
-        v1 = embedder.embed("metin bir")
-        v2 = embedder.embed("metin iki")
+        e = Embedder(client=_SahteIstemci())
+        v1 = e.embed(["metin bir"]).embeddings[0]
+        v2 = e.embed(["metin iki"]).embeddings[0]
         assert v1 != v2
 
-    def test_embed_empty_string_returns_zeros(self):
-        embedder = Embedder()
-        result = embedder.embed("")
-        assert result == [0.0] * 16
+    def test_embed_empty_string_returns_no_vector(self):
+        # Artik 16 sifir donmez: bos metin ATLANIR (vektor uretilmez).
+        # D-249: "veri yok" 0 demek degildir.
+        sonuc = Embedder(client=_SahteIstemci()).embed([""])
+        assert sonuc.ok_count == 0
+        assert sonuc.embeddings == []
 
-    def test_embed_custom_dimension(self):
-        embedder = Embedder(boyut=8)
-        result = embedder.embed("test")
-        assert len(result) == 8
+    def test_embed_batch_preserves_count(self):
+        sonuc = Embedder(client=_SahteIstemci()).embed(["a", "b", "c"])
+        assert sonuc.ok_count == 3
 
 
 class TestChunk:

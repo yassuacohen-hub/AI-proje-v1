@@ -1,0 +1,547 @@
+[
+  {
+    "task_id": "UTKU-02",
+    "id": "UTKU-02",
+    "baslik": "[UTKU] API endpoint optimizasyon - response time (2s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "archive",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "src/api/endpoints.py"
+    ],
+    "not": "Hayalet gorev (D-XXX): dosya kod tabaninda yok, sablon/placeholder. Arsive tasindi. UTKU-02: Yeni görev. API endpoint'lerin response time'ı optimize et.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_UTKU-02.md",
+    "talimat": "UTKU-02: [UTKU] API endpoint optimizasyon - response time (2s) Brief: plans/brief_UTKU-02.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "UTKU-04",
+    "id": "UTKU-04",
+    "baslik": "[UTKU] Veritabanı migration - index optimizasyon (1s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "archive",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/schema/migrations/0020_index_optimization.sql"
+    ],
+    "not": "Hayalet gorev (D-XXX): dosya kod tabaninda yok, sablon/placeholder. Arsive tasindi. UTKU-04: Yeni görev. DB index'lerini optimize et.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_UTKU-04.md",
+    "talimat": "UTKU-04: [UTKU] Veritabanı migration - index optimizasyon (1s) Brief: plans/brief_UTKU-04.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "UTKU-05",
+    "id": "UTKU-05",
+    "baslik": "[UTKU] Kullanıcı kimlik doğrulama - token yenileme (2s)",
+    "sahip": "utku",
+    "oncelik": "P0",
+    "durum": "archive",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "src/auth/token_refresh.py"
+    ],
+    "not": "Hayalet gorev (D-XXX): dosya kod tabaninda yok, sablon/placeholder. Arsive tasindi. UTKU-05: Yeni görev. Token yenileme mekanizması uygula.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_UTKU-05.md",
+    "talimat": "UTKU-05: [UTKU] Kullanıcı kimlik doğrulama - token yenileme (2s) Brief: plans/brief_UTKU-05.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "ORCH-01",
+    "id": "ORCH-01",
+    "baslik": "[ORCH] İş akışı koordinasyon - görev planlama (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P0",
+    "durum": "archive",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "orchestration/workflow_coordinator.py"
+    ],
+    "not": "Hayalet gorev (D-XXX): dosya kod tabaninda yok, sablon/placeholder. Arsive tasindi. ORCH-01: Yeni görev. İş akışı koordinasyonunu planla.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ORCH-01.md",
+    "talimat": "ORCH-01: [ORCH] İş akışı koordinasyon - görev planlama (2s) Brief: plans/brief_ORCH-01.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "ORCH-02",
+    "id": "ORCH-02",
+    "baslik": "[ORCH] Bağımlılık yönetimi - görüntü grafiği (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "archive",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "orchestration/dependency_graph.py"
+    ],
+    "not": "Hayalet gorev (D-XXX): dosya kod tabaninda yok, sablon/placeholder. Arsive tasindi. ORCH-02: Yeni görev. Bağımlılık grafiğini görselleştir.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ORCH-02.md",
+    "talimat": "ORCH-02: [ORCH] Bağımlılık yönetimi - görüntü grafiği (2s) Brief: plans/brief_ORCH-02.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "ORCH-03",
+    "id": "ORCH-03",
+    "baslik": "[ORCH] Görev dağıtımı - load balancing (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P0",
+    "durum": "archive",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "orchestration/load_balancer.py"
+    ],
+    "not": "Hayalet gorev (D-XXX): dosya kod tabaninda yok, sablon/placeholder. Arsive tasindi. ORCH-03: Yeni görev. Görev dağıtımı sistemi kur.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ORCH-03.md",
+    "talimat": "ORCH-03: [ORCH] Görev dağıtımı - load balancing (2s) Brief: plans/brief_ORCH-03.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "ORCH-04",
+    "id": "ORCH-04",
+    "baslik": "[ORCH] Hata toleransı - retry mekanizması (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "archive",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "orchestration/retry_handler.py"
+    ],
+    "not": "Hayalet gorev (D-XXX): dosya kod tabaninda yok, sablon/placeholder. Arsive tasindi. ORCH-04: Yeni görev. Retry mekanizması uygula.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ORCH-04.md",
+    "talimat": "ORCH-04: [ORCH] Hata toleransı - retry mekanizması (2s) Brief: plans/brief_ORCH-04.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "ORCH-05",
+    "id": "ORCH-05",
+    "baslik": "[ORCH] İzleme ve metrikler - telemetri sistemi (3s)",
+    "sahip": "ihsan",
+    "oncelik": "P0",
+    "durum": "archive",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "orchestration/telemetry.py"
+    ],
+    "not": "Hayalet gorev (D-XXX): dosya kod tabaninda yok, sablon/placeholder. Arsive tasindi. ORCH-05: Yeni görev. Telemetri ve monitoring sistemi kur.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_ORCH-05.md",
+    "talimat": "ORCH-05: [ORCH] İzleme ve metrikler - telemetri sistemi (3s) Brief: plans/brief_ORCH-05.md",
+    "dependencies": []
+  },
+  {
+    "task_id": "WK-02",
+    "id": "WK-02",
+    "baslik": "OSB Tender Monitor - Real-time Tracking",
+    "sahip": "-",
+    "oncelik": "P1",
+    "durum": "archive",
+    "baslangic": "2026-09-27T02:35:00",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "D-222 denetimi: arsivlenen gorev_panosu_ESKI_2026-09-22.md'den kanitli tasima",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": null,
+    "talimat": "DEVREDILDI -> VERI-02 (D-57 kanonik kimlik). Bu kayit yalnizca iz birakmak icindir.",
+    "kanit": "GERCEK: hic dosya yok, hic baslanmamis. OSB 42 dosyada gecen kapsam.",
+    "kapanma_nedeni": ""
+  },
+  {
+    "task_id": "WK-03",
+    "id": "WK-03",
+    "baslik": "Proxy Rotation and IP Management",
+    "sahip": "-",
+    "oncelik": "P2",
+    "durum": "archive",
+    "baslangic": "2026-09-27T02:35:00",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "D-222 denetimi: arsivlenen gorev_panosu_ESKI_2026-09-22.md'den kanitli tasima",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": null,
+    "talimat": "DEVREDILDI -> VERI-03 (D-57 kanonik kimlik). Bu kayit yalnizca iz birakmak icindir.",
+    "kanit": "GERCEK: hic dosya yok, hic baslanmamis. Proxy Rotation 6 dosyada gecen kapsam.",
+    "kapanma_nedeni": ""
+  },
+  {
+    "task_id": "VERI-02",
+    "id": "VERI-02",
+    "baslik": "[VERI] OSB ihale izleyicisini yaz → src/company_master/etl/scrapers/osb_tender_monitor.py (3s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-27T03:07:34",
+    "bitis": "2026-10-01T19:21:19",
+    "dosyalar": [],
+    "not": "Teslim (utku): osb_tender_monitor.py Ingilizce kolon adlariyla guncellendi (migration 0042/0044/0045 uyumu). IhaleIlan dataclass, SQL sorgulari, BaskentOSBScraper ve OstimOSBScraper parse metotlari Turkce->Ingilizce cevrildi. Tum company_master testleri (80) ve scraper testleri (12) gecti.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-02.md",
+    "talimat": "D-222 devri: eski kimlik WK-02, hic baslanmamis. Brifteki 3 olcumu yapmadan kod yazma."
+  },
+  {
+    "task_id": "VERI-NACE-COKLU-01",
+    "id": "VERI-NACE-COKLU-01",
+    "baslik": "[VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-27T13:19:21",
+    "bitis": "2026-10-01T19:36:35",
+    "dosyalar": [
+      "src/company_master/etl/nace_coklu_ata.py"
+    ],
+    "not": "Teslim (utku): nace_coklu_yaz.py calistirildi: company_industries 6788 satir, 6775 firma, 9 firma coklu NACE (maks 6). raw_nace ayristirildi, nace_codes referansina dogrulandi, is_primary tek/cok ayrimi yapildi. companies.nace_code ana kodla senkronize. Tum kabul kriterleri saglandi (0 orphan, 0 multi-primary, 9 coklu kod firmasi).",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-NACE-COKLU-01.md",
+    "talimat": "Brif: plans/brief_utku_VERI-NACE-COKLU-01.md. ONKOSUL: VERI-NACE-SOZLUK-01 bitmeden baslamayin (referans liste gerekiyor). URUN SAHIBI: coklu NACE kanuni; 3 kod varsa 3 is yapiyor demektir, firma detayinda gosterilecek. Sema HAZIR: company_industries tablosu VAR ama 0 SATIR, is_primary kolonu VAR. Yap: source_records.raw_nace (7595 dolu) ayristirma ONCE OLCULECEK (kac kayitta >1 kod, hangi ayirici), sonra company_industries'e yaz: ana kod is_primary=true digerleri false. nace_codes'ta olmayan kodu YAZMA, eslesmeyen dokumune dus. Kabul: satir>0, firma basina en fazla 1 is_primary=true, yetim kod yok. DIKKAT brifte itirazim var: kod sayisini kalite puanina HAM eklemeyin."
+  },
+  {
+    "id": "VERI-IVEDIK-YENIDEN-01",
+    "task_id": "VERI-IVEDIK-YENIDEN-01",
+    "baslik": "[VERI] Ivedik kaynak listesinden dusuruldu (KAHIN 2026-09-29)",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "done",
+    "dosyalar": [
+      "src/company_master/etl/scrapers/ivedik_scraper.py"
+    ],
+    "brief": "plans/brief_utku_VERI-IVEDIK-YENIDEN-01.md",
+    "talimat": "Ivedik OSB sitesi HTTP 403 donuyor; kazi yapilamaz. GOREV: erisim engelini OLC ve raporla, veri UYDURMA. YAPILDI: DNS+HTTP+robots.txt olculdu; mevcut 3.354 satir / 14 tekil firma, alanlar %0; brief varsayimi tutmadi (D-66) -> durduruldu. CIKTI: plans/IVERI_ERISIM_RAPORU.md. Kalan karar KAHIN'de: kurumdan ozel izin istenir mi, yoksa kaynak dusurulur mu?",
+    "mod": "code",
+    "from_agent": "ihsan",
+    "source": "ihsan",
+    "baslangic": null,
+    "bitis": null,
+    "not": "Teslim (yasu): KAZI YAPILMADI - erisim engeli. OLCUM: DNS cozuluyor (185.151.30.153) ama nginx HTTP 403 donuyor; https, http ve robots.txt dahil. Mevcut veri: 3.354 satir / 14 tekil firma, tum alanlar %0 - kullanilamaz. Brief varsayimi tutmadi (D-66) -> durduruldu. Sektor sorusu yanitlanamadi, uydurma cevap verilmedi. 403'e karsi tekrar istek atilmadi (P-5). Rapor: plans/IVERI_ERISIM_RAPORU.md",
+    "sonuc": "KAHIN karari: 'Ivedik'i kaynak listesinden dusur.' 4 yontem denendi, hepsi basarisiz (401 / Browser-Use BLOCKED). Mevcut veri 3.354 satir ama 14 tekil firma ve %0 alan = kullanilamaz.",
+    "kapanis_notu": "KAYNAK LISTESINDEN DUSTURULDU. Veri SILINMEDI (geri donusu olmayan silme riski) - data/ivedik/firmalar.jsonl referans icin bekletildi, urune alinmayacak. Kayit: data/ivedik/kaynaktan_dusuruldu.json (D-301). DB'de zaten yuklu degildi; hub listesinden cikarildi.",
+    "kapandi": "2026-09-29T20:59:57"
+  },
+  {
+    "task_id": "TEST-EKLE-DENEME",
+    "id": "TEST-EKLE-DENEME",
+    "baslik": "test",
+    "sahip": "ihsan",
+    "oncelik": "P2",
+    "durum": "iptal",
+    "baslangic": "2026-09-30T17:52:20",
+    "bitis": null,
+    "dosyalar": [],
+    "not": "iptal: test/demo görevi; D-225 D-57 kanonik kontrolünü engelliyor",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "",
+    "talimat": ""
+  },
+  {
+    "task_id": "VERI-TSG-04-YAZICI-01",
+    "id": "VERI-TSG-04-YAZICI-01",
+    "baslik": "[VERI] TSG-04 yazma hattini yaz → company_events INSERT pipeline'i (3s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-09-30T18:58:54",
+    "bitis": "2026-10-01T17:19:03",
+    "dosyalar": [
+      "src/company_master/etl/tsg_yazici.py"
+    ],
+    "not": "Teslim (utku): TSG-04 yazma hatti (tsg_yazici.py) yazildi ve calistirildi. 302 company_events kaydi eklendi, 22 firmanin last_verified_on guncellendi. Tum testler gecti (test_ticaret_sicili_kanit.py, test_tsg_rapor.py, test_panel_durustluk.py). Ilan turu eslesmesi (ILAN_TURU_ESLEME) 65 etiketle hazir, 20/326 kanit dosyasinda il_turu dolu, kalan 306 icin event_type=None/unknown (beklenen davranis). | DENETIM (2026-10-01, orkestrator, PARTIAL): Temel iş yapıldı, 3 eksik var: (1) case-mismatch normalize et (olay_esle büyük/küçük harf duyarlı, ILAN_TURU_ESLEME karışık harf), (2) get_engine() database kapısı kur (atlanıyor), (3) zincir testi yaz (D-288). Canlı unknown sayısı ölçüm (D-238) → VERI-TSG-ESLEME-CASE-01 (yeni görev). Yeniden ata → UTKU, eksiklikleri tamamlasın.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-TSG-04-YAZICI-01.md",
+    "talimat": "plans/brief_utku_VERI-TSG-04-YAZICI-01.md dosyasini oku ve uygula"
+  },
+  {
+    "task_id": "VERI-NACE-ACILIM-01",
+    "id": "VERI-NACE-ACILIM-01",
+    "baslik": "[VERI] NACE acilimini yaz → sunum.acilim_getir + musteri karti (3s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-10-01T11:18:23",
+    "bitis": "2026-10-01T17:19:04",
+    "dosyalar": [
+      "src/company_master/sunum.py",
+      "web_dashboard/tabs/admin_musteriler.py"
+    ],
+    "not": "Teslim (utku): NACE acilim (title) gosterimi eklendi: sunum.acilim_getir() fonksiyonu yazildi (cached, D-249/D-250/7 uyumlu), admin arama sonuclarina nace_acilim sutunu eklendi (_satirlari_df_yap). 2784/3319 NACE kodu acilimli, 535 bos (veri yok -> BOS). Tum testler gecti: test_panel_durustluk.py, test_ticaret_sicili_kanit.py, test_tsg_rapor.py. Hub'a eklendi: VERI_KALITESI_HUB.md. | DENETIM (2026-10-01, orkestrator, PENDING): Kod kalitesi: çıplak except Exception, bayat doctest, lru_cache(512) bayatlama (düzelt). Asıl sorun: teslim '535 boş' diyor ama canlı COUNT(*) FROM nace_codes WHERE title IS NULL doğrulanmadı (D-260, D-238). SOZLUK-DIL ile çelişkili sayım (10 sn fark) — sıralı ölçüm gerekli. AKSIYON: UTKU → canlı COUNT(*) test çalıştır, kod iyileştirmelerini yap, SOZLUK-DIL ile koordine et → onay gelmeden önce.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-NACE-ACILIM-01.md",
+    "talimat": "Brif: plans/brief_utku_VERI-NACE-ACILIM-01.md. D-268/3: 6387/8289 NACE kodunda acilim var ama acilim_getir fonksiyonu kodda yok. sunum.py tek kapisina yaz, musteri kartina bagla."
+  },
+  {
+    "task_id": "VERI-NACE-SOZLUK-DIL-01",
+    "id": "VERI-NACE-SOZLUK-DIL-01",
+    "baslik": "[VERI] NACE sozluk basliklarini duzelt → 572 TR karakter (4s)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-10-01T11:18:33",
+    "bitis": "2026-10-01T17:19:04",
+    "dosyalar": [
+      "src/company_master/etl/nace_sozluk_yukle.py",
+      "data/nace/sektor_meslek_nace_2026-05_resmi.xlsx"
+    ],
+    "not": "Teslim (utku): 572 yarim-ASCII'lesmis Türkçe baslik duzeltildi (mojibake onarimi). 4 kaynak birlesimiyle 3319/3319 NACE kodu title dolduruldu (0 bos, onceki 535 bos). 47.78, 20.59, 28.15 gibi onceki bozuk kodlar onarildi. clean_turkish_chars fonksiyonu sadece mojibake'leri onaracak sekilde duzenlendi, Türkçe karakterler korunuyor. Tum testler gecti: test_panel_durustluk.py, test_ticaret_sicili_kanit.py, test_tsg_rapor.py. Hub'a eklendi: VERI_KALITESI_HUB.md. | DENETIM (2026-10-01, orkestrator, PENDING): Teslim özeti kanıt değildir (D-260). Canlı COUNT(*) FROM nace_codes WHERE title IS NULL doğrulanması gerekli; ACILIM '535 boş' iddiası ile karşılaştırılacak (sıralı ölçüm, ACILIM 10 sn önceydi; sonuç gelmeden onay yok). AKSIYON: UTKU → ACILIM ile koordine et (aynı anda canlı COUNT), her iki görev sonuç gelmeden onay yok.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-NACE-SOZLUK-DIL-01.md",
+    "talimat": "Brif: plans/brief_utku_VERI-NACE-SOZLUK-DIL-01.md. D-268/3: 3319 NACE basligindan 572'si Turkce karakterde yarim-ASCII. SHA256 dogrulandi: kaynak xlsx kullanicinin gosterdigiyle ayni (TUIK indirme GEREKSIZ olabilir). Faz A once kok nedeni teshis et (xlsx mi, yukleyici encoding mi), sonra duzelt."
+  },
+  {
+    "task_id": "VERI-TSG-ESLEME-CASE-01",
+    "id": "VERI-TSG-ESLEME-CASE-01",
+    "baslik": "[VERI] TSG ilan turu eslermesini duzel -> olay_esle normalize + canli unknown olcumu (1s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-10-01",
+    "bitis": "2026-10-02T18:00:31",
+    "dosyalar": [
+      "src/company_master/etl/tsg_yazici.py",
+      "skills/services/ticaret_sicili_kanit.py",
+      "tests/test_ticaret_sicili_kanit.py"
+    ],
+    "not": "Teslim (utku): TSG ilan turu esleme: _TR_ASCII katlamasi, ILAN_TURU_ESLEME (17 anahtar), olay_esle() fonksiyonu. Turkce ı/ş/ğ yutulmasi duzeltildi (sessiz veri kaybi). Canli DB: event_type NULL 404->387, 19 satir etiketlendi. Hedefli suret 118 passed. D-193 notu: kod once stash'e dustu, kanitli sekilde geri yuklendi.",
+    "source": "ic",
+    "from_agent": "orkestrator",
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-TSG-ESLEME-CASE-01.md",
+    "talimat": "BORC-TSG-ESLEME-CASE-01 (D-260 borc) ile basla. 306 bos etiket, 20 dolu ama case-mismatch. Normalize -> canli olcum (D-238, D-288).",
+    "dependencies": []
+  },
+  {
+    "task_id": "VERI-SEMA-DOGRULA-01",
+    "baslik": "Şema Migrasyon Tutarsızlığını Düzelt (V7)",
+    "sahip": "salih",
+    "durum": "done",
+    "oncelik": "P1",
+    "dosyalar": [
+      "src/company_master/schema/migrations/schema_versions.json",
+      "src/company_master/schema/migrations/0007_add_address_column.sql",
+      "src/company_master/schema/migrations/0013_job_intelligence.sql"
+    ],
+    "not": "MIGRATE-EXEC-02 (Kritik): schema_versions.json defterde V7 satırı dosya adını işaret ediyor. Gerçek 0007 ve 0013 dosyaları kontrol edilmeli. Tutarsızlık migrate.py koşturulurken hata verebilir. UTKU'nun 4 görevinin ön koşulu.",
+    "brief": "plans/brief_salih_VERI-SEMA-DOGRULA-01.md",
+    "talimat": "1. schema_versions.json V7 satırını aç; 2. Dosya adını kontrol et (0007_add_address_column.sql mevcut mu?); 3. 0007 ve 0013 dosyalarını karşılaştır (içerik aynı mı?); 4. migrate.py --validate çalıştır (stderr boş olmalı); 5. Kanıt: migrate.log. Kurallar: D-251 (goc defteri tek anlaticı), D-253 (iz doğrulanır).",
+    "dependencies": [],
+    "mod": "code",
+    "id": "VERI-SEMA-DOGRULA-01",
+    "bitis": "2026-10-01T17:19:04"
+  },
+  {
+    "task_id": "VERI-SEMA-DOGRULA-02",
+    "baslik": "Eksik Tablolar İçin Kod Taraması (entity_matches, api_usage_daily)",
+    "sahip": "yasu",
+    "durum": "done",
+    "oncelik": "P1",
+    "dosyalar": [
+      "src/",
+      "scripts/"
+    ],
+    "not": "entity_matches: 1 dosyada 2 SELECT (threshold_optimizer.py:31,44), INSERT YOK. api_usage_daily: 1 dosyada 3 SELECT (admin_kpi.py:108,115,313), INSERT YOK. Canli olcum: ikisi de tablo VAR, satir 0. Rapor: plans/rapor_yasu_VERI-SEMA-DOGRULA-02.md",
+    "brief": "plans/brief_yasu_VERI-SEMA-DOGRULA-02.md",
+    "talimat": "1. src/ ve scripts/ dizinlerinde grep: 'entity_matches' ve 'api_usage_daily' bul (hangi dosyalarda, kaç yerde?); 2. Her referans için konteksti yaz (ne işe yarıyor?); 3. Sonuç: plans/rapor_yasu_VERI-SEMA-DOGRULA-02.md dosyasına yazılacak. 4. Chat'e bildir. Kurallar: D-260 (beyan değil, kanıt), D-310 (web kazıması).",
+    "dependencies": [
+      "VERI-SEMA-DOGRULA-01"
+    ],
+    "bitis": "2026-10-01T17:58:34",
+    "mod": "code",
+    "id": "VERI-SEMA-DOGRULA-02",
+    "sonuc": "entity_matches: threshold_optimizer.py:31,44 (2 SELECT, INSERT yok). api_usage_daily: admin_kpi.py:108,115,313 (3 SELECT, INSERT yok). Iki tablo da semada VAR. Rapor: plans/rapor_yasu_VERI-SEMA-DOGRULA-02.md. Acik borc: yazici yok (D-236)."
+  },
+  {
+    "task_id": "VERI-SEMA-DOGRULA-03",
+    "baslik": "NACE Dil Kolonları Kontrol Raporu",
+    "sahip": "yasu",
+    "durum": "done",
+    "oncelik": "P2",
+    "dosyalar": [
+      "src/company_master/schema/migrations/0006_nace_details.sql",
+      "src/company_master/sunum.py"
+    ],
+    "not": "Brief varsayimi YANLIS: nace_codes CREATE TABLE 0002_relations.sql'de, 0006 sadece companies ALTER. Canli: 6 sutun, dil sutunu YOK. sunum.py:acilim_getir() 1 parametre, lang YOK, SELECT title. title verisi Ingilizce (docstring 'Turkce' diyor - D-260 ihlali). nace_codes 3319 satir, title bos 0, orphan 0. Rapor: plans/rapor_yasu_VERI-SEMA-DOGRULA-03.md",
+    "brief": "plans/brief_yasu_VERI-SEMA-DOGRULA-03.md",
+    "talimat": "1. 0006_nace_details.sql denetim: CREATE TABLE nace_codes içinde hangi sütunlar tanımlanmış? 2. sunum.py:250-276 denetim: acilim_getir() fonksiyonu kaç parametre, dil destekli mi? 3. Rapor: plans/rapor_yasu_VERI-SEMA-DOGRULA-03.md dosyasına yaz (eksik sütunlar, önerim, risk). 4. Chat'e bildir. Kurallar: D-238 (canlı ölçüm), D-260 (beyan değil).",
+    "dependencies": [
+      "VERI-SEMA-DOGRULA-02"
+    ],
+    "bitis": "2026-10-01T17:58:44",
+    "mod": "code",
+    "id": "VERI-SEMA-DOGRULA-03",
+    "sonuc": "nace_codes 0002_relations.sql:59'da, 7 sutun, dil sutunu YOK. acilim_getir() 1 parametre, lang YOK, SELECT title. Karar: dil kolonu eklenmiyor (D-236, tuketici yok). Rapor: plans/rapor_yasu_VERI-SEMA-DOGRULA-03.md"
+  },
+  {
+    "task_id": "ALTYAPI-EVREN-PRIVATE-DOGRULAMA",
+    "id": "ALTYAPI-EVREN-PRIVATE-DOGRULAMA",
+    "baslik": "[ALTYAPI] EVREN private eğitim hizmetini araştır → docs/EVREN_PRIVATE_EGITIM_DOGRULAMA.md (7d)",
+    "sahip": "yasu",
+    "oncelik": "P0",
+    "durum": "done",
+    "baslangic": "2026-10-01T16:59:48",
+    "bitis": "2026-10-01T20:31:32",
+    "dosyalar": [
+      "docs/EVREN_PRIVATE_EGITIM_DOGRULAMA.md"
+    ],
+    "not": "Teslim (yasu): EVREN'de private egitim YOK: 10 uc 404 + JS'te fine-tune/LoRA/peft 0 kez. EVREN GPU kiralamasi (Slurm+Apptainer 64x H200). Cikarma 1 Kasim'a kadar 0.00 CR. D-310 varsayiminin dayanagi yok; mulkiyet + veri silme yazili degil.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_ALTYAPI-EVREN-PRIVATE-DOGRULAMA.md",
+    "talimat": "1. evren.ssyz.org.tr/llm private fine-tune desteği var mı — canlı doğrula (D-238). 2. Ücretsiz dönem bitiş tarihi + sonrası fiyat. 3. Veri saklama/izolasyon şartları (KVKK). 4. Alternatif sağlayıcı karşılaştırması. 5. chat_gonder.py ile bildir. Kurallar: D-310, D-260 (beyan değil ölçüm). Brif: plans/brief_utku_ALTYAPI-EVREN-PRIVATE-DOGRULAMA.md",
+    "dependencies": [],
+    "sonuc": "OLCULDU (3 kanit katmani): (1) API 16 uc -> egitim uclari 404, /models katalogunda fine-tune alani YOK. (2) Panel API /training/jobs -> 401 = UC VAR, yetki yok. (3) Urun Sahibi panel ekrani: Egitim konsolu VAR, 6/64 GPU, 1020 CR; ama gorev tipleri Nesne Tespiti/Segmentasyon/Siniflandirma/Poz/Dondurulmus Kutu, model aileleri YOLO26..RT-DETR = TAMAMI GORU. (4) Yeni Veri Seti modali: Gorsel+Medikal AKTIF, Ses/METIN/Coklu SOLUK (pasif). KARAR: EVREN'de LLM/metin egitimi bugun KAPALI, imkansiz degil - Metin sekmesi yer tutuyor. D-310'un 'bedava donemde fine-tune' varsayimi CURUTULDU. Rapor: docs/EVREN_PRIVATE_EGITIM_DOGRULAMA.md bolum 6-7."
+  },
+  {
+    "task_id": "VERI-ODIN-EGITIM-VERISI-HAZIRLA",
+    "id": "VERI-ODIN-EGITIM-VERISI-HAZIRLA",
+    "baslik": "[VERI] Odin eğitim veri setini yaz → data/odin_training_data.csv (7d)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "iptal",
+    "baslangic": "2026-10-01T16:59:48",
+    "bitis": null,
+    "dosyalar": [
+      "data/odin_training_data.csv",
+      "scripts/odin_veri_hazirla.py",
+      "data/odin_veri_dogrulama_raporu.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "dependencies": [],
+    "brief": "plans/brief_utku_VERI-ODIN-EGITIM-VERISI-HAZIRLA.md",
+    "talimat": "IPTAL (D-310 duzeltmesi): EVREN'de metin modeli egitimi fiziken yok (10/10 API ucu 404 + panelde Metin kilitli). Yerine VERI-RAG-KORPUS-01 acildi."
+  },
+  {
+    "task_id": "ALTYAPI-ODIN-EGITIM-PIPELINE",
+    "id": "ALTYAPI-ODIN-EGITIM-PIPELINE",
+    "baslik": "[ALTYAPI] Odin eğitim hattını yaz → scripts/odin_training_pipeline.py (7d)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "iptal",
+    "baslangic": "2026-10-01T16:59:48",
+    "bitis": null,
+    "dosyalar": [
+      "scripts/odin_training_pipeline.py",
+      "data/models/odin_model.bin",
+      "data/odin_training_metrics.csv"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "dependencies": [
+      "VERI-ODIN-EGITIM-VERISI-HAZIRLA",
+      "ALTYAPI-ODIN-UYARLAMA-01"
+    ],
+    "brief": "plans/brief_utku_ALTYAPI-ODIN-EGITIM-PIPELINE.md",
+    "talimat": "IPTAL (D-310 duzeltmesi): fine-tune hatti yerine prompt+RAG. Yerine ALTYAPI-MIMIR-BAGLAM-01 acildi."
+  },
+  {
+    "task_id": "ALTYAPI-ODIN-DENETIM-RAPORU",
+    "id": "ALTYAPI-ODIN-DENETIM-RAPORU",
+    "baslik": "[ALTYAPI] Odin üretim öncesi GO/NO-GO kararını denetle → ALTYAPI-ODIN-DENETIM-RAPORU_2026-10-31_denetim.md (10d)",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-10-01T16:59:48",
+    "bitis": "2026-10-01T17:59:33",
+    "dosyalar": [
+      "data/orchestrator/ALTYAPI-ODIN-DENETIM-RAPORU_2026-10-31_denetim.md"
+    ],
+    "not": "Teslim (yasu): NO-GO: 5 on gorevin 5'i de plan durumunda; egitim verisi/pipeline/metrik/injection testi yok. K3+K4 kirmizal (calistirilmadi). Maskeleme mandal 6/6, Odin test 19/19 gecti. EVREN katalogunda fine-tune ucu yok.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "dependencies": [
+      "TEST-ODIN-PROMPT-INJECTION",
+      "ALTYAPI-ODIN-EGITIM-PIPELINE"
+    ],
+    "brief": "plans/brief_yasu_ALTYAPI-ODIN-DENETIM-RAPORU.md",
+    "talimat": "1. Dört kapı: VERİ (maskeleme/TCKN), GÜVENLİK (injection), KALİTE (metrik), MALİYET. 2. 10-14 arası utku'nun veri teslimine ARA denetim yap — bozuk veriyle eğitim boş zaman. 3. Çıktı GO/NO-GO; NO-GO üretimi durdurur (D-239). 4. Her bulgu canlı ölçümle kanıtlanır (D-238, D-260). 5. chat_gonder.py ile bildir. Brif: plans/brief_yasu_ALTYAPI-ODIN-DENETIM-RAPORU.md",
+    "sonuc": "Denetim raporu teslim (370 satir). Bulgu 1: rag.py SHA-256 hash pseudo-embedder, ML degil. Bulgu 2: ML kutuphanesi kurulu degil. Bulgu 3: EVREN katalogunda fine-tune ucu YOK -> D-310 egitim premisi dogrulanmadi. Karar: NO-GO gerekcesi 'kanit yok'. Rapor dosya adindaki 2026-10-31 hedef tarihtir, uretim tarihi 2026-10-01 (D-183 notu)."
+  },
+  {
+    "task_id": "VERI-RAG-KORPUS-01",
+    "id": "VERI-RAG-KORPUS-01",
+    "baslik": "[VERI] Firma kayitlarini korpusa yaz -> vector/service.py (3s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "done",
+    "baslangic": "2026-10-01T20:52:26",
+    "bitis": "2026-10-02T18:00:31",
+    "dosyalar": [
+      "src/company_master/vector/service.py"
+    ],
+    "not": "Teslim (utku): Firma satiri -> korpus donusturucu (vector/service.py, 331 satir). KORPUS_ALANLARI beyaz liste 10 kolon; description cikarildi (632 dolunun 624'u adres deseni = D-247 ihlali), yerine sector_name (7595 dolu, adres deseni 0). TCKN deseni hex-duyarli (44 gercek kaydi yanlis reddediyordu). Canli Supabase olcumu (D-238): metin ortancasi 213.0 karakter (kriter >=80), kisisel veri 0/9412, chunk YAPILMAZ (448 embedder penceresi asilmadi, maks 306). Hedefli test 57 passed. Not: onceki oturumda teslim komutu hic calismamis; bu kayit ilk gercek teslim.",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_VERI-RAG-KORPUS-01.md",
+    "talimat": "Brief: plans/brief_utku_VERI-RAG-KORPUS-01.md. Beyaz liste alan secimi (siyah liste YASAK). D-247 kisisel veri taramasi 0 eslesme sarti. Veriyi DEGISTIRME, sadece oku+indeksle."
+  },
+  {
+    "task_id": "VERI-TOBB2B-BUYUTME-01",
+    "id": "VERI-TOBB2B-BUYUTME-01",
+    "baslik": "[VERI] TOBB2B pilot buyutme - tobb2b.org.tr ucretsiz, genis Id araligi (3-5g)",
+    "sahip": "yasu",
+    "oncelik": "P2",
+    "durum": "done",
+    "baslangic": "2026-10-02T16:35:02",
+    "bitis": "2026-10-02T18:22:32",
+    "dosyalar": [
+      "data/pilots/VERI-TOBB2B-BUYUTME-01/teklifler.json"
+    ],
+    "not": "Teslim (yasu): Pilot buyutuldu (D-319). Yeni Id araligi 21050-21149 tarandi; pilottaki 21000-21049 TEKRAR TARANMADI. 100 Id denendi -> 10 teklif dolu (%10 DOLULUK) vs PILOT %40 (20/50); 90 Id bos. Brif varsayimi '%40 buyuk olcekte gecerli' CURUTULDU; sebep olculmedi. Eslesme orani korundu 5/10 (%50) vs 11/20 (%55); mutlak firma 5 (pilot 1.575). Rate-limit zorunlu ARALIK_SN=1.0 kodda gorunur (kabul kriteri). R8 IP kontrolu: 3 hatada DUR. Kalici arac scripts/veri_tobb2b_buyutme.py. Cikti data/pilots/VERI-TOBB2B-BUYUTME-01/{teklifler,ozet}.json. Hub + bulgu defteri yazildi. EK OLCUM (--kuru, dosya yazilmadi): 500 Id (21150-21649) tarandi -> 0 TEKLIF. Nokta testleri (21060/21068=VAR, 21065/69/70/72/75/80/21100/21149=yok) TOBB2B kaynaginin Id 21068'de SONA ERDIGINI kanitladi. SONUC: %10 doluluk aralik seyrekligi degil, KAYNAK TUKENMESI; pilotun %40'i o araligin ozelligiydi, genellenmedi (D-260). KARAR: TOBB2B buyutme bu kapsamda KAPANDI; ek genisletme GEREKSIZ (kaynakta veri yok). Yeni kaynak acma ihsan kararina birakildi (brif kurali).",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_VERI-TOBB2B-BUYUTME-01.md",
+    "talimat": "D-319: tobb2b.org.tr ucretsiz onaylandi. Brief'i oku, pilotun denemedigi Id araligiyla basla, rate-limit zorunlu."
+  }
+]

@@ -1,0 +1,304 @@
+........................................................................ [  1%]
+........................................................................ [  2%]
+.......................................F................................ [  3%]
+........................................................................ [  5%]
+........................................................................ [  6%]
+........................................................................ [  7%]
+........................................................................ [  9%]
+........................................................................ [ 10%]
+.......................................................F................ [ 11%]
+........................................................................ [ 13%]
+......................F................................................. [ 14%]
+.F...................................................................... [ 15%]
+..F..................................................................... [ 17%]
+........................................................................ [ 18%]
+.....F................................................F............F.... [ 19%]
+........................F...F..........F...........F.................... [ 21%]
+........................................................................ [ 22%]
+............F........................................................... [ 23%]
+........................................................................ [ 25%]
+................................................s..............s........ [ 26%]
+........................................................................ [ 27%]
+........................................................................ [ 29%]
+........................................................................ [ 30%]
+........................................................................ [ 31%]
+........................................................................ [ 33%]
+........................................................................ [ 34%]
+...................................................................s.... [ 35%]
+........................................................................ [ 37%]
+........................................................................ [ 38%]
+........................................................................ [ 39%]
+........................................................................ [ 40%]
+........................................................................ [ 42%]
+........................................................................ [ 43%]
+........................................................................ [ 44%]
+........................................................................ [ 46%]
+........................................................................ [ 47%]
+........................................................................ [ 48%]
+........................................................................ [ 50%]
+........................................................................ [ 51%]
+........................................................................ [ 52%]
+........................................................................ [ 54%]
+........................................................................ [ 55%]
+........................................................................ [ 56%]
+........................................................................ [ 58%]
+........................................................................ [ 59%]
+........................................................................ [ 60%]
+........................................................................ [ 62%]
+........................................................................ [ 63%]
+..........F............................................................. [ 64%]
+........sssssss......................................................... [ 66%]
+........................................................................ [ 67%]
+........................................................................ [ 68%]
+............................F.F.............F........................... [ 70%]
+........................................................................ [ 71%]
+........................................................................ [ 72%]
+........................................................................ [ 74%]
+........................................................................ [ 75%]
+........................................................................ [ 76%]
+........................................................................ [ 77%]
+........................................................................ [ 79%]
+....................................................F....F.............. [ 80%]
+................................s....................................... [ 81%]
+........................................................................ [ 83%]
+........................................................................ [ 84%]
+........................................................................ [ 85%]
+........................................................................ [ 87%]
+.....................................s.................................. [ 88%]
+........................................................................ [ 89%]
+...........................................................F.FF......... [ 91%]
+........................................................................ [ 92%]
+........................................................................ [ 93%]
+........................................................................ [ 95%]
+........................................................................ [ 96%]
+........................................................................ [ 97%]
+........................................................................ [ 99%]
+...............................................                          [100%]
+================================== FAILURES ===================================
+E   AssertionError: ["C:\\\\Huginn Data Projesi\\\\Huginn Data Insights\\\\docs\\\\SAGLAYICI_OLCUMU_2026-10-03.md:64: 'Munin' -> Hesap: `yasua_Hugin_Munin`, plan **FREE**, ayl\u0131k tavan 10 $, kullan\u0131lm\u0131\u015f \u2248 0 $. Bu ay 2026-10-09'da s\u0131f\u0131rlan\u0131r. \u015eimdilik"]
+    assert ['C:\\Huginn ...ýr. Þimdilik'] == []
+      
+      Left contains one more item: "C:\\\\Huginn Data Projesi\\\\Huginn Data Insights\\\\docs\\\\SAGLAYICI_OLCUMU_2026-10-03.md:64: 'Munin' -> Hesap: `yasua_Hugin_Munin`, plan **FREE**, ayl\u0131k tavan 10 $, kullan\u0131lm\u0131\u015f \u2248 0 $. Bu ay 2026-10-09'da s\u0131f\u0131rlan\u0131r. \u015eimdilik"
+      Use -v to get more diff
+c:\\Huginn Data Projesi\\Huginn Data Insights\\tests\\test_marka_denetim_muafiyet.py:68: AssertionError: ["C:\\\\Huginn Data Projesi\\\\Huginn Data Insights\\\\docs\\\\SAGLAYICI_OLCUMU_2026-10-03.md:64: 'Munin' -> Hesap: `yasua_Hugin_Munin`, plan **FREE**, ayl\u0131k tavan 10 $, kullan\u0131lm\u0131\u015f \u2248 0 $. Bu ay 2026-10-09'da s\u0131f\u0131rlan\u0131r. \u015eimdilik"]
+E   AssertionError: hafiza 267 satir, tavan 200
+    assert 267 <= 200
+C:\Huginn Data Projesi\Huginn Data Insights\tests\test_d309_ders_kapisi.py:139: AssertionError: hafiza 267 satir, tavan 200
+E   assert 1 == 2
+     +  where 1 = len([{'task_id': 'A-1', 'durum': 'done', 'bitis': '2026-09-21T10:00:00'}])
+     +    where [{'task_id': 'A-1', 'durum': 'done', 'bitis': '2026-09-21T10:00:00'}] = <function loads at 0x000001821C42E020>('[\n  {\n    "task_id": "A-1",\n    "durum": "done",\n    "bitis": "2026-09-21T10:00:00"\n  }\n]')
+     +      where <function loads at 0x000001821C42E020> = json.loads
+     +      and   '[\n  {\n    "task_id": "A-1",\n    "durum": "done",\n    "bitis": "2026-09-21T10:00:00"\n  }\n]' = read_text(encoding='utf-8')
+     +        where read_text = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-3602/test_ikinci_calistirma_kayit_c0/task_board_arsiv_2026-Q3.json').read_text
+---------------------------- Captured stdout call -----------------------------
+3 kayit tasinacak, aktif panoda 2 kalacak.
+  2026-Q1: 1 kayit
+  2026-Q3: 1 kayit
+  2026-Q4: 1 kayit
+  YAZILDI task_board_arsiv_2026-Q1.json: +1 (toplam 1)
+  YAZILDI task_board_arsiv_2026-Q3.json: +1 (toplam 1)
+  YAZILDI task_board_arsiv_2026-Q4.json: +1 (toplam 1)
+AKTIF PANO: 2 kayit
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_gorev_kutusu_arsiv.py:44: assert 1 == 2
+E   AssertionError: down karsiligi olmayan up migration'lar: ['0051_kredi_cuzdani.sql']
+    assert ['0051_kredi_cuzdani.sql'] == []
+      
+      Left contains one more item: '0051_kredi_cuzdani.sql'
+      Use -v to get more diff
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_migration_down_standardi.py:28: AssertionError: down karsiligi olmayan up migration'lar: ['0051_kredi_cuzdani.sql']
+E   AssertionError: acik gorevlerde D-57 ihlali: {'SCRAPE-006-QUALITY-AUDIT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'SCRAPE-007-FINAL-REPORT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)'}
+    assert not {'SCRAPE-006-QUALITY-AUDIT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar...uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)'}
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_naming_audit.py:63: AssertionError: acik gorevlerde D-57 ihlali: {'SCRAPE-006-QUALITY-AUDIT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'SCRAPE-007-FINAL-REPORT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)'}
+E   AssertionError: 6 alan beklenir: 2026-10-03 | SCRAPE-005-KAZIMA-DOCKER-INTEGRATION | utku | COZULDU | D
+    assert 7 == 6
+     +  where 7 = len(['2026-10-03', 'SCRAPE-005-KAZIMA-DOCKER-INTEGRATION', 'utku', 'COZULDU', "DURUM GERCEGI - [3/4] COZULDU, TUM KALEMLER..._data.py ile tek yola alinacak - bunlar VERI-INGEST-ASO-GLOB-01'in devaminda, SCRAPE-005 teslimini blokelemiyor.", ...])
+C:\Huginn Data Projesi\Huginn Data Insights\tests\test_bulgu_defteri.py:269: AssertionError: 6 alan beklenir: 2026-10-03 | SCRAPE-005-KAZIMA-DOCKER-INTEGRATION | utku | COZULDU | D
+E   AssertionError: brief_yasu_VERI-SEMA-DOGRULA-03.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', '## Ajan chat zorunlu', 'ajan_chat.py komut referansý']
+      Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur.
+    assert not ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', '## Ajan chat zorunlu', 'ajan_chat.py komut referansý']
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_brief_sablon_denetim.py:102: AssertionError: brief_yasu_VERI-SEMA-DOGRULA-03.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', '## Ajan chat zorunlu', 'ajan_chat.py komut referansý']
+E   AssertionError: brief_yasu_VERI-SEMA-DOGRULA-02.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+      Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur.
+    assert not ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_brief_sablon_denetim.py:102: AssertionError: brief_yasu_VERI-SEMA-DOGRULA-02.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+E   AssertionError: brief_utku_VERI-INGEST-ASO-GLOB-01.md eksik bölüm (D-217): ['**Baþlýk:**']
+      Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur.
+    assert not ['**Baþlýk:**']
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_brief_sablon_denetim.py:102: AssertionError: brief_utku_VERI-INGEST-ASO-GLOB-01.md eksik bölüm (D-217): ['**Baþlýk:**']
+E   AssertionError: brief_salih_VERI-SEMA-DOGRULA-01.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+      Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur.
+    assert not ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_brief_sablon_denetim.py:102: AssertionError: brief_salih_VERI-SEMA-DOGRULA-01.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+E   AssertionError: brief_salih_VERI-SEMA-DOGRULA-02.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+      Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur.
+    assert not ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_brief_sablon_denetim.py:102: AssertionError: brief_salih_VERI-SEMA-DOGRULA-02.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+E   AssertionError: brief_salih_VERI-SEMA-DOGRULA-03.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+      Þablon: plans/_brief_sablon.md — baseline'a EKLEME, þablona uydur.
+    assert not ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_brief_sablon_denetim.py:102: AssertionError: brief_salih_VERI-SEMA-DOGRULA-03.md eksik bölüm (D-217): ['**Baþlýk:**', '**Öncelik:**', '**Hub:**', 'ajan_chat.py komut referansý']
+E   AssertionError: Migration 0051_kredi_cuzdani için down dosyasý bekleniyor, bulunamadý
+    assert 0 == 1
+     +  where 0 = len([])
+C:\Huginn Data Projesi\Huginn Data Insights\tests\test_schema_validation.py:63: AssertionError: Migration 0051_kredi_cuzdani için down dosyasý bekleniyor, bulunamadý
+E   AssertionError: Goc 0036'da dusurulen kolon uretim koduna geri sizdi (DB'de yok -> calisma aninda UndefinedColumn): scripts\yasu_canli_olcum_d260.py:47, scripts\yasu_canli_olcum_d260.py:48
+    assert not ['scripts\\yasu_canli_olcum_d260.py:47', 'scripts\\yasu_canli_olcum_d260.py:48']
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_dusurulen_kolon.py:57: AssertionError: Goc 0036'da dusurulen kolon uretim koduna geri sizdi (DB'de yok -> calisma aninda UndefinedColumn): scripts\yasu_canli_olcum_d260.py:47, scripts\yasu_canli_olcum_d260.py:48
+E   AssertionError: kanonik olmayan ALAN oneki: ['SCRAPE-006-QUALITY-AUDIT', 'SCRAPE-007-FINAL-REPORT']; izinli: UI, API, VERI, TEST, DOC, ALTYAPI, ORKESTRA
+    assert not ['SCRAPE-006-QUALITY-AUDIT', 'SCRAPE-007-FINAL-REPORT']
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_pano_d57_kalici.py:65: AssertionError: kanonik olmayan ALAN oneki: ['SCRAPE-006-QUALITY-AUDIT', 'SCRAPE-007-FINAL-REPORT']; izinli: UI, API, VERI, TEST, DOC, ALTYAPI, ORKESTRA
+E   AssertionError: aktif panoda D-57 ihlali:
+        SCRAPE-006-QUALITY-AUDIT: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+        ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+        SCRAPE-007-FINAL-REPORT: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+        ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+    assert not ['SCRAPE-006-QUALITY-AUDIT: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar s...uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)']
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_pano_d57_kalici.py:54: AssertionError: aktif panoda D-57 ihlali:
+E   Failed: DID NOT RAISE RuntimeError
+C:\Huginn Data Projesi\Huginn Data Insights\tests\vector\test_embedder.py:109: Failed: DID NOT RAISE RuntimeError
+E   AssertionError: assert 1 == 0
+     +  where 1 = <function cmd_teslim at 0x000001829024FF60>(Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=False))
+     +    where <function cmd_teslim at 0x000001829024FF60> = gk.cmd_teslim
+     +    and   Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=False) = _args()
+---------------------------- Captured stderr call -----------------------------
+[D-318 BULGU KAPISI] HATA: bulgu defterinde bu görev kaydi yok — teslim reddedildi.
+       Defter: data/orchestrator/bulgu_defteri.md (tek kanonik dosya)
+       Once bulgunu yaz, sonra teslim et:
+       python scripts/bulgu_defteri.py ekle --task-id TEST-B14-01 --rol utku \
+         --ozet "..." --karar "D-NNN | kapandi:<kanit>" --renk oneri|dikkat|acil|tamam
+       Bulgun yoksa: --ozet "bulgu yok, nedeni" --karar "red: <gerekce>"
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_gorev_kutusu_hafiza.py:70: AssertionError: assert 1 == 0
+E   AssertionError: assert 1 == 0
+     +  where 1 = <function cmd_teslim at 0x000001829024FF60>(Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=True))
+     +    where <function cmd_teslim at 0x000001829024FF60> = gk.cmd_teslim
+     +    and   Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=True) = _args(zorla=True)
+---------------------------- Captured stderr call -----------------------------
+[D-318 BULGU KAPISI] HATA: bulgu defterinde bu görev kaydi yok — teslim reddedildi.
+       Defter: data/orchestrator/bulgu_defteri.md (tek kanonik dosya)
+       Once bulgunu yaz, sonra teslim et:
+       python scripts/bulgu_defteri.py ekle --task-id TEST-B14-01 --rol utku \
+         --ozet "..." --karar "D-NNN | kapandi:<kanit>" --renk oneri|dikkat|acil|tamam
+       Bulgun yoksa: --ozet "bulgu yok, nedeni" --karar "red: <gerekce>"
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_gorev_kutusu_hafiza.py:80: AssertionError: assert 1 == 0
+E   AssertionError: D-220 Kural 4: yasak ad kalýbý 16 dosyada, üst sýnýr 15.
+      Yeni ihlal: _eski/_yeni/_kopya/_final/_v2 yasak — git geçmiþi bu iþi yapar.
+      ADIM8_FINAL_RAPOR.md
+      AI proje v1/V10/03_mimari/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md
+      AI proje v1/V10/04_karþýlaþtýrmalar/01_v9_ile_karsilastirma.md
+      data/orchestrator/ADIM_7_8_9_FINAL_OZET.md
+      data/orchestrator/ALTYAPI-VERI-GORUNURLUK-01_TAMAMLANDI_2026-09-24_FINAL.md
+      data/orchestrator/GRAPH-FINAL-DOGRULA_rapor_2026-09-21.md
+      data/orchestrator/PLAN_YENÝ_AÞAMA_2026-09-23.md
+      data/orchestrator/SPRINT-FINAL-METRIK-2026-09-21.md
+      data/orchestrator/SPRINT-FINAL-OZET-2026-09-21.md
+      data/orchestrator/VAULT-XREF-DUBLO-RAPOR-FINAL_2026-09-21_orkestrator.md
+      docs/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md
+      docs/plans/NAV-PLAN-01_v4.md
+      plans/_arsiv_brief/brief_utku_DASH-UX-02a-v1.md
+      plans/_arsiv_brief/brief_utku_DASH-UX-02a-v2.md
+      plans/_arsiv_brief/brief_utku_DOC-ADMIN-V9-KUTUCUK-24.md
+      salih_v4_arsiv.md
+    assert 16 <= 15
+     +  where 16 = len(['ADIM8_FINAL_RAPOR.md', 'AI proje v1/V10/03_mimari/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md', 'AI proje v1/V10/04_ka...I-VERI-GORUNURLUK-01_TAMAMLANDI_2026-09-24_FINAL.md', 'data/orchestrator/GRAPH-FINAL-DOGRULA_rapor_2026-09-21.md', ...])
+C:\Huginn Data Projesi\Huginn Data Insights\tests\test_dokuman_politikasi.py:100: AssertionError: D-220 Kural 4: yasak ad kalýbý 16 dosyada, üst sýnýr 15.
+E   AssertionError: AGENTS.md'de adý geçip docs/BORC_DEFTERI.md'de olmayan 1 kimlik: ['BORC-CHAT-TEK-KANAL-01']. Borç kapatan/açan D-kaydý ayný turda defteri de güncellemeli.
+    assert not ['BORC-CHAT-TEK-KANAL-01']
+C:\Huginn Data Projesi\Huginn Data Insights\tests\test_dokuman_politikasi.py:147: AssertionError: AGENTS.md'de adý geçip docs/BORC_DEFTERI.md'de olmayan 1 kimlik: ['BORC-CHAT-TEK-KANAL-01']. Borç kapatan/açan D-kaydý ayný turda defteri de güncellemeli.
+E   AssertionError: D-218: salih_project_context.md §Ilgili Nodlar yok
+    assert '## Ilgili Nodlar' in "# salih_project_context.md — Oturum Hafýzasý (D-219)\n\nÞablon: [[Huginn Data Insights/_ajan_context_sablon]] · Tavan...inen Açýklar (kapsam dýþý backlog)\n\n- Tam suite 20 failed — görev `TEST-BACKLOG-20` (utku'da)\n\n## Sýk Komutlar\n\n"
+C:\Huginn Data Projesi\Huginn Data Insights\tests\test_dokuman_politikasi.py:199: AssertionError: D-218: salih_project_context.md §Ilgili Nodlar yok
+============================== warnings summary ===============================
+tests\test_secrets_rotation.py:174
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\test_secrets_rotation.py:174: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration
+
+tests/company_master/test_ankara_osb.py: 15 warnings
+  C:\Huginn Data Projesi\Huginn Data Insights\src\company_master\seed\seed_ankara_osb.py:148: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.utcnow().isoformat()
+
+tests/test_benchmark.py: 100 warnings
+tests/company_master/test_web_app.py: 1 warning
+tests/test_api_integration.py: 2 warnings
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3620: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now_iso = datetime.utcnow().isoformat()
+
+tests/test_veri_denetim_d303.py::TestCaprazKuraliYanlisAlarm::test_dosya_ici_capraz_kurali_temiz
+tests/test_veri_denetim_d303.py::TestCanliDizi::test_hicbir_url_bos_degil
+tests/test_ostim_d300_temizlik.py::TestDizinButunlugu::test_hicbir_adres_cok_uzun
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\fixtures.py:1313: PytestRemovedIn10Warning: Class-scoped fixture defined as instance method is deprecated.
+  Instance attributes set in this fixture will NOT be visible to test methods,
+  as each test gets a new instance while the fixture runs only once per class.
+  Use @classmethod decorator and set attributes on cls instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method
+    fixturefunc = resolve_fixture_function(fixturedef, request)
+
+tests/test_mcp_transport.py::TestHTTPTransport::test_http_list_tools
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydantic_settings\sources\utils.py:47: IncompleteFieldDefinitionWarning: Field 'lifespan' has an incomplete definition: its annotation contains an unresolved forward reference, so settings sources may fail to correctly resolve its value. Call `model_rebuild()` on the model where the field is defined, once all the referenced types are defined.
+    warnings.warn(
+
+tests/test_auth_lockout.py: 10 warnings
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\sqlalchemy\engine\default.py:952: DeprecationWarning: The default datetime adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+    cursor.execute(statement, parameters)
+
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+  C:\Huginn Data Projesi\Huginn Data Insights\tests\test_job_intelligence_e2e.py:370: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    sig.setdefault("detected_at", datetime.utcnow() - timedelta(days=1))
+
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+  C:\Huginn Data Projesi\Huginn Data Insights\src\company_master\intelligence\job_intelligence\pipeline\scorer.py:28: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return datetime.utcnow()
+
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+  C:\Huginn Data Projesi\Huginn Data Insights\tests\test_job_intelligence_e2e.py:321: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "detected_at": datetime.utcnow() - timedelta(days=1),
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3323: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3358: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    start_date = datetime.utcnow().date() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_calculate_ltv_basic
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3259: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_by_tier
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3395: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff_30 = datetime.utcnow() - timedelta(days=30)
+
+tests/test_admin_ltv_cac.py::test_calculate_cac_basic
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3298: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_marka_denetim_muafiyet.py::test_kok_denetimi_temiz - Assert...
+FAILED tests/test_d309_ders_kapisi.py::test_hafiza_tavani_asmiyor - Assertion...
+FAILED tests/test_gorev_kutusu_arsiv.py::test_ikinci_calistirma_kayit_cogaltmaz
+FAILED tests/test_migration_down_standardi.py::test_her_up_icin_tam_bir_down
+FAILED tests/test_naming_audit.py::test_acik_gorevlerde_yeni_d57_ihlali_yok
+FAILED tests/test_bulgu_defteri.py::test_gercek_defter_kurallara_uyuyor - Ass...
+FAILED tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_VERI-SEMA-DOGRULA-03.md]
+FAILED tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_VERI-SEMA-DOGRULA-02.md]
+FAILED tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-INGEST-ASO-GLOB-01.md]
+FAILED tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_salih_VERI-SEMA-DOGRULA-01.md]
+FAILED tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_salih_VERI-SEMA-DOGRULA-02.md]
+FAILED tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_salih_VERI-SEMA-DOGRULA-03.md]
+FAILED tests/test_schema_validation.py::test_migration_down_files_content - A...
+FAILED tests/test_dusurulen_kolon.py::test_dusurulen_kolonlar_uretim_kodunda_yok
+FAILED tests/test_pano_d57_kalici.py::test_alan_oneki_kanonik - AssertionErro...
+FAILED tests/test_pano_d57_kalici.py::test_aktif_gorevler_d57_gecer - Asserti...
+FAILED tests/vector/test_embedder.py::test_embedder_client_uyuzsuz - Failed: ...
+FAILED tests/test_gorev_kutusu_hafiza.py::test_hub_izi_varsa_teslim_gecer - A...
+FAILED tests/test_gorev_kutusu_hafiza.py::test_zorla_gecerse_panoya_atlandi_islenir
+FAILED tests/test_dokuman_politikasi.py::test_kural4_yasak_ad_kalibi_artmiyor
+FAILED tests/test_dokuman_politikasi.py::test_d272_borc_defteri_eksiksiz - As...
+FAILED tests/test_dokuman_politikasi.py::test_d320_ajan_context_dosyalari - A...
+22 failed, 5413 passed, 12 skipped, 146 warnings in 237.00s (0:03:57)

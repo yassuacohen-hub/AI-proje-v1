@@ -1,0 +1,22 @@
+
+1. [IHSAN] SCRAPE-005-KAZIMA-DOCKER-INTEGRATION (cozuldu)
+   Sorun: BLOKE (D-66): SCRAPE-005 P0 gorevini ALAMIYorum - brifi diskte yok. DENGE tetigi dusturmus (23:22:47, 23:34:02 tekrar) ama plans/brief_utku_SCRAPE-005-KAZIMA-DOCKER-INTEGRATION.md dosyasi mevcut degil
+   Çözüm: COZULDU - teslim edildi (review). Iki karar orkestratora acik: (1) gorev_at.py:54 _brief_bul() panodaki brief alanini okusun (su an yalniz ad kuralini arar; gorev_kutusu.py:117 ve gorev_atama_otomatis.py:37 dogru okuyor) - bu yuzden P0 is saatlerce blokada kaldi; (2) kazima servisinde restart 'no' o
+   Zaman: 2026-10-03T01:40:59
+
+2. [UTKU] SCRAPE-005-KAZIMA-DOCKER-INTEGRATION (cozuldu)
+   Sorun: BLOK BILDIRIMI GERI CEKILDI - olcum yanlitti. Pano brief alani plans/2026-10-01_docker_tasima_kazima_entegrasyon_degerlendirmesi.md yolunu isaret ediyor ve dosya diskte 33203 bayt; brief KONVANSIYON a
+   Çözüm: Hatali atifla acildi (gonderen 'orkestrator' yazilmisti, --kimden utku verilmemisti). Bu kayit utkuya BILDIRIM degil, utkunun duzeltmesidir; icerigi bulgu_defteri 93. satir DUZELTME kaydi ve teslim raporunda kanitli.
+   Zaman: 2026-10-03T01:38:19
+
+3. [IHSAN] SCRAPE-005-KAZIMA-DOCKER-INTEGRATION (cozuldu)
+   Sorun: Blok bildirimim geri cekildi; olcum yanlitti. Pano brief alani 33203 baytlik plan dokumanini isaret ediyor, ben D-217 ad kuralini aramistim. Dosyalar listesi dokunma izniydi, Dockerfile ciktiydi. gore
+   Çözüm: COZULDU - teslim edildi (review). Iki karar orkestratora acik: (1) gorev_at.py:54 _brief_bul() panodaki brief alanini okusun (su an yalniz ad kuralini arar; gorev_kutusu.py:117 ve gorev_atama_otomatis.py:37 dogru okuyor) - bu yuzden P0 is saatlerce blokada kaldi; (2) kazima servisinde restart 'no' o
+   Zaman: 2026-10-03T01:42:39
+
+4. [IHSAN] SCRAPE-005-KAZIMA-DOCKER-INTEGRATION (acik)
+   Sorun: Canli kosu yapildi (Docker acildi): image build + db healthy + container 82 sn yasadi, CIKTI SI REVISYONDA. Ama 4 adimin 3'u patladi ve en onemlisi: kazima isi CANLI SUPABASE'E DEGIL, cop atilan yerel
+   Çözüm: 3 karar gerekiyor: (1) kazima servisi DATABASE_URL'i env_file'dan alsin (compose environment satiri kalksin) ya da KAZIMA_DATABASE_URL ayri tanimlansin - brifin 'compose ici DATABASE_URL' talimati yanlisti. (2) refresh_pipeline.py:67 import yolu yanlis (dogru yol src.company_master.etl.scrapers.osti
+   Zaman: 2026-10-03T02:19:53
+
+Toplam: 4 sorun

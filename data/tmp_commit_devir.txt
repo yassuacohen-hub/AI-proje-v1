@@ -1,0 +1,21 @@
+warning: in the working copy of 'AGENT_SYNC.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/file_locks.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/gorev_panosu.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/task_board.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/triggers/ihsan.jsonl', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/triggers/salih.jsonl', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/triggers/utku.jsonl', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/triggers/yasu.jsonl', CRLF will be replaced by LF the next time Git touches it
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 26.99s
+[chore/monorepo-merge fa091f3] orkestra: 6 gorev utku/yasu'ya toplu devir (toplu_gorev_at + brifler)
+ 16 files changed, 678 insertions(+), 28 deletions(-)
+ create mode 100644 data/orchestrator/devir_2026-10-03.json
+ create mode 100644 plans/brief_utku_TEST-SIMULASYON-B17-KIRIK-01.md
+ create mode 100644 plans/brief_utku_VERI-APIFY-BUTCE-01.md
+ create mode 100644 plans/brief_utku_VERI-OSTIM-HREF-FILTRE-01.md
+ create mode 100644 plans/brief_yasu_ALTYAPI-9ROUTER-ANAHTAR-01.md
+ create mode 100644 plans/brief_yasu_ALTYAPI-OPENROUTER-ARAC-01.md
+ create mode 100644 plans/brief_yasu_VERI-PAKET-FIYAT-SENKRON-01.md
+ create mode 100644 scripts/toplu_gorev_at.py

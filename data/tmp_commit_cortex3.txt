@@ -1,0 +1,6 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 22.30s
+TAHSIS EDILMEMIS KARAR NUMARASI: D-217
+Once al: python scripts/karar_no.py --al
+(Uc kez ayni numara iki karara gitti: D-281, D-301, D-303.)

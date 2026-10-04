@@ -1,0 +1,33 @@
+ M data/orchestrator/AGENT_SYNC.md
+A  data/orchestrator/SCRAPE-001-DOCKER-SETUP_rapor_2026-10-02_uretim.md
+A  data/orchestrator/SCRAPE-005-KAZIMA-DOCKER-INTEGRATION_rapor_2026-10-02_uretim.md
+ M data/orchestrator/VERI-RAG-KORPUS-01_rapor_2026-10-02_uretim.md
+A  data/orchestrator/VERI-RISK-MOTORU-01_rapor_2026-10-02_uretim.md
+A  data/orchestrator/VERI-SKOR-MOTORU-01_rapor_2026-10-02_uretim.md
+A  data/orchestrator/VERI-TENDER-KOLON-01_rapor_2026-10-02_uretim.md
+A  data/orchestrator/VERI-TSG-ESLEME-CASE-01_rapor_2026-10-02_uretim.md
+ M data/orchestrator/ajan-chat.jsonl
+A  data/orchestrator/ajan-chat.jsonl.bak_2026-10-02
+A  data/orchestrator/ajanlar/ajan_utku.json
+ M data/orchestrator/apify_webhook_dlq.jsonl
+ M data/orchestrator/benchmark/CL-02_benchmark_raporu.json
+A  data/orchestrator/bulgu_defteri.md
+ M data/orchestrator/chat/messages.jsonl
+ M data/orchestrator/file_locks.json
+ M data/orchestrator/gorev_panosu.md
+ M data/orchestrator/onay_kuyrugu.json
+A  data/orchestrator/osb_temizlik_raporu_2026-10-01.md
+ M data/orchestrator/sync_report.json
+ M data/orchestrator/task_board.json
+ M data/orchestrator/task_board_arsiv_2026-Q3.json
+A  data/orchestrator/task_board_arsiv_2026-Q4.json
+ M data/orchestrator/trigger_log.jsonl
+ M data/orchestrator/triggers/ihsan.jsonl
+ M data/orchestrator/triggers/salih.jsonl
+ M data/orchestrator/triggers/utku.jsonl
+ M data/orchestrator/triggers/yasu.jsonl
+ M src/company_master/orchestrator/trigger.py
+ M tests/test_gorev_trigger.py
+?? data/orchestrator/SCRAPE-005-KAZIMA-DOCKER-INTEGRATION_karar_2026-10-03.md
+?? scripts/chat_satir_oku.py
+?? scripts/tetik_teslim_geri_al.py

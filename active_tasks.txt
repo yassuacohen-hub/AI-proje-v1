@@ -1,0 +1,4 @@
+VERI-02 | P1 | aktif | [VERI] OSB ihale izleyicisini yaz → src/company_master/etl/scrapers/osb_tender_monitor.py (3s)
+VERI-NACE-COKLU-01 | P1 | aktif | [VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)
+VERI-02 | P1 | aktif | [VERI] OSB ihale izleyicisini yaz → src/company_master/etl/scrapers/osb_tender_monitor.py (3s)
+VERI-NACE-COKLU-01 | P1 | aktif | [VERI] Çoklu NACE kodunu yaz → company_industries.is_primary (3s)

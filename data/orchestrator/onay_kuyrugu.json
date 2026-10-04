@@ -3069,5 +3069,238 @@
     "onaylayan": "orkestrator",
     "onay_tarihi": "2026-10-03T16:58:25",
     "red_nedeni": "REDDEDILDI: canli kosu 1/4, kazima yerel db'ye yazdi. 3 karar: (1) compose environment DATABASE_URL satiri KALKSIN, env_file tek kaynak; (2) refresh_pipeline.py:67 import src.company_master.etl.scrapers.ostim_detail_scraper; (3) restart no ONAY. Kabul: scrape_all() hata yutmasin, canli 4/4 + Supabase psql olcumu. Detay: data/orchestrator/SCRAPE-005-KAZIMA-DOCKER-INTEGRATION_karar_2026-10-03.md"
+  },
+  {
+    "task_id": "ALTYAPI-KREDI-CUZDANI-01",
+    "ajan": "yasu",
+    "ozet": "F3 kredi cuzdani: 0051 semasi (kullanim_log + kredi_hareket, UUID FK, source_name) + kredi.py 55 satir (bakiye, dusebilir_mi, kullanim_yaz, KrediYetersiz) + test 4/4. Yazma kapisi dogrulandi: 0 bakiyeyle 30 harcama reddedildi.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-03T20:41:46",
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-10-04T00:36:09"
+  },
+  {
+    "task_id": "SCRAPE-005-KAZIMA-DOCKER-INTEGRATION",
+    "ajan": "utku",
+    "ozet": "4/4 adim yesil. [3/4] ingest_aso yeniden yazildi: glob yerine tek dosya aso_full.jsonl, alan eslesmesi unvan->legal_name (eski 'Firma Adi' anahtari hic uretilmiyordu), ON CONFLICT (legal_name) DO NOTHING (append batch'i ilk mukerrerde patlatiyordu), batch ici casefold tekillestirme, tax_number ve data_quality_score yazilmiyor (D-246/D-259), tasfiye oneki soyulmuyor (D-264). Canli Supabase olcumu: 1091 okundu -> 722 yazilabilir -> 711 eklendi, 11 mevcutla eslesti, companies 9412 -> 10123, bos unvan 0, 2. kosuda eklenen 0 (idempotent). Yedek alinmadi: ekleme-tekil is, hicbir satir silinmiyor. Test: tests/test_ingest_aso_glob.py 13 test; toplam 83 yesil (13+36 kabul+34 mandal). Tam suit regresyonsuz (27F+1E baseline ile birebir ayni). Onceki turlarda docker-compose.yml, refresh_pipeline.py ve pipeline.py duzeltildi, scrape_audit_log yazimi KazimaYazici ile baglandi (goc 0050). Utkunun ajan hafizasina bu turun 3 hatasi yazildi.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-03T20:57:06",
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-10-04T00:33:57"
+  },
+  {
+    "task_id": "TEST-SIMULASYON-B17-KIRIK-01",
+    "ajan": "utku",
+    "ozet": "22 passed (tests/test_gorev_kutusu_cli.py 18 + tests/test_gorev_kutusu_simulasyon.py 4). D-318 bulgu kapisi testi kirittiydi; duzeltme monkeypatch ile yapildi (gk.bulgu.task_var_mi -> True). ASIL BULGU: test_cmd_teslim_hata da ayni kapidan gecip YANLIS SEBEPLE yesildi - D-318 kapisi onden rc=1 donduruyor, cift teslim reddi hic denenmiyordu. Kapik atlatmak kapiyi sessizce kapatabilirdi; kapinin kendisi icin test_cmd_teslim_bulgu_kapisi_reddeder eklendi. gorev_kutusu.py simulasyon cikisi 1 (uyari: 37 gorev hafiza izsiz), hata degil. BULGU: tests/test_gorev_kutusu_hafiza.py ayni kok nedenle 2 kirmizi ama benim kilitli degil - dokunulmadi, TEST-GOREV-KUTUSU-HAFIZA-D318-01 olarak kayit altina alindi. Rapor: data/orchestrator/TEST-SIMULASYON-B17-KIRIK-01_rapor_2026-10-03_uretim.md.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-03T21:04:17",
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-10-04T00:34:19"
+  },
+  {
+    "task_id": "ALTYAPI-MIMIR-HABER-KUSU-01",
+    "ajan": "utku",
+    "ozet": "KAYNAK_HARITASI 3->7 adres (38 aday 3 tur olculdu, yalniz 200+gercek icerik); KAYNAK_PAKET_ADI kopru noktasi; docs/HABER_KUSU_KAYNAK_OLCUMU.md; 42 test yesil",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-03T21:26:35",
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-10-04T00:34:46"
+  },
+  {
+    "task_id": "VERI-OSTIM-HREF-FILTRE-01",
+    "ajan": "utku",
+    "ozet": "OSTIM web_sitesi alani kaynakta HIC YOK: 1555 dolu kaydin 1555'i OSB portal adresi (yanlis-pozitif %100). Bloklist 9->36, etiket-ankrajli cikarim, kok URL kabul. Asil bulgu: olcum araci kural kopyasi tasiyordu (140/%9 derken gercek 1555/%100) - artik ureticiden ithal ediyor. Pilot 100 A.S. -> 0 dolu; 10/10 canli sayfa 0/10 etiketli. Kanonik 1555 satira dokunulmadi (KAHIN karari).",
+    "ciktilar": [
+      "src/company_master/etl/scrapers/ostim_detail_scraper.py",
+      "tests/test_ostim_detail_scraper.py",
+      "scripts/ostim_href_olc.py",
+      "scripts/ostim_pilot_firma_sec.py",
+      "scripts/ostim_pilot_denetim.py",
+      "scripts/ostim_websitesi_temizle.py",
+      "data/orchestrator/VERI-OSTIM-HREF-FILTRE-01_rapor_2026-10-03_uretim.md"
+    ],
+    "teslim_tarihi": "2026-10-03T22:26:47",
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-10-04T00:35:25"
+  },
+  {
+    "task_id": "VERI-APIFY-BUTCE-01",
+    "ajan": "utku",
+    "ozet": "Apify aylik harcama API'den olculdu: 0.0000152605 USD / tavan 10 USD (zaten 10, konsola dokunulmadi). scripts/apify_butce_olc.py (GET-only, rc=0/2/3, /v2 duzeltmesi) + 17 test + docs/APIFY_BUTCE.md. Kanit: 17 passed, canli rc=0.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-03T22:47:47",
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-10-04T00:35:45"
+  },
+  {
+    "task_id": "VERI-INGEST-ASO-GLOB-01",
+    "ajan": "utku",
+    "ozet": "ASO ingest iki kok neden duzeltildi: (1) glob daraltildi - glob(*.csv)+glob(*.json) yalniz rapor dosyasini buluyordu, ham aso_full.jsonl (1091 satir) hic okunmamisti; (2) import koku goreliye cevrildi, refresh_pipeline 3/4 -> 4/4. Canli Supabase: 1091 okundu -> 722 yazilabilir -> 2 kosuda 0 eklendi (idempotens), companies 10123 sabit, bos unvan 0. 69 test yesil; import mandali kirilarak dogrulandi (2 failed -> 16 passed).",
+    "ciktilar": [
+      "data/orchestrator/VERI-INGEST-ASO-GLOB-01_rapor_2026-10-03_uretim.md"
+    ],
+    "teslim_tarihi": "2026-10-03T23:26:08",
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-10-04T00:35:05"
+  },
+  {
+    "task_id": "ALTYAPI-9ROUTER-ANAHTAR-01",
+    "ajan": "yasu",
+    "ozet": "scripts/ninerouter_anahtar_guncelle.py yazildi: .env NINEROUTER_KEY atomik gunceller (yedek -> tmp -> os.replace), --kuru modu, cift satir tespitinde rc=3, yazma sonrasi dogrulama + gerekirse geri yukleme. Anahtar hicbir ciktida yazilmaz, yalniz ilk 4 karakter (D-288). D-66 varsayimi dogrulandi: .env icinde anahtar tek satir. Test tests/test_ninerouter_anahtar_guncelle.py 10/10, test_yazma_kapisi.py 7/7. Ayrica SABLON_WEB D-303 tavan engeli cozuldu: 25 -> 23, 2 inceleme artigi arsive tasindi, tavan gevsetilmedi.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-04T00:26:20",
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-10-04T00:36:28"
+  },
+  {
+    "task_id": "ALTYAPI-AJAN-CAKISMA-01",
+    "ajan": "yasu",
+    "ozet": "scripts/ajan_cakisma_kilidi.py: eszamanli ajan calismasinda kilit sorgusu ve kapisi. FAZ-0'da 130 dosya kilit sorgulanmadan tasindi; commit kapisi (kilit_zorla.py D-284) zarar commit'ten once diskte oldugu icin gec kaldi. Modul: --ajan, --kayitli-son N, --denetle YOL (rc=3 red), --hareket-uyari, kapi_gecer(). D-211: kilit_zorla'dan import, kopya yok. IZIN_KILIT_ESIK koda gomulu degil; varsayilan 5 dakika. Olcum: --ajan yasu 10 aktif kilit; tests/conftest.py salih kilidi rc=3 RED; kendi kilidi rc=0; 24 saatten eski kilit dusuyor. Test 12/12 passed. Hub: hubs/ADMIN_DASHBOARD_HUB.md Kapanan isler. Kalan: gorev_at.py'ye kapi baglanmasi (Faz B).",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-04T00:36:53",
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-10-04T00:42:55"
+  },
+  {
+    "task_id": "VERI-OSTIM-HREF-FILTRE-01",
+    "ajan": "utku",
+    "ozet": "OSTIM web_sitesi kaynak sizintisi olculdu (1555/1555 yalan-pozitif %100); kaynak bazli kapatma karari KAHIN onayiyla rapora yazildi (olcum tablosu + tam kapsamada %3,8 puan etkisi, alan agirligi 0,3/10); ayri zenginlestirme gorevi icin brif yazildi, D-58 kapisi nedeniyle ihsan'a acma komutu iletildi.",
+    "ciktilar": [
+      "data/orchestrator/VERI-OSTIM-HREF-FILTRE-01_rapor_2026-10-03_uretim.md",
+      "plans/brief_utku_VERI-WEB-SITESI-ZENGINLESTIR-01.md"
+    ],
+    "teslim_tarihi": "2026-10-04T00:45:15",
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-10-04T00:49:25"
+  },
+  {
+    "task_id": "SCRAPE-003-9ROUTER-JINA-FALLBACK",
+    "ajan": "yasu",
+    "ozet": "scripts/kazima_jina_fallback.py: dogrudan fetch basarisiz olunca 9Router /v1/web/fetch (Jina-Reader) ile yeniden deneyen cekim kapisi. izin -> dogrudan -> jina fallback -> 0050 yazimi. KRITIK: Jina vekil oldugu icin izin reddinde HIC denenmez. Canli olcum: ostim.org.tr/firmalar dogrudan yoldan 300 kart / 336783 bayt / kart_tipi=col-lg-4.mb-3, yazilan=1; 2. kosu yazilan=0 (idempotans kanitlandi). baskentosb.org.tr robots.txt cozulemiyor -> izin yok -> Jina denenmedi (vekil korumasi olcumle kanitlandi). Test tests/test_kazima_jina_fallback.py 9/9 passed. Hub: hubs/ADMIN_DASHBOARD_HUB.md Kapanan isler.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-04T00:51:30",
+    "durum": "onaylandi",
+    "onaylayan": "orkestrator",
+    "onay_tarihi": "2026-10-04T01:04:46"
+  },
+  {
+    "task_id": "UI-ADMIN-KAYNAKLAR-SAYFA-34",
+    "ajan": "utku",
+    "ozet": "Veri Kaynaklari sayfasi yazildi (admin_kaynaklar.py, 4 bolum: Durum Ozeti/Son Calismalar/Hatalar/Toplanan Sayfalar). 0050 kazima tablolarinin ilk okuyucusu - D-236 kapandi. Yazma yok, KazimaYazici tek yazici kaldi. Nav kaydi __init__.py:367-379 (veri_kalite, sira 5, min_rol admin). Canli olcum: audit_log=36, errors=2, pages=3; sayfa okuyuculari SQL ile birebir UYUM. Testler 10 passed + nav/IA 309 passed 3 skipped. kodlama_denetim 43 on-mevcut ihlal, bu gorevin dosyalari temiz. Streamlit 8501 yeniden basladi. Bulgular bulgu_defteri + chat; olcek tuzagi icin orkestrator karari bekleniyor.",
+    "ciktilar": [
+      "web_dashboard/tabs/admin_kaynaklar.py",
+      "web_dashboard/tabs/__init__.py",
+      "tests/test_admin_kaynaklar.py"
+    ],
+    "teslim_tarihi": "2026-10-04T01:05:49",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "SCRAPE-004-QWEN-SINIFLANDIRMA",
+    "ajan": "yasu",
+    "ozet": "scripts/kazima_qwen_classify.py: yapi bilinmeyen sayfalari 9Router uzerinden LLM ile NACE + unvan siniflandirir. KRITIK (D-245): hicbir model calismazsa veya cevap JSON degilse UYDURMA ETIKET YAZILMAZ; nace_kodu=None, etiket_bos=true doner. Model zinciri sirayla denenir (saglayici degisse kod degismez). Canli olcum: clinepass/cline-pass/mimo-v2.5 -> nace 74.90 (Is Guvenligi ve Danismanlik), unvan '06 SIHHAT GRUP IS GUVENLIGI OSGB DANISMANLIK TIC.LTD.STI.'; Qwen modelleri 503 dondu, MiMo calisiyor. Metin 3000 karaktere kirpilir (maliyet + KVKK). D-288: NINEROUTER_KEY ciktiya yazilmaz. Test tests/test_kazima_qwen_classify.py 11/11 passed. Hub: hubs/ADMIN_DASHBOARD_HUB.md Kapanan isler.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-04T01:13:37",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-ADMIN-CRAWL-TASI-35",
+    "ajan": "utku",
+    "ozet": "Crawl tetikleme/durdur paneli webhook_monitor.py:236-302den admin_kaynaklar.py:359a (_render_crawl_kontrolu) tasindi. CRAWL_STATUS_*/CRAWL_ENABLED/CRAWL_DURUM_IKONLARI + _crawl_is_enabled + _log_crawl_action tek tanim (D-211 ikiz yasagi); webhook_monitor.pyde import os ve 2 yardimci kaldirildi, yerine st.caption + st.link_button(tab_getir kaynaklar) yonlendirmesi. Panel Section seviye=3 alt basligi: Durum Ozeti sonrasi, Son Calismalar oncesi; BOLUMLere girmez, D-213 menu tekligi korunur. 7 davranis maddesi birebir korundu (4 durum degeri, ikon haritasi, CRAWL_ENABLED kapisi, admin_email yetki kapisi, baslat->calisiyor, iki asamali onayli durdur, session_state anahtarlari); 4 butona key= eklendi (DuplicateWidgetID onlemi). Test: 8 yeni test, kabul seti 213 passed / 2 skipped, py_compile OK, findstr Crawl Kontrol webhook_monitor.py = 0 satir, repo genelinde tek tanim dogrulandi. SSOT v2.8->v2.9 (s7 Veri Ops, s8.1 A8, s12 Kismi->Tam + G8 zincir 34->35->36, s14 changelog); hub :123 oncul + :226 B-14 kapanis; bulgu defteri 2 kayit; kodlama denetimi bu dosyalarda 0 ihlal (repo tabani 43->47, artan NACE/QWEN dosyalari baska ajanlara ait). Streamlit PID 24880 saglikli. Rapor: data/orchestrator/UI-ADMIN-CRAWL-TASI-35_rapor_2026-10-04_uretim.md",
+    "ciktilar": [
+      "web_dashboard/tabs/admin_kaynaklar.py",
+      "web_dashboard/tabs/webhook_monitor.py",
+      "tests/test_admin_kaynaklar.py",
+      "AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_dokumani.md",
+      "hubs/ADMIN_DASHBOARD_HUB.md",
+      "data/orchestrator/UI-ADMIN-CRAWL-TASI-35_rapor_2026-10-04_uretim.md"
+    ],
+    "teslim_tarihi": "2026-10-04T01:19:39",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-OPENROUTER-ARAC-01",
+    "ajan": "yasu",
+    "ozet": "OpenRouter araclari kalicilastirildi. (1) 5 adet or_*.py betigine docstring + utf-8 stdout sarmali eklendi (5/5, sozdizimi OK). (2) KRITIK DUZELTME: or_seckin.py ve or_kod_liste.py C:\\Users\\yasin\\AppData\\Local\\Temp uzerinden veri alisverisiyordu; Windows Temp temizlenince sessizce dosya hatasi veriyordu. Artik docs/raporlar/openrouter/ altina yaziyorlar; or_seckin.py katalog yoksa or_kod_liste.py'yi kendisi calistiriyor. Canli olcum: 278 model katalog uretildi, 80 satirlik seckin raporu yazildi. (3) Zamanlanmis gorev kuruldu ve dogrulandi: \\\\Huginn_Continue_Haftalik, sonraki calisma 5.10.2026 09:00, Status Ready/Enabled. schtasks /tr tirnak sorunu icin Python installer yazildi (scripts/zamanli_gorev_kur.py). D-288: anahtar degerleri cikti veya dosyada YOK. BILINEN SINIR: gorev 'No Start On Batteries' + 'Interactive only'. Hub: hubs/PLAN_STRATEGY_HUB.md Kapanan isler.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-04T01:30:32",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-ADMIN-SON-KAZIMA-KART-36",
+    "ajan": "utku",
+    "ozet": "KISMI: GIRIS_KARTLARI 4->5 kart (kaynaklar) + 1 yeni test. Olcum: tuple hic render edilmiyor (oltukod), tek st.link_button aksiyon seridi b1 Firmalar. Cizim icin 3 secenek ihsan'a acildi. Kolon timestamp (created_at degil). Kabul 204 passed 3 skipped.",
+    "ciktilar": [
+      "data/orchestrator/UI-ADMIN-SON-KAZIMA-KART-36_rapor_2026-10-04_uretim.md"
+    ],
+    "teslim_tarihi": "2026-10-04T01:31:11",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "VERI-PAKET-FIYAT-SENKRON-01",
+    "ajan": "yasu",
+    "ozet": "Paket fiyat senkronu olcumu ve duzeltmesi. OLCCUM: script HICBIR ZAMAN calismamis - ROOT = parent.parent.parent bir seviye fazla idi ve c:\\\\Huginn Data Projesi (repo disi) veriyordu; sys.path yanlis yone baktigi icin ModuleNotFoundError: company_master. paketler.py ayni ifadeyi kullanir ama 3 seviye derin oldugu icin dogru - bu yuzden gozden kacti. DUZELTME: sabit seviye yerine isaretci ile repo koku aramasi (src/company_master bulunan dizin), konum degisse de calisir. CANLI: --check yesil -> data/demo/fiyat_katalogu.json yazildi -> tekrar --check yesil. Katalog 4 tier: Temel 499, Standart 2999,Profesyonel 7999, Kurumsal 19999. TEST tests/test_paket_fiyat_senkron.py 5/5 passed. DERS: metin taramali test yerine calisma zamani olcumu kullanilmali (yorumda gecen ifade hatayi tetikliyordu). Hub: hubs/PLAN_STRATEGY_HUB.md Kapanan isler.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-04T01:34:41",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-ADMIN-ACIKLAMA-METIN-37",
+    "ajan": "utku",
+    "ozet": "37 aciklamadan 24'u jargonsuz Turkceye cevrildi (KPI/DLQ/webhook/ETL/ticket/churn/tenant/tier/feature flag). Hepsi <=60 karakter (olcum: 60+ = 0). Yeni mandal tests/test_dashboard_nav.py::test_aciklama_menusunde_jargon_yok KELIME SINIRI (\\b) ile: duz alt-dize kontrolu 'Pak-etl-er' kelimesini ETL sayiyordu (1 yanlisl pozitif olculdu). Kirma kaniti: gecici DLQ kondu -> kirmizi, geri alindi -> yesil. Kabul seti 226 passed 3 skipped. SSOT v2.11 + hub B-14.",
+    "ciktilar": [
+      "data/orchestrator/UI-ADMIN-ACIKLAMA-METIN-37_rapor_2026-10-04_uretim.md"
+    ],
+    "teslim_tarihi": "2026-10-04T01:40:46",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "ALTYAPI-GOREV-AT-KAPI-01",
+    "ajan": "yasu",
+    "ozet": "kapi_gecer() gorev_at akisina baglandi (on-kapi). gorev_at.py:44-48 import; cmd_at icinde tb.gorev_ekle ONCESI (:306-323): dosyalar bos degilse kapi_gecer(dosyalar, ajan=args.ajan); gecmezse 'HATA (kilit kapisi)' + exit 8; sonra hareket_uyarisi() yazilir ama atamayi durdurmaz. CIKIS KODU 8 - olcum: return 4 D-58 kapisi (:252,:344), return 2 PermissionError (:341), kullanilan 1-7; 8 serbest. KOK NEDEN: _lock_alan (task_board.py:587) BAYAT kilit kontrolu yapmiyordu, 24 saat once kilitleyip birakilmis dosya sonsuza kadar atamayi reddediyordu; kapi_gecer once gecerek bayat'i eliyor. _lock_alan DEGISTIRILMEDI (D-211 tek kaynak). TEST 31 passed: yeni tests/test_gorev_at_kilit_kapisi.py (11) + mevcut test_gorev_at_kapi.py (11) + test_ajan_cakisma_kilidi.py (9). Kanitli senaryolar: taze baska-ajan kilidi exit 8 ve pano bozuk kalmadi; bayat kilit gecti; hareket uyarisi yazdi ama atama oldu; dosya bosken kapi cagrilmadi; kapi gorev_ekle oncesi calisti. NOT: test_gorev_at_kapi.py zaten vardi ve baska goreve aitti (ORKESTRA-GOREV-KAPI-01 D-66/D-80), ustune yazmadim. Hub: hubs/ORKESTRASYON_AJANLAR_HUB.md Kapanan isler.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-04T02:44:48",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "UI-ADMIN-REHBER-ALAN-38",
+    "ajan": "utku",
+    "ozet": "Sekme rehberi tek kaynaga tasindi (TabTanimi.rehber + app.py:714-715 tek cizim); 7 okuyucuda _hg_rehber 0; 37 bolumun 12'si + 7 kokun tami rehberli. 7 yeni mandal (11->18, kirma denemesi rc=1); kabul seti 241 passed/3 skipped; tam surec 30 failed/5285 passed, bu gorevden kirmizi 0. SSOT v2.12, hub B-14, 5 bulgu, rapor yazildi.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-04T02:49:25",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01",
+    "ajan": "utku",
+    "ozet": "Ikiz ingest yolu kapandi: tek yol src/company_master/etl/ingest_aso.py, eslesme yalniz kesin (fuzzy LIKE 673/722 yanlis aday), source_records idempotent. 57 test yesil. aso_full_clean.jsonl canli bagimlilik nedeniyle tasinmadi (D-233). Canli ingest calistirilmadi.",
+    "ciktilar": [],
+    "teslim_tarihi": "2026-10-04T03:33:51",
+    "durum": "bekliyor"
+  },
+  {
+    "task_id": "VERI-WEB-SITESI-ZENGINLESTIR-01",
+    "ajan": "utku",
+    "ozet": "website_domain zenginlestirme kaynagi yazildi: unvan -> arama -> izin -> icerik dogrulama -> kabul() -> yalniz bos alana yazma. 4 yeni kapi (marka kalintisi, yurt, saf JSON, el_tasidi sayaci). Hedefli test 47 passed; canli korunma dolu 2780 / bos 7343 / provenance 0; pilot 40 hedef 0 yazilan 1 dogrulanan 78 el_tasidi. 35 aday siniflandirildi. NACE sektor kelimesi genislemesi olculdu ve ertelendi.",
+    "ciktilar": [
+      "src/company_master/etl/web_sitesi_zenginlestir.py",
+      "tests/test_web_sitesi_zenginlestir.py",
+      "scripts/genel_kelime_olcum.py",
+      "data/orchestrator/VERI-WEB-SITESI-ZENGINLESTIR-01_rapor_2026-10-04_uretim.md"
+    ],
+    "teslim_tarihi": "2026-10-04T12:10:32",
+    "durum": "onaylandi",
+    "onaylayan": "ihsan",
+    "onay_tarihi": "2026-10-04T17:01:04"
   }
 ]

@@ -202,7 +202,6 @@ def render_admin_realtime_tab() -> None:
     son_guncelleme = datetime.now().strftime("%H:%M:%S")
     # K3-10g: "Sekme rehberi" anahtarı tek ve sayfa altında (`app.REHBER_KEY`).
     # Modül kendi toggle'ını çizmez, yalnız okur. Literal: app.py import'u döngü yapar.
-    rehber = bool(st.session_state.get("_hg_rehber", False))
     col_btn, col_zaman = st.columns([1, 4], vertical_alignment="center")
     with col_btn:
         yenile = st.button(
@@ -219,19 +218,6 @@ def render_admin_realtime_tab() -> None:
         st.cache_data.clear()
         st.rerun()
 
-    if rehber:
-        st.info(
-            "**Bu ekran ne işe yarar?** Sistemin şu anki nabzını gösterir: firma "
-            "sayısı, sinyal hacmi ve veri kalitesi. \"Şu an ne oluyor?\" sorusu "
-            "için bakılacak yerdir.\n\n"
-            "**Nasıl kullanılır?** Otomatik yenilemeyi açarsanız seçtiğiniz "
-            "aralıkta sayfa tazelenir; kapalıyken 🔄 Veriyi Yenile ile elle "
-            "tazelersiniz.\n\n"
-            "**Veriler nereden gelir?** Doğrudan veritabanından (`companies`, "
-            "`company_signals`). Admin panelinde SSE kullanılmaz — mimari kural "
-            "gereği canlı akış yalnız müşteri panelindedir.\n\n"
-            f"**Dikkat:** Değerler {CACHE_TTL} saniyelik önbellekten okunur."
-        )
 
     render_auto_refresh()
 

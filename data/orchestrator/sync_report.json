@@ -1,20 +1,167 @@
 {
-  "timestamp": "2026-09-29T19:52:56",
+  "timestamp": "2026-10-02T22:30:41",
   "status": "ok",
   "uygula": false,
   "bulgular": [
     {
-      "tip": "stuck",
+      "tip": "kayit",
       "seviye": "uyari",
-      "task_id": "VERI-02",
-      "mesaj": "aktif / son hareket 2026-09-27T03:07",
+      "task_id": "VERI-NACE-KOLON-01",
+      "mesaj": "done ama utku context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "VERI-SEKTOR-01",
+      "mesaj": "done ama utku context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "VERI-KAYNAK-SIZINTI-01",
+      "mesaj": "done ama utku context dosyasında kayıt yok",
       "duzeltme": null
     },
     {
       "tip": "stuck",
       "seviye": "uyari",
-      "task_id": "VERI-NACE-COKLU-01",
-      "mesaj": "aktif / son hareket 2026-09-27T13:19",
+      "task_id": "ALTYAPI-AJAN-CAKISMA-01",
+      "mesaj": "plan / son hareket 2026-09-29T00:42",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "ALTYAPI-SKILL-YAPISI-01",
+      "mesaj": "done ama yasu context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "ALTYAPI-TICARET-KANIT-01",
+      "mesaj": "done ama yasu context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "VERI-OSTIM-TAM-TARAMA-01",
+      "mesaj": "done ama yasu context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "TSG-PILOT-20",
+      "mesaj": "done ama yasu context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "VERI-TOBB2B-KESISIM-01",
+      "mesaj": "done ama yasu context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "VERI-LONCA-FIRMA-01",
+      "mesaj": "done ama yasu context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "VERI-TSG-04-YAZICI-01",
+      "mesaj": "done ama utku context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "VERI-NACE-ACILIM-01",
+      "mesaj": "done ama utku context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "VERI-NACE-SOZLUK-DIL-01",
+      "mesaj": "done ama utku context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "VERI-TSG-ESLEME-CASE-01",
+      "mesaj": "done ama utku context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "VERI-SEMA-DOGRULA-01",
+      "mesaj": "done ama salih context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "VERI-SEMA-DOGRULA-02",
+      "mesaj": "done ama yasu context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "VERI-SEMA-DOGRULA-03",
+      "mesaj": "done ama yasu context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "stuck",
+      "seviye": "uyari",
+      "task_id": "ALTYAPI-ODIN-UYARLAMA-01",
+      "mesaj": "plan / son hareket 2026-10-01T16:59",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "ALTYAPI-EVREN-PRIVATE-DOGRULAMA",
+      "mesaj": "done ama yasu context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "stuck",
+      "seviye": "uyari",
+      "task_id": "TEST-ODIN-PROMPT-INJECTION",
+      "mesaj": "aktif / son hareket 2026-10-01T16:59",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "ALTYAPI-ODIN-DENETIM-RAPORU",
+      "mesaj": "done ama yasu context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kayit",
+      "seviye": "uyari",
+      "task_id": "VERI-RAG-KORPUS-01",
+      "mesaj": "done ama utku context dosyasında kayıt yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "stuck",
+      "seviye": "uyari",
+      "task_id": "ALTYAPI-MIMIR-BAGLAM-01",
+      "mesaj": "aktif / son hareket 2026-10-01T20:52",
       "duzeltme": null
     },
     {
@@ -30,48 +177,112 @@
       "task_id": "ALTYAPI-SKILL-YAPISI-01",
       "mesaj": "kuyruk=bekliyor ama pano=done — onay kaydı kapatılmadı",
       "duzeltme": null
+    },
+    {
+      "tip": "kuyruk",
+      "seviye": "uyari",
+      "task_id": "VERI-OSTIM-TAM-TARAMA-01",
+      "mesaj": "kuyruk=bekliyor ama pano=done — onay kaydı kapatılmadı",
+      "duzeltme": null
+    },
+    {
+      "tip": "kuyruk",
+      "seviye": "uyari",
+      "task_id": "VERI-IVEDIK-YENIDEN-01",
+      "mesaj": "kuyruk=bekliyor ama pano=done — onay kaydı kapatılmadı",
+      "duzeltme": null
+    },
+    {
+      "tip": "orphan",
+      "seviye": "uyari",
+      "task_id": "VERI-OSB-Tazelik-01",
+      "mesaj": "kuyrukta (onaylandi) var, panoda yok",
+      "duzeltme": null
+    },
+    {
+      "tip": "kuyruk",
+      "seviye": "uyari",
+      "task_id": "VERI-KAYNAK-SIZINTI-01",
+      "mesaj": "kuyruk=bekliyor ama pano=done — onay kaydı kapatılmadı",
+      "duzeltme": null
+    },
+    {
+      "tip": "kuyruk",
+      "seviye": "uyari",
+      "task_id": "VERI-TOBB2B-KESISIM-01",
+      "mesaj": "kuyruk=bekliyor ama pano=done — onay kaydı kapatılmadı",
+      "duzeltme": null
+    },
+    {
+      "tip": "kuyruk",
+      "seviye": "uyari",
+      "task_id": "VERI-KAYNAK-BAG-01",
+      "mesaj": "kuyruk=bekliyor ama pano=done — onay kaydı kapatılmadı",
+      "duzeltme": null
+    },
+    {
+      "tip": "kuyruk",
+      "seviye": "uyari",
+      "task_id": "TSG-PILOT-20",
+      "mesaj": "kuyruk=bekliyor ama pano=done — onay kaydı kapatılmadı",
+      "duzeltme": null
     }
   ],
   "gorevler": [
-    {
-      "id": "VERI-02",
-      "durum": "aktif",
-      "update": "2026-09-27T03:07"
-    },
-    {
-      "id": "VERI-NACE-COKLU-01",
-      "durum": "aktif",
-      "update": "2026-09-27T13:19"
-    },
-    {
-      "id": "VERI-KAYNAK-BAG-01",
-      "durum": "aktif",
-      "update": null
-    },
-    {
-      "id": "VERI-SEKTOR-01",
-      "durum": "plan",
-      "update": null
-    },
-    {
-      "id": "VERI-KAYNAK-SIZINTI-01",
-      "durum": "plan",
-      "update": null
-    },
-    {
-      "id": "VERI-IVEDIK-YENIDEN-01",
-      "durum": "plan",
-      "update": null
-    },
     {
       "id": "ALTYAPI-AJAN-CAKISMA-01",
       "durum": "plan",
       "update": "2026-09-29T00:42"
     },
     {
-      "id": "VERI-OSTIM-TAM-TARAMA-01",
+      "id": "SCRAPE-002-LEMMLESS-ANKARA-OSB",
       "durum": "plan",
-      "update": "2026-09-29T15:33"
+      "update": "2026-10-03T00:00"
+    },
+    {
+      "id": "SCRAPE-003-9ROUTER-JINA-FALLBACK",
+      "durum": "plan",
+      "update": "2026-10-05T00:00"
+    },
+    {
+      "id": "SCRAPE-004-QWEN-SINIFLANDIRMA",
+      "durum": "plan",
+      "update": "2026-10-06T00:00"
+    },
+    {
+      "id": "SCRAPE-005-KAZIMA-DOCKER-INTEGRATION",
+      "durum": "plan",
+      "update": "2026-10-09T00:00"
+    },
+    {
+      "id": "SCRAPE-006-QUALITY-AUDIT",
+      "durum": "plan",
+      "update": "2026-10-11T00:00"
+    },
+    {
+      "id": "SCRAPE-007-FINAL-REPORT",
+      "durum": "plan",
+      "update": "2026-10-14T00:00"
+    },
+    {
+      "id": "ALTYAPI-ODIN-UYARLAMA-01",
+      "durum": "plan",
+      "update": "2026-10-01T16:59"
+    },
+    {
+      "id": "TEST-ODIN-PROMPT-INJECTION",
+      "durum": "aktif",
+      "update": "2026-10-01T16:59"
+    },
+    {
+      "id": "ALTYAPI-MIMIR-BAGLAM-01",
+      "durum": "aktif",
+      "update": "2026-10-01T20:52"
+    },
+    {
+      "id": "DOC-GLOBAL-INTEL-ARASTIRMA-01",
+      "durum": "plan",
+      "update": "2026-10-02T02:29"
     }
   ],
   "duzeltilen": [],

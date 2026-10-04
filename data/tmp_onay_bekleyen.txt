@@ -1,0 +1,17 @@
+2 teslim kontrol bekliyor:
+
+  SCRAPE-005-KAZIMA-DOCKER-INTEGRATION  <- utku  (2026-10-03T01:42:39)
+  OZET: kazima Dockerfile yazildi (python:3.12-slim + psycopg healthcheck + CMD refresh_pipeline.py). compose jobs profiline kazima servisi eklendi; dosyadaki scraper ikizi oneklendi (D-211, 0 harici referans). Briefin localhost:5000/health healthcheck'i olcumle uydurma oldugu icin uygulanmadi. docker compose config exit 0, kodlama denetimi temiz, 15 test yesil. CANLI up dogrulamasi yapilmadi: Docker daemon kapali.
+  CIKTILAR: src/company_master/scrapers/Dockerfile, docker-compose.yml, data/orchestrator/SCRAPE-005-KAZIMA-DOCKER-INTEGRATION_rapor_2026-10-02_uretim.md, hubs/ADMIN_DASHBOARD_HUB.md
+  -> python scripts/gorev_kutusu.py onayla --task-id SCRAPE-005-KAZIMA-DOCKER-INTEGRATION --ben orkestrator
+
+  DOC-GLOBAL-INTEL-ARASTIRMA-01  <- utku  (2026-10-02T23:49:45)
+  OZET: 
+  -> python scripts/gorev_kutusu.py onayla --task-id DOC-GLOBAL-INTEL-ARASTIRMA-01 --ben orkestrator
+eklendi=0 guncellendi=0 degismedi=10 arsivlendi=0
+yerel gorev=10 notion satiri=10
+ozet: 1 blok (silinen kopya 1)
+  Ilerleme Matrisi: eklendi 0, guncellendi 0, toplam 8
+  Ajan Ilerlemesi: eklendi 0, guncellendi 0, toplam 4
+  KRITIK - Simdi Buraya Bak: eklendi 0, guncellendi 0, toplam 2
+Sorun kaydı yok.

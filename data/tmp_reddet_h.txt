@@ -1,0 +1,7 @@
+usage: gorev_kutusu.py reddet [-h] --task-id TASK_ID --ben BEN --neden NEDEN
+
+options:
+  -h, --help         show this help message and exit
+  --task-id TASK_ID
+  --ben BEN
+  --neden NEDEN      Reddetme nedeni

@@ -1,0 +1,9 @@
+ Volume in drive C has no label.
+ Volume Serial Number is 76FD-4BFB
+
+ Directory of c:\Huginn Data Projesi\Huginn Data Insights\docs
+
+02.10.2026  23:46            22.909 FAZ6_GLOBAL_INTEL_KAPSAM.md
+               1 File(s)         22.909 bytes
+               0 Dir(s)  536.162.762.752 bytes free
+File Not Found

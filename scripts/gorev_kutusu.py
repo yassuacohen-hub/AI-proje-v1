@@ -174,7 +174,7 @@ def cmd_teslim(args: argparse.Namespace) -> int:
     # TEK BASINA yeterli degil — chat_gonder.py yazdigi messages.jsonl'de
     # cevapsiz mesaj varsa bu kapi onu GORMUYORDU. Ikisi birlikte kontrol edilir.
     engeller = chat.teslim_kontrol_et(args.task_id)
-    mesaj_nedenleri = _mesaj_kontrol_et(args.task_id)
+    mesaj_nedenleri = _mesaj_kontrol_et(args.task_id, args.ajan)
     if engeller["engel"] or mesaj_nedenleri:
         print(f"[D-210 TESLIM KAPISI] HATA: Acik sorular var — teslim reddedildi.",
               file=sys.stderr)
@@ -367,15 +367,25 @@ Arada KAHIN'e soru sorma; blokaj varsa raporda yaz.""")
     return 0
 
 
-def _mesaj_kontrol_et(task_id: str) -> list[str]:
-    """messages.jsonl: task_id'ye bagli cevapsiz mesaj var mi (D-210 teslim kapisi).
+def _mesaj_kontrol_et(task_id: str, ajan: str) -> list[str]:
+    """messages.jsonl: `ajan`a gelen, task_id'ye bagli CEVAPSIZ mesaj var mi.
 
     D-336 / ORCH-KIMLIK-ZINCIRI-01: chat.teslim_kontrol_et() yalnizca
     ajan-chat.jsonl'yi okur; chat_gonder.py'nin yazdigi messages.jsonl'yi
     gormuyordu. Bu yuzden bazi teslimler "acik soru var" diye reddedildi
     halbuki cevap messages.jsonl'deydi (ya da hic cevap yoktu, kapi bunu
     gormemisti). Ikisi artik birlikte kontrol edilir.
+
+    D-210 (duzeltme): onceki imza yalniz task_id aliyordu ve mesajin
+    YONU bakilmadan her cevapsiz kayit engel sayiliyordu. Boylece ajanin
+    baskalarina gonderdigi rapor (ihsan -> yasu) kendi teslimini blokeliyordu
+    ve cevapsiz soru ile cevap beklemeyen bildirim ayirt edilemiyordu.
+    Simdi yon filtresi var: yalniz `ajan`a gelen (kime == ajan veya "hepsi")
+    ve `ajan`in kendi gondermedigi mesajlar engeldir.
+
+    `sonra` verilirse (nobet) yalniz o tarihten yeniler sayilir.
     """
+    ajan = trigger.ajan_normalize(ajan)
     yol = tb.STATE_DIR / "chat" / "messages.jsonl"
     if not yol.exists():
         return []
@@ -385,10 +395,15 @@ def _mesaj_kontrol_et(task_id: str) -> list[str]:
             k = json.loads(satir)
         except json.JSONDecodeError:
             continue
-        if k.get("task_id") == task_id and not k.get("yanit_alindi"):
-            nedenler.append(
-                f"{str(k.get('mesaj', ''))[:120]} (kimden: {k.get('kimden', '?')}, chat_gonder)"
-            )
+        if k.get("task_id") != task_id or k.get("yanit_alindi"):
+            continue
+        if k.get("kimden") == ajan:
+            continue  # ajanin kendi ciktisi: cevap bekleyen soru degil
+        if k.get("kime") not in (ajan, "hepsi"):
+            continue  # baska birine gonderilmis: bu ajani bekletmez
+        nedenler.append(
+            f"{str(k.get('mesaj', ''))[:120]} (kimden: {k.get('kimden', '?')}, chat_gonder)"
+        )
     return nedenler
 
 

@@ -1,0 +1,16 @@
+
+
+def _yedek(yol: Path) -> Path:
+    damga = datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S')
+    yedek = yol.with_name(yol.name + '.bak_' + damga)
+    shutil.copy2(yol, yedek)
+    return yedek
+
+
+def _guncelle(env_yolu: Path, yeni: str):
+    '''NINEROUTER_KEY satirini degistirir/ekler; atomik yazar.'''
+    '''Doner: (yedek, adet, maske)'''
+    metin = env_yolu.read_text(encoding='utf-8-sig')
+    yeni_satir = ANAHTAR_ADI + '=' + yeni
+    satirlar = []
+    adet = 0

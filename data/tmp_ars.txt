@@ -1,0 +1,10 @@
+114 kayit tasinacak, aktif panoda 11 kalacak.
+  2026-Q3: 78 kayit
+  2026-Q4: 36 kayit
+(--kuru: hicbir dosya yazilmadi)
+eklendi=0 guncellendi=0 degismedi=11 arsivlendi=0
+yerel gorev=11 notion satiri=11
+ozet: 1 blok (silinen kopya 1)
+  Ilerleme Matrisi: eklendi 0, guncellendi 0, toplam 8
+  Ajan Ilerlemesi: eklendi 0, guncellendi 0, toplam 4
+  KRITIK - Simdi Buraya Bak: eklendi 0, guncellendi 0, toplam 2

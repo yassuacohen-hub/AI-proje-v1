@@ -42,10 +42,23 @@ def test_kimliksiz_ajan_her_kilidi_ihlal_gorur() -> None:
     assert len(kz.ihlaller(["src/a.py", "src/b.py"], None, KILITLER)) == 2
 
 
+def test_belirsiz_kimlik_nonedan_ayri_sabit() -> None:
+    """D-339: BELIRSIZ ("2+ ajan dosyasi var") None'dan ("hic yok") AYRI
+    olmali; aksi halde main() belirsizligi de "yok, gec" sayar ve utku'nun
+    ihsan-kilitli dosyayi commit'e sokmasina yol acan delik geri gelir."""
+    assert kz.BELIRSIZ != None  # noqa: E711 - degerin kendisini kontrol ediyoruz
+    assert kz.BELIRSIZ is not None
+
+
 def test_kimlik_user_name_icinden_cozulur() -> None:
-    """`git config user.name` bilinen ajan adini iceriyorsa kimlik cozulur."""
+    """`git config user.name` bilinen ajan adini iceriyorsa kimlik cozulur.
+
+    D-339: bu makinede 2+ ajan_<ad>.json varsa donus BELIRSIZ olur (artik
+    None ile ayni degil) — o da gecerli bir sonuc, main() onu fail-closed
+    isler (bkz. test_belirsiz_kimlik_nonedan_ayri_sabit).
+    """
     ad = kz.ajan_kimligi()
-    assert ad is None or ad in kz.AJANLAR
+    assert ad is None or ad == kz.BELIRSIZ or ad in kz.AJANLAR
 
 
 def test_kanca_zorlayiciyi_cagirir() -> None:

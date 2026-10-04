@@ -1,0 +1,6 @@
+python scripts\gorev_kutusu.py iptal --task-id ORKESTRA-DEVRALMA --gerekce "Yetkisiz devralma: yasu sihirli cumleyi/anahtar kodu almadan abrakadabra calistirdi. Kullanici acikca 'sen orkestrator degilsin' dedi; bu kayit gecersizdir." >> c:\Users\yasin\t.log 2>&1
+echo IPTAL=%ERRORLEVEL% >> c:\Users\yasin\t.log
+python scripts\gorev_kutusu.py bak --ajan yasu >> c:\Users\yasin\t.log 2>&1
+exit
+python scripts\gorev_kutusu.py teslim --ajan yasu --task-id ALTYAPI-9ROUTER-ANAHTAR-01 --ozet "scripts/ninerouter_anahtar_guncelle.py yazildi: .env NINEROUTER_KEY atomik gunceller (yedek -> tmp -> os.replace), --kuru modu, cift satir tespitinde rc=3, yazma sonrasi dogrulama + gerekirse geri yukleme. Anahtar hicbir ciktida yazilmaz, yalniz ilk 4 karakter (D-288). D-66 varsayimi dogrulandi: .env icinde anahtar tek satir. Test tests/test_ninerouter_anahtar_guncelle.py 10/10, test_yazma_kapisi.py 7/7. Ayrica SABLON_WEB D-303 tavan engeli cozuldu: 25 -> 23, 2 inceleme artigi arsive tasindi, tavan gevsetilmedi." >> c:\Users\yasin\t.log 2>&1
+echo TESLIM_KOD=%ERRORLEVEL% >> c:\Users\yasin\t.log

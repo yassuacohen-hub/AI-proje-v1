@@ -1,0 +1,6 @@
+    for ln in metin.splitlines():
+        if ln.strip().startswith(ANAHTAR_ADI + '='):
+            satirlar.append(yeni_satir)
+            adet += 1
+        else:
+            satirlar.append(ln)

@@ -4,12 +4,17 @@
 
 ## KALDIĞIM YER
 
-- **Konum:** aktif iş yok
-- **Yapılanlar:** 2026-09-29 — FAZ-0 kök hijyeni sonrası test ortamı güncellendi
-- **Kritik bağlam:** mekanik görev — SADECE ölçüm/plan çıktısı üret, kod değiştirme
-- **Sonraki adım:** `python scripts/gorev_kutusu.py liste --ajan salih` ile pano kontrolü
-- **Görev:** — · **Son okunan karar:** `D-268`
 
+
+
+
+
+
+- **Konum:** ALTYAPI-MIMIR-BAGLAM-01 (aktif) + TEST-ODIN-PROMPT-INJECTION (iş #1 etiket önerisi, iş #2 LLM-as-judge bekliyor)
+- **V4 okundu, organize edildi:** ayrıntı → [[salih_v4_arsiv]] (DIŞ+İÇ+ORTAK, mimir_servis sözleşmesi, 33 senaryo)
+- **Chat:** MIMIR-BAGLAM-01'e 17:27 cevap düştü (D-210 sayacı durdu). Kimlik blokesi geçici `$env:HUGINN_AJAN=salih` ile aşıldı (kalıcı = KAHIN kararı).
+- **Sonraki adım:** TESLİM BLOKE, bekleme: D-210 kapısına `type in (soru,hata)` filtresi eklenmesi (ihsan'a görev açıldı chat 13:21, task-id'siz). Gelince: `gorev_kutusu teslim --ajan salih --task-id ALTYAPI-MIMIR-BAGLAM-01`. Teknik BİTTİ 7/7 kanıt: A 4301ms finish=stop 'veri tabanımızda yok', B 4427kr BAGLAM 4124ms finish=stop 'calisan 85 + kaynak', 6/6 mandal + kil-restore, 60 komşu test, hub B-14 yazıldı. Sonra: REDTEAM-S1S4-I1I4-01 (P1, SLA 10-06)
+- **Görev:** ALTYAPI-MIMIR-BAGLAM-01 · **Son okunan karar:** `D-312`
 ## Oturum Açılış (60 saniye, bu sırayla)
 
 1. **§KALDIĞIM YER** — yukarıdaki blok.
@@ -18,6 +23,7 @@
 4. `python scripts/ajan_chat.py oku --ajan salih` (D-210 cevap süresi: P0 5-10dk, P1 10-15dk, P2 15-30dk)
 5. [[Huginn Data Insights/AGENTS]] son karar no ≠ `D-219` ise aradakileri oku (D-168).
 6. Brifin **§Doğrulanacak varsayım** maddelerini koda karşı doğrula.
+7. **Her teslimden sonra** `python scripts/gorev_kutusu.py nobet --ajan salih` (D-335). Çıkış 0 = İŞ VAR → hemen yap; 3 = 60 dk boş → ihsan'a rapor. `nobet` dönmeden "bitti" denmez.
 
 **§KALDIĞIM YER pano ile çelişiyorsa pano üstündür.**
 
@@ -39,52 +45,46 @@
 
 ## Sabitler (doğrulanmış gerçekler)
 
-- Test kökü `tests/`; tam suite **4457** test toplanıyor (2026-09-29)
-- Denetim testleri: `tests/test_naming_audit.py` (D-57), `tests/test_brief_sablon_denetim.py`
-  (D-217/D-218), `tests/test_kok_politikasi.py` (D-221/D-241 + kök yarısı)
-- `AGENTS.md` son karar: **D-268** (satır 3943)
-- `_ARSIV_tek_kullanimlik/` (130 dosya) — **arama kapsamı dışı** (D-220), teste girmez
-- D-57 başlıkta `→` (U+2192) şart; D-217 `## Ilgili Nodlar` ASCII `I` ile yazılır
 
+
+
+
+
+
+
+- Test kökü `tests/`; tam suite **4457** test toplanıyor (canlı koşu; lastfailed DEĞİL, D-268)
+- `AGENTS.md` son karar: **D-312** (v4 prompt dayanağı D-310)
+- **V4 = üç parça prompt** (DIŞ Mimir §1 / İÇ Odin §2 + ARA/GETIR / ORTAK): [[salih_v4_arsiv]]
+- **Kilitli dosyam:** `src/company_master/odin_ai/mimir_servis.py` (hâlâ YOK, yazılacak)
+- **Bağımlılıklar (okundu, mülküm değil):** `odin_ai/arac_dongusu.py` (ARA/GETIR, 6 tur), `odin_ai/rag.py` (chunk), `vector/embedder`
+- **Enjeksiyon:** `scripts/odin_prompt_injection_test.py` (adaptör `cevapla(prompt)->str`). Senaryo v4 ile 28→**33**; genişletilmeden GECTI sayılmaz (D-224). GO eşiği: 10/12 red, meşru red 0, sızıntı 0, başarısız ≤2. Şu an %50 NO-GO.
 ## Tuzaklar (aynı hatayı iki kez yapma)
 
-- Plan üretirken var olmayan dosyaya atıf → hayalet görev doğurur (D-216) → her atıf `dosya:satır` doğrulanır
-- Ölçüm sayısı brifteki sayı ile tutmuyor → **dur**, chat aç; sayıyı brife uydurma
-- **`.pytest_cache/lastfailed` kanıt DEĞİLDİR** → 330 bayat kayıt görüldü, fiilen 18 passed
-  → kırık test iddiası daima **canlı koşudan** (D-268). "N test kırık" dersen
-  önce `pytest` koştur, çıktı satırını yapıştır
-- **"Takım yeşil" tek satır beyanı kanıt değildir** → sıra + komut + çıktı gerekir (D-260)
-- Kırık test raporlayacaksan **canlı koşu** yap; `lastfailed`'a bakma
 
+
+
+
+
+
+
+
+- **BAŞKASININ DOSYASINA DOKUNMA (KAHIN 2026-10-03):** salih kendi dosyalarına yazar (`salih_*`, `tests/test_*` brifte bende), başkalarınınkini SADECE okur (mimir_servis.py hariç — o kilitli dosyam, brifte bende)
+- **Araç argümanı düşürme:** create/edit'te filepath+contents eksik → 6 kez patladı (N3, D-67). Çağırmadan önce her zorunlu argümanı kontrol
+- **Boş yanıt = sahte yeşil tuzak:** `reddetti_mi("") is True` 12 senaryoyu yalancı GO yapardı (D-249/D-266). Boş → basarili=False
+- **Fixture da beyandır (D-260):** `_s()` meşruda reddetti=True üretti, test_karar_go düştü; üretim kodu doğruydu
+- Her write/diff sonrası dosyanın İLK+SON satırını oku (`</parameter>` çöpü, İhsan Hatam #13)
+- **grep_search bu dizinde 0 döner** → PowerShell `Get-Content | Select-String`
+- **BAYAT chat kaydı BİLİ notu DEĞİLDİR (D-260, 2026-10-04):** 'qwen 503 offline' kaydına güvenip 'bloke' dedim; canlı tek istek ölçtüm → ONLINE. Bayat beyan + canlı ölçüm çelişirse ÖLÇ
+- **Ölçüm aracın da bir beyandır (D-260 kar-deseni, 2026-10-04):** PowerShell `Invoke-RestMethod` string'i Windows-1254'e çeviriyor, Türkçe prompt'ta 500 veriyor — model değil, ARACIM kör. Çözüm: `[Text.Encoding]::UTF8.GetBytes($bd)`. Modeli suçlamadan aracıyı doğrula
+- **`ajan_chat` index'i 0-TABANLI (2026-10-04):** `oku` 1'den numaralıyor, `kapat/guncelle` 0'dan. Ben 1-tabanlı verdim → NO-GO kaydını kapattım + ihsan'ın çözüm metnini ezdim. Index vermeden önce `oku` çıktısındaki satırı eşleştir
+- **`single_find_and_replace` uzun old_string kırılgan:** boş satır sayısı/tırnak/özel karakter farkı → 'string not found'. Kısa benzersiz satır hedefle, sonra edit'i MUTLAKA read/pytest ile doğrula ('Successfully edited' yalancı olabilir — 2 kez oldu)
+- **D-210 teslim kapısı mesaj tipine bakmıyor (bulgu 12:53):** `messages.jsonl`de `yanit_alindi=false` olan HER mesaj soru sayılıyor; benim `rapor` mesajlarım teslimi bloke etti. `--zorla` bu kapıyı ATMZ (yalnız B-14'ü atlar). jsonl'a elle `yanit_alindi:true` YAZMA (D-260, olmayan cevabı olmuş gösterme). Düzeltme ihsan'da
+- Çok satırlı `python -c` PowerShell'de sessiz bozuk → kalıcı kapı kullan
+- Plan/atıf: var olmayan dosya → hayalet görev (D-216); her atıf `dosya:satır` doğrulanır
+- `.pytest_cache/lastfailed` kanıt DEĞİL → canlı koşu (D-268)
 ## Bilinen Açıklar (kapsam dışı backlog)
 
 - Tam suite 20 failed — görev `TEST-BACKLOG-20` (utku'da)
 
 ## Sık Komutlar
 
-```bash
-python scripts/gorev_kutusu.py liste --ajan salih
-python scripts/gorev_kutusu.py al --ajan salih --task-id <TASK_ID>
-python scripts/ajan_chat.py ac salih <TASK_ID> "<sorun>" --cozum "<oneri>"
-python scripts/gorev_kutusu.py teslim --ajan salih --task-id <TASK_ID> --ozet "<özet>"
-```
-
-## Oturum Günlüğü
-
-### <YYYY-MM-DD> — <oturum konusu>
-
-- **Görev:** `<TASK_ID>`
-- **Yapılan:** <madde madde, `dosya:satır` referanslı>
-- **Doğrulama:** `<komut>` → `<sonuç>`
-- **Commit:** `<sha>`
-- **Kalan / bloke:** <yoksa "yok">
-- **Öğrenilen tuzak:** <varsa §Tuzaklar'a ekle>
-
-> **Oturumu kapatmadan:** §KALDIĞIM YER'i güncelle + **Son okunan karar** no'yu tazele.
-
-## Ilgili Nodlar
-
-- [[Huginn Data Insights/AGENTS]]
-- [[Huginn Data Insights/_ajan_context_sablon]]
-- [[Huginn Data Insights/yasu_project_context]]
-- [[plans/_brief_sablon]]

@@ -1,0 +1,7 @@
+
+1. [IHSAN] ORCH-SIMULASYON-BLOK-01 (acik)
+   Sorun: D-198 simulasyon cikis kodu 2 donuyor; HICBIR ajan 'basla' ile yeni gorev alamiyor. Olcum: B-01 pano-arsiv cakismasi HATA 105; B-03 brief diskte yok HATA 1; B-04 dosyalar bos UYARI 1; B-17 sablon UYAR
+   Çözüm: IHSAN: B-01 105 + B-03 1 kapatilinca simulasyon 1'e iner ve yeni gorev akisi acilir. Gecis icin --simulasyonsuz kipi veya ajan basina muafiyet onerisi. Benim tarafim: SCRAPE-005 review'da; canli Docker dogrulamasi daemon kapali oldugu icin bekliyor.
+   Zaman: 2026-10-03T01:44:11
+
+Toplam: 1 sorun

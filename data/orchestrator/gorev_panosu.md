@@ -22,24 +22,18 @@
 | V10-BELGE-01 | 6 curutulen iddiaya K1/K3/K4 duzeltme notu | ihsan | P1 | archive | - |
 | WK-02 | OSB Tender Monitor - Real-time Tracking | - | P1 | archive | - |
 | WK-03 | Proxy Rotation and IP Management | - | P2 | archive | - |
-| ALTYAPI-AJAN-CAKISMA-01 | [ALTYAPI] Eszamanli ajan kacak kilit kapisini yaz → ajan_cakisma_kilidi.py (4s) | yasu | P1 | plan | scripts/ajan_cakisma_kilidi.py |
 | TEST-EKLE-DENEME | test | ihsan | P2 | iptal | - |
-| SCRAPE-003-9ROUTER-JINA-FALLBACK | [KAZIMA] 9Router Jina-Reader fallback: yapı unknown sayfalar (2s) | yasu | P1 | plan | scripts/kazima_jina_fallback.py, ../.agents/skills/9router_web_fetch_upstream.md |
-| SCRAPE-004-QWEN-SINIFLANDIRMA | [KAZIMA] Qwen-7b-chat (9Router local): yapı unknown + sınıflandırma (2s) | yasu | P1 | plan | scripts/kazima_qwen_classify.py, ../.agents/skills/9router_chat_upstream.md |
-| SCRAPE-005-KAZIMA-DOCKER-INTEGRATION | [DOCKER] Kazıma servisi: profile jobs, healthcheck, cron (1s) | utku | P0 | aktif | Huginn Data Insights/docker-compose.yml, src/company_master/scrapers/Dockerfile, scripts/refresh_pipeline.py |
 | SCRAPE-006-QUALITY-AUDIT | [QA] Kazıma quality audit: D-250 field tamlık + D-310 kontrol (1s) | salih | P1 | plan | scripts/_kazima_dogrula.py, src/company_master/etl/quality_recalc.py |
 | SCRAPE-007-FINAL-REPORT | [DOC] Kazıma dönem sonu raporu: coverage, cost=0 doğrulaması, v2.0 roadmap (1s) | ihsan | P2 | plan | plans/2026-10-01_kazima_verimlilik_ve_eksiklik_analizi.md, scripts/_kazima_dogrula.py |
-| ALTYAPI-ODIN-UYARLAMA-01 | [ALTYAPI] Odin iç/müşteri endpoint ayrımını belgele → docs/ODIN_SECURITY_CHECKLIST.md (7d) | ihsan | P0 | plan | docs/ODIN_DEPLOYMENT_ARCHITECTURE.md, docs/ODIN_SECURITY_CHECKLIST.md, docs/ODIN_PROMPT_INJECTION_SCENARIOS.md |
 | VERI-ODIN-EGITIM-VERISI-HAZIRLA | [VERI] Odin eğitim veri setini yaz → data/odin_training_data.csv (7d) | utku | P1 | iptal | data/odin_training_data.csv, scripts/odin_veri_hazirla.py, data/odin_veri_dogrulama_raporu.md |
 | ALTYAPI-ODIN-EGITIM-PIPELINE | [ALTYAPI] Odin eğitim hattını yaz → scripts/odin_training_pipeline.py (7d) | utku | P1 | iptal | scripts/odin_training_pipeline.py, data/models/odin_model.bin, data/odin_training_metrics.csv |
 | TEST-ODIN-PROMPT-INJECTION | [TEST] Odin müşteri modelini prompt-injection ile ölç → data/odin_injection_test_log.jsonl (7d) | salih | P1 | aktif | scripts/odin_prompt_injection_test.py, data/odin_injection_test_scenarios.json, data/odin_injection_test_log.jsonl |
 | ALTYAPI-MIMIR-BAGLAM-01 | [ALTYAPI] Mimir baglam ucunu yaz -> odin_ai/mimir_servis.py (3s) | salih | P1 | aktif | src/company_master/odin_ai/mimir_servis.py |
-| ALTYAPI-9ROUTER-ANAHTAR-01 | [ALTYAPI] 9Router anahtar guncelleme betigini yaz -> scripts/ninerouter_anahtar_guncelle.py (2s) | yasu | P2 | plan | scripts/ninerouter_anahtar_guncelle.py, tests/test_ninerouter_anahtar_guncelle.py |
-| ALTYAPI-OPENROUTER-ARAC-01 | [ALTYAPI] continue_haftalik_bildir.py + or_*.py betiklerini kalici yaz -> scripts/ commit + zamanlanmis gorev (2s) | yasu | P2 | plan | scripts/continue_haftalik_bildir.py, scripts/or_batch_cikar.py, scripts/or_fiyat_ara.py |
-| VERI-OSTIM-HREF-FILTRE-01 | [VERI] OSTIM detay kaziyicida href filtresini duzelt -> ostim_detail_scraper.py + brave 100 firma pilot (3s) | utku | P2 | plan | src/company_master/etl/scrapers/ostim_detail_scraper.py, tests/test_ostim_detail_scraper.py |
-| VERI-APIFY-BUTCE-01 | [VERI] Apify kullanimini olc ve 10 dolar tavanina sabitle -> docs/APIFY_BUTCE.md + kota kodu (2s) | utku | P3 | plan | docs/APIFY_BUTCE.md, scripts/apify_butce_olc.py |
-| VERI-PAKET-FIYAT-SENKRON-01 | [VERI] sync_paket_fiyatlari.py betigini denetle ve DB ile esle -> paketler.py fiyat_katalogu tek kaynak (2s) | yasu | P2 | plan | scripts/sync_paket_fiyatlari.py, tests/test_paket_fiyat_senkron.py |
-| TEST-SIMULASYON-B17-KIRIK-01 | [TEST] Simulasyon B-17 sablon uyarilari + 3 kirik testi duzelt -> pytest yesil, simulasyon exit 0 (2s) | utku | P1 | plan | tests/test_gorev_kutusu_cli.py, tests/test_gorev_kutusu_simulasyon.py |
+| TEST-ODIN-REDTEAM-S1S4-I1I4-01 | [TEST] Urun sahibi red-team S1-S4 DIS + I1-I4 IC senaryolarini harness'e yaz → odin_injection_test_scenarios.json 36→44 + --rol ic (3s) | salih | P1 | aktif | tests/test_prompt_yukle_roller.py |
+| TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01 | [TEST] conftest.py duzelt -> tests/conftest.py (3s) | salih | P1 | plan | tests/conftest.py |
+| ORKESTRA-KIMLIK-ZINCIRI-01 | [ORKESTRA] Kimlik zinciri kaydını düzelt → plans/brief_ihsan_ORKESTRA-KIMLIK-ZINCIRI-01.md (1s) | ihsan | P1 | aktif | scripts/ajan_chat.py, scripts/gorev_kutusu.py |
+| ALTYAPI-9ROUTER-MITM-PATCH-01 | [ALTYAPI] 9router MITM NODE_ENV patch kaliciligini denetle + clinepass OAuth testi olc -> bulgu_defteri.md (1s) | yasu | P2 | plan | C:/Users/yasin/AppData/Roaming/npm/node_modules/9router/app/.next-cli-build/server/chunks/915.js |
+| ALTYAPI-ODIN-MASKE-V3-01 | [ALTYAPI] maskeleme_odin() V1/V2/V3 kaynak ayrımı + V3 endpoint (2s) | utku | P1 | aktif | src/company_master/sunum.py |
 
 ## Tamamlananlar
 
@@ -115,6 +109,7 @@
 | VERI-KAYNAK-SIZINTI-01 | [VERI] Kaynak sizintisini duzelt → ostim icinde 102 ASO kaydi (2s) | utku | 2026-09-30T19:41:07 |
 | VERI-HAYALET-TEMIZ-01 | [VERI] Hayalet kayitlari sil → companies 4591 fazlalik satir (3s) | utku | 2026-09-28T19:38:49 |
 | VERI-IVEDIK-YENIDEN-01 | [VERI] Ivedik kaynak listesinden dusuruldu (KAHIN 2026-09-29) | yasu | - |
+| ALTYAPI-AJAN-CAKISMA-01 | [ALTYAPI] Eszamanli ajan kacak kilit kapisini yaz → ajan_cakisma_kilidi.py (4s) | yasu | 2026-10-04T00:42:55 |
 | ALTYAPI-SKILL-YAPISI-01 | [ALTYAPI] Skill sistemini tek havuzda birlestir → SKILLS_INDEX.md yaz (6s) | yasu | 2026-09-29T15:51:21 |
 | ALTYAPI-TICARET-KANIT-01 | [ALTYAPI] Kanit katmanini yaz → skills/services/ticaret_sicili_kanit.py (2s) | yasu | 2026-09-29T15:51:21 |
 | VERI-OSTIM-TAM-TARAMA-01 | [VERI] OSTIM detay verisini denetle → firmalar_tamamlanmis.jsonl (2s) | yasu | 2026-09-30T19:41:04 |
@@ -128,9 +123,13 @@
 | VERI-TENDER-KOLON-01 | [VERI] D-308 tender sema kolon cevirisi -> osb_tender_monitor.py uyumlu hale getir (1s) | utku | 2026-10-02T22:25:17 |
 | SCRAPE-001-DOCKER-SETUP | [DOCKER] PostgreSQL 16 + Kazıma servisi entegrasyonu → compose (2s) | utku | 2026-10-02T22:27:44 |
 | SCRAPE-002-LEMMLESS-ANKARA-OSB | [KAZIMA] LLM-less: ostim.org.tr + ivedik.org.tr + baskentosb.org.tr → scrape_pages (3s) | utku | 2026-10-02T23:13:36 |
+| SCRAPE-003-9ROUTER-JINA-FALLBACK | [KAZIMA] 9Router Jina-Reader fallback: yapı unknown sayfalar (2s) | yasu | 2026-10-04T01:04:46 |
+| SCRAPE-004-QWEN-SINIFLANDIRMA | [KAZIMA] Qwen-7b-chat (9Router local): yapı unknown + sınıflandırma (2s) | yasu | 2026-10-04T03:31:05 |
+| SCRAPE-005-KAZIMA-DOCKER-INTEGRATION | [DOCKER] Kazıma servisi: profile jobs, healthcheck, cron (1s) | utku | 2026-10-04T00:33:57 |
 | VERI-SEMA-DOGRULA-01 | Şema Migrasyon Tutarsızlığını Düzelt (V7) | salih | 2026-10-01T17:19:04 |
 | VERI-SEMA-DOGRULA-02 | Eksik Tablolar İçin Kod Taraması (entity_matches, api_usage_daily) | yasu | 2026-10-01T17:58:34 |
 | VERI-SEMA-DOGRULA-03 | NACE Dil Kolonları Kontrol Raporu | yasu | 2026-10-01T17:58:44 |
+| ALTYAPI-ODIN-UYARLAMA-01 | [ALTYAPI] Odin iç/müşteri endpoint ayrımını belgele → docs/ODIN_SECURITY_CHECKLIST.md (7d) | ihsan | 2026-10-04T14:27:38 |
 | ALTYAPI-EVREN-PRIVATE-DOGRULAMA | [ALTYAPI] EVREN private eğitim hizmetini araştır → docs/EVREN_PRIVATE_EGITIM_DOGRULAMA.md (7d) | yasu | 2026-10-01T20:31:32 |
 | ALTYAPI-ODIN-DENETIM-RAPORU | [ALTYAPI] Odin üretim öncesi GO/NO-GO kararını denetle → ALTYAPI-ODIN-DENETIM-RAPORU_2026-10-31_denetim.md (10d) | yasu | 2026-10-01T17:59:33 |
 | VERI-OSB-TEMIZLIK-01 | [VERI] 647 kimliksiz + 44 mukerrer kaydi sil -> osb_firma_dosyalari temiz (2s) | yasu | 2026-10-02T22:25:00 |
@@ -143,3 +142,20 @@
 | VERI-SKOR-MOTORU-01 | [VERI] Need/Fit/Timing/Ensemble dort skor tablosu -> 0049_firsat_skorlari.sql (5-10g) | utku | 2026-10-02T22:24:45 |
 | VERI-TOBB2B-BUYUTME-01 | [VERI] TOBB2B pilot buyutme - tobb2b.org.tr ucretsiz, genis Id araligi (3-5g) | yasu | 2026-10-02T18:22:32 |
 | ALTYAPI-PANO-ARSIV-CAKISMA-02 | [ALTYAPI] B-01 pano<->arsiv task_id cakismasi: 105 kayit yeniden cikti (eski 17 kapanis sonrasi) | ihsan | 2026-10-03T16:41:10 |
+| ALTYAPI-9ROUTER-ANAHTAR-01 | [ALTYAPI] 9Router anahtar guncelleme betigini yaz -> scripts/ninerouter_anahtar_guncelle.py (2s) | yasu | 2026-10-04T00:36:28 |
+| ALTYAPI-OPENROUTER-ARAC-01 | [ALTYAPI] continue_haftalik_bildir.py + or_*.py betiklerini kalici yaz -> scripts/ commit + zamanlanmis gorev (2s) | yasu | 2026-10-04T03:31:20 |
+| VERI-OSTIM-HREF-FILTRE-01 | [VERI] OSTIM detay kaziyicida href filtresini duzelt -> ostim_detail_scraper.py + brave 100 firma pilot (3s) | utku | 2026-10-04T00:49:25 |
+| VERI-APIFY-BUTCE-01 | [VERI] Apify kullanimini olc ve 10 dolar tavanina sabitle -> docs/APIFY_BUTCE.md + kota kodu (2s) | utku | 2026-10-04T00:35:45 |
+| VERI-PAKET-FIYAT-SENKRON-01 | [VERI] sync_paket_fiyatlari.py betigini denetle ve DB ile esle -> paketler.py fiyat_katalogu tek kaynak (2s) | yasu | 2026-10-04T03:31:32 |
+| TEST-SIMULASYON-B17-KIRIK-01 | [TEST] Simulasyon B-17 sablon uyarilari + 3 kirik testi duzelt -> pytest yesil, simulasyon exit 0 (2s) | utku | 2026-10-04T00:34:19 |
+| ALTYAPI-MIMIR-HABER-KUSU-01 | [ALTYAPI] F2 haber kusu: KAYNAK_HARITASI paket kaynaklariyla genislet → arac_dongusu.py + test (3s) | utku | 2026-10-04T00:34:46 |
+| ALTYAPI-KREDI-CUZDANI-01 | [ALTYAPI] F3 kredi cuzdani: kullanim_log + kredi_hareket semasi ve yazma kapisi → 0050_kredi_cuzdani.sql + kredi.py (4s) | yasu | 2026-10-04T00:36:09 |
+| VERI-INGEST-ASO-GLOB-01 | [VERI] ingest_aso glob daralt: rapor dosyalari firma kaydi sanilmasin | utku | 2026-10-04T00:35:05 |
+| UI-ADMIN-KAYNAKLAR-SAYFA-34 | [UI] Veri Kaynakları sayfasını yaz -> admin_kaynaklar.py, 0050 kazıma tabloları tek yerde (4s) | utku | 2026-10-04T03:25:27 |
+| UI-ADMIN-CRAWL-TASI-35 | [UI] Crawl Kontrolü bloğunu Webhook'tan Veri Kaynakları sayfasına taşı -> tek OSINT adresi (2s) | utku | 2026-10-04T03:31:45 |
+| UI-ADMIN-SON-KAZIMA-KART-36 | [UI] Ana Kontrol'e Veri Kaynakları giriş kartını yaz -> GIRIS_KARTLARI 5. kart, son kazıma tek tıkla (1s) | utku | 2026-10-04T03:13:01 |
+| UI-ADMIN-ACIKLAMA-METIN-37 | [UI] SECTIONS aciklama metinlerini düzelt -> menü ipucu admin dilinde, jargonsuz (2s) | utku | 2026-10-04T03:31:58 |
+| UI-ADMIN-REHBER-ALAN-38 | [UI] TabTanimi.rehber alanını yaz -> 6 dağınık _hg_rehber okuyucusu tek kapıdan geçer (3s) | utku | 2026-10-04T03:32:17 |
+| VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01 | [VERI] ASO ikiz ingest yolunu sil -> tek kanonik dosya + etl/ingest_aso.py tek yükleyici (3s) | utku | 2026-10-04T03:38:07 |
+| VERI-WEB-SITESI-ZENGINLESTIR-01 | [VERI] website_domain zenginleştirme kaynağını yaz -> unvan arama + canlı HTTP doğrulama, 7343 boş alana gerçek site (4s) | utku | 2026-10-04T17:01:04 |
+| ALTYAPI-GOREV-AT-KAPI-01 | [ALTYAPI] gorev_at.py cmd_at'i duzelt -> kapi_gecer() kilit kapisindan gecer (3s) | yasu | 2026-10-04T03:32:28 |

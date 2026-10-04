@@ -1,0 +1,37 @@
+MANDAL-SAHNE-01: tek commit'te 37 dosya (tavan 20).
+`git add -A` kazasi mi? Uc ajan ayni agacta -- baskasinin isini
+commit'ine katmis olabilirsin (D-299'da oldu).
+
+  data/osb/anadolu/firmalar.jsonl
+  data/osb/anadolu/meta.json
+  data/osb/aso/firmalar.jsonl
+  data/osb/aso/meta.json
+  data/osb/aso2/firmalar.jsonl
+  data/osb/aso2/meta.json
+  data/osb/baskent/firmalar.jsonl
+  data/osb/baskent/meta.json
+  data/osb/cubuk/firmalar.jsonl
+  data/osb/cubuk/meta.json
+  data/osb/dokumcu/firmalar.jsonl
+  data/osb/dokumcu/meta.json
+  data/osb/elmadag/firmalar.jsonl
+  data/osb/elmadag/meta.json
+  data/osb/kazan_hab/firmalar.jsonl
+  data/osb/kazan_hab/meta.json
+  data/osb/ostim/firmalar.jsonl
+  data/osb/ostim/meta.json
+  data/osb/polatli/firmalar.jsonl
+  data/osb/polatli/meta.json
+  data/osb/sereflikochisar/firmalar.jsonl
+  data/osb/sereflikochisar/meta.json
+  plans/brief_yasu_VERI-OSB-Tazelik-01.md
+  scripts/kopen_denetim.py
+  scripts/kopen_doldur.py
+  scripts/kopen_kolonlari_ekle.py
+  scripts/osb_envanter_karsilastir.py
+  scripts/osb_veri_seti_uret.py
+  scripts/supabase_envanter.py
+  scripts/supabase_guvenlik_denetim.py
+  ... +7 dosya daha
+
+Kasitliysa: SAHNE_TAVAN=<sayi> git commit ...  (gerekce commit mesajina)

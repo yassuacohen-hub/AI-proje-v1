@@ -7,8 +7,13 @@ menüden çıkarılan sekmelerin URL'lerinin kırılmadığını doğrular.
 
 from __future__ import annotations
 
+import ast
+import dataclasses
+from pathlib import Path
+
 from web_dashboard.tabs import (
     SECTIONS,
+    TabTanimi,
     alt_sekmeler,
     tab_getir,
     tab_url_getir,
@@ -111,6 +116,97 @@ def test_birlestirilen_sekme_basliklari() -> None:
     assert tab_getir("hatalar").baslik == "Olaylar & Hatalar"
     assert tab_getir("hatalar").ust == "sistem"
     assert tab_getir("teknik_altyapi").baslik == "Altyapı"
+
+
+# --- UI-ADMIN-REHBER-ALAN-38: rehber tek kapı -------------------------------
+# Kapsam: yedi sayfada iç içe gömülü `_hg_rehber` okuması kaldırıldı, metinler
+# `TabTanimi.rehber` alanına taşındı ve tek çizim noktası `app.py::render_icerik`
+# oldu. D-211 (ikiz yapı) ve D-217 (mandal, kural kopyalanmaz) deseni.
+
+REHBER_OKUYUCULAR = (
+    "admin_kaynaklar.py",
+    "admin_musteriler.py",
+    "admin_panel.py",
+    "admin_realtime.py",
+    "ana_kontrol.py",
+    "paketler.py",
+    "pazarlama.py",
+)
+
+
+def _kok() -> Path:
+    return Path(__file__).resolve().parents[1]
+
+
+def test_rehber_alani_tanimli() -> None:
+    """Her TabTanimi `rehber` taşır; varsayılan boş string (None değil)."""
+    alanlar = {f.name for f in dataclasses.fields(TabTanimi)}
+    assert "rehber" in alanlar
+    assert TabTanimi.rehber == ""
+
+
+def test_her_kok_sayfanin_rehberi_var() -> None:
+    """Menüde görünen her kök sayfa kendini anlatabilmeli (brif kabul kriteri)."""
+    eksik = [t.anahtar for t in SECTIONS if t.ust is None and not t.rehber.strip()]
+    assert not eksik, f"rehbersiz kök sayfa: {sorted(eksik)}"
+
+
+def test_rehberli_bolum_sayisi() -> None:
+    """D-214 ratchet deseni: tavan sabit değil, ölçülen alt sınır.
+
+    12 = 7 taşınan (kaynaklar, musteriler, ayarlar, canli_veri, ana_kontrol,
+    musteri_onizleme, pazarlama) + 5 yeni kök (sistem, denetim,
+    musteri_yonetimi, proje_yonetimi, veri_kalite)."""
+    rehberli = [t.anahtar for t in SECTIONS if t.rehber.strip()]
+    assert len(rehberli) >= 12, f"rehberli bölüm azaldı: {len(rehberli)} < 12"
+    assert len(rehberli) == len(set(rehberli)), "anahtar tekrarı"
+
+
+def test_okuyucularda_rehber_kodu_kalmadi() -> None:
+    """Tek kapı: hiçbir tab modülü kendi rehberini okumaz."""
+    kalan = []
+    for ad in REHBER_OKUYUCULAR:
+        y = (_kok() / "web_dashboard" / "tabs" / ad).read_text(encoding="utf-8")
+        if "_hg_rehber" in y:
+            kalan.append(ad)
+    assert not kalan, f"iç içe rehber okuması duruyor: {kalan}"
+
+
+def test_rehber_metni_ikiz_degil() -> None:
+    """D-211: aynı metni taşıyan iki bölüm ikizdir — biri elle düzeltilir."""
+    gruplar: dict[str, list[str]] = {}
+    for t in SECTIONS:
+        if t.rehber.strip():
+            gruplar.setdefault(t.rehber, []).append(t.anahtar)
+    ikiz = [v for v in gruplar.values() if len(v) > 1]
+    assert not ikiz, f"ikiz rehber metni: {ikiz}"
+
+
+def test_rehber_metni_kaynaksiz_sembol_icermez() -> None:
+    """Taşınan metin kaynağından kopuk f-string kalıntısı taşımaz."""
+    kirli = [t.anahtar for t in SECTIONS if t.rehber and "{" in t.rehber]
+    assert not kirli, f"kaynaksız interpolasyon: {kirli}"
+
+
+def test_rehber_tek_cizim_noktasi() -> None:
+    """`tanim.rehber` yalnız app.py'de bir kez ÇİZİLİR; REHBER_KEY üç yerde.
+
+    Kural gövdesi tek yerde yaşar (D-239/D-246 deseni): koşul okuması ve
+    çizim aynı `if` içindedir, ikinci bir çizim noktası ikiz yapı olurdu.
+    Okuyucu taraması AST ile yapılır — docstring/açıklama metni kod
+    bağımlılığı değildir (`admin_kaynaklar.py` yalnız açıklamada geçiyor)."""
+    app = (_kok() / "app.py").read_text(encoding="utf-8")
+    assert app.count("st.info(tanim.rehber)") == 1, "tek çizim noktası beklenir"
+    assert app.count("REHBER_KEY") == 3, "sabit + kanca koşulu + footer toggle"
+    kodda = []
+    for ad in REHBER_OKUYUCULAR:
+        agac = ast.parse((_kok() / "web_dashboard" / "tabs" / ad).read_text(encoding="utf-8"))
+        for dugum in ast.walk(agac):
+            if isinstance(dugum, ast.Name) and dugum.id == "REHBER_KEY":
+                kodda.append((ad, dugum.lineno))
+            if isinstance(dugum, ast.Attribute) and dugum.attr == "REHBER_KEY":
+                kodda.append((ad, dugum.lineno))
+    assert not kodda, f"okuyucu REHBER_KEY okuyor: {kodda}"
 
 
 if __name__ == "__main__":  # elle çalıştırma: python tests/test_tabs_ia.py

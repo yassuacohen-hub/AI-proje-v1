@@ -39,8 +39,17 @@ def _git(*arg: str) -> str:
     return cp.stdout.strip()
 
 
+#: D-339: "kimlik yok" (fail-open, uyar-ve-gec) ile "kimlik BELIRSIZ" (2+ ajan
+#: dosyasi ayni makinede, fail-closed olmali) ayni None degerine sikisinca
+#: belirsizlik de sessizce gecerdi -> kilit fiilen devre disi kalirdi.
+BELIRSIZ = "__belirsiz__"
+
+
 def ajan_kimligi() -> str | None:
-    """Kilit sahipligiyle karsilastirilabilir ajan adi (yoksa None).
+    """Kilit sahipligiyle karsilastirilabilir ajan adi.
+
+    Donus: gercek ad, `None` (kimlik hic yok, fail-open) veya `BELIRSIZ`
+    (birden fazla ajan dosyasi var, main() bunu fail-closed isler, D-339).
 
     D-303: projedeki tek kimlik kaynagi. `karar_no.py` de bunu cagirir.
     D-306: gercek cozum burada. Kimlik zinciri:
@@ -62,14 +71,13 @@ def ajan_kimligi() -> str | None:
         try:
             return _coz()
         except KimlikBelirsiz:
-            # Sozlesme bu fonksiyonun "cozulemezse None" demesidir, ama
-            # paylasilan cozucu (ajan_kimligi.py:77-83) belirsizlikte
-            # istisna firlatir. O istisna yukseltilirse main()'in
-            # "kimlik yok -> uyar ve gec" dalina (satir 97-100) HIC
-            # ulasilamaz ve pre-commit kancası HUGINN_AJAN tanimli
-            # olmayan her ajan icin kalici olarak exit 1 verir
-            # (olculdu: 3 ajan dosyali makinede, 2026-10-04).
-            return None
+            # D-339: eskiden burada None donuyordu -> main() bunu "kimlik yok"
+            # ile ayni isleyip kilidi UYARIP GECIYORDU (utku, ihsan'in kilitli
+            # dosyasini commit'e soktu, ajan_salih.json + ajan_utku.json ayni
+            # makinede birlikte var oldugu icin kimlik COZULEMEDI ve kapı
+            # sessizce acildi). Belirsizlik "yok" degil, "ikisi de var"dir —
+            # main()'e ayri isaretle dondur, orada fail-closed islensin.
+            return BELIRSIZ
 
     if ad := (os.environ.get("HUGINN_AJAN") or _git("config", "huginn.ajan")):
         return ad.strip().lower()
@@ -100,11 +108,24 @@ def main() -> int:
     kilitler = json.loads(KILIT.read_text(encoding="utf-8"))
     staged = [y for y in _git("diff", "--cached", "--name-only").splitlines() if y]
     ben = ajan_kimligi()
-    ihlal = ihlaller(staged, ben, kilitler)
+    # D-339: BELIRSIZ ("ikisi de var") None ("hic yok") ile AYNI DEGIL —
+    # ikisini de ihlaller()'e "eslesmez" olarak verip asagida ayirt ederiz.
+    ben_ihlal_anahtari = None if ben == BELIRSIZ else ben
+    ihlal = ihlaller(staged, ben_ihlal_anahtari, kilitler)
     if not ihlal:
         return 0
     for yol, k in ihlal:
         print(f"[kilit] {yol} -> {k['sahip']} ({k['task_id']})", file=sys.stderr)
+    if ben == BELIRSIZ:
+        # D-339: fail-closed. Bu dal eskiden `ben is None` ile ayni islenip
+        # UYARIP GECIYORDU; utku'nun ihsan-kilitli dosyayi commit'e sokmasinin
+        # kok nedeni budur. Birden fazla ajan dosyasi "kimlik yok" degil,
+        # "hangisi oldugu belirsiz" demektir -> durdur.
+        print("[kilit] DURDU: bu makinede birden fazla ajan_<ad>.json var, "
+              "kimlik BELIRSIZ. HUGINN_AJAN ortam degiskeniyle belirtin veya "
+              "data/orchestrator/ajanlar/ icinde tek dosya kalsin.",
+              file=sys.stderr)
+        return 1
     if ben is None:
         print("[kilit] UYARI: ajan kimligi yok, gecildi. Kur: "
               "git config huginn.ajan <ad>", file=sys.stderr)

@@ -1,0 +1,52 @@
+
+1. [SALIH] ALTYAPI-MIMIR-BAGLAM-01 (acik)
+   Sorun: Odin prompt-injection 7. kosu SKIP(2) dondu: ODIN_CUSTOMER_API_URL tanimli degil. Bu task bitmeden (mimir_servis.py endpoint) canli GO/NO-GO olculemez. Borc #71-74 (prompt+kod+test) tamam, 43/43 yesil
+   Çözüm: 
+   Zaman: 2026-10-02T23:56:58
+
+2. [UTKU] ORKESTRA-GIT-INDEX-YARISI (acik)
+   Sorun: Paylasilan git index'inde yarisma olustu: git add ile git commit arasindaki ~8 saniyede baska ajan stage etti, dosyasi benim commitime girdi. --name-only dogrulamasi yarisiyi yakalamiyor (TOCTOU).
+   Çözüm: UTKU: paylasilan git index yarisi. 8c84522 commit'ime baska ajanin AGENTS.md D-330->D-331 rename'i sizdi (1 satir). Zararsiz: D-227 mandali 10 passed, D-330 0 referans. NEDEN: git add->commit arasi ~8 sn, baska ajan o arada stage etti; --name-only dogrulamasi TOCTOU.
+   Zaman: 2026-10-02T23:57:45
+
+3. [SALIH] ALTYAPI-MIMIR-BAGLAM-01 (acik)
+   Sorun: Odin N7 iki modelde de NO-GO: qwen3.8-flash-next 503(offline), mimo-v2.6-pro calisiyor ama guvenlik NO-GO (inj-12 kararsiz sizdirdi, mesru-07 ingilizce dusunme sizintisi, 3 senaryo dil uyumsuz, basari
+   Çözüm: 
+   Zaman: 2026-10-03T00:29:45
+
+4. [UTKU] SCRAPE-005-KAZIMA-DOCKER-INTEGRATION (cozuldu)
+   Sorun: BLOK BILDIRIMI GERI CEKILDI - olcum yanlitti. Pano brief alani plans/2026-10-01_docker_tasima_kazima_entegrasyon_degerlendirmesi.md yolunu isaret ediyor ve dosya diskte 33203 bayt; brief KONVANSIYON a
+   Çözüm: Hatali atifla acildi (gonderen 'orkestrator' yazilmisti, --kimden utku verilmemisti). Bu kayit utkuya BILDIRIM degil, utkunun duzeltmesidir; icerigi bulgu_defteri 93. satir DUZELTME kaydi ve teslim raporunda kanitli.
+   Zaman: 2026-10-03T01:38:19
+
+5. [IHSAN] SCRAPE-005-KAZIMA-DOCKER-INTEGRATION (cozuldu)
+   Sorun: Blok bildirimim geri cekildi; olcum yanlitti. Pano brief alani 33203 baytlik plan dokumanini isaret ediyor, ben D-217 ad kuralini aramistim. Dosyalar listesi dokunma izniydi, Dockerfile ciktiydi. gore
+   Çözüm: COZULDU - teslim edildi (review). Iki karar orkestratora acik: (1) gorev_at.py:54 _brief_bul() panodaki brief alanini okusun (su an yalniz ad kuralini arar; gorev_kutusu.py:117 ve gorev_atama_otomatis.py:37 dogru okuyor) - bu yuzden P0 is saatlerce blokada kaldi; (2) kazima servisinde restart 'no' o
+   Zaman: 2026-10-03T01:42:39
+
+6. [IHSAN] ORCH-SIMULASYON-BLOK-01 (cozuldu)
+   Sorun: D-198 simulasyon cikis kodu 2 donuyor; HICBIR ajan 'basla' ile yeni gorev alamiyor. Olcum: B-01 pano-arsiv cakismasi HATA 105; B-03 brief diskte yok HATA 1; B-04 dosyalar bos UYARI 1; B-17 sablon UYAR
+   Çözüm: COZULDU 7baf16a0: B-01 yalniz acik gorevleri tarar (105->0), B-03/B-04 ALTYAPI-PANO-ARSIV-CAKISMA-02 done ile kapandi. Simulasyon cikis 2->1 (yalniz B-14/B-17 uyari). 'basla' tekrar acik. --simulasyonsuz kipi EKLENMEDI (kapiyi delmek yerine kapi duzeltildi).
+   Zaman: 2026-10-03T16:43:10
+
+7. [IHSAN] SCRAPE-005-KAZIMA-DOCKER-INTEGRATION (cozuldu)
+   Sorun: Canli kosu yapildi (Docker acildi): image build + db healthy + container 82 sn yasadi, CIKTI SI REVISYONDA. Ama 4 adimin 3'u patladi ve en onemlisi: kazima isi CANLI SUPABASE'E DEGIL, cop atilan yerel
+   Çözüm: REDDEDILDI->aktif. 3 karar: (1) compose DATABASE_URL satiri kalksin, env_file tek kaynak; (2) import scrapers.ostim_detail_scraper; (3) restart no ONAY. Detay: data/orchestrator/SCRAPE-005-KAZIMA-DOCKER-INTEGRATION_karar_2026-10-03.md
+   Zaman: 2026-10-03T16:59:12
+
+8. [SALIH] ODIN-PROMPT (acik)
+   Sorun: Mimir-DIS prompt N12 olcumu: 36 senaryo, 2 basarisiz (kilavuz-01 iki fiyat, mesru-02 cevap+ret). NO-GO. mimir_servis.py hala yok (kilit sende). Commit 4f0c69e
+   Çözüm: mimir_servis.py yaz: prompt_yukle(rol='dis') + 9Router kombo mimir-dis; kilavuz-01 icin cevap sonrasi fiyat sayaci (kod tarafinda kes, prompt tutmuyor)
+   Zaman: 2026-10-03T03:20:40
+
+9. [IHSAN] ALTYAPI-MIMIR-BAGLAM-01 (cozuldu)
+   Sorun: REVIZE PROMPT HAZIR: prompts/mimir_sistem_promptu.md v4 (commit b41a532c, 2026-10-03): sapka tablosu, ARA/GETIR arac protokolu (§2), GETIR izin listesi, KATALOG §3b. Brief plans/brief_salih_ALTYAPI-MI
+   Çözüm: Yanlis hedef (ihsan->ihsan yazildi). Dogru kayit: salih'e acilan bir sonraki satir.
+   Zaman: 2026-10-03T16:43:39
+
+10. [SALIH] ALTYAPI-MIMIR-BAGLAM-01 (acik)
+   Sorun: REVIZE PROMPT HAZIR: prompts/mimir_sistem_promptu.md v4 (commit b41a532c, 2026-10-03): sapka tablosu, ARA/GETIR arac protokolu (§2), GETIR izin listesi, KATALOG §3b. Brief plans/brief_salih_ALTYAPI-MI
+   Çözüm: 
+   Zaman: 2026-10-03T16:43:39
+
+Toplam: 10 sorun

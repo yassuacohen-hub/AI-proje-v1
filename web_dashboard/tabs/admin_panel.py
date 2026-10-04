@@ -26,6 +26,8 @@ from scripts.decision_log import read_decisions, log_decision
 _KOK = Path(__file__).resolve().parents[2]
 if str(_KOK / "src") not in sys.path:
     sys.path.insert(0, str(_KOK / "src"))
+if str(_KOK / "scripts") not in sys.path:
+    sys.path.insert(0, str(_KOK / "scripts"))  # liderlik_verisi (ajan_chat.py) icin
 
 from company_master.settings import (  # noqa: E402
     AyarHatasi,
@@ -403,25 +405,11 @@ def render_ayarlar_tab(kullanici_id: str | None = None) -> None:
                ust_etiket="Sistem · Ayarlar", ikon="⚙️").render()
 
     # K3-10g: rehber anahtarı sayfa altında (`app.REHBER_KEY`); modül yalnız okur.
-    rehber = bool(st.session_state.get("_hg_rehber", False))
     st.caption(
         f"Ayarlar bu kullanıcıya özeldir (`{kullanici_id}`) ve tarayıcıdan bağımsız "
         "olarak sunucuda saklanır."
     )
 
-    if rehber:
-        st.info(
-            "**Bu ekran ne işe yarar?** Panel tercihlerinizi (tema, tablo satır sayısı, "
-            "bildirimler vb.) kullanıcı bazında kalıcı olarak saklar. Bir kez kaydettiğinizde "
-            "farklı tarayıcı veya cihazdan girseniz bile aynı ayarlar geçerli olur.\n\n"
-            "**Nasıl kullanılır?** Her sekme bir ayar grubudur. İstediğiniz alanları değiştirip "
-            "en alttaki **Kaydet** düğmesine basın. **Varsayılana dön** ile tüm ayarları "
-            "başlangıç değerlerine sıfırlayabilirsiniz.\n\n"
-            "**Veriler nereden gelir?** Ayar tanımları `company_master.settings` şemasından "
-            "otomatik üretilir; yeni bir ayar eklendiğinde bu ekranda kendiliğinden görünür.\n\n"
-            "**Dikkat:** Kaydetme işlemi hepsi-ya-hiç çalışır. Bir alan geçersizse "
-            "hata gösterilir ve hiçbir değer kaydedilmez; düzeltip yeniden kaydedin."
-        )
 
     SectionNav(BOLUMLER, yatay=True).render()
 
@@ -502,6 +490,20 @@ def render_chat_summary() -> None:
         "Ajan Chat Sistemi", ust_etiket="İş · Takip", ikon="💬",
         giris="Ajanlar arasında bildirilen sorunlar ve çözüm önerileri.",
     ).render()
+
+    # ---- Liderlik tablosu (Mesaj 6 · Yol A) — en üstte, tablo + grafik yan yana ----
+    Section("🏆 Liderlik Tablosu", "Gorev(done) + bulgu + mesaj sayisi, azalan siralama.", ikon="🏆").render()
+    try:
+        from ajan_chat import liderlik_verisi  # noqa: E402 (scripts/ — lazy import, CLI ile ayni hesap)
+        liderlik_df = pd.DataFrame(liderlik_verisi())
+        col_lb_tablo, col_lb_grafik = st.columns([1, 1])
+        with col_lb_tablo:
+            st.dataframe(liderlik_df, use_container_width=True, hide_index=True)
+        with col_lb_grafik:
+            if not liderlik_df.empty:
+                st.bar_chart(liderlik_df.set_index("ajan")[["gorev", "bulgu", "mesaj"]])
+    except Exception as e:  # pragma: no cover - UI hata gostergesi
+        st.warning(f"Liderlik tablosu yuklenemedi: {e}")
 
     # ---- Metrikler ----
     Section("Sorun Durumu Özeti", "Açık, çözüm bekleniyor ve çözüldü sayıları.", ikon="📊").render()
@@ -600,150 +602,152 @@ def render_chat_summary() -> None:
         )
         st.caption(f"Toplam {len(tum_sorunlar)} sorun kaydedilmiş.")
 
-    # ---- Çift Yönlü Mesaj Gönderme Formu (D-213, D-217: alıcı seçimi + otomatik yenileme) ----
-    Section("Mesaj Gönder", "Ajan seç, alıcı seç, mesaj yaz — gönderince tablo otomatik yenilenir.", ikon="📤").render()
+    # ---- Mesaj Gönder + Çözüme Bağla — aynı blokta yan yana (D-213/D-217, kullanıcı isteği) ----
+    Section(
+        "Mesaj Gönder & Çözüme Bağla",
+        "Solda yeni mesaj yaz, sağda açık soruna çözüm iliştir — ikisi aynı blokta.",
+        ikon="📤",
+    ).render()
+
+    col_mesaj, col_cozum = st.columns([1, 1])
 
     _GONDEREN_SECENEKLERI = ["kahin", "ihsan", "utku", "salih", "yasu", "mimir", "orkestrator"]
     _ALICI_SECENEKLERI = ["herkes", "ihsan", "utku", "salih", "yasu", "mimir", "orkestrator", "kahin"]
 
-    with st.form("kahin_mesaj_formu", clear_on_submit=True):
-        col_gonderen, col_alici, col_onem = st.columns([1, 1, 1])
-        with col_gonderen:
-            gonderen = st.selectbox(
-                "Gönderen",
-                options=_GONDEREN_SECENEKLERI,
-                format_func=lambda x: x.upper(),
-                index=0,
-            )
-        with col_alici:
-            alici = st.selectbox(
-                "Alıcı",
-                options=_ALICI_SECENEKLERI,
-                format_func=lambda x: "📢 HERKES" if x == "herkes" else x.upper(),
-                index=0,
-            )
-        with col_onem:
-            onem = st.selectbox(
-                "Önem Derecesi",
-                options=["orta", "yuksek", "kritik", "dusuk"],
-                index=0,
-            )
-
-        mesaj = st.text_area(
-            "Mesaj",
-            placeholder="Örn: Acil update: API v2 maintenance yarın saat 14:00-15:00 arasında.",
-            max_chars=500,
-            height=100,
-        )
-
-        task_id = st.text_input(
-            "Görev ID (isteğe bağlı)",
-            placeholder="Örn: API-12, P7-50, vb. — boşsa 'genel' kaydedilir.",
-            max_chars=50,
-        )
-
-        submitted = st.form_submit_button("📨 Mesaj Gönder", type="primary", use_container_width=True)
-
-    if submitted:
-        if not mesaj.strip():
-            st.error("Mesaj boş olamaz.")
-        else:
-            try:
-                hedef_ajan = "*" if alici == "herkes" else alici
-                if gonderen == "kahin":
-                    # kahin_gonder Telegram bildirimini de tetikler (D-212)
-                    sonuc = kahin_gonder(
-                        mesaj=mesaj.strip(),
-                        task_id=task_id.strip() if task_id else "",
-                        onem=onem,
-                        ajan=hedef_ajan,
-                    )
-                else:
-                    # Diğer ajanlar: ac() ile doğru "kimden" attribution + Telegram bildirimi (D-217)
-                    sonuc = ac(
-                        ajan=hedef_ajan,
-                        task_id=task_id.strip() if task_id else "genel",
-                        sorun=mesaj.strip(),
-                        kimden=gonderen,
-                        onem=onem,
-                    )
-                    try:
-                        from company_master.chat import _gonder_telegram_kahin
-                        _gonder_telegram_kahin(mesaj.strip(), sonuc.get("task_id", ""), onem, gonderen)
-                    except Exception:
-                        pass  # Telegram hatası web kaydını etkilemesin
-                alici_gosterim = "herkes" if alici == "herkes" else alici.upper()
-                st.success(
-                    f"✅ Mesaj gönderildi! ({gonderen.upper()} → {alici_gosterim}, task_id: {sonuc.get('task_id', '—')})"
+    with col_mesaj:
+        st.markdown("**📨 Mesaj Gönder**")
+        with st.form("kahin_mesaj_formu", clear_on_submit=True):
+            col_gonderen, col_alici, col_onem = st.columns([1, 1, 1])
+            with col_gonderen:
+                gonderen = st.selectbox(
+                    "Gönderen",
+                    options=_GONDEREN_SECENEKLERI,
+                    format_func=lambda x: x.upper(),
+                    index=0,
                 )
-                st.rerun()
-            except Exception as e:
-                st.error(f"❌ Hata: {e}")
+            with col_alici:
+                alici = st.selectbox(
+                    "Alıcı",
+                    options=_ALICI_SECENEKLERI,
+                    format_func=lambda x: "📢 HERKES" if x == "herkes" else x.upper(),
+                    index=0,
+                )
+            with col_onem:
+                onem = st.selectbox(
+                    "Önem Derecesi",
+                    options=["orta", "yuksek", "kritik", "dusuk"],
+                    index=0,
+                )
 
-    # ---- Çözüm Ekleme Formu (D-217: açık soruna çözüm iliştirme) ----
-    Section("Çözüme Bağla", "Açık bir soruna çözüm yazıp kapatın.", ikon="✅").render()
+            mesaj = st.text_area(
+                "Mesaj",
+                placeholder="Örn: Acil update: API v2 maintenance yarın saat 14:00-15:00 arasında.",
+                max_chars=500,
+                height=100,
+            )
 
-    acik_sorunlar_liste = ozet("acik")
-    if not acik_sorunlar_liste:
-        st.caption("Şu an açık sorun yok.")
-    else:
-        _secim_etiketleri = [
-            f"[{s.get('task_id', '?')}] {s.get('kimden', '?').upper()}: {s.get('sorun', '')[:40]}"
-            for s in acik_sorunlar_liste
-        ]
-        with st.form("cozum_formu", clear_on_submit=True):
-            secilen_idx = st.selectbox(
-                "Hangi soruna çözüm yazılacak?",
-                options=list(range(len(acik_sorunlar_liste))),
-                format_func=lambda i: _secim_etiketleri[i],
+            task_id = st.text_input(
+                "Görev ID (isteğe bağlı)",
+                placeholder="Örn: API-12, P7-50, vb. — boşsa 'genel' kaydedilir.",
+                max_chars=50,
             )
-            cozum_metni = st.text_area(
-                "Çözüm",
-                placeholder="Örn: Migration script'i review edildi, sorun giderildi.",
-                max_chars=300,
-                height=80,
-            )
-            durum_secim = st.selectbox(
-                "Durum",
-                options=["cozuldu", "cokundurmus"],
-                format_func=lambda x: "🟢 Çözüldü" if x == "cozuldu" else "🟡 Çözüm Bekleniyor",
-                index=0,
-            )
-            cozum_submit = st.form_submit_button("✅ Çözümü Kaydet", type="primary", use_container_width=True)
 
-        if cozum_submit:
-            if not cozum_metni.strip():
-                st.error("Çözüm metni boş olamaz.")
+            submitted = st.form_submit_button("📨 Mesaj Gönder", type="primary", use_container_width=True)
+
+        if submitted:
+            if not mesaj.strip():
+                st.error("Mesaj boş olamaz.")
             else:
-                secilen_sorun = acik_sorunlar_liste[secilen_idx]
-                hedef_task_id = secilen_sorun.get("task_id", "")
-                # Aynı task_id içindeki sırayı bul (guncelle() task_id + sorun_index ile çalışır)
-                ayni_task_sorunlar = [
-                    s for s in oku(task_id=hedef_task_id) if s.get("durum") == "acik"
-                ]
                 try:
-                    sorun_index = 0
-                    for i, s in enumerate(oku(task_id=hedef_task_id)):
-                        if s is secilen_sorun or (
-                            s.get("timestamp") == secilen_sorun.get("timestamp")
-                            and s.get("sorun") == secilen_sorun.get("sorun")
-                        ):
-                            sorun_index = i
-                            break
-                    sonuc = guncelle(
-                        task_id=hedef_task_id,
-                        sorun_index=sorun_index,
-                        cozum_guncel=cozum_metni.strip(),
-                        durum=durum_secim,
-                    )
-                    if sonuc:
-                        st.success("✅ Çözüm kaydedildi.")
-                        st.rerun()
+                    hedef_ajan = "*" if alici == "herkes" else alici
+                    if gonderen == "kahin":
+                        # kahin_gonder Telegram bildirimini de tetikler (D-212)
+                        sonuc = kahin_gonder(
+                            mesaj=mesaj.strip(),
+                            task_id=task_id.strip() if task_id else "",
+                            onem=onem,
+                            ajan=hedef_ajan,
+                        )
                     else:
-                        st.error("Sorun bulunamadı — tekrar deneyin.")
+                        # Diğer ajanlar: ac() ile doğru "kimden" attribution + Telegram bildirimi (D-217)
+                        sonuc = ac(
+                            ajan=hedef_ajan,
+                            task_id=task_id.strip() if task_id else "genel",
+                            sorun=mesaj.strip(),
+                            kimden=gonderen,
+                            onem=onem,
+                        )
+                        try:
+                            from company_master.chat import _gonder_telegram_kahin
+                            _gonder_telegram_kahin(mesaj.strip(), sonuc.get("task_id", ""), onem, gonderen)
+                        except Exception:
+                            pass  # Telegram hatası web kaydını etkilemesin
+                    alici_gosterim = "herkes" if alici == "herkes" else alici.upper()
+                    st.success(
+                        f"✅ Mesaj gönderildi! ({gonderen.upper()} → {alici_gosterim}, task_id: {sonuc.get('task_id', '—')})"
+                    )
+                    st.rerun()
                 except Exception as e:
                     st.error(f"❌ Hata: {e}")
 
+    with col_cozum:
+        st.markdown("**✅ Çözüme Bağla**")
+        acik_sorunlar_liste = ozet("acik")
+        if not acik_sorunlar_liste:
+            st.caption("Şu an açık sorun yok.")
+        else:
+            _secim_etiketleri = [
+                f"[{s.get('task_id', '?')}] {s.get('kimden', '?').upper()}: {s.get('sorun', '')[:40]}"
+                for s in acik_sorunlar_liste
+            ]
+            with st.form("cozum_formu", clear_on_submit=True):
+                secilen_idx = st.selectbox(
+                    "Hangi soruna çözüm yazılacak?",
+                    options=list(range(len(acik_sorunlar_liste))),
+                    format_func=lambda i: _secim_etiketleri[i],
+                )
+                cozum_metni = st.text_area(
+                    "Çözüm",
+                    placeholder="Örn: Migration script'i review edildi, sorun giderildi.",
+                    max_chars=300,
+                    height=80,
+                )
+                durum_secim = st.selectbox(
+                    "Durum",
+                    options=["cozuldu", "cokundurmus"],
+                    format_func=lambda x: "🟢 Çözüldü" if x == "cozuldu" else "🟡 Çözüm Bekleniyor",
+                    index=0,
+                )
+                cozum_submit = st.form_submit_button("✅ Çözümü Kaydet", type="primary", use_container_width=True)
+
+            if cozum_submit:
+                if not cozum_metni.strip():
+                    st.error("Çözüm metni boş olamaz.")
+                else:
+                    secilen_sorun = acik_sorunlar_liste[secilen_idx]
+                    hedef_task_id = secilen_sorun.get("task_id", "")
+                    try:
+                        sorun_index = 0
+                        for i, s in enumerate(oku(task_id=hedef_task_id)):
+                            if s is secilen_sorun or (
+                                s.get("timestamp") == secilen_sorun.get("timestamp")
+                                and s.get("sorun") == secilen_sorun.get("sorun")
+                            ):
+                                sorun_index = i
+                                break
+                        sonuc = guncelle(
+                            task_id=hedef_task_id,
+                            sorun_index=sorun_index,
+                            cozum_guncel=cozum_metni.strip(),
+                            durum=durum_secim,
+                        )
+                        if sonuc:
+                            st.success("✅ Çözüm kaydedildi.")
+                            st.rerun()
+                        else:
+                            st.error("Sorun bulunamadı — tekrar deneyin.")
+                    except Exception as e:
+                        st.error(f"❌ Hata: {e}")
 
 # ---------------------------------------------------------------------------
 # ALTYAPI-ADMIN-PANO-01: Task Board Gerçek Zamanlı Görünümü

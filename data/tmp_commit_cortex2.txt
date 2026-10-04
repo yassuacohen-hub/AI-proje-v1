@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 26.24s
+[chore/monorepo-merge 23367b3] ihsan cortex: review turu kapanisi (SCRAPE-005 red, DOC-GLOBAL-INTEL onay) + 2 tuzak (chat kirpma, hayalet onay-bekleyen)
+ 1 file changed, 13 insertions(+), 7 deletions(-)

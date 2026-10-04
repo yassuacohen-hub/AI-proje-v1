@@ -2,8 +2,8 @@
   "kaynaklar": [
     {
       "http": 200,
-      "bayt": 152031,
-      "sure_saniye": 1.14,
+      "bayt": 150876,
+      "sure_saniye": 2.8,
       "son_url": "https://ostim.org.tr/",
       "erisim": true,
       "ad": "OSTIM ana sayfa",
@@ -12,7 +12,7 @@
     {
       "http": 200,
       "bayt": 334276,
-      "sure_saniye": 1.21,
+      "sure_saniye": 1.15,
       "son_url": "https://ostim.org.tr/firmalar",
       "erisim": true,
       "ad": "OSTIM firmalar",
@@ -21,7 +21,7 @@
     {
       "http": 404,
       "bayt": 829,
-      "sure_saniye": 0.83,
+      "sure_saniye": 0.71,
       "son_url": "https://ostim.org.tr/uye-listesi",
       "erisim": false,
       "ad": "OSTIM uye listesi",
@@ -29,8 +29,8 @@
     },
     {
       "http": 200,
-      "bayt": 2801654,
-      "sure_saniye": 3.59,
+      "bayt": 2802018,
+      "sure_saniye": 2.24,
       "son_url": "https://www.atonet.org.tr/",
       "erisim": true,
       "ad": "ATO (Ankara Ticaret Odası)",
@@ -38,8 +38,8 @@
     },
     {
       "http": 200,
-      "bayt": 70240,
-      "sure_saniye": 2.03,
+      "bayt": 70356,
+      "sure_saniye": 3.51,
       "son_url": "https://www.atb.org.tr/",
       "erisim": true,
       "ad": "ATB (Ankara Ticaret Borsası)",
@@ -47,8 +47,8 @@
     },
     {
       "http": 200,
-      "bayt": 104184,
-      "sure_saniye": 1.05,
+      "bayt": 102597,
+      "sure_saniye": 2.59,
       "son_url": "https://www.aso.org.tr/",
       "erisim": true,
       "ad": "ASO (Ankara Sanayi Odası)",
@@ -57,7 +57,7 @@
     {
       "http": 200,
       "bayt": 37211,
-      "sure_saniye": 1.07,
+      "sure_saniye": 1.37,
       "son_url": "https://www.gib.gov.tr/",
       "erisim": true,
       "ad": "GIB VKN sorgu",
@@ -65,8 +65,8 @@
     },
     {
       "http": 200,
-      "bayt": 83224,
-      "sure_saniye": 1.29,
+      "bayt": 82212,
+      "sure_saniye": 1.45,
       "son_url": "https://ticaret.gov.tr/",
       "erisim": true,
       "ad": "Ticaret Bakanlığı",
@@ -75,7 +75,7 @@
     {
       "http": 200,
       "bayt": 31027,
-      "sure_saniye": 1.18,
+      "sure_saniye": 3.89,
       "son_url": "https://mersis.ticaret.gov.tr/",
       "erisim": true,
       "ad": "MERSIS (e-Devlet kontrol)",

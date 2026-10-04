@@ -1,0 +1,19 @@
+ONAYLANDI: DOC-GLOBAL-INTEL-ARASTIRMA-01 -> done (kilitler otomatik dustu)
+DENGE: tetik dusecek bos kuyruk yok
+eklendi=0 guncellendi=0 degismedi=9 arsivlendi=1
+yerel gorev=9 notion satiri=10
+ozet: 1 blok (silinen kopya 1)
+  Ilerleme Matrisi: eklendi 0, guncellendi 2, toplam 8
+  Ajan Ilerlemesi: eklendi 0, guncellendi 1, toplam 4
+  KRITIK - Simdi Buraya Bak: eklendi 0, guncellendi 0, toplam 2
+1 teslim kontrol bekliyor:
+
+  SCRAPE-005-KAZIMA-DOCKER-INTEGRATION  <- utku  (2026-10-03T01:42:39)
+  OZET: Red (orkestrator): REDDEDILDI: canli kosu 1/4, kazima yerel db'ye yazdi. 3 karar: (1) compose environment DATABASE_URL s
+  -> python scripts/gorev_kutusu.py onayla --task-id SCRAPE-005-KAZIMA-DOCKER-INTEGRATION --ben orkestrator
+eklendi=0 guncellendi=0 degismedi=9 arsivlendi=1
+yerel gorev=9 notion satiri=10
+ozet: 1 blok (silinen kopya 1)
+  Ilerleme Matrisi: eklendi 0, guncellendi 0, toplam 8
+  Ajan Ilerlemesi: eklendi 0, guncellendi 0, toplam 4
+  KRITIK - Simdi Buraya Bak: eklendi 0, guncellendi 0, toplam 2

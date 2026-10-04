@@ -1,0 +1,3 @@
+Baslik: [VERI] Kaynak sizintisini duzelt → ostim icinde 102 ASO kaydi (2s)
+Not: ostim kaynaginda ASO bicimli 102 kayit, kaynak=None
+Talimat: 

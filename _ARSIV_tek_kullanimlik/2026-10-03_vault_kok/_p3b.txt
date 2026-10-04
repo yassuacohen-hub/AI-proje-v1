@@ -1,0 +1,14 @@
+    if adet == 0:
+        S.append(yeni_satir)
+        adet = 1
+    icerik = ' 
++
+ 
+s
+ 
++
+ '
+'
+    yedek = _yedek(env_yolu)
+    gecici = env_yolu.with_name(env_yolu.name + '.tmp')
+    gecici.write_text(icerik, encoding='utf-8')

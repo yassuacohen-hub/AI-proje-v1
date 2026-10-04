@@ -23,7 +23,8 @@
 2. 200 dönenleri `KAYNAK_HARITASI`'na ekle; `ponytail` satırını güncelle (kaç adres, ne zaman genişler).
 3. `firma_haber_kaynaklari()` ile harita arasında köprü: haritadaki her anahtar `PAKET_KAYNAKLARI` içinde geçen bir kaynak adıyla eşleşsin; eşleşmeyen varsa chat'e yaz, uydurma.
 4. `tests/test_arac_dongusu_kaynak.py`: (a) haritadaki her URL `getir_izinli_mi` → `None`; (b) her URL `https://`; (c) harita anahtarları paket kaynak adlarıyla kesişiyor. 3 test, ağ yok.
-5. `python -m pytest tests/test_arac_dongusu_kaynak.py -q` yeşil → teslim.
+5. `python -m pytest tests/test_arac_dongusu_kaynak.py tests/test_arac_dongusu.py -q` yeşil → teslim.
+- **Dikkat (ihsan yaması 2026-10-03 19:45):** `arac_dongusu.py` içinde `_ozel_ag`, `_SAYISAL_ETIKET_RX`, `_WEB_TEXT_RX` güvenlik için değiştirildi (38 test yeşil). Sen yalnız `KAYNAK_HARITASI` + `ponytail` satırına dokunursun; bu üçünü **geri alma**. Haritaya eklediğin adres `getir_izinli_mi` → `None` vermiyorsa adres yanlıştır, filtre değil.
 
 ## Kabul kriteri
 - [ ] `KAYNAK_HARITASI` ≥ 6 adres, hepsi ölçüm dokümanında 200 satırıyla kanıtlı.

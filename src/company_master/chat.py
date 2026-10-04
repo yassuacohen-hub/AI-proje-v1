@@ -410,9 +410,10 @@ def ajan_acik_sorulari(
     satirlar = oku(data_dir=data_dir)
     ajan_norm = _ajan_normalize(ajan)
 
-    # Filtrele: hedef=ajan ve durum=acik
+    # Filtrele: hedef=ajan ve durum=acik ve kendi actigi degil (D-321)
     acik = [s for s in satirlar
-            if s.get("ajan") == ajan_norm and s.get("durum") == "acik"]
+            if s.get("ajan") == ajan_norm and s.get("durum") == "acik"
+            and s.get("kimden") != ajan_norm]
 
     return acik
 

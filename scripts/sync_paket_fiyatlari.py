@@ -19,11 +19,25 @@ import json
 import sys
 from pathlib import Path
 
-# Proje köküne göre yol
-ROOT = Path(__file__).resolve().parent.parent.parent
+# Proje köküne göre yol.
+# Düzeltme (VERI-PAKET-FIYAT-SENKRON-01): burada `.parent.parent.parent`
+# BIR SEVİYE FAZLAYDI ve `c:\Huginn Data Projesi` (repo DIŞI) veriyordu.
+# `paketler.py` aynı ifadeyi kullanır ama 3 seviye derinde olduğu için
+# doğruydu. Bu betik `scripts/` altında = 2 seviye. Sonuc: `sys.path`
+# yanlis yone bakip `company_master` bulunamadi -> betik HICBIR ZAMAN
+# calismadi. Kose bulmak yerine isaretci ile repo kokunu ariyoruz.
+def _repo_koku() -> Path:
+    yol = Path(__file__).resolve()
+    for aday in yol.parents:
+        if (aday / "src" / "company_master").is_dir():
+            return aday
+    return yol.parent.parent  # yedek: iki seviye
+
+
+ROOT = _repo_koku()
 sys.path.insert(0, str(ROOT / "src"))
 
-from company_master.paketler import fiyat_katalogu
+from company_master.paketler import fiyat_katalogu  # noqa: E402
 
 
 ORJINAL_JSON_PATH = ROOT / "data" / "demo" / "fiyat_katalogu.json"

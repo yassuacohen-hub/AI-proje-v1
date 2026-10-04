@@ -14,7 +14,8 @@
 
 1. `src/company_master/etl/pipeline.py::scrape_all()` hatayı yutmasın; `step_scrape()` başarısızlıkta **False** dönsün. Yeşil sinyal yalan söylemez (D-224).
 2. `update_task_board()` ya kaldırılır ya `bulgu_defteri.py` tarzı kilitle yazar. Kilitsiz pano yazımı SSOT riski (D-222).
-3. Canlı koşu **4/4** adım + Supabase'e yazıldığı `psql` ile ölçülür: `scrape_audit_log` satır sayısı önce/sonra, `data/ostim/firmalar_full.jsonl` mtime değişimi.
+3. Canlı koşu **4/4** adım + Supabase'e yazıldığı `psql` ile ölçülür: `scrape_audit_log` satır sayısı önce/sonra, `data/ostim/firmalar_detailed.jsonl` **ve** `data/aso/aso_full.jsonl` mtime değişimi. *(Revize 19:50 — bulgu #107: `firmalar_full.jsonl` `kaynak_kilidi.json` ile kilitli, değişmemesi doğru davranış; eski kalem ölçülemezdi.)*
+   - 3b. `[3/4] ingest` adımı `VERI-INGEST-ASO-GLOB-01` kapanmadan 4/4 olamaz (bulgu #105). O görev bitene kadar 3/4 + "ingest ayrı görevde" notu ile teslim **kabul edilir**; 4/4 ikinci koşuda ölçülür.
 4. `.dockerignore` `scripts/_*.py` dışlaması gözden geçirilir (gerekli betik varsa açılır).
 5. Rapor "Kapanma kanıtı" bölümü ölçümle dolu olmadan `teslim` çağrılmaz.
 
