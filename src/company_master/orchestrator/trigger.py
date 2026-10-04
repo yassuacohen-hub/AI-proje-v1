@@ -219,6 +219,9 @@ def tetik_al(
     S-06: Bekleyen tetik yoksa görev doğrudan panodan alınmaya çalışılır.
     Koşul: görev panoda var + `sahip == ajan` + durumu `plan`/`bekliyor`.
     Aksi halde TriggerError (başkasının görevi veya zaten alınmış/bitmiş iş).
+
+    D-341: `sahip == ajan` kontrolü koşulsuz — tetik kuyrukta bulunsa bile
+    panodaki `sahip` başka bir ajansa `al` reddedilir (devret şart).
     """
     ajan = ajan_normalize(ajan)
     kayitlar = _tetikleri_oku(ajan, data_dir)
@@ -229,14 +232,15 @@ def tetik_al(
             k["alma_tarihi"] = _simdi()
             bulundu = True
     gorev = tb.gorev_getir(task_id)
+    if gorev is None:
+        raise TriggerError(f"Görev panoda bulunamadı: {task_id}")
+    # D-341: sahip kontrolü artık her iki yolda (tetik/pano) da koşulsuz.
+    if ajan_normalize(gorev.get("sahip") or "-") != ajan:
+        raise TriggerError(
+            f"Görev {task_id} '{gorev.get('sahip')}' ajanına ait; {ajan} alamaz"
+        )
     if not bulundu:
         # S-06: pano fallback — panoya elle eklenmiş (tetiksiz) görevler için.
-        if gorev is None:
-            raise TriggerError(f"Görev panoda bulunamadı: {task_id}")
-        if ajan_normalize(gorev.get("sahip") or "-") != ajan:
-            raise TriggerError(
-                f"Görev {task_id} '{gorev.get('sahip')}' ajanına ait; {ajan} alamaz"
-            )
         if gorev.get("durum") not in PANO_ALINABILIR_DURUMLAR:
             raise TriggerError(
                 f"{ajan} için bekleyen tetik yok: {task_id} "
@@ -244,8 +248,6 @@ def tetik_al(
             )
         tb.gorev_guncelle(task_id, durum="aktif")
         return {"task_id": task_id, "ajan": ajan, "durum": "alindi", "kaynak": "pano"}
-    if gorev is None:
-        raise TriggerError(f"Görev panoda bulunamadı: {task_id}")
     _tetikleri_yaz(kayitlar, ajan, data_dir)
     tb.gorev_guncelle(task_id, durum="aktif")
     return {"task_id": task_id, "ajan": ajan, "durum": "alindi", "kaynak": "tetik"}

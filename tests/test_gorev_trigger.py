@@ -81,6 +81,15 @@ def test_tetik_al_panoda_olmayan_gorev_red(tmp_path):
         trigger.tetik_al("kilo", "YOK-1", data_dir=tmp_path)
 
 
+def test_tetik_al_baskasinin_gorevi_kuyrukta_olsa_da_red(tmp_path):
+    """D-341: kuyrukta tetik bulunsa bile pano sahibi farkliysa al() reddeder."""
+    _gorev_ac("T-08", "grok")  # pano: sahip=grok
+    trigger.tetik_ekle("T-08", "kilo", data_dir=tmp_path)  # kilo kuyruguna dusmus (sizinti)
+    with pytest.raises(trigger.TriggerError, match="ajanına ait"):
+        trigger.tetik_al("kilo", "T-08", data_dir=tmp_path)
+    assert tb.gorev_getir("T-08")["durum"] == "plan"
+
+
 # ---- Onay kuyruğu ----
 
 def _ac_al_teslim(tmp_path, task_id="T-08", ajan="kilo"):

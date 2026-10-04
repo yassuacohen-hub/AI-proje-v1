@@ -4990,3 +4990,134 @@ metnine "doğru" yazmadan önce kanıt **üretilir** (D-260).
 
 ### Referans
 [[D-310]] (K3/K4 kriterleri) · [[D-224]] (ölçülmeden karar yok) · [[D-256]] (mandal kırılarak doğrulanır) · [[D-211]] (ikiz yapı yasağı) · [[D-245]] (denylist kanıtlamaz) · [[D-260]] (beyan kanıt değildir) · [[D-266]] (mandal kendi kör noktasını korur) · [[D-86]] (geçici betik diskte kalmaz) · [[D-309]] (dört kapı: kod + kanıt + defter + karar)
+
+## Belirsiz Kimlik "Yok" Değildir; `kilit_zorla.py` İkisini Aynı Sayıp Kilidi Boşa Düşürüyordu (D-339 — KAHİN kararı 2026-10-04)
+
+### 1. Bulgu — utku, ihsan'ın kilitli dosyasını commit'e sokabildi
+
+`file_locks.json`'da `scripts/ajan_chat.py` ve `scripts/gorev_kutusu.py`
+`ihsan`'a (`ORKESTRA-KIMLIK-ZINCIRI-01`) kilitliydi. utku bu dosyaları
+değiştirip commit'e sokabildi — `kilit_zorla.py` kancası durdurmadı.
+
+Kök neden kilit tablosunda değil, kancanın kimlik çözümünde:
+`scripts/kilit_zorla.py::ajan_kimligi()`, `ajan_kimligi.py`'nin fırlattığı
+`KimlikBelirsiz` istisnasını (bu makinede 2+ `ajan_<ad>.json` var, hangisi
+olduğu belirsiz) yutup `None` döndürüyordu — "kimlik hiç yok" ile aynı
+değer. `main()` ise `ben is None` durumunda UYARIP GEÇİYORDU (fail-open).
+Bu makinede fiilen üç kimlik dosyası (`ajan_salih.json`, `ajan_utku.json`,
+`ajan_yasu.json`) birlikte duruyordu → her commit'te kimlik BELİRSİZ'di →
+kilit kontrolü sessizce devre dışı kalıyordu.
+
+### 2. Karar — BELİRSİZ, None'dan ayrı bir değerdir ve fail-closed işlenir
+
+`scripts/kilit_zorla.py`'ye `BELIRSIZ = "__belirsiz__"` sabiti eklendi.
+`ajan_kimligi()` artık `KimlikBelirsiz` yakalandığında `BELIRSIZ` döndürür
+(`None` değil). `main()`'de üç dal:
+
+| Dönüş | Anlam | Davranış |
+|---|---|---|
+| gerçek ad | kimlik net | kendi kilidi dışındaki dosyalar ihlal → DURDU |
+| `None` | kimlik hiç yok (0 dosya) | UYARI, geç (fail-open, kasıtlı — kurulumsuz makineyi tıkamaz) |
+| `BELIRSIZ` | 2+ ajan dosyası var | **DURDU** (fail-closed, yeni) |
+
+"Hiç yok" ile "ikisi de var" iki ayrı durumdur; biri affedilir, öteki
+affedilmez — çünkü BELİRSİZ durumda hangi ajan olduğu bilinmediği için
+HİÇBİR kilit güvenilir şekilde uygulanamaz.
+
+### 3. Kanıt
+
+| Kontrol | Sonuç |
+|---|---|
+| `tests/test_kilit_zorla.py` (yeni: `test_belirsiz_kimlik_nonedan_ayri_sabit`) | 7 passed |
+| Tam paket `pytest tests/ -q` | regresyon yok (bkz. çalıştırma kaydı) |
+| Hook zinciri | `scripts/hooks/pre-commit` doğrudan `python scripts/kilit_zorla.py` çağırır — kaynak gövde değişince `hook_kur.py` yeniden kurulumu gerekmez |
+
+### 4. Öz-eleştiri
+
+Bu düzeltme yalnız **commit anını** kapatır; bir ajanın kilitli dosyayı
+editörde AÇIP DÜZENLEMESİNİ engellemez — sadece `git commit` sırasında
+durdurur. Daha sağlam çözüm dosya sistemi seviyesinde kilit (ör. salt-okunur
+izin) olurdu, ama bu D-261'in "beyan kilidi" felsefesiyle çelişir ve
+otonom ajanların kendi dosyalarını özgürce düzenlemesini de kilitlerdi.
+Şimdilik commit kapısı yeterli: ajan ilerlemeden önce zaten en az bir kez
+commit denemek zorunda.
+
+İkinci eksik: `ajan_salih.json` + `ajan_utku.json` + `ajan_yasu.json`
+üçü birlikte **hâlâ diskte** — bu düzeltme sorunu gizlemez, aksine artık
+her commit'i BELİRSİZ olduğu için DURDURACAK. Temizlik (hangi dosya bu
+makinede kalacak) ayrı, insan kararı gerektiren bir adımdır; koda
+gömülmedi çünkü "doğru ajan hangisi" teknik değil, operasyonel bir
+sorudur.
+
+### Referans
+[[D-306]] (kimlik sessizce ihsan'a varsayılmaz) · [[D-261]] (kilit beyandır, zorlayıcı kilit_zorla.py'dir) · [[D-281]] (kilit_zorla.py commit kapısı) · [[D-333]] (hook kaynağı scripts/hooks/, .git/hooks/ sürümlenmez)
+
+## `tetik_al()` Sahip Kontrolü Yalnız Pano-Fallback Dalındaydı; Kuyruk Yoluyla Atlanabiliyordu (D-341 — KAHİN kararı 2026-10-04)
+
+### 1. Bulgu
+[`trigger.py:214`](Huginn Data Insights/src/company_master/orchestrator/trigger.py:214) `tetik_al()` içinde `sahip == ajan`
+denetimi sadece `bulundu == False` (pano-fallback) dalında yapılıyordu. Bir
+görev tetik kuyruğuna (başka ajanın kuyruğuna sızıntı/hata ile) düşmüşse,
+pano'daki gerçek `sahip` farklı olsa bile `al()` komutu geçiyordu — ownership
+kontrolü atlanıyordu.
+
+### 2. Karar
+Sahip kontrolü dal-bağımsız, fonksiyonun başına (koşulsuz) taşındı. Artık
+kuyrukta bulunsun/bulunmasın, pano `sahip` ≠ istek yapan ajan ise `al()`
+her zaman `TriggerError` fırlatır.
+
+### 3. Kanıt
+| Kontrol | Sonuç |
+|---|---|
+| Yeni test `test_tetik_al_baskasinin_gorevi_kuyrukta_olsa_da_red` | pass |
+| `pytest tests/test_gorev_trigger.py -q` | regresyon yok |
+
+### 4. Öz-eleştiri
+Daha ucuz yol: kontrolü tek satır yukarı taşımak yerine baştan tek dal
+yazılsaydı bu boşluk hiç oluşmazdı — kod iki kez `gorev is None` kontrolü
+tekrarlıyordu (kopya kontrol kokusu), bu da gözden kaçışın işaretiydi.
+
+### Referans
+[[D-339]] (BELİRSİZ kimlik fail-closed, aynı gün, farklı kilit katmanı) · [[D-77]] (pano işleri orkestratöre aittir)
+
+## .com Yurt Kapısı Gerçek TP'leri Eliyor; Kapsam Kaybı Ölçülü, Karar Askıda Kaldı (D-343 — KAHİN kararı 2026-10-04)
+
+### 1. Bulgu
+[`web_sitesi_zenginlestir.py:263`](Huginn Data Insights/src/company_master/etl/web_sitesi_zenginlestir.py:263)
+`yurt_kakismasi_olasilik()`: unvanda Türk şirket türü (`LTD`, `ŞTİ` vb.) var + alan adı
+`.tr` grubunda değilse → `yurt_kakismasi_suspesi` ile elenir (`el_tasidi`'ye düşürülür,
+otomatik kabul edilmez). `VERI-WEB-SITESI-ZENGINLESTIR-01_rapor_2026-10-04_uretim.md`'de
+ölçülmüş 3 örnek:
+
+| Domain | Gerçek durum | Gerekçe |
+|---|---|---|
+| `gezencadir.com` | Gerçek Gezen Çadır üreticisi | yurt_kakismasi_suspesi → coverage reddi |
+| `mkbhidrolik.com` | Gerçek MKB Hidrolik | yurt_kakismasi_suspesi → coverage reddi |
+| `egemen-group.com` | Ad markayla birebir | marka_kalintisi_kaniti_yok → belirsiz, muhtemelen hatalı eleme |
+
+utku'nun 2026-10-04 bulgusu yeni değil — bu rapor zaten ölçmüş, "karar sahibine
+bırakıldı" notuyla askıda kalmış.
+
+### 2. Karar
+Filtre **gevşetilmedi**. `yurt_kakismasi_suspesi` kodu bilinçli güvenlik tercihi:
+yanlış pozitif kabul etmek (yurt dışı markayı Türk firması sanmak) yanlış negatiften
+(gerçek Türk firmasını elemek) daha maliyetli — ikincisi `el_tasidi` kuyruğunda
+elle düzeltilebilir, ilki üretimde yanlış veri olarak kalır.
+
+| Seçenek | Artı | Eksi |
+|---|---|---|
+| **A — böyle kalsın (seçildi)** | Güvenlik tarafı korunur, kod değişmez | 2 ölçülü + N bilinmeyen gerçek TP `el_tasidi`'de bekler |
+| B — `.com` özel durumunu gevşet (unvan+marka tam eşleşirse kabul et) | Coverage artar | Yeni FP riski (GOMAP/gomap.be deseni D-262'de zaten ölçülmüştü) |
+
+### 3. Uygulama
+`el_tasidi` kuyruğundaki 3 satır (`gezencadir.com`, `mkbhidrolik.com`,
+`egemen-group.com`) elle incelenip onaylanacaksa bu D-66 elle inceleme
+sürecinden geçer — kod değişikliği gerekmez, veri düzeltmesi yeterlidir.
+
+### 4. Öz-eleştiri
+Daha hızlı yol: bu kararı utku'nun bulgusunu beklemeden, rapor yazıldığı gün
+(2026-10-04 daha erken saatte) kapatmak. Askıda bırakmak aynı bulguyu iki kez
+(rapor + utku chat) okuma maliyetine yol açtı.
+
+### Referans
+[[D-262]] (GOMAP/gomap.be deseni, aynı filtre mantığı) · [[VERI-WEB-SITESI-ZENGINLESTIR-01]]

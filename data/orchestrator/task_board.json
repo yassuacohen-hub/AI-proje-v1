@@ -2990,5 +2990,24 @@
     "mod": "code",
     "brief": "plans/brief_yasu_ALTYAPI-9ROUTER-MITM-PATCH-01.md",
     "talimat": "Bulgu defteri DEBUG-9ROUTER-COPILOT-502 task-id altinda 3 kayit var, once onlari oku. 1) 915.js spawn env NODE_ENV:production kaliyor, DEBUG_MITM patch'i yeniden uygula, restart sonrasi logs/mitm/ klasorunde dump olusuyor mu dogrula. 2) OAuth clinepass hesaplari (yassuacohen@gmail.com, muhammeddcan82@gmail.com) ERROR veriyor, yeniden test et, orijinal Copilot 502 ile iliskisini belirle. Sonucu bulgu_defteri.py ekle ile DEBUG-9ROUTER-COPILOT-502 task-id'sine kaydet."
+  },
+  {
+    "task_id": "ALTYAPI-ODIN-MASKE-V3-01",
+    "id": "ALTYAPI-ODIN-MASKE-V3-01",
+    "baslik": "[ALTYAPI] maskeleme_odin() V1/V2/V3 kaynak ayrımı + V3 endpoint (2s)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-10-04T18:23:59",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/sunum.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_ALTYAPI-ODIN-MASKE-V3-01.md",
+    "talimat": "plans/brief_utku_ALTYAPI-ODIN-MASKE-V3-01.md brifini oku; maskeleme_odin() kaynak parametresi ekle, V3 endpoint yaz."
   }
 ]

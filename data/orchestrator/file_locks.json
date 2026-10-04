@@ -1,24 +1,4 @@
 {
-  "scripts/ajan_cakisma_kilidi.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-AJAN-CAKISMA-01",
-    "kilitlendi": "2026-09-29T00:42:35"
-  },
-  "docs/ODIN_DEPLOYMENT_ARCHITECTURE.md": {
-    "sahip": "ihsan",
-    "task_id": "ALTYAPI-ODIN-UYARLAMA-01",
-    "kilitlendi": "2026-10-01T16:59:48"
-  },
-  "docs/ODIN_SECURITY_CHECKLIST.md": {
-    "sahip": "ihsan",
-    "task_id": "ALTYAPI-ODIN-UYARLAMA-01",
-    "kilitlendi": "2026-10-01T16:59:48"
-  },
-  "docs/ODIN_PROMPT_INJECTION_SCENARIOS.md": {
-    "sahip": "ihsan",
-    "task_id": "ALTYAPI-ODIN-UYARLAMA-01",
-    "kilitlendi": "2026-10-01T16:59:48"
-  },
   "data/odin_training_data.csv": {
     "sahip": "utku",
     "task_id": "VERI-ODIN-EGITIM-VERISI-HAZIRLA",
@@ -69,114 +49,29 @@
     "task_id": "ALTYAPI-MIMIR-BAGLAM-01",
     "kilitlendi": "2026-10-01T20:52:27"
   },
-  "scripts/ninerouter_anahtar_guncelle.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-9ROUTER-ANAHTAR-01",
-    "kilitlendi": "2026-10-03T17:35:43"
-  },
-  "tests/test_ninerouter_anahtar_guncelle.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-9ROUTER-ANAHTAR-01",
-    "kilitlendi": "2026-10-03T17:35:43"
-  },
-  "scripts/continue_haftalik_bildir.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-OPENROUTER-ARAC-01",
-    "kilitlendi": "2026-10-03T17:35:44"
-  },
-  "scripts/or_batch_cikar.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-OPENROUTER-ARAC-01",
-    "kilitlendi": "2026-10-03T17:35:44"
-  },
-  "scripts/or_fiyat_ara.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-OPENROUTER-ARAC-01",
-    "kilitlendi": "2026-10-03T17:35:44"
-  },
-  "scripts/or_kod_liste.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-OPENROUTER-ARAC-01",
-    "kilitlendi": "2026-10-03T17:35:44"
-  },
-  "scripts/or_sablon_ekle.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-OPENROUTER-ARAC-01",
-    "kilitlendi": "2026-10-03T17:35:44"
-  },
-  "scripts/or_seckin.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-OPENROUTER-ARAC-01",
-    "kilitlendi": "2026-10-03T17:35:44"
-  },
-  "src/company_master/etl/scrapers/ostim_detail_scraper.py": {
-    "sahip": "utku",
-    "task_id": "VERI-OSTIM-HREF-FILTRE-01",
-    "kilitlendi": "2026-10-03T17:35:44"
-  },
-  "tests/test_ostim_detail_scraper.py": {
-    "sahip": "utku",
-    "task_id": "VERI-OSTIM-HREF-FILTRE-01",
-    "kilitlendi": "2026-10-03T17:35:44"
-  },
-  "docs/APIFY_BUTCE.md": {
-    "sahip": "utku",
-    "task_id": "VERI-APIFY-BUTCE-01",
-    "kilitlendi": "2026-10-03T17:35:44"
-  },
-  "scripts/apify_butce_olc.py": {
-    "sahip": "utku",
-    "task_id": "VERI-APIFY-BUTCE-01",
-    "kilitlendi": "2026-10-03T17:35:44"
-  },
-  "scripts/sync_paket_fiyatlari.py": {
-    "sahip": "yasu",
-    "task_id": "VERI-PAKET-FIYAT-SENKRON-01",
-    "kilitlendi": "2026-10-03T17:35:44"
-  },
-  "tests/test_paket_fiyat_senkron.py": {
-    "sahip": "yasu",
-    "task_id": "VERI-PAKET-FIYAT-SENKRON-01",
-    "kilitlendi": "2026-10-03T17:35:44"
-  },
-  "tests/test_gorev_kutusu_cli.py": {
-    "sahip": "utku",
-    "task_id": "TEST-SIMULASYON-B17-KIRIK-01",
-    "kilitlendi": "2026-10-03T17:35:44"
-  },
-  "tests/test_gorev_kutusu_simulasyon.py": {
-    "sahip": "utku",
-    "task_id": "TEST-SIMULASYON-B17-KIRIK-01",
-    "kilitlendi": "2026-10-03T17:35:44"
-  },
-  "src/company_master/odin_ai/arac_dongusu.py": {
-    "sahip": "utku",
-    "task_id": "ALTYAPI-MIMIR-HABER-KUSU-01",
-    "kilitlendi": "2026-10-03T18:28:44"
-  },
-  "tests/test_arac_dongusu_kaynak.py": {
-    "sahip": "utku",
-    "task_id": "ALTYAPI-MIMIR-HABER-KUSU-01",
-    "kilitlendi": "2026-10-03T18:28:44"
-  },
-  "migrations/0050_kredi_cuzdani.sql": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-KREDI-CUZDANI-01",
-    "kilitlendi": "2026-10-03T18:28:44"
-  },
-  "src/company_master/kredi.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-KREDI-CUZDANI-01",
-    "kilitlendi": "2026-10-03T18:28:44"
-  },
-  "tests/test_kredi.py": {
-    "sahip": "yasu",
-    "task_id": "ALTYAPI-KREDI-CUZDANI-01",
-    "kilitlendi": "2026-10-03T18:28:44"
-  },
-  "tests/test_prompt_yukle_roller.py": {
+  "tests/conftest.py": {
     "sahip": "salih",
-    "task_id": "TEST-ODIN-REDTEAM-S1S4-I1I4-01",
-    "kilitlendi": "2026-10-03T18:29:43"
+    "task_id": "TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01",
+    "kilitlendi": "2026-10-03T21:29:46"
+  },
+  "scripts/ajan_chat.py": {
+    "sahip": "ihsan",
+    "task_id": "ORKESTRA-KIMLIK-ZINCIRI-01",
+    "kilitlendi": "2026-10-04T15:37:09"
+  },
+  "scripts/gorev_kutusu.py": {
+    "sahip": "ihsan",
+    "task_id": "ORKESTRA-KIMLIK-ZINCIRI-01",
+    "kilitlendi": "2026-10-04T15:37:09"
+  },
+  "C:/Users/yasin/AppData/Roaming/npm/node_modules/9router/app/.next-cli-build/server/chunks/915.js": {
+    "sahip": "yasu",
+    "task_id": "ALTYAPI-9ROUTER-MITM-PATCH-01",
+    "kilitlendi": "2026-10-04T17:00:43"
+  },
+  "src/company_master/sunum.py": {
+    "sahip": "utku",
+    "task_id": "ALTYAPI-ODIN-MASKE-V3-01",
+    "kilitlendi": "2026-10-04T18:23:59"
   }
 }
