@@ -5,6 +5,16 @@
 
 > D-219: tek blok, **üzerine yazılır**. Pano ile çelişirse pano üstündür.
 
+- **Konum (2026-10-05 00:42) — D-353+D-354 nöbetçi watchdog + bütçe, oturum kapanışı:**
+  - **D-353 PID watchdog:** `nobetci.py`'ye `pid_yaz()`/`pid_temizle()`/`watchdog_kontrol()` eklendi; `nobetci_periodic.py` başlangıçta PID yazıp `atexit` ile siliyor, açılışta stale-PID + log-yaş kontrolü yapıyor. Windows `os.kill(pid,0)` `WinError 87` attığı için `except OSError` eklendi (ProcessLookupError değil — platformlar arası tuzak).
+  - **D-354 tetik bütçesi:** `geciken_tetikler()`'e `max_uyari` parametresi, `nobetci_ayar_oku()` varsayılanı `max_uyari=10`; `uyari_sayisi >= max_uyari` ise ateşlenmiyor. Geriye dönük 8320 tetik temizlenmedi — kayıtlı açık borç.
+  - **Testler:** `tests/test_gorev_nobetci.py` 25/25 yeşil (`-v` ile tek tek doğrulandı; `-q` modunda görünen "KeyboardInterrupt exit 2" pytest'in Windows'ta ctrl+c yakalama tuhaflığı, gerçek hata değil — testler zaten "15 passed" yazmıştı önce).
+  - **AGENTS.md kaydı:** D-353 ve D-354 karar blokları (bulgu→karar→öz-eleştiri formatında) eklendi.
+  - **Kapanış ritüeli (D-309/1 dersi tekrar uygulandı):** değişen 4 dosya (`AGENTS.md`, `scripts/nobetci_periodic.py`, `src/company_master/orchestrator/nobetci.py`, `tests/test_gorev_nobetci.py`) izole `git add` ile seçildi — ortamda 23 başka dosya zaten stage'liydi (önceki oturumdan kalıntı, benim değil), `git reset` ile ayrıştırıldı. MANDAL-SAHNE-01 (20 dosya tavanı) bu sayede tetiklenmedi. Commit `64c1cd0f` → push `chore/monorepo-merge` başarılı.
+  - **SSOT/matrix kontrolü:** `SSOT_ILERLEME_MATRISI.md` kasıtlı dokunulmadı — nöbetçi/watchdog konusu Faz 2-6 veri skoru anlatısının dışında (D-197 tek-durum kuralı).
+  - **Sonraki adım:** Ürün Sahibine final rapor (bu mesaj) → yeni görev seçimi için pano taraması bir sonraki oturuma kalır.
+  - **Öz-eleştiri:** Commit'i ilk denemede `git add` ile değil doğrudan `git commit` ile denedim, MANDAL-SAHNE-01 27 dosya uyarısı verdi — önce stage durumunu kontrol etmeden commit denemek zaman kaybı oldu. Ders: çok-ajanlı ortakta her commit öncesi `git status --short` ile stage'i önce temizle, sonra kendi dosyalarını ekle.
+
 - **Konum (2026-10-04 19:00) — Borç kapatma + SSOT tazeleme turu (DIS_GORUS/ODIN/matris):**
   - **DIS_GORUS.md A5/K3 kapatıldı**: aksiyon planındaki iki kalem kanıtlanarak işaretlendi (bkz. `docs/DIS_GORUS.md` §8); `_tmp/y.py` (tek-kullanımlık, iz bırakmayan deneme dosyası) silindi — D-221 kök temizliği.
   - **SSOT_ILERLEME_MATRISI.md §2 tazelendi**: `scripts/ssot_ilerleme.py` canlı ölçümüyle `job_postings=8` yeni sinyal satırı eklendi. §1/§3/§4/§5 **kasıtlı dokunulmadı** — üçü de `company_products`/`company_capabilities`/`company_signals` anlatısı, `job_postings` bu bölümlerin hiçbirinde anılmıyor; zorla satır eklemek D-197 tek-durum kuralını ihlal ederdi.
