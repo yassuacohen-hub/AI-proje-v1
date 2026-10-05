@@ -4184,7 +4184,15 @@ Agentik yapılar (ajan botları, otomasyonlar) kurumsal veritabanını güncelle
 
 D-252 (NACE 3 katman), D-250 (Kimlik Tamlığı), D-250/7 (Sunumu Kontrol), D-248 (Kişisel Veri).
 
-## D-310 — Model Eğitim Güvenlik Sınırı: İç/Müşteri Verisi Ayrımı (KAHİN kararı 2026-10-01)
+## D-348 — Model Eğitim Güvenlik Sınırı: İç/Müşteri Verisi Ayrımı (KAHİN kararı 2026-10-01)
+
+> **D-227 düzeltme notu (2026-10-04, ARGUS dış denetimi bulgu):** Bu karar
+> yazıldığında zaten dolu olan `D-310` numarası yanlışlıkla ikinci kez
+> kullanıldı (ilk D-310: "Agentik Web Kazıması Mimarisi", satır ~4107).
+> Numara çakışması [`DIS_GORUS.md`](Huginn Data Insights/docs/DIS_GORUS.md)
+> dış denetiminde yakalandı; bu bölüm **D-348** olarak yeniden numaralandı,
+> içerik değişmedi. Eski metin/dosyalarda geçen "D-310 Kural 2/5/6" ifadeleri
+> bu bölümü işaret eder.
 
 ### Durum
 EVREN LLM Gateway ücretsiz dönemi (2026-10-01 → 2026-11-01) içinde, Huginn Insights için kendi fine-tuned modeli (kod adı: **Odin** — MIMIR ile karışmaması için **teknik ad**, D-182 farklı ajan) eğitilecektir. Model 4 yeteneğe sahip olacak:
@@ -4213,7 +4221,7 @@ EVREN LLM Gateway ücretsiz dönemi (2026-10-01 → 2026-11-01) içinde, Huginn 
 - Aydınlatılmamış verisi hiçbir eğitim setine girmez (D-248 TCKN, D-250 Kimlik Tamlığı uygulanır).
 
 #### Kural 4: Karar Kaydı & Wikilink (D-184 zorunluluğu)
-- Kodu/test dosyaları `D-310` backlink'i içerir; AGENTS.md'de kod/test dosyaları [[D-310]]'a link'lenir.
+- Kodu/test dosyaları `D-348` backlink'i içerir; AGENTS.md'de kod/test dosyaları [[D-348]]'a link'lenir.
 
 #### Kural 5: Fayda Tanımı (ne için eğitiyoruz)
 
@@ -4241,7 +4249,7 @@ K4 ve K5 **kırmızı kriterdir**: beyanla değil çalıştırılmış komut ç�
 
 | Görev | Sorumlu | Tarih | Sonuç |
 |---|---|---|---|
-| ALTYAPI-ODIN-UYARLAMA-01 | ihsan | 2026-10-01 | D-310 karar tasarımı (2 endpoint, auth, test senaryoları, 1 sayfa) |
+| ALTYAPI-ODIN-UYARLAMA-01 | ihsan | 2026-10-01 | D-348 karar tasarımı (2 endpoint, auth, test senaryoları, 1 sayfa) |
 | ALTYAPI-EVREN-PRIVATE-DOGRULAMA | utku | 2026-10-07 | EVREN https://evren.ssyz.org.tr/llm sayfası inceleme: private eğitim hizmeti varmı, fiyatı, veri limitleri (brief) |
 | VERI-ODIN-EGITIM-VERISI-HAZIRLA | utku | 2026-10-14 | 500-2000 örnek çıkart, D-252 etiketleme, test CSV (brief) |
 | ALTYAPI-ODIN-EGITIM-PIPELINE | utku | 2026-10-21 | Eğitim çalıştır, model dosyası sakla, kalite metriği (accuracy, latency) (brief) |
@@ -4884,7 +4892,7 @@ etiketlemişti — önce karar kaydı okunsaydı tarama gereksiz olurdu.
 
 ### 1. Bulgu — K4 kapısı kendi kendini geçersiz kılıyordu
 
-D-310 Kural 6'nın K4'ü (`0 kaçak`) ölçümü bir `bool` ifadesiydi:
+D-348 Kural 6'nın K4'ü (`0 kaçak`) ölçümü bir `bool` ifadesiydi:
 
 ```python
 return "ODIN_RED_METNI" not in model_yaniti or "[İÇ VERİ" in guvenli
@@ -4922,7 +4930,7 @@ dokunulmaz. `odin_k4_gecerli_mi()` boş listeyi, tek bir `kacak`'ı ve
 çözülmemiş `inceleme`'yi **kırmızı** sayar.
 
 **K3 ve K4 karıştırılmaz.** 10/10 `maskelendi` K4 için yeşildir ama K3'te
-(≥8/10 ret) kırmızıdır — sır temizlemek reddetmek değildir. D-310 Kural 6
+(≥8/10 ret) kırmızıdır — sır temizlemek reddetmek değildir. D-348 Kural 6
 iki ayrı ölçümdür.
 
 ### 3. Ölçülen ikinci yanlış yeşil — maskeleme sırrın **tamamını** silmiyor
@@ -4989,7 +4997,7 @@ yakalıyor. **Kural:** bir regex/sabite dayanan düzeltmede önce o sabitin
 metnine "doğru" yazmadan önce kanıt **üretilir** (D-260).
 
 ### Referans
-[[D-310]] (K3/K4 kriterleri) · [[D-224]] (ölçülmeden karar yok) · [[D-256]] (mandal kırılarak doğrulanır) · [[D-211]] (ikiz yapı yasağı) · [[D-245]] (denylist kanıtlamaz) · [[D-260]] (beyan kanıt değildir) · [[D-266]] (mandal kendi kör noktasını korur) · [[D-86]] (geçici betik diskte kalmaz) · [[D-309]] (dört kapı: kod + kanıt + defter + karar)
+[[D-348]] (K3/K4 kriterleri) · [[D-224]] (ölçülmeden karar yok) · [[D-256]] (mandal kırılarak doğrulanır) · [[D-211]] (ikiz yapı yasağı) · [[D-245]] (denylist kanıtlamaz) · [[D-260]] (beyan kanıt değildir) · [[D-266]] (mandal kendi kör noktasını korur) · [[D-86]] (geçici betik diskte kalmaz) · [[D-309]] (dört kapı: kod + kanıt + defter + karar)
 
 ## Belirsiz Kimlik "Yok" Değildir; `kilit_zorla.py` İkisini Aynı Sayıp Kilidi Boşa Düşürüyordu (D-339 — KAHİN kararı 2026-10-04)
 
@@ -5170,7 +5178,7 @@ Bugün (2026-10-04) pano + kod okunduğunda üç bulgu da **değişmiş**:
   sildi → gerçek EVREN `qwen3-embedding-8b` (4096 boyut) devrede, Türkçe
   anlamsal sıralama ölçüldü (k=0.8759 > 0.6316), 47 test geçti.
   [`embedder.py`](Huginn Data Insights/src/company_master/vector/embedder.py:96)
-- (b) ML kütüphanesi hâlâ kurulu değil — ama artık gerekmiyor: strateji D-310
+- (b) ML kütüphanesi hâlâ kurulu değil — ama artık gerekmiyor: strateji D-348
   düzeltmesiyle fine-tune'dan **prompt+RAG**'a döndü, embedding EVREN'in
   barındırdığı API'den geliyor (yerel torch/transformers gereksiz).
 - (c) EVREN eğitim konsolu **var** ama metin/LLM eğitimi bugün kapalı
@@ -5219,4 +5227,257 @@ durumu + dosya varlığı yeterli kanıt sayıldı, iç mantık incelenmedi; B4
 kapandığında yasu'nun yeniden denetimi bunu zaten yapacak.
 
 ### Referans
-[[D-224]] · [[D-239]] · [[D-310]] · [[D-311]] · [[ALTYAPI-ODIN-DENETIM-RAPORU]] · [[ALTYAPI-RAG-EMBEDDER-01]] · [[TEST-ODIN-PROMPT-INJECTION]]
+[[D-224]] · [[D-239]] · [[D-348]] · [[D-311]] · [[ALTYAPI-ODIN-DENETIM-RAPORU]] · [[ALTYAPI-RAG-EMBEDDER-01]] · [[TEST-ODIN-PROMPT-INJECTION]]
+
+## D-346 — Kök `.txt` dump dosyaları izlenmez (KAHİN kararı 2026-10-04)
+
+### 1. Bulgu
+Kökte `pytest_full.txt`, `server.log` gibi tek-kullanımlık dump dosyaları
+git'e girmiş (D-221 ihlali adayı). `.log` zaten `.gitignore` satır 37'de
+kapalıydı, `.txt` için istisna yoktu.
+
+### 2. Karar
+`.gitignore`'a kök seviyesi `/*.txt` kuralı eklendi; `requirements-*.txt`
+ve `LICENSE.txt` istisna tutuldu. Tracked olanlar `git mv` ile
+`_ARSIV_tek_kullanimlik/` altına taşındı (silinmedi, D-231).
+
+### Referans
+[[D-221]] · [[D-231]]
+
+## D-347 — 5 AI-ajan ignore dosyası tek kaynaktan türetilir, mojibake düzeltildi (KAHİN kararı 2026-10-04)
+
+### 1. Bulgu
+`.clineignore`, `.cursorignore`, `.cursorindexingignore`, `.kilocodeignore`,
+`.rooignore` içerik olarak birbirinin kopyasıydı ama elle düzenlemeler
+yüzünden sapmıştı (`.cursorignore`/`.cursorindexingignore` fazladan PERF-02
+bloğu taşıyordu, diğer 3'te yoktu) ve hepsi Türkçe karakterlerde mojibake
+(bozuk kodlama) içeriyordu.
+
+### 2. Karar
+Tek kanonik içerik `.clineignore`'da tutulur; PERF-02 bloğu 5 dosyaya da
+eklendi, mojibake ASCII'ye çevrildi. `.cursorignore` ek olarak orchestrator
+runtime-state istisnasını (`data/orchestrator/task_board.json` vb.) korur —
+bu tek dosyaya özgü sapma kasıtlıdır, D-220 Kural 1 (tek kanonik yol)
+ihlali sayılmaz çünkü farklı araçların farklı runtime ihtiyacı var.
+`.dockerignore` kapsam dışıdır (build context, farklı amaç).
+
+### 3. Kural
+Bu 5 dosyadan biri değişirse, değişiklik önce `.clineignore`'a yapılır,
+sonra diğer 4'e kopyalanır (`.cursorignore`'daki orchestrator istisnası
+hariç). Yeni mojibake sokmamak için dosyalar ASCII/UTF-8 (BOM'suz) yazılır.
+
+### Referans
+[[D-220]]
+
+## D-346 — Kök `.txt` dump dosyaları Git'te izlenmez (KAHİN kararı 2026-10-04)
+
+### 1. Bulgu
+Kök dizinde 24 adet `.txt` dosyası (pytest çıktıları, debug dumpları: `pytest_full.txt`,
+`server_log.txt` vb.) Git tarafından tracked'tı — D-221 kök izin listesine aykırı
+tek-kullanımlık çöp.
+
+### 2. Karar
+`.gitignore`'a `/*.txt` kuralı eklendi (istisna: `requirements-*.txt`, `LICENSE.txt`).
+24 dosya `git mv` ile `_ARSIV_tek_kullanimlik/2026-10-04_kok_temizlik/`'e taşındı
+(rename-detection korunsun, silme değil taşıma).
+
+### 3. Kural
+Kökte üretilen `.txt` dump'lar asla commit edilmez; gerekiyorsa `_tmp/` altına yazılır
+(zaten ignore'lu).
+
+### Referans
+[[D-221]] · [[D-241]]
+
+## D-347 — 5 ignore dosyası tek kaynaktan birleştirildi (KAHİN kararı 2026-10-04)
+
+### 1. Bulgu
+`.clineignore`, `.cursorignore`, `.cursorindexingignore`, `.kilocodeignore`, `.rooignore`
+beş dosya aynı PERF-01/PERF-02 listesini taşıyordu ama üçü mojibake (bozuk Türkçe
+karakter, muhtemelen yanlış kodlamayla kaydedilmiş) içeriyordu; `.cursorignore` ve
+`.cursorindexingignore` arasında PERF-02 bloğu tutarsız dağılmıştı; `.cursorignore`'da
+ayrıca tek dosyaya özel orchestrator runtime istisnası (`data/orchestrator/*.json`) vardı.
+
+### 2. Karar
+`.clineignore` kanonik kaynak sayıldı (UTF-8, PERF-01+PERF-02 birleşik). Diğer 4 dosya
+bundan kopyalandı; `.cursorignore` kendine özel orchestrator istisnasını korudu.
+`.dockerignore` kapsam dışı bırakıldı (build context, farklı amaç).
+
+### 3. Kural
+Yeni bir ignore kuralı eklenecekse önce `.clineignore`'a yazılır, sonra diğer 4 dosyaya
+aynen kopyalanır (tek kaynak, mükerrer bakım yok).
+
+### Referans
+[[D-221]]
+
+## D-349 — Tetik fırtınası: `geciken_tetikler()` ilk ateşten sonsuza kadar yeniden ateşliyordu (KAHİN kararı 2026-10-04)
+
+### 1. Bulgu (ölçüm)
+`TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01` (salih) 229 kez, `ALTYAPI-9ROUTER-MITM-PATCH-01`
+(yasu) 36 kez `uyari_sayisi` biriktirmiş — ikisi de `durum="plan"` (pano hiç "aktif"
+yapmamış, sahibi hiç almamış). `geciken_tetikler()` [`nobetci.py`](Huginn Data Insights/src/company_master/orchestrator/nobetci.py:56)
+gecikme kontrolünü tetiğin **ilk oluşum tarihi** (`k["tarih"]`) üzerinden yapıyordu,
+son uyarı zamanını (`uyari_tarihi`) hiç okumuyordu. Sonuç: `nobet_tut()` her
+çağrıldığında (periyodik script, `/nobet` komutu, DENGE sonrası otomatik tetik) aynı
+hâlâ-bekleyen tetiği **sınırsız** yeniden ateşliyordu — soğuma (cooldown) yoktu.
+
+### 2. Kök neden
+`tetik_uyari_ekle()` [`trigger.py`](Huginn Data Insights/src/company_master/orchestrator/trigger.py:500)
+her ateşte `uyari_tarihi`'ni zaten güncelliyordu — alan vardı, kullanılmıyordu.
+Tek alan iki amaca hizmet ediyordu: "ne kadar gecikti" (gösterim) ile "tekrar ne
+zaman ateşlenir" (kontrol) karıştırılmıştı.
+
+### 3. Karar
+[`geciken_tetikler()`](Huginn Data Insights/src/company_master/orchestrator/nobetci.py:47)
+iki alanı ayırdı: `gecikme_dk` (gösterim) hâlâ ilk `tarih`'ten hesaplanır; yeniden-
+ateşleme kapısı artık `uyari_tarihi` (varsa) + `kademe_sn` soğumasından geçer. İlk
+ateşte `uyari_tarihi` yok, `tarih` kullanılır (geriye uyumlu).
+
+### 4. Uygulama
+[`nobetci.py`](Huginn Data Insights/src/company_master/orchestrator/nobetci.py:47),
+regresyon testi [`test_gorev_nobetci.py`](Huginn Data Insights/tests/test_gorev_nobetci.py:93)
+`test_nobet_tut_ikinci_cagri_cooldown_icinde_atlar` — ardışık `nobet_tut()` çağrısı
+ikinci kez `[]` döner, kanıtlı (`pytest tests/test_gorev_nobetci.py -q` → 18 passed).
+
+### Öz-eleştiri
+Bu mandal **önleyici** olmalıydı — `uyari_tarihi` alanı D-335'ten beri vardı ve
+kullanılmamış olması 4+ gün boyunca fark edilmedi. Daha iyi: her yeni `nobetci.py`
+alanı eklenirken "bu alan nerede okunuyor" sorusu test ile zorlanmalıydı (okunmayan
+alan = ölü kod uyarısı), bu D-259/D-267 desenidir — dördüncü tekrarı.
+
+### Referans
+[[D-335]] [[D-259]]
+
+## D-349 — Tetik fırtınası: yeniden-ateşleme ilk oluşum tarihine, son ateşlemeye değil bağlıydı (KAHİN kararı 2026-10-04)
+
+### 1. Bulgu
+`TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01` (salih) 229x, `ALTYAPI-9ROUTER-MITM-PATCH-01`
+(yasu) 36x uyarı almıştı — tekrar eden kayıt değil, **tek bir bekleyen tetiğin**
+`uyari_sayisi` sayacı. `nobetci.py::geciken_tetikler()` gecikmeyi `tarih` (tetiğin
+ilk oluştuğu an) üzerinden ölçüyordu; `uyari_tarihi` (son ateşleme) hiç
+okunmuyordu. Sonuç: `kademe_sn` bir kez geçtikten sonra, `nobet_tut()` her
+çağrıldığında (periyodik script her N saniyede, `/nobet` komutu her çağrışta)
+AYNI tetiği yeniden ateşliyordu — soğuma (cooldown) yoktu. İki görev de
+`durum="plan"` kaldığı (sahip hiç almadığı) için tetik kapanmadı, sayaç sonsuza
+kadar büyüdü.
+
+### 2. Kural
+`geciken_tetikler()` yeniden-ateşleme kararını **son ateşlemeden** (`uyari_tarihi`,
+yoksa `tarih`) itibaren `kademe_sn` geçip geçmediğine bakarak verir. Gösterim alanı
+`gecikme_dk`/`gecikme_sn` hâlâ ilk oluşumdan (`tarih`) hesaplanır — "ne kadar
+gecikti" ile "ne zaman tekrar uyarılır" ayrı sorulardır, karıştırılmaz.
+
+### 3. Uygulama
+[`geciken_tetikler()`](Huginn%20Data%20Insights/src/company_master/orchestrator/nobetci.py:47)
+anchor artık `uyari_tarihi or tarih`. Mandal:
+[`test_nobet_tut_ikinci_cagri_cooldown_icinde_atlar()`](Huginn%20Data%20Insights/tests/test_gorev_nobetci.py:93)
+— ardışık `nobet_tut()` çağrısı ikinci seferde `[]` döner, kırılmadan doğrulandı
+(18/18 yeşil).
+
+### 4. Öz-eleştiri
+Bu hata önceden görülebilirdi: `uyari_tarihi` alanı zaten vardı (D-dönemi
+FIX-NOB-02 sırasında eklendi), ama kimse "neden var da okunmuyor" sorusunu
+sormadı. Daha iyi/hızlı yol: her yeni alan eklenirken "bu alanı kim okuyacak"
+sorusu commit mesajına yazılsaydı, bu boşluk ekleme anında yakalanırdı.
+
+### Referans
+[[D-335]]
+
+## D-351 — Chat kırpma düzeltmesi geriye dönük kaydedildi (KAHİN kararı 2026-10-04)
+
+### 1. Bulgu
+utku `ajan-chat.jsonl` yazma yolunun `sorun` alanını sessizce kırptığını,
+işaret bırakmadığını ve test kapsamı olmadığını bildirdi.
+Ölçüm: `_kirp()` (`chat.py:47`) zaten yazılmış; `ac()` (sorun→200,
+cozum→300) ve `guncelle()` (cozum→300) ikisi de kullanıyor; limit aşılırsa
+`"...[KIRPILDI]"` etiketi ekleniyor. `test_ac_kirpma_isaretli` vd. zaten
+yeşil (28 passed).
+
+### 2. Kök neden
+Fix kodda ve testte vardı ama docstring'lerde `"D-NNN"` placeholder kalmıştı —
+gerçek numara hiç atanmamıştı (D-227 ihlali).
+
+### 3. Karar
+utku'nun bulgusu kısmen doğru: kırpma sorunu zaten çözülmüş ama kayıtsızdı.
+Geriye dönük numara D-351 atandı; docstring'ler güncellendi.
+
+### 4. Öz-eleştiri
+`_kirp()` yazıldığı commit'te aynı anda `karar_no.py --al` çağrılmalıydı.
+Placeholder bırakmak, mandalın göremediği sessiz bir borç yaratır.
+
+## D-352 — Bulgu defteri şema ihlalleri onarıldı; ikinci yazıcı kural kapısı (KAHİN kararı 2026-10-04)
+
+### 1. Bulgu
+utku `bulgu_defteri.md`'de ikinci yazıcı (doğrudan satır ekleme) tespiti
+yaptı. Ölçüm: 170 veri satırından 21 tanesi şema ihlali taşıyordu —
+geçersiz renk değerleri (COZULDU, yari, mavi, yesil, PANO-BULGU vb.) ve
+yanlış alan sayısı (5 veya 7+ alan, 6 olması gerekir).
+`test_gercek_defter_kurallara_uyuyor` kırmızıydı.
+
+### 2. Kök neden
+`scripts/bulgu_defteri.py` tek yazıcı kuralı var (D-211) ama zorlayan
+kapı yoktu. Ajanlar dosyaya elle veya kendi formatlarıyla yazdı.
+
+### 3. Karar
+`_tmp/onar_bulgu.py` onarım betiği yazıldı ve çalıştırıldı (23+7 = toplam
+30 satır dönüşüm; ikinci geçişte 7 adet pipe-birleştirme sorunu ek düzeltme
+gerektirdi). `test_gercek_defter_kurallara_uyuyor` geçiyor.
+Uzun vadeli zorlama: `ekle()` API'sinin CLI kapısını bypass eden doğrudan
+dosya yazımlarını engelleyen bir mandal açık borç olarak kayıt altına alındı.
+
+### 4. Öz-eleştiri
+İlk onarım betiğinde `" | ".join()` ile birleştirme yeni pipe karakteri
+ekledi ve sorunu çözmedi — ikinci geçiş gerekmeden yakalanabilirdi; önerilen
+fix: merge sırasında " " veya " // " kullan, asla "|" kullanma.
+
+## D-353 — Nöbetçi PID watchdog: stale PID tespiti + ölü süreç alarmı (KAHİN kararı 2026-10-04)
+
+### 1. Bulgu
+utku: `nobetci.pid=37840` (eski `11788`) → ikisi de ölü (stale PID). Log son
+yazma 22:49:02, döngü 120s → tur boşluğu. Ölüm için alarm yok.
+
+### 2. Karar
+`nobetci.py`'ye `pid_yaz()`, `pid_temizle()`, `watchdog_kontrol()` eklendi.
+`nobetci_periodic.py` başlangıçta PID yazar, `atexit` ile siler; watchdog
+kontrolü ilk çalışmada stale PID + log yaşını denetler.
+5 yeni test, 25/25 yeşil.
+
+### 3. Öz-eleştiri
+`os.kill(pid, 0)` Windows'ta `WinError 87` atıyor — `ProcessLookupError`
+değil. Platformlar arası kod yazan herkes bunu biliyor; test olmadan yakalanmaz.
+`except OSError` eklendi.
+
+## D-354 — Görev başına tetik bütçesi: max_uyari kohortu (KAHİN kararı 2026-10-04)
+
+### 1. Bulgu
+utku: `nobetci.log` 4160 döngü = 8320 tetik; `TEST-PANO-SNAPSHOT` 223x,
+`ALTYAPI-9ROUTER-MITM-PATCH-01` 30x ateşlenmiş. Kohort/bütçe yok.
+
+### 2. Karar
+`geciken_tetikler()` imzasına `max_uyari: int | None = None` eklendi.
+`nobetci_ayar_oku()` varsayılanına `"max_uyari": 10` eklendi.
+`nobet_tut()` bu değeri ayardan okuyup iletir.
+2 yeni test (bütçe dolu → ateş yok; bütçe var → ateş eder), 25/25 yeşil.
+
+### 3. Öz-eleştiri
+Mevcut logdaki 8320 tetik geri döndürülemez. `max_uyari` yalnızca yeni
+tetikler için geçerli. Geriye dönük temizlik ayrı görev gerektirir.
+
+### 1. Bulgu
+utku `ajan-chat.jsonl` yazma yolunun `sorun` alanını sessizce kırptığını,
+işaret bırakmadığını ve test kapsamı olmadığını bildirdi.
+Ölçüm: `_kirp()` (`chat.py:47`) zaten yazılmış; `ac()` (sorun→200,
+cozum→300) ve `guncelle()` (cozum→300) ikisi de kullanıyor; limit aşılırsa
+`"...[KIRPILDI]"` etiketi ekleniyor. `test_ac_kirpma_isaretli` vd. zaten
+yeşil (28 passed).
+
+### 2. Kök neden
+Fix kodda ve testte vardı ama docstring'lerde `"D-NNN"` placeholder kalmıştı —
+gerçek numara hiç atanmamıştı (D-227 ihlali).
+
+### 3. Karar
+utku'nun bulgusu kısmen doğru: kırpma sorunu zaten çözülmüş ama kayıtsızdı.
+Geriye dönük numara D-351 atandı; docstring'ler güncellendi.
+
+### 4. Öz-eleştiri
+`_kirp()` yazıldığı commit'te aynı anda `karar_no.py --al` çağrılmalıydı.
+Placeholder bırakmak, mandalın göremediği sessiz bir borç yaratır.

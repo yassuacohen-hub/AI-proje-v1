@@ -2,6 +2,8 @@
 """ORCH-09: Otomatik tetikleme nöbetçi.
 
 - Görev panosunda bekleyen tetik bir sürede (kademe_sn) çalışmazsa alarm/log oluşturur, ses uyarısı verir ve opsiyonel Telegram bildirir.
+- D-353: PID watchdog — stale PID tespiti + ölü süreç alarmı.
+- D-354: Tetik bütçesi — görev başına max_uyari aşılırsa ateşleme durur.
 """
 from __future__ import annotations
 
@@ -27,7 +29,13 @@ def _data_dir(data_dir: Path | None) -> Path:
 
 # ---- Config -------------------
 def nobetci_ayar_oku(data_dir: Path | None = None) -> dict[str, Any]:
-    default = {"kademe_sn": 600, "kanallar": ["log", "ses"], "telegram": False}
+    default = {
+        "kademe_sn": 600,
+        "kanallar": ["log", "ses"],
+        "telegram": False,
+        "max_uyari": 10,      # D-354: görev başına tetik bütçesi
+        "pid_yasam_dk": 30,   # D-353: log bu kadar dakika güncel değilse uyar
+    }
     yol = _data_dir(data_dir) / "nobetci.json"
     if yol.exists():
         try:
@@ -44,22 +52,50 @@ def nobetci_ayar_yaz(ayar: dict[str, Any], data_dir: Path | None = None) -> None
     tb.atomic_write_text(yol, json.dumps(ayar, ensure_ascii=False, indent=2))
 
 # ---- Geçmiş tetik tespiti ----
-def geciken_tetikler(data_dir: Path | None = None, kademe_sn: int | None = None) -> list[dict[str, Any]]:
+def geciken_tetikler(
+    data_dir: Path | None = None,
+    kademe_sn: int | None = None,
+    max_uyari: int | None = None,
+) -> list[dict[str, Any]]:
+    """D-TETIK-FIRTINA-01: Cooldown + D-350: plan durumu + D-354: bütçe filtresi.
+
+    Yeniden-ateşleme `uyari_tarihi` (son ateşleme) üzerinden soğuma (cooldown)
+    uygular; `tarih` (ilk oluşum) yalnızca gösterim için kullanılır.
+    D-350: görev hâlâ `durum="plan"` ise ateşlenmez.
+    D-354: `uyari_sayisi >= max_uyari` ise bütçe doldu, ateşlenmez.
+    """
+    ayar = nobetci_ayar_oku(data_dir)
     if kademe_sn is None:
-        kademe_sn = nobetci_ayar_oku(data_dir).get("kademe_sn", 600)
+        kademe_sn = ayar.get("kademe_sn", 600)
+    if max_uyari is None:
+        max_uyari = ayar.get("max_uyari", 10)
     now = datetime.now()
     result: list[dict[str, Any]] = []
     for dosya in sorted((_data_dir(data_dir) / "triggers").glob("*.jsonl")):
         ajan = dosya.stem
         for k in bekleyen_tetikler(ajan, data_dir):
+            # D-350: plan durumunda alarm yok
+            gorev = tb.gorev_getir(k.get("task_id", ""))
+            if gorev and gorev.get("durum") == "plan":
+                continue
+            # D-354: bütçe kontrolü
+            if int(k.get("uyari_sayisi", 0) or 0) >= max_uyari:
+                continue
             try:
-                t = datetime.fromisoformat(k["tarih"])
+                ilk = datetime.fromisoformat(k["tarih"])
             except Exception:
                 continue
-            if now - t > timedelta(seconds=kademe_sn):
+            anchor = ilk
+            son_uyari = k.get("uyari_tarihi")
+            if son_uyari:
+                try:
+                    anchor = datetime.fromisoformat(son_uyari)
+                except Exception:
+                    anchor = ilk
+            if now - anchor > timedelta(seconds=kademe_sn):
                 rec = dict(k)
                 rec["ajan"] = ajan
-                rec["gecikme_sn"] = int((now - t).total_seconds())
+                rec["gecikme_sn"] = int((now - ilk).total_seconds())
                 rec["gecikme_dk"] = round(rec["gecikme_sn"] / 60, 1)
                 result.append(rec)
     return result
@@ -128,14 +164,96 @@ def nobet_tut(data_dir: Path | None = None, ayar: dict[str, Any] | None = None) 
     """Geciken tetikleri fırlatır.
 
     FIX-NOB-02: Ses, tetik başına değil **koşu başına en fazla bir kez** ve yalnızca
-    **ilk kez** uyarılan (daha önce hiç uyarılmamış) tetik varsa çalar. Böylece
-    eski/tekrarlayan gecikmeler her koşuda yeniden ötmez.
+    **ilk kez** uyarılan (daha önce hiç uyarılmamış) tetik varsa çalar.
+    D-354: geciken_tetikler() içinde max_uyari filtresi uygulanır.
     """
     if ayar is None: ayar = nobetci_ayar_oku(data_dir)
     if ayar.get("devre_disi"): return []
-    geciken = geciken_tetikler(data_dir, ayar.get("kademe_sn", 600))
+    geciken = geciken_tetikler(
+        data_dir,
+        kademe_sn=ayar.get("kademe_sn", 600),
+        max_uyari=ayar.get("max_uyari", 10),
+    )
     ilk_kez_var = any(int(k.get("uyari_sayisi", 0) or 0) == 0 for k in geciken)
     sonuc = [tetik_firlat(k, ayar, data_dir) for k in geciken]
     if sonuc and ilk_kez_var and "ses" in ayar.get("kanallar", []):
         _ses_uyarisi()
+    return sonuc
+
+
+# ---- D-353: PID Watchdog -----------------------------------------------
+
+def pid_yaz(data_dir: Path | None = None) -> Path:
+    """Mevcut süreç PID'ini nobetci.pid dosyasına yazar (D-353)."""
+    pid_yolu = _data_dir(data_dir) / "nobetci.pid"
+    pid_yolu.parent.mkdir(parents=True, exist_ok=True)
+    pid_yolu.write_text(str(os.getpid()), encoding="utf-8")
+    return pid_yolu
+
+
+def pid_temizle(data_dir: Path | None = None) -> None:
+    """nobetci.pid dosyasını siler (D-353)."""
+    pid_yolu = _data_dir(data_dir) / "nobetci.pid"
+    try:
+        pid_yolu.unlink(missing_ok=True)
+    except OSError:
+        pass
+
+
+def watchdog_kontrol(data_dir: Path | None = None) -> dict[str, Any]:
+    """D-353: Nöbetçi sürecinin canlı olup olmadığını denetler.
+
+    Döner:
+        {
+          "pid_var": bool,
+          "pid": int | None,
+          "canli": bool,          # False → stale PID veya süreç ölü
+          "log_yas_dk": float | None,
+          "log_stale": bool,      # True → log pid_yasam_dk'dan eski
+          "uyari": str | None,    # İnsan-okunabilir sorun özeti
+        }
+    """
+    ayar = nobetci_ayar_oku(data_dir)
+    pid_yasam_dk: float = ayar.get("pid_yasam_dk", 30)
+    pid_yolu = _data_dir(data_dir) / "nobetci.pid"
+    log_yolu = _data_dir(data_dir) / "nobetci.log"
+
+    sonuc: dict[str, Any] = {
+        "pid_var": False, "pid": None, "canli": False,
+        "log_yas_dk": None, "log_stale": False, "uyari": None,
+    }
+
+    # PID dosyası
+    if pid_yolu.exists():
+        try:
+            pid = int(pid_yolu.read_text(encoding="utf-8").strip())
+            sonuc["pid_var"] = True
+            sonuc["pid"] = pid
+            # Süreç canlı mı?
+            try:
+                os.kill(pid, 0)
+                sonuc["canli"] = True
+            except (ProcessLookupError, PermissionError, OSError):
+                # Windows: WinError 87 (hatalı parametre) = süreç yok
+                sonuc["canli"] = False
+                sonuc["uyari"] = f"Stale PID {pid}: süreç ölü. pid_temizle() çağrılmalı."
+        except ValueError:
+            sonuc["uyari"] = "nobetci.pid bozuk (int okunamadı)."
+    else:
+        sonuc["uyari"] = "nobetci.pid yok — nöbetçi hiç başlatılmamış olabilir."
+
+    # Log yaşı
+    if log_yolu.exists():
+        try:
+            yas_dk = (datetime.now().timestamp() - log_yolu.stat().st_mtime) / 60
+            sonuc["log_yas_dk"] = round(yas_dk, 1)
+            if yas_dk > pid_yasam_dk:
+                sonuc["log_stale"] = True
+                mevcut = sonuc.get("uyari") or ""
+                sonuc["uyari"] = (
+                    f"{mevcut} Log {yas_dk:.0f} dk güncellenmedi (eşik: {pid_yasam_dk} dk)."
+                ).strip()
+        except OSError:
+            pass
+
     return sonuc

@@ -31,9 +31,14 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
 sys.path.insert(0, str(ROOT))
 
+import atexit
+
 from src.company_master.orchestrator.nobetci import (
     nobet_tut,
     nobetci_ayar_oku,
+    pid_yaz,
+    pid_temizle,
+    watchdog_kontrol,
 )
 
 DEFAULT_INTERVAL = 600  # 10 dakika = 600 saniye
@@ -60,7 +65,17 @@ def run_once() -> list[dict]:
 
 
 def run_forever(interval_seconds: int = DEFAULT_INTERVAL) -> None:
-    """Sonsuz döngüde belirli aralıklarla çalıştırır."""
+    """Sonsuz döngüde belirli aralıklarla çalıştırır (D-353: PID yazılır)."""
+    # D-353: PID yaz; çıkışta sil
+    pid_dosyasi = pid_yaz()
+    atexit.register(pid_temizle)
+    print(f"[{time.strftime('%H:%M:%S')}] PID {pid_dosyasi.read_text(encoding='utf-8').strip()} yazıldı: {pid_dosyasi}")
+
+    # Başlangıçta watchdog kontrolü — stale PID uyarısı
+    durum = watchdog_kontrol()
+    if durum.get("uyari"):
+        print(f"[{time.strftime('%H:%M:%S')}] WATCHDOG: {durum['uyari']}", file=sys.stderr)
+
     print(f"Nöbetçi periyodik başlatıldı: her {interval_seconds} saniyede bir kontrol edilecek.")
     print("Durdurmak için Ctrl+C basın.")
 

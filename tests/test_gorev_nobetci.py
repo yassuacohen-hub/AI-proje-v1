@@ -28,6 +28,7 @@ def _gorev_ac(task_id="T-09", ajan="utku"):
 
 def _tetik_gec_kim(ajan="utku", task_id="T-09", sure_sn=120):
     _gorev_ac(task_id, ajan)
+    tb.gorev_guncelle(task_id, durum="aktif")  # D-350: plan'da kalan gorev atesmez
     trigger.tetik_ekle(task_id, ajan, talimat="tetik testi", data_dir=None)
     nobetci.tetik_gecikmis_yap(ajan, task_id, sure_sn)
     return trigger.bekleyen_tetikler(ajan)[0]
@@ -88,6 +89,18 @@ def test_nobet_tut_firlatir(izole_pano):
     )
     assert len(sonuc) == 1
     assert trigger.bekleyen_tetikler("utku")[0].get("uyari_tarihi")
+
+
+def test_nobet_tut_ikinci_cagri_cooldown_icinde_atlar(izole_pano):
+    """D-TETIK-FIRTINA-01: Ardışık nobet_tut() çağrıları aynı tetiği sınırsız
+    yeniden ateşlemez — kademe_sn, son uyarıdan (uyari_tarihi) itibaren sayılır.
+    Bu test olmadan tetik fırtınası (223x/30x tekrar) geri gelir."""
+    _tetik_gec_kim(sure_sn=120)
+    ayar = {"kademe_sn": 60, "kanallar": ["log"], "telegram": False}
+    ilk = nobetci.nobet_tut(ayar=ayar, data_dir=izole_pano)
+    assert len(ilk) == 1
+    ikinci = nobetci.nobet_tut(ayar=ayar, data_dir=izole_pano)
+    assert ikinci == []
 
 
 def test_nobet_tut_devre_disi(izole_pano):
@@ -172,6 +185,76 @@ def test_ses_uyarisi_tek_kisa_bip(monkeypatch):
     monkeypatch.setitem(sys.modules, "winsound", sahte)
     nobetci._ses_uyarisi()
     assert cagrilar == [("Beep", 800, 150)]
+
+
+# --- D-354: Tetik bütçesi ---------------------------------------------------
+
+def test_butce_doldugunda_atesmez(izole_pano):
+    """D-354: uyari_sayisi >= max_uyari ise geciken_tetikler() atlayarak [] döner."""
+    _tetik_gec_kim(task_id="T-09", sure_sn=120)
+    # max_uyari=0 -> ilk ateşleme bile engellenmeli
+    gecen = nobetci.geciken_tetikler(izole_pano, kademe_sn=60, max_uyari=0)
+    assert gecen == []
+
+
+def test_butce_dolmadan_atesar(izole_pano):
+    """D-354: uyari_sayisi < max_uyari ise ateşleme devam eder."""
+    _tetik_gec_kim(task_id="T-09", sure_sn=120)
+    gecen = nobetci.geciken_tetikler(izole_pano, kademe_sn=60, max_uyari=5)
+    assert len(gecen) == 1
+
+
+# --- D-353: PID watchdog ----------------------------------------------------
+
+def test_pid_yaz_ve_temizle(izole_pano):
+    """D-353: pid_yaz() mevcut PID'i yazar; pid_temizle() siler."""
+    yol = nobetci.pid_yaz(izole_pano)
+    assert yol.exists()
+    pid = int(yol.read_text(encoding="utf-8").strip())
+    assert pid == __import__("os").getpid()
+    nobetci.pid_temizle(izole_pano)
+    assert not yol.exists()
+
+
+def test_watchdog_pid_yok(izole_pano):
+    """D-353: PID dosyası yoksa watchdog uyarı üretir."""
+    sonuc = nobetci.watchdog_kontrol(izole_pano)
+    assert sonuc["pid_var"] is False
+    assert sonuc["canli"] is False
+    assert sonuc["uyari"] is not None
+
+
+def test_watchdog_stale_pid(izole_pano):
+    """D-353: Var olmayan PID → canli=False + uyari."""
+    pid_yolu = izole_pano / "nobetci.pid"
+    pid_yolu.write_text("99999999", encoding="utf-8")  # gerçekte yok
+    sonuc = nobetci.watchdog_kontrol(izole_pano)
+    assert sonuc["pid_var"] is True
+    assert sonuc["canli"] is False
+    assert "stale" in (sonuc["uyari"] or "").lower() or sonuc["uyari"]
+
+
+def test_watchdog_canli_pid(izole_pano):
+    """D-353: Gerçek PID → canli=True."""
+    import os
+    nobetci.pid_yaz(izole_pano)
+    sonuc = nobetci.watchdog_kontrol(izole_pano)
+    assert sonuc["pid"] == os.getpid()
+    assert sonuc["canli"] is True
+    nobetci.pid_temizle(izole_pano)
+
+
+def test_watchdog_log_stale(izole_pano, monkeypatch):
+    """D-353: Log dosyası pid_yasam_dk'dan eskiyse log_stale=True."""
+    import time
+    # Eski timestamp'li log dosyası oluştur
+    log_yolu = izole_pano / "nobetci.log"
+    log_yolu.write_text("eski log\n", encoding="utf-8")
+    # st_mtime'ı 2 saat öncesine çek
+    eski_zaman = time.time() - 7200
+    __import__("os").utime(log_yolu, (eski_zaman, eski_zaman))
+    sonuc = nobetci.watchdog_kontrol(izole_pano)
+    assert sonuc["log_stale"] is True
 
 
 def test_vbs_olustur_gizli_pencere(tmp_path, monkeypatch):
