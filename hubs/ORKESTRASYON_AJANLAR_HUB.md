@@ -96,10 +96,18 @@ Ana baglam: [[Huginn Data Insights/AGENTS]] · [[Huginn Data Insights/AGENT_SYNC
 | TEST-13-PREEXIST-DUZELT-01 | 13 pre-existing test hatasi duzeltildi → `d193_menu_e2e_report.md` | 2026-09-24 |
 | TEST-13-PREEXIST-DUZELT-02 | Kalan 7 test hatasi duzeltildi → pytest yesil | 2026-09-24 |
 | ORKESTRA-KIMLIK-ZINCIRI-01 | Pre-commit kilit kapisi `KimlikBelirsiz` ile cokuyordu → `kilit_zorla.py` duzeltildi, kirma 3/3 kanitli | 2026-10-04 |
+| ALTYAPI-RAG-EMBEDDER-01 | Sahte hash embedder silindi → `vector/embedder.py` qwen3-embedding-8b (4096), test_rag_* 64/64; 4 gun yetim review, vekaleten onay | 2026-10-06 |
+| ALTYAPI-ODIN-MASKE-V3-02 | `sunum.py` kaynak sozlesmesi (v3 fail-closed, tek normalizasyon) + `odin_musteri_cikis_kapisi`; commit 081eebfb, test_odin_kapi_olcumu 35/35; kademe-1 ajanlar kod alamadigi icin ihsan (kademe 3) yapti | 2026-10-06 |
 
 Tam liste ceyreklik arsivde: `data/orchestrator/task_board_arsiv_2026-Q3.json`
 
 ---
+
+## Gorev Brief'leri — Tur 2026-10-06
+
+| # | Brief | Oncelik | Kaynak |
+|---|-------|---------|--------|
+| K1 | [[Huginn Data Insights/plans/brief_utku_DOC-BRIEF-SABLON-KIRMIZI-01]] | P2 | `tests/test_brief_sablon_denetim.py` 6 failed / 71 passed (2026-10-06) |
 
 ## Ilgili Nodlar
 

@@ -138,10 +138,5 @@
     "sahip": "utku",
     "task_id": "UI-ADMIN-PANEL-DASHBOARD-YAYILIM",
     "kilitlendi": "2026-10-06T05:53:55"
-  },
-  "src/company_master/sunum.py": {
-    "sahip": "ihsan",
-    "task_id": "ALTYAPI-ODIN-MASKE-V3-02",
-    "kilitlendi": "2026-10-06T12:37:24"
   }
 }

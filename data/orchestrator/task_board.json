@@ -3168,13 +3168,13 @@
     "baslik": "[ALTYAPI] MASKE-V3-01 kodu depoda yok - sunum.py V3 kaynak katmanini testten yeniden yaz (2s)",
     "sahip": "ihsan",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-10-06T12:37:24",
-    "bitis": null,
+    "bitis": "2026-10-06T12:50:59",
     "dosyalar": [
       "src/company_master/sunum.py"
     ],
-    "not": "Devredildi: utku -> ihsan (utku/yasu/salih kademe-1 PLAN (kod yazamaz, bulgu_defteri 253-257); PO vekaleti ile kademe-3 ihsan uygular)",
+    "not": "Teslim (ihsan): commit 081eebfb; sunum.py kaynak sozlesmesi + odin_musteri_cikis_kapisi; pytest test_odin_kapi_olcumu+test_panel_durustluk 55 passed",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
