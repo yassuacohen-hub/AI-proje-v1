@@ -127,6 +127,12 @@
       "file": "0023_source_records_company_id.sql",
       "date": "2026-09-27",
       "note": "VERI-KAYNAK-BAG-01: source_records.company_id kolonu (Firma<->Kaynak bagi)"
+    },
+    {
+      "version": 24,
+      "file": "0053_api_analytics.sql",
+      "date": "2026-10-06",
+      "note": "ETL-LOGGING: api_analytics tablosu + log_api_request fonksiyonu (ALTYAPI-API-ANALYTICS-LOGLAMA-01)"
     }
   ]
 }

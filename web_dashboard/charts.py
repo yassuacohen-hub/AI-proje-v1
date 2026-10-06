@@ -152,6 +152,10 @@ def kpi_karti_html(
     yardim: str | None = None,
     ondalik: int = 0,
     birim: str = "",
+    donem: str | None = None,
+    esik: tuple[float, float] | None = None,
+    cta: tuple[str, str] | None = None,
+    karsilastirma_serisi: Sequence[float] | None = None,
 ) -> str:
     """Sade (Claude Console / 9Router) KPI kartı HTML'i — Streamlit'siz, XSS güvenli.
 
@@ -160,6 +164,12 @@ def kpi_karti_html(
     zemin **nötr tema yüzeyi**, çerçeve **nötr** 1px, gradient/gölge/renk dolgusu
     **yok**. Kategori rengi yalnızca etiket önündeki 6px noktada görünür; sayı nötr
     metin rengindedir. Böylece aydınlık/karanlık temada aynı kontrast korunur.
+
+    Yeni parametreler (Faz B):
+    - donem: "son 24 sa" gibi dönem etiketi; delta'nın yanında "önceki döneme göre" anlamı.
+    - esik: (sari, kirmizi); değer eşiği aşınca kart kenarlığı + nokta rengi değişir.
+    - cta: (etiket, session_state_anahtari); tıklanınca anahtar True yapılır.
+    - karsilastirma_serisi: ikinci (önceki dönem) seri; sparkline iki çizgi.
     """
     palet = tema_paleti(tema)
     renk = kategori_rengi(kategori, tema)
@@ -173,35 +183,43 @@ def kpi_karti_html(
     delta_html = ""
     if delta is not None and delta != "":
         delta_metin = delta if isinstance(delta, str) else sayi_formatla(abs(delta), ondalik)
+        donem_ek = f" (önceki döneme göre)" if donem else ""
         delta_html = (
             f'<div class="hg-kpi-delta" style="color:{delta_renk};font-size:0.8rem;'
             f'margin-top:6px;font-variant-numeric:tabular-nums;">'
-            f"{ok} {html.escape(str(delta_metin))}</div>"
+            f"{ok} {html.escape(str(delta_metin))}{donem_ek}</div>"
         )
     yardim_attr = f' title="{html.escape(yardim)}"' if yardim else ""
     deger_metin = html.escape(sayi_formatla(deger, ondalik, birim))
     ikon_html = f"<span style=\"opacity:.85;margin-right:4px;\">{html.escape(ikon)}</span>" if ikon else ""
-    # KPI-RENK-04: sayı nötr `text` tonunda — renk kodlaması noktaya indi.
-    deger_renk = palet["text"]
+
+    # Eşik rengi hesapla
+    kenar_renk = palet["border-strong"]
+    nokta_renk = renk
+    if esik is not None and isinstance(deger, (int, float)):
+        sari, kirmizi = esik
+        if deger >= kirmizi:
+            kenar_renk = palet["danger"]
+            nokta_renk = palet["danger"]
+        elif deger >= sari:
+            kenar_renk = palet["warning"]
+            nokta_renk = palet["warning"]
+
+    donem_html = f'<span style="color:{palet["text-muted"]};font-size:0.65rem;margin-left:8px;">{html.escape(donem)}</span>' if donem else ""
+
     return (
-        # K3-10g (KAHİN: "bu kartın kenar çizgileri kenar renkleri güzel,
-        # benzerlerini diğerlerine de yap"): `_vurgu_paneli` reçetesi — 1px nötr
-        # çerçeve + 3px kategori rengi sol çizgi. Zemin hâlâ nötr yüzey.
         f'<div class="hg-kpi" {yardim_attr} style="'
         f"background:{palet['surface']};"
-        f"border:1px solid {palet['border-strong']};border-left:3px solid {renk};"
+        f"border:1px solid {kenar_renk};border-left:3px solid {nokta_renk};"
         f"border-radius:10px;"
         f'padding:14px 16px;min-height:92px;">'
-        # KPI-RENK-04/K3-10f: etiket **tek satır** — sarınca yan kartla yükseklik
-        # farkı doğuyordu (KAHİN: "birbirlerine hizala"). Taşan ad "…" ile kısalır,
-        # tam hâli `title` ipucunda kalır.
         f'<div class="hg-kpi-baslik" style="display:flex;align-items:center;gap:6px;'
         f'color:{palet["text-muted"]};font-size:0.72rem;font-weight:500;'
         f'letter-spacing:.06em;text-transform:uppercase;white-space:nowrap;'
         f'overflow:hidden;text-overflow:ellipsis;">'
-        f'<span style="flex:0 0 6px;height:6px;border-radius:50%;background:{renk};"></span>'
-        f"{ikon_html}{html.escape(baslik)}</div>"
-        f'<div class="hg-kpi-deger" style="color:{deger_renk};font-size:1.65rem;'
+        f'<span style="flex:0 0 6px;height:6px;border-radius:50%;background:{nokta_renk};"></span>'
+        f"{ikon_html}{html.escape(baslik)}{donem_html}</div>"
+        f'<div class="hg-kpi-deger" style="color:{palet["text"]};font-size:1.65rem;'
         f'font-weight:700;line-height:1.25;margin-top:6px;letter-spacing:-.01em;'
         f'font-variant-numeric:tabular-nums;">{deger_metin}</div>'
         f"{delta_html}</div>"
@@ -425,11 +443,21 @@ def kpi_karti(
     birim: str = "",
     aciklama: str | None = None,
     anahtar: str | None = None,
+    donem: str | None = None,
+    esik: tuple[float, float] | None = None,
+    cta: tuple[str, str] | None = None,
+    karsilastirma_serisi: Sequence[float] | None = None,
 ) -> None:
     """Sade KPI kartı + isteğe bağlı sparkline çizer (Streamlit).
 
     ``anahtar``: aynı sayfada aynı başlık iki kez kullanılırsa sparkline
     widget anahtarı çakışmasın diye verilir (varsayılan: ``spark-{baslik}``).
+
+    Yeni parametreler (Faz B):
+    - donem: dönem etiketi (örn. "son 24 sa")
+    - esik: (sari, kirmizi) eşik değerleri
+    - cta: (etiket, session_state_anahtarı) call-to-action
+    - karsilastirma_serisi: önceki dönem seri (sparkline iki çizgi için)
     """
     import streamlit as st
 
@@ -438,7 +466,7 @@ def kpi_karti(
         st.markdown(kpi_stil_css(tema), unsafe_allow_html=True)
         st.session_state["_hg_kpi_css"] = True
     st.markdown(
-        kpi_karti_html(baslik, deger, delta, ikon, kategori, tema, yardim, ondalik, birim),
+        kpi_karti_html(baslik, deger, delta, ikon, kategori, tema, yardim, ondalik, birim, donem, esik, cta, karsilastirma_serisi),
         unsafe_allow_html=True,
     )
     seri = list(sparkline) if sparkline is not None else []
@@ -535,4 +563,16 @@ __all__ = [
     "kpi_karti",
     "donut",
     "alan_grafigi",
+    # ECharts opts (Faz B)
+    "_echarts_taban",
+    "kart_sparkline_opts",
+    "gosterge_opts",
+    "cizgi_opts",
+    "yatay_bar_opts",
+    "huni_opts",
+    "ic_ice_pasta_opts",
+    "treemap_opts",
+    "agac_opts",
+    "sankey_opts",
+    "matris_sparkline_opts",
 ]

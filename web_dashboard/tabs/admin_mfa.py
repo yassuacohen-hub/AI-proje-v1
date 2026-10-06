@@ -1,8 +1,11 @@
 # UI-ADMIN-MFA-26 B-05: MFA Yönetim Sekmesi
 
 import streamlit as st
-import requests
 from datetime import datetime
+
+from scripts.dash04_api_client import APIError, get_api, post_api
+from web_dashboard.charts import kpi_karti
+from company_master.ui import PageHeader, Section
 
 def _mfa_api_token() -> str | None:
     """Oturumdan admin token al."""
@@ -19,16 +22,9 @@ def _mfa_durum_getir() -> dict | None:
     if not token:
         return None
     try:
-        resp = requests.get(
-            "/api/admin/mfa/status",
-            headers={"Authorization": f"Bearer {token}"},
-            timeout=5,
-        )
-        if resp.ok:
-            return resp.json()
-    except Exception:
-        pass
-    return None
+        return get_api("/api/admin/mfa/status", token=token, timeout=5)
+    except APIError:
+        return None
 
 
 def _mfa_kur(request, mfa_token: str, code: str) -> dict:
@@ -37,17 +33,14 @@ def _mfa_kur(request, mfa_token: str, code: str) -> dict:
     if not token:
         return {"ok": False, "error": "Token bulunamadı"}
     try:
-        resp = requests.post(
+        return post_api(
             "/api/admin/mfa/verify",
             json={"mfa_token": mfa_token, "code": code},
-            headers={"Authorization": f"Bearer {token}"},
+            token=token,
             timeout=5,
         )
-        if resp.ok:
-            return resp.json()
-    except Exception:
-        pass
-    return {"ok": False, "error": "API hatası"}
+    except APIError as exc:
+        return {"ok": False, "error": str(exc)}
 
 
 def _mfa_devre_disi_birak(request, password: str) -> dict:
@@ -56,17 +49,14 @@ def _mfa_devre_disi_birak(request, password: str) -> dict:
     if not token:
         return {"ok": False, "error": "Token bulunamadı"}
     try:
-        resp = requests.post(
+        return post_api(
             "/api/admin/mfa/disable",
             json={"password": password},
-            headers={"Authorization": f"Bearer {token}"},
+            token=token,
             timeout=5,
         )
-        if resp.ok:
-            return resp.json()
-    except Exception:
-        pass
-    return {"ok": False, "error": "API hatası"}
+    except APIError as exc:
+        return {"ok": False, "error": str(exc)}
 
 
 def _mfa_backup_codes_getir(request) -> dict:
@@ -75,17 +65,9 @@ def _mfa_backup_codes_getir(request) -> dict:
     if not token:
         return {"ok": False, "error": "Token bulunamadı"}
     try:
-        resp = requests.post(
-            "/api/admin/mfa/backup-codes",
-            json={},
-            headers={"Authorization": f"Bearer {token}"},
-            timeout=5,
-        )
-        if resp.ok:
-            return resp.json()
-    except Exception:
-        pass
-    return {"ok": False, "error": "API hatası"}
+        return post_api("/api/admin/mfa/backup-codes", json={}, token=token, timeout=5)
+    except APIError as exc:
+        return {"ok": False, "error": str(exc)}
 
 
 def _mfa_kurulum_baslat() -> dict | None:
@@ -94,17 +76,9 @@ def _mfa_kurulum_baslat() -> dict | None:
     if not token:
         return None
     try:
-        resp = requests.post(
-            "/api/admin/mfa/setup",
-            json={},
-            headers={"Authorization": f"Bearer {token}"},
-            timeout=5,
-        )
-        if resp.ok:
-            return resp.json()
-    except Exception:
-        pass
-    return None
+        return post_api("/api/admin/mfa/setup", json={}, token=token, timeout=5)
+    except APIError:
+        return None
 
 
 def render_mfa_tab() -> None:
@@ -115,8 +89,7 @@ def render_mfa_tab() -> None:
     - MFA devre dışı bırakma (şifre ile)
     - Backup kodları yönetimi
     """
-    from company_master.ui import PageHeader
-    from company_master.ui.components.page import Section
+    from web_dashboard.tabs import aktif_rol
 
     PageHeader(
         "MFA Yönetimi", ust_etiket="Güvenlik · Yönetim", ikon="🔐",
@@ -124,15 +97,7 @@ def render_mfa_tab() -> None:
     ).render()
 
     # Admin rol kontrolü
-    try:
-        session = dict(st.session_state)
-        user_email = session.get("admin_email") or session.get("user_email")
-        user_role = session.get("user_role", "anon")
-    except Exception:
-        user_email = None
-        user_role = "anon"
-
-    if user_role != "admin":
+    if aktif_rol() != "admin":
         st.error("Bu sekmeye sadece admin rolü erişebilir.")
         return
 
@@ -147,13 +112,13 @@ def render_mfa_tab() -> None:
     col1, col2, col3 = st.columns(3)
     with col1:
         if veri.get("enabled"):
-            st.metric("🔐 MFA Durumu", "AKTİF", delta="Korunuyor")
+            kpi_karti("🔐 MFA Durumu", "AKTİF", delta="Korunuyor", kategori="basari")
         else:
-            st.metric("🔓 MFA Durumu", "PASİF", delta="Açık")
+            kpi_karti("🔓 MFA Durumu", "PASİF", delta="Açık", kategori="tehlike")
     with col2:
-        st.metric("Oluşturma", veri.get("created_at", "—")[:16] if veri.get("created_at") else "—")
+        kpi_karti("Oluşturma", veri.get("created_at", "—")[:16] if veri.get("created_at") else "—", kategori="sistem")
     with col3:
-        st.metric("Son Kullanım", veri.get("last_used_at", "—")[:16] if veri.get("last_used_at") else "—")
+        kpi_karti("Son Kullanım", veri.get("last_used_at", "—")[:16] if veri.get("last_used_at") else "—", kategori="sistem")
 
     st.divider()
 

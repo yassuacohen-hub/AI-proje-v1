@@ -574,7 +574,7 @@ def render_cost_tab() -> None:
         kpi_karti(
             "Sorunlu Providerlar",
             cost_summary.problematic_provider_count,
-            delta_color="inverse",
+            esik=(1, 1),
             kategori="maliyet",
         )
 

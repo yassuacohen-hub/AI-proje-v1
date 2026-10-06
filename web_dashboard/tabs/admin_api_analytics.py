@@ -119,13 +119,13 @@ def render_api_analytics_tab() -> None:
 
     c1, c2, c3, c4 = st.columns(4)
     with c1:
-        MetricCard("Toplam Çağrı", f"{toplam_cagri:,}".replace(",", ".").render(), kategori="sistem")
+        MetricCard("Toplam Çağrı", f"{toplam_cagri:,}".replace(",", "."), kategori="system").render()
     with c2:
-        MetricCard("Farklı Endpoint", distinct_endpoint, kategori="sistem").render()
+        MetricCard("Farklı Endpoint", distinct_endpoint, kategori="system").render()
     with c3:
-        MetricCard("En Çok Kullanılan", en_cok_kullanilan or "—", kategori="sistem").render()
+        MetricCard("En Çok Kullanılan", en_cok_kullanilan or "—", kategori="system").render()
     with c4:
-        MetricCard("İzlenen Tier Sayısı", len(items).render() if items else 0, kategori="sistem")
+        MetricCard("İzlenen Tier Sayısı", len(items) if items else 0, kategori="system").render()
 
     st.divider()
 
@@ -188,14 +188,14 @@ def render_api_analytics_tab() -> None:
     if metrics:
         m1, m2, m3, m4 = st.columns(4)
         with m1:
-            MetricCard("Toplam Sorgu", f"{metrics.get('huginn_query_count', 0).render():,}".replace(",", "."), kategori="sistem")
+            MetricCard("Toplam Sorgu", f"{metrics.get('huginn_query_count', 0):,}".replace(",", "."), kategori="system").render()
         with m2:
-            MetricCard("DB Süresi (ms).render()", f"{metrics.get('huginn_db_time_ms', 0):,.1f}".replace(",", "."), kategori="sistem")
+            MetricCard("DB Süresi (ms)", f"{metrics.get('huginn_db_time_ms', 0):,.1f}".replace(",", "."), kategori="system").render()
         with m3:
-            MetricCard("Cache Hit", metrics.get("huginn_cache_hits", 0).render(), kategori="sistem")
+            MetricCard("Cache Hit", metrics.get("huginn_cache_hits", 0), kategori="system").render()
         with m4:
             hit_rate = metrics.get("huginn_cache_hit_rate", 0)
-            MetricCard("Cache Hit Oranı", f"%{hit_rate * 100:.1f}", kategori="sistem").render()
+            MetricCard("Cache Hit Oranı", f"%{hit_rate * 100:.1f}", kategori="system").render()
     else:
         st.info("Sistem metrikleri alınamadı.")
 
