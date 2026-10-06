@@ -72,8 +72,19 @@ _SABLON_DEGERLER: tuple[str, ...] = (
 )
 
 
+# ALTYAPI-ADMIN-SQL-PARAM-01: `_dolu_kosulu` kolon adini SQL'e gomer; kolon adi
+# bind parametresi olamaz. Tek savunma beyaz liste -- `_QUALITY_FIELDS`
+# anahtarlari disinda ad gecemez (fail-closed, ValueError).
+_IZINLI_KOLONLAR: frozenset[str] = frozenset(_QUALITY_FIELDS)
+
+
 def _dolu_kosulu(col: str) -> str:
-    """Sablon degerleri yokluk sayan SQL doluluk kosulu (D-299)."""
+    """Sablon degerleri yokluk sayan SQL doluluk kosulu (D-299).
+
+    `col` yalnizca `_IZINLI_KOLONLAR` icinden olabilir; aksi ValueError.
+    """
+    if col not in _IZINLI_KOLONLAR:
+        raise ValueError(f"izinsiz kolon: {col!r}")
     liste = ", ".join("'" + d.replace("'", "''") + "'" for d in _SABLON_DEGERLER)
     return f"{col} IS NOT NULL AND {col} <> '' AND {col} NOT IN ({liste})"
 
