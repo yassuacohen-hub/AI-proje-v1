@@ -2369,9 +2369,9 @@
     "baslik": "[ALTYAPI] Sahte hash embedder'i sil -> odin_ai/rag.py (2s)",
     "sahip": "yasu",
     "oncelik": "P0",
-    "durum": "review",
+    "durum": "done",
     "baslangic": "2026-10-01T20:52:26",
-    "bitis": "2026-10-02T22:23:50",
+    "bitis": "2026-10-06T06:21:20",
     "dosyalar": [
       "src/company_master/odin_ai/rag.py"
     ],
@@ -2761,15 +2761,15 @@
     "task_id": "TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01",
     "id": "TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01",
     "baslik": "[TEST] conftest.py duzelt -> tests/conftest.py (3s)",
-    "sahip": "salih",
+    "sahip": "ihsan",
     "oncelik": "P1",
-    "durum": "plan",
+    "durum": "done",
     "baslangic": "2026-10-03T21:29:46",
-    "bitis": null,
+    "bitis": "2026-10-06T06:05:28",
     "dosyalar": [
       "tests/conftest.py"
     ],
-    "not": "",
+    "not": "Teslim (ihsan): bulgu 109 kok nedeni: conftest.py'de _uretim_verisi_dokunulmaz iki kez tanimliydi, aktif (ikinci) versiyon 5 canli pano dosyasini (task_board.json dahil) her test fonksiyonunda snapshot/restore ediyor, suite ortasindaki gercek dis yazimlari test kalintisi sanip siliyordu. Olu fixture + KORUMALI tamamen kaldirildi; TASK_BOARD da _pano_dosyalari_yalitim monkeypatch setine eklendi. test_uretim_verisi_dokunulmaz.py yeni mekanizmaya gore yeniden yazildi (3/3 yesil). Tam suite 5449 passed/77 failed(onceden var,ilgisiz)/13 skipped. Rapor: data/orchestrator/TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01_rapor_2026-10-06_orkestrator.md",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -2958,14 +2958,14 @@
     "baslik": "[ORKESTRA] Kimlik zinciri kaydını düzelt → plans/brief_ihsan_ORKESTRA-KIMLIK-ZINCIRI-01.md (1s)",
     "sahip": "ihsan",
     "oncelik": "P1",
-    "durum": "aktif",
+    "durum": "done",
     "baslangic": "2026-10-04T15:37:09",
-    "bitis": null,
+    "bitis": "2026-10-06T06:16:01",
     "dosyalar": [
       "scripts/ajan_chat.py",
       "scripts/gorev_kutusu.py"
     ],
-    "not": "",
+    "not": "Teslim (ihsan): Kimlik zinciri dogrulandi (env yasu/utku -> kimden; env bos + 3 ajan dosyasi -> KimlikBelirsiz, yazmaz; ALANLAR'da ORCH yok). Iki kapi kirildi (kapi1 basla=1 mesaj, kapi2 teslim=1 neden), yon filtresi ok, messages.jsonl bayt-esit geri alindi. Chat ORCH-KIMLIK-ZINCIRI-01 #2 cozuldu, bulgu defteri satiri eklendi, hub satiri mevcut. pytest 3 dosya: 120 gecti / 6 kirmizi (hepsi onceden listeli, yeni yok). kodlama_denetim: 57 ihlal onceden mevcut (mojibake/crlf/dosya_sonu) + tabs/__init__.py:740 utku'nun kilitli yarim duzenlemesi (utku'ya hata mesaji atildi).",
     "source": "ic",
     "from_agent": null,
     "mod": "code",
@@ -3009,5 +3009,176 @@
     "mod": "code",
     "brief": "plans/brief_utku_ALTYAPI-ODIN-MASKE-V3-01.md",
     "talimat": "plans/brief_utku_ALTYAPI-ODIN-MASKE-V3-01.md brifini oku; maskeleme_odin() kaynak parametresi ekle, V3 endpoint yaz."
+  },
+  {
+    "task_id": "ALTYAPI-APIVOM-VKN-ENTEGRASYON-01",
+    "id": "ALTYAPI-APIVOM-VKN-ENTEGRASYON-01",
+    "baslik": "[ALTYAPI] Apivom VKN sorgu entegrasyonu yaz → skills/services/apivom_vkn.py (2s)",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": null,
+    "bitis": null,
+    "dosyalar": [
+      "skills/services/apivom_vkn.py",
+      "tests/test_apivom_vkn.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": "ihsan",
+    "mod": "code",
+    "brief": "plans/brief_yasu_ALTYAPI-APIVOM-VKN-ENTEGRASYON-01.md",
+    "talimat": "DIKKAT (D-224): on arastirma kaydi ARASTIRMA-VKN-3PARTI-SERVIS-ON / Apivom-TOBB Atlas bulgu_defteri.md'de ve tum repoda dogrulanamadi - sadece urun sahibi beyani var, olculmemis. Ilk adim: Apivom canli testi (x-api-key, gercek VKN, HTTP yanit + fiyat tablosu) olcup kanitla. Sonra src/company_master/etl/kimlik_no.py:51 vkn_gecerli() (mod11 checksum) ile birlikte kullan - checksum once calisir, Apivom ikinci kat dogrulama/zenginlestirme olur. TaxID (ARASTIRMA-TAXID-TR-CANLI-TEST-01, bulgu_defteri.md satir 209) reddedilmisti: format-only, checksum yok, gecersiz VKN'yi gecerli sayiyordu. Apivom'un checksum uyguladigi veya gercek GIB verisi dondurdugu olculmeden entegrasyon 'done' sayilmaz."
+  },
+  {
+    "task_id": "UI-ADMIN-PANEL-TEMEL-REFERANS-01",
+    "id": "UI-ADMIN-PANEL-TEMEL-REFERANS-01",
+    "baslik": "[UI] Admin panel P0 düzeltmeleri + charts.py KPI/grafik yükseltmesi + Sistem/Sağlık referans dashboard'unu yaz → web_dashboard/tabs/admin_sistem_saglik.py (4s)",
+    "sahip": "utku",
+    "oncelik": "P0",
+    "durum": "aktif",
+    "baslangic": "2026-10-06T03:52:00",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/charts.py",
+      "web_dashboard/tabs/__init__.py",
+      "web_dashboard/tabs/admin_sistem_saglik.py",
+      "tests/test_charts_kpi.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_UI-ADMIN-PANEL-TEMEL-REFERANS-01.md",
+    "talimat": "G1 (3 faz A/B/C tek brifte, D-217). Faz A: user_role kapisi (admin_panel.py:1266, admin_mfa.py:127), yukleme demo sayfasi sil, nav mukerrer, Legacy yorumlari. Faz B: charts.py KPI (donem/esik/cta) + gosterge/yatay_bar/cift_donem/esikli_bar + secim_al, Streamlit>=1.35, streamlit-echarts (PO istisnasi, hibrit kural). Faz C: Sistem/Saglik tek-ekran referans dashboard, Plotly|ECharts gauge yan yana, 2 ekran goruntusu docs/img/. ONAY KAPISI: ekran goruntusu PO onayi gelmeden teslim yok; G2/G3 bu onaydan sonra acilir. Eski Sistem alt sekmelerine ve 36 st.metric gocune DOKUNMA (G2)."
+  },
+  {
+    "task_id": "DOC-BRIEF-SABLON-KIRMIZI-01",
+    "id": "DOC-BRIEF-SABLON-KIRMIZI-01",
+    "baslik": "6 eski brifi kanonik şablona uydur, test 77/77 yeşil (30 dk)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "aktif",
+    "baslangic": "2026-10-06T05:52:01",
+    "bitis": null,
+    "dosyalar": [
+      "plans/brief_salih_VERI-SEMA-DOGRULA-01.md",
+      "plans/brief_salih_VERI-SEMA-DOGRULA-02.md",
+      "plans/brief_salih_VERI-SEMA-DOGRULA-03.md",
+      "plans/brief_yasu_VERI-SEMA-DOGRULA-02.md",
+      "plans/brief_yasu_VERI-SEMA-DOGRULA-03.md",
+      "plans/brief_utku_VERI-INGEST-ASO-GLOB-01.md"
+    ],
+    "not": "Devredildi: salih -> utku (PO emri 06:00: RapidAPI haric yeni gorevler utku. Sira: G1 once, bu sonra.)",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_DOC-BRIEF-SABLON-KIRMIZI-01.md",
+    "talimat": "6 kirmizi brif sablon testi: eksik **Baslik:**/**Oncelik:**/**Hub:**/ajan_chat.py satirlarini ekle; icerik degismez; pytest tests/test_brief_sablon_denetim.py 77 passed"
+  },
+  {
+    "task_id": "ALTYAPI-ADMIN-SQL-PARAM-01",
+    "id": "ALTYAPI-ADMIN-SQL-PARAM-01",
+    "baslik": "Admin sekmelerinde 3 f-string SQL'i beyaz liste + bağlı parametreye çevir (45 dk)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-10-06T05:52:23",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_kpi.py",
+      "web_dashboard/tabs/admin_quality.py",
+      "web_dashboard/tabs/admin_search.py",
+      "tests/test_admin_sql_param.py"
+    ],
+    "not": "Devredildi: yasu -> utku (PO emri 06:00; admin dosyalari zaten utku alani. Sira: G1 once.)",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_ALTYAPI-ADMIN-SQL-PARAM-01.md",
+    "talimat": "3 f-string SQL (admin_kpi.py:197, admin_quality.py:281, admin_search.py:83): kolon adi frozenset beyaz liste + assert, degerler :param; grep text(f -> 0; yeni test"
+  },
+  {
+    "task_id": "VERI-RAPIDAPI-OSINT-ISTEMCI-01",
+    "id": "VERI-RAPIDAPI-OSINT-ISTEMCI-01",
+    "baslik": "RapidAPI OSINT Company API istemcisi + sözleşme belgesi + bütçe kapısı (2 saat)",
+    "sahip": "yasu",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-10-06T05:52:41",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/engine/rapidapi_osint.py",
+      "tests/test_rapidapi_osint.py",
+      "docs/RAPIDAPI_OSINT_SOZLESME.md"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_yasu_VERI-RAPIDAPI-OSINT-ISTEMCI-01.md",
+    "talimat": "Faz A: 1 canli istek, yanit semasini docs/RAPIDAPI_OSINT_SOZLESME.md'ye yaz (sir yok). Faz B: rapidapi_osint.py istemci (env'den KEY/HOST, timeout, gunluk istek tavani, hata siniflari). Faz C: mock testler. DB yazimi YOK (ayri gorev)."
+  },
+  {
+    "task_id": "UI-ADMIN-PANEL-DENETIM-ALTYAPI",
+    "id": "UI-ADMIN-PANEL-DENETIM-ALTYAPI",
+    "baslik": "Denetim sekmesi + st.dialog login + cache_resource bağlantı + data_editor toplu düzenleme (1 gün)",
+    "sahip": "utku",
+    "oncelik": "P2",
+    "durum": "plan",
+    "baslangic": "2026-10-06T05:53:01",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_denetim.py",
+      "tests/test_admin_denetim.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_UI-ADMIN-PANEL-DENETIM-ALTYAPI.md",
+    "talimat": "ONCUL: UI-ADMIN-PANEL-DASHBOARD-YAYILIM done. Olcum: dialog 0, data_editor 0, cache_resource 0 (2026-10-06). Yeni sayfa admin_denetim.py; login st.dialog; engine cache_resource; feature flag tablosu data_editor."
+  },
+  {
+    "task_id": "UI-ADMIN-PANEL-DASHBOARD-YAYILIM",
+    "id": "UI-ADMIN-PANEL-DASHBOARD-YAYILIM",
+    "baslik": "[ADMIN-KIT] G1 referans anatomisini Olaylar + Ayarlar sayfalarına yay: 39 st.metric → kpi_karti, ham grafikler → Grafik Haritası (1 gün)",
+    "sahip": "utku",
+    "oncelik": "P1",
+    "durum": "plan",
+    "baslangic": "2026-10-06T05:53:55",
+    "bitis": null,
+    "dosyalar": [
+      "web_dashboard/tabs/admin_panel.py",
+      "web_dashboard/tabs/admin_errors.py",
+      "web_dashboard/tabs/admin_mfa.py",
+      "web_dashboard/tabs/musteri_yonetimi.py",
+      "tests/test_admin_dashboard_yayilim.py"
+    ],
+    "not": "",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_UI-ADMIN-PANEL-DASHBOARD-YAYILIM.md",
+    "talimat": "ONCUL: UI-ADMIN-PANEL-TEMEL-REFERANS-01 PO ekran onayi + ALTYAPI-ADMIN-SQL-PARAM-01 done. Onay yoksa BASLAMA. D-355/356/357/358 bagli. 39 st.metric -> kpi_karti; her sayfa 5 Bolge."
+  },
+  {
+    "task_id": "ALTYAPI-ODIN-MASKE-V3-02",
+    "id": "ALTYAPI-ODIN-MASKE-V3-02",
+    "baslik": "[ALTYAPI] MASKE-V3-01 kodu depoda yok - sunum.py V3 kaynak katmanini testten yeniden yaz (2s)",
+    "sahip": "ihsan",
+    "oncelik": "P1",
+    "durum": "aktif",
+    "baslangic": "2026-10-06T12:37:24",
+    "bitis": null,
+    "dosyalar": [
+      "src/company_master/sunum.py"
+    ],
+    "not": "Devredildi: utku -> ihsan (utku/yasu/salih kademe-1 PLAN (kod yazamaz, bulgu_defteri 253-257); PO vekaleti ile kademe-3 ihsan uygular)",
+    "source": "ic",
+    "from_agent": null,
+    "mod": "code",
+    "brief": "plans/brief_utku_ALTYAPI-ODIN-MASKE-V3-02.md",
+    "talimat": "plans/brief_utku_ALTYAPI-ODIN-MASKE-V3-02.md oku; test_odin_kapi_olcumu.py sartname, sunum.py'ye 6 ad + kaynak= parametresi; COMMIT ET"
   }
 ]

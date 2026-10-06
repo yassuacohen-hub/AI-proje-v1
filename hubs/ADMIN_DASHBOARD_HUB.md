@@ -128,6 +128,17 @@ SSOT: `Huginn Data Insights/AI proje v1/V10/05_versiyonlar/02_admin_panel_hedef_
 Zincir: 34 → 35 → 36 (sira zorunlu). 37 → 38 ayri zincir; ikisi de `web_dashboard/tabs/__init__.py` kilidini paylastigi icin 34 teslim edilmeden baslamaz, 38 ayrica `ana_kontrol.py` icin 36'yi bekler. Kaynak belge: [[Huginn Data Insights/docs/ADMIN_8SAYFA_VIZYON_KAPSAM]] §"Bu belgeden cikan ayri gorevler".
 Ayni turda acilan bulgu gorevi (ADMIN disi): [[Huginn Data Insights/plans/brief_utku_VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01]] (P2, hub: VERI_KALITESI_HUB).
 
+## Gorev Brief'leri — Tur 2026-10-06 (ADMIN-KIT · UX 8 madde · dashboard donusumu)
+
+| # | Brief | Oncelik | Oncul | Kaynak |
+|---|-------|---------|-------|--------|
+| G1 | [[Huginn Data Insights/plans/brief_utku_UI-ADMIN-PANEL-TEMEL-REFERANS-01]] | P0 | — | PO 8 madde + `yedekler/admin ux kontrol.txt` · ihsan analizi 2026-10-05/06 · D-356 (ECharts 0.7.0 hibrit) · D-357 (Grafik Haritası, kart "patlamaz", referans `https://echarts.streamlit.app/`) · D-358 (5 Bölge anatomisi + 7 UX kuralı, ux kontrol.txt ölçümü) |
+| G2 | [[Huginn Data Insights/plans/brief_utku_UI-ADMIN-PANEL-DASHBOARD-YAYILIM]] | P1 | G1 referans **PO onayi** | Olaylar + Ayarlar dashboard'lari, **39** `st.metric` (olcum 2026-10-06) + ham grafik gocu · panoda beklemede |
+| G3 | [[Huginn Data Insights/plans/brief_utku_UI-ADMIN-PANEL-DENETIM-ALTYAPI]] | P2 | G2 | Denetim sekmesi, `st.dialog` login, `cache_resource`, `data_editor` · panoda beklemede |
+| B1 | [[Huginn Data Insights/plans/brief_utku_ALTYAPI-ADMIN-SQL-PARAM-01]] | P2 | — | Eski borc: 3 f-string SQL (`admin_kpi.py:197` `admin_quality.py:281` `admin_search.py:83`) → beyaz liste + `:param` (D-358 kurali) |
+
+Kurallar (PO 2026-10-06): uzun kaydirma yok (alt sekme = tek ekran dashboard); Streamlit kalici; grafik hibrit — Plotly varsayilan, ECharts yalniz gauge/yogun etkilesim; G1 sonunda Saglik referans ekran goruntusu onaylanmadan G2/G3 acilmaz.
+
 ## Kapanan isler (B-14 · hafiza izi)
 
 > Kapanan her gorev buraya bir satir birakir. `gorev_kutusu.py teslim` bu bolumde

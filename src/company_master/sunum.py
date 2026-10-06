@@ -45,6 +45,18 @@ __all__ = [
     "tavan_ozeti",
     "ODIN_RED_METNI",
     "maskeleme_odin",
+    "ODIN_KAYNAK_MUSTERI",
+    "ODIN_KAYNAKLAR",
+    "ODIN_KAYNAK_TANIM",
+    "odin_kaynak_dogrula",
+    "odin_musteri_cikis_kapisi",
+    "ODIN_KAPI_TEMIZ",
+    "ODIN_KAPI_KACAK",
+    "ODIN_KAPI_MASKELENDI",
+    "ODIN_KAPI_INCELEME",
+    "odin_kapi_olcumu",
+    "odin_kapi_denetle",
+    "odin_k4_gecerli_mi",
 ]
 
 # D-249: panelde "veri yok" bu isaretle gosterilir — asla 0 ile.
@@ -277,8 +289,30 @@ _ODIN_YASAK_DESENLER: tuple[re.Pattern[str], ...] = (
     re.compile(r"\b(SELECT|INSERT|UPDATE|DELETE)\s+.*\bFROM\b", re.IGNORECASE),
 )
 
+# ALTYAPI-ODIN-MASKE-V3: kaynak (sürüm) sözleşmesi. Ölçüm: V1/V2'nin hangi
+# deseni gevşettiği ölçülmedi (D-224) → tek tanımlı küme v3, bilinmeyen kaynak
+# fail-closed v3'e düşer. İkinci desen listesi açılmaz (D-211).
+ODIN_KAYNAK_MUSTERI = "v3"
+ODIN_KAYNAK_TANIM: dict[str, tuple[re.Pattern[str], ...]] = {
+    ODIN_KAYNAK_MUSTERI: _ODIN_YASAK_DESENLER,
+}
+ODIN_KAYNAKLAR: tuple[str, ...] = tuple(ODIN_KAYNAK_TANIM)
 
-def maskeleme_odin(metin: str | None, hedef: str = "musteri") -> str:
+
+def _odin_kaynak_temizle(kaynak) -> str:
+    """Ham kaynak adını kanonikleştirir (tek yer, D-211): "V3"/" v3 "/3 → "v3"."""
+    ad = "" if kaynak is None else str(kaynak).strip().lower()
+    return f"v{ad}" if ad.isdigit() else ad
+
+
+def odin_kaynak_dogrula(kaynak) -> str:
+    """Tanımlı kaynağı döndürür; tanımsız/boş kaynak fail-closed v3'e düşer."""
+    ad = _odin_kaynak_temizle(kaynak)
+    return ad if ad in ODIN_KAYNAK_TANIM else ODIN_KAYNAK_MUSTERI
+
+
+def maskeleme_odin(metin: str | None, hedef: str = "musteri",
+                   kaynak=ODIN_KAYNAK_MUSTERI) -> str:
     """D-310 Kural 2: iç model çıktısını müşteri-yüzlü tarafa güvenli aktarır.
 
     Tek kapı (D-247 genişletmesi): hedef == "musteri" ise yasak desenler
@@ -299,7 +333,7 @@ def maskeleme_odin(metin: str | None, hedef: str = "musteri") -> str:
     if hedef != "musteri":
         return metin
     sonuc = metin
-    for desen in _ODIN_YASAK_DESENLER:
+    for desen in ODIN_KAYNAK_TANIM[odin_kaynak_dogrula(kaynak)]:
         sonuc = desen.sub(ODIN_RED_METNI, sonuc)
     return sonuc
 
@@ -339,7 +373,7 @@ _KALAN_SIR = re.compile(
 )
 
 
-def odin_kapi_olcumu(model_yaniti: str | None) -> str:
+def odin_kapi_olcumu(model_yaniti: str | None, kaynak=ODIN_KAYNAK_MUSTERI) -> str:
     """Müşteri-yüzlü model yanıtının K4 sonucunu üç değerden biri olarak verir.
 
     - ``kacak``     : yasak desen maskelemeden **sonra** da duruyor (kapı bozuk)
@@ -358,9 +392,9 @@ def odin_kapi_olcumu(model_yaniti: str | None) -> str:
         # Model iç sözlüğü kendisi kullandı: nötrleştirilmiş olsa bile sızdı.
         return ODIN_KAPI_KACAK
 
-    maske_sonrasi = maskeleme_odin(model_yaniti, hedef="musteri")
+    maske_sonrasi = maskeleme_odin(model_yaniti, hedef="musteri", kaynak=kaynak)
 
-    for desen in _ODIN_YASAK_DESENLER:
+    for desen in ODIN_KAYNAK_TANIM[odin_kaynak_dogrula(kaynak)]:
         if desen.search(maske_sonrasi):
             return ODIN_KAPI_KACAK
 
@@ -368,6 +402,24 @@ def odin_kapi_olcumu(model_yaniti: str | None) -> str:
         return ODIN_KAPI_MASKELENDI
 
     return ODIN_KAPI_INCELEME
+
+
+def odin_musteri_cikis_kapisi(metin: str | None, kaynak=ODIN_KAYNAK_MUSTERI) -> dict:
+    """V3 müşteri çıkış kapısı: maske + K4 ölçümü tek çağrıda.
+
+    Tanımsız kaynak sessizce yutulmaz (D-339): maske yine en katı küme (v3)
+    ile uygulanır ama ``kapi`` insan kararına (``inceleme``) açılır ve
+    ``kaynak_istenen`` / ``kapi_tanimli`` uyuşmazlığı görünür kılar.
+    """
+    istenen = _odin_kaynak_temizle(kaynak)
+    tanimli = istenen in ODIN_KAYNAK_TANIM
+    return {
+        "metin": maskeleme_odin(metin, "musteri", kaynak),
+        "kapi": odin_kapi_olcumu(metin, kaynak=kaynak) if tanimli else ODIN_KAPI_INCELEME,
+        "kaynak": ODIN_KAYNAK_MUSTERI,
+        "kaynak_istenen": istenen,
+        "kapi_tanimli": tanimli,
+    }
 
 
 def odin_kapi_denetle(sonuc: str, temiz_mi: bool, gerekce: str = "") -> str:
