@@ -69,26 +69,6 @@
     "task_id": "DOC-BRIEF-SABLON-KIRMIZI-01",
     "kilitlendi": "2026-10-06T05:52:01"
   },
-  "web_dashboard/tabs/admin_kpi.py": {
-    "sahip": "utku",
-    "task_id": "ALTYAPI-ADMIN-SQL-PARAM-01",
-    "kilitlendi": "2026-10-06T05:52:23"
-  },
-  "web_dashboard/tabs/admin_quality.py": {
-    "sahip": "utku",
-    "task_id": "ALTYAPI-ADMIN-SQL-PARAM-01",
-    "kilitlendi": "2026-10-06T05:52:23"
-  },
-  "web_dashboard/tabs/admin_search.py": {
-    "sahip": "utku",
-    "task_id": "ALTYAPI-ADMIN-SQL-PARAM-01",
-    "kilitlendi": "2026-10-06T05:52:23"
-  },
-  "tests/test_admin_sql_param.py": {
-    "sahip": "utku",
-    "task_id": "ALTYAPI-ADMIN-SQL-PARAM-01",
-    "kilitlendi": "2026-10-06T05:52:23"
-  },
   "src/company_master/engine/rapidapi_osint.py": {
     "sahip": "yasu",
     "task_id": "VERI-RAPIDAPI-OSINT-ISTEMCI-01",

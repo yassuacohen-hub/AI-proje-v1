@@ -98,6 +98,7 @@ Ana baglam: [[Huginn Data Insights/AGENTS]] · [[Huginn Data Insights/AGENT_SYNC
 | ORKESTRA-KIMLIK-ZINCIRI-01 | Pre-commit kilit kapisi `KimlikBelirsiz` ile cokuyordu → `kilit_zorla.py` duzeltildi, kirma 3/3 kanitli | 2026-10-04 |
 | ALTYAPI-RAG-EMBEDDER-01 | Sahte hash embedder silindi → `vector/embedder.py` qwen3-embedding-8b (4096), test_rag_* 64/64; 4 gun yetim review, vekaleten onay | 2026-10-06 |
 | ALTYAPI-ODIN-MASKE-V3-02 | `sunum.py` kaynak sozlesmesi (v3 fail-closed, tek normalizasyon) + `odin_musteri_cikis_kapisi`; commit 081eebfb, test_odin_kapi_olcumu 35/35; kademe-1 ajanlar kod alamadigi icin ihsan (kademe 3) yapti | 2026-10-06 |
+| ALTYAPI-ADMIN-SQL-PARAM-01 | `admin_quality._dolu_kosulu` kolon adi beyaz listesi (`_IZINLI_KOLONLAR`, fail-closed ValueError); commit 5dcf59b4, test_admin_sql_param 3/3 + panel durustluk 45/45; utku planina gore ihsan (kademe 3) yapti | 2026-10-06 |
 
 Tam liste ceyreklik arsivde: `data/orchestrator/task_board_arsiv_2026-Q3.json`
 
