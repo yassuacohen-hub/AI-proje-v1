@@ -111,7 +111,7 @@ jobs:
         run: python scripts/pano_guard.py check --in "${{ runner.temp }}/pano_md5.json"
       - name: Upload coverage to Codecov
         if: matrix.python-version == '3.11'
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@v7
         with:
           file: ./coverage.xml
           flags: unittests
