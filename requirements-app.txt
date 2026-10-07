@@ -11,7 +11,7 @@ structlog>=23.0.0
 
 # ETL/yardimci scriptler (scripts/)
 requests>=2.32.0
-beautifulsoup4>=4.11.0
+beautifulsoup4>=4.15.0
 rapidfuzz>=3.0.0
 
 # Legacy: eski Streamlit arayuzu (compose profili: legacy)
