@@ -1,5 +1,5 @@
 # API + dashboard (guncel mimari)
-fastapi>=0.110.0
+fastapi>=0.141.1
 uvicorn[standard]>=0.29.0
 SQLAlchemy>=2.0.30
 psycopg[binary]>=3.2.0
