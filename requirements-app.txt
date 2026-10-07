@@ -10,7 +10,7 @@ redis>=5.0.0
 structlog>=23.0.0
 
 # ETL/yardimci scriptler (scripts/)
-requests>=2.32.0
+requests>=2.34.2
 beautifulsoup4>=4.11.0
 rapidfuzz>=3.0.0
 
