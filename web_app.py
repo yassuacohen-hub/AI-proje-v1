@@ -88,6 +88,7 @@ from src.company_master.api.core.normalize import (
     _tr_insensitive, _tr_rx_key, _tr_rx, _tr_rx_soft_end,
     _clean_double_dots, _mask_email, _mask_phone, apply_kvkk_mask, _mask_active,
     normalize_company_name, extract_trade_name, normalize_company, tr_normalize,
+    _KVKK_FIELD_CLASS,
 )
 
 
@@ -3046,40 +3047,53 @@ def api_admin_categories_save(req: dict, _auth: str = Depends(require_admin)):
     return {"ok": True, "created": True}
 
 
+# D-207 FIX (2026-10-06): canli DB semasi `effective_to` kolonunu icermiyor
+# (gercek sema: admin_kvkk_mode_id, admin_id UUID FK users, mode, changed_at,
+# previous_mode, reason, created_at - bkz. migrations/0018_visibility_layer.sql).
+# "En son satir = mevcut mod" mantigina gecildi; effective_to referanslari kaldirildi.
+# admin_id UUID NOT NULL oldugu icin "system" literali yerine gercek admin user_id kullanilir.
 @app.post("/api/admin/kvkk-mode")
-def api_admin_kvkk_mode(req: dict, _auth: str = Depends(require_admin)):
+def api_admin_kvkk_mode(
+    req: dict,
+    authorization: str = Header(None, alias="Authorization"),
+    _auth: str = Depends(require_admin),
+):
    """D-207: Admin KVKK mode toggle (strict ↔ lenient).
-   
+
    strict: KVKK kesinlikle uygulanır (yasak alanlar maskelenir)
    lenient: Admin riski alıp kısıtlı alanları açar (yasak kalır)
-   
+
    İstek: {mode: 'strict' | 'lenient', reason: str}
    Cevap: {ok: bool, previous_mode: str, new_mode: str, changed_at: str}
    """
    mode = (req.get("mode") or "").strip().lower()
    reason = (req.get("reason") or "").strip()
-   
+
    if mode not in ("strict", "lenient"):
        raise HTTPException(status_code=400, detail="mode 'strict' veya 'lenient' olmalı")
    if not reason or len(reason) < 3:
        raise HTTPException(status_code=400, detail="reason en az 3 karakter olmalı")
-   
-   # Admin ID'sini token'dan al
-   auth_header = req.get("_auth_header") or ""
-   admin_id = "system"  # ponytail: Token parsing opsiyonel; system default
-   
+
+   # admin_kvkk_mode.admin_id UUID NOT NULL -> DASH_API_KEY (anahtar) girisiyle
+   # degil, gercek admin kullanici token'iyla cagrilmasi sart.
+   tok = (authorization or "").replace("Bearer ", "").strip()
+   admin_user = _user_from_token(tok)
+   if not admin_user:
+       raise HTTPException(
+           status_code=401,
+           detail="KVKK mode degisikligi icin admin kullanici oturumu (token) gerekli",
+       )
+   admin_id = admin_user["user_id"]
+
    engine = get_engine()
-   
-   # Mevcut mode'u oku
-   previous_mode = "strict"  # default
+
+   # Mevcut mode = en son eklenen satir (semada effective_to yok)
    with engine.connect() as conn:
        row = conn.execute(
-           text("SELECT mode FROM admin_kvkk_mode WHERE effective_to IS NULL ORDER BY changed_at DESC LIMIT 1")
+           text("SELECT mode FROM admin_kvkk_mode ORDER BY changed_at DESC LIMIT 1")
        ).mappings().first()
-       if row:
-           previous_mode = row["mode"]
-   
-   # Eğer zaten aynı mode'daysa, değişiklik yapma
+   previous_mode = row["mode"] if row else "strict"
+
    if mode == previous_mode:
        return {
            "ok": True,
@@ -3088,30 +3102,23 @@ def api_admin_kvkk_mode(req: dict, _auth: str = Depends(require_admin)):
            "changed_at": datetime.now().isoformat(),
            "message": "Mevcut mode ile aynı"
        }
-   
-   # Eski mod'ü sonlandır ve yenisini ekle
+
    now = datetime.now().isoformat()
    try:
        with engine.begin() as conn:
-           # Mevcut modu sonlandır
-           conn.execute(
-               text("UPDATE admin_kvkk_mode SET effective_to = :now WHERE effective_to IS NULL"),
-               {"now": now}
-           )
-           # Yeni modu ekle
            conn.execute(
                text("""
-                   INSERT INTO admin_kvkk_mode (admin_id, mode, changed_at, reason, effective_to)
-                   VALUES (:admin_id, :mode, :changed_at, :reason, NULL)
+                   INSERT INTO admin_kvkk_mode (admin_id, mode, changed_at, previous_mode, reason)
+                   VALUES (:admin_id, :mode, :changed_at, :previous_mode, :reason)
                """),
                {
                    "admin_id": admin_id,
                    "mode": mode,
                    "changed_at": now,
+                   "previous_mode": previous_mode,
                    "reason": reason,
                }
            )
-       # Cache'i temizle
        cache_set("kvkk_admin_mode", mode)
        return {
            "ok": True,
@@ -3121,6 +3128,53 @@ def api_admin_kvkk_mode(req: dict, _auth: str = Depends(require_admin)):
        }
    except Exception as e:
            raise HTTPException(status_code=500, detail=f"Mode değiştirilemedi: {str(e)}")
+
+
+@app.get("/api/admin/kvkk-mode")
+def api_admin_kvkk_mode_get(_auth: str = Depends(require_admin)) -> dict:
+    """D-207 FIX: admin_panel.py `_kvkk_mode_getir()` icin eksik olan GET route.
+
+    Mevcut modu (en son satir) dondurur.
+    """
+    engine = get_engine()
+    with engine.connect() as conn:
+        row = conn.execute(
+            text("SELECT mode, changed_at, reason FROM admin_kvkk_mode ORDER BY changed_at DESC LIMIT 1")
+        ).mappings().first()
+    if not row:
+        return {"mode": "strict", "changed_at": None, "reason": None}
+    return dict(row)
+
+
+@app.get("/api/admin/kvkk-mode/history")
+def api_admin_kvkk_mode_history(limit: int = 30, _auth: str = Depends(require_admin)) -> list[dict]:
+    """D-214 FIX: `_kvkk_rapor_getir()` icin eksik olan GET route (gecmis tablosu + trend)."""
+    engine = get_engine()
+    with engine.connect() as conn:
+        rows = conn.execute(
+            text(
+                "SELECT admin_id, mode, changed_at, previous_mode, reason "
+                "FROM admin_kvkk_mode ORDER BY changed_at DESC LIMIT :limit"
+            ),
+            {"limit": limit},
+        ).mappings().all()
+    return [dict(r) for r in rows]
+
+
+@app.get("/api/admin/kvkk-mode/stats")
+def api_admin_kvkk_mode_stats(_auth: str = Depends(require_admin)) -> dict:
+    """UI-KONTROL-PANOSU-32 FIX: `_kontrol_panosu_getir()` icin eksik olan GET route.
+
+    Statik alan-sinifi haritasindan (D-203) maskeli/acik alan sayilarini dondurur.
+    strict: kisitli+yasak maskeli. lenient: yalnizca yasak maskeli.
+    """
+    yasak = sum(1 for v in _KVKK_FIELD_CLASS.values() if v == "yasak")
+    kisitli = sum(1 for v in _KVKK_FIELD_CLASS.values() if v == "kisitli")
+    toplam = len(_KVKK_FIELD_CLASS)
+    return {
+        "masked_fields_strict": kisitli + yasak,
+        "visible_fields_lenient": toplam - yasak,
+    }
 
 
 # UI-ADMIN-FEATURE-FLAG-25: Feature Flag Yönetim Endpoint
@@ -3153,11 +3207,7 @@ def admin_feature_flag_toggle(
                 "message": "Değer zaten aynı"
             }
         
-        # Güncelle
-        flags[flag_name] = new_value
-        _save_feature_flags(flags)
-        
-        # Audit log
+        # Güncelle: admin_audit_log INSERT = tek gerçek state kaynağı (ayrı tabloya ihtiyaç yok)
         admin_id = _get_admin_id_from_request(request)
         _log_feature_flag_change(admin_id, flag_name, previous, new_value)
         
@@ -3174,10 +3224,27 @@ def admin_feature_flag_toggle(
 
 
 def _get_feature_flags() -> dict[str, bool]:
-    """Feature flag'leri session state'ten oku."""
+    """Feature flag'lerin güncel durumu — her flag için admin_audit_log'daki son kayıttan türetilir.
+
+    D-310 FIX: önceki hali `streamlit.session_state` okuyordu ama bu kod FastAPI/uvicorn
+    sürecinde çalışıyor — Streamlit context'i yok, her zaman boş dönüyordu (frontend'in
+    session_state'i ayrı process, hiç konuşmuyorlardı). Audit log zaten tüm değişiklikleri
+    tutuyor, yeni tablo açmaya gerek yok.
+    ponytail: DB büyüdükçe bu sorgu pahalanabilir; gerekirse dedicated feature_flags tablosuna taşı.
+    """
     try:
-        import streamlit as st
-        return dict(st.session_state.get("_feature_flags", {}))
+        engine = get_engine()
+        with engine.connect() as conn:
+            rows = conn.execute(text("""
+                SELECT a.target, a.new_value
+                FROM admin_audit_log a
+                WHERE a.action = 'feature_flag_toggle'
+                  AND a.changed_at = (
+                      SELECT MAX(b.changed_at) FROM admin_audit_log b
+                      WHERE b.action = 'feature_flag_toggle' AND b.target = a.target
+                  )
+            """)).mappings().all()
+        return {r["target"]: str(r["new_value"]).lower() == "true" for r in rows}
     except Exception:
         return {}
 
@@ -3199,15 +3266,6 @@ def _get_plan_field_visibility(company_id: str) -> dict:
     except Exception:
         pass
     return plan_field_visibility
-
-
-def _save_feature_flags(flags: dict[str, bool]) -> None:
-    """Feature flag'leri session state'e yaz."""
-    try:
-        import streamlit as st
-        st.session_state["_feature_flags"] = dict(flags)
-    except Exception:
-        pass
 
 
 def _get_admin_id_from_request(request: Request) -> str:

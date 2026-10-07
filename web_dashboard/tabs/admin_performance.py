@@ -78,22 +78,25 @@ def load_ai_cost_per_call() -> dict[str, Any]:
 
 @st.cache_data(ttl=60)
 def load_prometheus_metrics() -> dict[str, Any]:
-    """Prometheus metriklerini oku (/metrics endpointinden)."""
+    """/metrics endpointinden metrik oku.
+
+    D-310 FIX: endpoint adı "Prometheus" dese de web_app.py::metrics()
+    gerçekte JSON dict döndürüyor (FastAPI otomatik serialize eder).
+    Eskiden burada Prometheus text-exposition formatı (satır başı
+    "ad değer") parse edilmeye çalışılıyordu — JSON satırları o kalıba
+    uymadığı için metrics dict hep boş/anlamsız çıkıyordu.
+    ponytail: gerçek Prometheus scrape formatı gerekirse (Grafana vb.)
+    backend'e ayrı /metrics.txt route eklenir; bu endpoint admin UI içi kullanım.
+    """
     try:
+        import json
         import urllib.request
 
         url = "http://localhost:8000/metrics"
         req = urllib.request.Request(url, timeout=5)
         raw = urllib.request.urlopen(req).read().decode("utf-8")
-        metrics: dict[str, Any] = {}
-        for line in raw.splitlines():
-            line = line.strip()
-            if not line or line.startswith("#"):
-                continue
-            parts = line.split()
-            if len(parts) >= 2:
-                metrics[parts[0]] = parts[1]
-        return metrics
+        data = json.loads(raw)
+        return data if isinstance(data, dict) else {}
     except Exception as exc:
         _admin_perf_logger.warning("Prometheus metrikleri yüklenemedi", exc)
         return {}

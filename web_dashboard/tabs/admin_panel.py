@@ -15,12 +15,16 @@ from __future__ import annotations
 
 import logging
 import sys
+from collections import Counter
 from pathlib import Path
 from typing import Any
 
 import pandas as pd
 import streamlit as st
+from sqlalchemy import text
 
+from company_master.db.connection import get_engine
+from scripts.dash04_api_client import APIError, get_api, post_api
 from scripts.decision_log import read_decisions, log_decision
 
 _KOK = Path(__file__).resolve().parents[2]
@@ -39,9 +43,10 @@ from company_master.settings import (  # noqa: E402
     varsayilanlar,
 )
 from company_master.ui import PageHeader, Section, SectionNav  # noqa: E402
+from web_dashboard.charts import kpi_karti  # noqa: E402
 from company_master.chat import ac, oku, ozet, kahin_gonder, guncelle  # noqa: E402
 from web_dashboard.tabs.admin_mfa import render_mfa_tab  # noqa: E402 (UI-ADMIN-MFA-26 B-05)
-import requests  # noqa: E402 (UI-ADMIN-KVKK-MODU-26: KVKK mode API çağrısı, UI-ADMIN-MFA-26: MFA API çağrısı)
+from web_dashboard.tabs import aktif_rol
 
 #: D-192 Faz 2 — ajan başına sabit renk (tema uyumlu: gece/gündüz)
 _AJAN_RENKLERI: dict[str, str] = {
@@ -516,11 +521,11 @@ def render_chat_summary() -> None:
 
     col1, col2, col3 = st.columns(3)
     with col1:
-        st.metric("🔴 Açık Sorunlar", len(acik))
+        kpi_karti("🔴 Açık Sorunlar", len(acik), kategori="tehlike")
     with col2:
-        st.metric("🟡 Çözüm Bekleniyor", len(cokundurmus))
+        kpi_karti("🟡 Çözüm Bekleniyor", len(cokundurmus), kategori="uyari")
     with col3:
-        st.metric("🟢 Çözüldü", len(cozuldu))
+        kpi_karti("🟢 Çözüldü", len(cozuldu), kategori="basari")
 
     # ---- Son Açık Sorunlar ----
     Section("Son 3 Açık Sorun", "Ajanlar tarafından en son bildirilen açık sorunlar.", ikon="🔴").render()
@@ -910,13 +915,13 @@ def render_task_board_tab() -> None:
     st.divider()
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.metric("✅ Tamamlandı", len(bolumler["tamamlandi"]))
+        kpi_karti("✅ Tamamlandı", len(bolumler["tamamlandi"]), kategori="basari")
     with col2:
-        st.metric("⏳ Beklemede", len(bolumler["beklemede"]))
+        kpi_karti("⏳ Beklemede", len(bolumler["beklemede"]), kategori="uyari")
     with col3:
-        st.metric("📋 Yedek", len(bolumler["yedek"]))
+        kpi_karti("📋 Yedek", len(bolumler["yedek"]), kategori="sistem")
     with col4:
-        st.metric("🔴 Değerlendirme", len(bolumler["degerlendirme"]))
+        kpi_karti("🔴 Değerlendirme", len(bolumler["degerlendirme"]), kategori="tehlike")
 
     st.caption(f"Toplam {len(filtrelenmis)} görev gösteriliyor (filtreli). Kaynak: data/orchestrator/task_board.json")
 
@@ -940,16 +945,9 @@ def _kvkk_mode_getir() -> dict | None:
     if not token:
         return None
     try:
-        resp = requests.get(
-            "/api/admin/kvkk-mode",
-            headers={"Authorization": f"Bearer {token}"},
-            timeout=5,
-        )
-        if resp.ok:
-            return resp.json()
-    except Exception:
-        pass
-    return None
+        return get_api("/api/admin/kvkk-mode", token=token, timeout=5)
+    except APIError:
+        return None
 
 
 def render_kvkk_mode_tab() -> None:
@@ -968,14 +966,14 @@ def render_kvkk_mode_tab() -> None:
     col1, col2 = st.columns(2)
     with col1:
         if mevcut:
-            st.metric("Mevcut Mode", mevcut.get("mode", "?").capitalize())
+            kpi_karti("Mevcut Mode", mevcut.get("mode", "?").capitalize(), kategori="sistem")
         else:
-            st.metric("Mevcut Mode", "—")
+            kpi_karti("Mevcut Mode", "—", kategori="sistem")
     with col2:
         if mevcut:
-            st.metric("Son Değişim", str(mevcut.get("changed_at", "—"))[:16])
+            kpi_karti("Son Değişim", str(mevcut.get("changed_at", "—"))[:16], kategori="sistem")
         else:
-            st.metric("Son Değişim", "—")
+            kpi_karti("Son Değişim", "—", kategori="sistem")
 
     st.divider()
 
@@ -994,18 +992,15 @@ def render_kvkk_mode_tab() -> None:
                     st.error("Oturum token bulunamadı. Yeniden giriş yapın.")
                 else:
                     try:
-                        resp = requests.post(
+                        post_api(
                             "/api/admin/kvkk-mode",
                             json={"mode": mode, "reason": reason},
-                            headers={"Authorization": f"Bearer {token}"},
+                            token=token,
                             timeout=10,
                         )
-                        if resp.ok:
-                            st.success(f"Mode '{mode}' olarak değiştirildi")
-                            st.rerun()
-                        else:
-                            st.error(f"Hata: {resp.json().get('detail', resp.text)}")
-                    except Exception as exc:
+                        st.success(f"Mode '{mode}' olarak değiştirildi")
+                        st.rerun()
+                    except APIError as exc:
                         st.error(f"İstek hatası: {exc}")
 
     # D-214: KVKK Rapor (gecmis/trend) bu sayfaya gomuldu (UI-ADMIN-KVKK-RAPOR-28).
@@ -1022,16 +1017,9 @@ def _kvkk_rapor_getir(limit: int = 30) -> list[dict]:
     if not token:
         return []
     try:
-        resp = requests.get(
-            f"/api/admin/kvkk-mode/history?limit={limit}",
-            headers={"Authorization": f"Bearer {token}"},
-            timeout=10,
-        )
-        if resp.ok:
-            return resp.json()
-    except Exception:
-        pass
-    return []
+        return get_api(f"/api/admin/kvkk-mode/history", token=token, params={"limit": limit}, timeout=10)
+    except APIError:
+        return []
 
 
 def render_kvkk_rapor_tab() -> None:
@@ -1051,18 +1039,19 @@ def render_kvkk_rapor_tab() -> None:
     gecmis = _kvkk_rapor_getir(limit=100)
     strict_say = sum(1 for r in gecmis if r.get("mode") == "strict")
     lenient_say = sum(1 for r in gecmis if r.get("mode") == "lenient")
-    en_sik_sebep = "Audit" if gecmis else "—"
+    sebepler = [r.get("reason") for r in gecmis if r.get("reason")]
+    en_sik_sebep = Counter(sebepler).most_common(1)[0][0][:30] if sebepler else "—"
     son_degisim = gecmis[0].get("changed_at", "—")[:16] if gecmis else "—"
 
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.metric("Strict Mode", strict_say)
+        kpi_karti("Strict Mode", strict_say, kategori="sistem")
     with col2:
-        st.metric("Lenient Mode", lenient_say)
+        kpi_karti("Lenient Mode", lenient_say, kategori="sistem")
     with col3:
-        st.metric("En Sık Sebep", en_sik_sebep)
+        kpi_karti("En Sık Sebep", en_sik_sebep, kategori="sistem")
     with col4:
-        st.metric("Son Değişim", son_degisim)
+        kpi_karti("Son Değişim", son_degisim, kategori="sistem")
 
     st.divider()
 
@@ -1128,28 +1117,16 @@ def _kontrol_panosu_getir() -> dict:
 
     try:
         # admin_kvkk_mode istatistikleri
-        resp = requests.get(
-            "/api/admin/kvkk-mode/stats",
-            headers={"Authorization": f"Bearer {token}"},
-            timeout=10,
-        )
-        if resp.ok:
-            data = resp.json()
-            sonuc["maskeli"] = data.get("masked_fields_strict", 0)
-            sonuc["acik"] = data.get("visible_fields_lenient", 0)
-    except Exception:
+        data = get_api("/api/admin/kvkk-mode/stats", token=token, timeout=10)
+        sonuc["maskeli"] = data.get("masked_fields_strict", 0)
+        sonuc["acik"] = data.get("visible_fields_lenient", 0)
+    except APIError:
         pass
 
     try:
         # Tier dağılımı
-        resp = requests.get(
-            "/api/admin/tier-distribution",
-            headers={"Authorization": f"Bearer {token}"},
-            timeout=10,
-        )
-        if resp.ok:
-            sonuc["tier_dagilimi"] = resp.json()
-    except Exception:
+        sonuc["tier_dagilimi"] = get_api("/api/admin/tier-distribution", token=token, timeout=10)
+    except APIError:
         pass
 
     return sonuc
@@ -1170,13 +1147,13 @@ def render_kontrol_panosu_tab() -> None:
     # KPI Row 1
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.metric("Maskeli Alan (Strict)", veri.get("maskeli", 0))
+        kpi_karti("Maskeli Alan (Strict)", veri.get("maskeli", 0), kategori="sistem")
     with col2:
-        st.metric("Açık Alan (Lenient)", veri.get("acik", 0))
+        kpi_karti("Açık Alan (Lenient)", veri.get("acik", 0), kategori="sistem")
     with col3:
-        st.metric("Terminal User", "—")
+        kpi_karti("Terminal User", "—", kategori="musteri")
     with col4:
-        st.metric("Enterprise User", "—")
+        kpi_karti("Enterprise User", "—", kategori="musteri")
 
     # Tier Dağılımı (bar chart)
     Section("User Dağılımı (Tier)", "Paket bazlı kullanıcı sayıları", ikon="📊").render()
@@ -1220,13 +1197,30 @@ def render_kontrol_panosu_tab() -> None:
 # ---------------------------------------------------------------------------
 
 def _get_feature_flags() -> dict[str, bool]:
-    """Feature flag'leri session state'ten oku."""
-    return dict(st.session_state.get("_feature_flags", {}))
+    """Feature flag'lerin güncel durumu — admin_audit_log'daki son kayıttan türetilir.
 
-
-def _save_feature_flags(flags: dict[str, bool]) -> None:
-    """Feature flag'leri session state'e yaz."""
-    st.session_state["_feature_flags"] = dict(flags)
+    D-310 FIX: önceki hali `st.session_state` okuyordu. Backend (FastAPI, ayrı process)
+    toggle'ı ayrı bir session_state'e yazıyordu — ikisi hiç senkron olmuyordu, bu yüzden
+    sayfa her yenilendiğinde flag varsayılana dönüyordu ("sürekli yükleniyor" hissi).
+    Artık backend'le (web_app.py::_get_feature_flags) AYNI sorguyu kullanıyor — tek kaynak.
+    """
+    try:
+        engine = get_engine()
+        with engine.connect() as conn:
+            rows = conn.execute(
+                text("""
+                    SELECT a.target, a.new_value
+                    FROM admin_audit_log a
+                    WHERE a.action = 'feature_flag_toggle'
+                      AND a.changed_at = (
+                          SELECT MAX(b.changed_at) FROM admin_audit_log b
+                          WHERE b.action = 'feature_flag_toggle' AND b.target = a.target
+                      )
+                """)
+            ).mappings().all()
+        return {r["target"]: str(r["new_value"]).lower() == "true" for r in rows}
+    except Exception:
+        return {}
 
 
 def _feature_flag_audit_getir(limit: int = 20) -> list[dict]:
@@ -1263,15 +1257,7 @@ def render_feature_flags_tab() -> None:
     ).render()
 
     # Admin rol kontrolü
-    try:
-        session = dict(st.session_state)
-        user_email = session.get("admin_email") or session.get("user_email")
-        user_role = session.get("user_role", "anon")
-    except Exception:
-        user_email = None
-        user_role = "anon"
-
-    if user_role != "admin":
+    if aktif_rol() != "admin":
         st.error("Bu sekmeye sadece admin rolü erişebilir.")
         return
 
@@ -1284,11 +1270,11 @@ def render_feature_flags_tab() -> None:
     }
 
     flags = _get_feature_flags()
-    # Default değerleri merge et
+    # Default değerleri sadece gösterim için merge et (DB'ye yazmaya gerek yok — hiç toggle
+    # edilmemiş flag zaten "default" demektir).
     for fname, fdef in DEFAULT_FLAGS.items():
         if fname not in flags:
             flags[fname] = fdef["default"]
-    _save_feature_flags(flags)
 
     # Flag listesi + toggle
     Section("Feature Flag Listesi", "Aktif/pasif toggle + açıklama", ikon="🚩").render()
@@ -1306,21 +1292,18 @@ def render_feature_flags_tab() -> None:
                 label_visibility="collapsed",
             )
             if new_val != current:
-                # API çağrısı
-                import requests
+                # Checkbox değişimi zaten Streamlit'i otomatik yeniden çalıştırır —
+                # buraya ayrıca st.rerun() eklemek ÇİFT yenilemeye (ağır "sürekli
+                # reload" hissi + çakışan satır render'ı) yol açıyordu. D-310 FIX.
                 try:
-                    resp = requests.post(
+                    post_api(
                         "/api/admin/feature-flags",
                         json={"flag_name": fname, "new_value": new_val},
-                        headers={"Authorization": f"Bearer {st.session_state.get('admin_token', '')}"},
+                        token=st.session_state.get("admin_token", ""),
                         timeout=5,
                     )
-                    if resp.ok:
-                        st.success(f"{fname} → {'Aktif' if new_val else 'Pasif'}")
-                        st.rerun()
-                    else:
-                        st.error(f"Hata: {resp.json().get('detail', 'Bilinmeyen hata')}")
-                except Exception as e:
+                    st.success(f"{fname} → {'Aktif' if new_val else 'Pasif'}")
+                except APIError as e:
                     st.error(f"İstek hatası: {e}")
         with col3:
             st.caption(fdef["desc"])
@@ -1363,21 +1346,13 @@ def _ltv_cac_api_token() -> str | None:
 
 def _ltv_cac_verileri_getir(days: int = 30) -> dict | None:
     """LTV/CAC verilerini API'den getir."""
-    import requests
     token = _ltv_cac_api_token()
     if not token:
         return None
     try:
-        resp = requests.get(
-            f"/api/admin/ltv-cac?days={days}",
-            headers={"Authorization": f"Bearer {token}"},
-            timeout=10,
-        )
-        if resp.ok:
-            return resp.json()
-    except Exception:
-        pass
-    return None
+        return get_api("/api/admin/ltv-cac", token=token, params={"days": days}, timeout=10)
+    except APIError:
+        return None
 
 
 def render_ltv_cac_tab() -> None:
@@ -1410,14 +1385,14 @@ def render_ltv_cac_tab() -> None:
     # KPI kartları
     col1, col2, col3, col4 = st.columns(4)
     with col1:
-        st.metric("LTV (Ortalama)", f"{veri.get('ltv', 0):,.0f} TRY")
+        kpi_karti("LTV (Ortalama)", f"{veri.get('ltv', 0):,.0f} TRY", kategori="marka")
     with col2:
-        st.metric("CAC (Kazanım Maliyeti)", f"{veri.get('cac', 0):,.0f} TRY")
+        kpi_karti("CAC (Kazanım Maliyeti)", f"{veri.get('cac', 0):,.0f} TRY", kategori="marka")
     with col3:
         ratio = veri.get('ratio', 0)
-        st.metric("LTV/CAC Ratio", f"{ratio:.1f}x")
+        kpi_karti("LTV/CAC Ratio", f"{ratio:.1f}x", kategori="basari" if ratio >= 3 else "uyari")
     with col4:
-        st.metric("Periyot", f"{days} gün")
+        kpi_karti("Periyot", f"{days} gün", kategori="sistem")
 
     # Ratio durumu
     ratio = veri.get('ratio', 0)
