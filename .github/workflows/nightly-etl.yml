@@ -18,7 +18,7 @@ jobs:
       SCRAPING_ROUTE: scheduled
       SCRAPER_USER_AGENT: ${{ secrets.SCRAPER_USER_AGENT }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ env.PYTHON_VERSION }}
