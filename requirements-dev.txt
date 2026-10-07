@@ -21,7 +21,7 @@ mkdocs>=1.4.0
 mkdocs-material>=9.0.0
 
 # Pre-commit
-pre-commit>=3.0.0
+pre-commit>=4.6.2
 # MCP (Model Context Protocol) - MCP-03 transport tests
 mcp>=2.0.0
 prometheus-client>=0.19.0
