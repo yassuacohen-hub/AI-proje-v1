@@ -14,7 +14,6 @@
 # Karar: TEK REPO TEK SISTEM. Ic depo tek orijinaldir; ust depo ona bakmaz.
 # ponytail: ust depo hala kok ayar dosyalarini (.vscode, .roo, AGENTS.md...)
 # izliyor. Ust depoyu tumden kaldirmak urun sahibinin karari.
-/Huginn Data Insights/
 
 # Yedekler: ayni diskteki gecici durak, repo gecmisine gomulmemeli
 yedekler/
@@ -38,3 +37,7 @@ __pycache__/
 .pytest_cache/
 *.pyc
 node_modules/
+
+# Vendor/skill cache (araclarin indirdigi paket icerigi, workspace kodu degil)
+.agents/skills/
+.kilo/skills/
