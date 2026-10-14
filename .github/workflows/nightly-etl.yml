@@ -43,7 +43,7 @@ jobs:
           python -m src.company_master.etl.score_quality
       - name: Upload artifacts (logs + jsonl)
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: nightly-etl-logs-${{ github.run_id }}
           path: |
