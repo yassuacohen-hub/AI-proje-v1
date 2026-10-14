@@ -41,3 +41,6 @@ node_modules/
 # Vendor/skill cache (araclarin indirdigi paket icerigi, workspace kodu degil)
 .agents/skills/
 .kilo/skills/
+ 
+frontend/.next/ 
+frontend/tsconfig.tsbuildinfo 
