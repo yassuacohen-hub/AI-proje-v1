@@ -136,7 +136,7 @@ jobs:
           bandit -r src/ -ll || echo "::warning::bandit Medium bulgular var (B608 f-string SQL / B113 timeout) — SEC-BANDIT-01 backlog"
           bandit -r src/ -lll
       - name: Upload bandit report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         if: always()
         with:
           name: bandit-report
