@@ -1,0 +1,509 @@
+version: '3.8'
+
+services:
+  # ---------------------------------------------------------
+  # NETWORK SECURITY LAYER: Kong API Gateway (Dual-IP Traffic Router)
+  # ---------------------------------------------------------
+  hugin-gateway:
+    image: kong:3.4-alpine
+    container_name: hugin_kong_gateway
+    restart: always
+    environment:
+      KONG_DATABASE: "off"
+      KONG_DECLARATIVE_CONFIG: /usr/local/kong/declarative/kong.yml
+      KONG_PROXY_LISTEN: "0.0.0.0:8000, 0.0.0.0:8443 ssl"
+      KONG_ADMIN_LISTEN: "0.0.0.0:8001"
+      KONG_LOG_LEVEL: notice
+      KONG_PLUGINS: "request-transformer,response-transformer,rate-limiting,correlation-id,ip-restriction,acl,oauth2,mtls-auth"
+    volumes:
+      - ./kong.yml:/usr/local/kong/declarative/kong.yml:ro
+      - ./kong/certs:/usr/local/kong/certs:ro
+    # FİZİKSEL IP BAĞLAMA (Source-IP İzolasyonu)
+    # Windows Server üzerindeki IP-1 ve IP-2 adreslerinizi buraya yazın:
+    ports:
+      # IP-1: Genel Trafik ve İstemci Paneli Girişi (Public/Clean)
+      - "192.168.1.50:80:8000"
+      - "192.168.1.50:443:8443"
+      # IP-2: Holding mTLS API Hattı ve Muninn Admin Girişi (Isolated/Enterprise)
+      - "192.168.1.60:8443:8443"
+      # Kong Admin API (sadece localhost'tan erişilebilir)
+      - "127.0.0.1:8001:8001"
+    networks:
+      - hugin-core-net
+    depends_on:
+      - hugin-db
+      - hugin-cache
+    healthcheck:
+      test: ["CMD", "kong", "health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+
+  # ---------------------------------------------------------
+  # CORE DATABASE: PostgreSQL 16 + PostGIS (SRID 4326) + JSONB + GIN
+  # ---------------------------------------------------------
+  hugin-db:
+    image: postgis/postgis:16-3.4
+    container_name: hugin_postgres_db
+    restart: always
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-hugin_commercial_db}
+      POSTGRES_USER: ${POSTGRES_USER:-hugin_admin}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256 --auth-local=scram-sha-256"
+    volumes:
+      - hugin_pg_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d:ro
+      - ./pg_hba.conf:/etc/postgresql/pg_hba.conf:ro
+    ports:
+      # Sadece Docker bridge network'ten erişim (Kong ve FastAPI üzerinden)
+      - "127.0.0.1:5432:5432"
+    networks:
+      - hugin-core-net
+    command: >
+      postgres
+      -c max_connections=200
+      -c shared_buffers=4GB
+      -c effective_cache_size=12GB
+      -c work_mem=64MB
+      -c maintenance_work_mem=1GB
+      -c random_page_cost=1.1
+      -c effective_io_concurrency=200
+      -c synchronous_commit=on
+      -c wal_buffers=64MB
+      -c checkpoint_completion_target=0.9
+      -c log_min_duration_statement=1000
+      -c log_statement=mod
+      -c log_connections=on
+      -c log_disconnections=on
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-hugin_admin} -d ${POSTGRES_DB:-hugin_commercial_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 8G
+          cpus: '4'
+        reservations:
+          memory: 4G
+          cpus: '2'
+
+  # ---------------------------------------------------------
+  # CACHE LAYER: Redis 7 (Warm Cache, Pub/Sub, Celery Broker)
+  # ---------------------------------------------------------
+  hugin-cache:
+    image: redis:7-alpine
+    container_name: hugin_redis_cache
+    restart: always
+    command: >
+      redis-server
+      --appendonly yes
+      --maxmemory 2gb
+      --maxmemory-policy allkeys-lru
+      --save 900 1
+      --save 300 10
+      --save 60 10000
+      --tcp-backlog 511
+      --timeout 300
+      --tcp-keepalive 60
+    volumes:
+      - hugin_redis_data:/data
+    ports:
+      - "127.0.0.1:6379:6379"
+    networks:
+      - hugin-core-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          memory: 3G
+          cpus: '1'
+        reservations:
+          memory: 1G
+          cpus: '0.5'
+
+  # ---------------------------------------------------------
+  # API LAYER: FastAPI Backend (Business Logic, TOBB Integration, Ingest)
+  # ---------------------------------------------------------
+  hugin-api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: hugin_fastapi_backend
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-hugin_admin}:${POSTGRES_PASSWORD}@hugin-db:5432/${POSTGRES_DB:-hugin_commercial_db}
+      REDIS_URL: redis://hugin-cache:6379/0
+      REDIS_PUBSUB_URL: redis://hugin-cache:6379/1
+      TOBB_API_URL: ${TOBB_API_URL:-https://api.tobb.org.tr}
+      TOBB_API_KEY: ${TOBB_API_KEY:-[REDACTED-ENV]}
+      TOBB_API_SECRET: ${TOBB_API_SECRET:-[REDACTED-ENV]}
+      TOBB_CARD_02_COST_TL: ${TOBB_CARD_02_COST_TL:-19.49}
+      TOBB_CARD_04_COST_TL: ${TOBB_CARD_04_COST_TL:-48.73}
+      TOBB_PREPAID_MIN_BALANCE: ${TOBB_PREPAID_MIN_BALANCE:-50000}
+      IYZICO_API_KEY: ${IYZICO_API_KEY}
+      IYZICO_SECRET_KEY: ${IYZICO_SECRET_KEY}
+      IYZICO_BASE_URL: ${IYZICO_BASE_URL:-https://api.iyzipay.com}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_MODEL_PARSER: ${OPENAI_MODEL_PARSER:-gpt-4o-mini}
+      JWT_SECRET_KEY: ${JWT_SECRET_KEY}
+      JWT_ALGORITHM: HS256
+      JWT_EXPIRE_MINUTES: ${JWT_EXPIRE_MINUTES:-60}
+      CORS_ORIGINS: ${CORS_ORIGINS:-https://app.huginn.local,https://admin.huginn.local}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      ENVIRONMENT: production
+    volumes:
+      - ./backend/app:/app/app:ro
+      - ./logs:/var/log/hugin
+    networks:
+      - hugin-core-net
+    depends_on:
+      hugin-db:
+        condition: service_healthy
+      hugin-cache:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '2'
+        reservations:
+          memory: 1G
+          cpus: '1'
+
+  # ---------------------------------------------------------
+  # ASYNC WORKERS: Celery Workers (TOBB Repair, PDF Parsing, Quarantine Loop)
+  # ---------------------------------------------------------
+  hugin-worker-tobb:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.worker
+    container_name: hugin_worker_tobb
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-hugin_admin}:${POSTGRES_PASSWORD}@hugin-db:5432/${POSTGRES_DB:-hugin_commercial_db}
+      REDIS_URL: redis://hugin-cache:6379/0
+      TOBB_API_URL: ${TOBB_API_URL:-https://api.tobb.org.tr}
+      TOBB_API_KEY: ${TOBB_API_KEY:-[REDACTED-ENV]}
+      TOBB_API_SECRET: ${TOBB_API_SECRET:-[REDACTED-ENV]}
+      TOBB_CARD_02_COST_TL: ${TOBB_CARD_02_COST_TL:-19.49}
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_MODEL_PARSER: ${OPENAI_MODEL_PARSER:-gpt-4o-mini}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      WORKER_CONCURRENCY: ${WORKER_CONCURRENCY_TOBB:-4}
+      WORKER_PREFETCH_MULTIPLIER: 1
+    volumes:
+      - ./backend/app:/app/app:ro
+      - ./logs:/var/log/hugin
+    networks:
+      - hugin-core-net
+    depends_on:
+      hugin-db:
+        condition: service_healthy
+      hugin-cache:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '2'
+        reservations:
+          memory: 1G
+          cpus: '1'
+
+  hugin-worker-pdf:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.worker
+    container_name: hugin_worker_pdf
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-hugin_admin}:${POSTGRES_PASSWORD}@hugin-db:5432/${POSTGRES_DB:-hugin_commercial_db}
+      REDIS_URL: redis://hugin-cache:6379/0
+      OPENAI_API_KEY: ${OPENAI_API_KEY}
+      OPENAI_MODEL_PARSER: ${OPENAI_MODEL_PARSER:-gpt-4o-mini}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      WORKER_CONCURRENCY: ${WORKER_CONCURRENCY_PDF:-2}
+      WORKER_PREFETCH_MULTIPLIER: 1
+    volumes:
+      - ./backend/app:/app/app:ro
+      - ./logs:/var/log/hugin
+    networks:
+      - hugin-core-net
+    depends_on:
+      hugin-db:
+        condition: service_healthy
+      hugin-cache:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 3G
+          cpus: '2'
+        reservations:
+          memory: 1G
+          cpus: '1'
+
+  hugin-worker-quarantine:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.worker
+    container_name: hugin_worker_quarantine
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-hugin_admin}:${POSTGRES_PASSWORD}@hugin-db:5432/${POSTGRES_DB:-hugin_commercial_db}
+      REDIS_URL: redis://hugin-cache:6379/0
+      TOBB_API_URL: ${TOBB_API_URL:-https://api.tobb.org.tr}
+      TOBB_API_KEY: ${TOBB_API_KEY:-[REDACTED-ENV]}
+      TOBB_API_SECRET: ${TOBB_API_SECRET:-[REDACTED-ENV]}
+      TOBB_CARD_02_COST_TL: ${TOBB_CARD_02_COST_TL:-19.49}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+      WORKER_CONCURRENCY: ${WORKER_CONCURRENCY_QUARANTINE:-2}
+      QUARANTINE_BATCH_SIZE: ${QUARANTINE_BATCH_SIZE:-50}
+      QUARANTINE_INTERVAL_SECONDS: ${QUARANTINE_INTERVAL_SECONDS:-60}
+      WORKER_PREFETCH_MULTIPLIER: 1
+    volumes:
+      - ./backend/app:/app/app:ro
+      - ./logs:/var/log/hugin
+    networks:
+      - hugin-core-net
+    depends_on:
+      hugin-db:
+        condition: service_healthy
+      hugin-cache:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1'
+        reservations:
+          memory: 512M
+          cpus: '0.5'
+
+  hugin-beat:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile.worker
+    container_name: hugin_celery_beat
+    restart: always
+    command: celery -A app.workers.celery_app beat --loglevel=INFO --scheduler celery.beat.PersistentScheduler
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-hugin_admin}:${POSTGRES_PASSWORD}@hugin-db:5432/${POSTGRES_DB:-hugin_commercial_db}
+      REDIS_URL: redis://hugin-cache:6379/0
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    volumes:
+      - ./backend/app:/app/app:ro
+      - ./logs:/var/log/hugin
+      - celery_beat_data:/app/celerybeat-schedule
+    networks:
+      - hugin-core-net
+    depends_on:
+      hugin-db:
+        condition: service_healthy
+      hugin-cache:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+        reservations:
+          memory: 256M
+          cpus: '0.25'
+
+  # ---------------------------------------------------------
+  # ADMIN PANEL: Streamlit (Muninn Admin) - IP-2 Only Access
+  # ---------------------------------------------------------
+  hugin-admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+    container_name: hugin_streamlit_admin
+    restart: always
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-hugin_admin}:${POSTGRES_PASSWORD}@hugin-db:5432/${POSTGRES_DB:-hugin_commercial_db}
+      REDIS_URL: redis://hugin-cache:6379/0
+      API_BASE_URL: http://hugin-api:8000
+      STREAMLIT_SERVER_PORT: 8501
+      STREAMLIT_SERVER_ADDRESS: 0.0.0.0
+      STREAMLIT_SERVER_HEADLESS: true
+      STREAMLIT_BROWSER_GATHER_USAGE_STATS: false
+    volumes:
+      - ./admin:/app:ro
+      - ./logs:/var/log/hugin
+    networks:
+      - hugin-core-net
+    depends_on:
+      hugin-db:
+        condition: service_healthy
+      hugin-cache:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1'
+        reservations:
+          memory: 512M
+          cpus: '0.5'
+
+  # ---------------------------------------------------------
+  # FRONTEND: Next.js (Client Portal) - IP-1 Public Access
+  # ---------------------------------------------------------
+  hugin-frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: hugin_nextjs_frontend
+    restart: always
+    environment:
+      NEXT_PUBLIC_API_URL: https://api.huginn.local
+      NEXT_PUBLIC_WS_URL: wss://api.huginn.local
+      NODE_ENV: production
+      NEXT_TELEMETRY_DISABLED: 1
+    volumes:
+      - ./frontend:/app:ro
+      - ./logs:/var/log/hugin
+    networks:
+      - hugin-core-net
+    depends_on:
+      - hugin-api
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1'
+        reservations:
+          memory: 512M
+          cpus: '0.5'
+
+  # ---------------------------------------------------------
+  # VECTOR DB: ChromaDB (Embeddings for Semantic Search)
+  # ---------------------------------------------------------
+  hugin-chroma:
+    image: chromadb/chroma:0.5.5
+    container_name: hugin_chromadb
+    restart: always
+    environment:
+      CHROMA_SERVER_HOST: 0.0.0.0
+      CHROMA_SERVER_HTTP_PORT: 8000
+      ANONYMIZED_TELEMETRY: false
+      ALLOW_RESET: true
+    volumes:
+      - hugin_chroma_data:/chroma/data
+    ports:
+      - "127.0.0.1:8002:8000"
+    networks:
+      - hugin-core-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v2/heartbeat"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+          cpus: '1'
+        reservations:
+          memory: 1G
+          cpus: '0.5'
+
+  # ---------------------------------------------------------
+  # MONITORING: Prometheus + Grafana (Optional but Recommended)
+  # ---------------------------------------------------------
+  prometheus:
+    image: prom/prometheus:v2.48.0
+    container_name: hugin_prometheus
+    restart: always
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus_data:/prometheus
+    ports:
+      - "127.0.0.1:9090:9090"
+    networks:
+      - hugin-core-net
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '0.5'
+
+  grafana:
+    image: grafana/grafana:10.2.0
+    container_name: hugin_grafana
+    restart: always
+    environment:
+      GF_SECURITY_ADMIN_USER: ${GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${GRAFANA_ADMIN_PASSWORD}
+      GF_INSTALL_PLUGINS: grafana-piechart-panel
+    volumes:
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards:ro
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources:ro
+      - grafana_data:/var/lib/grafana
+    ports:
+      - "127.0.0.1:3001:3000"
+    networks:
+      - hugin-core-net
+    depends_on:
+      - prometheus
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+
+volumes:
+  hugin_pg_data:
+    driver: local
+  hugin_redis_data:
+    driver: local
+  hugin_chroma_data:
+    driver: local
+  celery_beat_data:
+    driver: local
+  prometheus_data:
+    driver: local
+  grafana_data:
+    driver: local
+
+networks:
+  hugin-core-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.16.0.0/12
