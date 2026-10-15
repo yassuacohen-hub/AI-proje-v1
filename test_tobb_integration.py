@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 Huginn Data Insights - TOBB API Integration Test
-Tests Company Card 02 (Basic Info) and Card 04 (Gazette PDF) endpoints
-with provided credentials: Kodu=Crowtech_SrktKrt, Şifre=1y7!KTE!uW.f
+Tests Company Card 02 (Basic Info) and Card 04 (Gazette PDF) endpoints.
 
 Run: python test_tobb_integration.py
 """
@@ -27,8 +26,8 @@ load_dotenv()
 # CONFIGURATION
 # ================================================================
 TOBB_API_URL = os.getenv("TOBB_API_URL", "https://tobb.org.tr")
-TOBB_API_KEY = os.getenv("TOBB_API_KEY", "Crowtech_SrktKrt")
-TOBB_API_SECRET = os.getenv("TOBB_API_SECRET", "1y7!KTE!uW.f")
+TOBB_API_KEY = os.getenv("TOBB_API_KEY")
+TOBB_API_SECRET = os.getenv("TOBB_API_SECRET")
 TOBB_CARD_02_COST_TL = float(os.getenv("TOBB_CARD_02_COST_TL", "19.49"))
 TOBB_CARD_04_COST_TL = float(os.getenv("TOBB_CARD_04_COST_TL", "48.73"))
 
@@ -317,7 +316,7 @@ class TobbTestClient:
         print("HUGINN DATA INSIGHTS - TOBB API ENTEGRASYON TESTİ")
         print("="*60)
         print(f"API Endpoint: {TOBB_API_URL}")
-        print(f"API Key: {TOBB_API_KEY}")
+        print(f"API Key: {'SET' if TOBB_API_KEY else 'NOT SET'}")
         print(f"Test VKN: {TEST_VKN}")
         print(f"Test MERSIS: {TEST_MERSIS}")
         print(f"Card 02 Cost: {TOBB_CARD_02_COST_TL} TL")
@@ -395,13 +394,15 @@ class TobbTestClient:
 # ================================================================
 async def main():
     print("TOBB API Entegrasyon Testi Başlatılıyor...")
-    print(f"Credentials: Kodu={TOBB_API_KEY}, Şifre={TOBB_API_SECRET[:4]}****")
+    print(f"API Endpoint: {TOBB_API_URL}")
+    print(f"API Key: {'SET' if TOBB_API_KEY else 'NOT SET'}")
+    print(f"Test VKN: {TEST_VKN}")
     
-    # Validate credentials are not defaults
-    if TOBB_API_KEY == "Crowtech_SrktKrt" and TOBB_API_SECRET == "1y7!KTE!uW.f":
-        print("\n[UYARI] Varsayilan test credentials kullaniliyor!")
-        print("   Gercek test icin .env dosyasinda TOBB_API_KEY ve TOBB_API_SECRET ayarlayin.")
-        print("   On odemeli bakiye en az 50.000 TL olmalidir.\n")
+    # Validate credentials are provided
+    if not TOBB_API_KEY or not TOBB_API_SECRET:
+        print("\n[UYARI] TOBB_API_KEY ve TOBB_API_SECRET ortam değişkenleri ayarlanmamış!")
+        print("   Gerçek test için .env dosyasında TOBB_API_KEY ve TOBB_API_SECRET ayarlayın.")
+        print("   Ön ödemeli bakiye en az 50.000 TL olmalıdır.\n")
     
     client = TobbTestClient(TOBB_API_URL, TOBB_API_KEY, TOBB_API_SECRET)
     
