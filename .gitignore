@@ -44,3 +44,6 @@ node_modules/
  
 frontend/.next/ 
 frontend/tsconfig.tsbuildinfo 
+ 
+# D-380: anahtar dosyasi git'e girmez 
+.env 
