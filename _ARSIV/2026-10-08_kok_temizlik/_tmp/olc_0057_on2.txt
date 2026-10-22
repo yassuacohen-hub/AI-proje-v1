@@ -1,0 +1,9 @@
+companies (59): ['company_id', 'legal_name', 'trade_name', 'company_type', 'tax_number', 'mersis_number', 'establishment_date', 'status', 'status_confidence', 'employee_count', 'website_domain', 'primary_phone', 'primary_email', 'description', 'is_ankara', 'is_osb_member', 'osb_id', 'nace_validity', 'quarantine_reason', 'data_quality_score', 'entity_confidence', 'osb_parcel', 'first_seen_at', 'last_verified_at', 'created_at', 'updated_at', 'source_record_id', 'nace_source', 'nace_code', 'address', 'data_freshness_score', 'phone_format_score', 'social_media_score', 'source_diversity_score', 'job_postings_score', 'employee_count_score', 'email_validity_score', 'job_postings_count', 'employee_count_estimate', 'job_postings_last_checked', 'employee_count_last_checked', 'email_validation_data', 'email_validated_at', 'tax_office', 'trade_registry_number', 'trade_registry_office', 'identity_completeness', 'score_version', 'search_text', 'collected_at', 'source_name', 'source_type', 'source_file', 'source_line', 'collected_by', 'last_verified_on', 'sector_name', 'sector_source', 'kvkk_kapsam']
+company_locations (15): ['location_id', 'company_id', 'location_type', 'address_line', 'district', 'neighborhood', 'city', 'postal_code', 'latitude', 'longitude', 'geocode_confidence', 'osb_id', 'is_primary', 'source_id', 'verified_at']
+company_events (14): ['event_id', 'company_id', 'event_type', 'event_date', 'detection_date', 'direction', 'magnitude', 'evidence_id', 'confidence', 'common_cause_id', 'created_at', 'source_guid', 'event_person', 'person_role']
+key_personnel (7): ['personnel_id', 'company_id', 'full_name', 'position', 'is_public', 'source', 'created_at']
+ikiz adaylari companies: ['company_type', 'status', 'status_confidence', 'trade_registry_number', 'trade_registry_office', 'source_type']
+company_capital var mi: None
+company_legal_proceedings var mi: None
+companies.company_id tipi: uuid
+company_events.source_guid: 1

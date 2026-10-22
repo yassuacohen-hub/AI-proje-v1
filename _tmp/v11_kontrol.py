@@ -1,0 +1,15 @@
+import re, collections, subprocess
+h = open('Huginn Data Insights/docs/MUSTERI_PANEL_WIREFRAME_V11.html', encoding='utf-8').read()
+js = re.findall(r'<script>(.*?)</script>', h, re.S)[-1]
+open('_tmp/v11_script.js', 'w', encoding='utf-8').write(js)
+ids = re.findall(r'\bid="([^"]+)"', h)
+print('DUP', [k for k, v in collections.Counter(ids).items() if v > 1])
+need = set(re.findall(r"\$\('#([A-Za-z0-9_-]+)'\)", js))
+print('MISSING', sorted(need - set(ids)))
+sym = set(re.findall(r'<symbol id="i-([a-z0-9]+)"', h))
+use = set(re.findall(r'#i-([a-z0-9]+)', h))
+use |= set(re.findall(r"ic\('([a-z0-9]+)'\)", js))
+use |= set(re.findall(r"i:'([a-z0-9]+)'", js))
+print('SYMBOL_EKSIK', sorted(use - sym))
+r = subprocess.run(['node', '--check', '_tmp/v11_script.js'], capture_output=True, text=True)
+print('SYNTAX', 'OK' if r.returncode == 0 else r.stderr)

@@ -1,0 +1,21 @@
+Reading additional input from stdin...
+2026-10-20T19:00:27.573194Z ERROR codex_models_manager::manager: failed to refresh available models: request timed out
+2026-10-20T19:00:27.766732Z ERROR codex_models_manager::manager: failed to refresh available models: request timed out
+OpenAI Codex v0.163.0-alpha.10.2
+--------
+workdir: c:\Huginn Data Projesi
+model: cx/gpt-5.6-luna
+provider: 9router
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a15aaf-a452-76d2-a8cd-26661a794c08
+--------
+user
+Reply with exactly: ETIKET-VE-MODEL-TAM
+codex
+ETIKET-VE-MODEL-TAM
+tokens used
+22.821
+ETIKET-VE-MODEL-TAM

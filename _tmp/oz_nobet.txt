@@ -1,0 +1,33 @@
+[NOBET ihsan] tur 1 bos (0s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 2 bos (120s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 3 bos (240s). 120s sonra yine bakacagim.
+  3 tur bos: orkestratore kisa rapor at (chat_gonder.py --to ihsan --kimden ihsan --type rapor --mesaj "nobet: 3 tur bos"), beklemeye devam.
+[NOBET ihsan] tur 4 bos (360s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 5 bos (480s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 6 bos (600s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 7 bos (720s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 8 bos (840s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 9 bos (960s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 10 bos (1080s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 11 bos (1200s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 12 bos (1320s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 13 bos (1440s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 14 bos (1560s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 15 bos (1680s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 16 bos (1800s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 17 bos (1920s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 18 bos (2040s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 19 bos (2160s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 20 bos (2280s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 21 bos (2400s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 22 bos (2520s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 23 bos (2640s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 24 bos (2760s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 25 bos (2880s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 26 bos (3000s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 27 bos (3120s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 28 bos (3240s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 29 bos (3360s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 30 bos (3480s). 120s sonra yine bakacagim.
+[NOBET ihsan] tur 31 bos (3600s). 120s sonra yine bakacagim.
+[NOBET ihsan] azami 60 dk doldu, is yok. Yeniden: python scripts/gorev_kutusu.py nobet --ajan ihsan

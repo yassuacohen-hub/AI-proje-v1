@@ -1,0 +1,21 @@
+Reading additional input from stdin...
+2026-10-20T18:03:36.074320Z ERROR codex_models_manager::manager: failed to refresh available models: stream disconnected before completion: failed to decode models response: Data at line 1 column 446771 (body: 446771 bytes)
+2026-10-20T18:03:36.155713Z ERROR codex_models_manager::manager: failed to refresh available models: stream disconnected before completion: failed to decode models response: Data at line 1 column 446771 (body: 446771 bytes)
+OpenAI Codex v0.163.0-alpha.10.2
+--------
+workdir: c:\Huginn Data Projesi
+model: cx/gpt-5.6-luna
+provider: 9router
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a15a7b-9885-7711-bbea-63fcb0487f94
+--------
+user
+Reply with exactly: KANCA-TEMIZ
+codex
+KANCA-TEMIZ
+tokens used
+20.508
+KANCA-TEMIZ

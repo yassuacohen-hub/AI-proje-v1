@@ -1,0 +1,20 @@
+| tablo | beklenen | canli | ok |
+|---|---|---|---|
+| tobb_company_type_group | 9 | 9 | OK |
+| tobb_company_type | 28 | 28 | OK |
+| tobb_status | 10 | 10 | OK |
+| tobb_registry_office | 238 | 238 | OK |
+| tobb_city | 81 | 81 | OK |
+| tobb_representation_type | 5 | 5 | OK |
+| tobb_representation_duty | 30 | 30 | OK |
+| tobb_representation_authority | 11 | 11 | OK |
+
+duty.representation_type_code dolu: 30/30, kopuk FK: 0
+company_persons kolon: 35, company_person_joint kolon: 6
+indeks (2 tablo, PK dahil): 5, share_pct CHECK: 1, company_persons FK sayisi: 5
+key_personnel COMMENT PASIF: True
+defter 0056: 1
+mandal kirildi (beklenen): (psycopg.errors.CheckViolation) new row for relation "company_persons" violates check constraint "chk_company_persons_sh
+role_group mandal kirildi (beklenen): (psycopg.errors.CheckViolation) new row for relation "company_persons" violates check constraint "company_persons_role_g
+company_persons satir (rollback sonrasi): 0
+OLCUM OK

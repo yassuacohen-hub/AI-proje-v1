@@ -1,0 +1,17 @@
+[D-210 TESLIM KAPISI] HATA: Acik sorular var — teslim reddedildi.
+  - ATAMA KAYDI (resmi kanal): VERI-TOBB-HAVUZ-SEMA-01 ihsan'a atandi, 7 dosya kilitli, P0. yasu: MANTIK-01 Faz D (TOBB sozluk tablolari) bu brif tarafindan DEVRALINDI (D-211 ikiz is yasak) - Faz D'yi yap (kimden: ihsan)
+  - Faz A TAMAM (olcum+seed). Kanit: _tmp/tobb_havuz_canli_olcum.txt, scripts/tobb_alan_sozlugu_uret.py --say -> 132 tobb / 1 yedek / 5 huginn. Dogrulanan: 0054 son goc, source_record_id PK, companies kol (kimden: ihsan)
+  - Faz B TAMAM: 0055_tobb_havuz_sema.sql canlida (goc_defteri --uygula), 10 tablo, field_dictionary 138 (tobb 132 / yedek 1 / huginn 5), mandal kirilarak dogrulandi (D-256/4), defter 55/55. Kanit: _tmp/o (kimden: ihsan)
+  - Faz B2+C TAMAM: 0056 canlida (goc_defteri --uygula, defter 56/56). 8 sozluk seed 9/28/10/238/81/5/30/11 (brif 29 YANLISTI, kaynak basligi saymis; duzeltildi). duty.representation_type_code eklendi 30/ (kimden: ihsan)
+  - Faz D TAMAM: 0057_companies_tobb_kolonlari.sql canlida (defter 57/57). companies 59->66 kolon (company_type_code, tsm_code, business_start_date, closing_date, tobb_status_code, total_capital, parent_c (kimden: ihsan)
+  - Faz E TAMAM: 0058_adres_hukuk_gazete.sql canli, defter 58/58. company_locations +uavt_code +address_detail JSONB (AdresDetay 21 alan, kaynak satir 132-153; brif 17 yazmisti, duzeltildi). company_legal (kimden: ihsan)
+  - Faz F TAMAM: src/company_master/etl/tobb_alan_haritasi.py (ALANLAR 132 sabit, haritala/cikti tek kapi) + tests/test_tobb_alan_haritasi.py 7/7 yesil (kod=MD dokuman=canli field_dictionary ayni sira; ye (kimden: ihsan)
+  - Madde 6 TAMAMLANDI: tam yedek + yerel kopya + geri yukleme testi. Yedek: backups/supabase_20261010_122308.sql.gz (4.818 KB, yerel diskte, D-229 geregi git'te izlenmiyor). Dogrulama: gzip butunlugu + i (kimden: ihsan)
+
+Soruları kapadiğinda teslim yeniden calistir.
+eklendi=0 guncellendi=0 degismedi=10 arsivlendi=0
+yerel gorev=10 notion satiri=10
+ozet: 1 blok (silinen kopya 1)
+  Ilerleme Matrisi: eklendi 0, guncellendi 0, toplam 8
+  Ajan Ilerlemesi: eklendi 0, guncellendi 0, toplam 4
+  KRITIK - Simdi Buraya Bak: eklendi 0, guncellendi 0, toplam 1

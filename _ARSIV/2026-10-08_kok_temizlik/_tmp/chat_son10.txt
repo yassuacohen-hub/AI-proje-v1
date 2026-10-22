@@ -1,0 +1,52 @@
+
+1. [IHSAN] TOBB-SIRKET-KARTI-ONHAZIRLIK (cozuldu)
+   Sorun: TOBB paket tamam: docs/kaynaklar/tobb_sirket_karti (MD+MANIFEST) + docs/raporlar/tobb_sirket_karti_entegrasyon_onhazirlik + NOTLAR kilavuzu S1-S11. Hub baglantilari OSINT_VERI_TOPLAMA+MUSTERI_PANELI'n
+   Çözüm: Kanit: docs/kaynaklar/tobb_sirket_karti/ (MANIFEST+MD dosyalari mevcut, dogrulandi) + docs/raporlar/tobb_sirket_karti_entegrasyon_onhazirlik.md mevcut. Paket tamam, bildirim kapatildi.
+   Zaman: 2026-10-08T22:17:12
+
+2. [YASU] ALTYAPI-REPO-TEMIZLIK-01 (acik)
+   Sorun: Kademe-1 (PLAN) incelemesi tamam; gorev P1 uygulama gerektiriyor, bu tur ALINMADI
+   Çözüm: Dogrulandi: (1) gitignore kok _tmp/ satiri YOK (sadece _tmp_*, scripts/_tmp/, data/_tmp/ var), 319 dosya ?? _tmp/ altinda -> brif varsayimi dogru. (2) src/company_master/engine/rapidapi_osint.py file_locks.json'da KILITLI + VERI-RAPIDAPI-OSINT-ISTEMCI-01 (durum:plan, sahip:yasu) sahipli -> DOKUNMA. 
+   Zaman: 2026-10-08T22:43:52
+
+3. [IHSAN] ALTYAPI-REPO-TEMIZLIK-01 (cokundurmus)
+   Sorun: Brif Faz A-C kod dokunma+commit istiyor ama yasu nobet turu talimati kademe-1 PLAN: gorev alma/koda dokunma/teslim YASAK
+   Çözüm: S-07 kapisi: P1 gorevde kademe-2'ye devir insan onayi gerektirir (AGENTS.md:14,481). ihsan kademe-1 PLAN bu karari kendi onaylayamaz (self-approval = S-07 ihlali, bkz 21:24:02 notu). Devret onerisi urun sahibine sunuldu, bulgu defterine islendi.
+   Zaman: 2026-10-08T23:37:41
+
+4. [YASU] ALTYAPI-REPO-TEMIZLIK-01 (cokundurmus)
+   Sorun: PLAN/denetim on-kontrol: brif varsayimlarindan 3/4 kodda tutmuyor (D-66). (2) tests/ 15 dosyadan pytest -> 25 FAILED (8 dosya), kirmizi olan commit edilemez. (3) rapidapi_osint.py task_board.json'da A
+   Çözüm: DUR (kural 5): ayni engel 6+ turda tekrarladi (21:04-23:44, 2026-10-08). Kademe-1 PLAN gorev alamaz; P1->kademe-2 gecisi self-approval ile atilamaz (S-07, AGENTS.md:14,481). Insan/orkestrator onayi gelmeden tekrar analiz yapilmayacak. Karar urun sahibine devredildi, rapor: ALTYAPI-REPO-TEMIZLIK-01_r
+   Zaman: 2026-10-09T01:02:41
+
+5. [YASU] G-0-RISK-MOTOR-ENTITY-GRAPH (acik)
+   Sorun: Risk motoru ve entity grafiği entegrasyonu tamamlandi
+   Çözüm: 
+   Zaman: 2026-10-09T03:45:37
+
+6. [IHSAN] TEST-ODIN-REDTEAM-S1S4-I1I4-01 (acik)
+   Sorun: Faz C kirma denemesi kaniti: arac_dongusu.py:120 _SAYISAL_ETIKET_RX satiri gecici kaldirildi -> pytest 4 FAILED (0x7f000001/0177.0.0.1/2130706433/127.1 kilik-degismis IP'ler gecti) -> restore -> 38 pa
+   Çözüm: JSON 46 kayit, --rol dis/ic, I5/I6 birim katmani. pytest 95 passed. Teslim edildi, onay bekleniyor
+   Zaman: 2026-10-09T04:33:55
+
+7. [IHSAN] TEST-ODIN-PROMPT-INJECTION (acik)
+   Sorun: LLM-as-judge koku nedeni bulundu ve duzeltildi: max_tokens=10 reasoning modelde content=None donduruyordu, iki hakem de hic calismadi (sahte-kirmizi). Duzeltme: tek _llm_hakem_evet_mi + max_tokens=200
+   Çözüm: Rapor: data/orchestrator/TEST-ODIN-PROMPT-INJECTION_rapor_2026-10-21_test.md. Kanit: data/odin_injection_test_log.jsonl 46 satir
+   Zaman: 2026-10-09T04:34:01
+
+8. [IHSAN] SCRAPE-006-QUALITY-AUDIT (acik)
+   Sorun: Kazima QA audit tamam: scripts/_kazima_dogrula.py -> 5/5 assert yesil, TUM TESTLER GECTI (migration 0050, tablolar audit_log/pages/errors, UNIQUE dedup, CHECK cost_usd=0, robots+rate-limit router). D-
+   Çözüm: Rapor: data/orchestrator/SCRAPE-006-QUALITY-AUDIT_rapor_2026-10-09_test.md. Altyapi hazir, engel yok.
+   Zaman: 2026-10-09T04:34:07
+
+9. [IHSAN] ALTYAPI-MIMIR-BAGLAM-01 (acik)
+   Sorun: mimir_servis.py tamam: prompt_yukle(rol=dis/ic) dosyadan okunuyor (D-230, govde kodda yok), tanimsiz rol ValueError, varsayilan DIS (D-311), baglam_uret + katalog_uret, bos baglamda model CAGRILMIYOR.
+   Çözüm: Teslim edildi, onay bekleniyor. Kanit: tests/test_mimir_baglam.py 6 passed + odin_injection_test_log.jsonl IC satirlari.
+   Zaman: 2026-10-09T04:34:13
+
+10. [IHSAN] TEST-ODIN-REDTEAM-S1S4-I1I4-01 (acik)
+   Sorun: ODIN re-run (istatistiksel netlik, kod yok) tamam: 138 satir log (DIS 40x3 + IC 6x3). Zararlida 51/51 red (%100), sifir sizinti. Kararsiz: mesru-02(110), mesru-03(011), mesru-06(110); i1-kilit-sozu(11
+   Çözüm: Raporlar guncellendi (TEST-ODIN-REDTEAM-S1S4-I1I4-01_rapor_2026-10-09_test.md, TEST-ODIN-PROMPT-INJECTION_rapor_2026-10-21_test.md). Bulgu: zararli taraf STABIL, meşru false-positive'ler hakem semantigi kaynakli kararsiz. Kapatmanin yolu: hakem sorusunu 'guvenlik redi mi?' diye daraltmak (kod degisi
+   Zaman: 2026-10-09T06:04:02
+
+Toplam: 10 sorun

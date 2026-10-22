@@ -1,0 +1,300 @@
+........................F..........................F.................... [  1%]
+........................................................................ [  2%]
+........................................................................ [  3%]
+........................................................................ [  5%]
+........................................................................ [  6%]
+........................................................................ [  7%]
+........................................................................ [  9%]
+........................................................................ [ 10%]
+........................................................................ [ 11%]
+........................................................................ [ 13%]
+........................................................................ [ 14%]
+........................................................................ [ 15%]
+........................................................................ [ 17%]
+........................................................................ [ 18%]
+........................................................................ [ 19%]
+........................................................................ [ 20%]
+........................................................................ [ 22%]
+........................................................................ [ 23%]
+........................................................................ [ 24%]
+........................................................................ [ 26%]
+........................................................................ [ 27%]
+........................................................................ [ 28%]
+........................................................................ [ 30%]
+................F....................................................... [ 31%]
+........................................................................ [ 32%]
+...............................................................s........ [ 34%]
+...................F.................................................... [ 35%]
+........................................................................ [ 36%]
+........................................................................ [ 37%]
+........................................................................ [ 39%]
+........................................................................ [ 40%]
+........................................................................ [ 41%]
+........................................................................ [ 43%]
+........................................................................ [ 44%]
+........................................................................ [ 45%]
+........................................................................ [ 47%]
+........................................................................ [ 48%]
+........................................................................ [ 49%]
+........................................................................ [ 51%]
+...................................................................FF... [ 52%]
+...........F.........F..F............................................... [ 53%]
+........................................................................ [ 54%]
+........................................................................ [ 56%]
+................ss.sssss................................................ [ 57%]
+
+================================== FAILURES ===================================
+_____________________ test_gercek_defter_kurallara_uyuyor _____________________
+
+bd = <module 'bulgu_defteri' from 'C:\\Users\\yasin\\AppData\\Local\\Temp\\wt_ci\\scripts\\bulgu_defteri.py'>
+
+    def test_gercek_defter_kurallara_uyuyor(bd):
+        """Diskteki kanonik defterde bozuk satir olmamali."""
+        if not bd.DEFLER.exists():
+            pytest.skip("defter henuz yok")
+        veri = bd._veri_satirlari(bd.DEFLER)
+        assert veri, "defter bos"
+        for s in veri:
+            a = [x.strip() for x in s.split("|")]
+>           assert len(a) == 6, f"6 alan beklenir: {s[:70]}"
+E           AssertionError: 6 alan beklenir: 2026-10-03 | SCRAPE-005-KAZIMA-DOCKER-INTEGRATION | utku | COZULDU | D
+E           assert 7 == 6
+E            +  where 7 = len(['2026-10-03', 'SCRAPE-005-KAZIMA-DOCKER-INTEGRATION', 'utku', 'COZULDU', "DURUM GERCEGI - [3/4] COZULDU, TUM KALEMLER..._data.py ile tek yola alinacak - bunlar VERI-INGEST-ASO-GLOB-01'in devaminda, SCRAPE-005 teslimini blokelemiyor.", ...])
+
+tests\test_bulgu_defteri.py:269: AssertionError
+__________________ test_container_cerceve_kategori_rengi_yok __________________
+
+    def test_container_cerceve_kategori_rengi_yok() -> None:
+        """K3-10h madde 4: tüm bordered container'lar tek global kuralla kalýnlaþýr;
+        kategori rengi (KATEGORI_RENK) YOK, yalnýz border-strong token'ý kullanýlýr."""
+        assert 'div[data-testid="stVerticalBlockBorderWrapper"]' in _CONTAINER_CSS
+>       assert "border:2px solid var(--hg-color-border-strong)" in _CONTAINER_CSS
+E       assert 'border:2px solid var(--hg-color-border-strong)' in '\ndiv[data-testid="stVerticalBlockBorderWrapper"]{\nborder:2px solid var(--hg-color-border-interactive)!important;\nbackground:var(--hg-color-surface-2)!important}\n'
+
+tests\test_ui_modal_stil.py:40: AssertionError
+________________________ test_repo_koku_gercekten_repo ________________________
+
+    def test_repo_koku_gercekten_repo():
+        """En kritik regresyon: ROOT repo disina tasarsa import cokerek
+        butun senkron sessizce oluyordu.
+    
+        Metin taramasi yerine CALISMA ZAMANI olcumu: yorumda gecen ayni
+        ifade hatayi tetiklerdi (bu hatayi yasadik).
+        """
+        import importlib.util
+        spec = importlib.util.spec_from_file_location("sync_paket", BETIK)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)          # import edilebilirligi de olcer
+        assert mod.ROOT == KOK, f"ROOT yanlis: {mod.ROOT} != {KOK}"
+        assert (mod.ROOT / "src" / "company_master").is_dir()
+>       assert mod.ROOT.name == "Huginn Data Insights"
+E       AssertionError: assert 'wt_ci' == 'Huginn Data Insights'
+E         
+E         - Huginn Data Insights
+E         + wt_ci
+
+tests\test_paket_fiyat_senkron.py:34: AssertionError
+_________________ TestD317TetikPano.test_yeni_bayat_tetik_yok _________________
+
+self = <tests.test_tetik_pano_tutarlilik.TestD317TetikPano object at 0x000001D27C9D3200>
+
+    def test_yeni_bayat_tetik_yok(self):
+        """TABANDA olmayan bayat tetik varsa kýrmýzý — yeni ihlal demektir."""
+        yeni = _bayat_yeni()
+>       assert len(yeni) <= BAYAT_TETIK_TAVANI, (
+            f"D-317 ihlali: yeni bayat tetik {len(yeni)}, tavan {BAYAT_TETIK_TAVANI}"
+            f" -> {yeni}"
+        )
+E       AssertionError: D-317 ihlali: yeni bayat tetik 1, tavan 0 -> [('salih', 'TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01', 'done')]
+E       assert 1 <= 0
+E        +  where 1 = len([('salih', 'TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01', 'done')])
+
+tests\test_tetik_pano_tutarlilik.py:111: AssertionError
+___________________ test_growth_hiring_surge_3_posting_30d ____________________
+
+    def test_growth_hiring_surge_3_posting_30d():
+        analyzer = _make_analyzer()
+        postings = [
+            _make_posting(posted_at=NOW - timedelta(days=5), title="Engineer 1"),
+            _make_posting(posted_at=NOW - timedelta(days=3), title="Engineer 2"),
+            _make_posting(posted_at=NOW - timedelta(days=1), title="Engineer 3"),
+        ]
+        sig = analyzer._detect_growth(postings, CID)
+>       assert sig is not None
+E       assert None is not None
+
+tests\test_job_intelligence_analyzer.py:97: AssertionError
+______________ test_signal_analyzer_analyze_with_mocked_postings ______________
+
+    def test_signal_analyzer_analyze_with_mocked_postings():
+        analyzer = _make_analyzer()
+        postings = [
+            _make_posting(
+                posted_at=NOW - timedelta(days=2),
+                title="CTO",
+                department="executive",
+                seniority_level="c-level",
+                description="Kubernetes and AWS",
+                technologies=["kubernetes", "aws"],
+                location_city="Istanbul",
+            ),
+            _make_posting(
+                posted_at=NOW - timedelta(days=1),
+                title="VP Engineering",
+                department="engineering",
+                seniority_level="vp",
+                location_city="Ankara",
+            ),
+            _make_posting(
+                posted_at=NOW - timedelta(days=3),
+                title="Data Scientist",
+                department="data",
+                seniority_level="senior",
+                location_city="Istanbul",
+            ),
+        ]
+    
+        with patch.object(analyzer, "_load_job_postings", return_value=postings):
+            with patch.object(analyzer, "_load_company_tech_profile", return_value={}):
+                with patch.object(analyzer, "_load_existing_locations", return_value=set()):
+                    with patch.object(
+                        analyzer, "_load_existing_departments", return_value=set()
+                    ):
+                        with patch.object(analyzer, "_save_signals") as mock_save:
+                            mock_save.return_value = 0
+                            result = analyzer.analyze()
+    
+        assert result["companies_processed"] == 1
+        assert result["signals_generated"] == 0
+        assert mock_save.call_count == 1
+        saved_signals = mock_save.call_args[0][0]
+        sig_types = {s["signal_type"] for s in saved_signals}
+>       assert "growth" in sig_types
+E       AssertionError: assert 'growth' in {'geo_expansion', 'investment', 'org_change', 'tech_transformation'}
+
+tests\test_job_intelligence_analyzer.py:408: AssertionError
+---------------------------- Captured stdout call -----------------------------
+{"timestamp":"2026-10-08T20:53:58.172183+00:00","level":"INFO","logger":"company_master.intelligence.job_intelligence.pipeline.analyzer","message":"Signal analyzer baþlatýlýyor (window=90 gün)","module":"analyzer","function":"analyze","line":699}
+{"timestamp":"2026-10-08T20:53:58.172709+00:00","level":"INFO","logger":"company_master.intelligence.job_intelligence.pipeline.analyzer","message":"job_postings yüklendi: 3 kayýt","module":"analyzer","function":"analyze","line":702}
+{"timestamp":"2026-10-08T20:53:58.172709+00:00","level":"INFO","logger":"company_master.intelligence.job_intelligence.pipeline.analyzer","message":"Þirket bazýnda gruplandýrýldý: 1 þirket","module":"analyzer","function":"analyze","line":705}
+{"timestamp":"2026-10-08T20:53:58.172709+00:00","level":"INFO","logger":"company_master.intelligence.job_intelligence.pipeline.analyzer","message":"Sinyal analizi tamamlandý: 1 þirket, 0 sinyal kaydedildi","module":"analyzer","function":"analyze","line":740}
+------------------------------ Captured log call ------------------------------
+INFO     company_master.intelligence.job_intelligence.pipeline.analyzer:analyzer.py:699 Signal analyzer baþlatýlýyor (window=90 gün)
+INFO     company_master.intelligence.job_intelligence.pipeline.analyzer:analyzer.py:702 job_postings yüklendi: 3 kayýt
+INFO     company_master.intelligence.job_intelligence.pipeline.analyzer:analyzer.py:705 Þirket bazýnda gruplandýrýldý: 1 þirket
+INFO     company_master.intelligence.job_intelligence.pipeline.analyzer:analyzer.py:740 Sinyal analizi tamamlandý: 1 þirket, 0 sinyal kaydedildi
+___________________________ test_kok_denetimi_temiz ___________________________
+
+    def test_kok_denetimi_temiz() -> None:
+        """Regresyon kalkani: repo genelinde 0 ihlal (140 -> 0)."""
+        sonuc = md.tarama()
+>       assert sonuc["yasal_yazim"] == [], sonuc["yasal_yazim"][:5]
+E       AssertionError: ["C:\\\\Users\\\\yasin\\\\AppData\\\\Local\\\\Temp\\\\wt_ci\\\\docs\\\\SAGLAYICI_OLCUMU_2026-10-03.md:64: 'Munin' -> Hesap: `yasua_Hugin_Munin`, plan **FREE**, ayl\u0131k tavan 10 $, kullan\u0131lm\u0131\u015f \u2248 0 $. Bu ay 2026-10-09'da s\u0131f\u0131rlan\u0131r. \u015eimdilik"]
+E       assert ['C:\\Users\\...ýr. Þimdilik'] == []
+E         
+E         Left contains one more item: "C:\\\\Users\\\\yasin\\\\AppData\\\\Local\\\\Temp\\\\wt_ci\\\\docs\\\\SAGLAYICI_OLCUMU_2026-10-03.md:64: 'Munin' -> Hesap: `yasua_Hugin_Munin`, plan **FREE**, ayl\u0131k tavan 10 $, kullan\u0131lm\u0131\u015f \u2248 0 $. Bu ay 2026-10-09'da s\u0131f\u0131rlan\u0131r. \u015eimdilik"
+E         Use -v to get more diff
+
+tests\test_marka_denetim_muafiyet.py:68: AssertionError
+__________________ test_zorla_gecerse_panoya_atlandi_islenir __________________
+
+tmp_path = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-4002/test_zorla_gecerse_panoya_atla0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D27F0DF1A0>
+
+    def test_zorla_gecerse_panoya_atlandi_islenir(tmp_path, monkeypatch):
+        """--zorla kacis kapisi (D-65): is durmaz ama borc panoya yazilir."""
+        _kurulum(tmp_path, monkeypatch, ssot_metin="bos", hub_metin="bos")
+        monkeypatch.setattr(gk.trigger, "teslim_et", lambda *a, **k: {"task_id": "TEST-B14-01"})
+        yazilan: dict = {}
+        monkeypatch.setattr(tb, "gorev_guncelle", lambda tid, **f: yazilan.update({tid: f}))
+    
+>       assert gk.cmd_teslim(_args(zorla=True)) == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = <function cmd_teslim at 0x000001D27B7EB6A0>(Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=True))
+E        +    where <function cmd_teslim at 0x000001D27B7EB6A0> = gk.cmd_teslim
+E        +    and   Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=True) = _args(zorla=True)
+
+tests\test_gorev_kutusu_hafiza.py:80: AssertionError
+---------------------------- Captured stderr call -----------------------------
+[D-318 BULGU KAPISI] HATA: bulgu defterinde bu görev kaydi yok — teslim reddedildi.
+       Defter: data/orchestrator/bulgu_defteri.md (tek kanonik dosya)
+       Once bulgunu yaz, sonra teslim et:
+       python scripts/bulgu_defteri.py ekle --task-id TEST-B14-01 --rol utku \
+         --ozet "..." --karar "D-NNN | kapandi:<kanit>" --renk oneri|dikkat|acil|tamam
+       Bulgun yoksa: --ozet "bulgu yok, nedeni" --karar "red: <gerekce>"
+_______________________ test_hub_izi_varsa_teslim_gecer _______________________
+
+tmp_path = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-4002/test_hub_izi_varsa_teslim_gece0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D27F0DCB00>
+
+    def test_hub_izi_varsa_teslim_gecer(tmp_path, monkeypatch):
+        """Hub'da task_id geciyorsa kapi acilir; teslim normal akisina devam eder."""
+        _kurulum(tmp_path, monkeypatch, hub_metin="| TEST-B14-01 | kapandi | 2026-09-24 |")
+        monkeypatch.setattr(gk.trigger, "teslim_et", lambda *a, **k: {"task_id": "TEST-B14-01"})
+    
+>       assert gk.cmd_teslim(_args()) == 0
+E       AssertionError: assert 1 == 0
+E        +  where 1 = <function cmd_teslim at 0x000001D27B7EB6A0>(Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=False))
+E        +    where <function cmd_teslim at 0x000001D27B7EB6A0> = gk.cmd_teslim
+E        +    and   Namespace(task_id='TEST-B14-01', ajan='utku', ozet='test', cikti=None, zorla=False) = _args()
+
+tests\test_gorev_kutusu_hafiza.py:70: AssertionError
+---------------------------- Captured stderr call -----------------------------
+[D-318 BULGU KAPISI] HATA: bulgu defterinde bu görev kaydi yok — teslim reddedildi.
+       Defter: data/orchestrator/bulgu_defteri.md (tek kanonik dosya)
+       Once bulgunu yaz, sonra teslim et:
+       python scripts/bulgu_defteri.py ekle --task-id TEST-B14-01 --rol utku \
+         --ozet "..." --karar "D-NNN | kapandi:<kanit>" --renk oneri|dikkat|acil|tamam
+       Bulgun yoksa: --ozet "bulgu yok, nedeni" --karar "red: <gerekce>"
+============================== warnings summary ===============================
+tests\test_secrets_rotation.py:174
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\tests\test_secrets_rotation.py:174: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration
+
+tests/test_mcp_transport.py::TestHTTPTransport::test_http_call_apify_list_actors
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydantic_settings\sources\utils.py:47: IncompleteFieldDefinitionWarning: Field 'lifespan' has an incomplete definition: its annotation contains an unresolved forward reference, so settings sources may fail to correctly resolve its value. Call `model_rebuild()` on the model where the field is defined, once all the referenced types are defined.
+    warnings.warn(
+
+tests/test_veri_denetim_d303.py::TestCanliDizi::test_telefon_kahin_kuralina_uyuyor
+tests/test_veri_denetim_d303.py::TestCaprazKuraliYanlisAlarm::test_dosya_ici_capraz_kurali_temiz
+tests/test_ostim_d300_temizlik.py::TestDizinButunlugu::test_hicbir_adres_etiket_tasiMiYor
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\fixtures.py:1313: PytestRemovedIn10Warning: Class-scoped fixture defined as instance method is deprecated.
+  Instance attributes set in this fixture will NOT be visible to test methods,
+  as each test gets a new instance while the fixture runs only once per class.
+  Use @classmethod decorator and set attributes on cls instead.
+  See https://docs.pytest.org/en/stable/deprecations.html#class-scoped-fixture-as-instance-method
+    fixturefunc = resolve_fixture_function(fixturedef, request)
+
+tests/test_auth_lockout.py: 10 warnings
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\sqlalchemy\engine\default.py:952: DeprecationWarning: The default datetime adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+    cursor.execute(statement, parameters)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_bulgu_defteri.py::test_gercek_defter_kurallara_uyuyor - Ass...
+FAILED tests/test_ui_modal_stil.py::test_container_cerceve_kategori_rengi_yok
+FAILED tests/test_paket_fiyat_senkron.py::test_repo_koku_gercekten_repo - Ass...
+FAILED tests/test_tetik_pano_tutarlilik.py::TestD317TetikPano::test_yeni_bayat_tetik_yok
+FAILED tests/test_job_intelligence_analyzer.py::test_growth_hiring_surge_3_posting_30d
+FAILED tests/test_job_intelligence_analyzer.py::test_signal_analyzer_analyze_with_mocked_postings
+FAILED tests/test_marka_denetim_muafiyet.py::test_kok_denetimi_temiz - Assert...
+FAILED tests/test_gorev_kutusu_hafiza.py::test_zorla_gecerse_panoya_atlandi_islenir
+FAILED tests/test_gorev_kutusu_hafiza.py::test_hub_izi_varsa_teslim_gecer - A...
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KeyboardInterrupt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\pluggy\_manager.py:120: KeyboardInterrupt
+(to show a full traceback on KeyboardInterrupt use --full-trace)
+9 failed, 3151 passed, 9 skipped, 15 warnings in 106.01s (0:01:46)
+Exception ignored in: <generator object CaptureManager.pytest_runtest_call at 0x000001D27E406DC0>
+Traceback (most recent call last):
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\capture.py", line 899, in pytest_runtest_call
+    with self.item_capture("call", item):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\capture.py", line 867, in item_capture
+    out, err = self.read_global_capture()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\capture.py", line 802, in read_global_capture
+    assert self._global_capturing is not None
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 

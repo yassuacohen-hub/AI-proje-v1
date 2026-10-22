@@ -1,0 +1,163 @@
+{{ define "telegram.default" }}
+{{ range .Alerts }}
+<b>🔔 Huginn Alert</b>
+<b>Status:</b> {{ .Status | title }}
+<b>Alert:</b> {{ .Labels.alertname }}
+<b>Severity:</b> {{ .Labels.severity }}
+<b>Service:</b> {{ .Labels.service }}
+<b>Team:</b> {{ .Labels.team }}
+<b>Summary:</b> {{ .Annotations.summary }}
+<b>Description:</b> {{ .Annotations.description }}
+<b>Started:</b> {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+{{ if .GeneratorURL }}<b>Source:</b> <a href="{{ .GeneratorURL }}">Prometheus</a>{{ end }}
+{{ end }}
+{{ end }}
+
+{{ define "telegram.critical" }}
+{{ range .Alerts }}
+🚨 <b>CRITICAL ALERT</b> 🚨
+<b>Alert:</b> {{ .Labels.alertname }}
+<b>Service:</b> {{ .Labels.service }} | <b>Team:</b> {{ .Labels.team }}
+<b>Summary:</b> {{ .Annotations.summary }}
+<b>Details:</b> {{ .Annotations.description }}
+<b>Runbook:</b> {{ .Annotations.runbook }}
+<b>Started:</b> {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+<b>Instance:</b> {{ .Labels.instance }}
+{{ if .GeneratorURL }}<a href="{{ .GeneratorURL }}">📊 View in Prometheus</a>{{ end }}
+{{ end }}
+{{ end }}
+
+{{ define "telegram.security" }}
+{{ range .Alerts }}
+🔒 <b>SECURITY ALERT</b> 🔒
+<b>Alert:</b> {{ .Labels.alertname }}
+<b>Severity:</b> {{ .Labels.severity }}
+<b>Source IP:</b> {{ .Labels.source_ip | default "unknown" }}
+<b>Target:</b> {{ .Labels.handler | default .Labels.service }}
+<b>Summary:</b> {{ .Annotations.summary }}
+<b>Details:</b> {{ .Annotations.description }}
+<b>Runbook:</b> {{ .Annotations.runbook }}
+<b>Time:</b> {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+{{ if .GeneratorURL }}<a href="{{ .GeneratorURL }}">📊 Investigate</a>{{ end }}
+{{ end }}
+{{ end }}
+
+{{ define "telegram.finance" }}
+{{ range .Alerts }}
+💰 <b>FINANCE ALERT</b> 💰
+<b>Alert:</b> {{ .Labels.alertname }}
+<b>Service:</b> {{ .Labels.service }}
+<b>Summary:</b> {{ .Annotations.summary }}
+<b>Details:</b> {{ .Annotations.description }}
+<b>Current Value:</b> {{ .Value | humanize }}
+<b>Runbook:</b> {{ .Annotations.runbook }}
+<b>Time:</b> {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+{{ end }}
+{{ end }}
+
+{{ define "telegram.platform" }}
+{{ range .Alerts }}
+⚙️ <b>PLATFORM ALERT</b> ⚙️
+<b>Alert:</b> {{ .Labels.alertname }}
+<b>Severity:</b> {{ .Labels.severity }}
+<b>Service:</b> {{ .Labels.service }}
+<b>Instance:</b> {{ .Labels.instance }}
+<b>Summary:</b> {{ .Annotations.summary }}
+<b>Details:</b> {{ .Annotations.description }}
+<b>Runbook:</b> {{ .Annotations.runbook }}
+<b>Started:</b> {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+{{ if .GeneratorURL }}<a href="{{ .GeneratorURL }}">📊 View Metrics</a>{{ end }}
+{{ end }}
+{{ end }}
+
+{{ define "telegram.data" }}
+{{ range .Alerts }}
+📊 <b>DATA PIPELINE ALERT</b> 📊
+<b>Alert:</b> {{ .Labels.alertname }}
+<b>Severity:</b> {{ .Labels.severity }}
+<b>Queue/Task:</b> {{ .Labels.queue | default .Labels.task_name | default "unknown" }}
+<b>Summary:</b> {{ .Annotations.summary }}
+<b>Details:</b> {{ .Annotations.description }}
+<b>Runbook:</b> {{ .Annotations.runbook }}
+<b>Time:</b> {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+{{ if .GeneratorURL }}<a href="{{ .GeneratorURL }}">📈 View Queue</a>{{ end }}
+{{ end }}
+{{ end }}
+
+{{ define "telegram.product" }}
+{{ range .Alerts }}
+📈 <b>PRODUCT METRICS ALERT</b> 📈
+<b>Alert:</b> {{ .Labels.alertname }}
+<b>Severity:</b> {{ .Labels.severity }}
+<b>Summary:</b> {{ .Annotations.summary }}
+<b>Details:</b> {{ .Annotations.description }}
+<b>Runbook:</b> {{ .Annotations.runbook }}
+<b>Time:</b> {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+{{ end }}
+{{ end }}
+
+{{ define "telegram.enterprise" }}
+{{ range .Alerts }}
+🏢 <b>ENTERPRISE CLIENT ALERT</b> 🏢
+<b>Alert:</b> {{ .Labels.alertname }}
+<b>Client:</b> {{ .Labels.client_id | default "unknown" }}
+<b>Severity:</b> {{ .Labels.severity }}
+<b>Summary:</b> {{ .Annotations.summary }}
+<b>Details:</b> {{ .Annotations.description }}
+<b>Runbook:</b> {{ .Annotations.runbook }}
+<b>Time:</b> {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+{{ end }}
+{{ end }}
+
+{{ define "telegram.warning" }}
+{{ range .Alerts }}
+⚠️ <b>WARNING</b> ⚠️
+<b>Alert:</b> {{ .Labels.alertname }}
+<b>Severity:</b> {{ .Labels.severity }}
+<b>Service:</b> {{ .Labels.service }} | <b>Team:</b> {{ .Labels.team }}
+<b>Summary:</b> {{ .Annotations.summary }}
+<b>Details:</b> {{ .Annotations.description }}
+<b>Runbook:</b> {{ .Annotations.runbook }}
+<b>Started:</b> {{ .StartsAt.Format "2006-01-02 15:04:05" }}
+{{ if .GeneratorURL }}<a href="{{ .GeneratorURL }}">📊 View</a>{{ end }}
+{{ end }}
+{{ end }}
+
+{{ define "slack.critical.title" }}
+🚨 CRITICAL: {{ .GroupLabels.alertname }} [{{ .Status | title }}]
+{{ end }}
+
+{{ define "slack.critical.text" }}
+*Service:* {{ .GroupLabels.service }} | *Team:* {{ .GroupLabels.team }}
+*Summary:* {{ .CommonAnnotations.summary }}
+*Details:* {{ .CommonAnnotations.description }}
+*Runbook:* {{ .CommonAnnotations.runbook }}
+*Started:* {{ .Alerts.FireTime.Format "2006-01-02 15:04:05" }}
+{{ end }}
+
+{{ define "slack.security.title" }}
+🔒 SECURITY: {{ .GroupLabels.alertname }} [{{ .Status | title }}]
+{{ end }}
+
+{{ define "slack.security.text" }}
+*Source IP:* {{ .CommonLabels.source_ip | default "unknown" }}
+*Target:* {{ .CommonLabels.handler | default .CommonLabels.service }}
+*Summary:* {{ .CommonAnnotations.summary }}
+*Details:* {{ .CommonAnnotations.description }}
+*Runbook:* {{ .CommonAnnotations.runbook }}
+{{ end }}
+
+{{ define "slack.platform.title" }}
+⚙️ PLATFORM: {{ .GroupLabels.alertname }} [{{ .Status | title }}]
+{{ end }}
+
+{{ define "slack.platform.text" }}
+*Service:* {{ .GroupLabels.service }} | *Instance:* {{ .CommonLabels.instance }}
+*Summary:* {{ .CommonAnnotations.summary }}
+*Details:* {{ .CommonAnnotations.description }}
+*Runbook:* {{ .CommonAnnotations.runbook }}
+{{ end }}
+
+{{ define "pagerduty.description" }}
+[{{ .Status | title }}] {{ .GroupLabels.alertname }} - {{ .CommonAnnotations.summary }} | Service: {{ .GroupLabels.service }} | Team: {{ .GroupLabels.team }} | Runbook: {{ .CommonAnnotations.runbook }}
+{{ end }}

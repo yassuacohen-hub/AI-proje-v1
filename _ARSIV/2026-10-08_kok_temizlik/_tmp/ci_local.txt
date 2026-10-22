@@ -1,0 +1,1215 @@
+..............................F.FF..F........F..F.......F............... [  1%]
+...............................FF....................................... [  2%]
+...........................................................FF.F.F.F..... [  3%]
+......................................................................F. [  5%]
+........................................................................ [  6%]
+............................................F........................... [  7%]
+........................F............................................... [  8%]
+........................................................................ [ 10%]
+.................................................FF..................... [ 11%]
+........................................................................ [ 12%]
+...................................s.................................... [ 14%]
+........................................................................ [ 15%]
+........................................................................ [ 16%]
+........................................................................ [ 17%]
+........................................................................ [ 19%]
+........................................................................ [ 20%]
+........................................................................ [ 21%]
+........................................................................ [ 22%]
+........................................................................ [ 24%]
+........................................................................ [ 25%]
+........................................................................ [ 26%]
+........................................................................ [ 28%]
+........................................................................ [ 29%]
+........................................................................ [ 30%]
+........................................................................ [ 31%]
+........................................................................ [ 33%]
+........................................................................ [ 34%]
+........................................................................ [ 35%]
+........................................................................ [ 36%]
+........................................................................ [ 38%]
+........................................................................ [ 39%]
+........................................................................ [ 40%]
+........................................................................ [ 42%]
+........................................................................ [ 43%]
+.........................................F.............................. [ 44%]
+.............................................................F..F.F..... [ 45%]
+........................................................................ [ 47%]
+.........................ssss.sss....................................... [ 48%]
+........................................................................ [ 49%]
+....................................F................................... [ 50%]
+........................................................................ [ 52%]
+........................................................................ [ 53%]
+........................................................................ [ 54%]
+..........................................................s............. [ 56%]
+........................................................................ [ 57%]
+........................................................................ [ 58%]
+........................................................................ [ 59%]
+........................................................................ [ 61%]
+........................................................................ [ 62%]
+........................................................................ [ 63%]
+..FF.................................................................... [ 65%]
+........................................................................ [ 66%]
+................................................................s....... [ 67%]
+..................................................F..................... [ 68%]
+....................................F.F.F.FFF........................... [ 70%]
+........................................................................ [ 71%]
+........................................................................ [ 72%]
+........................................................................ [ 73%]
+........................................................................ [ 75%]
+........................................................................ [ 76%]
+......................F................................................. [ 77%]
+........................................................................ [ 79%]
+........F................................F.FF........................... [ 80%]
+........................................................................ [ 81%]
+..............F......................................................... [ 82%]
+........................................................................ [ 84%]
+........................................................................ [ 85%]
+........................................................................ [ 86%]
+.....................F..F............................................... [ 87%]
+.................................FFFF....F.sF..FFFFF.................... [ 89%]
+........................................................s............... [ 90%]
+......F.....
+================================== FAILURES ===================================
+_______________________ test_d272_borc_defteri_eksiksiz _______________________
+
+    def test_d272_borc_defteri_eksiksiz() -> None:
+        """D-272: AGENTS.md'de adı geçen her borç kimliği defterde yazılı olmalı.
+    
+        Mandalın yönü tek: AGENTS.md → defter. Tersi (defterde olup AGENTS.md'de
+        olmayan) kontrol edilmez, çünkü kapanan borcun D-kaydı silinmez; defter
+        AGENTS.md'nin üst kümesi olamaz ama alt kümesi de olmamalı.
+    
+        D-270 dersi uygulandı: kimlikler defterde **sabit dize** olarak durur,
+        parçadan kurulmaz; iki tarafta aynı BORC_KIMLIK regexi tarar.
+        """
+        defter = KOK / "docs" / "BORC_DEFTERI.md"
+        assert defter.exists(), f"borç defteri yok: {defter}"
+        yazili = set(BORC_KIMLIK.findall(defter.read_text(encoding="utf-8")))
+        eksik = sorted(_borc_kimlikleri() - yazili)
+>       assert not eksik, (
+            f"AGENTS.md'de adı geçip docs/BORC_DEFTERI.md'de olmayan {len(eksik)} kimlik: "
+            f"{eksik}. Borç kapatan/açan D-kaydı aynı turda defteri de güncellemeli."
+        )
+E       AssertionError: AGENTS.md'de adı geçip docs/BORC_DEFTERI.md'de olmayan 2 kimlik: ['BORC-CHAT-TEK-KANAL-01', 'VERI-RAG-KORPUS-01']. Borç kapatan/açan D-kaydı aynı turda defteri de güncellemeli.
+E       assert not ['BORC-CHAT-TEK-KANAL-01', 'VERI-RAG-KORPUS-01']
+
+tests\test_dokuman_politikasi.py:147: AssertionError
+____________________ test_kural4_yasak_ad_kalibi_artmiyor _____________________
+
+    def test_kural4_yasak_ad_kalibi_artmiyor() -> None:
+        ihlal = sorted(_bagil(p) for p in _kanonik_md() if YASAK_AD.search(p.stem))
+        # Mandal: D-220 anında 15 ihlal vardı. Geriye dönük düzeltmek değer üretmez;
+        # yeni ihlal girişi kapıda durur. Sayı yalnız küçülür.
+>       assert len(ihlal) <= 15, (
+            f"D-220 Kural 4: yasak ad kalıbı {len(ihlal)} dosyada, üst sınır 15.\n"
+            f"Yeni ihlal: _eski/_yeni/_kopya/_final/_v2 yasak — git geçmişi bu işi yapar.\n"
+            + "\n".join(ihlal)
+        )
+E       AssertionError: D-220 Kural 4: yasak ad kalıbı 19 dosyada, üst sınır 15.
+E         Yeni ihlal: _eski/_yeni/_kopya/_final/_v2 yasak — git geçmişi bu işi yapar.
+E         ADIM8_FINAL_RAPOR.md
+E         AI proje v1/V10/03_mimari/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md
+E         AI proje v1/V10/04_karşılaştırmalar/01_v9_ile_karsilastirma.md
+E         data/orchestrator/ADIM_7_8_9_FINAL_OZET.md
+E         data/orchestrator/ALTYAPI-ODIN-MASKE-V3-01_rapor_2026-10-04_uretim.md
+E         data/orchestrator/ALTYAPI-VERI-GORUNURLUK-01_TAMAMLANDI_2026-09-24_FINAL.md
+E         data/orchestrator/GRAPH-FINAL-DOGRULA_rapor_2026-09-21.md
+E         data/orchestrator/PLAN_YENİ_AŞAMA_2026-09-23.md
+E         data/orchestrator/SPRINT-FINAL-METRIK-2026-09-21.md
+E         data/orchestrator/SPRINT-FINAL-OZET-2026-09-21.md
+E         data/orchestrator/VAULT-XREF-DUBLO-RAPOR-FINAL_2026-09-21_orkestrator.md
+E         docs/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md
+E         docs/plans/NAV-PLAN-01_v4.md
+E         plans/_arsiv_brief/brief_utku_DASH-UX-02a-v1.md
+E         plans/_arsiv_brief/brief_utku_DASH-UX-02a-v2.md
+E         plans/_arsiv_brief/brief_utku_DOC-ADMIN-V9-KUTUCUK-24.md
+E         plans/brief_utku_ALTYAPI-ODIN-MASKE-V3-01.md
+E         plans/brief_utku_ALTYAPI-ODIN-MASKE-V3-02.md
+E         salih_v4_arsiv.md
+E       assert 19 <= 15
+E        +  where 19 = len(['ADIM8_FINAL_RAPOR.md', 'AI proje v1/V10/03_mimari/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md', 'AI proje v1/V10/04_ka...-V3-01_rapor_2026-10-04_uretim.md', 'data/orchestrator/ALTYAPI-VERI-GORUNURLUK-01_TAMAMLANDI_2026-09-24_FINAL.md', ...])
+
+tests\test_dokuman_politikasi.py:100: AssertionError
+______________________ test_d320_ajan_context_dosyalari _______________________
+
+    def test_d320_ajan_context_dosyalari() -> None:
+        """Her ajanin hafiza dosyasi: KALDIĞIM YER + wikilink + 400 satir tavani.
+    
+        D-320 DUZELTMESI: onceki test 200 satir ve Oz-eleştiri'yi tavana sayiyordu.
+        Iki yanlis vardi:
+          1) Tavan 2026-10-02'de Uretim Sahibi karariyla 400'e cikarildi (D-219 Ek).
+          2) §Öz-eleştiri KALICI ve tavana DAHIL DEGIL; ajanin ogrendigi ders
+             arsiv rotasyonuyla silinmez. Yanlis olcum, ajani dogru davranisindan
+             dolayi cezalandirir (ölçüm yaniltmaz, D-260).
+        """
+        ajanlar = ("ihsan", "utku", "yasu", "salih")
+        for a in ajanlar:
+            p = KOK / f"{a}_project_context.md"
+            assert p.is_file(), f"D-219: {p.name} yok — her ajanin hafiza dosyasi zorunlu"
+            t = p.read_text(encoding="utf-8")
+            assert "## KALDIĞIM YER" in t, f"D-219: {p.name} §KALDIĞIM YER blogu yok"
+>           assert "## Ilgili Nodlar" in t, f"D-218: {p.name} §Ilgili Nodlar yok"
+E           AssertionError: D-218: salih_project_context.md §Ilgili Nodlar yok
+E           assert '## Ilgili Nodlar' in "# salih_project_context.md — Oturum Hafızası (D-219)\n\nŞablon: [[Huginn Data Insights/_ajan_context_sablon]] · Tavan...inen Açıklar (kapsam dışı backlog)\n\n- Tam suite 20 failed — görev `TEST-BACKLOG-20` (utku'da)\n\n## Sık Komutlar\n\n"
+
+tests\test_dokuman_politikasi.py:199: AssertionError
+_________________________ test_kural3_sablon_tekligi __________________________
+
+    def test_kural3_sablon_tekligi() -> None:
+        bulunan = {
+            _bagil(p) for p in _kanonik_md() if re.search(r"(sablon|template)", p.stem, re.I)
+        }
+        yeni = bulunan - KANONIK_SABLONLAR
+>       assert not yeni, (
+            "D-220 Kural 3: kayıtsız şablon açılmış -> "
+            f"{sorted(yeni)}\nŞablon yetersizse mevcudu düzelt; yenisi KAHİN kararı ister (D-211)."
+        )
+E       AssertionError: D-220 Kural 3: kayıtsız şablon açılmış -> ['_tmp/ajan_nobet_sablon.md']
+E         Şablon yetersizse mevcudu düzelt; yenisi KAHİN kararı ister (D-211).
+E       assert not {'_tmp/ajan_nobet_sablon.md'}
+
+tests\test_dokuman_politikasi.py:90: AssertionError
+____________________ test_sessiz_yutma_yok[admin_yonetim] _____________________
+
+modul = 'admin_yonetim'
+
+    @pytest.mark.parametrize("modul", KAPSAM)
+    def test_sessiz_yutma_yok(modul: str) -> None:
+        """``except ...: pass`` kalıbı kapsam sekmelerinde bulunmamalı."""
+>       eslesmeler = _SESSIZ_YUTMA.findall(_yorumsuz(_kaynak(modul)))
+                                                     ^^^^^^^^^^^^^^
+
+tests\test_admin_sekme_durum.py:82: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_admin_sekme_durum.py:58: in _kaynak
+    return (TABS / f"{modul}.py").read_text(encoding="utf-8")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/web_dashboard/tabs/admin_yonetim.py')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Huginn Data Projesi\\Huginn Data Insights\\web_dashboard\\tabs\\admin_yonetim.py'
+
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\pathlib.py:1013: FileNotFoundError
+______________________ test_st_metric_yok[admin_yonetim] ______________________
+
+modul = 'admin_yonetim'
+
+    @pytest.mark.parametrize("modul", KAPSAM)
+    def test_st_metric_yok(modul: str) -> None:
+        """KPI tek dil: ``st.metric`` yerine ``kpi_karti``."""
+>       assert not _ST_METRIC.search(_yorumsuz(_kaynak(modul))), f"{modul}.py hâlâ st.metric kullanıyor"
+                                               ^^^^^^^^^^^^^^
+
+tests\test_admin_sekme_durum.py:89: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_admin_sekme_durum.py:58: in _kaynak
+    return (TABS / f"{modul}.py").read_text(encoding="utf-8")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/web_dashboard/tabs/admin_yonetim.py')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Huginn Data Projesi\\Huginn Data Insights\\web_dashboard\\tabs\\admin_yonetim.py'
+
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\pathlib.py:1013: FileNotFoundError
+___________________ test_ciplak_requests_yok[admin_yonetim] ___________________
+
+modul = 'admin_yonetim'
+
+    @pytest.mark.parametrize("modul", KAPSAM)
+    def test_ciplak_requests_yok(modul: str) -> None:
+        """Sekmeler HTTP'yi ``get_api``/``post_api`` + ``api_cagir`` üzerinden yapar."""
+>       assert not _CIPLAK_REQUESTS.search(_yorumsuz(_kaynak(modul))), (
+                                                     ^^^^^^^^^^^^^^
+            f"{modul}.py çıplak requests.* çağrısı içeriyor"
+        )
+
+tests\test_admin_sekme_durum.py:104: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+tests\test_admin_sekme_durum.py:58: in _kaynak
+    return (TABS / f"{modul}.py").read_text(encoding="utf-8")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\pathlib.py:1027: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/web_dashboard/tabs/admin_yonetim.py')
+mode = 'r', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: 'C:\\Huginn Data Projesi\\Huginn Data Insights\\web_dashboard\\tabs\\admin_yonetim.py'
+
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\pathlib.py:1013: FileNotFoundError
+_________________ test_modul_import_edilebilir[admin_yonetim] _________________
+
+modul = 'admin_yonetim'
+
+    @pytest.mark.parametrize("modul", KAPSAM)
+    def test_modul_import_edilebilir(modul: str) -> None:
+>       mod = importlib.import_module(f"web_dashboard.tabs.{modul}")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_sekme_durum.py:123: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+name = 'web_dashboard.tabs.admin_yonetim'
+import_ = <function _gcd_import at 0x000001F93C24C0E0>
+
+>   ???
+E   ModuleNotFoundError: No module named 'web_dashboard.tabs.admin_yonetim'
+
+<frozen importlib._bootstrap>:1324: ModuleNotFoundError
+____________________ test_dosya_var_ve_utf8[admin_yonetim] ____________________
+
+modul = 'admin_yonetim'
+
+    @pytest.mark.parametrize("modul", KAPSAM)
+    def test_dosya_var_ve_utf8(modul: str) -> None:
+        yol = TABS / f"{modul}.py"
+>       assert yol.exists(), f"{yol} bulunamadı"
+E       AssertionError: C:\Huginn Data Projesi\Huginn Data Insights\web_dashboard\tabs\admin_yonetim.py bulunamadı
+E       assert False
+E        +  where False = exists()
+E        +    where exists = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/web_dashboard/tabs/admin_yonetim.py').exists
+
+tests\test_admin_sekme_durum.py:73: AssertionError
+_________________ TestIskeletTokenRengi.test_iki_ton_korundu __________________
+
+self = <tests.test_ui_renk_token_mandali.TestIskeletTokenRengi object at 0x000001F9B3187F50>
+
+    def test_iki_ton_korundu(self) -> None:
+        """Tek tona dusurmek derinligi kaybettirir (brif adim 1)."""
+        kaynak = ADMIN_LOADING.read_text(encoding="utf-8")
+>       assert 'RENKLER["surface-2"]' in kaynak
+E       assert 'RENKLER["surface-2"]' in '# -*- coding: utf-8 -*-\n"""P7-42: Loading states — Skeleton screens, progress indicators.\n\nStreamlit loading UX iy...n\n    st.caption(f"Timeout: {timeout}s | Retry: {retry} | Current: {st.session_state.get(\'query_timeout\', 10)}s")\n'
+
+tests\test_ui_renk_token_mandali.py:169: AssertionError
+________________ TestIskeletTokenRengi.test_inline_hex_kalmadi ________________
+
+self = <tests.test_ui_renk_token_mandali.TestIskeletTokenRengi object at 0x000001F9B31D0650>
+
+    def test_inline_hex_kalmadi(self) -> None:
+        kalan = _inline_hex(ADMIN_LOADING)
+>       assert not kalan, f"admin_loading.py icinde inline hex kaldi: {kalan}"
+E       AssertionError: admin_loading.py icinde inline hex kaldi: [(77, 'f\'<div style="background:#e0e0e0;height:20px;border-radius:4px;margin:4px 0"></div>\','), (81, 'f\'<div style="background:#f0f0f0;height:60px;border-radius:4px;margin:4px 0"></div>\','), (85, 'f\'<div style="background:#e0e0e0;height:15px;border-radius:4px;margin:4px 0;width:{60 + i * 20}%"></div>\',')]
+E       assert not [(77, 'f\'<div style="background:#e0e0e0;height:20px;border-radius:4px;margin:4px 0"></div>\','), (81, 'f\'<div style=..., (85, 'f\'<div style="background:#e0e0e0;height:15px;border-radius:4px;margin:4px 0;width:{60 + i * 20}%"></div>\',')]
+
+tests\test_ui_renk_token_mandali.py:164: AssertionError
+____ TestIskeletTokenRengi.test_iskelet_her_iki_temada_zeminden_ayrisiyor _____
+
+self = <tests.test_ui_renk_token_mandali.TestIskeletTokenRengi object at 0x000001F9B31879E0>
+
+    def test_iskelet_her_iki_temada_zeminden_ayrisiyor(self) -> None:
+        """Aydinlık temada `surface-2` zemine cok yakin (1.04) -> bu yuzden
+        ayrim `border-strong` seridi ile korunur; serit de dogrulanir."""
+        kaynak = ADMIN_LOADING.read_text(encoding="utf-8")
+>       assert 'RENKLER["border-strong"]' in kaynak, "aydinlık temada iskelet zemine kacar"
+E       AssertionError: aydinlık temada iskelet zemine kacar
+E       assert 'RENKLER["border-strong"]' in '# -*- coding: utf-8 -*-\n"""P7-42: Loading states — Skeleton screens, progress indicators.\n\nStreamlit loading UX iy...n\n    st.caption(f"Timeout: {timeout}s | Retry: {retry} | Current: {st.session_state.get(\'query_timeout\', 10)}s")\n'
+
+tests\test_ui_renk_token_mandali.py:176: AssertionError
+________ TestAnaKontrolTokenRengi.test_trafik_isigi_uc_durumda_gecerli ________
+
+self = <tests.test_ui_renk_token_mandali.TestAnaKontrolTokenRengi object at 0x000001F9B31D0200>
+
+    def test_trafik_isigi_uc_durumda_gecerli(self) -> None:
+        """Uc renk degerli dongu gercekten donuyor (AST denetimi)."""
+        agac = ast.parse(ANA_KONTROL.read_text(encoding="utf-8"))
+        for dugum in agac.body:
+            if isinstance(dugum, ast.FunctionDef) and dugum.name == "_durum_ozeti":
+                govde = ast.unparse(dugum)
+                # Dort cikis, dort `RENKLER[...]` referansi (warning iki dalda).
+>               assert govde.count("RENKLER[") == 4, govde
+E               AssertionError: def _durum_ozeti(kpi: dict[str, Any], webhook: dict[str, Any], bekleyen: int) -> tuple[str, str, str]:
+E                     """(ışık, metin, renk) — trafik ışığı kararı tek yerde verilir."""
+E                     dlq = webhook.get('dlq_toplam', 0)
+E                     cache = kpi.get('cache_hit_rate', 0)
+E                     if dlq:
+E                         return ('🔴', f'{dlq} DLQ kaydı işlenmedi — Olaylar & Hatalar sekmesine bakın.', '#ef4444')
+E                     if cache and cache < 0.3:
+E                         return ('🟡', f'Cache hit %{cache * 100:.0f} — veritabanı yükü yüksek olabilir.', '#f59e0b')
+E                     if bekleyen > 0:
+E                         return ('🟡', f'{bekleyen} kullanıcı onay bekliyor.', '#f59e0b')
+E                     return ('🟢', 'Kritik uyarı yok — sistem normal çalışıyor.', '#22c55e')
+E               assert 0 == 4
+E                +  where 0 = <built-in method count of str object at 0x000001F93F7C9C80>('RENKLER[')
+E                +    where <built-in method count of str object at 0x000001F93F7C9C80> = 'def _durum_ozeti(kpi: dict[str, Any], webhook: dict[str, Any], bekleyen: int) -> tuple[str, str, str]:\n    """(ışık,...anıcı onay bekliyor.\', \'#f59e0b\')\n    return (\'🟢\', \'Kritik uyarı yok — sistem normal çalışıyor.\', \'#22c55e\')'.count
+
+tests\test_ui_renk_token_mandali.py:152: AssertionError
+______________ TestAnaKontrolTokenRengi.test_inline_hex_kalmadi _______________
+
+self = <tests.test_ui_renk_token_mandali.TestAnaKontrolTokenRengi object at 0x000001F9B31874A0>
+
+    def test_inline_hex_kalmadi(self) -> None:
+        kalan = _inline_hex(ANA_KONTROL)
+>       assert not kalan, f"ana_kontrol.py icinde inline hex kaldi: {kalan}"
+E       AssertionError: ana_kontrol.py icinde inline hex kaldi: [(334, 'return "🔴", f"{dlq} DLQ kaydı işlenmedi — Olaylar & Hatalar sekmesine bakın.", "#ef4444"'), (336, 'return "🟡", f"Cache hit %{cache * 100:.0f} — veritabanı yükü yüksek olabilir.", "#f59e0b"'), (338, 'return "🟡", f"{bekleyen} kullanıcı onay bekliyor.", "#f59e0b"'), (339, 'return "🟢", "Kritik uyarı yok — sistem normal çalışıyor.", "#22c55e"')]
+E       assert not [(334, 'return "🔴", f"{dlq} DLQ kaydı işlenmedi — Olaylar & Hatalar sekmesine bakın.", "#ef4444"'), (336, 'return "🟡",... kullanıcı onay bekliyor.", "#f59e0b"'), (339, 'return "🟢", "Kritik uyarı yok — sistem normal çalışıyor.", "#22c55e"')]
+
+tests\test_ui_renk_token_mandali.py:132: AssertionError
+________________________ test_kokte_izinsiz_dizin_yok _________________________
+
+    def test_kokte_izinsiz_dizin_yok() -> None:
+        """Kural 2: listede olmayan dizin koke ait degil.
+    
+        Arsiv/gecici klasorler (_ARSIV_*, _trash) bilinmeyen degil, bilinen
+        gecici alandir: sayilir ama ihlal saymaz.
+        """
+        izinsiz = {
+            ad
+            for ad in _kok_dizinleri()
+            if ad not in IZINLI_DIZINLER and not ad.startswith(("_", "."))
+        }
+>       assert not izinsiz, (
+            f"D-221 Kural 2 ihlali: kokte izinsiz dizin -> {sorted(izinsiz)}. "
+            "Yeni kok girdisi KAHIN karari ister."
+        )
+E       AssertionError: D-221 Kural 2 ihlali: kokte izinsiz dizin -> ['-p', 'data', 'docs', 'skills']. Yeni kok girdisi KAHIN karari ister.
+E       assert not {'-p', 'data', 'docs', 'skills'}
+
+tests\test_kok_izin_listesi.py:76: AssertionError
+_________________________ test_hafiza_tavani_asmiyor __________________________
+
+    def test_hafiza_tavani_asmiyor() -> None:
+        """Ajan hafizasi 200 satiri gecmemeli (tavan karari AGENTS.md'de)."""
+        n = len(_oku(HAFIZA).splitlines())
+>       assert n <= 200, "hafiza %d satir, tavan 200" % n
+E       AssertionError: hafiza 213 satir, tavan 200
+E       assert 213 <= 200
+
+tests\test_d309_ders_kapisi.py:139: AssertionError
+________________________ test_embedder_client_uyuzsuz _________________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F9B5653E60>
+
+    def test_embedder_client_uyuzsuz(monkeypatch):
+        monkeypatch.setattr("src.company_master.vector.embedder.get_client", None, raising=False)
+        embedder = Embedder(client=None, batch_size=2, max_retries=1, retry_delay_s=0)
+>       with pytest.raises(RuntimeError, match="kurulu degil"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE RuntimeError
+
+tests\vector\test_embedder.py:109: Failed
+___________________ test_muaf_kayitlari_gercek_ve_gerekceli ___________________
+
+    def test_muaf_kayitlari_gercek_ve_gerekceli() -> None:
+        for anahtar, gerekce in MUAF.items():
+            modul, ad = anahtar.split(".")
+>           assert ad in _FONKSIYONLAR.get(modul, {}), f"MUAF hayalet: {anahtar}"
+E           AssertionError: MUAF hayalet: admin_yonetim.render_yonetim_tab
+E           assert 'render_yonetim_tab' in {}
+E            +  where {} = <built-in method get of dict object at 0x000001F9B0DE5940>('admin_yonetim', {})
+E            +    where <built-in method get of dict object at 0x000001F9B0DE5940> = {'_db_yardim': {'tablo_var_mi': <ast.FunctionDef object at 0x000001F9B0DF5D90>}, 'abrakadabra': {'_mimir_seviyesi': <a...ctionDef object at 0x000001F9B0E8BBD0>, 'render_api_katalog_tab': <ast.FunctionDef object at 0x000001F9B0E89210>}, ...}.get
+
+tests\test_cift_baslik.py:208: AssertionError
+________________________ test_muaf_kaydi_hala_gerekli _________________________
+
+    def test_muaf_kaydi_hala_gerekli() -> None:
+        """İhlal kalkınca MUAF kaydı da kalkmalı (kilit paslanmasın)."""
+        for anahtar in MUAF:
+            modul, ad = anahtar.split(".")
+            MUAF_YEDEK = dict(MUAF)
+            try:
+                MUAF.clear()
+                hala = [b for b in _ihlaller() if b.startswith(f"{modul}.{ad}:")]
+            finally:
+                MUAF.update(MUAF_YEDEK)
+>           assert hala, f"MUAF kaydı artık gereksiz, silin: {anahtar}"
+E           AssertionError: MUAF kaydı artık gereksiz, silin: admin_yonetim.render_yonetim_tab
+E           assert []
+
+tests\test_cift_baslik.py:222: AssertionError
+___________________________ test_kok_denetimi_temiz ___________________________
+
+    def test_kok_denetimi_temiz() -> None:
+        """Regresyon kalkani: repo genelinde 0 ihlal (140 -> 0)."""
+        sonuc = md.tarama()
+>       assert sonuc["yasal_yazim"] == [], sonuc["yasal_yazim"][:5]
+E       AssertionError: ["C:\\Huginn Data Projesi\\Huginn Data Insights\\docs\\SAGLAYICI_OLCUMU_2026-10-03.md:64: 'Munin' -> Hesap: `yasua_Hugin_Munin`, plan **FREE**, aylık tavan 10 $, kullanılmış ≈ 0 $. Bu ay 2026-10-09'da sıfırlanır. Şimdilik"]
+E       assert ['C:\\Huginn ...ır. Şimdilik'] == []
+E         
+E         Left contains one more item: "C:\\Huginn Data Projesi\\Huginn Data Insights\\docs\\SAGLAYICI_OLCUMU_2026-10-03.md:64: 'Munin' -> Hesap: `yasua_Hugin_Munin`, plan **FREE**, aylık tavan 10 $, kullanılmış ≈ 0 $. Bu ay 2026-10-09'da sıfırlanır. Şimdilik"
+E         Use -v to get more diff
+
+tests\test_marka_denetim_muafiyet.py:68: AssertionError
+________________________ test_kokte_izinsiz_dosya_yok _________________________
+
+    @pytest.mark.skipif(
+        not (DIS_KOK / ".gitignore").exists(),
+        reason="dis kok bulunamadi (farkli klasor yapisi)",
+    )
+    def test_kokte_izinsiz_dosya_yok() -> None:
+        """Kokte izin listesi disinda dosya birikmez (D-241)."""
+        fazla = sorted(set(_kok_dosyalari()) - IZINLI_DOSYA)
+>       assert not fazla, (
+            f"Dis kokte {len(fazla)} izinsiz dosya: {fazla[:10]}\n"
+            "Cozum: tek kullanimlik betik/cikti alt klasore tasinir "
+            "(_ARSIV_* veya ilgili repo). Izin listesi buyutulmez (D-241)."
+        )
+E       AssertionError: Dis kokte 47 izinsiz dosya: ['_tmp_cf_keys.py', '_tmp_check_apikeys.py', '_tmp_check_cf_conn.py', '_tmp_check_combo_full.py', '_tmp_check_global.py', '_tmp_check_nodes.py', '_tmp_check_providers.py', '_tmp_combo_schema.py', '_tmp_ctx.txt', '_tmp_direct_cf_test.py']
+E         Cozum: tek kullanimlik betik/cikti alt klasore tasinir (_ARSIV_* veya ilgili repo). Izin listesi buyutulmez (D-241).
+E       assert not ['_tmp_cf_keys.py', '_tmp_check_apikeys.py', '_tmp_check_cf_conn.py', '_tmp_check_combo_full.py', '_tmp_check_global.py', '_tmp_check_nodes.py', ...]
+
+tests\test_kok_politikasi.py:47: AssertionError
+____________________ test_vault_kokte_tek_kullanimlik_yok _____________________
+
+    def test_vault_kokte_tek_kullanimlik_yok() -> None:
+        """Vault kokunde tek kullanimlik betik/cikti birikmez (D-221).
+    
+        Ajanlar `check_*.py` / `run_*.py` gorup YANLIS betigi calistirir:
+        ayni isin 5-7 kopyasi koke birikmisti. Cozum: `_ARSIV_tek_kullanimlik/`
+        altina tasinir; izin listesi BUYUTULMEZ.
+        """
+        fazla = _vault_kok_tek_kullanimlik()
+>       assert not fazla, (
+            f"Vault kokte {len(fazla)} tek kullanimlik dosya: {fazla[:10]}\n"
+            "Cozum: `_ARSIV_tek_kullanimlik/` altina tasinir. D-221 bu olcumun "
+            "gereklidir: kokte biriken betik ajanin yanlis calistirmasina yol acar."
+        )
+E       AssertionError: Vault kokte 42 tek kullanimlik dosya: ['_goc_defteri_rapor.txt', '_tmp_api.log', '_tmp_bd_head.md', '_tmp_check1.py', '_tmp_kvkk_debug.py', '_tmp_pytest.txt', '_tmp_streamlit.log', '_tmp_streamlit2.log', '_tmp_verify_out.txt', '_tmpihsan_nobet_20261008_093520.txt']
+E         Cozum: `_ARSIV_tek_kullanimlik/` altina tasinir. D-221 bu olcumun gereklidir: kokte biriken betik ajanin yanlis calistirmasina yol acar.
+E       assert not ['_goc_defteri_rapor.txt', '_tmp_api.log', '_tmp_bd_head.md', '_tmp_check1.py', '_tmp_kvkk_debug.py', '_tmp_pytest.txt', ...]
+
+tests\test_kok_politikasi.py:129: AssertionError
+________________________ test_kokte_izinsiz_klasor_yok ________________________
+
+    @pytest.mark.skipif(
+        not (DIS_KOK / ".gitignore").exists(),
+        reason="dis kok bulunamadi (farkli klasor yapisi)",
+    )
+    def test_kokte_izinsiz_klasor_yok() -> None:
+        """Kokte tanimsiz ust klasor olusmaz (D-241)."""
+        fazla = sorted(
+            p.name
+            for p in DIS_KOK.iterdir()
+            if p.is_dir()
+            and p.name not in IZINLI_KLASOR
+            and not p.name.startswith(IZINLI_KLASOR_ONEK)
+        )
+>       assert not fazla, f"Dis kokte tanimsiz klasor: {fazla}"
+E       AssertionError: Dis kokte tanimsiz klasor: ['-p', '_tmp', 'data', 'docs', 'skills']
+E       assert not ['-p', '_tmp', 'data', 'docs', 'skills']
+
+tests\test_kok_politikasi.py:67: AssertionError
+__________________ test_acik_gorevlerde_yeni_d57_ihlali_yok ___________________
+
+    def test_acik_gorevlerde_yeni_d57_ihlali_yok() -> None:
+        ihlal = {}
+        for g in _acik_gorevler():
+            tid = g.get("task_id", "")
+            sebep = gorev_at._d57_dogrula(tid, g.get("baslik", ""), g.get("sahip", ""))
+            if sebep and tid not in MUAF:
+                ihlal[tid] = sebep
+>       assert not ihlal, f"acik gorevlerde D-57 ihlali: {ihlal}"
+E       AssertionError: acik gorevlerde D-57 ihlali: {'SCRAPE-006-QUALITY-AUDIT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'SCRAPE-007-FINAL-REPORT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'DOC-BRIEF-SABLON-KIRMIZI-01': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'VERI-RAPIDAPI-OSINT-ISTEMCI-01': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'UI-ADMIN-PANEL-DENETIM-ALTYAPI': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'UI-ADMIN-PANEL-DASHBOARD-YAYILIM': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)'}
+E       assert not {'SCRAPE-006-QUALITY-AUDIT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar...or: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', ...}
+
+tests\test_naming_audit.py:63: AssertionError
+______________ test_signal_analyzer_analyze_with_mocked_postings ______________
+
+    def test_signal_analyzer_analyze_with_mocked_postings():
+        analyzer = _make_analyzer()
+        postings = [
+            _make_posting(
+                posted_at=NOW - timedelta(days=2),
+                title="CTO",
+                department="executive",
+                seniority_level="c-level",
+                description="Kubernetes and AWS",
+                technologies=["kubernetes", "aws"],
+                location_city="Istanbul",
+            ),
+            _make_posting(
+                posted_at=NOW - timedelta(days=1),
+                title="VP Engineering",
+                department="engineering",
+                seniority_level="vp",
+                location_city="Ankara",
+            ),
+            _make_posting(
+                posted_at=NOW - timedelta(days=3),
+                title="Data Scientist",
+                department="data",
+                seniority_level="senior",
+                location_city="Istanbul",
+            ),
+        ]
+    
+        with patch.object(analyzer, "_load_job_postings", return_value=postings):
+            with patch.object(analyzer, "_load_company_tech_profile", return_value={}):
+                with patch.object(analyzer, "_load_existing_locations", return_value=set()):
+                    with patch.object(
+                        analyzer, "_load_existing_departments", return_value=set()
+                    ):
+                        with patch.object(analyzer, "_save_signals") as mock_save:
+                            mock_save.return_value = 0
+                            result = analyzer.analyze()
+    
+        assert result["companies_processed"] == 1
+        assert result["signals_generated"] == 0
+        assert mock_save.call_count == 1
+        saved_signals = mock_save.call_args[0][0]
+        sig_types = {s["signal_type"] for s in saved_signals}
+>       assert "growth" in sig_types
+E       AssertionError: assert 'growth' in {'geo_expansion', 'investment', 'org_change', 'tech_transformation'}
+
+tests\test_job_intelligence_analyzer.py:408: AssertionError
+---------------------------- Captured stdout call -----------------------------
+{"timestamp":"2026-10-08T20:21:37.710361+00:00","level":"INFO","logger":"company_master.intelligence.job_intelligence.pipeline.analyzer","message":"Signal analyzer başlatılıyor (window=90 gün)","module":"analyzer","function":"analyze","line":699}
+{"timestamp":"2026-10-08T20:21:37.710361+00:00","level":"INFO","logger":"company_master.intelligence.job_intelligence.pipeline.analyzer","message":"job_postings yüklendi: 3 kayıt","module":"analyzer","function":"analyze","line":702}
+{"timestamp":"2026-10-08T20:21:37.710361+00:00","level":"INFO","logger":"company_master.intelligence.job_intelligence.pipeline.analyzer","message":"Şirket bazında gruplandırıldı: 1 şirket","module":"analyzer","function":"analyze","line":705}
+{"timestamp":"2026-10-08T20:21:37.710361+00:00","level":"INFO","logger":"company_master.intelligence.job_intelligence.pipeline.analyzer","message":"Sinyal analizi tamamlandı: 1 şirket, 0 sinyal kaydedildi","module":"analyzer","function":"analyze","line":740}
+------------------------------ Captured log call ------------------------------
+INFO     company_master.intelligence.job_intelligence.pipeline.analyzer:analyzer.py:699 Signal analyzer başlatılıyor (window=90 gün)
+INFO     company_master.intelligence.job_intelligence.pipeline.analyzer:analyzer.py:702 job_postings yüklendi: 3 kayıt
+INFO     company_master.intelligence.job_intelligence.pipeline.analyzer:analyzer.py:705 Şirket bazında gruplandırıldı: 1 şirket
+INFO     company_master.intelligence.job_intelligence.pipeline.analyzer:analyzer.py:740 Sinyal analizi tamamlandı: 1 şirket, 0 sinyal kaydedildi
+___________________ test_growth_hiring_surge_3_posting_30d ____________________
+
+    def test_growth_hiring_surge_3_posting_30d():
+        analyzer = _make_analyzer()
+        postings = [
+            _make_posting(posted_at=NOW - timedelta(days=5), title="Engineer 1"),
+            _make_posting(posted_at=NOW - timedelta(days=3), title="Engineer 2"),
+            _make_posting(posted_at=NOW - timedelta(days=1), title="Engineer 3"),
+        ]
+        sig = analyzer._detect_growth(postings, CID)
+>       assert sig is not None
+E       assert None is not None
+
+tests\test_job_intelligence_analyzer.py:97: AssertionError
+_________________ test_muaf_listesi_gerekcesiz_kayit_icermez __________________
+
+    def test_muaf_listesi_gerekcesiz_kayit_icermez() -> None:
+        """Muafiyet sessizce buyumesin: her kaydin gerekcesi olmali."""
+        for ad, gerekce in MUAF.items():
+            assert gerekce.strip(), f"{ad}: muafiyet gerekcesi bos"
+>           assert ad in _TANIMLAR, (
+                f"{ad}: MUAF listesinde ama artik boyle bir fonksiyon yok -- "
+                f"olu muafiyet kaydini sil."
+            )
+E           AssertionError: render_yonetim_tab: MUAF listesinde ama artik boyle bir fonksiyon yok -- olu muafiyet kaydini sil.
+E           assert 'render_yonetim_tab' in {'render_abrakadabra_tab': 'abrakadabra.py', 'render_api_analytics_tab': 'admin_api_analytics.py', 'render_api_katalog_tab': 'admin_api_katalog.py', 'render_audit_tab': 'admin_audit.py', ...}
+
+tests\test_sekme_kapsama.py:274: AssertionError
+______________________ test_null_satir_grafikten_dusuyor ______________________
+
+cizim = ([{'df':        tarih  ort_skor  firma_sayisi
+0 2026-09-06      4.41           712
+1 2026-09-08      1.47           49...0-03       NaN           711, 'x': 'tarih', 'y': 'ort_skor', 'baslik': 'Son 30 Gün — Ortalama Kalite Skoru', ...}], [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F9B82AC920>
+
+    def test_null_satir_grafikten_dusuyor(cizim, monkeypatch):
+        cagrilar, _ = cizim
+        monkeypatch.setattr(admin_kpi, "load_quality_trend", lambda g: CANLI_SEKIL.copy())
+        admin_kpi._render_quality_trend(30)
+        assert len(cagrilar) == 1, "grafik bir kez cizilmeli"
+        cizilen = cagrilar[0]["df"]
+>       assert len(cizilen) == 2, "3 satirdan 1 NULL satiri dusmeli"
+E       AssertionError: 3 satirdan 1 NULL satiri dusmeli
+E       assert 3 == 2
+E        +  where 3 = len(       tarih  ort_skor  firma_sayisi\n0 2026-09-06      4.41           712\n1 2026-09-08      1.47           491\n2 2026-10-03       NaN           711)
+
+tests\test_admin_kpi_gosterge_onarim.py:64: AssertionError
+______________ test_hepsi_null_ise_grafik_cizilmez_uyari_yazilir ______________
+
+cizim = ([{'df':        tarih ort_skor  firma_sayisi
+0 2026-10-03     None           711
+1 2026-10-04     None           700, 'x': 'tarih', 'y': 'ort_skor', 'baslik': 'Son 30 Gün — Ortalama Kalite Skoru', ...}], [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F9B72FCB00>
+
+    def test_hepsi_null_ise_grafik_cizilmez_uyari_yazilir(cizim, monkeypatch):
+        cagrilar, mesajlar = cizim
+        hep_null = _trend(
+            {"tarih": pd.Timestamp("2026-10-03"), "ort_skor": None, "firma_sayisi": 711},
+            {"tarih": pd.Timestamp("2026-10-04"), "ort_skor": None, "firma_sayisi": 700},
+        )
+        monkeypatch.setattr(admin_kpi, "load_quality_trend", lambda g: hep_null)
+        admin_kpi._render_quality_trend(30)
+>       assert cagrilar == [], "olcum yoksa grafik cizilmemeli"
+E       AssertionError: olcum yoksa grafik cizilmemeli
+E       assert [{'df':      ... Skoru', ...}] == []
+E         
+E         Left contains one more item: {'df':        tarih ort_skor  firma_sayisi\n0 2026-10-03     None           711\n1 2026-10-04     None           700, 'x': 'tarih', 'y': 'ort_skor', 'baslik': 'Son 30 Gün — Ortalama Kalite Skoru', ...}
+E         Use -v to get more diff
+
+tests\test_admin_kpi_gosterge_onarim.py:105: AssertionError
+______________________ test_bolme_dogru_sayi_donduruyor _______________________
+
+    def test_bolme_dogru_sayi_donduruyor():
+>       olculen, adet = admin_kpi._olculen_trende_bol(CANLI_SEKIL)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'web_dashboard.tabs.admin_kpi' has no attribute '_olculen_trende_bol'
+
+tests\test_admin_kpi_gosterge_onarim.py:123: AttributeError
+__________________ test_bolme_ort_skor_kolonu_yoksa_ayirmaz ___________________
+
+    def test_bolme_ort_skor_kolonu_yoksa_ayirmaz():
+        df = pd.DataFrame([{"tarih": 1}, {"tarih": 2}])
+>       olculen, adet = admin_kpi._olculen_trende_bol(df)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'web_dashboard.tabs.admin_kpi' has no attribute '_olculen_trende_bol'
+
+tests\test_admin_kpi_gosterge_onarim.py:130: AttributeError
+______________________________ test_bolme_bos_df ______________________________
+
+    def test_bolme_bos_df():
+>       olculen, adet = admin_kpi._olculen_trende_bol(pd.DataFrame())
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'web_dashboard.tabs.admin_kpi' has no attribute '_olculen_trende_bol'
+
+tests\test_admin_kpi_gosterge_onarim.py:136: AttributeError
+___________________ test_null_gun_sayisi_captionda_yaziyor ____________________
+
+cizim = ([{'df':        tarih  ort_skor  firma_sayisi
+0 2026-09-06      4.41           712
+1 2026-09-08      1.47           49...0-03       NaN           711, 'x': 'tarih', 'y': 'ort_skor', 'baslik': 'Son 30 Gün — Ortalama Kalite Skoru', ...}], [])
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F9B8365BB0>
+
+    def test_null_gun_sayisi_captionda_yaziyor(cizim, monkeypatch):
+        _, mesajlar = cizim
+        monkeypatch.setattr(admin_kpi, "load_quality_trend", lambda g: CANLI_SEKIL.copy())
+        admin_kpi._render_quality_trend(30)
+        captionlar = [m for k, m in mesajlar if k == "caption"]
+>       assert captionlar, "olculemeyen gun sayisi ekranda gorunmeli"
+E       AssertionError: olculemeyen gun sayisi ekranda gorunmeli
+E       assert []
+
+tests\test_admin_kpi_gosterge_onarim.py:73: AssertionError
+__________________ test_container_cerceve_kategori_rengi_yok __________________
+
+    def test_container_cerceve_kategori_rengi_yok() -> None:
+        """K3-10h madde 4: tüm bordered container'lar tek global kuralla kalınlaşır;
+        kategori rengi (KATEGORI_RENK) YOK, yalnız border-strong token'ı kullanılır."""
+        assert 'div[data-testid="stVerticalBlockBorderWrapper"]' in _CONTAINER_CSS
+>       assert "border:2px solid var(--hg-color-border-strong)" in _CONTAINER_CSS
+E       assert 'border:2px solid var(--hg-color-border-strong)' in '\ndiv[data-testid="stVerticalBlockBorderWrapper"]{\nborder:2px solid var(--hg-color-border-interactive)!important;\nbackground:var(--hg-color-surface-2)!important}\n'
+
+tests\test_ui_modal_stil.py:40: AssertionError
+_____________________ test_gercek_defter_kurallara_uyuyor _____________________
+
+bd = <module 'bulgu_defteri' from 'C:\\Huginn Data Projesi\\Huginn Data Insights\\scripts\\bulgu_defteri.py'>
+
+    def test_gercek_defter_kurallara_uyuyor(bd):
+        """Diskteki kanonik defterde bozuk satir olmamali."""
+        if not bd.DEFLER.exists():
+            pytest.skip("defter henuz yok")
+        veri = bd._veri_satirlari(bd.DEFLER)
+        assert veri, "defter bos"
+        for s in veri:
+            a = [x.strip() for x in s.split("|")]
+>           assert len(a) == 6, f"6 alan beklenir: {s[:70]}"
+E           AssertionError: 6 alan beklenir: 2026-10-03 | SCRAPE-005-KAZIMA-DOCKER-INTEGRATION | utku | COZULDU | D
+E           assert 7 == 6
+E            +  where 7 = len(['2026-10-03', 'SCRAPE-005-KAZIMA-DOCKER-INTEGRATION', 'utku', 'COZULDU', "DURUM GERCEGI - [3/4] COZULDU, TUM KALEMLER..._data.py ile tek yola alinacak - bunlar VERI-INGEST-ASO-GLOB-01'in devaminda, SCRAPE-005 teslimini blokelemiyor.", ...])
+
+tests\test_bulgu_defteri.py:269: AssertionError
+_____________________ test_kpi_css_onbellegi_tema_duyarli _____________________
+
+    def test_kpi_css_onbellegi_tema_duyarli() -> None:
+        """Onbellek anahtari temayi icermezse tema gecisinde eski CSS kalir."""
+        kaynak = CHARTS.read_text(encoding="utf-8")
+>       assert '_hg_kpi_css_{tema}' in kaynak, (
+            "KPI CSS onbellek anahtari tema-bagimsiz hale dondurulmus: "
+            "gece/gunduz gecisinde eski temanin hover rengi ekranda kalir. "
+            "Anahtar f'_hg_kpi_css_{tema}' bicimini korumali."
+        )
+E       AssertionError: KPI CSS onbellek anahtari tema-bagimsiz hale dondurulmus: gece/gunduz gecisinde eski temanin hover rengi ekranda kalir. Anahtar f'_hg_kpi_css_{tema}' bicimini korumali.
+E       assert '_hg_kpi_css_{tema}' in '# -*- coding: utf-8 -*-\n"""UI-CHART-01: Muninn admin paneli için modern KPI kartı ve grafik yardımcıları.\n\nTasarım...    "ic_ice_pasta_opts",\n    "treemap_opts",\n    "agac_opts",\n    "sankey_opts",\n    "matris_sparkline_opts",\n]\n'
+
+tests\test_charts_kategori_mandali.py:124: AssertionError
+____________________ test_kullanilan_her_kategori_tanimli _____________________
+
+    def test_kullanilan_her_kategori_tanimli() -> None:
+        """Sessiz `primary` fallback'i = gorsel hata. Hepsi sozlukte olmali."""
+        tanimli = _tanimli_kategoriler()
+        kacak = sorted({
+            f"{d}:{s} kategori={k!r}"
+            for d, s, k in _kullanilan_kategoriler() if k not in tanimli
+        })
+>       assert not kacak, (
+            "ADMIN-ENVANTER-01 ihlali: KATEGORI_RENK'te olmayan kategori kullanilmis "
+            f"-> {kacak}. `get(..., 'primary')` hatayi yutar, kart sessizce indigo "
+            "olur. charts.py:KATEGORI_RENK'e mevcut bir token'a takma ad ekle "
+            "(yeni renk icat etme)."
+        )
+E       AssertionError: ADMIN-ENVANTER-01 ihlali: KATEGORI_RENK'te olmayan kategori kullanilmis -> ["admin_audit.py:173 kategori='guvenlik'", "admin_audit.py:175 kategori='guvenlik'", "admin_audit.py:177 kategori='guvenlik'", "admin_audit.py:179 kategori='guvenlik'", "admin_audit.py:181 kategori='guvenlik'", "admin_cost.py:565 kategori='maliyet'", "admin_cost.py:574 kategori='maliyet'", "admin_cost.py:582 kategori='maliyet'", "admin_cost.py:590 kategori='maliyet'", "admin_denetim.py:241 kategori='denetim'", "admin_denetim.py:251 kategori='denetim'", "admin_denetim.py:260 kategori='denetim'", "admin_quality.py:694 kategori='kalite'", "admin_quality.py:699 kategori='kalite'", "admin_quality.py:705 kategori='kalite'", "admin_quality.py:712 kategori='kalite'", "webhook_monitor.py:182 kategori='hata'", "webhook_monitor.py:192 kategori='hata'", "webhook_monitor.py:206 kategori='hata'", "webhook_monitor.py:241 kategori='hata'", "webhook_monitor.py:245 kategori='hata'"]. `get(..., 'primary')` hatayi yutar, kart sessizce indigo olur. charts.py:KATEGORI_RENK'e mevcut bir token'a takma ad ekle (yeni renk icat etme).
+E       assert not ["admin_audit.py:173 kategori='guvenlik'", "admin_audit.py:175 kategori='guvenlik'", "admin_audit.py:177 kategori='guv...dit.py:179 kategori='guvenlik'", "admin_audit.py:181 kategori='guvenlik'", "admin_cost.py:565 kategori='maliyet'", ...]
+
+tests\test_charts_kategori_mandali.py:103: AssertionError
+__________________ test_kilitli_dosyalarda_st_metric_kalmadi __________________
+
+    def test_kilitli_dosyalarda_st_metric_kalmadi():
+        for ad in KAPSAMDAKI_DOSYALAR:
+            metin = (ROOT / ad).read_text(encoding="utf-8")
+            eslesmeler = _ST_METRIC.findall(metin)
+>           assert not eslesmeler, f"{ad}: {len(eslesmeler)} adet st.metric( kaldı"
+E           AssertionError: admin_errors.py: 6 adet st.metric( kaldı
+E           assert not ['st.metric(', 'st.metric(', 'st.metric(', 'st.metric(', 'st.metric(', 'st.metric(']
+
+tests\test_admin_dashboard_yayilim.py:33: AssertionError
+_______________________ test_bilinen_ekranlar_kapsamda ________________________
+
+    def test_bilinen_ekranlar_kapsamda() -> None:
+        """Çekirdek ekranlar kapsam dışına kaydırılamaz (regresyon kilidi)."""
+        cekirdek = {"ana_kontrol", "admin_sistem", "admin_yonetim", "admin_panel"}
+        eksik = sorted(cekirdek - set(EKRANLAR))
+>       assert not eksik, (
+            f"Çekirdek ekranlar sözleşme kapsamı dışında: {eksik}. "
+            "MUAF listesine alınmış olabilirler; bu kabul edilemez."
+        )
+E       AssertionError: Çekirdek ekranlar sözleşme kapsamı dışında: ['admin_yonetim']. MUAF listesine alınmış olabilirler; bu kabul edilemez.
+E       assert not ['admin_yonetim']
+
+tests\test_sayfa_iskeleti.py:188: AssertionError
+________________________ test_aktif_gorevler_d57_gecer ________________________
+
+    def test_aktif_gorevler_d57_gecer():
+        """Panodaki her aktif kayit giris kapisi dogrulamasini gecmeli."""
+        ga = _gorev_at()
+        ihlaller = []
+        for k in _aktif_kayitlar():
+            # Pano kaydinda ajan alani "sahip" adiyla tutulur (D-57 sahip zorunlu).
+            hata = ga._d57_dogrula(k.get("task_id", ""), k.get("baslik", ""), k.get("sahip", ""))
+            if hata:
+                ihlaller.append(f"{k.get('task_id')}: {hata}")
+>       assert not ihlaller, "aktif panoda D-57 ihlali:\n  " + "\n  ".join(ihlaller)
+E       AssertionError: aktif panoda D-57 ihlali:
+E           SCRAPE-006-QUALITY-AUDIT: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E           SCRAPE-007-FINAL-REPORT: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E           DOC-BRIEF-SABLON-KIRMIZI-01: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E           VERI-RAPIDAPI-OSINT-ISTEMCI-01: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E           UI-ADMIN-PANEL-DENETIM-ALTYAPI: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E           UI-ADMIN-PANEL-DASHBOARD-YAYILIM: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E       assert not ['SCRAPE-006-QUALITY-AUDIT: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar s...uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)']
+
+tests\test_pano_d57_kalici.py:54: AssertionError
+___________________________ test_alan_oneki_kanonik ___________________________
+
+    def test_alan_oneki_kanonik():
+        """task_id on eki gorev_at.ALANLAR icinde olmali (SEMA-01 hatasinin mandali)."""
+        ga = _gorev_at()
+        yabanci = [
+            k.get("task_id")
+            for k in _aktif_kayitlar()
+            if str(k.get("task_id", "")).split("-")[0] not in ga.ALANLAR
+        ]
+>       assert not yabanci, (
+            f"kanonik olmayan ALAN oneki: {yabanci}; izinli: {', '.join(ga.ALANLAR)}"
+        )
+E       AssertionError: kanonik olmayan ALAN oneki: ['SCRAPE-006-QUALITY-AUDIT', 'SCRAPE-007-FINAL-REPORT']; izinli: UI, API, VERI, TEST, DOC, ALTYAPI, ORKESTRA
+E       assert not ['SCRAPE-006-QUALITY-AUDIT', 'SCRAPE-007-FINAL-REPORT']
+
+tests\test_pano_d57_kalici.py:65: AssertionError
+_____________ test_h_yardim_gosterir[continue_haftalik_bildir.py] _____________
+
+ad = 'continue_haftalik_bildir.py'
+_ = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/data/_tmp/continue_weekly.log')
+
+    @pytest.mark.parametrize("ad,_", ARACLAR, ids=IDS)
+    def test_h_yardim_gosterir(ad: str, _: object) -> None:
+        """`-h` sifiz cikis kodu vermeli ve kullanim yazmali."""
+        r = _calistir(ad)
+        assert r.returncode == 0, f"{ad} -h rc={r.returncode}: {r.stderr[:200]}"
+        cikti = (r.stdout or "") + (r.stderr or "")
+>       assert ad in cikti, f"{ad} -h kendi adini yazmadi"
+E       AssertionError: continue_haftalik_bildir.py -h kendi adini yazmadi
+E       assert 'continue_haftalik_bildir.py' in '[2026-10-08 23:23:02] Tarama basliyor...\n[2026-10-08 23:23:09] Tarama bitti (cikis kodu 0)\n[2026-10-08 23:23:09] Ek...10-08 23:23:10] Rapor: C:\\Huginn Data Projesi\\Huginn Data Insights\\docs\\raporlar\\continue\\tarama_2026-10-08.md\n'
+
+tests\test_or_araclar_import.py:53: AssertionError
+__________________ test_h_yardim_gosterir[or_sablon_ekle.py] __________________
+
+ad = 'or_sablon_ekle.py'
+_ = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/docs/continue_config.json')
+
+    @pytest.mark.parametrize("ad,_", ARACLAR, ids=IDS)
+    def test_h_yardim_gosterir(ad: str, _: object) -> None:
+        """`-h` sifiz cikis kodu vermeli ve kullanim yazmali."""
+        r = _calistir(ad)
+        assert r.returncode == 0, f"{ad} -h rc={r.returncode}: {r.stderr[:200]}"
+        cikti = (r.stdout or "") + (r.stderr or "")
+>       assert ad in cikti, f"{ad} -h kendi adini yazmadi"
+E       AssertionError: or_sablon_ekle.py -h kendi adini yazmadi
+E       assert 'or_sablon_ekle.py' in 'Eklenen: 6\nToplam: 32\n\n   1. [UCRETSIZ] OR · Nemotron 3 Ultra 550B (1M, en guclu)\n   2. [UCRETSIZ] OR · Nemotron ...31. [UCRETLI] OR · Devstral 2512 (0.40/2.00 · Mistral kod)\n  32. [UCRETLI] OR · Gemini 3 Flash (0.50/3.00 · 1M ctx)\n'
+
+tests\test_or_araclar_import.py:53: AssertionError
+_________________ test_h_hicbir_dosyaya_yazmaz[or_seckin.py] __________________
+
+ad = 'or_seckin.py'
+korumali = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/docs/raporlar/openrouter/or_seckin.txt')
+
+    @pytest.mark.parametrize("ad,korumali", ARACLAR, ids=IDS)
+    def test_h_hicbir_dosyaya_yazmaz(ad: str, korumali: Path | None) -> None:
+        """KRITIK: `-h` hicbir yan etki uretmemeli (brief varsayimi dustu)."""
+        if korumali is None or not korumali.is_file():
+            pytest.skip(f"{ad}: korumali dosya yok ({korumali})")
+        once = korumali.stat().st_mtime_ns
+        boyut = korumali.stat().st_size
+        _calistir(ad)
+>       assert korumali.stat().st_mtime_ns == once, (
+            f"{ad} -h '{korumali.name}' dosyasini DEGISTIRDI — yan etki var")
+E       AssertionError: or_seckin.py -h 'or_seckin.txt' dosyasini DEGISTIRDI — yan etki var
+E       assert 1791490990306315100 == 1791485499177394500
+E        +  where 1791490990306315100 = os.stat_result(st_mode=33206, st_ino=19703248369836962, st_dev=8248058525834365947, st_nlink=1, st_uid=0, st_gid=0, st_size=6235, st_atime=1791490990, st_mtime=1791490990, st_ctime=1791104466).st_mtime_ns
+E        +    where os.stat_result(st_mode=33206, st_ino=19703248369836962, st_dev=8248058525834365947, st_nlink=1, st_uid=0, st_gid=0, st_size=6235, st_atime=1791490990, st_mtime=1791490990, st_ctime=1791104466) = stat()
+E        +      where stat = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/docs/raporlar/openrouter/or_seckin.txt').stat
+
+tests\test_or_araclar_import.py:65: AssertionError
+_______________ test_h_hicbir_dosyaya_yazmaz[or_batch_cikar.py] _______________
+
+ad = 'or_batch_cikar.py'
+korumali = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/docs/continue_config.json')
+
+    @pytest.mark.parametrize("ad,korumali", ARACLAR, ids=IDS)
+    def test_h_hicbir_dosyaya_yazmaz(ad: str, korumali: Path | None) -> None:
+        """KRITIK: `-h` hicbir yan etki uretmemeli (brief varsayimi dustu)."""
+        if korumali is None or not korumali.is_file():
+            pytest.skip(f"{ad}: korumali dosya yok ({korumali})")
+        once = korumali.stat().st_mtime_ns
+        boyut = korumali.stat().st_size
+        _calistir(ad)
+>       assert korumali.stat().st_mtime_ns == once, (
+            f"{ad} -h '{korumali.name}' dosyasini DEGISTIRDI — yan etki var")
+E       AssertionError: or_batch_cikar.py -h 'continue_config.json' dosyasini DEGISTIRDI — yan etki var
+E       assert 1791490990374646500 == 1791490990230297900
+E        +  where 1791490990374646500 = os.stat_result(st_mode=33206, st_ino=11821949021923129, st_dev=8248058525834365947, st_nlink=1, st_uid=0, st_gid=0, st_size=14723, st_atime=1791490990, st_mtime=1791490990, st_ctime=1789661828).st_mtime_ns
+E        +    where os.stat_result(st_mode=33206, st_ino=11821949021923129, st_dev=8248058525834365947, st_nlink=1, st_uid=0, st_gid=0, st_size=14723, st_atime=1791490990, st_mtime=1791490990, st_ctime=1789661828) = stat()
+E        +      where stat = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/docs/continue_config.json').stat
+
+tests\test_or_araclar_import.py:65: AssertionError
+__________ test_h_hicbir_dosyaya_yazmaz[continue_haftalik_bildir.py] __________
+
+ad = 'continue_haftalik_bildir.py'
+korumali = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/data/_tmp/continue_weekly.log')
+
+    @pytest.mark.parametrize("ad,korumali", ARACLAR, ids=IDS)
+    def test_h_hicbir_dosyaya_yazmaz(ad: str, korumali: Path | None) -> None:
+        """KRITIK: `-h` hicbir yan etki uretmemeli (brief varsayimi dustu)."""
+        if korumali is None or not korumali.is_file():
+            pytest.skip(f"{ad}: korumali dosya yok ({korumali})")
+        once = korumali.stat().st_mtime_ns
+        boyut = korumali.stat().st_size
+        _calistir(ad)
+>       assert korumali.stat().st_mtime_ns == once, (
+            f"{ad} -h '{korumali.name}' dosyasini DEGISTIRDI — yan etki var")
+E       AssertionError: continue_haftalik_bildir.py -h 'continue_weekly.log' dosyasini DEGISTIRDI — yan etki var
+E       assert 1791490996931323800 == 1791490990153353000
+E        +  where 1791490996931323800 = os.stat_result(st_mode=33206, st_ino=8162774325485478, st_dev=8248058525834365947, st_nlink=1, st_uid=0, st_gid=0, st_size=3687, st_atime=1791490996, st_mtime=1791490996, st_ctime=1790840672).st_mtime_ns
+E        +    where os.stat_result(st_mode=33206, st_ino=8162774325485478, st_dev=8248058525834365947, st_nlink=1, st_uid=0, st_gid=0, st_size=3687, st_atime=1791490996, st_mtime=1791490996, st_ctime=1790840672) = stat()
+E        +      where stat = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/data/_tmp/continue_weekly.log').stat
+
+tests\test_or_araclar_import.py:65: AssertionError
+________________ test_h_hicbir_dosyaya_yazmaz[or_kod_liste.py] ________________
+
+ad = 'or_kod_liste.py'
+korumali = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/docs/raporlar/openrouter/or_kod.txt')
+
+    @pytest.mark.parametrize("ad,korumali", ARACLAR, ids=IDS)
+    def test_h_hicbir_dosyaya_yazmaz(ad: str, korumali: Path | None) -> None:
+        """KRITIK: `-h` hicbir yan etki uretmemeli (brief varsayimi dustu)."""
+        if korumali is None or not korumali.is_file():
+            pytest.skip(f"{ad}: korumali dosya yok ({korumali})")
+        once = korumali.stat().st_mtime_ns
+        boyut = korumali.stat().st_size
+        _calistir(ad)
+>       assert korumali.stat().st_mtime_ns == once, (
+            f"{ad} -h '{korumali.name}' dosyasini DEGISTIRDI — yan etki var")
+E       AssertionError: or_kod_liste.py -h 'or_kod.txt' dosyasini DEGISTIRDI — yan etki var
+E       assert 1791490997800560600 == 1791485499177394500
+E        +  where 1791490997800560600 = os.stat_result(st_mode=33206, st_ino=88946092640654197, st_dev=8248058525834365947, st_nlink=1, st_uid=0, st_gid=0, st_size=3457, st_atime=1791490997, st_mtime=1791490997, st_ctime=1791104466).st_mtime_ns
+E        +    where os.stat_result(st_mode=33206, st_ino=88946092640654197, st_dev=8248058525834365947, st_nlink=1, st_uid=0, st_gid=0, st_size=3457, st_atime=1791490997, st_mtime=1791490997, st_ctime=1791104466) = stat()
+E        +      where stat = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/docs/raporlar/openrouter/or_kod.txt').stat
+
+tests\test_or_araclar_import.py:65: AssertionError
+___________________ test_h_yardim_gosterir[or_fiyat_ara.py] ___________________
+
+ad = 'or_fiyat_ara.py', _ = None
+
+    @pytest.mark.parametrize("ad,_", ARACLAR, ids=IDS)
+    def test_h_yardim_gosterir(ad: str, _: object) -> None:
+        """`-h` sifiz cikis kodu vermeli ve kullanim yazmali."""
+        r = _calistir(ad)
+>       assert r.returncode == 0, f"{ad} -h rc={r.returncode}: {r.stderr[:200]}"
+E       AssertionError: or_fiyat_ara.py -h rc=1: 
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\python.exe', '-X', 'utf8', 'C:\\Huginn Data Projesi\\Huginn Data Insights\\scripts\\or_fiyat_ara.py', '-h'], returncode=1, stdout='', stderr='').returncode
+
+tests\test_or_araclar_import.py:51: AssertionError
+____________________ test_h_yardim_gosterir[or_seckin.py] _____________________
+
+ad = 'or_seckin.py'
+_ = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/docs/raporlar/openrouter/or_seckin.txt')
+
+    @pytest.mark.parametrize("ad,_", ARACLAR, ids=IDS)
+    def test_h_yardim_gosterir(ad: str, _: object) -> None:
+        """`-h` sifiz cikis kodu vermeli ve kullanim yazmali."""
+        r = _calistir(ad)
+        assert r.returncode == 0, f"{ad} -h rc={r.returncode}: {r.stderr[:200]}"
+        cikti = (r.stdout or "") + (r.stderr or "")
+>       assert ad in cikti, f"{ad} -h kendi adini yazmadi"
+E       AssertionError: or_seckin.py -h kendi adini yazmadi
+E       assert 'or_seckin.py' in 'rapor: C:\\Huginn Data Projesi\\Huginn Data Insights\\docs\\raporlar\\openrouter\\or_seckin.txt (83 satir)\n'
+
+tests\test_or_araclar_import.py:53: AssertionError
+__________________ test_h_yardim_gosterir[or_batch_cikar.py] __________________
+
+ad = 'or_batch_cikar.py'
+_ = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/docs/continue_config.json')
+
+    @pytest.mark.parametrize("ad,_", ARACLAR, ids=IDS)
+    def test_h_yardim_gosterir(ad: str, _: object) -> None:
+        """`-h` sifiz cikis kodu vermeli ve kullanim yazmali."""
+        r = _calistir(ad)
+        assert r.returncode == 0, f"{ad} -h rc={r.returncode}: {r.stderr[:200]}"
+        cikti = (r.stdout or "") + (r.stderr or "")
+>       assert ad in cikti, f"{ad} -h kendi adini yazmadi"
+E       AssertionError: or_batch_cikar.py -h kendi adini yazmadi
+E       assert 'or_batch_cikar.py' in 'Once: 26 -> Sonra: 26\nNot eklendi.\n'
+
+tests\test_or_araclar_import.py:53: AssertionError
+___________________ test_h_yardim_gosterir[or_kod_liste.py] ___________________
+
+ad = 'or_kod_liste.py'
+_ = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/docs/raporlar/openrouter/or_kod.txt')
+
+    @pytest.mark.parametrize("ad,_", ARACLAR, ids=IDS)
+    def test_h_yardim_gosterir(ad: str, _: object) -> None:
+        """`-h` sifiz cikis kodu vermeli ve kullanim yazmali."""
+        r = _calistir(ad)
+        assert r.returncode == 0, f"{ad} -h rc={r.returncode}: {r.stderr[:200]}"
+        cikti = (r.stdout or "") + (r.stderr or "")
+>       assert ad in cikti, f"{ad} -h kendi adini yazmadi"
+E       AssertionError: or_kod_liste.py -h kendi adini yazmadi
+E       assert 'or_kod_liste.py' in 'rapor : C:\\Huginn Data Projesi\\Huginn Data Insights\\docs\\raporlar\\openrouter\\or_kod.txt\nkatalog: C:\\Huginn Data Projesi\\Huginn Data Insights\\docs\\raporlar\\openrouter\\or_kod.json (283 model)\n'
+
+tests\test_or_araclar_import.py:53: AssertionError
+_______________ test_h_hicbir_dosyaya_yazmaz[or_sablon_ekle.py] _______________
+
+ad = 'or_sablon_ekle.py'
+korumali = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/docs/continue_config.json')
+
+    @pytest.mark.parametrize("ad,korumali", ARACLAR, ids=IDS)
+    def test_h_hicbir_dosyaya_yazmaz(ad: str, korumali: Path | None) -> None:
+        """KRITIK: `-h` hicbir yan etki uretmemeli (brief varsayimi dustu)."""
+        if korumali is None or not korumali.is_file():
+            pytest.skip(f"{ad}: korumali dosya yok ({korumali})")
+        once = korumali.stat().st_mtime_ns
+        boyut = korumali.stat().st_size
+        _calistir(ad)
+>       assert korumali.stat().st_mtime_ns == once, (
+            f"{ad} -h '{korumali.name}' dosyasini DEGISTIRDI — yan etki var")
+E       AssertionError: or_sablon_ekle.py -h 'continue_config.json' dosyasini DEGISTIRDI — yan etki var
+E       assert 1791491000630349800 == 1791490999553168500
+E        +  where 1791491000630349800 = os.stat_result(st_mode=33206, st_ino=11821949021923129, st_dev=8248058525834365947, st_nlink=1, st_uid=0, st_gid=0, st_size=16492, st_atime=1791491000, st_mtime=1791491000, st_ctime=1789661828).st_mtime_ns
+E        +    where os.stat_result(st_mode=33206, st_ino=11821949021923129, st_dev=8248058525834365947, st_nlink=1, st_uid=0, st_gid=0, st_size=16492, st_atime=1791491000, st_mtime=1791491000, st_ctime=1789661828) = stat()
+E        +      where stat = WindowsPath('C:/Huginn Data Projesi/Huginn Data Insights/docs/continue_config.json').stat
+
+tests\test_or_araclar_import.py:65: AssertionError
+_________________ test_dusurulen_kolonlar_uretim_kodunda_yok __________________
+
+    def test_dusurulen_kolonlar_uretim_kodunda_yok():
+        desen = re.compile(r"\b(" + "|".join(_DUSENLER) + r")\b")
+        suclular = []
+        for p in _uretim_dosyalari():
+            yol = str(p.relative_to(KOK))
+            if any(m in yol for m in _MUAF):
+                continue
+            metin = p.read_text("utf-8", errors="replace")
+            for no, satir in enumerate(metin.splitlines(), 1):
+                if satir.lstrip().startswith(("#", "--", "//")):
+                    continue  # D-268 aciklama yorumu ihlal degil
+                if desen.search(satir):
+                    suclular.append(f"{yol}:{no}")
+>       assert not suclular, (
+            "Goc 0036'da dusurulen kolon uretim koduna geri sizdi "
+            "(DB'de yok -> calisma aninda UndefinedColumn): " + ", ".join(suclular)
+        )
+E       AssertionError: Goc 0036'da dusurulen kolon uretim koduna geri sizdi (DB'de yok -> calisma aninda UndefinedColumn): scripts\yasu_canli_olcum_d260.py:47, scripts\yasu_canli_olcum_d260.py:48
+E       assert not ['scripts\\yasu_canli_olcum_d260.py:47', 'scripts\\yasu_canli_olcum_d260.py:48']
+
+tests\test_dusurulen_kolon.py:57: AssertionError
+============================== warnings summary ===============================
+tests\test_secrets_rotation.py:174
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\test_secrets_rotation.py:174: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_by_tier
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3453: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff_30 = datetime.utcnow() - timedelta(days=30)
+
+tests/test_admin_ltv_cac.py::test_calculate_ltv_basic
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3317: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3381: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3416: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    start_date = datetime.utcnow().date() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_calculate_cac_basic
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3356: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/company_master/test_ankara_osb.py: 15 warnings
+  C:\Huginn Data Projesi\Huginn Data Insights\src\company_master\seed\seed_ankara_osb.py:148: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.utcnow().isoformat()
+
+tests/test_benchmark.py: 100 warnings
+tests/test_api_integration.py: 2 warnings
+tests/company_master/test_web_app.py: 1 warning
+  C:\Huginn Data Projesi\Huginn Data Insights\web_app.py:3678: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now_iso = datetime.utcnow().isoformat()
+
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+  C:\Huginn Data Projesi\Huginn Data Insights\tests\test_job_intelligence_e2e.py:321: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "detected_at": datetime.utcnow() - timedelta(days=1),
+
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+  C:\Huginn Data Projesi\Huginn Data Insights\src\company_master\intelligence\job_intelligence\pipeline\scorer.py:28: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return datetime.utcnow()
+
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+  C:\Huginn Data Projesi\Huginn Data Insights\tests\test_job_intelligence_e2e.py:370: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    sig.setdefault("detected_at", datetime.utcnow() - timedelta(days=1))
+
+tests/test_pano_ssot_kapisi.py::test_negatif_kontrol_sonrasi_temiz
+tests/test_pano_ssot_kapisi.py::test_negatif_kontrol_mandali_kirarlik
+tests/test_pano_ssot_kapisi.py::test_pano_dogrudan_yazilmaz
+  C:\Huginn Data Projesi\Huginn Data Insights\scripts\fix_emails.py:62: SyntaxWarning: invalid escape sequence '\.'
+    COUNT(*) FILTER (WHERE primary_email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') as valid,
+
+tests/test_pano_ssot_kapisi.py::test_negatif_kontrol_sonrasi_temiz
+tests/test_pano_ssot_kapisi.py::test_negatif_kontrol_mandali_kirarlik
+tests/test_pano_ssot_kapisi.py::test_pano_dogrudan_yazilmaz
+  C:\Huginn Data Projesi\Huginn Data Insights\scripts\fix_emails.py:77: SyntaxWarning: invalid escape sequence '\.'
+    COUNT(*) FILTER (WHERE primary_email IS NULL OR primary_email !~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') as email_issue,
+
+tests/test_auth_lockout.py: 10 warnings
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\sqlalchemy\engine\default.py:952: DeprecationWarning: The default datetime adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+    cursor.execute(statement, parameters)
+
+tests/test_mcp_transport.py::TestHTTPTransport::test_http_call_submit_evidence_batch
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydantic_settings\sources\utils.py:47: IncompleteFieldDefinitionWarning: Field 'lifespan' has an incomplete definition: its annotation contains an unresolved forward reference, so settings sources may fail to correctly resolve its value. Call `model_rebuild()` on the model where the field is defined, once all the referenced types are defined.
+    warnings.warn(
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_dokuman_politikasi.py::test_d272_borc_defteri_eksiksiz - As...
+FAILED tests/test_dokuman_politikasi.py::test_kural4_yasak_ad_kalibi_artmiyor
+FAILED tests/test_dokuman_politikasi.py::test_d320_ajan_context_dosyalari - A...
+FAILED tests/test_dokuman_politikasi.py::test_kural3_sablon_tekligi - Asserti...
+FAILED tests/test_admin_sekme_durum.py::test_sessiz_yutma_yok[admin_yonetim]
+FAILED tests/test_admin_sekme_durum.py::test_st_metric_yok[admin_yonetim] - F...
+FAILED tests/test_admin_sekme_durum.py::test_ciplak_requests_yok[admin_yonetim]
+FAILED tests/test_admin_sekme_durum.py::test_modul_import_edilebilir[admin_yonetim]
+FAILED tests/test_admin_sekme_durum.py::test_dosya_var_ve_utf8[admin_yonetim]
+FAILED tests/test_ui_renk_token_mandali.py::TestIskeletTokenRengi::test_iki_ton_korundu
+FAILED tests/test_ui_renk_token_mandali.py::TestIskeletTokenRengi::test_inline_hex_kalmadi
+FAILED tests/test_ui_renk_token_mandali.py::TestIskeletTokenRengi::test_iskelet_her_iki_temada_zeminden_ayrisiyor
+FAILED tests/test_ui_renk_token_mandali.py::TestAnaKontrolTokenRengi::test_trafik_isigi_uc_durumda_gecerli
+FAILED tests/test_ui_renk_token_mandali.py::TestAnaKontrolTokenRengi::test_inline_hex_kalmadi
+FAILED tests/test_kok_izin_listesi.py::test_kokte_izinsiz_dizin_yok - Asserti...
+FAILED tests/test_d309_ders_kapisi.py::test_hafiza_tavani_asmiyor - Assertion...
+FAILED tests/vector/test_embedder.py::test_embedder_client_uyuzsuz - Failed: ...
+FAILED tests/test_cift_baslik.py::test_muaf_kayitlari_gercek_ve_gerekceli - A...
+FAILED tests/test_cift_baslik.py::test_muaf_kaydi_hala_gerekli - AssertionErr...
+FAILED tests/test_marka_denetim_muafiyet.py::test_kok_denetimi_temiz - Assert...
+FAILED tests/test_kok_politikasi.py::test_kokte_izinsiz_dosya_yok - Assertion...
+FAILED tests/test_kok_politikasi.py::test_vault_kokte_tek_kullanimlik_yok - A...
+FAILED tests/test_kok_politikasi.py::test_kokte_izinsiz_klasor_yok - Assertio...
+FAILED tests/test_naming_audit.py::test_acik_gorevlerde_yeni_d57_ihlali_yok
+FAILED tests/test_job_intelligence_analyzer.py::test_signal_analyzer_analyze_with_mocked_postings
+FAILED tests/test_job_intelligence_analyzer.py::test_growth_hiring_surge_3_posting_30d
+FAILED tests/test_sekme_kapsama.py::test_muaf_listesi_gerekcesiz_kayit_icermez
+FAILED tests/test_admin_kpi_gosterge_onarim.py::test_null_satir_grafikten_dusuyor
+FAILED tests/test_admin_kpi_gosterge_onarim.py::test_hepsi_null_ise_grafik_cizilmez_uyari_yazilir
+FAILED tests/test_admin_kpi_gosterge_onarim.py::test_bolme_dogru_sayi_donduruyor
+FAILED tests/test_admin_kpi_gosterge_onarim.py::test_bolme_ort_skor_kolonu_yoksa_ayirmaz
+FAILED tests/test_admin_kpi_gosterge_onarim.py::test_bolme_bos_df - Attribute...
+FAILED tests/test_admin_kpi_gosterge_onarim.py::test_null_gun_sayisi_captionda_yaziyor
+FAILED tests/test_ui_modal_stil.py::test_container_cerceve_kategori_rengi_yok
+FAILED tests/test_bulgu_defteri.py::test_gercek_defter_kurallara_uyuyor - Ass...
+FAILED tests/test_charts_kategori_mandali.py::test_kpi_css_onbellegi_tema_duyarli
+FAILED tests/test_charts_kategori_mandali.py::test_kullanilan_her_kategori_tanimli
+FAILED tests/test_admin_dashboard_yayilim.py::test_kilitli_dosyalarda_st_metric_kalmadi
+FAILED tests/test_sayfa_iskeleti.py::test_bilinen_ekranlar_kapsamda - Asserti...
+FAILED tests/test_pano_d57_kalici.py::test_aktif_gorevler_d57_gecer - Asserti...
+FAILED tests/test_pano_d57_kalici.py::test_alan_oneki_kanonik - AssertionErro...
+FAILED tests/test_or_araclar_import.py::test_h_yardim_gosterir[continue_haftalik_bildir.py]
+FAILED tests/test_or_araclar_import.py::test_h_yardim_gosterir[or_sablon_ekle.py]
+FAILED tests/test_or_araclar_import.py::test_h_hicbir_dosyaya_yazmaz[or_seckin.py]
+FAILED tests/test_or_araclar_import.py::test_h_hicbir_dosyaya_yazmaz[or_batch_cikar.py]
+FAILED tests/test_or_araclar_import.py::test_h_hicbir_dosyaya_yazmaz[continue_haftalik_bildir.py]
+FAILED tests/test_or_araclar_import.py::test_h_hicbir_dosyaya_yazmaz[or_kod_liste.py]
+FAILED tests/test_or_araclar_import.py::test_h_yardim_gosterir[or_fiyat_ara.py]
+FAILED tests/test_or_araclar_import.py::test_h_yardim_gosterir[or_seckin.py]
+FAILED tests/test_or_araclar_import.py::test_h_yardim_gosterir[or_batch_cikar.py]
+FAILED tests/test_or_araclar_import.py::test_h_yardim_gosterir[or_kod_liste.py]
+FAILED tests/test_or_araclar_import.py::test_h_hicbir_dosyaya_yazmaz[or_sablon_ekle.py]
+FAILED tests/test_dusurulen_kolon.py::test_dusurulen_kolonlar_uretim_kodunda_yok
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KeyboardInterrupt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\threading.py:355: KeyboardInterrupt
+(to show a full traceback on KeyboardInterrupt use --full-trace)
+53 failed, 5059 passed, 12 skipped, 149 warnings in 287.87s (0:04:47)

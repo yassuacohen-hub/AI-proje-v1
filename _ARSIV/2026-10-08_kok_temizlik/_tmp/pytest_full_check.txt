@@ -1,0 +1,11 @@
+.............................
+============================== warnings summary ===============================
+tests\test_secrets_rotation.py:174
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\test_secrets_rotation.py:174: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KeyboardInterrupt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\tempfile.py:499: KeyboardInterrupt
+(to show a full traceback on KeyboardInterrupt use --full-trace)
+29 passed, 1 warning in 11.88s

@@ -1,0 +1,2 @@
+GUNCELLENDI: ALTYAPI-APIVOM-VKN-ENTEGRASYON-01 (sonuc, durum)
+✅ Sorun kaydedildi: ihsan → ihsan | ALTYAPI-APIVOM-VKN-ENTEGRASYON-01 (2026-10-10T07:14:07) [önem=orta]

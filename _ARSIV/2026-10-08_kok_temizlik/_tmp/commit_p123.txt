@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 24.68s
+[chore/monorepo-merge b407e743] UI-PROJE-SIDEBAR-01: proje hub sekmeleri sidebar cocuklariyla birebir (5 sekme, SECTIONS'tan turetilir, kimlik=url_path); Denetim Izi + Hata Yonetimi hub'dan cikti (kanonik kokler /denetim ve Sistem); rehber + aciklama + test mandali guncellendi
+ 3 files changed, 75 insertions(+), 67 deletions(-)

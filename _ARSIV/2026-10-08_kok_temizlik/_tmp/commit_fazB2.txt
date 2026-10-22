@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 19.23s
+[chore/monorepo-merge be7c216c] feat(D-355): Faz B - proje_yonetimi hub_ciz sablonuna baglandi
+ 3 files changed, 35 insertions(+), 130 deletions(-)

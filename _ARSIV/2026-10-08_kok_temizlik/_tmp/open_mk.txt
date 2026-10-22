@@ -1,0 +1,2 @@
+✓ Streamlit
+  http://127.0.0.1:8501/musteri-karti

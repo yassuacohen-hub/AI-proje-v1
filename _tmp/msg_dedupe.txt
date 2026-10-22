@@ -1,0 +1,5 @@
+dosya: C:\Huginn Data Projesi\Huginn Data Insights\data\orchestrator\chat\messages.jsonl
+once satir: 916  boyut: 559981 bayt
+sonra satir: 916  boyut: 559980 bayt
+benzersiz: 916  bozuk(korundu): 0  bom: False
+mod: KURU

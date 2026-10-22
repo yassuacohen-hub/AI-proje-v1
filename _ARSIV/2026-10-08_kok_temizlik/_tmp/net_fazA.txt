@@ -1,0 +1,12 @@
+COMPANY_EDGES_KOLONLAR:
+  company_a_id | uuid
+  company_b_id | uuid
+  edge_type | text
+  strength | numeric
+  evidence | text
+  source | text
+  created_at | timestamp with time zone
+TOPLAM_SATIR: 0
+EDGE_TYPE_DAGILIM:
+EN_KALABALIK (derece top5):
+COMPANY_PERSONS_SATIR: 0

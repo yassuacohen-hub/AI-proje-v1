@@ -1,0 +1,4 @@
+  File "c:\Huginn Data Projesi\_tmp\yedek_restore2.py", line 29
+    print("   rc=", r.returncode, r.stderr[-300:] if r.returncode else "")
+                                                                          ^
+IndentationError: unindent does not match any outer indentation level

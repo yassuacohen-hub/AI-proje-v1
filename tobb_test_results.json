@@ -1,0 +1,94 @@
+{
+  "timestamp": "2026-10-13T13:39:39.281284",
+  "config": {
+    "api_url": "https://ttsg.tobb.org.tr/webservis13_20260911.php",
+    "api_key": "Crow****",
+    "test_vkn": "1234567890",
+    "test_mersis": "0123456789012345"
+  },
+  "summary": {
+    "total": 7,
+    "passed": 2,
+    "failed": 5,
+    "pass_rate": 28.57142857142857
+  },
+  "results": [
+    {
+      "test_name": "TOBB Bakiye Sorgulama",
+      "passed": false,
+      "details": "Hata: 401 - {\"Hata\":\"Kullanıcı Kodu ve\\/veya Şifre Hatalı veya İzinsiz IP Adresi\"}",
+      "duration_ms": 217,
+      "response_data": {
+        "Basarili": false,
+        "HataKodu": "401",
+        "HataMesaji": "{\"Hata\":\"Kullanıcı Kodu ve\\/veya Şifre Hatalı veya İzinsiz IP Adresi\"}"
+      }
+    },
+    {
+      "test_name": "TOBB Şirket Kartı 02 (VKN)",
+      "passed": false,
+      "details": "Hata: 401 - {\"Hata\":\"Kullanıcı Kodu ve\\/veya Şifre Hatalı veya İzinsiz IP Adresi\"}",
+      "duration_ms": 63,
+      "response_data": {
+        "Basarili": false,
+        "HataKodu": "401",
+        "HataMesaji": "{\"Hata\":\"Kullanıcı Kodu ve\\/veya Şifre Hatalı veya İzinsiz IP Adresi\"}"
+      }
+    },
+    {
+      "test_name": "TOBB Şirket Kartı 02 (MERSIS)",
+      "passed": false,
+      "details": "Hata: 401 - {\"Hata\":\"Kullanıcı Kodu ve\\/veya Şifre Hatalı veya İzinsiz IP Adresi\"}",
+      "duration_ms": 59,
+      "response_data": {
+        "Basarili": false,
+        "HataKodu": "401",
+        "HataMesaji": "{\"Hata\":\"Kullanıcı Kodu ve\\/veya Şifre Hatalı veya İzinsiz IP Adresi\"}"
+      }
+    },
+    {
+      "test_name": "TOBB Şirket Kartı 04 (VKN - PDF)",
+      "passed": false,
+      "details": "Hata: 400 - {\"Hata\":\"Metod Bulunamadı\"}",
+      "duration_ms": 52,
+      "response_data": {
+        "Basarili": false,
+        "HataKodu": "400",
+        "HataMesaji": "{\"Hata\":\"Metod Bulunamadı\"}"
+      }
+    },
+    {
+      "test_name": "TOBB Şirket Kartı 04 (MERSIS - PDF)",
+      "passed": false,
+      "details": "Hata: 400 - {\"Hata\":\"Metod Bulunamadı\"}",
+      "duration_ms": 50,
+      "response_data": {
+        "Basarili": false,
+        "HataKodu": "400",
+        "HataMesaji": "{\"Hata\":\"Metod Bulunamadı\"}"
+      }
+    },
+    {
+      "test_name": "TOBB Geçersiz VKN Hata Yönetimi",
+      "passed": true,
+      "details": "Beklenen hata alındı: 401 - {\"Hata\":\"Kullanıcı Kodu ve\\/veya Şifre Hatalı veya İzinsiz IP Adresi\"}",
+      "duration_ms": 69,
+      "response_data": {
+        "Basarili": false,
+        "HataKodu": "401",
+        "HataMesaji": "{\"Hata\":\"Kullanıcı Kodu ve\\/veya Şifre Hatalı veya İzinsiz IP Adresi\"}"
+      }
+    },
+    {
+      "test_name": "TOBB Eksik Kimlik Bilgisi",
+      "passed": true,
+      "details": "Kimlik hatası beklendi: 401",
+      "duration_ms": 1074,
+      "response_data": {
+        "Basarili": false,
+        "HataKodu": "401",
+        "HataMesaji": "<br />\n<b>Notice</b>:  Undefined index: Sifre in <b>/home/virtual/ttsg/webservis13_20260911.php</b> on line <b>718</b><br />\n<br />\n<b>Notice</b>:  Undefined index: Kodu in <b>/home/virtual/ttsg/webservis13_20260911.php</b> on line <b>723</b><br />\n<br />\n<b>Notice</b>:  Undefined index: Sifre in <b>/home/virtual/ttsg/webservis13_20260911.php</b> on line <b>723</b><br />\n{\"Hata\":\"Kullanıcı Kodu ve\\/veya Şifre Hatalı veya İzinsiz IP Adresi\"}"
+      }
+    }
+  ]
+}

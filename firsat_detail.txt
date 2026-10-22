@@ -1,0 +1,40 @@
+Line 341:     <tr><th>Sürüm</th><th>Ne değişti</th><th>Durum</th></tr>
+Line 342:     <tr><td><b>v5</b></td><td>Açılır/kapanır ikon menü, gizli menü fikri</td><td><span class="rozet">Geçti</span></td></tr>
+Line 343:     <tr><td><b>v6</b></td><td>Tek menü, sağ üst paket rozeti + profil, push <span class="mono">193e0880</span></td><td><span class="rozet">Geçti</span></td></tr>
+Line 344:     <tr><td><b>v7</b></td><td>3 grup menü, BETA işareti, sade üst çubuk, bağlantı haritası (<span class="mono">37344d38</span>)</td><td><span class="rozet ok">PO: “daha güzel oldu”</span></td></tr>
+Line 345:     <tr><td><b>v8</b></td><td>Yazı sistemi ölçülü; arama sağda ve büyük; sol ikon şeridi (dil dahil); ilk sağ üst ikon = Uyarı; tüm sağ üst pencereler aynı yöne; Mimir’e ayırt edici ikon; Radarım dolu; KPI ikonlu; harita şehir seçer ve yakınlaşır; Pazar grubu; pazarlama araştırma satırı; eski panelden unutulanlar geri</td><td><span class="rozet ok"
+Line 346:     <tr><td><b>v9</b></td><td>Eşleşme sağ üst + ayrı sayfa, geniş kart, Fırsatlar grafiği, Dedektif (kanca seti), Trend altı dolu, Mimir labirent-göz logosu, tek seferlik yükleme animasyonu</td><td><span class="rozet ok">v10’a geçti</span></td></tr>
+Line 347:     <tr><td><b>v10</b></td><td>KPI kartları ilk sırada (hakem sorusu: düzen anahtarı ile iki hali görülür); Fırsatlar grafiği geniş + tıklanır; Radarım tıklanır nokta + süzgeç; her kartta ⓘ (“bu kart X sorusunu cevaplar”); “Görünümü özelleştir” anahtarları; KPI tıkla → detay şeridi; Akıllı Eşleşme 3 adım + ağırlık + puan kırılımı; Benim İşletmem = 
+Line 348:     <tr><td><b>v11</b></td><td>Üst çubuk 68 px, sağ üst ferahlatıldı; logo (işaret) ile “HUGİN Ticari Radar” ayrı; “Panel / Genel Bakış” yolu içeriğe taşındı; menü çizgileri kalktı, animasyonlu menü (giriş, hover, aktif ışık çubuğu); geniş Akıllı Eşleşme sayfası: 12 tür kart + sağ detay; §6b eski panelden taşınacaklar tablosu</td><td><span class="r
+Line 349:   </table></div>
+Line 350: 
+Line 351:   <h2>1. Çalışan çizim</h2>
+Line 352:   <p>Tıkla: menü simgeleri, sağ üst ikonlar, şehir kutusu, yakınlaştır +/−, kriter düğmeleri, Eşle düğmesi. Menü şeridinin üstüne gelince tarayıcı ipucu (başlık) çıkar.</p>
+Line 353: 
+Line 354:   <div class="kabuk dar" id="kabuk">
+Line 355:     <div class="ustbar">
+Line 356:       <button class="ikon-btn" id="yan-toggle" aria-label="Menüyü genişlet veya daralt"><svg class="ic"><use href="#i-pnl"/></svg></button>
+Line 357:       <div class="logo" aria-label="HUGİN Ticari Radar"><i aria-hidden="true">H</i><div class="marka"><b>HUGİN</b><span>Ticari Radar</span></div></div>
+Line 358:       <div class="ara" role="search"><svg class="ic"><use href="#i-search"/></svg><span>Şirket, sektör veya VKN ara</span><kbd>/</kbd></div>
+Line 359:       <button class="ikon-btn" id="uyari-btn" aria-label="Uyarılar, 3 yeni" aria-expanded="false"><svg class="ic"><use href="#i-bellr"/></svg><i class="nokta"></i></button>
+Line 360:       <button class="ikon-btn" id="esles-btn" aria-label="Akıllı Eşleşme" aria-expanded="false"><svg class="ic"><use href="#i-hand"/></svg></button>
+Line 361:       <button class="ikon-btn" id="mimir-btn" aria-label="Mimir, bilgelik asistanı" aria-expanded="false"><svg class="ic"><use href="#i-mimir"/></svg></button>
+Line 362:       <i class="ayrac"></i>
+Line 363:       <button class="paket-chip" id="paket-btn" aria-label="Paket: Professional" aria-expanded="false"><svg class="ic" style="width:14px;height:14px"><use href="#i-star"/></svg>PRO</button>
+Line 364:       <button class="profil" id="avatar-btn" aria-label="Profil menüsü, işletme tamlığı yüzde 70" aria-expanded="false">
+Line 365:         <span class="avatar-sar"><b>AS</b></span>
+Line 366:         <span class="kisi">{Ad Soyad}</span>
+Line 367:         <svg class="ic"><use href="#i-chev"/></svg>
+Line 368:       </button>
+Line 369:     </div>
+Line 370: 
+Line 371:     <!-- Sağ üst pencereler: HEPSİ top:60 right:14 — aynı yer, aynı yön -->
+Line 372:     <div class="pop" id="uyari-pop" role="dialog" aria-label="Uyarılar">
+Line 373:       <div class="p-bas"><svg class="ic"><use href="#i-bellr"/></svg>Uyarılar<span class="ornek">Örnek</span><span style="margin-left:auto" class="rozet warn">3 yeni</span></div>
+Line 374:       <div class="p-ic">
+Line 375:         <div class="uy" style="--c:var(--risk)"><span class="rozet-ic"><svg class="ic"><use href="#i-alert"/></svg></span><div><b>Çelişki sinyali: 2 kaynak farklı</b><small>ACME MAKİNA · 3 gün önce</small></div></div>
+Line 376:         <div class="uy" style="--c:var(--info)"><span class="rozet-ic"><svg class="ic"><use href="#i-info"/></svg></span><div><b>Unvan değişti</b><small>BETA TEKSTİL · 2 saat önce</small></div></div>
+Line 377:         <div class="uy" style="--c:var(--warn)"><span class="rozet-ic"><svg class="ic"><use href="#i-clock"/></svg></span><div><b>Aboneliğin bitmesine 7 gün</b><small>Professional · yenileme</small></div></div>
+Line 378:       </div>
+Line 379:       <div class="p-alt"><button class="btn kucuk">Tümünü okundu say</button><a href="#" data-git="radar" style="color:var(--info);font-size:13px">Radar’da aç →</a></div>
+Line 380:     </div>

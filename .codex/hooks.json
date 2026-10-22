@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"C:/Huginn Data Projesi/Huginn Data Insights/scripts/hafiza_yukle_nur.py\"",
+            "timeout": 15,
+            "statusMessage": "nur hafizasi yukleniyor..."
+          }
+        ]
+      }
+    ]
+  }
+}

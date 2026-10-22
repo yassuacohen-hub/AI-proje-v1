@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 25.77s
+[chore/monorepo-merge a1a1d3cf] UI-DLQ-TEKIL-01: proje hub DLQ sekmesi kaldirildi, kanonik yer Sistem koku (admin_sistem webhook-dlq); hub 5->4 sekme, rehber metni, test mandali guncellendi
+ 3 files changed, 19 insertions(+), 23 deletions(-)

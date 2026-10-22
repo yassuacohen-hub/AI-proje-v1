@@ -1,0 +1,4 @@
+1) ONCE: exit=0 7 passed in 5.11s
+2) SWAP Alan2<->Alan3: exit=1 4 failed, 3 passed in 4.98s
+3) GERI ALINDI: exit=0 7 passed in 4.83s
+MANDAL KIRILDI+ONARILDI OK

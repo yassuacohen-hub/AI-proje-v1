@@ -1,0 +1,46 @@
+python-docx: HATA
+
+-packages\pip\_internal\cli\main_parser.py", line 21, in <module>
+    from pip._internal.cli import cmdoptions
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_internal\cli\cmdoptions.py", line 55, in <module>
+    from pip._internal.cli.parser import ConfigOptionParser
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_internal\cli\parser.py", line 39, in <module>
+    from pip._internal.configuration import Configuration, ConfigurationError
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_internal\configuration.py", line 55, in <module>
+    from pip._internal.utils.logging import getLogger
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_internal\utils\logging.py", line 49, in <module>
+    from pip._vendor.rich.logging import RichHandler
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_vendor\rich\logging.py", line 29, in <module>
+    from .traceback import Traceback
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_vendor\rich\traceback.py", line 89, in <module>
+    from .syntax import Syntax, SyntaxPosition
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_vendor\rich\syntax.py", line 45, in <module>
+    from pip._vendor.pygments.lexer import Lexer
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_vendor\pygments\lexer.py", line 36
+    
+    ^
+SyntaxError: trailing comma not allowed without surrounding parentheses
+
+openpyxl: HATA
+
+-packages\pip\_internal\cli\main_parser.py", line 21, in <module>
+    from pip._internal.cli import cmdoptions
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_internal\cli\cmdoptions.py", line 55, in <module>
+    from pip._internal.cli.parser import ConfigOptionParser
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_internal\cli\parser.py", line 39, in <module>
+    from pip._internal.configuration import Configuration, ConfigurationError
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_internal\configuration.py", line 55, in <module>
+    from pip._internal.utils.logging import getLogger
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_internal\utils\logging.py", line 49, in <module>
+    from pip._vendor.rich.logging import RichHandler
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_vendor\rich\logging.py", line 29, in <module>
+    from .traceback import Traceback
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_vendor\rich\traceback.py", line 89, in <module>
+    from .syntax import Syntax, SyntaxPosition
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_vendor\rich\syntax.py", line 45, in <module>
+    from pip._vendor.pygments.lexer import Lexer
+  File "c:\Projeler\Huginn Data Insights\.venv\Lib\site-packages\pip\_vendor\pygments\lexer.py", line 36
+    
+    ^
+SyntaxError: trailing comma not allowed without surrounding parentheses
+

@@ -1,0 +1,23 @@
+list 
+{
+ "task_id": "ALTYAPI-REPO-TEMIZLIK-01",
+ "id": "ALTYAPI-REPO-TEMIZLIK-01",
+ "baslik": "[ALTYAPI] 340+ takipsiz dosyayı taşı -> temiz git status + _ARSIV/2026-10-08_kok_temizlik (3s)",
+ "sahip": "yasu",
+ "oncelik": "P1",
+ "durum": "plan",
+ "baslangic": "2026-10-08T20:36:34",
+ "bitis": null,
+ "dosyalar": [
+  ".gitignore",
+  "_tmp/",
+  "_ARSIV_tek_kullanimlik/"
+ ],
+ "not": "",
+ "source": "ic",
+ "from_agent": null,
+ "mod": "code",
+ "brief": "plans/brief_yasu_ALTYAPI-REPO-TEMIZLIK-01.md",
+ "talimat": "plans/brief_yasu_ALTYAPI-REPO-TEMIZLIK-01.md oku; Faz A-B-C sirasiyla; silme yok arsiv var"
+}
+Counter()

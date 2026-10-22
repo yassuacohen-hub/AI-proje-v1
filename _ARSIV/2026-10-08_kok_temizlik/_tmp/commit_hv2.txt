@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 41.60s
+[chore/monorepo-merge c56e79ee] docs(hafıza): /proje-yonetimi canlı doğrulama kaydı + sd01 giriş tuzağı
+ 1 file changed, 2 insertions(+)

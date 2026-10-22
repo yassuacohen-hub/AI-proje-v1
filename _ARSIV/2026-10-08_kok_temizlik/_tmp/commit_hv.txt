@@ -1,0 +1,37 @@
+MANDAL-SAHNE-01: tek commit'te 327 dosya (tavan 20).
+`git add -A` kazasi mi? Uc ajan ayni agacta -- baskasinin isini
+commit'ine katmis olabilirsin (D-299'da oldu).
+
+  data/errors/error_log.jsonl
+  data/orchestrator/AGENT_SYNC.md
+  data/orchestrator/ALTYAPI-REPO-TEMIZLIK-01_rapor_2026-10-08_denetim.md
+  data/orchestrator/OPENHUMAN-DESEN-PORT-01_rapor_2026-10-08_yasu.md
+  data/orchestrator/TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01_rapor_2026-10-08_test.md
+  data/orchestrator/ajan-chat.jsonl
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0015.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0035.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0055.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0115.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0135.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0155.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0215.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0235.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0255.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0315.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0335.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0355.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0415.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0435.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0455.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0515.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0535.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0555.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0615.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0635.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0655.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0715.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0735.txt
+  data/orchestrator/ajan_nobet_log/ihsan_20261008_0755.txt
+  ... +297 dosya daha
+
+Kasitliysa: SAHNE_TAVAN=<sayi> git commit ...  (gerekce commit mesajina)

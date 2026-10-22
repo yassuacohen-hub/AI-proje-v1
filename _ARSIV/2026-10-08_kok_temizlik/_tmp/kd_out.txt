@@ -1,0 +1,189 @@
+== TARAMA ==
+  crlf_karisik (6):
+    - scripts/ajan_nobet_kosucusu.py
+    - scripts/nobet_dongusu.py
+    - scripts/or_yardim.py
+    - src/company_master/demo_veri.py
+    - tests/test_demo_veri.py
+    - tests/test_or_araclar_import.py
+  dosya_sonu (26):
+    - scripts/ajan_cakisma_kilidi.py
+    - scripts/check_yasu_tasks.py
+    - scripts/g_0_risk_motoru.py
+    - scripts/kazima_jina_fallback.py
+    - scripts/kazima_qwen_classify.py
+    - scripts/list_yasu_tasks.py
+    - scripts/ninerouter_anahtar_guncelle.py
+    - scripts/rapidapi_test.py
+    - scripts/services/apivom_vkn.py
+    - scripts/update_task_progress.py
+    - scripts/update_task_status.py
+    - scripts/zamanli_gorev_kur.py
+    - src/company_master/engine/rapidapi_osint.py
+    - src/company_master/engine/vom_vkn.py
+    - src/company_master/logging/api_logger.py
+    - tests/test_admin_denetim.py
+    - tests/test_ajan_cakisma_kilidi.py
+    - tests/test_gorev_at_kilit_kapisi.py
+    - tests/test_kazima_jina_fallback.py
+    - tests/test_kazima_qwen_classify.py
+    - tests/test_ninerouter_anahtar_guncelle.py
+    - tests/test_paket_fiyat_senkron.py
+    - tests/test_rapidapi_osint.py
+    - tests/test_vom_vkn.py
+    - web_dashboard/tabs/admin_denetim.py
+    - web_dashboard/tabs/admin_sistem_saglik.py
+  mojibake (36):
+    - src/company_master/etl/nace_coklu_yaz.py:45
+    - src/company_master/etl/nace_sozluk_yukle.py:132
+    - src/company_master/etl/nace_sozluk_yukle.py:245
+    - src/company_master/etl/nace_sozluk_yukle.py:35
+    - src/company_master/etl/nace_sozluk_yukle.py:37
+    - src/company_master/etl/nace_sozluk_yukle.py:372
+    - src/company_master/etl/nace_sozluk_yukle.py:377
+    - src/company_master/etl/nace_sozluk_yukle.py:39
+    - src/company_master/etl/nace_sozluk_yukle.py:40
+    - src/company_master/etl/nace_sozluk_yukle.py:41
+    - src/company_master/etl/nace_sozluk_yukle.py:42
+    - src/company_master/etl/nace_sozluk_yukle.py:43
+    - src/company_master/etl/nace_sozluk_yukle.py:45
+    - src/company_master/etl/nace_sozluk_yukle.py:458
+    - src/company_master/etl/nace_sozluk_yukle.py:46
+    - src/company_master/etl/nace_sozluk_yukle.py:467
+    - src/company_master/etl/nace_sozluk_yukle.py:47
+    - src/company_master/etl/nace_sozluk_yukle.py:472
+    - src/company_master/etl/nace_sozluk_yukle.py:48
+    - src/company_master/etl/nace_sozluk_yukle.py:480
+    - src/company_master/etl/nace_sozluk_yukle.py:489
+    - src/company_master/etl/nace_sozluk_yukle.py:49
+    - src/company_master/etl/nace_sozluk_yukle.py:5
+    - src/company_master/etl/nace_sozluk_yukle.py:514
+    - src/company_master/etl/nace_sozluk_yukle.py:516
+    - src/company_master/etl/nace_sozluk_yukle.py:528
+    - src/company_master/etl/nace_sozluk_yukle.py:549
+    - src/company_master/etl/nace_sozluk_yukle.py:550
+    - src/company_master/etl/nace_sozluk_yukle.py:554
+    - src/company_master/etl/nace_sozluk_yukle.py:561
+    - src/company_master/etl/nace_sozluk_yukle.py:567
+    - src/company_master/etl/nace_sozluk_yukle.py:571
+    - src/company_master/etl/sozluk_baslik_duzelt.py:150
+    - src/company_master/etl/sozluk_baslik_duzelt.py:312
+    - src/company_master/etl/sozluk_baslik_duzelt.py:43
+    - tests/test_mojibake_bariyer.py:48
+  sondaki_bosluk (18):
+    - scripts/g_0_risk_motoru.py:100
+    - scripts/g_0_risk_motoru.py:107
+    - scripts/g_0_risk_motoru.py:111
+    - scripts/g_0_risk_motoru.py:17
+    - scripts/g_0_risk_motoru.py:20
+    - scripts/g_0_risk_motoru.py:26
+    - scripts/g_0_risk_motoru.py:29
+    - scripts/g_0_risk_motoru.py:35
+    - scripts/g_0_risk_motoru.py:69
+    - scripts/g_0_risk_motoru.py:78
+    - scripts/g_0_risk_motoru.py:86
+    - scripts/g_0_risk_motoru.py:94
+    - scripts/g_0_risk_motoru.py:97
+    - scripts/list_yasu_tasks.py:12
+    - scripts/list_yasu_tasks.py:14
+    - scripts/list_yasu_tasks.py:16
+    - scripts/list_yasu_tasks.py:20
+    - scripts/services/apivom_vkn.py:6
+  utf8_bom (5):
+    - scripts/dashboard_perf_monitor.py
+    - scripts/p44_benchmark.py
+    - scripts/p44_final_benchmark.py
+    - src/company_master/dashboard/__init__.py
+    - src/company_master/dashboard/perf_monitor.py
+ALLOWLIST DISI IHlAL (91):
+  - utf8_bom: scripts/dashboard_perf_monitor.py
+  - utf8_bom: scripts/p44_benchmark.py
+  - utf8_bom: scripts/p44_final_benchmark.py
+  - utf8_bom: src/company_master/dashboard/__init__.py
+  - utf8_bom: src/company_master/dashboard/perf_monitor.py
+  - mojibake: src/company_master/etl/nace_coklu_yaz.py:45
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:132
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:245
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:35
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:37
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:372
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:377
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:39
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:40
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:41
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:42
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:43
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:45
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:458
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:46
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:467
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:47
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:472
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:48
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:480
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:489
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:49
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:5
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:514
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:516
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:528
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:549
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:550
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:554
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:561
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:567
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:571
+  - mojibake: src/company_master/etl/sozluk_baslik_duzelt.py:150
+  - mojibake: src/company_master/etl/sozluk_baslik_duzelt.py:312
+  - mojibake: src/company_master/etl/sozluk_baslik_duzelt.py:43
+  - mojibake: tests/test_mojibake_bariyer.py:48
+  - crlf_karisik: scripts/ajan_nobet_kosucusu.py
+  - crlf_karisik: scripts/nobet_dongusu.py
+  - crlf_karisik: scripts/or_yardim.py
+  - crlf_karisik: src/company_master/demo_veri.py
+  - crlf_karisik: tests/test_demo_veri.py
+  - crlf_karisik: tests/test_or_araclar_import.py
+  - sondaki_bosluk: scripts/g_0_risk_motoru.py:100
+  - sondaki_bosluk: scripts/g_0_risk_motoru.py:107
+  - sondaki_bosluk: scripts/g_0_risk_motoru.py:111
+  - sondaki_bosluk: scripts/g_0_risk_motoru.py:17
+  - sondaki_bosluk: scripts/g_0_risk_motoru.py:20
+  - sondaki_bosluk: scripts/g_0_risk_motoru.py:26
+  - sondaki_bosluk: scripts/g_0_risk_motoru.py:29
+  - sondaki_bosluk: scripts/g_0_risk_motoru.py:35
+  - sondaki_bosluk: scripts/g_0_risk_motoru.py:69
+  - sondaki_bosluk: scripts/g_0_risk_motoru.py:78
+  - sondaki_bosluk: scripts/g_0_risk_motoru.py:86
+  - sondaki_bosluk: scripts/g_0_risk_motoru.py:94
+  - sondaki_bosluk: scripts/g_0_risk_motoru.py:97
+  - sondaki_bosluk: scripts/list_yasu_tasks.py:12
+  - sondaki_bosluk: scripts/list_yasu_tasks.py:14
+  - sondaki_bosluk: scripts/list_yasu_tasks.py:16
+  - sondaki_bosluk: scripts/list_yasu_tasks.py:20
+  - sondaki_bosluk: scripts/services/apivom_vkn.py:6
+  - dosya_sonu: scripts/ajan_cakisma_kilidi.py
+  - dosya_sonu: scripts/check_yasu_tasks.py
+  - dosya_sonu: scripts/g_0_risk_motoru.py
+  - dosya_sonu: scripts/kazima_jina_fallback.py
+  - dosya_sonu: scripts/kazima_qwen_classify.py
+  - dosya_sonu: scripts/list_yasu_tasks.py
+  - dosya_sonu: scripts/ninerouter_anahtar_guncelle.py
+  - dosya_sonu: scripts/rapidapi_test.py
+  - dosya_sonu: scripts/services/apivom_vkn.py
+  - dosya_sonu: scripts/update_task_progress.py
+  - dosya_sonu: scripts/update_task_status.py
+  - dosya_sonu: scripts/zamanli_gorev_kur.py
+  - dosya_sonu: src/company_master/engine/rapidapi_osint.py
+  - dosya_sonu: src/company_master/engine/vom_vkn.py
+  - dosya_sonu: src/company_master/logging/api_logger.py
+  - dosya_sonu: tests/test_admin_denetim.py
+  - dosya_sonu: tests/test_ajan_cakisma_kilidi.py
+  - dosya_sonu: tests/test_gorev_at_kilit_kapisi.py
+  - dosya_sonu: tests/test_kazima_jina_fallback.py
+  - dosya_sonu: tests/test_kazima_qwen_classify.py
+  - dosya_sonu: tests/test_ninerouter_anahtar_guncelle.py
+  - dosya_sonu: tests/test_paket_fiyat_senkron.py
+  - dosya_sonu: tests/test_rapidapi_osint.py
+  - dosya_sonu: tests/test_vom_vkn.py
+  - dosya_sonu: web_dashboard/tabs/admin_denetim.py
+  - dosya_sonu: web_dashboard/tabs/admin_sistem_saglik.py

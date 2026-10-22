@@ -1,0 +1,7 @@
+EKLENDI: WEB-SSR-API-ANAHTAR-01 -> bilo (P1)
+eklendi=1 guncellendi=0 degismedi=11 arsivlendi=0
+yerel gorev=12 notion satiri=11
+ozet: 1 blok (silinen kopya 1)
+  Ilerleme Matrisi: eklendi 0, guncellendi 2, toplam 8
+  Ajan Ilerlemesi: eklendi 0, guncellendi 0, toplam 4
+  KRITIK - Simdi Buraya Bak: eklendi 0, guncellendi 0, toplam 0

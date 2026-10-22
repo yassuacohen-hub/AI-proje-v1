@@ -1,0 +1,7 @@
+gzip OK, satir=73683, CREATE TABLE=120, COPY tablo=82
+  companies: 10123
+  company_persons: 0
+  field_dictionary: 138
+  schema_migrations: 59
+  tobb_card_raw: 0
+MANDAL: 10123/138/59 TUTTU

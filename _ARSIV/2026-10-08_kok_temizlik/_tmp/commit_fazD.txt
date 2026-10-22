@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 44.64s
+[chore/monorepo-merge a0d52c2a] feat(D-355): Faz D Musteri Karti iskeleti
+ 2 files changed, 64 insertions(+), 1 deletion(-)

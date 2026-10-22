@@ -1,0 +1,204 @@
+=== Looking for 'Radardaki' or 'radardaki' ===
+
+--- Line 138 ---
+   Line 135: .guven{width:84px;height:84px;border-radius:50%;background:conic-gradient(var(--act) 0 68%,var(--line) 68% 100%);display
+   Line 136: .guven::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--panel)}
+   Line 137: .guven b{position:relative;font:700 22px Inter,sans-serif}
+>> Line 138: .radar{position:relative;width:96px;height:96px;border-radius:50%;border:1.5px solid var(--line);flex:none;background:ra
+   Line 139: .radar::after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,color-mix(in sr
+   Line 140: .radar .nok{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--warn)}
+   Line 141: @keyframes don{to{transform:rotate(360deg)}}
+
+--- Line 139 ---
+   Line 136: .guven::before{content:"";position:absolute;inset:8px;border-radius:50%;background:var(--panel)}
+   Line 137: .guven b{position:relative;font:700 22px Inter,sans-serif}
+   Line 138: .radar{position:relative;width:96px;height:96px;border-radius:50%;border:1.5px solid var(--line);flex:none;background:ra
+>> Line 139: .radar::after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,color-mix(in sr
+   Line 140: .radar .nok{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--warn)}
+   Line 141: @keyframes don{to{transform:rotate(360deg)}}
+   Line 142: @media (prefers-reduced-motion:reduce){.radar::after{animation:none}}
+
+--- Line 140 ---
+   Line 137: .guven b{position:relative;font:700 22px Inter,sans-serif}
+   Line 138: .radar{position:relative;width:96px;height:96px;border-radius:50%;border:1.5px solid var(--line);flex:none;background:ra
+   Line 139: .radar::after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,color-mix(in sr
+>> Line 140: .radar .nok{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--warn)}
+   Line 141: @keyframes don{to{transform:rotate(360deg)}}
+   Line 142: @media (prefers-reduced-motion:reduce){.radar::after{animation:none}}
+   Line 143: .yakinda{border-style:dashed;background:transparent}
+
+--- Line 142 ---
+   Line 139: .radar::after{content:"";position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,color-mix(in sr
+   Line 140: .radar .nok{position:absolute;width:7px;height:7px;border-radius:50%;background:var(--warn)}
+   Line 141: @keyframes don{to{transform:rotate(360deg)}}
+>> Line 142: @media (prefers-reduced-motion:reduce){.radar::after{animation:none}}
+   Line 143: .yakinda{border-style:dashed;background:transparent}
+   Line 144: .chipler{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+   Line 145: .chip{display:flex;align-items:center;gap:8px;border:1px solid var(--line);background:var(--soft);border-radius:9px;padd
+
+--- Line 236 ---
+   Line 233: .gcub.genis{height:96px}
+   Line 234: .gtip{position:absolute;bottom:100%;transform:translateX(-50%);margin-bottom:6px;background:var(--raised);border:1px sol
+   Line 235: .gdetay{border:1px solid var(--line);background:var(--soft);border-radius:10px;padding:8px 12px;font-size:12.5px;color:v
+>> Line 236: .radar::after{pointer-events:none}.radar .nok{z-index:2;cursor:pointer;border:0;padding:0}.radar .nok.sec{outline:2px so
+   Line 237: .sek{display:flex;gap:4px;border-bottom:1px solid var(--line);margin:12px 0;flex-wrap:wrap}
+   Line 238: .sek button{all:unset;cursor:pointer;padding:8px 14px;font:500 13.5px Inter,sans-serif;color:var(--t2);border-bottom:2px
+   Line 239: .sek button[aria-selected=true]{color:var(--t1);border-color:var(--act)}
+
+--- Line 266 ---
+   Line 263: <body>
+   Line 264: <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+   Line 265: <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5V21H3z"/></symbol>
+>> Line 266: <symbol id="i-radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="4.5"/><path d="M12 12
+   Line 267: <symbol id="i-doc" viewBox="0 0 24 24"><path d="M6 3h9l4 4v14H6z M14 3v5h5 M9 13h6 M9 17h6"/></symbol>
+   Line 268: <symbol id="i-wallet" viewBox="0 0 24 24"><path d="M3 7h17v13H3z M3 7l3-3h12v3 M16 13.5h2"/></symbol>
+   Line 269: <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 16V11a6 6 0 0 1 12 0v5l2 2H4z M10 21h4"/></symbol>
+
+--- Line 344 ---
+   Line 341:     <tr><td><b>v5</b></td><td>Açýlýr/kapanýr ikon menü, gizli menü fikri</td><td><span class="rozet">Geçti</span></td></
+   Line 342:     <tr><td><b>v6</b></td><td>Tek menü, sað üst paket rozeti + profil, push <span class="mono">193e0880</span></td><td><
+   Line 343:     <tr><td><b>v7</b></td><td>3 grup menü, BETA iþareti, sade üst çubuk, baðlantý haritasý (<span class="mono">37344d38<
+>> Line 344:     <tr><td><b>v8</b></td><td>Yazý sistemi ölçülü; arama saðda ve büyük; sol ikon þeridi (dil dahil); ilk sað üst ikon =
+   Line 345:     <tr><td><b>v9</b></td><td>Eþleþme sað üst + ayrý sayfa, geniþ kart, Fýrsatlar grafiði, Dedektif (kanca seti), Trend 
+   Line 346:     <tr><td><b>v10</b></td><td>KPI kartlarý ilk sýrada (hakem sorusu: düzen anahtarý ile iki hali görülür); Fýrsatlar gr
+   Line 347:     <tr><td><b>v11</b></td><td>Üst çubuk 68 px, sað üst ferahlatýldý; logo (iþaret) ile “HUGÝN Ticari Radar” ayrý; “Pane
+
+--- Line 346 ---
+   Line 343:     <tr><td><b>v7</b></td><td>3 grup menü, BETA iþareti, sade üst çubuk, baðlantý haritasý (<span class="mono">37344d38<
+   Line 344:     <tr><td><b>v8</b></td><td>Yazý sistemi ölçülü; arama saðda ve büyük; sol ikon þeridi (dil dahil); ilk sað üst ikon =
+   Line 345:     <tr><td><b>v9</b></td><td>Eþleþme sað üst + ayrý sayfa, geniþ kart, Fýrsatlar grafiði, Dedektif (kanca seti), Trend 
+>> Line 346:     <tr><td><b>v10</b></td><td>KPI kartlarý ilk sýrada (hakem sorusu: düzen anahtarý ile iki hali görülür); Fýrsatlar gr
+   Line 347:     <tr><td><b>v11</b></td><td>Üst çubuk 68 px, sað üst ferahlatýldý; logo (iþaret) ile “HUGÝN Ticari Radar” ayrý; “Pane
+   Line 348:   </table></div>
+   Line 349: 
+
+--- Line 347 ---
+   Line 344:     <tr><td><b>v8</b></td><td>Yazý sistemi ölçülü; arama saðda ve büyük; sol ikon þeridi (dil dahil); ilk sað üst ikon =
+   Line 345:     <tr><td><b>v9</b></td><td>Eþleþme sað üst + ayrý sayfa, geniþ kart, Fýrsatlar grafiði, Dedektif (kanca seti), Trend 
+   Line 346:     <tr><td><b>v10</b></td><td>KPI kartlarý ilk sýrada (hakem sorusu: düzen anahtarý ile iki hali görülür); Fýrsatlar gr
+>> Line 347:     <tr><td><b>v11</b></td><td>Üst çubuk 68 px, sað üst ferahlatýldý; logo (iþaret) ile “HUGÝN Ticari Radar” ayrý; “Pane
+   Line 348:   </table></div>
+   Line 349: 
+   Line 350:   <h2>1. Çalýþan çizim</h2>
+
+--- Line 356 ---
+   Line 353:   <div class="kabuk dar" id="kabuk">
+   Line 354:     <div class="ustbar">
+   Line 355:       <button class="ikon-btn" id="yan-toggle" aria-label="Menüyü geniþlet veya daralt"><svg class="ic"><use href="#i-pn
+>> Line 356:       <div class="logo" aria-label="HUGÝN Ticari Radar"><i aria-hidden="true">H</i><div class="marka"><b>HUGÝN</b><span>
+   Line 357:       <div class="ara" role="search"><svg class="ic"><use href="#i-search"/></svg><span>Þirket, sektör veya VKN ara</spa
+   Line 358:       <button class="ikon-btn" id="uyari-btn" aria-label="Uyarýlar, 3 yeni" aria-expanded="false"><svg class="ic"><use h
+   Line 359:       <button class="ikon-btn" id="esles-btn" aria-label="Akýllý Eþleþme" aria-expanded="false"><svg class="ic"><use hre
+
+--- Line 378 ---
+   Line 375:         <div class="uy" style="--c:var(--info)"><span class="rozet-ic"><svg class="ic"><use href="#i-info"/></svg></span
+   Line 376:         <div class="uy" style="--c:var(--warn)"><span class="rozet-ic"><svg class="ic"><use href="#i-clock"/></svg></spa
+   Line 377:       </div>
+>> Line 378:       <div class="p-alt"><button class="btn kucuk">Tümünü okundu say</button><a href="#" data-git="radar" style="color:v
+   Line 379:     </div>
+   Line 380:     <div class="pop" id="mimir-pop" role="dialog" aria-label="Mimir">
+   Line 381:       <div class="p-bas"><svg class="ic"><use href="#i-mimir"/></svg>Mimir <span class="beta" style="margin-left:6px">Be
+
+--- Line 482 ---
+   Line 479:               </div>
+   Line 480:             </section>
+   Line 481: 
+>> Line 482:             <section class="wg k4" id="w-radar">
+   Line 483:               <div class="wg-bas"><h3><svg class="ic"><use href="#i-radar"/></svg>Radarým<span class="ornek">Örnek</span
+   Line 484:               <div class="wg-gov">
+   Line 485:                 <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+
+--- Line 483 ---
+   Line 480:             </section>
+   Line 481: 
+   Line 482:             <section class="wg k4" id="w-radar">
+>> Line 483:               <div class="wg-bas"><h3><svg class="ic"><use href="#i-radar"/></svg>Radarým<span class="ornek">Örnek</span
+   Line 484:               <div class="wg-gov">
+   Line 485:                 <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+   Line 486:                   <div class="radar"><button class="nok" data-f="BETA TEKSTÝL" data-t="yeni" aria-label="BETA TEKSTÝL, u
+
+--- Line 486 ---
+   Line 483:               <div class="wg-bas"><h3><svg class="ic"><use href="#i-radar"/></svg>Radarým<span class="ornek">Örnek</span
+   Line 484:               <div class="wg-gov">
+   Line 485:                 <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+>> Line 486:                   <div class="radar"><button class="nok" data-f="BETA TEKSTÝL" data-t="yeni" aria-label="BETA TEKSTÝL, u
+   Line 487:                   <div style="flex:1;min-width:0">
+   Line 488:                     <div class="mono" style="color:var(--t1);font-size:14px;white-space:nowrap">4/10 izleniyor</div>
+   Line 489:                     <div class="cubuk" style="margin:6px 0"><i style="width:40%"></i></div>
+
+--- Line 500 ---
+   Line 497:                   <div class="chip" style="--c:var(--info)"><svg class="ic"><use href="#i-clock"/></svg><div><b>08:10</b
+   Line 498:                 </div>
+   Line 499:                 <svg viewBox="0 0 300 36" width="100%" height="36" role="img" aria-label="Örnek 7 günlük sinyal çizgisi"
+>> Line 500:                 <div class="seg" id="rd-sz" role="group" aria-label="Radar süzgeci" style="margin:8px 0 4px"><button ari
+   Line 501:                 <div class="satir" data-t="risk"><svg class="ic" style="color:var(--risk)"><use href="#i-alert"/></svg><
+   Line 502:                 <div class="satir" data-t="yeni"><svg class="ic" style="color:var(--info)"><use href="#i-info"/></svg><d
+   Line 503:                 <div class="gdetay" id="radar-detay">Noktaya ya da satýra týkla: firma ve sinyal özeti burada.</div>
+
+--- Line 503 ---
+   Line 500:                 <div class="seg" id="rd-sz" role="group" aria-label="Radar süzgeci" style="margin:8px 0 4px"><button ari
+   Line 501:                 <div class="satir" data-t="risk"><svg class="ic" style="color:var(--risk)"><use href="#i-alert"/></svg><
+   Line 502:                 <div class="satir" data-t="yeni"><svg class="ic" style="color:var(--info)"><use href="#i-info"/></svg><d
+>> Line 503:                 <div class="gdetay" id="radar-detay">Noktaya ya da satýra týkla: firma ve sinyal özeti burada.</div>
+   Line 504:                 <div style="display:flex;gap:6px;margin-top:8px"><button class="btn kucuk" style="flex:1;justify-content
+   Line 505:               </div>
+   Line 506:             </section>
+
+--- Line 509 ---
+   Line 506:             </section>
+   Line 507: 
+   Line 508:             <section class="wg kpi k3" id="k-kredi" data-kpi="kredi" tabindex="0" role="button" aria-label="Kalan Kredi,
+>> Line 509:             <section class="wg kpi k3" id="k-radar" data-kpi="radar" tabindex="0" role="button" aria-label="Radardaki Þi
+   Line 510:             <section class="wg kpi k3" id="k-esles" data-kpi="esles" tabindex="0" role="button" aria-label="Yeni Eþleþme
+   Line 511:             <section class="wg kpi k3" id="k-uyari" data-kpi="uyari" tabindex="0" role="button" aria-label="Kapanan Uyar
+   Line 512: 
+
+--- Line 572 ---
+   Line 569:             <div class="bolum-bas"><h3>Pazarlama araþtýrmasý</h3><hr><span class="rozet mor"><svg class="ic"><use href="
+   Line 570: 
+   Line 571:             <section class="wg k4" id="w-satis">
+>> Line 572:               <div class="wg-bas"><h3><svg class="ic"><use href="#i-mega"/></svg>Satýþ Sinyali Radarý</h3></div>
+   Line 573:               <div class="wg-gov">
+   Line 574:                 <p style="margin:0 0 6px;font-size:12.5px">Kim sizden alabilir? <span class="ornek">Örnek</span></p>
+   Line 575:                 <div class="satir"><div class="ad"><b>ÖZ-KAR GIDA</b><small>yeni tesis açýldý</small></div><span class="
+
+--- Line 582 ---
+   Line 579:               </div>
+   Line 580:             </section>
+   Line 581:             <section class="wg k4" id="w-alis">
+>> Line 582:               <div class="wg-bas"><h3><svg class="ic"><use href="#i-cart"/></svg>Alýþ Sinyali Radarý</h3></div>
+   Line 583:               <div class="wg-gov">
+   Line 584:                 <p style="margin:0 0 6px;font-size:12.5px">Kimden alabilirsiniz? <span class="ornek">Örnek</span></p>
+   Line 585:                 <div class="satir"><div class="ad"><b>DEMÝR ÇELÝK A.Þ.</b><small>ham madde tedarikçisi</small></div><spa
+
+--- Line 648 ---
+   Line 645:               <div class="wg-bas"><h3><svg class="ic"><use href="#i-store"/></svg>Yakýnda: Pazar</h3></div>
+   Line 646:               <div class="wg-gov">
+   Line 647:                 <div class="satir"><svg class="ic"><use href="#i-store"/></svg><div class="ad"><b>Pazar Yeri</b><small>ü
+>> Line 648:                 <div class="satir"><svg class="ic"><use href="#i-recycle"/></svg><div class="ad"><b>Atýl Kapasite Radarý
+   Line 649:                 <button class="btn kucuk" id="haber-ver" style="margin-top:8px">Haber ver bana</button>
+   Line 650:               </div>
+   Line 651:             </section>
+
+--- Line 787 ---
+   Line 784:     <tr><td>Uyarý (ilk sað üst)</td><td><svg class="ic"><use href="#i-bellr"/></svg></td><td class="mono">bell-ring</td>
+   Line 785:     <tr><td>Mimir</td><td><svg class="ic"><use href="#i-mimir"/></svg></td><td>özel SVG (göz + ýþýn)</td><td class="mono
+   Line 786:     <tr><td>Dil</td><td><svg class="ic"><use href="#i-lang"/></svg></td><td class="mono">languages</td><td class="mono">
+>> Line 787:     <tr><td>Radar</td><td><svg class="ic"><use href="#i-radar"/></svg></td><td class="mono">radar</td><td class="mono">r
+   Line 788:     <tr><td>Eþleþme</td><td><svg class="ic"><use href="#i-hand"/></svg></td><td class="mono">handshake</td><td class="mo
+   Line 789:     <tr><td>Satýþ / Alýþ sinyali</td><td><svg class="ic"><use href="#i-mega"/></svg> <svg class="ic"><use href="#i-cart"
+   Line 790:     <tr><td>Pazar Yeri / Atýl kapasite</td><td><svg class="ic"><use href="#i-store"/></svg> <svg class="ic"><use href="#
+
+--- Line 796 ---
+   Line 793:   <div class="not uyari"><b>Öz-eleþtiri:</b> Çizimdeki ikon biçimi lucide ile ayný deðil; PO “doðru ikon” derken adý deð
+   Line 794: 
+   Line 795:   <h2>4. Yazý sistemi (ölçülü, renk sistemi gibi)</h2>
+>> Line 796:   <div class="not"><b>Kaynak:</b> <span class="mono">yedekler/osint_radar_font_rehberi.md</span> Kombinasyon A, baþlýk f
+   Line 797:   <div class="bol">
+Traceback (most recent call last):
+  File "c:\Huginn Data Projesi\analyze2.py", line 17, in <module>
+    print(f"{marker}Line {j}: {lines[j][:120]}")
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\encodings\cp1254.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2192' in position 42: character maps to <undefined>

@@ -1,0 +1,62 @@
+........................................................................ [  1%]
+.........................................F.............................. [  2%]
+.....................F.................................................. [  3%]
+........................................................................ [  5%]
+........................................................................ [  6%]
+..................................................F.FFF..FF............. [  7%]
+.................s...................................................... [  8%]
+...........................................................F............ [ 10%]
+........................................................................ [ 11%]
+........................................................................ [ 12%]
+...............................................F..........F............. [ 13%]
+........................................................................ [ 15%]
+........................................................................ [ 16%]
+.......................FF............................................... [ 17%]
+.....................................F.................................. [ 19%]
+........................................................................ [ 20%]
+........................................................................ [ 21%]
+.................................ssssss.s............................... [ 22%]
+........................................................................ [ 24%]
+........................................................................ [ 25%]
+..........................
+============================== warnings summary ===============================
+tests\test_secrets_rotation.py:174
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\test_secrets_rotation.py:174: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration
+
+tests/test_mcp_transport.py::TestHTTPTransport::test_http_call_submit_evidence_batch
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\pydantic_settings\sources\utils.py:47: IncompleteFieldDefinitionWarning: Field 'lifespan' has an incomplete definition: its annotation contains an unresolved forward reference, so settings sources may fail to correctly resolve its value. Call `model_rebuild()` on the model where the field is defined, once all the referenced types are defined.
+    warnings.warn(
+
+tests/test_pano_ssot_kapisi.py::test_negatif_kontrol_sonrasi_temiz
+tests/test_pano_ssot_kapisi.py::test_negatif_kontrol_mandali_kirarlik
+tests/test_pano_ssot_kapisi.py::test_pano_dogrudan_yazilmaz
+  C:\Huginn Data Projesi\Huginn Data Insights\scripts\fix_emails.py:62: SyntaxWarning: invalid escape sequence '\.'
+    COUNT(*) FILTER (WHERE primary_email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') as valid,
+
+tests/test_pano_ssot_kapisi.py::test_negatif_kontrol_sonrasi_temiz
+tests/test_pano_ssot_kapisi.py::test_negatif_kontrol_mandali_kirarlik
+tests/test_pano_ssot_kapisi.py::test_pano_dogrudan_yazilmaz
+  C:\Huginn Data Projesi\Huginn Data Insights\scripts\fix_emails.py:77: SyntaxWarning: invalid escape sequence '\.'
+    COUNT(*) FILTER (WHERE primary_email IS NULL OR primary_email !~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') as email_issue,
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_pano_denetim_tetik.py::test_canli_panoda_sessiz_is_emri_yok
+FAILED tests/test_bulgu_defteri.py::test_gercek_defter_kurallara_uyuyor - Ass...
+FAILED tests/test_admin_kpi_gosterge_onarim.py::test_hepsi_null_ise_grafik_cizilmez_uyari_yazilir
+FAILED tests/test_admin_kpi_gosterge_onarim.py::test_bolme_dogru_sayi_donduruyor
+FAILED tests/test_admin_kpi_gosterge_onarim.py::test_bolme_ort_skor_kolonu_yoksa_ayirmaz
+FAILED tests/test_admin_kpi_gosterge_onarim.py::test_null_gun_sayisi_captionda_yaziyor
+FAILED tests/test_admin_kpi_gosterge_onarim.py::test_null_satir_grafikten_dusuyor
+FAILED tests/test_admin_kpi_gosterge_onarim.py::test_bolme_bos_df - Attribute...
+FAILED tests/test_naming_audit.py::test_acik_gorevlerde_yeni_d57_ihlali_yok
+FAILED tests/test_pano_ssot_kapisi.py::test_negatif_kontrol_sonrasi_temiz - a...
+FAILED tests/test_pano_ssot_kapisi.py::test_pano_dogrudan_yazilmaz - Assertio...
+FAILED tests/test_charts_kategori_mandali.py::test_kullanilan_her_kategori_tanimli
+FAILED tests/test_charts_kategori_mandali.py::test_kpi_css_onbellegi_tema_duyarli
+FAILED tests/test_admin_dashboard_yayilim.py::test_kilitli_dosyalarda_st_metric_kalmadi
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KeyboardInterrupt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\threading.py:355: KeyboardInterrupt
+(to show a full traceback on KeyboardInterrupt use --full-trace)
+14 failed, 1444 passed, 8 skipped, 8 warnings in 116.89s (0:01:56)

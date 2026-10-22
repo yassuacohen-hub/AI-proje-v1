@@ -1,0 +1,66 @@
+........................................................................ [ 66%]
+..............F...................FF                                     [100%]
+================================== FAILURES ===================================
+________________________ test_kokte_izinsiz_dizin_yok _________________________
+
+    def test_kokte_izinsiz_dizin_yok() -> None:
+        """Kural 2: listede olmayan dizin koke ait degil.
+    
+        Arsiv/gecici klasorler (_ARSIV_*, _trash) bilinmeyen degil, bilinen
+        gecici alandir: sayilir ama ihlal saymaz.
+        """
+        izinsiz = {
+            ad
+            for ad in _kok_dizinleri()
+            if ad not in IZINLI_DIZINLER and not ad.startswith(("_", "."))
+        }
+>       assert not izinsiz, (
+            f"D-221 Kural 2 ihlali: kokte izinsiz dizin -> {sorted(izinsiz)}. "
+            "Yeni kok girdisi KAHIN karari ister."
+        )
+E       AssertionError: D-221 Kural 2 ihlali: kokte izinsiz dizin -> ['-p', 'data', 'docs', 'skills']. Yeni kok girdisi KAHIN karari ister.
+E       assert not {'-p', 'data', 'docs', 'skills'}
+
+tests\test_kok_izin_listesi.py:76: AssertionError
+__________________ test_acik_gorevlerde_yeni_d57_ihlali_yok ___________________
+
+    def test_acik_gorevlerde_yeni_d57_ihlali_yok() -> None:
+        ihlal = {}
+        for g in _acik_gorevler():
+            tid = g.get("task_id", "")
+            sebep = gorev_at._d57_dogrula(tid, g.get("baslik", ""), g.get("sahip", ""))
+            if sebep and tid not in MUAF:
+                ihlal[tid] = sebep
+>       assert not ihlal, f"acik gorevlerde D-57 ihlali: {ihlal}"
+E       AssertionError: acik gorevlerde D-57 ihlali: {'G-0-RISK-MOTOR-ENTITY-GRAPH': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'SCRAPE-006-QUALITY-AUDIT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'SCRAPE-007-FINAL-REPORT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'DOC-BRIEF-SABLON-KIRMIZI-01': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'VERI-RAPIDAPI-OSINT-ISTEMCI-01': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'UI-ADMIN-PANEL-DENETIM-ALTYAPI': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'UI-ADMIN-PANEL-DASHBOARD-YAYILIM': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)'}
+E       assert not {'G-0-RISK-MOTOR-ENTITY-GRAPH': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayar...or: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', ...}
+
+tests\test_naming_audit.py:63: AssertionError
+___________________________ test_guard_bom_ratchet ____________________________
+
+denetim = <module 'kodlama_denetim' from 'C:\\Huginn Data Projesi\\Huginn Data Insights\\scripts\\kodlama_denetim.py'>
+
+    def test_guard_bom_ratchet(denetim) -> None:
+        """Allowlist disinda UTF-8 BOM -> kirmizi (ratchet: liste asagi gitmeli)."""
+        mevcut_bom = _kapsam_bulgulari(denetim).get("utf8_bom", [])
+        allowlist: list[str] = []
+        if ALLOWLIST_YOLU.is_file():
+            veri = json.loads(ALLOWLIST_YOLU.read_text(encoding="utf-8"))
+            allowlist = sorted(veri.get("bom", []))
+        disinda = sorted(set(mevcut_bom) - set(allowlist))
+>       assert disinda == [], (
+            "Allowlist disinda UTF-8 BOM'lu dosyalar bulundu (ratchet ihlali): "
+            + ", ".join(disinda)
+        )
+E       AssertionError: Allowlist disinda UTF-8 BOM'lu dosyalar bulundu (ratchet ihlali): scripts/dashboard_perf_monitor.py, scripts/p44_benchmark.py, scripts/p44_final_benchmark.py, src/company_master/dashboard/__init__.py, src/company_master/dashboard/perf_monitor.py
+E       assert ['scripts/das...f_monitor.py'] == []
+E         
+E         Left contains 5 more items, first extra item: 'scripts/dashboard_perf_monitor.py'
+E         Use -v to get more diff
+
+tests\test_kodlama_denetim.py:169: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_kok_izin_listesi.py::test_kokte_izinsiz_dizin_yok - Asserti...
+FAILED tests/test_naming_audit.py::test_acik_gorevlerde_yeni_d57_ihlali_yok
+FAILED tests/test_kodlama_denetim.py::test_guard_bom_ratchet - AssertionError...
+3 failed, 105 passed in 10.12s

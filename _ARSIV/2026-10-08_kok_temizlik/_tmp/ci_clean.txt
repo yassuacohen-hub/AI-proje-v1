@@ -1,0 +1,420 @@
+....FFF........F....................F............F...FF.F........F...... [ 16%]
+.........................F...FF.....ss......F...........F...........F... [ 33%]
+...................................................F.................... [ 49%]
+...........s.......................................s.................... [ 66%]
+........................................................................ [ 83%]
+........................................................................ [ 99%]
+.                                                                        [100%]
+================================== FAILURES ===================================
+__________________ test_container_cerceve_kategori_rengi_yok __________________
+
+    def test_container_cerceve_kategori_rengi_yok() -> None:
+        """K3-10h madde 4: tüm bordered container'lar tek global kuralla kalınlaşır;
+        kategori rengi (KATEGORI_RENK) YOK, yalnız border-strong token'ı kullanılır."""
+        assert 'div[data-testid="stVerticalBlockBorderWrapper"]' in _CONTAINER_CSS
+>       assert "border:2px solid var(--hg-color-border-strong)" in _CONTAINER_CSS
+E       assert 'border:2px solid var(--hg-color-border-strong)' in '\ndiv[data-testid="stVerticalBlockBorderWrapper"]{\nborder:2px solid var(--hg-color-border-interactive)!important;\nbackground:var(--hg-color-surface-2)!important}\n'
+
+tests\test_ui_modal_stil.py:40: AssertionError
+_________________ test_dusurulen_kolonlar_uretim_kodunda_yok __________________
+
+    def test_dusurulen_kolonlar_uretim_kodunda_yok():
+        desen = re.compile(r"\b(" + "|".join(_DUSENLER) + r")\b")
+        suclular = []
+        for p in _uretim_dosyalari():
+            yol = str(p.relative_to(KOK))
+            if any(m in yol for m in _MUAF):
+                continue
+            metin = p.read_text("utf-8", errors="replace")
+            for no, satir in enumerate(metin.splitlines(), 1):
+                if satir.lstrip().startswith(("#", "--", "//")):
+                    continue  # D-268 aciklama yorumu ihlal degil
+                if desen.search(satir):
+                    suclular.append(f"{yol}:{no}")
+>       assert not suclular, (
+            "Goc 0036'da dusurulen kolon uretim koduna geri sizdi "
+            "(DB'de yok -> calisma aninda UndefinedColumn): " + ", ".join(suclular)
+        )
+E       AssertionError: Goc 0036'da dusurulen kolon uretim koduna geri sizdi (DB'de yok -> calisma aninda UndefinedColumn): scripts\yasu_canli_olcum_d260.py:47, scripts\yasu_canli_olcum_d260.py:48
+E       assert not ['scripts\\yasu_canli_olcum_d260.py:47', 'scripts\\yasu_canli_olcum_d260.py:48']
+
+tests\test_dusurulen_kolon.py:57: AssertionError
+__________________ test_acik_gorevlerde_yeni_d57_ihlali_yok ___________________
+
+    def test_acik_gorevlerde_yeni_d57_ihlali_yok() -> None:
+        ihlal = {}
+        for g in _acik_gorevler():
+            tid = g.get("task_id", "")
+            sebep = gorev_at._d57_dogrula(tid, g.get("baslik", ""), g.get("sahip", ""))
+            if sebep and tid not in MUAF:
+                ihlal[tid] = sebep
+>       assert not ihlal, f"acik gorevlerde D-57 ihlali: {ihlal}"
+E       AssertionError: acik gorevlerde D-57 ihlali: {'SCRAPE-006-QUALITY-AUDIT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'SCRAPE-007-FINAL-REPORT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'DOC-BRIEF-SABLON-KIRMIZI-01': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'VERI-RAPIDAPI-OSINT-ISTEMCI-01': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'UI-ADMIN-PANEL-DENETIM-ALTYAPI': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', 'UI-ADMIN-PANEL-DASHBOARD-YAYILIM': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)'}
+E       assert not {'SCRAPE-006-QUALITY-AUDIT': 'baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar...or: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)', ...}
+
+tests\test_naming_audit.py:63: AssertionError
+___________________ test_growth_hiring_surge_3_posting_30d ____________________
+
+    def test_growth_hiring_surge_3_posting_30d():
+        analyzer = _make_analyzer()
+        postings = [
+            _make_posting(posted_at=NOW - timedelta(days=5), title="Engineer 1"),
+            _make_posting(posted_at=NOW - timedelta(days=3), title="Engineer 2"),
+            _make_posting(posted_at=NOW - timedelta(days=1), title="Engineer 3"),
+        ]
+        sig = analyzer._detect_growth(postings, CID)
+>       assert sig is not None
+E       assert None is not None
+
+tests\test_job_intelligence_analyzer.py:97: AssertionError
+______________ test_signal_analyzer_analyze_with_mocked_postings ______________
+
+    def test_signal_analyzer_analyze_with_mocked_postings():
+        analyzer = _make_analyzer()
+        postings = [
+            _make_posting(
+                posted_at=NOW - timedelta(days=2),
+                title="CTO",
+                department="executive",
+                seniority_level="c-level",
+                description="Kubernetes and AWS",
+                technologies=["kubernetes", "aws"],
+                location_city="Istanbul",
+            ),
+            _make_posting(
+                posted_at=NOW - timedelta(days=1),
+                title="VP Engineering",
+                department="engineering",
+                seniority_level="vp",
+                location_city="Ankara",
+            ),
+            _make_posting(
+                posted_at=NOW - timedelta(days=3),
+                title="Data Scientist",
+                department="data",
+                seniority_level="senior",
+                location_city="Istanbul",
+            ),
+        ]
+    
+        with patch.object(analyzer, "_load_job_postings", return_value=postings):
+            with patch.object(analyzer, "_load_company_tech_profile", return_value={}):
+                with patch.object(analyzer, "_load_existing_locations", return_value=set()):
+                    with patch.object(
+                        analyzer, "_load_existing_departments", return_value=set()
+                    ):
+                        with patch.object(analyzer, "_save_signals") as mock_save:
+                            mock_save.return_value = 0
+                            result = analyzer.analyze()
+    
+        assert result["companies_processed"] == 1
+        assert result["signals_generated"] == 0
+        assert mock_save.call_count == 1
+        saved_signals = mock_save.call_args[0][0]
+        sig_types = {s["signal_type"] for s in saved_signals}
+>       assert "growth" in sig_types
+E       AssertionError: assert 'growth' in {'geo_expansion', 'investment', 'org_change', 'tech_transformation'}
+
+tests\test_job_intelligence_analyzer.py:408: AssertionError
+________________________ test_embedder_client_uyuzsuz _________________________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000002764DDFCA70>
+
+    def test_embedder_client_uyuzsuz(monkeypatch):
+        monkeypatch.setattr("src.company_master.vector.embedder.get_client", None, raising=False)
+        embedder = Embedder(client=None, batch_size=2, max_retries=1, retry_delay_s=0)
+>       with pytest.raises(RuntimeError, match="kurulu degil"):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: Regex pattern did not match.
+E         Expected regex: 'kurulu degil'
+E         Actual message: "Ne EVREN_API_KEY ne 9Router kurulu. .env'e evren_llm_* veya NINEROUTER_* tanimla."
+
+tests\vector\test_embedder.py:109: AssertionError
+____________________ test_kural4_yasak_ad_kalibi_artmiyor _____________________
+
+    def test_kural4_yasak_ad_kalibi_artmiyor() -> None:
+        ihlal = sorted(_bagil(p) for p in _kanonik_md() if YASAK_AD.search(p.stem))
+        # Mandal: D-220 anında 15 ihlal vardı. Geriye dönük düzeltmek değer üretmez;
+        # yeni ihlal girişi kapıda durur. Sayı yalnız küçülür.
+>       assert len(ihlal) <= 15, (
+            f"D-220 Kural 4: yasak ad kalıbı {len(ihlal)} dosyada, üst sınır 15.\n"
+            f"Yeni ihlal: _eski/_yeni/_kopya/_final/_v2 yasak — git geçmişi bu işi yapar.\n"
+            + "\n".join(ihlal)
+        )
+E       AssertionError: D-220 Kural 4: yasak ad kalıbı 19 dosyada, üst sınır 15.
+E         Yeni ihlal: _eski/_yeni/_kopya/_final/_v2 yasak — git geçmişi bu işi yapar.
+E         ADIM8_FINAL_RAPOR.md
+E         AI proje v1/V10/03_mimari/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md
+E         AI proje v1/V10/04_karşılaştırmalar/01_v9_ile_karsilastirma.md
+E         data/orchestrator/ADIM_7_8_9_FINAL_OZET.md
+E         data/orchestrator/ALTYAPI-ODIN-MASKE-V3-01_rapor_2026-10-04_uretim.md
+E         data/orchestrator/ALTYAPI-VERI-GORUNURLUK-01_TAMAMLANDI_2026-09-24_FINAL.md
+E         data/orchestrator/GRAPH-FINAL-DOGRULA_rapor_2026-09-21.md
+E         data/orchestrator/PLAN_YENİ_AŞAMA_2026-09-23.md
+E         data/orchestrator/SPRINT-FINAL-METRIK-2026-09-21.md
+E         data/orchestrator/SPRINT-FINAL-OZET-2026-09-21.md
+E         data/orchestrator/VAULT-XREF-DUBLO-RAPOR-FINAL_2026-09-21_orkestrator.md
+E         docs/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md
+E         docs/plans/NAV-PLAN-01_v4.md
+E         plans/_arsiv_brief/brief_utku_DASH-UX-02a-v1.md
+E         plans/_arsiv_brief/brief_utku_DASH-UX-02a-v2.md
+E         plans/_arsiv_brief/brief_utku_DOC-ADMIN-V9-KUTUCUK-24.md
+E         plans/brief_utku_ALTYAPI-ODIN-MASKE-V3-01.md
+E         plans/brief_utku_ALTYAPI-ODIN-MASKE-V3-02.md
+E         salih_v4_arsiv.md
+E       assert 19 <= 15
+E        +  where 19 = len(['ADIM8_FINAL_RAPOR.md', 'AI proje v1/V10/03_mimari/HUGINN_V10_PLAN_NETLESTIRME_2026-09-18.md', 'AI proje v1/V10/04_ka...-V3-01_rapor_2026-10-04_uretim.md', 'data/orchestrator/ALTYAPI-VERI-GORUNURLUK-01_TAMAMLANDI_2026-09-24_FINAL.md', ...])
+
+tests\test_dokuman_politikasi.py:100: AssertionError
+_______________________ test_d272_borc_defteri_eksiksiz _______________________
+
+    def test_d272_borc_defteri_eksiksiz() -> None:
+        """D-272: AGENTS.md'de adı geçen her borç kimliği defterde yazılı olmalı.
+    
+        Mandalın yönü tek: AGENTS.md → defter. Tersi (defterde olup AGENTS.md'de
+        olmayan) kontrol edilmez, çünkü kapanan borcun D-kaydı silinmez; defter
+        AGENTS.md'nin üst kümesi olamaz ama alt kümesi de olmamalı.
+    
+        D-270 dersi uygulandı: kimlikler defterde **sabit dize** olarak durur,
+        parçadan kurulmaz; iki tarafta aynı BORC_KIMLIK regexi tarar.
+        """
+        defter = KOK / "docs" / "BORC_DEFTERI.md"
+        assert defter.exists(), f"borç defteri yok: {defter}"
+        yazili = set(BORC_KIMLIK.findall(defter.read_text(encoding="utf-8")))
+        eksik = sorted(_borc_kimlikleri() - yazili)
+>       assert not eksik, (
+            f"AGENTS.md'de adı geçip docs/BORC_DEFTERI.md'de olmayan {len(eksik)} kimlik: "
+            f"{eksik}. Borç kapatan/açan D-kaydı aynı turda defteri de güncellemeli."
+        )
+E       AssertionError: AGENTS.md'de adı geçip docs/BORC_DEFTERI.md'de olmayan 2 kimlik: ['BORC-CHAT-TEK-KANAL-01', 'VERI-RAG-KORPUS-01']. Borç kapatan/açan D-kaydı aynı turda defteri de güncellemeli.
+E       assert not ['BORC-CHAT-TEK-KANAL-01', 'VERI-RAG-KORPUS-01']
+
+tests\test_dokuman_politikasi.py:147: AssertionError
+______________________ test_d320_ajan_context_dosyalari _______________________
+
+    def test_d320_ajan_context_dosyalari() -> None:
+        """Her ajanin hafiza dosyasi: KALDIĞIM YER + wikilink + 400 satir tavani.
+    
+        D-320 DUZELTMESI: onceki test 200 satir ve Oz-eleştiri'yi tavana sayiyordu.
+        Iki yanlis vardi:
+          1) Tavan 2026-10-02'de Uretim Sahibi karariyla 400'e cikarildi (D-219 Ek).
+          2) §Öz-eleştiri KALICI ve tavana DAHIL DEGIL; ajanin ogrendigi ders
+             arsiv rotasyonuyla silinmez. Yanlis olcum, ajani dogru davranisindan
+             dolayi cezalandirir (ölçüm yaniltmaz, D-260).
+        """
+        ajanlar = ("ihsan", "utku", "yasu", "salih")
+        for a in ajanlar:
+            p = KOK / f"{a}_project_context.md"
+            assert p.is_file(), f"D-219: {p.name} yok — her ajanin hafiza dosyasi zorunlu"
+            t = p.read_text(encoding="utf-8")
+            assert "## KALDIĞIM YER" in t, f"D-219: {p.name} §KALDIĞIM YER blogu yok"
+>           assert "## Ilgili Nodlar" in t, f"D-218: {p.name} §Ilgili Nodlar yok"
+E           AssertionError: D-218: salih_project_context.md §Ilgili Nodlar yok
+E           assert '## Ilgili Nodlar' in "# salih_project_context.md — Oturum Hafızası (D-219)\n\nŞablon: [[Huginn Data Insights/_ajan_context_sablon]] · Tavan...inen Açıklar (kapsam dışı backlog)\n\n- Tam suite 20 failed — görev `TEST-BACKLOG-20` (utku'da)\n\n## Sık Komutlar\n\n"
+
+tests\test_dokuman_politikasi.py:199: AssertionError
+_________________________ test_hafiza_tavani_asmiyor __________________________
+
+    def test_hafiza_tavani_asmiyor() -> None:
+        """Ajan hafizasi 200 satiri gecmemeli (tavan karari AGENTS.md'de)."""
+        n = len(_oku(HAFIZA).splitlines())
+>       assert n <= 200, "hafiza %d satir, tavan 200" % n
+E       AssertionError: hafiza 213 satir, tavan 200
+E       assert 213 <= 200
+
+tests\test_d309_ders_kapisi.py:139: AssertionError
+_____________________ test_gercek_defter_kurallara_uyuyor _____________________
+
+bd = <module 'bulgu_defteri' from 'C:\\Huginn Data Projesi\\_tmp\\wt_ci\\scripts\\bulgu_defteri.py'>
+
+    def test_gercek_defter_kurallara_uyuyor(bd):
+        """Diskteki kanonik defterde bozuk satir olmamali."""
+        if not bd.DEFLER.exists():
+            pytest.skip("defter henuz yok")
+        veri = bd._veri_satirlari(bd.DEFLER)
+        assert veri, "defter bos"
+        for s in veri:
+            a = [x.strip() for x in s.split("|")]
+>           assert len(a) == 6, f"6 alan beklenir: {s[:70]}"
+E           AssertionError: 6 alan beklenir: 2026-10-03 | SCRAPE-005-KAZIMA-DOCKER-INTEGRATION | utku | COZULDU | D
+E           assert 7 == 6
+E            +  where 7 = len(['2026-10-03', 'SCRAPE-005-KAZIMA-DOCKER-INTEGRATION', 'utku', 'COZULDU', "DURUM GERCEGI - [3/4] COZULDU, TUM KALEMLER..._data.py ile tek yola alinacak - bunlar VERI-INGEST-ASO-GLOB-01'in devaminda, SCRAPE-005 teslimini blokelemiyor.", ...])
+
+tests\test_bulgu_defteri.py:269: AssertionError
+________________________ test_aktif_gorevler_d57_gecer ________________________
+
+    def test_aktif_gorevler_d57_gecer():
+        """Panodaki her aktif kayit giris kapisi dogrulamasini gecmeli."""
+        ga = _gorev_at()
+        ihlaller = []
+        for k in _aktif_kayitlar():
+            # Pano kaydinda ajan alani "sahip" adiyla tutulur (D-57 sahip zorunlu).
+            hata = ga._d57_dogrula(k.get("task_id", ""), k.get("baslik", ""), k.get("sahip", ""))
+            if hata:
+                ihlaller.append(f"{k.get('task_id')}: {hata}")
+>       assert not ihlaller, "aktif panoda D-57 ihlali:\n  " + "\n  ".join(ihlaller)
+E       AssertionError: aktif panoda D-57 ihlali:
+E           SCRAPE-006-QUALITY-AUDIT: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E           SCRAPE-007-FINAL-REPORT: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E           DOC-BRIEF-SABLON-KIRMIZI-01: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E           VERI-RAPIDAPI-OSINT-ISTEMCI-01: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E           UI-ADMIN-PANEL-DENETIM-ALTYAPI: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E           UI-ADMIN-PANEL-DASHBOARD-YAYILIM: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)
+E           ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)
+E       assert not ['SCRAPE-006-QUALITY-AUDIT: baslik D-57 kalibina uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar s...uymuyor: [ALAN] FIIL + NESNE -> CIKTI (SURE)\n  ornek: [UI] Ayarlar sayfasini yaz -> admin_kullanici_ayarlari.py (2s)']
+
+tests\test_pano_d57_kalici.py:54: AssertionError
+___________________________ test_alan_oneki_kanonik ___________________________
+
+    def test_alan_oneki_kanonik():
+        """task_id on eki gorev_at.ALANLAR icinde olmali (SEMA-01 hatasinin mandali)."""
+        ga = _gorev_at()
+        yabanci = [
+            k.get("task_id")
+            for k in _aktif_kayitlar()
+            if str(k.get("task_id", "")).split("-")[0] not in ga.ALANLAR
+        ]
+>       assert not yabanci, (
+            f"kanonik olmayan ALAN oneki: {yabanci}; izinli: {', '.join(ga.ALANLAR)}"
+        )
+E       AssertionError: kanonik olmayan ALAN oneki: ['SCRAPE-006-QUALITY-AUDIT', 'SCRAPE-007-FINAL-REPORT']; izinli: UI, API, VERI, TEST, DOC, ALTYAPI, ORKESTRA
+E       assert not ['SCRAPE-006-QUALITY-AUDIT', 'SCRAPE-007-FINAL-REPORT']
+
+tests\test_pano_d57_kalici.py:65: AssertionError
+________________________ test_kokte_izinsiz_dizin_yok _________________________
+
+    def test_kokte_izinsiz_dizin_yok() -> None:
+        """Kural 2: listede olmayan dizin koke ait degil.
+    
+        Arsiv/gecici klasorler (_ARSIV_*, _trash) bilinmeyen degil, bilinen
+        gecici alandir: sayilir ama ihlal saymaz.
+        """
+        izinsiz = {
+            ad
+            for ad in _kok_dizinleri()
+            if ad not in IZINLI_DIZINLER and not ad.startswith(("_", "."))
+        }
+>       assert not izinsiz, (
+            f"D-221 Kural 2 ihlali: kokte izinsiz dizin -> {sorted(izinsiz)}. "
+            "Yeni kok girdisi KAHIN karari ister."
+        )
+E       AssertionError: D-221 Kural 2 ihlali: kokte izinsiz dizin -> ['wt_ci']. Yeni kok girdisi KAHIN karari ister.
+E       assert not {'wt_ci'}
+
+tests\test_kok_izin_listesi.py:76: AssertionError
+_______________________________ test_kok_sabit ________________________________
+
+    def test_kok_sabit() -> None:
+        """Kural 1: kok tasinmaz — 10.368 sabit yol buna bagli."""
+>       assert (KOK / "Huginn Data Insights").is_dir(), (
+            "Vault kokun altinda bulunamadi: kok tasinmis olabilir (D-221 Kural 1)."
+        )
+E       AssertionError: Vault kokun altinda bulunamadi: kok tasinmis olabilir (D-221 Kural 1).
+E       assert False
+E        +  where False = is_dir()
+E        +    where is_dir = (WindowsPath('C:/Huginn Data Projesi/_tmp') / 'Huginn Data Insights').is_dir
+
+tests\test_kok_izin_listesi.py:220: AssertionError
+___________________________ test_kok_denetimi_temiz ___________________________
+
+    def test_kok_denetimi_temiz() -> None:
+        """Regresyon kalkani: repo genelinde 0 ihlal (140 -> 0)."""
+        sonuc = md.tarama()
+>       assert sonuc["yasal_yazim"] == [], sonuc["yasal_yazim"][:5]
+E       AssertionError: ["C:\\Huginn Data Projesi\\_tmp\\wt_ci\\docs\\SAGLAYICI_OLCUMU_2026-10-03.md:64: 'Munin' -> Hesap: `yasua_Hugin_Munin`, plan **FREE**, aylık tavan 10 $, kullanılmış ≈ 0 $. Bu ay 2026-10-09'da sıfırlanır. Şimdilik"]
+E       assert ['C:\\Huginn ...ır. Şimdilik'] == []
+E         
+E         Left contains one more item: "C:\\Huginn Data Projesi\\_tmp\\wt_ci\\docs\\SAGLAYICI_OLCUMU_2026-10-03.md:64: 'Munin' -> Hesap: `yasua_Hugin_Munin`, plan **FREE**, aylık tavan 10 $, kullanılmış ≈ 0 $. Bu ay 2026-10-09'da sıfırlanır. Şimdilik"
+E         Use -v to get more diff
+
+tests\test_marka_denetim_muafiyet.py:68: AssertionError
+_________________ test_modul_import_edilebilir[admin_sistem] __________________
+
+modul = 'admin_sistem'
+
+    @pytest.mark.parametrize("modul", KAPSAM)
+    def test_modul_import_edilebilir(modul: str) -> None:
+>       mod = importlib.import_module(f"web_dashboard.tabs.{modul}")
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_admin_sekme_durum.py:123: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+<frozen importlib._bootstrap_external>:999: in exec_module
+    ???
+<frozen importlib._bootstrap>:488: in _call_with_frames_removed
+    ???
+web_dashboard\tabs\admin_sistem.py:23: in <module>
+    from web_dashboard.tabs.admin_api_katalog import render_api_katalog_tab
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    # -*- coding: utf-8 -*-
+    """UI-ADMIN-API-KATALOG-01: Tüm dış API'lerin tek bakışta kataloğu.
+    
+    PO talebi (2026-10-06): sadece RapidAPI değil, Huginn'in kullandığı TÜM
+    dış API'ler (OpenRouter, Groq, Telegram, Apify, GİB VKN + 10 RapidAPI
+    alt-servisi) tek sayfada görünsün; RapidAPI'ler kendi başlığı altında ayrı
+    gruplanıp gösterilsin. Her kayıt: ne için kullanıldığı + Aktif/Pasif durumu.
+    Veri kaynağı statik `data/orchestrator/api_katalog.json`.
+    
+    Option A verimlilik ölçümü: `company_master.engine.api_verimlilik.ozet()`
+    JSONL log'unu okur; hiçbir çağrı henüz loglanmadıysa boş döner (normal).
+    """
+    from __future__ import annotations
+    
+    import json
+    import sys
+    from pathlib import Path
+    from typing import Any
+    
+    import pandas as pd
+    import streamlit as st
+    
+    ROOT = Path(__file__).resolve().parent.parent.parent
+    sys.path.insert(0, str(ROOT / "src"))
+    
+>   from company_master.engine.api_verimlilik import ozet as _verimlilik_ozet  # noqa: E402
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   ModuleNotFoundError: No module named 'company_master.engine.api_verimlilik'
+
+web_dashboard\tabs\admin_api_katalog.py:26: ModuleNotFoundError
+---------------------------- Captured stderr call -----------------------------
+2026-10-08 23:25:54.847 WARNING streamlit.runtime.caching.cache_data_api: No runtime found, using MemoryCacheStorageManager
+2026-10-08 23:25:54.848 WARNING streamlit.runtime.caching.cache_data_api: No runtime found, using MemoryCacheStorageManager
+------------------------------ Captured log call ------------------------------
+WARNING  streamlit.runtime.caching.cache_data_api:cache_data_api.py:401 No runtime found, using MemoryCacheStorageManager
+WARNING  streamlit.runtime.caching.cache_data_api:cache_data_api.py:401 No runtime found, using MemoryCacheStorageManager
+=========================== short test summary info ===========================
+FAILED tests/test_ui_modal_stil.py::test_container_cerceve_kategori_rengi_yok
+FAILED tests/test_dusurulen_kolon.py::test_dusurulen_kolonlar_uretim_kodunda_yok
+FAILED tests/test_naming_audit.py::test_acik_gorevlerde_yeni_d57_ihlali_yok
+FAILED tests/test_job_intelligence_analyzer.py::test_growth_hiring_surge_3_posting_30d
+FAILED tests/test_job_intelligence_analyzer.py::test_signal_analyzer_analyze_with_mocked_postings
+FAILED tests/vector/test_embedder.py::test_embedder_client_uyuzsuz - Assertio...
+FAILED tests/test_dokuman_politikasi.py::test_kural4_yasak_ad_kalibi_artmiyor
+FAILED tests/test_dokuman_politikasi.py::test_d272_borc_defteri_eksiksiz - As...
+FAILED tests/test_dokuman_politikasi.py::test_d320_ajan_context_dosyalari - A...
+FAILED tests/test_d309_ders_kapisi.py::test_hafiza_tavani_asmiyor - Assertion...
+FAILED tests/test_bulgu_defteri.py::test_gercek_defter_kurallara_uyuyor - Ass...
+FAILED tests/test_pano_d57_kalici.py::test_aktif_gorevler_d57_gecer - Asserti...
+FAILED tests/test_pano_d57_kalici.py::test_alan_oneki_kanonik - AssertionErro...
+FAILED tests/test_kok_izin_listesi.py::test_kokte_izinsiz_dizin_yok - Asserti...
+FAILED tests/test_kok_izin_listesi.py::test_kok_sabit - AssertionError: Vault...
+FAILED tests/test_marka_denetim_muafiyet.py::test_kok_denetimi_temiz - Assert...
+FAILED tests/test_admin_sekme_durum.py::test_modul_import_edilebilir[admin_sistem]
+17 failed, 412 passed, 4 skipped in 28.94s

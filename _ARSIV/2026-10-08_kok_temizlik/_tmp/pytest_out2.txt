@@ -1,0 +1,32 @@
+............FF                                                           [100%]
+================================== FAILURES ===================================
+_______________________ test_sube_katalogda_bundle_only _______________________
+
+    def test_sube_katalogda_bundle_only():
+        """D-356/1: Þube katalogda yer alýr ama bundle-only — tekil fiyatý None, satis_tipi bundle_only."""
+        katalog = fiyat_katalogu()
+        sube = next(p for p in katalog if p["name"] == "Þube")
+    
+        assert sube["price"] is None, "Þube tekil satýþ fiyatý olmamalý (bundle-only)"
+>       assert sube["satis_tipi"] == "bundle_only"
+E       AssertionError: assert 'tekil' == 'bundle_only'
+E         
+E         - bundle_only
+E         + tekil
+
+tests\test_paket_fiyat.py:146: AssertionError
+___________________ test_paket_satis_tipi_sube_bundle_only ____________________
+
+    def test_paket_satis_tipi_sube_bundle_only():
+        """PAKET_SATIS_TIPI: Þube bundle_only, diðer 4 tier tekil."""
+        assert PAKET_SATIS_TIPI["Sube"] == "bundle_only"
+        for isim in _ORJINAL_SIRALAMA:
+>           assert PAKET_SATIS_TIPI[isim] == "tekil"
+                   ^^^^^^^^^^^^^^^^^^^^^^
+E           KeyError: 'Þube'
+
+tests\test_paket_fiyat.py:156: KeyError
+=========================== short test summary info ===========================
+FAILED tests/test_paket_fiyat.py::test_sube_katalogda_bundle_only - Assertion...
+FAILED tests/test_paket_fiyat.py::test_paket_satis_tipi_sube_bundle_only - Ke...
+2 failed, 12 passed in 1.27s

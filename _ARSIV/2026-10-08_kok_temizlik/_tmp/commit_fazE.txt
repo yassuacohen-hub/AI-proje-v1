@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 21.05s
+[chore/monorepo-merge f2cd952d] fix(D-355): Faz E Denetim tekrari temizligi
+ 2 files changed, 12 insertions(+), 4 deletions(-)

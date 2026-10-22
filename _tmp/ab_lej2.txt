@@ -1,0 +1,15 @@
+        - StaticText "Ön Tahsis Alan"
+        - slider "Ön Tahsis Alan saydamlık" [ref=e21]: 1
+        - StaticText "OSB Parselleri"
+        - slider "OSB Parselleri saydamlık" [ref=e25]: 1
+        - StaticText "Ön Tahsis Alan"
+        - button "Parsel 1/1" [expanded=false, ref=e39]
+      - textbox "OSB, EB veya ada/parsel ara…" [ref=e60]
+      - button "E-Tahsis" [ref=e3]
+        - StaticText "E-Tahsis"
+      - button "Ön Tahsis" [ref=e4]
+        - StaticText "Ön Tahsis"
+        - StaticText "OSB PARSELLERI"
+        - StaticText "210216 Ada · 8 Parsel"
+        - list "Parsel aşaması"
+        - image "Tahsis Durumu lejantı"

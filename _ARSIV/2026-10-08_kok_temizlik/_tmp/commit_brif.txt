@@ -1,0 +1,13 @@
+warning: in the working copy of 'ihsan_project_context.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'ihsan_project_context.md', CRLF will be replaced by LF the next time Git touches it
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 22.38s
+[chore/monorepo-merge fd19b5a6] docs(BRIEF): 6 posta brifi (utku 4, yasu 2) + ihsan hafiza commit notu
+ 7 files changed, 392 insertions(+), 1 deletion(-)
+ create mode 100644 plans/brief_utku_API-PAKET-SCOPE-01.md
+ create mode 100644 plans/brief_utku_API-V1-COMPANY-FRAUD-01.md
+ create mode 100644 plans/brief_utku_UI-PAKET-ROZET-01.md
+ create mode 100644 plans/brief_utku_VERI-OZELLIK-MATRISI-SIM-01.md
+ create mode 100644 plans/brief_yasu_API-V1-NETWORK-REPORT-01.md
+ create mode 100644 plans/brief_yasu_VERI-OSB-MASTER-LISTE-01.md

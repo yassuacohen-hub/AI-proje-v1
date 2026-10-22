@@ -1,0 +1,3 @@
+tablo: 13 bulunan: 13 yok: []
+RLS kapali: 13 ['field_dictionary', 'tobb_card_raw', 'tobb_company_type_group', 'tobb_company_type', 'tobb_status', 'tobb_registry_office', 'tobb_city', 'tobb_representation_duty', 'tobb_representation_authority', 'tobb_representation_type', 'company_persons', 'company_capital', 'company_legal_proceedings']
+anon/auth grant: []

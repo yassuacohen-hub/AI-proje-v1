@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 24.28s
+[chore/monorepo-merge 58cba2b6] docs(hafiza): pano/brief commit hash + tahsis ve --only tuzaklari
+ 1 file changed, 2 insertions(+)

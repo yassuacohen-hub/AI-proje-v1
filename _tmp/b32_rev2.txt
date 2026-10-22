@@ -1,0 +1,4 @@
+SIZINTI: ['ent_b6806b491a8f5d2a34d01aa0609f6422']
+ROBOLINK sayfada: True | 404 izi: False
+anahtarsiz ticariradar.com/api HTTP 404
+anahtarsiz api.huginn HTTP 000

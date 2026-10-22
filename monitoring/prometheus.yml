@@ -1,0 +1,213 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    cluster: 'huginn-prod'
+    environment: 'production'
+    region: 'ankara-vds'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets: ['alertmanager:9093']
+
+# Rule files
+rule_files:
+  - '/etc/prometheus/rules/*.yml'
+
+# Scrape configurations
+scrape_configs:
+  # ============================================================
+  # PROMETHEUS SELF-MONITORING
+  # ============================================================
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+        labels:
+          service: 'prometheus'
+          team: 'platform'
+
+  # ============================================================
+  # NODE EXPORTER (Host metrics)
+  # ============================================================
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+        labels:
+          service: 'node-exporter'
+          team: 'platform'
+          instance: 'huginn-vds'
+
+  # ============================================================
+  # CADVISOR (Container metrics)
+  # ============================================================
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+        labels:
+          service: 'cadvisor'
+          team: 'platform'
+
+  # ============================================================
+  # KONG API GATEWAY
+  # ============================================================
+  - job_name: 'kong'
+    static_configs:
+      - targets: ['kong:8001']
+        labels:
+          service: 'kong'
+          team: 'platform'
+    metrics_path: '/metrics'
+    scrape_interval: 10s
+
+  # ============================================================
+  # POSTGRESQL (via postgres_exporter)
+  # ============================================================
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+        labels:
+          service: 'postgres'
+          team: 'platform'
+    scrape_interval: 30s
+
+  # ============================================================
+  # REDIS (via redis_exporter)
+  # ============================================================
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+        labels:
+          service: 'redis'
+          team: 'platform'
+    scrape_interval: 15s
+
+  # ============================================================
+  # FASTAPI BACKEND (hugin-api)
+  # ============================================================
+  - job_name: 'hugin-api'
+    static_configs:
+      - targets: ['hugin-api:8000']
+        labels:
+          service: 'hugin-api'
+          team: 'platform'
+    metrics_path: '/metrics'
+    scrape_interval: 15s
+
+  # ============================================================
+  # CELERY WORKERS (via flower or custom exporter)
+  # ============================================================
+  - job_name: 'celery-workers'
+    static_configs:
+      - targets: ['celery-exporter:9540']
+        labels:
+          service: 'celery'
+          team: 'data'
+    scrape_interval: 30s
+
+  # ============================================================
+  # STREAMLIT ADMIN (Muninn Admin Panel)
+  # ============================================================
+  - job_name: 'muninn-admin'
+    static_configs:
+      - targets: ['muninn-admin:8501']
+        labels:
+          service: 'muninn-admin'
+          team: 'platform'
+    metrics_path: '/_stcore/metrics'
+    scrape_interval: 30s
+
+  # ============================================================
+  # NEXT.JS FRONTEND
+  # ============================================================
+  - job_name: 'nextjs-frontend'
+    static_configs:
+      - targets: ['nextjs-frontend:3000']
+        labels:
+          service: 'nextjs-frontend'
+          team: 'product'
+    metrics_path: '/api/metrics'
+    scrape_interval: 30s
+
+  # ============================================================
+  # CHROMADB (Vector database)
+  # ============================================================
+  - job_name: 'chromadb'
+    static_configs:
+      - targets: ['chromadb:8000']
+        labels:
+          service: 'chromadb'
+          team: 'data'
+    metrics_path: '/api/v1/metrics'
+    scrape_interval: 60s
+
+  # ============================================================
+  # GRAFANA
+  # ============================================================
+  - job_name: 'grafana'
+    static_configs:
+      - targets: ['grafana:3000']
+        labels:
+          service: 'grafana'
+          team: 'platform'
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # ============================================================
+  # ALERTMANAGER
+  # ============================================================
+  - job_name: 'alertmanager'
+    static_configs:
+      - targets: ['alertmanager:9093']
+        labels:
+          service: 'alertmanager'
+          team: 'platform'
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # ============================================================
+  # PUSHGATEWAY (for batch/ephemeral jobs)
+  # ============================================================
+  - job_name: 'pushgateway'
+    static_configs:
+      - targets: ['pushgateway:9091']
+        labels:
+          service: 'pushgateway'
+          team: 'platform'
+    metrics_path: '/metrics'
+    scrape_interval: 30s
+
+  # ============================================================
+  # BLACKBOX EXPORTER (External endpoint probing)
+  # ============================================================
+  - job_name: 'blackbox-http'
+    metrics_path: /probe
+    params:
+      module: [http_2xx]
+    static_configs:
+      - targets:
+          - 'https://huginn.local'
+          - 'https://api.huginn.local'
+          - 'https://admin.huginn.local'
+        labels:
+          service: 'external-probe'
+          team: 'platform'
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: blackbox-exporter:9115
+
+  # ============================================================
+  # WINDOWS EXPORTER (if running on Windows host directly)
+  # ============================================================
+  - job_name: 'windows-exporter'
+    static_configs:
+      - targets: ['windows-exporter:9182']
+        labels:
+          service: 'windows-exporter'
+          team: 'platform'
+    scrape_interval: 30s

@@ -1,0 +1,10 @@
+1) gzip -> dosya acma
+   23832 KB, 0.3s
+2) initdb
+3) pg_ctl start
+4) createdb
+5) psql -f dump.sql (timeout=240s)
+   bitti 2s, hata satiri=0
+6) SONUC:
+
+gecici kume silindi: C:\Users\yasin\AppData\Local\Temp\huginn_restore2_wa2zt30q -- OK

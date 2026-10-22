@@ -1,0 +1,245 @@
+DB: postgresql://***@aws-0-eu-west-2.pooler.supabase.com:6543/postgres
+
+== TABLOLAR (public) ==
+70 tablo
+  companies                    VAR
+  sources                      VAR
+  source_records               VAR
+  key_personnel                VAR
+  job_postings                 VAR
+  company_risk_scores          VAR
+  company_opportunity_scores   VAR
+  company_edges                VAR
+  company_locations            VAR
+  company_events               VAR
+  api_analytics                VAR
+  alan_sozlugu                 YOK
+  tobb_kart_ham                YOK
+  company_persons              YOK
+  company_capital              YOK
+  company_legal_proceedings    YOK
+  patent*: YOK
+  tobb_*: YOK
+
+== \d companies ==
+  company_id                         uuid                         null=NO def=gen_random_uuid()
+  legal_name                         text                         null=NO def=None
+  trade_name                         text                         null=YES def=None
+  company_type                       text                         null=YES def=None
+  tax_number                         text                         null=YES def=None
+  mersis_number                      text                         null=YES def=None
+  establishment_date                 date                         null=YES def=None
+  status                             text                         null=YES def='unknown'::text
+  status_confidence                  numeric                      null=YES def=None
+  employee_count                     integer                      null=YES def=None
+  website_domain                     text                         null=YES def=None
+  primary_phone                      text                         null=YES def=None
+  primary_email                      text                         null=YES def=None
+  description                        text                         null=YES def=None
+  is_ankara                          boolean                      null=YES def=false
+  is_osb_member                      boolean                      null=YES def=false
+  osb_id                             uuid                         null=YES def=None
+  nace_validity                      text                         null=YES def='unknown'::text
+  quarantine_reason                  text                         null=YES def=None
+  data_quality_score                 numeric                      null=YES def=None
+  entity_confidence                  numeric                      null=YES def=None
+  osb_parcel                         text                         null=YES def=None
+  first_seen_at                      timestamp with time zone     null=NO def=now()
+  last_verified_at                   timestamp with time zone     null=YES def=None
+  created_at                         timestamp with time zone     null=NO def=now()
+  updated_at                         timestamp with time zone     null=NO def=now()
+  source_record_id                   uuid                         null=YES def=None
+  nace_source                        text                         null=YES def='unknown'::text
+  nace_code                          text                         null=YES def=None
+  address                            text                         null=YES def=None
+  data_freshness_score               smallint                     null=YES def=None
+  phone_format_score                 smallint                     null=YES def=None
+  social_media_score                 smallint                     null=YES def=None
+  source_diversity_score             smallint                     null=YES def=None
+  job_postings_score                 smallint                     null=YES def=None
+  employee_count_score               smallint                     null=YES def=None
+  email_validity_score               smallint                     null=YES def=None
+  job_postings_count                 integer                      null=YES def=None
+  employee_count_estimate            integer                      null=YES def=None
+  job_postings_last_checked          timestamp with time zone     null=YES def=None
+  employee_count_last_checked        timestamp with time zone     null=YES def=None
+  email_validation_data              jsonb                        null=YES def=None
+  email_validated_at                 timestamp with time zone     null=YES def=None
+  tax_office                         text                         null=YES def=None
+  trade_registry_number              text                         null=YES def=None
+  trade_registry_office              text                         null=YES def=None
+  identity_completeness              numeric                      null=YES def=None
+  score_version                      text                         null=YES def=None
+  search_text                        text                         null=YES def=None
+  collected_at                       timestamp with time zone     null=YES def=None
+  source_name                        text                         null=YES def=None
+  source_type                        text                         null=YES def=None
+  source_file                        text                         null=YES def=None
+  source_line                        text                         null=YES def=None
+  collected_by                       text                         null=YES def=None
+  last_verified_on                   date                         null=YES def=None
+  sector_name                        character varying            null=YES def=None
+  sector_source                      character varying            null=YES def=None
+  kvkk_kapsam                        boolean                      null=YES def=None
+  PK: ['company_id']
+  satir: 10123
+
+== \d source_records ==
+  source_record_id                   uuid                         null=NO def=gen_random_uuid()
+  source_id                          uuid                         null=NO def=None
+  external_id                        text                         null=YES def=None
+  raw_name                           text                         null=YES def=None
+  raw_address                        text                         null=YES def=None
+  raw_phone                          text                         null=YES def=None
+  raw_email                          text                         null=YES def=None
+  raw_website                        text                         null=YES def=None
+  raw_tax_number                     text                         null=YES def=None
+  raw_nace                           text                         null=YES def=None
+  raw_payload                        jsonb                        null=YES def=None
+  collected_at                       timestamp with time zone     null=NO def=now()
+  content_hash                       text                         null=YES def=None
+  company_id                         uuid                         null=YES def=None
+  PK: ['source_record_id']
+  satir: 10601
+
+== \d sources ==
+  source_id                          uuid                         null=NO def=gen_random_uuid()
+  source_name                        text                         null=NO def=None
+  source_type                        text                         null=NO def=None
+  url                                text                         null=YES def=None
+  authority_score                    numeric                      null=YES def=None
+  collection_method                  text                         null=YES def=None
+  legal_basis                        text                         null=YES def=None
+  active                             boolean                      null=YES def=true
+  created_at                         timestamp with time zone     null=NO def=now()
+  PK: ['source_id']
+  satir: 4
+
+== \d key_personnel ==
+  personnel_id                       uuid                         null=NO def=gen_random_uuid()
+  company_id                         uuid                         null=NO def=None
+  full_name                          text                         null=NO def=None
+  position                           text                         null=NO def=None
+  is_public                          boolean                      null=NO def=false
+  source                             text                         null=NO def='manual'::text
+  created_at                         timestamp with time zone     null=NO def=now()
+  PK: ['personnel_id']
+  satir: 0
+
+== \d job_postings ==
+  job_posting_id                     uuid                         null=NO def=gen_random_uuid()
+  company_id                         uuid                         null=YES def=None
+  source_name                        text                         null=NO def=None
+  source_url                         text                         null=NO def=None
+  external_id                        text                         null=YES def=None
+  title                              text                         null=NO def=None
+  description                        text                         null=YES def=None
+  department                         text                         null=YES def=None
+  seniority_level                    text                         null=YES def=None
+  location_city                      text                         null=YES def=None
+  location_country                   text                         null=YES def='Türkiye'::text
+  employment_type                    text                         null=YES def=None
+  remote_type                        text                         null=YES def=None
+  technologies                       jsonb                        null=YES def='[]'::jsonb
+  salary_min                         integer                      null=YES def=None
+  salary_max                         integer                      null=YES def=None
+  salary_currency                    text                         null=YES def='TRY'::text
+  posted_at                          timestamp with time zone     null=YES def=None
+  expired_at                         timestamp with time zone     null=YES def=None
+  collected_at                       timestamp with time zone     null=YES def=now()
+  content_hash                       text                         null=YES def=None
+  raw_data                           jsonb                        null=YES def='{}'::jsonb
+  updated_at                         timestamp with time zone     null=YES def=now()
+  PK: ['job_posting_id']
+  satir: 8
+
+== \d company_risk_scores ==
+  company_id                         uuid                         null=NO def=None
+  corporateness_score                numeric                      null=YES def=None
+  reliability_score                  numeric                      null=YES def=None
+  reputation_score                   numeric                      null=YES def=None
+  cyber_security_score               numeric                      null=YES def=None
+  operational_power_score            numeric                      null=YES def=None
+  transparency_score                 numeric                      null=YES def=None
+  fraud_risk_score                   numeric                      null=YES def=None
+  overall_trust_score                numeric                      null=YES def=None
+  recommendation_tier                text                         null=YES def=None
+  calculated_at                      timestamp with time zone     null=NO def=now()
+  score_version                      text                         null=NO def='v1'::text
+  PK: ['company_id']
+  satir: 0
+
+== \d company_opportunity_scores ==
+  company_id                         uuid                         null=NO def=None
+  need_score                         numeric                      null=YES def=None
+  fit_score                          numeric                      null=YES def=None
+  timing_score                       numeric                      null=YES def=None
+  ensemble_score                     numeric                      null=YES def=None
+  calculated_at                      timestamp with time zone     null=NO def=now()
+  score_version                      text                         null=NO def='v1'::text
+  PK: ['company_id']
+  satir: 10123
+
+== \d company_edges ==
+  company_a_id                       uuid                         null=NO def=None
+  company_b_id                       uuid                         null=NO def=None
+  edge_type                          text                         null=NO def=None
+  strength                           numeric                      null=YES def=None
+  evidence                           text                         null=NO def=None
+  source                             text                         null=YES def=None
+  created_at                         timestamp with time zone     null=NO def=now()
+  PK: ['company_a_id', 'company_b_id', 'edge_type']
+  satir: 0
+
+== \d company_locations ==
+  location_id                        uuid                         null=NO def=gen_random_uuid()
+  company_id                         uuid                         null=NO def=None
+  location_type                      text                         null=YES def=None
+  address_line                       text                         null=YES def=None
+  district                           text                         null=YES def=None
+  neighborhood                       text                         null=YES def=None
+  city                               text                         null=YES def=None
+  postal_code                        text                         null=YES def=None
+  latitude                           numeric                      null=YES def=None
+  longitude                          numeric                      null=YES def=None
+  geocode_confidence                 numeric                      null=YES def=None
+  osb_id                             uuid                         null=YES def=None
+  is_primary                         boolean                      null=YES def=false
+  source_id                          uuid                         null=YES def=None
+  verified_at                        timestamp with time zone     null=YES def=None
+  PK: ['location_id']
+  satir: 0
+
+== \d company_events ==
+  event_id                           uuid                         null=NO def=gen_random_uuid()
+  company_id                         uuid                         null=NO def=None
+  event_type                         text                         null=YES def=None
+  event_date                         date                         null=YES def=None
+  detection_date                     date                         null=YES def=None
+  direction                          text                         null=YES def=None
+  magnitude                          numeric                      null=YES def=None
+  evidence_id                        uuid                         null=YES def=None
+  confidence                         numeric                      null=YES def=None
+  common_cause_id                    uuid                         null=YES def=None
+  created_at                         timestamp with time zone     null=NO def=now()
+  source_guid                        text                         null=YES def=None
+  event_person                       text                         null=YES def=None
+  person_role                        text                         null=YES def=None
+  PK: ['event_id']
+  satir: 407
+
+== 0025 dil / ikiz kolon ==
+  vergi_dairesi=False  tax_office=True
+  vergi_no=False  tax_id=False
+  mersis_no=False  mersis_number=True
+  unvan=False  name=False
+  0057 hedef kolonlari zaten var mi: []
+
+== goc defteri (canli) ==
+  schema_migrations: [('0054_api_analytics_kullanici_ingilizce.sql', datetime.datetime(2026, 10, 6, 21, 13, 55, 177285, tzinfo=datetime.timezone.utc)), ('0053_api_analytics.sql', datetime.datetime(2026, 10, 6, 18, 27, 13, 710384, tzinfo=datetime.timezone.utc)), ('0052_website_sablon_kisiti.sql', datetime.datetime(2026, 10, 3, 22, 23, 1, 114998, tzinfo=datetime.timezone.utc)), ('0051_kredi_cuzdani.sql', datetime.datetime(2026, 10, 3, 16, 10, 50, 689045, tzinfo=datetime.timezone.utc)), ('0050_scrape_audit_log.sql', datetime.datetime(2026, 10, 2, 18, 52, 57, 462895, tzinfo=datetime.timezone.utc))]
+  api_analytics kolonlari (0054 uygulandi mi?): ['id', 'zaman', 'endpoint', 'method', 'status', 'sure_ms', 'username', 'hata_mesaji']
+
+== RLS ==
+[('api_analytics', False), ('companies', True), ('key_personnel', True), ('source_records', True)]
+
+yazildi: c:\Huginn Data Projesi\Huginn Data Insights\_tmp\tobb_havuz_canli_olcum.txt

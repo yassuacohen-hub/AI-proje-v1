@@ -1,0 +1,10 @@
+proje str 18
+veri_tarihi str 10
+kaynak str 39
+aciklama str 75
+toplam_osb int 270
+iller dict 4
+fili_durum_dagilimi dict 4
+il_listesi list 11
+not str 159
+Adana

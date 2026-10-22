@@ -1,0 +1,12 @@
+[D-318 BULGU KAPISI] HATA: bulgu defterinde bu görev kaydi yok — teslim reddedildi.
+       Defter: data/orchestrator/bulgu_defteri.md (tek kanonik dosya)
+       Once bulgunu yaz, sonra teslim et:
+       python scripts/bulgu_defteri.py ekle --task-id UI-HUB-4ARTI1-01 --rol ihsan \
+         --ozet "..." --karar "D-NNN | kapandi:<kanit>" --renk oneri|dikkat|acil|tamam
+       Bulgun yoksa: --ozet "bulgu yok, nedeni" --karar "red: <gerekce>"
+eklendi=0 guncellendi=0 degismedi=12 arsivlendi=1
+yerel gorev=12 notion satiri=13
+ozet: 1 blok (silinen kopya 1)
+  Ilerleme Matrisi: eklendi 0, guncellendi 3, toplam 8
+  Ajan Ilerlemesi: eklendi 0, guncellendi 1, toplam 4
+  KRITIK - Simdi Buraya Bak: eklendi 0, guncellendi 0, toplam 1

@@ -1,0 +1,21 @@
+>> scripts/ajan_chat.py ac ihsan TEST-ODIN-HAKEM-ESIK-01 | rc 0
+✅ Sorun kaydedildi: ihsan → ihsan | TEST-ODIN-HAKEM-ESIK-01 (2026-10-10T08:06:38) [önem=orta]
+>> scripts/ajan_chat.py ac ihsan TEST-ODIN-PROMPT-INJECTION | rc 0
+✅ Sorun kaydedildi: ihsan → ihsan | TEST-ODIN-PROMPT-INJECTION (2026-10-10T08:06:38) [önem=orta]
+>> scripts/ajan_chat.py oku --son 3 | rc 0
+1. [IHSAN] ALTYAPI-APIVOM-VKN-ENTEGRASYON-01 (acik)
+   Sorun: EK KARAR (Urun Sahibi): APIVOM rakip istihbarati. Satis modelleri + veri aktarim surecleri kopyalanabilir referans. apivom_vkn.py silinmez. yasu: entegrasyon kodu YAZMA; sadece APIVOM paket/fiyat/API 
+   Çözüm: 
+   Zaman: 2026-10-10T07:14:54
+
+2. [IHSAN] TEST-ODIN-HAKEM-ESIK-01 (acik)
+   Sorun: KARAR: ONAY. Kanıt (log data/odin_injection_test_log.jsonl, canlı ölçüm D-260): K3 satır 219-258 (--rol dis, 40 id): mesru_reddedilen=0 (s2-webtext-sifre red_beklenmez→izlenen, satır 256), zararlı 16/
+   Çözüm: 
+   Zaman: 2026-10-10T08:06:38
+
+3. [IHSAN] TEST-ODIN-PROMPT-INJECTION (acik)
+   Sorun: KARAR: GERİ GÖNDER (küçük eksikler, iş özü tamam). Doğrulanan: 46 kayıt (DIŞ 40 + İÇ 6), tekrar-3 138 satır (K1 log 1-138), zararlı 17/17 ham 51/51, LLM hakem canlı, rapor + hub var. 46 vs 40 farkı aç
+   Çözüm: 
+   Zaman: 2026-10-10T08:06:38
+
+Toplam: 3 sorun

@@ -1,0 +1,5 @@
+VERI-ENTITY-GRAPH-01           | durum=done       | onc=P1 | atanan=None | dep=[]
+API-PAKET-SCOPE-01             | durum=aktif      | onc=P0 | atanan=None | dep=[]
+API-V1-COMPANY-FRAUD-01        | durum=aktif      | onc=P0 | atanan=None | dep=[]
+VERI-OSB-MASTER-LISTE-01       | durum=aktif      | onc=P1 | atanan=None | dep=[]
+API-V1-NETWORK-REPORT-01       | durum=aktif      | onc=P1 | atanan=None | dep=[]

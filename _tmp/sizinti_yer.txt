@@ -1,0 +1,13 @@
+1:=== bc68d90e WEB-SSR-API-ANAHTAR-01 teslim (review) - pano
+6:+++ b/data/orchestrator/task_board.json
+21:=== 772a2937 chore(chat): bilo->ihsan [WEB-SSR-API-ANAHTAR-01] (D-371)
+26:+++ b/data/orchestrator/chat/messages.jsonl
+31:+{"tarih": "2026-10-15T21:24:38", "kimden": "bilo", "kime": "ihsan", "type": "bilgi", "task_id": "WEB-SSR-API-ANAHTAR-01", "mesaj": "[WEB-SSR-API-ANAHTAR-01 OLCUM] (bilo)\nB-32: SSR /v1/companies/{vkn} 401. INTERNAL_API_KEY yok.\nMevcut key: ent_b6806b491a8f5d2a34d01aa0609f6422 (admin, enterprise).\nA) ENV ANAHTAR (oneri): .env + docker-compose.yml hugin-web env -> rebuild.\nB) Dahili bypass: X-Source header / internal IP check (kod degisikligi).\nOnay verince A uygularim.", "yanit_alindi": false}
+37:=== 9a5a26e0 WEB-SSR-API-ANAHTAR-01 teslim (done) - SSR 200 + JSON-LD, ic anahtar ent_5025c6... (ilk 8: ent_5025c6), hugin-api/hugin-web rebuild
+42:+++ b/data/orchestrator/task_board.json
+origin/chore/monorepo-merge:data/orchestrator/chat/messages.jsonl
+772a2937 2026-10-16 03:54:09 +0300 chore(chat): bilo->ihsan [WEB-SSR-API-ANAHTAR-01] (D-371)
+C:\Program Files\Git\usr\bin\astextplain: line 18: docx2txt.exe: command not found
+C:\Program Files\Git\usr\bin\astextplain: line 18: docx2txt.exe: command not found
+E: unsupported filetype C:\Users\yasin\AppData\Local\Temp/git-blob-8Z5DUT/pdf_a18a2282.pdf
+fatal: unable to read files to diff

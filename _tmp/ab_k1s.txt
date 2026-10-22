@@ -1,0 +1,20 @@
+          - StaticText "HARİTADA"
+          - button "Haritadan kaldır" [ref=e16]
+          - slider "Endüstri Bölgeleri saydamlık" [ref=e17]: 1
+          - button "Haritadan kaldır" [ref=e20]
+          - slider "Ön Tahsis Alan saydamlık" [ref=e21]: 1
+          - button "Haritadan kaldır" [ref=e24]
+          - slider "OSB Parselleri saydamlık" [ref=e25]: 1
+          - button "Haritadan kaldır" [ref=e28]
+          - slider "Organize Sanayi Bölgeleri saydamlık" [ref=e29]: 1
+          - button "Haritadan kaldır" [ref=e35]
+          - button "Haritadan kaldır" [ref=e36]
+          - button "Haritadan kaldır" [ref=e37]
+          - button "Grubu haritadan kaldır" [ref=e40]
+        - textbox "OSB, EB veya ada/parsel ara…" [ref=e60]
+        - separator "Detay panelini yeniden boyutlandır"
+          - StaticText "210216 Ada · 8 Parsel"
+          - StaticText "ID"
+          - StaticText "ANKARA · ELMADAĞ · YENİMAHALLE"
+          - image "Tahsis Durumu lejantı"
+    - button "ELMADAĞ MOBİLYACILAR İHTİSAS OSB" [ref=e73]

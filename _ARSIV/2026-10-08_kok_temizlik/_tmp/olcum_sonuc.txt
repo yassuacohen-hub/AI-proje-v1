@@ -1,0 +1,11 @@
+SON_GOC ['0057_companies_tobb_kolonlari.sql', '0058_adres_hukuk_gazete.sql', '0059_tobb_havuz_rls.sql']
+0060_VAR y
+0047_VAR x
+ROUTERS ['__init__.py']
+SEED ['seed_ankara_osb.py']
+API_DOSYA ['rate_limiter.py', '__init__.py']
+YOK src/company_master/api/scope.py
+VAR src/company_master/api/rate_limiter.py
+VAR src/company_master/engine/source_registry.py
+VAR web_app.py
+VAR src/company_master/schema/companies.sql

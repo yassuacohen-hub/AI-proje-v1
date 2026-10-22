@@ -1,0 +1,192 @@
+........................................................................ [  1%]
+........................................................................ [  2%]
+........................................................................ [  3%]
+........................................................................ [  5%]
+........................................................................ [  6%]
+...ssssss.s............................................................. [  7%]
+........................................................................ [  9%]
+........................................................................ [ 10%]
+........................................................................ [ 11%]
+........................................................................ [ 13%]
+...............................................................s........ [ 14%]
+........................................................................ [ 15%]
+........................................................................ [ 17%]
+........................................................................ [ 18%]
+........................................................................ [ 19%]
+........................................................................ [ 20%]
+........................................................................ [ 22%]
+.................................................................s...... [ 23%]
+........................................................................ [ 24%]
+.....s.................................................................. [ 26%]
+........................................................................ [ 27%]
+.F...................................................................... [ 28%]
+..............................................F......................... [ 30%]
+......F................................................................. [ 31%]
+........................................................................ [ 32%]
+........................................................................ [ 34%]
+........................................................................ [ 35%]
+........................................................................ [ 36%]
+........................................................................ [ 37%]
+........................................................................ [ 39%]
+........................................................................ [ 40%]
+........................................................................ [ 41%]
+........................................................................ [ 43%]
+........................................................................ [ 44%]
+........................................................................ [ 45%]
+........................................................................ [ 47%]
+........................................................................ [ 48%]
+........................................................................ [ 49%]
+........................................................................ [ 51%]
+........................................................................ [ 52%]
+........................................................................ [ 53%]
+........................................................................ [ 54%]
+........................................................................ [ 56%]
+........................................................................ [ 57%]
+........................................................................ [ 58%]
+...................................................................
+================================== FAILURES ===================================
+_________________ test_dusurulen_kolonlar_uretim_kodunda_yok __________________
+
+    def test_dusurulen_kolonlar_uretim_kodunda_yok():
+        desen = re.compile(r"\b(" + "|".join(_DUSENLER) + r")\b")
+        suclular = []
+        for p in _uretim_dosyalari():
+            yol = str(p.relative_to(KOK))
+            if any(m in yol for m in _MUAF):
+                continue
+            metin = p.read_text("utf-8", errors="replace")
+            for no, satir in enumerate(metin.splitlines(), 1):
+                if satir.lstrip().startswith(("#", "--", "//")):
+                    continue  # D-268 aciklama yorumu ihlal degil
+                if desen.search(satir):
+                    suclular.append(f"{yol}:{no}")
+>       assert not suclular, (
+            "Goc 0036'da dusurulen kolon uretim koduna geri sizdi "
+            "(DB'de yok -> calisma aninda UndefinedColumn): " + ", ".join(suclular)
+        )
+E       AssertionError: Goc 0036'da dusurulen kolon uretim koduna geri sizdi (DB'de yok -> calisma aninda UndefinedColumn): scripts\yasu_canli_olcum_d260.py:47, scripts\yasu_canli_olcum_d260.py:48
+E       assert not ['scripts\\yasu_canli_olcum_d260.py:47', 'scripts\\yasu_canli_olcum_d260.py:48']
+
+tests\test_dusurulen_kolon.py:57: AssertionError
+________________________ test_defter_semayla_uyusuyor _________________________
+
+    def test_defter_semayla_uyusuyor():
+        izler = goc_izleri()
+        with get_engine().connect() as conn:
+            sema = sema_durumu(conn)
+            defter = {
+                r[0]
+                for r in conn.execute(
+                    text("SELECT filename FROM public.schema_migrations")  # D-271
+                )
+            }
+        sonuc = degerlendir(izler, sema)
+    
+        # 1) Diskteki her goc defterde olmali (D-251/3).
+        yazilmamis = sorted(set(izler) - defter)
+        assert not yazilmamis, f"Deftere yazilmamis goc: {yazilmamis}"
+    
+        # 2) Defterdeki her kayit diskte olmali; hayalet kayit defteri yalanci yapar.
+        hayalet = sorted(defter - set(izler))
+>       assert not hayalet, f"Diskte karsiligi olmayan defter kaydi: {hayalet}"
+E       AssertionError: Diskte karsiligi olmayan defter kaydi: ['0053_api_analytics.sql']
+E       assert not ['0053_api_analytics.sql']
+
+tests\test_goc_defteri.py:41: AssertionError
+___________________ test_ikinci_calistirma_kayit_cogaltmaz ____________________
+
+tmp_path = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-4019/test_ikinci_calistirma_kayit_c0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000184B84E91C0>
+
+    def test_ikinci_calistirma_kayit_cogaltmaz(tmp_path, monkeypatch):
+        pano_yol = tmp_path / "task_board.json"
+        pano_yol.write_text(json.dumps(PANO, ensure_ascii=False), encoding="utf-8")
+        monkeypatch.setattr(gk.tb, "TASK_BOARD", pano_yol)
+        monkeypatch.setattr(gk.tb, "STATE_DIR", tmp_path)
+    
+        args = argparse.Namespace(kuru=False)
+        assert gk.cmd_arsivle(args) == 0
+        arsiv = tmp_path / "task_board_arsiv_2026-Q3.json"
+>       assert len(json.loads(arsiv.read_text(encoding="utf-8"))) == 2
+E       assert 1 == 2
+E        +  where 1 = len([{'task_id': 'A-1', 'durum': 'done', 'bitis': '2026-09-21T10:00:00'}])
+E        +    where [{'task_id': 'A-1', 'durum': 'done', 'bitis': '2026-09-21T10:00:00'}] = <function loads at 0x000001843D289BC0>('[\n  {\n    "task_id": "A-1",\n    "durum": "done",\n    "bitis": "2026-09-21T10:00:00"\n  }\n]')
+E        +      where <function loads at 0x000001843D289BC0> = json.loads
+E        +      and   '[\n  {\n    "task_id": "A-1",\n    "durum": "done",\n    "bitis": "2026-09-21T10:00:00"\n  }\n]' = read_text(encoding='utf-8')
+E        +        where read_text = WindowsPath('C:/Users/yasin/AppData/Local/Temp/pytest-of-yasin/pytest-4019/test_ikinci_calistirma_kayit_c0/task_board_arsiv_2026-Q3.json').read_text
+
+tests\test_gorev_kutusu_arsiv.py:44: AssertionError
+---------------------------- Captured stdout call -----------------------------
+3 kayit tasinacak, aktif panoda 2 kalacak.
+  2026-Q1: 1 kayit
+  2026-Q3: 1 kayit
+  2026-Q4: 1 kayit
+  YAZILDI task_board_arsiv_2026-Q1.json: +1 (toplam 1)
+  YAZILDI task_board_arsiv_2026-Q3.json: +1 (toplam 1)
+  YAZILDI task_board_arsiv_2026-Q4.json: +1 (toplam 1)
+AKTIF PANO: 2 kayit
+============================== warnings summary ===============================
+tests\test_secrets_rotation.py:174
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\tests\test_secrets_rotation.py:174: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration
+
+tests/company_master/test_ankara_osb.py: 15 warnings
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\src\company_master\seed\seed_ankara_osb.py:148: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.utcnow().isoformat()
+
+tests/company_master/test_web_app.py: 1 warning
+tests/test_api_integration.py: 2 warnings
+tests/test_benchmark.py: 100 warnings
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\web_app.py:3678: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now_iso = datetime.utcnow().isoformat()
+
+tests/test_admin_ltv_cac.py::test_calculate_ltv_basic
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\web_app.py:3317: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_calculate_cac_basic
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\web_app.py:3356: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\web_app.py:3381: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\web_app.py:3416: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    start_date = datetime.utcnow().date() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_by_tier
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\web_app.py:3453: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff_30 = datetime.utcnow() - timedelta(days=30)
+
+tests/test_auth_lockout.py: 10 warnings
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\sqlalchemy\engine\default.py:952: DeprecationWarning: The default datetime adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+    cursor.execute(statement, parameters)
+
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\tests\test_job_intelligence_e2e.py:321: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    "detected_at": datetime.utcnow() - timedelta(days=1),
+
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+tests/test_job_intelligence_e2e.py::test_scorer_sinyal_verisinden_skor_uretir
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\src\company_master\intelligence\job_intelligence\pipeline\scorer.py:28: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    return datetime.utcnow()
+
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+tests/test_job_intelligence_e2e.py::test_tam_akis_webhook_analiz_skor_zinciri
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\tests\test_job_intelligence_e2e.py:370: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    sig.setdefault("detected_at", datetime.utcnow() - timedelta(days=1))
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_dusurulen_kolon.py::test_dusurulen_kolonlar_uretim_kodunda_yok
+FAILED tests/test_goc_defteri.py::test_defter_semayla_uyusuyor - AssertionErr...
+FAILED tests/test_gorev_kutusu_arsiv.py::test_ikinci_calistirma_kayit_cogaltmaz
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KeyboardInterrupt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\pathlib.py:1013: KeyboardInterrupt
+(to show a full traceback on KeyboardInterrupt use --full-trace)
+3 failed, 3294 passed, 11 skipped, 142 warnings in 163.68s (0:02:43)

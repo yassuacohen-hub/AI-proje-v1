@@ -1,0 +1,7 @@
+HATA: VERI-TOBB-HAVUZ-SEMA-01 zaten onay kuyruğunda
+eklendi=0 guncellendi=0 degismedi=10 arsivlendi=0
+yerel gorev=10 notion satiri=10
+ozet: 1 blok (silinen kopya 1)
+  Ilerleme Matrisi: eklendi 0, guncellendi 0, toplam 8
+  Ajan Ilerlemesi: eklendi 0, guncellendi 0, toplam 4
+  KRITIK - Simdi Buraya Bak: eklendi 0, guncellendi 0, toplam 1

@@ -1,0 +1,27 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\yasin\AppData\Local\Programs\Python\Python312\python.exe
+Using --randomly-seed=1777531201
+rootdir: c:\Huginn Data Projesi\Huginn Data Insights
+configfile: pytest.ini
+plugins: anyio-4.14.2, langsmith-0.11.2, cov-7.1.0, randomly-5.0.0
+collecting ... collected 65 items
+
+tests/test_odin_prompt_injection.py::test_tipografik_kesme_isareti_yakalanir PASSED [  1%]
+tests/test_odin_prompt_injection.py::test_bos_yanit_red_sayilmaz PASSED  [  3%]
+tests/test_odin_prompt_injection.py::test_turkce_dusunme_sizintisi_yakalanir PASSED [  4%]
+tests/test_odin_prompt_injection.py::test_katla_sizintiyi_any_ile_toplar PASSED [  6%]
+tests/test_odin_prompt_injection.py::test_anahtar_adi_sizinti_degil PASSED [  7%]
+tests/test_odin_prompt_injection.py::test_govde_coz_sse_akisi_birlestirilir PASSED [  9%]
+tests/test_odin_prompt_injection.py::test_karar_ver_red_beklenmez_acigi_kapatmaz PASSED [ 10%]
+tests/test_odin_prompt_injection.py::test_karar_nogo_mesru_reddedilirse PASSED [ 12%]
+tests/test_odin_prompt_injection.py::test_kos_tekrar_sayisini_ham_kayda_yansitir PASSED [ 13%]
+tests/test_odin_prompt_injection.py::test_ag_hatasi_bekleme_backoff_ve_retry_after PASSED [ 15%]
+tests/test_odin_prompt_injection.py::test_karar_nogo_oran_dusuk PASSED   [ 16%]
+tests/test_odin_prompt_injection.py::test_kural_turunde_red_dalgalanmasi_kararsiz_degil PASSED [ 18%]
+tests/test_odin_prompt_injection.py::test_anahtar_9router_icin_ninerouter_key PASSED [ 20%]
+tests/test_odin_prompt_injection.py::test_sizinti_olcu PASSED            [ 21%]
+tests/test_odin_prompt_injection.py::test_bos_yanit_dil_uyumlu_sayilmaz PASSED [ 23%]
+tests/test_odin_prompt_injection.py::test_mesru_fiil_red_sayilmaz PASSED [ 24%]
+tests/test_odin_prompt_injection.py::test_belirsiz_soruda_varsayilan_turkce PASSED [ 26%]
+tests/test_odin_prompt_injection.py::test_en_fazla_bosluksuz_fiyat_yazimini_sayar PASSED [ 27%]
+tests/test_odin_prompt_injection.py::test_log_kesiti_yeniden_puanlamaya_yeter 

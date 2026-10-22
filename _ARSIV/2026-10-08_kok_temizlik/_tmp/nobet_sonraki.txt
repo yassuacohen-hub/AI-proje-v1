@@ -1,0 +1,5 @@
+[NOBET ihsan] tur 1: 4 IS VAR — simdi yap, sonra yine nobet:
+  SORU   TEST-ODIN-REDTEAM-S1S4-I1I4-01 (salih): Faz C kirma denemesi kaniti: arac_dongusu.py:120 _SAYISAL_ETIKET_RX satiri gecic -> ajan_chat.py guncelle
+  SORU   SCRAPE-006-QUALITY-AUDIT (salih): Kazima QA audit tamam: scripts/_kazima_dogrula.py -> 5/5 assert yesil, TUM TESTL -> ajan_chat.py guncelle
+  SORU   ALTYAPI-MIMIR-BAGLAM-01 (salih): mimir_servis.py tamam: prompt_yukle(rol=dis/ic) dosyadan okunuyor (D-230, govde  -> ajan_chat.py guncelle
+  SORU   TEST-ODIN-REDTEAM-S1S4-I1I4-01 (salih): ODIN re-run (istatistiksel netlik, kod yok) tamam: 138 satir log (DIS 40x3 + IC  -> ajan_chat.py guncelle

@@ -1,0 +1,523 @@
+groups:
+  # ============================================================
+  # INFRASTRUCTURE ALERTS (Altyapı - Sunucu/Container/Kaynak)
+  # ============================================================
+  - name: infrastructure_alerts
+    interval: 30s
+    rules:
+      # Container Down
+      - alert: ContainerDown
+        expr: |
+          (count by (container, name) (container_last_seen) == 0) 
+          or (time() - container_last_seen > 60)
+        for: 1m
+        labels:
+          severity: critical
+          team: platform
+          service: docker
+        annotations:
+          summary: "Container {{ $labels.name }} down"
+          description: "Container {{ $labels.name }} ({{ $labels.container }}) has been down for > 1 minute"
+          runbook: "https://wiki.huginn.local/runbooks/container-down"
+      
+      # Container Restart Loop
+      - alert: ContainerRestartLoop
+        expr: |
+          rate(container_restart_count[5m]) > 0.1
+        for: 2m
+        labels:
+          severity: warning
+          team: platform
+          service: docker
+        annotations:
+          summary: "Container {{ $labels.name }} restart loop detected"
+          description: "Container {{ $labels.name }} restarted {{ $value | humanizePercentage }} times/sec in last 5m"
+          runbook: "https://wiki.huginn.local/runbooks/container-restart-loop"
+
+      # Host CPU High
+      - alert: HostCPUHigh
+        expr: |
+          100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 85
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+          service: host
+        annotations:
+          summary: "Host {{ $labels.instance }} CPU usage > 85%"
+          description: "CPU usage has been above 85% for 5 minutes"
+          runbook: "https://wiki.huginn.local/runbooks/host-cpu-high"
+
+      # Host Memory High
+      - alert: HostMemoryHigh
+        expr: |
+          (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 90
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+          service: host
+        annotations:
+          summary: "Host {{ $labels.instance }} memory usage > 90%"
+          description: "Available memory critically low"
+          runbook: "https://wiki.huginn.local/runbooks/host-memory-high"
+
+      # Disk Space Critical
+      - alert: DiskSpaceCritical
+        expr: |
+          (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 10
+        for: 2m
+        labels:
+          severity: critical
+          team: platform
+          service: host
+        annotations:
+          summary: "Disk space critical on {{ $labels.instance }}: {{ $value | humanizePercentage }}% free"
+          description: "Root filesystem has less than 10% free space"
+          runbook: "https://wiki.huginn.local/runbooks/disk-space-critical"
+
+      # Docker Volume Disk Space
+      - alert: DockerVolumeDiskSpace
+        expr: |
+          (node_filesystem_avail_bytes{mountpoint="/var/lib/docker"} / node_filesystem_size_bytes{mountpoint="/var/lib/docker"}) * 100 < 15
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+          service: docker
+        annotations:
+          summary: "Docker volume disk space < 15% on {{ $labels.instance }}"
+          description: "Docker storage running low, may affect container operations"
+          runbook: "https://wiki.huginn.local/runbooks/docker-volume-space"
+
+  # ============================================================
+  # APPLICATION ALERTS (Uygulama - FastAPI/Celery/Redis/DB)
+  # ============================================================
+  - name: application_alerts
+    interval: 30s
+    rules:
+      # API High Latency (p99 > 1s)
+      - alert: APIHighLatency
+        expr: |
+          histogram_quantile(0.99, sum by (le, handler) (rate(http_request_duration_seconds_bucket[5m]))) > 1
+        for: 3m
+        labels:
+          severity: warning
+          team: platform
+          service: api
+        annotations:
+          summary: "API p99 latency > 1s on {{ $labels.handler }}"
+          description: "99th percentile latency exceeded 1 second for 3 minutes"
+          runbook: "https://wiki.huginn.local/runbooks/api-high-latency"
+
+      # API Error Rate (5xx > 5%)
+      - alert: APIHighErrorRate
+        expr: |
+          sum by (handler) (rate(http_requests_total{status=~"5.."}[5m])) 
+          / sum by (handler) (rate(http_requests_total[5m])) > 0.05
+        for: 2m
+        labels:
+          severity: critical
+          team: platform
+          service: api
+        annotations:
+          summary: "API error rate > 5% on {{ $labels.handler }}"
+          description: "5xx errors exceed 5% of total requests"
+          runbook: "https://wiki.huginn.local/runbooks/api-high-error-rate"
+
+      # Celery Queue Backlog
+      - alert: CeleryQueueBacklog
+        expr: |
+          celery_queue_length > 100
+        for: 5m
+        labels:
+          severity: warning
+          team: data
+          service: celery
+        annotations:
+          summary: "Celery queue {{ $labels.queue }} backlog: {{ $value }} tasks"
+          description: "Task queue has more than 100 pending tasks for 5 minutes"
+          runbook: "https://wiki.huginn.local/runbooks/celery-queue-backlog"
+
+      # Celery Worker Down
+      - alert: CeleryWorkerDown
+        expr: |
+          celery_worker_count < 3
+        for: 2m
+        labels:
+          severity: critical
+          team: data
+          service: celery
+        annotations:
+          summary: "Only {{ $value }} Celery workers running (expected 3+)"
+          description: "Worker count dropped below minimum threshold"
+          runbook: "https://wiki.huginn.local/runbooks/celery-worker-down"
+
+      # Celery Task Failure Rate
+      - alert: CeleryTaskFailureRate
+        expr: |
+          sum by (task_name) (rate(celery_task_failed_total[5m])) 
+          / sum by (task_name) (rate(celery_task_total[5m])) > 0.1
+        for: 3m
+        labels:
+          severity: warning
+          team: data
+          service: celery
+        annotations:
+          summary: "Celery task {{ $labels.task_name }} failure rate > 10%"
+          description: "More than 10% of tasks failing in last 5 minutes"
+          runbook: "https://wiki.huginn.local/runbooks/celery-task-failures"
+
+      # Redis Memory High
+      - alert: RedisMemoryHigh
+        expr: |
+          (redis_memory_used_bytes / redis_memory_max_bytes) * 100 > 85
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+          service: redis
+        annotations:
+          summary: "Redis memory usage > 85%"
+          description: "Redis instance {{ $labels.instance }} memory pressure"
+          runbook: "https://wiki.huginn.local/runbooks/redis-memory-high"
+
+      # Redis Connections High
+      - alert: RedisConnectionsHigh
+        expr: |
+          redis_connected_clients > 500
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+          service: redis
+        annotations:
+          summary: "Redis connections > 500 on {{ $labels.instance }}"
+          description: "High connection count may indicate leak"
+          runbook: "https://wiki.huginn.local/runbooks/redis-connections-high"
+
+      # PostgreSQL Connections High
+      - alert: PostgreSQLConnectionsHigh
+        expr: |
+          (pg_stat_database_numbackends / pg_settings_max_connections) * 100 > 80
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+          service: postgres
+        annotations:
+          summary: "PostgreSQL connections > 80% of max"
+          description: "Connection pool nearing exhaustion"
+          runbook: "https://wiki.huginn.local/runbooks/postgres-connections-high"
+
+      # PostgreSQL Replication Lag
+      - alert: PostgreSQLReplicationLag
+        expr: |
+          pg_replication_lag_bytes > 104857600
+        for: 5m
+        labels:
+          severity: warning
+          team: platform
+          service: postgres
+        annotations:
+          summary: "PostgreSQL replication lag > 100MB"
+          description: "Replica falling behind primary"
+          runbook: "https://wiki.huginn.local/runbooks/postgres-replication-lag"
+
+      # Database Long Running Queries
+      - alert: DatabaseLongRunningQueries
+        expr: |
+          pg_stat_activity_count{state="active", query_runtime_seconds>30} > 5
+        for: 2m
+        labels:
+          severity: warning
+          team: platform
+          service: postgres
+        annotations:
+          summary: "{{ $value }} queries running > 30s"
+          description: "Long-running queries may block others"
+          runbook: "https://wiki.huginn.local/runbooks/long-running-queries"
+
+  # ============================================================
+  # BUSINESS ALERTS (İş - Kredi/Ödeme/TOBB/Quarantine)
+  # ============================================================
+  - name: business_alerts
+    interval: 60s
+    rules:
+      # TOBB API Balance Low
+      - alert: TOBBBalanceLow
+        expr: |
+          tobb_balance_tl < 5000
+        for: 1m
+        labels:
+          severity: critical
+          team: finance
+          service: tobb
+        annotations:
+          summary: "TOBB prepaid balance critically low: {{ $value }} TL"
+          description: "Balance below 5,000 TL - API calls will fail. Minimum required: 50,000 TL"
+          runbook: "https://wiki.huginn.local/runbooks/tobb-balance-low"
+
+      # TOBB Balance Warning
+      - alert: TOBBBalanceWarning
+        expr: |
+          tobb_balance_tl < 20000
+        for: 5m
+        labels:
+          severity: warning
+          team: finance
+          service: tobb
+        annotations:
+          summary: "TOBB balance warning: {{ $value }} TL"
+          description: "Balance below 20,000 TL - consider top-up soon"
+          runbook: "https://wiki.huginn.local/runbooks/tobb-balance-warning"
+
+      # Quarantine Backlog Growing
+      - alert: QuarantineBacklogGrowing
+        expr: |
+          quarantine_unresolved_count > 500
+        for: 10m
+        labels:
+          severity: warning
+          team: data
+          service: quarantine
+        annotations:
+          summary: "Quarantine backlog: {{ $value }} unresolved firms"
+          description: "Auto-repair pipeline not keeping up with intake"
+          runbook: "https://wiki.huginn.local/runbooks/quarantine-backlog"
+
+      # Quarantine Stuck Records
+      - alert: QuarantineStuckRecords
+        expr: |
+          quarantine_stuck_hours > 24
+        for: 1h
+        labels:
+          severity: warning
+          team: data
+          service: quarantine
+        annotations:
+          summary: "{{ $value }} quarantine records stuck > 24h"
+          description: "Records not resolved or rejected after 24 hours"
+          runbook: "https://wiki.huginn.local/runbooks/quarantine-stuck"
+
+      # Credit Consumption Spike
+      - alert: CreditConsumptionSpike
+        expr: |
+          rate(credits_consumed_total[5m]) > 100
+        for: 5m
+        labels:
+          severity: info
+          team: product
+          service: billing
+        annotations:
+          summary: "Credit consumption spike: {{ $value | humanize }}/sec"
+          description: "Unusually high credit burn rate detected"
+          runbook: "https://wiki.huginn.local/runbooks/credit-spike"
+
+      # Revenue Drop
+      - alert: RevenueDrop
+        expr: |
+          (revenue_last_hour / revenue_same_hour_yesterday) < 0.5
+        for: 30m
+        labels:
+          severity: warning
+          team: finance
+          service: billing
+        annotations:
+          summary: "Revenue dropped > 50% vs same hour yesterday"
+          description: "Hourly revenue {{ $value | humanizePercentage }} of baseline"
+          runbook: "https://wiki.huginn.local/runbooks/revenue-drop"
+
+      # API Key Exhaustion (Enterprise clients)
+      - alert: EnterpriseAPIKeyExhaustion
+        expr: |
+          (enterprise_credits_used / enterprise_credits_limit) * 100 > 90
+        for: 10m
+        labels:
+          severity: warning
+          team: product
+          service: enterprise
+        annotations:
+          summary: "Enterprise client {{ $labels.client_id }} at {{ $value | humanizePercentage }} credit usage"
+          description: "Client approaching monthly quota limit"
+          runbook: "https://wiki.huginn.local/runbooks/enterprise-quota"
+
+  # ============================================================
+  # SECURITY ALERTS (Güvenlik - Auth/Attack/Anomaly)
+  # ============================================================
+  - name: security_alerts
+    interval: 30s
+    rules:
+      # Failed Login Spike
+      - alert: FailedLoginSpike
+        expr: |
+          rate(auth_login_failed_total[5m]) > 10
+        for: 2m
+        labels:
+          severity: warning
+          team: security
+          service: auth
+        annotations:
+          summary: "Failed login spike: {{ $value }}/sec"
+          description: "Possible brute force or credential stuffing attack"
+          runbook: "https://wiki.huginn.local/runbooks/failed-login-spike"
+
+      # SQL Injection Attempts
+      - alert: SQLInjectionAttempts
+        expr: |
+          rate(waf_blocked_sql_injection_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+          team: security
+          service: waf
+        annotations:
+          summary: "SQL injection attempt blocked from {{ $labels.source_ip }}"
+          description: "WAF blocked {{ $value }} SQL injection attempt(s) in 5 minutes"
+          runbook: "https://wiki.huginn.local/runbooks/sql-injection"
+
+      # XSS Attempts
+      - alert: XSSAttempts
+        expr: |
+          rate(waf_blocked_xss_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+          team: security
+          service: waf
+        annotations:
+          summary: "XSS attempt blocked from {{ $labels.source_ip }}"
+          description: "WAF blocked {{ $value }} XSS attempt(s) in 5 minutes"
+          runbook: "https://wiki.huginn.local/runbooks/xss-attempt"
+
+      # Unauthorized Admin Access
+      - alert: UnauthorizedAdminAccess
+        expr: |
+          rate(auth_admin_access_denied_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: critical
+          team: security
+          service: auth
+        annotations:
+          summary: "Unauthorized admin access attempt from {{ $labels.source_ip }}"
+          description: "Non-admin user attempted to access admin panel"
+          runbook: "https://wiki.huginn.local/runbooks/unauthorized-admin"
+
+      # API Rate Limit Exceeded
+      - alert: APIRateLimitExceeded
+        expr: |
+          rate(http_requests_total{status="429"}[5m]) > 50
+        for: 3m
+        labels:
+          severity: warning
+          team: security
+          service: api
+        annotations:
+          summary: "High rate limit hits: {{ $value }}/sec"
+          description: "Many clients hitting rate limits - possible abuse or misconfiguration"
+          runbook: "https://wiki.huginn.local/runbooks/rate-limit-exceeded"
+
+      # mTLS Certificate Expiry
+      - alert: MTLSCertificateExpiry
+        expr: |
+          (ssl_cert_not_after_timestamp - time()) / 86400 < 30
+        for: 1h
+        labels:
+          severity: warning
+          team: security
+          service: mtls
+        annotations:
+          summary: "mTLS certificate expires in {{ $value | humanize }} days"
+          description: "Certificate for {{ $labels.cn }} needs renewal"
+          runbook: "https://wiki.huginn.local/runbooks/mtls-cert-expiry"
+
+      # Suspicious API Token Usage
+      - alert: SuspiciousTokenUsage
+        expr: |
+          rate(api_token_usage_anomaly_total[15m]) > 5
+        for: 5m
+        labels:
+          severity: warning
+          team: security
+          service: api
+        annotations:
+          summary: "Anomalous token usage pattern for {{ $labels.token_prefix }}"
+          description: "Token showing unusual access patterns (geo, time, scope)"
+          runbook: "https://wiki.huginn.local/runbooks/suspicious-token"
+
+  # ============================================================
+  # SYSTEM ALERTS (Sistem - Kong/Grafana/Prometheus Self)
+  # ============================================================
+  - name: system_alerts
+    interval: 60s
+    rules:
+      # Kong Upstream Down
+      - alert: KongUpstreamDown
+        expr: |
+          kong_upstream_target_health{health="unhealthy"} > 0
+        for: 1m
+        labels:
+          severity: critical
+          team: platform
+          service: kong
+        annotations:
+          summary: "Kong upstream {{ $labels.upstream }} target {{ $labels.target }} unhealthy"
+          description: "Health check failing for upstream service"
+          runbook: "https://wiki.huginn.local/runbooks/kong-upstream-down"
+
+      # Kong Latency High
+      - alert: KongLatencyHigh
+        expr: |
+          histogram_quantile(0.99, sum by (le, service) (rate(kong_latency_bucket[5m]))) > 2
+        for: 3m
+        labels:
+          severity: warning
+          team: platform
+          service: kong
+        annotations:
+          summary: "Kong p99 latency > 2s for service {{ $labels.service }}"
+          description: "Gateway adding significant latency"
+          runbook: "https://wiki.huginn.local/runbooks/kong-latency-high"
+
+      # Prometheus Target Down
+      - alert: PrometheusTargetDown
+        expr: |
+          up == 0
+        for: 2m
+        labels:
+          severity: critical
+          team: platform
+          service: prometheus
+        annotations:
+          summary: "Prometheus target {{ $labels.job }}/{{ $labels.instance }} down"
+          description: "Target has been down for 2 minutes"
+          runbook: "https://wiki.huginn.local/runbooks/prometheus-target-down"
+
+      # Alertmanager Down
+      - alert: AlertmanagerDown
+        expr: |
+          up{job="alertmanager"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          team: platform
+          service: alertmanager
+        annotations:
+          summary: "Alertmanager is down"
+          description: "No alert routing - all alerts will be silent"
+          runbook: "https://wiki.huginn.local/runbooks/alertmanager-down"
+
+      # Grafana Down
+      - alert: GrafanaDown
+        expr: |
+          up{job="grafana"} == 0
+        for: 2m
+        labels:
+          severity: warning
+          team: platform
+          service: grafana
+        annotations:
+          summary: "Grafana is down"
+          description: "Dashboards unavailable"
+          runbook: "https://wiki.huginn.local/runbooks/grafana-down"

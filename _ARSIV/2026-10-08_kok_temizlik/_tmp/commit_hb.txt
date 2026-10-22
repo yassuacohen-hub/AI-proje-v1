@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 23.47s
+[chore/monorepo-merge c8a30aae] docs(hafiza): TEST-BACKLOG-CI-01 parti (b) kapandi b9067b05 - kod gercek/test eski gerekcesi
+ 1 file changed, 1 insertion(+)

@@ -1,0 +1,1 @@
+KAYDEDILDI: 2026-10-09 | UI-HUB-4ARTI1-01 | ihsan | 🟢 | Admin panel kok 7->5 (4+1 hub_ciz sablonu), Musteri Karti 4 sekme iskeleti canli dogrulandi, DETAY_EKRANLAR cift Denetim girisi temizlendi | D-355 | kapandi: 5 faz commit (cafc01f3/36de9f09+be7c216c+015b8bfd+debfb5f6/c811966f/a0d52c2a/f2cd952d), SSOT+hub teslim kaydi d7000d3c, pytest tam kosu 0 hata

@@ -1,0 +1,7 @@
+warning: in the working copy of 'data/orchestrator/bulgu_defteri.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/bulgu_defteri.md', CRLF will be replaced by LF the next time Git touches it
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 28.78s
+[chore/monorepo-merge 3e95b9e6] fix(TEST-BACKLOG-CI-01-a): belge düzeltmeleri — bulgu defteri 23 satır 6 alan/renk normalize, sağlayıcı ölçümü hesap adı kaldırıldı (D-288)
+ 2 files changed, 62 insertions(+), 33 deletions(-)

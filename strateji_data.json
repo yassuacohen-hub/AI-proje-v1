@@ -1,0 +1,58 @@
+{
+    "proje_adi": "VERI-OSB-HARITA-01",
+    "stratejiler": [
+        {
+            "adi": "STRATEGI-A",
+            "aciklama": "En temel strateji, bayat veri tespiti ve KVKK uyumu",
+            "fili_durum": "KAMULAŞTIRMA YAPILIYOR",
+            "priority": 1,
+            "kriterler": [
+                "Bayat veri tespiti",
+                "KVKK uyumluluğu", 
+                "TEMIZLEME"
+            ],
+            "durum": "SELECTED"
+        },
+        {
+            "adi": "STRATEGI-B",
+            "aciklama": "Orta seviye strateji, altyapı hazırlığı ile genişleme",
+            "fili_durum": "ALTYAPI HAZIRLANIYOR",
+            "priority": 2,
+            "kriterler": [
+                "Altyapı hazırlığı",
+                "Parsel tahsisi",
+                "KVKK uyumluluğu"
+            ],
+            "durum": "REJECTED"
+        },
+        {
+            "adi": "STRATEGI-C",
+            "aciklama": "Gelişme stratevi, faaliyetdeki OSB'ler",
+            "fili_durum": "İŞLETMEDE (FAALİYETTE)",
+            "priority": 3,
+            "kriterler": [
+                "Faaliyetdeki OSB'ler",
+                "KAMULAŞTIRMA YAPILIYOR verileri",
+                "KVKK uyumluluğu"
+            ],
+            "durum": "REJECTED"
+        }
+    ],
+    
+    "secili_strateji": "STRATEGI-A",
+    
+    "strateji_seçim_tarihi": "2024-01-01",
+    "kural_tablosu": {
+        "kriter_agirliklari": {
+            "bayat_tespit": 0.4,
+            "kvkk_uyum": 0.3,
+            "strateji_consistency": 0.3
+        },
+        "eşik_değerleri": {
+            "min_agirlik": 0.6,
+            "max_red_grounds": 3
+        }
+    },
+    
+    "durum": "READY_FOR_VALIDATION"
+}

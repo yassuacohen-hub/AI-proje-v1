@@ -1,0 +1,42 @@
+?? data/orchestrator/VERI-SEKTOR-01_rapor_2026-10-16_utku.md
+?? src/company_master/etl/sektor_normalize.py
+?? src/company_master/schema/migrations/0067_sector_columns.sql
+?? src/company_master/schema/migrations/down/0067_sector_columns.down.sql
+?? tests/test_api_scope.py
+?? tests/test_sektor_normalize.py
+_ARSIV/2026-10-08_kok_temizlik/_ARSIV_tek_kullanimlik/2026-10-04_kok_temizlik/create_sektor_sozluk.py
+_ARSIV/2026-10-08_kok_temizlik/_ARSIV_tek_kullanimlik/2026-10-04_kok_temizlik/create_sektor_sozluk_v2.py
+_ARSIV/2026-10-08_kok_temizlik/_ARSIV_tek_kullanimlik/2026-10-04_kok_temizlik/create_sektor_sozluk_v3.py
+_ARSIV/2026-10-08_kok_temizlik/_ARSIV_tek_kullanimlik/2026-10-04_kok_temizlik/create_sektor_sozluk_v4.py
+_ARSIV/2026-10-08_kok_temizlik/scripts/api_scope.py
+_ARSIV/2026-10-08_kok_temizlik/scripts/paket_scope.py
+_ARSIV/2026-10-08_kok_temizlik/src/company_master/api/routers/v1/scope.py
+_ARSIV/2026-10-08_kok_temizlik/src/company_master/etl/yetenek_sektor_yaz.py
+_ARSIV/2026-10-08_kok_temizlik/tests/test_api_scope.py
+_ARSIV/2026-10-08_kok_temizlik/tests/test_paket_scope.py
+_ARSIV/2026-10-08_kok_temizlik/tests/test_yetenek_sektor_yaz.py
+data/orchestrator/VERI-SEKTOR-01_rapor_2026-10-16_utku.md
+src/company_master/etl/sektor_normalize.py
+src/company_master/schema/migrations/0067_sector_columns.sql
+src/company_master/schema/migrations/down/0067_sector_columns.down.sql
+tests/test_api_scope.py
+tests/test_sektor_normalize.py
+sektor_normalize.py
+test_sektor_normalize.py
+0067_sector_columns.sql
+0060_mersis_tobb_data.sql
+0061_lookup_pool.sql
+0062_osb_master_15.sql
+0063_osbs_fiili_durum_rename.sql
+0064_osbs_fiili_durum_dusur.sql
+0065_odeme_musteri_ayar.sql
+0066_credit_transactions.sql
+0067_sector_columns.sql
+0e40d8f9 chore(chat): bilo->ihsan [GUVENLIK-ANAHTAR-01] (D-371)
+2f2606ef GUVENLIK-ANAHTAR-01 teslim (review) - admin anahtar iptal + yeni uretim + kredi bypass duzeltmesi
+ec43d582 chore(chat): bilo->ihsan [GUVENLIK-ANAHTAR-01] (D-371)
+a06edd72 chore(chat): bilo->ihsan [ALTYAPI-VDS-GIT-PULL-01] (D-371)
+ data/orchestrator/bulgu_defteri.md |  1 +
+ hubs/VERI_KALITESI_HUB.md          |  1 +
+ web_dashboard/tabs/__init__.py     | 44 +++++++++++++++++++-------------------
+ 3 files changed, 24 insertions(+), 22 deletions(-)

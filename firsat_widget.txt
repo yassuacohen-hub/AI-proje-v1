@@ -1,0 +1,54 @@
+Line 457:               <div class="wg-bas"><h3><svg class="ic"><use href="#i-target"/></svg>Fırsatlar<span class="ornek">Örnek</span></h3><button class="mini kat" aria-label="Daralt"><svg class="ic"><use href="#i-chev"/></svg></button></div>
+Line 458:               <div class="wg-gov" style="display:grid;grid-template-columns:170px 1fr;gap:18px">
+Line 459:                 <div><div class="buyuk" data-say="5">5</div><div style="color:var(--t3)">yeni fırsat</div><div class="delta ok" style="margin-top:6px"><svg class="ic"><use href="#i-up"/></svg>dün 2 → bugün 5</div>
+Line 460:                   <div class="dag" aria-label="Uyum dağılımı, örnek"><div><span>Uyum 80+</span><i style="width:40%"></i><b class="mono">2</b></div><div><span>60–79</span><i style="width:40%"></i><b class="mono">2</b></div><div><span>60 altı</span><i style="width:20%"></i><b class="mono">1</b></div></div>
+Line 461:                 </div>
+Line 462:                 <div>
+Line 463:                   <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap"><small style="color:var(--t3)">Günlük fırsat sayısı <span class="ornek">Örnek</span></small><div class="seg" id="fg-aralik" role="group" aria-label="Aralık"><button aria-pressed="false" data-n="7">7 gün</button><butt
+Line 464:                   <div class="gcub genis" id="fg" role="img" aria-label="Günlük fırsat sayısı, örnek. Çubuğa tıklayınca o günün özeti açılır"></div>
+Line 465:                   <div class="gcub-et" id="fg-et"></div>
+Line 466:                   <div class="gdetay" id="fg-detay">Çubuğa tıkla: o günün fırsat özeti burada açılır.</div>
+Line 467:                 </div>
+Line 468:                 <div style="grid-column:1/-1" id="fg-liste">
+Line 469:                   <div class="seg" id="fg-sz" role="group" aria-label="Uyum süzgeci" style="margin-bottom:6px"><button aria-pressed="true" data-u="0">Tümü</button><button aria-pressed="false" data-u="80">Uyum 80+</button><button aria-pressed="false" data-u="60">60–79</button></div>
+Line 470:                   <div class="satir"><div class="ad"><b>ACME MAKİNA SAN.</b><small>Ankara · Metal işleme · sektörünüzle uyum yüksek</small></div><span class="rozet ok">Uyum 86</span></div>
+Line 471:                   <div class="satir"><div class="ad"><b>ÖZ-KAR GIDA LTD.</b><small>Ankara OSB · Gıda · yeni tesis</small></div><span class="rozet info">Uyum 74</span></div>
+Line 472:                   <div class="satir blur"><div class="ad"><b>GİZLİ FİRMA A.Ş.</b><small>Konya · Makina</small></div></div>
+Line 473:                   <div class="satir blur"><div class="ad"><b>GİZLİ FİRMA 2</b><small>İzmir · Tekstil</small></div></div>
+Line 474:                   <div class="kilit"><svg class="ic"><use href="#i-lock"/></svg><button class="btn kucuk">Kilidi aç · 2 kredi</button></div>
+Line 475:                 </div>
+Line 476:                 <div style="grid-column:1/-1;align-self:end;border-top:1px solid var(--line);padding-top:10px">
+Line 477:                   <div style="font-size:12px;color:var(--t3);margin-bottom:6px">Bu hafta fırsat nedenleri <span class="ornek">Örnek</span></div>
+Line 478:                   <div style="display:flex;gap:8px;flex-wrap:wrap"><span class="rozet info">yeni tesis · 2</span><span class="rozet info">kapasite artırımı · 1</span><span class="rozet info">ihale ilanı · 1</span><span class="rozet info">sektör uyumu · 1</span><button class="btn kucuk" data-git="firsat">Tüm fırsatlar →</button></div>
+Line 479:                 </div>
+Line 480:               </div>
+Line 481:             </section>
+Line 482: 
+Line 483:             <section class="wg k4" id="w-radar">
+Line 484:               <div class="wg-bas"><h3><svg class="ic"><use href="#i-radar"/></svg>Radarım<span class="ornek">Örnek</span></h3><button class="btn kucuk" data-git="radar">Aç →</button></div>
+Line 485:               <div class="wg-gov">
+Line 486:                 <div style="display:flex;gap:12px;align-items:center;margin-bottom:10px">
+Line 487:                   <div class="radar"><button class="nok" data-f="BETA TEKSTİL" data-t="yeni" aria-label="BETA TEKSTİL, unvan değişti" style="left:22px;top:30px"></button><button class="nok" data-f="ACME MAKİNA" data-t="risk" aria-label="ACME MAKİNA, çelişki" style="left:60px;top:22px;background:var(--risk)"></button><button class="nok" data-f="ÖZ-K
+Line 488:                   <div style="flex:1;min-width:0">
+Line 489:                     <div class="mono" style="color:var(--t1);font-size:14px;white-space:nowrap">4/10 izleniyor</div>
+Line 490:                     <div class="cubuk" style="margin:6px 0"><i style="width:40%"></i></div>
+Line 491:                     <small style="color:var(--t3)">6 yuva boş · son tarama bugün 08:10</small>
+Line 492:                   </div>
+Line 493:                 </div>
+Line 494:                 <div class="chipler">
+Line 495:                   <div class="chip" style="--c:var(--warn)"><svg class="ic"><use href="#i-bell"/></svg><div><b>3</b><small>yeni sinyal · 24 sa</small></div></div>
+Line 496:                   <div class="chip" style="--c:var(--risk)"><svg class="ic"><use href="#i-shield"/></svg><div><b>1</b><small>riskli firma</small></div></div>
+Line 497:                   <div class="chip" style="--c:var(--ok)"><svg class="ic"><use href="#i-trend"/></svg><div><b>+2</b><small>haftalık değişim</small></div></div>
+Line 498:                   <div class="chip" style="--c:var(--info)"><svg class="ic"><use href="#i-clock"/></svg><div><b>08:10</b><small>son güncelleme</small></div></div>
+Line 499:                 </div>
+Line 500:                 <svg viewBox="0 0 300 36" width="100%" height="36" role="img" aria-label="Örnek 7 günlük sinyal çizgisi" style="margin-top:8px"><polyline fill="none" stroke="var(--act)" stroke-width="2" points="0,28 50,22 100,26 150,14 200,18 250,8 300,12"/></svg>
+Line 501:                 <div class="seg" id="rd-sz" role="group" aria-label="Radar süzgeci" style="margin:8px 0 4px"><button aria-pressed="true" data-t="tum">Tümü</button><button aria-pressed="false" data-t="risk">Riskli</button><button aria-pressed="false" data-t="yeni">Yeni sinyal</button></div>
+Line 502:                 <div class="satir" data-t="risk"><svg class="ic" style="color:var(--risk)"><use href="#i-alert"/></svg><div class="ad"><b>ACME MAKİNA</b><small>Çelişki 2 · 3 gün</small></div></div>
+Line 503:                 <div class="satir" data-t="yeni"><svg class="ic" style="color:var(--info)"><use href="#i-info"/></svg><div class="ad"><b>BETA TEKSTİL</b><small>Unvan değişti · 2 sa</small></div></div>
+Line 504:                 <div class="gdetay" id="radar-detay">Noktaya ya da satıra tıkla: firma ve sinyal özeti burada.</div>
+Line 505:                 <div style="display:flex;gap:6px;margin-top:8px"><button class="btn kucuk" style="flex:1;justify-content:center"><svg class="ic" style="width:14px;height:14px"><use href="#i-plus"/></svg>Firma ekle</button><button class="btn kucuk" data-git="izlenen">İzlenenler</button></div>
+Line 506:               </div>
+Line 507:             </section>
+Line 508: 
+Line 509:             <section class="wg kpi k3" id="k-kredi" data-kpi="kredi" tabindex="0" role="button" aria-label="Kalan Kredi, detay aç"><div class="wg-gov gov" style="--c:var(--act)"><div class="ust">Kalan Kredi<span class="rozet-ic ptop"><svg class="ic"><use href="#i-wallet"/></svg></span></div><div class="sayi" data-say="42">42</div><div class="alt">1
+Line 510:             <section class="wg kpi k3" id="k-radar" data-kpi="radar" tabindex="0" role="button" aria-label="Radardaki Şirket, detay aç"><div class="wg-gov gov" style="--c:var(--info)"><div class="ust">Radardaki Şirket<span class="rozet-ic ptop"><svg class="ic"><use href="#i-radar"/></svg></span></div><div class="sayi"><span data-say="4">4</span><sp

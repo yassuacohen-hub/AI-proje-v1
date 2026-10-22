@@ -1,0 +1,16 @@
+warning: in the working copy of 'data/orchestrator/task_board.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/triggers/utku.jsonl', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/triggers/yasu.jsonl', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'ihsan_project_context.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/task_board.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/triggers/utku.jsonl', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/triggers/yasu.jsonl', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'docs/strateji/PO_KARAR_FORMU.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'ihsan_project_context.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'plans/brief_yasu_UI-SSR-NEXT-KUNYE-01.md', CRLF will be replaced by LF the next time Git touches it
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 22.39s
+TAHSIS EDILMEMIS KARAR NUMARASI: D-251
+Once al: python scripts/karar_no.py --al
+(Uc kez ayni numara iki karara gitti: D-281, D-301, D-303.)

@@ -1,0 +1,511 @@
+== TARAMA ==
+  crlf_karisik (5):
+    - scripts/check_repo_status.py
+    - scripts/cleanup_repo.py
+    - scripts/complete_cleanup.py
+    - scripts/verify_tasks.py
+    - scripts/yasu_deliver.py
+  dosya_sonu (31):
+    - scripts/ajan_cakisma_kilidi.py
+    - scripts/check_board.py
+    - scripts/check_havuz_task.py
+    - scripts/check_task_board.py
+    - scripts/finalize_tasks.py
+    - scripts/git_credential_scan.py
+    - scripts/kazima_jina_fallback.py
+    - scripts/kazima_qwen_classify.py
+    - scripts/ninerouter_anahtar_guncelle.py
+    - scripts/verify_final_tasks.py
+    - scripts/zamanli_gorev_kur.py
+    - src/company_master/api/routers/v1/arama.py
+    - src/company_master/etl/gece_besleme.py
+    - src/company_master/etl/tobb_api.py
+    - src/company_master/kur.py
+    - src/company_master/logging/api_logger.py
+    - tests/test_ajan_cakisma_kilidi.py
+    - tests/test_api_arama.py
+    - tests/test_api_v1_network.py
+    - tests/test_gorev_at_kilit_kapisi.py
+    - tests/test_kazima_jina_fallback.py
+    - tests/test_kazima_qwen_classify.py
+    - tests/test_kur.py
+    - tests/test_ninerouter_anahtar_guncelle.py
+    - tests/test_odeme.py
+    - tests/test_paket_fiyat_senkron.py
+    - tests/test_paket_rozet.py
+    - tests/test_tobb_card02_parse.py
+    - web_dashboard/tabs/__init__.py
+    - web_dashboard/tabs/admin_denetim.py
+    - web_dashboard/tabs/admin_sistem_saglik.py
+  mojibake (36):
+    - src/company_master/etl/nace_coklu_yaz.py:45
+    - src/company_master/etl/nace_sozluk_yukle.py:132
+    - src/company_master/etl/nace_sozluk_yukle.py:245
+    - src/company_master/etl/nace_sozluk_yukle.py:35
+    - src/company_master/etl/nace_sozluk_yukle.py:37
+    - src/company_master/etl/nace_sozluk_yukle.py:372
+    - src/company_master/etl/nace_sozluk_yukle.py:377
+    - src/company_master/etl/nace_sozluk_yukle.py:39
+    - src/company_master/etl/nace_sozluk_yukle.py:40
+    - src/company_master/etl/nace_sozluk_yukle.py:41
+    - src/company_master/etl/nace_sozluk_yukle.py:42
+    - src/company_master/etl/nace_sozluk_yukle.py:43
+    - src/company_master/etl/nace_sozluk_yukle.py:45
+    - src/company_master/etl/nace_sozluk_yukle.py:458
+    - src/company_master/etl/nace_sozluk_yukle.py:46
+    - src/company_master/etl/nace_sozluk_yukle.py:467
+    - src/company_master/etl/nace_sozluk_yukle.py:47
+    - src/company_master/etl/nace_sozluk_yukle.py:472
+    - src/company_master/etl/nace_sozluk_yukle.py:48
+    - src/company_master/etl/nace_sozluk_yukle.py:480
+    - src/company_master/etl/nace_sozluk_yukle.py:489
+    - src/company_master/etl/nace_sozluk_yukle.py:49
+    - src/company_master/etl/nace_sozluk_yukle.py:5
+    - src/company_master/etl/nace_sozluk_yukle.py:514
+    - src/company_master/etl/nace_sozluk_yukle.py:516
+    - src/company_master/etl/nace_sozluk_yukle.py:528
+    - src/company_master/etl/nace_sozluk_yukle.py:549
+    - src/company_master/etl/nace_sozluk_yukle.py:550
+    - src/company_master/etl/nace_sozluk_yukle.py:554
+    - src/company_master/etl/nace_sozluk_yukle.py:561
+    - src/company_master/etl/nace_sozluk_yukle.py:567
+    - src/company_master/etl/nace_sozluk_yukle.py:571
+    - src/company_master/etl/sozluk_baslik_duzelt.py:150
+    - src/company_master/etl/sozluk_baslik_duzelt.py:312
+    - src/company_master/etl/sozluk_baslik_duzelt.py:43
+    - tests/test_mojibake_bariyer.py:48
+  sondaki_bosluk (175):
+    - scripts/cleanup_repo.py:28
+    - scripts/cleanup_repo.py:30
+    - scripts/cleanup_repo.py:33
+    - scripts/cleanup_repo.py:39
+    - scripts/cleanup_repo.py:42
+    - scripts/cleanup_repo.py:46
+    - scripts/cleanup_repo.py:54
+    - scripts/cleanup_repo.py:71
+    - scripts/complete_cleanup.py:68
+    - scripts/complete_cleanup.py:79
+    - scripts/yasu_deliver.py:26
+    - src/company_master/api/routers/v1/arama.py:100
+    - src/company_master/api/routers/v1/arama.py:105
+    - src/company_master/api/routers/v1/arama.py:121
+    - src/company_master/api/routers/v1/arama.py:175
+    - src/company_master/api/routers/v1/arama.py:180
+    - src/company_master/api/routers/v1/arama.py:187
+    - src/company_master/api/routers/v1/arama.py:190
+    - src/company_master/api/routers/v1/arama.py:198
+    - src/company_master/api/routers/v1/arama.py:216
+    - src/company_master/api/routers/v1/arama.py:225
+    - src/company_master/api/routers/v1/arama.py:229
+    - src/company_master/api/routers/v1/arama.py:240
+    - src/company_master/api/routers/v1/arama.py:247
+    - src/company_master/api/routers/v1/arama.py:259
+    - src/company_master/api/routers/v1/arama.py:264
+    - src/company_master/api/routers/v1/arama.py:267
+    - src/company_master/api/routers/v1/arama.py:295
+    - src/company_master/api/routers/v1/arama.py:87
+    - src/company_master/api/routers/v1/arama.py:93
+    - src/company_master/api/routers/v1/fraud.py:50
+    - src/company_master/api/routers/v1/fraud.py:52
+    - src/company_master/api/routers/v1/fraud.py:58
+    - src/company_master/api/routers/v1/network_router.py:100
+    - src/company_master/api/routers/v1/network_router.py:119
+    - src/company_master/api/routers/v1/network_router.py:140
+    - src/company_master/api/routers/v1/network_router.py:144
+    - src/company_master/api/routers/v1/network_router.py:147
+    - src/company_master/api/routers/v1/network_router.py:151
+    - src/company_master/api/routers/v1/network_router.py:154
+    - src/company_master/api/routers/v1/network_router.py:31
+    - src/company_master/api/routers/v1/network_router.py:34
+    - src/company_master/api/routers/v1/network_router.py:75
+    - src/company_master/api/routers/v1/network_router.py:79
+    - src/company_master/api/routers/v1/network_router.py:88
+    - src/company_master/api/routers/v1/network_router.py:96
+    - src/company_master/api/routers/v1/scope.py:109
+    - src/company_master/api/routers/v1/scope.py:44
+    - src/company_master/api/routers/v1/scope.py:53
+    - src/company_master/api/routers/v1/scope.py:95
+    - src/company_master/etl/mersis_api.py:202
+    - src/company_master/etl/mersis_api.py:245
+    - src/company_master/etl/mersis_api.py:253
+    - src/company_master/etl/mersis_api.py:262
+    - src/company_master/etl/mersis_api.py:271
+    - src/company_master/etl/mersis_api.py:283
+    - src/company_master/etl/tobb_api.py:136
+    - src/company_master/etl/tobb_api.py:143
+    - src/company_master/etl/tobb_api.py:148
+    - src/company_master/etl/tobb_api.py:172
+    - src/company_master/etl/tobb_api.py:179
+    - src/company_master/etl/tobb_api.py:189
+    - src/company_master/etl/tobb_api.py:194
+    - src/company_master/etl/tobb_api.py:208
+    - src/company_master/etl/tobb_api.py:212
+    - src/company_master/etl/tobb_api.py:217
+    - src/company_master/etl/tobb_api.py:219
+    - src/company_master/etl/tobb_api.py:236
+    - src/company_master/etl/tobb_api.py:239
+    - src/company_master/etl/tobb_api.py:246
+    - src/company_master/etl/tobb_api.py:257
+    - src/company_master/etl/tobb_api.py:282
+    - src/company_master/etl/tobb_api.py:287
+    - src/company_master/etl/tobb_api.py:292
+    - src/company_master/etl/tobb_api.py:297
+    - src/company_master/etl/tobb_api.py:300
+    - src/company_master/etl/tobb_api.py:303
+    - src/company_master/etl/tobb_api.py:307
+    - src/company_master/etl/tobb_api.py:312
+    - src/company_master/etl/tobb_api.py:314
+    - src/company_master/etl/tobb_api.py:331
+    - src/company_master/etl/tobb_api.py:334
+    - src/company_master/etl/tobb_api.py:341
+    - src/company_master/etl/tobb_api.py:351
+    - src/company_master/etl/tobb_api.py:376
+    - src/company_master/etl/tobb_api.py:381
+    - src/company_master/etl/tobb_api.py:386
+    - src/company_master/etl/tobb_api.py:391
+    - src/company_master/etl/tobb_api.py:396
+    - src/company_master/etl/tobb_api.py:401
+    - src/company_master/etl/tobb_api.py:408
+    - src/company_master/etl/tobb_api.py:415
+    - src/company_master/etl/tobb_api.py:422
+    - src/company_master/etl/tobb_api.py:429
+    - src/company_master/etl/tobb_api.py:436
+    - src/company_master/etl/tobb_api.py:439
+    - src/company_master/etl/tobb_api.py:442
+    - src/company_master/etl/tobb_api.py:469
+    - src/company_master/etl/tobb_api.py:471
+    - src/company_master/etl/tobb_api.py:473
+    - src/company_master/etl/tobb_api.py:544
+    - src/company_master/etl/tobb_api.py:554
+    - src/company_master/etl/tobb_api.py:559
+    - src/company_master/etl/tobb_api.py:636
+    - src/company_master/etl/tobb_api.py:647
+    - src/company_master/etl/tobb_api.py:653
+    - src/company_master/etl/tobb_api.py:668
+    - src/company_master/etl/tobb_api.py:688
+    - src/company_master/etl/tobb_api.py:709
+    - src/company_master/etl/tobb_api.py:712
+    - src/company_master/etl/tobb_api.py:716
+    - src/company_master/etl/tobb_api.py:724
+    - src/company_master/etl/tobb_api.py:738
+    - src/company_master/etl/tobb_api.py:745
+    - src/company_master/etl/tobb_api.py:749
+    - tests/test_api_arama.py:104
+    - tests/test_api_arama.py:229
+    - tests/test_api_arama.py:234
+    - tests/test_api_arama.py:240
+    - tests/test_api_arama.py:327
+    - tests/test_api_arama.py:338
+    - tests/test_api_arama.py:47
+    - tests/test_api_arama.py:54
+    - tests/test_api_arama.py:57
+    - tests/test_api_arama.py:59
+    - tests/test_api_arama.py:73
+    - tests/test_api_arama.py:75
+    - tests/test_api_arama.py:78
+    - tests/test_api_arama.py:82
+    - tests/test_api_arama.py:88
+    - tests/test_api_arama.py:91
+    - tests/test_api_arama.py:93
+    - tests/test_api_scope.py:135
+    - tests/test_api_scope.py:37
+    - tests/test_api_scope.py:51
+    - tests/test_api_scope.py:57
+    - tests/test_api_scope.py:61
+    - tests/test_api_v1_company.py:169
+    - tests/test_api_v1_company.py:175
+    - tests/test_api_v1_company.py:184
+    - tests/test_api_v1_company.py:37
+    - tests/test_api_v1_company.py:51
+    - tests/test_api_v1_company.py:57
+    - tests/test_api_v1_company.py:61
+    - tests/test_api_v1_network.py:100
+    - tests/test_api_v1_network.py:106
+    - tests/test_api_v1_network.py:110
+    - tests/test_api_v1_network.py:20
+    - tests/test_api_v1_network.py:34
+    - tests/test_api_v1_network.py:40
+    - tests/test_api_v1_network.py:48
+    - tests/test_api_v1_network.py:55
+    - tests/test_api_v1_network.py:60
+    - tests/test_api_v1_network.py:62
+    - tests/test_api_v1_network.py:74
+    - tests/test_api_v1_network.py:79
+    - tests/test_api_v1_network.py:88
+    - tests/test_api_v1_network.py:93
+    - tests/test_api_v1_network.py:98
+    - tests/test_paket_rozet.py:108
+    - tests/test_paket_rozet.py:18
+    - tests/test_paket_rozet.py:34
+    - tests/test_paket_rozet.py:51
+    - tests/test_paket_rozet.py:68
+    - tests/test_paket_rozet.py:78
+    - tests/test_paket_rozet.py:89
+    - tests/test_paket_rozet.py:93
+    - web_dashboard/tabs/__init__.py:720
+    - web_dashboard/tabs/__init__.py:757
+    - web_dashboard/tabs/__init__.py:771
+    - web_dashboard/tabs/__init__.py:846
+    - web_dashboard/tabs/admin_panel.py:1486
+    - web_dashboard/tabs/admin_panel.py:1496
+    - web_dashboard/tabs/paketler.py:198
+    - web_dashboard/tabs/paketler.py:209
+  utf8_bom (5):
+    - scripts/dashboard_perf_monitor.py
+    - scripts/p44_benchmark.py
+    - scripts/p44_final_benchmark.py
+    - src/company_master/dashboard/__init__.py
+    - src/company_master/dashboard/perf_monitor.py
+ALLOWLIST DISI IHlAL (252):
+  - utf8_bom: scripts/dashboard_perf_monitor.py
+  - utf8_bom: scripts/p44_benchmark.py
+  - utf8_bom: scripts/p44_final_benchmark.py
+  - utf8_bom: src/company_master/dashboard/__init__.py
+  - utf8_bom: src/company_master/dashboard/perf_monitor.py
+  - mojibake: src/company_master/etl/nace_coklu_yaz.py:45
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:132
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:245
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:35
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:37
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:372
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:377
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:39
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:40
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:41
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:42
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:43
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:45
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:458
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:46
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:467
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:47
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:472
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:48
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:480
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:489
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:49
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:5
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:514
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:516
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:528
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:549
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:550
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:554
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:561
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:567
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:571
+  - mojibake: src/company_master/etl/sozluk_baslik_duzelt.py:150
+  - mojibake: src/company_master/etl/sozluk_baslik_duzelt.py:312
+  - mojibake: src/company_master/etl/sozluk_baslik_duzelt.py:43
+  - mojibake: tests/test_mojibake_bariyer.py:48
+  - crlf_karisik: scripts/check_repo_status.py
+  - crlf_karisik: scripts/cleanup_repo.py
+  - crlf_karisik: scripts/complete_cleanup.py
+  - crlf_karisik: scripts/verify_tasks.py
+  - crlf_karisik: scripts/yasu_deliver.py
+  - sondaki_bosluk: scripts/cleanup_repo.py:28
+  - sondaki_bosluk: scripts/cleanup_repo.py:30
+  - sondaki_bosluk: scripts/cleanup_repo.py:33
+  - sondaki_bosluk: scripts/cleanup_repo.py:39
+  - sondaki_bosluk: scripts/cleanup_repo.py:42
+  - sondaki_bosluk: scripts/cleanup_repo.py:46
+  - sondaki_bosluk: scripts/cleanup_repo.py:54
+  - sondaki_bosluk: scripts/cleanup_repo.py:71
+  - sondaki_bosluk: scripts/complete_cleanup.py:68
+  - sondaki_bosluk: scripts/complete_cleanup.py:79
+  - sondaki_bosluk: scripts/yasu_deliver.py:26
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:100
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:105
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:121
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:175
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:180
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:187
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:190
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:198
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:216
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:225
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:229
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:240
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:247
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:259
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:264
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:267
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:295
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:87
+  - sondaki_bosluk: src/company_master/api/routers/v1/arama.py:93
+  - sondaki_bosluk: src/company_master/api/routers/v1/fraud.py:50
+  - sondaki_bosluk: src/company_master/api/routers/v1/fraud.py:52
+  - sondaki_bosluk: src/company_master/api/routers/v1/fraud.py:58
+  - sondaki_bosluk: src/company_master/api/routers/v1/network_router.py:100
+  - sondaki_bosluk: src/company_master/api/routers/v1/network_router.py:119
+  - sondaki_bosluk: src/company_master/api/routers/v1/network_router.py:140
+  - sondaki_bosluk: src/company_master/api/routers/v1/network_router.py:144
+  - sondaki_bosluk: src/company_master/api/routers/v1/network_router.py:147
+  - sondaki_bosluk: src/company_master/api/routers/v1/network_router.py:151
+  - sondaki_bosluk: src/company_master/api/routers/v1/network_router.py:154
+  - sondaki_bosluk: src/company_master/api/routers/v1/network_router.py:31
+  - sondaki_bosluk: src/company_master/api/routers/v1/network_router.py:34
+  - sondaki_bosluk: src/company_master/api/routers/v1/network_router.py:75
+  - sondaki_bosluk: src/company_master/api/routers/v1/network_router.py:79
+  - sondaki_bosluk: src/company_master/api/routers/v1/network_router.py:88
+  - sondaki_bosluk: src/company_master/api/routers/v1/network_router.py:96
+  - sondaki_bosluk: src/company_master/api/routers/v1/scope.py:109
+  - sondaki_bosluk: src/company_master/api/routers/v1/scope.py:44
+  - sondaki_bosluk: src/company_master/api/routers/v1/scope.py:53
+  - sondaki_bosluk: src/company_master/api/routers/v1/scope.py:95
+  - sondaki_bosluk: src/company_master/etl/mersis_api.py:202
+  - sondaki_bosluk: src/company_master/etl/mersis_api.py:245
+  - sondaki_bosluk: src/company_master/etl/mersis_api.py:253
+  - sondaki_bosluk: src/company_master/etl/mersis_api.py:262
+  - sondaki_bosluk: src/company_master/etl/mersis_api.py:271
+  - sondaki_bosluk: src/company_master/etl/mersis_api.py:283
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:136
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:143
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:148
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:172
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:179
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:189
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:194
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:208
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:212
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:217
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:219
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:236
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:239
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:246
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:257
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:282
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:287
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:292
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:297
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:300
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:303
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:307
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:312
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:314
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:331
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:334
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:341
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:351
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:376
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:381
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:386
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:391
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:396
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:401
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:408
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:415
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:422
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:429
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:436
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:439
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:442
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:469
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:471
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:473
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:544
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:554
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:559
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:636
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:647
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:653
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:668
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:688
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:709
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:712
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:716
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:724
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:738
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:745
+  - sondaki_bosluk: src/company_master/etl/tobb_api.py:749
+  - sondaki_bosluk: tests/test_api_arama.py:104
+  - sondaki_bosluk: tests/test_api_arama.py:229
+  - sondaki_bosluk: tests/test_api_arama.py:234
+  - sondaki_bosluk: tests/test_api_arama.py:240
+  - sondaki_bosluk: tests/test_api_arama.py:327
+  - sondaki_bosluk: tests/test_api_arama.py:338
+  - sondaki_bosluk: tests/test_api_arama.py:47
+  - sondaki_bosluk: tests/test_api_arama.py:54
+  - sondaki_bosluk: tests/test_api_arama.py:57
+  - sondaki_bosluk: tests/test_api_arama.py:59
+  - sondaki_bosluk: tests/test_api_arama.py:73
+  - sondaki_bosluk: tests/test_api_arama.py:75
+  - sondaki_bosluk: tests/test_api_arama.py:78
+  - sondaki_bosluk: tests/test_api_arama.py:82
+  - sondaki_bosluk: tests/test_api_arama.py:88
+  - sondaki_bosluk: tests/test_api_arama.py:91
+  - sondaki_bosluk: tests/test_api_arama.py:93
+  - sondaki_bosluk: tests/test_api_scope.py:135
+  - sondaki_bosluk: tests/test_api_scope.py:37
+  - sondaki_bosluk: tests/test_api_scope.py:51
+  - sondaki_bosluk: tests/test_api_scope.py:57
+  - sondaki_bosluk: tests/test_api_scope.py:61
+  - sondaki_bosluk: tests/test_api_v1_company.py:169
+  - sondaki_bosluk: tests/test_api_v1_company.py:175
+  - sondaki_bosluk: tests/test_api_v1_company.py:184
+  - sondaki_bosluk: tests/test_api_v1_company.py:37
+  - sondaki_bosluk: tests/test_api_v1_company.py:51
+  - sondaki_bosluk: tests/test_api_v1_company.py:57
+  - sondaki_bosluk: tests/test_api_v1_company.py:61
+  - sondaki_bosluk: tests/test_api_v1_network.py:100
+  - sondaki_bosluk: tests/test_api_v1_network.py:106
+  - sondaki_bosluk: tests/test_api_v1_network.py:110
+  - sondaki_bosluk: tests/test_api_v1_network.py:20
+  - sondaki_bosluk: tests/test_api_v1_network.py:34
+  - sondaki_bosluk: tests/test_api_v1_network.py:40
+  - sondaki_bosluk: tests/test_api_v1_network.py:48
+  - sondaki_bosluk: tests/test_api_v1_network.py:55
+  - sondaki_bosluk: tests/test_api_v1_network.py:60
+  - sondaki_bosluk: tests/test_api_v1_network.py:62
+  - sondaki_bosluk: tests/test_api_v1_network.py:74
+  - sondaki_bosluk: tests/test_api_v1_network.py:79
+  - sondaki_bosluk: tests/test_api_v1_network.py:88
+  - sondaki_bosluk: tests/test_api_v1_network.py:93
+  - sondaki_bosluk: tests/test_api_v1_network.py:98
+  - sondaki_bosluk: tests/test_paket_rozet.py:108
+  - sondaki_bosluk: tests/test_paket_rozet.py:18
+  - sondaki_bosluk: tests/test_paket_rozet.py:34
+  - sondaki_bosluk: tests/test_paket_rozet.py:51
+  - sondaki_bosluk: tests/test_paket_rozet.py:68
+  - sondaki_bosluk: tests/test_paket_rozet.py:78
+  - sondaki_bosluk: tests/test_paket_rozet.py:89
+  - sondaki_bosluk: tests/test_paket_rozet.py:93
+  - sondaki_bosluk: web_dashboard/tabs/__init__.py:720
+  - sondaki_bosluk: web_dashboard/tabs/__init__.py:757
+  - sondaki_bosluk: web_dashboard/tabs/__init__.py:771
+  - sondaki_bosluk: web_dashboard/tabs/__init__.py:846
+  - sondaki_bosluk: web_dashboard/tabs/admin_panel.py:1486
+  - sondaki_bosluk: web_dashboard/tabs/admin_panel.py:1496
+  - sondaki_bosluk: web_dashboard/tabs/paketler.py:198
+  - sondaki_bosluk: web_dashboard/tabs/paketler.py:209
+  - dosya_sonu: scripts/ajan_cakisma_kilidi.py
+  - dosya_sonu: scripts/check_board.py
+  - dosya_sonu: scripts/check_havuz_task.py
+  - dosya_sonu: scripts/check_task_board.py
+  - dosya_sonu: scripts/finalize_tasks.py
+  - dosya_sonu: scripts/git_credential_scan.py
+  - dosya_sonu: scripts/kazima_jina_fallback.py
+  - dosya_sonu: scripts/kazima_qwen_classify.py
+  - dosya_sonu: scripts/ninerouter_anahtar_guncelle.py
+  - dosya_sonu: scripts/verify_final_tasks.py
+  - dosya_sonu: scripts/zamanli_gorev_kur.py
+  - dosya_sonu: src/company_master/api/routers/v1/arama.py
+  - dosya_sonu: src/company_master/etl/gece_besleme.py
+  - dosya_sonu: src/company_master/etl/tobb_api.py
+  - dosya_sonu: src/company_master/kur.py
+  - dosya_sonu: src/company_master/logging/api_logger.py
+  - dosya_sonu: tests/test_ajan_cakisma_kilidi.py
+  - dosya_sonu: tests/test_api_arama.py
+  - dosya_sonu: tests/test_api_v1_network.py
+  - dosya_sonu: tests/test_gorev_at_kilit_kapisi.py
+  - dosya_sonu: tests/test_kazima_jina_fallback.py
+  - dosya_sonu: tests/test_kazima_qwen_classify.py
+  - dosya_sonu: tests/test_kur.py
+  - dosya_sonu: tests/test_ninerouter_anahtar_guncelle.py
+  - dosya_sonu: tests/test_odeme.py
+  - dosya_sonu: tests/test_paket_fiyat_senkron.py
+  - dosya_sonu: tests/test_paket_rozet.py
+  - dosya_sonu: tests/test_tobb_card02_parse.py
+  - dosya_sonu: web_dashboard/tabs/__init__.py
+  - dosya_sonu: web_dashboard/tabs/admin_denetim.py
+  - dosya_sonu: web_dashboard/tabs/admin_sistem_saglik.py

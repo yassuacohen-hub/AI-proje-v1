@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 27.30s
+[chore/monorepo-merge c811966f] feat(D-355): Faz C kok 7->5 (Gelir->Musteriler, Guvenlik->Sistem cocugu; hub kokleri anon)
+ 4 files changed, 42 insertions(+), 36 deletions(-)

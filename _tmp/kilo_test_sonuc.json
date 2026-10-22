@@ -1,0 +1,19 @@
+{
+ "kr/claude-haiku-4.5": "HATA HTTP Error 503: Service Unavailable {\"error\":{\"message\":\"[kiro/claude-haiku-4.5] [402]: {\\\"messa",
+ "kr/claude-sonnet-4.5": "HATA HTTP Error 503: Service Unavailable {\"error\":{\"message\":\"[kiro/claude-sonnet-4.5] [402]: {\\\"mess",
+ "kr/claude-sonnet-4": "HATA HTTP Error 503: Service Unavailable {\"error\":{\"message\":\"[kiro/claude-sonnet-4] [402]: {\\\"messag",
+ "kr/qwen3-coder-next": "HATA HTTP Error 503: Service Unavailable {\"error\":{\"message\":\"[kiro/qwen3-coder-next] [402]: {\\\"messa",
+ "kr/deepseek-3.2": "HATA HTTP Error 503: Service Unavailable {\"error\":{\"message\":\"[kiro/deepseek-3.2] [402]: {\\\"message\\\"",
+ "kr/glm-5": "HATA HTTP Error 503: Service Unavailable {\"error\":{\"message\":\"[kiro/glm-5] [402]: {\\\"message\\\":\\\"You ",
+ "kr/minimax-m2.5": "HATA HTTP Error 503: Service Unavailable {\"error\":{\"message\":\"[kiro/minimax-m2.5] [402]: {\\\"message\\\"",
+ "kr/auto": "HATA HTTP Error 503: Service Unavailable {\"error\":{\"message\":\"[kiro/auto] [402]: {\\\"message\\\":\\\"You h",
+ "bzl/auto:free": "HATA Extra data: line 1 column 619 (char 618) ",
+ "cl/minimax/minimax-m3.1-flash:free": "HATA Extra data: line 2 column 1 (char 1097) ",
+ "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free": "HATA Extra data: line 3 column 978 (char 988) ",
+ "kc/nvidia/nemotron-3.5-lightning:free": "HATA Extra data: line 1 column 2641 (char 2640) ",
+ "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free": "HATA Extra data: line 7 column 1504 (char 1536) ",
+ "kc/cohere/north-mini-code:free": "HATA Extra data: line 1 column 1846 (char 1845) ",
+ "openrouter/poolside/laguna-xs-2.1:free": "HATA Extra data: line 3 column 772 (char 782) ",
+ "kc/dots-studio/dots-3-note-preview:free": "HATA Extra data: line 1 column 2628 (char 2627) ",
+ "kc/openrouter/free": "HATA Extra data: line 1 column 2530 (char 2529) "
+}

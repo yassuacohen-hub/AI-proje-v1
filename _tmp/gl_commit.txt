@@ -1,0 +1,20 @@
+[pre-commit] panel durustluk mandallari...
+..............................................                           [100%]
+============================== warnings summary ===============================
+tests/test_pool_put_imza.py::test_pool_put_cagrilari_kanonik_imzada
+  <unknown>:62: SyntaxWarning: invalid escape sequence '\.'
+
+tests/test_pool_put_imza.py::test_pool_put_cagrilari_kanonik_imzada
+  <unknown>:77: SyntaxWarning: invalid escape sequence '\.'
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+46 passed, 2 warnings in 25.26s
+[90m9:58AM[0m [32mINF[0m [1m0 commits scanned.[0m
+[90m9:58AM[0m [32mINF[0m [1mscanned ~1847 bytes (1.85 KB) in 176ms[0m
+[90m9:58AM[0m [32mINF[0m [1mno leaks found[0m
+[chore/monorepo-merge 8c19db65] GUVENLIK-SIR-TARAMA-01: gitleaks pre-commit kapisi + olculmus yanlis alarm listesi (428 commit, 2364->1 bulgu; kalan 1 = 772a2937 gercek, iptal Bilo'da)
+ 3 files changed, 33 insertions(+)
+ create mode 100644 .gitleaks.toml
+ create mode 100644 .gitleaksignore
+rc=0  
+8c19db65 GUVENLIK-SIR-TARAMA-01: gitleaks pre-commit kapisi + olculmus yanlis alarm listesi (428 commit, 2364->1 bulgu; kalan 1 = 772a2937 gercek, iptal Bilo'da)

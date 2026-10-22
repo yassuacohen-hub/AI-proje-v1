@@ -1,0 +1,7 @@
+warning: in the working copy of 'tests/test_gorev_kutusu_hafiza.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'tests/test_gorev_kutusu_hafiza.py', CRLF will be replaced by LF the next time Git touches it
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 30.70s
+[chore/monorepo-merge b9067b05] test(TEST-BACKLOG-CI-01-b): kod<->test uyumsuzlugu - 4 test koda hizalandi (YERLESIM-03 token, growth NOW dinamik, D-318 kapisi mock, dizin-adi assert silindi)
+ 4 files changed, 11 insertions(+), 4 deletions(-)

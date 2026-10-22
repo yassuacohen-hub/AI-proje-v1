@@ -1,0 +1,46 @@
+Line 515:               <div class="wg-bas"><h3><svg class="ic"><use href="#i-bld"/></svg>Şirket Kartı<span class="ornek">Örnek</span></h3><button class="btn kucuk" data-git="sirket">Kartı aç →</button></div>
+Line 516:               <div class="wg-gov">
+Line 517:                 <div style="display:flex;gap:18px;align-items:center;margin-bottom:10px">
+Line 518:                   <div class="guven"><b>68</b></div>
+Line 519:                   <div><b style="color:var(--t1);font:600 16px Inter">ACME MAKİNA SAN. A.Ş.</b><div style="margin:4px 0;display:flex;gap:6px;flex-wrap:wrap"><span class="rozet ok">Aktif</span><span class="rozet info">Ankara OSB</span><span class="rozet warn">Veri eksik: 3</span><a href="#" data-git="dedektif" class="rozet mor" style="text-decoratio
+Line 520:                 </div>
+Line 521:                 <div class="puan"><span>Kurumsallık</span><div class="cubuk"><i style="width:70%"></i></div><span class="mono">14/20</span></div>
+Line 522:                 <div class="puan"><span>Güvenilirlik</span><div class="cubuk"><i style="width:55%"></i></div><span class="mono">11/20</span></div>
+Line 523:                 <div class="puan"><span>Şeffaflık</span><div class="cubuk"><i style="width:60%"></i></div><span class="mono">9/15</span></div>
+Line 524:                 <div class="puan"><span>Risk sinyali</span><div class="cubuk"><i style="width:15%;background:var(--risk)"></i></div><span class="mono">düşük</span></div>
+Line 525:                 <p style="margin:8px 0 0;font-size:12.5px">Dayanak: 3 kaynak · <span class="rozet info">LİTE izliyor → PRO’ya çıkar</span></p>
+Line 526:               </div>
+Line 527:             </section>
+Line 528:             <section class="wg k4" id="w-sinyal">
+Line 529:               <div class="wg-bas"><h3><svg class="ic"><use href="#i-bell"/></svg>Son Sinyaller<span class="ornek">Örnek</span></h3></div>
+Line 530:               <div class="wg-gov">
+Line 531:                 <div class="satir"><svg class="ic" style="color:var(--info)"><use href="#i-info"/></svg><div class="ad"><b>Unvan değişti</b><small>BETA TEKSTİL</small></div><small>2 sa</small></div>
+Line 532:                 <div class="satir"><svg class="ic" style="color:var(--warn)"><use href="#i-pin"/></svg><div class="ad"><b>Adres güncellemesi</b><small>ÖZ-KAR GIDA</small></div><small>dün</small></div>
+Line 533:                 <div class="satir"><svg class="ic" style="color:var(--risk)"><use href="#i-alert"/></svg><div class="ad"><b>Çelişki: 2 kaynak</b><small>ACME MAKİNA · <a href="#" data-git="dedektif" style="color:var(--mor)">Dedektife sor</a></small></div><small>3 gün</small></div>
+Line 534:               </div>
+Line 535:             </section>
+Line 536: 
+Line 537:             <section class="wg k6" id="w-trend">
+Line 538:               <div class="wg-bas"><h3><svg class="ic"><use href="#i-trend"/></svg>Trend<span class="ornek">Örnek</span></h3><span class="rozet info">30 gün</span></div>
+Line 539:               <div class="wg-gov"><svg viewBox="0 0 300 100" width="100%" height="185" role="img" aria-label="Örnek trend grafiği"><polyline fill="none" stroke="var(--act)" stroke-width="2.4" points="0,80 40,70 80,74 120,52 160,58 200,36 240,40 300,20"/><polyline fill="none" stroke="var(--info)" stroke-width="2" stroke-dasharray="5 4" points="0,86 
+Line 540:               <div style="display:flex;gap:14px;font-size:12.5px;color:var(--t3)"><span><i class="sw" style="background:var(--act)"></i>Sizin sektör</span><span><i class="sw" style="background:var(--info)"></i>Ankara OSB ortalaması</span></div>
+Line 541:               <div class="chipler" style="margin-top:10px">
+Line 542:                 <div class="chip" style="--c:var(--ok)"><b data-say="12" data-ek="%">12%</b><small>30 günde yeni firma artışı</small></div>
+Line 543:                 <div class="chip" style="--c:var(--info)"><b data-say="38" data-ek="%">38%</b><small>sektörünüzün Ankara OSB payı</small></div>
+Line 544:                 <div class="chip" style="--c:var(--warn)"><b data-say="4">4</b><small>unvan/adres değişikliği</small></div>
+Line 545:                 <div class="chip" style="--c:var(--risk)"><b data-say="2">2</b><small>çelişki sinyali</small></div>
+Line 546:               </div>
+Line 547:               <p style="margin:10px 0 0;font-size:13px"><b style="color:var(--t1)">Bu ne demek?</b> Sektörünüz Ankara OSB ortalamasından hızlı büyüyor; yeni firmalar çoğalıyor. <a href="#" data-git="dedektif" style="color:var(--mor)">Çelişkili 2 firmayı Dedektife sor →</a></p></div>
+Line 548:             </section>
+Line 549: 
+Line 550:             <section class="wg k6" id="w-harita">
+Line 551:               <div class="wg-bas"><h3><svg class="ic"><use href="#i-map"/></svg>Harita<span class="beta" style="margin-left:6px">Beta</span><span class="ornek">Örnek</span></h3>
+Line 552:                 <label style="font-size:12.5px;color:var(--t3)">Şehir <select id="sehir"></select></label></div>
+Line 553:               <div class="wg-gov">
+Line 554:                 <div class="harita-alan">
+Line 555:                   <svg viewBox="0 0 300 160" role="img" aria-label="Şematik harita, şehir seçilince yakınlaşır"><g id="hr">
+Line 556:                     <path d="M20 85 L40 60 L80 55 L110 40 L170 42 L220 38 L270 50 L285 80 L250 105 L190 108 L140 120 L90 112 L50 118 L25 100z" fill="var(--raised)" stroke="var(--line)" stroke-width="1.2"/>
+Line 557:                     <g id="hr-nok"></g>
+Line 558:                   </g></svg>
+Line 559:                   <div class="zoom"><button id="z-art" aria-label="Yakınlaştır"><svg class="ic"><use href="#i-plus"/></svg></button><button id="z-az" aria-label="Uzaklaştır"><svg class="ic"><use href="#i-minus"/></svg></button></div>
+Line 560:                 </div>

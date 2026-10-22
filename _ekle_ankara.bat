@@ -1,0 +1,2 @@
+@echo off
+python "Huginn Data Insights\scripts\gorev_kutusu.py" ekle --task-id ANKARA-15-OSB-KOORDINAT-OLCUM-01 --baslik "[VERI] Ankara 15 OSB koordinat ölçümü" --sahip yasu --oncelik P2 --dosyalar docs/raporlar/OSBUK-OSBLISTESI-01_veri_seti_2026-10-21.md --brief plans/brief_yasu_ANKARA-15-OSB-KOORDINAT-OLCUM-01.md --talimat "osbs tablosunda Ankara'daki 15 OSB koordinatını ölç, kaynaksız koordinat uydurma" --mod code

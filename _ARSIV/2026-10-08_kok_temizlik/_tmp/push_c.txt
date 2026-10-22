@@ -1,0 +1,2 @@
+To https://github.com/yassuacohen-hub/-AI-proje-v1-Parent-repo
+   c8a30aae..da01bbcd  chore/monorepo-merge -> chore/monorepo-merge

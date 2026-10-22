@@ -1,0 +1,23 @@
+warning: in the working copy of 'ADIM8_KAHIN_NOTIFICATION.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'ADIM8_TECHNICAL_SUMMARY.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/ADIM_7_8_9_KAPANISH_OZET.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/GRAPH-SON-DOGRULA_rapor_2026-09-21.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'plans/_arsiv_brief/brief_yasu_TEST-VISIBILITY-ENTEGRASYON-27.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'ADIM8_KAHIN_NOTIFICATION.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'ADIM8_SON_RAPOR.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'ADIM8_TECHNICAL_SUMMARY.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/ADIM_7_8_9_KAPANISH_OZET.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/ADIM_7_8_9_TEKNIK_OZET.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/ALTYAPI-VERI-GORUNURLUK-01_TAMAMLANDI_2026-09-24_tasarim.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/GRAPH-SON-DOGRULA_rapor_2026-09-21.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'plans/_arsiv_brief/brief_yasu_TEST-VISIBILITY-ENTEGRASYON-27.md', CRLF will be replaced by LF the next time Git touches it
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 26.22s
+[chore/monorepo-merge 41504a41] TEST-BACKLOG-CI-01 (c): tavan ihlalleri silindi — yasu hafiza 213->200, salih Ilgili Nodlar, borc defteri 2 kimlik, Kural 4 yasak ad 19->14 (5 git mv + baglantilar)
+ 14 files changed, 29 insertions(+), 33 deletions(-)
+ rename ADIM8_FINAL_RAPOR.md => ADIM8_SON_RAPOR.md (100%)
+ rename data/orchestrator/{ADIM_7_8_9_FINAL_OZET.md => ADIM_7_8_9_TEKNIK_OZET.md} (100%)
+ rename data/orchestrator/{ALTYAPI-VERI-GORUNURLUK-01_TAMAMLANDI_2026-09-24_FINAL.md => ALTYAPI-VERI-GORUNURLUK-01_TAMAMLANDI_2026-09-24_tasarim.md} (100%)
+ rename data/orchestrator/{GRAPH-FINAL-DOGRULA_rapor_2026-09-21.md => GRAPH-SON-DOGRULA_rapor_2026-09-21.md} (99%)
+ rename salih_v4_arsiv.md => salih_surum4_arsiv.md (100%)

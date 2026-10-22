@@ -1,0 +1,316 @@
+warning: in the working copy of 'web_app.py', CRLF will be replaced by LF the next time Git touches it
+diff --git a/web_app.py b/web_app.py
+index 2a505d51..2526c65a 100644
+--- a/web_app.py
++++ b/web_app.py
+@@ -47,6 +47,8 @@ from company_master.core.error_handling import (  # noqa: E402
+     mask_sensitive as _mask_sensitive,
+     setup_logging as _setup_app_logging,
+ )
++from company_master.api.routers.v1 import router as v1_router
++from company_master.api.routers.v1.v1_network import router as network_router
+ from scripts.apify_webhook_receiver import ApifyWebhookReceiver  # noqa: E402
+ from src.company_master.admin.caching import admin_cache
+ 
+@@ -125,7 +127,7 @@ _TR_INSENSITIVE_CLS = {
+ 
+ # Dashboard performance counters
+ 
+-app = FastAPI(title="Company Master Dashboard API", version="1.0")
++app = FastAPI(title="Company Master Dashboard API", version="1.0", openapi_url=None)
+ 
+ # UTKU-03: Merkezi structured JSON logging (stdout + rotating file).
+ # Production'da stdout JSON -> Datadog/ELK aggregator'e akitilir.
+@@ -193,7 +195,7 @@ _AUTH_RATE_LIMIT_MAX = int(os.getenv("AUTH_RATE_LIMIT_MAX", "5"))  # istek / dak
+ 
+ # Y26: API key kullanim metrikleri (tier bazli istek sayaci, in-memory)
+ _API_USAGE: dict[str, dict[str, int]] = {}  # tier -> endpoint -> sayac
+-_TIER_RATE_LIMITS = {"terminal": 60, "strategic": 120, "enterprise": 600}  # istek/dk
++_TIER_RATE_LIMITS = {"Temel": 60, "Profesyonel": 120, "Kurumsal": 300}  # istek/dk
+ 
+ 
+ def _record_api_usage(tier: str, path: str) -> None:
+@@ -240,7 +242,7 @@ def require_api_key(request: Request) -> str:
+     if session and session.user:
+         # Session bazlı auth: kullanıcı rolüne ve kredisine göre erişim
+         user = session.user
+-        tier = user.tier if user.tier else "public"
++        tier = user.tier if user.tier else "Temel"
+     else:
+         # 2) Fallback: API key kontrolü (X-API-Key header veya ?api_key= query param)
+         # HttpOnly çerezden API key'ini de al (session.py'den)
+@@ -250,14 +252,14 @@ def require_api_key(request: Request) -> str:
+                 "api_key", ""
+             )
+ 
+-        tier = "public"
++        tier = "Temel"
+ 
+         if key:
+             u = _user_from_api_key(key)
+-            if u and u.get("api_key") == key and u.get("tier") == "enterprise":
+-                tier = "enterprise"
++            if u and u.get("api_key") == key and u.get("tier") == "Kurumsal":
++                tier = "Kurumsal"
+             elif key == DASH_API_KEY:
+-                tier = "public"
++                tier = "Temel"
+             elif not u:
+                 raise HTTPException(
+                     status_code=401,
+@@ -283,18 +285,18 @@ def require_api_key(request: Request) -> str:
+                 status_code=429, detail="Cok fazla istek. Lutfen biraz bekleyin."
+             )
+ 
+-    if tier == "enterprise":
++    if tier == "Kurumsal":
+         _record_api_usage(tier, request.url.path)
+ 
+     # Return the effective key for endpoint usage
+     if session and session.user:
+         return session.user.user_id or "session-auth"
+-    return key or "public"
++    return key or "Temel"
+ 
+ 
+ def require_api_key_optional(request: Request) -> str:
+     """Zorunlu olmayan auth (rate limit yine uygulanir) - dashboard HTML icin."""
+-    return require_api_key(request) if DASH_API_KEY else "public"
++    return require_api_key(request) if DASH_API_KEY else "Temel"
+ 
+ 
+ def _auth_rate_guard(request: Request) -> None:
+@@ -400,6 +402,92 @@ WEB_DIR = ROOT / "web_dashboard"
+ WEB_DIR.mkdir(parents=True, exist_ok=True)
+ 
+ app.include_router(job_intelligence_router)
++app.include_router(v1_router)
++
++# Override openapi to ensure network routes are included
++_original_openapi = app.openapi
++
++def custom_openapi():
++    if app.openapi_schema:
++        return app.openapi_schema
++    openapi_schema = _original_openapi()
++    
++    # Manually add network routes to OpenAPI schema
++    if "paths" not in openapi_schema:
++        openapi_schema["paths"] = {}
++    
++    # Add /companies/{vkn}/network
++    openapi_schema["paths"]["/companies/{vkn}/network"] = {
++        "get": {
++            "summary": "Firma ilişki ağı",
++            "operationId": "get_company_network_companies__vkn__network_get",
++            "parameters": [
++                {"name": "vkn", "in": "path", "required": True, "schema": {"type": "string"}},
++                {"name": "derinlik", "in": "query", "required": False, "schema": {"type": "integer", "enum": [1, 2], "default": 1}},
++            ],
++            "responses": {
++                "200": {
++                    "description": "Successful Response",
++                    "content": {"application/json": {"schema": {"$ref": "#/components/schemas/NetworkResponse"}}}
++                },
++                "401": {"description": "Unauthorized"},
++                "402": {"description": "Payment Required"},
++                "404": {"description": "Not Found"},
++                "422": {"description": "Validation Error"}
++            },
++            "tags": ["v1_network"],
++            "security": [{"APIKeyHeader": []}]
++        }
++    }
++    
++    # Add /companies/{vkn}/full-report
++    openapi_schema["paths"]["/companies/{vkn}/full-report"] = {
++        "get": {
++            "summary": "Tam rapor",
++            "operationId": "get_full_report_companies__vkn__full_report_get",
++            "parameters": [
++                {"name": "vkn", "in": "path", "required": True, "schema": {"type": "string"}},
++            ],
++            "responses": {
++                "200": {
++                    "description": "Successful Response",
++                    "content": {"application/json": {"schema": {"$ref": "#/components/schemas/FullReportResponse"}}}
++                },
++                "401": {"description": "Unauthorized"},
++                "402": {"description": "Payment Required"},
++                "404": {"description": "Not Found"},
++                "422": {"description": "Validation Error"}
++            },
++            "tags": ["v1_network"],
++            "security": [{"APIKeyHeader": []}]
++        }
++    }
++    
++    app.openapi_schema = openapi_schema
++    return app.openapi_schema
++
++app.openapi = custom_openapi
++
++# Override the /openapi.json endpoint to use our custom_openapi
++@app.get("/openapi.json", include_in_schema=False)
++async def openapi_json():
++    return custom_openapi()
++
++# Directly define network endpoints (add_api_route not working properly in FastAPI 0.141.1)
++from company_master.api.routers.v1.v1_network import get_company_network, get_full_report
++
++def get_current_api_key(request: Request) -> str:
++    import web_app
++    return web_app.require_api_key(request)
++
++@app.get("/companies/{vkn}/network", response_model=None, tags=["v1_network"], include_in_schema=True)
++async def network_endpoint(vkn: str, derinlik: int = 1, api_key: str = Depends(get_current_api_key)):
++    return await get_company_network(vkn, derinlik, api_key)
++
++@app.get("/companies/{vkn}/full-report", response_model=None, tags=["v1_network"], include_in_schema=True)
++async def full_report_endpoint(vkn: str, api_key: str = Depends(get_current_api_key)):
++    return await get_full_report(vkn, api_key)
++
+ app.mount("/static", StaticFiles(directory=str(WEB_DIR)), name="web-static")
+ 
+ 
+@@ -1318,7 +1406,7 @@ def api_match(
+     user = _user_from_token(user_token) if user_token else None
+     # API-07: `user` token yoksa None olur; kosulsuz .get() cagrisi anonim
+     # /api/match isteklerinin tamamini 500'e dusuruyordu.
+-    tier = user.get("tier", "terminal") if user else "terminal"
++    tier = user.get("tier", "Temel") if user else "Temel"
+     credit_info = None
+     if user is not None and user["status"] == "onayli":
+         kalan = _charge_module_credit(str(user["user_id"]), tier, "match")
+@@ -1450,7 +1538,7 @@ _FREE_DOMAINS = {
+     "icloud.com",
+     "protonmail.com",
+ }
+-_TIER_CREDITS = {"terminal": 100, "strategic": 500, "enterprise": 0}  # 0 = sinirsiz
++_TIER_CREDITS = {"Temel": 100, "Profesyonel": 500, "Kurumsal": 0}  # 0 = sinirsiz
+ _DASH_SECRET = os.getenv(
+     "DASH_SECRET", (os.getenv("DASH_API_KEY") or "huginn-secret") + "-secret"
+ )
+@@ -1529,7 +1617,7 @@ def _charge_credit(user_id: str, email: str, reason: str, amount: int = 1) -> in
+         )
+         if not row:
+             return 0
+-        if row["tier"] == "enterprise":
++        if row["tier"] == "Kurumsal":
+             return -1  # sinirsiz
+         yeni = max(int(row["credit_balance"] or 0) - amount, 0)
+         conn.execute(
+@@ -1919,12 +2007,11 @@ def api_buyer_login(req: dict, request: Request, response: Response):
+         )
+     # DASH-01 S-2: HttpOnly session cookie olustur (XSS'e karsi guvenli)
+     from company_master.auth.session import SessionUser, create_session
+-
+     session_user = SessionUser(
+         user_id=row["user_id"],
+         email=row["email"],
+         role=row["role"] or "user",
+-        tier=row["tier"] or "terminal",
++            tier=row["tier"] or "Temel",
+         company_name=row["company_name"],
+         credit_balance=row["credit_balance"] or 0,
+     )
+@@ -2435,7 +2522,7 @@ def api_buyer_verify_email_confirm(token: str):
+         raise HTTPException(status_code=400, detail="geçersiz veya süresi dolmuş token")
+     if row["status"] == "onayli":
+         return {"ok": True, "message": "E-posta zaten doğrulanmış."}
+-    new_tier = row["tier"] or "terminal"
++        new_tier = row["tier"] or "Temel"
+     start_credit = _TIER_CREDITS.get(new_tier, 100)
+     with engine.begin() as conn:
+         conn.execute(
+@@ -2796,7 +2883,7 @@ def api_admin_pending(_auth: str = Depends(require_admin)):
+ def api_admin_approve(req: dict, _auth: str = Depends(require_admin)):
+     """Onayla: tier sec (terminal/strategic/enterprise) -> kredi yukle + enterprise'a api_key uret."""
+     user_id = req.get("user_id") or ""
+-    tier = req.get("tier") or "terminal"
++    tier = req.get("tier") or "Temel"
+     reject = bool(req.get("reject"))
+     note = req.get("note") or ""
+     if not user_id:
+@@ -2828,7 +2915,7 @@ def api_admin_approve(req: dict, _auth: str = Depends(require_admin)):
+                 {"n": note, "u": user_id},
+             )
+             return {"ok": True, "status": "reddedildi"}
+-        if tier == "enterprise":
++        if tier == "Kurumsal":
+             api_key = (
+                 "ent_"
+                 + hmac.new(
+@@ -2934,7 +3021,7 @@ def api_admin_rotate_key(req: dict, _auth: str = Depends(require_admin)):
+         )
+         if not row:
+             raise HTTPException(status_code=404, detail="kullanici bulunamadi")
+-        if row["tier"] != "enterprise":
++        if row["tier"] != "Kurumsal":
+             raise HTTPException(
+                 status_code=400, detail="key rotasyonu yalnizca enterprise tier icin"
+             )
+@@ -3455,7 +3542,7 @@ def _ltv_cac_by_tier() -> dict:
+     with engine.connect() as conn:
+         result = {}
+         
+-        for tier in ["terminal", "strategic", "enterprise"]:
++        for tier in ["Temel", "Profesyonel", "Kurumsal"]:
+             # Tier'a göre revenue
+             revenue = conn.execute(
+                 text("""
+@@ -3624,6 +3711,54 @@ def api_sources(_auth: str = Depends(require_api_key)) -> list[dict]:
+         return [dict(r) for r in rows] if rows else []
+ 
+ 
++@app.get("/api/company/vkn/{vkn}")
++def api_company_by_vkn(
++    vkn: str, mask: int = 0, _auth: str = Depends(require_api_key)
++) -> dict:
++    """VKN (vergi numarası) üzerinden tek firma detay.
++
++    D-250/4: tax_number bir iddia (claim), kanit değildir. Bu endpoint
++    yalnızca VKN eşleştirme yapar; kimlik doğrulaması ayrı bir kapı
++    gerekir (D-250 Kural 1).
++
++    Brief Faz B1: /api/company/{vkn} — veri ölçümü için canlı DB'den
++    tax_number üzerinden sorgu + risk skoru LEFT JOIN + KVKK mask.
++    """
++    engine = get_engine()
++    with engine.connect() as conn:
++        sql = text("""
++            SELECT c.company_id, c.legal_name, c.trade_name, c.tax_number,
++                   c.mersis_number, c.company_type, c.foundation_year,
++                   c.primary_phone, c.primary_email, c.website_domain,
++                   c.address, c.city, c.province, c.country, c.zip_code,
++                   c.nace_code, c.nace_source,
++                   c.identity_completeness, c.score_version,
++                   c.data_quality_score,
++                   r.corporateness_score, r.reliability_score,
++                   r.reputation_score, r.cyber_security_score,
++                   r.operational_power_score, r.transparency_score,
++                   r.fraud_risk_score, r.overall_trust_score,
++                   r.recommendation_tier, r.calculated_at
++            FROM companies c
++            LEFT JOIN company_risk_scores r ON r.company_id = c.company_id
++            WHERE c.tax_number = :vkn
++        """)
++        row = conn.execute(sql, {"vkn": vkn}).mappings().first()
++    if not row:
++        return {}
++    result = dict(row)
++    result = normalize_company(result)
++    admin_mode = "lenient" if mask == 1 else "strict"
++    if _mask_active(mask):
++        plan_field_visibility = _get_plan_field_visibility(result["company_id"])
++        result = apply_kvkk_mask(
++            result,
++            admin_mode=admin_mode,
++            plan_field_visibility=plan_field_visibility,
++        )
++    return result
++
++
+ @app.get("/api/company/{company_id}")
+ def api_company_detail(
+     company_id: str, mask: int = 0, _auth: str = Depends(require_api_key)

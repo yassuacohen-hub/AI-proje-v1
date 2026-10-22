@@ -1,0 +1,12 @@
+=== More context (lines 510-540) ===
+   Line 510:             <section class="wg kpi k3" id="k-esles" data-kpi="esles" tabindex="0" role="button" aria-label="Yeni Eþleþme, detay aç"><div class="wg-gov gov" style="--c:var(--ok)"><div class="ust">Yeni Eþleþme<span class="rozet-ic ptop"><svg class="ic"><use href="#i-hand"/></svg></span></div><div clas
+   Line 511:             <section class="wg kpi k3" id="k-uyari" data-kpi="uyari" tabindex="0" role="button" aria-label="Kapanan Uyarý, detay aç"><div class="wg-gov gov" style="--c:var(--warn)"><div class="ust">Kapanan Uyarý<span class="rozet-ic ptop"><svg class="ic"><use href="#i-shield"/></svg></span></div><di
+   Line 512: 
+   Line 513:             <section class="wg k8" id="w-sirket">
+Traceback (most recent call last):
+  File "c:\Huginn Data Projesi\analyze6.py", line 11, in <module>
+    print(f"{marker}Line {i}: {lines[i][:300]}")
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\encodings\cp1254.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2192' in position 195: character maps to <undefined>

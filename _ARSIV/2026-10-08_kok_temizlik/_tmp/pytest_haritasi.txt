@@ -1,0 +1,19 @@
+.F.....                                                                  [100%]
+================================== FAILURES ===================================
+__________________________ test_d_yedek_tam_bir_133 ___________________________
+
+    def test_d_yedek_tam_bir_133():
+        from sqlalchemy import text
+        with _conn() as c:
+            rows = c.execute(text(
+                "SELECT seq_no FROM public.field_dictionary WHERE origin = 'reserve'")).fetchall()
+>       assert [r[0] for r in rows] == [h.YEDEK_SIRA]
+E       assert [] == [133]
+E         
+E         Right contains one more item: 133
+E         Use -v to get more diff
+
+tests\test_tobb_alan_haritasi.py:50: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_tobb_alan_haritasi.py::test_d_yedek_tam_bir_133 - assert []...
+1 failed, 6 passed in 5.77s

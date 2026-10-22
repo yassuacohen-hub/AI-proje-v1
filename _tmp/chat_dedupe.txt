@@ -1,0 +1,5 @@
+satir=3726 bozuk=0 -> cikis=409
+cok-kopyali grup=47 boyut-dagilimi={2: 21, 3: 3, 5: 3, 13: 3, 19: 3, 84: 1, 118: 4, 174: 1, 176: 2, 179: 2, 422: 1, 438: 1, 449: 1, 453: 1}
+  zamani farkli grup=36
+zaman anahtari ornegi: ['timestamp']; alanlar=['ajan', 'cozum', 'durum', 'link', 'sorun', 'task_id', 'timestamp']
+YAZILDI; yedek=ajan-chat.jsonl.bak_dedupe

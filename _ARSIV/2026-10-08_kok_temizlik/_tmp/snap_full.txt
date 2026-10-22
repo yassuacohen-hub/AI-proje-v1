@@ -1,0 +1,160 @@
+- generic
+  - generic
+    - generic
+      - generic
+        - button "Navigate to home page" [ref=e11]
+          - image "Logo"
+        - StaticText "Admin Insights"
+        - separator
+        - LabelText
+          - button "Help for 🔍 Hızlı geçiş" [ref=e21]
+        - group
+          - combobox "🔍 Hızlı geçiş" [expanded=false, ref=e22]: 📋 Proje
+            - StaticText "📋 Proje"
+          - button "Open" [expanded=false, ref=e23]
+        - separator
+        - button "🏠 Ana Kontrol" [ref=e24]
+          - paragraph
+            - StaticText "🏠 Ana Kontrol"
+        - group
+          - DisclosureTriangle "keyboard_arrow_right 👥 Müşteriler" [expanded=false]
+            - StaticText "keyboard_arrow_right"
+            - paragraph
+              - StaticText "👥 Müşteriler"
+        - group
+          - DisclosureTriangle "keyboard_arrow_down 📋 Proje" [expanded=true]
+            - StaticText "keyboard_arrow_down"
+            - paragraph
+              - StaticText "📋 Proje"
+          - button "📋 Proje" [disabled, ref=e37]
+            - paragraph
+              - StaticText "📋 Proje"
+          - button "📔 Karar Defteri" [ref=e38]
+            - paragraph
+              - StaticText "📔 Karar Defteri"
+          - button "🤖 MIMIR" [ref=e39]
+            - paragraph
+              - StaticText "🤖 MIMIR"
+          - button "💬 Ajan Chat" [ref=e40]
+            - paragraph
+              - StaticText "💬 Ajan Chat"
+          - button "🗂️ Görev Panosu" [ref=e41]
+            - paragraph
+              - StaticText "🗂️ Görev Panosu"
+          - button "📑 MIMIR Raporları" [ref=e42]
+            - paragraph
+              - StaticText "📑 MIMIR Raporları"
+        - group
+          - DisclosureTriangle "keyboard_arrow_right 📈 Metrikler" [expanded=false]
+            - StaticText "keyboard_arrow_right"
+            - paragraph
+              - StaticText "📈 Metrikler"
+        - group
+          - DisclosureTriangle "keyboard_arrow_right 💼 Gelir" [expanded=false]
+            - StaticText "keyboard_arrow_right"
+            - paragraph
+              - StaticText "💼 Gelir"
+        - group
+          - DisclosureTriangle "keyboard_arrow_right 🧾 Güvenlik" [expanded=false]
+            - StaticText "keyboard_arrow_right"
+            - paragraph
+              - StaticText "🧾 Güvenlik"
+        - group
+          - DisclosureTriangle "keyboard_arrow_right ⚙️ Sistem" [expanded=false]
+            - StaticText "keyboard_arrow_right"
+            - paragraph
+              - StaticText "⚙️ Sistem"
+        - separator
+        - button "👤 Yönetici" [expanded=false, ref=e12]
+          - paragraph
+            - StaticText "👤 Yönetici"
+        - paragraph
+          - StaticText "Bölüm: 37/37 hazır · ⏳ = yapım aşamasında"
+        - paragraph
+          - StaticText "P7-44 Modern Navigasyon"
+    - generic
+      - banner
+        - button "Deploy" [ref=e25]
+          - StaticText "Deploy"
+        - button "Main menu" [expanded=false, ref=e26]
+      - generic [ref=e10] focusable [tabindex]
+        - paragraph
+          - StaticText "Ana Kontrol › 🏢 İş Operasyonları › Proje"
+        - generic
+          - textbox "Bölüm ara" [ref=e27]
+        - separator
+        - sectionheader
+          - paragraph
+            - StaticText "İŞ · YÖNETIM"
+          - heading "Proje Yönetimi" [level=1, ref=e28]
+            - generic
+              - StaticText "Proje Yönetimi"
+            - link "Link to heading" [ref=e43]
+          - paragraph
+            - StaticText "Karar defteri, MIMIR, ajan chat, görev panosu ve raporlar."
+        - tablist
+          - tab "Karar Defteri" [ref=e13]
+            - paragraph
+              - StaticText "Karar Defteri"
+          - tab "MIMIR" [ref=e14]
+            - paragraph
+              - StaticText "MIMIR"
+          - tab "Ajan Chat" [ref=e15]
+            - paragraph
+              - StaticText "Ajan Chat"
+          - tab "Görev Panosu" [ref=e16]
+            - paragraph
+              - StaticText "Görev Panosu"
+          - tab "MIMIR Raporları" [selected, ref=e17]
+            - paragraph
+              - StaticText "MIMIR Raporları"
+        - tabpanel "MIMIR Raporları"
+          - sectionheader
+            - paragraph
+              - StaticText "YÖNETIM"
+            - heading "MIMIR Architect Raporları" [level=1, ref=e615]
+              - generic
+                - StaticText "MIMIR Architect Raporları"
+              - link "Link to heading" [ref=e616]
+            - paragraph
+              - StaticText "MIMIR tarafından otomatik oluşturulan architect raporlarını görüntüleyin."
+          - status
+            - paragraph
+              - StaticText "Henüz rapor oluşturulmamış."
+        - separator
+        - LabelText
+          - paragraph
+            - StaticText "Aktif Bölüm"
+        - paragraph
+          - StaticText "Proje"
+        - paragraph
+          - StaticText "Görünüm anahtarları"
+        - LabelText [ref=e18] clickable [cursor:pointer, onclick]
+          - switch "Kompakt menü" [checked=false, ref=e30]
+          - paragraph
+            - StaticText "Kompakt menü"
+          - button "Help for Kompakt menü" [ref=e31]
+        - LabelText [ref=e19] clickable [cursor:pointer, onclick]
+          - switch "Bölüm açıklamasını göster" [checked=false, ref=e32]
+          - paragraph
+            - StaticText "Bölüm açıklamasını göster"
+          - button "Help for Bölüm açıklamasını göster" [ref=e33]
+        - LabelText [ref=e20] clickable [cursor:pointer, onclick]
+          - switch "Sekme rehberi" [checked=false, ref=e34]
+          - paragraph
+            - StaticText "Sekme rehberi"
+          - button "Help for Sekme rehberi" [ref=e35]
+        - LabelText
+          - paragraph
+            - StaticText "Sayfa Yükleme"
+        - paragraph
+          - StaticText "2348 ms"
+        - LabelText
+          - paragraph
+            - StaticText "Cache TTL"
+        - paragraph
+          - StaticText "30 sn"
+        - paragraph
+          - StaticText "Önbelleği temizlemek için sağ üst ⋮ menüsü › Clear cache."
+        - paragraph
+          - button "AI MIMIR sohbetini aç" [ref=e36]

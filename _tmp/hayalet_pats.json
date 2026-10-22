@@ -1,0 +1,15 @@
+{
+ "MON-WATCHDOG-NÖBETÇI-SISTEMI-001": "watchdog|nöbetçi|alertmanager|prometheus.*alert. TAMAMLANDI: Prometheus alert rules (5 groups, 35+ alerts), Alertmanager team-based routing (7 receivers), Telegram templates (8 types), Auto-recovery PS script (11 checks), Task Scheduler setup (6 tasks), Cert expiry checker, Prometheus scrape config (13 services).",
+ "SEC-MTLS-SERTIFIKALARI-CA-CERT-002": "",
+ "TEST-TOBB-CARD-02-04-CANLI-ENTEGRAS-003": "test_tobb_integration\\.py.*koş|pytest.*tobb|tobb.*canlı.*test. TAMAMLANDI: TOBB Şirket Kartı 02/04 entegrasyonu prod-ready. tobb_api.py yeni modül (Card 02/04 async client + sync wrapper). mersis_api.py TOBBProvider gerçek API kullanacak şekilde güncellendi. mersis_vkn_pipeline.py TOBBProvider sınıfı yeni client kullanacak şekilde refactor. Migration 0060 İngilizce kolon adlarıyla (trade_registry_no, tax_office, tobb_nace_name) uygulandı. Tüm pre-commit testleri (4/4) geçti. Functional test HTTP 401 döndürüyor - bu beklenen (IP whitelist/credential sorunu, kod hatası değil). Commit: db422f28",
+ "FE-NEXT-JS-SHADCN-ADMIN-BOILERP-004": "frontend.*boş|next\\.js.*kur|create-next-app|shadcn.*init",
+ "API-KONG-YML-DECLARATIVE-CONFIG-005": "kong\\.yml.*volume|kong.*mount|declarative.*config",
+ "WORKER-KARANTINA-ONARIM-CELERY-WORKER-006": "quarantine.*processor|karantina.*döngü|repair.*worker|celery.*worker",
+ "FE-MIRMIR-SSE-DASHBOARD-NEXT-JS-007": "sse.*dashboard|mirmir.*radar|sonner.*toast|canlı.*sinyal",
+ "FE-CMDK-KOMUT-PALETI-ARAMA-ÇUBUĞU-009": "cmdk|spotlight|komut.*paleti|hızlı.*arama",
+ "API-WEBHOOK-SINYAL-SATIŞ-ENDPOINTI-012": "webhook.*sat|webhook.*signal|3 kredi|credit.*webhook",
+ "API-ENTERPRISE-API-GATEWAY-PAKETI-013": "enterprise.*api|kurumsal.*gateway|650k|api gateway",
+ "DOC-FINANSAL-MODEL-VE-KARLILIK-ANA-014": "",
+ "SEC-KVKK-BDDK-MASKELEME-VE-UYUMLUL-015": "",
+ "DEPLOY-FULL-STACK-DOCKER-COMPOSE-DEPL-016": "docker.compose.*up|container.*başlat|stack.*deploy"
+}

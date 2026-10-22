@@ -1,0 +1,43 @@
+........................................................................ [  1%]
+........................................................................ [  2%]
+........................................................................ [  3%]
+........................................................................ [  5%]
+........................................................................ [  6%]
+........................................................................ [  7%]
+........................................................................ [  8%]
+........................................................................ [ 10%]
+........................................................................ [ 11%]
+.FF..................................................................... [ 12%]
+........................................................................ [ 13%]
+........................................................F............... [ 15%]
+.....................
+============================== warnings summary ===============================
+tests\test_secrets_rotation.py:174
+  c:\Huginn Data Projesi\Huginn Data Insights\tests\test_secrets_rotation.py:174: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration
+
+tests/test_auth_lockout.py: 10 warnings
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\sqlalchemy\engine\default.py:952: DeprecationWarning: The default datetime adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+    cursor.execute(statement, parameters)
+
+tests/test_pano_ssot_kapisi.py::test_negatif_kontrol_mandali_kirarlik
+tests/test_pano_ssot_kapisi.py::test_negatif_kontrol_sonrasi_temiz
+tests/test_pano_ssot_kapisi.py::test_pano_dogrudan_yazilmaz
+  C:\Huginn Data Projesi\Huginn Data Insights\scripts\fix_emails.py:62: SyntaxWarning: invalid escape sequence '\.'
+    COUNT(*) FILTER (WHERE primary_email ~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') as valid,
+
+tests/test_pano_ssot_kapisi.py::test_negatif_kontrol_mandali_kirarlik
+tests/test_pano_ssot_kapisi.py::test_negatif_kontrol_sonrasi_temiz
+tests/test_pano_ssot_kapisi.py::test_pano_dogrudan_yazilmaz
+  C:\Huginn Data Projesi\Huginn Data Insights\scripts\fix_emails.py:77: SyntaxWarning: invalid escape sequence '\.'
+    COUNT(*) FILTER (WHERE primary_email IS NULL OR primary_email !~ '^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$') as email_issue,
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_pano_ssot_kapisi.py::test_negatif_kontrol_sonrasi_temiz - a...
+FAILED tests/test_pano_ssot_kapisi.py::test_pano_dogrudan_yazilmaz - Assertio...
+FAILED tests/test_pano_denetim_tetik.py::test_canli_panoda_sessiz_is_emri_yok
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! KeyboardInterrupt !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\_weakrefset.py:88: KeyboardInterrupt
+(to show a full traceback on KeyboardInterrupt use --full-trace)
+3 failed, 882 passed, 17 warnings in 98.62s (0:01:38)

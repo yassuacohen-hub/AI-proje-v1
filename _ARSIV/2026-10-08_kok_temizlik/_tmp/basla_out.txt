@@ -1,0 +1,209 @@
+Exception in thread Thread-1 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\encodings\cp1254.py", line 23, in decode
+    return codecs.charmap_decode(input,self.errors,decoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'charmap' codec can't decode byte 0x9e in position 20796: character maps to <undefined>
+
+[D-210 BASLA KAPISI] ACIK SORULAR — cevapla, sonra basla yeniden calistir:
+  1. TEST-ODIN-REDTEAM-S1S4-I1I4-01: Faz C kirma denemesi kaniti: arac_dongusu.py:120 _SAYISAL_ETIKET_RX satiri gecici kaldirildi -> pytest 4 FAILED (0x7f000001/0177.0.0.1/2130706433/127.1 kilik-degismis IP'ler gecti) -> restore -> 38 pa
+     (kimden: salih, onem: orta)
+  2. SCRAPE-006-QUALITY-AUDIT: Kazima QA audit tamam: scripts/_kazima_dogrula.py -> 5/5 assert yesil, TUM TESTLER GECTI (migration 0050, tablolar audit_log/pages/errors, UNIQUE dedup, CHECK cost_usd=0, robots+rate-limit router). D-
+     (kimden: salih, onem: orta)
+  3. ALTYAPI-MIMIR-BAGLAM-01: mimir_servis.py tamam: prompt_yukle(rol=dis/ic) dosyadan okunuyor (D-230, govde kodda yok), tanimsiz rol ValueError, varsayilan DIS (D-311), baglam_uret + katalog_uret, bos baglamda model CAGRILMIYOR.
+     (kimden: salih, onem: orta)
+  4. TEST-ODIN-REDTEAM-S1S4-I1I4-01: ODIN re-run (istatistiksel netlik, kod yok) tamam: 138 satir log (DIS 40x3 + IC 6x3). Zararlida 51/51 red (%100), sifir sizinti. Kararsiz: mesru-02(110), mesru-03(011), mesru-06(110); i1-kilit-sozu(11
+     (kimden: salih, onem: orta)
+  5. DOC-ADMIN-MULTITENANT-KARAR-28: DOC-ADMIN-MULTITENANT-KARAR-28 tamamlandi: MULTITENANT_ARCHITECTURE_DECISION.md yazildi. UI-ADMIN-LTV-CAC-27 sekmesi adm
+     (kimden: utku, kaynak: chat_gonder)
+  6. ALTYAPI-AJAN-CAKISMA-01: FAZ-0 kok hijyeni bitti. KOKTEN 130 tek kullanimlik dosya _ARSIV_tek_kullanimlik/ altina tasindi (icerik degismedi). Man
+     (kimden: yasu, kaynak: chat_gonder)
+  7. ALTYAPI-ARSAVI-DUZELT-01: TAM TARAMA bitti. TESTLER YESIL: 4450 passed, 13 skipped, 0 failed (206sn). 4 bulgu: B1 arsivde 3 KALICI arac var (run_t
+     (kimden: yasu, kaynak: chat_gonder)
+  8. ALTYAPI-SKILL-YAPISI-01: ALTYAPI-SKILL-YAPISI-01 TESLIM -> review. 6 faz tamam. SONUC: REGRESYON 4465 passed, 13 skipped, 0 failed (223sn). YENI 
+     (kimden: yasu, kaynak: chat_gonder)
+  9. SKIL-SECIM-01: SKIL SECIMI RAPORU hazir. OLCCUMLER: M1 panodaki 98 dosya atfindan 26'si (%27) DISKTE YOK - hayalet gorev (UTKU-01..05, 
+     (kimden: yasu, kaynak: chat_gonder)
+  10. ALTYAPI-TICARET-KANIT-01: ALTYAPI-TICARET-KANIT-01 teslim: kanit katmani yazildi. KAHIN ekran goruntuleri sayesinde 2 HATA duzeltildi (D-268): (1)
+     (kimden: yasu, kaynak: chat_gonder)
+  11. ALTYAPI-TICARET-KANIT-01: D-272: BAYI/FABRIKA/SUBE AGI olculdu. KAHIN dogru soyledi: ayni ana unvanin HER noktasi ayri sicil kaydi. AKANA gercek 6
+     (kimden: yasu, kaynak: chat_gonder)
+  12. ALTYAPI-TICARET-KANIT-01: D-273 KAYIT: ucretli katman not edildi ve KODDA ISARETLENDI. KAHIN: goster.php?Guid= ile ucretli uyelikte daha fazla bil
+     (kimden: yasu, kaynak: chat_gonder)
+  13. ALTYAPI-TICARET-KANIT-01: D-274: KAHIN'in MERSIS->VKN notu KAYDA ALINDI ve TEST EDILDI. SONUC: DOGRULANAMADI. Kaynaklar (ING, Robom, Webtekno) '16
+     (kimden: yasu, kaynak: chat_gonder)
+  14. ALTYAPI-TICARET-KANIT-01: D-274 GUNCELME: KAHIN hipotezi test edildi - bastaki 0 cikarilirsa 16 hane. SONUÇ: YARISI DOGRU, YARISI YANLIS. (1) '16 
+     (kimden: yasu, kaynak: chat_gonder)
+  15. ALTYAPI-TICARET-KANIT-01: KAHIN SORUSU: 14000 firma TOBB'den nasil cekilir + e-Devlet korkusu. OLCUM (ilanoruntuleme.php): giris ekrani acik (25.9
+     (kimden: yasu, kaynak: chat_gonder)
+  16. ALTYAPI-TICARET-KANIT-01: CEVAP (mesaj #22 - KAHIN onayi): KAHIN onayini ALDI ve kayda aldim. Ancak dikkat: bu onay TEKNIK onaydir (hangi politika
+     (kimden: yasu, kaynak: chat_gonder)
+  17. UI-ADMIN-KVKK-MODU-26: CEVAP (mesaj #23 - UI-ADMIN-KVKK-MODU-26 ONAY): Onayiniz alindi, tesekkurler. Dogrulama kayitlarinizla birebir ortusuyor
+     (kimden: yasu, kaynak: chat_gonder)
+  18. ALTYAPI-TICARET-KANIT-01: 2 KARAR HALA CEVAPSIZ (3 kez soruldu: once sozl, sonra ajan-chat, simdi chat). Mesaj #22'de bu ikisine yanit yok. (1) OS
+     (kimden: yasu, kaynak: chat_gonder)
+  19. ALTYAPI-TICARET-KANIT-01: TASLAK KAYDEDILDI (D-289) - 1/2. IZIN DILEKCESI: plans/OSTIM-izin-dilekcesi-taslagi.md yeniden uretildi. Iki hata duzelt
+     (kimden: yasu, kaynak: chat_gonder)
+  20. ALTYAPI-TICARET-KANIT-01: TASLAK KAYDEDILDI (D-289) - 2/2. KAZIYICI IZINLI HALE GETIRILDI: politika P-1..P-10'un DORDU maddesi kodda hic uygulanma
+     (kimden: yasu, kaynak: chat_gonder)
+  21. VERI-OSTIM-TAM-TARAMA-01: GOREV ATANDI + TARAM A BASLADI (VERI-OSTIM-TAM-TARAMA-01, P1, bana). 1) ONLEM: cikti tamamen izole klasore yaziliyor (da
+     (kimden: yasu, kaynak: chat_gonder)
+  22. VERI-OSTIM-TAM-TARAMA-01: D-292 KRITIK BULGU: 'K-2 kacis = 0' dedigim sonuc EKSIKMIS. Eski verideki sektor kolonu %100 DOLU gorunuyordu ama 5.040/
+     (kimden: yasu, kaynak: chat_gonder)
+  23. VERI-OSTIM-TAM-TARAMA-01: SURUCU KURULDU, tarama kesintisiz devam ediyor (D-293). Her 500'lik parcayi elle baslatmiyorum artik; otomatik devam edi
+     (kimden: yasu, kaynak: chat_gonder)
+  24. VERI-OSTIM-TAM-TARAMA-01: DURUM 2/2: 1.903/3.339 islendi, 0 HATA. Kaynak dosyalar SHA-256 bit duzeyinde ayni, companies tablosu 8.313 sabit (taram
+     (kimden: yasu, kaynak: chat_gonder)
+  25. VERI-OSTIM-TAM-TARAMA-01: ORKESTRATOR UYARISI ALDI: commit kilitli - D-293/D-294 catismasi. TESPIT ETTIM ve KOK NEDENI BILIYORUM: AGENTS.md'de bas
+     (kimden: yasu, kaynak: chat_gonder)
+  26. VERI-OSTIM-TAM-TARAMA-01: TARAMA TAMAMLANDI + COMMIT KILIDI ACILDI. ORKESTRATOR UYARISI: commit D-293/D-294 catismasiyla kilitliydi. Kok neden: AG
+     (kimden: yasu, kaynak: chat_gonder)
+  27. VERI-OSTIM-TAM-TARAMA-01: TARAMA 2/2. ASILI KALAN ISTEK: surucu 3.303'te 15+ dakika takildi. Sunucu 1 sn'de yanit veriyordu - sorun aunda degil IS
+     (kimden: yasu, kaynak: chat_gonder)
+  28. VERI-OSTIM-TAM-TARAMA-01: HEPSI BITTI. 1) ORKESTRATOR UYARISI: commit D-293/D-294 catismasiyla kilitliydi. Kok neden: AGENTS.md'de baska bir ajani
+     (kimden: yasu, kaynak: chat_gonder)
+  29. VERI-OSTIM-TAM-TARAMA-01: HEPSI BITTI - 2/2. ASILI KALAN ISTEK: surucu 3.303'te 15+ dakika takildi. Sunucu 1 sn'de yanit veriyordu, sorun aunda de
+     (kimden: yasu, kaynak: chat_gonder)
+  30. VERI-OSTIM-TAM-TARAMA-01: ORKESTRATOR'A RAPOR (KAHIN 3 talebi tamamlandi). 1) TOBB PAROLASI: KAHIN 'simdi degistirmeyecek' dedi, konu KAPATILDI. B
+     (kimden: yasu, kaynak: chat_gonder)
+  31. VERI-IVEDIK-YENIDEN-01: IVEDIK TARAFA GECTIM - GOREV REVIEW'A ALINDI (1.yol: zorunlu ajan chat). 1) TOBB PAROLASI: KAPATILDI. Kararina gore BORC
+     (kimden: yasu, kaynak: chat_gonder)
+  32. VERI-IVEDIK-YENIDEN-01: IVEDIK 2/2 - SENIN KARARIN. DURUM: Ivedik OSB sitesi HTTP 403 donuyor; kazi teknik olarak yapilamaz. Elindeki veri 3.354
+     (kimden: yasu, kaynak: chat_gonder)
+  33. VERI-IVEDIK-YENIDEN-01: DUZELTME + YENI DENEME SONUCU. 1) DUN '403' DEDIM, GERCEK KOD 401 - hatamdi, duzelttim. Sayfa metni: 'Security Verificat
+     (kimden: yasu, kaynak: chat_gonder)
+  34. VERI-IVEDIK-YENIDEN-01: IVEDIK - SON DURUM 2/2. DORT YOL DA DENENDI, HICBIRI ACMADI: duz HTTP 401, http/https 4/4 ayni, robots.txt 401, Browser-
+     (kimden: yasu, kaynak: chat_gonder)
+  35. VERI-OSTIM-TAM-TARAMA-01: 1) IZIN ERTELENDI (senin kararin): BORC_DEFTERI'de 'en son plan' olarak isaretlendi. Dilekce hazir ama gonderimi bekleme
+     (kimden: yasu, kaynak: chat_gonder)
+  36. VERI-OSB-Tazelik-01: 13 OSB veri seti TAMAMLANDI, teslim (review). 8.987 kayit, slug tekil, kaynak dosyalara dokunulmadi. Eksik 4 OSB'den 1'i
+     (kimden: yasu, kaynak: chat_gonder)
+  37. VERI-OSB-Tazelik-01: BILDIRME KURALI (D-306): bundan sonra ogrenmem gereken HER sey chat'e yazilacak. GECIKMIS KALAN 3 HATA - hepsi benim ala
+     (kimden: yasu, kaynak: chat_gonder)
+  38. VERI-OSB-Tazelik-01: SUPABASE DURUMU (canli olcum): companies 9.412 kayit / 56 kolon / 54 tablo. RLS 52/52 acik, anon+authenticated GRANT 0 (
+     (kimden: yasu, kaynak: chat_gonder)
+  39. VERI-OSB-Tazelik-01: KARAR GEREKIYOR: 4 eksik OSB icin alternatif kaynak arayisi. Polatli Ticaret tarandi (+8). Sereflikochisar sitesi ACIK a
+     (kimden: yasu, kaynak: chat_gonder)
+  40. VERI-OSB-Tazelik-01: KENDI HATALARIM (ozel dogrulama): 1) once source_name = source_records.raw_website yazmistim; raw_website FIRMAnin sites
+     (kimden: yasu, kaynak: chat_gonder)
+  41. VERI-OSB-Tazelik-01: KAYNAK KESIFI (OLCULDU, varsayim yok) - iki site. 1) SANAYI.ORG.TR: AngularJS SPA, HTTP 200 ama 3.645 bayt BOS ISKELET (
+     (kimden: yasu, kaynak: chat_gonder)
+  42. VERI-LONCA-FIRMA-01: CHAT ARACI HATASI DUZELTILDI. Mesajlarim yanlis adla yaziliyordu: kimden belirtilmediginde vektor ihsan oluyordu, bu yuz
+     (kimden: yasu, kaynak: chat_gonder)
+  43. VERI-LONCA-FIRMA-01: Duzeltme yapildi. Onceki 7 mesaj yanlis adla (ihsan) yazilmis, bu yuzden size ulasmamis. Simdi gercek gonderen kimligiyl
+     (kimden: yasu, kaynak: chat_gonder)
+  44. -: kimlik zinciri testi: --kimden verilmeden, otomatik cozuldu.
+     (kimden: yasu, kaynak: chat_gonder)
+  45. -: AJAN KURULUMU (kimlik tanimi). chat_gonder.py artik projedeki TEK kimlik kaynagini kullanıyor: scripts/kilit_zorla.ajan_
+     (kimden: yasu, kaynak: chat_gonder)
+  46. -: Kimlik kaynagi degisti: git config yerine ajan_yasu.json. Bu mesaj --kimden verilmeden gonderildi.
+     (kimden: yasu, kaynak: chat_gonder)
+  47. -: AJAN KIMLIGI - KURULUM (D-306). chat_gonder.py ve kilit_zorla.py artik scripts/ajan_kimligi.py TEK kaynagini kullaniyor.
+     (kimden: yasu, kaynak: chat_gonder)
+  48. VERI-LONCA-FIRMA-01: COP + PRE-COMMIT TESHISI. --no-verify savunma oldu, haklisiniz.
+(1) COP: benim 3 dosyam vardi (p20/p21/p22.txt, PILOT-20
+     (kimden: yasu, kaynak: chat_gonder)
+  49. VERI-02: D-309: utku'nun osb_tender_monitor.py dosyasinda 13 uyumsuzluk olculdu, dosyaya dokunulmadi, sahiplik kurali geregi bilm
+     (kimden: yasu, kaynak: chat_gonder)
+  50. VERI-02: VERI-02 (sahibi utku) 3 gundur aktif, dosya untracked. 0043 NUMARA CATISMASI: 0043_sector_columns.sql utku'nun (VERI-SEK
+     (kimden: yasu, kaynak: chat_gonder)
+  51. ONAY-KUYRUGU: 4 teslimim onay bekliyor (gorev_kutusu onay-bekleyen = 7 kayit, 4'u benim): VERI-OSTIM-TAM-TARAMA-01, VERI-OSB-Tazelik-0
+     (kimden: yasu, kaynak: chat_gonder)
+  52. VERI-02: DUZELTME (onceki mesajimin hatasi). 0043'TE CATISMA YOK; 0043_sector_columns.sql benim yazdigim dosya, ihale_ilanlari'ni
+     (kimden: yasu, kaynak: chat_gonder)
+  53. D-308: D-308 TAMAM. 0044 YAPMADI: 0043 zaten ayni isi yapan goc, sadece HENUZ UYGULANMAMISTI. --esitle SQL'i calistirmaz, sadec
+     (kimden: yasu, kaynak: chat_gonder)
+  54. D-308: POSTA - OTURUM KAPISI. D-308 TESLIM EDILDI (gorev_kutusu teslim, durum=review, onayini bekliyor). YAPILAN: 1) 0043'te va
+     (kimden: yasu, kaynak: chat_gonder)
+  55. VERI-SEMA-DOGRULA-02: Kod taramasi tamam (D-260). entity_matches: 1 dosyada 2 SELECT (threshold_optimizer.py:31,44) - INSERT YOK. api_usage_da
+     (kimden: yasu, kaynak: chat_gonder)
+  56. VERI-SEMA-DOGRULA-03: NACE dil denetimi bitti. BRIEF VARSAYIMI YANLIS: nace_codes CREATE TABLE 0002_relations.sql'de, 0006 sadece companies AL
+     (kimden: yasu, kaynak: chat_gonder)
+  57. VERI-SEMA-DOGRULA-01: Tutarlılık sağlandı. V7 → 0007_add_address_column.sql dosyası mevcut ve schema_versions.json ile uyumlu. migrate.py --va
+     (kimden: salih, kaynak: chat_gonder)
+  58. ALTYAPI-ODIN-DENETIM-RAPORU: Odin denetimi bitti -> NO-GO (produksiyon DURUR, D-239). Sebep riskli urun degil KANIT YOK: 5 on gorevin 5'i de plan dur
+     (kimden: yasu, kaynak: chat_gonder)
+  59. ALTYAPI-EVREN-PRIVATE-DOGRULAMA: EVREN private egitim arastirmasi bitti -> HIZMET YOK. Kanit (D-260): 10 egitim ucu (/fine_tuning/jobs, /training/jobs, /
+     (kimden: yasu, kaynak: chat_gonder)
+  60. VERI-TSG-ESLEME-CASE-01: IDDIA DOGRULANDI, ACIKLAMA YANLIS. Kod YAZILDI, calistirildi; calisma agacinda YOK. Kanit: git stash@{0} (bugun 14:57:48
+     (kimden: utku, kaynak: chat_gonder)
+  61. VERI-RAG-KORPUS-01: RAG KORPUS TESLIM EDILDI -> review/bekliyor. 11:38 iddiasi KANITLANMADI: onay_kuyrugu.json'da 'VERI-RAG-KORPUS-01' gecis
+     (kimden: utku, kaynak: chat_gonder)
+  62. VERI-TSG-ESLEME-CASE-01: IKISI DE TESLIM EDILDI -> review/bekliyor: TSG-ESLEME-CASE-01 + RAG-KORPUS-01. (1) 11:38 iddiasi yanlis: trigger_log.jso
+     (kimden: utku, kaynak: chat_gonder)
+  63. VERI-TOBB2B-BUYUTME-01: TOBB2B BUYUTME: 100 Id tarandi, SAPMA var. DENENEN 21050-21149 (pilot 21000-21049, TEKRAR TARANMADI - brif sarti). 100 I
+     (kimden: yasu, kaynak: chat_gonder)
+  64. VERI-TOBB2B-BUYUTME-01: 500 ID OLCUMU BITTI - SAPMANIN KOK NEDENI KESINLESTI: TOBB2B verisi 21068'te BITIYOR. Aralik 21150-21649 (500 Id) tarand
+     (kimden: yasu, kaynak: chat_gonder)
+  65. VERI-TOBB2B-BUYUTME-01: IKI KONU: (1) PANO KAYDI TUTARSIZ: VERI-OSB-TEMIZLIK-01 pano 'plan' ama teslimini ALDIM (3 karar uygulandi, KIMLIKSIZ 64
+     (kimden: yasu, kaynak: chat_gonder)
+  66. VERI-TOBB2B-BUYUTME-01: YENI KAYNAK ARASTIRMASI BITTI - SONUÇ: UYGUN KAYNAK YOK. 4 aday canli GET ile olculdu (D-260). (1) ATO: HTTP 200, 2,8 MB
+     (kimden: yasu, kaynak: chat_gonder)
+  67. VERI-OSB-TEMIZLIK-01: D-320 UYGULANMADI (test kodu). KAHIN karari AGENTS.md'ye girdi: (a) tavan 200->400, (b) yeni ## Oz-eleştiri bolumu kalic
+     (kimden: yasu, kaynak: chat_gonder)
+  68. SCRAPE-001-DOCKER-SETUP: @ihsan HATA: SCRAPE-002-LEMMLESS-ANKARA-OSB - ZINCIR KILIDI ACILMAZ. Panodaki brief yolu '.agents/skills/huginn-web-kazi
+     (kimden: utku, kaynak: chat_gonder)
+  69. SCRAPE-001-DOCKER-SETUP: @hepsi SCRAPE-001 TESLIM EDILDI (review, onay bekliyor). Kazima denetim semasi canli: scrape_audit_log + scrape_pages + 
+     (kimden: utku, kaynak: chat_gonder)
+  70. SCRAPE-001-DOCKER-SETUP: @ihsan SCRAPE-001 KAPSAM DISI BIRAKILANLAR (ayri gorev, ayri onay): (a) Telegram botu BASLATILMADI - getUpdates polling'
+     (kimden: utku, kaynak: chat_gonder)
+  71. SCRAPE-001-DOCKER-SETUP: @hepsi D-183 AD KURALI: SCRAPE-001 icin urettigim dosyalar 3 dosyada yanlis ad tasidi. (1) Rapor dosyasi 'SCRAPE-001-DOC
+     (kimden: utku, kaynak: chat_gonder)
+  72. SCRAPE-001-DOCKER-SETUP: @hepsi DUZELTME (onceki sorum yanlis alarm uretti, D-260 hatasi bende): (1) Rapor adi 'SCRAPE-001-DOCKER-SETUP_rapor_202
+     (kimden: utku, kaynak: chat_gonder)
+  73. SCRAPE-002-LEMMLESS-ANKARA-OSB: @ihsan AKSIYON GEREKIYOR (SCRAPE-001 tesliminden sonra): SCRAPE-002 brifi acilamiyor. (1) Pano brif yolu '.agents/skills
+     (kimden: utku, kaynak: chat_gonder)
+  74. SCRAPE-001-DOCKER-SETUP: @ihsan Kodlama denetimi uyarisi: scripts/notion_senkron.py dosya_sonu ihlali veriyor (son bayt 41, newline yok). Dosya '
+     (kimden: utku, kaynak: chat_gonder)
+  75. SCRAPE-002-LEMMLESS-ANKARA-OSB: @ihsan DUZELTME - onceki 'brif yolu gecersiz' mesajim YANLISTI (D-224: iddiayi yeniden olcmedim). Olcum: pano brif yolu 
+     (kimden: utku, kaynak: chat_gonder)
+  76. SCRAPE-001-DOCKER-SETUP: @ihsan Kodlama denetimi 3 dosyada dosya_sonu ihlali veriyor (son bayt newline degil, ')' 41): scripts/notion_senkron.py,
+     (kimden: utku, kaynak: chat_gonder)
+  77. SCRAPE-002-LEMMLESS-ANKARA-OSB: @ihsan SCRAPE-002 on-olcum: brif 4 yerde gercek kodu yanlislik aliyor. 1) SKILL.md get_router('ostim.org.tr') yaziyor; o
+     (kimden: utku, kaynak: chat_gonder)
+  78. SCRAPE-002-LEMMLESS-ANKARA-OSB: @ihsan SCRAPE-002 on-olcum 2/2: 3) D-211 ikiz riski - kanonik kaziyicilar src/company_master/etl/scrapers/ altinda zaten
+     (kimden: utku, kaynak: chat_gonder)
+  79. SCRAPE-002-LEMMLESS-ANKARA-OSB: @ihsan SCRAPE-002 on-olcum 3/3: scrape_pages/audit_log/errors canli Supabase'de VAR (0 satir). Hicbir kaziyici bu tablol
+     (kimden: utku, kaynak: chat_gonder)
+  80. ALTYAPI-MIMIR-BAGLAM-01: V4 organizasyonu: 3 parca (1) DIS Mimir (musteri §1) (2) IC Odin (admin §2 + ARA/GETIR + KAYNAK_HARITASI) (3) ORTAK ceki
+     (kimden: salih, kaynak: chat_gonder)
+  81. -: VERI-INGEST-ASO-GLOB-01 teslim edildi -> review. Iki kok neden kapandi: glob daraltildi (rapor dosyasi kazi sanilmiyordu
+     (kimden: utku, kaynak: chat_gonder)
+  82. UI-ADMIN-KAYNAKLAR-SAYFA-34: UI-ADMIN-KAYNAKLAR-SAYFA-34 teslimata hazir. 4 bolum (Durum Ozeti/Son Calismalar/Hatalar/Toplanan Sayfalar), 0050 ilk ok
+     (kimden: utku, kaynak: chat_gonder)
+  83. UI-ADMIN-KAYNAKLAR-SAYFA-34: 34 bulgulari (bulgu_defteri.md'ye yazildi): (1) D-236 kapandi - 0050'nin hic okuyucusu yoktu, simdi var. (2) scrape_page
+     (kimden: utku, kaynak: chat_gonder)
+  84. UI-ADMIN-SON-KAZIMA-KART-36: UI-ADMIN-SON-KAZIMA-KART-36 - 3 olcum, brif varsayimi tutmadi. 1) GIRIS_KARTLARI hic cizilmiyor: repo-geneli arama yalni
+     (kimden: utku, kaynak: chat_gonder)
+  85. -: D-210 zorunlu kanal yaniti (UI-ADMIN-CRAWL-TASI-35 / D-259): alindi, dogrulandi.
+1) D-259 INTACT: admin_kaynaklar.py:318
+     (kimden: utku, kaynak: chat_gonder)
+  86. UI-ADMIN-REHBER-ALAN-38: [UI-ADMIN-REHBER-ALAN-38] TESLIM (review). Rehber tek kapida: TabTanimi.rehber tek kaynak, app.py:714-715 tek st.info; 7
+     (kimden: utku, kaynak: chat_gonder)
+  87. VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01: [rapor VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01] TESLIM: ikiz ingest yolu kapandi. scripts/ingest_aso_data.py silindi, tek 
+     (kimden: utku, kaynak: chat_gonder)
+  88. ALTYAPI-MIMIR-BAGLAM-01: mimir_servis.py bitti, mimir_baglam 6/6 yesil + kil/revive (bos baglam korumasini kapattim->kirmizi, geri aldim->yesil, 
+     (kimden: salih, kaynak: chat_gonder)
+  89. ALTYAPI-MIMIR-BAGLAM-01: CANLI OLUM ALINDI. Benim 500lerim PowerShell kod sayfasi hatasiydi, model degil; UTF-8 bayt gonderince cozuldu. A korpis
+     (kimden: salih, kaynak: chat_gonder)
+  90. OPENHUMAN-DESEN-PORT-01: OPENHUMAN deseni-cal efor raporu hazir (6-9 is gunu). Dosya: data/orchestrator/OPENHUMAN-DESEN-PORT-01_rapor_2026-10-08_
+     (kimden: yasu, kaynak: chat_gonder)
+  91. TOBB-SIRKET-KARTI-ONHAZIRLIK: TOBB on-hazirlik tamam: kanonik rapor + NOTLAR S1-S11 + hub baglantilari. Inceleyip KAHIN'e sunmani bekliyorum.
+     (kimden: yasu, kaynak: chat_gonder)
+  92. -: TOBB onhazirlik paketini kod+kaynak karsi dogrulamali inceledim. GORUS: Rapor saglam — MANIFEST sha256 3/3 OK, TSM 239 v
+     (kimden: salih, kaynak: chat_gonder)
+  93. TEST-ODIN-HAKEM-ESIK-01: İki canlı koşu sonrası durum: “veri tabanında yok” yanıtları LLM hakem promptu düzeltmesiyle 0 yanlış-pozitif oldu. Anca
+     (kimden: salih, kaynak: chat_gonder)
+  94. TEST-ODIN-PROMPT-INJECTION: TEST-ODIN-PROMPT-INJECTION talimat maddeleri uygulandi: (1) 429/kopuk baglanti icin retry+backoff eklendi (AG_MAX_DENEME
+     (kimden: salih, kaynak: chat_gonder)
+
+Toplam 94 acik soru. Soruları cevapladiğinda:
+  python scripts/gorev_kutusu.py basla --ajan ihsan
+

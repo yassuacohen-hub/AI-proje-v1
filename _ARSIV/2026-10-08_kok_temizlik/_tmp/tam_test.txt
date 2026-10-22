@@ -1,0 +1,250 @@
+
+=================================== ERRORS ====================================
+____________ ERROR collecting tests/company_master/test_web_app.py ____________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\python.py:508: in importtestmodule
+    mod = import_path(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+C:\Huginn Data Projesi\Huginn Data Insights\tests\company_master\test_web_app.py:11: in <module>
+    from web_app import app
+E     File "C:\Huginn Data Projesi\Huginn Data Insights\web_app.py", line 2886
+E       tier = req.get("tier") or "Temel"
+E   IndentationError: unexpected indent
+________________ ERROR collecting tests/test_api_companies.py _________________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\python.py:508: in importtestmodule
+    mod = import_path(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_api_companies.py:20: in <module>
+    import web_app
+E     File "C:\Huginn Data Projesi\Huginn Data Insights\web_app.py", line 2886
+E       tier = req.get("tier") or "Temel"
+E   IndentationError: unexpected indent
+_______________ ERROR collecting tests/test_api_integration.py ________________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\python.py:508: in importtestmodule
+    mod = import_path(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_api_integration.py:28: in <module>
+    import web_app  # noqa: E402
+    ^^^^^^^^^^^^^^
+E     File "C:\Huginn Data Projesi\Huginn Data Insights\web_app.py", line 2886
+E       tier = req.get("tier") or "Temel"
+E   IndentationError: unexpected indent
+_______________ ERROR collecting tests/test_api_kpi_history.py ________________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\python.py:508: in importtestmodule
+    mod = import_path(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+C:\Huginn Data Projesi\Huginn Data Insights\tests\test_api_kpi_history.py:6: in <module>
+    from web_app import api_kpi_history
+E     File "c:\HUGINN~1\HUGINN~1\web_app.py", line 2886
+E       tier = req.get("tier") or "Temel"
+E   IndentationError: unexpected indent
+__________________ ERROR collecting tests/test_benchmark.py ___________________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\python.py:508: in importtestmodule
+    mod = import_path(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_benchmark.py:22: in <module>
+    import benchmark_http
+C:\Huginn Data Projesi\Huginn Data Insights\scripts\benchmark_http.py:25: in <module>
+    import web_app  # noqa: E402
+    ^^^^^^^^^^^^^^
+E     File "C:\Huginn Data Projesi\Huginn Data Insights\web_app.py", line 2886
+E       tier = req.get("tier") or "Temel"
+E   IndentationError: unexpected indent
+___________________ ERROR collecting tests/test_kurallar.py ___________________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\python.py:508: in importtestmodule
+    mod = import_path(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+C:\Huginn Data Projesi\Huginn Data Insights\tests\test_kurallar.py:17: in <module>
+    from web_app import extract_trade_name, normalize_company, normalize_company_name
+E     File "C:\Huginn Data Projesi\Huginn Data Insights\web_app.py", line 2886
+E       tier = req.get("tier") or "Temel"
+E   IndentationError: unexpected indent
+_________________ ERROR collecting tests/test_sec_auth_01.py __________________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\python.py:508: in importtestmodule
+    mod = import_path(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_sec_auth_01.py:28: in <module>
+    import web_app  # noqa: E402
+    ^^^^^^^^^^^^^^
+E     File "C:\Huginn Data Projesi\Huginn Data Insights\web_app.py", line 2886
+E       tier = req.get("tier") or "Temel"
+E   IndentationError: unexpected indent
+______________ ERROR collecting tests/test_security_regresyon.py ______________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\python.py:508: in importtestmodule
+    mod = import_path(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+C:\Huginn Data Projesi\Huginn Data Insights\tests\test_security_regresyon.py:22: in <module>
+    import web_app
+E     File "C:\Huginn Data Projesi\Huginn Data Insights\web_app.py", line 2886
+E       tier = req.get("tier") or "Temel"
+E   IndentationError: unexpected indent
+_________________ ERROR collecting tests/test_v1_companies.py _________________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\python.py:508: in importtestmodule
+    mod = import_path(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+C:\Huginn Data Projesi\Huginn Data Insights\tests\test_v1_companies.py:6: in <module>
+    from web_app import app
+E     File "c:\HUGINN~1\HUGINN~1\web_app.py", line 2886
+E       tier = req.get("tier") or "Temel"
+E   IndentationError: unexpected indent
+__________________ ERROR collecting tests/test_v1_company.py __________________
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\python.py:508: in importtestmodule
+    mod = import_path(
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1387: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1360: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:935: in _load_unlocked
+    ???
+C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+c:\Huginn Data Projesi\Huginn Data Insights\tests\test_v1_company.py:6: in <module>
+    from web_app import app
+E     File "c:\HUGINN~1\HUGINN~1\web_app.py", line 2886
+E       tier = req.get("tier") or "Temel"
+E   IndentationError: unexpected indent
+=========================== short test summary info ===========================
+ERROR tests/company_master/test_web_app.py
+ERROR tests/test_api_companies.py
+ERROR tests/test_api_integration.py
+ERROR tests/test_api_kpi_history.py
+ERROR tests/test_benchmark.py
+ERROR tests/test_kurallar.py
+ERROR tests/test_sec_auth_01.py
+ERROR tests/test_security_regresyon.py
+ERROR tests/test_v1_companies.py
+ERROR tests/test_v1_company.py
+!!!!!!!!!!!!!!!!!! Interrupted: 10 errors during collection !!!!!!!!!!!!!!!!!!!
+10 errors in 11.08s

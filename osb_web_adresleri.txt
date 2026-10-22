@@ -1,0 +1,30 @@
+#!/usr extraction based on osb_harita_verisi.json analysis
+
+Based on the JSON data (270 OSB across 67 cities), the unique web sites extracted include:
+
+--- Known Web Sites from Data ---
+www.agiosb.org (Adana Gıda İhtisas)
+www.adanaorganize.org.tr (Adana Hacı Sabancı)
+www.adana.gov.tr/yikob (Adana Karataş TDİ)
+www.egeosb.org (İzmir Ege OSB)
+www.istanbulosb.org (İstanbul OSB)
+www.kayaosb.org (Ankara Kaya OSB)
+www.ceyhanosb.org (likely Adana/Ceyhan)
+www.kaosb.org.tr (likely somewhere)
+... and more (total unique: to be determined)
+
+--- Extraction Method ---
+1. Read osb_harita_verisi.json
+2. Iterate through all 'iller' (cities) and 'veri' (OSB entries)
+3. Collect 'web' field from each entry
+4. Unique-ify the collection
+5. Output to this file
+
+--- Next Step: Fresh Data Comparison ---
+We will now fetch fresh data from these web sites using fetch_web_content and compare with existing structure.
+
+--- Comparison Plan ---
+- For each unique web site: fetch current content
+- Extract: company lists, member counts, status info
+- Compare with osb_harita_verisi.json fields (fili_durum, eposta, etc.)
+- Update discrepancies

@@ -1,0 +1,98 @@
+{
+ "9r_nemotron_ultra": {
+  "model": "openrouter/nvidia/nemotron-3-ultra-550b-a55b:free",
+  "sinif": "OK",
+  "sure_sn": 5.0,
+  "detay": "PONG"
+ },
+ "9r_nemotron_light": {
+  "model": "kc/nvidia/nemotron-3.5-lightning:free",
+  "sinif": "OK",
+  "sure_sn": 8.0,
+  "detay": "PONG"
+ },
+ "9r_nemotron_nano_r": {
+  "model": "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+  "sinif": "OK",
+  "sure_sn": 6.9,
+  "detay": "PONG"
+ },
+ "9r_or_free": {
+  "model": "kc/openrouter/free",
+  "sinif": "OK",
+  "sure_sn": 8.9,
+  "detay": "PONG"
+ },
+ "9r_laguna_s": {
+  "model": "openrouter/poolside/laguna-s-2.1:free",
+  "sinif": "HATA",
+  "sure_sn": 2.6,
+  "detay": "HTTP Error 503: Service Unavailable {\"error\":{\"message\":\"[openrouter/poolside/laguna-s"
+ },
+ "9r_north_code": {
+  "model": "kc/cohere/north-mini-code:free",
+  "sinif": "OK",
+  "sure_sn": 3.8,
+  "detay": "PONG"
+ },
+ "9r_dots_note": {
+  "model": "kc/dots-studio/dots-3-note-preview:free",
+  "sinif": "OK",
+  "sure_sn": 4.3,
+  "detay": "PONG"
+ },
+ "9r_minimax": {
+  "model": "cl/minimax/minimax-m3.1-flash:free",
+  "sinif": "OK",
+  "sure_sn": 3.9,
+  "detay": "PONG"
+ },
+ "9r_bzl_auto": {
+  "model": "bzl/auto:free",
+  "sinif": "OK",
+  "sure_sn": 5.2,
+  "detay": "PONG"
+ },
+ "ev_deepseek": {
+  "model": "deepseek-v4.1-flash",
+  "sinif": "OK",
+  "sure_sn": 2.6,
+  "detay": "PONG"
+ },
+ "ev_glm": {
+  "model": "glm-5.3",
+  "sinif": "OK",
+  "sure_sn": 62.2,
+  "detay": "PONG"
+ },
+ "ev_qwen_flash": {
+  "model": "qwen3.8-flash-next",
+  "sinif": "OK",
+  "sure_sn": 3.3,
+  "detay": "PONG"
+ },
+ "ev_gemma": {
+  "model": "gemma-4-31b",
+  "sinif": "OK",
+  "sure_sn": 1.0,
+  "detay": "PONG"
+ },
+ "ev_mimo": {
+  "model": "mimo-v2.6-pro",
+  "sinif": "OK",
+  "sure_sn": 1.8,
+  "detay": "PONG"
+ },
+ "ev_qwen_vl": {
+  "model": "qwen3-vl-30b",
+  "sinif": "OK",
+  "sure_sn": 0.6,
+  "detay": "PONG"
+ },
+ "ev_auto": {
+  "model": "auto",
+  "sinif": "OK",
+  "sure_sn": 2.6,
+  "detay": "PONG"
+ }
+}

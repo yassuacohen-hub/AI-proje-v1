@@ -1,0 +1,7 @@
+ana_kontrol | 🏠 Ana Kontrol | 0 | []
+musteri_yonetimi | 👥 Müşteriler | 4 | ['🏢 Firmalar', '👤 Kullanıcı Yönetimi', '🎫 Destek Merkezi', '💾 Veri Dışa Aktarma']
+proje_yonetimi | 📋 Proje | 5 | ['📔 Karar Defteri', '🤖 MIMIR', '💬 Ajan Chat', '🗂️ Görev Panosu', '📑 MIMIR Raporları']
+veri_kalite | 📈 Metrikler | 6 | ['✅ Kalite Skoru', '💹 Executive Dashboard', '🔍 Global Arama', '🎚️ Kontrol Panosu', '💰 Maliyet', '🕷️ Veri Kaynakları']
+musteri_onizleme | 💼 Gelir | 3 | ['📢 Pazarlama', '📉 LTV/CAC', '📦 Paket & Kredi']
+denetim | 🧾 Güvenlik | 2 | ['🔒 KVKK Mode', '🔐 MFA Yönetimi']
+sistem | ⚙️ Sistem | 10 | ['🧭 Altyapı', '🔌 API Analitiği', '⚠️ Olaylar & Hatalar', '📡 Canlı Veri', '⚡ Performans', '🔗 Webhook İzleme', '🔄 Otomatik Yenileme', '🚩 Feature Flags', '🎛️ Ayarlar', '⏳ Yükleme Durumları']

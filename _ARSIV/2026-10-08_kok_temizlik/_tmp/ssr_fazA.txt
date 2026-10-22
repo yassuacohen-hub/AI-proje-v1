@@ -1,0 +1,6 @@
+API-PAKET-SCOPE-01           | durum=aktif
+API-V1-COMPANY-FRAUD-01      | durum=aktif
+API-V1-NETWORK-REPORT-01     | durum=aktif
+web_app.py /firma/ rotasi: YOK
+web_app.py include_router sayisi: 1
+routers py: ['__init__.py']

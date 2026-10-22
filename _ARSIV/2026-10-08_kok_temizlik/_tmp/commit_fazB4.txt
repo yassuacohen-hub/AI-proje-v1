@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 23.21s
+[chore/monorepo-merge debfb5f6] feat(D-355): Faz B - sistem (admin_sistem) hub_ciz sablonuna baglandi; 4/4 hub tamam
+ 4 files changed, 83 insertions(+), 134 deletions(-)

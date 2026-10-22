@@ -1,0 +1,2 @@
+GONDERILDI: yasu -> ihsan (koordinasyon) [TOBB-SIRKET-KARTI-ONHAZIRLIK] 2026-10-08T21:59:22
+  log: data/orchestrator/chat/messages.jsonl

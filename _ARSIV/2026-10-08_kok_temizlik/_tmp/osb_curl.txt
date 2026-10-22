@@ -1,0 +1,16 @@
+OSB WEB ADRES OLCUMU (curl -sI, timeout 12)
+anadoluosb.org.tr = 301 https://anadoluosb.org.tr/
+dokumculerosb.org.tr = 200 https://dokumculerosb.org.tr/
+aso2osb.org.tr = 200 https://aso2osb.org.tr/
+aosb.org.tr = 200 https://aosb.org.tr/
+hab.org.tr = 302 https://hab.org.tr/
+cubuktdiosb.org = 000 https://cubuktdiosb.org/
+ivedikosb.org.tr = 401 https://ivedikosb.org.tr/
+baskentosb.org = 200 https://baskentosb.org/
+www.baskentosb.org.tr = 000 https://www.baskentosb.org.tr/
+beyosb.org.tr = 200 https://beyosb.org.tr/
+mobilyacilarosb.com = 200 https://mobilyacilarosb.com/
+ostim.org.tr = 200 https://ostim.org.tr/
+posb.org.tr = 200 https://posb.org.tr/
+ptoosb.org.tr = 301 https://ptoosb.org.tr/
+sereflikochisarosb.org.tr = 301 https://sereflikochisarosb.org.tr/

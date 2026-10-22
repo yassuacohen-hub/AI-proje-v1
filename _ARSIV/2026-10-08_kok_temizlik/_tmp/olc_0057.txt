@@ -1,0 +1,23 @@
+companies kolon: 66 (beklenen 66)
+  company_type_code      smallint
+  tsm_code               integer
+  business_start_date    date
+  closing_date           date
+  tobb_status_code       smallint
+  total_capital          numeric
+  parent_company_id      uuid
+tax_office_code var mi: False (beklenen False)
+company_capital kolon: 7 ['company_id', 'total_capital', 'registered_share_count', 'bearer_share_count', 'par_value', 'source_record_id', 'updated_at'] (beklenen 7)
+companies yeni FK: 4 (beklenen 4)
+indeks: 3 (beklenen 3)
+company_capital CHECK: 4 (beklenen 4)
+kolon COMMENT: 7 (beklenen 7)
+defter: 1 (beklenen 1)
+companies TOBB kodlu satir: 0 (beklenen 0, ETL yok)
+FK tobb_status_code: kirildi (beklenen): IntegrityError (psycopg.errors.ForeignKeyViolation) insert or update on table "compan
+CHECK total_capital: kirildi (beklenen): IntegrityError (psycopg.errors.CheckViolation) new row for relation "companies" viola
+CHECK par_value: kirildi (beklenen): IntegrityError (psycopg.errors.CheckViolation) new row for relation "company_capital"
+FK company_capital.company_id: kirildi (beklenen): IntegrityError (psycopg.errors.ForeignKeyViolation) insert or update on table "compan
+company_capital satir (rollback sonrasi): 0
+companies tobb_status_code=9999: 0
+OLCUM OK

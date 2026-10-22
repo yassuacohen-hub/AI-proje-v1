@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 49.45s
+[chore/monorepo-merge 01f76b56] docs(D-355): hafiza Faz B ilk hub
+ 1 file changed, 2 insertions(+)

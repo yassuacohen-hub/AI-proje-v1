@@ -1,0 +1,20 @@
+usage: gorev_at.py at [-h] --task-id TASK_ID
+                      (--baslik BASLIK | --baslik-b64 BASLIK_B64) --ajan AJAN
+                      [--oncelik {P0,P1,P2,P3}] [--dosya DOSYA]
+                      [--talimat TALIMAT] [--mod {code,architect}]
+                      [--cagiran CAGIRAN]
+
+options:
+  -h, --help            show this help message and exit
+  --task-id TASK_ID
+  --baslik BASLIK       D-57 kalibinda baslik
+  --baslik-b64 BASLIK_B64
+                        Baslik utf-8 base64; cmd.exe Unicode bozulmasini
+                        atlatir
+  --ajan AJAN           sahip + posta kutusu (ör. kilo)
+  --oncelik {P0,P1,P2,P3}
+  --dosya DOSYA         Virgülle ayrılı, otomatik kilitlenir
+  --talimat TALIMAT     Ajana kısa talimat
+  --mod {code,architect}
+                        D-63: architect sadece ihsan/utku'ya atanabilir
+  --cagiran CAGIRAN     Komutu veren ajan (D-58 kapısı)

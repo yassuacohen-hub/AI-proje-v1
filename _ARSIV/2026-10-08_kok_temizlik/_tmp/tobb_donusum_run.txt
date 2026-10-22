@@ -1,0 +1,1 @@
+[OK] paket: c:\Huginn Data Projesi\Huginn Data Insights\docs\kaynaklar\tobb_sirket_karti dosya=3

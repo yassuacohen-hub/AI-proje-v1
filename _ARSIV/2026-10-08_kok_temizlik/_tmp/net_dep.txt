@@ -1,0 +1,5 @@
+VERI-ENTITY-GRAPH-01         | durum=done | atanan=None
+API-PAKET-SCOPE-01           | durum=aktif | atanan=None
+API-V1-COMPANY-FRAUD-01      | durum=aktif | atanan=None
+scope.py YOK
+v1_network.py YOK

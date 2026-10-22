@@ -1,0 +1,25 @@
+warning: in the working copy of 'src/company_master/etl/tobb_alan_haritasi.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'src/company_master/schema/migrations/0055_tobb_havuz_sema.sql', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'src/company_master/schema/migrations/0056_tobb_sozluk_seed_company_persons.sql', CRLF will be replaced by LF the next time Git touches it
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 36.02s
+[chore/monorepo-merge 9c52b43e] VERI-TOBB-HAVUZ-SEMA-01: 0055-0059 TOBB havuz goc+down, seed betikleri, tobb_alan_haritasi tek kapi + 7 test + mandal, RLS 13 tablo, brif/rapor
+ 18 files changed, 2077 insertions(+), 1 deletion(-)
+ create mode 100644 docs/raporlar/tobb_sirket_karti_alan_eslestirme.md
+ create mode 100644 plans/brief_ihsan_VERI-TOBB-HAVUZ-SEMA-01.md
+ create mode 100644 scripts/tobb_alan_sozlugu_uret.py
+ create mode 100644 scripts/tobb_sozluk_seed_uret.py
+ create mode 100644 src/company_master/etl/tobb_alan_haritasi.py
+ create mode 100644 src/company_master/schema/migrations/0055_tobb_havuz_sema.sql
+ create mode 100644 src/company_master/schema/migrations/0056_tobb_sozluk_seed_company_persons.sql
+ create mode 100644 src/company_master/schema/migrations/0057_companies_tobb_kolonlari.sql
+ create mode 100644 src/company_master/schema/migrations/0058_adres_hukuk_gazete.sql
+ create mode 100644 src/company_master/schema/migrations/0059_tobb_havuz_rls.sql
+ create mode 100644 src/company_master/schema/migrations/down/0055_tobb_havuz_sema.down.sql
+ create mode 100644 src/company_master/schema/migrations/down/0056_tobb_sozluk_seed_company_persons.down.sql
+ create mode 100644 src/company_master/schema/migrations/down/0057_companies_tobb_kolonlari.down.sql
+ create mode 100644 src/company_master/schema/migrations/down/0058_adres_hukuk_gazete.down.sql
+ create mode 100644 src/company_master/schema/migrations/down/0059_tobb_havuz_rls.down.sql
+ create mode 100644 supabase/migrations/20261010_tobb_havuz_rls.sql
+ create mode 100644 tests/test_tobb_alan_haritasi.py

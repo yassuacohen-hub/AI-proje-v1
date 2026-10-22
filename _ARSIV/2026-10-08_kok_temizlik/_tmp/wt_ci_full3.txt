@@ -1,0 +1,2278 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-9.1.1, pluggy-1.6.0 -- C:\Users\yasin\AppData\Local\Programs\Python\Python312\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\yasin\AppData\Local\Temp\wt_ci
+configfile: pytest.ini
+plugins: anyio-4.14.2, langsmith-0.11.2, cov-7.1.0
+collecting ... collected 5500 items / 1 skipped
+
+tests/company_master/test_ankara_osb.py::test_init_db_creates_companies PASSED [  0%]
+tests/company_master/test_ankara_osb.py::test_osb_master_count PASSED    [  0%]
+tests/company_master/test_ankara_osb.py::test_osb_firm_has_ankara_flag PASSED [  0%]
+tests/company_master/test_ankara_osb.py::test_quarantine_records_marked PASSED [  0%]
+tests/company_master/test_ankara_osb.py::test_mvp_filter_logic PASSED    [  0%]
+tests/company_master/test_base_osfb_scraper.py::test_base_firma_to_jsonl PASSED [  0%]
+tests/company_master/test_base_osfb_scraper.py::test_normalize_website PASSED [  0%]
+tests/company_master/test_base_osfb_scraper.py::test_extract_vkn PASSED  [  0%]
+tests/company_master/test_base_osfb_scraper.py::test_state_management PASSED [  0%]
+tests/company_master/test_base_osfb_scraper.py::test_scrape_yields_firmalar PASSED [  0%]
+tests/company_master/test_connection.py::test_get_database_url_from_env PASSED [  0%]
+tests/company_master/test_connection.py::test_get_database_url_fallback PASSED [  0%]
+tests/company_master/test_connection.py::test_get_engine_sqlite PASSED   [  0%]
+tests/company_master/test_connection.py::test_get_engine_postgresql_converts_psycopg PASSED [  0%]
+tests/company_master/test_connection.py::test_get_engine_fallback_without_sqlalchemy PASSED [  0%]
+tests/company_master/test_connection.py::test_get_engine_fallback_non_sqlite_url PASSED [  0%]
+tests/company_master/test_connection.py::test_get_session_with_sqlalchemy PASSED [  0%]
+tests/company_master/test_connection.py::test_get_session_returns_none_without_sqlalchemy PASSED [  0%]
+tests/company_master/test_connection.py::test_init_db_creates_tables PASSED [  0%]
+tests/company_master/test_connection.py::test_init_db_handles_sql_error PASSED [  0%]
+tests/company_master/test_connection.py::test_init_db_with_custom_sql_path PASSED [  0%]
+tests/company_master/test_connection.py::test_find_root_finds_env PASSED [  0%]
+tests/company_master/test_connection.py::test_load_env_no_env_file PASSED [  0%]
+tests/company_master/test_connection.py::test_load_env_sets_variables PASSED [  0%]
+tests/company_master/test_connection.py::test_load_env_skips_comments_and_blank PASSED [  0%]
+tests/company_master/test_connection.py::test_load_env_skips_existing_keys PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_get_database_url_returns_string PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_get_engine_postgresql_no_double_replace PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_get_engine_postgresql_with_kwargs PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_load_env_quoted_value PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_load_env_single_quoted_value PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_init_db_creates_quarantine PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_map_row_multi_phone PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_run_normalize_no_osb PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_search_as_list_keeps_nonempty PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_search_as_list_str_split_semicolon PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_search_row_to_dashboard_no_payload PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_search_row_to_dashboard_payload_not_dict PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_data_root_finds_ostim_dir PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_search_jsonl_filters_nace PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_fetch_filtered_companies_with_sectors PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_fetch_filtered_companies_with_extra PASSED [  0%]
+tests/company_master/test_extra_coverage.py::test_search_jsonl_skips_missing_files PASSED [  0%]
+tests/company_master/test_migrate.py::test_kapali_yol_yazmaya_kalkmaz PASSED [  0%]
+tests/company_master/test_migrate.py::test_kapali_yol_api_geri_gelmiyor PASSED [  0%]
+tests/company_master/test_migrate.py::test_tek_goc_dizini_var PASSED     [  0%]
+tests/company_master/test_migrate.py::test_kanonik_dizin_numarali_ve_dolu PASSED [  0%]
+tests/company_master/test_migrate.py::test_core_tablolari_tanimli PASSED [  0%]
+tests/company_master/test_normalize.py::test_map_row_basic PASSED        [  0%]
+tests/company_master/test_normalize.py::test_map_row_no_phone PASSED     [  0%]
+tests/company_master/test_normalize.py::test_map_row_medium_confidence PASSED [  0%]
+tests/company_master/test_normalize.py::test_run_normalize_empty PASSED  [  0%]
+tests/company_master/test_normalize.py::test_run_normalize_writes_records PASSED [  0%]
+tests/company_master/test_normalize.py::test_run_normalize_idempotent PASSED [  0%]
+tests/company_master/test_normalize.py::test_run_normalize_with_limit PASSED [  1%]
+tests/company_master/test_normalize.py::test_main_returns_zero_on_success PASSED [  1%]
+tests/company_master/test_normalize.py::test_main_returns_one_on_error PASSED [  1%]
+tests/company_master/test_pipeline.py::test_scrape_all_runs_successfully PASSED [  1%]
+tests/company_master/test_pipeline.py::test_scrape_all_handles_ostim_error PASSED [  1%]
+tests/company_master/test_pipeline.py::test_scrape_all_handles_aso_error PASSED [  1%]
+tests/company_master/test_search.py::test_as_list_with_list PASSED       [  1%]
+tests/company_master/test_search.py::test_as_list_with_string PASSED     [  1%]
+tests/company_master/test_search.py::test_as_list_with_none PASSED       [  1%]
+tests/company_master/test_search.py::test_as_list_with_empty_string PASSED [  1%]
+tests/company_master/test_search.py::test_row_to_dashboard_basic PASSED  [  1%]
+tests/company_master/test_search.py::test_search_jsonl_with_data PASSED  [  1%]
+tests/company_master/test_search.py::test_search_jsonl_no_match PASSED   [  1%]
+tests/company_master/test_search.py::test_search_companies PASSED        [  1%]
+tests/company_master/test_search.py::test_fetch_dashboard_companies PASSED [  1%]
+tests/company_master/test_search.py::test_count_ankara_osb_companies PASSED [  1%]
+tests/company_master/test_search.py::test_fetch_filtered_companies PASSED [  1%]
+tests/company_master/test_web_app.py::TestHealthEndpoint::test_health_returns_ok PASSED [  1%]
+tests/company_master/test_web_app.py::TestKPIEndpoint::test_kpi_returns_expected_fields PASSED [  1%]
+tests/company_master/test_web_app.py::TestKPIEndpoint::test_kpi_returns_empty_when_no_data PASSED [  1%]
+tests/company_master/test_web_app.py::TestCompaniesEndpoint::test_companies_returns_list PASSED [  1%]
+tests/company_master/test_web_app.py::TestCompaniesEndpoint::test_companies_search_filters PASSED [  1%]
+tests/company_master/test_web_app.py::TestDashboardEndpoint::test_dashboard_returns_html PASSED [  1%]
+tests/company_master/test_web_app.py::TestStaticFiles::test_css_served PASSED [  1%]
+tests/company_master/test_web_app.py::TestStaticFiles::test_js_served PASSED [  1%]
+tests/company_master/test_web_app.py::TestIntelligenceDashboardEndpoint::test_intelligence_dashboard_returns_expected_structure PASSED [  1%]
+tests/data_quality_toolkit/test_pii_scanner.py::test_validate_tckn_valid PASSED [  1%]
+tests/data_quality_toolkit/test_pii_scanner.py::test_validate_tckn_invalid_first_zero PASSED [  1%]
+tests/data_quality_toolkit/test_pii_scanner.py::test_validate_tckn_invalid_length PASSED [  1%]
+tests/data_quality_toolkit/test_pii_scanner.py::test_validate_luhn_visa PASSED [  1%]
+tests/data_quality_toolkit/test_pii_scanner.py::test_validate_luhn_invalid PASSED [  1%]
+tests/data_quality_toolkit/test_pii_scanner.py::test_scan_column_email PASSED [  1%]
+tests/data_quality_toolkit/test_validator.py::test_not_null_rule_pass PASSED [  1%]
+tests/data_quality_toolkit/test_validator.py::test_not_null_rule_fail PASSED [  1%]
+tests/data_quality_toolkit/test_validator.py::test_unique_rule_pass PASSED [  1%]
+tests/data_quality_toolkit/test_validator.py::test_unique_rule_fail PASSED [  1%]
+tests/data_quality_toolkit/test_validator.py::test_range_rule PASSED     [  1%]
+tests/data_quality_toolkit/test_validator.py::test_engine_aggregates_score PASSED [  1%]
+tests/intelligence/test_career_apify_source.py::test_default_init PASSED [  1%]
+tests/intelligence/test_career_apify_source.py::test_custom_init PASSED  [  1%]
+tests/intelligence/test_career_apify_source.py::test_set_company_urls PASSED [  1%]
+tests/intelligence/test_career_apify_source.py::test_build_run_input_empty PASSED [  1%]
+tests/intelligence/test_career_apify_source.py::test_build_run_input_with_urls PASSED [  1%]
+tests/intelligence/test_career_apify_source.py::test_build_run_input_limited PASSED [  1%]
+tests/intelligence/test_career_apify_source.py::test_apify_item_to_scraped_job PASSED [  1%]
+tests/intelligence/test_career_apify_source.py::test_parse_job_listing_empty PASSED [  1%]
+tests/intelligence/test_career_apify_source.py::test_parse_job_listing_no_keywords PASSED [  1%]
+tests/intelligence/test_career_apify_source.py::test_parse_job_listing_with_jobs PASSED [  1%]
+tests/intelligence/test_dlq_monitor.py::TestDLQEntry::test_entry_basic PASSED [  1%]
+tests/intelligence/test_dlq_monitor.py::TestDLQEntry::test_entry_to_dict PASSED [  1%]
+tests/intelligence/test_dlq_monitor.py::TestApifyDLQMonitor::test_load_entries PASSED [  1%]
+tests/intelligence/test_dlq_monitor.py::TestApifyDLQMonitor::test_error_type_counts PASSED [  1%]
+tests/intelligence/test_dlq_monitor.py::TestApifyDLQMonitor::test_entries_by_error_type PASSED [  1%]
+tests/intelligence/test_dlq_monitor.py::TestApifyDLQMonitor::test_entries_by_actor PASSED [  1%]
+tests/intelligence/test_dlq_monitor.py::TestApifyDLQMonitor::test_summary PASSED [  1%]
+tests/intelligence/test_dlq_monitor.py::TestApifyDLQMonitor::test_format_report PASSED [  2%]
+tests/intelligence/test_dlq_monitor.py::TestApifyDLQMonitor::test_format_report_verbose PASSED [  2%]
+tests/intelligence/test_dlq_monitor.py::TestApifyDLQMonitor::test_recent_entries PASSED [  2%]
+tests/intelligence/test_dlq_monitor.py::TestApifyDLQMonitor::test_clear_dlq PASSED [  2%]
+tests/intelligence/test_dlq_monitor.py::TestApifyDLQMonitor::test_empty_dlq PASSED [  2%]
+tests/intelligence/test_dlq_monitor.py::TestApifyDLQMonitor::test_retry_entry_out_of_range PASSED [  2%]
+tests/intelligence/test_dlq_monitor.py::TestApifyDLQMonitor::test_nonexistent_dlq PASSED [  2%]
+tests/intelligence/test_vector_search.py::test_config_defaults PASSED    [  2%]
+tests/intelligence/test_vector_search.py::test_config_top_k_capped PASSED [  2%]
+tests/intelligence/test_vector_search.py::test_search_empty_query PASSED [  2%]
+tests/intelligence/test_vector_search.py::test_search_bullets PASSED     [  2%]
+tests/intelligence/test_vector_search.py::test_search_plastik PASSED     [  2%]
+tests/intelligence/test_vector_search.py::test_search_result_to_dict PASSED [  2%]
+tests/intelligence/test_vector_search.py::test_index_company_invalid PASSED [  2%]
+tests/intelligence/test_vector_search.py::test_index_company_valid PASSED [  2%]
+tests/intelligence/test_vector_search.py::test_health PASSED             [  2%]
+tests/intelligence/test_vector_search.py::test_search_by_ids PASSED      [  2%]
+tests/orchestrator/test_brief.py::test_load_brief_json PASSED            [  2%]
+tests/orchestrator/test_brief.py::test_load_brief_markdown PASSED        [  2%]
+tests/orchestrator/test_brief.py::test_load_brief_missing_file PASSED    [  2%]
+tests/orchestrator/test_brief.py::test_load_brief_invalid_task_type PASSED [  2%]
+tests/orchestrator/test_brief.py::test_package_brief PASSED              [  2%]
+tests/orchestrator/test_brief.py::test_package_brief_and_brief_package_equivalence PASSED [  2%]
+tests/orchestrator/test_brief.py::test_load_brief_and_package_roundtrip PASSED [  2%]
+tests/orchestrator/test_dispatch_review.py::test_dispatch_review_full_cycle PASSED [  2%]
+tests/orchestrator/test_dispatch_review.py::test_dispatch_orchestrator_mode PASSED [  2%]
+tests/orchestrator/test_dispatch_review.py::test_dispatch_review_failed PASSED [  2%]
+tests/orchestrator/test_error_ledger.py::test_error_ledger_add_and_list PASSED [  2%]
+tests/orchestrator/test_error_ledger.py::test_error_ledger_by_task PASSED [  2%]
+tests/orchestrator/test_error_ledger.py::test_error_ledger_persistence PASSED [  2%]
+tests/orchestrator/test_error_ledger.py::test_error_ledger_clear PASSED  [  2%]
+tests/orchestrator/test_error_ledger.py::test_fix_ledger_01_gecici_kilit_retry_ile_gecilir PASSED [  2%]
+tests/orchestrator/test_error_ledger.py::test_fix_ledger_01_kalici_kilit_hatayi_yukari_atar PASSED [  2%]
+tests/orchestrator/test_models.py::test_task_status_values PASSED        [  2%]
+tests/orchestrator/test_models.py::test_task_type_values PASSED          [  2%]
+tests/orchestrator/test_models.py::test_task_roundtrip PASSED            [  2%]
+tests/orchestrator/test_models.py::test_task_result_roundtrip PASSED     [  2%]
+tests/orchestrator/test_models.py::test_error_ledger_entry_roundtrip PASSED [  2%]
+tests/orchestrator/test_models.py::test_agent_manifest_roundtrip PASSED  [  2%]
+tests/orchestrator/test_models.py::test_brief_roundtrip PASSED           [  2%]
+tests/orchestrator/test_quick_task.py::test_brief_olustur_gecerli_brief_uretir PASSED [  2%]
+tests/orchestrator/test_quick_task.py::test_brief_olustur_varsayilanlar PASSED [  2%]
+tests/orchestrator/test_quick_task.py::test_quick_task_e2e_dispatch_ve_review PASSED [  2%]
+tests/orchestrator/test_quick_task.py::test_quick_task_bilinmeyen_ajan_hata_verir PASSED [  2%]
+tests/orchestrator/test_review.py::test_review_clean_output PASSED       [  2%]
+tests/orchestrator/test_review.py::test_review_secret_detected PASSED    [  2%]
+tests/orchestrator/test_review.py::test_review_missing_file PASSED       [  2%]
+tests/orchestrator/test_review.py::test_review_nonexistent_path PASSED   [  2%]
+tests/orchestrator/test_runner.py::test_run_task_success PASSED          [  2%]
+tests/orchestrator/test_runner.py::test_run_task_failure_then_reassign PASSED [  2%]
+tests/orchestrator/test_runner.py::test_execute_orchestrator_task_research PASSED [  2%]
+tests/orchestrator/test_runner.py::test_execute_orchestrator_task_code_review PASSED [  2%]
+tests/orchestrator/test_runner.py::test_execute_orchestrator_task_unknown_type_fallback PASSED [  2%]
+tests/orchestrator/test_runner.py::test_execute_orchestrator_task_failed_on_write_error PASSED [  2%]
+tests/orchestrator/test_sync.py::test_append_completion PASSED           [  2%]
+tests/orchestrator/test_sync.py::test_update_error_ledger_section PASSED [  3%]
+tests/orchestrator/test_sync.py::test_append_completion_missing_file PASSED [  3%]
+tests/orchestrator/test_task_board.py::test_gorev_guncelle_not_keyword_argument PASSED [  3%]
+tests/orchestrator/test_task_board.py::test_gorev_guncelle_invalid_duration PASSED [  3%]
+tests/orchestrator/test_task_board.py::test_gorev_ekle_duplicate_prevention PASSED [  3%]
+tests/orchestrator/test_task_board.py::test_atomic_yazma_tmp_artigi_birakmaz PASSED [  3%]
+tests/orchestrator/test_task_board.py::test_atomic_write_text_dosya_icerigi PASSED [  3%]
+tests/orchestrator/test_task_board.py::test_orch05b_kilit_aktif_ve_review_guncellemede_korunur PASSED [  3%]
+tests/orchestrator/test_task_board.py::test_orch05b_blocked_kilit_dusurur_baska_gorevin_kilidi_kalir PASSED [  3%]
+tests/orchestrator/test_workspace.py::test_resolve_workspace PASSED      [  3%]
+tests/orchestrator/test_workspace.py::test_validate_write_path_inside_workspace PASSED [  3%]
+tests/orchestrator/test_workspace.py::test_validate_write_path_outside_workspace PASSED [  3%]
+tests/orchestrator/test_workspace.py::test_validate_manifest_valid PASSED [  3%]
+tests/orchestrator/test_workspace.py::test_validate_manifest_invalid_workspace PASSED [  3%]
+tests/orchestrator/test_workspace.py::test_scan_for_secrets_clean PASSED [  3%]
+tests/orchestrator/test_workspace.py::test_scan_for_secrets_detected PASSED [  3%]
+tests/orchestrator/test_workspace.py::test_validate_write_path_sibling_directory_rejected PASSED [  3%]
+tests/orchestrator/test_workspace.py::test_validate_write_path_kardes_manifest_rejected PASSED [  3%]
+tests/orchestrator/test_workspace.py::test_validate_write_path_dotdot_traversal_rejected PASSED [  3%]
+tests/test_9router_optimizer.py::TestSecretMaskeleme::test_uzun_deger_ilk_son_4 PASSED [  3%]
+tests/test_9router_optimizer.py::TestSecretMaskeleme::test_kisa_deger_tamamen_maskelenir PASSED [  3%]
+tests/test_9router_optimizer.py::TestSecretMaskeleme::test_dict_icinde_secret_anahtar_maskelenir PASSED [  3%]
+tests/test_9router_optimizer.py::TestSecretMaskeleme::test_list_icinde_recursive PASSED [  3%]
+tests/test_9router_optimizer.py::TestSaglikTaramasi::test_saglikli_provider_sorunlu_degil PASSED [  3%]
+tests/test_9router_optimizer.py::TestSaglikTaramasi::test_backoff_esik_ve_locks PASSED [  3%]
+tests/test_9router_optimizer.py::TestSaglikTaramasi::test_error_code_ve_teststatus PASSED [  3%]
+tests/test_9router_optimizer.py::TestSaglikTaramasi::test_null_backoff_cokmez PASSED [  3%]
+tests/test_9router_optimizer.py::TestSaglikTaramasi::test_bozuk_json_ham_fallback PASSED [  3%]
+tests/test_9router_optimizer.py::TestDbYedekle::test_retention_7_eski_yedekler_silinir PASSED [  3%]
+tests/test_9router_optimizer.py::TestDbYedekle::test_yeni_yedek_gercek_sqlite PASSED [  3%]
+tests/test_9router_optimizer.py::TestComboIstatistik::test_provider_bazli_latency_ve_maliyet PASSED [  3%]
+tests/test_9router_optimizer.py::TestComboIstatistik::test_settings_okunur PASSED [  3%]
+tests/test_9router_optimizer.py::TestComboIstatistik::test_bos_db_cokmez PASSED [  3%]
+tests/test_9router_optimizer.py::TestSkorla::test_saglikli_hizli_ucuz_en_iyi PASSED [  3%]
+tests/test_9router_optimizer.py::TestSkorla::test_teststatus_error_cezasi PASSED [  3%]
+tests/test_9router_optimizer.py::TestSkorla::test_olculmemis_provider_nort_75 PASSED [  3%]
+tests/test_9router_optimizer.py::TestSkorla::test_inaktif_provider_sifir_saglik PASSED [  3%]
+tests/test_9router_optimizer.py::TestSkorla::test_siralama_azalan PASSED [  3%]
+tests/test_9router_optimizer.py::TestAnomaliTespit::test_coklu_neden_yuksek_oncelik PASSED [  3%]
+tests/test_9router_optimizer.py::TestAnomaliTespit::test_tek_neden_orta_oncelik PASSED [  3%]
+tests/test_9router_optimizer.py::TestAnomaliTespit::test_temiz_provider_anomali_yok PASSED [  3%]
+tests/test_9router_optimizer.py::TestTelegramSentinel::test_ilk_bildirim_gonderilir PASSED [  3%]
+tests/test_9router_optimizer.py::TestTelegramSentinel::test_ayni_anomali_1_saat_icinde_tekrar_gonderilmez PASSED [  3%]
+tests/test_9router_optimizer.py::TestTelegramSentinel::test_farkli_anomali_gonderilir PASSED [  3%]
+tests/test_9router_optimizer.py::TestTelegramSentinel::test_bos_anomali_gonderilmez PASSED [  3%]
+tests/test_9router_optimizer.py::TestCikti::test_json_cikti_anahtarlari PASSED [  3%]
+tests/test_9router_optimizer.py::TestCikti::test_markdown_rapor_baslik_ve_provider PASSED [  3%]
+tests/test_admin_audit.py::test_supheli_basarisiz_giris_basarili PASSED  [  3%]
+tests/test_admin_audit.py::test_supheli_cok_ulkeli_ip PASSED             [  3%]
+tests/test_admin_audit.py::test_supheli_gece_toplu_export PASSED         [  3%]
+tests/test_admin_audit.py::test_supheli_skor_ve_etiket PASSED            [  3%]
+tests/test_admin_audit_tab.py::test_render_audit_tab_handles_missing_locks PASSED [  3%]
+tests/test_admin_audit_tab.py::test_render_audit_tab_handles_present_locks PASSED [  3%]
+tests/test_admin_audit_tab.py::test_load_file_locks_ignores_invalid_json PASSED [  3%]
+tests/test_admin_auth_env.py::test_env_kimlik_daima_ikili_demet[1] PASSED [  3%]
+tests/test_admin_auth_env.py::test_env_kimlik_daima_ikili_demet[true] PASSED [  4%]
+tests/test_admin_auth_env.py::test_env_kimlik_daima_ikili_demet[TRUE] PASSED [  4%]
+tests/test_admin_auth_env.py::test_env_kimlik_daima_ikili_demet[0] PASSED [  4%]
+tests/test_admin_auth_env.py::test_env_kimlik_daima_ikili_demet[] PASSED [  4%]
+tests/test_admin_auth_env.py::test_env_kimlik_daima_ikili_demet[hayir] PASSED [  4%]
+tests/test_admin_auth_env.py::test_env_kimlik_debug_acikken_env_degerlerini_kullanir PASSED [  4%]
+tests/test_admin_auth_env.py::test_env_kimlik_debug_kapaliyken_sifre_sizdirmaz PASSED [  4%]
+tests/test_admin_auth_env.py::test_env_kimlik_debug_acik_ama_env_bossa_varsayilan PASSED [  4%]
+tests/test_admin_auth_env.py::test_gorunur_bolum_sayisi_gercek_tanimlarla_pozitif PASSED [  4%]
+tests/test_admin_auth_env.py::test_gorunur_bolum_sayisi_hatada_sifir_ve_log PASSED [  4%]
+tests/test_admin_auth_env.py::test_env_sifre_guncelle_hatada_false_ve_uyari_log PASSED [  4%]
+tests/test_admin_auth_env.py::test_modul_sessiz_yutma_icermez PASSED     [  4%]
+tests/test_admin_auth_env.py::test_env_kimlik_tum_dallarda_return_var PASSED [  4%]
+tests/test_admin_auth_env.py::test_kaynak_bom_icermez PASSED             [  4%]
+tests/test_admin_auth_login.py::test_render_admin_login_clears_stale_token_and_shows_clear_error PASSED [  4%]
+tests/test_admin_auth_login.py::test_render_admin_login_clears_token_on_api_error PASSED [  4%]
+tests/test_admin_auth_login.py::test_render_admin_login_uses_post_with_json PASSED [  4%]
+tests/test_admin_auth_login.py::test_render_admin_login_token_varken_form_yerine_oturum_gosterir PASSED [  4%]
+tests/test_admin_auth_login.py::test_render_admin_login_401_ipucu_verir PASSED [  4%]
+tests/test_admin_auto_refresh.py::test_st_auto_refresh_kullanilmiyor PASSED [  4%]
+tests/test_admin_auto_refresh.py::test_buton_kompakt_primary_ve_stretch_yok PASSED [  4%]
+tests/test_admin_auto_refresh.py::test_etiket_mantigi_dogru PASSED       [  4%]
+tests/test_admin_auto_refresh.py::test_toggle_durumu_cevirir_ve_rerun PASSED [  4%]
+tests/test_admin_auto_refresh.py::test_acikken_fragment_ile_periyodik_yenileme PASSED [  4%]
+tests/test_admin_auto_refresh.py::test_kapaliyken_fragment_yok PASSED    [  4%]
+tests/test_admin_auto_refresh.py::test_fragment_yoksa_cokmez PASSED      [  4%]
+tests/test_admin_auto_refresh.py::test_aralik_metni PASSED               [  4%]
+tests/test_admin_auto_refresh.py::test_ayar_kaydet_guvenli_misafir_kaydetmez[None] PASSED [  4%]
+tests/test_admin_auto_refresh.py::test_ayar_kaydet_guvenli_misafir_kaydetmez[misafir] PASSED [  4%]
+tests/test_admin_auto_refresh.py::test_ayar_kaydet_guvenli_iki_anahtari_yazar PASSED [  4%]
+tests/test_admin_auto_refresh.py::test_ayar_kaydet_guvenli_hata_metni_ve_log PASSED [  4%]
+tests/test_admin_auto_refresh.py::test_toggle_tercihi_rerun_oncesi_kaydeder PASSED [  4%]
+tests/test_admin_auto_refresh.py::test_toggle_kayit_hatasinda_uyari_gosterir PASSED [  4%]
+tests/test_admin_auto_refresh.py::test_modul_sessiz_except_pass_icermez PASSED [  4%]
+tests/test_admin_dlq_tab.py::test_render_dlq_tab_empty_state PASSED      [  4%]
+tests/test_admin_dlq_tab.py::test_render_dlq_tab_with_data PASSED        [  4%]
+tests/test_admin_errors.py::test_error_logger_log_and_read PASSED        [  4%]
+tests/test_admin_errors.py::test_error_stats PASSED                      [  4%]
+tests/test_admin_errors.py::test_get_recent_errors_filters PASSED        [  4%]
+tests/test_admin_errors.py::test_admin_errors_format_error_entry PASSED  [  4%]
+tests/test_admin_errors.py::test_admin_errors_constants PASSED           [  4%]
+tests/test_admin_executive.py::test_load_db_hatasi_hata_alanina_yazilir PASSED [  4%]
+tests/test_admin_executive.py::test_load_db_basarili_tenant_hatasi_ayri_alanda PASSED [  4%]
+tests/test_admin_executive.py::test_load_tam_basari PASSED               [  4%]
+tests/test_admin_executive.py::test_tl_bicimi[12345-0-12.345 \u20ba] PASSED [  4%]
+tests/test_admin_executive.py::test_tl_bicimi[1234.5-2-1.234,50 \u20ba] PASSED [  4%]
+tests/test_admin_executive.py::test_tl_bicimi[0-0-0 \u20ba] PASSED       [  4%]
+tests/test_admin_executive.py::test_tl_bicimi[-750-0--750 \u20ba] PASSED [  4%]
+tests/test_admin_executive.py::test_tl_bicimi[None-0-\u2014] PASSED      [  4%]
+tests/test_admin_executive.py::test_tl_bicimi[abc-0-\u2014] PASSED       [  4%]
+tests/test_admin_executive.py::test_mrr_delta[seri0-None] PASSED         [  4%]
+tests/test_admin_executive.py::test_mrr_delta[seri1-None] PASSED         [  4%]
+tests/test_admin_executive.py::test_mrr_delta[seri2-+1.200 \u20ba] PASSED [  4%]
+tests/test_admin_executive.py::test_mrr_delta[seri3--1.200 \u20ba] PASSED [  4%]
+tests/test_admin_executive.py::test_mrr_delta[seri4-0 \u20ba (de\u011fi\u015fim yok)] PASSED [  4%]
+tests/test_admin_executive.py::test_mrr_delta[seri5-None] PASSED         [  5%]
+tests/test_admin_executive.py::test_mrr_delta[seri6-None] PASSED         [  5%]
+tests/test_admin_executive.py::test_mrr_delta[seri7-None] PASSED         [  5%]
+tests/test_admin_executive.py::test_churn_donemi_pencere PASSED          [  5%]
+tests/test_admin_executive.py::test_firma_kayitlari_30_gun_esigi PASSED  [  5%]
+tests/test_admin_executive.py::test_firma_kayitlari_canli_tipleri_aware_ve_decimal PASSED [  5%]
+tests/test_admin_executive.py::test_firma_kayitlari_canli_semaya_karsi_kosar PASSED [  5%]
+tests/test_admin_executive.py::test_render_db_varsa_alti_kpi_karti_ve_hata_yok PASSED [  5%]
+tests/test_admin_executive.py::test_render_db_yoksa_hata_kutusu_ve_bos_kartlar PASSED [  5%]
+tests/test_admin_executive.py::test_render_tenant_hatasi_ikinci_hata_kutusu PASSED [  5%]
+tests/test_admin_executive.py::test_render_hata_yoksa_hata_metni_bos_kaynak_icin_varsayilan PASSED [  5%]
+tests/test_admin_executive.py::test_modul_st_metric_ve_use_container_width_icermez PASSED [  5%]
+tests/test_admin_export_durum.py::test_pano_oku_dosya_yoksa_bos_df PASSED [  5%]
+tests/test_admin_export_durum.py::test_pano_oku_gecerli_json PASSED      [  5%]
+tests/test_admin_export_durum.py::test_pano_oku_bozuk_json_hata_doner PASSED [  5%]
+tests/test_admin_export_durum.py::test_db_sorgu_oku_kpi_tek_satir PASSED [  5%]
+tests/test_admin_export_durum.py::test_db_sorgu_oku_companies_cok_satir PASSED [  5%]
+tests/test_admin_export_durum.py::test_db_sorgu_oku_satir_yoksa_bos_df PASSED [  5%]
+tests/test_admin_export_durum.py::test_db_sorgu_oku_hata_yakalanir PASSED [  5%]
+tests/test_admin_export_durum.py::test_db_sorgu_oku_text_clause_kullanir PASSED [  5%]
+tests/test_admin_export_durum.py::test_export_verisi_oku_db_turleri[kpi] PASSED [  5%]
+tests/test_admin_export_durum.py::test_export_verisi_oku_db_turleri[companies] PASSED [  5%]
+tests/test_admin_export_durum.py::test_export_verisi_oku_db_turleri[audit] PASSED [  5%]
+tests/test_admin_export_durum.py::test_export_verisi_oku_bilinmeyen_tur PASSED [  5%]
+tests/test_admin_export_durum.py::test_modul_sessiz_yutma_icermez PASSED [  5%]
+tests/test_admin_export_excel.py::test_excel_bytes_gecerli_xlsx_uretir PASSED [  5%]
+tests/test_admin_export_excel.py::test_excel_bytes_openpyxl_yoksa_none PASSED [  5%]
+tests/test_admin_export_excel.py::test_render_export_tab_to_excel_hatasi_vermez PASSED [  5%]
+tests/test_admin_export_excel.py::test_sekme_rehberi_metinleri_utf8_ve_yapili[ana_kontrol] PASSED [  5%]
+tests/test_admin_export_excel.py::test_sekme_rehberi_metinleri_utf8_ve_yapili[musteriler] PASSED [  5%]
+tests/test_admin_export_excel.py::test_sekme_rehberi_metinleri_utf8_ve_yapili[pazarlama] PASSED [  5%]
+tests/test_admin_export_excel.py::test_sekme_rehberi_metinleri_utf8_ve_yapili[kaynaklar] PASSED [  5%]
+tests/test_admin_export_excel.py::test_sekme_rehberi_metinleri_utf8_ve_yapili[sistem] PASSED [  5%]
+tests/test_admin_export_excel.py::test_sekme_rehberi_metinleri_utf8_ve_yapili[canli_veri] PASSED [  5%]
+tests/test_admin_export_excel.py::test_sekme_rehberi_metinleri_utf8_ve_yapili[denetim] PASSED [  5%]
+tests/test_admin_export_excel.py::test_sekme_rehberi_metinleri_utf8_ve_yapili[ayarlar] PASSED [  5%]
+tests/test_admin_export_excel.py::test_sekme_rehberi_metinleri_utf8_ve_yapili[musteri_yonetimi] PASSED [  5%]
+tests/test_admin_export_excel.py::test_sekme_rehberi_metinleri_utf8_ve_yapili[proje_yonetimi] PASSED [  5%]
+tests/test_admin_export_excel.py::test_sekme_rehberi_metinleri_utf8_ve_yapili[veri_kalite] PASSED [  5%]
+tests/test_admin_export_excel.py::test_sekme_rehberi_metinleri_utf8_ve_yapili[musteri_onizleme] PASSED [  5%]
+tests/test_admin_export_excel.py::test_dort_baslikli_rehberler_basliklarini_korur[ana_kontrol] PASSED [  5%]
+tests/test_admin_export_excel.py::test_dort_baslikli_rehberler_basliklarini_korur[musteriler] PASSED [  5%]
+tests/test_admin_export_excel.py::test_dort_baslikli_rehberler_basliklarini_korur[pazarlama] PASSED [  5%]
+tests/test_admin_export_excel.py::test_dort_baslikli_rehberler_basliklarini_korur[canli_veri] PASSED [  5%]
+tests/test_admin_export_excel.py::test_dort_baslikli_rehberler_basliklarini_korur[ayarlar] PASSED [  5%]
+tests/test_admin_export_excel.py::test_dort_baslikli_rehberler_basliklarini_korur[musteri_onizleme] PASSED [  5%]
+tests/test_admin_extras.py::test_render_functions_exist PASSED           [  5%]
+tests/test_admin_extras.py::test_render_user_management_with_mock PASSED [  5%]
+tests/test_admin_extras_kullanici.py::test_render_user_management_uses_pageheader PASSED [  5%]
+tests/test_admin_extras_kullanici.py::test_render_user_management_token_yok_warning PASSED [  5%]
+tests/test_admin_extras_kullanici.py::test_render_user_management_approve_button PASSED [  5%]
+tests/test_admin_extras_kullanici.py::test_render_user_management_approve_error PASSED [  5%]
+tests/test_admin_kaynaklar.py::test_bolum_kimlikleri_tekil PASSED        [  5%]
+tests/test_admin_kaynaklar.py::test_tanimsiz_bolum_keyerror_verir PASSED [  5%]
+tests/test_admin_kaynaklar.py::test_bos_tabloda_rozet_basarili_yazar PASSED [  5%]
+tests/test_admin_kaynaklar.py::test_tek_kaynak_rozet_metni_uretilir PASSED [  6%]
+tests/test_admin_kaynaklar.py::test_ozet_metin_toplamlari_yazar PASSED   [  6%]
+tests/test_admin_kaynaklar.py::test_bos_liste_kart_dondurmez PASSED      [  6%]
+tests/test_admin_kaynaklar.py::test_cekis_yoksa_basari_orani_sifir PASSED [  6%]
+tests/test_admin_kaynaklar.py::test_st_metric_kullanilmaz PASSED         [  6%]
+tests/test_admin_kaynaklar.py::test_salt_okuma_yazma_yolu_yok PASSED     [  6%]
+tests/test_admin_kaynaklar.py::test_sections_kaydi_dogru PASSED          [  6%]
+tests/test_admin_kaynaklar.py::test_crawl_durum_sabitleri_tek_dosyada PASSED [  6%]
+tests/test_admin_kaynaklar.py::test_webhook_monitorde_crawl_kontrolu_kalmadi PASSED [  6%]
+tests/test_admin_kaynaklar.py::test_webhook_monitor_veri_kaynaklarina_link_verir PASSED [  6%]
+tests/test_admin_kaynaklar.py::test_crawl_kontrolu_son_calismalardan_once_cizilir PASSED [  6%]
+tests/test_admin_kaynaklar.py::test_crawl_kontrolu_seviye3_alt_baslik_ile_cizilir PASSED [  6%]
+tests/test_admin_kaynaklar.py::test_crawl_durumu_ve_yetki_korumasi PASSED [  6%]
+tests/test_admin_kaynaklar.py::test_crawl_baslat_durdur_durum_gecisleri PASSED [  6%]
+tests/test_admin_kaynaklar.py::test_crawl_durum_ikonlari_dort_durumu_kapsar PASSED [  6%]
+tests/test_admin_kpi.py::test_interval_parametresi_yanlis_baglanmiyor PASSED [  6%]
+tests/test_admin_kpi.py::test_kpi_ozeti_canlida_hata_yutmuyor PASSED     [  6%]
+tests/test_admin_kpi.py::test_kalite_trendi_canlida_kosuyor[7] PASSED    [  6%]
+tests/test_admin_kpi.py::test_kalite_trendi_canlida_kosuyor[30] PASSED   [  6%]
+tests/test_admin_kpi.py::test_kalite_trendi_canlida_kosuyor[90] PASSED   [  6%]
+tests/test_admin_kpi.py::test_alan_kalitesi_canlida_hata_yutmuyor PASSED [  6%]
+tests/test_admin_kpi.py::test_kaynak_sagligi_canlida_kosuyor PASSED      [  6%]
+tests/test_admin_kpi.py::test_kaynak_sagligi_zaman_damgasi_aware PASSED  [  6%]
+tests/test_admin_kpi_dau.py::test_dau_oran_hesapla PASSED                [  6%]
+tests/test_admin_kpi_dau.py::test_dau_mau_zero_bölme_engel PASSED        [  6%]
+tests/test_admin_kpi_dau.py::test_dau_dict_yapisi PASSED                 [  6%]
+tests/test_admin_kpi_dau.py::test_dau_veri_yok_rozeti PASSED             [  6%]
+tests/test_admin_kpi_dau.py::test_dau_normal_veri_varsa PASSED           [  6%]
+tests/test_admin_kpi_kart.py::test_visitor_detects_st_metric PASSED      [  6%]
+tests/test_admin_kpi_kart.py::test_visitor_ignores_kpi_karti PASSED      [  6%]
+tests/test_admin_kpi_kart.py::test_visitor_ignores_other_st_calls PASSED [  6%]
+tests/test_admin_kpi_kart.py::test_find_st_metric_in_file PASSED         [  6%]
+tests/test_admin_kpi_kart.py::test_webhook_monitor_no_st_metric PASSED   [  6%]
+tests/test_admin_kpi_kart.py::test_tenant_health_dashboard_no_st_metric PASSED [  6%]
+tests/test_admin_kullanici_ayarlari.py::test_kriter1_sayfa_uc_bolum_cizer SKIPPED [  6%]
+tests/test_admin_kullanici_ayarlari.py::test_kriter2_misafirde_hesap_guvenlik_cizilmez SKIPPED [  6%]
+tests/test_admin_kullanici_ayarlari.py::test_kriter3_sifre_degistirme_mevcut_sifre_ister SKIPPED [  6%]
+tests/test_admin_kullanici_ayarlari.py::test_kriter4_ayar_kaydetme_hepsi_ya_hic SKIPPED [  6%]
+tests/test_admin_kullanici_ayarlari.py::test_kriter5_admin_panelde_render_ayarlar_tab_kalmaz SKIPPED [  6%]
+tests/test_admin_kullanici_ayarlari.py::test_kriter6_navigasyon_yeni_module_isaret_eder SKIPPED [  6%]
+tests/test_admin_kullanici_ayarlari.py::test_kriter7_mevcut_ayar_testleri_canary PASSED [  6%]
+tests/test_admin_kullanici_ayarlari.py::test_render_fonksiyonu_imzasi_sozlesmeye_uyumlu SKIPPED [  6%]
+tests/test_admin_kvkk_mode_e2e.py::TestAdminKvkkModeE2E::test_strict_mode_masks_pii PASSED [  6%]
+tests/test_admin_kvkk_mode_e2e.py::TestAdminKvkkModeE2E::test_lenient_mode_reveals_pii PASSED [  6%]
+tests/test_admin_kvkk_mode_e2e.py::TestAdminKvkkModeE2E::test_strict_to_lenient_toggle PASSED [  6%]
+tests/test_admin_kvkk_mode_e2e.py::TestAdminKvkkModeE2E::test_admin_kvkk_mode_endpoint_logic PASSED [  6%]
+tests/test_admin_kvkk_mode_e2e.py::TestAdminKvkkModeE2E::test_e2e_with_plan_field_visibility PASSED [  6%]
+tests/test_admin_ltv_cac.py::test_calculate_ltv_basic PASSED             [  6%]
+tests/test_admin_ltv_cac.py::test_calculate_cac_basic PASSED             [  6%]
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend PASSED                   [  6%]
+tests/test_admin_ltv_cac.py::test_ltv_cac_by_tier PASSED                 [  6%]
+tests/test_admin_ltv_cac.py::test_api_ltv_cac_endpoint PASSED            [  6%]
+tests/test_admin_musteriler.py::test_render_musteriler_shows_empty_state PASSED [  6%]
+tests/test_admin_musteriler.py::test_render_musteriler_renders_filtered_companies PASSED [  6%]
+tests/test_admin_musteriler.py::test_render_musteriler_sayfa_iskeleti_h1_uretir PASSED [  6%]
+tests/test_admin_panel_tab.py::test_render_decision_tab_shows_empty_state PASSED [  7%]
+tests/test_admin_panel_tab.py::test_render_decision_tab_renders_populated_log PASSED [  7%]
+tests/test_admin_panel_tab.py::test_render_decision_tab_uses_pageheader PASSED [  7%]
+tests/test_admin_panel_tab.py::test_render_decision_tab_filters_by_decider PASSED [  7%]
+tests/test_admin_panel_tab.py::test_render_decision_tab_filters_by_tags PASSED [  7%]
+tests/test_admin_panel_tab.py::test_render_decision_tab_form_submission PASSED [  7%]
+tests/test_admin_panel_tab.py::test_read_decisions_skips_broken_jsonl_lines PASSED [  7%]
+tests/test_admin_panel_tab.py::test_aktif_kullanici_oturumdan_kimlik_cozer PASSED [  7%]
+tests/test_admin_panel_tab.py::test_aktif_kullanici_token_cache_restore_sonrasi_misafir_degil PASSED [  7%]
+tests/test_admin_panel_tab.py::test_aktif_kullanici_session_state_hatasinda_misafir_ve_log PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardDataPreparation::test_categorize_done_tasks PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardDataPreparation::test_categorize_pending_tasks PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardDataPreparation::test_categorize_backlog_tasks PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardDataPreparation::test_categorize_evaluation_tasks PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardFiltering::test_filter_by_agent PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardFiltering::test_filter_by_priority PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardFiltering::test_filter_by_date_range PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardFiltering::test_combined_filters PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardColorCoding::test_color_for_done_section PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardColorCoding::test_color_uniqueness PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardMetrics::test_count_all_sections PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardMetrics::test_metric_display_format PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardFileHandling::test_truncate_long_file_list PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardFileHandling::test_empty_file_list PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardTableRendering::test_table_columns PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardTableRendering::test_table_row_data_sanitization PASSED [  7%]
+tests/test_admin_pano_board_view.py::TestTaskBoardIntegration::test_full_workflow PASSED [  7%]
+tests/test_admin_performance.py::test_render_performance_tab_handles_no_data PASSED [  7%]
+tests/test_admin_performance.py::test_render_performance_tab_with_perf_data PASSED [  7%]
+tests/test_admin_performance.py::test_render_performance_tab_with_prometheus PASSED [  7%]
+tests/test_admin_performance.py::test_render_performance_tab_both_data_sources PASSED [  7%]
+tests/test_admin_performance.py::test_render_performance_tab_open_telemetry_check PASSED [  7%]
+tests/test_admin_performance.py::test_load_performance_data_api_error PASSED [  7%]
+tests/test_admin_quality.py::test_load_freshness_distribution_bos_tabloda_hata_vermez PASSED [  7%]
+tests/test_admin_quality.py::test_load_freshness_distribution_kova_dagilimi_dogru PASSED [  7%]
+tests/test_admin_quality.py::test_load_freshness_distribution_db_hatasinda_bos_doner PASSED [  7%]
+tests/test_admin_quality.py::test_chart_freshness_bos_df_hata_vermez PASSED [  7%]
+tests/test_admin_quality.py::test_sablon_deger_dolu_sayilmaz PASSED      [  7%]
+tests/test_admin_quality.py::test_kpi_doluluk_kosulu_ayni_kapidan_gecer PASSED [  7%]
+tests/test_admin_quality.py::test_kpi_alan_sozlugu_kopya_degil PASSED    [  7%]
+tests/test_admin_quality.py::test_quality_fields_canli_semada_var PASSED [  7%]
+tests/test_admin_quality.py::test_riskli_firmalar_sorgusu_canlida_kosar PASSED [  7%]
+tests/test_admin_quality.py::test_eksik_alan_analizi_olculemeyeni_sifir_yazmaz PASSED [  7%]
+tests/test_admin_realtime_tab.py::test_sse_kalintisi_yok PASSED          [  7%]
+tests/test_admin_realtime_tab.py::test_saglik_durumu[95-\U0001f7e2 Sa\u011fl\u0131kl\u0131] PASSED [  7%]
+tests/test_admin_realtime_tab.py::test_saglik_durumu[90-\U0001f7e2 Sa\u011fl\u0131kl\u0131] PASSED [  7%]
+tests/test_admin_realtime_tab.py::test_saglik_durumu[89.9-\U0001f7e0 Dikkat] PASSED [  7%]
+tests/test_admin_realtime_tab.py::test_saglik_durumu[None-\U0001f7e0 Dikkat] PASSED [  7%]
+tests/test_admin_realtime_tab.py::test_saglik_durumu[x-\U0001f7e0 Dikkat] PASSED [  7%]
+tests/test_admin_realtime_tab.py::test_db_kpi_oku_text_ile_sarili PASSED [  7%]
+tests/test_admin_realtime_tab.py::test_db_kpi_oku_satir_yoksa_sifir PASSED [  7%]
+tests/test_admin_realtime_tab.py::test_db_kpi_oku_hata_metni PASSED      [  7%]
+tests/test_admin_realtime_tab.py::test_db_trend_oku PASSED               [  7%]
+tests/test_admin_realtime_tab.py::test_db_trend_oku_hata_bos_df PASSED   [  7%]
+tests/test_admin_realtime_tab.py::test_render_veri_varsa_uc_kpi_ve_trend PASSED [  7%]
+tests/test_admin_realtime_tab.py::test_render_trend_yoksa_bos_durum PASSED [  8%]
+tests/test_admin_realtime_tab.py::test_render_db_hatasi_hata_kutusu PASSED [  8%]
+tests/test_admin_realtime_tab.py::test_render_bos_db_bos_durum PASSED    [  8%]
+tests/test_admin_realtime_tab.py::test_modul_except_pass_icermez PASSED  [  8%]
+tests/test_admin_reset.py::test_flash_yaz_ve_goster_tek_seferlik PASSED  [  8%]
+tests/test_admin_reset.py::test_flash_goster_tur_error PASSED            [  8%]
+tests/test_admin_reset.py::test_giris_basarili_flash_kuyruga_alinir_ve_rerun PASSED [  8%]
+tests/test_admin_reset.py::test_admin_cikis_token_siler_ve_flash_yazar PASSED [  8%]
+tests/test_admin_reset.py::test_render_admin_cikis_butona_basinca_rerun PASSED [  8%]
+tests/test_admin_reset.py::test_sifre_degistir_token_yoksa_info PASSED   [  8%]
+tests/test_admin_reset.py::test_sifre_degistir_yerel_dogrulama[girdiler0-en az 8] PASSED [  8%]
+tests/test_admin_reset.py::test_sifre_degistir_yerel_dogrulama[girdiler1-e\u015fle\u015fmiyor] PASSED [  8%]
+tests/test_admin_reset.py::test_sifre_degistir_yerel_dogrulama[girdiler2-ayn\u0131 olamaz] PASSED [  8%]
+tests/test_admin_reset.py::test_sifre_degistir_yerel_dogrulama[girdiler3-zorunludur] PASSED [  8%]
+tests/test_admin_reset.py::test_sifre_degistir_basarili_post_ve_success PASSED [  8%]
+tests/test_admin_reset.py::test_sifre_degistir_api_hatasi PASSED         [  8%]
+tests/test_admin_reset.py::test_env_sifre_guncelle_env_upsert_cagirir PASSED [  8%]
+tests/test_admin_reset.py::test_api_change_password_basarili PASSED      [  8%]
+tests/test_admin_reset.py::test_api_change_password_bearer_header PASSED [  8%]
+tests/test_admin_reset.py::test_api_change_password_hatalar[None-body0-403] PASSED [  8%]
+tests/test_admin_reset.py::test_api_change_password_hatalar[user1-body1-403] PASSED [  8%]
+tests/test_admin_reset.py::test_api_change_password_hatalar[user2-body2-403] PASSED [  8%]
+tests/test_admin_reset.py::test_api_change_password_hatalar[user3-body3-400] PASSED [  8%]
+tests/test_admin_reset.py::test_api_change_password_hatalar[user4-body4-400] PASSED [  8%]
+tests/test_admin_reset.py::test_api_change_password_hatalar[user5-body5-400] PASSED [  8%]
+tests/test_admin_reset.py::test_api_change_password_hatalar[user6-body6-401] PASSED [  8%]
+tests/test_admin_search.py::test_sorgu_kur_filtresiz_sadece_skor_ve_limit PASSED [  8%]
+tests/test_admin_search.py::test_sorgu_kur_terk_edilmis_kolona_bakmaz PASSED [  8%]
+tests/test_admin_search.py::test_sorgu_kur_tum_filtreler_parametreli PASSED [  8%]
+tests/test_admin_search.py::test_firma_ara_basarili_company_id_str_ve_skor_yuvarlanir PASSED [  8%]
+tests/test_admin_search.py::test_firma_ara_satir_yoksa_bos_df_hata_yok PASSED [  8%]
+tests/test_admin_search.py::test_firma_ara_hata_yakalanir_ve_loglanir PASSED [  8%]
+tests/test_admin_search.py::test_firma_ara_olculmemis_skor_sifira_cevrilmez PASSED [  8%]
+tests/test_admin_search.py::test_nace_kodu_etiketsiz_sunulmaz PASSED     [  8%]
+tests/test_admin_search.py::test_kaynak_adlari_basarili PASSED           [  8%]
+tests/test_admin_search.py::test_kaynak_adlari_hata_bos_liste_ve_metin PASSED [  8%]
+tests/test_admin_search.py::test_tamlik_bantlari_dagilim PASSED          [  8%]
+tests/test_admin_search.py::test_tamlik_bantlari_sabit_bant_adi_kullanmaz PASSED [  8%]
+tests/test_admin_search.py::test_tamlik_bantlari_olculmedi_ayri_durur PASSED [  8%]
+tests/test_admin_search.py::test_tamlik_bantlari_bos_girdi_sifir[None] PASSED [  8%]
+tests/test_admin_search.py::test_tamlik_bantlari_bos_girdi_sifir[df1] PASSED [  8%]
+tests/test_admin_search.py::test_tamlik_bantlari_bos_girdi_sifir[df2] PASSED [  8%]
+tests/test_admin_search.py::test_search_companies_df_doner PASSED        [  8%]
+tests/test_admin_search.py::test_search_companies_hatada_none PASSED     [  8%]
+tests/test_admin_search.py::test_get_source_names_hatada_bos_liste PASSED [  8%]
+tests/test_admin_search.py::test_cache_sarmalayicilar_saf_fonksiyona_delege_eder PASSED [  8%]
+tests/test_admin_search.py::test_render_filtre_yoksa_yalniz_bilgi PASSED [  8%]
+tests/test_admin_search.py::test_render_sonuc_varsa_uc_kpi_karti_ve_metric_yok PASSED [  8%]
+tests/test_admin_search.py::test_render_ortalama_tavanla_birlikte_sunulur PASSED [  8%]
+tests/test_admin_search.py::test_render_dusuk_kalite_yoksa_basari_kategorisi PASSED [  8%]
+tests/test_admin_search.py::test_render_db_hatasi_hata_kutusu PASSED     [  8%]
+tests/test_admin_search.py::test_render_bos_sonuc_bos_durum PASSED       [  8%]
+tests/test_admin_search.py::test_render_kaynak_hatasi_kucuk_hata_kutusu_ama_arama_surer PASSED [  8%]
+tests/test_admin_search.py::test_render_filtre_parametreleri_dogru_iletilir PASSED [  8%]
+tests/test_admin_search.py::test_render_slider_tavani_asamaz PASSED      [  8%]
+tests/test_admin_search.py::test_modul_st_metric_sessiz_except_ve_use_container_width_icermez PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_dosya_var_ve_utf8[admin_realtime] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_dosya_var_ve_utf8[admin_sistem] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_dosya_var_ve_utf8[admin_musteriler] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_dosya_var_ve_utf8[admin_extras] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_dosya_var_ve_utf8[admin_destek] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_dosya_var_ve_utf8[admin_export] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_dosya_var_ve_utf8[admin_loading] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_dosya_var_ve_utf8[teknik_altyapi] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_dosya_var_ve_utf8[proje_yonetimi] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_dosya_var_ve_utf8[pazarlama] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_dosya_var_ve_utf8[paketler] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_sessiz_yutma_yok[admin_realtime] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_sessiz_yutma_yok[admin_sistem] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_sessiz_yutma_yok[admin_musteriler] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_sessiz_yutma_yok[admin_extras] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_sessiz_yutma_yok[admin_destek] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_sessiz_yutma_yok[admin_export] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_sessiz_yutma_yok[admin_loading] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_sessiz_yutma_yok[teknik_altyapi] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_sessiz_yutma_yok[proje_yonetimi] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_sessiz_yutma_yok[pazarlama] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_sessiz_yutma_yok[paketler] PASSED  [  9%]
+tests/test_admin_sekme_durum.py::test_st_metric_yok[admin_realtime] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_st_metric_yok[admin_sistem] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_st_metric_yok[admin_musteriler] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_st_metric_yok[admin_extras] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_st_metric_yok[admin_destek] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_st_metric_yok[admin_export] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_st_metric_yok[admin_loading] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_st_metric_yok[teknik_altyapi] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_st_metric_yok[proje_yonetimi] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_st_metric_yok[pazarlama] PASSED    [  9%]
+tests/test_admin_sekme_durum.py::test_st_metric_yok[paketler] PASSED     [  9%]
+tests/test_admin_sekme_durum.py::test_kpi_karti_import_edilmis[admin_realtime] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_kpi_karti_import_edilmis[pazarlama] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_kpi_karti_import_edilmis[paketler] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_ciplak_requests_yok[admin_realtime] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_ciplak_requests_yok[admin_sistem] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_ciplak_requests_yok[admin_musteriler] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_ciplak_requests_yok[admin_extras] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_ciplak_requests_yok[admin_destek] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_ciplak_requests_yok[admin_export] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_ciplak_requests_yok[admin_loading] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_ciplak_requests_yok[teknik_altyapi] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_ciplak_requests_yok[proje_yonetimi] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_ciplak_requests_yok[pazarlama] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_ciplak_requests_yok[paketler] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_admin_realtime_polling_ve_text PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_modul_import_edilebilir[admin_realtime] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_modul_import_edilebilir[admin_sistem] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_modul_import_edilebilir[admin_musteriler] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_modul_import_edilebilir[admin_extras] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_modul_import_edilebilir[admin_destek] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_modul_import_edilebilir[admin_export] PASSED [  9%]
+tests/test_admin_sekme_durum.py::test_modul_import_edilebilir[admin_loading] PASSED [ 10%]
+tests/test_admin_sekme_durum.py::test_modul_import_edilebilir[teknik_altyapi] PASSED [ 10%]
+tests/test_admin_sekme_durum.py::test_modul_import_edilebilir[proje_yonetimi] PASSED [ 10%]
+tests/test_admin_sekme_durum.py::test_modul_import_edilebilir[pazarlama] PASSED [ 10%]
+tests/test_admin_sekme_durum.py::test_modul_import_edilebilir[paketler] PASSED [ 10%]
+tests/test_admin_sekme_durum.py::test_admin_extras_api_hatasi_exception_firlatmaz PASSED [ 10%]
+tests/test_admin_sekme_durum.py::test_admin_export_db_hatasi_exception_firlatmaz PASSED [ 10%]
+tests/test_admin_sekme_durum.py::test_pazarlama_ozet_kpi_karti_ile_cizilir PASSED [ 10%]
+tests/test_admin_sekme_durum.py::test_pazarlama_performans_none_maliyet PASSED [ 10%]
+tests/test_admin_sekme_durum.py::test_paketler_ozet_bos_liste PASSED     [ 10%]
+tests/test_admin_sekme_durum.py::test_paketler_ozet_fiyat_araligi_turkce_binlik PASSED [ 10%]
+tests/test_admin_sekme_durum.py::test_sayi_formatla_none_ve_string_gecisi PASSED [ 10%]
+tests/test_admin_sekme_durum.py::test_tabs_init_bekleyen_gorev_panoda_done PASSED [ 10%]
+tests/test_admin_sessiz_except.py::test_silent_except_detection PASSED   [ 10%]
+tests/test_admin_sessiz_except.py::test_non_silent_except_not_detected PASSED [ 10%]
+tests/test_admin_sessiz_except.py::test_mixed_code PASSED                [ 10%]
+tests/test_admin_sessiz_except.py::test_bare_except_detected PASSED      [ 10%]
+tests/test_admin_sessiz_except.py::test_except_with_other_statements_not_silent PASSED [ 10%]
+tests/test_admin_sessiz_except.py::test_detect_silent_excepts_in_file PASSED [ 10%]
+tests/test_admin_sessiz_except.py::test_admin_tabs_no_silent_excepts PASSED [ 10%]
+tests/test_admin_sifre_sifirla.py::test_hash_web_app_formatiyla_uyumlu PASSED [ 10%]
+tests/test_admin_sifre_sifirla.py::test_web_app_verify_ile_dogrulanir PASSED [ 10%]
+tests/test_admin_sifre_sifirla.py::test_env_upsert_gunceller_ve_ekler PASSED [ 10%]
+tests/test_admin_sifre_sifirla.py::test_env_upsert_tekrarlari_siler PASSED [ 10%]
+tests/test_admin_sifre_sifirla.py::test_kisa_sifre_reddedilir PASSED     [ 10%]
+tests/test_admin_sifre_sifirla.py::test_admin_bulunamazsa_hata PASSED    [ 10%]
+tests/test_admin_sifre_sifirla.py::test_basari_env_yazar PASSED          [ 10%]
+tests/test_admin_sifre_unuttum.py::test_iki_api_ucu_dogru_govde_ile_cagrilir PASSED [ 10%]
+tests/test_admin_sifre_unuttum.py::test_kisa_sifre_api_cagirmaz PASSED   [ 10%]
+tests/test_admin_sifre_unuttum.py::test_api_hatasi_genel_mesajla_gizlenir PASSED [ 10%]
+tests/test_admin_sifre_unuttum.py::test_giris_ekranindan_cagriliyor PASSED [ 10%]
+tests/test_admin_sistem.py::test_render_sistem_tab_composes_all_system_panels PASSED [ 10%]
+tests/test_admin_sistem.py::test_render_sistem_tab_sayfa_iskeleti_h1_uretir PASSED [ 10%]
+tests/test_admin_sistem.py::test_render_sistem_tab_shows_guidance_before_refresh_and_panels PASSED [ 10%]
+tests/test_admin_sistem.py::test_render_sistem_tab_detay_ekran_tembel[None] PASSED [ 10%]
+tests/test_admin_sistem.py::test_render_sistem_tab_detay_ekran_tembel[\U0001fa7a Sa\u011fl\u0131k] PASSED [ 10%]
+tests/test_admin_sistem.py::test_render_sistem_tab_detay_ekran_tembel[\U0001f9fe Denetim] PASSED [ 10%]
+tests/test_admin_sistem.py::test_render_sistem_tab_detay_ekran_tembel[\U0001f9e9 API Katalo\u011fu] PASSED [ 10%]
+tests/test_admin_sistem.py::test_render_sistem_tab_bolum_gezinmesi_yayinlanir PASSED [ 10%]
+tests/test_admin_sistem_cost.py::test_cost_loader_returns_empty_summary_when_source_is_missing PASSED [ 10%]
+tests/test_admin_sistem_cost.py::test_cost_loader_parses_provider_usage_and_anomalies PASSED [ 10%]
+tests/test_admin_sistem_cost.py::test_cost_loader_returns_empty_summary_for_broken_json PASSED [ 10%]
+tests/test_admin_sistem_cost.py::test_robust_zscore_anomaly_flags_outlier PASSED [ 10%]
+tests/test_admin_sistem_cost.py::test_robust_zscore_anomaly_mad_sifir_bolme_hatasi_vermez PASSED [ 10%]
+tests/test_admin_sistem_cost.py::test_robust_zscore_anomaly_bos_seri_none_doner PASSED [ 10%]
+tests/test_admin_sistem_quality.py::test_quality_loaders_return_empty_states_when_source_is_unavailable PASSED [ 10%]
+tests/test_admin_sistem_quality.py::test_quality_overview_calculates_populated_metrics PASSED [ 10%]
+tests/test_admin_sistem_quality.py::test_quality_suggestions_handle_empty_and_populated_inputs PASSED [ 10%]
+tests/test_admin_sql_param.py::test_izinli_kolon_gecer PASSED            [ 10%]
+tests/test_admin_sql_param.py::test_izinsiz_kolon_fail_closed PASSED     [ 10%]
+tests/test_admin_sql_param.py::test_izinli_kolonlar_quality_fields_ile_ayni PASSED [ 10%]
+tests/test_admin_token_cache.py::test_token_cache_yaz_ve_sil PASSED      [ 10%]
+tests/test_admin_token_cache.py::test_yazilamaz_yol_sessiz_gecer PASSED  [ 10%]
+tests/test_admin_token_cache.py::test_login_ve_cikis_cache_cagiriyor PASSED [ 10%]
+tests/test_admin_token_cache.py::test_popover_sifre_degistir_etiketi PASSED [ 10%]
+tests/test_admin_ui_cache_opt.py::TestCacheTemel::test_set_then_get_hit PASSED [ 11%]
+tests/test_admin_ui_cache_opt.py::TestCacheTemel::test_miss_returns_none PASSED [ 11%]
+tests/test_admin_ui_cache_opt.py::TestCacheTemel::test_expiry_after_ttl PASSED [ 11%]
+tests/test_admin_ui_cache_opt.py::TestTtlEnv::test_env_ttl_oku PASSED    [ 11%]
+tests/test_admin_ui_cache_opt.py::TestTtlEnv::test_env_ttl_gecersiz_deger_crash_etmez PASSED [ 11%]
+tests/test_admin_ui_cache_opt.py::TestTtlEnv::test_eski_env_adi_fallback_okunur PASSED [ 11%]
+tests/test_admin_ui_cache_opt.py::TestTtlEnv::test_yeni_ad_eski_adi_ezer PASSED [ 11%]
+tests/test_admin_ui_cache_opt.py::TestNegatifCache::test_bos_dict_cache_lenmez PASSED [ 11%]
+tests/test_admin_ui_cache_opt.py::TestNegatifCache::test_bos_list_cache_lenmez PASSED [ 11%]
+tests/test_admin_ui_cache_opt.py::TestNegatifCache::test_dolu_sonuc_cache_lenir PASSED [ 11%]
+tests/test_admin_ui_cache_opt.py::TestEviction::test_sinir_asimi_en_eski_atilir PASSED [ 11%]
+tests/test_admin_ui_cache_opt.py::TestAdminCache::test_decorator_fallback_calisir PASSED [ 11%]
+tests/test_ai_chat.py::test_model_zinciri_varsayilan PASSED              [ 11%]
+tests/test_ai_chat.py::test_model_zinciri_env_ayristirir PASSED          [ 11%]
+tests/test_ai_chat.py::test_model_zinciri_eski_env_geri_uyumlu PASSED    [ 11%]
+tests/test_ai_chat.py::test_model_zinciri_yeni_env_oncelikli PASSED      [ 11%]
+tests/test_ai_chat.py::test_varsayilan_zincir_olu_modelleri_icermez PASSED [ 11%]
+tests/test_ai_chat.py::test_gorunen_ad_mimir PASSED                      [ 11%]
+tests/test_ai_chat.py::test_kilit_sozu_varsayilan_ve_env PASSED          [ 11%]
+tests/test_ai_chat.py::test_kilit_acik_tam_sozcuk PASSED                 [ 11%]
+tests/test_ai_chat.py::test_kilit_maskele PASSED                         [ 11%]
+tests/test_ai_chat.py::test_sohbet_kilit_sozu_modele_sizmaz PASSED       [ 11%]
+tests/test_ai_chat.py::test_teklif_uygula_kilitsiz_reddedilir PASSED     [ 11%]
+tests/test_ai_chat.py::test_sohbet_admin_token_zorunlu PASSED            [ 11%]
+tests/test_ai_chat.py::test_sohbet_son_mesaj_user_olmali PASSED          [ 11%]
+tests/test_ai_chat.py::test_sohbet_ilk_model_basarili PASSED             [ 11%]
+tests/test_ai_chat.py::test_sohbet_fallback_zinciri PASSED               [ 11%]
+tests/test_ai_chat.py::test_sohbet_hepsi_duserse_hata PASSED             [ 11%]
+tests/test_ai_chat.py::test_sohbet_sistem_promptu_baglami_icerir PASSED  [ 11%]
+tests/test_ai_chat.py::test_mesaj_gecersiz_rol PASSED                    [ 11%]
+tests/test_ai_chat.py::test_teklif_ayikla_izinli PASSED                  [ 11%]
+tests/test_ai_chat.py::test_teklif_ayikla_izinsiz_ve_eksik_atlanir PASSED [ 11%]
+tests/test_ai_chat.py::test_teklif_uygula_done_reddedilir PASSED         [ 11%]
+tests/test_ai_chat.py::test_teklif_uygula_izinsiz_komut PASSED           [ 11%]
+tests/test_ai_chat.py::test_teklif_uygula_gorev_guncelle PASSED          [ 11%]
+tests/test_ai_chat.py::test_teklif_uygula_gorev_yoksa_hata PASSED        [ 11%]
+tests/test_ai_chat.py::test_teklif_uygula_tetik_ekle PASSED              [ 11%]
+tests/test_ai_chat.py::test_teklif_uygula_tetik_hatasi_sarilir PASSED    [ 11%]
+tests/test_ai_chat.py::test_baglam_metni_pano_ve_posta PASSED            [ 11%]
+tests/test_ai_chat.py::test_baglam_metni_bos PASSED                      [ 11%]
+tests/test_ajan_cakisma_kilidi.py::test_kilit_dosyasi_yapisi_bozulmedi PASSED [ 11%]
+tests/test_ajan_cakisma_kilidi.py::test_bayat_kilit_aktif_sayilmaz PASSED [ 11%]
+tests/test_ajan_cakisma_kilidi.py::test_taze_kilit_aktif PASSED          [ 11%]
+tests/test_ajan_cakisma_kilidi.py::test_ajan_kilitleri_sadece_own PASSED [ 11%]
+tests/test_ajan_cakisma_kilidi.py::test_kapi_baskasinin_kilidini_reddeder PASSED [ 11%]
+tests/test_ajan_cakisma_kilidi.py::test_kapi_kendi_kilidini_gecirir PASSED [ 11%]
+tests/test_ajan_cakisma_kilidi.py::test_kapi_bosta_dosyayi_gecirir PASSED [ 11%]
+tests/test_ajan_cakisma_kilidi.py::test_kapi_bayat_kilidi_gecirir PASSED [ 11%]
+tests/test_ajan_cakisma_kilidi.py::test_kapi_hareket_uyarisi_yakin_dakika PASSED [ 11%]
+tests/test_ajan_cakisma_kilidi.py::test_son_degisenler_hareket_disi_atlar PASSED [ 11%]
+tests/test_ajan_cakisma_kilidi.py::test_esik_dakika_cinsindendir PASSED  [ 11%]
+tests/test_ajan_cakisma_kilidi.py::test_json_bozuksa_cokmez PASSED       [ 11%]
+tests/test_ajan_chat.py::TestAc::test_ac_basit_kayit PASSED              [ 11%]
+tests/test_ajan_chat.py::TestAc::test_ac_cozum_onerileri_ile PASSED      [ 11%]
+tests/test_ajan_chat.py::TestAc::test_ac_task_id_normalizasyon PASSED    [ 11%]
+tests/test_ajan_chat.py::TestAc::test_ac_ajan_normalizasyon PASSED       [ 12%]
+tests/test_ajan_chat.py::TestGuncelle::test_guncelle_basit PASSED        [ 12%]
+tests/test_ajan_chat.py::TestGuncelle::test_guncelle_bulunamayan_sorun PASSED [ 12%]
+tests/test_ajan_chat.py::TestKapat::test_kapat_basit PASSED              [ 12%]
+tests/test_ajan_chat.py::TestOku::test_oku_tum_sorunlar PASSED           [ 12%]
+tests/test_ajan_chat.py::TestOku::test_oku_task_id_filtresi PASSED       [ 12%]
+tests/test_ajan_chat.py::TestOku::test_oku_son_n_satir PASSED            [ 12%]
+tests/test_ajan_chat.py::TestOzet::test_ozet_durum_filtresi PASSED       [ 12%]
+tests/test_ajan_chat.py::TestBulgula::test_bulgula_basit_kayit PASSED    [ 12%]
+tests/test_ajan_chat.py::TestBulgula::test_bulgular_oku_filtre PASSED    [ 12%]
+tests/test_ajan_chat.py::TestConcurrency::test_concurrent_append PASSED  [ 12%]
+tests/test_ajan_chat.py::TestIntegration::test_tam_akis PASSED           [ 12%]
+tests/test_ajan_chat.py::TestIntegration::test_mockup_orkestrator_workflow PASSED [ 12%]
+tests/test_ajan_chat.py::TestAcikSahipler::test_baskasinin_acik_kaydi_gorunur PASSED [ 12%]
+tests/test_ajan_chat.py::TestAcikSahipler::test_kendi_kaydi_uyari_uretmez PASSED [ 12%]
+tests/test_ajan_chat.py::TestAcikSahipler::test_kapali_kayit_uyari_uretmez PASSED [ 12%]
+tests/test_ajan_chat.py::TestAcikSahipler::test_baska_gorev_sizmaz PASSED [ 12%]
+tests/test_ajan_chat.py::TestAcikSahipler::test_uyari_engellemez PASSED  [ 12%]
+tests/test_ajan_chat.py::TestAcikSahipler::test_cli_uyariyi_cagirir PASSED [ 12%]
+tests/test_ajan_chat.py::TestAjanAcikSorulari::test_baskasinin_acik_kaydi_engeller PASSED [ 12%]
+tests/test_ajan_chat.py::TestAjanAcikSorulari::test_kendi_actigi_kayit_engellemez PASSED [ 12%]
+tests/test_ajan_chat.py::TestAjanAcikSorulari::test_karisik_kayitlar_sadece_karsi_taraf_sayilir PASSED [ 12%]
+tests/test_ajan_chat_liderlik_yorum.py::test_yorum_chat_jsonl_satirina_cevap_index_ekler PASSED [ 12%]
+tests/test_ajan_chat_liderlik_yorum.py::test_yorum_ayni_kisi_ayni_mesaja_3uncu_kez_reddedilir PASSED [ 12%]
+tests/test_ajan_chat_liderlik_yorum.py::test_liderlik_done_gorevi_sahibe_sayar PASSED [ 12%]
+tests/test_ajan_chat_liderlik_yorum.py::test_liderlik_verisi_dict_listesi_dondurur PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[utku-utku] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[Utku-utku] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[kilo-utku] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[Kilo-utku] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[KILO-utku] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[Ajan kilo-utku] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[ajan_kilo-utku] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[ajankilo-utku] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[kilo_code-utku] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[kilo-code-utku] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[kilocode-utku] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[@kilo-utku] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[  kilo  -utku] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[yasu-yasu] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[Yasu-yasu] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[cline-yasu] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[Cline-yasu] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[ajancline-yasu] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[Ajan cline-yasu] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[clinebot-yasu] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[yasin-yasu] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[Yasin-yasu] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[ihsan-ihsan] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[roo-ihsan] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[Ajan roo-ihsan] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[roo_code-ihsan] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[roo-code-ihsan] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[roocode-ihsan] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[orkestrator-ihsan] PASSED [ 12%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[salih-salih] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[Salih-salih] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[merve-salih] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[Merve-salih] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[Ajan merve-salih] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[continue-salih] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[Continue-salih] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[continue-ide-salih] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[continue_ide-salih] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[claude_code-claude_code] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_normalize_kanonik_ada_cevirir[claude-code-claude_code] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_normalize_bos_ad_hata[] PASSED   [ 13%]
+tests/test_ajan_normalize.py::test_ajan_normalize_bos_ad_hata[   ] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_normalize_bos_ad_hata[None] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_goster_buyuk_harf[ihsan-\u0130HSAN] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_goster_buyuk_harf[roo-\u0130HSAN] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_goster_buyuk_harf[utku-UTKU] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_goster_buyuk_harf[kilo-UTKU] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_goster_buyuk_harf[salih-SAL\u0130H] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_goster_buyuk_harf[continue-SAL\u0130H] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_goster_buyuk_harf[yasu-YASU] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_goster_buyuk_harf[cline-YASU] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_ajan_goster_buyuk_harf[yasin-YASU] PASSED [ 13%]
+tests/test_ajan_normalize.py::test_tetik_yolu_varyantlar_ayni_dosyaya_gider PASSED [ 13%]
+tests/test_ajan_normalize.py::test_tetik_ekle_ve_bekleyen_varyant_uyumlu PASSED [ 13%]
+tests/test_ana_kontrol_overview.py::test_giris_karti_dead_code_kaldirildi PASSED [ 13%]
+tests/test_ana_kontrol_overview.py::test_kaynaklar_sekmesi_tab_getirden_cozulur PASSED [ 13%]
+tests/test_ana_kontrol_overview.py::test_buton_renkleri_token_disina_cikmaz PASSED [ 13%]
+tests/test_ana_kontrol_overview.py::test_sonuc_yaz_oturuma_yazar PASSED  [ 13%]
+tests/test_ana_kontrol_overview.py::test_saglik_kontrolu_api_yoksa_hata_verir PASSED [ 13%]
+tests/test_ana_kontrol_overview.py::test_saglik_kontrolu_api_varsa_yesil PASSED [ 13%]
+tests/test_ana_kontrol_overview.py::test_csv_hazirla_bos_veride_kayit_yazmaz PASSED [ 13%]
+tests/test_ana_kontrol_overview.py::test_csv_hazirla_veriyle_csv_uretir PASSED [ 13%]
+tests/test_ana_kontrol_overview.py::test_veri_guncelle_hata_kodunda_hata_yazar PASSED [ 13%]
+tests/test_anthropic_pr_review.py::test_dosya_utf8_bom_yok PASSED        [ 13%]
+tests/test_anthropic_pr_review.py::test_redact_secrets_maskeler[API_KEY=abc123xyz-abc123xyz] PASSED [ 13%]
+tests/test_anthropic_pr_review.py::test_redact_secrets_maskeler[password: 's3cret!'-s3cret!] PASSED [ 13%]
+tests/test_anthropic_pr_review.py::test_redact_secrets_maskeler[x = 'sk-ant-abcdefghijklmnop'-sk-ant-abcdefghijklmnop] PASSED [ 13%]
+tests/test_anthropic_pr_review.py::test_redact_secrets_maskeler[ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZ-ghp_ABCDEFGHIJKLMNOPQRSTUVWXYZ] PASSED [ 13%]
+tests/test_anthropic_pr_review.py::test_redact_secrets_normal_kodu_bozmaz PASSED [ 13%]
+tests/test_anthropic_pr_review.py::test_diff_filtrele_gurultuyu_atar PASSED [ 13%]
+tests/test_anthropic_pr_review.py::test_kirp_sinir PASSED                [ 13%]
+tests/test_anthropic_pr_review.py::test_yorum_guncelle_marker_varsa_patch PASSED [ 13%]
+tests/test_anthropic_pr_review.py::test_yorum_yoksa_post PASSED          [ 13%]
+tests/test_anthropic_pr_review.py::test_main_mod_secimi PASSED           [ 13%]
+tests/test_api_aktivite.py::test_aktivite_yaz_basarili PASSED            [ 13%]
+tests/test_api_aktivite.py::test_aktivite_yaz_db_hatasi PASSED           [ 13%]
+tests/test_api_aktivite.py::test_aktivite_yaz_request_ip PASSED          [ 13%]
+tests/test_api_aktivite.py::test_aktivite_yaz_no_request PASSED          [ 13%]
+tests/test_api_aktivite.py::test_aktivite_yaz_detay_json PASSED          [ 13%]
+tests/test_api_companies.py::TestHealth::test_health_ok PASSED           [ 13%]
+tests/test_api_companies.py::TestKvkkMaskeUnit::test_mask_email PASSED   [ 13%]
+tests/test_api_companies.py::TestKvkkMaskeUnit::test_mask_phone PASSED   [ 13%]
+tests/test_api_companies.py::TestKvkkMaskeUnit::test_apply_kvkk_mask_both_fields PASSED [ 13%]
+tests/test_api_companies.py::TestKvkkMaskeAPI::test_mask_1_returns_masked PASSED [ 13%]
+tests/test_api_companies.py::TestKvkkMaskeAPI::test_default_not_masked PASSED [ 14%]
+tests/test_api_companies.py::TestKvkkMaskeAPI::test_no_bireysel_email_in_db PASSED [ 14%]
+tests/test_api_companies.py::TestNormalizeKurallariCanliVeri::test_legal_name_tamamen_buyuk_harf PASSED [ 14%]
+tests/test_api_companies.py::TestNormalizeKurallariCanliVeri::test_ascii_kisaltma_kalintisi_yok PASSED [ 14%]
+tests/test_api_companies.py::TestNormalizeKurallariCanliVeri::test_trade_name_legal_kelimelerinden PASSED [ 14%]
+tests/test_api_companies.py::TestTurkceArama::test_ascii_sorgu_turkce_veriyi_bulur PASSED [ 14%]
+tests/test_api_companies.py::TestTurkceArama::test_turkce_sorgu_calisir PASSED [ 14%]
+tests/test_api_companies.py::TestTurkceArama::test_turkce_karakter_sorgu_sozluk_kisaltmasini_bulur PASSED [ 14%]
+tests/test_api_companies.py::TestTurkceArama::test_bilinen_firma_arama PASSED [ 14%]
+tests/test_api_companies.py::TestCokluKaynak::test_source_ve_sources_ayni_sonuc PASSED [ 14%]
+tests/test_api_companies.py::TestCokluKaynak::test_iki_kaynak_toplami_tum_firmalara_esit PASSED [ 14%]
+tests/test_api_companies.py::TestPagination::test_limit_offset_calisir PASSED [ 14%]
+tests/test_api_companies.py::TestPagination::test_limit_clamp_500 PASSED [ 14%]
+tests/test_api_companies.py::TestPagination::test_kalite_skoruna_gore_azalan_siralama PASSED [ 14%]
+tests/test_api_companies.py::TestNaceFiltre::test_nace_onek_filtresi SKIPPED [ 14%]
+tests/test_api_companies.py::TestApiKeyAuth::test_key_olmayinca_401 PASSED [ 14%]
+tests/test_api_companies.py::TestApiKeyAuth::test_yanlis_key_401 PASSED  [ 14%]
+tests/test_api_companies.py::TestApiKeyAuth::test_dogru_key_header_ile_200 PASSED [ 14%]
+tests/test_api_companies.py::TestApiKeyAuth::test_dogru_key_query_ile_200 PASSED [ 14%]
+tests/test_api_companies.py::TestRateLimit::test_limit_asilinca_429 PASSED [ 14%]
+tests/test_api_integration.py::TestRotaEnvanteri::test_tum_api_rotalari_tanimli_listeyle_eslesir PASSED [ 14%]
+tests/test_api_integration.py::TestAcikUclar::test_health_ok PASSED      [ 14%]
+tests/test_api_integration.py::TestAcikUclar::test_tasks_pano_listesi_doner PASSED [ 14%]
+tests/test_api_integration.py::TestAcikUclar::test_handoffs_sozluk_doner PASSED [ 14%]
+tests/test_api_integration.py::TestAcikUclar::test_performance_metrik_anahtarlari PASSED [ 14%]
+tests/test_api_integration.py::TestAcikUclar::test_metrics_prometheus_metni PASSED [ 14%]
+tests/test_api_integration.py::TestAcikUclar::test_dashboard_html_doner PASSED [ 14%]
+tests/test_api_integration.py::TestVeriUclari::test_kpi_sozlesme PASSED  [ 14%]
+tests/test_api_integration.py::TestVeriUclari::test_kpi_bos_veri_bos_sozluk PASSED [ 14%]
+tests/test_api_integration.py::TestVeriUclari::test_companies_liste_sozlesme PASSED [ 14%]
+tests/test_api_integration.py::TestVeriUclari::test_companies_limit_ust_sinir PASSED [ 14%]
+tests/test_api_integration.py::TestVeriUclari::test_company_detail_bulunur PASSED [ 14%]
+tests/test_api_integration.py::TestVeriUclari::test_company_detail_bulunamaz_bos_sozluk PASSED [ 14%]
+tests/test_api_integration.py::TestVeriUclari::test_export_csv_doner PASSED [ 14%]
+tests/test_api_integration.py::TestVeriUclari::test_match_gecersiz_buyer_404 PASSED [ 14%]
+tests/test_api_integration.py::TestVeriUclari::test_quality_trend_bantlar_tavandan_turetilir PASSED [ 14%]
+tests/test_api_integration.py::TestVeriUclari::test_nace_distribution_tahmini_kod_dagilima_girmez PASSED [ 14%]
+tests/test_api_integration.py::TestVeriUclari::test_sources_liste PASSED [ 14%]
+tests/test_api_integration.py::TestVeriUclari::test_intelligence_dashboard_sozlesme PASSED [ 14%]
+tests/test_api_integration.py::TestVeriUclari::test_buyer_categories_sozlesme PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKimlik::test_me_token_yok_401 PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKimlik::test_profile_token_yok_401 PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKimlik::test_ledger_token_yok_401 PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKimlik::test_change_password_token_yok_401 PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKimlik::test_me_gecersiz_token_401 PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKimlik::test_login_gecersiz_email_400 PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKimlik::test_login_bilinmeyen_email_404 PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKimlik::test_login_yanlis_sifre_401 PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKimlik::test_login_onay_bekliyor_403 PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKimlik::test_login_onayli_kullanici_200_token PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKimlik::test_logout_ok PASSED    [ 14%]
+tests/test_api_integration.py::TestBuyerKayit::test_register_eksik_alan_400 PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKayit::test_register_kisa_sifre_400 PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKayit::test_register_ucretsiz_domain_400 PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKayit::test_register_kvkk_yok_400 PASSED [ 14%]
+tests/test_api_integration.py::TestBuyerKayit::test_register_mukerrer_email_409 PASSED [ 15%]
+tests/test_api_integration.py::TestBuyerKayit::test_register_basarili_onay_bekliyor PASSED [ 15%]
+tests/test_api_integration.py::TestBuyerKayit::test_welcome_telegram_onay_bekliyor_403 PASSED [ 15%]
+tests/test_api_integration.py::TestBuyerKayit::test_welcome_telegram_onayli_kullanici_ok PASSED [ 15%]
+tests/test_api_integration.py::TestAdminFailClosed::test_anahtar_yokken_403[/api/admin/pending-get] PASSED [ 15%]
+tests/test_api_integration.py::TestAdminFailClosed::test_anahtar_yokken_403[/api/admin/api-usage-get] PASSED [ 15%]
+tests/test_api_integration.py::TestAdminFailClosed::test_anahtar_yokken_403[/api/admin/categories-get] PASSED [ 15%]
+tests/test_api_integration.py::TestAdminFailClosed::test_anahtar_yokken_403[/api/admin/approve-post] PASSED [ 15%]
+tests/test_api_integration.py::TestAdminFailClosed::test_anahtar_yokken_403[/api/admin/credit-post] PASSED [ 15%]
+tests/test_api_integration.py::TestAdminFailClosed::test_anahtar_yokken_403[/api/admin/rotate-key-post] PASSED [ 15%]
+tests/test_api_integration.py::TestAdminFailClosed::test_anahtar_yokken_403[/api/admin/categories-post] PASSED [ 15%]
+tests/test_api_integration.py::TestAdminFailClosed::test_yanlis_anahtar_403 PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_pending_bos_listeler PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_api_usage_sozlesme PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_approve_user_id_yok_400 PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_approve_uuid_degil_400 PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_approve_kullanici_yok_404 PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_credit_eksik_parametre_400 PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_credit_kullanici_yok_404 PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_credit_basari PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_rotate_uuid_degil_400 PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_rotate_kullanici_yok_404 PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_rotate_enterprise_degil_400 PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_rotate_enterprise_basarili PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_admin_categories_bos PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_admin_categories_save_eksik_400 PASSED [ 15%]
+tests/test_api_integration.py::TestAdminUclari::test_admin_categories_save_nace_grup_hatali_400 PASSED [ 15%]
+tests/test_api_integration.py::TestWebhookUclari::test_webhook_health_200 PASSED [ 15%]
+tests/test_api_integration.py::TestWebhookUclari::test_webhook_metrics_200 PASSED [ 15%]
+tests/test_api_integration.py::TestWebhookUclari::test_webhook_gecersiz_govde_reddedilir PASSED [ 15%]
+tests/test_api_integration.py::TestApiKeyModu::test_anahtar_zorunluyken_key_yok_401 PASSED [ 15%]
+tests/test_api_integration.py::TestApiKeyModu::test_yanlis_anahtar_401 PASSED [ 15%]
+tests/test_api_integration.py::TestApiKeyModu::test_dogru_anahtar_200 PASSED [ 15%]
+tests/test_api_integration.py::TestSseStream::test_stream_event_stream_verir PASSED [ 15%]
+tests/test_api_kpi_history.py::test_api_kpi_history_returns_structure PASSED [ 15%]
+tests/test_api_kpi_history.py::test_api_kpi_history_empty PASSED         [ 15%]
+tests/test_api_kpi_history.py::test_api_kpi_history_days_validation PASSED [ 15%]
+tests/test_api_kpi_history.py::test_api_kpi_history_exception_handling PASSED [ 15%]
+tests/test_apify_butce_olc.py::test_api_kok_v2_iki_kere_eklemez[https://api.apify.com/v2] PASSED [ 15%]
+tests/test_apify_butce_olc.py::test_api_kok_v2_iki_kere_eklemez[https://api.apify.com/v2/] PASSED [ 15%]
+tests/test_apify_butce_olc.py::test_api_kok_v2_iki_kere_eklemez[https://api.apify.com] PASSED [ 15%]
+tests/test_apify_butce_olc.py::test_api_kok_v2_iki_kere_eklemez[https://api.apify.com/] PASSED [ 15%]
+tests/test_apify_butce_olc.py::test_api_kok_v2_iki_kere_eklemez[https://ozel.vendor.com/api/v2] PASSED [ 15%]
+tests/test_apify_butce_olc.py::test_api_kok_ozel_kok_koruma PASSED       [ 15%]
+tests/test_apify_butce_olc.py::test_env_oku_tirnak_yorumlar PASSED       [ 15%]
+tests/test_apify_butce_olc.py::test_env_oku_dosya_yoksa_bos PASSED       [ 15%]
+tests/test_apify_butce_olc.py::test_token_yoksa_olculmez_sifir_yazmaz PASSED [ 15%]
+tests/test_apify_butce_olc.py::test_token_var_ama_401_olcum_yok PASSED   [ 15%]
+tests/test_apify_butce_olc.py::test_http_200_ama_alan_yoksa_sifir_sayilmaz PASSED [ 15%]
+tests/test_apify_butce_olc.py::test_tavan_ici_rc0 PASSED                 [ 15%]
+tests/test_apify_butce_olc.py::test_tavan_asilirsa_rc2 PASSED            [ 15%]
+tests/test_apify_butce_olc.py::test_platform_tavani_yuksekse_guvenlik_acigi PASSED [ 15%]
+tests/test_apify_butce_olc.py::test_limits_duserse_usage_monthly_yedegine_duser PASSED [ 15%]
+tests/test_apify_butce_olc.py::test_cikti_token_sicmaz PASSED            [ 15%]
+tests/test_apify_butce_olc.py::test_cikti_json_ile PASSED                [ 15%]
+tests/test_apify_client.py::TestTokenGuvenligi::test_token_bos_ise_hata PASSED [ 16%]
+tests/test_apify_client.py::TestTokenGuvenligi::test_token_ortamdan_okunur PASSED [ 16%]
+tests/test_apify_client.py::TestTokenGuvenligi::test_token_url_sorgusuna_girer_loglansin_diye_param_ici PASSED [ 16%]
+tests/test_apify_client.py::TestStartActorRun::test_basarili_baslatici PASSED [ 16%]
+tests/test_apify_client.py::TestStartActorRun::test_http_hatasinda_apify_error PASSED [ 16%]
+tests/test_apify_client.py::TestWaitForRun::test_terminal_durumda_doner PASSED [ 16%]
+tests/test_apify_client.py::TestWaitForRun::test_failed_durumu_hatadir PASSED [ 16%]
+tests/test_apify_client.py::TestWaitForRun::test_polling_zaman_asimi PASSED [ 16%]
+tests/test_apify_client.py::TestFetchDatasetItems::test_tek_sayfa PASSED [ 16%]
+tests/test_apify_client.py::TestFetchDatasetItems::test_cok_sayfali_okuma PASSED [ 16%]
+tests/test_apify_client.py::TestFetchDatasetItems::test_max_items_siniri PASSED [ 16%]
+tests/test_apify_client.py::TestRunActorAndCollect::test_basarili_akis PASSED [ 16%]
+tests/test_apify_dlq.py::TestDeadLetterQueue::test_dlq_yazma PASSED      [ 16%]
+tests/test_apify_dlq.py::TestDeadLetterQueue::test_dlq_boyutu PASSED     [ 16%]
+tests/test_apify_dlq.py::TestDeadLetterQueue::test_dlq_hata_tur_raporlama PASSED [ 16%]
+tests/test_apify_dlq.py::TestDeadLetterQueue::test_process_webhook_string_payload_dlq PASSED [ 16%]
+tests/test_apify_dlq.py::TestDeadLetterQueue::test_dlq_zaman_damgati PASSED [ 16%]
+tests/test_apify_dlq.py::TestDeadLetterQueue::test_dlq_tekrarlanabilir PASSED [ 16%]
+tests/test_apify_dlq.py::TestRetryBackoff::test_basarili_ilk_deneme PASSED [ 16%]
+tests/test_apify_dlq.py::TestRetryBackoff::test_retry_basarisiz_bitince_istisna PASSED [ 16%]
+tests/test_apify_dlq.py::TestRetryBackoff::test_exponential_backoff_beklentisi PASSED [ 16%]
+tests/test_apify_dlq.py::TestRetryBackoff::test_retry_basarili_ikinci_denemeyle PASSED [ 16%]
+tests/test_apify_dlq.py::TestRetryBackoff::test_rate_limit_sinir_dogrulanir PASSED [ 16%]
+tests/test_apify_dlq.py::TestRetryBackoff::test_rate_limit_refill PASSED [ 16%]
+tests/test_apify_dlq.py::TestDlqWebhookIntegration::test_basarili_islem_dlq_olusturmaz PASSED [ 16%]
+tests/test_apify_dlq.py::TestDlqWebhookIntegration::test_islem_idempotent PASSED [ 16%]
+tests/test_apify_dlq.py::TestDlqWebhookIntegration::test_dlq_auth_hatasinda_yazar PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRateLimiting::test_ilk_istek_izne_verilir PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRateLimiting::test_kapasite_asilirsa_reddedilir PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRateLimiting::test_anonymous_token_icin_limit_yok PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRateLimiting::test_rate_limit_devre_disi_birakildi PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRateLimiting::test_bucket_refill_olur PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestDeadLetterQueue::test_dlq_validation_hatasinda_yazilir PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestDeadLetterQueue::test_dlq_auth_hatasinda_yazilir PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestDeadLetterQueue::test_process_webhook_bad_payload_dlq_ile PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestDeadLetterQueue::test_dlq_zaman_damgasi_icerir PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRequestValidation::test_gecersiz_payload_turu_reddedilir PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRequestValidation::test_yanlis_secret_reddedilir PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRequestValidation::test_bos_secret_reddedilir PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRequestValidation::test_gecersiz_hmac_reddedilir PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRequestValidation::test_timestamp_skew_kontrolu PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRequestValidation::test_gecerli_timestamp_kabul_edilir PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRetryBackoff::test_basarili_ilk_deneme PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRetryBackoff::test_basaridan_sonra_retry PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRetryBackoff::test_tum_denemeler_basarisiz PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRetryBackoff::test_backoff_suresi_artar PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestHealthEndpoint::test_health_anahtar_kelimeler PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestHealthEndpoint::test_health_durumu_healthy PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestHealthEndpoint::test_health_secret_durumu PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestHealthEndpoint::test_health_dlq_boyutu PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestPrometheusMetrics::test_metrics_cikti_turu PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestPrometheusMetrics::test_prometheus_yoksa_noop_mesaj PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestPrometheusMetrics::test_metrics_uretimi PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRetryIntegration::test_handle_succeeded_retry_icerir PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRetryIntegration::test_retry_tukendiginde_hata_kayit_olusturulur PASSED [ 16%]
+tests/test_apify_webhook_hardening.py::TestRateLimitHeaders::test_rate_limited_retry_after_icerir PASSED [ 17%]
+tests/test_apify_webhook_hardening.py::TestRateLimitHeaders::test_normal_istek_rate_limit_yok PASSED [ 17%]
+tests/test_apify_webhook_hardening.py::TestIdempotencyWithDLQ::test_ikinci_istek_dlq_yazmaz PASSED [ 17%]
+tests/test_apify_webhook_hardening.py::TestIdempotencyWithDLQ::test_basari_sonrasi_tekrar_basari PASSED [ 17%]
+tests/test_apify_webhook_hardening.py::TestIdempotencyWithDLQ::test_olay_logu_tekrar_yazilmaz PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestVerifySecret::test_valid_secret PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestVerifySecret::test_invalid_secret PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestVerifySecret::test_empty_secret PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestVerifySecret::test_no_secret_configured_allows_all PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestVerifyHmac::test_valid_hmac PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestVerifyHmac::test_invalid_hmac PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestVerifyHmac::test_missing_signature PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestParseEvent::test_succeeded_parse PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestParseEvent::test_failed_parse PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestIdempotency::test_first_run_not_processed PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestIdempotency::test_second_run_processed PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestProcessWebhook::test_rejected_bad_secret PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestProcessWebhook::test_rejected_missing_run_id PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestProcessWebhook::test_succeeded_routes_to_handler PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestProcessWebhook::test_failed_routes_to_failure_handler PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestProcessWebhook::test_unknown_event_noop PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestHandleFailure::test_error_ledger_and_telegram PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestHandleSucceededNoClient::test_succeeded_without_apify_client_triggers_ingest PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestHandleSucceededWithClient::test_succeeded_with_mock_client PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestHandleSucceededWithClient::test_succeeded_dataset_error_logged PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestEventLogger::test_event_persisted_to_jsonl PASSED [ 17%]
+tests/test_apify_webhook_receiver.py::TestIdempotencyPersistence::test_processed_run_detected_after_restart PASSED [ 17%]
+tests/test_app_js.py::test_app_js_helper_functions PASSED                [ 17%]
+tests/test_app_menu_rol.py::test_rol_filtresi_kademeli_buyur PASSED      [ 17%]
+tests/test_app_menu_rol.py::test_teknik_altyapi_tanimi PASSED            [ 17%]
+tests/test_app_menu_rol.py::test_admin_token_menuyu_buyutur PASSED       [ 17%]
+tests/test_app_nav_tek_tik.py::test_bolum_sec_implementation_kontrol PASSED [ 17%]
+tests/test_app_nav_tek_tik.py::test_selectbox_index_aktif_bolum_gosterir PASSED [ 17%]
+tests/test_app_nav_tek_tik.py::test_page_icon_utf8 PASSED                [ 17%]
+tests/test_app_nav_tek_tik.py::test_nav_ipucu_her_durumda_none PASSED    [ 17%]
+tests/test_app_nav_tek_tik.py::test_nav_ipcu_topbar_caption_toggle PASSED [ 17%]
+tests/test_app_nav_tek_tik.py::test_auth_gate_modal_kapatilamaz PASSED   [ 17%]
+tests/test_app_nav_tek_tik.py::test_post_login_endpoint PASSED           [ 17%]
+tests/test_app_nav_tek_tik.py::test_hizli_gecis_onchange_anahtar_gecirir PASSED [ 17%]
+tests/test_arac_dongusu.py::test_ara_komutu_araci_calistirir_ve_nihai_yanit_doner PASSED [ 17%]
+tests/test_arac_dongusu.py::test_tavan_asiminda_durur_ve_olculmedi_notu_duser PASSED [ 17%]
+tests/test_arac_dongusu.py::test_web_text_icindeki_komut_ve_talimat_uygulanmaz PASSED [ 17%]
+tests/test_arac_dongusu.py::test_getir_yalniz_http PASSED                [ 17%]
+tests/test_arac_dongusu.py::test_getir_uretilmis_adresi_acmaz_veri_sizintisi_kapali PASSED [ 17%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_yasak[http://127.0.0.1/] PASSED [ 17%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_yasak[http://192.168.1.1/x] PASSED [ 17%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_yasak[http://10.0.0.5/] PASSED [ 17%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_yasak[http://172.16.0.1/] PASSED [ 17%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_yasak[http://169.254.169.254/latest/meta-data] PASSED [ 17%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_yasak[http://localhost/] PASSED [ 17%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_yasak[http://db.internal/] PASSED [ 17%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_yasak[http://[::1]/] PASSED [ 17%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_kilik_degistirmis_ip_yasak[http://2130706433/] PASSED [ 17%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_kilik_degistirmis_ip_yasak[http://0x7f000001/] PASSED [ 17%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_kilik_degistirmis_ip_yasak[http://0177.0.0.1/] PASSED [ 17%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_kilik_degistirmis_ip_yasak[http://127.1/] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_kilik_degistirmis_ip_yasak[http://localhost./] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_kilik_degistirmis_ip_yasak[http://a.localhost/] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_getir_ozel_ag_kilik_degistirmis_ip_yasak[http://[::ffff:127.0.0.1]/] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_getir_alan_adi_sayisal_sanilmaz[https://www.dmo.gov.tr/x] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_getir_alan_adi_sayisal_sanilmaz[https://1a.tld/] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_getir_alan_adi_sayisal_sanilmaz[https://x1.y2.tld/p] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_getir_izinli_adres_kilik_degistirince_ret[HTTP://EVIL.COM/] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_getir_izinli_adres_kilik_degistirince_ret[https://www.dmo.gov.tr@evil.com/] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_getir_izinli_adres_kilik_degistirince_ret[https://www.dmo.gov.tr.evil.com/] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_getir_izinli_adres_kilik_degistirince_ret[https://www.dmo.gov.tr/Ihale/Liste?type=1&x=1] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_getir_izinli_adres_kilik_degistirince_ret[https://www.dmo.gov.tr/Ihale/Liste?type=1#f] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_komut_ayikla_web_text_sinirlari[cevap\n<web_text kaynak="x">metin\nGETIR: http://evil.com-None] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_komut_ayikla_web_text_sinirlari[<web_text kaynak="x">a\n</web_text_>\nGETIR: http://evil.com-None] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_komut_ayikla_web_text_sinirlari[**GETIR:** http://evil.com-None] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_komut_ayikla_web_text_sinirlari[> GETIR: http://evil.com-None] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_komut_ayikla_web_text_sinirlari[<web_text kaynak="x">GETIR: http://evil.com</web_text>\nARA: dmo ihale-beklenen4] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_komut_ayikla_web_text_sinirlari[GET\u0130R: https://a.tld\nARA: b-beklenen5] PASSED [ 18%]
+tests/test_arac_dongusu.py::test_web_text_blogu_kaynak_tirnak_kacisi PASSED [ 18%]
+tests/test_arac_dongusu.py::test_arac_ciktisinda_gorulen_adres_sonraki_turda_izinli PASSED [ 18%]
+tests/test_arac_dongusu.py::test_kaynak_haritasi_promptsuz_izinli_ve_protokolde PASSED [ 18%]
+tests/test_arac_dongusu.py::test_sohbet_araclar_kapaliyken_protokol_prompta_girmez PASSED [ 18%]
+tests/test_arac_dongusu_kaynak.py::test_harita_en_alti_adres_ve_her_adres_iznli PASSED [ 18%]
+tests/test_arac_dongusu_kaynak.py::test_her_adres_https PASSED           [ 18%]
+tests/test_arac_dongusu_kaynak.py::test_harita_anahtarlari_paket_kodlariyla_kesisiyor PASSED [ 18%]
+tests/test_arac_dongusu_kaynak.py::test_olcum_dokumani_her_adresi_kanitliyor PASSED [ 18%]
+tests/test_auth_gate.py::test_admin_login_post_endpoint PASSED           [ 18%]
+tests/test_auth_gate.py::test_admin_reset_request_endpoint PASSED        [ 18%]
+tests/test_auth_gate.py::test_admin_reset_confirm_endpoint PASSED        [ 18%]
+tests/test_auth_gate.py::test_auth_modal_icerik_fonksiyonu PASSED        [ 18%]
+tests/test_auth_gate.py::test_modal_dismissible_parametresi PASSED       [ 18%]
+tests/test_auth_gate.py::test_admin_auth_post_kullanimi PASSED           [ 18%]
+tests/test_auth_gate.py::test_eski_url_sections_eslesmesinden_once_gelir[kullanicilar] PASSED [ 18%]
+tests/test_auth_gate.py::test_eski_url_sections_eslesmesinden_once_gelir[/KULLANICILAR/] PASSED [ 18%]
+tests/test_auth_gate.py::test_eski_url_sections_eslesmesinden_once_gelir[ kullanicilar ] PASSED [ 18%]
+tests/test_auth_gate.py::test_yeni_url_sections_dongusu_korunur[/Paketler/-musteri_onizleme] PASSED [ 18%]
+tests/test_auth_gate.py::test_yeni_url_sections_dongusu_korunur[canli-veri-canli_veri] PASSED [ 18%]
+tests/test_auth_gate.py::test_bilinmeyen_url_none_doner[] PASSED         [ 18%]
+tests/test_auth_gate.py::test_bilinmeyen_url_none_doner[olmayan] PASSED  [ 18%]
+tests/test_auth_lockout.py::test_kilit_suresi_bind_ediliyor PASSED       [ 18%]
+tests/test_auth_lockout.py::test_esik_altinda_kilit_yok PASSED           [ 18%]
+tests/test_auth_lockout.py::test_suresi_dolan_kilit_temizlenir_ve_commit_olur PASSED [ 18%]
+tests/test_auth_lockout.py::test_db_hatasi_fail_open_degil PASSED        [ 18%]
+tests/test_auth_lockout.py::test_interval_metin_sabiti_kalmadi PASSED    [ 18%]
+tests/test_auth_lockout.py::test_ikiz_fonksiyon_tanimi_yok PASSED        [ 18%]
+tests/test_auth_lockout.py::test_kilit_kontrolu_sifre_dogrulamasindan_once PASSED [ 18%]
+tests/test_benchmark.py::TestBenchmarkSuiteEsikler::test_standart_suite_tum_esikler_altinda PASSED [ 18%]
+tests/test_benchmark.py::TestBenchmarkSuiteEsikler::test_kritik_uc_p50_tavan[/api/health-50.0] PASSED [ 18%]
+tests/test_benchmark.py::TestBenchmarkSuiteEsikler::test_kritik_uc_p50_tavan[/api/kpi-150.0] PASSED [ 18%]
+tests/test_benchmark.py::TestBenchmarkSuiteEsikler::test_kritik_uc_p50_tavan[/api/companies?limit=20-200.0] PASSED [ 18%]
+tests/test_benchmark.py::TestKirletmeMandali::test_kos_sahte_motoru_geri_koyar PASSED [ 18%]
+tests/test_benchmark.py::TestBenchmarkRapor::test_rapor_dosyasi_yazilir PASSED [ 18%]
+tests/test_brief_sablon_denetim.py::test_kanonik_sablon_tek PASSED       [ 18%]
+tests/test_brief_sablon_denetim.py::test_sablon_zorunlu_bolumleri_tanimlar PASSED [ 18%]
+tests/test_brief_sablon_denetim.py::test_baseline_dosyasi_var PASSED     [ 18%]
+tests/test_brief_sablon_denetim.py::test_baseline_buyumez PASSED         [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_var_veya_hepsi_baseline PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_TEST-BACKLOG-20.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-03.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_ihsan_ALTYAPI-AJAN-CAKISMA-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_ihsan_ALTYAPI-ODIN-UYARLAMA-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_ihsan_ORKESTRA-KIMLIK-ZINCIRI-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_salih_ALTYAPI-MIMIR-BAGLAM-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_salih_TEST-ODIN-PROMPT-INJECTION.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_salih_TEST-ODIN-REDTEAM-S1S4-I1I4-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_salih_TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_salih_VERI-SEMA-DOGRULA-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_salih_VERI-SEMA-DOGRULA-02.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_salih_VERI-SEMA-DOGRULA-03.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_ALTYAPI-EVREN-PRIVATE-DOGRULAMA.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_ALTYAPI-MIMIR-HABER-KUSU-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_ALTYAPI-ODIN-EGITIM-PIPELINE.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_ALTYAPI-ODIN-MASKE-V3-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_ALTYAPI-ODIN-MASKE-V3-02.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_DOC-GLOBAL-INTEL-ARASTIRMA-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_TEST-SIMULASYON-B17-KIRIK-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_UI-ADMIN-ACIKLAMA-METIN-37.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_UI-ADMIN-CRAWL-TASI-35.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_UI-ADMIN-KAYNAKLAR-SAYFA-34.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_UI-ADMIN-REHBER-ALAN-38.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_UI-ADMIN-SON-KAZIMA-KART-36.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-02.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-APIFY-BUTCE-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-HAYALET-TEMIZ-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-INGEST-ASO-GLOB-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-INGEST-ASO-IKIZ-YOL-BIRLESTIR-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-IVEDIK-YENIDEN-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-KAYNAK-BAG-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-KAYNAK-SIZINTI-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-KOLON-IKIZ-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-NACE-ACILIM-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-NACE-COKLU-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-NACE-KOLON-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-NACE-SOZLUK-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-NACE-SOZLUK-DIL-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-NACE-TEMIZ-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-ODIN-EGITIM-VERISI-HAZIRLA.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-OSTIM-HREF-FILTRE-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-RAG-KORPUS-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-RISK-MOTORU-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-SEKTOR-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-SKOR-MOTORU-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-TENDER-KOLON-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-TSG-04-YAZICI-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-TSG-ESLEME-CASE-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_utku_VERI-WEB-SITESI-ZENGINLESTIR-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_ALTYAPI-9ROUTER-ANAHTAR-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_ALTYAPI-9ROUTER-MITM-PATCH-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_ALTYAPI-GOREV-AT-KAPI-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_ALTYAPI-KREDI-CUZDANI-01.md] PASSED [ 19%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_ALTYAPI-ODIN-DENETIM-RAPORU.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_ALTYAPI-OPENROUTER-ARAC-01.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_ALTYAPI-RAG-EMBEDDER-01.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_ALTYAPI-REPO-TEMIZLIK-01.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_ALTYAPI-SKILL-YAPISI-01.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_ALTYAPI-TICARET-KANIT-01.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_DOC-BROWSERUSE-YASALLIK-01.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_DOC-VENDOR-DD-ARASTIRMA-01.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_TSG-PILOT-20.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_VERI-ENTITY-GRAPH-01.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_VERI-LONCA-FIRMA-01.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_VERI-OSB-Tazelik-01.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_VERI-OSB-TEMIZLIK-01.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_VERI-OSTIM-TAM-TARAMA-01.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_VERI-PAKET-FIYAT-SENKRON-01.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_VERI-SEMA-DOGRULA-02.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_VERI-SEMA-DOGRULA-03.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_VERI-TOBB2B-BUYUTME-01.md] PASSED [ 20%]
+tests/test_brief_sablon_denetim.py::test_yeni_brif_sablona_uyar[brief_yasu_VERI-TOBB2B-KESISIM-01.md] PASSED [ 20%]
+tests/test_bulgu_defteri.py::test_satir_birlestir_alti_alan PASSED       [ 20%]
+tests/test_bulgu_defteri.py::test_renk_ismi_emoji_donusur[oneri] PASSED  [ 20%]
+tests/test_bulgu_defteri.py::test_renk_ismi_emoji_donusur[dikkat] PASSED [ 20%]
+tests/test_bulgu_defteri.py::test_renk_ismi_emoji_donusur[acil] PASSED   [ 20%]
+tests/test_bulgu_defteri.py::test_renk_ismi_emoji_donusur[tamam] PASSED  [ 20%]
+tests/test_bulgu_defteri.py::test_cok_satirli_ozet_satir_kirmaz PASSED   [ 20%]
+tests/test_bulgu_defteri.py::test_kanonik_olmayan_rol_reddedilir[bilinmeyen] PASSED [ 20%]
+tests/test_bulgu_defteri.py::test_kanonik_olmayan_rol_reddedilir[uretim] PASSED [ 20%]
+tests/test_bulgu_defteri.py::test_kanonik_olmayan_rol_reddedilir[URETIM] PASSED [ 20%]
+tests/test_bulgu_defteri.py::test_kanonik_olmayan_rol_reddedilir[] PASSED [ 20%]
+tests/test_bulgu_defteri.py::test_gecersiz_renk_reddedilir PASSED        [ 20%]
+tests/test_bulgu_defteri.py::test_bos_alan_reddedilir[tarih] PASSED      [ 20%]
+tests/test_bulgu_defteri.py::test_bos_alan_reddedilir[task_id] PASSED    [ 20%]
+tests/test_bulgu_defteri.py::test_bos_alan_reddedilir[rol] PASSED        [ 20%]
+tests/test_bulgu_defteri.py::test_bos_alan_reddedilir[ozet] PASSED       [ 20%]
+tests/test_bulgu_defteri.py::test_bos_alan_reddedilir[karar] PASSED      [ 20%]
+tests/test_bulgu_defteri.py::test_karar_alani_bos_birakilamaz PASSED     [ 20%]
+tests/test_bulgu_defteri.py::test_baslik_paragrafi_veri_sayilmaz PASSED  [ 20%]
+tests/test_bulgu_defteri.py::test_bolum_isaretleri_veri_sayilmaz PASSED  [ 20%]
+tests/test_bulgu_defteri.py::test_ekle_idempotent PASSED                 [ 20%]
+tests/test_bulgu_defteri.py::test_ekle_farkli_bulgu_ekler PASSED         [ 20%]
+tests/test_bulgu_defteri.py::test_ekle_bos_dosyaya_basar PASSED          [ 20%]
+tests/test_bulgu_defteri.py::test_task_var_mi PASSED                     [ 20%]
+tests/test_bulgu_defteri.py::test_task_var_mi_tam_eslik PASSED           [ 20%]
+tests/test_bulgu_defteri.py::test_kapi_teslimi_reddeder PASSED           [ 20%]
+tests/test_bulgu_defteri.py::test_kapi_teslimi_gecirir PASSED            [ 20%]
+tests/test_bulgu_defteri.py::test_d321_board_kapisi_reddeder PASSED      [ 20%]
+tests/test_bulgu_defteri.py::test_islenmemis_yakalar PASSED              [ 20%]
+tests/test_bulgu_defteri.py::test_islenmemis_alan_sayisi_eksik PASSED    [ 20%]
+tests/test_bulgu_defteri.py::test_istatistik PASSED                      [ 20%]
+tests/test_bulgu_defteri.py::test_tum_roller_gecerli PASSED              [ 20%]
+tests/test_bulgu_defteri.py::test_gercek_defter_kurallara_uyuyor PASSED  [ 20%]
+tests/test_bulgu_defteri.py::test_eszamanli_ekle_kayip_olmaz PASSED      [ 20%]
+tests/test_bulgu_defteri.py::test_kilit_dosyasi_geride_kalmaz PASSED     [ 20%]
+tests/test_bulgu_defteri.py::test_kilit_hata_durumunda_temizlenir PASSED [ 20%]
+tests/test_change_notify.py::test_esik_zorunlu PASSED                    [ 20%]
+tests/test_change_notify.py::test_kucuk_degisim_yakalanir PASSED         [ 21%]
+tests/test_change_notify.py::test_olculmemis_puan_degisim_sayilmaz PASSED [ 21%]
+tests/test_change_notify.py::test_yeni_ve_silinen_ayri_durur PASSED      [ 21%]
+tests/test_charts.py::test_kpi_stil_css_sadece_cerceve_hover PASSED      [ 21%]
+tests/test_charts.py::test_veri_akisi_dot_zincir_ve_tema PASSED          [ 21%]
+tests/test_charts.py::test_veri_akisi_dot_vurgu_marka_rengi PASSED       [ 21%]
+tests/test_charts.py::test_veri_akisi_dugumler_buyuk_harf_ve_alt_satirsiz PASSED [ 21%]
+tests/test_charts.py::test_veri_akisi_streamlit_fallback PASSED          [ 21%]
+tests/test_charts.py::test_veri_akisi_streamlit_graphviz_cizer PASSED    [ 21%]
+tests/test_charts.py::test_sayi_formatla_turkce_binlik_ve_birim[1234567-0--1.234.567] PASSED [ 21%]
+tests/test_charts.py::test_sayi_formatla_turkce_binlik_ve_birim[0-0--0] PASSED [ 21%]
+tests/test_charts.py::test_sayi_formatla_turkce_binlik_ve_birim[None-0--\u2014] PASSED [ 21%]
+tests/test_charts.py::test_sayi_formatla_turkce_binlik_ve_birim[-0--\u2014] PASSED [ 21%]
+tests/test_charts.py::test_sayi_formatla_turkce_binlik_ve_birim[\U0001f7e2 Sa\u011fl\u0131kl\u0131-0--\U0001f7e2 Sa\u011fl\u0131kl\u0131] PASSED [ 21%]
+tests/test_charts.py::test_sayi_formatla_turkce_binlik_ve_birim[87.456-1-%-%87,5] PASSED [ 21%]
+tests/test_charts.py::test_sayi_formatla_turkce_binlik_ve_birim[12.3-0-ms-12 ms] PASSED [ 21%]
+tests/test_charts.py::test_sayi_formatla_turkce_binlik_ve_birim[1234.5-2--1.234,50] PASSED [ 21%]
+tests/test_charts.py::test_delta_yonu[5-yukari] PASSED                   [ 21%]
+tests/test_charts.py::test_delta_yonu[-2.5-asagi] PASSED                 [ 21%]
+tests/test_charts.py::test_delta_yonu[0-duz] PASSED                      [ 21%]
+tests/test_charts.py::test_delta_yonu[None-duz] PASSED                   [ 21%]
+tests/test_charts.py::test_delta_yonu[-duz] PASSED                       [ 21%]
+tests/test_charts.py::test_delta_yonu[+12 (24s)-yukari] PASSED           [ 21%]
+tests/test_charts.py::test_delta_yonu[-3%-asagi] PASSED                  [ 21%]
+tests/test_charts.py::test_delta_yonu[7 adet-yukari] PASSED              [ 21%]
+tests/test_charts.py::test_delta_yonu[abc-duz] PASSED                    [ 21%]
+tests/test_charts.py::test_tema_normalize[light-aydinlik] PASSED         [ 21%]
+tests/test_charts.py::test_tema_normalize[aydinlik-aydinlik] PASSED      [ 21%]
+tests/test_charts.py::test_tema_normalize[dark-karanlik] PASSED          [ 21%]
+tests/test_charts.py::test_tema_normalize[None-karanlik] PASSED          [ 21%]
+tests/test_charts.py::test_tema_normalize[x-karanlik] PASSED             [ 21%]
+tests/test_charts.py::test_tema_paleti_tokenlardan_gelir PASSED          [ 21%]
+tests/test_charts.py::test_kategori_rengi_eslesmesi PASSED               [ 21%]
+tests/test_charts.py::test_kpi_karti_html_xss_kacisi PASSED              [ 21%]
+tests/test_charts.py::test_kpi_karti_html_delta_renk_ve_ok PASSED        [ 21%]
+tests/test_charts.py::test_kpi_karti_html_kategori_ve_tema PASSED        [ 21%]
+tests/test_charts.py::test_kpi_karti_baslik_tek_satir_kalir PASSED       [ 21%]
+tests/test_charts.py::test_kpi_karti_html_sabit_genislik_yok PASSED      [ 21%]
+tests/test_charts.py::test_sparkline_fig_eksensiz_ve_seffaf PASSED       [ 21%]
+tests/test_charts.py::test_donut_fig_yapisi_ve_merkez_toplam PASSED      [ 21%]
+tests/test_charts.py::test_donut_fig_renkler_temadan PASSED              [ 21%]
+tests/test_charts.py::test_alan_grafigi_fig_yapisi PASSED                [ 21%]
+tests/test_charts.py::test_aktif_tema_streamlit_ayarindan PASSED         [ 21%]
+tests/test_charts.py::test_aktif_tema_context_oncelikli PASSED           [ 21%]
+tests/test_charts.py::test_kpi_karti_markdown_ve_sparkline PASSED        [ 21%]
+tests/test_charts.py::test_kpi_karti_sparkline_yoksa_grafik_cizmez PASSED [ 21%]
+tests/test_charts.py::test_kpi_karti_ozel_anahtar PASSED                 [ 21%]
+tests/test_charts.py::test_donut_bos_df_info PASSED                      [ 21%]
+tests/test_charts.py::test_donut_ve_alan_grafigi_plotly_cizer PASSED     [ 21%]
+tests/test_charts.py::test_plotly_yokken_fallback PASSED                 [ 21%]
+tests/test_chat_enricher.py::test_chat_tam_akim PASSED                   [ 21%]
+tests/test_chat_enricher.py::test_chat_json_blok_sarmali PASSED          [ 21%]
+tests/test_chat_enricher.py::test_chat_skills_str_ise_listeye_cevrilir PASSED [ 21%]
+tests/test_chat_enricher.py::test_chat_hatasinda_fallback_kullanilir PASSED [ 21%]
+tests/test_chat_enricher.py::test_chat_strict_mod_hata_firlatir PASSED   [ 21%]
+tests/test_chat_enricher.py::test_chat_json_parse_hatasinda_fallback PASSED [ 22%]
+tests/test_chat_enricher.py::test_fallback_sektor_bilisim PASSED         [ 22%]
+tests/test_chat_enricher.py::test_fallback_sektor_satis PASSED           [ 22%]
+tests/test_chat_enricher.py::test_fallback_sektor_belirsiz PASSED        [ 22%]
+tests/test_chat_enricher.py::test_fallback_skills_icerik_eslesmesi PASSED [ 22%]
+tests/test_chat_enricher.py::test_fallback_description_kesme PASSED      [ 22%]
+tests/test_chat_enricher.py::test_enrich_with_chat_mock_enricher PASSED  [ 22%]
+tests/test_chat_enricher.py::test_enrich_with_chat_bos_liste PASSED      [ 22%]
+tests/test_chat_enricher.py::test_enrich_with_chat_hata_toleransi PASSED [ 22%]
+tests/test_chat_enricher.py::test_json_cevir_duz PASSED                  [ 22%]
+tests/test_chat_enricher.py::test_json_cevir_gecersiz PASSED             [ 22%]
+tests/test_chat_enricher.py::test_json_cevir_bos PASSED                  [ 22%]
+tests/test_chat_enricher.py::test_enrich_skill_keywords_modulde_tanimli PASSED [ 22%]
+tests/test_chat_enricher.py::test_build_default_enricher_client_cagrilabilir PASSED [ 22%]
+tests/test_chat_enricher.py::test_available_fonksiyon_client_reddeder PASSED [ 22%]
+tests/test_chat_enricher.py::test_chat_sonuc_kontrol_karakteri_temizlenir PASSED [ 22%]
+tests/test_chat_table_stil.py::test_sohbet_tablo_stil_ajan_ve_onem_renklendirir PASSED [ 22%]
+tests/test_chat_table_stil.py::test_chat_ac_onem_alani_varsayilan_orta PASSED [ 22%]
+tests/test_churn.py::test_risk_etiketi_3sinyal_basit PASSED              [ 22%]
+tests/test_churn.py::test_risk_etiketi_3sinyal_3_sinyal PASSED           [ 22%]
+tests/test_ci_rastgele_sira.py::test_ci_konfigu_okunabilir PASSED        [ 22%]
+tests/test_ci_rastgele_sira.py::test_pytest_randomly_ci_test_jobunda_kuruluyor PASSED [ 22%]
+tests/test_ci_rastgele_sira.py::test_randomly_eklentisi_acikca_zorunlu_kilinmis PASSED [ 22%]
+tests/test_ci_rastgele_sira.py::test_rastgele_sira_kapatilmamis PASSED   [ 22%]
+tests/test_ci_rastgele_sira.py::test_yerel_konfig_rastgele_sirayi_kapatmiyor PASSED [ 22%]
+tests/test_ci_workflow.py::test_anlik_goruntu_yalniz_json_dosyalarini_alir PASSED [ 22%]
+tests/test_ci_workflow.py::test_anlik_goruntu_dizin_yoksa_bos PASSED     [ 22%]
+tests/test_ci_workflow.py::test_farklar_yeni_silindi_degisti PASSED      [ 22%]
+tests/test_ci_workflow.py::test_cli_snapshot_check_degisiklik_yoksa_0 PASSED [ 22%]
+tests/test_ci_workflow.py::test_cli_check_degisiklik_varsa_1_ve_error_annotasyonu PASSED [ 22%]
+tests/test_ci_workflow.py::test_ci_yml_gecerli_ve_test_isi_var PASSED    [ 22%]
+tests/test_ci_workflow.py::test_kapsam_esigi_85_altina_dusmez PASSED     [ 22%]
+tests/test_ci_workflow.py::test_pytest_komutu_sertlestirilmis PASSED     [ 22%]
+tests/test_ci_workflow.py::test_pytest_timeout_kuruluyor PASSED          [ 22%]
+tests/test_ci_workflow.py::test_pano_guard_snapshot_testten_once_check_sonra PASSED [ 22%]
+tests/test_ci_workflow.py::test_requirements_dev_pytest_timeout_icerir PASSED [ 22%]
+tests/test_cift_baslik.py::test_tarama_calisti PASSED                    [ 22%]
+tests/test_cift_baslik.py::test_h2_ardindan_h1_cizen_delegate_yok PASSED [ 22%]
+tests/test_cift_baslik.py::test_muaf_kayitlari_gercek_ve_gerekceli PASSED [ 22%]
+tests/test_cift_baslik.py::test_muaf_kaydi_hala_gerekli PASSED           [ 22%]
+tests/test_coverage_analitik.py::test_coverage_orani_bos_liste_sifir PASSED [ 22%]
+tests/test_coverage_analitik.py::test_coverage_orani_hedef_sifir_bolme_hatasi_yok PASSED [ 22%]
+tests/test_coverage_analitik.py::test_coverage_orani_yuzde_yuz PASSED    [ 22%]
+tests/test_coverage_analitik.py::test_coverage_orani_hedef_asimi_kirpilir PASSED [ 22%]
+tests/test_coverage_analitik.py::test_coverage_orani_yuvarlama_iki_ondalik PASSED [ 22%]
+tests/test_coverage_analitik.py::test_coverage_orani_none_girdiler PASSED [ 22%]
+tests/test_coverage_analitik.py::test_firma_nace_grubu[firma0-62] PASSED [ 22%]
+tests/test_coverage_analitik.py::test_firma_nace_grubu[firma1-63] PASSED [ 22%]
+tests/test_coverage_analitik.py::test_firma_nace_grubu[firma2-Yaz\u0131l\u0131m] PASSED [ 22%]
+tests/test_coverage_analitik.py::test_firma_nace_grubu[firma3-62] PASSED [ 22%]
+tests/test_coverage_analitik.py::test_firma_nace_grubu[firma4-62] PASSED [ 22%]
+tests/test_coverage_analitik.py::test_firma_nace_grubu[firma5-bilinmeyen] PASSED [ 22%]
+tests/test_coverage_analitik.py::test_firma_nace_grubu[firma6-bilinmeyen] PASSED [ 22%]
+tests/test_coverage_analitik.py::test_firma_nace_grubu[metin-bilinmeyen] PASSED [ 22%]
+tests/test_coverage_analitik.py::test_sektor_bazli_bos_liste_hedefler_sifir_oranla_doner PASSED [ 22%]
+tests/test_coverage_analitik.py::test_sektor_bazli_siralama_en_dusuk_once PASSED [ 23%]
+tests/test_coverage_analitik.py::test_sektor_bazli_hedefsiz_grup_listede_kalir PASSED [ 23%]
+tests/test_coverage_analitik.py::test_sektor_bazli_liste_tanimi_kabul_edilir PASSED [ 23%]
+tests/test_coverage_analitik.py::test_sektor_bazli_satir_anahtarlari PASSED [ 23%]
+tests/test_coverage_analitik.py::test_sektor_bazli_gecersiz_hedef_sifir_sayilir PASSED [ 23%]
+tests/test_coverage_analitik.py::test_coverage_ozeti_bos PASSED          [ 23%]
+tests/test_coverage_analitik.py::test_coverage_ozeti_en_dusuk_3_sektor PASSED [ 23%]
+tests/test_coverage_analitik.py::test_coverage_ozeti_hedefi_sifir_sektor_en_dusuk_listesine_girmez PASSED [ 23%]
+tests/test_coverage_analitik.py::test_coverage_ozeti_nace_gruplari_opsiyonel PASSED [ 23%]
+tests/test_coverage_analitik.py::test_hedef_nace_dosya_yoksa_esit_paylasim PASSED [ 23%]
+tests/test_coverage_analitik.py::test_hedef_nace_dosya_bozuksa_esit_paylasim PASSED [ 23%]
+tests/test_coverage_analitik.py::test_hedef_nace_dosya_bos_sozlukse_esit_paylasim PASSED [ 23%]
+tests/test_coverage_analitik.py::test_hedef_nace_esit_paylasim_grup_yoksa_bos PASSED [ 23%]
+tests/test_coverage_analitik.py::test_hedef_nace_dosya_hedefler_sarmali PASSED [ 23%]
+tests/test_coverage_analitik.py::test_hedef_nace_dosya_duz_sozluk PASSED [ 23%]
+tests/test_coverage_analitik.py::test_hedef_nace_dosya_liste_bicimi PASSED [ 23%]
+tests/test_coverage_analitik.py::test_hedef_nace_dosya_coverage_ozeti_ile_uyumlu PASSED [ 23%]
+tests/test_coverage_analitik.py::test_hedef_nace_repo_dosyasi_gecerli PASSED [ 23%]
+tests/test_d182_mimir.py::test_mimir_kanonik_ajan PASSED                 [ 23%]
+tests/test_d182_mimir.py::test_varsayilan_orkestrator_canonical PASSED   [ 23%]
+tests/test_d182_mimir.py::test_anahtar_dondur_env_gunceller PASSED       [ 23%]
+tests/test_d182_mimir.py::test_anahtar_dondur_env_yoksa_key_dosyasi PASSED [ 23%]
+tests/test_d190_mimir_rapor.py::test_architect_gorev_rapor_auto_yazilir PASSED [ 23%]
+tests/test_d190_mimir_rapor.py::test_code_gorev_rapor_yazilmaz PASSED    [ 23%]
+tests/test_d190_mimir_rapor.py::test_brief_yoksa_rapor_hala_yazilir PASSED [ 23%]
+tests/test_d190_mimir_rapor.py::test_trigger_onayla_rapor_tetikler SKIPPED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestAdminPanelWidget::test_render_chat_summary_imports PASSED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestAdminPanelWidget::test_widget_metrikler_fonksiyon PASSED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestAdminPanelWidget::test_widget_son_acik_sorunlar PASSED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestAdminPanelWidget::test_widget_tum_sorunlar_tablosu PASSED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestAdminPanelREST::test_rest_endpoint_health_check PASSED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestAdminPanelREST::test_rest_sorun_ac_payload PASSED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestAdminPanelREST::test_rest_sorun_oku_filtresi PASSED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestAdminPanelREST::test_rest_sorun_guncelle_payload PASSED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestUserAcceptanceCriteria::test_uac_1_metrikler_gorunuyor PASSED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestUserAcceptanceCriteria::test_uac_2_son_sorunlar_expander PASSED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestUserAcceptanceCriteria::test_uac_3_tum_sorunlar_tablosu PASSED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestUserAcceptanceCriteria::test_uac_4_sorun_acma_kapama_islemler PASSED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestAdminPanelRegression::test_regression_decision_tab_calisir PASSED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestAdminPanelRegression::test_regression_settings_tab_calisir PASSED [ 23%]
+tests/test_d192_admin_panel_uat.py::TestAdminPanelRegression::test_regression_reports_tab_calisir PASSED [ 23%]
+tests/test_d309_ders_kapisi.py::test_kapi_1_acik_borc_sahipsiz_kalmaz PASSED [ 23%]
+tests/test_d309_ders_kapisi.py::test_kapi_1_negatif_kontrol PASSED       [ 23%]
+tests/test_d309_ders_kapisi.py::test_kapi_2_karsilastigim_is_sahibi_yazili PASSED [ 23%]
+tests/test_d309_ders_kapisi.py::test_kapi_3_ihale_goc_hedefleri_ingilizce PASSED [ 23%]
+tests/test_d309_ders_kapisi.py::test_kapi_4_geri_alinan_deneme_kayitli PASSED [ 23%]
+tests/test_d309_ders_kapisi.py::test_d309_ders_kaydi_her_yerde_var PASSED [ 23%]
+tests/test_d309_ders_kapisi.py::test_kapi_5_karar_numarasi_tahsis_edilmis PASSED [ 23%]
+tests/test_d309_ders_kapisi.py::test_hafiza_tavani_asmiyor FAILED        [ 23%]
+
+================================== FAILURES ===================================
+_________________________ test_hafiza_tavani_asmiyor __________________________
+
+cls = <class '_pytest.runner.CallInfo'>
+func = <function call_and_report.<locals>.<lambda> at 0x0000023BE82B60C0>
+when = 'call'
+reraise = (<class '_pytest.outcomes.Exit'>, <class 'KeyboardInterrupt'>)
+
+    @classmethod
+    def from_call(
+        cls,
+        func: Callable[[], TResult],
+        when: Literal["collect", "setup", "call", "teardown"],
+        reraise: type[BaseException] | tuple[type[BaseException], ...] | None = None,
+    ) -> CallInfo[TResult]:
+        """Call func, wrapping the result in a CallInfo.
+    
+        :param func:
+            The function to call. Called without arguments.
+        :type func: Callable[[], _pytest.runner.TResult]
+        :param when:
+            The phase in which the function is called.
+        :param reraise:
+            Exception or exceptions that shall propagate if raised by the
+            function, instead of being wrapped in the CallInfo.
+        """
+        excinfo = None
+        instant = timing.Instant()
+        try:
+>           result: TResult | None = func()
+                                     ^^^^^^
+
+..\..\Programs\Python\Python312\Lib\site-packages\_pytest\runner.py:361: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+>       lambda: runtest_hook(item=item, **kwds),
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        when=when,
+        reraise=get_reraise_exceptions(item.config),
+    )
+
+..\..\Programs\Python\Python312\Lib\site-packages\_pytest\runner.py:250: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <HookCaller 'pytest_runtest_call'>
+kwargs = {'item': <Function test_hafiza_tavani_asmiyor>}
+
+    def __call__(self, **kwargs: object) -> Any:
+        """Call the hook.
+    
+        Only accepts keyword arguments, which should match the hook
+        specification.
+    
+        Returns the result(s) of calling all registered plugins, see
+        :ref:`calling`.
+        """
+        assert not self.is_historic(), (
+            "Cannot directly call a historic hook - use call_historic instead."
+        )
+        self._verify_all_args_are_provided(kwargs)
+        firstresult = self.spec.opts.get("firstresult", False) if self.spec else False
+        # Copy because plugins may register other plugins during iteration (#438).
+>       return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_hooks.py:512: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <_pytest.config.PytestPluginManager object at 0x0000023BEEE73C80>
+hook_name = 'pytest_runtest_call'
+methods = [<HookImpl plugin_name='threadexception', plugin=<module '_pytest.threadexception' from 'C:\\Users\\yasin\\AppData\\Lo...tIOWrapper name='nul' mode='r' encoding='utf-8'>> _state='suspended' _in_suspended=False> _capture_fixture=None>>, ...]
+kwargs = {'item': <Function test_hafiza_tavani_asmiyor>}, firstresult = False
+
+    def _hookexec(
+        self,
+        hook_name: str,
+        methods: Sequence[HookImpl],
+        kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        # called from all hookcaller instances.
+        # enable_tracing will set its own wrapping function at self._inner_hookexec
+>       return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_manager.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+hook_name = 'pytest_runtest_call'
+hook_impls = [<HookImpl plugin_name='threadexception', plugin=<module '_pytest.threadexception' from 'C:\\Users\\yasin\\AppData\\Lo...tIOWrapper name='nul' mode='r' encoding='utf-8'>> _state='suspended' _in_suspended=False> _capture_fixture=None>>, ...]
+caller_kwargs = {'item': <Function test_hafiza_tavani_asmiyor>}
+firstresult = False
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+                        res = hook_impl.function(*args)
+                        if res is not None:
+                            results.append(res)
+                            if firstresult:  # halt further impl calls
+                                break
+            except BaseException as exc:
+                exception = exc
+        finally:
+            if firstresult:  # first result hooks return a single value
+                result = results[0] if results else None
+            else:
+                result = results
+    
+            # run all wrapper post-yield blocks
+            for teardown in reversed(teardowns):
+                try:
+                    if exception is not None:
+                        try:
+                            teardown.throw(exception)
+                        except RuntimeError as re:
+                            # StopIteration from generator causes RuntimeError
+                            # even for coroutine usage - see #544
+                            if (
+                                isinstance(exception, StopIteration)
+                                and re.__cause__ is exception
+                            ):
+                                teardown.close()
+                                continue
+                            else:
+                                raise
+                    else:
+                        teardown.send(result)
+                    # Following is unreachable for a well behaved hook wrapper.
+                    # Try to force finalizers otherwise postponed till GC action.
+                    # Note: close() may raise if generator handles GeneratorExit.
+                    teardown.close()
+                except StopIteration as si:
+                    result = si.value
+                    exception = None
+                    continue
+                except BaseException as e:
+                    exception = e
+                    continue
+                _raise_wrapfail(teardown, "has second yield")
+    
+        if exception is not None:
+>           raise exception
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+hook_name = 'pytest_runtest_call'
+hook_impls = [<HookImpl plugin_name='threadexception', plugin=<module '_pytest.threadexception' from 'C:\\Users\\yasin\\AppData\\Lo...tIOWrapper name='nul' mode='r' encoding='utf-8'>> _state='suspended' _in_suspended=False> _capture_fixture=None>>, ...]
+caller_kwargs = {'item': <Function test_hafiza_tavani_asmiyor>}
+firstresult = False
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+                        res = hook_impl.function(*args)
+                        if res is not None:
+                            results.append(res)
+                            if firstresult:  # halt further impl calls
+                                break
+            except BaseException as exc:
+                exception = exc
+        finally:
+            if firstresult:  # first result hooks return a single value
+                result = results[0] if results else None
+            else:
+                result = results
+    
+            # run all wrapper post-yield blocks
+            for teardown in reversed(teardowns):
+                try:
+                    if exception is not None:
+                        try:
+>                           teardown.throw(exception)
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <_pytest.logging.LoggingPlugin object at 0x0000023BEFC5B530>
+item = <Function test_hafiza_tavani_asmiyor>
+
+    @hookimpl(wrapper=True)
+    def pytest_runtest_call(self, item: nodes.Item) -> Generator[None]:
+        self.log_cli_handler.set_when("call")
+    
+        with self._runtest_for(item, "call"):
+>           yield
+
+..\..\Programs\Python\Python312\Lib\site-packages\_pytest\logging.py:865: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+hook_name = 'pytest_runtest_call'
+hook_impls = [<HookImpl plugin_name='threadexception', plugin=<module '_pytest.threadexception' from 'C:\\Users\\yasin\\AppData\\Lo...tIOWrapper name='nul' mode='r' encoding='utf-8'>> _state='suspended' _in_suspended=False> _capture_fixture=None>>, ...]
+caller_kwargs = {'item': <Function test_hafiza_tavani_asmiyor>}
+firstresult = False
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+                        res = hook_impl.function(*args)
+                        if res is not None:
+                            results.append(res)
+                            if firstresult:  # halt further impl calls
+                                break
+            except BaseException as exc:
+                exception = exc
+        finally:
+            if firstresult:  # first result hooks return a single value
+                result = results[0] if results else None
+            else:
+                result = results
+    
+            # run all wrapper post-yield blocks
+            for teardown in reversed(teardowns):
+                try:
+                    if exception is not None:
+                        try:
+>                           teardown.throw(exception)
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <CaptureManager _method='fd' _global_capturing=<MultiCapture out=<FDCapture 1 oldfd=5 _state='suspended' tmpfile=<_io...._io.TextIOWrapper name='nul' mode='r' encoding='utf-8'>> _state='suspended' _in_suspended=False> _capture_fixture=None>
+item = <Function test_hafiza_tavani_asmiyor>
+
+    @hookimpl(wrapper=True)
+    def pytest_runtest_call(self, item: Item) -> Generator[None]:
+        with self.item_capture("call", item):
+>           return (yield)
+                    ^^^^^
+
+..\..\Programs\Python\Python312\Lib\site-packages\_pytest\capture.py:900: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+hook_name = 'pytest_runtest_call'
+hook_impls = [<HookImpl plugin_name='threadexception', plugin=<module '_pytest.threadexception' from 'C:\\Users\\yasin\\AppData\\Lo...tIOWrapper name='nul' mode='r' encoding='utf-8'>> _state='suspended' _in_suspended=False> _capture_fixture=None>>, ...]
+caller_kwargs = {'item': <Function test_hafiza_tavani_asmiyor>}
+firstresult = False
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+                        res = hook_impl.function(*args)
+                        if res is not None:
+                            results.append(res)
+                            if firstresult:  # halt further impl calls
+                                break
+            except BaseException as exc:
+                exception = exc
+        finally:
+            if firstresult:  # first result hooks return a single value
+                result = results[0] if results else None
+            else:
+                result = results
+    
+            # run all wrapper post-yield blocks
+            for teardown in reversed(teardowns):
+                try:
+                    if exception is not None:
+                        try:
+>                           teardown.throw(exception)
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+hook_impl = <HookImpl plugin_name='langsmith_plugin', plugin=<module 'langsmith.pytest_plugin' from 'C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\langsmith\\pytest_plugin.py'>>
+hook_name = 'pytest_runtest_call'
+args = [<Function test_hafiza_tavani_asmiyor>]
+
+    def run_old_style_hookwrapper(
+        hook_impl: HookImpl, hook_name: str, args: Sequence[object]
+    ) -> Teardown:
+        """
+        backward compatibility wrapper to run a old style hookwrapper as a wrapper
+        """
+    
+        teardown: Teardown = cast(Teardown, hook_impl.function(*args))
+        try:
+            next(teardown)
+        except StopIteration:
+            _raise_wrapfail(teardown, "did not yield")
+        try:
+            res = yield
+            result = Result(res, None)
+        except BaseException as exc:
+            result = Result(None, exc)
+        try:
+            teardown.send(result)
+        except StopIteration:
+            pass
+        except BaseException as e:
+            _warn_teardown_exception(hook_name, hook_impl, e)
+            raise
+        else:
+            _raise_wrapfail(teardown, "has second yield")
+        finally:
+            teardown.close()
+>       return result.get_result()
+               ^^^^^^^^^^^^^^^^^^^
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <pluggy._result.Result object at 0x0000023BE7AD53C0>
+
+    def get_result(self) -> ResultType:
+        """Get the result(s) for this hook call.
+    
+        If the hook was marked as a ``firstresult`` only a single value
+        will be returned, otherwise a list of results.
+        """
+        __tracebackhide__ = True
+        exc = self._exception
+        tb = self._traceback
+        if exc is None:
+            return cast(ResultType, self._result)
+        else:
+>           raise exc.with_traceback(tb)
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_result.py:103: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+hook_impl = <HookImpl plugin_name='langsmith_plugin', plugin=<module 'langsmith.pytest_plugin' from 'C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\langsmith\\pytest_plugin.py'>>
+hook_name = 'pytest_runtest_call'
+args = [<Function test_hafiza_tavani_asmiyor>]
+
+    def run_old_style_hookwrapper(
+        hook_impl: HookImpl, hook_name: str, args: Sequence[object]
+    ) -> Teardown:
+        """
+        backward compatibility wrapper to run a old style hookwrapper as a wrapper
+        """
+    
+        teardown: Teardown = cast(Teardown, hook_impl.function(*args))
+        try:
+            next(teardown)
+        except StopIteration:
+            _raise_wrapfail(teardown, "did not yield")
+        try:
+>           res = yield
+                  ^^^^^
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+hook_name = 'pytest_runtest_call'
+hook_impls = [<HookImpl plugin_name='threadexception', plugin=<module '_pytest.threadexception' from 'C:\\Users\\yasin\\AppData\\Lo...tIOWrapper name='nul' mode='r' encoding='utf-8'>> _state='suspended' _in_suspended=False> _capture_fixture=None>>, ...]
+caller_kwargs = {'item': <Function test_hafiza_tavani_asmiyor>}
+firstresult = False
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+                        res = hook_impl.function(*args)
+                        if res is not None:
+                            results.append(res)
+                            if firstresult:  # halt further impl calls
+                                break
+            except BaseException as exc:
+                exception = exc
+        finally:
+            if firstresult:  # first result hooks return a single value
+                result = results[0] if results else None
+            else:
+                result = results
+    
+            # run all wrapper post-yield blocks
+            for teardown in reversed(teardowns):
+                try:
+                    if exception is not None:
+                        try:
+>                           teardown.throw(exception)
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py:139: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+item = <Function test_hafiza_tavani_asmiyor>
+
+    @hookimpl(wrapper=True)
+    def pytest_runtest_call(item: Item) -> Generator[None]:
+        xfailed = item.stash.get(xfailed_key, None)
+        if xfailed is None:
+            item.stash[xfailed_key] = xfailed = evaluate_xfail_marks(item)
+    
+        if xfailed and not item.config.option.runxfail and not xfailed.run:
+            xfail("[NOTRUN] " + xfailed.reason)
+    
+        try:
+>           return (yield)
+                    ^^^^^
+
+..\..\Programs\Python\Python312\Lib\site-packages\_pytest\skipping.py:268: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+hook_name = 'pytest_runtest_call'
+hook_impls = [<HookImpl plugin_name='threadexception', plugin=<module '_pytest.threadexception' from 'C:\\Users\\yasin\\AppData\\Lo...tIOWrapper name='nul' mode='r' encoding='utf-8'>> _state='suspended' _in_suspended=False> _capture_fixture=None>>, ...]
+caller_kwargs = {'item': <Function test_hafiza_tavani_asmiyor>}
+firstresult = False
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+>                       res = hook_impl.function(*args)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py:121: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+item = <Function test_hafiza_tavani_asmiyor>
+
+    def pytest_runtest_call(item: Item) -> None:
+        _update_current_test_var(item, "call")
+        try:
+            del sys.last_type
+            del sys.last_value
+            del sys.last_traceback
+            if sys.version_info >= (3, 12, 0):
+                del sys.last_exc  # type:ignore[attr-defined]
+        except AttributeError:
+            pass
+        try:
+>           item.runtest()
+
+..\..\Programs\Python\Python312\Lib\site-packages\_pytest\runner.py:184: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Function test_hafiza_tavani_asmiyor>
+
+    def runtest(self) -> None:
+        """Execute the underlying test function."""
+>       self.ihook.pytest_pyfunc_call(pyfuncitem=self)
+
+..\..\Programs\Python\Python312\Lib\site-packages\_pytest\python.py:1707: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <HookCaller 'pytest_pyfunc_call'>
+kwargs = {'pyfuncitem': <Function test_hafiza_tavani_asmiyor>}
+
+    def __call__(self, **kwargs: object) -> Any:
+        """Call the hook.
+    
+        Only accepts keyword arguments, which should match the hook
+        specification.
+    
+        Returns the result(s) of calling all registered plugins, see
+        :ref:`calling`.
+        """
+        assert not self.is_historic(), (
+            "Cannot directly call a historic hook - use call_historic instead."
+        )
+        self._verify_all_args_are_provided(kwargs)
+        firstresult = self.spec.opts.get("firstresult", False) if self.spec else False
+        # Copy because plugins may register other plugins during iteration (#438).
+>       return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_hooks.py:512: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <_pytest.config.PytestPluginManager object at 0x0000023BEEE73C80>
+hook_name = 'pytest_pyfunc_call'
+methods = [<HookImpl plugin_name='python', plugin=<module '_pytest.python' from 'C:\\Users\\yasin\\AppData\\Local\\Programs\\Pyt...n' from 'C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\anyio\\pytest_plugin.py'>>]
+kwargs = {'pyfuncitem': <Function test_hafiza_tavani_asmiyor>}
+firstresult = True
+
+    def _hookexec(
+        self,
+        hook_name: str,
+        methods: Sequence[HookImpl],
+        kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        # called from all hookcaller instances.
+        # enable_tracing will set its own wrapping function at self._inner_hookexec
+>       return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_manager.py:120: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+hook_name = 'pytest_pyfunc_call'
+hook_impls = [<HookImpl plugin_name='python', plugin=<module '_pytest.python' from 'C:\\Users\\yasin\\AppData\\Local\\Programs\\Pyt...n' from 'C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\anyio\\pytest_plugin.py'>>]
+caller_kwargs = {'pyfuncitem': <Function test_hafiza_tavani_asmiyor>}
+firstresult = True
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+                        res = hook_impl.function(*args)
+                        if res is not None:
+                            results.append(res)
+                            if firstresult:  # halt further impl calls
+                                break
+            except BaseException as exc:
+                exception = exc
+        finally:
+            if firstresult:  # first result hooks return a single value
+                result = results[0] if results else None
+            else:
+                result = results
+    
+            # run all wrapper post-yield blocks
+            for teardown in reversed(teardowns):
+                try:
+                    if exception is not None:
+                        try:
+                            teardown.throw(exception)
+                        except RuntimeError as re:
+                            # StopIteration from generator causes RuntimeError
+                            # even for coroutine usage - see #544
+                            if (
+                                isinstance(exception, StopIteration)
+                                and re.__cause__ is exception
+                            ):
+                                teardown.close()
+                                continue
+                            else:
+                                raise
+                    else:
+                        teardown.send(result)
+                    # Following is unreachable for a well behaved hook wrapper.
+                    # Try to force finalizers otherwise postponed till GC action.
+                    # Note: close() may raise if generator handles GeneratorExit.
+                    teardown.close()
+                except StopIteration as si:
+                    result = si.value
+                    exception = None
+                    continue
+                except BaseException as e:
+                    exception = e
+                    continue
+                _raise_wrapfail(teardown, "has second yield")
+    
+        if exception is not None:
+>           raise exception
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+hook_name = 'pytest_pyfunc_call'
+hook_impls = [<HookImpl plugin_name='python', plugin=<module '_pytest.python' from 'C:\\Users\\yasin\\AppData\\Local\\Programs\\Pyt...n' from 'C:\\Users\\yasin\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\site-packages\\anyio\\pytest_plugin.py'>>]
+caller_kwargs = {'pyfuncitem': <Function test_hafiza_tavani_asmiyor>}
+firstresult = True
+
+    def _multicall(
+        hook_name: str,
+        hook_impls: Sequence[HookImpl],
+        caller_kwargs: Mapping[str, object],
+        firstresult: bool,
+    ) -> object | list[object]:
+        """Execute a call into multiple python functions/methods and return the
+        result(s).
+    
+        ``caller_kwargs`` comes from HookCaller.__call__().
+        """
+        __tracebackhide__ = True
+        results: list[object] = []
+        exception = None
+        try:  # run impl and wrapper setup functions in a loop
+            teardowns: list[Teardown] = []
+            try:
+                for hook_impl in reversed(hook_impls):
+                    try:
+                        args = [caller_kwargs[argname] for argname in hook_impl.argnames]
+                    except KeyError as e:
+                        # coverage bug - this is tested
+                        for argname in hook_impl.argnames:  # pragma: no cover
+                            if argname not in caller_kwargs:
+                                raise HookCallError(
+                                    f"hook call must provide argument {argname!r}"
+                                ) from e
+    
+                    if hook_impl.hookwrapper:
+                        function_gen = run_old_style_hookwrapper(hook_impl, hook_name, args)
+    
+                        next(function_gen)  # first yield
+                        teardowns.append(function_gen)
+    
+                    elif hook_impl.wrapper:
+                        try:
+                            # If this cast is not valid, a type error is raised below,
+                            # which is the desired response.
+                            res = hook_impl.function(*args)
+                            function_gen = cast(Generator[None, object, object], res)
+                            next(function_gen)  # first yield
+                            teardowns.append(function_gen)
+                        except StopIteration:
+                            _raise_wrapfail(function_gen, "did not yield")
+                    else:
+>                       res = hook_impl.function(*args)
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\Programs\Python\Python312\Lib\site-packages\pluggy\_callers.py:121: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+pyfuncitem = <Function test_hafiza_tavani_asmiyor>
+
+    @hookimpl(trylast=True)
+    def pytest_pyfunc_call(pyfuncitem: Function) -> object | None:
+        testfunction = pyfuncitem.obj
+        if is_async_function(testfunction):
+            async_fail(pyfuncitem.nodeid)
+        funcargs = pyfuncitem.funcargs
+        testargs = {arg: funcargs[arg] for arg in pyfuncitem._fixtureinfo.argnames}
+>       result = testfunction(**testargs)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\Programs\Python\Python312\Lib\site-packages\_pytest\python.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    def test_hafiza_tavani_asmiyor() -> None:
+        """Ajan hafizasi 200 satiri gecmemeli (tavan karari AGENTS.md'de)."""
+        n = len(_oku(HAFIZA).splitlines())
+>       assert n <= 200, "hafiza %d satir, tavan 200" % n
+E       AssertionError: hafiza 213 satir, tavan 200
+E       assert 213 <= 200
+
+tests\test_d309_ders_kapisi.py:139: AssertionError
+============================== warnings summary ===============================
+tests\test_secrets_rotation.py:174
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\tests\test_secrets_rotation.py:174: PytestUnknownMarkWarning: Unknown pytest.mark.integration - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+    @pytest.mark.integration
+
+tests/company_master/test_ankara_osb.py: 15 warnings
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\src\company_master\seed\seed_ankara_osb.py:148: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now = datetime.utcnow().isoformat()
+
+tests/company_master/test_web_app.py: 1 warning
+tests/test_api_integration.py: 2 warnings
+tests/test_benchmark.py: 100 warnings
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\web_app.py:3678: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    now_iso = datetime.utcnow().isoformat()
+
+tests/test_admin_ltv_cac.py::test_calculate_ltv_basic
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\web_app.py:3317: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_calculate_cac_basic
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\web_app.py:3356: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\web_app.py:3381: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff = datetime.utcnow() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_trend
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\web_app.py:3416: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    start_date = datetime.utcnow().date() - timedelta(days=days)
+
+tests/test_admin_ltv_cac.py::test_ltv_cac_by_tier
+  C:\Users\yasin\AppData\Local\Temp\wt_ci\web_app.py:3453: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+    cutoff_30 = datetime.utcnow() - timedelta(days=30)
+
+tests/test_auth_lockout.py: 10 warnings
+  C:\Users\yasin\AppData\Local\Programs\Python\Python312\Lib\site-packages\sqlalchemy\engine\default.py:952: DeprecationWarning: The default datetime adapter is deprecated as of Python 3.12; see the sqlite3 documentation for suggested replacement recipes
+    cursor.execute(statement, parameters)
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/test_d309_ders_kapisi.py::test_hafiza_tavani_asmiyor - Assertion...
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 1 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+==== 1 failed, 1303 passed, 10 skipped, 134 warnings in 157.50s (0:02:37) =====

@@ -1,0 +1,2 @@
+@echo off
+python "Huginn Data Insights\scripts\gorev_kutusu.py" ekle --task-id OSBUK-IZIN-DILEKCESI-TASLAK-01 --baslik "[VERI] OSBÜK izin dilekçesi taslağı (gönderilmez)" --sahip yasu --oncelik P3 --dosyalar docs/raporlar/OSBUK-OSBLISTESI-01_veri_seti_2026-10-21.md --brief plans/brief_yasu_OSBUK-IZIN-DILEKCESI-TASLAK-01.md --talimat "OSBÜK public liste var mı kontrol et, izin gerekliyse taslak yaz, gönderme" --mod code

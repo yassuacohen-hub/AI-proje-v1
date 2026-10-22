@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 25.13s
+[chore/monorepo-merge d7000d3c] docs(D-355): UI-HUB-4ARTI1-01 teslim kayitlari (SSOT + hub + hafiza)
+ 3 files changed, 21 insertions(+), 3 deletions(-)

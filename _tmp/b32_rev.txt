@@ -1,0 +1,12 @@
+bc68d90e 2026-10-16 03:55:21 +0300 Yasua Cohen | WEB-SSR-API-ANAHTAR-01 teslim (review) - pano
+772a2937 2026-10-16 03:54:09 +0300 Yasua Cohen | chore(chat): bilo->ihsan [WEB-SSR-API-ANAHTAR-01] (D-371)
+9a5a26e0 2026-10-16 03:53:09 +0300 Yasua Cohen | WEB-SSR-API-ANAHTAR-01 teslim (done) - SSR 200 + JSON-LD, ic anahtar ent_5025c6... (ilk 8: ent_5025c6), hugin-api/hugin-web rebuild
+c68e44d0 2026-10-16 03:26:53 +0300 Yasua | chore(chat): ihsan->bilo [D-371] (D-371)
+62078e7f 2026-10-16 03:26:20 +0300 Yasua | feat(chat): D-371 demir kural - uzak ajana chat otomatik commit+push (ihsan, PO emri)
+860b666a 2026-10-16 03:21:28 +0300 Yasua | chore(chat): B-32 A UYGULA karari + bilo toplu yanit + SMTP dogrulandi (ihsan)
+5c42bd7a 2026-10-16 01:24:45 +0300 Yasua | fix(kimlik_no): mersis_dogrula 0+VKN bicimini kabul et (ROBOLINK reddediliyordu) + VERI-GAZETE-OLCUM-01 brief Faz C alan kapsama listesi
+8f1259f3 2026-10-16 01:07:06 +0300 Yasua | fix(mersis_vkn_pipeline): TOBB Card02 alan eslemesi gercek semaya (sessiz bos sonuc hatasi) + VERI-GAZETE-OLCUM-01 bilo'ya atandi (PO onayi A)
+---SAYFA---  
+firma HTTP 200 15942B
+JSON-LD VAR  
+anahtarsiz /api HTTP 000

@@ -1,0 +1,16 @@
+914:## İkiz Yapı Yasağı (D-211 — KAHİN kararı 2026-09-26)
+956:Tek oturumda verilen üç KAHİN talimatı. Üçünün ortak ilkesi: **tek düğme, tek kalıp** — gizlemek/etiketlemek/renklendirmek için ikinci bir liste tutulmaz (D-211 ikiz yasağının UI karşılığı).
+996:- **İkiz çocuk temizliği (D-211 UI hâli):** `kpi` (ust=veri_kalite) ve `paketler` (ust=musteri_onizleme) çocuk kayıtları köküyle **aynı** `modul.fonksiyon` çiftini render ediyordu (`admin_kpi.render_kpi_tab`, `paketler.render_paketler_tab`) — tıklanabilir çift giriş, tek gerçek sayfa. Çocuk kayıtları silindi, `sira` boşlukları kapatıldı, `ESKI_URL["kpi"]`/`ESKI_URL["paketler"]` köke yönlendirir.
+999:- **`test_d214_kok_cocuk_ayni_renderer_yasak`:** kök ile çocuğunun aynı `(modul, fonksiyon)` çiftini render etmesi kalıcı olarak yasaklandı (D-211 kökler için de geçerli).
+1040:- Kanonik şablon **tek dosya**: `plans/_brief_sablon.md`. İkinci şablon dosyası açmak D-211 ihlali.
+1057:### İkiz şablon temizliği (D-211 uygulaması)
+1061:- **Referans:** D-66 (brifsiz atama yasak), D-210 (ajan chat), D-211 (ikiz yapı yasağı).
+1137:Bir tür için **tek** şablon: `_<tür>_sablon.md`. İkinci şablon (`*_TEMPLATE.md`, `*_v2.md`, `*_yeni.md`) açmak D-211 ikiz ihlalidir. Şablon yetersizse **şablon düzeltilir**, yenisi açılmaz.
+1161:**Referans:** D-211 (ikiz yapı yasağı), D-217 (tek brif şablonu), D-218 (Obsidyen grafiği), D-219 (ajan hafızası).
+1194:**Referans:** D-211 (ikiz yapı yasağı), D-222 (tek pano).
+1694:   komutu aynı gövdeyi çağırır; ikinci kopya yazmak D-211 ihlalidir.
+1720:- **Referans:** D-217 (brif şablonu), D-211 (ikiz gövde yasağı), D-221 (kök izin
+1791:- **Referans:** D-221 (kök politikası, mandalı bu kararla kuruldu), D-211 (kural
+1890:- **Referans:** D-242 (yedek tek çatı `yedekler/`), D-211 (kural çalıştırılabilir
+4332:- [`scripts/kilit_zorla.py:30`](scripts/kilit_zorla.py:30) ikiz `AJANLAR` tuple — **ölçüldü, D-211 ihlali değil**: docstring'i git kimliği çözümü için bilinçli olarak geniş kümeyi (`+orkestrator`) belgeliyor. [`scripts/ajan_kimligi.py:25`](scripts/ajan_kimligi.py:25) üçüncü kümeyi tutuyor (`+mimar`, `+orkestrator`) — birleştirme düşük değerli, borç defterinde kalır.
+4919:(D-211 ikiz yasağı; senaryo belgesi yalnız bu adrese yönlendirir).

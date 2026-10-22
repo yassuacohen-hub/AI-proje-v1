@@ -1,0 +1,22 @@
+1) gzip -> dosya acma
+   23832 KB, 0.2s
+2) initdb
+   rc= 1 ore2_i9vah_j1" exists but is not empty
+initdb: hint: If you want to create a new database system, either remove or empty the directory "C:/Users/yasin/AppData/Local/Temp/huginn_restore2_i9vah_j1" or run initdb with an argument other than "C:/Users/yasin/AppData/Local/Temp/huginn_restore2_i9vah_j1".
+
+3) pg_ctl start
+   rc= 1  pg_ctl: directory "C:/Users/yasin/AppData/Local/Temp/huginn_restore2_i9vah_j1" is not a database cluster directory
+
+4) createdb
+   rc= 2 psql: error: connection to server at "127.0.0.1", port 54330 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+5) psql -f dump.sql (timeout=240s)
+   bitti 2s, returncode=2, hata satiri=0
+   stdout_son: 
+   stderr_son: psql: error: connection to server at "127.0.0.1", port 54330 failed: Connection refused (0x0000274D/10061)
+	Is the server running on that host and accepting TCP/IP connections?
+
+6) SONUC:
+
+gecici kume silindi: C:\Users\yasin\AppData\Local\Temp\huginn_restore2_i9vah_j1 -- OK

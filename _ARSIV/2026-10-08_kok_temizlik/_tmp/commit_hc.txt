@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 23.78s
+[chore/monorepo-merge 60e9249e] hafiza: TEST-BACKLOG-CI-01 kapanis (82cc4a86), worktree tam kosu 3297 passed / 0 failed
+ 1 file changed, 2 insertions(+), 6 deletions(-)

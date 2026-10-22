@@ -1,0 +1,27 @@
+yazildi: c:\Huginn Data Projesi\Huginn Data Insights\data\orchestrator\nobet_modu.json
+UI-ADMIN-PANEL-TEMEL-REFERANS-01 utku -> index 0 (None)
+>> scripts/ajan_chat.py kapat UI-ADMIN-PANEL-TEMEL-REFERANS-01 0 --karar | rc 0
+✅ Kapatıldı: UI-ADMIN-PANEL-TEMEL-REFERANS-01 (durum=cozuldu)
+UI-ADMIN-PANEL-TEMEL-REFERANS-01 ihsan -> index 1 (None)
+>> scripts/ajan_chat.py guncelle UI-ADMIN-PANEL-TEMEL-REFERANS-01 1 --durum | rc 0
+✅ Güncellenmiş: UI-ADMIN-PANEL-TEMEL-REFERANS-01 → cozuldu
+>> scripts/ajan_nobet_kosucusu.py --durum | rc 0
+0261009_0110.txt
+  [2026-10-09 01:15:19] ihsan kademe=1 rc=0 sure=18sn dosya=ihsan_20261009_0115.txt
+  [2026-10-09 01:22:05] yasu kademe=1 rc=0 sure=123sn dosya=yasu_20261009_0120.txt
+  [2026-10-09 01:25:32] utku kademe=1 rc=0 sure=31sn dosya=utku_20261009_0125.txt
+  [2026-10-09 01:30:41] salih kademe=1 rc=0 sure=40sn dosya=salih_20261009_0130.txt
+
+== ZAMANLAYICI KAYITLARI ==
+  TaskName:      \HuginnData-AgentNobet-yasu
+  Next Run Time: 10.10.2026 08:20:00
+  Status:        Ready
+  TaskName:      \HuginnData-AgentNobet-utku
+  Next Run Time: 10.10.2026 08:25:00
+  Status:        Ready
+  TaskName:      \HuginnData-AgentNobet-salih
+  Next Run Time: 10.10.2026 08:30:00
+  Status:        Ready
+  TaskName:      \HuginnData-AgentNobet-ihsan
+  Next Run Time: 10.10.2026 08:35:00
+  Status:        Ready

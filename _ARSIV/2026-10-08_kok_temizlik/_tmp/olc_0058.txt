@@ -1,0 +1,14 @@
+company_locations: 17 (beklenen 17) True True
+company_events: 15 (beklenen 15) True
+company_legal_proceedings: 11 ['proceeding_id', 'company_id', 'request_type', 'concordat_type', 'court', 'decision_date', 'decision_no', 'start_date', 'end_date', 'source_record_id', 'created_at'] (beklenen 11)
+legal_proceedings kisit: [('c', 1), ('f', 2), ('p', 1), ('u', 1)] (beklenen c=1 f=2 p=1 u=1)
+indeks: 3 (beklenen 3)
+defter son: 0058_adres_hukuk_gazete.sql (beklenen 0058_adres_hukuk_gazete.sql)
+defter toplam: 58 (beklenen 58)
+CHECK tsg_pdf_hash hex64: kirildi (beklenen): IntegrityError (psycopg.errors.CheckViolation) new row for relation "company_events" 
+CHECK end>=start: kirildi (beklenen): IntegrityError (psycopg.errors.CheckViolation) new row for relation "company_legal_pr
+FK company_id: kirildi (beklenen): IntegrityError (psycopg.errors.ForeignKeyViolation) insert or update on table "compan
+NOT NULL address_detail: kirildi (beklenen): IntegrityError (psycopg.errors.NotNullViolation) null value in column "address_detail
+legal_proceedings satir (rollback sonrasi): 0
+tsg_pdf_hash='abc': 0
+OLCUM OK

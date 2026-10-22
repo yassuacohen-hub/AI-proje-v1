@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 27.20s
+[chore/monorepo-merge 08a76169] docs(hafiza): ihsan KALDIGIM YER — TEST-BACKLOG-CI-01 parti (a) 3e95b9e6
+ 1 file changed, 2 insertions(+)

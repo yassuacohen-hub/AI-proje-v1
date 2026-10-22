@@ -1,0 +1,11 @@
+ACTIVE TASKS (last 10):
+  UTKU-01 | utku | [UTKU] Veri şeması doğrulama - Core modülü (2s)
+  VERI-SEKTOR-01 | utku | [VERI] Sektor sozlugunu yaz → 9689 kayitta sektor alani (3s)
+  UI-ADMIN-PANEL-DENETIM-ALTYAPI | utku | Denetim sekmesi + st.dialog login + cache_resource bağlantı + data_edi
+  VERI-OZELLIK-MATRISI-SIM-01 | utku | [VERI] OZELLIK_MATRISI + PAKET_V2 + RAPOR_KREDI tek kaynak -> fiyat_ka
+  ALTYAPI-KONG-MULTISITE-01 | bilo | [ALTYAPI] Kong multisite routingu yaz -> 3 domain + SSL (1d)
+  ALTYAPI-ODEME-01 | yasu | [ALTYAPI] Odeme yiginini yaz -> iyzico + PayTR adapter (4d)
+  UI-TICARIRADAR-PANEL-01 | utku | [UI] Ticariradar ana panelini yaz -> app/panel + Tremor (5d)
+  VERI-INDIRIM-KODU-01 | utku | [VERI] Indirim kodu sistemini yaz -> 0062 + indirim.py (3d)
+  ALTYAPI-KUR-CEKICI-01 | ihsan | [ALTYAPI] USD/TL kur cekici + 5'e yuvarlama + 1 kredi=1 USD (S-9 cekic
+  GUVENLIK-TOBB-SIFRE-GOMULU-01 | utku | [GUVENLIK] tobb_api.py:135-136 gomulu TOBB kod/sifre varsayilani kaldi

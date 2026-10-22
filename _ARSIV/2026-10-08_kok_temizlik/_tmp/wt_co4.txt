@@ -1,0 +1,2 @@
+Previous HEAD position was da01bbcd chore(TEST-BACKLOG-CI-01-c): D-317 bayat tetik kapatildi - salih/TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01 pano done, tetik bekliyor->kapandi (tavan 0 korundu)
+HEAD is now at 41504a41 TEST-BACKLOG-CI-01 (c): tavan ihlalleri silindi — yasu hafiza 213->200, salih Ilgili Nodlar, borc defteri 2 kimlik, Kural 4 yasak ad 19->14 (5 git mv + baglantilar)

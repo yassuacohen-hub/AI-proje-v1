@@ -1,0 +1,45 @@
+URL_PREFIX postgresql
+OSBS_KOLONLAR:
+  osb_id | uuid | null=NO | def=gen_random_uuid()
+  name | text | null=NO | def=None
+  city | text | null=NO | def='Ankara'::text
+  district | text | null=YES | def=None
+  website | text | null=YES | def=None
+  osb_type | text | null=YES | def=None
+  status | text | null=YES | def='active'::text
+  source_id | uuid | null=YES | def=None
+  verified_at | timestamp with time zone | null=YES | def=None
+  created_at | timestamp with time zone | null=NO | def=now()
+  fiili_durum | text | null=NO | def='isletmede'::text
+OSBS_SATIR (15):
+  Anadolu Geri Dönüşümcüleri İhtisas OSB | Ankara | Sincan | ihtisas | active | None
+  Anadolu OSB | Ankara | Sincan | karma | active | https://anadoluosb.org.tr
+  Ankara Uzay ve Havacılık İhtisas OSB | Ankara | Yenimahalle | ihtisas | active | https://hab.org.tr
+  ASO 1. OSB | Ankara | Sincan | karma | active | https://aosb.org.tr
+  ASO 2-3 OSB | Ankara | Sincan | karma | active | https://aso2osb.org.tr
+  Başkent OSB | Ankara | Kazan | karma | active | https://baskentosb.org
+  Beypazarı OSB | Ankara | Beypazarı | karma | active | https://beyosb.org.tr
+  Çubuk TDİ Besi OSB | Ankara | Çubuk | ihtisas | active | https://cubuktdiosb.org
+  Dökümcüler OSB | Ankara | Sincan | ihtisas | active | https://dokumculerosb.org.tr
+  Elmadağ Mobilyacılar İhtisas OSB | Ankara | Elmadağ | ihtisas | active | https://mobilyacilarosb.com
+  İvedik OSB | Ankara | Yenimahalle | karma | active | https://ivedikosb.org.tr
+  OSTİM OSB | Ankara | Yenimahalle | karma | active | https://ostim.org.tr
+  Polatlı OSB | Ankara | Polatlı | karma | active | https://posb.org.tr
+  Polatlı Ticaret Odası OSB | Ankara | Polatlı | karma | active | https://ptoosb.org.tr
+  Şereflikoçhisar OSB | Ankara | Şereflikoçhisar | karma | active | https://sereflikochisarosb.org.tr
+FIRMA_SAYISI (osb bazinda):
+  OSTİM OSB: 8196
+  Elmadağ Mobilyacılar İhtisas OSB: 0
+  Ankara Uzay ve Havacılık İhtisas OSB: 0
+  Polatlı OSB: 0
+  Polatlı Ticaret Odası OSB: 0
+  Şereflikoçhisar OSB: 0
+  Anadolu Geri Dönüşümcüleri İhtisas OSB: 0
+  İvedik OSB: 0
+  Beypazarı OSB: 0
+  Anadolu OSB: 0
+  Başkent OSB: 0
+  ASO 1. OSB: 0
+  Dökümcüler OSB: 0
+  ASO 2-3 OSB: 0
+  Çubuk TDİ Besi OSB: 0

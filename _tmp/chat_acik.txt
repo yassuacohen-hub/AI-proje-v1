@@ -1,0 +1,14 @@
+📊 Ajan Chat Özeti:
+  🔴 Açık Sorunlar:      7
+  🟡 Çözüm Bekleniyor:   5
+  🟢 Çözüldü:            256
+  —————————————————————
+  Toplam:                268
+
+ACIK sorunlar (7):
+  1. [YASU] ALTYAPI-IZLEME-YEDEK-SSL-01: Yedek+izleme+SSL tamam: gunluk pg_dump + test rest
+  2. [YASU] ALTYAPI-KONG-MULTISITE-01: B-14 (ORTA): Docker Desktop motoru interaktif otur
+  3. [IHSAN] BILO-KARAR-B26-B29: KARAR (ihsan, PO yetkisiyle): B-29 golge RDP kural
+  4. [IHSAN] GUVENLIK-TOBB-SIFRE-GOMULU-01: IHSAN DUZELTME (RED-4 metnini yok say, iki hatam v
+  5. [IHSAN] API-HAVUZ-ARAMA-01: IHSAN DUZELTME (RED-1 metnindeki '8/8 test' iddias
+  ... ve 2 daha

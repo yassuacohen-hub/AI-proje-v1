@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 23.42s
+[chore/monorepo-merge 28e61530] hafiza: 12.2+12.3+12.4 kapanis (a1a1d3cf, b407e743), proje hub sidebar ile tek kaynak
+ 1 file changed, 1 insertion(+)

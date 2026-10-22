@@ -1,0 +1,31 @@
+Run started:2026-10-08 20:13:52.491590+00:00
+
+Test results:
+>> Issue: [B602:subprocess_popen_with_shell_equals_true] subprocess call with shell=True identified, security issue.
+   Severity: High   Confidence: High
+   CWE: CWE-78 (https://cwe.mitre.org/data/definitions/78.html)
+   More Info: https://bandit.readthedocs.io/en/1.9.4/plugins/b602_subprocess_popen_with_shell_equals_true.html
+   Location: src/company_master\telegram_bot.py:2692:8
+2691	        )
+2692	        subprocess.Popen(cmd, shell=True)
+2693	        bot.send_message(message.chat.id, "🔄 Streamlit yeniden başlatılıyor (~5-10 sn sürer).")
+
+--------------------------------------------------
+
+Code scanned:
+	Total lines of code: 34905
+	Total lines skipped (#nosec): 0
+	Total potential issues skipped due to specifically being disabled (e.g., #nosec BXXX): 0
+
+Run metrics:
+	Total issues (by severity):
+		Undefined: 0
+		Low: 185
+		Medium: 21
+		High: 1
+	Total issues (by confidence):
+		Undefined: 0
+		Low: 20
+		Medium: 1
+		High: 186
+Files skipped (0):

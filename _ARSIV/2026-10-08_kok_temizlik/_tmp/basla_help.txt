@@ -1,0 +1,6 @@
+usage: gorev_kutusu.py basla [-h] --ajan AJAN [--simulasyonsuz]
+
+options:
+  -h, --help       show this help message and exit
+  --ajan AJAN
+  --simulasyonsuz  D-198 simulasyon kapisini atla (kacis kapisi, D-65)

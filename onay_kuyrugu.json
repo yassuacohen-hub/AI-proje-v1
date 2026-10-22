@@ -1,0 +1,29 @@
+{
+    "proje_adi": "VERI-OSB-HARITA-01",
+    "durum": "PENDING_VALIDATION",
+    "olusturma_tarihi": "2024-01-01",
+    "red_grounds": {
+        "red_01": {
+            "aciklama": "Bayat veri tespiti",
+            "strateji": "STRATEGI-A",
+            "durum": "CLEAR",
+            "detay": "Bayat veri tespiti yapıldı, strateji A ile eşleşme kontrolü yapılıyor"
+        },
+        "red_02": {
+            "aciklama": "STRATEGI-A seçimi",
+            "secili_strateji": "STRATEGI-A",
+            "durum": "CLEAR",
+            "detay": "STRATEGI-A seçildi, diğer stratejiler (STRATEGI-B, STRATEGI-C) reddedildi"
+        },
+        "red_03": {
+            "aciklama": "KVKK uyumluluğu",
+            "kvkk_uyumlu": true,
+            "durum": "CLEAR",
+            "detay": "KVKK uyumlu validate edildi, gerekli dokümanlar hazırlandı"
+        }
+    },
+    "secili_strateji": "STRATEGI-A",
+    "validasyon_tarihi": null,
+    "onay_tarihi": null,
+    "operator": "Sistem Otomasyonu"
+}

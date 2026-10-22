@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_3b6963fe34d193b2dde7adb01ffa3ecb {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+</head>
+<body>
+    
+    
+            <div class="folium-map" id="map_3b6963fe34d193b2dde7adb01ffa3ecb" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_3b6963fe34d193b2dde7adb01ffa3ecb = L.map(
+                "map_3b6963fe34d193b2dde7adb01ffa3ecb",
+                {
+                    center: [37.8168, 33.18696],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 7,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_1c99043377c1d0d2f127e49b6c0a981b = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_1c99043377c1d0d2f127e49b6c0a981b.addTo(map_3b6963fe34d193b2dde7adb01ffa3ecb);
+        
+    
+            var tile_layer_b0e79ebb0e9773013be2eefb3d1f3be7 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "Map data \u0026copy; \u003ca href=\"https://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+  "controlType": "dropdown",
+}
+
+            );
+        
+    
+            tile_layer_b0e79ebb0e9773013be2eefb3d1f3be7.addTo(map_3b6963fe34d193b2dde7adb01ffa3ecb);
+        
+    
+            var tile_layer_411e3dfcad95eca173e390d3fe5beaba = L.tileLayer(
+                "https://stamen-tiles.a.ssl.fastly.net/terrain/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 18,
+  "maxNativeZoom": 18,
+  "noWrap": false,
+  "attribution": "Map tiles \u0026copy; \u003ca href=\"https://stamen.com\"\u003eStamen\u003c/a\u003e",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+  "controlType": "dropdown",
+}
+
+            );
+        
+    
+            tile_layer_411e3dfcad95eca173e390d3fe5beaba.addTo(map_3b6963fe34d193b2dde7adb01ffa3ecb);
+        
+    
+            var marker_0d18857508bd0061e2a8cfd0f1d70c07 = L.marker(
+                [36.9875, 35.3211],
+                {
+}
+            ).addTo(map_3b6963fe34d193b2dde7adb01ffa3ecb);
+        
+    
+            var icon_0138fee80ca860713a750e3439b4429b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "\ud83c\udfed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4664bf36ba9a38d208b9f262c93bfea4 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8d34ba1f9fcbe49b97cfc252f77f4a64 = $(`<div id="html_8d34ba1f9fcbe49b97cfc252f77f4a64" style="width: 100.0%; height: 100.0%;">         <b>OS:</b> AGİOSB<br>         <b>Fili Durumu:</b> FAALİYETTE<br>         <b>Firma Sayısı:</b> 30 firma<br>         <b>Şehir:</b> Adana<br>         <b>Tarih:</b> 2026-10-22 12:45         </div>`)[0];
+                popup_4664bf36ba9a38d208b9f262c93bfea4.setContent(html_8d34ba1f9fcbe49b97cfc252f77f4a64);
+            
+        
+
+        marker_0d18857508bd0061e2a8cfd0f1d70c07.bindPopup(popup_4664bf36ba9a38d208b9f262c93bfea4)
+        ;
+
+        
+    
+    
+            marker_0d18857508bd0061e2a8cfd0f1d70c07.bindTooltip(
+                `<div>
+                     AGİOSB - FAALİYETTE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0d18857508bd0061e2a8cfd0f1d70c07.setIcon(icon_0138fee80ca860713a750e3439b4429b);
+            
+    
+            var marker_a7f0189fd410a13ce9e3040f0df5bc60 = L.marker(
+                [36.8252, 35.3125],
+                {
+}
+            ).addTo(map_3b6963fe34d193b2dde7adb01ffa3ecb);
+        
+    
+            var icon_c02762f41a22133732adda49d2840544 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "\ud83c\udfed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_aa129550d31965afe420410947050555 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_13ac9b54d46d1a65370ab68f4a2fe8e7 = $(`<div id="html_13ac9b54d46d1a65370ab68f4a2fe8e7" style="width: 100.0%; height: 100.0%;">         <b>OS:</b> Hacı Sabancı<br>         <b>Fili Durumu:</b> FAALİYETTE<br>         <b>Firma Sayısı:</b> 525 firma<br>         <b>Şehir:</b> Adana<br>         <b>Tarih:</b> 2026-10-22 12:45         </div>`)[0];
+                popup_aa129550d31965afe420410947050555.setContent(html_13ac9b54d46d1a65370ab68f4a2fe8e7);
+            
+        
+
+        marker_a7f0189fd410a13ce9e3040f0df5bc60.bindPopup(popup_aa129550d31965afe420410947050555)
+        ;
+
+        
+    
+    
+            marker_a7f0189fd410a13ce9e3040f0df5bc60.bindTooltip(
+                `<div>
+                     Hacı Sabancı - FAALİYETTE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a7f0189fd410a13ce9e3040f0df5bc60.setIcon(icon_c02762f41a22133732adda49d2840544);
+            
+    
+            var marker_1c8777161a98d45e966d4c19add1d9b4 = L.marker(
+                [36.9142, 35.2987],
+                {
+}
+            ).addTo(map_3b6963fe34d193b2dde7adb01ffa3ecb);
+        
+    
+            var icon_c297929f2d3f507b7a07d7422df68864 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "\ud83c\udfed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_85db3052b094440d6d49f92ff36b6472 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fbb9717e0ad1b163c909974a6695367f = $(`<div id="html_fbb9717e0ad1b163c909974a6695367f" style="width: 100.0%; height: 100.0%;">         <b>OS:</b> Karataş TDİ<br>         <b>Fili Durumu:</b> FAALİYETTE<br>         <b>Firma Sayısı:</b> 25 firma<br>         <b>Şehir:</b> Adana<br>         <b>Tarih:</b> 2026-10-22 12:45         </div>`)[0];
+                popup_85db3052b094440d6d49f92ff36b6472.setContent(html_fbb9717e0ad1b163c909974a6695367f);
+            
+        
+
+        marker_1c8777161a98d45e966d4c19add1d9b4.bindPopup(popup_85db3052b094440d6d49f92ff36b6472)
+        ;
+
+        
+    
+    
+            marker_1c8777161a98d45e966d4c19add1d9b4.bindTooltip(
+                `<div>
+                     Karataş TDİ - FAALİYETTE
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1c8777161a98d45e966d4c19add1d9b4.setIcon(icon_c297929f2d3f507b7a07d7422df68864);
+            
+    
+            var marker_6b3f5724391acf56e012207f89e86b19 = L.marker(
+                [39.9334, 32.8597],
+                {
+}
+            ).addTo(map_3b6963fe34d193b2dde7adb01ffa3ecb);
+        
+    
+            var icon_630d5043e3e7c2f65cd8d444b1f893e9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "\ud83c\udfd7\ufe0f",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a379235722dceec840125607c2c9c17d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_443fa0c9a33bad4c69ca48ec5f70ee4c = $(`<div id="html_443fa0c9a33bad4c69ca48ec5f70ee4c" style="width: 100.0%; height: 100.0%;">         <b>OS:</b> Kaya OSB<br>         <b>Fili Durumu:</b> KAMULAŞTIRMA YAPILIYOR<br>         <b>Firma Sayısı:</b> 0 firma<br>         <b>Şehir:</b> Ankara<br>         <b>Tarih:</b> 2026-10-22 12:45         </div>`)[0];
+                popup_a379235722dceec840125607c2c9c17d.setContent(html_443fa0c9a33bad4c69ca48ec5f70ee4c);
+            
+        
+
+        marker_6b3f5724391acf56e012207f89e86b19.bindPopup(popup_a379235722dceec840125607c2c9c17d)
+        ;
+
+        
+    
+    
+            marker_6b3f5724391acf56e012207f89e86b19.bindTooltip(
+                `<div>
+                     Kaya OSB - KAMULAŞTIRMA YAPILIYOR
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6b3f5724391acf56e012207f89e86b19.setIcon(icon_630d5043e3e7c2f65cd8d444b1f893e9);
+            
+    
+            var marker_8829ebb9b66e6a922ff2f5029dfedd18 = L.marker(
+                [38.4237, 27.1428],
+                {
+}
+            ).addTo(map_3b6963fe34d193b2dde7adb01ffa3ecb);
+        
+    
+            var icon_22d52b513323d522f5a687c6e06a028a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "\ud83c\udfed",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_fc75fab4b81d5c9b1177077cde3b380d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_e705522c967fdab624a5ea88662794c4 = $(`<div id="html_e705522c967fdab624a5ea88662794c4" style="width: 100.0%; height: 100.0%;">         <b>OS:</b> Ege OSB<br>         <b>Fili Durumu:</b> İŞLETMEDE (FAALİYETTE)<br>         <b>Firma Sayısı:</b> 0 firma<br>         <b>Şehir:</b> İzmir<br>         <b>Tarih:</b> 2026-10-22 12:45         </div>`)[0];
+                popup_fc75fab4b81d5c9b1177077cde3b380d.setContent(html_e705522c967fdab624a5ea88662794c4);
+            
+        
+
+        marker_8829ebb9b66e6a922ff2f5029dfedd18.bindPopup(popup_fc75fab4b81d5c9b1177077cde3b380d)
+        ;
+
+        
+    
+    
+            marker_8829ebb9b66e6a922ff2f5029dfedd18.bindTooltip(
+                `<div>
+                     Ege OSB - İŞLETMEDE (FAALİYETTE)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8829ebb9b66e6a922ff2f5029dfedd18.setIcon(icon_22d52b513323d522f5a687c6e06a028a);
+            
+    
+            var layer_control_30c65d6b36c31808d28e3e6f1e7f63b4_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_1c99043377c1d0d2f127e49b6c0a981b,
+                    "OpenStreetMap" : tile_layer_b0e79ebb0e9773013be2eefb3d1f3be7,
+                    "Stamen Terrain" : tile_layer_411e3dfcad95eca173e390d3fe5beaba,
+                },
+                overlays :  {
+                },
+            };
+            let layer_control_30c65d6b36c31808d28e3e6f1e7f63b4 = L.control.layers(
+                layer_control_30c65d6b36c31808d28e3e6f1e7f63b4_layers.base_layers,
+                layer_control_30c65d6b36c31808d28e3e6f1e7f63b4_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": true,
+  "autoZIndex": true,
+}
+            ).addTo(map_3b6963fe34d193b2dde7adb01ffa3ecb);
+
+        
+</script>
+</html>

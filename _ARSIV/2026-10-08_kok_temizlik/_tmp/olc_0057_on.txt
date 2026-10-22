@@ -1,0 +1,4 @@
+tax_office dolu: (0, 10123)
+tro dolu: (25, 619)
+ornek: []
+sozluk n: [('tobb_company_type_group', 0), ('tobb_company_type', 0), ('tobb_status', 0), ('tobb_registry_office', 0), ('tobb_city', 0), ('tobb_representation_duty', 0), ('tobb_representation_authority', 0), ('tobb_representation_type', 0)]

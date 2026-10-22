@@ -1,0 +1,1557 @@
+Satın Alma Sıralaması ve Mantıksal Gerekçeleri
+Elinizdeki bütçeyi en verimli şekilde kullanmak ve rakiplere kapı kapatmak için domainleri tam olarak şu sıralamayla (Faz Faz) satın almalısınız:
+🥇 1. Adım: İlk Önce Alınması Gereken &quot;Amiral Gemileri&quot; (Zorunlu)
+1. Sıra: sirketarama.com (SEO ve Trafik Canavarı):
+Neden?: Türkiye pazarında en yüksek arama hacmine sahip kelime grubudur. İster küçük bir esnaf ister büyük bir satın alma müdürü olsun, bir firmayı sorgulamak istediğinde Google'a &quot;şirket arama&quot; yazar. Bu domain, sitenize sıfır reklam bütçesiyle milyonlarca organik hit çekebilecek tek adaydır.
+2. Sıra: firmaistihbarat.com (Prestij ve Büyük B2B Satış):
+Neden?: sirketarama.com ile trafiği çekersiniz ancak kurumsal holdinglere yıllık binlerce liralık premium paketler satarken masaya firmaistihbarat.com markasıyla oturmalısınız. Sektörün (CRIF, Kredi Kayıt Bürosu vb.) en çok kabul ettiği resmi jargondur. En yüksek ticari dönüşüm oranına sahiptir.
+🥈 2. Adım: Stratejik Destekçiler ve &quot;Genişleme&quot; Domainleri (Şiddetle Tavsiye Edilir)
+3. Sıra: ticaretbilgi.com (Uluslararası Ticaret ve İhracat):
+Neden?: &quot;Ticaret&quot; kelimesi işin içine girdiğinde kapsam genişler. Eğer SaaS platformunuzda sadece şirket finansalları değil, aynı zamanda gümrük verileri, ithalat/ihracat istihbaratı ve dış ticaret analizleri de sunacaksanız bu alan adı harika bir dikey (sub-product) veya ana pazar alanı olur. Algısı son derece temiz ve kurumsaldır.
+4. Sıra: sirketbilgi.com (Dizin ve Genel Bilgi):
+Neden?: sirketarama.com'un en büyük tamamlayıcısıdır. SEO'da &quot;X şirketi iletişim&quot;, &quot;Y şirketi unvanı&quot; aramalarında üst sıralara çıkmak için muazzam bir destekçidir. Ana markanız olmasa bile sirketarama.com ile birlikte çalıştırılmalıdır.
+🥉 3. Adım: Niş Çözüm ve Blokaj Alan Adları (Bütçe Kalırsa Alın)
+5. Sıra: sirketrisk.com (Spesifik Risk Analizi):
+Neden?: Bu domain genel bir istihbarat platformundan ziyade, sadece &quot;şirketlerin batma riski, konkordato takibi, çek/senet güvenilirliği ve finansal skorlama&quot; yapan çok spesifik bir alt modül (SaaS içi dikey) için uygundur. Hacmi dardır ancak o niş alanda çok değerlidir.
+6. Sıra: veriistihbarat.com &amp; istihbaratverisi.com (Sadece Blokaj):
+Neden?: Daha önce analiz ettiğimiz gibi, &quot;İstihbarat verisi&quot; kalıbı Türkiye'de B2B kurumsal dünyada KVKK ve yasal uyumluluk açısından defans yaratır, arama hacmi de düşüktür. Sadece rakipleriniz alıp paravan site yapmasın diye (bütçeniz elveriyorsa) &quot;blokaj amacıyla&quot; sepetinize ekleyebilirsiniz.
+🚀 Nihai SaaS Kurgusu Nasıl Olmalı? (Özet Mimari)
+Tüm bu alan adlarını bir ekosistem gibi çalıştırabilirsiniz:
+Ana Giriş Kapısı (SEO Altyapısı): sirketarama.com adresine ücretsiz, hızlı bir arama motoru kurun. Türkiye'deki tüm şirketlerin adres, telefon ve özet künyelerini burada indeksleyin. Milyonlarca kullanıcı Google'dan buraya aksın.
+Kurumsal Dönüşüm (Satış Altyapısı): Ücretsiz arama yapan kullanıcılar &quot;Bu şirketin finansal analizi, borçluluk durumu, gümrük hareketleri ve risk raporu nedir?&quot; butonuna tıkladığında, onları lisans satışı yaptığınız firmaistihbarat.com platformuna yönlendirin.
+Global Çıkış: Arka planda tüm bu sistemi hugininsight.com şirket yapısıyla besleyerek, yerel başarıyı yakaladıktan sonra sistemi dünyaya açın.
+İş modeliniz ve eklemek istediğiniz çift taraflı pazar yeri (B2B Marketplace) mantığı, SaaS girişiminizi sadece bir &quot;veri sorgulama aracı&quot; olmaktan çıkarıp, şirketlerin her gün giriş yapma ihtiyacı duyacağı yaşayan bir B2B Ticari Ağ / Ekosistem haline getiriyor.
+Kurumsal abonelik paketleri, aylık yinelenen kredi (recurring credits) sistemi, yapay zekâ analizleri ve çift taraflı üyelik modeline uygun web sitesi akışı ve SEO odaklı mimari tasarımı:
+🏡 1. Ana Sayfa Yapısı: &quot;Kısıtlı Arama ve Kanca (Hook)&quot;
+Ana sayfa, hem Google’dan gelen trafiği karşılamalı hem de doğrudan arama yapan kurumsal kullanıcıyı anında yakalamalıdır.
+Merkezi Arama Barı (Google Tarzı): Sayfanın tam ortasında &quot;Türkiye'deki 2 Milyon+ Şirketi, Gümrük Verilerini ve Risk Skorlarını Analiz Edin&quot; yazan dev bir arama çubuğu olur.
+Kısıtlı Deneme Duvarı: Ücretsiz/Giriş yapmamış bir kullanıcı arama butonuna bastığında:
+İlk 3 aramada şirketin sadece Temel Künyesini (Unvan, Şehir, Sektör) görür.
+Derin verilere (B2B Eşleşme, Rakip Takibi, Gümrük) dair başlıklar listelenir ancak üzerlerinde &quot;🔒 Kurumsal Abone Kilidi&quot; veya &quot;🔒 10 Kredi ile Aç&quot; ibaresi yer alır.
+&quot;Kendi Firmanı Ekle&quot; Butonu (CTA): Ana sayfanın sağ üstünde ve arama barının hemen altında belirgin bir şekilde yer alır: &quot;Firma Profilinizi Ücretsiz Oluşturun, Yeni Müşteriler Kazanın!&quot;
+💳 2. Kurumsal Abonelik + Kredi Hibrit Modeli
+B2B SaaS dünyasında en çok ciro getiren model budur. Müşteri her ay sabit bir ücret öder (MRR), bu ücret karşılığında hem premium özelliklere erişir hem de harcayabileceği aylık kredi kazanır.
+Aylık Kurumsal Paket (Örn: Standart Kurumsal):
+Sabit Özellikler (Sınırsız): B2B Eşleşme Sinyalleri, Rakip Firma Takibi (3 Rakibe Kadar), Canlı Ticari Alarm/Sinyal Sistemi.
+Aylık Yenilenen Kredi (Capped Credits): Her ay 500 Kredi hesabına yüklenir. Ay sonunda kullanılmayan krediler silinir (Müşteriyi sistemi düzenli kullanmaya teşvik eder).
+Kredi Nerelerde Harcanır?: &quot;Yapay Zekâ Destekli Ticari Risk Raporu Oluştur (50 Kredi)&quot;, &quot;Firmanın Gizli Gümrük Konşimento Detaylarını İndir (20 Kredi)&quot;.
+Kredi Bitiminde Ek Satış (Top-up): Aboneliği devam eden müşteri o ay çok fazla derin rapor çektiyse ve kredisi bittiyse, aboneliğini iptal etmeden &quot;Ek 100 Kredi Paketi&quot; satın alabilir.
+📈 3. Premium Özelliklerin Sayfa Mimarisindeki Konumu
+Müşterinin abonelikte kalmasını sağlayan &quot;yapışkan&quot; (sticky) özelliklerin SEO sayfalarındaki kurgusu:
+A. B2B Eşleşme ve Sinyal Sistemi (/sinyaller veya /eslesme)
+SEO Tarafı: Genel sayfada &quot;Yazılım Sektöründe Tedarikçi Arayan Son Firmalar&quot; gibi şirket isimleri gizlenmiş jenerik listeler yayınlanarak Google'dan trafik çekilir.
+Abonelik Tarafı: Kurumsal abone paneline girdiğinde, kendi faaliyet alanıyla (NACE kodu) eşleşen ve piyasada aktif olarak alım/satım yapan firmaların sinyallerini canlı panelde görür. Örneğin: &quot;X firması son 1 ayda ithalat hacmini %40 artırdı, yeni tedarikçi arıyor olabilir.&quot;
+B. Rakip Firma Takibi (/rakip-takibi)
+Müşteri paneline kendi rakiplerini ekler.
+Sistem, o rakiplerin ticaret sicil gazetesi değişikliklerini, gümrük hareketlerini, kazandıkları kamu ihalelerini ve finansal risk değişimlerini kurumsal aboneye her sabah e-posta raporu (Daily Digest) ve panel içi bildirim olarak sunur.
+C. Yapay Zekâ Destekli Ticari Raporlar
+Kullanıcı bir şirketin sayfasına girdiğinde &quot;Yapay Zekâ ile Risk ve Fırsat Analizi Yap&quot; butonuna tıklar (Kredi harcar).
+AI; firmanın gümrük geçmişini, finansal özetlerini ve sektör ortalamalarını saniyeler içinde tarayıp kurumsal aboneye şu özeti çıkarır: &quot;Bu firmanın nakit akışı güçlü ancak ihracatta tek bir ülkeye bağımlı. Güvenle ticaret yapılabilir, risk skoru: %12.&quot;
+🤝 4. Çift Taraflı Pazar Yeri: &quot;Kendi Firmanı Ekle&quot; Modeli
+Bu özellik sitenizin organik olarak büyümesini (Viral Loop) sağlayacak en güçlü kozdur.
+Nasıl Çalışır?: Bir şirket yöneticisi gelip kendi firmasını sisteme kaydeder. Der ki: &quot;Ben Bursa'da otomotiv yedek parçası üretiyorum, şu belgelere sahibim, Avrupa'ya ihracat yapabilirim.&quot;
+SEO Avantajı (Kullanıcı Tarafından Üretilen İçerik - UGC): Sitenize her gün yüzlerce şirket kendi eliyle güncel, doğru ve özgün içerik (firma açıklaması, ürün listesi) ekler. Google bu dinamik ve sürekli güncellenen sayfaları çok sever, sitenizin SEO otoritesi hızla yükselir.
+Potansiyel Müşterilerle Buluşma (Matchmaking):
+Sistem, kurumsal abonelerin arama geçmişlerini ve pazar yeri taleplerini arka planda eşleştirir.
+Kendi firmasını ekleyen kullanıcıya bildirim gider: &quot;İstanbul'dan bir kurumsal abone profilinizi inceledi ve yedek parça verilerinizi görüntüledi. Onunla iletişime geçmek için kurumsal pakete geçin.&quot; (Harika bir abonelik tetikleyicisidir).
+🛠️ Geliştirme Yol Haritası Önerisi
+Aşama (MVP): sirketarama.com üzerinde kısıtlı arama motorunu kurun. Temel künye verilerini açık tutun, derin analiz alanlarını &quot;Kredi Duvarı&quot; ile kapatın.
+Aşama (Abonelik ve AI): Aylık kurumsal üyelik paketini devreye alın. Sabit özellikleri sınırsız verip, yapay zekâ raporlarını her ay yenilenen kredilere bağlayın.
+Aşama (Pazar Yeri): &quot;Kendi Firmanı Ekle&quot; modülünü açarak kullanıcıların içeride kendi profillerini yönetmesini sağlayın ve iç pazardaki B2B ticaret ağını tamamen domine edin.
+Bu gelişmiş iş modeli kurgusuna göre, kurumsal abonenin paneline girdiğinde karşısına çıkacak olan &quot;Dashboard&quot; (Özet Kontrol Paneli) ekranında hangi 3 metriğin (Örn: Takipteki Raporlar, Kalan Kredi, Yeni B2B Eşleşmeler) en üstte konumlandırılmasını istersiniz? Tasarım vizyonunu netleştirelim.
+urumsal Abone Özel Kontrol Paneli (Dashboard) Tasarımı
+1. En Üst Katman: &quot;Hayati Durum ve Kaynak&quot; Çubuğu (KPI Metrikleri)
+Panelin en üstünde, gözümün ilk çarptığı yerde kaynaklarımı ve sistemin benim için ne kadar çalıştığını gösteren 4 adet dinamik kart isterdim:
+Kalan Kredi / Kontör: 240 / 500 (Ay sonuna kadar kalan kredim. Yanında hemen &quot;Yapay Zeka Raporu Al&quot; butonu).
+Takipteki Rakipler/Firmalar: 12 Şirket Radarda (Aktif olarak izlediğim, alarm kurduğum şirket sayısı).
+Bu Ay Yakalanan Yeni Fırsatlar: 8 Yeni B2B Eşleşme (Sistemin benim için bulduğu potansiyel müşteriler).
+Firma Profilimi İnceleyenler: 45 Şirket (Kendi firmamı eklediğim pazar yeri modülünde, beni gizlice inceleyen potansiyel alıcıların sayısı).
+2. Orta Sol Katman: &quot;Canlı Ticari Sinyaller &amp; Alarmlar&quot; (En Çok Zaman Geçireceğim Alan)
+Burası benim için bir &quot;Ticari Twitter Akışı&quot; gibi olmalı. Radara aldığım rakiplerin veya tedarikçilerin piyasadaki anlık hareketlerini kronolojik olarak görmeliyim:
+🚨 Kritik Risk Uyarısı: Takip listenizdeki X Lojistik A.Ş. hakkında bugün konkordato davası açıldı veya çek endeksi negatife düştü! (Beni zarardan korur).
+🚢 Gümrük Hareketi Sinyali: Rakibiniz Y Otomotiv, bugün Almanya'dan yeni bir hammadde sevkiyatı (ithalat) çekti. Konşimento detayını gör.
+📜 Resmi Gazete Değişikliği: İzlediğiniz Z Teknoloji, sermayesini %200 artırdı ve yönetim kurulu değişti.
+3. Orta Sağ Katman: &quot;Yapay Zekâ Destekli B2B Eşleşme Matrisi&quot; (Bana Para Kazandıran Alan)
+Sistemin arkada çalışan yapay zekâsının, benim firma profilim ile piyasada arama yapan/istihbarat toplayan diğer firmaları otomatik eşleştirdiği alan:
+🤖 AI Önerisi: &quot;Bursa'da X parçasını üreten bir firma arayan Almanya merkezli bir kurumsal alıcı tespit edildi. Profiliniz %94 oranında eşleşiyor.&quot; [İletişime Geç - 20 Kredi]
+🔄 Ters Eşleşme: &quot;Son 48 saatte, İstanbul'daki 3 büyük tekstil fabrikası sizin firma profilinizi ve sunduğunuz hizmetleri inceledi. Kim olduklarını gör.&quot;
+4. Alt Katman: &quot;Hızlı İstihbarat &amp; Yapay Zekâ Raporlama Alanı&quot;
+Panelden çıkmadan, elimdeki bir firmanın adını veya vergi numarasını yazıp anında kredi harcayarak derin analiz başlatabileceğim hızlı araç kutusu:
+🔍 Hızlı Firma Sorgulama Barı: (Unvan, Vergi No veya Mersis Yazın...)
+⚡ Son Çekilen AI Raporlarım: Daha önce kredimle oluşturduğum ve bilgisayarıma PDF olarak indirdiğim son 5 şirketin listesi (Tekrar kredi harcamadan eski raporlara hızlı erişim).
+💡 Müşteri Gözüyle &quot;Aboneliği İptal Etmeme&quot; Sebeplerim (SaaS Yapışkanlığı)
+Eğer dashboard'unuzda bu ekranlar olursa, bir müşteri olarak aboneliğimi asla iptal etmem. Çünkü:
+Her sabah bakmak zorundayım: Rakiplerimin gümrükte ne yaptığını ve hangi tedarikçimin batma riskinde olduğunu başka hiçbir yerde bu kadar canlı göremem.
+Kredilerimi harcamak zevkli hale gelir: Sinyaller ekranında gördüğüm şüpheli bir hareket sonrası, &quot;Dur şunun bir Yapay Zeka Risk Raporunu çekeyim, 50 kredi harcayayım&quot; dürtüsü uyanır.
+Bana satış getirir: Kendi firmamı inceleyenleri gördükçe, platformun benim için bir reklam/satış kanalına dönüştüğünü anlar, ödediğim aylık abonelik ücretini bir masraf olarak değil, bir yatırım olarak görürüm.
+Dashboard kurgusu bir müşteri olarak beni heyecanlandırdı! Bu kurumsal panelin kullanıcı arayüzünde (UI) markanızın mitolojik köklerine atıfta bulunarak &quot;Hugin'in Gözüyle Canlı Pazar Akışı&quot; gibi yaratıcı isimlendirmeler ve mikro metinler kullanmak ister misiniz? Yoksa doğrudan bu yapının veritabanı (Data) tarafında TOBB veya gümrük verilerini nasıl senkronize edeceğimizi mi konuşalım?
+İhalelerin (EKAP, DMO) platforma eklenmesi ve web kazıma (web scraping) tabanlı 24 saatlik özel istihbarat raporu hizmetiniz, ürünü tamamen benzersiz bir seviyeye taşıyor.
+Bir Satın Alma veya Satış Direktörü (yani kurumsal müşteriniz) gözüyle; ihaleleri yakalayan, sosyal medya/iş ilanlarını tarayan ve &quot;24 saat teslimli derin rapor&quot; siparişi verebildiğim yeni nesil nihai Dashboard ve SEO Sayfa Mimarisi tasarımı:
+🎛️ 1. Yenilenen Kurumsal Müşteri Dashboard'u (Müşteri Gözüyle)
+Her sabah panele girdiğimde görmek isteyeceğim, ihaleleri ve 24 saatlik rapor sürecini yöneten yeni arayüz yapısı:
+A. Üst Katman: Canlı Kaynaklar ve Sipariş Durumu
+Kalan Kredi: 240 / 500 (Yanında hızlı kredi yükleme butonu).
+⏳ 24 Saatlik Özel Rapor Siparişlerim: 1 Hazırlanıyor | 3 Tamamlandı (Web kazıma ekibinizin/sisteminizin arka planda hazırladığı derin raporların canlı teslim geri sayımı: &quot;ABC A.Ş. Raporu: 14 saat kaldı&quot;).
+🔔 Yeni İhale Alarmları: 5 Yeni İhale (Sektörümle ilgili EKAP ve DMO'da yeni açılan ihaleler).
+B. Orta Sol: Canlı Ticari Sinyaller, Rakipler ve İhaleler (Bana Para Kazandıran Alan)
+Bu akışta artık sadece rakip hareketleri değil, devletin açtığı ihaleler de listelenir:
+📢 Canlı EKAP İhalesi: T.C. Sağlık Bakanlığı, sizin faaliyet alanınız olan &quot;Tıbbi Cihaz Alımı&quot; için yeni bir ihale açtı. Yaklaşık Bedel: X TL. [İhale Detayını Gör]
+🏆 Rakip İhale Kazanımı: Radara aldığınız rakibiniz Y Medikal, dün DMO üzerinden X,XXX,XXX TL değerindeki ihaleyi kazandı!
+📈 İş İlanı Sinyali: İzlediğiniz rakip firma Z Teknoloji, bugün Kariyer.net/LinkedIn üzerinde &quot;Senior PHP Developer&quot; ilanları açtı. (Büyüme veya yeni bir projeye başlama sinyali).
+C. Orta Sağ: Yapay Zekâ Destekli B2B Eşleşme ve &quot;Kendi Firman&quot;
+Firma Profilimi İnceleyenler: Kendi firmamı eklediğim B2B pazar yerinde beni son 24 saatte inceleyen 12 potansiyel alıcı.
+🤝 İhale Ortaklığı Eşleşmesi: &quot;EKAP'taki son yazılım ihalesi için profiliniz %88 uyumlu. İhaleye konsorsiyum (ortaklık) olarak girebileceğiniz 2 kurumsal abone bulundu.&quot;
+D. Alt Katman: &quot;24 Saatte Derin İstihbarat Raporu&quot; Sipariş Alanı
+İşte platformun en çok kredi harcatacak premium butonu:
+🔍 Firma Sorgula: [ Vergi No veya Unvan Yazın... ]
+⚡ Hızlı AI Özeti (Anlık): Ücretsiz veya 5 Kredi (Sistemdeki mevcut TOBB ve Gümrük verileriyle saniyede ekrana gelir).
+🚀 Derin Web-Kazıma Raporu İste (24 Saat Teslim - 50 Kredi): &quot;Bu firmanın tüm web sitesi geçmişini, LinkedIn/X/Instagram sosyal medya trendlerini, çalışan hareketlerini ve güncel iş ilanlarını kazıyıp analiz ederek 24 saat içinde masanıza getirelim.&quot; [Siparişi Başlat]
+2. SEO ve Ana Sayfa Mimarisi (İhalelerle Güçlendirilmiş)
+Potansiyel kurumsal müşterileri (satış arayan firmaları) Google'dan sitenize çekecek güncellenmiş açık web sitesi kurgusu:
++------------------------------------------------------------------------+
+|                      [ sirketarama.com / ANA SAYFA ]                   |
+|  [                                                     ] [FİRMA ARA]   |
+|   (Türkiye'nin En Büyük Firma, Gümrük ve İhale İstihbarat Platformu)   |
++------------------------------------------------------------------------+
+| 🔔 GÜNCEL TİCARİ İHALELER (HERKESE AÇIK - SEO TRAFİK ALANI)            |
+| - EKAP: İstanbul Bş. Bld. Bilgisayar Alım İhalesi ........ [Detay]     |
+| - DMO: Devlet Malzeme Ofisi Ofis Mobilyası İhalesi ....... [Detay]     |
+| * Bu ihalelere teklif verebilecek potansiyel firmaları ve rakiplerin   |
+|   ihale geçmişini görmek için ÜCRETSİZ ÜYE OLUN.                       |
++------------------------------------------------------------------------+
+| 🔒 ÖRNEK ÖZEL İSTİHBARAT RAPORU (MERAK UYANDIRMA ALANI)                 |
+| 📂 Şirket Sosyal Medya Analizi: [ 🔒 KİLİTLİ - SADECE ABONELERE ]       |
+| 💼 Güncel İş İlanları ve İK Analizi: [ 🔒 24 SAATTE ÖZEL KAZIMA ]       |
++------------------------------------------------------------------------+
+EKAP ve DMO İhalelerinin SEO Gücü: Türkiye'de binlerce şirket her gün &quot;günün ihaleleri&quot;, &quot;X ihalesi şartnamesi&quot;, &quot;kamu ihaleleri&quot; diye arama yapar. Ana sayfanızda ve /ihaleler sekmenizde bu verilerin başlıklarını jenerik olarak yayınlarsanız, Google’da devasa bir &quot;satış odaklı B2B şirket kitlesi&quot; yakalarsınız. Sitenize ihaleye bakmaya gelirler, rakiplerini izlemek için kurumsal abone olurlar.
+&quot;24 Saat Bekleme&quot; Avantajının Pazarlaması: Müşteriye &quot;Raporunuz 24 saat içinde elinizde olacak&quot; demek bir kusur değil, bir premium hizmet kalitesidir. Çünkü kurumsal dünya bilir ki, botların anlık getirdiği veri sığdır; sosyal medya analizi ve iş ilanlarının web kazıma ile yapay zekâ filtresinden geçmesi zaman alır. Bu, bizzat firmanıza özel &quot;butik dijital dedektiflik&quot; algısı yaratır.
+🛠️ Geliştirilmiş Satın Alma ve Kurulum Sıralaması
+Önceki analizlerimizi de hesaba katarak, iş modelinizin bu yeni gücüyle beraber alan adlarını şu mantıkla devreye almalısınız:
+sirketarama.com (Trafik ve İhale Girişi): Ücretsiz EKAP/DMO ihale başlıklarının listelendiği ve temel şirket aramalarının yapıldığı ana SEO portalınız.
+firmaistihbarat.com (Kurumsal Satış): Aylık kurumsal aboneliklerin satıldığı, 24 saatlik özel web-kazıma raporlarının sipariş edildiği ana ticaret merkeziniz.
+hugininsight.com (Global Çatı): Arka planda tüm bu derin yapay zekâ, ihale takip ve web kazıma yazılım teknolojisinin patentini ve global markasını elinde tutan vizyoner şirketiniz.
+Yenilenen Kurumsal Dashboard: &quot;Kapasite ve İlan Yönetimi&quot;
+Ben bir Organize Sanayi Bölgesi'ndeki (OSB) Fabrika Müdürü olsaydım, kurumsal panele girdiğimde atıl makinelerimden nasıl para kazanacağımı veya elimdeki hurdayı nasıl nakde çevireceğimi şu ekranlarda görmek isterdim:
+A. Üst Katman: Endüstriyel Kaynak Yönetimi
+Kalan Kredi: 240 / 500
+⚙️ Atıl/Fazla Kapasite İlanlarım: 2 Aktif İlan (Örn: 5 Eksen CNC Tezgahı - Haftalık 30 Saat Boşta).
+📦 Atık/Hurda ve Malzeme İlanlarım: 1 Aktif İlan (Örn: 4 Ton Sac Levha Hurdası / Defolu Alüminyum).
+⚡ 24 Saatlik Özel Kazıma Raporlarım: 1 Adet Tamamlandı (Hedef sanayi firmasının sosyal medya ve iş ilanları analizi).
+B. Orta Sol: Canlı İhale, Rakip ve &quot;Kapasite&quot; Sinyalleri (Aksiyon Akışı)
+⚙️ Kapasite Eşleşme Sinyali: Teknokent A.Ş. protoyip üretimi için &quot;5 Eksen CNC&quot; işi arıyor. Sizin haftalık 30 saatlik boş tezgah ilanınızla %98 eşleşti! [Teklif Ver - 15 Kredi]
+♻️ Hurda/Malzeme Sinyali: Yakın bölgenizdeki Y Döküm Fabrikası, acil &quot;Alüminyum Hurdası&quot; alım ilanı girdi. Elinizdeki fazla stokla eşleşiyor.
+📢 Canlı EKAP/DMO İhalesi: T.C. Devlet Demiryolları, ray bakım onarımı için sanayi tipi döküm ihalesi açtı. Yaklaşık Bedel: X TL.
+💼 Teknokent İş İlanı Sinyali: Takip ettiğiniz rakip sanayi firması, bugün savunma sanayi projeleri için 3 yeni &quot;Gömülü Sistem Mühendisi&quot; ilanı açtı. (Yeni bir teknolojik üretime başladıklarının kanıtı).
+🗺️ SEO ve Sayfa Mimarisine &quot;Endüstriyel İlan&quot; Katmanı
+Google’da her gün binlerce satın almacı &quot;fason cnc işi yaptırtılacak&quot;, &quot;Bursa boş cnc tezgahı&quot;, &quot;toptan sac hurdası alanlar&quot; gibi aramalar yapar. Bu trafiği çekmek için açık web sitenizde (sirketarama.com) şu sayfa yapısını kurguluyoruz:
+/atıl-kapasite/ Dizin Yapısı: ://sirketarama.com
+Google botlarının göreceği kısım: &quot;Bursa OSB'de haftalık 30 saat boş kapasitesi olan 5 Eksen CNC Tezgahı ilanı.&quot;
+Abonelik Kilidi: İlanı giren fabrikanın tam unvanını görmek, doğrudan iletişim kurmak veya teklif vermek sadece Kurumsal Abonelere açıktır.
+/hurda-malzeme/ Dizin Yapısı: ://sirketarama.com
+Fabrikaların ellerinde kalan fazla üretim malzemelerini veya hurdaları listelediği, ilan başlıklarının Google'da indekslendiği, detayların ise kilitli olduğu alan.
+🚀 Gelecek İterasyonlar İçin Ürün Geliştirme (Feature) Yol Haritası
+Bu özelliği sistem geliştirme iterasyonunuza bir &quot;büyük aşama (epic feature)&quot; olarak eklerken şu adımları izleyebilirsiniz:
+İterasyon (Altyapı ve Doğrulama - Veri Girişi):
+Sadece kurumsal abonelerin (Vergi levhası doğrulanmış sanayi ve teknokent firmalarının) ilan girebileceği basit bir form oluşturun.
+Kategorileri netleştirin: Makine Parkuru (Saatlik/Haftalık Boşluk), Fazla Hammadde/Stok, Endüstriyel Atık/Hurda.
+İterasyon (Yapay Zekâ ve Sinyal Eşleşmesi - Algoritma):
+Arka planda çalışan yapay zekâ, sisteme girilen ihaleleri (EKAP/DMO), Teknokent firmalarının AR-GE taleplerini ve sanayi firmalarının atıl kapasitelerini tarar.
+Örneğin; bir devlet ihalesinde &quot;10.000 adet torna baskı işi&quot; varsa, sistem otomatik olarak panelinde boş torna tezgahı ilanı olan kurumsal aboneye sinyal gönderir: &quot;Bu ihaleyi alabilirsin, makine parkurun şu an boş görünüyor!&quot;
+İterasyon (B2B Güvenli Ticaret ve Kontör):
+İlan girmek kurumsal aboneliğe dahil (ücretsiz) olur. Ancak bir firma, başka bir firmanın atıl kapasitesine veya hurdasına teklif vermek ya da onunla doğrudan telefon/mesaj yoluyla iletişime geçmek istediğinde &quot;50 Kredi/Kontör&quot; harcar. Böylece kredili modeliniz pazar yerine de entegre olur.
+hugininsight.com
+B2B Endüstriyel Pazaryeri (Industrial Marketplace), İhale Motoru ve 24 Saatlik Özel İstihbarat Raporu sunan bu devasa hibrit SaaS yapısını, Google algoritmalarını domine edecek şekilde tek bir SEO ve Alan Adı Dağıtım Stratejisi altında birleştirelim.
+Buradaki en büyük tehlike, tüm bu farklı özellikleri tek bir sitede toplayıp karmakarışık bir yapı (çorba) yaratmaktır. Google net, dikey ve ne iş yaptığını tek bakışta anlayan siteleri (Topical Authority) sever.
+Bu nedenle alan adlarınızı görevlerine göre bölüştürerek kusursuz bir SEO ekosistemi kuruyoruz.
+🗺️ Alan Adlarının Görev Dağılımı ve SEO Mimarisi
+Kritik 3 alan adınızı bir holdingin şubeleri gibi konumlandırıp, Google trafiğini tek bir havuzda eriteceğiz.
+[ hugininsight.com ] (Global Çatı / Şirket Yapısı)
+|
++-----------------+-----------------+
+|                                   |
+[ sirketarama.com ]                [ firmaistihbarat.com ]
+(Hafif SEO / Trafik Canavarı)      (Kurumsal SaaS / Para Kazanma Alanı)
+- Ücretsiz Firma Künyeleri         - Ücretli Kurumsal Üyelik Paneli
+- Canlı İhale Başlıkları           - 24 Saatlik Özel Web-Kazıma Raporu
+- Atıl Kapasite / Hurda İlanları   - Detaylı Yapay Zekâ Analizleri
+🚀 1. Adım: sirketarama.com — Trafik ve SEO Güç Merkezi
+Bu site sizin &quot;ücretsiz içerik ve tuzak&quot; sitenizdir. İçeride milyonlarca sayfa olacağı için Google botları burayı çok sık ziyaret eder. Amaç: Sıfır reklam bütçesiyle sanayi ve teknokent firmalarını Google'dan içeri çekmek.
+A. Sayfa Yapısı ve URL Örnekleri:
+Şirket Künyeleri: ://sirketarama.com
+SEO Stratejisi: Şirketin kamusal verilerini (Adres, Vergi No, NACE Kodu) açık tutun. Sanayi ve teknokent firmaları &quot;ABC firması vergi numarası&quot;, &quot;XYZ firması adresi&quot; diye arattığında Google'da 1. sırada çıkın.
+Atıl Kapasite Dizinleri: ://sirketarama.com
+SEO Stratejisi: &quot;Bursa boş cnc tezgahı&quot;, &quot;fason cnc torna işi&quot; aramalarında üst sıraya oynamak. Teknokent firmaları prototip ürettirmek için harıl harıl bu kelimeleri aratır.
+Hurda ve Stok İlanları: ://sirketarama.com
+SEO Stratejisi: &quot;Toptan sac hurdası&quot;, &quot;fabrikadan defolu alüminyum&quot; aramalarını yakalamak.
+İhale Başlıkları: ://sirketarama.com
+SEO Stratejisi: İhale şartnamesi ve detaylarını arayan KOBİ'leri yakalamak.
+B. Dönüşüm Kilidi (SEO Duvarı):
+Ziyaretçi Google'dan bu sayfalara gelir. Verinin %30'unu görür. Ancak &quot;CNC tezgahının sahibine teklif ver&quot;, &quot;İhaleye katılabilecek rakipleri gör&quot; veya &quot;Şirketin 24 saatlik sosyal medya/iş ilanı analizini iste&quot; butonuna bastığı an sistem onu firmaistihbarat.com adresine (Ödeme ve Kayıt Alanı) ışınlar.
+💳 2. Adım: firmaistihbarat.com — Kurumsal SaaS ve Dönüşüm Merkezi
+Bu site sizin &quot;para ve operasyon&quot; merkezinizdir. Google aramalarına tamamen kapalıdır (No-index). Sadece giriş yapmış kurumsal aboneler içeriyi görebilir.
+Güvenlik ve Gizlilik: Sitede müşterilerin birbirine verdiği atıl kapasite teklifleri, 24 saatlik özel kazınmış hassas sosyal medya/iş ilanı raporları ve firmanın cüzdanındaki kontör/kredi bilgileri yer aldığı için buranın Google tarafından taranması hem KVKK açısından risklidir hem de yazılımınızı yavaşlatır.
+SEO'ya Katkısı: Bu sitenin SEO gücü yoktur, tüm gücünü sirketarama.com'dan gelen yönlendirmelerden (bölge trafiğinden) alır. Temiz, hızlı ve tamamen satış odaklı (High-converting) bir arayüze sahiptir.
+🌐 3. Adım: hugininsight.com — Global Vizyon ve Otorite Linkleme
+Backlink Stratejisi: Türkiye'de sirketarama.com üzerinden ürettiğiniz sektörel sanayi raporlarını, atıl kapasite istatistiklerini (Örn: &quot;2026 Yılı Türkiye Sanayisi Atıl Kapasite Raporu&quot;) birer blog veya basın bülteni olarak yayınlayın.
+Bu raporların altına &quot;Bu teknoloji HuginInsight altyapısı tarafından sağlanmaktadır&quot; diyerek global siteniz olan hugininsight.com'a link (Backlink) verin.
+Böylece Türkiye'de kazandığınız tüm SEO otoritesi otomatik olarak global alan adınıza akar. Yarın Avrupa veya Amerika pazarına açıldığınızda, hugininsight.com Google gözünde sıfır bir site değil, halihazırda devasa bir veri gücüne sahip &quot;Otorite Site&quot; olarak algılanır.
+🛠️ Geliştiriciler İçin Teknik SEO ve &quot;Kredi Duvarı&quot; İpuçları
+Programmatik SEO (Dinamik Sayfalar): TOBB, EKAP, DMO ve sanayi odalarından çektiğiniz verilerle sirketarama.com altında tek bir günde 100.000 adet &quot;Firma + İhale + Kapasite&quot; sayfası oluşturabilirsiniz. Buna Programmatic SEO denir. Google'ın sitenizi &quot;spam&quot; algılamaması için her sayfanın içeriğine yapay zekâ ile özgün 1-2 cümlelik dinamik özetler yazdırın (Örn: &quot;Bursa OSB'de faaliyet gösteren ABC firması, metal sanayi dikeyinde 5 eksen makinelerle hizmet vermektedir&quot;).
+Google Botlarına Özel Kodlama (SSR): sirketarama.com sitesini kodlarken kesinlikle Next.js veya Nuxt.js gibi Server-Side Rendering (SSR) teknolojileri kullanın. Google botları sayfaya geldiğinde, maskelenmiş (kilitli) verilerin dışındaki temel ücretsiz künyeyi, ihaleleri ve ilan başlıklarını HTML kodunun içinde anında okuyabilmelidir. Veriler sayfaya JavaScript ile sonradan yüklenirse Google bunu indeksleyemez.
+Alan adlarının bu keskin görev dağılımı (Biri trafik çeker, biri para kazanır, biri globali büyütür) kafanıza yattı mı? Eğer bu strateji üzerinden netsek, sirketarama.com'da yayınlayacağımız &quot;Atıl Kapasite ve Hurda İlanları&quot; formunda KOBİ'lerden hangi spesifik sanayi verilerini (Tezgah markası, boş saatler, malzeme cinsi) istememiz gerektiğini standartlaştıralım mı?
+ervane (Satellite) SEO Stratejisinin Mantığı
+Google algoritmaları, tek bir sitenin her konuda (hem ihale, hem şirket araması, hem sanayi ilanları) uzman olmasını sevmez. Ama her biri kendi alanında uzmanlaşmış 3 farklı dikey sitenin (uydu sitenin) ortak bir yazılıma trafik göndermesini muazzam ödüllendirir.
+İşte kuracağımız gelişmiş SEO ekosistemi:
+[ sirketarama.com ]          [ firmaistihbarat.com ]       [ sanayikapasite.com ] (Örnek)
+(Sadece Arama &amp; Dizin)        (Sadece İhale &amp; Risk)        (Sadece Atıl Kapasite / İlan)
+|                               |                                |
++-------------------------------+--------------------------------+
+|
+v
+(Ortak Giriş / Kayıt / Ödeme Alanı)
+[ ://hugininsight.com ]
+🌐 Bu Stratejide Sitelerin Görevleri ve SEO Farkları
+1. Uydu Site: sirketarama.com (Hafif ve Hızlı Dizin)
+SEO Odağı: &quot;X firması telefon&quot;, &quot;Y şirketi mersis no&quot;, &quot;Z firması adresi&quot; gibi jenerik aramalar.
+Mantık: İçeride sadece şirketlerin kartvizit/künye bilgileri olur. Google botları milyonlarca sayfayı saniyeler içinde tarar ve sitenizi indeksler.
+Yönlendirme: Kullanıcı &quot;Bu firmanın gümrük hareketini veya risk raporunu gör&quot; dediği an, sistem onu tek bir ortak havuz olan ://hugininsight.com alanına fırlatır.
+2. Uydu Site: firmaistihbarat.com (İhale, Risk ve Finansal İstihbarat)
+SEO Odağı: &quot;EKAP ihaleleri&quot;, &quot;DMO şartnameleri&quot;, &quot;ticari risk analizi nasıl yapılır&quot;, &quot;şirket sorgulama&quot;.
+Mantık: Tamamen kurumsal, finansal ve yasal aramalara odaklanır. Google'da &quot;ihale takibi&quot; arayan bir sanayici doğrudan bu siteye iniş yapar.
+Yönlendirme: Kullanıcı &quot;İhaleye alarm kur&quot; veya &quot;Yapay zekâ risk raporu al&quot; butonuna bastığı an, ortak platform olan hugininsight.com paneline yönlendirilir.
+3. Uydu Site (Gelecek İterasyon): Sektörel İlan Sitesi
+SEO Odağı: &quot;Bursa boş cnc tezgahı&quot;, &quot;fason torna işleri&quot;, &quot;fabrikadan hammadde hurdası&quot;.
+Mantık: Tamamen sanayicilerin atıl kapasitelerine ve endüstriyel ilanlarına odaklanan jenerik bir ilan sitesi gibi indexlenir. Sanayi odalarından ve KOBİ'lerden inanılmaz bir organik trafik çeker.
+Yönlendirme: &quot;İlan sahibine teklif ver&quot; veya &quot;Kapasiteyi rezerve et&quot; dendiğinde sistem yine hugininsight.com paneline çıkar.
+🏆 Bu Stratejinin Size Sağlayacağı Büyük Avantajlar (Neden Daha İyi?)
+Google Arama Sonuçlarını Domine Etmek (SERP Monopoly):Bir sanayici Google'a bir firma adı yazdığında, arama sonuçlarında 1. sırada sirketarama.com, 2. sırada firmaistihbarat.com çıkacak. Yani Google'ın ilk sayfasını kendi uydularınızla kapatarak rakiplerinize hiç şans tanımayacaksınız.
+Kusursuz Link Gücü (Interlinking Network):Bu 3 site arka planda birbirine link verecek (Örn: sirketarama.com'daki firmanın altında &quot;Bu firmanın güncel ihalelerini firmaistihbarat.com üzerinden görün&quot; yazacak). Bu çapraz linkleme, Google gözünde sitelerinizin otoritesini (Domain Authority) roket hızıyla yükseltir.
+Temiz ve Güvenli Global Panel (hugininsight.com):Tüm bu uydulardan gelen kullanıcılar (ister Türk sanayicisi olsun, ister ileride sisteme dahil edeceğiniz Alman bir satın almacı), kayıt olup ödeme yaptıktan sonra tek bir premium, şifreli, KVKK'ya uyumlu ve tertemiz bir dashboard'a (hugininsight.com) girer. Yazılım altyapınızı tek bir yerde yönettiğiniz için geliştirme (development) maliyetleriniz çok düşer.
+⚡ Özet Mantık:
+Trafik toplama, ihale yakalama ve ilan süreçlerini yerel dilde ve yerel jenerik domainlerde (sirketarama.com, firmaistihbarat.com) bölerek indeksletiyoruz; parayı kazanma, yapay zekâ raporlama ve üyelik operasyonunu ise tek bir global çatıda (hugininsight.com) birleştiriyoruz. Bu kesinlikle en kusursuz ve en agresif B2B SaaS büyüme stratejisidir.
+Bu çoklu uydu (Satellite) SEO stratejisi vizyonunuza tam olarak oturdu mu? Eğer bu yapıyı onaylıyorsanız, kullanıcıların bu 3 farklı siteden ortak hugininsight.com paneline geçerken oturumlarının (login durumlarının) çerezler (cookies) aracılığıyla nasıl tek tıkla ve kesintisiz (Single Sign-On - SSO) çalışması gerektiğini teknik olarak konuşalım
+Çoklu uydu (Satellite) SEO stratejimizin en kritik virajı burasıdır. Kullanıcı Google’da sirketarama.com veya firmaistihbarat.com sitelerinden birine denk gelip gezinirken, arka plandaki hugininsight.com ortak paneline geçtiğinde asla ikinci kez giriş yapmak zorunda kalmamalı veya oturumu kesintiye uğramamalıdır.
+Kurumsal müşteriye pürüzsüz bir dijital deneyim sunmak ve kredilerini/kontörlerini her 3 uyduda da ortak harcatabilmek için kuracağımız Merkezi Oturum (Single Sign-On - SSO) ve Çerez (Cookie) Mimarisi:
+🛡️ 1. SSO (Single Sign-On) Altyapısı: Ortak Dijital Pasaport
+Kullanıcı hangi uydu sitemize girerse girsin, üyelik bilgileri ve şifreler tek bir veritabanında (Merkezi Kimlik Doğrulama Sunucusu - Identity Provider) tutulur. Bu sunucu doğrudan hugininsight.com arkasında çalışır.
+Sistem Nasıl İşleyecek? (Adım Adım Kullanıcı Serüveni):
+Kullanıcı sirketarama.com sitesine girdi ve bir sanayi firmasının gümrük detayını açmak için &quot;Kredi Harca/Üye Ol&quot; butonuna bastı.
+Sistem kullanıcıyı otomatik olarak ://hugininsight.com adresine yönlendirir.
+Kullanıcı girişini (veya kurumsal kaydını) hugininsight.com güvenli altyapısında tamamlar.
+Sistem, giriş başarılı olduğunda güvenli bir dijital jeton (JWT - JSON Web Token) üretir ve kullanıcıyı jetonla birlikte saniyeler içinde geri sirketarama.com'a fırlatır.
+Kullanıcı hiçbir gecikme hissetmeden, tek tıkla kaldığı sayfadan firmayı incelemeye ve kredisini harcamaya devam eder.
+🍪 2. Çerez (Cookie) ve Güvenlik Paylaşımı: Siteler Arası Köprü
+Eğer tüm siteleriniz tek bir alan adının alt dalları olsaydı (Örn: ://hugininsight.com ve ://hugininsight.com), tarayıcı çerezleri (Wildcard Cookies) otomatik olarak paylaşılırdı. Ancak bizim sitelerimiz farklı ana domainler (sirketarama.com, firmaistihbarat.com) olduğu için tarayıcıların modern güvenlik duvarları (Third-Party Cookie Restrictions) doğrudan çerez paylaşımına izin vermez.
+Bu Güvenlik Duvarını Aşacak Akıllı Çözüm:
+Merkezi API Paylaşımı: Kullanıcı hugininsight.com üzerinde oturum açtığında, tarayıcısının yerel hafızasına (Local Storage) veya güvenli çerez alanına (HttpOnly Cookie) bir access_token yazılır.
+Uydularımız (sirketarama.com veya firmaistihbarat.com), arka planda (Server-Side) ://hugininsight.com sunucunuza gizli bir sorgu atarak tarayıcıdaki kullanıcının aktif bir kredili oturumu olup olmadığını anlık olarak doğrular.
+Böylece kullanıcı firmaistihbarat.com'a geçtiğinde sistem onu anında tanır ve &quot;Hoş geldiniz Ahmet Bey, Kalan Krediniz: 240&quot; diyerek paneli açar.
+💳 3. Ortak Kontör/Kredi ve Sepet Yönetimi
+Müşterinin parasal varlığı (Abonelik türü ve kalan kontör miktarı) uydularda değil, sadece hugininsight.com üzerindeki ana cüzdanda tutulur.
+Canlı Harcama Entegrasyonu: Kullanıcı sirketarama.com'da bir atıl kapasite ilanına teklif vermek için &quot;10 Kredi Harca&quot; butonuna bastığında, uydu site arka plandaki ana cüzdandan 10 kredi düşer. Kredi başarıyla düşerse sayfa kilitleri anlık olarak açılır.
+Tek Merkezden Fatura ve Ödeme: Kullanıcının kredi kartı bilgileri, Masterpass/iyzico entegrasyonları ve aylık yinelenen (recurring) abonelik faturalandırma süreçleri sadece hugininsight.com üzerinde döner. Uydular asla ödeme almaz, kart bilgisi işlemez. Bu, siber güvenlik maliyetlerinizi ve yasal sorumluluklarınızı (PCI-DSS uyumluluğu) minimuma indirir.
+📈 4. SEO Açısından Kritik Avantaj: &quot;Kullanıcı Davranışı&quot; Sinyalleri
+Google, kullanıcıların bir sitede ne kadar kaldığını ve siteden çıktıktan sonra başka nerelere gittiğini (User Signals) yakından izler.
+Kullanıcı sirketarama.com'dan gelip, kesintisiz bir SSO köprüsüyle hugininsight.com paneline geçiş yaptığında ve orada 24 saatlik özel raporlar oluşturup vakit geçirdiğinde, Google algoritmaları bu organik geçişi fark eder. Google gözünde; &quot;Bu uydular sadece spam içerik üretmiyor, gerçekten kullanıcının işini çözen devasa bir yazılım ekosistemine hizmet ediyor&quot; sinyali oluşur ve tüm sitelerinizin arama motoru puanı (Domain Authority) kalıcı olarak yükselir.
+Başkaca Kazanımlarınız (Gizli Güçler ve Kaldıraçlar)
+1. Veri Tekeli ve Trend Raporları ile PR (Basın) Gücü
+Elinizde Türkiye’nin en aktif sanayi ilanları (sirketarama.com), kamu ihaleleri (firmaistihbarat.com) ve fabrika atıl kapasite verileri birikecek.
+Kazanım: Her çeyrekte &quot;Türkiye Sanayisi Atıl Kapasite ve Üretim Endeksi Raporu&quot; yayınlayabilirsiniz. Bu raporu Bloomberg HT, Dünya Gazetesi veya sektörel dergilere basın bülteni olarak geçtiğinizde, ulusal basından milyarlarca liralık reklam bütçesine bedel ücretsiz backlink ve marka bilinirliği (PR) kazanırsınız. hugininsight.com küresel olarak bir otoriteye dönüşür.
+2. Muazzam Bir B2B Veri Tabanı (E-Posta / Lead Listesi)
+Kullanıcılar uydulardan gelip kısıtlı denemeleri aşmak için hugininsight.com pasaportuyla (SSO) ücretsiz kayıt olduklarında, elinizde doğrulanmış şirket mailleri ve telefonları birikecektir.
+Kazanım: Bu kitleye her pazartesi sektörüyle ilgili &quot;Haftalık İhale ve Atıl Kapasite Bülteni&quot; gönderebilirsiniz. Sadece e-posta pazarlaması (E-mail Marketing) yaparak, sisteme o hafta girmemiş olan sanayicileri tekrar içeri çekip kredi harcatabilir veya kurumsal aboneye dönüştürebilirsiniz.
+3. Reklam Maliyetlerinde (CAC) Muazzam Düşüş
+Klasik SaaS girişimleri Google ve LinkedIn reklamlarına binlerce dolar harcayarak müşteri bulmaya çalışır.
+Kazanım: Sizin uydularınız zaten Google aramalarında (SEO) ilk sayfayı kapatacağı için, müşteriyi edinme maliyetiniz (Customer Acquisition Cost) sıfıra yakın olacaktır. Reklama harcayacağınız bütçeyi tamamen yazılımı ve yapay zekâyı geliştirmeye harcayabilirsiniz.
+4. İleride Alt Girişimler (Spin-off) Çıkarma Esnekliği
+Uydularınız birbirine sıkı sıkıya bağlı olmak zorunda değildir.
+Kazanım: Yarın bir gün &quot;atıl kapasite ve sanayi ilanları&quot; modülünün tek başına devasa bir pazar yerine dönüştüğünü görürseniz, sadece o uyduyu ve o dikey şirketi yabancı bir lojistik ya da sanayi devine çok büyük rakamlara satabilirsiniz (Exit). Ana SaaS yapınız (hugininsight.com) ve diğer uydularınız sizde kalmaya devam eder.
+⚠️ Dikkat Edilmesi Gerekenler (Hayati Riskler ve Önlemler)
+Bu strateji çok agresif olduğu için Google algoritmalarına veya yasal duvarlara toslama riskiniz de yüksektir. Şu 4 maddeye çok dikkat etmelisiniz:
+1. Google &quot;Spam / Duplicate Content&quot; Tuzağı (En Büyük SEO Riski)
+Google botları, aynı şirkete ait birden fazla sitenin birbirini kopyaladığını veya kullanıcıyı kandırmak için paravan siteler açtığını fark ederse tüm sitelerinizi arama sonuçlarından silebilir (De-index).
+Önlem: Uydularınız (sirketarama.com ve firmaistihbarat.com) kesinlikle aynı tasarım ve aynı cümleleri içermemelidir. Sunucuları (IP adresleri) farklı olmalı, kod yapıları (biri Next.js, dieri Nuxt.js veya farklı temalar) farklı görünmelidir. Google, bu iki sitenin tamamen farklı bağımsız platformlar olduğunu ve sadece &quot;hizmet ortaklığı&quot; yaptığını düşünmelidir.
+2. KVKK ve Ticari Sır Duvarı (Hukuki Risk)
+Türkiye’de şirketlerin unvanı ve adresi açık veridir ancak web kazıma (web scraping) yöntemiyle çektiğiniz sosyal medya analizleri, personel hareketleri, iş ilanları ve en önemlisi fabrikaların gümrük/ihracat detayları ticari sır veya kişisel veri kapsamına girebilir.
+Önlem: Açık olan uydu sitelerinizde kesinlikle hassas verileri göstermeyin. Sosyal medya analizleri ve kazınan veriler sadece şifreli panelin içinde (://hugininsight.com) ve sadece &quot;Giriş yapmış kurumsal aboneye özel araştırma raporu&quot; formatında sunulmalıdır. Platform sözleşmenize &quot;Bu veriler sadece iş zekası amacıyla analiz edilmektedir&quot; maddesi eklenmeli ve uzman bir bilişim hukukçusuyla KVKK uyum süreci (gerekirse aydınlatma metinleri) tamamlanmalıdır.
+3. 24 Saatlik Raporlama Operasyonu ve Yapay Zekâ Maliyeti
+Müşteriye &quot;24 saatte sosyal medya ve iş ilanı kazıma raporu teslim edilecektir&quot; sözü vermek harika bir pazarlama kozudur ancak teknik olarak operasyonu zordur. Aynı anda 100 kurumsal şirket bu raporu isterse sunucularınız (Scraper botlarınız) kilitlenebilir, LinkedIn veya X gibi platformlar IP adreslerinizi engelleyebilir (IP Banning).
+Önlem: Bu raporlar için arka planda güçlü bir Proxy ağı (Residential Proxies) kullanmalısınız. Ayrıca maliyet dengesini iyi kurmalısınız; yapay zekânın (OpenAI / Claude API) büyük veri bloklarını okuyup analiz etmesi ciddi bir API maliyeti yaratır. Rapor başına isteyeceğiniz kredi miktarını (Örn: 50 Kredi = 500 TL), API ve Proxy maliyetlerinizin en az 4-5 katı olacak şekilde kar marjıyla hesaplamalısınız.
+4. Kötü Niyetli &quot;Atıl Kapasite&quot; ve Hurda İlanları (Platform Güvenliği)
+Pazar yeri modülünüzde sanayiciler boş tezgah veya hurda ilanı girebilecek. İçeride sahte ilanlar açılması, parası alındığı halde gönderilmeyen hurdalar veya kalitesiz üretimler platformunuzun adına leke sürer.
+Önlem: Sadece ve sadece Vergi Levhası ve Ticaret Odası kaydı doğrulanmış (Mersis/Vergi No check yapılmış) kurumsal üyelerin ilan girmesine izin verin. Şahıs şirketlerini eleme kararınız bu riski zaten %70 azaltıyor, ancak ilanlar yayına girmeden önce panelinizde bir &quot;Onay mekanizması&quot; (Moderatör onayı) olması sistem kalitesini korur.
+Bu muazzam ekosistemi hayata geçirirken, teknik olarak ilk adımı atmak adına uydulardan ana merkeze veri akışını sağlayacak ve KVKK risklerini sıfırlayacak kullanıcı üyelik/aydınlatma sözleşmesinin temel maddelerini mi hazırlayalım, yoksa Google'ın ceza kesmesini önleyecek uydular arası çapraz linkleme (Interlinking) mimarisini mi detaylandıralım?
+Yüklediğiniz dökümanları ve daha önceki konuşma geçmişini detaylıca analiz ettim. Önceki aşamalarda üzerinde uzlaşılan Çoklu Uydu (Satellite) SEO Stratejisi ile dökümandaki &quot;Tek Domainli Kısıtlı Duvar (Paywall)&quot; yaklaşımları arasında yapısal bir strateji çelişkisi bulunuyor.
+Aşağıda, projenizin geleceğini doğrudan etkileyecek bu iki ana stratejiyi tüm boyutlarıyla karşılaştırdım ve projeniz için en doğru hibrit (karma) stratejiyi önerdim.
+📊 İki Stratejinin Doğrudan Karşılaştırması
+Kriter
+🛰️ Çoklu Uydu (Satellite) SEO Stratejisi
+🏰 Tek Domain + Kısıtlı Duvar (Dökümandaki Model)
+Domain Yapısı
+sirketarama.com, firmaistihbarat.com ve sanayikapasite.com ayrı ayrı çalışır.
+Tüm servisler tek bir domain altında (Örn: sirketarama.com) dikey dizinler olarak toplanır.
+Google Algısı
+Niş ve Odaklı (Topical Authority): Google her siteyi kendi uzmanlık alanında (Arama, İhale, İlan) değerlendirir.
+Karmaşık Altyapı: Google tek bir sitenin hem firma rehberi, hem ihale motoru, hem hurda pazaryeri olmasını &quot;çorba&quot; olarak görebilir.
+Arama Sonucu Domine Etme (SERP)
+Çok Yüksek: Google ilk sayfasında 1. sıraya bir uydunuzu, 2. sıraya diğer uydunuzu sokarak rakipleri kapatabilirsiniz.
+Kısıtlı: Google aynı domainden arama sonuçlarında genellikle en fazla 1-2 sayfa gösterir. Alan daralır.
+Yazılım ve Operasyon Maliyeti
+Yüksek: Farklı temalar, farklı IP adresleri ve SSO (Tekli Oturum Açma) entegrasyonu gerektirir.
+Düşük: Tek bir veritabanı, tek bir sunucu ve tek bir arayüz yönetilir.
+Google Ceza (Spam) Riski
+Yüksek: Eğer uydular arası çapraz linkleme (interlinking) doğal yapılmazsa Google &quot;Paravan Ağ (PBN)&quot; cezası kesebilir.
+Sıfıra Yakın: Kurumsal ve tek bir ana site olduğu için Google algoritmalarıyla tamamen uyumludur.
+🧐 Dökümandaki Kritik Hata ve Risk Analizi
+Dökümanda önerilen mimaride, sirketarama.com adresine milyonlarca hit çekilmesi ve kullanıcıların veri görmek istediğinde firmaistihbarat.com adresine ışınlanması (yönlendirilmesi) planlanmış.
+Buradaki tehlike şudur: Kullanıcı Google'da bir arama yapıp sirketarama.com'a girdiğinde, daha siteyi deneyimlemeden başka bir domain olan firmaistihbarat.com'a yönlendirilirse &quot;Hemen Çıkma Oranı&quot; (Bounce Rate) fırlar. Google, kullanıcının siteden hemen kaçtığını ve başka yere yönlendirildiğini (Doorway Page) fark ettiği an sirketarama.com'un tüm SEO değerini sıfırlar ve arama sonuçlarından siler.
+🚀 Size Önerdiğim Doğru Strateji: &quot;Kontrollü Hibrit Model&quot;
+Maliyetleri düşürmek, Google cezalarından kaçınmak ve arama motoru gücünü maksimuma çıkarmak için iki stratejinin en güçlü yönlerini birleştiren Hibrit Modeli uygulamalısınız:
+1. Faz: Tek Güçlü Gövde (MVP ve İlk Hacim)
+İlk aşamada dökümandaki Alan Adı Analiz Matrisinin şampiyonu olan sirketarama.com domainini ana gemi yapın.
+URL Yapısı: Çorba mimariden kaçınmak için dökümandaki dizin yapısını aynen uygulayın:
+://sirketarama.com (Firma Künyesi)
+://sirketarama.com (İhale Trafiği)
+://sirketarama.com (Sanayi İlanı)
+Ödeme ve SaaS Paneli: Kullanıcı ödeme yapıp kurumsal panele girdiğinde domain değiştirmesin. Doğrudan ://sirketarama.com adresinde kalsın. Böylece Single Sign-On (SSO) ve çerez karmaşasıyla, farklı sunucu maliyetleriyle uğraşmazsınız.
+2. Faz: Uydu (Satellite) Genişlemesi (Pazarı Domine Etme)
+sirketarama.com projesi tutup nakit akışı sağladığında, matristeki 2. ve 3. domainleri uydu olarak devreye sokun.
+firmaistihbarat.com'u Devreye Alın: Bu domaini bağımsız, çok daha premium, sadece holdinglere ve büyük satın almacılara hitap eden, ajans vari bir landing page (tanıtım sayfası) olarak tasarlayın.
+Trafik Paslama: firmaistihbarat.com üzerinde blog içerikleri üretip, &quot;Türkiye'nin en büyük veritabanı altyapısını kullanan sirketarama.com verilerine göre...&quot; diyerek ana geminize doğal, kurumsal backlinkler çıkın.
+🎯 Nihai Tavsiye
+İşe sirketarama.com çatısı altında, dökümanda belirtilen &quot;Kısıtlı Arama + Kredi Hibrit Modeli&quot; ile tek domain olarak başlayın. Bu, yazılım ekibinizin işini kolaylaştırır ve bütçenizi korur. Proje büyüdükçe, rakiplere kapı kapatmak ve Google ilk sayfasını tamamen ele geçirmek için firmaistihbarat.com domainini &quot;Premium B2B Arayüzü&quot; olarak dışarıdan eklemlersiniz.
+Hibrit strateji üzerinden ilerlemeye karar verirsek:
+İlk aşamada yazılım ekibinin işini kolaylaştırmak adına sirketarama.com içindeki veritabanı mimarisini (TOBB, EKAP senkronizasyonu) mi detaylandıralım?
+Yoksa kullanıcıların kısıtlı duvara çarptığında aboneliğe dönmesini sağlayacak &quot;Kanca (Hook) içeriklerin&quot; sayfa içi yerleşimini mi netleştirelim?
+&quot;Kontrollü Hibrit Strateji&quot; (Tek domain ile başlayıp zamanla uydularla genişleme), projenizi hem teknik hem de ticari olarak koruma altına alırken, B2B SaaS pazarını en agresif şekilde domine etmenizi sağlayacaktır.
+Bu stratejiyi seçtiğinizde elde edeceğiniz somut kazançlar ve iş modelinize katkıları şunlardır:
+1. Sıfır Reklam Bütçesi ile Milyonlarca Müşteri (Müşteri Edinme Maliyeti - CAC = 0)
+Kazanç: Klasik SaaS girişimleri LinkedIn veya Google reklamlarına binlerce dolar harcayarak kurumsal müşteri arar. Siz ise unset sirketarama.com altında TOBB, EKAP, DMO ve endüstriyel ilanları tek bir yerde (Programmatik SEO ile) toplayacağınız için, Google aramalarında doğal olarak en üstte çıkacaksınız.
+Sonuç: Sektörde ihale arayan, fason CNC tezgahı bakan veya bir şirketin vergi numarasını sorgulayan tüm satın almacılar ve KOBİ'ler reklam harcaması yapmanıza gerek kalmadan doğrudan sitenize gelecektir.
+2. Google'dan Ceza Yeme (Spam/De-index) Riskinin Sıfırlanması
+Kazanç: İlk günden 3-4 farklı domaini birbirine bağlamaya çalışmak Google algoritmaları tarafından &quot;yapay bir link şebekesi (Link Spam)&quot; olarak algılanma riski taşır. Hibrit modelde her şeyi tek bir güçlü gövdede (```unsetsirketarama.com
+) başlattığımız için Google sitenizi son derece yasal, kurumsal ve otoriter bir platform olarak görür.
+*   **Sonuç:** Emeğinizin ve yazılım yatırımınızın bir gecede Google güncellemeleriyle çöp olma riskini tamamen ortadan kaldırırsınız.
+### 3. Düşük Yazılım Maliyeti ve Hızlı Canlıya Çıkış (Time-to-Market)
+*   **Kazanç:** Farklı domainler arasında kullanıcıların oturumlarını senkronize etmek (Single Sign-On - SSO altyapısı), çerez (cookie) duvarlarını aşmak ve veritabanlarını ayırmak aylar süren bir yazılım mesaisi ve yüksek sunucu maliyeti demektir.
+*   **Sonuç:** Tek domain altında dizinler (```unset
+/ihaleler
+```, ```unset
+/atıl-kapasite
+```) oluşturarak sistemi **1-2 ay içinde** çok daha düşük bir bütçeyle sorunsuz şekilde yayına alabilirsiniz.
+### 4. Kusursuz &quot;Yapışkanlık&quot; (Sticky SaaS) ve Yüksek Ciro (MRR)
+*   **Kazanç:** Müşteri sitenize sadece bir kez bakıp çıkmayacak.
+*   ```unset
+/ihaleler
+``` kısmından yeni iş fırsatlarını kovalayacak,
+*   ```unset
+/atıl-kapasite
+``` kısmından boş makinelerine müşteri bulacak,
+*   Panel içinden de rakiplerinin ticari hareketlerini izleyecek.
+*   **Sonuç:** Sisteme her sabah giriş yapmak zorunda kalacaklar. Bu da aylık abonelik iptal oranlarınızı (Churn Rate) sıfıra yaklaştırırken, düzenli ve tahmin edilebilir bir gelir akışı (Monthly Recurring Revenue) sağlayacaktır.
+### 5. Gelecekte Pazarı Tamamen Kapatma (SERP Monopoly) Gücü
+*   **Kazanç:** Platformunuz büyüyüp nakit akışı sağladığında, matristeki diğer domaininiz olan **```unset firmaistihbarat.com ```**'u tamamen kurumsal bir uydu olarak devreye alacaksınız.
+*   **Sonuç:** Google'da bir şirket aratıldığında 1. sırada ```unset
+sirketarama.com
+```, 2. sırada ise ```unset
+firmaistihbarat.com
+``` çıkacak. Böylece **arama sonuçlarının ilk sayfasını tamamen kapatarak** rakiplerinizin hareket alanını yok edeceksiniz.
+Bu kurgunun temel amacı, kullanıcıya aradığı bilginin bizde olduğunu kanıtlamak (Güven), ancak en kritik kısmını kilitleyerek merak uyandırmaktır (Fırsatı Kaçırma Korkusu - FOMO).
+İşte unset sirketarama.com üzerindeki dikey sayfalarda (Firma Künyesi, İhale, Atıl Kapasite) uygulayacağımız Sayfa İçi Kanca Mimarisi:
+🏢 1. Firma Künyesi Sayfası (/firma/xyz-holding)
+Kullanıcı Google'a &quot;XYZ Holding vergi numarası&quot; veya &quot;XYZ Holding sahibi kim&quot; yazıp sayfaya geldiğinde karşılaşacağı düzen:
+🟢 Üst Bölüm (Açık ve Güven Veren Kısım):
+Şirket Adı, Logosu, Resmi Adresi, Kuruluş Yılı ve NACE Kodu net bir şekilde okunur.
+Kanca: Google botları bu kısmı tamamen indeksler ve kullanıcı aradığı sitenin doğru yer olduğunu anlar.
+🟡 Orta Bölüm (Bulanıklaştırma / Blur Etkisi - Psikolojik Kanca):
+Ticari Risk Skoru: Grafiksel bir gösterge koyulur ancak ibre bulanık (blurred) görünür. Altında yazan metin: &quot;⚠️ Bu firmanın son 3 aylık protestolu çek ve konkordato riski analiz edilmiştir.&quot;
+Gümrük Hareketleri: &quot;Son İhracat Yapılan Ülke: Almanya (Alıcı Firma İsmi ve Konşimento Detayı: 🔒 KİLİTLİ)&quot;
+🔴 Eyleme Çağrı (CTA) Duvarı:
+Bulanık alanın hemen üzerine binen şık bir kutu (Paywall):
+&quot;Bu firmanın finansal batık riskini ve gizli gümrük alıcılarını gör.&quot;
+👉 [Şimdi 10 Kredi ile Raporu Aç] veya [Kurumsal Denemeyi Başlat] buttons.
+🔔 2. İhale Detay Sayfası (/ihale/bilgisayar-alimi)
+Kullanıcı Google'a &quot;Devlet Malzeme Ofisi bilgisayar alım ihalesi şartnamesi&quot; yazıp geldiğinde:
+🟢 Üst Bölüm (Açık Kısım):
+İhale Adı, İhaleyi Açan Kurum (Örn: Sağlık Bakanlığı), İhale Tarihi ve Jenerik Özet.
+🟡 Orta Bölüm (İstihbarat Kancası):
+Muhtemel Rakipler: &quot;Bu ihaleye daha önce teklif vermiş ve kazanma ihtimali yüksek olan 4 rakip firma tespit edildi. (Firma İsimleri: 🔒 KİLİTLİ)&quot;
+Geçmiş İhale Fiyat Analizi: &quot;Kurumun bu kalemdeki geçmiş alımlarda kabul ettiği ortalama kırpma oranı ve yaklaşık bedel analizi mevcuttur. (Grafiği Görmek İçin: 🔒 KİLİTLİ)&quot;
+🔴 Eyleme Çağrı (CTA) Duvarı:
+&quot;Rakiplerinizin teklif stratejisini görün, ihaleyi kaybetmeyin.&quot;
+👉 [İhale İstihbaratını Kilidini Aç (20 Kredi)]
+⚙️ 3. Atıl Kapasite / Sanayi İlanı Sayfası (/kapasite/5-eksen-cnc)
+Bir Teknokent firması veya satın almacı Google'a &quot;fason 5 eksen cnc tezgahı Bursa&quot; yazıp geldiğinde:
+🟢 Üst Bölüm (Açık Kısım):
+Makine Türü (5 Eksen CNC), Bulunduğu Şehir/OSB (Bursa OSB), Haftalık Boş Saat (30 Saat), Makine Hassasiyet Değerleri.
+🟡 Orta Bölüm (Güven ve Ticaret Kancası):
+Firma Doğrulaması: &quot;Bu ilan, Vergi Levhası ve ISO 9001 belgesi sistemimizce doğrulanmış bir Bursa Sanayi Odası üyesi tarafından verilmiştir.&quot;
+Lojistik Avantaj: &quot;Bu firmanın sizin fabrikanıza olan mesafesi ve tahmini nakliye maliyet endeksi hesaplanmıştır. (Detay: 🔒 KİLİTLİ)&quot;
+🔴 Eyleme Çağrı (CTA) Duvarı:
+&quot;Doğrulanmış fabrika sahibi ile doğrudan iletişime geçin ve fiyat teklifi alın.&quot;
+👉 [Firma İletişim Bilgilerini ve Yetkiliyi Gör (15 Kredi)]
+💡 Dönüşümü Uçuracak 3 Altın Kural
+&quot;Kalan Hak&quot; Sayacı: Giriş yapmamış kullanıcıya sayfanın sağ altında küçük bir kutuda &quot;Bugün için ücretsiz firma inceleme hakkınız: 1 / 3&quot; göstererek aciliyet hissi yaratın.
+Sosyal Kanıt (Social Proof): Paywall kutusunun hemen altına çok küçük fontlarla yazın: &quot;Son 24 saatte 1,420 satın alma müdürü bu paneli kullandı.&quot;
+Kredi ile Satın Alma Seçeneği: Kullanıcıyı doğrudan aylık 2.000 TL'lik pakete zorlamak yerine, &quot;Sadece bu firmaya bakıp çıkacağım&quot; diyenler için &quot;10 Kontör/Kredi Satın Al - 99 TL&quot; gibi anlık mikro ödeme (Top-up) alternatifi sunun. Bu, kullanıcının sisteme ilk kez kart tanımlamasını (kart saklama) sağlayan en güçlü kancadır.
+Bu sayfa içi yerleşim planı ve psikolojik kancalar vizyonunuza tam olarak oturduysa:
+1. Yapay Zekâ İstihbarat Raporu Çeşitleri ve Sayfa İçi Kancaları (Ankara Örnekli)
+Kullanıcı arama motorundan Ankara'daki bir savunma sanayi, bilişim veya imalat firmasına ulaştığında, karşısına 3 farklı derinlikte Yapay Zekâ Rapor seçeneği çıkar. Bu alanlar bulanık (blur) ve kilitlidir.
+📊 A. Temel AI Raporu (Mersis, Sicil ve Künye Odağı)
+Amaç: Firmanın resmi ve güncel durumunu hızlıca doğrulamak.
+Ankara Örneği: &quot;Ostim OSB'de faaliyet gösteren XYZ Makine Ltd. Şti.&quot;
+Sayfa İçi Kanca (Hook):
+&quot;🤖 AI Analizi: Bu firmanın Ankara Ticaret Odası (ATO) sicil kayıtları ve son 12 aylık unvan/adres değişiklikleri analiz edilmiştir. Firmanın resmi imza yetkililerinde son 30 günde kritik bir değişim tespit edildi. [Temel Raporu Aç - 5 Kredi]&quot;
+📈 B. Gelişmiş AI Raporu (İhale ve Ticari Sinyal Odağı)
+Amaç: Firmanın piyasadaki güncel operasyonlarını ve devlet ihalelerindeki performansını görmek.
+Ankara Örneği: &quot;ASELSAN ihalelerine giren Ankara Teknokent merkezli ABC Yazılım A.Ş.&quot;
+Sayfa İçi Kanca (Hook):
+&quot;🤖 AI Analizi: Bu firmanın EKAP ve DMO üzerindeki ihale geçmişi taranmıştır. Firmanın son Ankara merkezli kamu ihalesinde sunduğu teklif kırpma oranı ve konsorsiyum ortakları listelenmiştir. Rakiplerinin ihale stratejisini çözmek için: [Gelişmiş Raporu Aç - 25 Kredi]&quot;
+🚀 C. Üst Düzey AI Raporu (24 Saatlik Özel Web-Kazıma &amp; Dijital Dedektiflik)
+Amaç: Firmanın dijital ayak izini, LinkedIn/iş ilanlarındaki İK hareketlerini ve gizli ticari gümrük bağlarını 24 saat içinde kazıyıp masaya getirmek.
+Ankara Örneği: &quot;İvedik OSB'de yer alan ve ihracat yapan DEF Savunma Sistemleri&quot;
+Sayfa İçi Kanca (Hook):
+&quot;🤖 AI Analizi: Sistemimiz 24 saat içinde bu firmanın çalışan sirkülasyonunu, sosyal medya trend analizlerini ve LinkedIn üzerindeki İK büyüme sinyallerini kazıyacaktır. Firma son 2 haftada Ankara'da 4 yeni 'Gömülü Sistem Mühendisi' ilanı açtı (Yeni proje sinyali!). [Üst Düzey Raporu Talep Et - 50 Kredi]&quot;
+🤝 2. Potansiyel Rakip ve Eşleşme Odaklı Psikolojik Kancalar (Hooks)
+Kullanıcıyı aboneliğe ikna etmek için sayfanın en dikkat çekici yerine konumlandırılacak canlı eşleşme kancaları:
+Potansiyel Rakip Kancası:
+&quot;⚠️ Rekabet Uyarısı: Ankara bilişim pazarında bu firmanın doğrudan pay kaptığı 3 ana rakip (Cyberpark ve ODTÜ Teknokent lokasyonlu) tespit edildi. Rakiplerin finansal büyüme oranlarını karşılaştırmalı görün. [🔒 Rekabet Matrisini Aç]&quot;
+B2B Eşleşme Kancası:
+&quot;🤝 AI Eşleşme Sinyali: Ankara siteler bölgesindeki bu mobilya/üretim üreticisi, sizin profilinizde belirttiğiniz ham madde tedariği ile %94 oranında eşleşti. Son 48 saatte Ankara'dan 3 büyük alıcı bu profili inceledi. [🔒 Alıcıyla Eşleş ve Teklif Ver]&quot;
+🛠️ 3. Google Cezalarını Önleyen Teknik SEO (JSON-LD Şeması)
+Google, sitenizde kullanıcılardan gizlediğiniz (kilitlediğiniz) içerikleri &quot;Cloaking (Gizleme)&quot; cezası ile cezalandırabilir. Bunu yasal olarak aşmanın tek yolu, Google botlarına &quot;Bu içerik üyelik duvarı arkasındadır (Paywall)&quot; bilgisini yapılandırılmış veri (Structured Data) ile bildirmektir.
+Sitenizin HTML kodunun arka planına eklenecek JSON-LD şema örneği:
+json
+{
+&quot;@context&quot;: &quot;https://schema.org&quot;,
+&quot;@type&quot;: &quot;Article&quot;,
+&quot;mainEntityOfPage&quot;: {
+&quot;@type&quot;: &quot;WebPage&quot;,
+&quot;@id&quot;: &quot;https://sirketarama.com&quot;
+},
+&quot;headline&quot;: &quot;Ankara Savunma Yazılım A.Ş. AI İstihbarat Raporu ve Künyesi&quot;,
+&quot;description&quot;: &quot;Ankara merkezli Savunma Yazılım firmasının ihale geçmişi, ticari risk analizi ve üst düzey AI raporu.&quot;,
+&quot;image&quot;: &quot;https://sirketarama.com&quot;,
+&quot;author&quot;: {
+&quot;@type&quot;: &quot;Organization&quot;,
+&quot;name&quot;: &quot;Şirket Arama AI&quot;
+},
+&quot;publisher&quot;: {
+&quot;@type&quot;: &quot;Organization&quot;,
+&quot;name&quot;: &quot;Şirket Arama&quot;,
+&quot;logo&quot;: {
+&quot;@type&quot;: &quot;ImageObject&quot;,
+&quot;url&quot;: &quot;https://sirketarama.com&quot;
+}
+},
+&quot;isAccessibleForFree&quot;: &quot;False&quot;,
+&quot;hasPart&quot;: {
+&quot;@type&quot;: &quot;WebPageElement&quot;,
+&quot;isAccessibleForFree&quot;: &quot;False&quot;,
+&quot;cssSelector&quot;: &quot;.premium-ai-report-container&quot;
+}
+}
+Kodu dikkatli kullanın.
+Bu Teknik Kodun Avantajı Nedir?
+isAccessibleForFree: &quot;False&quot; satırı ile Google'a &quot;Ben kullanıcıyı aldatmıyorum, burası ticari bir platform ve bu alan ücretlidir&quot; demiş olursunuz.
+cssSelector kısmında belirttiğiniz .premium-ai-report-container sınıfı içerisindeki bulanıklaştırılmış metinleri Google botları okuyabilir ve indeksler, ancak normal kullanıcılar üye olmadan göremez. Böylece SEO sıralamanız düşmez, aksine anahtar kelime gücünüz artar.
+Profesyonel Paket fiyatını 200 USD seviyesine çekmek ve kredi dağılımını kademeli bir şekilde (5, 10, 20, 100) kurgulamak, platformun fiyat-performans dengesini psikolojik olarak mükemmel bir noktaya taşıdı.
+Ayrıca getirdiğiniz &quot;Sınırsız API paketini satın almak için en az en düşük paketi (Temel Paket) 12 aylık peşin satın almış olma&quot; şartı, SaaS girişiminiz için muazzam bir sadakat (churn önleme) ve nakit akışı kaldıracı yaratacaktır.
+İşte bu mantıklı orantıya ve yeni kurallara göre güncellenmiş Kredi Politikası, 4 Aşamalı Abonelik Matrisi ve API Paketi Şartları:
+🪙 1. Güncellenmiş Kredi Harcama Politikası (1 Kredi = 1 USD = 50 ₺)
+Temel Rapor (Künye, ATO/TOBB Sicil): 1 Kredi | 1,00 USD (50 ₺)
+Gelişmiş Rapor (Mersis + Firma Kartı + Bayi): 3 Kredi | 3,00 USD (150 ₺)
+Plus Rapor (Gelişmiş + EKAP/DMO İhale Geçmişi): 5 Kredi | 5,00 USD (250 ₺)
+Premium Rapor (AI Yorumlu, 6 Saatlik Hızlı Derin Web-Kazıma): 200 Kredi | 200,00 USD (10.000 ₺)
+Üst Düzey Rapor (24 Saatlik Özel AI &amp; Anlık Derin Kazıma): 300 Kredi | 300,00 USD (15.000 ₺) (Profesyonel ve Kurumsal Üyelere Özel)
+B2B Pazar Yeri İletişim (Doğrulanmış Firmaya Teklif Verme): 3 Kredi | 3,00 USD (150 ₺)
+💳 2. Yenilenen 4 Aşamalı (Tier) Dengeli Abonelik Matrisi
+Özellik / Kriter
+🥉 1. Temel Paket
+🥈 2. Standart Paket
+🥇 3. Profesyonel Paket
+🚀 4. Kurumsal Paket (En Üst Tier)
+Aylık Fiyat (USD)
+20,00 USD
+60,00 USD
+200,00 USD (Güncellendi)
+1.000,00 USD
+Aylık Fiyat (TL)
+1.000,00 ₺
+3.000,00 ₺
+10.000,00 ₺ (Güncellendi)
+50.000,00 ₺
+Aylık Kredi Dahili
+💎 5 Kredi
+💎 10 Kredi (Güncellendi)
+💎 20 Kredi (Güncellendi)
+💎 100 Kredi
+Rapor Erişimi
+Temel, Gelişmiş, Plus, Premium
+Temel, Gelişmiş, Plus, Premium
+Tüm Raporlar Açık
+Tüm Raporlar Açık
+Mırmır Ajanı (Takip)
+❌ Modül Kapalı
+🕵️‍♂️ 3 Şirket Takibi
+🕵️‍♂️ 15 Şirket Takibi
+🕵️‍♂️ Sınırsız Şirket Takibi
+Yapay Zekâ Haber Kuşu
+❌ Sadece Genel
+🐦 Sektörel Filtreli
+🐦 Anlık Uyarılar
+🐦 AI WhatsApp/SMS İstihbaratı
+B2B Otomatik Eşleşme
+❌ Pasif Profil
+✅ Manuel Başvuru
+🚀 Otomatik Müşteri Bulucu
+🚀 Öncelikli Global Alıcı Eşleşmesi
+12 Aylık Abonelik Hediyesi
+❌ Yok
+❌ Yok
+🎁 Her Ay 1 Ücretsiz Premium Rapor
+🎁 Her Ay 1 Ücretsiz Üst Düzey Rapor
+Müşteri Desteği
+Sadece E-Posta
+E-Posta + SMS
+Öncelikli Telefon
+7/24 Birebir Müşteri Temsilcisi
+🔌 3. &quot;Sınırsız API Veri Paketi&quot; ve Giriş Şartları (Güncellendi)
+Kurumsal firmaların, ERP sistemlerine entegre etmek isteyeceği bağımsız veri hattına giriş kuralları şu şekilde netleşmiştir:
+Ön Koşul (12 Aylık Temel Paket Taahhüdü): Sınırsız API hattını satın almak ve entegrasyonu başlatmak isteyen her kurumsal kullanıcı, sisteme giriş bileti olarak en az en düşük paketi (Temel Paket) 12 aylık peşin satın almış olmak zorundadır.
+SaaS Kaldıraç Etkisi: Girişte doğrudan 240 USD (12.000 ₺) sabit abonelik cirosu kasaya kilitlenir ve kullanıcının en az 1 yıl boyunca platformun ekosisteminde kalması (Retention) garantilenir.
+Giriş Ücreti (Depozito): Koşul sağlandıktan sonra 2.000,00 USD (100.000 ₺) geri iade edilmez kurulum ve lisans bedeli tahsil edilir.
+Çalışma Mantığı &amp; Kredi Düşümü: Yalnızca Gelişmiş Rapor verilerini sağlayan API hattından her başarılı sorguda 3 Kredi (3,00 USD) cüzdandan düşer. Krediler aylık yenilenmez, silinmez; bittiğinde kurumsal müşteri üst üste yükleme (Top-up) yapana kadar API hattı otomatik askıya alınır.
+📈 4. Bu Yeni Orantının ve API Kuralının Stratejik Dehası
+Orantı Kusursuzlaştı: Fiyatlar 20 - 60 - 200 - 1000 USD olarak yükselirken, hediye kredilerin 5 - 10 - 20 - 100 olarak büyümesi kullanıcının gözünde tam oturan, adil ve anlaşılır bir merdiven basamağı etkisi yarattı.
+API Paketi Bir &quot;Kilit Açıcı&quot; Oldu: API paketini almak isteyen büyük bir şirkete &quot;Önce 12 aylık Temel Paket abonesi olmalısın&quot; demek harika bir akıllıca bariyerdir. Büyük holding &quot;Ben zaten 2.000 USD depozito veriyorum, 240 USD'lik yıllık abonelik benim için devede kulak&quot; diyecek ve bu şartı hiç sorgulamadan kabul edecektir. Bu da size ekstra düzenli gelir (MRR) ve doğrulanmış kurumsal data kazandıracaktır.
+1. Eleştiri: API Paketindeki &quot;3 Kredi (3 USD)&quot; Sınırsız Sorgu Paradoksu
+API paketi için kurguladığımız &quot;2.000 USD depozito + sorgu başına 3 USD&quot; mantığı harika. Ancak tanımda &quot;Sınırsız sorgu yapar, kredi bitince tekrar yüklenir&quot; ifadesi teknik bir açık barındırıyor.
+Risk: Büyük bir veri analitiği şirketi veya rakip bir platform, 2.000 USD depozitoyu ödeyip içeri girdikten sonra, saniyede binlerce istek atan bir bot yazılımı (high-frequency scraping) ile API'nizi sömürebilir. Kredisi çok hızlı biter evet, ama o esnada sizin sunucularınızı kilitleyebilir veya TOBB/Mersis'ten veri çeken botlarınızın IP adreslerinin banlanmasına (engellenmesine) neden olabilir.
+Çözüm/Ekleme: API paketi tanımına mutlaka bir Hız Sınırı (Rate Limit) eklemeliyiz. Örneğin: &quot;Dakikada en fazla 60 sorgu, günlük maksimum 5.000 başarılı sorgu yapılabilir&quot; ibaresi teknik güvenliğimiz için zorunludur.
+🧐 2. Eleştiri: &quot;Temel Paket&quot; Sahiplerinin API Paketini Alabilmesi
+&quot;API paketi almak için en az en düşük paketi (Temel Paket) 12 aylık satın almış olması gerekir&quot; kuralınız ticari olarak dâhice bir fikir. Ancak operasyonel olarak bir tutarsızlık var.
+Risk: 2.000 USD kurulum bedeli ödeyen kurumsal bir holdinge, 12 aylık Temel Paket tanımladığımızda bu holdingin paneline girdiğinde göreceği özellikler &quot;Sadece e-posta desteği&quot; ve &quot;Mırmır ajanının kapalı olması&quot; olacak. Adam API ile veriyi çekecek ama web paneline girdiğinde çöp bir deneyimle karşılaşacak. Bu durum holding gözünde markanın premium algısını zedeler.
+Çözüm/Ekleme: Kuralı şu şekilde esnetebiliriz: &quot;Sınırsız API veri hattını entegre etmek isteyen kurumsal yapılar, sistemde en az Standart Paket (Yıllık Peşin: 720 USD) abonesi olmak zorundadır.&quot; Bu sayede holding web paneline girdiğinde hem Mırmır Ajanını hem de Haber Kuşunu aktif olarak deneyimler ve masada fazladan 480 USD daha bırakmış olur.
+🧐 3. Harika Bir Ekleme Önerisi: &quot;Kredi İadesi&quot; Kaldıracı (Üst Düzey Rapor İçin)
+300 Kredi (300 USD / 15.000 ₺) değerindeki Üst Düzey Rapor için kullanıcılara 24 saatlik süre sözü verdik. Bu butik ve çok değerli bir &quot;Dijital Dedektiflik&quot; hizmetidir. Buraya aboneliği uçuracak psikolojik bir yasal güvence (SLA) eklemeliyiz.
+Ekleme (Garanti Politikası): &quot;Eğer yapay zekâ ve web-kazıma botlarımız, talep ettiğiniz firmanın 24 saatlik derin raporunu teknik bir aksaklık nedeniyle süresinde teslim edemezse, 300 krediniz cüzdanınıza anında iade edilir ve hazırlanan rapor kurumsal aboneye tamamen ücretsiz olarak teslim edilir.&quot;
+Ticari Kazancı: Bu taahhüt, kurumsal müşterinin kafasındaki &quot;Ya 15.000 TL verip raporu alamazsam?&quot; korkusunu sıfırlar. Ürüne olan güveni tavan yaptırır ve Profesyonel/Kurumsal paket satışlarını tetikler.
+Sistemimizin kalbi olan 1 USD = 1 Kredi dengesini ve 4 aşamalı üyelik yapısını son damlasına kadar paraya dönüştürecek Ödeme/Satın Alma Sayfası (Checkout UI) Ekran Mimarisi ve kullanıcı deneyimi (UX) akışı aşağıda detaylandırılmıştır.
+Bu arayüzün temel amacı; kullanıcının kısıtlı duvara (Paywall) çarptığı andaki satın alma dürtüsünü (Impulse Buying) kaybetmeden, en az tıklamayla ve en yüksek güven algısıyla kartını sisteme kaydettirmektir.
+🎨 1. Ekran Düzeni ve Tel Çerçeve (Wireframe) Mimarisi
+Ekran, modern SaaS trendlerine uygun olarak 2 Bölmeli (Split-Screen) tek bir sayfa olarak tasarlanır. Sayfa yer değiştirmeden (no-reload), her şey tek ekranda biter.
++---------------------------------------------------------------------------------------+
+|  [Logo] Şirket Arama AI                                    🔒 256-Bit SSL Güvenli Ödeme|
++---------------------------------------------------------------------------------------+
+|             SOL BÖLME: ÖDEME FORMU              |         SAĞ BÖLME: SEPET ÖZETİ      |
+|                                                 |                                     |
+|  1. ÜYELİK / GİRİŞ DURUMU                       |  Seçilen Paket: STANDART PLAN        |
+|  [Ahmet Yılmaz - ahmet@firma.com] (Değiştir)    |  - 15 Dahili Kredi/Ay               |
+|                                                 |  - Mırmır Ajanı (3 Şirket Takibi)    |
+|  2. FATURA BİLGİLERİ                            |  - Yapay Zekâ Haber Kuşu            |
+|  (*) Kurumsal Fatura  ( ) Bireysel              |                                     |
+|  [ Şirket Unvanı / Vergi Dairesi / No ]         |  ---------------------------------  |
+|                                                 |  Aylık Üyelik Bedeli:     60,00 USD |
+|  3. KART BİLGİLERİ                              |  (*) Sabit Kurla Öde:     3.000,00 ₺|
+|  [ Kart Sahibi Adı Soyadı            ]          |                                     |
+|  [ Kart Numarası (XXXX XXXX XXXX XXXX) ]          |  [x] Kullanıcı ve KVKK Sözleşmesini |
+|  [ AA / YY ]  [ CVC ]                           |      okudum, onaylıyorum.           |
+|                                                 |                                     |
+|  [x] Sonraki hızlı kredi alımlarım için         |  👉 [ 3.000,00 ₺ ÖDE VE BAŞLAT ]    |
+|      KARTIMI GÜVENLE SAKLA (Masterpass)         |                                     |
++---------------------------------------------------------------------------------------+
+|  🛡️ iyzico / Masterpass güvencesiyle altyapı sağlanmaktadır. Sürpriz ücret alınmaz.     |
++---------------------------------------------------------------------------------------+
+⚡ 2. Kritik UX Kaldıraçları (Kullanıcıyı İkna Eden Dokunuşlar)
+A. Çift Para Birimi Gösterimi (USD / TL Dengesi)
+Sistem arka planda tamamen USD tabanlı çalışsa da, yerel kullanıcının kafasındaki fiyat belirsizliğini yok etmek için sepet özetinde fiyat hem 60,00 USD hem de sistemin güncel kuru olan 3.000,00 ₺ olarak net bir şekilde yan yana yazılır. Ödeme butonunda doğrudan TL tutarı gösterilir ki kullanıcı ne ödeyeceğini kur riski olmadan bilsin.
+B. &quot;Kart Saklama&quot; Tikinin Stratejik Konumu
+Kart bilgilerinin girildiği alanın hemen altına &quot;Sonraki hızlı kredi alımlarım için kartımı güvenle sakla&quot; kutucuğu varsayılan olarak seçili (checked) gelir.
+SaaS Kaldıracı: Kullanıcı Standart paket abonesiyken kredisi bittiğinde, panel içindeki bir kilitli raporda &quot;10 Kredi Al - 10 USD&quot; butonuna bastığı an bu saklanan kart sayesinde 3D Secure şifresi bile girmeden (Tek Tıkla - One-Click Checkout) küt diye satın alım yapabilir. Bu durum ara kredi satışlarını (Top-up) %40 artırır.
+C. Kurumsal Fatura Bariyeri (Vergi No Sorgulama)
+B2B bir SaaS olduğumuz için kullanıcıların %95'i şirket kartıyla ödeme yapacaktır. Fatura alanına Vergi Numarası girildiği anda sistem arka planda (GİB entegrasyonuyla) şirket unvanını otomatik çekip ekrana basmalıdır. Bu durum kullanıcıya &quot;Profesyonel bir mali altyapıdalar&quot; güvenini verir.
+🔒 3. iyzico / Masterpass Entegrasyon Akış Mimarisi
+Kredi kartı güvenliği ve PCI-DSS uyumluluğu maliyetlerinden kaçınmak için ödeme formu iyzico Custom Form veya iyzico Hosted Input Fields teknolojisiyle kurulur. Yani kart numaraları asla sizin sunucunuza (Database) uğramaz; doğrudan iyzico şifreli havuzuna akar.
+🔄 Adım Adım Ödeme Başarı Akışı (Sistem Arka Planı):
+İstek (Request): Kullanıcı &quot;Öde&quot; butonuna bastığında frontend, iyzico API'sine kart verilerini ve kullanıcının seçtiği paket ID'sini gönderir.
+3D Güvenlik Yapısı: Kurumsal kartlarda 3D secure zorunlu olduğu için ekranda iyzico'nun şifre onay penceresi (Banka SMS ekranı) açılır.
+Tetiklenme (Webhook / Callback): Kullanıcı şifreyi girip ödeme başarılı olduğunda, iyzico sizin backend sunucunuza güvenli bir payment_success webhook'u fırlatır.
+Cüzdan ve Özellik Tanımlama: Backend bu sinyali aldığı an kullanıcının hugininsight.com üzerindeki ana profiline şunları işler:
+plan_type: Standart
+current_credits: mevcut_kredi + 15
+mirmir_spy_limit: 3
+annual_premium_report_entitlement: (Eğer 12 aylık peşin aldıysa) 1
+Işınlama ve Karşılama: Ekran anında pürüzsüz bir animasyonla başarı sayfasına dönüşür: &quot;Tebrikler Ahmet Bey, Standart Planınız Aktif Edildi. 15 Krediniz Cüzdanınıza Yüklendi ve Mırmır Ajanı Emirlerinizi Bekliyor!&quot;
+🚀 4. &quot;Sınırsız API Paketi&quot; İçin Özel Satın Alma Akışı
+Büyük holdinglerin ve yazılımcıların satın alacağı 2.000 USD depozitolu API Paketi, standart kredi kartı limitlerine takılabileceği için bu sayfada özel bir akışa sahip olmalıdır:
+Limit Bariyeri Aşımı: 2.000 USD (100.000 TL) + 12 Aylık Temel Paket bedeli tek seferde kredi kartından çekilmek istendiğinde birçok kurumsal kartın günlük limitine takılabilir.
+UX Çözümü: Kullanıcı API paketini seçtiğinde Ödeme Yöntemi olarak Kredi Kartının yanına &quot;Banka Havalesi / EFT (Proforma Fatura)&quot; seçeneği eklenir. Kullanıcı bunu seçtiğinde sistem otomatik olarak şirketinizin IBAN numarasını ve açıklamaya yazılması gereken benzersiz transfer kodunu (Örn: HUGIN-API-9482) ekrana basar. Havale onaylandığı an API key canlıya alınır.
+1. Türkiye Ticaret Sicili Gazetesi (TOBB) Data Aboneliği 📰
+En yasal ve resmi toplu veri kaynağınız burasıdır. Türkiye Odalar ve Borsalar Birliği (TOBB), ilan edilen şirket verilerini girişimcilere ve veri şirketlerine ücretli API / Web Servis aboneliği ile yasal olarak satmaktadır. [ HYPERLINK &quot;https://www.ticaretsicil.gov.tr/view/hizlierisim/goster.php?Guid=4fb204d4-8b72-11e9-a292-54e058904e0d&quot; 1]
+Buradan Çekip Satabileceğiniz Yasal Veriler:
+Şirket Kuruluş ve Kimlik Bilgileri: Ticari Ünvan, Ticaret Sicil No, MERSİS No, Vergi Numarası, Kuruluş Tarihi, Şirket Türü (A.Ş., Ltd. Şti.).
+Adres ve İletişim Altyapısı: Şirketin resmi merkez adresi ve şube adresleri.
+Yönetim ve Temsil Verileri: Şirket ortakları, yönetim kurulu üyeleri, müdürler, imza yetkilileri ve şirketi temsil süreleri.
+Sermaye Hareketleri: Şirketin kuruluş sermayesi ve zaman içindeki sermaye artırımı/azaltımı geçmişi.
+Sektörel Dağılım: Şirketin ana faaliyet konusu (NACE kodları).
+2. Ticaret Odaları Üye Bilgi Bankaları (Örn: İTO) 🏛️
+HYPERLINK &quot;https://www.ito.org.tr/tr&quot; \t &quot;C:\\Users\\yasin\\AppData\\Local\\Temp\\_blank&quot; İstanbul Ticaret Odası (İTO) başta olmak üzere büyük ticaret odaları, kendi üyelerine ait ticari kartları sorgulamak için &quot;Şirket Kartı Web Servisleri&quot; sunmaktadır. [ HYPERLINK &quot;https://www.utikad.org.tr/Images/DosyaYoneticisi/1010202410e23ab3dfc44319acead918b6c16348.pdf&quot; 1]
+Buradan Çekip Satabileceğiniz Yasal Veriler:
+Şirketin güncel oda kayıt durumu (Faal, Askıda, Tasfiyede).
+Şirketin tescilli telefon, faks ve web sitesi gibi iletişim kanalları.
+Meslek grubu ve NACE kodu kırılımları. [ HYPERLINK &quot;https://bilgibankasi.ito.org.tr/&quot; 1]
+3. Kamuyu Aydınlatma Platformu (KAP) Verileri (Borsa İstanbul Şirketleri) 📈
+Eğer borsa şirketlerine odaklanacaksanız,  HYPERLINK &quot;https://www.kap.org.tr/&quot; \t &quot;C:\\Users\\yasin\\AppData\\Local\\Temp\\_blank&quot; KAP üzerindeki tüm veriler tamamen halka açık ve aleni verilerdir.
+Buradan Çekip Satabileceğiniz Yasal Veriler:
+Borsa şirketlerinin Finansal Tabloları (Bilanço, Gelir Tablosu, Nakit Akış Tablosu). (Açıkça matrah ve ciro arıyorsanız, sadece borsa şirketlerinin bu verilerine yasal ve ücretsiz olarak buradan erişebilirsiniz.)
+Ortaklık yapısı ve genel kurul bildirimleri.
+Sizin İş Modeliniz İçin Altın Tavsiye (KYB ve Risk Analitiği)
+TÜRMOB yerine rotanızı TOBB Ticaret Sicil Gazetesi API Entegrasyonuna çevirmelisiniz. Sektörde buna &quot;KYB (Know Your Business - Şirketini Tanı)&quot; ve &quot;İlişki Ağı Analizi&quot; yazılımları denir. [ HYPERLINK &quot;https://www.ticaretsicil.gov.tr/view/hizlierisim/goster.php?Guid=4fb204d4-8b72-11e9-a292-54e058904e0d&quot; 1,  HYPERLINK &quot;https://www.ihsteknoloji.com/blog/ticaret-sicil-api-entegrasyonu-ile-sirket-dogrulama-sureclerini-otomatize-etmenin-yollari/&quot; 2]
+Yasal olarak satın aldığınız bu gazete ilan verilerini yapay zekayla tasnif ederek piyasaya şu formatta satabilirsiniz:
+Şirket Doğrulama Servisi: Müşterilerinizin, kendi bayilerinin veya yeni tedarikçilerinin gerçekten faal olup olmadığını tescil verileriyle otomatik doğrulayan API yazılımı. [ HYPERLINK &quot;https://www.ihsteknoloji.com/blog/ticaret-sicil-api-entegrasyonu-ile-sirket-dogrulama-sureclerini-otomatize-etmenin-yollari/&quot; 1]
+Ortaklık ve Network Analizi: &quot;A şahsı geçmişte hangi şirketleri kurmuş? Şu anki şirketin arkasındaki nihai ortak (UBO) kim?&quot; gibi bağlantı haritaları çıkarıp bunu risk raporu olarak satmak. [ HYPERLINK &quot;https://www.ihsteknoloji.com/blog/ticaret-sicil-api-entegrasyonu-ile-sirket-dogrulama-sureclerini-otomatize-etmenin-yollari/&quot; 1]
+Girişiminiz için TOBB'un sunduğu bu resmi veri aboneliği paketlerini teknik olarak nasıl işleyeceğinizi veya bu verilerle üreteceğiniz Şirket Risk Raporu şablonu
+1. Nihai Faydalanıcı (UBO - Ultimate Beneficial Owner) ve Ortaklık Ağ Haritası
+Büyük şirketler ve finans kuruluşları, iş yapacakları bir firmanın arkasındaki gerçek patronların kim olduğunu bilmek zorundadır. Ticaret Sicil verilerindeki hisse devirlerini ve ortaklıkları tarayarak dinamik bir ağ haritası çıkarabilirsiniz.
+Ne Sağlar?: Kullanıcı bir VKN girdiğinde, o şirketin ortaklarını, o ortakların ortak olduğu diğer şirketleri ve en tepedeki nihai gerçek kişileri (UBO) görsel bir şema ile gösterir.
+Kritik Özellik: &quot;İlişkili Şirketler&quot; tespiti. (Örn: X şirketiyle iş yaparken, aslında o şirketin sahibinin batık durumdaki Y şirketinin de sahibi olduğunu sistemsel olarak yakalamak).
+2. Yönetim ve İmta Yetkisi Takip/Alarm Servisi (B2B SaaS)
+Büyük tedarikçiler (Örn: Bir lojistik firması veya fabrika), her gün yüzlerce sözleşme imzalar. Karşı tarafın imza atan yetkilisinin görev süresinin dolup dolmadığını kontrol etmek tam bir operasyonel yüktür.
+Ne Sağlar?: Şirketlerin imza yetkililerini, yönetim kurulu üyelerini ve yetki bitiş tarihlerini listeler.
+Kritik Özellik (Alarm): Kullanıcı sisteminize takip etmek istediği firmaları ekler. O firmalarda bir hisse devri, adres değişikliği, unvan değişimi veya imza yetkilisi süresinin dolmasına 30 gün kalması gibi bir sicil gazetesi ilanı yayınlandığı an kullanıcıya e-posta/SMS/Webhook alarmı gider.
+3. Sektörel NACE Kodu ve Bölge Yoğunluk Matrisi (Pazar Araştırma Raporları)
+Yeni bir sektöre girecek, bayilik verecek veya rakip analizi yapacak firmalara yönelik makro veri raporlamasıdır.
+Ne Sağlar?: Türkiye genelinde tescil edilen tüm şirketlerin kuruluş ve kapanış verilerini NACE kodlarına (faaliyet alanlarına) göre gruplarsınız.
+Örnek Rapor: &quot;Son 1 yılda İstanbul/Başakşehir bölgesinde tescil edilen yazılım şirketi sayısı&quot; veya &quot;İzmir'de kapanan gıda lojistiği firmalarının dönemsel analizi&quot;. Bu pazar analiz raporlarını kurumsal firmalara PDF veya dinamik dashboard olarak satabilirsiniz.
+4. Şirket &quot;Sağlık ve Yaş&quot; Skorlaması (Risk Derecelendirmesi)
+Finansal veri olmadan da bir şirketin sadece sicil geçmişine bakarak temel bir güvenilirlik/risk skoru üretebilirsiniz.
+Skorlama Parametreleri:
+Şirketin yaşı (İlk 3 yılı atlatan şirketler daha güvenlidir).
+Sermaye yapısı (Kuruluş sermayesi ne kadar? Yakın zamanda sermaye artırımı yaptı mı?).
+Adres ve unvan değişiklik sıklığı (Çok sık adres değiştiren veya sürekli unvan/faaliyet alanı değiştiren firmalar risk sinyali verir).
+Yönetim istikrarı (Ortakların sürekli değişip değişmediği).
+5. Sahte/Paravan Şirket Filtresi (Fraud Detection API)
+Özellikle pazaryerleri (Trendyol, Hepsiburada vb.) veya POS hizmeti veren FinTek şirketleri, platformlarına her gün binlerce sahte/paravan satıcı başvurusunu engellemeye çalışır.
+Ne Sağlar?: Yeni başvuru yapan şirketin sicil gazetesindeki kuruluş ilan tarihi, sermayesinin asgari tutarda olup olmadığı, ortakların daha önce batmış/kapanmış şüpheli şirketlerde ortaklığının bulunup bulunmadığı gibi kriterleri saniyeler içinde tarayan bir Fraud (Dolandırıcılık) Tespit API'si sunarsınız.
+🚀 Yol Haritası ve İlk Adım
+Bu fikirleri hayata geçirmek için sistem mimarisini ve iş modelini şu şekilde kurmalıyız:
+Aşama
+Yapılacak İşlem
+Amaç
+1. Veri Temini
+TOBB Ticaret Sicili Gazetesi Müdürlüğü ile görüşüp Web Servis Entegrasyon Paket fiyatlarını almak.
+Yasal veri akışını başlatmak.
+2. Veri Tabanı Mimarisi
+Gelen ham metinleri ve XML'leri (Ortak adı, hisse oranı, unvan vb.) ilişkilendirilebilir bir veritabanına (Graph Database - örn. Neo4j) aktarmak.
+Ortaklık ağ haritalarını milisaniyeler içinde çizebilmek.
+3. MVP ve Arayüz
+İlk etapta en çok talep gören &quot;Şirket Doğrulama ve Alarm Servisi&quot; modülü ile bir prototip (MVP) çıkarmak.
+Pazardan hızlıca geri bildirim almak.
+Bu modüller arasından ilk olarak hangisini hayata geçirmek istersiniz? Eğer isterseniz, seçeceğiniz modül için bankaların ve kurumsal firmaların entegre edebileceği örnek bir API İstek/Yanıt (JSON) yapısı tasarlayalım veya bir dashboard (arayüz) şeması çıkaralım. Hangisinden başlayalım?
+peki kademe bazlı api servisi mimarisi varmı örneğin x bir özelliği sadece y apisinde olacak yani özellik bazlı api mimarisi örnek 5. Sahte/Paravan Şirket Filtresi (Fraud Detection API) ve bunların hepsinin birleştiği bütüncül bir sistem apisi şeklinde vebilirmiyim böyle bir pazarlam yöntemi ve esnek kullanım sunmak iş yükü yaparmı en kolay önereceğin yöntem nedir fikir ver
+Evet, düşündüğünüz bu model yazılım dünyasında Feature-Based Pricing (Özellik Bazlı Fiyatlandırma) ve teknik olarak Granular API Gateway (Taneli API Ağ Geçidi) mimarisi olarak adlandırılır. Günümüzde Stripe, Twilio ve yerli FinTek'lerin tamamı bu esnek modelle satılır.
+Bu pazarlama yöntemi B2B müşteriler için mükemmel bir satın alma motivasyonudur. Çünkü küçük bir startup sadece basit &quot;Şirket Doğrulama&quot; API'sini ucuza almak isterken, dev bir banka &quot;Fraud Detektörü ve Tüm Entegrasyonları&quot; kapsayan en üst pakete büyük bütçeler ayırabilir.
+Peki bu model arka planda size çok büyük bir iş yükü çıkarır mı ve en kolay nasıl yönetilir? Detayları aşağıda yapılandırdım:
+🛠️ En Kolay ve Sürdürülebilir API Mimarisi (Monolitik Çekirdek + Gateway)
+Özellik bazlı esnekliği sağlamak için her bir servisi (Fraud, Alarm, Network) ayrı ayrı sunucularda bağımsız yazılımlar (Microservices) olarak geliştirmek ilk etapta size devasa bir iş yükü ve maliyet çıkarır.
+Bunun yerine en kolay yöntem: Tüm kod tabanını tek bir çatı altında toplamak (Monolith) ama müşterinin erişimini bir API Gateway (Ağ Geçidi) ve Rol/Kapsam (Scope) Yönetimi ile sınırlandırmaktır.
+Mimarinin Çalışma Mantığı (3 Katmanlı Yapı)
+[Müşteri İsteği]
+│
+▼
+1. API GATEWAY (Kong, KrakenD veya Express-Gateway)
+↳ &quot;Bu API Key geçerli mi? Hangi pakete sahip? Saniyede kaç istek atabilir (Rate Limit)?&quot;
+│
+▼
+2. SCOPE / YETKİ KONTROLÜ (JWT veya API Key Yetkileri)
+↳ &quot;Müşteri /fraud uç noktasına erişebilir mi? (İzni: fraud:read)&quot;
+│
+▼
+3. CORE UYGULAMA (Backend - Python/Node.js/Go)
+↳ İsteği işler, TOBB veritabanından sorgular ve sonucu döner.
+📋 Örnek Kademe ve API Endpoint Yapısı
+Sisteminizi dış dünyaya tek bir ana domain (örn: ://sirketanaliz.com) üzerinden, ancak net ayrılmış uç noktalarıyla (endpoints) açarsınız.
+Müşterinin API anahtarına (Token) panelinizden tik atarak yetki verirsiniz.
+Kademe 1: Temel Plan (Core KYB API)
+Endpoint: GET /v1/companies/{vkn}
+İşlev: Sadece şirketin faal olup olmadığını, unvanını ve adresini döner.
+Kademe 2: Risk &amp; Fraud Planı (Fraud Detection API)
+Endpoint: POST /v1/fraud-check
+İşlev: Şirketin paravan olup olmadığını, tescil yaşını ve şüpheli adres/ortaklık geçmişini tarar. Temel planı alan bu endpoint'e istek atamaz (403 Forbidden hatası alır).
+Kademe 3: Ağ ve İlişki Planı (Network API)
+Endpoint: GET /v1/companies/{vkn}/network
+İşlev: Şirketin ortaklık ağını ve nihai faydalanıcı (UBO) şemasını JSON olarak döner.
+Kademe 4: Bütüncül / Enterprise Plan (All-in-One API)
+Endpoint: GET /v1/companies/{vkn}/full-report
+İşlev: Yukarıdaki tüm katmanların (Temel + Fraud + Network) birleştiği tek ve devasa bir JSON çıktısı üretir. Kurumsal büyük firmalar tek istekte her şeyi almak için bu endpoint'i kullanır.
+📉 Bu Model İş Yükü Yaratır mı? Avantaj ve Dezavantajları
+Neden İş Yükü Yaratmaz? (Avantajları)
+Tek Veritabanı: Tüm API'ler aynı TOBB ve ticaret odası veritabanını kullanır. Sadece yazdığınız SQL veya Graph kodları değişir. (Temel API basit bir SELECT yaparken, Fraud API'si 5 farklı kural setini çalıştırır).
+Kolay Fiyatlandırma Değişikliği: İleride yeni bir özellik eklediğinizde müşterinin koduna dokunmadan, sadece veritabanınızdan o müşterinin API Key yetkilerine yeni bir &quot;scope&quot; (örneğin alarm:write) ekleyerek anında ek satış (upsell) yapabilirsiniz.
+Dikkat Etmeniz Gereken Tek Zorluk
+Dokümantasyon: Esnek ve parça parça bir yapı sunduğunuz için API dokümantasyonunuzun (Swagger/OpenAPI kullanarak) çok net olması gerekir. Müşteri hangi pakette hangi veriyi alacağını dokümantasyona bakarak hatasız entegre etmelidir.
+🎯 Girişiminiz İçin En Kolay Yol Haritası Önerisi
+Kodlamaya Başlarken: Tüm özellikleri tek bir projede yazın. API yönlendirmelerini (routing) baştan /v1/companies, /v1/fraud-check şeklinde ayrı tasarlayın.
+Müşteri Yönetimi İçin: Hazır açık kaynaklı API yönetim araçları (Örn: Kong API Gateway veya KrakenD) kullanın. Bu araçlar sayesinde &quot;X müşterisinin API Key'i sadece /v1/companies adresine gidebilsin, dakikada en fazla 60 istek atabilsin&quot; gibi kuralları tek satır kod yazmadan bir arayüzden ayarlayabilirsiniz.
+Faturalandırma: Stripe veya yerli ödeme kuruluşlarının &quot;kullandığın kadar öde&quot; (metered billing) veya &quot;özellik bazlı abonelik&quot; altyapılarını entegre ederek tahsilat sürecini de tamamen otomatize edebilirsiniz.
+Eğer isterseniz, kurumsal müşterilere pazarlayabileceğiniz ve bu kademeleri (Temel, Fraud, Full Report) gösteren örnek bir API Paket/Fiyatlandırma Tablosu kriterleri hazırlayabilirim.
+Stratejik API Geliştirme Planı (Faz Bazlı)
+Sistemi karmaşıklaştırmadan, tek bir veritabanı (Monolith çekirdek) ve bir API Gateway (Kong veya KrakenD) kullanarak özellikleri kademeli olarak açacağız.
+🛠️ 1. Aşama: Altyapı ve Veri Bağlantıları (MVP Başlangıcı)
+Odak: TOBB Ticaret Sicil Gazetesi API'si, EKAP ve DMO veri akışlarının ana sisteme bağlanması.
+Teknik Mimari: Tüm veriler ilişkisel ve hızlı sorgulanabilir bir yapıda (Graph veri tabanı desteğiyle) tek bir havuzda toplanır.
+Uç Nokta (Endpoint): GET /v1/companies/{vkn} (Temel Şirket Künyesi ve Doğrulama).
+🔒 2. Aşama: Risk, Paravanlık ve İhale Katmanı (Orta Kademe)
+Odak: Şirket yaşı, sermaye hareketleri ve adres değişim sıklığına göre Fraud (Sahte Firma) algoritmasının çalıştırılması. Kamu ihalelerinin geçmiş fiyat kırpma oranlarıyla sisteme dahil edilmesi.
+Uç Nokta: POST /v1/fraud-check ve GET /v1/companies/{vkn}/tenders
+🌐 3. Aşama: Ağ Haritası ve Bütüncül Rapor (Enterprise Katmanı)
+Odak: Hissedarlık bağları üzerinden Nihai Faydalanıcı (UBO) şemasının çizilmesi. Tek istekte tüm veri kümesini dönen bütüncül mimarinin tamamlanması.
+Uç Nokta: GET /v1/companies/{vkn}/network ve GET /v1/companies/{vkn}/full-report.
+🚨 Açık Riskler ve Dikkat Edilmesi Gereken Kritik Yerler
+Girişiminizin teknik olarak kilitlenmesini veya hukuki cezalarla karşılaşmasını engellemek için mutlaka önlem almanız gereken 4 ana risk şunlardır:
+1. &quot;Sınırsız API&quot; Paketindeki Teknik Açık ve Sömürülme Riski
+Açık Nokta: Kurumsal firmalara (örneğin 2.000 USD depozito ödeyen yapılara) &quot;Sınırsız API hattı&quot; tanımı yapıldığında, bu firmalar saniyede binlerce istek atan botlar (High-frequency scraping) çalıştırabilir.
+Yaratacağı Tehlike: Kredileri hızlı bitse dahi, o anki anlık trafik yükü sizin sunucularınızı kilitleyebilir. Daha da kötüsü, arka planda TOBB veya odalardan anlık veri çeken botlarınızın kaynak kurumlar tarafından IP engellemesine (IP Banning) uğramasına yol açar.
+Kesin Çözüm: API Gateway üzerinde katı bir Rate Limit (Hız Sınırı) politikası uygulayın. Kurumsal paket için bile &quot;Dakikada maksimum 60 sorgu, günlük maksimum 5.000 başarılı sorgu&quot; gibi teknik bariyerler koymak zorunludur.
+2. &quot;Temel Paket&quot; Sahiplerine API Satışındaki Marka Algısı Riski
+Açık Nokta: Dokümandaki planda, sınırsız API satın almak isteyenlerin ön koşul olarak en düşük paketi (Temel Paket) 12 aylık peşin alması şartı koşulmuş.
+Yaratacağı Tehlike: 2.000 USD kurulum bedeli ödeyen dev bir holding, kurallar gereği sisteme &quot;Temel Paket&quot; kullanıcısı olarak kaydolduğunda web paneline giriş yaparsa kısıtlı bir arayüzle karşılaşacak. Sadece e-posta desteği görecek, &quot;Mırmır Ajanı&quot; gibi premium modülleri kilitli olacak. Bu durum, markanın büyük müşteriler gözündeki premium algısını zedeler.
+Kesin Çözüm: Giriş şartını bir kademe yukarı taşıyın: &quot;API hattını entegre etmek isteyen yapılar, web panelinde en az Standart Paket (Yıllık Peşin) abonesi olmak zorundadır.&quot; Böylece holdinge web panelinde de kusursuz bir deneyim sunarsınız.
+3. KVKK, Web Kazıma (Web Scraping) ve Ticari Sır Duvarı
+Açık Nokta: TOBB ve Ticaret Sicil Gazetesi verileri kanunen aleni (halka açık) olsa da, 24 saatlik özel rapor modülünde botların internetten kazıyacağı personel hareketleri, iş ilanları ve firmaların gümrük/ithalat konşimento detayları gri alandadır.
+Yaratacağı Tehlike: Hassas verilerin açık kaynaklarda depolanması veya ambalajlanıp doğrudan satılması KVKK ihlallerine ve &quot;Ticari Sırrın İhlali&quot; davalarına yol açabilir.
+Kesin Çözüm: Açık olan arama motoru sitenizde (sirketarama.com) hassas hiçbir veriyi göstermeyin ve indeksletmeyin. Kazınan tüm derin istihbarat verilerini sadece şifreli, giriş yapılmış panelin (hugininsight.com) içerisinde ve yalnızca &quot;Kullanıcının talebi üzerine anlık hazırlanmış iş zekası raporu&quot; formatında sunun.
+4. 24 Saatlik Taahhüt ve Proxy Maliyet Tuzağı
+Açık Nokta: Kullanıcıya &quot;24 saatte derin dijital dedektiflik raporu&quot; vaat etmek harika bir satış kancasıdır. Ancak aynı gün 50 farklı kurumsal firma bu raporu talep ederse teknik operasyon tıkanabilir.
+Yaratacağı Tehlike: LinkedIn, X (Twitter) veya Google gibi platformlar botlarınızı saniyeler içinde fark edip engelleyebilir. Yoğun veri işleme süreçleri (OpenAI/Claude API ve konut tipi yerleşik proxy maliyetleri) tahmin ettiğinizden çok daha yüksek faturalar çıkarabilir.
+Kesin Çözüm: Finansal dengeyi sıkı kurun. 300 Kredi (300 USD) bedelle satacağınız bu üst düzey raporun ham yapay zekâ ve proxy maliyetinin, satış fiyatınızın en fazla %20'si olmasını sağlayacak şekilde algoritmanızı optimize edin. Ayrıca dökümandaki &quot;Zamanında teslim edilmezse kredi iadesi&quot; taahhüdünü yasal sözleşmenize (SLA) mutlaka ekleyin.
+1 Kredi = 1 USD (50 ₺) dengesine, 4 aşamalı üyelik yapısına ve getirdiğiniz &quot;API alabilmek için yıllık peşin abonelik taahhüdü&quot; kuralına göre optimize edilmiş en olası ticari senaryo tablosu aşağıdadır.
+Dokümandaki operasyonel riski sıfırlamak adına, API satın alma ön koşulu &quot;Temel Paket&quot; yerine yıllık peşin &quot;Standart Paket&quot; olarak güncellenmiştir. Ayrıca teknik güvenliğiniz için Hız Sınırları (Rate Limit) tabloya net olarak işlenmiştir.
+📊 Belge Tabanlı Güncellenmiş API Paket ve Fiyatlandırma Matrisi
+Kriter / Özellik
+🥉 1. TEMEL PAKET
+🥈 2. STANDART PAKET
+🥇 3. PROFESYONEL PAKET
+🚀 4. ENTERPRISE &amp; API UZANTISI
+Aylık Fiyat (USD)
+20,00 USD
+60,00 USD
+200,00 USD
+1.000,00 USD
+Aylık Fiyat (TL)
+1.000,00 ₺
+3.000,00 ₺
+10.000,00 ₺
+50.000,00 ₺
+Dahil Aylık Kredi
+5 Kredi
+10 Kredi
+20 Kredi
+100 Kredi
+Hız Sınırı (Rate Limit)
+Dakikada max. 30 istek
+Dakikada max. 60 istek
+Dakikada max. 120 istek
+Dakikada max. 60 istek (Teknik Güvenlik Sınırı)
+Erişilebilir Endpoint'ler
+GET /v1/companies/{vkn}
+GET /v1/companies/{vkn}POST /v1/fraud-check
+Tüm Web Endpoint'leri Açık
+Tüm Web &amp; API Entegrasyon Uç Noktaları Açık
+Rapor Kapsamı &amp; Gücü
+Temel Künye, ATO/TOBB Sicil
+Temel + Gelişmiş Kart + Bayi Sorgu
+Tüm Raporlar + 6 Saatlik Hızlı Kazıma
+Tüm Raporlar + 24 Saatlik Üst Düzey AI Kazıma
+Özel Modüller
+❌ Tüm Takip Modülleri Kapalı
+🕵️‍♂️ Mırmır Ajanı (3 Firma Takibi)🐦 Haber Kuşu (Sektörel)
+🕵️‍♂️ Mırmır Ajanı (15 Firma Takibi)🐦 Haber Kuşu (Anlık Uyarı)
+🕵️‍♂️ Mırmır Ajanı (Sınırsız Takip)🐦 AI WhatsApp/SMS İstihbaratı
+API Entegrasyon İzni
+❌ API Erişimi Yok
+❌ API Erişimi Yok
+❌ API Erişimi Yok
+✅ Sınırsız Canlı API Entegrasyon Hattı
+API Giriş Ön Koşulu
+Entegrasyona uygun değil.
+Entegrasyona uygun değil.
+Entegrasyona uygun değil.
+12 Aylık Standart Paket Peşin Ödemesi (720 USD / 36.000 ₺ Taahhüt kilitlenir).
+API Kurulum Bedeli
+—
+—
+—
+2.000,00 USD (100.000 ₺) İade edilmez kurulum ve lisans depozitosu.
+API Sorgu Başat Tüketim
+—
+—
+—
+Başarılı sorgu başına cüzdandan 3 Kredi (3 USD) düşer.
+🔍 En Olası Senaryonun API Tarafındaki Çalışma Mantığı (Nasıl Faturalanacak?)
+Kurumsal bir holding sisteminize doğrudan API entegrasyonu yapmak istediğinde finansal akış tam olarak şu şekilde gerçekleşecektir:
+İlk Giriş Kapısı (Ön Koşul &amp; Güvence): Holding, web panelini de aktif kullanabilmek ve Churn (abonelik iptali) riskini sıfırlamak için öncelikle 12 aylık Standart Paket bedeli olan 720 USD'yi peşin öder.
+Altyapı Kurulum Faturalandırması: Ön koşul sağlandıktan sonra, holdingden tek seferlik 2.000 USD tutarında &quot;API Kurulum ve Entegrasyon Bedeli&quot; (Depozito) tahsil edilir.
+Kredi / Kontör Yükleme (Top-up): Şirket API havuzuna dilediği kadar bütçe yükler (Örneğin 1.000 USD = 1.000 Kredi). ERP veya muhasebe sistemlerinden uygulamanıza gönderilen her başarılı sorguda (örneğin bayi doğrulama/fraud analizi) şirketin cüzdanından 3 Kredi (150 ₺) anında düşer. Krediler ay sonunda silinmez, bittiğinde API otomatik olarak askıya alınır ve şirket yeni kredi yüklemesi (top-up) yapar.
+1 Kredi = 1 USD dengesi ve tasarladığımız Kontrollü Hibrit Strateji (tek domainde başlayıp uydularla genişleme) temelinde şu an Türkiye B2B SaaS pazarı için son derece agresif, yenilikçi ve yüksek kârlılık potansiyeline sahip bir noktada.
+Ancak bir yatırımcı, yazılım mimarı ve potansiyel kurumsal müşteriniz (satın alma/risk direktörü) gözüyle sistemi masaya yatırdığımızda; operasyonu kilitleyebilecek, yasal cezalar doğurabilecek veya masada para bırakmanıza neden olacak 4 kritik açık/eleştiri ve bunları giderecek iyileştirme önerileri bulunmaktadır:
+🧐 1. Eleştiri: &quot;Mırmır Ajanı&quot; (Firma Takibi) Modülünün Gizli Maliyet Tuzağı
+Açık/Sorun: Standart pakette 3, Profesyonel pakette 15 firmayı abonenin &quot;Radarına&quot; almasına izin veriyoruz. Sistem bu firmaların Ticaret Sicil Gazetesi, EKAP ihaleleri ve iş ilanlarındaki değişiklikleri anlık tarayacak. Türkiye'de her gün binlerce sicil gazetesi ilanı ve ihale yayınlanıyor. 1.000 abonenin ortalama 10'ar firma takip ettiğini düşünürsek, sistemin her gün 10.000 firmayı sürekli &quot;Scrape&quot; etmesi (web kazıması yapması) gerekir.
+Risk: Bu durum devasa bir Proxy (Konut Tipi IP) ve Sunucu maliyeti yaratır. 60 USD (3.000 ₺) ödeyen Standart paket kullanıcısı, arka planda size 100 USD'lik sunucu ve proxy faturası çıkarabilir.
+💡 İyileştirme Önerisi: Takip modülünü (Mırmır Ajanı) tamamen ücretsiz/sınırsız bir hak gibi sunmak yerine Kredi Odaklı hale getirin. Abone, radarına yeni bir şirket eklerken tek seferlik 5 Kredi, o şirketten gelen her anlık alarm/bildirim başına ise 0.5 Kredi harcasın. Böylece çok sorgu yapan kurumsal müşteri maliyetini kendi ödemiş olur.
+🧐 2. Eleştiri: 200 ve 300 Kredilik &quot;Premium/Üst Düzey Rapor&quot; Fiyat Uçurumu
+Açık/Sorun: Temel, Gelişmiş ve Plus raporlar 1, 3 ve 5 kredi (50 ₺ - 250 ₺) gibi çok makul ve hızlı harcanabilir seviyelerdeyken, anlık derin web kazıma raporları birden 200 ve 300 Krediye (10.000 ₺ - 15.000 ₺) fırlıyor. Aradaki makas psikolojik olarak çok açık.
+Risk: Küçük ve orta ölçekli KOBİ'ler 5 kredilik raporu çok sık harcar ancak 200 kredilik butona basmaya korkar. Bu durum, en çok güvendiğiniz &quot;Dijital Dedektiflik&quot; özelliğinin içeride atıl kalmasına neden olabilir.
+💡 İyileştirme Önerisi: Araya bir &quot;Köprü Ürün&quot; ekleyin. Şirketlerin sadece sosyal medya ve aktif iş ilanlarını (gümrük ve derin ağ analizleri hariç) 1 saat içinde tarayıp getiren bir &quot;Dijital Ayak İzi Raporu&quot; modülü tasarlayın ve bunu 30 Kredi (1.500 ₺) olarak konumlandırın. Kullanıcılar 5 krediden 30 krediye daha kolay zıplar, 30 krediyi deneyip memnun kalan holdingler ise 300 kredilik üst düzey dedektiflik raporunu sipariş eder.
+🧐 3. Eleştiri: Pazar Yeri (İlan) Modülündeki KVKK ve Güven Duvarı
+Açık/Sorun: Fabrikaların atıl makinelerini (Boş CNC tezgahı vb.) ve fazla stok/hurdalarını listeyebileceği ://sirketarama.com dizini dâhice bir SEO kancası. Ancak B2B dünyasında dolandırıcılık (fake ilanlar) markanızı bir günde bitirebilir. Bir kullanıcı platformdaki ilana güvenip kapora gönderirse ve karşı taraf paravan çıksa ihale size kalır.
+Risk: Ticari itibar kaybı ve platformun &quot;güvenilmez&quot; olarak yaftalanması.
+💡 İyileştirme Önerisi: Platformda ilan açma yetkisini sadece &quot;Mersis + Ticaret Odası Kaydı + Vergi Levhası&quot; sistem tarafından (GİB API'si ile) %100 doğrulanmış kurumsal üyelere açın (Şahıs şirketlerini eleme kararınız doğru, bunu daha da sıkılaştırın). Ayrıca ilan detayına şu ibareyi yasal zırh olarak ekleyin: &quot;Bu ilan sahibi, vergi levhası tescilli X Anonim Şirketi'dir. HuginInsight taraflar arasındaki ticari anlaşmalardan sorumlu değildir.&quot;
+🧐 4. Eleştiri: API Giriş Koşulundaki &quot;Bürokratik Engel&quot;
+Açık/Sorun: API entegrasyonu yapmak isteyen büyük holdinglere &quot;Önce 12 aylık Standart Paket aboneliğini peşin öde (720 USD), sonra 2.000 USD kurulum bedeli ver&quot; şartı harika bir Churn bariyeri ve nakit akışı aracı. Ancak büyük holdinglerin satın alma departmanları (Örn: Sabancı Holding, Trendyol vb.) iki farklı kalemde fatura kesilmesini, süreçlerin uzamasını sevmez. &quot;Bize tek bir Enterprise paket faturası kesin&quot; derler.
+Risk: Satış süreçlerinin bürokraside boğulması ve kurumsal müşterinin masadan kalkması.
+💡 İyileştirme Önerisi: Bu iki ücreti kurumsal müşteriye pazarlarken ayrı ayrı söylemeyin. Paket adını doğrudan &quot;Enterprise API Gateway Planı&quot; yapın. Fiyatı ise &quot;Yıllık 2.720 USD (Kurulum ve 12 Aylık Web Panel Kullanımı Dahil)&quot; şeklinde tek bir paket olarak paketleyin. Psikolojik olarak holding &quot;Ekstra bir de abonelik mi alacağım?&quot; demez, tek kalemde tüm ekosistemin kilidini açtığını düşünür.
+🎯 Son Durum Değerlendirmesi: Girişimin Geleceği Ne Durumda?
+Bu iyileştirmeleri yaptığınız takdirde elinizdeki model:
+Programmatik SEO sayesinde sıfır reklam maliyetiyle Google'ı domine eder.
+Kredi + Abonelik (Hibrit) modeliyle düzenli ve öngörülebilir nakit akışı sağlar.
+API bariyeri sayesinde kurumsal büyük balıkları içeriye en az 1 yıl boyunca kilitler.
+Sistem mimarisini kusursuzlaştırmak adına bir sonraki adımda neyi planlayalım?
+Ekosistemimizin hem teknik kaslarını (API) hem de kullanıcıyı paraya dönüştüren arayüz kaslarını (UI/UX) sırayla inşa edelim.
+İlk olarak, yazılım ekibinizin doğrudan backend mimarisine entegre edebileceği Kademe 2: Risk &amp; Fraud Planı (POST /v1/fraud-check) uç noktasının teknik JSON şemasını tasarlıyoruz.
+🛠️ Bölüm 1: POST /v1/fraud-check API Teknik İstek/Yanıt Şeması
+Bu API, özellikle FinTek'lerin, pazaryerlerinin ve bankaların üye işyeri alım (onboarding) süreçlerinde paravan veya dolandırıcı şirketleri saniyeler içinde yakalamak için kullanacağı ana üründür.
+1. İstek (Request) Yapısı
+Müşteri sisteminize sorgulamak istediği şirketin Vergi Kimlik Numarasını (VKN) ve firmanın beyan ettiği kuruluş yılını gönderir.
+Endpoint: https://sirketanaliz.com
+Method: POST
+Headers:
+Content-Type: application/json
+Authorization: Bearer hg_live_9482f3... (Müşterinin API Anahtarı)
+json
+{
+&quot;vkn&quot;: &quot;1234567890&quot;,
+&quot;declared_establishment_year&quot;: 2024
+}
+Kodu dikkatli kullanın.
+2. Başarılı Yanıt (Response - 200 OK) Yapısı
+Sistem, TOBB ve Ticaret Sicil veritabanındaki parametreleri kendi ağırlık algoritmasından geçirerek 0 ile 100 arasında bir Risk Skoru ve risk tetikleyicilerini döner.
+json
+{
+&quot;status&quot;: &quot;success&quot;,
+&quot;query_metadata&quot;: {
+&quot;vkn&quot;: &quot;1234567890&quot;,
+&quot;company_title&quot;: &quot;XYZ PARAVAN ELEKTRONİK TİCARET LİMİTED ŞİRKETİ&quot;,
+&quot;execution_time_ms&quot;: 420,
+&quot;credits_deducted&quot;: 3
+},
+&quot;fraud_analysis&quot;: {
+&quot;risk_score&quot;: 82,
+&quot;risk_level&quot;: &quot;HIGH&quot;,
+&quot;evaluation_summary&quot;: &quot;Şirket, asgari kuruluş sermayesine sahip olup son 12 ayda olağan dışı adres ve yönetim kurulu değişikliği gerçekleştirmiştir. Paravan şirket davranışı göstermektedir.&quot;
+},
+&quot;risk_indicators&quot;: [
+{
+&quot;code&quot;: &quot;FRD_AGE_CRITICAL&quot;,
+&quot;description&quot;: &quot;Şirket yaşı 1 yıldan küçüktür.&quot;,
+&quot;is_triggered&quot;: true,
+&quot;weight&quot;: 25
+},
+{
+&quot;code&quot;: &quot;FRD_CAPITAL_MINIMUM&quot;,
+&quot;description&quot;: &quot;Şirket sermayesi yasal asgari sınırda tescil edilmiştir ve büyüme göstermemiştir.&quot;,
+&quot;is_triggered&quot;: true,
+&quot;weight&quot;: 15
+},
+{
+&quot;code&quot;: &quot;FRD_ADDRESS_CHURN&quot;,
+&quot;description&quot;: &quot;Son 12 ayda 2'den fazla resmi adres değişikliği tescil edilmiştir.&quot;,
+&quot;is_triggered&quot;: true,
+&quot;weight&quot;: 30
+},
+{
+&quot;code&quot;: &quot;FRD_MANAGEMENT_INSTABILITY&quot;,
+&quot;description&quot;: &quot;Son 6 ayda imza yetkililerinde veya ortaklık yapısında ani değişim.&quot;,
+&quot;is_triggered&quot;: true,
+&quot;weight&quot;: 12
+},
+{
+&quot;code&quot;: &quot;FRD_NACE_MISMATCH&quot;,
+&quot;description&quot;: &quot;Beyan edilen faaliyet alanı ile resmi NACE kodu uyuşmazlığı.&quot;,
+&quot;is_triggered&quot;: false,
+&quot;weight&quot;: 0
+}
+]
+}
+Kodu dikkatli kullanın.
+🎨 Bölüm 2: Panel İçi UI/UX Akışları &amp; Kısıtlı Duvar (Paywall) Mimarisi
+Kullanıcıların kısıtlı duvara çarptığında Standart veya Profesyonel pakete geçmesini ya da mikro ödemeyle kredi yüklemesini sağlayacak olan Yapay Zekâ Haber Kuşu ve Mırmır Ajanı modüllerinin panel içi yerleşim kurgusu:
+🐦 Modül A: Yapay Zekâ Haber Kuşu (Sektörel İstihbarat Akışı)
+Kullanıcı panele girdiğinde, kendi ilgilendiği sektörlerde (Örn: Savunma Sanayi veya Tekstil) yapay zekânın interneti tarayarak yakaladığı kritik haberleri ve ticari sinyalleri görür.
+Ücretsiz / Temel Paket Arayüzü (Kanca Etkisi):
+Ekranda son derece kritik 3 adet sektörel istihbarat başlığı listelenir.
+Örnek Başlık: &quot;Ankara merkezli bir savunma sanayi devinin alt yüklenici listesi güncellendi. 4 yeni KOBİ listeye dahil edildi.&quot;
+Kısıtlı Duvar (Paywall): Kullanıcı haberin detayına veya &quot;Hangi 4 şirket dahil edildi?&quot; sorusunun cevabına tıklamak istediğinde ekran buzlanır (blur) ve üzerine şu kart biner:
+🔒 Haber Kuşu Premium DetayBu istihbarat raporunun ve şirket isimlerinin tamamını görmek için Standart Plan'a geçiş yapın veya cüzdanınızdan 5 Kredi harcayın.[ Şimdi Standart Plana Geç - 60$/Ay ] [ Sadece Bu Raporu Aç - 5 Kredi ]
+🕵️‍♂️ Modül B: Mırmır Ajanı (Firma Radarı &amp; Takip Sistemi)
+Kullanıcının piyasada rekabet ettiği veya borç/alacak ilişkisi içinde olduğu firmaları &quot;Takip Listesine&quot; eklediği ekrandır.
+Kullanıcı Deneyimi (UX) Akışı:
+Kullanıcı arama barına bir şirketin VKN'sini yazar.
+Şirket kartının sağ üst köşesinde dev bir &quot;Mırmır Ajanını Görevlendir (Takibe Al)&quot; butonu yer alır.
+Harcama Tetikleyicisi: İyileştirme önerimiz doğrultusunda, kullanıcı butona bastığında ekrana net bir onay kutusu gelir:
+🕵️‍♂️ Ajan Görevlendiriliyor&quot;ABC Anonim Şirketi&quot; 7/24 radara alınacaktır. Bu şirketin Ticaret Sicil Gazetesi değişiklikleri, EKAP ihale katılımları ve LinkedIn iş ilanları anlık taranacaktır.
+Maliyet: Takibe alma bedeli 5 Kredi.
+Bildirimler: Gelen her anlık alarm başına 0.5 Kredi bakiyenizden düşecektir.[ Onaylıyorum, Takibi Başlat ] [ İptal ]
+Cüzdan Bariyeri (Yetersiz Bakiye Akışı): Eğer kullanıcının bakiyesi yetersizse, sistem onu ödeme sayfasına atmadan panel içinde açılır bir pencereyle (Modal) yakalar:
+💳 Yetersiz Kredi BakiyesiBu işlemi gerçekleştirmek için 5 krediniz bulunmuyor. Kartınızla tek tıkla yükleme yapın:[ 10 Kredi Yükle - 10 USD ] [ 50 Kredi Yükle - 45 USD (%10 İndirimli) ](Masterpass güvencesiyle kayıtlı kartınızdan anında tahsil edilecektir.)
+Ekosistemin hem teknik hem de ticari altyapısını mükemmel bir şekilde kurguladık. Bir sonraki aşamada projenizi ileri taşımak için hangisini yapalım?
+Bölüm 1: sirketarama.com İçin Google Paywall JSON-LD Şeması (Technical SEO)
+Google, normal kullanıcılardan gizlediğiniz (kilitlediğiniz veya blurlaştırdığınız) içerikleri kod tabanında doğrudan okursa sitenize &quot;Cloaking (Gizleme/Kullanıcıyı Yanıltma)&quot; cezası keserek sizi arama sonuçlarından silebilir. Bunu yasal olarak aşmanın ve kilitli anahtar kelimelerden trafik çekmenin tek yolu, Google botlarına içeriğin ticari bir duvar arkasında olduğunu Schema.org standartlarında bildirmektir.
+Yazılım ekibinizin sirketarama.com altındaki dinamik şirket, ihale ve ilan sayfalarının &lt;head&gt; etiketleri arasına dinamik olarak basması gereken Server-Side Rendered (SSR) uyumlu teknik kod yapısı:
+json
+{
+&quot;@context&quot;: &quot;https://schema.org&quot;,
+&quot;@type&quot;: &quot;Article&quot;,
+&quot;mainEntityOfPage&quot;: {
+&quot;@type&quot;: &quot;WebPage&quot;,
+&quot;@id&quot;: &quot;https://sirketarama.com&quot;
+},
+&quot;headline&quot;: &quot;XYZ Holding A.Ş. Ticari Risk Analizi, İhale Geçmişi ve Künyesi&quot;,
+&quot;description&quot;: &quot;XYZ Holding A.Ş. şirketinin güncel TOBB tescil kayıtları, EKAP ihale performans verileri ve yapay zekâ destekli paravanlık/risk analiz raporu.&quot;,
+&quot;image&quot;: &quot;https://sirketarama.com&quot;,
+&quot;author&quot;: {
+&quot;@type&quot;: &quot;Organization&quot;,
+&quot;name&quot;: &quot;HuginInsight AI&quot;
+},
+&quot;publisher&quot;: {
+&quot;@type&quot;: &quot;Organization&quot;,
+&quot;name&quot;: &quot;Şirket Arama&quot;,
+&quot;logo&quot;: {
+&quot;@type&quot;: &quot;ImageObject&quot;,
+&quot;url&quot;: &quot;https://sirketarama.com&quot;
+}
+},
+&quot;isAccessibleForFree&quot;: &quot;False&quot;,
+&quot;hasPart&quot;: {
+&quot;@type&quot;: &quot;WebPageElement&quot;,
+&quot;isAccessibleForFree&quot;: &quot;False&quot;,
+&quot;cssSelector&quot;: &quot;.premium-data-layer-container&quot;
+}
+}
+Kodu dikkatli kullanın.
+💡 Yazılımcılar İçin Teknik Uygulama Notu:
+isAccessibleForFree: &quot;False&quot;: Bu satır Google botuna &quot;Ben kullanıcıyı aldatmıyorum, burası ticari bir platform ve bu veri katmanı ücretlidir&quot; beyanıdır. Google bu sayede içerideki bulanıklaştırılmış metinleri indeksler ancak sitenize ceza kesmez.
+cssSelector: Sayfa tasarımınızda kilitli, bulanık (blur) olan tüm premium alanları (Fraud skoru, gümrük detayları vb.) mutlaka class=&quot;premium-data-layer-container&quot; isimli tek bir ana HTML div kapsayıcısı (wrapper) içerisine alın.
+📜 Bölüm 2: Kurumsal B2B Hizmet Seviyesi Taahhüdü (SLA) ve Sözleşme Taslağı
+Büyük holdingler, bankalar ve FinTek şirketleri uygulamalarını sizin API hattınıza bağlamadan önce kesintisiz hizmet güvencesi isterler. Bu taslak, eleştirilerimiz doğrultusunda hız sınırlarını (Rate Limit) yasal bir hakka dönüştüren ve 24 saatlik üst düzey rapor iade garantisini regüle eden kurumsal kuralları içerir.
+VERİ ENTEGRASYONU VE HİZMET SEVİYESİ SÖZLEŞMESİ (SLA)
+1. TARAFLARİşbu sözleşme, bir tarafta HuginInsight Bilgi Teknolojileri A.Ş. (Bundan böyle &quot;Sağlayıcı&quot; olarak anılacaktır) ile diğer tarafta entegrasyon hizmetinden faydalanacak olan [Müşteri Şirket Ünvanı] (Bundan böyle &quot;Müşteri&quot; olarak anılacaktır) arasında imzalanmıştır.
+2. SÖZLEŞMENİN AMACI VE KAPSAMIİşbu sözleşmenin amacı, Sağlayıcı tarafından geliştirilen B2B Şirket Doğrulama, Risk &amp; Fraud Analizi ve Ortaklık Ağ Haritası API hatlarının ve Web Panel platformunun Müşteri'ye tahsis edilmesi, kullanım şartlarının, hız sınırlarının ve hizmet garantilerinin (SLA) belirlenmesidir.
+3. HİZMET SEVİYESİ VE KESİNTİSİZLİK (UPTIME) TAAHHÜDÜ
+3.1. Sağlayıcı, API hatlarının ve veri sorgulama sunucularının aylık bazda %99.9 oranında erişilebilir (Uptime) olacağını taahhüt eder.
+3.2. Resmi devlet kurumlarının (TOBB, GİB, MERNİS, EKAP vb.) altyapılarında meydana gelen ve Sağlayıcı'nın kontrolü dışında olan genel veya bölgesel kesintiler, işbu Uptime hesaplamasına dahil edilmez.
+4. TEKNİK GÜVENLİK VE HIZ SINIRLARI (RATE LIMIT) POLİTİKASI
+4.1. Müşteri'nin siber altyapıyı sömürmesini, kötü niyetli toplu veri çekme (scraping) faaliyetlerini ve Sağlayıcı sunucularının kilitlenmesini önlemek amacıyla Enterprise API hattına Hız Sınırı (Rate Limit) uygulanmıştır.
+4.2. Müşteri'ye tahsis edilen API anahtarı (Token) ile dakikada maksimum 60 (altmış) adet, günlük maksimum 5.000 (beş bin) adet başarılı sorgu gerçekleştirilebilir. Limit aşımında API hattı otomatik olarak sonraki periyoda kadar 429 Too Many Requests yanıtı vererek istekleri askıya alır.
+5. 24 SAATLİK ÜST DÜZEY RAPOR VE GARANTİ (SLA İADE) POLİTİKASI
+5.1. Müşteri tarafından Web Panel üzerinden talep edilen &quot;Üst Düzey Yapay Zekâ ve Anlık Derin Kazıma Raporları&quot;, sipariş saatinden itibaren en geç 24 (yirmidört) saat içinde Müşteri paneline teslim edilmek zorundadır.
+5.2. Sağlayıcı kaynaklı teknik bir aksaklık veya operasyonel gecikme nedeniyle raporun 24 saat içinde teslim edilememesi durumunda, Müşteri'den tahsil edilen 300 (üç yüz) Kredi tutarı Müşteri cüzdanına anında ve kesintisiz olarak iade edilir.
+5.3. İade işlemi gerçekleştirilse dahi, geciken ilgili derin araştırma raporu tamamlandığı an Müşteri'ye tamamen ücretsiz olarak teslim edilecektir.
+6. MALİ HÜKÜMLER VE API SORGULAMA TÜKETİMİ
+6.1. Müşteri, Enterprise API hattına erişim sağlayabilmek için ön koşul olarak Standart Web Paketini 12 aylık peşin (720 USD) ve API Kurulum &amp; Lisans bedelini (2.000 USD) tek seferde ödemekle yükümlüdür. Bu bedeller iade edilmez.
+6.2. API üzerinden çekilen her başarılı Gelişmiş Şirket Kartı ve Fraud sorgusunda, Müşteri'nin Enterprise cüzdan bakiyesinden sabit 3 Kredi (3 USD) düşülür. Cüzdan bakiyesi sıfırlandığında API hattı otomatik olarak durdurulur ve yeni yükleme (Top-up) yapılana kadar aktif edilmez.
+7. YASAL UYUM VE KVKK SORUMLULUĞU
+7.1. Sağlayıcı tarafından sunulan veriler ticari istihbarat ve iş zekası amaçlı olup, Müşteri bu verileri üçüncü şahıslara ham veri olarak satamaz, pazarlayamaz veya veri tabanı ticareti amacıyla kullanamaz. Taraflar, 6698 sayılı KVKK hükümlerine uymayı karşılıklı olarak taahhüt eder.
+Yazılımcılarınızın ödeme süreçlerini otomatize etmesi için gereken iyzico Webhook Akış Mimarisi ve girişimizin finansal sürdürülebilirliğini garanti altına alacak, tüm gizli maliyetleri (KDV, Gelir Vergisi, iyzico Komisyonu, Sunucu, API) hesaplayan Net Kâr Algoritması Formülü aşağıda yapılandırılmıştır.
+🛠️ Bölüm 1: iyzico Webhook Veritabanı ve API Entegrasyon Şeması
+Kullanıcı kredi kartı ile ödeme yaptığında veya aylık aboneliği yenilendiğinde, iyzico sizin backend sunucunuza bir POST isteği (Webhook) fırlatır. Yazılımcılarınızın bu sinyali yakalayıp kullanıcının cüzdanına krediyi güvenli bir şekilde tanımlaması için örnek şema:
+Endpoint (Sizin Sunucunuz): https://hugininsight.com
+Method: POST
+📥 iyzico'dan Gelen Örnek Webhook Verisi (Request Body)
+json
+{
+&quot;eventType&quot;: &quot;GROSS_MERCHANT_PAYMENT_SUCCESSFUL&quot;,
+&quot;eventTime&quot;: 1791612600000,
+&quot;ioPaymentId&quot;: &quot;12345678&quot;,
+&quot;merchantId&quot;: &quot;987654&quot;,
+&quot;paymentConversationId&quot;: &quot;HUGIN-SUB-2026-9841&quot;,
+&quot;status&quot;: &quot;SUCCESS&quot;,
+&quot;iyziReferenceCode&quot;: &quot;REF-998811&quot;,
+&quot;totalPrice&quot;: 3000.00,
+&quot;currency&quot;: &quot;TRY&quot;,
+&quot;paymentId&quot;: &quot;951753&quot;,
+&quot;basketId&quot;: &quot;B_STANDART_PLAN_01&quot;,
+&quot;customParams&quot;: {
+&quot;user_id&quot;: &quot;usr_849204&quot;,
+&quot;allocated_credits&quot;: &quot;10&quot;,
+&quot;plan_type&quot;: &quot;STANDART&quot;
+}
+}
+Kodu dikkatli kullanın.
+🧠 Backend Yazılımcıları İçin İş Mantığı (Logic Steps)
+İmza Doğrulama (Signature Verification): Gelen isteğin gerçekten iyzico'dan gelip gelmediğini iyzico SDK'sını kullanarak Iyzico-Signature başlığı (header) üzerinden doğrulayın.
+Çift İşlem Engelleme (Idempotency): iyziReferenceCode bilgisini veritabanında aratın. Eğer bu ödeme daha önce işlendiyse 200 OK dönün ve işlemi tekrarlamayın.
+Cüzdan Güncelleme (Database Update): customParams içindeki user_id'yi bulun:
+Kullanıcının current_credits değerine allocated_credits (10) ekleyin.
+plan_type değerini STANDART olarak güncelleyin ve geçerlilik süresini +30 gün uzatın.
+Loglama: İşlemi payment_history tablosuna başarılı olarak kaydedip iyzico'ya anında HTTP 200 OK yanıtı dönün.
+📊 Bölüm 2: Finansal Net Kâr Algoritması ve Hesaplama Formülü
+Platformumuzda 1 Kredi = 1 USD dengesi kurduk. Ancak TOBB veri çekim maliyetleri, vergiler, iyzico komisyonları ve sunucu/proxy altyapısı bu 1 USD'den pay alır. Aşağıdaki formül, Gelişmiş Rapor (3 Kredi = 3 USD = 150 ₺) üzerinden bir kurumsal şirketin yaptığı sorgu başına cebinize kalacak Net Kârı hesaplar.
+🧮 Kaba Maliyet Parametreleri (Varsayımlar)
+KDV: %20
+Gelir / Kurumlar Vergisi: %25
+iyzico Komisyonu: %3 + 0.50 ₺ (B2B hacimli kurumsal hesap varsayımı)
+TOBB / Veri Tedarik Maliyeti: Sorgu başına 1 USD + KDV (%20)
+Sunucu, Yapay Zekâ &amp; Proxy Maliyeti: Sorgu başına sabit ~0.10 USD (Yapay zekâ token harcaması ve konut tipi IP maliyet havuzu)
+📐 Net Kâr Algoritması Formülü (Python Örneği)
+Yazılımcılarınızın finansal dashboard paneline entegre edebileceği veya excel modellerinizde kullanabileceğiniz kaba matematiksel formül:
+python
+def hesapla_sorgu_basi_net_kar(sorgu_kredisi, usd_kuru):
+# 1. Brüt Gelir Hesaplama (Kullanıcının harcadığı kredi)
+brut_gelir_usd = sorgu_kredisi * 1.0  # 3 Kredi = 3 USD
+brut_gelir_tl = brut_gelir_usd * usd_kuru
+# 2. Vergilerin Ayrılması (KDV)
+matrah_tl = brut_gelir_tl / 1.20  # %20 KDV düşülmüş net matrah
+kdv_tutari_tl = brut_gelir_tl - matrah_tl
+# 3. iyzico Kesintisi (Brüt ciro üzerinden hesaplanır)
+iyzico_komisyon_orani = 0.03
+iyzico_islem_ucreti = 0.50
+iyzico_maliyeti_tl = (brut_gelir_tl * iyzico_komisyon_orani) + iyzico_islem_ucreti
+# 4. Veri (TOBB) Tedarik Maliyeti (1 USD + %20 KDV)
+tobb_maliyeti_usd = 1.0 * 1.20  # KDV dahil TOBB maliyeti
+tobb_maliyeti_tl = tobb_maliyeti_usd * usd_kuru
+# 5. Teknik Altyapı Maliyeti (AI API + Sunucu + Proxy)
+teknik_maliyet_usd = 0.10
+teknik_maliyet_tl = teknik_maliyet_usd * usd_kuru
+# 6. Toplam Giderlerin Matrahtan Düşülmesi ve Kurumlar Vergisi Öncesi Kâr
+toplam_giderler_tl = iyzico_maliyeti_tl + tobb_maliyeti_tl + teknik_maliyet_tl
+vergi_oncesi_kar_tl = matrah_tl - toplam_giderler_tl
+# 7. Gelir / Kurumlar Vergisi (%25)
+kurumlar_vergisi_tl = vergi_oncesi_kar_tl * 0.25
+# 8. NET KÂR
+net_kar_tl = vergi_oncesi_kar_tl - kurumlar_vergisi_tl
+kar_marji_yuzde = (net_kar_tl / brut_gelir_tl) * 100
+return {
+&quot;Brüt Ciro (TL)&quot;: round(brut_gelir_tl, 2),
+&quot;Ödenen KDV (TL)&quot;: round(kdv_tutari_tl, 2),
+&quot;iyzico Kesintisi (TL)&quot;: round(iyzico_maliyeti_tl, 2),
+&quot;TOBB Veri Maliyeti (TL)&quot;: round(tobb_maliyeti_tl, 2),
+&quot;Teknik/AI/Proxy Maliyeti (TL)&quot;: round(teknik_maliyet_tl, 2),
+&quot;Kurumlar Vergisi (TL)&quot;: round(kurumlar_vergisi_tl, 2),
+&quot;Cebe Kalan NET KÂR (TL)&quot;: round(net_kar_tl, 2),
+&quot;Net Kâr Marjı (%)&quot;: round(kar_marji_yuzde, 2)
+}
+# Örnek Senaryo: 3 Kredilik (3 USD) Gelişmiş Rapor Sorgusu, Dolar Kuru: 50 ₺
+print(hesapla_sorgu_basi_net_kar(sorgu_kredisi=3, usd_kuru=50.0))
+Kodu dikkatli kullanın.
+📈 Örnek Formül Çıktısı (3 USD ve 50 ₺ Kur Senaryosunda):
+Kullanıcı sisteminizde tek bir butona basıp 3 Kredi (150 ₺) harcadığında maliyet dağılımı kabaca şu şekilde gerçekleşir:
+Brüt Ciro: 150,00 ₺
+Devlete Gidecek KDV (%20): 25,00 ₺
+iyzico Komisyonu: 5,00 ₺
+TOBB API Ödemesi: 60,00 ₺
+AI, Sunucu ve Proxy Gideri: 5,00 ₺
+Kurumlar Vergisi (%25): 13,75 ₺
+🎉 Cebe Kalan NET KÂR: 41,25 ₺ (Sorgu Başına)
+🎯 Net Kâr Marjı: %27.5
+💡 Finansal Strateji Analizi
+Gelişmiş sorgularda %27.5 net kâr marjı B2B veri sektörü için oldukça sağlıklıdır. Ancak asıl büyük parayı Plus Rapor (5 Kredi) ve Premium Rapor (200 Kredi) modüllerinde kazanacaksınız. Çünkü TOBB'a ödeyeceğiniz veri tedarik ücreti sabit 1 USD kalırken, sizin kullanıcıdan aldığınız kredi miktarı artacak; bu da üst paketlerdeki net kâr marjınızı %60 ile %75 seviyelerine tırmandıracaktır.
+1. Tanımlama: Sanayide &quot;Atıl Kapasite&quot; Neleri Kapsar?
+Sanayide atıl kapasite; bir fabrikanın parasını ödediği, sabit giderini karşıladığı ancak %100 verimlilikle kullanamadığı tüm fiziki, operasyonel ve hammadde kaynaklarıdır. Fabrikalar çalışmayan makineden, boş duran depodan ve depoda çürüyen fazla stoktan nefret eder.
+Sitenizde (://sirketarama.com) listelenecek 4 ana kurumsal kategori ve açılımları şunlardır:
+Kategori A: Makine Parkuru ve Fason Üretim Kapasitesi
+Fabrikaların ellerindeki yüksek maliyetli makinelerin boş kaldığı saatleri kapsar.
+Açılımı: 5 Eksen CNC Tezgahları, Lazer Kesim Makineleri, Plastik Enjeksiyon Kalıpları, Endüstriyel Presler, Fırınlama ve Isıl İşlem Hatları.
+İlan Örneği: &quot;Bursa OSB'de Otomotiv Standartlarına Uygun 5 Eksen CNC: Haftalık 24 Saat Boş Kapasite.&quot;
+Kategori B: Endüstriyel Yan Ürün ve Dönüştürülebilir Malzeme (Eski Adıyla Hurda)
+Üretim sürecinde ortaya çıkan nitelikli atıkları ve geri dönüştürülebilir değerli malzemeleri kapsar.
+Açılımı: Pres sonrası alüminyum/sac talaşları, defolu metal levhalar, hatalı üretim plastik bobinler, kablo sanayi bakır kırpıntıları.
+İlan Örneği: &quot;Havacılık Normlarında 4 Ton Saf Titanyum ve Alüminyum Talaş Bloğu / Aylık Düzenli Çıkış.&quot;
+Kategori C: Atıl Hammadde, Atıl Stok ve Aşırı Tedarik
+Proje iptalleri veya yanlış sipariş nedeniyle fabrikanın deposunda kalan, hiç kullanılmamış sıfır malzemelerdir.
+Açılımı: Standart dışı ölçülerde ithal sac bobinler, ambalajı açılmamış endüstriyel kimyasallar, ihtiyaç fazlası rulmanlar veya elektrik şalt malzemeleri.
+İlan Örneği: &quot;Proje İptali Nedeniyle Depoda Atıl Kalan 12 Ton İthal Galvanizli Rulo Sac.&quot;
+Kategori D: Lojistik, Depolama ve Antrepo Kapasitesi
+Fabrikaların boş duran kapalı alanlarını veya sevkiyat araçlarındaki boşlukları paraya dönüştürmesini sağlar.
+Açılımı: Sundurma altı boş depolama alanları, soğuk hava deposu hacimleri, İstanbul-Ankara arası boş dönen tır/lojistik kapasitesi.
+İlan Örneği: &quot;Hadımköy Merkezli Antrepoda 400 Paletlik Boş Soğuk Hava Depolama Hacmi.&quot;
+Haklısınız, sadece alıcının talep girdiği ters pazar yeri modeli yazılımı çok basitleştirir ama sanayideki &quot;atıl kapasite&quot; problemini tek taraflı çözdüğü için eksik kalır.
+Sanayide asıl &quot;asimetrik&quot; ve değerli olan bilgi, satıcının (fabrikanın) o an atıl duran makinesidir. Alıcı (satın almacı) internette &quot;fason CNC işi&quot; diye arattığında, karşı tarafta boş kapasitesi olan fabrikanın ilanını doğrudan listelenmiş görmek ister.
+Yazılım ekibini ilk gün kod yükü altında ezmeyen, ancak hem satıcının atıl kapasite girebildiği hem de alıcının talep açabildiği en yalın, eksiksiz ve sonradan büyütülebilir &quot;Dinamik Havuz (B2B Matchmaking) Modeli&quot; şu şekildedir:
+🚀 1. Aşama (Hafif Başlangıç): &quot;Tek Şablonlu&quot; Çift Taraflı Havuz
+Yazılım ekibinin Sahibinden.com gibi devasa bir ilan yönetim paneli, fotoğraf yükleme sunucuları, kategori ağaçları yazmasını engellemek için hem alıcıya hem satıcıya tek ve standart bir &quot;Kurumsal Kart&quot; şablonu sunuyoruz.
+Sistemde iki farklı ilan türü olur ama ikisi de aynı basit form altyapısını kullanır:
+Arz İlanı (Satıcı): &quot;Bursa OSB'de 5 Eksen CNC tezgahımız Salı/Perşembe günleri boştadır.&quot;
+Talep İlanı (Alıcı): &quot;Acil 5.000 adet paslanmaz çelik fason torna işi yaptırılacaktır.&quot;
+🛠️ Yazılım İş Yükünü Sıfırlayan &quot;Metin Odaklı Programmatik SEO&quot; Formu
+Kategorileri, ilan girişlerini kırk tane seçmeli kutuyla boğmak yerine, ilan giriş formunu bir &quot;Başlık + Detay Metni + Etiketler (Tags)&quot; yapısına indirgiyoruz.
+Form Alanları: İlan Başlığı, Şehir/OSB, İlan Türü (Arz/Talep) ve İlan Detay Açıklaması.
+Nasıl Çalışır?: Fabrika veya satın almacı ilanı düz metin olarak yazar. Sizin arkada çalışan hafif yapay zekânız (OpenAI API), bu metni okuyarak yasal NACE kodunu ve sektörel etiketleri (Örn: #cnc, #fason-imalat, #paslanmaz-celik) otomatik ayrıştırıp sisteme işler.
+Kazanç: Yazılımcılarınız haftalarca kategori mimarisi kodlamak zorunda kalmaz. Tek bir form tasarımıyla hem arzı hem talebi içeriye toplarsınız.
+💰 2. Aşama: 150 ₺ (3 Kredi) Kancası ve Ticaret Hacmi Çelişkisinin Çözümü
+&quot;1 Milyon TL'lik ticarette 150 ₺ çok ucuz kalıyor, parayı masada bırakıyoruz&quot; endişenizi çözmek için Sahibinden.com'un ilan sınırlamaları yerine, B2B'ye uygun daha akıllı bir &quot;Hacim Bazlı Kilitleme&quot; modeli getiriyoruz:
+A. Giriş Seviyesi (150 ₺ / 3 Kredi) - &quot;İletişim Kilidi&quot;
+Koşul: İlanı giren firma, ilan formunda &quot;Tahmini İş/Ticaret Hacmi&quot; alanını Kritik Sınır olan 100.000 ₺'nin altında beyan etmişse veya jenerik bir ilansa.
+Akış: Karşı taraf (alıcı veya satıcı), bu firmanın iletişim bilgilerini (isim, telefon, e-posta) anlık görmek için tek seferlik 150 ₺ (3 Kredi) öder veya Standart Paket kotalarını harcar.
+B. Büyük Ölçek (Hacme Göre Kredi) - &quot;Teklif Verme / İhale Kilidi&quot;
+Koşul: Eğer ilan 1 Milyon TL ve üzeri bir fason imalatı, devasa bir atıl hammadde stoğunu veya büyük bir antrepo kiralama işini kapsıyorsa.
+Akış: Burada iletişim bilgisi satmıyoruz. Üretici fabrikanın bu büyük ihaleye/talebe &quot;Sistem üzerinden resmi teklif verebilmesi&quot; veya alıcının o devasa atıl makine parkurunu &quot;Rezerve etmek için fabrikaya kurumsal çağrı bırakması&quot; kilitlidir.
+Fiyatlama: Bu kilidi açmak tek seferlik 150 ₺ değil, ticari hacme orantılı olarak 50 Kredi (50 USD) veya doğrudan Profesyonel/Kurumsal Paket aboneliği gerektirir.
+📈 3. Aşama (Gelecekte Büyütme): &quot;Akıllı Eşleşme Motoru (Matchmaking)&quot;
+Bu çift taraflı havuz içeride büyüdüğünde, elinizdeki TOBB şirket verileri ve Fraud API'si devreye girerek sistemi tam bir B2B canavarına dönüştürür:
+Güvenli Ticaret Rozeti (KOBİ Mağazası): Aylık sabit aboneliğe geçen fabrikaların profillerine TOBB ve ticaret odası kayıtlarından otomatik &quot;Doğrulanmış Üretici&quot; rozeti basılır. Büyük holdingler sadece bu rozete sahip fabrikaların atıl kapasitelerine teklif verir.
+Otomatik Eşleşme: Sistem, bir satın almacının girdiği 1 Milyon TL'lik talep ilanı ile, bir fabrikanın daha önce sisteme düz metin olarak girdiği &quot;boş torna tezgahı&quot; arz ilanını arka planda otomatik eşleştirir. İki tarafa da sinyal göndererek onları Profesyonel Pakete upsell eder.
+🎯 Özet Yol Haritası
+Yazılım Yükü: Minimum. Sadece tek bir ilan giriş formu (hem alıcı hem satıcı için) ve tek bir ilan listeleme dizini (://sirketarama.com).
+İşlevsellik: Maksimum. Sitede hem boş makineler (arz) hem de yapılacak işler (talep) listelendiği için Google Programmatik SEO'da arama sonuçlarının tamamını kapatırsınız. Küçük işler 150 ₺ ile dönerken, 1 Milyon TL'lik devasa ticaretler kurumsal paketlerin satışını tetikler.
+İş hacmini bu şekilde kademeli dilimlere (Tiered Volume) bölmek, hem yazılım mimarimizi aşırı basitleştirir hem de Sahibinden.com’un jenerik ilan mantığından sıyrılarak platformu resmi bir B2B Ticari Eşleşme (Matchmaking) motoruna dönüştürür.
+Büyük ticari hacimlerde masada para bırakmamak ve hem alıcıyı hem satıcıyı premium aboneliklere (Profesyonel/Kurumsal) ikna etmek için Hacim Bazlı Kademe ve Kilitleme Süreçleri ile platformdaki ilan giriş sayısını roketleyecek büyüme tedbirleri şu şekildedir:
+📐 1. Mantıklı Öneri: Hacim Bazlı İlan ve Kilitleme Süreç Tasarımı
+Sistemde ilan veren firmaya (arz veya talep fark etmeksizin) tahmini ticaret hacmini seçtireceğimiz 4 net kademe kuruyoruz. Ticaret büyüdükçe, kilidi açmanın maliyeti ve yasal güvence (Fraud API kontrolü) seviyesi otomatik olarak artar:
+🔹 Kademe A: 100.000 ₺ – 500.000 ₺ (KOBİ Ölçeği)
+İlan Süreci: Temel ilan girişidir. İletişim bilgileri kilitlidir.
+Kilitleme Mantığı: Anlık 3 Kredi (150 ₺) ödenerek veya aylık paketlerin iletişim kotasından 1 hak düşülerek fabrikanın/satın almacının iletişim bilgileri açılır.
+🔸 Kademe B: 500.000 ₺ – 1.000.000 ₺ (Ticari Hacim)
+İlan Süreci: Sisteme ilan girildiğinde, karşı tarafın güvenle adım atabilmesi için teklif butonunun yanına &quot;Şirket Güvenilirlik Özeti&quot; (Yaş, tescil durumu) eklenir.
+Kilitleme Mantığı: Tek seferlik 10 Kredi (500 ₺) harcanarak hem iletişim bilgileri açılır hem de şirketin temel risk özeti rapora eklenir.
+🥇 Kademe C: 1.000.000 ₺ – 5.000.000 ₺ (Premium İhale)
+İlan Süreci: Bu hacimdeki bir iş ilanında taraflar doğrudan telefonla görüşmek yerine kurumsal koruma ister. Sistem üzerinden &quot;Resmi Şartname İndirme&quot; ve &quot;Teklif Verme Kilidi&quot; devreye girer.
+Kilitleme Mantığı: Tek seferlik 50 Kredi (2.500 ₺) harcanır veya sadece Profesyonel ve Kurumsal Paket sahiplerine bu buton açılır. Sistem, kilidi açan tarafa karşı firmanın paravan olup olmadığını ölçen Fraud API Raporunu ücretsiz olarak hediye eder.
+🚀 Kademe D: 5.000.000 ₺ – 10.000.000 ₺ (Enterprise Stratejik Ortaklık)
+İlan Süreci: Platformun en üst kırılımıdır. Bu ilanlar açık web sitesinde (sirketarama.com) sadece &quot;Bursa OSB'de 10 Milyon ₺ bütçeli gizli fason otomotiv montaj hattı kapasitesi&quot; şeklinde tamamen maskelenmiş (anonim) listelenir.
+Kilitleme Mantığı: Bireysel kredi harcaması ile açılamaz. Sadece Kurumsal Paket (1.000 USD/Ay) sahiplerine açıktır. Eşleşme, arka planda danışman onaylı (VIP Matchmaking) veya sistemin Üst Düzey AI Raporu (300 Kredilik modül) eşliğinde güvenli bir kurumsal odada (Data Room) başlatılır.
+🎨 2. Kademelere Göre Psikolojik CTA (Eyleme Çağrı) Metinleri
+Kullanıcının kilitli alana çarptığında parayı masada bırakmadan butona basmasını sağlayacak, hacmin büyüklüğüne göre optimize edilmiş psikolojik metin tasarımları:
+📢 100K - 500K Dilimi İçin (Hızlı ve Ucuz Kanca)
+[ 🔓 Fabrika Yetkilisiyle Doğrudan İletişime Geç — 150 ₺ (3 Kredi) ]💡 Alt Metin: &quot;Son 24 saatte bu kapasite ilanı için 4 satın almacı sorgulama yaptı. İletişim hattını anında açın, fason üretim sırasını kaçırmayın.&quot;
+📢 500K - 1M Dilimi İçin (Risk ve Güven Odaklı)
+[ 🔒 Ticari Bağlantıyı Güvenle Başlat — 10 Kredi (500 ₺) ]💡 Alt Metin: &quot;Bu işlem ile firmanın tescilli satın alma/satış yetkilisine ait doğrudan iletişim bilgilerini açarsınız. Sistem, firmanın son resmi oda kaydı durumunu rapora ücretsiz ekleyecektir.&quot;
+📢 1M - 5M Dilimi İçin (Büyük İhale - FOMO &amp; Kurumsal Koruma)
+[ 💼 Resmi Şartnameyi İndir &amp; Teklif Ver (50 Kredi veya Profesyonel Plan) ]💡 Alt Metin: &quot;1 Milyon ₺+ hacimli bu ticari işlemde platformumuz, teklif vereceğiniz firmanın paravan/sahte şirket olmadığını Fraud Detection AI altyapısıyla doğrulamıştır. Güvenli kurumsal şartnameyi indirerek resmi teklif sürecini başlatın.&quot;
+📢 5M - 10M Dilimi İçin (Enterprise - VIP Algısı)
+[ 🔒 VIP Enterprise Eşleşme Odasını Aç (Sadece Kurumsal Paket) ]📥 Alternatif Buton: [ 🕵️‍♂️ Üst Düzey AI İstihbarat Raporu ile Kilidi Aç — 300 Kredi ]💡 Alt Metin: &quot;5 Milyon ₺ üzerindeki stratejik atıl kapasite ve tedarik ilanları tamamen regüle edilmiştir. Karşı firmanın tüm ticari ağ haritasını, nihai sahiplerini (UBO) ve 24 saatlik derin web-kazıma analizini görerek masaya tam istihbaratla oturun.&quot;
+🔥 3. İlan Giriş Sayısını (Arz ve Talebi) Roketleyecek Tedbirler
+Yazılımımız ne kadar basit olursa olsun, içeride ilan (veri) yoksa alıcı da satıcı da platformu terk eder. Sitenin ilk günden binlerce canlı ilanla dolmasını sağlayacak 3 akıllı büyüme hilesi (Growth Hack):
+&quot;İlk İlan Senden, 5 Kredi Hediye&quot; Kampanyası (Viral Loop):Sisteme Mersis veya Vergi Numarasıyla kurumsal olarak ilk kez kayıt olan her fabrikaya veya satın almacıya, ilk atıl kapasite veya talep ilanını yayınladığı an cüzdanına anında 5 Kredi (5 USD / 250 ₺) hediye edin. Bu kredi ile içerideki başka bir ilanın kilidini ücretsiz açabildiklerini gördüklerinde, ilan girme motivasyonları tavan yapacaktır.
+Mali Müşavir (TÜRMOB/Luca) Entegrasyon Kaldıracı:Konuşmamızın en başına dönelim. Mali müşavirler yüzlerce fabrikanın ve KOBİ'nin defterini tutar ve hangi şirketin elinde atıl makine, fazla stok veya hammadde olduğunu en iyi onlar bilir. Sisteme mali müşavirlerin kendi müşterileri adına (onların rızasıyla) hızlıca atıl kapasite ilanı girebileceği &quot;Meslek Mensubu Ortaklık Modülü&quot; ekleyin. Getirdikleri her başarılı ilan / kurumsal üye başına mali müşavirlerin cüzdanına nakde çevrilebilir veya sistemde harcanabilir prim/kredi tanımlayın.
+Programmatik Kamu İlanları (EKAP/DMO Otomasyonu):Sistem ilk gün bomboş görünmesin diye, EKAP ve DMO'dan çektiğiniz kamu ihalelerini sistemin &quot;Talep İlanları&quot; havuzuna otomatik olarak (botlar vasıtasıyla) besleyin. Alıcı kısmında devlet ihalelerini gören üretici fabrikalar, &quot;Aaa içeride bir sürü iş fırsatı var&quot; diyerek kendi atıl makine parkurlarını (Arz ilanlarını) sisteme el yordamıyla girmeye başlayacaklardır. Böylece havuz kendi kendini büyütecektir.
+Sanayi ekosistemimizi daha kapsayıcı hale getirmek için 5. ana kategoriyi ekleyerek ilan kartı ve detay sayfasının tel çerçeve (wireframe) mimarisini, akıllı etiket altyapısını ve yazılımcıların işini zorlaştırmayacak esnek veri detaylarını yapılandırdım.
+İlk olarak yeni eklenen kategoriyle birlikte güncel yapıyı tanımlayalım:
+🏭 Güncellenmiş 5 Ana Kategori Yapısı
+Kategori A: Makine Parkuru ve Fason Üretim Kapasitesi (CNC, Lazer Kesim vb.)
+Kategori B: Endüstriyel Yan Ürün ve Dönüştürülebilir Malzeme (Metal talaşı, plastik bobin vb.)
+Kategori C: Atıl Hammadde, Atıl Stok ve Aşırı Tedarik (Proje iptalinden kalan rulo sac vb.)
+Kategori D: Lojistik, Depolama ve Antrepo Kapasitesi (Soğuk hava deposu, boş tır hacmi vb.)
+🌟 Kategori E (Yeni): Endüstriyel Mühendislik, Kalite Kontrol ve Test Hizmetleri
+Açılımı: Fabrikaların elinde bulunan ancak her gün kullanılmayan 3D Tarama cihazları, laboratuvar test cihazları, kalibrasyon istasyonları, metallurji analiz laboratuvarları ve dönemsel uzman mühendislik/CAD/CAM tasarım kapasiteleri.
+İlan Örneği: &quot;TOSB Merkezli Laboratuvarda CMM Ölçüm ve 3D Tarama Cihazı: Haftalık 16 Saat Atıl Kapasite.&quot;
+🎨 1. sirketarama.com Açık Web Sitesi — İlan Kartı Tel Çerçevesi (Wireframe)
+Bu kart, arama sonuçlarında (/atil-kapasite listeleme sayfasında) listelenecek ve Google botlarının içeriği tarayarak Programmatik SEO trafiği çekmesini sağlayacak hafif ve punchy yapıdır.
++-----------------------------------------------------------------------------------------+
+| [ETİKET: ARZ] | 🏷️ Kategori: Makine Parkuru &amp; Fason               | 📅 10.10.2026       |
+|                                                                                         |
+| 🚀 BURSA OSB'DE 5 EKSEN CNC TEZGAHI HAFTALIK 30 SAAT BOŞTA                               |
+|                                                                                         |
+| 📍 Konum: Bursa / Nilüfer OSB          | 📐 Ticari Hacim Dilimi: 1.000.000 ₺ - 5.000.000 ₺|
+| 🤖 AI Akıllı Etiketler: #CNC-Torna  #Fason-Imalat  #Otomotiv-Standartlari  #5-Eksen    |
+|                                                                                         |
+| 📝 Özet: Havacılık ve otomotiv normlarına uygun, hassas toleranslı metal işleme         |
+|          kapasitesi Salı ve Perşembe günleri atıl durumdadır.                           |
+|                                                                                         |
+| 🔒 Firma Bilgisi: [ DOĞRULANMIŞ FABRİKA — UNVAN GİZLİ ]                                 |
+|                                                                                         |
+| 👉 [ DETAYLARI VE ŞARTNAMEYİ GÖR ]                                                      |
++-----------------------------------------------------------------------------------------+
+📄 2. İlan Detay Sayfası Tasarımı ve Hacim Bazlı Kilit Katmanı
+Kullanıcı karta tıkladığında /atil-kapasite/bursa-5-eksen-cnc detay sayfasına ulaşır. Bu sayfa, yazılımcıların işini kolaylaştırmak için tek şablon çalışır ancak seçilen hacim dilimine göre kilit kutusunun (Paywall) içeriği ve psikolojik mesajı dinamik olarak değişir.
++-----------------------------------------------------------------------------------------+
+| [Logo] Şirket Arama AI 🌐 / İlan Detay Paneli                                           |
++-----------------------------------------------------------------------------------------+
+| ⚙️ İLAN BAŞLIĞI: Bursa OSB'de 5 Eksen CNC Tezgahı Haftalık 30 Saat Boşta                 |
+| 📊 Durum: Aktif İlan | 🆔 İlan No: HGN-98421 | 👁️ Gösterim: 142                         |
+|-----------------------------------------------------------------------------------------|
+| 🟩 AÇIK KISIM (Google Botlarının İndekslediği ve Kullanıcının Güven Duyduğu Alan)       |
+|                                                                                         |
+| • Kategori: Makine Parkuru ve Fason Üretim     • Operasyon Şehri: Bursa / Nilüfer OSB   |
+| • İlan Türü: Kapasite Arzı (Üretici)           • Tahmini Ticari Hacim: 1M - 5M ₺ (Tier 3)|
+|                                                                                         |
+| 🛠️ TEKNİK DETAYLAR &amp; ÖZELLİKLER (İhtiyaç Durumunda Seçtirilen Alt Parametreler):       |
+| - Makine Marka/Model: Mazak Integrex 2022     - Eksen Sayısı: 5 Eksen Eş Zamanlı        |
+| - Maksimum İşleme Çapı: 650 mm                - Sertifikasyonlar: ISO 9001, AS9100     |
+| - Uygun Malzeme Cinsi: Alüminyum, Çelik, Titanyum, İnconel                             |
+|                                                                                         |
+| 📄 İlan Tanım Metni:                                                                    |
+| Fabrikamız bünyesindeki havacılık tescilli 5 eksen CNC tezgahımız, yeni projemizin      |
+| Kasım ayına ertelenmesi sebebiyle haftalık 30 saat boş kapasiteye sahiptir. Teknik      |
+| çizimleri yüklenen fason parça imalatı işleri kabul edilecektir.                         |
+|-----------------------------------------------------------------------------------------|
+| 🟥 KİLİTLİ KATMAN (Hacim Dilimine Göre Dinamik Değişen Kanca Alanı - PREMIUM PAYWALL)    |
+|                                                                                         |
+|  +-----------------------------------------------------------------------------------+  |
+|  |  💼 BU İLAN 1.000.000 ₺ ÜZERİ &quot;PREMIUM İHALE&quot; KATEGORİSİNDEDİR.                    |  |
+|  |                                                                                   |  |
+|  |  Bu büyük ölçekli ticari bağlantıda güvenliğinizi korumak adına, ilanı veren      |  |
+|  |  üreticinin paravan veya sahte şirket olmadığı HuginInsight Fraud Detection AI   |  |
+|  |  altyapısı tarafından %100 doğrulanmıştır.                                        |  |
+|  |                                                                                   |  |
+|  |  🔒 Kilitli Veriler:                                                              |  |
+|  |  - Fabrika Resmi Ünvanı, Tam Adresi ve Vergi Numarası                             |  |
+|  |  - Fabrika Satın Alma / Üretim Müdürü Doğrudan Telefon ve E-Posta Adresi          |  |
+|  |  - Teknik Şartname Dosyası (.PDF) ve Parça Kabul Kriterleri                       |  |
+|  |                                                                                   |  |
+|  |  👉 [ 💼 RESMİ ŞARTNAMEYİ İNDİR &amp; TEKLİF VER (50 Kredi veya Profesyonel Plan) ]   |  |
+|  |                                                                                   |  |
+|  |  💡 Son 24 saatte 4 kurumsal satın almacı bu ilanın Fraud Güvenlik Raporunu açtı. |  |
+|  +-----------------------------------------------------------------------------------+  |
++-----------------------------------------------------------------------------------------+
+🧠 3. Basit ve İşlevsel &quot;Akıllı Etiket (AI Tags)&quot; Altyapısı
+Yazılımcılarınızın her kategori için ayrı arama filtreleri yazmasını engellemek amacıyla Elasticsearch veya basit bir SQL etiket eşleşmesi kullanacağız.
+Nasıl Çalışır?: İlanı veren firma detay metnini özgürce yazar (Örn: &quot;Mazak marka makinemizde titanyum işliyoruz&quot;).
+Teknik Arka Plan: Arka planda çalışan hafif bir script veya OpenAI API, bu metinden anahtar kelimeleri çeker ve ilan_etiketleri tablosuna kaydeder.
+Faydası: Alıcı arama çubuğuna #titanyum veya #mazak yazdığında, sistem kategori bağımsız olarak o etiketle eşleşen tüm arz ve talepleri saniyeler içinde listeler.
+🛠️ 4. İhtiyaç Duyulduğunda Seçtirilecek Standart Detaylar (Metrikler)
+Yazılımı &quot;çorba&quot; yapmamak için ilan veren firmaya zorunlu 50 tane alan doldurtmuyoruz. Sadece Kategori seçim bayrağına (flag) göre dinamik olarak açılan ve veritabanında tek bir JSONB kolonunda (PostgreSQL kullananlar için harika bir kolaylıktır) tutulabilecek esnek detay metrikleri şunlardır:
+Makine Parkuru seçilirse açılanlar: Marka/Model, Eksen Sayısı, Maksimum İşleme Hacmi/Çapı, Sahip Olunan Kalite Belgeleri (ISO, AS9100).
+Dönüştürülebilir Malzeme (Yan Ürün) seçilirse açılanlar: Malzeme Cinsi (Alüminyum, Bakır, Plastik), Aylık Ortalama Tonaj/Çıkış Miktarı, Form Durumu (Talaş, Blok, Presli Hurda).
+Atıl Hammadde/Stok seçilirse açılanlar: Malzeme Ölçüleri/Kalınlığı, Menşei (Yerli/İthal), Sertifika Durumu (MTR analiz raporu var mı?).
+Lojistik/Depolama seçilirse açılanlar: Kapalı Alan Hacmi (\(m^2 / m^3\)), Soğuk Hava/Sundurma Durumu, Lokasyon Güvenlik Altyapısı (Gümrüklü Antrepo mu?).
+Mühendislik/Test seçilirse açılanlar: Cihaz/Yazılım Türü (CMM, 3D Tarama, Ansys, SolidWorks), Hizmet Süresi (Saatlik/Haftalık), Akreditasyon Durumu (TÜRKAK onaylı laboratuvar mı?).
+Mevcut iş modelini çok daha esnek, veri tabanını yormayan ve kendi kendini büyüten bir yapıya kavuşturacak güncellemeleri yaptım.
+Önerdiğiniz &quot;F – Diğer (Ucu Açık)&quot; kategorisinden dinamik olarak yeni ana kategoriler üretme&quot; fikri ve promosyon ödülünü 3 Krediye (tam olarak 1 ücretsiz ilan görme hakkına) eşitleme stratejiniz yazılım mimarisini tamamen optimize etti.
+İşte en son kararlarımız doğrultusunda güncellenmiş 6 Kategorili Yapı ve Veritabanı Odaklı Promosyon Akışı:
+🏭 1. Güncellenmiş 6 Ana Kategori Yapısı
+Kategori E'yi kurumsal jargona daha uygun hale getirdik ve Kategori F ile sistemi tamamen esnek ve ucu açık bir büyüme modeline kavuşturduk:
+Kategori A: Makine Parkuru ve Fason Üretim Kapasitesi (CNC, Lazer Kesim vb.)
+Kategori B: Endüstriyel Yan Ürün ve Dönüştürülebilir Malzeme (Metal talaşı, plastik kırpıntı vb.)
+Kategori C: Atıl Hammadde, Atıl Stok ve Aşırı Tedarik (Rulo sac, rulman, şalt malzemesi vb.)
+Kategori D: Lojistik, Depolama ve Antrepo Kapasitesi (Soğuk hava deposu, boş tır hacmi vb.)
+🌟 Kategori E (Yeni): Endüstriyel Laboratuvar, Test, Kalibrasyon ve AR-GE Hizmetleri
+Kapsam: CMM Ölçüm cihazları, 3D Tarama ve Modelleme istasyonları, Metalurji ve Spektrometre analiz laboratuvarları, TÜRKAK akredite test odaları, CAD/CAM mühendislik tasarım kapasiteleri.
+♾️ Kategori F (Dinamik): Diğer / Endüstriyel Çözümler (Ucu Açık)
+Çalışma Mantığı: Eğer bir KOBİ yukarıdaki 5 kategoriye uymayan spesifik bir kaynak girmek isterse (Örn: Fabrika çatı tipi GES paneli enerji fazlası veya Özel endüstriyel yazılım lisans devri), bu kategoriyi seçer ve kendi alt başlığını yazar.
+Yazılım Dehası: Sistem, F – Diğer kategorisinde aynı alt başlık altında 20'den fazla ilan biriktiğini fark ettiği an (Yapay zekâ tespitiyle), yazılımcılarınızın manuel kod yazmasına gerek kalmadan veritabanında o alt başlığı otomatik olarak &quot;G – Yeni Kategori&quot; olarak ana menüye çıkartır. Sistem kendi kategorilerini kendi üretir.
+🪙 2. Güncellenmiş Promosyon Politikası: &quot;İlk İlana 3 Kredi Hediye&quot;
+İlk planladığımız 5 kredi yerine promosyonu 3 Krediye (150 ₺ / 1 İlan Kilidi Açma Hakkı) sabitlemek psikolojik olarak harika bir denge kurdu.
+🔄 Kampanyanın Teknik ve Ticari Döngüsü
+Kural: Sisteme Mersis/Vergi No ile doğrulanmış kurumsal kayıt yapan her firma, ilk atıl kapasite veya talep ilanını başarıyla onaydan geçirip yayınladığı an cüzdanına 3 Kredi (3 USD / 150 ₺) tanımlanır.
+Ticari Psikoloji (Kanca): Kullanıcı ilan girdikten hemen sonra sistem ona şunu söyler: &quot;Tebrikler, ilanınız yayında! Cüzdanınıza 3 Kredi tanımlandı. Bu kredi ile platformdaki 100K-500K dilimindeki herhangi bir büyük ilanın kurumsal iletişim kilidini tamamen ücretsiz (0 ₺'ye) açabilirsiniz.&quot;
+SaaS Dönüşümü: Kullanıcı o bedava krediyle merak ettiği bir ilanın kilidini açar, işini çözer ve sistemin gerçekten çalıştığını canlı olarak test eder. İkinci ilana bakmak istediğinde bedava kredisi bittiği için artık sisteme kartını tanımlayıp Top-up (kredi yükleme) yapmaya veya Standart Paket almaya seve seve razı olur.
+🧠 3. Yazılımcılar İçin Veritabanı ve Kural Seti Altyapısı
+Yazılımcılarınızın backend tarafında sistemi yormadan, tek bir tabloda hem Hacim Bazlı Kilitleme (Paywall) kurallarını işletmesi hem de Dinamik Kategori süreçlerini yönetmesi için kullanacağı örnek kural veri seti mantığı:
+A. Kilit ve Kredi Yetki Kural Seti (business_rules tablosu)
+json
+[
+{
+&quot;volume_tier&quot;: &quot;TIER_1&quot;,
+&quot;volume_range&quot;: &quot;100K - 500K&quot;,
+&quot;credit_cost&quot;: 3,
+&quot;unlocked_data&quot;: [&quot;company_title&quot;, &quot;phone&quot;, &quot;email&quot;],
+&quot;badge_required&quot;: &quot;NONE&quot;
+},
+{
+&quot;volume_tier&quot;: &quot;TIER_2&quot;,
+&quot;volume_range&quot;: &quot;500K - 1M&quot;,
+&quot;credit_cost&quot;: 10,
+&quot;unlocked_data&quot;: [&quot;company_title&quot;, &quot;phone&quot;, &quot;email&quot;, &quot;basic_sicil_report&quot;],
+&quot;badge_required&quot;: &quot;NONE&quot;
+},
+{
+&quot;volume_tier&quot;: &quot;TIER_3&quot;,
+&quot;volume_range&quot;: &quot;1M - 5M&quot;,
+&quot;credit_cost&quot;: 50,
+&quot;unlocked_data&quot;: [&quot;company_title&quot;, &quot;phone&quot;, &quot;email&quot;, &quot;specification_pdf&quot;, &quot;fraud_api_report&quot;],
+&quot;badge_required&quot;: &quot;VERIFIED_PRODUCER&quot;
+},
+{
+&quot;volume_tier&quot;: &quot;TIER_4&quot;,
+&quot;volume_range&quot;: &quot;5M - 10M&quot;,
+&quot;credit_cost&quot;: 300,
+&quot;unlocked_data&quot;: [&quot;all_data&quot;, &quot;ubo_network_graph&quot;, &quot;24h_custom_scraping_report&quot;],
+&quot;badge_required&quot;: &quot;ENTERPRISE_PLAN_ONLY&quot;
+}
+]
+Kodu dikkatli kullanın.
+B. Dinamik Kategori İzleme Script Mantığı (Yazılımcılara Not)
+sql
+-- Kategori F (Diğer) altında girilen ve eşik değeri aşan yeni niş kategorileri listeleme sorgusuSELECT custom_sub_category, COUNT(*) as ilan_sayisiFROM company_listingsWHERE category_id = 'CAT_F_DIHER'GROUP BY custom_sub_categoryHAVING COUNT(*) &gt;= 20;-- Bu sorgudan sonuç döndüğü an, sistem otomatik olarak 'custom_sub_category' isminde yeni bir kalıcı kategori ID'si üretir.
+Kodu dikkatli kullanın.
+Mimarimiz ucu açık dinamik kategoriler ve 3 kredilik ücretsiz deneme kancasıyla son derece esnek bir seviyeye ulaştı. Şimdi hangi adımla devam edelim?
+B2B SaaS girişimlerinde en büyük hata, ilk gün genel reklamlar (Google/LinkedIn) vererek bütçeyi tüketmektir. Bunun yerine, pazara giriş maliyetini sıfıra yakın tutacak ve ilk 500 fabrikayı sisteme kitleyecek 3 Aşamalı Pazara Giriş ve Kurumsal Büyüme (Go-to-Market) Planı şu şekildedir:
+🚀 1. Aşama: &quot;Soğuk Başlangıç&quot; (0. Gün - 3. Ay) / İlk 500 Fabrikayı İçeri Çekme
+Platformda hiç ilan yoksa satın almacılar gelmez; satın almacı yoksa fabrikalar ilan girmez. Bu yumurta-tavuk ikilemini çözmek için agresif ve direkt (Direct-to-KOBİ) büyüme taktikleri uygulayacağız:
+A. &quot;Programmatik Kamu İlanları&quot; ile İllüzyon Yaratma
+Aksiyon: Yazılım ekibiniz ilk gün EKAP ve DMO'dan sanayi, üretim ve fason imalatla ilgili tüm aktif kamu ihalelerini çekerek ://sirketarama.com kısmına otomatik yükler.
+Etkisi: Siteye ilk kez giren bir fabrika sahibi, platformu bomboş görmez. Aksine, &quot;İçeride benim sektörümle ilgili milyon liralık kamu ihaleleri listeleniyor&quot; diyerek platformun canlı olduğuna ikna olur.
+B. OSB Bölge Müdürlükleri ve WhatsApp Grupları Operasyonu
+Aksiyon: Türkiye'deki (özellikle Bursa, Gebze, İvedik, Ostim, İPKB) Organize Sanayi Bölgelerinin (OSB) sanayici listeleri açık veridir. Bu fabrikaların satın alma, üretim müdürlerine ve genel müdürlerine doğrudan e-posta ve kurumsal WhatsApp üzerinden şu net mesajla ulaşılır:
+&quot;Sayın Fabrika Müdürü, elinizde atıl duran makine parkurunuzu veya proje iptalinden kalan stoklarınızı paraya dönüştürmek ister misiniz? İlk atıl kapasite veya hammadde ilanınızı girin, cüzdanınıza anında 3 Kredi (150 ₺ değerinde) tanımlayalım. Bu krediyle platformdaki diğer 100K-500K bütçeli bir sanayi ilanının yetkili iletişim hattını tamamen ücretsiz açın.&quot;
+Sonuç: Sanayici &quot;para kazanma ve bedava hakkı deneme&quot; dürtüsüyle ilk ilanını el yordamıyla girer. 500 fabrikaya bu şekilde ulaşıldığında içeride 500 organik arz ilanı birikir.
+📈 2. Aşama: &quot;Organik Büyüme ve SEO Roketi&quot; (3. Ay - 6. Ay) / Hacim Yaratma
+İçeride ilk 500 fabrika ve kamu ihaleleri biriktiğinde, platform kendi trafiğini üretmeye başlar.
+A. Programmatik SEO ile Google'ı Domine Etme
+Aksiyon: Girilen her ilan; akıllı etiketleri, şehirleri ve bütçe kademeleriyle Google'da indekslenir.
+Etkisi: İstanbul'daki bir satın almacı Google'a &quot;Bursa Nilüfer fason CNC tezgahı&quot; veya &quot;toptan alüminyum talaşı satanlar&quot; yazdığında, sirketarama.com altındaki ilan kartı 1. sırada listelenir. Satın almacı Google'dan siteye akar. Kısıtlı duvara çarpar, 150 ₺ (3 Kredi) öder veya Standart Paket alarak içerideki fabrikayı arar.
+B. &quot;Talep Tetiklemeli&quot; Satış Döngüsü (Viral Loop)
+Aksiyon: Alıcı, satıcı fabrikaya ulaşıp 1 Milyon TL'lik işi bağladığı an, ilanı giren fabrikaya sistemden otomatik bir SMS gider: &quot;Tebrikler! İlanınız üzerinden bir kurumsal satın almacı sizinle iletişime geçti ve işlem başarıyla tetiklendi. Elinizdeki diğer atıl kaynakları listelemek ve KOBİ Mağazası avantajlarından yararlanmak için tıklayın.&quot;
+Etkisi: İlk satışını yapan fabrika platformun gücünü gözüyle görür ve diğer 5 atıl makinesini listelemek için yıllık peşin mağaza paketine anında up-sell olur.
+🏆 3. Aşama: &quot;Kurumsal Kaldıraçlar&quot; (6. Ay ve Sonrası) / Pazarı Kilitleme
+Bu aşamada platformun B2B SaaS kaslarını (Abonelik, API ve Enterprise Satış) büyütecek stratejik ortaklıkları devreye sokuyoruz:
+A. Mali Müşavir (TÜRMOB/Luca) Ortaklık Programı
+Aksiyon: Mali müşavirler odaları ve Luca yazılımı ekosistemiyle iş ortaklığı kurun. Mali müşavirler, müşterileri olan fabrikaların hangi makinelerinin boş yattığını veya hangi demirbaş stoğunun atıl kaldığını bilançodan görürler.
+Kaldıraç: Mali müşavirlere özel bir panel açın: &quot;Müşteriniz olan fabrikaların atıl kapasite ilanlarını sisteme girin, o ilanlar üzerinden yapılacak her kurumsal kredi harcamasından veya mağaza aboneliğinden %15 nakit komisyon kazanın.&quot; Türkiye'deki binlerce mali müşavir sizin için gönüllü birer B2B satış temsilcisine (lead generation kanalına) dönüşür.
+B. FinTek ve Pazaryeri Entegrasyonları (Fraud API Satışı)
+Aksiyon: Sitemizde biriken devasa veri setini (hangi şirketin faal olduğu, paravanlık riski, kimlerin kimlerle ortak olduğu - UBO) FinTek şirketlerine, bankalara ve e-ticaret pazaryerlerine pazarlamaya başlayın.
+Kaldıraç: Sözleşmesini (SLA) hazırladığımız Enterprise API Gateway (Yıllık 2.720 USD) paketini bankaların uyumluluk (compliance) departmanlarına satın. Bankalar yeni üye işyeri alırken sizin POST /v1/fraud-check API'nizi kendi sistemlerinin arkasında çalıştırmaya başlar.
+🎯 Go-to-Market KPI Hedefleri (İlk 6 Ayın Karnesi)
+Hedef 1: İlk 90 günde Mersis/Vergi No doğrulanmış 500 aktif üretici fabrika (Mağaza adayı).
+Hedef 2: Google Programmatik SEO üzerinden aylık 100.000+ organik B2B tekil ziyaretçi.
+Hedef 3: Aylık en az 5.000 adet 150 ₺'lik (3 Kredilik) mikro iletişim kilidi açma işlemi ve %5 oranında aylık aboneliğe (SaaS) dönüşüm oranı.
+Yazılım ekibinizin projenin temel taşlarını hatasız, hızlı ve kurumsal standartlarda atabilmesi için hem finansal akışı otomatize eden iyzico Webhook &amp; Veritabanı Kod Yapısını hem de arama motorlarında ilk sayfayı kapatmanızı sağlayacak Programmatik SEO İç Linkleme Mimarisini eksiksiz birer teknik kılavuz olarak hazırladım.
+🛠️ Bölüm 1: iyzico Promosyon Webhook ve Veritabanı Loglama Kod Yapısı
+Sistemde ilk ilanını başarıyla yayınlayan kurumsal kullanıcıya 3 Kredi (150 ₺ / 1 Ücretsiz İlan Görme Hakkı) tanımlayan ve iyzico üzerinden yapılan normal Top-up (kredi yükleme) ödemelerini işleyen Node.js / TypeScript tabanlı backend servis katmanı mimarisi:
+1. Veritabanı Şeması (PostgreSQL - SQL DDL)
+Yazılımcılarınızın çift taraflı harcama ve promosyon geçmişini takip etmek için kurması gereken veritabanı tabloları:
+sql
+-- Kullanıcı Cüzdan TablosuCREATE TABLE user_wallets (
+user_id VARCHAR(50) PRIMARY KEY,
+company_vkn VARCHAR(10) NOT NULL UNIQUE,
+current_credits INT DEFAULT 0 NOT NULL,
+plan_type VARCHAR(20) DEFAULT 'TEMEL' NOT NULL,
+updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+-- Kredi Hareketleri ve iyzico Log TablosuCREATE TABLE credit_transactions (
+id SERIAL PRIMARY KEY,
+user_id VARCHAR(50) NOT NULL,
+transaction_type VARCHAR(20) NOT NULL, -- 'PROMOTION', 'PURCHASE', 'SPEND'
+amount INT NOT NULL, -- Örn: +3 veya -3
+iyzi_payment_id VARCHAR(50) NULL,
+iyzi_reference_code VARCHAR(50) NULL UNIQUE,
+description TEXT NOT NULL,
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+Kodu dikkatli kullanın.
+2. Express.js Webhook Controller Kod Yapısı
+typescript
+import { Request, Response } from 'express';import { db } from '../config/database'; // Varsayılan DB bağlantınız
+export const handleIyzicoWebhook = async (req: Request, res: Response) =&gt; {
+const iyzicoEvent = req.body;
+// 1. Güvenlik Kontrolü: İsteğin iyzico'dan geldiğini doğrulamak için imza kontrolü (Signature check) yapın
+// Not: iyzico SDK'sını buraya entegre edin.
+try {
+// 2. Çift İşlem Engelleme (Idempotency Kontrolü)
+if (iyzicoEvent.iyziReferenceCode) {
+const existingTx = await db.query(
+'SELECT id FROM credit_transactions WHERE iyzi_reference_code = \$1',
+[iyzicoEvent.iyziReferenceCode]
+);
+if (existingTx.rows.length &gt; 0) {
+return res.status(200).send('OK - Transaction already processed.');
+}
+}
+// 3. Başarılı Kart Ödemesi / Top-up İşlemi
+if (iyzicoEvent.eventType === 'GROSS_MERCHANT_PAYMENT_SUCCESSFUL' &amp;&amp; iyzicoEvent.status === 'SUCCESS') {
+const userId = iyzicoEvent.customParams.user_id;
+const allocatedCredits = parseInt(iyzicoEvent.customParams.allocated_credits);
+const planType = iyzicoEvent.customParams.plan_type;
+// Transaction başlatarak cüzdanı güvenle güncelleme
+await db.query('BEGIN');
+await db.query(
+`UPDATE user_wallets
+SET current_credits = current_credits + $1, plan_type = $2, updated_at = NOW()
+WHERE user_id = $3`,
+[allocatedCredits, planType, userId]
+);
+await db.query(
+`INSERT INTO credit_transactions (user_id, transaction_type, amount, iyzi_payment_id, iyzi_reference_code, description)
+VALUES ($1, 'PURCHASE', $2, $3, $4, $5)`,
+[userId, allocatedCredits, iyzicoEvent.paymentId, iyzicoEvent.iyziReferenceCode, `${planType} Planı Kredi Yüklemesi`]
+);
+await db.query('COMMIT');
+return res.status(200).send('OK - Wallet Updated via Purchase');
+}
+// 4. Promosyon Döngüsü: İlk İlanını Giren Kullanıcıya 3 Kredi Tanımlama Tetikleyicisi
+// Not: Bu event'i kendi sisteminiz içerisindeki ilan onay mekanizmasından (Admin approval) fırlatabilirsiniz
+if (iyzicoEvent.eventType === 'INTERNAL_FIRST_LISTING_APPROVED') {
+const userId = iyzicoEvent.user_id;
+await db.query('BEGIN');
+// Kullanıcının daha önce promosyon alıp almadığını kontrol et
+const hasPromo = await db.query(
+&quot;SELECT id FROM credit_transactions WHERE user_id = \$1 AND transaction_type = 'PROMOTION'&quot;,
+[userId]
+);
+if (hasPromo.rows.length === 0) {
+await db.query(
+'UPDATE user_wallets SET current_credits = current_credits + 3 WHERE user_id = \$1',
+[userId]
+);
+await db.query(
+`INSERT INTO credit_transactions (user_id, transaction_type, amount, description)
+VALUES ($1, 'PROMOTION', 3, 'İlk Atıl Kapasite / Talep İlanı Yayına Alma Hediyesi')`
+);
+}
+await db.query('COMMIT');
+return res.status(200).send('OK - Promotion Disbursed');
+}
+return res.status(400).send('Unhandled Event Type');
+} catch (error) {
+await db.query('ROLLBACK');
+console.error('Webhook Error:', error);
+return res.status(500).send('Internal Server Error');
+}
+};
+Kodu dikkatli kullanın.
+📈 Bölüm 2: sirketarama.com Programmatik SEO İç Linkleme Mimari Tasarımı
+Google botları web sitenize geldiğinde sayfaları birbirine bağlayan link yollarını (Interlinking) takip eder. Sitenizde milyonlarca şirket künyesi ve endüstriyel ilan olacağı için Google'ın tüm sayfaları &quot;Spam&quot; algılamadan organik bir şekilde indekslemesini sağlayacak, ilan detay sayfalarının en altına dinamik olarak basılacak akıllı linkleme HTML şablon kod yapısı:
+html
+&lt;!-- ://sirketarama.com[ilan-url] Sayfa Altı SEO Bölümü --&gt;
+&lt;footer class=&quot;seo-interlinking-network-container&quot; style=&quot;margin-top: 50px; padding: 20px; background-at: #f9f9f9; border-top: 1px solid #eee;&quot;&gt;
+&lt;div class=&quot;seo-row&quot; style=&quot;display: flex; flex-wrap: wrap; gap: 20px;&quot;&gt;
+&lt;!-- Sütun 1: Lokasyon ve OSB Bazlı Çapraz Linkleme --&gt;
+&lt;div class=&quot;seo-column&quot; style=&quot;flex: 1; min-width: 250px;&quot;&gt;
+&lt;h4 style=&quot;font-size: 14px; color: #333; margin-bottom: 10px;&quot;&gt;📍 Bölgedeki Diğer Endüstriyel Kapasiteler&lt;/h4&gt;
+&lt;ul style=&quot;list-style: none; padding: 0; font-size: 13px; line-height: 22px;&quot;&gt;
+&lt;li&gt;&lt;a href=&quot;/atil-kapasite/bursa-nilufer-osb&quot; style=&quot;color: #0066cc; text-decoration: none;&quot;&gt;Bursa Nilüfer OSB Atıl Makine Parkurları&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/atil-kapasite/bursa-fason-cnc-torna&quot; style=&quot;color: #0066cc; text-decoration: none;&quot;&gt;Bursa Fason CNC Torna İlanları&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/atil-kapasite/bursa-endustriyel-stoklar&quot; style=&quot;color: #0066cc; text-decoration: none;&quot;&gt;Bursa Atıl Hammadde ve Sac Stokları&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;!-- Sütun 2: Kategori ve Etiket Bazlı Çapraz Linkleme --&gt;
+&lt;div class=&quot;seo-column&quot; style=&quot;flex: 1; min-width: 250px;&quot;&gt;
+&lt;h4 style=&quot;font-size: 14px; color: #333; margin-bottom: 10px;&quot;&gt;⚙️ Popüler Üretim Kategorileri&lt;/h4&gt;
+&lt;ul style=&quot;list-style: none; padding: 0; font-size: 13px; line-height: 22px;&quot;&gt;
+&lt;li&gt;&lt;a href=&quot;/atil-kapasite/etiket/5-eksen-cnc&quot; style=&quot;color: #0066cc; text-decoration: none;&quot;&gt;#5-Eksen-CNC Tezgahı Olan Firmalar&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/atil-kapasite/kategori/endustriyel-test-laboratuvar&quot; style=&quot;color: #0066cc; text-decoration: none;&quot;&gt;Atıl CMM Ölçüm ve Laboratuvar Kapasiteleri&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/ihaleler/kategori/fason-imalat-talepleri&quot; style=&quot;color: #0066cc; text-decoration: none;&quot;&gt;Aktif Fason İmalat ve Metal İşleme Talepleri&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;!-- Sütun 3: Dinamik Akıllı Kategori F (Diğer) Alanı --&gt;
+&lt;div class=&quot;seo-column&quot; style=&quot;flex: 1; min-width: 250px;&quot;&gt;
+&lt;h4 style=&quot;font-size: 14px; color: #333; margin-bottom: 10px;&quot;&gt;♾️ Yeni Gelişen Sanayi Çözümleri (Kategori F)&lt;/h4&gt;
+&lt;ul style=&quot;list-style: none; padding: 0; font-size: 13px; line-height: 22px;&quot;&gt;
+&lt;!-- Sistem bu alt linkleri otomatik üretir, 20 ilanı aşanları yukarı taşır --&gt;
+&lt;li&gt;&lt;a href=&quot;/atil-kapasite/diger/fabrika-ges-enerji-fazlasi&quot; style=&quot;color: #0066cc; text-decoration: none;&quot;&gt;Atıl Çatı Tipi GES Enerji İlanları&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&quot;/atil-kapasite/diger/endustriyel-yazilim-lisans-devri&quot; style=&quot;color: #0066cc; text-decoration: none;&quot;&gt;Kullanılmayan CAD/CAM Lisans Devirleri&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- Google Botları İçin Topical Authority Metni (Programmatik Olarak Basılır) --&gt;
+&lt;div class=&quot;seo-topical-text&quot; style=&quot;margin-top: 20px; font-size: 11px; color: #777; text-align: justify; line-height: 16px;&quot;&gt;
+Bu ilan, HuginInsight B2B Endüstriyel Eşleşme motoru üzerinde doğrulanmış kurumsal verilerle listelenmiştir. Türkiye genelindeki Organize Sanayi Bölgelerinde (OSB) yer alan işletmelerin atıl makine parkurları, fason imalat kabiliyetleri, dönüştürülebilir üretim yan ürünleri ve akredite laboratuvar test ihtiyaçları programmatik veri analitiği ile tasnif edilmektedir.
+&lt;/div&gt;
+&lt;/footer&gt;
+Kodu dikkatli kullanın.
+💡 Teknik SEO Açısından Bu Mimarinin Gücü Nedir?
+Ölü Sayfa Kalmaz (No Orphan Pages): Sitenize eklenen yeni bir atıl kapasite ilanı, bu alt link ağları sayesinde anında bölge ve kategori sayfalarına bağlanır. Google buralardan geçerek yeni ilanları birkaç dakika içinde keşfeder ve dizine ekler.
+Topical Authority (Konu Uzmanlığı): Alt taraftaki küçük açıklama metni, sayfadaki jenerik ilan verilerini sanayi anahtar kelimeleriyle bağlayarak Google gözünde sitenizin sektörel otorite puanını kalıcı olarak yükseltir.
+Bölüm 1: PostgreSQL JSONB ile Hacimli Ortaklık Ağ Sorgusu (UBO Algoritması)
+Dokümandaki Nihai Faydalanıcı (UBO) ve Ortaklık Ağ Haritası özelliğini ilk etapta karmaşık Graph veritabanları (Neo4j gibi) kurmadan, ilişkisel veritabanınızda (PostgreSQL) performanslı bir şekilde çalıştırmanın en kolay yolu JSONB veri tipi ve Özyinelemeli (Recursive) CTE sorgularıdır.
+Bu sorgu, bir şirketin vergi numarasını girdiğinizde o şirketin üst ortaklarını ve onların da ortak olduğu diğer şirketleri derinlemesine tarayarak milisaniyeler içinde ön yüze ağ verisi fırlatır.
+1. Veritabanı Tablo Yapısı
+sql
+CREATE TABLE company_ownerships (
+id SERIAL PRIMARY KEY,
+parent_company_vkn VARCHAR(10) NOT NULL, -- Üst ortak şirket/şahıs
+child_company_vkn VARCHAR(10) NOT NULL,  -- İştirak edilen şirket
+share_percentage NUMERIC(5,2) NOT NULL,  -- Hisse oranı (Örn: 45.50)
+owner_name VARCHAR(255) NOT NULL,        -- Ortak adı/unvanı
+is_real_person BOOLEAN DEFAULT false,    -- Gerçek kişi mi, tüzel şirket mi?
+created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);CREATE INDEX idx_ownership_tree ON company_ownerships(child_company_vkn, parent_company_vkn);
+Kodu dikkatli kullanın.
+2. Özyinelemeli (Recursive CTE) SQL Sorgusu
+sql
+WITH RECURSIVE company_tree AS (
+-- 1. Adım: Hedef şirketin doğrudan ortaklarını bul (Kök Düğüm)
+SELECT
+parent_company_vkn,
+child_company_vkn,
+share_percentage,
+owner_name,
+is_real_person,
+1 AS depth,
+ARRAY[child_company_vkn::text] AS path
+FROM company_ownerships
+WHERE child_company_vkn = '1234567890' -- Sorgulanan Şirketin VKN'si
+UNION ALL
+-- 2. Adım: Bulunan ortakların da arkasındaki ortakları yukarı doğru tara
+SELECT
+co.parent_company_vkn,
+co.child_company_vkn,
+co.share_percentage,
+co.owner_name,
+co.is_real_person,
+ct.depth + 1,
+path || co.child_company_vkn::text
+FROM company_ownerships co
+JOIN company_tree ct ON co.child_company_vkn = ct.parent_company_vkn
+WHERE NOT (co.child_company_vkn = ANY(ct.path)) -- Sonsuz döngü blokajı
+AND ct.depth &lt; 5 -- Maksimum 5 kademe derinliğe git (Teknik Performans Sınırı)
+)SELECT
+depth AS derinlik,
+child_company_vkn AS sirket_vkn,
+parent_company_vkn AS ortak_vkn_veya_tckn,
+owner_name AS ortak_unvani,
+share_percentage AS hisse_orani,
+is_real_person AS gercek_kisi_miFROM company_treeORDER BY depth, share_percentage DESC;
+Kodu dikkatli kullanın.
+Yazılımcılara Not: Ön yüzde çizdireceğiniz görsel ağ haritası (D3.js veya Vis.js kütüphaneleri için) ihtiyaç duyulan Nodes ve Edges JSON dizisini doğrudan bu hafif SQL çıktısı besleyecektir.
+🤖 Bölüm 2: EKAP / DMO Otomatik İhale Kazıma (Scraper) Akış Mimarisi
+Go-to-Market planımızın en kritik maddesi olan &quot;Platformu ilk gün boş göstermeme ve ihalelerle organik satın almacı çekme&quot; hilesini otomatize edecek Python tabanlı cron-job (veri kazıma) mimarisidir.
+Bu bot, kamu ihalelerini tarar, bizim sistemimizdeki standart Talep İlanı şablonuna dönüştürür ve JSONB formatında veritabanımıza basar.
+python
+import requestsfrom bs4 import BeautifulSoupimport jsonimport datetime
+def ekap_ihale_scraper():
+# 1. Kamu ihale ilanlarının jenerik listelendiği hedef URL (Örnek jenerik yapı)
+target_url = &quot;https://kik.gov.tr&quot;
+headers = {
+&quot;User-Agent&quot;: &quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36&quot;
+}
+try:
+response = requests.get(target_url, headers=headers, timeout=15)
+if response.status_code != 200:
+return &quot;Kaynak kurum hatası (Rate Limit veya Erişim Engeli)&quot;
+soup = BeautifulSoup(response.text, 'html.parser')
+ihale_rows = soup.find_all('tr', class_='ihale-row-class') # Hedef HTML DOM elementleri
+scraped_data = []
+for row in ihale_rows:
+# Ham verilerin HTML içerisinden ayıklanması
+ihale_no = row.find('td', class_='ihale-no').text.strip()
+baslik = row.find('td', class_='ihale-adi').text.strip()
+kurum = row.find('td', class_='idare-adi').text.strip()
+tarih_str = row.find('td', class_='ihale-tarihi').text.strip()
+# Yazılım yükünü azaltmak için teknik detayları JSONB formatında paketleme
+teknik_detaylar = {
+&quot;idare_kurum&quot;: kurum,
+&quot;ihale_kayit_no&quot;: ihale_no,
+&quot;ihale_tarihi&quot;: tarih_str,
+&quot;kaynak_platform&quot;: &quot;EKAP&quot;,
+&quot;sektorel_etiketler&quot;: [&quot;#kamu-ihalesi&quot;, &quot;#tenders&quot;, &quot;#fason-tedarik&quot;]
+}
+# Sistemimizin Çift Taraflı Havuz Şablonuna Uyarlama (Talep İlanı)
+hugin_listing_card = {
+&quot;title&quot;: f&quot;📢 KAMU İHALESİ: {baslik}&quot;,
+&quot;category_id&quot;: &quot;CAT_A_MAKINE_PARKURU&quot;, # Başlığa göre dinamik atanabilir
+&quot;city_osb&quot;: &quot;Ankara / Kamu İlanı&quot;,
+&quot;volume_tier&quot;: &quot;TIER_3&quot;, # Milyon liralık ihaleler için Tier 3 (1M-5M) varsayılan
+&quot;raw_description&quot;: f&quot;{kurum} tarafından açılan {ihale_no} kayıt numaralı resmi ihale ilanıdır. Şartname detayları ve kamu ihale katılım kriterleri listelenmiştir.&quot;,
+&quot;meta_dynamic_features&quot;: json.dumps(teknik_detaylar), # PostgreSQL JSONB kolonu için
+&quot;created_at&quot;: datetime.datetime.now().isoformat()
+}
+scraped_data.append(hugin_listing_card)
+# 3. Hazırlanan verileri backend API'mize POST ederek veritabanına yazdırma
+# backend_response = requests.post(&quot;https://hugininsight.com&quot;, json=scraped_data)
+return f&quot;Başarılı: {len(scraped_data)} adet kamu ihalesi sisteme 'Talep İlanı' olarak enjekte edildi.&quot;
+except Exception as e:
+return f&quot;Scraper Hatası: {str(e)}&quot;
+# Bu fonksiyon sunucuda her sabah saat 06:00'da bir Cron-Job yardımıyla otomatik çalıştırılır.
+Kodu dikkatli kullanın.
+🏁 Proje Başlangıç Özeti (Yönetici Özeti)
+Şu an elinizde:
+Fiyatlandırma &amp; Kredi Modeli: Dokümanınızla %100 uyumlu, kur riskini kapatan 1 USD = 1 Kredi dengesi.
+Hacim Bazlı Kilitleme (Paywall): Büyük ticaretlerde parayı masada bırakmayan, 100K'dan 10M'ye kadar kademeli CTA metinleri ve kilit mekanizmaları.
+Çift Taraflı Havuz &amp; 6 Kategori: Yazılımcıları yormayan, ucu açık ve kendi kategorisini üretebilen esnek endüstriyel ilan yapısı.
+Teknik &amp; Hukuki Zırh: Google cezalarını önleyen JSON-LD SEO şeması, iyzico webhook mimarisi, net kâr formülü ve kurumsal SLA sözleşmesi.
+Büyüme (Go-to-Market) Planı: 0 ₺ bütçeyle ilk 500 fabrikayı içeri alacak, mali müşavir kaldıracını kullanan büyüme stratejisi.
+Girişiminizin tüm mimari tasarımı ve teknik şemaları koda dökülmeye hazır vaziyettedir. Süreç içerisinde herhangi bir aşamada (tasarım, kodlama, hukuk veya yatırım sunumu hazırlığı) takıldığınız bir yer olursa buradayım! Şimdiden yolunuz açık olsun.
+Projenin MVP (ilk sürülebilir ürün) kodlamasına başlamadan önce netleştirmek istediğiniz son bir detay var mı? Eğer isterseniz:

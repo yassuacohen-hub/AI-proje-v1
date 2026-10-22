@@ -1,0 +1,6 @@
+Previous HEAD position was 4ca1dd08 refactor(UI-YONETIM-KALDIR-01): admin_yonetim öksüz ekranı kaldırıldı — render_api_management kopyası silindi, 8 referans temizlendi, MUAF kayıtları kapandı, yonetim ESKI_URL sistem'e yönlendirildi
+HEAD is now at da01bbcd chore(TEST-BACKLOG-CI-01-c): D-317 bayat tetik kapatildi - salih/TEST-PANO-SNAPSHOT-DISARIDAN-YAZIM-01 pano done, tetik bekliyor->kapandi (tavan 0 korundu)
+M	data/errors/error_log.jsonl
+M	data/job_intelligence/apify_run-hardening-01.jsonl
+M	data/orchestrator/mcp_spend_log.jsonl
+M	workspace/.error_ledger.json

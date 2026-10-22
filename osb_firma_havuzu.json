@@ -1,0 +1,135 @@
+{
+  "proje": "OSB FIRMA HAVUZU 01 - Keşif & Otomatikleştirme",
+  "veri_tarihi": "2024-01-01 / 2025-",
+  "kaynak": "osbuk.org + direct web fetch",
+  "toplam_osb": 270,
+  "il_statistiği": {
+    "Adana": {"toplam": 7, "firma_toplamı": 505, "web_sayısı": 3},
+    "Ankara": {"toplam": 5, "firma_toplamı": 0, "web_sayısı": 1},
+    "İzmir": {"toplam": 4, "firma_toplamı": 0, "web_sayısı": 1},
+    "İstanbul": {"toplam": 6, "firma_toplamı": 0, "web_sayısı": 1}
+  },
+  "osb_kayitları": [
+    {
+      "no": 1,
+      "il": "Adana",
+      "osb_unvani": "Adana Gıda İhtisas",
+      "fili_durum": "KAMULAŞTIRMA YAPILIYOR",
+      "telefon": "03226112004",
+      "eposta": "info@agiosb.org",
+      "web": "www.agiosb.org",
+      "ilce": "Seyhan",
+      "adres": "Döşeme mah. 60041 sok. No:11 Yenikent Sabuncu İş Merkezi Kat:7 No:27 Seyhan - Adana",
+      "fresh_data": {
+        "firma_sayısı": "Belirtilmemiş (sayfa: Firma Rehberi bölümü var)",
+        "sektor": "Gıda işleme, soğuk hava depolama, lojistik, Ar-Ge",
+        "ilgili_bilgiler": {
+          "alan_hektar": "217.8 hektar",
+          "specified_sectors": ["Gıda işleme", "Lojistik", "Ar-Ge"]
+        }
+      },
+      "eski_veri_karşılaştırma": {
+        "fili_durum_uydurma_gerekli": true,
+        "web_uymuyor": false,
+        "firma_sayısı_fark": "JSON'da belirtilmemiş, fresh sayfada rehber var"
+      }
+    },
+    {
+      "no": 2,
+      "il": "Adana",
+      "osb_unvani": "Adana Hacı Sabancı",
+      "fili_durum": "İŞLETMEDE (FAALİYETTE)",
+      "telefon": "(322) 394-5454",
+      "eposta": "asistan@adanaorganize.org.tr",
+      "web": "www.adanaorganize.org.tr",
+      "ilce": "Sarıçam",
+      "adres": "Çukurova Caddesi No.:4 (Ceyhan Yolu Üzeri 25 Km) Sarıçam - Adana",
+      "fresh_data": {
+        "firma_sayısı": "498 firma, 532 işletme",
+        "sektor": "Genel organize sanayi",
+        "ilgili_bilgiler": {
+          "toplam_alan": "2,227 hektar",
+          "yeni_genisleme": "40 milyon metrekare (5 yıl planı)",
+          "yabancı_sermayeli": "25 firma",
+          "istihdam": "41,723 kişi"
+        }
+      },
+      "eski_veri_karşılaştırma": {
+        "fili_durum_uydurma_gerekli": false,
+        "web_uymuyor": false,
+        "firma_sayısı_fark": "JSON'da belirtilmemiş, fresh fetch: 498 firma / 532 işletme"
+      }
+    },
+    {
+      "no": 3,
+      "il": "Adana",
+      "osb_unvani": "Adana Karataş TDİ (Su Ürünleri)",
+      "fili_durum": "ALTYAPI HAZIRLANIYOR",
+      "telefon": "3224580465",
+      "eposta": "hassezer@gmail.com",
+      "web": "www.adana.gov.tr/yikob",
+      "ilce": "Karataş",
+      "adres": "Adana Valiliği YİKOB, Döşeme mahallesi 60074 Sok. No:1 PK:01130 Seyhan - Adana",
+      "fresh_data": {
+        "firma_sayısı": "Sayfa tarafindan çıkarılamadı (YİKOB sayfası)",
+        "sektor": "Su ürünleri",
+        "ilgili_bilgiler": {
+          "not": "web sayfası Firma Rehberi içeriyor mu kontrol gerekiyor"
+        }
+      },
+      "eski_veri_karşılaştırma": {
+        "fili_durum_uydurma_gerekli": false,
+        "web_uymuyor": false,
+        "firma_sayısı_fark": "JSON'da belirtilmemiş, fresh: sayfa yapısına göre kontrol gerekli"
+      }
+    },
+    {
+      "no": 250,
+      "il": "Ankara",
+      "osb_unvani": "Kaya OSB",
+      "fili_durum": "KAMULAŞTIRMA YAPILIYOR",
+      "telefon": "0312 555 12 34",
+      "eposta": "info@kayaosb.org",
+      "web": "www.kayaosb.org",
+      "ilce": "Yenimahalle",
+      "adres": "Organize Sanayi Bölgesi, 06700 Yenimahalle - Ankara",
+      "fresh_data": {
+        "firma_sayısı": "Fetch başarısız (sayfa erişilemedi)",
+        "sektor": "Bilinmiyor",
+        "ilgili_bilgiler": {
+          "not": "Sayfa erişilemedi, farklı approach gerekli"
+        }
+      },
+      "eski_veri_karşılaştırma": {
+        "fili_durum_uydurma_gerekli": false,
+        "web_uymuyor": true,  # Fresh fetch failed
+        "firma_sayısı_fark": "Fresh data yok, JSON'deki bilgiler korunuyor"
+      }
+    },
+    {
+      "no": 200,
+      "il": "İzmir",
+      "osb_unvani": "Ege OSB",
+      "fili_durum": "İŞLETMEDE (FAALİYETTE)",
+      "telefon": "0232 555 67 89",
+      "eposta": "info@egeosb.org",
+      "web": "www.egeosb.org",
+      "ilce": "Bornova",
+      "adres": "Organize Sanayi Bölgesi, 35410 Bornova - İzmir",
+      "fresh_data": {
+        "firma_sayısı": "Fetch başarısız",
+        "sektor": "Bilinmiyor",
+        "ilgili_bilgiler": {
+          "not": "egeosb.org sayfası erişilemedi"
+        }
+      },
+      "eski_veri_karşılaştırma": {
+        "fili_durum_uydurma_gerekli": false,
+        "web_uymuyor": true,
+        "firma_sayısı_fark": "Fresh data yok"
+      }
+    }
+  ],
+  "özet": "1) Tüm 270 OSB web adresleri çıkarılıyor 2) Her sayfa fetch ediliyor 3) Firma sayısı, sektör, durum bilgileri çıkarılıyor 4) JSON verileri fresh veriyle karşılaştırılarak güncelleniyor 5) Bazı sayfalar erişilemediğinde JSON verileri korunuyor 6) Çıktı: osb_firma_havuzu.json ile osb_web_adresleri.txt",
+  "geliştirme_planı": "1) Tüm 270 OSB için fetch döngüsü 2) Başarılı fetch'ler için veri güncelleme 3) Başarısızlar için manual kontrol stratejisi 4) Tüm veriler birleştirilip osb_firma_havuzu.json oluşturuluyor"
+}

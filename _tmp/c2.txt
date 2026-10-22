@@ -1,0 +1,17 @@
+ONAYLANDI: WEB-SSR-API-ANAHTAR-01 -> done (kilitler otomatik dustu)
+DENGE: tetik dusecek bos kuyruk yok
+eklendi=0 guncellendi=0 degismedi=12 arsivlendi=1
+yerel gorev=12 notion satiri=13
+ozet: 1 blok (silinen kopya 1)
+  Ilerleme Matrisi: eklendi 0, guncellendi 3, toplam 8
+  Ajan Ilerlemesi: eklendi 0, guncellendi 0, toplam 4
+  KRITIK - Simdi Buraya Bak: eklendi 0, guncellendi 0, toplam 0
+GONDERILDI: ihsan -> bilo (hata) [GUVENLIK-ANAHTAR-01] 2026-10-16T09:31:55
+  log: data/orchestrator/chat/messages.jsonl
+  push: OK (chore/monorepo-merge + main) — uzak ajan 5 dk icinde gorur
+Everything up-to-date
+35c5a551 chore(chat): ihsan->bilo [GUVENLIK-ANAHTAR-01] (D-371)
+cf0c9f48 fix(guvenlik): sizan admin anahtari chat'te maskelendi + GUVENLIK-ANAHTAR-01 pre-commit bekcisi (PO onayi A; anahtar VDS'te iptal edilecek)
+bc68d90e WEB-SSR-API-ANAHTAR-01 teslim (review) - pano
+772a2937 chore(chat): bilo->ihsan [WEB-SSR-API-ANAHTAR-01] (D-371)
+ M data/orchestrator/task_board.json

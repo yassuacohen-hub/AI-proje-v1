@@ -1,0 +1,37 @@
+Reading additional input from stdin...
+2026-10-20T16:48:07.668517Z ERROR codex_models_manager::manager: failed to refresh available models: unexpected status 401 Unauthorized: Geçersiz API anahtarı, url: https://evren-llmapi.ssyz.org.tr/v1/models?client_version=0.163.0, request id: fba6c9a2-f853-40ed-9850-a6e9bd546a6f
+2026-10-20T16:48:07.718066Z ERROR codex_models_manager::manager: failed to refresh available models: unexpected status 401 Unauthorized: Geçersiz API anahtarı, url: https://evren-llmapi.ssyz.org.tr/v1/models?client_version=0.163.0, request id: a6d30486-85cf-4eb9-ad7a-b68d9f5b40b7
+OpenAI Codex v0.163.0-alpha.10.2
+--------
+workdir: c:\Huginn Data Projesi
+model: deepseek-v4.1-flash
+provider: evren
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a15a36-8c8a-75f2-9838-6b7a43e0ea76
+--------
+user
+Reply with exactly: EVREN-CALISIYOR
+warning: Model metadata for `deepseek-v4.1-flash` not found. Defaulting to fallback metadata; this can degrade performance and cause issues.
+2026-10-20T16:48:08.895057Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer resource_metadata=\"https://huggingface.co/.well-known/oauth-protected-resource/mcp?login\"" })
+hook: SessionStart
+2026-10-20T16:48:12.685189Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer resource_metadata=\"https://huggingface.co/.well-known/oauth-protected-resource/mcp?login\"" })
+hook: SessionStart Failed
+hook: UserPromptSubmit
+hook: UserPromptSubmit Failed
+2026-10-20T16:48:13.686146Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer resource_metadata=\"https://huggingface.co/.well-known/oauth-protected-resource/mcp?login\"" })
+2026-10-20T16:48:17.835368Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer resource_metadata=\"https://huggingface.co/.well-known/oauth-protected-resource/mcp?login\"" })
+ERROR: Reconnecting... 1/5
+2026-10-20T16:48:21.626878Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer resource_metadata=\"https://huggingface.co/.well-known/oauth-protected-resource/mcp?login\"" })
+ERROR: Reconnecting... 2/5
+2026-10-20T16:48:25.915355Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer resource_metadata=\"https://huggingface.co/.well-known/oauth-protected-resource/mcp?login\"" })
+ERROR: Reconnecting... 3/5
+2026-10-20T16:48:30.600453Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer resource_metadata=\"https://huggingface.co/.well-known/oauth-protected-resource/mcp?login\"" })
+ERROR: Reconnecting... 4/5
+2026-10-20T16:48:36.507316Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer resource_metadata=\"https://huggingface.co/.well-known/oauth-protected-resource/mcp?login\"" })
+ERROR: Reconnecting... 5/5
+2026-10-20T16:48:42.608977Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer resource_metadata=\"https://huggingface.co/.well-known/oauth-protected-resource/mcp?login\"" })
+ERROR: unexpected status 401 Unauthorized: Geçersiz API anahtarı, url: https://evren-llmapi.ssyz.org.tr/v1/responses, request id: 6a8a7384-0946-400f-9d38-b3ecabf39e44
+ERROR: unexpected status 401 Unauthorized: Geçersiz API anahtarı, url: https://evren-llmapi.ssyz.org.tr/v1/responses, request id: 6a8a7384-0946-400f-9d38-b3ecabf39e44

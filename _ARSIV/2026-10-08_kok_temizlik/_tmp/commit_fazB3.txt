@@ -1,0 +1,5 @@
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 21.52s
+[chore/monorepo-merge 015b8bfd] feat(D-355): Faz B - veri_kalite (admin_kpi) hub_ciz sablonuna baglandi
+ 4 files changed, 16 insertions(+), 2 deletions(-)

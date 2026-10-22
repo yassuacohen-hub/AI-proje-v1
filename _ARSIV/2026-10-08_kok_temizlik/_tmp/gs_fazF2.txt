@@ -1,0 +1,24 @@
+A  docs/raporlar/tobb_sirket_karti_alan_eslestirme.md
+A  plans/brief_ihsan_VERI-TOBB-HAVUZ-SEMA-01.md
+ M tests/test_schema_validation.py
+?? scripts/tobb_alan_sozlugu_uret.py
+?? scripts/tobb_sozluk_seed_uret.py
+?? src/company_master/etl/tobb_alan_haritasi.py
+?? src/company_master/schema/migrations/0055_tobb_havuz_sema.sql
+?? src/company_master/schema/migrations/0056_tobb_sozluk_seed_company_persons.sql
+?? src/company_master/schema/migrations/0057_companies_tobb_kolonlari.sql
+?? src/company_master/schema/migrations/0058_adres_hukuk_gazete.sql
+?? src/company_master/schema/migrations/0059_tobb_havuz_rls.sql
+?? src/company_master/schema/migrations/down/0055_tobb_havuz_sema.down.sql
+?? src/company_master/schema/migrations/down/0056_tobb_sozluk_seed_company_persons.down.sql
+?? src/company_master/schema/migrations/down/0057_companies_tobb_kolonlari.down.sql
+?? src/company_master/schema/migrations/down/0058_adres_hukuk_gazete.down.sql
+?? src/company_master/schema/migrations/down/0059_tobb_havuz_rls.down.sql
+?? supabase/migrations/20261010_tobb_havuz_rls.sql
+?? tests/test_tobb_alan_haritasi.py
+73de7cc1 fix(nav): D-355 hub cocugu linkleri ust huba sekme parametresiyle yonlendir (Secim B)
+fdbd9a87 chore(onay-kuyrugu): TEST-ODIN-PROMPT-INJECTION reddet (NO-GO, mesru_reddedilen=3) + UI-HUB-4ARTI1-01 onayla (done)
+725b10f7 fix(onay_kuyrugu): bayat kayitlar duzeltildi - ALTYAPI-MIMIR/SCRAPE-006 zaten done, UI-HUB-4ARTI1-01 ozet guncel
+7aa11873 chore(hafiza): UI-HUB-4ARTI1-01 bagimsiz pytest dogrulamasi (882/3) ve kok neden kaydi
+86fe952b fix(UI-HUB-4ARTI1-01): task_board notu dogru pytest sonucuyla guncellendi (882 passed/3 failed, ayri gorevin hatasi)
+bdbc6656 fix(UI-HUB-4ARTI1-01): bulgu defteri format hatasi (7 alan->6) + 0 hata asiri-iddiasi duzeltildi (gercek: 14 bilinen hata, hepsi diger gorevlere ait)

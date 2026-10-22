@@ -1,0 +1,13 @@
+usage: gorev_at.py [-h] {at,guncelle,pano,abrakadabra} ...
+
+Orkestratör görev atama (ORCH-08)
+
+positional arguments:
+  {at,guncelle,pano,abrakadabra}
+    at                  Panoya görev ekle + ajana tetik düşür
+    guncelle            Mevcut görevin alanlarını düzelt (D-87)
+    pano                Tetik + onay kuyruğu özetini göster
+    abrakadabra         Orkestratörlüğü devral (D-58)
+
+options:
+  -h, --help            show this help message and exit

@@ -1,0 +1,23 @@
+DOCX: Şirket_kartı_22092026.docx (2064246 byte)
+  zip uye sayisi: 29
+  paragraf: 1685, tablo: 6
+  P0: 20.09.202620.09.2026
+  P1: 20.09.2026
+  P2: 20.09.2026
+  P3:      Şirket Kartı Web Servisleri     Şirket Kartı Web Servisleri
+  P4:      
+
+XLSX: Değerler.xlsx (22038 byte)
+  sekme sayisi: 6
+  - Firma Türü
+  - Nevi Grup
+  - Nevi Grubu Kodu
+  - Durumu
+  - TSM Listesi
+  - Şehir Listesi
+
+XLSX: TemsilGorevi TemsilYetkiSekli Bilgileri.xlsx (17959 byte)
+  sekme sayisi: 3
+  - TemsilGorevi
+  - TemsilYetkiSekli
+  - TemsilTuru

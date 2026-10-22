@@ -1,0 +1,2 @@
+YASU AKTIF GOREVLER:
+  ALTYAPI-ODEME-01 | P2 | [ALTYAPI] Odeme yiginini yaz -> iyzico + PayTR adapter (4d)

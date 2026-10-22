@@ -1,0 +1,47 @@
+== TARAMA ==
+  crlf_karisik (6):
+    - scripts/check_yasu_tasks.py
+    - scripts/g_0_risk_motoru.py
+    - scripts/list_yasu_tasks.py
+    - scripts/services/apivom_vkn.py
+    - scripts/update_task_progress.py
+    - scripts/update_task_status.py
+  mojibake (6):
+    - src/company_master/etl/nace_coklu_yaz.py:45
+    - src/company_master/etl/nace_sozluk_yukle.py:37
+    - src/company_master/etl/nace_sozluk_yukle.py:45
+    - src/company_master/etl/sozluk_baslik_duzelt.py:150
+    - src/company_master/etl/sozluk_baslik_duzelt.py:312
+    - src/company_master/etl/sozluk_baslik_duzelt.py:43
+  sondaki_bosluk (9):
+    - scripts/fix_kodlama_temizlik.py:101
+    - scripts/fix_kodlama_temizlik.py:19
+    - scripts/fix_kodlama_temizlik.py:36
+    - scripts/fix_kodlama_temizlik.py:42
+    - scripts/fix_kodlama_temizlik.py:44
+    - scripts/fix_kodlama_temizlik.py:51
+    - scripts/fix_kodlama_temizlik.py:7
+    - scripts/fix_kodlama_temizlik.py:70
+    - scripts/fix_kodlama_temizlik.py:95
+ALLOWLIST DISI IHlAL (21):
+  - mojibake: src/company_master/etl/nace_coklu_yaz.py:45
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:37
+  - mojibake: src/company_master/etl/nace_sozluk_yukle.py:45
+  - mojibake: src/company_master/etl/sozluk_baslik_duzelt.py:150
+  - mojibake: src/company_master/etl/sozluk_baslik_duzelt.py:312
+  - mojibake: src/company_master/etl/sozluk_baslik_duzelt.py:43
+  - crlf_karisik: scripts/check_yasu_tasks.py
+  - crlf_karisik: scripts/g_0_risk_motoru.py
+  - crlf_karisik: scripts/list_yasu_tasks.py
+  - crlf_karisik: scripts/services/apivom_vkn.py
+  - crlf_karisik: scripts/update_task_progress.py
+  - crlf_karisik: scripts/update_task_status.py
+  - sondaki_bosluk: scripts/fix_kodlama_temizlik.py:101
+  - sondaki_bosluk: scripts/fix_kodlama_temizlik.py:19
+  - sondaki_bosluk: scripts/fix_kodlama_temizlik.py:36
+  - sondaki_bosluk: scripts/fix_kodlama_temizlik.py:42
+  - sondaki_bosluk: scripts/fix_kodlama_temizlik.py:44
+  - sondaki_bosluk: scripts/fix_kodlama_temizlik.py:51
+  - sondaki_bosluk: scripts/fix_kodlama_temizlik.py:7
+  - sondaki_bosluk: scripts/fix_kodlama_temizlik.py:70
+  - sondaki_bosluk: scripts/fix_kodlama_temizlik.py:95

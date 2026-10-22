@@ -1,0 +1,116 @@
+..............................................F......................... [ 27%]
+...........................................................F....F....... [ 54%]
+..................................F..................F...............F.. [ 82%]
+.F....s........................................                          [100%]
+================================== FAILURES ===================================
+_________________ test_her_bolum_menu_agacindan_erisilebilir __________________
+
+    def test_her_bolum_menu_agacindan_erisilebilir() -> None:
+        """NAV-AGAC-01 (KAHIN): "olusturulmus bir sayfa navigator menu agacinda gozukmeli".
+    
+        Eskiden `ust_sayfalar()` icinde 6 anahtarlik sabit bir frozenset vardi;
+        listede olmayan kok bolum sessizce menuden dusuyordu. Kural artik tek:
+        bolum ya kok (`ust is None`) ya da bir kokun altinda (`ust=<kok>`).
+        `ust` baska bir alt sekmeye isaret ederse (2+ seviye) agac cizilmez.
+        """
+        from web_dashboard.tabs import ust_sayfalar
+    
+        kokler = set(ust_sayfalar())
+        for tanim in SECTIONS:
+            if tanim.ust is None:
+                assert tanim.anahtar in kokler, (
+                    f"{tanim.anahtar}: ust=None ama menu kokunde yok -- "
+                    f"ust_sayfalar() bir yerde filtreliyor."
+                )
+            else:
+>               assert tanim.ust in kokler, (
+                    f"{tanim.anahtar}: ust='{tanim.ust}' bir menu koku degil; "
+                    f"sayfa agacta gozukmez. Ya kok yap (ust=None) ya mevcut bir "
+                    f"kokun altina bagla. Kokler: {sorted(kokler)}"
+                )
+E               AssertionError: pazarlama: ust='musteri_onizleme' bir menu koku degil; sayfa agacta gozukmez. Ya kok yap (ust=None) ya mevcut bir kokun altina bagla. Kokler: ['ana_kontrol', 'musteri_yonetimi', 'proje_yonetimi', 'sistem', 'veri_kalite']
+E               assert 'musteri_onizleme' in {'ana_kontrol', 'musteri_yonetimi', 'proje_yonetimi', 'sistem', 'veri_kalite'}
+E                +  where 'musteri_onizleme' = TabTanimi(anahtar='pazarlama', baslik='Pazarlama', ikon='\U0001f4e2', grup='\U0001f3e2 \u0130\u015f Operasyonlar\u0131', aciklama='Kampanyalar, segment...mpanya olu\u015fturma ve d\xfczenleme kapal\u0131d\u0131r. G\xf6sterim/t\u0131klama/d\xf6n\xfc\u015f\xfcm metrikleri yaln\u0131zca kaynakta kay\u0131tl\u0131ysa hesaplan\u0131r.').ust
+
+tests\test_sekme_kapsama.py:256: AssertionError
+______________________ test_derinlik_en_fazla_uc_seviye _______________________
+
+    def test_derinlik_en_fazla_uc_seviye() -> None:
+        """Alt sekmenin altýnda sekme olamaz (seviye 3 sayfa gövdesinde çözülür)."""
+        ustler = set(ust_sayfalar())
+        for tanim in SECTIONS:
+            if tanim.ust:
+>               assert tanim.ust in ustler, f"{tanim.anahtar} -> {tanim.ust}"
+E               AssertionError: pazarlama -> musteri_onizleme
+E               assert 'musteri_onizleme' in {'ana_kontrol', 'musteri_yonetimi', 'proje_yonetimi', 'sistem', 'veri_kalite'}
+E                +  where 'musteri_onizleme' = TabTanimi(anahtar='pazarlama', baslik='Pazarlama', ikon='\U0001f4e2', grup='\U0001f3e2 \u0130\u015f Operasyonlar\u0131', aciklama='Kampanyalar, segment...mpanya olu\u015fturma ve d\xfczenleme kapal\u0131d\u0131r. G\xf6sterim/t\u0131klama/d\xf6n\xfc\u015f\xfcm metrikleri yaln\u0131zca kaynakta kay\u0131tl\u0131ysa hesaplan\u0131r.').ust
+
+tests\test_tabs_ia.py:103: AssertionError
+____________________________ test_ust_sayfa_sayisi ____________________________
+
+    def test_ust_sayfa_sayisi() -> None:
+        """D-215 ratchet: 7 kök (Gelir Kapýsý + Güvenlik Kapýsý eklendi).
+    
+        Tavan 6'dan 7'ye yükseldi — KAHÝN onayýyla (D-214 prensibi: tavan
+        sabit kalýrsa yeni daðýnýklýk test kýrar, düþürülürse dosya elle
+        güncellenir)."""
+        assert len(ust_sayfalar()) <= 7
+        # Nav agaci sirasi (D-215):
+        # 0 Ana Kontrol | 1 Gelir Kapýsý | 2 Müþteriler | 3 Metrikler
+        # 4 Proje | 5 Güvenlik Kapýsý | 6 Sistem
+>       assert len(ust_sayfalar()) == 7
+E       AssertionError: assert 5 == 7
+E        +  where 5 = len({'ana_kontrol': TabTanimi(anahtar='ana_kontrol', baslik='Ana Kontrol', ikon='\U0001f3e0', grup='\U0001f3e2 \u0130\u015f Operasyonlar\u0131', aciklama='...i kayna\u011f\u0131 hen\xfcz olu\u015fmad\u0131ysa kart **veri kayna\u011f\u0131 yok** yazar \u2014 bu, \xf6l\xe7\xfclen de\u011ferin s\u0131f\u0131r oldu\u011fu anlam\u0131na gelmez.'), ...})
+E        +    where {'ana_kontrol': TabTanimi(anahtar='ana_kontrol', baslik='Ana Kontrol', ikon='\U0001f3e0', grup='\U0001f3e2 \u0130\u015f Operasyonlar\u0131', aciklama='...i kayna\u011f\u0131 hen\xfcz olu\u015fmad\u0131ysa kart **veri kayna\u011f\u0131 yok** yazar \u2014 bu, \xf6l\xe7\xfclen de\u011ferin s\u0131f\u0131r oldu\u011fu anlam\u0131na gelmez.'), ...} = ust_sayfalar()
+
+tests\test_tabs_ia.py:44: AssertionError
+__________________________ test_ust_sayfalar_admin_7 __________________________
+
+    def test_ust_sayfalar_admin_7():
+        """NAV-IA-01: admin 7 \xfcst sayfay\u0131 g\xf6r\xfcr (D-215: denetim \u2192 G\xfcvenlik Kap\u0131s\u0131 k\xf6k oldu)."""
+        ust = ust_sayfalar(ROL_ADMIN)
+>       assert len(ust) == 7
+E       AssertionError: assert 5 == 7
+E        +  where 5 = len({'ana_kontrol': TabTanimi(anahtar='ana_kontrol', baslik='Ana Kontrol', ikon='\U0001f3e0', grup='\U0001f3e2 \u0130\u015f Operasyonlar\u0131', aciklama='...i kayna\u011f\u0131 hen\xfcz olu\u015fmad\u0131ysa kart **veri kayna\u011f\u0131 yok** yazar \u2014 bu, \xf6l\xe7\xfclen de\u011ferin s\u0131f\u0131r oldu\u011fu anlam\u0131na gelmez.'), ...})
+
+tests\test_dashboard_nav.py:283: AssertionError
+_________________________ test_ust_sayfalar_analyst_4 _________________________
+
+    def test_ust_sayfalar_analyst_4():
+        """NAV-IA-01: analyst 4 üst sayfayý görür."""
+        ust = ust_sayfalar(ROL_ANALYST)
+>       assert len(ust) == 4
+E       AssertionError: assert 5 == 4
+E        +  where 5 = len({'ana_kontrol': TabTanimi(anahtar='ana_kontrol', baslik='Ana Kontrol', ikon='\U0001f3e0', grup='\U0001f3e2 \u0130\u015f Operasyonlar\u0131', aciklama='...i kayna\u011f\u0131 hen\xfcz olu\u015fmad\u0131ysa kart **veri kayna\u011f\u0131 yok** yazar \u2014 bu, \xf6l\xe7\xfclen de\u011ferin s\u0131f\u0131r oldu\u011fu anlam\u0131na gelmez.'), ...})
+
+tests\test_dashboard_nav.py:300: AssertionError
+__________________________ test_ust_sayfalar_anon_2 ___________________________
+
+    def test_ust_sayfalar_anon_2():
+        """NAV-IA-01: anon yalnýz 2 üst sayfayý görür (kimlik/yonetim/sistem çýkmaz)."""
+        ust = ust_sayfalar(ROL_ANON)
+>       assert len(ust) == 2
+E       AssertionError: assert 3 == 2
+E        +  where 3 = len({'ana_kontrol': TabTanimi(anahtar='ana_kontrol', baslik='Ana Kontrol', ikon='\U0001f3e0', grup='\U0001f3e2 \u0130\u015f Operasyonlar\u0131', aciklama='...(DLQ) **Sistem** sayfas\u0131ndad\u0131r. Kararlar, dosya kilitleri ve g\xf6rev durumu yaln\u0131z orkestrat\xf6r taraf\u0131ndan g\xfcncellenir.')})
+
+tests\test_dashboard_nav.py:293: AssertionError
+____________ test_u10_anon_kritik_bolumleri_gormez_yonetimi_gorur _____________
+
+    def test_u10_anon_kritik_bolumleri_gormez_yonetimi_gorur() -> None:
+        """Denetim/ayarlar/yukleme gizli; yonetim acik (admin giris formu orada)."""
+        anon = {t.anahtar for t in gorunur_bolumler(ROL_ANON)}
+>       assert {"denetim", "ayarlar", "yukleme", "sistem", "canli_veri"}.isdisjoint(anon)
+E       AssertionError: assert False
+E        +  where False = <built-in method isdisjoint of set object at 0x0000020AE0B727A0>({'ana_kontrol', 'musteri_onizleme', 'musteri_yonetimi', 'musteriler', 'pazarlama', 'proje_yonetimi', ...})
+E        +    where <built-in method isdisjoint of set object at 0x0000020AE0B727A0> = {'ayarlar', 'canli_veri', 'denetim', 'sistem', 'yukleme'}.isdisjoint
+
+tests\test_dashboard_nav.py:179: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_sekme_kapsama.py::test_her_bolum_menu_agacindan_erisilebilir
+FAILED tests/test_tabs_ia.py::test_derinlik_en_fazla_uc_seviye - AssertionErr...
+FAILED tests/test_tabs_ia.py::test_ust_sayfa_sayisi - AssertionError: assert ...
+FAILED tests/test_dashboard_nav.py::test_ust_sayfalar_admin_7 - AssertionErro...
+FAILED tests/test_dashboard_nav.py::test_ust_sayfalar_analyst_4 - AssertionEr...
+FAILED tests/test_dashboard_nav.py::test_ust_sayfalar_anon_2 - AssertionError...
+FAILED tests/test_dashboard_nav.py::test_u10_anon_kritik_bolumleri_gormez_yonetimi_gorur
+7 failed, 255 passed, 1 skipped in 4.29s

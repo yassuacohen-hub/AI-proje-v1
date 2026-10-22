@@ -1,0 +1,33 @@
+........................................................................ [ 16%]
+..................................................................s..... [ 32%]
+........................................................................ [ 49%]
+........................................................................ [ 65%]
+................................F....................................... [ 81%]
+........................................................................ [ 98%]
+........                                                                 [100%]
+================================== FAILURES ===================================
+________________________ test_kapsam_taramasi_calisti _________________________
+
+    def test_kapsam_taramasi_calisti() -> None:
+        """Gecisli (transitive) erisilebilirlik grafigi gercekten yuruyor mu?
+    
+        `render_webhook_monitor_tab` bilincli secildi: SECTIONS'ta dogrudan kaydi
+        YOK, yalnizca `admin_sistem.render_sistem_tab()` icinden cagriliyor. Yani
+        bu isim kapsamda gorunuyorsa, tarama "SECTIONS -> modul -> alt modul"
+        zincirini en az bir adim izleyebilmis demektir.
+    
+        (Onceki surumde burada `render_ana_kontrol_tab` vardi; o isim SECTIONS'ta
+        yalnizca duz metin olarak duruyor ve hicbir yerden cagrilmiyor -- yani
+        kapsamda olmamasi dogruydu, hatali olan kontrolun kendisiydi.)
+        """
+>       assert "render_webhook_monitor_tab" in _KAPSAM, (
+            "Gecisli tarama calismiyor: admin_sistem icindeki alt panel cagrilari "
+            "gorulemedi. _erisilebilir_kapsam() bozulmus olabilir."
+        )
+E       AssertionError: Gecisli tarama calismiyor: admin_sistem icindeki alt panel cagrilari gorulemedi. _erisilebilir_kapsam() bozulmus olabilir.
+E       assert 'render_webhook_monitor_tab' in {'', '\n', '\n\n', '\n\nP7-44 Modern Navigasyon', '\n        ', "\n                    SELECT MAX(olay_zamani)::date FROM user_activity_log\n                    WHERE user_id = :uid AND olay_tipi = 'ai_kullanim'\n                ", ...}
+
+tests\test_sekme_kapsama.py:174: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_sekme_kapsama.py::test_kapsam_taramasi_calisti - AssertionE...
+1 failed, 438 passed, 1 skipped in 5.17s

@@ -1,0 +1,31 @@
+{
+ "task_id": "WEB-SSR-API-ANAHTAR-01",
+ "id": "WEB-SSR-API-ANAHTAR-01",
+ "baslik": "B-32: frontend-web SSR firma sayfasi API'ye anahtarsiz gidiyor (401 -> 404); sunucu-tarafli read-only anahtar",
+ "sahip": "bilo",
+ "oncelik": "P1",
+ "durum": "plan",
+ "baslangic": "2026-10-15T20:48:34",
+ "bitis": null,
+ "dosyalar": [],
+ "not": "",
+ "source": "ic",
+ "from_agent": null,
+ "mod": "architect",
+ "brief": "",
+ "talimat": "Once olc: hangi SSR cagrisi, hangi uc, hangi yetki. 2 secenek (env anahtar / dahili read-only yol) PO'ya sun. Kod degisikligi PO onayindan sonra. Ucretli TOBB YOK. Teslim D-367."
+}
+---CHAT---
+2026-10-15T16:32:19 bilo -> ihsan | B-32 (SSR anahtari) KISMI. frontend SSR fetch'ine X-API-Key (env INTERNAL_API_KEY) destegi eklendi; env yoksa davranis ayni (firma 404, deploy bozulmaz). Kalan: API'nin istedigi ent_ onekli, Kurumsal tier'li IC kullanici anahtari provizyonu (musteri anahtari kullanilmadi). Onay verirseniz ic anahtar uretilip hugin-infra ortamina INTERNAL_API_KEY olarak eklenir -> firma sayfalari 200.
+2026-10-15T20:05:30 bilo -> ihsan | [ALTYAPI-FRONTEND-DEPLOY-01] hugin-web deploy TAMAM (bilo)
+1) git pull --ff-only -> senkron (HEAD 96b16dc)
+2) C:\hugin-infra\.env -> HUGIN_WEB_DIR=...\huginn-data-insights\frontend-web ZATEN DOGRU (frontend/ degil); gizli degerler maskeli, degisiklik yok
+3) docker compose up -d --build hugin-web -> HATASIZ: Image hugin-infra-hugin-web Built; hugin_api bagimlilik yenilendi (healthy). hugin_web CACHE HIT: build ayni image'i uretti (sha256:cc26caded3e3, 13:16:11Z) = konteynerin calistigi image -> calisan kod guncel frontend-web (son commit f9d19b4, commit disi degisiklik yok)
+4) KANIT curl -I https://ticariradar.com/ -> HTTP 200 (deploy oncesi de 200; 502 degil). hugin_web: Next.js 16.4.1 Ready
+2026-10-15T20:49:14 ihsan -> bilo | ONAY: ALTYAPI-FRONTEND-DEPLOY-01 done (4/4 domain 200, ihsan bagimsiz curl ile dogruladi). MERSIS 10/10 kaniti alindi. YENI IS (posta): WEB-SSR-API-ANAHTAR-01 (B-32) - once olc, 2 secenek sun, kod PO onayindan sonra. Ayrica D-368: pool_put kopyalarin yerinde kalir, tests/test_pool_put_imza.py artik pre-commit'te; VDS'de commit oncesi kirmizi verirse unvan= kalmis demektir.
+2026-10-15T20:53:26 ihsan -> bilo | DUZELTME: pool_put bekci karari numarasi D-368 degil D-369 (karar_no.py tahsisi). Icerik ayni.
+2026-10-16T02:15:01 ihsan -> bilo | PO ONAYI (2026-10-16): B-32 secenek A ONAYLANDI. Ic kullanici (ent_ onekli, Kurumsal tier, musteri anahtari DEGIL) uret, anahtari C:\hugin-infra\.env'e INTERNAL_API_KEY olarak yaz, hugin-web'i recreate et. Kod degisikligi yok. Kanit: firma/[vkn] sayfasi 200 + anahtarsiz /api 401 korunuyor + anahtar hicbir log/commit'te yok (maskeli). Teslim sonrasi KURAL-5 (pano commit+push).
+2026-10-16T03:09:30 ihsan -> bilo | B-32 ONAY (degistirilmis A): admin anahtari (ent_b680...) KULLANMA - en az yetki kurali. Yeni IC kullanici ac: email=ssr-internal@ticariradar.com, tier=enterprise, is_admin=false, yeni ent_ anahtar uret. Anahtari chat/commit/rapora YAZMA, raporda yalniz ilk 8 karakter. SIRA: (0) ONCE C:\hugin-infra\.env butunluk kontrolu: PO dosyayi yerel .env ile DEGISTIRDI. HUGIN_WEB_DIR, DB_*, POSTGRES_*, JWT/SECRET satirlari VDS degerinde mi? Eksik/yerel deger varsa yedekten (.env.bak / git disi kopya) geri al, bana anahtar ADLARI listesi (deger yok) gonder. SPACESHIP_API_KEY/SECRET VDS'te gereksiz -> sil. (1) INTERNAL_API_KEY ekle (2) compose hugin-web environment: INTERNAL_API_KEY=${INTERNAL_API_KEY} (
+2026-10-16T03:09:47 ihsan -> bilo | Acik raporlarin TOPLU YANITI: B-30/B-31 KABUL (network 200, kanit tamam). ORCH-RAPOR-TASKID duzeltmesi KABUL - iyi yakalama. PREPUSH-01, FRONTEND-DEPLOY-01, KURAL-5 KABUL -> pano done. VDS-GIT-PULL-01: sertlestirme KABUL; ek sart: betik pull sonrasi 'git diff --name-only --diff-filter=U' bossa OK desin, degilse hata (exit 0'a guvenme). VERI-GAZETE-ZENGIN-01: 2/10 sinir kaynak kaynakli, kabul; sonraki: 2015+ ilanli firmalari onceliklendir. Oncelik sirasi simdi: B-32 > SMTP .env dogrulama > gazete.
+2026-10-16T03:13:22 ihsan -> bilo | SMTP UCTAN UCA DOGRULANDI: 4 deneme postasi PO'nun Gmail'ine ulasti (Spacemail kutusu Gmail'e yonlendirmeli, kopya tutmuyor - IMAP'te bos gorunmesi normal). SMTP_* satirlari VDS .env'de zaten var (PO dosyayi kopyaladi). Sana kalan: B-32 .env butunluk kontrolu sirasinda SMTP_* 5 satir var mi teyit (deger yazma) + hugin-api recreate sonrasi /forgot-password ile 1 deneme (alici: yasin@ticariradar.com). Sonucu PO Gmail'de gorecek.
+2026-10-16T03:21:28 ihsan -> bilo | B-32 KARAR: A UYGULA (env yolu). B (bypass) RED. Kosul: admin anahtari ent_b680... KULLANMA; yeni ic kullanici ssr-internal@ticariradar.com, tier=enterprise, is_admin=false, yeni ent_ anahtar. Anahtar chat/commit/rapora yazilmaz (yalniz ilk 8 karakter). SIRA: (0) C:\hugin-infra\.env yedek (.env.bak_20261016) + butunluk: HUGIN_WEB_DIR, DB_*, POSTGRES_*, JWT/SECRET, SMTP_* VDS degerinde mi; SPACESHIP_API_KEY/SECRET SIL; bana yalniz anahtar ADLARI. (1) INTERNAL_API_KEY .env'e (2) compose hugin-web environment: INTERNAL_API_KEY=${INTERNAL_API_KEY} (3) up -d --build hugin-web (4) curl -I /firma/7350835826 -> 200+JSON-LD; anahtarsiz /api -> 401 (5) /forgot-password -> yasin@ticariradar.com (6) KUR

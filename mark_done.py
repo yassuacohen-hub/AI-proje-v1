@@ -1,0 +1,11 @@
+import json  
+\"with open('Huginn Data Insights/data/orchestrator/task_board.json', 'r', encoding='utf-8') as f:\"  
+\"    tb = json.load(f)\"  
+\"for t in tb:\"  
+\"    if t['task_id'] == 'DOK-STRATEJI-BAYAT-DUZELT-01':\"  
+\"        t['durum'] = 'done'\"  
+\"        print(f'Gorev {t[chr(39)+'t'+chr(39)+' task_id']} durumuna done olarak guncellendi')\"  
+\"        break\"  
+\"with open('Huginn Data Insights/data/orchestrator/task_board.json', 'w', encoding='utf-8') as f:\"  
+\"    json.dump(tb, f, ensure_ascii=False, indent=2)\"  
+\"print('task_board.json guncellendi')\" 

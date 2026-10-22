@@ -1,0 +1,18 @@
+---  
+.gitignore:3:# Veritabanı yedekleri (Supabase pg_dump ciktilari)
+.gitignore:4:backups/
+.gitignore:49:# arşivi git'te TUTULUR. Gerekçe: yedek kritik; süreç/karar yönetimi ileride ayrı ürüne
+.gitignore:63:# D-186: otomatik zaman damgali yedekler ve yedek klasorleri repoya girmez
+.gitignore:65:data/orchestrator/_yedek_*/
+.gitignore:66:# D-242: yedekler/ tek yedek catisi. KVKK: vergi_no + e-posta icerir, repoya girmez.
+.gitignore:67:yedekler/
+.gitignore:116:# 9Router optimizer yedekleri (KVKK: token/anahtar içerebilir, dışarı gönderilmez)
+.gitignore:117:data/router/yedekler/
+.gitignore:135:# TUR-C Adim 2 (2026-09-24): gecici betik + zaman damgali yedek artiklari (AGENTS.md:394, :502)
+.gitignore:137:# izlenmeye alinmisti ve git izlenen dosyaya .gitignore uygulamaz. `.yedek_` deseni ise
+.gitignore:141:*.yedek_*
+.gitignore:147:# deseninden (`.backup_`, `.yedek_`, `_pytest_rerun`, `_tmp_onem_test`) biri burada yoktu.
+..\.gitignore:4:#   2) yedekler/               -> bundle/zip yedekleri (repoya GIRMEZ, asagida)
+..\.gitignore:19:# Yedekler: ayni diskteki gecici durak, repo gecmisine gomulmemeli
+..\.gitignore:20:yedekler/
+---  

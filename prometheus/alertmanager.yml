@@ -1,0 +1,262 @@
+global:
+  resolve_timeout: 5m
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'alerts@huginn.local'
+  smtp_auth_username: 'alerts@huginn.local'
+  smtp_auth_password: '${SMTP_PASSWORD}'
+  smtp_require_tls: true
+
+  # Telegram defaults
+  telegram_api_url: 'https://api.telegram.org'
+  http_config:
+    tls_config:
+      insecure_skip_verify: false
+
+# Route tree - alerts enter at root, flow down to receivers
+route:
+  group_by: ['alertname', 'service', 'team']
+  group_wait: 30s
+  group_interval: 5m
+  repeat_interval: 4h
+  receiver: 'default'
+  routes:
+    # CRITICAL - Pages immediately, all channels
+    - match:
+        severity: critical
+      receiver: 'critical-alerts'
+      group_wait: 10s
+      group_interval: 2m
+      repeat_interval: 1h
+      continue: true
+
+    # SECURITY - Security team + on-call
+    - match:
+        team: security
+      receiver: 'security-alerts'
+      group_wait: 10s
+      group_interval: 2m
+      repeat_interval: 2h
+      continue: true
+
+    # FINANCE - Finance team for billing/TOBB
+    - match:
+        team: finance
+      receiver: 'finance-alerts'
+      group_wait: 30s
+      group_interval: 10m
+      repeat_interval: 6h
+
+    # PLATFORM - Infra/platform team
+    - match:
+        team: platform
+      receiver: 'platform-alerts'
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 4h
+
+    # DATA - Data engineering team
+    - match:
+        team: data
+      receiver: 'data-alerts'
+      group_wait: 1m
+      group_interval: 10m
+      repeat_interval: 6h
+
+    # PRODUCT - Product team for business metrics
+    - match:
+        team: product
+      receiver: 'product-alerts'
+      group_wait: 5m
+      group_interval: 30m
+      repeat_interval: 12h
+
+    # ENTERPRISE - Enterprise/client success
+    - match:
+        team: enterprise
+      receiver: 'enterprise-alerts'
+      group_wait: 1m
+      group_interval: 15m
+      repeat_interval: 4h
+
+    # WARNING - Lower urgency, batch notifications
+    - match:
+        severity: warning
+      receiver: 'warning-alerts'
+      group_wait: 5m
+      group_interval: 30m
+      repeat_interval: 12h
+
+# Inhibition rules - prevent notification spam
+inhibit_rules:
+  # If target is down, don't alert on its dependencies
+  - source_match:
+      alertname: 'PrometheusTargetDown'
+    target_match_re:
+      alertname: '.*'
+    equal: ['instance']
+
+  # If host is down, don't alert on container/service issues
+  - source_match:
+      alertname: 'HostDown'
+    target_match_re:
+      alertname: 'ContainerDown|ServiceDown'
+    equal: ['instance']
+
+  # If Kong is down, suppress upstream alerts
+  - source_match:
+      alertname: 'KongDown'
+    target_match_re:
+      alertname: 'KongUpstreamDown'
+    equal: ['instance']
+
+# Receiver definitions
+receivers:
+  # Default fallback
+  - name: 'default'
+    email_configs:
+      - to: 'team@huginn.local'
+        send_resolved: true
+        headers:
+          Subject: '[Huginn] {{ .GroupLabels.alertname }} - {{ .Status }}'
+    telegram_configs:
+      - bot_token: '${TELEGRAM_BOT_TOKEN}'
+        chat_id: '${TELEGRAM_CHAT_ID_DEFAULT}'
+        parse_mode: 'HTML'
+        api_url: 'https://api.telegram.org'
+        message: '{{ template "telegram.default" . }}'
+
+  # CRITICAL - Page on-call, Telegram, Slack, Email, PagerDuty
+  - name: 'critical-alerts'
+    email_configs:
+      - to: 'oncall@huginn.local, platform@huginn.local'
+        send_resolved: true
+        headers:
+          Subject: '[CRITICAL] {{ .GroupLabels.alertname }} - {{ .Status }}'
+    telegram_configs:
+      - bot_token: '${TELEGRAM_BOT_TOKEN}'
+        chat_id: '${TELEGRAM_CHAT_ID_CRITICAL}'
+        parse_mode: 'HTML'
+        message: '{{ template "telegram.critical" . }}'
+    slack_configs:
+      - api_url: '${SLACK_WEBHOOK_CRITICAL}'
+        channel: '#alerts-critical'
+        send_resolved: true
+        title: '{{ template "slack.critical.title" . }}'
+        text: '{{ template "slack.critical.text" . }}'
+    pagerduty_configs:
+      - service_key: '${PAGERDUTY_CRITICAL_KEY}'
+        severity: critical
+        description: '{{ template "pagerduty.description" . }}'
+        client: 'Huginn Alertmanager'
+        client_url: 'https://grafana.huginn.local'
+
+  # SECURITY - Security team + Telegram + Slack
+  - name: 'security-alerts'
+    email_configs:
+      - to: 'security@huginn.local'
+        send_resolved: true
+        headers:
+          Subject: '[SECURITY] {{ .GroupLabels.alertname }} - {{ .Status }}'
+    telegram_configs:
+      - bot_token: '${TELEGRAM_BOT_TOKEN}'
+        chat_id: '${TELEGRAM_CHAT_ID_SECURITY}'
+        parse_mode: 'HTML'
+        message: '{{ template "telegram.security" . }}'
+    slack_configs:
+      - api_url: '${SLACK_WEBHOOK_SECURITY}'
+        channel: '#alerts-security'
+        send_resolved: true
+        title: '{{ template "slack.security.title" . }}'
+        text: '{{ template "slack.security.text" . }}'
+
+  # FINANCE - Finance team + Email
+  - name: 'finance-alerts'
+    email_configs:
+      - to: 'finance@huginn.local, billing@huginn.local'
+        send_resolved: true
+        headers:
+          Subject: '[FINANCE] {{ .GroupLabels.alertname }} - {{ .Status }}'
+    telegram_configs:
+      - bot_token: '${TELEGRAM_BOT_TOKEN}'
+        chat_id: '${TELEGRAM_CHAT_ID_FINANCE}'
+        parse_mode: 'HTML'
+        message: '{{ template "telegram.finance" . }}'
+
+  # PLATFORM - Platform/infra team
+  - name: 'platform-alerts'
+    email_configs:
+      - to: 'platform@huginn.local'
+        send_resolved: true
+        headers:
+          Subject: '[PLATFORM] {{ .GroupLabels.alertname }} - {{ .Status }}'
+    telegram_configs:
+      - bot_token: '${TELEGRAM_BOT_TOKEN}'
+        chat_id: '${TELEGRAM_CHAT_ID_PLATFORM}'
+        parse_mode: 'HTML'
+        message: '{{ template "telegram.platform" . }}'
+    slack_configs:
+      - api_url: '${SLACK_WEBHOOK_PLATFORM}'
+        channel: '#alerts-platform'
+        send_resolved: true
+        title: '{{ template "slack.platform.title" . }}'
+        text: '{{ template "slack.platform.text" . }}'
+
+  # DATA - Data engineering team
+  - name: 'data-alerts'
+    email_configs:
+      - to: 'data@huginn.local'
+        send_resolved: true
+        headers:
+          Subject: '[DATA] {{ .GroupLabels.alertname }} - {{ .Status }}'
+    telegram_configs:
+      - bot_token: '${TELEGRAM_BOT_TOKEN}'
+        chat_id: '${TELEGRAM_CHAT_ID_DATA}'
+        parse_mode: 'HTML'
+        message: '{{ template "telegram.data" . }}'
+
+  # PRODUCT - Product team
+  - name: 'product-alerts'
+    email_configs:
+      - to: 'product@huginn.local'
+        send_resolved: true
+        headers:
+          Subject: '[PRODUCT] {{ .GroupLabels.alertname }} - {{ .Status }}'
+    telegram_configs:
+      - bot_token: '${TELEGRAM_BOT_TOKEN}'
+        chat_id: '${TELEGRAM_CHAT_ID_PRODUCT}'
+        parse_mode: 'HTML'
+        message: '{{ template "telegram.product" . }}'
+
+  # ENTERPRISE - Client success / enterprise
+  - name: 'enterprise-alerts'
+    email_configs:
+      - to: 'enterprise@huginn.local, success@huginn.local'
+        send_resolved: true
+        headers:
+          Subject: '[ENTERPRISE] {{ .GroupLabels.alertname }} - {{ .Status }}'
+    telegram_configs:
+      - bot_token: '${TELEGRAM_BOT_TOKEN}'
+        chat_id: '${TELEGRAM_CHAT_ID_ENTERPRISE}'
+        parse_mode: 'HTML'
+        message: '{{ template "telegram.enterprise" . }}'
+
+  # WARNING - Batched, less urgent
+  - name: 'warning-alerts'
+    email_configs:
+      - to: 'warnings@huginn.local'
+        send_resolved: true
+        headers:
+          Subject: '[WARNING] {{ .GroupLabels.alertname }} - {{ .Status }}'
+    telegram_configs:
+      - bot_token: '${TELEGRAM_BOT_TOKEN}'
+        chat_id: '${TELEGRAM_CHAT_ID_WARNINGS}'
+        parse_mode: 'HTML'
+        message: '{{ template "telegram.warning" . }}'
+    slack_configs:
+      - api_url: '${SLACK_WEBHOOK_WARNINGS}'
+        channel: '#alerts-warnings'
+        send_resolved: true
+
+# Templates reference (defined in templates/telegram.tmpl and templates/slack.tmpl)
+templates:
+  - 'templates/*.tmpl'

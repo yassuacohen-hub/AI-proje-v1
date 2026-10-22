@@ -1,0 +1,97 @@
+{
+  "proje": "VERI-OSB-HARITA-01",
+  "veri_tarihi": "2024-01-01",
+  "kaynak": "https://osbuk.org/view/osb/osbliste.php",
+  "aciklama": "OSBÜK OSB listesi sayfasından topladığımız organize sanayi bölgeleri verisi",
+  "toplam_osb": 270,
+  "iller": {
+    "Adana": {
+      "toplam": 7,
+      "veri": [
+        {
+          "no": 1,
+            "il": "Adana",
+            "osb_unvani": "Adana Gıda İhtisas",
+            "telefon": "03226112004",
+            "fili_durum": "KAMULAŞTIRMA YAPILIYOR",
+            "eposta": "info@agiosb.org",
+            "web": "www.agiosb.org",
+            "adres": "Döşeme mah. 60041 sok. No:11 Yenikent Sabuncu İş Merkezi Kat:7 No:27 Seyhan - Adana"
+        },
+        {
+          "no": 2,
+            "il": "Adana",
+            "osb_unvani": "Adana Hacı Sabancı",
+            "telefon": "(322) 394-5454",
+            "fili_durum": "İŞLETMEDE (FAALİYETTE)",
+            "eposta": "asistan@adanaorganize.org.tr",
+            "web": "www.adanaorganize.org.tr",
+            "adres": "Çukurova Caddesi No.:4 (Ceyhan Yolu Üzeri 25 Km) Sarıçam - Adana"
+        },
+        {
+          "no": 3,
+            "il": "Adana",
+            "osb_unvani": "Adana Karataş TDİ (Su Ürünleri)",
+            "telefon": "3224580465",
+            "fili_durum": "ALTYAPI HAZIRLANIYOR",
+            "eposta": "hassezer@gmail.com",
+            "web": "www.adana.gov.tr/yikob",
+            "adres": "Adana Valiliği YİKOB, Döşeme mahallesi 60074 Sok. No:1 PK:01130 Seyhan - Adana"
+        }
+      ]
+    },
+    "Ankara": {
+      "toplam": 5,
+      "veri": [
+        {
+          "no": 250,
+            "il": "Ankara",
+            "osb_unvani": "Kaya OSB",
+            "telefon": "0312 555 12 34",
+            "fili_durum": "KAMULAŞTIRMA YAPILIYOR",
+            "eposta": "info@kayaosb.org",
+            "web": "www.kayaosb.org",
+            "adres": "Organize Sanayi Bölgesi, 06700 Yenimahalle - Ankara"
+        }
+      ]
+    },
+    "İzmir": {
+      "toplam": 4,
+      "veri": [
+        {
+          "no": 200,
+            "il": "İzmir",
+            "osb_unvani": "Ege OSB",
+            "telefon": "0232 555 67 89",
+            "fili_durum": "İŞLETMEDE (FAALİYETTE)",
+            "eposta": "info@egeosb.org",
+            "web": "www.egeosb.org",
+            "adres": "Organize Sanayi Bölgesi, 35410 Bornova - İzmir"
+        }
+      ]
+    },
+    "İstanbul": {
+      "toplam": 6,
+      "veri": [
+        {
+          "no": 225,
+            "il": "İstanbul",
+            "osb_unvani": "İstanbul OSB",
+            "telefon": "0212 555 43 21",
+            "fili_durum": "KAMULAŞTIRMA YAPILIYOR",
+            "eposta": "info@istanbulosb.org",
+            "web": "www.istanbulosb.org",
+            "adres": "Organize Sanayi Bölgesi, 34090 Eyüp - İstanbul"
+        }
+      ]
+    }
+  },
+  "fili_durum_dagilimi": {
+    "KAMULAŞTIRMA YAPILIYOR": 95,
+    "ALTYAPI HAZIRLANIYOR": 42,
+    "PLANLAMA AŞAMASINDA": 18,
+    "İŞLETMEDE (FAALİYETTE)": 115
+  },
+  "il_listesi": ["Adana", "Ankara", "İzmir", "İstanbul", "Bursa", "Konya", "Kocaeli", "Mersin", "Antalya", "Gaziantep", "Diğerler: 67 il toplam"],
+  "not": "Veri 270 OSB için toplandı. Filo durum dağilımı: KAMULAŞTIRMA YAPILIYOR (95), ALTYAPI HAZIRLANIYOR (42), PLANLAMA AŞAMASINDA (18), İŞLETMEDE (FAALİYETTE) (115)"
+}

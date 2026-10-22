@@ -1,0 +1,139 @@
+- generic
+  - generic
+    - generic
+      - generic
+        - button "Navigate to home page" [ref=e2]
+          - image "Logo"
+        - StaticText "Admin Insights"
+        - separator
+        - LabelText
+          - button "Help for 🔍 Hızlı geçiş" [ref=e7]
+        - group
+          - combobox "🔍 Hızlı geçiş" [expanded=false, ref=e8]: 🪪 Müşteri Kartı
+            - StaticText "🪪 Müşteri Kartı"
+          - button "Open" [expanded=false, ref=e9]
+        - separator
+        - button "🏠 Ana Kontrol" [ref=e10]
+          - paragraph
+            - StaticText "🏠 Ana Kontrol"
+        - group
+          - DisclosureTriangle "keyboard_arrow_down 👥 Müşteriler" [expanded=true]
+            - StaticText "keyboard_arrow_down"
+            - paragraph
+              - StaticText "👥 Müşteriler"
+          - button "👥 Müşteriler" [ref=e23]
+            - paragraph
+              - StaticText "👥 Müşteriler"
+          - button "🏢 Firmalar" [ref=e24]
+            - paragraph
+              - StaticText "🏢 Firmalar"
+          - button "👤 Kullanıcı Yönetimi" [ref=e25]
+            - paragraph
+              - StaticText "👤 Kullanıcı Yönetimi"
+          - button "🎫 Destek Merkezi" [ref=e26]
+            - paragraph
+              - StaticText "🎫 Destek Merkezi"
+          - button "💾 Veri Dışa Aktarma" [ref=e27]
+            - paragraph
+              - StaticText "💾 Veri Dışa Aktarma"
+          - button "🔑 Giriş Etkinliği" [ref=e28]
+            - paragraph
+              - StaticText "🔑 Giriş Etkinliği"
+          - button "🔎 Aramalar" [ref=e29]
+            - paragraph
+              - StaticText "🔎 Aramalar"
+          - button "🚀 Upsell Adayları" [ref=e30]
+            - paragraph
+              - StaticText "🚀 Upsell Adayları"
+          - button "💼 Gelir" [ref=e31]
+            - paragraph
+              - StaticText "💼 Gelir"
+          - button "🪪 Müşteri Kartı" [disabled, ref=e32]
+            - paragraph
+              - StaticText "🪪 Müşteri Kartı"
+        - group
+          - DisclosureTriangle "keyboard_arrow_right 📋 Proje" [expanded=false]
+            - StaticText "keyboard_arrow_right"
+            - paragraph
+              - StaticText "📋 Proje"
+        - group
+          - DisclosureTriangle "keyboard_arrow_right 📈 Metrikler" [expanded=false]
+            - StaticText "keyboard_arrow_right"
+            - paragraph
+              - StaticText "📈 Metrikler"
+        - group
+          - DisclosureTriangle "keyboard_arrow_right ⚙️ Sistem" [expanded=false]
+            - StaticText "keyboard_arrow_right"
+            - paragraph
+              - StaticText "⚙️ Sistem"
+        - separator
+        - button "👤 Yönetici" [expanded=false, ref=e3]
+          - paragraph
+            - StaticText "👤 Yönetici"
+        - paragraph
+          - StaticText "Bölüm: 41/41 hazır · ⏳ = yapım aşamasında"
+        - paragraph
+          - StaticText "P7-44 Modern Navigasyon"
+    - generic
+      - banner
+        - button "Deploy" [ref=e11]
+          - StaticText "Deploy"
+        - button "Main menu" [expanded=false, ref=e12]
+      - generic [ref=e1] focusable [tabindex]
+        - paragraph
+          - StaticText "Ana Kontrol › 🏢 İş Operasyonları › Müşteri Kartı"
+        - generic
+          - textbox "Bölüm ara" [ref=e13]
+        - separator
+        - sectionheader
+          - paragraph
+            - StaticText "MÜŞTERILER · KART"
+          - heading "Müşteri Kartı" [level=1, ref=e14]
+            - generic
+              - StaticText "Müşteri Kartı"
+            - link "Link to heading" [ref=e33]
+          - paragraph
+            - StaticText "Tek müşterinin özet, ödeme, kredi ve ayar bilgisi."
+        - generic
+          - LabelText
+          - textbox "Kullanıcı ID" [ref=e15]
+        - status
+          - paragraph
+            - StaticText "Görüntülemek için kullanıcı ID girin."
+        - separator
+        - LabelText
+          - paragraph
+            - StaticText "Aktif Bölüm"
+        - paragraph
+          - StaticText "Müşteri Kartı"
+        - paragraph
+          - StaticText "Görünüm anahtarları"
+        - LabelText [ref=e4] clickable [cursor:pointer, onclick]
+          - switch "Kompakt menü" [checked=false, ref=e16]
+          - paragraph
+            - StaticText "Kompakt menü"
+          - button "Help for Kompakt menü" [ref=e17]
+        - LabelText [ref=e5] clickable [cursor:pointer, onclick]
+          - switch "Bölüm açıklamasını göster" [checked=false, ref=e18]
+          - paragraph
+            - StaticText "Bölüm açıklamasını göster"
+          - button "Help for Bölüm açıklamasını göster" [ref=e19]
+        - LabelText [ref=e6] clickable [cursor:pointer, onclick]
+          - switch "Sekme rehberi" [checked=false, ref=e20]
+          - paragraph
+            - StaticText "Sekme rehberi"
+          - button "Help for Sekme rehberi" [ref=e21]
+        - LabelText
+          - paragraph
+            - StaticText "Sayfa Yükleme"
+        - paragraph
+          - StaticText "60 ms"
+        - LabelText
+          - paragraph
+            - StaticText "Cache TTL"
+        - paragraph
+          - StaticText "30 sn"
+        - paragraph
+          - StaticText "Önbelleği temizlemek için sağ üst ⋮ menüsü › Clear cache."
+        - paragraph
+          - button "AI MIMIR sohbetini aç" [ref=e22]

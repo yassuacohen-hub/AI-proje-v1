@@ -1,0 +1,8 @@
+tobb_company_type_group: 9
+tobb_company_type: 28
+tobb_status: 10
+tobb_registry_office: 238
+tobb_city: 81
+tobb_representation_type: 5
+tobb_representation_duty: 30
+tobb_representation_authority: 11

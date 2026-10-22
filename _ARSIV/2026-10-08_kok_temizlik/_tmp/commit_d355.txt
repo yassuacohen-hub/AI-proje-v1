@@ -1,0 +1,17 @@
+warning: in the working copy of 'data/orchestrator/chat/messages.jsonl', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/file_locks.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/task_board.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/triggers/ihsan.jsonl', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/triggers/yasu.jsonl', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/chat/messages.jsonl', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/file_locks.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/task_board.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/triggers/ihsan.jsonl', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'data/orchestrator/triggers/yasu.jsonl', CRLF will be replaced by LF the next time Git touches it
+[pre-commit] panel durustluk mandallari...
+.............................................                            [100%]
+45 passed in 26.78s
+[chore/monorepo-merge f7f98601] docs(D-355): 4+1 hub modeli karari + UI-HUB-4ARTI1-01/VERI-MUSTERI-ODEME-AYAR-01 pano+brief
+ 10 files changed, 317 insertions(+), 87 deletions(-)
+ create mode 100644 plans/brief_ihsan_UI-HUB-4ARTI1-01.md
+ create mode 100644 plans/brief_yasu_VERI-MUSTERI-ODEME-AYAR-01.md

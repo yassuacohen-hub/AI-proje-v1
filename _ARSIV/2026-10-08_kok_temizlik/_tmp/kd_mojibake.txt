@@ -1,0 +1,21 @@
+scripts\kodlama_denetim.py:11:    mojibake : cift-kodlama izleri (scripts/mojibake_onar.py imzalari;
+scripts\kodlama_denetim.py:69:#: GUARD-ENC-01: mojibake imzalari (scripts/mojibake_onar.py'den yeniden
+scripts\kodlama_denetim.py:76:    from scripts.mojibake_onar import MOJIBAKE_RX as _MOJIBAKE_RX  # type: ignore[import-not-found,import-outside-toplevel]
+scripts\kodlama_denetim.py:79:        from mojibake_onar import MOJIBAKE_RX as _MOJIBAKE_RX  # type: ignore[import-not-found,no-redef,import-outside-toplevel]
+scripts\kodlama_denetim.py:81:        _MOJIBAKE_RX = re.compile(
+scripts\kodlama_denetim.py:90:#: Mojibake taramasi yapilan uzantilar (duz metin + kod).
+scripts\kodlama_denetim.py:93:#: Bu yuzden asagidaki _SATIR_MOJIBAKE_SUPHELISI filtresiyle esik alti
+scripts\kodlama_denetim.py:95:MOJIBAKE_UZANTILARI = {".py", ".md", ".sql"}
+scripts\kodlama_denetim.py:97:#: GUARD-ENC-01: tek basina A-tipi gorunum mojibake degildir (Turkce c/g
+scripts\kodlama_denetim.py:100:_MOJIBAKE_GUCLU_RX = re.compile(
+scripts\kodlama_denetim.py:109:def _satir_mojibake_suphelisi(satir: str) -> bool:
+scripts\kodlama_denetim.py:112:    `_MOJIBAKE_RX` tek basina cok genis (A-tipi oruntu her Turkce satiri
+scripts\kodlama_denetim.py:117:    if not _MOJIBAKE_RX.search(satir):
+scripts\kodlama_denetim.py:119:    if _MOJIBAKE_GUCLU_RX.search(satir):
+scripts\kodlama_denetim.py:242:        if yol.suffix in MOJIBAKE_UZANTILARI and _MOJIBAKE_RX.search(metin):
+scripts\kodlama_denetim.py:244:                if _satir_mojibake_suphelisi(satir):
+scripts\kodlama_denetim.py:245:                    bulgular.append(("mojibake", f"{goreceli}:{no}"))
+scripts\kodlama_denetim.py:329:        "mojibake": [],
+scripts\kodlama_denetim.py:344:            # GUARD-ENC-01: yeni ihlal kodlari (mojibake/sozdizimi/okuma_hatasi)
+scripts\kodlama_denetim.py:490:    # utf16 / nul / bos / okuma_hatasi / mojibake / sozdizimi icin muafiyet
+scripts\kodlama_denetim.py:502:    for kod in ("utf16", "nul", "bos", "okuma_hatasi", "mojibake", "sozdizimi", "crlf_karisik", "sondaki_bosluk", "tab_girinti", "dosya_sonu"):

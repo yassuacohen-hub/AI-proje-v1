@@ -1,0 +1,37 @@
+usage: ajan_chat [-h] {ac,guncelle,kapat,oku,ozet,bulgula,yorum,liderlik} ...
+
+D-192: Ajan Chat Sistemi — Sorun ve çözüm takibi
+
+positional arguments:
+  {ac,guncelle,kapat,oku,ozet,bulgula,yorum,liderlik}
+                        Komut seçin
+    ac                  Sorun aç
+    guncelle            Çözümü güncelle
+    kapat               Sorunukapalı işaretle
+    oku                 Sorunları oku
+    ozet                Sorunların özetini göster
+    bulgula             Tasarım eleştirisi kaydı
+    yorum               Mesaja yanıt ekle (max 2/kişi/hedef)
+    liderlik            Ajan liderlik tablosu
+
+options:
+  -h, --help            show this help message and exit
+
+D-192: Ajan Chat Sistemi — CLI.
+
+Komutlar:
+  ac            — Sorun aç (ajan, task_id, sorun)
+  guncelle      — Çözümü güncelle (task_id, sorun_index, cozum, durum)
+  kapat         — Sorunukapalı işaretle (task_id, sorun_index, karar)
+  oku           — Sorunları oku (--task_id, --son)
+  ozet          — Sorunların özetini göster (--durum)
+  bulgula       — Tasarım eleştirisi kaydı (konu, bulgu, --link)
+  yorum         — Mesaja yanıt ekle (kime, cevap_index, mesaj) (Mesaj 6 · D-3xx)
+  liderlik      — Ajan liderlik tablosu: görev+bulgu+mesaj sayısı (Mesaj 6 · Yol A)
+
+Örnek:
+  python scripts/ajan_chat.py ac ihsan UI-01 "Button hover eksik"
+  python scripts/ajan_chat.py ozet --durum acik
+  python scripts/ajan_chat.py bulgula "Tasarım (D-192)" "Font boyut tutarsız" --link "data/..."
+  python scripts/ajan_chat.py yorum utku 42 "Kabul, SLA'yi 15dk yaptim" --kimden ihsan
+  python scripts/ajan_chat.py liderlik

@@ -1,0 +1,43 @@
+........................................................................ [ 16%]
+........................................................................ [ 33%]
+........................................................................ [ 49%]
+........................................................................ [ 66%]
+............................F....................................s...... [ 83%]
+................................................................F....... [ 99%]
+.                                                                        [100%]
+================================== FAILURES ===================================
+________________ test_proje_yonetimi_sekmeler_sidebar_ile_ayni ________________
+
+    def test_proje_yonetimi_sekmeler_sidebar_ile_ayni():
+        """Hub sekme başlıkları == sidebar çocuk başlıkları (aynı sıra)."""
+        basliklar = [b.baslik for b in proje.BOLUMLER]
+        sidebar = [t.baslik for t in alt_sekmeler("proje_yonetimi", ROL_ADMIN)]
+        assert len(basliklar) == 5
+        assert basliklar[0] == "Karar Defteri"
+>       assert basliklar == sidebar, f"hub {basliklar} != sidebar {sidebar}"
+E       AssertionError: hub ['Karar Defteri', '9Router / Abrakadabra', 'Ajan Chat', 'Görev Panosu', 'MIMIR Raporları'] != sidebar ['Karar Defteri', 'MIMIR', 'Ajan Chat', 'Görev Panosu', 'MIMIR Raporları']
+E       assert ['Karar Defte...IR Raporları'] == ['Karar Defte...IR Raporları']
+E         
+E         At index 1 diff: '9Router / Abrakadabra' != 'MIMIR'
+E         Use -v to get more diff
+
+tests\test_proje_yonetimi.py:30: AssertionError
+_________________________ test_aciklama_kisa_ve_dolu __________________________
+
+    def test_aciklama_kisa_ve_dolu() -> None:
+        """Her ipucu boş değil ve 60 karakteri geçmez (menü ipucu satırına sığar)."""
+        for tanim in SECTIONS:
+            assert tanim.aciklama.strip(), f"{tanim.anahtar} ipucu bos"
+>           assert len(tanim.aciklama) <= 60, (
+                f"{tanim.anahtar} ipucu {len(tanim.aciklama)} karakter: {tanim.aciklama}"
+            )
+E           AssertionError: proje_yonetimi ipucu 66 karakter: Karar defteri, 9Router, ajan chat, görev panosu ve MIMIR raporları
+E           assert 66 <= 60
+E            +  where 66 = len('Karar defteri, 9Router, ajan chat, görev panosu ve MIMIR raporları')
+E            +    where 'Karar defteri, 9Router, ajan chat, görev panosu ve MIMIR raporları' = TabTanimi(anahtar='proje_yonetimi', baslik='Proje', ikon='📋', grup='🏢 İş Operasyonları', aciklama='Karar defteri, 9Rou... (DLQ) **Sistem** sayfasındadır. Kararlar, dosya kilitleri ve görev durumu yalnız orkestratör tarafından güncellenir.').aciklama
+
+tests\test_dashboard_nav.py:442: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_proje_yonetimi.py::test_proje_yonetimi_sekmeler_sidebar_ile_ayni
+FAILED tests/test_dashboard_nav.py::test_aciklama_kisa_ve_dolu - AssertionErr...
+2 failed, 430 passed, 1 skipped in 5.12s

@@ -1,0 +1,374 @@
+115:### DASH-UX-02a Split: v1 (Dosya) / v2 (SECTIONS) (D-85 Ek — KAHİN kararı 2026-09-21)
+130:### Şifre Rotasyon Protokolü (D-73 — KAHİN kararı 2026-09-20)
+140:### Anahtar Sahipliği (D-74 — KAHİN kararı 2026-09-20)
+146:### Orkestratör Devralma Örneği (D-76 — KAHİN kararı 2026-09-20)
+199:### Rapor Zorunluluğu
+205:### Bulgu İşleme Zorunluluğu
+213:### Haftalık Özeleştiri (D-67 Karar 2: Haftalık)
+220:### Orkestratör Haftalık Döngüsü
+225:### Gerekçe
+241:### Tek Komut: `basla` (D-68 ikinci parça)
+412:### Ajanlar ve Roller
+422:### Görev Yaşam Döngüsü Terimleri
+434:### Teknik Kısaltmalar ve Terimler
+453:### Dosya ve Dizin Kısaltmaları
+471:### Marka ve Ürün Kimliği
+479:### Süreç Kuralları (Hızlı Referans)
+569:### D-187 Geriye Dönük Kayıt (D-223 ile birlikte yazıldı)
+633:### GRAPH-FIX-02 Büyük İzole Nod Backlink'leri
+651:### GRAPH-HUB-EXPAND Kategori Hub'ları (200 Orphan Bağlantı)
+661:### GRAPH-INDEX-BUILD Tür-Bazlı Index'ler (319 Orphan Bağlantı)
+683:### CLI Komutları
+709:### Orkestratör Günlük Rutini (15 min)
+718:### Arkitektur
+726:### Test Kapsamı
+738:### Phase 2 (İleri)
+823:### Hafıza Kapıları Nerede Yaşar (B-14 · TUR-B2 2026-09-24)
+879:### Kural Özeti
+887:### Zorunlu Chat Türleri
+893:### Chat Komutları
+898:### Chat Log Konumu
+902:### Gerçek Örnekler
+908:### Karar Yayınıyla İlgili Nodlar
+918:### Kural
+921:### Neden
+924:### Denetim
+928:### Bu kural kapsamında silinenler (2026-09-26)
+939:### Kural
+944:### Uygulama
+949:### Denetim
+958:### NAV-AGAC-01 — Oluşturulan sayfa menüde görünür
+972:### VERI-ETIKET-01 — Her blok verisinin kaynağını söyler
+980:### MARKA-BASLIK-01 — Logo büyük + gradyan "Admin Insights"
+1034:### Şablon kullanımı zorunlu
+1042:### Tek brif kuralı
+1050:### Brifte ajan chat zorunlu
+1057:### İkiz şablon temizliği (D-211 uygulaması)
+1063:### Mandal (ratchet) yaklaşımı
+1114:### Kural 1 — Tek Kanonik Yol
+1127:### Kural 2 — Arama Kapsamı Dışı
+1135:### Kural 3 — Şablon Tekliği
+1139:### Kural 4 — Yeni Doküman Kapısı
+1148:### Denetim
+1171:### Kural 1 — Kök Değişmez
+1175:### Kural 2 — Kökte Ne Durabilir
+1188:### Kural 3 — İkiz Gövde Yasağı
+1204:### Kural 4 — Devralınan Görev Kanonik Kimlik Alır
+1210:### Kural 1 — Tek Pano
+1214:### Kural 2 — Pano Kapatma Kanıt İster
+1226:### Kural 3 — Arşiv Silmez
+1230:### Denetim
+1725:### D-240 — Brif arşiv klasörü REDDEDİLDİ: yol taşımanın bedeli faydasından büyük
+1756:### D-241 — Dış kök (git deposu kökü) izin listesiyle kapalıdır
+1797:### D-242 — Yedek/arşiv tek çatı altında; `Path.match` glob sanılmaz
+1833:### D-243 — Prova diske yazmaz; yıkıcı işin yedek yolu enjekte edilebilir olur
+1893:### D-244 — Canlı veritabanı yıkıcı iş: yedek dosyası kanıt, "yapıldı" beyanı değil
+2269:### Neden
+2282:### Kural
+2308:### Uygulama sirasi
+2335:### Olcumun soyledigi
+2353:### Kural
+2422:### Bugun yapilabilir / bugun yapilamaz
+2438:### Olcumun soyledigi
+2450:### Kural
+2475:### Bu kararla yapilanlar
+2493:### Bulgu
+2507:### Kural
+2549:### Bu kararla yapilanlar
+2562:### Olcum (2026-09-28)
+2584:### 1. Depo cogul: **iki ayri git reposu var**
+2597:### 2. Kanca framework'suz kuruldu (ucuz ruhsat)
+2610:### 3. "Kurdum" demek kanit degildir
+2631:### 4. 0024 neden yarim kaldi: **olcumun kapsami kararin kapsamini belirledi**
+2645:### 5. `0028_skor_varsayilan_kalan_dort.sql`
+2662:### 6. Gocun tek basina yetmedigi yer: hesaplayici da yalan soyluyordu
+2672:### 7. Acik borc notu
+2680:### Olcum (2026-09-28, gocten sonra)
+2703:### 1. Tek kapi: `etl/quality_recalc.py`
+2718:### 2. Ikinci yollar kesildi --- **gocun tek basina yetmedigi yer, ikinci kez**
+2735:### 3. Yazma tek ifadeyle (D-249/2)
+2749:### 4. Mandal: 11 assert, kanca kurulu, **kirilarak** dogrulandi
+2763:### 5. Puan dibe yakin cikti --- bu **dogru** olcumdur
+2781:### 6. Alan bazli kayip tablosu --- yatirimin nereye yapilacagini bu soyler
+2806:### 7. Sema: yeni goc **gerekmedi** (D-253)
+2815:### 8. Arac notu: `apply_diff` tekrar tekrar patladi, betik ilk seferde tuttu
+2825:### 9. Acik borc
+2844:### 1. MERSIS'te anonim sorgu ekrani **yoktur**
+2855:### 2. D-256'nin 5.0 puan iddiasi **dogrulanamadi**
+2870:### 3. TAVUK-YUMURTA gercektir --- artik kanitli
+2894:### 4. Yasal dayanak **yoktur**
+2905:### 5. Beklenen karar (urun sahibi)
+2916:### 6. Acik borc
+2932:### 1. Tavan artik turetilir, sabit yazilmaz
+2946:### 2. Sunum tek kapidan gecer: `src/company_master/sunum.py`
+2954:### 3. NACE tahmini artik etiketli
+2962:### 4. "Yarim goc" deseni: ad degisti, ona bagli sey kaldi
+2991:### 5. `dusen-iz:` --- goc defteri korlesmeden daraltilir
+3004:### 6. Mandal ve kanca
+3012:### 7. Bayat testler duzeltildi --- test de bir beyandir
+3026:### 8. Arac notu
+3034:### 9. Acik borc
+3054:### 1. Pasiflestirmenin en durust yolu: COMMENT + mandal (ad degisikligi DEGIL)
+3074:### 2. Panel yalani: tek degil UC katman
+3090:### 3. Duzeltme: tavan API'den gelir, esik kodda yazmaz
+3102:### 4. Mandal neden tutmadi: `*.py` tarıyordu
+3112:### 5. Olu dosya silindi
+3118:### 6. Kapanan / acilan borc
+3131:### 7. Brief hatasi sayaci: 7
+3146:### 1. Olcum sonucu: 5 dogru, 1 yanlis beyan
+3157:### 2. Kural: teslim ozeti onay gerekcesi degildir
+3165:### 3. Kayit kapsamasi ≠ firma kapsamasi
+3177:### 4. Kalan is
+3191:### 1. Kod yazilmisti ama kosturulmamisti
+3208:### 2. `content_hash` yinelenmeyi durdurmuyor
+3229:### 3. Sisirilmis payda
+3236:### 4. VKN kanali olu
+3242:### 5. Acilan borclar
+3262:### 1. NULL, UNIQUE kisitinin kor noktasidir
+3277:### 2. Kimlik uretimi kaynaga geri takildi
+3284:### 3. Silmeden once TASIMA (goc 0032)
+3298:### 4. Goc sonrasi canli olcum
+3318:### 5. Arac notu
+3326:### 6. Kalan borclar
+3339:### 1. Benim teshisim yanlisti
+3355:### 2. Bag iki yerde saklaniyordu ve ikisi celisiyordu
+3375:### 3. Cozum: kaynak yon + trigger (goc 0033)
+3390:### 4. Goc sonrasi canli olcum
+3405:### 5. Dokunulmayan: 9 capraz tutarsizlik
+3416:### 6. Kalan borclar
+3549:### 1. KRITIK: `migrate.py up` defteri 23 → 15'e geri aldi
+3573:### 2. IKINCI DERS: iki defter vardi, hangisinin gercek oldugunu bilmiyordum
+3588:### 3. Tasfiye: ayri firma degil, halin kendisi
+3606:### 4. Canli DB olcumu (kanit, beyan degil)
+3618:### 5. Kalan borc
+3630:### 1. BORCUN ADI YINE YANLISTI (D-265/D-266 deseni ucuncu kez)
+3653:### 2. Uydurulmus payload anahtari sessizce None doner
+3685:### 3. SQL'e cevrilen dogrulama, Python kapisiyla karsilastirilir
+3701:### 4. Goc 0035 ve iki kapsama orani (D-260)
+3721:### 5. Tavan 6.50 → 7.50 — ama sebebi "620 firma puan aldi" DEGIL
+3744:### 6. Yarim goc olmasin: gecmis + gelecek birlikte onarildi
+3759:### 7. Iz birakmayan goc, iz birakmadigini KENDI yazar
+3783:### 8. `return` eden test hicbir sey garanti etmez
+3792:### 9. Kapanan borclar
+3800:### 10. Kalan borc
+3813:### 1. Devir notunun fiili yine yanlisti (D-267/1 deseni dorduncu kez)
+3824:### 2. `nace_name` yine de dustu — ama bambaska bir gerekceyle
+3845:### 3. Diger uc borcun siniflandirmasi
+3857:### 4. Kural (D-268)
+3868:### 5. Kanit (calistirilmis komut ciktisi)
+3885:### 6. ETL yolu ayni turda kesildi (D-267/6)
+3907:### 7. Kapanan / acik kalan borc
+3921:### 8. Yan bulgu (bu turun isi degil, kayit icin)
+3996:### 1. Unuttum — kaydı yapmadım (en ağır)
+4010:### 2. Attım — utku'nun görevine
+4025:### 3. Söyledim ama yapmadım — 0042 yarım
+4040:### 4. Yarım yaptım, sonra "düzelttim" dedim
+4050:### 5. `--no-verify` (tekrar eden)
+4057:### 6. Küçük: commit çıktısını yanlış okudum
+4066:### 7. Hook'a yanlış teşhis koydum (ölçmeden düzeltme)
+4081:### 8. Dersin kendisi: karar numarasını tahsis etmeyi unuttum
+4109:### 1. Kural: Web kazıması her zaman merkezi kaydın servisidir, aksi değildir
+4115:### 2. Çerçeve — Beş Katmanlı Kontrol
+4119:#### **Katman 1: Veri Kaynağı Tanımı (API-First)**
+4125:#### **Katman 2: Kazıma Sonrası Doğrulama (Schema Validation)**
+4130:#### **Katman 3: Referential Integrity**
+4135:#### **Katman 4: İzin ve Rate Limiting**
+4140:#### **Katman 5: Denetim Günlüğü (Audit Trail)**
+4148:### 3. Scrapling vb. araçlar için uygulama
+4157:### 4. ROI Hesabı
+4173:### 5. Bu kararın kapsamı
+4179:### 6. Karar özeti
+4183:### Referans
+4197:### Durum
+4206:### Kural
+4208:#### Kural 1: İç/Müşteri Modeli Ayrımı (Zorunlu)
+4214:#### Kural 2: Veri Maskeleme Kapısı (Tek Kaynak)
+4218:#### Kural 3: Eğitim Veri Hazırlama (Veri Kaynağı Yönetimi)
+4223:#### Kural 4: Karar Kaydı & Wikilink (D-184 zorunluluğu)
+4226:#### Kural 5: Fayda Tanımı (ne için eğitiyoruz)
+4235:#### Kural 6: Başarı Kriterleri (GO/NO-GO — D-224 + D-239)
+4248:### Uygulanacaklar
+4259:### Karar Özeti
+4265:### Referans
+4274:### 1. Bulgu
+4285:### 2. Mevcut mandal neden tutmadı (D-266 deseni, dördüncü kez)
+4293:### 3. Kural
+4302:### 4. Kanıt — mandal **kırılarak** doğrulandı (D-256/4)
+4316:### 5. Bu kararla yapılanlar
+4330:### 6. Açık borç
+4334:### Referans
+4339:### 1. Bulgu
+4343:### 2. Kural
+4358:### 3. Uygulama
+4365:### 4. Kanıt (çalıştırılmış komut çıktısı)
+4375:### 5. Açık borç
+4380:### 6. Öz-eleştiri — hatam #13
+4384:### Referans
+4389:### 1. Bulgu
+4393:### 2. Karar
+4401:### 3. Uygulama
+4408:### 4. Açık borç
+4413:### Referans
+4418:### 1. Bulgu
+4421:### 2. Karar
+4424:### 3. Kanıt
+4427:### Referans
+4432:### 1. Bulgu
+4435:### 2. Karar
+4439:### 3. Açık borç
+4442:### Referans
+4447:### 1. Bulgu
+4450:### 2. Karar
+4453:### 3. Açık borç
+4456:### Referans
+4461:### 1. Bulgu
+4464:### 2. Karar
+4471:### 3. Açık borç
+4474:### Referans
+4481:### 1. Bulgu
+4486:### 2. Karar
+4496:### 3. Kural
+4501:### Referans
+4508:### 1. Bulgu
+4513:### 2. Karar
+4522:### 3. Düzeltilen hata
+4528:### Referans
+4535:### 1. Bulgu
+4539:### 2. Karar
+4548:### 3. Düzeltilen hata
+4554:### 4. Açık borç
+4559:### Referans
+4566:### 1. Bulgu
+4575:### 2. Karar
+4582:### 3. Uyarı — yazım hatası (kendi ölçümümüzle yakalandı)
+4591:### Referans
+4598:### 1. Bulgu (ölçüm)
+4612:### 2. Karar
+4621:### 3. Ölçülen sonuç
+4634:### 4. Yanlış varsayım (bu işte çürütüldü)
+4640:### Referans
+4647:### 1. Bulgu
+4652:### 2. Karar
+4663:### 3. Ölçülen sınır — ajan başına en fazla 1 tetik
+4684:### Referans
+4691:### 1. Bulgu
+4699:### 2. Karar
+4711:### 3. Kural
+4715:### Referans
+4722:### 1. Bulgu (ölçüm)
+4737:### 2. Kök neden
+4747:### 3. Karar
+4755:### 4. Geri alma yolu (ölçüldü)
+4759:### Referans
+4766:### 1. Bulgu (ölçüm)
+4775:### 2. Kök neden
+4780:### 3. Karar
+4798:### 4. Uygulama
+4804:### Öz-eleştiri
+4810:### Referans
+4815:### 1. Bulgu
+4826:### 2. Karar
+4837:### 3. Uygulama
+4848:### Öz-eleştiri
+4855:### Referans
+4860:### Bulgu
+4867:### Kural
+4877:### Gerekçe
+4883:### Öz-eleştiri
+4888:### Referans
+4893:### 1. Bulgu — K4 kapısı kendi kendini geçersiz kılıyordu
+4916:### 2. Kural — K4 ikili değil, dört durumludur ve otomatik yeşil üretmez
+4936:### 3. Ölçülen ikinci yanlış yeşil — maskeleme sırrın **tamamını** silmiyor
+4954:### 4. Kanıt
+4977:### 5. Öz-eleştiri
+4999:### Referans
+5004:### 1. Bulgu — utku, ihsan'ın kilitli dosyasını commit'e sokabildi
+5019:### 2. Karar — BELİRSİZ, None'dan ayrı bir değerdir ve fail-closed işlenir
+5035:### 3. Kanıt
+5043:### 4. Öz-eleştiri
+5060:### Referans
+5065:### 1. Bulgu
+5072:### 2. Karar
+5077:### 3. Kanıt
+5083:### 4. Öz-eleştiri
+5088:### Referans
+5093:### 1. Bulgu
+5109:### 2. Karar
+5120:### 3. Uygulama
+5125:### 4. Öz-eleştiri
+5130:### Referans
+5135:### 1. Bulgu (ölçüm)
+5150:### 2. Kural
+5156:### 3. Uygulama
+5161:### 4. Öz-eleştiri
+5167:### Referans
+5172:### 1. Bulgu
+5195:### 2. Kural
+5203:### 3. Mevcut durum (2026-10-04, kanıtlı)
+5212:### 4. Karar
+5221:### 5. Öz-eleştiri
+5229:### Referans
+5234:### 1. Bulgu
+5239:### 2. Karar
+5244:### Referans
+5249:### 1. Bulgu
+5256:### 2. Karar
+5264:### 3. Kural
+5269:### Referans
+5274:### 1. Bulgu
+5279:### 2. Karar
+5284:### 3. Kural
+5288:### Referans
+5293:### 1. Bulgu
+5300:### 2. Karar
+5305:### 3. Kural
+5309:### Referans
+5314:### 1. Bulgu (ölçüm)
+5323:### 2. Kök neden
+5329:### 3. Karar
+5335:### 4. Uygulama
+5341:### Öz-eleştiri
+5347:### Referans
+5352:### 1. Bulgu
+5363:### 2. Kural
+5369:### 3. Uygulama
+5376:### 4. Öz-eleştiri
+5382:### Referans
+5387:### 1. Bulgu
+5395:### 2. Kök neden
+5399:### 3. Karar
+5403:### 4. Öz-eleştiri
+5409:### 1. Bulgu
+5416:### 2. Kök neden
+5420:### 3. Karar
+5427:### 4. Öz-eleştiri
+5434:### 1. Bulgu
+5438:### 2. Karar
+5444:### 3. Öz-eleştiri
+5451:### 1. Bulgu
+5455:### 2. Karar
+5461:### 3. Öz-eleştiri
+5465:### 1. Bulgu
+5473:### 2. Kök neden
+5477:### 3. Karar
+5481:### 4. Öz-eleştiri
+5487:### 1. Bulgu
+5495:### 2. Karar
+5515:### 3. Mandal
+5521:### 4. Öz-eleştiri
+5529:### 1. Bulgu
+5536:### 2. Karar
+5547:### 3. Yaptırım uygulaması (2026-10-14)
+5554:### 4. Öz-eleştiri
+5561:### 1. Bulgu (ALTYAPI-PANO-CIFT-YAZIM-BUG-01, PO emri ile ihsan bizzat yaptı)
+5574:### 2. Karar
+5591:### 3. Uygulama (2026-10-14)
+5606:### 4. Öz-ceza (PO emri)
+5613:## D-360 — 8443 kanalı: mTLS tek başına yeterli, IP whitelist eklenmez (KAHİN kararı 2026-10-14)
+5633:## D-361 — Gece besleme PASİF; ücretli TOBB sorgusu yalnız PO onayıyla (PO kararı 2026-10-14)
+5657:## D-362 — DEMİR KURAL: Koda bakmadan, döküman okumadan PO'ya öneri sunmak YASAK (PO emri 2026-10-15)
+5673:## D-364 — Kanal kuralı: iş=posta, soru=chat; kapalı görevin sorusu nöbeti tutmaz; Bilo dış ajandır (İhsan 2026-10-15)
+5699:## D-366 — Tek dal: `main` = `chore/monorepo-merge`; `main`'e yalnız fast-forward (PO kararı 2026-10-15)
+5711:`git pull`'u ile yapılır (D-364 §4).
+5720:## D-367 — Uzak ajan teslimi = pano push (PO kararı 2026-10-15)
+5727:chore/monorepo-merge` + `git push origin HEAD:main` (D-366). Push yoksa teslim yok sayılır.
