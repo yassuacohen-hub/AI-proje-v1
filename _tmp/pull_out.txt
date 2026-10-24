@@ -1,19 +1,0 @@
-From https://github.com/yassuacohen-hub/-AI-proje-v1-Parent-repo
- * branch              chore/monorepo-merge -> FETCH_HEAD
-warning: in the working copy of 'AGENT_SYNC.md', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/AGENT_SYNC.md', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/file_locks.json', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/gorev_panosu.md', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/ihsan_gozcu_durum.json', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/pano_yazim_kaydi.jsonl', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/task_board.json', CRLF will be replaced by LF the next time Git touches it
-Created autostash: b12e45ab
-Rebasing (1/2)Rebasing (2/2)Auto-merging data/orchestrator/ajan-chat.jsonl
-CONFLICT (content): Merge conflict in data/orchestrator/ajan-chat.jsonl
-error: could not apply bbb1c7e1... chat: ihsan koordine MUSTERI-PANEL-TASARIM-01 (yasu bilo salih mimir utku)
-hint: Resolve all conflicts manually, mark them as resolved with
-hint: "git add/rm <conflicted_files>", then run "git rebase --continue".
-hint: You can instead skip this commit: run "git rebase --skip".
-hint: To abort and get back to the state before "git rebase", run "git rebase --abort".
-hint: Disable this message with "git config set advice.mergeConflict false"
-Could not apply bbb1c7e1... # chat: ihsan koordine MUSTERI-PANEL-TASARIM-01 (yasu bilo salih mimir utku)

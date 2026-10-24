@@ -1,2 +1,0 @@
-scripts/hooks/pre-commit
-FINDSTR: Cannot open pre-commit

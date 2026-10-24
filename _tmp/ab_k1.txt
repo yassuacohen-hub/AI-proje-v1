@@ -1,5 +1,0 @@
-✓ Done
-✓ Done
-✓ Done
-✗ Failed to read: Bağlanılan uygun olarak belli bir süre içinde yanıt vermediğinden veya kurulan
-bağlantı bağlanılan ana bilgisayar yanıt vermediğinden bir bağlantı kurulamadı. (os error 10060)

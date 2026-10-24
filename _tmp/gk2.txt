@@ -1,4 +1,0 @@
-usage: gorev_kutusu.py [-h]
-                       {bak,basla,nobet,rapor-postala,raporlar,al,teslim,zincir,onay-bekleyen,onayla,reddet,hepsini-tamamla,bakim,ozet,arsivle,simulasyon,yardim,destek-al,devret,denge,ekle}
-                       ...
-gorev_kutusu.py: error: argument komut: invalid choice: 'durum' (choose from bak, basla, nobet, rapor-postala, raporlar, al, teslim, zincir, onay-bekleyen, onayla, reddet, hepsini-tamamla, bakim, ozet, arsivle, simulasyon, yardim, destek-al, devret, denge, ekle)

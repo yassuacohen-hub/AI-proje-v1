@@ -1,3 +1,0 @@
-AGENTS.md: 143 baslik, max=D-368
-BORC_DEFTERI.md: 20 baslik, max=D-298
-TAHSIS EDILDI = D-369

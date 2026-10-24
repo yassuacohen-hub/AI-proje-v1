@@ -1,3 +1,0 @@
-adet: 1
-anahtar_sizinti self-test OK
-exit=0 

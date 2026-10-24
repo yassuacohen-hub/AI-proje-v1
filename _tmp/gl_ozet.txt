@@ -1,7 +1,0 @@
-gercek: 1 yanlis alarm susturuldu: 3
-[90m9:57AM[0m [33mWRN[0m [1mleaks found: 1[0m
-# GUVENLIK-SIR-TARAMA-01 olculmus yanlis alarmlar (commit:dosya:kural:satir).
-# 772a2937 messages.jsonl:320 BILEREK YOK: gercek ent_ admin anahtari, iptal Bilo'da.
-549b3672d8b589e2d16a2a5e7c760abf48fc24a3:src/company_master/api/routers/v1/arama.py:generic-api-key:112
-016fd74845610f27ce13438a5b6ee6f204113efe:agent_bilo/kanit_spaceship_dns.txt:generic-api-key:15
-5928730a4522a4a9bffaad6ea97499f1659aae30:docs/ODIN_PROMPT_INJECTION_SCENARIOS.md:generic-api-key:43

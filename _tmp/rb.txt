@@ -1,17 +1,0 @@
-warning: in the working copy of 'AGENT_SYNC.md', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/AGENT_SYNC.md', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/ajan-chat.jsonl', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/file_locks.json', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/gorev_panosu.md', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/onay_kuyrugu.json', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/pano_yazim_kaydi.jsonl', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/task_board.json', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/triggers/bilo.jsonl', CRLF will be replaced by LF the next time Git touches it
-warning: in the working copy of 'data/orchestrator/triggers/utku.jsonl', CRLF will be replaced by LF the next time Git touches it
-Created autostash: d998e135
-Rebasing (1/2)Rebasing (2/2)Your local changes are stashed, however applying them
-resulted in conflicts.  You can either resolve the conflicts
-and then discard the stash with "git stash drop", or, if you
-do not want to resolve them now, run "git reset --hard" and
-apply the local changes later by running "git stash pop".
-Successfully rebased and updated refs/heads/chore/monorepo-merge.

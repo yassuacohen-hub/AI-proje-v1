@@ -1,2 +1,0 @@
-To https://github.com/yassuacohen-hub/-AI-proje-v1-Parent-repo
-   df256365..1fed3168  HEAD -> main

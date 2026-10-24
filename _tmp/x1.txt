@@ -1,9 +1,0 @@
-5b349067 GUVENLIK-TOBB-SIFRE-GOMULU-01: çalışma ağacı kimlik bilgisi sızıntılarını temizle
-c7f6af77 fix(CI-KODLAMA-DENETIM-01): kodlama_denetim temizligi - 36 mojibake (nace_sozluk_yukle onarildi, kasitli sozluk satirlari \\u kacisli), bosluk/dosya_sonu/BOM/crlf; mantik degismedi. SAHNE_TAVAN=35 gerekce: mekanik bicim temizligi, dosya listesi yalniz izlenen+temiz+kilitsiz. Haric: utku kilitleri (tobb_api.py, scope.py, test_tobb_card02_parse.py), chat jsonl, izlenmeyenler (ihsan)
-cb9f4d08 ALTYAPI-KUR-CEKICI-01: S-9 cekici tarafi - TCMB canli 49,3485 -> 1 kredi 50 TL (5'e yuvarlak)
-brief_yasu_ALTYAPI-KUR-CEKICI-01.md
-brief_yasu_ALTYAPI-KUR-OTOMASYON-01.md
-2026-09-22_gece_zinciri_sprint.md
-4168:    "task_id": "ALTYAPI-KUR-CEKICI-01",
-4169:    "id": "ALTYAPI-KUR-CEKICI-01",
-4184:    "brief": "plans/brief_yasu_ALTYAPI-KUR-CEKICI-01.md",

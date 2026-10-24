@@ -1,2 +1,0 @@
-usage: gorev_kutusu.py bak [-h] --ajan AJAN
-gorev_kutusu.py bak: error: the following arguments are required: --ajan

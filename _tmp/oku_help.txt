@@ -1,7 +1,0 @@
-usage: ajan_chat oku [-h] [--task_id TASK_ID] [--son SON]
-
-options:
-  -h, --help            show this help message and exit
-  --task_id TASK_ID, -t TASK_ID
-                        Belirli göreve filtrele
-  --son SON, -s SON     Son N satırı al
