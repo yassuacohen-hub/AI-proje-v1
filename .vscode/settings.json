@@ -13,7 +13,9 @@
     "terminal.integrated.enablePersistentSessions": false,
     "terminal.integrated.tabs.enabled": true,
     "terminal.integrated.scrollback": 2000,
-    "python.analysis.extraPaths": ["Huginn Data Insights/src"],
+    "python.analysis.extraPaths": [
+        "Huginn Data Insights/src"
+    ],
     "python.defaultInterpreterPath": "${workspaceFolder}/Huginn Data Insights/.venv/Scripts/python.exe",
     "terminal.integrated.env.windows": {
         "HUGINN_AJAN": "ihsan"
@@ -35,44 +37,169 @@
     "openDesign.activeDesignSystemId": "claude",
     "github.copilot.chat.customOaiModels": [
         {
-            "name": "9Router - Yasu-9Router",
+            "name": "9Router - Codex Zincir (yedekli)",
             "url": "http://localhost:20128/v1",
-            "model": "yasu-9router",
+            "model": "codex-zincir",
             "apiKey": "${env:NINEROUTER_KEY}",
             "toolCalling": true,
             "vision": false
         },
         {
-            "name": "9Router - Claude-ClaudeCombo",
+            "name": "9Router - Ultra Kalite (tek model, fusion'siz)",
             "url": "http://localhost:20128/v1",
-            "model": "claude-claudecombo",
+            "model": "claude-evren-derin",
             "apiKey": "${env:NINEROUTER_KEY}",
             "toolCalling": true,
             "vision": false
         },
         {
-            "name": "9Router - Claude Sadece",
+            "name": "9Router - Dengeli Gunluk",
             "url": "http://localhost:20128/v1",
-            "model": "claude_sadece",
+            "model": "claude-evren-dengeli",
             "apiKey": "${env:NINEROUTER_KEY}",
             "toolCalling": true,
             "vision": false
         },
         {
-            "name": "9Router - Full Claude",
+            "name": "9Router - Ekspres Hiz",
             "url": "http://localhost:20128/v1",
-            "model": "fullclaude",
+            "model": "claude-evren-seri",
             "apiKey": "${env:NINEROUTER_KEY}",
             "toolCalling": true,
             "vision": false
         },
         {
-            "name": "9Router - Mimir-Dis",
+            "name": "9Router - Global Kurtarici",
             "url": "http://localhost:20128/v1",
-            "model": "mimir-dis",
+            "model": "claude-karma-evren",
             "apiKey": "${env:NINEROUTER_KEY}",
+            "toolCalling": true,
+            "vision": false
+        },
+        {
+            "name": "Evren LLM \u00b7 Mimo v2.6 Pro (Primary)",
+            "url": "https://evren-llmapi.ssyz.org.tr/v1",
+            "model": "mimo-v2.6-pro",
+            "apiKey": "${env:EVREN_LLM_API_KEY}",
+            "toolCalling": true,
+            "vision": true
+        },
+        {
+            "name": "Evren LLM \u00b7 DeepSeek V4.1 Flash (Primary)",
+            "url": "https://evren-llmapi.ssyz.org.tr/v1",
+            "model": "deepseek-v4.1-flash",
+            "apiKey": "${env:EVREN_LLM_API_KEY}",
+            "toolCalling": true,
+            "vision": true
+        },
+        {
+            "name": "Evren LLM \u00b7 Qwen3.8 Flash Next (Primary)",
+            "url": "https://evren-llmapi.ssyz.org.tr/v1",
+            "model": "qwen3.8-flash-next",
+            "apiKey": "${env:EVREN_LLM_API_KEY}",
+            "toolCalling": true,
+            "vision": true
+        },
+        {
+            "name": "Evren LLM \u00b7 Auto Router (Primary)",
+            "url": "https://evren-llmapi.ssyz.org.tr/v1",
+            "model": "auto",
+            "apiKey": "${env:EVREN_LLM_API_KEY}",
+            "toolCalling": true,
+            "vision": false
+        },
+        {
+            "name": "Evren LLM \u00b7 Mimo v2.6 Pro (Backup)",
+            "url": "https://evren-llmapi.ssyz.org.tr/v1",
+            "model": "mimo-v2.6-pro",
+            "apiKey": "${env:EVREN_LLM_API_KEY_BACKUP}",
+            "toolCalling": true,
+            "vision": true
+        },
+        {
+            "name": "Evren LLM \u00b7 DeepSeek V4.1 Flash (Backup)",
+            "url": "https://evren-llmapi.ssyz.org.tr/v1",
+            "model": "deepseek-v4.1-flash",
+            "apiKey": "${env:EVREN_LLM_API_KEY_BACKUP}",
+            "toolCalling": true,
+            "vision": true
+        },
+        {
+            "name": "Evren LLM \u00b7 Qwen3.8 Flash Next (Backup)",
+            "url": "https://evren-llmapi.ssyz.org.tr/v1",
+            "model": "qwen3.8-flash-next",
+            "apiKey": "${env:EVREN_LLM_API_KEY_BACKUP}",
+            "toolCalling": true,
+            "vision": true
+        },
+        {
+            "name": "Evren LLM \u00b7 Auto Router (Backup)",
+            "url": "https://evren-llmapi.ssyz.org.tr/v1",
+            "model": "auto",
+            "apiKey": "${env:EVREN_LLM_API_KEY_BACKUP}",
             "toolCalling": true,
             "vision": false
         }
+    ],
+    "github.copilot.chat.experimental.modelSelector": {
+        "models": [
+            {
+                "id": "claude-combo-ultrakalite",
+                "name": "Combo Ultrakalite",
+                "provider": "9router"
+            },
+            {
+                "id": "claude-combo-dengeligunluk",
+                "name": "Combo Dengeligunluk",
+                "provider": "9router"
+            },
+            {
+                "id": "claude-combo-ekspreshiz",
+                "name": "Combo Ekspreshiz",
+                "provider": "9router"
+            },
+            {
+                "id": "claude-combo-globalkurtarici",
+                "name": "Combo Globalkurtarici",
+                "provider": "9router"
+            },
+            {
+                "id": "claude-OPUS-5-5-DERIN",
+                "name": "Opus 5 5 Derin",
+                "provider": "9router"
+            },
+            {
+                "id": "claude-SONNET-5-5-IS",
+                "name": "Sonnet 5 5 Is",
+                "provider": "9router"
+            },
+            {
+                "id": "claude-HAIKU-5-5-HIZLI",
+                "name": "Haiku 5 5 Hizli",
+                "provider": "9router"
+            },
+            {
+                "id": "claude-QWEN-3-8-HIZLI",
+                "name": "Qwen 3 8 Hizli",
+                "provider": "9router"
+            },
+            {
+                "id": "claude-MIMO-2-6-PRO",
+                "name": "Mimo 2 6 Pro",
+                "provider": "9router"
+            },
+            {
+                "id": "claude-GPT-6-ASTRA",
+                "name": "Gpt 6 Astra",
+                "provider": "9router"
+            }
+        ]
+    },
+    "roo-cline.allowedCommands": [
+        "python",
+        "git",
+        "pytest",
+        "pip",
+        "9router"
     ]
 }
