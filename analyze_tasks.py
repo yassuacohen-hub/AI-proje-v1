@@ -1,31 +1,86 @@
 import json
+with open('Huginn Data Insights/data/orchestrator/task_board.json', 'r', encoding='utf-8') as f:
+    tasks = json.load(f)
+print(f'Total tasks: {len(tasks)}')
 
-with open('C:/Huginn Data Projesi/Huginn Data Insights/data/orchestrator/task_board.json', encoding='utf-8') as f:
-    d = json.load(f)
+by_agent = {}
+by_status = {}
+by_priority = {}
 
-from collections import Counter
-durumlar = Counter(t.get('durum', 'N/A') for t in d)
-print('Görev Durumları:')
-for k, v in durumlar.most_common():
-    print(f'  {k}: {v}')
+for t in tasks:
+    agent = t.get('sahip', 'YOK')
+    status = t.get('durum', 'YOK')
+    priority = t.get('oncelik', 'YOK')
+    
+    by_agent[agent] = by_agent.get(agent, 0) + 1
+    by_status[status] = by_status.get(status, 0) + 1
+    by_priority[priority] = by_priority.get(priority, 0) + 1
 
-ajanlar = Counter(t.get('sahip', 'N/A') for t in d)
-print('\nAjan Başına Görev:')
-for k, v in ajanlar.most_common():
-    print(f'  {k}: {v}')
+print('\nPer Agent:')
+for a, c in sorted(by_agent.items(), key=lambda x: -x[1]):
+    print(f'  {a}: {c}')
 
-oncelikler = Counter(t.get('oncelik', 'N/A') for t in d)
-print('\nÖncelikler:')
-for k, v in oncelikler.most_common():
-    print(f'  {k}: {v}')
+print('\nPer Status:')
+for s, c in sorted(by_status.items(), key=lambda x: -x[1]):
+    print(f'  {s}: {c}')
 
-aktif = [t for t in d if t.get('durum') in ['bekliyor', 'devam ediyor', 'acik']]
-print(f'\nAktif Görevler: {len(aktif)}')
-for t in aktif:
-    print(f'  {t.get("task_id")}: {t.get("baslik")[:60]} | {t.get("sahip")} | {t.get("oncelik")} | {t.get("durum")}')
+print('\nPer Priority:')
+for p, c in sorted(by_priority.items(), key=lambda x: -x[1]):
+    print(f'  {p}: {c}')
 
-# P0/P1 kritik görevler
-kritik = [t for t in d if t.get('oncelik') in ['P0', 'P1'] and t.get('durum') in ['bekliyor', 'devam ediyor', 'acik']]
-print(f'\nKritik Aktif Görevler (P0/P1): {len(kritik)}')
-for t in kritik:
-    print(f'  {t.get("task_id")}: {t.get("baslik")[:60]} | {t.get("sahip")} | {t.get("oncelik")} | {t.get("durum")}')
+# Active tasks per agent
+active = {}
+for t in tasks:
+    if t.get('durum') in ['aktif', 'devam', 'in_progress']:
+        agent = t.get('sahip', 'YOK')
+        active[agent] = active.get(agent, 0) + 1
+
+print('\nActive per Agent:')
+for a, c in sorted(active.items(), key=lambda x: -x[1]):
+    print(f'  {a}: {c}')
+
+# Done tasks per agent
+done = {}
+for t in tasks:
+    if t.get('durum') == 'done':
+        agent = t.get('sahip', 'YOK')
+        done[agent] = done.get(agent, 0) + 1
+
+print('\nDone per Agent:')
+for a, c in sorted(done.items(), key=lambda x: -x[1]):
+    print(f'  {a}: {c}')
+
+# Archive tasks per agent
+archive = {}
+for t in tasks:
+    if t.get('durum') == 'archive':
+        agent = t.get('sahip', 'YOK')
+        archive[agent] = archive.get(agent, 0) + 1
+
+print('\nArchive per Agent:')
+for a, c in sorted(archive.items(), key=lambda x: -x[1]):
+    print(f'  {a}: {c}')
+
+# Ihsan tasks
+ihsan_tasks = [t for t in tasks if t.get('sahip') == 'ihsan']
+print(f'\nIhsan tasks: {len(ihsan_tasks)}')
+for t in ihsan_tasks:
+    print(f"  {t.get('id', 'NO-ID')}: {t.get('durum')} [{t.get('oncelik')}] {t.get('baslik', '')[:60]}")
+
+# Active tasks detail
+print('\n=== AKTIF GÖREVLER ===')
+for t in tasks:
+    if t.get('durum') in ['aktif', 'devam', 'in_progress']:
+        print(f"  {t.get('id')}: {t.get('sahip')} [{t.get('oncelik')}] {t.get('baslik')[:80]}")
+
+# Plan tasks detail
+print('\n=== PLAN GÖREVLERİ ===')
+for t in tasks:
+    if t.get('durum') == 'plan':
+        print(f"  {t.get('id')}: {t.get('sahip')} [{t.get('oncelik')}] {t.get('baslik')[:80]}")
+
+# Bekleyen tasks detail
+print('\n=== BEKLEYEN GÖREVLER ===')
+for t in tasks:
+    if t.get('durum') == 'bekliyor':
+        print(f"  {t.get('id')}: {t.get('sahip')} [{t.get('oncelik')}] {t.get('baslik')[:80]}")

@@ -21,7 +21,8 @@ CHAT_LOG = Path('c:/Huginn Data Projesi/Huginn Data Insights/data/orchestrator/c
 WATCHDOG_ALERT = Path('c:/Huginn Data Projesi/watchdog_alert_chat.json')
 WATCHDOG_LOG = Path('c:/Huginn Data Projesi/watchdog_remediation_log.json')
 
-CAPACITIES = {'ihsan': 2, 'utku': 3, 'bilo': 2, 'nur': 2, 'salih': 5, 'nisa': 3, 'yasu': 0, 'mimir': 0}
+# nisa: PO 25.10 emri - hasta (yasu gibi), bir sure gorev alamaz. gorev_kutusu.py ile senkron.
+CAPACITIES = {'ihsan': 2, 'utku': 3, 'bilo': 2, 'nur': 2, 'salih': 5, 'nisa': 0, 'yasu': 0, 'mimir': 0}
 
 THRESHOLDS = {
     'agent_utilization_pct': 150,
